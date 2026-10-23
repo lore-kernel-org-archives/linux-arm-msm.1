@@ -1,111 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792749940;
-	b=Uv+aYy5m222Bh3Upkte/beRl6xwcQ0qC3nEL1abWnZtxwWQCZvdVpOqs429mwWJF0QAC
-	 78A8rlcNl+TCi6QAv4KaPgfK3Kmw3rjRy3RU6SXHBzSKgqZRYxiNeBp4RBf4gg9YkiS3M
-	 YgYiX0SGcUmDFM3E3W47vdTBr1EHJrgBzF4M+y5ltsVK/RpF4I1yr9V22stFXXRcBpbFv
-	 2f3NbHovWpOnTMnAkEL7rfGTvFcTj78rj+qNUV8c2mXrYBjXOsXy+5rrYhMKYXvV3ayIG
-	 Ju98hj3Izp8pWyGHk8cks2TnJiy+Fon1C9mfsz2NjFEY8tejZzKzdDBEz8rizxCIh8A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792749940;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=tR6WqUzgduImAQJNa+B+OOfRPJTUMCWJUP/DfxjaDDI=;
-	b=QyeunYN8EaVio2ELUR7xNgymt8qYU5dwt3YCXtalolT2mBAVV/kdGy3jS1WaYg8dncA9
-	 a/u0Jv+D0NEZHcV1OD6gzNMia9dzyar/mOMGgiNEnCdTEBbueSZGLy/QFUvVFS3lkVPUL
-	 lPtOhaHyZ2scOLNoehy4B48ywBdIo2/hCGG/l1NL7jtlua71/BWLQZ2vbLXPIhW3SCpOd
-	 cgwKrj9iOWioA/6itacOPcXxJ0ggH//VE3pDvX+Q1rHLlxtR5+VfnESGmEsIX+0udzO0d
-	 LFWcNXt6/lGXRoJQnt4lfQFU2SxWfkBHFXpHrToQvH6HPFcXTzPD0n/FnyHml9dDjqQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e1IitvQw;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MjvXfsqp;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792750216;
+	b=4+K6YtOazhfhmfUgkbLl/gZKev5mMsh6p4+SkXjSnKzcd8jsnLj/Vo3S6mYaUUPnHf8A
+	 xB+xRDiKOW2qmz3bbWUDc6Kwy04llYpiGV4H1GniHAJ3Zj+fcGVNu1StSA/W5Z3cowuwQ
+	 HQy5e0uYPvTXr4LLCeErw9Z2FbKFZ2wUB2NVVlIXkP2McTY4Ls3zrkGKqwIc+waukzplN
+	 R/T4GXJ5JXe1r6r7+SfT6bf2CeurIL+NS6dglqHuNfAdA8e4ShXCXMYTRoCBzxtnhFe0U
+	 xf/PlW7ZVjIVKZqS5WTq0C1YhW1+7kYNBlYFi7wMPl9/e6qaEOk3bf79O0eVNeSQTBA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792750216;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=GIjcJbhiZCM8A/Ohjw3DKcZtoKida5YLpCeOLFvQ9aQ=;
+	b=c7EqLKFhgjRTsIaIZ21fbVvFuAgopriUbz0U1r3EugPAsoP7kjiUkz0VS/E97AacKel8
+	 lVkg1RfJZODfEvTEDKLC0yG9im3xuIvl//5+UmQlvk3WZowdc85o7IB5zqYJ1ul5Xm9OM
+	 qNEZNWQodHTyPnKDw1ixDFOfrmoEZDKTWBqwjmI2O0MHmL8xyI3Ei7VITEyAlmiE7HNqb
+	 Xu6XRW0MUAd60rznf+Tzudp/qeECqec+M6+dtncRd87EqCFn0Oizr/AjlbeWPrwa6VtuO
+	 8UGtj52GFxc12HqQ3xR5am7NNHDiff07UQL6JAbPM+IumE6COBrZVl/PvPv7o7D0hRA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a+XuSZCR;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B6D6606A31B;
+	Fri, 23 Oct 2026 10:10:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a+XuSZCR
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1792750214;
+	b=rs6E0FVVg4vJpBpZszAnD+G2auV+90G1UYeis7G3tQRFjWQmS5ZMriCIn8KJMWPQeNoG
+	 rvw4mWq+8u9Dh2+RZNbbhtG/h9XP3ea94C0hmmpl0/EnPzS7qlubNxrxDaMka9o3fPFL4
+	 jiAJFkEPbAi08zsF6sScb2q5cXwJgjmoKRQ11YWsEnuMLYOzg75cAqTea57oAeZoEr0In
+	 SHB7HJi2dtgoYrto5ZJEoEsUwJCHEVN6ZpJAtFXsC9LhfEkpnjRdgz9wtn0wE1/zPxqOx
+	 lQrMnUvgzQhrhHYaTQTgWBKAJLQYFeyRaBT4D6tZULZgAErkSXmo3edoEDwq6XvoMfQ==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792750214;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=GIjcJbhiZCM8A/Ohjw3DKcZtoKida5YLpCeOLFvQ9aQ=;
+	b=cpzHJFMkUyWT7t7hAkYI1DsOTxpVLW5q4ZCcAa0j3x/VcjoEdK/m82PxPnHwqNim3th+
+	 t5tMguOkwUjSz4f5N60c9xQgJjgU1GqJojrJr6x1GSyafWDSd+oookfgvqsZovhDQ7A+P
+	 xkUEOXCHxr+HLdV59bkj5ZuozZPgIJ+OCm9MyW+a3wvmuNEbyuq9AQAs9vMjMscuW1phL
+	 hTpRGi4Qstby/HK5ApggmOtMsXQ2y7lMjCr9nBvJ0gM5jHP1e012eDGV9REKtnRemhxLy
+	 IKMrBqe474YhcELKNXBsUzfOwAGYsjlVHCSRSGbbJf2PZVAbaqytMHNs2oYjNN4w6dw==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5566F606A31B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:05:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5566F606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e1IitvQw;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MjvXfsqp
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7FEEA2068118
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:05:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	tR6WqUzgduImAQJNa+B+OOfRPJTUMCWJUP/DfxjaDDI=; b=e1IitvQwugHSTyFE
-	Dm1H4kwMP7I7VgngRGtFJ1/5y1UgtiLBitdqqJjjfUVZAJVxahCNCQ61KI4n8QIq
-	lurMPzcozAx6foaQeREbf2vNqWkJ4LLBfnlgITt3FuWwvrxGcnZ29KuFmgN86r/7
-	IMEPg0OEGgjEafKdhOIfuGhEtvMKKHmC8yWIoFz6bTifa+vvHo+7Y7lXeqaoJQ0Q
-	dLfOxUkKZ+MOR1sU+zn4Rt8uvWAP2s1rG6VBkaaozC1798bvzKniWTXU+UHPhHOR
-	OinWOlNs1w4jYqG55QWo+78SiLbCrmZlfNf9Ntx2Rk+lAyI9Hj2It1ZwBv5RLaix
-	3rdsbQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfnyw3mpd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:05:39 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93ea6b66e53so11469285a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:05:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792749938; x=1793354738; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tR6WqUzgduImAQJNa+B+OOfRPJTUMCWJUP/DfxjaDDI=;
-        b=MjvXfsqpsbXtqMqrfe37bK+0njcUZrPpuzZNaLhTyXHf3IMT2qQuybQZI+t7M/hkKs
-         J8xNoJ/XcpSPzkddhkRtAMfkDEV11U0od5fUJSDJkrfaZ9VGo7kZbFeiFsytgGTMhgeU
-         yn6Prp5SaQqiJaq7bZ5h6CRZAE6eIoFKW8ehDSM1lKbHzNxxnx303mRA3NLfEIZp2sca
-         BR9L19Ti6CAAz5Hc84FCmrWrzUG3dLHHHtKtSKGMq9cKhHsbELDXFAQjxzDT52GLFdwv
-         JE7wPE5XRgCvfU8lvcY6l6ojDhCIYQs4vo+sFLQgYNZ3KJZmYIWe4wY7CCVFcbAykxEs
-         hybw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792749938; x=1793354738;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tR6WqUzgduImAQJNa+B+OOfRPJTUMCWJUP/DfxjaDDI=;
-        b=N/UOyYqYi4ZVNkdRzptSTZjXgnVo+yBfqmwNmAZLERyAEP/AQz6O5Bh4Rr8AEbzkUB
-         tvKfSYfQdjI6XGF3XedYSFbuJEfBEklvm5PAVXFq99w8WMlPSh7lzfnjT9u+OlVYpimD
-         xk1SjePaQMTeRqHU/tg9trPQF7YOZPJ7iK025/KIp5MX2pEFrfzhkdKgP9wstN8zo5r5
-         3jCyzaEH1450H3XilmjyteRuoTe+rmLlgWe6qCZkRgZTsx6npRU58Bbej909RpYpjrHX
-         z8y+FEMEIBDqEgB+XDlheAJN/NsruwLBSyJvdAbQVUdCbBnjCiSxo/bZ62XdlWuCf36M
-         JmHw==
-X-Forwarded-Encrypted: i=1; AKwUvBxmV/BkL+GyS5ZXx0I/Sixy1XGCEPMlerCFUOoy3KYwu0nTcaEHGNvzodsTAC7yHQ2x4ZuCz9zyqTm+B4g7@vger.kernel.org
-X-Gm-Message-State: AFq9FYItwTdy0Qwubvs7Tyf/tnRI8bDDyiSHYS4cwcTy5iekjp43QWJZ
-	QbEUEDu+zTIojqIVqJyYjzMabEsBVPLMmvwYWBeDP06Wahect/imCyrpPniaXbBKETdvgW1nwrA
-	Fo25kdRGXv48bKGv6ryGiN8hOStQQxXBmykMgVvar6f4nEQNLvNKKZ6irYdQ7jAHoROSP
-X-Gm-Gg: AYBFou36QfbogvAr3gvjijKR//b/BAcr69zuUCj2nx+vHTnEyvlFv8Eblm1s/HrB2f9
-	W3ms9+cuAQ2e2qg7ZVfLHj0xD6F5Pn5HVerEhgTWUNXOvxIPz+xc0xvaueyXrD8Hk00BNG/NNaO
-	pKaovdL77lZFlQLXEQszATk8GIwTIJ+WtNE6nYEJNY1d86Hw6SlHfYOYbheC8E2B4T7FEomons6
-	Z6mY+fN159UfEite/skSSRzCUTrM7QvMbcuxNOATSskg23ksImeYPAj48Dx67koWeWmlPsh4H08
-	nPCc0wNzc34mN39dSTWIv3KOeQ1jfQ98Xjv+WEKhnhTwhcPCMkcnabn5lNTpx29pUkCMXrfROUI
-	uoNj4NJnI9lzcJxilu5Z8vA==
-X-Received: by 2002:a05:620a:7313:10b0:939:8148:1e3d with SMTP id af79cd13be357-93f6f7f3e78mr327423285a.2.1792749938592;
-        Fri, 23 Oct 2026 03:05:38 -0700 (PDT)
-X-Received: by 2002:a05:620a:7313:10b0:939:8148:1e3d with SMTP id af79cd13be357-93f6f7f3e78mr327418185a.2.1792749937962;
-        Fri, 23 Oct 2026 03:05:37 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5c4d0d6sm85262566b.29.2026.10.23.03.05.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 03:05:37 -0700 (PDT)
-Message-ID: <43ca74be-942c-4b52-a87d-1bf13d5dea6e@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 12:05:34 +0200
+	by smtp.kernel.org (Postfix) with ESMTPS id 63E4D1F031E0;
+	Fri, 23 Oct 2026 10:10:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792750214;
+	bh=GIjcJbhiZCM8A/Ohjw3DKcZtoKida5YLpCeOLFvQ9aQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=a+XuSZCRMFTUp8TfGOC6tmlkKgnvlS+wa36rCGL7MsMybpcCqOOY+5zPfXrl8vZW0
+	 SWlJixPfYZ0sAeomnQMBkPQ+xlCGW08nzAmDdZnkeNJzbj2IFlFMAxufkCs4izsUst
+	 tToHVZptpd7AotXNUXkcQWFGDj5xhD8oND+Cw0PIEYkj83vk2Ixt4ZQJwDnDpzm3Cj
+	 EgghMbuC06ilYB60qZuznjRb5aiqI4YF8DGvdtPd6mhdEI2u/G+ySp2fz91qKmiY6z
+	 YzEJxye5QL+rRtuqCczVwFLy0pk+UKVf987QOX+39xKh940/6YqEgJeMTcKVkAmV4w
+	 5GYnCufyCP0xQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id D815544499;
+	Fri, 23 Oct 2026 10:10:13 +0000 (UTC)
+From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
+Date: Fri, 23 Oct 2026 15:40:08 +0530
+Subject: [PATCH 1/2] dt-bindings: clock: qcom: Add SM7250 graphics clock
+ controller
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,63 +83,112 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/msm: Report primary minor index as gpu_mem_total
- gpu_id
-To: oushixiong1025@163.com, Rob Clark <robin.clark@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Shixiong Ou <oushixiong@kylinos.cn>
-References: <20261023072644.542364-1-oushixiong1025@163.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261023072644.542364-1-oushixiong1025@163.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261023-gpucc-sm7250-v1-1-d9149cece8be@brar.si>
+References: <20261023-gpucc-sm7250-v1-0-d9149cece8be@brar.si>
+In-Reply-To: <20261023-gpucc-sm7250-v1-0-d9149cece8be@brar.si>
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Taniya Das <taniya.das@oss.qualcomm.com>, 
+ Imran Shaik <quic_imrashai@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Ishu Brar <patches@brar.si>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792750212; l=2751;
+ i=patches@brar.si; h=from:subject:message-id;
+ bh=zNYJpd8CGDe4+jLuKQsFoERznSdYKLOwrl2HcMSC/Jw=;
+ b=IWiL+WuU0aMzyFIDvNG6CyKEglNpi6iwZrVN+QBjuih/cd0siKsRB0IauF0wv2nTvBZ4f9iN9
+ FUvwMdYxp40D8C9cnVj9LxlOpNMB4mDU3rltRFDrZZd617bQKUXMtjb
+X-Developer-Key: i=patches@brar.si; a=ed25519;
+ pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
+X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
+ auth_id=1189
+X-Original-From: Ishu Brar <patches@brar.si>
+Reply-To: patches@brar.si
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: b0ZG5MpEEADHA-cSeFAvQkTcp4QE7f7Y
-X-Proofpoint-ORIG-GUID: b0ZG5MpEEADHA-cSeFAvQkTcp4QE7f7Y
-X-Authority-Analysis: v=2.4 cv=dphOmFg4 c=1 sm=1 tr=0 ts=6adb3173 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=Byx-y9mGAAAA:8 a=EUspDBNiAAAA:8 a=nDcocf_55Z5I0WzahHEA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzOSBTYWx0ZWRfXzz+dYFt9Rfda
- g7xdn46HI3UUYejiAP731SBgdrGqT/C1TBlSUT08/zZTfCDbXXxbeGwYw/2HMtLwH+qLruVeyGF
- rZ8tzBWlY0rES4HufWGukBRfb43BaEE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzOSBTYWx0ZWRfX3kIslTQVRT14
- pdCCDRFD2e3GUVd7hPLpf4P3uBbZJib6759BSLCvlDMiizroFfWg8jgP5cr04IPdAk1vqUY4di1
- dNBk8CjZMBY8gx9SbJpl0F4cXKdh6oC4mrPQKodLAiA5B5VHeFxsF1Z+sUyy1iIe/J5VaPDbGWw
- +NjteSfqWQdfeINNiY1qmja1vt1C8BV7EeGLgcxWWelrtOOkB6iocOcLJzatFl7eEzdVnGsbFWm
- hYlfusyc66taPbrkj97vCIwWV8uIlw+FfOSro+LORPvS5U/vMfRW1Co47E3GImhxohTYf3da1zQ
- 5xUxK/Psw5hpHsJWWxa/k/4vOPGE+LiTgWsVOFqtpXE2MhCa8xdvqDiQAKQ5mV+k44I8vM/lCXO
- IUCIJ66EzDVA2Woo9zHKroYFjgDrNM47ug2Yhtphei1aPdgGDdh8+lhTEyeBn9Ph2f5MUj1q5ej
- 3hOQ2db9sLH5ZwDnZ1g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 clxscore=1015 impostorscore=0 adultscore=0
- lowpriorityscore=0 priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230039
 
-On 10/23/26 9:26 AM, oushixiong1025@163.com wrote:
-> From: Shixiong Ou <oushixiong@kylinos.cn>
-> 
-> Both gpu_mem_total emissions hardcode gpu_id 0, so events from multiple
-> GPUs are indistinguishable. Report dev->primary->index instead, as xe
-> already does in commit ce3d39fae3d3 ("drm/xe/bo: add GPU memory trace
-> points").
-> 
-> Signed-off-by: Shixiong Ou <oushixiong@kylinos.cn>
-> ---
+From: Ishu Brar <patches@brar.si>
 
-Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Add the compatible for the graphics clock controller (GPU_CC) of the
+Qualcomm SM7250 SoC (Snapdragon 765/765G/768G), and the header with its
+clock, reset and GDSC indices. The clock inputs are the same as on
+SM8250, so the existing clock and clock-names constraints apply unchanged.
 
-Konrad
+Assisted-by: Claude
+Signed-off-by: Ishu Brar <patches@brar.si>
+---
+ .../devicetree/bindings/clock/qcom,gpucc.yaml      |  2 ++
+ include/dt-bindings/clock/qcom,gpucc-sm7250.h      | 36 ++++++++++++++++++++++
+ 2 files changed, 38 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/clock/qcom,gpucc.yaml b/Documentation/devicetree/bindings/clock/qcom,gpucc.yaml
+index 3ac441900..d262455f3 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,gpucc.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,gpucc.yaml
+@@ -21,6 +21,7 @@ description: |
+     include/dt-bindings/clock/qcom,gpucc-sc7280.h
+     include/dt-bindings/clock/qcom,gpucc-sc8280xp.h
+     include/dt-bindings/clock/qcom,gpucc-sm6350.h
++    include/dt-bindings/clock/qcom,gpucc-sm7250.h
+     include/dt-bindings/clock/qcom,gpucc-sm8150.h
+     include/dt-bindings/clock/qcom,gpucc-sm8250.h
+     include/dt-bindings/clock/qcom,gpucc-sm8350.h
+@@ -37,6 +38,7 @@ properties:
+       - qcom,sc8180x-gpucc
+       - qcom,sc8280xp-gpucc
+       - qcom,sm6350-gpucc
++      - qcom,sm7250-gpucc
+       - qcom,sm8150-gpucc
+       - qcom,sm8250-gpucc
+       - qcom,sm8350-gpucc
+diff --git a/include/dt-bindings/clock/qcom,gpucc-sm7250.h b/include/dt-bindings/clock/qcom,gpucc-sm7250.h
+new file mode 100644
+index 000000000..f4536808d
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,gpucc-sm7250.h
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0-only OR BSD-3-Clause */
++/*
++ * Copyright (c) 2019, The Linux Foundation. All rights reserved.
++ */
++
++#ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_SM7250_H
++#define _DT_BINDINGS_CLK_QCOM_GPU_CC_SM7250_H
++
++/* GPU_CC clock registers */
++#define GPU_CC_AHB_CLK				0
++#define GPU_CC_CRC_AHB_CLK			1
++#define GPU_CC_CX_APB_CLK			2
++#define GPU_CC_CX_GMU_CLK			3
++#define GPU_CC_CX_SNOC_DVM_CLK			4
++#define GPU_CC_CXO_AON_CLK			5
++#define GPU_CC_CXO_CLK				6
++#define GPU_CC_GMU_CLK_SRC			7
++#define GPU_CC_GX_GMU_CLK			8
++#define GPU_CC_GX_VSENSE_CLK			9
++#define GPU_CC_PLL1				10
++#define GPU_CC_SLEEP_CLK			11
++#define GPU_CC_HLOS1_VOTE_GPU_SMMU_CLK		12
++
++/* GPU_CC Resets */
++#define GPUCC_GPU_CC_ACD_BCR			0
++#define GPUCC_GPU_CC_CX_BCR			1
++#define GPUCC_GPU_CC_GFX3D_AON_BCR		2
++#define GPUCC_GPU_CC_GMU_BCR			3
++#define GPUCC_GPU_CC_GX_BCR			4
++#define GPUCC_GPU_CC_XO_BCR			5
++
++/* GPU_CC GDSCRs */
++#define GPU_CX_GDSC				0
++#define GPU_GX_GDSC				1
++
++#endif
+
+-- 
+2.56.0
+
+
