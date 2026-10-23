@@ -1,99 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.54
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792713703;
-	b=OLNRBZAaFoYFst3Njxm1p9llAP9H6MbDGKnSOd/bKUQWTXQ31+8mz8Nr9OTAixTvkxK/
-	 Zk1IaSBnh7guDBmwmcv/NMTZnF7bkY6dlMx7wuNPPbnD0M4YKQrgeCBE/jw86ZePT0HVD
-	 4vUm1EerCpvOWOUv/UCI1tj/Pz5huYeB1ZmkAjO4BcYiZ5BdO6WibOk9XJxe8KYrCpgkj
-	 qYi8jDj3btKdVKsYKHkdEYMmjgSnAWN+pkErKT6bhwGqbIjKxyU3Y5o6S63lQZqVyzgbH
-	 U2IMkfXTpaqWsDjE0hcaErUWKuCbUSX88tEbee3UXGCV/lWj2V6+nTXILAKvdHmSCkg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792713703;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.85
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792714494;
+	b=iUzy+xXEduZgpZEZuZpELCyCDsD+Uh7NCFsS+fkbwYaIZKp4raaA3Wuoo0n6Psmf6+E7
+	 kTvmNSL7OqsyrhYRA8SvUAMYWd5lt1C9YAjOyRWaIbX+J94N83UCGDzmzFHEcmF4gagsr
+	 C0yXFwq7km10DsRkwogAhtDeQqypc75db7MkaLxS8/am9H5uaExBQdOleAzZrTLACOKKT
+	 TQpKeYgnVvhVZEQGnQrDqHrT29l20djfMzVjgXrsV0b4x9jgmwK8Aspj22yzDWHZ+EJfA
+	 9j4yRRVSQHmyjq9vtTKp+PTKog0m1pAwvyL5rkUUrDUxZs1y4l/fD6MBl9wkzZokuaQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792714494;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=yzq9DLiJaBumj+9b6/Tu+UJpvww2VzpZXqDN8hZnKOM=;
-	b=SFZN5YMGyKah6Jnej2P9hWOnbyiyLKsgvugQOxwcKYd2XhID2gyv/rbyyee4EbCEJ3y8
-	 bfK89/6kEc646MNdGlIe5VgUCxqt9aq9yJsNOnylmeyT6CWWamFiHmWg0aTpHFyNYY7L1
-	 SEhJFoIPq7TScNr2bk+HoHyGycxdJwreg5WYJt+HLc7cvHP/peux5Ukqf8+Uso7t23u6z
-	 WEGHsmkkBaeszPKFuPwIF+6ty49jAdwHbwEp0dT6J7B+GS2uop47WjFVAbZH3NmUKLstE
-	 jXHHY++/j6bIxnrs6C2jVWuK2Fl3+2f8DAwK9lCteTT3E/K5NkYniz90J0dR1vDkV2A==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=M50CXSkX;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.54
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
+	bh=lrbvJq8CZZ1i5CdJCdGc3rMDa2+2t/qQi1YR2f+7yBo=;
+	b=G0lcFqrFPuQsaVokEHhhXlv2PhdF1Oab9Kp/zmPCjFvdPWi/VaaI24/8r+t4OB2NV9tj
+	 6V+Os2vCz9EklDsaHef5DJUGwU/gRFBI9FEX7GoBE6ZNyIYqsH6dIkuf5K1AXvgSkZ5+z
+	 NfHCq5unEOA5Q28yVpQM4s8khUlYb6dP4Lbvl05XWeU1TV1j3PN2f9GlTgN2eG88fqs0i
+	 Jnf0LRzHMbsT/Ob526f+D7XNku1OEmVERSfb5DVT6zmKT/4SYiGy7vvgK+X1O09ZUQo5T
+	 ZJOSVESnHnFKw7Q1nXAEQSbAhe9pzYPeoFEaTFhBuHAc3PbyZ02rszGOynrV9gi5Gow==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b="m60/nwHU";
+	arc=none smtp.remote-ip=91.218.175.85
+Received: from mta0.migadu.com (out-85.mta0.migadu.com [91.218.175.85])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C79A606A319
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 00:01:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C79A606A319
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA709606A31A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 00:14:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA709606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=M50CXSkX
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-67583c777abso317222d50.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 17:01:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792713702; cv=none;
-        d=google.com; s=arc-20260327;
-        b=aE4gyemODBXUDWNg0cm0RlmQwnN5fXFmug+S+bEwcDgVYaHl1nL4z3kLl3eI4NRtjC
-         XL9+Il1G5s4ZdO71IKwECDWULBPOFPIfPTN9zNTMrvLOapLs1Cw88aNjlqzeH2F3gcUy
-         BtT7zIeMlqZ/G8rVhc5qQ1vDzKjMvy8B/tSEaHIt3wIFJy6eiJDYVv4Em0F+OFYEb27S
-         ojm80+WdYJW6RuLWvx+DJ07jhYcgvSmE79wdvhZ22jar1jGDZn45pSViRDaWqZ5C/Myd
-         ZOkQM9IRI/tc/xvkSKI7tfvZWw4uck7BuYGscbPx39fS5oKm6G5hV4PVJlqQ+m6KdD6w
-         qq7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=yzq9DLiJaBumj+9b6/Tu+UJpvww2VzpZXqDN8hZnKOM=;
-        fh=U9JxCdxCmFlaxTU7SQAV0CThd2T7YCT5yTj2BlHfQXM=;
-        b=kmrh+8ukzneQzrt7QOwi61bpDGPDD0IIwdJbg0qEZQA3DpsZmbz2oxsEzIogt/lMPt
-         JXReFd8lUInIPdRUvOCGYcx45zS9uSa3VVlyXX88pxDYorJUCytN3XcE3moe4mUTQUai
-         cRntBtSc6tPkUzFqFZDacOZz/dltHLhZt9FYn5zHgVqJmgxKS7gnhg6hCFl4y25zcEZl
-         QoshDr4zZGuocOQa7i9xVZk1nI3A0Zqe/WdzSLIV/hBAJiFgLvPevLyKxSt/kaB1d+61
-         0kb/SpPEmj4vKNl6/SaObTKHXQ8SmBeSYVbCeCOKeTzkR7FJtQcEDwhNWZ3JDs7prn+L
-         bJKA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792713702; x=1793318502; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=yzq9DLiJaBumj+9b6/Tu+UJpvww2VzpZXqDN8hZnKOM=;
-        b=M50CXSkXcThrBd58ow/idb05qqM1bqyleaHXlO1YxpAN6xiBh1zo1eOn3f2SyxbWY5
-         mZlRmddBVaWyO7N8NuRAYXn22YUnjwkDapm39tl49t3AiEwiGgCx/VdSVOJVMSrp2W2Z
-         cUJpbG2j4d8tDaYUKyPR86q5OGuUPcejNVaUrTomOCZtfG5el/3iAVJlsDOn5FjhLN3p
-         yPucnnrsve6ZgLSBgponEi/aP7DCyNKap00SXw8Rnqjd31Q/Mw/cJj7aqIBVfDCOy/jF
-         XD0/6QCfWer+Sa2seNz+xZgaSBUIwhSA6Ua9Mov71+sJOcKN+nRQXvIO9nvxuNA+FAyC
-         7UwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792713702; x=1793318502;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yzq9DLiJaBumj+9b6/Tu+UJpvww2VzpZXqDN8hZnKOM=;
-        b=UGWavkuPg5ndpDCKO5Dt03ERmIG4rXEv22r2x/4cfrnrfkdmh3Pzts7SYN6mLDS3+X
-         vTSOTiKbaIBQaUEQhQKXczu02UibXx2VjICYANVIbUSt87SLJ79MxJaaW1lXgPL09sx2
-         Dhx7JSBjvVkh0YKdSwtSeNsaph4l4LBpnAoXnAMEYQ/YxOUcW3v4ZEMS1DzdAWbIOVXU
-         AAJ7TF04LeFNqaOC50fxC37EmLElD6N/ecJTy0Qiu1Tkjq074wBVor4CG2Bbl2ig4/u4
-         6OhEGf6llnt68kfW7icKNDeWSNbptdYrBs0iFGsllq83dlzD7vaPdwQ0ha17X2XMJl5s
-         +tCQ==
-X-Gm-Message-State: AFq9FYJYWFpv4Z+kVzCf6VqjU3Wrernxu1iKQHf7/A5UfHBdBiwYOjhJ
-	MbCzj16WffUBNzwuw+cb6wityOggDiRe+/3MHlOAWbn8VdFirqx9gZHn1ctbSreYDth63I+1qee
-	FJGmEIHBGjtW7q3UFvId42p4D3nh6HzU=
-X-Gm-Gg: AYBFou2RZh1paq8sDvrs4BG9HqRc3xj7Rx7OsKO3fiqhH9qVdhTE3Z8mb26SaTO6DP/
-	dHfS6GRh3DLFGW6GL2Rodb30Z/ikkMxvgRJa7V33R8yhabDLzv3vy/F9/OXzciJiyXfZJO3Kf1G
-	BjXYS2q2iX/Xb+r4MebaxlGduIbfWIGDT8L03Xfj518jGt7d6RifdXWB2+Ozy1Rr9uZ03PHGVJM
-	MBdSgS2it8kYa9zikTd5liIq/PtfQNONds4oDHwpE3Pfkcl086LuoZbCkKlDj2sOW4NbbsiHnDd
-	Tt1mKMQBELicdU90xc2pfkvjY7nt/CxwelCWr8mp3PldvOi7HdBymsAl2vd2b37mqb0gM16ltUp
-	4FTJ7HuMffV9OzLDjRmsPur683LiZn/99oZ6h
-X-Received: by 2002:a05:690e:118d:b0:679:97d1:439e with SMTP id
- 956f58d0204a3-67a35a6c199mr448404d50.2.1792713701951; Thu, 22 Oct 2026
- 17:01:41 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=m60/nwHU
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=2swJGTcFLv4kEfw8FDByno5CejpjJPgPYrzDrZPo6QQ=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792714490; v=1; x=1793319290;
+ b=m60/nwHU6DUW1Z/1jMnLsAyKXgyN5KIrtTHBwlmm7wuYzDNBIgHjoEFkCG9n+AUlGukxeIRD
+ 4YPx/QFstIsv4aIUWImB3r36Acbi+ZCrm1pju7gvtf5gflSXDtnnU9sOcXUgwWwTJClE7ERWRyZ
+ tZSbiD/zaqqQtwu+HAgtWmniHkRYwDV0HdWhlZKFyGIIOVswoeumVxd+pY1qShfOw7+BX8lJxMU
+ O6Ooq0OkpMplKRpK15zAu1rBuG4TJqf4jvyIKCfNx/oWRKUuY4INzGZ8f6ypqQ9g4Qwq7xRs6n9
+ HkXbnm81ML7pbnhm4KtfrULoCzXRT3lJCQ5AJjbBLvdMw==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 0de22f02c81a06ee;
+	Fri, 23 Oct 2026 00:14:50 +0000
+X-Mizu-Trace-ID: 0de22f02c81a06ee
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <f8a9d12b-c859-4d3f-82f6-d22b9eaee472@packett.cool>
+Date: Thu, 22 Oct 2026 21:14:45 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,77 +60,87 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
- <CAAnD8RaicCmi2vk_Mna-Mfct4Ebh5dFVnKUkvVSiX6kpTB_imw@mail.gmail.com> <1ec9207e-0eb8-481b-8cad-ee6cbb31bee8@oss.qualcomm.com>
-In-Reply-To: <1ec9207e-0eb8-481b-8cad-ee6cbb31bee8@oss.qualcomm.com>
-From: Jeff Roach <jeff.roach0@gmail.com>
-Date: Thu, 22 Oct 2026 19:01:31 -0500
-X-Gm-Features: AclHuK9Ou9nMTNXaoNYaO8jx8I2A4hFZ-K0BbSc9girdNrXXWXuzQ9E4n7fnFEI
-Message-ID: <CAAnD8RareQsg9tsVQ_1nVNq2dwGubni8pjKNKVVVdkydn_YX0w@mail.gmail.com>
-Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>, lumag@kernel.org, vkoul@kernel.org, 
-	neil.armstrong@linaro.org, linux-phy@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] phy: qcom: qmp-combo: Leave the USB PCS alone in DP-only
+ mode
+To: Joonhoe Kim <26rote@gmail.com>, vkoul@kernel.org
+Cc: neil.armstrong@linaro.org, mani@kernel.org,
+ konrad.dybcio@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
+ wesley.cheng@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
+References: <20261022165219.1368-1-26rote@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261022165219.1368-1-26rote@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 22, 2026 at 3:27=E2=80=AFAM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
+
+On 10/22/26 1:52 PM, Joonhoe Kim wrote:
+> In DP-only mode (DisplayPort pin assignments C and E) all four lanes
+> belong to the DisplayPort PHY and the USB PCS stays powered down. The
+> USB controller can still exit and re-init its PHY in this state, e.g.
+> across a system suspend that loses power. qmp_combo_usb_init() then
+> programs the USB serdes, lane and PCS tables over the DisplayPort
+> configuration and times out waiting for PHYSTATUS, and
+> qmp_combo_usb_exit() resets and powers down a PCS that is not in use.
 >
+> In DP-only mode only take and drop the common reference, but keep
+> counting the USB user, so that qmp_combo_reconfigure_phy() powers the
+> USB PCS up when the port leaves DP-only mode.
 >
-> Can you give this series a shot?
+> On a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a USB-C monitor
+> in pin assignment C, resume from s2idle failed with "phy initialization
+> timed-out", the dwc3 resume returned -110 and the following xHCI resume
+> hung the system.
+Good catch. I don't think I've seen system hangs from this on Hamoa, but 
+I've had USB stop working on the ports where 4xDP+USB2 was left 
+connected during suspend..
+> Fixes: 896277138c13 ("phy: qcom: qmp-combo: register a typec mux to change the QMPPHY_MODE")
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> ---
+> Tested on a 7.3-rc4 based tree, where the mux switch itself still drops
+> usb_init_count when it enters DP-only mode, so the tested change skipped
+> the count as well. This version follows the reworked mux path in
+> phy-next and is build-tested only.
 >
-> https://lore.kernel.org/linux-arm-msm/20261001-glymur-phy-v3-v5-0-3848c26=
-15d5a@oss.qualcomm.com/
+>   drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 18 +++++++++++-------
+>   1 file changed, 11 insertions(+), 7 deletions(-)
 >
+> diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> index 187f0cd11f6c..6e3406d519d2 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> @@ -4459,10 +4459,12 @@ static int qmp_combo_usb_init(struct phy *phy)
+>   	if (ret)
+>   		return ret;
+>   
+> -	ret = qmp_combo_usb_power_on(phy);
+> -	if (ret) {
+> -		qmp_combo_com_exit(qmp, false);
+> -		return ret;
+> +	if (qmp->qmpphy_mode != QMPPHY_MODE_DP_ONLY) {
+> +		ret = qmp_combo_usb_power_on(phy);
+> +		if (ret) {
+> +			qmp_combo_com_exit(qmp, false);
+> +			return ret;
+> +		}
+> [..]
 
-Thanks, that fixes it. With the series, DP alt mode works at HBR2 on
-this machine.
+The USB4 chunk above (juuuust before the start of this diff's context) 
+does a similar thing in a different style: it increments both init_count 
+and usb_init_count and early-returns, skipping over qmp_combo_com_init 
+as well.
 
-Setup: Ubuntu 7.3.0-21 kernel, phy-qcom-qmp-combo built out of tree
-from the 7.3 source plus all 11 patches (patch 4 needed a small manual
-fix for context, since this tree doesn't have the USB4 block). I
-removed the link-frequencies cap from mdss_dp0_out/mdss_dp1_out, so
-the full 1.62/2.7/5.4/8.1 GHz list is back. Sink is an Anker USB-C
-hub (Parade PS176 DP-to-HDMI) into a 1080p monitor, on the usb_0 port.
-The hub runs DP on 2 lanes and USB3 on the other 2.
+I think both USB4 and DP should be written similarly but should 
+qmp_combo_com_init be skipped here? No in both cases or does USB4 skip 
+it for a good reason?
 
-- Picture is sharp and stable (before the series: "No signal" at HBR2).
-- DPCD 0x100/0x101 =3D 14 82 (HBR2, 2 lanes, enhanced framing).
-- DPCD 0x202-0x204 =3D 77 00 81 (lanes 0/1 CR + EQ + symbol lock,
-  interlane aligned).
-- Measured vblank rate on that CRTC: 60.000 Hz for 1920x1080@60.
-  Before the series, at HBR2, the same mode ran at exactly 30 Hz.
-- Works in both plug orientations.
-- Plain USB3 on the patched PHY is fine: a USB 3.2 Gen1 stick
-  directly in the other USB-C port enumerates at 5000M and works.
+(I'm especially wondering about the impact of that on the USB HS PHY 
+clock, since it's actually sourced from here without a properly modeled 
+dependency right now…)
 
-Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (Mahua)
-
-Two intermittent things I saw over four plug-ins of the hub, in case
-they are useful. I can't tell yet whether they are the PHY, the hub,
-or the cable:
-
-1. One of the four plug-ins gave no picture. DPCD 0x100/0x101 was
-   still 14 82, but 0x202-0x204 =3D 00 00 80 (no clock recovery on
-   either lane), and dpu logged "vblank timeout", "wait for commit
-   done returned -110" and "frame done timeout". Replugging fixed it.
-   I first thought it was orientation-dependent, but the same
-   orientation worked on a later plug-in.
-
-2. On three of the four plug-ins, the hub's USB3 side kept dropping
-   and re-enumerating every few seconds while DP was running ("can't
-   restore configuration #1 (error=3D-110)", "set hub depth failed",
-   "device not accepting address, error -71"). Unplugging only the
-   HDMI cable from the hub stopped it within a minute. On the other
-   plug-in, USB3 stayed stable at 5000M with DP running. The hub also
-   logs a "URB submitted while active" warning in hub_activate() even
-   without DP, so part of this may be the hub itself.
-
-I can collect drm.debug logs or test patches if either of these
-looks worth chasing.
 
 Thanks,
-Jeff
+~val
+
