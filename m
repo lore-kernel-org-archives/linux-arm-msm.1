@@ -1,114 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792759177;
-	b=Z6+LzzidJGd8PKIe2Jn4tfpSMRLmJSiPZOWV9TrkljD6OhcxqBMVNCskl1XQw0ntUUkK
-	 miuHbbga13AseQJnachp/X4DFc+2dcy3y7GODvchPHUq2XJXKTHIpQ+f6eaQBWcKio4SI
-	 4vxGe+1Q6i+geabUgC3S3/CahvJLLXcYDPfeyxcBNGlmwwFUD5UEn1F2B9l1J7AYrABXE
-	 /aM9Pe9X7t/RnRQJlQTq0tRqREANfziwvQjSyRrmebuVy9RM/DBE5qAQIkP6g9Ck2FgRf
-	 AON+l3QNn5oDZ2+Wpl0iM2oKHMmXAfRKX20YIM7MlDsycqbtoVG2tNK37N+9tl9e1iQ==
+	t=1792759449;
+	b=wM8mmK3kMRuPerLBcLk8TMoegQ4VM+ZcKNUkGeee5rtLVB4A2lZDh82HcsUBnK5qv5Eo
+	 09S8dA3bgT7dTXNj26CymDW/sN63GFatGKbj3mSVkEqyl1jpMPFWGmdxBf7t1MUlZai1n
+	 zQ2vA4Af4VPciYluQeqjR2ZF7TVd4z12j3Q1/3gll0duIMe44Bs2HbRU+kO7aGafCaZsE
+	 ZoF/bdrlHuRjJgeDacXVcbykMI/psG8kxR5/t3hs5HraCROrDAHUNKxaFQZ9p2Lzp67Fk
+	 Fm45i19CW/pBcYoXKDsIOwXcW/EetmNVndKMw99A5iH23xScbEG0xKDf0pnX+lz5s1A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792759177;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792759449;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=xjCoj1TeSYUJTHNSm8LnzG0tBJDF6FzWI0kupNfIcP4=;
-	b=AGDhsLCIwazJFfoF4Fl2+wSSVyD2aK+nDf9sb6EIjT/k5fA1BhsUZK2xfIcX1Flol0P/
-	 TUTXRizAeZEX96hWWXaefzkmGPfTZYnd0E+G6ubJnoZ8c9Z78HSYtlfqdKB63d7UBHD+R
-	 OS1hgLyOo3fVMt6ygPPWA/5cWiFei5feiJbJlQtuV8+3O0p9lQw+6J3xFh3/QGhJIVHR8
-	 UgkMTbgfJjryWLzRNrXY7q0SYYIxkTSILLcZln9Y+cmEWbdwhl3i4Bs/yPyDJBTQ6/6AX
-	 gGISrpU2fMHSad0KFeVBEhmAykqhqug1eCSm+gd0qgCgKVg7PIlT3E7pUjjXzhLDI+Q==
+	bh=AOMQhYGznP8ZPbiSDUkXtajttWxKGXnZv3BF5N3G1jE=;
+	b=5Ba23ExbpYxEAJX2a1jj5H8gzDPiSFnmJ9+CERhhLpNb3aR1nspR0YpNZTFLfvb5Eldf
+	 9eH+4ZGDyc2ZiKZAeLzzDpZKCK5pIRF7vWP8jA+aABHMYS0f9+hhinyzGZgm2bMv1nfS3
+	 z02hBfmKOXXG7VfrSVovOJ70NFX6glSUhgncJS1ZbrIaqiIe/9gXcL3T6T5HvIHQb1GR8
+	 RtHy/puP7oR6Aww3LdO+GrYr0ya7CsIVGJi3EbBq3q/pfriiKdk4LeD7lyUlXTDv16HoB
+	 Vw/DRVDzmBISey+KkcA97VdtTxZwRZSnIwimsMHP7ws/m8GE1wO7pZjhvwNwRellXAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NDjc0So0;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hSr8HrdR;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EOLzUgb+;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MeB+Ccm5;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9444D606A31F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:39:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9444D606A31F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA8A2606A321
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:44:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA8A2606A321
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NDjc0So0;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hSr8HrdR
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NCAbMN3822360
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:39:36 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EOLzUgb+;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MeB+Ccm5
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NAAZGw3045401
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:44:07 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=xjCoj1TeSYUJTHNSm8LnzG0tBJDF6FzWI0k
-	upNfIcP4=; b=NDjc0So0HCHmLJaYIPm1SoH/WFgNf/QUmcVPxY3UTo0VvaKig0x
-	ga2w1tqw+0Ei6O7Qx5PYy2dc08fO355CWRRDauyXzE4Esfg3cKGK9IsGcEELINBz
-	Nikoobc8DUVGmW45UVA4UeAoI7/QjgwXZ2pdZNz1/jvgFz0kXvqMG+FzxLhP+d77
-	qeJXYXmIVqqmOTOYA33EselHlLrW11UbJTkPgDu3op07dWGm+9qXhTAMJLf0co8v
-	YyfYUCIo1StPihX2Esfyb81sAhyBuJEGaZvuV+absc/3+PJrKUOXLi3QVI9VeFx6
-	Bbm0b0/wzcU9Y7yTtF4rSV2rOul3DWnlPxQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hg7bw036j-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	AOMQhYGznP8ZPbiSDUkXtajttWxKGXnZv3BF5N3G1jE=; b=EOLzUgb+E0uxQT0f
+	8/QFI615gs0NK7KYqfejZXLYKOyB7OB0560XRPDD5G+PUkYnVJwx5zK1VpNCLELR
+	x5b3blzv2BlAL15emEihOb9KX5SnTu7lqNYKhS6lW4DXqdVX68Wt4UGLA9nWvTtg
+	RiIs4O/fp6bnL4JNSy3BXcxmEvZ7FTMJSOUYNWCYJqSWKnyE73dYX9dpx9dz6q7n
+	LdNWCPVCQtSkQwpNuzXzZhQJDMdM6Y9pThf1tS/pFV6DRwfkYwoXXttuFWvTkxa4
+	aB+5iS39UsgXJqGvZJZK4fM53PstW2etw4VLf7x6wWuOY8QToWB55ryeb/Eztc+W
+	cIB8hw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmjbqn2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:39:35 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e82060977so169999885a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 05:39:35 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 12:44:07 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93edac5877bso28487185a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 05:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792759175; x=1793363975; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xjCoj1TeSYUJTHNSm8LnzG0tBJDF6FzWI0kupNfIcP4=;
-        b=hSr8HrdRvdsR2dvF7o0nC9OaYMO8dFDX4KSppKxZYjYXuRS0EA0J28HjINs6zGwiIA
-         WGbDUIB22gIFrnfjj9H1ydAAksw4FivDvQmNSjkFdDgRw3J+4kpGRRGq5Tut4HnfBlmZ
-         2QOqzH4tP7XnK79yLH3yhPpBY/QKQNBJayE7XT7YFwYmXqCryOmEDJcriEV0zBN9DWoY
-         WFb8vehCPXiUWmAuXUdAYFIX9h5Q4tEr7yLRl1Y+JQJ1b7LAhKnDLAKm+ImqcQkudVYH
-         cI1rL9Sps+lgUgBicB4CwA0A7jtmTZ2ukTz0n2lyMjkfIwMVIBZtW5/+97jzr0CkFicu
-         nsag==
+        d=oss.qualcomm.com; s=google; t=1792759447; x=1793364247; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AOMQhYGznP8ZPbiSDUkXtajttWxKGXnZv3BF5N3G1jE=;
+        b=MeB+Ccm5+rYESBvl0VmsABVWwe4RJU1awZNQVd5r6V3zqlJbBEBfeZ4n00F30fK6uy
+         Um+NtVvW45iJwN4NAHMAvI/goDOTVIuiqNzxecvCxYyGQExDaHOOmvqhEc4DRmTCh4Uv
+         qrcCjXIUqlEL0qQVqmdzGVQfCThezR0dzobly1pG2eP7YGqUXg/CMPo/y1g1z7XAIxn+
+         kyLbhZItpic115bXmULrMX29JZU8JFw6OgFsBpnfYQL3mEJsQvJgxhnXBfY7YtELCUgv
+         904HkCydiv4xEMqfvZv5BBg3vJ3C1gZ4yRSMTlNHS9sT1qnLSMZwZQrRKLcjSTS6OQXt
+         mNqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792759175; x=1793363975;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1792759447; x=1793364247;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xjCoj1TeSYUJTHNSm8LnzG0tBJDF6FzWI0kupNfIcP4=;
-        b=mNZBkAPAaRS0OWdcviD+e6THj+pVqfZxWyng/N8KlFy+ffkRifGmm4J3wgnUghX878
-         obF+uEYsdgA9RAprMwo0KS5NFmCozOIyPtdWDJgFmmXL6tSXp5/pn9fWU2oKfni23EYo
-         A4dNRMpmTgVd9zHA4jtoLpC/MX37tQFbpXuzs92qMa5imxD/eWrhYYPP1weT++IbOLTg
-         Q36ykul9M8LQvWIV478/oFx/Es2vKE7qkV4zhRqwS56QBTAzt6OJPbPabY4qJvbdA6J/
-         LIwKsb6IOgoNtLloqmRIZ3/whfEA4fmeEnTSIfh3ed7GsNt7CP7fIMlw8w17J7jNZB5P
-         4Cig==
-X-Forwarded-Encrypted: i=1; AKwUvBy3w/Sbgez+wLYl6wjhx2f29j7gqfIk/H6zBuN5rp3IB2X6wWkSSbmf3t7Cz4Izwj8r/rGggVC3HWAyZrIT@vger.kernel.org
-X-Gm-Message-State: AFq9FYL/eH9XW7q2UHntWDoSTmjHlAGmmUSMrOqruqYNBiTM57DCRXKf
-	V4Z+uoSIpQDHtBpBj3zdd85TVHJGtm3mQG392rXY2La7yyhb8ep5Dlsbp+2pKUuapANxUOfZ283
-	pW8dZH4NMa4+yy4j31RATp8jhW/OT7FkFJ9991Tz52R/7Jn8xotCHnpMYeq3Omo9bWSpx
-X-Gm-Gg: AYBFou34auwc1QCbj2OtabOcnGm5Pc0a5PrZmtV5vspHrdN0gHzLC6vTgN3+6vJgYme
-	a/HBFDYpFjKOdtMmYu/GeJBqI/izq8jpO6q19st0WBqN3RztKGfWkUiTabn3IsKH4j7fB9PLeyS
-	9+Vb7sLDCe0mmlluMZBfE/EBLuDj/1bvwGGNAN+B3qt8bqH3BZDO+eNzgF8I3tP0Gvj9moWxewt
-	v1NVHMukM0nA2FEet5VEb3JeeaGNnbMddaFedjHc5BH5rdj0d51gQTidW5wgyK+pL1eZk6JPus/
-	26Rxowaj+/s9pAQHsLuwIxG0DB/gcC2heEWuFOliD0btuETGkuy5MWGkqrJ0KL+E4osRYe2bCQM
-	AQxwqH1/3d3uHHQNMy/1K7CUlDZmDAov9Ew==
-X-Received: by 2002:a05:620a:1786:b0:93c:d209:4ea1 with SMTP id af79cd13be357-93f627549fcmr851063685a.24.1792759174369;
-        Fri, 23 Oct 2026 05:39:34 -0700 (PDT)
-X-Received: by 2002:a05:620a:1786:b0:93c:d209:4ea1 with SMTP id af79cd13be357-93f627549fcmr851057385a.24.1792759173411;
-        Fri, 23 Oct 2026 05:39:33 -0700 (PDT)
-Received: from juillet.box.freepro.com ([2a05:6e02:1041:c10:b74b:faa1:2e99:5c8c])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3805761fsm4935816f8f.47.2026.10.23.05.39.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 05:39:32 -0700 (PDT)
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-To: andersson@kernel.org, konradybcio@kernel.org
-Cc: robh@kernel.org, krzk+dt@kernel.org, johannes.goede@oss.qualcomm.com,
-        stephan.gerhold@linaro.org, conor+dt@kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v5] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal zones for PMICs
-Date: Fri, 23 Oct 2026 14:39:14 +0200
-Message-ID: <20261023123914.8641-1-daniel.lezcano@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+        bh=AOMQhYGznP8ZPbiSDUkXtajttWxKGXnZv3BF5N3G1jE=;
+        b=Cyq69xZhmaade/oVPStjfnix6eT1z8hTb7jnzCTCUoBCarkzsZYbH+h4+noEHVUjtA
+         QTAo7YJOZIndV2fgdGb1Xl3d53AF6732dxl2dGC9tE5r4CG4+f7nqaqKzFJMXST8MyIM
+         2FeNaOnCidviE5c4mwwyoXs6vure/PR2bn993auFoTYM+JJxznOnlcH7iaiCPoj03vOA
+         +CXV4TYUpHukJJxnlA28djwFIFW94HXCAzKqvfDnDyaNZFj3CTmAY+nNgi+b2ponJO3n
+         ZNSLt9wprkmsxhEq0RFUVM1Ra3Iv0+xvEfGAN1yUeLQP37uT45yqhKckcyynTTV4etY9
+         SvMg==
+X-Forwarded-Encrypted: i=1; AKwUvBzDvVD598YHLc3kZ3b14TUPRTL/2jgGt4I+ziDV/lHPbWz6J+d8QkHjVQxliMPS27ZJ2eK0/iLGpiOnG2nt@vger.kernel.org
+X-Gm-Message-State: AFq9FYLkHccwHeUk9m0QoAyTujIpIRD4jPmJyrQwi5r5C75gND0UYWF2
+	Rsn3lH3VdcOTlCi145fEqTV832ZCnK6vJTbp67KRXRyxl1Z6soanY/JngNqpFEYh//vC+vBj1lG
+	JelKHjNDuyjSNRu/VOX/I7ajQcB98W2MaqLtQHxwOZnlH1doxqa+ba3GyJgPzGfxqgis6
+X-Gm-Gg: AYBFou2sqsOj3Z5qPg3ZQ9BOrtkhzjmVS1tsswZb5sYYsvr7xSxL+0K4XufH4div0vf
+	r7NtLPeynTHeaL2iEH3SRP3l3Amrck+F8gLdeinD98qQa8noNx4UIpW/dRLdo23otNvFv//Z8HK
+	xG968pes6NQSCM4TSmuUSAjUXYPxiMvIEG4IePYI4s5RcyqTgbp2Qwz1AJrx4qgPlzbYuTBttKb
+	bFvqaV2Uzf5Zcl6mxRuNLb8Wk3YU76jb18xv9fVaXWcpsshJ9ptasqXYgHxcCSBNMgEVhfQSPas
+	VrhKsQsTTTpMPVZy/GtW6Q717xELukq686Re1L7E48aYnDxTeRZONz8ihAbfOyYkxOyWjWN4SmY
+	NHODFmUNEKOxBFBgwvbr9dQ==
+X-Received: by 2002:a05:620a:564a:b0:93c:c96c:a5b4 with SMTP id af79cd13be357-93f6f936070mr411664185a.4.1792759446742;
+        Fri, 23 Oct 2026 05:44:06 -0700 (PDT)
+X-Received: by 2002:a05:620a:564a:b0:93c:c96c:a5b4 with SMTP id af79cd13be357-93f6f936070mr411654985a.4.1792759445506;
+        Fri, 23 Oct 2026 05:44:05 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5c7d0b7sm100365266b.43.2026.10.23.05.44.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Oct 2026 05:44:04 -0700 (PDT)
+Message-ID: <4455607d-53b1-46fc-934f-7e7ae8f4f3d8@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 14:44:03 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,208 +115,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: _Hq22qm8jYgf-peoVzE4W7cApTYwZ2vC
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA0OSBTYWx0ZWRfX3vfYVAOM5xZz
- vfaOT2C9gOXZFJ9IcfqkrOoBH2OaJMdj/32+/Kb8PYEQT+t65XPq6TNsmUZXvR4/Bt0dWYlTlbo
- EoZpTu/d8M6qvDMlCQS5dR4rwB8YJiw=
-X-Authority-Analysis: v=2.4 cv=QdTzLcbv c=1 sm=1 tr=0 ts=6adb5587 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8
- a=W5eknlhPjGTqicOx0vkA:9 a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: _Hq22qm8jYgf-peoVzE4W7cApTYwZ2vC
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA0OSBTYWx0ZWRfX+g+kmRk/QmtU
- HBwq98k0sGfWsKS3DOh66/Zu2yBzT0BwjjwN4gkaa3wDqDVx/gbvJSCcE+NK6EALzsIA+eSUIqe
- p2MIp+0UUzSLX/dY+7jAY1gM1rxCp/NRH63rOW+8qEvrXr6pKBd67Po7rqdNINkgh6tK2C8o8Yi
- CAgp8hvIiSBNv9KKGKAhb6TTTbMjN7zGtSxvHvq/HegunkLgyLypdhY0/DUJ4ESIXfOo4Zrerip
- iMDcmogpJbj6ObkQbK45M67c+zJ/6yLRZYU32chf6D05ifPVS4YaQll/mk/jdU9q630NyCzfLOu
- msJ5Uu/hFUW4Ph6stK9ERLYcyYmWkwrvy5b0UUKNl8uWNcMGjaqjD3gr6WP37ZNwPimmwlOOl5Z
- RT8l/naohWXuQ9R3naRQPZTkXNpn1YanTwsWeohiYemUU+4+Ara6OLfSratLNp2M+fYphyBMwKT
- p/EbGxDZ3qL39c8wYjg==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] arm64: dts: qcom: sdm630: Drop the cluster idle
+ states
+To: Fabricio Akio <fabricioakio@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Alexey Minnekhanov <alexeymin@postmarketos.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Martin Botka <martin.botka@somainline.org>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261011-sdm630-idle-states-v1-0-3181d488dc0f@gmail.com>
+ <20261011-sdm630-idle-states-v1-1-3181d488dc0f@gmail.com>
+ <2e5bfe2f-f639-4c55-bb4e-e8893e9f098d@oss.qualcomm.com>
+ <CANxzQdH3eC97bb+eef=wizrxoB4XfvROzg8iHFxCrN_a+TZiSg@mail.gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <CANxzQdH3eC97bb+eef=wizrxoB4XfvROzg8iHFxCrN_a+TZiSg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: ToUNAxS9Wazg7SJk-hy-FMJb5HxaurQs
+X-Authority-Analysis: v=2.4 cv=cPR1IVeN c=1 sm=1 tr=0 ts=6adb5697 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=2CUSOdstmcgysknA9-EA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA0OSBTYWx0ZWRfX8tO3mfWmug93
+ iyj9sa14jOjml0+VkHyvX6UFTQBAgvRVoykgECGFurUwpPKUl9mmk/NQjb5FEvM3KoxfKQezVSK
+ z526ZLWU1E6m/IgQemZHLtD2VeKxcqg=
+X-Proofpoint-ORIG-GUID: ToUNAxS9Wazg7SJk-hy-FMJb5HxaurQs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA0OSBTYWx0ZWRfXzPWR/Ay47V3M
+ rgbvrouFR79OgvT5qGDK5dkfALJfWWzPo2sTqkDp3QYGjHpMnPvuQT393GW47BgkInHwBzs34wv
+ BO/TMUvNtVvRluo/veKtySE4Pp7C1bPPLw23GEJ9UwQ8bF6SExRVXXmNgWu75qGo/1QDHC6A+oW
+ Xpws6tvD3Laho2kHzT9+ddxw7Dq0uaH28iCgtg5Hp7518k9x5hNi1PIVq59hdPh41duuWs8WjvP
+ vGpHsw/VvQEt0UhPjAPIE8Gp9xMFm2eIrfabVpUto4SIt6qFVmo/rMmzrwly7i27Fn1bNZZFjNT
+ wb5re2sfp7jh6nFFcTrWF/aZNxLxtQrupP50emqbYYXCkAQtUcF0ZNszp9QayMgjvR76GIvTszJ
+ kojrfjRpglaMY6csgZDwdJyc2YsnVQKZZhgSS1BxANI++LSJm1Aqr5HY4kriCeHciUjU2LHdGpx
+ d6Ffpw0HmtmKJBe9YFQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_03,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0 spamscore=0
- bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0 clxscore=1015
+ adultscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 suspectscore=0
+ impostorscore=0 priorityscore=1501 malwarescore=0 clxscore=1015 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230049
 
-The ThinkPad T14s needs thermal mitigation under sustained workloads to
-limit temperature rise before thermal shutdown. EC interrupt-driven thermal
-monitoring is not yet supported, so use the board temperature sensors
-exposed through the PMK8550 VADC to provide mitigation now.
+On 10/20/26 6:15 PM, Fabricio Akio wrote:
+> On 10/15/26 3:51 PM, Konrad Dybcio wrote:
+>> I threw an LLM at the downstream tree and it decoded the states to:
+>>
+>> C2D, no cluster state    2        0x00000002
+>> C3, no cluster state    3        0x40000003
+>> pwr/perf L2 D2D + C2D    L2 2        0x01000022
+>> pwr/perf L2 D2D + C3    L2 2        0x41000023
+>> pwr/perf L2 D2E + C3    L2 3        0x41000033
+>> pwr/perf L2 D4 + C3    L2 4        0x41000043
+>> System PC + L2 D4 + C3    sys3, L2 4    0x42000343
+>>
+>> sorry for getting it wrong years ago!
+> 
+> Thanks! I had decoded the same values, but I didn't just put them in
+> place of the old ones. This firmware supports OS-initiated mode and
+> refuses platform-coordinated mode ("psci: [Firmware Bug]: failed to
+> set PC mode: -3", PSCI DENIED). In OS-initiated mode a cluster state
+> may only be requested by the last running CPU of the cluster, which a
+> flat cpu-idle-states list cannot express. I tried it: with 0x41000043
+> in the flat list the firmware returns DENIED to nearly every request,
+> accepting only the few that come from a cluster's last running CPU,
+> and the idle CPUs spin on it again, at about twice the battery current.
+> Linux runs OSI only with the CPUs described as PSCI power domains,
+> with 0x41000043 as each cluster's domain-idle-state and 0x42000343 for
+> system power collapse above them. I'm working on that, but I'm not
+> sure yet when it will be ready, so this is not a placeholder for a
+> replacement coming right behind it.
 
-Describe the sensors near DRAM, the fan/heatpipe, the GPU and CPU PMICs,
-the charger, the WWAN area and the USB-C ports. The DRAM-area sensor faces
-the keyboard, while the fan/heatpipe-area sensor faces the back cover.
-These are internal board measurements rather than direct measurements of
-the user-contact surfaces.
+See:
 
-Use the heatpipe-area sensor for passive mitigation at 57.85 degrees
-Celsius, derived from observed platform behaviour with the Windows
-balanced power profile. Map the passive trip to all CPUs and the GPU,
-with 1 degree Celsius hysteresis and a 500 ms passive polling interval.
-Name the trip "backcover-ec-alert" so that the planned EC support can
-locate and adjust it.
+https://lore.kernel.org/linux-arm-msm/20261015-b4-shikra_lpm_addition-v2-0-ac7f1a0d5638@oss.qualcomm.com/
 
-An earlier approach using staged CPU-cluster throttling did not show a
-significant improvement and introduced a latency imbalance between CPU
-clusters. Keep a single passive trip to provide timely mitigation.
+https://lore.kernel.org/lkml/20261005-s2idle_state-v1-0-3c402c66f388@oss.qualcomm.com/
 
-Add 73 degree Celsius critical shutdown trips for the DRAM-area and
-heatpipe-area sensors. Retain these baseline thresholds pending
-sensor-specific hardware validation. The reported Windows DRAM threshold
-of 115 degrees Celsius has not been established to apply to these VADC
-measurements and does not justify changing the shutdown thresholds.
+> Dropping the states is not the complete fix, but it helps now, because
+> as they are they do harm: cpuidle records no successful entry into any
+> of them, and since the deepest of them is what an idle CPU picks, each
+> failed request is retried instead of sleeping. On the Moto X4
+> that is about 133,000 failed entries per second with the screen off,
+> and the battery current goes from 277 mA to about 115 mA without them.
+> 
+> Is dropping them first OK with you?
 
-Thermal camera measurements indicate that the readings primarily reflect
-internal temperatures rather than chassis surface temperatures. No unsafe
-external surface temperature was observed during those tests, but they do
-not establish qualified critical limits for the internal sensors.
+Temporarily, yes
 
-Expose the remaining sensors as monitoring-only zones and enable ADC
-threshold monitoring on the corresponding PMK8550 VADC channels.
-
-Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
----
- .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   | 112 ++++++++++++++++++
- 1 file changed, 112 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-index 75ad74bcb042..6909458c0996 100644
---- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-@@ -502,6 +502,88 @@ platform {
- 			};
- 		};
- 	};
-+
-+	thermal-zones {
-+		/* Sensor in the charger area. */
-+		charger-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+		};
-+
-+		/* Sensor near the CPU PMICs. */
-+		cpu-pmic-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-+		};
-+
-+		/* Sensor near DRAM, facing the keyboard. */
-+		dram-thermal {
-+			critical-action = "shutdown";
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+
-+			trips {
-+				dram-critical {
-+					temperature = <73000>;
-+					hysteresis = <1000>;
-+					type = "critical";
-+				};
-+			};
-+		};
-+
-+		/* Sensor near the GPU PMICs. */
-+		gpu-pmic-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+		};
-+
-+		/* Sensor near the fan/heatpipe, facing the back cover. */
-+		heatpipe-thermal {
-+			critical-action = "shutdown";
-+			polling-delay-passive = <500>;
-+
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-+
-+			trips {
-+				backcover_ec_alert: backcover-ec-alert {
-+					temperature = <57850>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+
-+				heatpipe-critical {
-+					temperature = <73000>;
-+					hysteresis = <1000>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&backcover_ec_alert>;
-+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		/* Sensor near the USB-C ports. */
-+		typec-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		};
-+
-+		/* Sensor in the WWAN area. */
-+		wwan-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+		};
-+	};
- };
- 
- &apps_rsc {
-@@ -1285,6 +1367,36 @@ usb0_pwr_1p15_reg_en: usb0-pwr-1p15-reg-en-state {
- 	};
- };
- 
-+&pmk8550_vadc {
-+	channel@144 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@145 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@146 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@147 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@148 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@14a {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@14b {
-+		qcom,adc-tm;
-+	};
-+};
-+
- &qupv3_0 {
- 	status = "okay";
- };
--- 
-2.53.0
+Konrad
 
