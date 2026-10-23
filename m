@@ -1,79 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792750710;
-	b=mxkbqaqZpXOZRyx3mvk3womWTxgse023QdeAKmSEHgU2MvBOhK5YE1W6NB68ukt1vb5H
-	 tdbEIdTEf/O0eot+7ju4tduN6GtIKe6N51hJRwmgyMWfSN59V9y9DwGHl2IFlzAWorvk1
-	 g+5RQLzBs4UFeUkt6zYMS0z7BNoA2P7GKrBcVdz5vB1Kqe/2r3l62BlBlacXG/X6BlY5f
-	 KllFMfCOCJCg/1Uta49PLg8DHaLCqbjdfGo6fHkn4K7pKXi54cqHwKIkwFqtbMvKaXCo0
-	 xvrpCs+/Cd1zSp01bfmKsOI5e74XjYSu0L8yie2N4qKQt3FXwJjmiD3OaF+5tu/X8xg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792750710;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Os+4IbuR4w4I6EwpFOprhq7fwbr4xPPpn+mMOYfw1zQ=;
-	b=n+vT0u0zarpMlGoMXfyWJYHFdng9MXkoO36PSQPWhATp/SMPkvVy7zDhtmevfonY4+1V
-	 pqK5160PCmfBTQZ77plPsNkPgfy4KQfY8+ejom72y6zEFoD2DYdEwYZK2ZdtFp1i8HlVB
-	 d576ktOXotXl7pqIYTGLvl96DCSRQFsTpZjZckW13veVVD7cLstXxRYeab9nUPGieSDSX
-	 0Q+BMfiB80P8tVCwHsTpzDK98huZFImSDkrF8yfHEZwklpk41U5D+ANag3ti8SNoIU41k
-	 PMgiuSBrTaY7nzt02FufoP+Xr3G5ZLi5gwGa/YxL9PDNHfukzCPZx7owciJB7j8XOTw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M01eeUMR;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC17D606A31B;
-	Fri, 23 Oct 2026 10:18:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M01eeUMR
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792750709;
-	b=x5XTZWcf3VUUAYITH/RKNZVsT9QBLTzn8CwNZ4O3weHQ695mSEqZw3/It5SsVyejQw+l
-	 98/VSNVouXmdObpdtpotJPMjbdrmhJjh1L47se5sR7vYvxWE/rD81aUEq9hM7o3nQHwj+
-	 /ipYJlF/ykHIBNcSvuk+mXk1JBYJs1Rrhi9DoRhlT/bdojHMsOiby4UXKz+h1jhlbg0RC
-	 muhFfb9TMV/SIpaQXGxtfjzga+Lw9E/xAJL5avVkER8/x/WS6aKilG/3vnb+jOfaTl/9C
-	 +JUGI2NWEdsTbQh+YqwyhP0XlfKpWKhv3UZZNzzSFzuC/fVSWIVDuRHD4JcqheY+R7A==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792750709;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Os+4IbuR4w4I6EwpFOprhq7fwbr4xPPpn+mMOYfw1zQ=;
-	b=goJS2zzLZOAtIXCNEOQUaMhy1g4popU36ShKL4Z+wF0ARuV6MP/mWJuxXnAi/Qtp/VO8
-	 LKMRRXbG/TXI+OlS/sp5aqQ5QgNjZuTLx2byrrHw2BfO9qIpzMkOpW84ZSAwdLDGVxYrT
-	 6xi5+iaUUKGcYtygSg+Z7eflwJjjpjRKPYZYPTw57FT+2Nme4vEWMs69S78JX0kcW8pqs
-	 nV/OfR3ytyqPqkk0+NyvkBAirzKCOEKYavR4ARDNxfexXiaKVDEseA6H8D9gtmjFss0zW
-	 m3H4XflFlilMG4mzSvVH3DIWso3OwZBHUU8aiucHNWi0tRqpEDxRfSkUAJGjpsYA5Yg==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792751044;
+	b=5pCsZNkmDKLBhQ38zBcrM8tSrCrtw7dUsTlvrMEB66V6rGnJwO78XcVcP6ZGtfKy3hLw
+	 ggZYGknEWuqohSVknTNui+IfMH0KhSQp++pRzUAFVwga2KFbuUyjIHWyfKAkpwcoi4CN6
+	 eOY8W/qfMzhkP3cb1oWrcARLVVyXhuThfDx6RuZ6L9e2Py1jz+R3lCmhZ93kLtBm6Ub5S
+	 9k8HICaMX0INfnuxkGXXVSWcISRU3n2Uf7X+sTz3fvChwW0wRnNmY9ne02lVCPaEuu3BX
+	 zqLbHpL7gqNI+Nj6I+qGDlGfAED0UYr8fjK1nl1Vezktg415snliSzq/hhev/1n/kQw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792751044;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=AB1BQQvVTkQHNjM+5OSNHokWQOtdwlR/NDdlUhu12m0=;
+	b=0X5oMiK6C6qPvtcVWngbQQGJdcWZXPbN7ICn6Yqa7bCqjETtv96E9/RWacGEKuykH7qQ
+	 IXMj9KOr5JZ395IvWe2m9UiXGcAQNzVQ/RqYwfyXylGreIiAjrZx+qjhGBpxb4XXa3lD8
+	 vJUViyUXkbtK1Dt9fzPdSqo0bwkdcn+5tzOFkIFaxuN0A26Pp8/KJs8U/pyITDaZD6mc8
+	 UxDnPNe06crlLJey/MDO5byYRUA/ShshbMVQGy//QJusBoAjkafji2j8v5H1wJP1u6yFD
+	 yxMUfFvPeOqZ+s5VjfsLuCPS5G9tU3s39ihwtZhD1jAty3XKPO9r92Unuo9eI2f0qqg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k6fcnEVF;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AYSjHGAw;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id CB3CD1F01828;
-	Fri, 23 Oct 2026 10:18:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792750709;
-	bh=Os+4IbuR4w4I6EwpFOprhq7fwbr4xPPpn+mMOYfw1zQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=M01eeUMR57YB7iLCT7NSIMFXif/mUlLB0PSjA0PYJ9C/S1QMVPTdQc8W5ghmmvucv
-	 gDOfYF3ygLI/fTJ1Oncyf5Hsyc0oSGHFX0DmZdufttLDU2j8NOZgmVx2rrMkS6Feqx
-	 cl1p5ODz1MDWws6JpAe5pLC9jNjRNRSzR2L4LDmTIOwTYeQdJixbfhvwPW3dPgOcDt
-	 aspbumYnpkq4wPbqdV0Avmo4M7RhSEnBS26ii10IeXalyinrGEmQTIImpo/ElbnB+M
-	 yBosistucIDfuNk6jmWKLS9QqMUIZ3gMqaR6C4b/stq96kemNU6uD2eFxqfI0YmHpb
-	 dEQpsBdcsMCoQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 608A6444A6;
-	Fri, 23 Oct 2026 10:18:28 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Date: Fri, 23 Oct 2026 15:48:24 +0530
-Subject: [PATCH 1/2] dt-bindings: clock: qcom: Document the SM7250 display
- clock controller
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 474FD606A31B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:24:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 474FD606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k6fcnEVF;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AYSjHGAw
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NAAVIV2164269
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:24:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	AB1BQQvVTkQHNjM+5OSNHokWQOtdwlR/NDdlUhu12m0=; b=k6fcnEVFqKFqohpu
+	26hkUttDEURZCKKo3dqJ/CGgx8kw7R0zM/0d2FdEZSi7r+zGMS/s9YUn2mSomQnf
+	iWl3hJJHL7UMsfuzWzK8ILQ6cWQVsNFLNjeVp6PLqvzRkJqJcwPZ+CuNLnjsDc0U
+	bmCobvZOP75/U/b0J/ryfHEh18Zr/8TNZe3zEV9KWtt8R6wqlaL46bjZZhdLosEb
+	Gtbk9wT7fklnZg9bF3JdbwA7SiPP/H8gsOLnkfAy2oKK/iGeECt3wZyHtgLprzU1
+	Wvr1qb8FnxlNpUS1MB7MxI3kzoXsl7kYv/F0wx66rTuX7fzt1Dup8W42Z2oDFWTI
+	jXdOmQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfpahun9j-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:24:03 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2bdebfc5so18698185a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:24:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792751042; x=1793355842; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AB1BQQvVTkQHNjM+5OSNHokWQOtdwlR/NDdlUhu12m0=;
+        b=AYSjHGAwTqMqfuHFa+2iIy+hQI/Ym+fvYlpp1uDkZVf5Pf5fJin8tEp7Um5GtONPp1
+         yXOWwLi3V9ESqlVQe7z0ablVcnQm7ObB9B/Ds84/HxRxLWAaTAWfxNLjlOjrHzY1bWmj
+         HDGhjvxmX2FHwLto2DMNp+v4hdczvr7TeXu+J3dCxHhTnaoZAwTMA+mikl2vhOgqZUaK
+         MOXcFvPUZHNQp0VfRVPdMLTpkBbPRz4xRNdmgYGNk48leQTbpkH/7aUB2CKEsBCs1Ew5
+         edjnQqPMrqco0J38z8pVWfTxjb8Sn0urXzAQoFKXior970Nl3IeSoso7wPT/2K/rpI4a
+         4CzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792751042; x=1793355842;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AB1BQQvVTkQHNjM+5OSNHokWQOtdwlR/NDdlUhu12m0=;
+        b=AuaLG8yFtQC0hrHeu0F/6+IVps+0DLJuQVtkBRRHOjRTNpKvt3nUM//GhMwjkvxUGq
+         S33J4i/W9IngUboKkt2WNLPY2p3Wg5eI8gy6ahaggCCELVH+DrT84yV40D+NlgF4d10P
+         fAS0aEJILTBNoJxaKmvbDHb9aR+A5phfeAUhU6rRMp7y7H4HNbkejY2l10CIxKS8TgdN
+         803O/8pMqvdB1XSev3IHEaNjatUbzyK4FfNKNWWJ2ZLvovKL5L9fzylmWKpi2+X1ns0+
+         ZpBWnm4SSXNsYRtYLPbx1zVrMpQjVEKnsVmPVLs5nQyE36FNUvmyDHCcnBtDz5HGEt2I
+         J2Rg==
+X-Forwarded-Encrypted: i=1; AKwUvBzY4NEfA/jEfsBhfUHMTZkUuaBOcpYepGmUeaxaBwGNfqsiwLjwMwGXbAnB4GSS/R3f9L2RfDK/YrABW/7r@vger.kernel.org
+X-Gm-Message-State: AFq9FYJvqrXLu7kJVbZPgfI9MEbFt6eTWPcR7ubwpqYJX1Bu8bL1dBPQ
+	Mtcih7FqnexJVW8zOm00ynsEB2ho3RXJiQ8LysJ16+SZAJQ5p5QQS4UDvWSnE9oxCKFuuz4h2CE
+	mmomaoKdvy5JwIqwik9Pwe/RFBUgR+D4wXwrPtXcVCILpNKpPk2+IIEEgK9ABJleg85YcsDBepE
+	pg
+X-Gm-Gg: AYBFou1YR7ruEMfw5ngrA6XhsaXiuzK2jg8z/mQy95BaS9P7xuM4/41wPd90iJXUeRp
+	Es2soUaCpKocwecNWW4k71jVD+e/Fi/jLH8okd6dd84JgDaiguDqPM0/EMJnt89JZqmMWDX/539
+	NNVA2D3t9O5DsxXKSIVjFeW57dBcRri9RR4pJxdFHL+mloSt50vSf5vR3GFfqMsDp50j3zxm31t
+	sqcwhn+5lIJQPPKmShEEhhblM99S1NeufEGpZkhUJPSDzrMT6HTKCSUnWOxE+Ek/N+th2wZo7xK
+	4gYFvivFuRNPmAeWhAhUQQ9ku1BQu8pq7NBBCsOvA9uf+qz+iO07E0PARpjdVA7yNggzpi7pHcn
+	N8guSdnn3Ve6bgiDkaYp3Zw==
+X-Received: by 2002:ae9:e208:0:b0:93e:e111:2771 with SMTP id af79cd13be357-93f6f7c51c8mr345314685a.2.1792751042449;
+        Fri, 23 Oct 2026 03:24:02 -0700 (PDT)
+X-Received: by 2002:ae9:e208:0:b0:93e:e111:2771 with SMTP id af79cd13be357-93f6f7c51c8mr345311285a.2.1792751041992;
+        Fri, 23 Oct 2026 03:24:01 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5cb7fc6sm86648666b.51.2026.10.23.03.23.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Oct 2026 03:24:01 -0700 (PDT)
+Message-ID: <de3e5baf-dab5-417b-a9ed-225cbc56ce1a@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 12:23:59 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,198 +116,99 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261023-dispcc-sm7250-v1-1-07bdefb99801@brar.si>
-References: <20261023-dispcc-sm7250-v1-0-07bdefb99801@brar.si>
-In-Reply-To: <20261023-dispcc-sm7250-v1-0-07bdefb99801@brar.si>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Ishu Brar <patches@brar.si>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792750706; l=5475;
- i=patches@brar.si; h=from:subject:message-id;
- bh=Sc530KmGL8zaKa6SHDV02PUR6renziuJ0eqUJFmUVWM=;
- b=gSZmv1o3R88egNOvPZqRRMWUYGfrT8l7KReB53mFONMDRFASiQQFPUoMocK33yklZQixTeZHD
- ZiNyZ2So+14D/yWNi7KBI1a/hxq0WbieGAgvTtxRXNUDXlxcjjlsg+l
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] phy: qcom: qmp-combo: Add PM suspend/resume
+ callbacks
+To: Prashanth K <prashanth.k@oss.qualcomm.com>, Vinod Koul
+ <vkoul@kernel.org>,
+        Kishon Vijay Abraham I <kishon@kernel.org>
+Cc: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-kernel@vger.kernel.org
+References: <20261022104321.306679-1-prashanth.k@oss.qualcomm.com>
+ <20261022104321.306679-2-prashanth.k@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261022104321.306679-2-prashanth.k@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA0MCBTYWx0ZWRfX/uSecM9fIsQ1
+ K+6Ep9NJv0npSGlxgbpj6hppOMrAHvFWnvsmc17Pu19jOA3OUDWGyEpNNaF11NyB2U8vtiRHPGX
+ RwB7Wzu5ybyQi3x0YBJkPIhgR4+KTr8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA0MCBTYWx0ZWRfX79Rs+B6QUQaZ
+ hFhikd5CS0mzyyvaQNJuYeH6ds5I0avGN0SHu+hdDrj3OvyrVfzySibfYl0cJyf/uiY+ki9uviT
+ E8CS0Kcv73t56J0wMsRIA+JYRyyZlrg1sG73lgKAhnkAAhzl+mZKzDangdKLgFhxvAE9Vop4KT7
+ X82pPunx0Jmr7eiUZmEYbIsI1kAbcGrx6MlMeabR85oWZMgPVn/L7Ouu1MXJxW/Bz0Gb6g5Ypkj
+ DSexCQhyT472ouq0hwr+6tGpxJ6YxX6EifnBXHxiN+KBxJ6Sr29PWmr0x6/RarlprYMJGvbnELl
+ OHjouQOwRT13y9ooU0etwAOYSqqOcXt4bBvIMvWZa/sV7G4RzQDGpqA2lElKZQC0tNMXmXkpWv1
+ 62wLCrErULivg4wy20Qv6faJ+zqnFwLpuxYEgXsQAjQnDSWY3xzMs7iCi0yGxSiihm2azTvuUzW
+ vCBstW6031W+uFzunFA==
+X-Proofpoint-GUID: MlohDlonxIf7OAEns470xPgwqgX2h5Q7
+X-Authority-Analysis: v=2.4 cv=YIMKWhGx c=1 sm=1 tr=0 ts=6adb35c3 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=fBNUL6i4Ua7AmJppQHsA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: MlohDlonxIf7OAEns470xPgwqgX2h5Q7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
+ impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230040
 
-From: Ishu Brar <patches@brar.si>
+On 10/22/26 12:43 PM, Prashanth K wrote:
+> Currently when we perform system suspend, the phy clocks aren't
+> turned off leading to power leakage. Prevent this by adding PM
+> suspend/resume callbacks for the qmp-combo-phy which toggles
+> clocks on/off correspondingly.
+> 
+> Signed-off-by: Prashanth K <prashanth.k@oss.qualcomm.com>
+> ---
 
-Add the binding and the header with the clock, reset and GDSC indices
-for the display clock controller (DISPCC) of the Qualcomm SM7250 SoC
-(Snapdragon 765/765G/768G).
+Well this still leaves pm_runtime_forbid() in the probe function..
 
-The header and the binding are derived from the SM7150 ones: the register
-layout is the same, but the controller takes GPLL0 from the GCC as an
-extra parent and has its own PLL.
+>  drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> index c39ced168d03..f624195c9b84 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> @@ -4463,9 +4463,26 @@ static int __maybe_unused qmp_combo_runtime_resume(struct device *dev)
+>  	return 0;
+>  }
+>  
+> +static int __maybe_unused qmp_combo_pm_suspend(struct device *dev)
+> +{
+> +	if (pm_runtime_suspended(dev))
+> +		return 0;
+> +
+> +	return qmp_combo_runtime_suspend(dev);
+> +}
+> +
+> +static int __maybe_unused qmp_combo_pm_resume(struct device *dev)
+> +{
+> +	if (pm_runtime_suspended(dev))
+> +		return 0;
+> +
+> +	return qmp_combo_runtime_resume(dev);
+> +}
+> +
+>  static const struct dev_pm_ops qmp_combo_pm_ops = {
+>  	SET_RUNTIME_PM_OPS(qmp_combo_runtime_suspend,
+>  			   qmp_combo_runtime_resume, NULL)
+> +	SET_SYSTEM_SLEEP_PM_OPS(qmp_combo_pm_suspend, qmp_combo_pm_resume)
 
-Assisted-by: Claude
-Signed-off-by: Ishu Brar <patches@brar.si>
----
- .../bindings/clock/qcom,sm7250-dispcc.yaml         | 73 ++++++++++++++++++++++
- include/dt-bindings/clock/qcom,sm7250-dispcc.h     | 62 ++++++++++++++++++
- 2 files changed, 135 insertions(+)
+You can instead do
 
-diff --git a/Documentation/devicetree/bindings/clock/qcom,sm7250-dispcc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm7250-dispcc.yaml
-new file mode 100644
-index 000000000..684aaf7bb
---- /dev/null
-+++ b/Documentation/devicetree/bindings/clock/qcom,sm7250-dispcc.yaml
-@@ -0,0 +1,73 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/clock/qcom,sm7250-dispcc.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Qualcomm Display Clock & Reset Controller for SM7250
-+
-+maintainers:
-+  - Ishu Brar <patches@brar.si>
-+
-+description: |
-+  Qualcomm display clock control module provides the clocks, resets and power
-+  domains on SM7250.
-+
-+  See also: include/dt-bindings/clock/qcom,sm7250-dispcc.h
-+
-+properties:
-+  compatible:
-+    const: qcom,sm7250-dispcc
-+
-+  clocks:
-+    items:
-+      - description: Board XO source
-+      - description: Board Always On XO source
-+      - description: GPLL0 source from GCC
-+      - description: Sleep clock source
-+      - description: Byte clock from MDSS DSI PHY0
-+      - description: Pixel clock from MDSS DSI PHY0
-+      - description: Byte clock from MDSS DSI PHY1
-+      - description: Pixel clock from MDSS DSI PHY1
-+      - description: Link clock from DP PHY
-+      - description: VCO DIV clock from DP PHY
-+
-+  power-domains:
-+    maxItems: 1
-+    description:
-+      CX power domain.
-+
-+required:
-+  - compatible
-+  - clocks
-+  - power-domains
-+
-+allOf:
-+  - $ref: qcom,gcc.yaml#
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,sm7250-gcc.h>
-+    #include <dt-bindings/clock/qcom,rpmh.h>
-+    #include <dt-bindings/power/qcom,rpmhpd.h>
-+    clock-controller@af00000 {
-+      compatible = "qcom,sm7250-dispcc";
-+      reg = <0x0af00000 0x20000>;
-+      clocks = <&rpmhcc RPMH_CXO_CLK>,
-+               <&rpmhcc RPMH_CXO_CLK_A>,
-+               <&gcc GCC_DISP_GPLL0_CLK_SRC>,
-+               <&sleep_clk>,
-+               <&mdss_dsi0_phy 0>,
-+               <&mdss_dsi0_phy 1>,
-+               <&mdss_dsi1_phy 0>,
-+               <&mdss_dsi1_phy 1>,
-+               <&dp_phy 0>,
-+               <&dp_phy 1>;
-+      power-domains = <&rpmhpd RPMHPD_CX>;
-+      #clock-cells = <1>;
-+      #reset-cells = <1>;
-+      #power-domain-cells = <1>;
-+    };
-+...
-diff --git a/include/dt-bindings/clock/qcom,sm7250-dispcc.h b/include/dt-bindings/clock/qcom,sm7250-dispcc.h
-new file mode 100644
-index 000000000..907f4122c
---- /dev/null
-+++ b/include/dt-bindings/clock/qcom,sm7250-dispcc.h
-@@ -0,0 +1,62 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+/*
-+ * Copyright (c) 2018, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2024, Danila Tikhonov <danila@jiaxyga.com>
-+ * Copyright (c) 2024, David Wronek <david@mainlining.org>
-+ */
-+
-+#ifndef _DT_BINDINGS_CLK_QCOM_DISPCC_SM7250_H
-+#define _DT_BINDINGS_CLK_QCOM_DISPCC_SM7250_H
-+
-+/* DISPCC clock registers */
-+#define DISPCC_PLL0				0
-+#define DISPCC_MDSS_AHB_CLK			1
-+#define DISPCC_MDSS_AHB_CLK_SRC			2
-+#define DISPCC_MDSS_BYTE0_CLK			3
-+#define DISPCC_MDSS_BYTE0_CLK_SRC		4
-+#define DISPCC_MDSS_BYTE0_DIV_CLK_SRC		5
-+#define DISPCC_MDSS_BYTE0_INTF_CLK		6
-+#define DISPCC_MDSS_BYTE1_CLK			7
-+#define DISPCC_MDSS_BYTE1_CLK_SRC		8
-+#define DISPCC_MDSS_BYTE1_DIV_CLK_SRC		9
-+#define DISPCC_MDSS_BYTE1_INTF_CLK		10
-+#define DISPCC_MDSS_DP_AUX_CLK			11
-+#define DISPCC_MDSS_DP_AUX_CLK_SRC		12
-+#define DISPCC_MDSS_DP_CRYPTO_CLK		13
-+#define DISPCC_MDSS_DP_CRYPTO_CLK_SRC		14
-+#define DISPCC_MDSS_DP_LINK_CLK			15
-+#define DISPCC_MDSS_DP_LINK_CLK_SRC		16
-+#define DISPCC_MDSS_DP_LINK_INTF_CLK		17
-+#define DISPCC_MDSS_DP_PIXEL1_CLK		18
-+#define DISPCC_MDSS_DP_PIXEL1_CLK_SRC		19
-+#define DISPCC_MDSS_DP_PIXEL_CLK		20
-+#define DISPCC_MDSS_DP_PIXEL_CLK_SRC		21
-+#define DISPCC_MDSS_ESC0_CLK			22
-+#define DISPCC_MDSS_ESC0_CLK_SRC		23
-+#define DISPCC_MDSS_ESC1_CLK			24
-+#define DISPCC_MDSS_ESC1_CLK_SRC		25
-+#define DISPCC_MDSS_MDP_CLK			26
-+#define DISPCC_MDSS_MDP_CLK_SRC			27
-+#define DISPCC_MDSS_MDP_LUT_CLK			28
-+#define DISPCC_MDSS_NON_GDSC_AHB_CLK		29
-+#define DISPCC_MDSS_PCLK0_CLK			30
-+#define DISPCC_MDSS_PCLK0_CLK_SRC		31
-+#define DISPCC_MDSS_PCLK1_CLK			32
-+#define DISPCC_MDSS_PCLK1_CLK_SRC		33
-+#define DISPCC_MDSS_ROT_CLK			34
-+#define DISPCC_MDSS_ROT_CLK_SRC			35
-+#define DISPCC_MDSS_RSCC_AHB_CLK		36
-+#define DISPCC_MDSS_RSCC_VSYNC_CLK		37
-+#define DISPCC_MDSS_VSYNC_CLK			38
-+#define DISPCC_MDSS_VSYNC_CLK_SRC		39
-+#define DISPCC_XO_CLK_SRC			40
-+#define DISPCC_SLEEP_CLK			41
-+#define DISPCC_SLEEP_CLK_SRC			42
-+
-+/* DISPCC resets */
-+#define DISPCC_MDSS_CORE_BCR			0
-+
-+/* DISPCC GDSCR */
-+#define MDSS_GDSC				0
-+
-+#endif
++	SET_SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend,
++				pm_runtime_force_resume)
 
--- 
-2.56.0
+and as a related fix, we should probably throw a mutex guard into the
+runtime pm functions
 
-
+Konrad
