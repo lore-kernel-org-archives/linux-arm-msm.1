@@ -1,72 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.71
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.69
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792750597;
-	b=ioy1hNvJ+rJ9bwsvf5TTJuapJ7W1CE5qIbOAfYce42U/wzS55Qqc9FkzprmFZlJRz8To
-	 NYEl7ZnTrxS/ESU0jz7QBP+give2AxanEMFvQnp/0axI/o9YuPm+fnT1cwMAAFegQNffw
-	 sMyR//lgkPnObAkjvKLNOFVJIkImsn2CQFMEBkoOgXoGrWiOATrCsPTFzRHX2bGNF8d2d
-	 AoqCDwsQwEQyJBRILyKu16XUXES3k3/ADoAqqM16p7WqeHvQ9Z4wn4ddmFq+q30reJ6HJ
-	 NZz/zU2cYu7YttZ5LS7QX8UoQZiBP7ldvt2Z9pFBsnjxLVmR7q+1A5Z/1BNvPdC4irQ==
+	t=1792750603;
+	b=bCEMbJbt3x2A7KazbCdcsgbfMGwVrTTj0IDVKNo2IfQDTBcLJ7ECsJtqNZALbWX1B3+h
+	 MbmdOQTkqQ7ermtvp6/9XuELMamdH6efwBmF0mIq2+W46inSv5H1E8kpxb9InSm6fJbzR
+	 bw6MNFglrBza0urOLOTLIpdj5FZ4j35FCeZZwQjiPMg8VQFPKNqWna3CCsqSvEVm8P6cs
+	 vdvq0Z/b6jbx2J/wCS/nunhKEjjcDQeC+FbO/VGaEDJr6hXMbYF8L2905Y0ZgRInyG4vx
+	 RayxG0ebf4JR5GECiq749tbz2s06vh7ijrbfCyHRLbd9Fem3+LphNBJFWnWrcui+G9g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792750597;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792750603;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Received:Date:In-Reply-To:Mime-Version:
 	 References:X-Mailer:Message-ID:Subject:From:To:Cc:Content-Type;
-	bh=w3JinBf0Z2jF81QKjb6rRVvSkFxoBcyPBCQyWjZnSYE=;
-	b=2drvUKzARsD8hEg52zt6BYlLaXCCX4PM+0QPPaKW4Ax6lJViM65QIr+vapCvT0/pZAVz
-	 +bjDdEAbb7OvI3sic8PpQzhxuMDwcwRl+PEXm18R+NVoZyOuEUbOFBQxeZ7E6AynOg0eA
-	 NaSSXnx52lhRPkra3pehc52UAxeOYtnjiaoEb4sLKQTaSTt3fmk5w/nnEK0szEdAJPvua
-	 J80472G2+LzM5fxEQ+V5jctxiShy4PcT+rWn/u9js4BqTDY3GDvo+BFDKQV8yRp9QEywk
-	 s22lQq3grNesSVwK3ve6409qJhS4M+DuBRLQHQgvEhsPGZCNWRYTDQAUsLinLfeF9rA==
+	bh=/z+CNiWz7aa6AS1V1mN86DIGD1P9Q5f6dX5ydwPWWJ8=;
+	b=DtxmrartjJ89jJsWrYYzd3cKlyCdNpRhgXnOJG1LPaWCKYENYGomY2pII5DRDYyACWv+
+	 a8BSwpSb5lNy0uP/KT/y2ilB4iNnv/M3fksPMFNQXl/81Q2V3uy7lKIRrCMpsxLjZnC8s
+	 PuxQWet4mMWXXF30VNbgB44QyD7AGVvV10Hlqop5y+u6Btix3T9B0DTfwgnOBtzIigxc7
+	 uzRdIt4khIiL0oC8S6dsAThOqPgAjAR1qh+pM7WTwb8SVg+Enr7gv1KDOJMqyVse53+qQ
+	 PedPTvIXrtFf8OnBQgtI4YHYl9/wWnC2h3lC1cpzCDJauwmnyx99UAqZcIObL29Zlcw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=google.com;
 	spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=lKBxdyju;
-	arc=none smtp.remote-ip=209.85.218.71
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com [209.85.218.71])
+	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=QjncHXzV;
+	arc=none smtp.remote-ip=209.85.221.69
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com [209.85.221.69])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D12ED606A324
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:16:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D12ED606A324
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A19CD606A32D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:16:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A19CD606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=lKBxdyju
-Received: by mail-ej1-f71.google.com with SMTP id a640c23a62f3a-c25501f4aa2so85194766b.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:16:36 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=QjncHXzV
+Received: by mail-wr1-f69.google.com with SMTP id ffacd0b85a97d-48b01a74792so475486f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1792750595; x=1793355395; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1792750596; x=1793355396; darn=vger.kernel.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=w3JinBf0Z2jF81QKjb6rRVvSkFxoBcyPBCQyWjZnSYE=;
-        b=lKBxdyjushZ+5eg971tfk2uIwBETMu3NrDXozbFHyWCXB5At8VD7ucPRFqLIBZunsz
-         m8VpXVYAo8CRUVTcSsaqPf84rMM6G81z6tdjEUf1xbsvUAQR4pKPJm0U41XIK9UbaFxR
-         Xc/hMMQ2BKe22GNP3SNK3PJDQ09YBvn5/T0Sgn1D5cZEwNaXD9HImYqcr4BwOhD4wE7R
-         32zBUf349CB+OtDLe4HHr7EVHwCYdGcWwYwom8ge4ZIEEWrOhD6iwjM47tUsrBceEGHw
-         C3DpV3vxZ77EGR9vEr3PQal9vx/SdL0yjK55oPgXmqPCX/V4j07QviSvXjiY22h6BwYU
-         MZaA==
+        bh=/z+CNiWz7aa6AS1V1mN86DIGD1P9Q5f6dX5ydwPWWJ8=;
+        b=QjncHXzVqh8zHbTAxnjVY0N8VzXDR70plAjCDKAabNbo1hsw9DqwCx5SyR7SCwOh7e
+         jVgwxcf0zmCg/w+KYUn+2gIrMf9mMTVd1qW78Oe/EuDXm2PtJ163wPwLlqsrXvQ2f0LH
+         O9Ak3UiRb9qdookhCrOwSDeuiy2nSEY6ijemnARRHVgJTGj5fluPCEvwJykaVbEaNoN9
+         q3cb9+BO4+rff3u1vzHAqxJNp5a0eRx2I3jA5/aHbEZjsI2TJmcqhmOuolWFj553wtRW
+         qoqtZmazAWwQwVeoJ2MAcx80ifdMJ3YzmLQKYSAxVfdVpiptiOr1HfBVm995w9MsgCAH
+         P5gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792750595; x=1793355395;
+        d=1e100.net; s=20260707; t=1792750596; x=1793355396;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=w3JinBf0Z2jF81QKjb6rRVvSkFxoBcyPBCQyWjZnSYE=;
-        b=2N571L8GMDql7tJ57TUJHV6cQ7kMN/TqiruX7ieytEQ4s1wcRW6fLVFejxocW6cMOD
-         SNCfz8zJpo2ltYIeqzWai46dHJRHT0uVzCnND269EWrVDt/rbXfBROSwAhZYfHJ/atbo
-         GejXBld188sWiQMYBQrdo2XqmVDTnc8YU1trYuZ1VkmWOKEvz8DJqdg+mGCaQN+mp8LR
-         sQtKjDuWNJuO4lv2SBZT7Lh2fdSStqDv5t31INIa1w9FRqTkyuvs979/kh97alD/K3ja
-         780ea2207DoJnpfITNwWES7XJlB9BTlfLnb+aiYBWaVNkO0HJTzxN3wUm2xkyz0phpzW
-         /9Kg==
-X-Gm-Message-State: AFq9FYL3JV1IWR2TzCoHxN6XLgYD7anAy3BXDUznQBHqzHbV91pynfWT
-	40O31YBJo0nMMxvPQW5EIE3zCkkzitpFPJJ8eGYHozJ4sed5q0LswKM0FYDuEgTEzktT1rWolBN
-	bqJ1jI9lIPhcJkw==
-X-Received: from ejcog42.prod.google.com ([2002:a17:907:1dea:b0:c31:81f2:c52b])
+        bh=/z+CNiWz7aa6AS1V1mN86DIGD1P9Q5f6dX5ydwPWWJ8=;
+        b=M/PAoytzHYftOFq19FYwsPJS535Jn5fg7AzNANzILdKxnvrdx0yx/ViHngKQwRwJPB
+         o5lAiU1Pqi07bMDW0AcLYpXvT1KyYgnMjDqcAKM32Z1EBRxexqNO5i31W0ZQNVdOucCL
+         ma51KyE8VCBsQXX9D7eyk4T3xicHL0FGbS9DdQqUd5liYrUY8thhLXbBqiPDlLBBU8Kh
+         qzMDRue0vY0E0g4JEenzFUjNbqEVwy1FGDW/X2ycOuZeFQTLYAErM1lwQE7VMBQO64Y8
+         qdSXf2sDy9XIDM68G3cXlBVT0gobTHy+jNWXXZKArMXNJo/Ax4jvtoI7m3qqoJAzHRaI
+         VI/A==
+X-Gm-Message-State: AFq9FYL3GijfDTwfgol9w8ItRKpn3s6aozUuO/3yI2dO8qYmMzetKR7A
+	IEkGn8eeXLlTbmzO3vfXdMbX2+91z6Zuu2UmfzKhfqkZVETsXChhfqzeLx+0ZcrCmK27Iqyt6zg
+	6MtlpO1Gishq2Wg==
+X-Received: from wmoo1.prod.google.com ([2002:a05:600d:101:b0:4a2:1396:ef32])
  (user=smostafa job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:907:da2:b0:c2a:ac35:95fb with SMTP id a640c23a62f3a-c468d88a5c0mr676886766b.24.1792750595024;
+ 2002:a05:600c:1909:b0:4a2:1398:dd05 with SMTP id 5b1f17b1804b1-4a21398df21mr25661445e9.16.1792750595975;
  Fri, 23 Oct 2026 03:16:35 -0700 (PDT)
-Date: Fri, 23 Oct 2026 10:15:35 +0000
+Date: Fri, 23 Oct 2026 10:15:36 +0000
 In-Reply-To: <20261023101536.3965344-1-smostafa@google.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -79,61 +79,59 @@ Precedence: list
 Mime-Version: 1.0
 References: <20261023101536.3965344-1-smostafa@google.com>
 X-Mailer: git-send-email 2.56.0.307.g5fe7bd680c-goog
-Message-ID: <20261023101536.3965344-2-smostafa@google.com>
-Subject: [PATCH v2 1/2] dmaengine: qcom: bam_dma: Take a PM ref at remove()
+Message-ID: <20261023101536.3965344-3-smostafa@google.com>
+Subject: [PATCH v2 2/2] dmaengine: qcom: bam_dma: Do not touch remote BAM in remove()
 From: Mostafa Saleh <smostafa@google.com>
 To: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org
 Cc: linux-arm-msm@vger.kernel.org, vkoul@kernel.org, Frank.Li@kernel.org, 
-	bartosz.golaszewski@oss.qualcomm.com, Mostafa Saleh <smostafa@google.com>
+	bartosz.golaszewski@oss.qualcomm.com, Mostafa Saleh <smostafa@google.com>, 
+	Frank Li <Frank.Li@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 
-bam_dma_remove() calls pm_runtime_dont_use_autosuspend() and
-pm_runtime_force_suspend(), which on a BAM with its own clock disables
-bam_clk, and only then writes BAM_IRQ_SRCS_MSK_EE and terminates the
-channels, touching registers of a block whose clock has just been
-removed, causing the board to reset.
+Unbinding the crypto BAM through sysfs on X1P42100 resets the board.
+bam_dma_remove() clears BAM_IRQ_SRCS_MSK_EE unconditionally. For a BAM
+that is controlled or powered remotely the register may not be
+accessible: the clock and power of the block belong to the remote side
+or to the consumer of the BAM, which is why bam_init() already avoids
+every register access for such a BAM when the DT provides num-channels
+and qcom,num-ees.
 
-Sashiko(Locally) also reports, it then calls clk_disable_unprepare()
-on a clock that runtime suspend already disabled, which can trigger
-"already disabled" warning in clk_core_disable().
+The write is also unnecessary. On a remotely controlled BAM the driver
+only ever sets per channel bits in the EE mask, in bam_chan_init_hw(),
+and bam_free_chan() clears them again. Both run on behalf of a
+consumer, which keeps the block clocked while they do.
 
-Hold a runtime PM reference across the register accesses and the
-channel teardown. Once the hardware is quiet, disable runtime PM with
-the device still active and drop the clock exactly once, balancing the
-clk_prepare_enable() in probe.
+Skip the write for both kinds of remotely managed BAM, using the same
+condition as bam_init().
 
-Fixes: 7d2545599f5b ("dmaengine: qcom-bam-dma: Add pm_runtime support")
+Fixes: 5172c9eb89d4 ("dmaengine: qcom: bam_dma: add controlled-remotely dt property")
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
 Signed-off-by: Mostafa Saleh <smostafa@google.com>
 ---
- drivers/dma/qcom/bam_dma.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/dma/qcom/bam_dma.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-index f67a93a37d48..8a1f4e5d24d1 100644
+index 8a1f4e5d24d1..e01f0fec1599 100644
 --- a/drivers/dma/qcom/bam_dma.c
 +++ b/drivers/dma/qcom/bam_dma.c
-@@ -1403,12 +1403,10 @@ static void bam_dma_remove(struct platform_device *pdev)
- 	struct bam_device *bdev = platform_get_drvdata(pdev);
- 	u32 i;
- 
--	pm_runtime_dont_use_autosuspend(&pdev->dev);
--	pm_runtime_force_suspend(&pdev->dev);
--
- 	of_dma_controller_free(pdev->dev.of_node);
+@@ -1407,8 +1407,15 @@ static void bam_dma_remove(struct platform_device *pdev)
  	dma_async_device_unregister(&bdev->common);
  
-+	pm_runtime_get_sync(&pdev->dev);
- 	/* mask all interrupts for this execution environment */
- 	writel_relaxed(0, bam_addr(bdev, 0,  BAM_IRQ_SRCS_MSK_EE));
+ 	pm_runtime_get_sync(&pdev->dev);
+-	/* mask all interrupts for this execution environment */
+-	writel_relaxed(0, bam_addr(bdev, 0,  BAM_IRQ_SRCS_MSK_EE));
++
++	/*
++	 * Mask all interrupts for this execution environment. A remotely
++	 * controlled or powered BAM is left alone: it may be unclocked, and
++	 * the only bits this driver sets in its mask are the per channel
++	 * ones that bam_free_chan() cleared.
++	 */
++	if (!bdev->controlled_remotely && !bdev->powered_remotely)
++		writel_relaxed(0, bam_addr(bdev, 0,  BAM_IRQ_SRCS_MSK_EE));
  
-@@ -1428,6 +1426,8 @@ static void bam_dma_remove(struct platform_device *pdev)
- 
- 	tasklet_kill(&bdev->task);
- 
-+	pm_runtime_disable(&pdev->dev);
-+	pm_runtime_put_noidle(&pdev->dev);
- 	clk_disable_unprepare(bdev->bamclk);
- }
+ 	free_irq(bdev->irq, bdev);
  
 -- 
 2.56.0.307.g5fe7bd680c-goog
