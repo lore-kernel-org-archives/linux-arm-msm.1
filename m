@@ -1,105 +1,105 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792775880;
-	b=IbSJuBDhvthvpA9x+jv34ddERDgy4yBiX6lhUQMnT9MpgiMeZvAY50N1P4woNfXKhVYz
-	 /+omaX+lcg//XPuOLx8vlvn0Dt/+zAtgw8B1wyaZhc8zVC6wKavGw2aXTOSS9qHgrCJjt
-	 oxea+PrGxzu6pXseXeuup7CEIviUNqBKZKkBTU2qL50GKF1CSEYvV19auGukcsrLDSr9S
-	 Y/qJhM5aqXFDzll8gHF36YXVqNP+6Nxz1lVJLX29sGHzdUAcs22Jnv4L0qoMj4mpNHPBz
-	 7B7s2/t3XCQyTxhbOuAc+Itfcy9dti8bCULXiWeFy4rEmHkOX6I0dWOlYnKpFp836lg==
+	t=1792775883;
+	b=IUGIlHEIzPVJFCESypajXoHnX3+sxgMMx4gb61jA7zZazDokac/A8YRfhNmmRaCiPtHK
+	 +4yjKkofXEo8guDpM6ICPHAb4YZStlwTNxJjPBNPNT3Mgh1QK3MU9mPg9JbYO+Vhj03ZI
+	 nkStrClVBvmeCnH6/kWnBMv20DlHEi6aP3nicCxkLXLScIW0/lJxHKF/lpq36+UDC2jie
+	 JC7ne2Ohca0aempHFIGFj3uCbkjHvJjcj+ZobPp07zDA1lgC8vA3tQ2KGtwZ54XLZKcyH
+	 1IgW+NoM1OsgRq4ORYPe4O8RJRPZK0WkCXqOYQSDKFKF1tKrhOCvudpQXoj6VWSB36w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792775880;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792775883;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=SfsF2sbiRp1415Zg5QD61mmr6NxukLeOnr8JRBKFqbs=;
-	b=sRa9u95eSZndF89SCVSA9F9oDsbdZ3HtiAsCwFGPiKa5Uq6RQEx5/wbyPsMU8YaX+mnc
-	 iLSjLPEZkAvM1yInBGZb5ZYU2deyLiNPM+FtQO37ZPtL5IcNRCayvFtMz6a6rve4aUSnw
-	 219fiy1TycBiihe2R0ymsTOWl7/7phVN5SaEjOqIXXe12Z5gRjKHxPH1uM/Pypa5BV7JC
-	 08GrEjFD9mgF5e/FAfXxU4fuWvZHhRsoBMvpE34ElSVLnqyTV+mjFwFM114Fh1mtSRe4Z
-	 clhuxD9mhDfFNemBA3jB+2Kkuitc5GBx77bqoI+jMpDdId2Z0YlZOnuiFSI54LtB/wQ==
+	bh=1ZUhJ3mPI+qqMp/uxXmGVfm4VBqcoFVidfP/mpyC9/g=;
+	b=RHFjt7YlLBjhblxEo/UWjCE2RGLUtDP1FwbynrUaD/HSU+e0uKs5y7jRgYXHDyF5ELoD
+	 rgoIAVeLHhxV+hm9Ul8zpBi46VXb4MoiuXB4COVmL8HEgcpsZZzOVIrzwPrxRsoQeoXYp
+	 9EkZR3UKYMvQ3AKR6XCipyxCNGSI4G8NcTDOWVRQdgEixoiWVNJ7NS1+nds1iekNlIPOE
+	 MA5x68xPPZRCNJvs6DrV5UMaMTs7dpi/TUJln6Y3FGdNvTsZDM4RGTZe2ttz1TxCTVrKg
+	 WLv0OttyGJA9pXqXyjMhk0qpUsOwa7e5Wfc0oxBXHEqND/6otso87dfvAgqtXd0jCuA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="lcyB+k/j";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Io50dZuV;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=c62CTsUs;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BcrsUttV;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1438560A3829
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:17:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1438560A3829
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5473A606A322
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5473A606A322
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lcyB+k/j;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Io50dZuV
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NG343w3734767
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:17:59 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=c62CTsUs;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BcrsUttV
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NG6KuP2216025
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=SfsF2sbiRp1
-	415Zg5QD61mmr6NxukLeOnr8JRBKFqbs=; b=lcyB+k/jbGPPFkXQEw4U3rZdqX9
-	6D28PZ5ni2ouJQMh6PMWt+WIYYGK2cz66UmMcfNtJzzHJIixmCLViHLXF0ftywIQ
-	JQW2OVCB4YoAuF5g+h70rCuSiy12Z38WbodyPwQpZ3nAokwK3YqKsTeA0UIuBHi1
-	c+bh3xfhOfALFpItF/TPnlnZoWI7gsjSP8bVwYGD1Fn11IdkEPq6C115ztoFzinL
-	2eARUCZa+nXCxpIYpIaolQObWp5l2QkNCe5wT6mEs6AdAH0l8sTCKor9E+IXbI7k
-	2ViOwdVa8MDMLftpJxni82DWVCM43NwAVOVFjZrg6OSjIPMifs2V3nOwNgQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgarug9cg-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=1ZUhJ3mPI+q
+	qMp/uxXmGVfm4VBqcoFVidfP/mpyC9/g=; b=c62CTsUssSa8Fp/j33dU0ED2La/
+	mTsyVSuCrnrnEFbwhccDvSBmF/oNOHeWUcLPuRfJZQ2c+jX4DxeOWAGUOIJgLy7U
+	4aqgF7rTQjfmtRV05QahlTGlUjvR8TsJdUroLsOkG+RV+fHMfLHEQr+HE5o1hakh
+	Our75TiEMREZtuvB4ChTqvsu5GhoVLpWx/pmzdxEOsktw4ztBVBMzwOVpHYph2wc
+	fedH6MNvUxAzls15k3bh6uClWSCFh6QEiKKn8wkZD8mwQTQ6GbprkRore9hOlMii
+	kWODllbjgJsV+W4fGRDJY1wr3+ucf2wb7T7ovO9dT+gwh/R5ku7O11p25hw==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgatc8943-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:17:58 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f3969a2a7so187976885a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:17:58 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:02 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-91b875639ceso23829616d6.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792775878; x=1793380678; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792775881; x=1793380681; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SfsF2sbiRp1415Zg5QD61mmr6NxukLeOnr8JRBKFqbs=;
-        b=Io50dZuVKCfETgSoQTI14ZtbNYlxzdVo3UTLMLhYv4jwWyyA8rONJcOvXdz/QGbN6X
-         56SxbgEGDw/F0u2i2pTTSn+iwVrQ0l4fvxsWsqktieGUSsj05QwX+kWgdyenbqPcPM8r
-         nIAVXcrvhGujizn9Q7ybyLWI4wNzWdRdh5BwvgKZWpap0CcyfWruisAd7jzqjtJcfYOW
-         aWp0M1ZuWqcIwkJTzjvJnRVfPgPVyZLFdDxehURZpo3Y/KazhbIRWAO84I4j34MRL7O9
-         B9mB/YQhCs3voMpmdtM0y5xbt5X4tx4G4tDVAUKDq4WNuaD1warPjovnZGL61H0KQxKA
-         SzQQ==
+        bh=1ZUhJ3mPI+qqMp/uxXmGVfm4VBqcoFVidfP/mpyC9/g=;
+        b=BcrsUttV5fxBXNEojwK9oc6Q32nv81Xgv3KZglXDMy5LyWMt9orlS6T3AhAih/O/cl
+         QDe37TzKlhXLJcJptQXNBlRFblwkOnFnx7WrO9QSYoAqbvDcl9ZzoYsK1r4p/Y48Ueyk
+         wIKslGckScrVWRdNlZh0CMEUlzJOJUgyiEyJdBw+U0jEaD1l7binucFAvWavyjsCxZSq
+         0w6Wb4D0lwLxeyhRpe/0QxRJhuND142CWoF6ZywFXCObz7xoxFjQOgciSG1kj8y3L/hj
+         kPs7DCHr5RsHpDmo7iDboiG+Dwc4ObGux5HsBSKrvxA2lALDHxYR9wn+iXmkbHu2w0zk
+         EjyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792775878; x=1793380678;
+        d=1e100.net; s=20260707; t=1792775881; x=1793380681;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SfsF2sbiRp1415Zg5QD61mmr6NxukLeOnr8JRBKFqbs=;
-        b=KkhGh8tN/XVa80G8YBBcfu4wOWNi7SqeufoPE3c41Q79uIX4gK6LuRO9A1n136DjEc
-         Bvtbyh57BG3yxiZa60HTXLsbUU6OgfvOuBARl4ERBH7Wu9XxMX8BSA857cz+14hvDxvc
-         VhEeDMyOBSxjC+E62Nf4a5eoVRTwn6bpblTscsWPRST2au6/SAjuQIRSYlSRkKaUZdKf
-         PwqyrEn/ZfzWyOqqPJ7mj6ovJE9QjU/qlORa04IAmMkzHnIbCCG9mn/wsNu7MOZ71jc6
-         cJY5aFth4ydEbSOLcO2yQQ5Y2j+9/S2moHDBa6glqHFnHFj10tqPUTIK7NGep9b17Ppn
-         mmlA==
-X-Forwarded-Encrypted: i=1; AKwUvBzIx+XkQSEEp8uYRdW3iAqEvAX4aIhSEET9C+ktBf1mm14bZEsJHm+1ehvYs4+XLu+5j/8loChYaBwj35Ju@vger.kernel.org
-X-Gm-Message-State: AFq9FYJZPNfyvWdEBDSveKumCFded8BjBdcmmL3UAz0CCQCb+ujEc+6L
-	uLvj2Trf9snKeS4lSQEEwVHmAafKzI+ez9op6B84+E/8+4243maEJW+nrULKB6CkakVhvxv2irH
-	NCPyNbjvZ4omdz6NOmLrqChgKvEPysu/owhu9HvLft21n5JJsdoXJ0LnHFfdx+jxL+WhT
-X-Gm-Gg: AYBFou3kxZjKE1a8pQ2nE/2eEv3VA+O/1sSXrJvS9Hq9ZEvQQY1fKAPGEdDS/hq8kyB
-	JsGffoShEbBNQt4LmT/Pt0V8jCBIzvRtqSXSqxb5KUwr1xkM6ATEvxUPzGZaWQtqJIpzpgmlWfD
-	q/n8JkD7QOQ1A6MbUNumNGREb/AFQqVJX/icQJEyKvYdgh/2wCPay5SRTZ2zVh9bWdZcHNOWdQ6
-	Lm9neGelg5VdDGxS8szTMUBAxa6Nee8uUMpA9xzzW0qHigZudTirreQw3hHXsS0OQBvzU5lyq8C
-	ixBRUSV8ZUf3ReUxrajVYtPPyuU9e04yt33wk3Iv5W/8i8RoIZTYRTb8YAWoVGxCC6ArDsVaHpD
-	j9utYZKcLsvR0
-X-Received: by 2002:a05:620a:269d:b0:93f:1ff5:8908 with SMTP id af79cd13be357-93f6f7e72f6mr519957085a.41.1792775878290;
-        Fri, 23 Oct 2026 10:17:58 -0700 (PDT)
-X-Received: by 2002:a05:620a:269d:b0:93f:1ff5:8908 with SMTP id af79cd13be357-93f6f7e72f6mr519952785a.41.1792775877752;
-        Fri, 23 Oct 2026 10:17:57 -0700 (PDT)
+        bh=1ZUhJ3mPI+qqMp/uxXmGVfm4VBqcoFVidfP/mpyC9/g=;
+        b=McgcyBOqRHbFsPALtyPDi8Ign9Xsff1U6/HnuLQp0RyiUTyMBHuTv7qHkfnBp78R3D
+         uKjSSafBq/OlEzUT/+YPOsEtRPXyyBqcOpWvz+KUM2WvCBmASlCszvhFNiH+uHqyty7o
+         ewvp6qkC+On64gGthV/y5/SJ20csJj6FSq/kQypP8f0QVBq6xe5jzlPTISf4QBhrMBH3
+         nplknpeIDr4O0+gusYbeYfQCIiNCyHpwjbtDy8u5HK5ORkeARR1h4c4d7A9BX9a0QiqR
+         UIFopA7TMZbpohEacsIM+hu4UtDNcWfqVDUskc3F4w51X9OeAcp2kvdCoIyxgcsFpNMm
+         gP+w==
+X-Forwarded-Encrypted: i=1; AKwUvByFj2ADo642t18EZTGQEeT/ADqfYjm0YaWlup7Vvfk1U12yShdLKERwD+k9766syiMDO7nBJvahk3DVXEEe@vger.kernel.org
+X-Gm-Message-State: AFq9FYKoIR9Ob3X+28Hd5F1rVj53xYEy4rMohzzrd28qvyB1x6Y2niFY
+	Hbl0n2gx3WcefHgxB9K1G+ZwrDiw+uhTj+8N5dvzmzrwT25QYPC3cF1L5z3wlMvxQI40YoSSvCO
+	szhkhwqfKc4d7rz04hgIWPWfSlGziEKB7L19FpQdZSfWQFw93mbbW8PZLXYKq0O3aa/eq
+X-Gm-Gg: AYBFou0eFWxHkUTh3PkJ1BLZ+ZGoKogz8znwWoIJeOAJzkz4/IrPYmi82EAxGkj8gdQ
+	eP0wq7mwrWMAR9ZTN6Kc06eQBNbMxI8TbZ33Mbfdp6DA8/WEbaiOSHqyV7OyfgTgI5GpBH+wbD4
+	dpt2TSszdc+I+4cShwM+n1LrvIre5x1JrLxO7vn1Ge5kPZ9BdMN0NkIjcAtjRtt2tuW+r5NNpqL
+	17gi6plAUaHAgxTtAsZFn0UyvqZlebwIfLez34Gk2n8IoIbp+kJjii4ntlfWjqLFfd7BW6vRCkb
+	yNqTLh8KRy1YyuzGDdr/mOxppSVK+1aPqToolIHv+8kWzLggoS6HBsQAHmCtcFTaEO+dwC+7xfR
+	AseOyNy5zLydr
+X-Received: by 2002:a05:620a:2b46:b0:93f:34c9:925f with SMTP id af79cd13be357-93f6f79bcaemr486350585a.17.1792775881475;
+        Fri, 23 Oct 2026 10:18:01 -0700 (PDT)
+X-Received: by 2002:a05:620a:2b46:b0:93f:34c9:925f with SMTP id af79cd13be357-93f6f79bcaemr486346185a.17.1792775880931;
+        Fri, 23 Oct 2026 10:18:00 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.17.56
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.17.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:17:56 -0700 (PDT)
+        Fri, 23 Oct 2026 10:18:00 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
 Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -114,9 +114,9 @@ Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [RFC PATCH 06/23] ASoC: codecs: wsa884x: register the die temperature as a thermal zone
-Date: Fri, 23 Oct 2026 18:14:16 +0100
-Message-ID: <20261023171433.820092-7-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [RFC PATCH 08/23] ASoC: qcom: audioreach: run VI module in calibration mode with per-speaker events
+Date: Fri, 23 Oct 2026 18:14:18 +0100
+Message-ID: <20261023171433.820092-9-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -130,153 +130,301 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX+AzLqvs5nInJ
- DgmF+q2L2hy/pautecvX1j6Bsum2EvhoNOSnEo8rMRb4rtH3vnBadZiLv4WAZ3Ig7AK6i5osNI0
- VLPYwr/kx/LIilBQFuxpwMlgo7F/vyk=
-X-Proofpoint-GUID: mkMONCUXmxQf6Roh1QzZBW-b3tmgtrWh
-X-Authority-Analysis: v=2.4 cv=SK7Xx+vH c=1 sm=1 tr=0 ts=6adb96c6 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX3UHU1n46HPt3
+ KKhSF3fo5n9TNNMT4h4UeLWQMYQlDVZiS8IlgBxT7aej8RjfmDuJ0Hv8ghuKq2ueAwyAw/ZMoel
+ i8/FyP3vAAy1SHB2lmrfkWeZkjPdqVlpTc/BrIRIbc1OV/Ur3Z5Y7iODadUTtNVZ6vwIVetutbU
+ s0Ho0JyUvDl2OYsQe1xhqpK01y/xLn1xYgiuay7vu9I8qf4yTIY2iPdA3xH3hz/DwMBOAZerV1g
+ AEfogSLkSpA9qXMkfm1AjRUMUSi8uA3/7xi1jk0GaFAGalOeJG76o7AlTpQfExlyyqfettdyCiN
+ /mTdJ7QqA+mcdPmFwTsnyKBLRMSZYh8hlG9qc26LhN6yqgGCX8J4LRHpzsZdj/RnPu6MZv0iHE6
+ OpjnDJFr7mKAfXqRLdbJKYrOirErinoAPigojiKPXJo30xhHgqA6nkbGmffFe028A1rf3H5i6jE
+ co36MTUvhoamCd6oNIA==
+X-Proofpoint-GUID: HeECEZjAHgqWfKBRMDA6FJtKgwJrGCVt
+X-Authority-Analysis: v=2.4 cv=Scxi5fRu c=1 sm=1 tr=0 ts=6adb96ca cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=51jdShTR6rvD-JhUMxgA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: mkMONCUXmxQf6Roh1QzZBW-b3tmgtrWh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfXwZpUp0A9LmIp
- t2V8FakPdn0vNkJFU1Eg4Ia2V87Ne/cMAsm/9230qw2mc3lLC7SgSb5KZx24GpXDPTiiNzQyKwU
- /hql9tWpeEmRF/ZIb+orkr6RRVSoamVNAmXp/8A/m0/QVfYgpAxi2KGdDw1dCdtGsp5+xQ05oc4
- WafXMQz6eTydP5UemrYMbF/V99p+L/DMOtwg9bjjDGUUFm57LP2er/Fh6dsMfMTU8u8sqsWE2dG
- pPP5EYN1f2JZGHeHSR0GosU8TQwTkRMNWF0yGE3JYXAUh1uEhwA07tFJOsyaSCAwjtwjEA/grig
- 0XBoFsbLLWf4TH94fhTonxBsU0k6rvjvYUJCfo5Hn9F8wGWcEcuKMKjKXZCtt6Sj9hwZM9SEgLX
- 3ZuNQKDUln7lwJN9mDNhWqQ1Iig1al3ZT4AWjjcEpYeMUx558USB8O9ZgC2XWfvb6raZbuIEb9Q
- dGXSnnSc0SkEIc0XMbg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=G-aZ52fNQZuqIlxTME0A:9 a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-ORIG-GUID: HeECEZjAHgqWfKBRMDA6FJtKgwJrGCVt
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX4XiiX4R7pJib
+ WelvW24VxQ/T5pJ3ixClIP+DzbE6tIsgOMmVIxRB5RoFMtLYeY2HGp2xnK6Hm5mBDTFW16CboWD
+ Oaw8d2peYUMxAjJTJZp68pqRKu+WM+k=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 phishscore=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230067
+ suspectscore=0 adultscore=0 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610230067
 
-Speaker protection pairs each speaker's calibrated resistance with the
-amplifier die temperature (T0) at the time, but an in-kernel user has
-no way to read that temperature.
+From: Ravi Hothi <ravi.hothi@oss.qualcomm.com>
 
-Register a tripless thermal zone over the existing temperature read,
-named "wsa-<bus id>-<unique id>" so a user holding the codec's device
-can find it with thermal_zone_get_zone_by_name(). Until the codec is
-initialised, and while the PA is on with nothing cached yet, return
--EAGAIN to hwmon and no valid temperature to the thermal zone, instead
-of a plausible looking zero. -EAGAIN would make the thermal core re-read
-the zone every 250 ms and keep the codec awake.
+Put the speaker protection and VI modules in calibration mode and
+register for EVENT_ID_VI_PER_SPKR_CALIBRATION, so each speaker's state
+and measured resistance are reported on their own.
 
+Number the V/I channel pairs consecutively, as the VI capture packs one
+pair per speaker without gaps.
+
+Signed-off-by: Ravi Hothi <ravi.hothi@oss.qualcomm.com>
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- sound/soc/codecs/wsa884x.c | 70 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 69 insertions(+), 1 deletion(-)
+ sound/soc/qcom/qdsp6/audioreach.c | 72 +++++++++++++++++++++++--------
+ sound/soc/qcom/qdsp6/audioreach.h | 36 ++++++++++++++++
+ sound/soc/qcom/qdsp6/q6apm.c      | 55 +++++++++++++++++++++++
+ 3 files changed, 146 insertions(+), 17 deletions(-)
 
-diff --git a/sound/soc/codecs/wsa884x.c b/sound/soc/codecs/wsa884x.c
-index fbb9c5773aa5..ecc6983bb54e 100644
---- a/sound/soc/codecs/wsa884x.c
-+++ b/sound/soc/codecs/wsa884x.c
-@@ -23,6 +23,7 @@
- #include <linux/soundwire/sdw_type.h>
- #include <sound/pcm.h>
- #include <sound/pcm_params.h>
-+#include <linux/thermal.h>
- #include <sound/soc-dapm.h>
- #include <sound/soc.h>
- #include <sound/tlv.h>
-@@ -1928,8 +1929,10 @@ static int wsa884x_get_temp(struct wsa884x_priv *wsa884x, long *temp)
- 	if (wsa884x->pa_on) {
- 		/*
- 		 * Reading temperature is possible only when Power Amplifier is
--		 * off. Report last cached data.
-+		 * off. Report last cached data if we have one, -EAGAIN otherwise.
- 		 */
-+		if (!wsa884x->temperature)
-+			return -EAGAIN;
- 		*temp = wsa884x->temperature * 1000;
- 		return 0;
+diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+index 9e45634cafbc..75995426b9f6 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.c
++++ b/sound/soc/qcom/qdsp6/audioreach.c
+@@ -1464,6 +1464,35 @@ static int audioreach_speaker_protection(struct q6apm_graph *graph,
+ 					 operation_mode);
+ }
+ 
++static int audioreach_register_events(struct q6apm_graph *graph,
++				      const struct audioreach_module *module)
++{
++	struct apm_module_register_events *payload;
++	struct gpr_pkt *pkt;
++	int rc, payload_size;
++	void *p;
++
++	/* No event config payload, the packet is zeroed on allocation */
++	payload_size = ALIGN(sizeof(struct apm_module_register_events), 8);
++	pkt = audioreach_alloc_cmd_pkt(payload_size, APM_CMD_REGISTER_MODULE_EVENTS,
++				       0, graph->port->id, module->instance_id);
++	if (IS_ERR(pkt))
++		return PTR_ERR(pkt);
++
++	p = (void *)pkt + GPR_HDR_SIZE + APM_CMD_HDR_SIZE;
++
++	payload = p;
++	payload->module_instance_id = module->instance_id;
++	payload->event_id = EVENT_ID_VI_PER_SPKR_CALIBRATION;
++	payload->is_register = 1;
++
++	rc = audioreach_graph_send_cmd_sync(graph, pkt, 0);
++
++	kfree(pkt);
++
++	return rc;
++}
++
+ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 					    const struct audioreach_module *module,
+ 					    const struct audioreach_module_config *mcfg)
+@@ -1474,8 +1503,9 @@ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 	struct apm_module_sp_vi_ex_mode_cfg *ex_cfg;
+ 	int op_sz, cm_sz, ex_sz;
+ 	struct apm_module_param_data *param_data;
+-	int rc, i, payload_size, j;
++	int rc, i, j, payload_size;
+ 	struct gpr_pkt *pkt;
++	u32 num_speakers;
+ 	void *p;
+ 
+ 	if (num_channels > 2) {
+@@ -1483,9 +1513,20 @@ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 		return -EINVAL;
  	}
-@@ -2051,6 +2054,42 @@ static const struct hwmon_chip_info wsa884x_hwmon_chip_info = {
- 	.info	= wsa884x_hwmon_info,
- };
  
-+static int wsa884x_tz_get_temp(struct thermal_zone_device *tz, int *temp_mdeg)
-+{
-+	struct wsa884x_priv *wsa884x = thermal_zone_device_priv(tz);
-+	long mdeg;
-+	int ret;
-+
-+	/*
-+	 * OTP trims read back as zero until the codec is initialised. Report
-+	 * no reading rather than -EAGAIN, which makes the core poll the zone.
-+	 */
-+	if (!wsa884x->hw_init) {
-+		*temp_mdeg = THERMAL_TEMP_INVALID;
-+		return 0;
+-	op_sz = APM_SP_VI_OP_MODE_CFG_PSIZE(num_channels);
++	/* One 32-bit V/I word per speaker, so channels == speakers */
++	num_speakers = num_channels;
++	if (!num_speakers) {
++		dev_err(graph->dev, "Error: VI needs at least one channel\n");
++		return -EINVAL;
 +	}
 +
-+	ret = wsa884x_get_temp(wsa884x, &mdeg);
-+	if (ret == -EAGAIN) {
-+		*temp_mdeg = THERMAL_TEMP_INVALID;
-+		return 0;
-+	}
-+	if (ret)
-+		return ret;
++	rc = audioreach_register_events(graph, module);
++	if (rc)
++		return rc;
 +
-+	*temp_mdeg = (int)mdeg;
-+	return 0;
-+}
-+
-+static const struct thermal_zone_device_ops wsa884x_tz_ops = {
-+	.get_temp = wsa884x_tz_get_temp,
-+};
-+
-+static void wsa884x_tz_unregister(void *data)
-+{
-+	thermal_zone_device_unregister(data);
-+}
-+
- static void wsa884x_reset_powerdown(void *data)
- {
- 	struct wsa884x_priv *wsa884x = data;
-@@ -2187,6 +2226,35 @@ static int wsa884x_probe(struct sdw_slave *pdev,
- 	if (ret)
- 		return ret;
++	op_sz = APM_SP_VI_OP_MODE_CFG_PSIZE(num_speakers);
+ 	/* Channel mapping for Isense and Vsense, thus twice number of speakers. */
+-	cm_sz = APM_SP_VI_CH_MAP_CFG_PSIZE(num_channels * 2);
++	cm_sz = APM_SP_VI_CH_MAP_CFG_PSIZE(num_speakers * 2);
+ 	ex_sz = APM_SP_VI_EX_MODE_CFG_PSIZE;
  
-+	if (IS_REACHABLE(CONFIG_THERMAL)) {
-+		char tz_name[THERMAL_NAME_LENGTH];
-+		struct thermal_zone_device *tz;
+ 	payload_size = op_sz + cm_sz + ex_sz;
+@@ -1503,8 +1544,9 @@ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 	param_data->param_id = PARAM_ID_SP_VI_OP_MODE_CFG;
+ 	param_data->param_size = op_sz - APM_MODULE_PARAM_DATA_SIZE;
+ 
+-	op_cfg->cfg.num_channels = num_channels;
+-	op_cfg->cfg.operation_mode = PARAM_ID_SP_VI_OP_MODE_NORMAL;
++	/* The DSP calls this field num_speakers for the VI module */
++	op_cfg->cfg.num_channels = num_speakers;
++	op_cfg->cfg.operation_mode = PARAM_ID_SP_VI_OP_MODE_CALIBRATION;
+ 	p += op_sz;
+ 
+ 	cm_cfg = p;
+@@ -1514,20 +1556,15 @@ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 	param_data->param_id = PARAM_ID_SP_VI_CHANNEL_MAP_CFG;
+ 	param_data->param_size = cm_sz - APM_MODULE_PARAM_DATA_SIZE;
+ 
+-	cm_cfg->cfg.num_channels = num_channels * 2;
+-	/* Convert the physical mapping to a logical mapping of the channels */
+-	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < num_channels; i++) {
++	cm_cfg->cfg.num_channels = num_speakers * 2;
++	/* Number the V/I pairs consecutively, the capture has no gaps */
++	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < num_speakers; i++) {
+ 		if (!mcfg->channel_map[i])
+ 			continue;
+-		/*
+-		 * Map speakers into Vsense and then Isense of each channel.
+-		 * E.g. for PCM_CHANNEL_FL and PCM_CHANNEL_FR to:
+-		 * [1, 2, 3, 4]
+-		 */
+-		cm_cfg->cfg.channel_mapping[2 * j] = (mcfg->channel_map[i] - 1) * 2 + 1;
+-		cm_cfg->cfg.channel_mapping[2 * j + 1] = (mcfg->channel_map[i] - 1) * 2 + 2;
+ 
+-		++j;
++		cm_cfg->cfg.channel_mapping[2 * j] = 2 * j + 1;
++		cm_cfg->cfg.channel_mapping[2 * j + 1] = 2 * j + 2;
++		j++;
+ 	}
+ 
+ 	p += cm_sz;
+@@ -1601,7 +1638,7 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+ 		break;
+ 	case MODULE_ID_SPEAKER_PROTECTION:
+ 		rc = audioreach_speaker_protection(graph, module,
+-						   PARAM_ID_SP_OP_MODE_NORMAL);
++						   PARAM_ID_SP_OP_MODE_CALIBRATION);
+ 		if (!rc)
+ 			rc = audioreach_module_enable(graph, module, true);
+ 
+@@ -1610,6 +1647,7 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+ 		rc = audioreach_speaker_protection_vi(graph, module, cfg);
+ 		if (!rc)
+ 			rc = audioreach_module_enable(graph, module, true);
 +
-+		/*
-+		 * Register after runtime PM is enabled, as the zone is read
-+		 * right away. dev_name() is too long for a zone name.
-+		 */
-+		scnprintf(tz_name, sizeof(tz_name), "wsa-%d-%u",
-+			  pdev->bus->id, pdev->id.unique_id);
-+		tz = thermal_tripless_zone_device_register(tz_name,
-+							   wsa884x,
-+							   &wsa884x_tz_ops,
-+							   NULL);
-+		if (IS_ERR(tz)) {
-+			dev_warn(dev,
-+				 "thermal zone '%s' registration failed (%ld); SP T0 kcontrol will read 0 for this codec\n",
-+				 tz_name, PTR_ERR(tz));
-+		} else {
-+			ret = devm_add_action_or_reset(dev,
-+						       wsa884x_tz_unregister,
-+						       tz);
-+			if (ret)
-+				return ret;
+ 		break;
+ 	case MODULE_ID_AUDIO_IF_SOURCE:
+ 	case MODULE_ID_AUDIO_IF_SINK:
+diff --git a/sound/soc/qcom/qdsp6/audioreach.h b/sound/soc/qcom/qdsp6/audioreach.h
+index 38b71aefd845..4744d3117010 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.h
++++ b/sound/soc/qcom/qdsp6/audioreach.h
+@@ -720,6 +720,42 @@ struct param_id_sp_vi_channel_map_cfg {
+ 	uint32_t channel_mapping[];
+ } __packed;
+ 
++/* VI per-speaker calibration event, raised every frame in calibration mode */
++#define EVENT_ID_VI_PER_SPKR_CALIBRATION	0x08001511
 +
-+			thermal_zone_device_enable(tz);
++/* Calibration state, as reported by struct vi_per_spkr_calib_param.state */
++#define VI_CALIBRATION_STATE_NORMAL_MODE	0 /* Not in calibration mode */
++#define VI_CALIBRATION_STATE_INACTIVE		1 /* Port not started */
++#define VI_CALIBRATION_STATE_WARM_UP		2 /* Warming up */
++#define VI_CALIBRATION_STATE_IN_PROGRESS	3 /* Calibration running */
++#define VI_CALIBRATION_STATE_SUCCESS		4 /* R0/T0 within range */
++#define VI_CALIBRATION_STATE_FAILED		5 /* R0/T0 out of range */
++#define VI_CALIBRATION_STATE_WAIT_FOR_VI	6 /* Waiting for V/I data */
++#define VI_CALIBRATION_STATE_VI_WAIT_TIMEOUT	7 /* Timed out waiting for V/I */
++#define VI_CALIBRATION_STATE_LOW_VI		8 /* V/I signal level too low */
++
++/**
++ * struct vi_per_spkr_calib_param - Per-speaker calibration result
++ * @state: Calibration state of this speaker.
++ * @r0_cali_q24: Measured DC resistance in ohms, Q24. Filled in regardless of
++ *		 @state, so it is meaningful for both VI_CALIBRATION_STATE_SUCCESS
++ *		 and VI_CALIBRATION_STATE_FAILED.
++ */
++struct vi_per_spkr_calib_param {
++	uint32_t state;
++	int32_t r0_cali_q24;
++} __packed;
++
++/**
++ * struct event_id_vi_per_spkr_calibration - Per-speaker VI calibration result
++ * @num_ch: Number of speakers the result covers.
++ * @cali_param: Per-speaker calibration state and measured resistance.
++ */
++struct event_id_vi_per_spkr_calibration {
++	uint32_t num_ch;
++	struct vi_per_spkr_calib_param cali_param[];
++} __packed;
++
+ #define PARAM_ID_SAL_OUTPUT_CFG			0x08001016
+ struct param_id_sal_output_config {
+ 	uint32_t bits_per_sample;
+diff --git a/sound/soc/qcom/qdsp6/q6apm.c b/sound/soc/qcom/qdsp6/q6apm.c
+index bb2f18a64644..0e02cadbc14b 100644
+--- a/sound/soc/qcom/qdsp6/q6apm.c
++++ b/sound/soc/qcom/qdsp6/q6apm.c
+@@ -560,6 +560,58 @@ int q6apm_get_hw_pointer(struct q6apm_graph *graph, int dir)
+ }
+ EXPORT_SYMBOL_GPL(q6apm_get_hw_pointer);
+ 
++/*
++ * Convert a Q24 fixed-point value to its integer part, and to the first three
++ * decimal places of its fractional part.
++ */
++static int q6apm_q24_to_int_frac(int32_t val, int *frac)
++{
++	*frac = (int)(((s64)(val & 0xffffff) * 1000) >> 24);
++
++	return val >> 24;
++}
++
++static void q6apm_vi_calibration_event(struct device *dev,
++				       const struct apm_module_event *event,
++				       int payload_size)
++{
++	const struct event_id_vi_per_spkr_calibration *cali;
++	unsigned int num_ch, i;
++	int r0_int, r0_frac;
++
++	if (payload_size < 0 || payload_size < (int)(sizeof(*event) + sizeof(*cali))) {
++		dev_err(dev, "VI calibration event truncated (%d bytes)\n",
++			payload_size);
++		return;
++	}
++
++	cali = (const struct event_id_vi_per_spkr_calibration *)(event + 1);
++
++	/* Bound the array by the received payload, not by num_ch alone */
++	num_ch = (payload_size - sizeof(*event) - sizeof(*cali)) / sizeof(cali->cali_param[0]);
++	num_ch = min_t(unsigned int, cali->num_ch, num_ch);
++
++	for (i = 0; i < num_ch; i++) {
++		/* Only SUCCESS and FAILED carry a measured R0; both are worth reporting */
++		switch (cali->cali_param[i].state) {
++		case VI_CALIBRATION_STATE_SUCCESS:
++			break;
++		case VI_CALIBRATION_STATE_FAILED:
++			dev_dbg(dev, "VI calibration channel %u failed, R0/T0 out of range\n", i);
++			break;
++		default:
++			dev_dbg(dev, "VI calibration channel %u in state %u\n",
++				i, cali->cali_param[i].state);
++			continue;
 +		}
-+	}
 +
- 	return devm_snd_soc_register_component(dev,
- 					       &wsa884x_component_drv,
- 					       wsa884x_dais,
++		r0_int = q6apm_q24_to_int_frac(cali->cali_param[i].r0_cali_q24, &r0_frac);
++		/* Raised every frame, so keep it at debug level */
++		dev_dbg(dev, "VI calibration channel %u: R0 %d.%03d ohms\n",
++			i, r0_int, r0_frac);
++	}
++}
++
+ static int graph_callback(const struct gpr_resp_pkt *data, void *priv, int op)
+ {
+ 	struct data_cmd_rsp_rd_sh_mem_ep_data_buffer_done_v2 *rd_done;
+@@ -583,6 +635,9 @@ static int graph_callback(const struct gpr_resp_pkt *data, void *priv, int op)
+ 			client_event = APM_CLIENT_EVENT_WATERMARK_EVENT;
+ 			graph->cb(client_event, hdr->token, data->payload, graph->priv);
+ 			break;
++		case EVENT_ID_VI_PER_SPKR_CALIBRATION:
++			q6apm_vi_calibration_event(dev, event, data->payload_size);
++			break;
+ 		}
+ 
+ 		break;
 -- 
 2.47.3
 
