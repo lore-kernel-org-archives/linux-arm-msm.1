@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792791664;
-	b=B3dOiuhbzsU5tqcB8Ar2wvI4Pi9cqOQoLzfd1b9kF5B5Z/6T/xMoRalUvDRBCCYZlFMt
-	 C4LDfdZXrMnEQWwJlXuynVA3//nry9jQZim8DMZhNU6JiO0T5k+mPwrv7Yq5vV0WJEdhV
-	 6s3yBKulrRkWXtHujh047dzOh0bkEJ0hq5+GF1G0yprQAxa+tkSyIxMvelP1AGUgoEHHO
-	 W4yFNjv4ii92LKQxc3Zg+sUD/FAs20sKc1STwZZsFgP3XWW2ff1uM7eVsP8/digWK5/jR
-	 M65zdEKXr3o32oFarq+bPjfprFbaSZbduMNRMcbkJh4Mpgai9+Djss/tswY6DF+LZEA==
+	t=1792791859;
+	b=NFhuDpIcrqQeVBJVVHYL2/nP1CMLEMyWFGA221BsrWFMX5WST0OAr3VOJV/8hKGPYbTP
+	 AM2xfBOxr/aj9fQYaH8kJeT9Ztlu/imFS0zlHx6elc0eP2vtgMRN7U7iJ0mgQHZnIQ5No
+	 nebsboZFiKEG6z7Fg0Ys2h9+qsxKAeK3EQEfmJks5+McPni2yRHqGIjj8vED8059mW9Tp
+	 0Q6Rf2KA3PfEPkb4u0Gdt1FN0RcHT2vpYAwCG6g7aOSQURUCr9U5wUNqPYC4PtuyFUzYM
+	 yIYSCjwAAvaPCNkKfHv/3yZ3kklyLdSSW3hMmhkuShViB7YOhyqPrijdUDvVjLYFxQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792791664;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792791859;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
 	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=dLP+vrP/WYHAzwYYzRIUkm5egmqsrMk3OsoBqC+cLU0=;
-	b=J0KEF3hGNxtOWnYfDYpdaIf85ty08QW5XK0FPCuugR8qjOqKmVIWvLKowx7xH29rbngI
-	 aEBDgBhgnrZ/fFzKv8/bEW/cfGhgC3oyp62saq3vJIVcyvpXx+Wgw2VYujeTjOGd16H6D
-	 Go0HmTEeZ5cdxeWilFopS8dG1dhlW2BZSVRdwN90sFk9yIfbzlbrL4oCIkk8jFn2n+kuE
-	 clMc3RsFFwBcp8h3tgL3AcO8kzQUnAsDc2zcLb7UdutqSrJhEA/+8MEve5GJa9SPIDsCj
-	 7rYaNWQwhQXNBBMHgU+hSlAe1w8ZhntADRwUbzrljPXEWa2IoR186SeJgV54aSBu59g==
+	bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
+	b=PjZy2r+jgP/+yofW2QS4/VLZJXiJmoYY1ShHctkJ+6QsSJfHXd0lKx+mXrf5/w7JzPMH
+	 p+QSiki0JnQ4SbaLHJ7RS5jTUen/1Mit1PybhfpUIrrkVGynqoI1jW7QSkolozxihbDG+
+	 sZOVZ6OGHTTTtPZGLIqzS3a0QYk8ae30BS7+kCd6/nZFVAOXuOoJfKmdyFVk4AHCtrQ5P
+	 jo+XltJPACghLUlVC+nCiLjuz4jJs8MxkxGqggSRERJUsQpOD/DGfdCblEKmJwaavxJJu
+	 Wo478aAolsd0Z43V/BGSSuXN+tm7eZ8396qIcE4ISCcUWMCDbC4JdFQJ0kaLI5PVZoQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=LQrJf4OS;
-	arc=none smtp.remote-ip=209.85.128.41
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mlFIvltp;
+	arc=none smtp.remote-ip=209.85.128.46
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AE7B606A31D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 21:41:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9AE7B606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31443606A31A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 21:44:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31443606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=LQrJf4OS
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a0286c981dso13200915e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 14:41:03 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mlFIvltp
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a208d93758so13877755e9.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 14:44:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792791661; x=1793396461; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1792791858; x=1793396658; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dLP+vrP/WYHAzwYYzRIUkm5egmqsrMk3OsoBqC+cLU0=;
-        b=LQrJf4OSaoEVpmb+GJA3KdPDbY9LJG4a9BbM+Sl7uXL0mJuANTMx2nhwg1BqWVQLGg
-         lHCsxDogRJWeuXljhlL0O1MOf9Zwa7doI6HsWicG0q5Os63u43dditMT2VO7/YduFChJ
-         HkLndPTfkG0cqYMO9PKmF934xo6blasxUmfWf9FokJwO9xGXwawVhTWfRo7K+vfPA4XJ
-         Xp4L2qVBQOESMNYOU+plEHeFqjsFNcm0JEGaTwkOYiHPe3VMOxISBPyJmtlB5C+0rekP
-         LhAC/j6LyEogidIu4jXgWPoa3sfIadx6HPG6dJK0xJOmI8geZ0AQdFodzEjzQalqy2hQ
-         0u2g==
+        bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
+        b=mlFIvltpQf//XRh4JIZWCEhPJNJ0X/sQhjQhiV4wzLgBap50wkui+qFJRqfQ3YDRk1
+         yHrOFrS5vtSk+Yj9CrrFgHVyHo4KKLmIYBaRTM/7bj25gxU06M7VfQCUDI5s4oOeWcKi
+         F2DLBsHnk/8lWkH5W/MTIG6K5uKsg84EIbIpD98Yer2j1HB2cyW6kRBGnoRYL2rOWKJ/
+         TMDpqq4l0qY2PMRtmJz/10lj9/HkD5YDbOHEUNMayjlxBFrqfDvM4ND1pILr+Wp4uD2r
+         eN7CY/Aj2TOzSEIuaZystdERQIs9nH35oiHz6TmbIUQ0iwv7Bs/UPsnfxchnRQzyprGD
+         0+XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792791661; x=1793396461;
+        d=1e100.net; s=20260707; t=1792791858; x=1793396658;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dLP+vrP/WYHAzwYYzRIUkm5egmqsrMk3OsoBqC+cLU0=;
-        b=K//zhbFGPxssXPq4898uVpI4+MuvzKYUTSB4ePILnEDxKKON9jWlafn227+LFHjeAc
-         5LelJzpX0SjhCrOLAVlhelvwer8sOr0C5SD6fsz/35IzmMcvfKqvlyB0/25MnrDihA3q
-         pzNX29/KXH+J7i+f1YggknEJVM27FGPqQrnGT84gVW25on8aoJRcxeYRWF+I8hE7lBLV
-         OK5Ph81m5JREkbtgvKlyKnoS4oZ7/3AzRaixApWRadjrz6iuct3YjBB68Y3HmKAgNNlv
-         iH1PX0S/YH7q9ZndSf867ZSLyCYj4Ce9OR7YbunRtKDejGJRbhKbG5lvZfMQOAwGq6SI
-         ujaw==
-X-Forwarded-Encrypted: i=1; AKwUvBwGIr79xRInsR/IK5GASFiG4AI5Kqj0lj16JDtZFUAeQJLis/mGhfls1ocgBn/2V/jGLXYz2bPsN6T5vTcH@vger.kernel.org
-X-Gm-Message-State: AFq9FYKiJ6Ze/ck2NHR5KsxroapjFkaUmpL7kQuuLbPafsaZ6Hdatiqr
-	d6J+ZX5W25/g3JGoALZt8KSa+uSkNE8IgzuuO0akCpuwKy8fUbdLbOtNnZiMg7hbVA4=
-X-Gm-Gg: AYBFou002iNWm76nx4qgqcfBnfQpnmLIGDPqeQLFkplly/ZS6xpN5byzqhmwIEhPPKD
-	CUWuGHwniRDXvpfFYmISeCmg3jGeccBcSHs8EwinNtg/bTkYwxdRx7mLhvrR32pZkdeau5PVlX3
-	5tGjk3KAlpmf+37jeyHL+Tl4T5KFQXuHgTqzFBiqBXP6yJk6WC+7ZP8qc7jPyKlxxMAYzNaYYLD
-	QyHn4neo+uErU4OWSiEKpRCNvdJd2svwksAQm/ftxqy9TZyTU8pSOxOrEqMnv/CKs5gjnRyKxw8
-	x39ZE2Xme4C9Ruoo6IR7HjK+c1gUbs2gENWMtRXUaueaAq9fEjDUe1Qg1XNUDmNk9LcHGVxJmdR
-	8iCRXhJJwyQKmYFnvkffxGYhGyxubi3c3pf9AohuTtypHgVMNVlPPwIHPjA5f2+pu5bHLtfSPeb
-	/iHLEkt2qj0XyAigd9IogjO7HtO18LDCuu+2wriS0lxj6GvRsa3oDMKB/7/tQdPmQ+HGPVRCWPs
-	oXIcb5RJkD4xCHdfEL5UzDdklfY18MgC4RWEANMwPpFrrHRl+8ONLA8ULIXav51UD6l
-X-Received: by 2002:adf:e186:0:b0:48d:f730:bda8 with SMTP id ffacd0b85a97d-48e3eb879ebmr390913f8f.50.1792791661485;
-        Fri, 23 Oct 2026 14:41:01 -0700 (PDT)
+        bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
+        b=e63PXq+w4w9zHUdPozM5q8OXQ/BHvWO4NLqr6zxaqpHGTbcl1OSCbzwnyJTW3Fuq9X
+         DkKacnwTvTULf/XRshxAlydTfyu5191j7Hi4QNTD+WWuhxJdks1CUCtl6Zu0DhFwMJrW
+         j69PAkc2xvJZ3uJf5xNon53d5W0BsJuYwkNhZ1/lu4SSZEuE80sQaYAKYYMIsTvVaANr
+         XOfsol2sHNt1iIVHW2toVf/vW1UfUyAV3rj8pdYFzzWClC9VQdSdJrv8VXLEFcPJekd3
+         dsCTKJ6SJcUARS1wZeQC7a9pt1Y/jUndtPdwVC4oJkrn4VR6AEFkDFf4xGQA3ll6Gdk6
+         8nyQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwGebwECz18OWoX/w+EJDccdG3vUrsDwEmcXJ1J0svSYhC+MBmYpw8zxNc9Inis0H+qRcHAmF+RSSGxYp5j@vger.kernel.org
+X-Gm-Message-State: AFq9FYKpPjKqN01b7sdx7dCdHkTD/v/ASEH4MSdx0rOLYc9hDf2oPoxY
+	oQTDjEq2VV33TKqy7HOaD2k2ZV7v+emZJQ0tpXwFEObf9VV0p9fRmGKMsoL71guQ2WM=
+X-Gm-Gg: AYBFou03PMASadepotB5qUROxc45KS0RHQ/gPMlrQjbiCaW8ANslWvVkwMfnWH6VHWW
+	VhajSW1k82CqLl74RJc+XN1yjVEmb53o6nZJy/K+RXEiuQ/yTvWTh4Vra0Qnm0566mE65kVUt0b
+	4u90YnEpxnaqPo5pWlRMjMq4jtXYtd7vXMCTMlquh1k9377wF+LGfPyVubKyGCm8qZwpBd5u+/N
+	4Va+Rj0E0FEOoAvBNOTX53zTIAbWws94YncqLNYzemNVKUWgUdtEI2WJKlSniLtHa7XAXs6L9BV
+	lSP2Qy/gc06cUlbX8Tfo9/XJ1dF9RMJUSAHCdklYJpHK3MyGbwBrgnb/9woTrNQqngNJ3LdArwc
+	nHdwplyHAfNJdoXvwuUteY6FEsKqutkOgcFHA9ee7/isYwW/H2oaFjQ4WnHqVTtqk+e/LZlhpO1
+	1DtyzhRVUYkT3ky22VfunzNt/fC4oabszHNhruXhFsFeHiSTjZ8cRdje5Col+Eluu8sLwuUbIuA
+	bdhr0qi5mtimDJthV5OnpZOd/LofmzG9me1MIkvmGYQsdnEbtlpB1jmEoNjnKWRYEXo
+X-Received: by 2002:a05:600c:6095:b0:49f:fdca:c361 with SMTP id 5b1f17b1804b1-4a35ac99412mr2318005e9.12.1792791857174;
+        Fri, 23 Oct 2026 14:44:17 -0700 (PDT)
 Received: from [192.168.0.167] ([109.76.107.26])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3932sm469172f8f.18.2026.10.23.14.41.00
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a55e786sm10434525e9.3.2026.10.23.14.44.16
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 14:41:00 -0700 (PDT)
-Message-ID: <4a88a2ab-0020-41d1-8924-bba8ac42f429@linaro.org>
-Date: Fri, 23 Oct 2026 22:41:00 +0100
+        Fri, 23 Oct 2026 14:44:16 -0700 (PDT)
+Message-ID: <1574aa17-dd5d-43a7-a433-ecef6a8ce136@linaro.org>
+Date: Fri, 23 Oct 2026 22:44:15 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,8 +90,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] media: qcom: camss: share VFE clock sources by the
- highest rate
+Subject: Re: [PATCH 0/4] media: qcom: camss: share VFE clock sources on SM8250
 To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
  Mauro Carvalho Chehab <mchehab@kernel.org>
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
@@ -100,394 +99,21 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
  linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  linux-kernel@vger.kernel.org
 References: <20261023152857.2859767-1-atanas.filipov@oss.qualcomm.com>
- <20261023152857.2859767-4-atanas.filipov@oss.qualcomm.com>
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 Content-Language: en-GB
-In-Reply-To: <20261023152857.2859767-4-atanas.filipov@oss.qualcomm.com>
+In-Reply-To: <20261023152857.2859767-1-atanas.filipov@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 23/10/2026 16:28, Atanas Filipov wrote:
-> Group the VFE clocks with rate tables by their clock source at probe
-> time, so that a VFE no longer lowers a shared source under a running
-> one. A source shared by several VFEs follows the highest rate requested
-> by its running users and drops to the highest remaining one when a VFE
-> is powered off; with no user left it keeps its rate, as it may feed
-> consumers outside CAMSS. A source with a single VFE user is dropped to
-> its lowest rate on power off. Clocks whose rate the VFE does not set are
-> left untouched.
-> 
-> Grouping is enabled through the vfe_clock_domains resource flag, so far
-> only on SM8250, where the VFE AREG clocks share the fast AHB source and
-> the VFE Lite clocks share one core clock source. The current parent of
-> an RCG depends on its last rate, so other SoCs keep setting their VFE
-> clocks directly.
-> 
-> Also let the VFE set the SM8250 AREG clock rate instead of the CSID.
+> The aggregation only covers the CAMSS VFEs. Drivers outside CAMSS that
+> use the same shared clock sources are not covered and are left to a
+> separate change.
 
-You're simultaneously adding a new clock to an existing list and 
-introducing a behaviour change at the same time.
+Hmm.
 
-Those two things should be split on principle.
+Lets discuss that change so. We need to represent shared clocks through 
+CamNoC anyway right ?
 
-> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/camss/camss-vfe.c |  14 +-
->   drivers/media/platform/qcom/camss/camss.c     | 175 +++++++++++++++++-
->   drivers/media/platform/qcom/camss/camss.h     |  13 ++
->   3 files changed, 196 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-> index 87096095b1eb..a3133720c765 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-> @@ -907,12 +907,15 @@ static int vfe_match_clock_names(struct vfe_device *vfe,
->   {
->   	char vfe_name[7]; /* vfeXXX\0 */
->   	char vfe_lite_name[12]; /* vfe_liteXXX\0 */
-> +	char vfe_areg_name[12]; /* vfeXXX_areg\0 */
->   
->   	snprintf(vfe_name, sizeof(vfe_name), "vfe%d", vfe->id);
->   	snprintf(vfe_lite_name, sizeof(vfe_lite_name), "vfe_lite%d", vfe->id);
-> +	snprintf(vfe_areg_name, sizeof(vfe_areg_name), "vfe%d_areg", vfe->id);
->   
->   	return (!strcmp(clock->name, vfe_name) ||
->   		!strcmp(clock->name, vfe_lite_name) ||
-> +		!strcmp(clock->name, vfe_areg_name) ||
->   		!strcmp(clock->name, "vfe_lite") ||
->   		!strcmp(clock->name, "camnoc_axi") ||
->   		!strcmp(clock->name, "camnoc_rt_axi"));
-> @@ -1002,7 +1005,7 @@ static int vfe_set_clock_rates(struct vfe_device *vfe)
->   				return -EINVAL;
->   			}
->   
-> -			ret = clk_set_rate(clock->clk, rate);
-> +			ret = camss_set_clock_rate(vfe->camss, clock, rate);
->   			if (ret < 0) {
->   				dev_err(dev, "clk set rate failed: %d\n", ret);
->   				return ret;
-> @@ -1101,12 +1104,12 @@ int vfe_get(struct vfe_device *vfe)
->   
->   		ret = vfe_set_clock_rates(vfe);
->   		if (ret < 0)
-> -			goto error_pm_runtime_get;
-> +			goto error_release_rates;
->   
->   		ret = camss_enable_clocks(vfe->nclocks, vfe->clock,
->   					  vfe->camss->dev);
->   		if (ret < 0)
-> -			goto error_pm_runtime_get;
-> +			goto error_release_rates;
->   
->   		ret = vfe_reset(vfe);
->   		if (ret < 0)
-> @@ -1131,7 +1134,9 @@ int vfe_get(struct vfe_device *vfe)
->   error_reset:
->   	camss_disable_clocks(vfe->nclocks, vfe->clock);
->   
-> -error_pm_runtime_get:
-> +error_release_rates:
-> +	camss_release_clock_rates(vfe->camss, vfe->nclocks, vfe->clock);
-> +
->   	pm_runtime_put_sync(vfe->camss->dev);
->   error_domain_off:
->   	vfe->res->hw_ops->pm_domain_off(vfe);
-> @@ -1159,6 +1164,7 @@ void vfe_put(struct vfe_device *vfe)
->   			vfe->res->hw_ops->vfe_halt(vfe);
->   		}
->   		camss_disable_clocks(vfe->nclocks, vfe->clock);
-> +		camss_release_clock_rates(vfe->camss, vfe->nclocks, vfe->clock);
->   		pm_runtime_put_sync(vfe->camss->dev);
->   		vfe->res->hw_ops->pm_domain_off(vfe);
->   	}
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 7fe12049b78a..db5212b14d5a 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -2053,7 +2053,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
->   		.clock_rate = { { 400000000 },
->   				{ 400000000 },
->   				{ 0 },
-> -				{ 100000000, 200000000, 300000000, 400000000 },
-> +				{ 0 },
->   				{ 0 } },
->   		.reg = { "csid0" },
->   		.interrupt = { "csid0" },
-> @@ -2070,7 +2070,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
->   		.clock_rate = { { 400000000 },
->   				{ 400000000 },
->   				{ 0 },
-> -				{ 100000000, 200000000, 300000000, 400000000 },
-> +				{ 0 },
->   				{ 0 } },
->   		.reg = { "csid1" },
->   		.interrupt = { "csid1" },
-> @@ -4509,6 +4509,167 @@ void camss_disable_clocks(int nclocks, struct camss_clock *clock)
->   		clk_disable_unprepare(clock[i].clk);
->   }
->   
-> +/*
-> + * A clock domain is a clock source shared by clocks of different engines.
-> + * Its rate follows the highest rate requested by its users, so that an
-> + * engine started at a lower rate never lowers the rate under an engine that
-> + * is still running.
-> + */
-> +struct camss_clock_domain {
-> +	struct list_head node;
-> +	struct clk *parent;
-> +	struct list_head users;
-> +	unsigned int nusers;
-> +};
-
-It seems to me as a read this that the above text is the abstract 
-description of at least one patch - which should have examples in the 
-commit log, to make it less abstract.
-
-> +
-> +struct camss_clock_user {
-> +	struct list_head node;
-> +	struct camss_clock_domain *domain;
-> +	struct camss_clock *clock;
-> +	unsigned long rate;
-> +};
-> +
-> +static int camss_add_clock_user(struct camss *camss, struct camss_clock *clock)
-> +{
-> +	struct camss_clock_domain *domain;
-> +	struct camss_clock_user *user;
-> +	struct clk *parent;
-> +
-> +	if (!clock->nfreqs)
-> +		return 0;
-> +
-> +	parent = clk_get_parent(clock->clk);
-> +	if (!parent)
-> +		return 0;
-> +
-> +	list_for_each_entry(domain, &camss->clock_domains, node)
-> +		if (clk_is_match(domain->parent, parent))
-> +			goto add_user;
-> +
-> +	domain = devm_kzalloc(camss->dev, sizeof(*domain), GFP_KERNEL);
-> +	if (!domain)
-> +		return -ENOMEM;
-> +
-> +	domain->parent = parent;
-> +	INIT_LIST_HEAD(&domain->users);
-> +	list_add_tail(&domain->node, &camss->clock_domains);
-> +
-> +add_user:
-> +	user = devm_kzalloc(camss->dev, sizeof(*user), GFP_KERNEL);
-> +	if (!user)
-> +		return -ENOMEM;
-> +
-> +	user->domain = domain;
-> +	user->clock = clock;
-> +	list_add_tail(&user->node, &domain->users);
-> +	domain->nusers++;
-> +	clock->user = user;
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * camss_init_clock_domains - Group the VFE clocks by clock source
-> + * @camss: CAMSS device
-> + *
-> + * A clock whose source feeds no other VFE clock forms a dedicated domain
-> + * with a single user. Only SoCs whose VFE sets the rates of clocks with a
-> + * fixed source group their clocks; the VFE clocks of other SoCs are set
-> + * directly.
-
-What do you mean by user here, its not clear to me. Another engine ? I 
-think so - you mean the JPEG has a dependency on the clocks listed in 
-CAMSS ?
-
-I thought we decided for full separation of JPEG and CAMSS/IFE ?
-
-> + *
-> + * Return 0 on success or a negative error code otherwise
-> + */
-> +static int camss_init_clock_domains(struct camss *camss)
-> +{
-> +	int ret, i, j;
-> +
-> +	if (!camss->res->vfe_clock_domains)
-> +		return 0;
-> +
-> +	for (i = 0; i < camss->res->vfe_num; i++)
-> +		for (j = 0; j < camss->vfe[i].nclocks; j++) {
-> +			ret = camss_add_clock_user(camss, &camss->vfe[i].clock[j]);
-> +			if (ret)
-> +				return ret;
-> +		}
-> +
-> +	return 0;
-> +}
-> +
-> +static int camss_apply_clock_domain(struct camss_clock_domain *domain)
-> +{
-> +	struct camss_clock_user *user, *top = NULL;
-> +
-> +	list_for_each_entry(user, &domain->users, node)
-> +		if (user->rate && (!top || user->rate > top->rate))
-> +			top = user;
-> +
-> +	if (!top)
-> +		return 0;
-> +
-> +	return clk_set_rate(top->clock->clk, top->rate);
-> +}
-> +
-> +/*
-> + * camss_set_clock_rate - Set the rate of a clock
-> + * @camss: CAMSS device
-> + * @clock: Clock
-> + * @rate: Requested rate
-> + *
-> + * A shared clock is set to the highest rate requested by the running users
-> + * of its source.
-> + *
-> + * Return 0 on success or a negative error code otherwise
-> + */
-> +int camss_set_clock_rate(struct camss *camss, struct camss_clock *clock,
-> +			 unsigned long rate)
-> +{
-> +	int ret;
-> +
-> +	if (!clock->user)
-> +		return clk_set_rate(clock->clk, rate);
-> +
-> +	mutex_lock(&camss->clock_lock);
-> +	clock->user->rate = rate;
-> +	ret = camss_apply_clock_domain(clock->user->domain);
-> +	mutex_unlock(&camss->clock_lock);
-> +
-> +	return ret;
-> +}
-> +
-> +/*
-> + * camss_release_clock_rates - Release the rates requested by an engine
-> + * @camss: CAMSS device
-> + * @nclocks: Number of clocks of the engine
-> + * @clock: Clocks of the engine
-> + *
-> + * A dedicated clock drops to its lowest rate. A shared clock drops to the
-> + * highest rate of the users still running, and keeps its rate when none is
-> + * left, as its source may feed consumers outside CAMSS.
-> + */
-> +void camss_release_clock_rates(struct camss *camss, int nclocks,
-> +			       struct camss_clock *clock)
-> +{
-> +	int i;
-> +
-> +	mutex_lock(&camss->clock_lock);
-> +
-> +	for (i = 0; i < nclocks; i++) {
-> +		struct camss_clock_user *user = clock[i].user;
-> +
-> +		if (!user || !user->rate)
-> +			continue;
-> +
-> +		user->rate = 0;
-> +		if (user->domain->nusers == 1)
-> +			clk_set_rate(user->clock->clk, 0);
-> +		else
-> +			camss_apply_clock_domain(user->domain);
-> +	}
-> +
-> +	mutex_unlock(&camss->clock_lock);
-> +}
-> +
->   /*
->    * camss_find_sensor_pad - Find the media pad via which the sensor is linked
->    * @entity: Media entity to start searching from
-> @@ -5427,6 +5588,11 @@ static int camss_probe(struct platform_device *pdev)
->   
->   	atomic_set(&camss->ref_count, 0);
->   	camss->dev = dev;
-> +	INIT_LIST_HEAD(&camss->clock_domains);
-> +
-> +	ret = devm_mutex_init(dev, &camss->clock_lock);
-> +	if (ret)
-> +		return ret;
->   	platform_set_drvdata(pdev, camss);
->   
->   	camss->csiphy = devm_kcalloc(dev, camss->res->csiphy_num,
-> @@ -5474,6 +5640,10 @@ static int camss_probe(struct platform_device *pdev)
->   	if (ret < 0)
->   		goto err_genpd_cleanup;
->   
-> +	ret = camss_init_clock_domains(camss);
-> +	if (ret < 0)
-> +		goto err_genpd_cleanup;
-> +
->   	ret = dma_set_mask_and_coherent(dev, 0xffffffff);
->   	if (ret)
->   		goto err_genpd_cleanup;
-> @@ -5736,6 +5906,7 @@ static const struct camss_resources sm8250_resources = {
->   	.csiphy_num = ARRAY_SIZE(csiphy_res_8250),
->   	.csid_num = ARRAY_SIZE(csid_res_8250),
->   	.vfe_num = ARRAY_SIZE(vfe_res_8250),
-> +	.vfe_clock_domains = true,
->   };
->   
->   static const struct camss_resources sc8280xp_resources = {
-> diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/platform/qcom/camss/camss.h
-> index 7dc2fd9f03e0..ad1d49275e0f 100644
-> --- a/drivers/media/platform/qcom/camss/camss.h
-> +++ b/drivers/media/platform/qcom/camss/camss.h
-> @@ -11,6 +11,8 @@
->   #define QC_MSM_CAMSS_H
->   
->   #include <linux/device.h>
-> +#include <linux/list.h>
-> +#include <linux/mutex.h>
->   #include <linux/types.h>
->   #include <media/v4l2-async.h>
->   #include <media/v4l2-device.h>
-> @@ -120,6 +122,7 @@ struct camss_resources {
->   	const unsigned int tpg_num;
->   	const unsigned int csid_num;
->   	const unsigned int vfe_num;
-> +	const bool vfe_clock_domains;
->   };
->   
->   struct camss {
-> @@ -141,6 +144,9 @@ struct camss {
->   	struct icc_path *icc_path[ICC_SM8250_COUNT];
->   	const struct camss_resources *res;
->   	bool legacy_phy;
-> +	/* Protects clock_domains and the rates requested by their users */
-> +	struct mutex clock_lock;
-> +	struct list_head clock_domains;
->   };
->   
->   struct camss_camera_interface {
-> @@ -153,11 +159,14 @@ struct camss_async_subdev {
->   	struct camss_camera_interface interface;
->   };
->   
-> +struct camss_clock_user;
-> +
->   struct camss_clock {
->   	struct clk *clk;
->   	const char *name;
->   	u32 *freq;
->   	u32 nfreqs;
-> +	struct camss_clock_user *user;
->   };
->   
->   struct parent_dev_ops {
-> @@ -170,6 +179,10 @@ void camss_add_clock_margin(u64 *rate);
->   int camss_enable_clocks(int nclocks, struct camss_clock *clock,
->   			struct device *dev);
->   void camss_disable_clocks(int nclocks, struct camss_clock *clock);
-> +int camss_set_clock_rate(struct camss *camss, struct camss_clock *clock,
-> +			 unsigned long rate);
-> +void camss_release_clock_rates(struct camss *camss, int nclocks,
-> +			       struct camss_clock *clock);
->   struct media_pad *camss_find_sensor_pad(struct media_entity *entity);
->   s64 camss_get_link_freq(struct media_entity *entity, unsigned int bpp,
->   			unsigned int lanes);
-
+---
+bod
