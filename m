@@ -1,47 +1,101 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792748394;
-	b=mXE2FbT+D1PAWFIacNKguGjBvqzqAXiVpdo/tg6Lacalr2JENKjiF0+HND+Hgz09/G5+
-	 gCu+LFpA08v6ZT7lmM9CsjORWwqAxN0o0kW0yfG/PeExhXqe2Q+SpGdA07Lu/iQZn0ery
-	 ZpcQHhcciGYJzdfNCS0bRCwKhdeQeK1T4Qc981g2gh6RnNBcUqWcqcyoU7iJp60HUFmyQ
-	 c5TYF7N2bSrz2o18YfFo+GzdT3ZFjTTQijrnV2S8lftbl8Cq/eMmMHxJdDk5Wvqa6XAmm
-	 uuMcKTYImvdnXVsBWI6cQynVtjKASG1KpayfYZUcvlXzfqOc54kZFuPWDEQmrah6byA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792748394;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=Zbo4H69cUqvzI4mr1Z35AeXw7zrN9617F5T5W5xQxQI=;
-	b=IV0NNWLzcD5Q0CJ3yEZCTupMoZ95VreIvSS8zqbGofpo15YnIEf4hA6u8dKcFRv1DBo6
-	 zgqtYfnvDsJgEdkoPVsRFwJTeYg9f9A9kYPHteuGfbsPRQ+LIdbdf3sXibUhuK3kg3IPG
-	 VSqbExs748nTXGAuXTELE2q0XWe32Zzkn/jf8bIIEQ0odEmWL1IqrD3hn6k+v1XCucPCQ
-	 TiDcV5Sk4J5ng+tKG1BuWO3ZfsxXDIVNbTiu/UYNh/IDjD11yWTl421FYlUhyjORzpTMh
-	 ijcWm20imyKipOLAklPoI6obTFlYo6aeccrD7hk/yDiE0LSszQ9aVeb6/xMU/uk4uqw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VytnqpKY;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.216.47
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792748484;
+	b=n1twiWNBpTqA2PlasjSyMxKzSjX5XD5pPzIyf+7c8Z01BrHXGLB0hocKCTljD6hnK8o0
+	 hfFxndxaYPV+E4tyVdlZUbpTvN6i6iYif+56ylMuTn0vy2cKItf5UkmYQ5uzTX6f22emb
+	 5W4hg9TICQAAfdj4VlANsripPrlIm5V9lqxhYFmwxntq1QdjrAPJ/CGek/jjxUSGMiKHl
+	 mkvuRsaoAoxid41BsfO1dL2XikV3Tw0uhf+9DgkCm7724Y+4DAhMAC5FG7PC/mjrmmmEz
+	 KuuI++OXzZgBpL7CW+xZKvZdNJmton8+n7c1eG0+yLG8Q2cYjoz/30YSMnfMhR4TPNA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792748484;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=Okgw5IuIeyoGQZ+JzmeJO9+dqCKtCII160B3B426Y1k=;
+	b=ub7OB5XghLoPlbM/WpRp+ghR8C9p19KDjUlNkOosA1KGcaZtIIcl4md3zX4kJN7fPf9c
+	 fgnfKJKXLGGHBA2v+VHASO+6D1xovuLM2IAQCd/ZAuHwuIBuV7EkjkC/qg1KhgJrAwRGX
+	 1Scd/bMfGmKPZ+SIIdoVnvsx3qiHDKHe5qH1QBZfDx15m1dje5u8mLaV8ET543r2fSRBM
+	 ed0GkO7ecjDUit09KRneEgDcm9stHDslVg4mjJtHuK+DrjEQ+eXvuxyKz/Bde6WTjrsky
+	 Pv3PTxiwGgEvkIVv0bv97SZDOJvHK+T6fyrFoJYsCPLXDBXSgc/kFUgEeae1Oec0bJA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=sartura.hr;
+	spf=pass smtp.mailfrom=sartura.hr;
+	dkim=pass header.d=sartura.hr header.i=@sartura.hr header.a=rsa-sha256 header.s=sartura header.b=NbnFC6ic;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.216.47
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B924606A31B;
-	Fri, 23 Oct 2026 09:39:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7602E606A31D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:41:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7602E606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sartura.hr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VytnqpKY
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 399CD1F01825;
-	Fri, 23 Oct 2026 09:39:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792748394;
-	bh=Zbo4H69cUqvzI4mr1Z35AeXw7zrN9617F5T5W5xQxQI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=VytnqpKYpIHRPkeXyRIulPMzndR+eR+KkSB5eWRJF0fIGARDHMUlfit0DH9rcGzej
-	 ZEDWt/Ma2mi89dL9tIE2HZ806LYUfYSCYxikbxamsZ7LN3OG7g9hzQspm7MLJ56B6g
-	 8yLZU2g5QN3XZ7S0Z5QY5mhyfXSpDwzFWbzuKIRmbArYFA3q0IMTl8ds/T5isuRfmv
-	 zzfbQ7+9M72iHcoAnkA8/X6YxK3AuGrcGZnbfuf3ATV/HAaOHoKEx7vT/7hKkLZmER
-	 dLgbxRbqV1Kh30CRsgKmLuvqrXzArNAjrIJYzcDuFZTSS4yOg07AjJFGQt1Up49775
-	 o3k9vgs2beZww==
-Message-ID: <aa76425c-0579-42c2-832d-cc767703f3f5@kernel.org>
-Date: Fri, 23 Oct 2026 11:39:47 +0200
+	dkim=pass (2048-bit key, unprotected) header.d=sartura.hr header.i=@sartura.hr header.a=rsa-sha256 header.s=sartura header.b=NbnFC6ic
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3adac5c10e3so405395a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 02:41:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792748484; cv=none;
+        d=google.com; s=arc-20260327;
+        b=CR+bKB0cLdCU9Oeoi+bdMOoLTcASWC+/TOpSKKv3aS1zHbX//6FaywE3ff35jDyjVn
+         SQqi6tZMWqrj8Vwcy6M+M+aRTjFtbH/PPEEqez7ASdDx1/PV0+28MPr8XEye8wzKarPd
+         VwntgkB0AWIu/DG6HQSJ1pxmKpCEEvQud2X2Qhe2imUNtJtg/vzfQLKaoRBVrxKc6sen
+         QJHMiTcpCAl8cOPizqPGM+mYQ3WxsiPPbMfCq1jaRucRXquhbbdxuyAo4+Du1SJ2l5NH
+         /LMunNMyQrZ9hDYugAfwu2kFgQAvwfyOJKYCzRh9QMgEzMEvNQTrs/xLWluaNdyu62fY
+         9hyA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Okgw5IuIeyoGQZ+JzmeJO9+dqCKtCII160B3B426Y1k=;
+        fh=qnfhF9iGsFa7Q3PJpz9hl3bDLmLYknL9ZBlwoq0Hn7g=;
+        b=c8VjJNSjDDSJGA4XVJtDPnckqgSu+MwvSYu8p/VMlRYXjR68zWd8wzOlZZrepMZpQ3
+         qx2/VS6I0iGM0qXj9mNEJf/uN0RrbOFUSeUsJ9A55jaH3b2uarey+hXPfJF8wwiPz2zJ
+         qWKEHNbRViNvse38NjEMzfJ4zsnPQb80SNnhF7RzNlJC19VRiTgHsL1sOpTGRJILxF7f
+         Vaj0gSuYZCv3uDK7YL03hbwWpUHp/yQKTt3H5Nlz9B0ynsm2QlywDR1Uux2AkIvejBsn
+         3InAOMB80uZrjxfvlJwKWQkvyzenfiZ/Esyjel2SzP1qQYhsdVyfW369nRDCJewuGGZI
+         2DWQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=sartura.hr; s=sartura; t=1792748484; x=1793353284; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Okgw5IuIeyoGQZ+JzmeJO9+dqCKtCII160B3B426Y1k=;
+        b=NbnFC6ic7YCzTwBcbpR7q/m6kM1BIsWqz6AVmGqI2UzTJ+lilYdayfl9Dyqyd8Jlj0
+         LqKSdThWJ9k/Pfw78uVKyxE95Uu5wC3zbvaeyEzFc7D8m0MkQQZtVA/zy57hGDoqcUsd
+         AuNJkeR+JiGxFYp+RWwkId8zDBR8pg16lKQEls9eA2U+PPWJLA0gTKAsCx/cP/bcYOqO
+         pcltwsbn4oP5ffSMY4fEXa7KBDsVINYTbgAEqEfuUJLUO5gNu7xKSMgVi5RkiawqerjX
+         yNSaca1p+va8vnMpfklHN7Hy3wTFru44ogGI5wpGLFj1j2e/tXOKbflXa1anevxV7Dkj
+         FoXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792748484; x=1793353284;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Okgw5IuIeyoGQZ+JzmeJO9+dqCKtCII160B3B426Y1k=;
+        b=glIGTIi7LiPF5gr383lsCFcqhPn/PzsCOO3AFZ4yOVi0E2l7D9aXV8n92sq221Ng6z
+         SR/7Y5DKMmZ2xCJGTHyXjsR7jbAXdPppsW47eJ2QkSZaPAnI+aU7VqzTZdVr2mgwNpLh
+         jeApptUEh7H2VQuTQo5JIX24xtRRuiz26T0GJyQ9Dee8wl+CNSe3r0i+ck2VZKznavwW
+         R9ysIqOeeitywIR9GGVPOajkjxulho4or/mLKV2GALR1sf2f2wZ+JRN4EyiaV+OP8tBc
+         2SR17pWOSopLXnBDDu7F3gRJlGy/1Uf6GhoKzHvQ79NfOCywBZy3iKWbWGgFcuch/Tb1
+         Lw1g==
+X-Forwarded-Encrypted: i=1; AKwUvBy+HcHr3tl93jPyZRh3jWlfj04x3R9Rq4zKcWORYyW+POv2C0dlnC4cj0TptODbWNswLICl3C/6Qr24rlzY@vger.kernel.org
+X-Gm-Message-State: AFq9FYJHEASvZ4T7lxT5n+yiw3E2FJvXOB68n8A8QuoHYr2TAszKs0cL
+	j+piNTJP0rK/zbFy8A91+uUL0uHddpqOeAOvEsFiLsbSXBBZWtry+4EKxQhwtmSXEy+PtYZyBil
+	51PJ5RRA8WSmFN26QiYzT/C0kYI3TdBHyIj30UHsgew==
+X-Gm-Gg: AYBFou0uqbDEFP/qeyvfr04lrK5DFCrV3WfiutLxhT2lBG7CtHrOm4YgBJF6HWmhlC3
+	7EaZuDhKGkw6+qTvlFpSbPCGxTXGwj7hI7tH7cngiwGZlcrkcRx7DD93OAXYI6e2InUf3VyoQVR
+	vfwmmd78Mtl3r+TEty7FacScEqGDFHwL1b52+MElT1QMyP0mGXv89f2nJYOq+TkdLg0qkv7NOS3
+	sp7xHGb0CTqBKYce+bUur3tPmVy0/aO80TVuT25wHi8PNASBQUDs1sRglBnsSOtnmZzaKIjpBLx
+	tL8TAJ+XZNF0AEgKaJl8gsVERHdIT2vOpt/WtVSUFaYntHamO+Sj3Z6YOtOw0zTT865DACxc4Ly
+	iW7FbOOTGfuUm8X2QMDbKTqih9TPKkFlwlk0A3PZfbJ46Dhuoe0dQgai06rXYOytamkHmfSlMOH
+	1tgTdtS6ppO34wBXxp
+X-Received: by 2002:a17:90b:3805:b0:3a8:59d3:530f with SMTP id
+ 98e67ed59e1d1-3adce0df541mr1412012a91.57.1792748483778; Fri, 23 Oct 2026
+ 02:41:23 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,136 +105,78 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] dt-bindings: ptp: Document the TSCSS on Qualcomm
- Lemans and Monaco SoCs
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Richard Cochran <richardcochran@gmail.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
- Taniya Das <taniya.das@oss.qualcomm.com>,
- Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
- <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
- <02792987-7ad8-4a6b-81ad-559c63174bb0@kernel.org>
- <640acacb-1704-4ee6-aa34-d6be3b30b44b@oss.qualcomm.com>
- <f5aa313d-0e23-41fa-b59b-9388839b2525@kernel.org>
- <7f6839fb-59b0-4f6d-a3f8-7579f6d40857@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
- /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
- s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
- EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
- rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
- DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
- IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
- vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
- oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
- sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
- vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
- Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
- BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
- 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
- f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
- WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
- XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
- IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
- YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
- p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
- GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
- YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
- vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
- ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
- QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
- +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
- wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
- c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
- K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
- n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
- qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <7f6839fb-59b0-4f6d-a3f8-7579f6d40857@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20261020065430.1251541-1-julius@bairaktaris.de>
+ <30c21159-3008-463c-9cd2-a07f26668a25@sartura.hr> <9699033c-a9e1-4b11-a55f-b1aa216c700f@oss.qualcomm.com>
+In-Reply-To: <9699033c-a9e1-4b11-a55f-b1aa216c700f@oss.qualcomm.com>
+From: Robert Marko <robert.marko@sartura.hr>
+Date: Fri, 23 Oct 2026 11:41:12 +0200
+X-Gm-Features: AclHuK_z7zkTrXcOEBJ5YdNRtSSjaBF7iP_4-bXy54P0B5j7vSDrFZjtf2Rlh6M
+Message-ID: <CA+HBbNELhPAAZoUuXm3SrvgxiU0eMaiu5LB3wfup04_HuZ+yxg@mail.gmail.com>
+Subject: Re: [PATCH] clk: qcom: gcc-ipq6018: add fallback names for the bias
+ PLL parents
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Julius Bairaktaris <julius@bairaktaris.de>, Bjorn Andersson <andersson@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Vladyslav Andreichykov <vladdrako007@gmail.com>, linux-arm-msm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 13/10/2026 13:49, Imran Shaik wrote:
->>>>> +
->>>>> +patternProperties:
->>>>> +  "^etu-slice@[0-9a-f]+$":
->>>>> +    type: object
->>>>> +    description: ETU slice configuration
->>>>> +    properties:
->>>>> +      reg:
->>>>> +        maxItems: 1
->>>>> +
->>>>> +      pinctrl-0: true
->>>>> +
->>>>> +      pinctrl-names:
->>>>> +        items:
->>>>> +          - const: default
->>>>
->>>> Heh? Which code do you copy?
->>>>
->>>
->>> Each ETU slice has its own external event pin config, so kept pinctrl-0
->>> and pinctrl-names on the slice subnode. Please suggest if you prefer
->>> otherwise.
+On Wed, Oct 21, 2026 at 10:06=E2=80=AFAM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> On 10/20/26 1:39 PM, Robert Marko wrote:
+> >
+> > On 20/10/2026 08:54, Julius Bairaktaris wrote:
+> >> From: Vladyslav Andreichykov <vladdrako007@gmail.com>
+> >>
+> >> bias_pll_cc_clk and bias_pll_nss_noc_clk are outputs of the CMN PLL,
+> >> which takes its AHB and SYS clocks from GCC, so the device tree does n=
+ot
+> >> pass them back to GCC. With only .fw_name these parents never resolve,
+> >> nss_ppe_clk_src stays an orphan, and setting it to 300 MHz fails with
+> >> -EINVAL. The NSS clocks below it, such as gcc_nss_edma_clk, read 0 Hz.
+> >>
+> >> Add .name fallbacks so they resolve to the clocks the CMN PLL register=
+s,
+> >> as gcc-ipq8074 already does.
+> >>
+> >> Tested-by: Vladyslav Andreichykov <vladdrako007@gmail.com>
+> >> Assisted-by: Claude:claude-opus-5-5
+> >> Signed-off-by: Vladyslav Andreichykov <vladdrako007@gmail.com>
+> >> Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
+> >> ---
+> >
+> > Hi,
+> >
+> > This issue does not exist upstream, as CMN PLL is not yet wired due to =
+missing
+> > networking, even then the solution is not to add global name matching.
+> >
+> > The required clock inputs should just be passed to GCC directly which I=
+ have
+> > just pushed to OpenWrt.
+>
+> Just read your reply after writing mine, I'm looking forward to seeing
+> that patch!
 
-Just drop both pinctrl properties, because you should not need them. You
-define them only if they are different than default.
+Hi Konrad,
+You mean the wiring for CMN PLL or?
 
->>
->> No, from where did you get this code? Why are you sending bindings which
->> are different then all other bindings?
->>
-> 
-> I was referring to the example in [1] when adding the pinctrl properties
-> under the etu-slice sub node.
-> 
-> [1] - 
-> Documentation/devicetree/bindings/media/samsung,exynos4212-fimc-is.yaml
+Regards,
+Robert
 
-That's like 13 years old device binding, so unfortunately likely
-antipattern.
+>
+> Konrad
 
 
 
-> 
-> On checking further, I found that our etu-slice sub node deviates from
-> that example, since we don't have a compatible string for the sub node.
-> 
-> Please let me know if we should move the pinctrl properties under the
-> tscss node with per-slice names, or instead keep them under the
-> etu-slice sub node and add a compatible there.
-
-etu-slice does not feel like device at all unfortunately. I see only
-address space, so one resource, which might be enough but lack of
-description for the subnode is not helping. I have doubts that separate
-subnodes should be there in the first place, but if they stay, describe
-the child node fully - what sort of device it is. Just because there is
-independent timestamping counter does not make it separate device, just
-like independent interrupt in GIC is not itself an independent device.
-
-
-Best regards,
-Krzysztof
+--=20
+Robert Marko
+Staff Embedded Linux Engineer
+Sartura d.d.
+Lendavska ulica 16a
+10000 Zagreb, Croatia
+Email: robert.marko@sartura.hr
+Web: www.sartura.hr
