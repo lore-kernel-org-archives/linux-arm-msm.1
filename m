@@ -1,80 +1,81 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792778846;
-	b=Y5ovYd2WFfUy+MTHQJS9iI73SxzuvxCgthaIbGP6hNOcgQaefix3L/lXou4OvxGPPQCX
-	 wjWUwoO3VKx+zBugtyDg9zJ9BQ0LXkHnE9ZIW+v7JntUnKvHqsymOLa4c69GVrpPjfLar
-	 ZL2SD4XOYjNVuZLTftHj/bsHuh15GmjqoZsA1AnNzFSNkJpXUrM6hVdW1uVWRwInV0nSs
-	 0DiFIGuI9FtSd5wdLehKcYp1BeSp3Wrln5CcKeEv34M5DkExFL7FRD0c0vnETJohYZJSP
-	 M0DlX8n7vbAEPwWo6FQ29wwr0qmaGpZs+yllOQc59ryCb9p9lmABDS9kf83T1aUdAog==
+	t=1792778868;
+	b=R+18KaKdOH3f7MZ6dcBSwbG0W3b4X4o+cJqQ8avENF+y9alreG15vLc+ZpOpWfQyBkNN
+	 hnB6uxSH/aaPqOB3yJrOk1t5YcJKsnoiLK8saBlQVD3rrRU3NY7ApBdUp37oDhHEOF79/
+	 wYWveDXB9teXPGM+zCVop2dH2InA7rwfUZ7RO5jZCPLMWmgRw2cmertjZPCU8NKJkJUv8
+	 0Rsv6llJJfK6OEj0j9RPUmcHMFK/XGYkbFrOW13fl+uUmpIb/Ikn/BMlTDNA/8NmjvBil
+	 ZsiUbRE+//w0hm1+nbH/+xRDOlwS2OElnu2vBCLuo9d1aK0eqeNS8lmyjeaKYjwjAoQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792778846;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792778868;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=txl2YxthedvIMMSIevEpBIv6A2VeEKzSw5KVzhLjaoQ=;
-	b=bejDIpeDXk5/YV+gmYqzA+Lr45SCd9xnqNmT3Ulpc3Zdpc39ekc9tHsfyrH6X6Oiu8eo
-	 oRur0qOCacHk50z2pNYCJ9s/BKkLkqRy14pRAbOJ15aNm89/SJ7xViHDAODuXS4PPkPEc
-	 MTTE1+/4LwiiWfD093/yBeMGMN1y8QJkRT3EIq15hfHcTJIKr1RdjbX19yRADEHKWLgea
-	 cJd+y+JqWJCvzuWTv3/KP+l2fd4OEdG2V3yWkroDDEWteZSADiNuXW4ohC/mvAhkS/Z40
-	 X5QAyv9rDN0lBPPJSVkudx2OCxpSWAB9zfDOFWv97LGsMwCXPju7d16Y3NeBysh4SUg==
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=J3XSfexUEQIihbbvfLU/6+xIU/w28QhcpSoaKqiT8+M=;
+	b=WX3iNg7VmPAQ1ywtmlKDqVLCykVxbVq/VKNhzux6Qp9me+yPd97Q2PDAhj4nninKfOxB
+	 pW1s4CTKON9fZ88wD0myFLWplRAoatmS0/UUeQ0vmApEAKbNDenmLcTQFECQZXprnf/5m
+	 UJ8CSKwB8EWACrFSOqyaZvXfyKbzuLIFTGalcDgGHdFJfH/iMPEezaAhqMPMFHq6jUb1B
+	 ARrTMEB2gDcRMIAWCgn5wsUrXo1FnDtpX4SFCPTHhgpIV73nx+I5Rza/iglFB2K7o9eiD
+	 MzZTTV7Z0KQB1P3Mj+28+oi124Mxux810Iehd/nGc3piXvSVzCn++0sgRU6X9P1rwKA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="st32/fl0";
-	arc=none smtp.remote-ip=74.125.82.49
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=IpDukG6E;
+	arc=none smtp.remote-ip=74.125.82.54
+Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78BBB606A31A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 18:07:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 78BBB606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95B01606A31A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 18:07:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 95B01606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=st32/fl0
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-14394530ec6so1739097c88.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 11:07:26 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=IpDukG6E
+Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-19305bcb72cso753447c88.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 11:07:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792778846; x=1793383646; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=txl2YxthedvIMMSIevEpBIv6A2VeEKzSw5KVzhLjaoQ=;
-        b=st32/fl0CotkbJ/OCE5OZBsuikCq8TNCARKbaZPMZmNMM8Q/AzAzYnKX8SVrs8xv/2
-         P159Yefa4xVs2scYVb9on7cYzHbx1n8xvTUT3hJ8xt3fwr+JzTkOIuSM0BJ/8NOZTOhl
-         dDTmbuUOj6tv5mSux32WHtgBFGrA0qB57zDMgCFX9oYTx4CZWGa43QUov7Kdo4RG9zpB
-         j1z4ZqPaMkCKGcAdjP4xHnW0a/Eok44V860lLwczEnqcszEbdfLD+tQRd6oyFDULUd1U
-         XmPUXjaeEy4Hi2znNGs3iIBs+MqA7vFfMEfeHWNw/KhNkyxRGhMrEca/yc9apnwM6FLF
-         D1KA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792778846; x=1793383646;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792778867; x=1793383667; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=txl2YxthedvIMMSIevEpBIv6A2VeEKzSw5KVzhLjaoQ=;
-        b=I+dcjZkJerWnwrOaX/sTUB2HcmID0852GSzJo0OQTy5+t1CI6v3KeOAJlxsDBKsxZe
-         MZF1osbVCib8Y5k355iQupKZyliwP/3Llj/8eYY8KsZ4NVvpCsYQXlRTpiiVGUmd9ibR
-         zrFqG3Jt7UpxRVpyGAX0vrVmUfAH5VyF8TFdlVc8ISFpAPd0vrauCHEENXVXnNKHJ7d4
-         bAZheJ7dmmzlaOFnooMG0CYU0o15WGNehGTN1u1IBL3dONLTRW7TrIAzF9b8ZcA9QemF
-         h0ki7RtvgcqpDOOo+uW3NlRGhmAHLxEseiXakA8GoBixn7H7/s9JAAeNr/YVirNLulcn
-         RJPA==
-X-Gm-Message-State: AFq9FYLUHTU8ZlYE54UK8WimWpJF72C0sdqHtDbFmHdm1hexJMjOHwUq
-	hWWIGhSyLgsp87JVwbfX5FW8uTT0+yK/c2qwTneXiyH27StyuwWIzOaK
-X-Gm-Gg: AYBFou2C31I3fi4sz3aI0Pmjo7VX57aPycJ2DZGfexzzv+FLc94bHOO7LXDHsMu3zg7
-	xQaXFr4TcZl+RaAkE77dLGvkiNH2ttvW7VjGKqD2MWKTtWN9sEnQM+NLpKIGs4iFK/hhXBhftcd
-	a0va0Ki6mfjXUNqhSEUWgwjm1xIiPJwFL+CJbYTh2WNwZM84kJ60N0Dkj1ToHz2rmYaWRWeRcpr
-	v3wMqXs0bZbFlWo1dRiB8rNh8i0QlUfcJMm64gtA+QS3FWQ/7FAWnSm88eEmyfGvhLp3XrtsAu1
-	ZVqaO2/dUpoJCf9oYaXV+li/aR0RXC3Ddtus6TZSA4fVvNer5F/aC5132qQtsLAk3Rye4Z0xVZF
-	oxEs4oGt5xWss8NRgYUAlgUjt2JQASXW2ywgxdq2y6JSd05mfDzX+pLrCbH6mK+xvMFRGv7Mryt
-	bPxCnPTwWGjNRTrQjw0ZnC9/PCKFdZW0jVG/0zXr2KZM1UkkgQRQACn4D7lP75H8ZOJ7H6z75/K
-	3LiVB2f0kvi/kJ6EWqR+TSNpvVhpY4rf0XKawjokqTSJpv9FQfW+Lv2NXCdjQKLgJtDruRwR5mt
-	Ay7QrTik
-X-Received: by 2002:a05:7022:ea8b:b0:143:2719:f800 with SMTP id a92af1059eb24-1959a382eadmr3584289c88.40.1792778845045;
-        Fri, 23 Oct 2026 11:07:25 -0700 (PDT)
+        bh=J3XSfexUEQIihbbvfLU/6+xIU/w28QhcpSoaKqiT8+M=;
+        b=IpDukG6Ecza4l9ficU4xJSei12/9cnvu/plig6HIPO8dWMC+GZnHt1DkJrofxFrtf0
+         uWXDETdXyZ9+55jsb5mw7KPKyS3tOFjlhQ9LYnD0ekveyEMPIjX+PNeTO7SVtFhAoKac
+         Hb5UzcL/1erhWsV4PXGeJ2N1Spqgx156bQ+a8zBCwUh53RQXuMUwUn0dxdCl5eFs3LoY
+         RbMlHKg3WUtIg1DMV4Of0xO+7ARSWX69LUFFnZR3WYpYuSMkux0cVwya1e0iNiHI/6wa
+         1ntuGPvnyIF73v4zF81e8ndWhUmQSGxov80XK5yZkCTNlfc4j/DhLP4Wn4Z548Gkk0HC
+         RG7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792778867; x=1793383667;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=J3XSfexUEQIihbbvfLU/6+xIU/w28QhcpSoaKqiT8+M=;
+        b=bUsvi9+XPBWEMH2qdePqpoaZlr6ZQzJw4i6MVYN/y7hV+UzgzrLkSHDj8HkguW3K9E
+         yUmOOCRB7RC7tY+CdytQp546OaaIj27zhVGOJXvYhTNqj4lTo2jzDOpXz+yuIXkAaaV1
+         mi0k74edYrOzXQLjHrbSztaB3SpHnyi0c0PuTSYN3xOvvI97TilG0FDw809ZZ6LC0XUm
+         ObiiYWhHnfujf5d+74oHrl7T3FKFZXJw+wvFgMldW4l+noo+UwAML2nNUQRORM6O3LDx
+         m0Pj0/2bHsc2ji9/k8FpZyrJYFUuAUXHVp0gi3LpnYbhFOqVjhKVwH8tQLPMiKjk4qnv
+         SnkQ==
+X-Gm-Message-State: AFq9FYKRdVw56iIB8/67RazdJwsup9KpR6PjryshnQ7XFeDIHGUBQ5hV
+	rWZOJ9ZULZI4ulryveVW1ei4+/DVI81BdD/QMQcgFGGLooNrM0ff0YH2
+X-Gm-Gg: AYBFou3mGglAYtL0k0h/xwkQ+CklVvb4PcU4kLHCjXA6Rld7usZijGEJ86c9tZuB/eV
+	zQrlzrSI57bv2tS6YKoPJju+G1MAuIIHn74gLlKgEusLP9+xH4r/m7q/bH8o5tr6pZoPh/YKR46
+	atTKmcRk3uFJs6JzHLN99L3fORv2IoQs4YEwQssVhyyfe8Uw3FbGBE7MX8p+rGDwrsqxUwu+Zmt
+	ZOdqfsp8t8cU54ztwSgnT7HR0KjFWyYmdGvB9d59Ot+TqrVfUU7IH8ZWwIUUi/p9IlDMysJTxrD
+	w3fspZZuffGmUcEAiNIS9xsEKPcupTXAvEH5OagDPI7pACVpt+yvdUSj5kfh5uTD8TavxipsH7x
+	agjLts5olKfKt0C+HA9j/646GHeFUs2jSG2sTIUEngD45GTB1zNc8+fI2MnEEtOghC3ciClGUrY
+	7KvyjkSu+fCVkU7+Iuvh1kkCzC+0zgAF0dxJwdI+P0DKeBnEAvXI/SS0NdfVapSUSZozu52q6AJ
+	KrUsPnu2Rx+Tm0Pzj1DElsHXFNG2Ao39IwVrSJlj+02xCPH56SiHTxCKRjQCI0=
+X-Received: by 2002:a05:7022:250b:b0:13b:3132:6e99 with SMTP id a92af1059eb24-195c5ad17e3mr6055983c88.20.1792778866606;
+        Fri, 23 Oct 2026 11:07:46 -0700 (PDT)
 Received: from ada.lan (cwgw.codeweavers.com. [4.36.164.2])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19886f790e4sm326318c88.0.2026.10.23.11.07.21
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-19886f790e4sm326318c88.0.2026.10.23.11.07.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 11:07:24 -0700 (PDT)
+        Fri, 23 Oct 2026 11:07:46 -0700 (PDT)
 From: Kaipeng Zeng <kaipeng94@gmail.com>
 To: devicetree@vger.kernel.org
 Cc: linux-arm-msm@vger.kernel.org,
@@ -84,11 +85,14 @@ Cc: linux-arm-msm@vger.kernel.org,
 	abelvesa@kernel.org,
 	konradybcio@kernel.org,
 	andersson@kernel.org,
-	Kaipeng Zeng <kaipeng94@gmail.com>
-Subject: [PATCH v5 0/2] Add device tree for Acer Swift Go Pro AI (SFA14-11)
-Date: Sat, 24 Oct 2026 02:05:11 +0800
-Message-ID: <20261023180513.36417-1-kaipeng94@gmail.com>
+	Kaipeng Zeng <kaipeng94@gmail.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v5 1/2] dt-bindings: arm: qcom: Add Acer Swift Go Pro AI (SFA14-11)
+Date: Sat, 24 Oct 2026 02:05:12 +0800
+Message-ID: <20261023180513.36417-2-kaipeng94@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261023180513.36417-1-kaipeng94@gmail.com>
+References: <20261023180513.36417-1-kaipeng94@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,122 +104,27 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The work started with x1-crd.dtsi as initial template.
-HDMI refers to ThinkPad T14s.
-Bluetooth refers to x1-crd.dtsi from the ubuntu-concept kernel [1].
-PWM brightness control refers to Ratizux's GitHub repository [2].
+Add Acer Swift Go Pro AI (SFA14-11), a laptop based on the Snapdragon X
+Elite (X1E78100) SoC.
 
-Tested on linux-next (next-20261021: 9a482184) / Ubuntu 26.04 LTS.
-
-Tested and working devices:
- - NVMe
- - Keyboard & Touchpad
- - USB Type-A, Type-C
- - Battery & charging status
- - Internal display & Backlight brightness control
- - HDMI & Type-C display (with audio)
- - Bluetooth & Wi-Fi
- - Webcam (usb_2)
- - GPU
- - Audio: speaker (partial), mic, headphone.
-
-Known issues:
-- Four internal speakers are detected, but only three work. I use Ratizux's tplg [3] and
-  alsa configuration [4] on my desktop. I also use amixer & speaker-test to verify them.
-- EL2-mode:
-  - EL2-mode can only work with kernel parameter: "iommu.passthrough=1".
-  - Audio and Battery status are broken under EL2 mode.
-  - Bluetooth is broken under EL2 mode.
-
-Also, some notes about eusb*_repeater and EC; hopefully, this can help others understand
-why I configured these nodes this way:
-- eusb*_repeater conflict between the DSDT and my testing:
-  By using `i2ctransfer` to sequentially set the modes of 'eusb3/5/6_repeater', I can
-  observe the corresponding connection or disconnection state changes for the
-  right-side USB-A port ('usb_mp_hsphy0'), the left-side USB-A port ('usb_mp_hsphy1'),
-  and the webcam ('usb_2'). Using `gpioset`, it can be verified that 'eusb6_repeater'
-  is affected by tlmm's GPIO 184, while setting GPIO 6/7 has no effect. And webcam
-  can be shut down and reset by toggling GPIO 184. The DSDT places GPIO 6/184 as a
-  'ResourceTemplate' under 'USB3'(usb_mp), GPIO 7 under USB4(usb_2), and webcam is
-  under USB4. This conflicts with my testing. So, I didn't add the unverified GPIO,
-  and the connection between USB and repeater follows my testing rather than DSDT.
-- There is an EC device under i2c5 at address 0x76, with driver probe failed.
-  But using i2ctransfer I can observe some data changes related to fan.
-  The EC driver appears to require additional work, and it couldn't be included in
-  this patch. So, I didn't add that node.
-
-[1] https://git.launchpad.net/~ubuntu-concept/ubuntu/+source/linux/+git/resolute
-[2] https://github.com/Ratizux/linux-device-acer-sfa14-11.git
-[3] https://github.com/Ratizux/audioreach-topology/
-[4] https://github.com/Ratizux/alsa-ucm-conf
-
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Kaipeng Zeng <kaipeng94@gmail.com>
 ---
-Changelog:
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-V5:
-- Rebase to next-20261021, pick up the following upstream changes:
-    arm64: dts: qcom: x1-crd: Mark the EC reset gpio as reserved (099cd579).
-    arm64: dts: qcom: hamoa/purwa: Add QREF regulator supplies (d9d07e23).
-    arm64: dts: qcom: hamoa: Fix swapped USB QMP PHY vdda-phy/vdda-pll supplies (4458dcd3).
-- Add 'eusb*_repeater'. (Jianfeng Liu)
-- Add 'displayport-2-dai-link'. (Jianfeng Liu)
-- Remove 'usb_1_ss1' and 'mdss_dp1'. (Jianfeng Liu)
-- Remove unused 'audio-routing'. (Jianfeng Liu)
-- Remove 'kypd_vol_up_n'. (Jianfeng Liu)
-
-V4:
-- Add -el2-dtbs. (Sashiko)
-- The "audio-routing" of "sound" is from x1-crd.dtsi, audio doesn't totally work,
-  and I didn't see any improvements when I followed Sashiko's advice,
-  so I just kept it the same as x1-crd.dtsi. (Sashiko)
-- Tested in EL2 mode:
-  Successfully boots with the kernel parameter: "iommu.passthrough=1",
-  The above features work as in EL1 mode except battery status.
-- Fix missing newline before "wsa-dai-link". (Val Packett)
-- Link to V4: https://lore.kernel.org/linux-devicetree/20261006085425.40450-1-kaipeng94@gmail.com/
-
-V3:
-- Re-sort *-link and its sub-nodes. (Konrad Dybcio)
-- Keep a '\n' before 'status'. (Konrad Dybcio)
-- Remove 'output-low' from wcd_default. (Konrad Dybcio)
-- Link to V3: https://lore.kernel.org/linux-devicetree/20260729064538.19564-1-kaipeng94@gmail.com/
-
-V2:
-- Fix Makefile entry ordering. (Krzysztof Kozlowski)
-- Use readable compatible string. (Krzysztof Kozlowski)
-- Fix sound card model name for this device. (Krzysztof Kozlowski & Konrad Dybcio)
-- Re-sort nodes, pinctrl-*. (Krzysztof Kozlowski & Konrad Dybcio)
-- Remove those regulators without consumer and lack of a required value in DSDT. (Konrad Dybcio)
-- Remove ADSP/CDSP fastrpc memory. (Konrad Dybcio)
-- Add iris firmware path. (Konrad Dybcio)
-- Delete usb_1_ss1_qmpphy/usb_1_ss2_qmpphy properties of Type-C. (Sashiko)
-- Delete usb_1_ss2_hsphy. (Sashiko)
-- Remove unused pmic-glink orientation-gpio. (Sashiko)
-- Remove node related to WWAN.
-
-- The Webcam is a USB device, can be probed without any additional
-  node. (Sashiko)
-- Using reset-gpios in swr* seems common in X1E devices, like Lenovo
-  Yoga Slim7x, ThinkPad t14s and Microsoft Romulus.
-  Because speakers do not completely work and I could not see any
-  effect of changing it, just retain it. (Sashiko)
-- Also, the HDMI audio is the same reason as above. (Sashiko)
-- Link to V2: https://lore.kernel.org/linux-devicetree/20260721082410.18275-1-kaipeng94@gmail.com/
-
-- Link to V1: https://lore.kernel.org/linux-devicetree/20260702063156.35169-1-kaipeng94@gmail.com/
-
-Kaipeng Zeng (2):
-  dt-bindings: arm: qcom: Add Acer Swift Go Pro AI (SFA14-11)
-  arm64: dts: qcom: Add support for Acer Swift Go Pro AI (SFA14-11)
-
- .../devicetree/bindings/arm/qcom.yaml         |    1 +
- arch/arm64/boot/dts/qcom/Makefile             |    2 +
- .../boot/dts/qcom/x1e78100-acer-sfa14-11.dts  | 1541 +++++++++++++++++
- 3 files changed, 1544 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/x1e78100-acer-sfa14-11.dts
-
-
-base-commit: 9a482184d910775cf648863148944945b74e2815
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 121ca557ce1e..027207758cab 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1240,6 +1240,7 @@ properties:
+ 
+       - items:
+           - enum:
++              - acer,swift-go-sfa14-11
+               - medion,sprchrgd14s1
+               - tuxedo,elite14gen1
+           - const: qcom,x1e78100
 -- 
 2.53.0
 
