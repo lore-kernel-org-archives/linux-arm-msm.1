@@ -1,63 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792753561;
-	b=BTebSHNGb7iOOPCN8BJQlWBrIcDeIuGb/jxVcYR8s7CpzkWUZB7NeRF4Kl3VyLUVjt4o
-	 hOBUxqDZliUI6ERfO62U1PIGpjwaeGgy/lnGOqA+/yaNyBHGdHOUiw5djMloZy6b7/eDK
-	 Uz1pmFqaR2lZkAENSv52Kw5YcHUedpcNnR6bm3XIB4L7lz24VQ3pDo4BJm542cQAZxUHq
-	 8/DFZFQaY0Dp6pNRSms8KhFbu8U9jnFebhYZxZlBB29/FpGCakBhL7lD4hEhj9FVTxnqv
-	 S+hIeEUDGiRBaZUgsM8RdSB2NUAodrF9Xo9R7Az0kqEpHGt4OsVJRwFQEtK0oFPhojQ==
+	t=1792753588;
+	b=P/+O00uIz4n3O3XSaeALWlBDhtM1b7wvjjMOiKQCRReJxzZ+ZcPGqYL1oZvO9NT8ElnV
+	 WeStj8v0NULwOwVbCkTfjdcjWqs0cwhpzi26YF0jevD/uEzlr3HAVPDs0DSj3qDFUX8wW
+	 K0+3jnooiFQXmvEmqOl+2B9n8IvJjy96etk0mrgCsUY8s76C6qelYBXh7VcHbd3cBCLva
+	 63IDA0k9aUvoyIT8QYv9oZxSqI4ctQhMD8zec9JuNAu7Ajrds4BtUNni4YK6y/jFB5esy
+	 /X7UfJld9BbZ4urwudhLV+kEEeEyP2SuvCpEbE0/V2Pv0kkIdvwOn2n3uwr1KZ1mNBQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792753561;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
-	 X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=/rQlsHaf8RUxj4BJ5C4uFZp1pXhNw2oObE6nCLkBPIk=;
-	b=GTwyz1zG7AzhXKSAv4ULfKRao7sVupwe6NOjv7ZjhXGE3cJTVL9wsJ4tM40UF8OcoXQ0
-	 1L3pDy+N90v6Xh7xEU7BOl9KpnnBbHECJgdManh3V0uRElAN0XwzapDLG1gR3LgK9ICrq
-	 FJ1+fuvPBYCj8WDy2sQXnoFpcCiv+vSPJD1/12AZGoJK5MkHLAaZXJlN4x/jQVxSQXYNf
-	 YRQvHGhofnOc6gqeY8Oqi48KTcrUv+K4v5Joqs7WXJEecBP8z66fGNBxDAhPAKXiXdbmB
-	 dfG3S9kJ43pAx3P3YYr1WVwtsxWjSHncPDCajX+gK4ez89k0W8kG7Ql6rV9lJ3xoUmg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792753588;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=94KUf73knvkRCbtnNXTEaPx18IfDH7sxhTJZxwp/k1g=;
+	b=PnIIZ3HyvJc33lPkzCkCc4LbHZbD5EwsgMeCX0/P1RnuxIm6qe5UklzBwM7FUNnr0Kgi
+	 6wopYFRVa8KtdQFTaUuqchn5ru07jWSo0+0LE7ra0/+lOPhe9JK8RaaIBafyla8L30tMZ
+	 318idhEkBruC0Akz5iqE3MGRVDUMOJP387BCgBVrRJjWaeeO+Lu5A7cNYRDMsrfA2wweT
+	 25dnvvP08aRVKjYAD6FNI8tEzWy4Kaeqdrnx2f47hsvpXREJAZMDUUW0O9QiFtPKfnJca
+	 Dgm6aSDINbx8S54ZqSXHqrnN7JpKtsF+uV01IGZpI4+pdaGzy0WUOL6+3ueOk/qqeKQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=WsBuFAaz;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA528606A31A;
-	Fri, 23 Oct 2026 11:05:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CA528606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WeLOOn5G;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jlcfEY5i;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA70606A32C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 11:06:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6FA70606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=WsBuFAaz
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WeLOOn5G;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jlcfEY5i
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NAAZUW2966019
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 11:06:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	94KUf73knvkRCbtnNXTEaPx18IfDH7sxhTJZxwp/k1g=; b=WeLOOn5GHHdy28pJ
+	5ED9l3bG9FJ1xyYKh5wYhYq08bJWUNS3zADofouXVRh8ZOYu2bctvY/MQ4c/DrS4
+	WZ8gZVBiPhTutDL9rpD/hpHv79TDBCSNHFbLyKwXOpIGiW/ZMWtojpbdQL6MZ+HQ
+	zoAPyJwomPcBjjqkK4M0GR3VhvEVJa37GUJLhQ3ScaU6I6mx7UdOebG1pwWT2za5
+	m8bJvN41qeLdrsgJeOsMLeOOceB5hoQ6j+9N0LlwM7qaLsRXLhbxnAcpJQit0Fja
+	IaQxgQzWbfKPiAUmW8nxCTkMnO2DRZaz4MbqPGslv+ag4ei/TWyStNmH2qcbzt06
+	jBU+Hw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfnq0kvqh-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 11:06:26 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e60770381cso7652195ad.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 04:06:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:Content-Type:
-	Content-Transfer-Encoding:MIME-Version; bh=/rQlsHaf8RUxj4BJ5C4uF
-	Zp1pXhNw2oObE6nCLkBPIk=; b=WsBuFAazG//+mgfQh/unhuD0T6gpPU+KtWIz1
-	vMhSqyNIq2+m3MnfjokluEAwORJbv7n5VTGi+QsyAS9NmLCMvzvky5kgT60fdedQ
-	v6rPD0+Gk67LSrIY5EZFL1SE8kkYQ6wpriF9YPSbTrYDhHnv++8fFulvaVTXIKE6
-	Gi8g68=
-Received: from [127.0.1.1] (unknown [114.214.178.200])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgB3AkeMP9tqZHU0AA--.1874S2;
-	Fri, 23 Oct 2026 19:05:48 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-pm@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org, Ulf Hansson <ulf.hansson@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Mike Tipton <mike.tipton@oss.qualcomm.com>,
- Taniya Das <taniya.das@oss.qualcomm.com>
-Subject:
- Re: [PATCH] power: supply: qcom_battmgr: do not report power_now on SM8750
-Date: Fri, 23 Oct 2026 19:05:48 +0800
-Message-ID: <179275354818.2172689.9851715727007912571@mail.ustc.edu.cn>
-In-Reply-To: <101257b5-7e43-4cc1-ba17-1507dad27b52@oss.qualcomm.com>
-References: <20261013002124.332111-1-xiaqinghuan@mail.ustc.edu.cn>
- <179249416915.570120.11194300523322683054@mail.ustc.edu.cn>
- <101257b5-7e43-4cc1-ba17-1507dad27b52@oss.qualcomm.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=oss.qualcomm.com; s=google; t=1792753585; x=1793358385; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=94KUf73knvkRCbtnNXTEaPx18IfDH7sxhTJZxwp/k1g=;
+        b=jlcfEY5iC31K/U0SKyAEV1s5oXL+b0/yCnRZDNlew0tG10HyVaunZ87UCjnardOCSU
+         myHAdYqtAXjpOlL8nIDrgDGySsyShEqYCykrffUZHUvwHog02RoJaB1QwF2iI0F+dkbm
+         WnYPuk1y9C2rzNKU02zwvBSkNB9McbeVr5yaxJ5Y27b28tV3XEVrWOal4e8EHMkxizu8
+         rNrmOEad1MZ1Uqko1jzKjscs8/m54LE1V1c3d4IrDL2k0TV/cyGkO8wR9BzYRmUIKric
+         GLoJDMAINhxDz1nCh+uPQSnt0jEDD+70FyxFD2lZZYJbe+v96ELcXDiZORcg5AvVUhKi
+         tVrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792753585; x=1793358385;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=94KUf73knvkRCbtnNXTEaPx18IfDH7sxhTJZxwp/k1g=;
+        b=VweD8oviEWzCM1azgijtd0oADHTibWxObljYWwUAXFcqaZc5sQt6aSqVHgGTEogm3h
+         stLV2Wjgiy7y28epKUesCrjhjwCQW8Ci82KdbBh7vbfX4tA4eWO4kIkPgzf9nOy5H8XE
+         91BA/mmxKIwnSWHoYbENrWKuSlRtqhU3n5XpEM+5WxPaVWEIjx85jBseBQ8A2tXKlkvD
+         tBG2XYfWBN5EEheYlynm0GneI7R3BYsOUsZeVYhGVQB3yCsvNZkhHulOyY4z1Rmvd1Ki
+         fDCLMnZuGJESpOQNQJeZMXTM6IgTmRjN4BsRr4K3i+oTK4Y/lO65AYNdX62C/FV3e9ko
+         AHUw==
+X-Forwarded-Encrypted: i=1; AKwUvBzcepK/ETinq0Rz/CPautbaF4deGT/eBs++MJe2gvtqeLJUIJGMxkbvVOwW5+IiAiIYombDFNczzJV/56Vw@vger.kernel.org
+X-Gm-Message-State: AFq9FYLfoDdfAAyPmdMFzF/y4/GSWCl89/qxp1eieoMKZmEMNWh2v1Ng
+	NX7f8RboZawgg4NkZED5/SdgIj5QrvX7jZWGKmVFGPeiFpooKCYpY4Cbb65Bj7XnkT++xOGVB3O
+	ffPSWa+zdIDi3p3094KEfeRdPiezbH4BHB9ggiLptIdfeaSVeTB6fa5Ogxo3Bw5SiFr7w
+X-Gm-Gg: AYBFou0Ui+jDJPLg1r0Q9T7a0/964M0Rpvl4Drs6S99OxS0CV9x7s6Qo2DWiHxTE06r
+	tG0lYlg4f6o5ufoFn0jdJx7naiIK1c5+qLVGJ8NvAnxAqbSJKnew8l17NZ+QiJEfpSR/vuzuu7H
+	0vw/BwEUHNaW/CpkqWlAmXsoq/2InI7wGSajYLTpz+azYXXTWT1WX2ZUnMqzgEQjKjZnFQBtRVa
+	lp/3dnMiRqCATLWb8JdLsglktY6gIImrIiREOzYELrXmseIkTunMz5NIDJYVK1/+GY+2YVPKYqq
+	stUc/vBdJ17PoxMSIDOjz/BLAr7/+3QeLviVMt4lLqWYWDATf3O8P5Y94cNb8yyfP40oEsZKqps
+	a8CkrpKXVzj53xawmi7fxQotTYnZM8234FroQl+OeW054/4GJO3PseWwTvnpJ
+X-Received: by 2002:a17:903:120f:b0:2e9:8e0a:cc4d with SMTP id d9443c01a7336-2ea7c181d40mr20451895ad.41.1792753585024;
+        Fri, 23 Oct 2026 04:06:25 -0700 (PDT)
+X-Received: by 2002:a17:903:120f:b0:2e9:8e0a:cc4d with SMTP id d9443c01a7336-2ea7c181d40mr20451405ad.41.1792753584385;
+        Fri, 23 Oct 2026 04:06:24 -0700 (PDT)
+Received: from [10.239.96.176] ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea7b3b5744sm8729635ad.42.2026.10.23.04.06.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Oct 2026 04:06:23 -0700 (PDT)
+Message-ID: <6adc7028-241c-47f0-9063-f8f3d0c1059a@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 19:06:17 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,154 +115,643 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgB3AkeMP9tqZHU0AA--.1874S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3GFyDXF1fJFW8CF17XF43Jrb_yoW7tFWxpF
-	9xK3sYka1kJw18X3srAr1xZas5ZrZaya98Jr1kG348ZasxurySqryFkFWjqay5urn8X3WY
-	vrs0qrnF9F4vkaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUk2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
-	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
-	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
-	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l42xK
-	82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGw
-	C20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48J
-	MIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMI
-	IF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E
-	87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUgcTQUUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREJB2raZFVVbQARs2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v21 08/14] media: qcom: camss: csid: Add support for CSID
+ 1080
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        jeyaprakash.soundrapandian@oss.qualcomm.com,
+        Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>,
+        Atiya Kailany <atiya.kailany@oss.qualcomm.com>
+References: <20261011-kaanapali-camss-v21-0-04fd28d815c6@oss.qualcomm.com>
+ <20261011-kaanapali-camss-v21-8-04fd28d815c6@oss.qualcomm.com>
+ <b920a52f-2a81-45ac-b025-f2df8f98aa79@linaro.org>
+Content-Language: en-US
+From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+In-Reply-To: <b920a52f-2a81-45ac-b025-f2df8f98aa79@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: hAGlB4zdLv4Ztrvgh01VZ7cd2v5bPAq4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA0MyBTYWx0ZWRfX2cuGl6aH5V9o
+ 9O36AABUH3pM3sq31ei/NSNxRQKoDshnwTVEppZcmwraGKI+hN7PEmqYNEcYG3vkMPED7QkdQXG
+ GqZyT6o1qMi+NR9RFqVyC2lrskkBRw1rHDb7s9/xp9A6mSMXIcjcldJhpb4hh6y8LdBhyw7lV33
+ /kCaCW3gXEUoBn45zINnNSdreWlXmqBbkbu1dbJXw9o/JrN9aDjMHzW//1+jqcvDbQP7Ht4Erwk
+ OmAZ5ofSnv+/Jz0d1iCE/10T8fXRIJLuQYd6bGQVVuzbrjdSFn7BzYVeLmhUfFHtO/3R8Hqfjpo
+ DFw/9vTPJtcDPdbsJp+NMW/hANbij/9Qh6laNA5Iwx+gEl7AiCcn/j5QXPiEeIYXdTC/IkifDLD
+ LTKTExWTzqX4s0fOjariqTFkK17zwtCbGV2+sKBKMUen6J9o/WIB4TLD6XHRqHy+OZ5c1kB8tRl
+ bKH5x1O3HMYz7Uf+r9A==
+X-Proofpoint-GUID: hAGlB4zdLv4Ztrvgh01VZ7cd2v5bPAq4
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA0MyBTYWx0ZWRfXxLEhl79v8138
+ eLBXQxqrLQqk7l5j0NyNKJJw2DO3hOemOscU+xyWM/96xq7b9cPdsgd/FVbmOoW40XAg+nCOom3
+ q+q9m9x3V2EpfnZPTzHCC8+S6/PPy24=
+X-Authority-Analysis: v=2.4 cv=UaHE26SN c=1 sm=1 tr=0 ts=6adb3fb2 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=8H2rM04zqQRs751kQuIA:9
+ a=4Q4zU7iZy6iiv8wZ:21 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0
+ malwarescore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230043
 
-Hi Konrad,
+On 10/23/2026 7:00 PM, Bryan O'Donoghue wrote:
+> On 12/10/2026 07:45, Hangxiang Ma wrote:
+>> Add support for the CSID 1080 hardware found on Kaanapali SoC.
+>>
+>> Introduce CSID 1080 hardware resource descriptions and implement the
+>> hardware-specific register programming, reset sequence, and BUF_DONE
+>> interrupt handling.
+>>
+>> CSID 1080 splits RUP and AUP updates into separate registers and uses a
+>> SET register to commit the updates. Update the CSID interface to support
+>> both this scheme and the legacy combined reg_update mechanism.
+>>
+>> Reviewed-by: Bryan O'Donoghue <bod@kernel.org>
+>> Co-developed-by: Atiya Kailany <atiya.kailany@oss.qualcomm.com>
+>> Signed-off-by: Atiya Kailany <atiya.kailany@oss.qualcomm.com>
+>> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+>> ---
+>>   drivers/media/platform/qcom/camss/Makefile         |   1 +
+>>   .../media/platform/qcom/camss/camss-csid-1080.c    | 384 +++++++++++ 
+>> ++++++++++
+>>   drivers/media/platform/qcom/camss/camss-csid.h     |   9 +-
+>>   drivers/media/platform/qcom/camss/camss.c          |  75 ++++
+>>   4 files changed, 468 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/Makefile b/drivers/ 
+>> media/platform/qcom/camss/Makefile
+>> index 27898b3cc7d3..218ba3a95939 100644
+>> --- a/drivers/media/platform/qcom/camss/Makefile
+>> +++ b/drivers/media/platform/qcom/camss/Makefile
+>> @@ -8,6 +8,7 @@ qcom-camss-objs += \
+>>           camss-csid-4-7.o \
+>>           camss-csid-340.o \
+>>           camss-csid-680.o \
+>> +        camss-csid-1080.o \
+>>           camss-csid-gen2.o \
+>>           camss-csid-gen3.o \
+>>           camss-csiphy.o \
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csid-1080.c b/ 
+>> drivers/media/platform/qcom/camss/camss-csid-1080.c
+>> new file mode 100644
+>> index 000000000000..46e443e05195
+>> --- /dev/null
+>> +++ b/drivers/media/platform/qcom/camss/camss-csid-1080.c
+>> @@ -0,0 +1,384 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * camss-csid-1080.c
+>> + *
+>> + * Qualcomm MSM Camera Subsystem - CSID (CSI Decoder) Module
+>> + *
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +#include <linux/completion.h>
+>> +#include <linux/delay.h>
+>> +#include <linux/interrupt.h>
+>> +#include <linux/io.h>
+>> +#include <linux/kernel.h>
+>> +#include <linux/of.h>
+>> +
+>> +#include "camss.h"
+>> +#include "camss-csid.h"
+>> +#include "camss-csid-gen3.h"
+>> +
+>> +/* Reset and Command Registers */
+>> +#define CSID_RST_CFG                0x108
+>> +#define        RST_MODE                BIT(0)
+>> +#define        RST_LOCATION                BIT(4)
+>> +
+>> +/* Reset and Command Registers */
+>> +#define CSID_RST_CMD                0x10C
+>> +#define        SELECT_HW_RST                BIT(0)
+>> +#define        SELECT_IRQ_RST                BIT(2)
+>> +#define CSID_IRQ_CMD                0x110
+>> +#define        IRQ_CMD_CLEAR                BIT(0)
+>> +
+>> +/* Register Update Commands, RUP/AUP */
+>> +#define CSID_RUP_CMD                0x114
+>> +#define CSID_AUP_CMD                0x118
+>> +#define        CSID_RUP_AUP_RDI(rdi)            (BIT(8) << (rdi))
+>> +#define CSID_RUP_AUP_CMD            0x11C
+>> +#define        RUP_SET                    BIT(0)
+>> +#define        MUP                    BIT(4)
+>> +
+>> +/* Top level interrupt registers */
+>> +#define CSID_TOP_IRQ_STATUS            0x180
+>> +#define CSID_TOP_IRQ_MASK            0x184
+>> +#define CSID_TOP_IRQ_CLEAR            0x188
+>> +#define        INFO_RST_DONE                BIT(0)
+>> +#define        CSI2_RX_IRQ_STATUS            BIT(2)
+>> +#define        BUF_DONE_IRQ_STATUS            BIT(3)
+>> +
+>> +/* Buffer done interrupt registers */
+>> +#define CSID_BUF_DONE_IRQ_STATUS        0x1A0
+>> +#define        BUF_DONE_IRQ_STATUS_RDI_OFFSET        16
+>> +#define CSID_BUF_DONE_IRQ_MASK            0x1A4
+>> +#define CSID_BUF_DONE_IRQ_CLEAR            0x1A8
+>> +#define CSID_BUF_DONE_IRQ_SET            0x1AC
+>> +
+>> +/* CSI2 RX interrupt registers */
+>> +#define CSID_CSI2_RX_IRQ_STATUS            0x1B0
+>> +#define CSID_CSI2_RX_IRQ_MASK            0x1B4
+>> +#define CSID_CSI2_RX_IRQ_CLEAR            0x1B8
+>> +#define CSID_CSI2_RX_IRQ_SET            0x1BC
+>> +
+>> +/* CSI2 RX Configuration */
+>> +#define CSID_CSI2_RX_CFG0            0x880
+>> +#define        CSI2_RX_CFG0_NUM_ACTIVE_LANES        0
+>> +#define        CSI2_RX_CFG0_DL0_INPUT_SEL        4
+>> +#define        CSI2_RX_CFG0_PHY_NUM_SEL        20
+>> +#define        CSI2_RX_CFG0_PHY_SEL_BASE_IDX        1
+>> +#define CSID_CSI2_RX_CFG1            0x884
+>> +#define        CSI2_RX_CFG1_ECC_CORRECTION_EN        BIT(0)
+>> +#define        CSI2_RX_CFG1_VC_MODE            BIT(2)
+>> +
+>> +#define MSM_CSID_MAX_SRC_STREAMS_1080        (csid_is_lite(csid) ? 
+>> 4 : 5)
+>> +
+>> +/* RDI Configuration */
+>> +#define CSID_RDI_CFG0(rdi)    (csid_is_lite(csid) ?\
+>> +                    (0x3080 + 0x200 * (rdi)) :\
+>> +                    (0x5480 + 0x200 * (rdi)))
+>> +#define        RDI_CFG0_RETIME_BS            BIT(5)
+>> +#define        RDI_CFG0_TIMESTAMP_EN            BIT(6)
+>> +#define        RDI_CFG0_TIMESTAMP_STB_SEL        BIT(8)
+>> +#define        RDI_CFG0_DECODE_FORMAT            12
+>> +#define        RDI_CFG0_DT                16
+>> +#define        RDI_CFG0_VC                22
+>> +#define        RDI_CFG0_EN                BIT(31)
+>> +
+>> +/* RDI Control and Configuration */
+>> +#define CSID_RDI_CTRL(rdi)    (csid_is_lite(csid) ?\
+>> +                    (0x3088 + 0x200 * (rdi)) :\
+>> +                    (0x5488 + 0x200 * (rdi)))
+>> +#define        RDI_CTRL_START_CMD            BIT(0)
+>> +
+>> +#define CSID_RDI_CFG1(rdi)    (csid_is_lite(csid) ?\
+>> +                    (0x3094 + 0x200 * (rdi)) :\
+>> +                    (0x5494 + 0x200 * (rdi)))
+>> +#define        RDI_CFG1_DROP_H_EN            BIT(5)
+>> +#define        RDI_CFG1_DROP_V_EN            BIT(6)
+>> +#define        RDI_CFG1_CROP_H_EN            BIT(7)
+>> +#define        RDI_CFG1_CROP_V_EN            BIT(8)
+>> +#define        RDI_CFG1_PACKING_FORMAT_MIPI        BIT(15)
+>> +
+>> +/* RDI Pixel Store Configuration */
+>> +#define CSID_RDI_PIX_STORE_CFG0(rdi)    (0x5498 + 0x200 * (rdi))
+>> +#define        RDI_PIX_STORE_CFG0_EN            BIT(0)
+>> +#define        RDI_PIX_STORE_CFG0_MIN_HBI        1
+>> +
+>> +/* RDI IRQ Status in wrapper */
+>> +#define CSID_CSI2_RDIN_IRQ_STATUS(rdi)    (0x224 + (0x10 * (rdi)))
+>> +#define CSID_CSI2_RDIN_IRQ_MASK(rdi)    (0x228 + (0x10 * (rdi)))
+>> +#define CSID_CSI2_RDIN_IRQ_CLEAR(rdi)    (0x22C + (0x10 * (rdi)))
+>> +#define        INFO_RUP_DONE                BIT(23)
+>> +
+>> +static void __csid_aup_rup_trigger(struct csid_device *csid)
+>> +{
+>> +    /* trigger SET in combined register */
+>> +    writel(RUP_SET, csid->base + CSID_RUP_AUP_CMD);
+>> +}
+>> +
+>> +static void __csid_aup_rup_clear(struct csid_device *csid, int port_id)
+>> +{
+>> +    /* Hardware clears the registers upon consuming the settings */
+>> +    csid->aup_update &= ~CSID_RUP_AUP_RDI(port_id);
+>> +    csid->rup_update &= ~CSID_RUP_AUP_RDI(port_id);
+>> +}
+>> +
+>> +static void __csid_aup_update(struct csid_device *csid, int port_id)
+>> +{
+>> +    csid->aup_update |= CSID_RUP_AUP_RDI(port_id);
+>> +    writel(csid->aup_update, csid->base + CSID_AUP_CMD);
+>> +
+>> +    __csid_aup_rup_trigger(csid);
+>> +}
+>> +
+>> +static void __csid_reg_update(struct csid_device *csid, int port_id)
+>> +{
+>> +    csid->rup_update |= CSID_RUP_AUP_RDI(port_id);
+>> +    writel(csid->rup_update, csid->base + CSID_RUP_CMD);
+>> +
+>> +    __csid_aup_rup_trigger(csid);
+>> +}
+>> +
+>> +static void __csid_configure_rx(struct csid_device *csid,
+>> +                struct csid_phy_config *phy)
+>> +{
+>> +    u8 lane_cnt = phy->lane_cnt;
+>> +    int val;
+>> +
+>> +    if (!lane_cnt)
+>> +        lane_cnt = 4;
+>> +
+>> +    val = (lane_cnt - 1) << CSI2_RX_CFG0_NUM_ACTIVE_LANES;
+>> +    val |= phy->lane_assign << CSI2_RX_CFG0_DL0_INPUT_SEL;
+>> +    val |= (phy->csiphy_id + CSI2_RX_CFG0_PHY_SEL_BASE_IDX)
+>> +           << CSI2_RX_CFG0_PHY_NUM_SEL;
+>> +    writel(val, csid->base + CSID_CSI2_RX_CFG0);
+>> +
+>> +    val = CSI2_RX_CFG1_ECC_CORRECTION_EN;
+>> +    writel(val, csid->base + CSID_CSI2_RX_CFG1);
+>> +}
+>> +
+>> +static void __csid_configure_rx_vc(struct csid_device *csid, int vc)
+>> +{
+>> +    int val;
+>> +
+>> +    if (vc > 3) {
+>> +        val = readl(csid->base + CSID_CSI2_RX_CFG1);
+>> +        val |= CSI2_RX_CFG1_VC_MODE;
+>> +        writel(val, csid->base + CSID_CSI2_RX_CFG1);
+>> +    }
+>> +}
+>> +
+>> +static void __csid_ctrl_rdi(struct csid_device *csid, int enable, u8 
+>> rdi)
+>> +{
+>> +    int val = 0;
+>> +
+>> +    if (enable)
+>> +        val = RDI_CTRL_START_CMD;
+>> +
+>> +    writel(val, csid->base + CSID_RDI_CTRL(rdi));
+>> +}
+>> +
+>> +static void __csid_configure_rdi_pix_store(struct csid_device *csid, 
+>> u8 rdi)
+>> +{
+>> +    u32 val;
+>> +
+>> +    /*
+>> +     * Configure pixel store to allow absorption of hblanking or idle 
+>> time.
+>> +     * This helps with horizontal crop and prevents line buffer 
+>> conflicts.
+>> +     * Reset state is 0x8 which has MIN_HBI=4, we keep the default 
+>> MIN_HBI
+>> +     * and just enable the pixel store functionality.
+>> +     */
+>> +    val = (4 << RDI_PIX_STORE_CFG0_MIN_HBI) | RDI_PIX_STORE_CFG0_EN;
+>> +    writel(val, csid->base + CSID_RDI_PIX_STORE_CFG0(rdi));
+>> +}
+>> +
+>> +static void __csid_configure_rdi_stream(struct csid_device *csid, u8 
+>> enable, u8 port, u8 vc)
+>> +{
+>> +    u8 lane_cnt = csid->phy.lane_cnt;
+>> +    u32 val;
+>> +
+>> +    /* Source pads matching RDI channels on hardware.
+>> +     * E.g. Pad 1 -> RDI0, Pad 2 -> RDI1, etc.
+>> +     */
+>> +    struct v4l2_mbus_framefmt *input_format = &csid- 
+>> >fmt[MSM_CSID_PAD_FIRST_SRC + port];
+>> +    const struct csid_format_info *format = csid_get_fmt_entry(csid- 
+>> >res->formats->formats,
+>> +                                   csid->res->formats->nformats,
+>> +                                   input_format->code);
+>> +
+>> +    if (!lane_cnt)
+>> +        lane_cnt = 4;
+>> +
+>> +    val = RDI_CFG0_TIMESTAMP_EN;
+>> +    val |= RDI_CFG0_TIMESTAMP_STB_SEL;
+>> +    val |= RDI_CFG0_RETIME_BS;
+>> +
+>> +    /* note: for non-RDI path, this should be format->decode_format */
+>> +    val |= DECODE_FORMAT_PAYLOAD_ONLY << RDI_CFG0_DECODE_FORMAT;
+>> +    val |= vc << RDI_CFG0_VC;
+>> +    val |= format->data_type << RDI_CFG0_DT;
+>> +    writel(val, csid->base + CSID_RDI_CFG0(port));
+>> +
+>> +    val = RDI_CFG1_PACKING_FORMAT_MIPI;
+>> +    writel(val, csid->base + CSID_RDI_CFG1(port));
+>> +
+>> +    /* Configure pixel store using dedicated register in 1080 */
+>> +    if (!csid_is_lite(csid))
+>> +        __csid_configure_rdi_pix_store(csid, port);
+>> +
+>> +    val = 0;
+>> +    writel(val, csid->base + CSID_RDI_CTRL(port));
+>> +
+>> +    val = readl(csid->base + CSID_RDI_CFG0(port));
+>> +
+>> +    if (enable)
+>> +        val |= RDI_CFG0_EN;
+>> +
+>> +    writel(val, csid->base + CSID_RDI_CFG0(port));
+>> +}
+>> +
+>> +static void csid_configure_stream(struct csid_device *csid, u8 enable)
+>> +{
+>> +    u8 i, k;
+>> +
+>> +    __csid_configure_rx(csid, &csid->phy);
+>> +
+>> +    for (i = 0; i < MSM_CSID_MAX_SRC_STREAMS_1080; i++) {
+>> +        if (csid->phy.en_vc & BIT(i)) {
+>> +            __csid_configure_rdi_stream(csid, enable, i, 0);
+>> +            __csid_configure_rx_vc(csid, 0);
+>> +
+>> +            for (k = 0; k < CAMSS_INIT_BUF_COUNT; k++)
+>> +                __csid_aup_update(csid, i);
+>> +
+>> +            __csid_reg_update(csid, i);
+>> +
+>> +            __csid_ctrl_rdi(csid, enable, i);
+>> +        }
+>> +    }
+>> +}
+>> +
+>> +static int csid_configure_testgen_pattern(struct csid_device *csid, 
+>> s32 val)
+>> +{
+>> +    return 0;
+>> +}
+>> +
+>> +static void csid_subdev_reg_update(struct csid_device *csid, int 
+>> port_id,
+>> +                   bool clear)
+>> +{
+>> +    if (clear)
+>> +        __csid_aup_rup_clear(csid, port_id);
+>> +    else
+>> +        __csid_aup_update(csid, port_id);
+>> +}
+>> +
+>> +/**
+>> + * csid_isr - CSID module interrupt service routine
+>> + * @irq: Interrupt line
+>> + * @dev: CSID device
+>> + *
+>> + * Return IRQ_HANDLED on success
+>> + */
+>> +static irqreturn_t csid_isr(int irq, void *dev)
+>> +{
+>> +    struct csid_device *csid = dev;
+>> +    u32 val, buf_done_val;
+>> +    u8 reset_done;
+>> +    int i;
+>> +
+>> +    val = readl(csid->base + CSID_TOP_IRQ_STATUS);
+>> +    writel(val, csid->base + CSID_TOP_IRQ_CLEAR);
+>> +
+>> +    reset_done = val & INFO_RST_DONE;
+>> +
+>> +    buf_done_val = readl(csid->base + CSID_BUF_DONE_IRQ_STATUS);
+>> +    writel(buf_done_val, csid->base + CSID_BUF_DONE_IRQ_CLEAR);
+>> +
+>> +    for (i = 0; i < MSM_CSID_MAX_SRC_STREAMS_1080; i++) {
+>> +        if (csid->phy.en_vc & BIT(i)) {
+>> +            val = readl(csid->base + CSID_CSI2_RDIN_IRQ_STATUS(i));
+>> +            writel(val, csid->base + CSID_CSI2_RDIN_IRQ_CLEAR(i));
+>> +
+>> +            if (val & INFO_RUP_DONE)
+>> +                csid_subdev_reg_update(csid, i, true);
+>> +
+>> +            if (buf_done_val & BIT(BUF_DONE_IRQ_STATUS_RDI_OFFSET + i))
+>> +                camss_buf_done(csid->camss, csid->id, i);
+>> +        }
+>> +    }
+>> +
+>> +    val = IRQ_CMD_CLEAR;
+>> +    writel(val, csid->base + CSID_IRQ_CMD);
+>> +
+>> +    if (reset_done)
+>> +        complete(&csid->reset_complete);
+>> +
+>> +    return IRQ_HANDLED;
+>> +}
+>> +
+>> +/**
+>> + * csid_reset - Trigger reset on CSID module and wait to complete
+>> + * @csid: CSID device
+>> + *
+>> + * Return 0 on success or a negative error code otherwise
+>> + */
+>> +static int csid_reset(struct csid_device *csid)
+>> +{
+>> +    unsigned long time;
+>> +    u32 val;
+>> +    int i;
+>> +
+>> +    reinit_completion(&csid->reset_complete);
+>> +
+>> +    val = INFO_RST_DONE | BUF_DONE_IRQ_STATUS;
+>> +    writel(val, csid->base + CSID_TOP_IRQ_CLEAR);
+>> +    writel(val, csid->base + CSID_TOP_IRQ_MASK);
+>> +
+>> +    val = 0;
+>> +    for (i = 0; i < MSM_CSID_MAX_SRC_STREAMS_1080; i++) {
+>> +        if (csid->phy.en_vc & BIT(i)) {
+>> +            /*
+>> +             * Only need to clear buf done IRQ status here,
+>> +             * RUP done IRQ status will be cleared once isr
+>> +             * strobe generated by CSID_RST_CMD
+>> +             */
+>> +            val |= BIT(BUF_DONE_IRQ_STATUS_RDI_OFFSET + i);
+>> +        }
+>> +    }
+>> +    writel(val, csid->base + CSID_BUF_DONE_IRQ_CLEAR);
+>> +    writel(val, csid->base + CSID_BUF_DONE_IRQ_MASK);
+>> +
+>> +    /* Clear all IRQ status with CLEAR bits set */
+>> +    val = IRQ_CMD_CLEAR;
+>> +    writel(val, csid->base + CSID_IRQ_CMD);
+>> +
+>> +    val = RST_LOCATION | RST_MODE;
+>> +    writel(val, csid->base + CSID_RST_CFG);
+>> +
+>> +    val = SELECT_HW_RST | SELECT_IRQ_RST;
+>> +    writel(val, csid->base + CSID_RST_CMD);
+>> +
+>> +    time = wait_for_completion_timeout(&csid->reset_complete,
+>> +                       msecs_to_jiffies(CSID_RESET_TIMEOUT_MS));
+>> +
+>> +    if (!time) {
+>> +        dev_err(csid->camss->dev, "CSID reset timeout\n");
+>> +        return -EIO;
+>> +    }
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static void csid_subdev_init(struct csid_device *csid)
+>> +{
+>> +    csid->testgen.nmodes = CSID_PAYLOAD_MODE_DISABLED;
+>> +}
+>> +
+>> +const struct csid_hw_ops csid_ops_1080 = {
+>> +    .configure_stream = csid_configure_stream,
+>> +    .configure_testgen_pattern = csid_configure_testgen_pattern,
+>> +    .hw_version = csid_hw_version,
+>> +    .isr = csid_isr,
+>> +    .reset = csid_reset,
+>> +    .src_pad_code = csid_src_pad_code,
+>> +    .subdev_init = csid_subdev_init,
+>> +    .reg_update = csid_subdev_reg_update,
+>> +};
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/ 
+>> media/platform/qcom/camss/camss-csid.h
+>> index 5296b10f6bac..3c2d15a61836 100644
+>> --- a/drivers/media/platform/qcom/camss/camss-csid.h
+>> +++ b/drivers/media/platform/qcom/camss/camss-csid.h
+>> @@ -154,7 +154,13 @@ struct csid_device {
+>>       void __iomem *base;
+>>       u32 irq;
+>>       char irq_name[30];
+>> -    u32 reg_update;
+>> +    union {
+>> +        u32 reg_update;
+>> +        struct {
+>> +            u32 rup_update;
+>> +            u32 aup_update;
+>> +        };
+>> +    };
+>>       struct camss_clock *clock;
+>>       int nclocks;
+>>       struct regulator_bulk_data *supplies;
+>> @@ -216,6 +222,7 @@ extern const struct csid_hw_ops csid_ops_4_1;
+>>   extern const struct csid_hw_ops csid_ops_4_7;
+>>   extern const struct csid_hw_ops csid_ops_340;
+>>   extern const struct csid_hw_ops csid_ops_680;
+>> +extern const struct csid_hw_ops csid_ops_1080;
+>>   extern const struct csid_hw_ops csid_ops_gen2;
+>>   extern const struct csid_hw_ops csid_ops_gen3;
+>> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/ 
+>> media/platform/qcom/camss/camss.c
+>> index eeceb79c1e86..261e6c837dd4 100644
+>> --- a/drivers/media/platform/qcom/camss/camss.c
+>> +++ b/drivers/media/platform/qcom/camss/camss.c
+>> @@ -83,6 +83,79 @@ static const struct camss_subdev_resources 
+>> csiphy_res_kaanapali[] = {
+>>       },
+>>   };
+>> +static const struct camss_subdev_resources csid_res_kaanapali[] = {
+>> +    /* CSID0 */
+>> +    {
+>> +        .clock = { "csid", "csid_csiphy_rx" },
+>> +        .clock_rate = { { 400000000, 480000000 },
+>> +                { 400000000, 480000000 } },
+>> +        .reg = { "csid0" },
+>> +        .interrupt = { "csid0" },
+>> +        .csid = {
+>> +            .is_lite = false,
+>> +            .parent_dev_ops = &vfe_parent_dev_ops,
+>> +            .hw_ops = &csid_ops_1080,
+>> +            .formats = &csid_formats_gen2
+>> +        }
+>> +    },
+>> +    /* CSID1 */
+>> +    {
+>> +        .clock = { "csid", "csid_csiphy_rx" },
+>> +        .clock_rate = { { 400000000, 480000000 },
+>> +                { 400000000, 480000000 } },
+>> +        .reg = { "csid1" },
+>> +        .interrupt = { "csid1" },
+>> +        .csid = {
+>> +            .is_lite = false,
+>> +            .parent_dev_ops = &vfe_parent_dev_ops,
+>> +            .hw_ops = &csid_ops_1080,
+>> +            .formats = &csid_formats_gen2
+>> +        }
+>> +    },
+>> +    /* CSID2 */
+>> +    {
+>> +        .clock = { "csid", "csid_csiphy_rx" },
+>> +        .clock_rate = { { 400000000, 480000000 },
+>> +                { 400000000, 480000000 } },
+>> +        .reg = { "csid2" },
+>> +        .interrupt = { "csid2" },
+>> +        .csid = {
+>> +            .is_lite = false,
+>> +            .parent_dev_ops = &vfe_parent_dev_ops,
+>> +            .hw_ops = &csid_ops_1080,
+>> +            .formats = &csid_formats_gen2
+>> +        }
+>> +    },
+>> +    /* CSID_LITE0 */
+>> +    {
+>> +        .clock = { "vfe_lite_csid", "vfe_lite_cphy_rx" },
+>> +        .clock_rate = { { 400000000, 480000000 },
+>> +                { 400000000, 480000000 } },
+>> +        .reg = { "csid_lite0" },
+>> +        .interrupt = { "csid_lite0" },
+>> +        .csid = {
+>> +            .is_lite = true,
+>> +            .parent_dev_ops = &vfe_parent_dev_ops,
+>> +            .hw_ops = &csid_ops_1080,
+>> +            .formats = &csid_formats_gen2
+>> +        }
+>> +    },
+>> +    /* CSID_LITE1 */
+>> +    {
+>> +        .clock = { "vfe_lite_csid", "vfe_lite_cphy_rx" },
+>> +        .clock_rate = { { 400000000, 480000000 },
+>> +                { 400000000, 480000000 } },
+>> +        .reg = { "csid_lite1" },
+>> +        .interrupt = { "csid_lite1" },
+>> +        .csid = {
+>> +            .is_lite = true,
+>> +            .parent_dev_ops = &vfe_parent_dev_ops,
+>> +            .hw_ops = &csid_ops_1080,
+>> +            .formats = &csid_formats_gen2
+>> +        }
+>> +    }
+>> +};
+>> +
+>>   static const struct resources_icc icc_res_kaanapali[] = {
+>>       {
+>>           .name = "ahb",
+>> @@ -5639,9 +5712,11 @@ static const struct camss_resources 
+>> kaanapali_resources = {
+>>       .version = CAMSS_KAANAPALI,
+>>       .pd_name = "top",
+>>       .csiphy_res = csiphy_res_kaanapali,
+>> +    .csid_res = csid_res_kaanapali,
+>>       .icc_res = icc_res_kaanapali,
+>>       .icc_path_num = ARRAY_SIZE(icc_res_kaanapali),
+>>       .csiphy_num = ARRAY_SIZE(csiphy_res_kaanapali),
+>> +    .csid_num = ARRAY_SIZE(csid_res_kaanapali),
+>>   };
+>>   static const struct camss_resources msm8916_resources = {
+>>
+> 
+> I'd like to ask for the definition of the SOF enable bits - not 
+> necessarily enabling the SOF interrupt _yet_ but the bits.
+> 
+> =>
+> 
+> We will shortly start switching on V4L2_EVENT_FRAME_SYNC which will need 
+> to trigger off of SOF.
+> 
+> ---
+> bod
 
-(Sorry for the subject mismatch - this continues your suggestion inside the
-battmgr thread rather than the SM8750 sleep one, since it was your reply in
-this thread that told me what to try. Feel free to re-thread if you prefer.)
+Got it. I'll make sure the SOF enable bits take effect and include the 
+change in the next revision.
 
-You suggested disabling rpmhpd_driver.sync_state to pin the rails at their
-maximum corner. I ran it, it worked, and I think I now know why. Short
-version: the effect you saw is not specific to sync_state - it is the
-Retention corner, and there is already an upstream commit for it.
-
-What I observed
-
-Board: Lenovo Legion Y700 Gen4 (TB322FC, SM8750P, mainline port).
-Symptom: with the camera power domains powered on, turning the display off
-(DPMS off via the compositor) hard-resets the SoC. No panic, empty pstore,
-no userland record - the reset is below the kernel.
-
-Two kernels, same userspace, same device tree, same module tree:
-
-  7.2-based tree    6 of 8 runs reset      (your sync_state arm: 0 of 4)
-  7.3-rc7 tree      0 of 41 runs reset
-
-Your arm pins every rail without presync_floor to level_count - 1, so
-retention is never selected. That made me look at what else differs between
-the two trees in the RPMh power domain code, and there is exactly one
-behavioural difference in drivers/pmdomain/qcom/rpmhpd.c:
-
-  7.2:   if (rpmhpd->skip_retention_level && buf[i] == RETENTION)
-                 continue;
-         (skip_retention_level is only set on mxc and mxc_ao)
-
-  7.3:   if (buf[i] == RETENTION)
-                 continue;
-
-So on 7.2, every rail except mxc/mxc_ao keeps RPMH_REGULATOR_LEVEL_RETENTION
-(16) in its level table. That is Mike Tipton's "Skip retention by default"
-(2026-06-29, Reviewed-by: you), which landed after the 7.2 point this port
-was based on.
-
-Confirmed against the actual level tables
-
-The device exposes cmd-db through debugfs, so this is measured rather than
-inferred. Dumping /sys/kernel/debug/cmd-db on the 7.2 kernel:
-
-  cx.lvl   [00 00 10 00 40 00 ...]     -> has 0x10
-  mx.lvl   [00 00 10 00 40 00 ...]     -> has 0x10
-  ebi.lvl  [00 00 10 00 80 00 ...]     -> has 0x10
-  lcx.lvl  [00 00 10 00 38 00 ...]     -> has 0x10
-  lmx.lvl  [00 00 10 00 c0 00 ...]     -> has 0x10
-  gmxc.lvl [00 00 10 00 32 00 ...]     -> has 0x10
-  mmcx.lvl [00 00 38 00 40 00 ...]     -> no 0x10
-  mxc.lvl  [00 00 10 00 40 00 ...]     -> has 0x10, but skipped on 7.2 too
-
-Recomputing enable_corner under each tree's semantics: for cx, mx, ebi, lcx,
-lmx and gmxc, the 7.2 kernel's enable_corner = 1, whose level value is
-0x010, i.e. Retention. The 7.3 kernel's enable_corner = 2, whose level
-value is the real working corner (0x038 / 0x040 / 0x0c0). For mmcx, mxc,
-gfx, nsp, nsp2, mss, ddr and xo the two trees agree.
-
-Note that mmcx is NOT affected - I initially assumed it was and the cmd-db
-dump disproved me. Worth stating because it makes the hit list smaller and
-more specific.
-
-How it maps onto the failure
-
-rpmhpd_power_on() deliberately does corner = max(pd->corner,
-pd->enable_corner), so enabling a rail without an explicit OPP vote lands it
-exactly at enable_corner. rpmhpd_aggregate_corner()'s presync_floor branch
-then does to_active_sleep(pd, max(corner, pd->enable_corner)) - it reuses
-the same enable_corner, so it does not save you here.
-
-The rails in that hit list are the ones the DSPs depend on. From
-qcom_q6v5_pas.c:
-
-  sm8550_adsp_resource   proxy_pd_names = { "lcx", "lmx" }
-  sm8550_cdsp_resource   proxy_pd_names = { "cx", "mxc", "nsp" }
-
-So lcx and lmx are affected on 7.2 (both have 0x10 and neither is
-whitelisted), and cx is affected while mxc is whitelisted and nsp has no
-retention level. When the display and camera votes go away on DPMS off, the
-DSP proxy PDs can be the last votes left, and the rail gets enabled at
-Retention. What actually comes out on the serial console matches that:
-
-  qcom_q6v5_pas 32300000.remoteproc: fatal error received:
-      sys_m_smsm.c:322:err fatal notification received from TZ
-  qcom_q6v5_pas 6800000.remoteproc: watchdog received:
-      sys_m_smsm.c:322:err fatal notification received from TZ
-  remoteproc remoteproc0: crash detected in adsp: type watchdog
-  ucsi_glink.pmic_glink_ucsi: failed to send UCSI write request: -5
-
-TZ notices first, then ADSP falls over, then the SoC resets.
-
-Why I think this explains your result
-
-Your arm and the upstream fix do completely different things - pinning at
-the top versus deleting retention from the table - and both make the failure
-go away. They agree only on one property: the affected rails never sit at
-Retention. That convergence is what convinced me this is the mechanism and
-not coincidence.
-
-What I am not claiming
-
-- One arm I built (7.2 + just the skip-retention change, nothing else)
-  produced zero usable samples. All five attempts died in the display stack
-  first - dpu vblank timeout, then drm_crtc_wait_one_vblank WARNINGs, dpms
-  never actually reached Off. So I have not reproduced the fix myself on the
-  7.2 tree. I am not presenting that as confirmation, and I am not
-  presenting it as a refutation either - it is simply no data. I am
-  mentioning it so nobody reads more into the above than it supports.
-
-- I have not proven pd->corner is 0 at the moment of DPMS off. That step
-  comes from the reasoning in your commit message, not from my own
-  measurement.
-
-- Everything above is one board. If other SM8750 devices with a
-  7.2-era tree and DSP proxy PDS enabled at Retention do not reset, then
-  something else is also involved.
-
-For what it is worth, for us this is now closed: we run the 7.3 line, the
-fix is already in, and we need no local patch. The reason I am writing is
-that the observation is generic - any tree predating the skip-retention
-commit that enables an RPMh rail through a proxy PD without an explicit OPP
-vote can land on Retention. If you want I can send the cmd-db dump and the
-serial capture, but there is probably nothing in them you cannot reproduce
-faster on your own hardware.
-
-Thanks again for the pointer - it was the right direction even though the
-mechanism turned out to be one layer underneath what it looked like.
-
-Best regards,
-Qianhui Xu
-
+Best Regards,
+Hangxiang
