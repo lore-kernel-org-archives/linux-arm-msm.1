@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.42
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792751712;
-	b=MBMER/Bha0pSrqljaaaOeR45KV22VjT+OGUrSRYcv4OljwdlmkA1KaB/ga6Q0SvMjJkJ
-	 lL2SxTMubcdkmeqTMXf+qicfpxC61rvS0FrnKnx0S5bkAaJ8suyrOcW3hUgYf7aJ7nCrO
-	 w1z4y/kL9t0P6L/XI5dcv8pOB6MK3M5t7+/ZzllpyfF0ljk/r0ptJdVlDMURgEm4mMm+z
-	 mTPOUtvKmq3uUz7CnbCQE3bTjH6RjbxY336rFKAq3SdwcvW6z/MImkqGuRTJ+MxDefea1
-	 DFIXu/MEHGlEMuH8VSFsc9JXhGofe2RqWpQZmVpnFAQWH7twoKxo6TJWSRAeLvf0Zdg==
+	t=1792751714;
+	b=uzRoz9GlnzhKxsipum8lh6JmGWltsvzj2uVvtF3nDvgz4QBYAQTbtYQiPobskdaLwENS
+	 h1CJrpSN23qZBh/cTiU8vhuQYF1eaGL/rDIviNOT4gcTFq4AG1z62Dk2t21izdeFeK5/I
+	 951IA5OSfWMDRW0gPtfUw/seaP4Oj8gnd0ncfgriouEXV6+zXRunuMtbqsHXZTPiaLgmj
+	 c+T9WG3MFopug4NFVUQLBkDAelFZUo675UNKByqlEqvuLDuVPeqZZXSN3PN8LOdeeB6Vr
+	 8NlU6ps27VQ/NgisS1ZP6nSeKzchXB6dQRBI17I0ElHPTONXDqFZjViVjfivSakVd7Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792751712;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792751714;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
 	 Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=zheX+XNXZRQsqnxaQohoj/DUJpNDERXKGAb12Po/cyU=;
-	b=eqxEejOyiJHVifJZR6lrMBtUAWckwZMsEtBykQMHdPXVUJUUFz0FBQyVNekNrCsSpWKA
-	 G9k1DbE6/szCsa7U/De5wSm3oAphTnCdCaXOgCygWMxT54EG5d6ZQj6Mk5QNeY7oeoml/
-	 0PnnYk/rpQQ7XhyhTzHheUnoTZJpH9Vnqp+r2R9gN5Ac4yh7LJFvhsu2R1pcMgzh9+UMv
-	 AhDg6AX2ozFa/BlREzPpHdFGwo5axO6Fq9C3M89KuDmfZQB8H/bEF1JQbiFkqd9XRI76Y
-	 2Kf6GQcYQxboMfhqiA44O64hLWA3y5Usya7zUx2AI3CdGLCHMc6/zqm+tGrOQisevjA==
+	bh=OAwUO3xw9jddafsCMcqvt+DK/SLIQKUYqgCB0JnxYDw=;
+	b=dGXY9dXePSByB7LEILgTgttCEcy0Nsbo6ysuFt5WSmXqOWHMQQ8Z0iXzgo0f6TWtI4oy
+	 m2lV7IGGZg3IYapgVR6yiheV7ZOlpdETTRdXVYkIhcH1f86O/RfM84tOPFFlZJSt/DiCV
+	 vU73raUFGS/ksrNPnH6rsL6FiOMxgykSTfXOq6hgqZ6p99D5FdN4cLuyngzYhIpdV8zGg
+	 UpzUOM+6LqwF2FLNNaWLxCkd9oT4Lx474GKSvnVTaKp3mNilSIe0TVuOKPd/PvhpnQP9t
+	 JpE/oAj0TGyYQJZgyrEMzW40fBbgQFtPeqezM/gOR+vwDGAuA163hWV+dr/wy126OCA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=jbPi0Iw1;
-	arc=none smtp.remote-ip=209.85.221.42
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=YvPzcphU;
+	arc=none smtp.remote-ip=209.85.221.53
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9149606A327
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:35:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B9149606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8949A60A2613
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:35:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8949A60A2613
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=jbPi0Iw1
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48e0d1da913so538610f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:35:10 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=YvPzcphU
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48c45111bebso379424f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:35:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1792751709; x=1793356509; darn=vger.kernel.org;
+        d=baylibre.com; s=google; t=1792751712; x=1793356512; darn=vger.kernel.org;
         h=message-id:date:references:in-reply-to:cc:to:from:subject
          :content-transfer-encoding:content-type:mime-version:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=zheX+XNXZRQsqnxaQohoj/DUJpNDERXKGAb12Po/cyU=;
-        b=jbPi0Iw1aJHhHQpSTnENb6ntTeL9VEqxE8JllgVE/SMQ4nuhMEkh4zx+11VIoWuI52
-         3BTFTNVDysE3hsDjdcIrC2ce8jd/csL8SC+1aeLIcZ4+eSLFIFvrX+y5gPvk7HMT/0WE
-         PotStsJWLKnX+8JwsooEHCrpzu7Bh8L3dLMVoaomEU8ipIABlUPyrfGIiCyitROzINV6
-         tr/iMvmyjZLrdv3eXDH+ialHhWtIkgGin+FPLUt+s1udrl42teOU7mHymHjLD+ZvNvUK
-         3f71xIKR6b70XQGlVcDFXYqOWG6/XUWAC1yzb7s1B6MsYziJ36L/8EZMWbiWtQ6sFS37
-         MXrA==
+        bh=OAwUO3xw9jddafsCMcqvt+DK/SLIQKUYqgCB0JnxYDw=;
+        b=YvPzcphUeUm9ntiRTjXKfvXX0Bscbb5UYsaP12qKD0C8ZUDh/CjG5GhOd30VyS901B
+         I7injMmS92W+KzSmo5Vnk04EdkGjUDDKA5Sx1u+znNMjnHEAmhw0cA9hDBYeNCPIBk/3
+         lalZ5NSjW2bDjo8ape9ruRipgTlQQFHtMidGrqzr++5bd8PeNjVTLlUyrNwpy0sO1wPb
+         PHPBODmv+H43y/gEzChKYND4BmwfNpF11Y210c3H9oTaqc+W1+1wbP2A1W6iggjqkLf4
+         mQ+5PXQ/1OTr8o/M5/RM/JwJbaLtIPPEBRbilXubhnYK09dJX8xEpS1zm3r72ZNl7Yuw
+         G4rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792751709; x=1793356509;
+        d=1e100.net; s=20260707; t=1792751712; x=1793356512;
         h=message-id:date:references:in-reply-to:cc:to:from:subject
          :content-transfer-encoding:content-type:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zheX+XNXZRQsqnxaQohoj/DUJpNDERXKGAb12Po/cyU=;
-        b=Yg4QJ1ndWZXNnoTNBUg5DV+a0/HMd3XstqiiYctARsxuQUELYjWR+75kfaHKHyDQzK
-         lUqR3BCLVUt4KeZsGZGcoI99nA2ngMp1OeENEo0CBqtw1AemgAYwHj/VZtemPE8suONV
-         kWLs+sBl6fjoKdktvxTKs8lXr2qQdePc36Xhl3RdzVUb0U2BnLpkRwI14j7cfvhkEVdq
-         47f0mPKqTz99tpd4tN1igDHqvr8nuiOKrHZCQ8eTpWAFBet4CXp6itW/Jr/gkIBMfp7S
-         ezB1yqaw+U7NPZdphl+2cKrvJVMGfQZpFvdYfXGXj4pPgH68mnv+3fWupxJBhivpBvR0
-         BS5g==
-X-Forwarded-Encrypted: i=1; AKwUvByesaxsPQYyBVe2kKRCDRIsLUoAB8QQ72KNqDf2pCgzyNsKM3eiIq4PiywQn37Mr1cNdI7nmS/iZfBpH3lz@vger.kernel.org
-X-Gm-Message-State: AFq9FYLSLBvNcOoLq2kuOMG2WKt15A9FzpNF0Va0IHScYhhaAO2qv+8x
-	lo8WS3Wt0V1/NNZN2OHjieeAHV1wsJ50qC/75N5DuNpnYa4+3hMAlYM8eSYCo/fLgQI=
-X-Gm-Gg: AYBFou3Bm417SrzEzQW63ocrI4LB7f+DbZ3U4XblCxKBBNTvh8us0PP8a+OwNRShdN0
-	rIaZrWQcm6kZUn3AUazZ+xzuiy9xKBKsQJyYVNz/XGRTUKoZ3KRTAErqvOwDmTxCCaDOOgEcMDT
-	PShgGfqMlF499/A4sfEvSeZtxGeQhW3meUGfD+Ove7S/NMLpvdUdMMd47uiCuYUlKFn5yUSvJZr
-	JXh/I+KXW+UOBdQU+zb9FG7rH7cdagC0TpLqZl9wogyi7a9v2LOL1RtYmnergo/CPDG5OWafNUM
-	MOEZfjjAcCdg+zJGI1L6k9iqoMUElo0s+7eRvcTcR2Cm2DL3yTHpBPsxF/j0bImNJy6POIGv4A7
-	+KAifio1bGzeQuv1Frt5wKBqgLnWJpK4WHzAP9zkwrlYZgQ5ioqSb8tn+YC1KOtQ5DR950ip6SS
-	xZI0/4myqBIrALopl0LlObXVGitgzU3qdX7yiasuIyNeLlbQYLZdOfRFwOUJZLwminO0gekXO5i
-	5J/5rT2voHgtI9eGH8eGfYLdk4lvtI+ZvXbA0QDM0s/JijmaXdwOEmMWrdenie/8OWhMDLc6E8=
-X-Received: by 2002:a05:6000:4713:b0:488:8566:9986 with SMTP id ffacd0b85a97d-48e2d0ff5ddmr10532774f8f.2.1792751709131;
-        Fri, 23 Oct 2026 03:35:09 -0700 (PDT)
+        bh=OAwUO3xw9jddafsCMcqvt+DK/SLIQKUYqgCB0JnxYDw=;
+        b=k0sSOGfZTZINuosN8w5wdeXzDzRa4GN3SPvvklMk/Pd9GWyWvnOgrfplhzfc4P2G4T
+         oPW9v42iLNUonfSStGZ8AbkegEUXnQV+viYGhPHWINRCk5pZZir83rJSPmxuluZy+92z
+         PEvnjF45jzbSnN06zTKDKzmm0A49bU5tSYdOYRIDBt8HuyCfZd+h1qQD8q9B55lg94Cl
+         U/4mfgIkzq6LMP0G9tz9NfkAcCK6RzJmC1vtsm+u7vJfEmbQAYwCDgqYV3VZRZdJt5vM
+         qYh2BBwPDIXlpxkZrXqhUcrw50r1GTeb8uB9hkHTQSFi+3QSGlu3LyGfVgjKaTsiKX6e
+         t7ZA==
+X-Forwarded-Encrypted: i=1; AKwUvByEwwuBqjjUBYbh8P8BUMkDI6LAZvYKQZlhuAC+zUIsGjSXzNXLr5wAkxORv5UtQZWETqScZ0iXuh6zWmmK@vger.kernel.org
+X-Gm-Message-State: AFq9FYLhtAKYIIHPPZYfYTYjz4L08uNF8gO6mu9exOGuq2r8XIz6dJ1H
+	IxHCSk5kvVVXt/Uszq325sXVapbHeVd0P8nrgvX8MJfCRiMJWsLGuvt3uTrFetlv9+4=
+X-Gm-Gg: AYBFou1te2Doi5KByByJDDO8HBQbCJPdW6q1Hf027HchgGtxEZsImEgMw7Hg2iIlz8i
+	HnMmHl1od1Fd1GSZ6yaeitXCBdv9kXNNnkYXEIYTUYZ8ZNKislOqDZI3qe5ar/D4ZB0Zs7uE1OK
+	zU9XydY19lxgsbuN6BCRWKt/YCmSWakOHreVis+4t2iJw0jsinjDIUy8L649Y1bIMPNpW1L7cp2
+	e42SCqCgn4fjmXJdNQ5XGbbSaL+KZ5EBf+mwW4aAn2M5tWdWw/SFXsQNOyOqCxi81J+cLbDJ5I7
+	DOqIzofQnyML6+vhMRk3Ikv+lU4BwP6Aepm4evEN1kRigulb5/IdKZYXEn0feqvZSgZRsUE5P9Z
+	ogDhyIqHe+vFDen1k8QIboHcF3vyaDQm39EadkRjKrjOVdssucNQcx5ya1wI1MfsDXJeb++v0Yo
+	Krz+4bRVqcFi0C4JMIV2ie3AfIRfgB7iJbd0bFtg272nt6jE+KtmQtpzELeKJ9oOvxtko1HTs5A
+	UijF5hSKqSQUPQB4jgGL931chxC6iLruCCXZo1KwgNwnQ7uetblWaDhjlBfphFTf0AmwKvo2TA=
+X-Received: by 2002:a05:6000:4916:b0:487:a15:b4cc with SMTP id ffacd0b85a97d-48e38595e5bmr2679426f8f.23.1792751711919;
+        Fri, 23 Oct 2026 03:35:11 -0700 (PDT)
 Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e37edef81sm4665234f8f.5.2026.10.23.03.35.06
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e37edfb3fsm4713525f8f.8.2026.10.23.03.35.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 03:35:08 -0700 (PDT)
+        Fri, 23 Oct 2026 03:35:11 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,8 +90,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC PATCH 00/16] Centralize the ownership of power rail votes
- for Qualcomm clocks
+Subject: Re: [PATCH RFC 02/16] clk: Acquire resources for clock transitions
 From: Jerome Brunet <jbrunet@baylibre.com>
 To: Konrad Dybcio <konradybcio@kernel.org>
 Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
@@ -110,67 +109,66 @@ Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
  linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
  driver-core@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
  devicetree@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+In-Reply-To: <20261014-topic-qc_clk_dvfs-v1-2-3041b788e9f7@oss.qualcomm.com>
 References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+ <20261014-topic-qc_clk_dvfs-v1-2-3041b788e9f7@oss.qualcomm.com>
 Date: Fri, 23 Oct 2026 12:35:03 +0200
-Message-Id: <179275170360.4070168.15401690927522463377.b4-review@b4>
+Message-Id: <179275170360.4070168.11650113664838519061.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2455; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=ib/lADe6pfUlXtQQRTg/Q6ldBcUGQ6EizR7YFWwG8S0=;
- b=owGbwMvMwCW2VtK+WnvWU3HG02pJDFm3LaKslnNIt9+eW5eVWGnBkLVM2WF645Ynpy6/Ti37q
- Cmld9qwo5SFQYyLQVZMkaWGu1r8naTWl1nTdW7DzGFlAhnCwMUpABM5ysPw3yPFaaeKL2ODTfM7
- 2y2CDQfkp32sXXf4y0xfpxPLPxg2qjIyfO2Yq5Icx6SspT1v0g6hZtY2f8FY5fvTF0oU3Nu7dct
- CNgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2342; i=jbrunet@baylibre.com;
+ h=from:subject:message-id; bh=dNgQAFqyGnVxmM7oecHvQ23reWhdI9mPMjanH5L2B3M=;
+ b=owGbwMvMwCW2VtK+WnvWU3HG02pJDFm3LaJkUwN+3WXTmhS0Wn1LV8+H60VT70se+bvq/c/mj
+ X9XzNSO6yhlYRDjYpAVU2Sp4a4Wfyep9WXWdJ3bMHNYmUCGMHBxCsBE8tYxMpwu5GVlv+ARel/H
+ l4mrmS0wQetMf0lT0c80eYtlV0OENRgZLlT8mjPF1ViKdcu9H62FN3cvnnFj228+iQvsp3ccXsR
+ nxw8A
 X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
  fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
-> On Qualcomm SoCs, both the PLLs and other types of clocks alike require
-> specific voltage rail levels to operate in-spec, but through the
-> separation and decentralization of clock and voltage votes, these
-> requirements are often not met and are never explicitly stated.
-> This results in clocks being undervolted, or at the very least a state
-> we're unable to reason about.
+> Preparing a clock protects its current requirements, not the resources
+> needed while changing its rate or parent. A transition can temporarily
+> use both parents or access an unprepared clock, and a parent rate change
+> can cause other clocks to be programmed too. Raising resources one clock
+> at a time leaves those operations exposed to insufficient power.
 > 
-> The devices consuming these clocks very rarely have their own
-> requirements in that regard. (1)
+> Failures make this worse: hardware may already have changed when the
+> operation returns an error. A matching cached rate is then not proof
+> that resource reconciliation finished. Retaining a temporary enable
+> reference without a corresponding prepare reference also breaks a
+> consumer's normal disable/unprepare sequence after a failed reparent.
 > 
-> This series moves the frequency-power_domain-perf_state mappings inside
-> the clock drivers, ensuring a single, trusted source of truth is
-> established and that the silicon is no longer driven at out-of-spec
-> conditions.
-> 
-> To illustrate the nuances involved, here's a couple examples of hidden
-> dependencies, as found on SM8650:
-> * video_cc_mvs0_clk requires LOW_SVS to run at 900 MHz, but the
->   PLL it sources the signal from requires SVS (higher corner) to
->   produce that frequency. Similarly, to produce 1140 MHz, the clock
->   requires SVS, but the PLL then requires SVS_L1.
->   Analogous story for mvs1_clk.
-> * gpu_cc_gmu_clk requires MX to be at SVS to output 625 MHz, the PLL
->   requires SVS_L1 to produce that frequency.
-> * A number of camera clocks follow the same pattern.
-> * Additionally, some clocks like cam_cc_cci_{0,1,2}_clk require
->   MMCX to run at LOW_SVS, but the PLL has the additional requirement
->   of keeping MXC (a wholly different rail) at SVS_L1.
-> 
-> There's a broad agreement that a consumer should only have to care
-> about the clock it consumes, and that configuring its parents is the
-> responsibility of the CCF. Requiring the consumers to care about the
-> above cases (as is the expectation today) is a clear violation of
-> that contract.
+> Make CCF acquire the affected tree's and parent paths' resources before
+> notifiers or programming, and reconcile them only when the walk stops.
+> Keep fault recovery independent of rate shortcuts and subsequent
+> consumer reference-count changes. Require explicit recovery of an
+> ancestor's uncertain parent selection rather than reporting success
+> from a descendant request.
 
-This is a fairly bold statement. Yes, the CCF's task is to make it as
-easy as possible for a consumer to enable, disable and set the rate of
-a clock, and I agree a consumer should not have to know what the
-parents of its clock need.
+I don't think all this is necessary to address the problem described
+here and in the cover letter.
 
-That does not make the framework responsible for it. Taken that far,
-the CCF would become a de facto platform coordinator, which it is not
-meant to be. The clock driver knows what its clocks need; the framework
-should give it the hooks to act at the right time, and stop there.
+IMO a new provider API is the wrong layer. The framework already has
+the hook a provider needs: the rate change notifiers. What the core
+should do instead is fix those notifiers, which do have a few issues.
+You are fixing one in patch 1. Another fix, about setting the parent,
+was sent recently:
 
-When coordination is needed across devices, there are dedicated
-frameworks for it, like OPP and genpd.
+https://patchwork.kernel.org/project/linux-clk/patch/20261021-submit-clk-parent-abort-v1-v1-1-2936181822fc@gmail.com/
+
+You want to act on some changes before anything is programmed. PRE
+notifiers are the right tool for this. The user of this change in
+patch 7 could use them AFAICT: PRE sets a temporary vote, POST settles
+it, ABORT drops it.
+
+Also, what is acquired here follows the requested clock. When an
+ancestor switches parent, the chain of its new parent is not acquired,
+although it feeds the whole subtree after the switch.
+
+With notifiers, the parent fault state is not needed either. As it is,
+it blocks every request on or below the clock until the same switch is
+retried.
+
+Could you tell me what you need from this approach that cannot be done
+with (fixed) notifiers?
 
 -- 
 Jerome
