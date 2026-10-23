@@ -1,112 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792742971;
-	b=ZuYoNT9cGWXnhPiDnAzxVeDpyKgqKBceR1ctrTuS2YDiX5P0bml4KnZphunhaZo5oK9B
-	 JaEF7sn/bExlKbLOg51xLKy9DDq/MGW7+509F9qkgldTcRQ920PYszouTqOThH+/3cQeJ
-	 oyLtQgFQVF1S6EYiMlsOj3iU13AWKa7ulgJvn4XQc7wOq5gKCfgdENsXFob9nX5J0IpxG
-	 hKHfbOamQcI6klD/RL6sRUyXfvvE6BOAk7q/TgaeRIkM6zGHVCuoMU9VLB+0XUAe2kVmC
-	 ucPYNCFF2abBt+SkpEMag0N60/kYPK5t93lXJTfB1zM9xDlWreJGR7HZ5EY4ZptPuDw==
+	t=1792743041;
+	b=I2MkCgSXr2eHB0aSx3psuB5y6EHSRWKcHIEbyK7MeoEi/GFzIzDkR9Z6wqVP0lBQNUEE
+	 Aeg0N9EoRqigT+hQwhFYto68BsdR5a3/hjM6zbACslFAzZpflHgx48YMH8ykWkIo7hdxL
+	 b+Y75o8Ce3OFvSvWO+B6ueBTC18K1vW8huN1ITlkC10+vwbk/cVWZuVp2YroJI87roTnn
+	 fgrHqcqgX1duHW2ZHCiaa/bmgt85xCFLkvNSODZGBdAibZOVgQjIAkjQxO6ZjEyVToZK4
+	 5pr4v0LHjalGbFYpO9kwf3oG7PhQGgifPB5oauayr6/4+i6zwZU6WXU93nJ7+FL0fow==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792742971;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792743041;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
 	 X-Google-Original-From:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=CQ2YyH4++3exGu8Dsbj56zfhqJFgMR7Ojx8rJjCB2pU=;
-	b=nOhIQHeAc5wj41N69EHvAGKwiohF2GeBwyjUkHzuo2j+xi+v+tEfLmMMMXTYbZo5ZoAB
-	 PZaj//2N+ojWoFp2Ss/QQ2GRzYg+wJS4Mx+yIfENsvINVtEcGkVpn4WnZLKnAnKcmYqXF
-	 Z4GmvxqWzsgHSAkErj4Ot1UptQ8QhwnfLL3CAUyZPXQwhj+7sVJ6OOnl+uKg/O+8vqGXP
-	 rIKeEDpmKs7CbK3CVDFamU4ZiBHBVe3QM0tAhdlL4Fn5EOXw26Wj9CpHj6V39eyBlN13l
-	 RrKOXq5DpYKyG8PLkJC5aBrWJ1ZDhAL8aNtSVBUHGWCpu+qv4ieo/Sn11IDp9SLg9JQ==
+	bh=Qt1u1PGQnVLwLZKEH+hp9Dtkn1RKbERmxA8BWP6q4N8=;
+	b=0STburZlDkwW7h+gxMjk4AqrgKneaUeQRlmhaFyWMkGgPbZl9rzY2cnjsbYaE6oHUGiT
+	 MSVSl4k6Yh6bV6jZWwhjS+9VQXe0dWUrsEXby3FA4KXGqcD4YXQJs/+Mpyol8b3uT43tU
+	 eZ5W0vA+t+cATEKgsaMN/Fk2joe72bMeU7ntqfpHfAENsyNZD+XoqdCE8sfFC5S1KPgKP
+	 DffPZq5d/v97ixY7X1OfUkeAv6Jkjoy4fJwQehvuU7v79eGxI5MTAEdH5o2aDx+vXJVtj
+	 uhFDlkdecsYnmIntPn9Uffg6MDwUQ6ZevWIt/q3cDH4uUaYY4B/PCFIMkHdgkN0qKig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cNcprOtw;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iGK+P1jL;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U7fHBr2Z;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=e45Izuit;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCF9C606A31E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:09:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BCF9C606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B171D606A331
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:10:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B171D606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cNcprOtw;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iGK+P1jL
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7F9BK2112143
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:09:30 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U7fHBr2Z;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=e45Izuit
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7F7CO3154001
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:10:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CQ2YyH4++3exGu8Dsbj56zfhqJFgMR7Ojx8rJjCB2pU=; b=cNcprOtwMNh5Oi4h
-	r3L66XeDSgSmfw/FUnVOAv+B1nuzcciIZBrqAwIhbBqT/42G8t3fianzwYY4Sf9e
-	macp0YR1D5KGxxUdvchfH+L1xzAnboF9YT2Cpz7V7ZtrcL9jsYd0tiqH+A+DLrFb
-	IPvrNn2ungTZUwLId6ohquj79Dz47wr+R//3FRreEDcYOFmZzzDY8r0CfCs+azBy
-	ubR9r8z0ip4ERf2fZGQjak5vSoab0LWEHEhZyx0KJOqpzCUuC7mZihq7NODcy56d
-	4niHaV0S0cIU2pORGL9Qe0kANfWbtzUQak4qV/izDkKySV+KDWVcmYO7Kbf47LyB
-	BNhHXQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfsyka3ax-1
+	Qt1u1PGQnVLwLZKEH+hp9Dtkn1RKbERmxA8BWP6q4N8=; b=U7fHBr2Zzr5BzR0l
+	GZ4p+H51nKm9WVAQPxZtK5Fxkawu2eyIUw8uq1dLaEEiMmoXZzBSEOt1Ca9eoWJh
+	Lmldut7xSV7XBgCfpN1LqCL+BlRp56ZaYaSsa4GwxE5GF1t7f/hD6UuuO/Nb3+Ie
+	pzBPhe/0u5Dl7/AVXrCPWXw/OJQQoSxrCbRu2YwIGvD6Eh/ZW3w29qV+5Ex5n93u
+	V0Ekb2Macw7YJI7/WfuTkPsM2grc2qboRWV1y9a+c6TX6khVSg8MVWZxO16ccf14
+	DwWONyUX847Rs1JDb87TeUaYuMA/se/zirkPxWskU8S8qCLB8g+30G4DDdGoCCK/
+	zHAsZw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmramy0-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:09:29 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2df8d1e91c9so10900035ad.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 01:09:29 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:10:38 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3aaf955db5fso1078169a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 01:10:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792742969; x=1793347769; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792743038; x=1793347838; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CQ2YyH4++3exGu8Dsbj56zfhqJFgMR7Ojx8rJjCB2pU=;
-        b=iGK+P1jLoZJWFPJCVY56cmCV4IpT1RsHJOnlPRF1vgJ1VlnX3iXzL+DrPHBZ5v2dVX
-         4mJkZTVfNwcOdsN43Hvm8GtosgS1QINpiehh143OFsLmKmMd6MbUWKYkq2K46wgDVi/E
-         bEvK1a7pmsZdhy7nRtOgHo+pQf0E3tEX2dJk+IUWsKsKZ1iRZZZqZ2U5rv98dAW01jxj
-         KwqkGnLCrxysp+UpgU2HOeyYsBc6mvHOC2ppuCPQvRY+lUyQpZbF00zJw+0ZlNz+N40t
-         e86WvwI23Xok2GrsBiF1E9sjSCVdFdvUhMbhCNmt3pfXezN7TS0rLya1BuhMjuPyLZlC
-         NXDg==
+        bh=Qt1u1PGQnVLwLZKEH+hp9Dtkn1RKbERmxA8BWP6q4N8=;
+        b=e45IzuitG6Hw89f+NJpwhNPo7fkPr1mPDbK5eNSuPgeGFFPxZgTihpkaIE5kSnEpm2
+         8eEz86Q+00rU62TzH/J89CW09JSQBz7m0+19upcVb4m9kUBJa+n3BFO/MLwkcGm7f9lR
+         rG60NjoorCDNbBeaALnYfsrBabFXNiKFOuKXl3v27p9xU2xriQExjJbO2I/7QbQpwNRm
+         Pf1H34Rqvvj9b82SyQVVmjbtEB0mosfLqp4v4+vOFwudUv6mXMFKnwOk1Wo+V1YwVn+/
+         7rieHIvIXkzENGZXQo4DTI/SDgh40bjscMXXphHeU6/RK/ENh+6Nr4TcXYTVmdARCvBJ
+         sJug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792742969; x=1793347769;
+        d=1e100.net; s=20260707; t=1792743038; x=1793347838;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=CQ2YyH4++3exGu8Dsbj56zfhqJFgMR7Ojx8rJjCB2pU=;
-        b=FBatXJj1wIYU2rk+pDdf/H1DUpaUmuedgh6Czs9cKgJDQ7EFupLhzu7jNZZv9jHtf3
-         Yx9CsuoDXL4iOGDZTzkPn7yWf15+2uMNdHC98LQVNRvhb2keZ+KumChtjbCKAF4bTa45
-         +Dj/ZD1E/rGL0+pKLCJ98fV2dpv1yBX/KtZtVaVr7CTefBgQta2QY9pt15HkZKd4WzUZ
-         bIg4KIlmlM9wybuSJem/PVwLWJKTl0PjeTPNpDWmGPu1q3uBkrEskeNJJO1kGEKzFM55
-         QJpQQFCg9tjmw1cfoclzp9DJcgfwCCyKFOc/4Do7qxbm8G+HkI2OQu5SdFutK7bjxvuS
-         uv9A==
-X-Forwarded-Encrypted: i=1; AKwUvBwlW+/9mU6NkXqPAl/Xuv0EKQN0VhmnFNu7RINFPS4i6h0L9az9PFCx6L+RdL48RwwpFmOd0P2qXdEMdsD+@vger.kernel.org
-X-Gm-Message-State: AFq9FYKKNOF6JxlyWQASQojnB8XrmN+J96VC1wQVgnNbdu5u5LS1HgDf
-	Z1iHsIobrC4zcMvGxd/Yq263QyepdhQT9eqtC5ysBnA7IkK6VVolvZgJbkCjT+pMXDcRTj5pZcx
-	bBwFbSJ+L6baJ+Fsw0hqzj37qmheb0qCSPkBgXI9bksevIP1p/pO41B7e8nepJUCABjaZ
-X-Gm-Gg: AYBFou0/iEdMN4NS8kypH6n6ejvGnC+wG4vnH8m/QDRlJdgPqIBfyY4RAl3Z+C1Zn8A
-	9QoNA5TU+9Snwd/U8mdM08ei/Hx+drIgcJ6FnPNsxMM+DR47tg7z/eEIcnYd4TFKCio1Z59rg7X
-	zwdTT1TZa5IOYWPAEvqOcB/1ZQw4sNvoFXhAkYT4VPuLkxACNuK/boRruOiGTjwcmWEHrqjSi/G
-	gnoWgTBVCFRd9l5cQ5oAatHINf9JAgzkt7Hn3Yw/ttXVzCWy40W6mmU1DPxStsUMkVidql8GFlP
-	nktOyw4EH3VIElPh970RLRObsW7uxklA7BWPfJtxzxHxzMF3HhV+E/tXoKc8vhVyt8+jhCPYmTy
-	FaspzKm017NECe7PksLmyq+dnuTv3FrAiJw==
-X-Received: by 2002:a17:903:2f8e:b0:2e9:776c:d52e with SMTP id d9443c01a7336-2ea7d12b226mr15286025ad.52.1792742968626;
-        Fri, 23 Oct 2026 01:09:28 -0700 (PDT)
-X-Received: by 2002:a17:903:2f8e:b0:2e9:776c:d52e with SMTP id d9443c01a7336-2ea7d12b226mr15285435ad.52.1792742967925;
-        Fri, 23 Oct 2026 01:09:27 -0700 (PDT)
+        bh=Qt1u1PGQnVLwLZKEH+hp9Dtkn1RKbERmxA8BWP6q4N8=;
+        b=wlsSqXrTlS+MLfK8igR6nHG4qnDbD5WfnsZhjFCEyrFDC5SL4kD5sPqPaVx4LHlhga
+         wswCx/YCfkNow9vb54SMMAPVwqptxvFr6U8pwEQUA8j2yOdTMl2qZSFmoI2L+SU05Tyk
+         U9F3VcNI7Ydgtkn1gxe9wk1qNXSrXoDlOCvTRVTUx0Ye4pvt6oJpS0ZUX3kp2GkWDjz4
+         90t3cDt0Us9p3/Lf96nk84k6cmjyRZ/OGgws/dcVTUpYvqQJOvfxFzoHLD62yQM8DVCX
+         JohFiJjuDjYhKjt0Gd2ydHbV1kLAtWu0RJh/a892Ag3qPgaoDh/GXqWquz7W6QH05bAw
+         g12A==
+X-Forwarded-Encrypted: i=1; AKwUvBwvSVbGzCuuwdjxf4C79QNADhwSEdWvyY8jPT6cLzp5VoRd2qmeH/n8dus3ABt2rxDrFTgfENyC/qpfW1B8@vger.kernel.org
+X-Gm-Message-State: AFq9FYI+KZ2jIKV+3bAvuJzI+TVwck7XJ566Q+w9U5i3awhOux212RoU
+	+WmhR5a18Xue3y8Np7DDdWwpYO1IOSJZ1ilIba9s0rtAnOeS5FrXN3isGKrGW+A8AgP0IK2k+ZH
+	qzstdbTM6uvT5T+5KIcVI4RH62BROP8lG7G7fnOXBuZi2R8zojvqMr4gjXXKUQy0z8cfq
+X-Gm-Gg: AYBFou1t06TAo++o9MXBZ6gnDezrTAql5LV9yFXi5et4YVZCAIp3qQY5o/DP+AQQheW
+	3tpdHqWyyr7R9Hlg1TqF36LEeWqSl2jXlZyZdbpUFQ7Ngr1Wa1ZK6w8Ov72qz0hOUrUYAgd41sP
+	k0MhPSCz6vuRMFwHJKB/0Q29HPAlX1dYGmC5NWtCwMX0ZISAucA3JBkL6knIvH40ZpDclxa50Hv
+	ulriQJEPJ5LGE6CdB868rBAQHZVtsbQ2XOfM8/tOFxeqntGBpHEmzNhqsMzXbFarcAhgoM0vauH
+	GGZO2ZJ9MT4KWMv0QAbmbO7t1eogh7R9ACIMDz3aZbxj9TqYiD48gnIp+3aZzPelYa2IIqdf1x2
+	OUf91RpNXI9QVDIpr7dgUS8lWanogajg0xQ==
+X-Received: by 2002:a17:90a:dfc3:b0:3ac:97e3:7389 with SMTP id 98e67ed59e1d1-3adce072ca9mr1162570a91.44.1792743038017;
+        Fri, 23 Oct 2026 01:10:38 -0700 (PDT)
+X-Received: by 2002:a17:90a:dfc3:b0:3ac:97e3:7389 with SMTP id 98e67ed59e1d1-3adce072ca9mr1162541a91.44.1792743037308;
+        Fri, 23 Oct 2026 01:10:37 -0700 (PDT)
 Received: from [10.204.79.28] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea7b350f59sm7089615ad.18.2026.10.23.01.09.18
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3adcb0a11fbsm2517749a91.4.2026.10.23.01.10.27
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 01:09:27 -0700 (PDT)
+        Fri, 23 Oct 2026 01:10:36 -0700 (PDT)
 From: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 X-Google-Original-From: Jayant Shekhar <jshekhar.shekhar@oss.qualcomm.com>
-Message-ID: <524d5dfc-c6fe-4346-9264-c5ec98850b23@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 13:39:17 +0530
+Message-ID: <ae967eb1-cc54-4733-9e89-bc375e1cbfd6@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 13:40:25 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,9 +117,9 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/13] drm/msm/dcp: Add VirtIO transport and platform
- driver
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+Subject: Re: [PATCH 01/13] dt-bindings: display: msm: Add Qualcomm DCP
+ bindings
+To: Krzysztof Kozlowski <krzk@kernel.org>,
         Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         Dmitry Baryshkov <lumag@kernel.org>,
@@ -147,703 +147,115 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
         iommu@lists.linux.dev
 References: <20261015-jshekhar-drm-msm-dcp-v1-v1-0-48aad0fe4f72@oss.qualcomm.com>
- <20261015-jshekhar-drm-msm-dcp-v1-v1-10-48aad0fe4f72@oss.qualcomm.com>
- <gegmh2qb7odywjesxlvrm6knjjwsx6g2xfif2s6wq5zn7y33q4@gpdwz2ajlm4i>
+ <20261015-jshekhar-drm-msm-dcp-v1-v1-1-48aad0fe4f72@oss.qualcomm.com>
+ <20261015-heavy-clam-of-sunshine-8fe831@quoll>
 Content-Language: en-US
-In-Reply-To: <gegmh2qb7odywjesxlvrm6knjjwsx6g2xfif2s6wq5zn7y33q4@gpdwz2ajlm4i>
+In-Reply-To: <20261015-heavy-clam-of-sunshine-8fe831@quoll>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzMiBTYWx0ZWRfXxMAV1eq7XR+l
- 8xfRssCMekQlc2ZF5ZX8MwYvPmWJSzK5UBPhT0/drcdzKQ9BCePXp2FJLa3R1E98/3DZxy85GKn
- 0mVrxTsu8ql5DrsZduCsJyF15WFEzX0MA4cWeHd4H7Rj7At3OkEPmnJmuI6qq84xUwDxQm+3XY2
- HD+XbzDkEcmRwOzmSa0XX2pGoOZBn8t+IATlIhBciftDTaP4vt5gLJGkQV88Mx1OUpK+X6EF3U6
- DGfLcq90UcE8X1uQm58a0uZAVEEHZe6w16jTJR/C6O9KW3rp+sWEf/QX3JRSxf0zOLYGOdDL2Xk
- +YeSs9J6IVm9d9IIBljyzcS2wxZaWTm6/H4eSqhEMyHZ+pFGsJxHK6DUg7H7dHigiYP6XHHG5o6
- j2AkCYWAPNijM7nyzBnDUJRnTnNxxXDVDis1ID6HoOoVul0j9wn7K0AkKRzokIhMU19fnJtQ9Rj
- N73sltUR4Yk20w/K0qA==
-X-Proofpoint-ORIG-GUID: 5J491vFVm7-4csFELKy7JivAeaVO6yyB
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzMiBTYWx0ZWRfX4NCkOQFTjim/
- LZKGPacVaZQljzur8S7V4o70K9gZamBWEIxq7oYXW2/uYkoTmugJjR1++UbH5x3njYNhXrS+aSr
- 1kqKDOqBcgaz9NkapHEHOhjOD+Bde1I=
-X-Proofpoint-GUID: 5J491vFVm7-4csFELKy7JivAeaVO6yyB
-X-Authority-Analysis: v=2.4 cv=GLKdgeNK c=1 sm=1 tr=0 ts=6adb1639 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: vD9qsgD4u0kehTtHDmgSXBq8uxFYJq8j
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzMiBTYWx0ZWRfX832ECRymoQV9
+ np7ijct1xO4z4ReUDyiyzi92kvSrXVUJJpFeLDq21GhQbmtI9Ig+m5RJ38qJnLN48lGSpBvCmxW
+ l9u7JToz2zURWabyEpXqfqcTAwT0XDA=
+X-Authority-Analysis: v=2.4 cv=VNZIDNPX c=1 sm=1 tr=0 ts=6adb167e cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=5Ai3m9dWi82lR06rT2wA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=P-IC7800AAAA:8 a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=CvYCOFMdU_owP9l6gQwA:9
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=d3PnA9EDa4IxuAV0gXij:22
+ a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzMiBTYWx0ZWRfX8OdF2patEyI1
+ o00mMIE8DvMnRybUhM7eSiCzL5iEPBb8XdL7+q7l8HFbNuZ8z9FwJ6f9xujHHa0sGBiWts69bB4
+ QYcUqU6xxsAKRuL0EUMadu/TgSnE/5RkQYtHl7wOJu5Ujl6UfI1u8zdGw4WG6QaM/+dXPDf6RGt
+ G/jbUrdhWD8NqJMw5labz8IfIQrI+9/qEfB50K56L0Jhnvb6alawUkN5VCFx9jtTP4tfhoAKuAv
+ v7axBwpFWXjKPcM8jpPoDN5w/LbJOBU7DLzGVr7nwh4R5l4+QgIjoKVgP2NqK15rR3+Pv4iC4o2
+ ZYlzOFk93/eBpDdEYj1lbRSBIRJgUxGEkcOdWMnq/rfx5dkY6KWTE5RzS1zOmWzBcRKc3N/6AvA
+ z6SxjIV9NXXbE10sjAYi5YtLWw/IWnPPfgwGQNEskE+X9BG684DxIgNxYGkZMFiv6VE/Y8CkUuR
+ YbTgudjeIwc8x21WVAg==
+X-Proofpoint-ORIG-GUID: vD9qsgD4u0kehTtHDmgSXBq8uxFYJq8j
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 suspectscore=0 malwarescore=0 adultscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 phishscore=0
+ impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230032
 
 
-On 15-10-2026 18:36, Dmitry Baryshkov wrote:
-> On Thu, Oct 15, 2026 at 01:08:30PM +0530, Jayant Shekhar wrote:
->> DCP display hardware is controlled by firmware and exposed to Linux as a
->> VirtIO function. The MSM DRM driver needs a platform driver to establish
->> the transport, DMA/IOMMU address spaces, power-notify path, and display
->> component.
->>
->> Add the VirtIO-MMIO transport and DCP platform-function driver. Set up the
->> DMA/IOMMU identity, IPCC client, VirtIO queues, HFI transport, firmware
->> capability handling, and MSM DRM registration. Synchronize suspend, resume,
->> remove, and shutdown with in-flight HFI activity.
+On 15-10-2026 16:20, Krzysztof Kozlowski wrote:
+> On Thu, Oct 15, 2026 at 01:08:21PM +0530, Jayant Shekhar wrote:
+>> DCP platforms place the display pipeline under firmware control, so Linux
+>> cannot discover display resources through direct register access. The DRM
+>> driver therefore needs device-tree descriptions of the firmware transport,
+>> display topology, IOMMU contexts, and panel connections.
+> Due to dependencies this cannot be tested, so limited review.
+>
+> A nit, subject: drop second/last, redundant "bindings". The
+> "dt-bindings" prefix is already stating that these are bindings.
+> See also:
+> https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
+>
+
+Thanks, will fix this in v2.
+
+
+>> Add bindings for the Qualcomm DCP VirtIO display function, including the
+>> INTF graph and DSI host outputs. Document the framebuffer IOMMU context,
+>> IPCC power-notify mailbox and interrupts, firmware display topology, and
+>> firmware-visible IOVA window supplied by the parent VirtIO-MMIO transport.
 >>
 >> Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 >> Assisted-by: LLM
 >> ---
->>   drivers/gpu/drm/msm/Makefile         |   2 +
->>   drivers/gpu/drm/msm/dcp/dcp_drv.c    | 245 ++++++++++++++++++++++++++++
->>   drivers/gpu/drm/msm/dcp/dcp_drv.h    |  19 +++
->>   drivers/gpu/drm/msm/dcp/dcp_virtio.c | 302 +++++++++++++++++++++++++++++++++++
->>   drivers/gpu/drm/msm/dcp/dcp_virtio.h |  22 +++
->>   5 files changed, 590 insertions(+)
+>>   .../bindings/display/msm/qcom,dcp-dsi.yaml         |  75 +++++++++++++
+>>   .../bindings/display/msm/qcom,dcp-virtio.yaml      | 113 +++++++++++++++++++
+>>   .../devicetree/bindings/display/msm/qcom,dcp.yaml  | 119 +++++++++++++++++++++
+>>   3 files changed, 307 insertions(+)
 >>
->> diff --git a/drivers/gpu/drm/msm/Makefile b/drivers/gpu/drm/msm/Makefile
->> index 9910bd4f306d..e57aee483137 100644
->> --- a/drivers/gpu/drm/msm/Makefile
->> +++ b/drivers/gpu/drm/msm/Makefile
->> @@ -83,6 +83,8 @@ msm-display-$(CONFIG_DRM_MSM_DCP) += \
->>   	dcp/dcp_ipcc.o \
->>   	dcp/dcp_plane.o \
->>   	dcp/dcp_encoder.o \
->> +	dcp/dcp_drv.o \
->> +	dcp/dcp_virtio.o \
->>   	dcp/hfi/hfi_packer.o \
->>   	dcp/hfi/hfi_unpacker.o \
->>   	dcp/hfi/hfi_utils.o
->> diff --git a/drivers/gpu/drm/msm/dcp/dcp_drv.c b/drivers/gpu/drm/msm/dcp/dcp_drv.c
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml b/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml
 >> new file mode 100644
->> index 000000000000..e7016937a028
+>> index 000000000000..f7178c66c09e
 >> --- /dev/null
->> +++ b/drivers/gpu/drm/msm/dcp/dcp_drv.c
->> @@ -0,0 +1,245 @@
->> +// SPDX-License-Identifier: GPL-2.0-only
->> +/*
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + * DCP VirtIO driver.
->> + */
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml
+>> @@ -0,0 +1,75 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/display/msm/qcom,dcp-dsi.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
 >> +
->> +#include <linux/component.h>
->> +#include <linux/device.h>
->> +#include <linux/dma-mapping.h>
->> +#include <linux/of.h>
->> +#include <linux/of_platform.h>
->> +#include <linux/panic_notifier.h>
->> +#include <linux/pm_runtime.h>
+>> +title: Qualcomm DCP DSI host
 >> +
->> +#define DCP_DPU_AUTOSUSPEND_DELAY_MS	5000
+>> +maintainers:
+>> +  - Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 >> +
->> +#include "dcp_drv.h"
->> +#include "dcp_hfi.h"
->> +#include "dcp_ipcc.h"
->> +#include "dcp_virtio.h"
->> +#include "msm_drv.h"
->> +#include "msm_kms.h"
+>> +description: |
+>> +  A MIPI DSI host exposed by the Qualcomm DCP VirtIO device (see
+>> +  qcom,dcp.yaml). DCP is a firmware protocol shared across multiple
+>> +  Qualcomm SoCs, not specific to any one of them; Hawi is its first
+>> +  platform. The DSI host and its connection to a panel are described
+>> +  using the standard DSI controller and OF graph properties.
 >> +
->> +int dcp_subsystem_dev_init(struct dcp_drv *drv)
->> +{
->> +	struct virtio_device *vdev = drv->vdev;
->> +	struct device_node *dcp_subsystem_node;
->> +	struct platform_device *pdev;
->> +	struct device *dev;
->> +	char busid[32];
->> +	int ret;
+>> +allOf:
+>> +  - $ref: /schemas/display/dsi-controller.yaml#
 >> +
->> +	dcp_subsystem_node = of_get_child_by_name(vdev->dev.parent->of_node,
->> +						  "dcp-subsystem");
->> +	if (!dcp_subsystem_node) {
->> +		dev_err(&vdev->dev, "no dcp-subsystem DT node\n");
->> +		return -ENODEV;
->> +	}
+>> +properties:
+>> +  reg:
+>> +    maxItems: 1
+>> +    description: Index of this DSI host among its siblings.
 >> +
->> +	snprintf(busid, sizeof(busid), "dcp-subsystem.%s", dev_name(vdev->dev.parent));
->> +
->> +	/*
->> +	 * DCP is discovered through VirtIO, but display/HFI buffers must be
->> +	 * mapped through the dcp-subsystem node's DMA/IOMMU identity. Create a
->> +	 * platform device for that DT node so DMA API and msm_kms_init_vm() use
->> +	 * the display function's IOMMU domain.
->> +	 */
->> +	pdev = of_platform_device_create(dcp_subsystem_node, busid, vdev->dev.parent);
->> +	if (!pdev) {
->> +		dev_err(&vdev->dev, "dcp_subsystem_dev creation failed\n");
->> +		of_node_put(dcp_subsystem_node);
->> +		return -ENODEV;
->> +	}
->> +	dev = &pdev->dev;
->> +
->> +	dev->dma_parms = &drv->dcp_subsystem_dma_parms;
->> +	dma_set_max_seg_size(dev, UINT_MAX);
->> +
->> +	ret = of_dma_configure_id(dev, dcp_subsystem_node, true, NULL);
->> +	if (ret) {
->> +		dev_err(dev, "of_dma_configure_id failed: %d\n", ret);
->> +		goto err_destroy;
->> +	}
->> +
->> +	if (!device_iommu_mapped(dev)) {
->> +		dev_err(dev, "no IOMMU group attached\n");
->> +		ret = -ENODEV;
->> +		goto err_destroy;
->> +	}
->> +
->> +	dev_dbg(dev, "dcp-subsystem: iommu_mapped=%d iommu_group=%d\n",
->> +		device_iommu_mapped(dev),
->> +		 dev->iommu_group ? iommu_group_id(dev->iommu_group) : -1);
->> +
->> +	pm_runtime_set_active(dev);
->> +	pm_runtime_enable(dev);
->> +	pm_runtime_set_autosuspend_delay(dev, DCP_DPU_AUTOSUSPEND_DELAY_MS);
->> +	pm_runtime_use_autosuspend(dev);
->> +
->> +	drv->dcp_subsystem_dev = pdev;
->> +	drv->dcp_subsystem_node = dcp_subsystem_node;
->> +
->> +	return 0;
->> +
->> +err_destroy:
->> +	of_platform_device_destroy(dev, NULL);
->> +	of_node_put(dcp_subsystem_node);
->> +	return ret;
->> +}
->> +
->> +void dcp_subsystem_dev_deinit(struct dcp_drv *drv)
->> +{
->> +	if (!drv->dcp_subsystem_dev)
->> +		return;
->> +
->> +	pm_runtime_disable(&drv->dcp_subsystem_dev->dev);
->> +	of_platform_device_destroy(&drv->dcp_subsystem_dev->dev, NULL);
->> +	of_node_put(drv->dcp_subsystem_node);
->> +	drv->dcp_subsystem_dev = NULL;
->> +}
->> +
->> +int dcp_pm_prepare(struct device *vdev_dev)
->> +{
->> +	struct dcp_drv *drv = vdev_dev ? ((struct virtio_device *)
->> +					  dev_to_virtio(vdev_dev))->priv : NULL;
->> +
->> +	if (!drv || !drv->dcp_subsystem_dev)
->> +		return 0;
->> +
->> +	return msm_kms_pm_prepare(&drv->dcp_subsystem_dev->dev);
->> +}
->> +
->> +void dcp_pm_complete(struct device *vdev_dev)
->> +{
->> +	struct dcp_drv *drv = vdev_dev ? ((struct virtio_device *)
->> +					  dev_to_virtio(vdev_dev))->priv : NULL;
->> +
->> +	if (!drv || !drv->dcp_subsystem_dev)
->> +		return;
->> +
->> +	msm_kms_pm_complete(&drv->dcp_subsystem_dev->dev);
->> +}
->> +
->> +static int dcp_pm_ipcc_notify(struct dcp_drv *drv)
->> +{
->> +	int ret;
->> +
->> +	if (!drv->ipcc_valid)
->> +		return 0;
->> +
->> +	ret = dcp_ipcc_send_power_notify(&drv->ipcc);
-> An indirection just for the sake of indirection? Can we drop one-line
-> wrappers?
->
-
-Will fix this in v2
+>> +  status: true
+> I see slop, I finished here. Mind this maintainers summit words - if you
+> use AI, you must use good one, not the shloppy slop.
 
 
->> +	if (ret)
->> +		dev_warn(&drv->vdev->dev,
->> +			 "IPCC power notification failed during PM: %d\n", ret);
->> +
->> +	return ret;
->> +}
->> +
->> +int dcp_pm_suspend(struct device *vdev_dev)
->> +{
->> +	struct dcp_drv *drv = vdev_dev ? ((struct virtio_device *)
->> +					  dev_to_virtio(vdev_dev))->priv : NULL;
->> +
->> +	if (!drv || !drv->dcp_subsystem_dev)
->> +		return 0;
->> +
->> +	return dcp_pm_ipcc_notify(drv);
->> +}
->> +
->> +int dcp_pm_resume(struct device *vdev_dev)
->> +{
->> +	struct dcp_drv *drv = vdev_dev ? ((struct virtio_device *)
->> +					  dev_to_virtio(vdev_dev))->priv : NULL;
->> +
->> +	if (!drv || !drv->dcp_subsystem_dev)
->> +		return 0;
->> +
->> +	return dcp_pm_ipcc_notify(drv);
->> +}
->> +
->> +static int dcp_self_bind(struct device *master, struct device *dev, void *data)
->> +{
->> +	return 0;
->> +}
->> +
->> +static void dcp_self_unbind(struct device *master, struct device *dev,
->> +			    void *data)
->> +{
->> +}
->> +
->> +static const struct component_ops dcp_self_ops = {
->> +	.bind   = dcp_self_bind,
->> +	.unbind = dcp_self_unbind,
->> +};
->> +
->> +int dcp_component_register(struct dcp_drv *drv)
->> +{
->> +	struct device *dev = &drv->dcp_subsystem_dev->dev;
->> +	struct component_match *match = NULL;
->> +	int ret;
->> +
->> +	/*
->> +	 * DCP has no host-visible display subcomponents: firmware owns the
->> +	 * underlying display blocks. The self component is only the minimal shim
->> +	 * needed to enter the existing MSM DRM component-master init path without
->> +	 * adding a DCP-specific entry point to common MSM DRM code.
->> +	 */
-> And how does that work with the DSI probing sequences? The panel driver
-> might be not (yet) available when you probe the DCP. The driver should
-> register the DSI host, create DSI devices, but the DRM device
-> registration is only possible when the panel / bridge has attached to
-> the DSI host. See how it's handled by the mdp4/mdp5/dpu drivers.
->
+Will remove this in v2.
 
-I will add dsi component binding in v2.
+Thanks
+
+Jayant
 
 
->> +	ret = component_add(dev, &dcp_self_ops);
->> +	if (ret) {
->> +		dev_err(dev, "component_add failed: %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	component_match_add(dev, &match, component_compare_dev, dev);
-> Missing optional GPU match. I think I wrote that before...
->
-
-Will add in v2.
-
-
->> +
->> +	ret = component_master_add_with_match(dev, &msm_drm_ops, match);
->> +	if (ret) {
->> +		dev_err(dev, "component_master_add_with_match failed: %d\n",
->> +			ret);
->> +		component_del(dev, &dcp_self_ops);
->> +		return ret;
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> +void dcp_component_unregister(struct dcp_drv *drv)
->> +{
->> +	struct device *dev = &drv->dcp_subsystem_dev->dev;
->> +
->> +	component_master_del(dev, &msm_drm_ops);
->> +	component_del(dev, &dcp_self_ops);
->> +}
->> +
->> +static int dcp_panic_notifier_cb(struct notifier_block *nb,
->> +				 unsigned long action, void *data)
->> +{
->> +	struct dcp_drv *drv = container_of(nb, struct dcp_drv, panic_notifier);
->> +
->> +	if (drv->hfi)
->> +		atomic_set(&drv->hfi->shutdown_in_progress, 1);
->> +
->> +	return NOTIFY_OK;
->> +}
->> +
->> +void dcp_panic_notifier_register(struct dcp_drv *drv)
->> +{
->> +	drv->panic_notifier.notifier_call = dcp_panic_notifier_cb;
->> +	atomic_notifier_chain_register(&panic_notifier_list, &drv->panic_notifier);
->> +}
->> +
->> +void dcp_panic_notifier_unregister(struct dcp_drv *drv)
->> +{
->> +	atomic_notifier_chain_unregister(&panic_notifier_list, &drv->panic_notifier);
->> +}
->> +
->> +void __init msm_dcp_register(void)
->> +{
->> +	dcp_virtio_register();
->> +}
->> +
->> +void __exit msm_dcp_unregister(void)
->> +{
->> +	dcp_virtio_unregister();
->> +}
->> diff --git a/drivers/gpu/drm/msm/dcp/dcp_drv.h b/drivers/gpu/drm/msm/dcp/dcp_drv.h
->> index af2db3cf9066..ca8e5bd284e0 100644
->> --- a/drivers/gpu/drm/msm/dcp/dcp_drv.h
->> +++ b/drivers/gpu/drm/msm/dcp/dcp_drv.h
->> @@ -26,6 +26,25 @@ struct dcp_drv {
->>   	struct dcp_dpu_kms	*kms;
->>   	struct dcp_caps		 caps;
->>   	struct notifier_block	 panic_notifier;
->> +	struct dcp_ipcc		 ipcc;
->> +	bool			 ipcc_valid;
->>   };
->>   
->> +int dcp_subsystem_dev_init(struct dcp_drv *drv);
->> +void dcp_subsystem_dev_deinit(struct dcp_drv *drv);
->> +
->> +int dcp_component_register(struct dcp_drv *drv);
->> +void dcp_component_unregister(struct dcp_drv *drv);
->> +
->> +int dcp_pm_prepare(struct device *vdev_dev);
->> +void dcp_pm_complete(struct device *vdev_dev);
->> +int dcp_pm_suspend(struct device *vdev_dev);
->> +int dcp_pm_resume(struct device *vdev_dev);
->> +
->> +void dcp_panic_notifier_register(struct dcp_drv *drv);
->> +void dcp_panic_notifier_unregister(struct dcp_drv *drv);
->> +
->> +void __init msm_dcp_register(void);
->> +void __exit msm_dcp_unregister(void);
->> +
->>   #endif /* __DCP_DRV_H__ */
->> diff --git a/drivers/gpu/drm/msm/dcp/dcp_virtio.c b/drivers/gpu/drm/msm/dcp/dcp_virtio.c
->> new file mode 100644
->> index 000000000000..b2aeb03688c9
->> --- /dev/null
->> +++ b/drivers/gpu/drm/msm/dcp/dcp_virtio.c
->> @@ -0,0 +1,302 @@
->> +// SPDX-License-Identifier: GPL-2.0-only
->> +/*
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + * DCP VirtIO device driver.
->> + */
->> +
->> +#include <linux/module.h>
->> +#include <linux/err.h>
->> +#include <linux/pm_runtime.h>
->> +#include <linux/virtio.h>
->> +#include <linux/virtio_config.h>
->> +#include <linux/scatterlist.h>
->> +#include <linux/slab.h>
->> +
->> +#include "dcp_drv.h"
->> +#include "dcp_dpu_kms.h"
->> +#include "dcp_hfi.h"
->> +#include "dcp_ipcc.h"
->> +#include "dcp_virtio.h"
->> +#include "msm_drv.h"
->> +#include "msm_kms.h"
->> +
->> +static void dcp_virtio_hfi_cleanup(struct dcp_drv *drv);
->> +
->> +static const unsigned int dcp_virtio_features[] = {
->> +	VIRTIO_F_VERSION_1,
->> +	VIRTIO_F_NOTIFICATION_DATA,
->> +	VIRTIO_F_RING_RESET,
->> +	VIRTIO_F_ACCESS_PLATFORM,
->> +};
->> +
->> +/*
->> + * The VirtIO core owns transport discovery. This driver owns HFI setup and
->> + * creates the DRM component only after firmware capabilities are available.
->> + */
->> +static int dcp_virtio_probe(struct virtio_device *vdev)
->> +{
->> +	struct dcp_drv *drv;
->> +	struct virtqueue *vqs[DCP_NUM_VQS];
->> +	struct virtqueue_info vqs_info[DCP_NUM_VQS] = {
->> +		[DCP_VQ_CMD]  = { .name = "cmd",  .callback = dcp_hfi_cmd_callback },
->> +		[DCP_VQ_RESP] = { .name = "resp", .callback = dcp_hfi_resp_callback },
->> +	};
->> +	struct dcp_dpu_kms *dpu_kms;
->> +	struct msm_drm_private *priv;
->> +	int ret;
->> +
->> +	dev_dbg(&vdev->dev, "DCP VirtIO probe started\n");
->> +
->> +	drv = devm_kzalloc(&vdev->dev, sizeof(*drv), GFP_KERNEL);
->> +	if (!drv)
->> +		return -ENOMEM;
->> +
->> +	drv->vdev = vdev;
->> +	vdev->priv = drv;
->> +
->> +	if (!virtio_has_feature(vdev, VIRTIO_F_VERSION_1)) {
->> +		dev_err(&vdev->dev, "VIRTIO_F_VERSION_1 not negotiated\n");
->> +		return -ENODEV;
->> +	}
->> +	/* Access-platform is required for the firmware-visible IOVA mappings. */
->> +	if (!virtio_has_feature(vdev, VIRTIO_F_ACCESS_PLATFORM)) {
->> +		dev_err(&vdev->dev, "VIRTIO_F_ACCESS_PLATFORM not negotiated\n");
->> +		return -ENODEV;
->> +	}
->> +
->> +	ret = dcp_subsystem_dev_init(drv);
->> +	if (ret)
->> +		return ret;
->> +
->> +	ret = dcp_ipcc_init(&drv->ipcc, vdev->dev.parent);
->> +	if (ret) {
->> +		if (ret == -EPROBE_DEFER)
->> +			dev_err_probe(&vdev->dev, ret,
->> +				      "IPCC not ready, deferring probe\n");
->> +		else
->> +			dev_err(&vdev->dev, "IPCC init failed: %d\n", ret);
->> +		goto err_fn_dev;
->> +	}
->> +	drv->ipcc_valid = !!drv->ipcc.power_chan;
->> +
->> +	ret = virtio_find_vqs(vdev, DCP_NUM_VQS, vqs, vqs_info, NULL);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "virtqueue allocation failed: %d\n", ret);
->> +		goto err_ipcc;
->> +	}
->> +
->> +	ret = dcp_hfi_init(drv, vdev, vqs[DCP_VQ_CMD], vqs[DCP_VQ_RESP],
->> +			   vdev->dev.parent);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "HFI init failed: %d\n", ret);
->> +		goto err_del_vqs;
->> +	}
->> +
->> +	if (drv->ipcc_valid)
->> +		dcp_ipcc_set_resp_vq(&drv->ipcc, vqs[DCP_VQ_RESP]);
->> +
->> +	/*
->> +	 * Keep the device unready until HFI state and virtqueues are initialized.
->> +	 * KMS registration below depends on synchronous firmware initialization.
->> +	 */
->> +	virtio_device_ready(vdev);
->> +	virtqueue_kick(drv->hfi->resp_vq);
->> +
->> +	ret = dcp_hfi_send_device_init(drv->hfi);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "HFI DEVICE_INIT failed: %d\n", ret);
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	ret = dcp_hfi_get_capabilities(drv->hfi, &drv->caps);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "HFI GET_CAPS failed: %d\n", ret);
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	/* Register the display resources before exposing the DRM component. */
->> +	ret = dcp_hfi_send_resource_register(drv->hfi);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "HFI RESOURCE_REGISTER failed: %d\n", ret);
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	dev_dbg(&vdev->dev,
->> +		"DCP caps: %u displays, max %ux%u, %u planes, features=0x%x\n",
->> +		 drv->caps.num_crtcs, drv->caps.max_width, drv->caps.max_height,
->> +		 drv->caps.max_planes, drv->caps.features);
->> +
->> +	dpu_kms = devm_kzalloc(&drv->dcp_subsystem_dev->dev, sizeof(*dpu_kms), GFP_KERNEL);
->> +	if (!dpu_kms) {
->> +		ret = -ENOMEM;
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	dpu_kms->drv       = drv;
->> +	dpu_kms->pm_dev    = &drv->dcp_subsystem_dev->dev;
->> +	dpu_kms->hfi       = drv->hfi;
->> +	dpu_kms->caps      = &drv->caps;
->> +	dpu_kms->dpus_np   = drv->dcp_subsystem_node;
->> +	dpu_kms->iommu_dev = &drv->dcp_subsystem_dev->dev;
->> +
->> +	ret = msm_kms_init(&dpu_kms->base, &dcp_dpu_kms_funcs);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "msm_kms_init failed: %d\n", ret);
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	priv = devm_kzalloc(&drv->dcp_subsystem_dev->dev, sizeof(*priv), GFP_KERNEL);
->> +	if (!priv) {
->> +		ret = -ENOMEM;
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	priv->kms      = &dpu_kms->base;
->> +	priv->kms_init = dcp_kms_init;
->> +	dev_set_drvdata(&drv->dcp_subsystem_dev->dev, priv);
->> +	dpu_kms->rpm_enabled = true;
->> +
->> +	/* Component binding now sees initialized HFI, capabilities, and IOMMU state. */
->> +	ret = dcp_component_register(drv);
->> +	if (ret) {
->> +		dev_err(&vdev->dev, "component register failed: %d\n", ret);
->> +		goto err_hfi_deinit;
->> +	}
->> +
->> +	dcp_panic_notifier_register(drv);
->> +
->> +	dev_dbg(&vdev->dev, "DCP VirtIO probe complete\n");
->> +	return 0;
->> +
->> +err_hfi_deinit:
->> +	dcp_virtio_hfi_cleanup(drv);
->> +	goto err_ipcc;
->> +err_del_vqs:
->> +	virtio_reset_device(vdev);
->> +	vdev->config->del_vqs(vdev);
->> +err_ipcc:
->> +	if (drv->ipcc_valid) {
->> +		dcp_ipcc_deinit(&drv->ipcc);
->> +		drv->ipcc_valid = false;
->> +	}
->> +err_fn_dev:
->> +	dcp_subsystem_dev_deinit(drv);
->> +	return ret;
->> +}
->> +
->> +static void dcp_virtio_hfi_cleanup(struct dcp_drv *drv)
->> +{
->> +	struct virtio_device *vdev = drv->vdev;
->> +
->> +	if (!drv->hfi)
->> +		return;
->> +
->> +	dcp_hfi_stop(drv->hfi);
->> +	virtio_reset_device(vdev);
->> +	virtio_synchronize_cbs(vdev);
->> +	vdev->priv = NULL;
->> +	dcp_hfi_quiesce_queues(drv->hfi);
->> +	vdev->config->del_vqs(vdev);
->> +	dcp_hfi_deinit(drv->hfi);
->> +	drv->hfi = NULL;
-> What's the point of setting pointers to NULL? Won't this memory be
-> kfree()'d soon?
->
-
-Will be removed in v2.
-
-
->> +}
->> +
->> +/*
->> + * Remove DRM users before tearing down HFI, IPCC, or the VirtIO queues.
->> + */
->> +static void dcp_virtio_remove(struct virtio_device *vdev)
->> +{
->> +	struct dcp_drv *drv = vdev->priv;
->> +
->> +	dev_dbg(&vdev->dev, "DCP VirtIO remove\n");
->> +
->> +	if (!drv)
->> +		return;
->> +
->> +	dcp_component_unregister(drv);
->> +	dcp_panic_notifier_unregister(drv);
->> +
->> +	dcp_virtio_hfi_cleanup(drv);
->> +
->> +	if (drv->ipcc_valid) {
->> +		dcp_ipcc_deinit(&drv->ipcc);
->> +		drv->ipcc_valid = false;
->> +	}
->> +
->> +	dcp_subsystem_dev_deinit(drv);
->> +}
->> +
->> +/* KMS shutdown must complete while the firmware transport is available. */
->> +static void dcp_virtio_shutdown(struct virtio_device *vdev)
->> +{
->> +	struct dcp_drv *drv = vdev->priv;
->> +
->> +	if (!drv || !drv->dcp_subsystem_dev)
->> +		return;
->> +
->> +	pm_runtime_get_sync(&drv->dcp_subsystem_dev->dev);
->> +	msm_kms_shutdown(drv->dcp_subsystem_dev);
->> +	pm_runtime_put_noidle(&drv->dcp_subsystem_dev->dev);
->> +}
->> +
->> +/*
->> + * Firmware capabilities may change independently of the VirtIO transport;
->> + * refresh them without rebuilding the DRM device.
-> And what does that mean? How can they change?
->
-
-Will be removed.
-
-
->> + */
->> +static void dcp_virtio_config_changed(struct virtio_device *vdev)
->> +{
->> +	struct dcp_drv *drv = vdev->priv;
->> +	int ret;
->> +
->> +	dev_dbg(&vdev->dev, "VirtIO config changed — re-querying DCP capabilities\n");
->> +
->> +	if (!drv || !drv->hfi)
->> +		return;
->> +
->> +	ret = dcp_hfi_get_capabilities(drv->hfi, &drv->caps);
->> +	if (ret)
->> +		dev_err(&vdev->dev,
->> +			"config_changed: capability re-query failed: %d\n", ret);
->> +	else
->> +		dev_dbg(&vdev->dev,
->> +			"config_changed: DCP caps updated: %u displays, features=0x%x\n",
->> +			 drv->caps.num_crtcs, drv->caps.features);
->> +}
->> +
-> [...]
->
->> diff --git a/drivers/gpu/drm/msm/dcp/dcp_virtio.h b/drivers/gpu/drm/msm/dcp/dcp_virtio.h
->> new file mode 100644
->> index 000000000000..fe244bc5b51a
->> --- /dev/null
->> +++ b/drivers/gpu/drm/msm/dcp/dcp_virtio.h
->> @@ -0,0 +1,22 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +/*
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + * DCP VirtIO driver interface.
->> + */
->> +
->> +#ifndef __DCP_VIRTIO_H__
->> +#define __DCP_VIRTIO_H__
->> +
->> +#include <linux/device.h>
->> +#include <linux/virtio.h>
->> +#include <linux/virtio_ids.h>
->> +
->> +struct dcp_drv;
->> +
->> +#define VIRTIO_ID_QPSFI		                52
->> +#define VIRTIO_VENDOR_ID_DCP_HFI		    1
-> I think this was questioned by Bjorn. Is it described somewhere? Is it a
-> part of the VirtIO spec? If so, add these ids to the VirtIO headers. If
-> not... then it's squatting. We can't just randomly settle on the ID.
->
-
-I will add patch to move VIRTIO_ID_QPSFI to virtio_ids.h
-
-
->> +
->> +int dcp_virtio_register(void);
->> +void dcp_virtio_unregister(void);
->> +
->> +#endif /* __DCP_VIRTIO_H__ */
->>
->> -- 
->> 2.43.0
->>
+> Best regards,
+> Krzysztof
