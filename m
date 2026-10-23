@@ -1,105 +1,105 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792775896;
-	b=gBDBV8zor8jQgpMt4HXTXxj4DuJ8EF7k4293VxVkiv356N0K+3OtZW77EB/JHovjMBna
-	 ScX/UBGS9XXjikxYvNuHTrdaKdglgxTnBeAcqtiK2JdjvPb/I2jKxe+NTI/zqJRd4tZ8g
-	 pLHHLE0sGT/UENAggVW1XZoupRvwgoo3OhKxqHXx51+blHWQghLOBggNrdW48y4cojyNe
-	 r3PGbdjOdXLIjamaQX1VyLHCkp8nYGeyNcJZXMN387mxLEtkic7ERkmKoy0KYZAApVcqW
-	 XKcfZ9x0ReFgRF277DTovA1uV2nlCLXD/IkkysWABVt2MgduRDc5wtXIe/KAP5I17DA==
+	t=1792775909;
+	b=btTxD+MsN1qYtEsWmnWYTtwrx7Y44CjdtUpq+1bYOCScPi26KWbwt7WKnfaXiaEwscrK
+	 DWkxef2vrfal5aESsSfRpjkuoOhKbkugevlgZWiQDZKEdMCgaSfyQGPwhp0TgDScW+wIy
+	 JsGTZHDoyflKc5Acbmiu8sQWCxwYKCoNgstmBlw99WyRfhB2HaT2t4eIUnGyQjVvbyFIl
+	 2aBgkaHZEqZDd9Yt/JwPJKWCw5VsFwqVck7UTgMUxfY8AFTfYarNKAHM9sNetEAT4Zd6N
+	 jG759q9vTelvRNkRn7uX70D7LElvbOWweh407Zy/f5676ViKWKKyVCWW1y7E3myg1pQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792775896;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792775909;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=U+BHFh2JR5H1czrBSRnQE+UUSBqRmAYSBtaatxRecFY=;
-	b=TnlwColvDy2oIBLeUdlMmlY8Ph8LmTYAMXBme/cOadcVoI6eQiAYizQNLzqZOPkWfPC6
-	 5dqJSyuORjW35j1Nxt99K+CI2Ktq+5KuAjpFJVExhUt/iAbuZk+KKiz6dkdFv4M6PJbvp
-	 CdRRbNsIqAwzlV+eQDHQ+P+c+n19pIDews/t5qasEC8/3wnGt45D5ec+JRTCzUChgt2dP
-	 7IxNGayk1a0GGCRs/tKZ4yggUzPMUnz479vNtFDtt4QhnFy2STT5NQgqUQ7XnsFKsFha2
-	 OR8LOkE9aY32wyRxjrkaHodAaX1VW4Kr3aUqlFJ8QctqPfGaslMDvxdvh8iKc2WbsTg==
+	bh=cXMlmuKppBQb2uNG37YMLCql+EtOjLG2XfTFyB1o3YI=;
+	b=JTG2vYqBdgP+UzTpivBlwWZ82WRS32nNtSQoEbCYy/nPRmt5akrCHaMKq3ecemGNB8ro
+	 rlMFpoUiFOWPgmiIqkkoHmQ8zG6ycmU9vskMkx3HVus+viE2NF9UnkwqW831S5dyZ5PId
+	 wTgxcsn4wDhedvwUecjzhHY8bk1eGRqVBJ4H4r32YqIGU4EGq0qPdyRrT19zUNr7aDnja
+	 KB0UW8hpqhrEHgKE4gF+PRHzd1PLSqtPYKUiRuZMi6dKF6tAhL1jghrJ7GnfQipdNjJY4
+	 x3yL+ueODCUXbZCwuecNMZCip18kNEE3ip+bS/xFH4y8iv0qytfCO+ELAzEoZ1dkd0w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="o/NHi7bw";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JAJhD95N;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=i347DQ9x;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=P1lKYjc3;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 554C0606A957
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 554C0606A957
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1AB160A381A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1AB160A381A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=o/NHi7bw;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JAJhD95N
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NE5sqI4072734
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:15 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=i347DQ9x;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=P1lKYjc3
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NG6CCO2215802
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=U+BHFh2JR5H
-	1czrBSRnQE+UUSBqRmAYSBtaatxRecFY=; b=o/NHi7bwzHaUe0zx+U5i1aJzUbk
-	n1FftPGLzrrQVKvHI6ZVfl9YPuLD2ka3yB5oegvIeLmF0RNOkDyoWYuXfSCS+Bn1
-	FyH7+3rSnw38pzaskxoZqgIFGkkitbOhKLsY3kt+oqDfEWLYaayJ+KQ8TzdUj80g
-	VeU8GaORhFGG6XttX2cSEagqinBCIgUFAWp+tXQerlen3kSKcTGTI2Jg/FzlveVe
-	OS8/PlNhJfTzeJQsKoK8yX8J85lKm4okhodWfLS6vhzyKFSt1F/dSKPvkMNgAZaf
-	iChj2cGz+hQfv8f19rNOPEdGwVgRpMdBnzSzjBXdVUuzcX5C7SwEF+8fExw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hg7bw15fw-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=cXMlmuKppBQ
+	b2uNG37YMLCql+EtOjLG2XfTFyB1o3YI=; b=i347DQ9x7D1UCl+LQHDGivzgiQu
+	MebQJAqRBiZswZYniNcj5Zv8iP+HMpB7ZwWeb9iYxTazXB48fLHKix2u40Ycdhr6
+	p7NSf3OornhiWcGJh4hl7ccTfWWxY7u7hLYeuECdkDdUWlh29adAJ5Ors3c8+4Fd
+	ijeNd/z9urcNS2pNIuZDd8tFzJxj1PCDGDNfJsGhPpTUjwHXtddqnOsqGErtY/c0
+	anDMxKUASWUX7PV5dXOl9MPxt2RFg0l0a7TMEn4RngvhSjlb5bJ7Wy7eNPVsLGVF
+	ZeHqzXvKk2n7J/K+1B9sUfyjlk5unAfG9xxTthDq8F9xGvkMj3/1L2qR+8A==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgatc896c-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:15 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f3969a2a7so188024185a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:18:15 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:27 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-91b875639ceso23838076d6.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:18:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792775894; x=1793380694; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792775907; x=1793380707; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=U+BHFh2JR5H1czrBSRnQE+UUSBqRmAYSBtaatxRecFY=;
-        b=JAJhD95NUHJsRhjgowg6T5MQ/LGaDz8JgBjC5wyTrwLwm63R6Fj6Dr7/m4XbrJaTNW
-         i/1oP3GnLmFrP/ZzOgQeBVLW3I7mRdRk1ZJ/iTE6/9McWKYYStd3DbV+xj+9hN1fw0M9
-         pD49B4ODwZ4r3XIGdXo/DeHkecQaO+O6O8aL/iFpQQfyRLM5s4wzxedJaOmXrA9VZIxx
-         liEzJ+7BYtzw81zkMkWJ3UQkog4PR8la1wfRvcGCMwF5IGb6UO6eqz3S04MFgumCcO+5
-         iqJRQBam9YX6hbo3UvejAUNt00hsFbC3HZS3Oxzy9tIFsJah+L8PllLpbhlss4sqWduM
-         bjjw==
+        bh=cXMlmuKppBQb2uNG37YMLCql+EtOjLG2XfTFyB1o3YI=;
+        b=P1lKYjc3lw79SU5QhNz9T24PTWiyXITkOa5Oon/GLu66pYx+jczmCxrkGly0Whu9tv
+         3kd4743s8G4LVkLHk0RnyxxJ06soFfeYOFIljif87HeEsy3f/JlAXVWnGstXCKu41V43
+         OUW6oKHTk9w81a82xdnfjhpndlNbAi3ukzNP7JP+zluiioEnRhznEd2XZ+j/PP24mK8W
+         9Fdy/Lk9eST5VI3xKUxcINqFzualjkeMGpy0UCqRt7Leo1QrZwhLBu3eBfWqYZYwqjv0
+         oVDp6PzMjwicF0pWDeNfZtHq98JSO35dKFNyhwK3Xw6PK4zWI/KjTaAeU+X5ALtHoeZD
+         UFmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792775894; x=1793380694;
+        d=1e100.net; s=20260707; t=1792775907; x=1793380707;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=U+BHFh2JR5H1czrBSRnQE+UUSBqRmAYSBtaatxRecFY=;
-        b=hSOLiq4PUIsQVtMYwdXK5VCzl1+QGhGZPVQ2NAItDPDlIrZvRoR0kYKDSgqSG+6Hpw
-         dODRmq7MEBXMd4Xrhs9NofSlzFNe+dOOM0UBJuuOTVDuSXKvBtTe2cNIl6cQYSgiyeQR
-         Vrk0CVzhL+83H9R0Q0dxoUomVoEIORINxfABrAtL3SMUfREBV9HUeHhafOXpWDxz7PXr
-         FlbITwsHtHJI4VfyuCpxxGwbY4izrGHpKOD7ot8UPu+9pIkiLotto7fZxW7226q3k/K1
-         AvLivlKfoJDV1N4iO6ZtixhLFZXEeu1TZJUpJDHLQmeYLDLwaY9eGGnuEV4vOxSabK8r
-         dcqQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwdUrCOSMNtKu60RAqq2s0JocWXIxqmLVT7yYqSvYmggCcTAB4VmlsdzU7PBpZPLfvoKshKF59fVjx/RTn4@vger.kernel.org
-X-Gm-Message-State: AFq9FYItC8DO56dqEdFvmyaZJKDSrj81WhGVb5LxRBEYroXF8b6SL1oC
-	2b4Yi7WgTLq25y/zMfSKUs8q9reH+wQYazVbwS959K6R3ZcM/VGrf0kozZlj7qvxvOOvHDmtKuT
-	Qt/0GUXG2Ec6V6dgNB9XkoI4eiiAbsYpF2nIrfSX3WmE4wEV9BrrbpAx/L7hy3LhNwrI7
-X-Gm-Gg: AYBFou3xsy8H4Uth5vRrMC8wUvyXBmF7wB6Pqe6LWfdMeUuRZqOVni3Xhtrh+hmZu22
-	cFMIEg8NN3uaRyo2auBTK3seAzpoEzDHfWxqsSI7LTkQr/t/DKqQxShVZX0buE0reLaTVY6tMu4
-	pDXDoDyr6ybPNzGtIhG0pfE9HQ/XxwC7srXRFOCvfZToQx4ZQcsWphZI+XPQuzuEJvAcL7vXCfu
-	qfq3/ByyIl6MRNCuaI9idI8vDa7CTNlBJk6uqL4NJoQO0Hgi0StgQKQZ44s8FLPd4cc+0RErK0y
-	9/4fajvnDetcVsXYvLVrAZwydCZTJtI+0kp77/h8Xuq1VKFHvAGpMxqEdCiwOxGCNFEtNySAs6W
-	AHy1z6/4/jw0/
-X-Received: by 2002:a05:620a:4515:b0:93e:4b3c:19a1 with SMTP id af79cd13be357-93f6f7e9cd4mr552284785a.44.1792775894368;
-        Fri, 23 Oct 2026 10:18:14 -0700 (PDT)
-X-Received: by 2002:a05:620a:4515:b0:93e:4b3c:19a1 with SMTP id af79cd13be357-93f6f7e9cd4mr552275785a.44.1792775893579;
-        Fri, 23 Oct 2026 10:18:13 -0700 (PDT)
+        bh=cXMlmuKppBQb2uNG37YMLCql+EtOjLG2XfTFyB1o3YI=;
+        b=Riofv0UnWEozyUffsd9q7nmyipLllxKyCve1Td8y1ojlIbfPcPtbCWjPeDwtfX2Ddr
+         izKvkC+jqPDONF84X93vhuyBf8nPB6mhSAzdSysBefEIU9KBVHPWN2RJaomOiz0D73+Z
+         0PKSdKLeo901J2aClTYxBg30b8aX6etSjabhV9DFIIJgf1YBhDYfCPLAAZDFkjJuoKR5
+         N2VtcLpzjr+pVX3Tmy3hYd5IlE6j6Dyv3Z4NALcblck4lF31TgANjTtI87NrJMDMeBHE
+         V0IfBbLl0bTkRdOUQdtvFMAw6orkS5wTs2Ta0nfqH9v2C7pWZ5K2szgkHpsUYURI5mfG
+         ABWg==
+X-Forwarded-Encrypted: i=1; AKwUvBzgUfZuKxuCTfTtKJuvoAU7dr92WK3yaNuhqwzcamOdwsUwvpQ7pwvPcGjYwmvhrtlSSQTqeXbGs0mh1hts@vger.kernel.org
+X-Gm-Message-State: AFq9FYJKauZqWI97F6tKALgbNu0mzjCVEm4g+1tUK1zHhMDIySzBwNnB
+	EHFxQCvaw+6W7HtvmjHmswK7OPtHRDBtvHHso2S9qFEoCaAwqzdMpStsgCZufeyCv7ZQimJ5jRU
+	ktbJbwsjNTht1OlKiVjpultTtqHqHREd60t1legfJXHUzsJPpLP5jX/5C7agGIAh3cTEA
+X-Gm-Gg: AYBFou0Xatdmj/uw7Rav7LzrgdhCjGdUJIvs9zJ92vGnxNOoL6dLvwI360QQHS9sITO
+	CSIafhMJiZNiizBvCi+ILMUwhJBw6yodkuTzoSVB9vtrHLsMQ/A1d7nRw6SuvVHYQeQKaxZLfhS
+	SPyp9ubkZSjzL5w2FXNEKrSTW4LkGYEjGFYJbumGWVGcX2AoEt0dxyI4cxm2FcOZfwIkzjSnB+9
+	DoCJuertKpZK5iP/77oepO59q00pJTBORUrjx9xUHYAB32WRDVlU7D+UR0QvZC09EE3+zGg6b5x
+	F9cDSvksj2vE7xZwhs0HSbD+T66oh/Y0KG+P64FzWuHd1gL/8HxI4G5BQR5Gw3lE6fiq/rpvx4b
+	0WS9rT0bLpVE9
+X-Received: by 2002:a05:620a:8702:10b0:940:7e5c:7424 with SMTP id af79cd13be357-9407e5c748bmr97337785a.66.1792775906837;
+        Fri, 23 Oct 2026 10:18:26 -0700 (PDT)
+X-Received: by 2002:a05:620a:8702:10b0:940:7e5c:7424 with SMTP id af79cd13be357-9407e5c748bmr97335285a.66.1792775906330;
+        Fri, 23 Oct 2026 10:18:26 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.18.11
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.18.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:18:12 -0700 (PDT)
+        Fri, 23 Oct 2026 10:18:25 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
 Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -114,9 +114,9 @@ Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [RFC PATCH 15/23] ASoC: qcom: audioreach: add speaker protection mixer controls
-Date: Fri, 23 Oct 2026 18:14:25 +0100
-Message-ID: <20261023171433.820092-16-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [RFC PATCH 22/23] arm64: dts: qcom: glymur-crd: add WSA speaker protection VI feedback
+Date: Fri, 23 Oct 2026 18:14:32 +0100
+Message-ID: <20261023171433.820092-23-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -130,171 +130,117 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: eQBErVuSfSGhDsQ5flGj2A4eruudVxuv
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX/7DSwHA6uD2/
- JiLnzIDdMbxc1uG8bFIHBYpwA3WKzpx/46Mb+ZOOUJ9xE9RBuapjro2faBO8vwrKughGgDPWyBM
- d6wAo0dE1xtZTp3aeyvnPLAnaMzzWBo=
-X-Authority-Analysis: v=2.4 cv=QdTzLcbv c=1 sm=1 tr=0 ts=6adb96d7 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX5B4z+hLwjYp+
+ qRkZWGLrnW6ZOw5V/skeF7gdONmkDXxVo8aMIYWkmPEWyttqs9HvULw6pVg6ep/ToI49q9YFmDQ
+ bMpvrFYVprpCrsQZeWvldY8x1NaHMwdreyQGZHCBsRRleGBoW2Skn0jKH11lYDF0IZeFWUC7cfH
+ uH6v1hFojAdQRQC8zqhi2g75gdH0WWBatrym7A6f2Q4uvpce3i+1i74SrdZoFYu3nSX/RQ/FAXf
+ QJd+aihAR2i+mwsRCmzHGFX6CjLwQJMwoyVhpJBu13kYQWvs6pxDy5QkMEh6J59HSSrHyQVDt/0
+ +0kJFP8amia0iqQnLMrk3k299mRk7hpeei01OpgtDXWNULrluPoqaQOzYqbMHxyup+9or5x7X2P
+ sw+RM8XPHa/2dkYACxZYK+rt+Xxfgft05qMlgPu71IFkDswS6F/EduZxU+2MgsZtgne/7Sqcb7y
+ DWU1ODFyMZA4P8pxlVA==
+X-Proofpoint-GUID: VLB27n0iGzvTXxjrgjia4ecyinhmUEmq
+X-Authority-Analysis: v=2.4 cv=Scxi5fRu c=1 sm=1 tr=0 ts=6adb96e3 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=z7hZsS5TAAAA:8 a=9gDSyMU-ReTuyL3ZNT8A:9 a=NFOGd7dJGGMPyQGDc5-O:22
- a=Qe1wxHrAD-1Q-kOd8w1m:22
-X-Proofpoint-GUID: eQBErVuSfSGhDsQ5flGj2A4eruudVxuv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfXxyeapv595cN6
- LQHd/VccF5qOGyNIndYv0gk1uEjvju3o8IUGqN4wxK7Lh/rF84my37Sjjcpvhr4sCMsP+DWORpV
- tLRw7ivQJ3Igqb5Tdaw4IVq4vUqPhLj68XNnfnzPVU7RJdLYUopKz6Jv8bxOyVP9/o3gUdIg3c+
- H2WR6TRbiXaddT8NwvGAcUWxSZmh5dw+T5EObv8c2Z3SUo0qvxFP9IWLE4KxLj5TpNieUo5biul
- 7cr5TA1WaxF9nmFjcIIJhwiSqpBidk14gZyTZcO1a4rEErQHBWveErXNHOFKaBDSM+T0EzLQIVe
- XFNjmGhfa7sXf31K8YD+Hc7WCW5/fWd8Kq1UNhmYacLseWW3ebvRjz/9rkxAZbBuJdMOAfsIExf
- XjW0qZpEjjlHN6nULrWnfFu0Gcjfn7DYob0o3LGwrlWd8in6vJTc9xhr6MbIJGYbaj+APJYOKQu
- /yuJwS5nzQgFgl97D7A==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=gpxm3BjZcJp1ZicY-GEA:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-ORIG-GUID: VLB27n0iGzvTXxjrgjia4ecyinhmUEmq
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX4PZ+UMrWvDZc
+ c3jktwEGlQv5FuAyYRAuZoyMjHZ4xgzj7Y8rqimypu2JBeDh+fzw28YsahcuYkXCPLuamc+zEKp
+ S1jdfmkVyGTpT4zJnVU20G4N3e6pcAY=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0 spamscore=0
- bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230067
+ suspectscore=0 adultscore=0 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610230067
 
 From: Ravi Hothi <ravi.hothi@oss.qualcomm.com>
 
-Add topology mixer controls for the operation mode and the per-speaker
-R0/T0 pairs, so userspace can run a calibration and restore its result.
+Add the V/I sense DAIs of the four WSA8845 speakers, the SoundWire VI
+ports and the WSA macro VI capture DAIs to the WSA Playback link, for
+speaker protection. The speakers now expose two DAIs, so give them a
+'#sound-dai-cells' of 1 and address the playback DAI explicitly.
 
 Signed-off-by: Ravi Hothi <ravi.hothi@oss.qualcomm.com>
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- include/uapi/sound/snd_ar_tokens.h |  2 +
- sound/soc/qcom/qdsp6/topology.c    | 80 ++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+ arch/arm64/boot/dts/qcom/glymur-crd.dtsi | 29 ++++++++++++++++++------
+ 1 file changed, 22 insertions(+), 7 deletions(-)
 
-diff --git a/include/uapi/sound/snd_ar_tokens.h b/include/uapi/sound/snd_ar_tokens.h
-index 7ab8e11ca5c2..db62dc7f9c8a 100644
---- a/include/uapi/sound/snd_ar_tokens.h
-+++ b/include/uapi/sound/snd_ar_tokens.h
-@@ -57,6 +57,8 @@ enum ar_event_types {
-  */
- #define SND_SOC_AR_TPLG_FE_BE_GRAPH_CTL_MIX	256
- #define SND_SOC_AR_TPLG_VOL_CTL			257
-+#define SND_SOC_AR_TPLG_SP_OP_MODE_CTL		258
-+#define SND_SOC_AR_TPLG_SP_R0T0_CTL		259
+diff --git a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
+index 58158b51fe29..fddc76f59557 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
+@@ -256,11 +256,26 @@ cpu {
+ 				sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
+ 			};
  
- /*
-  * %AR_TKN_U32_SUB_GRAPH_INSTANCE_ID:		Sub Graph Instance Id
-diff --git a/sound/soc/qcom/qdsp6/topology.c b/sound/soc/qcom/qdsp6/topology.c
-index 5de7e821e5f4..6316d1ab0675 100644
---- a/sound/soc/qcom/qdsp6/topology.c
-+++ b/sound/soc/qcom/qdsp6/topology.c
-@@ -1463,6 +1463,73 @@ static int audioreach_put_vol_ctrl_audio_mixer(struct snd_kcontrol *kcontrol,
- 	return 1;
- }
++			/*
++			 * WSA SPKR playback-side codec DAIs plus the WSA
++			 * speaker-protection VI capture-side DAIs on both
++			 * WSA (left) and WSA2 (right) buses. One MM1
++			 * playback open brings up both chains via the
++			 * machine driver's multi_direction_codecs flag;
++			 * the SP<->SP_VI control link in the tplg handles
++			 * the DSP-side pairing.
++			 */
+ 			codec {
+-				sound-dai = <&left_woofer>, <&left_tweeter>,
++				sound-dai = <&left_woofer 0>, <&left_tweeter 0>,
+ 					    <&swr0 0>, <&lpass_wsamacro 0>,
+-					    <&right_woofer>, <&right_tweeter>,
+-					    <&swr3 0>, <&lpass_wsa2macro 0>;
++					    <&left_woofer 1>, <&left_tweeter 1>,
++					    <&swr0 12>, <&swr0 13>,
++					    <&lpass_wsamacro 2>,
++					    <&right_woofer 0>, <&right_tweeter 0>,
++					    <&swr3 0>, <&lpass_wsa2macro 0>,
++					    <&right_woofer 1>, <&right_tweeter 1>,
++					    <&swr3 12>, <&swr3 13>,
++					    <&lpass_wsa2macro 2>;
+ 			};
  
-+static int audioreach_get_sp_op_mode(struct snd_kcontrol *kcontrol,
-+				     struct snd_ctl_elem_value *ucontrol)
-+{
-+	ucontrol->value.enumerated.item[0] = audioreach_get_sp_operation_mode();
-+
-+	return 0;
-+}
-+
-+static int audioreach_put_sp_op_mode(struct snd_kcontrol *kcontrol,
-+				     struct snd_ctl_elem_value *ucontrol)
-+{
-+	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
-+	unsigned int mode = ucontrol->value.enumerated.item[0];
-+
-+	if (mode >= e->items)
-+		return -EINVAL;
-+
-+	if (mode == audioreach_get_sp_operation_mode())
-+		return 0;
-+
-+	audioreach_set_sp_operation_mode(mode);
-+
-+	return 1;
-+}
-+
-+/* One R0/T0 pair per speaker, written as a whole set */
-+#define AR_SP_R0T0_CTL_COUNT	(MAX_SP_VI_SPEAKERS * 2)
-+
-+static int audioreach_info_sp_r0t0(struct snd_kcontrol *kcontrol,
-+				   struct snd_ctl_elem_info *uinfo)
-+{
-+	uinfo->type = SNDRV_CTL_ELEM_TYPE_INTEGER;
-+	uinfo->count = AR_SP_R0T0_CTL_COUNT;
-+	uinfo->value.integer.min = S32_MIN;
-+	uinfo->value.integer.max = S32_MAX;
-+
-+	return 0;
-+}
-+
-+static int audioreach_get_sp_r0t0(struct snd_kcontrol *kcontrol,
-+				  struct snd_ctl_elem_value *ucontrol)
-+{
-+	audioreach_get_sp_vi_r0t0(ucontrol->value.integer.value,
-+				  AR_SP_R0T0_CTL_COUNT);
-+
-+	return 0;
-+}
-+
-+static int audioreach_put_sp_r0t0(struct snd_kcontrol *kcontrol,
-+				  struct snd_ctl_elem_value *ucontrol)
-+{
-+	struct snd_soc_component *scomp = snd_kcontrol_chip(kcontrol);
-+	long cur[AR_SP_R0T0_CTL_COUNT];
-+	int ret;
-+
-+	audioreach_get_sp_vi_r0t0(cur, AR_SP_R0T0_CTL_COUNT);
-+	if (!memcmp(cur, ucontrol->value.integer.value, sizeof(cur)))
-+		return 0;
-+
-+	ret = audioreach_set_sp_vi_r0t0(scomp->dev, ucontrol->value.integer.value,
-+					AR_SP_R0T0_CTL_COUNT);
-+	if (ret < 0)
-+		return ret;
-+
-+	return 1;
-+}
-+
- static int audioreach_control_load_mix(struct snd_soc_component *scomp,
- 				       struct snd_ar_control *scontrol,
- 				       struct snd_kcontrol_new *kc,
-@@ -1503,6 +1570,7 @@ static int audioreach_control_load(struct snd_soc_component *scomp, int index,
- {
- 	struct snd_ar_control *scontrol;
- 	struct soc_mixer_control *sm;
-+	struct soc_enum *se;
- 	struct snd_soc_dobj *dobj;
- 	int ret = 0;
- 
-@@ -1522,6 +1590,14 @@ static int audioreach_control_load(struct snd_soc_component *scomp, int index,
- 		sm = (struct soc_mixer_control *)kc->private_value;
- 		dobj = &sm->dobj;
- 		break;
-+	case SND_SOC_AR_TPLG_SP_R0T0_CTL:
-+		sm = (struct soc_mixer_control *)kc->private_value;
-+		dobj = &sm->dobj;
-+		break;
-+	case SND_SOC_AR_TPLG_SP_OP_MODE_CTL:
-+		se = (struct soc_enum *)kc->private_value;
-+		dobj = &se->dobj;
-+		break;
- 	default:
- 		dev_warn(scomp->dev, "control type not supported %d:%d:%d\n",
- 			 hdr->ops.get, hdr->ops.put, hdr->ops.info);
-@@ -1548,6 +1624,10 @@ static const struct snd_soc_tplg_kcontrol_ops audioreach_io_ops[] = {
- 		audioreach_put_audio_mixer, snd_soc_info_volsw},
- 	{SND_SOC_AR_TPLG_VOL_CTL, audioreach_get_vol_ctrl_audio_mixer,
- 		audioreach_put_vol_ctrl_audio_mixer, snd_soc_info_volsw},
-+	{SND_SOC_AR_TPLG_SP_OP_MODE_CTL, audioreach_get_sp_op_mode,
-+		audioreach_put_sp_op_mode, snd_soc_info_enum_double},
-+	{SND_SOC_AR_TPLG_SP_R0T0_CTL, audioreach_get_sp_r0t0,
-+		audioreach_put_sp_r0t0, audioreach_info_sp_r0t0},
- };
- 
- static const struct snd_soc_tplg_ops audioreach_tplg_ops = {
+ 			platform {
+@@ -923,7 +938,7 @@ left_woofer: speaker@0,0 {
+ 		compatible = "sdw20217020400";
+ 		reg = <0 0>;
+ 		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
+-		#sound-dai-cells = <0>;
++		#sound-dai-cells = <1>;
+ 		sound-name-prefix = "WooferLeft";
+ 		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+ 		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+@@ -935,7 +950,7 @@ left_tweeter: speaker@0,1 {
+ 		compatible = "sdw20217020400";
+ 		reg = <0 1>;
+ 		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
+-		#sound-dai-cells = <0>;
++		#sound-dai-cells = <1>;
+ 		sound-name-prefix = "TweeterLeft";
+ 		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+ 		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+@@ -951,7 +966,7 @@ right_woofer: speaker@0,0 {
+ 		compatible = "sdw20217020400";
+ 		reg = <0 0>;
+ 		reset-gpios = <&lpass_tlmm 13 GPIO_ACTIVE_LOW>;
+-		#sound-dai-cells = <0>;
++		#sound-dai-cells = <1>;
+ 		sound-name-prefix = "WooferRight";
+ 		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+ 		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+@@ -963,7 +978,7 @@ right_tweeter: speaker@0,1 {
+ 		compatible = "sdw20217020400";
+ 		reg = <0 1>;
+ 		reset-gpios = <&lpass_tlmm 13 GPIO_ACTIVE_LOW>;
+-		#sound-dai-cells = <0>;
++		#sound-dai-cells = <1>;
+ 		sound-name-prefix = "TweeterRight";
+ 		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+ 		vdd-io-supply = <&vreg_l18b_e0_1p2>;
 -- 
 2.47.3
 
