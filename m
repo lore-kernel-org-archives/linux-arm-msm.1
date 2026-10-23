@@ -1,79 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792748734;
-	b=lRvxS4SQxxePOXEWbqxyn3DwMNUzFlDe1XzlvrgI6JDFuXWsAzuUU6kuZPzBRuhDDO/W
-	 EORMtfUaiGboeXI6gmVKAF1p8mWUqud1+g9maWDumG7cYRSRCxw1K5kvpNZHIUwezniAZ
-	 H5/9Op4v4P5APYOus8Bx/xAb1xgkVZfjvVnUItaRMmVxxAmZeTHW2YLkaseEqamZk1/tt
-	 JpmFZWjZbEdyQXI3mnsVYefn9Y4kBw9QDXnhjKRhd6rGgSqXk18RTkLuGQU9HL8yFdvBf
-	 I09CFHLuwjznLcct8Wgsk2O+WehfqtRkELA06kZDcn4iAUAi0Hcyna+k4ZQoXlFgaoQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792748734;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=sckv4JNuAi5meAQNwLAdMDOJEC6CdBw9UzoGeh/4nvQ=;
-	b=wmMPWRQeDM+SzOMDJLP4T3ie4HEQlDlFRyzl6bKlsbmuLuuouXxPfuC31gO1VxMCrBbJ
-	 PIadDQrdc9J1wTOL1B3vYTYMtDFmC1cuvOcY2PSBTmfOswqh4M9+zcWpqFMOSm+GZv9Pf
-	 ccq8sNbrxdnC9q2WFrUEb7+6EERLP9GCh2DI85JTk6PH21/DGpUG+dpSbdfeLrrUWysaE
-	 dxB2JNtGmTIz107pvtUC6wfU3Ahya9JsmBBcfyArhHnjV0Mbvj/+FgOnXf3GLQha8DNzQ
-	 fjEf3mplAsBM9QTX2YRjZ00wxH5jAV+lA7mfLoN9VuZ862AjxYDGTw+ckRC0Mamj8Uw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XwV+uDSM;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F416606A335;
-	Fri, 23 Oct 2026 09:45:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XwV+uDSM
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792748733;
-	b=Af3UZUQHpHziBqcZSS6wuMNp4MLdOOYvRDMfkwXNa+RobtImIyXe2y9SHdNJ593i0Bs2
-	 mdIEqYxGN65KyPYD7eTdaGwp+/NgfKDzm5p20jyX3WSJjagnDMFeMKUmMpnNWVL2FWZ0m
-	 oKFZOIwHhiXZfZfOEONTgUgYOuU9JYG2VrSfdlQ+7QTR45ErPzX5vpAlfPdiVEq+reUih
-	 sqdTo8Q+h0wRTDdhnNkXKD3vHC/OjHAAfw3ObmhPMffC7W0fN2G+PA3YG6nHVGpl2Y1gW
-	 VUEaJnnUE34s5MZIysWXECv1R3INMqhD2jX7DGWWCDqZkUHMMPap4fcoGqfiFThj4hg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792748733;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=sckv4JNuAi5meAQNwLAdMDOJEC6CdBw9UzoGeh/4nvQ=;
-	b=JzLXFXB41WhE09/VIC+Zv4XVGmwnTxWAMCJXSePfqGLiGkrifD2CW5OhbLAYkUoDh6o3
-	 IhfWM1x+D7Dk7Opc+j67wDNlYxQ/LWslfXFYA8naBbPRJxpusK58ySzDgblC9Q47Pk46v
-	 f60sPIMryyV9I9iNi672MPNb9muHFYzKKcE0w1U18ZdDWBOQ3qHZlwvDG/Ix2nvrd0rr5
-	 0N2s2myiR4QwUstTK1LjGxoM7xH7VBH+xpkF1bocYRW/J37/Z8fxKb7Rr6sSEI9IhJvcx
-	 cd5nX0eslloyoZLM1WmJdgrhRMQNbAXB+fSSbyVWigRvyx8B4gBVbS2e+LihQEuTFoQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792748764;
+	b=izdVYMLOoiMKVZ6KK64OpemYXXWmcyKXt1plGAJnyvDqB2hN1Ojvtdi5k60lrB6LD32i
+	 2tu68SAuMxJ/kRE02YA9XNdpGoAj5kb7+/ekP5cjSV47HnDjI2nuBT49QWq6eVT9cYW1N
+	 WPs4L8EY89/LW082HbQ/J0po2Hc/X3FaI5yL4SdUSZsoBr4VZEapOK9WRsMXPXJs7JgFC
+	 Zn7IaK7U33U9kE1vS7xTSMz8IQhcFIZ8wwzLrG2Lq9XS1xAVATToBpFbjLpardgLf12Og
+	 t/jM6nMXBB82xTVacMhx2nMDGyVQKTPkaQ3tkMevqIDXx+WWPsSBgAK1AZcoLghvvfA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792748764;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=sv984i3EtPZRLgQvL+4afIipg3exs4lVXN/3p5iVk3M=;
+	b=plApTbJA4S4aQNxqH/dSZi3irRPPlFvOkPsiDJ0WQ6smwd5SntW5mJOP7RXNBwN0z4ww
+	 6pm7byVvbCKgz+CbrmOuljWXnzV6j9EhTfTp6YeKTcOKiimuhzIi5HOxXzrIm3RdT0lL5
+	 U0E7ciQQhHaPu8AGIBZtADS/53DDFMuGKaYBU65FtqABaaCZRMyiSNoLxmdFLvTnmHTnW
+	 E3BwXvkA7D7IgQkLIrCM0G9/JelqBTGLTHKpRWzsfdhi+YSOMECmIKMc3q1yhM7wpysMz
+	 O789zAAGGGNsT1GQI+dBodMjHGARK72MaHj1fZ5dlvv2xNcyZ8XKBpgItKd/JhitHug==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TLd1pMg+;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YwJ0kDr7;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id CB6781F01829;
-	Fri, 23 Oct 2026 09:45:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792748733;
-	bh=sckv4JNuAi5meAQNwLAdMDOJEC6CdBw9UzoGeh/4nvQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=XwV+uDSMgAXYM2Z4yPJ7XefCs4XQ1rkwymvpCGHgXLZkxmUK2btnk1OZ5jFEagSjd
-	 RL+XW5efXy1DUco4yBglHSwMJvyI1AL8H+yZVihOnmdW80USusG4GD60GgCelVVCml
-	 XOiy9wNbBwOMTr19/VMGLy5TZ8OThaYtlZFRSszFqERx3g5+ImT15x4uwRfJS0vUy8
-	 B+RnF6Juuj+9qr41WN5SqHMEB5Q7lA+EpIVzCnFtI6HjlWiUamEYO5vTiSuV0lAFgD
-	 DvKkvP01CfG/NReIaPz5mBcHV8tjtAMqujB9l3EjYFhXltEjmykzEkrkI2l9aepgMr
-	 Q9ozeGnIK5E/w==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 4F5EC4447F;
-	Fri, 23 Oct 2026 09:45:30 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Date: Fri, 23 Oct 2026 15:15:29 +0530
-Subject: [PATCH 2/2] interconnect: qcom: Add SM7250 interconnect provider
- driver
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0483606A31E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:46:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B0483606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TLd1pMg+;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YwJ0kDr7
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7FEpa1767242
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:46:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	sv984i3EtPZRLgQvL+4afIipg3exs4lVXN/3p5iVk3M=; b=TLd1pMg+hsh+sdis
+	QuLNWthzsTT0eaJHxBBFbAr0m+dnNKNHG0+pHCHT4dAK71TN41vEotrFSBThAGuN
+	cPNoXPOM3EbOtRya6rlgET1hFeiH02KpqEoErtjAM5fbFEc5LLKpg7FMdgSxeah3
+	qEMqGvTA5+KiJF+L6YB5mORbgxyl/FEZw53rsd0Up6eIlWgU6RFMLey0Dumbho37
+	0tk0KBnC7N+HrhVf43wwITiYdjigP3/Omp8wurlX+LMYjTXilFSmEEaXSXAxZLe6
+	IW8OU8sbJhlaacAfmT3Oja3FYk9XhdGBgmCWyx2lhYcTKccS5tYaTC9py5tt1srj
+	i8oCzw==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfpahug5u-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:46:02 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-530cd3dff25so1142971cf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 02:46:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792748762; x=1793353562; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=sv984i3EtPZRLgQvL+4afIipg3exs4lVXN/3p5iVk3M=;
+        b=YwJ0kDr7N3llpVFNpy0AeIo2LlY7dm/xGvKkj1ELKqggFNOGXQsrWlIfEbyBolNZFK
+         9XfGpTstOptB46wc4xpl4r3wwFp2nIOH7VEvh5bo30hNli2HSuOora6PFXI/y82Uij+L
+         kDdraxB7R65rDMA+AW0GNhIboPPQ2Cz7dCgeEpOabJ4X/QNoDI3atyK7c35/4yUUftLE
+         Eu/borcPcthnJNii5GDwvYev2gDTtowp3kvgwrzKfForYBFNOLun9gmnuPQlmvwM9hvG
+         19wWR/vomnGlPZ6mzpbY3D986LaXIb/q/GynBc9CUCStC3+ZoOcuQcmZzZk6ftEeFQOz
+         HGIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792748762; x=1793353562;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=sv984i3EtPZRLgQvL+4afIipg3exs4lVXN/3p5iVk3M=;
+        b=orEci+27aPSSsE82WIxKRv70ZgHiSHiTjtaFfX1b92ULWFdyihMOXwCe3e4OD8e6az
+         dGCB3mHX8ldHhl6dkOMd0GArvaJPqd0X20vNnrItBtgOBhKvBCDLWZydoU+EaoTaQgAx
+         22ARuw0Ru+acuJO3QtfaThxPsyDOCMhXyg+XpwU1V3bZj2MR9fPGjZiKhDysU6Kea1YD
+         eKzjWIR9VSoSY2a6Jf0oijILQhkZQPApbnA+B5ALWIC2kvyiZgOvyTaNfGGVuroIlajE
+         W3mvsD9uM/UnfFZiDmwMlVNYVRB0uzXS6ySdpGICu6ofe0FVzErrDuTXMzLgFe9G+eFx
+         dZ0Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzeFFbAdFblc9K8OJVHRWfNt5RDDeDIjxmMVKVItXqeTWPle6RRE8EtbjN/9OuZIe9pvD3jADhIWmfmJF2b@vger.kernel.org
+X-Gm-Message-State: AFq9FYL9H5hnjzI26m0zj6M8iUDeGmxhU3tdUzk/EJDodfEz/Wg7Xrnp
+	V54ROGkCV0ZJOY6TvJ44mK7YudAYpwgAXvn0GPiHMJjFCGLcX9gk/+lf0LaYfQR+ZT2fSdCBrgd
+	WiAHgvW1wXEpMNAvKoFmOo2djn4UBok/wZ5pL0wZbohSQVKzFdnjZH9ju1fVFJ6dOdJnp
+X-Gm-Gg: AYBFou0Jkjmg/4wcfL6XxjZD0z+kdQGP94ob8IvbizYbIIXZOZCZBkUh+rFPSqKV63y
+	itkgySPfQ13RfDJ/ufoPbHylNuPo+Uwe55cSS4a1XPRl58IS5mZOiZt4HQ8UP6s6QOMPUQ7wRQY
+	ltRFwW3pemcWvG1MGldh4+5sHs5H8Utfaw3lCa3zYW2c3gH2VFSNJaVvizHm51KjdRbgPNTvsPl
+	neq1YaU3g6r6US5MdjE83nKC5SHOgEu0LC/u4DTYoTlFay83f3AeoM+GZyM4Uct+0K5dJFoCgPX
+	dSrkKZEEddUuXbnBtOgi3VDqBH9Km8z2Q4WQiV0JY33Cfzn0NyxalTgeRLsGfNZu+7M9nKwAfr7
+	cZEEB69g/MqX31JI4oVgz1Q==
+X-Received: by 2002:a05:622a:ea06:10b0:535:162c:2e81 with SMTP id d75a77b69052e-536c293f856mr20737211cf.5.1792748761858;
+        Fri, 23 Oct 2026 02:46:01 -0700 (PDT)
+X-Received: by 2002:a05:622a:ea06:10b0:535:162c:2e81 with SMTP id d75a77b69052e-536c293f856mr20736901cf.5.1792748761235;
+        Fri, 23 Oct 2026 02:46:01 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5c4d827sm85500066b.15.2026.10.23.02.45.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Oct 2026 02:46:00 -0700 (PDT)
+Message-ID: <729312d0-d48b-4c92-ac6c-98ffbb23d7c7@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 11:45:58 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,1785 +115,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261023-icc-sm7250-v1-2-1e47c1226857@brar.si>
-References: <20261023-icc-sm7250-v1-0-1e47c1226857@brar.si>
-In-Reply-To: <20261023-icc-sm7250-v1-0-1e47c1226857@brar.si>
-To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Ishu Brar <patches@brar.si>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792748728; l=46186;
- i=patches@brar.si; h=from:subject:message-id;
- bh=l9VgpmEE4K+mDmL/MtVdaykrGT+BaZDEpP//aaM/FWA=;
- b=JOyuA2res8L6QzpzEqnW87uSW3pUX1QflUz8zAVnY6c+vvU5RX1mRoPqGtSr4KkrZHoAuW2mC
- 1MzLLo850nqABakmUMX3tG8peIdq9rLzyxmJqgwJuxzCAowvVi9rrrA
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: gcc-ipq6018: add fallback names for the bias
+ PLL parents
+To: Robert Marko <robert.marko@sartura.hr>
+Cc: Julius Bairaktaris <julius@bairaktaris.de>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Vladyslav Andreichykov <vladdrako007@gmail.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261020065430.1251541-1-julius@bairaktaris.de>
+ <30c21159-3008-463c-9cd2-a07f26668a25@sartura.hr>
+ <9699033c-a9e1-4b11-a55f-b1aa216c700f@oss.qualcomm.com>
+ <CA+HBbNELhPAAZoUuXm3SrvgxiU0eMaiu5LB3wfup04_HuZ+yxg@mail.gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <CA+HBbNELhPAAZoUuXm3SrvgxiU0eMaiu5LB3wfup04_HuZ+yxg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzOCBTYWx0ZWRfXxwjYNDBEe+C6
+ rgxMFJqXoaTsGNqqucs13OwYkNxlkI9VKM8GQB0d+A9YEichh4vFyFOZT3Ah195D5BdOSX4ibsK
+ D+nt5Kwi3sjB9qUJNbv6mvSetkRNJRk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzOCBTYWx0ZWRfX/ctw+r1coaXy
+ 1H4xT1D+rMoj2/RWR8p/cE7PJfMAhXXbpbov0QfB3q4YLmpoPXsC+KUVnbrz8MLI7CKGo1TI7JG
+ VbQFSpBa5e72BIiTYNF94wULJuOSl8gxnZWMMyvUc/IX9cZ2BpMDkLYmvKXyqhqw8bSGEiBy3Jo
+ Je+2nhKzuvnZ26F6oRYYTAYTRD+w+R7376aDCSV1UPxX0VmPj8MOD193UIo2o4GFr8A3vs2NsUb
+ oOlUjNZt1ko4VkQ/8B+T1IvSjNlSbKSLdAlEWQyYEqQ4AkEj6VA/rmzwK4WTXjuYNSYq86piLdd
+ OsrtbVYpfV5pN3LR3ide6iVidnm2kgOFBfbsy9+fO/KQtvTrID4nDhJJ0qfkE0ISj4jHwfJOaq0
+ cyp5h4VuS1ElAw1He4csgdv/ecr+YB5StjgSm7wKMHPCE5GB3cSv+VrVTHNinr9mMbURv07PLeA
+ XaM88GJ+LJ4Cbvm9rVg==
+X-Proofpoint-GUID: D502n47nOCYFmwL8hkZeP93KchsEb5tM
+X-Authority-Analysis: v=2.4 cv=YIMKWhGx c=1 sm=1 tr=0 ts=6adb2cda cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=Rp3BUHB5SiOdbJK_EPAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-ORIG-GUID: D502n47nOCYFmwL8hkZeP93KchsEb5tM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
+ impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230038
 
-From: Ishu Brar <patches@brar.si>
+On 10/23/26 11:41 AM, Robert Marko wrote:
+> On Wed, Oct 21, 2026 at 10:06 AM Konrad Dybcio
+> <konrad.dybcio@oss.qualcomm.com> wrote:
+>>
+>> On 10/20/26 1:39 PM, Robert Marko wrote:
+>>>
+>>> On 20/10/2026 08:54, Julius Bairaktaris wrote:
+>>>> From: Vladyslav Andreichykov <vladdrako007@gmail.com>
+>>>>
+>>>> bias_pll_cc_clk and bias_pll_nss_noc_clk are outputs of the CMN PLL,
+>>>> which takes its AHB and SYS clocks from GCC, so the device tree does not
+>>>> pass them back to GCC. With only .fw_name these parents never resolve,
+>>>> nss_ppe_clk_src stays an orphan, and setting it to 300 MHz fails with
+>>>> -EINVAL. The NSS clocks below it, such as gcc_nss_edma_clk, read 0 Hz.
+>>>>
+>>>> Add .name fallbacks so they resolve to the clocks the CMN PLL registers,
+>>>> as gcc-ipq8074 already does.
+>>>>
+>>>> Tested-by: Vladyslav Andreichykov <vladdrako007@gmail.com>
+>>>> Assisted-by: Claude:claude-opus-5-5
+>>>> Signed-off-by: Vladyslav Andreichykov <vladdrako007@gmail.com>
+>>>> Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
+>>>> ---
+>>>
+>>> Hi,
+>>>
+>>> This issue does not exist upstream, as CMN PLL is not yet wired due to missing
+>>> networking, even then the solution is not to add global name matching.
+>>>
+>>> The required clock inputs should just be passed to GCC directly which I have
+>>> just pushed to OpenWrt.
+>>
+>> Just read your reply after writing mine, I'm looking forward to seeing
+>> that patch!
+> 
+> Hi Konrad,
+> You mean the wiring for CMN PLL or?
 
-Add a driver for the Network-On-Chip interconnect providers of the
-Qualcomm SM7250 SoC (Snapdragon 765/765G/768G). It follows the layout of
-the other RPMh based providers: the nodes and the Bus Clock Managers
-come from the downstream interconnect description of the platform.
+Yes the wiring 
 
-Tested on a OnePlus Nord: all providers probe, and the UFS, USB,
-display, I2C, serial and camera ISP devices get their paths without
-errors.
-
-Assisted-by: Claude
-Signed-off-by: Ishu Brar <patches@brar.si>
----
- drivers/interconnect/qcom/Kconfig  |   14 +
- drivers/interconnect/qcom/Makefile |    2 +
- drivers/interconnect/qcom/sm7250.c | 1683 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 1699 insertions(+)
-
-diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
-index 7f3a977e8..fc79bd803 100644
---- a/drivers/interconnect/qcom/Kconfig
-+++ b/drivers/interconnect/qcom/Kconfig
-@@ -426,6 +426,20 @@ config INTERCONNECT_QCOM_SM7150
- 	  This is a driver for the Qualcomm Network-on-Chip on sm7150-based
- 	  platforms.
- 
-+config INTERCONNECT_QCOM_SM7250
-+	tristate "Qualcomm SM7250 interconnect driver"
-+	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
-+	depends on ARM64 || COMPILE_TEST
-+	select INTERCONNECT_QCOM_RPMH
-+	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
-+	help
-+	  This is a driver for the Qualcomm Network-on-Chip on sm7250-based
-+	  platforms.
-+
-+	  To compile this driver as a module, choose M here: the module
-+	  will be called qnoc-sm7250.
-+
- config INTERCONNECT_QCOM_MILOS
- 	tristate "Qualcomm Milos interconnect driver"
- 	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
-diff --git a/drivers/interconnect/qcom/Makefile b/drivers/interconnect/qcom/Makefile
-index a71478aaf..87d2f6630 100644
---- a/drivers/interconnect/qcom/Makefile
-+++ b/drivers/interconnect/qcom/Makefile
-@@ -43,6 +43,7 @@ qnoc-shikra-objs			:= shikra.o
- qnoc-sm6115-objs			:= sm6115.o
- qnoc-sm6350-objs			:= sm6350.o
- qnoc-sm7150-objs			:= sm7150.o
-+qnoc-sm7250-objs			:= sm7250.o
- qnoc-sm8150-objs			:= sm8150.o
- qnoc-sm8250-objs			:= sm8250.o
- qnoc-sm8350-objs			:= sm8350.o
-@@ -93,6 +94,7 @@ obj-$(CONFIG_INTERCONNECT_QCOM_SHIKRA) += qnoc-shikra.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM6115) += qnoc-sm6115.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM6350) += qnoc-sm6350.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM7150) += qnoc-sm7150.o
-+obj-$(CONFIG_INTERCONNECT_QCOM_SM7250) += qnoc-sm7250.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM8150) += qnoc-sm8150.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM8250) += qnoc-sm8250.o
- obj-$(CONFIG_INTERCONNECT_QCOM_SM8350) += qnoc-sm8350.o
-diff --git a/drivers/interconnect/qcom/sm7250.c b/drivers/interconnect/qcom/sm7250.c
-new file mode 100644
-index 000000000..cef29b805
---- /dev/null
-+++ b/drivers/interconnect/qcom/sm7250.c
-@@ -0,0 +1,1683 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
-+ */
-+
-+#include <linux/device.h>
-+#include <linux/interconnect.h>
-+#include <linux/interconnect-provider.h>
-+#include <linux/module.h>
-+#include <linux/platform_device.h>
-+#include <dt-bindings/interconnect/qcom,sm7250-rpmh.h>
-+
-+#include "bcm-voter.h"
-+#include "icc-rpmh.h"
-+
-+static struct qcom_icc_node qhm_a1noc_cfg;
-+static struct qcom_icc_node qhm_qup_1;
-+static struct qcom_icc_node xm_sdc2;
-+static struct qcom_icc_node xm_sdc4;
-+static struct qcom_icc_node xm_emmc;
-+static struct qcom_icc_node xm_ufs_mem;
-+static struct qcom_icc_node xm_usb3_0;
-+static struct qcom_icc_node qhm_a2noc_cfg;
-+static struct qcom_icc_node qhm_qdss_bam;
-+static struct qcom_icc_node qhm_qup_0;
-+static struct qcom_icc_node qxm_crypto;
-+static struct qcom_icc_node qxm_ipa;
-+static struct qcom_icc_node xm_qdss_etr;
-+static struct qcom_icc_node qnm_npu;
-+static struct qcom_icc_node qxm_npu_dsp;
-+static struct qcom_icc_node qnm_snoc;
-+static struct qcom_icc_node xm_qdss_dap;
-+static struct qcom_icc_node qhm_cnoc_dc_noc;
-+static struct qcom_icc_node acm_apps0;
-+static struct qcom_icc_node acm_sys_tcu;
-+static struct qcom_icc_node alm_gpu_tcu;
-+static struct qcom_icc_node qhm_gemnoc_cfg;
-+static struct qcom_icc_node qnm_cmpnoc;
-+static struct qcom_icc_node qnm_gpu;
-+static struct qcom_icc_node qnm_mnoc_hf;
-+static struct qcom_icc_node qnm_mnoc_sf;
-+static struct qcom_icc_node qnm_snoc_gc;
-+static struct qcom_icc_node qnm_snoc_sf;
-+static struct qcom_icc_node ipa_core_master;
-+static struct qcom_icc_node llcc_mc;
-+static struct qcom_icc_node qhm_mnoc_cfg;
-+static struct qcom_icc_node qxm_camnoc_icp;
-+static struct qcom_icc_node qxm_camnoc_hf0;
-+static struct qcom_icc_node qxm_camnoc_hf1;
-+static struct qcom_icc_node qxm_camnoc_sf;
-+static struct qcom_icc_node qxm_mdp0;
-+static struct qcom_icc_node qxm_mdp1;
-+static struct qcom_icc_node qxm_rot;
-+static struct qcom_icc_node qxm_venus0;
-+static struct qcom_icc_node qxm_venus1;
-+static struct qcom_icc_node qxm_venus_arm9;
-+static struct qcom_icc_node amm_npu_sys;
-+static struct qcom_icc_node qhm_cfg;
-+static struct qcom_icc_node qup_core_master_1;
-+static struct qcom_icc_node qup_core_master_2;
-+static struct qcom_icc_node qhm_snoc_cfg;
-+static struct qcom_icc_node qnm_aggre1_noc;
-+static struct qcom_icc_node qnm_aggre2_noc;
-+static struct qcom_icc_node qnm_gemnoc;
-+static struct qcom_icc_node qxm_pimem;
-+static struct qcom_icc_node qns_a1noc_snoc;
-+static struct qcom_icc_node srvc_aggre1_noc;
-+static struct qcom_icc_node qns_a2noc_snoc;
-+static struct qcom_icc_node srvc_aggre2_noc;
-+static struct qcom_icc_node qns_cdsp_gem_noc;
-+static struct qcom_icc_node qhs_a1_noc_cfg;
-+static struct qcom_icc_node qhs_a2_noc_cfg;
-+static struct qcom_icc_node qhs_ahb2phy0;
-+static struct qcom_icc_node qhs_ahb2phy2;
-+static struct qcom_icc_node qhs_aoss;
-+static struct qcom_icc_node qhs_camera_cfg;
-+static struct qcom_icc_node qhs_clk_ctl;
-+static struct qcom_icc_node qhs_compute_dsp;
-+static struct qcom_icc_node qhs_cpr_cx;
-+static struct qcom_icc_node qhs_cpr_mx;
-+static struct qcom_icc_node qhs_crypto0_cfg;
-+static struct qcom_icc_node qhs_cx_rdpm;
-+static struct qcom_icc_node qhs_dcc_cfg;
-+static struct qcom_icc_node qhs_ddrss_cfg;
-+static struct qcom_icc_node qhs_display_cfg;
-+static struct qcom_icc_node qhs_gpuss_cfg;
-+static struct qcom_icc_node qhs_imem_cfg;
-+static struct qcom_icc_node qhs_ipa;
-+static struct qcom_icc_node qhs_ipc_router;
-+static struct qcom_icc_node qhs_lpass_cfg;
-+static struct qcom_icc_node qhs_mnoc_cfg;
-+static struct qcom_icc_node qhs_npu_cfg;
-+static struct qcom_icc_node qhs_pdm;
-+static struct qcom_icc_node qhs_pimem_cfg;
-+static struct qcom_icc_node qhs_prng;
-+static struct qcom_icc_node qhs_qdss_cfg;
-+static struct qcom_icc_node qhs_qup0;
-+static struct qcom_icc_node qhs_qup1;
-+static struct qcom_icc_node qhs_sdc2;
-+static struct qcom_icc_node qhs_sdc4;
-+static struct qcom_icc_node qhs_snoc_cfg;
-+static struct qcom_icc_node qhs_tcsr;
-+static struct qcom_icc_node qhs_tlmm_0;
-+static struct qcom_icc_node qhs_tlmm_1;
-+static struct qcom_icc_node qhs_tlmm_2;
-+static struct qcom_icc_node qhs_ufs_mem_cfg;
-+static struct qcom_icc_node qhs_emmc_cfg;
-+static struct qcom_icc_node qhs_usb3_0;
-+static struct qcom_icc_node qhs_venus_cfg;
-+static struct qcom_icc_node qhs_vsense_ctrl_cfg;
-+static struct qcom_icc_node srvc_cnoc;
-+static struct qcom_icc_node qhs_gemnoc;
-+static struct qcom_icc_node qhs_llcc;
-+static struct qcom_icc_node qhs_mcdma_ms_mpu_cfg;
-+static struct qcom_icc_node qhs_mdsp_ms_mpu_cfg;
-+static struct qcom_icc_node qns_gem_noc_snoc;
-+static struct qcom_icc_node qns_llcc;
-+static struct qcom_icc_node srvc_gemnoc;
-+static struct qcom_icc_node ipa_core_slave;
-+static struct qcom_icc_node ebi;
-+static struct qcom_icc_node qns_mem_noc_hf;
-+static struct qcom_icc_node qns_mem_noc_sf;
-+static struct qcom_icc_node srvc_mnoc;
-+static struct qcom_icc_node qhs_cal_dp0;
-+static struct qcom_icc_node qhs_cp;
-+static struct qcom_icc_node qhs_dma_bwmon;
-+static struct qcom_icc_node qhs_dpm;
-+static struct qcom_icc_node qhs_isense;
-+static struct qcom_icc_node qhs_llm;
-+static struct qcom_icc_node qhs_tcm;
-+static struct qcom_icc_node qns_npu_sys;
-+static struct qcom_icc_node srvc_noc;
-+static struct qcom_icc_node qup_core_slave_1;
-+static struct qcom_icc_node qup_core_slave_2;
-+static struct qcom_icc_node qhs_apss;
-+static struct qcom_icc_node qns_cnoc;
-+static struct qcom_icc_node qns_gemnoc_gc;
-+static struct qcom_icc_node qns_gemnoc_sf;
-+static struct qcom_icc_node qxs_imem;
-+static struct qcom_icc_node qxs_pimem;
-+static struct qcom_icc_node srvc_snoc;
-+static struct qcom_icc_node xs_qdss_stm;
-+static struct qcom_icc_node xs_sys_tcu_cfg;
-+
-+static struct qcom_icc_bcm bcm_cn1;
-+static struct qcom_icc_bcm bcm_ce0;
-+static struct qcom_icc_bcm bcm_co2;
-+static struct qcom_icc_bcm bcm_co3;
-+static struct qcom_icc_bcm bcm_cn0;
-+static struct qcom_icc_bcm bcm_sh4;
-+static struct qcom_icc_bcm bcm_sh2;
-+static struct qcom_icc_bcm bcm_sh3;
-+static struct qcom_icc_bcm bcm_mm3;
-+static struct qcom_icc_bcm bcm_mm1;
-+static struct qcom_icc_bcm bcm_qup0;
-+static struct qcom_icc_bcm bcm_sn5;
-+static struct qcom_icc_bcm bcm_sn6;
-+static struct qcom_icc_bcm bcm_sn10;
-+static struct qcom_icc_bcm bcm_co0;
-+static struct qcom_icc_bcm bcm_sh0;
-+static struct qcom_icc_bcm bcm_ip0;
-+static struct qcom_icc_bcm bcm_mc0;
-+static struct qcom_icc_bcm bcm_acv;
-+static struct qcom_icc_bcm bcm_mm0;
-+static struct qcom_icc_bcm bcm_mm2;
-+static struct qcom_icc_bcm bcm_sn2;
-+static struct qcom_icc_bcm bcm_sn0;
-+static struct qcom_icc_bcm bcm_sn1;
-+static struct qcom_icc_bcm bcm_sn3;
-+static struct qcom_icc_bcm bcm_sn4;
-+
-+static struct qcom_icc_node qhm_a1noc_cfg = {
-+	.name = "qhm_a1noc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &srvc_aggre1_noc },
-+};
-+
-+static struct qcom_icc_node qhm_qup_1 = {
-+	.name = "qhm_qup_1",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_sdc2 = {
-+	.name = "xm_sdc2",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_sdc4 = {
-+	.name = "xm_sdc4",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_emmc = {
-+	.name = "xm_emmc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_ufs_mem = {
-+	.name = "xm_ufs_mem",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_usb3_0 = {
-+	.name = "xm_usb3_0",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a1noc_snoc },
-+};
-+
-+static struct qcom_icc_node qhm_a2noc_cfg = {
-+	.name = "qhm_a2noc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &srvc_aggre2_noc },
-+};
-+
-+static struct qcom_icc_node qhm_qdss_bam = {
-+	.name = "qhm_qdss_bam",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a2noc_snoc },
-+};
-+
-+static struct qcom_icc_node qhm_qup_0 = {
-+	.name = "qhm_qup_0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a2noc_snoc },
-+};
-+
-+static struct qcom_icc_node qxm_crypto = {
-+	.name = "qxm_crypto",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a2noc_snoc },
-+};
-+
-+static struct qcom_icc_node qxm_ipa = {
-+	.name = "qxm_ipa",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a2noc_snoc },
-+};
-+
-+static struct qcom_icc_node xm_qdss_etr = {
-+	.name = "xm_qdss_etr",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_a2noc_snoc },
-+};
-+
-+static struct qcom_icc_node qnm_npu = {
-+	.name = "qnm_npu",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_cdsp_gem_noc },
-+};
-+
-+static struct qcom_icc_node qxm_npu_dsp = {
-+	.name = "qxm_npu_dsp",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_cdsp_gem_noc },
-+};
-+
-+static struct qcom_icc_node qnm_snoc = {
-+	.name = "qnm_snoc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 41,
-+	.link_nodes = { &qhs_compute_dsp, &qhs_tlmm_2, &qhs_camera_cfg, &qhs_tlmm_0, &qhs_sdc4,
-+		&qhs_sdc2, &qhs_mnoc_cfg, &qhs_ufs_mem_cfg, &qhs_snoc_cfg, &qhs_pdm, &qhs_cx_rdpm,
-+		&qhs_tlmm_1, &qhs_a2_noc_cfg, &qhs_qdss_cfg, &qhs_display_cfg, &qhs_tcsr,
-+		&qhs_dcc_cfg, &qhs_ddrss_cfg, &qhs_ipc_router, &qhs_ahb2phy2, &qhs_npu_cfg,
-+		&qhs_ahb2phy0, &qhs_gpuss_cfg, &qhs_venus_cfg, &qhs_ipa, &qhs_imem_cfg, &srvc_cnoc,
-+		&qhs_usb3_0, &qhs_lpass_cfg, &qhs_cpr_cx, &qhs_a1_noc_cfg, &qhs_aoss, &qhs_prng,
-+		&qhs_vsense_ctrl_cfg, &qhs_crypto0_cfg, &qhs_pimem_cfg, &qhs_cpr_mx, &qhs_qup0,
-+		&qhs_qup1, &qhs_clk_ctl, &qhs_emmc_cfg },
-+};
-+
-+static struct qcom_icc_node xm_qdss_dap = {
-+	.name = "xm_qdss_dap",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 41,
-+	.link_nodes = { &qhs_compute_dsp, &qhs_tlmm_2, &qhs_camera_cfg, &qhs_tlmm_0, &qhs_sdc4,
-+		&qhs_sdc2, &qhs_mnoc_cfg, &qhs_ufs_mem_cfg, &qhs_snoc_cfg, &qhs_pdm, &qhs_cx_rdpm,
-+		&qhs_tlmm_1, &qhs_a2_noc_cfg, &qhs_qdss_cfg, &qhs_display_cfg, &qhs_tcsr,
-+		&qhs_dcc_cfg, &qhs_ddrss_cfg, &qhs_ipc_router, &qhs_ahb2phy2, &qhs_npu_cfg,
-+		&qhs_ahb2phy0, &qhs_gpuss_cfg, &qhs_venus_cfg, &qhs_ipa, &qhs_imem_cfg, &srvc_cnoc,
-+		&qhs_usb3_0, &qhs_lpass_cfg, &qhs_cpr_cx, &qhs_a1_noc_cfg, &qhs_aoss, &qhs_prng,
-+		&qhs_vsense_ctrl_cfg, &qhs_crypto0_cfg, &qhs_pimem_cfg, &qhs_cpr_mx, &qhs_qup0,
-+		&qhs_qup1, &qhs_clk_ctl, &qhs_emmc_cfg },
-+};
-+
-+static struct qcom_icc_node qhm_cnoc_dc_noc = {
-+	.name = "qhm_cnoc_dc_noc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 2,
-+	.link_nodes = { &qhs_llcc, &qhs_gemnoc },
-+};
-+
-+static struct qcom_icc_node acm_apps0 = {
-+	.name = "acm_apps0",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node acm_sys_tcu = {
-+	.name = "acm_sys_tcu",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node alm_gpu_tcu = {
-+	.name = "alm_gpu_tcu",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node qhm_gemnoc_cfg = {
-+	.name = "qhm_gemnoc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 3,
-+	.link_nodes = { &qhs_mcdma_ms_mpu_cfg, &srvc_gemnoc, &qhs_mdsp_ms_mpu_cfg },
-+};
-+
-+static struct qcom_icc_node qnm_cmpnoc = {
-+	.name = "qnm_cmpnoc",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node qnm_gpu = {
-+	.name = "qnm_gpu",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node qnm_mnoc_hf = {
-+	.name = "qnm_mnoc_hf",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_llcc },
-+};
-+
-+static struct qcom_icc_node qnm_mnoc_sf = {
-+	.name = "qnm_mnoc_sf",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 2,
-+	.link_nodes = { &qns_llcc, &qns_gem_noc_snoc },
-+};
-+
-+static struct qcom_icc_node qnm_snoc_gc = {
-+	.name = "qnm_snoc_gc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_llcc },
-+};
-+
-+static struct qcom_icc_node qnm_snoc_sf = {
-+	.name = "qnm_snoc_sf",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.link_nodes = { &qns_llcc },
-+};
-+
-+static struct qcom_icc_node ipa_core_master = {
-+	.name = "ipa_core_master",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &ipa_core_slave },
-+};
-+
-+static struct qcom_icc_node llcc_mc = {
-+	.name = "llcc_mc",
-+	.channels = 2,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &ebi },
-+};
-+
-+static struct qcom_icc_node qhm_mnoc_cfg = {
-+	.name = "qhm_mnoc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &srvc_mnoc },
-+};
-+
-+static struct qcom_icc_node qxm_camnoc_icp = {
-+	.name = "qxm_camnoc_icp",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node qxm_camnoc_hf0 = {
-+	.name = "qxm_camnoc_hf0",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_hf },
-+};
-+
-+static struct qcom_icc_node qxm_camnoc_hf1 = {
-+	.name = "qxm_camnoc_hf1",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_hf },
-+};
-+
-+static struct qcom_icc_node qxm_camnoc_sf = {
-+	.name = "qxm_camnoc_sf",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node qxm_mdp0 = {
-+	.name = "qxm_mdp0",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_hf },
-+};
-+
-+static struct qcom_icc_node qxm_mdp1 = {
-+	.name = "qxm_mdp1",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_hf },
-+};
-+
-+static struct qcom_icc_node qxm_rot = {
-+	.name = "qxm_rot",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node qxm_venus0 = {
-+	.name = "qxm_venus0",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node qxm_venus1 = {
-+	.name = "qxm_venus1",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node qxm_venus_arm9 = {
-+	.name = "qxm_venus_arm9",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_node amm_npu_sys = {
-+	.name = "amm_npu_sys",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qns_npu_sys },
-+};
-+
-+static struct qcom_icc_node qhm_cfg = {
-+	.name = "qhm_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 8,
-+	.link_nodes = { &srvc_noc, &qhs_isense, &qhs_llm, &qhs_dma_bwmon, &qhs_cp, &qhs_tcm,
-+		&qhs_cal_dp0, &qhs_dpm },
-+};
-+
-+static struct qcom_icc_node qup_core_master_1 = {
-+	.name = "qup_core_master_1",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qup_core_slave_1 },
-+};
-+
-+static struct qcom_icc_node qup_core_master_2 = {
-+	.name = "qup_core_master_2",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qup_core_slave_2 },
-+};
-+
-+static struct qcom_icc_node qhm_snoc_cfg = {
-+	.name = "qhm_snoc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &srvc_snoc },
-+};
-+
-+static struct qcom_icc_node qnm_aggre1_noc = {
-+	.name = "qnm_aggre1_noc",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 6,
-+	.link_nodes = { &qns_gemnoc_sf, &qxs_pimem, &qxs_imem, &qhs_apss, &qns_cnoc, &xs_qdss_stm },
-+};
-+
-+static struct qcom_icc_node qnm_aggre2_noc = {
-+	.name = "qnm_aggre2_noc",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 7,
-+	.link_nodes = { &qns_gemnoc_sf, &qxs_pimem, &qxs_imem, &qhs_apss, &qns_cnoc,
-+		&xs_sys_tcu_cfg, &xs_qdss_stm },
-+};
-+
-+static struct qcom_icc_node qnm_gemnoc = {
-+	.name = "qnm_gemnoc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 6,
-+	.link_nodes = { &qxs_pimem, &qxs_imem, &qhs_apss, &qns_cnoc, &xs_sys_tcu_cfg,
-+		&xs_qdss_stm },
-+};
-+
-+static struct qcom_icc_node qxm_pimem = {
-+	.name = "qxm_pimem",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 2,
-+	.link_nodes = { &qns_gemnoc_gc, &qxs_imem },
-+};
-+
-+static struct qcom_icc_node qns_a1noc_snoc = {
-+	.name = "qns_a1noc_snoc",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_aggre1_noc },
-+};
-+
-+static struct qcom_icc_node srvc_aggre1_noc = {
-+	.name = "srvc_aggre1_noc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_a2noc_snoc = {
-+	.name = "qns_a2noc_snoc",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_aggre2_noc },
-+};
-+
-+static struct qcom_icc_node srvc_aggre2_noc = {
-+	.name = "srvc_aggre2_noc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_cdsp_gem_noc = {
-+	.name = "qns_cdsp_gem_noc",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_cmpnoc },
-+};
-+
-+static struct qcom_icc_node qhs_a1_noc_cfg = {
-+	.name = "qhs_a1_noc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_a1noc_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_a2_noc_cfg = {
-+	.name = "qhs_a2_noc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_a2noc_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_ahb2phy0 = {
-+	.name = "qhs_ahb2phy0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_ahb2phy2 = {
-+	.name = "qhs_ahb2phy2",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_aoss = {
-+	.name = "qhs_aoss",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_camera_cfg = {
-+	.name = "qhs_camera_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_clk_ctl = {
-+	.name = "qhs_clk_ctl",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_compute_dsp = {
-+	.name = "qhs_compute_dsp",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_cpr_cx = {
-+	.name = "qhs_cpr_cx",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_cpr_mx = {
-+	.name = "qhs_cpr_mx",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_crypto0_cfg = {
-+	.name = "qhs_crypto0_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_cx_rdpm = {
-+	.name = "qhs_cx_rdpm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_dcc_cfg = {
-+	.name = "qhs_dcc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_ddrss_cfg = {
-+	.name = "qhs_ddrss_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_cnoc_dc_noc },
-+};
-+
-+static struct qcom_icc_node qhs_display_cfg = {
-+	.name = "qhs_display_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_gpuss_cfg = {
-+	.name = "qhs_gpuss_cfg",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_imem_cfg = {
-+	.name = "qhs_imem_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_ipa = {
-+	.name = "qhs_ipa",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_ipc_router = {
-+	.name = "qhs_ipc_router",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_lpass_cfg = {
-+	.name = "qhs_lpass_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_mnoc_cfg = {
-+	.name = "qhs_mnoc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_mnoc_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_npu_cfg = {
-+	.name = "qhs_npu_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_pdm = {
-+	.name = "qhs_pdm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_pimem_cfg = {
-+	.name = "qhs_pimem_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_prng = {
-+	.name = "qhs_prng",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_qdss_cfg = {
-+	.name = "qhs_qdss_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_qup0 = {
-+	.name = "qhs_qup0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_qup1 = {
-+	.name = "qhs_qup1",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_sdc2 = {
-+	.name = "qhs_sdc2",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_sdc4 = {
-+	.name = "qhs_sdc4",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_snoc_cfg = {
-+	.name = "qhs_snoc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_snoc_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_tcsr = {
-+	.name = "qhs_tcsr",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_tlmm_0 = {
-+	.name = "qhs_tlmm_0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_tlmm_1 = {
-+	.name = "qhs_tlmm_1",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_tlmm_2 = {
-+	.name = "qhs_tlmm_2",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_ufs_mem_cfg = {
-+	.name = "qhs_ufs_mem_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_emmc_cfg = {
-+	.name = "qhs_emmc_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_usb3_0 = {
-+	.name = "qhs_usb3_0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_venus_cfg = {
-+	.name = "qhs_venus_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_vsense_ctrl_cfg = {
-+	.name = "qhs_vsense_ctrl_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node srvc_cnoc = {
-+	.name = "srvc_cnoc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_gemnoc = {
-+	.name = "qhs_gemnoc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 1,
-+	.link_nodes = { &qhm_gemnoc_cfg },
-+};
-+
-+static struct qcom_icc_node qhs_llcc = {
-+	.name = "qhs_llcc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_mcdma_ms_mpu_cfg = {
-+	.name = "qhs_mcdma_ms_mpu_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_mdsp_ms_mpu_cfg = {
-+	.name = "qhs_mdsp_ms_mpu_cfg",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_gem_noc_snoc = {
-+	.name = "qns_gem_noc_snoc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_gemnoc },
-+};
-+
-+static struct qcom_icc_node qns_llcc = {
-+	.name = "qns_llcc",
-+	.channels = 2,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.link_nodes = { &llcc_mc },
-+};
-+
-+static struct qcom_icc_node srvc_gemnoc = {
-+	.name = "srvc_gemnoc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node ipa_core_slave = {
-+	.name = "ipa_core_slave",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node ebi = {
-+	.name = "ebi",
-+	.channels = 2,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_mem_noc_hf = {
-+	.name = "qns_mem_noc_hf",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_mnoc_hf },
-+};
-+
-+static struct qcom_icc_node qns_mem_noc_sf = {
-+	.name = "qns_mem_noc_sf",
-+	.channels = 1,
-+	.buswidth = 32,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_mnoc_sf },
-+};
-+
-+static struct qcom_icc_node srvc_mnoc = {
-+	.name = "srvc_mnoc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_cal_dp0 = {
-+	.name = "qhs_cal_dp0",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_cp = {
-+	.name = "qhs_cp",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_dma_bwmon = {
-+	.name = "qhs_dma_bwmon",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_dpm = {
-+	.name = "qhs_dpm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_isense = {
-+	.name = "qhs_isense",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_llm = {
-+	.name = "qhs_llm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_tcm = {
-+	.name = "qhs_tcm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_npu_sys = {
-+	.name = "qns_npu_sys",
-+	.channels = 2,
-+	.buswidth = 32,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node srvc_noc = {
-+	.name = "srvc_noc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qup_core_slave_1 = {
-+	.name = "qup_core_slave_1",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qup_core_slave_2 = {
-+	.name = "qup_core_slave_2",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qhs_apss = {
-+	.name = "qhs_apss",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qns_cnoc = {
-+	.name = "qns_cnoc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_snoc },
-+};
-+
-+static struct qcom_icc_node qns_gemnoc_gc = {
-+	.name = "qns_gemnoc_gc",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_snoc_gc },
-+};
-+
-+static struct qcom_icc_node qns_gemnoc_sf = {
-+	.name = "qns_gemnoc_sf",
-+	.channels = 1,
-+	.buswidth = 16,
-+	.num_links = 1,
-+	.link_nodes = { &qnm_snoc_sf },
-+};
-+
-+static struct qcom_icc_node qxs_imem = {
-+	.name = "qxs_imem",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node qxs_pimem = {
-+	.name = "qxs_pimem",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node srvc_snoc = {
-+	.name = "srvc_snoc",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node xs_qdss_stm = {
-+	.name = "xs_qdss_stm",
-+	.channels = 1,
-+	.buswidth = 4,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_node xs_sys_tcu_cfg = {
-+	.name = "xs_sys_tcu_cfg",
-+	.channels = 1,
-+	.buswidth = 8,
-+	.num_links = 0,
-+};
-+
-+static struct qcom_icc_bcm bcm_cn1 = {
-+	.name = "CN1",
-+	.keepalive = false,
-+	.num_nodes = 8,
-+	.nodes = { &xm_sdc2, &xm_sdc4, &xm_emmc, &qhs_ahb2phy2, &qhs_pdm, &qhs_sdc2, &qhs_sdc4,
-+		&qhs_emmc_cfg },
-+};
-+
-+static struct qcom_icc_bcm bcm_ce0 = {
-+	.name = "CE0",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qxm_crypto },
-+};
-+
-+static struct qcom_icc_bcm bcm_co2 = {
-+	.name = "CO2",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_npu },
-+};
-+
-+static struct qcom_icc_bcm bcm_co3 = {
-+	.name = "CO3",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qxm_npu_dsp },
-+};
-+
-+static struct qcom_icc_bcm bcm_cn0 = {
-+	.name = "CN0",
-+	.keepalive = true,
-+	.num_nodes = 38,
-+	.nodes = { &qnm_snoc, &xm_qdss_dap, &qhs_a1_noc_cfg, &qhs_a2_noc_cfg, &qhs_ahb2phy0,
-+		&qhs_aoss, &qhs_camera_cfg, &qhs_clk_ctl, &qhs_compute_dsp, &qhs_cpr_cx,
-+		&qhs_cpr_mx, &qhs_crypto0_cfg, &qhs_cx_rdpm, &qhs_dcc_cfg, &qhs_ddrss_cfg,
-+		&qhs_display_cfg, &qhs_gpuss_cfg, &qhs_imem_cfg, &qhs_ipa, &qhs_ipc_router,
-+		&qhs_lpass_cfg, &qhs_mnoc_cfg, &qhs_npu_cfg, &qhs_pimem_cfg, &qhs_prng,
-+		&qhs_qdss_cfg, &qhs_qup0, &qhs_qup1, &qhs_snoc_cfg, &qhs_tcsr, &qhs_tlmm_0,
-+		&qhs_tlmm_1, &qhs_tlmm_2, &qhs_ufs_mem_cfg, &qhs_usb3_0, &qhs_venus_cfg,
-+		&qhs_vsense_ctrl_cfg, &srvc_cnoc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh4 = {
-+	.name = "SH4",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &acm_apps0 },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh2 = {
-+	.name = "SH2",
-+	.keepalive = false,
-+	.num_nodes = 2,
-+	.nodes = { &acm_sys_tcu, &alm_gpu_tcu },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh3 = {
-+	.name = "SH3",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_cmpnoc },
-+};
-+
-+static struct qcom_icc_bcm bcm_mm3 = {
-+	.name = "MM3",
-+	.keepalive = false,
-+	.num_nodes = 5,
-+	.nodes = { &qxm_camnoc_icp, &qxm_camnoc_sf, &qxm_venus0, &qxm_venus1, &qxm_venus_arm9 },
-+};
-+
-+static struct qcom_icc_bcm bcm_mm1 = {
-+	.name = "MM1",
-+	.keepalive = true,
-+	.num_nodes = 4,
-+	.nodes = { &qxm_camnoc_hf0, &qxm_camnoc_hf1, &qxm_mdp0, &qxm_mdp1 },
-+};
-+
-+static struct qcom_icc_bcm bcm_qup0 = {
-+	.name = "QUP0",
-+	.keepalive = false,
-+	.num_nodes = 2,
-+	.nodes = { &qup_core_master_1, &qup_core_master_2 },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn5 = {
-+	.name = "SN5",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_aggre1_noc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn6 = {
-+	.name = "SN6",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_aggre2_noc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn10 = {
-+	.name = "SN10",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qnm_gemnoc },
-+};
-+
-+static struct qcom_icc_bcm bcm_co0 = {
-+	.name = "CO0",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qns_cdsp_gem_noc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sh0 = {
-+	.name = "SH0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qns_llcc },
-+};
-+
-+static struct qcom_icc_bcm bcm_ip0 = {
-+	.name = "IP0",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &ipa_core_slave },
-+};
-+
-+static struct qcom_icc_bcm bcm_mc0 = {
-+	.name = "MC0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &ebi },
-+};
-+
-+static struct qcom_icc_bcm bcm_acv = {
-+	.name = "ACV",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &ebi },
-+};
-+
-+static struct qcom_icc_bcm bcm_mm0 = {
-+	.name = "MM0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qns_mem_noc_hf },
-+};
-+
-+static struct qcom_icc_bcm bcm_mm2 = {
-+	.name = "MM2",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qns_mem_noc_sf },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn2 = {
-+	.name = "SN2",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qns_gemnoc_gc },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn0 = {
-+	.name = "SN0",
-+	.keepalive = true,
-+	.num_nodes = 1,
-+	.nodes = { &qns_gemnoc_sf },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn1 = {
-+	.name = "SN1",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qxs_imem },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn3 = {
-+	.name = "SN3",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &qxs_pimem },
-+};
-+
-+static struct qcom_icc_bcm bcm_sn4 = {
-+	.name = "SN4",
-+	.keepalive = false,
-+	.num_nodes = 1,
-+	.nodes = { &xs_qdss_stm },
-+};
-+
-+static struct qcom_icc_bcm * const aggre1_noc_bcms[] = {
-+	&bcm_cn1,
-+};
-+
-+static struct qcom_icc_node * const aggre1_noc_nodes[] = {
-+	[MASTER_A1NOC_CFG] = &qhm_a1noc_cfg,
-+	[MASTER_QUP_1] = &qhm_qup_1,
-+	[MASTER_SDCC_2] = &xm_sdc2,
-+	[MASTER_SDCC_4] = &xm_sdc4,
-+	[MASTER_EMMC] = &xm_emmc,
-+	[MASTER_UFS_MEM] = &xm_ufs_mem,
-+	[MASTER_USB3] = &xm_usb3_0,
-+	[A1NOC_SNOC_SLV] = &qns_a1noc_snoc,
-+	[SLAVE_SERVICE_A1NOC] = &srvc_aggre1_noc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_aggre1_noc = {
-+	.nodes = aggre1_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(aggre1_noc_nodes),
-+	.bcms = aggre1_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(aggre1_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const aggre2_noc_bcms[] = {
-+	&bcm_ce0,
-+};
-+
-+static struct qcom_icc_node * const aggre2_noc_nodes[] = {
-+	[MASTER_A2NOC_CFG] = &qhm_a2noc_cfg,
-+	[MASTER_QDSS_BAM] = &qhm_qdss_bam,
-+	[MASTER_QUP_0] = &qhm_qup_0,
-+	[MASTER_CRYPTO_CORE_0] = &qxm_crypto,
-+	[MASTER_IPA] = &qxm_ipa,
-+	[MASTER_QDSS_ETR] = &xm_qdss_etr,
-+	[A2NOC_SNOC_SLV] = &qns_a2noc_snoc,
-+	[SLAVE_SERVICE_A2NOC] = &srvc_aggre2_noc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_aggre2_noc = {
-+	.nodes = aggre2_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(aggre2_noc_nodes),
-+	.bcms = aggre2_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(aggre2_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const compute_noc_bcms[] = {
-+	&bcm_co0,
-+	&bcm_co2,
-+	&bcm_co3,
-+};
-+
-+static struct qcom_icc_node * const compute_noc_nodes[] = {
-+	[MASTER_NPU] = &qnm_npu,
-+	[MASTER_NPU_CDP] = &qxm_npu_dsp,
-+	[SLAVE_CDSP_GEM_NOC] = &qns_cdsp_gem_noc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_compute_noc = {
-+	.nodes = compute_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(compute_noc_nodes),
-+	.bcms = compute_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(compute_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const config_noc_bcms[] = {
-+	&bcm_cn0,
-+	&bcm_cn1,
-+};
-+
-+static struct qcom_icc_node * const config_noc_nodes[] = {
-+	[SNOC_CNOC_MAS] = &qnm_snoc,
-+	[MASTER_QDSS_DAP] = &xm_qdss_dap,
-+	[SLAVE_A1NOC_CFG] = &qhs_a1_noc_cfg,
-+	[SLAVE_A2NOC_CFG] = &qhs_a2_noc_cfg,
-+	[SLAVE_AHB2PHY_SOUTH] = &qhs_ahb2phy0,
-+	[SLAVE_AHB2PHY_CENTER] = &qhs_ahb2phy2,
-+	[SLAVE_AOSS] = &qhs_aoss,
-+	[SLAVE_CAMERA_CFG] = &qhs_camera_cfg,
-+	[SLAVE_CLK_CTL] = &qhs_clk_ctl,
-+	[SLAVE_CDSP_CFG] = &qhs_compute_dsp,
-+	[SLAVE_RBCPR_CX_CFG] = &qhs_cpr_cx,
-+	[SLAVE_RBCPR_MX_CFG] = &qhs_cpr_mx,
-+	[SLAVE_CRYPTO_0_CFG] = &qhs_crypto0_cfg,
-+	[SLAVE_CX_RDPM] = &qhs_cx_rdpm,
-+	[SLAVE_DCC_CFG] = &qhs_dcc_cfg,
-+	[SLAVE_CNOC_DDRSS] = &qhs_ddrss_cfg,
-+	[SLAVE_DISPLAY_CFG] = &qhs_display_cfg,
-+	[SLAVE_GRAPHICS_3D_CFG] = &qhs_gpuss_cfg,
-+	[SLAVE_IMEM_CFG] = &qhs_imem_cfg,
-+	[SLAVE_IPA_CFG] = &qhs_ipa,
-+	[SLAVE_IPC_ROUTER_CFG] = &qhs_ipc_router,
-+	[SLAVE_LPASS] = &qhs_lpass_cfg,
-+	[SLAVE_CNOC_MNOC_CFG] = &qhs_mnoc_cfg,
-+	[SLAVE_NPU_CFG] = &qhs_npu_cfg,
-+	[SLAVE_PDM] = &qhs_pdm,
-+	[SLAVE_PIMEM_CFG] = &qhs_pimem_cfg,
-+	[SLAVE_PRNG] = &qhs_prng,
-+	[SLAVE_QDSS_CFG] = &qhs_qdss_cfg,
-+	[SLAVE_QUP_0] = &qhs_qup0,
-+	[SLAVE_QUP_1] = &qhs_qup1,
-+	[SLAVE_SDCC_2] = &qhs_sdc2,
-+	[SLAVE_SDCC_4] = &qhs_sdc4,
-+	[SLAVE_SNOC_CFG] = &qhs_snoc_cfg,
-+	[SLAVE_TCSR] = &qhs_tcsr,
-+	[SLAVE_TLMM_NORTH] = &qhs_tlmm_0,
-+	[SLAVE_TLMM_SOUTH] = &qhs_tlmm_1,
-+	[SLAVE_TLMM_WEST] = &qhs_tlmm_2,
-+	[SLAVE_UFS_MEM_CFG] = &qhs_ufs_mem_cfg,
-+	[SLAVE_EMMC_CFG] = &qhs_emmc_cfg,
-+	[SLAVE_USB3] = &qhs_usb3_0,
-+	[SLAVE_VENUS_CFG] = &qhs_venus_cfg,
-+	[SLAVE_VSENSE_CTRL_CFG] = &qhs_vsense_ctrl_cfg,
-+	[SLAVE_SERVICE_CNOC] = &srvc_cnoc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_config_noc = {
-+	.nodes = config_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(config_noc_nodes),
-+	.bcms = config_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(config_noc_bcms),
-+};
-+
-+static struct qcom_icc_node * const dc_noc_nodes[] = {
-+	[MASTER_CNOC_DC_NOC] = &qhm_cnoc_dc_noc,
-+	[SLAVE_GEM_NOC_CFG] = &qhs_gemnoc,
-+	[SLAVE_LLCC_CFG] = &qhs_llcc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_dc_noc = {
-+	.nodes = dc_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(dc_noc_nodes),
-+};
-+
-+static struct qcom_icc_bcm * const gem_noc_bcms[] = {
-+	&bcm_sh0,
-+	&bcm_sh2,
-+	&bcm_sh3,
-+	&bcm_sh4,
-+};
-+
-+static struct qcom_icc_node * const gem_noc_nodes[] = {
-+	[MASTER_AMPSS_M0] = &acm_apps0,
-+	[MASTER_SYS_TCU] = &acm_sys_tcu,
-+	[MASTER_GPU_TCU] = &alm_gpu_tcu,
-+	[MASTER_GEM_NOC_CFG] = &qhm_gemnoc_cfg,
-+	[MASTER_COMPUTE_NOC] = &qnm_cmpnoc,
-+	[MASTER_GRAPHICS_3D] = &qnm_gpu,
-+	[MASTER_MNOC_HF_MEM_NOC] = &qnm_mnoc_hf,
-+	[MASTER_MNOC_SF_MEM_NOC] = &qnm_mnoc_sf,
-+	[MASTER_SNOC_GC_MEM_NOC] = &qnm_snoc_gc,
-+	[MASTER_SNOC_SF_MEM_NOC] = &qnm_snoc_sf,
-+	[SLAVE_MCDMA_MS_MPU_CFG] = &qhs_mcdma_ms_mpu_cfg,
-+	[SLAVE_MSS_PROC_MS_MPU_CFG] = &qhs_mdsp_ms_mpu_cfg,
-+	[SLAVE_GEM_NOC_SNOC] = &qns_gem_noc_snoc,
-+	[SLAVE_LLCC] = &qns_llcc,
-+	[SLAVE_SERVICE_GEM_NOC] = &srvc_gemnoc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_gem_noc = {
-+	.nodes = gem_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(gem_noc_nodes),
-+	.bcms = gem_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(gem_noc_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const ipa_virt_bcms[] = {
-+	&bcm_ip0,
-+};
-+
-+static struct qcom_icc_node * const ipa_virt_nodes[] = {
-+	[MASTER_IPA_CORE] = &ipa_core_master,
-+	[SLAVE_IPA_CORE] = &ipa_core_slave,
-+};
-+
-+static const struct qcom_icc_desc sm7250_ipa_virt = {
-+	.nodes = ipa_virt_nodes,
-+	.num_nodes = ARRAY_SIZE(ipa_virt_nodes),
-+	.bcms = ipa_virt_bcms,
-+	.num_bcms = ARRAY_SIZE(ipa_virt_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const mc_virt_bcms[] = {
-+	&bcm_acv,
-+	&bcm_mc0,
-+};
-+
-+static struct qcom_icc_node * const mc_virt_nodes[] = {
-+	[MASTER_LLCC] = &llcc_mc,
-+	[SLAVE_EBI_CH0] = &ebi,
-+};
-+
-+static const struct qcom_icc_desc sm7250_mc_virt = {
-+	.nodes = mc_virt_nodes,
-+	.num_nodes = ARRAY_SIZE(mc_virt_nodes),
-+	.bcms = mc_virt_bcms,
-+	.num_bcms = ARRAY_SIZE(mc_virt_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const mmss_noc_bcms[] = {
-+	&bcm_mm0,
-+	&bcm_mm1,
-+	&bcm_mm2,
-+	&bcm_mm3,
-+};
-+
-+static struct qcom_icc_node * const mmss_noc_nodes[] = {
-+	[MASTER_CNOC_MNOC_CFG] = &qhm_mnoc_cfg,
-+	[MASTER_CAMNOC_ICP] = &qxm_camnoc_icp,
-+	[MASTER_CAMNOC_HF0] = &qxm_camnoc_hf0,
-+	[MASTER_CAMNOC_HF1] = &qxm_camnoc_hf1,
-+	[MASTER_CAMNOC_SF] = &qxm_camnoc_sf,
-+	[MASTER_MDP_PORT0] = &qxm_mdp0,
-+	[MASTER_MDP_PORT1] = &qxm_mdp1,
-+	[MASTER_ROTATOR] = &qxm_rot,
-+	[MASTER_VIDEO_P0] = &qxm_venus0,
-+	[MASTER_VIDEO_P1] = &qxm_venus1,
-+	[MASTER_VIDEO_PROC] = &qxm_venus_arm9,
-+	[SLAVE_MNOC_HF_MEM_NOC] = &qns_mem_noc_hf,
-+	[SLAVE_MNOC_SF_MEM_NOC] = &qns_mem_noc_sf,
-+	[SLAVE_SERVICE_MNOC] = &srvc_mnoc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_mmss_noc = {
-+	.nodes = mmss_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(mmss_noc_nodes),
-+	.bcms = mmss_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(mmss_noc_bcms),
-+};
-+
-+static struct qcom_icc_node * const npu_noc_nodes[] = {
-+	[MASTER_NPU_SYS] = &amm_npu_sys,
-+	[MASTER_NPU_NOC_CFG] = &qhm_cfg,
-+	[SLAVE_NPU_CAL_DP0] = &qhs_cal_dp0,
-+	[SLAVE_NPU_CP] = &qhs_cp,
-+	[SLAVE_NPU_INT_DMA_BWMON_CFG] = &qhs_dma_bwmon,
-+	[SLAVE_NPU_DPM] = &qhs_dpm,
-+	[SLAVE_ISENSE_CFG] = &qhs_isense,
-+	[SLAVE_NPU_LLM_CFG] = &qhs_llm,
-+	[SLAVE_NPU_TCM] = &qhs_tcm,
-+	[SLAVE_NPU_COMPUTE_NOC] = &qns_npu_sys,
-+	[SLAVE_SERVICE_NPU_NOC] = &srvc_noc,
-+};
-+
-+static const struct qcom_icc_desc sm7250_npu_noc = {
-+	.nodes = npu_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(npu_noc_nodes),
-+};
-+
-+static struct qcom_icc_bcm * const qup_virt_bcms[] = {
-+	&bcm_qup0,
-+};
-+
-+static struct qcom_icc_node * const qup_virt_nodes[] = {
-+	[MASTER_QUP_CORE_0] = &qup_core_master_1,
-+	[MASTER_QUP_CORE_1] = &qup_core_master_2,
-+	[SLAVE_QUP_CORE_0] = &qup_core_slave_1,
-+	[SLAVE_QUP_CORE_1] = &qup_core_slave_2,
-+};
-+
-+static const struct qcom_icc_desc sm7250_qup_virt = {
-+	.nodes = qup_virt_nodes,
-+	.num_nodes = ARRAY_SIZE(qup_virt_nodes),
-+	.bcms = qup_virt_bcms,
-+	.num_bcms = ARRAY_SIZE(qup_virt_bcms),
-+};
-+
-+static struct qcom_icc_bcm * const system_noc_bcms[] = {
-+	&bcm_sn0,
-+	&bcm_sn1,
-+	&bcm_sn10,
-+	&bcm_sn2,
-+	&bcm_sn3,
-+	&bcm_sn4,
-+	&bcm_sn5,
-+	&bcm_sn6,
-+};
-+
-+static struct qcom_icc_node * const system_noc_nodes[] = {
-+	[MASTER_SNOC_CFG] = &qhm_snoc_cfg,
-+	[A1NOC_SNOC_MAS] = &qnm_aggre1_noc,
-+	[A2NOC_SNOC_MAS] = &qnm_aggre2_noc,
-+	[MASTER_GEM_NOC_SNOC] = &qnm_gemnoc,
-+	[MASTER_PIMEM] = &qxm_pimem,
-+	[SLAVE_APPSS] = &qhs_apss,
-+	[SNOC_CNOC_SLV] = &qns_cnoc,
-+	[SLAVE_SNOC_GEM_NOC_GC] = &qns_gemnoc_gc,
-+	[SLAVE_SNOC_GEM_NOC_SF] = &qns_gemnoc_sf,
-+	[SLAVE_OCIMEM] = &qxs_imem,
-+	[SLAVE_PIMEM] = &qxs_pimem,
-+	[SLAVE_SERVICE_SNOC] = &srvc_snoc,
-+	[SLAVE_QDSS_STM] = &xs_qdss_stm,
-+	[SLAVE_TCU] = &xs_sys_tcu_cfg,
-+};
-+
-+static const struct qcom_icc_desc sm7250_system_noc = {
-+	.nodes = system_noc_nodes,
-+	.num_nodes = ARRAY_SIZE(system_noc_nodes),
-+	.bcms = system_noc_bcms,
-+	.num_bcms = ARRAY_SIZE(system_noc_bcms),
-+};
-+
-+static const struct of_device_id qnoc_of_match[] = {
-+	{ .compatible = "qcom,sm7250-aggre1-noc", .data = &sm7250_aggre1_noc },
-+	{ .compatible = "qcom,sm7250-aggre2-noc", .data = &sm7250_aggre2_noc },
-+	{ .compatible = "qcom,sm7250-compute-noc", .data = &sm7250_compute_noc },
-+	{ .compatible = "qcom,sm7250-config-noc", .data = &sm7250_config_noc },
-+	{ .compatible = "qcom,sm7250-dc-noc", .data = &sm7250_dc_noc },
-+	{ .compatible = "qcom,sm7250-gem-noc", .data = &sm7250_gem_noc },
-+	{ .compatible = "qcom,sm7250-ipa-virt", .data = &sm7250_ipa_virt },
-+	{ .compatible = "qcom,sm7250-mc-virt", .data = &sm7250_mc_virt },
-+	{ .compatible = "qcom,sm7250-mmss-noc", .data = &sm7250_mmss_noc },
-+	{ .compatible = "qcom,sm7250-npu-noc", .data = &sm7250_npu_noc },
-+	{ .compatible = "qcom,sm7250-qup-virt", .data = &sm7250_qup_virt },
-+	{ .compatible = "qcom,sm7250-system-noc", .data = &sm7250_system_noc },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, qnoc_of_match);
-+
-+static struct platform_driver qnoc_driver = {
-+	.probe = qcom_icc_rpmh_probe,
-+	.remove = qcom_icc_rpmh_remove,
-+	.driver = {
-+		.name = "qnoc-sm7250",
-+		.of_match_table = qnoc_of_match,
-+		.sync_state = icc_sync_state,
-+	},
-+};
-+
-+static int __init qnoc_driver_init(void)
-+{
-+	return platform_driver_register(&qnoc_driver);
-+}
-+core_initcall(qnoc_driver_init);
-+
-+static void __exit qnoc_driver_exit(void)
-+{
-+	platform_driver_unregister(&qnoc_driver);
-+}
-+module_exit(qnoc_driver_exit);
-+
-+MODULE_DESCRIPTION("Qualcomm SM7250 NoC driver");
-+MODULE_LICENSE("GPL");
-
--- 
-2.56.0
-
-
+Konrad
