@@ -1,113 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=82.76.27.144
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792762847;
-	b=BmuXONRGDnre0/eHaGLMhHa8Vf7I7uqrQjoPHjZEnj4ARzthNPNvbxt4tnV4QGMuJiiQ
-	 BkNlkdbe2kz/NIyLJmz8L+ohM8NKrZv+5mbSijz3FHgaj+rT/au/kGS1BFa5FCXNxVza+
-	 8DCwRcmjmbwAR9R3iJGvpsEuc9iJtRgcIpfWrP3l2imTYju5kzgY3TyzIOnn184e9A33t
-	 Udw4dc2wniPfYx4RZgqyBaM5VnaWSvlhhkNrqvblKrCIgrUxH8w+BXNPJ4NubsQw/8kSU
-	 kFakYXcr9aM+cFSA0EEu4R6Z3DS79k+tLFxO2dd/e0jg/173tV1YieNCBwE8nmHl+Qg==
+	t=1792762889;
+	b=hGpnD7GDKQzuRd6IT2OFDNVARut69xKsTckzSob6l1/5DqOdMlbsF0lt05u89BPVSbLR
+	 D5nn7JMAlX7g+835DEyYqjXoj7mJ3uAxVp41sZ+j8LPyQjx3AuiEj4vSTEeolYzyE4s1p
+	 7b96GJzxZk1z+mS9dkmA6BzzFw/qyuvWx9uvC1t2r5LItjOq0UOwk/FeJz9hXLx6EFEqw
+	 qM1Zr3YdHUxz2iy5yIydq7AEGXtEg9pL4mfHcBczAb0dYkQlySdMt38a+rVxzcVRb4Sgt
+	 p09C4eDZfL9csZzZaSAbROu9fb23vNowXu/icvqPfOBmWxh3JeSsID6ljhQjLNR1+dg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792762847;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=ZeC773TKEYubASujmMTo4cYzyXvzJFRJKmRo+UPd0C4=;
-	b=n/dvJDwPv1D9uJ0KHvBqO6ylXSpON3Wv/kfS7+0moIv5GvedrspBnHwwXvqjzYQK52aO
-	 uf1CeHxG9lGDfdYJd8FuQserjPj1GC4+uC07Vrjnr/bojnBrXlDK6SKV7PMDBza7PLUNR
-	 vZ/+Ww9slleeFUHfhzZVavjF83M6oX+wmtubm5p5reo4hqkWcXOL6eaVyhBr+ch5F2cFn
-	 sVseIIR3VHOtSP9O42+uc679FD781ye6b0rXE8BnPucr/rlhYB+mt8EBKrSiaYaw5TkbB
-	 cJUgi9rh1WqrqZpFDKxWwa1vhoXUusqP/Id/bdtdfARwDgV/Np3cmhTUKHa8N9XoHWQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792762889;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:From:To:CC:
+	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:Content-Type:X-Originating-IP:
+	 X-ClientProxiedBy;
+	bh=x9/7eJRYDwbESNpYB8kbCEAUdqr1A0a9ky3Wg4BvjVs=;
+	b=b23uTn11GQksigv97vh/DX9EkIJiorMIGb/8fCcug11bkOQ5/emWmepBr7d7rZmOI/ME
+	 Uxxb3AFeyxPVBxM50KCQ8iDNvLrUFxl2TEmIx+/DjdqMXIuS0m4DhysvtWmVMte22PEIj
+	 3Mn8LJq2Bx1k8OUdRLgMpPJBMaZKL+s986vnTWfRfj2UHDX1WbyqzbkTuD1kuvbXFNzJ4
+	 JvsoxJrLydnQSfYQGVxz0VeytsedXCKMv/OIlgZCKuqc2e4amKHleeGuJuiklADyaz6i2
+	 /IS32HBTTv5VnqzeMOw1H9AhYZ8Z2sx6Uch1uR30oZN4sUxxzOqt3B29dY4+8ksJQeg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NZDQmjEo;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="T/0MoPdM";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=andrei-z.com;
+	spf=pass smtp.mailfrom=andrei-z.com;
+	dkim=pass header.d=andrei-z.com header.i=@andrei-z.com header.a=rsa-sha256 header.s=sig1 header.b=f1arccVH;
+	arc=none smtp.remote-ip=82.76.27.144
+Received: from vtj.irix.systems (vtj.irix.systems [82.76.27.144])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7522C60A6F41
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 13:40:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7522C60A6F41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 262EE60A2616;
+	Fri, 23 Oct 2026 13:41:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 262EE60A2616
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=andrei-z.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NZDQmjEo;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T/0MoPdM
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NAARPJ2463056
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 13:40:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZeC773TKEYubASujmMTo4cYzyXvzJFRJKmRo+UPd0C4=; b=NZDQmjEo3XEu43PU
-	qrUt2Yrt5RNEiHBrhrMODLvo7dCNn7vAd+G9DrNpFcK3+vA1y4YExqlfev88biMw
-	79PH/yAhbyjzkThwN7o1j9kuIJTRhI7K6EgmIxIjQ0rz33bMhHn5SSkf7hE4QgF9
-	SGU8BlGv05gCsCjyKIC6KPwhiWTld2YdDRiuS1YvFppdx2MjXwouWB/MvwUhLfPo
-	SdBhQ2zFD4QBatW9pJBcfxdzCt4pG3JQl82VixJB6m3wW0jxV04pueNbdyBUrYjG
-	GvGHl0357Xvcf3xrKjxOK0WkSX0WYqe581JBMznG33H9raDKY37gxnLM2VWK1e6E
-	0Z8UQw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfnyw4cqg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 13:40:35 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92e82060977so182648985a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 06:40:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792762834; x=1793367634; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZeC773TKEYubASujmMTo4cYzyXvzJFRJKmRo+UPd0C4=;
-        b=T/0MoPdMFHqM8/bLHW36BtLWaYU2JHkJtDwSFT2BfVt/FVMcZDifIhRABRZsQSXtPD
-         yn2Fz6hVbJQPHdWipyq+IsiEBm50/Nn5KCleGBgwmNUJeZpApztNNcfocRpKecmyhvm9
-         hBOjsl6ec57X0/D7oE4A5w9B0JR9xcA1vrSjF+HDpfKiEgv2+G7Na7q+1jQu74pmj41a
-         Pn90xA4XG/iOKagTKyVP+FRe37MuCkRTcU2YSvpqkIYZfrAjWCDTYd65ytoGP+Dpzzh2
-         NzIWKfQcEX+aep0SL2RZGFo+yVPicn34zWU7Ka1+KpxWzPoixcZeeWJbKB7vbqHn3UPH
-         +1NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792762834; x=1793367634;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZeC773TKEYubASujmMTo4cYzyXvzJFRJKmRo+UPd0C4=;
-        b=pCXxuP4WZ5stL2vLqpgSqRFdRjrrFxK7JYncSNkQPniE9VH+xMAI3QucAqnZJhVcPF
-         M+IIzD0rq3EGhZUFXNWs89C8MEhldMld8rJXgY6u7Zn+uGsHnxx8nMtrIeIS5hook8ZN
-         KT/IBBBTwfV3yH5KECbEE2Yj17TUg8gygMOHsufZ1rY5G3iZlZ2PwHJIlGMY6gOiRDJe
-         aXR1xBZnVdzAB22XuFF610qQSNy5cuX3z8x+rlySP3xG8vR84zqXdb+26HhimPXVA1Qy
-         wdOat/6tDdYSQMKTFsQ48n9ws02UOXVPDWc0JA5maQizh5f8gigGPcI3LPRjRhj+5T4J
-         ULAg==
-X-Forwarded-Encrypted: i=1; AKwUvBxIteOipvGmdTQo8GVZ+AW1pF/yjRG1tQKH5OUGpbBfmOmDQJ/C7dPtLD6MbBFuRG0Xs6OPA0CCSx4A5Qqz@vger.kernel.org
-X-Gm-Message-State: AFq9FYIaShs/i6F7Z8LaIC9vNhB6g0/L8Y919GLkjf50UTKwIc0zcF2z
-	EGmMyRwQIMfQ3BrsFYBsY/5gD5RBQAuWhFFuW6/ZWe+tVY3xpYDK3H/EQV1DDLuabVI0XE51D+l
-	n2it9f8KG6bZjD6YDLMPorDKpwfA5FBBYwtGxORz6jXBnCniNxe3BOWOPPdBreURn0dIA
-X-Gm-Gg: AYBFou32G3N9/o2ERsqbvVBsb2BgDaEGteBVrJKswAd5AAohuhKrNkajQKubEvdPS7z
-	GC3KbBV84u+qW7Zc/73zOmOhZjkB/isBTcx5uaxQavHPt/VU8pwY9+n8xTVIgkKzZHFAGR9X2vf
-	Y2tg+QeUrIeO3ca1Nq+YujlmWqjoD1jomyuK6H+8GNRYjf1Qwc3ftXoTmxmlXFw1HtsSawATQG/
-	XUV36nSalUnWlW2uie++djhAfxhNZhhmTMxHXcmWoEE+gUrnA/5gXoCLNZzZjUGbXUzNAGq6E9m
-	ilofP5dhJ9i3dcDrOhO+JA3bmSBj+94EHCG14V29heStx2dFfiGjf/463VOzAeLITe/zvmbrZZZ
-	HIZAwkTZMuaLj11KH578SpyUxB8vdgE52wSjK/CpzUl9hVnGuRGxkWZPzpsmPsLeHx2f9O/L3JI
-	uRWrxIW6qyqdFA
-X-Received: by 2002:a05:620a:4727:b0:93c:65e3:df81 with SMTP id af79cd13be357-93f626db2e2mr856690785a.13.1792762834341;
-        Fri, 23 Oct 2026 06:40:34 -0700 (PDT)
-X-Received: by 2002:a05:620a:4727:b0:93c:65e3:df81 with SMTP id af79cd13be357-93f626db2e2mr856686185a.13.1792762833809;
-        Fri, 23 Oct 2026 06:40:33 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ac65ce14fcsm5309701fa.7.2026.10.23.06.40.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 06:40:31 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 16:39:49 +0300
-Subject: [PATCH v7 9/9] usb: typec: ucsi: huawei-gaokun: pass down HPD_IRQ
- events
+	dkim=pass (2048-bit key, unprotected) header.d=andrei-z.com header.i=@andrei-z.com header.a=rsa-sha256 header.s=sig1 header.b=f1arccVH
+Received: from MAILGW-DELL.dell.vtj.corp.irix.systems (localhost [127.0.0.1])
+	by vtj.irix.systems (Proxmox) with ESMTP id 08F9F9272;
+	Fri, 23 Oct 2026 16:41:27 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andrei-z.com; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:from:from:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to; s=sig1; bh=x9/7eJRYDwbESNpYB8kb
+	CEAUdqr1A0a9ky3Wg4BvjVs=; b=f1arccVH4kFUWema5f/VUktFlatnJe/wcPz8
+	QtwOComdyPr2Zd+b5hr50Ec5TI2UZ81phCjO0MZad/WuUR8ELNKLYHZdV0vBXpgf
+	bg3GfAp7zyTrrPRqLcAD6HTQpEaSj6gpSjdigVaKzOlFm4VeIosCENaiEDv0kdaZ
+	k6skN7I0SGX6ziI1Xx9t2b315hf8IJHXujGi3j4MtUIGBhBqIFv4cL/Vb31Qwf6B
+	sFrpMrkiVEYMhls/cCbXCGu6PRwe8GdVksrFInE7ua/iCTrf51hvkR/qfC/ngggy
+	R5gAzvvFlm2xMLUaZM1dFwtueAm0SI3LyP0CRIm0R51D1bcJBw==
+Received: from VTJ-MX.corp.irix.systems (unknown [IPv6:2a02:2f04:1:9c24::6])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by vtj.irix.systems (Proxmox) with ESMTPS id BD46E9021;
+	Fri, 23 Oct 2026 16:41:26 +0300 (EEST)
+Received: from workspace.corp.irix.systems (2a02:2f04:1:9c23::c) by
+ VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Fri, 23 Oct 2026 16:41:26 +0300
+From: Andrei-Alexandru Bleortu <me@andrei-z.com>
+To: Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Jeff Johnson <jjohnson@kernel.org>,
+	Johannes Berg <johannes@sipsolutions.net>, Konrad Dybcio
+	<konradybcio@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob
+ Herring <robh@kernel.org>
+CC: <ath11k@lists.infradead.org>, <devicetree@vger.kernel.org>,
+	<linux-arm-msm@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-wireless@vger.kernel.org>
+Subject: [PATCH v3 4/4] arm64: dts: qcom: ipq5018: add Ubiquiti UniFi U6 Enterprise
+Date: Fri, 23 Oct 2026 16:37:00 +0300
+Message-ID: <d1bd2f947ad986ff3c3fca1ad367aec2f1cec6b1.1792761470.git.me@andrei-z.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <cover.1792761470.git.me@andrei-z.com>
+References: <cover.1792761470.git.me@andrei-z.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,125 +80,306 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261023-hpd-irq-events-v7-9-57a3aea3f09e@oss.qualcomm.com>
-References: <20261023-hpd-irq-events-v7-0-57a3aea3f09e@oss.qualcomm.com>
-In-Reply-To: <20261023-hpd-irq-events-v7-0-57a3aea3f09e@oss.qualcomm.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Andrzej Hajda <andrzej.hajda@intel.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Robert Foss <rfoss@kernel.org>,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Luca Ceresoli <luca.ceresoli@bootlin.com>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Tvrtko Ursulin <tursulin@ursulin.net>,
-        Francesco Dolcini <francesco@dolcini.it>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Pengyu Luo <mitltlatltl@gmail.com>,
-        Chaoyi Chen <chaoyi.chen@rock-chips.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-usb@vger.kernel.org, intel-gfx@lists.freedesktop.org,
-        intel-xe@lists.freedesktop.org, linux-amlogic@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        freedreno@lists.freedesktop.org
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1516;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=bY5FhyMu3eZPaJc1ltLzH3W13KWzM9lAhGrC22j7pKg=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq22OtA5kQaJAzu3uDsBpPRilZ5f2hkyP8+qPHe
- NeTG5AI00KJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCattjrQAKCRCLPIo+Aiko
- 1RI2CACg5pQDUEeajZzHEEghd4rfxKwDm4JgwgS9OSplIDBiAHrg2w/55A4G94IWULDp5wDxMxc
- jlgkqR47eCTeNzA2l6yZUkkMMvkCVWKhBM8U09/ys0hiHXYUW036cBiTAsb0Dj58VFU9dRl/R8+
- abZrn9cWVIKIHzllDpGW+CiM838Koz2EgVRrFKk76B1j/Rwx3fzwTPICryRsDzdbAzliuRvqaXV
- O8Vvtzbw/1Z+5I7/WE9Ic24Yk8xBHdCBSoATwKaz16mXwtSI8XwYvM0MQqwwSSiJ98d9mY7UwAo
- LfRTAJ62c1+UgsjyAEfClwnjIwik4AOmFfFZQCmJ4l6CZhuc
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-GUID: l_qKTtqXz2b7CJKzZCY1SMS-yrD8ldda
-X-Proofpoint-ORIG-GUID: l_qKTtqXz2b7CJKzZCY1SMS-yrD8ldda
-X-Authority-Analysis: v=2.4 cv=dphOmFg4 c=1 sm=1 tr=0 ts=6adb63d3 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=pGLkceISAAAA:8
- a=QyXUC8HyAAAA:8 a=EUspDBNiAAAA:8 a=HJ0TMOZLSqZlwYNULgAA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA1MyBTYWx0ZWRfXxCBpB8oZAo4J
- tsQWFxyqp+d5ahUjYjTDR54UL5f4m7DeUQaW9hYNPZG90bFNXjqwpJ+lT9lqPCfPG8TP6eFN14+
- jsZVTLWjS/w+kiex7dryKcFnHn0xQHk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA1MyBTYWx0ZWRfX8s6x9poWbugK
- +IWqdqHAyQXcmYx+IxEbOWmF1yC2JKnH5O01r89HRp2WUD1SirTsGfTgZI4Csm7TnzSPKWt8C8u
- yC+04G7ccINTMmMw3bd70fb5dNNVf4hIvy4RKpP1cdg5039UdFYwCeVj/aDDmY/xVidl0pz/ALQ
- n8FkP7RuCSddVh0XH02XsW1+vz15/6sHjHOdQ1Vd7Q+F1jGFYkpAWKg/2G9DfniEe1wUP4Qt2vG
- 3muuQ7wzRkMzRqem9kh6rpxZSA3s2BtAxMSWc4kKalXjfdrTd20LF6LrOU4scMPqz1BNhPQrcla
- K3b7KGWtAKWPe344oHQjIbEkiHK+kiGwNH0CTlyDAD2/K4RCwJ0gcv3ubyYq2kpq7ibnibOecjt
- TDtSVZq7tYtLQJm4RMpJ7Vf9XnQwQcZqDAmLJfsWMBkfTWkNdnafrVukPR6D8YK5lRf0Ih4BUHm
- CoT57/zRQanb7a6JZNg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-23_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 clxscore=1015 impostorscore=0 adultscore=0
- lowpriorityscore=0 priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230053
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) To
+ VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6)
 
-The DisplayPort standard defines a special kind of HPD events called
-IRQ_HPD. These events are used to notify DP Source about the events on
-the Sink side.
+The Ubiquiti UniFi U6 Enterprise is a ceiling-mount Wi-Fi 6E access point:
 
-Pass IRQ_HPD events from the EC to the HPD bridge, letting those
-to be delivered to the DisplayPort driver.
+- SoC: Qualcomm IPQ5018
+- RAM: 1 GiB
+- Flash: SPI NOR (boot chain) and eMMC
+- 5 GHz: QCN9074 on PCIe0
+- 6 GHz: QCN9074 on PCIe1
+- Ethernet: one 2.5GbE PoE port, a QCA8081 PHY behind GMAC1
+- Accelerometer: ST LIS2DH12
+- Button: reset
 
-Reviewed-by: Pengyu Luo <mitltlatltl@gmail.com>
-Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Describe what mainline supports today. The Ethernet port and the
+IPQ5018's own 2.4 GHz radio are left out until the GMAC and the WCSS
+remoteproc have bindings; the LED controller and the board MCU on the
+I2C bus have none. The QCN9074s carry the calibration variants their
+board data is looked up by. The SoC dtsi gains the pcie1_port0 label, as
+pcie0 has, for the 6 GHz radio below that root port. The vendor QSEE
+reserves 4 MiB, twice the SoC default.
+
+Assisted-by: LLM
+Signed-off-by: Andrei-Alexandru Bleortu <me@andrei-z.com>
 ---
- drivers/usb/typec/ucsi/ucsi_huawei_gaokun.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../dts/qcom/ipq5018-ubnt-u6-enterprise.dts   | 235 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/ipq5018.dtsi         |   2 +-
+ 3 files changed, 237 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
 
-diff --git a/drivers/usb/typec/ucsi/ucsi_huawei_gaokun.c b/drivers/usb/typec/ucsi/ucsi_huawei_gaokun.c
-index 57b37fca150c..cb0312e2b8dc 100644
---- a/drivers/usb/typec/ucsi/ucsi_huawei_gaokun.c
-+++ b/drivers/usb/typec/ucsi/ucsi_huawei_gaokun.c
-@@ -316,10 +316,13 @@ static void gaokun_ucsi_handle_usb_mode(struct gaokun_ucsi_port *port)
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 88230c4e00..aca7d8e415 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -32,6 +32,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-lenovo-ideacentre-mini-01q8x10.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= hawi-mtp.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-rdp432-c2.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-tplink-archer-ax55-v1.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-ubnt-u6-enterprise.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= ipq5210-rdp504.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= ipq5332-rdp441.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= ipq5332-rdp442.dtb
+diff --git a/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts b/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
+new file mode 100644
+index 0000000000..131e89fe61
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
+@@ -0,0 +1,235 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++
++#include "ipq5018.dtsi"
++
++/ {
++	model = "Ubiquiti UniFi U6 Enterprise";
++	compatible = "ubnt,u6-enterprise", "qcom,ipq5018";
++
++	aliases {
++		serial0 = &blsp1_uart1;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	keys {
++		compatible = "gpio-keys";
++		pinctrl-0 = <&button_pins>;
++		pinctrl-names = "default";
++
++		button-reset {
++			label = "Reset";
++			gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_RESTART>;
++		};
++	};
++};
++
++&blsp1_i2c3 {
++	pinctrl-0 = <&i2c_pins>;
++	pinctrl-names = "default";
++
++	status = "okay";
++
++	accelerometer@18 {
++		compatible = "st,lis2dh12-accel";
++		reg = <0x18>;
++	};
++};
++
++&blsp1_spi1 {
++	pinctrl-0 = <&spi_0_pins>;
++	pinctrl-names = "default";
++
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <50000000>;
++
++		partitions {
++			compatible = "fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			partition@0 {
++				label = "0:sbl1";
++				reg = <0x000000 0x030000>;
++				read-only;
++			};
++
++			partition@30000 {
++				label = "0:mibib";
++				reg = <0x030000 0x010000>;
++				read-only;
++			};
++
++			partition@40000 {
++				label = "0:bootconfig";
++				reg = <0x040000 0x010000>;
++				read-only;
++			};
++
++			partition@50000 {
++				label = "0:qsee";
++				reg = <0x050000 0x0a0000>;
++				read-only;
++			};
++
++			partition@f0000 {
++				label = "0:devcfg";
++				reg = <0x0f0000 0x010000>;
++				read-only;
++			};
++
++			partition@100000 {
++				label = "0:cdt";
++				reg = <0x100000 0x010000>;
++				read-only;
++			};
++
++			partition@110000 {
++				label = "0:appsblenv";
++				reg = <0x110000 0x010000>;
++			};
++
++			partition@120000 {
++				label = "0:appsbl";
++				reg = <0x120000 0x0a0000>;
++				read-only;
++			};
++
++			partition@1c0000 {
++				label = "0:art";
++				reg = <0x1c0000 0x070000>;
++				read-only;
++			};
++
++			partition@230000 {
++				label = "eeprom";
++				reg = <0x230000 0x010000>;
++				read-only;
++			};
++		};
++	};
++};
++
++/* The bootloader muxes the console pins; GPIO33/34 are I2C on this board. */
++&blsp1_uart1 {
++	status = "okay";
++};
++
++&pcie0 {
++	status = "okay";
++};
++
++&pcie0_phy {
++	status = "okay";
++};
++
++&pcie0_port0 {
++	reset-gpios = <&tlmm 15 GPIO_ACTIVE_LOW>;
++
++	wifi@0,0 {
++		compatible = "pci17cb,1104";
++		reg = <0x10000 0x0 0x0 0x0 0x0>;
++		qcom,calibration-variant = "Ubiquiti-U6-Enterprise-5G";
++	};
++};
++
++&pcie1 {
++	status = "okay";
++};
++
++&pcie1_phy {
++	status = "okay";
++};
++
++&pcie1_port0 {
++	reset-gpios = <&tlmm 18 GPIO_ACTIVE_LOW>;
++
++	wifi@0,0 {
++		compatible = "pci17cb,1104";
++		reg = <0x10000 0x0 0x0 0x0 0x0>;
++		qcom,calibration-variant = "Ubiquiti-U6-Enterprise-6G";
++	};
++};
++
++&sdhc_1 {
++	pinctrl-0 = <&emmc_pins>;
++	pinctrl-names = "default";
++	bus-width = <4>;
++	non-removable;
++	no-sd;
++	no-sdio;
++
++	status = "okay";
++};
++
++&sleep_clk {
++	clock-frequency = <32000>;
++};
++
++&tlmm {
++	button_pins: button-state {
++		pins = "gpio24";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-pull-up;
++	};
++
++	emmc_pins: emmc-state {
++		clk-pins {
++			pins = "gpio9";
++			function = "sdc1_clk";
++			drive-strength = <8>;
++			bias-disable;
++		};
++
++		cmd-pins {
++			pins = "gpio8";
++			function = "sdc1_cmd";
++			drive-strength = <8>;
++			bias-pull-up;
++		};
++
++		data-pins {
++			pins = "gpio4", "gpio5", "gpio6", "gpio7";
++			function = "sdc1_data";
++			drive-strength = <8>;
++			bias-disable;
++		};
++	};
++
++	i2c_pins: i2c-state {
++		pins = "gpio33", "gpio34";
++		function = "blsp2_i2c0";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	spi_0_pins: spi-0-state {
++		pins = "gpio10", "gpio11", "gpio12", "gpio13";
++		function = "blsp0_spi";
++		drive-strength = <8>;
++		bias-disable;
++	};
++};
++
++/* The vendor QSEE uses 4 MiB, twice the SoC default. */
++&tz_region {
++	reg = <0x0 0x4ac00000 0x0 0x400000>;
++};
++
++&xo_board_clk {
++	clock-div = <4>;
++	clock-mult = <1>;
++};
+diff --git a/arch/arm64/boot/dts/qcom/ipq5018.dtsi b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+index dde5435f69..ee8c0fc03f 100644
+--- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+@@ -837,7 +837,7 @@ pcie1: pcie@80000000 {
  
- 	/* UCSI callback .connector_status() have set orientation */
- 	if (port->bridge && port->svid == USB_TYPEC_DP_SID)
--		drm_aux_hpd_bridge_notify(&port->bridge->dev,
--					  port->hpd_state ?
--					  connector_status_connected :
--					  connector_status_disconnected);
-+		drm_aux_hpd_bridge_notify_extra(&port->bridge->dev,
-+						port->hpd_state ?
-+						connector_status_connected :
-+						connector_status_disconnected,
-+						port->hpd_irq ?
-+						DRM_CONNECTOR_DP_IRQ_HPD :
-+						DRM_CONNECTOR_NO_EXTRA_STATUS);
+ 			status = "disabled";
  
- 	gaokun_ec_ucsi_pan_ack(uec->ec, port->idx);
- }
-
+-			pcie@0 {
++			pcie1_port0: pcie@0 {
+ 				device_type = "pci";
+ 				reg = <0x0 0x0 0x0 0x0 0x0>;
+ 				bus-range = <0x01 0xff>;
 -- 
 2.47.3
+
 
