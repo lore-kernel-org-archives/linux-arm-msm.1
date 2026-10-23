@@ -1,85 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792791859;
-	b=NFhuDpIcrqQeVBJVVHYL2/nP1CMLEMyWFGA221BsrWFMX5WST0OAr3VOJV/8hKGPYbTP
-	 AM2xfBOxr/aj9fQYaH8kJeT9Ztlu/imFS0zlHx6elc0eP2vtgMRN7U7iJ0mgQHZnIQ5No
-	 nebsboZFiKEG6z7Fg0Ys2h9+qsxKAeK3EQEfmJks5+McPni2yRHqGIjj8vED8059mW9Tp
-	 0Q6Rf2KA3PfEPkb4u0Gdt1FN0RcHT2vpYAwCG6g7aOSQURUCr9U5wUNqPYC4PtuyFUzYM
-	 yIYSCjwAAvaPCNkKfHv/3yZ3kklyLdSSW3hMmhkuShViB7YOhyqPrijdUDvVjLYFxQw==
+	t=1792793411;
+	b=TlIJWHSWVbZuSbInfTVNr9S1OPmQcSzEZzEy5M6IR/flpzM9FMvmAnwYPcit6H2V5r8z
+	 FX+qsKHTjVMvIIRo809+TrmhE1IppKA/MT+nzaDQge9BidZI6NR7+t8tjt+DmQdE2IDhS
+	 0H7D1Wk4JVUjljqbhvP0Bsh4z0Tkb7irXjH2tOIN28IX5HK9EukvpCqK0K62FSfmxABoG
+	 2S1YPPcVPuQKzo4mEQdFKWKtkX+Nupdh/DlhNSFuf22WBh0h5DxZkU/uYW9a7im8FfcCL
+	 Sj6WCPBLG9c77JuVsbuK2xnpgZ3Ql/iVIKzo/oQPXa7fKYrVpJU6A0ChuibRf5ui7eA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792791859;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
-	b=PjZy2r+jgP/+yofW2QS4/VLZJXiJmoYY1ShHctkJ+6QsSJfHXd0lKx+mXrf5/w7JzPMH
-	 p+QSiki0JnQ4SbaLHJ7RS5jTUen/1Mit1PybhfpUIrrkVGynqoI1jW7QSkolozxihbDG+
-	 sZOVZ6OGHTTTtPZGLIqzS3a0QYk8ae30BS7+kCd6/nZFVAOXuOoJfKmdyFVk4AHCtrQ5P
-	 jo+XltJPACghLUlVC+nCiLjuz4jJs8MxkxGqggSRERJUsQpOD/DGfdCblEKmJwaavxJJu
-	 Wo478aAolsd0Z43V/BGSSuXN+tm7eZ8396qIcE4ISCcUWMCDbC4JdFQJ0kaLI5PVZoQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792793411;
+	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
+	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc;
+	bh=6CMiduJ/Wqxtfpz+RWzxC2OkgUKs0OUfnEyG4nC4Y2k=;
+	b=bKc3R3o9mRgh26gBqeLvAPraPnHvyFvM77pxyBz3hYjUUVgCl9V1iuhawGszpMJPUu1n
+	 mnXdFz/zLQaJhKQtQsAs7py1x/PhAkoQtIuv+Jjc8Tv02BOMF6cYvzNzD7dualZs/ylbG
+	 QPVGMd5GTKv/mdgMq8RgFzTWHX/gOvS9404gdFqU6WeYUfqA99UDTM8ZBxOgq8hSv8Uxv
+	 Yx16osaQnYXjBgsIHntXBdwhjwaGFVFyVkU+/hAwmQfylOYHzsHw/H58QAAumNVFlhFRU
+	 Ol/fp/Vx94mwNY0psMxnbnL+0e+d8c1REcc9lcKb4EQj0cnIjyO4yz8RW52JtBFnBlA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mlFIvltp;
-	arc=none smtp.remote-ip=209.85.128.46
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i70zcWxY;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31443606A31A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 21:44:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31443606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69EAA606A323;
+	Fri, 23 Oct 2026 22:10:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mlFIvltp
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a208d93758so13877755e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 14:44:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792791858; x=1793396658; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
-        b=mlFIvltpQf//XRh4JIZWCEhPJNJ0X/sQhjQhiV4wzLgBap50wkui+qFJRqfQ3YDRk1
-         yHrOFrS5vtSk+Yj9CrrFgHVyHo4KKLmIYBaRTM/7bj25gxU06M7VfQCUDI5s4oOeWcKi
-         F2DLBsHnk/8lWkH5W/MTIG6K5uKsg84EIbIpD98Yer2j1HB2cyW6kRBGnoRYL2rOWKJ/
-         TMDpqq4l0qY2PMRtmJz/10lj9/HkD5YDbOHEUNMayjlxBFrqfDvM4ND1pILr+Wp4uD2r
-         eN7CY/Aj2TOzSEIuaZystdERQIs9nH35oiHz6TmbIUQ0iwv7Bs/UPsnfxchnRQzyprGD
-         0+XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792791858; x=1793396658;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fFwyhZCXORgrLkzDtxE/mSv92Ck+rSlYQsSs3nn1b1E=;
-        b=e63PXq+w4w9zHUdPozM5q8OXQ/BHvWO4NLqr6zxaqpHGTbcl1OSCbzwnyJTW3Fuq9X
-         DkKacnwTvTULf/XRshxAlydTfyu5191j7Hi4QNTD+WWuhxJdks1CUCtl6Zu0DhFwMJrW
-         j69PAkc2xvJZ3uJf5xNon53d5W0BsJuYwkNhZ1/lu4SSZEuE80sQaYAKYYMIsTvVaANr
-         XOfsol2sHNt1iIVHW2toVf/vW1UfUyAV3rj8pdYFzzWClC9VQdSdJrv8VXLEFcPJekd3
-         dsCTKJ6SJcUARS1wZeQC7a9pt1Y/jUndtPdwVC4oJkrn4VR6AEFkDFf4xGQA3ll6Gdk6
-         8nyQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwGebwECz18OWoX/w+EJDccdG3vUrsDwEmcXJ1J0svSYhC+MBmYpw8zxNc9Inis0H+qRcHAmF+RSSGxYp5j@vger.kernel.org
-X-Gm-Message-State: AFq9FYKpPjKqN01b7sdx7dCdHkTD/v/ASEH4MSdx0rOLYc9hDf2oPoxY
-	oQTDjEq2VV33TKqy7HOaD2k2ZV7v+emZJQ0tpXwFEObf9VV0p9fRmGKMsoL71guQ2WM=
-X-Gm-Gg: AYBFou03PMASadepotB5qUROxc45KS0RHQ/gPMlrQjbiCaW8ANslWvVkwMfnWH6VHWW
-	VhajSW1k82CqLl74RJc+XN1yjVEmb53o6nZJy/K+RXEiuQ/yTvWTh4Vra0Qnm0566mE65kVUt0b
-	4u90YnEpxnaqPo5pWlRMjMq4jtXYtd7vXMCTMlquh1k9377wF+LGfPyVubKyGCm8qZwpBd5u+/N
-	4Va+Rj0E0FEOoAvBNOTX53zTIAbWws94YncqLNYzemNVKUWgUdtEI2WJKlSniLtHa7XAXs6L9BV
-	lSP2Qy/gc06cUlbX8Tfo9/XJ1dF9RMJUSAHCdklYJpHK3MyGbwBrgnb/9woTrNQqngNJ3LdArwc
-	nHdwplyHAfNJdoXvwuUteY6FEsKqutkOgcFHA9ee7/isYwW/H2oaFjQ4WnHqVTtqk+e/LZlhpO1
-	1DtyzhRVUYkT3ky22VfunzNt/fC4oabszHNhruXhFsFeHiSTjZ8cRdje5Col+Eluu8sLwuUbIuA
-	bdhr0qi5mtimDJthV5OnpZOd/LofmzG9me1MIkvmGYQsdnEbtlpB1jmEoNjnKWRYEXo
-X-Received: by 2002:a05:600c:6095:b0:49f:fdca:c361 with SMTP id 5b1f17b1804b1-4a35ac99412mr2318005e9.12.1792791857174;
-        Fri, 23 Oct 2026 14:44:17 -0700 (PDT)
-Received: from [192.168.0.167] ([109.76.107.26])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a55e786sm10434525e9.3.2026.10.23.14.44.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 14:44:16 -0700 (PDT)
-Message-ID: <1574aa17-dd5d-43a7-a433-ecef6a8ce136@linaro.org>
-Date: Fri, 23 Oct 2026 22:44:15 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i70zcWxY
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DDA81F01825;
+	Fri, 23 Oct 2026 22:10:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792793411;
+	bh=6CMiduJ/Wqxtfpz+RWzxC2OkgUKs0OUfnEyG4nC4Y2k=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=i70zcWxY40Nu29RkiYIsiQeAOjWK9UKiFoUz6RgQuKpBUvloFDCicdmOlHpk/XXFb
+	 MWw8L1VrsooED3CPREfKtrVpqdzoPq27DScqg58UWhq2UJ9nwY4iUItumk6FllqDKZ
+	 Zo3ILEl6w+ndq/ih8s9hx/vEbYnx9uC1ZjPWtUzSD+7vgVPPlwdwyeTB1/RXQblKP9
+	 oFAG+kwUoKpKY1Q/idsjGXOtWs23K1fXO8j+NkW83niGv07LYGZuguxFDzZSaWqrfS
+	 Gwa0JalCuURoehTxN/sDn5FbQdaVtZFp2I/lZVOQDYPAd4hDnoF+Hb1Aknh1F8pbWe
+	 tCrVemOJuZIrg==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 04C59391B158;
+	Fri, 23 Oct 2026 22:10:11 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,31 +53,45 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] media: qcom: camss: share VFE clock sources on SM8250
-To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH bluetooth] Bluetooth: qca: Fix the WCN3950 NVM baud rate
+ offset
+From: patchwork-bot+bluetooth@kernel.org
+Message-Id: 
+ <179279340956.1294506.15428171878126640467.git-patchwork-notify@kernel.org>
+Date: Fri, 23 Oct 2026 22:10:09 +0000
+References: <20261021195112.41138-1-me@michaelmcallister.org>
+In-Reply-To: <20261021195112.41138-1-me@michaelmcallister.org>
+To: Michael McAllister <me@michaelmcallister.org>
+Cc: linux-bluetooth@vger.kernel.org, brgl@kernel.org, marcel@holtmann.org,
+ luiz.dentz@gmail.com, lumag@kernel.org, linux-arm-msm@vger.kernel.org,
  linux-kernel@vger.kernel.org
-References: <20261023152857.2859767-1-atanas.filipov@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261023152857.2859767-1-atanas.filipov@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
-On 23/10/2026 16:28, Atanas Filipov wrote:
-> The aggregation only covers the CAMSS VFEs. Drivers outside CAMSS that
-> use the same shared clock sources are not covered and are left to a
-> separate change.
+Hello:
 
-Hmm.
+This patch was applied to bluetooth/bluetooth-next.git (master)
+by Luiz Augusto von Dentz <luiz.von.dentz@intel.com>:
 
-Lets discuss that change so. We need to represent shared clocks through 
-CamNoC anyway right ?
+On Wed, 21 Oct 2026 20:51:12 +0100 you wrote:
+> WCN3950 uses the HCI transport tag layout that stores the UART baud rate
+> at byte 1, like WCN3991. However, QCA_WCN3950 precedes QCA_WCN3991 in
+> qca_btsoc_type, so qca_tlv_check_data() writes the baud rate to byte 2
+> instead.
+> 
+> On a Motorola Moto G10 with WCN3950 and cmnv12.bin, configuring a 3 Mbps
+> UART therefore leaves the NVM baud rate at its default 3.2 Mbps and
+> overwrites the following byte. Firmware download completes, but the
+> subsequent HCI_RESET times out and Bluetooth initialization fails.
+> 
+> [...]
 
----
-bod
+Here is the summary with links:
+  - Bluetooth: qca: Fix the WCN3950 NVM baud rate offset
+    https://git.kernel.org/bluetooth/bluetooth-next/c/24a4c2f1f7ce
+
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
