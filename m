@@ -1,111 +1,114 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792744345;
-	b=z8GWYoHxN26Qjye69tdcVjSlp67pg+49t6LVASktJB2/xgf3vOHM6wVt8Z9PXNoCMt0P
-	 v5/LMkp0lcP5/g2jLMFkUg9hOxVuhI2j9fxGCJaUDmDpYE9HOiV6H1kUX/7+JrHfVDdDP
-	 SmpsA0FOiSExG2phLKvOkJXLD5pk8cZNViyDfgwryOJEyOhGe5qE7NBWHc7JaVWlbnhS/
-	 PGlCMxAcWVVvUhNTdFg+vLsKASERszsAlkmtzvbPvGZdexV3vtT9bYmfY409uEc8nW1yK
-	 +9p658Drj6aNteovUmosZWC+HKzD/FJvRfJNuTUSWo3ahDc1cEsmPKco5dE0jT+yWqw==
+	t=1792744721;
+	b=Jnc9J8KxM4volTtby0roV7xShCUXTv8OoippZyQuaSf7L9S44Fscxi7brrRUL32gG/6i
+	 Y+HFDpfGgcknjcHiStqL7RviWuIBXkDgxl9kqF/El5mGPJJWTTMvenXrZKLQHrek+GYm3
+	 GWjiE/8iSqbC7K2B2JQX//DdFz4pBRP50evjXyTC9NTFkpwf7uCzz9M5ZzO5kY4GimHqh
+	 gpdPrdFE7F4HaH/Jy6wf7BqA5OllllB/dn1Ygj0rxY9aGFpff6riCFi320juvHjBzgSnp
+	 0rrmHIawzVKfhBGm+U513CBBSP5zLD2TP+0ChVX/BUuhehmuVhFKjVdGT4jboR33hVw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792744345;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792744721;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-GUID:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=RWDa8pTB10NwUg70R0bD58or3FOQoW7MLVqNJx2zkck=;
-	b=vXJY2ipoKlY0api0yTT4NB1VSwnHLQ4iTFGgbBvulDXNx4pqT3SfVuhgpSzu3edwPxKh
-	 b9WTAr64oNDcznVcYKFIRynkvYHJ8wY1UHlIOxviUxdqHjDKwkQwhvEfoX+OVXMBjeWzc
-	 gozJpZhj3m2s983F0bCTg2V7KA3J0lLQrS6//QCDAm/8wteejaaWmm+Km3Mp/25B5SHzk
-	 VVlfQV529L92wXgDTYY5O9OyNqUcPaBA+ox62sSmzWReISAWHtaBVV8oBtbYuFduixeUW
-	 IMiIahEZcopjaO7Pm6FjPkcFqMjROnOKsbW9GrpFRTreY4kWuFnQ12y7y+zEkQ/P1ww==
+	bh=gY2fRVnI2zhWXKknMYprw1I6Eo3hbc44HoOJowJu3+w=;
+	b=r7Bk37vSXLfYl7KUssBMC0q7PO8AXM2dZSJA9EHQGGSJtSKCa8B4NG04M//IwYJbs2wT
+	 V2LspZvx0AmWMLkCzkxERu26RASXSZVPOL4FFW0p43mBaepJNMzk1YeV9XzGN9rMxmCkV
+	 JvHllUGLB1Cwgri9w5DDVE0+Jz18FuLhtZ76bZBhsKzU7vTaQ8tbl9y4cVlKG4qk1EVrd
+	 ShzF4HJMGgQH71tDVFT5XyeSoVBj7RlZSzku96cLr9r8cX+lK7hlFMb0pB6bcjZix7nNg
+	 02ZO2lDlmBSOFg/HCfMmxrLFUNZA5BLdK4D0UpTLCxTJTXAyOC3l7xO3K9b35mnlNcA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JglFhSEp;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jgOxohVd;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XNMUVd39;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YnQYsxxS;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 795E9606A31E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:32:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 795E9606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 266CC606A31A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:38:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 266CC606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JglFhSEp;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jgOxohVd
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XNMUVd39;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YnQYsxxS
 Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7FKEO1552217
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:32:24 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7FOq01552878
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:38:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	RWDa8pTB10NwUg70R0bD58or3FOQoW7MLVqNJx2zkck=; b=JglFhSEpN/463j+0
-	h9Q7fxiikFUpCb1mOWbGbX55shsWg+75t0La1Ctrv9XWte5rq22Y9eG56Gzam/u3
-	C7PhBBu0uIFFqTjFSSXwmRKjTuYlsZ2fW+Uvhfr8eZP3VfvTu8tKyDaBBYdRRvFN
-	JmAhCmEVn/9NKLk0fjloCCqL9kTm02pebHvvcegUAEyJq+27AlP9RzOQaTvwgnec
-	2c2au3mR+Ali2k9WF1zNLxB3n4yhB52hPo5c2dLFp+5/5Iqcsf61mkRziR92lNjt
-	vTBg9ZZuy+oMSb9NqrnGW0HjTyRaGlt1AFGXjQKdQT6gmn4zv6LH8LilUyczlnwV
-	7AhggQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmttr0v-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=gY2fRVnI2zhWXKknMYprw1I6Eo3hbc44HoO
+	JowJu3+w=; b=XNMUVd39JgTR/WLSU8wyeE6hC9ylNlDv+9Q7myaUl5rphEQQopN
+	M85dsZI2ZfrjHqzof3HjQE+iOavWjza4zBWPhr6x2R6IzdSptx/n5p4Eiu0o2u6L
+	p65BZPpZZlHV8CuHN6dlYn7eiTMBmf8Qiz0l+UfO2rt+MU9sS7vB4UlYoRGqVdx6
+	gcGp0Cv5DKCgB/eJ1k/RjGFLrmuWtpVs+Vl0JQjmgTZSwJwGn44zmFrRTFADxFRb
+	gqbicXGuBefzRhLnsPn/lHKf8SVk3uNiEq1hLuyA3yayz5mRU8lHMuq4XderpZ8T
+	Pi98M4FUTPkFhrfz4Cgv4FZsce0hre0xpJg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmttrrb-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:32:24 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f3960dca5so15380485a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 01:32:24 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 08:38:40 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93e49a1d3b1so151468885a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 01:38:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792744343; x=1793349143; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RWDa8pTB10NwUg70R0bD58or3FOQoW7MLVqNJx2zkck=;
-        b=jgOxohVdwFPa/g7MA0of6LWr8XevoduAlw94Ul5ZZjgaWO9M3wOrcu9C/Dj8zNHEih
-         +6sXfeL+5VUCbpbuLrWrtR4G73GivmkRfStf41ey5LLX99WfbQMjPxyN6r5g/CfTBqMq
-         /lJ2pgZTm6EmZKGVCBtfIGBUCT+sMqsGrQaBW0eeVd4CGuyKrBWBaGCzNeBByjI/NekG
-         /mR3WNuwL9RjQjIBYdg4lsMgv9nstX65W7ExJbXMkNMtfUnFal8hrQhjvNrZSwqFn54H
-         /7GmPJUzK22pys56V75OAt7NuArr++qHVwWlP4wkHIqTa28//ZAUXge1hMCgrRrTG2gT
-         qDqg==
+        d=oss.qualcomm.com; s=google; t=1792744719; x=1793349519; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=gY2fRVnI2zhWXKknMYprw1I6Eo3hbc44HoOJowJu3+w=;
+        b=YnQYsxxSJRu637uF74ISuQgpeK41kV5xX030D1YTNq666xrk5zEujYHWmMqpBb+4OR
+         7LXbHnFvyGKAAlMmixIc+DzXx5lrDVbDyzVshsrx7kq6UTpGPqqGbEFs4/46qJHFBAP7
+         ZLtLComNuCCea6L3NS/qqj4NuLrDpyVTLgL7HY218sAQQITRfKnhli/cG2IVUqYapsr8
+         mJ+Yh78TiB/5ET4G+RCtlUXIUAQmUG+g02EA6lhuZsbpT/IrBS/BSVNeStHpw1kueEcj
+         TQiO+yYZFsOZg3NhkgFOdkXeusWqIGQfz2gXK2CkB0P0I7OSW5MG6kLW3EsqUTYWGwW+
+         1htQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792744343; x=1793349143;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1792744719; x=1793349519;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RWDa8pTB10NwUg70R0bD58or3FOQoW7MLVqNJx2zkck=;
-        b=vkJwXGkqR6ka7ZkGQobofiayIKSPN6C5V1UEhPr9PnwbArRn2ZchUXl2YJOLzt+8ix
-         ESxipetwdrQ11bC6jEaDcMe/k5y70L6efJgnPVNFLlZVS2k/a3JJCSYyuksAc0qC3IDR
-         GH2Hiq/C9wijPm+kPv1m7fLsovz79B62fRCEMDLN4+D0NRceBUJVJf0RKh7pR1enIng2
-         Jl2oQPU7yqgW+UDE3PMekx4WmN5A2D0ZXAmLu5yf4oyv2R4N1Iat0vqbMe+o70t2ZxiK
-         c+CY8FZUSW0XE613k4CnnbhVprRCBe3HboUzknZGL5Tx1YRVxsCl2RAhGSn/U2mjkBXc
-         t/rw==
-X-Forwarded-Encrypted: i=1; AKwUvBxRkNpUdJxqdlCaUfbIUJqVW6ZCBz/skTLQRtLL7GCc3Tivo+w8TxJ9f3/cLoKseJsw3WIcDxZa3uQxJxbA@vger.kernel.org
-X-Gm-Message-State: AFq9FYIBL5MAc07Vk+4NgJmQnrOZ3hboUlQRgOa0NOUH6ABp86Na7Hf8
-	rxS+oVSxz/w9pL6p7NniGHP8yJeZw0iNfUMMG16duc4a8LEre9Ewr5pLs3LYAo6EEfpQ1Je5YdL
-	sx6DCqDlpyuyHnAE0sD3nWMtr9heCBuNATYpteh3jQ/xkMS1MsTxx3AAW9iKaQZqN8tcl
-X-Gm-Gg: AYBFou0z9htGq2ZK0BHMISG2Bxy03HAPGjsgsjeRWylusnLiI+x7VKfytPm5f4fkJ8P
-	IWkgKQVGGBJNl52uWru0y2b1P3yI2eBeyMsXodil0Cf4svcinQz8OOTtMFZ+5SJ2AQ2cChBAoZM
-	vkU/xcPTXtoUFbZl0xMyjwb42arhzpfzAb8zRy/NwtX6U6GEZXlXXQC1/lXmOLV3I7mKRlfcpoc
-	lTQKb755EJif3Kg7uqJ6QPtwmrkLfEreYRo6kg4WTz+IwHQjoScKRmSKPolvAZWOkW4cg+aGA8K
-	z6OYLxUqVtUpcFY9n3CgJoQvR6akYZpF/fccg7zzx6fQGDLYz0MUR2HTJUboW2U1gyQH7ho0WaS
-	XfoHS/MyI6kTysqZVeQ3QOg==
-X-Received: by 2002:a05:620a:a8ca:10b0:93e:5a3f:ac13 with SMTP id af79cd13be357-93f6f54812fmr310821485a.0.1792744343436;
-        Fri, 23 Oct 2026 01:32:23 -0700 (PDT)
-X-Received: by 2002:a05:620a:a8ca:10b0:93e:5a3f:ac13 with SMTP id af79cd13be357-93f6f54812fmr310817985a.0.1792744342945;
-        Fri, 23 Oct 2026 01:32:22 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5c81c1bsm75481866b.44.2026.10.23.01.32.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 01:32:21 -0700 (PDT)
-Message-ID: <ee86c401-5e1b-4c1c-9f43-fac90fb303d0@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 10:32:19 +0200
+        bh=gY2fRVnI2zhWXKknMYprw1I6Eo3hbc44HoOJowJu3+w=;
+        b=d4VuhVv54doigkpSXhFccvV5KMVyTAl3R6MxfxX9NnJ+Omg2CThniJwS1217jptsdb
+         RJpDGTPsmWlYTzSQlbwb3bcBmaiIBydCGQAOTAb0c5k9vHdU+x1cEeprcxEQia9Nl5+H
+         a8faimFcPVs0pmdrFcePFWu7pv3qSjuUov5BHlTp90Y80RSB0mUVj5tKTTWsOR+4kNA9
+         un1bFNefU1dbC/L9NLXR6PWveXtZwpQ3s2wMPgOI+J/eGu+Nxkx67o2ERRz3cTa5BYJ7
+         4xA3zRBUJsAXTgB0kfj13W8TXFhZ8niSEyfEO+GnvoZRW53BOiB/LVXggThUwWOQUeof
+         pc5Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxiCiwGOQhDRa8CQsSmHc1Dr0R+y4yKyVIXH3iw+2Io7N7HocbZ+i8gJ04XqqAppdc+f3sDfZDfvoaW4HX/@vger.kernel.org
+X-Gm-Message-State: AFq9FYK7Y00pPLfeZo6nmZAa0eXN1xiebi6bIlq3kVesck7e+sW+tknL
+	tYB8Sbw0zSVcKcQuFjS6inIhNgXDrZUiZV1qo4TPSNU2/SeP0abdbJoVG/sTm6wKO+Q+KaBurKC
+	0l4OnvmkdaVQRGtVRVcCMCoRnexQRhmwIFbteiq3AjRxQHqwY6QuCUnYdqtBxXQHW4dzp
+X-Gm-Gg: AYBFou20HVDNVxzj1lg31DRDL9ZDToMvZf7bt207pk8vpTv1qqftwqPxOzq108MMqZC
+	SCU+4Tt61T9GjoJHmOrxBfaUp2gkoG5ul9TUwQpC40nr2GGfqXkTyvT9TdaKu8QkCPR+Rq4KHjw
+	qufeIdAxpoGRqsUwUKLTjbrULZGdGi0qkov/NANras7DozOaahS/1v9p6rKA5WmS1353/gsl0nM
+	tfX1z21UX7yxNxNcC2XQcxth6YLZlXoXvLlb77M/5bRoenXVakTKUA4ZphnnWxnfBOxzqigcnbV
+	W7K0LXaZf0qQ5DeA4BtLkGQZApJfe6xYp9UjSXXFu2BRYLAJGx0dMGa2rfK2mVPNEIoCZO7j5tE
+	RvPuxdjhkuNOIY2OZrD9Zk91q7xxCng4ntg==
+X-Received: by 2002:a05:620a:390c:b0:93e:e175:ee92 with SMTP id af79cd13be357-93f6f7d048cmr287079385a.39.1792744719027;
+        Fri, 23 Oct 2026 01:38:39 -0700 (PDT)
+X-Received: by 2002:a05:620a:390c:b0:93e:e175:ee92 with SMTP id af79cd13be357-93f6f7d048cmr287077085a.39.1792744718559;
+        Fri, 23 Oct 2026 01:38:38 -0700 (PDT)
+Received: from juillet.box.freepro.com ([2a05:6e02:1041:c10:b74b:faa1:2e99:5c8c])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e37eded3fsm3587017f8f.7.2026.10.23.01.38.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 01:38:37 -0700 (PDT)
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org
+Cc: robh@kernel.org, krzk+dt@kernel.org, johannes.goede@oss.qualcomm.com,
+        stephan.gerhold@linaro.org, conor+dt@kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v4] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal zones for PMICs
+Date: Fri, 23 Oct 2026 10:38:27 +0200
+Message-ID: <20261023083827.7648-1-daniel.lezcano@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,41 +118,25 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: Add Motorola Moto G10
-To: Michael McAllister <me@michaelmcallister.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <cover.1792703903.git.me@michaelmcallister.org>
- <9d30c98a7eb0e57b09f239e8276f6d84422d9fd4.1792703903.git.me@michaelmcallister.org>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <9d30c98a7eb0e57b09f239e8276f6d84422d9fd4.1792703903.git.me@michaelmcallister.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Gt3XaU1C c=1 sm=1 tr=0 ts=6adb1b98 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=JwJ85b4fAAAA:8 a=pGLkceISAAAA:8
- a=oW6_BwkcVB5HKUzH1HsA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
- a=qg2vb7sgHZQYDKbllo_a:22
-X-Proofpoint-GUID: X3iy0uVHXTZzJOj6Y3t_gJUxbrtV4UqD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzMyBTYWx0ZWRfX0EswAsfc/njH
- i1FWZPKCKxoZ1r7XRbMjVmbv/bMaP1Bo/ilgPsMXTppYz3RV4DS8oFSIWjWBGQEemTKsMMl7K/M
- 9LfkiC7l9vKbaWPg60vw/UnHAlmaqbMfyR1g9uD3RFAdK/zVswGa4RN7xNyKay0Ug3p9+gyC0fA
- J20xmNHq97dVFr93RrJjlmthZgH8IhVReiIBv7W2t/EcABCV1ZhDC63P1E2h0TUPEjH0VHMIc3h
- pRuG4aSIXeZSill5naFQUPS7AW5SRCqAa9RiGqTcdTc/H0aEnhpKj+0Icaxzj1JrJEH6lSsOg1v
- 6ExCIYLNpO4K+hzB65A23jdsKrsotLam999vj28p5uY60U8QuUzouKymlEyKq3Z9OvNRnkuJEFR
- GjhrbDX27yESD6xNLNbZLfeYq/qy97NNernkzlrKl4+8JqnDdWu2AigwqUP6LuSUtZkNNKOxkyI
- L6OeD7XNrIbOxHMb54A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzMyBTYWx0ZWRfX/E8ViwMpupm1
- QYUv15ntRZqSG2X566PVvy3duINWzQiv0cMqDW3CRwJbkpT8RShjt42EcF6fchJOdhve/AaEckL
- q3fbNdiPIPqn15RcDiNqda7PwTdX/w0=
-X-Proofpoint-ORIG-GUID: X3iy0uVHXTZzJOj6Y3t_gJUxbrtV4UqD
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=Gt3XaU1C c=1 sm=1 tr=0 ts=6adb1d10 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8
+ a=W5eknlhPjGTqicOx0vkA:9 a=bTQJ7kPSJx9SKPbeHEYW:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: PVMwQ2awkoYwbA6yFpNL8pjnqSvqGRTG
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzNCBTYWx0ZWRfXzoCW83hRyd7q
+ GLd5k4I6VZanJmGGW4xYYuU/X/K3tXil2rGkhU+U2F/UMDT68buiiexr8yqXuqzCrLC9e0FOePk
+ 3wVRQD1IQtd6KEbmiNJM8EISwfvBiO4W0sUKz08KzD/IWkRYuTQaFmFeybiUk/9mh1gfTfJEZFj
+ tqY6rfxYcEIdQsVRDHt5s1m7QXTVbncV1oOvhP3QVOLLyc6+UMW75Ja8ZcOtFWhZLJ3v/vdimXq
+ cSwODik05lu/z55NZw0+hUU3Dq9p/O5m/HFJLlkxxaQvKQXWgBygWRmfOb1YBpGToKksNKGZCuy
+ qgErVNmU4dHR1bSWr6q1WvLgUgB9nAq81w09YOsyv68eWiwx20OXvmkaBMwtPIPiQYSscGh06Uq
+ pp3GjxwpxEyRKhhcIh5xYMzRZ7nXo+mCWmVtgdlmjqgf5RhvXbaweCZUL/tz7BTfHuJDoDshQ9Q
+ 02cpGDtl2G10PTmuN+g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzNCBTYWx0ZWRfXwlb4jhHvt1ap
+ pK73ZfxzyB8Mby4vcvGiBz5RlmtMq86vrElwGJpFUcah3ASIwWAA7TDW1+sR+AlpAPbolDF45vr
+ P1TQtV3ruzWoOus5BuOou93m7aYu/qQ=
+X-Proofpoint-ORIG-GUID: PVMwQ2awkoYwbA6yFpNL8pjnqSvqGRTG
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
@@ -158,146 +145,181 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0
  lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610230033
+ definitions=main-2610230034
 
-On 10/22/26 10:40 PM, Michael McAllister wrote:
-> Add an initial board description for the SM4250-based Motorola Moto G10
-> (codenamed capri), including eMMC, USB-C, buttons, GPU, Wi-Fi and
-> Bluetooth. Use the firmware framebuffer until native panel support is
-> available.
+The ThinkPad T14s needs thermal mitigation under sustained workloads to
+limit temperature rise before thermal shutdown. EC interrupt-driven thermal
+monitoring is not yet supported, so use the board temperature sensors
+exposed through the PMK8550 VADC to provide mitigation now.
 
-[...]
+Describe the sensors near DRAM, the fan/heatpipe, the GPU and CPU PMICs,
+the charger, the WWAN area and the USB-C ports. The DRAM-area sensor faces
+the keyboard, while the fan/heatpipe-area sensor faces the back cover.
+These are internal board measurements rather than direct measurements of
+the user-contact surfaces.
 
-> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-> +/*
-> + * Copyright (c) 2026 Michael McAllister <me@michaelmcallister.org>
-> + *
-> + * PM6125 regulator definitions derived from sm4250-oneplus-billie2.dts:
-> + * Copyright (c) 2021 Iskren Chernev <iskren.chernev@gmail.com>
+Use the heatpipe-area sensor for passive mitigation at 57.85 degrees
+Celsius, derived from observed platform behaviour with the Windows
+balanced power profile. Map the passive trip to all CPUs and the GPU,
+with 1 degree Celsius hysteresis and a 500 ms passive polling interval.
+Name the trip "backcover-ec-alert" so that the planned EC support can
+locate and adjust it.
 
-Did you adjust them to match your specific device? Otherwise you risk
-some magic smoke..
+An earlier approach using staged CPU-cluster throttling did not show a
+significant improvement and introduced a latency imbalance between CPU
+clusters. Keep a single passive trip to provide timely mitigation.
 
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/input.h>
-> +#include "sm4250.dtsi"
-> +#include "pm6125.dtsi"
-> +#include "pmi632.dtsi"
-> +
-> +/ {
-> +	model = "Motorola Moto G10";
-> +	compatible = "motorola,capri", "qcom,sm4250";
-> +
-> +	/* Used by the bootloader to select the board. */
-> +	qcom,msm-id = <0x1a1 0x10000>;
+Add 73 degree Celsius critical shutdown trips for the DRAM-area and
+heatpipe-area sensors. Retain these baseline thresholds pending
+sensor-specific hardware validation. The reported Windows DRAM threshold
+of 115 degrees Celsius has not been established to apply to these VADC
+measurements and does not justify changing the shutdown thresholds.
 
-Please add a line to socinfo (this is SM4250 as you said), include that
-header and use the define here
+Thermal camera measurements indicate that the readings primarily reflect
+internal temperatures rather than chassis surface temperatures. No unsafe
+external surface temperature was observed during those tests, but they do
+not establish qualified critical limits for the internal sensors.
 
-[...]
+Expose the remaining sensors as monitoring-only zones and enable ADC
+threshold monitoring on the corresponding PMK8550 VADC channels.
 
-> +/* The stock firmware uses CPU mode 3 and affinity level 1 for these states. */
-> +&cluster_0_sleep_0 {
-> +	arm,psci-suspend-param = <0x41000023>;
-> +};
-> +
-> +&cluster_0_sleep_1 {
-> +	arm,psci-suspend-param = <0x41000043>;
-> +};
-> +
-> +&cluster_1_sleep_0 {
-> +	arm,psci-suspend-param = <0x41000023>;
-> +};
-> +
-> +&cluster_1_sleep_1 {
-> +	arm,psci-suspend-param = <0x41000043>;
-> +};
+Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Link: https://patch.msgid.link/20261014193524.5590-1-daniel.lezcano@oss.qualcomm.com
+Signed-off-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+---
+ .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   | 112 ++++++++++++++++++
+ 1 file changed, 112 insertions(+)
 
-This isn't customized per-device. I've confirmed these values are
-right, please update them in the SoC DTSI in a preceding patch.
+diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+index 75ad74bcb042..21f4569068e1 100644
+--- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+@@ -502,6 +502,88 @@ platform {
+ 			};
+ 		};
+ 	};
++
++	thermal-zones {
++		/* Sensor near DRAM, facing the keyboard. */
++		dram-thermal {
++			critical-action = "shutdown";
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
++
++			trips {
++				dram-critical {
++					temperature = <73000>;
++					hysteresis = <1000>;
++					type = "critical";
++				};
++			};
++		};
++
++		/* Sensor near the GPU PMICs. */
++		gpu-pmic-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
++		};
++
++		/* Sensor near the fan/heatpipe, facing the back cover. */
++		heatpipe-thermal {
++			critical-action = "shutdown";
++			polling-delay-passive = <500>;
++
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
++
++			trips {
++				backcover_ec_alert: backcover-ec-alert {
++					temperature = <57850>;
++					hysteresis = <1000>;
++					type = "passive";
++				};
++
++				heatpipe-critical {
++					temperature = <73000>;
++					hysteresis = <1000>;
++					type = "critical";
++				};
++			};
++
++			cooling-maps {
++				map0 {
++					trip = <&backcover_ec_alert>;
++					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++				};
++			};
++		};
++
++		/* Sensor in the WWAN area. */
++		wwan-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
++		};
++
++		/* Sensor in the charger area. */
++		charger-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
++		};
++
++		/* Sensor near the CPU PMICs. */
++		cpu-pmic-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
++		};
++
++		/* Sensor near the USB-C ports. */
++		typec-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
++		};
++	};
+ };
+ 
+ &apps_rsc {
+@@ -1285,6 +1367,36 @@ usb0_pwr_1p15_reg_en: usb0-pwr-1p15-reg-en-state {
+ 	};
+ };
+ 
++&pmk8550_vadc {
++	channel@144 {
++		qcom,adc-tm;
++	};
++
++	channel@145 {
++		qcom,adc-tm;
++	};
++
++	channel@146 {
++		qcom,adc-tm;
++	};
++
++	channel@147 {
++		qcom,adc-tm;
++	};
++
++	channel@148 {
++		qcom,adc-tm;
++	};
++
++	channel@14a {
++		qcom,adc-tm;
++	};
++
++	channel@14b {
++		qcom,adc-tm;
++	};
++};
++
+ &qupv3_0 {
+ 	status = "okay";
+ };
+-- 
+2.53.0
 
-We also have this state:
-
-system_sleep_0: system-sleep-0 {
-	compatible = "domain-idle-state";
-	arm,psci-suspend-param = <0x42000343>;
-	entry-latency-us = <10831>;
-	exit-latency-us = <4506>;
-	min-residency-us = <15338>;
-};
-
-but this is definitely going to stay pending on this series:
-
-https://lore.kernel.org/linux-arm-msm/20261015-b4-shikra_lpm_addition-v2-0-ac7f1a0d5638@oss.qualcomm.com/
-
-[...]
-
-> +&reserved_memory {
-> +	/delete-node/ memory@53800000;
-> +	/delete-node/ memory@56100000;
-> +	/delete-node/ memory@56110000;
-> +	/delete-node/ memory@56115000;
-
-Please remove these nodes via a &label_reference at the top of the
-file instead, so the compiler will do some more checking
-
-[...]
-
-> +	/* Bootloader debug data. */
-
-Ultra nit: usually comments don't end in a period
-
-[...]
-
-> +		vreg_l8a: l8 {
-> +			/* Handset ICNSS DT overrides CX/MX to 640 mV. */
-
-This is presumably CX/MX for the bluetooth chip?
-I find this comment a bit more on the confusing side rather than helping
-
-> +			regulator-min-microvolt = <640000>;
-> +			regulator-max-microvolt = <640000>;
-> +		};
-> +
-> +		vreg_l9a: l9 {
-> +			regulator-min-microvolt = <1800000>;
-> +			regulator-max-microvolt = <1800000>;
-> +			/* Display and touch share this rail with Bluetooth. */
-
-This will become self-evident as you add support for these pieces
-
-[...]
-
-> +		vreg_l16a: l16 {
-> +			/* ICNSS WCN3990 XO supply setting. */
-
-This comment feels likewise a little strange
-
-[...]
-
-> +&tlmm {
-> +	gpio-reserved-ranges = <14 4>;
-
-Do we know what these map to? Usually that's NFC eSE or a fingerprint
-scanner. If you do, please add a comment, like in glymur-crd.dtsi
-
-[...]
-
-> +&usb_dwc3 {
-> +	dr_mode = "otg";
-
-OTG is the default, you can drop this line
-
-
-> +	maximum-speed = "high-speed";
-> +	phy-names = "usb2-phy";
-> +	phys = <&usb_hsphy>;
-> +	role-switch-default-mode = "peripheral";
-
-And this is the default too
-
-Konrad
