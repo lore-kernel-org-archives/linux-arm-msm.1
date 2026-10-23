@@ -1,105 +1,105 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792775904;
-	b=bJuYHXqgHmqcBBclCbR36QlUGImV5OYQuJMFAaUyhmvnp0MmCHwzbpUbDAO20GRvDkqV
-	 yW0XIdxra54FiCoo/+U5xUhaq6qlXXsWPyszMO7o/vJVC1IVpWmpPABL9IBQ5kWXyMztL
-	 Ex/gSrfcFxQ+btEieQoH/RvlgdCpl5dXJ9tIVWmcTBqB60q4UX/ElaD0NqPmp+Mx1GAI1
-	 6Pc8W6x6xp0IECnxlt/tc6aUZQOmnBBFruPYQmlU0+X12XxhwZVRMpaFG7RpVyG5R5xlw
-	 VtObeUCutXAiS36f5NRANhNv9gH+PVnbCueDv8OfGXR6twrSwUOE3JPWMgiKGGvwzvw==
+	t=1792775907;
+	b=rcdQXfVFABD6Xt5mszlaZnEYSmyhhwj7ufbYGUHNAl5cbQqF+lW+FP968LB9dbCjE/lI
+	 tKJediGi8SeKXvyCPRu0jCCDzIZKfjKstqLXKfyVKBV3pKdIg4JPpbxc8yxOONiibsxwe
+	 89WeIC0nybV4iSZaJOSs7pq1UYwA6k09YxgcHgop+I6UUgGBYetl+iwnMshkALKGPzna9
+	 XdvNTH5jOJ6ZTF5n6p1vllVj6pzufZ/JYU5PoNFOIYhqEWsirzZy8WtRXjikOMMwMzmE1
+	 iyMzUpu4d4YPb0PG3P/by5U8rCLWvff76LFJeIzLbsEsCVY5FVVN+fWZmOAzuT1jDWw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792775904;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792775907;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=M9b4xWrqlE0Kv3+ymwpxhoecVabQr8ouhVupqXjGu1k=;
-	b=lZnlhvLNbz2nDczaiu5fjjtR5zyNghDJ99YGP1Jhg54L26dzMODOVSEwvNFnW67zCVL+
-	 57M4+Sf5UogFG9lIAASI7ZninMqQ09k8HYmT1XpzQZivc8xnM2xHHnJAAUTNIp3ePYgU7
-	 LA7sA5jmKKib1wYPzI0jVS3fClZ0i9Xp0BknsisKv39XaaAD8azrkWJB8lxTLgwOn+Cuc
-	 1ZRK/Y8+UK1ryJHgW7Lha/vSh/419KJTssG6nAdFo51HXISet9CFVeAeI0ShwMTs1Bm1J
-	 /kyvGFJp22zwF715++DiDXskOjNcVR9NvgPH1j7yNQMlNjHtMhLjiK+to8c3csHLpqg==
+	bh=J7MeUmGzDc31SgdSuHsk12T5/Bjqex2jk8PVtUzDBw8=;
+	b=iE3kwsep1iFVTxWpl2MWYRyRB8wBnJzZB30uJs4HfdTKL3esW7nyjlrmrGdXL2ykwHIn
+	 xMNQu4074s2Ivt788vWtQjPUR2sr84j8pKwJAOGG7heYrRP80nbkRUragcbYlYkLHpjo6
+	 z8PEcuRaZBh7RqGTIN59qsHwBB2PxVvan+GlX2VCwzsOw+t1Jj56GMmQ9QkLuJLZ5wgPI
+	 1XClYGyI5duVxOX7VxYa9sOIUmfjao9/DsYjXNsfIhBCnleUcmjhQxT4PGS/F17KEq0cC
+	 IAKCWV1JSVYjxm3BOaXz91pFXou/XcAbSjRROpNOHetSyg7SSbb9KdjROkh8m8RDQgg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7asCZYZ;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aoY4qbfu;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="h/lk/pa1";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EE8Ac3mH;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4EAD60A380B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C4EAD60A380B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC250606DC72
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CC250606DC72
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7asCZYZ;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aoY4qbfu
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NG2vVq3733905
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:23 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=h/lk/pa1;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EE8Ac3mH
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NE6NT73000254
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=M9b4xWrqlE0
-	Kv3+ymwpxhoecVabQr8ouhVupqXjGu1k=; b=N7asCZYZQ/M79q0CDhsr6wTFxhv
-	5sGz/fRJYD/XXFByGPOAcdh+zXgky2vNSK2rm3lRpd7pYj2ExswyOEA2f8R3C2XK
-	+hTA/KAgPw2FJJpGe5yG4wBXWXP36bpn6cWbwiLQdmENul+wLYUoY555IG1nL4Bb
-	HKMLAkPXc5Ev9C3UvoN4yjuZHy6jD4T6aR9DpKPT7YOXd8STzrxSHtxiMOvUn2ru
-	1cNrs6UU9RXb7rTRMZna+CUlDhWy6A0Zy3+MSBDZ+UxF6nlcnwt8pCHOMT3i0AQ/
-	i1vgalvn3sc3Xkc9hbzUyxAyc/xhAz6HJqMXQxXxHD8+FijP1GNpw2bXXuw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgarug9f2-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=J7MeUmGzDc3
+	1SgdSuHsk12T5/Bjqex2jk8PVtUzDBw8=; b=h/lk/pa10xaS0W9NPAlVXuIeZy4
+	nsospPMSTOXpvfI3Jws8BB8UyU7LWi03hBshcp6IGyida/0d+NaErNFwDga4ZaoI
+	mzRR6EC8hGj1TMTCnBuQ0q36x8PqNH8v4KLhQsiHVcK8dDIs1CYNNtB+mlFetMNA
+	X+NkLlH1DLqn7VaJ3jhogzi8m6vS2KUwoyBz9LQIOJtdt/zGQ5UmRfVzy0LAQn4T
+	4O+WRUqBgUvfLgYWdM6OHSrU8maY1gLgaYNoKECXdMnMIhG4ovPCZiqX4UxqZPE5
+	9BlLqSUmo5k10ToscXZiOwOgbe338CNpTysrtbZGC2v2I5vubGFiNMj79UQ==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hg7cn14j9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:22 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f5844cb60so203793185a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:18:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:18:25 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-91b529a8610so24788946d6.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:18:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792775902; x=1793380702; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792775905; x=1793380705; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=M9b4xWrqlE0Kv3+ymwpxhoecVabQr8ouhVupqXjGu1k=;
-        b=aoY4qbfuWYIAR8W9rBEtMQzfYepdax1UjkB4LVKkV5tzbmhf0kf+H/Uw3vshdnHMXC
-         KvhCrG7XyBaDdYOK4z582xswZn7GcU/h+cGUcNVMDTXm8JHFisv9cIZVk7Y+elhzpgGW
-         L43SIbkWwz5Sw37NQp3t/figIeyOfCZcxOxn0rLoYCZ5n4x6QcbjRZtNeWtJYIBZrU+9
-         zPqabqsfv1wiqiLbKeZtkOqpe3qrOdaTPFoeaQFBKv1mCAquJHLHgZMdziN3pj+bCiC8
-         lI8KX642n29RVhDfk7O7fw4CN40kMN8LRZH/LPbyuKaq/+zNTGHnTMn9etno0WY850mk
-         qemQ==
+        bh=J7MeUmGzDc31SgdSuHsk12T5/Bjqex2jk8PVtUzDBw8=;
+        b=EE8Ac3mHJr6uB1KYgk3L6WOhoXv0tq43n9ZdmqxU0UOCUohgqclzj1dpO6+Bl1rRsu
+         wIotEGBHcgvLQZJ2lzQfPpDb6E9RW4QhZtNS/xuL+uowd4Sk06a6p0yV50pjHmw6vhgV
+         ySucElvQFFA2m7x1djfyMk69mxMY+5Z9Uv/2U35RV7w+VtyGUcOPc3pLaI0wHb/fmWYF
+         xahTK08O0jRcos0eTsd7Z1JVOujslR3zKeWGQW16LRNaoj8EEAmdAKrrRYBQA3s1gpFU
+         su+4FCiK4VlMOTRbJE4zZXC3kPbWY3HpOWVKB1je4SyFQv6qGZsU84A25kA3QxjuELn7
+         8ZWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792775902; x=1793380702;
+        d=1e100.net; s=20260707; t=1792775905; x=1793380705;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=M9b4xWrqlE0Kv3+ymwpxhoecVabQr8ouhVupqXjGu1k=;
-        b=XmBY0j92gDT6qb1hJTDwEh4qha6xrHDDonNa8voVLJMtfAjOk4s1yq4wD6DJFsjfap
-         yCQzahfGuP6JTG9vJIhCFziP86OHzJjDUC/xIq7he5RQ2yniTuBgvGnPVnTaZqkkLbeH
-         bG2T7W9lnYvYRdfGz3FSsrxF0EL3p1l1tjeBcdGp+2V6F7EgQ15VVA2Y7udM1xJ4BE6a
-         JUJbfs6y8rwb3HOSTMuHmfHEnn0Sz1ICLg7xEzxyctDHrnLnqmF0j+AkMum2UEpltR7H
-         VWyF3sGzdLuvgnM7Afgp4BcyGSyiNUud2p8wJahsSbeGleji2BRca93kFEa2aE6GCV6N
-         nKMQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzTpI+bV8aKOQONzgWU1tX9LYTBzMRbA18gGHf6KiZW0rVX3FNHgBiJ2WRqozwTOChtlcVeX68dD8J/xo6V@vger.kernel.org
-X-Gm-Message-State: AFq9FYI9qvJsF5TsD6b4LwBSn6ZrVdnTIjeQC3luwkdIW8J5q4X7fgKt
-	JAIWG6JJk6TdKMO0e3f6mINsrwtBvJa5eOibPzw6W/o+nn919TpE2H1XsLrMBH0nUt1PoZ+g+RR
-	cQitBOEzubt3MBJxWF7Ndy4/gnG7dHglh1Mbln+pbXwSq2UvY2YzqVJgvddbFg8ce/HhQ
-X-Gm-Gg: AYBFou3yjgAEsvO3LrVPckogg3RPyC/JfkzaoD6qe7Ae1zXLbo/G6HV0yeliPcAImpU
-	H5sOHBnBU/d5nWkoMpncU7XePLWBcjuUOVqz2G+UC4qbixVSprjkZCy3fOePGcudkluNY6xkztm
-	uneW/fJ33OWwDb65LRX73bENT6sqrgw/jT4TBD3hfoj8fAgEurgWyfZzXqYBARm1k/DYhnqFP2d
-	mEqzR0uy3xTpCdKPetHU0TT3dmMT2FzqEv/UhQ5HD6FPNCggH800DRiuZIbo22koWW976LQ3fv/
-	RbuM6hxW28Wypp0jJ+61Hfl9ya/KLwy4No80kNOVMjMPaHDKt/sbHEHk1U/CA8rxJ8+4a/sMjT/
-	wkFewfP33orNY
-X-Received: by 2002:a05:620a:880d:b0:93e:53db:d59e with SMTP id af79cd13be357-93f627233d0mr922233785a.23.1792775901840;
-        Fri, 23 Oct 2026 10:18:21 -0700 (PDT)
-X-Received: by 2002:a05:620a:880d:b0:93e:53db:d59e with SMTP id af79cd13be357-93f627233d0mr922228285a.23.1792775901279;
-        Fri, 23 Oct 2026 10:18:21 -0700 (PDT)
+        bh=J7MeUmGzDc31SgdSuHsk12T5/Bjqex2jk8PVtUzDBw8=;
+        b=Sb60vbU2GQ4rFh9Utp+0CmlAeMf2lllX+amQPiNYgqg7tLh5qGJq0kP+UdPyo+vA6m
+         AJKPQpCoxH7BsHAKNsf+aPmMwbbXKFKnRNcF2kmp/RcCz/OWdSxbgjxNUdbSCSIM6gaK
+         Wyzpog6godrXIdU3TUNq50VdIlgywrO621HA3G0XLDcTXYEUtfXoshXOw9kPem8uHJHD
+         CgTCO5meh1qtl7H6i9wjSoqGPExuDzFtNPSyqvOSL0O+M18lnKRacI9by0+YnZe9ygPN
+         ZiB8LQB3873cSgWUc3cORzCs9rqCs+Lc4iVzLSqTjB6rjXPmWid+QycdWUWjBEzL5j0F
+         hcBA==
+X-Forwarded-Encrypted: i=1; AKwUvBxPuUlbAoooEYSWfDFwpt7T0m+o01WxLis+6GOZ40x6rmJ+q3yf6pzFcVuoRcaNaG+4aVo7DLovArrjEijV@vger.kernel.org
+X-Gm-Message-State: AFq9FYKSyuZQ06eD8ptPdZac5VoVWyTnbr01g8LAPByhQZUoscIzHri5
+	pFqR91xeLwufSMldXpp3wVa/aKgqoLpaosMNYuaLfy9JxWnRak9DDQ8d8cQNdB1/QIgFRDP4wQc
+	vKGKODrfqX1tqchJhIzN+BmueY39XNfW0OWm7btTeTnpG9JoG6TDsl79I5byWhqbtV+Zg
+X-Gm-Gg: AYBFou2pP8POQoPzyDihLW5I7cvuvRjTkr41h4U0cZ/PH2BCbW8FarfcSIOYRWytBsl
+	rkjUdgL7zuTFzvpLXwOqyX3VtjB9y4z0EkjpzrKRrcaVLrskpKhnu4Ksx4TPeKPgqjEQ3fHz286
+	oAn7WaUavn/feRUUuKa/ibRQoF/arS8rCOzINvbY+8OHEcCl8sJNJX+OdGOcv+mdJwLYKinSIPJ
+	p+RXScapOKNYNMl+IEUTlfx3gzJuwLPWfugFjQn1NpbLJ5G+C7Qa712NDVxyR0FB+qYuGuqxluf
+	VeYoN3cqvl7X/nDmC312weLi/81vPO3IyCPrfJOaRKC0L8yin6unTwaHn+ba2m8wi7oBr447ZN9
+	OfecRB+YCJW49
+X-Received: by 2002:a05:620a:1a28:b0:93e:96e0:25a5 with SMTP id af79cd13be357-93f6f7caf5emr537787285a.41.1792775905079;
+        Fri, 23 Oct 2026 10:18:25 -0700 (PDT)
+X-Received: by 2002:a05:620a:1a28:b0:93e:96e0:25a5 with SMTP id af79cd13be357-93f6f7caf5emr537781485a.41.1792775904509;
+        Fri, 23 Oct 2026 10:18:24 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.18.19
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d41e0fesm937475f8f.46.2026.10.23.10.18.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 10:18:20 -0700 (PDT)
+        Fri, 23 Oct 2026 10:18:23 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
 Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -114,9 +114,9 @@ Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [RFC PATCH 19/23] ASoC: qcom: audioreach: keep the last VI calibration result until the DSP reports
-Date: Fri, 23 Oct 2026 18:14:29 +0100
-Message-ID: <20261023171433.820092-20-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [RFC PATCH 21/23] ASoC: qcom: x1e80100: register WSA speaker thermal zones for speaker protection
+Date: Fri, 23 Oct 2026 18:14:31 +0100
+Message-ID: <20261023171433.820092-22-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -130,112 +130,138 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfXykL0m4j6LNzh
- 9B63UCJ3seFopUD1566npRUvq3G7w5R+CQ+ENN/KDAeJMbOpQu8CSu+og/OHo99VbMoYTMCuknJ
- RXzMRZoAloOmW1jiowUIfu7K3Uxtb74=
-X-Proofpoint-GUID: glLvOmYhE0qCcGYtFJomt2aa6ZXIy2k4
-X-Authority-Analysis: v=2.4 cv=SK7Xx+vH c=1 sm=1 tr=0 ts=6adb96de cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX/F0gpTnO5UmU
+ XHHkD7xPSQ6bwkp+HNtjTksUow3RqnceZcUnGm08Bx0CCbAcbOW40wYGyconBuv5azVLTFZJTKB
+ 4gh4vVM2+KPgZiGiPvrmTrEhgc+HVNZxHMjG0PC3Nm4is8ff2CIn5MiwGVjg53JcZS4V9H9h8rK
+ ca3GCuS9ctKxZV8Hu14DslYIXHt5x72mfQqZhjK4omAlZTxYiJF4+HtlXZn+7CC1PARRvSpjd3x
+ FzSDpSHlUWJH1rrdLIYIg/dGHz48Sjvjhj/DfMWkpECNROVtdM2caotHgjO2N6CLbD/eSikpnzJ
+ sU+uOARlkyld0do9tDQ24VeOxIDRCe1/d+eff20YatgkK4a5ZT07+E99slWRTLTKbNMs+kuK0yq
+ 9nDyqyrg7GalMh7JGULLP30NuE8UaaTQG29iilr5ZRml1mYUdSbWiE4uUSzr2sw3BIZUTzE5Oav
+ DAwa6mkjVWP5Zpy6BJA==
+X-Proofpoint-GUID: FiKh8WLcbabWDJJ7I0ijhS3Nb4LnplpZ
+X-Authority-Analysis: v=2.4 cv=a9mlZkSF c=1 sm=1 tr=0 ts=6adb96e1 cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=IK27QhZfs67nWGHMqAUA:9 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: glLvOmYhE0qCcGYtFJomt2aa6ZXIy2k4
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfXwFwcoFXlwCJG
- UQZJebtXzRnbDv1h/7XBNUHw0PBBEm/gPSKvIOUSVSas0CSJ2oD8PKqkiVraP6yob0yhxqXceY+
- b40bn+UNAO0F4Kr7l5w1rPT2krEMT2Nj2yc0kZOwgwESZI8xNBqsdh8CPk9o3eN/irCiK50ioxy
- VzaKvyWaMjaQjdqzkAZC/jeTNW9z5a90m8dFhDrmuiwT9Gel2dIFfBUAO1XVX+5UShT6k5aD4qY
- RUD/pGtABDBM+l9XMZkC7QZcBRp3K9Q4QjyAVGfKqFVjzwgt3z+Kb9yoLUJRhpfEZp3Jsx+2LPl
- 6Zg7uHBmbXeekgxRaWxhe+Abbbp/+nQOaKDotcgQv+2+4tQvPpqSQgjyvyFeNe5jItRo1AefAA+
- j5u3BIBAKjwkXJcq4qrXlt9Ow/DFXYf5q5G2py3poOXiHQkLcjhkk8R/t9HP3uM1DoV/O2RyTIB
- f4GrONCl7OfZlMWQL1Q==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=CEpVYLg39VmosHVYFFMA:9 a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-ORIG-GUID: FiKh8WLcbabWDJJ7I0ijhS3Nb4LnplpZ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX9enjF39Ja7zy
+ 8jYAuarzP3I2FrKEFZsTyprNLR9/m0/9sG26w94n110epx5BlHlHoCj0iUZg5LYE8+d2bjK2EmK
+ /OUdDZ4jKlraAsoVo7Whjpyc7Vo+eaA=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 phishscore=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230067
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 adultscore=0
+ spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610230067
 
-Preparing a VI graph in calibration mode cleared the previous result
-straight away. A graph prepared and stopped before the DSP reports, for
-example by a sound server probing the PCM after a calibration, wiped a
-successful result.
-
-Only mark the run pending when arming, and drop the previous result
-when the first event of the new run arrives.
+Look up the thermal zone of each WSA884x VI DAI on the WSA Playback
+link, in DT order, and register them with
+audioreach_sp_register_speaker_map() for the "Speaker Protection T0"
+control. A missing zone is logged and leaves its slot reading 0. The
+map is cleared when the link is torn down.
 
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- sound/soc/qcom/qdsp6/audioreach.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ sound/soc/qcom/x1e80100.c | 54 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
-diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
-index 3eba0a9a0372..e996be54c42e 100644
---- a/sound/soc/qcom/qdsp6/audioreach.c
-+++ b/sound/soc/qcom/qdsp6/audioreach.c
-@@ -25,6 +25,8 @@ enum sp_vi_cali_state {
+diff --git a/sound/soc/qcom/x1e80100.c b/sound/soc/qcom/x1e80100.c
+index 23a28c60bfb7..8cf7dad37c7f 100644
+--- a/sound/soc/qcom/x1e80100.c
++++ b/sound/soc/qcom/x1e80100.c
+@@ -5,6 +5,7 @@
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ #include <linux/soundwire/sdw.h>
++#include <linux/thermal.h>
+ #include <sound/pcm.h>
+ #include <sound/pcm_params.h>
+ #include <sound/jack.h>
+@@ -12,6 +13,7 @@
+ #include <sound/soc-dapm.h>
+ 
+ #include "common.h"
++#include "qdsp6/audioreach.h"
+ #include "qdsp6/q6afe.h"
+ #include "qdsp6/q6dsp-common.h"
+ #include "sdw.h"
+@@ -24,6 +26,55 @@ struct x1e80100_snd_data {
+ 	bool jack_setup;
  };
  
- struct sp_vi_r0_result {
-+	/* Set when a calibration run is armed, cleared when it ends */
-+	bool armed;
- 	enum sp_vi_cali_state state;
- 	u32 num_ch;
- 	s32 r0_cali_q24[MAX_SP_VI_SPEAKERS];
-@@ -1707,9 +1709,16 @@ void audioreach_vi_calibration_event(struct device *dev,
- 
- 	guard(mutex)(&sp_vi_r0_lock);
- 
--	if (sp_vi_r0.state != SP_VI_CALI_RUNNING)
-+	if (!sp_vi_r0.armed)
- 		return;
- 
-+	/* First event of this run: drop the previous result */
-+	if (!memchr_inv(sp_vi_r0.seen_states, 0, sizeof(sp_vi_r0.seen_states))) {
-+		sp_vi_r0.state = SP_VI_CALI_RUNNING;
-+		sp_vi_r0.num_ch = 0;
-+		memset(sp_vi_r0.r0_cali_q24, 0, sizeof(sp_vi_r0.r0_cali_q24));
++/*
++ * Register the thermal zones of the link's wsa884x VI DAIs, in DT order,
++ * which is the VI channel order.
++ */
++static void x1e80100_register_sp_speakers(struct snd_soc_pcm_runtime *rtd)
++{
++	struct thermal_zone_device *tzs[MAX_SP_VI_SPEAKERS];
++	struct snd_soc_dai *codec_dai;
++	unsigned int num = 0;
++	int i;
++
++	for_each_rtd_codec_dais(rtd, i, codec_dai) {
++		struct snd_soc_component *component = codec_dai->component;
++		struct thermal_zone_device *tz;
++		struct sdw_slave *slave;
++		char tz_name[THERMAL_NAME_LENGTH];
++
++		if (strcmp(codec_dai->name, "VI"))
++			continue;
++		if (!component || !component->dev)
++			continue;
++		if (num >= ARRAY_SIZE(tzs))
++			break;
++
++		/* The name wsa884x registers its thermal zone under */
++		slave = dev_to_sdw_dev(component->dev);
++		scnprintf(tz_name, sizeof(tz_name), "wsa-%d-%u",
++			  slave->bus->id, slave->id.unique_id);
++		tz = thermal_zone_get_zone_by_name(tz_name);
++		if (IS_ERR(tz)) {
++			dev_warn(rtd->dev,
++				 "no thermal zone '%s' for %s (%ld); SP T0 kcontrol will read 0 for this slot\n",
++				 tz_name, dev_name(component->dev),
++				 PTR_ERR(tz));
++			tz = NULL;
++		}
++		tzs[num++] = tz;
 +	}
 +
- 	for (i = 0; i < num_ch; i++) {
- 		u32 state = cali->cali_param[i].state;
- 
-@@ -1731,6 +1740,7 @@ void audioreach_vi_calibration_event(struct device *dev,
- 	if (!decisive)
- 		return;
- 
-+	sp_vi_r0.armed = false;
- 	sp_vi_r0.state = success ? SP_VI_CALI_SUCCESS : SP_VI_CALI_FAILED;
- 	sp_vi_r0.num_ch = num_ch;
- 
-@@ -1780,7 +1790,13 @@ void audioreach_vi_calibration_abort(struct device *dev)
- 
- 	guard(mutex)(&sp_vi_r0_lock);
- 
--	if (sp_vi_r0.state != SP_VI_CALI_RUNNING)
-+	if (!sp_vi_r0.armed)
-+		return;
++	/* Also drops the zones of a previous bind when none are found */
++	audioreach_sp_register_speaker_map(tzs, num);
++}
 +
-+	sp_vi_r0.armed = false;
++static void x1e80100_snd_exit(struct snd_soc_pcm_runtime *rtd)
++{
++	if (snd_soc_rtd_to_cpu(rtd, 0)->id == WSA_CODEC_DMA_RX_0)
++		audioreach_sp_register_speaker_map(NULL, 0);
++}
 +
-+	/* The DSP never reported on this run: keep the previous result */
-+	if (!memchr_inv(sp_vi_r0.seen_states, 0, sizeof(sp_vi_r0.seen_states)))
- 		return;
- 
- 	sp_vi_r0.state = SP_VI_CALI_ABORTED;
-@@ -1844,9 +1860,8 @@ static void audioreach_arm_vi_calibration(void)
+ static int x1e80100_snd_init(struct snd_soc_pcm_runtime *rtd)
  {
- 	guard(mutex)(&sp_vi_r0_lock);
+ 	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
+@@ -34,6 +85,8 @@ static int x1e80100_snd_init(struct snd_soc_pcm_runtime *rtd)
  
--	sp_vi_r0 = (struct sp_vi_r0_result){
--		.state = SP_VI_CALI_RUNNING,
--	};
-+	sp_vi_r0.armed = true;
-+	memset(sp_vi_r0.seen_states, 0, sizeof(sp_vi_r0.seen_states));
- }
- 
- static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
+ 	switch (cpu_dai->id) {
+ 	case WSA_CODEC_DMA_RX_0:
++		x1e80100_register_sp_speakers(rtd);
++		fallthrough;
+ 	case WSA_CODEC_DMA_RX_1:
+ 		/*
+ 		 * Set limit of -3 dB on Digital Volume and 0 dB on PA Volume
+@@ -192,6 +245,7 @@ static void x1e80100_add_be_ops(struct snd_soc_card *card)
+ 	for_each_card_prelinks(card, i, link) {
+ 		if (link->no_pcm == 1) {
+ 			link->init = x1e80100_snd_init;
++			link->exit = x1e80100_snd_exit;
+ 			link->be_hw_params_fixup = x1e80100_be_hw_params_fixup;
+ 			link->ops = &x1e80100_be_ops;
+ 		}
 -- 
 2.47.3
 
