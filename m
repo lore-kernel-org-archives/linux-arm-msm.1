@@ -1,110 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792746445;
-	b=Ib47OdkVsEWzokdRQPvbVqfiTQa9w/ZfkwH6+My9GDCQU/XKEGKfBpRN5a3InWcLRbnt
-	 nRciq1iyA7U1RKTMZthGxsX1bVeWoYLzl7D85hab4H/E9+Oizn6KLFrLf+bZeP5CZVmup
-	 UB7FfwLeVnMmXGopc9b2+tYWqxaDCDzXqBv564/Z9N1UxiAjMc8qVRltLJIuvzw3clSv5
-	 sk71sY/GjadtbDP2GGWzJAbHlWyQNh0QAw+w9eiop38XbOLdEVdHLahmERfvPotWMLmRo
-	 BL4whjhTWgz5TvCqcVsP36Nxu+C61E3h9aFey/57lh9n92F7vpWGJ1NqS2hkFdyHTAA==
+	t=1792747082;
+	b=pbLJV8SuY6J1HS37HlWoqLUgjeKQ1CFeJHBVwv3souMi5yDu7g1X5jq/jJBh1AMMdYkC
+	 W929tNh1+JJkB90PNFBlOnqbtJaTgpr77/OO7qQSszwK6byNz161hZiw7zJT56PW0zPUW
+	 lUlq6+NCPk91Kd8D4rp3szvswCznOJhw8pBnDw2Bc7unhWaqHE/os2jppbEhin94K6yTW
+	 U+jPfFub2cwrqIXI06yWEKKC+JAO31PG/GfNp6DclzTmFrfB0TU6vZ/rgJl3tsOx0eH+h
+	 LS8H/NQFZTmCUECHfF0ePlkdei1/rFQQKvD+ZNhzLm21DBXMLtbP6uwp2ldxldsjkqA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792746445;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=dqGyeZV3oX3j3YBuq5s/ny+BKNGQxGrSV/QQaPdBNdA=;
-	b=slsYMa8F+JCEwCW7tUuP4MTGaARxt1h7Th8Vhm/XOZFEEIv6XyIJVqLyoAwEuoybx1+D
-	 RRd/ixgbeCGUazswn9GUfra3+Ke4NybxwfRcBesDMh4TVIoIg979K1F/id16/oeNosfMd
-	 Fnhc2XxXET2VXx7oTYjh4iBWKDSLgInUr5Z9zWtNsKRrJNkLgM3aacffqYcltNjRWD38n
-	 z56VxQSxLhKh7RZev04VBh7RAmiFD4iLOd79I9jHmlQZyMfxQl45nm/+1HzHNNj6iH6aI
-	 3By0/94PSMRqUH4x61AawrHBFMbx0O7RWEP4j4kqlvVDGKWqHsgQ8wquzlv26tDwe9g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792747082;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=DkBtcEeyoOj9rnNnUDnU5HJQyBwrAv9r2nNM1OjD5c4=;
+	b=hTJ2Sh+486OvI+xftyF45D65LGATc05bwcg9SXeBna/L7aJ7xSyDvdqbqjcUnPfwmMva
+	 Lj6XrPPu/w2596sVGg437EQYtsKSrXm4l+AYQRn84sFnbncl9N1+JhWWlhY75Xr1GlRr1
+	 RA4HRBWH8311+YDzS55AEujihaxYIkvDhGHW8WSZB6HHmwnHMBopaYgVKxyrZNR06OcX/
+	 4GYN02I7ri8m7tLFfAy1q9vh/iVkS55UXghXECxklm1N4/vU2iI/+QOPHTSDhbVxWQjDl
+	 GI9HbCLMJQ4JFrBx9/9yjf9c7DcfqQNquU9xeXhCSBjFPzM9wj4ljY5vsTdB3zAav9Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KY82gwWr;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FkkpH780;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=gS3DtNMp;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4391606A31E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:07:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C4391606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50E13606A332
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:18:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 50E13606A332
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KY82gwWr;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FkkpH780
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7F5GF1200725
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:07:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	dqGyeZV3oX3j3YBuq5s/ny+BKNGQxGrSV/QQaPdBNdA=; b=KY82gwWrd88cyQoO
-	N6VlcU0gEPxvfRxtihd6fFVUqe/HVjFBPuj5QU6HCwf4iUSVGmrmoodDM615Fv/L
-	5WF5N8yYHJ3QOop8lFziY7+6bQQP68JTtZSiwhEW1ppn2yQNkLNUeyi7xPEqkF6D
-	aJYeZK9W0tXW2vYv4rk7a/kLW0QbGepz1AqaX4JoB7b4OQTDjLxNtOAmeXc7ZWDE
-	9Q3sVrH/80ogpAiFWvkTc0Ol08FB3G8RqjkNpCWqj91cqcXnVgX6Bu9ICK/M//aY
-	czsMLj0lcdJVA9Ff9gi7aygTYcUW411MmtqbYTOPS6JT5MQprgdcav8W7WoQbqES
-	OhHC3w==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqms2uvf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 09:07:23 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-917a04d1cb2so2161226d6.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 02:07:23 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=gS3DtNMp
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a1b07c3c5fso5901855e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 02:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792746443; x=1793351243; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dqGyeZV3oX3j3YBuq5s/ny+BKNGQxGrSV/QQaPdBNdA=;
-        b=FkkpH780nU05h0VcjynCf85HyrJlLBiuS4jNCYBL8MI/P24dINq2qDkZ6gecnqV6ve
-         t/+rzliSahc68/Y/T4fot54qIzfR+23nz6LuIa97BT8/dddB1hdaagA2VBMsVC8NPC3M
-         kDVd60FItrX4r2uXcbWdqdGExLL3zOwUW+EQRTYCNvlRUYgcGXm0UtLD9CZGjBrrXrei
-         LEFYebCXq57ReTh/LGk4iRNIY1E4c12UJiZ3y1xL4ifqcNOR8nhfnUNM0HHtYdaQv3kT
-         CZSf8Ic3dByy7HcgiwVMqtmFvPbZA9ufkN6ENxbCzF69gHaEc8u3PgRY5EPkVATdn1im
-         SgNA==
+        d=linaro.org; s=google; t=1792747081; x=1793351881; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=DkBtcEeyoOj9rnNnUDnU5HJQyBwrAv9r2nNM1OjD5c4=;
+        b=gS3DtNMpVSAhRKLz/tO31/qW1Tzg+CpzolIJbnfPCQqQhCPskhnR67AHmvHStKqN/R
+         J8x0Wa+nSdPYcJ9V/6oKnZ2LB6Ccc52tI10KRfK/VZ8/CEuDy4VYK4KnnK/pJYt699C1
+         Rx0GwdA8qfU/5PAy0ef+tOhp06JEsfDPt4NL4QQqJpDunFr/oYu6V5VxUZiGfaDygrQN
+         PqzJSJK/IF5owlKtIVT1tWdvhO0uz6pzCk5wgQCn25M9s2v0AdnRrK3MskJmF2bccnXK
+         +MJD7m3z+bUHECxczgtCxes5DQOElAt1OsoqfjXiptxebUrBZytcmUC5rzfcl/TBSQJU
+         GTZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792746443; x=1793351243;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dqGyeZV3oX3j3YBuq5s/ny+BKNGQxGrSV/QQaPdBNdA=;
-        b=0W8L3IYvQ+Z6xVSExOjRKZoDXVSrPBpjTCU1XH2suZKT97cobvha7M2pjoYjUIcg3d
-         9r5p8xCUoBwDVhRMOYZ1+I9OYXORC+MS5ar/pRtmGbMZyTkXPx/FRsQUjHf8+3BVCm/+
-         eDMh/avZQ7ZD9Hq2T4STc+Zfly2giAM9vRHK03gs/szCWnPb8VkCIPYiij181bFripA4
-         7CdBeWWNalNXyd1s/87zhae/u5vC2eBw50B5nGTf3t9a7JJlHE4NLygtC8M0FKy1VB2q
-         VdcgHywYdBIfW+qYy13K77coQeSbzi1lk0OK/um7yMc2q5U8h95ZFuvrcyRUf3YWuilF
-         ALLg==
-X-Gm-Message-State: AFq9FYItPpNE8NmDsa8YdRvG8L+bu0ic4e+je2OgwyzogyumORiHJdBW
-	LxeNY6QXDi9jRoUoVaSbJqtBWDY/Mq8qU6tAGGG0K0qmvGSd1D+uLv3Yrz+MJx7WcPvfaa2lYGB
-	SgH2uUOqdWntETOoE2N7AeofoNpXoRxWqbEIkXloLMTLXOkVKLp0vgwxRz1k3sq/hZcKWgQTw1V
-	76
-X-Gm-Gg: AYBFou2vrChCPw00Nc6QAZUvsy2236CcoYVJGFNJ9vMA3TXdyZ9GH4xaPXr1DTzijQg
-	bW3wuROSoGLjwFNLCT6zakYfC54m2Ymc0jz8FwP9PGT4xUCWw2mP2sFcT4RcNCjMDXj6UpwiNp9
-	52c+9xqzKh6JtXZcYgCUyuLlGkdSK1wJXX6bjbg4G8WbmvKio5wT9nEBBMqztcj2MNjoaNeS/pw
-	BXSeLf5Hf7pyVsc26xpePi3g3ZNbSAJPCfW9MGoRhl4HIR54Rsk4ruTK5G4GteiQyvYEACGoJ4d
-	c1A/NQ6uEc7eK+0SaxtuGy4hMBUT6E/knCqOk49MyWWOuVgTIpL3oVhcsWW8B3MVIBC21q5Ph9r
-	Ne7gC6bsB3hf2meRDhsLg4g==
-X-Received: by 2002:ae9:e507:0:b0:93f:211f:7ba4 with SMTP id af79cd13be357-93f6fa10fabmr286066385a.5.1792746443074;
-        Fri, 23 Oct 2026 02:07:23 -0700 (PDT)
-X-Received: by 2002:ae9:e507:0:b0:93f:211f:7ba4 with SMTP id af79cd13be357-93f6fa10fabmr286062885a.5.1792746442626;
-        Fri, 23 Oct 2026 02:07:22 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46a5cf09c7sm80166066b.77.2026.10.23.02.07.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Oct 2026 02:07:21 -0700 (PDT)
-Message-ID: <81d21974-9242-4caf-8792-bcd8d59d9191@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 11:07:19 +0200
+        d=1e100.net; s=20260707; t=1792747081; x=1793351881;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DkBtcEeyoOj9rnNnUDnU5HJQyBwrAv9r2nNM1OjD5c4=;
+        b=HTGFzp+N9otn0AcFe2ntZ6LLHTYg32yuRWWM+AFwea5tLuvMzJK8VbiMVYBkootCNL
+         BtYloDNM2YkbZcNRRVn2WqsRawtGXZKsWxGWFzAeP2KgVQWu4jPucadRcnpwffslzpCt
+         7qZ0LvDHYYrwrUPI7HmrBayakxNr5pwaKr+ZOrgMj1P6dF5KCh8+FdIVdNbtn/D/m92v
+         InHibo9vy8w6kV2uHl2aPg0K5/wAFWNHQsxDue7E9o80LxkR1esf7zH5XmdfiP+q01yE
+         mjK8BjnYwp6iUlss6hJAjA3nsJTtyo1+nU8KYI2w8NSOWHta90LpPk723CNSEJ4O//pO
+         arTw==
+X-Forwarded-Encrypted: i=1; AKwUvBwpib64kkLHqjDZ977kK8rPlmLu0wOTi343v8xzvHDmwE7+CoH2eMDawIgHFQVlz9LX65PW6PLn5o9EJOMH@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKoyV+wFB3QOKA3kXxPAhm+DDaxwI6uuynsSRdbmqvuJx22bp7
+	dtQ8HrHhg57E8RGwFP3HmFnjKYaGCWhay8fWVxToB4C7CNCT9ImFgiQxhFc+sm/RBLU=
+X-Gm-Gg: AYBFou36AiyYA/DAJ69bHMo7NZRqAWj3E7+W86crUrjSOUZuqyY6ebdK4bcXWmRhbYt
+	tOy0qZqkcxjzSvQb6iT2YfoqCU4CpnitygrNC41sc5PSCZ00e9Yg2jYogDAZ01x1hV2F7Lormgo
+	R8iFBTXKdGbeXh8gj8dIsTWR3CCssA+H7r+HmmgjrGuRIz5o15q7x6zWC/c4pKv2PcjO6mRWMBz
+	2G/BNOh7PwZ+1Rf/Q4dj4eOVTY8DwxfyFtISBmcAt9GyYdCROj26UwA68cml41TBFsUpVNTN4FJ
+	lBLyWi6VPtSxHp30WtG69gO1cehdIlBZvMg9O0XN4GLoq1eIndiZUaS6hsJQPAL1IVkhctkMdoH
+	v+VyEU7HZW2DsYJCQ5GRA3A7xNl9S7gZ4UfnricsEfK4iAAx91DO+kP88nS1kvWfonI9ysXcCkG
+	Wuxfx02amH8VO9rl1hAxdSWq1vX1/csVVn9KxTD4AUP+hQAMSIOn5xfPriz30qYx13fvFRdHj97
+	zh4VAWp/IVlFvBng7yb6wCI0Ijs8lfhEUdISksTllkx3Ui1X2xgmtls80cDk8Ghl0c=
+X-Received: by 2002:a05:600d:84ca:10b0:4a2:150f:1610 with SMTP id 5b1f17b1804b1-4a2150f1826mr12043165e9.23.1792747080587;
+        Fri, 23 Oct 2026 02:18:00 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff25:4f10:a88e:f1a2:fd42:7693])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a2104627e0sm60827045e9.9.2026.10.23.02.17.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 02:18:00 -0700 (PDT)
+Date: Fri, 23 Oct 2026 11:17:54 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+Cc: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+	krzk+dt@kernel.org, johannes.goede@oss.qualcomm.com,
+	conor+dt@kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Mark Pearson <mpearson-lenovo@squebb.ca>
+Subject: Re: [PATCH v4] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal
+ zones for PMICs
+Message-ID: <atsmQqSOuqp1LKw8@linaro.org>
+References: <20261023083827.7648-1-daniel.lezcano@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,89 +99,158 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] drm/msm/a6xx: Add a bandwidth table for the Adreno
- 620 GMU
-To: patches@brar.si, Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar
- <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261023-adreno-a620-v2-0-1d654c3f52d5@brar.si>
- <20261023-adreno-a620-v2-2-1d654c3f52d5@brar.si>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261023-adreno-a620-v2-2-1d654c3f52d5@brar.si>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzNiBTYWx0ZWRfX+UNyDoy4gA4B
- p3wPXKUDAeBGwDPJ6cwXiZt96Ej59EsxT1KVWbf3aFsVq7f2ADQwrpVOXce3oEcaMrzPRHXetvB
- Qj3rrma1ua9V/6FaNfpUBZCqzLQzXvxmrJHwo1TeHU9tsPgOO2HDoUjnEHPzMvKH4PQaBBwNZDs
- Wj5GSqlg1+H8JCm7gupGSsAoewmwU9dXHJDaeFNgDneR9pbYs4oL2CbVt+SXvIQvEkg7a37vNEm
- IH7t7jTIR/nCS/n6lgEnk4p3rzE3KiYPqnx4Gtqd821Z+Z62vNibt09MnS1gf3G6J+7NhRuoKwL
- HchK6OEQEyycxZ1Ezs3tTJDABDZtpNWSa1tWUqUqHZYHhW80X1IjHt3xDPfKBKkhA50k0uqm3Es
- 2BXuAXzKhITu+BG6IEI8aU0AX/rjl1qSvyf0H3qmdsiBJpCsJpOxFeQ6icn9NFB7K/QD7M+3/X/
- 1icpkbEe8FcPlQcJijQ==
-X-Proofpoint-GUID: zllJvyJQ72ki-DXjygmKeHHOf3aXMHya
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzNiBTYWx0ZWRfX1ESn/0Cr+Bpk
- qvE1Bq/ocf2e0DgAGF7Au7sZ5CLjX+jyInPH5xMTJkPfiShQhWSf186yyHlFqbzbGhcWOJEilAM
- jqkPHBlMDCR/HZR/fSCbW3tOphCSn5o=
-X-Authority-Analysis: v=2.4 cv=UdbE26SN c=1 sm=1 tr=0 ts=6adb23cb cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=uaad06dfl4CJDRj71lEA:9 a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-ORIG-GUID: zllJvyJQ72ki-DXjygmKeHHOf3aXMHya
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
- priorityscore=1501 suspectscore=0 lowpriorityscore=0 spamscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610230036
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261023083827.7648-1-daniel.lezcano@oss.qualcomm.com>
 
-On 10/23/26 10:49 AM, Ishu Brar via B4 Relay wrote:
-> From: Ishu Brar <patches@brar.si>
+On Fri, Oct 23, 2026 at 10:38:27AM +0200, Daniel Lezcano wrote:
+> The ThinkPad T14s needs thermal mitigation under sustained workloads to
+> limit temperature rise before thermal shutdown. EC interrupt-driven thermal
+> monitoring is not yet supported, so use the board temperature sensors
+> exposed through the PMK8550 VADC to provide mitigation now.
 > 
-> Without an A620 specific table the GMU falls back to the generic A630
-> one, whose BCM addresses do not exist on SM7250, and the first GX
-> performance vote times out.
+> Describe the sensors near DRAM, the fan/heatpipe, the GPU and CPU PMICs,
+> the charger, the WWAN area and the USB-C ports. The DRAM-area sensor faces
+> the keyboard, while the fan/heatpipe-area sensor faces the back cover.
+> These are internal board measurements rather than direct measurements of
+> the user-contact surfaces.
 > 
-> Like the A650 one, send a single "off" entry just to get things running,
-> with the BCM addresses looked up in cmd-db. This is only used while the
-> GPU OPP table has no bandwidth levels; with them, the table is generated
-> from the BCMs listed in the catalog entry. Add adreno_is_a620() for the
-> selection.
+> Use the heatpipe-area sensor for passive mitigation at 57.85 degrees
+> Celsius, derived from observed platform behaviour with the Windows
+> balanced power profile. Map the passive trip to all CPUs and the GPU,
+> with 1 degree Celsius hysteresis and a 500 ms passive polling interval.
+> Name the trip "backcover-ec-alert" so that the planned EC support can
+> locate and adjust it.
+> 
+> An earlier approach using staged CPU-cluster throttling did not show a
+> significant improvement and introduced a latency imbalance between CPU
+> clusters. Keep a single passive trip to provide timely mitigation.
+> 
+> Add 73 degree Celsius critical shutdown trips for the DRAM-area and
+> heatpipe-area sensors. Retain these baseline thresholds pending
+> sensor-specific hardware validation. The reported Windows DRAM threshold
+> of 115 degrees Celsius has not been established to apply to these VADC
+> measurements and does not justify changing the shutdown thresholds.
+> 
+> Thermal camera measurements indicate that the readings primarily reflect
+> internal temperatures rather than chassis surface temperatures. No unsafe
+> external surface temperature was observed during those tests, but they do
+> not establish qualified critical limits for the internal sensors.
+> 
+> Expose the remaining sensors as monitoring-only zones and enable ADC
+> threshold monitoring on the corresponding PMK8550 VADC channels.
+> 
+> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> Link: https://patch.msgid.link/20261014193524.5590-1-daniel.lezcano@oss.qualcomm.com
+> Signed-off-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+> ---
+>  .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   | 112 ++++++++++++++++++
+>  1 file changed, 112 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+> index 75ad74bcb042..21f4569068e1 100644
+> --- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+> @@ -502,6 +502,88 @@ platform {
+>  			};
+>  		};
+>  	};
+> +
+> +	thermal-zones {
+> +		/* Sensor near DRAM, facing the keyboard. */
+> +		dram-thermal {
+> +			critical-action = "shutdown";
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
+> +
+> +			trips {
+> +				dram-critical {
+> +					temperature = <73000>;
+> +					hysteresis = <1000>;
+> +					type = "critical";
+> +				};
+> +			};
+> +		};
+> +
+> +		/* Sensor near the GPU PMICs. */
+> +		gpu-pmic-thermal {
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
+> +		};
+> +
+> +		/* Sensor near the fan/heatpipe, facing the back cover. */
+> +		heatpipe-thermal {
+> +			critical-action = "shutdown";
+> +			polling-delay-passive = <500>;
+> +
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
+> +
+> +			trips {
+> +				backcover_ec_alert: backcover-ec-alert {
+> +					temperature = <57850>;
+> +					hysteresis = <1000>;
+> +					type = "passive";
+> +				};
+> +
+> +				heatpipe-critical {
+> +					temperature = <73000>;
+> +					hysteresis = <1000>;
+> +					type = "critical";
+> +				};
+> +			};
+> +
+> +			cooling-maps {
+> +				map0 {
+> +					trip = <&backcover_ec_alert>;
+> +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> +				};
+> +			};
+> +		};
+> +
+> +		/* Sensor in the WWAN area. */
+> +		wwan-thermal {
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
+> +		};
+> +
+> +		/* Sensor in the charger area. */
+> +		charger-thermal {
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
+> +		};
+> +
+> +		/* Sensor near the CPU PMICs. */
+> +		cpu-pmic-thermal {
 
-Please just add the BCMs for your GPU:
+I'm a bit confused by the node order here. It's not ordered by the
+thermal sensor (SYS_THERMx) like in x1e80100-crd.dts, but it's not
+ordered alphabetically either. Or is it still the old order from the
+previous revision?
 
-.bcms = (const struct a6xx_bcm[]) {
-	{ .name = "SH0", .buswidth = 16 },
-	{ .name = "MC0", .buswidth = 4 },
-	{
-		.name = "ACV",
-		.fixed = true,
-		.perfmode = BIT(3),
-	},
-	{ /* sentinel */ }
-};
+I think I'd personally prefer ordering by SYS_THERMx, but alphabetical
+order would be our typical rule.
 
-You can factor it out since it's common across many a6xx GPUs
-and &refer to it from the entry for a620
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
+> +		};
+> +
+> +		/* Sensor near the USB-C ports. */
+> +		typec-thermal {
+> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
+> +		};
+> +	};
+>  };
 
-Konrad
+Anyway, for the changes itself:
+
+Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+
+Thanks for fixing the names!
+Stephan
