@@ -1,68 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792773111;
-	b=nq7ASO1wG0n19MeqwhywgP12vNZt7HuYolvMbiwHsLQwMxLxHHyx5oA69lXETp/dzCYz
-	 ZSeXWdMfif/jMGIpfqwsE7Nu0VaqRxPi3wvtZTr+dv2RJ3E3dE5imsvSFMZPPIurFZlxc
-	 UWhqHJvaN24NkxP6SKp1zNwExwFO4Xn7WwuWB6SO2AgjmvJaj8155dLL0QGhDc4kBxLON
-	 TVinIkO88vQBhfqznD9G6LlDPugHV+PoSLqCt/kC1cqqPnoxQxZ9O9Z77Qr5OdWPK/2OK
-	 JXvM8HIN6Oc/tVodiOk0csIiHie6XmhbgLcdbFcJdJLPfzV0NTqnbw2IYo2U6g30xhA==
+	t=1792775617;
+	b=Ec37RyTD3+AhwTERKHOD61rFHbEV9sXZ3iWIqSgbj4u65K2Geo5PcNzCMJPyQiqeaEHn
+	 gIWKQjsMiHkVkSmkTyGzktY4C/nXmcqUxvtva5+/eW+16s77393YIfhOI4A7iAlBqjEbi
+	 7yCwzMu1d/PptsympkDKgD0ENq1PbrMvh0TdAoSSVEGYXBnIjBW61VDw7Nn7ClIIXp8gR
+	 WICT+Z+IFXMFyRaqvODSbN2MkkIbqmG4AV//02X0QOrJMOTD0BbvJH2IV1xtDcAgf06Xi
+	 cgx100+BOPXanMVMCIkSTgSKSFhr73QOCwYNqYyVNJ39kEAv/IZHGE78J5f8BX9YvdQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792773111;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=yl8QJfRZuvkNJm2THHc8v87wJg0vu5rrEXOwizXufww=;
-	b=CVkUXbe5vJOg3IdETVj6yqdBn2LFlMckPhSnVeqc9H60aH0jJgrBCkF1T/KICv+203JW
-	 0dGJspa45W2FgEOuv8BFwRKAN6NBFLR3i/bKPmOGv+0RJarB7JlgZbKn+IPS2BLCXftYf
-	 uoh+C/EvDRdrdJc8G+GwJ4QVjF7N6JxVFFEtbXsoTfGNoRyG0Gp3rXt8RExc+HhwZHPbi
-	 o4dkX52sDmlsP/ILBFfVMryTTnQ+OjGr2pQlpVWF3S+NIZCQZtjFV9dxxxI0Ws7AzL+lA
-	 kRdje472gu1gHuMl51Nw9IlpViqjKYyhPexHr7PC8zEHiz+L7VcdXbo8/aD/gaRyWaA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792775617;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=0RaoJf1quXYWRkDgnF0+UKFcSUDOACQJ5dkLWQMqNDo=;
+	b=pjPhLr15l8Nv1TOCtNOSSw9/uWQ5rfDVtG/a88wPOeN98n4AML5KscsBd4q1vcRqmp/0
+	 adqc7nK0Yp0ffvR12+tk2Lh7Ts6pZinNk2iVjd35akqDtc+9yFHTu/jGNUiZAC16CtPOb
+	 ADKwHwJHplUqdUomSFcptejsnf33wM/vSU6M5Upg7JbpGeEx2C1otkJMSsbGzE4cXUQRx
+	 iopUcGkDa0/5vc5t2NdsZ0NXhRFAyJI1klmISQ9p+5099T2Uw5bN14/lfvKh6V0n8zmci
+	 jM823dDzaUOYDFi0Jg4ZXL7aZvIrzhx5/XKmWsmbXd7JDFaf1z8adoAJQWUimbB52PQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AvVPXfO+;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CPeE9K52;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jDNgySCA;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46524606A31B;
-	Fri, 23 Oct 2026 16:31:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 439EA606A31B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:13:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 439EA606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AvVPXfO+
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46E711F01825;
-	Fri, 23 Oct 2026 16:31:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792773110;
-	bh=yl8QJfRZuvkNJm2THHc8v87wJg0vu5rrEXOwizXufww=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=AvVPXfO+KOJhWIebgeXSyxZU2hKeHuDiH0DooCvS2NtZmxFSX5tGSGoyLEdDhlCe7
-	 bi51+uLV1qS+D3sprUJKoe5Fs6QtkBwANePNSjhgIRcEpTE5wwYpe1wGly8G0hhNdO
-	 lqVMKPNkTXH6y/eJSVs3i0sPZGrQQW6vTnmgRacVOtzYU6u6AlmVLMfsbUrykrOlwZ
-	 OZW4t6Z1lTHeY7NFF0DnCTZwfkj3EirjVFahh9irdnP6QF2rzxsvZWfce+53Bq13Tm
-	 /QmfV/DPOpYlewBxJvSGkdqsVTqvGb8dhq1xdrmmwU52Ev8ajfbM1m79Av0wjF/HnN
-	 4XkMkhqEyspUQ==
-From: Vladimir Zapolskiy <vz@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-media@vger.kernel.org,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	linux-phy@lists.infradead.org,
-	Conor Dooley <conor+dt@kernel.org>,
-	devicetree@vger.kernel.org
-Subject: [PATCH 7/7] media: qcom: camss: Add Waipio CAMSS support
-Date: Fri, 23 Oct 2026 19:30:57 +0300
-Message-ID: <20261023163057.775917-8-vz@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20261023163057.775917-1-vz@kernel.org>
-References: <20261023163057.775917-1-vz@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CPeE9K52;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jDNgySCA
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69NG3uXl3812384
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:13:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=0RaoJf1quXY
+	WRkDgnF0+UKFcSUDOACQJ5dkLWQMqNDo=; b=CPeE9K529Dr5esSobebjLOZOJmn
+	lC7XXPUB2BhZt8WFuvJhrtNQLzNm3glP8Lpdvcwasg6vfan8GbezAjEsj4gcbxpr
+	qS2QvuPvrJY1zwFrvQeRNDzQLsgHXxycCQAGo0HGYlfp8/XC8AFs2t2Rtd9QQeE+
+	wLXlHCmnCVt03gMhBE+qHTLqNuuvQMEuUv2XdNDjTHx+PzQ0UHo2KpxByoncWlL7
+	e+iBRwfP37yaZHHym3l2HQSsNA/yBZ/66koZ0D21s20eLt/OduPHLiDP2oldZFN0
+	sCTgg9DctvSgeVolatlJU7EsZFJ3BX0tG3Hlads4JlfGadaezQZVJOGHrGw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgas888jc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:13:36 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e82060977so226133985a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:13:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792775614; x=1793380414; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0RaoJf1quXYWRkDgnF0+UKFcSUDOACQJ5dkLWQMqNDo=;
+        b=jDNgySCAGDqPFOm8WeJw/bnsGCKYAxZM8As1HC3sVfyuFB2FP4TMkp6J2Z3tcZY31d
+         OExh9NnHxkZPY7AEOlp+nMbS2vJQqfTvLlzxQ38Mr971jVwTIgtIzFArlZlEK/T3lp/+
+         Bu1rQlHHA43W2Iijk684jYri88rTP5HtFsujyL15Yz4M25n1JyUHABCE6p53DgbWmUVV
+         29gD6t1tBeg6Xh0QQtzUnPn1Utuu+0onMhnm8SOhNW8s+NUnRWnNivNAXK72MLP8W7aK
+         G4AcBqxBGSQfsRlRQZ1fSucoIoRQR7O7OqTiFgTY+mZRBfXxc5+JuR3sgKlVyUk8ugFR
+         QERA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792775614; x=1793380414;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=0RaoJf1quXYWRkDgnF0+UKFcSUDOACQJ5dkLWQMqNDo=;
+        b=dYaVyFbnhFJPXH958PvJb5ZyDkaa9hcgGKgYGkKbkfIvHni+WyxgOrO9Y+G8iL9QFP
+         ziiIqsjCwmaG3snZ8OSsjYTeHDjiytKYvZiMGNgROOqxj2E6yR57CKl0qx3L3FFIx0PG
+         4xwKEr1fYirCUdonpO6gHwdy9VakWVpyap9cKIUV5UkzusheuwIYsRBYSap/k7+1bD0S
+         XuYmNWtlRdtrzHnhcchwQWKKKg9Mi8fVMj8qmVFNfofvRjyJ7CcpWaA+Vlf06jBTJwjF
+         r9uNi304xlqDr9irDNL4muatjBwGlv/I4GMs6UjXnliO3v3Pm65Np6+LVGCGZ/oCt/2Y
+         psvQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwSVPwJvs3WnDqK/7Z7CTAAsYlmOLu/FrZ/pcAao14fT2PzA/0YqBOa/PO6FTCsypibBx9ZAOIO7VJ1WSOZ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJQT/cE4gQoYcVhBlcZbHkGjGjYB2ZX4IppVknsjid7+W0xhq+x
+	n0KKIz4Nd9fJ5g7mMDctL0MZgP+WhytJK3K17iZ4yVn5MpO5sgxwDQWdK552qLEN12fKoEY8Ujm
+	IWovbrBd3FG7b0Man4l3kmt+yz9dTiYEvvhnW5m4ZgxUM7n0m89irk6iXRyBj6Cw9gHpL
+X-Gm-Gg: AYBFou19jUl7I4lO3Gn7lkJzFm3cJ0VkUYo75SKgaqiArLJREGlf/BMnkrDYsABnCrG
+	O0FD1sx0LbdiI5rfmfjIiooPBhTo2gWsS6dF/IsuGnnyrQN++LmFmzHZXfmAEsbwhLnAxgfxfpZ
+	i8A84Lqi5U5Ir7rSWKt4YDbLabWm6b/Jyp7NOBakQ4+I8QycHvXUeFpsHDDKNKL9k0tqjaJ92Vx
+	A2gNDWXstnf41rV985SqoVjIqwKBeWvH/utTG+HdaxTgP/ksCDaP6DYBP+XDvEntbTWvyMh9GUT
+	iMEKzyhm5ROB6Kz5egEWQccZYJQFBJb9TWSIRHaMcYZZQS90kP6+GAAkA06oI/mw3+7MBaxCbMJ
+	hWfS6nfHGC1go
+X-Received: by 2002:a05:620a:270d:b0:939:5d22:d1f0 with SMTP id af79cd13be357-93f624b1fa5mr963959285a.2.1792775614095;
+        Fri, 23 Oct 2026 10:13:34 -0700 (PDT)
+X-Received: by 2002:a05:620a:270d:b0:939:5d22:d1f0 with SMTP id af79cd13be357-93f624b1fa5mr963954685a.2.1792775613589;
+        Fri, 23 Oct 2026 10:13:33 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3d4104b5sm1043841f8f.36.2026.10.23.10.13.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 10:13:32 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
+Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Alexey Klimov <alexey.klimov@linaro.org>,
+        Ravi Hothi <ravi.hothi@oss.qualcomm.com>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        stable@vger.kernel.org
+Subject: [PATCH 2/7] ASoC: codecs: wsa884x: Accept temperatures across the full trim range
+Date: Fri, 23 Oct 2026 18:13:11 +0100
+Message-ID: <20261023171316.819857-3-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261023171316.819857-1-srinivas.kandagatla@oss.qualcomm.com>
+References: <20261023171316.819857-1-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,316 +125,78 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfXxrhBFKWil589
+ Z0IzRV4QMgczmJYeE8sEFDK2bPBFjx2TbIxusA9678920XIRbciuFAN/Fv5oyPtEqo9i5z5OMRG
+ GSfuBbtA7D1JjtppYH0wiBMU+s2QwQM=
+X-Authority-Analysis: v=2.4 cv=OPqyTiaB c=1 sm=1 tr=0 ts=6adb95c0 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=KF22LIoASRNQ4hJq_1YA:9 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2NyBTYWx0ZWRfX8vv/xCuEJxsX
+ x3HayyW9ozTAtmr23s0vnAX5rc5lCDxOy+4gACb31zzj+ClI1x2ytUceDNDmhs7N/3ikgKwzG7r
+ h6u15C/ghwGNhJZqPFwEjdZazOgSe6Kmx0JpM4EEBlCg7xZnLLtXHCHB+1s8Isn1M26bVDsEdHq
+ 6NmHzHYZTimP3tVhMOh7O6exG0dNcBWxDbNj0UGkOV2IB5JRyTwCj3e3fPjn5HKB4615da9HIiI
+ L4rxLQRdTI9yHWowAX/nFF8mc9E5BAssA9XXaSsTFIgqY39aykcNiK5QQyJtHIvkaMnSgS4LD/Y
+ 8ncq3062OY0tqlVcvlS3SXZm0vymC8tTegpXE7Xrqe9L+S5FMTsm8koOM5Edcwp5fREH7NMAE3V
+ Jg7Bqtc2zYAYpZ2a6EmHwqc2sUFPjBkux7WS71Gc9PREwvFb0r77Ad98LMPq18GcOR+Yjlq75l0
+ JFoJPp3+WvOtJJWxRZQ==
+X-Proofpoint-GUID: P-nBxDhUD3ucrpqToSldKPF0kVehdQ0n
+X-Proofpoint-ORIG-GUID: P-nBxDhUD3ucrpqToSldKPF0kVehdQ0n
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 suspectscore=0 bulkscore=0 adultscore=0
+ phishscore=0 impostorscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230067
 
-Add support of the camera subsystem (CAMSS) found on Qualcomm Waipio SoC.
+wsa884x_get_temp() rejects any reading outside 5..45 degC with -EAGAIN.
+A speaker that has been playing, or sits in a warm laptop, easily runs
+above 45 degC, so its temperature becomes unreadable when it matters.
 
-The CAMSS IP on Waipio contains:
-* three CSID and two CSID lite, which are supported by CSID 680,
-* three VFE and two VFE lite blocks, which are supported by VFE 680,
-* three CSI test pattern generators, which are supported by TPG Gen1.
+The check only needs to drop bogus conversions, such as the all-zero
+reading before the PA is first enabled. Bound it by the -10..150 degC
+two-point trim range instead.
 
-Qualcomm Waipio CSIPHYs are supported by the CSI2 PHY driver only.
-
-Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+Fixes: 6b99dc62d940 ("ASoC: codecs: wsa884x: Implement temperature reading and hwmon")
+Cc: stable@vger.kernel.org
+Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/camss-vfe.c |   2 +
- drivers/media/platform/qcom/camss/camss.c     | 236 ++++++++++++++++++
- drivers/media/platform/qcom/camss/camss.h     |   1 +
- 3 files changed, 239 insertions(+)
+ sound/soc/codecs/wsa884x.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-index 2680a9914765..f2aada991a0d 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-@@ -353,6 +353,7 @@ static u32 vfe_src_pad_code(struct vfe_line *line, u32 sink_code,
- 	case CAMSS_8550:
- 	case CAMSS_8650:
- 	case CAMSS_8775P:
-+	case CAMSS_WAIPIO:
- 	case CAMSS_X1E80100:
- 		switch (sink_code) {
- 		case MEDIA_BUS_FMT_YUYV8_1X16:
-@@ -2013,6 +2014,7 @@ static int vfe_bpl_align_rdi(struct vfe_device *vfe)
- 	case CAMSS_8550:
- 	case CAMSS_8650:
- 	case CAMSS_8775P:
-+	case CAMSS_WAIPIO:
- 	case CAMSS_X1E80100:
- 		ret = 16;
- 		break;
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index b0d60e70e4bb..efb8f9cc983c 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -2967,6 +2967,226 @@ static const struct resources_icc icc_res_sc8280xp[] = {
- 	},
- };
+diff --git a/sound/soc/codecs/wsa884x.c b/sound/soc/codecs/wsa884x.c
+index a367c94bfb4d..f0857c0588d5 100644
+--- a/sound/soc/codecs/wsa884x.c
++++ b/sound/soc/codecs/wsa884x.c
+@@ -720,10 +720,11 @@
  
-+static const struct camss_subdev_resources csid_res_waipio[] = {
-+	/* CSID0 */
-+	{
-+		.regulators = {},
-+		.clock = { "cpas_ahb", "csid", "csiphy_rx" },
-+		.clock_rate = { { 0 },
-+				{ 480000000 },
-+				{ 400000000 }, },
-+		.reg = { "csid0" },
-+		.interrupt = { "csid0" },
-+		.csid = {
-+			.hw_ops = &csid_ops_680,
-+			.parent_dev_ops = &vfe_parent_dev_ops,
-+			.formats = &csid_formats_gen2,
-+		},
-+	},
-+	/* CSID1 */
-+	{
-+		.regulators = {},
-+		.clock = { "cpas_ahb", "csid", "csiphy_rx" },
-+		.clock_rate = { { 0 },
-+				{ 480000000 },
-+				{ 400000000 }, },
-+		.reg = { "csid1" },
-+		.interrupt = { "csid1" },
-+		.csid = {
-+			.hw_ops = &csid_ops_680,
-+			.parent_dev_ops = &vfe_parent_dev_ops,
-+			.formats = &csid_formats_gen2,
-+		},
-+	},
-+	/* CSID2 */
-+	{
-+		.regulators = {},
-+		.clock = { "cpas_ahb", "csid", "csiphy_rx" },
-+		.clock_rate = { { 0 },
-+				{ 480000000 },
-+				{ 400000000 }, },
-+		.reg = { "csid2" },
-+		.interrupt = { "csid2" },
-+		.csid = {
-+			.hw_ops = &csid_ops_680,
-+			.parent_dev_ops = &vfe_parent_dev_ops,
-+			.formats = &csid_formats_gen2,
-+		},
-+	},
-+	/* CSID_LITE0 */
-+	{
-+		.regulators = {},
-+		.clock = { "cpas_ahb", "vfe_lite_csid", "vfe_lite_cphy_rx",
-+			   "csiphy_rx" },
-+		.clock_rate = { { 0 },
-+				{ 480000000 },
-+				{ 400000000 },
-+				{ 400000000 }, },
-+		.reg = { "csid_lite0" },
-+		.interrupt = { "csid_lite0" },
-+		.csid = {
-+			.is_lite = true,
-+			.hw_ops = &csid_ops_680,
-+			.parent_dev_ops = &vfe_parent_dev_ops,
-+			.formats = &csid_formats_gen2,
-+		},
-+	},
-+	/* CSID_LITE1 */
-+	{
-+		.regulators = {},
-+		.clock = { "cpas_ahb", "vfe_lite_csid", "vfe_lite_cphy_rx",
-+			   "csiphy_rx" },
-+		.clock_rate = { { 0 },
-+				{ 480000000 },
-+				{ 400000000 },
-+				{ 400000000 }, },
-+		.reg = { "csid_lite1" },
-+		.interrupt = { "csid_lite1" },
-+		.csid = {
-+			.is_lite = true,
-+			.hw_ops = &csid_ops_680,
-+			.parent_dev_ops = &vfe_parent_dev_ops,
-+			.formats = &csid_formats_gen2,
-+		},
-+	},
-+};
-+
-+static const struct camss_subdev_resources vfe_res_waipio[] = {
-+	/* IFE0 */
-+	{
-+		.regulators = {},
-+		.clock = { "gcc_hf_axi", "camnoc_axi", "cpas_ahb",
-+			   "core_ahb", "cpas_fast_ahb", "cpas_vfe0",
-+			   "vfe0_fast_ahb", "vfe0" },
-+		.clock_rate = { { 0 },
-+				{ 300000000, 400000000 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 432000000, 594000000, 675000000, 727000000 }, },
-+		.reg = { "vfe0" },
-+		.interrupt = { "vfe0" },
-+		.vfe = {
-+			.line_num = 4,
-+			.pd_name = "ife0",
-+			.hw_ops = &vfe_ops_680,
-+			.formats_rdi = &vfe_formats_rdi_845,
-+			.formats_pix = &vfe_formats_pix_845,
-+		},
-+	},
-+	/* IFE1 */
-+	{
-+		.regulators = {},
-+		.clock = { "gcc_hf_axi", "camnoc_axi", "cpas_ahb",
-+			   "core_ahb", "cpas_fast_ahb", "cpas_vfe1",
-+			   "vfe1_fast_ahb", "vfe1" },
-+		.clock_rate = { { 0 },
-+				{ 300000000, 400000000 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 432000000, 594000000, 675000000, 727000000 }, },
-+		.reg = { "vfe1" },
-+		.interrupt = { "vfe1" },
-+		.vfe = {
-+			.line_num = 4,
-+			.pd_name = "ife1",
-+			.hw_ops = &vfe_ops_680,
-+			.formats_rdi = &vfe_formats_rdi_845,
-+			.formats_pix = &vfe_formats_pix_845,
-+		},
-+	},
-+	/* IFE2 */
-+	{
-+		.regulators = {},
-+		.clock = { "gcc_hf_axi", "camnoc_axi", "cpas_ahb",
-+			   "core_ahb", "cpas_fast_ahb", "cpas_vfe2",
-+			   "vfe2_fast_ahb", "vfe2" },
-+		.clock_rate = { { 0 },
-+				{ 300000000, 400000000 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 432000000, 594000000, 675000000, 727000000 }, },
-+		.reg = { "vfe2" },
-+		.interrupt = { "vfe2" },
-+		.vfe = {
-+			.line_num = 4,
-+			.pd_name = "ife2",
-+			.hw_ops = &vfe_ops_680,
-+			.formats_rdi = &vfe_formats_rdi_845,
-+			.formats_pix = &vfe_formats_pix_845,
-+		},
-+	},
-+	/* IFE_LITE_0 */
-+	{
-+		.regulators = {},
-+		.clock = { "gcc_hf_axi", "camnoc_axi", "cpas_ahb",
-+			   "core_ahb", "cpas_fast_ahb", "cpas_vfe_lite",
-+			   "vfe_lite_ahb", "vfe_lite" },
-+		.clock_rate = { { 0 },
-+				{ 300000000, 400000000 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 400000000, 480000000 },
-+				{ 0 },
-+				{ 400000000, 480000000 }, },
-+		.reg = { "vfe_lite0" },
-+		.interrupt = { "vfe_lite0" },
-+		.vfe = {
-+			.is_lite = true,
-+			.line_num = 4,
-+			.hw_ops = &vfe_ops_680,
-+			.formats_rdi = &vfe_formats_rdi_845,
-+			.formats_pix = &vfe_formats_pix_845,
-+		},
-+	},
-+	/* IFE_LITE_1 */
-+	{
-+		.regulators = {},
-+		.clock = { "gcc_hf_axi", "camnoc_axi", "cpas_ahb",
-+			   "core_ahb", "cpas_fast_ahb", "cpas_vfe_lite",
-+			   "vfe_lite_ahb", "vfe_lite" },
-+		.clock_rate = { { 0 },
-+				{ 300000000, 400000000 },
-+				{ 0 },
-+				{ 0 },
-+				{ 0 },
-+				{ 400000000, 480000000 },
-+				{ 0 },
-+				{ 400000000, 480000000 }, },
-+		.reg = { "vfe_lite1" },
-+		.interrupt = { "vfe_lite1" },
-+		.vfe = {
-+			.is_lite = true,
-+			.line_num = 4,
-+			.hw_ops = &vfe_ops_680,
-+			.formats_rdi = &vfe_formats_rdi_845,
-+			.formats_pix = &vfe_formats_pix_845,
-+		},
-+	},
-+};
-+
-+static const struct resources_icc icc_res_waipio[] = {
-+	{
-+		.name = "ahb",
-+		.icc_bw_tbl.avg = 150000,
-+		.icc_bw_tbl.peak = 300000,
-+	},
-+	{
-+		.name = "hf_mnoc",
-+		.icc_bw_tbl.avg = 2097152,
-+		.icc_bw_tbl.peak = 2097152,
-+	},
-+};
-+
- static const struct camss_subdev_resources csiphy_res_8550[] = {
- 	/* CSIPHY0 */
- 	{
-@@ -5769,6 +5989,21 @@ static const struct camss_resources sc7280_resources = {
- 	.vfe_num = ARRAY_SIZE(vfe_res_7280),
- };
+ /*
+  * Device will report senseless data in many cases, so discard any measurements
+- * outside of valid range.
++ * outside of the two-point trim range. Do not narrow this to ambient: a
++ * speaker that has been playing easily runs well above 45 degC.
+  */
+-#define WSA884X_LOW_TEMP_THRESHOLD	5
+-#define WSA884X_HIGH_TEMP_THRESHOLD	45
++#define WSA884X_LOW_TEMP_THRESHOLD	WSA884X_T1_TEMP
++#define WSA884X_HIGH_TEMP_THRESHOLD	WSA884X_T2_TEMP
  
-+static const struct camss_resources waipio_resources = {
-+	.version = CAMSS_WAIPIO,
-+	.pd_name = "top",
-+	.tpg_res = tpg_res_8775p,
-+	.csid_res = csid_res_waipio,
-+	.vfe_res = vfe_res_waipio,
-+	.csid_wrapper_res = &csid_wrapper_res_sm8550,
-+	.icc_res = icc_res_waipio,
-+	.icc_path_num = ARRAY_SIZE(icc_res_waipio),
-+	.csiphy_num = 6,
-+	.tpg_num = ARRAY_SIZE(tpg_res_8775p),
-+	.csid_num = ARRAY_SIZE(csid_res_waipio),
-+	.vfe_num = ARRAY_SIZE(vfe_res_waipio),
-+};
-+
- static const struct camss_resources sm8550_resources = {
- 	.version = CAMSS_8550,
- 	.pd_name = "top",
-@@ -5831,6 +6066,7 @@ static const struct of_device_id camss_dt_match[] = {
- 	{ .compatible = "qcom,sm8250-camss", .data = &sm8250_resources },
- 	{ .compatible = "qcom,sm8550-camss", .data = &sm8550_resources },
- 	{ .compatible = "qcom,sm8650-camss", .data = &sm8650_resources },
-+	{ .compatible = "qcom,waipio-camss", .data = &waipio_resources },
- 	{ .compatible = "qcom,x1e80100-camss", .data = &x1e80100_resources },
- 	{ .compatible = "qcom,glymur-camss", .data = &x1e80100_resources },
- 	{ }
-diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/platform/qcom/camss/camss.h
-index 7dc2fd9f03e0..b62f555bd0f6 100644
---- a/drivers/media/platform/qcom/camss/camss.h
-+++ b/drivers/media/platform/qcom/camss/camss.h
-@@ -96,6 +96,7 @@ enum camss_version {
- 	CAMSS_8550,
- 	CAMSS_8650,
- 	CAMSS_8775P,
-+	CAMSS_WAIPIO,
- 	CAMSS_X1E80100,
- };
+ struct wsa884x_priv {
+ 	struct regmap *regmap;
+@@ -1929,8 +1930,8 @@ static int wsa884x_get_temp(struct wsa884x_priv *wsa884x, long *temp)
+ 	dev_dbg(wsa884x->dev, "Measured temp %ld (dmeas=%d, d1=%d, d2=%d)\n",
+ 		val, dmeas, d1, d2);
  
+-	if ((val > WSA884X_LOW_TEMP_THRESHOLD) &&
+-	    (val < WSA884X_HIGH_TEMP_THRESHOLD)) {
++	if (val >= WSA884X_LOW_TEMP_THRESHOLD &&
++	    val <= WSA884X_HIGH_TEMP_THRESHOLD) {
+ 		wsa884x->temperature = val;
+ 		*temp = val * 1000;
+ 		ret = 0;
 -- 
-2.53.0
+2.47.3
 
