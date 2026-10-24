@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792810944;
-	b=Ld37hX+WTiGn4d5paPgn5TSxgSepI6lieX5sPM6luGDwNzmL6amB3WkGGR0D5xww1zVu
-	 oX7UQsotPBl8KCAUW0pcgsQXnVBeTPB5+QtTJT2nnodYrEaCXYgiEu9I5YTgjA7z/zGWo
-	 aGZX85n257mda7zLOX/jlr3aPKWZm7NSemMvRt28+63TysnJXmiGbXffZPgrJYhCdCJ6I
-	 cLXJYQsHGU/zhMeakTlnIyPqxq5uop25RLdcjEeOLwLRiyQxG+5OXQczAVgWaCgyIzjQb
-	 A56n+3aipdLwn2+ZjFzyLIpp+KHcVF0Q1B6IMx9EX/ULr3nEXtxEZ1PuPlSKQTK8EIQ==
+	t=1792810946;
+	b=T13qL/fIkVsfMGUXKV9hrH+oNdV7aaeWp1c5tAjvDxYQR+FZEd260TZC4HndTcgpxsJV
+	 TJlW02zGPKZc202sNNpU71aOqLQIVZk2f4bM6BPIhlxs62iI0/B6N4WC73pKWM+IcJcEW
+	 6vLBlzK5mJDjBrWr92si0DhxVTV3jhc+IWM2YYRnQAzctpJwF8BjcKDbdv0GpeCgo+uMX
+	 zEUEeeIIogafMmxzeKLsSN+JvGJOsmO3MFS/pI8Mm3/oFTilYSAQuUHI75ed5uDGwEQzf
+	 xroadcvyckW6ok/1xkb1RY+7RNeOTDbaUaeqD6uTuvdZM5Iv7Vb4j5EK2XiFciIldwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792810944;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792810946;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=kGCxXEwPwI4lAX7fe7S92k1f1wQoJNpstz6Mh/Dxeog=;
-	b=YMk8mRYzk1Tn5vhjjEHNEzwzI/jzNcOHtf792xcC5BM7kM7+++8GISfuxasFN4nLeHSC
-	 zZo2ybU/9zgWkmbtSLmZaft94aQmq8ns8gAC6JAG2J8lQNPFv1Pkgb2k0WDwsj0KJYS8j
-	 Uz1ivuj0JVl5ijT9UoLTCTAsYX4uIvb2NAYsxTlAnEx3RJhBu35WpWuyNfGnAkmeovt1C
-	 HdQOY5H5vdgh28CccV0acQpRDDwylW21VBir3hYROJEu8+3JzAmvYE4csMlIBO/AM9qyB
-	 Kg2boFoWdFrBWLlYUegOS5mSjlW0HtyXB2CY49b11JHyHOMOpGqVmAUUi4OHS/fEiGw==
+	bh=a1b5LqRY8mdvBUKXOEQXg0mPK4S5xc8s9ZkWSNVbjB8=;
+	b=zg+Gm762TZ+9jAXGtBjBoGTHMxb1bBKbyUfb33jAzwGqMIyeXs9Q1Vuyn4SsaTsOGTIm
+	 EypgS44Sea0J8SDHq/yuAomKNde53I+3bdJsIufFPPs1+dk/B+RPlZ/EgCB9yra0NC8CG
+	 GLrMQC23670PzR1c/1bt9F2g3z0uWTaamY3glUSnfdPJ8IhMwSwen8laaRF6fghwnDQlK
+	 5f0p6yf8WwcqSpYuzJILKKNEssjf5aMTvyFFxE2+CPRd+B7urBm35U3KJTi+zVUDGtI0H
+	 8lInaKwIFpUZCNFAdYMgLjt6PSUlzD/T/OC4c+L2GqU4jxGtsaqb9aqGUPqbGwneemA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=AEWlX3ts;
-	arc=none smtp.remote-ip=209.85.161.51
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=W3kxhTVu;
+	arc=none smtp.remote-ip=209.85.161.45
+Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61F2F60A2614
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 03:02:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 61F2F60A2614
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0A8560A261E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 03:02:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0A8560A261E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=AEWlX3ts
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-6b19e291cc6so1200354eaf.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 20:02:24 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=W3kxhTVu
+Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-6cfed5dd083so1080871eaf.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 20:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792810943; x=1793415743; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792810945; x=1793415745; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kGCxXEwPwI4lAX7fe7S92k1f1wQoJNpstz6Mh/Dxeog=;
-        b=AEWlX3tsC69COQXbIMqZ+Q92h0GavoeO6F/p+pNANvaT5IUyY4UMDRMNteR8TxOJ5+
-         e8abKyiWH+koqvPi61Fa5CQZWfBImPffRi/gV9sv4sZyKnG4yWDBaD1bXLrVImlUWLZU
-         7/2Xyy+EenpYVnw0c6j5tXmb6O7axTUJsXNAcV1qJmQC2Uj/bkn/pohlHJoBY7syzmZ9
-         LPlWcmpZ+VfVgjavjs3q34z8mqod7+SjLcXdqi6MJh3Se2q55aW1hNcAik5vt5MvmygK
-         foKYDjOSkUeHgayBhRgBbuUnvpqAhkPRoON/Le9rrq0wGHvuQETMcjyL5jhDGqo0y0pD
-         caZA==
+        bh=a1b5LqRY8mdvBUKXOEQXg0mPK4S5xc8s9ZkWSNVbjB8=;
+        b=W3kxhTVuQ+8cLf6rhlqLOrYzMcLaBl8I6Dag0J4MjPvsfpUc9TzSZxPf66HrcYBPcx
+         UoYI/Bz8LC6fRbrkUcS/lhAjs2EAWt5n6AgJGiztosBqlhc+/ySrm1ZWyyqGqhr9fb5O
+         +lHz/tlj6SJ/1pFAlZV8aoqB/l8ZIfMa2QpbyDqTiSLAcH6EGdgA1VXviQRRiDsXrWyk
+         jgFx+hP7LF+kRN5k7lVimwFt+20nuEV5PIyFUPPZmp5umDg6QSQqvFyjB5+MXyAcbLhN
+         K2DlKrvrzqFBVdQkG1boYm7RShhXEh6w717TtNYkYhAC61oq4tgYj233iT+LzTZ19MI5
+         3dRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792810943; x=1793415743;
+        d=1e100.net; s=20260707; t=1792810945; x=1793415745;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kGCxXEwPwI4lAX7fe7S92k1f1wQoJNpstz6Mh/Dxeog=;
-        b=Y2gnxlEoZMC/pdC8xSlxEDaWFaPG4Eie/cmD+BnL2YM1CPlE4Vfe/koUCSReiyi1qy
-         CZmH75TJrbcWIOcwRfRglCSei2ImWytlYEKkk91pCYcLRemlp3l+7k7HhynDdgAKA7GC
-         m0TWLj+e/iWE2hdmb5AaaAFKTrvVG2lra0HOBXBVfvfRV/HpQDCK9OxU6aXaKweb4IJX
-         RsLfiKE4G1vUkJ+AfUw091HB3MhRAkyXj+uzmgatB0zWMK9pJIFtYPoOdlvJba0mlbJ3
-         O0mbDSXECeMafp4Lx+gTNY/BKC2mx7PlRUkfz/MRS0QE9IykHrMd2sLpo4blZCD/1kat
-         d/mw==
-X-Forwarded-Encrypted: i=1; AKwUvBykkqnpK0TdqMH2hgaPxv2CdWVkF5wvI7hiX1qkNOvzjcQIMx7nyBm8mDgsObHWolG5J738p2Sb3hpoN0MC@vger.kernel.org
-X-Gm-Message-State: AFq9FYK4/0UzHXz1nqe5JKSad2EeNBzKT0xSYMhbiF+/iRDjX1ixYPmT
-	DVeyFwrFUAArNkg9hjnrf363+RkgB+YLU4VqjDRyeuyELXKxC5JjC9fA
-X-Gm-Gg: AYBFou0Elx8k90UoVMK3MXjL6qFbRszMEoKfN3jZfuRfWdwpfJBT9d72OUaNUNJB3m1
-	GbbDDbaY7suwmoez8q+MLerVnywKYiVl2833QAElGDYiZzUAQbtJRKT00sXRIdNJv51B+0l0m76
-	Cg05YT7fy9Sij/yrGsQt9qzERHnT2/8xIy9f9HHmaLMR37Wu6pGDlzP/4C7wH0FktdJRQzHApCp
-	Mn/5SeVsH/joAdcMizTt40MNeEUTrLXITwoiT5fuktw15bfnpXgCCOcgYU+cMdR4MdDAyEPG7/+
-	5Zzd1ckOkIaS8QRdi6FdGtq75HlR+4PvCr7sCTIzkvFuFDDNQluq7smw4CDIKPtsCgeo1Pq8Xmw
-	hBfu3PIAlBFiE21d8Y7hfKf7dwOM5d3Qlx9DwkuxgO807ad3Z14150/9f+p6S5lo5QV7UmUB/5s
-	L1Tfg/yupIRj1M+1Kw/9mhPNW/t/ozCZtfIq17vQv6Mt2P+96q7/SdDJwRNFYoPNlDLmV9asKvv
-	G/hXeqprZh/dLTrgCdNPHZWnq5r0DHpmSP8d4zy6M1f3uDokJr2qsLQJ3XV14LO1XXIJWTDTqFs
-	oyBX
-X-Received: by 2002:a05:6820:c44e:10b0:6dc:beeb:34d5 with SMTP id 006d021491bc7-70ba0d725admr258799eaf.21.1792810943330;
-        Fri, 23 Oct 2026 20:02:23 -0700 (PDT)
+        bh=a1b5LqRY8mdvBUKXOEQXg0mPK4S5xc8s9ZkWSNVbjB8=;
+        b=hd5uu1Ode8vTjzwql7+AIYPkF+MosZTPBKQj8AyOj8JdOM+LrqstG78jHYNsHzCtjA
+         D3jk2OqtBXQbjnteR4YpteymAVYxpggTh5cUb9O7O6y48na5qW52zDHfQAI2Lhr9GGA8
+         3I4wtibAtiXH7uSSbWSEJy0AAr8Y3owSSLFurQr1xCQM25/zqkppGxepM5/kQP5NeP4A
+         whxSSvEL9o7stH2pUORuuRF9ypWAe+bH2EdCwI1ly8A4qIYZ1VGBGJW2BuC2COpVkmA0
+         /QLBIv83sLB7lCRgpEXLaUDIOLc3O2HDXxzEkVh7wAHNoy+EerIrGN/OXoLUcql5XJeB
+         NtcA==
+X-Forwarded-Encrypted: i=1; AKwUvBzJhfY8efQC9IDdMRYceNl1bt0umuXIjD1fNIdhIAxnRRVEkGYgKQRUOY1mARti1zppL38V9mN9+IJgAXCe@vger.kernel.org
+X-Gm-Message-State: AFq9FYKqtM6kTjm7SaUS8DelNO/QI0zyG8j25jMq3X7+aGtkG2Ys3M7i
+	pW/9CZzVdhApSSSRxpcNnhSC73kzUGweEqAQxxPg4f+pkX9dt4uMw43L
+X-Gm-Gg: AYBFou3dJdntuoRVppOct61gEkGBHMbn9YVIbCKVvDCDwMEmAE0ivGcd7aam8X9wjWi
+	0oyBNpTUXO08x+neBG2DjfTUMfgVQI+iQLNjOjawHNKtsYishqkLTLPxXraG0MVMJqvbp4KUEtL
+	da/326L/rT169b9wtzsKFhZjQ6Y8IaNsdmLvTIOjG4To+apWGUj1/RMrmhMzkGi2J+EjPHiulCF
+	2q5tBSnQQR+YLBFCIW1Y5cl/geekOt9VavsFzZGNUbs1EZ0NeEdBQ4PE1AcSdCfR/ydR7y/Y3ay
+	XPJh1dn9w87wPJMqQDmne/yrRgjmQW0ByxMe93Vwhr6aznz+uo4Qi7VUJa2kO6bwWeNLquT+tEA
+	wtNnEdbLrex6gztHgkHHHy+eZyfe+wmRs3C9uxZ8PsfBQaLWnKiVJEdxp4pUK0TJ55WDE9kvW7Z
+	4O3xa3zgBA6ucDpnwtNKwIpz+UqYkKQzWzCsF1uJquwvh2VI2Lwn8Wuu+HmtNz/RsfQyWqoIjSg
+	juECpcr2foMENqMwfV2mUdTKK6Tm0e+A2uewIMQOyDh1nrDi6PavOryPecuo5c3ZvUdAWN3zu3n
+	QTDqCQ==
+X-Received: by 2002:a05:6820:1627:b0:705:cb2d:e0d7 with SMTP id 006d021491bc7-70ba0d9eeb5mr369148eaf.26.1792810944770;
+        Fri, 23 Oct 2026 20:02:24 -0700 (PDT)
 Received: from jeffmr (63-152-17-145.cdrr.qwest.net. [63.152.17.145])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-70b9e1fa334sm824552eaf.9.2026.10.23.20.02.21
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-70b9e1fa334sm824552eaf.9.2026.10.23.20.02.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 20:02:22 -0700 (PDT)
+        Fri, 23 Oct 2026 20:02:24 -0700 (PDT)
 From: Jeff Roach <jeff.roach0@gmail.com>
 To: Nabige Aala <nabige.aala@oss.qualcomm.com>
 Cc: Vinod Koul <vkoul@kernel.org>,
@@ -97,12 +97,12 @@ Cc: Vinod Koul <vkoul@kernel.org>,
 	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
 	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v5 02/11] phy: qualcomm: qmp-combo: Update DP PHY common init tables
-Date: Fri, 23 Oct 2026 22:01:27 -0500
-Message-ID: <20261024030142.13643-4-jeff.roach0@gmail.com>
+Subject: Re: [PATCH v5 03/11] phy: qualcomm: qmp-combo: Update link rate specific DP PHY tables
+Date: Fri, 23 Oct 2026 22:01:28 -0500
+Message-ID: <20261024030142.13643-5-jeff.roach0@gmail.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261001-glymur-phy-v3-v5-2-3848c2615d5a@oss.qualcomm.com>
-References: <20261001-glymur-phy-v3-v5-2-3848c2615d5a@oss.qualcomm.com>
+In-Reply-To: <20261001-glymur-phy-v3-v5-3-3848c2615d5a@oss.qualcomm.com>
+References: <20261001-glymur-phy-v3-v5-3-3848c2615d5a@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,11 +114,11 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On Thu, 01 Oct 2026 15:04:19 +0530, Nabige Aala wrote:
-> Update common DP PHY serdes and TX initialization tables with
-> corrected PLL control values (MODE0 instead of MODE1), updated
-> SSC step size, reset control, and various TX lane configuration
-> parameters including emphasis levels and driver enable settings.
+On Thu, 01 Oct 2026 15:04:20 +0530, Nabige Aala wrote:
+> Update DP PHY initialization tables for all link rates (RBR, HBR,
+> HBR2, HBR3) with corrected VCO calibration codes, lock compare
+> values, SSC step sizes, clock forward config, and bias enable
+> settings for proper PLL programming across different data rates.
 > [...]
 
 Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (Mahua)
