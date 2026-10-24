@@ -1,55 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.67.36.65
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792851943;
-	b=YwdOSXQpRAJoDp2qB+BaixTeFc/LQrSX73pJE1diYwqwdu+s18aW9gpLGQtwdJ1sSUyn
-	 tNGwZECtOTC+bfBC63vxF8vQG3Z7dIqWAeDS27OxM5sUXh52/7ybgWErW+6A4YWl/eQ27
-	 tH/Z4V1PGQrWpeX0+/TjBlNIQWh6sl+0xCS2kLa9bemZcZ86FI1hrvQZUil1X814CRuy8
-	 KvQX9SkrAvPtUJKhR/9hpoGNqzglocP4tsm9u/6zYYQMhpbiLBCimtfzfMfd4HhsNgAbo
-	 xGsf/gfVQzqpF6qpmXjg5hP68xAaP/3isXVB/lgh9diLTdAgTtyvHrkNwpNfrNWUmsA==
+	t=1792852127;
+	b=0mjSymoxEOQOphGU2AKOHhZhSmZW76NNMjqW0B/+2gsovmx6OL8KF0zWFLAeholNOltz
+	 46juryyXjEZkRs6VNlFOV/EdN7V9qdMuH4VDQ52adN2CDj6LzslcnDklTRn3ORoZvPvwr
+	 +fw9SfmksrKbufbVKm9JbvtbDiyr9gKWvxEnO3pH1s/v/kxdTnNk+HaFNXk9LP9f7iZkp
+	 A/imkKRxQomlfApg1MQJM6dMmvbfvE5RCY30AthS/itxy/Vccdw5uISoQ+w91wgwpQEDP
+	 cZ44Sh9i6PHi+cIYbgjUjK7J0dnOgsBVzY7AzIRlxHhXzgxhimY8gsGQXfW6h8DNfrQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792851943;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Mime-Version:
-	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
-	 From:To:References:In-Reply-To;
-	bh=cCphAvYO75OUmxhIYJK5YQNa9hTJbt+3TPGwsGv6BVo=;
-	b=oK8t95WVR/ckWQ1fP5199EsT6ptSJ3Ao77mInSWFDk5QxAVdJ+ZiIj7Wg/0TEuKu/P6u
-	 snE4QJR65kzSAc+bZVSAdKxe9yh+UTqeojwjjey2seKLatYO1AZLOWU51ZH1cLeuhTSJZ
-	 QYpdZkc+5ykNPBxPpTuCZxuz6LFTPVUYPZvgzYP/Z2se+9vRKafWyFKs+YaVrkaHo68ac
-	 9xo0ba/RS5ar5gmDtxSPGSYTs8YiT97ogLKLJVsIh7Url685Sotmk0y4S1MX40JJehg89
-	 2zlrdPEg2ZuPFiP0plhL78LfYE1MxWBsKcS0UTYb3AcpfH4HAfCAUt1rZnN+krNF1UQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792852127;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
+	 Subject:Message-ID:Content-Type:Content-Transfer-Encoding:
+	 MIME-Version;
+	bh=SNbYPXjdDvBqxnd6BWiHDZ/T7eGyoJJ0/v+O62n7CMA=;
+	b=35ucVtSakRWqBBnt1HU8M4zXDYHtuYXlIBnupoWI/Zm6v0v/Q1dr6avJe3i3aw4JnS/5
+	 8azhjFeqYdTa8RTPsnjNwhO/YrV/dW8X2IU+bV9xboEbWBHFhbaU1L2vy7jwcKAO96hwu
+	 f8I05zoJnlxj74CYHCS14PewJ3GWCkn4YjMEZRNSwvwi0QiTSeKMZRugLJf0OeIDmREee
+	 B6SY+FjaId/DA/G3om1X9nuZKpX/AgMlZ3yljytOQS6vrFD+FInSUHdUw6cqLBsbtPxG4
+	 BtUjqEhPv91NxYideL39Pz9AwQ4WML/KfsHxHFmg2EpnU5EuWDbsKW7R2WLnvWEgDfQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=posteo.net;
-	spf=pass smtp.mailfrom=posteo.net;
-	dkim=pass header.d=posteo.net header.i=@posteo.net header.a=rsa-sha256 header.s=1984.8680eb header.b=KefUI85b;
-	arc=none smtp.remote-ip=185.67.36.65
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	arc=none smtp.remote-ip=185.70.43.172
+Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch [185.70.43.172])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0C3D606A31A
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 14:25:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E0C3D606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=posteo.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=posteo.net
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=posteo.net header.i=@posteo.net header.a=rsa-sha256 header.s=1984.8680eb header.b=KefUI85b
-Received: from submission (posteo.de [185.67.36.169]) 
-	by mout01.posteo.de (Postfix) with ESMTPS id 1FC4924002B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 16:25:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net;
-	s=1984.8680eb; t=1792851940;
-	bh=cCphAvYO75OUmxhIYJK5YQNa9hTJbt+3TPGwsGv6BVo=;
-	h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:
-	 Message-Id:Cc:Subject:From:To:From;
-	b=KefUI85bTXKsAWIn0893TnZmXpghcPmG/xWBR5OZohJzZVpwrqd4FHnIosG4e5hGA
-	 pDG0Rog8FJZzE0MICpzxNeXNufxNNHfl7MXuexAq6VDw9qfgsidzyCy0fsL9obxfk2
-	 DEYgG12YlWZoGM02woHH18EYGTUulbwpbQBaNIhSJLXymfkUNChC+w3Udo1CJ/5vky
-	 EDDTdorYZxGlPPgWkybW3jNnrA+1lAsosn3M+Gr5dWkX9KGTlwzu65cDF1XSBudO16
-	 DkYJ3/pbXCJl+qY2UltU/KtcsyAUqturv//NbERmR46RIcK3L2C3IyG49Ce6KT7WHJ
-	 qVZY7wqgcR+yQ==
-Received: from customer (localhost [127.0.0.1])
-	by submission (posteo.de) with ESMTPSA id 4jBhxq74NGz6twR;
-	Sat, 24 Oct 2026 16:25:35 +0200 (CEST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C9F2606A31B
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 14:28:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8C9F2606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=michaelmcallister.org; s=protonmail2; t=1792852122; x=1793111322;
+	bh=SNbYPXjdDvBqxnd6BWiHDZ/T7eGyoJJ0/v+O62n7CMA=;
+	h=From:To:Cc:Date:Subject:Message-ID:From:To:Cc:Date:Subject:
+	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=cPsvRrN4h2PcKKckDkOW/C4TznSurpWu9gFzhpw+q42IvBsb7y860TzJJW9lqYYiL
+	 DpaRc9LxdHYxfV0C4l0/+cG9ZCpieUpl6+HsY12uHvTK6JNYxBrA0IxpOBOWYpeyhH
+	 a8CL3DJUjnu4ousk0mgCrwV/xgDGGbuc3EL2Ec67DdLRV/Saw5fgcnxUongf2mscVl
+	 /IBmBhLmIK4+Oyyf9UwYjBaBWwSpfdpsZJ5ExaofYQJFzwjXaBsoguu17noEJf+5PA
+	 MVwNLpsYmxU8FssTAET6SOzQh4o9wF/ombumUT0ZtymQC2DC7OGKV85PtQZKcDIV8s
+	 qYqTOG2qs9cOQ==
+X-Pm-Submission-Id: 4jBj1L2Pnkz1DDnW
+From: Michael McAllister <me@michaelmcallister.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Adam Skladowski <a39.skl@gmail.com>, linux-arm-msm@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Sat, 24 Oct 2026 15:27:59 +0100
+Subject: [PATCH 0/2] Fix SM6115 MDSS register access during runtime resume
+Message-ID: <cover.1792852079.git.me@michaelmcallister.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -58,56 +66,24 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 24 Oct 2026 14:25:38 +0000
-Message-Id: <DMD4YWIP2TFH.23VEGM4QAFO9D@posteo.net>
-Cc: <akhilpo@oss.qualcomm.com>, <andersson@kernel.org>,
- <freedreno@lists.freedesktop.org>, <konradybcio@kernel.org>,
- <linux-arm-msm@vger.kernel.org>, <lumag@kernel.org>,
- <rob.clark@oss.qualcomm.com>, <sumit.garg@kernel.org>
-Subject: Re: Adreno 829 (SM8845) zap shader: PAS init rejected by TZ under
- Gunyah
-From: "James Wilson" <james.wilson@posteo.net>
-To: "Venkat Yadlapati" <venkat.yadlapati@hotmail.com>,
- <james.wilson@posteo.net>
-References: <DMBYHSAP8KY7.K9L1DON3KDR4@posteo.net>
- <TYCPR01MB1184706197E878D59F9E82E629F642@TYCPR01MB11847.jpnprd01.prod.outlook.com>
-In-Reply-To: <>
+MIME-Version: 1.0
 
-On Fri Oct 23, 2026 at 8:40 PM IST, Venkat Yadlapati wrote:
-> Hi James,
->
-> Thanks for the heads up. To avoid duplicating work, here is what I have
-> on a Motorola Signature (SM8845 "alor"), none of it posted yet:
->
->  - TLMM driver and binding (205 GPIOs, own GPIO->PDC wakeup map), alor PD=
-C
->  - SoC dtsi on top of kaanapali.dtsi, plus the board DT
->  - gpucc variant, A829 catalog, panel, touch, DSI1
->  - UFS, USB, SMMU, charging, audio and modem work on hardware
->
-> I used the downstream codename "alor" for compatibles and file names.
-> What do you use?
->
-> Do you want to post the SoC base (clock, pinctrl, interconnect, dtsi)
-> and I rebase on it? I would first diff my TLMM/PDC against yours. Or I
-> post TLMM/PDC since it is tested on hardware, your call.
+Hi,
 
-Hello Venkat,
+This fixes garbled compressed scanout on my device (Moto G10, SM4250)
+after display power cycling. MDSS needs the DISPCC AHB clock before the
+DPU child resumes, so this adds it to the binding and shared SM6115 clock
+list. I tested this on 7.2.9 and power-cycled the display 20 times.
 
-Sounds good. Give me some days to clean up on my side, then I will share
-my patches with you.
+Michael McAllister (2):
+  dt-bindings: display: msm: sm6115-mdss: Add missing AHB clock
+  arm64: dts: qcom: sm6115: Add missing MDSS AHB clock
 
-Best,
-James
-
->
-> Separately: I carry a hack disabling icc-rpmh QoS programming, because
-> with it the display dies at boot. Do you have a tree with your
-> interconnect driver that I can test?
->
-> Venkat
+ .../devicetree/bindings/display/msm/qcom,sm6115-mdss.yaml    | 5 ++++-
+ arch/arm64/boot/dts/qcom/sm6115.dtsi                         | 3 ++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
 
+base-commit: d053e38e614fb2e383b298ce8fc308a780d7f209
+-- 
+2.39.5
