@@ -1,79 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792814070;
-	b=zPgGLx6cF9JoQ4EVzdc46gxYUBNLj7vybEu5aS64NcefWBqRbIbexO4x0fm7/tY6TGil
-	 JSVCf/SrZJqt5AgI0AVNZzQPvAYh3kdt7qAXbPMRRSkMuzwA7ss7IfTm+wsr8luKHZB1y
-	 Vo1XHtPUERjMeO1uyOcl1hUIJUYZmHqnMFpPaoWkOEMMVU1T33b2AJ6UAIea8DIjIrVHM
-	 8sZ/55JuMh6LdfS+0bbasu2NNusOwUmItrlGIcwNf2Xyq5a4vyig3ZYQOddxhkvwE//Dq
-	 fE2PWY8eUqyGTLdRRl7iJQOi8MK72Gtzqw33X3QeC5fDVEIa0yLjIfDxieDUkiA9TGQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792814070;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=r9Oeew+HIGKjdLmCd0UHv5aPDW3Qih0WbW9njiFpnK0=;
-	b=KQYnyQH7tDOUR1XGPJDnkSKn7eIENKtzJVny63v6yCXxd6CmPX8G3ArRRKKo7VXQHMds
-	 4FF4ROaq1k5J3hQqgOKpk3D4vuwLjQi2Q+lTL+/9I9YwOI8c2wOe3oNqsB41cWnv4GUPC
-	 7bEGRmFEQNt0wlbCp1SQ+ouAyp7IObiMHe9hXPKPQ6gw79LgVzf4FKiqlYmMVy1K5bFQY
-	 UY/uRr9WGqqZfh2zrMwi8FV+WiI5Y3TKn3vP2ap77HvZju3yfjeXju6lG+m/B+nOdCDr0
-	 jNfcnLqjSXmtK5bCcbFXsdcH//JSopP/tSIchXIAznPiw059J4oUz3czvkuj5J3SAwA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CRSzzD+V;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E991606A31A;
-	Sat, 24 Oct 2026 03:54:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CRSzzD+V
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792814069;
-	b=xs3Yah1q2+U/bBGGfAO4pSNJfBki9qFJAzsENYHYvw40525cA8XjZFriPdrv9KJfhsW/
-	 9nKhzXJ48gyVhr8bc70Pguz8QS/7cZ7Xma3BuVNsNeGaZzkt7QCdXm1Y5OyX/TdIcJjbz
-	 xRCDtQ/cW9W4gQj6B/yLjqJ/Pic3a/Jn/cUMTVLSoGn5iW3Zpyr32sJJU6a3+MRlfNSdS
-	 3unyxArWHfEfZBvOp6f6k4rjcNWuY58aC91cJsfGfmPiG+A3vbmr000qvCy3yx7MgbM73
-	 XkBMyTKeuYGTcujSvjrbIXyCFCxzlDCoUQctFrBvaoK4by2Y+vcuHT3UbXWY1Fx1xgw==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792814069;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=r9Oeew+HIGKjdLmCd0UHv5aPDW3Qih0WbW9njiFpnK0=;
-	b=RjxMHqHkm9jPu8rWJToXXOWFadrl+aR/4xtGk7sNZahETeYNZllS4S8Rc/VqYkEUFiDc
-	 Mz5hjIfFyF6L0KOOlqYhHnTnlbtHTJR+vkxlcHVzH6jWSfoOphYygUB6a3THJ10I9RKnb
-	 ZrIKGmrAnk4imi5zW3iqfa5tEJ9kciBgainI9LU0L1ppiZ9RlbbrcaQI+Ij0RqCXWJEHR
-	 KrjZppvuSPUk4Gb/PSENG7fpB4cuzM3vYEJsGz+6Aij1SLx21TIovwK4XDgh2lRaQz3fY
-	 B4CBDqswigCZ4xRZ7fTvE+Om4kYoXNm+eJ7vYe/CXGH5F8p3RvWTqP3i15yTT1SN7cg==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.51
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792817296;
+	b=mlHe23IMwQ3miar9u/QoBlETDzFoc8Y/wrYVxjUNamCrPpRo5PvwcMU0DTeA+K3+sY+q
+	 LEagMMSmMJufFcYVI0hLoRmzEmXl2fTyQQRY1GNbiuGC9Ipc3T0p9JK54KZ8f9lv4z48p
+	 uIWANat/gYTVcWJLcmHzCu3Qs8RQWP6zZe52OoSZOP5ur8bqWWTl+7l20f0jJubO4+HCb
+	 l2rxlhp+8JK6V5j8Ax8X8eiaUTcrno5V066YJ08XR9hbhgG7fn0rJZXA9h3TcSlBV0dlR
+	 F0iLaq6V/GQvdOdMf9rZQ0OJIuVtBtjBh3gDSCwv5ZjtU0fGB2JxjlDhPybIoiTA66g==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792817296;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=hLEsygWM6+4H/+RqRuEHadaGd+pRQ2KkZeoK/YR9z1Q=;
+	b=CGjl4uxCkdOqfZjvXIEKAWRAK5cRKa2iGAET70ucfhOPmkTcy49oHsZsbFMyKCf/Yz4V
+	 CcpWGACny/nQMHYW1Ov+NEkRvIosqOXPBsjqksklNFqM8EH0eEMFv39CRtvVSz+beEZ81
+	 BzrsuVOATUDhNFB+DIeRjtAgC04iocDndsTEiKgjDFcmA4TCNSbw+vR1JyMrSjoNvEofc
+	 rbt7hLNRFr0diZFg+D2Uu3T6spMxjAQzCb1czeoQ+6DqgRwGXuO4+fdTSp9X/Qx8vxDI1
+	 Nfc6e7EZht60MQEKw6ybbnkexI2yf+s4bvnEqRG3BH9/BY4UHNmqjO2pNOoI6z0gF/Q==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=bn5HdHFo;
+	arc=none smtp.remote-ip=209.85.210.51
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 1DFDE1F01825;
-	Sat, 24 Oct 2026 03:54:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792814069;
-	bh=r9Oeew+HIGKjdLmCd0UHv5aPDW3Qih0WbW9njiFpnK0=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=CRSzzD+VsJibtdGqeuXN9LpGAP1S5ilm6AYwjbwgaP5hS8cjpTUiE1YWLrfy+FgZz
-	 1wn+b/Q1JwRYMI2etG+UgFzKlSSuhGIsuy1MaJVBaEaKTLYmgMw4XbjHLI1KlCxn1r
-	 bwBCX8btex4RQn1Whjx58iTvxab98y3TBF57eP2NVAT/q9Wg5iXvbUM3KXPJKDdHzB
-	 26Nr1TnBBEK47V8p4Oo/SGsSotdpobnQsEWPiR0+wsbhaopqqnZyy1ZJ+vRUMUhj7Z
-	 2FD6zHdfHV/WRe2bI4Gp8YU3G3Lo/PYIravCxibL6ZMGKCx4Te53XBulAkCVXdxpON
-	 BfMGt39vPQPXg==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 8803344706;
-	Sat, 24 Oct 2026 03:54:28 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Date: Sat, 24 Oct 2026 09:24:27 +0530
-Subject: [PATCH v2] dt-bindings: remoteproc: qcom,sm6350-pas: Document
- SM7250 ADSP
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4D1D606A31B
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 04:48:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4D1D606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=bn5HdHFo
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-844a8bf7e25so1082567a34.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 21:48:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792817295; x=1793422095; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hLEsygWM6+4H/+RqRuEHadaGd+pRQ2KkZeoK/YR9z1Q=;
+        b=bn5HdHFoht3tPfTohGv771TsC0f2WPm59gfEoeVqoK9EN+61yvh9pXgdDwhlmUAYKy
+         ku3Hepd2tRo1Fq5Q7oiTAzmTEMfsid3EOBABukgTAr16DlRlj/ui1VTKVFQMfc9IFMjP
+         xrCT0Ek9YwWW9xXLlfjm6hJfrFtsybjhi57keSrGMNV6Ejin6ivL9ffnip0ajxivBs0C
+         pccD41tB66oSuQo/dJlEqJ6BiAQkmoqdQ+b9FJGjUCBXEnRSvBQqN9eIWH6NcE6tTbfR
+         znT26lvkKnAFYRh4NsKe0xjJ2iWkrzltczFAmtcLjzsE9cP/VoeGtVRbW9lvfjJQcWTz
+         hMcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792817295; x=1793422095;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hLEsygWM6+4H/+RqRuEHadaGd+pRQ2KkZeoK/YR9z1Q=;
+        b=jvCxmyethBD+gOmd90hzGs0RJ6aTCknSFE6RKESH5t+vlLV+HUFPNUwzWkvEU0bgSp
+         QWLjCv/hsLDMQx0uVQqO0MRgQCAG+p95gLS2/Q9pXoFAT0AtwY0bTiP8cpXC94lixEok
+         /1JYJsUWallvclZyc+Fy+oMDqAw1NAtLxe6V9uLuB3AwcnwUDsh0LlsORfmsXtcwVsHb
+         mXj9yR49jqDjjWkMt6v7xfcKR2V7egeBtIxE/uSNRFGW/S77QqyMEEuS07BHzbmYVM6I
+         1Gf/P3n3jJgymFKOVlHt2QKIwIrkeP/t8JZ+F3OyTVxPzGyTEM+kQhP5mp0v5uYnWdxl
+         PeyQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwZowuD8MQW+zdzTlK+zW9rKCILtJSWybTVyjEDjEaOX2IBx/Xbhw+KyKzNP2JKKRqGlDH+UG0qUavQHt7P@vger.kernel.org
+X-Gm-Message-State: AFq9FYKZUgcuDYYx5wHSo2r6UxIu9CTcjmoGWBR1NGWp/h+Uw3ECaJe+
+	Ux+Mo6XskVU3pcZ55QcY3iItjt0SoJ23Mc7uULvMOSE/r0/UcMZUYPW9
+X-Gm-Gg: AYBFou1FrOy/t9hKtpf2LMJ/6DOmzxvrfJWgoiZd689G59H/uXwIP+Hr4evL7ijYd7P
+	zUUjZBil6ewkh8m02fnPw/Xbggr/TFHSeeUHm2vQKGjbzKXYSXrmSFKRksR5j1jcqg3ZrDN2Xdj
+	v0Gjy3rXFchXtdqjHhPGNw5XNeWcg5Eq8pLBGWJMVitybAMl4f7HMryenmR7y6UU3butqBxSVH+
+	hOmyrMdgMnzC57yUqdkr34xDylm1UQXgFLlj8hkeFZOHX4AqXaX8xSziwr/kO0RtHvBmc27080W
+	zYRIuJc+sg+XqPk9+K4hJVEx2/APVYqdmFd2YFsFdn9aCzNl1dPgWS9cZFObPhI0JWbRwhcSBa6
+	TrLf56fXvIIBRg4V5pcDEYCvgBpnLX1HKzl6YFclWjVV2SgaKZRwoeyCnovOXML8mBfAIR719lx
+	cgG5+6AdQRgq0qQoNyRaxW2OvojwMTWfFFd+r9OTZjr7Zrc7TV0YD6zuCOHW64wI60PvMA4Yz0S
+	HopGLy+93Q+OY4QPs12ezkQW4YJErAkUtVb47ZwfBuTHoviKM0ks7zApW7yrruAGGBN1eBPQgYr
+	BNVY
+X-Received: by 2002:a05:6830:4489:b0:7dc:dbe4:3f21 with SMTP id 46e09a7af769-850fb0769cfmr1141196a34.1.1792817294879;
+        Fri, 23 Oct 2026 21:48:14 -0700 (PDT)
+Received: from jeffmr (63-152-17-145.cdrr.qwest.net. [63.152.17.145])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-850fb0749dcsm1331577a34.11.2026.10.23.21.48.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 21:48:14 -0700 (PDT)
+From: Jeff Roach <jeff.roach0@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
+Date: Fri, 23 Oct 2026 23:46:48 -0500
+Message-ID: <20261024044650.9936-1-jeff.roach0@gmail.com>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,120 +100,44 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261024-adsp-sm7250-v2-1-ef278af8da5d@brar.si>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/1WNQQ6CMBBFr0JmbU1boQgr72FYlHaQMRFIBxsN6
- d0FjAuXL3n//QUYAyFDnS0QMBLTOKygDxm43g43FORXBi21UVIVwnqeBD9KXUjhbXH2rcK8tAb
- WxRSwo9deuzZf5md7Rzdvic3oiecxvPe7qDbvVzZ/5aiEFLo7VdapTuaVubTBhiMTNCmlD5D63
- pq2AAAA
-X-Change-ID: 20261015-adsp-sm7250-da58db1e47a6
-To: Bjorn Andersson <andersson@kernel.org>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Ishu Brar <patches@brar.si>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792814067; l=2822;
- i=patches@brar.si; h=from:subject:message-id;
- bh=GuEwrEMO43vHoIW4u6rPZvhBWRNxjETv3/Mw/VJkhR0=;
- b=J7g9bjVXCQ3xsqu578Sr23l8hEGB4wJwwCBDJA67wIAE2OmsJXWkrHEUPDJI+Zw12rKF2fiSw
- mxueE191jyrBjetKy9Gw9nQ/1xDd6DxU6GNOstir7OGw8EsICRdVC6b
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-From: Ishu Brar <patches@brar.si>
+This adds a device tree for the HP OmniBook X 16-cp1 (board 8F46), a 16"
+laptop with the 12-core Snapdragon X2 Elite (Mahua).
 
-Document the ADSP Peripheral Authentication Service on the Qualcomm
-SM7250 SoC. It has the same interrupts and LCX/LMX power domains as the
-SM6350 ADSP, so use the SM6350 compatible as a fallback.
+Tested with Ubuntu's 7.3-based linux-qcom-x1e kernel. Everything listed
+in patch 2 works there, including suspend (s2idle).
 
-Signed-off-by: Ishu Brar <patches@brar.si>
----
-Document the ADSP remoteproc of the Qualcomm SM7250 SoC (Snapdragon
-765/765G/768G) in the SM6350 PAS binding, with qcom,sm6350-adsp-pas as
-fallback. The SM7250 ADSP behaves like the SM6350 one: same PAS ID, same
-interrupts, same LCX/LMX power domains, same SMEM crash reason item. So the
-driver needs no change.
+Notes:
+- DisplayPort at HBR2 needs "phy: qualcomm: qmp-combo: update DP PHY PLL
+  programming on Glymur" v5 [1]. Without it the stream runs at half rate
+  and the monitor shows no picture. With it, about 1 in 4 plug-ins still
+  gives no picture; replugging fixes it.
+- The GPU is disabled. It works with "drm/msm: Mahua GPU support" [2]
+  applied; I'll send a follow-up to enable it once that lands.
+- Audio needs a topology and UCM config for the "HP-OmniBook-X16" model,
+  which are not upstream yet. The headphone jack (SDCA) is not described.
+- I hit one hard lockup while plugging USB-C devices during testing and
+  could not reproduce it in later plug/unplug cycles.
 
-I am bringing up mainline on a OnePlus Nord (SM7250, "avicii"). With
-this binding the ADSP boots on that phone and I can play audio through it
-and read the sensors from it.
+Earlier bring-up report: [3]
 
-The SoC devicetree is not part of this series; it is being sent
-separately.
----
-Changes in v2:
-- Use qcom,sm6350-adsp-pas as fallback compatible and drop the driver patch
-  (Krzysztof)
-- Match the fallback with contains in the allOf conditions
-- Drop Reviewed-by from the binding patch, since the binding changed
-- Link to v1: https://patch.msgid.link/20261016-adsp-sm7250-v1-0-2f39ac1f0496@brar.si
----
- .../bindings/remoteproc/qcom,sm6350-pas.yaml       | 23 +++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+[1] https://lore.kernel.org/all/20261001-glymur-phy-v3-v5-0-3848c2615d5a@oss.qualcomm.com/
+[2] https://lore.kernel.org/all/20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qualcomm.com/
+[3] https://lore.kernel.org/all/CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com/
 
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-index 42e02c643..8387471d6 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-@@ -15,10 +15,14 @@ description:
- 
- properties:
-   compatible:
--    enum:
--      - qcom,sm6350-adsp-pas
--      - qcom,sm6350-cdsp-pas
--      - qcom,sm6350-mpss-pas
-+    oneOf:
-+      - enum:
-+          - qcom,sm6350-adsp-pas
-+          - qcom,sm6350-cdsp-pas
-+          - qcom,sm6350-mpss-pas
-+      - items:
-+          - const: qcom,sm7250-adsp-pas
-+          - const: qcom,sm6350-adsp-pas
- 
-   reg:
-     maxItems: 1
-@@ -83,9 +87,10 @@ allOf:
-   - if:
-       properties:
-         compatible:
--          enum:
--            - qcom,sm6350-adsp-pas
--            - qcom,sm6350-cdsp-pas
-+          contains:
-+            enum:
-+              - qcom,sm6350-adsp-pas
-+              - qcom,sm6350-cdsp-pas
-     then:
-       properties:
-         interrupts:
-@@ -102,8 +107,8 @@ allOf:
-   - if:
-       properties:
-         compatible:
--          enum:
--            - qcom,sm6350-adsp-pas
-+          contains:
-+            const: qcom,sm6350-adsp-pas
-     then:
-       properties:
-         power-domains:
+Jeff Roach (2):
+  dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
+  arm64: dts: qcom: Add HP OmniBook X 16-cp1
 
----
-base-commit: 23d0516587f896f5f16a47c97ddb41d28e6289ff
-change-id: 20261015-adsp-sm7250-da58db1e47a6
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/mahua-hp-omnibook-x16.dts   | 840 ++++++++++++++++++
+ 3 files changed, 842 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
 
-Best regards,
---  
-Ishu Brar <patches@brar.si>
 
+base-commit: f5672a3dff0291d6a45eb0c258b9d2baeb4dc577
+-- 
+2.55.0
 
