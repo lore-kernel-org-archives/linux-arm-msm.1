@@ -1,99 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.48
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792827212;
-	b=Q0KbPh19RJugHNQqRJxT6iSSLtpkNY924poVKOvor4+uCMRMBPdSAuL4JSLiYqwDzVMt
-	 26vbYNaOcTHTRHlAod3hwaZzYmJ3gxpnPuCjR44dQQXrwhrZxAN7XkYimxsvx/VlAnI3i
-	 yLV1iaudnqBCNnVxi+/j2piaPUSVe2fFhW/cahsrTBqvwOLn/l3eNm/jRLtvul6dk4YVJ
-	 avysRFfN+eOMaPHFpThpQ6zKBIcl1Xpzqirbr1vN7Dzn5KVk8lsZsWJAtOypoKcp6q/YK
-	 AFzoHyI3OazUusq3JVc92k5fl6rpFWsHneqGOWBkSBnUFjwYDNEDqKYTqZGYMoxhNLA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792827212;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.53
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792829819;
+	b=H0zbocS3kam4Kg+Dsv13GmYLA5CSOCWePwfGih1BsvUSh8RbRmT+1O/I8MascVY12Zjx
+	 Nmg6epFF27UMQ1Ul4aZWd3pWazQ0Qw8LxMWxdgiH74XUbq+kUFH4hKu6h40n26eouj9hr
+	 3WIgYFXzmvzt2jfWkXeKxsanWITZLuc4VjD3AIh7wjvfEctrjbzFbB1idZjL/Xh5f8aBm
+	 YSSTIpb5i+4mv5UAz6jjKIpYcxTU7gEv4Qjs3rXq2aKTAvWaQBXFvYC06jaExhlBOk9Ta
+	 QFWMFv0V+LEO2dzUqMmik3d2FZaPFpAvDopbZ0lEIZftVRJeZOOfYxyObxG92QNBTog==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792829819;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=EizUEZn6zIBi8G1IeAjstYEBnHs91ety8PPfTu13Tuo=;
-	b=EjowpNbncc33YtQftZbCc/3OfRIcL17yAi+MTENZjKkVlFJf0S+2JUZ51tswSm1C402D
-	 sW+bCIMjfqviTy4LEL60SJ+sRcAt9mnBkyYIKKUChwzdB4Wg+amoNJzODxuXAlVjBf2rD
-	 ptg9N8466DR3sF4InW+dZHI5SeH5UQTpNCeWgneVq9dcurlPMwnUk9nluQoyimDKfN1kM
-	 BWEVXIjyHC2tXL5NEtxibp2+8g/8jGhrKQS0O53QJFG2Z6hdpfaE3NJsz18kvlW+nUb98
-	 NfbLPVVFDTFpeu7CAMUyuvdNjqEekm22T8xAGC5oRNBXaxQKziL2HwV3FLfAwvWyTVw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="h/nhEG57";
-	arc=none smtp.remote-ip=74.125.82.48
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
+	 Received:MIME-Version:In-Reply-To:References:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=uUDc+hglJMdcXxhvbv9wrZ+R2kkDMXVbGgG/7tMuxuo=;
+	b=IKpTYDHL+gi3L3ZWd64JdZNBqqbetO6K9k1VT8I3UxEcvFR/SNOF98s6lELV5HNWEMiU
+	 KeV2l7FBbcHpxNOMxEUdms69pV8tHfBHyXLqD0MItUPyCtnS4kRJu2qZNGj26gbA5CGH0
+	 yilhtb5HIyWmWaFgZXSqiRzNOmGGP7xKKzYGk4yGUuFuJqanao2Nuqp93x/+r1I/0+0+G
+	 ok4nefQtFonAGoaueqg0nC3wnFlvkArFulMST8dluAXc9UIbRL+Vmo2ZuqzGnA3cMmUdt
+	 m/Q2BAjW8Ok2OcKdNLm1nljmcRXdSl2nelBSh6xVSWpLxx0wU1ifrMoreFJGDxkjqaw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=chromium.org;
+	spf=pass smtp.mailfrom=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b="j9m/eYvc";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.53
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C922606A325
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 07:33:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0C922606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 960BB606A328
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 08:16:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 960BB606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=h/nhEG57
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-168de2167deso10255c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 00:33:31 -0700 (PDT)
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=j9m/eYvc
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-6b167ffd132so2414258a12.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 01:16:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792829817; cv=none;
+        d=google.com; s=arc-20260327;
+        b=U77S+SGW9kDY5/0hlCfxMCEe2OPSXwWgGor4gk7T+ScowfJoDgE73zMAuHKifz8Yex
+         Vmf+gTzEphdeG5i4fXQ6c5KbxOCPkMs+RP9pULiZTMQSFl4jj/mz9Ge2QFQd7dXd4N3l
+         rOQBZQg+S9PA+ZTarFOSer023LYcuwghWSgaM5VBipzHEUX2fShjNfyp9yB4mLUUuKwy
+         cm09ojsFSYfRlYxFXbbm7BLflkd2sVl/C/JND63Ex9LYBnJIgxzdIMzQ9vg6sa5lH/LG
+         OTwwyVOuGZ7X013khPA5EGGub0fyNGZvwKPDi7eVWATzDxQ84O/WzfGeIamqbbA8r60V
+         q9PQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:references:in-reply-to
+         :mime-version:dkim-signature;
+        bh=uUDc+hglJMdcXxhvbv9wrZ+R2kkDMXVbGgG/7tMuxuo=;
+        fh=wwyj6OsohwULLyt6zr9CkQfoUAVpv/ZQ/2d+9thB9do=;
+        b=dqK1b8lAsaeA93yTnLjxjgJtJGmSxHevfYi8qhgIqC7KnvorsS+961PVhy8vEvWg3u
+         X7V83u/jb2UD9xyx0otyNzFca4lD9+f6okWTMuxFtf1n46H63lX+mYiZwbTGXUqwXODz
+         TKwTUUaPvnSNw6VxeKpBGpNrc7OI4VqZN8Ra5lWJclDkHDDzgRK0wcpWo+/VHkJnkogX
+         1ppPL/hl3tyyWuBTHPJ+QiPCZE6jyz9t0AnUtViECozDiOyk+WBp5xa0qtHw/aGgSEgr
+         e5dAn8hzvds9gC6fzeTF2KXLJDCpKThCHAe8LQpU+bd30MUfCnFSz4VVbUDxUpQryFzI
+         zRew==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792827211; x=1793432011; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=EizUEZn6zIBi8G1IeAjstYEBnHs91ety8PPfTu13Tuo=;
-        b=h/nhEG57h+Lg9OmydDnC/PAhyAF82HN17Hdx+qIDe2YpQQU5kl4a2iiwUz4tzpE67O
-         HuMCnjk/TvX5Q+2ITw5ISZfE03NVA9+Te3+g5F5iSELzfkOgpefeB68vPuQliqcp7VLm
-         OPOPnYTtexrTe6z87YGKpZmovoPlz3f5G1WDLAZ7hz+76BUlhI8WHS9Qd2qQ1SOK2zL9
-         zf3PprR++JukjDdlSh2ugTqPCmfYaxROhxdhvm2/hmYqpgIPpXKtWbfNqPMmGpON2XGb
-         Rvdr3ecMyK0ObGDb9DSe15Yezgt5zO7laSJWBU/X2tS6lTdFow+5qAck3ZXeLDxB6jw4
-         uAmg==
+        d=chromium.org; s=google; t=1792829817; x=1793434617; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:references
+         :in-reply-to:mime-version:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=uUDc+hglJMdcXxhvbv9wrZ+R2kkDMXVbGgG/7tMuxuo=;
+        b=j9m/eYvcshaqWdxR1RRPRIr1ItYrA1TN4RRH0Tb/73JTmjyGNBA+MSabq/chQ3jRup
+         FDO+bPo7UmRdMpdeNPL45rZL+MvdTWsOwUsOK1L3CWBxyBfvgHY1GMnC7+rnUD+uEALq
+         OMq+yCYuInNRftXgM4Yo1DFyaRmVERqAUmQ+Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792827211; x=1793432011;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=EizUEZn6zIBi8G1IeAjstYEBnHs91ety8PPfTu13Tuo=;
-        b=chbN+bKQYRMFXg/BxKt+miaRAcczoacSfjx7qdpz9J9kinupHiH2aqC2yv5QfPcsF7
-         afT7hrNR0nyGhEJ+qf2XxdfXG3VxN7ijJzN5rhBAyb3Thy4kwUsQhM2GghFmkug75EQa
-         MW7/nA3rfdwRFhb4znBlzQCCpLnBBRMkN19XHfOYn9ySi6vxULoUxOBYxcPccM8kmIg+
-         ia/cgHIKRgLaNPT/RWTU1ixrB7m4xXiwCNPUzFcpfMzE3nD/108beYzdKDUJdB6S0fjH
-         k9cUmaeL6IeQflVqvL0pEoJNPmb80dEkL/DKMzRvbMIFuzSKbWVi2FUICi7m/wHMvHB7
-         YN8g==
-X-Forwarded-Encrypted: i=1; AKwUvBxW80Uw/IiWHr/+6hwKOoSJTM0p/8EAtAIuEpRFe+EAfvmTlcUyHHAjW9d9/QM9rg2luITMmS9Bz6B1DPlN@vger.kernel.org
-X-Gm-Message-State: AFq9FYJxQvJ/chVajp1dfWPdDkIMIvXKXhHo9k24O47AcyP1/xU9uXkk
-	PxhCLJG1eilEKvWDelhxBmKMurtRbBp9l1YXbtzaWd5ptrP4ZnBDuICA
-X-Gm-Gg: AYBFou13vo6sYgz/8IPS4KUA/c8fjiQhRlE4XZQDiHCKUJ2GEU8FkBsSqzIJTU+o0Zn
-	f0pOz/rZTxUzjahaQed0BRxxlyLrPmvV5Br+ZU/pJljvy8lMGKU7QApJp7nMTq471yK6x6ot1H7
-	GZF+R+078uhww0v8ZT6iAcyefP4AZbcAIAoP/SqdCYYKxxt2KiiMuais4qBQOwE+5xuN0lzzSDw
-	QygHnS7x6D3QagbKZKkegp0UzCt3a9FP4E6N0IlOYugTSs69bjB3OSSsX4Kf2eOGGxg/yWB5zxf
-	WKKyYhXjLMt3bGMVy0MU7xIj32jgDUTyeNVyxWXDnMEM6F1fsD7ltI8EsTvbqTqn5yCOzyw3HN3
-	4M5Sxt6zreI+rupT7xKfM+PFlpaOkX2s5LYrHBYHa6VWFEYR2MfLt6o2SRnNTyq8YV4m/Ywa60a
-	n49u0m//ZVp4k+IiKZcpLw3XcYBG7DS58ZN8EgcvWOCmhTPZfBu3uAMYTep/+us9pGG+R3OzZAw
-	6wcKuvfi0yzOaPxYFFlF2WODBUQSFR5z9ylQMtq41R7zQyuXqn22kjjPstNVyvQBhgDn1w=
-X-Received: by 2002:a05:701b:4516:20b0:143:5c2a:e45f with SMTP id a92af1059eb24-1991b1423bdmr2509746c88.0.1792827210988;
-        Sat, 24 Oct 2026 00:33:30 -0700 (PDT)
-Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0e8d700sm5402319c88.10.2026.10.24.00.33.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Oct 2026 00:33:30 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: kaipeng94@gmail.com
-Cc: abelvesa@kernel.org,
-	andersson@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	robh@kernel.org
-Subject: Re: [PATCH v5 0/2] Add device tree for Acer Swift Go Pro AI (SFA14-11)
-Date: Sat, 24 Oct 2026 15:33:24 +0800
-Message-ID: <20261024073326.3018902-1-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261023180513.36417-1-kaipeng94@gmail.com>
-References: <20261023180513.36417-1-kaipeng94@gmail.com>
+        d=1e100.net; s=20260707; t=1792829817; x=1793434617;
+        h=content-type:cc:to:subject:message-id:date:from:references
+         :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=uUDc+hglJMdcXxhvbv9wrZ+R2kkDMXVbGgG/7tMuxuo=;
+        b=vdivFzBbGBIyvLZBZZUzRzAVkO2K867sqlLUA+5vengDTviPyek1oGUex/zw8yBkR5
+         RQcq39pMaUXc1JoT5ToItW+zG6SgZt9Dg5Bwu8mdXGP+H2ec8uCG8WnSXGc685aQGADL
+         pjB81KCv+r2p0VMHIDkiujF+y8zwH2ai751+3fa0QnQxAi3+D6vEHzP1UOBt4GoYIKnG
+         RhfwfHf0MD0rM9YZCNbi2jhBNHDPPD9qVphwsPXS9gyR5CQ9yebSuE1gi/577a4dbkYT
+         qCtz7Ec9m0BozQOAGn8dTdZ0prixoyQqSYu06ELs1qpNtEaRNROjzSyFwf4cY4IIXwLc
+         Focw==
+X-Forwarded-Encrypted: i=1; AKwUvBwhBZwZRxdGQ/xcHtbzYlylPP/ccZKlw1CICNGwMx/KfWwX9Q0md8h8w7g6dVcc8kRzdsr20yXmrMYJlB58@vger.kernel.org
+X-Gm-Message-State: AFq9FYKxst4R6/N/8jVldpvwuIQhbgg1zWf0+lA6aBkEP/pWINqwLpPP
+	KK5ALuc1iagz1fyiUiCsv5uH5gLOzoXU4kXTmLOMfjskJAfmys/q2BxdLQA1ebgqeDwIF46+p05
+	wROt5UppKKwWDIO7deHrySNk+SgKtAJ+lYEtOIYGw
+X-Gm-Gg: AYBFou3fpvPuMvqM7pPoBy8XmNu5AblbZ8UQCR+eAsQT1m529xpms6Rxtai9kr2fcy8
+	YvzCyfiAQ3Hv1L5kDtuCDMXCjDTZSxEht7WlnROjITYVGTiDKvFAuVR5vgKHOCfKTbNY59r9i91
+	Yd6YCtgl57afCHUK7N5qSLTIJx2CE/piQJ0LG4JxcJC7mt5cOeMWrHKi2rcpSzkXoMZQPJDQiMl
+	n2xt8bQKGaZoDbqPvsKKNs+HubcRvNWbTFBiuhlaVQ5sRF0kZJaLQKesu8mYY5rDvHf0c05AKty
+	KcsSlN+SZE8maYt99jnkdmMCVIPXWzI8RO1tCT4bLs7oXpX/UTepMMhnUA4dEWcOUjOYHtBP5OO
+	QCCvzoVkTNWhvN97C/xQJ+Ij0SeE9f4wUT8A=
+X-Received: by 2002:aa7:c9d4:0:b0:6b1:c355:c7c0 with SMTP id
+ 4fb4d7f45d1cf-6b442fde26emr1152906a12.26.1792829816963; Sat, 24 Oct 2026
+ 01:16:56 -0700 (PDT)
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Sat, 24 Oct 2026 01:16:55 -0700
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Sat, 24 Oct 2026 00:46:28 -0700
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,24 +104,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261020083501.RFC.1.I7ef2211f59d5912146a6816d533638605edd0f36@changeid>
+References: <20261020153652.2907186-1-dianders@chromium.org> <20261020083501.RFC.1.I7ef2211f59d5912146a6816d533638605edd0f36@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 24 Oct 2026 01:16:55 -0700
+X-Gm-Features: AclHuK-X20URHOUw51jVSQxB-TyQaLgWVXdt5sH3O8YNafmV3nonazmm4bHkTWI
+Message-ID: <CAFLszTjoZ=TZqW8BTFTot0ZRcv_--BYZgdOCUD-rv6nT479--Q@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/7] scripts/dtc: Add fdtget.c and fdtput.c to sync script
+To: dianders@chromium.org
+Cc: Devicetree-compiler@vger.kernel.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-kbuild@vger.kernel.org, 
+	Brian Norris <briannorris@chromium.org>, Catalin Marinas <catalin.marinas@arm.com>, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	Simon Glass <sjg@chromium.org>, Chen-Yu Tsai <wenst@chromium.org>, linux-arm-msm@vger.kernel.org, 
+	Nicolas Schier <nsc@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Tudor Ambarus <tudor.ambarus@linaro.org>, Devicetree@vger.kernel.org, 
+	Julius Werner <jwerner@chromium.org>, Saravana Kannan <saravanak@kernel.org>, 
+	Will Deacon <will@kernel.org>, Michal Simek <michal.simek@amd.com>, 
+	=?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Kaipeng,
+On 2026-10-20T15:35:18, Douglas Anderson <dianders@chromium.org> wrote:
+> scripts/dtc: Add fdtget.c and fdtput.c to sync script
+>
+> fdtget.c and fdtput.c were imported into scripts/dtc/ in commit
+> cd296721a964 ("dtc: import latest upstream dtc") prior to the creation
+> of update-dtc-source.sh, and were never added to the sync script.
+>
+> Add FDTGET_SOURCE and FDTPUT_SOURCE to update-dtc-source.sh so they are
+> kept in sync with the rest of scripts/dtc/.
+>
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+>
+>  scripts/dtc/update-dtc-source.sh | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 
-Thanks for v5 and for the detailed notes on the eUSB repeaters and the EC — those are very useful.
-
-Two points from my side.
-
-On the naming: I'm fine with the model string carrying the retail name, i.e.
-
-    model = "Acer Swift Go Pro AI (SFA14-11)";
-
-For the compatible, though, I think we should choose a name that can be found on the hardware or in the firmware itself, and "acer,swift-sfa14-11" does that: it matches the DMI product name (SFA14-11) combined with the family name Acer itself uses on its support site ("Swift SFA14-11"). The archived retail page lists the Chinese product name, but it doesn't show the device configuration or images, and in practice users identify their machine by the name Windows shows (which comes from the DMI) or through Acer's support site. So my suggestion is: model = "Acer Swift Go Pro AI (SFA14-11)", compatible = "acer,swift-sfa14-11". Note this is also the string quoted earlier in this thread, while v5 uses "acer,swift-go-sfa14-11" in both the binding and the DTS — could we align on one?
-
-Second, please add the machine to the QSEECOM allowlist (qcom_scm_qseecom_allowlist) as a separate "firmware: qcom: scm" patch. This device's firmware does not accept keyboard input, so the EFI boot order cannot be configured from the setup UI: without QSEECOM/efivars, the only way to boot Linux is to press F12 and select the entry on every boot. With the allowlist entry, efibootmgr can make Linux the default boot entry. This is the same kind of change other boards carry, e.g. the recent addition by Srinivas [1]. My series has it as a third patch; I'm happy to have it folded into whichever series moves forward.
-
-[1] https://lore.kernel.org/all/20260928145122.1337186-1-srinivas.kandagatla@oss.qualcomm.com/
-
-Best regards,
-Jianfeng
+Reviewed-by: Simon Glass <sjg@chromium.org>
