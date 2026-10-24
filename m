@@ -1,102 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.185
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792810630;
-	b=z1u4piCbZcZJIHOgVaupS5VbFy9TvITbIEEKQz8Mb0QhFmY2/TD/YmsFAg+9tS4ZYtgP
-	 FluA0UTJXPBhvaMkff4xAy2lv/yKHLFo11vQFMhG1to1zd9Dq51KQKC8T51EkanG2MBfw
-	 JztG9ZBMkzKEzu6ZOVt1tcg2FxAfAwp1j3yq498kYrQTbmUL+oDTmvDiIxzPrLh48KODy
-	 CV2OxY+fbIGlpKs291SbvDRtZcRVwI5iRwyh98oyziMs3VXzTogjy7GLhYI6HdYMHC5/Y
-	 9tdyQohP7QT/PH9xoZ6uh0MAh2MP+APx9dKTHLBMjCcKsF/q0vKv2xP/6t3Fd3kPHJg==
+	t=1792810720;
+	b=ffJXXiKFqqjTMjJIo+YhYKopo8mgFzNjqF2iaWYqO9tryqiqlGq2/LVjhRRQZvzMU3Fj
+	 6N8+QhelunBlbZvQ7hXUcK+o4Ci7BVKsABdWpyFwzg+8FnArJfqsSzuaS9MVoT4bCIRdi
+	 7d39v0ZhTNVg7ed8rz5P0Zjc0I1+3juGSmsQV+qJLtbQYS8xjKRxM6o2gsMv6NOJAtTlj
+	 HFax7eX+HTDOEpBbGbDnrEK8wuVc6G9ublFUfs/zILrBbL5KnxiqOlhG/+lqt7wsXMmRE
+	 fja+wI+hpUc22OLCHtWcD8NEj7PwwOXIkn1sNT+4nGg4/95DGsJMenfFixk96xDhNWQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792810630;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=I8fxW7vrt77kAEgSKRbYezNY7nlUDAstQ7iXToVpRQs=;
-	b=idLfmb8qwLsDjTBEzEM9v38unJ6wJxPZyovwDjzMIs6A2JDMgw6Le9q0P5uhP/pA9OdA
-	 D1A9QNkXqalkeiU6oVvryJj19NqDkTVdpJXCsc1IjShQYlNyWGoESXSr81xx5lY0zg9uO
-	 Z0VdtcZxxXsvwMigZvILCniLlWKbUKcTv5HJrrFqcJ4ABVxrov+HxXaIZHRZp4UhLJkXc
-	 F9zKTwxwlclsbsms+xelB+GfFoZ7a4v/rG+L9YLBCJ+C/BzBZdmrgNCoSmvlZCSiQoJf8
-	 Mfr5vC+jdG07YZ2aBUAl4nq7rucG+gZslpkAp5CgJ3VFMNIve/OHqt7qGPNs/H2j/oQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792810720;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=DMCCmtvheCPZ6z25FzUW0Qd9uAafljfKefGPpydFs30=;
+	b=bVjl7g1xwLtrCkh1TDYuL16G+Fci+llsiy+cmSEgPXaaltya6wRjE++sibkH4XESg0eP
+	 ocmkXWf9VmGSKqMcF00eFXwbsMSCWEXTUPz4AhLN4+zhjzwuQcCB1RKTQzOxaW3oadh7i
+	 EMLEq40ssZ4jBQG74tPpPr5lmAJCY41YFudLoZoR6QV452OB23asWrO5raOUwZqyzxMxB
+	 e6FNCNbKxStvmeqWC3DT3qGtXcBZVT3E+kL9cZBiKmdJaSuNnivNWgxZVdIV+6kuG50gT
+	 7abWbi+8fbxHyLzs/xwdsrk+tp9uIqyogJlqt12aFadb3Hxs5xp3wJIZZl02iWkxodw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=BPKmkzCh;
-	arc=none smtp.remote-ip=209.85.210.47
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=PlWGrR3n;
+	arc=none smtp.remote-ip=95.215.58.185
+Received: from mta1.migadu.com (out-185.mta1.migadu.com [95.215.58.185])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BFA8606A31B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 02:57:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0BFA8606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCECA606A31B
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 02:58:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BCECA606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=BPKmkzCh
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7fccba9c675so2917559a34.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 19:57:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792810629; x=1793415429; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=I8fxW7vrt77kAEgSKRbYezNY7nlUDAstQ7iXToVpRQs=;
-        b=BPKmkzChoKihc6iAdO5T/4xW8IiSD0BpwDr7WBsQBZL4PXTDwRMCy+lzq+uPmGvqIr
-         AUnED5rV31sYOrzGpYJ074dWRG4GcWokzHAg1E+dNLtMDaqZV/suF6LoSMmEmbzSjhsN
-         RWWVeWeP7IKiYJvmz8nB/gsaRpSFOHvr0+dUo7V406exuh4ZPqU9HO/qgRMRXVt4Pnog
-         BRYfkbjuM6NbS4+3wY2UT3BZd8iiNENu5X7XnCEnTUH5Q68bsKy2c1c6NQaEQZgRqE0N
-         N0davRMG3jx6ku739UiCyitbJRDNxddwR+iBXcBeVIw/LRy5ASqUZCtAlwDX0ZH3A/ss
-         +Vpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792810629; x=1793415429;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=I8fxW7vrt77kAEgSKRbYezNY7nlUDAstQ7iXToVpRQs=;
-        b=VJEdayaqylL0fFAigI4+4EXF7V4qz1K05NNcmRkHnqoOJwvsiGAA4IzDDlbSWHsijy
-         C3HNnVX0ZL9nH33yrlJifRu9AWXvzo2AXMMRL5d1C9nJkAOIxNH+IW9tEWBmOy77I2Jr
-         HER+RWlVBRs1BInwU/3TU1wJSTkcBvHEVOPV9lRmYhx/9pJX+7iAYslcc7hlr6tiaV2W
-         2s0A+Xr7k1+PcJ0pjwB7atOhdcS+9gWd2QxS9GJ4r0JUCVsTsZGGIfRRtkLPpEvuE2T8
-         Aa8W9qv5iUBeSm8JR2vAFxTsLkK9kXTXWdNLGsVCbqjAH2iB6tL7e8TAsVPAIMKTc1Ti
-         bIVg==
-X-Forwarded-Encrypted: i=1; AKwUvBzG8A8DurBf5sjXV/vqgwUpjKLj7moJT3P4nwe3g4LidRbVIauz1cCmqXaHEiMukr6PgX3N3DDtU47iphvJ@vger.kernel.org
-X-Gm-Message-State: AFq9FYLK+M4Z76/Lw7q5VaS82ATEs2UvjtqpTQ+BcTOZau510hLG4SiW
-	N8IYzb0hyjMtXvmKzALvRrusESqxiceHSOxzUrkwVDWMQhkccB/bAdXc
-X-Gm-Gg: AYBFou20CKX7yZrNIgH8Jc458IWCVKQI6TzZDrSY6XQ64b/fqBy9Dve4O40caKRWTDy
-	ROnnnPMz7pQuGBz4yc138MsHhYMGfNhfBKFh/8dRMO9YJk85MYLvMYUkwGGIR93IxJitP1IyM9x
-	cOK/5iDrPEfS873M1P1VC4yzVx1/E6iSW/FZ3iPEK5VdwvUMD1c3brosdQ3s1SEZJ2jZZ3uMvbV
-	1rORONcN8i4pDe9Yj7x3H+rzzZ315V101ZtH9u4BCSoeqr110UHWf/fvADNOMOA7JJx596yvAfr
-	4rdXHFq+qWF0FAco4ptg90qVNCSufd9IWceGFTPlHcuOiUYk6ffyRkeYfZJOCFy97wqJZPoyg7+
-	KXTdIS9EVjUfeDcpquqZGoKX1lKB959PA7+ACbKm9bdLxRcgc6Qu/GXb849D+qQSzhyK2Q0zPdm
-	86dOB+UEPKd8SzHL6VKyCnpiEri2/McQ+6odwUS8gajXoqi+WxHqnecInpEm7tSJglQLxlDIxHW
-	Nx3dTL+vcsfIXJh9+7Ce6SrDrvlqa6HKxdOsmWH0IbZQBX5Qmp4sEtpIgj4qrhm7tCxBGMPZYCL
-	xJ2R
-X-Received: by 2002:a05:6820:f008:b0:6d3:abd1:9b90 with SMTP id 006d021491bc7-70ba0fcde9cmr288037eaf.54.1792810629029;
-        Fri, 23 Oct 2026 19:57:09 -0700 (PDT)
-Received: from jeffmr (63-152-17-145.cdrr.qwest.net. [63.152.17.145])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-70b9e04aa58sm1060327eaf.7.2026.10.23.19.57.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 19:57:08 -0700 (PDT)
-From: Jeff Roach <jeff.roach0@gmail.com>
-To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc-glymur: Use PWRSTS_RET_ON flag for USB GDSCs
-Date: Fri, 23 Oct 2026 21:53:47 -0500
-Message-ID: <20261024025526.13339-1-jeff.roach0@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261016-glymur-usb-ret-on-v1-1-1790a523fd9c@oss.qualcomm.com>
-References: <20261016-glymur-usb-ret-on-v1-1-1790a523fd9c@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=PlWGrR3n
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=gMqBedMqV6/PbEo4P/C/wuOOsirk4D+GGPXOjLgDTws=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792810716; v=1; x=1793415516;
+ b=PlWGrR3n5CnVaJDtS1BCZrLEZV3BF47ZC06Vma1LNJdgfCCgzrXTMjkFGKt+sa0M4rJgIwaK
+ k9ZAf95fFi3BfwFIZ9Jy5AxUE8QAd35QRYOnQTb77MZggU2qQ2iAhPZ5E5j+/wKgAud/knZx/Lr
+ v3F7bd7suXx+ICwQZp79cus9p8Ke6NTVM4dkrUUe8pRkQHoxmBE8UZmM5r8oaD5vUPSTsAqnva+
+ ck4gYX12rZE9HpeiCRmiL0cH1HyQM+UZ8vg48r/NeghbdUC80hpGVYnnu+0XyJxrFAt4ZHYCW0v
+ ynhE94sD95pd3aJWyXGcJT9k0yYW8Wr11RuiOpVnC4oHQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 16e8be6ff7b3bc0f;
+	Sat, 24 Oct 2026 02:58:36 +0000
+X-Mizu-Trace-ID: 16e8be6ff7b3bc0f
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <c1f5b813-4228-42ff-94ac-2ea6533328f2@packett.cool>
+Date: Fri, 23 Oct 2026 23:58:25 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -106,17 +60,149 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [v2] drm/msm/dp: hold one runtime PM reference per plugged state
+To: Joonhoe Kim <26rote@gmail.com>, robin.clark@oss.qualcomm.com,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
+ marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
+ yongxing.mou@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <20261007155848.106-1-26rote@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261007155848.106-1-26rote@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, 16 Oct 2026 11:58:44 +0530, Jagadeesh Kona wrote:
-> The USB GDSCs on Glymur are currently configured with PWRSTS_OFF_ON,
-> which allows the GDSC framework to fully collapse these power domains
-> during gdsc_disable(). When these GDSCs collapse, the corresponding USB
-> configurations are not retained in USB host mode use-cases and this breaks
-> the resume of USB controller from suspend.
-> [...]
 
-This fixes the usb_hs controller (webcam) dying with an SMMU context fault
-after s2idle resume on the HP OmniBook X 16 (X2 Elite, Mahua).
+On 10/7/26 12:58 PM, Joonhoe Kim wrote:
+> The plug handler takes a runtime PM reference every time it runs and
+> sets dp->plugged; the unplug handler drops a single reference when
+> dp->plugged is set. msm_dp_bridge_detect() also takes a reference and
+> marks the sink plugged, and keeps that reference as well -- on every
+> detect while the sink stays connected. On top of that, in the current
+> tree the plug handler runs more than once per plug:
+> drm_bridge_connector_detect() calls .detect() and then .hpd_notify(),
+> and pmic_glink altmode reports an IRQ_HPD as "connected" too. Every
+> extra reference is leaked on unplug.
+>
+> On a Lenovo TB323FU (SM8850, DP over the USB-C port via pmic_glink
+> altmode) the DP controller's usage count reached 28-34 after a few
+> plugs (rpm_usage tracepoint), so the controller never runtime-suspended
+> after the display was unplugged. It in turn kept the MDSS core GDSC on
+> while all displays were off.
+>
+> Make the plugged state own exactly one reference: the plug handler
+> only takes it when the sink was not plugged yet, and detect() returns
+> its own reference when the plugged state already holds one, or drops
+> both when it finds the sink gone.
+>
+> With this the count stays at 1-3 while a display is connected, the
+> controller suspends 3-4 s after unplug, MDSS suspends and its GDSC
+> powers off on DPMS off, and replugging (quickly or after 20 s) still
+> brings the picture back. Only tested on this device.
+>
+> Fixes: 3ea2d1c3d154 ("drm/msm/dp: turn link_ready into plugged")
+> Assisted-by: LLM
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> ---
+> Changes in v2:
+> - Drop the plugged state's reference once, after the if/else, instead
+>    of in both branches [Val]
+> - Drop the comments
+> - Link to v1: https://lore.kernel.org/all/20260929130627.959-1-26rote@gmail.com/
+>
+>   drivers/gpu/drm/msm/dp/dp_display.c | 15 +++++++++++----
+>   1 file changed, 11 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+> index 6abe30bdff12..4059cb9dba64 100644
+> --- a/drivers/gpu/drm/msm/dp/dp_display.c
+> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
+> @@ -412,10 +412,12 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
+>   
+>   	guard(mutex)(&dp->plugged_lock);
+>   
+> -	ret = pm_runtime_resume_and_get(&pdev->dev);
+> -	if (ret) {
+> -		DRM_ERROR("failed to pm_runtime_resume\n");
+> -		return ret;
+> +	if (!dp->plugged) {
+> +		ret = pm_runtime_resume_and_get(&pdev->dev);
+> +		if (ret) {
+> +			DRM_ERROR("failed to pm_runtime_resume\n");
+> +			return ret;
+> +		}
+>   	}
+>   
+>   	msm_dp_aux_enable_xfers(dp->aux, true);
 
-Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (Mahua)
+This part (msm_dp_hpd_plug_handle) is now also handled by the IRQ_HPD 
+series:
+
+https://lore.kernel.org/all/20261024-hpd-irq-events-v8-6-6ee949e7a384@oss.qualcomm.com/ 
+
+
+> @@ -897,6 +899,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
+>   	u8 dpcd[DP_RECEIVER_CAP_SIZE];
+>   	struct drm_dp_desc desc;
+>   	bool phy_deinit;
+> +	bool was_plugged;
+>   	int ret;
+>   
+>   	dp = to_dp_bridge(bridge)->msm_dp_display;
+> @@ -910,6 +913,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
+>   		return status;
+>   	}
+>   
+> +	was_plugged = priv->plugged;
+>   	phy_deinit = msm_dp_display_host_phy_init(priv);
+>   
+>   	msm_dp_aux_enable_xfers(priv->aux, true);
+> @@ -962,6 +966,9 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
+>   		pm_runtime_put_sync(&dp->pdev->dev);
+>   	}
+>   
+> +	if (was_plugged)
+> +		pm_runtime_put_sync(&dp->pdev->dev);
+
+Thinking about this again, this flow of the reference(s) seems confusing.
+
+If I understand it correctly now,
+
+* there's a long-term reference associated with priv->plugged;
+* and this function needs the device to not be suspended because it's 
+doing transfers to check if there's something plugged into the port.
+
+With the current flow (fixed by this v2 patch to not leak, or at least 
+leak less):
+
+* we always take +1 reference;
+* if we "find a plug" (!was_plugged && priv->plugged): no drop, our 
+reference "becomes" the long-term one;
+* if we "find an unplug" (was_plugged && !priv->plugged): we drop our 
+own reference, as well as the long-term one;
+* if we "find no change while plugged" (was_plugged && priv->plugged): 
+we only drop our own reference;
+* if we "find no change while unplugged" (!was_plugged && 
+!priv->plugged): no drop, is this intended or a leak still? Not clear 
+who needs the reference to persist in this case?
+
+**If** that last case is actually **not** intended to keep the 
+reference, I think it would be clearer to, instead:
+
+* use a guard (probably PM_RUNTIME_ACQUIRE_IF_ENABLED to keep the error 
+check) for this function's own reference;
+* and use a plain get an extra time when setting priv->plugged = true..?
+
+> +
+>   	return status;
+>   }
+>   
+
+
+Thanks,
+~val
+
