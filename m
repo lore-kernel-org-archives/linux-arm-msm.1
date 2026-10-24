@@ -1,63 +1,121 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.113
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792840274;
-	b=I4FrJXRoYtOpvTC5IOSi0GEms1JZAl7R50CR4MuiS3YzbMsRxakQRkbOcZufogvWTlf1
-	 sd6IuT5XucK41dnKulZcFc4mnILIh2NyOEJEX2RYTyX7xkyPGeASLPmi1W/GxihMUOAWG
-	 PVPtDrBFQeXoO1uLRj0vepHvRGlPrC4Bq4XKcJOuzyLdP/534lnP+/85IXuAosCrpbFLe
-	 DMjL68Q/2P1eF+GshZ5vFIKXtJYG2MFwDy5j+3BMTdReqZLyYAI/AoIazlpPcl0VOnlzx
-	 fi6WavN6AB8LynG+lRxY/fY9UjPZhr9OlOq44hPX8Ok0XkseCi6qgnSTJ7BJxxAXJ0A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792840274;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
-	 Subject:Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=XKawUEas0+ewxVkQvD9UzFgid97iDDDPxd6wFpvvkpg=;
-	b=jJ9mS/ZsL/6IMx9hEpE8/L0+Y4bTZS2bV1t+hNeESpwo+qgdSBjS9MzNdO0bNYB5dsdx
-	 F9MdahbcKDUh+NecJ/QBKKn3efgxhwSSyrfcW/ZqwhcviSsgzRJx9BrxQlvMiMYkXa8hy
-	 5d7Skgws2HcFHPJUKJKjZmHLCZQtygzs0w2C3WOGVcUu3A2EuOI6YMRXlv4WNu9CPrRH6
-	 xZfs5nPyamauzKX3Ly+HF+fVtYX9k/dpA7v/9RvjKm9dQHG5dMcSVTX60Um8HK+J+LAca
-	 AtXXQGU2vJX9iNMjO+1NK/n+YECtG+Avg6a5+7f9ExzSB4OaVg4XMrGYlY4A/8n7+6A==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=wIhJGjnd;
-	arc=none smtp.remote-ip=79.135.106.113
-Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch [79.135.106.113])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.10
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792844755;
+	b=vM2XZHUE69qyaMLR/z6aKeVI5mMVCyFjRPNjRY7Rl9f0eOyxG1Nc/simCvOijZLklSSQ
+	 zZPbF3KEG9iUURGLOgcIF+no+rwvFyFb6y70i8RIX64tLlauRl3XTSW1Dogg1xQK0Q+vi
+	 6g76NM8IWBRZVPPDyPM9pMyC7af4hIm59Yx8XWws6tMQFGxqb0ZXwuogL7yqgbfoiJiW3
+	 P+exjIRf/dmME97UqDYzfXO7KYzQobqj2/SWQC6kP/BRNErfeUJ4Gl09cAwCOrNeZK7wa
+	 uotgl5PAEagpf7x/U3/btkZhKlG5mPAV+inSgG2xIHST3UpHZspSBYi7CgMdHsrBroQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792844755;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed:X-LD-Processed:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=bKszCIBeoOpE0GX0h5+5wHlpbP8hNFZX+77PX+wbTEg=;
+	b=I80rc2sI8oQuwO6dpy+m8xKnZ2H+DbiI2+r+FVzfvbXh3/7M0GkgpuTeNMHFWaLmEOBU
+	 GgOmqM1wrjdvPc8pLDC1Tc953uShSYHzoaONFesaaYhwQc8NFAaSSYPEwdDtDFXU5393y
+	 +u4WwaGsCeRwvAjwEPUnZgQy464foop4+KB/9oiDZapBynERhUy0N5IUqqMxPr4HfH+TS
+	 y0O3OkgIQAxhQqwe4YQI3aboU6qEyZBzlnLUBv8cdQLj0ghRrdtQrJIIUh0P0kX5ehTf5
+	 +kE0Qc0YWQqvlK9dU+m+6xx8pfdxK1sboiRLAbpxACbr11Cz9c3KbrIPyFA0gVt5IBA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.nxp.com;
+	spf=pass smtp.mailfrom=oss.nxp.com;
+	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=IzZLxW2m;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.10
+Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010010.outbound.protection.outlook.com [52.101.69.10])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16DE8606A327
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 11:11:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 16DE8606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3E3F606A31B;
+	Sat, 24 Oct 2026 12:25:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3E3F606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=wIhJGjnd
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1792840267; x=1793099467;
-	bh=XKawUEas0+ewxVkQvD9UzFgid97iDDDPxd6wFpvvkpg=;
-	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=wIhJGjndxQn7TlWCFlzc02lHFzlNXVNkI+r0KQ3p3JkzkW36FelZCPdMCFTH0fAA3
-	 6/epOSfWNY3JtAL7Ni+SEGQibzXBSmSKfcXokc8Gnwe6ScbgNSh561Xz4WKw/p7PfH
-	 vnASIb0MohWftxnYRqO8sgdipqmayV9EkzsLbT9O4sDKBq7+25wku1kZuahqZNa4tE
-	 2+w923jvPoaDeHSNq9nTUhN+4AoubndwQRuJXV+ozr9ISRO6BY8wecwogCqg0vKpf2
-	 IhJFFe1/PkNJt913KQgCuCdCSgQUwuhxJ2SPtcgitq2TAIBrxvuBO2S4IDO/84PEfp
-	 Fm9xX254z6YXw==
-X-Pm-Submission-Id: 4jBcdP3wjHz1DFSp
-From: Michael McAllister <me@michaelmcallister.org>
-To: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Sat, 24 Oct 2026 12:10:08 +0100
-Subject: [PATCH v2 3/3] arm64: dts: qcom: Add Motorola Moto G10
-Message-ID: <1e50fab3692cc285621b2ad4a674dca79e5391ea.1792840208.git.me@michaelmcallister.org>
-In-Reply-To: <cover.1792840208.git.me@michaelmcallister.org>
-References: <cover.1792840208.git.me@michaelmcallister.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=IzZLxW2m
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MyCueLw6NBNNEksyTHUKf8JF4bJY6an9O+LAWld79HLsVwth0f+RUjy3k0ROcpoPuQ6qN/OLtP3cQBj6xItRM0ZCWDQRIPBcZO2m8JUpk4WnCdcBpu2sWaKV/4eOVoICD/YkAdAo+v3r91lx8idalxfyKtFmBOi6goCnoacjSq3yuRtAybkbAvk6bs1GCCDYcIDJ0OEtSnbD+ximEpdgnze0debUa7sLW/5Z0jXGj0ymGCAe3gRV1W8lXXLUGPX9M0Lw3dbxHyPD/W0rV813ALLq1Yce0PIDzCjy39PPTMH5wVQbbdJhFOjVv5KUZ9mb7irTkfKq4MSyT9seo+Ol8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bKszCIBeoOpE0GX0h5+5wHlpbP8hNFZX+77PX+wbTEg=;
+ b=lzfSG39aM1M3+i/ssslO0FsKPWiBCEhEZABN0epk6r48RZeNR8bLxHcvkcMPH/fhM+NvD1Dga9u9XSfrH43B7oW7l9+egSKMyd57JCBHHPJAJ5n2wNWlB6iVMRq/iYNyl35id6uwM/YIT/36ieGDzv+jKNe56VmjS7lJLDmHSdr3wMicWVFeaG6ZuGkr9gHe8cg9USNTt9gzc70Ad5TlWM4H892x54iXXsh1K+eb+F2eMOlj6AR3yZQth8k1f1r8bqaYcTomyFZ4O0eBdD2TOb8P+7+7rk3XYEZyypyqhi5lrixoZXwtI+0jJ4TK6UFx7JO4eRJOlkI3mVUTP6Dsvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bKszCIBeoOpE0GX0h5+5wHlpbP8hNFZX+77PX+wbTEg=;
+ b=IzZLxW2mfJe6uv+m4bbVCgOSdI02P0n8zQvlf60zGUdNkOxH8oXSxULRDtQ0nZzlWRGoCHj4LUvPqg0ogOV/HWC0B+2C8SID2SLS/W9WgZN9LS8vBU0YXdpl1q9joWrsPdP4srM9xH5XmS5azYlIItbZk46nkWlGO7pitUVP8PrY4PPUZNiIUo5R5Suu2M6B1sVkgbq5I2/8HBHQt9Ps9vqWPFvgM6t0y+H3galfDKTzVnNjleaKVybzpQlZLiOV02/Fy6t/4tyeoDANDioxRv2MG3cBkW8+1z3CHoitrYHbiP7+SqS8UpfBl28gtI4LTqc94di8ndODGukF8Hw8jw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
+ (2603:10a6:150:368::10) by PA4PR04MB7789.eurprd04.prod.outlook.com
+ (2603:10a6:102:c3::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Sat, 24 Oct
+ 2026 12:25:50 +0000
+Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
+ ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
+ ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0546.019; Sat, 24 Oct 2026
+ 12:25:49 +0000
+From: Larisa Grigore <larisa.grigore@oss.nxp.com>
+To: Larisa Grigore <larisa.grigore@oss.nxp.com>,
+	NXP S32 Linux Team <s32@nxp.com>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Avri Altman <avri.altman@sandisk.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <mkp@kernel.org>,
+	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
+	Ajay Neeli <ajay.neeli@amd.com>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Pedro Sousa <pedrom.sousa@synopsys.com>,
+	Joao Pinto <Joao.Pinto@synopsys.com>,
+	Hannes Reinicke <hare@suse.de>
+Cc: Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	linux-scsi@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	clizzi@redhat.com,
+	aruizrui@redhat.com,
+	eballetb@redhat.com,
+	echanude@redhat.com,
+	Frank Li <Frank.Li@nxp.com>,
+	Stanley Jhu <stanleyjhu@google.com>
+Subject: [PATCH 04/10] ufs: host: Add common Hibern8 TX FSM polling helper
+Date: Sat, 24 Oct 2026 14:25:27 +0200
+Message-ID: <20261024122533.3609180-5-larisa.grigore@oss.nxp.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
+References: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AS4P190CA0006.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5de::9) To GV2PR04MB12558.eurprd04.prod.outlook.com
+ (2603:10a6:150:368::10)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,417 +125,329 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|PA4PR04MB7789:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7daabb01-c862-4338-4466-08df31c9f034
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+ BCL:0;ARA:13230040|376014|7416014|23010399003|366016|19092799006|1800799024|261009223027099003|261021123027099003|261022105027099003|261022075727099003|261021121427099003|10067099003|56012099006|18002099003|22082099003|921020|11063799006;
+X-Microsoft-Antispam-Message-Info:
+ GWMim0leUA67t+uPdoaDyoN+2NDjktQm2B91QO9sCoAB4B2ED7rgV15z1VlBtJjk6VRgTvRkNjbE3cNi8Kh6ym0PWznH5wvJ1SArAVrBOdE2dKbcqW711XTDyQsw28X6dU6uRJJJks7FkEufhD3ODIcRmm3QNuiIS1WhDAfw8L3OxaTI92J3o94dH4ECPWs74sr8grCVXStkiC4e25hQPB4oBYB5MIUjkYlbXbKczB1quL6UT069XRfvQ2Ebhpyx74QJMGhzthwF6h1ewrieK4usjj77k3w1bwYaqijV22hd0rqmyEw5eMGySVT34shIeIUuNetolu/UgnGqX2Ciq+eYld1t6gQ+nfL60yYeGdqzx+L3KZJ3Nal7SKRcYz+BygBBBwF7jGka9XUlevG5+6DT7CaViqaggmsBbvn1j+kkNyPPzDF3eW+q/nL3MFlgjV6yeOHv7knEVeXmudBmYKF5ubA/a9BHpI8eMlgecIZFmvaQni9ZHVqPo0R2cd4onQMPIlgJFLxRuckMj1zQlInMoraWtsLVYnv3lcRH04bMgMBZa9hWEDpivh2kxf9iLHEorjwMP0aqr7CknCYu7v7w3tgiqRNvjQ7VkdxS1TH4qRlSJTyXANe9QTS+JnWrr+2h97IeS9Wmi+lUc6wO1W1JmGWv933vd8liBBB2p/GP6kzJ70Quh//RNZCutfGuqQ+D9VE8ifabuXNx7zHgpg==
+X-Forefront-Antispam-Report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(23010399003)(366016)(19092799006)(1800799024)(261009223027099003)(261021123027099003)(261022105027099003)(261022075727099003)(261021121427099003)(10067099003)(56012099006)(18002099003)(22082099003)(921020)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+ =?utf-8?B?dFRTdXZndCtKNk1Yb2dCSlV6M1pDMlc1N0pLeDlnMzFzTjJ0R01OekxIemxY?=
+ =?utf-8?B?cUVmSTlRRHdaR0dEdU5NYlRwZ2pGVFdGOEhoSjR2YkJmYnNkKzd5SWkzTDkv?=
+ =?utf-8?B?c0RRbzZSWThaTng1ZE5iUEIrU0UvMUtaTEszL0RNRHFPSDVsa2RWU3hMWEQ1?=
+ =?utf-8?B?QWd1OGJnMmYzWGtGdnAzVjltWkFrZEdWV1dEb1EzOHFDQmVkNTZTQndEY1Fy?=
+ =?utf-8?B?dFFrRnFIR0pWM3k2ZVA1VGk1MWlGelBmYkJ5MmdwbHIrVzVxdktIVTMyeEJI?=
+ =?utf-8?B?YWNQTWRJWU1yeWRkWUxIOWdlM3pZWkZjdTRSZHhxNzJmNDdnNEUxc0lKbE1P?=
+ =?utf-8?B?bmFybWtiSXQ0bnF6Qm1hUHBCTXdNbGpEWnhTM1FkRE5oZmdpK0N3eFA1d0Qw?=
+ =?utf-8?B?QW9pUFdRV1o2Ti9BZmNiVWJrUnZsZkgxc2laMldDSFpLREZ6ODNGR1BRZGFZ?=
+ =?utf-8?B?cWVnU0RJY05BY0E3VDFJRW1WdUlWa2x1KzFxWDNOaktYZWZYSlBidGlHZERw?=
+ =?utf-8?B?WENsblQ5NU5nbHF5STMzMlk0S090cXVKdVc4QUQ2YWpMd0crNTNaRDRoYy9Z?=
+ =?utf-8?B?NVdsTmRMZ3M0dG84eEtxMWJZWkI0Z0UwaEE4cDFNUFpnamZNMjZ0M1hUSEF6?=
+ =?utf-8?B?WkNGbldHSUhaOU5EdWc1R09Gb2ZyMUVJQUJhUm9mNHI4NVNDWnNqTnFQQ29w?=
+ =?utf-8?B?Y0xIMFNBd3I1RkVQQ1lUSGt5aHJWZkFiaEErSllEd2ZOTlQySkVZS3h1ZGJk?=
+ =?utf-8?B?SWZTMXh5VitXOHRnc21KL2dLeFVDQlY1VFBCNHpBV0dSbnk2Z05JRk05dFVI?=
+ =?utf-8?B?RytkcFZDSnUvKy91NERXV2h3S2cyQmk3K0ZXRGx6ZE40dVNYMkR1bG82WHNI?=
+ =?utf-8?B?UXNTb2tWL2RhZkI4SmloSWZBNkJtTkVzWFdDeWMrY21FTjZmVnNNbG9taFFX?=
+ =?utf-8?B?RmxLd3lTZllIUDFNOTF1OE44bnNKeUQ1Mkt6VVhFdk41b3oxeXJaQ3Z5SlRt?=
+ =?utf-8?B?QnYvQzlYMzJqVkM2ZW9xK1dJVmFOMUpHSm1RbHhoM2h3cHJBNEhMUGd6dkpK?=
+ =?utf-8?B?SDd4NzhrQ1kwdWEyY3oxNnlxNDhnT1VERUZtMHVab1djQ29JR01Uek04TWEz?=
+ =?utf-8?B?blF3ck5hMCt3VHBmWTkrNisyU2FBYzBva3J3UVBGdjBwRDVWRmpPMG43R2NT?=
+ =?utf-8?B?THBEb05yZk9wbyt2ZThESUZWaFVoS1NLNzcxcVk0T3NoS2xzZjg1eFUyVlNr?=
+ =?utf-8?B?bzRDbWJpT0pMMU81SnFscGJRd3FoVGx6UlN2S0wvNllxRVFjQVhySjM1dzEy?=
+ =?utf-8?B?Mkp6TmtENXFUNnlrdHJyT3MyeE5PR09KeXJZdjVBOU1ZcTVXS0ZJajNoMXBH?=
+ =?utf-8?B?bEhnZVFvUXlCQk1uTEU1OCt1U3p3MTlyWGtrZWxwVkk5bkNiYy90citBNDZy?=
+ =?utf-8?B?NnhqYXphMHREWmFKU2FVRFh4cm5iYXllelRoMlpYMmdCd3U0cnBRVVZ3UjlQ?=
+ =?utf-8?B?YlV4OXNoZnZ3V3VqQjhRamlndmVvQWlVQ1pXaFNPYk9xRnZLNW1YUGpSaFI1?=
+ =?utf-8?B?ZVhaZ2RYTkdwZUF0c3pIQ3dmQ1VFU2VzWXpNVEtwaVdta0hnRWlkK3Bnc1lZ?=
+ =?utf-8?B?K0MrVkE0V0l3Y3BJNkZ6akNlUFdQZXZGK2ZXZ0hBK3VuOU9yKytzTUtmOGpH?=
+ =?utf-8?B?Qm90MVBQQnNHenFJK1U2M1hxa3BjVGxXWFhuV2MwdzhaYmFPTHppd21SUHBq?=
+ =?utf-8?B?aW9NNmNMSk9KSjFQdVBxTnVUMG9BWUptaXBjQlN4dnI4bUJGSW9UclNsTzZt?=
+ =?utf-8?B?SVZTaG5nNktzTFRudjBZNEtsSURGZ0tsdmpKSXN3YS9tZnlzNUV3Rnpkb0RX?=
+ =?utf-8?B?cHF4bitoYS94WVltdDRrNzJOKzJOaEprVVdJQnVPaXkwM21UWjBibjZrOXlY?=
+ =?utf-8?B?aXNRT0wvVUZOdmRCNVdtUWNBTTYxdGJXaXlyYkxYN3hqTEFMdmIzajlMVis0?=
+ =?utf-8?B?WGMxRUl0Y0MyMEtpdW8rZWtYVGI5OUVKWVN6eWI2ZlFyNExWaWVYdGo0UXJX?=
+ =?utf-8?B?ZUFYY1NmbDlLRzQ2RlNGaDRFYXFtbjdUMkYySUl0eUZtS2ZxUmwxb0cxWUpt?=
+ =?utf-8?B?SzVUR1JZKzFHc0Q1OVdsUFY1SitqdWs1ajdPWnNaU3ZmTXFXejVUL3ZYdGZI?=
+ =?utf-8?B?cHNHaHlvaFlQNXc3WWdoU0tOUzQyRWtCUUQ5WjVXWnE1TFBEWFJQYlhoazlk?=
+ =?utf-8?B?Zmg3VlU3NXI3OUw1ZVNoa3lmNWNKS2Y3dU5hVDcrTy90aGpsS2Q0a3NsM25M?=
+ =?utf-8?B?NGQxTEs0WlR0Y3AvTzRxTVV1R1lnWEwwb3l1NHdqTUFVM2Z0OUF5Zz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7daabb01-c862-4338-4466-08df31c9f034
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 12:25:49.8781
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TGyf4p7BQWZSFjSUlv+KuGJODlMoleLn0Bjs/o5XEwCwUophtElf/G/eo4bIsB6/fViYdxNYetwIAUYgUzibbg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7789
 
-Add an initial board description for the SM4250-based Motorola Moto G10
-(codenamed capri), including eMMC, USB-C, buttons, GPU, Wi-Fi and remote
-processors. Describe the board-specific firmware carveouts and use the
-shared PM6125 and PMI632 definitions. Put the modem, ADSP and GPU firmware
-paths under qcom/motorola/capri/.
+Factor out the common logic used to poll TX_FSM_STATE until the TX lanes
+enter Hibern8 into ufshcd_check_hibern8().
 
-Use the firmware framebuffer until native panel support is available.
-Retain the GCC display AHB and AXI clocks and leave DISPCC disabled to
-preserve the bootloader display configuration.
+The HiSilicon and Qualcomm drivers currently implement similar checks
+using the UniPro TX_FSM_STATE attribute after link/PHY bring-up. Move
+this logic to a common helper in ufshcd so it can be shared across host
+controller drivers.
 
-Leave Bluetooth disabled until the WCN3950 shutdown fixes are merged.
-Panel, touchscreen, amplifier, sound-card and battery-monitor support
-depend on separate driver and binding submissions.
+Switch the HiSilicon and Qualcomm drivers to use the new helper and drop
+their local implementations. While at it, normalize the "TX lane failed to
+reach Hibern8" error path to return -ETIMEDOUT instead of the raw
+TX_FSM_STATE value (qcom) or -1 (hisi), so all callers get a proper errno.
+This is an intentional, harmless change of the returned error value; the
+pass/fail behaviour at the call sites is unchanged.
 
-Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+Unlike the initial implementation, the timeout error is now reported only
+once by ufshcd_dme_check_tx_hibern8() after its final check, instead of
+per lane.
+
+This also prepares for reusing the same UniPro-specific Hibern8 check in
+a subsequent commit.
+
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
+Reviewed-by: Stanley Jhu <stanleyjhu@google.com>
+Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../boot/dts/qcom/sm4250-motorola-capri.dts   | 374 ++++++++++++++++++
- 2 files changed, 375 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
+ drivers/ufs/core/ufshcd.c   | 73 +++++++++++++++++++++++++++++++++++++
+ drivers/ufs/host/ufs-hisi.c | 48 +-----------------------
+ drivers/ufs/host/ufs-qcom.c | 42 +--------------------
+ include/ufs/ufshcd.h        |  3 ++
+ 4 files changed, 78 insertions(+), 88 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 88230c4e0..6f2dd88a1 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -383,6 +383,7 @@ shikra-iqs-evk-imx577-camera-dtbs	:= shikra-iqs-evk.dtb shikra-iqs-evk-imx577-ca
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk-imx577-camera.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk-imx577-camera.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-imx577-camera.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-motorola-capri.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts b/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
-new file mode 100644
-index 000000000..08807953a
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
-@@ -0,0 +1,374 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (c) 2026 Michael McAllister <me@michaelmcallister.org>
+diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
+index ca8329052cbc..c8b7248a769a 100644
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -4448,6 +4448,79 @@ int ufshcd_dme_get_attr(struct ufs_hba *hba, u32 attr_sel,
+ }
+ EXPORT_SYMBOL_GPL(ufshcd_dme_get_attr);
+ 
++/**
++ * ufshcd_poll_tx_hibern8_lanes - Check TX_FSM_STATE of all TX lanes once
++ * @hba: host controller instance
++ * @num_lanes: number of TX lanes to check
 + *
-+ * PM6125 regulator definitions derived from sm4250-oneplus-billie2.dts:
-+ * Copyright (c) 2021 Iskren Chernev <iskren.chernev@gmail.com>
++ * Read TX_FSM_STATE for every lane and verify it reached Hibern8.
++ *
++ * Return: 0 if all lanes are in Hibern8, -EAGAIN if any lane is not (yet)
++ * in Hibern8, or a negative errno (e.g. -ETIMEDOUT from a hard UIC command
++ * timeout) if the attribute read fails.
 + */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/arm/qcom,ids.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include "sm4250.dtsi"
-+#include "pm6125.dtsi"
-+#include "pmi632.dtsi"
-+
-+/delete-node/ &pil_adsp_mem;
-+/delete-node/ &pil_ipa_fw_mem;
-+/delete-node/ &pil_ipa_gsi_mem;
-+/delete-node/ &pil_gpu_mem;
-+
-+/ {
-+	model = "Motorola Moto G10";
-+	compatible = "motorola,capri", "qcom,sm4250";
-+
-+	/* Used by the bootloader to select the board */
-+	qcom,msm-id = <QCOM_ID_SM4250 0x10000>;
-+	qcom,board-id = <0 0xb200>;
-+
-+	aliases {
-+		display0 = &mdss;
-+		mmc0 = &sdhc_1;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		stdout-path = "display0";
-+
-+		framebuffer0: framebuffer@5c000000 {
-+			compatible = "simple-framebuffer";
-+			reg = <0 0x5c000000 0 (720 * 1600 * 4)>;
-+			clocks = <&gcc GCC_DISP_AHB_CLK>,
-+				 <&gcc GCC_DISP_HF_AXI_CLK>;
-+			display = <&mdss>;
-+			format = "a8r8g8b8";
-+			height = <1600>;
-+			stride = <(720 * 4)>;
-+			vddio-supply = <&vreg_l9a>;
-+			width = <720>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		pinctrl-0 = <&volume_up_default>;
-+		pinctrl-names = "default";
-+
-+		key-volume-up {
-+			debounce-interval = <15>;
-+			gpios = <&pm6125_gpios 5 GPIO_ACTIVE_LOW>;
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			wakeup-source;
-+		};
-+	};
-+};
-+
-+&dispcc {
-+	/* Preserve the bootloader display until the native panel is supported */
-+	status = "disabled";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/motorola/capri/a610_zap.mdt";
-+};
-+
-+&pil_cdsp_mem {
-+	reg = <0 0x51a00000 0 0x800000>;
-+};
-+
-+&pm6125_gpios {
-+	volume_up_default: volume-up-state {
-+		pins = "gpio5";
-+		function = "normal";
-+		bias-pull-up;
-+		input-enable;
-+		power-source = <0>;
-+	};
-+};
-+
-+&pmi632_typec {
-+	status = "okay";
-+
-+	connector {
-+		compatible = "usb-c-connector";
-+		data-role = "dual";
-+		pd-disable;
-+		power-role = "dual";
-+		self-powered;
-+		typec-power-opmode = "default";
-+		vbus-supply = <&pmi632_vbus>;
-+
-+		port {
-+			pmi632_hs_in: endpoint {
-+				remote-endpoint = <&usb_dwc3_hs>;
-+			};
-+		};
-+	};
-+};
-+
-+&pmi632_vbus {
-+	regulator-min-microamp = <500000>;
-+	regulator-max-microamp = <500000>;
-+
-+	status = "okay";
-+};
-+
-+&pon_pwrkey {
-+	status = "okay";
-+};
-+
-+&pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/motorola/capri/adsp2.mdt";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_mpss {
-+	firmware-name = "qcom/motorola/capri/modem.mdt";
-+
-+	status = "okay";
-+};
-+
-+&reserved_memory {
-+	/* The ADSP and following carveouts differ from the SM6115 defaults */
-+	pil_adsp_mem: memory@52200000 {
-+		reg = <0 0x52200000 0 0x1c00000>;
-+		no-map;
-+	};
-+
-+	pil_ipa_fw_mem: memory@53e00000 {
-+		reg = <0 0x53e00000 0 0x10000>;
-+		no-map;
-+	};
-+
-+	pil_ipa_gsi_mem: memory@53e10000 {
-+		reg = <0 0x53e10000 0 0x5000>;
-+		no-map;
-+	};
-+
-+	pil_gpu_mem: memory@53e15000 {
-+		reg = <0 0x53e15000 0 0x2000>;
-+		no-map;
-+	};
-+
-+	/* Bootloader debug data */
-+	memory@aef9d800 {
-+		reg = <0 0xaef9d800 0 0x62800>;
-+		no-map;
-+	};
-+
-+	ramoops@af000000 {
-+		compatible = "ramoops";
-+		reg = <0 0xaf000000 0 0xbf800>;
-+		console-size = <0x40000>;
-+		pmsg-size = <0x40000>;
-+		record-size = <0x20000>;
-+	};
-+};
-+
-+&rpm_requests {
-+	regulators-0 {
-+		compatible = "qcom,rpm-pm6125-regulators";
-+
-+		vreg_s6a: s6 {
-+			regulator-min-microvolt = <320000>;
-+			regulator-max-microvolt = <1456000>;
-+		};
-+
-+		vreg_s7a: s7 {
-+			regulator-min-microvolt = <1280000>;
-+			regulator-max-microvolt = <2040000>;
-+		};
-+
-+		vreg_s8a: s8 {
-+			regulator-min-microvolt = <1064000>;
-+			regulator-max-microvolt = <1304000>;
-+		};
-+
-+		vreg_l1a: l1 {
-+			regulator-min-microvolt = <952000>;
-+			regulator-max-microvolt = <1152000>;
-+		};
-+
-+		vreg_l4a: l4 {
-+			regulator-min-microvolt = <488000>;
-+			regulator-max-microvolt = <1000000>;
-+		};
-+
-+		vreg_l5a: l5 {
-+			regulator-min-microvolt = <1648000>;
-+			regulator-max-microvolt = <3056000>;
-+		};
-+
-+		vreg_l6a: l6 {
-+			regulator-min-microvolt = <576000>;
-+			regulator-max-microvolt = <656000>;
-+		};
-+
-+		vreg_l7a: l7 {
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1304000>;
-+		};
-+
-+		vreg_l8a: l8 {
-+			regulator-min-microvolt = <640000>;
-+			regulator-max-microvolt = <640000>;
-+		};
-+
-+		vreg_l9a: l9 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-boot-on;
-+		};
-+
-+		vreg_l10a: l10 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1904000>;
-+		};
-+
-+		vreg_l11a: l11 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1952000>;
-+		};
-+
-+		vreg_l12a: l12 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <1984000>;
-+		};
-+
-+		vreg_l13a: l13 {
-+			regulator-min-microvolt = <1504000>;
-+			regulator-max-microvolt = <1952000>;
-+		};
-+
-+		vreg_l14a: l14 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1904000>;
-+		};
-+
-+		vreg_l15a: l15 {
-+			regulator-min-microvolt = <2920000>;
-+			regulator-max-microvolt = <3232000>;
-+		};
-+
-+		vreg_l16a: l16 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		vreg_l17a: l17 {
-+			regulator-min-microvolt = <1304000>;
-+			regulator-max-microvolt = <1304000>;
-+		};
-+
-+		vreg_l18a: l18 {
-+			regulator-min-microvolt = <1104000>;
-+			regulator-max-microvolt = <1304000>;
-+		};
-+
-+		vreg_l19a: l19 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		vreg_l20a: l20 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		vreg_l21a: l21 {
-+			regulator-min-microvolt = <2400000>;
-+			regulator-max-microvolt = <3544000>;
-+		};
-+
-+		vreg_l22a: l22 {
-+			regulator-min-microvolt = <2952000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		vreg_l23a: l23 {
-+			regulator-min-microvolt = <3296000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		vreg_l24a: l24 {
-+			regulator-min-microvolt = <2704000>;
-+			regulator-max-microvolt = <3544000>;
-+		};
-+	};
-+};
-+
-+&sdhc_1 {
-+	pinctrl-0 = <&sdc1_state_on>;
-+	pinctrl-1 = <&sdc1_state_off>;
-+	pinctrl-names = "default", "sleep";
-+	vmmc-supply = <&vreg_l24a>;
-+	vqmmc-supply = <&vreg_l11a>;
-+	max-frequency = <50000000>;
-+	non-removable;
-+
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32764>;
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <14 4>;
-+};
-+
-+&usb {
-+	/* The connector exposes only the USB 2.0 data pair */
-+	qcom,select-utmi-as-pipe-clk;
-+
-+	status = "okay";
-+};
-+
-+&usb_dwc3 {
-+	maximum-speed = "high-speed";
-+	phy-names = "usb2-phy";
-+	phys = <&usb_hsphy>;
-+};
-+
-+&usb_dwc3_hs {
-+	remote-endpoint = <&pmi632_hs_in>;
-+};
-+
-+&usb_hsphy {
-+	vdd-supply = <&vreg_l4a>;
-+	vdda-phy-dpdm-supply = <&vreg_l15a>;
-+	vdda-pll-supply = <&vreg_l12a>;
-+
-+	status = "okay";
-+};
-+
-+&wifi {
-+	vdd-0.8-cx-mx-supply = <&vreg_l8a>;
-+	vdd-1.3-rfa-supply = <&vreg_l17a>;
-+	vdd-1.8-xo-supply = <&vreg_l16a>;
-+	vdd-3.3-ch0-supply = <&vreg_l23a>;
-+	qcom,calibration-variant = "Motorola_Capri";
-+
-+	status = "okay";
-+};
-+
-+&xo_board {
-+	clock-frequency = <19200000>;
-+};
++static int ufshcd_poll_tx_hibern8_lanes(struct ufs_hba *hba,
++					unsigned int num_lanes)
++{
++	u32 tx_fsm_val = 0;
++	unsigned int i;
++	int err;
++
++	for (i = 0; i < num_lanes; i++) {
++		err = ufshcd_dme_get(hba,
++				UIC_ARG_MIB_SEL(TX_FSM_STATE,
++					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(i)),
++				&tx_fsm_val);
++		if (err) {
++			dev_err(hba->dev,
++				"%s: unable to get TX_FSM_STATE for lane %u, err %d\n",
++				__func__, i, err);
++			return err;
++		}
++
++		if (tx_fsm_val != UFS_TX_STATE_HIBERN8)
++			return -EAGAIN;
++	}
++
++	return 0;
++}
++
++/**
++ * ufshcd_dme_check_tx_hibern8 - Check if all TX lanes entered Hibern8 state
++ * @hba: host controller instance
++ * @num_lanes: number of TX lanes to check
++ * @timeout_ms: overall timeout in milliseconds shared by all lanes
++ *
++ * Return: 0 on success, negative errno on failure.
++ */
++int ufshcd_dme_check_tx_hibern8(struct ufs_hba *hba, unsigned int num_lanes,
++				unsigned int timeout_ms)
++{
++	int err, ret;
++
++	if (!num_lanes)
++		return -EINVAL;
++
++	/*
++	 * Poll every lane until ufshcd_poll_tx_hibern8_lanes() stops returning
++	 * -EAGAIN, i.e. all lanes reached HIBERN8 (err == 0) or a real error
++	 * was hit.
++	 */
++	ret = read_poll_timeout(ufshcd_poll_tx_hibern8_lanes, err,
++				err != -EAGAIN, 200,
++				(u64)timeout_ms * USEC_PER_MSEC, false,
++				hba, num_lanes);
++	if (ret) {
++		dev_err(hba->dev,
++			"%s: timeout waiting for TX lanes to enter HIBERN8\n",
++			__func__);
++		return ret;
++	}
++
++	return err;
++}
++EXPORT_SYMBOL_GPL(ufshcd_dme_check_tx_hibern8);
++
+ /**
+  * ufshcd_dme_rmw - get modify set a DME attribute
+  * @hba: per adapter instance
+diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
+index fb44a776e9e7..b84075dfe00d 100644
+--- a/drivers/ufs/host/ufs-hisi.c
++++ b/drivers/ufs/host/ufs-hisi.c
+@@ -22,50 +22,6 @@
+ #include <ufs/ufshci.h>
+ #include <ufs/ufs_quirks.h>
+ 
+-static int ufs_hisi_check_hibern8(struct ufs_hba *hba)
+-{
+-	int err = 0;
+-	u32 tx_fsm_val_0 = 0;
+-	u32 tx_fsm_val_1 = 0;
+-	unsigned long timeout = jiffies + msecs_to_jiffies(HBRN8_POLL_TOUT_MS);
+-
+-	do {
+-		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
+-				      &tx_fsm_val_0);
+-		err |= ufshcd_dme_get(hba,
+-		    UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
+-		if (err || (tx_fsm_val_0 == UFS_TX_STATE_HIBERN8 &&
+-			tx_fsm_val_1 == UFS_TX_STATE_HIBERN8))
+-			break;
+-
+-		/* sleep for max. 200us */
+-		usleep_range(100, 200);
+-	} while (time_before(jiffies, timeout));
+-
+-	/*
+-	 * we might have scheduled out for long during polling so
+-	 * check the state again.
+-	 */
+-	if (time_after(jiffies, timeout)) {
+-		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
+-				     &tx_fsm_val_0);
+-		err |= ufshcd_dme_get(hba,
+-		 UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
+-	}
+-
+-	if (err) {
+-		dev_err(hba->dev, "%s: unable to get TX_FSM_STATE, err %d\n",
+-			__func__, err);
+-	} else if (tx_fsm_val_0 != UFS_TX_STATE_HIBERN8 ||
+-			 tx_fsm_val_1 != UFS_TX_STATE_HIBERN8) {
+-		err = -1;
+-		dev_err(hba->dev, "%s: invalid TX_FSM_STATE, lane0 = %d, lane1 = %d\n",
+-			__func__, tx_fsm_val_0, tx_fsm_val_1);
+-	}
+-
+-	return err;
+-}
+-
+ static void ufs_hisi_clk_init(struct ufs_hba *hba)
+ {
+ 	struct ufs_hisi_host *host = ufshcd_get_variant(hba);
+@@ -224,9 +180,7 @@ static int ufs_hisi_link_startup_pre_change(struct ufs_hba *hba)
+ 
+ 	/* Unipro VS_mphy_disable */
+ 	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(0xD0C1, 0x0), 0x0);
+-	err = ufs_hisi_check_hibern8(hba);
+-	if (err)
+-		dev_err(hba->dev, "ufs_hisi_check_hibern8 error\n");
++	err = ufshcd_dme_check_tx_hibern8(hba, 2, HBRN8_POLL_TOUT_MS);
+ 
+ 	if (!(host->caps & UFS_HISI_CAP_PHY10nm))
+ 		ufshcd_writel(hba, UFS_HCLKDIV_NORMAL_VALUE, UFS_REG_HCLKDIV);
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index d273e16313a1..815ca82a0878 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -382,46 +382,6 @@ static int ufs_qcom_init_lane_clks(struct ufs_qcom_host *host)
+ 	return 0;
+ }
+ 
+-static int ufs_qcom_check_hibern8(struct ufs_hba *hba)
+-{
+-	int err;
+-	u32 tx_fsm_val;
+-	unsigned long timeout = jiffies + msecs_to_jiffies(HBRN8_POLL_TOUT_MS);
+-
+-	do {
+-		err = ufshcd_dme_get(hba,
+-				UIC_ARG_MIB_SEL(TX_FSM_STATE,
+-					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
+-				&tx_fsm_val);
+-		if (err || tx_fsm_val == UFS_TX_STATE_HIBERN8)
+-			break;
+-
+-		/* sleep for max. 200us */
+-		usleep_range(100, 200);
+-	} while (time_before(jiffies, timeout));
+-
+-	/*
+-	 * we might have scheduled out for long during polling so
+-	 * check the state again.
+-	 */
+-	if (time_after(jiffies, timeout))
+-		err = ufshcd_dme_get(hba,
+-				UIC_ARG_MIB_SEL(TX_FSM_STATE,
+-					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
+-				&tx_fsm_val);
+-
+-	if (err) {
+-		dev_err(hba->dev, "%s: unable to get TX_FSM_STATE, err %d\n",
+-				__func__, err);
+-	} else if (tx_fsm_val != UFS_TX_STATE_HIBERN8) {
+-		err = tx_fsm_val;
+-		dev_err(hba->dev, "%s: invalid TX_FSM_STATE = %d\n",
+-				__func__, err);
+-	}
+-
+-	return err;
+-}
+-
+ static void ufs_qcom_select_unipro_mode(struct ufs_qcom_host *host)
+ {
+ 	ufshcd_rmwl(host->hba, QUNIPRO_SEL, QUNIPRO_SEL, REG_UFS_CFG1);
+@@ -607,7 +567,7 @@ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
+ 		break;
+ 	case POST_CHANGE:
+ 		/* check if UFS PHY moved from DISABLED to HIBERN8 */
+-		err = ufs_qcom_check_hibern8(hba);
++		err = ufshcd_dme_check_tx_hibern8(hba, 1, HBRN8_POLL_TOUT_MS);
+ 		ufs_qcom_enable_hw_clk_gating(hba);
+ 		ufs_qcom_ice_enable(host);
+ 		ufs_qcom_config_ice_allocator(host);
+diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
+index dfd302f2dc7c..0d9d0a26eb20 100644
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1556,6 +1556,9 @@ extern int ufshcd_dme_set_attr(struct ufs_hba *hba, u32 attr_sel,
+ 			       u8 attr_set, u32 mib_val, u8 peer);
+ extern int ufshcd_dme_get_attr(struct ufs_hba *hba, u32 attr_sel,
+ 			       u32 *mib_val, u8 peer);
++extern int ufshcd_dme_check_tx_hibern8(struct ufs_hba *hba,
++				       unsigned int num_lanes,
++				       unsigned int timeout_ms);
+ extern int ufshcd_change_power_mode(struct ufs_hba *hba,
+ 				    struct ufs_pa_layer_attr *pwr_mode,
+ 				    enum ufshcd_pmc_policy pmc_policy);
+-- 
+2.43.0
+
