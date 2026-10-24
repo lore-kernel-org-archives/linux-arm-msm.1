@@ -1,16 +1,16 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.84.66
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.72.33
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792844754;
-	b=2RrWfy8pE4+NqK9HHueVwShWL68Qcv6H8RmiadafZophyOiGlE1Ym9O4ELgsi5thxyhV
-	 F6Esf2WFWrpvHcsCYxrlbAHHcM7yB5vU3nI3D8cH8ZqWy64d30rneHC56Cc8L9Ml4ZtlL
-	 gzJcFVLZO1CZaZMnR6gbjJVcjzNe2GDSQU+rYcQkYN7mTeJFm/II5jp4NAVLVka/J/3bJ
-	 rem9v0mE/Qf2geE7MFpY5QPdZwuz1P9XuYYgWljKtpQB3WralWqLMbkYT+Yu43ijhPKXd
-	 DVDRM8bdYI0BBjh7QiXhItX0VHKNnXxB2ubOfZURIahv/DADhcFPtNVA2YwhJA64rCw==
+	t=1792844750;
+	b=C5rrd8OKMGmmb8vPnwW9PDhI+S5ZVX68G/Hk1RZ3fN53mCt539W455de7y3JGGL1Bwn8
+	 lmhbOh9n9e6wxXPBFr/us5xY/kWbAm/7PVBJC30ZDTGBGgpgJMursjECKrLHpRg0xfOLk
+	 MS3RdhdDu7BbH68r5/+80vwGOWISeLFCQIyhQOcE9Lryk+jAnPpBEhuJFuywUwBAe0e1z
+	 Z3lwuJWSRkQGL1jxs9RexXaV3kieclg+c+OzirFIR51qhFZkA62hgCjAiX0g8/8rMxEvp
+	 DwEqi/og8FVwJ2s24ZYPRg21KBwiaFx2aMolG1Pq8b3Bd0UcgK4a4BimBXtVUnhIJsQ==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792844754;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792844750;
 	h=DMARC-Filter:DKIM-Signature:Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 Date:Message-ID:X-Mailer:Content-Type:Content-Transfer-Encoding:
+	 X-ClientProxiedBy:MIME-Version:
 	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
 	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
 	 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed:X-LD-Processed:
@@ -26,54 +26,54 @@ ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
 	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
 	 X-MS-Exchange-CrossTenant-UserPrincipalName:
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=z+OoI2rN3KWppGz8+WmW53ZP+XzL4h5IzNMAq9FU0W8=;
-	b=YkH9623Z+XVSKZCw1rJWzKQ+M/YfLjx+auQP/43/9oYezCnti7/hH2p1Wa+0rUVpPBoG
-	 YaXYiv4xk1RwZAKZHD4TlAljBxEQZcC8bZe1hbgalc+Qjcr73EwWJdvCgSIqMlKdW4uXn
-	 WpKheUWUPejw4Bc0tWnqJiYOpPxkWmER8I7LUCxhmt8g+5nBO3MC/Vh8+LgVVO8U65nNy
-	 G5ihlFzoYMf8fLkJpAk+F2w72fkNJ74nWitmC9lWLlPZuNg5cez47HX5HpgTmAsC2NN5j
-	 7CplRL4vHEmOd2iOviSqLq7xnH3d3TUwLcTHIEbEipOq2g1/rnmU2EVCtgOQSgElD5g==
+	bh=khuXjQS6Mj0XgL5YItREt8XVu/nFbq7rHTl2M+SzVyU=;
+	b=tNGMI+cHfFEHDh+1Xk0dhl6v3i35ed91mznTpOjwEuo9JlTIxcCWKYcOZBFYukyjVe84
+	 psQ7ucwV93xSWmYmRvu1ztrTG9KRgAA8sfq7NEMkytoaZnhxFRbrMkcmm4sdlamecBjh/
+	 AvwJ1LnBBhd8/SxBJbN0yP5NVH85Od3iHj3bWuQICx7DvPAoXcvOmnClnakiuJSlI3Nqw
+	 lpnPh+ezJV32Dp9F0P6tB08Q+uTctIbMdh1RbtQeqkVBIvTH+FGRtAjd3g/cLTpC9bgSQ
+	 r3xH/tYMJhHp5yyPgykmDjD5nsSmnNzaTHCjbQ6McVbA07yI0pBDdvlwCTE1eQz70iw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.nxp.com;
 	spf=pass smtp.mailfrom=oss.nxp.com;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=WqURwvlV;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.84.66
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010066.outbound.protection.outlook.com [52.101.84.66])
+	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tw6jXD7E;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.72.33
+Received: from AM0PR02CU008.outbound.protection.outlook.com (mail-westeuropeazon11013033.outbound.protection.outlook.com [52.101.72.33])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A049606A32F;
-	Sat, 24 Oct 2026 12:25:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2A049606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AF60606A31A;
+	Sat, 24 Oct 2026 12:25:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4AF60606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=WqURwvlV
+	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tw6jXD7E
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yP5+LO8v1Zfjwh3ihsWXd/7BDtpZGD2GL5IwWZHI5AaJDIzR0/6Bq31loSGMPMO1BZ8A3XaOK+YJt9zzuyc5lqIS3lK/tUZk0VwoY/WHSJ7zKbTlPcR6G1pTgI0qhCrAa+QeA5dqG1EZ+La5jkFRjqJo43cGOl3zXkGSLWml0toUolhcqRkH13Xko/fU7TjkX6DLtG6iM6sA43ZqCEWRgU1xVmHxIwx+9UX8+3SHnFi9CpAeIEAn3KkFFey0X05mInC4ww5pZXj41MdUkZBVxc6NJnLArgjC0EuJ3je/OyY00HFI2LCOTfjv0tg9bSnpd4kYdLXA7SHd6FULKB39+Q==
+ b=kbhJZRM9NsZROEhK/CpmAa9nLSL5mOP/dtewBsRG11gNoo535d5vIsJnFcMF+DfDQ3d4ziJfTABgLyu5mhxxPvdpbJxAP8G2yx53BArKuuNYq0y1KrBRB4atoxsAPsD9dX/Aahsf7fbybhPXDd5rCln/ivrwRRd31L1qSzBNKnlQStN5b/M6p5xBn0wfppmwvbXjKpuzvgCy0Tk+edaFhiWvIXfQvRSnJ5BnDO5/Nswa9o4bSS86rk8svDQVlpZ9b0yAF81yR5KSmxYxYvQrFeM9XSHK3aVTapb21BXQhfaScpgCQ12rQLhVAlly2cDvCuEra+40bTJQhRdI67dCnQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z+OoI2rN3KWppGz8+WmW53ZP+XzL4h5IzNMAq9FU0W8=;
- b=DunVTcZYQRIWq0QTD/9ofdf00hrs84WMkCzlm5uuf1YvWQDJNap6r1VugF8UklIZX/IHKv0+UGjXGEQY+xF6mFiSRj685f+caCHsNW23DOMQOMNlW3JZFLawfnl/ZKJVNdmpoWf2IkfRvrA7vOX1HsdxxXBv0mCGVPW2GF1jGpEEjEsYl20jMvzA/ZSCQg71BF53bgdbZeHODTPbSdKDa07v8Kr1Y+WqxELoncAblXyCYnk36oCoqUiGvNC4Oqupzw0Dlg/mhWkVDVpSY2WdD5vgq3ViEqg53MBA/JAQWK4EXo/qPQUo50qkhHq0a5Dt8GTR+bmXfDkwXG5hrL356Q==
+ bh=khuXjQS6Mj0XgL5YItREt8XVu/nFbq7rHTl2M+SzVyU=;
+ b=c5XVGAAXzC+5CMVMULIp06pxE4ImvWA6p+U8Ld1ITa35xCN4CrVck3Koo3THSNLnIEfnpVfSlbl2MM9kfawcYyhR2vzKwtBJJKAQ129upEIXzxz3DPLUq1ruGoQdRyuLJDXG1s3V1Vxqt2rn3GYM/w068p1rzMxzUqYPS1RJ0edUnXGFdGFgiVFq617jFPjJLxz4XjmAlS0N15sSNv5N5U0HpkLRqjNXeuxbccINxdw110LLMT28Sh8RhNPmnoKOKjNRbDwf9OddTk8ZWE+3uMq7/fv15uzvUoVRIZ8DZWF+kEfcapa3O+pqRZ4hM+aYX/Ov448zbR7xGav7nkCeow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z+OoI2rN3KWppGz8+WmW53ZP+XzL4h5IzNMAq9FU0W8=;
- b=WqURwvlVjOvM8k1oupjyl+cJ4AgbOST6zrkrofABX+ija1BMO/wo9YMMokXkXkgSIkliYVuPuEI7+PGTaMTH/1EWKCJOxuVhwxlx77Pdj0T6e13xfxJUkPiwrnJwxwCdcL0+jhhbLIs6XUXq0SFIewSz773fpnqw0a34vAdnlu0n58wus1kCuvg1NaCP7yudcln8nlo20WeA+ivZ5rF7K2rTFnvDeKtmSJX7VUmedyUqOkxarCgWmQLwQzlNxjgFfqLzO3orPLFWH3oVKHzc9HvYaM0WKc54igRz6FmWvyDfJmQlKa/lI14dJvrznxWYSnDxq0aDXunnxadhfeie8w==
+ bh=khuXjQS6Mj0XgL5YItREt8XVu/nFbq7rHTl2M+SzVyU=;
+ b=tw6jXD7EZEtCsd03XHfanaWymUeUagxb6ALjfgOqCz5xF47DAUuPFPydH3HeuJcp1oYHtDFYllUHe089M7do4yTPG+AT0lX0PMXd5CYG6fcvfw+8G/fAGMO9Vgqc2ALgAykcXO0d238x0hoMsDndapgFZvD3vLoSGGsq0a4EiqT0eOWhC7lQnCXB21zKHGqRQ+ojx5GV5XiRnp2n2GBQCesRpM1hT6vY8t5ZEOJrAU92rqmYexrB4vc2CmWLQN9XQ47UIuAS4UbXBL3z5wbuWiB7ikMCrk85uGtTS4+k7T/hRywUBu7ND8kk8iHKQ3yaVf96durJJOQ1fGgua+wWEg==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10) by AS8PR04MB8483.eurprd04.prod.outlook.com
- (2603:10a6:20b:34b::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.21; Sat, 24 Oct
- 2026 12:25:48 +0000
+ (2603:10a6:150:368::10) by PA4PR04MB9687.eurprd04.prod.outlook.com
+ (2603:10a6:102:270::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.20; Sat, 24 Oct
+ 2026 12:25:43 +0000
 Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
  ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
  ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0546.019; Sat, 24 Oct 2026
- 12:25:48 +0000
+ 12:25:42 +0000
 From: Larisa Grigore <larisa.grigore@oss.nxp.com>
 To: Larisa Grigore <larisa.grigore@oss.nxp.com>,
 	NXP S32 Linux Team <s32@nxp.com>,
@@ -102,18 +102,15 @@ Cc: Pengutronix Kernel Team <kernel@pengutronix.de>,
 	clizzi@redhat.com,
 	aruizrui@redhat.com,
 	eballetb@redhat.com,
-	echanude@redhat.com,
-	Frank Li <Frank.Li@nxp.com>
-Subject: [PATCH 03/10] ufs: unipro: Add TX/RX FSM state attributes
-Date: Sat, 24 Oct 2026 14:25:26 +0200
-Message-ID: <20261024122533.3609180-4-larisa.grigore@oss.nxp.com>
+	echanude@redhat.com
+Subject: [PATCH 00/10] Add S32N79RDB UFS support
+Date: Sat, 24 Oct 2026 14:25:23 +0200
+Message-ID: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
-References: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4P190CA0012.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:20b:5de::12) To GV2PR04MB12558.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AS4P190CA0014.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5de::18) To GV2PR04MB12558.eurprd04.prod.outlook.com
  (2603:10a6:150:368::10)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -126,229 +123,290 @@ Precedence: list
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|AS8PR04MB8483:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b89182e-3117-404e-0b03-08df31c9ef33
+X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|PA4PR04MB9687:EE_
+X-MS-Office365-Filtering-Correlation-Id: 62d4489a-a3f4-4052-215c-08df31c9ebcf
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
- BCL:0;ARA:13230040|1800799024|7416014|376014|366016|19092799006|23010399003|921020|11063799006|56012099006|261009223027099003|261021123027099003|261021121427099003|261022105027099003|261022075727099003|10067099003|18002099003|22082099003|6133799003;
+ BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|19092799006|921020|11063799006|56012099006|261009223027099003|261021123027099003|261021121427099003|261022105027099003|261022075727099003|10067099003|18002099003|6133799003|3023799007;
 X-Microsoft-Antispam-Message-Info:
- Spb7prMhWj/8Hcfs6OH44jEy0SsjLLlgZZs+QBqN2TwSnPjQsbQFBPVoJKgZU7+fX/qNPWN+cYVyvoLISlLMlQqxI7oUndL64+nXaSeABT4kc1UFQ2Qs6omNIx7oGpXy4CeLjfFoI1MZ5JMEM7g4bKqjciSjSQVhTwY08urI3qdBFUit2LZ6nwrmezr8BOeFyqJEQYGEgKOQFUQ3gW7TLfglJRpegKOEgqqVXbWmCFdy3VvodqQTc6eCh2VZkOjLtzj1cJO9N2dKtb1QGdhvFMOF+jAOazBlr0a4fSsZx1GuVf8WAQT9TekugKiZP8ix8x278aQBpkYvpZZag4cpWzLdYkoNzVmiYDgvQ03MR8el6ZmsBLUtFbxUBLauAzFspapd4aWgKH6R+iGee1WDx7cDNPu0qATqPw1dDmUB3MlYqbCdNh1Rxj2k02BUEDBrCbh1CNfa1CVZYIYQyLuUagmkJG86GjFtOCYLR1aiYO6Xuwoqm18Qb3RpzgBYfsFK7oXC4dnnbK4aQ02HJkcRY5eAQeqRoMyQldBGqlRN0jBEtluqaN7clYMxw0dkldU8v8fuKSoDWNdYW02YnNDwXFHButoZ57HPpwdEGREm2cr0hhNU9JB40Odq6rwVqmk6TlEKvta10UGgxrU/nnvQijaWHSreEjKUWjAcDWLjYtoxTtDWodbqUqeEGqEvlMj9dwszl0M3LWE1XbqAYGLtXw==
+ ciiBKgF0s8fQ3ebPzdZzeIQOzPwzFNCbWviSSEkhc9/ExG+M7mOfWNv5qqe9zGNcPIEK3BjGzpdXEk3lVPhF5NwMBKsobhX93Wd+oe/CXOJzWfrs+SLTZ+z84shldxoP0SdHxBuudj2kY4wZtezWeHSBDw+xAbG4HcAUXz1ZMwBTdexcPdmXo3EZ9cnQyfX3DPfeEz3dEnBXMb4GJHF6RnKp5AzdOXPkZwUVlDCkCKurqABu0RC6DkXtAYL0WbFAexLIdLjPf/VcvNexWkrMRhnRIk2ZkXWHmHWT3YZgQDOgTweJm+FXmU328J4vLBsd891dyQV+7cOFonRnLYg0YZ2kyOpUY2Ocmirw3DcyKgKP/Z8A/muCp1HyqFic2SeGAxv9i2a9sqgtPdrZiJP083U4e/xGLG61Zh0/dAI1S/Ah1Xc8PvXnIrwDB+kVWkZxXFNRznE+AGLiSb4bBexrxb32nMSVS0CETpl63fWqFmIJQzH79Av7yieJmjkdG9/aLT91cn+LIYxEuBjbmuNl2w59Nkcr3W9eo+R/l2LvR7xSPZ7qF6MI+fa8+rCejlVoGyVx56IcW6jlR3z3NnQAE85q2REylaLTeDyeL0E8ceszr7+ou44Miztr3Ur5fnegkeEd5GUAHR0Ov3UD6Hsaws99+GtbhaiQRaXWMEyH52q8sLeNhNvHLxv9vhxKizryNiBY64UIANfcLbbNO99aiQ==
 X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(19092799006)(23010399003)(921020)(11063799006)(56012099006)(261009223027099003)(261021123027099003)(261021121427099003)(261022105027099003)(261022075727099003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(19092799006)(921020)(11063799006)(56012099006)(261009223027099003)(261021123027099003)(261021121427099003)(261022105027099003)(261022075727099003)(10067099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
- =?utf-8?B?YWNuUm9ZR0FZblkybnBpN1JhaW1FMzFmcnN5OUlqdnlkY1ZPMUlTNG5iUURn?=
- =?utf-8?B?dnBiQ291N21SaXJYVVNYL1dveHlMbStCYVdka2NQVUcranRPQkZUTHpUbEVJ?=
- =?utf-8?B?SC9vWjh0Z3dWcWNybkdUK3c4aG9GY1JESU85WlVad0RyZGtCZDZnYzB6QzJJ?=
- =?utf-8?B?bkxnK0I1cTRiWDlzdG9yVVVydWpUaUdBcHcvL1BnUnk0dmVOWHZFZ1JBcFBp?=
- =?utf-8?B?RXRLdUlrRDBjSE1FVzFkdk91SXd1SzZhV0xrSktLbEZ2QUo1ZG9wSE1sTXVm?=
- =?utf-8?B?dG94R3VZUnJpZXFXRUZWREpmZDJDM1lDa2hZd0cwUC9FQjZQY2VnV0Jhb3pw?=
- =?utf-8?B?ZkdGUFZvc01Ga2Z6YXFhT1RmdktqNGZrMXdlOFNnalNlR2NMY1FIQkRqZ1hL?=
- =?utf-8?B?WDZ0c21nN0lUSld6UmNCdkdLNG5EZWtjNFdCbURZY0NCZm9XekIyS0E3bmNk?=
- =?utf-8?B?T1lpdzVRQ1FqNnc4NXhtS0Eza08wY3htdjZvSlNrRThMZzRxaWNyZms1V3N1?=
- =?utf-8?B?WHE1SEJJSG5WZWlhWDliN0EvOXkrcUJKdnBqNld3cDRTYU11YnlleE43YVlw?=
- =?utf-8?B?TkhyLy9QSWwwTHZvRmxlL2IzT1BBeVIrMTMyU09WWHdsTGUxUnRoQnBWMStU?=
- =?utf-8?B?N2plQkdPRi9kdnZKbFpTdW1wRFZrbE85OEVXMkpGTytib21Bckg3ZW9zc3M4?=
- =?utf-8?B?K1BFTW1PalZOS1lFb2FJYUFLTm1US3JQV2hnbERvZEZsMmFhK2kxWEMwaDhJ?=
- =?utf-8?B?Tk5hN3hTaTJlcmcwVXM0TTA0VmRsdkdic240bk1lbjZraTd0VGtBTmhvNTFZ?=
- =?utf-8?B?TldKU1RJVjZFWld0bGJmenNaRU5oNGlFdWc0clZCMzF0VmdSSlp6SU1BaDhp?=
- =?utf-8?B?ZVlpVm11ZlR4V3FMKzZsT0VjU0QvdG5KZXRwYkIrUmRJMUtPcGtGK1dKV2JO?=
- =?utf-8?B?c0VMUnpWV25VOGUzcDQ4MDZWZ2tTZnFhTTFPcFdHcFR4VnBQV3M5dXFudUs3?=
- =?utf-8?B?OHZGaWVxcWxLaVQyL1FwSy9BS2lWS3VkcU9LU0VzZVMwczFKcnZGUjV0Zm91?=
- =?utf-8?B?akRqVDlmbE5xc2lSN2RIOUZkYkxuY1dnOVkzZzVGT2I3Yzlha2dDMVNoVHJE?=
- =?utf-8?B?OThjenJja1U4SHQyMXIrNVowQmpZSWRuMExmVWYxUHhmK1BMRUtFNGp1bVRQ?=
- =?utf-8?B?djFzMkYvZTVuZWdYV3dvY2hRbzhHdFdaSTJma1BZNFhTU1dLb0ZSUEp2NXBj?=
- =?utf-8?B?SU4rWTB4SHdjTnkreFFiSzNZTGp0ZGpIaUJvaGFBcU9CTWdweDQ0RTU3Skdi?=
- =?utf-8?B?VHc4YWZFNnlhUitUTGcwWVRxNmNhYXBmMUxTQ2FrN0ZTNjRwdktHQTNlVVYr?=
- =?utf-8?B?aW5ZaGVTbFNlM3BVcFZCZjVlV3dWbjlTekV4NFJnaWpXSTNaTk5RUHBXOUhi?=
- =?utf-8?B?VkhvUkNNTGFOcWFSQmhOOXJBa3NSTGcrYkdwSDlUREZWN0J0MkN1TGFIWTF0?=
- =?utf-8?B?eHFXczBBTTN6Q1BPQ0lpbVJBSko4ZnJ3Z3N1V1J1TERVbDhueTNadVBSRHhv?=
- =?utf-8?B?MVk2QmUxb3RqVjBYdFJiOS9rUTg1K2MvYzBLeEk3Z1lwWTF5Z1YyejB1UUV6?=
- =?utf-8?B?RUZ4eXhwTXBMZ3prQkJzUWhWQ3VZVWt6a0lNbDc4ZUYwQTk2ZnUwQnc2b3ox?=
- =?utf-8?B?L1hqNUJYYTBIeS9vUlJSSmhZcmdhWENaaXRURzNoNWxLYWVaQWY0YzVPajMw?=
- =?utf-8?B?blZadkQwczh2VWwzZVVmYkFjQjJUOVJjNmRoL3RIaFJnNFc5VXpNdEpXb0Vx?=
- =?utf-8?B?WUZpM0tPNm1haWF6ZHphWU04S0lwcTVXMkpNdDhHc0VBYnAySDJ0bHppUFBD?=
- =?utf-8?B?RGJDUXdqWEIzbkJ2Ykx1cERtUiswbW5USnFlRXBGT0VwUjQ2V2NVMEdhbFVw?=
- =?utf-8?B?dW5XSzA0a2JlVkdNcHUrY09sUGVRUElENS90NW1aVnZjL1hQM0RPT1RvVUZH?=
- =?utf-8?B?cklCMUhaODlFaE9mZDduMHdidWxZbzV5UUR6UytqczBWdzFuL0ZiNk9DMWFh?=
- =?utf-8?B?bEVQb2Y0NjR2OTZxT09Dc3JwaG5CLzZCNWtwMGI4TDhzRWFIbmZBTGZ4VTM3?=
- =?utf-8?B?NnpKMkVITVIrOFQvUXZORVdiWVEyc1BRditrSjJPNGZJVWVvZXJJanUzWHVz?=
- =?utf-8?B?aG0vc0kralZFS3lyUHlFQ2NyOGxjRUVHeG95bmJLL3M1d09yWjl3bWRqcmg2?=
- =?utf-8?B?TnhvdUYxQjZIaGFxUmd0R3IySzg3VnJPZEtON2hRMFVjdjNnYlpBaTJQTkpO?=
- =?utf-8?B?SndoRTg1cjVoUUE1TjhYbEVqek56dGpnTmlRam1Ud3B2TXF5ZkJtUT09?=
+ =?utf-8?B?MkRtWEUvSU1sRlFLbUxpelBWeTRrMENtWWM2ejltaTJRSHR5YVQrWHpCQlU2?=
+ =?utf-8?B?aW4rRysyL2ptQXpqS0lMcEZ4aFJhTUIvM285aE9EQVI0aVdVZ1k3bTdCMXRM?=
+ =?utf-8?B?YkZTWCtuV1B6Rk1HbVBGOThxRzhFOGM1MUpGdEtDN1RUM2t1QU5oOWZIRTg3?=
+ =?utf-8?B?MS81aitueFc0QmV6aDBwME9tZXpkeE5WVmZ1Y2lWU1hNaTVCQW5HaHI4RTVV?=
+ =?utf-8?B?bkl0QWpKM1ZEUW8vK3BPVFB3NmwzbVltclZXbnBRSnR3b0N5VUwyT1I3MVNr?=
+ =?utf-8?B?RGlHL29oUC9qU0V6dWJEc1A4cDc0N0F3a0VITEJKYzIrVWpwWXZsdVo4RWs3?=
+ =?utf-8?B?UWxCdVRzS0xrVmxpdkJpSVhPOWtzVFdkeVkydWszVERZdFB2UXlPRXo4TDFq?=
+ =?utf-8?B?ZVd1YUQ0Vm9CZko5VXRhTlhpNVY0Qjl6SEdSNXZGT2MyMmQycXZ2cWJueG4w?=
+ =?utf-8?B?ZDlySDFzV3dteTBucWU0ZDRUa25mRUNBcDl5Z01QSWFoN0RsQ24yN0ozdWJz?=
+ =?utf-8?B?M2t0U01UMnZXMGRNZWl0bno0Ujh2TEE0TEFzT1pKUUtSSnVVa2svS0prQWtr?=
+ =?utf-8?B?Y2J3cHNpN0ZsTCt2YThBQjhjTjh3M2E5U05tVEJTdjhHWHVTZlVFdzdUTk45?=
+ =?utf-8?B?a0Z0YWRndk1hQjBHb2VtTVFseSs2dk5OdktzRmFzQ2xxTk9USEhncThRWllm?=
+ =?utf-8?B?aUVyU3ZaMU9wZ2kzQUhmQUlTdGNZZTZrbmc3Rkozd1ZFV2NLenZlN0o3S3R4?=
+ =?utf-8?B?QkpGTHgwazdEWmx4ZU5MYmVFNGVJdFUyd2lzeFdxT05WK2xIeG9Od3IzM2JW?=
+ =?utf-8?B?Yyt0b3ZzNlF1MXo1UnY4U0FRdDNSanNGeXdpN0VHQllvUFFJa0VXWno4YXMy?=
+ =?utf-8?B?YkdGdTV6Y29QbW9HV0IzdzRVL0xsQllZT1p1NlR6cnU2S1V1UGZEc2NZb3Vx?=
+ =?utf-8?B?YVp0d1BXOTh0dUpSR1QxLzlIS1Q4OEVSZFVCeGgxNUEzZ3pwb1hhcFlZR1JM?=
+ =?utf-8?B?YnU2b2JxaFlaTkdYQnJXUVZxTnBEMytLenRRM2cyUDhCUG5JWlRyWVloNm9h?=
+ =?utf-8?B?QktQSk85WEZJeWJ2emVOd2hxMnV4cDZDQ1Z2TnIxaWxvMUN5eXdOOTRyNTdw?=
+ =?utf-8?B?YlVNMk5aOVpaT2owL0NFZG82dGxDREZpVWY5TldqeVdUTUNZQjFtY254NFlN?=
+ =?utf-8?B?L0lNdVV0b3lnUjFiODl4eTJqMHhmMHJrVEx3M1JDSlV6ZG1ycWlHeDViQmJU?=
+ =?utf-8?B?ZUJpY0l0cnNraS8xZjNTSzd2eWJBVXMvbWNLeEt4dEZKOEkwWGFjNlZFcnhp?=
+ =?utf-8?B?UEZ6clFwMEpkNWpmL0FEeTVtRlN1cFRSajZTVVZrL21mMmVwYXlFT2hxNXly?=
+ =?utf-8?B?L1NoTUVjeStDRm9NN04wbXg5RHpGRUpFVU9SZXViNG83Y255L01pNHhKNldi?=
+ =?utf-8?B?Q1JUWDFwVzBRNVU1SXpvajkwei92RzByRVNNaVcrRER0dExUNS92bEZHRUVy?=
+ =?utf-8?B?YUR0WVhwSWJCQ3dDcGl4TkF2Um5NZDRET1o4Wm9LakhsajVYZ0ZrcnpsK1Jr?=
+ =?utf-8?B?TEtENDJmd0NVVGdMTmw5TmdBQ25keVA5MHF2YnB1aVViZjFQc1VXRGphZVZX?=
+ =?utf-8?B?TkFkekNrN29wUS9MaTVOckVLMWY5NmhWWEc1Nk1OdWZ4M2RsVlhHYzBsRElV?=
+ =?utf-8?B?T3FGZWxUeEVxblRlcWp0V2tjSnMvQk4xQlZWQUg3VStFbGxVdmp4ajhqbGpS?=
+ =?utf-8?B?LzN3M2d3RDYyVkhKMkp6WnAzTFQ0QnVkeGhEWjhDY0pocWN6c1hSTjFLNGhQ?=
+ =?utf-8?B?QzZuYU5YSWhDOURycUxWd0RTWkpHNW9WRW9OYUJwSGp1WmhycUk5OEJwL2Er?=
+ =?utf-8?B?Q2p0KzhONjJZYmpVMndpTEIxK29Ka0pLRStpT3NwcFczbE9SVnQ3VVRHemtz?=
+ =?utf-8?B?K25qS1RJcU5ETnkwNW9DS1dNNWJNMDEvRnFNdmFwZm5FVHdsWFozNGZOb25G?=
+ =?utf-8?B?SE4wQjI3NGs1YjBLMWE1dkJ0V1ZkS05GM3cxZFl4amtGYVU3aXVFaVRDV3Uy?=
+ =?utf-8?B?ZEI0Mm9wOFRyTC9iMkFrbHVDL1RjeDg1Z2ZSUlRpM2lpTXdZcXFDRmZDZHNM?=
+ =?utf-8?B?dExGU0xtTFovcWxUVEdZTHJ3VDJ4L0x6WDhTNXY3clFDNVdjSGJzWDJ4Qy9T?=
+ =?utf-8?B?dkVyME5IUzNmQmRjMksvWWx3N0lFQlpIUENiaGpiblgrQlh5bnpwSzMvN2VX?=
+ =?utf-8?B?QitIQTRRT01zbG1pQ2VHaFo0LzlHUnl1dUcwbWVOM3ZnUm1ZSWZVaEM0WjVY?=
+ =?utf-8?B?OWtQZGpTR0NCMGdDM2xKblJPTnNpaXhGWHJkcllCcFVNTHlldy9Udz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b89182e-3117-404e-0b03-08df31c9ef33
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62d4489a-a3f4-4052-215c-08df31c9ebcf
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 12:25:48.2080
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 12:25:42.6446
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GTLa43pirw9C06LD5OoaflvweG0eFmmmFZvmfHn/RtRFftVd/vIshBk5xgY7PfSAG9g9QIxggv1qTkrk3e0+wg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8483
+X-MS-Exchange-CrossTenant-UserPrincipalName: ud0+zQhkQkEmrM4H+SftQAiYPqimj1lDx7vEnGNAZdAGB4ROJPudbfb/4+nPD12h6UbznddsV4gxG4TMoJNF6g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9687
 
-Add TX_FSM_STATE and RX_FSM_STATE to include/ufs/unipro.h, as these are
-UniPro M-PHY attribute definitions rather than host controller specific
-ones.
+This series adds support for the UFS host controller found on the NXP S32N79
+platform. The controller is based on the Synopsys DesignWare (DWC) UFS host
+architecture and requires S32N79-specific M-PHY initialization/calibration
+sequence. It is compliant with JESD-223D "Universal Flash Storage Host
+Controller Interface" v3.0, and supports up to HS-Gear 4 speed grade. It is
+compatible with UFS 2.1, 3.0 and 3.1 devices. The MIPI UniPro is compliant with
+"MIPI Alliance Specification for Unified Protocol", v1.8. The MIPI M-PHY is
+compliant to version 4.1.
 
-Remove the duplicated local definitions from the HiSilicon, Qualcomm, AMD
-Versal and DesignWare UFS headers.
+In order to keep the S32N79 platform driver small and avoid duplicating common
+DWC code across platform glue drivers, the series also refactors and exports a
+few reusable DWC helpers. In particular, M-PHY CREG (CBCREG*) register access
+helpers are moved from the existing AMD Versal2 glue driver into the common
+ufshcd-dwc layer, and are then used by the platform drivers. The series also
+introduces a generic Hibern8 TX-FSM polling helper so that multiple platforms
+can reuse the same pre-link checks.
 
-This also prepares for using these definitions in a subsequent commit.
+Device tree binding documentation for the S32N79 UFS controller is included.
+The SoC and board DTS updates that instantiate and enable the controller are
+no longer part of this series and will be posted separately.
 
-Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
----
- drivers/ufs/host/ufs-amd-versal2.c | 4 ++--
- drivers/ufs/host/ufs-hisi.c        | 8 ++++----
- drivers/ufs/host/ufs-hisi.h        | 5 -----
- drivers/ufs/host/ufs-qcom.c        | 4 ++--
- drivers/ufs/host/ufs-qcom.h        | 1 -
- drivers/ufs/host/ufshcd-dwc.h      | 4 ----
- include/ufs/unipro.h               | 2 ++
- 7 files changed, 10 insertions(+), 18 deletions(-)
+Changes in v9:
 
-diff --git a/drivers/ufs/host/ufs-amd-versal2.c b/drivers/ufs/host/ufs-amd-versal2.c
-index 7c0f102ffe7b..93755befb880 100644
---- a/drivers/ufs/host/ufs-amd-versal2.c
-+++ b/drivers/ufs/host/ufs-amd-versal2.c
-@@ -112,7 +112,7 @@ static int ufs_versal2_enable_phy(struct ufs_hba *hba)
- 		u32 time_left, mibsel;
- 
- 		time_left = TIMEOUT_MICROSEC;
--		mibsel = UIC_ARG_MIB_SEL(MTX_FSM_STATE, UIC_ARG_MPHY_TX_GEN_SEL_INDEX(offset));
-+		mibsel = UIC_ARG_MIB_SEL(TX_FSM_STATE, UIC_ARG_MPHY_TX_GEN_SEL_INDEX(offset));
- 		do {
- 			ret = ufshcd_dme_get(hba, mibsel, &reg);
- 			if (ret)
-@@ -132,7 +132,7 @@ static int ufs_versal2_enable_phy(struct ufs_hba *hba)
- 		}
- 
- 		time_left = TIMEOUT_MICROSEC;
--		mibsel = UIC_ARG_MIB_SEL(MRX_FSM_STATE, UIC_ARG_MPHY_RX_GEN_SEL_INDEX(offset));
-+		mibsel = UIC_ARG_MIB_SEL(RX_FSM_STATE, UIC_ARG_MPHY_RX_GEN_SEL_INDEX(offset));
- 		do {
- 			ret = ufshcd_dme_get(hba, mibsel, &reg);
- 			if (ret)
-diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
-index aaf66bfc3e70..fb44a776e9e7 100644
---- a/drivers/ufs/host/ufs-hisi.c
-+++ b/drivers/ufs/host/ufs-hisi.c
-@@ -30,10 +30,10 @@ static int ufs_hisi_check_hibern8(struct ufs_hba *hba)
- 	unsigned long timeout = jiffies + msecs_to_jiffies(HBRN8_POLL_TOUT_MS);
- 
- 	do {
--		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE, 0),
-+		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
- 				      &tx_fsm_val_0);
- 		err |= ufshcd_dme_get(hba,
--		    UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE, 1), &tx_fsm_val_1);
-+		    UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
- 		if (err || (tx_fsm_val_0 == UFS_TX_STATE_HIBERN8 &&
- 			tx_fsm_val_1 == UFS_TX_STATE_HIBERN8))
- 			break;
-@@ -47,10 +47,10 @@ static int ufs_hisi_check_hibern8(struct ufs_hba *hba)
- 	 * check the state again.
- 	 */
- 	if (time_after(jiffies, timeout)) {
--		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE, 0),
-+		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
- 				     &tx_fsm_val_0);
- 		err |= ufshcd_dme_get(hba,
--		 UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE, 1), &tx_fsm_val_1);
-+		 UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
- 	}
- 
- 	if (err) {
-diff --git a/drivers/ufs/host/ufs-hisi.h b/drivers/ufs/host/ufs-hisi.h
-index 6af6a268458d..08dccfbec404 100644
---- a/drivers/ufs/host/ufs-hisi.h
-+++ b/drivers/ufs/host/ufs-hisi.h
-@@ -39,11 +39,6 @@
- #define MASK_UFS_DEVICE_RESET		(0x1 << 16)
- #define BIT_UFS_DEVICE_RESET		(0x1)
- 
--/*
-- * M-TX Configuration Attributes for Hixxxx
-- */
--#define MPHY_TX_FSM_STATE	0x41
--
- /*
-  * Hixxxx UFS HC specific Registers
-  */
-diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-index 69ec6327843e..d273e16313a1 100644
---- a/drivers/ufs/host/ufs-qcom.c
-+++ b/drivers/ufs/host/ufs-qcom.c
-@@ -390,7 +390,7 @@ static int ufs_qcom_check_hibern8(struct ufs_hba *hba)
- 
- 	do {
- 		err = ufshcd_dme_get(hba,
--				UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE,
-+				UIC_ARG_MIB_SEL(TX_FSM_STATE,
- 					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
- 				&tx_fsm_val);
- 		if (err || tx_fsm_val == UFS_TX_STATE_HIBERN8)
-@@ -406,7 +406,7 @@ static int ufs_qcom_check_hibern8(struct ufs_hba *hba)
- 	 */
- 	if (time_after(jiffies, timeout))
- 		err = ufshcd_dme_get(hba,
--				UIC_ARG_MIB_SEL(MPHY_TX_FSM_STATE,
-+				UIC_ARG_MIB_SEL(TX_FSM_STATE,
- 					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
- 				&tx_fsm_val);
- 
-diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
-index 3c6cb2281af0..1ec661277c1d 100644
---- a/drivers/ufs/host/ufs-qcom.h
-+++ b/drivers/ufs/host/ufs-qcom.h
-@@ -10,7 +10,6 @@
- #include <soc/qcom/ice.h>
- #include <ufs/ufshcd.h>
- 
--#define MPHY_TX_FSM_STATE       0x41
- #define HBRN8_POLL_TOUT_MS      100
- #define DEFAULT_CLK_RATE_HZ     1000000
- #define MAX_SUPP_MAC		64
-diff --git a/drivers/ufs/host/ufshcd-dwc.h b/drivers/ufs/host/ufshcd-dwc.h
-index a5e40e7604a1..0406f2bb576b 100644
---- a/drivers/ufs/host/ufshcd-dwc.h
-+++ b/drivers/ufs/host/ufshcd-dwc.h
-@@ -27,10 +27,6 @@
- 
- #define CBREFREFCLK_GATE_OVR_EN		BIT(7)
- 
--/* M-PHY Attributes */
--#define MTX_FSM_STATE		0x41
--#define MRX_FSM_STATE		0xC1
--
- /* M-PHY registers */
- #define RX_OVRD_IN_1(n)		(0x3006 + ((n) * 0x100))
- #define RX_PCS_OUT(n)		(0x300F + ((n) * 0x100))
-diff --git a/include/ufs/unipro.h b/include/ufs/unipro.h
-index 16b2051f7241..7adba11f4700 100644
---- a/include/ufs/unipro.h
-+++ b/include/ufs/unipro.h
-@@ -34,6 +34,7 @@
- #define TX_PWM_G6_G7_SYNC_LENGTH		0x0034
- #define TX_HS_DEEMPHASIS_SETTING		0x0037
- #define TX_HS_PRESHOOT_SETTING			0x003B
-+#define TX_FSM_STATE				0x0041
- #define TX_REFCLKFREQ				0x00EB
- #define TX_CFGCLKFREQVAL			0x00EC
- #define	CFGEXTRATTR				0x00F0
-@@ -72,6 +73,7 @@
- #define CFGRXCDR8				0x00BA
- #define CFGRXOVR8				0x00BD
- #define CFGRXOVR6				0x00BF
-+#define RX_FSM_STATE				0x00C1
- #define RX_FOM					0x00C2
- #define RXDIRECTCTRL2				0x00C7
- #define CFGRXOVR4				0x00E9
+ufs: unipro: Move Tx/Rx FSM state definitions to unipro.h:
+- Prefixed the RX_STATE_* and TX_STATE_* enum constants with UFS_ to avoid
+  polluting the global namespace, and updated the existing users
+  (AMD Versal2, HiSilicon, Qualcomm).
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Use the renamed UFS_TX_STATE_HIBERN8 constant.
+
+dt-bindings: ufs: Add NXP S32N79 UFS host controller:
+- Added Reviewed-by: Frank Li.
+
+MAINTAINERS: Add NXP S32N7 UFS host controller entry:
+- Added the imx@lists.linux.dev mailing list.
+
+arm64: dts: freescale: s32n79: Add UFS host controller:
+arm64: dts: freescale: s32n79-rdb: Enable UFS:
+- Dropped from this series, as requested; they will be sent separately.
+
+Changes in v8:
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Added Reviewed-by: Stanley Jhu.
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Let the UFS core manage the core reference clock: declare it in DT via
+  clock-names/operating-points-v2 so the core adds it to hba->clk_list_head
+  and gates it across system suspend and runtime idle. Dropped the manual
+  devm_clk_get_enabled() and the struct s32n7_ufs core_clk member, and now
+  read the clock rate from the core clock list.
+- Dropped the ufs_s32n7_calculate_us_tick() wrapper and inlined the division.
+- Dropped the unused struct s32n7_ufs hba member.
+
+dt-bindings: ufs: Add NXP S32N79 UFS host controller:
+- Added the required clock-names and operating-points-v2 properties.
+- Dropped the Reviewed-by and Acked-by tags.
+
+arm64: dts: freescale: s32n79: Add UFS host controller:
+- Added clock-names = "core" and an operating-points-v2 table with
+  opp-hz = <0> (fixed-rate clock) so the UFS core manages (and gates) the
+  core reference clock.
+
+Changes in v7:
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Wrapped .prepare/.complete in pm_sleep_ptr() instead of pm_ptr().
+- Fixed code alignment issues.
+
+Changes in v6:
+
+scsi: ufs: dwc: Return a negative error if the link is down:
+- Translate a positive UIC command result from ufshcd_dme_get() into -EIO.
+- Declare dme_result as u32 to match the ufshcd_dme_get() parameter type.
+
+scsi: ufs: dwc: Sort CBCRCTRL and CBREFCLKCTRL2 by offset:
+- Added Reviewed-by: Frank Li.
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Added Reviewed-by: Frank Li.
+
+Changes in v5:
+
+scsi: ufs: dwc: Sort CBCRCTRL and CBREFCLKCTRL2 by offset:
+- New patch. Split the macro reorder into its own cleanup.
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Return the real poller error on timeout, not a forced -ETIMEDOUT.
+
+dt-bindings: ufs: Add NXP S32N79 UFS host controller:
+- Dropped the jedec,ufs-2.0 fallback.
+- Removed the select: block and the clocks description.
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Documented the timeout values as driver-defined bounds.
+- Wrapped .prepare/.complete in pm_ptr().
+
+arm64: dts: freescale: s32n79: Add UFS host controller:
+- Dropped the jedec,ufs-2.0 fallback.
+
+Changes in v4:
+
+scsi: ufs: dwc: Return a negative error if the link is down:
+- New patch. ufshcd_dwc_link_is_up() now returns a negative errno on failure
+  instead of a positive value.
+
+ufs: unipro: Move Tx/Rx FSM state definitions to unipro.h
+- Added Reviewed-by: Frank Li.
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Refactored ufshcd_dme_check_tx_hibern8() to use read_poll_timeout().
+
+scsi: ufs: Move Versal2 M-PHY CREG access helpers into ufshcd-dwc:
+- Added Reviewed-by: Frank Li.
+
+dt-bindings: ufs: Add NXP S32N79 UFS host controller:
+- Added Reviewed-by: Frank Li.
+
+Changes in v3:
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Use -EAGAIN while polling and only normalize to -ETIMEDOUT on timeout, so
+  real attribute-read errors are returned instead of masked.
+- Drop the stray delay.h include in ufshcd-pltfrm.c; the helper lives in
+  ufshcd.c.
+- Drop the now-redundant dev_err() after the check in the HiSilicon driver.
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Use devm_clk_get_enabled() to enable the core reference clock.
+- Rename the family-level identifiers from the s32n_ prefix to s32n7_
+  (structs and functions), keeping the s32n79_ prefix only for the
+  chip-specific data.
+
+Changes in v2:
+
+ufs: unipro: Move Tx/Rx FSM state definitions to unipro.h:
+- Improved the enum comments. They now cite the MIPI M-PHY v6.0 tables.
+
+ufs: unipro: Add TX/RX FSM state attributes:
+- Added Reviewed-by: Frank Li.
+
+ufs: host: Add common Hibern8 TX FSM polling helper:
+- Moved the helper into the UFS core (ufshcd.c).
+- Split out an inner per-lane poller, ufshcd_poll_tx_hibern8_lanes().
+- Expanded the commit message to document the -ETIMEDOUT normalization done
+  when converting the qcom/hisi checks to the helper. No code behaviour change.
+
+scsi: ufs: Move Versal2 M-PHY CREG access helpers into ufshcd-dwc:
+- Made the DME attribute arrays const. They are now initialized inline instead
+  of by later field assignments.
+
+scsi: ufs: dwc: Export common clock divider and link status helpers:
+- Added Reviewed-by: Frank Li.
+
+dt-bindings: ufs: Add NXP S32N79 UFS host controller:
+- Renamed the patch subject and simplified the commit message.
+- Renamed the binding file to nxp,s32n79-ufshc.yaml so it matches the
+  nxp,s32n79-ufshc compatible string.
+- Removed the nxp,mphy-boot-mode property.
+- Made reg-names and clocks required.
+- Removed the conditional if/then/else schema.
+- Removed clock-names.
+- Changed the compatible from jedec,ufs-3.0 to jedec,ufs-2.0.
+- Updated the example clocks to <&clks 0x92>.
+
+scsi: ufs: Add NXP S32N79 UFS host controller driver:
+- Removed the nxp,mphy-boot-mode handling and the mphy_boot_mode enum. The
+  M-PHY firmware always runs from ROM now.
+- Added a struct s32n_soc_data for SoC match data.
+- Moved the calibration writes out to static const tables.
+- Renamed struct phy_reg_cfg to s32n_phy_reg.
+- Moved the rate-select sequence out of link_startup_post_change() into a new
+  pwr_change_notify() pre-change path.
+- Used devm_clk_get(dev, NULL) and dropped the redundant core_clk NULL check.
+- Switched to *_PM_OPS() macros and pm_ptr() for the PM ops.
+- Clarified the Hibern8 poll timeout comment.
+- Enabled Auto-Hibern8 instead of setting UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8.
+- Reworked and improved the M-PHY initialization sequence.
+
+arm64: dts: freescale: s32n79: Add UFS host controller:
+- Changed the compatible from jedec,ufs-3.0 to jedec,ufs-2.0.
+- Removed clock-names.
+
+arm64: dts: freescale: s32n79-rdb: Enable UFS:
+- Removed the nxp,mphy-boot-mode property.
+
+Larisa Grigore (10):
+  scsi: ufs: dwc: Return a negative error if the link is down
+  ufs: unipro: Move Tx/Rx FSM state definitions to unipro.h
+  ufs: unipro: Add TX/RX FSM state attributes
+  ufs: host: Add common Hibern8 TX FSM polling helper
+  scsi: ufs: Move Versal2 M-PHY CREG access helpers into ufshcd-dwc
+  scsi: ufs: dwc: Export common clock divider and link status helpers
+  dt-bindings: ufs: Add NXP S32N79 UFS host controller
+  scsi: ufs: dwc: Sort CBCRCTRL and CBREFCLKCTRL2 by offset
+  scsi: ufs: Add NXP S32N79 UFS host controller driver
+  MAINTAINERS: Add NXP S32N7 UFS host controller entry
+
+ .../bindings/ufs/nxp,s32n79-ufshc.yaml        |  65 +++
+ MAINTAINERS                                   |   9 +
+ drivers/ufs/core/ufshcd.c                     |  73 +++
+ drivers/ufs/host/Kconfig                      |  12 +
+ drivers/ufs/host/Makefile                     |   1 +
+ drivers/ufs/host/ufs-amd-versal2.c            |  97 +---
+ drivers/ufs/host/ufs-hisi.c                   |  48 +-
+ drivers/ufs/host/ufs-hisi.h                   |   6 -
+ drivers/ufs/host/ufs-nxp-s32n7.c              | 540 ++++++++++++++++++
+ drivers/ufs/host/ufs-qcom.c                   |  42 +-
+ drivers/ufs/host/ufs-qcom.h                   |   2 -
+ drivers/ufs/host/ufshcd-dwc.c                 |  86 ++-
+ drivers/ufs/host/ufshcd-dwc.h                 |  39 +-
+ drivers/ufs/host/ufshci-dwc.h                 |   6 +
+ include/ufs/ufshcd.h                          |   3 +
+ include/ufs/unipro.h                          |  22 +
+ 16 files changed, 851 insertions(+), 200 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/ufs/nxp,s32n79-ufshc.yaml
+ create mode 100644 drivers/ufs/host/ufs-nxp-s32n7.c
+
 -- 
 2.43.0
 
