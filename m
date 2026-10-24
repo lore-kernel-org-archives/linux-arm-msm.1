@@ -1,121 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.241
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792874328;
-	b=0gDhHihkyoyxXZe1OWOGdZ9Lt8JBAAnBh7dVU2liq/T0I2GJXdUHl3Htwgy+Fe/tkm/d
-	 N8VCmoy4xQvBAqJL6z3V19UDxtt0b7oebm/oNQTnoPspHrkN565wDW8WRKlrgSRZ7fP+T
-	 EhOXi572dJ8Ot5ayMeCZpJjjfmBqN8vwGd0fpaF13+ROr8BowNKiIlzFm8fqyj9feqPwr
-	 rWKQkwYmhen6306Q0Q1CgZunj226keiPFxSI1n+5m1rDXfFlUfLvehJm8gkTcAoT/9xPX
-	 QHB2khf1wlVvkNRlfFwy5VZJWenl0vf530ddOR19Uk26Kn1D17RpucTNYznMTjJULIw==
+	t=1792882721;
+	b=MhbolWBHe5kkQznFJ5idVXuMUO5Z8KSn3mfCzBLxvaoTwFYV7ImLP+NdWEXJ/so/nfvg
+	 uxZdn6AULZK3idObmPSpa/YHulPd7L0FVYfdS03PrynaoNPkLehGv0mK/zmwUl9VewGz2
+	 w+pTV3a0dHBOhAEhyEcmXfU1Tlm6enNXpyKWFtkzAxGVjioNf7baJOLGqgumEv9fGHo6H
+	 xk5WGVS82sbzHebYM6z/DWuESZO1ZxDmsLOTqwMnMbT1o4tVgORBB4RTb9vBGAe9II/7A
+	 AKWfhehyHbzwXGuri/bkIhwWn8SKg96jErGT0h9b8M1tfUv2ebkH70jsCno4TK4ihEA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792874328;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=jmQdvOcLeHgrhM9Jlt4/V9JsPNpFugxpi7xLAla95oA=;
-	b=oApdrVz7GfjLGF9JmIypB11Q74JDjifKyzyjJGuKzO6q//zaDFPm+RpipOgGyoYr77j+
-	 na7L5WTjEOz0BW9oqIAuIjWFvIQ8EW2pQMNyroSN9nQ/xA/d+OOT1O6qW2eYYp5XI1Aei
-	 6b/GOsP12S+P7Vx4JU3LCgIHUGl43HrwjFxda6pDVuwrcmFE3PvRZAUMtJ6Ixly+c0lEo
-	 sNZhkgqat6JoM0hVYzfhlXa5OsED8BbXigJ90gPgTova3hnQ5FYzo8zdFveo/pctXU0s8
-	 cGJ8+3u9yXEb0g3b9AN3ELEngVxFr/5Vfi9Nhsxa4cby+pLZZWIL4QpH02Lxo3eipdg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792882721;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=WSIS6+25y7PpulNnWBnfkisB8hS2P0CMzOFHtu1nW4c=;
+	b=jtOVZ8x4dFs0j3cBXSAuuusILMaNEhEMOfmxxOcs/eo+CbEMkEEzrHGPMWX0vugKqv8x
+	 ecW6r/nH9qo78i/dBVN1NvI7myCGpXbiBZE6mwlWWgW4L/rQffN08Rk4QSR0KfO1imdUU
+	 Ny8hDPOwvFTrtq4VNA6uPG2OaN1KNUMeewO5iGY1fUrcgijTdr3E7lV7zHAwKFbNcGLvo
+	 TwgCsACMa/idQh9u0KPy6RIwE9XPzlnsBhrnKdJNz2x89kpnMTpnuLbHbcDRbdmd8LJID
+	 +3Bsn04/FDzTYThujjFIemr5PLty1h6BiEadLAEvMS9y43ObCcGbb4CFkSVlDR2ezAQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ag+f3dIq;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cf7N8aGo;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=YsuAc8wh;
+	arc=none smtp.remote-ip=95.215.58.241
+Received: from mta1.migadu.com (out-241.mta1.migadu.com [95.215.58.241])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCE44606A31B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 20:38:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DCE44606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C73B8606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 22:58:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C73B8606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ag+f3dIq;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cf7N8aGo
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69OIU6wL798289
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 20:38:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=jmQdvOcLeHgrhM9Jlt4/V9Js
-	PNpFugxpi7xLAla95oA=; b=ag+f3dIqoUJexnVqnzI4uMwh/evPI7jYTcmjNgoR
-	9pqLAGpdFpyFiu1WAWLYI3SiZOS8Tv7t/NslhB+2JhZlTs3mXaAleXygJ7Efbrnx
-	P0WTozD8xJ0vI8oof10etJSOJp3Z3Yama7xPixD8VZn0BkKWpXqQt+xwKdjAemYH
-	4RYNljpRpdcGfVT8LZ++ZG6qU4K+iyFNPXSl8mVwP/VgF2m72jVTAWD4UfM0EULb
-	CFK6UN7jZ336qI69M24YK8/e8XLzT6SWvRuUaQjKMYRTP18Xmkn5jvuyKJBUNQ9X
-	ZsYKAG7YLa7WM92tIiZgrkcmoKuqQEjwCgDBXBgyfiW2GQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgnuk9kvc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 20:38:47 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-936aa34873bso399367885a.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 13:38:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792874326; x=1793479126; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=jmQdvOcLeHgrhM9Jlt4/V9JsPNpFugxpi7xLAla95oA=;
-        b=cf7N8aGoNpJbpDoveH2HnhhQPIO/esV9GjKpXL+g0BnHHW1fOR4gtXv11YhmACVnC8
-         YZjt21AINs/gRqRvSEKhsfh0v2bxjhobVEt4nPu22gQ6RZmHV18n4VjNCfH5fBgScP+n
-         /+El3WWdbHafCqG+krX3hdHS0w4+ZRkdq/e3AH3oaVIsqQ5hwqo9dJV2I7ZFVbESsIEe
-         nvvur17Ymt1JoFaxRE4JWblVa2muUxaUKbUqTw84FTqjUkDkovSt8FqsmnWlys/h90t6
-         JUlHH0K4SoJ2PT0JUCB2OjCpiBC5ilC0qAWM+vgy4bCR57G/NFyMAkvMpqYx4AJOp0za
-         u9fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792874326; x=1793479126;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jmQdvOcLeHgrhM9Jlt4/V9JsPNpFugxpi7xLAla95oA=;
-        b=pVp7azv42B/X28rakLANUnx4pAQ7nAOIOP4vpDbkmjzp6l+Hxc+sG87/+yMQ1nZsUo
-         n9zKsOrrEXPKdxCC4nLWYxutfyncC++4WxrYXzeJOlzL+lIhIn4FEXumta2pHlvKlyJK
-         kh74PR4FgikKPhGhbr95YLmUFYD+5jLcXGDsf+lPZHcE1zwh78UNhZTgaP/nOeftSqb8
-         sKx1Wp5ATmkGT3WCLq1Ye0DfUJO/B7k88GBdOrJ7FABw7HnsELugoYgnvjPujLS9tQfi
-         WhN/C6riche/fXbRw2SDhUa0GAy83bCEnNO6HNwc6T9sOgQJR39oWKLkzuJFeU8zNV9V
-         /IlQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwjlc1SjQm/HScz7HAnASKvrtpY3ZqsKis/lgGsbyCfzKj4l7K8uhmcSa+kt05DRnmZN3afRmNPTqPKpbcq@vger.kernel.org
-X-Gm-Message-State: AFq9FYIEHvxuo3qFMQXaP0Un0L2MN64B5yw9yp9Z1aIgASh4JUhaerH2
-	pf7JsD8u1GTp2oTsTanF5/gIU4dP8km8iosX9P0Pn2pVU0gYC8U5F3FD7zoV7JPXthZyJwOv6lm
-	Jv533tmU6ZA5ZvvAViAgIPZhwSbBadBhbw49EsaX4c33MULU2GAH2kEJNznr/qyAKMPFm
-X-Gm-Gg: AYBFou2AY8OYsvQYnWb9Zw0tC4V52F2LNd5AjVww3FacMBDTFsgbcxgwmRy6W1xqkcE
-	7kXqQ6O5GAAZONQrMgFECM5ivg18hY6/sHAIKxP9x0P0NfQ6KO+jJilJl63tRDZKwsctlis8v9O
-	ncdMpTsFx41NBmKuRJ6n7jQNXf8GSwveCFyg8fSCY0t4V1Ur9oTsa+4t/sqIrVo+GbDAf4asWY7
-	JDTuLuttnz9nT/Jg5XDd+x1izE0LxRRkilWmQQiJ/6DNHJcSx5MC645+VCCDgIdkiVQbuZHP1+S
-	UuEEuuvz/pTfi23AKfyx60OwCQ6xru4KRYT6VKrw4wP4JtW4d1lP2sN3XW58xbAtlH4N2Rxo9iN
-	j8RNLgVA5MoImTBcw
-X-Received: by 2002:a05:620a:a8d0:20b0:942:e4f7:6104 with SMTP id af79cd13be357-942e4f76149mr101912885a.55.1792874325974;
-        Sat, 24 Oct 2026 13:38:45 -0700 (PDT)
-X-Received: by 2002:a05:620a:a8d0:20b0:942:e4f7:6104 with SMTP id af79cd13be357-942e4f76149mr101911385a.55.1792874325422;
-        Sat, 24 Oct 2026 13:38:45 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.187])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a2d6f6fsm73963625e9.12.2026.10.24.13.38.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Oct 2026 13:38:44 -0700 (PDT)
-Date: Sat, 24 Oct 2026 23:38:43 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: Re: [PATCH RFC v3 1/3] arm64: dts: qcom: nord: Add SoCCP remoteproc
- DT support for Nord
-Message-ID: <p4auxf2q5hzcdwynse75ipjmzmlh625shldy32ovlv42gpf7og@vy6jv5kfs7gn>
-References: <20261022-nord-soccp-dt-v3-0-1a69a4d54c42@oss.qualcomm.com>
- <20261022-nord-soccp-dt-v3-1-1a69a4d54c42@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=YsuAc8wh
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=bGDQoazpJNyjoIiqx4hbPSVe8AwD1RNCrDC+N8q46A4=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792882717; v=1; x=1793487517;
+ b=YsuAc8whqQV+CP0YWqOUXI1EZBzWRLPdKcB31cF9eDBmkamAfpo8PUJeeG8Xu3wwJSgdmPp3
+ f/DBdXaq7phuN3Y/Ez9DsVEg3AKcIcmmeV0zbm4AURUnAbJcRIorQrZ7RUoYet4fv5baIgdOP/F
+ OXA9b1pMClAXTU+s9ccOm6KC3C0aVs9fwUpPjS7E6KkEK4dWNzKb8DIQkxZ0nMaNUQ9R9s34dtq
+ sYrzyzcxELdz58qnn6ZGD3+eOGvD7Z64qJNHvfl2H44evW3KA0XDexCf9AYQ8gWcjAp+InrcPMj
+ PuXrC6mHqnMetKscuMR6D8xDRzb6WcegzKCAkZwh7u9TQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 24569aa950332146;
+	Sat, 24 Oct 2026 22:58:37 +0000
+X-Mizu-Trace-ID: 24569aa950332146
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <f17f962d-22d7-4a88-bdcc-9be6556040f1@packett.cool>
+Date: Sat, 24 Oct 2026 19:58:33 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,46 +60,84 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261022-nord-soccp-dt-v3-1-1a69a4d54c42@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=Z8Z5j3RA c=1 sm=1 tr=0 ts=6add1757 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=OoMBhQ6JWsPECC_GQXkA:9 a=CjuIK1q_8ugA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-ORIG-GUID: 9h0w0fGOE-alDh59Q7LPxTxccMCE6p7e
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI0MDA4MiBTYWx0ZWRfX91qj6B1oF192
- 6GW/vj+Hf5c2qFP7SujRFyeaEACXA/2Ymh2ikTMzi0incwhc2GPMwONipIigJ0hYqAvpNKyjnJ8
- L8BFtLd4OH4qd5wLLslzhtfXdxI+2KDuZBZ8BiwgUGJi9/EG3BEX2N9Pe2iPgtPERVPvmwvwGHZ
- BPZHkLAHBYDIR5CATl9GuqAWYrZtJHWGL6E8UWnt5OwhtwSByt3OqDUUVwiGDERLEklWTZU3otU
- t9SGPUT6YZYhSxg04PDxyYizmw0o+Y1ijQf8tdfOOih/6s9mSb8mrqb1dAs3s2Qni6N0RYLhJbc
- DpXAtDXIolDZxT8gQJrFEZ5FMbKvCN/Fz5SYyBmNfVypOpQCsNHCmOPZmOE5VxSfcx+liK4LpYf
- Avk5rNLt/DpN6OyExWwOFWkrsz45tzjOfAw84CGpnpuHQ2XkLcsRTfPobl3azaByEYKM6tTbzG/
- UiagHUlYhe5UOEZJRfw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI0MDA4MiBTYWx0ZWRfX1yW2B7P06BFf
- ar5asUxVz6Q7ZZozEIXBrK0AlQJCwp16FhD5PmRiVUN2AiCPefo/FgComO/6mQDtRNDa7ceey05
- bFxOb6zOwiTOgcqttrsOBdGR02uGFR0=
-X-Proofpoint-GUID: 9h0w0fGOE-alDh59Q7LPxTxccMCE6p7e
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-24_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- impostorscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610240082
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ASoC: codecs: lpass-macro: release macro and dcodec
+ clocks in runtime suspend
+To: =?UTF-8?B?UmFtw7NuIEplc8O6cyBNaXJhbmRh?= <ramonjesusmiranda@gmail.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>
+Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261023173216.6245-1-ramonjesusmiranda@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261023173216.6245-1-ramonjesusmiranda@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 26-10-22 17:27:01, Anurag Pateriya wrote:
-> Add the SoCCP (System on Chip Control Processor) remoteproc node and
-> its SMP2P configuration at the SoC level in nord.dtsi, and wire up
-> the clock and power-domain dependencies shared by all Nord embedded
-> variants in nord-embedded.dtsi.
-> 
-> Move the SoCCP compatible to nord-embedded.dtsi to fix binding
-> errors reported for the Ride board.
-> 
-> Signed-off-by: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+On 10/23/26 2:32 PM, Ramón Jesús Miranda wrote:
+> The LPASS rx, tx, wsa, and va macro codec drivers prepare and enable their
+> "macro" and "dcodec" clocks (which correspond to q6prm LPASS_HW_MACRO and
+> LPASS_HW_DCODEC clock votes to the ADSP) in probe() and only release them
+> in remove(). Their runtime PM callbacks only toggle mclk, npl, and fsgen.
+>
+> On Qualcomm X1E80100 systems where the ADSP is booted by Linux (such as
+> running at EL2 on the Microsoft Surface Pro 11), keeping the LPASS_HW_MACRO
+> and LPASS_HW_DCODEC votes active while audio is idle prevents the ADSP from
+> entering low-power sleep during s2idle, which in turn blocks the SoC from
+> reaching CX collapse (CXSD) and AOSS sleep (AOSD) (both counters remain at
+> 0). Also, calling clk_disable_unprepare() unconditionally in remove() on
+> clocks already disabled by runtime_suspend() causes clock enable count
+> underflows if the driver is unloaded while runtime-suspended.
+>
+> Disable "dcodec" and "macro" in runtime_suspend(), re-enable them in
+> runtime_resume(), and guard the clock teardown in remove() with
+> !pm_runtime_status_suspended(). With this change, ADSP, CXSD, and AOSD
+> reach >99.9% residency during s2idle (~0.20 W system sleep power on a
+> Microsoft Surface Pro 11 OLED).
+>
+> Assisted-by: Claude:claude-opus-5-5
+> Assisted-by: Antigravity:gemini-2.5-pro
+Advertisements for particular slop-generators are discouraged since 
+816d9992d9ed ("coding-assistants: simplify attribution") btw, and the 
+tag is no longer required since 1e035297ffda ("docs: remove Assisted-by 
+references").
+> [..]
+> --- a/sound/soc/codecs/lpass-tx-macro.c
+> +++ b/sound/soc/codecs/lpass-tx-macro.c
+> @@ -2390,11 +2390,13 @@ static void tx_macro_remove(struct platform_device *pdev)
+>   {
+>   	struct tx_macro *tx = dev_get_drvdata(&pdev->dev);
+>   
+> -	clk_disable_unprepare(tx->macro);
+> -	clk_disable_unprepare(tx->dcodec);
+> -	clk_disable_unprepare(tx->mclk);
+> -	clk_disable_unprepare(tx->npl);
+> -	clk_disable_unprepare(tx->fsgen);
+> +	if (!pm_runtime_status_suspended(&pdev->dev)) {
+> +		clk_disable_unprepare(tx->macro);
+> +		clk_disable_unprepare(tx->dcodec);
+> +		clk_disable_unprepare(tx->mclk);
+> +		clk_disable_unprepare(tx->npl);
+> +		clk_disable_unprepare(tx->fsgen);
+> +	}
+>   
+>   	lpass_macro_pds_exit(tx->pds);
+>   }
+> [..]
+
+You're working with a tree that's months out of date! This does not 
+apply to linux-next at all.
+
+Commit a5ee3180a2a7 ("ASoC: codecs: lpass-{tx,rx}-macro: switch to PM 
+clock framework") back in July removed all of these calls, and the 
+clocks are now automatically managed by the framework, which has solved 
+the issue.
+
+Several people in #aarch64-laptops have gotten CXSD state working 
+recently, and no one touched sound/soc/codecs.
+
+~val
+
