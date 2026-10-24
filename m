@@ -1,99 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.43
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792802524;
-	b=FchgenhVLc4ZOb31/sXFkFZWOAFlgh/E32yxp6Ahr4hmpT/jZvy3J4HI1V3vD6G8k053
-	 VWhLHxSy4zvEAEnT1oi7IkCOjUzqEc9sRv3kzrqZ7anuEHBpyAGXsp+gbLLPcVHstQTOs
-	 i0b0gOQI0dSK92oVHdeJqCAP3By1Ax+FmVwkAwXKnJZM8QZXO8ACbbubwZliJ5+K1SNHA
-	 xOesDWvlBMhOfk+5IkQYJSvYX+mvAXOs9UPeQsKvz5A7+QY1ZQUGYPZMKNGK7qxWo1clL
-	 yyqr7udPGAzRysCiYJ6pqw/BfvFZZBl5wVTz4cLve2Y3bsd5flDciKTiHuN2H/5Eiig==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792802524;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.43
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792803559;
+	b=hdasje3Vb8na8g7poIfER7pXec5y1jcrxHSpWYZfRZxgQasaZqDtLf+Kuhwtlrk0xJ02
+	 MKGFXk04Wrv2RivZBcMKCINITiLHB7Eo+eRgUmXONmfmgDIY3IxyYeZHs7y+d5AFBItOy
+	 8jrW7svku20w633Tso/mqmGqq/eQlTtCHOHqXnN9tc/JZzGlPuAjjdaJiCmBXaBLDla01
+	 VNKbR03CXd626eqRGXh+TCpEmzv22qoWtlG45fsUIROlBbGCdmfumndW8oY4pZU7x6byc
+	 F2Qdf65kOAM4b92cK2DsKChWjFrrsbFfprbG2fb3sKhZpTX2IDKg25Ynuu8DI6FRtXA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792803559;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=/XRXSv4fVHsC4ziboqWGIFRRdg8cj1bRHxSMe4gZ92A=;
-	b=XXUATipIzjCtKU5G+L3n/CY+vAWk2PyjuxAZIWI3iMFf59bE988GEKtmFhwOy0eBvaPM
-	 OrjAQTm7H7rYz+zR4rxRj5TioCWNRQV/vJTqZFz64ons++o03K6aWd+t6zgtUCe8Udeua
-	 SE46VerdbviLIHZq8xTlK8OXDmFNpbQ3WBjZkeVkMhqdpPo91wdPtoRWXum4+n0hFKsdC
-	 Krlrsk8fVekxHDoatFWcHZ1oQGp4ubrHPZVfaAiMpX+Tn/lRwIuvSmiow1SmaCE3M+utR
-	 J4bzCEZ3vur4fEOAqmrZm/LUIK5fQdwRdWWDYH14y2j7gCQMqYPAEHj+HJEXfaF9N/g==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=dZo8YGXipFDOPlk5LjrlXEXfuFOOoXy5+FZD35r1Kog=;
+	b=Dgun+xL7bdOkycg4baQbduofwljFbRtT4HAy9O4TTMVsulGyJ6Y4u3QBJ9+yNPGz2Utl
+	 mihYDprZLv3MkvWgGLT9xoVfZvxMqOcZn8abBDPampFER+TRq7pFAILk74Gxe9ec3W6Nh
+	 RXFwAvrxOBAo12Q0WNwXgp1wGQvjtR7pA8xisyD6mph1MjH0xgdDEBvgm1YqITc2pz/Nk
+	 z5e5Hg+wO93hiBj68jI1/ek2UK1L82M7ddOo8K4XZ2hkOQ0KZul5AXQb878+WRNLJwM2n
+	 RpM2NrT3MTdgm0XGbANaJJg93fBSo49LvUk8Sa6iam7VNZxBJOQK6nbrNCfi2Ao0BKQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=l1kNxS3r;
-	arc=none smtp.remote-ip=74.125.82.43
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=BvNnJ2qJ;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.43
 Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23E38606A31B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 00:42:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 23E38606A31B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB15E606A31E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 00:59:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CB15E606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=l1kNxS3r
-Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-15ea896ddc8so2241875c88.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:42:03 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=BvNnJ2qJ
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-16079d54c17so2916702c88.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 17:59:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792803558; cv=none;
+        d=google.com; s=arc-20260327;
+        b=kH2yIAO6/ndeSgamRkimDgKNhLAby6fU8fs26YI1nalUDq5FT9qW0oe0w5Pmsf0cwA
+         rSF5PkGQUFrtI1uSCNGAqEAnIR+Lfkyt6Zg2lHwC1STnOO1oaads9CzoYh8SEW5SqbIL
+         lXANNeG/CJafYJbKsGK9pEKuwBP4bVbdE4EJdWS8UB2l9fNVqF7HmjplONQRAJOFVfau
+         SKsPiIKovxPE29NDIaaatr3J/oN9F/WnJCJhPZJySMAV+eNiBnI0bug6ZEvwLoulKvVg
+         XCVq+YUnUmbdSGNb8i9Ca8CErRrqld4JWstFYn/I4vDj+8U9KTIlH8Nb//KVZQyrQoEv
+         +F4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=dZo8YGXipFDOPlk5LjrlXEXfuFOOoXy5+FZD35r1Kog=;
+        fh=HM2tdxevIEFgwq3oLbHLJxbXzW7RvTEs2cwBKQT36qI=;
+        b=RmagZlcu5YV11+4/0CyUKP1Au7BdQTjIqSXh10HmnCWYiQrIT1Tl154Kiu+aeXIAPt
+         ESep2cy7Agpg75PoMisdIENRYMAHoBP2360G1TBOCL3kXbeG2aR9cTdmxSB7kZJj/p1+
+         Y7yJQNwCeomE+PTXuvlAYukmGuii3pRCSQqL8urAhtEP9SW9+JU6YcTUQIg9B4zRfiGn
+         /Mcnl7geVm3qCO4npo9sjx+xFWzY2k9RYeI/jLTQbf1iAbNs8zTzgUpKCO56b4rf8+4Y
+         8RHmzjpASoq6F2wemlUxhOSZ1lY6m8EZbRe/pIf78UNGYyvRHL/x9hTlvcCDPlbE8V1t
+         rXRg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792802523; x=1793407323; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/XRXSv4fVHsC4ziboqWGIFRRdg8cj1bRHxSMe4gZ92A=;
-        b=l1kNxS3r1BfdUFvUMKH7y1fh2OhEiUVnI2T5QKHo939GmXIeIk9Z6PxMsOccC+2wLA
-         lRoB0mH+lRb6FY/eZmH9U9R2MZ8yD74jAFiRhiNj+CBoBV1EM1TG2kKho1LrvgkLLWtG
-         NUtt2GrObPMgt0iBvyrk4z9aymonlMIiJa5OElTV2EV0/TzLie0HWxBn6COIJW0sb/J0
-         HUCTUn5tU1Hkb+KmophqyHFLz8kYpAM20AGuYpAzNB9+qWO4HN3bNxCCpJ6rIsVhhalY
-         ehzpW7TzyMTqTIz/c7ROPF50UW4FWu/5gmAaGtbgwr4R3Es8XCilXuSWkV21s6L780Qe
-         KEKA==
+        d=gmail.com; s=20251104; t=1792803558; x=1793408358; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=dZo8YGXipFDOPlk5LjrlXEXfuFOOoXy5+FZD35r1Kog=;
+        b=BvNnJ2qJiKNYx+kMqLstZUfLbZO3SWFMHIFNvg5PlmWaoOBd1ZXExM66HZnXjTCi4S
+         unE6rjajRqY8/A7SPEfI+4LBAuyuJiZmoG6Q0Fq7Y+tQ9wmZa108XB9h2/Ng2vW0Xp/b
+         AuD3gZTSlSYuSougzvuYb2iXNty1CyVxCSA205hal/Jtbnmth7kFubu1V8Iv8Z9fKKNc
+         jNTDfuf7/PVrPtMco3654bq7gxYWtmwWshbc7A+9XOhzjwvfjRy6RUeLptR0GdzXx5k2
+         Z19S16Xi3RX+FXqQpE5fkAoh5JaAMd13ZeR4cQZkBBCyl5sEOlwgR5aS2wARVCM7yyxc
+         16ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792802523; x=1793407323;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/XRXSv4fVHsC4ziboqWGIFRRdg8cj1bRHxSMe4gZ92A=;
-        b=pufIT+zt1G+e9W2dsC07JLnXoNT1Yj/mZtv/yn9D4DMC4nuh3s3uUaYMQSe8o50DCZ
-         6E6W9/0p2+ZKAj4RbPPekStT2zQ9hDkFrigOZwNNg8zop7r/fjmwGSl7apzcYkJHGgd9
-         fhIbGgdXdTHYMO/Ohjpjq7hldYd+accY/XCN8LMOi1o61RkoHojn16XR2RmIV+CC/1PC
-         SPQvSLwkrvkNb+uP8zpU/Y5FYcVwMZSD2jVNStUuVBlrBHDo7QrmYvmAnsX6ZHV7kt/+
-         lSbFALBNTQQ0tZba5IBdn8zgRPdmCEPRtauRhkLTCYgvcsWbsQxip8GRsV/NtIEtebwA
-         fkLA==
-X-Forwarded-Encrypted: i=1; AKwUvBzUndpVsFzldfQmEd2xuXJ7yEGKqOr0pf2aibHcZc1qVpGg+qNP4KwJM3tHYQbMkToBu+yDL+4bFskzKo59@vger.kernel.org
-X-Gm-Message-State: AFq9FYLSBuleYdWevXpn/ULw8EGJJeMX+dYASsNgTC1ZJR5vGQ1nC1p+
-	JBVw0HD6mVk6UEx8gxEXSVMqpbCoUFNo06YxqiFAguu7c7yLtMkw4FzW
-X-Gm-Gg: AYBFou1oRMQv3WRfncy8oo8BbG5K/fRPt1hU8OhZiFx4C9Hjs60pQoh8nyCRXSCZME5
-	LuyEeekoh5hWqLaXlKKnvD0eZPeTGIWFvuhNbXwIcp/buuNIL3jBH9HDY71QIfN2PZJVAm0PQb3
-	INLc7ZFdi/DFGraRvtfUGQSs1c1LXtMYjw2qBynITPmyQ22cHn8+9Tpq0Xg2vZKt6DkV4CzB0ZJ
-	mlhGvZJXAP6pj36nhemSxxp8ylJPbhapccoWc/50ecoK5pCFRksqLJsvkLGYgvYb4RRXfMMKEr4
-	1Hgph2ZjF+4SNniyIzz67VOliV8g4ByxSCqOwH2elQbWtSCLb24+b2VZYaAoDs9RHwhq8W7UCbc
-	AybwAEJCqou9AEnaVVbN+s/QbRX+YLvWiHkQFX3mJyoV0WWWGVm2TkvWX5nzVUGcxO+py5MFNr3
-	xN+weUt4B8+4QPcUkVbr32688Oa4sdhJ9sCdGRX+ygrQ/pD+pXfL17R5oFyrYaWIXe9rZCEMeaE
-	LuleGVFM4jFSsNuDbnE2hZzXyS2pjEl/erJoiX+MdogkNLa8WryQfq8LPZKylwP+wcMPdiV3s7i
-	GbnfbBrCmIHiNYnUnVE6Tho4qEIhikCC
-X-Received: by 2002:a05:7022:3b8c:b0:190:3950:43e2 with SMTP id a92af1059eb24-19933f05581mr963161c88.8.1792802523106;
-        Fri, 23 Oct 2026 17:42:03 -0700 (PDT)
-Received: from ryu.remote.fontis.id.au ([2403:5814:a404:0:f5b3:4c58:d5d1:e6e6])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a37c88aasm1697548c88.23.2026.10.23.17.41.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Oct 2026 17:42:02 -0700 (PDT)
-From: lloyd.hazlett@gmail.com
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Lloyd Hazlett <lloyd.hazlett@gmail.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org
-Subject: Re: [PATCH RFC RFT] drm/msm: adreno: attach the GMU device to a driver
-Date: Sat, 24 Oct 2026 11:41:07 +1100
-Message-ID: <20261024004108.2084140-1-lloyd.hazlett@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20251022-topic-adreno-attach-gmu-to-driver-v1-1-999037f7c83e@linaro.org>
-References: <20251022-topic-adreno-attach-gmu-to-driver-v1-1-999037f7c83e@linaro.org>
+        d=1e100.net; s=20260707; t=1792803558; x=1793408358;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=dZo8YGXipFDOPlk5LjrlXEXfuFOOoXy5+FZD35r1Kog=;
+        b=vqw1MCFXpKxP/hyWActyocLvjOwotAH0nIs7VeB86WSstpQj1DaHn8YcKBvVPZA7we
+         6mhk7EFn9WiVYrfyXIStbSSjGQd1k/OeDXWI9JNWiWRKtAhC+aqhJbcU96WAJqU50PUS
+         j1DKeAz6ud+PFo/r+R+C5lvl0ywsmXwj7WnKLLgnuykbc5l37d0UmE6KvT/JcVZi2wfM
+         noEoHjLQrfOploeqmMC3Hqu6dbacGef8Y0b6f2UzMr4JYMDgYpfGzzWTrO1xzzWi68eD
+         zNM3rtPttuhiDmLf1jhCZH20KWkQCLxfPfaEl2nONB5gwy/MnGmaWadKgSBAXJjsh6il
+         eglQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxKZooKaha/vGOsTXZ9Fo3Dy23a6l3RCrh3+/VLZGcuLIoaYai9WH/wLv/YHMYoiQON5n/uYBuWU6qM6DdJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYKf+qMpbSjJnjjVYgVL28pHlfmBaJqIW5A7hGb0+JO+G+1Vv+/o
+	PWuv/V6lDAxEWXuUcfJ2sDex6/Z8IFEPzGz7kreVD2X/EB6w3j7tdFoo51AxmLX+ZQQ397dGodG
+	OudCjMutRVTLJ/aEeKPe4eAuutSBv6Cw=
+X-Gm-Gg: AYBFou1jGebHp989pjM6BcHffd/uWtNW6hry8uai06znAKYf/oWchRyhQTJy5oTzwMJ
+	xjF0+Li0x0XeZ1cFmqaQKzcaZOSFQCJOYhvmwHNrRgWhJj8rWwIClo+9UoTIBBgytGNO+TT0rf6
+	vGBwzxEEk1W00ZM8Hn5RAba3X5Jx+bDvePQsjvaJs3EIQju6kV3aXLeUE5q3rO9L1wO5wuJyRrh
+	dcg8ymNcgrHUsJnd6KysJH7WeUO0IFtqjWUrS00gklAKb5vE0WWfZJhcT5yQNm1W2tPSo1GhP1k
+	FNZwHZkoMAy037MKBH2Gi1JgXJZSU+mnc5zxjZvnfst1ELdEUB00tsoWtNBOMjnCQtXAS7URUq5
+	6IVmti0diN1/r+Ld3EMi/+DBiy0OJmjx78AHKYuaeAajC2t/dXWCIbCl748V3rLvsBrIR
+X-Received: by 2002:a05:7022:ea4a:b0:193:9aa3:4748 with SMTP id
+ a92af1059eb24-1992a250624mr874553c88.1.1792803557836; Fri, 23 Oct 2026
+ 17:59:17 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,67 +104,69 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261022-psci-fix-v3-0-9ce2133c5659@gmail.com>
+ <20261022-psci-fix-v3-3-9ce2133c5659@gmail.com> <e0becea2-c5a1-46d4-932e-50517311fb96@oss.qualcomm.com>
+In-Reply-To: <e0becea2-c5a1-46d4-932e-50517311fb96@oss.qualcomm.com>
+From: Reza Kurniawan <imkyufie@gmail.com>
+Date: Sat, 24 Oct 2026 07:59:06 +0700
+X-Gm-Features: AclHuK805OtpEX04XfOwa7m3QcwJPrF0jSlDAfdHBuylNxB6UZKJYqAFi9tMyjQ
+Message-ID: <CAAq9HC7EdA3proF75D9kKa0QFJswV-bFp284u2vUfJi-dcj2_Q@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] arm64: dts: qcom: msm8917: Use a shallower cluster
+ state to fix unresponsive idle
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Ulf Hansson <ulfh@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Val Packett <val@packett.cool>, 
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Lloyd Hazlett <lloyd.hazlett@gmail.com>
-
-> Does this *actually* cause any harm, by the way?
+On Thu, Oct 22, 2026 at 5:14=E2=80=AFPM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
 >
-> For example on x1e, GMU refers to 2 GPU_CC GDSCs, GPU_CC refers
-> to a pair of GCC clocks and GCC refers to VDD_CX
+> On 10/22/26 11:41 AM, Reza Kurniawan wrote:
+> > MSM8917 is a single cluster SoC, so powering down the cluster means
+> > powering down the whole system. This causes two problems:
+> >
+> > 1. The system becomes unresponsive, even to common interrupts. Waking i=
+t
+> >    requires an interrupt from the MPM (MSM Power Manager) or scheduling
+> >    the MPM to wake the system later. Linux currently has no way of doin=
+g
+> >    the latter, so the cluster may never resume operation.
+> >
+> > 2. Entering power collapse blanks the screen. When the state is entered
+> >    and exited repeatedly, this shows up as visible flicker.
+> >
+> > Even if MPM scheduling were implemented, the second problem would remai=
+n
+> > and it wouldn't fix the system being unresponsive at idle.
+> >
+> > Replace the idle state with PSCI mode 4 (dubbed GDHS downstream), which
+> > is less aggressive and can wake up from conventional interrupt sources.
+> >
+> > Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
+> > ---
 >
-> and I see these prints, yet:
 >
-> /sys/kernel/debug/pm_genpd/gpu_cx_gdsc/current_state:off-0
-> /sys/kernel/debug/pm_genpd/gpu_gx_gdsc/current_state:off-0
+> https://lore.kernel.org/lkml/20261005-s2idle_state-v1-0-3c402c66f388@oss.=
+qualcomm.com/
+>
+> and
+>
+> https://lore.kernel.org/lkml/20261015-b4-shikra_lpm_addition-v2-0-ac7f1a0=
+d5638@oss.qualcomm.com/
+>
+> are in flight, you may want to integrate/test them locally!
 
-I may well be missing something, but on an ASUS Zenbook A14 (x1e80100,
-next-20261001) the GCC half of that message does seem to cost
-something. The GPU_CC domains here are off as you describe; it is the
-GCC ones that stay on.
+Thanks for the tip!
 
-Every GDSC the firmware hands over enabled is registered powered-on,
-genpd records that as stay_on, and genpd_power_off() returns on that
-flag before it looks at consumers. So nothing downstream can release
-them. Unbinding dwc3-qcom, runtime-suspending the controllers and
-booting without pd_ignore_unused each made no difference.
-
-UFS is the clearest case: ufshc@1d84000 is status = "disabled" with no
-driver bound, and gcc_ufs_phy_gdsc and gcc_ufs_mem_phy_gdsc still read
-"on" through a suspend.
-
-With fw_devlink.sync_state=timeout, seven domains let go - both UFS,
-gcc_usb30_tert_gdsc and gcc_usb20_prim_gdsc straight away, and
-gcc_usb30_{prim,sec,mp}_gdsc once xhci-hcd and dwc3-qcom are also
-allowed to runtime-suspend. Their idle_states show Usage 1, Rejected 0.
-
-Suspend draw on battery, same kernel either side, both windows ~99%
-suspended:
-
-  domains held on   23.3 Wh / 21.3 h   1.09 W
-  seven released     2.0 Wh /  2.3 h   0.87 W
-
-The windows are very different lengths, so to be clear about which way
-that cuts: the long one is the most reliable figure I have for the
-held-on case, and shorter runs of that same configuration came out
-higher, between 1.1 and 1.7 W. Taking the lowest of them makes ~20%
-the conservative reading. It is not the whole problem, since this
-machine never reaches cxsd either way. It may relate to your note in
-the same mail that cx sits at perf_state 256 "because of USB3 votes":
-those GDSCs cannot collapse, so the votes stay.
-
-The same thing happens here with a second device, in case that is
-useful:
-
-  qnoc-x1e80100 interconnect-1:       sync_state() pending due to 1dfa000.crypto
-  qnoc-x1e80100 1700000.interconnect: sync_state() pending due to 1dfa000.crypto
-
-1dfa000.crypto is enabled in DT but qce is not built here, so it never
-probes. Any consumer that never binds seems to do this to its provider,
-so the GMU may be the most visible case rather than the only one.
-
-I have not tested the patch itself - the GMU here has no driver bound,
-which is what led me to the thread. This is only evidence that the
-motivation holds on x1e80100.
-
-Assisted-by: Claude:claude-opus-5 [claude-code]
+>
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+>
+> Konrad
