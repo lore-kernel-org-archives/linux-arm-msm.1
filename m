@@ -1,56 +1,116 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.185
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792810720;
-	b=ffJXXiKFqqjTMjJIo+YhYKopo8mgFzNjqF2iaWYqO9tryqiqlGq2/LVjhRRQZvzMU3Fj
-	 6N8+QhelunBlbZvQ7hXUcK+o4Ci7BVKsABdWpyFwzg+8FnArJfqsSzuaS9MVoT4bCIRdi
-	 7d39v0ZhTNVg7ed8rz5P0Zjc0I1+3juGSmsQV+qJLtbQYS8xjKRxM6o2gsMv6NOJAtTlj
-	 HFax7eX+HTDOEpBbGbDnrEK8wuVc6G9ublFUfs/zILrBbL5KnxiqOlhG/+lqt7wsXMmRE
-	 fja+wI+hpUc22OLCHtWcD8NEj7PwwOXIkn1sNT+4nGg4/95DGsJMenfFixk96xDhNWQ==
+	t=1792810940;
+	b=uBfs2rZnxA3WhA9F7KaimWgER9TUyWTOJX0xvQbNuJUWD/FRHbB4u9SjQkaYJ1tngv8J
+	 r952tf3/pFyrarUsijt4XTECsoorTNwmJv/DOz1n8IHz11t7CFMal0NazXcRUcTOhfD+W
+	 WxScofngXB4osbxE6tJif1OcRjYlKdAkO/5tv6yNZkm7SAkb8TATKO5ivB8d98HQDHi8X
+	 8Uxq2IrtBQA8H8rMUIoiVCo11XQdOl9i/4mc7/Ku5xHAdqsqzhsrBOQSua94rm2kwknCR
+	 7JbcSR5/SiGwvpYn64e+Dq7cus1AAqbieYWEZRld2ABXIt78PsA/g+Whou2RiKDx5KA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792810720;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=DMCCmtvheCPZ6z25FzUW0Qd9uAafljfKefGPpydFs30=;
-	b=bVjl7g1xwLtrCkh1TDYuL16G+Fci+llsiy+cmSEgPXaaltya6wRjE++sibkH4XESg0eP
-	 ocmkXWf9VmGSKqMcF00eFXwbsMSCWEXTUPz4AhLN4+zhjzwuQcCB1RKTQzOxaW3oadh7i
-	 EMLEq40ssZ4jBQG74tPpPr5lmAJCY41YFudLoZoR6QV452OB23asWrO5raOUwZqyzxMxB
-	 e6FNCNbKxStvmeqWC3DT3qGtXcBZVT3E+kL9cZBiKmdJaSuNnivNWgxZVdIV+6kuG50gT
-	 7abWbi+8fbxHyLzs/xwdsrk+tp9uIqyogJlqt12aFadb3Hxs5xp3wJIZZl02iWkxodw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792810940;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=d42c0lsKAH/3dqQCFaUwqRJoKAQ44ktKOlAIQMH1hCY=;
+	b=D0OqfK4H1MVtWlw9t2jCa/LF6Z5k+1mv7P/NzzfnTaJRGwt9zViQS2ZOzC3Ul7Wy35pJ
+	 iQa+hIszSWQpUiLDlU5nBTSYxRqMlILvcXxCUJ/u5LyT4/AOEBbPd4Y6upvAmcWWmqq3t
+	 XLf9aKvUMbrW/oCiUYovB7157Afr1HXYkNsfpuvp9YGtEYduNePj2bgHn3D+kOh02IaKK
+	 3Es+wgYZfypTnrne4eH2d0bzRpNh9gzkQk/UhtHISd4lAUJz9xhoxD+H/p8hY/6qZq6iH
+	 hrKmyigFHws9oHt8zhvsIKEdo90WnZlaehTAHAZz+HQoSgqtoEDW0FjEHkgSwrPRvLA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=PlWGrR3n;
-	arc=none smtp.remote-ip=95.215.58.185
-Received: from mta1.migadu.com (out-185.mta1.migadu.com [95.215.58.185])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=OzxlIDvH;
+	arc=none smtp.remote-ip=209.85.161.46
+Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com [209.85.161.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCECA606A31B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 02:58:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BCECA606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B262A606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 03:02:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B262A606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=PlWGrR3n
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=gMqBedMqV6/PbEo4P/C/wuOOsirk4D+GGPXOjLgDTws=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792810716; v=1; x=1793415516;
- b=PlWGrR3n5CnVaJDtS1BCZrLEZV3BF47ZC06Vma1LNJdgfCCgzrXTMjkFGKt+sa0M4rJgIwaK
- k9ZAf95fFi3BfwFIZ9Jy5AxUE8QAd35QRYOnQTb77MZggU2qQ2iAhPZ5E5j+/wKgAud/knZx/Lr
- v3F7bd7suXx+ICwQZp79cus9p8Ke6NTVM4dkrUUe8pRkQHoxmBE8UZmM5r8oaD5vUPSTsAqnva+
- ck4gYX12rZE9HpeiCRmiL0cH1HyQM+UZ8vg48r/NeghbdUC80hpGVYnnu+0XyJxrFAt4ZHYCW0v
- ynhE94sD95pd3aJWyXGcJT9k0yYW8Wr11RuiOpVnC4oHQ==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 16e8be6ff7b3bc0f;
-	Sat, 24 Oct 2026 02:58:36 +0000
-X-Mizu-Trace-ID: 16e8be6ff7b3bc0f
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <c1f5b813-4228-42ff-94ac-2ea6533328f2@packett.cool>
-Date: Fri, 23 Oct 2026 23:58:25 -0300
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=OzxlIDvH
+Received: by mail-oo1-f46.google.com with SMTP id 006d021491bc7-6b8e2d8df4fso1020379eaf.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 20:02:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792810939; x=1793415739; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=d42c0lsKAH/3dqQCFaUwqRJoKAQ44ktKOlAIQMH1hCY=;
+        b=OzxlIDvHsBuVBGUMT+8hhDmDm2eraWK4nTBCUKtlXeqdjCWhOVVKs0LEyTlgA4CakO
+         hOKTMvk2s5xQ2y7oiVo8Ei/AL/PfDavAKCBaVNpItzfDKRkzgUD7Twkq0cvqIviMydD7
+         zuC25cLkocAPUh0ikOsEUtnfkVBmqgPb2+l28VMJp92uiWHwteFwFEGY6TWTRc4tgHWB
+         FeJVCGiXbSScFv9BuFW6Vip5MK4mRbIjVaqDILDiX1HgF3TS/xxaB8AMt6j7NAK9PPcK
+         NQW5rwFHVWiVdtnAoDsBwWw72WsW23ZWXTl87S5F71ZAwgGLyBQ9+5K9O9Q/2gfvolMj
+         2Iog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792810939; x=1793415739;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=d42c0lsKAH/3dqQCFaUwqRJoKAQ44ktKOlAIQMH1hCY=;
+        b=BgI+zwZDwcupUxnErp+9jLqVvABoGCXhWytpDI4gubnyLFqgSEJK/O84vIGYP0BIVY
+         CHu8SYPwsgOqfyem4Ne0bTBelcYuGwQ3RQHmaFqFWvikiX4Mb7zPY0uxTyWtPOEUMe7/
+         5x7hjKShclURz5Yryv+mGuZo5D5sAbEsACpbpKxt76QrWzfiCqFUkqEsN4xbaa6SXtJO
+         qFhfkOz1G8qZl553mdUu0DQOk19PqfC/OocVnJ6i5ENwvUt4++sNzrTt2tqmllVf0U4u
+         hQ5xU9EVSgxj7Dn1P7rCkyKMdj0o6+AwBVpoGyXP5i7LTQbpi4s67IIkqkwZK9+PE7Tr
+         GD7g==
+X-Forwarded-Encrypted: i=1; AKwUvBxpk4iQFAFIlBzruErCXDQx56uy+dcOx3KhItz+FSaomKK5fpzbmpvp0//1cR3qGnkHET/uSQE02kZGPsoQ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ/XpFKLoAQVjadh8nX+G5vhpYf+xyQeEZwThokP8AOC2NUm0oP
+	VmLQRf9jK8X210xxAX5dttxsm8ZeUG4J3FNiZW2IveuvvAC+ZaflMxQM
+X-Gm-Gg: AYBFou3WhKoF1s964z0uNjLQBOdFq/37b1dxhiCSOYM9cWhFP1YK/nR5TQcVL70k9XA
+	Vphoi7SURw4z5tt/vXOxoilt78qygKdwPPgN/gSzX1qXV6aG6RybWnamTD7ww3wkgkCITemcrZK
+	3w9JOHOw6S2usGuaah7H1b+0LEMeK+owQ+26Nmd6FWnFA4DnHXt37P7GVLqH7FPmquzkY1Wo0qs
+	z2lZAZo2x2oXrXC8tID+091PuvQPHM9PgWud24xHBVx8nS2KWjS3Rbrb3LhDwZD+EONOQx+/fq7
+	wYiFTffxTziCDVAe8xXgKKbDllrwbdZKA2jaOwdhufBtthMSqqu6t05YxRYenoTPEDnYfcpV9jD
+	LyQ/uDIgcpCPlNEmSVV4PSedw3d8uH7OdvczPLK9nLEfnFd8u1eQAlO9BmasY7lJkaSZuwoem1C
+	HGtUNjO2cf7cWymKKOuB6ckR4kAUDp7mRlNRZklQEjFLX5x26k0yAonTYG5SAN4MlPLEGV/hcgL
+	JzMj+JDCwuJn4nAfSGKi69w4ZBg0ibfNY3BzJqmVj6UpGPiRyzj8UbWLMi9vZRVZd1tQgtHJn6s
+	EAsa
+X-Received: by 2002:a05:6820:a514:10b0:708:c97f:5542 with SMTP id 006d021491bc7-70ba0f72e95mr238732eaf.76.1792810938704;
+        Fri, 23 Oct 2026 20:02:18 -0700 (PDT)
+Received: from jeffmr (63-152-17-145.cdrr.qwest.net. [63.152.17.145])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-70b9e1fa334sm824552eaf.9.2026.10.23.20.02.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2026 20:02:18 -0700 (PDT)
+From: Jeff Roach <jeff.roach0@gmail.com>
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Jie Zhang <jie.zhang@oss.qualcomm.com>
+Subject: Re: [PATCH 3/5] drm/msm/a8xx: Add Mahua GPU support
+Date: Fri, 23 Oct 2026 22:01:24 -0500
+Message-ID: <20261024030142.13643-1-jeff.roach0@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260925-mahua-gpu-v1-3-0fa0bfd8d315@oss.qualcomm.com>
+References: <20260925-mahua-gpu-v1-3-0fa0bfd8d315@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,149 +120,18 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [v2] drm/msm/dp: hold one runtime PM reference per plugged state
-To: Joonhoe Kim <26rote@gmail.com>, robin.clark@oss.qualcomm.com,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
- marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
- yongxing.mou@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <20261007155848.106-1-26rote@gmail.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261007155848.106-1-26rote@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+On Fri, 25 Sep 2026 02:44:34 +0530, Akhil P Oommen wrote:
+> Add support for Adreno X2-85 GPU present in Mahua SoC. This GPU is a
+> smaller version of Glymur GPU with fewer slices and smaller internal
+> memories, but shares the same register layout. Also, the GMU chipid is
+> different when compared to Glymur's GPU. Add a new catalog entry to
+> support this GPU.
+> [...]
 
-On 10/7/26 12:58 PM, Joonhoe Kim wrote:
-> The plug handler takes a runtime PM reference every time it runs and
-> sets dp->plugged; the unplug handler drops a single reference when
-> dp->plugged is set. msm_dp_bridge_detect() also takes a reference and
-> marks the sink plugged, and keeps that reference as well -- on every
-> detect while the sink stays connected. On top of that, in the current
-> tree the plug handler runs more than once per plug:
-> drm_bridge_connector_detect() calls .detect() and then .hpd_notify(),
-> and pmic_glink altmode reports an IRQ_HPD as "connected" too. Every
-> extra reference is leaked on unplug.
->
-> On a Lenovo TB323FU (SM8850, DP over the USB-C port via pmic_glink
-> altmode) the DP controller's usage count reached 28-34 after a few
-> plugs (rpm_usage tracepoint), so the controller never runtime-suspended
-> after the display was unplugged. It in turn kept the MDSS core GDSC on
-> while all displays were off.
->
-> Make the plugged state own exactly one reference: the plug handler
-> only takes it when the sink was not plugged yet, and detect() returns
-> its own reference when the plugged state already holds one, or drops
-> both when it finds the sink gone.
->
-> With this the count stays at 1-3 while a display is connected, the
-> controller suspends 3-4 s after unplug, MDSS suspends and its GDSC
-> powers off on DPMS off, and replugging (quickly or after 20 s) still
-> brings the picture back. Only tested on this device.
->
-> Fixes: 3ea2d1c3d154 ("drm/msm/dp: turn link_ready into plugged")
-> Assisted-by: LLM
-> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
-> ---
-> Changes in v2:
-> - Drop the plugged state's reference once, after the if/else, instead
->    of in both branches [Val]
-> - Drop the comments
-> - Link to v1: https://lore.kernel.org/all/20260929130627.959-1-26rote@gmail.com/
->
->   drivers/gpu/drm/msm/dp/dp_display.c | 15 +++++++++++----
->   1 file changed, 11 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-> index 6abe30bdff12..4059cb9dba64 100644
-> --- a/drivers/gpu/drm/msm/dp/dp_display.c
-> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
-> @@ -412,10 +412,12 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
->   
->   	guard(mutex)(&dp->plugged_lock);
->   
-> -	ret = pm_runtime_resume_and_get(&pdev->dev);
-> -	if (ret) {
-> -		DRM_ERROR("failed to pm_runtime_resume\n");
-> -		return ret;
-> +	if (!dp->plugged) {
-> +		ret = pm_runtime_resume_and_get(&pdev->dev);
-> +		if (ret) {
-> +			DRM_ERROR("failed to pm_runtime_resume\n");
-> +			return ret;
-> +		}
->   	}
->   
->   	msm_dp_aux_enable_xfers(dp->aux, true);
+This fixes the rendering corruption on the HP OmniBook X 16 (X2 Elite,
+Mahua): GMEM is now reported as 15.75 MiB, and GL, Vulkan and WebKit
+render cleanly without the sysmem workaround.
 
-This part (msm_dp_hpd_plug_handle) is now also handled by the IRQ_HPD 
-series:
-
-https://lore.kernel.org/all/20261024-hpd-irq-events-v8-6-6ee949e7a384@oss.qualcomm.com/ 
-
-
-> @@ -897,6 +899,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
->   	u8 dpcd[DP_RECEIVER_CAP_SIZE];
->   	struct drm_dp_desc desc;
->   	bool phy_deinit;
-> +	bool was_plugged;
->   	int ret;
->   
->   	dp = to_dp_bridge(bridge)->msm_dp_display;
-> @@ -910,6 +913,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
->   		return status;
->   	}
->   
-> +	was_plugged = priv->plugged;
->   	phy_deinit = msm_dp_display_host_phy_init(priv);
->   
->   	msm_dp_aux_enable_xfers(priv->aux, true);
-> @@ -962,6 +966,9 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
->   		pm_runtime_put_sync(&dp->pdev->dev);
->   	}
->   
-> +	if (was_plugged)
-> +		pm_runtime_put_sync(&dp->pdev->dev);
-
-Thinking about this again, this flow of the reference(s) seems confusing.
-
-If I understand it correctly now,
-
-* there's a long-term reference associated with priv->plugged;
-* and this function needs the device to not be suspended because it's 
-doing transfers to check if there's something plugged into the port.
-
-With the current flow (fixed by this v2 patch to not leak, or at least 
-leak less):
-
-* we always take +1 reference;
-* if we "find a plug" (!was_plugged && priv->plugged): no drop, our 
-reference "becomes" the long-term one;
-* if we "find an unplug" (was_plugged && !priv->plugged): we drop our 
-own reference, as well as the long-term one;
-* if we "find no change while plugged" (was_plugged && priv->plugged): 
-we only drop our own reference;
-* if we "find no change while unplugged" (!was_plugged && 
-!priv->plugged): no drop, is this intended or a leak still? Not clear 
-who needs the reference to persist in this case?
-
-**If** that last case is actually **not** intended to keep the 
-reference, I think it would be clearer to, instead:
-
-* use a guard (probably PM_RUNTIME_ACQUIRE_IF_ENABLED to keep the error 
-check) for this function's own reference;
-* and use a plain get an extra time when setting priv->plugged = true..?
-
-> +
->   	return status;
->   }
->   
-
-
-Thanks,
-~val
-
+Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (Mahua)
