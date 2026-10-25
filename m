@@ -1,79 +1,107 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792887857;
-	b=ivinz7GGeD2wMtl54Z0N+CJLjdK+pbKHGmiMTlWq+UXxcIZdOdHS8b81Ipu+S4LmJ5fX
-	 Hcp0Eptq0lViXHVeCYY36gbFhfPSgQXSg9D8HhcybgPd0IvjGL6g6LJrl0eDaULtuChxN
-	 3cX8L+tGlG257uzKRflrWvEkHWmOjbVRu7c7bYJ5njCFPtQISu8KTxd45ec+AjDB9x4he
-	 lPrE0sBJmOo/tG8mEvksczzNwYFgaJpANn8MLPckXXEP3kXrVNQiOt3J3JKaizXt33sIH
-	 iPmXikLbttgkz4tN1PxABTwo1CGxcXl0PpHuUA0kG53bv2iVUZvFHL0qXh494YFxRsA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792887857;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=jh1RY3xoeF/XaqMjp8a7e4jU3alkw9RlqWuVIZCU8vQ=;
-	b=sgSSnDghy0QbxZQ9yIAK2lcyWYTZtREvfeKRdLHxCeD76WrIFWYaRZQAIKkrtiNN4suS
-	 sdiIar4hY2Zz2bkzo3HRVhrSeOzEmj7nBeZeMCjRIQvmjJwwVP2lt+7T2ypasTRdXRhC8
-	 rhPtPU3bIadY4wKELn+O1hHGF323Cufz6dNp8ltAmxxO1zqgvriV8M/RhEkKzwmWSxPpI
-	 iSAbmP74pRTYf6DQ1/HCO6ddDS4MbmV7reyMC69rEgg+rxTpfwh8SdSDVwOcVdkhofD9s
-	 3oigoGGklRwZEyl80xFG65a+Y8XxNYjgxAPjS2Wr0nEk9lGWV2LeTh23NFq7GQiCiug==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="dLvIan/L";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94528606A31A;
-	Sun, 25 Oct 2026 00:24:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dLvIan/L
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792887856;
-	b=gYRaCUWB6LS5uRCCN9IR/mhLjjU118ehJDaPlhOz0IU3VhLWpllgnDT5x2g+LNTZ9fLQ
-	 cHHeOufukO/PD2T+oREVz3U2vBEkOc5QysjioTlLae2uKjsQGuxez5w94km+vNfz+0h2R
-	 oXgBmwqtlnm4rzHKHgGZzwn4EHi5hKLeZcCCN4gT7cDMdmUtdGyKCJ9NdDpG7VylW8y5B
-	 kR4zUgWNpVO7ni2SSk7YJ7ot2JG+JNrmsZxFsdr2FbDNqGnlG3vJRAbwW+quy8IgUFvNZ
-	 kVu7/FlCCDixWihKhzxMbatdmyFDXaAT2RtR+uk55lb9t/CniGWO/5n07KnOuVqDOxw==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792887856;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=jh1RY3xoeF/XaqMjp8a7e4jU3alkw9RlqWuVIZCU8vQ=;
-	b=S3EjIPxfhBe0dJEdpkEZS59fzzBRfhBweyELWkhpK2c1qgrV9RFQ4NorsuzaKQ53xpwa
-	 OcYR2ISCOU6RM8Wshis0Y6n9lDYsHwSgbnsqtxwXvxdFd+sD6Mo8gKgaagdedipIlOOY5
-	 9Ew7hrKpRgTbp3lSDBAgeUsPaLMfxtmlYq3aoqCk41BHMRYdzF6CG3dK51JfCMqzCahzh
-	 j02P2/unuzU5keyivLyXbLxEQu/MszKSs84uDbJvx1yZn3gWJosKHhRAqkYBPnAEJ1GdS
-	 LKPEAy4FxuCeT3agjpDnYAzLg7muY71gRlV2tH/sGwOD7bCzFeZ+9+sT17lyH4Vyq1g==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792890589;
+	b=2y+GFXkrcocEfQkPQnachqtYNkWI1NtF8zTxM+6hnYHwL3MFzeqYGnnRVfnUEXDjwYf0
+	 X3MgS2xzy34Qr2vx6mCHG6hZHcQD5CLQGG+7DW//9vuoz/FHu+heTEjIw2irJoj71iJcd
+	 iVRraqjRFpwcfirVsS1LSlamxKvykjFA7Z9J9PotU/cjPcasnKlXAERcSbtPfaKQDrL+i
+	 K1Tkksz2Eax8JZT4SAqgNkSdRyH/Aoy5kkA8pdBXURmFmg5pSX9Lh1RBCwyYo6JJynZX3
+	 lStRh8SdK6xi4aeyg6jMFfAlPa8ERi4iiqrmGsLsZwI9e47fe9QePbq+bGZfaids0AA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792890589;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=i0AwH57X1vsjWKq5fcOf8sV7EOFwtM7v+VTGA+PEix0=;
+	b=KPMvrwxNa+pxT747LX9Nsr7ooBVupJBZRvtpWMfsuKhl5IZy8RCUuAQEMUGJWIqnD3e1
+	 wqu9lh5DKCT4mV+ioCJ6MJmbRs9gPXthob3H6MhtwzoZck/OwTdz1ARYioTqcC8EuCFvJ
+	 WCOk8G9OqmBFjrwtOZBKZhlsVwBnHTO7OCzgYwPJfKczNdE8oDwPsUR0X/hzyg6iCySdV
+	 TvE7hkZT0rqfhy1J2yu3fsMAl47lTQvvhMAnnnSwp2X0CH/gHQSinmy4QQcY+NuGzcphx
+	 5q7xGcT6ijCyS7EJHcp3zKETBk+egUgcZnZ2nWR/GrMEc08JwYPSm4gy4L0XTQpQDng==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QGtUbw2y;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gIBrV5CJ;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id A5AA81F01825;
-	Sun, 25 Oct 2026 00:24:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792887856;
-	bh=jh1RY3xoeF/XaqMjp8a7e4jU3alkw9RlqWuVIZCU8vQ=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=dLvIan/LnjFzGr/S5BdRvXIqwHpz2JkUvg8wNPTBahx2c04a4UG6LB4WU6V/K6n38
-	 idNTjUkuLnF9hM+JCcpc4seul11rBswFF/+5DrWpbOmZyk0R+LdQW0mzl/c2lU234m
-	 COfEZNSC5OYd/f8E1PP2KS+KRbM8ylpDwJE7tq0js7ZORpvAm6d/Mn/RF0lggs3zjK
-	 IZz7gGRB7KAg3aAP+sJsEYwECGl5V3xF5cATkax/JcSDdtSb8rBc6CdkqhOTZDwJw3
-	 Lqpil3VxZkExwGKhtpxrdLpttO0hz6N/oIKi5OqDmr13OFz5IIJVppCY8uIk27rNua
-	 cylRvVI3wmOrA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 02328448FE;
-	Sun, 25 Oct 2026 00:24:14 +0000 (UTC)
-From: Haipeng Lin via B4 Relay <devnull+jimmie.lin.gmail.com@kernel.org>
-Date: Sat, 24 Oct 2026 20:24:00 -0400
-Subject: [PATCH] drm/panel-edp: disable the backlight before powering off
- panel
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F93C606A31B
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 01:09:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8F93C606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QGtUbw2y;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gIBrV5CJ
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69P17HR43097777
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 01:09:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=i0AwH57X1vsjWKq5fcOf8s
+	V7EOFwtM7v+VTGA+PEix0=; b=QGtUbw2yK1pVFAsoGD4U9LzWjD0BnmL3TQMIpp
+	NAXom6pW3HzUNaqsSJBwJk9PC29G5/e1ELJ7gjyMnZf6ZBEUxnDXutYoYDBXzY9Z
+	edjHqm9CN/AUFi9k1Cuhk4cYuDLpPJxavvE3kEGGmF8IGSkPmvgTu0cmpayniElI
+	ghrG1dsRi2FcbXV1f9KQMqKmyxaSDuzbu7c5N+OfKRdHL6EIaLFAWK+OeeNxoV7v
+	IttQKFdb+aJ9aWFutZGCkQJOF8gQLndsEXMMWYkRhGkmtQliLqEEEND0G1qfnCoQ
+	ooedrZNEUknWSryjzjSGhbkWCic1d7/nRXM/EvMjPcclg6gA==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgj1pagag-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 01:09:47 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-677deb12bceso3403756d50.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 24 Oct 2026 18:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792890587; x=1793495387; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=i0AwH57X1vsjWKq5fcOf8sV7EOFwtM7v+VTGA+PEix0=;
+        b=gIBrV5CJcyN563rzh+tOsnN930dET4phKmPbSeukGxvKogVQgn0nLzLIwSjF9FbSUO
+         Dq+2wSwgXjlhNsKuOSrL/+/Sl7Q4zukPTsCw8+joNntyLfWRhpLMrJpqkd2+jrvj4ezy
+         PvGwlsqX0619AUL/XXaA5PEpQqWbfJlhlu7SnEyZWkMQ8VdKo+4sxbSjiruuvflRL+oV
+         KfXSWDMp4MLC8SfLW2mOpXKC83sBLrbtPyQFpuxbYjR3tHKLAuHVl3fTLWKPiTW0muRP
+         xRpeaItCkl+3ZCgeTDY28j5j8tapsN8KjVIxaLastGfpiXnYx5zqqjManT0Zos8cYUky
+         Cehg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792890587; x=1793495387;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=i0AwH57X1vsjWKq5fcOf8sV7EOFwtM7v+VTGA+PEix0=;
+        b=mWoc+1kCgu/5t1p99/IdPfmhUy/v8KguTbKfBPnojIPLrvw9uUO/yo8MMiqNBRFnF6
+         3f2eMm0WBetPKYn4McWGlYcfbBOnvoku3sm8Vyw1xbB/rXj0Xxx98sGRpc2oJOYTBvsp
+         lMcmL3CpyDTut9TjHF8Bne0YeN8bhbWJVQnFaVjkk0wdRBFQO9qg7PkkAJ6CCDzEQsIn
+         lSwAG50hoTdpVvkiZWit7Vqc1imeO9oIT3q28jn5u3kv2S/Wm2KbQQ7DW426Nm5BJPMw
+         bldrBmfiHBxVqNItemG9JrjaH8ACSzKSjiN48u1RS0UsuSeoOlz1ujHugE9MOescgwT0
+         kGew==
+X-Gm-Message-State: AFq9FYInw2Hi9suxAcZvZBwQmS1uNF8YKptLQ11AMxygT/TREZJDrrTi
+	DqQrn/Nt5Sf3d1o/jtHqi9Nc4tclpI++JqCZBaHVGz2ylGRY2w/2k5gIINPWV6TNicdLmqyq1rZ
+	Psvd1OGK93X5NX9fOEAXEDkTt0Ce6UogErnXG4QsTwtdsV1d4osJ0AAVadix8DJp/3mrL
+X-Gm-Gg: AYBFou0RiMAT+lpGTP1gOh7HMy/l/LrpntLmNJ+wXoxorF3wmbCzzk+g9R3kuml3cZh
+	yOLIpv+d99kOaaRQscFv59bIjootpRAaPqZ/YpPH4Xw3J10eNM9eLUYfBlOKvhqlcSP6Wl0ImIb
+	/5T87tAXenyFmoJ9Bkjcbb3OgJlbUAXe15YDu9D4uf1D0DA9E/JaV9uNRY6kWoqB1AVPeOj/p/a
+	8tHTLWjvk1VXxZp910zU5mTah5fpUXDKdpGTsYNryPcAqkfbzO7iJVUmWqMlN7kIvNUk6/VyMUz
+	OGQGJwp7PJpfAGlbS1xFUhkqCfJjzzi9cNJlIVSInNWSDwJfMkGJMQrR3ziIIPMsRy3qNmkWK+m
+	MR/ruBARL++4bp77omzQ0CglY62qIsLEKdxpZrgwCpoOny7Rg3xyf3cpLCwWFS+LhMSAnsWU=
+X-Received: by 2002:a05:690e:b84:b0:679:a56c:e2d4 with SMTP id 956f58d0204a3-67a4525b99cmr1612674d50.21.1792890586863;
+        Sat, 24 Oct 2026 18:09:46 -0700 (PDT)
+X-Received: by 2002:a05:690e:b84:b0:679:a56c:e2d4 with SMTP id 956f58d0204a3-67a4525b99cmr1612653d50.21.1792890586313;
+        Sat, 24 Oct 2026 18:09:46 -0700 (PDT)
+Received: from x2e.localdomain (108-208-224-205.lightspeed.gnbonc.sbcglobal.net. [108.208.224.205])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a4626fb03sm1517286d50.17.2026.10.24.18.09.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 24 Oct 2026 18:09:45 -0700 (PDT)
+From: Tyler Baker <tyler.baker@oss.qualcomm.com>
+Date: Sat, 24 Oct 2026 21:09:44 -0400
+Subject: [PATCH] arm64: dts: qcom: monaco: reserve firmware carve-outs
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,144 +112,162 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261024-sp11-bl-upstream-1-v1-1-d39bfaf9afbc@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDAyMT3eICQ0PdpBzd0oLikqLUxFxdQ91UMzNDs0QzixSzNAMloMaCotS
- 0zAqwodGxtbUA0eaJsWQAAAA=
-X-Change-ID: 20261024-sp11-bl-upstream-1-e6616a68d6f0
-To: Douglas Anderson <dianders@chromium.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Linus Walleij <linusw@kernel.org>, Sam Ravnborg <sam@ravnborg.org>, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- Dale Whinham <daleyo@gmail.com>, linux-arm-msm@vger.kernel.org, 
- aarch64-laptops@lists.linaro.org, Haipeng Lin <jimmie.lin@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792887854; l=4817;
- i=jimmie.lin@gmail.com; s=20261011; h=from:subject:message-id;
- bh=Ad1iSx6+Lkqh9DkZeY8irIQ3hUZslhOvNah24ewp07A=;
- b=PogfgUqfM2SzGF0yLihQqRwvLshIXA7c0iqTKAbXu3RzurqjhsnfnnS2SZ8SfVxRdSC7DzfEd
- V7qdqNst1DzCD3vex6ve2i0T8eyEINM48JC+gywDQmJOuwrHr9yr7ve
-X-Developer-Key: i=jimmie.lin@gmail.com; a=ed25519;
- pk=3KDRF1RQ/9A7ZUVTdRVEZnVrGltdmq1bRocsOYeXezI=
-X-Endpoint-Received: by B4 Relay for jimmie.lin@gmail.com/20261011 with
- auth_id=1164
-X-Original-From: Haipeng Lin <jimmie.lin@gmail.com>
-Reply-To: jimmie.lin@gmail.com
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261024-monaco-fw-carveouts-v1-1-1cd68aedf46d@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIANdW3WoC/yXMQQ6CMBBA0auQWTsJtFqMVzEs6jDVMbE1nYImh
+ LtTcfkW/y+gnIUVLs0CmWdRSbGiOzRADx/vjDJWg2mN61pzxFeKnhKGD5LPM6epKFpn7cm70Ds
+ 6Qy3fmYN89+t1+Fun25Op/FawrhsiN8QYdwAAAA==
+X-Change-ID: 20261024-monaco-fw-carveouts-36335a6f76c8
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Tyler Baker <tyler.baker@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI1MDAwNCBTYWx0ZWRfX8q1kn6A2DjiL
+ X4woka35qzmidwGvdEd9nQX0prEVdzUVwuOGGHofjnAkEW/jEY4Qa1elSd+dSCGt4LS6qkpcPcp
+ baJUmePkmMws09MnV7tQ8uUbiil5KXY=
+X-Proofpoint-GUID: biHJZXVEcIFqDsA1PEQ8IyAuvX4hL_E9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI1MDAwNCBTYWx0ZWRfX1Y86HkVpvxUN
+ YooYWKHvZ06fEBVDdsP8n6IZro6lUbmrKzMJhDRHdnJ1/iI9F/wiw7oi7vwm4bxsf0+5yTOT234
+ 0h+VDA5iALPZncsgXm9nKOFWyiji9yO6pFO1V9tToq0GUodFkOTtd+Doh05lrj7UO09XvSumqyb
+ knwRYddxjUYNNDelGjeTpdaiDkHZzsvWKMMy/dNR2knZMIcy7AGa6bv2phAtTvVq8ieTTa8ui4k
+ 7cJMnBNzKR4S2jKTkRCccuNLj/I239SQoh2y4vj8WZD1vOMS3O/zYsZx+3D3Lkm1faD9dPw+bbr
+ DjFv3JdmzjhBNL9EGPrRlqERIvrPlmP9qHoEnFeeLCf5+i+btS6WtUNRwq5DjsPM4TeY2hlK3NI
+ PnyNs0MPMnro6+lFG8TuhYaAGbrldkFXkEYL/31Sb0T9eXJ6a0QImKzOEEt8IoehshCIKkMX8al
+ 2k3ddPHHR+YLNW9MTDQ==
+X-Proofpoint-ORIG-GUID: biHJZXVEcIFqDsA1PEQ8IyAuvX4hL_E9
+X-Authority-Analysis: v=2.4 cv=D5vSufRj c=1 sm=1 tr=0 ts=6add56db cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=PFxtTy0squD/fJwW5Be2sw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pG-yhIzIu_fIu1UVJuAA:9 a=QEXdDO2ut3YA:10
+ a=nd2WpGr1bMy9NW-iytEl:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-25_01,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ impostorscore=0 phishscore=0 spamscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610250004
 
-From: Haipeng Lin <jimmie.lin@gmail.com>
+monaco.dtsi does not reserve the DDR carve-outs used by firmware at
+runtime.
 
-If the display pipeline takes longer than the runtime-PM autosuspend
-delay (1 s) to bind after the panel probes, panel-edp's runtime suspend
-powers the panel off while the backlight is still on: pwm-backlight
-inherits the enable state left by the firmware at probe and keeps the
-enable GPIO high. The panel supply is thus cut without first disabling
-the backlight, leaving BL_EN asserted across a panel power cycle.
+The downstream UEFI hides these from the OS. U-Boot as the EFI firmware
+[0] builds its memory map from the SMEM DDR banks, which do not list
+them, so it hands them to Linux as RAM, and the first write to one of
+those pages takes an SError.
 
-On the Surface Pro 11 LCD (LGD0779), leaving BL_EN high across this
-power cycle appears to leave the backlight controller in an incorrect
-state: brightness is pinned near maximum with a greatly reduced
-dimming range. Subsequent brightness changes update the PWM duty, but
-do not restore it to normal. Cycling the backlight off and on at
-unchanged brightness restores the full range.
+Reserve them as no-map, at the base and size the QCS8300 boot binaries
+use, as lemans.dtsi does.
 
-The first drm_panel_enable() does not recover from this because
-pwm-backlight still considers itself enabled and leaves BL_EN high.
-
-Disable the attached backlight in panel_edp_suspend() before marking
-AUX unpowered and cutting panel power. This ensures that the first
-modeset enables the backlight after panel power and video are ready.
-When DRM has already disabled the backlight, it remains off.
-
-Verified on the Surface Pro 11 LCD by delaying display pipeline bind
-past the autosuspend timeout. BL_EN now drops before panel power is
-cut, and brightness control works at the first modeset.
-
-Fixes: 5540cf8f3e8d ("drm/panel-edp: Implement generic "edp-panel"s probed by EDID")
-Link: https://github.com/dwhinham/archiso-aarch64-sp11/issues/41
-Assisted-by: claude-fable:5
-Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
+Link: https://lore.kernel.org/r/20260928-monaco-ventuno-q-v2-0-0e046c8242be@oss.qualcomm.com [0]
+Signed-off-by: Tyler Baker <tyler.baker@oss.qualcomm.com>
 ---
-Can reproduce on an installed system on Surface Pro 11 LCD (X1P-64-100,
-LGD0779 LCD) by booting with modprobe.blacklist=phy_qcom_qmp_combo then
-loading that module manually after ~20s. This delays DPU component bind
-past the panel's runtime autosuspend timeout.
-
-A/B tested against the same v7.2 tree:
-
-- Unpatched: panel VDD off 3.5s..20.5s while BL_EN stays high.
-after the first modeset brightness is pinned near max brightness with
-a "collapsed" dimming range. sysfs brightness writes still reprogram
-the PMIC LPG. One bl_power off/on cycle at unchanged brightness 
-restores the full range.
-
-- Patched: BL_EN drops ~300us before the VDD cut and rises again after
-panel power+link at the first modeset. full brightness range works.
-
-Tracing and functional testing on the SP11 shows unchanged sequencing
-for fast boots, DPMS off/on, and system suspend/resume.
-
-Two cases would benefit from testing on other hardware:
-1. AUX-controlled backlights
-The disable is placed before drm_dp_dpcd_set_powered(false) and
-regulator_disable() so the panel remains accessible if disabling its
-backlight requires AUX writes. But I have not tested this since my 
-LCD is GPIO/PWM based.
-
-2. Panels with shared/always-on supplies and no panel enable GPIO
-These panels may continue displaying the firmware framebuffer during
-the pre-first-modeset runtime suspend. This change will turn off their
-attached backlight during that interval, potentially making the boot
-display go dark earlier. This matches the driver's powered-off state,
-but I have not tested that configuration.
-
-Testing on other panel-edp systems particularly with pwm-backlight,
-would be appreciated.
+Tested on the Arduino VENTUNO Q with U-Boot as the EFI firmware and
+with the downstream UEFI, which already withholds these regions.
 ---
- drivers/gpu/drm/panel/panel-edp.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ arch/arm64/boot/dts/qcom/monaco.dtsi | 55 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
 
-diff --git a/drivers/gpu/drm/panel/panel-edp.c b/drivers/gpu/drm/panel/panel-edp.c
-index 94bc54c3833a..87f9c13380be 100644
---- a/drivers/gpu/drm/panel/panel-edp.c
-+++ b/drivers/gpu/drm/panel/panel-edp.c
-@@ -21,6 +21,7 @@
-  * DEALINGS IN THE SOFTWARE.
-  */
+diff --git a/arch/arm64/boot/dts/qcom/monaco.dtsi b/arch/arm64/boot/dts/qcom/monaco.dtsi
+index 35fbee63d4c65..43e1954b563b9 100644
+--- a/arch/arm64/boot/dts/qcom/monaco.dtsi
++++ b/arch/arm64/boot/dts/qcom/monaco.dtsi
+@@ -729,6 +729,11 @@ reserved-memory {
+ 		#size-cells = <2>;
+ 		ranges;
  
-+#include <linux/backlight.h>
- #include <linux/debugfs.h>
- #include <linux/delay.h>
- #include <linux/gpio/consumer.h>
-@@ -413,6 +414,18 @@ static int panel_edp_suspend(struct device *dev)
- {
- 	struct panel_edp *p = dev_get_drvdata(dev);
- 
-+	/*
-+	 * eDP panel power sequencing requires the backlight to be off
-+	 * whenever the panel is powered off. Before the first modeset the
-+	 * backlight driver may still hold the enable state inherited from
-+	 * the firmware, and some panels' backlight controllers come up in a
-+	 * wrong dimming mode if their enable line stays high across a panel
-+	 * power cycle. Sync the backlight off here so that the backlight
-+	 * enable from drm_panel_enable() performs a true power-on in the
-+	 * correct order.
-+	 */
-+	backlight_disable(p->base.backlight);
++		sail_ss_mem: sail-ss-region@80000000 {
++			reg = <0x0 0x80000000 0x0 0x10000000>;
++			no-map;
++		};
 +
- 	drm_dp_dpcd_set_powered(p->aux, false);
- 	gpiod_set_value_cansleep(p->enable_gpio, 0);
- 	regulator_disable(p->supply);
+ 		aop_image_mem: aop-image-region@90800000 {
+ 			reg = <0x0 0x90800000 0x0 0x60000>;
+ 			no-map;
+@@ -740,6 +745,11 @@ aop_cmd_db_mem: aop-cmd-db-region@90860000 {
+ 			no-map;
+ 		};
+ 
++		ddr_training_checksum_mem: ddr-training-checksum-region@908c0000 {
++			reg = <0x0 0x908c0000 0x0 0x1000>;
++			no-map;
++		};
++
+ 		smem_mem: smem@90900000 {
+ 			compatible = "qcom,smem";
+ 			reg = <0x0 0x90900000 0x0 0x200000>;
+@@ -747,6 +757,21 @@ smem_mem: smem@90900000 {
+ 			hwlocks = <&tcsr_mutex 3>;
+ 		};
+ 
++		tz_sail_mailbox_mem: tz-sail-mailbox-region@90c00000 {
++			reg = <0x0 0x90c00000 0x0 0x100000>;
++			no-map;
++		};
++
++		sail_mailbox_mem: sail-mailbox-region@90d00000 {
++			reg = <0x0 0x90d00000 0x0 0x100000>;
++			no-map;
++		};
++
++		sail_ota_mem: sail-ota-region@90e00000 {
++			reg = <0x0 0x90e00000 0x0 0x300000>;
++			no-map;
++		};
++
+ 		gunyah_md_mem: gunyah-md-region@91a80000 {
+ 			reg = <0x0 0x91a80000 0x0 0x80000>;
+ 			no-map;
+@@ -811,6 +836,36 @@ video_mem: video-region@9be82000 {
+ 			reg = <0x0 0x9be82000 0x0 0x700000>;
+ 			no-map;
+ 		};
++
++		tags_mem: tags-region@d0100000 {
++			reg = <0x0 0xd0100000 0x0 0x1200000>;
++			no-map;
++		};
++
++		qtee_mem: qtee-region@d1300000 {
++			reg = <0x0 0xd1300000 0x0 0x500000>;
++			no-map;
++		};
++
++		deepsleep_backup_mem: deepsleep-backup-region@d1800000 {
++			reg = <0x0 0xd1800000 0x0 0x100000>;
++			no-map;
++		};
++
++		trusted_apps_mem: trusted-apps-region@d1900000 {
++			reg = <0x0 0xd1900000 0x0 0x1a00000>;
++			no-map;
++		};
++
++		tz_stat_mem: tz-stat-region@db100000 {
++			reg = <0x0 0xdb100000 0x0 0x100000>;
++			no-map;
++		};
++
++		cpucp_fw_mem: cpucp-fw-region@db200000 {
++			reg = <0x0 0xdb200000 0x0 0x100000>;
++			no-map;
++		};
+ 	};
+ 
+ 	smp2p-adsp {
 
 ---
-base-commit: cf61bef3801c3c9d0d8c39026b7b2fb242898a3a
-change-id: 20261024-sp11-bl-upstream-1-e6616a68d6f0
+base-commit: 20a33c6b6cbe7e4805dfb6cd68816937443aa148
+change-id: 20261024-monaco-fw-carveouts-36335a6f76c8
 
 Best regards,
--- 
-Haipeng Lin <jimmie.lin@gmail.com>
-
+--  
+Tyler Baker <tyler.baker@oss.qualcomm.com>
 
