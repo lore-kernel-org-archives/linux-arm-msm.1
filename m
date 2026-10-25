@@ -1,111 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792946824;
-	b=apA4zArmryzkRHkfcwJ4rhFASJS30VTSk1JBP4FBwdwdoHJDewdIB7HizO2AWQNtPolh
-	 LKLtOyzivtUMztCnUUjHlcz5io7RRlv4F12CJ0laZZZMutDfkdgDbIVwqbOaqRAQQ6oa+
-	 Pk1W2CEhXEx/ojSj0WRZU8PVBsCS0gS+PUrz1OSbh561ULSTbrroMEd44zxuv+8CiIF10
-	 weVOKBeK5C/7LlIlYVuT5X2ZR6c8CA9AH0ElnvmVO9jZPteST+kcVXvEEVz+zMBuH1G5A
-	 SbyMn7XSYjcSTc5UGtjB2ajsxJBHcw+2eYiBawdWNN1QdEGf6FTypdVZ0LH/fBD7rdw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792946824;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Xp8FtUY4IDV5E4b4db6+noYAQseHMiy5uxXtnclLFYw=;
-	b=jJYSSokSao399eIvxwXK3aOJPKc5nIbRQMuYxJjPlQvqnzX861yjgVrlxizapajo0mT+
-	 zEbVx8iBk93j4NnCmYqu6AVEa04rQfE5cuMpp5B2s2nsneyi3UDOFNnciqPhGF+Sgtz23
-	 XW0TM7WWw2LpaAcVBRcn+sz1EjKcjSYflTyPXJhS7JB0J4AjSWiI9RMoCJ1WIbLXodduI
-	 xxHT4w4ejRifzNC8C9bVsG/T6/dHK3Cv0ZdejAdgOZ21NEkSSL/K5wEB35yVHLnkfKaM0
-	 r8IiQ4NmlGXUqKCOLTYCxMvx7I8NJm4S1aUVte5TBU9SERps4aT8IhBIPCKbYdEepSg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UGO8N2bE;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="Q/dOC/vP";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.48
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792947425;
+	b=30NQGsoodX7/1nADrAHMwYh+rGc9wEiUI4HA7vIkySAfailiZzY6Caw3m8r5Q+WiWMyD
+	 e8KrEWsuPvro7SX1cxUu0ANE0bbLZbu8VwqxvsmpKuJEnCghq0+fC1ZZXXg6y/kA/KNtc
+	 NdSsykuAWCDzcKUjHQF2J5Qeb/oP4muIrfh3DSCyESdYLGhQjKeSGvCFq218wjPDEnLIn
+	 Dwh5EKcLymftrHwnKuhQtFj1s4x3pzDB+R6AEIug2xpgADOh2O1Uyql21LMRBo0rUkcFT
+	 R8duYxhw8grWDCTk3AeKaF+mpdfMicDJnQBg7ktsFLN8Nj97tfvQlxsVAd1WbPLAY0A==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792947425;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
+	b=NDNvTUBxcOnkaBUpb2iFo739wOp7vC5VoLTzfQl3S8mVzzV8PGDn0giF3U5uIzgjCNnf
+	 6OWWxTUVkagry1EZ8urNG5L4QVF9l8xrJJ8YsixSJbewOt1GAFISGsd1oYzz6K57ivfMc
+	 CXB4MEBIIJuGGt7pEnVaQjR+moCZJbm5bK3I5D7Ojb1b3NPBeqPw2+EG6HBpe/SEkgztB
+	 1DcRnIPcL1Yo6OF10fpYKa6LgeUSdNP8E+/QzrlJZ5CikAbo/UJfL9LI1Pnd3GzSa5l42
+	 ZB471giHd4bnRN3SmWJ6HDeV3RHQa6A/dAlWbS7I/a2QzSuL1+AGtncObff5hYvsNWw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="jlt3d6/z";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.48
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 972D3606A31D
-	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 16:46:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 972D3606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5762606A31B
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 16:57:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5762606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UGO8N2bE;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Q/dOC/vP
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69PFjLlT639437
-	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 16:46:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Xp8FtUY4IDV5E4b4db6+noYAQseHMiy5uxXtnclLFYw=; b=UGO8N2bEPA/9WR8c
-	pmMe02dkH2DV9moeXtM7rl+9ZfqhhixfOs7tUecHgQnEk5IdKQ6NTyxCwbZlX/qr
-	xWN2nWbbEKp/HZhKIwGBsbQghnCCpf47jgWi4LvuhTEjyCk9fhdnBzIupfxeDZJB
-	mXAxe/z0md1NQqf7eSVjc8bd4CHmQxbO83roBX4fGcVlQb+q//C+8bL4tcPtqgwE
-	Oifl1cu/P7zcUJZURPT+Se390nt40wskyGlLRP71yD3e6GtI4gXfvXzfrLkfaHv/
-	hTBPvN4AYXrxrGCy+IxewNXr9o+/xxyV7sD4zmIo5vm3rKvr5QZVn0lbEtuUoO0h
-	44x2mg==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgmrukeve-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 16:46:57 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-18b5ee75447so10009136c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 09:46:57 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jlt3d6/z
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6ae14eecc64so3013990a12.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 09:57:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792947423; cv=none;
+        d=google.com; s=arc-20260327;
+        b=PJoXD6C380j3LicUlFPa20ieqd2PWvFZq+mq3AXfwrnWfJvNHAkepIpAoKavQfDmU1
+         9qJNW6fbKqTYkHGhQLi99f87JdjddOc8KTRLi7ZmFN6mgBKpISjriljm589b+LZeD5Ox
+         eDD8rK6hqRiSdTdYwpscLSkICqHSq5q/Je4T8U6ZPTVjmlSrvq2XwgipEzKrBuIS6R9I
+         elyp1+TaY3KAN5lq9kbu/bgyCIP2hnXCVkoOZvBW4L5xsLf4ooSqRnHjfy2gLIUySzzb
+         h4iZzpwAsHzSsTTuz4de6NNc7ne8y1n0PjSC6M9X/E94/Pc2b0unhPkWMRXcHD7jcSzQ
+         JTVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
+        fh=1pCul/XFYTXAFjeg2x3JaYpHIUoi6RMvVwgSFjGEZz0=;
+        b=Yj1qL3YDhf9RBRKcVbT5Z3hIDXKLI1mL8svpNUBJHw5MOabSDwTAG2HWJDic7kSt89
+         cUOWJ+TZqOQnHZBz2kEVYctgDtBtFjTZD8hacfNffOgpbxiA5VT4ZkDH3g2oVyiDn149
+         Jm1CKyDTTtGGkM+lehdqUf+TA3UWVfG34QbEV0L8ZvJHSAxMEMCDFIjvhoVLO/f6nqVg
+         2Sqv2p7A1Y7OLGm3nVtL99G8CjyuKfzjc7mTIXfT4PeW/eaBluC2JJsZMDEmRwLeNCzD
+         uIMzrPr9Grd0RmOrKmkpP5Jaalbss4L2uam45Yy54/Pm1m44EF28lahc4x3pIwX1noUE
+         creA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792946816; x=1793551616; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :from:content-language:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Xp8FtUY4IDV5E4b4db6+noYAQseHMiy5uxXtnclLFYw=;
-        b=Q/dOC/vPOVDlRbtbD9f41Ahngu3aGU53HTSB2uTiD4/0WCtTSqmoe0FhXlp/bDG6Ud
-         t0Oii/Nh/PGTftpKGCFdO7zIY9z2uOA0csx/qUeIctOgXOXOLl1WYDiazfD6JjWaijDz
-         QP/nivL99wGJ/rx6WLRDGf+1WeLzWIAVIAE0ExbWoc4WyZKsbw/AeLYwIS4f36kxT2bq
-         k1PpB6zRGffrkuT1wN9pzwr/uB20+mBnoqLNnchFvntuSDhWdeJ3ExRVX0FhIV9IJePG
-         q9Gd7iL2Babp8BSbuWlmnNeOWSRxBaT8pk89/hSfqYbbyR9TBgxsJJv9QAZPVzhrLjDo
-         hBUA==
+        d=gmail.com; s=20251104; t=1792947423; x=1793552223; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
+        b=jlt3d6/zk0oARLw4/TXZZzL6Ptvm60/7yQG0QxcJlDcLqUxJ4ELLncjtgp+VMnhLJ5
+         VOmMkEoeUs4BabEDqRNm83PGPq/v/WpQNISu6yQxiKUA0NvCGpmSlECOPG8Jd32SDwZt
+         n3C/LvP2U355dmmdnPnqvyR4DS4zxQ6ptuzndDEmY52C0pS036Su1UB7x5FjTQU9kmLd
+         wYfpd2lFT3Uei7N01Sk/8Oki5n55+oaEKBoVZAN3efXNvUxgBmiPAtjkrkkD4v8tHg0r
+         eT/szXNcbu7uhmQW6sMpez9h+sWZhSgIUWfVw35KdfD7h1endl7C97TFWHy8uWHO+2tP
+         vZ8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792946816; x=1793551616;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :from:content-language:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Xp8FtUY4IDV5E4b4db6+noYAQseHMiy5uxXtnclLFYw=;
-        b=nR2srte11IVlFNKBsBCv+5DHEGGxgifRu2yOIiPYFgag6uQlfyqGHXp5J4W2pcqPyd
-         XTK0Cy33H4ipQ3/HNGf7CDaCOJCBtynhhIDSNKYeKDD50+x98Cem/J+3NUlitDdJMnBv
-         e8vElH9zynW9vuZ7jpQjF+maCQHvawbN0Xrnn6rqPNnRZ7Axyve39y7P5J8zVnBiduzV
-         mWShyLjKY8Itlte3sht79RqnKI8VNVP4FmiwYOH2bkoYNu9ocpRYoyBlj8AutI7nYBtX
-         K4mtzNJO+IG4v0LcSZAeZJfD81gorlVIv+uNSR9MgQYW7DUQNQIwQeGNTCf02JgU+aud
-         pVjA==
-X-Forwarded-Encrypted: i=1; AKwUvBxwHsPVLmruEboZaw9MsEZxfTj/+KEWOnz9G6Ussiqb9tQMRPcyNnj1rspaY5yG9T5LuEGWBI0DDcfBJ1WT@vger.kernel.org
-X-Gm-Message-State: AFq9FYJlUmhoDrEP38bmXpArEMHnr9hKsYQ8Sl5ssPnj3Zjbvc6C7GyF
-	iktdFB9eJyP72B7L8D1BXeInNqKm6RY4GBKPY071otsH8OqnCNtyQ+ty45cEBHj1N1rQ0r8kRgG
-	4ueRmjCnXcmqFm1GiN1b42tlF+UIIE/0u5Sr71JlcwvkSkI2G0WdMwIfnQE6BPR1l4avJ
-X-Gm-Gg: AYBFou1YIIk5fRqj6kp+S9DRRx5HPVGHgmGoz9zFlIShGmWl/usRkzrKxXNwfihqCKu
-	CIGnnmwoV8+krMTfMSw5w8mCI3nafUma8pzotaq3lmANkh8qwsDnHntZlRkmdYR52/JZBpQ6Y3p
-	w+E65+T7fjpXkx6qAYke2PivocbjilQKUzr5eOEmMpQkwl30Xlm1gIk5SC1x+o1pULZoQzae6Eh
-	JLyUXpxlQMVl5YRkGb/xhlYz7XJ0E7AAWtKzMaX1ilZFD+LcNceu0Jw5I2Nxj5Pg7QU+qdNria+
-	hweXvUunAoppsXaORuWT4V9oHCGQhcny2v2tqYQz6EYJZL9pRJ7rEaJkAXK0mBtdJThNQ42bEsa
-	pul+IogLft9OMDJOWS/1IbdVFz8Of0w==
-X-Received: by 2002:a05:7022:5f14:b0:144:de98:eec1 with SMTP id a92af1059eb24-1993571a23bmr6612004c88.11.1792946816246;
-        Sun, 25 Oct 2026 09:46:56 -0700 (PDT)
-X-Received: by 2002:a05:7022:5f14:b0:144:de98:eec1 with SMTP id a92af1059eb24-1993571a23bmr6611976c88.11.1792946815627;
-        Sun, 25 Oct 2026 09:46:55 -0700 (PDT)
-Received: from [192.168.29.10] ([49.37.153.119])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a249c331sm37712917c88.17.2026.10.25.09.46.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Oct 2026 09:46:55 -0700 (PDT)
-Message-ID: <b5cc804e-0f73-4ec9-88bf-ef6dd04eea83@oss.qualcomm.com>
-Date: Sun, 25 Oct 2026 22:16:49 +0530
+        d=1e100.net; s=20260707; t=1792947423; x=1793552223;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
+        b=1OLscIGupF6uPY54lq1QxsuWOBvjZfI8GYU+/89+E9yrE/+GoO0frnyH8J+d5MMmNw
+         dobP+OKjqUh5iLacA96iQTePj+tqzf8yiqBEsmnSpkL0uBD/zXnvTRkf8c1svzBnZPwd
+         VF0PMsRDcjbdHWKJ3aEFTGTvM8q3ve9KJDzYFB/UwPFHYkoQ8/XG1n0q2aU8sc706HHC
+         aY0NT/+qIHKKj8imWXN/PEPEMzIqe+pRuSLS2J+w6yhkJsRPcyKEP+ddlFfQ8Ktnsh38
+         /hFvSVph5txALYByrDeNN9larmrWaJXP8gQGqWh1rJJoIdN96X850o70A5XnyI6cFmpL
+         7IWw==
+X-Gm-Message-State: AFq9FYICHpkQlE4h3MXHWG/gut1B9GGF6VLB+r7unDSnJrpiQQ2rNjKl
+	wB3dZU6YnyhBmQnsIfPTvJ/XU8ppRoFNRB1isiE3Ayy6GjvCC9CYhTdRQhc6eYTjdByH+mwyR2z
+	3fq1USNfQFyaJJj8OdP5EWzER84Fr9Yg+80mJ
+X-Gm-Gg: AYBFou30BlPBwJckpASB0UHWguZmKm1eE4l2lnc8MUI6ecReM96aawoun3oQdJEMOFU
+	34luI2bFaUyJ28fmHppUlMmC4TV9YOniqHWO6PNl8jUPksHCMmkfuz1Ylt+SvvmdA0lS0dmr/BT
+	cFzuFMgLMS4DbAIdfJxbojGJeuFQHsJ2bNHbyQw7EoVo4W5Zv3TjS4kkeuJdL4S+XpYizfAVi5a
+	X64XRyATgcjSr67HjoUr2V6m54rrPGqwoG0jDbVPnzD0iER7AkRwAOCWEn5hQ71RILVjNAtrjm5
+	IVh84/RqRlrhX1x/l7YJccm3dCRAU2FlKvDYw7wChNGQCvE8qZOBf/JnqV6Ta45GHPoRzyEFc1p
+	jWrcQgplHb+z7MsQx895Zlig0ywOoR9o+6M0K4qhDK9UbkmsyET4hmzNXhWWqAyI7e/4djw==
+X-Received: by 2002:a05:6402:4144:b0:6af:a64f:bd44 with SMTP id
+ 4fb4d7f45d1cf-6b443116103mr5407242a12.45.1792947422788; Sun, 25 Oct 2026
+ 09:57:02 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,114 +103,169 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] Add support for a TEE agnostic Inline Crypto Engine
- service
-To: Eric Biggers <ebiggers@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Selvam Sathappan Periakaruppan <selvam.periakaruppan@oss.qualcomm.com>,
-        Basant Kumar <basantk@qti.qualcomm.com>, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org
-References: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
- <20261024185602.GF2553@quark>
-Content-Language: en-US
-From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Organization: Qualcomm
-In-Reply-To: <20261024185602.GF2553@quark>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI1MDA2NiBTYWx0ZWRfX8v4aZU8TcYZA
- +KuzWBFA/bAkrKFdxXqUBmVb9bR0bkQUHc5P0GSAlAkkuvKMtzQxoAKw0yXzZDrsjC6hXm6Yup3
- MLUq/0T7D8RYzMLLmYY6PGPP7lL6aKLqgaFsoJUanEXl7m3GjIBEd2a8+9z7+loCU8l9wsCLR/4
- GYXOBYvyJD/vBaMfxNDg8yZF38rXgoDzF7P4LCOQvgTGhtnYYXmg5xKKe08xm3hQBRLttlVZu+V
- iJWuakGMWFX8AJNQ08Kf1ntHJxXm+iX9PMN9rPObwcV/9MjP+dtsrd1JFZJtA6Kz7ZSiodlb+XJ
- 4dRWA1P+elrdcqR6Tzw3yqT573jTH+R+CYxJj3tVH82iAMcMnaEV9NIFYkWTDW/8pVcb7gwd4ks
- l3HyT4OCaeE0HZNBMS5qCypEbd+aHOfXeyiLMbbeZGiS87xTMIl9jdmJgifJ8waVTeq0E8CsBU3
- w4pZBcBBHnYENrrHClA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI1MDA2NiBTYWx0ZWRfXztaljGdJwiyQ
- jeSzaFyUrhD3NRPr+fTUR0aDih6PDTY4tMqlJPKdx/qgHK4rG9EtuNFA4uSor/HQMWuoI1f+Ond
- 3O6uRXuQTBTDTj5+ubpP7uofuhE35+o=
-X-Proofpoint-ORIG-GUID: ilZJTetVyIlamjl5ubesgBU3PW-wwtX6
-X-Authority-Analysis: v=2.4 cv=e+aT2qp/ c=1 sm=1 tr=0 ts=6ade3281 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=hZ1hWxSZf3UX9FuxeSnJ0A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=P-IC7800AAAA:8 a=2OcuuN4x_lZ4hByzxpEA:9 a=QEXdDO2ut3YA:10
- a=Fk4IpSoW4aLDllm1B1p-:22 a=d3PnA9EDa4IxuAV0gXij:22
-X-Proofpoint-GUID: ilZJTetVyIlamjl5ubesgBU3PW-wwtX6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-25_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0
- priorityscore=1501 malwarescore=0 lowpriorityscore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610250066
+References: <179184923104.248043.14168731037113716140@mail.ustc.edu.cn>
+ <CAH2e8h6_pACX_j8YBDhhSZzbfs45waF-Y6KJo82_2c6BT0suEg@mail.gmail.com> <179276337975.97444.18043862696501391672@mail.ustc.edu.cn>
+In-Reply-To: <179276337975.97444.18043862696501391672@mail.ustc.edu.cn>
+From: Pengyu Luo <mitltlatltl@gmail.com>
+Date: Mon, 26 Oct 2026 00:56:37 +0800
+X-Gm-Features: AclHuK9xwUCZ0kvBEwimUn0QZtdVftZr-duC_-VmN0v4C76GGny8RdueHiy-YR4
+Message-ID: <CAH2e8h4wFH5Q_biepZzQuerydvmwbUOsEMRRzs4y-c-0WbjYrw@mail.gmail.com>
+Subject: Re: [REPORT] SM8750 bonded dual-DSI + NT36536: first DCS command-DMA
+ timeout on cold boot
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Eric,
-
-On 25-10-2026 12:26 am, Eric Biggers wrote:
-> On Wed, Oct 21, 2026 at 09:13:06PM +0530, Harshal Dev wrote:
->> This patch series adds a generic ICE service which provides TEE agnostic
->> APIs
-> 
-> There is already an ICE driver: drivers/soc/qcom/ice.c.  If it needs to
-> do different things on different platforms, then it should be updated to
-> do so.
-
-Agreed, however this series does not intend to replace the ICE driver. It is
-only meant to make the driver's calls into the ARM TEE firmware OS agnostic
-of whether the platform boots with QTEE or OP-TEE. The ICE driver should not
-do different things on different platforms, it should do exactly the same
-things, however the TEE firmware calls should not be tied to QTEE as they
-have been until now. 
-
-> Adding a separate middleware module underneath it, with the ICE
-> driver as its sole user, is unnecessary complexity that will just cause
-> problems.
+On Fri, Oct 23, 2026 at 9:49=E2=80=AFPM Qianhui Xu <xiaqinghuan@mail.ustc.e=
+du.cn> wrote:
+>
+> Hi Pengyu,
+>
+> Thanks again for the DPU answer - it reordered how we are spending effort=
+ here.
+> Two things, both about this same board (TB322FC / Y700 Gen4).
+>
+> 1) DT coordination for sm8750-lenovo-elden.dts
+>
+> Your v2 adds arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts (1170 lines=
+).
+> Our tree carries the same path and filename, 3178 lines, with your copyri=
+ght
+> header kept, because we imported your v2 as the base and have been extend=
+ing it
+> locally for a year of bring-up. We would rather not send a competing file=
+.
+>
+> What we would like to do: after your series lands (or on top of its next
+> revision), send the delta as separate follow-ups, split so each piece goe=
+s to
+> the right maintainer, roughly:
+>
+>   - display: mdss resets (CORE/CORE_INT2/RSCC), DSI PHY PWRDN_B sequencin=
+g,
+>     panel supplies (vddio/vsp/vsn) and touch
+>   - remoteproc: ADSP/CDSP fastrpc qcom,non-secure-domain (this one remove=
+s
+>     ~300 lines of boot spam and makes sensors work again)
+>   - misc: audio codec / amplifier / haptics / backlight
+>
+> If you would rather keep the file minimal and have us send each block as =
+its own
+> series later, that is fine too - just tell us which shape you prefer, and
+> whether you want to be Cc'd or would rather review them in the list.
 >
 
-By moving the TEE call re-direction to a separate middleware we are ensuring
-that we only touch the 9-10 lines in the driver which depend on the TEE firmware.
-Merging this functionality in the ICE driver would substantially increases
-the total file size.
+You can squash them and send the whole thing your way, since I have no
+plans to update it for next months.
 
-> In fact the middleware module is called qcom_ice.ko, which is the exact
-> same name as the ICE driver.  That's broken, as it's a name collision.
-
-I agree with this point, I will re-name it to qcom_ice_tee_svc.ko, Hopefully
-that will help with the name collision.
-
-> I think the fact they have the same name hints pretty strongly that the
-> functionality should just be incorporated into the existing qcom_ice.ko.
+> 2) Do you have downstream sources for TB322FC?
 >
 
-I beg to differ here. The ICE driver programs the non-secure hardware
-interfaces of the ICE hardware. The ICE service this series introduces
-re-directs ICE driver's calls into the TEE firmware to the correct firmware
-booted on the platform. I believe these two are very orthogonal functionalities.
-> AFAICT, this series also breaks boot on platforms without ICE firmware
-> support, due to indefinite EPROBE_DEFER.  Choosing a simpler design
-> would help avoid issues like that.
+No public repo, my local tree with all features hasn't updated for
+about half a year(i.e. the 6.19.6 tree, that is what you can see in
+the picture). Many things need to be organized and updated, I need
+time to recall my context. Recently, I have had no time to handle it.
+But I think my tree is unnecessary now, nowadays LLMs seem to be
+capable of bringing up qom devices.
 
-As per my understanding, all versions of the Qualcomm ICE hardware depend
-on the TEE firmware to program certain aspects of the hardware. In-fact
-a portion of the hardware interfaces of ICE are secure-software only
-programmable. So we don't have any platform where ICE works without TEE
-firmware support. This is why probe always defers if this check fails:
-https://elixir.bootlin.com/linux/v7.3/source/drivers/soc/qcom/ice.c#L568
+> Concretely we need two things that only downstream can answer:
+>
+>   - the battery/QBG side. A maintainer asked us whether the OEM remaps th=
+e QBG
+>     properties and whether the downstream kernel reports power_now at all=
+. The
+>     stock build here is user/release-keys, so no adb root and
+>     /sys/class/power_supply is denied to the shell domain - we can read
+>     dumpsys battery but not the kernel attributes.
+>   - display init ordering on cold boot (who programs DSI/PLL first, and w=
+hether
+>     the bootloader leaves the panel running).
+>
+> Your v2 cites GUF296/linux for TB321FU for mic/speaker/vibrator. If that =
+tree
+> covers TB322FC's battery/display paths too, a pointer would save us a lot=
+.
+>
 
-Appreciate your valuable time and suggestions here Eric. Do let me know if
-any further thoughts.
+No, once GUF296 brought up gen3, so I reference this to indicate we
+can reuse the peripheral drivers, like haptics, smartpa, etc. However,
+I still haven't started dealing with it due to things irl.
 
-Regards,
-Harshal
-> 
-> - Eric
+> 3) Data in case it helps your display work
+>
 
+Actually, you can ignore what I said to Konrad at that time, I figured
+out the SMMU issue later(UEFI is still writing to the splash region
+after SMMU is broughtup), it works well with splash, or a proper and
+whole backlight initialization without splash. So the display worked
+10 out of 10 for me at that time.
+
+> Since your reply we ran a controlled A/B (23 real power-off cold boots, s=
+ame
+> config/DTB/ramdisk/cmdline, only the kernel hunks differ):
+>
+>   without an MDSS-block reset at bring-up:  5 of 9 boots failed (command =
+DMA
+>                                             timeout, panel never lit)
+>   with it:                                  15 of 15 boots OK, p =3D 0.00=
+3
+>   split by hunk: block reset 5/5 OK; DSI PHY-only 3/4 still failed
+>
+> Two corrections we had to make to our own report afterwards, both negativ=
+e:
+>
+>   - the -110 command-DMA timeout is not the invariant. An image that remo=
+ves the
+>     bonded command path entirely shows zero timeouts, reports "panel prep=
+ared",
+>     DPU renders, and the panel is still dark.
+>   - neither the latch nor modeset re-entry is the lever: bounded retry re=
+tries
+>     and still fails; restarting the compositor re-runs prepare and still =
+fails.
+>     The only quantity that tracked the physical state was the DSI interru=
+pt
+>     count (41 when lit, 0 when dark).
+>
+> We also moved the resets out of the clock driver after Taniya's review: t=
+he
+> three BCRs now live in msm_mdss_reset() as a shared bulk reset with a dea=
+ssert
+> prime, and dispcc-sm8750.c is untouched in our current daily.
+>
+> Question on your "hack the DSI clk source select for the 10-bit CPHY plan=
+e":
+> which select do you mean? On our side DSI_7nm_PHY_CMN_CLK_CFG1 already us=
+es
+> SEL=3D0 / pll_bit for this 30bpp 3-lane C-PHY case, matching downstream, =
+and the
+> resulting pclk checks out arithmetically (756839941/2 * 16/35 =3D 1729919=
+86 Hz,
+> which is what disp_cc_mdss_pclk0_clk_src reports). If your hack is somewh=
+ere
+> else - an INTF/dispcc mux rather than the PHY CMN block - a register name=
+ or a
+> patch pointer would be enough for us to test it here.
+>
+
+0 is the right value. dsiclk_sel was not 0 at that time, as I
+mentioned in commit[1], so I hacked it as 0 at that time.
+
+[1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/com=
+mit/?id=3D0f5c8f03d990f9be9908a08a701c324e113554d2
+
+---
+Sorry, I don't answer technical details, since I have almost lost my contex=
+t.
+
+Best wishes,
+Pengyu
+
+> We can run any patch you want on the hardware and report cold-boot statis=
+tics;
+> the unit is dedicated to this.
+>
+> Thanks,
+> Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+>
