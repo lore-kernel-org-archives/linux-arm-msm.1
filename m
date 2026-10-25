@@ -1,66 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=199.89.1.16
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792959035;
-	b=LRb0TRMyhxPK9gM+pVshDi0p+VpLNWl1cPzgkfYodbSiOHjo31/LRV4sAdJATaHjx43K
-	 ObDjt5ac1r2YM92We5M+lgsiYXPBWPEsdKqg5x18lIJgyf2XAxGk1TwkaRPNiJMN/BTEg
-	 ZOo5Wq3LuBEb7wYVQx6ng3MQqGsIHvMLGpzf1wYcQjkv4dtih3drsQ9BRk/UQ6zTTmkxB
-	 YS1KwoJCV7vubN/r53jnqUiiLh3D3Cui5IZ/9dogKm06f1ylh4dUzB4K9MSqdS/FxtkWn
-	 ZEliulYDpb8BDo5Rb56c6KEHdWTn78Vv1oB4FlHOQKAp1l1TDTCsaRi1MBov6FSSP/A==
+	t=1792960316;
+	b=nZAGznQd6O+BhNSQdVanlMWUxyWPERDG/M2xiSwa2vSFpd/vyGbkGOYDCf48Hdw45e+K
+	 O9GuIkh2FG8p8hwKR/Ya5CDRigSW2o84q8/l0IkaAh5U304oGqwVkZPQrF8y0e1RKIFyq
+	 FmxlVfIY0vBKiDCu3o+7/ZABzWJvvBz9Hjv+Yhk0nKwaWKdu5VRTn3uEdSCiHCh1907A5
+	 ng8ZfMcuqA70RbRrxFlAoCy8/7XKb6XP5902OISuguBojilIgsVNWMMhz/qr4Q2A9nS51
+	 WJkXrWJE/XPsNRRqVvLBay36NvkPsYQRj20w729ti3ZH1oMyRwt/U2V4jgWQPUIL9HQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792959035;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Virus-Scanned:Received:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=nfuxDUd17BdkkholAC0E5iZ6FczMfNtszUIXAcM/J/4=;
-	b=MtiuCWpXi9qCDthwaB1qUwatBNpobHAAl7IuUN7iLrVks8z1xC6pGVasSYa7Aah1Vqc2
-	 xr51UsWdnuisHqYRX0kAnzaBG5tQoj7LQjdeup+hOcksCkbtRldbIHDP8kZiDDa2kQq8j
-	 lN03cEw5eo7MtJKqJIr1pppYMEEhMphQaC1sx56qxDKMX6QivhLeyyAAhclQWDyxGbt5f
-	 3H4e4pwr3gV2CRWjpMXgOapEaLpwfH8TqQ26YfVDh1Qw8dN8hjwGU45hOUprHcUK2g2/x
-	 NoO0H0FPvKnd0UlTjw/RPKPgtCH/cllv9h15Oc+DeXPRuDxkWIClFlmImFjGb43Rzew==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792960316;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=Be2Qj5VPj3anKQUTdbqSapQ73mXLTFDSUDurM06zZss=;
+	b=oSr3mZlLMcCdRWs72fviYdNWUALBKl/8TEgV7lNgcdVZu95cVP5bNOjxkzRLaVmhoZ37
+	 kO84WaJ3g8pS2Sz60QLu+x+4a7yAC6xnPYiEc+9/x0VMaHXxSTxcNYPnAuMNUQNlGfVI/
+	 5epG++TzWzl8l9lMkNuiFiVJk1cCJMf8gf7LIdLXhVeaLXiSVXADW7/48wOtAcvaPiha9
+	 pMUijsWh9CxzicvBgHOWZgz3diKaJuEH36GabW6+6ggVHMoMQAI7c8EFwjbODLm9HIzIF
+	 6VMKSKVGsXV0Uh65pwPg8uIaZ3KCWE463BEQe70NEa8GihKp8hQLVZBb77MVHIAdNgw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=acm.org;
-	spf=pass smtp.mailfrom=acm.org;
-	dkim=pass header.d=acm.org header.i=@acm.org header.a=rsa-sha256 header.s=mr01 header.b=xIbPSHG9;
-	arc=none smtp.remote-ip=199.89.1.16
-Received: from 013.lax.mailroute.net (013.lax.mailroute.net [199.89.1.16])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=K6aBLVdw;
+	arc=none smtp.remote-ip=209.85.208.50
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB87606A31A;
-	Sun, 25 Oct 2026 20:10:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DFB87606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83EB5606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 20:31:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 83EB5606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=acm.org header.i=@acm.org header.a=rsa-sha256 header.s=mr01 header.b=xIbPSHG9
-Received: from localhost (localhost [127.0.0.1])
-	by 013.lax.mailroute.net (Postfix) with ESMTP id 4jCSYQ2rpdzlfvpM;
-	Sun, 25 Oct 2026 20:10:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1792959029; x=1795551030; bh=nfuxDUd17BdkkholAC0E5iZ6
-	FczMfNtszUIXAcM/J/4=; b=xIbPSHG9E/ShBMSpMR7/MCIc5yF6CJvMRbZ+75QX
-	TJ7blH0H/jORRmw6sB1iF5m3Y8DQxQ9i6sDKhu/Mnywp4iPywwl/lsBZDO5F2oT9
-	jFRc/eLosbMCBNPd9aBhBjv8+zWi4iY7aJjGmG2QH6X+eI22nb1lQUzPk4rSraIA
-	2QazKqnF2itsHjqbDh4CxQ/3pdnX5t6obUXtAVdLy4Wxn3PPQ8Fc8dFHzn3vncyT
-	RnrLIo8wfXAzBXiljOyQwg178p+T7ofDCGfj/LtI265+MaSJgzYTMtBUCoC8dW7o
-	6LJC/Hg/0X84UO9Zga8qAoZLivGnK9LpUX+mzzGJWqDwNw==
-X-Virus-Scanned: by MailRoute
-Received: from 013.lax.mailroute.net ([127.0.0.1])
- by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id EBJM-FDfAURl; Sun, 25 Oct 2026 20:10:29 +0000 (UTC)
-Received: from [192.168.51.14] (c-24-6-239-25.hsd1.ca.comcast.net [24.6.239.25])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4jCSYK095DzlfvpK;
-	Sun, 25 Oct 2026 20:10:28 +0000 (UTC)
-Message-ID: <76bbebb4-7337-486d-8f21-a39bcb6dca93@acm.org>
-Date: Sun, 25 Oct 2026 13:10:26 -0700
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=K6aBLVdw
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6af9a9451daso3607790a12.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 13:31:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792960315; x=1793565115; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Be2Qj5VPj3anKQUTdbqSapQ73mXLTFDSUDurM06zZss=;
+        b=K6aBLVdwCtDvNVXrUDErFoAr+HRy4mh7AvlIq94sT2SQL9nyA0N0K9H5ArPFI4co+s
+         Hr62gpQP70mBYNeGejcjmoM+Cfj3qhkDcel7pq7QbZsdI0VbAbD6rDdyyY4kvpsHlHUv
+         iyzeHlGZwXYYHFOqfgle5UBdOdTPCbKp7wAxs9Mw3zsMWCfZHMsRvOP2eVfXmTACkLBo
+         lYLIOPAIRQABc4UuQ7pnKwWy378A7RpZE6pdLZ7SNuijZrhAmeIIV+RqlgtNgxXrBTlr
+         GjuvAgHMD07GeL3Pq8U3S5MLlyf8PMp0+5yvMvFbjZs9lpzvib0qYA9zy8nH4IwyQayl
+         RFsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792960315; x=1793565115;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Be2Qj5VPj3anKQUTdbqSapQ73mXLTFDSUDurM06zZss=;
+        b=19aG/46tkBm44yTL02dqblmKbtOZldqREAcLb46kmSUHdXa5pugP4n3qiObeoqhg8Q
+         7v7Bhqb5bzGMI+LMrtFT1N5dFSXsfFjp+DP5QsSlJ0VrYrpMw/H+8BWx3ZB9zFSu2q1V
+         MOeRimADNfMHHGPiJAnzpIw6vfs8w/3ChnteU0aQWlrGLM9ID3isqgz+ltLU20OZo2jR
+         zgm4G9BILX1AzS5rYiIe7oKXK1hlhKpSAL8b/wXTpFw0JAjKWPzwZ//+sqe8fbfutCdH
+         eCY9nj/Lt9uKVA8pnkWygBsu+gdzU9OLVNZM1nmfgixO0TUEnLxrox5npN56yX+xuDS9
+         hhEQ==
+X-Gm-Message-State: AFq9FYK2Q8uf0VUscOdhQHgR6OFJOfHK6v5ml7we+0gING2uo7bByxI5
+	wxv87Cj0tLH3GHd3FKDw4IniC2ca1zxbZWTXPl1jdYtQ8XtfRtsveNHsCXsolVDrxwI=
+X-Gm-Gg: AYBFou2qM4YyFDi35TrWh91ahYrb4fHKNYyFmr0yFo2FW+NiU5uN71fo6Grcw5KNOR4
+	mKHU7IiwP3NAylFgtlH0naBrZnpEyl7s+PewNWmTlNHbj6VCul1wNmt+L02kb2CBbq1eyRV+Zqr
+	bD6mFmT9gqv4w5bEp28HhhpFazi6PB4KS6bU0No1onhoI8Yy3bca0tWnACN27H8gEzE0W/ipz6v
+	UOKAdxW2RqdAUwa5Lpe0eXGrLt8El85uvnZrtLpyN3qLmdngB/zAMsV/aMBbsDpPwdg3lkPvItf
+	5mztNl7HSOI0TkJIorgRXDAFwKSCGXwnp3utk3ZzYUKGGmWl3LCV3yPFwNu9sxgcgjnCMd1pt1f
+	/5CA04cvUhS6pxS+2RT7pWjNQ7nO+aGF/npulgw4rm3WemlAlyQ1UkGvlF6INAZ0RGsruPJp/TJ
+	+OMFE9g7x7FvgK3AqgrxXQ0cJtV4vDkTWt1Qk3ZEnFSmyLK6Dr9+rst4JHCjZgQSjjbdcqQ//7d
+	c9m2i9Znun1tL6s/mGQfWTDp09mgM9Eut+VcbBY9ubY5rQZqOjHf1kKeE4GSzHniBEe3LcpyvVi
+	LKJoyrhUJQxMuOXGEPd2/r1zITM+UuMQdsjDKmGELv7GrEGEsnwlNUIsrkBylFbibu5Vbe66Z4S
+	RgGER+7G5QTF8nvfUq8XQ6siwqFI8JzaDFlYHw8d/5fWx
+X-Received: by 2002:aa7:d286:0:b0:6b3:8018:7643 with SMTP id 4fb4d7f45d1cf-6b44300a8d3mr4496308a12.45.1792960314732;
+        Sun, 25 Oct 2026 13:31:54 -0700 (PDT)
+Received: from localhost ([2605:59c1:3500:c210:a19e:c679:44e8:e9a])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b44595df8fsm2802175a12.11.2026.10.25.13.31.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 25 Oct 2026 13:31:54 -0700 (PDT)
+From: Selby Mashiki <mashikiselby@gmail.com>
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Selby Mashiki <mashikiselby@gmail.com>
+Subject: [PATCH] usb: typec: tcpm: qcom: fix connector fwnode_handle leak in qcom_pmic_typec_port_probe()
+Date: Sun, 25 Oct 2026 22:31:51 +0200
+Message-ID: <20261025203151.455062-1-mashikiselby@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,82 +97,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on
- mutex helpers
-To: Rupesh Majhi <zoone.rupert@gmail.com>, Andy Shevchenko <andy@kernel.org>,
- David Lechner <dlechner@baylibre.com>, Jonathan Cameron <jic23@kernel.org>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-kernel@vger.kernel.org, Marco Elver <elver@google.com>,
- Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-References: <20261025191510.22261-1-zoone.rupert@gmail.com>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <20261025191510.22261-1-zoone.rupert@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10/25/26 12:15 PM, Rupesh Majhi wrote:
-> Found by building with CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y
+In qcom_pmic_typec_port_probe(), device_get_named_child_node(dev,
+"connector") acquires a reference to the connector fwnode_handle to pass
+to_of_node(connector) to devm_of_regulator_get_optional(), but never
+releases the reference.
 
-Please include the CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y change in
-your patch.
+Call fwnode_handle_put(connector) immediately after
+devm_of_regulator_get_optional() to fix the leak.
 
-> diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> index c68c6c5f6aca..6a3cabedf4e8 100644
-> --- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> +++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> @@ -663,7 +663,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
->   }
->   
->   void adc5_gen3_mutex_lock(struct device *dev)
-> -	__acquires(&adc->lock)
-> +	__context_unsafe(/* returns with adc->lock held */)
->   {
->   	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
->   	struct adc5_chip *adc = iio_priv(indio_dev);
-> @@ -673,7 +673,7 @@ void adc5_gen3_mutex_lock(struct device *dev)
->   EXPORT_SYMBOL_NS_GPL(adc5_gen3_mutex_lock, "QCOM_SPMI_ADC5_GEN3");
->   
->   void adc5_gen3_mutex_unlock(struct device *dev)
-> -	__releases(&adc->lock)
-> +	__context_unsafe(/* releases adc->lock */)
->   {
->   	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
->   	struct adc5_chip *adc = iio_priv(indio_dev);
-> 
-> base-commit: c9dbe2a47f635465c9985b7af74d2ae310e98125
+Fixes: 506927b6bf29 ("usb: typec: tcpm: qcom: prefer VBUS supply from the connector node")
+Signed-off-by: Selby Mashiki <mashikiselby@gmail.com>
+---
+ drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Please consider replacing the above with the patch below:
-
-diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c 
-b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-index c68c6c5f6aca..09013c6e44a0 100644
---- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-+++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-@@ -663,7 +663,7 @@ static int adc5_gen3_add_aux_tm_device(struct 
-adc5_chip *adc)
-  }
-
-  void adc5_gen3_mutex_lock(struct device *dev)
--       __acquires(&adc->lock)
-+       __acquires(&((struct adc5_chip 
-*)iio_priv(dev_get_drvdata(dev->parent)))->lock)
-  {
-         struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
-         struct adc5_chip *adc = iio_priv(indio_dev);
-@@ -673,7 +673,7 @@ void adc5_gen3_mutex_lock(struct device *dev)
-  EXPORT_SYMBOL_NS_GPL(adc5_gen3_mutex_lock, "QCOM_SPMI_ADC5_GEN3");
-
-  void adc5_gen3_mutex_unlock(struct device *dev)
--       __releases(&adc->lock)
-+       __releases(&((struct adc5_chip 
-*)iio_priv(dev_get_drvdata(dev->parent)))->lock)
-  {
-         struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
-         struct adc5_chip *adc = iio_priv(indio_dev);
-
-Thanks,
-
-Bart.
+diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+index bf985efe1..b89495315 100644
+--- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
++++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+@@ -728,6 +728,7 @@ int qcom_pmic_typec_port_probe(struct platform_device *pdev,
+ 	pmic_typec_port->vdd_vbus = devm_of_regulator_get_optional(dev,
+ 								   to_of_node(connector),
+ 								   "vbus");
++	fwnode_handle_put(connector);
+ 	if (pmic_typec_port->vdd_vbus == ERR_PTR(-ENODEV))
+ 		pmic_typec_port->vdd_vbus = devm_regulator_get(dev, "vdd-vbus");
+ 	if (IS_ERR(pmic_typec_port->vdd_vbus))
+-- 
+2.56.0
