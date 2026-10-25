@@ -1,56 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.117
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792965628;
-	b=KuLVEfu+VWi1rh/+UyeFNL8H69eJbg4inkmim9liWCPlFhNS64jvfovlZy0qJKR96stH
-	 7extAv5751gSDmL2SvoZJ9JK7Q3RdD+YWsBHANjxn9J0lYhj09cj5p7kWKzIWs+iFyFwu
-	 6U1nzoYxIYVfQ/Q7PEz8FvsvGww3n2DURmRi9+3ocvzxBZdPgP2CiC6QbhnT/XxQSaMBe
-	 m/f2JqT4WJEKXZkaqv8o2cGny5djlTfG3FcFA4duvjSACL6rOB2LSTOZ8VAuC3Ewbuyzn
-	 j1txAlEe5aEfslFVUGPD6WN6WrLatewyy+YvuJwXuEExLIW6NSsiwGP3OZxiZwYioLw==
+	t=1792966576;
+	b=a3LyLViNHWlPCsqyoC8DG1iAksl8rff0Bl1aAlurV0TOEVXTiXyOIEW9lqW5/ge0MJ77
+	 /mentVWU5ls5w0XB42eAHRq427AlgG/1jW5Njt3OFDsYuhb8N/BnF4lL014VUsNyXEGwO
+	 XQxH/pKpXPP9EnqPSrkA5VJiCLykCgUqRhkKSFLN9EqMAdwmUgA/DKiu9SrSXoeYY5Hfn
+	 jCQrUH4Ozcu0plrZtwciMQSdAkAI03KFTHe7GAtM++MlHniEaXqNVvANHHOzmzYs1x+ck
+	 1WBh5fJ+Pij6T4m2+SrC63AiD8UoRC6tzjBnfz8EtPKrH74qGCozHodsLtQUdftfBgQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792965628;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=mRVKYrbkHXi7Quv1tFN615Pz9w82zvx7xWpPPWG9U6M=;
-	b=S8ZLjMm9GljxvetrNKP1DTEtAp5jbxiU+eV6zc4aZLgUmM9gW9Bytz8r4u3fgSqAY4lg
-	 Iu298FsuOgThr7Q928KYCiIJRTSrbg0A2jwi9uclLlhKF8Aq+m2KLtQsFacVlkwIAk2Gn
-	 fFVHUvFx5J9IBFiawb4ay3kfqOx5DaylWWdD9kv33wzKGgi4Qqd2f5sBk5hXnzrFiJw62
-	 /wn+pS3I2JWuMQ36aUSup/n2ybA5QOLNNJ0zOmC3olJHAKaDXNvY5NftUbQRGrHar7w2U
-	 ErcEKYpkkrOGIV49CPOyCn9M7uGKN5Yw+BQoiLw2+iRztaNkqrVs3xLae+WtRTnCYzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792966576;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=DMnV/6aSn1ZXSp1qQ4XFqAj3ot4W3oi4+OfSLRlndkc=;
+	b=l9ESOPcnwroe3muqEBwjGOavlWGCY+tGJ5nb1gjQfyNvW9yoXE/PjNc/8sxLQIE9QmSj
+	 89FmhLxnuudQQ4uNeXA+33mN3uGMPcztwKMGbrQ+qvLDnthtjrf4vktEZHpNnE9tir9Qj
+	 V6e7E+ljRY+2GUZyoq0XPLn1+ywB4GvlU27WZvlJZ+pv/eFr/z9IybaNo28hUsVB8o6oN
+	 SFTc9dB0Ejz/LBeDnCSAMI6dPV/QTYALm4Yzt3ThNT95NKriE7KmWPaW7bu7Mx/WCB8dx
+	 S9sqGUjGme+PHCt6NiATWG4fj9ToN8L2HWi2whKOtrlLIEB9ws6QcFGSSOaG553LdYA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=mQtmLusM;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+	dmarc=pass header.from=vinarskis.com;
+	spf=pass smtp.mailfrom=vinarskis.com;
+	dkim=pass header.d=vinarskis.com header.i=@vinarskis.com header.a=rsa-sha256 header.s=protonmail3 header.b=FzFEwH16;
+	arc=none smtp.remote-ip=109.224.244.117
+Received: from mail-244117.protonmail.ch (mail-244117.protonmail.ch [109.224.244.117])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AADCF606A31A;
-	Sun, 25 Oct 2026 22:00:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AADCF606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4111606A31B;
+	Sun, 25 Oct 2026 22:16:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B4111606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=mQtmLusM
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 497B55340ADC;
-	Sun, 25 Oct 2026 23:00:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1792965619;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=mRVKYrbkHXi7Quv1tFN615Pz9w82zvx7xWpPPWG9U6M=;
-	b=mQtmLusMXzB6BnpkE446q+Tc1/MaWaU0tG/0W1B6QPtvfPaIP4x90HV88J7tyKQ4nJ0cg+
-	OzP3AzElHm/wASCAZePA2PNND+WMFCqF6+VAgP2v6+nQ76gUBiBFjtShIlbBl1MlY65KVS
-	d7ZOcXIeQl6J2rkC4iX/KzTR617qPGk=
-Message-ID: <12fe717d-683b-42f6-8f72-a1e3e3612f46@ixit.cz>
-Date: Sun, 25 Oct 2026 23:00:18 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=vinarskis.com header.i=@vinarskis.com header.a=rsa-sha256 header.s=protonmail3 header.b=FzFEwH16
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
+	s=protonmail3; t=1792966573; x=1793225773;
+	bh=DMnV/6aSn1ZXSp1qQ4XFqAj3ot4W3oi4+OfSLRlndkc=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=FzFEwH163Kethc0JpXcJAw5b98NkdekC+gczB91jtDHhg4YCXncWSKMzoePU73eyk
+	 7xecNkYt7sny7Wex8uMGZbMIEREPOWh4XB/51TSqoWYyoNW91N1mjTKv3eXaASVoPN
+	 btMettP4GvM5nzts47lCEf28kyOCHfNWpkBTsObcGDbailPlkZ6Bod1Bwiabi4ZCkb
+	 lQz7LmGq9e42ZEMKa5IAwGvwuQTkuOVEQ11UW538sn6z5e3y2QSt1v7Q7q0h9rFKyf
+	 W0qbuB1uYzSZ2OCCXNy47a+YmNZcOI5n2s8YdxVVKPfIihltjF4QGTO4CLisPeWHij
+	 V+1N3Z+XvM3rA==
+Date: Sun, 25 Oct 2026 22:16:07 +0000
+To: Liviu Nicoara <lnicoara@thinkoid.org>
+From: Aleksandrs Vinarskis <alex@vinarskis.com>
+Cc: Michael Burch <me@michaelburch.net>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Kees Cook <kees@kernel.org>, "Gustavo A . R . Silva" <gustavoars@kernel.org>, Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>, Tobias Heider <tobias.heider@canonical.com>, Val Packett <val@packett.cool>, Neil Armstrong <neil.armstrong@linaro.org>, Stephan Gerhold <stephan.gerhold@linaro.org>, linux-hardening@vger.kernel.org, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v6 3/3] arm64: dts: qcom: x1e80100-dell-xps13-9345: introduce EC
+Message-ID: <tgnlBNUOnW42EiLCz_akAzeeWkNknNtC0L6XgPu22x5snLwk-jvS8K8byxz0LVhf-i0Zi5deKpU5UuE0QqzqMOZHx6OqLcpSllgj6JyZAAM=@vinarskis.com>
+In-Reply-To: <20261022192709.12149-1-lnicoara@thinkoid.org>
+References: <NCQ5O8k2_GpmJZBjDzgZL67uwdiYmmuSudO9VmdRaFTDq0u7aec6at00VYbzdwwSVvgJnLnGxewwp_TVO9oTjM2pAjP_LoiURf9JCIKXB-w=@vinarskis.com> <20261022192709.12149-1-lnicoara@thinkoid.org>
+Feedback-ID: 158356072:user:proton
+X-Pm-Message-ID: 18a3e30b6d997ba5a1b9c6346f460aaab43f928c
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,103 +64,127 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: typec: tcpm: qcom: fix connector fwnode_handle leak
- in qcom_pmic_typec_port_probe()
-To: Selby Mashiki <mashikiselby@gmail.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261025203151.455062-1-mashikiselby@gmail.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20261025203151.455062-1-mashikiselby@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 25/10/2026 21:31, Selby Mashiki wrote:
-> In qcom_pmic_typec_port_probe(), device_get_named_child_node(dev,
-> "connector") acquires a reference to the connector fwnode_handle to pass
-> to_of_node(connector) to devm_of_regulator_get_optional(), but never
-> releases the reference.
+
+
+
+
+On Thursday, October 22nd, 2026 at 21:27, Liviu Nicoara <lnicoara@thinkoid.=
+org> wrote:
+
+> On Thu, 22 Oct 2026 17:07:25 +0000, Aleksandrs Vinarskis wrote:
+> > I do not think the left charger you identified is correct - how did
+> > you arrive to that conclusion? Curious to compare to my method.
+>=20
+> I am afraid my method was simpler and coarser than yours: one run per
+> port, nineteen samples ten seconds apart, the charger feeding the
+> system only (battery at 96 % and not charging), on a 7.2.6 kernel
+> with all four GPIO channels in one DTB. The deltas over three minutes:
+>=20
+> Channel                Left charger   Right charger
+> 0x14b  AMUX2_GPIO          +1.6           -0.9
+> 0x145  AMUX2_THM           +0.1           +3.4
+> 0x146  AMUX3_THM           +0.8           -0.1
+> 0x14a  AMUX1_GPIO          -0.2           +1.3
+> 0x144  AMUX1_THM           -0.1           +0.2
+> 0x148  AMUX5_THM           -0.2           +1.2
+> 0x147  AMUX4_THM           +0.1           +1.8
+> 0x14d  AMUX4_GPIO          +0.0           -0.0
+>=20
+> The other channels fell or held while 0x14b rose, so it was not the
+> board warming as a whole. But 1.6 C in three minutes, against your
+> 2.3 C in ten seconds on the right, might mean that 0x14b is a sensor
+> somewhere on the left side of the board, not necessarily on the left
+> port's power path. Under SSD load it moved with 0x146 and fell with
+> it in cool-down, which puts it close to the SSD. "Left charger" was
+> my reading of the sign pattern. Your ten-second test is probably the
+> better discriminator for a sensor on a power path. If nothing answers
+> the left charger in ten seconds, the simpler reading is that the left
+> port has no thermistor of its own among these seven.
+>=20
+> > pm8550_gpio_02 does NOT clearly follow. In your test you have
+> > waited multiple minutes, which is enough to heat up a larger
+> > area on the motherboard.
+>=20
+> Agreed. In your left run it was the only channel with a positive
+> delta while the board drifted down, which is the same weak signal I
+> had, and no more than that.
+>=20
+> On the two AMUX3/AMUX4 GPIO channels: neither carries a thermistor
+> on this unit, and your tables say the same for yours. 0x14c reads
+> 130.048 C on every sample, the last row of the conversion table,
+> where the driver clamps a voltage at or below the lowest it knows.
+> Its input sits near 0 V. Windows' ADC configuration sets up only
+> PM8550 GPIO3 and GPIO4 as analog inputs, for AMUX1 and AMUX2, so the
+> pin behind AMUX3 is in its digital default, and PM8550's low GPIOs
+> read back here as inputs with a 10 uA pull-down. 0x14d held 34.7 C
+> within 0.1 C through both chargers and two load runs on this unit,
+> and 35.8 to 36.0 C through every one of your tests, the hairdryer
+> included. That is a biased pin, not a sensor. Both nodes can go.
+>=20
+> > ADC5_GEN3_AMUX1_GPIO_100K_PU - Likely "lpddr5_therm"
+>=20
+> I cannot separate 0x14a from 0x144 and 0x148 by heating. Under a
+> one-core load reading a file from /dev/shm they rose 14.0, 14.4 and
+> 14.2 C in lockstep, while the SoC's mem TSENS zone rose 20 C. Your
+> RAM stress warmed every PMIC die by 1 to 4 C as well, so it does not
+> single out 0x14a either. The three sit with the SoC; which one is the
+> memory I cannot tell.
+>=20
+> > Looks more like "sys_therm5" is the actual keyboard thermistor.
+>=20
+> Consistent with what I see. 0x147 is the coolest of the seven, 29 C
+> at idle, and nearly indifferent to board loads: it gained 2.0 C where
+> 0x144 gained 9.2 under SSD I/O, and 2.5 C where 0x144 gained 14.4
+> under the CPU load. A sensor away from the board, on the skin side,
+> fits.
+>=20
+> On 0x146: under four minutes of direct-I/O reads it rose 8.2 C
+> against 10.0 C on the NVMe's own sensor, the largest share of any
+> channel, and it fell at once when the load stopped while the
+> SoC-side channels kept rising. Under the CPU-only control its share
+> halved. I would keep "ssd_conn_therm" on it with partial confidence,
+> but I will not argue if it goes with the others.
+>=20
+> > Alternatively, I am leaning to drop the labels for anything we are
+> > not sure about...
+>=20
+> Or just give them pirate names. Jk.
+>=20
+> Agreed. 0x145 as the right charger is what both of us measured.
+> Everything else is a guess until the teardown. Numbering sys_therm
+> from 1 matches Windows' SYS_THERM1 to 7, so that helps too.
+>=20
+> One consequence on my side: the 9345 thermal-zones patch
+> (20261006185557.23016-1-lnicoara@thinkoid.org) names its zones
+> chg-left on 0x14b and ssd on 0x146. I will respin it with neutral
+> names for the zones that are not settled, so the two patches agree.
+>=20
+> Happy to test a v7, including a lid close on the EC interrupt line,
+> which my v6 run did not cover.
+>=20
+> I love this laptop, but I will not open it up just to pinpoint the
+> right thermistors' locations.
+
+I went ahead and tested thermistors against their potential names.
+Finding are available here:
+https://github.com/alexVinarskis/linux-x1e80100-dell-tributo/blob/master/de=
+ll-xps13-9345-ec.pdf
+
+TL;DR: with your correction of AMUX GPIOs to 1, 2 instead of 3, 4 most=20
+of the proposed labels are correct, except for left charging controller.
+This thermistor is quite far away such that IMO it cannot be associated
+with the charger. This perfectly explains the difference in heating up
+rate we both observed.
+
+I will adjust labels, address rest of the comments and respin series
+shortly.
+
+Regards,
+Alex
+
+>=20
+> Liviu
 > 
-> Call fwnode_handle_put(connector) immediately after
-> devm_of_regulator_get_optional() to fix the leak.
-> 
-> Fixes: 506927b6bf29 ("usb: typec: tcpm: qcom: prefer VBUS supply from the connector node")
-> Signed-off-by: Selby Mashiki <mashikiselby@gmail.com>
-> ---
->   drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-
-Hello Selby,
-
-check out
-
-https://lore.kernel.org/linux-arm-msm/20261025-typec-of-fix-v1-1-06bfc16a7846@ixit.cz/
-
-This is one of the patches from the gen1 Type-C enablement series and it seems 
-to be almost same as yours, if it looks good to you, feel free to drop A-b/R-b.
-
-Thanks
-David
-
-> diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-> index bf985efe1..b89495315 100644
-> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-> @@ -728,6 +728,7 @@ int qcom_pmic_typec_port_probe(struct platform_device *pdev,
->   	pmic_typec_port->vdd_vbus = devm_of_regulator_get_optional(dev,
->   								   to_of_node(connector),
->   								   "vbus");
-> +	fwnode_handle_put(connector);
->   	if (pmic_typec_port->vdd_vbus == ERR_PTR(-ENODEV))
->   		pmic_typec_port->vdd_vbus = devm_regulator_get(dev, "vdd-vbus");
->   	if (IS_ERR(pmic_typec_port->vdd_vbus))
-
