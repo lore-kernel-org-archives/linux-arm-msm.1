@@ -1,99 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.48
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792947425;
-	b=30NQGsoodX7/1nADrAHMwYh+rGc9wEiUI4HA7vIkySAfailiZzY6Caw3m8r5Q+WiWMyD
-	 e8KrEWsuPvro7SX1cxUu0ANE0bbLZbu8VwqxvsmpKuJEnCghq0+fC1ZZXXg6y/kA/KNtc
-	 NdSsykuAWCDzcKUjHQF2J5Qeb/oP4muIrfh3DSCyESdYLGhQjKeSGvCFq218wjPDEnLIn
-	 Dwh5EKcLymftrHwnKuhQtFj1s4x3pzDB+R6AEIug2xpgADOh2O1Uyql21LMRBo0rUkcFT
-	 R8duYxhw8grWDCTk3AeKaF+mpdfMicDJnQBg7ktsFLN8Nj97tfvQlxsVAd1WbPLAY0A==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792947425;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
-	b=NDNvTUBxcOnkaBUpb2iFo739wOp7vC5VoLTzfQl3S8mVzzV8PGDn0giF3U5uIzgjCNnf
-	 6OWWxTUVkagry1EZ8urNG5L4QVF9l8xrJJ8YsixSJbewOt1GAFISGsd1oYzz6K57ivfMc
-	 CXB4MEBIIJuGGt7pEnVaQjR+moCZJbm5bK3I5D7Ojb1b3NPBeqPw2+EG6HBpe/SEkgztB
-	 1DcRnIPcL1Yo6OF10fpYKa6LgeUSdNP8E+/QzrlJZ5CikAbo/UJfL9LI1Pnd3GzSa5l42
-	 ZB471giHd4bnRN3SmWJ6HDeV3RHQa6A/dAlWbS7I/a2QzSuL1+AGtncObff5hYvsNWw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="jlt3d6/z";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.48
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792947720;
+	b=bYZQnKCG+vZ+6Y7heh9CWA3kVnlxU82w4neT8cNx1XmDA4sbk6HZW9SceBsd5An+dd+N
+	 EFg3DDArF/zjKcYppn3/oj4bA+9QiZC6NP7brYJgGdM0BwOaZBAj5AmEbzhCv76+7Rpl3
+	 ydEVcnBZgRwpKQjxERbKUZXE6dM0+NO62BjMa3ZuBPywu0o11lvLW+U2orXSM75dvrC55
+	 zEPHZPqA+D9TuNlzhIOEF5yageVfrRkWjAw9CPqT4rfNuX/o/mySgXa71LlOBDx7ZzZLK
+	 CtQdcfmnXOWfu0L1HiawAe/DiaxA00d6IB8PpdpAmT0NMp4e2F6nY1ksJlIByiDkyCQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792947720;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=yC4Ixl0yXMVt9ps7yzBx2x4QC7PQ27qXmobL+RWzIck=;
+	b=QbtzZM4wqz1m7mq9duus3i9aWrVSuweVpTpcJyYrbAcpwajNA3lCpjm5wzDpY8YvSkeA
+	 8XpzftfUVU5yi4VtXT8gv+Wf7hpsZH9iV3SycC3H3/TPp+Sp/7Nx8S/nTyPz10V4avgVQ
+	 xBGMITgCvS9OkFgxqKfKhzN414h9PGngQMld3Qmo1Bq/tBgFC8c568TbL9EwftXvqlPGQ
+	 4KjcbLQ+QUMIgrYC76Sysr/e/wgL5h4h6uHia04AVy+vcXNfVMLiXxBstuFFq2v8rZJW2
+	 lk5tnpyfVgDVYxjVYmvyB/v89Hn6zYMkLOTuhqfIvggkTxaG6c+nW9F01Kg/SCbKUsw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=owac0YFS;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TmdILhxn;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5762606A31B
-	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 16:57:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5762606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 851F0606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 17:01:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 851F0606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jlt3d6/z
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6ae14eecc64so3013990a12.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 09:57:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792947423; cv=none;
-        d=google.com; s=arc-20260327;
-        b=PJoXD6C380j3LicUlFPa20ieqd2PWvFZq+mq3AXfwrnWfJvNHAkepIpAoKavQfDmU1
-         9qJNW6fbKqTYkHGhQLi99f87JdjddOc8KTRLi7ZmFN6mgBKpISjriljm589b+LZeD5Ox
-         eDD8rK6hqRiSdTdYwpscLSkICqHSq5q/Je4T8U6ZPTVjmlSrvq2XwgipEzKrBuIS6R9I
-         elyp1+TaY3KAN5lq9kbu/bgyCIP2hnXCVkoOZvBW4L5xsLf4ooSqRnHjfy2gLIUySzzb
-         h4iZzpwAsHzSsTTuz4de6NNc7ne8y1n0PjSC6M9X/E94/Pc2b0unhPkWMRXcHD7jcSzQ
-         JTVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
-        fh=1pCul/XFYTXAFjeg2x3JaYpHIUoi6RMvVwgSFjGEZz0=;
-        b=Yj1qL3YDhf9RBRKcVbT5Z3hIDXKLI1mL8svpNUBJHw5MOabSDwTAG2HWJDic7kSt89
-         cUOWJ+TZqOQnHZBz2kEVYctgDtBtFjTZD8hacfNffOgpbxiA5VT4ZkDH3g2oVyiDn149
-         Jm1CKyDTTtGGkM+lehdqUf+TA3UWVfG34QbEV0L8ZvJHSAxMEMCDFIjvhoVLO/f6nqVg
-         2Sqv2p7A1Y7OLGm3nVtL99G8CjyuKfzjc7mTIXfT4PeW/eaBluC2JJsZMDEmRwLeNCzD
-         uIMzrPr9Grd0RmOrKmkpP5Jaalbss4L2uam45Yy54/Pm1m44EF28lahc4x3pIwX1noUE
-         creA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=owac0YFS;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TmdILhxn
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69PFjMUW3343700
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 17:01:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=yC4Ixl0yXMVt9ps7yzBx2x
+	4QC7PQ27qXmobL+RWzIck=; b=owac0YFS4DUXO5Y1TyTE1MxsunU49C97lX/k4N
+	HIhbbMP2Clx8mwx51sSR4YtrOG4TtoI29MZgU43J/tZLp1jKz51cs0NdpGMhPhHn
+	cPP1ZbX+8p6XWHjZeNo3W2CNrGrc6mRa33AtQ40t4+laQtQE4eht1fHNIqYKZOM7
+	f1mNR95/H/oFUnhZdgajy+k3zSk6wcEiMdXHAz6wFPnQVKud+sfOKttuQBNm8tgI
+	3lD9sQBi0guYgBgb8BWH6J9f9wIl2N1b7LY2jXRj5Ah5hBWRpq20AkgrZOwWNMhl
+	4i9dIcdCKmFZIvm4ZVeOIsfpar93ooko2baqMQo+ArebZYow==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgnukbard-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 17:01:58 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-351788121cfso9743654eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 10:01:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792947423; x=1793552223; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
-        b=jlt3d6/zk0oARLw4/TXZZzL6Ptvm60/7yQG0QxcJlDcLqUxJ4ELLncjtgp+VMnhLJ5
-         VOmMkEoeUs4BabEDqRNm83PGPq/v/WpQNISu6yQxiKUA0NvCGpmSlECOPG8Jd32SDwZt
-         n3C/LvP2U355dmmdnPnqvyR4DS4zxQ6ptuzndDEmY52C0pS036Su1UB7x5FjTQU9kmLd
-         wYfpd2lFT3Uei7N01Sk/8Oki5n55+oaEKBoVZAN3efXNvUxgBmiPAtjkrkkD4v8tHg0r
-         eT/szXNcbu7uhmQW6sMpez9h+sWZhSgIUWfVw35KdfD7h1endl7C97TFWHy8uWHO+2tP
-         vZ8A==
+        d=oss.qualcomm.com; s=google; t=1792947718; x=1793552518; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=yC4Ixl0yXMVt9ps7yzBx2x4QC7PQ27qXmobL+RWzIck=;
+        b=TmdILhxnW032sQxpPg06VZKZraK+WCg1PCCuxnKviSMq11Hq8T9AsX/Mf5LcoEz5jJ
+         7GgJh9vSuT6aItpMTsTKMZslYypOjLGTVoUkcrK1v0ypgU0q+iWVPCiFVeqN9PA0Yaax
+         Qm62fB6AvZlXzfiQ7KI+10kPdPnbjMSlSH3tPL5BLLIUDRNOSwx4pj8Ei8vaadQbbmRu
+         BtTEQ9cXZg+y4mX4On6fYDJ5+j/8frUUIBNr1WYPkw7YIwCE26+mFC2GjRrUMMvfadcY
+         VsMM0VRHwMXYDoOt/73ZpcQA4h5NfKe373UhW3YTkkwpVUwCgiUVaLd67o8JSuZWHvVv
+         HX3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792947423; x=1793552223;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IyRu6JMjat1Pu0azstQ7ekUKDPeGwTyG9FIod2bYWMI=;
-        b=1OLscIGupF6uPY54lq1QxsuWOBvjZfI8GYU+/89+E9yrE/+GoO0frnyH8J+d5MMmNw
-         dobP+OKjqUh5iLacA96iQTePj+tqzf8yiqBEsmnSpkL0uBD/zXnvTRkf8c1svzBnZPwd
-         VF0PMsRDcjbdHWKJ3aEFTGTvM8q3ve9KJDzYFB/UwPFHYkoQ8/XG1n0q2aU8sc706HHC
-         aY0NT/+qIHKKj8imWXN/PEPEMzIqe+pRuSLS2J+w6yhkJsRPcyKEP+ddlFfQ8Ktnsh38
-         /hFvSVph5txALYByrDeNN9larmrWaJXP8gQGqWh1rJJoIdN96X850o70A5XnyI6cFmpL
-         7IWw==
-X-Gm-Message-State: AFq9FYICHpkQlE4h3MXHWG/gut1B9GGF6VLB+r7unDSnJrpiQQ2rNjKl
-	wB3dZU6YnyhBmQnsIfPTvJ/XU8ppRoFNRB1isiE3Ayy6GjvCC9CYhTdRQhc6eYTjdByH+mwyR2z
-	3fq1USNfQFyaJJj8OdP5EWzER84Fr9Yg+80mJ
-X-Gm-Gg: AYBFou30BlPBwJckpASB0UHWguZmKm1eE4l2lnc8MUI6ecReM96aawoun3oQdJEMOFU
-	34luI2bFaUyJ28fmHppUlMmC4TV9YOniqHWO6PNl8jUPksHCMmkfuz1Ylt+SvvmdA0lS0dmr/BT
-	cFzuFMgLMS4DbAIdfJxbojGJeuFQHsJ2bNHbyQw7EoVo4W5Zv3TjS4kkeuJdL4S+XpYizfAVi5a
-	X64XRyATgcjSr67HjoUr2V6m54rrPGqwoG0jDbVPnzD0iER7AkRwAOCWEn5hQ71RILVjNAtrjm5
-	IVh84/RqRlrhX1x/l7YJccm3dCRAU2FlKvDYw7wChNGQCvE8qZOBf/JnqV6Ta45GHPoRzyEFc1p
-	jWrcQgplHb+z7MsQx895Zlig0ywOoR9o+6M0K4qhDK9UbkmsyET4hmzNXhWWqAyI7e/4djw==
-X-Received: by 2002:a05:6402:4144:b0:6af:a64f:bd44 with SMTP id
- 4fb4d7f45d1cf-6b443116103mr5407242a12.45.1792947422788; Sun, 25 Oct 2026
- 09:57:02 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792947718; x=1793552518;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=yC4Ixl0yXMVt9ps7yzBx2x4QC7PQ27qXmobL+RWzIck=;
+        b=zak/4HIuqDc0pUDLdgeWy6eNQgjYIpVFK+42E/lr71qRtZM67hjAJIM9nuSS/VLvJw
+         ntSG56etIFODbhFkbgzapqA7Ow2o4jp1H2fcrsG7DRasNsSpdvf0tKgKbGwxrplQlWpw
+         hTIMBI545uPFNCaOHjz6pQ1Mnuqbh7QYx+I8G3rEiQAqGWNV4Zl5ALtus33PLz2qx7hE
+         0WXmFncSyQtzSlDB6MwFBob0+4c0aVaGGnBK8S2JBLP2BXBduMXlnQ1oiZga5PByaWa9
+         hffMeVWFuInOoK2K8OdP6KPnPVuFz42gZ8z5OdxGeFvGFFZ5u/1Je+2kpTBs/XUmCL6c
+         XHyg==
+X-Forwarded-Encrypted: i=1; AKwUvByM0YrAjin4MplVjHxfaoSlekek+WiH464XY/08/qh0Qsad6UCALyJjTu9Dm+NDOIfvKeIezIQQY6T1RHM0@vger.kernel.org
+X-Gm-Message-State: AFq9FYIskgXe2UKuAzmRynekzPOQv0mBIPv/D4fv/CY9RX4x+pJaJ2TA
+	bX7F+W+1LApuSEeq0SkJdfujqV8JdW8P3UFbL/eOwcow7ih7Q4LGOz4yGFsijb9lz/PiRPIhJ2b
+	sqfxsFZFYc3pemutsiOT32UtFDeo/WTKjBfPUVuAe8wQCrDlYnlJE5cF+csJIiBFrmkxU
+X-Gm-Gg: AYBFou1G4EeGdf8nLB10avBJnIOIA01mOqRuPts6Ea9IFnEXbOcud3qNHcdLmdOZJQu
+	0mXTzjuPaYJTevit8K3EH0HIaoTdLIHkW8IAK4db/Ybp6bA0bwL+jbQ8cXBLPiuye8QrGJLhpIf
+	rgIhLAKAFjz184HzAXSbVnlCyX3C8z4oE+TAZF9ik/g1j3WVWk4Lan4ix6UGsG019OxfcVwi3eb
+	311r3sOhvDxN+Nsk8BVQvsxVsl+AksHmAwXkbpqIWzz28Xhj/Q9jNcBc+AKBnloJNawjOuNZTyE
+	uA/O4K8XQSBFQXn70vV9UE9v2Xvq37DE3V87pRO2iFoTtW7JONY6SslaaVsWIlEhT5sWklUk4gF
+	LY4M7otueT2a1ZSIycXGPx2hucoc5KGcXshk=
+X-Received: by 2002:a05:7022:ea4a:b0:193:9aa3:4748 with SMTP id a92af1059eb24-1992a250624mr6956613c88.1.1792947717843;
+        Sun, 25 Oct 2026 10:01:57 -0700 (PDT)
+X-Received: by 2002:a05:7022:ea4a:b0:193:9aa3:4748 with SMTP id a92af1059eb24-1992a250624mr6956585c88.1.1792947717240;
+        Sun, 25 Oct 2026 10:01:57 -0700 (PDT)
+Received: from hu-vdadhani-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a2a5a515sm15783683c88.19.2026.10.25.10.01.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 25 Oct 2026 10:01:56 -0700 (PDT)
+From: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Date: Sun, 25 Oct 2026 22:31:49 +0530
+Subject: [PATCH] soc: qcom: geni-se: Leave resource management to protocol
+ drivers
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,169 +114,134 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <179184923104.248043.14168731037113716140@mail.ustc.edu.cn>
- <CAH2e8h6_pACX_j8YBDhhSZzbfs45waF-Y6KJo82_2c6BT0suEg@mail.gmail.com> <179276337975.97444.18043862696501391672@mail.ustc.edu.cn>
-In-Reply-To: <179276337975.97444.18043862696501391672@mail.ustc.edu.cn>
-From: Pengyu Luo <mitltlatltl@gmail.com>
-Date: Mon, 26 Oct 2026 00:56:37 +0800
-X-Gm-Features: AclHuK9xwUCZ0kvBEwimUn0QZtdVftZr-duC_-VmN0v4C76GGny8RdueHiy-YR4
-Message-ID: <CAH2e8h4wFH5Q_biepZzQuerydvmwbUOsEMRRzs4y-c-0WbjYrw@mail.gmail.com>
-Subject: Re: [REPORT] SM8750 bonded dual-DSI + NT36536: first DCS command-DMA
- timeout on cold boot
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261025-gen-se-remove-resources-handling-v1-1-e81da6707b5f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAPw13moC/yWN0QrCMBAEf6XcswdNoBH9FfFBk2080UTubBFK/
+ 91Un5aBZWYhgwqMjt1CillMamngdh3F26VksKTG5HsfXO8HzihsYMWzzttYnTTCuJ3TQ0rm5N0
+ hjPvohxSoaV6KUT6/xOn8Z5uud8T35qV1/QKQIG0RhAAAAA==
+X-Change-ID: 20261025-gen-se-remove-resources-handling-d2196f7c25d6
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: mukesh.savaliya@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792947713; l=2930;
+ i=viken.dadhaniya@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
+ bh=6JW/djw6dTCF/7ZGylf7GTqpGywoSaSaOyRPyUnMUss=;
+ b=R2XETQTkjObqFm78AwDWWeGYBSLyBccXIteyfAExZ86jjiIPTIeHWEgAILpyivFab6TSW3wCM
+ 1yeY9NmjZwKBBPQRVuwLn7VQSg9bpObGykg7vUPZ9vUWPF/xACsHGnY
+X-Developer-Key: i=viken.dadhaniya@oss.qualcomm.com; a=ed25519;
+ pk=C39f+LOIGhh/02LQpT46TsUSXRvBn9qXC8Xb26KJ44Y=
+X-Authority-Analysis: v=2.4 cv=Z8Z5j3RA c=1 sm=1 tr=0 ts=6ade3606 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=DVgANZ3ww1WCvfZeIL8A:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-ORIG-GUID: K1qMp2TRV7Tn-ELtvhDbsit51mUccKS6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI1MDA2NyBTYWx0ZWRfXwSGmoPEsN1Sg
+ 45e6M2CTHEe2ALE9jVdMeAMRJnsdg5Bxr4E+ho6jpkyJ51QLOq756tJpPz04tll7/5758fw9bpE
+ CWvOsQb3Hqk4psdLWYN03uokLahf5EfYhTw6wVLIqYSzUY19dlPKt4ZZO3lnsDJpOVXZwOpe09R
+ ZEd7lAMTCpO4UXD8KQB8N2kCY8dZGrU+gxvbiEWxleiiIYJapnfXyPBu3Gp0iRAOmP404FABQTb
+ mHsQ44TqhMLsPXYv5i+QPwGC3UZyFvq7cJg78y9X8dwW9u/Jfy7yoK7zWmF6Pn0RM6lhPS8YXxt
+ vvbC1Uqd5lBVZ1sz623UyWepFbX3bSqKLPTVxEZz5PX+tP0dock/1ZbusDQ8fRJt50rK5oqln63
+ OHA3AB7wdUTsmH1M6hgp8G5sZsl8Bw1PWLuqhouCIOFIHNIy4RQZo9PzArgYTcU49cFOrcwOk+G
+ VYOMpzLm5g9I/1j4Xbg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI1MDA2NyBTYWx0ZWRfX6XjACShVsTio
+ CTmPb68pZSIEXgJnpY1U5azNjD07DwS62YSFNdth9/RT8qxObd8AQOJRKwa2BU9wOp6DEkEFSCy
+ jyFHL3x7NGIXl2LCrTTmKL1s69oPOUo=
+X-Proofpoint-GUID: K1qMp2TRV7Tn-ELtvhDbsit51mUccKS6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-25_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+ impostorscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610250067
 
-On Fri, Oct 23, 2026 at 9:49=E2=80=AFPM Qianhui Xu <xiaqinghuan@mail.ustc.e=
-du.cn> wrote:
->
-> Hi Pengyu,
->
-> Thanks again for the DPU answer - it reordered how we are spending effort=
- here.
-> Two things, both about this same board (TB322FC / Y700 Gen4).
->
-> 1) DT coordination for sm8750-lenovo-elden.dts
->
-> Your v2 adds arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts (1170 lines=
-).
-> Our tree carries the same path and filename, 3178 lines, with your copyri=
-ght
-> header kept, because we imported your v2 as the base and have been extend=
-ing it
-> locally for a year of bring-up. We would rather not send a competing file=
-.
->
-> What we would like to do: after your series lands (or on top of its next
-> revision), send the delta as separate follow-ups, split so each piece goe=
-s to
-> the right maintainer, roughly:
->
->   - display: mdss resets (CORE/CORE_INT2/RSCC), DSI PHY PWRDN_B sequencin=
-g,
->     panel supplies (vddio/vsp/vsn) and touch
->   - remoteproc: ADSP/CDSP fastrpc qcom,non-secure-domain (this one remove=
-s
->     ~300 lines of boot spam and makes sensors work again)
->   - misc: audio codec / amplifier / haptics / backlight
->
-> If you would rather keep the file minimal and have us send each block as =
-its own
-> series later, that is fine too - just tell us which shape you prefer, and
-> whether you want to be Cc'd or would rather review them in the list.
->
+Protocol drivers power the Serial Engine (SE) up and down from their
+runtime PM callbacks. Firmware loading runs with a runtime PM reference
+held, so the resources and interconnect paths are already enabled.
 
-You can squash them and send the whole thing your way, since I have no
-plans to update it for next months.
+geni_load_se_fw() redundantly enables these resources and unconditionally
+disables them after programming the firmware. This drops the protocol
+driver's ICC vote while the device remains active.
 
-> 2) Do you have downstream sources for TB322FC?
->
+Leave resource management to the protocol drivers and keep the common
+firmware loader limited to programming the SE.
 
-No public repo, my local tree with all features hasn't updated for
-about half a year(i.e. the 6.19.6 tree, that is what you can see in
-the picture). Many things need to be organized and updated, I need
-time to recall my context. Recently, I have had no time to handle it.
-But I think my tree is unnecessary now, nowadays LLMs seem to be
-capable of bringing up qom devices.
+Fixes: d4bf06592ad6 ("soc: qcom: geni-se: Add support to load QUP SE Firmware via Linux subsystem")
+Cc: stable@vger.kernel.org
+Signed-off-by: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+---
+ drivers/soc/qcom/qcom-geni-se.c | 23 +++++------------------
+ 1 file changed, 5 insertions(+), 18 deletions(-)
 
-> Concretely we need two things that only downstream can answer:
->
->   - the battery/QBG side. A maintainer asked us whether the OEM remaps th=
-e QBG
->     properties and whether the downstream kernel reports power_now at all=
-. The
->     stock build here is user/release-keys, so no adb root and
->     /sys/class/power_supply is denied to the shell domain - we can read
->     dumpsys battery but not the kernel attributes.
->   - display init ordering on cold boot (who programs DSI/PLL first, and w=
-hether
->     the bootloader leaves the panel running).
->
-> Your v2 cites GUF296/linux for TB321FU for mic/speaker/vibrator. If that =
-tree
-> covers TB322FC's battery/display paths too, a pointer would save us a lot=
-.
->
-
-No, once GUF296 brought up gen3, so I reference this to indicate we
-can reuse the peripheral drivers, like haptics, smartpa, etc. However,
-I still haven't started dealing with it due to things irl.
-
-> 3) Data in case it helps your display work
->
-
-Actually, you can ignore what I said to Konrad at that time, I figured
-out the SMMU issue later(UEFI is still writing to the splash region
-after SMMU is broughtup), it works well with splash, or a proper and
-whole backlight initialization without splash. So the display worked
-10 out of 10 for me at that time.
-
-> Since your reply we ran a controlled A/B (23 real power-off cold boots, s=
-ame
-> config/DTB/ramdisk/cmdline, only the kernel hunks differ):
->
->   without an MDSS-block reset at bring-up:  5 of 9 boots failed (command =
-DMA
->                                             timeout, panel never lit)
->   with it:                                  15 of 15 boots OK, p =3D 0.00=
-3
->   split by hunk: block reset 5/5 OK; DSI PHY-only 3/4 still failed
->
-> Two corrections we had to make to our own report afterwards, both negativ=
-e:
->
->   - the -110 command-DMA timeout is not the invariant. An image that remo=
-ves the
->     bonded command path entirely shows zero timeouts, reports "panel prep=
-ared",
->     DPU renders, and the panel is still dark.
->   - neither the latch nor modeset re-entry is the lever: bounded retry re=
-tries
->     and still fails; restarting the compositor re-runs prepare and still =
-fails.
->     The only quantity that tracked the physical state was the DSI interru=
-pt
->     count (41 when lit, 0 when dark).
->
-> We also moved the resets out of the clock driver after Taniya's review: t=
-he
-> three BCRs now live in msm_mdss_reset() as a shared bulk reset with a dea=
-ssert
-> prime, and dispcc-sm8750.c is untouched in our current daily.
->
-> Question on your "hack the DSI clk source select for the 10-bit CPHY plan=
-e":
-> which select do you mean? On our side DSI_7nm_PHY_CMN_CLK_CFG1 already us=
-es
-> SEL=3D0 / pll_bit for this 30bpp 3-lane C-PHY case, matching downstream, =
-and the
-> resulting pclk checks out arithmetically (756839941/2 * 16/35 =3D 1729919=
-86 Hz,
-> which is what disp_cc_mdss_pclk0_clk_src reports). If your hack is somewh=
-ere
-> else - an INTF/dispcc mux rather than the PHY CMN block - a register name=
- or a
-> patch pointer would be enough for us to test it here.
->
-
-0 is the right value. dsiclk_sel was not 0 at that time, as I
-mentioned in commit[1], so I hacked it as 0 at that time.
-
-[1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/com=
-mit/?id=3D0f5c8f03d990f9be9908a08a701c324e113554d2
+diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
+index 074087c592cc..ebca60c8496a 100644
+--- a/drivers/soc/qcom/qcom-geni-se.c
++++ b/drivers/soc/qcom/qcom-geni-se.c
+@@ -1453,18 +1453,6 @@ static int geni_load_se_fw(struct geni_se *se, const struct firmware *fw,
+ 	cfg_idx_arr = (const u8 *)hdr + le16_to_cpu(hdr->cfg_idx_offset);
+ 	cfg_val_arr = (const u32 *)((const u8 *)hdr + le16_to_cpu(hdr->cfg_val_offset));
+ 
+-	ret = geni_icc_set_bw(se);
+-	if (ret)
+-		return ret;
+-
+-	ret = geni_icc_enable(se);
+-	if (ret)
+-		return ret;
+-
+-	ret = geni_se_resources_on(se);
+-	if (ret)
+-		goto out_icc_disable;
+-
+ 	/*
+ 	 * Disable high-priority interrupts until all currently executing
+ 	 * low-priority interrupts have been fully handled.
+@@ -1514,7 +1502,7 @@ static int geni_load_se_fw(struct geni_se *se, const struct firmware *fw,
+ 
+ 	ret = geni_configure_xfer_mode(se, mode);
+ 	if (ret)
+-		goto out_resources_off;
++		return ret;
+ 
+ 	geni_enable_interrupts(se);
+ 
+@@ -1541,11 +1529,6 @@ static int geni_load_se_fw(struct geni_se *se, const struct firmware *fw,
+ 	else
+ 		geni_setbits32(se->base + SE_FIFO_IF_DISABLE, FIFO_IF_DISABLE);
+ 
+-out_resources_off:
+-	geni_se_resources_off(se);
+-
+-out_icc_disable:
+-	geni_icc_disable(se);
+ 	return ret;
+ }
+ 
+@@ -1559,6 +1542,10 @@ static int geni_load_se_fw(struct geni_se *se, const struct firmware *fw,
+  * UART protocol due to lack of GSI DMA support. Requests the firmware and loads
+  * it into the SE.
+  *
++ * The caller must keep the SE resources and interconnect paths enabled for the
++ * duration of this call, including holding a runtime PM reference when runtime
++ * PM manages these resources.
++ *
+  * Return: 0 on success, negative error code on failure.
+  */
+ int geni_load_se_firmware(struct geni_se *se, enum geni_se_protocol_type protocol)
 
 ---
-Sorry, I don't answer technical details, since I have almost lost my contex=
-t.
+base-commit: 20a33c6b6cbe7e4805dfb6cd68816937443aa148
+change-id: 20261025-gen-se-remove-resources-handling-d2196f7c25d6
 
-Best wishes,
-Pengyu
+Best regards,
+--  
+Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
 
-> We can run any patch you want on the hardware and report cold-boot statis=
-tics;
-> the unit is dedicated to this.
->
-> Thanks,
-> Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
->
