@@ -1,71 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.205.69.214
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793039169;
-	b=oLQhlJyS6SvD4RY2sGJhH67jBfn3UR0pVrslx/Ffoy5C/56F98II478gcalafcOEJD9J
-	 7DBCDSfC170zMoTdFzhwIutB5bnGjLGhulWApkH87utGD1yslMGrvu73CIjSafS1EzPRa
-	 21HPmuifBPMI0tdk70rZ1n2GzK3U93hRYofvpLRCyZ5tlNlF/fJ4k6rLxydF0RTFhGqC6
-	 QgzsEgWE6Gbwq7kbjChnTaIlfk07ZMnhNyy8DiOsvBndExXp0wNPeVuBCg04UXv88fV0T
-	 TWq2MU44STPP+wQn+48YrOXjuF4DeNBNRnjDDBG/v8MuUM9QHFYBMG4OVtdypntSysw==
+	t=1793040344;
+	b=3u5+8r4KXhdURnXFjEkQ3RorQUn9FcbUBWuFCZiRFTJe88bwKyQEev027JKhOP7HRHC2
+	 6KDQeTYmAsqV67pxIoWOgudqt/imx+jrVshlQp3z/cOrjTMpqyFXMsI87I3WMzOpF+uSk
+	 Hkb0xF45ZaoY6eLl382MUrAlobF3hg4lvKB9bdQPDGYz97yGUGo4Df7jzSKrg9MNE0ke/
+	 lrWG5DiFizui89Ac9wa2ZWQLJ2l8VSAwINRa38x/pNBENdAuv6B2+CvmDpVZ02lt9hQHQ
+	 IpKyfZanmh7Ho/FEZzvvsgVfDkLcwHjbANXH0RJTqs6Rk1XxJNE8KPfadGjhilzR3oA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793039169;
-	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Message-ID:
-	 In-Reply-To:References:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Feedback-ID;
-	bh=UeV/13Sh60z8s5fD4l3Y3G/Ey/zhI+5SuTw4o6o9VcY=;
-	b=az4mfNntbzcrwHviDMKx2u+21gcUzMUxg5H/n0AyDpygGZ+3lGznCNzKrGCoUyvOdqdz
-	 gUDErfPCDF+Lhmztn5wuaGVN0NV64qbJmJgYKkF0slfLwEsv2IwZkTNWnctgzTfGNdyn+
-	 SGvVX3XIYqNSE/fUbISa0Coann5qZaYcOymWvuea8hhCUKZJxYws49wu3iceemvpobqXY
-	 99yOOiU9yOl0jwBzBxO2HHCk0UW3qiW/Q2a7XTEKIaZPRavAGixL9Wu+uQgyk+2vsu6R1
-	 0gL03/0KakyWzkUeVf3RnqD7+RGdvV6pn1XNuhv9SfeviPbAMLUD3+340DF8MFx6mpw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793040344;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=s9kKn5OnW0rSv2c3iz6WM7rho6XB5fObcZeQYwnjFs0=;
+	b=gg95SyLmva47WwQEmROpiGVPXHvATR9i84yM1G7BEhydX5UBZ66rr/1owqWcxmRkj4C/
+	 nyWo5OrI8OEYaeSEhkegYXe4lLNUSs7SNjrbtp0lXLmlZ/TreMpRZpITsivcCI27Iu+jd
+	 vDjS9DbOVAZIQf0kMYJThrrdp4E45YpmkrPxYk2ty73iNHNNw6CAOq0vMmLcQ0lkhNK2D
+	 aYIncVxGD/Zx1P1rLw7ZiMEJS8P9udXOwf2PU6SPVSdsUrY0IR/yQD911TMqkkBsQfZO0
+	 2odfiBfelS1zEK68wvwzWEQYFQwsokKPqYjs99fK9/wG5vMDZngk7mg7JHs9hcYoYVQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=se-rg.io;
-	spf=pass smtp.mailfrom=se-rg.io;
-	dkim=pass header.d=se-rg.io header.i=@se-rg.io header.a=rsa-sha256 header.s=s1 header.b=OsdPZ8s+;
-	arc=none smtp.remote-ip=185.205.69.214
-Received: from mail.w14.tutanota.de (mail.w14.tutanota.de [185.205.69.214])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Sope3mTw;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8mXtiHF;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFD25606A325
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:26:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EFD25606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=se-rg.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=se-rg.io
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70CD4606A332
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:45:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 70CD4606A332
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=se-rg.io header.i=@se-rg.io header.a=rsa-sha256 header.s=s1 header.b=OsdPZ8s+
-Received: from tutadb.w10.tutanota.de (w10.api.tuta.com [IPv6:fd:ac::d:10])
-	by mail.w14.tutanota.de (Postfix) with ESMTP id 35D7819CD5CEF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:26:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1793039165;
-	s=s1; d=se-rg.io;
-	h=From:From:To:To:Subject:Subject:Content-Description:Content-ID:Content-Type:Content-Type:Content-Transfer-Encoding:Content-Transfer-Encoding:Cc:Cc:Date:Date:In-Reply-To:In-Reply-To:MIME-Version:MIME-Version:Message-ID:Message-ID:Reply-To:References:References:Sender;
-	bh=UeV/13Sh60z8s5fD4l3Y3G/Ey/zhI+5SuTw4o6o9VcY=;
-	b=OsdPZ8s+nbtmcRD9MiFRWupfky+uXK/ErRii0O0bjlZGj1sAxDQbvIsRNGt1KhT8
-	WPWm/NCjwM+/1Rg5WXVgJOvXrfqGUhdxqw+ID9fVc4riN4r1ian1PxAUejkFy/R9TqF
-	xF4+9+zbAw5ZIQNqrdWlEj99cCksslhG6xgnIr6YgZYqJgiXE6EsBE3rSZl/V8MPiAj
-	tlp0jdPJ0qV69oyRcXDKnJf7nxx/GDtwL+OyWaao3E82GnTPkEhUvNTQnhZmPbcmOnB
-	yEoImZrazmAtcdGjLQeQRmr5kmn2JEIAdxHtu3EySR4jkLKgqNXCGxqCxyLMvq0et3S
-	FC47stHTwQ==
-Date: Mon, 26 Oct 2026 19:26:05 +0100 (CET)
-From: =?UTF-8?Q?S=C3=A9rgio_Ferreira?= <ferreira@se-rg.io>
-To: Ettore Chimenti <ettore.chimenti@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Linux Arm Msm <linux-arm-msm@vger.kernel.org>,
-	Devicetree <devicetree@vger.kernel.org>,
-	Linux Kernel <linux-kernel@vger.kernel.org>,
-	Georg Gottleuber <ggo@tuxedocomputers.com>,
-	Ettore Chimenti <ek5.chimenti@gmail.com>,
-	Jens Glathe <jens.glathe@oldschoolsolutions.biz>,
-	Srinivas Kandagatla <srini@kernel.org>
-Message-ID: <P4tSXlD--F-9@se-rg.io>
-In-Reply-To: <DMEXOUF2X7O6.3W5B9URS8YOEF@linaro.org>
-References: <20261025-medion-sprchrgd-14-backlight-v2-1-bf2979485ec2@se-rg.io> <DMEXOUF2X7O6.3W5B9URS8YOEF@linaro.org>
-Subject: Re: [PATCH v2] arm64: dts: qcom: x1e80100-medion-sprchrgd-14-s1:
- Add PWM backlight
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Sope3mTw;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8mXtiHF
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QEvpBU3268445
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:45:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	s9kKn5OnW0rSv2c3iz6WM7rho6XB5fObcZeQYwnjFs0=; b=Sope3mTwm5HyUkLJ
+	x6jQx52i9U0ecmeJZJ6qH94yFRsy11XErJh51uRDJDpuTJGrRNIViamgJHx1QiZ3
+	xKfa90J6Agp3uy1aMvwH+FQtvQV2npPxF6PVJ20850ALK90sqAIb1oOO9JeUDhuH
+	cPjS8l5fgbWpex089wYTcrJvNFsE0HY9ARYjwTNHJl4aLvguXECWyQ7i5U2PBcD0
+	wIitKtL13jJxrPig422W669mWUtuqu7n5oL6XJdtXx5l3snNAhKxeqvHsgc7lSao
+	Xzr4puP5oqAmiy3fHvDtFzHsTpiujsj21hANOW0mEZxwwSoqZO9mJ5KoBviOeYs3
+	pTKiLQ==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hj4cpa59t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:45:43 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-18b5ee75447so3278133c88.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 11:45:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793040342; x=1793645142; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=s9kKn5OnW0rSv2c3iz6WM7rho6XB5fObcZeQYwnjFs0=;
+        b=B8mXtiHFbgXY+kZt92oZ79JerUUCf29185RekpjEMyHcTSHIchQeAQ5bsCGsDTpDBk
+         gb46vI6FIuocc4+IGNuob8HxU/yUi1eFf36eZ2UdWhWCyIhYCpINY7TAHnqImJ1sN8dk
+         8ECj2VcqZuXkXH7A7AQcjO8c1AX5FCKVWoF89goiJrb/wmIVhVONX0ZFnbW8rbKX0AZM
+         V/ki9/Rv9TvmTqs1HaJpH0fTW1LVqIhCHYf3UXpuR7QDf+ksQvnQqsQZzfYEiC+CVPh/
+         xEJgcvZfuh2dwEJiXtZf1U7zdosiRd0fBkLBVxBKNx1AW3Mh2xIH9kLwa9ILDWy5eeWc
+         O9EA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793040342; x=1793645142;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=s9kKn5OnW0rSv2c3iz6WM7rho6XB5fObcZeQYwnjFs0=;
+        b=p6FV7BlQn6Ut2b9F77zdrT2SHNgmk+ASxCJnxD5VxawtNocVLW5A/cUakxgH3slMYa
+         DNEqZ0sZjHXtqIDgUaXklogxoX58gDwXeZmU0hlW5U0HD+Rov6iZuh7RHF+jD1we060C
+         s9+ECFAnuC9vJa2nNZg/dnBBnDEwmT1NMhnn0lQTPNKZW5qYm5Jky/9vIb8WT3xwdQVz
+         SE0OHY7O2zlikuS0sR701mh9+PKa7kdC7LlpI8dLHmQdEfR5++X3jz5yHmFl7cZsPYLq
+         jyVdaqklh3LZlyiVh2kAmjIPwSl9sOxHjTF/5JGnIQuDbt3RfrgXD3TL3Kkp7cGg9DN9
+         yXog==
+X-Forwarded-Encrypted: i=1; AKwUvByxGcc55Oee0yzdtYo/MaHnydtAXXtjZ//ulyJpdo9hYr4O6XWAUJ44h3KSuAp/Itxd9iy9l0o1Z8wYO2Ci@vger.kernel.org
+X-Gm-Message-State: AFq9FYJrq1ST7iEP61OEU9ZbqHrlUBLVHFSq+w42SAXGIwgPXwkV9F2T
+	8cf8hOz0Fzyh3UXNeb8otNgcIUklFPhgqJbTXh1TS2O7joIOfWUa9ozXM+MfGNZr04E8UWQ1aoo
+	UuM7VZIXrH0R9I0QONPLIDp+Yay8Il/3wP9o8Dz8xs+03BQQhhIN8wZZ/coLrqf7Up5/9
+X-Gm-Gg: AYBFou2xL0EjTk2Uy9hvVylI00/vEW7zmUUWI7cpaoU9scRhi86UDLVTv2XLzraQLv1
+	vYPvirlsfG3FwHDAeScR06BG/AeixL2eQIdjWRWDHa3o+34dxJHEu/jzgZqElKJWYg9FG79m4Tw
+	rUH53EgVIFHW8DtmF6MfXwVgiL3YP0HV6uQU7gd4Nr/uOJgT2PYiiVFCIsjvP9IwxWmD2PE4UYX
+	MB25AH3q0UupyC9p9pSTXZ7o62OQQg50/1c+qe1wdyTEFrk0B43QEgdV7zUVko50WhiCacUR2Rv
+	lWNMHtyrcmrl323XAljy5w4UjQsYJJud7CTWw3e/96AqshAgVBRRc8BRwAmalgvBQca/bgt4mg5
+	cLM1CL7V3tOHTNeGmzgq5j6uyDgu4gZXOr6u5LbsdYdQzpZ0u+vsTRPJm7s5IY+G1AB1bhBo0yQ
+	q2FlM2YNI=
+X-Received: by 2002:a05:7023:a85:b0:18c:ad6d:b790 with SMTP id a92af1059eb24-1993f6d3884mr12734018c88.45.1793040342121;
+        Mon, 26 Oct 2026 11:45:42 -0700 (PDT)
+X-Received: by 2002:a05:7023:a85:b0:18c:ad6d:b790 with SMTP id a92af1059eb24-1993f6d3884mr12733961c88.45.1793040341387;
+        Mon, 26 Oct 2026 11:45:41 -0700 (PDT)
+Received: from [192.168.1.2] ([106.222.233.247])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369f27d5bf8sm25283040eec.4.2026.10.26.11.45.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 26 Oct 2026 11:45:38 -0700 (PDT)
+Message-ID: <1360aff0-d738-441c-a631-0d2998889057@oss.qualcomm.com>
+Date: Tue, 27 Oct 2026 00:15:33 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,204 +116,104 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Feedback-ID: 01dd4eab77738e167533efd0c87004e8ce63075c63aedba89d38f476a24ad9d3e63954156b6713ccd6066b668add86597103d79f81b23ab0d34049cd78faed2fc7:TurnOnPrivacy!:tutamail
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] i2c: qcom-geni: Add shutdown callback to quiesce
+ hardware on reboot
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
+        konrad.dybcio@oss.qualcomm.com,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, linux-i2c@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-0-9f31b5fae5f6@oss.qualcomm.com>
+ <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-1-9f31b5fae5f6@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-1-9f31b5fae5f6@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA3NCBTYWx0ZWRfX53uwd5W88yti
+ Qwm0zf7RG+WTXhvSYcwOqUGwNtmge1i/3YnIUyE8K7zjIr46PZn9djzXZKHBH7Yis5DebiEljdl
+ X8WfxiSLcI10sH7RnmCQM+mQw+ZGATxdoCaaqHeoOxlM7Ew8hCj+ss51j1DJeHrHBMsPyc54wud
+ udxf8drfl0sg4UWhS+HmKadaGSqio6/m70hWjtzaA29zoTAIkDiguUZQodI4xAOZhtErs1GSO+c
+ I7nLFJzlyzA2TFjQklYP1mleYKNe0/0RAgAFtynhjcjOLjsRo7UM59z2hkllslkfz0YIwufvLqO
+ CBMrPeg3htl3vAaYSG9zmI2salTtlms0q5cO9M08GG8oRSUpFhnqz36IfJd1uqLtRIfggijvtq1
+ f7hLBNhHNx9vEM0SQ/f3o+sNm4AMJmMJxxGYUSrJqhUFV8golv2DaS4KAkmXMHYqsSrNT1wPPaV
+ IOGkLUOr/TfI/M0ouew==
+X-Proofpoint-GUID: xZvCSmGI8aelM1appQjOY20qcF4huCgp
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA3NCBTYWx0ZWRfX7lXacsKR2uN3
+ SGuhB4Yo9WtBi50yjdlKSXe92BSWi5cVo4/SjdmSMVMWp3i4NJwDXnfUP4N2WXXNwofQMezRlf2
+ ChTfNhpMbFWiK6qyil41OK+T/XD9iG0=
+X-Proofpoint-ORIG-GUID: xZvCSmGI8aelM1appQjOY20qcF4huCgp
+X-Authority-Analysis: v=2.4 cv=TboDJhQh c=1 sm=1 tr=0 ts=6adf9fd7 cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=5/Y9Gi2N1OwmQbPtUd2E/A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=hUR4YRKjZVNWWFvtt-oA:9 a=QEXdDO2ut3YA:10 a=Kq8ClHjjuc5pcCNDwlU0:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-26_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 impostorscore=0 lowpriorityscore=0
+ spamscore=0 clxscore=1015 adultscore=0 malwarescore=0 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610260074
 
-Hi Ettore,
 
-Oct 26, 2026, 18:08 by ettore.chimenti@linaro.org:
 
-> Hi S=C3=A9rgio,
->
-> On Sun Oct 25, 2026 at 8:51 AM CET, S=C3=A9rgio Ferreira via B4 Relay wro=
-te:
->
->> From: S=C3=A9rgio Ferreira <>> ferreira@se-rg.io>> >
->>
->> The eDP panel (CSOT MNE007ZA3-2, IPS LCD) cannot have its brightness
->> set over eDP AUX. With no backlight phandle on the panel, panel-edp
->> falls back to the DP AUX backlight, which registers dp_aux_backlight
->> with a maximum brightness of 0, so brightness control has no effect.
->>
->> Brightness is driven by PWM instead. UEFI leaves PM8550 LPG channel 3
->> running and the PWM output configured on PM8550 GPIO 8, and drives
->> PMC8380_3 GPIO 4 high as the backlight enable:
->>
->> pm8550 gpio8 : out low func1 vin-0 no pull push-pull medium
->> pmc8380_3 gpio4 : out  high normal  vin-1 pull-down push-pull medium
->>
->> The panel configuration in the Windows ACPI tables confirmed this.
->> (PMIC-controlled PWM, PMIC 1, bank 3, 9-bit, 2 kHz).
->>
->> Describe this with a pwm-backlight node: enable pm8550_pwm, add pinctrl
->> states for the enable GPIO and for gpio8 func1, and attach the
->> backlight to the panel.
->>
->> Tested on a Medion SPRCHRGD 14 S1 (X1E78100): brightness control over
->> the full range, brightness keys, suspend/resume and restore after
->> reboot.
->>
->> Assisted-by: LLM
->> Signed-off-by: S=C3=A9rgio Ferreira <>> ferreira@se-rg.io>> >
->> ---
->>
->
-> I tested this on a Medion SPRCHRGD 14 S1, but the controls are inverted.
-> When increasing the backlight lightness it actually decreases it, and
-> vice versa.
->
-> ```
-> % cat /sys/class/backlight/backlight/max_brightness
-> 4095
->
-> % echo 1 | sudo tee /sys/class/backlight/backlight/brightness
-> 1 # BRIGHT
->
-> % echo 2000 | sudo tee /sys/class/backlight/backlight/brightness
-> 2000 # LESS BRIGHT
->
-> % echo 4095 | sudo tee /sys/class/backlight/backlight/brightness
-> 4095 # OFF
->
-> % echo 0 | sudo tee /sys/class/backlight/backlight/brightness
-> 0 # OFF
-> ```
->
-> Moreover, I see that from `/sys/kernel/debug/pwm` the period
-> request differs from the actual:
->
-> ```
-> pwm-3   (backlight           ): requested
-> requested configuration:  enabled, 498418/500000 ns, normal polarity
-> # with brightness set at 4090:
-> actual configuration:     enabled, 425834/425834 ns, normal polarity
-> # with brightness set at 2:
-> 0/425834 ns, normal polarity
-> ```
->
-> This probably causes the top 250 values to be all at the same
-> brightness. Not a big deal probably.
->
-> Do you have the same behavior? Can you send the EDID of your panel?
->
-> Thanks,
-> Ettore
->
-thanks for testing.
+On 8/18/2026 10:31 AM, Praveen Talari wrote:
+[...]> ---
+>   drivers/i2c/busses/i2c-qcom-geni.c | 51 ++++++++++++++++++++++++++++++++++++--
+>   1 file changed, 49 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+> index 658636c1ee0e..10c6a4b0b825 100644
+> --- a/drivers/i2c/busses/i2c-qcom-geni.c
+> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
 
-No, i can not reproduce the value inversion. A brightness of 1 equals very =
-dark while 4095 is maximum brightness. 0 is turning the screen off as expec=
-ted.
+[...]
 
-Here is my edid:
+> +	geni_se_abort_m_cmd(&gi2c->se);
+> +
+> +	if (!readl_poll_timeout_atomic(base + SE_GENI_M_IRQ_STATUS, val,
+> +				       val & M_CMD_ABORT_EN, 10, 200000))
+> +		writel_relaxed(M_CMD_ABORT_EN, base + SE_GENI_M_IRQ_CLEAR);
+> +
+> +	if (readl_relaxed(base + SE_GENI_DMA_MODE_EN)) {
+> +		writel_relaxed(1, base + SE_DMA_TX_FSM_RST);
+> +		readl_poll_timeout_atomic(base + SE_DMA_TX_IRQ_STAT, val,
+> +					  val & TX_RESET_DONE, 10, 50000);
+Any error log to print if times out ?
 
-```
-edid-decode /sys/class/drm/card1-eDP-1/edid
-edid-decode (hex):
+if (ret)
+	dev_err(gi2c->se.dev, "Timeout resetting TX DMA FSM\n");
+else
+	writel_relaxed(TX_RESET_DONE, base + SE_DMA_TX_IRQ_CLR);
 
-00 ff ff ff ff ff ff 00 0e 77 31 14 00 00 00 00
-00 21 01 04 b5 1e 13 78 03 2f 55 a6 54 4c 9b 24
-0d 50 54 00 00 00 01 01 01 01 01 01 01 01 01 01
-01 01 01 01 01 01 17 88 40 a0 b0 08 6e 70 30 20
-36 00 2d bc 10 00 00 18 00 00 00 fd 00 1e 78 e6
-e6 46 01 0a 20 20 20 20 20 20 00 00 00 fe 00 43
-53 4f 54 20 54 33 0a 20 20 20 20 20 00 00 00 fc
-00 4d 4e 45 30 30 37 5a 41 33 2d 32 0a 20 01 fc
+> +		writel_relaxed(val, base + SE_DMA_TX_IRQ_CLR);
+> +
+> +		writel_relaxed(1, base + SE_DMA_RX_FSM_RST);
+> +		readl_poll_timeout_atomic(base + SE_DMA_RX_IRQ_STAT, val,
+> +					  val & RX_RESET_DONE, 10, 50000);
+Any error log to print if times out ?
 
-70 20 79 00 00 22 00 28 bf a1 0a 85 3f 0b 9f 00
-2f 00 1f 00 07 07 6d 00 02 00 05 00 b3 40 04 05
-3f 0b 9f 00 2f 00 1f 00 07 07 6d 00 02 00 05 00
-81 00 07 e6 06 01 01 60 60 28 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 62 90
-
-----------------
-
-Block 0, Base EDID:
-=C2=A0 EDID Structure Version & Revision: 1.4
-=C2=A0 Vendor & Product Identification:
-=C2=A0=C2=A0=C2=A0 Manufacturer: CSW
-=C2=A0=C2=A0=C2=A0 Model: 5169
-=C2=A0=C2=A0=C2=A0 Made in: 2023
-=C2=A0 Basic Display Parameters & Features:
-=C2=A0=C2=A0=C2=A0 Digital display
-=C2=A0=C2=A0=C2=A0 Bits per primary color channel: 10
-=C2=A0=C2=A0=C2=A0 DisplayPort interface
-=C2=A0=C2=A0=C2=A0 Maximum image size: 30 cm x 19 cm
-=C2=A0=C2=A0=C2=A0 Gamma: 2.20
-=C2=A0=C2=A0=C2=A0 Supported color formats: RGB 4:4:4
-=C2=A0=C2=A0=C2=A0 First detailed timing includes the native pixel format a=
-nd preferred refresh rate
-=C2=A0=C2=A0=C2=A0 Display supports continuous frequencies
-=C2=A0 Color Characteristics:
-=C2=A0=C2=A0=C2=A0 Red=C2=A0 : 0.6484, 0.3300
-=C2=A0=C2=A0=C2=A0 Green: 0.2998, 0.6083
-=C2=A0=C2=A0=C2=A0 Blue : 0.1416, 0.0517
-=C2=A0=C2=A0=C2=A0 White: 0.3134, 0.3291
-=C2=A0 Established Timings I & II: none
-=C2=A0 Standard Timings: none
-=C2=A0 Detailed Timing Descriptors:
-=C2=A0=C2=A0=C2=A0 DTD 1:=C2=A0 2880x1800=C2=A0=C2=A0 60.001033 Hz=C2=A0 16=
-:10=C2=A0=C2=A0 114.602 kHz=C2=A0=C2=A0=C2=A0 348.390000 MHz (301 mm x 188 =
-mm)
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 Hfront=C2=A0=C2=A0 48 Hsync=C2=A0 32 Hback=C2=A0=C2=
-=A0 80 Hpol N
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 Vfront=C2=A0=C2=A0=C2=A0 3 Vsync=C2=A0=C2=A0 6 Vback=
-=C2=A0 101 Vpol N
-=C2=A0=C2=A0=C2=A0 Display Range Limits:
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Monitor ranges (Range Limits Only): 30-120 H=
-z V, 230-230 kHz H, max dotclock 700 MHz
-=C2=A0=C2=A0=C2=A0 Alphanumeric Data String: 'CSOT T3'
-=C2=A0=C2=A0=C2=A0 Display Product Name: 'MNE007ZA3-2'
-=C2=A0 Extension blocks: 1
-Checksum: 0xfc
-
-----------------
-
-Block 1, DisplayID Extension Block:
-=C2=A0 Version: 2.0
-=C2=A0 Extension Count: 0
-=C2=A0 Display Product Primary Use Case: Same primary use case as the base =
-section
-=C2=A0 Video Timing Modes Type 7 - Detailed Timings Data Block:
-=C2=A0=C2=A0=C2=A0 DTD:=C2=A0 2880x1800=C2=A0 120.000000 Hz=C2=A0 16:10=C2=
-=A0=C2=A0 229.200 kHz=C2=A0=C2=A0=C2=A0 696.768000 MHz (aspect 16:10, no 3D=
- stereo, preferred)
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 Hfront=C2=A0=C2=A0 48 Hsync=C2=A0 32 Hback=C2=A0=C2=A0 80 Hpol N
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 Vfront=C2=A0=C2=A0=C2=A0 3 Vsync=C2=A0=C2=A0 6 Vback=C2=A0 101 Vp=
-ol N
-=C2=A0=C2=A0=C2=A0 DTD:=C2=A0 2880x1800=C2=A0=C2=A0 48.000138 Hz=C2=A0 16:1=
-0=C2=A0=C2=A0=C2=A0 91.680 kHz=C2=A0=C2=A0=C2=A0 278.708000 MHz (aspect 16:=
-10, no 3D stereo)
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 Hfront=C2=A0=C2=A0 48 Hsync=C2=A0 32 Hback=C2=A0=C2=A0 80 Hpol N
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 Vfront=C2=A0=C2=A0=C2=A0 3 Vsync=C2=A0=C2=A0 6 Vback=C2=A0 101 Vp=
-ol N
-=C2=A0 CTA-861 DisplayID Data Block:
-=C2=A0 HDR Static Metadata Data Block:
-=C2=A0=C2=A0=C2=A0 Electro optical transfer functions:
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Traditional gamma - SDR luminance range
-=C2=A0=C2=A0=C2=A0 Supported static metadata descriptors:
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Static metadata type 1
-=C2=A0=C2=A0=C2=A0 Desired content max luminance: 96 (400.000 cd/m^2)
-=C2=A0=C2=A0=C2=A0 Desired content max frame-average luminance: 96 (400.000=
- cd/m^2)
-=C2=A0=C2=A0=C2=A0 Desired content min luminance: 40 (0.098 cd/m^2)
-=C2=A0 Checksum: 0x62
-Checksum: 0x90
-```
-
-I can confirm the PWM period value mapping is a bit off for the top-end val=
-ues, though I haven't noticed that in day-to-day use.
-
-Best,
-S=C3=A9rgio
+> +		writel_relaxed(val, base + SE_DMA_RX_IRQ_CLR);
+> +	}
+> +}
+> +
+>   static int geni_i2c_init(struct geni_i2c_dev *gi2c)
+>   {
+>   	u32 proto, tx_depth;
+> @@ -1209,8 +1257,7 @@ static void geni_i2c_shutdown(struct platform_device *pdev)
+>   {
+>   	struct geni_i2c_dev *gi2c = platform_get_drvdata(pdev);
+>   
+> -	/* Make client i2c transfers start failing */
+> -	i2c_mark_adapter_suspended(&gi2c->adap);
+> +	geni_i2c_quiesce(gi2c);
+>   }
+>   
+>   static int __maybe_unused geni_i2c_runtime_suspend(struct device *dev)
+> 
 
