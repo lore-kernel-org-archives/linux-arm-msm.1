@@ -1,78 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793020863;
-	b=GK6Rtw6h5DwjxX1lR2OZqbpsGFDLyFI/LpzlYqxizrEAIr6eYWpSuxRbghQLEEz3EGoZ
-	 Rq4TWE88hGJdU0SlAqcQj27uIA3YdG8RTqONtDdGCfTtovnG9f0t8Rtnh+llvF5U41BIW
-	 o0OF6AYuF/50QkxZUjyYgsPeYUWgYUvg3IXZgCpd3ZCyuUrWcB2P/Xi8BJwDLdo2YwH0X
-	 hG4OPZdUJt+P8BOUck70zlV4sE4iTU2Ul+fFll8wcZDYFBVa4JzER6cFNksapHf/fzOuJ
-	 U882PYGvwPJZiK8AGmIafoW5y2e1y+MyB9EQziufRuxidsCFNrxXE5XPiW0XBJyVv0Q==
+	t=1793021128;
+	b=4HgJ91Nnh/MBIJR9LvJGiEBpaSgcWoUfz0n6eZNsSeyuh3OF+Jd8qF6DNmx15VKD3ZHT
+	 k4yR8PV2V48ppchsQ2GVVPUrGgdofpz67YeaG17hJ42gjuXd3SISVn5Pnwv552EVLu6Aw
+	 RoakNzD8UBogWsLxwO50QrmewmzTmY0ptlBybX/9ISs7UCoxVZbMg1cJEZOL22uawAbZV
+	 w8tcLajQDbYsNUYGbYDXCDIMGC7BX9qYRUgO4sR/UTYF6hFDbPtoN2+l761imKaiE9ktO
+	 NymjOkxmUgxTHpqwKiTEPUMDlp38B9BGMwHUyuV6pox+bcSo5YUJ3ShchqgMnE7T6ig==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793020863;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=92zvWHSppKZKlbV2z8fjTOWLGPxOJ1h84oGpWcTlTa0=;
-	b=ZW/XQ/x8j9wqEIBubWl54DHqWDcgkQXjXt0QmBmxw3IAWYHZJi+EUPwbYLCp+nMvCG1V
-	 VSX4/v/0jeNv8Oj9VHln1pUFVtshToDdU3A2a2r4/P6X836S4EkvahR+CfSOnVVtG30Sl
-	 LiuLpZxXT0UJX96oV6wLhfd4N16hb+WX13rprTCajKR1PECdOmj7QMl1OyFWt8yMu0YRw
-	 YB0TiQi5rrnCB1lIAExhs9wOGTQJMq0Pb/AKfxuiACKtMW/vHrW+BNF+ar8gzsRHstPZC
-	 RCCESMMU3AcpyGVVTDB/XW+EfqdU1qq/WR8L6YhFIzomotMSPes6Bhemb3Q9YadG+Ug==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793021128;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
+	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:
+	 References:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=tTxUp3C1O2wnUd8FUbEYoeuC+ufoIvHQBgbQQiOhdOA=;
+	b=4y+wOx9AI/Ukhi0vCHXBdBD14oJYITXmHegz4SbdAznXo4ysBbt/SDvJwmX4FX1WHwGW
+	 THTzY+mj5cUJ7BGVkzbhJMK+4kuz93t6VWv8Zek51i+idzvctwi27zm8FGic/peOCBzTA
+	 5aWbz4zIwzpYWJssIOGGvtRWIRtk4M9QvayUnuTXRGbcWws3Dg6cJ0A5xIbz+CkejbJmi
+	 apc469/TKDU6iuDFA+15G6OunyNCxa2Umtj1KlOFe5AJgED/52T+bb0UVs6tTGdD51Kx+
+	 wCr7BfJ5ECIym3xfUI038iW0+oyj8gO3rOvx0MC3nJzPzQjRRflM730W9SADMnvGBCQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UyEsjetc;
-	arc=none smtp.remote-ip=198.175.65.19
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=V4ZRPYkL;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBA3A606A321;
-	Mon, 26 Oct 2026 13:21:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BBA3A606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 784A3606A31B;
+	Mon, 26 Oct 2026 13:25:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 784A3606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UyEsjetc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793020863; x=1824556863;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=q6UvNyOiSBy/+IxTQtW7UsyYTQPm1czeX/2xhznn6Gs=;
-  b=UyEsjetcICm4VRhp4Iy0mgEtWZM8m3aPBH1YtqtuhRKkwn6KeyDMHX9y
-   J/6FzDF6/pyFEEILyKNRITAnsB9qpQSfOp6jYT3GoEA+rqUcF9ryRxyjH
-   HbN5VMId4Sx49slStSxzNrjohQtUmRFJbqT+aFZ9OZJKD47Z4sF/h6VlK
-   903rbZTM7y4APxzMn22fCdFCCAKg1sL4XycYpvH8McnBnnGsaSvuzGwyC
-   T7IXMzJSQxnIIJgXdHGyR1H0D5BqvApVeLnCb1Q8mys7FAnU4ZBWavbCe
-   msBkyPhrcRlnum9KmacPxcftc4VkiICykQqIG55Lc9Hl5q0IIYuT7kfpt
-   Q==;
-X-CSE-ConnectionGUID: EswSfgT7SB6SOm2g60gakA==
-X-CSE-MsgGUID: A7o+F5QfTXGtdzoeUGaJ2g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11947"; a="1717905"
-X-IronPort-AV: E=Sophos;i="6.27,179,1787036400"; 
-   d="scan'208";a="1717905"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2026 06:20:54 -0700
-X-CSE-ConnectionGUID: Mw/j33mWQxywAcp5SRfSfw==
-X-CSE-MsgGUID: w6K/vCLGRh2RTP9zxJha7Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,179,1787036400"; 
-   d="scan'208";a="4652334"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa006.fm.intel.com with ESMTP; 26 Oct 2026 06:20:52 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1008)
-	id 15ED699; Mon, 26 Oct 2026 14:20:51 +0100 (CET)
-Date: Mon, 26 Oct 2026 14:20:51 +0100
-From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-To: Joonhoe Kim <26rote@gmail.com>
-Cc: gregkh@linuxfoundation.org, neil.armstrong@linaro.org,
-	linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] usb: typec: mux: fsa4480: Keep the USB 2.0 switch on in
- DP-only modes
-Message-ID: <at9Ts6lDS7yWuAMK@black.igk.intel.com>
-References: <20261022165143.1327-1-26rote@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=V4ZRPYkL
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QAtX5V1547952;
+	Mon, 26 Oct 2026 13:25:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=tTxUp3C1O2w
+	nUd8FUbEYoeuC+ufoIvHQBgbQQiOhdOA=; b=V4ZRPYkLL/5rbpj8BYmXvzgyTll
+	jJJ3Wm8P+BkJ/TRT2b2C4sxP38E8qlEDe7ksefAmftD+gnMl47Bu+EhCp17u2y6b
+	p/IgWe1BtV5+nEGeZGjS1WlkgG/UcT9z72K8vUyKrzqtDTvc99sXlvs24p2y7+bU
+	7CCILoG7BRDjLgZ69Spxr+3MBFc5n+q/4v8t/0JdWpriVjckpR5Csf3i2EjiDyul
+	I+uaRKuROUp7MeA4VllZU8ShyO/YOOGM7T7YpEnKe/M03UAfsqUxyEH3M+pyI29o
+	qmMR07Ukda42uPqncCwj1IYGh3hPU9ytj6SA+wCZYOMmx+8T/6/yIOCFuNw==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hhsgstm9w-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 26 Oct 2026 13:25:25 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69QDPK591853286;
+	Mon, 26 Oct 2026 13:25:22 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ks5-hyd.qualcomm.com [10.147.255.18])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 69QDPM4v1853312
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 26 Oct 2026 13:25:22 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4763723)
+	id 73118679; Mon, 26 Oct 2026 18:55:21 +0530 (+0530)
+From: Karthik S <karthik.s@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Karthik S <karthik.s@oss.qualcomm.com>,
+        Kumar Anurag <kumar.singh@oss.qualcomm.com>
+Subject: [PATCH v2 2/3] arm64: dts: qcom: qcs6490-rb3gen2: Add sound-dai-cells to lt9611
+Date: Mon, 26 Oct 2026 18:55:16 +0530
+Message-Id: <20261026132517.1133138-3-karthik.s@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20261026132517.1133138-1-karthik.s@oss.qualcomm.com>
+References: <20261026132517.1133138-1-karthik.s@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,60 +86,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261022165143.1327-1-26rote@gmail.com>
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA1MyBTYWx0ZWRfX7fEq/R708587
+ b+Q9ZZX9KaA6KBJuCLKuLHVNo5/aEkdkOKTGRLckCZFmji30nIHph9JEhXaEH55De23WUXD86n+
+ k3Wv+ax4aBkOK7yzAMJFKuDxjqJ5qxg=
+X-Proofpoint-GUID: 2avBkw88B-2QMNLR6EsH8TyVy97mVOmj
+X-Authority-Analysis: v=2.4 cv=c+8+0h9l c=1 sm=1 tr=0 ts=6adf54c6 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8 a=lJWSN8bgU03ZulAgMsQA:9
+X-Proofpoint-ORIG-GUID: 2avBkw88B-2QMNLR6EsH8TyVy97mVOmj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA1MyBTYWx0ZWRfXwm5LySUuMO//
+ +P50KcWXJJNY/wLxROh6XIFNE3gWgRxpP69lCm4xX4Popg1jSW/oUORDb8X/0bHKihQNnOmuSxI
+ fXZDSCSQWmYizf1PPWtO+ex15B5O6jMhAAFmZdROlhjzO1MjCzWGc6+Lsodc0U6sGuiq1P8wuWP
+ NCJyu92F02v6ZO2De+uowgq4LfAXFDqm/jvFFL4IwIpqB0X1aOXuQ+VMo16rHRhmKNLxEx5zdyO
+ w3gWhwSEEgXAoPHUSvv02klI93dnFexYOj80xJNn4siVbIlyGJoH5rUZgkoA4XC9RxTXxdxIa6P
+ XmeRpYMvjRZbw3So8pWvUykKrOprqH4d1eXau7ORu4fchKW57cbg5GnxPmN+jlYNoqdVSijv5fN
+ 7S8ghLoY97XfjYsGVhUnxAJhZCLIBPLi6Hz5yOc5mzEWiJx3YJUgm1Tbt2NP0AQFLPNG8Iu+msN
+ 7QSVkZUOms/RxnV/qwQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-26_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 adultscore=0 phishscore=0 impostorscore=0 spamscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610260053
 
-On Fri, Oct 23, 2026 at 01:51:43AM +0900, Joonhoe Kim wrote:
-> DisplayPort pin assignments C and E give all four SuperSpeed lanes to
-> DisplayPort, but the USB 2.0 D+/D- pair is not part of the pin
-> assignment and stays available. The FSA4480 sits on that pair, and in
-> these modes the driver turns its USB switch off, so a USB 2.0 hub or
-> device behind a DisplayPort sink is disconnected as soon as the
-> DisplayPort mode is set.
-> 
-> Configure the USB switch the same way in all DisplayPort modes.
-> 
-> Fixes: c7054c31c1c9 ("usb: typec: fsa4480: rework mux & switch setup to handle more states")
-> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+Add #sound-dai-cells to lt9611 HDMI bridge to allow it to be
+referenced as a sound DAI provider.
 
-Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Signed-off-by: Kumar Anurag <kumar.singh@oss.qualcomm.com>
+Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 1 +
+ 1 file changed, 1 insertion(+)
 
-> ---
-> Tested on a Lenovo Y700 Gen 5 (TB323FU, Kaanapali; out-of-tree board
-> support) with a USB-C monitor in pin assignment C: its USB 2.0 hub was
-> disconnected when the mux was set; with this change the hub and the
-> keyboard behind it stay connected.
-> 
->  drivers/usb/typec/mux/fsa4480.c | 9 +--------
->  1 file changed, 1 insertion(+), 8 deletions(-)
-> 
-> diff --git a/drivers/usb/typec/mux/fsa4480.c b/drivers/usb/typec/mux/fsa4480.c
-> index bea0c1deec94..e05ab3c10c81 100644
-> --- a/drivers/usb/typec/mux/fsa4480.c
-> +++ b/drivers/usb/typec/mux/fsa4480.c
-> @@ -93,16 +93,9 @@ static int fsa4480_set(struct fsa4480 *fsa)
->  		sel = FSA4480_SEL_USB;
->  	} else if (fsa->svid) {
->  		switch (fsa->mode) {
-> -		/* DP Only */
->  		case TYPEC_DP_STATE_C:
-> -		case TYPEC_DP_STATE_E:
-> -			enable |= FSA4480_ENABLE_SBU;
-> -			if (reverse)
-> -				sel = FSA4480_SEL_SBU_REVERSE;
-> -			break;
-> -
-> -		/* DP + USB */
->  		case TYPEC_DP_STATE_D:
-> +		case TYPEC_DP_STATE_E:
->  		case TYPEC_DP_STATE_F:
->  			enable |= FSA4480_ENABLE_USB | FSA4480_ENABLE_SBU;
->  			sel = FSA4480_SEL_USB;
-> 
-> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-> -- 
-> 2.43.0
-
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+index cd3b065a2049..f9b28791226c 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+@@ -711,6 +711,7 @@ &i2c0 {
+ 	lt9611_codec: hdmi-bridge@2b {
+ 		compatible = "lontium,lt9611uxc";
+ 		reg = <0x2b>;
++		#sound-dai-cells = <1>;
+ 
+ 		interrupts-extended = <&tlmm 24 IRQ_TYPE_EDGE_FALLING>;
+ 		reset-gpios = <&pm7250b_gpios 2 GPIO_ACTIVE_HIGH>;
 -- 
-heikki
+2.34.1
+
