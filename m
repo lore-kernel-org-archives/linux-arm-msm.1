@@ -1,69 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793055034;
-	b=JEuWar9j0tBCbzixlwxHNuy/0cQr0vjcEod7+czJWW4CLnwhIbP/XSJCHjytLyOyYXko
-	 r5iSlYZgjXNyUjUWcgzHD8xfFfzvWMN756l17M9jTno1a8kdW/sc3otxKU4Ie2IwnwnM0
-	 Xh2Heatn4N09AKcj4dqAO4dWQSjK33SuhBPcZuK+Sone2GWaTTtk/JOE4yN4/LhYa+ylI
-	 6R3MIZ6SnsCvE6eBKDJtIfqvpbn2jzvo9j+V3RorUF0MRmQ/Vfv3o5Vpoykpa8A7jJr73
-	 CtqPHZ64hjbtOnQzbMzhe7Ty/Pliid/R5AdPpZauvQT+qdJyu5pu7SFHXPgkPFF9vgg==
+	t=1793055883;
+	b=C04vG8+esOcJBWMcb1rlP3xIKtbvJSEwuyao4vN7I53zDr45VB5wJWX2The7DqAtR8ol
+	 ilqo09vYnz90MgOhWgOzDWy3q/ovydfAq1CVqwXxmmPIbWmloUkoxl1oofvvAAdIadzfR
+	 eo5e3OJoO/ggdveZmQJaAKyjm9V2KeyFf1mE9rWr2VQ/4gEXhSNYRBKCAw3/mSmpwp9qy
+	 DX85UYv3waIVVC9ZMCiDIph2T9mQgFK0P78XA8aqLxPg7KgNwUiEhPHetZSUb/JVgqWpN
+	 sVpdlntnNPcS5bgiU7/7WVpVc6/cp0vtIRfzlefWQfdCjj77/cvxpGEzhQmJqa2G2tA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793055034;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=3bdtNEp42571APEj35U1oavSEcPp9Du+9f+sh1xWMBU=;
-	b=ZQ7uxKQLC+zYSMS8qXI7FYNO+76mLSt4RaOXvXZW32eHgIrbH2xat+mR7sDrVa7VJ6sb
-	 wTyoqH041p/tWVGNFNo0h1QirpfbvvC8Q7WdnXBtWiDngnshO6w+zWIkkXsh8iTwFno/6
-	 Y7+zMGpQX0Qe0hHgf4Pv3Hw7BEH6Dlemm6Wmhk3G7Fz1Oz+reVTleMCnV7O4ZyTPaFp78
-	 hrnCBWhoKe3hopwIjX/BshuEDumqzqOLlPt4A1dvN1ymPVA3ZcwfU9v5tBs/q+W2CUgNl
-	 jpbt4icWY5nNFfataicmVCwgGQDlHYEBJoNBDio97RZX//v5QSWok0xyOm57qx8rjfA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793055883;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=dJNs1RsXHtfK4OCSrdWE9j8SAinVe+8U27y3tQbfrSo=;
+	b=3VStV6hfdztZYj47/bTkVUzNpphw0qLGH2WcLzYuH/YrJlrVyuZ1wKEj7+Iw85TtPW7C
+	 Ias4rlDAmOqUcA4vEjdt90hy2mBSHNvrhX15AVGYe0lmrhTeaP5ZcRQYQCv9ylIlciGEw
+	 2cszhVR2SdHyviE0egZ1CzSHRYBxOvUi1lW8ge68mQAuADGnG9FmwsHibk8KKrVHBth7A
+	 oMT+K2yIV1QhsekuYJusWq99wyFrSuqmduK/8vmWy3yIDxsMDtHN79DfOZ5V/HO2GsOrB
+	 5CYD9i9UeZqfv9HZkeQXEWauo55cVRihDwkSseibiAOeYn7ZNaDtFZyYPl5opKZGBUg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W913DyTI;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=j2wqjV78;
+	arc=none smtp.remote-ip=95.215.58.51
+Received: from mta1.migadu.com (out-51.mta1.migadu.com [95.215.58.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A50F606A31A;
-	Mon, 26 Oct 2026 22:50:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E78C606A31B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:04:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2E78C606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W913DyTI
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57CC51F01825;
-	Mon, 26 Oct 2026 22:50:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793055034;
-	bh=3bdtNEp42571APEj35U1oavSEcPp9Du+9f+sh1xWMBU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=W913DyTISHFqsIeOv8PPYYewH/5SmTAHmggUXp8BVT4wg4z72Ea/JMJV8lL52fMPg
-	 BfAoLJMJfZm8Zd4mGeO3KxmFlqzEX2jtg/CcVF63jF0JRIHkZSlaW4ldXy8SolPV78
-	 YGgVeHCzMOowi2NV2Mn6buoUZ6OWRyAAwCZSwn2i4EUd3OG/Y+iILLDMpVgZEgI/si
-	 e/+EwSBbnvJK05sK2HeZ7EVNt+zmACULdc+HRKyO0Cf8TuKK99Pt0D48cTCnrM8apZ
-	 GS0u+s/3EtI/HPpUcjZy3L211UvhGp3AxaGLOn+/YGhyyLw/5jXXE4uig5R99DYtzG
-	 uvhq6QyMhiXGQ==
-From: Vladimir Zapolskiy <vz@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-media@vger.kernel.org,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	linux-phy@lists.infradead.org,
-	Conor Dooley <conor+dt@kernel.org>,
-	devicetree@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v2 7/7] arm64: dts: qcom: sm8450: Add description of pins with MCLK function
-Date: Tue, 27 Oct 2026 00:49:57 +0200
-Message-ID: <20261026224957.1115370-8-vz@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20261026224957.1115370-1-vz@kernel.org>
-References: <20261026224957.1115370-1-vz@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=j2wqjV78
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=VpHtdEItOfBeyzi/S7o4HPEf4C+PK1AXEFD68qJcQMU=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1793055880; v=1; x=1793660680;
+ b=j2wqjV788SXMn3EMI1d9VoRkEPsswMQKmBNfnmU/GJMrMXFgLZ/ZWwwm6uaASqpulhEZJIaq
+ W5SKHmfjg2vlkFg2HEeyKAvHbzz9ycD4QhnAPKOc9mA9wFioC3jqDCsVExYnUZKxCuLMN5mszAA
+ wQNCjQEM0Hs7Jgn7F72vxCrImcdCx7ZbimtALvIe39UNqObL/fh5NI9pf1QfzumNitt+B6y779Q
+ Mfyt8NIOPVdBgBVMjD0gCx60TibYS00Pji2p9pXiBNU/+46/v1dJd0PfMHt1VnNMPr10dh0qPKb
+ nbcXtvgPLiME4i/fm+J5db9nOBhdRhOyebosEtFfAPIRQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id ca2d3fc45a918743;
+	Mon, 26 Oct 2026 23:04:40 +0000
+X-Mizu-Trace-ID: ca2d3fc45a918743
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <498e2fa8-b707-4a06-9fe7-9e62253786c5@packett.cool>
+Date: Mon, 26 Oct 2026 20:04:34 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,140 +60,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] drm/msm/dpu: reset unassigned resource slots to
+ NULL on topology update
+To: Xi Zhang <xz.ca.cn@gmail.com>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Xilin Wu <sophon@radxa.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
+ <20261026-msm-dpu-res-clean-v2-1-3d864435186e@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261026-msm-dpu-res-clean-v2-1-3d864435186e@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Qualcomm SM8450 SoC provides up to 8 MCLK signals on GPIOs 100 to 107,
-add the correspondent default and sleep pin configurations.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
----
- arch/arm64/boot/dts/qcom/sm8450.dtsi | 112 +++++++++++++++++++++++++++
- 1 file changed, 112 insertions(+)
+On 10/26/26 5:25 PM, Xi Zhang wrote:
+> While this is not currently the case, it may be possible that topology
+> for cwb and dsc resource requirements change between mode set in the
+> future.
+>
+> e.g. when dsc support is added to DisplayPort, dsc may be optionally
+> enabled and disabled between different modes due to
+> bandwidth requirements.
+>
+> Set unassigned resource slots to NULL on topology update to avoid
+> issues in the future. It's good practice to do so anyway.
+>
+> Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
+> ---
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 22 +++++++++++++++-------
+>   1 file changed, 15 insertions(+), 7 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+> index 0a6be69a3e83..8d2b4d2726f2 100644
+> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+> @@ -1205,9 +1205,13 @@ static void dpu_encoder_virt_atomic_mode_set(struct drm_encoder *drm_enc,
+>   						       ARRAY_SIZE(hw_pp));
+>   	}
+>   
+> -	for (i = 0; i < num_cwb; i++) {
+> -		dpu_enc->hw_cwb[i] = to_dpu_hw_cwb(hw_cwb[i]);
+> -		cwb_mask |= BIT(dpu_enc->hw_cwb[i]->idx - CWB_0);
+> +	for (i = 0; i < ARRAY_SIZE(dpu_enc->hw_cwb); i++) {
+> +		if (i < num_cwb) {
+> +			dpu_enc->hw_cwb[i] = to_dpu_hw_cwb(hw_cwb[i]);
+> +			cwb_mask |= BIT(dpu_enc->hw_cwb[i]->idx - CWB_0);
+> +		} else {
+> +			dpu_enc->hw_cwb[i] = NULL;
+> +		}
+> [..]
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-index b4f7672cec94..c8e9af8eb66d 100644
---- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-@@ -4292,6 +4292,118 @@ data-pins {
- 				};
- 			};
- 
-+			cam0_default: cam0-default-state {
-+				pins = "gpio100";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam0_sleep: cam0-sleep-state {
-+				pins = "gpio100";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam1_default: cam1-default-state {
-+				pins = "gpio101";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam1_sleep: cam1-sleep-state {
-+				pins = "gpio101";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam2_default: cam2-default-state {
-+				pins = "gpio102";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam2_sleep: cam2-sleep-state {
-+				pins = "gpio102";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam3_default: cam3-default-state {
-+				pins = "gpio103";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam3_sleep: cam3-sleep-state {
-+				pins = "gpio103";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam4_default: cam4-default-state {
-+				pins = "gpio104";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam4_sleep: cam4-sleep-state {
-+				pins = "gpio104";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam5_default: cam5-default-state {
-+				pins = "gpio105";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam5_sleep: cam5-sleep-state {
-+				pins = "gpio105";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam6_default: cam6-default-state {
-+				pins = "gpio106";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam6_sleep: cam6-sleep-state {
-+				pins = "gpio106";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
-+			cam7_default: cam7-default-state {
-+				pins = "gpio107";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			cam7_sleep: cam7-sleep-state {
-+				pins = "gpio107";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+
- 			cci0_default: cci0-default-state {
- 				/* SDA, SCL */
- 				pins = "gpio110", "gpio111";
--- 
-2.51.0
+I've mentioned in a reply to v1 that this was indeed affected by the DSC 
+changes in radxa's WIP, but missed the more relevant one:
+
+This is already handled by the "drm/msm: fix SMMU fault dumps" series:
+
+https://lore.kernel.org/all/20261024-fd-kms-fix-smmu-v5-0-a5b0b284aead@oss.qualcomm.com/
+
+Namely patches 5-8 ("drm/msm/dpu: clear the ... blocks ...")
+
+Thanks,
+~val
 
