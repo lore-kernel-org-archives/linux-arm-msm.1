@@ -1,66 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.112
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793051881;
-	b=B7wmcB6X9DtSFnAhKBCMEa6t8zyfvvhNZx/usGNpRjeaMtuUY5EHy8ocJLTndEwgurAr
-	 wWm9GthZ4885q0krnRnr2+fDcPW0x0Ljc+ZfBtBarUgjawEOk2tMuxqXWsFn1K9dy0/4e
-	 W2NzdwvKOQdAwEeT1QbYDmkc/fYhTSMNMhEcUkkLIBiIa5O4ucqKQxTiKAkMhqp4CxmDt
-	 MkpsN/ea/85u8GalaN3XvyFgdmrzvbtCQn6j5IL0H9aANdWzqRhI0xec9JrGsdSDnStOm
-	 XEjtNP+bVhw4zhSSlbnlnZ0yL5HRs5Fiy4QtCm7rtoRRA/M9nN69lcGCpq6eS2WYwlA==
+	t=1793052630;
+	b=X7T41xheqSVkaVlmKto89EbNIMrsqsBdWWznC4+cwce5oq5lnnpQ1y7xzlLysyfqECZ7
+	 75PKeC8K67aCfNHDdnmIGVDhGGN8l+GUdqt30catBh6f2YwjxcemfarXQt3F0rcuKRqnb
+	 C7tHD01iYVojPKyxfAWp2KFi18D1ajmG8bOGSuUqTrOy6tm0/I9dXU0QKepnTNZmRso2T
+	 0iAcUwiA8VpKs8BRBlgTADSr1fSNKlgCJmsT0f2+zS3ZMyFHe1waZOV8jkLFwfxeH8hkf
+	 lmgpAuSGDpAQfd8/tPeDRJgj2rqozQtb2SDQ6wOyWcFONzGzWGK8khwP89IyTxZZIeg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793051881;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793052630;
 	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
 	 Subject:Message-ID:In-Reply-To:References:Content-Type:
 	 Content-Transfer-Encoding:MIME-Version;
-	bh=eN5G9Ls9ytaUpIc52dHNgLyCQKxcctTRzTTICGzufKU=;
-	b=oyqu014ZXzj0QiNBv0PUum6dxIBD1Hm3CD92hNyJKQQFBMYxnMnRg2wm9PFLDGuL2db5
-	 KSr8Uv5l7RfQxUo0JZJFcgWQTKFVkC8/fRMPan2Braq+/pg//ygR7g7ryfqJjwU+tMNI+
-	 z0fp8NdZqU16VfbfCJPGc7gQvwUY+zJY0ujxTdAZV6fYlB+KWu1AbQMRPL/dDLQj2fGpv
-	 2eTTw6ZG6XohyWnWVGyv0SEreQ1iJAhWdOG9tYIWcAJresb9Rmfb7uULuHANBdqgtMIMN
-	 kkKvcToJjXCPuAxDQk8XxmKQWsto4uqiOuTL+MMOSEn8uB5nY7IEFz/1joiGiAFC/Cw==
+	bh=ABoVPvvrFqOEH2gV0M6izYCHk+pREbqv5zj4Hi7+l34=;
+	b=cYZm86htKDMFLGcn5j8PSZzPk0OhYcxPQsLQSq0WpaFAOav7Lix67bWgClO6MVcHXUPl
+	 O1a6IBrl37Yjfzr7O19yyCP0o62M3w7fn6FTOLpIVtrArm7tTbJ5qF+3d1IlAuZWi1oL7
+	 rxr9Gxa21eGRR0+8XZn7ILYt9NlbxsjjmGKNw3YV+R2GouNOV0YWKGPocvl6CmzDjt0KF
+	 2ZHPt2cI8MzUu15vNx8hs0bcpInBaq8Xg6bkU/zLmvPf2ecWS8fCcHMrwF+7N1rATa+vv
+	 MSlF6+8zhShANTsyTS6Z6+rfrxOztWqN7HH/CSJSyX/1mNYtpiAd1jxv16hrlcTvKeQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=michaelmcallister.org;
 	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=CzNGIVmq;
-	arc=none smtp.remote-ip=185.70.43.172
-Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch [185.70.43.172])
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=OQ6H+wJa;
+	arc=none smtp.remote-ip=79.135.106.112
+Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C4B1606A331;
-	Mon, 26 Oct 2026 21:58:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9C4B1606A331
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56996606A322
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 22:10:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56996606A322
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=CzNGIVmq
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=OQ6H+wJa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1793051878; x=1793311078;
-	bh=eN5G9Ls9ytaUpIc52dHNgLyCQKxcctTRzTTICGzufKU=;
+	d=michaelmcallister.org; s=protonmail2; t=1793052628; x=1793311828;
+	bh=ABoVPvvrFqOEH2gV0M6izYCHk+pREbqv5zj4Hi7+l34=;
 	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
 	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=CzNGIVmquSW6BfZMSXWq4zv2h80MFfs9R+EpCS7mSO1uuz0aWiNY+ZvtL2Xtdnvk3
-	 puFwa3oVFzJXqJdgZONh0R6S+dyEQefnZaQi2lDiGzEQdjF4fV61rJPqjPE4zXNV8j
-	 Ii3uWsPY1T0gSf0rPICpgqSGkfHDHa+eaBQB5prPvmpYMVa8dShCv0+f8529RF0g+X
-	 bSTUhdb1+HFF3TZCHkarDVsX07RrmiSu+i3CcZCWKmZ3FC2eHeyq3g4+kHCd3uE7/2
-	 W82j/Pod+rm2A/slyWehOktafQeWr4ELHB5jIoNnKQ06mX9U/Fe6JhAegQBEBFSh+j
-	 lWUaGYiDkNTOA==
-X-Pm-Submission-Id: 4jD6tq1grjz2SccZ
+	b=OQ6H+wJaLSNK8+HBG0bpkjufB3xFVT04k2YOBlVurBKTeXhSiAYWWaBCkd03OcNtE
+	 Gp2HavLSPTfRNuQlf460YAy29DvnQ9WfBT7BYoYnvWjO6SQMAYpj6aNBY5wgWR/PQu
+	 gi6vs18p/76Gx2RE6+U1uPhUBr7zfnWfqu9qDLrk2ZVgco6L3Wo8KsQKjgco04D2Yd
+	 fBP7eFl+76IyH57TS6fFZdcswNF4LU5k8R7Z0BV4hhZFed0FipZs6RvNGjdvjQRk7J
+	 eP9JqnVVHAH6wHyqCNjl7KQrdZj59Ju2mhBE09HpznmIKlSazDiJ2b9NNUAHTba2d3
+	 tydIqBmtulTaQ==
+X-Pm-Submission-Id: 4jD79F21fvz2ScXH
 From: Michael McAllister <me@michaelmcallister.org>
 To: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Adam Skladowski <a39.skl@gmail.com>, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Mon, 26 Oct 2026 21:46:23 +0000
-Subject: [PATCH v2 2/2] arm64: dts: qcom: sm6115: Add missing MDSS AHB clock
-Message-ID: <179305118391.93309.8898668683371265381.sm6115-mdss-ahb-v2-2@michaelmcallister.org>
-In-Reply-To: <179305118390.93309.15055947565850813746.sm6115-mdss-ahb-v2-0@michaelmcallister.org>
-References: <cover.1792852079.git.me@michaelmcallister.org> <179305118390.93309.15055947565850813746.sm6115-mdss-ahb-v2-0@michaelmcallister.org>
+Date: Mon, 26 Oct 2026 22:10:16 +0000
+Subject: [PATCH v3 1/3] arm64: dts: qcom: sm6115: Correct cluster idle state
+ parameters
+Message-ID:
+ <179305261663.94591.234076861502971834.capri-dts-v3-1@michaelmcallister.org>
+In-Reply-To:
+ <179305261663.94591.5491359960257085739.capri-dts-v3-0@michaelmcallister.org>
+References: <cover.1792840208.git.me@michaelmcallister.org>
+ <179305261663.94591.5491359960257085739.capri-dts-v3-0@michaelmcallister.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -73,41 +72,72 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 
-The MDSS node is missing DISP_CC_MDSS_AHB_CLK. Although the DPU child
-already requests this clock, MDSS resumes before the child enables it.
-The MDSS hardware-version register can then read as zero, causing
-msm_mdss_enable() to skip UBWC configuration.
+The cluster state IDs encode unsupported CPU modes: the GDHS entries
+request CPU mode 2 and the power-collapse entries request CPU mode 4.
+The CPU power-collapse state is mode 3, as already used by the CPU
+idle-state nodes. The GDHS entries also omit the cluster affinity level,
+and cluster 1 requests cluster power collapse instead of GDHS.
 
-On the Motorola Moto G10 (SM4250), this results in garbled compressed
-scanout after display power cycling. Adding the clock restores the
-UBWC configuration and makes compressed and linear scanout agree.
+The downstream Bengal power description [1] defines CPU power collapse
+as mode 3, cluster GDHS as mode 2 and cluster power collapse as mode 4,
+with cluster mode shifted by four bits. Its idle driver [2] combines
+these with bit 30 for CPU reset and bits 25:24 for the affinity level.
+For either cluster this yields 0x41000023 for GDHS and 0x41000043 for
+power collapse. The Motorola SM4250 tree uses the same power description,
+byte-for-byte, as the Xiaomi SM6115 release cited here.
 
-Include the DISPCC AHB clock in the MDSS clock list so that its existing
-bulk clock handling enables it before accessing the MDSS registers.
+[1]
+https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/02ca1a919564a9b176a79cce09c40977f833e9ac/arch/arm64/boot/dts/vendor/qcom/bengal-pm.dtsi
+[2]
+https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/02ca1a919564a9b176a79cce09c40977f833e9ac/drivers/cpuidle/lpm-levels.c
 
-Fixes: 705e50427d81 ("arm64: dts: qcom: sm6115: Add mdss/dpu node")
-Cc: stable@vger.kernel.org
 Signed-off-by: Michael McAllister <me@michaelmcallister.org>
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
-Changes in v2:
-- Remove the blank line between commit trailers.
+Changes in v3:
+- Remove the final commit-message paragraph.
 - Add the received Reviewed-by tag.
 
- arch/arm64/boot/dts/qcom/sm6115.dtsi | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/sm6115.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/qcom/sm6115.dtsi b/arch/arm64/boot/dts/qcom/sm6115.dtsi
-index 0f2af8aba..f7002b9eb 100644
+index 0f2af8aba..79ca73bfc 100644
 --- a/arch/arm64/boot/dts/qcom/sm6115.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sm6115.dtsi
-@@ -1927,7 +1927,8 @@ mdss: display-subsystem@5e00000 {
- 
- 			clocks = <&gcc GCC_DISP_AHB_CLK>,
- 				 <&gcc GCC_DISP_HF_AXI_CLK>,
--				 <&dispcc DISP_CC_MDSS_MDP_CLK>;
-+				 <&dispcc DISP_CC_MDSS_MDP_CLK>,
-+				 <&dispcc DISP_CC_MDSS_AHB_CLK>;
- 
- 			resets = <&dispcc DISP_CC_MDSS_CORE_BCR>;
- 
+@@ -232,7 +232,7 @@ domain-idle-states {
+ 			cluster_0_sleep_0: cluster-sleep-0-0 {
+ 				/* GDHS */
+ 				compatible = "domain-idle-state";
+-				arm,psci-suspend-param = <0x40000022>;
++				arm,psci-suspend-param = <0x41000023>;
+ 				entry-latency-us = <360>;
+ 				exit-latency-us = <421>;
+ 				min-residency-us = <782>;
+@@ -241,7 +241,7 @@ cluster_0_sleep_0: cluster-sleep-0-0 {
+ 			cluster_0_sleep_1: cluster-sleep-0-1 {
+ 				/* Power Collapse */
+ 				compatible = "domain-idle-state";
+-				arm,psci-suspend-param = <0x41000044>;
++				arm,psci-suspend-param = <0x41000043>;
+ 				entry-latency-us = <800>;
+ 				exit-latency-us = <2118>;
+ 				min-residency-us = <7376>;
+@@ -250,7 +250,7 @@ cluster_0_sleep_1: cluster-sleep-0-1 {
+ 			cluster_1_sleep_0: cluster-sleep-1-0 {
+ 				/* GDHS */
+ 				compatible = "domain-idle-state";
+-				arm,psci-suspend-param = <0x40000042>;
++				arm,psci-suspend-param = <0x41000023>;
+ 				entry-latency-us = <314>;
+ 				exit-latency-us = <345>;
+ 				min-residency-us = <660>;
+@@ -259,7 +259,7 @@ cluster_1_sleep_0: cluster-sleep-1-0 {
+ 			cluster_1_sleep_1: cluster-sleep-1-1 {
+ 				/* Power Collapse */
+ 				compatible = "domain-idle-state";
+-				arm,psci-suspend-param = <0x41000044>;
++				arm,psci-suspend-param = <0x41000043>;
+ 				entry-latency-us = <640>;
+ 				exit-latency-us = <1654>;
+ 				min-residency-us = <8094>;
