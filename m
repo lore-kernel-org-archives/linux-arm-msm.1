@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.49
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793029272;
-	b=a8XpcA5S+J2bxtVqh6YSmv2Tic/tyxrYvVRFDFM5Gj277lWWYBZPuMh9kwbv1WkY4rNT
-	 PqBjogE11ii1F8Ioe3AT9pfDHIFqM4huqPaHzweq/wTHwD3P8u/dh0qwX6IQZhfycI4jg
-	 77oFGASlpI+28b2SpHigYuAxqp/XsQROuhtCKRSJ+A7V93qHaQNKV3CydRT5GT5NY/3rj
-	 XqnY5S0JULbOX/A1s/CVG3LXRpIua0fz+esI73KZZoF/Lvj7X2Vkgn7354DkOpa6MbCiJ
-	 2ez9asegXLiv694tGOQWaYqpjRvlcp8EDepfubzbDphskm8zCIDPzViSSyPJRKvvR8w==
+	t=1793029274;
+	b=HQt3sRUCgS/u8fpD8mWyVX5Bwc9GJ4dfxA9dyXgLRD7Dr6+6XNMknL07aIwFgtBl8dID
+	 wHGah6+8AVRw3dl2GXcBw6YfQdR2VQnCN7+oR7V3YPouvSn3/0qok2IiDnmMT7XY9Xfre
+	 sL9kt3CUwygTEA82ffpwegMFP3xqV8xjsnHSH6CIZaB4O+/hIG4DPLl7qZq+qGmVexBjv
+	 c8xxfZEZdc9Sas3aABUXd6DtuLDjiFpj76lJhA2xMI12r7+qtIvtmIlxuLzopfj1MSmnS
+	 Xr8fm8lSFaRrdZqWUQLbU3Y7kavwcZhcyA7BdyrtvLk2X/l6+Au9ojXBj8SC+5byahg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793029272;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793029274;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=wa7jpdJ887MlxcgoqqazDZr2I8peh/arTuSgNh6Gg2Y=;
-	b=bhr8BsXNTXAirabq+RpYY3y8NHmgG4m4+xWuk+4iD0PzKC2zSTioamRKUJwpPM9xhlJY
-	 RuAk3/FepvuDl9kVE2iozoXz70d8pO3miCTGIQseC5bAfKFJLzKM3yIJnQudoFESLA0Os
-	 /Vu7HQSEd3oC+3hxq2McGum4k9SbMPtabDyrt5JeraKEOR0OJXN/E7J2ZrtCpmoNTaF52
-	 qjY60Q6nNEDU5dvA2cE8h3dQQ+vhSRPL3WXg+7PFtFqxqel8FLjH7aRfRmbhRTnGPcXDr
-	 G3p/3bND40l13UYdxLCqgDpcvGDLxv5m7Wyb/gt+q732RFrdQnA5KM1xo61A3Uicz0g==
+	bh=4+cAsG6FgSIr4DxyojuVeIycbDZ40ZqITFTeO4biqBo=;
+	b=37Td1K3Ot/TeDPWeqVoTQw7lkLOOH/jQNQsR6/Rm5zvCQMPeDeh6lWPHZUOQokSUtFJm
+	 gCnupD4Tz4m0b35PhKkZrhoXnXfgH3adcvi63LLB+QR9xq8+5cxAFgQhwNWbpVg3LW2l2
+	 jWJ7g0AGZNjNDl5OWDF+405ABuvXswjf5mq5T21KTtvnRr7nqihA7zcN0dialPFUDWZ6y
+	 7skuu0TYws51dCkkXnZUtjrU0pjk0A8oJQr6uLMfcw67uMi8USDu89C/vaOqfShdPw9il
+	 EUUqRm6ySkmrFHiRlq760hvx42Sm9Wt4wEGyZfyMoxRYS5gUCvBJg7Q8IYy6QfLHLvQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cHSv23ao;
-	arc=none smtp.remote-ip=209.85.167.170
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=h9qYhvXj;
+	arc=none smtp.remote-ip=209.85.161.49
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22033606A31B
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 15:41:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 22033606A31B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52E74606A31F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 15:41:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 52E74606A31F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cHSv23ao
-Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-4d7034a99a9so1881019b6e.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 08:41:11 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=h9qYhvXj
+Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-6ddef424972so1812651eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 08:41:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793029271; x=1793634071; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1793029273; x=1793634073; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wa7jpdJ887MlxcgoqqazDZr2I8peh/arTuSgNh6Gg2Y=;
-        b=cHSv23aoKBvmNZzrwMqxEQ8owFyPvY3MMf6al0nBxabp4LETXHemewHKhv7Q6xdcAl
-         PP/BiYXMxGMdvPNh9Jm99FqfF1st2GyowVSbDLa2gaQrPEeClPc03oCijVPXssWs3ThN
-         t5y8eV8XylNDdIX7Ar/4U3adMFLuWENGGr771idWkJx/FRH1q+DOcnKoCV/pnu+zyTrQ
-         ZvnCif6tg1QJH8KlBjDJ1LCSWPqSquzsPzb02HFJbUYBJrCiWsKOnNVL6bgx8rtLrzvR
-         utd60SPwNoJnG0zwcSxlX4PJ0H9zHCnCPPlVq5pZZ9yK4tr6dRnnOcnxAjEt3Yszd6X1
-         9Duw==
+        bh=4+cAsG6FgSIr4DxyojuVeIycbDZ40ZqITFTeO4biqBo=;
+        b=h9qYhvXjlh/ILzbs+arUbyGCQ1vHsWhnyrlKD3LjrY/CrINpY9RiJc91a2UCm3EWiw
+         JRgQIH6akTAQWLftnsw1GZ5eLMbp12F2i7ZSW00jZnyfbzvT9/w9x8aM5827kh0mDe+n
+         zqiInNrwlj8hcMN6lQ3UOEOHb2WmPz1h6ptegkReA7krXtFqz7huI07rwbdt/euM2Wii
+         Rbkt9oSF+XNZZO2QUwIfhwv8TWN3tZmsL3wDTCaFs4E/Dp4zkt7st5kU9PIUJxqea26r
+         UhAQS5TVRu6osCoBGppvVwWwhiyWfQvQmUAhF+FGYZBwLp6snKLoCu1ZD5E7yzBH8t1v
+         wPJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793029271; x=1793634071;
+        d=1e100.net; s=20260707; t=1793029273; x=1793634073;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wa7jpdJ887MlxcgoqqazDZr2I8peh/arTuSgNh6Gg2Y=;
-        b=BW8plbDyk9he74ZwjKFDfkYDoZAaJyj67cQjft+n/9hhuPWF2wVGApPlkqu2fsGmjT
-         Y/bj98nF8itPKXUqPLfx4IH8rJE3rYOwh3v3WPgnlGpho1tJVMlBUfvAKVuxt7oPVL50
-         uGQx90NKPxnsTdJWuHJidbzEVZvHBdwOXY6Bx18SS3mUdPbIVnDbadsPhRhl7SYT3Zv9
-         N/oJFnWkO3S/Z+Pwc8w8Qw6ojvXKeN4FC1MpYqGBApOiqVCWgIfh07WkcRtEE8ZaVXIo
-         cSxC4KMmKAQA45ojV7q8YVd3kARtdEdJ8LpHSomFdP9svusYd/l+VyNUkvIOKyXw7j9F
-         gI5Q==
-X-Forwarded-Encrypted: i=1; AKwUvBzlLkLxzoLcjPVzzrEpV89/bzTQKp6VHyoDdWj4x5LPWiTVhKGo6fVHRQjUgtVeIq+bpfDEr3xqTUpGJPB0@vger.kernel.org
-X-Gm-Message-State: AFq9FYKhfdWKasGBi63Opsz1017qSSFyswRJ9C4Wd/e4ngRViHLjOziX
-	rC5bI6gNHnnOYj35M1z7Lktd+/66nYbmTHrYMNlGofVYGVEeEIdjIdI3
-X-Gm-Gg: AYBFou32DD/Vd6o0+y2AeAsyLmaI9cYHcvYwy22wK9GwLXX6y02Q3HdYu3Wdvff5nzP
-	kbTryjXZnalFPZwe8DEsi0OW5PWl+vQ7YwmmgjFRM5c9GCUoKjupqQiO+2gRbNtnU5YNIPtqgpg
-	2CCJQyzn8HDRBeQw7VWPHk4S52zUaVjWDkf4qKcK6M/WH0ZHieM4oLepFtJxXIwy3oaaCPg8Kqw
-	tV7DNIqgotKWlWpSWa5aJc2ppGq8xHqMh0bqlvEECPwR7NYLl8pMxxsF6j0h6ltOXpMR9xbeurt
-	PdynYOVg8j5KhyWIfD6eELT8LSC2S1JN4J2eOErZdv9+n2qe9pdoBAJvi0yIbGoEsu+jTCQMonL
-	RTagIBCuaz7CSGLg+/T4gEmBi1impOl6U9P6DKX+blDitxFp+ljUKMQaQfVcpqw7fjzhyEAS8bJ
-	i1UCdTrKhAIxv56l+9ztyHUYGJzU86qB8XBE1ruKDZ7Kr1PURW/TudG8IKeP+oGpg/hbDSAQKfY
-	eU6rP3u4ClZpBacY+XHxVnRcZH99Ko21j0fCphnIW3HhGSCvwTV+r6WhXJqSVrEly+qT2w0Mt7C
-	MIFwjuCzQw==
-X-Received: by 2002:a05:6808:1202:b0:4d6:90d3:e185 with SMTP id 5614622812f47-55c002f9613mr4694800b6e.46.1793029270943;
-        Mon, 26 Oct 2026 08:41:10 -0700 (PDT)
+        bh=4+cAsG6FgSIr4DxyojuVeIycbDZ40ZqITFTeO4biqBo=;
+        b=QBt5CbNkcC9FitWFrywY46ZFRYJCK7YYwgu3aaavnOCUVlGZh8xBeH1K98gTdc4Nby
+         lHn66T9R5OqRPKaCjFOR3VKCPoXo85FveENAmS/eFHYTnJUwssW5PJQdnrf8ZD8+YlNr
+         e9GJ2U2dtPnz9i7iIYHTHePSZ1TbxCTGCKYlNpX9dwzzO4ngD845BrfZSU5S+Zjhof6l
+         mZpWEtbzZgBZCUePHPa4HMLypThZZDOwyYaIuyEEP/XTUg2rMqiJMcpsIN6fdMEcge7V
+         bR7hrSuJkYmCWZfTiw3H0JFF1LivR06o4U1lnC5KOpmZ371CbSWB4ITfDgAu63o3NDF/
+         B/QA==
+X-Forwarded-Encrypted: i=1; AKwUvByNh9kdwd+nA61MuEnPPCyNVogVCBM022TVlenoEC4YRu1gUxKVp7ysZjUbPLp0A6emAF7tH7Jx6u7scH9G@vger.kernel.org
+X-Gm-Message-State: AFq9FYLmPA0qT/1nANZhu0t8iWDUXiAOl+AcBvwrvpQi6opm6Xcx/s6M
+	y1JYlVeJDMnMFd2FljTaeLycyJ3MED6lFoOfEchnSZtU6cw1naJ1oi5A
+X-Gm-Gg: AYBFou3cl86zm3EEzBCrBR6Nqv3VOCK7WDFf9ie99g1qJCBlKawVQpZnzc3wun1+HIz
+	8ED+8PcYeflRPOSroppucps/O/qlOy88t2lUd27Iy1ck/jpqwW8TmvHNQnSD+KN+ljyZ1F70+i6
+	eH0L2Fjrf4izi0lypfvPBjQsmHOig6/mtdjEGg5nFU3FN4pcnZAEyFFuypXPoe07YQrwP88bOPQ
+	EErxzN3AAdUIu+DjbRvtDvhf0wzfg7mvsPzOGvaT2OpwpQ9R37GnJEyB9gzANfPoxBDKoTOqYMi
+	wUmFOL/BJ5TRI5LcG27sj3Y/4J3eogcZVJEcG62/eUyJ0kn9xbM3jrI9N7Ppstxgm9mim518JtE
+	3Xwo28anlTivfq0kH2KqFywE6eg8dHTPGP48JPhs26g3giFI9IOEuyrrCe+9nTG/3ZAhls+o1qV
+	e0mNyqFCjR4pGD/ViFiN3oCap9GGS5cAVkvsN1dJkhvtozSlXQkaqH6oKG6RkMgakp6jwz506ek
+	5KWgBCsThZYR5VQN7svqtbRBkmcYHyZedQ8pJN8j/M6Igu+GosrWN24RAW6DnyrWCG5XhtgHuK7
+	wvsTsHNDkg==
+X-Received: by 2002:a05:6820:1518:b0:70a:598b:12a9 with SMTP id 006d021491bc7-70ba0fac80fmr4111733eaf.53.1793029273175;
+        Mon, 26 Oct 2026 08:41:13 -0700 (PDT)
 Received: from jeffmr.mynetworksettings.com ([2600:1014:a112:1526:a95b:f8ab:d834:50c9])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a84315c0c9sm4746441fac.7.2026.10.26.08.41.08
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a84315c0c9sm4746441fac.7.2026.10.26.08.41.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 08:41:10 -0700 (PDT)
+        Mon, 26 Oct 2026 08:41:12 -0700 (PDT)
 From: Jeff Roach <jeff.roach0@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>
@@ -88,9 +88,9 @@ Cc: Rob Herring <robh@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 1/2] dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
-Date: Mon, 26 Oct 2026 10:40:00 -0500
-Message-ID: <20261026154001.9323-2-jeff.roach0@gmail.com>
+Subject: [PATCH v2 2/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
+Date: Mon, 26 Oct 2026 10:40:01 -0500
+Message-ID: <20261026154001.9323-3-jeff.roach0@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261026154001.9323-1-jeff.roach0@gmail.com>
 References: <20261026154001.9323-1-jeff.roach0@gmail.com>
@@ -105,26 +105,910 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document the HP OmniBook X 16-cp1 laptop, based on the Qualcomm Mahua
-(Snapdragon X2 Elite, 12 cores) SoC.
+Add a device tree for the HP OmniBook X 16-cp1 laptop, based on the
+Qualcomm Mahua (Snapdragon X2 Elite, 12 cores) SoC.
+
+Supported and tested:
+- Keyboard, touchpad and touchscreen over I2C HID
+- Lid switch
+- NVMe SSD (PCIe 5)
+- Qualcomm QCC2072 Wi-Fi (PCIe 4, M.2 key E slot)
+- Two USB-C ports with orientation switching, USB PD and battery
+  reporting through pmic-glink
+- USB-A port (usb_2)
+- Webcam on the internal USB 2.0 host
+- eDP OLED panel with DP AUX backlight
+- DisplayPort alt mode on both USB-C ports
+- ADSP and CDSP remoteprocs
+- Two speakers (WSA8845) and two digital microphones
+
+The GPU is left disabled until Mahua's Adreno X2-85 is supported.
+
+This device tree was written with the help of an AI coding assistant
+(Claude), starting from glymur-hp-elitebook-x-g2q.dts and the laptop's
+ACPI tables. I reviewed it and tested every feature listed above on the
+laptop.
 
 Signed-off-by: Jeff Roach <jeff.roach0@gmail.com>
 ---
- Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/mahua-hp-omnibook-x16.dts   | 855 ++++++++++++++++++
+ 2 files changed, 856 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index 121ca557ce..4dd57e8663 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -191,6 +191,7 @@ properties:
- 
-       - items:
-           - enum:
-+              - hp,omnibook-x16-cp1
-               - qcom,mahua-crd
-           - const: qcom,mahua
- 
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 88230c4e00..a3ba955451 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -64,6 +64,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-el2.dtb
+ lemans-evk-ifp-mezzanine-dtbs	:= lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo
+ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-ifp-mezzanine.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= mahua-hp-omnibook-x16.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= mahua-lenovo-thinkpad-t14s-gen7-lcd.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= milos-fairphone-fp6.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= milos-nothing-asteroids.dtb
+diff --git a/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts b/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
+new file mode 100644
+index 0000000000..88abd50997
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
+@@ -0,0 +1,855 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * Copyright (c) 2026 Jeff Roach <jeff.roach0@gmail.com>
++ */
++/dts-v1/;
++
++#include "mahua.dtsi"
++
++#include "pmcx0102.dtsi"
++#include "pmh0101.dtsi"
++#include "pmh0110-glymur.dtsi"
++#include "pmh0104-glymur.dtsi"
++#include "pmk8850.dtsi"
++#include "smb2370.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/gpio-keys.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
++#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
++
++/* PMICs tied to Glymur's cluster2 are absent on Mahua. */
++/delete-node/ &pmcx0102_d_e0;
++/delete-node/ &pmcx0102_d0_thermal;
++/delete-node/ &pmh0104_i_e0;
++/delete-node/ &pmh0104_i0_thermal;
++/delete-node/ &pmh0104_j_e0;
++/delete-node/ &pmh0104_j0_thermal;
++
++/ {
++	model = "HP OmniBook X 16-cp1";
++	compatible = "hp,omnibook-x16-cp1", "qcom,mahua";
++	chassis-type = "laptop";
++
++	aliases {
++		i2c0 = &i2c0;
++		i2c4 = &i2c4;
++		i2c8 = &i2c8;
++		serial0 = &uart21;
++		serial1 = &uart14;
++	};
++
++	clocks {
++		xo_board: xo-board {
++			compatible = "fixed-clock";
++			clock-frequency = <38400000>;
++			#clock-cells = <0>;
++		};
++
++		sleep_clk: sleep-clk {
++			compatible = "fixed-clock";
++			clock-frequency = <32000>;
++			#clock-cells = <0>;
++		};
++	};
++
++	gpio-keys {
++		compatible = "gpio-keys";
++
++		pinctrl-0 = <&lid_default>;
++		pinctrl-names = "default";
++
++		switch-lid {
++			label = "lid";
++			gpios = <&tlmm 92 GPIO_ACTIVE_LOW>;
++			linux,input-type = <EV_SW>;
++			linux,code = <SW_LID>;
++			wakeup-source;
++			wakeup-event-action = <EV_ACT_DEASSERTED>;
++		};
++	};
++
++	pmic-glink {
++		compatible = "qcom,glymur-pmic-glink",
++			     "qcom,pmic-glink";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		/* Left rear USB-C port */
++		connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++			power-role = "dual";
++			data-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					pmic_glink_hs_in: endpoint {
++						remote-endpoint = <&usb_0_dwc3_hs>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					pmic_glink_ss_in: endpoint {
++						remote-endpoint = <&usb_0_qmpphy_out>;
++					};
++				};
++			};
++		};
++
++		/* Left front USB-C port */
++		connector@1 {
++			compatible = "usb-c-connector";
++			reg = <1>;
++			power-role = "dual";
++			data-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					pmic_glink_hs_in1: endpoint {
++						remote-endpoint = <&usb_1_dwc3_hs>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					pmic_glink_ss_in1: endpoint {
++						remote-endpoint = <&usb_1_qmpphy_out>;
++					};
++				};
++			};
++		};
++	};
++
++	sound {
++		compatible = "qcom,glymur-sndcard";
++		model = "HP-OmniBook-X16";
++
++		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
++				"SpkrRight IN", "WSA WSA_SPK2 OUT",
++				"VA DMIC0", "vdd-micb",
++				"VA DMIC1", "vdd-micb";
++
++		va-dai-link {
++			link-name = "VA Capture";
++
++			codec {
++				sound-dai = <&lpass_vamacro 0>;
++			};
++
++			cpu {
++				sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
++			};
++
++			platform {
++				sound-dai = <&q6apm>;
++			};
++		};
++
++		wsa-dai-link {
++			link-name = "WSA Playback";
++
++			codec {
++				sound-dai = <&left_spkr>, <&right_spkr>,
++					    <&swr0 0>, <&lpass_wsamacro 0>;
++			};
++
++			cpu {
++				sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
++			};
++
++			platform {
++				sound-dai = <&q6apm>;
++			};
++		};
++	};
++
++	vreg_edp_3p3: regulator-edp-3p3 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "VREG_EDP_3P3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++
++		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&edp_reg_en>;
++		pinctrl-names = "default";
++
++		regulator-boot-on;
++	};
++
++	vreg_wcn_3p3: regulator-wcn-3p3 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "VREG_WCN_3P3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++
++		gpio = <&tlmm 94 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&wcn_sw_en>;
++		pinctrl-names = "default";
++
++		regulator-boot-on;
++	};
++
++	/* Qualcomm QCC2072 Wi-Fi/Bluetooth module in an M.2 key E slot */
++	wlan-connector {
++		compatible = "pcie-m2-e-connector";
++		vpcie3v3-supply = <&vreg_wcn_3p3>;
++		vpcie1v8-supply = <&vreg_l15b_e0_1p8>;
++
++		w-disable1-gpios = <&tlmm 117 GPIO_ACTIVE_LOW>;
++		w-disable2-gpios = <&tlmm 116 GPIO_ACTIVE_LOW>;
++
++		pinctrl-0 = <&wcn_wlan_bt_en>;
++		pinctrl-names = "default";
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_pcie_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&pcie4_port0_ep>;
++				};
++			};
++
++			port@3 {
++				reg = <3>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_uart_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&uart14_ep>;
++				};
++			};
++		};
++	};
++};
++
++&apps_rsc {
++	regulators-0 {
++		compatible = "qcom,pmh0101-rpmh-regulators";
++		qcom,pmic-id = "B_E0";
++
++		vreg_l1b_e0_1p8: ldo1 {
++			regulator-name = "vreg_l1b_e0_1p8";
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l7b_e0_3p1: ldo7 {
++			regulator-name = "vreg_l7b_e0_3p1";
++			regulator-min-microvolt = <3072000>;
++			regulator-max-microvolt = <3072000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l15b_e0_1p8: ldo15 {
++			regulator-name = "vreg_l15b_e0_1p8";
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l18b_e0_1p2: ldo18 {
++			regulator-name = "vreg_l18b_e0_1p2";
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++	};
++
++	regulators-1 {
++		compatible = "qcom,pmcx0102-rpmh-regulators";
++		qcom,pmic-id = "C_E1";
++
++		vreg_l1c_e1_0p91: ldo1 {
++			regulator-name = "vreg_l1c_e1_0p91";
++			regulator-min-microvolt = <912000>;
++			regulator-max-microvolt = <912000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l4c_e1_0p91: ldo4 {
++			regulator-name = "vreg_l4c_e1_0p91";
++			regulator-min-microvolt = <912000>;
++			regulator-max-microvolt = <912000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++	};
++
++	regulators-2 {
++		compatible = "qcom,pmh0110-rpmh-regulators";
++		qcom,pmic-id = "F_E0";
++
++		vreg_l2f_e0_0p94: ldo2 {
++			regulator-name = "vreg_l2f_e0_0p94";
++			regulator-min-microvolt = <936000>;
++			regulator-max-microvolt = <936000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l3f_e0_0p91: ldo3 {
++			regulator-name = "vreg_l3f_e0_0p91";
++			regulator-min-microvolt = <912000>;
++			regulator-max-microvolt = <912000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++	};
++
++	regulators-3 {
++		compatible = "qcom,pmh0110-rpmh-regulators";
++		qcom,pmic-id = "F_E1";
++
++		vreg_l1f_e1_0p88: ldo1 {
++			regulator-name = "vreg_l1f_e1_0p88";
++			regulator-min-microvolt = <880000>;
++			regulator-max-microvolt = <880000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l2f_e1_0p88: ldo2 {
++			regulator-name = "vreg_l2f_e1_0p88";
++			regulator-min-microvolt = <880000>;
++			regulator-max-microvolt = <880000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l4f_e1_1p2: ldo4 {
++			regulator-name = "vreg_l4f_e1_1p2";
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++	};
++
++	regulators-4 {
++		compatible = "qcom,pmh0110-rpmh-regulators";
++		qcom,pmic-id = "H_E0";
++
++		vreg_l1h_e0_0p94: ldo1 {
++			regulator-name = "vreg_l1h_e0_0p94";
++			regulator-min-microvolt = <936000>;
++			regulator-max-microvolt = <936000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l2h_e0_0p88: ldo2 {
++			regulator-name = "vreg_l2h_e0_0p88";
++			regulator-min-microvolt = <880000>;
++			regulator-max-microvolt = <880000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
++		vreg_l4h_e0_1p2: ldo4 {
++			regulator-name = "vreg_l4h_e0_1p2";
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++	};
++};
++
++&gmu {
++	status = "disabled";
++};
++
++&gpu {
++	status = "disabled";
++};
++
++&i2c0 {
++	clock-frequency = <400000>;
++
++	status = "okay";
++
++	keyboard@3a {
++		compatible = "hid-over-i2c";
++		reg = <0x3a>;
++
++		hid-descr-addr = <0x1>;
++		interrupts-extended = <&tlmm 67 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-0 = <&kybd_default>;
++		pinctrl-names = "default";
++
++		wakeup-source;
++	};
++};
++
++&i2c4 {
++	clock-frequency = <400000>;
++
++	status = "okay";
++
++	touchpad@15 {
++		compatible = "hid-over-i2c";
++		reg = <0x15>;
++
++		hid-descr-addr = <0x1>;
++		interrupts-extended = <&tlmm 3 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-0 = <&tpad_default>;
++		pinctrl-names = "default";
++
++		wakeup-source;
++	};
++};
++
++&i2c8 {
++	clock-frequency = <400000>;
++
++	status = "okay";
++
++	touchscreen@10 {
++		compatible = "hid-over-i2c";
++		reg = <0x10>;
++
++		hid-descr-addr = <0x1>;
++		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
++
++		post-power-on-delay-ms = <200>;
++
++		pinctrl-0 = <&ts0_default>;
++		pinctrl-names = "default";
++	};
++};
++
++&lpass_vamacro {
++	vdd-micb-supply = <&vreg_l1b_e0_1p8>;
++
++	pinctrl-0 = <&dmic01_default>;
++	pinctrl-names = "default";
++
++	qcom,dmic-sample-rate = <4800000>;
++};
++
++&mdss {
++	status = "okay";
++};
++
++&mdss_dp0 {
++	status = "okay";
++};
++
++&mdss_dp0_out {
++	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
++};
++
++&mdss_dp1 {
++	status = "okay";
++};
++
++&mdss_dp1_out {
++	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
++};
++
++&mdss_dp3 {
++	/delete-property/ #sound-dai-cells;
++
++	status = "okay";
++
++	aux-bus {
++		panel {
++			compatible = "samsung,atna33xc20";
++			enable-gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
++			power-supply = <&vreg_edp_3p3>;
++
++			pinctrl-0 = <&edp_bl_en>;
++			pinctrl-names = "default";
++
++			port {
++				edp_panel_in: endpoint {
++					remote-endpoint = <&mdss_dp3_out>;
++				};
++			};
++		};
++	};
++};
++
++&mdss_dp3_out {
++	data-lanes = <0 1 2 3>;
++	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
++
++	remote-endpoint = <&edp_panel_in>;
++};
++
++&mdss_dp3_phy {
++	vdda-phy-supply = <&vreg_l2f_e1_0p88>;
++	vdda-pll-supply = <&vreg_l4f_e1_1p2>;
++
++	status = "okay";
++};
++
++&pcie4 {
++	pinctrl-0 = <&pcie4_default>;
++	pinctrl-names = "default";
++
++	status = "okay";
++};
++
++&pcie4_phy {
++	vdda-phy-supply = <&vreg_l1c_e1_0p91>;
++	vdda-pll-supply = <&vreg_l4f_e1_1p2>;
++
++	status = "okay";
++};
++
++&pcie4_port0 {
++	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
++	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
++};
++
++&pcie4_port0_ep {
++	remote-endpoint = <&m2_e_pcie_ep>;
++};
++
++&pcie5 {
++	pinctrl-0 = <&pcie5_default>;
++	pinctrl-names = "default";
++
++	status = "okay";
++};
++
++&pcie5_phy {
++	vdda-phy-supply = <&vreg_l2f_e0_0p94>;
++	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
++
++	status = "okay";
++};
++
++&pcie5_port0 {
++	reset-gpios = <&tlmm 152 GPIO_ACTIVE_LOW>;
++	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
++
++	status = "okay";
++};
++
++&pmk8850_rtc {
++	qcom,no-alarm;
++};
++
++&remoteproc_adsp {
++	firmware-name = "qcom/glymur/hp/omnibook-x16/qcadsp8480.mbn",
++			"qcom/glymur/hp/omnibook-x16/adsp_dtbs.elf";
++
++	status = "okay";
++};
++
++&remoteproc_cdsp {
++	firmware-name = "qcom/glymur/hp/omnibook-x16/qccdsp8480.mbn",
++			"qcom/glymur/hp/omnibook-x16/cdsp_dtbs.elf";
++
++	status = "okay";
++};
++
++&smb2370_j_e2_eusb2_repeater {
++	vdd18-supply = <&vreg_l15b_e0_1p8>;
++	vdd3-supply = <&vreg_l7b_e0_3p1>;
++};
++
++&smb2370_k_e2_eusb2_repeater {
++	vdd18-supply = <&vreg_l15b_e0_1p8>;
++	vdd3-supply = <&vreg_l7b_e0_3p1>;
++};
++
++&swr0 {
++	status = "okay";
++
++	/* WSA8845, left speaker */
++	left_spkr: speaker@0,0 {
++		compatible = "sdw20217020400";
++		reg = <0 0>;
++		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
++		#sound-dai-cells = <0>;
++		sound-name-prefix = "SpkrLeft";
++		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
++		vdd-io-supply = <&vreg_l18b_e0_1p2>;
++		qcom,port-mapping = <1 2 3 7 12 14>;
++	};
++
++	/* WSA8845, right speaker */
++	right_spkr: speaker@0,1 {
++		compatible = "sdw20217020400";
++		reg = <0 1>;
++		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
++		#sound-dai-cells = <0>;
++		sound-name-prefix = "SpkrRight";
++		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
++		vdd-io-supply = <&vreg_l18b_e0_1p2>;
++		qcom,port-mapping = <4 5 6 7 13 15>;
++	};
++};
++
++&tcsr {
++	vdda-qrefrpt0-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrpt1-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrpt2-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrpt3-0p9-supply = <&vreg_l1f_e1_0p88>;
++	vdda-qrefrpt4-0p9-supply = <&vreg_l2h_e0_0p88>;
++	vdda-qrefrpt5-0p9-supply = <&vreg_l2h_e0_0p88>;
++	vdda-qrefrx0-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrx1-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrx2-0p9-supply = <&vreg_l2f_e1_0p88>;
++	vdda-qrefrx3-0p9-supply = <&vreg_l2h_e0_0p88>;
++	vdda-qreftx1-0p9-supply = <&vreg_l1f_e1_0p88>;
++	vdda-refgen3-0p9-supply = <&vreg_l1f_e1_0p88>;
++	vdda-refgen3-1p2-supply = <&vreg_l4f_e1_1p2>;
++};
++
++&tlmm {
++	gpio-reserved-ranges = <4 4>, /* EC TZ Secure I3C */
++			       <10 2>, /* OOB UART */
++			       <44 4>, /* Security SPI (TPM) */
++			       <65 1>; /* EC reset */
++
++	tpad_default: tpad-default-state {
++		pins = "gpio3";
++		function = "gpio";
++		bias-disable;
++	};
++
++	edp_bl_en: edp-bl-en-state {
++		pins = "gpio18";
++		function = "gpio";
++		drive-strength = <16>;
++		bias-disable;
++	};
++
++	ts0_default: ts0-default-state {
++		pins = "gpio51";
++		function = "gpio";
++		bias-disable;
++	};
++
++	kybd_default: kybd-default-state {
++		pins = "gpio67";
++		function = "gpio";
++		bias-disable;
++	};
++
++	edp_reg_en: edp-reg-en-state {
++		pins = "gpio70";
++		function = "gpio";
++		drive-strength = <16>;
++		bias-disable;
++	};
++
++	lid_default: lid-default-state {
++		pins = "gpio92";
++		function = "gpio";
++		bias-disable;
++	};
++
++	wcn_sw_en: wcn-sw-en-state {
++		pins = "gpio94";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	wcn_wlan_bt_en: wcn-wlan-bt-en-state {
++		pins = "gpio116", "gpio117";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	pcie4_default: pcie4-default-state {
++		clkreq-n-pins {
++			pins = "gpio147";
++			function = "pcie4_clk_req_n";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++
++		perst-n-pins {
++			pins = "gpio146";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		wake-n-pins {
++			pins = "gpio148";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++	};
++
++	pcie5_default: pcie5-default-state {
++		clkreq-n-pins {
++			pins = "gpio153";
++			function = "pcie5_clk_req_n";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++
++		perst-n-pins {
++			pins = "gpio152";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		wake-n-pins {
++			pins = "gpio154";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++	};
++};
++
++&uart14 {
++	status = "okay";
++
++	port {
++		uart14_ep: endpoint {
++			remote-endpoint = <&m2_e_uart_ep>;
++		};
++	};
++};
++
++&usb_0 {
++	status = "okay";
++};
++
++&usb_0_dwc3_hs {
++	remote-endpoint = <&pmic_glink_hs_in>;
++};
++
++&usb_0_hsphy {
++	vdd-supply = <&vreg_l3f_e0_0p91>;
++	vdda12-supply = <&vreg_l4h_e0_1p2>;
++
++	phys = <&smb2370_j_e2_eusb2_repeater>;
++
++	status = "okay";
++};
++
++&usb_0_qmpphy {
++	vdda-phy-supply = <&vreg_l3f_e0_0p91>;
++	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
++	refgen-supply = <&vreg_l2f_e0_0p94>;
++
++	status = "okay";
++};
++
++&usb_0_qmpphy_out {
++	remote-endpoint = <&pmic_glink_ss_in>;
++};
++
++&usb_1 {
++	status = "okay";
++};
++
++&usb_1_dwc3_hs {
++	remote-endpoint = <&pmic_glink_hs_in1>;
++};
++
++&usb_1_hsphy {
++	vdd-supply = <&vreg_l3f_e0_0p91>;
++	vdda12-supply = <&vreg_l4h_e0_1p2>;
++
++	phys = <&smb2370_k_e2_eusb2_repeater>;
++
++	status = "okay";
++};
++
++&usb_1_qmpphy {
++	vdda-phy-supply = <&vreg_l1h_e0_0p94>;
++	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
++	refgen-supply = <&vreg_l2f_e0_0p94>;
++
++	status = "okay";
++};
++
++&usb_1_qmpphy_out {
++	remote-endpoint = <&pmic_glink_ss_in1>;
++};
++
++/* USB-A port on the right side */
++&usb_2 {
++	dr_mode = "host";
++
++	/delete-property/ usb-role-switch;
++
++	status = "okay";
++};
++
++&usb_2_hsphy {
++	vdd-supply = <&vreg_l4c_e1_0p91>;
++	vdda12-supply = <&vreg_l4f_e1_1p2>;
++
++	status = "okay";
++};
++
++&usb_2_qmpphy {
++	vdda-phy-supply = <&vreg_l4c_e1_0p91>;
++	vdda-pll-supply = <&vreg_l4f_e1_1p2>;
++	refgen-supply = <&vreg_l1c_e1_0p91>;
++
++	/delete-property/ mode-switch;
++	/delete-property/ orientation-switch;
++
++	status = "okay";
++
++	ports {
++		port@0 {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			/delete-node/ endpoint;
++
++			usb_2_qmpphy_out_usb: endpoint@1 {
++				reg = <1>;
++
++				data-lanes = <1 0>;
++			};
++		};
++	};
++};
++
++/* Internal USB 2.0 host for the webcam */
++&usb_hs {
++	dr_mode = "host";
++
++	status = "okay";
++};
++
++&usb_hs_phy {
++	vdd-supply = <&vreg_l2h_e0_0p88>;
++	vdda12-supply = <&vreg_l4h_e0_1p2>;
++
++	status = "okay";
++};
 -- 
 2.55.0
 
