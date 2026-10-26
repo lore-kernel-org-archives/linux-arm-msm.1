@@ -1,80 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793046367;
-	b=u3kaPcejz7fsOgbF0XtwqWvEQrpksqdIeAn68mOlqySQRwnuwHoe8nfNkZH7Ngd6CBjL
-	 hoSlEAzmNAtwpp6X78GpmpUSBzWKjBTtWYS9FhPH8vFEzeaTKaw+Mruo7ipCOdBsqFHZE
-	 rrF1Gt+Orzjvc5ottTOI474cdvtpsCTgl63mIHh5iUJgIlxtXIt6NhZGKcwxtgHfgNhob
-	 gddriYO6EMolchDTBQcRuW+5H7TnnysDoJ2HIy8bIbCyxM72W02ckhPVRVdsCu8WSLQF/
-	 TZpPyX4RTaJfR1gk1K1W5xvZg/r7xS12J1ORkAu384OSJQH5zK7/mzPOzlxmZiEEb2Q==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793046367;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
-	b=Vz1Ns/CiNfQXx6WkS0f3jwSF4dt71A6h1sUNl9GCh4p9xFe7npjHj5TdVGMgNrm8CTaC
-	 W/Qx+GnO3aNdIx0ALfwPqdh4CtsHIueVdKSQV0ROP49dnU94zOkxzKzhexV9jAfuyTRDZ
-	 04f8RtVOyCwCRD/UZZrXuG6mYn58H4Oa5Q6USul2vFDwi5G5ZkODlG3hwYoG2bmJ+CtYi
-	 5blJgIeL7e2dVU5ZBKmWUZy+WjOiQ0R3t6Inn1jB2x9/N0GCLhpHxY6IJM5J+eFj0hkyY
-	 wX0crXZHna8QwYZLDnPVmX7sVKy/8iE+SjMXAQovXk9XDW/xeOuKncqiMCYfXD86KAw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hWDFityt;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793047455;
+	b=O3pWW65KqdIM5ZXP+pr1vb7rfQ92QPg/3yuY9w5BK4sdBHA/6NFmDXQlvIBLlqC/6WuJ
+	 E4vuSWZMQlNlLAZotVS/RzPT2dXnBZx39jOJ3S4g6otklPnvK11Kf0UHg5oe1izs1tBcX
+	 nMwEbJ+b/i/q1B8qHLSPMyhJXncxL/vuEitbiXzk4ktaTvOX6SCPFBjX8TrHlNIwLtc/Y
+	 b3K0hreS1RIu1NnfbT2XC/IbLP2yMmNSSBOfseM5ppt9t74IpCeudUg9DUoABpamj4p54
+	 u+c2QEA39w5J81VrFgPSJ3AhWsRMbbNt7tPbfurJE9wEsiFRG3Hfg7qAsUShj9Ft6SA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793047455;
+	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
+	 Subject:Message-Id:Date:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=/kBWIySqVK+PWmxdvx34TJ2UPR1qXh1MS37/nhOACws=;
+	b=s7aa4AF/43kSOTudtYbksgJBp8mUlJ+i6IVTG5uLpEbWrMNzXf1D5Un6HZyqrNJ+PhGB
+	 jp/AAujOMtmK7icnxCftLdvQr96BEd2V0XFfwuQiNxLsI4xMnIQGsxf6nJsF8aN4cTln2
+	 lkaDv6z7igAwzpgWoNCd/MGGE8q0Rs9kn9IEDJLzbeUWV0KDGO8LhOT0XAIKQw1RpOT6d
+	 jXeI+/WQ3PXpcPGESYooDiPpP+PUFBn0+S/jmlFPV/zKRG+OjM8ZvjjYFqD4VrcQxZTL6
+	 oO3+zrF+yPfuyMxCEsbZ68EKHw9LnAuxWpGREwW4HqU0jjux4vf2v/J+7kaM/fHCT3w==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UMlzYbub;
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7A90606A31D;
-	Mon, 26 Oct 2026 20:26:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C548606A31A;
+	Mon, 26 Oct 2026 20:44:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hWDFityt
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793046366;
-	b=N4BRJI5UeR34mq6dWbrtmB2LNC3IpARa/Qvphmqi71guVHSQbODNyo2rcd3/8iPxqyOv
-	 Xu37IEdQCU465D/lmxhr38Nmr4utWi7wFC/e87/lCywzD0uydXtiHof9cYb2sthBfr6nr
-	 mIdL+02kO4vtlfzXwFPzjrcs3uSAZTwMD1hhJDkRtJajMKoCaj+gxemP4um0tATjm3FLH
-	 oz0BKc3bEDjcH8XS6dyfjfqHEwrjzdYwUknX/DQP7heQz41eSOAsQBzkCXWUr0+ePjWow
-	 7ZvrV6oQ8HhPW+T0xrZjGn++2rDUQ6pXE/GGXPKNs0uVCo38WLZsXLy/xIrqQijWDDQ==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793046366;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
-	b=Li1SDCXipGOCWB2bCW+4/17gtOti8j/v/yoQ1wHaYS2FQI8M6NtHJcbtEnxV+krw6S+F
-	 jf6aDsorI5hitZd/XJz+uD7t8/4Li18H3iEk7HFMINUHUZMuvqPkzMaCcYgE1CL97vP1X
-	 HyqBm/sPLi1gHx4lGYAv3JvhA+e3+7JZe6Dy611SZBE3xpkdcEKDW1oaks9StikP+1gTU
-	 Uu5PS+nW2PxSNT75UYh25sI/sNceckKOREPtktd5eRb3pBJG65uJbnXoKbTMNXRjXFfYZ
-	 H+q8ijwewis3CUq0mWXmL17NWoWimm3AwXxCFWHI5vOfeD//we9FHR5dxUH67XFJ5Pw==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 6BE291F01828;
-	Mon, 26 Oct 2026 20:26:05 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UMlzYbub
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DAA71F01825;
+	Mon, 26 Oct 2026 20:44:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793046366;
-	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=hWDFitytTvzqsub0C1t9st7Lm7QyCf9sltrg9X1I5O9mpsdCvKXpowG/B1QeUO27N
-	 jN4tuZ9BUyNxDf/S06mMQpY7Jdcat0z71Rkqcg0fDueTM9brWEsfYhval46PDLLbmH
-	 eE6rfcOJwhqDHqgyGzPl4MzWaSsMuP2K9SkB9Fk6evil1FxHXKGcEXnAm8fQ7XfcsS
-	 9dmtEHVeRwPXcXmd9nINLXZ1K8iaUqFOKIINWnIRC8+5+9NpjqKCBGAqqQCCVdOL3B
-	 JXuwP4wuilyq5oxaDBpz8utouLT3oFqbVpbSDYj+wYk8ufdEFbvg8RNFrq99+2Hw95
-	 FB6KNPgBMphcQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id B4D1944E8D;
-	Mon, 26 Oct 2026 20:26:04 +0000 (UTC)
-From: Xi Zhang via B4 Relay <devnull+xz.ca.cn.gmail.com@kernel.org>
-Subject: [PATCH v2 0/6] drm/msm/dpu: various dpu resource
- allocation/release mismatch fix
-Date: Mon, 26 Oct 2026 17:25:41 -0300
-Message-Id: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
+	s=k20260515; t=1793047455;
+	bh=/kBWIySqVK+PWmxdvx34TJ2UPR1qXh1MS37/nhOACws=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=UMlzYbubU9+UHKB74PSevBibC29LZQLOORvzLEcWSxfcArzmmh3NgD/uVj44cM2WW
+	 9VCLMVrSJh78gj6pVk5clxxljY9tiAWSdlsTPYU7Qki4EoOR3vsC6dus0vKWleF1cx
+	 cagwvcosF+9v8uDCZPytC80sU3U0lxkNHfjbYurN3yGJs0VyKRBsMLTtT+kHncw/lv
+	 mrqtPxLlbeknaIk5vtddCHOQaRj6WLSP2osBA2W/qMN76koNzWeBldiHg1DrbH+ggF
+	 FLwqKJdoCx6oehOe9eOaJiYelTuLxIzLucY3Ue++aavZF2wOBYww3I1rnEki0ziQDH
+	 jBzMsRlV2FoEQ==
+Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
+	by traversing.sirena.org.uk (Postfix) with ESMTP id 4281B1F286F3;
+	Mon, 26 Oct 2026 20:44:00 +0000 (GMT)
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Val Packett <val@packett.cool>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+ Bhushan Shah <bhushan.shah@machinesoul.in>, 
+ Luca Weiss <luca.weiss@fairphone.com>, Antoine Bernard <zalnir@proton.me>, 
+ ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <20261016063536.598610-1-val@packett.cool>
+References: <20261016063536.598610-1-val@packett.cool>
+Subject: Re: [PATCH RESEND v2] ASoC: qcom: qdsp6: q6afe: fix clk vote
+ response type mismatch
+Message-Id: <179303940192.199157.18424504890882837346.b4-ty@b4>
+Date: Mon, 26 Oct 2026 18:30:01 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -86,90 +71,44 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NwQ6CMBBEf4Xs2TVdQDCe/A/DoZYt1FAgXSAaw
- r9b8O5hDi+ZebOCcHAscEtWCLw4cUMfIT0lYFrdN4yujgypSguKQS8e63HGwIKmY92jpVLlpIr
- 8klmIuzGwde/D+ah+LPPzxWbaRXujdTIN4XOcLrT3/vkXQoU2LyhT+qpLKu+N1647m8FDtW3bF
- 7V9J8LEAAAA
-X-Change-ID: 20261026-msm-dpu-res-clean-f1704106453f
-To: Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- Xi Zhang <xz.ca.cn@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793046364; l=2411;
- i=xz.ca.cn@gmail.com; s=20261026; h=from:subject:message-id;
- bh=UVZ0FP0vB3+dqaosznwwckHsKb9132cEaz7lbbhZycE=;
- b=aAAOtE8VWiLHW047vwU7KeXFOCIn5E3D2gJPmPL46lWFaVplS6WdNri9jyWpA+OslCObFu7uD
- iwPJ0J2uJYZDgTSXljBPVAp57OVVM4MZBzlmLMHja8B29eXS+6ld+vE
-X-Developer-Key: i=xz.ca.cn@gmail.com; a=ed25519;
- pk=aRUll5L3eJbwG8Y4BO9uySKGzm+Uy+Ccei9prnRVZRs=
-X-Endpoint-Received: by B4 Relay for xz.ca.cn@gmail.com/20261026 with
- auth_id=1328
-X-Original-From: Xi Zhang <xz.ca.cn@gmail.com>
-Reply-To: xz.ca.cn@gmail.com
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1139; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=+8moeMoR9LiSrGcSUzfh7gF90tvP7B2NY9IC3v4N87o=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLLu755wZMNxw9+3xCYanV8QWp//8NC64wbTY0Qnxp3fu
+ mi+8u7cWx2lLAxiXAyyYooscVncL+tLXq/hO7iwDWYOKxPIEAYuTgGYSKQ1I8Oxi/s/FLtJSZVd
+ uWD/7RgHU++k282cM2Tv3r26Ilqk/HoqI8MDl8S8FdV/KysazorOXOabwLD6g7Gp6qno6uPPP1U
+ 5HWIBAA==
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Hello,
+On Fri, 16 Oct 2026 03:29:17 -0300, Val Packett wrote:
+> ASoC: qcom: qdsp6: q6afe: fix clk vote response type mismatch
 
-Sorry for the quick v2, this version fixes issue found by
-sashiko bot (Good AI!).
+Applied to
 
-This series fixes various resource de-allocation issues in DPU
-resource cleanup code. Aim is more reliable mode set, in particular
-when multiple displays/encoders are connected, to avoid blue screen
-or snowy dsc displays.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
 
-Tested with v7.3 + msm-next, on Ayaneo Pocket DS (SM8550 Kalama).
-Changes are not device/chip specific.
+Thanks!
 
----
-Changes in v2:
-- Removed problematic patches as indicated by sashiko bot.
-- - removed [PATCH 5/8] drm/msm/dpu: use cached PINGPONGs from mode set in cwb setup
-- - removed [PATCH 6/8] drm/msm/dpu: workaround res re-assignment issues by pairing enc/crtc
-- Fixed issues indicaed by sashiko bot
-- - [PATCH 2/8] drm/msm/dpu: save LMs in encoder mode_set for cleanup use later
-Re-add dpu_hw_ctl_setup_blendstage calls
-- Link to v1: https://patch.msgid.link/20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com
+[1/1] ASoC: qcom: qdsp6: q6afe: fix clk vote response type mismatch
+      https://git.kernel.org/broonie/sound/c/f3c7bee984aa
 
-To: Rob Clark <robin.clark@oss.qualcomm.com>
-To: Dmitry Baryshkov <lumag@kernel.org>
-To: Abhinav Kumar <abhinav.kumar@linux.dev>
-To: Jessica Zhang <jesszhan0024@gmail.com>
-To: Sean Paul <sean@poorly.run>
-To: Marijn Suijten <marijn.suijten@somainline.org>
-To: David Airlie <airlied@gmail.com>
-To: Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org
-Cc: freedreno@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
----
-Xi Zhang (6):
-      drm/msm/dpu: reset unassigned resource slots to NULL on topology update
-      drm/msm/dpu: save LMs in encoder mode_set for cleanup use later
-      drm/msm/dpu: use common helper cleanup function in cmd mode disable
-      drm/msm/dpu: Match setup_dither cleanup to the way it was set up
-      drm/msm: force mode_changed on color_mgmt_changed, not just ctm
-      drm/msm/dpu: reset DSC_CMN_MAIN_CNF in dsc disable
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
- drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c        | 92 +++++++++++++---------
- .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c   | 10 +--
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c     |  1 +
- drivers/gpu/drm/msm/msm_atomic.c                   |  3 +-
- 4 files changed, 57 insertions(+), 49 deletions(-)
----
-base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
-change-id: 20261026-msm-dpu-res-clean-f1704106453f
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-Best regards,
---  
-Xi Zhang <xz.ca.cn@gmail.com>
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
+Thanks,
+Mark
 
