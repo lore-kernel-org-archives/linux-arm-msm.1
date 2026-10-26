@@ -1,107 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.22
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793056375;
-	b=rMaA7zr0r2nbiBRpbelFDhB7tBPqtCMg8pAG/CX9heH6+Kdn2O1QQtKgfvmwtcMQRGzy
-	 w3y/2TgG4kdMw72QQBaTEpHvDYvc6SSSlPFXh0VvRdnZ3plzLC5/mK72GQjzoqpTRmUbF
-	 ru6VmTxu/bUiFhR00E/UnAUjMBglLhsthmUsHfIvZLaa2trxTfs8nwgw3S0vUNoHf0nAv
-	 M47OqZOLLcLGXd1kkaqUFUqsDY/a3+gR1itAnCkK6afQJ10qG5v3mNrk2+gHPclsSUQIA
-	 1a3Vembl0MKt/E9E6qJAsZi8VRntiWMAsPvvs8Nt3KQlSj+iT7Mk1JLraE1BOnypsUQ==
+	t=1793056521;
+	b=p2pNxfr7Hl7+2iKMq9eCkQFw9haxplNG5FiZ29yhfcjPUwKpyK+JAc7tVbwRkYUAsTKG
+	 +2jhyJ0fPNZg2RVKjTawrWSzkRRbXL8LTcepCVKrkUua3eSdOtypYUxa0Z8tcF5WLG1Yg
+	 JjpblQFAZDcMAa+JiMF8RpyYfboDpIKiiHq/3cjj6zJ6IPVLn6/KKbGI1X3i+ynEhZWm3
+	 nw5CW2S9zR6VPGcFNoEQ80RJaz0F0yFiErLY13mufkVOzb98s4ywI9pzsLYZM+0uV5hkm
+	 oOeH4k9vmY4uy9Oe4J5sOHoB9k1Gr+H1jFHTP+i8r9q44bSte+MSLoyIHrCY41XW2bw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793056375;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
-	b=Xnrib8zNYhCbIRODiavWmU986Q+7E9mACoEGfNtJX/efVgLEqJQcFeQGOI7XDQNpiFYr
-	 0oBJ+vJA3HOCSXQ0DD+C5M95k8wns0DPZe04p1tM7pFrHuUWmUDqh6YCGruOs8yV7JYY3
-	 5uofF9hyXsQmiL6GfAs/JPkylszTFSz8q/fbNq/tCwDJELFVYS6iBHRq7IRDUp4eleURQ
-	 D7ZXe69WAOmarAiBRSMYUvb63ZWB3I0TQGceqJNWaUeUJrRPFKb0uQCCr0X3YdAPQuLMU
-	 P2AQmSQnKJ009v0wMOoSgZDYugnKK02GBmT69a6v9E/KWmugYRmFacJaPLW1G3NbVRQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793056521;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=+DHdAyNizA7TjiMqewTGxuz3iGliKiTpW9uFJ0Zu3bk=;
+	b=hSDLZB5emmLohdBaFx01LQZ4rucAyn6u3W8rh6ANEnw9O5Dz77YvqxxXM4znjEiP+ZCx
+	 j1V2EuvMKe2pIDw1MlN79D1iCs9tV8y/YOxuzC156XoSGdJIgDNZ2pmK5vigCDqE6xuId
+	 Fitf5qvfR25zArjZHPPTgWS9iZKcBh5gw+gpCyZK57HBiOMlU0a8xT3AJkJMu2LgOyQEv
+	 +HO1lMuqEOnQM5D1WYn+QJHTISAgNHBd4jZL5qW3UVMbaNwkAPMpAthvqYBCLc9y8nwpl
+	 0qg9a31huU9WrxtnQli+6Xl9fyHPnSLQ7LZhyLiLENGWaZ5zp45P05klm9pmwi+wF9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aRilCere;
-	arc=none smtp.remote-ip=209.85.128.41
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=OKUu4Ltc;
+	arc=none smtp.remote-ip=95.215.58.22
+Received: from mta1.migadu.com (out-22.mta1.migadu.com [95.215.58.22])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0C15606A31D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:12:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0C15606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88F62606A31B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:15:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 88F62606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aRilCere
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2d6d01ecbso17417515e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 16:12:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793056373; x=1793661173; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
-        b=aRilCerebHy+kF6vnnvW0jj/Q9uLDDrTywoyUyeMhiipONTZd2IUQluvjI0jnnKGNP
-         5nppDehQuYJicLjntoH9W0d1gEvh5uvm+Y++H7Z/gm1g5FHCsSMqG6mFrDIOgDePHd38
-         PqsapbD53k7pazaNKpc+I6MVV5O9Oj0+G3G21QQwXCkcFYjC1xE7ZAyOBZYcOGAa3MpX
-         MMMkrR1ojHvLZD0LPu5JK6UmNI79ge7OFq8S2VE2LwsH/NQB8NHBRtG5hy6YpbY5aX4E
-         k6JkCxilvej2FO2/anbmOpgOVrJx3N7Z0JiRMhgzbJq1cwNYOhT57VqQhUZ7vBjFgkvM
-         E1xA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793056373; x=1793661173;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
-        b=1gezNAkzSHFRJsMlCmXxYCeKwbQkuO76xi7KM0LKVK/SqvcVfKLrgOL51WyS2N9IGe
-         il17DNcCouxJhk+NTaC+MK/FgsPqMtIvYjMB7ON6bie24IX9l87SsGrkO2q8Q3qceyGd
-         XK2+BTftNqVqB/urWn3APhGdRe1YyI/BwET38ilWYTOKPUlrLdHCyYX1Paif3cM5DAY8
-         MpwUNS4mdQSsqi5KG3lacz4vOUdnEiISsQlVpA1QnQT1QfColI3HYD1AjTFF0/abkIv6
-         Vk9Kel/PNqH1WjUsVMyaPhkGqCD6PUsKx9EfUiIu7Wa86ix8819kmhnn9q5UWhy/rvgy
-         X3FA==
-X-Forwarded-Encrypted: i=1; AKwUvBxCqjcMDRUOT2DofrvZc6RnXMksq8aoj0KTXLFIhjA+56PHNJOGnl4DCpAAoR5Vowsd3fkF3cj420WlKBW5@vger.kernel.org
-X-Gm-Message-State: AFq9FYLX5HfWS1vrpKVeDJkR5V31agVEtowe0WwJqO+TY2556dkZ6+Bd
-	l+ZDdI/Lb2+K3GeoqdmUgo5/E1BbBMs40+EFdpaBRit0iDFTHmRb+OY+
-X-Gm-Gg: AYBFou0wmztcs0LQfFvnmRrDMIlbIyvM7P63OmGhBjuOLljAVw/T/ht2Tc8h6tL9jj8
-	RZebfJ7GFgA2iZDFzajr9chNpoN+p5szqe1YrBLFRYiFtoYUMgitGZxXti1jZoNFqzWzBNQjvJ9
-	mbPMPcc+iKoWwYTsZnW6DQFDHCQR/1N7SLQqBlFs8apxNabiXjBU/54jfVj5ESefIId8qwLa6dZ
-	YaimvUzg7U/n87KxgCukR6TTeqTfHOclnlsXjmsvEMdwIzklyguw2tPhVScJF0kAjwdBFzSDCld
-	p++zQhJB32AebZ7P05oI1DpCoO84tF1MXRX7nNWTGvJou8YfK9uIE2DPLz+MejWR2cJ9n4QaHIE
-	RAJPnmW91ttto+O3NFW6bkc3D7/mhnaVrQAeoRBi+ZNJVNJUqi6JNkF57GcCk0mkEIyuyfwf8YY
-	OBJ11xIdKuoZqb7lLJS8P8dGC9bIX+OTXS5wpYSeoYxIwWI1bWmfM6WXKMbtxVHSYfIJDxJQRxn
-	+QSCS9xxdYbaY6r8NURK/FoNN+UlRaVGLYdnNX65YvtzO8OpKajiAYQQVGdy0pr94MluI5aU1SL
-	AAUrfaJKOboeQ3i4+OV1ePeys5bXkA0q5h6P7Gs59cmmZSqpGltZCXe4gxx2Hw==
-X-Received: by 2002:a05:600c:840e:b0:4a2:b89:b02 with SMTP id 5b1f17b1804b1-4a35acafc84mr143906785e9.10.1793056373131;
-        Mon, 26 Oct 2026 16:12:53 -0700 (PDT)
-Received: from iamyoubutArch.adf.bham.ac.uk (smal-20-b2-v4wan-173097-cust1152.vm20.cable.virginm.net. [77.97.36.129])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a574088sm212047515e9.9.2026.10.26.16.12.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 16:12:52 -0700 (PDT)
-From: Filippo Falezza <effeffe99@gmail.com>
-To: Joonhoe Kim <26rote@gmail.com>
-Cc: Filippo Falezza <effeffe99@gmail.com>,
-	mani@kernel.org,
-	davem@davemloft.net,
-	edumazet@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	christopher.lew@oss.qualcomm.com,
-	deepak.singh@oss.qualcomm.com,
-	pranav.phansalkar@oss.qualcomm.com,
-	andersson@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	regressions@lists.linux.dev,
-	stable@vger.kernel.org
-Subject: Re: [PATCH net v2] net: qrtr: announce local services again once our HELLO is sent
-Date: Mon, 26 Oct 2026 23:12:36 +0000
-Message-ID: <20261026231243.68801-1-effeffe99@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261022163116.1042-1-26rote@gmail.com>
-References: <20261022163116.1042-1-26rote@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=OKUu4Ltc
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=5+C9eGmNHsPXaGlsuMgVqJCe2uE/aRlsxhqFVlOWH7I=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1793056518; v=1; x=1793661318;
+ b=OKUu4LtckR0cWT/Bn31ZSz+TBGR1tq3ZHdKApaCXsW+kXDiThS+o186lcjo41LgYLS+lNNx6
+ jL05rxBYPJwyDN0iOTfgeR+FBIbjurGt0h8nji04a61710e8L1ol05A9QkoMkfW1lr5ob0tnxBD
+ SP2ZSyAFR0xHvHgdPo1Ja0VoIfTCAYXrnDKR4nn30Lftc1U+Q8LmeIIRmABzGj90Q0DSH8ItG4R
+ Ph73dtdYXnU15eJCjbrXYgc5U81+5VzuGOQDhYATlo0UGKMymxeZzPM6zsMcR8uNsij+pXtBDbi
+ K4/bRyNnMYqSdT7t52F0eCzRxG1k3ShlWRLtTb8ltbntQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 05c349e6dd1b2b4b;
+	Mon, 26 Oct 2026 23:15:15 +0000
+X-Mizu-Trace-ID: 05c349e6dd1b2b4b
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <cb719558-3f7e-4332-beff-b81fa31cb73d@packett.cool>
+Date: Mon, 26 Oct 2026 20:15:10 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,32 +60,64 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/6] drm/msm: force mode_changed on color_mgmt_changed,
+ not just ctm
+To: Xi Zhang <xz.ca.cn@gmail.com>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
+ <20261026-msm-dpu-res-clean-v2-5-3d864435186e@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261026-msm-dpu-res-clean-v2-5-3d864435186e@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello Joonhoe,
 
-I ran into the same problem on a Motorola Moto G 5G Plus (SM7250),
-which I'm bringing up on linux-next (next-20261021). Since the HELLO
-gate went in, the name service's first announcement to the modem fails
-with -EAGAIN on every boot, and so far I had been carrying a local
-retry loop in ns.c to get rmtfs announced to it.
+On 10/26/26 5:25 PM, Xi Zhang wrote:
+> dpu_crtc_atomic_check calls dpu_crtc_assign_resources when
+> color_mgmt_changed is set, which is unsafe outside of full modeset.
+>
+> Set allow_modeset and mode_changed when color_mgmt_changed is set,
+> not just when ctm is changed.
+>
+> Also would fix
+> commit 42f62cd79578 ("drm/msm/dpu: try reserving the DSPP-less LM first")
+> which was reverted.
+>
+> Closes: https://gitlab.freedesktop.org/drm/msm/-/work_items/102
+>
+> Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
+> ---
+>   drivers/gpu/drm/msm/msm_atomic.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/msm_atomic.c b/drivers/gpu/drm/msm/msm_atomic.c
+> index a8babf1dbe0d..6f0f30b0728a 100644
+> --- a/drivers/gpu/drm/msm/msm_atomic.c
+> +++ b/drivers/gpu/drm/msm/msm_atomic.c
+> @@ -195,8 +195,7 @@ int msm_atomic_check(struct drm_device *dev, struct drm_atomic_commit *state)
+>   	 */
+>   	for_each_oldnew_crtc_in_state(state, crtc, old_crtc_state,
+>   				      new_crtc_state, i) {
+> -		if ((old_crtc_state->ctm && !new_crtc_state->ctm) ||
+> -		    (!old_crtc_state->ctm && new_crtc_state->ctm)) {
+> +		if (new_crtc_state->color_mgmt_changed) {
+>   			new_crtc_state->mode_changed = true;
+>   			state->allow_modeset = true;
+>   		}
 
-I dropped that loop, applied your v2 instead, and booted the phone
-seven times in a row. The modem came up and registered on the network
-on every boot, with rmtfs serving it, and the phone never reset.
-"failed to announce new service" still shows up once for a remote
-whose HELLO arrives before ours (one boot logged it for both the ADSP
-and the modem, others once or not at all), and the modem carries on
-normally afterwards, which matches the replay doing its job.
+This is also handled by patch 9 "drm/msm/dpu: only reassign resources 
+when the encoder is reprogrammed" of the smmu fault series:
 
-One thing I couldn't cover is a modem restart: on this phone it
-resets the whole SoC with or without your patch, so that's a separate
-problem here and says nothing about the patch.
+https://lore.kernel.org/all/20261024-fd-kms-fix-smmu-v5-9-a5b0b284aead@oss.qualcomm.com/
 
-I did the testing with the help of an AI coding assistant (Claude Code);
-the results above are from the phone.
-
-Tested-by: Filippo Falezza <effeffe99@gmail.com> # Motorola Moto G 5G Plus nairo (SM7250)
 
 Thanks,
-Filippo
+~val
+
