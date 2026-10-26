@@ -1,60 +1,107 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793055970;
-	b=ot2j6eL4rMRasw9jbmVgGA8A9e/yGFBS0P0x5A50VFa+gJU7IRey+I+RB1RHVL4pS82l
-	 B6lfi2un9YFV3dMm4K1eccDiWuzmP5TOvbygS0YjJHVR+M8Y9qQMbUMrXKl6g0IMDbOJe
-	 K635CbMWSGpn2/CRSqMDLkaBi6u8eMsLZeg4lQgkRdc7zNY5xoleDl0+G7pKnuxCGzNt6
-	 gCmJzC4TpgOiKgIDl/EGKwpSXv2NVj6Lg/RkuI55m2rGsZ6aRzN3wN50i/a41wsIdjTFd
-	 ur0wE9VownL2wKMS33QkwYacVYwcituE4g3ibjBRrQjRXhQywMST1cWHdEvwowWAcng==
+	t=1793056375;
+	b=rMaA7zr0r2nbiBRpbelFDhB7tBPqtCMg8pAG/CX9heH6+Kdn2O1QQtKgfvmwtcMQRGzy
+	 w3y/2TgG4kdMw72QQBaTEpHvDYvc6SSSlPFXh0VvRdnZ3plzLC5/mK72GQjzoqpTRmUbF
+	 ru6VmTxu/bUiFhR00E/UnAUjMBglLhsthmUsHfIvZLaa2trxTfs8nwgw3S0vUNoHf0nAv
+	 M47OqZOLLcLGXd1kkaqUFUqsDY/a3+gR1itAnCkK6afQJ10qG5v3mNrk2+gHPclsSUQIA
+	 1a3Vembl0MKt/E9E6qJAsZi8VRntiWMAsPvvs8Nt3KQlSj+iT7Mk1JLraE1BOnypsUQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793055970;
-	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=MlVXs1jLxQZF4o0+dT5jjLKuw14fXaeHyli8vXzrsy4=;
-	b=vNoyt4k+p6BXJUB1xvl0g9S55iKW/HPRJq/2uShaMho0QSGq+EGzmv/MowV5Hus+p+9A
-	 H8Ei2G4BkE3CGUsGxCZIaWm0ExtHmc648yHhIEAv/3x8isif5XReRmDx/ADRfYeOmsNFm
-	 w35OyxH0P4g6tOjyddnLW8PWoQ7/AGO7ufP/B0bkLsWOxjYLvXmep0l8AVBktD7+H98G0
-	 GBTxsGjETnI6jrJcfff+VRsSsI2JjcfAM+CYfM2fPjFBzXvkclsKGOESkaFuPPY7a5Jm3
-	 45jvuYq3yc7ZZGlUrCuScqjVFke0jZPS7Vtc19MkBSjPCofUSG54wByy6DeVkiMi9ew==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793056375;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
+	b=Xnrib8zNYhCbIRODiavWmU986Q+7E9mACoEGfNtJX/efVgLEqJQcFeQGOI7XDQNpiFYr
+	 0oBJ+vJA3HOCSXQ0DD+C5M95k8wns0DPZe04p1tM7pFrHuUWmUDqh6YCGruOs8yV7JYY3
+	 5uofF9hyXsQmiL6GfAs/JPkylszTFSz8q/fbNq/tCwDJELFVYS6iBHRq7IRDUp4eleURQ
+	 D7ZXe69WAOmarAiBRSMYUvb63ZWB3I0TQGceqJNWaUeUJrRPFKb0uQCCr0X3YdAPQuLMU
+	 P2AQmSQnKJ009v0wMOoSgZDYugnKK02GBmT69a6v9E/KWmugYRmFacJaPLW1G3NbVRQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=pm.me;
-	spf=pass smtp.mailfrom=pm.me;
-	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=VoLcw0aa;
-	arc=none smtp.remote-ip=109.224.244.116
-Received: from mail-244116.protonmail.ch (mail-244116.protonmail.ch [109.224.244.116])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aRilCere;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5FCE606A334
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:06:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5FCE606A334
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0C15606A31D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:12:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0C15606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=VoLcw0aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1793055967; x=1793315167;
-	bh=MlVXs1jLxQZF4o0+dT5jjLKuw14fXaeHyli8vXzrsy4=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=VoLcw0aaAMmfGBtmXFXPE7+H15mb7U5PYAu1tS74HQywop8KCKyH+W4YkBxflcGiX
-	 JCo+ZqzNglAn63YjbBcc89lj/1ExQEASkNAxoHe3QG6AM44OcwqdLCx0QLteCYXank
-	 rq+u558ikCtmdl0mmZpyarbk/OSVysu703NtMfD9mVHd3Dx9+iDuQYe6IyMIC3wkpU
-	 QD8m8PCPRq8bWrDAkndh5XCSIGU5V5kZwaAc7BpjHZP8gU52ysYoezooY8ffSEzgu0
-	 fa5O/jSbU9IuUgBAEuni4AKtyUaK/5dKXr7CdZcVBzkyosKP+E+YlR3lMk6ndkrdhq
-	 2sMrQwuxxxXWw==
-Date: Mon, 26 Oct 2026 23:06:03 +0000
-To: Rob Clark <robin.clark@oss.qualcomm.com>
-From: Alexander Koskovich <akoskovich@pm.me>
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, Jie Zhang <jie.zhang@oss.qualcomm.com>, Akhil P Oommen <akhilpo@oss.qualcomm.com>, Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>, Konrad Dybcio <konradybcio@kernel.org>, linux-kernel@vger.kernel.org, Marijn Suijten <marijn.suijten@somainline.org>, Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>
-Subject: Re: [PATCH v2 00/14] drm/msm/a8xx: GPU state capture support
-Message-ID: <FZvwtKTpIxRNzjzcqFf6bTw12mNTJvJZmg6j9lmi8MehHBt91NogIW8oQd5yFHN5DSL8yIWL8p_b1cJPAJC57ZFkoe2BOAh_Y3kwph5SV_A=@pm.me>
-In-Reply-To: <20261021204244.67160-1-robin.clark@oss.qualcomm.com>
-References: <20261021204244.67160-1-robin.clark@oss.qualcomm.com>
-Feedback-ID: 37836894:user:proton
-X-Pm-Message-ID: f32a6dcc444d30a95a9221d97405edca057cfd45
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aRilCere
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2d6d01ecbso17417515e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 16:12:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1793056373; x=1793661173; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
+        b=aRilCerebHy+kF6vnnvW0jj/Q9uLDDrTywoyUyeMhiipONTZd2IUQluvjI0jnnKGNP
+         5nppDehQuYJicLjntoH9W0d1gEvh5uvm+Y++H7Z/gm1g5FHCsSMqG6mFrDIOgDePHd38
+         PqsapbD53k7pazaNKpc+I6MVV5O9Oj0+G3G21QQwXCkcFYjC1xE7ZAyOBZYcOGAa3MpX
+         MMMkrR1ojHvLZD0LPu5JK6UmNI79ge7OFq8S2VE2LwsH/NQB8NHBRtG5hy6YpbY5aX4E
+         k6JkCxilvej2FO2/anbmOpgOVrJx3N7Z0JiRMhgzbJq1cwNYOhT57VqQhUZ7vBjFgkvM
+         E1xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793056373; x=1793661173;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TLn7TVaVukXMVmZsUzU1TI29I6h9VPQT25Hl23f6vc8=;
+        b=1gezNAkzSHFRJsMlCmXxYCeKwbQkuO76xi7KM0LKVK/SqvcVfKLrgOL51WyS2N9IGe
+         il17DNcCouxJhk+NTaC+MK/FgsPqMtIvYjMB7ON6bie24IX9l87SsGrkO2q8Q3qceyGd
+         XK2+BTftNqVqB/urWn3APhGdRe1YyI/BwET38ilWYTOKPUlrLdHCyYX1Paif3cM5DAY8
+         MpwUNS4mdQSsqi5KG3lacz4vOUdnEiISsQlVpA1QnQT1QfColI3HYD1AjTFF0/abkIv6
+         Vk9Kel/PNqH1WjUsVMyaPhkGqCD6PUsKx9EfUiIu7Wa86ix8819kmhnn9q5UWhy/rvgy
+         X3FA==
+X-Forwarded-Encrypted: i=1; AKwUvBxCqjcMDRUOT2DofrvZc6RnXMksq8aoj0KTXLFIhjA+56PHNJOGnl4DCpAAoR5Vowsd3fkF3cj420WlKBW5@vger.kernel.org
+X-Gm-Message-State: AFq9FYLX5HfWS1vrpKVeDJkR5V31agVEtowe0WwJqO+TY2556dkZ6+Bd
+	l+ZDdI/Lb2+K3GeoqdmUgo5/E1BbBMs40+EFdpaBRit0iDFTHmRb+OY+
+X-Gm-Gg: AYBFou0wmztcs0LQfFvnmRrDMIlbIyvM7P63OmGhBjuOLljAVw/T/ht2Tc8h6tL9jj8
+	RZebfJ7GFgA2iZDFzajr9chNpoN+p5szqe1YrBLFRYiFtoYUMgitGZxXti1jZoNFqzWzBNQjvJ9
+	mbPMPcc+iKoWwYTsZnW6DQFDHCQR/1N7SLQqBlFs8apxNabiXjBU/54jfVj5ESefIId8qwLa6dZ
+	YaimvUzg7U/n87KxgCukR6TTeqTfHOclnlsXjmsvEMdwIzklyguw2tPhVScJF0kAjwdBFzSDCld
+	p++zQhJB32AebZ7P05oI1DpCoO84tF1MXRX7nNWTGvJou8YfK9uIE2DPLz+MejWR2cJ9n4QaHIE
+	RAJPnmW91ttto+O3NFW6bkc3D7/mhnaVrQAeoRBi+ZNJVNJUqi6JNkF57GcCk0mkEIyuyfwf8YY
+	OBJ11xIdKuoZqb7lLJS8P8dGC9bIX+OTXS5wpYSeoYxIwWI1bWmfM6WXKMbtxVHSYfIJDxJQRxn
+	+QSCS9xxdYbaY6r8NURK/FoNN+UlRaVGLYdnNX65YvtzO8OpKajiAYQQVGdy0pr94MluI5aU1SL
+	AAUrfaJKOboeQ3i4+OV1ePeys5bXkA0q5h6P7Gs59cmmZSqpGltZCXe4gxx2Hw==
+X-Received: by 2002:a05:600c:840e:b0:4a2:b89:b02 with SMTP id 5b1f17b1804b1-4a35acafc84mr143906785e9.10.1793056373131;
+        Mon, 26 Oct 2026 16:12:53 -0700 (PDT)
+Received: from iamyoubutArch.adf.bham.ac.uk (smal-20-b2-v4wan-173097-cust1152.vm20.cable.virginm.net. [77.97.36.129])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a574088sm212047515e9.9.2026.10.26.16.12.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Oct 2026 16:12:52 -0700 (PDT)
+From: Filippo Falezza <effeffe99@gmail.com>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: Filippo Falezza <effeffe99@gmail.com>,
+	mani@kernel.org,
+	davem@davemloft.net,
+	edumazet@kernel.org,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	christopher.lew@oss.qualcomm.com,
+	deepak.singh@oss.qualcomm.com,
+	pranav.phansalkar@oss.qualcomm.com,
+	andersson@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	regressions@lists.linux.dev,
+	stable@vger.kernel.org
+Subject: Re: [PATCH net v2] net: qrtr: announce local services again once our HELLO is sent
+Date: Mon, 26 Oct 2026 23:12:36 +0000
+Message-ID: <20261026231243.68801-1-effeffe99@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261022163116.1042-1-26rote@gmail.com>
+References: <20261022163116.1042-1-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,110 +111,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Wednesday, October 21st, 2026 at 4:54 PM, Rob Clark <robin.clark@oss.qua=
-lcomm.com> wrote:
->=20
-> I'd appreciate tested-by's on Hawi, Maili, Milos, and Pakala, since I
-> don't have these devices at-hand to test myself.  In particular, do
-> things look fine after the switch to generated nonctx regs.  To test
-> devcoredump, you can use the msm_recovery test in igt.. or just:
->=20
->   cat /sys/kernel/debug/dri/*/gpu > /dev/null
->=20
+Hello Joonhoe,
 
-Tested this series on Milos, series as is works fine for initial boot, navi=
-gating
-around GNOME & apps etc, but when I run 'cat /sys/kernel/debug/dri/*/gpu', =
-run
-into an oops.
+I ran into the same problem on a Motorola Moto G 5G Plus (SM7250),
+which I'm bringing up on linux-next (next-20261021). Since the HELLO
+gate went in, the name service's first announcement to the modem fails
+with -EAGAIN on every boot, and so far I had been carrying a local
+retry loop in ns.c to get rmtfs announced to it.
 
-That is resolved after removing 0x20400-0x20487 from milos_gmucx_registers,
-and removing 0x0f000-0x0f002 from milos_cp_cp_pipe_none_registers. Not sure
-if access to these is restricted by TZ or something isn't configured right?
-These ranges don't seem to be described downstream in adreno_gen8_3_0_snaps=
-hot.h.
+I dropped that loop, applied your v2 instead, and booted the phone
+seven times in a row. The modem came up and registered on the network
+on every boot, with rmtfs serving it, and the phone never reset.
+"failed to announce new service" still shows up once for a remote
+whose HELLO arrives before ours (one boot logged it for both the ADSP
+and the modem, others once or not at all), and the modem carries on
+normally afterwards, which matches the replay doing its job.
 
-After that 'cat /sys/kernel/debug/dri/*/gpu' works and I get a dump, did ob=
-serve these errors in dmesg after though:
+One thing I couldn't cover is a modem restart: on this phone it
+resets the whole SoC with or without your patch, so that's a separate
+problem here and says nothing about the patch.
 
-[   42.891106] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891142] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891157] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891171] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891184] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891198] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891211] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891224] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891237] platform 3d6c000.gmu: GMU fence error: 0x0
-[   42.891250] platform 3d6c000.gmu: GMU fence error: 0x0
-[   43.640122] ------------[ cut here ]------------
-[   43.640137] msm_dpu ae01000.display-controller: [drm] crashdumper timed =
-out: status=3D5c00bd00 (-110)
-[   43.640222] WARNING: drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:115 at =
-CD_RUN+0x20c/0x594 [msm], CPU#3: cat/1929
-[   43.640419] Modules linked in: rfcomm q6apm_dai q6prm_clocks q6apm_lpass=
-_dais snd_q6dsp_common q6prm algif_hash algif_skcipher bnep snd_q6apm panel=
-_raydium_rm69220 fastrpc qcom_pd_mapper ath11k_ahb ath11k mac80211 hci_uart=
- btqca bluetooth qcom_iris cfg80211 ecdh_generic msm ledtrig_pattern videob=
-uf2_dma_contig ecc v4l2_mem2mem drm_dp_aux_bus videobuf2_memops qcom_q6v5_p=
-as ocmem qcom_pil_info videobuf2_v4l2 pwrseq_qcom_wcn gpu_sched ipa pwrseq_=
-core qmi_tmd focaltech_ft3683g qcom_q6v5 drm_gpuvm videobuf2_common drm_exe=
-c rfkill drm_display_helper ubwc_config cec qcom_common mdt_loader libarc4 =
-nft_reject_inet nf_reject_ipv6 nf_reject_ipv4 nft_reject nft_ct nf_conntrac=
-k nf_defrag_ipv6 nf_defrag_ipv4 nf_tables uhid fuse usb_f_ncm u_ether spi_g=
-eni_qcom evdev libcomposite
-[   43.640750] CPU: 3 UID: 0 PID: 1929 Comm: cat Tainted: G S              =
-     7.3.0-next-20261026 #3 PREEMPT(full)=20
-[   43.640763] Tainted: [S]=3DCPU_OUT_OF_SPEC
-[   43.640770] Hardware name: Nothing Phone (3a) (DT)
-[   43.640778] pstate: 61400005 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=
-=3D--)
-[   43.640787] pc : CD_RUN+0x20c/0x594 [msm]
-[   43.640972] lr : CD_RUN+0x208/0x594 [msm]
-[   43.641155] sp : ffff8000891c3990
-[   43.641161] x29: ffff8000891c3990 x28: ffffc3ee34aef850 x27: ffff0008092=
-53000
-[   43.641180] x26: 0000000000000001 x25: 0000000000000001 x24: 00000000000=
-00020
-[   43.641198] x23: 0000000000000000 x22: 0000000000000000 x21: 00000000000=
-02114
-[   43.641216] x20: 0000000a28796b5c x19: ffff000813d7f000 x18: ffff8000891=
-ad078
-[   43.641233] x17: 3a74756f2064656d x16: 6974207265706d75 x15: 64687361726=
-3205d
-[   43.641250] x14: 3fffffffffffefff x13: 0000000000000003 x12: ffffc3ee5c6=
-649c0
-[   43.641267] x11: 3fffffffffffefff x10: 0000000000000003 x9 : 9e14538c77b=
-b2600
-[   43.641284] x8 : 9e14538c77bb2600 x7 : 2e30303031306561 x6 : 207570645f6=
-d736d
-[   43.641301] x5 : ffffc3ee5cb061bf x4 : 0000000000000345 x3 : 00000000000=
-00000
-[   43.641318] x2 : 0000000000000000 x1 : ffff8000891c3790 x0 : 00000000fff=
-fff92
-[   43.641336] Call trace:
-[   43.641343]  CD_RUN+0x20c/0x594 [msm] (P)
-[   43.641530]  a8xx_gpu_state_get+0xdc4/0x2698 [msm]
-[   43.641714]  msm_gpu_open+0xc0/0x134 [msm]
-[   43.641898]  full_proxy_open_regular+0xe0/0x1e8
-[   43.641913]  do_dentry_open+0x154/0x4d8
-[   43.641927]  vfs_open_consume+0x40/0x114
-[   43.641939]  path_openat+0x440/0x6a0
-[   43.641950]  do_file_open+0xdc/0x198
-[   43.641960]  do_sys_openat2+0x88/0x118
-[   43.641972]  __arm64_sys_openat+0x78/0xac
-[   43.641985]  invoke_syscall+0x6c/0x12c
-[   43.641997]  el0_svc_common+0x98/0xf0
-[   43.642007]  do_el0_svc+0x28/0x38
-[   43.642016]  el0_svc+0x4c/0x1ac
-[   43.642031]  el0t_64_sync_handler+0x6c/0xe4
-[   43.642043]  el0t_64_sync+0x1a0/0x1a4
-[   43.642056] ---[ end trace 0000000000000000 ]---
+I did the testing with the help of an AI coding assistant (Claude Code);
+the results above are from the phone.
 
+Tested-by: Filippo Falezza <effeffe99@gmail.com> # Motorola Moto G 5G Plus nairo (SM7250)
 
 Thanks,
-Alex
-
+Filippo
