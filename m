@@ -1,47 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793054357;
-	b=g3iVQrqSO2J50mhdhTVksU2mOUp5en9w1sygvtiOa46UnbNdO6f2tbYvspk0O1WE6xIJ
-	 hC3XExHoKiFdcJHcoov0wI6tptDB3do6iQJfbL8jDVBaStWX3grbEcYok1wiFyKiPURnc
-	 q6p2FIzKD0iBwa8d8x+syhxCQIj11QEUIpIEFb7OwaBy0MhU7zAsD8s+bCk6Eexw2RAc5
-	 bDR1FdUfrfKrlaHBktGDH+f6DXQaWLINz76qXf2XKhC9wdjYlJdgVNyDu3icRv92X8bq+
-	 XkZvtBgnvaSdXKPYoDzFYu+/WRoIZjYkOVq//jkQZrMJgwm4ybcAILv0Hkp5pwyvsjA==
+	t=1793055004;
+	b=RlinG1ZAl3NjQ8wVfmka0PvVy8FN19sZ+RZfWY1++JGKecwYjz48s/bKFPVpdEzQiI7f
+	 FjIY6QDHuVEGvL5hzjKl/objg+HgiTzDGXfEUG7e+oiP3q6y5UA5iwjgrWSGOx7/rpNVH
+	 PYybuUk6JUdVjzOPkcDMwRGNlq7syAVhg3qfW0PlNsO0xivDhUbUaMT/aF3wdJ7plEd7P
+	 QMMewqTCF+B+AraocDbw1pnEvLAN8YwW/JYj1xBZbWXdFb9xWlox01TB1Qk/3WMMwkKqi
+	 RcFqzFom0EDc7t2mWcHg2DVOyeUHpTN/oW4KUI7xuzlogLlplM4q3N8I43u3AijBEoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793054357;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=A1eR4A/QNGx4Y3JbfvLkzgmkQj82YlIwsgDeUWzBzZc=;
-	b=c076crNE2dkRpET8uaY+Q9FOQ6/XgYe00R/LGuncC6bt7+AIswTT+b8NsBbfx8HnAlbZ
-	 zDITcJHiJiP8FjETbya2bSle2/dpjgS0U76KZlpTAXfRQXJxn3QK/zJtBmjc5AnkupXEi
-	 bP3PcALXehql+v3Khh0zmXPes6NvhhcdK/gkc3obGai775HTd4AAygCbQer06fNZe36pR
-	 AGEplEf4j9XnxOAKrL3QnD7xD8r1FfnsjLYEiV3ukTud6ftR2mMKPcKjEGUlGMa6i3bbv
-	 yC+qjF22euwqM7qzCSla8XsFzk5L6nmLoyDJdun8kh7MdmH09LFCcoJvBgRbbiu2Wlg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793055004;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=t7JehZMn3Nl/lxkYG/xWHY5X5HT1Ppoe07eraMxeFB8=;
+	b=C+fTKfXSwQFjAeZ3xq/+zIPJXNvetYhj3IQnFPy0BKYzPhX9TugrcfLmALvTP83wwFMn
+	 nGqoVL5SMaz05pHhiYq3qlQ8XhJ9eQrq6FNkesEAQWm+lQMqrSlhfSmQ+w742yrONEcKM
+	 RG53wFMxam2vtd5RdLV6nnEOlg71VG6P4lp2iZ5CL+6rGyRflx8QQaTZl8ZT3ictx3NDl
+	 5cPAoYw3srWayhoAufKKWgqK07JpOcMoBtyEYVGakjirGihYnQTBQqtfEv4AF9NQzls3S
+	 3OJICgmKGhyDz50SpsufcZyktsUQIihkH37s1BtcPby1uMgmuF6zY7CocvIvPM3Cx1A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PUX9S7YR;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="OdN/9mtj";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E68F0606A31A;
-	Mon, 26 Oct 2026 22:39:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 186EE606A31A;
+	Mon, 26 Oct 2026 22:50:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PUX9S7YR
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFC381F01829;
-	Mon, 26 Oct 2026 22:39:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OdN/9mtj
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE7FF1F01825;
+	Mon, 26 Oct 2026 22:49:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793054356;
-	bh=A1eR4A/QNGx4Y3JbfvLkzgmkQj82YlIwsgDeUWzBzZc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=PUX9S7YRj/qhqjUPrrVxXucchCSKzIfyOnLi1ZgqVBHqJy6FOi7Hqoa3/yAQK8BBY
-	 4+WXC61g5wYSclM1etoWPajx7FqMnH3i03PuFoOlxsa5dMSVPCbKm3ashx94dzCyHf
-	 4Id6H1oZBqwuxoeP2KEF3FKEkYTyALJtsB/io0r7dZZ/CC34RZcvHQtTG1JVOJLoev
-	 c/dNQsPnvd7CsFDLufIOITFCEIVy8+XwZHFxR0+FWgX8aNXXxBrs2pQOIDMzxpKhUn
-	 2y0q4fdvKHMz3oC3WMHMRiA/GcUHM8spzQSyejcwS4MgqGfQMQQTRC6OqC4qRoRzgT
-	 B69yH0CzYJlIQ==
-Message-ID: <378094fb-5f7f-42c6-a91f-158e2083a6cb@kernel.org>
-Date: Tue, 27 Oct 2026 00:38:57 +0200
+	s=k20260515; t=1793055003;
+	bh=t7JehZMn3Nl/lxkYG/xWHY5X5HT1Ppoe07eraMxeFB8=;
+	h=From:To:Cc:Subject:Date;
+	b=OdN/9mtjOk1dKJ6xkM1gNYxz2hYE+Sd1gZtHVyuGFOZ38XHV7tm187e5xxlR6Hmva
+	 a9fzW1SE4muojYgFTd9AecGrsycLE7bV1hEnFOSUOr6iG6JcnHDuoQElakfZZJ7iws
+	 VJxxi80KiVRpySfEYTrQJMqfpkfVNPYcrdM2o9xi0y6pJhFE2HG5A7MoD95/E6RYmq
+	 Av3c3Pdh0jPvhvb3xIvmg6dhz56YMs+yQm+JJXE+ZAg3DYGop0yUFedFuedTWrqXKM
+	 6jL4j1CX/7oTM5B8aNVy9vEBFVO7RMqQhCgbJ+qhIAtXGSWiqqm0fnln7qqs69wtYw
+	 WL9/3QR/rmNcg==
+From: Vladimir Zapolskiy <vz@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-media@vger.kernel.org,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	linux-phy@lists.infradead.org,
+	Conor Dooley <conor+dt@kernel.org>,
+	devicetree@vger.kernel.org
+Subject: [PATCH v2 0/7] media: qcom: camss: Add SM8450 CAMSS support
+Date: Tue, 27 Oct 2026 00:49:50 +0200
+Message-ID: <20261026224957.1115370-1-vz@kernel.org>
+X-Mailer: git-send-email 2.51.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,274 +70,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] arm64: dts: qcom: sm8450: Add CAMSS device tree node
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vladimir Zapolskiy <vz@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- linux-arm-msm@vger.kernel.org,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
- Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
-References: <20261023163057.775917-1-vz@kernel.org>
- <20261023163057.775917-5-vz@kernel.org>
- <CAFEp6-03Kqxya74Cd+hgueZ0D4xAcYNOx_R1sNqdMu2JrMBynw@mail.gmail.com>
-From: Vladimir Zapolskiy <vz@kernel.org>
-In-Reply-To: <CAFEp6-03Kqxya74Cd+hgueZ0D4xAcYNOx_R1sNqdMu2JrMBynw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi Loic.
+This series adds support of Qualcomm SM8450 Camera Subsystem.
 
-On 10/26/26 18:32, Loic Poulain wrote:
-> On Fri, Oct 23, 2026 at 6:31 PM Vladimir Zapolskiy <vz@kernel.org> wrote:
->>
->> Add Qualcomm Waipio CAMSS device tree node to the platform dtsi file,
->> the CAMSS input ports are connected to output ports of CSIPHY devices.
->>
->> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
->> ---
->>   arch/arm64/boot/dts/qcom/sm8450.dtsi | 167 +++++++++++++++++++++++++++
->>   1 file changed, 167 insertions(+)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
->> index babf1a4196a1..7f5b0501a23e 100644
->> --- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
->> @@ -3310,6 +3310,167 @@ cci1_i2c1: i2c-bus@1 {
->>                          };
->>                  };
->>
->> +               camss: isp@acb6000 {
->> +                       compatible = "qcom,waipio-camss";
->> +                       reg = <0 0xacb6000 0 0x1000>,
->> +                             <0 0xacb7000 0 0x1000>,
->> +                             <0 0xacb9000 0 0x1000>,
->> +                             <0 0xacbb000 0 0x1000>,
->> +                             <0 0xacc6000 0 0x1000>,
->> +                             <0 0xacca000 0 0x1000>,
->> +                             <0 0xacf6000 0 0x1000>,
->> +                             <0 0xacf7000 0 0x1000>,
->> +                             <0 0xacf8000 0 0x1000>,
->> +                             <0 0xac62000 0 0x3000>,
->> +                             <0 0xac71000 0 0x3000>,
->> +                             <0 0xac80000 0 0x3000>,
->> +                             <0 0xacc7000 0 0x2000>,
->> +                             <0 0xaccb000 0 0x2000>;
->> +                       reg-names = "csid_wrapper",
->> +                                   "csid0",
->> +                                   "csid1",
->> +                                   "csid2",
->> +                                   "csid_lite0",
->> +                                   "csid_lite1",
->> +                                   "tpg0",
->> +                                   "tpg1",
->> +                                   "tpg2",
->> +                                   "vfe0",
->> +                                   "vfe1",
->> +                                   "vfe2",
->> +                                   "vfe_lite0",
->> +                                   "vfe_lite1";
-> 
-> Is there a camss "top" register to describe here? e.g. to retrieve the
-> CAMSS hardware version.
+The CSIPHYs are described as separate CSIPHY devices compatible with
+X1E80100 ones, there is no legacy CSIPHY resource description in
+the CAMSS driver, and this option is not intended to be supported.
 
-I'm not aware of anything like that. What is "CAMSS hardware version"?
+The change can be immediately tested on any SM8450 powered board by
+running an image stream from TPG to CSIDs, CSIPHY IPs are equal to
+the ones found on Hamoa platform, and were tested on a private board.
 
-CAMSS embraces various blocks, there are CSID and VFE, full and lite
-IPs, and all these components do export their versions individually.
+The series was based and tested on linux-next-20261023.
 
->> +                       clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
->> +                                <&camcc CAM_CC_CORE_AHB_CLK>,
->> +                                <&camcc CAM_CC_CPAS_AHB_CLK>,
->> +                                <&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
->> +                                <&camcc CAM_CC_CPAS_IFE_0_CLK>,
->> +                                <&camcc CAM_CC_CPAS_IFE_1_CLK>,
->> +                                <&camcc CAM_CC_CPAS_IFE_2_CLK>,
->> +                                <&camcc CAM_CC_CPAS_IFE_LITE_CLK>,
->> +                                <&camcc CAM_CC_CSID_CLK>,
->> +                                <&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
->> +                                <&gcc GCC_CAMERA_HF_AXI_CLK>,
->> +                                <&camcc CAM_CC_IFE_0_CLK>,
->> +                                <&camcc CAM_CC_IFE_0_FAST_AHB_CLK>,
->> +                                <&camcc CAM_CC_IFE_1_CLK>,
->> +                                <&camcc CAM_CC_IFE_1_FAST_AHB_CLK>,
->> +                                <&camcc CAM_CC_IFE_2_CLK>,
->> +                                <&camcc CAM_CC_IFE_2_FAST_AHB_CLK>,
->> +                                <&camcc CAM_CC_IFE_LITE_CLK>,
->> +                                <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
->> +                                <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
->> +                                <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
->> +                       clock-names = "camnoc_axi",
->> +                                     "core_ahb",
->> +                                     "cpas_ahb",
->> +                                     "cpas_fast_ahb",
->> +                                     "cpas_vfe0",
->> +                                     "cpas_vfe1",
->> +                                     "cpas_vfe2",
->> +                                     "cpas_vfe_lite",
->> +                                     "csid",
->> +                                     "csiphy_rx",
->> +                                     "gcc_hf_axi",
->> +                                     "vfe0",
->> +                                     "vfe0_fast_ahb",
->> +                                     "vfe1",
->> +                                     "vfe1_fast_ahb",
->> +                                     "vfe2",
->> +                                     "vfe2_fast_ahb",
->> +                                     "vfe_lite",
->> +                                     "vfe_lite_ahb",
->> +                                     "vfe_lite_cphy_rx",
->> +                                     "vfe_lite_csid";
->> +                       interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 640 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 641 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
->> +                                    <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>;
->> +                       interrupt-names = "csid0",
->> +                                         "csid1",
->> +                                         "csid2",
->> +                                         "csid_lite0",
->> +                                         "csid_lite1",
->> +                                         "vfe0",
->> +                                         "vfe1",
->> +                                         "vfe2",
->> +                                         "vfe_lite0",
->> +                                         "vfe_lite1";
->> +                       interconnects = <&gem_noc MASTER_APPSS_PROC 0 &config_noc SLAVE_CAMERA_CFG 0>,
->> +                                       <&mmss_noc MASTER_CAMNOC_HF 0 &mc_virt SLAVE_EBI1 0>;
->> +                       interconnect-names = "ahb",
->> +                                            "hf_mnoc";
->> +                       iommus = <&apps_smmu 0x800 0x460>;
->> +                       power-domains = <&camcc IFE_0_GDSC>,
->> +                                       <&camcc IFE_1_GDSC>,
->> +                                       <&camcc IFE_2_GDSC>,
->> +                                       <&camcc TITAN_TOP_GDSC>;
->> +                       power-domain-names = "ife0",
->> +                                            "ife1",
->> +                                            "ife2",
->> +                                            "top";
->> +                       status = "disabled";
->> +
->> +                       ports {
->> +                               #address-cells = <1>;
->> +                               #size-cells = <0>;
->> +
->> +                               port@0 {
->> +                                       reg = <0>;
->> +
->> +                                       camss_csiphy0_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy0_out_ep>;
->> +                                       };
->> +                               };
->> +
->> +                               port@1 {
->> +                                       reg = <1>;
->> +
->> +                                       camss_csiphy1_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy1_out_ep>;
->> +                                       };
->> +                               };
->> +
->> +                               port@2 {
->> +                                       reg = <2>;
->> +
->> +                                       camss_csiphy2_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy2_out_ep>;
->> +                                       };
->> +                               };
->> +
->> +                               port@3 {
->> +                                       reg = <3>;
->> +
->> +                                       camss_csiphy3_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy3_out_ep>;
->> +                                       };
->> +                               };
->> +
->> +                               port@4 {
->> +                                       reg = <4>;
->> +
->> +                                       camss_csiphy4_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy4_out_ep>;
->> +                                       };
->> +                               };
->> +
->> +                               port@5 {
->> +                                       reg = <5>;
->> +
->> +                                       camss_csiphy5_inep: endpoint {
->> +                                               remote-endpoint = <&csiphy5_out_ep>;
->> +                                       };
->> +                               };
->> +                       };
->> +               };
->> +
->>                  csiphy0: phy@ace4000 {
->>                          compatible = "qcom,waipio-csi2-phy", "qcom,x1e80100-csi2-phy";
->>                          reg = <0 0x0ace4000 0 0x2000>;
->> @@ -3349,6 +3510,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy0_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy0_inep>;
->>                                          };
->>                                  };
->>                          };
->> @@ -3393,6 +3555,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy1_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy1_inep>;
->>                                          };
->>                                  };
->>                          };
->> @@ -3437,6 +3600,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy2_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy2_inep>;
->>                                          };
->>                                  };
->>                          };
->> @@ -3481,6 +3645,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy3_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy3_inep>;
->>                                          };
->>                                  };
->>                          };
->> @@ -3525,6 +3690,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy4_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy4_inep>;
->>                                          };
->>                                  };
->>                          };
->> @@ -3569,6 +3735,7 @@ port@1 {
->>                                          reg = <1>;
->>
->>                                          csiphy5_out_ep: endpoint {
->> +                                               remote-endpoint = <&camss_csiphy5_inep>;
->>                                          };
->>                                  };
->>                          };
->> --
->> 2.53.0
->>
+Changes from v1 to v2:
+* renamed Waipio SoC name taken from downstream to SM8450 (Krzysztof),
+* pushed DTS patches to the end of the series (Krzysztof),
+* added Reviewed-by tags by Konrad and Bryan,
+* minor non-function commit message and blank space changes.
+
+Link to v1:
+* https://lore.kernel.org/linux-arm-msm/20261023163057.775917-1-vz@kernel.org/
+
+Vladimir Zapolskiy (7):
+  dt-bindings: phy: qcom,x1e80100-csi2-phy: Add SM8450 compatible
+  dt-bindings: media: Add Qualcomm SM8450 CAMSS
+  media: qcom: camss: Allow CSI2 PHY devices without CSIPHY resources
+  media: qcom: camss: Add SM8450 CAMSS support
+  arm64: dts: qcom: sm8450: Add CSI2 PHY device tree nodes
+  arm64: dts: qcom: sm8450: Add CAMSS device tree node
+  arm64: dts: qcom: sm8450: Add description of pins with MCLK function
+
+ .../bindings/media/qcom,sm8450-camss.yaml     | 274 +++++++++
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml  |   4 +-
+ arch/arm64/boot/dts/qcom/sm8450.dtsi          | 565 ++++++++++++++++++
+ .../media/platform/qcom/camss/camss-csiphy.c  |  16 +-
+ drivers/media/platform/qcom/camss/camss-vfe.c |   2 +
+ drivers/media/platform/qcom/camss/camss.c     | 244 +++++++-
+ drivers/media/platform/qcom/camss/camss.h     |   1 +
+ 7 files changed, 1100 insertions(+), 6 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/media/qcom,sm8450-camss.yaml
 
 -- 
-Best wishes,
-Vladimir
+2.51.0
+
