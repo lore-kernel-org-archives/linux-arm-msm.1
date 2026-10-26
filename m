@@ -1,95 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793030994;
-	b=qcH55DY03JT3SpFQCTZGf5R/ZiOaOlqlFXff0hfQM2ri0f8kF3+4QsMusTdtk8sqHvsN
-	 OvQZCgZXzF+SwnX6kHKa39fT47HfYOY2+rkC3+vo6Mc8y3/zNaYCIB+Fcl/yeKMOfGu1g
-	 KarcLW8g75gS25Vcvz7PhGXVp2RObR9oBX9KtEIg0czXDd4IC1BOFp9pG1FnXvtWJgEBk
-	 8V6znbEDw9P4vH9Trkh86Y3MId7VGpRnYUTDdhQR2UAQJiJAYhC6175tx5rKpHD3wG2qF
-	 5Axlimje5Vl3uirGzx+ZmhHeoE6h3Gn2Yxz5bKEpAA48S/8YgKp2v1DHIvtXMLuq/lQ==
+	t=1793031054;
+	b=M05S1Il7OeWu7Aq6U8xN5mbznMw0x2wSNFp4tEl9mxnRdahbR11mpsIQiqlRVjE469dP
+	 UIH0Wo632eMGI60rwHBW/6DAC01Gt3lBPMWUF5eKlUdN8rt7soh28a8nNyAiSwLBpwqQb
+	 qTjF0biEKFh0C5LM3d2SmICqa4JCzWm7qZz321eyQ/4Cx1RAyFjIBsoCzJdGyvkxwlo8x
+	 6xDguqAicudAEFqYEF8T5NQOB1JZy9viF2s5BleY06+/en6QbxACfOToZ403U7oldMzts
+	 z5ZGN7CugFRrg2a+QQUi/iV8PpKrbpokMYDfEHEChc4j47hAnpQ7W5rJIHOsfRu7KEw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793030994;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793031054;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=1wVVjAN22ulQJKFqD/QUSRwh146acUkCNkVGGsaACqg=;
-	b=ZYOjvO9Y+H3ZJMAv7MvIY4n9N1iNENjwYuh7XWoKBE07Z7n4eAewSiOldabGVs1oEv3t
-	 gohn1ngHH9rAFg58FnvXS3LvT2dGabToej8DQ59QOQeiww6K7SmALg/syOof+9icoiVZJ
-	 YHQfi1uaNL577fp1kJzfXQFMWWiWfT8oZk+phzxMHC3t97q7VT35RI9ZdhY9CTkdy/3xN
-	 QO1bg9xw5ZPwC3+PQJXZzHEeHwJFShPeWmD10TFzqCZzR7p3uLlHXyKc7xtY2B2RvJhyN
-	 aTdN4PNYOvN603ifE/qXfdt0Yv30s/hneXz6d1+ff9NVGAeGGUKTuPTlFqGPua7tFWw==
+	 Received:X-Forwarded-Encrypted:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=LRYiObfFeB4WPOp5iFNMLIAZZFa6drRLpmas4AXgTgk=;
+	b=ng5hH30ZX64z/EYKLC3rWGxpMg2RfBNdnvGMV1ao35tJ9VopTQoaThxztDTEgPrVCkdq
+	 v5WP92pdU/w9MTTFCalf5jFniSOFM3eW2ZBvEj23OUipJA33tetY/5Oa5IRM0aprf3Bz4
+	 oTrL+Ll3Nar7R5MZli89QoXn0TWIwynFdRPH2uQCOaAioOn4V6zq/BoWaBCjaMP/CkAES
+	 FLcv4YUbsnFkzu27ohCcnJlIEajWHKRGXdrE+S8Ez0qTnvDOXo0rC1BSSpXqaR7OpJPHS
+	 sfZqz2AvUD/X7hErayQZZErhylT6ADL9zHjnHs8XhFPnwi0uiddn+6d2LMudbEH0bGg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=mDoNb3i5;
-	arc=none smtp.remote-ip=209.85.219.51
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
+	dmarc=pass header.from=chromium.org;
+	spf=pass smtp.mailfrom=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=Of5qfHIu;
+	arc=none smtp.remote-ip=209.85.167.41
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 749F4606A32C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 16:09:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 749F4606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87E13606A31A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 16:10:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 87E13606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=mDoNb3i5
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-91c60e30054so10270036d6.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 09:09:54 -0700 (PDT)
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=Of5qfHIu
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5bfc3292d90so502479e87.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 09:10:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793030993; x=1793635793; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1wVVjAN22ulQJKFqD/QUSRwh146acUkCNkVGGsaACqg=;
-        b=mDoNb3i5V67k287VPFUWt5FSGms4m4CnqPGfNhiOXYwPH1hgFlxD6yKZpnLXYC3v2s
-         wIV9spwbePrYyJpZAZEXwaPbw2wBLSQw9/om3xpinxxUWe+8MSPBwIwbo/ghEyGecaf7
-         wMbT15HvgZaXqITpQN6gWd72J200NhFwT5D5nQtZ9zxRv+Zl/+0yoxYEt8u6rIZNOYj4
-         KGPGtF9z33isBh59rUpt+qcQOs6OTbK2Vacg1FiN1GFJa8Tyh7alBVwn/VNoLLEavf82
-         vaReFuazlCTWIvJowrwIfcNMApAOsglYbnZC4XV7CBU2i4INoVx3qOjlH4JQ8LWj+eLx
-         rZuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793030993; x=1793635793;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=chromium.org; s=google; t=1793031052; x=1793635852; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=1wVVjAN22ulQJKFqD/QUSRwh146acUkCNkVGGsaACqg=;
-        b=y1jZ5FOi4A50cXtI6pniQ6hGCGPdv+MPmyjzRCMCWJOm1AWCw8yOBPTGoUV3mXm456
-         y6EyFDcMsG25QghkiBfzEDhpebcz6cw5r1ESUO18PQHQ+YdWRIxP6sYfwl6PLfxgQ7uH
-         Iv2XXQ654nByABzI5addnl3aYhRhXO08FoljOQamCsxT7CPqF5J1of8+ox905OYVK4kJ
-         jyYdrvCgdOSe2e0u+UdatRzUgtSfAFwVMfMEYI6uMNfWle1NfHNrJ/tg0jAECEIyWVWG
-         N68AeMRj9o6zXtLXbqs/pzUW0XipI4ts4J8R6oQ/Wb8bj9mD13UjHxjbOLdUo0BJ2Egb
-         roqw==
-X-Forwarded-Encrypted: i=1; AKwUvBx/ZGj9Iyv0V52Le3miwk6MDUDboY5LtpEfEmvdKIw1ySciRATYScFAVspdatLOpVQHsEpvldZUrzeiCHf5@vger.kernel.org
-X-Gm-Message-State: AFq9FYLGhhoXFvi+dLnmgOA7yTWQ4VJadaTmbe9E7xbk6otTdH8VTn36
-	3A1UgS3JgL0LgverKe1Zp23tTjzXaUSqfEVOx47ObRZuMvjaWoYQVtQy
-X-Gm-Gg: AYBFou2kEJAuGt/oKWlDM88zZxM2sK2O4ko1BVR7RwtcaWl6El1LAXw/6hUq2hEgK7Q
-	gE6dj7PxB5Wzjy4fMoxcbVh9wopewpHWNyn6MTFcYITiJ/stovMFAK2lMHY+NL3spV96Tl1nHpk
-	+7bT+Yr9YNzAN15szuG7kBAYT3sWJj40uo1WT+URggqV7+nLo2bklFU7LpkmEly5XPEocDHOJq3
-	73/dXfnr0/8w5yv16I3WNWg0Y0hHeyDQwE0WABuDVb6sVQfTA6ug1MyvphYwkOqhr68kLqruMJZ
-	0X5f7641vZw4Jk2/doo40NjKhFgghL2T4T7j9fW8k+nDaKMhEjbW1Dp4f6xmghXqCz5I4Vtzm4W
-	PcTst5I1aMTGzd9f1++BUvOirW66ZDl/h4+FfDZhIVE3dxCBIJ9K/MMIYSkxeKe5qYXqxw/sYzB
-	ZM0Z1g4vLDu7VmnSnUBBr1YxgwKW1mYg8m6U6+wHqQdLKUq2rTg9mAI4fhS3XpJL9I02yY0iVGB
-	HrClKnmkdfJ+NhWskeiBMsD67eZgo8snyKLbtLy/p/aI4JyYrdKJCI6nNXYK+tSxO1C01+GvH5P
-	Hjdx0aMChgjiW08p44ytAwWu2Du8lYzumiYblpLVeIwu2BEsTbz3zA==
-X-Received: by 2002:a05:6214:2426:b0:914:4bd3:d984 with SMTP id 6a1803df08f44-91c48e5295bmr123146416d6.34.1793030993136;
-        Mon, 26 Oct 2026 09:09:53 -0700 (PDT)
-Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91c47c6ffc2sm76425806d6.28.2026.10.26.09.09.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 09:09:52 -0700 (PDT)
-From: Christian Cortner <ccortner@gmail.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Birk Skyum <birk.skyum@pm.me>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [BUG] media: iris: resolution change handling stops ffmpeg's h264_v4l2m2m decoder on glymur
-Date: Mon, 26 Oct 2026 11:09:49 -0500
-Message-ID: <20261026160952.22082-1-ccortner@gmail.com>
-X-Mailer: git-send-email 2.56.0
+        bh=LRYiObfFeB4WPOp5iFNMLIAZZFa6drRLpmas4AXgTgk=;
+        b=Of5qfHIuy51tBz3qzukcNEIHaL2XsXpAKnrLySg4DNfWqxlVMamDIkdskfaksxGF8G
+         lpMv16BJdKg2sXQiUHwvvQ3C82Howxng6pWoPHL4hpKuWtjWkyhs1cS7ce+MGq92OM4Y
+         JHAQCMMETKiQqDYDuTM3II9mnGJqHHQ+Hug6Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793031052; x=1793635852;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LRYiObfFeB4WPOp5iFNMLIAZZFa6drRLpmas4AXgTgk=;
+        b=hsrZWjapmCyWPoJ/+ORS360MG/e0cNwCPdHmPkwpgasoWKyMMVEnL/FNXmhKRzlhOO
+         DLLZOnkF96DVDe03zu7C6CvhK6pIwGsTjUhk8fWydMskD/8jrDRcy4z7wl4/STMD6dt0
+         wstuPmGKJCjkgmmiPkHPWHkS9oPs2wXxtoR/2ziKcnSsrAUhov7+HqOeU6Qva9lCX1gC
+         zcR+g4WxNLYWIjSIGQt1FEqaEpjn0oTliGpvrEiA9osXblB8bw4idYsj7KqxeWyaISYr
+         RN/opKVYkTDfp30vCllgDNMgIFE1Ke7fGJlz5m7Fxhm0H2pNocv4JfymMX022JQ8rPH0
+         v8gw==
+X-Forwarded-Encrypted: i=1; AKwUvByK4kjyZI5CCH+01qXcb7QHdQBv1cjsue9KHi1LqRlcCc8bmpBBGyZPILfDcMlMWifGaixbVb9EVzn1K5K8@vger.kernel.org
+X-Gm-Message-State: AFq9FYLRilwwR6fBPbqo9dOe+O0xQ42cKcoWFnZYdkqHNZ2pQtL0ZnQl
+	qU4ClrrVMqAWhwK00u5MI4tca8uVKpQ5uNAp9vBqSZQ7dPcDpbJeVO2xut8OlUkOvH44nP6Mwuf
+	chtB2Tg==
+X-Gm-Gg: AYBFou0SiWF0e6kAKNCX9fPOAXtfXEY3LGU0pV97MITrVMSOGRTedUPgvAaUbGLHlu5
+	0kST7oe35zz8fEKRkML3Jq1ydSrAgZTh5hEBSu4+o6Q431CZ16zYdyaQ8v3mSxHbxoWQOlV6tn3
+	gH0g7xzrGkJYRsUeGk+Q91ltokVY0PfabxcBRCcbSHxJez7Wedtgin7OGL4zDpH0duLtAwQx6Zj
+	flFqyWwnJ0gPDYpXog0ARpbVqYNMx7CdgyTErggYW3YlvGkkR3tP8Ve48cwLlb6Mithc5uJT61b
+	5dHn+c47R3HisVmX30+2gm4TJR9d/GeEfySUMg/vgpsXzJ0YbweHqA8RV/6vNF8gXqIKW+xA2S3
+	JzmRqjX31P76yCPztsoK7thZgB2sGP7h5ijqSHdKgyHjYMBsFsUckMvgZmdLIe7iEXsXL6NGv9D
+	g9oN1129o0mepLjIEmzqo1sKI6cnkE1nprDHjDZyulw43nwFSkc0Kj4gvK3OnCaYYOZs4devhLO
+	AyABiLcO9jaPEsuG6QoWivT5F1DJ5K5AMKl8pzQLTaEUEDG7AkNxfR962xLSoiIZ54xI9ZAkdMA
+	P4kQfQcWGBZ1w2un/Hv8Nhs=
+X-Received: by 2002:a05:6512:15a8:b0:5ba:3e13:f0dc with SMTP id 2adb3069b0e04-5bfb716dfe7mr2266414e87.5.1793031051750;
+        Mon, 26 Oct 2026 09:10:51 -0700 (PDT)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com. [209.85.208.169])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7a894d5sm1630477e87.50.2026.10.26.09.10.48
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 26 Oct 2026 09:10:50 -0700 (PDT)
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3ab3b29a298so21982031fa.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 09:10:48 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBy3Sq/d186r8KjB4yTlNKk2RNfF2w1YSdNtb/DkCab5wR5CRNzLdSRoQvp7/GJr+IAuOG463B/U2oCTWzXR@vger.kernel.org
+X-Received: by 2002:a05:651c:a32c:b0:3ab:690f:82ab with SMTP id
+ 38308e7fff4ca-3ac6fd6d952mr16112171fa.28.1793031047006; Mon, 26 Oct 2026
+ 09:10:47 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -99,150 +94,149 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20261024-sp11-bl-upstream-1-v1-1-d39bfaf9afbc@gmail.com>
+In-Reply-To: <20261024-sp11-bl-upstream-1-v1-1-d39bfaf9afbc@gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Mon, 26 Oct 2026 09:10:34 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=X+003jZ_LLQK6HEtuKs9Y39z=4=2SaN_=Y0uSXgVXFOA@mail.gmail.com>
+X-Gm-Features: AclHuK8VJDZ71e8SV7IfzgVPRQ8znFYiO6UYRUmBFyp4fXJJtzRNheKbSl34Kx8
+Message-ID: <CAD=FV=X+003jZ_LLQK6HEtuKs9Y39z=4=2SaN_=Y0uSXgVXFOA@mail.gmail.com>
+Subject: Re: [PATCH] drm/panel-edp: disable the backlight before powering off panel
+To: jimmie.lin@gmail.com
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Linus Walleij <linusw@kernel.org>, Sam Ravnborg <sam@ravnborg.org>, 
+	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+	Dale Whinham <daleyo@gmail.com>, linux-arm-msm@vger.kernel.org, 
+	aarch64-laptops@lists.linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On an ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite / glymur),
-ffmpeg's h264_v4l2m2m decoder outputs one corrupted frame and stops,
-on every stream I tried. GStreamer's V4L2 decoders work. Below are the
-two driver behaviours behind it (1 and 2), two more that stop ffmpeg
-at a resolution change in the middle of a stream (3 and 4), and an
-inconsistent CAPTURE format that ffmpeg happens to avoid (5).
+On Sat, Oct 24, 2026 at 5:24=E2=80=AFPM Haipeng Lin via B4 Relay
+<devnull+jimmie.lin.gmail.com@kernel.org> wrote:
+>
+> From: Haipeng Lin <jimmie.lin@gmail.com>
+>
+> If the display pipeline takes longer than the runtime-PM autosuspend
+> delay (1 s) to bind after the panel probes, panel-edp's runtime suspend
+> powers the panel off while the backlight is still on: pwm-backlight
+> inherits the enable state left by the firmware at probe and keeps the
+> enable GPIO high. The panel supply is thus cut without first disabling
+> the backlight, leaving BL_EN asserted across a panel power cycle.
+>
+> On the Surface Pro 11 LCD (LGD0779), leaving BL_EN high across this
+> power cycle appears to leave the backlight controller in an incorrect
+> state: brightness is pinned near maximum with a greatly reduced
+> dimming range. Subsequent brightness changes update the PWM duty, but
+> do not restore it to normal. Cycling the backlight off and on at
+> unchanged brightness restores the full range.
+>
+> The first drm_panel_enable() does not recover from this because
+> pwm-backlight still considers itself enabled and leaves BL_EN high.
+>
+> Disable the attached backlight in panel_edp_suspend() before marking
+> AUX unpowered and cutting panel power. This ensures that the first
+> modeset enables the backlight after panel power and video are ready.
+> When DRM has already disabled the backlight, it remains off.
+>
+> Verified on the Surface Pro 11 LCD by delaying display pipeline bind
+> past the autosuspend timeout. BL_EN now drops before panel power is
+> cut, and brightness control works at the first modeset.
+>
+> Fixes: 5540cf8f3e8d ("drm/panel-edp: Implement generic "edp-panel"s probe=
+d by EDID")
+> Link: https://github.com/dwhinham/archiso-aarch64-sp11/issues/41
+> Assisted-by: claude-fable:5
+> Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
+> ---
+> Can reproduce on an installed system on Surface Pro 11 LCD (X1P-64-100,
+> LGD0779 LCD) by booting with modprobe.blacklist=3Dphy_qcom_qmp_combo then
+> loading that module manually after ~20s. This delays DPU component bind
+> past the panel's runtime autosuspend timeout.
+>
+> A/B tested against the same v7.2 tree:
+>
+> - Unpatched: panel VDD off 3.5s..20.5s while BL_EN stays high.
+> after the first modeset brightness is pinned near max brightness with
+> a "collapsed" dimming range. sysfs brightness writes still reprogram
+> the PMIC LPG. One bl_power off/on cycle at unchanged brightness
+> restores the full range.
+>
+> - Patched: BL_EN drops ~300us before the VDD cut and rises again after
+> panel power+link at the first modeset. full brightness range works.
+>
+> Tracing and functional testing on the SP11 shows unchanged sequencing
+> for fast boots, DPMS off/on, and system suspend/resume.
+>
+> Two cases would benefit from testing on other hardware:
+> 1. AUX-controlled backlights
+> The disable is placed before drm_dp_dpcd_set_powered(false) and
+> regulator_disable() so the panel remains accessible if disabling its
+> backlight requires AUX writes. But I have not tested this since my
+> LCD is GPIO/PWM based.
+>
+> 2. Panels with shared/always-on supplies and no panel enable GPIO
+> These panels may continue displaying the firmware framebuffer during
+> the pre-first-modeset runtime suspend. This change will turn off their
+> attached backlight during that interval, potentially making the boot
+> display go dark earlier. This matches the driver's powered-off state,
+> but I have not tested that configuration.
+>
+> Testing on other panel-edp systems particularly with pwm-backlight,
+> would be appreciated.
+> ---
+>  drivers/gpu/drm/panel/panel-edp.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/panel/panel-edp.c b/drivers/gpu/drm/panel/pa=
+nel-edp.c
+> index 94bc54c3833a..87f9c13380be 100644
+> --- a/drivers/gpu/drm/panel/panel-edp.c
+> +++ b/drivers/gpu/drm/panel/panel-edp.c
+> @@ -21,6 +21,7 @@
+>   * DEALINGS IN THE SOFTWARE.
+>   */
+>
+> +#include <linux/backlight.h>
+>  #include <linux/debugfs.h>
+>  #include <linux/delay.h>
+>  #include <linux/gpio/consumer.h>
+> @@ -413,6 +414,18 @@ static int panel_edp_suspend(struct device *dev)
+>  {
+>         struct panel_edp *p =3D dev_get_drvdata(dev);
+>
+> +       /*
+> +        * eDP panel power sequencing requires the backlight to be off
+> +        * whenever the panel is powered off. Before the first modeset th=
+e
+> +        * backlight driver may still hold the enable state inherited fro=
+m
+> +        * the firmware, and some panels' backlight controllers come up i=
+n a
+> +        * wrong dimming mode if their enable line stays high across a pa=
+nel
+> +        * power cycle. Sync the backlight off here so that the backlight
+> +        * enable from drm_panel_enable() performs a true power-on in the
+> +        * correct order.
+> +        */
+> +       backlight_disable(p->base.backlight);
 
-I'm not a kernel developer. I tracked this down with an AI coding
-assistant (Claude, by Anthropic): it traced the driver, wrote a small
-V4L2 test client and tried changes to the driver. Everything below was
-run on this laptop, and each local change described made its problem
-go away here. I can't review or defend kernel patches myself, so I'm
-reporting the problems instead of sending fixes, but I'm glad to test
-patches on this machine.
+The above doesn't look right to me. In general, the backlight should
+be owned by the core DRM panel code. Jamming this in here looks like a
+hack. We'll also be double-disabling the backlight in most cases since
+the core drm_panel code will be disabling it _and_ we'll be disabling
+it.
 
-Setup: the linux-msm laptops tree at 65f4ae7320b8 (v7.3-rc7), which
-has the glymur iris support, plus the iris patches needed to run it
-here: patch 06/13 of "media: iris: Migrate iommus to iris sub nodes"
-v5, a driver-only form of the restrict-region IOVA fix, the PAS ID fix
-and the runtime PM reference fix from the list, and radxa's libva-v4l2
-kernel patches. Firmware: video-firmware 3.6 (aeb98f00ce9f) from the
-Windows driver package. ffmpeg 8.1.3, GStreamer 1.28.8. The functions
-involved are the same in media-committers next.
+I guess the problem here is that the PWM backlight code tries to
+preserve the backlight to handle panel drivers that support a seamless
+handoff from the bootloader to the kernel. Since some panel drivers
+handle that and others (like panel-edp) don't, it's hard for the core
+to magically do the right thing.
 
-I could only test glymur. Birk Skyum's h264_v4l2m2m decodes on
-X1E80100 matched a software decode [1], so problem 1 probably depends
-on timing. Problems 2-4 are in code that runs at every resolution
-change (2 and 4 on HFI gen2), so I expect them on other platforms too,
-but I have not seen that.
+I think the right answer is to disable the backlight at probe time for
+panel-edp. This is a one-time thing and just to handle the bootloader
+handoff, so having the workaround run once at bootup is better.
 
-
-1. A full resolution change at the start, although nothing changed
-
-After STREAMON(OUTPUT), the firmware reports the first source change
-about 2 ms later. ffmpeg has set up and started CAPTURE before that,
-with a format that matches the stream. iris_inst_sub_state_change_drc()
-then takes the IRIS_INST_SUB_DRC path rather than
-IRIS_INST_SUB_FIRST_IPSC, so the client gets a full resolution change:
-an empty LAST buffer, then no decoding until V4L2_DEC_CMD_START or a
-CAPTURE restart. ffmpeg sends V4L2_DEC_CMD_START as soon as it sees the
-event, gets -EBUSY because the drain is still running, as
-dev-decoder.rst allows, and never sends it again after the LAST
-buffer, which is a bug in ffmpeg. A test client that starts CAPTURE
-early in the same way decodes all 60 frames when it sends START after
-the LAST buffer, and none when it behaves like ffmpeg.
-
-The question is whether iris should run a resolution change here at
-all. The note in step 3 of the Initialization sequence says: "If the
-values configured by the client do not match those parsed by the
-decoder, a Dynamic Resolution Change will be triggered to reconfigure
-them." vicodec raises no source change when the stream matches the
-CAPTURE format. Keeping the event, but resuming the firmware in the
-driver once its drain completes and giving the empty PSC_LAST buffer
-back to the firmware, when this is the first source change and the
-parsed format fits the CAPTURE queue, made ffmpeg decode bit-exact
-here.
-
-
-2. The empty LAST buffer of a source change is flagged as an error
-
-iris_hfi_gen2_handle_output_buffer() sets V4L2_BUF_FLAG_ERROR on an
-empty capture buffer unless the firmware flagged it
-HFI_BUF_FW_FLAG_LAST. The empty buffer that ends a resolution change
-carries HFI_BUF_FW_FLAG_PSC_LAST instead and reaches the client as
-LAST|ERROR, although dev-decoder.rst says such a buffer "must be
-ignored by the client". ffmpeg prints "capture: driver decode error"
-for it and outputs it as a corrupted frame; that is the one frame in
-problem 1. Exempting PSC_LAST the way 7adc11e6abf6 exempts LAST fixed
-it here.
-
-
-3. V4L2_EVENT_EOS at every resolution change
-
-iris_vb2_buffer_done() and iris_vb2_buf_queue() queue V4L2_EVENT_EOS
-and call v4l2_m2m_mark_stopped() for every LAST capture buffer,
-including the one that ends a resolution change, and ffmpeg stops
-decoding when it gets the event. Nothing in iris clears the stopped
-mark again, so the EOS of the real drain at the end of the stream is
-never sent. With a stream that changes from 640x360 to 1280x720 after
-30 frames, the test client, following the spec, got an EOS at the
-change and none at the end in 6 of 6 runs. Sending the event, and
-marking the context stopped, only when IRIS_INST_SUB_DRAIN_LAST is set
-fixed it here.
-
-
-4. Stopping CAPTURE during a resolution change's drain kills the
-   instance
-
-ffmpeg handles a resolution change by stopping CAPTURE about 10 us
-after it dequeues the event, which dev-decoder.rst allows as a way to
-abort the drain. When the stop reaches the firmware before it has
-returned the PSC_LAST buffer, IRIS_INST_SUB_DRC_LAST is never set. At
-the next STREAMON(CAPTURE), iris_process_streamon_output() resumes the
-firmware without reallocating the internal input buffers. 1.3 ms
-later the firmware returns the PSC_LAST buffer it still owed,
-iris_inst_sub_state_change_drc_last() rejects it because the input is
-no longer paused, and the instance goes to IRIS_INST_ERROR. Nothing is
-returned after that, and the client waits in poll() forever. It is a
-race: the test client imitating ffmpeg stalled in 2 of 4, 0 of 6 and
-1 of 6 runs in three series, and ffmpeg stopped at the change every
-time, from this or from problem 3. Waiting in
-iris_vb2_stop_streaming(), for at most 500 ms, until the firmware has
-returned the PSC_LAST buffer fixed it here. Completing the resolution
-change at STREAMON instead did not help: the firmware then returned
-nothing at all.
-
-
-5. S_FMT(OUTPUT) leaves the CAPTURE stride and size stale
-
-Setting the OUTPUT format updates the CAPTURE width and height
-(8aadfd445373) but not bytesperline and sizeimage, which keep their
-320x240 defaults on a new instance. For a 640x360 stream,
-G_FMT(CAPTURE) then reports 640x384 NV12 with a sizeimage of 147456,
-and iris_vb2_buf_prepare() rejects CAPTURE buffers smaller than 368640
-bytes, so a client that allocates them from G_FMT cannot queue them.
-ffmpeg is not affected, because it sets the CAPTURE format itself.
-Recomputing both fields as S_FMT(CAPTURE) does fixed it here.
-
-
-With all five changes
-
- - ffmpeg h264_v4l2m2m: bit-exact against the software decoder on raw
-   H.264 (5 of 5 runs), MP4 (3 of 3), and across the 640x360 to
-   1280x720 change (2 of 2).
- - GStreamer: v4l2h264dec, v4l2h265dec, v4l2vp9dec and v4l2av1dec
-   bit-exact at 1080p, H.264 and HEVC also at 2160p, and bit-exact
-   across the resolution change. The encoders still pass.
- - the test client, with CAPTURE set up before or after the first
-   event, and in a mode that aborts the drain like ffmpeg: 27 of 27
-   runs bit-exact, and at the resolution change one EOS per run, at
-   the end (12 of 12).
- - v4l2-compliance 1.33.0 (c6600a7e342e): decoder with -s5
-   --stream-from=<720p H.264> and encoder with -s, 55 of 55 each. This
-   tree predates 1facae9bc3c1, so the bus_info prefix check had to be
-   relaxed for these runs.
- - 60 s of 2160p60 H.264 with 15 IDR frames: the firmware raised one
-   source change, at the start.
-
-[1] https://lore.kernel.org/linux-media/179224901845.60580.12634525576974095945@pm.me/
-
-Thanks,
-Christian Cortner
+-Doug
