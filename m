@@ -1,83 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793021266;
-	b=sxc7cdTCMuMqqEaE0HpeYipnHmbmSbDD9FfZGRKKSJ1rQ4A3lVybYE/B7hfTyjjRZMmk
-	 Qd/aMjVMZ4eCPkvcp8XZw8aPS57DZjInhgerW6VWh2ArBxGzTG8/OfNxmvNzCgciUdqcH
-	 uxG69fyYdf7XuCxA1Gdhch5y7NgidZfD7KD8HOqPFpVirAScfYbIUEZsKpGF4A99MsWge
-	 0NmrzehcgSNY27SLeWULvGl/jVb+dufWHrQl4mClnY91bGZjEdHPcS1TvvYJztQhAzwqd
-	 OQ9ZELUUFfP5jUjDuHWzBcUPXBEof0s/rNOn2gHGmCyJnNurjU/wqrJBudVAqEywrHw==
+	t=1793021773;
+	b=UNTWqRZwqRD2T0viSCQ+fMvzPf2tBcF2MSRdh6mUAAW1rkq08BWOx2Im6l4wJCNB1KrI
+	 96s8/My/n/cAwCvspKr4adg+kf6FNnkpw+AFHinqw0hX9KdnbhirC1EkuJ4/xdq2m1MUh
+	 vKgEyXNDrFqSADfH/NbEAYPTAouqk76Zfp90x1c9/k6gihn19QhaZh3JDPBmmOHkYzrLi
+	 nT8jtVsBPif38LAQErFYMwPa3FlopmYIhGtUQQxHTA7hD0pqZS1L5imbnZ9SdS9pRwcSL
+	 MQj48vr9ngjSVrepX/eOopUv4u9IFy9UcGo9GCjH3likHF84zHn5Wco3XMmYCtkz4/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793021266;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=rUCJmSkAQSE6h4s+zutWPJ/g313zVRHQcPsD4SLWs4Q=;
-	b=dyekA6ogRqf0kDHu6M/vAic5DZ8VFFplxXG9DWzV8uzu1rPvM9mPhXDfkqcSb66zo8K7
-	 JtV6AhZOEwRvN0dvtcXotAk3Z/xkYdggP8cLvWwpCyHDVjPZb9j9eop8wGzlbx5MhNbf7
-	 hVoazV/Bx2LygYuEdvLRrTDUNRvGteBNL04XZlImzS3vOHVZxFyfeF9OWzZ7y8Lf9KCCT
-	 IkQzjQF111RHayoErQOUzeITLVr9QKJXF9Ukx3jLIr+c6qKBxCWeCQvTbmT1Z/IeDAPDw
-	 4yAegb5kIYSZV2LDicy25zyC8Q9vypeVydUb0NyImgFbm/kyKRycBVIP2Xkky9ldxKA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793021773;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=p1WtSQn7L0DYGC9pR9BMqKWHT52U+ozj60nsEhplsp0=;
+	b=l7Q358NBMo44nKJs3x0r32BApbC8rNb2yTCARrOEGBeC3HVR7ricBon3WBn2ksPvAU32
+	 GSJ189j6h/mJ//3WxD2gM42Kkji7a0GSzKA71Rk/VnhKCbnfiK3jSxH8DN/OLWloN2yrV
+	 ZkB4dwP76DhglkY1F2ZYuTz7L7GIBaBaLMzO9qHe9Z+oBPVjy1uh9vQL+2Ypx4ab5wJHZ
+	 2+KrnJ5tZpA6umEndVvwQNJzut9XY1g4ANZJwaWohcUB4uPb3d56dXYlYe1MeeTZrmijx
+	 zZVF+PBgUVINx+1YN+9dDirS10O8kGbH+Q0aeqzn2M7Po3eWsdavOZpZYcbfbqH+NjQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YN8qnszA;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DatefYcg;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36174606A31A;
-	Mon, 26 Oct 2026 13:27:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 36174606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 894EE606A31A;
+	Mon, 26 Oct 2026 13:36:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YN8qnszA
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QAt7174126433;
-	Mon, 26 Oct 2026 13:27:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=rUCJmSkAQSE
-	6h4s+zutWPJ/g313zVRHQcPsD4SLWs4Q=; b=YN8qnszArhQPdW9A2hIJAvBRCor
-	HJM3wqGpQLYPvhNNFefXY5kGy4aYIUDlF59X52utQUxvR5fFB1f78rSAoFSfjyBm
-	IkJRm9Q6QR9zeH2gMm3Cue/diUM5IJ5FwkUN+iVzfbUr3A4YWbrPVAY4bB5XrZjW
-	UCnr/3cKgVjU6glHkaZJUbBnL8oe5oRBVXn/keH984j4oJ7EsOHsubepj3DJGxmw
-	ffVHXblz4TUoIUyp6BcqAlw9qVN6idPe0krxqNLUhrIAlKKzXe5LNS36yg3f0yy8
-	pB6DKwe3cfXpDNeFoS/zJSroFmBu1BC5grYk6pGaXkcH7ZXEp4kf9Ik0aYA==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hhshptjxx-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 26 Oct 2026 13:27:43 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69QDPPfA1853381;
-	Mon, 26 Oct 2026 13:25:25 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ks5-hyd.qualcomm.com [10.147.255.18])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 69QDPPGF1853371
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 26 Oct 2026 13:25:25 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4763723)
-	id 2BB8C679; Mon, 26 Oct 2026 18:55:24 +0530 (+0530)
-From: Karthik S <karthik.s@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Karthik S <karthik.s@oss.qualcomm.com>,
-        Kumar Anurag <kumar.singh@oss.qualcomm.com>
-Subject: [PATCH v2 3/3] arm64: dts: qcom: qcs6490-rb3gen2: kodiak: Enable DP audio
-Date: Mon, 26 Oct 2026 18:55:17 +0530
-Message-Id: <20261026132517.1133138-4-karthik.s@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261026132517.1133138-1-karthik.s@oss.qualcomm.com>
-References: <20261026132517.1133138-1-karthik.s@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DatefYcg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D010D1F01825;
+	Mon, 26 Oct 2026 13:36:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793021773;
+	bh=p1WtSQn7L0DYGC9pR9BMqKWHT52U+ozj60nsEhplsp0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=DatefYcg/w9HGFfuOna2c60G1rJCinc4ssy2DkZ0bAxS6PSuFH+217D3rCKY191kH
+	 ak1SF5ksx5VQuTXD8EZE7PYHw1Ll8x5jxCT6isWnxZd+5kTvjSQpFdACH+m7ZLLhJJ
+	 enkOVXHZaIPa6YgsGeaSzWaR3J0B/0z7YMybtdEqs8LpCnb1so8xKPFBME/DmbBsT4
+	 wIdeX97TtU+OGkb+NvOY629Zy1JIyOUBawqgsh7hfv5LJWxBrJq7B63sfr4knVp2y9
+	 0iqGGw6gkbeQ8a7yG56uk8pt3pfCF6Xec6AVtKpUOYeA/kVMYAWzTIQdSu8hxubz7E
+	 7zaoHwN5a5fQw==
+Date: Mon, 26 Oct 2026 19:06:03 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+Cc: "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org, tao.zhang1@oss.qualcomm.com, 
+	peter.chen@oss.qualcomm.com, jeff.johnson@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com
+Subject: Re: [PATCH net-next 3/3] net: qrtr: implement shutdown()
+Message-ID: <at9WXQsV6pZzNZuL@debian>
+References: <20261016-qrtr-add-shutdown-v1-0-e1cc01ca5919@oss.qualcomm.com>
+ <20261016-qrtr-add-shutdown-v1-3-e1cc01ca5919@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -87,71 +61,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA1MyBTYWx0ZWRfXw2qVwI7CGFxV
- ZpfUA3knxphgmeut66bC7WgeNcuIeEoZO2tISVTLtGd4nc+Ry4T5AFP3SXAgemekiu/iHxrfH47
- Hros7YHL3YoTM0frcsBfTqWGJM/5YQA=
-X-Proofpoint-GUID: ecPAonc_78HzYNMUO_9gT9PUEusOI4Fs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA1MyBTYWx0ZWRfX0SnQRraesNWV
- 2XW1izZJwZlxO9ZlX6VPzAxaLZmWl6hhsU0caKzJ5VwnW1n2GCuIf84khQIOMTqnr6cggAMefIl
- loYW9OhThokTZnEBMPkTVJWmzK4ugceJq2iqz5Moc+hlhZi60lBXfYRBdVf0D3u6eTKHQ+FA+3g
- C5HX18XHS/GWe5gv/xdr6jFlSZVSlSKT07U6PkY3wIMNBWDW2kEqw4b1RAOmcXuIsRb+LoJmq+L
- tZmnu4FPpTa+TX2W+kVO46CzTcFeDeqn/JLXtJql1pi4CGhX/tYmMw/bz2xJfPslb/07EFoWR6m
- 4CCtqJ18Uq9ppQNQD9vc8gRRy77+H/OLj85e/dJ8yITNheVlrXtqGdKVIgjPyFxhYQ7Aksr2+yF
- ZYuD3TlHOHmRNzCqVUepzi0DS4vByPvLThuP/LSN1c9fj7sh9I3FgN45/e4BYcMIw5vl2uvwctb
- XH0FMQLhyxnAeGMiWGQ==
-X-Authority-Analysis: v=2.4 cv=HZWB3SE8 c=1 sm=1 tr=0 ts=6adf5550 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=R9G7c-vIJ9g11eUHkTsA:9
-X-Proofpoint-ORIG-GUID: ecPAonc_78HzYNMUO_9gT9PUEusOI4Fs
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-26_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 clxscore=1015 adultscore=0 priorityscore=1501
- impostorscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260053
+In-Reply-To: <20261016-qrtr-add-shutdown-v1-3-e1cc01ca5919@oss.qualcomm.com>
 
-Add new dai link to enable audio over USB-C DisplayPort.
+On Fri, Oct 16, 2026 at 01:58:20AM -0700, Chunkai Deng wrote:
+> QRTR uses sock_no_shutdown(), so shutdown() fails with -EOPNOTSUPP and
+> there is no way to wake up a thread blocked in recv() on the socket.
+> 
+> Implement it the same way as unix_shutdown(): map SHUT_* to the
+> *_SHUTDOWN bits, set them in sk_shutdown and call sk_state_change().
+> 
+> Do not use lock_sock() here. qrtr_sendmsg() holds it while sleeping in
+> qrtr_tx_wait() until the remote returns flow control credit, which would
+> leave shutdown() stuck in an uninterruptible wait. Take sk_lock.slock to
+> serialize concurrent callers instead, and use WRITE_ONCE() for the
+> lockless readers. Do the same for the store in qrtr_release().
+> 
+> A sender already sleeping in qrtr_tx_wait() is not woken by SHUT_WR;
+> later sendmsg() calls fail with -EPIPE.
+> 
+> Signed-off-by: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
 
-Signed-off-by: Kumar Anurag <kumar.singh@oss.qualcomm.com>
-Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-index f9b28791226c..8aa91e96e44a 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-@@ -1197,6 +1197,22 @@ &sound {
- 			"VA DMIC2", "vdd-micb",
- 			"VA DMIC3", "vdd-micb";
- 
-+	dp-dai-link {
-+		link-name = "DisplayPort0 Playback";
-+
-+		codec {
-+			sound-dai = <&mdss_dp>;
-+		};
-+
-+		cpu {
-+			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
-+		};
-+
-+		platform {
-+			sound-dai = <&q6apm>;
-+		};
-+	};
-+
- 	mi2s1-playback-dai-link {
- 		link-name = "Secondary MI2S Playback";
- 
+- Mani
+
 -- 
-2.34.1
-
+மணிவண்ணன் சதாசிவம்
