@@ -1,13 +1,13 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793021865;
-	b=bLh5xEtP/rbX1WCSGSJuG612EgAYg2yUZs+Q/ONDcmjJPqSlPP1GmOMFyY99xiN+n/3o
-	 GpwgUzGHs7gZu/hdtbQDkzKM/cVnzQAiIR72hYoUkb05NV54N13mC8NY3uHNtITiRkg3b
-	 F+/Tm2lnqIsh0XhKIBiRY4aiDw7BN6FHCDvEjK9aZE7LXxB6obG3F14jTgV6Cg6RgJDyL
-	 8L4dEg/UlltpCn5kwEdsWwvfa9Ra6HCEpNEOqNFGwFn8JPD5NLtfX/eDmSU+t3WYq/Yr5
-	 BAJhpNUmqRLxX22taG+MuewU69bZNeaQMgqI5l7h/9U5rCjD9T6v/erNza/lccPsBtA==
+	t=1793021868;
+	b=2D2aWKUlEFs+1/ZFHEsFrvooheYGF3Lsdq/tubqfi1/RS8c6dkFZxtqIxHLblBeA3D9u
+	 aD44beJo0EAyoZwd8HNRdF4PtiXAoicREWEFLmUqMEf2tc6qrdleU3maHFNjm4Awzp0tq
+	 8VVOm0NEd9g3Ugvsiy6sZBN6yJssV97VhSF+CyBhRCw39IkI9szdvLEEqwZKPfuZ1xQ5/
+	 7Nc/RugcnDQMUTyBZ2dTHUqAsEm43/liamJMgiLr20RuADKwdtlwoq2CPGwuDp0M6DIDR
+	 VkTIrzaZP4PdaagarLl3exxztyB3MGWQhuq/ZSehhDNQE3wMY9UwhJmv5d5SC6f0WAg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793021865;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793021868;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
@@ -16,90 +16,90 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
 	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=8NVtysIHAb2aw6KysRyb98OnPA6mo3D+Nkw0IkOczVk=;
-	b=exBcyjYwkLlXlrCj+DP8a68f7/S17UtBCWqg57HbNAYfbDs82iBjevUMe0wQO/TlZ4I0
-	 iZAQpL8udIBnwIeUuMfEba+fFvPR9t/UWuTrgFLiqCOVHwqJv8SIgjPII8FdoWB1wFt2D
-	 M3PvtPfqtgM7ttnf37dC4EUVuAY64gJ/GQUEZi2yFVvkhYLqQ7GkltGzJqM+nsOAO+Hxb
-	 XSOsE5sw7Euk5cP5CbtN+rYAx53mtL4IhJRs71E7boJ/WZEdg/0HPF/wrj8mK1vqzYFSM
-	 dM1yYp8dNnTeuOvdsOoHBa7mt3xC0Ie6jkTJ3umByVQjOj4qBU5dbbBG6/HL/7hnxOw==
+	bh=RuRFymShgsilHwdTJCHghvu8/w7kYi6eDSMaIMLmBKI=;
+	b=2gzX+2UvyZTolETWcRTm3sQdEJCHHy0E8I7gUj83CKFNoutMkKWBF/d40RINq/OJF2JY
+	 gBV4GLqEmNlIgVVmoFDUqLVqOaZQurne605sVJ06i9ShD2UUGQ9+Aur3Tn4yZY0CGijDO
+	 oRGKHNurMrFf6g+huxjjENwrJGOMo2BdAJTq4YT9hxFszLK7kKKmT5OVGg3VaeVYcmzYK
+	 CWKrhjvCIe1En/uHcdk8qOqH5aCzo+MKTNeWsjHOOXID865r49F4iz7+JEnckC+xsOPAV
+	 daDnaXPaq42EoBzTzRpGO7CSMnlypZHpdbVgM09WXytRrNN9PDoMRJTN4If0ib/4q8g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=To+5xErF;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bSAnt6cM;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cBb+Js1J;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Uq5BcEw2;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F24760A6F70
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8F24760A6F70
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A34AB6072CD5
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A34AB6072CD5
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=To+5xErF;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bSAnt6cM
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cBb+Js1J;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Uq5BcEw2
 Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QAsm4R2168521
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:44 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QAt0WI2168793
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=8NVtysIHAb2
-	aw6KysRyb98OnPA6mo3D+Nkw0IkOczVk=; b=To+5xErFOlemyI2j53B+tCU3jyT
-	Xq1t0PR/Ydkznmzbri8snC6h7Kr/QRuHhjjSs+9ZRutlIzgDtjgqW/wPDNDEZUz9
-	Xey+tQQIRvNgbenmUND4vvLkRj3H8rIFKpN5w5bje3xZkE4bP4DXl51iokpcwGZE
-	WS7os9MM7kn0pjoELYs5DKmc/mkR4oRqppe7pIG72cxHsT2GHwCN7x+yXyJ3fvxp
-	X1HmZrKEG1tnpEbU6gVY39YngJcI9R0P6nUDmh1JGxmdAcI6i22fPFVALTqAchhc
-	ARQDsv9a+jyunGkiAMWGgAgonoTRz8K80UeuYv6JoSCeuzVH5YvtDCcQ7dw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hj3u610fm-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=RuRFymShgsi
+	lHwdTJCHghvu8/w7kYi6eDSMaIMLmBKI=; b=cBb+Js1Jgge4rwa4NlyBBYDN+I8
+	3hfWHZe3O2TgATdMd/pJfZLA1UmEPDgdjAz3slyXXnK0jMu9SM9lNpnN1xDC1oOm
+	rUoCKjBykCiOF5T2RnX16yQWjQ4jk4TG/mZtpozeHt+o7zqxUyY6t6Ig0MbUCqKM
+	4qmmc9c88rCWcjSGYdbn4VgkTjpzxLmyNpUS+8W8g5JnbHWs/KdGehkR+MgYEWdB
+	WI9tdK32Uw9VQq1hl2w2+zTDv4n8WNQy153L46qO47bVpHARDzscPFrWn2c5NIzQ
+	I+idRdcPp5A5Fkx1gp5ief3FV40bNoGCNB0YIaOLL+xP5LejWq0T/jIgT5g==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hj3u610ex-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:43 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93ca9b53afaso482987085a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:37:43 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 13:37:41 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-5337f26ee19so54434281cf.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793021863; x=1793626663; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793021861; x=1793626661; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8NVtysIHAb2aw6KysRyb98OnPA6mo3D+Nkw0IkOczVk=;
-        b=bSAnt6cMZW7KcRLSIeJAzPv2oCaHlcXgaQgkn0WN2UemwkTlyQ+vXzlPr25Wq6GryN
-         ZJyuQX8mTu0Aq9zAR48+56nweMAdOqPpyPK0dmcLJMpaeFem6NYOn71uMeVKvHenXais
-         yPAnlHFBrPILCKf4FnzJy+xdy/aQtt3s/wKlLiZ/5akqMF+PZeIv1NdsY5LdEMIflC9T
-         HgM4R/TP6q4G4lmOHOUfLIDRlY2G5TKMjJqkjOmD+FY3RX+H5NNnYOA6VjgNFOHrC9oR
-         qpZ7BT2vfI3yo4l3/0eN2fdh3NAe4uxXpYZyrmWL4XunPpPrLQEdEfJon+Wl/g59o2//
-         IK1w==
+        bh=RuRFymShgsilHwdTJCHghvu8/w7kYi6eDSMaIMLmBKI=;
+        b=Uq5BcEw2rdrYvjKRHHdBvR7cj7rPh9PM1HQgSGGX2Qk9anwQ2mmabb4W1QrbkFwwaV
+         No3e5+dI5ysq0L2ylk9/BXFypaK3D9R7p8sO49wuGV2RMfuC9W1tRJTf7kBn5UUavug8
+         6aWNKnggoP5y8Vih4tG+803u90mV8Gghg/LwdX8XTgIiihx19pquB0kwQb+liIi1nUCN
+         c/hlt8IJKsom7dNb/F1UgrET+p4tUh58KwJzZ+izVeFDUvM4ZufSigB3tamlJfdZhG6c
+         tbSOpuAHCYAfvzjJpvCLYUf/8/26+8vxGMHuCZ2RbGpbZ7AB3AfFMOaYcKa3Uuet7MyC
+         gYIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793021863; x=1793626663;
+        d=1e100.net; s=20260707; t=1793021861; x=1793626661;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8NVtysIHAb2aw6KysRyb98OnPA6mo3D+Nkw0IkOczVk=;
-        b=idBy19WhTqiZZwRzMXWUeaiGvnjEwB64JAjFeHe4zUT5YB3eSb2OT61bi5zgbF/CVC
-         1bSPESd2NzVsjo8HJOK/StqHSQFxmlgbOtYzPNUg+qt9YjUYYSG8R/2D6ojdZyhetdzG
-         Hcf8+9LilTONdxhd02YdSvt1DlYQAfm58FDAgzsmZqXVJqsO3YB/cB+OwqIoHZ4Df/rf
-         jsCkA/gvlaOq3zmaG0j6qQdq0KlAPXvCQbU+RaWKPVne+IhxEXzRtnGDHYqdxAXbxxgo
-         ScF0SfZOuRU7103/UhA5/pSMsURlTTJnIspQYorqT9g3t5b2nk8htelOmX7VO8fsSn+R
-         1MOg==
-X-Forwarded-Encrypted: i=1; AKwUvBzkLgQVFNmqHqql54PgM6HNVQ+Sj2r8ylOwtdN3+1Cj+9x6133dWR6NGrAoiDiMApRmsmhfVFX0Yzi+PFi3@vger.kernel.org
-X-Gm-Message-State: AFq9FYKx3G2D7fRDOWb6TFCoXYvUZch7NQhAGgu3kG2MFSZv50rhPRIr
-	jadTf9eFjPJHjp86Sn9fxRzs6hxGBLSIN6sxIgw8SJ8LYN4jf2UIyuxCC5yK5VppqrRzu7jBtoV
-	kRZ6Jt8/lxRNZb/Tb8nlF1xBRP8UVXQPIxrakCntqYSwz1S8JGR5RgS5I/WmnX4rI6o/9
-X-Gm-Gg: AYBFou3R0uOGp6LHtpmzZwaHOXgsmwRt9OCY8GOEbXpV9HG1yuBd9JM49Tac3vQrRko
-	+I6WfzIBAblQUP9Ru7bphTu+pKPJK4dfcjxv43wstlwL1SeONtzqVYRliapk2Juv22tTPRCeQ4D
-	uBBE9lNSOMN7u/Gd1MvXqwnKBzpLdOeNjVpd2iNlNftoRExbshsEcNnol6AFXQ3XcacQhm6H8WR
-	PyP/usOax/c5jLE9CQBNWZcaS0u246tatRCe+TFudwinN6RQ5bgSszW/neDAE8yaJOWL6Lr9USE
-	bgOgZXuNhQhWZNmR1rvPWQOuMSAdIQoaq7bOm7sM8eVHfw2XKpOUelwXgoPD2uPNDBy0sFnI25+
-	+HET13pK/+vjagmyzYhIuyBRC
-X-Received: by 2002:a05:620a:294a:b0:93e:c12c:f13d with SMTP id af79cd13be357-940ef93d216mr1021019885a.71.1793021862826;
-        Mon, 26 Oct 2026 06:37:42 -0700 (PDT)
-X-Received: by 2002:a05:620a:294a:b0:93e:c12c:f13d with SMTP id af79cd13be357-940ef93d216mr1021014585a.71.1793021862215;
-        Mon, 26 Oct 2026 06:37:42 -0700 (PDT)
+        bh=RuRFymShgsilHwdTJCHghvu8/w7kYi6eDSMaIMLmBKI=;
+        b=sHonDo9Lz81N3tnqrZCvWSmmrpHglsvXfWyvgckHdI+V/kbAOzccriSCwp71Nl1Pf3
+         tbdrrtt5bT4140gtc2t16AtPxu+PI2S7f0iFjRVnzTNlwrjJS9Rz7dGGoCtSxRsmMFRx
+         7ZHGCdnOs3lMLzOGpjZi2uG0xFJnctU0n/vjIic3bz3Pm//ZUy+CJ5IoUjuXyObaJGjB
+         Nxs8c+lhjfwjxv4SJnV14dklHVPAOrORhYAj/u5YvpzjRRJ1X9OyLxsj8+8HWtOjEWCN
+         ug3PRg3Yo2NLIGVcgWUWWR3kIDOOVlwnnn3TJ7B97yRUPALxGc0kuyyhQjWsuEvDLYaV
+         +PRA==
+X-Forwarded-Encrypted: i=1; AKwUvBzIgN04YW8YTpf0m/ZW47Znf8tAGLo0JYPSs2YpyzXJlui2WE+36lpV+U5wEY/gk78/QYVpaZpLsfRdorrD@vger.kernel.org
+X-Gm-Message-State: AFq9FYLp88Nv/+SGiKj7vEcs6635diEGepNx6dxaNIG8aSFiIdi+cGPw
+	m2JSZG+AiuldVsyb0NFjNH5t07TO6limNiBvGYv6+Rq2Hce1hj+BjDlfBpKUYvroGvlXI4lz3bH
+	81mkneiyh1d7tyluhMP+wx7A1AATzMJuOAUpPERW+P3x0hxC64vuf2JODBlJZAURwTgo3
+X-Gm-Gg: AYBFou3owZ9NMocEY2KIZK55i3nkMnGNJKVtJ1KYLROmwh7AIdzZGrtXI8agp2JEDDb
+	3xlbz/Q1iMcgCD8Eiq3zj6pS1uKKrQ53vp6zQgagGkTCKC3RjcQunNZXmF61pBrG7Hvdv8LbUZ9
+	WB5P9biDRljiUkDYRI09V7qGAiR6/1FTRLPa8Y9pzrW7HjcG6SXOZG6xgLUjWAhdfrkI10JNlAq
+	vnQNnZdCI5m2VPyDSWiZrVuWpz7HO4KWXkKUONsKGpCR2IwRonDoqLL2XTGV2B1T5/5QJc76bFs
+	4JzQtcRg8LnBVPYns7e7Q3wnmwcsWtgS7X7hkNzwg6GlVYAymDUpRpo3wektFQuBo5/QsQMoAHt
+	7wPhrOlvC0zNVtrbDcVCD3H81
+X-Received: by 2002:a05:620a:46a4:b0:93f:2f48:c9e5 with SMTP id af79cd13be357-940ef8c944cmr1071685785a.34.1793021860667;
+        Mon, 26 Oct 2026 06:37:40 -0700 (PDT)
+X-Received: by 2002:a05:620a:46a4:b0:93f:2f48:c9e5 with SMTP id af79cd13be357-940ef8c944cmr1071681385a.34.1793021860265;
+        Mon, 26 Oct 2026 06:37:40 -0700 (PDT)
 Received: from lin-0772.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3eb8f305sm15376512f8f.3.2026.10.26.06.37.40
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3eb8f305sm15376512f8f.3.2026.10.26.06.37.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 06:37:41 -0700 (PDT)
+        Mon, 26 Oct 2026 06:37:39 -0700 (PDT)
 From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -109,9 +109,9 @@ Cc: atanas.filipov@oss.qualcomm.com,
         Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
         linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v3 6/6] media: qcom: camss: sm8250: set the camera NoC AXI rate from the VFE
-Date: Mon, 26 Oct 2026 15:37:26 +0200
-Message-Id: <20261026133726.3249235-7-atanas.filipov@oss.qualcomm.com>
+Subject: [PATCH v3 5/6] media: qcom: camss: sm8250: set the VFE AREG clock rate from the VFE
+Date: Mon, 26 Oct 2026 15:37:25 +0200
+Message-Id: <20261026133726.3249235-6-atanas.filipov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261026133726.3249235-1-atanas.filipov@oss.qualcomm.com>
 References: <20261026133726.3249235-1-atanas.filipov@oss.qualcomm.com>
@@ -125,24 +125,24 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 9FGuhZTmuuzp2Ftu27fQ6izIWc6faVQf
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA1NCBTYWx0ZWRfXz3pnI+j0yDi3
- PUHSXHHVHlo3MyhiH1FwjMn6KC6ZittgVl9lVjG4pYyL6be+ygYZrmtrxgxDY49peYJTwqbCQD+
- MUNkq8RIqmRupCQvH5A/jGlE01vmKGje5Y6FEiIBXJYyi7DQfWGrtbsjuYWdRmJ77wHVkNL7AIn
- dIIRIvP/IT2xoe1rLFMNdZIXn6bj+55MkgSO9HWlFUwvZMXimT42R3x+99/gyl9p8zftqT31RYU
- A39A4/IF2EHyMN7FCgbvazWYhDB9/4Xf58aL0YPP0zd3K8wG5TNRHoOZvUXhXbt7zi8/xzAuVp4
- bYMgtpLVPzyN5Ollbyo6t4jHX0ei5uqaKqOYR4P4Ck0NUqmnWigdHaP2Ia8IRqV45Pdgzd3Vz5n
- cUpJ5CgvlxPhZXk1Ovtyu4N/TGbmSt+S5RvZXzB3hXAiVZIH3Mk3h+1UWe17rCM8gViHngUZ0BY
- b8q6mJuP3y7aBK6oACA==
-X-Proofpoint-ORIG-GUID: 9FGuhZTmuuzp2Ftu27fQ6izIWc6faVQf
-X-Authority-Analysis: v=2.4 cv=K823jCWI c=1 sm=1 tr=0 ts=6adf57a7 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Proofpoint-GUID: kwRUAhsCN-Q6YToyBQBMq71oFOqAN48E
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA1NCBTYWx0ZWRfX/MzwaZ2rqQMV
+ vJdUQkGr0JafxQBqTPRlhDmiRrGCld3ym0oLNkyQWhzIBubqIQKTJTZsxwUfZIWaISfc5poFThv
+ 5FjYh7Z3RlwAs+NjALp0kWNN0BhBhCV4mYcwoHjj8f/JhR767EcHKTN7IP5xp8Sqws9wu5VcC3K
+ 0tPetN6Tc/ztKEpjhnelDZCxb8zvzewPbRiSK/+y96iV5X6sTMRAsUUVs7iD8lWmIrb4IGAeoj/
+ e5aCTOBeDRKs+edJAEkmj/r5r7KorWaiIR1Fjm69Sv+VKM+JxT6EvEeBm/jhWw1TAL+7aTWKgxB
+ DZ1jsMqaaq8H8d/e9X6LmVtzccP1dmx7SHTubUSiBbEIZDC3KBBkOz0ULklzCz4EBPiYmK+8k3N
+ b2Ol73GxLb61bH6IpTFiYb+5exlSxlaP/Y+MABmGjT4DR4WS+Bl4qvPEPq/wJL3xunSN5gWSuE3
+ 2sjwkDraL4kDkdYxtZA==
+X-Proofpoint-ORIG-GUID: kwRUAhsCN-Q6YToyBQBMq71oFOqAN48E
+X-Authority-Analysis: v=2.4 cv=K823jCWI c=1 sm=1 tr=0 ts=6adf57a5 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=FiRPRoyJa4ALD98OXUAA:9 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA1NCBTYWx0ZWRfX+SvmUA/X5VFc
- kPqbSOpFcj68GWybfoCV8XhST69S51WKn0capuhlhqC0CyWKi/M9eg/BdxQ9jp2zvlxbCFHd21K
- 7CkUi9PEYJcmU7flAatXEIJpez9AEjA=
+ a=QxXRlGHHTI4QcL78iLwA:9 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA1NCBTYWx0ZWRfX1MiOHZ6O7Syd
+ jerSmJw2yj/8m9SZ1/tb2SfIcgsvNUGVPrVq9HPm9J2lg9J86YkC2TVpzxo2/uCyveHTuKU6D22
+ 43f66lG5OF0DQNJybYP+h7DlARboiJ0=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-26_02,2026-10-21_02,2025-10-01_01
@@ -152,96 +152,82 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260054
 
-The SM8250 VFE resources list both the camera NoC AXI RCG,
-camnoc_axi_src, and its camnoc_axi branch. The camnoc_axi_src levels
-are never applied, since vfe_match_clock_names() does not match that
-name, and they list 480 MHz, which the RCG does not support. The
-camnoc_axi branch has no rates, so the camera NoC runs from XO and two
-concurrent streams stall.
+The SM8250 VFE AREG clock lists four rates, 100, 200, 300 and 400 MHz,
+in both the VFE and the CSID resources. The VFE only enables it, as
+vfe_match_clock_names() does not match the AREG clock name, so its rate
+is set by the CSID, which always selects the lowest one.
 
-Drop camnoc_axi_src, as the camnoc_axi branch keeps it enabled through
-its parent, and list the 300 and 400 MHz camera NoC AXI rates for the
-camnoc_axi branch, whose rate the VFE sets through the parent. The four
-VFEs share the camnoc_axi clock, so it runs at the highest rate
-requested by the running VFEs.
+Match the VFE AREG clock in vfe_match_clock_names(), list a single
+400 MHz rate for it and drop its levels from the CSID resources. The
+AREG clocks of VFE0 and VFE1 are separate clocks on the fast AHB
+source, so a fixed rate keeps one VFE from lowering it under the other.
 
 Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/camss.c | 28 ++++++++++-------------
- 1 file changed, 12 insertions(+), 16 deletions(-)
+ drivers/media/platform/qcom/camss/camss-vfe.c | 3 +++
+ drivers/media/platform/qcom/camss/camss.c     | 8 ++++----
+ 2 files changed, 7 insertions(+), 4 deletions(-)
 
+diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
+index 30504e614e4b..d38491a845d8 100644
+--- a/drivers/media/platform/qcom/camss/camss-vfe.c
++++ b/drivers/media/platform/qcom/camss/camss-vfe.c
+@@ -907,12 +907,15 @@ static int vfe_match_clock_names(struct vfe_device *vfe,
+ {
+ 	char vfe_name[7]; /* vfeXXX\0 */
+ 	char vfe_lite_name[12]; /* vfe_liteXXX\0 */
++	char vfe_areg_name[12]; /* vfeXXX_areg\0 */
+ 
+ 	snprintf(vfe_name, sizeof(vfe_name), "vfe%d", vfe->id);
+ 	snprintf(vfe_lite_name, sizeof(vfe_lite_name), "vfe_lite%d", vfe->id);
++	snprintf(vfe_areg_name, sizeof(vfe_areg_name), "vfe%d_areg", vfe->id);
+ 
+ 	return (!strcmp(clock->name, vfe_name) ||
+ 		!strcmp(clock->name, vfe_lite_name) ||
++		!strcmp(clock->name, vfe_areg_name) ||
+ 		!strcmp(clock->name, "vfe_lite") ||
+ 		!strcmp(clock->name, "camnoc_axi") ||
+ 		!strcmp(clock->name, "camnoc_rt_axi"));
 diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 911ceb7202ab..8ffe02d97dbb 100644
+index 80eab898611d..911ceb7202ab 100644
 --- a/drivers/media/platform/qcom/camss/camss.c
 +++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -2120,13 +2120,12 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
- 	/* VFE0 */
- 	{
- 		.regulators = {},
--		.clock = { "camnoc_axi_src", "slow_ahb_src", "cpas_ahb",
-+		.clock = { "slow_ahb_src", "cpas_ahb",
- 			   "camnoc_axi", "vfe0_ahb", "vfe0_areg", "vfe0",
- 			   "vfe0_axi", "cam_hf_axi" },
--		.clock_rate = { { 19200000, 300000000, 400000000, 480000000 },
--				{ 19200000, 80000000 },
-+		.clock_rate = { { 19200000, 80000000 },
- 				{ 19200000 },
--				{ 0 },
-+				{ 300000000, 400000000 },
- 				{ 0 },
+@@ -2053,7 +2053,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.clock_rate = { { 400000000 },
  				{ 400000000 },
- 				{ 350000000, 475000000, 576000000, 720000000 },
-@@ -2146,13 +2145,12 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
- 	/* VFE1 */
- 	{
- 		.regulators = {},
--		.clock = { "camnoc_axi_src", "slow_ahb_src", "cpas_ahb",
-+		.clock = { "slow_ahb_src", "cpas_ahb",
- 			   "camnoc_axi", "vfe1_ahb", "vfe1_areg", "vfe1",
- 			   "vfe1_axi", "cam_hf_axi" },
--		.clock_rate = { { 19200000, 300000000, 400000000, 480000000 },
--				{ 19200000, 80000000 },
-+		.clock_rate = { { 19200000, 80000000 },
- 				{ 19200000 },
--				{ 0 },
-+				{ 300000000, 400000000 },
  				{ 0 },
+-				{ 100000000, 200000000, 300000000, 400000000 },
++				{ 0 },
+ 				{ 0 } },
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+@@ -2070,7 +2070,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.clock_rate = { { 400000000 },
  				{ 400000000 },
+ 				{ 0 },
+-				{ 100000000, 200000000, 300000000, 400000000 },
++				{ 0 },
+ 				{ 0 } },
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+@@ -2128,7 +2128,7 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
+ 				{ 19200000 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 100000000, 200000000, 300000000, 400000000 },
++				{ 400000000 },
  				{ 350000000, 475000000, 576000000, 720000000 },
-@@ -2172,13 +2170,12 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
- 	/* VFE2 (lite) */
- 	{
- 		.regulators = {},
--		.clock = { "camnoc_axi_src", "slow_ahb_src", "cpas_ahb",
-+		.clock = { "slow_ahb_src", "cpas_ahb",
- 			   "camnoc_axi", "vfe_lite_ahb", "vfe_lite_axi",
- 			   "vfe_lite", "cam_hf_axi" },
--		.clock_rate = { { 19200000, 300000000, 400000000, 480000000 },
--				{ 19200000, 80000000 },
-+		.clock_rate = { { 19200000, 80000000 },
+ 				{ 0 },
+ 				{ 0 } },
+@@ -2154,7 +2154,7 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
  				{ 19200000 },
--				{ 0 },
-+				{ 300000000, 400000000 },
  				{ 0 },
  				{ 0 },
- 				{ 400000000, 480000000 },
-@@ -2196,13 +2193,12 @@ static const struct camss_subdev_resources vfe_res_8250[] = {
- 	/* VFE3 (lite) */
- 	{
- 		.regulators = {},
--		.clock = { "camnoc_axi_src", "slow_ahb_src", "cpas_ahb",
-+		.clock = { "slow_ahb_src", "cpas_ahb",
- 			   "camnoc_axi", "vfe_lite_ahb", "vfe_lite_axi",
- 			   "vfe_lite", "cam_hf_axi" },
--		.clock_rate = { { 19200000, 300000000, 400000000, 480000000 },
--				{ 19200000, 80000000 },
-+		.clock_rate = { { 19200000, 80000000 },
- 				{ 19200000 },
--				{ 0 },
-+				{ 300000000, 400000000 },
+-				{ 100000000, 200000000, 300000000, 400000000 },
++				{ 400000000 },
+ 				{ 350000000, 475000000, 576000000, 720000000 },
  				{ 0 },
- 				{ 0 },
- 				{ 400000000, 480000000 },
+ 				{ 0 } },
 -- 
 2.34.1
 
