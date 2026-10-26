@@ -1,44 +1,44 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793055017;
-	b=Y+9y0ASpUUcmlF/Pp2NqxS+UwF8nx3MeyKNfLr7WtBQ18DkXqviKrJlsX9SnMKicp3+x
-	 GIGsX10hF1gIHpAJbfQ0ff9F54w8lyWQDIOZ5odRY4NPW0uCMuBY3PklN44MNZHq+ky17
-	 j7lXnV0XeLbXtIE3scLj7VCOLrnXvMR3CDXb+W+0zOM8itc+Hp8/aVAUZYXGBcbnFx0Cg
-	 Gob1zUa9YcQbMhmdA7FdewuWxOCCHDgcicxiLkSk4zPnQhBL5gBdB72GfVRTfTcK1rf1C
-	 O7kwBp1/2m7sl3GYU0PUJAeAMjJFCgg9WdkZUyhDxg7Q5ay+/POuauqCLnCWjdaP2Hw==
+	t=1793055030;
+	b=qT6sMUcRttAQIzmRbHVIRZeroQHScEKZMxI/D5bURNhTp45aA3cxA2Ak4lrV/HdF1dJx
+	 I80O3Rj9CWMNqvYV5UqwrSXUxYqqIGEfXegEqPipJM9WlimauqtAVr6a/GqElvAR0WHPG
+	 3XUBKpxD1xPxTX/LLQ37cOl8HMnwNM71iD80zXMbzsZEAHoJ/ulg3wuFVYYqrEBKdEjvm
+	 qrwJJdR2PUSRRGth401wMetmUaIOC4gleSjtktdXnivYL34Kxs9ITZdqWqG1QdLy/bzCv
+	 LVzeazfluY4gKyjhuuwObDo+oesk57DRpAiGVBoyd9wUXITf54nl+3Svv1YkKi0glHA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793055017;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793055030;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=EVk+yjL8wX++W59cZlj03JU3r1mhQtWxs7tNqn9bqvI=;
-	b=T2QBes+v8CJRrykz8hzXH8Z5DDn7nJgkz/LOI2GS+ML8Xf5FQlrMLCxSs0I76A3uOGF0
-	 ysRr2wQoUUGBg9mpapfrfbrJlDvDcIDQOwufsgDSFMFdbn3dEZx7F+DjfmfcOBGezBAWb
-	 ixM4C3p1TgQSMNqGFC1dm9Jx/VCvbtIXvX0Rf4I1Dl7uvCh0SCuJqfDq2NA0eqFyt5jF6
-	 zkexyy8Cy3yjjWcKX/3cj5KhdfhAa7KwzI3Y+Qwqb1Yr7T8BdwLYErVxFG/J7mmvDZxRr
-	 nWZDbJWQHKqPC9V4w7FEAG7SvMiFTV9f9N+x+UbKTlQMjoOyFzN61aFITJH0Tlm5fPA==
+	bh=Yymwnu6zD+vpaCEhbkClPScnqg2Frrzq7tYxOW9Q5bM=;
+	b=o7v0X6pG65hXpBGIuh3UR5LLTOonWJPXjyT8z8X5o4OjWyU28bpfP+HYUzigt/6pjCt6
+	 awEoqG5KDx3jHzuMp6eF+eqnh3Uk2h/UhCQDWCOHPl9e93DL9jyh3tGzAQROj/69Dw2Ll
+	 9AXFk5Tt42yK35vaNX2MWct2qiWdptMifWHnQyuuEUmkTgwEf3ii/6BjMDyDhyaGlEpvW
+	 1BtKn6yuS9zsYvTELlyYhkv4n85B9ZuNETZubr1ZgMty6NzJkdNyreDfswmcck1rf+yfo
+	 fHdSv9tg55Yo69RnArYDWYNNrWNVzrOlKTt9InRSxjdyJB+Zz1vF9fvgRFBlwrErjnA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jgHcbQI0;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZvynyYdM;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACB2606A31D;
-	Mon, 26 Oct 2026 22:50:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05FC7606A328;
+	Mon, 26 Oct 2026 22:50:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jgHcbQI0
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F04AD1F01828;
-	Mon, 26 Oct 2026 22:50:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZvynyYdM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 127041F01828;
+	Mon, 26 Oct 2026 22:50:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793055016;
-	bh=EVk+yjL8wX++W59cZlj03JU3r1mhQtWxs7tNqn9bqvI=;
+	s=k20260515; t=1793055029;
+	bh=Yymwnu6zD+vpaCEhbkClPScnqg2Frrzq7tYxOW9Q5bM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=jgHcbQI09A3d3M0g/KmmtEpTADbCvZC/tSH0rghK+sXC66YowBmkjj4kU47nQ2esu
-	 I5bAe6PuHSTgGorvWHVYf0/Gw7cXB83ntq1USkuM6sq0T6JO55+t5UzaNkWDJjRCdu
-	 1xokByT60JmhoChA/V3lAIiKCH6UZ8/1iYMdbAtCQSuNnodd9IYFQsrquAEYGOnYxo
-	 RUQxuhM1JuBd7AWT8f30BGBfBICItYko+hOX9ZIMdI+sU5L9A1i1pPBy5+6n+G9GTv
-	 ZaPextkgy1ow5F+QLR2iZ9wmCuOI8DxOPW6lOjqyckJnu5HE3ue2fe/aujQhJuPlsw
-	 gxOtMdeHbaBHA==
+	b=ZvynyYdMCDALgwVEZCxDgJMmutrvexEy4mofrRT+G/sqGWK9LzLeBL729MGYzCwf7
+	 1PddGBbjVAhsKkP1TFcZeTM25WoIlVrzTEbCLl16TfxWZy77spwrCGzRFLi3aHPRdj
+	 /dBTYt2ShWbbx6BB3q1caZ5m1eRrmDOhIkXz4ixMhRE2CSl3yCj/f+L4V2hpnIbsQu
+	 CZqbr2bqcbzmHoXx+ox58E7ZimIVK4AV8xoVSm8Dgy1CrT85NDmYprriZtEUImuFfY
+	 N/FAlc34Ls87mJECO5g+fZb2/TWN+IMC4gL0EAzU78yvx17/uFiN/+z8HfIYy0wPLA
+	 AKLqJf5v1MKMg==
 From: Vladimir Zapolskiy <vz@kernel.org>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -57,9 +57,9 @@ Cc: linux-arm-msm@vger.kernel.org,
 	linux-phy@lists.infradead.org,
 	Conor Dooley <conor+dt@kernel.org>,
 	devicetree@vger.kernel.org
-Subject: [PATCH v2 3/7] media: qcom: camss: Allow CSI2 PHY devices without CSIPHY resources
-Date: Tue, 27 Oct 2026 00:49:53 +0200
-Message-ID: <20261026224957.1115370-4-vz@kernel.org>
+Subject: [PATCH v2 6/7] arm64: dts: qcom: sm8450: Add CAMSS device tree node
+Date: Tue, 27 Oct 2026 00:49:56 +0200
+Message-ID: <20261026224957.1115370-7-vz@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20261026224957.1115370-1-vz@kernel.org>
 References: <20261026224957.1115370-1-vz@kernel.org>
@@ -74,91 +74,240 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If CAMSS CSIPHYs are supported by the stand-alone CSI2 PHY driver only,
-there is no need to provide description of legacy CSIPHY resources in
-the CAMSS driver, therefore if CSIPHY resources are not given for some
-supported platform, use CAMSS CSIPHY port numbers as CSIPHY identifiers.
+Add Qualcomm SM8450 CAMSS device tree node to the platform dtsi file,
+the CAMSS input ports are connected to output ports of CSIPHY devices.
 
 Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
 ---
- drivers/media/platform/qcom/camss/camss-csiphy.c | 16 +++++++++++++---
- drivers/media/platform/qcom/camss/camss.c        |  8 ++++++--
- 2 files changed, 19 insertions(+), 5 deletions(-)
+ arch/arm64/boot/dts/qcom/sm8450.dtsi | 173 +++++++++++++++++++++++++++
+ 1 file changed, 173 insertions(+)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers/media/platform/qcom/camss/camss-csiphy.c
-index f99eea2ef228..8ecd514451d2 100644
---- a/drivers/media/platform/qcom/camss/camss-csiphy.c
-+++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
-@@ -799,6 +799,11 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
- 	return ret;
- }
+diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
+index f429dcaf1075..b4f7672cec94 100644
+--- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
+@@ -3310,6 +3310,173 @@ cci1_i2c1: i2c-bus@1 {
+ 			};
+ 		};
  
-+/* Fallback to generic SDM845 compatible formats for non-legacy CSIPHYs */
-+static const struct csiphy_subdev_resources csiphy_res_phy = {
-+	.formats = &csiphy_formats_sdm845,
-+};
++		camss: isp@acb6000 {
++			compatible = "qcom,sm8450-camss";
 +
- /*
-  * msm_csiphy_subdev_init - Initialize CSIPHY device structure and resources
-  * @camss: CAMSS structure
-@@ -808,7 +813,7 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
-  */
- int msm_csiphy_subdev_init(struct camss *camss, u8 port)
- {
--	const struct camss_subdev_resources *res = &camss->res->csiphy_res[port];
-+	const struct camss_subdev_resources *res = camss->res->csiphy_res;
- 	struct csiphy_device *csiphy = &camss->csiphy[port];
- 	struct device *dev = camss->dev;
- 	struct device_node *ep, *remote;
-@@ -836,8 +841,13 @@ int msm_csiphy_subdev_init(struct camss *camss, u8 port)
- 	}
++			reg = <0 0xacb6000 0 0x1000>,
++			      <0 0xacb7000 0 0x1000>,
++			      <0 0xacb9000 0 0x1000>,
++			      <0 0xacbb000 0 0x1000>,
++			      <0 0xacc6000 0 0x1000>,
++			      <0 0xacca000 0 0x1000>,
++			      <0 0xacf6000 0 0x1000>,
++			      <0 0xacf7000 0 0x1000>,
++			      <0 0xacf8000 0 0x1000>,
++			      <0 0xac62000 0 0x3000>,
++			      <0 0xac71000 0 0x3000>,
++			      <0 0xac80000 0 0x3000>,
++			      <0 0xacc7000 0 0x2000>,
++			      <0 0xaccb000 0 0x2000>;
++			reg-names = "csid_wrapper",
++				    "csid0",
++				    "csid1",
++				    "csid2",
++				    "csid_lite0",
++				    "csid_lite1",
++				    "tpg0",
++				    "tpg1",
++				    "tpg2",
++				    "vfe0",
++				    "vfe1",
++				    "vfe2",
++				    "vfe_lite0",
++				    "vfe_lite1";
++
++			clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
++				 <&camcc CAM_CC_CORE_AHB_CLK>,
++				 <&camcc CAM_CC_CPAS_AHB_CLK>,
++				 <&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
++				 <&camcc CAM_CC_CPAS_IFE_0_CLK>,
++				 <&camcc CAM_CC_CPAS_IFE_1_CLK>,
++				 <&camcc CAM_CC_CPAS_IFE_2_CLK>,
++				 <&camcc CAM_CC_CPAS_IFE_LITE_CLK>,
++				 <&camcc CAM_CC_CSID_CLK>,
++				 <&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
++				 <&gcc GCC_CAMERA_HF_AXI_CLK>,
++				 <&camcc CAM_CC_IFE_0_CLK>,
++				 <&camcc CAM_CC_IFE_0_FAST_AHB_CLK>,
++				 <&camcc CAM_CC_IFE_1_CLK>,
++				 <&camcc CAM_CC_IFE_1_FAST_AHB_CLK>,
++				 <&camcc CAM_CC_IFE_2_CLK>,
++				 <&camcc CAM_CC_IFE_2_FAST_AHB_CLK>,
++				 <&camcc CAM_CC_IFE_LITE_CLK>,
++				 <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
++				 <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
++				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
++			clock-names = "camnoc_axi",
++				      "core_ahb",
++				      "cpas_ahb",
++				      "cpas_fast_ahb",
++				      "cpas_vfe0",
++				      "cpas_vfe1",
++				      "cpas_vfe2",
++				      "cpas_vfe_lite",
++				      "csid",
++				      "csiphy_rx",
++				      "gcc_hf_axi",
++				      "vfe0",
++				      "vfe0_fast_ahb",
++				      "vfe1",
++				      "vfe1_fast_ahb",
++				      "vfe2",
++				      "vfe2_fast_ahb",
++				      "vfe_lite",
++				      "vfe_lite_ahb",
++				      "vfe_lite_cphy_rx",
++				      "vfe_lite_csid";
++
++			interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 640 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 641 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "csid0",
++					  "csid1",
++					  "csid2",
++					  "csid_lite0",
++					  "csid_lite1",
++					  "vfe0",
++					  "vfe1",
++					  "vfe2",
++					  "vfe_lite0",
++					  "vfe_lite1";
++
++			interconnects = <&gem_noc MASTER_APPSS_PROC 0
++					 &config_noc SLAVE_CAMERA_CFG 0>,
++					<&mmss_noc MASTER_CAMNOC_HF 0
++					 &mc_virt SLAVE_EBI1 0>;
++			interconnect-names = "ahb",
++					     "hf_mnoc";
++
++			iommus = <&apps_smmu 0x800 0x460>;
++
++			power-domains = <&camcc IFE_0_GDSC>,
++					<&camcc IFE_1_GDSC>,
++					<&camcc IFE_2_GDSC>,
++					<&camcc TITAN_TOP_GDSC>;
++			power-domain-names = "ife0", "ife1", "ife2", "top";
++
++			status = "disabled";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					camss_csiphy0_inep: endpoint {
++						remote-endpoint = <&csiphy0_out_ep>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					camss_csiphy1_inep: endpoint {
++						remote-endpoint = <&csiphy1_out_ep>;
++					};
++				};
++
++				port@2 {
++					reg = <2>;
++
++					camss_csiphy2_inep: endpoint {
++						remote-endpoint = <&csiphy2_out_ep>;
++					};
++				};
++
++				port@3 {
++					reg = <3>;
++
++					camss_csiphy3_inep: endpoint {
++						remote-endpoint = <&csiphy3_out_ep>;
++					};
++				};
++
++				port@4 {
++					reg = <4>;
++
++					camss_csiphy4_inep: endpoint {
++						remote-endpoint = <&csiphy4_out_ep>;
++					};
++				};
++
++				port@5 {
++					reg = <5>;
++
++					camss_csiphy5_inep: endpoint {
++						remote-endpoint = <&csiphy5_out_ep>;
++					};
++				};
++			};
++		};
++
+ 		csiphy0: phy@ace4000 {
+ 			compatible = "qcom,sm8450-csi2-phy", "qcom,x1e80100-csi2-phy";
+ 			reg = <0 0x0ace4000 0 0x2000>;
+@@ -3349,6 +3516,7 @@ port@1 {
+ 					reg = <1>;
  
- 	csiphy->camss = camss;
--	csiphy->id = res->csiphy.id;
--	csiphy->res = &res->csiphy;
-+	if (res) {
-+		csiphy->id = res[port].csiphy.id;
-+		csiphy->res = &res[port].csiphy;
-+	} else {
-+		csiphy->id = port;
-+		csiphy->res = &csiphy_res_phy;
-+	}
+ 					csiphy0_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy0_inep>;
+ 					};
+ 				};
+ 			};
+@@ -3393,6 +3561,7 @@ port@1 {
+ 					reg = <1>;
  
- 	snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csi%d", csiphy->id);
+ 					csiphy1_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy1_inep>;
+ 					};
+ 				};
+ 			};
+@@ -3437,6 +3606,7 @@ port@1 {
+ 					reg = <1>;
  
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index c54185c93a8a..b0d60e70e4bb 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -4796,7 +4796,10 @@ static void camss_detect_legacy_phy(struct camss *camss)
- 	struct device_node *remote;
- 	struct device_node *ep;
+ 					csiphy2_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy2_inep>;
+ 					};
+ 				};
+ 			};
+@@ -3481,6 +3651,7 @@ port@1 {
+ 					reg = <1>;
  
--	camss->legacy_phy = true;
-+	/* Legacy CSIPHY description implies the provided CSIPHY resources */
-+	camss->legacy_phy = !!camss->res->csiphy_res;
-+	if (!camss->legacy_phy)
-+		goto done;
+ 					csiphy3_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy3_inep>;
+ 					};
+ 				};
+ 			};
+@@ -3525,6 +3696,7 @@ port@1 {
+ 					reg = <1>;
  
- 	/* Find first remote-endpoint and determine if its a PHY */
- 	for_each_endpoint_of_node(camss->dev->of_node, ep) {
-@@ -4810,6 +4813,7 @@ static void camss_detect_legacy_phy(struct camss *camss)
- 		break;
- 	}
+ 					csiphy4_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy4_inep>;
+ 					};
+ 				};
+ 			};
+@@ -3569,6 +3741,7 @@ port@1 {
+ 					reg = <1>;
  
-+done:
- 	dev_dbg(camss->dev, "legacy phy mode %s\n",
- 		camss->legacy_phy ? "true" : "false");
- }
-@@ -4841,7 +4845,7 @@ static int camss_init_subdevices(struct camss *camss)
- 
- 		if (ret < 0) {
- 			dev_err(camss->dev, "csiphy %d init fail\n",
--				res->csiphy_res[i].csiphy.id);
-+				res->csiphy_res ? res->csiphy_res[i].csiphy.id : i);
- 			return ret;
- 		}
- 	}
+ 					csiphy5_out_ep: endpoint {
++						remote-endpoint = <&camss_csiphy5_inep>;
+ 					};
+ 				};
+ 			};
 -- 
 2.51.0
 
