@@ -1,128 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792995777;
-	b=c7LccYqv3DOJj/SnJLvcSFVZ6gUlg3XMPPfKM14RGrWHU1F/YnBtWrcfCoQV/ZSfLIn5
-	 peg8vuNXY4XEX1rJrQKCf9AM3RF8KtIQcfBx6s4TaAgjsdnbftucoyGFiLllHvse179Q0
-	 KTUZdOW8g/7Vpg2+v3l91fqMmcG136TJrWcjCAYT1JF0cjiRR2By6UD1PE1yZ4P5wBnf3
-	 Sjfz7m122Wk19d2Vu2IeMIBc7ZFIQy9eTK3bTKek+rzaI+/cK+0uRrVvxVPkEcRr21lF+
-	 YQoyZ81Sql80mcqSpxtwhfYTeps0srKb7cUW7Mk5oYT0igBELJnxwr4yojOvBoGr4TA==
+	t=1792995787;
+	b=ntXNeRus5DUxR3bJlv7IgbXwbNv2HwjsP/qKhqwnRQle5CEKYdTMoZe50HhWKXP18I/v
+	 gE4ytGg1jFrumE4TG5EyJdbUgSQqaNZg6VMYCYxZ9yuigUivHNv9roScpVGoKEum929pu
+	 l5sEIYkk6FRrlMm1Oddv17Ki86/gvINthwQsseTL3y/oB6BhqzW55QdzWtI8apSYK8lY1
+	 5KfV44z1XcdPwQ+ClGRI7k6kbTb3taidxNHNLYa1z9d3Gx9TCE8GbWrdyX9c9qah97wR+
+	 p3YSEUxRcxbDz579m00321JkD42afE8hAtw7VkBkjFI8eST+PqdNExrjhiNmmgtwyMw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792995777;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792995787;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=BRGzkDJlyaYo27YOEoR3qSlvLhrXH7ug7jX2UAfMTGc=;
-	b=Y5F2KWV4qd3REe+Q7CygnoLPqZTdqvOdNWY3B67+MxKV1/w+Bgv2pEVdRzNbpTAkcxga
-	 tnzx2uUtie8KHH2PhkI9eWlJp2c5P6mPXOBl0gJkykn26foomjUbK33myQ/YO6/BFQB1r
-	 xDZsGRtsiLqjwJyiB8/oDBkHQdeetXBZcaXMiezv4Ptw6q1JpWX5QMe78s8iekBEMVUfq
-	 6T1b2vVr9uHeCKpOLwTW4tmDKEDzvQkux61HxZVK7SS3FDiPa/RvjHIqAxw7VU3hTwQAZ
-	 3Jw7sRsuqQFCgok3HlospHtBx6j91p4aU1t/FGDknJjTuY92Hr5lfwJ8oJ3o/Er5XdA==
+	bh=FOTpEFlT+y/a1rTH+O9UH/+T4QWFtNapc0ipHXawgfI=;
+	b=WOmJHeWODEo9X1NcwC9Ch1bPkI8azjI2/PIZhNsrOhoyC+0ZSe9MX+4hWf71AAemSdTL
+	 b/rwRLmGKwpBvCre8bCsXkD7D9GVgeoTtZXFlNQDBxuI6iz+cfOKiqtFiMm3Ew5y49VLb
+	 qqvXsgxsx9lWCQWl3XZZvVkNYrf5ykeoboJD5IG3Qfj/9hW2ofy+aF9UU65ahLdKjn9EJ
+	 GGq9fclDtE8T56daSJ7bnfBJvjk4PJLPjalW0hRPxaxXGcWouqWn7dAY0FQHKuOXBWZdC
+	 LeRE2Uc4RsNZ7nkb8wtCsJ3vwdkiL4x5pDZmdVhDU1pleGfRPimxYWiR5hgGgVxRPpw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Igk+3iVG;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Yjep0Xqf;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eqq6Xly6;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Jx1l3e09;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96A69606A326
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:22:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 96A69606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABE5A606A31E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:23:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org ABE5A606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Igk+3iVG;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Yjep0Xqf
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69Q4auAF2255188
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:22:56 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eqq6Xly6;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Jx1l3e09
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69Q4axW52727320
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:23:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	BRGzkDJlyaYo27YOEoR3qSlvLhrXH7ug7jX2UAfMTGc=; b=Igk+3iVGlbz5b6tB
-	V0gA1Nrz0Jly4J1OoNE4xjoJzvyRPSUvYvWw5qqIicKvSIFMpsef8xt0gCj8xm6u
-	m+3YAe/99SqF4IOPJYeMV3u2Ko1V4qRB6G2Y+eMGuU5FssFwDbDQYNrc36fCvlYc
-	O0BbhCKv3duQ+abRD280UU5h5nx3fFj/1/w+yVP+P/zvM4xQI18VQikn4VPcPZGP
-	nNEITFedz13srfsp0fnhIfkYyy5z5Y8hYyDCG8prtOzLpxBgNC8oL06RDGX2Qody
-	DkZl0Q1IRZ6f5nDTmYLGJMLnUFa7PLP0gfiyQh+/vS/XClLzwNAIG136J9NUOcwJ
-	xlMm5g==
-Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgmw3n14s-1
+	FOTpEFlT+y/a1rTH+O9UH/+T4QWFtNapc0ipHXawgfI=; b=eqq6Xly6j99rVXxm
+	mTMq6xSCi4SVvYsj6gI/WPSO/xQ3S3GU6gaMtmo6Vk6MCg+dNeUJoFzftv+auoIt
+	Dy08ozdSZLaxETXhRU5WikzK5iroDhSedoGKCVyFGEaDLMcPZfUOfXFm3CuaguJa
+	T0B5KvsRAyxdMnFR4gcC5+VDi1jlyQOaHiTce5Dwcect4a+2VAzt1NxHcQOlvrNl
+	pSINbm5NOU8CAVE0VtjzUmo9SbLqMZNTNULAaPeQ3JESGMi2D9DYFG2JZ2O9T8+B
+	YNy0LsCNrJhJSNVBB1huy5+oOSL3GO/3OBnzwxqe2RHYdN/k4murgsQ36qeGYanK
+	5wkOLw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgkp6n5yj-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:22:55 +0000 (GMT)
-Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-18eb2616974so10200551c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 23:22:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 06:23:05 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e95f8543c9so22155275ad.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 23:23:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792995775; x=1793600575; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=BRGzkDJlyaYo27YOEoR3qSlvLhrXH7ug7jX2UAfMTGc=;
-        b=Yjep0Xqf6bdTiKRuVRARy9CvCTiuRZ2d68nGzYVb6CtG4BeVFbiGQFvJ9WKUU9ekGT
-         nnGSyKxquyu1S7mZnNDih2yW6IXTP7Kh6T0SHWeyx7ynpHqYBbWk9JUIRGm129+YhIAY
-         LFiMHW1zLFueThJ7ANwDRsCUFW54wZlH6AGpbEe9Ga0MTKfoLKSYL/mQ/hEnyeKg0w7p
-         t8n3Rbw/FbH+4BFfZ/6jc4gdCYd6aCXQNWOLxUbMmC86AbGd6UBEdn6iwvGGBjdl8dvB
-         TogHWygR0R5YLouI4QlovcHdCbGcUVJKo8Y4iFmDpxhhW+7NNkJfAWz+oac6TsTDd7JZ
-         WSUg==
+        d=oss.qualcomm.com; s=google; t=1792995785; x=1793600585; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FOTpEFlT+y/a1rTH+O9UH/+T4QWFtNapc0ipHXawgfI=;
+        b=Jx1l3e09FiXVC1g+XtxLvWyTQF/uFw5Iz98owwCe0UEiRV6L1wlgBkdL7pgIA+25XW
+         RLwkasYyxG+WfDg+CWwo0yR/4u0Mx8MrWEkQMaT7TvYyRoP3Do0wZ9k43DIHY7m67VIU
+         mY3zCa8K1dIKBJL1g01RNp9ovHQIzoRaS8Vvwf1UcbkfCKHHX9O5ArUIyrHsMekW8bes
+         nCCXDnI2SXICHAsbyQSAT+Z0ijmOiLIPRlx+OS8+I3eTjz1BudNldWB2/UHpMJn0Fxhd
+         aeGYleKLMLA5HnG3r4zVzeGU8xzvkOe/di2+VwY7Tzqd6CMUI5jgO+1LJn25crZCSA0t
+         VWfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792995775; x=1793600575;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1792995785; x=1793600585;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BRGzkDJlyaYo27YOEoR3qSlvLhrXH7ug7jX2UAfMTGc=;
-        b=gAEXehsOq9htV9d+NGW2DUk/kCX56QeWRVVY9kvuW9KNs9hAIDvbJ6gdRAUwnYTZSX
-         mIORN5/fLDN3rDagp359NuifN3Zm88cbNCz4DAWc2IXLdsTCJq8Cj01uvS4DY5H1EtWt
-         jBukbiR/QaWjjT+ArsuRHdoDk4gbU1tSTTIx+fA1Asoc4BHpfsAidcVYUPgAnNxf60um
-         hx8Z4y2//mezR4O+3oKJwl6AC5HYEHVX27hS3pmGV6/J3XSQCX3NCIisxVk6grI0p9LK
-         +RJVYtn4F/GNgx6GIc7Tp/Dj4GoUJhB4L08rz6sPtlqq77F/IISQx034G85xKLkrMgqh
-         JKgw==
-X-Gm-Message-State: AFq9FYJMVk3JZuNND2uVvpxtX3Gux9mBHirzc8nPjpWdLOmsNM7UgzKx
-	2K1d/TzpWThTqnie3Rdb6REZCaa1Z3OezzC5CEctjVxBkEdWSTOYYrGHwx5LJ3q8sFWnhjNS1Uc
-	jFlKcZlDNp2IWkZ6ZJpSy/QRJYEYKxeLIwCg3E/tXj9OuYtgLBHOJkeLCTn7xr9NBf3ur
-X-Gm-Gg: AYBFou2SgQwinGrodcT0wTBKrouEBaApmraH3thg7ZxqRYyIBFHfbwa0A6bkdINeguv
-	k6yJc9LNldBI95TAjBc2lqWDwALajk3Ogr2yyQg2Oxx4JunixNNC2WJEKNsnBIZPkXKS8dGH5Xa
-	CeeOcQ+KXM0FuIrhvIq17isnQlwaeoiOQdY83x9neAbaNV7YKDH+nfUgeOjQOaiay+k+Xq41K/l
-	2UxIW9ECcmbzmzxOhUsZWsfNuX2nSgiwdEnXMqw9Vp+fUhvXE3nUXu73yiwZekE+tQdLsO5/C4S
-	D2dXYnIOxHhwu4sGahiLGylOPzN/nQmJ/PBjRYO4NzZfljdiegyvBIzQBggfOBjgdMvGEhZVvSC
-	4Jw+OIW+AJddAssdc810PPFWCMfg2xIIQ
-X-Received: by 2002:a05:701b:2405:b0:18c:e014:6f1d with SMTP id a92af1059eb24-19929a9e465mr8204930c88.1.1792995775116;
-        Sun, 25 Oct 2026 23:22:55 -0700 (PDT)
-X-Received: by 2002:a05:701b:2405:b0:18c:e014:6f1d with SMTP id a92af1059eb24-19929a9e465mr8204894c88.1.1792995774577;
-        Sun, 25 Oct 2026 23:22:54 -0700 (PDT)
-Received: from hu-daizhuan-sha.qualcomm.com ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a2a5a515sm19719783c88.19.2026.10.25.23.22.47
+        bh=FOTpEFlT+y/a1rTH+O9UH/+T4QWFtNapc0ipHXawgfI=;
+        b=Oy2CViHJI/xUd6FGxsXhnh68OK+o9BC1oNUzuKjwHVIOmELBoM0iBzcI3SpvJzVCr6
+         tm5AYnCO72xNDRreMJRCozxdik/HRZOM7cCfFnUcyQTPPDO1+2mBm5mkWX1gwjLxRnxD
+         zAfYqqKY6uq4IWlYeiHkXh4x2b2DSO7FvdzlDOCetuGlBFiNm98B6+eRMGM5uTCIuwiX
+         BfBxT8dGPF5hALYtCJYceUkaw5matLVbbIuP609PYBnvcITZr9eV519gFOf1fFECOzYC
+         +8iiqtmQ7NnHwh/lr+OYRl+odXFWBBGwuoqN/T+Vs2fkXOZncD4XoSRS7SFPVBpoKBMv
+         iAbQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxZRbvtCMU1i4Wnmn6uIptKjn3UCgQaaeW7FAbdo7SyucB/aEhBhZEYrBy3A/tebarl/4irqmJ8cvol4ck6@vger.kernel.org
+X-Gm-Message-State: AFq9FYLpexnAopI2lhnSBo/SVhJT2aKrvU9bzGxwME32dpMW/uBQ0K8F
+	vUVC/CvP3hQO7eHZ39Q+CwxTF+Gn9qfJHIKrauMe8kzW6Vj+QNHHBYuA+HI5Y+venwKwuBEyE36
+	tDlI87cLWMMNcUMNGrDwKArQA3Yoo2VpGUav+CSNHWzPydy5FtMRqv1TsbULwc9SqAGmK
+X-Gm-Gg: AYBFou1q5wI9sAUnlosyjClmmSTj+Z8CrxJK7guv10+sIJIjAV9gfaYXm0k8tY55ZYp
+	ibOphsyc5A4i9rJRCsdE+/2P+0G9WWF3u2J+nX9rmVYvZa7atZ0wvOkuD2vG8Yld3HDfzJydiZU
+	x/ZA03CPqTggRm9kVZrY9mSWN6xKxPOLshRdREr8ASR9dQbQSjhHf9WD40A3nvelDK3i3rUD9R7
+	b//n123+6MTBrnj+kBSkyQCjKawF1ZxjAwYUJJsj+RjKkHOfXEF6+I6lv62IO9wUf6gOi4ivk3O
+	Fjk3eqCWR4wJz2w+FthexwNjRflhemUKaEaXxVXlLY7STSC4zRPn94MmkWTLfDwplPKHaxxjwpx
+	rv21yoFFozkQeK2zRfGHLxh6JBbznvqGIkw==
+X-Received: by 2002:a17:903:3850:b0:2ea:7180:3ab9 with SMTP id d9443c01a7336-2ea9c8afeb4mr48270245ad.43.1792995784649;
+        Sun, 25 Oct 2026 23:23:04 -0700 (PDT)
+X-Received: by 2002:a17:903:3850:b0:2ea:7180:3ab9 with SMTP id d9443c01a7336-2ea9c8afeb4mr48269755ad.43.1792995784146;
+        Sun, 25 Oct 2026 23:23:04 -0700 (PDT)
+Received: from hu-jshekhar-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea9b1a1c56sm12633415ad.44.2026.10.25.23.22.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Oct 2026 23:22:54 -0700 (PDT)
-From: Daizhuang Bai <daizhuang.bai@oss.qualcomm.com>
-To: Manivannan Sadhasivam <mani@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-        Jeff Johnson <jjohnson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
-        ath11k@lists.infradead.org, ath12k@lists.infradead.org,
-        Bjorn Andersson <andersson@kernel.org>,
-        Chris Lew <christopher.lew@oss.qualcomm.com>,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
-        Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
-        Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
-        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Subject: Re: [PATCH v4 4/4] wifi: ath12k: Connect to the QMI server belonging to the MHI endpoint that received the packet
-Date: Mon, 26 Oct 2026 11:52:20 +0530
-Message-ID: <20261026062244.2875432-1-daizhuang.bai@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261022-qrtr-multi-ep-v4-4-c6fdb75fcd3e@oss.qualcomm.com>
-References: <20261022-qrtr-multi-ep-v4-0-c6fdb75fcd3e@oss.qualcomm.com> <20261022-qrtr-multi-ep-v4-4-c6fdb75fcd3e@oss.qualcomm.com>
+        Sun, 25 Oct 2026 23:23:03 -0700 (PDT)
+From: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+Date: Mon, 26 Oct 2026 11:51:18 +0530
+Subject: [PATCH v2 08/23] drm/msm/dcp: Add IPCC power notifications
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -132,44 +115,349 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: ityi8fgXoBQ_hIoh8GrH_YQGVNKMGzVN
-X-Proofpoint-ORIG-GUID: ityi8fgXoBQ_hIoh8GrH_YQGVNKMGzVN
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDAyNSBTYWx0ZWRfX3YohMg9ilTY0
- cHJXPncdmH2eTkQ+Qv972s8w9VsvKtNfikN3HyKuu0kgJUVwPp0nd/EpvKGE4t8Dg8HeuWcQBoX
- mIpnCXGjEdpeuF+pR8W3ze6DEjNCUME=
-X-Authority-Analysis: v=2.4 cv=HqHjiETS c=1 sm=1 tr=0 ts=6adef1bf cx=c_pps
- a=SvEPeNj+VMjHSW//kvnxuw==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=zDojY5Dqmkyknr1b:21 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=nUn8ewCANHEy0S7HLBYA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
- a=Kq8ClHjjuc5pcCNDwlU0:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDAyNSBTYWx0ZWRfXzlXED6CLN+fZ
- arPlJUtKZRgurdylF+ZTb/7v1Wz6xoTMFoq5sw2Qw32d//VIppdCLvBPaiFNNWky8WTtxH6iDKC
- dEMAtROdb57i9nV/4pi4kovUBq5FGzVet15xYVgKqc1z13ldiPp5ykZHbGDjRf52oaNPqV/6BiI
- OMpLLysLXVy4q2+QXRKhBNZyrJbcoYw4vZnIbX9MmBchcx9O2kWxmpWJNvLMZJ/ugjSO9q8aY0J
- uII7qTLQJ+R3nDIclOsxHti++QKPdwINlZKeIGaIwnkSmdmARH/CqNtAVAfJg2S1d8/Zx9LbZRH
- QNmVpfo/o5qpNM1QWeHeYXVYn0kCIoM910zYmOTLRiyPfD/kkTeGuV/j4awB1C8JjqZ879nLLzg
- U3EeedQl23BveacxAUBfH3NDdwvsdnfnJIkBUqFFifT+PKwV6s2191vGf9OnI0LSHGXo+Z2NzeC
- CX6jtCAKwEoNHJeUn7g==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261026-jshekhar-dcp-hlos-v2-8-7cf014efdee1@oss.qualcomm.com>
+References: <20261026-jshekhar-dcp-hlos-v2-0-7cf014efdee1@oss.qualcomm.com>
+In-Reply-To: <20261026-jshekhar-dcp-hlos-v2-0-7cf014efdee1@oss.qualcomm.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowangio@gmail.com>,
+        =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Philipp Stanner <phasta@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Flemin Jose <flemin.jose@oss.qualcomm.com>,
+        Mahadevan P <mahap@oss.qualcomm.com>
+Cc: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>,
+        virtualization@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+        iommu@lists.linux.dev
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792995687; l=7880;
+ i=jayant.shekhar@oss.qualcomm.com; s=20260925; h=from:subject:message-id;
+ bh=ZliBQcpFZc/16J0ivg4K92KJ50R0FEFC7a9oWSS2AUk=;
+ b=oeF2+yhu6C0tTEPvS4ijcCGa3EHT1863DUfZIbjiUMBcQ15kbRI0oR2KII+grdry/V7RCxSJT
+ 3oyw8G3PXx7B2Xb39BRODfFABQmVENPqGVOsWGj/n1PxFxmt+AyeeZ+
+X-Developer-Key: i=jayant.shekhar@oss.qualcomm.com; a=ed25519;
+ pk=saYTwtCCpug4b0Hz0jHFoATgDtdhFVicwMzDJo2z5ZE=
+X-Proofpoint-ORIG-GUID: GNhwqIZiOx7vFyn_i8TiikwAbxMGvS-2
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDAyNSBTYWx0ZWRfX1Wh68f+jbsm4
+ yo10S9VxLN05R69R7UulcUtV7HW9QaAl21X4y4xwV3Ky+7Hz3U6J6Os2IP7J3+HO87+XlKOFWr3
+ 6Zb8sph/wePwmJ9vapFw3UbbMCSG+Vs=
+X-Proofpoint-GUID: GNhwqIZiOx7vFyn_i8TiikwAbxMGvS-2
+X-Authority-Analysis: v=2.4 cv=bq/Zl0ai c=1 sm=1 tr=0 ts=6adef1c9 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=Rkk83rcldGj31tuyXloA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDAyNSBTYWx0ZWRfXxFp4VrvOkJyz
+ C3NEzghar38xBCYRHff1Z31Fq4RPSuY9ezG4WpabaXyVWjKs6ghp40+5aIKW8crIweGFndc4WhQ
+ DYj1MlN1uzkuv78hAt2Rl+cqYrEgfEAP+E2mF1aNA9sMv0Ds4mvXswMojzIRGnTUgKNO3exPnxi
+ H3Qf+0oWS0cKvrOHR6PX07wNRnV5rz9osdA4ZQn5Kwef4nu3dDjBY6XGhM9/WjGqSwHMyHFWdA/
+ fPRFneZQC31xNXFubUnjWxRAyp2/3XgghkbeWSTRAGnP2LxlC1khL8NGzOrXz0UGG0ydipsfdrs
+ 2uPoVRVNyzOYuG9Q1RwoABrDD5pKvp/d0djeoqKfI5A4GscPetGayRn7gP2sP/Xhw9yuafeKHNY
+ 0QOvU78X7AYfbVlzxxG4XKIrkp4dLPq0GZEo4M2ks2/9QWEYVtRbJHwGduKBo5spv8MK/+pENDb
+ kid+d8P16xTyHEpH1qA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-26_01,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 bulkscore=0 malwarescore=0 lowpriorityscore=0
- clxscore=1011 impostorscore=0 adultscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260025
+ adultscore=0 malwarescore=0 bulkscore=0 impostorscore=0 spamscore=0
+ suspectscore=0 clxscore=1015 lowpriorityscore=0 priorityscore=1501
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610260025
 
-Tested-by: Daizhuang Bai <daizhuang.bai@oss.qualcomm.com>
-Tested-on: QCC2072 hw1.0 PCI WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+Wake and acknowledge DCP firmware through the platform IPCC
+channel. DCP may power-collapse while VirtIO-MMIO remains accessible,
+so a VirtIO queue kick alone cannot reliably wake firmware during
+system power transitions.
 
-I took the entire state of the QRTR directory as of after these changes,
-on top of 6.18.44 kernel, and with some trivial changes to avoid conflicts.
-Then I cherry-picked the ath11k/ath12k changes, which
-had no conflicts.
+Implement serialized IPCC notifications, bounded acknowledgment waits,
+IRQ wake handling, and teardown-safe callback lifetime management
+while leaving HFI data transport on VirtIO.
 
-Before these changes, Cologne WLAN QRTR NID could conflict with CDSP QRTR NID.
-After applying this series, the conflict is gone and WLAN/CDSP QRTR services
-work as expected.
+Assisted-by: LLM
+Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+---
+ drivers/gpu/drm/msm/Makefile       |   1 +
+ drivers/gpu/drm/msm/dcp/dcp_drv.h  |   1 +
+ drivers/gpu/drm/msm/dcp/dcp_ipcc.c | 173 +++++++++++++++++++++++++++++++++++++
+ drivers/gpu/drm/msm/dcp/dcp_ipcc.h |  42 +++++++++
+ 4 files changed, 217 insertions(+)
+
+diff --git a/drivers/gpu/drm/msm/Makefile b/drivers/gpu/drm/msm/Makefile
+index 56c48fe2e2c5..9c698c4f4949 100644
+--- a/drivers/gpu/drm/msm/Makefile
++++ b/drivers/gpu/drm/msm/Makefile
+@@ -73,6 +73,7 @@ msm-display-$(CONFIG_DRM_MSM_MDP5) += \
+ 
+ msm-display-$(CONFIG_DRM_MSM_DCP) += \
+ 	dcp/dcp_hfi_core.o \
++	dcp/dcp_ipcc.o \
+ 	dcp/hfi/hfi_packer.o \
+ 	dcp/hfi/hfi_unpacker.o \
+ 	dcp/hfi/hfi_utils.o
+diff --git a/drivers/gpu/drm/msm/dcp/dcp_drv.h b/drivers/gpu/drm/msm/dcp/dcp_drv.h
+index 44d9b2cd5171..16f87035cb9a 100644
+--- a/drivers/gpu/drm/msm/dcp/dcp_drv.h
++++ b/drivers/gpu/drm/msm/dcp/dcp_drv.h
+@@ -11,6 +11,7 @@
+ #include <linux/platform_device.h>
+ 
+ #include "dcp_hfi.h"
++#include "dcp_ipcc.h"
+ 
+ struct dcp_dpu_kms;
+ 
+diff --git a/drivers/gpu/drm/msm/dcp/dcp_ipcc.c b/drivers/gpu/drm/msm/dcp/dcp_ipcc.c
+new file mode 100644
+index 000000000000..e161939dddc1
+--- /dev/null
++++ b/drivers/gpu/drm/msm/dcp/dcp_ipcc.c
+@@ -0,0 +1,173 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * DCP IPCC power-notify mailbox client.
++ *
++ * The APSS-to-DCP channel must be signaled before a VirtIO queue kick.
++ */
++
++#include <linux/device.h>
++#include <linux/err.h>
++#include <linux/jiffies.h>
++#include <linux/interrupt.h>
++#include <linux/mailbox_client.h>
++#include <linux/mutex.h>
++#include <linux/of_irq.h>
++#include <linux/string.h>
++#include <linux/virtio.h>
++
++#include "dcp_ipcc.h"
++
++#define DCP_IPCC_POWER_NOTIFY_TIMEOUT_MS	10000
++
++static void dcp_ipcc_handle_rx(struct dcp_ipcc *ipcc)
++{
++	unsigned long flags;
++
++	spin_lock_irqsave(&ipcc->state_lock, flags);
++	if (ipcc->shutting_down) {
++		spin_unlock_irqrestore(&ipcc->state_lock, flags);
++		return;
++	}
++
++	complete(&ipcc->power_notify_done);
++	if (ipcc->resp_vq && virtqueue_kick_prepare(ipcc->resp_vq))
++		virtqueue_notify(ipcc->resp_vq);
++
++	spin_unlock_irqrestore(&ipcc->state_lock, flags);
++}
++
++static irqreturn_t dcp_ipcc_power_notify_irq(int irq, void *data)
++{
++	struct dcp_ipcc *ipcc = data;
++
++	dcp_ipcc_handle_rx(ipcc);
++
++	return IRQ_HANDLED;
++}
++
++static void dcp_ipcc_rx_callback(struct mbox_client *cl, void *data)
++{
++	struct dcp_ipcc *ipcc = container_of(cl, struct dcp_ipcc, client);
++
++	dcp_ipcc_handle_rx(ipcc);
++}
++
++static void dcp_ipcc_free_channel(void *data)
++{
++	mbox_free_channel(data);
++}
++
++int dcp_ipcc_init(struct dcp_ipcc *ipcc, struct device *dev, unsigned int irq_index)
++{
++	int irq, ret;
++
++	memset(ipcc, 0, sizeof(*ipcc));
++	init_completion(&ipcc->power_notify_done);
++	mutex_init(&ipcc->power_notify_lock);
++	spin_lock_init(&ipcc->state_lock);
++
++	ipcc->client.dev          = dev;
++	ipcc->client.tx_block     = false;
++	ipcc->client.tx_tout      = 0;
++	ipcc->client.knows_txdone = true;
++	ipcc->client.rx_callback  = dcp_ipcc_rx_callback;
++
++	ipcc->power_chan = mbox_request_channel(&ipcc->client, 0);
++	if (IS_ERR(ipcc->power_chan)) {
++		ret = PTR_ERR(ipcc->power_chan);
++		if (ret != -EPROBE_DEFER)
++			dev_err(dev, "IPCC: failed to get DCP power channel: %d\n", ret);
++		return ret;
++	}
++
++	ret = devm_add_action_or_reset(dev, dcp_ipcc_free_channel,
++				       ipcc->power_chan);
++	if (ret)
++		return ret;
++
++	irq = of_irq_get(dev->of_node, irq_index);
++	if (irq <= 0)
++		return dev_err_probe(dev, irq ? irq : -EINVAL,
++				    "failed to get required power notify IRQ\n");
++
++	ret = devm_request_irq(dev, irq, dcp_ipcc_power_notify_irq, 0,
++			       "dcp-power-notify", ipcc);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				    "failed to request power notify IRQ %d\n", irq);
++
++	ipcc->power_notify_irq = irq;
++
++	return 0;
++}
++
++void dcp_ipcc_set_resp_vq(struct dcp_ipcc *ipcc, struct virtqueue *resp_vq)
++{
++	unsigned long flags;
++
++	spin_lock_irqsave(&ipcc->state_lock, flags);
++	if (!ipcc->shutting_down)
++		ipcc->resp_vq = resp_vq;
++	spin_unlock_irqrestore(&ipcc->state_lock, flags);
++}
++
++void dcp_ipcc_deinit(struct dcp_ipcc *ipcc)
++{
++	struct device *dev = ipcc->client.dev;
++	unsigned long flags;
++
++	mutex_lock(&ipcc->power_notify_lock);
++
++	spin_lock_irqsave(&ipcc->state_lock, flags);
++	ipcc->shutting_down = true;
++	ipcc->resp_vq = NULL;
++	spin_unlock_irqrestore(&ipcc->state_lock, flags);
++
++	devm_free_irq(dev, ipcc->power_notify_irq, ipcc);
++	devm_release_action(dev, dcp_ipcc_free_channel, ipcc->power_chan);
++	mutex_unlock(&ipcc->power_notify_lock);
++}
++
++int dcp_ipcc_enable_irq_wake(struct dcp_ipcc *ipcc)
++{
++	return enable_irq_wake(ipcc->power_notify_irq);
++}
++
++void dcp_ipcc_disable_irq_wake(struct dcp_ipcc *ipcc)
++{
++	disable_irq_wake(ipcc->power_notify_irq);
++}
++
++int dcp_ipcc_send_power_notify(struct dcp_ipcc *ipcc)
++{
++	unsigned long timeout;
++	int ret;
++
++	mutex_lock(&ipcc->power_notify_lock);
++
++	reinit_completion(&ipcc->power_notify_done);
++
++	ret = mbox_send_message(ipcc->power_chan, NULL);
++	mbox_client_txdone(ipcc->power_chan, ret);
++	if (ret < 0) {
++		dev_err(ipcc->client.dev,
++			"IPCC TX: power notify failed: %d\n", ret);
++		goto out_unlock;
++	}
++
++	timeout = wait_for_completion_timeout(&ipcc->power_notify_done,
++					      msecs_to_jiffies(DCP_IPCC_POWER_NOTIFY_TIMEOUT_MS));
++	if (!timeout) {
++		dev_err(ipcc->client.dev,
++			"IPCC power notify acknowledgment timed out\n");
++		ret = -ETIMEDOUT;
++	} else {
++		ret = 0;
++	}
++
++out_unlock:
++	mutex_unlock(&ipcc->power_notify_lock);
++	return ret;
++}
+diff --git a/drivers/gpu/drm/msm/dcp/dcp_ipcc.h b/drivers/gpu/drm/msm/dcp/dcp_ipcc.h
+new file mode 100644
+index 000000000000..2d1ddd5adebb
+--- /dev/null
++++ b/drivers/gpu/drm/msm/dcp/dcp_ipcc.h
+@@ -0,0 +1,42 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * IPCC power-notify mailbox interface for DCP firmware.
++ *
++ * Channel 5 carries APSS-to-DCP wake notifications; responses arrive through
++ * the mailbox client's RX callback.
++ */
++
++#ifndef __DCP_IPCC_H__
++#define __DCP_IPCC_H__
++
++#include <linux/completion.h>
++#include <linux/mailbox_client.h>
++#include <linux/mutex.h>
++#include <linux/spinlock.h>
++
++struct device;
++struct virtqueue;
++
++struct dcp_ipcc {
++	struct mbox_client client;
++	struct mbox_chan *power_chan;
++	struct virtqueue *resp_vq;
++	struct completion power_notify_done;
++	/* Serializes concurrent power-notify transactions. */
++	struct mutex power_notify_lock;
++	/* Protects callback state and response queue access. */
++	spinlock_t state_lock;
++	bool shutting_down;
++	int power_notify_irq;
++};
++
++int dcp_ipcc_init(struct dcp_ipcc *ipcc, struct device *dev, unsigned int irq_index);
++void dcp_ipcc_set_resp_vq(struct dcp_ipcc *ipcc, struct virtqueue *resp_vq);
++void dcp_ipcc_deinit(struct dcp_ipcc *ipcc);
++int dcp_ipcc_send_power_notify(struct dcp_ipcc *ipcc);
++int dcp_ipcc_enable_irq_wake(struct dcp_ipcc *ipcc);
++void dcp_ipcc_disable_irq_wake(struct dcp_ipcc *ipcc);
++
++#endif /* __DCP_IPCC_H__ */
+
+-- 
+2.43.0
+
