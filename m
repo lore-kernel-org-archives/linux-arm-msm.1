@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793042240;
-	b=wQTTd9K36QDKqI5CX3VagwZDy9/03UkJX7Bjs71HgBLxgk7hGANb0paMkYB04XAPPHUZ
-	 XCys8P0ZAcUjIoK/BeZNSMKm7Qhu+y+XRL42M7Ii8oaESYS5ZymKvqpC9ehXwja3NUIRL
-	 fMAnVn6O5wvH8OKeoGrIUoTg432H4t2rONLjORaLKJ1HL0o77shmAV8fLHWmA9+Zn4pBy
-	 KBlJedCXqg7Xq2PdMR8Ak1pyuMwqGvJvsj86MJwL8pNf/VVLmp9SGXkUe9aLrXhfkznKF
-	 uKR00sQZVeZaOWiHiJUJou/MSR8gCJbsHAZMooePk6XaVmYN+qYl/PiW90dI4w6SrdQ==
+	t=1793042241;
+	b=WJbQybgrmFDW9xZVXAHZVcQuN8QrEPA1WoX3hbsPYmolWHacztcz5eGkLyUaQlKxw/wJ
+	 j4zG4u9N1z+TIJWkd6lInGjNSs3cHpHElEjd+NwFwZL+19guFB+CK1MBM7LlKM6rWEEHq
+	 oSSoXsV5ySIrfCNJM0iLEpZ5rmgQ7UtRxILvV+DheYhq+sKf3We6xVAon9W2vrZ/HBbkZ
+	 7dQPG3yzGiSTvqt6O0fT8W7w5rXKsoJjn8p1ErjW/EdHwYPrphQ0I1vauPjHpPIr16EIc
+	 pf8oQMifYTnpvaULKCb2xVX4y0qphceTu/T/bCpLwjNOuY0P+fggbx+sJmlJYcv4R8Q==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793042240;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793042241;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=m6JQuiiAvAgYD5P15vse2J1auiyKgGQSXV7w3Qubaxs=;
-	b=JSaHy5vY05jC2pxL27sKhA7bEEc0HAl6z3k7xa/rAzVaSB5TcALOhVN5/zsPC57ZIOiD
-	 Ueu9lYSbytxQqPsMbZDhh1UBSV7QbnkbAucsAgCXPOpN2yJNBNhuWNZXrd7AFN9FczmzP
-	 mTCnqdVCjk7yI9wIE+t1xfg47TvmfUW5gWNtYXKLC+ftH+DHQW238yQySENxG9tXNC/lD
-	 BQdyAVBu19wh+a1hVpPBHhqMtzI/rvLUMV/pMWIc3cFmMfqVtwB9CIwhnZj69IByiUgT1
-	 yH80fhXar9hp5RHAqN7uHcjBeFSozdWC8Ich865YyLV7fhzV3IIJhFbATrremAXwtAA==
+	bh=bUzni0iK/C+PhtxdHk9zeTrgmQXy4renjbgo9cCUJ7I=;
+	b=lGD8R8MXhqNC0akA92grtYdbjBf3tvZ+nMoeqaNxSGL/g4RBFKmKHA2a4dV3lNZKDEKW
+	 aa+CP0h9X9eEXNS7+s4Mwonbgzc2fNIvOjsA3gHAfi7vop3GOp9hMdwstihP8Hza3pBBT
+	 IHEzujrEr+z1buc48fYby3P6cmB5Ra7Zsi3DGg9favr+kZ4pGbRlrkgtl+Q5Cf5AvdRwl
+	 uhwE9kTfBjF4Z7Db2u3DatcilkRgm2dNVJleYVyDfq0k3YHBIqof6+RVNsSfcMPlAIWnG
+	 cT2sAB+FCf7c7RdkUgzCJ6ZtX5LP+1+21DEIBRQZugWLM8Y5JZFbWxFjhDDlv8mGU2Q==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F4n0CBhU;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Us+cBCcJ;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA5C1606A335;
-	Mon, 26 Oct 2026 19:17:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1A2C60A260E;
+	Mon, 26 Oct 2026 19:17:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F4n0CBhU
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Us+cBCcJ
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793042239;
-	b=zhEj0wSvD9+j6a/pz7Z5qCOUV2rejkNv61mJMheqvcN/+Bmp+j4eVpGeCDT7ttOZ8XoS
-	 mW8DTpvtpHX+jXBxjP2YpzZzYkzDpUzr5bUfCjHu9lbXykOG5b96keOe6DPGowbebUuHB
-	 yvIO2GTBABJYWpF3gEa3OLuYIk4NvzWaI++V2WSevitL3r9x+idT3dFgCjMKqJXT0QUTx
-	 rVvR2hGNnagIkxfoKAsGvVUNJrYXEUH0hQR+BkYd1jWF2lWQdpGSwjq18y+kD9SiRgdqN
-	 52c/8dNVNAby8GsVqoxM2OIh/0wlHY8rtxrqu+sDtyUjZM/ETPaDYyvqFs6/trLhTdQ==
+	t=1793042240;
+	b=cabIcGffNexV246wSdv72au5KVzUY/fixq6wBplUpJGslPnvFpSNsoJMXwl0kxTQbcVD
+	 LnS0lkRh3+H1iIGLXufiriskGtsvm3mWeP9mFjD2MMAwe4QJt+4M8Y/F0c2LBXgFC73Tt
+	 1Rgj+6vKp8eT5nLs7DwKV87ELKdyqeeKX6l4d2Rg6bw+lb2AM9RBpZ1YWZqlwXWuc8Ey2
+	 ZjSgL6GiS35yEIq0X1alanin4sqCqa2R7EKm8im/ew0GLG6uQGk1cSiVuPtyNr/iNItY7
+	 M31bKP6eVrfEuu9ICPruszl7u3tXmWovsekhZDEQZWysZWTjpF8SxKIV5Mjn8gGjCjQ==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793042239;
+	c=relaxed/relaxed; t=1793042240;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=m6JQuiiAvAgYD5P15vse2J1auiyKgGQSXV7w3Qubaxs=;
-	b=Yf7SugHUK4bD9uJW7S8Nj4M5PeZ8D6qYHc65Fj8xWV1F8Aqy2hDiabPy/3CDGbqcmRCg
-	 5tDXT+8GSqKhq6SSmHEAaQwo19Pkpv9//UfWzT/7pMBnTpcTo2UqhZZRNl6gt7xb0OiTw
-	 3UeaPC2Km0tNQ9tIzlsVWhd3IMwmc0uh1OMWhyzjm4irycEfhkIsKltxDHo/3QyXI92zm
-	 e4h5u0r8KGJuft17keIndR51QszwqUDyhW1uS7dpz2cLDuli2nVQbrDe5Kkdv5no06Q5L
-	 5RU9FuplcaoWSEUW5YJnRAM2zUEdzP89NgPiM3UyB22uELmpScs1djdcAizkrd5KGvA==
+	bh=bUzni0iK/C+PhtxdHk9zeTrgmQXy4renjbgo9cCUJ7I=;
+	b=lRtvmNtjfrWDbl3LKNTIf6qqUfL5FEE6AyTe1BzW2uzMeW/h/jgLMlgRlnRUWPH/JrKc
+	 kENEXMU5awypCIAO08ZanevO4xyqD7yrseu0BpExIk7FDGR7KJxs0pnfLrbFffuBjiXoe
+	 5Vm84kA03cTato/OWl8Jx+UnyYbK6JTsZcuLxDQ//dfZy6oYPItVsHOqNOpUuxGMFf5Ii
+	 K9xVX6eNm8gosOCZFwGP/LqM2HIaH5Ncr5veN+l84g9MdoI4IEmiFfIjCliTbwhWstK82
+	 +1Y0iaYqpCbyNhA2BG1/kdjC8Pa1DMg02Wsi3QfbS/nLQPxDLWp3YOmPRZDMA7ict3A==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id B5A661F031E6;
+	by smtp.kernel.org (Postfix) with ESMTPS id D47FE1F01828;
 	Mon, 26 Oct 2026 19:17:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793042239;
-	bh=m6JQuiiAvAgYD5P15vse2J1auiyKgGQSXV7w3Qubaxs=;
+	s=k20260515; t=1793042240;
+	bh=bUzni0iK/C+PhtxdHk9zeTrgmQXy4renjbgo9cCUJ7I=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=F4n0CBhUCYnGNj1cWqi28pTIOvZsA3SKRhrT0hZ4hWuJL9mAUB4S6qORi4bG8+EUD
-	 eavjIO/7EDVEcVzWa1Y3fCY9Q6bIwE2dJIYH4inRDMAO/cVSxwFpU8ibD+FkoAESdF
-	 14kES7EBwkmfo+ZJLMBwQ3GTsIaT/7xqir8CQsVd+GccEaP2lFRCSk7pprq8zC5Mc8
-	 MRorNYvxJeuiZHef7JnGPP/8uG7pE30IiMb+fGoTtLMU6SrMS0d0wOcRIIMUG0372X
-	 njqwcfz6muWND44UH6nwUvbQlbTHNQY/WRhX88tYx1aBluXAKJf4pn7SKKOQGnH6GL
-	 /M33KTTWLIsgQ==
+	b=Us+cBCcJbAn3Q+yLcgwyQHQby9XUeGr9p7f2jxnJtte0O8MWoiPXsC+CCZ5JJQi8a
+	 n9INEvY2OVVr2ou2zlexFanoHDSYr2dV6S/exHzjV36wg3mIgJgT7Tt0L0DU0/mVqa
+	 /TpoIoZoLUHIaFABITbzpojIp6VNOH63AJFU9Zfz4+1kR5+rD4lgg5gnKFacZAlv/T
+	 cXOVZBYuYg1wFBpESzY2R9/ZErYuQqQfYU1nFJBi0L7Ks1+C+yhJvXlDXq44FmBDhS
+	 Af4flbgvyHkU6mQBQ5FeeDasVr2tdzQ7VHyPvlv5tk8DVyGHpjwMk5eyXus2Y+ZlSI
+	 pc3BLUBDBSOgA==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id DC2D244E58;
+	by lkml.kernel.org (Postfix) with ESMTP id E7F2A44E5C;
 	Mon, 26 Oct 2026 19:17:16 +0000 (UTC)
 From: Xi Zhang via B4 Relay <devnull+xz.ca.cn.gmail.com@kernel.org>
-Date: Mon, 26 Oct 2026 16:16:54 -0300
-Subject: [PATCH 6/8] drm/msm/dpu: workaround res re-assignment issues by
- pairing enc/crtc
+Date: Mon, 26 Oct 2026 16:16:55 -0300
+Subject: [PATCH 7/8] drm/msm: force mode_changed on color_mgmt_changed, not
+ just ctm
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261026-msm-dpu-res-clean-v1-6-f46130a8a717@gmail.com>
+Message-Id: <20261026-msm-dpu-res-clean-v1-7-f46130a8a717@gmail.com>
 References: <20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com>
 In-Reply-To: <20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -97,11 +97,11 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Xi Zhang <xz.ca.cn@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793042236; l=1740;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793042236; l=1219;
  i=xz.ca.cn@gmail.com; s=20261026; h=from:subject:message-id;
- bh=3eiBb0uy0PBNKjp2IH6yVXShmpVfE6rEzfXROTQjPv0=;
- b=ycxSfaEHnf/r9SC/zlyhmgTTleLJJJn92cKvzii6Bit0CyIas1C355iPIhMAqv0NA6PlhVHZC
- dulUR+CXhM7DEBZrrlKO277amomkcrzgmo04Y0S7FeLxt7KmbuRk4vy
+ bh=Wo3tEP0RL/iVZrlVbjqizqGErC2YhsS/kVeKWgJ1UBY=;
+ b=Ka8elEcmKvRmXT6MxV7shh8QtW1BUM34m8jO69Pppxv34hT1WkBIwW/du7byZGl5q+mivl9sR
+ dI2mCiPGOpqDqqYH8xMs8i3CNw8qaTypCBy8azN6b6SYsV6VTBNx13P
 X-Developer-Key: i=xz.ca.cn@gmail.com; a=ed25519;
  pk=aRUll5L3eJbwG8Y4BO9uySKGzm+Uy+Ccei9prnRVZRs=
 X-Endpoint-Received: by B4 Relay for xz.ca.cn@gmail.com/20261026 with
@@ -112,49 +112,37 @@ Content-Transfer-Encoding: 7bit
 
 From: Xi Zhang <xz.ca.cn@gmail.com>
 
-Consider the scenario with 4 crtcs, 3 encoders/displays are
-connected. DPU resources is nearly maxed-out, and mode set is
-performed on a display which has acquired many dpu resources.
-A new crtc is selected by kernel drm for the mode set,
-and during atomic_check, the previous crtc won't have a chance
-to release its old resources from global_state before the new
-crtc tries to allocate new ones. Leading to atomic_check failure.
+dpu_crtc_atomic_check calls dpu_crtc_assign_resources when
+color_mgmt_changed is set, which is unsafe outside of full modeset.
 
-By having the same crtc for encoder when possible, during
-atomic_check each individual crtc will always be able to release
-old resources before allocating new ones.
+Set allow_modeset and mode_changed when color_mgmt_changed is set,
+not just when ctm is changed.
+
+Also would fix
+commit 42f62cd79578 ("drm/msm/dpu: try reserving the DSPP-less LM first")
+which was reverted.
+
+Closes: https://gitlab.freedesktop.org/drm/msm/-/work_items/102
 
 Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/msm/msm_atomic.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-index da3556eb6ecc..13099d6e3ac9 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-@@ -879,9 +879,18 @@ static int _dpu_kms_drm_obj_init(struct dpu_kms *dpu_kms)
+diff --git a/drivers/gpu/drm/msm/msm_atomic.c b/drivers/gpu/drm/msm/msm_atomic.c
+index a8babf1dbe0d..6f0f30b0728a 100644
+--- a/drivers/gpu/drm/msm/msm_atomic.c
++++ b/drivers/gpu/drm/msm/msm_atomic.c
+@@ -195,8 +195,7 @@ int msm_atomic_check(struct drm_device *dev, struct drm_atomic_commit *state)
+ 	 */
+ 	for_each_oldnew_crtc_in_state(state, crtc, old_crtc_state,
+ 				      new_crtc_state, i) {
+-		if ((old_crtc_state->ctm && !new_crtc_state->ctm) ||
+-		    (!old_crtc_state->ctm && new_crtc_state->ctm)) {
++		if (new_crtc_state->color_mgmt_changed) {
+ 			new_crtc_state->mode_changed = true;
+ 			state->allow_modeset = true;
  		}
- 	}
- 
--	/* All CRTCs are compatible with all encoders */
--	drm_for_each_encoder(encoder, dev)
--		encoder->possible_crtcs = (1 << dev->mode_config.num_crtc) - 1;
-+	/* All CRTCs are compatible with all encoders.
-+	 * Nevertheless, if enough CRTCs are available, pair up crtc/encoder
-+	 * for better resource re-assignments during atomic_check
-+	 * from userspace mode set.
-+	 */
-+	i = 0;
-+	drm_for_each_encoder(encoder, dev) {
-+		if (dev->mode_config.num_crtc >= num_encoders)
-+			encoder->possible_crtcs = 1 << i++;
-+		else
-+			encoder->possible_crtcs = (1 << dev->mode_config.num_crtc) - 1;
-+	}
- 
- 	return 0;
- }
 
 -- 
 2.55.0
