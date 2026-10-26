@@ -1,62 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793036378;
-	b=La9CpjljLuGQb+RCWnbUKxWXVKNCHmerJeyCDUWjpj85Pc91qbpKrHm4cDD5q2cxHXuN
-	 1L+mAahSMlFGAdVHHbF6BdWGuEw8gEekeyRfy5a9lFwkiEwRjXl9f91fbRONQVWdt0QZu
-	 FbhGRNLSKewHnEkSIxQ/XKGXlbS3IFyiX2N5iGm56BOdohbX0c5APNGCV2GL2H7bjVywJ
-	 4sVz5EDG6EZ4w4il9KzqJYLKR1fK2nBD2+B13jYUgop5EXCtojfzYmWMJORUbMKZj6e1s
-	 4USncVyYRw0TNPxMwYqfJsUVxs1cwEDF+4WCaOTE9f5p0JGOvSaRHC1jSSg9AYS04Ww==
+	t=1793036682;
+	b=4+iowemHdykf1rws4iL8gATkQsmbB8ZjOLzkGirC1Igkuce1qJuXy98Tai6QpFUhpELO
+	 51An9rPy3RqGBLWdd3HQ1ftL+hlmUygKxrC9KXivuh0OEvYqNaAJo73RfoDlS+HOz6v9/
+	 dJtDlR34uOncUZ9MF0Pq0H6zDKfELamv/A4tcJfl5ho/gJlWU7vEfrvg46pkadkcr5J4k
+	 dLVk3oY4fCQWF7N8fp+0L2TlQaWwhYICSoQcEIQ+8+wEWc0Nxyrttf9Q1PP6Etkva74WZ
+	 3d3mc9C8aW9tfo5g6LQH62Lizh5I/md7d/i0pA1MaLFOveRvHsITU4eh/j/zq48yt+g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793036378;
-	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
-	 In-Reply-To:References:X-sashiko-severity:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=t8Or3b9/pQwlfW96GSEcWmN+qVfsQHETPMtYl66RaNU=;
-	b=SFmYkTCbXXYGLMlk71ow1jbs5z+NOwYWff+3oqzPFIcUAUZu+G8QxZk9j7+FUGlAQfep
-	 eRBQzt+p5/RbJCiIHb4s9y11ZTNmQSsbPSZ7qw9c+YeQ/I8j/LbCWJnHiWb905yplYfFb
-	 XgttFyMy2vQ+DNs6wXtNyNkgNs1VESDukt8urt1Zd5Yw7rILv6wzs/Z7qXyHnL2taIW9B
-	 cToi702ZHpOB3LV5HuOtTd9IElpPnZq42+QW82cB2awyOMBpqZqzWblW+uOzCYnF5sf30
-	 yPlokzA1dAFzqLHS/8v2ejquKf70cs/0wyAcFfELlbZ7xMn0xYyLSdL7wNh5kRxiikA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793036682;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=VCDyE/Rla7ZTFbrWbkl5F+i2vdziDZVe9ErSwypy7mI=;
+	b=gCy6WNUUA6Fea6ROvHk1FmZkcuUszh3zr2chBBYzEJSNjnVMSf4T68+RHQu7ygqsQ6Id
+	 mOGLd7s57y3bPxdmwDIOdRUU66kfwteeGUmOQN64zJZnkaRyvDy3ijGLVLegvhJndeRQB
+	 jrP+bPwNCIiPZNAgRUJORiI7T/ugXLck8HI+RHij4+hyxC3Ptl6dif1u18FCYeeoIWMp2
+	 VwoYBShmQ8DdUEhnqxjAdEHBD0+R9BBb3MACApWyRzzBBilhv60NVZjeA3aSuhv6MdRu/
+	 hmazBMurMZXQdfxCyufA6NyaI71z0durV1JnKnoN8IuJxjY16/QvdBPwKX5cuurq4OA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DcTblxIK;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=fail header.from=mswin.me;
+	spf=none smtp.mailfrom=mswin.me;
+	dkim=pass header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=L8E5XqA6;
+	arc=none smtp.remote-ip=209.85.218.46
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2D65606A325;
-	Mon, 26 Oct 2026 17:39:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59A30606A329
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 17:44:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59A30606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=mswin.me
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=mswin.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DcTblxIK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F5C21F01825;
-	Mon, 26 Oct 2026 17:39:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793036377;
-	bh=t8Or3b9/pQwlfW96GSEcWmN+qVfsQHETPMtYl66RaNU=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=DcTblxIKUMbacZae6nQnDOLlJOAKsl2zHNVVwsdna3FHx04eCfESZinLgKdAHbSYZ
-	 64UZ5OVpCPydLM1YFBWrtrLZwPPVErHRxJDTImnAEeD7fXh1Ci9rEDk42bj4e43yoJ
-	 gn+1ghFxLMn62etYz4iP9fykfOHBE7dFRm/d0OtdoBBMyECoZzdO9Fy0S83XHDonR0
-	 YMsH0lCbPkk31FS8MuyltKiDdLqA6FsxPFaACx7EhgEaZcL4XxwsRmJFLVcO2+3DcQ
-	 M46gZMNrIsZ1waHdjY6XsECyPTVvMbtm7VqDdqRc9emfu/RDxpaAoJ2Huzf/Ve7m6Y
-	 cFZACiDwD6Uuw==
-Subject: Re: [PATCH net v2] net: qrtr: announce local services again once our
- HELLO is sent
-From: netdev-bot+sashiko@kernel.org
-To: 26rote@gmail.com
-Cc: mani@kernel.org, davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
- pabeni@redhat.com, horms@kernel.org, christopher.lew@oss.qualcomm.com,
- deepak.singh@oss.qualcomm.com, pranav.phansalkar@oss.qualcomm.com,
- andersson@kernel.org, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, regressions@lists.linux.dev,
- stable@vger.kernel.org
-Date: Mon, 26 Oct 2026 17:39:36 +0000
-Message-ID: <179303637610.3134.6464335759134048296@kernel.org>
-In-Reply-To: <20261022163116.1042-1-26rote@gmail.com>
-References: <20261022163116.1042-1-26rote@gmail.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key, unprotected) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=L8E5XqA6
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c498fa2f365so168695366b.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 10:44:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mswin-me.20251104.gappssmtp.com; s=20251104; t=1793036680; x=1793641480; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=VCDyE/Rla7ZTFbrWbkl5F+i2vdziDZVe9ErSwypy7mI=;
+        b=L8E5XqA6Tqzxzv5x+x3Dnt/A7KPA1+eFip+NQx04KhL6C2dStKFQf8ld29c5xMK85c
+         HiIGJx+dO+lPi5qreXNsifCsc+BQaLcL/U9MYK7FV/DNzeJYAJnHYRztxN2Wns5cfLJN
+         Fd3hX293ZhuHlLBFZY2Or4chX0tVIgcEykewJFRKVzhX9SeyxGIAuwK2ArvLos6ryo4t
+         EP5bMzSifgq7ShQPG6eVE8cJoM02VumKLSRxxaCUObgQej9ox6C1Fnp1VwnsqEe/Ievh
+         oMCY9pIt3nAHEWRF0LJx0TCO9asKtk6+4CNp83eGh3wlNc94zDh5mV/5jS9hyxTDUx9c
+         fEbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793036680; x=1793641480;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VCDyE/Rla7ZTFbrWbkl5F+i2vdziDZVe9ErSwypy7mI=;
+        b=PCy2owP89z2oj8fg4ax4xYMh4xTTSCb4/PKNpLjPApJWV8O2qseMGl/IXuZ8D7soRY
+         5ij4wiSVls3KwasuYXi+s5tFRXW5YwSA3Mejlg5ISdPnFEqlUOXbnJwzd+MPrTC+26+z
+         Qj9oJPMRT+j/vaTnNMTvlan7eQ4QROFak3QJ2ynb9jztwVIp4Ah+fx7t1/mytoMJtvdJ
+         JeAGkaYN8wWP5rZoYseS06sFcr6QUowyFSJdme4aOYEPHpLoiHrm/BDN3PQviKCIkyQ5
+         ANPOcTbuenQSefYhhO99rpam3fbqfSUnQR5jIOdqen9Pv9VlEKUlIPT7GtbvzVhGYJm2
+         f91g==
+X-Forwarded-Encrypted: i=1; AKwUvBxXwkL7MB5Z+GHbDFQxhBOAIPBU4ewqPW+Zho+nZwy8f9kfD4YPBhY3K9VFLBez1o93CjGFuwPkNgXH0lsJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ8XV//whXSRGqPDyhdph46qRC80UtZwU/86rB/WK8Z8vrh4LdP
+	+giiPbs8oNOjeC3OODzqiodaZTcpM5xVDdGxa6jq6TLjeykTamycLMsAEuBASmZnCj0=
+X-Gm-Gg: AYBFou1QuH1UYM+jzpEGYERMbTbggKO6YhE9IqWCOWdU/8kkdU/DUu9SPbLqoJZdDXd
+	z+lF4fKFv9rdDuOP+ZlLiLmS3/V9mFAZ8WN0qrBZVS+z5ndLbdi2pydHv0hBF1I4swK21SMg/l7
+	pvYxK0K49FGvgEQ236bEs5SMSxRuUWK8DHdd5lgIem3g48EpZ3zX4tkaVrkr/Q8N8JxJUGXDTbM
+	j0BRqlGzCep+pqG6C5KrTrV/Sbzr1pLnjmPABOENaHwfPSvGkuIzn3VlOvpOWLguYhSo2ZhsM45
+	ha58GxzOoViINOlvVRwZ9qiP420LMpx4Cm8dr3vA5cShEriIUIK0o7R5VaTEXMycPtLI8QqmceJ
+	Xhp12ehi4HB24do9j7GC5tg06jc2xOUs/dKIbPedV0nUgAUn5U8pPj11WXxyUG/GpsVvNzGp1WX
+	3GnedRjFB6plLGmw6DMB0EP3r1rKdunaSDALyDyX56BXhh7co3+inKiV9cs/qoNhWyau9K6jS9u
+	BEcmYLoMfninI2bSMFLkr1P9W9Ks/u3Gm15jn8im3ODW/LhD6NkLL/bvED3YeI=
+X-Received: by 2002:a17:907:d16:b0:c46:9ca9:f522 with SMTP id a640c23a62f3a-c46bde42195mr863150266b.26.1793036679205;
+        Mon, 26 Oct 2026 10:44:39 -0700 (PDT)
+Received: from zephyr.int.serkovo.ru ([95.135.208.171])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd520838sm346004566b.31.2026.10.26.10.44.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Oct 2026 10:44:38 -0700 (PDT)
+From: Roman Linev <admin@mswin.me>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	barnabas.czeman@mainlining.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3] arm64: dts: qcom: sm6125: enlarge reserved_mem1
+Date: Mon, 26 Oct 2026 20:44:36 +0300
+Message-ID: <20261026174436.305327-1-admin@mswin.me>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20260824155535.335494-1-admin@mswin.me>
+References: <20260821032541.1856299-1-admin@mswin.me> <20260824155535.335494-1-admin@mswin.me>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,146 +104,60 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider.
+reserved_mem1@46200000 is sized 0x2d00000 (45 MiB) in the SoC dtsi, so it
+ends at 0x48f00000, while camera_mem begins at 0x4ab00000. The reference
+firmware memory map for sm6125 reserves 0x4900000 (73 MiB) at this base,
+ending exactly where camera_mem starts, so the 28 MiB in between belongs to
+firmware and not to the kernel. The dtsi nevertheless leaves that span as
+normal System RAM and hands it to the page allocator.
 
-Critical: 0 · High: 0 · Medium: 1 · Low: 1
+Every sm6125 board inherits this reservation and none of them overrides it
+or places another region in the gap, so size it for the firmware map in the
+common dtsi.
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+On laurel-sprout the mismatch is observable: page-cache pressure eventually
+reaches the span, and a store into it never completes, which hard-locks the
+machine. Before this change the board wedged at roughly one lockup per
+59 MiB of buffered reads; after enlarging the region the same workload ran
+691 GiB of buffered reads with no lockups. Booting with CONFIG_MEMTEST=y
+and memtest=1 sweeps 17 free ranges with no bad ranges reported and skips
+0x46200000..0x4ab00000 entirely, confirming the carveout is out of the page
+allocator's pool.
 
-- [Medium] In net/qrtr/af_qrtr.c, qrtr_hello_work() replays the HELLO
-  once and never retries, so a failed replay is lost for good.
-- [Low] In net/qrtr/af_qrtr.c, the new HELLO replay in qrtr_hello_work()
-  is not serialized against qrtr_endpoint_unregister(), so the replayed…
+The downstream laurel_sprout device tree describes the same base as
+removed_region@46200000 with a size of 0x4900000, so the reserved bytes are
+not a new claim about this hardware family.
 
---
+Signed-off-by: Roman Linev <admin@mswin.me>
+---
+Changes in v3 (from Konrad's review of v2):
+ - Move the reservation into the common SoC dtsi, as the size follows the
+   reference firmware map and applies to every sm6125 board. The v2
+   board-level &reserved_mem1 override is dropped; v3 touches no board file.
+ - State that no sm6125 board overrides this region or places another region
+   in 0x48f00000..0x4ab00000, and that all four affected boards build with
+   the enlarged span ending exactly at camera_mem.
 
-net: qrtr: announce local services again once our HELLO is sent
+v2: https://lore.kernel.org/r/20260824155535.335494-1-admin@mswin.me
+v1: https://lore.kernel.org/r/20260821032541.1856299-1-admin@mswin.me
 
-The patch records that the remote node has sent a HELLO. Once our own
-HELLO has gone out, qrtr_hello_work() passes a synthetic HELLO from that
-node to the local name service. The name service then announces the
-local services again, replacing the NEW_SERVER packets that
-qrtr_node_enqueue() dropped with -EAGAIN before hello_sent was set.
+---
+ arch/arm64/boot/dts/qcom/sm6125.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
-> index e7b3647424b8f..508a2dd2d16d4 100644
-> --- a/net/qrtr/af_qrtr.c
-> +++ b/net/qrtr/af_qrtr.c
-
-[ ... ]
-
-> @@ -619,7 +626,20 @@ static void qrtr_hello_work(struct work_struct *work)
->  	pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
->  	from.sq_node = qrtr_local_nid;
->  	to.sq_node = node->nid;
-> -	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to);
-> +	if (qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to))
-> +		goto out;
-> +
-> +	/* Pairs with smp_store_release() in qrtr_endpoint_post() */
-> +	if (!smp_load_acquire(&node->hello_rcvd))
-> +		goto out;
-> +
-> +	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
-> +	if (skb) {
-> +		pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
-> +		to.sq_node = READ_ONCE(node->nid);
-> +		qrtr_local_enqueue(NULL, skb, QRTR_TYPE_HELLO, &to, &from);
-> +	}
-
-[Severity: Medium]
-What happens if this replay is lost? If qrtr_alloc_ctrl_packet() returns
-NULL, the replay is skipped without any message.
-
-The return value of qrtr_local_enqueue() is also ignored. That function
-frees the skb and returns an error in two cases. It returns -ENODEV if
-the CTRL port lookup fails. It returns -ENOSPC if sock_queue_rcv_skb()
-rejects the skb because the name service socket's receive queue is full:
-
-net/qrtr/af_qrtr.c:qrtr_local_enqueue() {
-    ...
-	if (sock_queue_rcv_skb(&ipc->sk, skb)) {
-		qrtr_port_put(ipc);
-		kfree_skb(skb);
-		return -ENOSPC;
-	}
-    ...
-}
-
-At this point hello_sent is already true. So this re-arm in
-qrtr_node_enqueue() can no longer fire:
-
-	if (rc == -EAGAIN && type == QRTR_TYPE_HELLO)
-		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
-
-The work only runs again after qrtr_endpoint_hello() on resume.
-
-Without the replayed HELLO, ctrl_cmd_hello()->announce_servers() never
-runs. The NEW_SERVER packets dropped with -EAGAIN before hello_sent was
-set then stay lost, which is the outcome the commit message describes
-for rmtfs and the modem.
-
-Earlier in the same function, the first allocation failure reschedules
-say_hello:
-
-	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
-	if (!skb) {
-		qrtr_port_put(ctrl);
-		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
-		return;
-	}
-
-Should a failed replay also be retried, or at least logged? The commit
-message lists duplicate NEW_SERVER announcements as the only cost. It
-does not say that the recovery is best effort.
-
-[Severity: Low]
-Can this replayed HELLO reach the name service after the node's BYE?
-
-After qrtr_node_enqueue() returns 0, ep_lock is no longer held, and
-nothing here checks node->ep again. The GFP_KERNEL allocation can also
-sleep. A concurrent teardown could run like this:
-
-CPU1                               CPU2
-qrtr_hello_work()
-  qrtr_node_enqueue()
-    xmit HELLO
-    hello_sent = true
-                                   qrtr_endpoint_unregister()
-                                     node->ep = NULL
-                                     queue QRTR_TYPE_BYE to NS
-                                     qrtr_node_release()
-                                       radix entries removed
-                                       cancel_delayed_work_sync()
-  qrtr_alloc_ctrl_packet()
-  qrtr_local_enqueue(HELLO)
-
-The NS worker would handle the BYE first in ctrl_cmd_bye(), then the
-stale HELLO. ctrl_cmd_hello()->announce_servers() would then send
-NEW_SERVER for every local server to the dead node id.
-
-qrtr_sendmsg() then fails at qrtr_node_lookup() with -ECONNRESET. That
-is not -ENODEV, so announce_servers() logs "failed to announce new
-service" and qrtr_ns_worker() logs "failed while handling packet". If a
-new endpoint has already registered with the same node id, it may get
-duplicate announcements.
-
-cancel_delayed_work_sync() prevents a use-after-free, so the effect
-looks limited to log noise and extra announcements. Before this patch,
-qrtr_hello_work() never sent anything to the local name service, so
-this reordering is new.
-
-Should the replay be ordered against qrtr_endpoint_unregister()?
-
-> +out:
->  	qrtr_port_put(ctrl);
->  }
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261022163116.1042-1-26rote%40gmail.com
+diff --git a/arch/arm64/boot/dts/qcom/sm6125.dtsi b/arch/arm64/boot/dts/qcom/sm6125.dtsi
+index 86de156..fb126db 100644
+--- a/arch/arm64/boot/dts/qcom/sm6125.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm6125.dtsi
+@@ -282,7 +282,7 @@ smem_mem: memory@46000000 {
+ 		};
+ 
+ 		reserved_mem1: memory@46200000 {
+-			reg = <0x0 0x46200000 0x0 0x2d00000>;
++			reg = <0x0 0x46200000 0x0 0x4900000>;
+ 			no-map;
+ 		};
+ 
