@@ -1,111 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793038526;
-	b=jDqBYunSmc7yomos7mFtj+ca+4SOep2QbC9+BsuMkE0wHTewR9YS1CWYBX0TFAYR6rdo
-	 4h0mUBq3kVF8oLKENam3M+etpXDh0h1BkQsJ9WXfSPNE307IvZ+8EMGenVTQ3je2RPaKN
-	 eE5i+RA1EI/cIlbtIhyRysB4ivpjhlWuZOuU4DeRBWtJZmqEOrAM/wUiJwj0fibq2+Mol
-	 YMSUC4kATWQ+gz63gNg91mgacnKUP+gMZNMo5lYD/TvdHcoKZzMw2G2blU3cAuPQCb1dc
-	 SCJQC/zgms500WrByKduG0uTgnR+ssdGPYotdns90zsjipBZQkXcnSgOqge69M3tT6w==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793038526;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=ZzxC/mlDfiFU5gNlalakyp7W3bN2uLkMFf4OmwpYJoI=;
-	b=UPGj/fR/ibPh0SQkrQx6/aUzMykYxX8NIWLArRqWQlFDp8NANaGMUeDHfgduXXD+u+2/
-	 Mg6BWojFZLrheMX5DAtxubUObGNikUDhd1xzSJLmelbKeX4GQMLvAsYvkhmYFGJb5zIDj
-	 C/hzZ6Nzvkh6myPziK034kjCz1V1sRpJc4JFfNNgDiV0i2+MuUWsY4dDXxWKwlGBx5sfx
-	 5RdaPkcDV+HLILnIdeyxyyW9jrjNUO/CS8RdKqhcPbiI5maDKTHSNSI9VKPbvapD9e7/m
-	 4keiTgKzOY3lnTpMIBlQQNtMRAn8bVvQY59phci9K2OUgdzVKuKfb6SQkVwfCxM9TBA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A235TU8w;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkm89exA;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793038748;
+	b=MjsaxaGuwAuXfffUCO97J/wSVAXQTOHTumaJBiNRpakBcLR7oyC+DiVOWXIdjUlqU4qF
+	 SX5GNjaUGZDqv5HbUpGuv997nbKshzkGmD9MRdFTVJZb23+6wuoCr++Yhh7liRama9DVv
+	 p6HBECVZnCja46GHHrxEdNbek7BQNZBajefavA3LqOJo0mkdZD/Rf1HTpC45OTegI14O1
+	 HhWm3BBofhZWtlmca6gNKi4yAKmSzPCBdTpceBv+SLUPON+haBxnWLL968SxxDsEJO7+d
+	 4Q6s7hktNv37lxr15kEyF808JiXrmY5qAViBB9u6ccbRcZViblCt4yhvIaMZxnXlG4A==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793038748;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=m08PXGyn7U8s1ZQtlfTCv0P39/uk4oenXTU+aUpG6AY=;
+	b=ReaEzpQd8GQCC+59Yk97R3mdCM6g5iBVm5qhYKqNY6uQkHNC5BpxZV80cAmSaowadCfH
+	 GFn7+l455pGTtimw9jjRaB1pNL2LG13QAKGdPvbsyTlBzPfzcLk5OwxgaBKlM4wCME6NU
+	 7uy1HY0cevgi3HmGH6hrpIxKnaSI8uwLOyy3k5m8W0QT0e+BZ+FWdfPL44zLGcUVXCQz+
+	 Zby7KwpuvAiRJPfJDsW3d8kcEb0HGK1TzRN62MgW+oTvoHfOsX0hdY8hy+QOAFb+mgGqq
+	 l7820zTWjOA7yMa4w2PLnQLN+PFiwmspsEW5EMW/8w/W18qeSrlCf1uolx3lg1G8Nmw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YEBkeUXZ;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BE0A606A31D;
+	Mon, 26 Oct 2026 18:19:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YEBkeUXZ
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1793038748;
+	b=TMuu3Xhc2O8glIct9ox3xNTZlNStQF3ryCGDrEnPzA5jmG/3LOotmSZmpdSxxxwsJhod
+	 vEHBGRJd/kdiDWZiul/A1444Q1S1GXXB1ZQZdxJTAooPBYLLEn3mOSNd4b3sufpwPZMnt
+	 3pTa2Wwxjs7UQNMuMEoQnj9rEiq4TSSO9XQ63c+NyRPFqs9xI2ZRLREpUw2jayLCQAqMM
+	 fF44LMMMRpUk9jThqZbODvT0P87WQ4ka5uxqn2It8p0nB05UlL5gVqzBSmkr6uKLWkpCJ
+	 vPh+CwiD+IWEiLSLCSpygfD2NZhN1NXD6dTeZ1/STY7PB5OMCU/JJWRn7MqdRO22b5w==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793038748;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=m08PXGyn7U8s1ZQtlfTCv0P39/uk4oenXTU+aUpG6AY=;
+	b=cLQ7PMmWgQlmeXn2D5t93yyN1PXsESd+iX8mgCP/XgS1FB6V79BnQCFrD6M8efhb6rO/
+	 9evONDJMSVm8DXlM+bxVEXoEbh7GTmvmAANNyTR2y6FIl85TZmsoEyeEfRRCUjSkatXxj
+	 ZkcHX2ziW+dyek2vJ5muH3VbiKYHQI5We2LBvPNRAC9XxG6V/FQQ1OVxjMV9Gttl8x8BR
+	 moSPJL/EBNELL2mrSXh/LlJkml6jg5ksbzI9jgn5wp113846glEO6oHTgnb0ljYi8yLVK
+	 njARkApwGoVQ40ThhrPVgawg+KsUILroKV2D0wt5RPJyrTa9qM+bPA5CWlRZ5Jv9kAA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F060A606A32E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:15:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F060A606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A235TU8w;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kkm89exA
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QEvdWR465840
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:15:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZzxC/mlDfiFU5gNlalakyp7W3bN2uLkMFf4OmwpYJoI=; b=A235TU8wtxM5RILd
-	h42gaibcHoYge2tpQw2jJ/bgLJagAFeCWSRcvGwgKm1OUpFtr6BzHUpNTHS4+OpA
-	I//hJvjRcAvAoE6yvOhDq7FikBAPRwy+MitJJhGIE0nk3y9vVbTOCi4U+8a+Zpvm
-	Khhrj00Fy11josRZ++NOgXGeLP5armkjlHIJ0cE0IiZJx4HS8/lh8C/Et+DpZEJS
-	stp8WIhiBg6jCCxNEdXfhoYyiexjHAzYxcjEhmrfENVFYmx3q/Ty3/HVgo4eeTh1
-	3cykqjXB/APH6WmG4TFimNUwOGd/fP8zqWxH/FXNg2e4L3CNFPCxa04w1hIcwkA7
-	RzoZUA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hhshpus0r-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 18:15:25 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30bcb065bfdso5757898eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 11:15:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793038525; x=1793643325; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZzxC/mlDfiFU5gNlalakyp7W3bN2uLkMFf4OmwpYJoI=;
-        b=kkm89exAbYayr9ErDGXZ14B4CfLtCwfZkdtQgr5K+y1yi3EvYOawfyoi4fpH8+HPjD
-         UQ9KZb2wx8Sr0EujhVaoO98b/rNoN/w+Tgr8eMCRMa8qqUF5kfdOdW9+03+kQ2SxTC/P
-         m9uFmqcwwHxgHssCUcgGDOOfGgnnh4ZFp4CfSDmdBi2wokGtkRx6uFCo/cP3WdtEJEwo
-         Ika6K4FfJuFa2seaBozA7iYOv9Q5O/DPM2D/6b2CjstijKG+MOToEFuvnEAtH9Aj0cIV
-         KIWnxxnUdlk8BjVJj3UsxiVHnCsihCReOucaHPTtLR/LvqetobwhTNycY4dG+Y+2+OYZ
-         TB4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793038525; x=1793643325;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZzxC/mlDfiFU5gNlalakyp7W3bN2uLkMFf4OmwpYJoI=;
-        b=titG6JrA+jOu3dGXOewaNUJXofaSZ7mzstLVTvRXP6QCQ/h+BjG0ZHa7PGHEGH69M0
-         73C1+R4gnoqOjoVTb9WE2vciqpHT4TanUtm06gyixzL6Emmx4/TlG8WdfuAQZTx2Eujj
-         sXU4RQw9OkxvkQ6wCkJ4OUoY9chpPhZmRTXhIPfrRUTS6dC6Jc9FWGc6Na2/UgTnm31d
-         Dj63AuR1oFcr5E8phSRLN/aXqlf8rkTSFtGDTAUzITBbo7mia/PPZcAF1VsaO0J+HN6v
-         HGF6uDNkXMspxyQSvfH0IS/hvhApQBw8bYlv6c+UIa2jZ0/g9dNE2fgRDwkxeRfPjzHT
-         lClw==
-X-Forwarded-Encrypted: i=1; AKwUvBzV/UGnmH8Dy4uAE0lD6qNRRspXkU1653lu5YDlKt8sfiVTI3p0vzZl1kzkGet+Pdn5aKDqW681al+iyQhN@vger.kernel.org
-X-Gm-Message-State: AFq9FYKF4F9xn4mu12P2qSOIFjipNAiHPg0EtBZ80FQCtHXE0PabyHRc
-	WLUkOnrvHwQQsVOQWNP7ldqdeXkeETyQczZCmJy3ZPHQXZTr8/3A/9mlRbW9ZGyeAYFLRYhIvgH
-	gE1NLLLIRJGP/CkYJgoxYrlM3lAQYfMGcPa/kqGqRCGEkb4owl39G44ImMvSQiJo4PGm9
-X-Gm-Gg: AYBFou39R8rXASJ3yUKmiopZ0BnB+HFjofsaagwGQwtJ9071bGyufjua0QWz/ZlbMIK
-	GiA1LHtnsb6w7Gr+rES373TNoHPrXGHVuJiXcphuIC3MEFNfcz37AjqqNiNPgmlV7X89mCbBtNd
-	/QC7orAA5xN2HwrvMI5DF9bFI/CqqTacDIKRy4F2HMza+2K3Xz+vjBs/5HCbyzRIoxAfMekl+gU
-	/8FVxCJI0CUx8jbJ4yFg8imXqQBr+Xc9INSoemnR6bMBRh6+OVh2y530kQQYqTd038YJnKPMxwK
-	UdWU28r7l/nlpyZQU2OhXMNEqLDnphOF2iG2NvB2LoIm49y3bHiwYeRQkFw2lBwjAPFuB+T0cCf
-	yW9TMfQQMPHPIoIy51MCyKbA+T1ynJdrA
-X-Received: by 2002:a05:7022:7f12:b0:195:1a77:85cb with SMTP id a92af1059eb24-199290fe446mr9782939c88.1.1793038524486;
-        Mon, 26 Oct 2026 11:15:24 -0700 (PDT)
-X-Received: by 2002:a05:7022:7f12:b0:195:1a77:85cb with SMTP id a92af1059eb24-199290fe446mr9782902c88.1.1793038523606;
-        Mon, 26 Oct 2026 11:15:23 -0700 (PDT)
-Received: from [192.168.0.172] ([183.83.137.15])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0d98660sm29204742c88.9.2026.10.26.11.15.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Oct 2026 11:15:23 -0700 (PDT)
-Message-ID: <91fa12ce-93ec-4a39-b0e2-ed5e79e03ccc@oss.qualcomm.com>
-Date: Mon, 26 Oct 2026 23:45:17 +0530
+	by smtp.kernel.org (Postfix) with ESMTPS id 9562E1F01825;
+	Mon, 26 Oct 2026 18:19:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793038748;
+	bh=m08PXGyn7U8s1ZQtlfTCv0P39/uk4oenXTU+aUpG6AY=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=YEBkeUXZadQDXk7iriQYF75B+lX0bA8c8LVij+9l78XRwZ77m3v5UqMvOVohd/i5h
+	 SnxhAtHoxDeht8LOWwyC9Oz2fp0ScEEPYjyDZCzd3Uu1wMQQctfqx4q9jxu/e/ueyx
+	 YbjlfPN0fBXcHbiSoV5WPBD7fB1kO3/zQeQJ3IOjSlJeDEInulcB4IWvTTOJk6Wuig
+	 iAFOXGeQe5hoQj9atoP458izSMH/ZB5DBe142kKR7LnbHIMU2cYIXuhW0meystprBE
+	 OVaQdus3HNjD8S88qhvDgB5X9x2g1SN090+V2piOOP8tXXYvFzWNdoUz8a+1qhfh9R
+	 DJFgh4JFcQlcA==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 2666C44E1F;
+	Mon, 26 Oct 2026 18:19:07 +0000 (UTC)
+From: Filippo Falezza via B4 Relay <devnull+effeffe99.gmail.com@kernel.org>
+Date: Mon, 26 Oct 2026 18:19:07 +0000
+Subject: [PATCH] remoteproc: qcom: pas: Print auth error code
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,63 +82,101 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: add cyclic intra refresh on AR50LT encoder
-To: Gourav Kumar <gourav.kumar@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261023-iris-ar50lt-ir-cyclic-v1-1-a81d7060585d@oss.qualcomm.com>
-Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <20261023-iris-ar50lt-ir-cyclic-v1-1-a81d7060585d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261026-pas-auth-error-v1-1-1569e83358e5@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMBCE4VeRPbuQiBTaVykeYhyb7SHKroogv
+ ntTPczhO8x/kEEFRq/qIMUmJlMu8HVFMYX8ActQTI1rHr6M52Ac1iUxVCdltLF9un7w0YHKaVa
+ Msl/Bd3fb1v6LuPwrdJ4/s+C2enIAAAA=
+X-Change-ID: 20261026-pas-auth-error-e4c490bd1c0e
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Filippo Falezza <effeffe99@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793038746; l=2798;
+ i=effeffe99@gmail.com; s=20261022; h=from:subject:message-id;
+ bh=+UAPMP0mpA/2AP1Feq4iEAd04j9ngTHwcofPyCUE/Rw=;
+ b=/A113p09qt5dybuOuaIFcfMOHoKqEPwur5s2OMpFXC4z7zJipTjl/hbYB7nEIOxAIUAuYW7Yh
+ LamNBz+gD6bAmKVdj1qtMzrew4KsdCHGMtU6w61Kx9mlSpAZyYEyV+u
+X-Developer-Key: i=effeffe99@gmail.com; a=ed25519;
+ pk=7PPwl4QILojrh+ATB5QOpvXVmmoxaxyLQhrLRLWEL0I=
+X-Endpoint-Received: by B4 Relay for effeffe99@gmail.com/20261022 with
+ auth_id=1327
+X-Original-From: Filippo Falezza <effeffe99@gmail.com>
+Reply-To: effeffe99@gmail.com
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA3MiBTYWx0ZWRfX4eaXZcUMRjS6
- oM7rU8+xgz8V0bqFuQWNIB9+PeqDi9IkWP9SrcN/a01uTLjM7VhCTjRo8e0I4ePlhhvnEKU9dA3
- N4VTRrE0o7FI1aQG69ROL2y5S6QPo+0=
-X-Proofpoint-GUID: 2nyXdIdwXzszOOFlLSBCwxA8fg06cMyy
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA3MiBTYWx0ZWRfX706Mal7DKlNE
- ycjFnXjq/7web9fl1ZcjMBWzm6VH6ahflNMXc3/8RTVSZEaESoTPwN2ObeU0U5MwI8EjWpNOkCs
- J/+yTNO72zPvzT2hcLV3huYw3Q1eiDjKWwMtj1S4Bbts7bd1nnoPEa15XplFm+traje2Aj9BAu1
- gTlbEC4eaMxm6jxtIF2onBVL6zcQIAdQjKtMsTmHioZl7D5nJQ+0W+vhs0mS0NCkHUA8eYqwApP
- cRWHPJGz0iWFLw9iIeFAO2NiMRUTS5gRH57dslazreNqExhaME1ALkMSHllY9MxIIhYPj0sXHz7
- 3yz93J6dVnQy9SRvostU7Nfz//wH2CxPBA1FsC764elHXve4Pngwq2pmMZIH5J12er9uQkvM8Ye
- WddCJYFGf6BNO20cwGZaN7jGfUXXbjleQaGtadMgp5oUQm2USnH9aYdHt+PTiP0tRBorP9v/Lk0
- DFsx8YsoQTns9AGMQBQ==
-X-Authority-Analysis: v=2.4 cv=HZWB3SE8 c=1 sm=1 tr=0 ts=6adf98bd cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=H7Zjl3+OYEgA4r5vDjEDjA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=m_4LuSJA5yVraRB4MqYA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-ORIG-GUID: 2nyXdIdwXzszOOFlLSBCwxA8fg06cMyy
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-26_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 clxscore=1015 adultscore=0 priorityscore=1501
- impostorscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260072
 
+From: Filippo Falezza <effeffe99@gmail.com>
 
-On 10/23/2026 8:46 AM, Gourav Kumar wrote:
-> The Gen2 AR50LT encoder capability table advertises only the RANDOM
-> intra refresh type, so V4L2_CID_MPEG_VIDEO_INTRA_REFRESH_PERIOD_TYPE
-> exposes a single menu entry and userspace cannot select CYCLIC.
-> 
-> Advertise CYCLIC alongside RANDOM in the AR50LT encoder capabilities so
-> that userspace can choose between the two intra refresh types. RANDOM
-> remains the default, so existing behaviour is unchanged.
-> 
-> Signed-off-by: Gourav Kumar<gourav.kumar@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/iris/iris_hfi_gen2.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+When a subsystem fails to start, qcom_pas_start() logs "failed to
+authenticate image and release reset", but drops the error returned by
+qcom_pas_prepare_and_auth_reset(). That code tells the failures apart:
+a negative errno is either a clock, interconnect or SHM bridge failure
+on the Linux side or the SCM call's own status, remapped by
+qcom_scm_call(); a positive value is the status the PIL service
+returned for the request. Without it, finding out which one happened
+means adding a print and rebuilding the kernel.
 
-Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Print the error code, for the DTB image as well as the main one.
+
+Signed-off-by: Filippo Falezza <effeffe99@gmail.com>
+---
+Hello there,
+
+this is a small one: when a remote processor fails to authenticate,
+qcom_pas_start() says so but drops the error code, and that code is
+what tells a TrustZone refusal apart from a problem on the Linux side.
+The patch adds it to both messages, the main image and the DTB one.
+
+I ran into this bringing up the Motorola Moto G 5G Plus (nairo,
+SM7250), where the compute DSP will not start. With the patch it
+reports "failed to authenticate image and release reset: -22", which
+pointed at TrustZone refusing the call rather than at the image. The
+ADSP and the modem still start as before. I could not test the DTB
+path, as SM7250 has no DTB images.
+
+It builds without warnings with W=1 (arm64 defconfig), checkpatch
+--strict is clean, and it applies to rproc-next (82d0bbd67c42). The
+change and the changelog were written with Claude Opus 5.5 in Claude
+Code during that bring-up; I tested it on the phone and reviewed it
+before sending.
+
+Thanks,
+Filippo
+---
+ drivers/remoteproc/qcom_q6v5_pas.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+index abc59c0c29f0..ea3eb8e293c2 100644
+--- a/drivers/remoteproc/qcom_q6v5_pas.c
++++ b/drivers/remoteproc/qcom_q6v5_pas.c
+@@ -346,7 +346,8 @@ static int qcom_pas_start(struct rproc *rproc)
+ 		ret = qcom_pas_prepare_and_auth_reset(pas->dtb_pas_ctx);
+ 		if (ret) {
+ 			dev_err(pas->dev,
+-				"failed to authenticate dtb image and release reset\n");
++				"failed to authenticate dtb image and release reset: %d\n",
++				ret);
+ 			goto unmap_dtb_carveout;
+ 		}
+ 	}
+@@ -365,7 +366,7 @@ static int qcom_pas_start(struct rproc *rproc)
+ 	ret = qcom_pas_prepare_and_auth_reset(pas->pas_ctx);
+ 	if (ret) {
+ 		dev_err(pas->dev,
+-			"failed to authenticate image and release reset\n");
++			"failed to authenticate image and release reset: %d\n", ret);
+ 		goto unmap_carveout;
+ 	}
+ 
+
+---
+base-commit: 82d0bbd67c42a44f0e18b0b7b0da0f3ace0c9527
+change-id: 20261026-pas-auth-error-e4c490bd1c0e
+
+Best regards,
+--  
+Filippo Falezza <effeffe99@gmail.com>
+
 
