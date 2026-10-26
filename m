@@ -1,62 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.20
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793017942;
-	b=bq9tYZ0Vo2sm26ob4TOHQWqHF/8Ugo1zuE6rEJFcK+K6wvHSFAECYAWcI+BKNYvZBmTR
-	 7zknCAiY3me5r2AXXpd45oC7mBQgEanJt5Dk3+S8Gn/8JjIcTTxQvnZdJPJ+yTPQuqoSl
-	 V68CW1gcA6UCoe2yN77Rg+1wVu6I6KKbcl0xOVSQx0dEjGm4nhzL/o+/x0hx3rJA7SYm5
-	 yye129TY9kFWol0dGeXrAndmnbWPNww0no8aIyAgjP3z2NZt2+G264txUbppQMeKT3/0I
-	 idsvJyU4cqyQV9EyBsDuT2KyI/8Tc/3avQb7Ga9jt7s11QtUUqiQ/2SXWfxr5hvjDAg==
+	t=1793018207;
+	b=li3SEPXPKhvw+vSQh2qqSkqd7taUmxZ0kNj8NzvgOJXUDlsxcs9vQm/dh+SWmYHziFK/
+	 Aq7n7aFAfEOEzQjdO3hIjmt4UOTJ6VImZ7Pg+1o1FO7MUkWTRpW/tFeiam3URbQ1nSigK
+	 OVkphvMweTizT+bEXqVvx+hqibfOWti/+Fw3NkDSf4wYhLXg65uNnk4viQntBqRzI1CDb
+	 dOA/4hvJb9OhRg9X561h4XXhHfAIWr0M11ooA7L3v+TH0A7AyUxPhC2Suy3D5DawEnMgl
+	 Ur2S4ZchBxoaYXyN3uaW/lM1H5NGDI/KGTNBmVkW+i6xGIEL8xHEf2taC6x+PrIIViw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793017942;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=YP6TS5doeKkZA3J1McevqiS1QfTiivf4o6F01McV3DE=;
-	b=E5+l5Kb7M0m0lXCKHcZiV0b1Idpga1n5Q/9a4kNd3+EbyYwrzP2bDRGbEPbOyxxdq0Hy
-	 x91tFh2UTxeBuBM5bDtVf5xjG3HLywNM+oHHsBReGy5rTklNTbmQpWdkBPyRqKn96nUw/
-	 t8CF3RcqPvZGZF94gutIynNJgqWxC/ikq3t07OBMArPm5nZPMtZhUfn4yplS8uNI+gM7H
-	 SAEoPH/V2HC7wyqKs3/4EQmGGRsmFn960KSJMVM3zXx0BIh0nD9QQoF0hTSbmsNE7Z2s/
-	 YGinWOfMqlaSH17cwZWaecafPs8owmlNGPlU17S96Aj4LH6qsYV1fxQvqKUmEb5Nv2Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793018207;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=HICHL9vZkQCWXFVCM7oneoRD1DunhAvGDTsJhni/qVE=;
+	b=ysDovCPrZevBzspPziCiLQDp9p8lnQ4mGgPIqdyNWjVBAXP6phtaRQjkGrnec2VyvdM+
+	 d1h+PKISPlxsnVF2jGcro9nhNr5pVb+HH3FGxxYMHDB7QCk7/1hwBC7rBGFOzBefasvSW
+	 Q6RtSHVNHG0eoWv0Tw1ov7WZNg5VMAQvb1v6b1Fq5vN9dBZAkEhFi6qD7S1lQ5QMZI1vP
+	 OYTcJuO1kVdPqQkTRUOb8Cu9IgVmqrtnaackh7jVJpiYo4ef34lKl42HyZu7x1WZpnQYu
+	 2AQHZRldPnqJQ43+6KEwQ8n+4ruYyDxCzT3aJKKpxKdcPw8t/eZF0ejLFamKtZWjupg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KjfPsXrq;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A876460A2608;
-	Mon, 26 Oct 2026 12:32:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A876460A2608
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=nxsw.ie;
+	spf=pass smtp.mailfrom=nxsw.ie;
+	dkim=pass header.d=nxsw.ie header.i=@nxsw.ie header.a=rsa-sha256 header.s=protonmail2 header.b=FRE4tG1L;
+	arc=none smtp.remote-ip=185.70.43.20
+Received: from mail-4320.protonmail.ch (mail-4320.protonmail.ch [185.70.43.20])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0648606A322;
+	Mon, 26 Oct 2026 12:36:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D0648606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxsw.ie
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KjfPsXrq
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=YP6TS5doeKkZA3J1McevqiS1QfTiivf4o6
-	F01McV3DE=; b=KjfPsXrqNaSj4Vcy28dhyHq1iGnFj1L9Wn9ev7iedyOkKBp+ka
-	23TNA1Uosjx3JrIppoggJKLg5V2VEWAYsytkKgNi+1nCwnDqPb6QyxHJ3W6n80BG
-	nXecgJ/MRZbAIXOvyE5oDgzmig6t0wV6pex9xcXMjo36qMxgdKTaDldPM=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.177.11])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgCHATZLSN9qClRJAA--.2459S3;
-	Mon, 26 Oct 2026 20:32:13 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: linux-usb@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v4 1/3] dt-bindings: usb: snps,dwc3: describe two connectors sharing one HS bus
-Date: Mon, 26 Oct 2026 20:32:09 +0800
-Message-ID: <20261026123211.243224-2-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261026123211.243224-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261026123211.243224-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass (2048-bit key, unprotected) header.d=nxsw.ie header.i=@nxsw.ie header.a=rsa-sha256 header.s=protonmail2 header.b=FRE4tG1L
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxsw.ie;
+	s=protonmail2; t=1793018201; x=1793277401;
+	bh=HICHL9vZkQCWXFVCM7oneoRD1DunhAvGDTsJhni/qVE=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=FRE4tG1LnrwPMi1Cs6EYtxZmcPtPXX2/SE4okIEdW9rVrzobdakT2R0CKf5fvUEO0
+	 t+b2C6WctcLo25xN0blezizIBQ8tTHsebLDUTR22hRjDssJcZBzHNwJhxMYOpPeS5R
+	 MzenK5/ceoCP91tpKPETj17/y2UldqApEelbaDn9f6umXCZrYU7EvrR2i/GhmFzXo0
+	 04w6Hn9zZg1nVwENTV7ibIOUs9+HxT9EAmWz+AP1b+jJBGAKlijhjkQKgKEXouFtkT
+	 j+XmIZjV1bu41kGShv/ZA//Q1IE9RgHQkYSP8IAzxU6fWsqsV4r7HGYgnJ3GB3WeuD
+	 tAE1+HOiS5Y7A==
+Date: Mon, 26 Oct 2026 12:36:36 +0000
+To: Bryan O'Donoghue <bod@kernel.org>, Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Stanimir Varbanov <stanimir.varbanov@linaro.org>, Neil Armstrong <neil.armstrong@linaro.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Stephan Gerhold <stephan.gerhold@linaro.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Abel Vesa <abelvesa@kernel.org>
+From: Bryan O'Donoghue <bod@nxsw.ie>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Krzysztof Kozlowski <krzk@kernel.org>, iommu@lists.linux.dev, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Subject: Re: [PATCH v5 04/13] iommu: of_iommu: Add support for "iommu-ranges" on a device node
+Message-ID: <0b9fff7e-f284-4d46-a384-098bf90542aa@nxsw.ie>
+In-Reply-To: <a0ed3cf6-a58d-4a74-939d-62c9e6643b79@oss.qualcomm.com>
+References: <20260926-vpu_iommu_iova_handling-v5-0-0322ca5dc10c@oss.qualcomm.com> <20260926-vpu_iommu_iova_handling-v5-4-0322ca5dc10c@oss.qualcomm.com> <99a419c3-81a8-4b37-b9c7-2dd56978162d@linaro.org> <a0ed3cf6-a58d-4a74-939d-62c9e6643b79@oss.qualcomm.com>
+Feedback-ID: 54899767:user:proton
+X-Pm-Message-ID: 068be5f842ec7b780e5c7dece63d821971e308a8
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,185 +64,78 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgCHATZLSN9qClRJAA--.2459S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxGF48XFW7XF1ktF4fXryDtrb_yoWrWr4kpF
-	ZxtF48JrykKryfX3s7AF18uwn5K398ArnrJryUJryUZa98Jr1rXa13Kwn0qa47Cr92va4a
-	k34kWF1Yq3W7GF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBSb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82
-	IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
-	0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
-	IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
-	0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87
-	Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUgm9-UUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREMB2reWNVnoAALsu
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Two connectors can share the High Speed D+/D- pair of a single DWC3
-controller, with a GPIO selecting which one is connected.  Super Speed
-lanes stay per connector.
+On 26/10/2026 12:31, Bryan O'Donoghue wrote:
+> On 26/10/2026 12:08, Vikash Garodia wrote:
+>>> https://github.com/devicetree-org/dt-schema/pull/207
+>>>
+>>> Perhaps splitting this into two patches as an iommu-series would be=20
+>>> best.
+>> Intention was to keep the patch to add iommu-ranges property as part of
+>> iris driver patches to show the usage of this new property.
+>>
+>> I am fine either ways, whatever it takes for the maintainers of this
+>> file to review.
+>>
+>> Regards,
+>> Vikash
+>>
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 end =3D m=
+aps + size / sizeof(__be32);
+>>>> @@ -258,6 +367,9 @@ void of_iommu_get_resv_regions(struct device *dev,
+>>>> struct list_head *list)
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 type =3D iommu_resv_region_get_t=
+ype(dev, &phys, iova,
+>>>> length);
+>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 if (type !=3D IOMMU_RESV_DIRECT)
+>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 continue;
+>>>> +
+>>> If you look in iommu_resv_region_get_type() you can emit
+>>>
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_warn(dev, "treati=
+ng non-direct mapping [%pr] -> [%pap-=20
+>>> %pap]
+>>> as reservation\n", phys,
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &start, &end);
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return IOMMU_RESV_RES=
+ERVED;
+>>>
+>>> on a mismatch - which is not what the code will do now. Mismatch will
+>>> warn and then not map.
+>>>
+>>> So maybe dev_err() saying you won't map - in the new patch for reg.
+>>> Either way this isn't a change specific to iommu-ranges.
+>=20
+> Sure the above needs to be addressed though because its not a straight=20
+> change.
+>=20
+> Before if there was a mismatch it would sill be mapped - now we print a=
+=20
+> warning and _don't_ map.
+>=20
+> I'm not sure that's really what you meant to do here but if it is it=20
+> should be stated in the git log and IMO it should be a follow on change=
+=20
+> _after_ the initial addition (or before it) stating why mismatched will=
+=20
+> no longer be mapped.
+>=20
+> Because add iommu-ranges !=3D don't map mismatched, basically.
+>=20
+> ---
+> bod
 
-Describe that in snps,dwc3-common.yaml:
+sic - "before it was reserved, now we will print a warning stating=20
+something we don't do and won't reserve it"
 
-  - port-select-gpios selects which connector drives the shared HS bus;
-  - the shared HS bus is port@0 with two numbered endpoints, endpoint@0
-    and endpoint@1, so that "ports" keeps describing the controller's own
-    buses as the graph bindings expect;
-  - each endpoint carries "mux-state", the port-select level of that
-    connector, and "usb-role-switch" to declare that this connector has
-    its own role switch input.
-
-When port-select-gpios is absent the endpoint properties are rejected,
-so existing single-connector descriptions are unaffected.  The two
-mux-state values are constrained to be complementary.
-
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 ---
- .../bindings/usb/snps,dwc3-common.yaml        | 109 +++++++++++++++++-
- 1 file changed, 108 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
-index 6c0b8b6..6b06b00 100644
---- a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
-+++ b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
-@@ -13,6 +13,38 @@ description:
-   Defines the properties of the DWC3 core as being embedded in either an
-   vendor-specific implementation or as a standalone component.
- 
-+$defs:
-+  hs-endpoint:
-+    $ref: /schemas/graph.yaml#/$defs/endpoint-base
-+    unevaluatedProperties: false
-+
-+    properties:
-+      usb-role-switch:
-+        type: boolean
-+        description:
-+          This connector endpoint has its own USB role switch. The switch is
-+          registered against this endpoint and looked up with
-+          usb_role_switch_at_endpoint().
-+
-+      mux-state:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        enum: [0, 1]
-+        description:
-+          Logical level of the port-select GPIO which connects this
-+          connector to the shared High Speed data bus.
-+
-+    dependentRequired:
-+      usb-role-switch: [mux-state]
-+      mux-state: [usb-role-switch]
-+
-+  hs-port:
-+    $ref: /schemas/graph.yaml#/$defs/port-base
-+    unevaluatedProperties: false
-+
-+    patternProperties:
-+      '^endpoint@[01]$':
-+        $ref: '#/$defs/hs-endpoint'
-+
- allOf:
-   - $ref: usb-drd.yaml#
-   - if:
-@@ -26,8 +58,83 @@ allOf:
-       $ref: usb.yaml#
-     else:
-       $ref: usb-xhci.yaml#
-+  - if:
-+      required: [port-select-gpios]
-+    then:
-+      required: [dr_mode, ports]
-+      properties:
-+        dr_mode:
-+          const: otg
-+        ports:
-+          required: [port@0]
-+          properties:
-+            port@0:
-+              required: ['#address-cells', '#size-cells', endpoint@0, endpoint@1]
-+              properties:
-+                endpoint@0:
-+                  required: [usb-role-switch, mux-state]
-+                endpoint@1:
-+                  required: [usb-role-switch, mux-state]
-+    else:
-+      properties:
-+        ports:
-+          properties:
-+            port@0:
-+              patternProperties:
-+                '^endpoint@[01]$':
-+                  properties:
-+                    usb-role-switch: false
-+                    mux-state: false
-+  - if:
-+      properties:
-+        ports:
-+          properties:
-+            port@0:
-+              properties:
-+                endpoint@0:
-+                  properties:
-+                    mux-state:
-+                      const: 0
-+    then:
-+      properties:
-+        ports:
-+          properties:
-+            port@0:
-+              properties:
-+                endpoint@1:
-+                  properties:
-+                    mux-state:
-+                      const: 1
-+  - if:
-+      properties:
-+        ports:
-+          properties:
-+            port@0:
-+              properties:
-+                endpoint@1:
-+                  properties:
-+                    mux-state:
-+                      const: 0
-+    then:
-+      properties:
-+        ports:
-+          properties:
-+            port@0:
-+              properties:
-+                endpoint@0:
-+                  properties:
-+                    mux-state:
-+                      const: 1
- 
- properties:
-+  port-select-gpios:
-+    maxItems: 1
-+    description:
-+      Selects which of the two connectors drives the controller's shared High
-+      Speed data bus. Each connector is described by a numbered endpoint of
-+      "port@0" that carries its own role-switch input and the "mux-state"
-+      level selecting it.
-+
-   extcon:
-     maxItems: 1
-     deprecated: true
-@@ -411,7 +518,7 @@ properties:
- 
-     properties:
-       port@0:
--        $ref: /schemas/graph.yaml#/properties/port
-+        $ref: '#/$defs/hs-port'
-         description: High Speed (HS) data bus.
- 
-       port@1:
--- 
-2.53.0
+bod
 
