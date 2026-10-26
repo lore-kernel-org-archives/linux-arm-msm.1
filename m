@@ -1,54 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792974602;
-	b=YT6t6kE3W0ungv3h54UUkaOYhgALhCKwv9Ed1hCfpKi+TyUWuaZSZ45iOn1D2LR1D2+M
-	 c43CStPQzis3yHVVghAu7c1X/KA3dpkN+JlH7mFejr51zoY6VmUHYYYT5IKbNyPCwaMv9
-	 iwNbyx24mkiaV8YHKMtIGiOAfe9hNc0KLj3jQyMgd74nnq6tkrOzEUa7t9+pdxrmvVMjz
-	 fAc01KKFavYKd5SlCpvcZ/15KD4ah0cxiDvevRUO+TbwhTVckBi5Am7W7YW3DkInEGPBR
-	 Ykn4coiMrVb9tuW91vFgWQo8uXECCXl2s4zsJZ2nXCgLNKBlMpR640J4hJ0UY+4sSng==
+	t=1792983108;
+	b=G6C5vSlm02A6eLeVFTeapmDc3XGwg248U24wGC8ZV6qZSBip9q9wGKJ4zbN9qMscXENy
+	 MhgITaYrYY29ZRW+oaJ4adI128Dq1uhYABqqy4tLHB33pc5XmTZRtMpTaC6A39g0czPHG
+	 I2BBPxtbQHKAevBECjoTTTU0siOawonL0OpgiiugCxtfoqyFHPjp0PbKNvAp8uEAaaR6d
+	 ZwLUeLgtfcmIcdAr0782FSwtAzrRGvFi4vGK3qmzCe+qCLi2p/jOY7oxbj94H+HXwYFBF
+	 PC+u+2jjfrZF0oq3HokMdLYRKxqdxVmuB5RxxhDMNQR2VQreMS2xkSICbJ36ycc7iGA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792974602;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=ZKd3P1wzysSIL36iUdZh084BLryM9DRn1w/rd4mk+9E=;
-	b=F0rb1flJCQcatV7Kam291ZUsGTLdb4C9neXhmjITgnEBxaJyuwEQFWA6rtaZ7pBF+41B
-	 WrYQ/7vXcx8/szQ0jdl7c0zwYyNEoAHp1a6Fd07gWKPHqbJeuFBkDroTYLEtc+kXqmDPz
-	 4Acu+cX8vPnsipwCb0xr3DFxl+pJHDnmlbywqN6hVFrxttF+FIWwHjrzTyv0X54rqi+73
-	 mRjh4Wzij8rI47VdbQa7hoYnYjsEY+l15EJBLPYpbmI6AkSgLRDsPSw0KEKVe1HMpNSKO
-	 ZnTO7z1bypqy3a7JgLnYR/tBHQkBdRMx/nWEcaJDPYIPFyRUvz1U63ON0HT1HkitOjQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792983108;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=IEkv/QW2n3UCakr8PhLDY+azEONjvwOgumA41eOj6t4=;
+	b=4FUHbEikUZnm0Tsop8MKwsfPPnppVDS/G1qU5tf6J3qges1u+9M/5f6+56siuRIk25KP
+	 doQem/esBUMEQ09rGdoIDvI7jwQkyc8lIHFwNpq+4/tLuX/fd/Is9tBuJo0Zpl4RtSBfE
+	 gJo8hbupBXloTEbAqPdaORsVX+NA8dPtZp/Gfl4o2T4DyRP6+Qg+q6JrX9BTTb2fkG4WI
+	 ZICItTrrlRJjR9UgVqlyi6TFmBeiaEq6oHdVrrZS/XqwoUzL30JEigzNQ5PRZWLhaFniz
+	 colIT8R2fvNRc4QOz445qg26akTOB6fKLBkT6WqY1SzM3H7i4hKTzoD6r0DtDK1o3dw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=vinarskis.com;
-	spf=pass smtp.mailfrom=vinarskis.com;
-	dkim=pass header.d=vinarskis.com header.i=@vinarskis.com header.a=rsa-sha256 header.s=protonmail3 header.b=YahRD4Sa;
-	arc=none smtp.remote-ip=185.70.43.172
-Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch [185.70.43.172])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FmeYuR8y;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CF1Bh6hc;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7D7F606A321;
-	Mon, 26 Oct 2026 00:30:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7D7F606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C74A0606A31B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 02:51:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C74A0606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vinarskis.com header.i=@vinarskis.com header.a=rsa-sha256 header.s=protonmail3 header.b=YahRD4Sa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
-	s=protonmail3; t=1792974598; x=1793233798;
-	bh=ZKd3P1wzysSIL36iUdZh084BLryM9DRn1w/rd4mk+9E=;
-	h=From:Date:Subject:Message-Id:References:In-Reply-To:To:Cc:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=YahRD4SaojC7/Jv3m6QyRmVQyzNNEzHaHw3tlsUxQnUXwAWsPLic/kAYzFQUlXIc0
-	 DqghPf5xzKtGbArtQN3NmROocZoP2+zwcSQeFuMYnG+jFGZqXaPdRpVV02+QrWuQ2s
-	 mgu+8ZD5uNRSJBJp+t0eZUxaXFbc/USUDCkIbtsQQjl04lGnn9ujQfKmzgQpRYQ3dn
-	 YQ0Rtwx7kklefUAcZv1kmiRYJzolJQqObKOo4wn0bZWv45CABOnI9O7Hn4KLkI+jMl
-	 QJFeCW5NgviNOQofi+xfBC6UUf/739MeSdmUVdqTxWf/2lZ5OlsIgp7AUYcDD6b7EX
-	 5a2RzPFqW0Uyw==
-X-Pm-Submission-Id: 4jCZJg6SvDz1DFDy
-From: Aleksandrs Vinarskis <alex@vinarskis.com>
-Date: Mon, 26 Oct 2026 01:29:41 +0100
-Subject: [PATCH v8 2/3] platform: arm64: dell-xps-ec: new driver
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FmeYuR8y;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CF1Bh6hc
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69Q2KVRL3015081
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 02:51:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=IEkv/QW2n3UCakr8PhLDY+az
+	EONjvwOgumA41eOj6t4=; b=FmeYuR8ykUjaHHqWfE4YEIzloPqx/S04aCNCs7l9
+	5k3Ozn894zbngFZATQeonfgl3dupQD3kLZfZrUGHrh2z42EWrokJ2Vu7k9P9jPx9
+	Ib6CzBeJeSUerDQPH0+6g8COTgc/RRu4EFTpcpHa9lzlfziFIOMqgA0lG0zmioBu
+	nJ9oiEg7RpIg7F1PtTLLEwrYLHAfgHV75+K/vsowKW/RJl1Z+lm4cvcc5LU2K/YT
+	CNwH36yJXijEmMIlQQqCvWEcNR8C8I6hYl8lbDcjmRdpvJntuWWgCmCEZl9kp0RT
+	s/1EM1uYAzAaHDgveHNG7oqticVZed1ssWdGna2ZpQfZzw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgkmsck88-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 02:51:46 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-35c902e0da2so4392358eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 25 Oct 2026 19:51:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792983106; x=1793587906; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=IEkv/QW2n3UCakr8PhLDY+azEONjvwOgumA41eOj6t4=;
+        b=CF1Bh6hcT4RHZGf7a0ynatK3sXT94RoS9qGapTidRFUQKp7wewqjtBIFLbTOLaeg+H
+         lyjJD1/LWCvj5B6Mrtmcer8nuOyIaLcerSnopVmc3BML2aTzJDRBYriaMl4h6ROQyT61
+         SU2Lv7OL+8mSNcJfUDt1yTDDmDahxtrOgJCVdnvjH5G69z+3/kNTJMKc+E6v4dvJMLFf
+         M+rI1JHdwqQKlSdo1EqRMXbzRLnkEcW2znH4b72bL5H7xRRVJgZ88tv5ztZL2+sy92EE
+         27eWaIYZDeyj3YuKc6NR8xlVvfw3jT9Mw5LkASZV9jCuXVFb9feNGBdzdqyLzr1ZgWA8
+         tiHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792983106; x=1793587906;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IEkv/QW2n3UCakr8PhLDY+azEONjvwOgumA41eOj6t4=;
+        b=IUYdonWHb0ppXaGiss9I4tExFEE/McIDIU0BZBgaAyD9zZ31iSI1pMBVAmpqci4p/V
+         +73sAWlIQAKDqL77B83OXStG9gVR+55z6vH8hNs0Yll1WxWAOj6SM6GfdexwSoecbx84
+         acyGFYsxPUtANvWk42je5TuVUZTUJRzaofywDXSWLtymkgJyn2sOyFmoBF2gbohpeeyp
+         oVjV+iN/F0nd18DXhW5uG3RMr446vBxFldsaZoQRIjnPu8WnJH5rvjIoM+rOS7J1XkJu
+         N1ZnyOovMY6u+CoFX5uUYnCkoRWFONtlaQ+t9uKwohd7gfmvoEf8Vizqdi/4BzjCmxpd
+         zQiA==
+X-Forwarded-Encrypted: i=1; AKwUvBwtGBucLnigHtn+SyY0lLCH47seh6TgQE4+fTsUSUNoJkLr3SSJ3pr7KquAqrR1M9gvs1ozC4aX+1lYgaD8@vger.kernel.org
+X-Gm-Message-State: AFq9FYKMimFKARSBE9LqBsIJzOfVqckEZoYX+i6nQynnM5R7PhhPl3h0
+	/sFaew0oLr+wfoX2LSTujTgxyc3/KbBRKwCHQG14OHJhFN6Dmk0uIAt/uVIHczHEVtjwKl9zLeg
+	8AVNAsgpsdSmjl7pLrR8kBSvqKMJ6GlAGlEeGdIvm8o3uPQrGf6zRwNSP3UCQlMz+4CVn
+X-Gm-Gg: AYBFou14ZUWfAJGBta7aJ2Mow1wDeJUKPM9HFwYo0AE8v+gGatcn7xGfB7cvzZ9cDG6
+	pxUz9btEyryZCy0AJoqNfeIoGc68dXefzNiRINGgTK89HyeK67yOFiUB+6vyX7msaNgJDdNDevF
+	A/+d94xzmRe1xH7gSQp0xO1qjXwxwve/9pUUG7xXwtR7IsDnLglU7MGzlAxRmkXC/qMBBT2oXX5
+	ct0GP0KuQo6tMbAzOeHSKDiA8uDRD087kvWloJQOD3j0FR2mAi6+n72sL3u9S/pyfuQWfkEZcBR
+	1QqbKlCLnWSVkcQjcgm6L9XLVLl2JDGrqJBZT383/iw34wYF/lH4S942WC0rFF/HjgBXa7WhqVR
+	M9x4/pdlAJKnB4wWRzbCRV6UKhYc4NvB0xROIJvJvZnX0PlZxhZguWmEU
+X-Received: by 2002:a05:7022:3b82:b0:159:f192:5290 with SMTP id a92af1059eb24-1993505eb32mr8885756c88.13.1792983106008;
+        Sun, 25 Oct 2026 19:51:46 -0700 (PDT)
+X-Received: by 2002:a05:7022:3b82:b0:159:f192:5290 with SMTP id a92af1059eb24-1993505eb32mr8885698c88.13.1792983105262;
+        Sun, 25 Oct 2026 19:51:45 -0700 (PDT)
+Received: from YUANJIEY2.ap.qualcomm.com (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a2a5937dsm20442306c88.20.2026.10.25.19.51.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 25 Oct 2026 19:51:44 -0700 (PDT)
+Date: Mon, 26 Oct 2026 10:51:38 +0800
+From: yuanjiey <yuanjie.yang@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        tingwei.zhang@oss.qualcomm.com,
+        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: Add base HAMOA-IOT-COME board
+Message-ID: <at7AOnFJT94NYWk0@YUANJIEY2.ap.qualcomm.com>
+References: <20260727070758.528-1-yuanjie.yang@oss.qualcomm.com>
+ <20260727070758.528-3-yuanjie.yang@oss.qualcomm.com>
+ <ebd754fd-96bc-4f37-b390-35a952dc6328@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -58,435 +124,117 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261026-dell-xps-9345-ec-v8-2-251c2cbfbc6c@vinarskis.com>
-References: <20261026-dell-xps-9345-ec-v8-0-251c2cbfbc6c@vinarskis.com>
-In-Reply-To: <20261026-dell-xps-9345-ec-v8-0-251c2cbfbc6c@vinarskis.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
- =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Kees Cook <kees@kernel.org>, 
- "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
- Abel Vesa <abelvesa@kernel.org>
-Cc: Liviu Nicoara <lnicoara@thinkoid.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- platform-driver-x86@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
- Tobias Heider <tobias.heider@canonical.com>, Val Packett <val@packett.cool>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>, 
- linux-hardening@vger.kernel.org
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12381; i=alex@vinarskis.com;
- h=from:subject:message-id; bh=elAnLZWt8z6MOvbkJYIm0rR1i528ydQVBjJ4N5S5sc0=;
- b=owGbwMvMwCX2dl3hIv4AZgHG02pJDFn35jMsnR6ur7j5mpvenFflieyT+V/UJoa6zPtyaKLbm
- uMee+p2dpSyMIhxMciKKbJ0//ma1rVo7lqG6xrfYOawMoEMYeDiFICJvLdnZNh/dMu0rvSju3m0
- Q/4rMTKHxWQd/Tq5LU1BPf7A5Qcqzi8ZGU6IOwra99xIjpfK37jG/13hZj9mAXfrAxliFpdUdp7
- fxwkA
-X-Developer-Key: i=alex@vinarskis.com; a=openpgp;
- fpr=8E21FAE2D2967BB123303E8C684FD4BA28133815
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ebd754fd-96bc-4f37-b390-35a952dc6328@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: 5khYRyGlC1D6RulqXhAQyzc7zTa6jdvT
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDAxMSBTYWx0ZWRfX6QnYBJHT262g
+ LFXSCrcKupqLMyexVlz2wEK64YfOiUjujmDskqWHqZqoYpJfiQV58LYXEB2FQY0ss9c1Fo4omez
+ C25Ld5uVP7DU5soji/9aGsTXFmw9sKJ6UcJp+3nRebOmgJfqnoXsWEAgQFczZR4b8Iun6EexXLI
+ 4mGHKCta6zjSRFqrvTgpvg9r2mfYKHG8/zDgEna9GGRbgTksogBXpuTVw7mLW6wrJD5c+0bePvn
+ ZVY5yFhCaE5OluduZ4FF6UQtb6viZ9osfrChUgFqyorneYyHp3i7ugdQNjKGnSRZYcIO9Qj7kmO
+ CWDW6+nxh33I/sS7X+XALI/c6Kt/EMdzhsDnaF7MrsfNAz7jGLxvC/eb3/pcOveTPgO8+ynpTDj
+ Rca4sI4/pkz0Qw6gGEt1KXql37wwnKu/gyBDoL6/iinR/8zNJJmxKaqWVY4XVws/2omJDxEE9/d
+ C+xLoyt/SwYvxcLfdJw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDAxMSBTYWx0ZWRfXxLrO6Jyq97vV
+ MExXdb7yh8FQx5EKaiynKP3Zmv5Ls21CzvG1dd5aY/cPMy8G8kh2sEE/pANGX4nEnRQDXYP7kOy
+ iVsqn54B4tQXQwyKFXkpxnP23O1P+gY=
+X-Authority-Analysis: v=2.4 cv=UqX2pOwB c=1 sm=1 tr=0 ts=6adec042 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=TJUqZQk6AAAA:8 a=UhjQvpYGxMY_E1aW340A:9
+ a=CjuIK1q_8ugA:10 a=6Ab_bkdmUrQuMsNx7PHu:22 a=Q0W1slMkcave-rSCEGgY:22
+X-Proofpoint-GUID: 5khYRyGlC1D6RulqXhAQyzc7zTa6jdvT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-26_01,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0 adultscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610260011
 
-Introduce EC driver for Dell XPS 13 9345 (codename 'tributo') which may
-partially of fully compatible with Snapdragon-based Dell Latitude,
-Inspiron ('thena'). Primary function of this driver is unblock EC's
-thermal management, specifically to provide it with necessary
-information to control device fans, peripherals power.
+On Wed, Oct 21, 2026 at 12:18:39PM +0200, Konrad Dybcio wrote:
+> On 7/27/26 9:07 AM, Yuanjie Yang wrote:
+> > Add the initial device tree for the HAMOA-IOT-COME platform based on
+> > the Qualcomm X1E80100 SoC.
+> > 
+> > The platform consists of a system-on-module (SoM) mounted on a carrier
+> > board. The SoM integrates the core system functionality through a SiP
+> > containing the X1E80100 SoC and its supporting components.
+> > 
+> > Hierarchy:
+> > 
+> >     Carrier Board
+> >         -> SoM
+> >             -> SiP
+> >                 -> SoC
+> > 
+> > The COME SiP hardware is effectively the same as the SoM used on the
+> 
+> "is effectively" or "is"?
+is,
 
-The driver was developed primarily by analyzing ACPI DSDT's _DSM and
-i2c dumps of communication between SoC and EC. Changes to Windows
-driver's behavior include increasing temperature feed loop from ~50ms
-to 100ms here.
+My description here was inaccurate. I have revised it in v4.
+https://lore.kernel.org/all/20260806-hamoa-come-v4-v4-0-706021d4bc8c@oss.qualcomm.com/
 
-While Xps's EC is rather complex and controls practically all device
-peripherals including touch row's brightness and special keys such as
-mic mute, these do not go over this particular i2c interface.
+The platform consists of an Advantech SOM-6820 system-on-module (SoM)
+mounted on an Advantech SOM-DB5830 carrier board. The SOM integrates an
+IQ X7181 EVK SiP containing the Qualcomm X1E80100 SoC and its supporting
+components.
 
-Not yet implemented features:
-- On lid-close IRQ event is registered. Windows performs what to
-  appears to be thermistor constants readout, though its not obvious
-  what it used for.
-- According to ACPI's _DSM there is a method to readout fans' RPM.
-- Initial thermistor constants were sniffed from Windows, these can be
-  likely fine tuned for better cooling performance.
-- There is additional temperature reading that Windows sents to EC but
-  more rare than others, likely SoC T_j / TZ98 or TZ4. This is the only
-  thermal zone who's reading can exceed 115C without triggering thermal
-  shutdown.
-- Given similarities between 'tributo' and 'thena' platforms, including
-  EC i2c address, driver can be potentially extended to support both.
+> [...]
+> 
+> > +&ufs_mem_phy {
+> > +	vdda-phy-supply = <&vreg_l3i_0p8>;
+> > +	vdda-pll-supply = <&vreg_l3e_1p2>;
+> > +
+> > +	status = "okay";
+> > +};
+> > +
+> > +&ufs_mem_hc {
+> > +	reset-gpios = <&tlmm 238 GPIO_ACTIVE_LOW>;
+> > +
+> > +	vcc-supply = <&vreg_l17b_2p5>;
+> > +	vcc-max-microamp = <1300000>;
+> > +	vccq-supply = <&vreg_l2i_1p2>;
+> > +	vccq-max-microamp = <1200000>;
+> > +
+> > +	status = "okay";
+> > +};
+> 
+> Does UFS come stuffed on all such SoMs?
+yes, UFS is stuffed on all such SoMs.
 
-Signed-off-by: Aleksandrs Vinarskis <alex@vinarskis.com>
----
- MAINTAINERS                          |   1 +
- drivers/platform/arm64/Kconfig       |  12 ++
- drivers/platform/arm64/Makefile      |   1 +
- drivers/platform/arm64/dell-xps-ec.c | 308 +++++++++++++++++++++++++++++++++++
- 4 files changed, 322 insertions(+)
+here is the SoM doc.
+https://advdownload.advantech.com.cn/productfile/PIS/SOM-6820/file/SOM-6820_DS(052925)20250529110758.pdf
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f20bb171e5ee..791bc39af64f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7541,6 +7541,7 @@ DELL XPS EMBEDDED CONTROLLER DRIVER
- M:	Aleksandrs Vinarskis <alex@vinarskis.com>
- S:	Maintained
- F:	Documentation/devicetree/bindings/embedded-controller/dell,xps13-9345-ec.yaml
-+F:	drivers/platform/arm64/dell-xps-ec.c
- 
- DELTA AHE-50DC FAN CONTROL MODULE DRIVER
- M:	Zev Weiss <zev@bewilderbeest.net>
-diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
-index de45c5e101a4..63d53e05b502 100644
---- a/drivers/platform/arm64/Kconfig
-+++ b/drivers/platform/arm64/Kconfig
-@@ -33,6 +33,18 @@ config EC_ACER_ASPIRE1
- 	  laptop where this information is not properly exposed via the
- 	  standard ACPI devices.
- 
-+config EC_DELL_XPS
-+	tristate "Dell XPS 9345 Embedded Controller driver"
-+	depends on ARCH_QCOM || COMPILE_TEST
-+	depends on I2C
-+	depends on IIO
-+	help
-+	  Driver for the Embedded Controller in the Qualcomm Snapdragon-based
-+	  Dell XPS 13 9345, which handles thermal management and fan speed
-+	  control.
-+
-+	  Say M or Y here to include this support.
-+
- config EC_HUAWEI_GAOKUN
- 	tristate "Huawei Matebook E Go Embedded Controller driver"
- 	depends on ARCH_QCOM || COMPILE_TEST
-diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
-index 605cca4d42a9..400a2c732410 100644
---- a/drivers/platform/arm64/Makefile
-+++ b/drivers/platform/arm64/Makefile
-@@ -6,6 +6,7 @@
- #
- 
- obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
-+obj-$(CONFIG_EC_DELL_XPS)	+= dell-xps-ec.o
- obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
- obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
- obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
-diff --git a/drivers/platform/arm64/dell-xps-ec.c b/drivers/platform/arm64/dell-xps-ec.c
-new file mode 100644
-index 000000000000..20cb2a1b7bbd
---- /dev/null
-+++ b/drivers/platform/arm64/dell-xps-ec.c
-@@ -0,0 +1,308 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2026, Aleksandrs Vinarskis <alex@vinarskis.com>
-+ */
-+
-+#include <linux/array_size.h>
-+#include <linux/container_of.h>
-+#include <linux/dev_printk.h>
-+#include <linux/device.h>
-+#include <linux/devm-helpers.h>
-+#include <linux/err.h>
-+#include <linux/i2c.h>
-+#include <linux/iio/consumer.h>
-+#include <linux/interrupt.h>
-+#include <linux/jiffies.h>
-+#include <linux/module.h>
-+#include <linux/overflow.h>
-+#include <linux/pm.h>
-+#include <linux/types.h>
-+#include <linux/unaligned.h>
-+#include <linux/units.h>
-+#include <linux/workqueue.h>
-+
-+#define DELL_XPS_EC_SUSPEND_CMD		0xb9
-+#define DELL_XPS_EC_SUSPEND_MSG_LEN	64
-+
-+#define DELL_XPS_EC_TEMP_CMD0		0xfb
-+#define DELL_XPS_EC_TEMP_CMD1		0x20
-+#define DELL_XPS_EC_TEMP_CMD3		0x02
-+#define DELL_XPS_EC_TEMP_MSG_LEN	6
-+#define DELL_XPS_EC_TEMP_POLL_JIFFIES	msecs_to_jiffies(100)
-+
-+/*
-+ * Mapping between IIO channel name (as per schematics) and EC command byte.
-+ */
-+struct dell_xps_ec_therm {
-+	const char *name;
-+	u8 cmd;
-+};
-+
-+struct dell_xps_ec_data {
-+	const struct dell_xps_ec_therm *therms;
-+	unsigned int num_therms;
-+	const u8 *profile;
-+	size_t profile_len;
-+};
-+
-+/*
-+ * Format:
-+ * - header/unknown (2 bytes)
-+ * - per-thermistor entries (3 bytes): thermistor_id, param1, param2
-+ */
-+static const u8 dell_xps13_9345_thermistor_profile[] = {
-+	0xff, 0x54,
-+	0x01, 0x00, 0x2b,	/* sys_therm1 */
-+	0x02, 0x44, 0x2a,	/* sys_therm2 */
-+	0x03, 0x44, 0x2b,	/* sys_therm3 */
-+	0x04, 0x44, 0x28,	/* sys_therm4 */
-+	0x05, 0x55, 0x2a,	/* sys_therm5 */
-+	0x06, 0x44, 0x26,	/* sys_therm6 */
-+	0x07, 0x44, 0x2b,	/* sys_therm7 */
-+};
-+
-+static const struct dell_xps_ec_therm dell_xps13_9345_therms[] = {
-+	/* TODO: 0x01 is sent only occasionally, likely TZ98 or TZ4. */
-+	{ "sys_therm1", 0x02 },
-+	{ "sys_therm2", 0x03 },
-+	{ "sys_therm3", 0x04 },
-+	{ "sys_therm4", 0x05 },
-+	{ "sys_therm5", 0x06 },
-+	{ "sys_therm6", 0x07 },
-+	{ "sys_therm7", 0x08 },
-+};
-+
-+static const struct dell_xps_ec_data dell_xps13_9345_data = {
-+	.therms = dell_xps13_9345_therms,
-+	.num_therms = ARRAY_SIZE(dell_xps13_9345_therms),
-+	.profile = dell_xps13_9345_thermistor_profile,
-+	.profile_len = sizeof(dell_xps13_9345_thermistor_profile),
-+};
-+
-+struct dell_xps_ec {
-+	struct device *dev;
-+	struct i2c_client *client;
-+	const struct dell_xps_ec_data *data;
-+	struct delayed_work temp_work;
-+	unsigned int num_therms;
-+	struct iio_channel *therm_channels[] __counted_by(num_therms);
-+};
-+
-+static int dell_xps_ec_suspend_cmd(struct dell_xps_ec *ec, bool suspend)
-+{
-+	u8 buf[DELL_XPS_EC_SUSPEND_MSG_LEN] = {};
-+	int ret;
-+
-+	buf[0] = DELL_XPS_EC_SUSPEND_CMD;
-+	buf[1] = suspend ? 0x01 : 0x00;
-+	/* bytes 2..63 remain zero */
-+
-+	ret = i2c_master_send(ec->client, buf, sizeof(buf));
-+	if (ret < 0)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int dell_xps_ec_send_temp(struct dell_xps_ec *ec, u8 cmd_byte,
-+				 int milli_celsius)
-+{
-+	u8 buf[DELL_XPS_EC_TEMP_MSG_LEN];
-+	u16 deci_celsius;
-+	int ret;
-+
-+	deci_celsius = milli_celsius / MILLIDEGREE_PER_DECIDEGREE;
-+
-+	buf[0] = DELL_XPS_EC_TEMP_CMD0;
-+	buf[1] = DELL_XPS_EC_TEMP_CMD1;
-+	buf[2] = cmd_byte;
-+	buf[3] = DELL_XPS_EC_TEMP_CMD3;
-+	put_unaligned_le16(deci_celsius, &buf[4]);
-+
-+	ret = i2c_master_send(ec->client, buf, sizeof(buf));
-+	if (ret < 0)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static void dell_xps_ec_temp_work_fn(struct work_struct *work)
-+{
-+	struct dell_xps_ec *ec = container_of(work, struct dell_xps_ec,
-+					      temp_work.work);
-+	const struct dell_xps_ec_therm *therms = ec->data->therms;
-+	int val, ret;
-+	unsigned int i;
-+
-+	for (i = 0; i < ec->num_therms; i++) {
-+		if (!ec->therm_channels[i])
-+			continue;
-+
-+		ret = iio_read_channel_processed(ec->therm_channels[i], &val);
-+		if (ret < 0) {
-+			dev_err_ratelimited(ec->dev,
-+					    "Failed to read thermistor %s: %d\n",
-+					    therms[i].name, ret);
-+			continue;
-+		}
-+
-+		ret = dell_xps_ec_send_temp(ec, therms[i].cmd, val);
-+		if (ret < 0) {
-+			dev_err_ratelimited(ec->dev,
-+					    "Failed to send temp for %s: %d\n",
-+					    therms[i].name, ret);
-+		}
-+	}
-+
-+	schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES);
-+}
-+
-+static irqreturn_t dell_xps_ec_irq_handler(int irq, void *data)
-+{
-+	struct dell_xps_ec *ec = data;
-+
-+	/*
-+	 * TODO: IRQ is fired on lid-close. Follow Windows example to read out
-+	 *       the thermistor thresholds and potentially fan speeds.
-+	 */
-+	dev_dbg(ec->dev, "IRQ triggered (irq=%d)\n", irq);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static int dell_xps_ec_probe(struct i2c_client *client)
-+{
-+	const struct dell_xps_ec_data *data;
-+	struct device *dev = &client->dev;
-+	struct dell_xps_ec *ec;
-+	unsigned int i;
-+	int ret;
-+
-+	data = i2c_get_match_data(client);
-+	if (!data)
-+		return dev_err_probe(dev, -ENODEV, "No match data\n");
-+
-+	ec = devm_kzalloc(dev, struct_size(ec, therm_channels, data->num_therms),
-+			  GFP_KERNEL);
-+	if (!ec)
-+		return -ENOMEM;
-+
-+	ec->dev = dev;
-+	ec->client = client;
-+	ec->data = data;
-+	ec->num_therms = data->num_therms;
-+	i2c_set_clientdata(client, ec);
-+
-+	/* Set default thermistor profile */
-+	ret = i2c_master_send(client, data->profile, data->profile_len);
-+	if (ret < 0)
-+		return dev_err_probe(dev, ret, "Failed to set thermistor profile\n");
-+
-+	/* Get IIO channels for thermistors */
-+	for (i = 0; i < ec->num_therms; i++) {
-+		ec->therm_channels[i] =
-+			devm_iio_channel_get(dev, data->therms[i].name);
-+		if (IS_ERR(ec->therm_channels[i])) {
-+			ret = PTR_ERR(ec->therm_channels[i]);
-+			ec->therm_channels[i] = NULL;
-+			if (ret == -EPROBE_DEFER)
-+				return ret;
-+			dev_warn(dev, "Thermistor %s not available: %d\n",
-+				 data->therms[i].name, ret);
-+		}
-+	}
-+
-+	/* Start periodic temperature reporting */
-+	ret = devm_delayed_work_autocancel(dev, &ec->temp_work,
-+					   dell_xps_ec_temp_work_fn);
-+	if (ret)
-+		return ret;
-+	schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES);
-+	dev_dbg(dev, "Started periodic temperature reporting to EC every %d ms\n",
-+		jiffies_to_msecs(DELL_XPS_EC_TEMP_POLL_JIFFIES));
-+
-+	/* Request IRQ for EC events */
-+	ret = devm_request_threaded_irq(dev, client->irq, NULL,
-+					dell_xps_ec_irq_handler,
-+					IRQF_ONESHOT, dev_name(dev), ec);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to request IRQ\n");
-+
-+	return 0;
-+}
-+
-+/*
-+ * Notify EC of suspend
-+ *
-+ * This will:
-+ * - Cut power to display/trackpad/keyboard/touchrow, wake-up source still works.
-+ */
-+static int dell_xps_ec_suspend(struct device *dev)
-+{
-+	struct dell_xps_ec *ec = dev_get_drvdata(dev);
-+
-+	int ret;
-+
-+	cancel_delayed_work_sync(&ec->temp_work);
-+
-+	ret = dell_xps_ec_suspend_cmd(ec, true);
-+	if (ret) {
-+		schedule_delayed_work(&ec->temp_work,
-+				      DELL_XPS_EC_TEMP_POLL_JIFFIES);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Notify EC of resume
-+ *
-+ * This will undo the suspend actions. Without the resume signal, device would
-+ * wake up but be forced back into suspend by EC within seconds.
-+ */
-+static int dell_xps_ec_resume(struct device *dev)
-+{
-+	struct dell_xps_ec *ec = dev_get_drvdata(dev);
-+	int ret;
-+
-+	ret = dell_xps_ec_suspend_cmd(ec, false);
-+	if (ret)
-+		return ret;
-+
-+	schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES);
-+
-+	return 0;
-+}
-+
-+static const struct of_device_id dell_xps_ec_of_match[] = {
-+	{ .compatible = "dell,xps13-9345-ec", .data = &dell_xps13_9345_data },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, dell_xps_ec_of_match);
-+
-+static const struct i2c_device_id dell_xps_ec_i2c_id[] = {
-+	{ "dell-xps-ec", (kernel_ulong_t)&dell_xps13_9345_data },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(i2c, dell_xps_ec_i2c_id);
-+
-+static const struct dev_pm_ops dell_xps_ec_pm_ops = {
-+	SYSTEM_SLEEP_PM_OPS(dell_xps_ec_suspend, dell_xps_ec_resume)
-+};
-+
-+static struct i2c_driver dell_xps_ec_driver = {
-+	.driver = {
-+		.name = "dell-xps-ec",
-+		.of_match_table = dell_xps_ec_of_match,
-+		.pm = &dell_xps_ec_pm_ops,
-+	},
-+	.probe = dell_xps_ec_probe,
-+	.id_table = dell_xps_ec_i2c_id,
-+};
-+module_i2c_driver(dell_xps_ec_driver);
-+
-+MODULE_AUTHOR("Aleksandrs Vinarskis <alex@vinarskis.com>");
-+MODULE_DESCRIPTION("Dell XPS 13 9345 Embedded Controller");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS("IIO_CONSUMER");
+> > +
+> > +&usb_1_ss0 {
+> > +	/delete-property/ usb-role-switch;
+> > +	dr_mode = "peripheral";
+> > +};
+> > +
+> > +&usb_1_ss1 {
+> > +	/delete-property/ usb-role-switch;
+> > +	dr_mode = "host";
+> > +};
+> > +
+> > +&usb_1_ss2 {
+> > +	/delete-property/ usb-role-switch;
+> > +	dr_mode = "host";
+> > +};
+> 
+> And this sounds like a limitation of the carrier board more than
+> anything else
 
--- 
-2.54.0
+The SoM is a self-contained, pluggable module, and these USB role configurations are part 
+of its basic functionality. Therefore, I chose to define them in the SoM dtsi, consistent
+with the USB configuration in hamoa-iot-som.dtsi.
 
+Thanks,
+Yuanjie
+
+> Konrad
