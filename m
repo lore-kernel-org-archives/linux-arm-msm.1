@@ -1,110 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793025782;
-	b=x199Vh8pPOiVJAQSEXXrlGuSGfx3c8Mg4n2GcIL0sgKiaOpCUW+vFXoZqsMVLDAllDG2
-	 rsoEn96Lp4ynvS9CnM14GtJtK7HyHmHnJ55Dcn8f7/43h2ibQyEJlWQNzwqSsBLiTqssh
-	 BwozZdgLx3Qbx4+hs8cyh4CQlpRMgwahk1Ck5C5cQZ1dCNWOu62k6z8WqQZc+TkSLDmDh
-	 kxKUQvtDNNQTPvrOpS45RoHRPOjs3p+NSEWcIIyxkSh1NE6QN0tdFtWg8DjHgLhVKY1Mi
-	 oLMckJENXZDwtMvvnS8eqHxeZec/iLizw9xXoZ9LChw5rDzDkCrFQqjlPiR+8QGKS1A==
+	t=1793026217;
+	b=bEYIzk03dadpobC1BL/dnYao1NeMqN9IMDGTseg7wvPg+wsM8wapITrdhc5SMj6rQDkq
+	 u0gEmAhWI8qCTjRn5oWVKNOPNEieFpNyIuyKNyFH8zCSuj+4Jm0BeivnTwzEy5ulxJ47P
+	 ikWiHVkBxa6Ea6Z9ymKzgbU7NEZj7Pg68II1f5HFAFOSx+W/964K98389zRorlPVTaA5S
+	 /+OiK3SVoWwQQ5vJ0k61+AlciM39q6wgD072PHPMKwG+tlFODqgsLahIkObZtWaWXqY3K
+	 eZzmhJQS0h41SrIrhaaPJlKHz3yj80JKOPIWW6z1IQNrNsGFuW5Vxs6qci5KS6usvcw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793025782;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:From:Subject:To:Cc:References:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=09aJ8L1OVTrnJV751FfxeO3NQL3YOp8bQs333698z88=;
-	b=EgGdX4f6VmotyW/dFjqmk1AZWdNfEQSK/IiTPP8Ou3z3+JeOs644lURI9W7QUADwMXnf
-	 mdySBECqM9OgGi8YAr3GJixZO0GQs25ft9ZbMQNLxpkv+53P7M1gmjVRmXS5lFdIxSal0
-	 ZtimrZgp5bigb33ptOUwQFS9OBnnfC9IF0Mnp/j9hEBC08sGzQGhNzIxiTAvyRraTMKMO
-	 LlNsHOwPlO2CyEGW7ShbWQXw4wFJgHWit+2PeIaBC3sk0A8FzjCaDh8l5Y5TrJrDyyIH1
-	 F9/LYKbI+qP4MN5uBN+069vU7PRE+RSOzbtFWSFBo5xxVFbYYx7tMbNa+mLnCMiNwAA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793026217;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=p2Y0ewCR7R8xG92WWc1IJLfHg4RXwgJ2QKJmcFiaHq8=;
+	b=w4Rv6+jVZoxSNE8lBpr9vkEx1xKzV0/tjnRVZm5rgnJYwZ/qHOcn2VnulQemVVp8DR0u
+	 uVjnVX2ydZA8l0wTTDkDiGDoA8K/R3+dGzyf4scInMBztsybb/L8MBRq9nOI3U12gYZa4
+	 KT1aDbIjVBvpf6NOk09QQMPqozZKqiAMDduk0oKE0PtHhTuFZusr8AjJpSVAJpqBXyjio
+	 +jUIZw5TYXWm0N17ZXSZL5lhkJCXrh4I5B84GualLHLA5wSl8BIwQ3SdFHbZUsf0G0xGF
+	 w6mKk549YLjC57V4ksLnV6una4ZG1P+Rxt3EYxJdtVuDQazC/JMFNIcVgq8LKZQHmCA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=j41cvNl6;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=L1JD3a9t;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ADfa2vmw;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17841606A334
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 14:43:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 17841606A334
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71A50606A31A;
+	Mon, 26 Oct 2026 14:50:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=j41cvNl6;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=L1JD3a9t
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69QAt9xO3049897
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 14:43:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	09aJ8L1OVTrnJV751FfxeO3NQL3YOp8bQs333698z88=; b=j41cvNl6Ev3LOIQd
-	VY2aZwnEqjMO94P4Pa9oHxau/65Gs+fWNZLIUyQssZSpmfz5XFgdtwBtoaWCYxDq
-	HHkDdOMD34nsYGmDD2Zg2nBMnG8Cfuh0YS+lh3FWH+Re4qrWGWvjj9tnCee8P48u
-	5Bzt6xSuBoUs8VtNdNRyxQDynJ5JoXPfhPolr988NhF6TnvGhprGAIEZkhLZcbsv
-	xP3M+v/g4XxahE4Eu7OdU63/M9K2Ng6jS3d9+OxJ+R4imkD/DiYwgvAFOoNBc9yo
-	TOFkwxxQ2DkqETZ/IpdLXDz+amIcVheKWH8/a3zxm9I63vfhN/6qnHCbMIC/o+R7
-	dg+Xgg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hhvddamxh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 14:43:00 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f6f4fe531so555279385a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 07:42:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793025779; x=1793630579; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=09aJ8L1OVTrnJV751FfxeO3NQL3YOp8bQs333698z88=;
-        b=L1JD3a9tVRxmii9q+j03ni9ZBWKYnbQcge4y6Mp45IloDa4saewkpDJ2og/nldnTby
-         WylTHEEKDtJ7iALCXMyJY7qVLqJwSBXH5XGmUj5NDs/I96eqeyOQoKnZ4ot2+F/LuV9O
-         R0ZkrjCUv7sUZ7TLSigcjI4r+7PAGhyZm2122rpxVtPCJCmDj4r2iBsFmMJx30fqaqUO
-         w3/4/ajLCIbe/rzkHw/965jH9bBdcfhoSXCEaQSRx7ChGt9Vx2UsNP8jFHe0FHTj6FoV
-         dT47z3PrSqVRGswoUv11YZc9pMCxt1I3bmXeMHjaMcJcZlKCRykvdDpMH7j3NJ51TNpZ
-         P8Pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793025779; x=1793630579;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=09aJ8L1OVTrnJV751FfxeO3NQL3YOp8bQs333698z88=;
-        b=IDRNnXXYPJeBn9yB1s4L4tTCfXbuafxWXcZkcTokPStVIuMT/4ugdc9AfOo3HtKxqN
-         klBJnicT6pNd1a/LvMUmcG4846pAoIjzwqhl8cPb7EO6glZf8z+U55MInEE/a2i3mlJF
-         lQDRxXSmhT4Y0IPz1XXNtoxGb3gg6bmF5S1x3XQub9MUWk+pZgOmGYMX2qLtusJ2tyeh
-         qNfRTeXnP+f5ooxjVDr0ZhRA56ljKb/TlisZUiV4DurJ1g7bcutx+bulcDCRkh7SRRos
-         sMiltihSMkBQG7mzh2X6jyVQx80/z7Fmn6561c7Wo/XWXStH6co9eu185sojyiBtFLJF
-         cvpA==
-X-Forwarded-Encrypted: i=1; AKwUvBzwSbherjvLW64E4Qe34AAUnW0BmXpQHZMqeh8z+TR4zlDlAGppW/TQgDD1qfPljsj6NNmgZnNzPBwD7HyL@vger.kernel.org
-X-Gm-Message-State: AFq9FYI24q+j9iY1q1k+3TFp9D6VH4Uszc6pxpKuts+FzlaAzTym9W4x
-	J+xlKgzKv+sD1o7ulO3weSHhqBpSsrpByxSSMwVFJNKnVUOtkIJKKZu8A7cD/jJkp6Ydbrg2TsK
-	BA+DbfJnxCClpmGl0GsxchsnkmM2DIcME9SLLv06EcYN/ztrxuaiijNuVY/7gw4G9I0eu
-X-Gm-Gg: AYBFou2TGnFIaVz5qLk6YqUeYbnZNQaGUjeRGlyA+zfd8SP8aRF0+S/6yERIrQME77P
-	1QTHZzVkqljuuZoe5O+RLmFEpy+nASZGOQbF4o5lPB+mEwEvT52wFsMElsL8OSN666ZFLBDdNgx
-	lP9IeB426o+3PVzy1RZSs2dJiPmOGfnq7uXsl6HfmzEmUKP+LsiXaLI86jgYn9k7KLgF4IJCnZQ
-	jkYqtdoGHxUgL6n0OMb0dLeMsRESfqMgz3aC690eDnhlM2K5xbstaLve0aFnXbdmmlm0dN8K4Xl
-	KPqnfxpXOFRk4uOzEJQZx+VacDOkmucJkpvFA/fl9J0TEgo/cf9EwgNVxsN9cEJN5jHZR8u923i
-	Gce1vzb/xMGMMyn+NH+E=
-X-Received: by 2002:a05:620a:3184:b0:93f:1936:b1f2 with SMTP id af79cd13be357-940ef9ca117mr973043985a.81.1793025779292;
-        Mon, 26 Oct 2026 07:42:59 -0700 (PDT)
-X-Received: by 2002:a05:620a:3184:b0:93f:1936:b1f2 with SMTP id af79cd13be357-940ef9ca117mr973036185a.81.1793025778673;
-        Mon, 26 Oct 2026 07:42:58 -0700 (PDT)
-Received: from [10.40.99.45] ([78.108.130.194])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd350706sm336512066b.3.2026.10.26.07.42.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Oct 2026 07:42:57 -0700 (PDT)
-Message-ID: <62db6c93-a8f1-42be-bc2f-6df46c470d96@oss.qualcomm.com>
-Date: Mon, 26 Oct 2026 15:42:56 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ADfa2vmw
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 217BB1F01828;
+	Mon, 26 Oct 2026 14:50:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793026217;
+	bh=p2Y0ewCR7R8xG92WWc1IJLfHg4RXwgJ2QKJmcFiaHq8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ADfa2vmwrHaq6Cw87D7xoZlsX2o0pkNyxKUrI+5+vFM62gAyKxTly3E8ktnrWA+WU
+	 NYTqhhfautYQKtvR7P88HhQy9YLndnsoXlLotl0O5mQcYzgddrn6wKpE8jfWW6HInS
+	 VE8WGv6JW3tn5X4XRxemxhuCBg8ib4mIbu94Xq9V3SGSNv7hRsHAfICkAeehBVTail
+	 5EDq9DGuYGqS/wivKYYztdku7NIySprHmMJQKDYRMNHNI4Tev4/YdQzMFE49oGJEgJ
+	 1AHoaxq6qGCjkGYnM9IvIQC0zAtsDyuH98eV59fhKGytU+hY4DKSoWVvXmqgtJZRGe
+	 ryb3znwlyQTrA==
+Date: Mon, 26 Oct 2026 20:20:06 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Cc: "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>, Chris Lew <christopher.lew@oss.qualcomm.com>, 
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] net: qrtr: don't lose name server packets behind the
+ HELLO gate
+Message-ID: <at9n5CR6de3echo_@debian>
+References: <20261019-upstream-qrtr-hello-gate-fix_b4-v1-0-bd420aec171b@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,271 +62,54 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: johannes.goede@oss.qualcomm.com
-Subject: Re: [PATCH v11 5/9] media: Documentation: uapi: Add qcom-camss ISP
- params documentation
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Bryan O'Donoghue <bod@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-hardening@vger.kernel.org
-References: <20261023-camss-isp-ope-v11-0-0c2937195298@oss.qualcomm.com>
- <20261023-camss-isp-ope-v11-5-0c2937195298@oss.qualcomm.com>
-Content-Language: en-US, nl
-In-Reply-To: <20261023-camss-isp-ope-v11-5-0c2937195298@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: gQO2fOsv-VnahDu2IYMBhNWPM_Xd2usr
-X-Proofpoint-GUID: gQO2fOsv-VnahDu2IYMBhNWPM_Xd2usr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA1OCBTYWx0ZWRfXyNrVlTnJmvdp
- qaNBMUx2pFfR7EZoLH4Oq2q5nEonl5cu0AFJvEbHJGcwkLBRpZ4ajkOrLUIPWnrqdPv+2K7nrpt
- ga6tcPHwOAm7EErKV8fq3G7p5OVYB7sB3B03f+HEtszdz0prtOkeLbz2XA+gsv/FN8p81zbUx5y
- TlEJrsZUejpKaJY0pdhWgs0bHsYDq1B7IbxtgJ+0odvfC/OsIsI54iwmNE2ZJ6iygxl+GRkGuqO
- /julOtPbe7WOpuTpXLEhlbukvV+26soXNPO4l8a+RjBbHYZHsMFA4kjW4HLKE0TTFRgJasCpVB9
- W08M8Yaxj1wOcbfhBkI3NTTdlaTfWwoOh6Vs9aQ1VwzGs9DT9eSaovEBI8nZ7P3ooKktaJ1MdjG
- k/JGMRlHALE8duigq929gYCCN2YqYJaSzuSuPVsCpTRbKnwuD9btR4MMSqMRV1Kwdo6/L0AMbEn
- Gd29ZQiO9VAFLFKCHdw==
-X-Authority-Analysis: v=2.4 cv=N8+8hG9B c=1 sm=1 tr=0 ts=6adf66f4 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=rrvG0T/C2D967D07Ol03YQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=5S4UquuD0OMwzOfU3tcA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA1OCBTYWx0ZWRfX17VEOyIdtB8A
- ic3M6bmel+4N645pSWu95zaeXP3PUO9M9BuNCwszH+gHgq89ahOr934cGFi7QP1rDZ4rpJ+W0aI
- gKRRn9409fHqlxHD9GY2gH/FH457QBQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-26_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 adultscore=0 bulkscore=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260058
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261019-upstream-qrtr-hello-gate-fix_b4-v1-0-bd420aec171b@oss.qualcomm.com>
 
-On 23-Oct-26 5:09 PM, Loic Poulain wrote:
-> Add documentation for the Qualcomm CAMSS ISP parameters metadata format
-> (V4L2_META_FMT_QCOM_ISP_PARAMS). The format is built on the V4L2
-> extensible ISP parameters system, with per-block structs defined in the
-> qcom-camss-config.h uAPI header, and is designed to be shared by any
-> CAMSS ISP engine exposing a parameters metadata output video node. The
-> Offline Processing Engine (OPE) ope_params node is the first consumer,
-> with additional engines expected to add their own parameter blocks in
-> the future.
+Hi Igor,
+
+On Mon, Oct 19, 2026 at 01:12:00PM +0200, Igor Opaniuk wrote:
+> Since commit 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint
+> register") the core refuses every non-HELLO packet to a node until the
+> HELLO to it has been sent, and retries a HELLO that cannot be sent yet
+> 100 ms later. A freshly booted remoteproc has no glink rx intents, so
+> the first HELLO fails, and the name server's announcements in that
+> window (the replies to the remote's HELLO and the NEW_SERVER broadcasts
+> of local servers) are dropped for good. The name server then also skips
+> the lookup notifications for a server whose broadcast failed.
 > 
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-
-Thanks, patch looks good to me:
-
-Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-
-With the remark that this is quite OPE specific atm and we will likely
-need to split this into generic + ISP specific doc files later when
-we also add support for e.g. inline ISPs.
-
-It is probably best to figure out how to split the docs once we are
-landing a second ISP driver upstream though, so for now this is good
-as is.
-
-Regards,
-
-Hans
-
-
-
-
-> ---
->  .../userspace-api/media/v4l/meta-formats.rst       |   1 +
->  .../userspace-api/media/v4l/metafmt-qcom-isp.rst   | 147 +++++++++++++++++++++
->  MAINTAINERS                                        |   1 +
->  3 files changed, 149 insertions(+)
+> On QCM2290 (Arduino UNO Q) this stalls the modem in about one boot in
+> five: it waits for the RMTFS service, which rmtfs registers in the same
+> instant the modem starts, until its watchdog fires 40 s later; WiFi,
+> whose firmware runs on the modem, comes up a minute late.
 > 
-> diff --git a/Documentation/userspace-api/media/v4l/meta-formats.rst b/Documentation/userspace-api/media/v4l/meta-formats.rst
-> index b5455229837e707c24e134438d5e2fd12cb3bf37..25b46af4d9f7faab37000076c530e9aad5b4a076 100644
-> --- a/Documentation/userspace-api/media/v4l/meta-formats.rst
-> +++ b/Documentation/userspace-api/media/v4l/meta-formats.rst
-> @@ -20,6 +20,7 @@ These formats are used for the :ref:`metadata` interface only.
->      metafmt-intel-ipu3
->      metafmt-pisp-be
->      metafmt-pisp-fe
-> +    metafmt-qcom-isp
->      metafmt-rkisp1
->      metafmt-rppx1
->      metafmt-uvc
-> diff --git a/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..da0dd9b0884ea8b3c5fba7b5aa2eb1af80418cae
-> --- /dev/null
-> +++ b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-> @@ -0,0 +1,147 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. c:namespace:: V4L
-> +
-> +.. _v4l2-meta-fmt-qcom-isp-params:
-> +
-> +**************************************
-> +V4L2_META_FMT_QCOM_ISP_PARAMS ('QCIP')
-> +**************************************
-> +
-> +Configuration Parameters
-> +========================
-> +
-> +The ``V4L2_META_FMT_QCOM_ISP_PARAMS`` format carries image processing
-> +configuration for the ISP engines found in the Qualcomm Camera Subsystem
-> +(CAMSS). It is passed to a metadata output video node using the
-> +:c:type:`v4l2_meta_format` interface.
-> +
-> +Rather than a single struct containing sub-structs for each configurable area
-> +of the ISP, parameters use the :ref:`v4l2-isp` parameters system, through which
-> +groups of parameters are defined as distinct structs or "blocks" which may be
-> +added to the data member of :c:type:`v4l2_isp_buffer`. Userspace is
-> +responsible for populating the data member with the blocks that need to be
-> +configured by the driver. Each block-specific struct embeds
-> +:c:type:`v4l2_isp_block_header` as its first member and userspace must
-> +populate the type member with a value from :c:type:`camss_params_block_type`.
-> +Populated blocks must be placed consecutively in the data member, and the
-> +combined size of all populated blocks must be set in the data_size member of
-> +:c:type:`v4l2_isp_buffer`.
-> +
-> +The set of supported blocks depends on the CAMSS engine consuming the buffer.
-> +The block definitions themselves are shared across CAMSS ISPs; currently the
-> +Offline Processing Engine (OPE) is the only engine consuming them, through its
-> +``ope_params`` metadata output video node. Additional engines and blocks may be
-> +added to this format in the future.
-> +
-> +A block carrying ``V4L2_ISP_PARAMS_FL_BLOCK_DISABLE`` bypasses the
-> +corresponding hardware module. Any other block updates the module's
-> +configuration and leaves it enabled. Blocks omitted from a buffer keep their
-> +previously programmed configuration and enable state; until userspace submits
-> +a block for a given module, the driver's default configuration applies.
-> +
-> +OPE processing pipeline
-> +=======================
-> +
-> +The OPE is a memory-to-memory engine that reads a Bayer RAW frame from its
-> +``ope_input`` node and writes a YUV frame to its ``ope_disp_output`` node. The
-> +parameter blocks configure fixed-function hardware modules that the frame data
-> +passes through, in the following order:
-> +
-> +.. code-block:: none
-> +
-> +	 Bayer RAW in            RGB domain                      YUV domain      YUV out
-> +	 (8/10-bit)   +------+   +------+   +------+   +------+   +------+   +------+   (NV12/NV16/
-> +	  ----------> |  WB  |-->| DEMO |-->|  CC  |-->| GLUT |-->|CHROMA|-->| DSC  |----------->
-> +	              +------+   +------+   +------+   +------+   |ENHAN |   +------+    NV24/GREY)
-> +	                                                         +------+
-> +
-> +The stages, and the parameter block that configures each one, are:
-> +
-> +.. flat-table:: OPE pipeline stages
-> +    :header-rows: 1
-> +    :stub-columns: 0
-> +
-> +    * - Stage
-> +      - Module
-> +      - Parameter block
-> +      - Function
-> +    * - WB
-> +      - CLC_WB
-> +      - :c:type:`camss_params_wb_gain`
-> +      - Per-channel white balance gains and black-level / pedestal offsets,
-> +        applied to the raw Bayer data.
-> +    * - DEMO
-> +      - CLC_DEMO
-> +      - *(none)*
-> +      - Demosaic: reconstructs a full-resolution RGB image from the Bayer
-> +        mosaic. Always enabled; not configurable through this format.
-> +    * - CC
-> +      - CLC_CC
-> +      - :c:type:`camss_params_color_correct`
-> +      - Color correction matrix applied in the RGB domain.
-> +    * - GLUT
-> +      - CLC_GLUT
-> +      - :c:type:`camss_params_gamma`
-> +      - Per-channel gamma correction curves (256-entry LUTs).
-> +    * - CHROMA_ENHAN
-> +      - CLC_CHROMA_ENHAN
-> +      - :c:type:`camss_params_chroma_enhan`
-> +      - RGB to YUV color transfer matrix.
-> +    * - DSC
-> +      - Downscaler
-> +      - *(none)*
-> +      - Chroma (and, when required, luma) downscaling to produce the requested
-> +        YUV subsampling, e.g. YUV 4:4:4 to 4:2:2 (NV16) or 4:2:0 (NV12).
-> +
-> +The input node accepts 8-bit and 10-bit packed Bayer RAW formats (for example
-> +``V4L2_PIX_FMT_SRGGB8`` and ``V4L2_PIX_FMT_SRGGB10P``). The output node
-> +produces semi-planar YUV (``V4L2_PIX_FMT_NV12`` / ``NV21`` / ``NV16`` /
-> +``NV61`` / ``NV24`` / ``NV42``) or luma-only ``V4L2_PIX_FMT_GREY``. A
-> +configurable stage is bypassed while its block carries
-> +``V4L2_ISP_PARAMS_FL_BLOCK_DISABLE``.
-> +
-> +The following example populates an OPE parameters buffer with a white balance
-> +and a gamma correction block:
-> +
-> +.. code-block:: c
-> +
-> +	struct v4l2_isp_buffer *params =
-> +		(struct v4l2_isp_buffer *)buffer;
-> +
-> +	params->version = V4L2_ISP_VERSION_V1;
-> +	params->data_size = sizeof(struct camss_params_wb_gain) +
-> +			    sizeof(struct camss_params_gamma);
-> +
-> +	__u8 *data = params->data;
-> +
-> +	struct camss_params_wb_gain *wb =
-> +		(struct camss_params_wb_gain *)data;
-> +
-> +	memset(wb, 0, sizeof(*wb));
-> +	wb->header.type = CAMSS_PARAMS_WB_GAIN;
-> +	wb->header.flags = V4L2_ISP_PARAMS_FL_BLOCK_ENABLE;
-> +	wb->header.size = sizeof(struct camss_params_wb_gain);
-> +
-> +	/* Unity gain on all three channels (15uQ10, 1024 = 1.0) */
-> +	wb->g_gain = 1024;
-> +	wb->b_gain = 1024;
-> +	wb->r_gain = 1024;
-> +
-> +	data += sizeof(struct camss_params_wb_gain);
-> +
-> +	struct camss_params_gamma *gamma =
-> +		(struct camss_params_gamma *)data;
-> +
-> +	memset(gamma, 0, sizeof(*gamma));
-> +	gamma->header.type = CAMSS_PARAMS_GAMMA;
-> +	gamma->header.flags = V4L2_ISP_PARAMS_FL_BLOCK_ENABLE;
-> +	gamma->header.size = sizeof(struct camss_params_gamma);
-> +
-> +	/* Identity curve (pass-through, gamma 1.0) */
-> +	for (unsigned int i = 0; i < CAMSS_GAMMA_LUT_SIZE; i++)
-> +		gamma->glut[i] = gamma->blut[i] = gamma->rlut[i] = i;
-> +
-> +Qualcomm CAMSS ISP uAPI data types
-> +==================================
-> +
-> +.. kernel-doc:: include/uapi/linux/qcom-camss-config.h
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f53047aa8d3c103edaab227e7a21e50f6d9fd733..8d48a704e959dcabc8ff45f71f35b832afcf4971 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -22376,6 +22376,7 @@ L:	linux-media@vger.kernel.org
->  S:	Maintained
->  F:	Documentation/admin-guide/media/qcom_camss.rst
->  F:	Documentation/devicetree/bindings/media/qcom,*camss*
-> +F:	Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
->  F:	drivers/media/platform/qcom/camss/
->  
->  QUALCOMM CLOCK DRIVERS
+> Patch 1 makes the name server carry on after a failed send (announce
+> the remaining servers, notify the pending lookups). Patch 2 holds
+> control packets for a node behind its HELLO and sends them right after
+> it, instead of dropping them; data packets are still refused before the
+> HELLO, so flow control is unchanged.
+> 
+> Initially tested on the Arduino UNO Q (QRB2210) with v7.3-rc6 plus the board
+> support it needs: 10 fresh boots and 10 modem stop/start cycles, no
+> "failed to announce new service", no modem watchdog, WLAN firmware up
+> 6.4-8.2 s after boot every time; unpatched, 2/10 boots and 1/18 restarts
+> stalled. Built with W=1 on net/main; applies to next-20261016.
+> 
+> I'm not deeply familiar with QRTR; an alternative would be to have the
+> core trigger announce_servers() for the node once its HELLO is sent.
+> Happy to rework it that way if preferred.
 > 
 
+Thanks for the series. There is already a patch floating [1] to fix the issue
+you are trying to fix and it looks simple compared to this series.
+
+But still, this series is useful, atleast patch 1. So you can resend this series
+on top of v3 of [1] after fixing Sashiko's comments.
+
+- Mani
+
+[1] https://lore.kernel.org/netdev/20261022163116.1042-1-26rote@gmail.com
+
+-- 
+மணிவண்ணன் சதாசிவம்
