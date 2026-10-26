@@ -1,80 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793036983;
-	b=0z93bhNS1UC3sJXNuzBDDJeENVJPGHtKdcvxxdLN0XlWW/WXNWsaGx0I2tklHtf0WAl/
-	 4DE5C0PH7ORaXGyHDcIsKeRD6M8CsoA6LfDzwYSWKvV0KqOmAzxubT32zjwstKdwEjUBe
-	 jJiW49V4Uf7tG8FxWhITOKxT/bJsdJETWZFRqP96EgCcWyUdWSI0km/Z+L1KJVv0EInfn
-	 q6/VQ3SY6JXJ7TwhtSYm/lTnsXJODpW8wnh2gQNGXd/Bq/ypV0j16ctn5dj8FXO7BgrZd
-	 F9ZDUn7TgZ+3+/UgW3YE3QXWJidXui2FUhyBA32E9Wqe13Vmsec/PZ0XpUFkEatnThQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793036983;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=ZqtX6DI0kr6jtVxLiN9ux1tO8B5QzkEQXV5/RmgmS1A=;
-	b=GVxiXoI0EWsHQjccCcgwCuJAyM5gxfExw/+Lz30044SFE/U0HBm+2XjA1KAREYGsf1Bu
-	 8TwoknpGESNckVmp8AziVgz3Axw5UIOfV9SqXU8lDfLRD2s2FcLYhT/IEgHtlw/7IfeWO
-	 SZofizLwugn9CzgxIdm2rrcwxmqzc2MmVDLQ+EPX4GlDku7JiJAzTpDItYEA4G/ot+zYb
-	 XJpxwf8yEwzU2EpReMKd9k7IxRr4LUkShtlcJWekQ2U9qNqljdLSF9ceLje0CaZr/qoLy
-	 Uq/xubngKFLyWE30NpXaCogopXgdrO4yRrDF93ensElE5RAZPSNA/DtxzJbabhAtKTw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZccSGIN1;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9215606A31A;
-	Mon, 26 Oct 2026 17:49:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZccSGIN1
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793036982;
-	b=t6Ex82ZySKASHboV4vV6gtxTpWHi7yOhgM7Skn//Z4VG5Aa9Z+n42mFiO/FoLcOflbU6
-	 YI9yUDeiSIWQ5eKhBIsFRhISkmpmiopSo0Stgzey+7iC8DXqmIQkqRGDnkubZSuRlEUMp
-	 jkrdbjS54m6piYfWyd9mex1OUuzzCXCLBNVmVDcv9fZgxx+gby37juLxNMsLTdPlE2fpr
-	 a793LOPawHuoc7p+JQnDwYc8xJov7kYAMSAxJTtZ0o5/xyQSiIxHhVViaIzmpRlH8dwQ/
-	 QDBOoSvIrUrB0hMsREXMmhzzAQOujjNk6SBt/kXkfX5FoWCZ4v5vcpePzJxnH60rzVg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793036982;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=ZqtX6DI0kr6jtVxLiN9ux1tO8B5QzkEQXV5/RmgmS1A=;
-	b=GW1/Mvh6LvwalVofWOe2VFAo+5UNcCw2Y6aXYkoSYS82Z7L+1GqXJep1i/eVVtYy3jmc
-	 TMDhR7CZFaZ+BXrAFONGBOACu9/+/sM9DBncvMeWMKh33XFRqfZK+KOcO8m/gmpu3jWQb
-	 d34McNOY3gb12FHIqNQ3Is5ZgW9jRjwhZ5wpDgllrSwfXqtfEDwDZ9YJPCJT+RjvfrNPl
-	 xEIm6onBLbhPlHMP4FvSvk4irq8ZIBZdV299PSzy5gJ6krBIPPLN2Yuk79f9qDRywWCG1
-	 EdEAcionqR0xg5lhT/Pl84ss8B77nkCNotUm6I1yjz2CGCXwq2dw0UBsAp5VKIKlqkQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.121
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793037016;
+	b=UHhLljVzhhnID9G+NNDeXvnL/tDBMMwhkH7nWy/RmUt4YwBCUkg68jKofIjERua8RvW8
+	 zVr73f4YKPFRB8FDUvRkrP2F8olSuSUd3zDnFXfARtnsuAKAHKb+LhzA2I5Wm+wDJgTlp
+	 gBAVBxpY/JhYN7Iql1uTuqTNOu4O1r6VzX8fo2g6W+rpA72yoquhbYNi/KLTHRY3+Qers
+	 RxrIPWuq10q5vW0GgEMQeTyPJmrBEKTXW/n5ftSG1QGoxLKmJbiEIbjYP6MZk9HEn7B2g
+	 0uUZm9plaXrQ+qvw213GNqxO6WteNf7ymQmMITpA6KoXaJVxdG57yuUzQ2Gpytzo5VQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793037016;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=qtvLQFXYLH1xZASuIzh92uiv38RJQbKSHMJOqz45oZA=;
+	b=nzJ6hzTR+DYT+4ZurUrXopuHIe6EZeDTO6XbAwuIJwOc3+duzU0iTWhcJGQaUK3h641L
+	 MT9ABvmAQcTFca6DBysNIgqwHAFI7AxjD1b0j9waE3re+li/GOgd24JBa/ajhnu/to8Y1
+	 oSnqh38TCVSZWL9Kv9B3NJkNm3zbK5A41QYNt4lWHR7Yz0XjFfaPM3qQpqAhGP8XbA7Le
+	 PJM/920KE1StK5i1ob1dhIY+v79j0ZQlraBjz0fR6+7AQaVLpb2fqq5TlLnBou7stCe1n
+	 8Spvjrwd6tuaLRYf61wX4La2u/QIZwSRighieLaAtl7hCG6Wk/Pvo3ajFQbcZ0YahhQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=lQ+Mk76s;
+	arc=none smtp.remote-ip=79.135.106.121
+Received: from mail-106121.protonmail.ch (mail-106121.protonmail.ch [79.135.106.121])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id BF12C1F01825;
-	Mon, 26 Oct 2026 17:49:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793036982;
-	bh=ZqtX6DI0kr6jtVxLiN9ux1tO8B5QzkEQXV5/RmgmS1A=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=ZccSGIN1gYfAomNmS+396+iIjiqH61e3iB9ano8cuajVQfweLEGNvzYWw3A7uYR4J
-	 Wl/2peKylkLg1FDf43/ARgg9ZuSbXvQhat680ZDTWewBuW7J1QQpSfaVJYZ+5c1TtZ
-	 1FG+OIbEzgPb0sxwD8OuRy4UvB2FJ9Zz8Pq2oa/w5DpflAO4N85oKvuu3ShqqZX9bg
-	 SXomrsYBLU4fVwBkjnZ69zDO45Fu805XKB/7NA8BonEBalwYnVL4QyEkrdUAEsoJqW
-	 2NJJItDvKkU8GnIxb1KFm96cDy00f+c/79QD3ef+GJdDTUN68Xhyc3G5D1CihI/HBI
-	 Qe7/66eA3ldsQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 4172A44E12;
-	Mon, 26 Oct 2026 17:49:41 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Subject: [PATCH v3 0/2] interconnect: qcom: Add SM7250 interconnect
- provider
-Date: Mon, 26 Oct 2026 23:18:16 +0530
-Message-Id: <20261026-icc-sm7250-v3-0-aa303226298c@brar.si>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86F57606A31A;
+	Mon, 26 Oct 2026 17:50:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86F57606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=lQ+Mk76s
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1793037011; x=1793296211;
+	bh=qtvLQFXYLH1xZASuIzh92uiv38RJQbKSHMJOqz45oZA=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=lQ+Mk76s7lWRpR4oQYMVINFINOJF7IiFHz/Z0vPf2hM3mOhTeJiU2vJNP3/kqHDaw
+	 Ryo+E1tzDh0C62qfP4qFjdzXbaT7UWO2am6uabXA45t9R74aljhs+S2y4ildWJVfVh
+	 AWx2G2sJYxAbWgkr7HFP+/5dP4IBdLYV1Lr2Tbgv1GoOurt1hsknVbTSiCJ4SywiRg
+	 M3hYhclG0YJeJTF953qCAAN4l0wOY/ew+LjYLVfDqFQsHrUHLrWGSxyB8NkHUviDVj
+	 +5UxrVTCnZ+Svwj8t7vyAXvIaFiTU9WhMKjJAZX20Ixu2nnS3iKRGEUQNU5bimvA0U
+	 9w2OK84O9+cvQ==
+Date: Mon, 26 Oct 2026 17:50:06 +0000
+To: Christian Cortner <ccortner@gmail.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [BUG] media: iris: resolution change handling stops ffmpeg's h264_v4l2m2m decoder on glymur
+Message-ID: <179303700379.61096.12413812442887213723@pm.me>
+In-Reply-To: <20261026160952.22082-1-ccortner@gmail.com>
+References: <20261026160952.22082-1-ccortner@gmail.com>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 8f1d016c07f8251b96f90316162772dc61b152e8
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,93 +64,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NywrCMBBFf6VkbSSZ5qUr/0NctHG0I9hKUoNS+
- u8mdaGCywP3nDuxiIEwsm01sYCJIg19hnpVMd81/Rk5HTMzEGCkgJqT9zxeLWjBpXEKDSrZCGB
- ZuAU80WOJ7Q9vjvf2gn4shbLoKI5DeC5vSZbd33CSPNdRWS8BjNN214YmrCOxkk3wLaofEbIo0
- GrtNqqVzn3EeZ5fH0+yPe0AAAA=
-X-Change-ID: 20261023-icc-sm7250-1684e6e41a02
-To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Ishu Brar <patches@brar.si>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793036977; l=2815;
- i=patches@brar.si; h=from:subject:message-id;
- bh=XMn17Mlz1sQ1bjtBVxi9S/AkNIdkb5Ce8gNvbH3tfeM=;
- b=p6liVVIh25kiR7QvG2SeuvdfSRLRIVGeO/1/wz6ACoFFHbsJsxpSYqQSqZsuZ3JLEK0/StOyC
- LNqW8DHZp0eBSkq95HLKpvpdbRsr+jxiEbjBhLPdf1H2DCwE9dvOUWX
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Add the binding and the driver for the Network-On-Chip interconnect
-providers of the Qualcomm SM7250 SoC (Snapdragon 765/765G/768G). They are
-controlled through RPMh Bus Clock Managers, like the other RPMh based
-providers. The driver follows the layout of sm7150 and sm8250, and the
-nodes and BCMs come from the downstream interconnect description of the
-platform.
+On Mon, 26 Oct 2026 11:09:49 -0500, Christian Cortner wrote:
+> I could only test glymur. Birk Skyum's h264_v4l2m2m decodes on
+> X1E80100 matched a software decode [1], so problem 1 probably depends
+> on timing.
 
-Tested on a OnePlus Nord (a 7.3 based tree): all providers probe,
-and UFS, USB, display, I2C, serial and camera ISP devices get their
-paths without errors. The Adreno 620 GPU also takes its memory bandwidth
-levels from these providers (the Adreno 620 series sent earlier relies on
-them). The SoC devicetree nodes are not part of this series.
+It shows up on X1E80100 as well, with smaller streams than the 720p
+clips I had tested. Lenovo Yoga Slim 7x, Omarchy's kernel (v7.3 with
+a few Iris fixes from the list, none in the resolution change path),
+ffmpeg 9.0.2, h264_v4l2m2m on 2 and 3 second libx264 clips in MP4,
+compared frame by frame with a software decode:
 
----
-Changes in v3:
-- Subject: drop the redundant trailing "bindings" (Krzysztof)
-- Drop the "Child node's properties" comment (Krzysztof)
-- Binding: no child nodes any more; compute-noc, mc-virt and qup-virt are
-  separate compatibles on top-level nodes without reg (reg: false), as in
-  the milos and kuno bindings, so patternProperties goes away (Krzysztof)
-- No change to the driver
-- Link to v2: https://patch.msgid.link/20261024-icc-sm7250-v2-0-0e755894b188@brar.si
+  1280x720     every frame identical in 17 of 17 runs
+  1920x1080    every frame identical in 3 of 3 runs
+  640x360      one frame, then the decode ends, in 10 of 11 runs
+  640x352      the same in 2 of 3 runs
+  640x368      the same in 2 of 3 runs
 
-Changes in v2:
-- Set .enable_mask = BIT(3) on the ACV BCM, like sm8150, sm8250 and sc7180, so
-  that the voter sends the one-hot APPS RSC bit instead of the scaled bandwidth
-  (reported by sashiko-bot)
-- Drop the IPA virtual provider (qcom,sm7250-ipa-virt, its BCM and its node IDs):
-  clk-rpmh already owns the IP0 BCM through RPMH_IPA_CLK, and the sibling SoCs
-  have no such provider either; otherwise icc_sync_state() would zero its vote
-  (reported by sashiko-bot)
-- Link to v1: https://patch.msgid.link/20261023-icc-sm7250-v1-0-1e47c1226857@brar.si
+The one frame comes with "capture: driver decode error" and ffmpeg
+marks it corrupt, as in your problem 2. In the other 3 runs ffmpeg
+got EIO when submitting a packet and aborted:
 
-To: Georgi Djakov <djakov@kernel.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Ishu Brar <patches@brar.si>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-pm@vger.kernel.org
-Cc: Konrad Dybcio <konradybcio@kernel.org>
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
+  Assertion pkt failed at fftools/ffmpeg_dec.c:753
 
----
-Ishu Brar (2):
-      dt-bindings: interconnect: qcom: Add SM7250 RPMh NoC
-      interconnect: qcom: Add SM7250 interconnect provider driver
+In a series of 8 runs at 640x360 the firmware also reported a fatal
+session error, five lines each time, in 2 runs, one of them the run
+that aborted:
 
- .../bindings/interconnect/qcom,sm7250-rpmh.yaml    |   81 +
- drivers/interconnect/qcom/Kconfig                  |   14 +
- drivers/interconnect/qcom/Makefile                 |    2 +
- drivers/interconnect/qcom/sm7250.c                 | 1642 ++++++++++++++++++++
- .../dt-bindings/interconnect/qcom,sm7250-rpmh.h    |  148 ++
- 5 files changed, 1887 insertions(+)
----
-base-commit: 3fd56a2833c22f62eb84297d0dbd47739632f1a0
-change-id: 20261023-icc-sm7250-1684e6e41a02
+  qcom-iris aa00000.video-codec: session error received 0x4000003: fatal er=
+ror
 
-Best regards,
---  
-Ishu Brar <patches@brar.si>
+I'm glad to test patches on this machine too.
 
+Birk
 
