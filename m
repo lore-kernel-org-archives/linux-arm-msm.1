@@ -1,79 +1,80 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793046366;
-	b=tN6HviuVnndI4pCDBF+uiBo0CK8h5uzeKe4d3CNRJ25IsuzkrJ/OMYb6+NlVrNrzltF0
-	 Jj+wjO7rt+UQiJY8RQmWhFtqXXQLLnjTdMbqdLP+pCbnrfswkxBt7y7UEB5skR58RTy+2
-	 NNkCN23ecXyairMM3M+w3cw14gLTYSHDG8icJxiUfnsXJshX3Yn0UWC3oaFqYCtAV+oEF
-	 kj2Ipal3Rdw6ipWzrbkdmtmUth2JDQ04Ngw/3FNl/QzYGdrNG5OVsf/KjsJAhWLVGSFzZ
-	 uWZZoHRVH5fEHEFacOIX2RnBk1qw3sdIfDjPXKmmQ7vpySLcy6PrbsKvEkry8hy6pHA==
+	t=1793046367;
+	b=u3kaPcejz7fsOgbF0XtwqWvEQrpksqdIeAn68mOlqySQRwnuwHoe8nfNkZH7Ngd6CBjL
+	 hoSlEAzmNAtwpp6X78GpmpUSBzWKjBTtWYS9FhPH8vFEzeaTKaw+Mruo7ipCOdBsqFHZE
+	 rrF1Gt+Orzjvc5ottTOI474cdvtpsCTgl63mIHh5iUJgIlxtXIt6NhZGKcwxtgHfgNhob
+	 gddriYO6EMolchDTBQcRuW+5H7TnnysDoJ2HIy8bIbCyxM72W02ckhPVRVdsCu8WSLQF/
+	 TZpPyX4RTaJfR1gk1K1W5xvZg/r7xS12J1ORkAu384OSJQH5zK7/mzPOzlxmZiEEb2Q==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793046366;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9kV3mpo9IDcWJzdmAM3TrfjqAu96cGtkJuIv3p/bUaE=;
-	b=oFzzTUfJxk7xEToEQadBfUdmHAh8BS8/4dKl4vLaf/+6UurgcQ3pLmF23jU14WjVxJD4
-	 dtycKqSUNtASrBCsG6yNj2kG28MZ0y4G/WPD3vybMTrzuYxtlRrL5trIzAWakAcctTtXC
-	 unv2EuiEzdA/o2jQbUmNCnnDEQQKxgxLZcTh3iJ0fEddGd6/Z45+P4YDmH0DPQvA6Vmq2
-	 IVn/FNunZi2qlnBTIYZSXZVMlrRp3SD3GjPlJenz5MTRzH7gmF2U7FEW6721yLFu5B6tb
-	 ld25HD9oE5ojbrvlrMoWNzNU7yWBB9OuSRc5LqS12s8Oxx5MhQ6YPoF+l2MSUQV0DJw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793046367;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
+	b=Vz1Ns/CiNfQXx6WkS0f3jwSF4dt71A6h1sUNl9GCh4p9xFe7npjHj5TdVGMgNrm8CTaC
+	 W/Qx+GnO3aNdIx0ALfwPqdh4CtsHIueVdKSQV0ROP49dnU94zOkxzKzhexV9jAfuyTRDZ
+	 04f8RtVOyCwCRD/UZZrXuG6mYn58H4Oa5Q6USul2vFDwi5G5ZkODlG3hwYoG2bmJ+CtYi
+	 5blJgIeL7e2dVU5ZBKmWUZy+WjOiQ0R3t6Inn1jB2x9/N0GCLhpHxY6IJM5J+eFj0hkyY
+	 wX0crXZHna8QwYZLDnPVmX7sVKy/8iE+SjMXAQovXk9XDW/xeOuKncqiMCYfXD86KAw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HVZlARwq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hWDFityt;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A22C606A31A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7A90606A31D;
 	Mon, 26 Oct 2026 20:26:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HVZlARwq
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hWDFityt
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793046365;
-	b=LaswMTUwtPHZuz3YAX2905GQ99iuhDIXPyZontZxeN8B3o4rPfqj7jgmbN73mqj6PkYg
-	 chsH1tzqQ9pHCcRCCUXSMRq70h6iiaKOixFOry3gsyjb6ePJmqLf3Ewsza1u9y4bbtLHH
-	 RAMY77pPMhXqT7u/eMsxgtRjwcLIJAHdpp+g0cfjVpwJQLWVAsjWdb9kmsSGnmsLv172u
-	 52vUHRcyna1YM2BHftq+FPHIfYfZy/WpVjaIcsKKu6cPuQh5me+KoglYBo22wxJYsywWj
-	 A/khg4Wr6mvwXFcCdLD2PgMgz2m4kZyNyiJ4bRGFmNqVLwqkbdlgpAk7MPc7d5HA8vg==
+	t=1793046366;
+	b=N4BRJI5UeR34mq6dWbrtmB2LNC3IpARa/Qvphmqi71guVHSQbODNyo2rcd3/8iPxqyOv
+	 Xu37IEdQCU465D/lmxhr38Nmr4utWi7wFC/e87/lCywzD0uydXtiHof9cYb2sthBfr6nr
+	 mIdL+02kO4vtlfzXwFPzjrcs3uSAZTwMD1hhJDkRtJajMKoCaj+gxemP4um0tATjm3FLH
+	 oz0BKc3bEDjcH8XS6dyfjfqHEwrjzdYwUknX/DQP7heQz41eSOAsQBzkCXWUr0+ePjWow
+	 7ZvrV6oQ8HhPW+T0xrZjGn++2rDUQ6pXE/GGXPKNs0uVCo38WLZsXLy/xIrqQijWDDQ==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793046365;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9kV3mpo9IDcWJzdmAM3TrfjqAu96cGtkJuIv3p/bUaE=;
-	b=wHe0WVf7WbbPI2psYJFE2H+NWKgUlooUg5cPWFMPKefTdzVbVucQIKLfpD8TV+F5iDbH
-	 1ur/zvErtIQdogxoExuNSSsdNcuuNIt5ghu+UXO3eBLG2BhWBmKnRD2d/7a0fdzMnvsV5
-	 a21RxM3J3q+yNWe1epRIb7C4TjamOF2OLmgBmaLGyhWKPiuMi43JsmUGfQWtVTVDco/Nh
-	 0cNtoTWm5z3+ZbX+ReskNxHoRQv3ZmlFJnhIp8AuACl66PQN/2Ww7plChEpYEHtx5y5m6
-	 t4OfSN8E0OKqLOqA0QKPaCTRCJibthVToJYhwoptwBKe0LZGOYVHGElw7Km6nUhkoCA==
+	c=relaxed/relaxed; t=1793046366;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
+	b=Li1SDCXipGOCWB2bCW+4/17gtOti8j/v/yoQ1wHaYS2FQI8M6NtHJcbtEnxV+krw6S+F
+	 jf6aDsorI5hitZd/XJz+uD7t8/4Li18H3iEk7HFMINUHUZMuvqPkzMaCcYgE1CL97vP1X
+	 HyqBm/sPLi1gHx4lGYAv3JvhA+e3+7JZe6Dy611SZBE3xpkdcEKDW1oaks9StikP+1gTU
+	 Uu5PS+nW2PxSNT75UYh25sI/sNceckKOREPtktd5eRb3pBJG65uJbnXoKbTMNXRjXFfYZ
+	 H+q8ijwewis3CUq0mWXmL17NWoWimm3AwXxCFWHI5vOfeD//we9FHR5dxUH67XFJ5Pw==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 67F6F1F01825;
+	by smtp.kernel.org (Postfix) with ESMTPS id 6BE291F01828;
 	Mon, 26 Oct 2026 20:26:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793046365;
-	bh=9kV3mpo9IDcWJzdmAM3TrfjqAu96cGtkJuIv3p/bUaE=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=HVZlARwqmxS83q6l7ZbRUfFbZtjYy5PeP39XMVOS4eUF0TB/VQTba+iwiqlMSs5LH
-	 Q3DLKeYxtD/SZHphJK5mhv+3XPXpy4rGflgAPJY7CqLNwAe8I6dogeweRTCTxg8VDH
-	 VuW1mdmd5yJYM7tdE9ucemUgrSJbu1M10mmkGH3np4gF4HhJKjkKrfFoVoeGJ/QJT4
-	 cy0xccoQ9bhiNwzo2K6NpBbwbG6tqKfyw4ZJzv883j2t3sc9TMNthc44iKdQvadFjb
-	 UPvD1bzd3EqnpxbaOVE4lrcbdgP17zIVLWS1YKAMtou1dHK7fB7gc4aNaaweDqZfMG
-	 A1kdBrpOUwwWA==
+	s=k20260515; t=1793046366;
+	bh=U02bIyx3BCfEu09yqQK9NYbBI6VqnDE3NRZhVK5rMik=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=hWDFitytTvzqsub0C1t9st7Lm7QyCf9sltrg9X1I5O9mpsdCvKXpowG/B1QeUO27N
+	 jN4tuZ9BUyNxDf/S06mMQpY7Jdcat0z71Rkqcg0fDueTM9brWEsfYhval46PDLLbmH
+	 eE6rfcOJwhqDHqgyGzPl4MzWaSsMuP2K9SkB9Fk6evil1FxHXKGcEXnAm8fQ7XfcsS
+	 9dmtEHVeRwPXcXmd9nINLXZ1K8iaUqFOKIINWnIRC8+5+9NpjqKCBGAqqQCCVdOL3B
+	 JXuwP4wuilyq5oxaDBpz8utouLT3oFqbVpbSDYj+wYk8ufdEFbvg8RNFrq99+2Hw95
+	 FB6KNPgBMphcQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id C401A44E8A;
+	by lkml.kernel.org (Postfix) with ESMTP id B4D1944E8D;
 	Mon, 26 Oct 2026 20:26:04 +0000 (UTC)
 From: Xi Zhang via B4 Relay <devnull+xz.ca.cn.gmail.com@kernel.org>
-Date: Mon, 26 Oct 2026 17:25:42 -0300
-Subject: [PATCH v2 1/6] drm/msm/dpu: reset unassigned resource slots to
- NULL on topology update
+Subject: [PATCH v2 0/6] drm/msm/dpu: various dpu resource
+ allocation/release mismatch fix
+Date: Mon, 26 Oct 2026 17:25:41 -0300
+Message-Id: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,9 +85,12 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261026-msm-dpu-res-clean-v2-1-3d864435186e@gmail.com>
-References: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
-In-Reply-To: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NwQ6CMBBEf4Xs2TVdQDCe/A/DoZYt1FAgXSAaw
+ r9b8O5hDi+ZebOCcHAscEtWCLw4cUMfIT0lYFrdN4yujgypSguKQS8e63HGwIKmY92jpVLlpIr
+ 8klmIuzGwde/D+ah+LPPzxWbaRXujdTIN4XOcLrT3/vkXQoU2LyhT+qpLKu+N1647m8FDtW3bF
+ 7V9J8LEAAAA
+X-Change-ID: 20261026-msm-dpu-res-clean-f1704106453f
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
  Dmitry Baryshkov <lumag@kernel.org>, 
  Abhinav Kumar <abhinav.kumar@linux.dev>, 
@@ -97,85 +101,75 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Xi Zhang <xz.ca.cn@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793046364; l=2413;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793046364; l=2411;
  i=xz.ca.cn@gmail.com; s=20261026; h=from:subject:message-id;
- bh=XV5yIGRicisWHnZm/blBrd+eV6OtBhD/12tGnVobzAE=;
- b=PC8rCKcVBdPqI+8YugF/JK3f2ZJoK/+mL56ZMTYea2y7srn3rB74fUnnoW9F8vEyXVAqrCM8q
- VE1DcpN1W9pDxN4Xt9VuTInL1zi5OYgy7EqvaOEC6pTnu6kDrmKZzJQ
+ bh=UVZ0FP0vB3+dqaosznwwckHsKb9132cEaz7lbbhZycE=;
+ b=aAAOtE8VWiLHW047vwU7KeXFOCIn5E3D2gJPmPL46lWFaVplS6WdNri9jyWpA+OslCObFu7uD
+ iwPJ0J2uJYZDgTSXljBPVAp57OVVM4MZBzlmLMHja8B29eXS+6ld+vE
 X-Developer-Key: i=xz.ca.cn@gmail.com; a=ed25519;
  pk=aRUll5L3eJbwG8Y4BO9uySKGzm+Uy+Ccei9prnRVZRs=
 X-Endpoint-Received: by B4 Relay for xz.ca.cn@gmail.com/20261026 with
  auth_id=1328
 X-Original-From: Xi Zhang <xz.ca.cn@gmail.com>
 Reply-To: xz.ca.cn@gmail.com
-Content-Transfer-Encoding: 7bit
 
-From: Xi Zhang <xz.ca.cn@gmail.com>
+Hello,
 
-While this is not currently the case, it may be possible that topology
-for cwb and dsc resource requirements change between mode set in the
-future.
+Sorry for the quick v2, this version fixes issue found by
+sashiko bot (Good AI!).
 
-e.g. when dsc support is added to DisplayPort, dsc may be optionally
-enabled and disabled between different modes due to
-bandwidth requirements.
+This series fixes various resource de-allocation issues in DPU
+resource cleanup code. Aim is more reliable mode set, in particular
+when multiple displays/encoders are connected, to avoid blue screen
+or snowy dsc displays.
 
-Set unassigned resource slots to NULL on topology update to avoid
-issues in the future. It's good practice to do so anyway.
+Tested with v7.3 + msm-next, on Ayaneo Pocket DS (SM8550 Kalama).
+Changes are not device/chip specific.
 
-Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
+Changes in v2:
+- Removed problematic patches as indicated by sashiko bot.
+- - removed [PATCH 5/8] drm/msm/dpu: use cached PINGPONGs from mode set in cwb setup
+- - removed [PATCH 6/8] drm/msm/dpu: workaround res re-assignment issues by pairing enc/crtc
+- Fixed issues indicaed by sashiko bot
+- - [PATCH 2/8] drm/msm/dpu: save LMs in encoder mode_set for cleanup use later
+Re-add dpu_hw_ctl_setup_blendstage calls
+- Link to v1: https://patch.msgid.link/20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-index 0a6be69a3e83..8d2b4d2726f2 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-@@ -1205,9 +1205,13 @@ static void dpu_encoder_virt_atomic_mode_set(struct drm_encoder *drm_enc,
- 						       ARRAY_SIZE(hw_pp));
- 	}
- 
--	for (i = 0; i < num_cwb; i++) {
--		dpu_enc->hw_cwb[i] = to_dpu_hw_cwb(hw_cwb[i]);
--		cwb_mask |= BIT(dpu_enc->hw_cwb[i]->idx - CWB_0);
-+	for (i = 0; i < ARRAY_SIZE(dpu_enc->hw_cwb); i++) {
-+		if (i < num_cwb) {
-+			dpu_enc->hw_cwb[i] = to_dpu_hw_cwb(hw_cwb[i]);
-+			cwb_mask |= BIT(dpu_enc->hw_cwb[i]->idx - CWB_0);
-+		} else {
-+			dpu_enc->hw_cwb[i] = NULL;
-+		}
- 	}
- 
- 	dpu_enc->cwb_mask = cwb_mask;
-@@ -1215,16 +1219,20 @@ static void dpu_encoder_virt_atomic_mode_set(struct drm_encoder *drm_enc,
- 	num_ctl = dpu_rm_get_assigned_resources(&dpu_kms->rm, global_state,
- 		drm_enc->crtc, DPU_HW_BLK_CTL, hw_ctl, ARRAY_SIZE(hw_ctl));
- 
--	for (i = 0; i < MAX_CHANNELS_PER_ENC; i++)
-+	for (i = 0; i < ARRAY_SIZE(dpu_enc->hw_pp); i++)
- 		dpu_enc->hw_pp[i] = i < num_pp ? to_dpu_hw_pingpong(hw_pp[i])
- 						: NULL;
- 
- 	num_dsc = dpu_rm_get_assigned_resources(&dpu_kms->rm, global_state,
- 						drm_enc->crtc, DPU_HW_BLK_DSC,
- 						hw_dsc, ARRAY_SIZE(hw_dsc));
--	for (i = 0; i < num_dsc; i++) {
--		dpu_enc->hw_dsc[i] = to_dpu_hw_dsc(hw_dsc[i]);
--		dsc_mask |= BIT(dpu_enc->hw_dsc[i]->idx - DSC_0);
-+	for (i = 0; i < ARRAY_SIZE(dpu_enc->hw_dsc); i++) {
-+		if (i < num_dsc) {
-+			dpu_enc->hw_dsc[i] = to_dpu_hw_dsc(hw_dsc[i]);
-+			dsc_mask |= BIT(dpu_enc->hw_dsc[i]->idx - DSC_0);
-+		} else {
-+			dpu_enc->hw_dsc[i] = NULL;
-+		}
- 	}
- 
- 	dpu_enc->dsc_mask = dsc_mask;
+To: Rob Clark <robin.clark@oss.qualcomm.com>
+To: Dmitry Baryshkov <lumag@kernel.org>
+To: Abhinav Kumar <abhinav.kumar@linux.dev>
+To: Jessica Zhang <jesszhan0024@gmail.com>
+To: Sean Paul <sean@poorly.run>
+To: Marijn Suijten <marijn.suijten@somainline.org>
+To: David Airlie <airlied@gmail.com>
+To: Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
 
--- 
-2.55.0
+---
+Xi Zhang (6):
+      drm/msm/dpu: reset unassigned resource slots to NULL on topology update
+      drm/msm/dpu: save LMs in encoder mode_set for cleanup use later
+      drm/msm/dpu: use common helper cleanup function in cmd mode disable
+      drm/msm/dpu: Match setup_dither cleanup to the way it was set up
+      drm/msm: force mode_changed on color_mgmt_changed, not just ctm
+      drm/msm/dpu: reset DSC_CMN_MAIN_CNF in dsc disable
+
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c        | 92 +++++++++++++---------
+ .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c   | 10 +--
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c     |  1 +
+ drivers/gpu/drm/msm/msm_atomic.c                   |  3 +-
+ 4 files changed, 57 insertions(+), 49 deletions(-)
+---
+base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
+change-id: 20261026-msm-dpu-res-clean-f1704106453f
+
+Best regards,
+--  
+Xi Zhang <xz.ca.cn@gmail.com>
 
 
