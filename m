@@ -1,105 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793016573;
-	b=tzWrX8gO153OWciTEKriA7+8NkDi8V2y9fNjZ6bda1c9U7ZMOirmea9cME4RHcOfGpSZ
-	 G+IltCS9V7jjRC7O0vo5xkS8cba4VZayFOk7TqcUe3Sazj+SkCW02V6VIR6YGCPVwRns/
-	 DfZoqi2v/LbhFFOQBLagE8pt6q9pYbgmt1OZs7wL1ssl36VbhFa2TlMstJnqEojJzMp9K
-	 vzhPs+B6A+QsUEporNfuvyNrPFNIP5gOLniFVp3ItkXdP1ANLlYVa6f3bp8OAyKqCCj6V
-	 mlrlQN9JgXDC/7Uyx+uUS46tuCiuueOs2A7081UrT5ttpG+VrrvcVv0hrolRhLPbTZg==
+	t=1793016803;
+	b=WCeSFthgHPCFAT/74tw4SI7hL46Q4bGRHiqM4v97VavUsfdRUFjE0rLC+DwxOA/f6DW6
+	 Hl6sbbor9o9Idk6cD/xeNx3cN2w+OKiPdyJjte0b5+ZQOeWoYva+bjGkyAQHLKjkJcOEi
+	 S4OjvGLOjIfL9MySFhKNU9CROE+PHCxAtqPeFQ5L0RE873JBhJRR4X3S0+TnsSP2tI0oh
+	 hhg6SpwoLrrrP5A83RtYKqwQe9+P+Q8i1BnQTZOu9ax8oRqRJpVht93hkhmznm9rzfo8L
+	 U8RwotaZpA8pnDsJk0wyZOHHkszPejFx3mW8KKqS5ghrW3vt0lqjreDKLq8XbQPmdOg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793016573;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=1XPOBam7G51rl7n3GTaB7HD60REecu6em+DTE1e8j8E=;
-	b=RDbDCFPENRADAFNVtb2KYlwEiBQGeOt178R5nFoaMt5x7QO8UqqmalgogdW4lppipKgh
-	 ZeKVFC9rzCcbMDuprv3Cj4WmIGPGtj1JJ216jO/sekVrBrPvBFKhWdyrf0L8Leo2zXlc5
-	 P8Ne4QKZMAkPo7ECdrTz2mm0RpDtYen9C2agAkVCMsYDXVg/V5nV8QNoWwFyIgue/r2cw
-	 aPUAlb+XrWmvzzT1Nq0xikkhlWTanznbYLooylZGL4UXEq/JfUkEXVeFrQd+DTba9cVA5
-	 VQZZ/NDOg4h7gzFbvCf4rxyO8CualNogtQ8B6Gnxf41yS4dIfmyIouawpiKsn8yPD2w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793016803;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=5kpg6tu3jJ87t2WAsg/Cx15iwbLBaiT8eGmLfTt2JdM=;
+	b=q/VYhVm0JvwXwvYh22LZzlsiBxrKbOT/Jxds+dRnVANW09iWPqD9/PbxJkJ/UKMXobNC
+	 Vi7UCBAXXbwBZ40oxtByGSf7EQjXUd0ug07vNiQ2ZOFsgVS/c4XBzjhWJ6dgKjTHVX43B
+	 zowOPdC4cAAQICsVW7xxHqmL3kld2yA1q1h9WSuXQZBz8628k8EJ7Ka/zEYxuwKRcYn64
+	 NIGkV+z+SAFCr2aBI0jHIgiPs1Z/IdpZ7yRtoMwu17xfYZ3Aj5fgvMonslCkGM16QTZbQ
+	 8ZeOVH/Xh+UBF4p47OPBldbUg38nz54IBh4xnwNEKGHoiSkO32r0+mFHHYnTqN6shVA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=IOOm4Ef4;
-	arc=none smtp.remote-ip=209.85.128.45
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zrrh1Cnk;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3632C606A320
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 12:09:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3632C606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38D13606A31F;
+	Mon, 26 Oct 2026 12:13:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=IOOm4Ef4
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a35db1f202so12844005e9.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 05:09:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793016571; x=1793621371; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1XPOBam7G51rl7n3GTaB7HD60REecu6em+DTE1e8j8E=;
-        b=IOOm4Ef4YDTqKiGToDXLmbxqjqQL1TIvvhk4ERP/ch8VUtWXD3OyfF8p+pG1NnZ5es
-         1JHByO622WHqoByvRR3qc0KFrjoNSLhPEtS/e6kyE2qtkHRZz+YN2uKJHltG52/MjNXm
-         S2Xp1R+AzbvgHiV1DFxRvyUasvOfVknS+PARmwyTg1YfamwiJqi8gNiAv8JQkVbHaD2d
-         nSgxiGBhnWjdv/Fh0lRfRyOzDgRES19kECggb9GYwIDWimthSxLb/PxGfdWNh94HkxiM
-         Ft3YgjyPk//uVZ32BqWrkLlgSF6k8mLAXe+x4dTxhU3cibtdeFvxARYLlkOUJFBfKfN8
-         +VdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793016571; x=1793621371;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1XPOBam7G51rl7n3GTaB7HD60REecu6em+DTE1e8j8E=;
-        b=Ao4RWw3jqdGt+n6QFHHPpLNlZV/QnwrN1aCor3xGs7lGsvaDswdCmHJARkQUixGXkS
-         RQmy0+2R2WgjPV7yAMNr3tQ2K7kpl8Lf8GZCLn7MtMypxsIGfVJGBVmn04C+L9QRb8KQ
-         J6IkDoXUkvW9j2oQJRIbCMeBc2f5ID+DqeIe0bPdYCdHx7d+TcwqcO/rHbREFLz2kMT2
-         lUA6GgWzj+Gkzuiqv5dHSRmsgysJvyqz2lcPQHWJmnnBLrnrU6XtJc2wYQ44FW21zjbi
-         hLocXepidk9SRnXGxC1m7V3ZsTusZgbCWpuQ+FrWz95/FfCN63lRDHOkEezqoGWRWsqc
-         g1Ww==
-X-Forwarded-Encrypted: i=1; AKwUvBwt2c3GTyCwNbfGnX6SVGqs6q9+wYj2yLIgA0NnGgtkj3y9ILiT/8QKXpEJ9IDwTbsnq/IQaan+Cu12KF7z@vger.kernel.org
-X-Gm-Message-State: AFq9FYKxDR6DRFMMUFycU7u+txhy995rKy/Hc7q9c4S1PvqN041tFaou
-	tjZ2EYlUGVCyGe3W+NUiqjvsxnJ0SOhTzGLNTkym8qmzHYUq7Yd3RUM5
-X-Gm-Gg: AYBFou00tUB1uE3KCtm833dH5Qxa4mnWHwOPn7ncA3Y/+wgJurRH9vYipvuxjJ2Gpko
-	vgY2hW45ck48GFgJjXNpeJ3/INn9KWuJvb3obtRBrsagqONToqExNeKmfWSs1EEKEQn2Yd90H6r
-	RX4Vgj2vOj6diwULv5BExJBM569K+CaviEMKGsaYvsoVZZKpctuQf86DsdqE4e8pz/FHwNkk65F
-	GRDr9BVspQb0ucoDuMMtSo86+U1UEJT1VhC7bue0xLXPlbAQ1Tz1xNWRNsXwvSjTQrl85Y7xPPM
-	p10QtovsNuIU9V3dT247mk7h1zsxx/0CnCRb961mQLAuI0he7r9qf3phgm/Ad17o4zsCnTIaXep
-	Lm2UZE26uF3uwBmQeDFbfUuJN4cBld7txlB3yJJpjifuUQaFU/NYdLPM1IgBXIKidSEV/dV5LVU
-	WylveL9pZ/VBKW7izS2Y008JevSp58ccyH9g95U+aQEi4RXt3tCY1mIao3+xg074IZmi4/JHlrL
-	3SnUwHSEFxc1IsxCfzGI0Ci5BkMSmlQRH8i7KXA2W3LWE/0oPbjKPf825fd9yKVK5MmNYkn6HGo
-	4iT6Ju7Yomy5dGWOQaLOqF/4KlwpV1dTt7khsI/dj0lcA7lkQS0qgwTqx07BF5GIuA9jeHpNjHb
-	9nonG
-X-Received: by 2002:a05:600c:8b86:b0:4a3:59c9:a754 with SMTP id 5b1f17b1804b1-4a35acb17bfmr117309135e9.22.1793016571251;
-        Mon, 26 Oct 2026 05:09:31 -0700 (PDT)
-Received: from threadripper-fedora-workstation (dh207-14-234.xnet.hr. [88.207.14.234])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a00e1b0sm152200695e9.3.2026.10.26.05.09.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 05:09:30 -0700 (PDT)
-From: Robert Marko <robimarko@gmail.com>
-To: andersson@kernel.org,
-	abelvesa@kernel.org,
-	sboyd@kernel.org,
-	bmasney+clk@redhat.com,
-	jbrunet+clk@baylibre.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	konradybcio@kernel.org,
-	taniya.das@oss.qualcomm.com,
-	ansuelsmth@gmail.com,
-	john@phrozen.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Robert Marko <robimarko@gmail.com>
-Subject: [PATCH v2 1/4] clk: qcom: ipq-cmn-pll: Correct IPQ8074 NSS NoC rate
-Date: Mon, 26 Oct 2026 13:08:12 +0100
-Message-ID: <20261026120920.1667982-1-robimarko@gmail.com>
-X-Mailer: git-send-email 2.56.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zrrh1Cnk
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 519AC1F01828;
+	Mon, 26 Oct 2026 12:13:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793016802;
+	bh=5kpg6tu3jJ87t2WAsg/Cx15iwbLBaiT8eGmLfTt2JdM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Zrrh1Cnkh1X9Zp52CwB31ogBR+JH0zOj1Dqf6y0qLMU28HWa0BU0nc9Hh7DR6xWLZ
+	 mdIGGyALyrVrAOhiP/QU5RHrankJTrUEZ+xN+cOaf6oKSvFVjxff0ZkBw3xVWij9L8
+	 ZoEbAJivrJo0FACBLttHT3OC0nJG36nL2m3sRfcwuQncjpXm84IRenPRlHGzqMMcOi
+	 fmdIVeyKdW/hAX5aIZqzjMrIG4+ubepfKK7UjGi1liYiXPVfrH4BZA/h3iy7hSG1hj
+	 fuJoKeYCWZyP/I0m7DTt1vU9JS92rVcCMOX0pbJjWPTZ/ZcyofUhwefzgc3bQsTOVJ
+	 T+1/3eb1aFyyQ==
+Date: Mon, 26 Oct 2026 17:43:05 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Wei Deng <wei.deng@oss.qualcomm.com>, andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org, 
+	krzk+dt@kernel.org, conor+dt@kernel.org, linux-bluetooth@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	quic_chezhou@quicinc.com, cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com, 
+	jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com
+Subject: Re: [PATCH 2/2] arm64: dts: qcom: monaco-evk: Describe the PCIe M.2
+ Key E connector
+Message-ID: <at9Dn2N-PmLOPaeq@debian>
+References: <0303224f-4c2c-46ec-9866-5ea1fd0fb4a3@oss.qualcomm.com>
+ <20260825092715.5794-1-wei.deng@oss.qualcomm.com>
+ <isbrpaztfrgwfcleujrn4w26cshbi2mgn57tbh5bubvsegn6lc@jh3ab6htvd24>
+ <83b67ab2-ab68-427a-94aa-881454f457ba@oss.qualcomm.com>
+ <CAFEp6-2KDxDrfTZLN7KPRg=aavj8nqQr7ftna23n9C1Cpbwwbg@mail.gmail.com>
+ <e26f0360-aaed-4e40-b1b2-956c92d34db5@oss.qualcomm.com>
+ <CAFEp6-0b15kV6ehMN4Pv24UmMo7xFYr=H396dvdD1Teh7h+K+w@mail.gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -109,39 +68,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAFEp6-0b15kV6ehMN4Pv24UmMo7xFYr=H396dvdD1Teh7h+K+w@mail.gmail.com>
 
-The IPQ8074 NSS NoC bias output feeds the GCC NSS NoC clock without
-a divider.
+On Thu, Oct 22, 2026 at 03:08:44PM +0200, Loic Poulain wrote:
+> On Thu, Oct 22, 2026 at 11:34 AM Konrad Dybcio
+> <konrad.dybcio@oss.qualcomm.com> wrote:
+> >
+> > On 10/13/26 10:13 AM, Loic Poulain wrote:
+> > > Hi Folks,
+> > >
+> > > On Mon, Sep 21, 2026 at 2:38 PM Konrad Dybcio
+> > > <konrad.dybcio@oss.qualcomm.com> wrote:
+> >
+> > [...]
+> >
+> > >>>> We are adding M.2 Key E connector support for monaco-evk [2]. Konrad
+> > >>>> suggested moving the port/endpoint anchor nodes to the SoC DTSI
+> > >>>> (monaco.dtsi) for clean DTS layering, so that board files only need to
+> > >>>> fill in remote-endpoint for boards that actually have an M.2 connector.
+> > >>>>
+> > >>>
+> > >>> This means, the dummy port/endpoint node will always be present even when the
+> > >>> M.2 connector is not used. I don't see a compelling reason to do so.
+> > >>
+> > >> I don't really see a compelling reason to defer re-defining them to each
+> > >> device DT either..
+> > >
+> > > Adding an empty port/endpoint at the SoC level is problematic for
+> > > uart, port is not always expected, this depends if the uart is exposed
+> > > through a connector or to an onboard device. So we may end with an
+> > > unconnected endpoint but still have a bluetooth subnode, which can be
+> > > a bit confusing... Also why adding a port/endpoint only for a specific
+> > > uart in the dts, and not for the others? This is a board/SoC level
+> > > choice to use a specific uart for M2 or not.
+> >
+> > From my perspective it's removing boilerplate. Currently all USB and
+> > PCIe hosts already define their ports and endpoints in the SoC DTSI
+> > and if they're unconnected, then simply nothing happens.
+> >
+> > Both 'ports' and 'endpoints' are an abstract property that signify
+> > 'X can be related to Y' and I don't see how that's a problem here given
+> > UART is very much expected to be connected "somewhere" (with the
+> > "somewhere" perhaps being external/a pin header)
+> 
+> Yes, but in the UART case, where the connection can be represented in
+> different ways, we can end up with devices being described as both
+> unconnected (no remote endpoint) and connected (via a child device).
+> We can probably live with that, but if we go in this direction, we
+> should consider adding a port/endpoint definition for every UART
+> instance in the DTSI for consistency. The same would apply to I2C once
+> endpoint support is available there as well.
+> 
 
-GCC and SSDK (Qualcomm vendor switch driver from SDK) both configure that
-clock for 461.5 MHz, while the CMN PLL driver reports its parent at
-416.5 MHz.
+Yeah, that's also one of the thing I really hate. For getting rid of
+boilerplate, we will be just introducing dead nodes :/
 
-Report the 461.5 MHz output rate so consumers see the correct rate.
+- Mani
 
-Fixes: 4e36f8ab45c4 ("clk: qcom: ipq-cmn-pll: Add IPQ8074 SoC support")
-Signed-off-by: Robert Marko <robimarko@gmail.com>
----
-Changes in v2:
-- New patch to correct the IPQ8074 NSS NoC bias clock rate.
-
- drivers/clk/qcom/ipq-cmn-pll.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
-index 74a2043632b7..76678a4d6b7d 100644
---- a/drivers/clk/qcom/ipq-cmn-pll.c
-+++ b/drivers/clk/qcom/ipq-cmn-pll.c
-@@ -237,7 +237,7 @@ static const struct cmn_pll_fixed_output_clk ipq6018_output_clks[] = {
- 
- static const struct cmn_pll_fixed_output_clk ipq8074_output_clks[] = {
- 	CLK_PLL_OUTPUT(IPQ8074_BIAS_PLL_CC_CLK, "bias_pll_cc_clk", 300000000UL),
--	CLK_PLL_OUTPUT(IPQ8074_BIAS_PLL_NSS_NOC_CLK, "bias_pll_nss_noc_clk", 416500000UL),
-+	CLK_PLL_OUTPUT(IPQ8074_BIAS_PLL_NSS_NOC_CLK, "bias_pll_nss_noc_clk", 461500000UL),
- 	{ /* Sentinel */ }
- };
- 
 -- 
-2.56.0
-
+மணிவண்ணன் சதாசிவம்
