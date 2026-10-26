@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793012531;
-	b=rgZ/ShTSEjZEYKEdKRyUQSWYf3vwzhR5jSpKl4eynKy3Jz7230oA8lkYIT7OgsCqycRn
-	 VDYm0CO0/2/aXM9Eexx/ywHIYA4NvmCz1Xts92F7wsRfcA397K6eGwIRvhr/7yn1KqQEQ
-	 NIO7GyI/h/m84bDuYzloLDoXMo9eChuE2fdPG4Ek1OpnjcPQmI338N5UsIuFzSnmkw2D2
-	 Z7X5BMT5NX3zzdHC6h4MwEIxdzSrufVHn6w390aphHHcMmkZVlm3pxZKc33okg5Ib6eE/
-	 JnVmp67Qve/8oS6SMo4dtVM/JAxpw/9jg7dGftJUS0cN+IuPPyYRnI38asaJzQCuHKw==
+	t=1793012848;
+	b=AP2rieqbicdDWLUZ/NEq5FBV/5lyEVFxkQRG/V1nHHBw1ClcFf1fsd2H6eTXNe2gQ9kp
+	 1QYN8CTnN87EQaqehcUdVf5Oco1P4xm9ZY9sccJv5+yAq6K31rnGmOMYXNTnPXj6/1YLQ
+	 HRfb/MtJUAcFFq5W4GBQWVVPNpQqQKZOavWIro5yKFqXsdyPEAUUTjNvcg57B6jkKaRkA
+	 5Rddl2sa9m7ozHjmVruC5r/iGnxsDuN93mXP8RM3YYphCt9AfOOiyAsvkZQMWMvqp3UwN
+	 MlhSkVpvbHM6lz6k3yFynrQdFyTFWPXdDRbay/vxjbr75TIFp7vLwjBKuCvICbvlMNA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793012531;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793012848;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=IosdQzjCXHKd6sP0mmtnu1KHk5WLDHA5y9noFJXIIHg=;
-	b=dP7XCv5g7ghqH2y89dRj3B9pHR1nMHKoR0KQDB6cMFfGHN/myr2onim1K6t5NDVaKBGT
-	 IXrL3+HF91aP1AHS2t9ywJC6Rm53N1Vi8c/z8MxvIu9dJ/Bhfwjk1dCDgALUxH4Jrg8Vq
-	 cxqlnXbSb+y5yMamhk0m5+EGnILX4shaTUqdrvEjlYP6Eoq6WVJVqV3dC5ugXzTmn+Yxf
-	 Vd058mXxhRR3+VPxdBXf6qsfdmovTj6P02Ba4+pTM6/5Xy3ueSedibpk8jxx3/uEJ3WKw
-	 D3g1j+6NQLoThHy+ApdO296/DsgrqeTZVVGeWPB3D7M+M/i0dPAtzR6PcKoAKDTjyRw==
+	bh=UqQ6YN3C0My0ei2913fj4EsSC5xlag6VWjFK6Bm+zNI=;
+	b=IbC43MWmjoTewouPJYRbgZxIFNxZaNAcmEq+SHIeITJhjCpua+Mtq1g25rLdj5pWSIIY
+	 Xq1raiwiHwY7rjTLjIlk5oyAGYOwy+Hmh5HBazUdKfezvgyZGh0GFOeofD0wm4ZJC/83N
+	 Lzkma07fROgEI2tIwxgp72R9KE8DXcjVJnxKhRFOiq6MiVU04UFKDjsd8rO9Zj40VVlXB
+	 wArnLVvsP2eP8F6qydlZeuu8bI/OwA7u2Sc0kqH3fSmwJqHnhrtT3F4ADT+mEWq9cpS7h
+	 Q30+k2CVoEw0YXrZHRv9AaK4u0Cb/Cj6jBtI3cP5HBmvqpzn3LKKv0xgrhn/RU82Vxg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=blFztxwL;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m+meOosx;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03201606A31B;
-	Mon, 26 Oct 2026 11:02:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AA4A606A31D;
+	Mon, 26 Oct 2026 11:07:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=blFztxwL
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B46B41F01825;
-	Mon, 26 Oct 2026 11:02:09 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m+meOosx
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4579B1F01825;
+	Mon, 26 Oct 2026 11:07:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793012530;
-	bh=IosdQzjCXHKd6sP0mmtnu1KHk5WLDHA5y9noFJXIIHg=;
+	s=k20260515; t=1793012848;
+	bh=UqQ6YN3C0My0ei2913fj4EsSC5xlag6VWjFK6Bm+zNI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=blFztxwLJmp165Tj99WaYJtX4SnZRAvTWHOKCdctfIfdjHiaaGswd5XPBDTmqsJNO
-	 RJqpa70xPlJiGT7DPlK7TSyopCyTefUY2Vai82Nuez5ht5jnd+i0vOUth3829ONkKk
-	 ZMJ0AMx5h93nhysXmiccVseXi6+4emok6x1DdVueSmx7tNrL+VVK+7dRrLvonoRW6/
-	 CEkljiDfpVe/xBip0EQ2jISxySNZKDln20l5I5vMBgCrHeFKQUWD4Rt7ftlv4NTznV
-	 7QFQl9siAK5wDw1zdL1A7SnqTGLLmtrYqKMcvbAgUqZWVnku+hS005G8boPFcrxKut
-	 F1C4tkBbV8j4A==
-Date: Mon, 26 Oct 2026 12:02:07 +0100
+	b=m+meOosxYEHJlg943p50ulC5iE079L9OGgPtW/odYLzLQg+0VGSol/hn4/fWuxD30
+	 58wPrPe1F9NA125zZZ/Su2aPA9723xi+YV5jG8EnRysHeh3Q6FtMfWZK4MobquGTn8
+	 DS1p4aZnwx7XcXfbVh8FFlfaSSGYY9bPjF22uIDB5teAonB8rKhEj/xz/uCrbr+i1f
+	 cyBHOMny6jO6oCQadDn/8tIV/BLGrLYwLkM0JdaIogfSBR3/pugY2vaTvxmr/ZUFkn
+	 mkaap2y8VfAV6Wt5H5mQd/cJNVuTBA9t48xCyGKweYT8N1ugIsgGgdcVXVrrna/d/s
+	 XVCmDaF1YExuQ==
+Date: Mon, 26 Oct 2026 12:07:24 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Jeff Roach <jeff.roach0@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+To: Robert Marko <robimarko@gmail.com>
+Cc: andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org, 
+	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org, 
+	conor+dt@kernel.org, konradybcio@kernel.org, taniya.das@oss.qualcomm.com, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
-Message-ID: <20261026-adorable-taupe-peacock-5bcee7@quoll>
-References: <20261024044650.9936-1-jeff.roach0@gmail.com>
- <20261024044650.9936-2-jeff.roach0@gmail.com>
+Subject: Re: [PATCH 1/2] dt-bindings: clocks: qcom,gcc-ipq8074: allow CMN PLL
+ bias clocks
+Message-ID: <20261026-terrestrial-thankful-trout-8eea58@quoll>
+References: <20261024103401.761125-1-robimarko@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,16 +62,43 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261024044650.9936-2-jeff.roach0@gmail.com>
+In-Reply-To: <20261024103401.761125-1-robimarko@gmail.com>
 
-On Fri, Oct 23, 2026 at 11:46:49PM -0500, Jeff Roach wrote:
-> Document the HP OmniBook X 16-cp1 laptop, based on the Qualcomm Mahua
-> (Snapdragon X2 Elite, 12 cores) SoC.
+On Sat, Oct 24, 2026 at 12:33:09PM +0200, Robert Marko wrote:
+> CMN PLL in IPQ8074 provides 2 fixed clocks to the GCC clock controller.
+> In order to describe this in DTS, allow passing them as the inputs to GCC.
 > 
-> Assisted-by: Claude Opus 5.5
+> This has a benefit that it avoids doing a global matching by name.
 
-Please read the docs how this is supposed to be constructed. Then run
-the checkpatch...
+That's ABI break, so at minItems.
+
+> 
+> Signed-off-by: Robert Marko <robimarko@gmail.com>
+> ---
+>  Documentation/devicetree/bindings/clock/qcom,gcc-ipq8074.yaml | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/clock/qcom,gcc-ipq8074.yaml b/Documentation/devicetree/bindings/clock/qcom,gcc-ipq8074.yaml
+> index 00d7df75b3d6..d489c6332e6c 100644
+> --- a/Documentation/devicetree/bindings/clock/qcom,gcc-ipq8074.yaml
+> +++ b/Documentation/devicetree/bindings/clock/qcom,gcc-ipq8074.yaml
+> @@ -29,6 +29,8 @@ properties:
+>        - description: sleep clock
+>        - description: Gen3 QMP PCIe PHY PIPE clock
+>        - description: Gen2 QMP PCIe PHY PIPE clock
+> +      - description: 300 MHz bias clock from CMN PLL
+> +      - description: 416.5 MHz NSS NoC bias clock from CMN PLL
+>  
+>    clock-names:
+>      items:
+> @@ -36,6 +38,8 @@ properties:
+>        - const: sleep_clk
+>        - const: pcie0_pipe
+>        - const: pcie1_pipe
+> +      - const: bias_pll_cc_clk
+> +      - const: bias_pll_nss_noc_clk
+
+Drop _clk. Names should represent the input.
 
 Best regards,
 Krzysztof
