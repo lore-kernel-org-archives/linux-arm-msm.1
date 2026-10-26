@@ -1,83 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793034522;
-	b=4VIBTzBnVB91CQuGXk7hUw+befD035qTo6EAMCgPFqhGQNmWc1rfiYSBACQAjh9TCtQS
-	 JPuuL8oJxPw7BhlY4NxMwrfzrsh0gWGNrFqQ4U+A020kD/tLNiJIHELW/WaKuQthgi6B+
-	 QjWlLLyj1gonSGSh2s+4zakJBAPpj9Zc4409waZ9mjiIyoucen4CaLHixsQv0K9I2yrm5
-	 Q37fV0CnNgiE+NeeEfqS9tqyMnqDV45V0yt5/3FFA/BcdAXSJlW0J9jl1nPH9zTOBG0p7
-	 3Bnl0VfS5S0aPxRLlwsG3RNVafXxSj60EVIfYP2pAhMzj02cZILWEszjj1PYK0igodw==
+	t=1793035499;
+	b=w5pmyyXNJ2r6lcV0HRD9TjEzXJLQ9QAFlSRxei3jEG38Mak28Hhiv0T1JyK8ytqAwTU9
+	 8Ncko9d6jdtTJuXtxhggoIW8A6BoCa0v9UXTew0MNRI3gU+RsE80hwBRnQyL1ITQOW770
+	 wXDVGJ5LQgJE/U+y7HSJEA/gejl4oH3dJBP2VcBXiJIOOb7RbFlXznlXVygDLH2bWQAB0
+	 TAMrDhnUk1e5AAiOuf5dzBvi5+pk6Y/ZUg4oebdhhIWIOcSrib/C/6nheYmevXIxXepYM
+	 qj5pP2vIpE//dmw+cLnXiALpLwy2bQ7RPTBgkHx/ifD7du4sIlg/EnjKaJbwvT1lneg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793034522;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Mime-Version:
-	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Subject:From:
-	 To:Cc:X-Mailer:References:In-Reply-To;
-	bh=JUq0YtB31WFdvPytox1Nrwa4F7PRUF5WI/cc8sTZd0Y=;
-	b=eZbBvuq4ztMOsPJuhBRs4Hk0SgdyhbyKNRoz5lATG20Qn9J0IkSM6E+l7gK5pnw8j1x4
-	 7GBH9YdeL9/5h2AQMUjiwuQOmnPEaborcpSz3+uTMDeHo6Cq5+dW/UDAf4lIRpe3vSSuI
-	 SR+fPqPIBMgwPxK9CVkTvlqxYxfw8lrtLPEHXRobYpLIotPW5xLp8lBRmFkcsD37MZyhb
-	 cV2SYy/Eioz+phiPPW6V92Yzga4P7VNfccxBWdXCWFqcyMd1JeMBRi4+VUaVeLExSBA7H
-	 umKg8XgkPaUQ+ju8Q+G/CvRgVJndVyT7GRhJEfAgPpzqznTyttYNbpdwOws0Q62V0Vg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793035499;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=k6TWqe6a8TrmnSxPzfBWojZNqbAoIQPtwFE2RKyIVPo=;
+	b=U3hFpPNZ0yJsA9l0b2aRh5x+iV/5tZ3afO0umWT1FOBpvHp2icgzrh5O7WzQnY+IwI72
+	 ZpyW0VriIRh+dxSOezDOo11Ghhy/0XwutiCt8fhjj7kfhlxQDq69+PyOeigT70v1MDkjr
+	 gZYDg5lHITMB+Ffmh/zIL6NjK4pTvMELlh1IL0y3rmC4bouuo+o1GCrwKIyE/19P8W5jI
+	 JIjTCz2vmqtqfXO0wGBXhcAph9nL6OUWAFgkvgENdQ7xXE//cYPTGbOhQDjRMC/4uusqg
+	 eB/QLs3/uPyBuEtVdfRE4Uezhs8BUYkgEe0AnNwOKooNb+EjXRecF4NJxviKw+NxJng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Imn2WVeJ;
-	arc=none smtp.remote-ip=209.85.128.47
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=S0wpvMbb;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C508606A323
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 17:08:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C508606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1644E606A322;
+	Mon, 26 Oct 2026 17:24:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Imn2WVeJ
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a2069b9710so31157935e9.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 10:08:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793034520; x=1793639320; darn=vger.kernel.org;
-        h=in-reply-to:references:cc:to:from:subject:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=JUq0YtB31WFdvPytox1Nrwa4F7PRUF5WI/cc8sTZd0Y=;
-        b=Imn2WVeJmrsTcniPIqa5MczKk/j0HQLC5R50ZsdY0tt/KPGgosIRsrOYx5CjSAKpCg
-         sUBCaMHuKHtTEabCxW/nZHVbwkoUsi7CiUzDGWAppSDFZW/Rqi/35XGKmoO4C22uCRTs
-         dNOmXiy12f46t/57YuL9TTcLH4h1BJnkQMeMp6zIdvLE2Vh3uwvwI2GxuU6YRQzem5TN
-         Bxk/CojGBw8QhkB0nnalb+Fn8e3oifdszHpxNFWH7CoOgjH8lS1TQDpYKy8b2F4aypXO
-         aRWt0jL6SoxN0Wn78lEPFZmBCaMtN11bbCphCxe0QfWvSKr3kuYrD6VvG5GifU/KGxvh
-         0Ssw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793034520; x=1793639320;
-        h=in-reply-to:references:cc:to:from:subject:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=JUq0YtB31WFdvPytox1Nrwa4F7PRUF5WI/cc8sTZd0Y=;
-        b=jRTDvDi3kDAdiXAzOlPuHQC2/w9/CgngX7eBiepwWAtfsS8BPLkMYDl16u6UeKEVhf
-         N31btd6mB3ehqsBaSOhwQ8yQFsrsq1tF1jJfUbXJyHvSABd4gxlEe7v7S43mY/Wkar6x
-         c2pgBG5GMnJGA9KBXbNyX8kB0dUKxKEE7bjM4asFhhbzGZAnVIhQAznc4jdpT3s9voxb
-         Ln8RB0dEkpw7qv6NrbD8F6Uuom4TBZ4PhBuN+57+A5nS9SZcfNcSBvykIyFUbc5k32Gw
-         oSbbGZMfMCsZBU72UUF9RIdKByUj1WkeV4vqW0ZYXxuST8tEwC3rY3GklsIZ8NmNpLXX
-         lo0g==
-X-Gm-Message-State: AFq9FYKbrgtj5HB1Z9zpyqlW+gV0KAQ3mrMASF4KmyMON5Zpczw7d16R
-	17Ocw9S8pTWq5PP0fFWds8dhfI3LEDlO0VpzTn6X/2L6QRceWJuyDv4g2EZThgtUxIw=
-X-Gm-Gg: AYBFou32vH70xDmQYVUJ5PEgMf7+HQcCGApyZDeYXRjGyOpM8hB4GpNbiKqR/MB06uL
-	muv0Q/QoCuOqBa7VgyWdl3HoXfYaU/J9ZMeOlLCRVJlDcWJL6JtyzvjJ7x+8O/D7IjE82h9wYTc
-	VFribC25l6okWQ+taxcNEE9P35QQwSa9zFmwErb2hR1TJoZaQ3goJ38QsYRcbrcVYVoVeA5H/Nr
-	u3PXf1cDFUOsML/sVV5/V3uRQE0DzS7Dv4FaZ8c+hh8+5xv8llK/ijRUUdDd1KOI7Vg0fVOFMF0
-	llR0PM8PFKDcJPbu+PxjY8RPU8jT8eG9zuTnNUKHqcbyFB2vTLQYDNesfzXorq/eb/jLzNUS8/u
-	Gsx1rSgnYyYygz03L770Q6TBGCxAspavnYitO3PLPlsAKfbrsETjNek1NkyEe5087z8o2zhMQ6S
-	izfkRb8qmUFvujKr7+hMhWFjoWOkQhdYnKVbHyA7jDeibdHqUU5UP12oQEW3CK8yLPRiJF7cgm+
-	MI6AFo77yMZExnB2NVBlTJI81zmP+rbOo5GuMIj5Kpk82CmxYHOktDB5T7RsJlIQIxfjgn+aMEK
-	5dZPpv1rOedcJ1xJMJBio36cCHVzZoUzuIvKmyN9SGmu/D1h
-X-Received: by 2002:a05:600c:3f07:b0:4a3:5a91:5f64 with SMTP id 5b1f17b1804b1-4a35acb3e77mr124957225e9.27.1793034520264;
-        Mon, 26 Oct 2026 10:08:40 -0700 (PDT)
-Received: from localhost ([151.40.161.170])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3eb8f25fsm17070976f8f.2.2026.10.26.10.08.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Oct 2026 10:08:39 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=S0wpvMbb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFFCA1F01825;
+	Mon, 26 Oct 2026 17:24:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793035498;
+	bh=k6TWqe6a8TrmnSxPzfBWojZNqbAoIQPtwFE2RKyIVPo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=S0wpvMbbVmxyhuPDPxnibJKXyr98XwfGMMYyQCZgyII0zZsb/jkU+b0YClSZ9eLzn
+	 RdNJHWwEivyLczV3NKuj+MsGaYwfFqWF3coUXb7J9OGiHbWhPYsg9BLqiNL3Q7xNBw
+	 dIVrKldAHUJNEsp9z6eIlBoa75zuUlIZbi5imjb0bt27O3BIZ+GrZapOR/wDx49ZGA
+	 H1GJNim+Gw7Nm4XOJQuloa33dSxLqjELFiwMXItMUX2+Fp8LP1TpkkFG1oTU1r7P4/
+	 pzCCDVZ1gA1Tv1vqdr0PVOFOs743YmtM9sN4XGvjloi854i6azmpsNeWutnu7nHi/x
+	 lEkcvWdGSsyPA==
+Date: Mon, 26 Oct 2026 17:24:53 +0000
+From: Simon Horman <horms@kernel.org>
+To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>,
+	Chris Lew <christopher.lew@oss.qualcomm.com>,
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+	Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Subject: Re: [PATCH v4 1/4] net: qrtr: Allow the host QRTR to assign a unique
+ node id
+Message-ID: <20261026172453.GH257209@horms.kernel.org>
+References: <20261022-qrtr-multi-ep-v4-0-c6fdb75fcd3e@oss.qualcomm.com>
+ <20261022-qrtr-multi-ep-v4-1-c6fdb75fcd3e@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -86,97 +68,49 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 26 Oct 2026 18:08:38 +0100
-Message-Id: <DMEXOUF2X7O6.3W5B9URS8YOEF@linaro.org>
-Subject: Re: [PATCH v2] arm64: dts: qcom: x1e80100-medion-sprchrgd-14-s1:
- Add PWM backlight
-From: "Ettore Chimenti" <ettore.chimenti@linaro.org>
-To: <ferreira@se-rg.io>, "Bjorn Andersson" <andersson@kernel.org>, "Konrad
- Dybcio" <konradybcio@kernel.org>, "Abel Vesa" <abelvesa@kernel.org>, "Rob
- Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
- "Conor Dooley" <conor+dt@kernel.org>
-Cc: <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, "Georg Gottleuber"
- <ggo@tuxedocomputers.com>, "Ettore Chimenti" <ek5.chimenti@gmail.com>,
- "Jens Glathe" <jens.glathe@oldschoolsolutions.biz>, "Srinivas Kandagatla"
- <srini@kernel.org>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3
-References: <20261025-medion-sprchrgd-14-backlight-v2-1-bf2979485ec2@se-rg.io>
-In-Reply-To: <20261025-medion-sprchrgd-14-backlight-v2-1-bf2979485ec2@se-rg.io>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261022-qrtr-multi-ep-v4-1-c6fdb75fcd3e@oss.qualcomm.com>
 
-Hi S=C3=A9rgio,
-
-On Sun Oct 25, 2026 at 8:51 AM CET, S=C3=A9rgio Ferreira via B4 Relay wrote=
-:
-> From: S=C3=A9rgio Ferreira <ferreira@se-rg.io>
->
-> The eDP panel (CSOT MNE007ZA3-2, IPS LCD) cannot have its brightness
-> set over eDP AUX. With no backlight phandle on the panel, panel-edp
-> falls back to the DP AUX backlight, which registers dp_aux_backlight
-> with a maximum brightness of 0, so brightness control has no effect.
->
-> Brightness is driven by PWM instead. UEFI leaves PM8550 LPG channel 3
-> running and the PWM output configured on PM8550 GPIO 8, and drives
-> PMC8380_3 GPIO 4 high as the backlight enable:
->
->   pm8550 gpio8 : out low func1 vin-0 no pull push-pull medium
->   pmc8380_3 gpio4 : out  high normal  vin-1 pull-down push-pull medium
->
-> The panel configuration in the Windows ACPI tables confirmed this.
-> (PMIC-controlled PWM, PMIC 1, bank 3, 9-bit, 2 kHz).
->
-> Describe this with a pwm-backlight node: enable pm8550_pwm, add pinctrl
-> states for the enable GPIO and for gpio8 func1, and attach the
-> backlight to the panel.
->
-> Tested on a Medion SPRCHRGD 14 S1 (X1E78100): brightness control over
-> the full range, brightness keys, suspend/resume and restore after
-> reboot.
->
-> Assisted-by: LLM
-> Signed-off-by: S=C3=A9rgio Ferreira <ferreira@se-rg.io>
+On Thu, Oct 22, 2026 at 07:43:07PM +0200, Manivannan Sadhasivam wrote:
+> Currently, QRTR identifies each remote node by the value of the
+> 'src_node_id' field in the received packet and uses the node id as the key
+> to store the node to the internal 'qrtr_nodes' radix tree.
+> 
+> But this approach comes with a limitation. When more than one remote node
+> share the same id, then QRTR can only add the first node to the radix tree
+> and has to drop the successive nodes with the same node id as the 'key' in
+> radix tree has to be unique. This prevents connecting identical Qcom PCIe
+> WLAN devices to a single host at the same time.
+> 
+> To fix this limitation, allow the host QRTR to use the node id (nid)
+> received from the endpoint driver during qrtr_endpoint_register() as the
+> unique node id and use it as the 'key' for the internal radix tree. Also,
+> store the received 'src_id' in a new 'qrtr_node->ep_nid' field and replace
+> the 'ep_nid' with the unique 'nid' in the QRTR control packets if both
+> differ i.e., an endpoint driver has passed a unique 'nid' during
+> qrtr_endpoint_register(). To maintain symmetry, replace the 'nid' with the
+> 'ep_nid' while sending the packet back to the remote node if both differ.
+> 
+> A node can also bridge other distant nodes, so the source id of an
+> incoming packet is not always the id the endpoint advertises for itself.
+> Keep adding such ids to the radix tree as additional keys for the same
+> node, as it was done before this change. Otherwise the bridged nodes would
+> lose their route and qrtr_sendmsg() would start failing with -ECONNRESET
+> for them.
+> 
+> Currently, all QRTR endpoint drivers pass 'QRTR_EP_NID_AUTO' as the 'nid'
+> during qrtr_endpoint_register(). So 'ep_nid' and 'nid' are same and the
+> routing behavior is not changed.
+> 
+> Finally, since qrtr_node_rewrite_ctrl() dereferences the control packet for
+> DEL_SERVER and DEL_CLIENT as well, extend the existing length check in
+> qrtr_endpoint_post() to cover both types.
+> 
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 > ---
+>  net/qrtr/af_qrtr.c | 132 ++++++++++++++++++++++++++++++++++++++++++++++-------
 
-I tested this on a Medion SPRCHRGD 14 S1, but the controls are inverted.
-When increasing the backlight lightness it actually decreases it, and
-vice versa.
+Reviewed-by: Simon Horman <horms@kernel.org>
 
-```
-% cat /sys/class/backlight/backlight/max_brightness
-4095
-
-% echo 1 | sudo tee /sys/class/backlight/backlight/brightness
-1 # BRIGHT
-
-% echo 2000 | sudo tee /sys/class/backlight/backlight/brightness
-2000 # LESS BRIGHT
-
-% echo 4095 | sudo tee /sys/class/backlight/backlight/brightness
-4095 # OFF
-
-% echo 0 | sudo tee /sys/class/backlight/backlight/brightness
-0 # OFF
-```
-
-Moreover, I see that from `/sys/kernel/debug/pwm` the period
-request differs from the actual:
-
-```
- pwm-3   (backlight           ): requested
-    requested configuration:  enabled, 498418/500000 ns, normal polarity
-    # with brightness set at 4090:
-    actual configuration:     enabled, 425834/425834 ns, normal polarity
-    # with brightness set at 2:
-                                            0/425834 ns, normal polarity
-```
-
-This probably causes the top 250 values to be all at the same
-brightness. Not a big deal probably.
-
-Do you have the same behavior? Can you send the EDID of your panel?=20
-
-Thanks,
-Ettore
