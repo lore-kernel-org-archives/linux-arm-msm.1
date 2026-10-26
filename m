@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793042240;
-	b=17dO1UJasCsdeFqkvItBkSmTsy8z8WDL1oVdKxWz1/g8j11utarwV2rQlkCXfWv9fVcz
-	 n8ZDFRz1yKmwG/nToc95c6sbwnBhV9yWG/i2BSIlzNaVQFkyRPP72KUjSCFh8MrT3FiAO
-	 X57oz6HT+2TpPzGIEtJlSo5uG+ty7bDMEQtm2JTslQxg5D18ly6ehZ+YpaCDf9oMn9H+E
-	 RJnhCneb18KhCbv25lHCNt8yqGEurjULdyVmQiFQd/rXkO9625a1UgC4moz/k7DyfP9po
-	 XDyu63yy/px1t1qPoMlsSuXozlHrApdHtI9jnvduEfNgWAdXaZRTaRlYlsj9Ztz4p1w==
+	t=1793042239;
+	b=sLPuiWKXaK34WZPzx4NS0g6GFMxql1T7HpsE8e4WwUBF5CrNlsJIx6qst3vtDd00mjFV
+	 eT3om6qK0sau/smxO/wsr6rF//fZ06tQBY1JcqfT0hrWWeZwObilNDUxGGKXcGAvHDDj5
+	 rLZmrbxkzrmv94PRw0FSkrPnTLBd+ClHJEDN+DPxiuGwUKbUUPj62p0MPsBlZWGFVFQAJ
+	 MawLuzsSf28m7HR7x4woimRhcI/lO9nlMPmyhM8tK587FKG0+BwkPVs7CeZcrB04rItVT
+	 WiXan6Ymfu0CCzHJhj1VnDWivFvpJ/OBFkk9qnIaOE2vDCjCiPouatXbyGClpO4LxMA==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793042240;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793042239;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Fj09/jauXkz5U9D12Z3ZmVr1su41ljj6T2mjBFgcV/8=;
-	b=GTi9adN7tobrOqSelDEzuMHjiapV+s/dnr2IjHkWlqRcv+gYpHEG6HO5JjlhOO4GCf7n
-	 exFMstM9klDkwxlUGL0wGlljDhjIrbcSFNvbPj2k+ceS9REnbQT1UnGEfgUeKyQ8coDzM
-	 iRy54mBnIFz/tQh0+L+Oyzc4u4RP+R38eTc8WI66CHEvbhYVt0W20UrfQKOfZS8oD2hxk
-	 aQ/Y1aEkFSKS21r7AUmbm3gkawvQZDhTb17wuJXdq6mjWHsaL2sSGFFhqjmgO8Yg4GMN+
-	 KwY/x+S2i/vlpMnGkeZFsAhQyqQCgB4mSspNNIwDp1cYluUFlY5FN+8kg9txu4J2+vg==
+	bh=14rfyzm65lxIesVgmpqsb3ClQ/W4rPHSeHF6M+MbKeI=;
+	b=bdh5ErFow7vvpf+tEekjC6cjUa4gDCsktxrgjrmkeCOnhDMH3z3BrBnwFd/6aqN97m1C
+	 bD3kx3gIREe0jv0jf3rbdguCjCv9fOv5MxBjTcmZzuH9gpSS9V77osAW0Tor4MIdHPrD9
+	 DVfC3UNfnQ1jALOf6x/W/tRuhINNParKz1V7tLNbL9223emzW75mT8pl8ji+peyIzoOIh
+	 tKFieEHL63Atic1qGj21SB4KhcPmA3fgAyxThkOyL7hhvPwjBTB7FPsVKEA7FUS2KoFkP
+	 NvfAmXpgxdlLRRL/Upz9ClM4TrrYnL3NtAtPnf9TIBIwnIW4RjIodYYBCG/pquPnrUQ==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ot1W3rqU;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VLSPxDOH;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1A9A60A2616;
-	Mon, 26 Oct 2026 19:17:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 924A060A2601;
+	Mon, 26 Oct 2026 19:17:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ot1W3rqU
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VLSPxDOH
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793042240;
-	b=2sUkj69HqBdLnhfEyj3veYEKJvzUIr/lVvu4lpPhLY3yGgbmNIukt38cgCueKZCKN1Qz
-	 hP3G91hNWiFt70z5fiLsbU5ZdCulJHkv6D18VX14JOssbVsQrdZX1B1h+hYhsAuVFhma+
-	 k12r1Vhnwaq2uv5uF5R470cyYA0ruphu/yNpE0ClwMxiiMI8zEzh+s1fV6qwZJrJBqG7Q
-	 MICpSseJa8EI/3ui4QCBWgJIkptvSYcHAfr2n+PaFECu9X4rZ2chjbEKLt1pJB7SAj5ds
-	 xkEJnhzBBfWPjINvlCpW7SItRcq94h7bVxWVGXU29kmBqpEDzKnR8+YApZaaiVttV4g==
+	t=1793042238;
+	b=kx+V4n8SbADSUpw550YT/jlvFREIffVPDdHBQfBfPGJy6yGzRQw6WicLqc9lfg9z6089
+	 5ENz+2gjOFtlhWmjUxILWEf2QVEmQOhdQ6MdDD1497hmfEax/01NrkllOYrLIr3u4ZaUs
+	 GZ19dHesIcwK2iDh+YeLtsEx+G6G0xDSbNE3vH4M/4zm8YV4c0KWFp19qiOajoeNWOSxB
+	 8MzB2h4kdmp5jQdQVZx4LOfTHOQ4qCpTqOBdLny2bqJHDzI2xkyALzEhHccTfmujz9jg4
+	 m17tw+AdP52ZbgkCeCopoNN0wDEO3HxK7XwMauQ+iKPjOFenvKJNMJ3TgEbcqaWmrZQ==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793042240;
+	c=relaxed/relaxed; t=1793042238;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Fj09/jauXkz5U9D12Z3ZmVr1su41ljj6T2mjBFgcV/8=;
-	b=LqooaBIEIHvmhl9oR+hKs67c0+bJ8ilsTV0Lb2eD1ORPnjx+D3BI6bRXADwViHIrkaA/
-	 TKoW/NnpKvVoRu0PZ3aqGdq9hR2zt63KBb5B9fXUejL21voQYixBkLCMk0vAqW4bl1bNx
-	 nbFQi0tLZCRVWJmjvTI/r3X8ahAchZ2hZ2zT0VNZBrjpzTJtjvSl6kFs3gSOwpyrSVKc9
-	 45hZkWe67altKnIc1o+4rYpAYuchm9CBBUzQsuldAiyv+2/j0e+qYlXklOYDG58xZJfHy
-	 w5xC7ePA47iJo+Em2SWJTEFPZ3aW/VHF8BkNzO60iLQw5fyqORtuYwgQn0v9rBbnfzw==
+	bh=14rfyzm65lxIesVgmpqsb3ClQ/W4rPHSeHF6M+MbKeI=;
+	b=G0TpD8uw6xnin59lKuZzimJasVqiL9hF8ThL4uOVmU9E+KEOGvklod4l4Ls4fdELff5H
+	 msrPTS74sNRM74Lmr0QzNI7JcOITZFWEpBflvfzmM/ZZtc6DvzXbOE1zQRoeX1LTCBbmd
+	 CguRPv9xeE12XBbsXffyJ16VrI9uJnuTxFuwQDrTHykXid8bhmbp0gAuvQ/UkUca6Ftfr
+	 Cbp37cnFapd0ojV0LbMMWybRR9UXS3MX7ZW6XVn1gg/w510Ow9xrpbuOjbCHkhWVcbOXp
+	 12NI2U/JP14imtbLUI1AiiQC86fKAeNX7JK4aYx70jSmn/r2NWSiGh9BvBvA2Gs9qkQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id DA1771F031EA;
-	Mon, 26 Oct 2026 19:17:18 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 4138F1F031E4;
+	Mon, 26 Oct 2026 19:17:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793042240;
-	bh=Fj09/jauXkz5U9D12Z3ZmVr1su41ljj6T2mjBFgcV/8=;
+	s=k20260515; t=1793042238;
+	bh=14rfyzm65lxIesVgmpqsb3ClQ/W4rPHSeHF6M+MbKeI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=Ot1W3rqUAVz2AMW37Ple26UIaN0B8z8U9SaUc4OnN+9JE7VPKaU2Ofv8h67GVP6ZP
-	 yYrKNqecuuNLQQrFOfx+YHHkyOzIqxhqoeUl43lpsere0QaM4+oG1zZoWFZS54/LRk
-	 VJTeCxemaVFG0TrvYA8MpfhIj697cAzow10OZmWlR6z1DO5g75y3dDLR2WCHOMvoAx
-	 Kf29DJ43MkPq5xMZ8fPf15KqTWMfU7UFLB2QRVOGvN2EumHUyFtdzbVoKfbxLA87mX
-	 uJhSxOUoxk90caF/jTCsjsvdaxT8gEMKEq2BGhZm924hoAHJowhoNNKy68YiNiOlg3
-	 V2KtkSsu7pqFg==
+	b=VLSPxDOHrN8ex+rMYXNdJmZ3u7Djxyabua6sGerQCnHIY+PaTtGLCnmxcgO+BLtM5
+	 9KHogUujLcvF6navi3pwPGjiIHEBBwsAoIlP8oCoPUi7Fu3ejWcK1rkdhATk+YLHjy
+	 lpi6hgwNkW5WWvqee1iexr8GB3G9A+5gPDoKzocSys3/kBJ7flocq4KsTKrbxTWEew
+	 lx2dTqcsUb93azTeMqcYFIO9NYJHXJ4mKEM0csVJaoAvP31TcizwBSFZkLIhsYY3y4
+	 GttNpQL49gYvKToYYP7RrqnAcQYuRH2cAnWpqGRajqORiz9cWN79i0MZfPUeS5WYDA
+	 iLGKKrdCvZXZA==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id F3DCE44E60;
+	by lkml.kernel.org (Postfix) with ESMTP id BAE1344E4C;
 	Mon, 26 Oct 2026 19:17:16 +0000 (UTC)
 From: Xi Zhang via B4 Relay <devnull+xz.ca.cn.gmail.com@kernel.org>
-Date: Mon, 26 Oct 2026 16:16:56 -0300
-Subject: [PATCH 8/8] drm/msm/dpu: reset DSC_CMN_MAIN_CNF in dsc disable
+Date: Mon, 26 Oct 2026 16:16:51 -0300
+Subject: [PATCH 3/8] drm/msm/dpu: use common helper cleanup function in cmd
+ mode disable
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261026-msm-dpu-res-clean-v1-8-f46130a8a717@gmail.com>
+Message-Id: <20261026-msm-dpu-res-clean-v1-3-f46130a8a717@gmail.com>
 References: <20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com>
 In-Reply-To: <20261026-msm-dpu-res-clean-v1-0-f46130a8a717@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -96,11 +97,11 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Xi Zhang <xz.ca.cn@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793042236; l=1211;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793042236; l=2525;
  i=xz.ca.cn@gmail.com; s=20261026; h=from:subject:message-id;
- bh=wGiN+gugp5FNldO/Kg3sFcSJT75myNdU6h5lxozuNKM=;
- b=nZsMcnqOnHbzY5XUKzRyVEOuXUJzxph+ChWqkFDxajHQLKX7ODGcxSaWtu3dJ/g1DTLbZ35fj
- Bk/lg76NhylDt2yhCP9gqPDgJf7pbvrQ9fVMgbXzok2zcQP0f1LC/fE
+ bh=gZ1zC6u8j/CKI/qwlb5BfuiGxnpobk+GG3KE6oTYs3E=;
+ b=djxSX4RkzGCjSlbrGlDEDQTemoOHmmwWVv3U6EqgJqc3gjSxfRZHYmyKyI7l0tIR3a4tgvWE1
+ KaOqgDsEm/lCj2DQejbY1fYbGErlUkz9xTZzHmPKFYvGiYzrUtBbytL
 X-Developer-Key: i=xz.ca.cn@gmail.com; a=ed25519;
  pk=aRUll5L3eJbwG8Y4BO9uySKGzm+Uy+Ccei9prnRVZRs=
 X-Endpoint-Received: by B4 Relay for xz.ca.cn@gmail.com/20261026 with
@@ -111,36 +112,66 @@ Content-Transfer-Encoding: 7bit
 
 From: Xi Zhang <xz.ca.cn@gmail.com>
 
-From observation, DSC_CMN_MAIN_CNF has hardware restriction on
-differing values between paired even/odd dsc.
+cmd mode encoder previously did not clean up dsc, or LMs during
+disable.
 
-Reset it to 0 when dsc disable to avoid issues when a dsc pair
-is later used individually for each of its dsc.
+Change to use the common dpu_encoder_helper_phys_cleanup function
+for cmd mode disable.
 
-Note that currently dpu always assigns dsc in pairs if possible
-for power saving. In the future, it may be desired to assign
-singular dsc if possible to support high display count. e.g.
-when dsc for DisplayPort support is added.
-
-Tested on Ayaneo Pocket DS (SM8550 Kalama)
+Also do not set intf_cfg.mode_3d during disable:
+dpu_encoder_helper_get_3d_blend_mode accesses drm_encoder->crtc->state
+directly so intf_cfg.mode_3d weren't set to expected value for disable.
+intf_cfg.mode_3d is also ignored by ctl->ops.reset_intf_cfg.
 
 Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c          |  4 ++--
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c | 10 +---------
+ 2 files changed, 3 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c
-index b3395e9c34a1..b8a330d813e6 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_dsc_1_2.c
-@@ -78,6 +78,7 @@ static void dpu_hw_dsc_disable_1_2(struct dpu_hw_dsc *hw_dsc)
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+index 09afc0681248..0ab151369c99 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+@@ -2332,8 +2332,8 @@ void dpu_encoder_helper_phys_cleanup(struct dpu_encoder_phys *phys_enc)
+ 		dpu_enc->dsc = NULL;
+ 	}
  
- 	hw = &hw_dsc->hw;
- 	sblk = hw_dsc->caps->sblk;
-+	DPU_REG_WRITE(hw, DSC_CMN_MAIN_CNF, 0);
- 	DPU_REG_WRITE(hw, sblk->ctl.base + DSC_CFG, 0);
+-	intf_cfg.stream_sel = 0; /* Don't care value for video mode */
+-	intf_cfg.mode_3d = dpu_encoder_helper_get_3d_blend_mode(phys_enc);
++	intf_cfg.stream_sel = 0; /* Ignored by reset_intf_cfg */
++	intf_cfg.mode_3d = 0; /* Ignored by reset_intf_cfg */
+ 	intf_cfg.dsc = dpu_encoder_helper_get_dsc(phys_enc);
+ 	intf_cfg.cwb = dpu_enc->cwb_mask;
  
- 	DPU_REG_WRITE(hw, sblk->enc.base + ENC_DF_CTRL, 0);
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c
+index 45079ee59cf6..111f9dd5e053 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_cmd.c
+@@ -538,7 +538,6 @@ static void dpu_encoder_phys_cmd_disable(struct dpu_encoder_phys *phys_enc)
+ {
+ 	struct dpu_encoder_phys_cmd *cmd_enc =
+ 		to_dpu_encoder_phys_cmd(phys_enc);
+-	struct dpu_hw_ctl *ctl;
+ 
+ 	if (phys_enc->enable_state == DPU_ENC_DISABLED) {
+ 		DPU_ERROR_CMDENC(cmd_enc, "already disabled\n");
+@@ -566,14 +565,7 @@ static void dpu_encoder_phys_cmd_disable(struct dpu_encoder_phys *phys_enc)
+ 			phys_enc->hw_pp->ops.disable_tearcheck(phys_enc->hw_pp);
+ 	}
+ 
+-	if (phys_enc->hw_intf->ops.bind_pingpong_blk) {
+-		phys_enc->hw_intf->ops.bind_pingpong_blk(
+-				phys_enc->hw_intf,
+-				PINGPONG_NONE);
+-
+-		ctl = phys_enc->hw_ctl;
+-		ctl->ops.update_pending_flush_intf(ctl, phys_enc->hw_intf->idx);
+-	}
++	dpu_encoder_helper_phys_cleanup(phys_enc);
+ 
+ 	phys_enc->enable_state = DPU_ENC_DISABLED;
+ }
 
 -- 
 2.55.0
