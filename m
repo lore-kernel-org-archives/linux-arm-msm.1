@@ -1,99 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793124844;
-	b=qibXZ8SEMEC4mr5dBrbhTL7zM/IuYA6xBM3uNNvO/wXqHyfLXMhQ0QrogKMYGHP86UOy
-	 ozKdFd0+9+QucrsWPYlxbr43zNkMe+lvpR5DEzjVzKjVnM28t5x66HInS7bwXqD8pJeWB
-	 i/gBC4lhcwDoSnu3D6J8YfutmAAgOoyVLAsukctmH2mj/sj38TY6ZuwJHiTFd3azw6BwS
-	 Fqm+/TCIqiIZ6fdvqi9I9h2md4LyqmXFn2rNIDiV3xUiNlKxr2f5ykGt2yIdr0/6ls4Vf
-	 f/AXrrQZ4tqAU8lpkXbWKNTLTn1WGN9GOaH5kUXGeaUbIxxSO5941lxc/nEI14n9HwQ==
+	t=1793125453;
+	b=0Luutlzq/Gc+PuBpDmttZduscKCH8oYKPl6el6QZD1L4V5ZCqSAdSKP8Gh/TPBpTScaH
+	 CitJiKqLKk/C2EkVl7RaOuWDjPkuLHtqEV6Bdhwn6NMfTaKmKkkCOiQDaBjYF1aoB1E5+
+	 B7UfMZBEJea3MArQ7AH3TJ2XU3bzo16LAMDynInoesfUOAiHNrN1xQSMVKtvICc1ftE7H
+	 B962V4SRsTTK49fbZmYXDAOaqWLZTkge9cQyyImqZtwdNIJEYPy0o7vWu8EbO2gEZodQB
+	 8ezu6v2yH7MIrknlpRWv9vgpMnBZQ3v5SgX7tL/u8OCEx8cABQwHWnh8vTPT9dRuflQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793124844;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 Content-Type:MIME-Version:Content-Transfer-Encoding;
-	bh=K4o0hsfCr8qItqNcAeYTl+Awx2cc8eddNn4H7ZE/4Hc=;
-	b=WamuYKgPeDtPMMaGB4tkI+YMoUUBO0GwLEGraj6ymLfnER0SCvVK+NwpZiuT8FP8YQFY
-	 xL2Tl87lppbzgEfWQ+puACBLLHXFC7FXrLS+QVBCBwxTilv+SirsIekL/ZnaTR+aD8ZAh
-	 pfi0y5y/Mk44G0pj819G1tuMwrEQFQgGoWkpnlpd5H98o/t4cXvcp0FpE/vDgKl8ZANE6
-	 XlEIhi9W6yIGqcRarBY4XKOWfgwgU9OUqVDUpYVL2rkKCZC7+jsJUH5uOEEl/TAq72yk9
-	 QRbZc7bkA0zvHNcLHP+vCkS6UXOMDSbxZEAPupKV1YXaFbM8IXaqaUxjr+fSRybrLHA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793125453;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=dKrXUpS5lY7XH1tqSJBOhITY7Qjt8wuebW/mqxCfCJ4=;
+	b=XRvnzbgrs2h1wpwEpKZnEaTaat5OcVv3v5vNs8WLvXFsmkBSqd3zbLeBzg/CTGQB7//5
+	 1MNKpwRYyGcOgiRlp628eJK8G4mGzNbUMH5SCiDhifganiDixtBr3NX2ImgynKN2XeTnA
+	 urC9IdxNf/BSQJfO5i1KE4ubEQk7uNuBZoUgAhnCjr0YQ0Nw3SJsF5NpKvziXUAovuG9M
+	 DSCxxho7xopuzGqHPfXDoAC3HHE3SrUe+2meMCPikrFBECuCPGzwh8fiFPxY4IaxO3z47
+	 p4CIgezRJjlx3+l6wlojfHVfAwBm5nW2ff4oTksVajpzg4LhI9pv7K7ig3cAR9iXwUA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TptjDx4j;
-	arc=none smtp.remote-ip=74.125.224.54
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BfzegT8l;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FPU2y1ei;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14B4606A31A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 18:14:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B14B4606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35FDE606A320
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 18:24:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 35FDE606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TptjDx4j
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-67a2efec15cso216247d50.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:14:03 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BfzegT8l;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FPU2y1ei
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RIHUsK2451967
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 18:24:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	dKrXUpS5lY7XH1tqSJBOhITY7Qjt8wuebW/mqxCfCJ4=; b=BfzegT8lQWr5KYmL
+	8E/TvsxHhIK8H80cdTpoCVaePf+2gHjqNG3Vi9jpf9iObLVt0IN98de2RmDVZ1h4
+	RxUHXeoq9nRKe8pBISqgkpooJGde9zmxZV1UiWcMzR7tLQS+B+XV//nNKXkG4sHG
+	zUDmMhizlQupnOG74fSRoY76e5kSx2WSz9pSR3oUUjErJwGUd2rzrQlgN0wQfMdt
+	lLtwjmUp2rS94XAEAQY9RCt7ZE015xpmDOMWV/CSWSOHGq9MMFrzP4hPSXSQzpw5
+	dyHgJDRtBGlXkPyLZmiD1G3022BvJT9jhunlS9TJXsq0yD3XTr3IKJwXMEnHauI0
+	f1ejuw==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjy6g0m4s-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 18:24:11 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3662e7a9299so484085eec.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:24:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793124843; x=1793729643; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:content-type:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=K4o0hsfCr8qItqNcAeYTl+Awx2cc8eddNn4H7ZE/4Hc=;
-        b=TptjDx4jMAwg2Qt8cQIV+w83R5Lt3MX0LsbgWQijLZHqjkjQQbvu7Z3XTrLZH4PdVf
-         skRLuY++QPeeBvoH+DHJknO4wi0B9BRZHMkE9qZVwztQVdBVsfLz2Umn8p/PgbRbQwC2
-         x+7Pc0QObk7soUTHFSYWn00ibUkzPeuRYdfex0wvJBYz0xA7EUxeq839QhrlPa3ARG3L
-         dXsCmsxSC/TgSz6iWKQacNWhFgXh4uQMDJZy7XvBp8sbslOWhGaQ936WHBKDjEVtPsX0
-         BOaXtNYwBCDJ1+EHE6bM0wEbyrGkZxDxk+fbBGu/mkSNljIQ8ttMMfsepGfWZ+jzTSlU
-         y4fQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793124843; x=1793729643;
-        h=content-transfer-encoding:mime-version:content-type:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1793125451; x=1793730251; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=K4o0hsfCr8qItqNcAeYTl+Awx2cc8eddNn4H7ZE/4Hc=;
-        b=uOLfNZ3WuiEWhcp+rEqvovkdpDsjXX+0SCH5rSB2gO93xJenriJNwQXTttOGuwPfWi
-         8gmwre6dD/VjPEwvt5z7dxDVx6VQynaDMyrbLnPnbwsCoDVrEi6SHkLiq2fQz5SFyP2C
-         HCDGzjvtMSbsvSLzriTDWk7wuRK4LfOLS/Wdx5+r5XbEezIsJyDVtXKSk0aOL1CsNqWH
-         jIzVH5B5r+4tCWWH6DF4CY191X19Z0kW/1VcrJIvH3TBXAO0Z4jDbxBpgg1EAoKNDb36
-         Ly/XVrrebND2I80s3OmTEbaQRmEf/W1sVBBOHQ+0pduS3gbfGFWh6JpzRvgy9C7Ha6sV
-         Gjww==
-X-Forwarded-Encrypted: i=1; AKwUvBxW96bd6YBglMaD/rqzIdwxOR/fNgv7y29oxW7px2rS2nG8LodbWwsCqnqtqU7YaSwfxxjyQwQcO1ynT/Yp@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ27HJ1Hu85e5JjsDfM/UyIRGhJC2A3c/SO49jAU21rSiACgYrm
-	LdkidYW4x7Bsog8aC74QMnARinEL3NSjcYGiTrEPxVPjRWjO3r24m1//Gjz8W7DhwrNixw==
-X-Gm-Gg: AYBFou2tO6os+WhysMFKY8SiFulvxhKeo/jK9xbXs+mjND6GEdsfWMTFGWvMo7WfQpY
-	ADgjm2fP4/VGT0fSCJ3/bQcXyEG+rF/Y5VH1cmYWsnIfcapdXAzzniTY5U+MTIllHrVXIJaJgvV
-	/5VdZhgI3E5RBF2BVp1ZIW7ras9mHyjBHx2cL2dMsztdPNRwtDSzLyx7WBmwQTg73LvApEs7SHn
-	ehOy8+MOGgEq63q7MH36jUyIsKIWZEOdNZWt1PPKKhEarloYc+R9LNXk47WraTySOiJsxUMYY5t
-	OOLpqTWHgUV9j0hErQeFN5dMal8SYH/GVYGe/AHrvnSf7oleb6o8WR64kP/uzCTZGA7inOGe8aY
-	vTNToJnUbl8o8WbihrKci4c1nWuVSF/uCTBOjBLSqLqbrt2j4Bj0oHQaXvDrzic9keV/yopH8x8
-	2Za3YjKKut4+36DGRCw0sM4BpLTei4aJt4ryUieX0vAG8BskPGI2geNq/fEW3505ecidhnVP+Kk
-	E7ssYo6qeaoTiG0Cq4zKDkXLjBGc2V+lrMczlF/sGIZXbnmV1Jvw333LEkr5CXaXaRKzp2YM+Jo
-	DiVjgKdmE7qAgzxtqQoLPIzZIXj0kaI48l4TJ+9/5M1C8T9CKQJBXQ==
-X-Received: by 2002:a05:690e:414a:b0:677:cb43:4b10 with SMTP id 956f58d0204a3-67a6de9d295mr2246308d50.6.1793124842656;
-        Tue, 27 Oct 2026 11:14:02 -0700 (PDT)
-Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a79f365b0sm543038d50.3.2026.10.27.11.14.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 11:14:02 -0700 (PDT)
-From: Christian Cortner <ccortner@gmail.com>
-To: Birk Skyum <birk.skyum@pm.me>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [BUG] media: iris: resolution change handling stops ffmpeg's h264_v4l2m2m decoder on glymur
-Date: Tue, 27 Oct 2026 13:14:01 -0500
-Message-ID: <179312417145.10007.14957642704462684875.iris-birk-reply@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <179310500796.73918.9946996824482992887@pm.me>
-References: <20261026160952.22082-1-ccortner@gmail.com> <36201ae2-1cee-4d8d-9381-dfc9013c522e@kernel.org> <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com> <179310500796.73918.9946996824482992887@pm.me>
-Content-Type: text/plain; charset="us-ascii"
+        bh=dKrXUpS5lY7XH1tqSJBOhITY7Qjt8wuebW/mqxCfCJ4=;
+        b=FPU2y1eijUijHyfp9tjH+qmGD2sndkRgLwYXoPC8bTl03l+PaSXfz3w2PgZZsxS9BY
+         U7YaOmpUKfzhiCUok+nBtgRfmTyq8RwJhY1Gd1VLEnU3m+1tMlafSDytFTu9fs3KFEpg
+         5Bb/y863smfghlwLVqAmH/N9YT/7dWBcVj3mHAtliK6EJ7psWR5X8872Tsnvi6JN01Pj
+         IqGY27Qt9zHo2Z4GJApzBFuUmAUXhSzkKxMw4qrgq0h7gPzDTsjTx7hcMouA8Le/rtw0
+         sMRaWUA1jV9Yrzg9raBECO2ScfEamQ6e6h/WNYwA3Ny4/irAwITOu/4uUsy01nIzG7Tz
+         /YQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793125451; x=1793730251;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dKrXUpS5lY7XH1tqSJBOhITY7Qjt8wuebW/mqxCfCJ4=;
+        b=g49TIkUKpZ+Ujafc4NNn0Iyc5/QzOi8Lv+apSPWyKbAAJLj41YgE9k/lhrVO/fCE3u
+         UiKmW4ZUEhgVV38LlyrYL7JyQowrbOu7JVFyPnLD0CRsL6ddyflNJmjjGgRKuS7JIyJq
+         q57IQYgk18C8/mbSy7ctJlFh23oXw4kuTLMwsteKpnNzhi3h7bd/1iaMbE7nDcIYuwsp
+         S/F1Vb8QCjeSO1DmI9RGxDMc+I7/DtbGvO3Qaa1aZkKE6YH368z3E/7FC4rlMO1pBeuf
+         SYZXlYGbjTdZQLzf7hbvHE8qn1a/9cy5EPrqgw+EMxx1bihrhCwjyWZvK2E4MY9FYp2y
+         OgQw==
+X-Gm-Message-State: AFq9FYLMP14afZyqNKSwTlCVxNMGz72qEEKZeLzmLbZ8DUy96Z3zeunI
+	HtpN5fqGcJs2E3J4CvKl/i7NJJ3IQBVIBh94ImObLnGClJOHbYwr32ZmfRE6ANwIfcQrcuJRWek
+	LIvQ3P9JtyeMUDghYpjMTJc5Gfzn75Q5p9WRNHpyw17BySR2piFbvjHTgJ1GlPqLzGOLh4+KmO2
+	PP
+X-Gm-Gg: AYBFou1odZgR4V1gcYFSzBYHly8yuylfnydYRM+6moNjsZPCaIUryFOr35KW9oObKWI
+	xElUVwag9mnvGBXYLNEfmN6ASyUlQsJS07EV9IasnZU6oJ7Rr3+2U97R2COwM8Uh/ANGHD8rxUW
+	ay6qn5ASXN+pPPG3xqoDHcKzlTIZGRg19jaS8EwiKBrX/ioe4Ljb6H4vO7eYf4OHwrFeuIAf4zd
+	owhHCxkpZH/7pQ8rHH9xayzEHW9wcBYvBJqCKV0/QOQFeyJswn4HtRUjIukuB1LQ038zA11tI1D
+	zI12SBGQke35zBFCuJfPGu/o8bISg9WKc2EzMJspSCvdhSm2mi1BTgxOEqL4SO/6epIKXk2UvZK
+	FTPG6pHRGLbRRW4VC2BbPVDTFUU8=
+X-Received: by 2002:a05:701b:4349:b0:194:3a84:e67a with SMTP id a92af1059eb24-1a6ce2fec9fmr43956c88.41.1793125450543;
+        Tue, 27 Oct 2026 11:24:10 -0700 (PDT)
+X-Received: by 2002:a05:701b:4349:b0:194:3a84:e67a with SMTP id a92af1059eb24-1a6ce2fec9fmr43925c88.41.1793125449897;
+        Tue, 27 Oct 2026 11:24:09 -0700 (PDT)
+Received: from [192.168.0.195] ([124.123.196.2])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a32ff780sm34006142c88.22.2026.10.27.11.24.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 27 Oct 2026 11:24:08 -0700 (PDT)
+Message-ID: <d0492d0f-42a5-4400-80d0-987086d7d224@oss.qualcomm.com>
+Date: Tue, 27 Oct 2026 23:54:03 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,51 +114,98 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: rcg2: validate frequency table entry in
+ __clk_rcg2_shared_set_rate()
+To: Gabor Juhos <j4g8y7@gmail.com>, Bjorn Andersson <andersson@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Dmitry Baryshkov <lumag@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261027-rcg2-avoid-null-ptr-deref-v1-1-43c21b54cfeb@gmail.com>
+Content-Language: en-US
+From: Taniya Das <taniya.das@oss.qualcomm.com>
+In-Reply-To: <20261027-rcg2-avoid-null-ptr-deref-v1-1-43c21b54cfeb@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA3MyBTYWx0ZWRfX3AY8BtQD91jp
+ HbV3isN0mD6D3q1wux4hrBO7ovKqFLT0/C5YtpMNOX+BPBi9ccGoU6PqbBGEGE3qle6uHlx+DA4
+ 0jEn6wv3cv2udt7/xJitQvqEfQvCUR13J20z1RLPze4ezyd4aBAtu1+YdeQfpj+1Xl7ZtVkGnEf
+ 1cnXRQrAE3W1Sp3uGp3uM9bRAXCpFv1zv/hwJV9qKp73GxGLapTWKKFcizhDyjctJoQEUBmPsm7
+ /WQNT4KYf6LBExniaEEYzlyGIOTYabIthEtFxIe2lUO7ShtR6UigbMbn07lJdAv0rrVHO/Zuks+
+ f2iK/bpRFPt4AfmNd/m2XFLFBC+4Afe9ECZDQyQQ71GfMa+HtpJP/2iDatctN9tMyKslTd3WOHU
+ +9a9WH3fUM3EXF8nJ3lAXLeIGfpfrhr9numdNxe/Shs6cMgeUaObGEwRX+s3oIeMYw3viIYit9P
+ DcfI8FK4b09erMBX3LA==
+X-Proofpoint-GUID: mfpHXeC01khhqXTS8hW8SYynDC5ye7Fy
+X-Proofpoint-ORIG-GUID: mfpHXeC01khhqXTS8hW8SYynDC5ye7Fy
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA3MyBTYWx0ZWRfX5i79Mqzq8H5f
+ LYSYuZWCrXSZtW+3qA+MmLZohDQtezOtfDlSRyFwcG4fomNXlfaoLPiKQ98jHYoSWxbKAUrqrgv
+ VtLrk+itHETpP4u6KYRAMWiD/z59Rkw=
+X-Authority-Analysis: v=2.4 cv=dKgzC+Zb c=1 sm=1 tr=0 ts=6ae0ec4b cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=QnKtIixuteL6j6IxG7zQig==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=pGLkceISAAAA:8 a=i0tAhZrUCOUqKSMIGdwA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-27_05,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 spamscore=0
+ suspectscore=0 priorityscore=1501 clxscore=1015 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610270073
 
-On Tue, 27 Oct 2026 12:43:32 +0000, Birk Skyum wrote:
-> On the unmodified driver ba stops as well, without the errors. After
-> START the client gets a second empty LAST buffer, START then returns
-> EBUSY, and every DQBUF gives EPIPE, which looks like the stopped mark
-> from your problem 3. The fatal errors come only when the count rises.
 
-Thanks for running it. I booted the qcom-iris.ko of my kernel
-package, which has none of the five changes, and got the same here:
-when the client resumed with V4L2_DEC_CMD_START, both streams stopped
-after 30 of 60 frames (2 of 2 runs each), ab with the five fatal
-errors. With -A both decoded bit-exact (one run each).
 
-With kprobes on vb2_buffer_done() (recording its caller),
-iris_vb2_buf_queue(), iris_dec_cmd() and iris_vdec_start_cmd(), the
-stop traces back to problem 2 rather than to the stopped mark. In all
-four START runs:
+On 10/27/2026 11:35 PM, Gabor Juhos wrote:
+> Commit aec8c0e28ce4 ("clk: qcom: rcg2: add clk_rcg2_shared_floor_ops")
+> removed validating of the frequency table entry pointer returned by the
+> qcom_find_freq() or the qcom_find_freq_floor() functions.
+> 
+> Since both functions can return NULL and the pointer is passed directly
+> to the __clk_rcg2_configure() function where it gets dereferenced
+> unconditionally, it could cause a panic.
+> 
+> Restore the sanity check removed by the mentioned commit in order to avoid
+> a possible NULL pointer dereference.
+> 
+> Compile tested only.
+> 
+> Fixes: aec8c0e28ce4 ("clk: qcom: rcg2: add clk_rcg2_shared_floor_ops")
+> Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
+> ---
+>  drivers/clk/qcom/clk-rcg2.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clk-rcg2.c b/drivers/clk/qcom/clk-rcg2.c
+> index d7914e59129f..260e90f53461 100644
+> --- a/drivers/clk/qcom/clk-rcg2.c
+> +++ b/drivers/clk/qcom/clk-rcg2.c
+> @@ -1385,6 +1385,9 @@ static int __clk_rcg2_shared_set_rate(struct clk_hw *hw, unsigned long rate,
+>  		return -EINVAL;
+>  	}
+>  
+> +	if (!f)
+> +		return -EINVAL;
+> +
 
-1. iris_vb2_buffer_done() completes the empty PSC_LAST buffer as
-   VB2_BUF_STATE_ERROR (the client sees flags=ERROR|LAST). For an
-   ERROR buffer it returns early, before it sets
-   inst->last_buffer_dequeued.
+Normally, the CCF calls .determine_rate before .set_rate. The floor
+determination helper already rejects a request below the lowest supported
+ frequency:
 
-2. Within 0.2 ms, before it has dequeued that buffer, the client
-   requeues a frame buffer. DRC_LAST is set and
-   inst->last_buffer_dequeued is false, so iris_vb2_buf_queue()
-   completes it at once as a second empty LAST. That branch also
-   queues the EOS event and sets the stopped mark.
+ ```c
+   if (!f)
+      return -EINVAL;
+ ```
 
-3. The START for the first LAST returns 0. The one for the second
-   returns -EBUSY without reaching iris_vdec_start_cmd(), since the
-   first START already ended the resolution change. vb2 then returns
-   EPIPE for every DQBUF: only a START that iris accepts or a CAPTURE
-   STREAMOFF clears last_buffer_dequeued.
+So an ordinary clk_set_rate() request below the table minimum should
+fail during rate determination and typically not reach
+ __clk_rcg2_shared_set_rate().
 
-The stopped mark doesn't halt decoding: in the ba runs the firmware
-completes all 16 CAPTURE buffers within 11 ms of the first START,
-and the client can't dequeue any of them. With -A the second LAST is
-made as well, but the client's CAPTURE STREAMOFF discards it.
 
-On my kernel with the five changes, where patch 1 stops flagging the
-PSC_LAST buffer, ba decodes all 60 frames bit-exact (2 of 2 runs). In
-today's run, with the same kprobes, the client got flags=LAST and
-iris_vb2_buf_queue() completed no buffer. I haven't tested patch 1 on
-its own.
+-- 
+Thanks,
+Taniya Das
 
-Christian
