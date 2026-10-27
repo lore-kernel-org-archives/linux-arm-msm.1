@@ -1,89 +1,108 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793100691;
-	b=rYu/cVUaGoaJiELm0YjLG0e8KdqReKugB8uT5+vo+q5cqnhlu0sycjjr6R6SGzmLtnAo
-	 5JMx+3q7kIsxFuTvhYpwr4YQk3stMj10ezib9WXKjrEpF+yWnP1rH9GGgn07nyZ8qhzEL
-	 MqMXltnLMCBcBVEzNmhkMJitw/o0NEQ+4kHBv/kojrhZDCXK7ACK8AIwKg7l5Wrv/yrVW
-	 dQ+gA6FFY+9BlgIIk4req82IMiCmCyEM+xpG+n0jI39DEoIyhwAiEZdAIc8aTJ1M3Q+wi
-	 mRB60Y5S3TSmJkyXZ2P26z27qUmB0HeKCOBZdSDBvqyW7yr7ivrsrTM5XpIjQinoRmw==
+	t=1793100726;
+	b=G08q1jDiqjOi3lKXOtAkO+OjpriVZ5+eLorAhovCJM0vAx7gtA2lRmL3ES8/xhpK8Wt5
+	 SHm3o56niTB66h7Lme3zhaRrmOUWMdtZ07Z12nzLvrF8YKrkk1CPXkcnOkRLtmMVccW2L
+	 VvF5IvaqixJz0ztOcV55Rtn9LgA6qFkvTtgrtReQvksbeidL6smXv4RBqdL9cI+dpQj1U
+	 qy+bCVWHJK6xtu24EyoHSbd8LvROPXKE5wtOEvkUspGURexNg5+cCGr0c6Iba5VMZwop4
+	 r/FN+O+Y3tIsdKHNMsSUcACkkfHjIZOSrP46ZLE7VSRbjdGkBrlXoFLm5pBImCFjLhg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793100691;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=GQyVT+EFovlv5K0TgFKKJHnlBXNpdOtQnIori5eWwSM=;
-	b=D7zGo01JcFwea+zja7w3Dhn4FBTLizGWsmKsnl0qZofDZThlimJ3Pu/20bojQmKr2w/5
-	 zB5Fas3KUcedEmJcGwuUAzK25spFvdujxupRq+cyQSf1dhXdAAl+ZGTeLwZMU4IjeERcb
-	 IUdAz0EhJJPHtYQDTNtoHcsNX8q3MoYp2fjut9dD/m33AGKh+t/uBLDqkKNEhmvcylQl/
-	 pHdY0Ny/fdS61w6iK2Q9qvFSw8O968lHHSvkja7UzmpajsBSQDkHXKFumy9KdneFYjQEP
-	 RkCATuYXwtVl+W1Ud4PFP1tk6zoRB14k7uH+WbKptOpITYKkZrPlMWw/SphN+a2bNOQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793100726;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=PwAgCMcgHnZ/bogI6CXw2isLPSLCqdg40Q4o+na34B8=;
+	b=Qm7lBmqhSL1WHqRlGCd1xsWWon8wytSojOBHln5/u8GxdFPtUswun+gFD60eE7nZgR/c
+	 t+edvWVYiJyVXv6kM5QaIKvCv4fV6Mhai/4UQ9eaQLlNCVeSkU9ZSwRqvarXpxRU1+y4S
+	 BkB84IYlyc9f/rCVSkXd5oZvo1OyPS+/2O7+oNb7CrxI+wk5kgtdIvyaUOjhqeUqQYbfu
+	 vgshLRvFcHIcA/465jQOQs/WLW5xthTT2FtJyBQQydCmiBqMJ077jVTjMTptd4l5VzAgH
+	 ylXH5+C7ggB1g+gMeEfS+fnG+heDv+tmBusO+7xJD8nNUoRR4vWtqhXLHp/PweQqeVw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b="bu9jG/wt";
-	arc=none smtp.remote-ip=192.198.163.15
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LoTMbJfX;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PF78dhdo;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E419606A31B;
-	Tue, 27 Oct 2026 11:31:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4E419606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFBF4606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:32:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EFBF4606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=bu9jG/wt
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793100689; x=1824636689;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=KDMfKFiUm7Y3lC+nwfIordIWlQtUZP5F0MRIw/MEwjQ=;
-  b=bu9jG/wtfZYT4UNfyB5Y+LL2YKZSFQ0YplgRPFLFRdUVHlj2IIYq+LOC
-   eFOLUbL5wdcQuLG5wwXeZjhpjPwpt7VGJJEWESm3YXTzY/POQwgp4DJa2
-   9heGd0OuQ3vkNzikCSBESiDKRRFtoy6eeKySG14zdW+doo/fOBTU2iHNB
-   rxfdKklMYQPmfUYb7+G28r5U8unFBBb9VFtiei6y5rXUE76cDHnJq8P4Y
-   Sjxhc0d/rqfQmDsgcQ94MvxOAxdI/Bg/2EiV5lmaQJErWXz5zCr4VIZOq
-   tRYeNABu6oMNHl9r95D6+EfeYAaM0aAVYzzzyWSOrhl40Wie4g6tAxHkB
-   Q==;
-X-CSE-ConnectionGUID: FiaBAqzBQqWVt065haab4A==
-X-CSE-MsgGUID: LoPFTNSJQiyMo92wpIBjow==
-X-IronPort-AV: E=McAfee;i="6800,10657,11947"; a="1805807"
-X-IronPort-AV: E=Sophos;i="6.27,181,1787036400"; 
-   d="scan'208";a="1805807"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2026 04:31:28 -0700
-X-CSE-ConnectionGUID: ZCM0VRDVSZ2uHu0u4hkQeQ==
-X-CSE-MsgGUID: la2fgOt2QMKPFEra0fO3OQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,181,1787036400"; 
-   d="scan'208";a="5043934"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa010.fm.intel.com with ESMTP; 27 Oct 2026 04:31:24 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xLfOj-00000000XAq-3cit;
-	Tue, 27 Oct 2026 11:31:21 +0000
-Date: Tue, 27 Oct 2026 19:30:27 +0800
-From: kernel test robot <lkp@intel.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	dri-devel@lists.freedesktop.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/gem: Add some cleanup.h
-Message-ID: <202610271940.hGm7dpnG-lkp@intel.com>
-References: <20261026213701.22126-1-robin.clark@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LoTMbJfX;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PF78dhdo
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAdxqP2458146
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:32:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=PwAgCMcgHnZ/bogI6CXw2i
+	sLPSLCqdg40Q4o+na34B8=; b=LoTMbJfXZjrpd7mVhKr3QW/qTk66GJX1CG9xSM
+	Bony8VnhGl8rru8bIZXYw2juN8AyH76Eut6aQLxVRsJ/nps0FMdCgLyooY0MexGA
+	J+fNBObaQBUpsfPakET/WbnbxCDA/FaGxkDQds+A0ANVNPKWzSO5mzxkxbUv+rsk
+	kv+LX48JEco75Pw5aqmVbbvoKrFmP8QtrZh2vQeZnvTukZXdnPJ94e4vR/N2s/bA
+	BpDvfrnbh+vOShqMLaGYNlFZLVrfYSFI82yAjw5grHBXkL0Z6cnxj8MW7tC/WgNB
+	2SBBm/AvTj34bVrEfkLAoIDLdCMUqtbXU9Q0tiPo480ekPEQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjjbta1nt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:32:03 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-ccacc75a997so1697684a12.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:32:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793100722; x=1793705522; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=PwAgCMcgHnZ/bogI6CXw2isLPSLCqdg40Q4o+na34B8=;
+        b=PF78dhdoHGmlaICc5CHVRdQyGAG9jJBT29ET1KcG5xyJh828M8qyjp/5Q8PKLTBSfL
+         TI7a1YgCoh/tNedkyy2yP2zqKe77ExlgBlcbqFXpFwVNmHEf+wS2Bvlj0vDFnFF9JwuN
+         w/1DZWVByuCqtXMA8Y2wXXig4RnGZ4lBAdBfswkX9wq+zqVvX44ja5/EJpQR5bRVpDu8
+         mfULcUYx3svTTVTgcpPSpfsR7NcEmDY/00Zp2f7lbOIA4/px7AWer1IGc7wOBBsFwm3e
+         XU39hsD/GSXpkBMN97XlR23PtWAJRLL+YyP/BNNRKx1TOCtyIvOhXOVySia4AxeIJUpr
+         wPMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793100722; x=1793705522;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=PwAgCMcgHnZ/bogI6CXw2isLPSLCqdg40Q4o+na34B8=;
+        b=cGtarhKV1tnQuUsz+EoAe7sPZNAqXITshB4XdbS08etBq2JjgzfZaxJDRvnaZgkm68
+         PCoherLtE+6GXj6uyTvEE37oE7W2rI8HMhKFWwBpYpU9jjHBzCDyIH8I3N1BAPDtaDAG
+         hYJLhU1uMb0scd1qvdJBdyjgXa20ZYpfdZwZNtXm8nrDfEQkCJydX9XQGfRn4wmTrBcV
+         b6oomn6Idcr/o/bfgZIVjBBSQd6gkTvSRO0k1N409iCGcZMT/xhe1VZ+XvwI6wZP0mQL
+         6a+L2GUyJA4bEJE1LIMT0006Cyc2JzascBZDMcum4OZ0Qu9r297vDVQ9lx4uHY09x6Ho
+         daHg==
+X-Gm-Message-State: AFq9FYIDOjmxZG4f9JmBpxMO7k83lHmx8O+hiFsHFMMqPiH3wDqgNMLV
+	fFjIAAg83IQZqvWHakPAZDpJNcpUgNB+ehgbai7CUN5NZ2yYo3PVmfzUwp4CAP0w+2XwheAHSV1
+	80AAcOsqdNmFfLKzcc8NFPPs3ihZNtAF8II0r2u7QMJZgNCduChWceuUMxfTx7rqQocgF
+X-Gm-Gg: AYBFou3nqvlRAkTgiCphJVy+FtPdiH6MaHi9uJe/Na5qH/cXdQMo4kPE5DdKNTbnXD5
+	22HxpL6s8EH1fvyibacU9O18ynu3GY5rSA+TWVqOpyixYtVmMKEouTAtqwAM9HorEx5CPnxz8gJ
+	3cyGj+4YQ4yBkUCDcZgYJdIo6izY7VBPXBJ4NnYfNk8BCibBvlo3cdu+i85Fx9KDGQA3RYaVN3i
+	dELZ28rX62VnwGMCTUPwffYAyadu9XeDhj5KbLhdk3WIfq3yb/WHjqZh09z6zYF/4KbX+MftGWq
+	udS8PL3yYBhttiOOqr5HAU1UnwOa3Cdn0uXJ48SYynqMiZVUTXu1mVVTzd6uIQRCqWazJ1XfuVv
+	D/A9aYLDpP+1mmWultqx1
+X-Received: by 2002:a05:6a20:3ca3:b0:3e2:c75:2349 with SMTP id adf61e73a8af0-3e7af7e9a5bmr7938458637.8.1793100722413;
+        Tue, 27 Oct 2026 04:32:02 -0700 (PDT)
+X-Received: by 2002:a05:6a20:3ca3:b0:3e2:c75:2349 with SMTP id adf61e73a8af0-3e7af7e9a5bmr7938416637.8.1793100721910;
+        Tue, 27 Oct 2026 04:32:01 -0700 (PDT)
+Received: from [10.213.104.249] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a36c0fefa3sm2143836b3a.51.2026.10.27.04.31.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Oct 2026 04:32:01 -0700 (PDT)
+From: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>
+Subject: [PATCH v3 0/3] Add support for Talos Lyra EVK board
+Date: Tue, 27 Oct 2026 17:01:54 +0530
+Message-Id: <20261027-talos-lyra-evk-v2-v3-0-658fd5a7ec99@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,105 +112,129 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261026213701.22126-1-robin.clark@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKqL4GoC/22O0Q6CMAxFf4Xs2RIYguCT/2F42EaRKTBdgUAI/
+ +6GPJo0Te5te25XRmg1ErsGK7M4adKmdyI5BUw1on8g6MppxiOexVF0gUG0hqBdrACcXjBxQI5
+ pnovkXGcVc3dvi7Wed+a9/Gka5RPV4EF+QwpCkFb0qvFWj/MAR0Dh542mwdhlf2rinnPkx/xPv
+ qsIKqWKJM5QyrS4GaLwM4pWma4LXWPltm1fS//yBusAAAA=
+X-Change-ID: 20261007-talos-lyra-evk-v2-e2e588a34f6d
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>,
+        Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>,
+        Monish Chunara <quic_mchunara@quicinc.com>,
+        Rakesh Kota <rakesh.kota@oss.qualcomm.com>,
+        Sayali Lokhande <sayalil@qti.qualcomm.com>,
+        Nirmesh Kumar Singh <nirmesh.singh@oss.qualcomm.com>,
+        Akash Kumar <akakum@qti.qualcomm.com>,
+        Khalid Faisal Ansari <khalid.ansari@oss.qualcomm.com>,
+        Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>,
+        Vishnu Saini <vishsain@qti.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA0NSBTYWx0ZWRfX+lVcLB05gFA+
+ Iltkboxde7aIJM5W6fUfawJX25r17g16+qzQbh+imGTpvbyBjnr1l6aNbtn+9UGCsUur/KA2IUu
+ 7x6mMchxut1Cc2hKJLP1Z6Vi0FyAKqs=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA0NSBTYWx0ZWRfXzkZF2odWlTV9
+ 2V6AHm0FDEMGcBzYP1B+Ybf8Ti0aAw7rwctdbTmx8KoureQbO1KptqBApyVhjmICPc3y04/trwj
+ elh2FkTCHhKTY0M71Yc04MtqiOc8ymLOCqkEDofGwDr/+tPms2pT/GGOMK4tpU5phnJ54vdtT35
+ MAs5Lm/1Z0JxNUBtk4uNA07sDcicxuNLZGpNLwnQDT8f1j5fuFLctODLNnw5J/IbNXON5xv2oK5
+ h1FOOGPu5lNZd3wAp9YnnVGRw2/qBqa9Uv12DAXRr2GSSh3ETQkkuBX+i1C3Lgcn2H5gsEZ2bHy
+ qi0ekGyHUTzhtJfl+j6RXEtOjv7zVmeL+OFptShim5/0GGkIeiaOAmu6uTiOgAv+Xyf+2ASzcjU
+ QJri6ehrxMicoDzMvXZ5lwqZ6MPOVuZGafNAeRPGrkeVv4HLgMFY/QiwynBIUFpRQGRVufY3ca7
+ 4fviK+GmCq0fCWkHZuw==
+X-Proofpoint-ORIG-GUID: LGFOkd1clkwdJVcewsFxkWBqYMoAKK8w
+X-Proofpoint-GUID: LGFOkd1clkwdJVcewsFxkWBqYMoAKK8w
+X-Authority-Analysis: v=2.4 cv=XaIcX455 c=1 sm=1 tr=0 ts=6ae08bb3 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bC-a23v3AAAA:8 a=XRYUP8yNB-fVxFRa9e4A:9
+ a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-27_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 spamscore=0 bulkscore=0 priorityscore=1501
+ clxscore=1015 lowpriorityscore=0 suspectscore=0 impostorscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610270045
 
-Hi Rob,
+This series continues work originally posted by Avaneesh Kumar Dwivedi [1].
 
-kernel test robot noticed the following build warnings:
+This series adds initial device tree support for the Talos Lyra EVK,
+a QCS615-based System on Module (SoM) paired with a carrier board.
 
-[auto build test WARNING on drm/drm-next]
-[also build test WARNING on drm-i915/for-linux-next drm-i915/for-linux-next-fixes drm-tip/drm-tip linus/master v7.3 next-20261026]
-[cannot apply to drm-misc/drm-misc-next daeinki-drm-exynos/exynos-drm-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+The Talos Lyra SoM is a compact compute module integrating the QCS615 SoC,
+PMICs, memory, and essential connectivity. It is designed to be paired with
+multiple carrier boards to support different use cases.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Rob-Clark/drm-msm-gem-Add-some-cleanup-h/20261026-143700
-base:   https://gitlab.freedesktop.org/drm/kernel.git drm-next
-patch link:    https://lore.kernel.org/r/20261026213701.22126-1-robin.clark%40oss.qualcomm.com
-patch subject: [PATCH] drm/msm/gem: Add some cleanup.h
-config: x86_64-buildonly-randconfig-1005-20261027 (https://download.01.org/0day-ci/archive/20261027/202610271940.hGm7dpnG-lkp@intel.com/config)
-compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261027/202610271940.hGm7dpnG-lkp@intel.com/reproduce)
+Talos Lyra is a distinct SoM revision of the existing Talos EVK SoM. The
+key differences are:
+  - Adds Apache (Lite-on-Module) WLAN on SoC Card.
+  - Removes SPI-attached CAN transceiver module.
+  - SDC2 on the existing Talos SoM supported SDIO-based WLAN; it is now
+    used for the SD card connector only.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610271940.hGm7dpnG-lkp@intel.com/
+Note: The following are not included in this series and will be posted
+as follow-ups:
+  - WLAN node
+  - USB Type-C OTG role switching via CYPD6129 controller (OTG support,
+    VBUS supply management). USB controllers are set to peripheral/host
+    for initial bring-up only.
 
-All warnings (new ones prefixed by >>):
+[1] Link: https://lore.kernel.org/r/20260901-lyra_upstreaming-v1-0-e3a76dc9e21c@oss.qualcomm.com
 
->> drivers/gpu/drm/msm/msm_drv.c:613:13: warning: variable 'ret' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
-     613 |         } else if (copy_to_user(metadata, buf, len)) {
-         |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/gpu/drm/msm/msm_drv.c:621:9: note: uninitialized use occurs here
-     621 |         return ret;
-         |                ^~~
-   drivers/gpu/drm/msm/msm_drv.c:613:9: note: remove the 'if' if its condition is always true
-     613 |         } else if (copy_to_user(metadata, buf, len)) {
-         |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     614 |                 ret = -EFAULT;
-     615 |         } else {
-         |           ~~~~~~
-     616 |                 *metadata_size = len;
-         |                 ~~~~~~~~~~~~~~~~~~~~~
-     617 |         }
-         |         ~
-   drivers/gpu/drm/msm/msm_drv.c:588:9: note: initialize the variable 'ret' to silence this warning
-     588 |         int ret, len;
-         |                ^
-         |                 = 0
-   1 warning generated.
+Changes in v3:
+- Remove inapplicable Tested-by from dt-bindings patch
+- Fix DP HPD: use native pinctrl in mdss_dp0 instead of hpd-gpios in dp0-connector
+- Fix model string: capitalize "Lyra"
+- Squash EL2 overlay Makefile changes into board DTS patch
+- Move USB PHY supply nodes to SoM DTSI (supplies are SoM PMIC-routed)
+- Sort &node overrides alphabetically in board DTS (&tlmm before &usb_*)
+- Reword dt-bindings commit message: clarify board/SoM relationship and explain absence of SoM-specific compatible
+- Link to v2: https://patch.msgid.link/20261012-talos-lyra-evk-v2-v2-0-dcc9316ebb59@oss.qualcomm.com
 
+Changes in v2:
+  - Drop qcom,talos-lyra-evk-som compatible from the binding; group
+    qcom,talos-lyra-evk under the existing talos-evk block instead
+  - Remove unused regulators vreg_s3a (smps3), vreg_s5a (smps5) and
+    vreg_s6a (smps6) from the SoM device tree
+  - Update board compatible string to remove qcom,talos-lyra-evk-som
+  - Add "talos:" subsystem prefix to patches 2 and 3 subjects
+  - Set initial-mode to HPM for all LDOs (ldo3, ldo11, ldo13, ldo15, ldo16)
+  - Add EL2 overlay for talos-lyra-evk as a separate patch (patch 4)
 
-vim +613 drivers/gpu/drm/msm/msm_drv.c
+Changes in v1:
+  - dt-bindings for the Talos Lyra EVK board.
+  - Talos Lyra SoM DTSI with PMIC, regulators, storage (UFS/SD),
+    QUPv3 instances, ADSP/CDSP remoteprocs, and GPU definitions.
+  - Talos Lyra EVK board DTS enabling DisplayPort, GPIO expanders,
+    SPI-attached TPM (ST33), and USB on the carrier board.
 
-9902cb999e4e91 Rob Clark        2023-11-06  581  
-9902cb999e4e91 Rob Clark        2023-11-06  582  static int msm_ioctl_gem_info_get_metadata(struct drm_gem_object *obj,
-9902cb999e4e91 Rob Clark        2023-11-06  583  					   __user void *metadata,
-9902cb999e4e91 Rob Clark        2023-11-06  584  					   u32 *metadata_size)
-9902cb999e4e91 Rob Clark        2023-11-06  585  {
-9902cb999e4e91 Rob Clark        2023-11-06  586  	struct msm_gem_object *msm_obj = to_msm_bo(obj);
-9902cb999e4e91 Rob Clark        2023-11-06  587  	void *buf;
-9902cb999e4e91 Rob Clark        2023-11-06  588  	int ret, len;
-9902cb999e4e91 Rob Clark        2023-11-06  589  
-9902cb999e4e91 Rob Clark        2023-11-06  590  	if (!metadata) {
-9902cb999e4e91 Rob Clark        2023-11-06  591  		/*
-9902cb999e4e91 Rob Clark        2023-11-06  592  		 * Querying the size is inherently racey, but
-9902cb999e4e91 Rob Clark        2023-11-06  593  		 * EXT_external_objects expects the app to confirm
-9902cb999e4e91 Rob Clark        2023-11-06  594  		 * via device and driver UUIDs that the exporter and
-9902cb999e4e91 Rob Clark        2023-11-06  595  		 * importer versions match.  All we can do from the
-9902cb999e4e91 Rob Clark        2023-11-06  596  		 * kernel side is check the length under obj lock
-9902cb999e4e91 Rob Clark        2023-11-06  597  		 * when userspace tries to retrieve the metadata
-9902cb999e4e91 Rob Clark        2023-11-06  598  		 */
-9902cb999e4e91 Rob Clark        2023-11-06  599  		*metadata_size = msm_obj->metadata_size;
-9902cb999e4e91 Rob Clark        2023-11-06  600  		return 0;
-9902cb999e4e91 Rob Clark        2023-11-06  601  	}
-9902cb999e4e91 Rob Clark        2023-11-06  602  
-fec06716d04d17 Rob Clark        2026-10-26  603  	scoped_cond_guard (gem_lock_intr, return -EINTR, obj) {
-fec06716d04d17 Rob Clark        2026-10-26  604  		/* Avoid copy_to_user() under gem obj lock by making a copy: */
-9902cb999e4e91 Rob Clark        2023-11-06  605  		len = msm_obj->metadata_size;
-9902cb999e4e91 Rob Clark        2023-11-06  606  		buf = kmemdup(msm_obj->metadata, len, GFP_KERNEL);
-fec06716d04d17 Rob Clark        2026-10-26  607  		if (!buf)
-47cbfe2608314b Yasuaki Torimaru 2026-03-25  608  			return -ENOMEM;
-47cbfe2608314b Yasuaki Torimaru 2026-03-25  609  	}
-47cbfe2608314b Yasuaki Torimaru 2026-03-25  610  
-9902cb999e4e91 Rob Clark        2023-11-06  611  	if (*metadata_size < len) {
-9902cb999e4e91 Rob Clark        2023-11-06  612  		ret = -ETOOSMALL;
-9902cb999e4e91 Rob Clark        2023-11-06 @613  	} else if (copy_to_user(metadata, buf, len)) {
-9902cb999e4e91 Rob Clark        2023-11-06  614  		ret = -EFAULT;
-9902cb999e4e91 Rob Clark        2023-11-06  615  	} else {
-9902cb999e4e91 Rob Clark        2023-11-06  616  		*metadata_size = len;
-9902cb999e4e91 Rob Clark        2023-11-06  617  	}
-9902cb999e4e91 Rob Clark        2023-11-06  618  
-9902cb999e4e91 Rob Clark        2023-11-06  619  	kfree(buf);
-9902cb999e4e91 Rob Clark        2023-11-06  620  
-47cbfe2608314b Yasuaki Torimaru 2026-03-25  621  	return ret;
-9902cb999e4e91 Rob Clark        2023-11-06  622  }
-9902cb999e4e91 Rob Clark        2023-11-06  623  
+Signed-off-by: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>
+---
+Avaneesh Kumar Dwivedi (3):
+      dt-bindings: arm: qcom: Add Talos Lyra EVK board
+      arm64: dts: qcom: talos: Add Talos Lyra EVK SoM platform
+      arm64: dts: qcom: talos: Add Talos Lyra EVK board
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+ Documentation/devicetree/bindings/arm/qcom.yaml  |   1 +
+ arch/arm64/boot/dts/qcom/Makefile                |   5 +
+ arch/arm64/boot/dts/qcom/talos-lyra-evk-som.dtsi | 281 +++++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/talos-lyra-evk.dts      | 115 ++++++++++
+ 4 files changed, 402 insertions(+)
+---
+base-commit: becb95e45ef0dda9ffb35156d909d3da7a2789c3
+change-id: 20261007-talos-lyra-evk-v2-e2e588a34f6d
+
+Best regards,
+--  
+Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>
+
