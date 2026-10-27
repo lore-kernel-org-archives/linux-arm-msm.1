@@ -1,55 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793126319;
-	b=mOoniHGs3gItLqqGu7aibcXfspAO2cv6iiBvHQZ8yn8ok3f7VnDoawaSu65VujxKgx0T
-	 nyGGgE03gshnPg05mTGY9LKa/STBAdgfE/ITDT9TbW9rrCn0IWz9fERfLZ22btW/jrmeV
-	 GEIG4uHIyWis0/YbWsBV/fo76pUWToy29fAgUzaTCNsvihxd2kWqUq0fZ6tVKSfmGsm6M
-	 CwuXM1vTQhHwBV8Ce/4J1xCapRD8w9nwwEket0drBbiWSPldh46WFG/aZE6TckdzDbU9T
-	 PsfvMw2CbfUyNXCehIdVjcOSJFipj7P9yqZ7OnS4r3TqITs+aZv1eRoji1H6ogioQjA==
+	t=1793126477;
+	b=ZGvIpnTTJT9i608Rb9O/OzRp2OsS9sHvyYDXvKToLZ9dskyp/WSscSMYPynuT19aRCn+
+	 xSogLmKZ7jTBDC78ZBlsTKq7+Xs3hEuBqBP4MmgFzbIcXwzNPR5lsYeTq6nI58AI6iyac
+	 i9bhXC7tS54fe9zIFJlWZFAzDSCZN7vRPB9Ush88fLjs+2MTb+/xqmXSymmhQU2dD/vVI
+	 rJKftlQ2K3JwobYNnip1HlyhUyZQkYLliTp3189cY9nvpQEP0wCTXjO/zsFPiTvDNBChE
+	 9OmWeNFzMLStvZ1vWpkSj5BRMMoJE8GLqAp/tT/Ohk3lU2jGXiU9l21AaFFOP+viDGg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793126319;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793126477;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=uBoSJTtzRxvJ8IoYQJOlz0olC7lznlyUmLgUztO17J8=;
-	b=muLKby4HyCxCVPQBK28MBE9JoCtLGPu6ZP4oZHbAiyyryhwR2/sYQJJmfW6ujVexLSVQ
-	 LUqhLBXO2FyCGi/ZHh/hNZJzjBIqQac9bEBCASNAZ4EzaKlokr2L9LjjKKd6QCFH3RDCk
-	 eJmhKN+4ng2hbzqkrxl32y46No79suUH5A3skGr/i1hURS4PAN9q094pIC8HADqqHHfHb
-	 LHrE8STXwmsXJpAsrOIGBLFp2Q3cdy4LvAIZ15Lr3Etc8OdRX/AuZEqLK4MnAn6k2/rgn
-	 omRwdrtTQXp3EpDLliZCWaED3E2rw4+GvQVoCJVD3jH2csoBeEpxJnCZBqLGnVIlLtQ==
+	bh=ArcvoskceT7SzX8ayPehqAjDk7HcQG50dGsvaAvvCfQ=;
+	b=iPdQC5C1uZbyORPl3ErFO1t7CJOMbuRCvz1RJqdyEswqyfb8fi2+kjJOmrWg/fu0o3UB
+	 p0qhJVl/jyioHUd6SaA30/t+L/i7/TK3Fu9gkiFKYRi32QsPwZrtatPAOKz0DHQ9aGF+9
+	 5SumiDfTcCvj9CDGpCAB9uR+nfbmFalHyIpay4D5S2m31SNZfKWXvIp7wvDjyBCWqTr9W
+	 ZqCpoInt2l5fQplWRgE3DmBE6xBWna6WYBqAp3hGMYmnoKa4kZmvEAVH9tZnfIJXqsjcX
+	 YL2xiptH8lrtzXBuWl3Tq07EGD5FZJlSVlp1THPDWBxnPCPvPphGY0Y9jXr+r+po83A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UGY0+Uik;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nm6IFaOy;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2563606A31D;
-	Tue, 27 Oct 2026 18:38:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56EAD606A31D;
+	Tue, 27 Oct 2026 18:41:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UGY0+Uik
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98B211F01828;
-	Tue, 27 Oct 2026 18:38:37 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nm6IFaOy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 237641F01825;
+	Tue, 27 Oct 2026 18:41:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793126318;
-	bh=uBoSJTtzRxvJ8IoYQJOlz0olC7lznlyUmLgUztO17J8=;
+	s=k20260515; t=1793126476;
+	bh=ArcvoskceT7SzX8ayPehqAjDk7HcQG50dGsvaAvvCfQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UGY0+UikCFUt8hwv4spfhzh0v2PxZ/wCQMCGYBGA/w8anYhMOv6hnb70+68iAXwmP
-	 6b5MDe1bXcUcknQR2H+m0mh47551tzLN7nE4P56zTBnCAKSNl67trGd2O6s5HnM7Lz
-	 4DMh+75jYlYIFdY1JmsNl5CCTV/lYEkYiLYHB4Oc6kucCImixFlvvroxhcgR3vmiGf
-	 30soTkn6sAwYzpgI6XSGx1ogANlx5Gzk80yAyUt2pqszY9A9kdD9nP/Jk5oBYfzN23
-	 AGA8Vk63eqzB/j/Nh0itFC3W/clkteHa5/MqivKIyOYvKLrm011SLPB8UXsLTCfp91
-	 +G3c5D5CGEzBw==
-Date: Tue, 27 Oct 2026 19:38:34 +0100
+	b=nm6IFaOyTwANOf2bfUMbkROTvpXUF0hQ3Ofki1Z+DXodV3Y2nQyZ1gs/wxhe0+EN/
+	 FOBAuXYkEmeyeqSeZOErhFJLwHUyG2BhMM0l3OmQ5r7nlj6EEfW/PG2utLthJ0So5s
+	 AbDLKV4ts/NrSK2k+Q37JIE7Imn2yA3MC2dsGSbB+bijNT/JbZKPfJ2xp77hzgkcKJ
+	 e5gOKTJJW7/sRzOyn/S9tJrGmHyPdlG8EYLOrVtBLHAra3BFzqcGeBgMJfPJgSEuqs
+	 WGDAuIejwgB74NJZP4SFvHwRXhTSugn6KJ/8dY0zDmcW1AD0pMbrH/4KZX8lCY9qs7
+	 Fs9YejBxp36kQ==
+Date: Tue, 27 Oct 2026 19:41:13 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Ishu Brar <patches@brar.si>
-Cc: djakov@kernel.org, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
-	konradybcio@kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/2] dt-bindings: interconnect: qcom: Add SM7250 RPMh
- NoC
-Message-ID: <20261027-married-jasmine-hummingbird-dadc1d@quoll>
-References: <20261027-icc-sm7250-v4-0-f9bdaa3c1c7b@brar.si>
- <010601a17d6212dc-ed028a84-ea72-48e7-a4d8-fea315dc42cc-000000@ap-northeast-1.amazonses.com>
+To: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
+Subject: Re: [PATCH v3 1/3] dt-bindings: arm: qcom: Add Talos Lyra EVK board
+Message-ID: <20261027-whimsical-russet-marmoset-f248ba@quoll>
+References: <20261027-talos-lyra-evk-v2-v3-0-658fd5a7ec99@oss.qualcomm.com>
+ <20261027-talos-lyra-evk-v2-v3-1-658fd5a7ec99@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,23 +62,26 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <010601a17d6212dc-ed028a84-ea72-48e7-a4d8-fea315dc42cc-000000@ap-northeast-1.amazonses.com>
+In-Reply-To: <20261027-talos-lyra-evk-v2-v3-1-658fd5a7ec99@oss.qualcomm.com>
 
-On Tue, Oct 27, 2026 at 12:42:21PM +0000, Ishu Brar wrote:
-> Document the Network-On-Chip interconnect providers of the Qualcomm
-> SM7250 SoC (Snapdragon 765/765G/768G), which are controlled through RPMh
-> Bus Clock Managers, and add the header with the node and slave IDs.
+On Tue, Oct 27, 2026 at 05:01:55PM +0530, Ruchira Revdekar wrote:
+> From: Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
 > 
-> Signed-off-by: Ishu Brar <patches@brar.si>
-> ---
->  .../bindings/interconnect/qcom,sm7250-rpmh.yaml    | 105 +++++++++++++++
->  .../dt-bindings/interconnect/qcom,sm7250-rpmh.h    | 148 +++++++++++++++++++++
->  2 files changed, 253 insertions(+)
-> 
+> Add the qcom,talos-lyra-evk compatible string for the Talos Lyra EVK
+> board. The Talos Lyra EVK pairs the Talos Lyra SoM with a carrier board.
+> The SoM uses the same QCS615/SM6150 SoC as the existing Talos EVK, so
+> qcom,talos-lyra-evk is grouped under the existing talos-evk block rather
+> than introducing a SoM-specific compatible.
 
-Cover letter is missing, but you also never responded what is the actual
-hardware here - why sometimes you have children, sometimes not. How is
-it supposed to work?
+I do not understand this logic at all. Usage of same SoC has nothing to
+do with having or not having SoM compatible. Every SoM uses same
+compatible as some other device, so we should drop all SoM-compatibles
+in the future?.
+
+So if you have a SoM then it can be used with different boards, thus it
+should have its own compatible.
+
+Again, explain properly the hardware if this is the chosen design.
 
 Best regards,
 Krzysztof
