@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.175
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793067576;
-	b=CUE8PE1GFqyZDHU7hTGGrO3f/7CZi3lh4j/94ivY9ga3H1ERTmIRdfAC9LaOAS2L85p4
-	 8VIUOyYOA2pHPtCW8+EeEfxNhL9BgWxxWuU2oIbxFvyr9fI7G08V9fMKqukPBwePnRAPd
-	 bAXxQMsIFcGDRxHnN+3O8rqQH9AqrPKLS3d+3eSeFMtdwD7ndkUutP+WQOlx1Plkvxiiq
-	 JyrAZELNPd1OXLIEaz5R7Tg9N1HzdCc22v4+VdgmEPYX5G9RcJz1U6jfXI/CW+aJLdGz3
-	 JAtPh4hOCkjLKOpaWwa+OPAHe0ruMlwoWYFR/8NT7GTpyCyps1ibgqeNTXRLIat3SNQ==
+	t=1793067578;
+	b=13vRS1TSzgV5Sowp0OQo3D9aBF2mpg5tDUWU91Iqa3iuMjuiGBuD+ju8NDZEf8csFpBE
+	 K9UJfPhGsJ0Ntsj/+KJ/7r4kSxIk22uvMzkQNJVsA2xSHlR5KfqVLHXQTnfeShPfN+TOE
+	 8ukNiVTnI4hElRnWPfMDAnO86hpGLZb9yLl8Ldy7FYHkhiMCdpytl36QglTBuWwh7bxzX
+	 tPqDZtJ+7SVo8QA1nPLM42aedl0oz0HEUQFH15EeRfAtjope/CNgTJLuQlfNbF8JEResu
+	 m3OTqoi15/TqEapB1J9xioWN3Q6x3TgX8U2sYN0ojb3Ft3b2LLV57RiRlEETPlxnVMQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793067576;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793067578;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
-	b=y3ZUqC5Q4SYo+p5xI/vQjPkrLTDqT6Nltqu4XUwKXpXVdxCCfCDf5DAvLpKuKLXp20I7
-	 3gOhjDmVunC75A69PFZfQzGpbULZ/ROmsfCG/FxEYtmSKVTlz4aU5zcCxvBVdV7zHao1j
-	 byHasBB7TwfEn0CVfuod3l6YqALU4RAPylfnunvOh8g3q31NYcKLZnwwZ8RrSZUDsmo8S
-	 YMqCSIpTXB3QSq+ZwxJSvjlL4v/OoeVhbUejbuP9AyhqUIwkLUl80bUo6fVBhKqHU7FML
-	 2Z405FhhO8luQdY1GZsS62VenIkwqubkOZ4mM7uS7k5DXJ9v91R6SuseRCJqG2uvglA==
+	bh=+oGtn5HyH2tGay2E9emxXMcr59j7/7G6D6wMx8qk5mA=;
+	b=Dyej4CZ4urGOO63udzKqeTKhIlHPBho5QXrepgU9+HGxsljVLF/zsAVeS0veDsqUcDo8
+	 MoDLLzeFP4CkSn08Cs3OJfte9ttJ2tiBILkW3sLvRr30zaCZB2yvx/5OMWR74Y904WTeH
+	 nMeKCsrJkWLKInNWUjRebqsSZwQ0MF8VVBSmS098G/YBZ0Kp95qCOCklM6MOe4dIPXVzP
+	 iev4h0tgb6AHSAwaUu234+etUIj8hGlDWGP1vKN+naqG5WYxuGo8k/ahr+ZbpkVxdoBF0
+	 +X3hr1uunJG+3oUM1qmsHe+2eRH0LYnSqZIAc48HvkhMI8PqAyRjEYPprTdessUJkbg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aYDYfTgx;
-	arc=none smtp.remote-ip=209.85.128.175
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LY4Oi5Ly;
+	arc=none smtp.remote-ip=209.85.128.172
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CF6D606A323
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 02:19:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CF6D606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEBE3606A323
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 02:19:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BEBE3606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aYDYfTgx
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-8ab38a051aaso35141827b3.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:19:36 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LY4Oi5Ly
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-8b0d91601bdso4649447b3.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:19:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793067575; x=1793672375; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1793067577; x=1793672377; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
-        b=aYDYfTgxhzNih+KCle5OtOY1DQZ369aokBe0Rqzdo5j/hFQOe1MypyJTghY7w+VYm/
-         M0XXqRTk8QJYAKHbr/zQwjtxd+f1j5z/pTFovlDvQwINK651iKJh60jIdQeS4BUeA1FD
-         weUO8PRTDBFve3SyaomNJ6t3PYGcOG14+rILLGEe9CoPaLSbAjBIy9QTvL/WeIXC7Ohh
-         +oSyb4kBg2ohivAjYgsCH1zUQQHkOwkOUyDZief9rBJxLQ+VPI5zoz2NMdDuSdIK5eDq
-         db24jCOC9sCaj3sGw6RQV9sptk1dbWuiSfrTpmUyyaUMQ5KpGmPrpYxtFgZi+vs/ye0j
-         vsrg==
+        bh=+oGtn5HyH2tGay2E9emxXMcr59j7/7G6D6wMx8qk5mA=;
+        b=LY4Oi5LyC2nqWp4QkFqzZNpPW6fsO85fRDIBN4RXcD+McXJeYu+Yq44Xss4ef2vDIc
+         LyYsreCgEHwr8kP0luXzKJHXMi9iu9zH1KYngJEtkHYphSp+y8/mRZJ1AcE3UmdfoQ6s
+         4ujHiJjcRcct2KAS3C3z1TD0m4W3J67QPoH2396fSM2BoEKaTu9+CmqADXOH52722yD+
+         G7DZ3bPME5l60fCqh4fSE6nAzgE0V6HOsKayc6xCIv1MUwZqG9x2J2jssppuhd2kOzNa
+         2dBV6jqpDBD72CUBgGj+bT5bj8uyFKShmmt05NLXX51jWU0rB3Dm00eq5NLoF9Pt9gxv
+         IVqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793067575; x=1793672375;
+        d=1e100.net; s=20260707; t=1793067577; x=1793672377;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
-        b=a5KetwvI3bKj09o3d3NK3/D4wUCTFRjU0abvs9PS6oPnv0Fzu9THL0r562RG+nZJZ/
-         +q60oe+MYQqtWwVao4V8qTq4c5HZA0sz+7fTmCioi1JJZ0xpLV5MExNsSfvWwRj0Vhve
-         k9+JEs51JtBvjHZAeUrZphT9mf0U7OE4i7nrMWvp+SvA2hjqXMdYpALF5qZk2aXlymom
-         Y69ksO9p4AfHqEBgv+shuaPyV4dIIpRjP5Pc5NsPcF+dXyePq9bJSexcUwCDmKfcomhg
-         fDNvinTUUcFXT9zaubxkgu0uPzCmIhyqbeovXXu0TMr7vtJm0AbeApCccP2wGdwPpCmE
-         kJ9A==
-X-Forwarded-Encrypted: i=1; AKwUvBxVYEXngy1ouTfpwN/07aC1Wtf0lP7vUvV93JXyw+X6LUqhYXh/qCfhkhcgUQ5zQKyIQbp1cj7xoFsMCMJY@vger.kernel.org
-X-Gm-Message-State: AFq9FYLYxxg2v92PxotqItu2bo4bEDcpQNuj0tyQ/8HWNLCFPiYhhFEW
-	CGQpsNfHE+JSvKdPvicZ1YG3JTOny3aaui6SlbEqhd7pI6sBazkBVker
-X-Gm-Gg: AYBFou2593ShzZoJ7BsfvV5iOZTcGojCoWWfy+XB7lc61cKVdCmnA+dBV8zAi5HOOJs
-	qqE/eShlL887uqw6rVmMBe4pRs5ahNY8IpX30lWpMRmVlCUfKvM8p0qidIPywHE2/6xBtzZNoqs
-	PrjUVRK4hR+mQrRGQVBU3cqsEk+4GKDDiZUrykp8B6fPNeDUJDCaNAzzIjD+QhySq+pX2UjlK/E
-	OYyY3YYF6Ct5VY2+cWJt4Sj1dXN+pkuDF7gpjCK0PbL5o4qpxFcrqaA84b/Y+Fqun4JmZFc50Ng
-	AwOKo6hj1evA33PleMe2It79eoz6HcZBXuCIR/b0WjmeI5sslPYI3oClYQEXk6e4XhcdR5gPbg2
-	jTv8FNjcgxBeRYIDqcBiwOX9DIIoO3z3enXmEjbIwSVLkTWbamAdMmz+dGFQoEDSE7TZVlxo5B1
-	xObpG3iDv50zsM8cw8xmlPT/Gl5lhYpICfrMJ9UpX8yHQR/JlcOb5RT87wwvBEGaRgdLBOFNHKv
-	BvOPlrFK8r7vrdB2K0w1r7f2gS8rTo3qr+Tw/eglUaPWZ6gyEpN1j9hZGjOrQ+ucIxQcO+YfZ+A
-	qv1sBm1jBLvejn+Z6KbmbTC+KSkUSZkG
-X-Received: by 2002:a05:690c:4028:b0:8b0:c673:9958 with SMTP id 00721157ae682-8b1669cb3a2mr50043147b3.3.1793067575123;
-        Mon, 26 Oct 2026 19:19:35 -0700 (PDT)
+        bh=+oGtn5HyH2tGay2E9emxXMcr59j7/7G6D6wMx8qk5mA=;
+        b=wPOCDxboPy0kInvBCKSypAHrbXbZARlGwV2slPcAWD05u9Q/zfhjrbePxoskid77JV
+         y96BlxBYAktLjygT/vgDz6uryr0Pnpg27tiIZ9H/jt7jK4HEgpt3Qo3KaXRflVu1fDsw
+         RLLGRprKvRyg8sTA3sH6xPBcvNinPt8YbpCPcgpHBHzEPRKZmfr+hmn1UX2Te4rO1hEM
+         VgXJX5POrZPYdhVKGIDavc+4rJMfAgJ0iyKwXaZ8RiL1yvvoe0vk0ezttBiXh1BImVZ+
+         QUJ/fd4bdH5Ij+UwDLIKcrwiCXiox26arRzR3YQSnsPxqKpHNtHXDpMLZyaCH1gpp2RM
+         ATRQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw9PyJQqF3qe22x/Fr776ZYUZceKXKnF/5RQWzHV5KJc05I2EwkwgMUi6O3VJR3yXgOVCvsqVmZkSMa0SP3@vger.kernel.org
+X-Gm-Message-State: AFq9FYLAx0WcmIORql9hwaXHJd5BlZyneBn63zD9lObt5rZKLt6xvRQQ
+	qnh1mv0PwrtOZT/jv5vfG+Na/dTqi/XyIuXhmb3erQk7ErohnTUa9Lyy
+X-Gm-Gg: AYBFou04qeSdmaW13PsNebs/7CfO47zzAItGM+PNB7njEUi5VUzVxUdY/B4ce+qHhxX
+	SZ6nPPeX88nJ5l5QatyCfpaB8SVS7zSXh3QHclAPJ+hjy9Fj9wz6E14j6vphgUGsPw9kKz9oAVo
+	pnPa8L9WZqMiPx8oBELyJfsV9cz/YM0cqu4SJ3xKdfIAiLXZOC4vkFgOogbBF4g/VxryGJ9l8pR
+	eKComvL4zX586GZ9BBl6LCwlKLskEVhklCEPRn8f/PjTShPwQ2cDezYv7PUp6oCHKnQY7tHn/wl
+	wA1hOKAy03dEqRTe1zIVYzdegap5tFhpHdbRGp5kpGzoT/FSQgMK9RK9O4uKExKkAazwQsnafjB
+	tJdQVOkqiec/rZ4VxeKYetqy6c+h+n7tYnpXpM8hfQ1Vr+e3OAjLp+D6ePTRrHGspm9F2QnWA6P
+	OinSL7m+IiV9VWxxQkfT3x37i+Du9Z3mzBvxSftYkSt24jz/aVPs4rMi+qjeuMfPfx12NyBk2U+
+	SHO8Juujn8mOhOXSDz7HW/0kAv4m8ZeeDLFcF763NQEqf9d/arRVF9FJQ7c3hyaHDxKhbj8OAv1
+	2bPVtkf8kyKUws6xGuKEJfNSzcV2q4qI
+X-Received: by 2002:a05:690c:6807:b0:8b0:a01e:2ce2 with SMTP id 00721157ae682-8b19c9f2242mr11952457b3.15.1793067576776;
+        Mon, 26 Oct 2026 19:19:36 -0700 (PDT)
 Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b19e61d0cdsm5033647b3.40.2026.10.26.19.19.34
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b19e5ca51asm5148467b3.31.2026.10.26.19.19.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 19:19:34 -0700 (PDT)
+        Mon, 26 Oct 2026 19:19:35 -0700 (PDT)
 From: Christian Cortner <ccortner@gmail.com>
 To: Bryan O'Donoghue <bod@kernel.org>,
 	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
@@ -86,12 +86,13 @@ Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Birk Skyum <birk.skyum@pm.me>,
 	linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org
-Subject: [RFC PATCH 0/5] media: iris: ffmpeg decoder flow changes, for reference only
-Date: Mon, 26 Oct 2026 21:19:29 -0500
-Message-ID: <20261027021934.22113-1-ccortner@gmail.com>
+Subject: [RFC PATCH 1/5] media: iris: Don't flag an empty source change LAST buffer as an error
+Date: Mon, 26 Oct 2026 21:19:30 -0500
+Message-ID: <20261027021934.22113-2-ccortner@gmail.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
+In-Reply-To: <20261027021934.22113-1-ccortner@gmail.com>
 References: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
+ <20261027021934.22113-1-ccortner@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,74 +104,52 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These are the local changes behind my report "[BUG] media: iris:
-resolution change handling stops ffmpeg's h264_v4l2m2m decoder on
-glymur" [1], posted because Bryan asked for the code [2]. They are for
-reference only, not for merging, and carry no Signed-off-by, because I
-can't review or defend kernel code myself. An AI coding assistant
-(Claude, by Anthropic) traced the driver, wrote the changes, their
-commit messages and a test client, and ran the tests below, in a long
-interactive session that started from "make hardware video decoding
-work on this laptop". Each patch has an Assisted-by tag.
+When the firmware completes a source change, it returns the last capture
+buffer from before the change flagged HFI_BUF_FW_FLAG_PSC_LAST, and that
+buffer can be empty. iris_hfi_gen2_handle_output_buffer() sets
+V4L2_BUF_FLAG_ERROR on every empty capture buffer returned while
+streaming unless it carries HFI_BUF_FW_FLAG_LAST, the flag that ends a
+drain, so the empty buffer that ends a source change reaches the client
+flagged both LAST and ERROR.
 
-Patch 5 does not work for most real streams, see [3]. It resumes the
-firmware through iris_vdec_start_cmd() while the driver's internal
-buffers are still sized for four frame buffers, so streams that need
-more, x264 at its default settings among them, end in a fatal
-firmware error. It is included only to show where the driver could
-resume a first source change itself; a working version would have to
-re-create the internal buffers first, or resume only when they fit.
-The commit message of patch 4 notes that re-creating them at a later
-VIDIOC_STREAMON(CAPTURE), in a different situation, made the firmware
-return nothing at all.
+The stateful decoder interface says of this buffer, as it does of the
+one that ends a drain, that it "may be empty (with v4l2_buffer bytesused
+= 0) and in that case it must be ignored by the client, as it does not
+contain a decoded frame". With the ERROR flag, ffmpeg's h264_v4l2m2m
+decoder reports "capture: driver decode error" and outputs a corrupted
+frame.
 
-The patches and the problems in [1] they address:
+Exempt HFI_BUF_FW_FLAG_PSC_LAST as well.
 
-  1/5  Don't flag an empty source change LAST buffer as an error  (2)
-  2/5  Update the CAPTURE stride and size on S_FMT(OUTPUT)        (5)
-  3/5  Signal V4L2_EVENT_EOS only at the end of a drain           (3)
-  4/5  Let a resolution change drain before stopping CAPTURE      (4)
-  5/5  Resume the first source change if it fits the CAPTURE
-       setup                                                      (1)
+Fixes: 7adc11e6abf6 ("media: iris: Send V4L2_BUF_FLAG_ERROR for capture buffers with 0 filled length")
+Cc: stable@vger.kernel.org
+Assisted-by: LLM sparse smatch
+---
+Reference only, not for merging (no Signed-off-by); see the cover
+letter.
 
-Testing: the same changes, in the form that applies to the linux-msm
-laptops tree, ran on the glymur laptop from [1]; the functions they
-change are the same there and in media-committers next, apart from one
-line of context. These versions, on media-committers next, are
-build-tested only: each builds with W=1, sparse and smatch without new
-warnings, and checkpatch --strict warns only about the missing
-Signed-off-by and, because my clone is shallow, the commit ids in the
-Fixes tags. The H.264 and HEVC results in [1] came from clips encoded
-with -preset ultrafast. With x264-default clips at 640x360, 1024x576
-and 1280x720, the test client from [3] decoded bit-exact when it set
-up CAPTURE after the first event, so that patch 5 did not act. Not
-tested at all: other SoCs, and HFI gen1, which patches 3 and 4 touch.
+ drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-[1] https://lore.kernel.org/linux-media/20261026160952.22082-1-ccortner@gmail.com/
-[2] https://lore.kernel.org/linux-media/36201ae2-1cee-4d8d-9381-dfc9013c522e@kernel.org/
-[3] https://lore.kernel.org/linux-media/179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com/
-
-Christian Cortner (5):
-  media: iris: Don't flag an empty source change LAST buffer as an error
-  media: iris: Update the CAPTURE stride and size on S_FMT(OUTPUT)
-  media: iris: Signal V4L2_EVENT_EOS only at the end of a drain
-  media: iris: Let a resolution change drain before stopping CAPTURE
-  media: iris: Resume the first source change if it fits the CAPTURE
-    setup
-
- .../media/platform/qcom/iris/iris_buffer.c    |   7 +-
- .../media/platform/qcom/iris/iris_common.c    |   3 +
- .../qcom/iris/iris_hfi_gen2_response.c        |  40 +++++-
- .../media/platform/qcom/iris/iris_instance.h  |   7 ++
- drivers/media/platform/qcom/iris/iris_state.c |   8 +-
- drivers/media/platform/qcom/iris/iris_vb2.c   |  23 +++-
- drivers/media/platform/qcom/iris/iris_vdec.c  | 117 +++++++++++++-----
- drivers/media/platform/qcom/iris/iris_vdec.h  |   3 +
- drivers/media/platform/qcom/iris/iris_vidc.c  |   1 +
- 9 files changed, 176 insertions(+), 33 deletions(-)
-
-
-base-commit: d7e7bca7169873b46e857c025c10f3336c1258d8
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+index f0782c4b1e6e..b4fe9066fcb8 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+@@ -390,8 +390,13 @@ static int iris_hfi_gen2_handle_output_buffer(struct iris_inst *inst,
+ 
+ 	buf->flags = iris_hfi_gen2_get_driver_buffer_flags(inst, hfi_buffer->flags);
+ 
++	/*
++	 * The empty buffer that ends a drain (LAST) or a source change
++	 * (PSC_LAST) is not an error, the client just ignores it.
++	 */
+ 	if (!buf->data_size && inst->state == IRIS_INST_STREAMING &&
+-	    !(hfi_buffer->flags & HFI_BUF_FW_FLAG_LAST)) {
++	    !(hfi_buffer->flags &
++	      (HFI_BUF_FW_FLAG_LAST | HFI_BUF_FW_FLAG_PSC_LAST))) {
+ 		buf->flags |= V4L2_BUF_FLAG_ERROR;
+ 	}
+ 
 -- 
 2.56.0
 
