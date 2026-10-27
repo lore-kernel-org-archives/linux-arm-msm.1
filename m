@@ -1,70 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=46.38.247.119
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793105862;
-	b=B9bwM3IJ8/17/xFtI6U312Ff20V78pMasia1C1AZKGw/052TMmpRWnsBfc7r7NxRTayx
-	 TZXTVzAp0qQ1YEOS2pba8WIfcdLjN+ec1yJMKXx+SM1N2u1vDyR4Os7YxUfhDfyX3yfWi
-	 8MpINDR8kytt1z+1rQaeON+wC3cepaagx9CFEFjOrNobDsIhlFEfnALxkPkpUMbOSurCE
-	 khAtaHrdkLd2vmElViD1xBftTAgsVpvUFHstK6noZ3aAfrsdkZtuC3C0uAKuNEseZvGLS
-	 HeQLbgRt4n2TG1KPFT/8aaB+n6w67e1AQEkCP6s+5ZtjZj8lgSN/4VQFtXFr38aqHuw==
+	t=1793105858;
+	b=32ig/YH3NctxQ2nO7n1xmR2LBlSgbstzGkJL7VX6mC9lM3fc9aJ2+FWWAr8SmU1nMg9J
+	 J6uB62UK8r4eWilQ3ePEn81NtJC73bmWlHeIMpRZBOHDjUROnW3dwdrhFgvfL99kc3Mcz
+	 lhrbXy6Uq42qP6CdA418sWZm4GY2gWogCVOp3EVQxXO8sAt39uWvlt/ezveP+cDrFwXoD
+	 Nvijd45dA80c1sPOjTlnfxCn0b7Ifp3NtBgFMg8f4ygQWy//PcX7rz/Imz16hlKPAWFxe
+	 y1g8SXTTIChZKQQe04u9+c/9LB2wWhpd0ZYR8QkaH5xtMwODxtUFmVrZCmAf7v9Zxqw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793105862;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received-SPF:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:From:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-PPP-Message-ID:X-Rspamd-Server:
-	 X-Rspamd-Queue-Id:X-NC-CID;
-	bh=521a5KiHMV0SqLCMajvruFvZwpk1Efpz42h4U52rsZI=;
-	b=Cm0zt3ayjhd7Slmq4ChWubQDV0m+ib8VZzOFmkIJw0HFk9fbvz5T7vNk/ek/cD0hPO+A
-	 DlpVs2WunMvDdrIMcw2QqNnXH9c0h+8op6Vh1RZ9tRJBRrbVhXb03qsmq8C1uAii0V41f
-	 nMvQPgrdwTAZthwkHGpSfCmHoLTDypDYkUirmWYyMOM73TOau2Biy45KFJZmOQiVqVg/C
-	 xAI0VPOjzhjKbcdke5T/kIES1ueAm64USsmxC3lvZ840L232RpLj989UncxOaHpfLTL5V
-	 5kx4X4ZVHwgE6jR61z1EnUD6genxToGNKgKtWjnOH+N9nGPG7Rnh/bBRX3uFF2rXcXA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793105858;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=ladm7VNw3w94qCYNsul6pq86i2SGy96Tryu3X7+mFyY=;
+	b=23aMJRzZ+fBTZ7JoBtpzTCbu62WU7FBFxcUFPQD/gG18OuHcijUQ3jQQ3rQDBUKfjiPt
+	 DmCMhnjXU662pDKpX0w7Ve5hL8eihUEpWqmCAFY1KDlwSZ4HRvEJemWDl7T0xdhUQZ8AU
+	 e/Zjrgetj8KozjQZv6VsS3a91uNDE92fANrF41srHsLeqvf84Igpe1cbA7YUC4jCRssDg
+	 F1q/TbusdEga5ov/ams3VWNkLuao1qbv3CNRJ+p2bLw6myvhwySNkdCdUl+MDr5+N5N8Q
+	 gACrKuXVKX3QVpgZ5Th1rMOCKgKAvHgPA427Pah0JrLhG79gtQZF24eBlqoZ4mkimWw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=leemhuis.info;
-	spf=pass smtp.mailfrom=leemhuis.info;
-	dkim=pass header.d=leemhuis.info header.i=@leemhuis.info header.a=rsa-sha256 header.s=key2 header.b=PoO8LaOx;
-	arc=none smtp.remote-ip=46.38.247.119
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [46.38.247.119])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mRc9dkJP;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1305606A31A;
-	Tue, 27 Oct 2026 12:57:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1305606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F853606A31B;
+	Tue, 27 Oct 2026 12:57:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=leemhuis.info header.i=@leemhuis.info header.a=rsa-sha256 header.s=key2 header.b=PoO8LaOx
-Received: from mors-relay-8404.netcup.net (localhost [127.0.0.1])
-	by mors-relay-8404.netcup.net (Postfix) with ESMTPS id 4jDVrf30L1z8ZWh;
-	Tue, 27 Oct 2026 13:57:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1793105842;
-	bh=F9UN7r5NdJQ1zWaDOKDK9sE858rSa5l4u47sjcAp0mM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=PoO8LaOxz+IUHezCI5wUu3yNUk4Ok5X8lSMi5sp+qKARff4lTJEOnvLWOMeP3VqXS
-	 j5ARMaoaYdgzVtoJx50xrQDkD+LZYRbVtcR64e/uu+9X7wD1YfUeL9fcZSenFeg65J
-	 p//6dePZCRFuefT5Gt1KApYbfRXJpdndMvoFK9MgIU3Wm04+apwp7mpBT9VfuCeYkA
-	 kBwxfkbtakuWXvlpU0Ybxs4LpmA7bkdwz2wmTEXSV9e2pUcObv4D62I+yixaXGxfDv
-	 hygIDMMTosX2uqjwElmKR6ciaVV+k7Qc7230K4annS0iLZQJytAkpHERcIaD+nygy+
-	 uL6uJN+rOYIOQ==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-8404.netcup.net (Postfix) with ESMTPS id 4jDVqD0Jmnz505Y;
-	Tue, 27 Oct 2026 13:56:08 +0100 (CET)
-Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4jDVqC0LkBz8sb7;
-	Tue, 27 Oct 2026 13:56:07 +0100 (CET)
-Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
-	by mxe9fb.netcup.net (Postfix) with ESMTPSA id 027775F9EA;
-	Tue, 27 Oct 2026 13:56:01 +0100 (CET)
-Authentication-Results: mxe9fb;
-        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
-Received-SPF: pass (mxe9fb: connection is authenticated)
-Message-ID: <7472a96a-313c-4bf3-a1b1-5687c010f7e4@leemhuis.info>
-Date: Tue, 27 Oct 2026 13:56:00 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mRc9dkJP
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BB821F01825;
+	Tue, 27 Oct 2026 12:57:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793105857;
+	bh=ladm7VNw3w94qCYNsul6pq86i2SGy96Tryu3X7+mFyY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=mRc9dkJP49MiwKf3rSOK32sJbhXthHhtbOG/JfyMsNlpq7pddc8gs2aJtUy8AY7Mh
+	 e6fQH/rpFVkUt8zIxrDEPKetT2/IVD5SDxlMNlpd4B1KjR5E/NPJRgUKtMPNeeyJUp
+	 wRqyNNMGOH8MgTooKcF+gd8ErmtonbxJKyUs5/hmKrrBE5bjsaaRYSdHsZwtWl0DVx
+	 i3IFSra+WQuJmNFXuA28aJnUOLl4TvRN2SffGsty6xKJq99kBbfX1DA/1BPL2AyAXs
+	 DEUqcdLKfPs7C4l3dOWepcqNoiFYD9dOggir6Vsr3/0u3ZWs8O58uYpDxNriGMY/SF
+	 dncx6iS/hqWuw==
+Message-ID: <6358dcdc-cdf4-4986-ba6b-a5cca4a093fa@kernel.org>
+Date: Tue, 27 Oct 2026 14:57:31 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,83 +52,172 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pmdomain: qcom: rpmhpd: don't clamp gfx and gmxc before
- sync_state
-To: Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>
-Cc: Oleg Keri <okerixx@gmail.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>,
- Rob Clark <rob.clark@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
- regressions@lists.linux.dev
-References: <20261021080517.2161-1-okerixx@gmail.com>
-From: Thorsten Leemhuis <regressions@leemhuis.info>
-Content-Language: de-DE, en-US
-In-Reply-To: <20261021080517.2161-1-okerixx@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-PPP-Message-ID: <179310576257.1469982.4921492503478710883@mxe9fb.netcup.net>
-X-Rspamd-Server: rspamd-worker-8404
-X-Rspamd-Queue-Id: 027775F9EA
-X-NC-CID: W4f2xB7Fsat1xO23TYCPIE9b90XxyjJEIuD+ilO0bRFVn8+02DE=
+Subject: Re: [PATCH 4/7] arm64: dts: qcom: sm8450: Add CAMSS device tree node
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ linux-arm-msm@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ linux-media@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
+ Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
+References: <20261023163057.775917-1-vz@kernel.org>
+ <20261023163057.775917-5-vz@kernel.org>
+ <CAFEp6-03Kqxya74Cd+hgueZ0D4xAcYNOx_R1sNqdMu2JrMBynw@mail.gmail.com>
+ <378094fb-5f7f-42c6-a91f-158e2083a6cb@kernel.org>
+ <CAFEp6-3XTotgkOKRACGLT91wUw30CgFB=44RtHnXfA6cOF7bVA@mail.gmail.com>
+ <0d25a732-ccd5-4a7b-9809-93e67899b4e7@kernel.org>
+ <CAFEp6-1fAAfG+dMsS+bK4KDjX795OXhWBSrkWZKzM4P9r7+m1g@mail.gmail.com>
+From: Vladimir Zapolskiy <vz@kernel.org>
+In-Reply-To: <CAFEp6-1fAAfG+dMsS+bK4KDjX795OXhWBSrkWZKzM4P9r7+m1g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 10/21/26 10:05, Oleg Keri wrote:
-> Until rpmhpd's sync_state every vote is clamped to the highest corner,
-> so that hardware the bootloader left running keeps the rail level it
-> needs until its driver takes over.  Nothing the bootloader leaves behind
-> runs on the GPU rails, but the clamp hits them anyway: the GPU clock
-> controller's probe runtime-resumes and suspends its GFX and GMXC
-> domains, and from then on both rails are pinned at their highest corner
-> until sync_state.
+Hi Loic.
 
-Ulf, Bjorn, FYI: this is a fix for a regression that was reported in
--next some time ago and recently made it to mainline. Linus hates when
-this happen. Strictly speaking the drm folks caused this and thus would
-have to fix it, too -- but there iirc was some reason why a revert was a
-bad option. Hence:
-
-could you hence do us a favor and review and mainline this rather sooner
-than later? Maybe even before 7.4-rc1 to prevent more people from
-running into this (three people already did afaics).
-
-Ciao, Thorsten
-> On Glymur gfx.lvl has 14 levels and the clamp holds the rail at the top
-> one, 0x1d0, while the GMU's own performance table ends at level 11,
-> 0x1c4.  With the GPU driver and firmware built in, the GMU boots long
-> before sync_state, and its CLX DCVS calibration does not survive a gfx
-> rail held that high: the firmware gives up with HFI_F2H_MSG_ERROR
-> 0x007306c7 (ResMgrCalibrateDcvsLvl), the first HFI_H2F_MSG_GX_BW_PERF_VOTE
-> times out and the first GPU init fails.  On the Lenovo Yoga Slim 7x
-> Gen 11 this means the compositor cannot start at first login.  Pinning
-> gfx at level 11 or 12 instead fails the same way, level 10 and below
-> boot fine, and pinning gmxc alone has no effect.
+On 10/27/26 12:31, Loic Poulain wrote:
+> Hi Vlad,
 > 
-> Leave gfx and gmxc out of the clamp: they have no bootloader-configured
-> consumer to protect, and the GMU votes them through its own RSC.
 > 
-> Fixes: 93b6c8d10fad ("drm/msm/a8xx: Enable CLX feature on Adreno X2-85")
-> Link: https://lore.kernel.org/r/179248663855.32151.9955864156939592299@gmail.com
-> Acked-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-> Signed-off-by: Oleg Keri <okerixx@gmail.com>
-> ---
->  drivers/pmdomain/qcom/rpmhpd.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> On Tue, Oct 27, 2026 at 10:54 AM Vladimir Zapolskiy <vz@kernel.org> wrote:
+>>
+>> On 10/27/26 11:07, Loic Poulain wrote:
+>>> On Mon, Oct 26, 2026 at 11:39 PM Vladimir Zapolskiy <vz@kernel.org> wrote:
+>>>>
+>>>> Hi Loic.
+>>>>
+>>>> On 10/26/26 18:32, Loic Poulain wrote:
+>>>>> On Fri, Oct 23, 2026 at 6:31 PM Vladimir Zapolskiy <vz@kernel.org> wrote:
+>>>>>>
+>>>>>> Add Qualcomm Waipio CAMSS device tree node to the platform dtsi file,
+>>>>>> the CAMSS input ports are connected to output ports of CSIPHY devices.
+>>>>>>
+>>>>>> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+>>>>>> ---
+>>>>>>     arch/arm64/boot/dts/qcom/sm8450.dtsi | 167 +++++++++++++++++++++++++++
+>>>>>>     1 file changed, 167 insertions(+)
+>>>>>>
+>>>>>> diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
+>>>>>> index babf1a4196a1..7f5b0501a23e 100644
+>>>>>> --- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
+>>>>>> +++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
+>>>>>> @@ -3310,6 +3310,167 @@ cci1_i2c1: i2c-bus@1 {
+>>>>>>                            };
+>>>>>>                    };
+>>>>>>
+>>>>>> +               camss: isp@acb6000 {
+>>>>>> +                       compatible = "qcom,waipio-camss";
+>>>>>> +                       reg = <0 0xacb6000 0 0x1000>,
+>>>>>> +                             <0 0xacb7000 0 0x1000>,
+>>>>>> +                             <0 0xacb9000 0 0x1000>,
+>>>>>> +                             <0 0xacbb000 0 0x1000>,
+>>>>>> +                             <0 0xacc6000 0 0x1000>,
+>>>>>> +                             <0 0xacca000 0 0x1000>,
+>>>>>> +                             <0 0xacf6000 0 0x1000>,
+>>>>>> +                             <0 0xacf7000 0 0x1000>,
+>>>>>> +                             <0 0xacf8000 0 0x1000>,
+>>>>>> +                             <0 0xac62000 0 0x3000>,
+>>>>>> +                             <0 0xac71000 0 0x3000>,
+>>>>>> +                             <0 0xac80000 0 0x3000>,
+>>>>>> +                             <0 0xacc7000 0 0x2000>,
+>>>>>> +                             <0 0xaccb000 0 0x2000>;
+>>>>>> +                       reg-names = "csid_wrapper",
+>>>>>> +                                   "csid0",
+>>>>>> +                                   "csid1",
+>>>>>> +                                   "csid2",
+>>>>>> +                                   "csid_lite0",
+>>>>>> +                                   "csid_lite1",
+>>>>>> +                                   "tpg0",
+>>>>>> +                                   "tpg1",
+>>>>>> +                                   "tpg2",
+>>>>>> +                                   "vfe0",
+>>>>>> +                                   "vfe1",
+>>>>>> +                                   "vfe2",
+>>>>>> +                                   "vfe_lite0",
+>>>>>> +                                   "vfe_lite1";
+>>>>>
+>>>>> Is there a camss "top" register to describe here? e.g. to retrieve the
+>>>>> CAMSS hardware version.
+>>>>
+>>>> I'm not aware of anything like that. What is "CAMSS hardware version"?
+>>>>
+>>>> CAMSS embraces various blocks, there are CSID and VFE, full and lite
+>>>> IPs, and all these components do export their versions individually.
+>>>
+>>> I mean, CAMSS usually has a top-level register block (often top or
+>>> cpas_top) that contains the Titan/Spectra version information, along
+>>> with various global configuration and mux registers.
+>>
+>> On SM8450 there is "cpas_top" register <0xac13000 0x1000> (not in the
+>> series), I believe you reference to it.
+>>
+>> Is CPAS a natural part of CAMSS? Can it be modelled differently, e.g.
+>> as a separate device/driver, like it was done with JPEG or CSIPHY?
+>>
+>> I see that there are only SM6150 and SM6350 platforms mention this
+>> register, to capture and process frames on SM8450 there is no need
+>> to program CPAS.
+>>
+>> Note, that even SM6150 and SM6350 platforms do not use this register,
+>> it makes it redundant.
+>>
+>>> In particular, exposing this block could be useful for reporting the
+>>> Spectra version to userspace, for example through libcamera.
+>>
+>> It could be so, but adding dead code is an anti-pattern in software design.
+>>
+>>> Moreover, if the goal is to describe the CAMSS hardware exhaustively
+>>> in DT, this block should probably be represented as well. Whether it
+>>
+>> Here I oppose such a goal as impractical, the set goal is to get working
+>> camera on the platform with the minimum of irreversible changes. It was
+>> proven multiple times in the past, that "an exhaustive description"
+>> equals to "the totally broken description", and brings nothing valuable
+>> but irrecoverable ethernal problems to overcome.
+>>
+>>> belongs in this specific binding is open for discussion, but my
+>>> inclination is that it does.
+>>
+>> This register is not needed to get CAMSS up to the functionally
+>> working stage, which is represented by the series.
 > 
-> diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
-> index fa8fed5bd3e5..2c9d4beeffbe 100644
-> --- a/drivers/pmdomain/qcom/rpmhpd.c
-> +++ b/drivers/pmdomain/qcom/rpmhpd.c
-> @@ -1006,7 +1006,7 @@ static int rpmhpd_aggregate_corner(struct rpmhpd *pd, unsigned int corner)
->  	unsigned int peer_active_corner = 0, peer_sleep_corner = 0;
->  	unsigned int peer_enabled_corner;
->  
-> -	if (pd->state_synced) {
-> +	if (pd->state_synced || pd == &gfx || pd == &gmxc) {
->  		to_active_sleep(pd, corner, &this_active_corner, &this_sleep_corner);
->  	} else {
->  		/* Clamp to highest corner if sync_state hasn't happened */
-> 
-> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+> CAMSS already supports reading the hardware version from such
+> top-level register blocks and exposing it through the media framework.
+> While this is not strictly required, it will likely become useful to
+> libcamera in the future.
 
+Likely so, and I didn't know about the fact that "cpas_top" stores some
+hardware version information, which may be utilized by userspace, thank
+you for sharing this.
+
+Anyway at this stage, if there is no strong objections, I'd prefer to
+follow the conservative model of not adding "cpas_top" to CAMSS.
+
+Like it's been said, it might be preferred to create a new stand-alone
+CPAS device abstraction, with no conflict for I/O regions with CAMSS,
+especially assuming the latter one just does not need this I/O region
+at all to be functional.
+
+Also, I'm a bit concerned when the abstraction inversion is used as
+an argument, here the kernel should not depend on libcamera or other
+userspace component, but the opposite is to be satisfied, i.e. libcamera
+should work properly with 90% of CAMSS variants, which do not export
+"cpas_top" info, like this or many other recently added CAMSS variants.
+
+>> I believe someone may create a new fancy CPAS device driver or so, and
+>> the new device driver will utilize the "cpas_top" register and other
+>> CPAS resources in a better way, the register shall not be nailed to
+>> the CAMSS preliminarly.
+> 
+> Well, yes, we could certainly model it as a syscon node, especially
+> now that CAMSS is no longer the monolithic block it used to be.
+> 
+
+Sure, that's the view I share to exploit the modularisation at maximum.
+
+As always, thank you very much for review!
+
+-- 
+Best wishes,
+Vladimir
