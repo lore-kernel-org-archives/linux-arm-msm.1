@@ -1,85 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793119960;
-	b=jmPdANTD8hfVaAC+lWq8nxgu16RZGj75kFHjyaJhEUJN6Kr9Vv49ujQ3/kiedBUb3x4O
-	 sfU5FROvTLUN1E4H25CjnvumdXO+jtYuHJtEBjev3xijKGArWB+SnI7SEX31jEvnfmOgi
-	 etNEkRtYenjsmz3C27WRrPjG+zi2tD2onTS83/0Dg/pgtTGu8uaen8gf2K5u61EMvZ9et
-	 9nAdp1VrqFNN3+Zztqc7WmECzJQuSbW3a0NogHN+Afj6Db6eUb1oZpmyfx7WFnBjp6ryT
-	 bqTuHl+mkJV78T9+/m+om4zzAOwnwBPI0I1JL4g5MLTT+pKKjG1+FXTseW/A/KPnbgw==
+	t=1793120447;
+	b=14Skn0wQBmW8P25tdCSdlTn1mQVjT4Z3c/rj0Q0ihRnthR47S+X9nfREdDuWxhaZ3IcZ
+	 z95iMbnEN+v/q1ffHFYYBtGh6h9eUnUr+ppdmywb+A4KdKvngNJ2m3Weu3XCJUVrH2Kcj
+	 lgJ/Ng+g1T/EyhmcEGMXgLwdmMWrv8uiDMVnViUCVTm9jp82VBDP0M/3en1eP69Fauonr
+	 rLTKZNHyI7E34Mf8/w4yPd5zCPHFORqYN9cb0YWBQrKpTXWSzMFo56KSyEdbyyKgu48U7
+	 0UcaD86zNwWFWnnz1mtTOgIdC+NJtbKZUs3b/u4uHUKBJMBnnsW9Vv2rr74HwhVGQgQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793119960;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Message-Id:
-	 Subject:Cc:To:From:X-Mailer:References:In-Reply-To;
-	bh=kbsd3smpsKE1xqx27K/D3zo9SvefwIOkhzZEOizfuio=;
-	b=LAYBSCoJ2mIWN1/hh8GHzmdz8OR4/gyn6oXnQdK4Iv3O9ookYfF1N/neaMUaM3o5uMja
-	 DOcGoUId4WC5nao7PHgUNTW32kZspOUnoMT3pcDXWP5P5vSEKpkxuIY6wbmFZvq48qaH8
-	 nwjcg0wDWCA68CDlz0f8rUd+tHDjsKvCpb+6jJjoDqAGkg8QmFCt+Pa0vbKoV5TTXwaQM
-	 AY+GHD6DzS2A/OchhWrQLmnQ1DaqEnlne6wwZjd6bGaNnxuhBdemR6++ry6GNx35fzjTZ
-	 1uZfm171Csw4Ttqi3XmkTWdjY08wV0zbMujSjv8tvcfR6dNgaUTUe3mF/wAGzRPN3Rw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793120447;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=MWogW9v4I9IYrvgTyhl6LKMKwTAkz80m1q6fFg2x4yc=;
+	b=TPnFYU9icEcx8EMfhMnMHPEwbkMigEKUU27exjz4V7d2nDL2IqzvjbYRca6+9WvTGdF1
+	 +ad2mNri+TTCtGGia2KUX3GNqCdmulpiNqMg0YZvlaTw18y0TTRT97zGOL6/8yBv1yE/s
+	 /nT4tCXP+4FsXOIdSX9F869R2fP/muLPVhQHzmo1KxHCjEYf4u9ROQwNpiLSSgPI3HuEI
+	 4zK/BZCESgpUCb8TM9FcHvRyiPlJIpVIDE1NpyfxqVPnKoJaHolFJJsHD4/Ohw7PXxDQS
+	 ip0SLI9SvnO+uym6+ZuOaLkuH6zCDfvWJFiAzUZN69GkrhcrNOz6N7ED7G6QT9xo3hQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DcjtgjTX;
-	arc=none smtp.remote-ip=74.125.224.46
-Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f2Bt5010;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7043E606A31A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 16:52:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7043E606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B978606A31A;
+	Tue, 27 Oct 2026 17:00:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DcjtgjTX
-Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-67a79750749so49512d50.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 09:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793119958; x=1793724758; darn=vger.kernel.org;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=kbsd3smpsKE1xqx27K/D3zo9SvefwIOkhzZEOizfuio=;
-        b=DcjtgjTXtEdgC1bhvRAnyTPZma5OI3VE4GrINbe/kwo65uZfS8pthPj5h9S6qxE13S
-         1W3r4+mNCNnWztUjUx8kR85VHvB9QEJcnxYNBBvXygSXWpm5BxopqumeMaCqfZf4sTOw
-         GU4/QAcRk5Rne9D/p0QpbBEmO7Ezk7ck0iR/4t83S6IqgJgxynokhs6JXZBoZRaSvL9L
-         MM6LpL9+OcsV44QoNIjOndAbdR77JAQm68NRn4865j/Ky/wQ8lNHx5WJkgcWe1a51Glh
-         lXpZbphucm6YwvQ3MQbGOvAhhMOrCk5v/WdwpwrrIShf+VWFpjZvHiEIW6LtszDxxtRq
-         kjjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793119958; x=1793724758;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kbsd3smpsKE1xqx27K/D3zo9SvefwIOkhzZEOizfuio=;
-        b=UlSn/qoMQIkGnZBt2w8rVzQS/hpsrMY9B12nuvtFQKBKJLCutN7+LWAgVsJhivuK4F
-         DslKz5fvpbEAAaAgmBie+0FKVVXD72GapSONSY8mRpsKWsdC9sdB4o3U59PQj59hq2ls
-         exmWWO4hfysCRaW4eeRSaFV3e1I5FrAyROjK+rLFUE3vqKuVshVV3mIkwPNjOZciLWJ5
-         P2bbECecmVpO3v72tMevsXXCfbDAFH+cvf1n1My5WDlX4JOOteYft6qrA0x+gbixsCWn
-         71Dt+tmFgOx2O6jOKNTPwmj3ikSbpy8FIQdmX6FNbbqBkGUupLFYN2Jcx9l4SuysURrI
-         4+wQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwy3Gp1kDE059lukGBSd2WEG61b/OdtmJfareNVOMwFNZ8qxLTJNq0OqHEIpkGuEKY58FTd9W9070reeSFj@vger.kernel.org
-X-Gm-Message-State: AFq9FYISzjNvGxWkc9qXr+P/sZHndRp3ku4bL1xb3eEJFlJvCWXacRDH
-	U1Ho7dOu7tU3dB7tihboOg4rXrjHuQl0eLAWAHPMEJmkS1bpoeeCBq+v
-X-Gm-Gg: AYBFou05/zO4Q9lK4sZIeM6KcxYv5rzWI8Ar0BjwCo963pEZKP5g/zKLtacKpPfLQkC
-	i8LocyxIzVk3Xw+gsFBljg6xUDact3+sYU/7T+vpSl1QNxOyfX0nqKyttFQH/PYJnarPnbty5bO
-	skyXzWBTtuz0E4l3vOMSfUA9AWK+3cqCewjHSM88qryKQh3JDqwEgYxckAPskASRNZiq8TtZAxS
-	ihkLrDrGeuPyQzW5yLqqpWJi4A6upnC0lavlFlpPHtk+YJU6H7MfqQe7WESXcX/d8Iblpk4wIJa
-	G/yBnZ3yEPsNynt/6cT1XyWBiJaM/7wBSIfPv/zNK+0ZTx/fB8PrybcxfzevQvjke2wCiZDDWC4
-	PwsHMXecSo8QlOFP5VS3af5GDa3hpid6VX1LIpGLtgPQLT5iKCFwsWRDFyExAmMjF2KHjMJ5EF3
-	JO9nfCh3P+ABKd++aqnyMIB4wXJMzRKI/BaFRzgYRofHLy9FxRYxi1kU5tOOFrWqByFqYNsp7ja
-	zLWGuVLceJr7BlH5j3/lfk2E+qIiZjYWDWBnWw1Wao3FqESb0owTA+O/LOnbviFXMllXInQN88B
-	qrhB6aRvi7S5j9G2jGg7Wy0Bbkz4gxzmk+tJ6nCeOrigW42DVouWq4myHLCh7U25XhSi9lYOM19
-	BcSeVTs/fq4mI
-X-Received: by 2002:a53:e7d0:0:b0:677:c8af:d149 with SMTP id 956f58d0204a3-67a7bd1804fmr61705d50.74.1793119958354;
-        Tue, 27 Oct 2026 09:52:38 -0700 (PDT)
-Received: from localhost (host-209-35-187-178.broadbandcancun.mx. [209.35.187.178])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a7a080d4csm425545d50.4.2026.10.27.09.52.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Oct 2026 09:52:37 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f2Bt5010
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 392071F01825;
+	Tue, 27 Oct 2026 17:00:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793120447;
+	bh=MWogW9v4I9IYrvgTyhl6LKMKwTAkz80m1q6fFg2x4yc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=f2Bt5010mode/v1AcQmeCHwLvfIEEb58IsTo5RDyviSkvUbpQOyn4kxx+WIau3jC3
+	 FlDRp6uO6LcGJIWb+uNgJ3VoAYew13QuiKEQnzwVPgXm7abXYgvgZCUohOWrHxn7Jn
+	 qIdxdsZN6qP/UnbT9VDtjzlsHiakVkLd4WZqc2fgabMLmAGc/iBQr9lkqUOD1SiZ9C
+	 bl4W6sX3zzh54Q5AM+WXpK0vs7QxVw1cgZxx1ygHX6Y4roF0HBjjMZLvRF2ZBY5O/j
+	 0ziVYaXLTobcTd+ShMtPC532EcR2DDQgrYlFtx6F9YZa6BPEccEOukxwXLise02bVd
+	 ll8LYZRsFP18w==
+Message-ID: <271ccc9b-ccf1-4254-9664-2f00b504a5a9@kernel.org>
+Date: Tue, 27 Oct 2026 19:00:41 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,74 +50,152 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 27 Oct 2026 11:52:34 -0500
-Message-Id: <DMFRZ3B3A6CH.P7SKUZSQR23T@gmail.com>
-Subject: Re: [PATCH v4 8/9] iio: light: veml6031x00: annotate the event
- enable helpers
-Cc: <chrome-platform@lists.linux.dev>, <linux-amlogic@lists.infradead.org>,
- <linux-arm-kernel@lists.infradead.org>, <linux-arm-msm@vger.kernel.org>,
- <linux-iio@vger.kernel.org>, <linux-kernel@vger.kernel.org>, "Marco Elver"
- <elver@google.com>, "Bart Van Assche" <bvanassche@acm.org>
-To: "Rupesh Majhi" <zoone.rupert@gmail.com>, "Alex Lanzano"
- <lanzano.alex@gmail.com>, "Andy Shevchenko" <andy@kernel.org>, "Benson
- Leung" <bleung@chromium.org>, "David Lechner" <dlechner@baylibre.com>,
- "Guenter Roeck" <groeck@chromium.org>, "Jagath Jog J"
- <jagathjog1996@gmail.com>, "Javier Carrasco"
- <javier.carrasco.cruz@gmail.com>, "Jean-Baptiste Maneyrol"
- <jean-baptiste.maneyrol@tdk.com>, "Jerome Brunet" <jbrunet@baylibre.com>,
- "Jinseob Kim" <kimjinseob88@gmail.com>, "Jonathan Cameron"
- <jic23@kernel.org>, "Kevin Hilman" <khilman@baylibre.com>, "Lorenzo
- Bianconi" <lorenzo@kernel.org>, "Martin Blumenstingl"
- <martin.blumenstingl@googlemail.com>, "Matti Vaittinen"
- <mazziesaccount@gmail.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, "Remi Buisson"
- <remi.buisson@tdk.com>
-From: "Javier Carrasco" <javier.carrasco.cruz@gmail.com>
-X-Mailer: aerc 0.21.0
-References: <20261027124954.110697-1-zoone.rupert@gmail.com>
- <20261027124954.110697-9-zoone.rupert@gmail.com>
-In-Reply-To: <20261027124954.110697-9-zoone.rupert@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/7] media: qcom: camss: Allow CSI2 PHY devices without
+ CSIPHY resources
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vz@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ linux-arm-msm@vger.kernel.org,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
+ Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
+References: <20261026224957.1115370-1-vz@kernel.org>
+ <20261026224957.1115370-4-vz@kernel.org>
+ <CAFEp6-16WAoyS+aY2BzPknsMtHa1cSfVYNmYvTKHm_MWqqW_ag@mail.gmail.com>
+From: Vladimir Zapolskiy <vz@kernel.org>
+In-Reply-To: <CAFEp6-16WAoyS+aY2BzPknsMtHa1cSfVYNmYvTKHm_MWqqW_ag@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue Oct 27, 2026 at 7:49 AM EST, Rupesh Majhi wrote:
-> veml6031x00_event_enable() and veml6031x00_event_disable() call
-> veml6031x00_set_interrupt(), which needs irq_lock held. Their only
-> caller holds it, so mark both __must_hold(&data->irq_lock).
->
-> Signed-off-by: Rupesh Majhi <zoone.rupert@gmail.com>
-> ---
-> Cc: Marco Elver <elver@google.com>
-> Cc: Bart Van Assche <bvanassche@acm.org>
->
->  drivers/iio/light/veml6031x00.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/iio/light/veml6031x00.c b/drivers/iio/light/veml6031=
-x00.c
-> index f6308498e422..476ac3717f8e 100644
-> --- a/drivers/iio/light/veml6031x00.c
-> +++ b/drivers/iio/light/veml6031x00.c
-> @@ -784,6 +784,7 @@ static int veml6031x00_read_event_config(struct iio_d=
-ev *iio,
->  }
->
->  static int veml6031x00_event_enable(struct veml6031x00_data *data)
-> +	__must_hold(&data->irq_lock)
->  {
->  	struct device *dev =3D regmap_get_device(data->regmap);
->  	int ret;
-> @@ -804,6 +805,7 @@ static int veml6031x00_event_enable(struct veml6031x0=
-0_data *data)
->  }
->
->  static int veml6031x00_event_disable(struct veml6031x00_data *data)
-> +	__must_hold(&data->irq_lock)
->  {
->  	struct device *dev =3D regmap_get_device(data->regmap);
->  	int ret;
+On 10/27/26 12:52, Loic Poulain wrote:
+> Hi Vlad,
+> 
+> On Mon, Oct 26, 2026 at 11:50 PM Vladimir Zapolskiy <vz@kernel.org> wrote:
+>>
+>> If CAMSS CSIPHYs are supported by the stand-alone CSI2 PHY driver only,
+>> there is no need to provide description of legacy CSIPHY resources in
+>> the CAMSS driver, therefore if CSIPHY resources are not given for some
+>> supported platform, use CAMSS CSIPHY port numbers as CSIPHY identifiers.
+>>
+>> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+>> ---
+>>   drivers/media/platform/qcom/camss/camss-csiphy.c | 16 +++++++++++++---
+>>   drivers/media/platform/qcom/camss/camss.c        |  8 ++++++--
+>>   2 files changed, 19 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> index f99eea2ef228..8ecd514451d2 100644
+>> --- a/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> +++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> @@ -799,6 +799,11 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
+>>          return ret;
+>>   }
+>>
+>> +/* Fallback to generic SDM845 compatible formats for non-legacy CSIPHYs */
+>> +static const struct csiphy_subdev_resources csiphy_res_phy = {
+>> +       .formats = &csiphy_formats_sdm845,
+>> +};
+>> +
+>>   /*
+>>    * msm_csiphy_subdev_init - Initialize CSIPHY device structure and resources
+>>    * @camss: CAMSS structure
+>> @@ -808,7 +813,7 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
+>>    */
+>>   int msm_csiphy_subdev_init(struct camss *camss, u8 port)
+>>   {
+>> -       const struct camss_subdev_resources *res = &camss->res->csiphy_res[port];
+>> +       const struct camss_subdev_resources *res = camss->res->csiphy_res;
+>>          struct csiphy_device *csiphy = &camss->csiphy[port];
+>>          struct device *dev = camss->dev;
+>>          struct device_node *ep, *remote;
+>> @@ -836,8 +841,13 @@ int msm_csiphy_subdev_init(struct camss *camss, u8 port)
+>>          }
+>>
+>>          csiphy->camss = camss;
+>> -       csiphy->id = res->csiphy.id;
+>> -       csiphy->res = &res->csiphy;
+>> +       if (res) {
+>> +               csiphy->id = res[port].csiphy.id;
+>> +               csiphy->res = &res[port].csiphy;
+> 
+> So, can't we simply drop the above assignment and keep only the
+> port/csiphy_res_phy below? That would provide the same behavior for
+> all non-legacy PHY initializations, regardless of whether legacy
+> CSIPHY resources are described or not.
+> 
 
-Thanks!
+Please note that 'csiphy_res_phy' was introduced a few lines above
+by this change, it's only purpose is to provide the needed supported
+media formats, and this is unavoidable.
 
-Reviewed-by: Javier Carrasco <javier.carrasco.cruz@gmail.com>
+This change follows the assumption that pixel formats from all
+non-legacy PHYs are SDM845 compatible, that's true for this platform,
+it is expected to be true for the most of approaching non-legacy
+platforms, and on demand it may be changed later on.
+
+The current form likely is the most compact and the least invasive
+change, which gets to the point of supporting CAMSS on platforms
+with no CSIPHY resources given in the CAMSS driver.
+
+For instance, note, the recently proposed Glymur CAMSS [1] references
+X1E CSIPHY resources, which is actually incorrect, since there is
+no "csiphyX" I/O resources anymore for Glymur. This change can be
+reused for Glymur as well, and its reference to X1E CSIPHYs can be
+dropped, but any better proposal or improvement are welcome.
+
+>> +       } else {
+>> +               csiphy->id = port;
+>> +               csiphy->res = &csiphy_res_phy;
+>> +       }
+>>
+>>          snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csi%d", csiphy->id);
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+>> index c54185c93a8a..b0d60e70e4bb 100644
+>> --- a/drivers/media/platform/qcom/camss/camss.c
+>> +++ b/drivers/media/platform/qcom/camss/camss.c
+>> @@ -4796,7 +4796,10 @@ static void camss_detect_legacy_phy(struct camss *camss)
+>>          struct device_node *remote;
+>>          struct device_node *ep;
+>>
+>> -       camss->legacy_phy = true;
+>> +       /* Legacy CSIPHY description implies the provided CSIPHY resources */
+>> +       camss->legacy_phy = !!camss->res->csiphy_res;
+>> +       if (!camss->legacy_phy)
+>> +               goto done;
+>>
+>>          /* Find first remote-endpoint and determine if its a PHY */
+>>          for_each_endpoint_of_node(camss->dev->of_node, ep) {
+>> @@ -4810,6 +4813,7 @@ static void camss_detect_legacy_phy(struct camss *camss)
+>>                  break;
+>>          }
+>>
+>> +done:
+>>          dev_dbg(camss->dev, "legacy phy mode %s\n",
+>>                  camss->legacy_phy ? "true" : "false");
+>>   }
+>> @@ -4841,7 +4845,7 @@ static int camss_init_subdevices(struct camss *camss)
+>>
+>>                  if (ret < 0) {
+>>                          dev_err(camss->dev, "csiphy %d init fail\n",
+>> -                               res->csiphy_res[i].csiphy.id);
+>> +                               res->csiphy_res ? res->csiphy_res[i].csiphy.id : i);
+>>                          return ret;
+>>                  }
+>>          }
+>> --
+>> 2.51.0
+>>
+
+[1] https://lore.kernel.org/linux-arm-msm/20261015-glymur_camss_dts-v2-0-e7b1f403146f@oss.qualcomm.com/
+
+-- 
+Best wishes,
+Vladimir
