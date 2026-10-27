@@ -1,95 +1,108 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793088639;
-	b=Pw/Sx6UelDlX0HDHH663IejHsieLyPIznYNhxfC3saN9gd1o7SjTq4iRYmp1ar1UJrO4
-	 sM6X6d3CCfZIAOGZCJvJr76zIe2IC3EdsGw62rggvemeqTWO+EfpLNa67gVYI14XrMqMR
-	 JgRNomi49170arz78bNJxfSY3LAUxz2RKLXOhAlA+usTD9tf0WqMEbB+/mdSB/SzIIgMC
-	 m4em/X4g1DlsGQt0CvDTguxn1UG0/8iSzl4JHJqwZuNUeROzA4gAS/VYzSnW8z0eODM9f
-	 NtVZLp8r4mnJMulJkSRXr/w2s3ruWlqfmTUa0U0IeOzjSFDx+YhK851vQNcHco7Myqw==
+	t=1793089352;
+	b=PRcx6pkcnjuguzsXeXSaeZc6c++b9Z6ZtCtRtpJYSsyrxsXZ3ZPX30aWFHDuI6dx9eF8
+	 s4if/XzAvjRhaX2pqqK55imIJxsGSl+a6l2/o9GI9rq57/e+JDTBxXhBPwLU5wqOjwJ8E
+	 VTZx7U6QiZJxApZaNIy9MQO+OxhgxN2MhILoUmFs3g+a7eKJ2rQ6hfzZs/v08W2F8uCNX
+	 83+P6dhui7ipgKC4dOuE5FuXxxlIpO4lnhZNq166SnpxpNpZfXI2pHOoGG1of43KrbPpx
+	 aJ0jsCJncCNPuMmSneEL03RBe1OTmwpPk801/fgHXWrkPdKZbc+cy8rXFT9Y0kMfx8A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793088639;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793089352;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:
-	 X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=EJml6LkzSdxjzvcMjCvcsg9ewQeSkDLux3QaJXnvGRU=;
-	b=wU02ggzC2SMgByzQUO3xN4foZQpeTPeeTQQv08Rj7A+Z6NgKY1BaW9o2ritzZeE3sfIb
-	 l5A4gpzZziZZCTaBrqxb06RSqCC69l933TlSS6WGNAyXCtQ0I3Ueso8dZCfjkFkAjeSX6
-	 8oU1xQIY7OX/O+muIcVgGKSdYoIPr3ndOk3RLTVgXQcPZ3h0uwinVQlZNQJSFLIbjZFmX
-	 oUQHphkCm/brlwau2u++OZkCJKW/L/lwNfqm9arJyR/pLEQ3AJWGw8tzWak+RydliJ/Yq
-	 ITG3Y40U/K7pSZukd50R/EQDCxUWRa6Gb2k1eeMrCE8bJ7/bmzgpdgIUF07r3/BFgDw==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=+q+RfQ5Kwv1XNt4YuEC2Y4+X+a7USu5opNal/bTFsOw=;
+	b=sznuza+T9K/bHGBzlQdAWwe67YzsyAzM43agfcu4HPfa6Xd6Ir1ToZ6oG3STz2MBv9os
+	 NcC2+qUQCDHXL9kXAYKsOeDYEK2dsQGxkOWTpwRC0q6wiqWf9UfBY6VI5gpuUDV8+J/9/
+	 ae54kT1ad22aFfU9LipqwH90GWFHdO1E4mbcUYh0LIyPMP7jEXFXXjiAxaYUPAlgw1sZO
+	 7GM3ZB2vpdghZ/QwVR8iDqYGx/vNckjkkBgrMVN4SQ59ZOXUZBTGo3sOFhlVZ2469+vzC
+	 HTgT7ORH8zo+8lpWJJmuQRTV+4tyz4ZMdQ6FAex46TNMtSD8re9NK9DnfyW44VEUebw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=PW8KVOik;
-	arc=none smtp.remote-ip=209.85.216.46
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ZurG5xut;
+	arc=none smtp.remote-ip=74.125.82.182
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9156B606A31F
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 08:10:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9156B606A31F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 184E0606A327
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 08:22:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 184E0606A327
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=PW8KVOik
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-3ac451e128cso2778902a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 01:10:38 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ZurG5xut
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-35d0be18c71so899863eec.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 01:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793088638; x=1793693438; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1793089351; x=1793694151; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EJml6LkzSdxjzvcMjCvcsg9ewQeSkDLux3QaJXnvGRU=;
-        b=PW8KVOikH45cI6r4z/VgBektu+0dGD77T8bLsrxpG+Qmdaa4kIkhHzZJLDZ2FvJxXy
-         KB0prV+DIw6UtaFrJjoaDhwOGZ5UngmvoXUQtiyw31PT5v8eofgYFwBrYdI2O5zvdBAW
-         3MaCXmROn0ev3EnOVm8kw7Xj57NPaq8qQH3wFkAZeAyGWYZJJ7HByaXmLFznboiCpYzD
-         8p+9eyEUHE96pXty3CFycY3a1ZRtmm9b1CJiTS4PTktW9/58rVrKPvabUhsxqtC8AwSv
-         8Yug8b/o0wsDJKFpDtEWyeDAI42tGVUsxteQ+Yr9G7LDpIMgN9bQI5tjlzQenkKp7ao9
-         +oVg==
+        bh=+q+RfQ5Kwv1XNt4YuEC2Y4+X+a7USu5opNal/bTFsOw=;
+        b=ZurG5xutDCh1J7m4GPD1L2fxDLreUhtXfCdJ/Qc0XSYIV3caH9ozgfgRsilfd9MiwM
+         WqfYgBCJvBtKJGTxAl+ukXEnDIM+oLtaQcxAsC3+fO720QsZGx8qlGNHlPALrypI92GJ
+         LtRZdAaL2NHqNNLZRIM4TJESul12xrc0r1TIg5UH/gfHCaqnsimeF1+ZeIaQZscH/hl9
+         0bZr2dpbaagVpp2X2K5xAjUFcHdgy1jIaXKXDDvk/xUQyKR/N/yB2GpO2IxGfpypJz8E
+         RB5Jsf1R2fhyL25ZB+LyOMYJn2pUClZkIcopdr9zlORMqMXbPvV8h+V+1lVYpFSV72Gj
+         Eerw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793088638; x=1793693438;
+        d=1e100.net; s=20260707; t=1793089351; x=1793694151;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EJml6LkzSdxjzvcMjCvcsg9ewQeSkDLux3QaJXnvGRU=;
-        b=GvCvnZ9l2ecP4sgeKuxGkg/0oBbrCGvx/rj7S23+cY0A/hHFdY/A0xp5ELfYYrAq57
-         9VzFcLRP6BuvrjqGrgbqrC6QQB5tniuOuhUrxsssxXzoP0kE4A/xa53VSguPqNzoQ4yM
-         sCDYkRPEovGEHEXRmIjCJt6rlTqjoE2rxLXokQhUlaCfQ4+JBbdIxpUipeBtWCpvhgM+
-         cIR773RjhwTPHalaKsAwWa22kO2VG064BbP8uZgs7Xh3BCZCZoJS0yCkdOvpEb+vXaLv
-         vbt/h9kvb9sy8+kXdCLoFRHwMpda+X+H5Ma6Wz5OaUCHDIcs1Jk2LsNLq7Ewhs3ayj6r
-         gbQQ==
-X-Gm-Message-State: AFq9FYLjkCZ/l6te2LP5WG2NQbiQy2jDKnWHsVKlfM9gl/jLyExdZAwa
-	fLw+9dyVqGa/j3xVu7VdK2euFnwyvKQGWy7qrvpMdnUOW9dzFeqs28go
-X-Gm-Gg: AYBFou3DSsVw+jIGyFscMpRRZC90g8iQYJ5JA/CrPTYDjMUpPNj4lqTOalVPE4jjA2L
-	pDb81mGimnMNypZh5UZmK9zhK0891HnG4SJASC6LrXXangzIUuzLjBL3PiAd901CgrDN2OYU1Bb
-	LBLKvuJfd4FMaaULRLqZYNI4mEbEycukmd72sJqqbeGP44wgLLhGLD5m5oHzmLm+CLgmlHaf6g4
-	M+yuHW9lGZEyg9FbN7Xmzk8R3BCLYw+Trs5TC5UOXZRRt1S22a2GH/rwwFLQXj50Iq8gF9w3dVe
-	26GimfcwgPqWaY6A2+IXq43EjjrUSIe6wsmbexkHmyF8rKhZ0BKHNTsjcuf3uL/M5u3sULIffcT
-	EA+bbZ3nfectm1ULBfSLJHwxagBv6IPrukFtnAppIkeSoqYF3nZ4/+zTxG7V1H1mwCesNqMomQf
-	zxuvHziO0/JBmxZlWTkCuuVBw0JtUHDm5PlNFZlT5N4qJ0tIPwhC3/noB1MKakhFj2b/g86tj50
-	SNNdMq2kIGQ7TJKPnWkuOIqkpmJrDQphQBR5ZB4rBe/PlXJHv+NcUcED/6PE6a+6gjJYCoDUA==
-X-Received: by 2002:a17:90b:2648:b0:3ad:53a7:62d5 with SMTP id 98e67ed59e1d1-3adeae6d7admr6673934a91.12.1793088637747;
-        Tue, 27 Oct 2026 01:10:37 -0700 (PDT)
-Received: from localhost.localdomain ([218.194.41.155])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae406361e2sm2592284a91.8.2026.10.27.01.10.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 01:10:37 -0700 (PDT)
-From: ShiTou Hong <redstone.dcity@gmail.com>
-X-Google-Original-From: ShiTou Hong <dc_redstone@outlook.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org,
-	conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
+        bh=+q+RfQ5Kwv1XNt4YuEC2Y4+X+a7USu5opNal/bTFsOw=;
+        b=vv5TK9sDgbizPltBpP8ClcPXDiAy9SZ0kKMCL/qEXaxN+Sn5YIEhbdPJNNdH6TUdrz
+         jWMLXUp8LsbffbIPXKSfn+tbM6m3Xa9SyHZvyX6eJvGs7qUrqzB/HNNfA02KzrlaexZF
+         NAOarWKI6XTspYcPzq+cco7T90EFpKEd4n1CCZrLW7K6UrHwPVWw00bPVRPauEAjaQ4w
+         rkEi+tu9Lrq1Y0mIZqToLGuV+j3ox0z2NLD8EhGA++EJovkdNdexoklMb7PPN24aE9ZK
+         WZ4MZTla9A2GhbN7TjTUWgWTLA8SDbIeMIXvnDGfMuby4GgpsyKZMYm/x4NeAUNEUJ1W
+         a32g==
+X-Forwarded-Encrypted: i=1; AKwUvBxNUHBRqriKb2gUc9ej7x+x8KIAW5wn1NvN2BbdWz8SN+0nFS33bH+H1ZaqTuhxXd1APwyTECYiMms46KBK@vger.kernel.org
+X-Gm-Message-State: AFq9FYLsR861q1oWWb92AlvBk3Fqh5ZAVf6jdRfLtpkRSL9B4fLHbAPe
+	RZlWQVSBa6cTkVloua0LgxJxG+esh31SJZ0Wr7NBRYJFMDExuZf2Q1fnbsGPIJQ2xBI=
+X-Gm-Gg: AYBFou1knFZFiynzds+LfBh0qV6i7ERqNdw0wUiiW9Uh2zX2ci4rxRPbzkRZ4okKE5J
+	rrmU/gqxyjicjTOW57WWU85ZSNdKm3jxMFvl983CweRBOfkz0J+f08aokqC8Qh9lje1Q/5MixR8
+	aTQV66OFmKFjwUZ3hlhdt89avLkDAAMdb5Rf5IqVfPQR0fxlHuC+2MYaB34GoRrLZESWWRWAqF3
+	ZVur+oWjH2Xk0vBIfbq5sowVdIEyUatcJIFg2+FV9EU0/AGp190RPvJ0VHTttR69xJXtQ3JPVDt
+	Jqlr/MLm/PCFSXmeKEk/ERn3aM6qcdVabGY8GUkrKMIyBWaQKzdWxp/K2EKkL/rylIpX3f2Zo8x
+	8dH13b/UF/DWJ3YS2zsu4jSs/GbOrNnS7/2P1RO2tKA/xD5VYd5stL9PYk9YTvdrGUT5GZTlkts
+	zmRhRBxxpuKWcxFaiziaVuLIS9gZcJShs0/M2WaYEm84lKBWytrwQKTtjSLW7WfEbTG8QLqUrIx
+	A6dvJ5B7D0TcHReP5Cx4DpvAvp8BBnMfW/RNjEMKoCwbwYkba2WNQjpl46IG16zbT8gVIue7aq/
+	3nHgPI9Rq8OK2knytGXJa5cWJ7DLjH7kfizN3mBsOU9+Ag==
+X-Received: by 2002:a05:7022:1703:b0:144:f0c6:ddac with SMTP id a92af1059eb24-1a3c53db509mr2547824c88.17.1793089350969;
+        Tue, 27 Oct 2026 01:22:30 -0700 (PDT)
+Received: from localhost.localdomain ([113.161.48.203])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0f81ea9sm37314409c88.11.2026.10.27.01.22.25
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Tue, 27 Oct 2026 01:22:30 -0700 (PDT)
+From: Adrian Nguyen <thenguyen1024@gmail.com>
+To: Fabricio Akio <fabricioakio@gmail.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+	Sebastian Reichel <sre@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Robin Snyders <robin@snyders.xyz>,
+	David Heidelberg <david@ixit.cz>,
+	Richard Acayan <mailingradian@gmail.com>,
+	Sebastian Reichel <sebastian.reichel@collabora.com>,
+	phone-devel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	ShiTou Hong <dc_redstone@outlook.com>
-Subject: [PATCH v2 6/6] arm64: dts: qcom: sm8250-hdk: Add PM8150b LEDs
-Date: Tue, 27 Oct 2026 16:07:58 +0800
-Message-ID: <20261027080758.3990418-7-dc_redstone@outlook.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261027080758.3990418-1-dc_redstone@outlook.com>
-References: <20261027080758.3990418-1-dc_redstone@outlook.com>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/4] power: supply: qcom_smbx: report charger state changes
+Date: Tue, 27 Oct 2026 15:22:15 +0700
+Message-ID: <20261027082215.70983-1-thenguyen1024@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
+References: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -101,56 +114,16 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are 2 LEDs controlled by PM8150b on sm8250-hdk
-which are not added in the dts file.
-The LED1 is for heartbeat indicator,
-the LED2 is for wifi activity.
+On Sat, 03 Oct 2026 16:45:20 -0300, Fabricio Akio wrote:
+> qcom_smbx does not handle the charger's chg-state-change interrupt, so
+> a charge completing is not notified and consumers can keep a stale
+> status.
 
-Enable the LED controller of PM8150b,
-add the LED nodes with proper triggers into it.
+Tested on a Vsmart Active 1 (SDM660/PM660). Switching charge_behaviour
+between inhibit-charge and auto now fires chg-state-change once per
+switch, with a uevent carrying the new status. A charge_behaviour write
+alone doesn't send one, so this is what lets userspace notice.
 
-Signed-off-by: ShiTou Hong <dc_redstone@outlook.com>
----
- arch/arm64/boot/dts/qcom/sm8250-hdk.dts | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+Tested-by: Adrian Nguyen <thenguyen1024@gmail.com> # Vsmart Active 1 (PM660)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-index b32f254bf..11865abd1 100644
---- a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-@@ -7,6 +7,7 @@
- 
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- #include <dt-bindings/usb/pd.h>
-+#include <dt-bindings/leds/common.h>
- #include "sm8250.dtsi"
- #include "pm8150.dtsi"
- #include "pm8150b.dtsi"
-@@ -614,6 +615,24 @@ &pcie2_phy {
- 	status = "okay";
- };
- 
-+&pm8150b_lpg {
-+	status = "okay";
-+
-+	led@1 {
-+		reg = <1>;
-+		function = LED_FUNCTION_HEARTBEAT;
-+		color = <LED_COLOR_ID_GREEN>;
-+		linux,default-trigger = "heartbeat";
-+	};
-+
-+	led@2 {
-+		reg = <2>;
-+		function = LED_FUNCTION_WLAN;
-+		color = <LED_COLOR_ID_RED>;
-+		linux,default-trigger = "phy0tx";
-+	};
-+};
-+
- &pm8150b_typec {
- 	status = "okay";
- 
--- 
-2.47.3
-
+(Test script and mail drafted with an LLM assistant.)
