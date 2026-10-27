@@ -1,100 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.180
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793113761;
-	b=y+NzBF4okBIuE0XeWkkeUoGIzKa+jdW9UhXkK3OJhctsX7oiSUNZUGXZ61rh3VHHYY2J
-	 R31VDIOtMuEN8Xucu7joq2PBkALy99t4wDgTr/zGujDd/PSHkdbE5292jPZmbgS8JSi5g
-	 z5OLRh/PQDfyA7vl2B90umgDHmiNmLHPwJwhEepTUKQF1ORJrNijHsqe905BUwVn2zwu7
-	 ypPl6Bu4Ps9c5NnjXAtvbJUmi/2m27+gRQifpgeOsH3atheTGOXjCfVNSswHTlfu8VzE1
-	 cVB76Xkci3ErMxMoNx8kJqVJRcgCgiQQ+70FPGvQ1UTLzKxE4Nhqc4wtyOfbFfiva1g==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793113761;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type;
-	bh=oAHxKAOEiqLhGsEJj6uWGojbuVaoZYDv1iJ7mHdZGsA=;
-	b=15AtdTYOOFnSiuUJooUB0vxL3Co0aVlGVz1kdLwOJ+MveBr7QdGFAvxVLnWZMriJ2voT
-	 E7675HnToKoUDtBJOi+gzf3C6y2bAyB5+aYhyw7tQgyh/UbqB0MFL+uAppcPUdZaF2/hf
-	 8hxhdJte1sCFhaLEljCn9FJUAasusonIklHuvuiPrD/efUwBID3bkJ6MjCB8Lip/UMpx2
-	 19RN0opvo1GGBDmpCoL81KtRUVXu4ZiHU2CpwU5ewFxr09KzA674Zyv2fq+Ots5h52bAA
-	 ZHPxwj96cddbP/ZrO/qzZF9oW0emMmqic+L/BHsQbHMvK2DmPcSCIu7kAo3ZxvaOEZg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=co466oFF;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793114389;
+	b=b0QIC+PN5v3ztRrfLmvkowcfL/DE9shHLHIHo6Vs2En6mAYDVuQfxuj15a0aKbp4OGB8
+	 An4O0E+w6rHxyt/cKFrMXQrOeHJBYfXxWLAGDxSes0SzjSrveFz+jswvrDqt4Fi44q16U
+	 rPqI/uTJnFmgH8R7gLqc4VI2Wb2D7iT3MI4IvW4qAz7CKS756IAGBXX+Q1SIozq1NDnm7
+	 udr/FFmPiR2/JDVcCiDCnivayYV7z0xNUci9JFaUMe4wKSeyTnRRHPIlzgAsbGTffC69v
+	 sYp4dQQVDc3/U5rGqcYronhLnURG6sucyQsrBlsr5vJjXN+HHbKcmLwcgYum/7JWZWw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793114389;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=sMgUDH2AwcqoMwjXDgkudYOyFG4cLjIdTSCCeoJtqvg=;
+	b=ndsMJ7XEZhUtlhXBmmb+dU+Vlvu+foKz5LO0FRDGsonU6CMhJUbPRN/cSZ2wfgMaQpHP
+	 JnB4mG7CI91yEtUU/Jj3ZSmpWmJPfJOa11qbKbElmY2JGFkCX9sAPjYZLOzrTt+Zdz609
+	 s9pZI6czCvbJypUyC8c1pp3llaFjKInPt501koluxMg/9pqRxQ6zHD+tif8o0nsxNzPNH
+	 oftp8R7F6b4MndeP+OsoiRnyqEKGQXn7TdaQedk31Jzd/SeG2y1xjY/lRUiAuLTk8x+2L
+	 sQcEmu4teLGTn0KILuReyFnW5m9Ictd5K1XBdjkFc96GGUvmH5/ztLCyCQSxs/VhiQg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k7jh1tBB;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09506606A31D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 15:09:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 09506606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E9B8606A31E;
+	Tue, 27 Oct 2026 15:19:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=co466oFF
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-3535a54bed9so6545087eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 08:09:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793113760; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ePbsmESbNlCXpDUya1Z9m4nj8UtboaOZrCJbRaxFYBi9e85AQ2sP9aDQvOtwTPL/5T
-         jW9jpt7Vf/HNNo2ViWl4WBeO5e9KoVBtpp9L7cJmVtvwD3NLT+nPtRBhxa2C3carJWQl
-         T1HBDMDLwP1uQ5wwsofIbaunSfXo3ftNMleQaYrj+evrB9WFtkcyzBZbhhWU5aBxiy9A
-         OZ3xkLvr47iP+B8ZXwqLfHL0guOOOAYYEkW5VJ3/W2Q5vrOiQj6G1YHtLbqPULU2TnAZ
-         udy3+HouBEz78PmMIfEeuy0lFmE1jfBV5Ed9VK9u9SvbK5LGH8VPwnuRv2/kpVFXbjMs
-         Cbbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=oAHxKAOEiqLhGsEJj6uWGojbuVaoZYDv1iJ7mHdZGsA=;
-        fh=x8a/qPM6vt+D5moh7up1+hrSlUc2aMjTLtxPzve0mAM=;
-        b=kvGS4waavZBOFMzGlJfakdGrfFOuDy3YBF0dNvXEuufMYB2sZYR6Ln+5Xl+D0cUkyo
-         pVDtfHIplpJs3yuWrAbCQ0IMMD7wO8RcWzAnXYQOEDrIsfuAqHGX1oCDZHoTxkPSCV1/
-         Jzj3YBEsRkTx5e0ATLtO9byN6lZQmiqpDSHw15eoElFyMvWoP5dYAgG+aOEDp8oXuHaA
-         FI0yKfGL4dr/xVmEK9ke4Hvh06oJdPpuuE6RuTqvzKy4pH/14uob09SOvsDhFZME16VW
-         pGbIobTFRBLoG0UUfoXlr5mbV8Y8X7ghv5a8mffnWQqDBT6hdrCcBoWWYlVlMjN9uC/X
-         tp1Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793113760; x=1793718560; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oAHxKAOEiqLhGsEJj6uWGojbuVaoZYDv1iJ7mHdZGsA=;
-        b=co466oFF1dhQmr2N8vEvSlNncCSXO6JbBOpXu3AWET4ZRArQ0r5TFsh3JtzIiCijJs
-         xuVELQBeufrhTzCRwaLyL8IJ94XYqwLjwQ3N+cMEQtFXinnkOenaRTKVr8WkgE73/iUL
-         gbZbuqionHz7tYdmAQP1py0nt116nJIadBvAhG6AzwmPkwVa6rXM7EM86B4eB8T/7V7g
-         EQarfMCisspF/8XzNwrt4NZ8cAgg0yWxLsM82t7x18XK4CkIdCNTCRscDbHeWKY/iGJT
-         gDPIv5zAgn3MCyG8o/2beygcMBwF9PfRJb1KNZIMoKB6X7pHl5zKVUfmZWYKrj7NMVAL
-         aBOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793113760; x=1793718560;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=oAHxKAOEiqLhGsEJj6uWGojbuVaoZYDv1iJ7mHdZGsA=;
-        b=aMYUOqOuo/p1OxUwkDxHrMol67E0UtDswwnxApO3UM8MYkl2eutGq1BBWu1D61PYdy
-         G1joZaDHkUMnVQejZthlgsUMw79xof/5SYjAFje4YXKqTZWUXH15955KzOcuwLw3ERs5
-         AUaKmFpM5Lvp34zcQtGxByA1pgvOgpZVOr7+090SVUfFHLyHgndeMjxfS5i/cMXj9nK6
-         Yhv8Z05bRIr7JmRfbTyx25uCXxw8vgupoFUXeMIhBKbtCzxZ7h39DzRbXIWrRy2K3rIL
-         VgNCwtPg+/jT9Sj0yaCXlzgiUKAyWQ9ENNCTSdAkRXTkiKTy+esXeweSUYuwz5zuLliB
-         4x0w==
-X-Forwarded-Encrypted: i=1; AKwUvBzQshvDyAryv029KsyznuCfbWW8oM6VR/Ou0DzQWLj3XqjQYxxjgEsDl3JGiNNfH/xClgCmZyGOOWPN0viR@vger.kernel.org
-X-Gm-Message-State: AFq9FYJg/hQdtXYlws+TCus77YyzbPGiXBknIkH9GBRDpVjreJPmIJj3
-	3tXRXvGi0MTKGMxnXyy3kcho4FZiNG4N3Sy4Uq95jaqOnnzIKhyJNHyfVWH8f1HUHroTQX+FHoG
-	cPbYuZRaKi51V9cAuHYTlGRKR1bPMmuQ=
-X-Gm-Gg: AYBFou0TpT9U+QI/ywxbbX9UqEvYX9Vb20mbHob06U5vNMDeSnZ60P9ZI4Q5XvaY8dw
-	cHxeCFbZzOCWU4mc/5Ce0/3VkDvIGCpB0grMAn4JlSAIWJFccDcPfKd1ev4TDr43EDU+IIWZnPq
-	IzrTTHpyCCWzOYUVvKv/Z/7M6wTDgkciFN/Nm65TLpYFBgaowa+pT36krCwjfn3qdO8donAx936
-	p/jDoI7BEPqTrdr7nnBInNhruFwnJSv3xN17KlFYuLKQF5LkjxETrfdHwo05uvtFrzx6wfaymks
-	3IecXxx+q7bmUQbfKuWj/+j/YWixgSRS3Ywlce2avb9pSz8zuF+kNaJ1fjfR3CMUM7VZjvBW8QX
-	GRWXMMI/oSKaunBxQ8LFQY1WVHz0wfQMVeyLCXEBuUWi9t8qtm1leWGeu6aoeKrSdJLBZxNF6IR
-	/txiarSz78Nn+OQhSstL06enN0j/UKWcaPcR/xBcnwGqgFnCQY8kKUKg==
-X-Received: by 2002:a05:7300:e024:b0:36a:158e:f917 with SMTP id
- 5a478bee46e88-36a158f021emr2604437eec.6.1793113760079; Tue, 27 Oct 2026
- 08:09:20 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k7jh1tBB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 982AF1F01829;
+	Tue, 27 Oct 2026 15:19:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793114389;
+	bh=sMgUDH2AwcqoMwjXDgkudYOyFG4cLjIdTSCCeoJtqvg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=k7jh1tBBsOBG5dou8fhCh+tMjVrfqZ+QyYH2YOAVR8oqdJZnj8f4I6oUNYZR81/L6
+	 AApxwcBGN8jxBbomV9prXrYPjHejt3bgnfAgZy3ZCuYE5RC9rmpEuxZHT5BtMQmTAl
+	 +MHFdzxsWia+XWBxbpV1GUTmGUtz04jpnds3WL3atps/Jn0SrR4Oc3UqhH7sF7/Oak
+	 G/99NS4H4+bssn5vJNqxXd/gVyVgJmKfcxAHHvHnIMSGCNAPi507NWnO4Ad1TI/313
+	 l6R70fGsYL6j1DoCGQ1R8gMFMqc//VvUsfRU/tvrnMgNjTMs5szsrSoBAPMxvFHGDz
+	 mghJJuXIew6qQ==
+Message-ID: <8fdc66b2-6047-4f3d-932f-1e6883e370bc@kernel.org>
+Date: Tue, 27 Oct 2026 16:19:38 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,51 +51,137 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261027124954.110697-1-zoone.rupert@gmail.com> <20261027124954.110697-10-zoone.rupert@gmail.com>
-In-Reply-To: <20261027124954.110697-10-zoone.rupert@gmail.com>
-From: Kim Jinseob <kimjinseob88@gmail.com>
-Date: Wed, 28 Oct 2026 00:09:08 +0900
-X-Gm-Features: AclHuK8H6vSFxFswuEXecNS4oxgF2wzBLnY17J5ZgNNydJKg-55kp3rBfAwA1Kg
-Message-ID: <CALMSew+nhZp9BoqS5tOgFdiVy13U1r2f4UQa9Sd5zc9pSt_YcA@mail.gmail.com>
-Subject: Re: [PATCH v4 9/9] iio: enable context analysis for all drivers
-To: Rupesh Majhi <zoone.rupert@gmail.com>
-Cc: Alex Lanzano <lanzano.alex@gmail.com>, Andy Shevchenko <andy@kernel.org>, 
-	Benson Leung <bleung@chromium.org>, David Lechner <dlechner@baylibre.com>, 
-	Guenter Roeck <groeck@chromium.org>, Jagath Jog J <jagathjog1996@gmail.com>, 
-	Javier Carrasco <javier.carrasco.cruz@gmail.com>, 
-	Jean-Baptiste Maneyrol <jean-baptiste.maneyrol@tdk.com>, Jerome Brunet <jbrunet@baylibre.com>, 
-	Jonathan Cameron <jic23@kernel.org>, Kevin Hilman <khilman@baylibre.com>, 
-	Lorenzo Bianconi <lorenzo@kernel.org>, 
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
-	Matti Vaittinen <mazziesaccount@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	=?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	Remi Buisson <remi.buisson@tdk.com>, chrome-platform@lists.linux.dev, 
-	linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Marco Elver <elver@google.com>, 
-	Bart Van Assche <bvanassche@acm.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] dt-bindings: ptp: Document the TSCSS on Qualcomm
+ Lemans and Monaco SoCs
+To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Richard Cochran <richardcochran@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+ Taniya Das <taniya.das@oss.qualcomm.com>,
+ Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
+ <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
+ <02792987-7ad8-4a6b-81ad-559c63174bb0@kernel.org>
+ <640acacb-1704-4ee6-aa34-d6be3b30b44b@oss.qualcomm.com>
+ <f5aa313d-0e23-41fa-b59b-9388839b2525@kernel.org>
+ <7f6839fb-59b0-4f6d-a3f8-7579f6d40857@oss.qualcomm.com>
+ <aa76425c-0579-42c2-832d-cc767703f3f5@kernel.org>
+ <237b2f74-4a9b-4df2-a0fe-a7b783ed5267@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <237b2f74-4a9b-4df2-a0fe-a7b783ed5267@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I independently build-tested the full v4 series (1/9 through 9/9) on
-top of jic23/iio.git testing at 7d80b4b383bc, using Clang 24.0.0git
-with context analysis enabled and W=1.
+On 26/10/2026 13:55, Imran Shaik wrote:
+>>
+>>>
+>>> On checking further, I found that our etu-slice sub node deviates from
+>>> that example, since we don't have a compatible string for the sub node.
+>>>
+>>> Please let me know if we should move the pinctrl properties under the
+>>> tscss node with per-slice names, or instead keep them under the
+>>> etu-slice sub node and add a compatible there.
+>>
+>> etu-slice does not feel like device at all unfortunately. I see only
+>> address space, so one resource, which might be enough but lack of
+>> description for the subnode is not helping. I have doubts that separate
+>> subnodes should be there in the first place, but if they stay, describe
+>> the child node fully - what sort of device it is. Just because there is
+>> independent timestamping counter does not make it separate device, just
+>> like independent interrupt in GIC is not itself an independent device.
+>>
+> 
+> The ETU is an independent hardware block within TSCSS that captures/
 
-Results:
+How is it independent? I see no resources, except address space. A
+channel of some device does not mean it is a separate device.
 
-  - x86_64 OSF: 5/5 translation units built, 0 warnings/errors.
 
-  - ARM64 OSF: 5/5 translation units built, 0 warnings/errors.
+> snapshots the TSC timestamp in response to an external hardware
+> event trigger, for each slice individually. Hence the subnodes approach
+> was followed and will capture these details in the description as well.
+> 
+> If we drop the subnodes and add everything into the parent TSCSS node
+> instead, then all the arrays here must stay index aligned as per slice
+> mapping. Example DTS node looks like this (QDU1000, 3 slices):
+> 
+> ptp@1da0000 {
+> 	compatible = "qcom,qdu1000-tscss";
+> 	reg = <0x0 0x01da0000 0x0 0x2000>,
+> 	      <0x0 0x01db0000 0x0 0x10000>;
+> 	reg-names = "tsc", "etu";
+> 	
+> 	...
+> 
+> 	interrupts = <GIC_SPI 329 IRQ_TYPE_EDGE_RISING>,
+> 		     <GIC_SPI 333 IRQ_TYPE_EDGE_RISING>,
+> 		     <GIC_SPI 334 IRQ_TYPE_EDGE_RISING>;
+> 	interrupt-names = "slice1", "slice5", "slice6";
+> 	
+> 	pinctrl-0 = <&tod_pps>;
+> 	pinctrl-1 = <&gps_pps>;
+> 	pinctrl-2 = <&hardsync_pps>;
+> 	pinctrl-names = "slice1", "slice5", "slice6";
+> 	
+> 	qcom,etu-slice = <1 5 6>;
+> 	qcom,etu-event-sel = <1 3 2>;
 
-  - x86_64 allmodconfig-based IIO: 723/723 selected translation units
-built, 0 warnings/errors.
+Why this is not continuous? The slices are all fixed in the hardware. I
+don't get why do you list some of them.
 
-As a control, enabling context analysis with 9/9 alone reproduced 256
-warnings and 2 errors. Applying the complete series eliminated these
-diagnostics, including an OSF warning resolved by the conditional mode
-claim annotation in 2/9.
 
-Testing covered compilation and static context analysis only. Final
-module linking, module loading and runtime/hardware testing were not
-performed.
-
-Tested-by: Jinseob Kim kimjinseob88@gmail.com
+Best regards,
+Krzysztof
