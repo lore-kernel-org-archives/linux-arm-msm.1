@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793114389;
-	b=b0QIC+PN5v3ztRrfLmvkowcfL/DE9shHLHIHo6Vs2En6mAYDVuQfxuj15a0aKbp4OGB8
-	 An4O0E+w6rHxyt/cKFrMXQrOeHJBYfXxWLAGDxSes0SzjSrveFz+jswvrDqt4Fi44q16U
-	 rPqI/uTJnFmgH8R7gLqc4VI2Wb2D7iT3MI4IvW4qAz7CKS756IAGBXX+Q1SIozq1NDnm7
-	 udr/FFmPiR2/JDVcCiDCnivayYV7z0xNUci9JFaUMe4wKSeyTnRRHPIlzgAsbGTffC69v
-	 sYp4dQQVDc3/U5rGqcYronhLnURG6sucyQsrBlsr5vJjXN+HHbKcmLwcgYum/7JWZWw==
+	t=1793114735;
+	b=1AFMPlP7FX6fGILEFR/33Tdb2ZHlYRL6J8/NjhsPtZJfg/pRMmB7gm+3MhzvC3tVHv0g
+	 V/2j+aNvw31xTrW93/Jd7QQKCy2e0ewUImcb+sym1qS2Z3reyRulL9hDOiY23rx5RW5Gu
+	 5Fifc7RMt9/WuIuXxTpjKb0Nu/Z+odM86O/YTpYk4nm6e+mpy8zLwSwfugcLYABqTBePe
+	 Kemmy+cK6/0mP6RlUp7OxePb3SM6LbegDWop2TisD/kDppvNjyTnMzA1lO/sGcqmmP3vU
+	 GT73gEjmy9l4F39Qf8H6GkPobvysUelKF1bODprDS6+scKJEYt3l/dTpSl/BTUOk+Dg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793114389;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793114735;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=sMgUDH2AwcqoMwjXDgkudYOyFG4cLjIdTSCCeoJtqvg=;
-	b=ndsMJ7XEZhUtlhXBmmb+dU+Vlvu+foKz5LO0FRDGsonU6CMhJUbPRN/cSZ2wfgMaQpHP
-	 JnB4mG7CI91yEtUU/Jj3ZSmpWmJPfJOa11qbKbElmY2JGFkCX9sAPjYZLOzrTt+Zdz609
-	 s9pZI6czCvbJypUyC8c1pp3llaFjKInPt501koluxMg/9pqRxQ6zHD+tif8o0nsxNzPNH
-	 oftp8R7F6b4MndeP+OsoiRnyqEKGQXn7TdaQedk31Jzd/SeG2y1xjY/lRUiAuLTk8x+2L
-	 sQcEmu4teLGTn0KILuReyFnW5m9Ictd5K1XBdjkFc96GGUvmH5/ztLCyCQSxs/VhiQg==
+	bh=MAKDx31khoefmfUOeL61lGC9ufpndRmKXdUk86UDyqw=;
+	b=WpwpprhcMW24GZrbc/2wTDAEABTqV7Xezic13fgobe7pBe8qdVrylPxkwsDXLGFWHyz6
+	 tWJXzrN9I4uaFqjyVStYm3QNaGSNkO1bz55HY4Hna2c7KN0ERvwTq/aUb/CPAHt/+Ne9b
+	 s48Q1zqDM4yJAxNS7gvdna5rcEBTpIWTDi/FdqN58PyAAD9L+9qedD8bgQi0E8/Akv7F0
+	 ztM9jvSIdr6SEfPOPMn/ujZWA+Fj0WbZKOavB9VOseCHLJrZddGvXQCyrFa0Q334Lh/VW
+	 mcdi7sPyFo3vPWs1KbjIOSMhN21WXqw8mT3AI1/IbUkS5Iz2WslGBTZFFZX/JVtzhLg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k7jh1tBB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cLnckm3H;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E9B8606A31E;
-	Tue, 27 Oct 2026 15:19:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45B4B606A31D;
+	Tue, 27 Oct 2026 15:25:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k7jh1tBB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 982AF1F01829;
-	Tue, 27 Oct 2026 15:19:42 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cLnckm3H
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48E601F01825;
+	Tue, 27 Oct 2026 15:25:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793114389;
-	bh=sMgUDH2AwcqoMwjXDgkudYOyFG4cLjIdTSCCeoJtqvg=;
+	s=k20260515; t=1793114734;
+	bh=MAKDx31khoefmfUOeL61lGC9ufpndRmKXdUk86UDyqw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=k7jh1tBBsOBG5dou8fhCh+tMjVrfqZ+QyYH2YOAVR8oqdJZnj8f4I6oUNYZR81/L6
-	 AApxwcBGN8jxBbomV9prXrYPjHejt3bgnfAgZy3ZCuYE5RC9rmpEuxZHT5BtMQmTAl
-	 +MHFdzxsWia+XWBxbpV1GUTmGUtz04jpnds3WL3atps/Jn0SrR4Oc3UqhH7sF7/Oak
-	 G/99NS4H4+bssn5vJNqxXd/gVyVgJmKfcxAHHvHnIMSGCNAPi507NWnO4Ad1TI/313
-	 l6R70fGsYL6j1DoCGQ1R8gMFMqc//VvUsfRU/tvrnMgNjTMs5szsrSoBAPMxvFHGDz
-	 mghJJuXIew6qQ==
-Message-ID: <8fdc66b2-6047-4f3d-932f-1e6883e370bc@kernel.org>
-Date: Tue, 27 Oct 2026 16:19:38 +0100
+	b=cLnckm3H8keXxOmWbcw0algepILOQqKfuYzEvH6392uZph2Sn2U1ego1hl+yvw9f/
+	 vKNa4hWvcmAW/DMABwir3vFtT5eLsFk3EpOoLSq+gWgIpgT0lPv87wkKxof/kAWNjW
+	 tWo1yY1QcmScO4OSnJjPRUAZ3DPo6Lq6jB2NtiCraOstdCAWHM54j06m5PjMTfxNKD
+	 +8c5ngOSI+33eXvYF9GMAiph0K20lCr1httWkPpCdoK+KDanveD2RH9opNqhgtZrde
+	 NZ11Rw+KCyjep/llL9tmw5kJqZHAGJeH/VhPm0agumhlY5lBvTHfpOgoGCV6LCzH7N
+	 6EIQ4Hx59Jmfw==
+Message-ID: <e6f56e97-f920-466b-9ad6-ec43be0f5e2a@kernel.org>
+Date: Tue, 27 Oct 2026 16:25:25 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,30 +52,25 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] dt-bindings: ptp: Document the TSCSS on Qualcomm
- Lemans and Monaco SoCs
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Richard Cochran <richardcochran@gmail.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
- Taniya Das <taniya.das@oss.qualcomm.com>,
- Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
- <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
- <02792987-7ad8-4a6b-81ad-559c63174bb0@kernel.org>
- <640acacb-1704-4ee6-aa34-d6be3b30b44b@oss.qualcomm.com>
- <f5aa313d-0e23-41fa-b59b-9388839b2525@kernel.org>
- <7f6839fb-59b0-4f6d-a3f8-7579f6d40857@oss.qualcomm.com>
- <aa76425c-0579-42c2-832d-cc767703f3f5@kernel.org>
- <237b2f74-4a9b-4df2-a0fe-a7b783ed5267@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: clock: introduce
+ toshiba,tc9564-clock.yaml
+To: Alex Elder <elder@riscstar.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Daniel Thompson <daniel@riscstar.com>
+References: <20261005230927.2000398-1-elder@riscstar.com>
+ <20261005230927.2000398-2-elder@riscstar.com>
+ <20261009-gifted-stylish-tortoise-95b14d@quoll>
+ <b190fe58-364b-4b94-9cab-c5f81f874289@riscstar.com>
+ <aafe2703-bfb8-43da-8472-b1dfa36fa8f9@kernel.org>
+ <77dacc46-7294-47c8-899a-fd56b6a2af55@riscstar.com>
+ <ad511ae7-755d-42bc-a55d-12b93d49ddaf@kernel.org>
+ <ee6ba585-2b87-4e38-963d-9d2731cf4d78@riscstar.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -121,67 +116,95 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <237b2f74-4a9b-4df2-a0fe-a7b783ed5267@oss.qualcomm.com>
+In-Reply-To: <ee6ba585-2b87-4e38-963d-9d2731cf4d78@riscstar.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 26/10/2026 13:55, Imran Shaik wrote:
->>
+On 09/10/2026 17:09, Alex Elder wrote:
+> On 10/9/26 9:46 AM, Krzysztof Kozlowski wrote:
+>> On 09/10/2026 16:23, Alex Elder wrote:
+>>> On 10/9/26 8:56 AM, Krzysztof Kozlowski wrote:
+>>>> On 09/10/2026 15:44, Alex Elder wrote:
+>>>>> On 10/9/26 4:31 AM, Krzysztof Kozlowski wrote:
+>>>>>> On Mon, Oct 05, 2026 at 06:09:24PM -0500, Alex Elder wrote:
+>>>>>>> Define the binding for the clock controller functionality present in
+>>>>>>> the Toshiba TC9564 SoC.
+>>>>>>>
+>>>>>>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>>>>>>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>>>>>>> Signed-off-by: Alex Elder <elder@riscstar.com>
 >>>
->>> On checking further, I found that our etu-slice sub node deviates from
->>> that example, since we don't have a compatible string for the sub node.
+>>> . . .
 >>>
->>> Please let me know if we should move the pinctrl properties under the
->>> tscss node with per-slice names, or instead keep them under the
->>> etu-slice sub node and add a compatible there.
+>>>>>>> +properties:
+>>>>>>> +  compatible:
+>>>>>>> +    const: toshiba,tc9564-clock
+>>>>>>> +
+>>>>>>> +  toshiba,config-syscon:
+>>>>>>> +    $ref: /schemas/types.yaml#/definitions/phandle
+>>>>>>> +    description:
+>>>>>>> +      Phandle for the configuration space system controller.
+>>>>>>
+>>>>>> I do not see my previous comment addressed - you have no resources here,
+>>>>>> so this belongs to the parent. You responded something about pci-ep, but
+>>>>>> the parent is not pci-ep. Open your code:
+>>>>>> https://lore.kernel.org/lkml/20260918165234.687224-5-elder@riscstar.com/
+>>>>>>
+>>>>>> I clearly see code like:
+>>>>>>      syscon {
+>>>>>>        clock@ {
+>>>>>>        };
+>>>>>>      };
+>>>>>>
+>>>>>> so I do not understand what pci-ep has anything to do here.
+>>>>>
+>>>>> What I have now (about to send) looks like this:
+>>>>>
+>>>>>        syscon@0 {
+>>>>>            compatible = "syscon", "simple-mfd";
+>>>>>            reg = <0x0 0x2000>;
+>>>>>
+>>>>>            clock {
+>>>>>                compatible = "toshiba,tc9564-clock";
+>>>>>                #clock-cells = <1>;
+>>>>>            };
+>>>>>        };
+>>>>>
+>>>>> A reset node will also go inside the syscon, so there is another
+>>>>> function for that MFD.
+>>>>>
+>>>>> The regmap belongs to the parent, and is looked up this way:
+>>>>>
+>>>>>        regmap = syscon_node_to_regmap(dev_of_node(dev->parent));
+>>>>
+>>>> That's driver code, so irrelevant. So how does this solve my comment
+>>>> from v1?
+>>>
+>>> I'm trying Krzysztof.
 >>
->> etu-slice does not feel like device at all unfortunately. I see only
->> address space, so one resource, which might be enough but lack of
->> description for the subnode is not helping. I have doubts that separate
->> subnodes should be there in the first place, but if they stay, describe
->> the child node fully - what sort of device it is. Just because there is
->> independent timestamping counter does not make it separate device, just
->> like independent interrupt in GIC is not itself an independent device.
->>
+>> In v1 I asked to fold the node into the parent. v2 did not have it. v3,
+>> which you are preparing, still has no node folded, because they are
+>> separate.
 > 
-> The ETU is an independent hardware block within TSCSS that captures/
+> Are you saying to fold it into the PCI function?
 
-How is it independent? I see no resources, except address space. A
-channel of some device does not mean it is a separate device.
+I do not see in the example the parent being PCI function, so I do not
+understand that. What is this node? What is its parent?
 
 
-> snapshots the TSC timestamp in response to an external hardware
-> event trigger, for each slice individually. Hence the subnodes approach
-> was followed and will capture these details in the description as well.
 > 
-> If we drop the subnodes and add everything into the parent TSCSS node
-> instead, then all the arrays here must stay index aligned as per slice
-> mapping. Example DTS node looks like this (QDU1000, 3 slices):
+> If so, could the PCI function be a clock provider and
+> define #clock-cells (and #reset-cells)?
 > 
-> ptp@1da0000 {
-> 	compatible = "qcom,qdu1000-tscss";
-> 	reg = <0x0 0x01da0000 0x0 0x2000>,
-> 	      <0x0 0x01db0000 0x0 0x10000>;
-> 	reg-names = "tsc", "etu";
-> 	
-> 	...
+> Because as things stand now, clock and reset are used by
+> the two DWMAC Ethernet interfaces as well as a separate
+> interrupt controller (one for each PCI function).
 > 
-> 	interrupts = <GIC_SPI 329 IRQ_TYPE_EDGE_RISING>,
-> 		     <GIC_SPI 333 IRQ_TYPE_EDGE_RISING>,
-> 		     <GIC_SPI 334 IRQ_TYPE_EDGE_RISING>;
-> 	interrupt-names = "slice1", "slice5", "slice6";
-> 	
-> 	pinctrl-0 = <&tod_pps>;
-> 	pinctrl-1 = <&gps_pps>;
-> 	pinctrl-2 = <&hardsync_pps>;
-> 	pinctrl-names = "slice1", "slice5", "slice6";
-> 	
-> 	qcom,etu-slice = <1 5 6>;
-> 	qcom,etu-event-sel = <1 3 2>;
-
-Why this is not continuous? The slices are all fixed in the hardware. I
-don't get why do you list some of them.
-
+> It sounds a little like you might prefer everything being
+> wrapped up in the DWMAC driver, as we originally did six
+> months ago.
+> 
+Not sure which patchset you refer to - v1 was in September.
 
 Best regards,
 Krzysztof
