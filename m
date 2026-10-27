@@ -1,65 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793060116;
-	b=473UIaWn5Kfm4qA3AcEOcj8P4NE1fZ/8Tpbzssmfz5Q1mWDnC4wwdWS1Z6oGMCb4pMmE
-	 4Q7rFoBiSZCGAURdAg2jf4+J+YyeTgXwKvw4I1wUnAsFKQ5+XGjQ9I+pJq793BN5H3gw3
-	 GTqNqqC9gQstYsQoagVkZEZf5TIuPx2f76sYVpm32eSk1OdnfgeZTDuvKoZuKAkDBReB5
-	 sFxfSmV4YjwG8kSdd6LrO//ehksD69LrM+oIkNw0murDm7SWpzxsMdReuMVxZSVNX5NXz
-	 Et6Pn8yJ1BcYVUApLqBZtB874xrDiHM2y9J5fAomkuHSbowm436ei1zX1ru5D/0jzUQ==
+	t=1793061340;
+	b=dAlhcxLCENxeBGztOCxA6N8pGVxXzS4txZ3PKAHsl/e9IreWsMgKBKNhmlvc88RGj9Jp
+	 BjeiFikVQ8HFyrbhW0hvaF4253WUYzAFXIA0/u9efg9k4RUKOIrVQv0khOxdRzc/UCEBh
+	 /sS8UsW3D2naTtKmDhZ7ih39wNhJe39bD2zdMs2LAcqUC4B84x/+SHMDi8vOyyvvLxPxI
+	 8yk10bvHQ8TGGlYf5rNE0WH2Xzlz0Ad/p6g9x7Qc8bwhV25r2bZPEdDTYqqpBo+P3qTey
+	 Z3QLIw3+9MZiSJQIRBIV5Ub5X4V0NXLJo1X6I72puxeXLtiaGPDyiJZRUOuXXLNgKBA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793060116;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=H/yoQOUKBrL56T5gjNQcc+KduxA/BxAhW7oXXt9IhIc=;
-	b=znr0o0+xI/4nycKKJZ/uLSzBw5+iYF5/+EIT0rzXOI+txfrMBrmNJMr28mwJ8F6AP9pY
-	 H5f8J9quAiK1mWVv7iLWtjk71HnFSwZICMeRZAn0FTUiyXX/+Joch/hnRc7aPn5T3nsWL
-	 UUoqrhkNfYcWvEEQBRiF8O84WIGcDmU2OnuCCuVzm2H5IbZIBpqdoTwNMFPNfsiISxrMt
-	 YFTa/nCYFIrvdeeeJt534zNQuU7HtT3DdXmGnswpWArLcGm5extaxKsf7G0x485FXqkuh
-	 UL+YYDPlxL6aBTPwUrE07osoLVaKg7kEuNdpQNaqcS8hP+Z9V0B8KG4w6bPsoGfaH5Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793061340;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=YSbXQKziGH609nPdZNcIeIXefaI7EIJS50SrA8uijeQ=;
+	b=XBFEnEkf25EHNau87w745SgScHWBjd+W0UzutGS43pGAz4gv+eluyGzFkAq6ySX3KD/r
+	 WO7w7ePA1KHSq2SwzTaMaHxf9RhKbZH3w/7vr1SciFnLuMQyxrKtl1PgBhMPFiBSebhlG
+	 5G9hDkKR703EjZV50GagFjSESzhxeYCXQt2/dAlS0uQ8mWlBVTQq8QsM9U/0JTdHgj8aW
+	 8yVOkYWKnICvHOPQOOB3yP5cEg7AJ2J9OLaEwPap29ohSymPg0l0cOwvMctMPwBFDiGfb
+	 BpMg2o19XTE6UaBK9k9GqEoy5EBF7I6FV6iAD3pJSuxdz8TtUYhMBL0uQzs0csWmwsQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IPpmdMgW;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LHmc3JbG;
+	arc=none smtp.remote-ip=209.85.128.42
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51E28606A31B;
-	Tue, 27 Oct 2026 00:15:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6149C606A31A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 00:35:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6149C606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IPpmdMgW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14FD51F01825;
-	Tue, 27 Oct 2026 00:15:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793060115;
-	bh=H/yoQOUKBrL56T5gjNQcc+KduxA/BxAhW7oXXt9IhIc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=IPpmdMgWBt1jeGhOyJrZLKls4yjD6kVph15b6Y6qHdKQ11b9aAxvx+Ar9n9oHuPU7
-	 ik6RmqL6C4t2DwUiKDgqqEqkJgnVb8rO3Nq3+KI0tsryhcW+xNAsi+nuLeh+JfcgP5
-	 msQ/Qwq9PY09mcCwCJu6qz1yqHlS6k9pUdU5ouCHpMArXpcK8312x3yaWTqAcrItXs
-	 Fh/5fH2zakApSy+yx7UtQ7DAfMxO5uQ9rCWnj5d2Scab6XDypcEDgWaadPOOLYnHXo
-	 0vxZcJ9sVOBJOU+5sYCx4hLwt3DAbqwljp0Q2XE5gnkSrGeQ0s+HX3UumLBTdkHG7H
-	 bpVu/SD4ErvZA==
-Date: Mon, 26 Oct 2026 17:15:14 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Manivannan Sadhasivam via B4 Relay
- <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Cc: manivannan.sadhasivam@oss.qualcomm.com, Manivannan Sadhasivam
- <mani@kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
- <horms@kernel.org>, Jeff Johnson <jjohnson@kernel.org>,
- linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, ath12k@lists.infradead.org, Bjorn Andersson
- <andersson@kernel.org>, Chris Lew <christopher.lew@oss.qualcomm.com>,
- Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, Raj Kumar Bhagat
- <raj.bhagat@oss.qualcomm.com>, Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Subject: Re: [PATCH v4 0/4] net: qrtr: Add support for using identical MHI
- endpoint devices
-Message-ID: <20261026171514.35136bec@kernel.org>
-In-Reply-To: <20261022-qrtr-multi-ep-v4-0-c6fdb75fcd3e@oss.qualcomm.com>
-References: <20261022-qrtr-multi-ep-v4-0-c6fdb75fcd3e@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LHmc3JbG
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a140e7405dso36372455e9.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 17:35:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1793061339; x=1793666139; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=YSbXQKziGH609nPdZNcIeIXefaI7EIJS50SrA8uijeQ=;
+        b=LHmc3JbGEqSIFRVjQjBfyVI6IvY9PbFzivwPCiZwa28AAPW+CHT1PEOVVLGzGQFUwm
+         nq++EPd5hQtkZ2XCgj+S44panDF9ZDBh9pk5ou2Zx51miV8FR5dSHOR3WFqy+gS46O6A
+         Tls/yCrYIuSbCr/i0AhwX6BT9hOC9a0osT0IwSiAVwp1FtjkSDCa1oZP/6Vo1QTH8/gQ
+         HAky0x27B0JpZCm9I/6i5OQO/G9zTXjaAWZOLa6xL9VVjTZO5wkcJFpXl93dxHM24xTf
+         jmZ0F79frx0SjrlWBRCpPIWVnaFaxbmrMsfmyMEuTZDxVxshGLswwPrU4TCHow4EMUiy
+         kDMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793061339; x=1793666139;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=YSbXQKziGH609nPdZNcIeIXefaI7EIJS50SrA8uijeQ=;
+        b=WHELjUIrFpjQc86O2f33KN1RkM6yovV4Kr3Q33gpa0Qwqi7eQy+a5OnQH6EaByWOkS
+         8gU32q7R79oKUZaFFos2DFITq3iosKZpoCrYFsjyY13ym0GrO8I8BtZcMAKuGPZB4ZsH
+         G1nMHdQkoIASeswnE1aRvMM/Behe8Mrd17/lYZocYRxLfj2OzWEFZvl6Bw0GIKKOXtW7
+         5Ze2yrOn0fPJuD1ELrstlgtNxGobbFbe71L1/Scr1BTPITPyGTgoitjQpAd7Z0rv3Xfu
+         zKuYhJH9d889iozyNmofdJaLbSXM/FFBMSzDkTuxABL0ZKHpWtHE4j6VUoIm56KGIPZG
+         2KYQ==
+X-Gm-Message-State: AFq9FYKUCIjb8Amje9xqK5ds2cbkkKkHzNLU8Z/26sorqhKcx1Wt+u88
+	/ZFDBphnXtHl7L4ff1dO+7LG0pPKZlCyJxQDNM/cRBeOruVkIEtC0mpg
+X-Gm-Gg: AYBFou2+iCQ66b7U9J1QGEDgjgm8pQ1UVn7AyTj0d35fjxpGpw1dEuUC/2L2fzgH83K
+	LRa1Zglw4TrEt9usaXdyZnv+TD4vtp60UsVn68mXnEZqPkAv9Bk12DXg+hJtpRN6QF9MVaG54p7
+	TPygU/V8SIhVEFwV/xOtfQx+MkVhlvMljJnOlKDYyCKchMJApQjQR/cgI2UKhSevrLD0msKuosz
+	2gxZF61LqCM89ITBRLyq0F2PU2+0zYDX2h3k67KtID6GK1wAg4ialnVx0pqHN8rjtBUFTnj2GVv
+	Rdxkha9NfUPB5/sQfwlPI+doFfdCabOKPIizIG/1E+PYM7Y/jDT6paJJVfArodjEA8fNBa36lgG
+	/XB2xcoZ24xowQUT+tKZIjI/FCpd8EZeFSDIZ7ZXYYlfq690VJb4yX4FMw0GhmPea1Q4l1VIm/X
+	Zo3d4HTPNOm5NQaQ8wvSCbeo7NAiLGwNNn3YZR+y7KddGK1e3K2/A88g61rXxWOX4FnthcG77Ip
+	Zn8Vkco0jQOhFJC43qUrhaAaEhYHJCxKZ2bm8Kb8Wnxpyiw2sG9bZpmxy4cqcg8h5oqldnZzq9+
+	XQMwxyNTiGjsNak+63K7fGflfIsMmzCazztm51s=
+X-Received: by 2002:a05:600c:1988:b0:4a2:1364:252a with SMTP id 5b1f17b1804b1-4a35ac3caa5mr148009505e9.3.1793061338595;
+        Mon, 26 Oct 2026 17:35:38 -0700 (PDT)
+Received: from [127.0.0.1] (smal-20-b2-v4wan-173097-cust1152.vm20.cable.virginm.net. [77.97.36.129])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a04ad39sm597853985e9.1.2026.10.26.17.35.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Oct 2026 17:35:38 -0700 (PDT)
+From: Filippo Falezza <effeffe99@gmail.com>
+Date: Tue, 27 Oct 2026 00:35:35 +0000
+Subject: [PATCH RFC net-next] net: qrtr: Wake the system for userspace
+ packets
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,19 +91,262 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261027-qrtr-wakeup-v1-1-42b0a5816ff9@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDAyNz3cKikiLd8sTs1NICXXODlOQ085RkC1PjNCWgjoKi1LTMCrBp0Up
+ Bbs4gsbzUEt281IoSpViIguLSpKzU5BKQmUq1tQCz6zUngAAAAA==
+X-Change-ID: 20261027-qrtr-wakeup-70dcf7dc853f
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Filippo Falezza <effeffe99@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793061337; l=9511;
+ i=effeffe99@gmail.com; s=20261022; h=from:subject:message-id;
+ bh=RoFuzO2Bwr6iEMKLrxcbqbCMH3fjrF/rrycmcstcfcs=;
+ b=PMrYkvalp8S4Kl2u+HzuZEnyES1xZ36cNyCCXoBQnZ8283FdcywwTjqQE0Bmv9GMt5BJu5CUi
+ XNssrYn/1daBLKNav+eFfsukOQc7O6/tdtLwQ/IcLm4aPlSY2Iohae4
+X-Developer-Key: i=effeffe99@gmail.com; a=ed25519;
+ pk=7PPwl4QILojrh+ATB5QOpvXVmmoxaxyLQhrLRLWEL0I=
 
-On Thu, 22 Oct 2026 19:43:06 +0200 Manivannan Sadhasivam via B4 Relay
-wrote:
-> Merge Strategy
-> ==============
-> 
-> Since both QRTR and ath drivers are falling under the networking tree, the whole
-> series can be merged through netdev tree.
+On Qualcomm phones the modem reports an incoming call or SMS as a QMI
+indication over QRTR, which ModemManager or a similar daemon reads from
+a QRTR socket. While the system is in suspend-to-idle, the GLINK
+interrupt that carries the packet still fires, since it is requested
+with IRQF_NO_SUSPEND, and the packet is queued on the socket. Nothing
+reports a wakeup event though, so the system goes back to idle with
+userspace frozen and the call rings out unnoticed.
 
-Makes sense, could you repost these after the merge window (~1 week)
-and tag as "PATCH net-next" then? Our CI is thrown by the wifi patches
-in the same series and did not ingest the series.
--- 
-pw-bot: defer
+The transport cannot decide this on its own. Reporting a wakeup for
+every GLINK interrupt aborts most suspends, because the name service
+and in-kernel QMI clients such as ath10k's WLFW keep talking to the
+remotes while devices suspend. Reporting only once the edge is
+suspended (in its noirq phase) misses the packets that arrive after
+userspace is frozen but before that point: on SM7250 a call and an SMS
+that arrived in that window went unnoticed until the next wakeup.
+
+QRTR knows who a packet is for. Let an endpoint name a device to report
+wakeup events on, and report a hard wakeup event with
+pm_wakeup_dev_event() when a data packet from that endpoint is queued
+on a socket owned by userspace. Control packets and packets for kernel
+sockets do not wake the system: the kernel handles those while
+suspending anyway. Decide before queueing the skb, since the socket
+owns it afterwards.
+
+In the SMD/GLINK transport, use the rpmsg device of the IPCRTR channel.
+It is wakeup capable but disabled by default, and userspace enables it
+through power/wakeup for the remotes it wants to be woken by, typically
+the modem.
+
+Signed-off-by: Filippo Falezza <effeffe99@gmail.com>
+---
+Hello there,
+
+this RFC lets a QRTR remote, in practice the modem, wake the system
+when it sends something to a userspace client, so that a suspended
+phone notices an incoming call or SMS. I'm sending it as an RFC because
+it puts a wakeup policy into the QRTR core, and I'd like to know whether
+this is the right layer before going further. I know net-next is closed
+for the merge window; this is for discussion only.
+
+I ran into this while bringing up mainline on a Motorola Moto G 5G Plus
+(SM7250). With s2idle working, the phone slept through every call: the
+GLINK interrupt fired, ModemManager's socket got the indication, and the
+system went straight back to idle. My first attempt reported the wakeup
+from the GLINK SMEM interrupt once the edge was in its noirq suspend
+phase, since reporting every interrupt aborted almost every suspend
+(the kernel's own QMI clients talk to the modem while devices suspend).
+Logging the suspend phases showed the hole in that: a call and an SMS
+that arrived after userspace was frozen but before the noirq phase were
+delivered to ModemManager's sockets and never reported, and the phone
+only noticed them at the next wakeup. QRTR is the first place that can
+tell a frozen userspace client from a kernel socket, hence this patch.
+
+For comparison, the downstream kernel this phone shipped with registers
+a wakeup source for the QRTR nodes 0, 3 and 7, hard-coded, and reports
+a hard wakeup event for every packet from them, control packets and
+kernel-socket traffic included. Here the remote is chosen from
+userspace through power/wakeup, and only data for userspace sockets
+counts.
+
+Keeping it opt-in matters for another reason. Any user who can open a
+QRTR socket can ask the modem for frequent indications, so with wakeup
+enabled such a user can wake the system from s2idle again and again
+and drain the battery. A single event doesn't keep the system awake,
+but it does end each s2idle. That is why wakeup is off by default and
+only root can enable it, per remote.
+
+I tested it on the phone on top of next-20261021, with a udev rule that
+sets power/wakeup to "enabled" on the modem's IPCRTR rpmsg device. Five
+idle suspends in a row completed without an abort. An SMS woke the
+phone after 90 minutes and again after 9 minutes in s2idle, an incoming
+call woke it and rang, and with pm_test=devices an SMS cut the 60
+second wait short. The modem's EFS requests to rmtfs wake the system
+as well, which is expected (rmtfs is a userspace client) and matches
+downstream. While the system is awake, ModemManager's traffic counts as
+wakeup events too; it is harmless, but it keeps the wakeup source's
+event count moving.
+
+Three things I'm unsure about and would value opinions on:
+
+The rpmsg device of the IPCRTR channel as the place for the
+power/wakeup knob. It is per remote, which is what userspace wants, but
+it's a transport detail; a per-node setting in QRTR itself would be the
+alternative.
+
+Whether to report only while a system suspend is in progress, rather
+than for every userspace packet.
+
+The MHI transport (PCIe modems in laptops) could set wakeup_dev the
+same way. I left it out because I have no hardware to test it on.
+
+This exact change was tested on the phone on top of next-20261021: an
+SMS woke it after 7 minutes in s2idle, a call after nearly 3 minutes,
+and three idle suspends of up to 21 minutes ended only on the power
+key. The patch applies to net-next (734bef548a96) and builds there
+with W=1 for arm64.
+
+I wrote this patch, ran the tests and drafted this note with the help
+of an AI coding assistant (Claude Code). I have reviewed the patch
+myself, and the results above are from the phone.
+
+Thanks,
+Filippo
+---
+ net/qrtr/af_qrtr.c | 18 ++++++++++++++++++
+ net/qrtr/qrtr.h    |  4 ++++
+ net/qrtr/smd.c     | 14 +++++++++++++-
+ 3 files changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index e7b3647424b8..5481652cb0ca 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -5,6 +5,7 @@
+  */
+ #include <linux/module.h>
+ #include <linux/netlink.h>
++#include <linux/pm_wakeup.h>
+ #include <linux/qrtr.h>
+ #include <linux/termios.h>	/* For TIOCINQ/OUTQ */
+ #include <linux/spinlock.h>
+@@ -460,6 +461,7 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
+ 	size_t size;
+ 	unsigned int ver;
+ 	size_t hdrlen;
++	bool wake;
+ 
+ 	if (len == 0 || len & 3)
+ 		return -EINVAL;
+@@ -548,11 +550,27 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
+ 		if (!ipc)
+ 			goto err;
+ 
++		/*
++		 * If userspace is frozen for a system suspend, nothing reads
++		 * this packet until something else wakes the system: an
++		 * incoming call or message would go unnoticed. Let the
++		 * endpoint wake the system, if wakeup is enabled for it.
++		 * Kernel sockets (the name service, in-kernel QMI clients) are
++		 * served while suspending, and their traffic must not abort
++		 * the suspend. Decide before queueing: once queued, the skb
++		 * belongs to the socket and may already be freed.
++		 */
++		wake = ep->wakeup_dev && cb->type == QRTR_TYPE_DATA &&
++		       !ipc->sk.sk_kern_sock;
++
+ 		if (sock_queue_rcv_skb(&ipc->sk, skb)) {
+ 			qrtr_port_put(ipc);
+ 			goto err;
+ 		}
+ 
++		if (wake)
++			pm_wakeup_dev_event(ep->wakeup_dev, 0, true);
++
+ 		qrtr_port_put(ipc);
+ 	}
+ 
+diff --git a/net/qrtr/qrtr.h b/net/qrtr/qrtr.h
+index de2de69a6199..089302323310 100644
+--- a/net/qrtr/qrtr.h
++++ b/net/qrtr/qrtr.h
+@@ -4,6 +4,7 @@
+ 
+ #include <linux/types.h>
+ 
++struct device;
+ struct sk_buff;
+ 
+ /* endpoint node id auto assignment */
+@@ -12,6 +13,8 @@ struct sk_buff;
+ /**
+  * struct qrtr_endpoint - endpoint handle
+  * @xmit: Callback for outgoing packets
++ * @wakeup_dev: Device to report a wakeup event on when a data packet from
++ *	this endpoint is queued for a userspace socket, or NULL
+  *
+  * The socket buffer passed to the xmit function becomes owned by the endpoint
+  * driver.  As such, when the driver is done with the buffer, it should
+@@ -19,6 +22,7 @@ struct sk_buff;
+  */
+ struct qrtr_endpoint {
+ 	int (*xmit)(struct qrtr_endpoint *ep, struct sk_buff *skb);
++	struct device *wakeup_dev;
+ 	/* private: not for endpoint use */
+ 	struct qrtr_node *node;
+ };
+diff --git a/net/qrtr/smd.c b/net/qrtr/smd.c
+index c91bf030fbc7..e3b2b67dfcce 100644
+--- a/net/qrtr/smd.c
++++ b/net/qrtr/smd.c
+@@ -4,6 +4,7 @@
+  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <linux/device.h>
+ #include <linux/module.h>
+ #include <linux/skbuff.h>
+ #include <linux/rpmsg.h>
+@@ -68,10 +69,20 @@ static int qcom_smd_qrtr_probe(struct rpmsg_device *rpdev)
+ 	qdev->channel = rpdev->ept;
+ 	qdev->dev = &rpdev->dev;
+ 	qdev->ep.xmit = qcom_smd_qrtr_send;
++	qdev->ep.wakeup_dev = &rpdev->dev;
++
++	/*
++	 * Packets from the remote, such as an incoming call or SMS from the
++	 * modem, may wake the system. Keep it disabled by default, so that
++	 * userspace enables it only for the remotes it wants to be woken by.
++	 */
++	device_set_wakeup_capable(&rpdev->dev, true);
+ 
+ 	rc = qrtr_endpoint_register(&qdev->ep, QRTR_EP_NID_AUTO);
+-	if (rc)
++	if (rc) {
++		device_init_wakeup(&rpdev->dev, false);
+ 		return rc;
++	}
+ 
+ 	dev_set_drvdata(&rpdev->dev, qdev);
+ 
+@@ -85,6 +96,7 @@ static void qcom_smd_qrtr_remove(struct rpmsg_device *rpdev)
+ 	struct qrtr_smd_dev *qdev = dev_get_drvdata(&rpdev->dev);
+ 
+ 	qrtr_endpoint_unregister(&qdev->ep);
++	device_init_wakeup(&rpdev->dev, false);
+ 
+ 	dev_set_drvdata(&rpdev->dev, NULL);
+ }
+
+---
+base-commit: 734bef548a96e8774d6eef5dfa2026c6edc4e80b
+change-id: 20261027-qrtr-wakeup-70dcf7dc853f
+
+Best regards,
+--  
+Filippo Falezza <effeffe99@gmail.com>
+
