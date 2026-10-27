@@ -1,110 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.15
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793100665;
-	b=EXsHnJ0u7nOHDiM42P/5C3+lZuF25G3A67jhBL3OWkP4tAReml/6pax/xbV/IEkwFAMZ
-	 NsEtfOjzZBehLyjDLz2OIbT00tbLrsPTxPeUh3XKZ/i/SNgyAis1Bhkhm7Ruf2m1QIrH/
-	 4X+B11V4riy2GdrWqxBZ/2xBz9SAp+/9tu+P4nnSJawAhlG/ju4TpFutjIGyQFvHcLuih
-	 p51bSMMRspWL3aRJtWNkvx8kusbj/yOA+d399f2+MWCJDRFXxMIaOFRXCqGxByWYEBFHY
-	 1AYSsCuZFPZlUms9hjgzwDD+O+cbw/ALkB1QDtOwRLp73yvLVnaxT9nJQimor6pUi3w==
+	t=1793100691;
+	b=rYu/cVUaGoaJiELm0YjLG0e8KdqReKugB8uT5+vo+q5cqnhlu0sycjjr6R6SGzmLtnAo
+	 5JMx+3q7kIsxFuTvhYpwr4YQk3stMj10ezib9WXKjrEpF+yWnP1rH9GGgn07nyZ8qhzEL
+	 MqMXltnLMCBcBVEzNmhkMJitw/o0NEQ+4kHBv/kojrhZDCXK7ACK8AIwKg7l5Wrv/yrVW
+	 dQ+gA6FFY+9BlgIIk4req82IMiCmCyEM+xpG+n0jI39DEoIyhwAiEZdAIc8aTJ1M3Q+wi
+	 mRB60Y5S3TSmJkyXZ2P26z27qUmB0HeKCOBZdSDBvqyW7yr7ivrsrTM5XpIjQinoRmw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793100665;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=EZV999AdlRRtqkxVlOTuk2BEEI+idcTU+X5XEmWLzBM=;
-	b=5K1xGyV3afBdeh/nkEwdos4YPOMphX3c6OJTkZ/SCWCgeUub7cytbz3ywnl9pKWm5KGo
-	 LmWfrsx7+KWept0jvEGm/MU3RZGvsZpSSrEkF2iyXSXTYFGrRHDOqCaB4reyrdl5/pl2R
-	 h4ijlbUtp5Xk//otMmsWebe2+5vyOTD6Hr23IHhzMl1QsOfDACtWUGF19vPubDauWM25p
-	 7XIX5JxX3T3zrN4MT0fQX4LaY48yCoq4c+MeOMB27Tsm5VWLjs5ylgkivv7XWd2n28+Pl
-	 Oxc/xa5a+/EfnDlXrlU3/0xttaE0yqYEheTreOHKfhOL6ZKfdD3nXrByRmGteV1BWmA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793100691;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
+	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=GQyVT+EFovlv5K0TgFKKJHnlBXNpdOtQnIori5eWwSM=;
+	b=D7zGo01JcFwea+zja7w3Dhn4FBTLizGWsmKsnl0qZofDZThlimJ3Pu/20bojQmKr2w/5
+	 zB5Fas3KUcedEmJcGwuUAzK25spFvdujxupRq+cyQSf1dhXdAAl+ZGTeLwZMU4IjeERcb
+	 IUdAz0EhJJPHtYQDTNtoHcsNX8q3MoYp2fjut9dD/m33AGKh+t/uBLDqkKNEhmvcylQl/
+	 pHdY0Ny/fdS61w6iK2Q9qvFSw8O968lHHSvkja7UzmpajsBSQDkHXKFumy9KdneFYjQEP
+	 RkCATuYXwtVl+W1Ud4PFP1tk6zoRB14k7uH+WbKptOpITYKkZrPlMWw/SphN+a2bNOQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CxhXrxeR;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T78TujVY;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b="bu9jG/wt";
+	arc=none smtp.remote-ip=192.198.163.15
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26D36606A31B
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:31:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 26D36606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E419606A31B;
+	Tue, 27 Oct 2026 11:31:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4E419606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CxhXrxeR;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T78TujVY
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAdx4E2458143
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:31:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	EZV999AdlRRtqkxVlOTuk2BEEI+idcTU+X5XEmWLzBM=; b=CxhXrxeRo0uHosVs
-	d+YypxksBHMEuil3Lvq31ZAu7lZ5zUP/I0rhgeninKTHNegcPkDehC1Z7x/MhcqX
-	57rao/AG897OTeTj/a9DdWqqBSTHHw91oaItygxwnh09mzR4dcnYfEusq7oakmi4
-	FWOfMn7mEva1j6baGb424lXhwteRHSJKCoBsVedhOpCK/lmJ2MBEffZybvel80zJ
-	bH6cvvvrVab2E+l9IiJCtjN2ijbQFSiSRSa663uHNgj1u4zlfyVdrv+zl4oLu9xJ
-	zO0kxS0pnLRkwyxXHI9oS8iOJn0V7FDavUjXJfXEmAzVV3xC0fqx8YdITd1Zb7G9
-	NRZCyg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjjbta1h1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:31:03 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-943fffbc5dbso3449385a.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:31:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793100663; x=1793705463; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=EZV999AdlRRtqkxVlOTuk2BEEI+idcTU+X5XEmWLzBM=;
-        b=T78TujVYKOU7ROi9xdJtpzVjavN1aqSV9ppzKfY3E3UOeETrQG2Ua+OS66dDr3RHid
-         YHf/XBr+bc0JkcCcrc5s/P0X9vZV2MrHjT2NkxYzi4VPf6r5zv3cIlgP04jfIB4GyZPA
-         2hnXw+a+buIBjuef1BAgvkZIzrvujyfzK2i1Lll1S3nS/iufux5YNke07eRvKH5n8cuJ
-         RO4ehLLzkV6Tbv2t8BUAYIwWb0TLAOkwa2c/tOifngyZOGnFgs3TxgRTg7lEbrnw0I1h
-         JX8nBnWgJRSl/q7rWUBr2G/c57KbK69HWFf7Ei5thRqBjEMSK45cx1v8XKsRmqzF3b8D
-         rzjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793100663; x=1793705463;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=EZV999AdlRRtqkxVlOTuk2BEEI+idcTU+X5XEmWLzBM=;
-        b=Bc8PbUQZhOHBv6ptF6dEzOu6Y2oPldHe0TmDranxoi+oP9mTPMGIAbNGZXg5ASi2qc
-         2me0ih2LlEajyREjJNAB6Fk6H361lbM2KZ5+iTqkRnF2cL5orxo7/No4fP0DYthilez8
-         OV/gMzzTPece3PbEsrfYsa70uO6/pWWQSq0Sl4e9fMJg6rdsPkwbb8yYLEcsJp7oZ33G
-         wAjKXr3sYc1QN0CJ/DpuTB5F4RfkXWGXn0zBTHofe1V4KyzcIQ5ub4CirKqSqYlMPz4X
-         +8BAoXZxPVl5GTJoC14BSEefqYhNVsQTeiD9adJMGXM07wdBhPBcO8qHtalnPnjs098R
-         Jchg==
-X-Gm-Message-State: AFq9FYL1YkYEFAomCarNu6ri1JdXc/8/zv5UrrTJk+MXs4ndxCh6IytH
-	aWmFQzlOFGYrRgxy9GVHtAnvNKVwRw3TOQ+IboupGaC0RfxTkGqvilVI0HJ1was9BX8Pc4ECSRw
-	tOZwKPqEjFxry0RK2vA399ww/q4VoGKAuV72qFajC5ejy7l+KDwK3Xk3OanoAN7guotvqFfQ12e
-	6G
-X-Gm-Gg: AYBFou00beSahKgNpDUuSn4xgmhLungSd/64pMaxhlcg5tkuzWefKggKNlUdhSjXkoD
-	b2XLXO5qXFRcJEvMaLX8aYnvNN/IVFRkDEtCEqiOLM6N2aV9HvCApaxPt77xSATosVuQOz3WUsA
-	yvLxIXDBp6UUSXCwzxN/DaDc7qxFcysB+JBFvzyWssKJJVkCipLUojz6aN+T4gAh7ov3nlc07UY
-	Ty3Buk1bbuRIw1LTvNR/chAG6wYD/q75dBcGXWYkZTPFgAhkB+6Z3VStcS2GfxKwld32kGBIjCC
-	x0lLtnmGdtADoQnEnSkCcNDO4PIQFB7JMsI/xFDVylPXkVa0rlwmdJn1xO7tsMlkM1UyCUMAelP
-	S6jMXNtaZWcmIBYSGFvTBF8zsXfO5Q1tFrBjPPSs0KjYthDQwalUItb6Ec/ZhyIx4gTGrtJg=
-X-Received: by 2002:a05:620a:57d1:b0:93f:25c7:a4e7 with SMTP id af79cd13be357-940ef915dc2mr1745444785a.4.1793100662952;
-        Tue, 27 Oct 2026 04:31:02 -0700 (PDT)
-X-Received: by 2002:a05:620a:57d1:b0:93f:25c7:a4e7 with SMTP id af79cd13be357-940ef915dc2mr1745439485a.4.1793100662389;
-        Tue, 27 Oct 2026 04:31:02 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd0f6f1asm441101766b.0.2026.10.27.04.30.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Oct 2026 04:31:00 -0700 (PDT)
-Message-ID: <a3096f94-ae83-42f8-a9ab-19b185eb9531@oss.qualcomm.com>
-Date: Tue, 27 Oct 2026 12:30:57 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=bu9jG/wt
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1793100689; x=1824636689;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=KDMfKFiUm7Y3lC+nwfIordIWlQtUZP5F0MRIw/MEwjQ=;
+  b=bu9jG/wtfZYT4UNfyB5Y+LL2YKZSFQ0YplgRPFLFRdUVHlj2IIYq+LOC
+   eFOLUbL5wdcQuLG5wwXeZjhpjPwpt7VGJJEWESm3YXTzY/POQwgp4DJa2
+   9heGd0OuQ3vkNzikCSBESiDKRRFtoy6eeKySG14zdW+doo/fOBTU2iHNB
+   rxfdKklMYQPmfUYb7+G28r5U8unFBBb9VFtiei6y5rXUE76cDHnJq8P4Y
+   Sjxhc0d/rqfQmDsgcQ94MvxOAxdI/Bg/2EiV5lmaQJErWXz5zCr4VIZOq
+   tRYeNABu6oMNHl9r95D6+EfeYAaM0aAVYzzzyWSOrhl40Wie4g6tAxHkB
+   Q==;
+X-CSE-ConnectionGUID: FiaBAqzBQqWVt065haab4A==
+X-CSE-MsgGUID: LoPFTNSJQiyMo92wpIBjow==
+X-IronPort-AV: E=McAfee;i="6800,10657,11947"; a="1805807"
+X-IronPort-AV: E=Sophos;i="6.27,181,1787036400"; 
+   d="scan'208";a="1805807"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2026 04:31:28 -0700
+X-CSE-ConnectionGUID: ZCM0VRDVSZ2uHu0u4hkQeQ==
+X-CSE-MsgGUID: la2fgOt2QMKPFEra0fO3OQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,181,1787036400"; 
+   d="scan'208";a="5043934"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa010.fm.intel.com with ESMTP; 27 Oct 2026 04:31:24 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xLfOj-00000000XAq-3cit;
+	Tue, 27 Oct 2026 11:31:21 +0000
+Date: Tue, 27 Oct 2026 19:30:27 +0800
+From: kernel test robot <lkp@intel.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	dri-devel@lists.freedesktop.org
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] drm/msm/gem: Add some cleanup.h
+Message-ID: <202610271940.hGm7dpnG-lkp@intel.com>
+References: <20261026213701.22126-1-robin.clark@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,115 +93,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/5] drm/msm/a6xx: Program the PDC sequencer on Adreno
- 620
-To: patches@brar.si, Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar
- <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261027-adreno-a620-v4-0-b0095e028c76@brar.si>
- <20261027-adreno-a620-v4-2-b0095e028c76@brar.si>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261027-adreno-a620-v4-2-b0095e028c76@brar.si>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA0NSBTYWx0ZWRfX4QY9kKIdfyWg
- y/ex9lSWKmQ2YpFBBufmUh47vjquQwZJfpyz3O8thQcqutMfuwcgRh2qvjSC4GPuAANHgdJIhrS
- tAOwzAcAalKuBhGlSWe6g8T0bmFKByU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA0NSBTYWx0ZWRfX0OOab9JvzaJg
- 5ytL5jd5M0l6ymZpNIYE8f5+bWsdZuWa1k+0nwfcUJhsaUqo3JdmutBL3vH/FF84eHBzIEGUx+0
- OXKdhMe9JUjsvpQUF5lAF84y1UGNX2qp3sSt+WLanFcI5Y4OhGAJf5KBGQZMMhr7EhD2s6cBqK6
- 1y3rv8tVZRPohukjnUuRazBDaJTqn+itWY/IQZy5yDsV3+u+1HRRUI/3a+eOo4ySUU31olBPspd
- UlVv8qAGVjGvotRp0iZ7drAWHeb8Ed7lCdAybhgLz8HTygS/uKHxiuc2jBpHRM2eHMeihvtMlYx
- nWP1m/9lOmpMRff8g0PxB3uYXm7iwIlV3TgARayb8kuyk0wcKt3gXIAGuj4/nNIrEj7ioD/F9wQ
- vCnatwGurd57KZ5A+v6bSB+1t78iUcJcX8iURov+han3sP3Mo0aQweZzrs52yD4PvDjrK14swZK
- 1Yg08QdhlkSl24oGGXA==
-X-Proofpoint-ORIG-GUID: X43mmwBsYcsCbHsT_v7r7G0ysrOJlp1U
-X-Proofpoint-GUID: X43mmwBsYcsCbHsT_v7r7G0ysrOJlp1U
-X-Authority-Analysis: v=2.4 cv=XaIcX455 c=1 sm=1 tr=0 ts=6ae08b77 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=27YcngequVK7hVtoIPYA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-27_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 spamscore=0 bulkscore=0 priorityscore=1501
- clxscore=1015 lowpriorityscore=0 suspectscore=0 impostorscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610270045
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261026213701.22126-1-robin.clark@oss.qualcomm.com>
 
-On 10/27/26 8:14 AM, Ishu Brar via B4 Relay wrote:
-> From: Ishu Brar <patches@brar.si>
-> 
-> Unlike the rest of the A650 family, the A620 does not get its PDC set up
-> by AOP (the downstream devicetree has no pdc_in_aop for it). Without the
-> sequence, the RSC never acks the second power-up ("Unable to power on
-> the GPU RSC") and the device hangs.
-> 
-> Program the sequence from the driver, taking the xo, mx and cx resource
-> addresses from cmd-db instead of the hardcoded ones. Like the downstream
-> driver, also program the VRM command when cmd-db has a vrm.soc resource.
-> Add adreno_is_a620() for the selection.
-> 
-> Signed-off-by: Ishu Brar <patches@brar.si>
-> ---
->  drivers/gpu/drm/msm/adreno/a6xx_gmu.c   | 35 +++++++++++++++++++++++++++------
->  drivers/gpu/drm/msm/adreno/adreno_gpu.h |  5 +++++
->  2 files changed, 34 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> index 662f09bec9d5..8d426f1f127e 100644
-> --- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> +++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> @@ -686,6 +686,7 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
->  	u32 seqmem0_drv0_reg = REG_A6XX_RSCC_SEQ_MEM_0_DRV0;
->  	void __iomem *seqptr = NULL;
->  	uint32_t pdc_address_offset;
-> +	u32 mx_addr = 0x30010, cx_addr = 0x30000, vrm_addr = 0;
+Hi Rob,
 
-We should grab these form cmd_db unconditionally, so:
+kernel test robot noticed the following build warnings:
 
-u32 cx_addr = cmd_db..
-u32 mx_addr = cmd_db..
+[auto build test WARNING on drm/drm-next]
+[also build test WARNING on drm-i915/for-linux-next drm-i915/for-linux-next-fixes drm-tip/drm-tip linus/master v7.3 next-20261026]
+[cannot apply to drm-misc/drm-misc-next daeinki-drm-exynos/exynos-drm-next]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-etc.
+url:    https://github.com/intel-lab-lkp/linux/commits/Rob-Clark/drm-msm-gem-Add-some-cleanup-h/20261026-143700
+base:   https://gitlab.freedesktop.org/drm/kernel.git drm-next
+patch link:    https://lore.kernel.org/r/20261026213701.22126-1-robin.clark%40oss.qualcomm.com
+patch subject: [PATCH] drm/msm/gem: Add some cleanup.h
+config: x86_64-buildonly-randconfig-1005-20261027 (https://download.01.org/0day-ci/archive/20261027/202610271940.hGm7dpnG-lkp@intel.com/config)
+compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261027/202610271940.hGm7dpnG-lkp@intel.com/reproduce)
 
->  	void __iomem *pdcptr;
->  	bool pdc_in_aop = false;
->  
-> @@ -697,8 +698,18 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
->  	if (IS_ERR(pdcptr))
->  		return;
->  
-> -	if (adreno_is_a650_family(adreno_gpu) ||
-> -	    adreno_is_a7xx(adreno_gpu))
-> +	/* Unlike the rest of the A650 family, A620 has no PDC setup from AOP */
-> +	if (adreno_is_a620(adreno_gpu)) {
-> +		pdc_address_offset = cmd_db_read_addr("xo.lvl");
-> +		mx_addr = cmd_db_read_addr("mx.lvl");
-> +		cx_addr = cmd_db_read_addr("cx.lvl");
-> +		vrm_addr = cmd_db_read_addr("vrm.soc");
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610271940.hGm7dpnG-lkp@intel.com/
 
-but keep assigning vrm.addr here, as kgsl only ever writes there
-on A620, but the cmd_db lookup will succeed on other SoCs too
+All warnings (new ones prefixed by >>):
 
-Konrad
+>> drivers/gpu/drm/msm/msm_drv.c:613:13: warning: variable 'ret' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+     613 |         } else if (copy_to_user(metadata, buf, len)) {
+         |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/msm/msm_drv.c:621:9: note: uninitialized use occurs here
+     621 |         return ret;
+         |                ^~~
+   drivers/gpu/drm/msm/msm_drv.c:613:9: note: remove the 'if' if its condition is always true
+     613 |         } else if (copy_to_user(metadata, buf, len)) {
+         |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     614 |                 ret = -EFAULT;
+     615 |         } else {
+         |           ~~~~~~
+     616 |                 *metadata_size = len;
+         |                 ~~~~~~~~~~~~~~~~~~~~~
+     617 |         }
+         |         ~
+   drivers/gpu/drm/msm/msm_drv.c:588:9: note: initialize the variable 'ret' to silence this warning
+     588 |         int ret, len;
+         |                ^
+         |                 = 0
+   1 warning generated.
+
+
+vim +613 drivers/gpu/drm/msm/msm_drv.c
+
+9902cb999e4e91 Rob Clark        2023-11-06  581  
+9902cb999e4e91 Rob Clark        2023-11-06  582  static int msm_ioctl_gem_info_get_metadata(struct drm_gem_object *obj,
+9902cb999e4e91 Rob Clark        2023-11-06  583  					   __user void *metadata,
+9902cb999e4e91 Rob Clark        2023-11-06  584  					   u32 *metadata_size)
+9902cb999e4e91 Rob Clark        2023-11-06  585  {
+9902cb999e4e91 Rob Clark        2023-11-06  586  	struct msm_gem_object *msm_obj = to_msm_bo(obj);
+9902cb999e4e91 Rob Clark        2023-11-06  587  	void *buf;
+9902cb999e4e91 Rob Clark        2023-11-06  588  	int ret, len;
+9902cb999e4e91 Rob Clark        2023-11-06  589  
+9902cb999e4e91 Rob Clark        2023-11-06  590  	if (!metadata) {
+9902cb999e4e91 Rob Clark        2023-11-06  591  		/*
+9902cb999e4e91 Rob Clark        2023-11-06  592  		 * Querying the size is inherently racey, but
+9902cb999e4e91 Rob Clark        2023-11-06  593  		 * EXT_external_objects expects the app to confirm
+9902cb999e4e91 Rob Clark        2023-11-06  594  		 * via device and driver UUIDs that the exporter and
+9902cb999e4e91 Rob Clark        2023-11-06  595  		 * importer versions match.  All we can do from the
+9902cb999e4e91 Rob Clark        2023-11-06  596  		 * kernel side is check the length under obj lock
+9902cb999e4e91 Rob Clark        2023-11-06  597  		 * when userspace tries to retrieve the metadata
+9902cb999e4e91 Rob Clark        2023-11-06  598  		 */
+9902cb999e4e91 Rob Clark        2023-11-06  599  		*metadata_size = msm_obj->metadata_size;
+9902cb999e4e91 Rob Clark        2023-11-06  600  		return 0;
+9902cb999e4e91 Rob Clark        2023-11-06  601  	}
+9902cb999e4e91 Rob Clark        2023-11-06  602  
+fec06716d04d17 Rob Clark        2026-10-26  603  	scoped_cond_guard (gem_lock_intr, return -EINTR, obj) {
+fec06716d04d17 Rob Clark        2026-10-26  604  		/* Avoid copy_to_user() under gem obj lock by making a copy: */
+9902cb999e4e91 Rob Clark        2023-11-06  605  		len = msm_obj->metadata_size;
+9902cb999e4e91 Rob Clark        2023-11-06  606  		buf = kmemdup(msm_obj->metadata, len, GFP_KERNEL);
+fec06716d04d17 Rob Clark        2026-10-26  607  		if (!buf)
+47cbfe2608314b Yasuaki Torimaru 2026-03-25  608  			return -ENOMEM;
+47cbfe2608314b Yasuaki Torimaru 2026-03-25  609  	}
+47cbfe2608314b Yasuaki Torimaru 2026-03-25  610  
+9902cb999e4e91 Rob Clark        2023-11-06  611  	if (*metadata_size < len) {
+9902cb999e4e91 Rob Clark        2023-11-06  612  		ret = -ETOOSMALL;
+9902cb999e4e91 Rob Clark        2023-11-06 @613  	} else if (copy_to_user(metadata, buf, len)) {
+9902cb999e4e91 Rob Clark        2023-11-06  614  		ret = -EFAULT;
+9902cb999e4e91 Rob Clark        2023-11-06  615  	} else {
+9902cb999e4e91 Rob Clark        2023-11-06  616  		*metadata_size = len;
+9902cb999e4e91 Rob Clark        2023-11-06  617  	}
+9902cb999e4e91 Rob Clark        2023-11-06  618  
+9902cb999e4e91 Rob Clark        2023-11-06  619  	kfree(buf);
+9902cb999e4e91 Rob Clark        2023-11-06  620  
+47cbfe2608314b Yasuaki Torimaru 2026-03-25  621  	return ret;
+9902cb999e4e91 Rob Clark        2023-11-06  622  }
+9902cb999e4e91 Rob Clark        2023-11-06  623  
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
