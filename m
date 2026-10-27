@@ -1,47 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793120447;
-	b=14Skn0wQBmW8P25tdCSdlTn1mQVjT4Z3c/rj0Q0ihRnthR47S+X9nfREdDuWxhaZ3IcZ
-	 z95iMbnEN+v/q1ffHFYYBtGh6h9eUnUr+ppdmywb+A4KdKvngNJ2m3Weu3XCJUVrH2Kcj
-	 lgJ/Ng+g1T/EyhmcEGMXgLwdmMWrv8uiDMVnViUCVTm9jp82VBDP0M/3en1eP69Fauonr
-	 rLTKZNHyI7E34Mf8/w4yPd5zCPHFORqYN9cb0YWBQrKpTXWSzMFo56KSyEdbyyKgu48U7
-	 0UcaD86zNwWFWnnz1mtTOgIdC+NJtbKZUs3b/u4uHUKBJMBnnsW9Vv2rr74HwhVGQgQ==
+	t=1793121579;
+	b=V2C3B36w17kLWtzTcdrIjut9CdY+rwoVYLOZFCQ2B5MICteQH6sBX6jZj1iMFPodkxiq
+	 WVCEi5grwaWfkxo5QWrzApvv58KqQY/QBbeAlDVdTjcWVyPEojcdBTTZ4lZ+fyliDv3ZL
+	 Ko+pxvuLTiG/hbinldfTVywLoUDKhZ8HqvR7H1freXWI+Ej/dhW0Yn8YorlHn/8ypqtSb
+	 MQJ9SZyfZt4yXoME6mkVJqxwAx4VHTTI4pZxf26BV3je1ALsX6hJ9VXNQ3Zp7P5m2JsSG
+	 zFqc4e2Ou/4yQG2VYvSassjpCOtiLIzsrQSfObzoVcKt6PQlLMFoN5i7L4sU3w6+PIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793120447;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=MWogW9v4I9IYrvgTyhl6LKMKwTAkz80m1q6fFg2x4yc=;
-	b=TPnFYU9icEcx8EMfhMnMHPEwbkMigEKUU27exjz4V7d2nDL2IqzvjbYRca6+9WvTGdF1
-	 +ad2mNri+TTCtGGia2KUX3GNqCdmulpiNqMg0YZvlaTw18y0TTRT97zGOL6/8yBv1yE/s
-	 /nT4tCXP+4FsXOIdSX9F869R2fP/muLPVhQHzmo1KxHCjEYf4u9ROQwNpiLSSgPI3HuEI
-	 4zK/BZCESgpUCb8TM9FcHvRyiPlJIpVIDE1NpyfxqVPnKoJaHolFJJsHD4/Ohw7PXxDQS
-	 ip0SLI9SvnO+uym6+ZuOaLkuH6zCDfvWJFiAzUZN69GkrhcrNOz6N7ED7G6QT9xo3hQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793121579;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=lp3hOSIGPE1tppyJv1RE+JXMFvZyG7e+JE+3G2D1EhM=;
+	b=fu0Ta493eOcwG38cTcKG9oFVA0f6yzOgsnKuahvV8KbujUEq7l1wYDHXGT3V1ymRpMcR
+	 MnnKOyzalZQIMqg60wLTAURfGASLXD1zO0vALmFnD0V37kM+Ntc1deKvZQoNR20BokINm
+	 q3vAcAD8+DLiWfNRm9C7oFc0c2p175gjnz0eBmetkd2//684xoPE3pPo0FiAHzTRAUnDX
+	 AaCnR9e2kD9e8eovd8pldIHqtjwoFCTrRfQ/QDrrsSflR/pmQNWoBLTNDO6H9y6gTT2s+
+	 yeEnbyF6Ex9/jJwSfzE5s78+XchtOPrfIGKv09CdmhIVOIiQ+0jzlpiULo+hC9Zhg3w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f2Bt5010;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=YM8ItfqA;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B978606A31A;
-	Tue, 27 Oct 2026 17:00:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27BD6606A31A;
+	Tue, 27 Oct 2026 17:19:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 27BD6606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f2Bt5010
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 392071F01825;
-	Tue, 27 Oct 2026 17:00:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793120447;
-	bh=MWogW9v4I9IYrvgTyhl6LKMKwTAkz80m1q6fFg2x4yc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=f2Bt5010mode/v1AcQmeCHwLvfIEEb58IsTo5RDyviSkvUbpQOyn4kxx+WIau3jC3
-	 FlDRp6uO6LcGJIWb+uNgJ3VoAYew13QuiKEQnzwVPgXm7abXYgvgZCUohOWrHxn7Jn
-	 qIdxdsZN6qP/UnbT9VDtjzlsHiakVkLd4WZqc2fgabMLmAGc/iBQr9lkqUOD1SiZ9C
-	 bl4W6sX3zzh54Q5AM+WXpK0vs7QxVw1cgZxx1ygHX6Y4roF0HBjjMZLvRF2ZBY5O/j
-	 0ziVYaXLTobcTd+ShMtPC532EcR2DDQgrYlFtx6F9YZa6BPEccEOukxwXLise02bVd
-	 ll8LYZRsFP18w==
-Message-ID: <271ccc9b-ccf1-4254-9664-2f00b504a5a9@kernel.org>
-Date: Tue, 27 Oct 2026 19:00:41 +0200
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=YM8ItfqA
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 723EE5340910;
+	Tue, 27 Oct 2026 18:19:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1793121569;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=lp3hOSIGPE1tppyJv1RE+JXMFvZyG7e+JE+3G2D1EhM=;
+	b=YM8ItfqA4BF7rJZDIFswBTxxeSt2+Wmke/u8AQRSaWDIEkZBpQr6VW4vl4O7mke0AZpKtE
+	rVqebQG/95qvDD25TnBI5HD1MN2Bh+SCXNfMu0IwB6JNxRMFe256XCsZyNNtXz1nnPNWAE
+	AU+qWs7KjqVNem5fIqGtdh6urwU5IDA=
+Message-ID: <6251801f-3662-4ad4-8d55-710144462010@ixit.cz>
+Date: Tue, 27 Oct 2026 18:19:28 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,150 +61,175 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] media: qcom: camss: Allow CSI2 PHY devices without
- CSIPHY resources
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vladimir Zapolskiy <vz@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- linux-arm-msm@vger.kernel.org,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
- Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
-References: <20261026224957.1115370-1-vz@kernel.org>
- <20261026224957.1115370-4-vz@kernel.org>
- <CAFEp6-16WAoyS+aY2BzPknsMtHa1cSfVYNmYvTKHm_MWqqW_ag@mail.gmail.com>
-From: Vladimir Zapolskiy <vz@kernel.org>
-In-Reply-To: <CAFEp6-16WAoyS+aY2BzPknsMtHa1cSfVYNmYvTKHm_MWqqW_ag@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] power: supply: qcom_smbx: add SMB5 support
+To: robin@snyders.xyz, Casey Connolly <casey.connolly@linaro.org>,
+ Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Joel Selvaraj <foss@joelselvaraj.com>
+References: <20260820-submit-qcom-smbx-send-v1-v4-0-818dabb2771e@snyders.xyz>
+ <20260820-submit-qcom-smbx-send-v1-v4-2-818dabb2771e@snyders.xyz>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260820-submit-qcom-smbx-send-v1-v4-2-818dabb2771e@snyders.xyz>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 10/27/26 12:52, Loic Poulain wrote:
-> Hi Vlad,
+On 20/08/2026 12:03, Robin Snyders via B4 Relay wrote:
+> From: Casey Connolly <casey.connolly@linaro.org>
 > 
-> On Mon, Oct 26, 2026 at 11:50 PM Vladimir Zapolskiy <vz@kernel.org> wrote:
->>
->> If CAMSS CSIPHYs are supported by the stand-alone CSI2 PHY driver only,
->> there is no need to provide description of legacy CSIPHY resources in
->> the CAMSS driver, therefore if CSIPHY resources are not given for some
->> supported platform, use CAMSS CSIPHY port numbers as CSIPHY identifiers.
->>
->> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
->> ---
->>   drivers/media/platform/qcom/camss/camss-csiphy.c | 16 +++++++++++++---
->>   drivers/media/platform/qcom/camss/camss.c        |  8 ++++++--
->>   2 files changed, 19 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers/media/platform/qcom/camss/camss-csiphy.c
->> index f99eea2ef228..8ecd514451d2 100644
->> --- a/drivers/media/platform/qcom/camss/camss-csiphy.c
->> +++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
->> @@ -799,6 +799,11 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
->>          return ret;
->>   }
->>
->> +/* Fallback to generic SDM845 compatible formats for non-legacy CSIPHYs */
->> +static const struct csiphy_subdev_resources csiphy_res_phy = {
->> +       .formats = &csiphy_formats_sdm845,
->> +};
->> +
->>   /*
->>    * msm_csiphy_subdev_init - Initialize CSIPHY device structure and resources
->>    * @camss: CAMSS structure
->> @@ -808,7 +813,7 @@ int msm_csiphy_subdev_init_legacy(struct camss *camss,
->>    */
->>   int msm_csiphy_subdev_init(struct camss *camss, u8 port)
->>   {
->> -       const struct camss_subdev_resources *res = &camss->res->csiphy_res[port];
->> +       const struct camss_subdev_resources *res = camss->res->csiphy_res;
->>          struct csiphy_device *csiphy = &camss->csiphy[port];
->>          struct device *dev = camss->dev;
->>          struct device_node *ep, *remote;
->> @@ -836,8 +841,13 @@ int msm_csiphy_subdev_init(struct camss *camss, u8 port)
->>          }
->>
->>          csiphy->camss = camss;
->> -       csiphy->id = res->csiphy.id;
->> -       csiphy->res = &res->csiphy;
->> +       if (res) {
->> +               csiphy->id = res[port].csiphy.id;
->> +               csiphy->res = &res[port].csiphy;
+> Introduce support for the SMB5 charger found on PM7250B, PM8150B and
+> related Qualcomm PMICs.
 > 
-> So, can't we simply drop the above assignment and keep only the
-> port/csiphy_res_phy below? That would provide the same behavior for
-> all non-legacy PHY initializations, regardless of whether legacy
-> CSIPHY resources are described or not.
+> SMB5 uses different DCDC status offsets, charger-state encodings and
+> electrical ranges. Select these from per-PMIC match data, with PM7250B
+> using the PM8150B compatible fallback and parameter block. Read
+> overvoltage from the SMB5 status bit, use the already-prescaled IIO
+> voltage reading, and convert the SMB5 current-sense voltage to microamps.
+> Use battery-info property presence when selecting voltage and current
+> targets.
 > 
+> Keep Type-C power-role and VBUS control with the dedicated TCPM and
+> regulator drivers. Clear the unsupported HVDCP negotiation modes so stale
+> firmware settings cannot raise VBUS. Leave the firmware recharge policy
+> unchanged and match the downstream default of ADC-based AICL disabled,
+> while enabling periodic hardware AICL with its twelve-second SMB5 rerun
+> interval. Preserve the existing three-second SMB2 interval.
+> 
+> PM8150B places the charger and VBUS regulator in the same DCDC peripheral,
+> but the SMB5 path does not write the regulator registers. qcom_smbx reads
+> 0x1108 and 0x110b, while qcom_usb_vbus-regulator writes 0x1140, 0x1152
+> and 0x1153. The SMB2-only OTG configuration write to 0x1153 is not part
+> of the SMB5 initialization sequence. The TCPM port and PD PHY use the
+> separate 0x15xx and 0x17xx peripherals. Name the USBIN BC1.2 integration
+> register and SMB2-only OTG definitions accordingly to make this ownership
+> boundary explicit.
+> 
+> Program the battery limits and complete SMB5 input and charging setup
+> from the power-supply registration init callback before device_add
+> publishes the properties. This makes all public callbacks safe without
+> driver-specific probe synchronization.
+> 
+> Suspend USB input and charging before SMB5 initialization. On a later
+> failure, restore the original charging-enable state before the
+> input-suspend state; leave the input suspended if charging cannot be
+> restored. Cancel status work before unregistering the power supply during
+> managed teardown. Update the Kconfig description to cover both charger
+> generations.
+> 
+> On a OnePlus 7T Pro, register reads from the initial implementation
+> confirmed the programmed 4.40 V, 1.50 A and 500 mA limits. A 180-second
+> guarded charging trace and a subsequent 600-second runtime trace
+> completed without crossing the voltage guard.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> Co-developed-by: Joel Selvaraj <foss@joelselvaraj.com>
+> Signed-off-by: Joel Selvaraj <foss@joelselvaraj.com>
+> Co-developed-by: Robin Snyders <robin@snyders.xyz>
+> Signed-off-by: Robin Snyders <robin@snyders.xyz>
+> ---
+>   drivers/power/supply/Kconfig     |   8 +-
+>   drivers/power/supply/qcom_smbx.c | 757 ++++++++++++++++++++++++++++++---------
+>   2 files changed, 598 insertions(+), 167 deletions(-)
+> 
+> diff --git a/drivers/power/supply/Kconfig b/drivers/power/supply/Kconfig
+> index b89ef40df7f8..1159a7711919 100644
+> --- a/drivers/power/supply/Kconfig
+> +++ b/drivers/power/supply/Kconfig
+> @@ -1173,13 +1173,13 @@ config BATTERY_CHARGER_SURFACE_RT
+>   	  will be called surface-rt-ec.
+>   
+>   config CHARGER_QCOM_SMB2
+> -	tristate "Qualcomm PMI8998 PMIC charger driver"
+> +	tristate "Qualcomm SMB2 and SMB5 charger driver"
+>   	depends on MFD_SPMI_PMIC
+>   	depends on IIO
+>   	help
+> -	  Say Y here to enable the Qualcomm PMIC Charger driver. This
+> -	  adds support for the SMB2 switch mode battery charger found
+> -	  in PMI8998 and related PMICs.
+> +	  Say Y here to enable the Qualcomm PMIC charger driver. This adds
+> +	  support for the SMB2 and SMB5 switch-mode battery chargers found
+> +	  in PMI8998, PM660, PM7250B and PM8150B PMICs.
+>   
+>   config FUEL_GAUGE_MM8013
+>   	tristate "Mitsumi MM8013 fuel gauge driver"
+> diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom_smbx.c
+> index 71f5a4859412..bc2b1cd3ed68 100644
+> --- a/drivers/power/supply/qcom_smbx.c
+> +++ b/drivers/power/supply/qcom_smbx.c
+> @@ -23,6 +23,13 @@
+>   #include <linux/types.h>
+>   #include <linux/workqueue.h>
+>   
+> +enum smb_generation {
+> +	SMB2,
+> +	SMB5,
+> +};
+> +
+> +#define SMB_REG_OFFSET(smb) ((smb)->gen == SMB2 ? 0x600 : 0x100)
+> +
 
-Please note that 'csiphy_res_phy' was introduced a few lines above
-by this change, it's only purpose is to provide the needed supported
-media formats, and this is unavoidable.
+More and more as I look at it, this shouldn't be here, but within the 
+device-tree as
+charger@1000 {
+     reg = <0x1000>, <0x1600>;  # SMB2, or
+     reg = <0x1000>, <0x1100>;  # SMB5
+};
 
-This change follows the assumption that pixel formats from all
-non-legacy PHYs are SDM845 compatible, that's true for this platform,
-it is expected to be true for the most of approaching non-legacy
-platforms, and on demand it may be changed later on.
+But see also:
+https://lore.kernel.org/all/eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3/
 
-The current form likely is the most compact and the least invasive
-change, which gets to the point of supporting CAMSS on platforms
-with no CSIPHY resources given in the CAMSS driver.
+I'll try to do some basic separation so we know what bits belongs into which 
+blog, keep you in CC.
 
-For instance, note, the recently proposed Glymur CAMSS [1] references
-X1E CSIPHY resources, which is actually incorrect, since there is
-no "csiphyX" I/O resources anymore for Glymur. This change can be
-reused for Glymur as well, and its reference to X1E CSIPHYs can be
-dropped, but any better proposal or improvement are welcome.
+David
 
->> +       } else {
->> +               csiphy->id = port;
->> +               csiphy->res = &csiphy_res_phy;
->> +       }
->>
->>          snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csi%d", csiphy->id);
->>
->> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
->> index c54185c93a8a..b0d60e70e4bb 100644
->> --- a/drivers/media/platform/qcom/camss/camss.c
->> +++ b/drivers/media/platform/qcom/camss/camss.c
->> @@ -4796,7 +4796,10 @@ static void camss_detect_legacy_phy(struct camss *camss)
->>          struct device_node *remote;
->>          struct device_node *ep;
->>
->> -       camss->legacy_phy = true;
->> +       /* Legacy CSIPHY description implies the provided CSIPHY resources */
->> +       camss->legacy_phy = !!camss->res->csiphy_res;
->> +       if (!camss->legacy_phy)
->> +               goto done;
->>
->>          /* Find first remote-endpoint and determine if its a PHY */
->>          for_each_endpoint_of_node(camss->dev->of_node, ep) {
->> @@ -4810,6 +4813,7 @@ static void camss_detect_legacy_phy(struct camss *camss)
->>                  break;
->>          }
->>
->> +done:
->>          dev_dbg(camss->dev, "legacy phy mode %s\n",
->>                  camss->legacy_phy ? "true" : "false");
->>   }
->> @@ -4841,7 +4845,7 @@ static int camss_init_subdevices(struct camss *camss)
->>
->>                  if (ret < 0) {
->>                          dev_err(camss->dev, "csiphy %d init fail\n",
->> -                               res->csiphy_res[i].csiphy.id);
->> +                               res->csiphy_res ? res->csiphy_res[i].csiphy.id : i);
->>                          return ret;
->>                  }
->>          }
->> --
->> 2.51.0
->>
 
-[1] https://lore.kernel.org/linux-arm-msm/20261015-glymur_camss_dts-v2-0-e7b1f403146f@oss.qualcomm.com/
-
--- 
-Best wishes,
-Vladimir
+[...]
