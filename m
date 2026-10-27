@@ -1,47 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793141076;
-	b=P3L1nysYxtZzD+LKMaAjP1vStMkTCaJZIBSJmbtBCJPSK2iYlFyPbzHK89EFKoHdUTwW
-	 RKNlvPj731myMKElAHYvcO2IHDO1H+ML+iXmVSu17bf8tjVQWsQAOkHy3aIpDBYkFkRre
-	 dvi6YMczNp+EwnXuJNnB0kDpMZl9dvcwPe3mjP5tsliFJK78dGbY6Zs0iv92GlpMSHbtp
-	 em4ZsRlZFogbb/ocatQShhyr9et/JikqSf0CxWhmzGJ9WVsX33uNynOKaB1KIRlWHFJLX
-	 iTMNFWELiP0QdtUF+cXMBUel7ErD+sSmbzyG8YY5x8oB8I0WAXuCWxRGmImjXaF1iiA==
+	t=1793141290;
+	b=5cAEfGFQlA5ySBPsaRFfJ1UVhKWyKIFPhaBxSNIbu0C+a67zoZHmKv51X8Bob3MF+BGV
+	 Lqqb5Ox73w7TB3XnL5+Qk8s9FvFoxp5vjgysKGfYbjEt12l7UkimHL+JkLJMPxVcMERN1
+	 pHlWV3ChC2bbRZQub6+oaGbQKn650+rp+ZFylQF+DE1Sj/Evwdo4BxhFLU9OMLx4/ed9F
+	 E4M4Mj/fYr/RjtH2WG3tb2KcNz8FK9KRp8wUkoyvx19p86yHLOv8ybM/XzL85U33GVtPn
+	 koPfi9rCD1/ixCSnG352+jNt2EQlGvvkrYh79h2uGlEorXojLrWQ5oq5pQ6kimKfy5g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793141076;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=rJO7rSe9eLqzFXmbbsuCfMtpPVfF/GMPvzghtsTBDCU=;
-	b=cZKrtRvKzlkCp3fsRKFZODTkesqEtL4vLk5QE79kdBI+TJOSEprRU1aupINaD42jf5R4
-	 7iLZo7XcaS/pSXEPQhlMKP6qG0dkRF2obpsyogz7gToIPupNSxXHJXe8Bmk4wf+I+PZpu
-	 AocncbiRDgdNxP3voOhUVgGrVxG02XkDa9KaiXalnbpBw/fnMQey9+eRQeZYJ45CeuA2E
-	 yhseCeEtMu2xF+bUw7KOn0YgsXWMUq91lU9gbs4EKe8l1xyRtGyZQXWmRqyny0Eng2MkM
-	 Dm1CceBOLrgjZGIWLVTJZJmxS+UmmpNcYqLgVwKoQ+XHJed76LJwl2GrgzCLcDGZysg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793141290;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=PpKy7i455kq8X8Z/yAP0URWjwihBWOIlXzAYuU2cxns=;
+	b=peDL/pgOjmuGsyAwN5hpikJ07U63gs5pJ7U27peQfINqono4ZHYeGPNSKG7rcDoUrrLW
+	 SF+EhOK8Of0DP2QnBcgrCE09mESxZ8BzXC94lC2/9rc37/PT6hKI1W19bKQZD8g9mAONK
+	 ALo5CQedtN9DJ7S1yTg8jL9Gg16bA7PaHvJ6XgYzaZJBRThI+WjbcvIqV6KqXl3dsUxUx
+	 ZKGe77ldMMn07fxHsin+PWyUYsDSU2UXgX9F+EJhV4JVwM31R5OoVq04mzy6/cmrwIcIe
+	 +WaeqG9c6ECQim3LmszvRuv9pCK9UFCSUKl4JUY0vv5i2UkS+nQhd7wK6irvZTpcuqA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GojsxI3h;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=htplDUYZ;
+	arc=none smtp.remote-ip=109.224.244.18
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch [109.224.244.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C64A5606A31A;
-	Tue, 27 Oct 2026 22:44:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 201CA606A31E;
+	Tue, 27 Oct 2026 22:48:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 201CA606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GojsxI3h
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 464471F01825;
-	Tue, 27 Oct 2026 22:44:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793141075;
-	bh=rJO7rSe9eLqzFXmbbsuCfMtpPVfF/GMPvzghtsTBDCU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=GojsxI3hCpZtttAdK3MIvfpu80WQCB5lsatKlIvifYvu1L/4m1RrMcqO125KORlDT
-	 0BRYsyhwSvsVo9uShqCas1lvIQd+feOiHSQtkbWQ0bLX6BR2pmsnVde4sGEV0BkOpR
-	 cel2GOR9fCv2ff96bU65tEw4Htg3PNx5RltP0Rg3e1tZ4vzWau+goQ94E+7E7AzJPA
-	 lVgWEL/YINmpSRKxd66CdsGpvMwSpDJniSQBUv8A3XiJbxTAZ6hrBUP4XeXXnbxGUH
-	 nKUzOtbxCw2fKg0rupggaoMBk8tt8a0lxiSTyNQ3E6JBliiE/yR6Lh1YnDt/679XCz
-	 jJfKD50lOe2hw==
-Message-ID: <7ee16d85-9cc2-48a0-ab38-3eb131c6282f@kernel.org>
-Date: Tue, 27 Oct 2026 23:44:32 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=htplDUYZ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1793141285; x=1793400485;
+	bh=PpKy7i455kq8X8Z/yAP0URWjwihBWOIlXzAYuU2cxns=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=htplDUYZLXP+d/4jSZHlOaWJpD1RWTNmAAdO6hrUO2GDeFKhmvABLVblM7gdTHt2F
+	 9Amfdm0bnZJMnyUFjHoT7fv3c0RqubEjNXviqBG1cFmDVF7FNJkZJBQ/SwRFl3Edag
+	 h73jwzqSqDckXOz/ogg8jial0CZYTFqQLWb6J6fNMP31xMu/vpEOtQFenRmw+hsQgN
+	 3QeuSq/Jk9N89qCxv7bv5SGSZth0qspO6bjs06tVbyeQOZAiCHHD1xr0GuAEYv/rvP
+	 lWah+mBiky6fZqG2kz9XnQ1vXN9vxXcI9Q2EOCWz4rfH/i0K78oluOOknmwVxgDZZA
+	 FT05CPUcPLH4Q==
+Date: Tue, 27 Oct 2026 22:48:02 +0000
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: Praveen Talari <praveen.talari@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2] serial: qcom-geni: Set the serial engine up again after hibernation
+Message-ID: <20261027224800.86418-1-birk.skyum@pm.me>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: b7fb55564b6cb7b44c2b5d7bc9115818957fc008
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,105 +61,106 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 3/5] media: iris: Signal V4L2_EVENT_EOS only at the
- end of a drain
-To: Christian Cortner <ccortner@gmail.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>, Birk Skyum <birk.skyum@pm.me>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
- <20261027021934.22113-1-ccortner@gmail.com>
- <3m0nX8uY072pf3fCrsvbTIMw_7hAaOyUSSCQSUBMwviYGnMBOVkNnJR5fTde258Lm8YY6PrvlqvlmTrFk1AbHw==@protonmail.internalid>
- <20261027021934.22113-4-ccortner@gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20261027021934.22113-4-ccortner@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 27/10/2026 03:19, Christian Cortner wrote:
-> iris_vb2_buffer_done() and iris_vb2_buf_queue() queue V4L2_EVENT_EOS and
-> mark the m2m context as stopped for every capture buffer flagged
-> V4L2_BUF_FLAG_LAST, including the one that ends a dynamic resolution
-> change. In the stateful decoder interface the (deprecated) EOS event is
-> part of the drain sequence only, and a resolution change is not the end
-> of the stream: a client that still acts on the event, like ffmpeg's
-> h264_v4l2m2m decoder, stops decoding at the first resolution change in
-> the stream. And since nothing in the driver clears the stopped mark
-> again, the EOS event of the drain at the real end of such a stream is
-> never sent.
+A hibernation image is restored after a power cycle, which resets every
+serial engine. The kernel that loads the image only sets up the engines
+it uses itself, and on laptops the Bluetooth UART is opened from the
+root file system, so that kernel never touches it.
 
-More word salad. I'd almost drop that entire paragraph - hitting you 
-with these stuttering paragraphs is !elucidating - kind of the opposite.
+The restored kernel still has port->setup set from before, so the
+startup in uart_resume_port() skips qcom_geni_serial_port_setup() and
+the port runs on an engine whose FIFOs, packing and transfer mode were
+never configured. On a Lenovo Yoga Slim 7x (X1E80100) the WCN7850's
+Bluetooth controller then never comes back: every setup attempt of
+hci_qca's error recovery ends in "command 0xfc00 tx timeout" and
+"Reading QCA version information failed (-110)".
 
-> Queue the event, and mark the context as stopped, only when the LAST
-> buffer ends a drain, that is when IRIS_INST_SUB_DRAIN_LAST is set. Both
-> HFI generations set it before they return the LAST buffer of a drain,
-> for the decoder and the encoder alike.
+Clear port->setup in a restore callback of its own, so the next startup
+sets the engine up again. Leave console ports alone: the kernel that
+loads the image sets up its console when it registers it, and setting
+the engine up again in qcom_geni_serial_startup() would run without the
+port lock while the console may be writing. The other system sleep
+callbacks are unchanged.
 
-This is much clearer.
-> Fixes: 84e17adae3e3 ("media: iris: add support for dynamic resolution change")
-> Cc: stable@vger.kernel.org
-> Assisted-by: LLM sparse smatch
-> ---
-> Reference only, not for merging (no Signed-off-by); see the cover
-> letter.
-> 
->   drivers/media/platform/qcom/iris/iris_buffer.c | 7 ++++++-
->   drivers/media/platform/qcom/iris/iris_vb2.c    | 4 +++-
->   2 files changed, 9 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
-> index eb8de60c1177..ff2a1b331ac2 100644
-> --- a/drivers/media/platform/qcom/iris/iris_buffer.c
-> +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
-> @@ -913,7 +913,12 @@ int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf)
->   	}
-> 
->   	if (vbuf->flags & V4L2_BUF_FLAG_LAST) {
-> -		if (!v4l2_m2m_has_stopped(m2m_ctx)) {
-> +		/*
-> +		 * Only a drain ends with V4L2_EVENT_EOS: the LAST buffer of a
-> +		 * source change is not the end of the stream.
-> +		 */
-> +		if (inst->sub_state & IRIS_INST_SUB_DRAIN_LAST &&
-> +		    !v4l2_m2m_has_stopped(m2m_ctx)) {
->   			const struct v4l2_event ev = { .type = V4L2_EVENT_EOS };
-> 
->   			v4l2_event_queue_fh(&inst->fh, &ev);
-> diff --git a/drivers/media/platform/qcom/iris/iris_vb2.c b/drivers/media/platform/qcom/iris/iris_vb2.c
-> index 8faf709c26c1..b820b3e43910 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vb2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vb2.c
-> @@ -324,7 +324,9 @@ void iris_vb2_buf_queue(struct vb2_buffer *vb2)
->   			vbuf->field = V4L2_FIELD_NONE;
->   			vb2_set_plane_payload(vb2, 0, 0);
->   			v4l2_m2m_buf_done(vbuf, VB2_BUF_STATE_DONE);
-> -			if (!v4l2_m2m_has_stopped(m2m_ctx)) {
-> +			/* EOS ends a drain only, see iris_vb2_buffer_done() */
-> +			if (inst->sub_state & IRIS_INST_SUB_DRAIN_LAST &&
-> +			    !v4l2_m2m_has_stopped(m2m_ctx)) {
+Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+---
+Changes in v2:
+- Leave console ports alone. Clearing port->setup on one made the next
+  startup run qcom_geni_serial_port_setup() without the port lock,
+  which can race with console output (Sashiko).
+- v1: https://lore.kernel.org/all/20261027203136.95971-1-birk.skyum@pm.me/
 
-Adding the flag over and over again is pretty mindless.
+The change from v1 only affects console ports, which this laptop does
+not have, so the v1 test still applies. It ran on 7.3 with the other
+hibernation fixes for this laptop that are in review (pinctrl, PCI,
+smp2p and hci_qca, linked in v1), on one build with a switch for this
+change, each a real hibernation with a power-off from a fresh boot:
 
-Add a function or wrapper to capture this logic - we had functional 
-decomposition in the previous patch - but distinctly lacking here.
+  without   restored after 112 s, Bluetooth never comes back
+  with      restored after 89 s, hci_qca's recovery sets the controller
+            up about 18 s after the restore and a scan finds devices
 
-=>
+A console that the kernel loading the image did not set up stays as
+broken as it is without this patch. Setting one up under the port lock
+before uart_resume_port() would be a separate change, and this laptop
+has no serial console to test it on.
 
-$ grep -r v4l2_m2m_has_stopped drivers/media/platform/qcom/iris/*
-drivers/media/platform/qcom/iris/iris_buffer.c:		if 
-(!v4l2_m2m_has_stopped(m2m_ctx)) {
-drivers/media/platform/qcom/iris/iris_vb2.c:			if 
-(!v4l2_m2m_has_stopped(m2m_ctx)) {
+Built with W=3D1 and sparse on tty-next with hibernation on, with
+hibernation off, and without system sleep.
 
+ drivers/tty/serial/qcom_geni_serial.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
->   				v4l2_event_queue_fh(&inst->fh, &eos);
->   				v4l2_m2m_mark_stopped(m2m_ctx);
->   			}
-> --
-> 2.56.0
-> 
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qco=
+m_geni_serial.c
+index bfdc155c1..5a3bf51a3 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -2131,6 +2131,22 @@ static int qcom_geni_serial_resume(struct device *de=
+v)
+ =09return ret;
+ }
+=20
++/*
++ * A hibernation image is restored after a power cycle, which reset the se=
+rial
++ * engine. The kernel that loaded the image only set up the engines it use=
+d
++ * itself, so set this one up again when the port starts. A console is lef=
+t as
++ * it is, since setting it up at startup would race with console output.
++ */
++static int qcom_geni_serial_restore(struct device *dev)
++{
++=09struct qcom_geni_serial_port *port =3D dev_get_drvdata(dev);
++
++=09if (!uart_console(&port->uport))
++=09=09port->setup =3D false;
++
++=09return qcom_geni_serial_resume(dev);
++}
++
+ #if IS_ENABLED(CONFIG_SERIAL_QCOM_GENI_CONSOLE)
+ static const struct qcom_geni_device_data qcom_geni_console_data =3D {
+ =09.console =3D true,
+@@ -2168,7 +2184,12 @@ static const struct qcom_geni_device_data sa8255p_qc=
+om_geni_uart_data =3D {
+ static const struct dev_pm_ops qcom_geni_serial_pm_ops =3D {
+ =09SET_RUNTIME_PM_OPS(qcom_geni_serial_runtime_suspend,
+ =09=09=09   qcom_geni_serial_runtime_resume, NULL)
+-=09SYSTEM_SLEEP_PM_OPS(qcom_geni_serial_suspend, qcom_geni_serial_resume)
++=09.suspend =3D pm_sleep_ptr(qcom_geni_serial_suspend),
++=09.resume =3D pm_sleep_ptr(qcom_geni_serial_resume),
++=09.freeze =3D pm_sleep_ptr(qcom_geni_serial_suspend),
++=09.thaw =3D pm_sleep_ptr(qcom_geni_serial_resume),
++=09.poweroff =3D pm_sleep_ptr(qcom_geni_serial_suspend),
++=09.restore =3D pm_sleep_ptr(qcom_geni_serial_restore),
+ };
+=20
+ static void qcom_geni_serial_sys_shutdown(struct platform_device *pdev)
+--=20
+2.56.0
+
 
