@@ -1,84 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793105406;
-	b=x4qQk83EQhO59Uxx1rkD/yTpVohhZfpImSbg/4yVavCQBJ7Qn2SFn9rxCoTxRsYatOkv
-	 q7tTC800DW9EtDbpvIJUu/z7YnDKAlsg66et8xfWvC2xJccQ+ApFYmo9ZG0oWjXGU6rcW
-	 6yZcNK3O2Nh7MHeeSnAj7FkXdJa4rDUXtQvXZMXRF5PCWIeA/bIIl8GLMy0XIAAq9mIvj
-	 Ycqcq8f0qnP1p3RUkCN22ir4A8UqehBmrUgsFEry93EzLLQYlB0Fksph5iVi0xhjG2ht+
-	 T8z4fYob9U9H0+0Np9IarrrhO02TqbO+gqCgHRntG5tp+ryrCU77kb0j2XcAZfLsUsQ==
+	t=1793105407;
+	b=2dOmMirnXkj0CwM/mS9QGjzjf2kZyHC2xjT3SoXtZYKlMqt8q+o2b8a2jjf+BTdEHtFU
+	 rzmMnULPf3yiU8DE+IqAZWTmjJeGWtA5bFhE6oHXEmY50Av1hxCrb3Xv9DjOZ7mJP7zfb
+	 3wu6FO5FDPJKdaAuf61bMwuCu3KCNqeo8UBjvS1Jve85anKdn7ZHH3APOaX5354C947Ja
+	 4VZ3vGmFOvlCqXBuDCc66ojieYHqCnBf+yZ79pPlW9+wps/6QTKrj+QnJ+MINQbciqpnP
+	 EQInCnl8v97lL61mtUHuaNvb6rrZ84cLWvnfPCe4OjvbKrQJwVjf3iqDlMl6AAQ7kmA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793105406;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793105407;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=pkcAkMdCRwIuT9szM2gCVVjCSXFflqIHrQQCvrEeeZg=;
-	b=N+3Ptg9Oum2x0h5V81J4NdCQsspBlZ/2vMS8686uplBuOgmV3mG4v08s8DTMUVFczASd
-	 vh9Kgu31ZC9a9BZ93eRIaUciysy2iBTt+lOXDt3gquhBs8jnzyztUUj7FBmuJytA+wIbR
-	 PYhimueXFIYZaVqadG4yljArEPoR4Q1ilWEUlAxnnE38JV11qh7SOsyIqrQ7a+qjQq/mI
-	 7QFhPdXTQ88m599HMbwnkTGTpBV0Soxp4IUI6I0SBmwGq71Tgj/qv/aY6baovaINXhL/W
-	 yRHN5+l6ijxvRZg3DgMNCbx6Hv4VpiCmswkrWXuBi+uF0b45yEmuww9yHhn1hqHT2ew==
+	bh=EOmMLjMAFJxyM/LPyWQT2i9O3ojzkNgFK3nKjeDrayg=;
+	b=tP4vzkRCQBo0uQTrrALQnh3SvisWLvr0+VfVLACQQxIG3MzlB375xp/OyEpA6m034a1g
+	 CXCrzT8Ikv4wP95CT9tdiijx/QVcG+EYrQArxVbaFjJUiFf4aAWgsRA4EnqyfhY39tGJe
+	 aCnTpeksr/0L9WAqNc90QeCTj0M5rOV+UZkQ9HtFoRa2fMSsI/AlF9fgRal336t6eSo2n
+	 LG1UUCS3tCz208ZNfvnV/KUkF7ZojsWN9UiDmEOeAFmzp2CGb8cHw5g/8xwHqBByOSj4d
+	 8Ddk3iKqCO1FJPasecvkfrYEWqi4+ocj1tzxtEfKEF2dvnbSaXcbuRe95ctHSXgUuoA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HisGQ0qh;
-	arc=none smtp.remote-ip=209.85.167.41
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=fERYkGLO;
+	arc=none smtp.remote-ip=209.85.208.170
+Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5F93606A323
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:50:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C5F93606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15E98606A332
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:50:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 15E98606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HisGQ0qh
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5bfbc67991cso1577360e87.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 05:50:05 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=fERYkGLO
+Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-3ab3b29a210so9634201fa.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 05:50:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793105404; x=1793710204; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1793105405; x=1793710205; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pkcAkMdCRwIuT9szM2gCVVjCSXFflqIHrQQCvrEeeZg=;
-        b=HisGQ0qht2PJXTGw5WAvL5jvm2y81pQfxwwDQ4pzxV7qEjKiv/cqetdgchEhFLiQLm
-         ROP5GV/aiLKdwUS5yrc42cRdpfbWE6g6/AZoVTpM3DOxB1HL5tKE2Yt5IkGDO4waVpbk
-         awtdsgY7FcZ3vowE/ptcyBfXU2C336wcXkxZ7EMY2GPg1Bl/VWuYLNep3txus1W61/Ks
-         uCY26n0GZGaAgOEGI1fvCI8j1vekzG/24grSoR7ldsnRPwon7x2Xrfe2Dm+IuyclK8B1
-         i0l7aoi1lkIR4OxsL5LDbEJ9nIrCcBli6PE0+oWTTTNIXk3EFHKTG0yEoxJwFwqMR14s
-         puDw==
+        bh=EOmMLjMAFJxyM/LPyWQT2i9O3ojzkNgFK3nKjeDrayg=;
+        b=fERYkGLO7Lnu2DkX/7bn/afdYO23mp5qW9KVQlCZBoCzvajuqGp16A/e/h/SpUkTW6
+         iwweSy3pejWkTe4JIJ7d/rRMtdk0WZo7r3nnujnmoq+etqZ2TGcZwdMmgQ1CcXTlaG/1
+         BVwldr6P+tCD/NLU7BGX/JYjyMcnUolSSHFxg+VvGNjeSxDY1KhUazKHOYNePLjtq7nM
+         0ma5UjSP4QWMJHwVCIG0bPfx8F2qGyss425ANUkTirPGVDwCuz5Qs1K+VKxCP0sksFVS
+         4jnW0V+oDHX1yzOy/2/7To+LH7S4mkSnO/9rlTTPBM+5awfi3nRll+DARFWMg3L4D0gJ
+         B6Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793105404; x=1793710204;
+        d=1e100.net; s=20260707; t=1793105405; x=1793710205;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pkcAkMdCRwIuT9szM2gCVVjCSXFflqIHrQQCvrEeeZg=;
-        b=lyJ3Bq0oRcbeTzI1fBqHVE7PxqTXSPPoIYiDY1l9S9Lw8BfBBTnRWYE3OtlGzJhO0v
-         PLZh2UVyHmQf+ekquCOHots18vKqE9UA2QQ0YqXYRVu29mFXaYLUQNq2dLmpYGWYdInU
-         K/Xmy6CiDr7DjMgz8oo0Ogk9USr2kSCNIqRJ9ajRMgQkaUiTB2SM0v3IuvTlhWkYHqiV
-         YIR927IYJRYPA38rF3C5hbeZuGfsk0eWtQ0ar1t+L741eecxz0xaXzXl8I4Qahau5+jw
-         2UmxEdO0DSliI4ahHLYA/7lHDl6wbDrcJ1AiQuPIQjfC3PPrPhb2iS7pX8JhvDxfRQkQ
-         BGwg==
-X-Forwarded-Encrypted: i=1; AKwUvBySXEk/HinACJlpPIzYBrMuJDGQbrV8APwG4k8qYBwWhkYgFeNFYlkD7hbnI20mH3CRyo1w3KwIt6lj7qAi@vger.kernel.org
-X-Gm-Message-State: AFq9FYIkQhm+upDbp34vRZVwZIuLNnwqxYPOS4c1j1C6SUGysS6MjQUc
-	WymqyW0JPM2/QNWDkH9M2v3CMGhDC0qhwSnJ0zm4ECVs03WWVP8DewfC
-X-Gm-Gg: AYBFou0HrftoTjS27eybSogx1Qn2ZbXEAuXnkfS77qA/lmOtgBBlczm00q/X4cz44XZ
-	6RARrqlE6Dh8kr35julquT6askl2HY1+4+JL3l195BkCty3zNB03GA8uFPrBvyU/eTduSkf+mIj
-	sxKKOrVeL3D0YceP0DLj3rzEHa0tBp2RIBkvkqfbq4PEK6BMunyPR8Duget9Mlx1Zzposib78jV
-	9cQ+7VoFuODGh/4lSGiFGsyyjznh8R6F8YM/f8NIHQVfhi9gF4hQqtuhTyO0BX/AIjSozSsqy4/
-	DFcRJaXsi1ZlEGA+PZfCwcwzvplqAz2iT4+WRbfILHxdLbZa5EbRKeFi+1D/85P62D0pzEdPGF4
-	AJR9hJWSWQIDj7/WLNEZDNYJ8l+3FOoSO8Xzxl9Gm6w6UCabjtTYrHUveO/R6+SDusqAx+pKAKV
-	ZtT7BVl8gcH4Mxaa7kiCsJMQVnrnpP5n5NKeSSQlzg4YqN14ajF2zYtyYi+cFwl03wUHzlAbHdr
-	/voiIUxwc8X1eMyTgWBkvVVRnN0pWbUFhU6sklnAuQTDtgealcOCi0gdCibyCo3YShFzEnlwX/D
-	El2/HJlCu3refx4gxfF0RCba6qMj5HqR74sTemdfWHRxuVo5YX5X15xj5XcaOyjbxLRGml/R0S/
-	Ei3T6WdZGCQ==
-X-Received: by 2002:a05:6512:1047:b0:5bc:d9de:d75c with SMTP id 2adb3069b0e04-5bfb71e3343mr3417911e87.47.1793105403789;
-        Tue, 27 Oct 2026 05:50:03 -0700 (PDT)
+        bh=EOmMLjMAFJxyM/LPyWQT2i9O3ojzkNgFK3nKjeDrayg=;
+        b=Tg6g0gQISDt06PM0zD3JtQoAhYkfGiVpJQRE8kM45qoquE8dFzIR3P7eyffPfXM7YG
+         HLGZE/27ebiEccE3cEtSr97QUxGFzwwNAIJUcd8hLivrNvlmgIKnQ5k2iNiw+FmSwKXn
+         Sj4onRl/nF9G+F6g4pzRmKODWWSeER4JSpt1eEtJ6zaYbvK7V+m/2aSD+G8X9x/1SXP9
+         rWr+7o63RR3AuAfioWlmeZjaOHXicMUWchtk48RlC4BbUhFV93/ijm+B9OnaxFUcE2QV
+         IHVe6HRWTqudUPjGp4BDDy2QG2WYdcLnvapOqk2FKS7PMR153lO0FY5mgI+Ovlx8wzRv
+         9gwA==
+X-Forwarded-Encrypted: i=1; AKwUvBw7qrmNE2wdElqQnE4Ki1NcvxDmoIx7rFu0xGZwcy7p+laNFcdCxGNgvKOjT4VHzhxvMLQtteaPZHbOEbjt@vger.kernel.org
+X-Gm-Message-State: AFq9FYLQWAHMQWk6I82S0D6AN1uoWyRlHASS+v82vF9D+3yxJngm4Lv1
+	WcnbQrIPycE1kknpAPM1lu23pwiY/H2K2+nxA/9bDAR+heDURZEkF6jg
+X-Gm-Gg: AYBFou0fZ7J4uYHWc7ROAXZBvwKDWX4oVX/x94usz3qOVsCASxrrOXvwmIq/lYWgkj+
+	NTfFUIqPi5byqmtiLRDzCpVuSAApbGU8vqX8vem1BqLl7mdXRydzDu8vv/e/L5l2GxT9jyv0KER
+	2qzEiMmi07xCQBzM4oCpxUeZnH3cZGqouOaF2e220VgtRImXtRtrua3fl3RtLDobdvp6SCmS6Yw
+	Z8e5FHpT5T9Ia6v2BDAg25brJHgcAeUESyG11UfUgLv9bSeu//1vCg5uKcL24MmVVZsRCbzmrCT
+	Og5V/90Rh4EuP2BddKy4++Dr3c4skuZegAGdp+prSLTydNqVMWY4G0lRCnMwxWTDu33RfOG1nOy
+	jXV//+wLxemin/MsJG6txw3U3qkr6XrA/vbcYgHbpYHcPAknXBAhg01ngjetoOowC+V0+2VwTeu
+	Vv7jgcuMfOm9TPGDp0DPbGm4a+D6vtqSX+NUp/mpEKUExLKbiECqOL0/QJA0vSvobHiPwEZ4OP1
+	dwbCpeUMmeDofFAMYHdw+yAtHss9NtEpekLfR8ZCeQ2CcJCvryTvgkeRk8OhA7KwHMQZv86cUun
+	aEABYOAYeeZ66ktq3DCcCMlkCupWXDR9h+dfCg4416pjyIeZXsFWFCIh1UPgZ9zc
+X-Received: by 2002:a2e:a883:0:b0:3a9:7c85:a16d with SMTP id 38308e7fff4ca-3ac908e3716mr5518161fa.5.1793105404928;
+        Tue, 27 Oct 2026 05:50:04 -0700 (PDT)
 Received: from yantra.. (nekmmqtcmoboczbkdcs-1.v6.elisa-laajakaista.fi. [2001:99a:d7d:c300:55c8:a52b:6ba2:979c])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7e7cb24sm2052803e87.25.2026.10.27.05.50.02
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7e7cb24sm2052803e87.25.2026.10.27.05.50.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 05:50:03 -0700 (PDT)
+        Tue, 27 Oct 2026 05:50:04 -0700 (PDT)
 From: Rupesh Majhi <zoone.rupert@gmail.com>
 To: Alex Lanzano <lanzano.alex@gmail.com>,
 	Andy Shevchenko <andy@kernel.org>,
@@ -105,12 +104,11 @@ Cc: chrome-platform@lists.linux.dev,
 	linux-iio@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Rupesh Majhi <zoone.rupert@gmail.com>,
-	Bart Van Assche <bvanassche@acm.org>,
 	Marco Elver <elver@google.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Subject: [PATCH v4 1/9] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on mutex helpers
-Date: Tue, 27 Oct 2026 14:49:46 +0200
-Message-ID: <20261027124954.110697-2-zoone.rupert@gmail.com>
+	Bart Van Assche <bvanassche@acm.org>
+Subject: [PATCH v4 2/9] iio: core: annotate the conditional mode claims
+Date: Tue, 27 Oct 2026 14:49:47 +0200
+Message-ID: <20261027124954.110697-3-zoone.rupert@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261027124954.110697-1-zoone.rupert@gmail.com>
 References: <20261027124954.110697-1-zoone.rupert@gmail.com>
@@ -125,56 +123,57 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since commit 5b63d0ae94cc ("compiler-context-analysis: Remove Sparse
-support"), __acquires() and __releases() only feed context analysis.
-Their argument is parsed before the function body, where only dev is in
-scope, so with analysis enabled for this file the build fails:
+iio_device_claim_direct() and iio_device_try_claim_buffer_mode() hold
+the mode lock only when they return true, but carry no annotation. With
+context analysis on, each caller that releases the claim is reported
+for releasing a lock it never took.
 
-  error: use of undeclared identifier 'adc'
+Mark both __cond_acquires(true, indio_dev), the token that
+__iio_dev_mode_lock() acquires. Sparse no longer reads these
+annotations, so drop the comment about it.
 
-Name the lock through dev, the same way the bodies find it. The analysis
-then also checks that the helpers really take and drop it.
-
-Suggested-by: Bart Van Assche <bvanassche@acm.org>
 Signed-off-by: Rupesh Majhi <zoone.rupert@gmail.com>
 ---
 Cc: Marco Elver <elver@google.com>
 Cc: Bart Van Assche <bvanassche@acm.org>
-Cc: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 
-v4: name the lock through dev instead of __context_unsafe() (Bart),
-    now the first patch of the series that enables the analysis (Jonathan)
-v3: drop Fixes tag (Jonathan), trailer cleanup (Andy)
-    https://lore.kernel.org/linux-iio/20261025191510.22261-1-zoone.rupert@gmail.com/
-v2: __context_unsafe() explained in commit message (Andy)
-    https://lore.kernel.org/linux-iio/20261021052435.112686-1-zoone.rupert@gmail.com/
-v1: https://lore.kernel.org/linux-iio/20261003214516.128573-1-zoone.rupert@gmail.com/
+ include/linux/iio/iio.h | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
- drivers/iio/adc/qcom-spmi-adc5-gen3.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-index c68c6c5f6aca..09013c6e44a0 100644
---- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-+++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-@@ -663,7 +663,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
- }
+diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
+index 9b63785d5aec..ca91f5a64626 100644
+--- a/include/linux/iio/iio.h
++++ b/include/linux/iio/iio.h
+@@ -707,13 +707,6 @@ int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp);
+ void __iio_dev_mode_lock(struct iio_dev *indio_dev) __acquires(indio_dev);
+ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
  
- void adc5_gen3_mutex_lock(struct device *dev)
--	__acquires(&adc->lock)
-+	__acquires(&((struct adc5_chip *)iio_priv(dev_get_drvdata(dev->parent)))->lock)
+-/*
+- * Helper functions that allow claim and release of direct mode
+- * in a fashion that doesn't generate many false positives from sparse.
+- * Note this must remain static inline in the header so that sparse
+- * can see the __acquires() and __releases() annotations.
+- */
+-
+ /**
+  * iio_device_claim_direct() - Keep device in direct mode
+  * @indio_dev:	the iio_dev associated with the device
+@@ -726,6 +719,7 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
+  * Returns: true on success, false on failure.
+  */
+ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
++	__cond_acquires(true, indio_dev)
  {
- 	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
- 	struct adc5_chip *adc = iio_priv(indio_dev);
-@@ -673,7 +673,7 @@ void adc5_gen3_mutex_lock(struct device *dev)
- EXPORT_SYMBOL_NS_GPL(adc5_gen3_mutex_lock, "QCOM_SPMI_ADC5_GEN3");
+ 	__iio_dev_mode_lock(indio_dev);
  
- void adc5_gen3_mutex_unlock(struct device *dev)
--	__releases(&adc->lock)
-+	__releases(&((struct adc5_chip *)iio_priv(dev_get_drvdata(dev->parent)))->lock)
+@@ -760,6 +754,7 @@ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
+  * Returns: true on success, false on failure.
+  */
+ static inline bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
++	__cond_acquires(true, indio_dev)
  {
- 	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
- 	struct adc5_chip *adc = iio_priv(indio_dev);
+ 	__iio_dev_mode_lock(indio_dev);
+ 
 -- 
 2.43.0
 
