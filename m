@@ -1,48 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793106015;
-	b=mdjVGgK2MY0V8sPN0K4koaWPj5KTRyu5KWLt6z+gFv65b319ODPoVmw1HqKwXby+neJR
-	 esngnAdB2W3pPQg4sPg+kW5mj/R5TFpZ2wmRO8jOYPoaNVehq8obRE6LNJv+PeB9WTzfo
-	 vjO461gjCjAMzBK12Eapo/bvmlsVpX3KeTI48fkbov820LJVVWiCQQMwlHLIsdAgCW7C/
-	 a3C8g9rk3tQKEbrbrPVGRauSdn4Pa8auQjIVH4QcCXxMHpDblfCqTxWpABoHzjCr3o9Ie
-	 rwyRCYl+npJLIcezRRB/4YEEq9dD5t6EBqBhXg4h4b9z1jscMsQ7Sg6JprURlrN1zQg==
+	t=1793106272;
+	b=Aa7b8je4fpMYQAitA5qrukbzKQVAAFL0GTVlF0yfp36n+xTtIpYqrY0NJM+7pLErxzQg
+	 HrXvktV5MNeBQz/CexI3gexmffVGfr0RJF9W5fa2MCLz9kdQSC5ntSvzF3PKN//RfshdQ
+	 +Pj0Zzz5kpQPAXNxpFPgg/aUhLx7XC3S5fzTcILJqm8RcN+4ROLeir9XDFlA0nV2rARok
+	 pGvzeK/QJRZKzbJnqi+6yCw+QUe+FW/caLcM5Tpdm3lWVHFq+BUtetccza3vVAJDJYeOJ
+	 8oXERE8e1CgjEKpCyYfvR3YZTSkH0x9b5EgxM0iKHBFxx5aB01rq9j00EDu/fqMNOMw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793106015;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=gFIh6WeJFW0C7ye5I8pdoHCMTlq6ifigvMfUGvpQv9Q=;
-	b=BSx7wZUnZOYTevZvgkv55Gfc8Az1A7X0x4QwaVA0Dzd9lrA2DBS6d1cfqIRkyG9FpKdK
-	 dXBVoplFHtvWBqOZ69VSGlkhlSAADSRfLNRjOOf9JoA8thWvuo5YxrfRMN5mMf3avnVYD
-	 KuRtwt5l+7Dcffx1PdZYAbaLHnQV59xRUCfonSLEnALz7tzhK89lU+djhuoqKtBCNcnfZ
-	 pqiH3eBZOQGvAN3BC5lmVlqFCO8KYCgb+b/JnhpvQEw5akd6BrUhfIbGfQ6tAymmGaU3M
-	 gCAdPbxsWV16XQLHRTBUNIFj6zJAIxn9pXRVau1pYrFlwzsOfAuv7wTpGoERD2pfTzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793106272;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=20sAaBtek/W6uwYCnGF7PYPD9AnfU5r554thWYjEZOI=;
+	b=zIWvlBHWtrzdmAKVXGhfZTyctJfE4mNQaZPseo2xMyfj8epcZTy1p6zpBIW1VSuiIAuV
+	 7ViZ7iqPRKqLw/VgWDy90wsWDsoL2sBPnKtoCOoS3EkpUCYUn/Jbx8xGnx5gKuktN557N
+	 HKTuXJgxXDi0rSUwO+pzyKOligVJz0syfpLEed1isHGnAjUJzatHkRBXcPyolYRWcL+Nn
+	 d8i3u0e6LpLfUaxEKKSXzsYuVo6z/+aWclWIxd4E2ROq2jxRuDs1aGdcAfWCsEIvvo563
+	 y2HYHUkxd+uOu4WcDjF3UOxTG+07KJFPUqsVBeHoXMJJ7nIzYaaNqrUPM0wYIdRVRqQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="ImLS/4H4";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CzoEnh2f;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BD8liUP1;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96786606A338;
-	Tue, 27 Oct 2026 13:00:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05254606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 13:04:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 05254606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ImLS/4H4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EEBE81F01829;
-	Tue, 27 Oct 2026 13:00:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793106014;
-	bh=gFIh6WeJFW0C7ye5I8pdoHCMTlq6ifigvMfUGvpQv9Q=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=ImLS/4H4Ur5BZ0bMRf7FbkfUEg00BJHOQFV+rHX7bW6P67UOIXNNHTKAR3NkOZCo1
-	 RCBqbnfJVyztecO1Zh4QKOjiF0NhRT35E+0rV1uEfu53gn5LT/RnHoPm+64qFseFIk
-	 CbH9wpLB8F5JrizWfKnEk6fobk6lr258q90rZxoocsBzGq3WegY1znmRykm7au1PB6
-	 3eLw69iOmEDo+QprSYRL+wANykwhV2jYS3MiU3DJRiRoNrWarl0Kkqmz2j3ezhtKkc
-	 pM1VD2HMhJ4IIMeAsixSrWDpWo6wjDD9Ez+n1pWsDTqHd+cnGvEjnBQ3Hiykn+wKa+
-	 urhl1NY/I/Nrg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Date: Tue, 27 Oct 2026 14:00:05 +0100
-Subject: [PATCH v4 2/2] phy: qcom-snps-femto-v2: Add support for SA8255P
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CzoEnh2f;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BD8liUP1
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAdxsk2523923
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 13:04:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	20sAaBtek/W6uwYCnGF7PYPD9AnfU5r554thWYjEZOI=; b=CzoEnh2fY3FWxv+S
+	mTyVyGZt1JOg+PzIKup5Pv1txj9hnaELLI7UhW9atQHV1vRzQpmfQLCNyDl7dYRP
+	2v6JkzqfmnHdJeCvEx0z3H/FdXaEoMfMiNotmlzWH9X+qWYvb9WMgBVrW4J8QjZL
+	4cMteuqeRrUT1wPg79EoKsmR1JgrDdG/Ug22wxT1Z9Ms7RbZ5LvSHaN73atvd8q0
+	MHQJzNkFICLfmxuIvfkGmjNCHjdPDQGxERMeqAcexn60WWlqZwj41RQzLW6U2LR7
+	ok5WyZsHvE5huQFUHISRqYwmnPF/kPH4y/kENR8N9A50S9oICFsvIxPg93V7xHUt
+	2unGSA==
+Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjqw216ad-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 13:04:30 +0000 (GMT)
+Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5c97957d83bso246415e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 06:04:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793106270; x=1793711070; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=20sAaBtek/W6uwYCnGF7PYPD9AnfU5r554thWYjEZOI=;
+        b=BD8liUP1HYEvR60U6DRxz3FSP6rt4asjLuyFsoZfJI+dSHGYuA+jP3dkZTZr7E0AXs
+         CFVA6dkq+F4yQkCLfzI6Qc+ykNgSDfhLDnvO6utVg/w64pDbZKIbeV55VIdf7fPFhgjF
+         O5+MzmmjRVYmTDMPASXkGjoWZNWFerSPHroB2RFKZzfwJrractCnjsV8hAgUdgnpdeJw
+         63KxNslt2FEyLgXb5WYb8aYoPkSqvEEUhIVGjQNyCJghO/5OEK16pVsho6B0MObZgvxq
+         JsEzqUZiqITCFeRMQftUtyBb3h+NoqaM9R24Ne8yZab0Vuq9SwEAEmNGJXcr80ZhMdEL
+         k4dQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793106270; x=1793711070;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=20sAaBtek/W6uwYCnGF7PYPD9AnfU5r554thWYjEZOI=;
+        b=JKTbDzdM6106lL09l1Kx9avQwOegxvjcUSGT+VtKAn4paCcnt8E6aVkjoBAakl5m1U
+         N1mjcMN6n7E/pkAucEJotKQTO7ODXPBXmgLbXpx138wikWy6mXO8uZ+7vTF+YUrbBvX7
+         TNzOkeDZ9n7D7QlSVQFIa3HTohsflXaVL5weht5hWXP+6imepOSR+g3W4zDQ2oYNzl2D
+         F2GT7EX8CJR3mwk1e8zmfXWUDREvsT699E9ZntvxgH1djB0g09evSWGeanuWtODPRfR1
+         vG9q85M7UrVHxGN0GuZ0BRLmqk+Rji8XloPjV+saBzol8roi/uGJdOza1xaMa3ibSaEU
+         9qTg==
+X-Gm-Message-State: AFq9FYLzMphJdFNy4Jddi8IfGZwNmxkfTnJAHZ4+jLdduwClSWM4QMQt
+	EqAYV3JMCHdyBavMQspYy3lweSLAzov+YHQ/Poc3UUQKr+/AYkM627CnPS7euCNlM58KPYe/Lqi
+	Hj0yyhUnO29a9ddLfL0ZkLBZWoiNFDMqgGcIb/fu1WN2QSkWt13wXPPb67AOan/BNqRrH
+X-Gm-Gg: AYBFou160OU0/tilSKgyY2vKOCA4fYrWaF/ym2mSaoX7sS68MdN0Zb6kn5gdUuONA7e
+	ZauWkNshxNy6ZYmcPPMyN5KR6H/7QKuX5mNWu3Vg7n+XbjaIaLNQ6Zz2MnbL3FrPukr2dRT3zBa
+	y8TpAk2QblhdUGyA2N18XlW6bH261FejICyHF9xd3PEqjTo0zNybweE/l2vuLtntBIUViiJziy9
+	6cJK60Ngl8qzDPZ/oFyhR/L0h2YzULREpZ9SX2dCwo60//Bfa406NmcUg+eI5/jNYo1xkQ2J5BA
+	G5oIDZn6xqqISkGP38sza5gS4hGHT1Z5hYMnru9PuloyCYOufvXNX/YLNxiWwG/R3kbk33paQA9
+	KdbF4Y1GslvvyyAV57Iz8lQ==
+X-Received: by 2002:a05:6122:c2da:10b0:5ce:bde0:9b53 with SMTP id 71dfb90a1353d-5ec23230f38mr3698472e0c.3.1793106270031;
+        Tue, 27 Oct 2026 06:04:30 -0700 (PDT)
+X-Received: by 2002:a05:6122:c2da:10b0:5ce:bde0:9b53 with SMTP id 71dfb90a1353d-5ec23230f38mr3698435e0c.3.1793106269536;
+        Tue, 27 Oct 2026 06:04:29 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7a894d5sm2072671e87.50.2026.10.27.06.04.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 27 Oct 2026 06:04:28 -0700 (PDT)
+Message-ID: <08bc0714-4998-494b-baf5-bf1fed8a80f8@oss.qualcomm.com>
+Date: Tue, 27 Oct 2026 14:04:26 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,426 +113,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] interconnect: qcom: Add SM7250 interconnect
+ provider driver
+To: Ishu Brar <patches@brar.si>, djakov@kernel.org, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        konradybcio@kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261027-icc-sm7250-v4-0-f9bdaa3c1c7b@brar.si>
+ <010601a17d62222c-befdb9b3-ce1d-469d-a6d3-00511529579f-000000@ap-northeast-1.amazonses.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <010601a17d62222c-befdb9b3-ce1d-469d-a6d3-00511529579f-000000@ap-northeast-1.amazonses.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261027-phy-qcom-snps-femto-v2-8255-v4-2-874023825a63@kernel.org>
-References: <20261027-phy-qcom-snps-femto-v2-8255-v4-0-874023825a63@kernel.org>
-In-Reply-To: <20261027-phy-qcom-snps-femto-v2-8255-v4-0-874023825a63@kernel.org>
-To: Vinod Koul <vkoul@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sriram Dash <quic_sriramd@quicinc.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11533;
- i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=oEPftRTHj3yi6CivFVEZiMGgDcs2b82F6luhlAuuqq8=;
- b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq4KBXgoJIsKin0dLsKXPP7zbOqSNWC1SRAYBIF
- wWZbxudjeaJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCauCgVwAKCRAZDR20Zk4Z
- NUlrCADEChif2+ZMuIZnjBrRKzkoc2dFF0G2XnQFCR6h2Eira3/XLDFfJq/NJZO4difcNlkCmx/
- mg/L406imHkVbp4gNG0FvFnJkK+EC0mimp5dtkzNDOfcRVXBIIAE4AHD4as7sfusMgw7JmXAFq5
- nO4Fy9LBspowmsiGKNqLk+tQQdMy/3Mc3xMo5DExVppEHCNiGGYQd323m9C6HoPXaOWf5XbOBa6
- PkVST62ZFnPLu+Ri/rJpJG6Koy2f+mQjOJh6Dbj5+J/Z+n3H0pBJpd3K3A8TX1RjqTklnKO4eIo
- oKaKGuz3tPRBJMXfTKQEGOKfMl0RPqSQDe+vhOje2AVVtKte
-X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
- fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA1MSBTYWx0ZWRfX4TG50WblNeD3
+ xcl8KuyV/eWZMOZbfg4r72PkNAYN/P/Ct62J8wg9aCzOsru4eInbjpbA6JlvmvwXxPTxNScsYaQ
+ GP7LQgNgMrCuXIDTwqkzrxFC6oXOkcLsE2YEcJL5ppYqoUGjqHvQcLnR9Us0TFpUMymp42YT7pA
+ 1qAvS3lkQBt7OqrJbxzouP70/UNpVLsX3JcV2A59Zwv1xfOFm2VdHiKmaM0AG1idVFaN7jYRgox
+ 9cPRnrtwd6R4tL2E0rSnH2QFs/1+pKtm4v1mmk5jWFdE5D9XbLJESrZ3UiyFQGDumexKSQvNNli
+ c0JqPXq7DkB03xUrrnlmLoLTxtxpfQOfagFI0Sw7SC6fTRAkdsxUSZEWi5CY+zIH8ENTpkRUJj9
+ yHH7+JW2jKxdaglQudT0UznymmxsC/461kQ0lNz5QMMEdAId9TinQQVZi96reIgzw/fkt8KJUNt
+ BKMpmWDygPrJ5T8hTBQ==
+X-Proofpoint-GUID: 7h8-45X2vPfkFqTyEfOFeiEFPr8BDtrm
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA1MSBTYWx0ZWRfX0c6x+1huN6EF
+ rou/DTm241TXvWpE3tKUeJSHnxSbnGs1HWZC+ThZhMuXN+e3Es4Tokhk1prnV23xgs5leOCsVBM
+ oQXBSThU5lYfrnyreEVHdAOkqQ7Iexs=
+X-Authority-Analysis: v=2.4 cv=PsYG/AM3 c=1 sm=1 tr=0 ts=6ae0a15e cx=c_pps
+ a=wuOIiItHwq1biOnFUQQHKA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=rbLHc7TusOZuPl1584oA:9 a=QEXdDO2ut3YA:10
+ a=XD7yVLdPMpWraOa8Un9W:22
+X-Proofpoint-ORIG-GUID: 7h8-45X2vPfkFqTyEfOFeiEFPr8BDtrm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-27_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610270051
 
-From: Sriram Dash <quic_sriramd@quicinc.com>
+On 10/27/26 1:42 PM, Ishu Brar wrote:
+> Add a driver for the Network-On-Chip interconnect providers of the
+> Qualcomm SM7250 SoC (Snapdragon 765/765G/768G). It follows the layout of
+> the other RPMh based providers: the nodes and the Bus Clock Managers
+> come from the downstream interconnect description of the platform.
+> 
+> Tested on a OnePlus Nord: all providers probe, and the UFS, USB,
+> display, I2C, serial and camera ISP devices get their paths without
+> errors.
+> 
+> Signed-off-by: Ishu Brar <patches@brar.si>
+> ---
 
-SA8255p platform abstracts resources such as resets, clocks and
-regulators in firmware. The SCMI firmware exposes multiple protocols to
-control such resources which are identified by protocol_id.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-For this USB phy, 2 SCMI protocols are exposed by the firmware:
-* power domain management protocol (protocol_id=0x11)
-* performance domain management protocol (protocol_id=0x13)
-
-The power domain has 2 indices: 'core' and 'transfer'.
-* core controls the regulators, the clocks and the reset
-* transfer only controls the clocks
-
-For example, to power on/off the PHY, we should use the 'core' domain.
-To disable data transfer and keeping power enabled, we should use the
-'transfer' domain.
-
-Add support for the SCMI firmware-managed variant in the driver.
-
-Note: the performance domain (0x13) exposes opaques values (0xa to 0x11)
-for which we don't have any information. Since it is not mandatory
-for the PHY to be functional, we have ommited it from the driver.
-
-Signed-off-by: Sriram Dash <quic_sriramd@quicinc.com>
-Co-developed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
----
- drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 253 +++++++++++++++++++++-----
- 1 file changed, 204 insertions(+), 49 deletions(-)
-
-diff --git a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-index 980ad1fb1e2e..8d17cf093be1 100644
---- a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-+++ b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-@@ -12,6 +12,7 @@
- #include <linux/of.h>
- #include <linux/phy/phy.h>
- #include <linux/platform_device.h>
-+#include <linux/pm_domain.h>
- #include <linux/regmap.h>
- #include <linux/regulator/consumer.h>
- #include <linux/reset.h>
-@@ -95,6 +96,7 @@ struct override_param_map {
- 	u8 table_size;
- 	u8 reg_offset;
- 	u8 param_mask;
-+	bool fw_managed;
- };
- 
- struct phy_override_seq {
-@@ -121,6 +123,7 @@ struct phy_override_seq {
-  * @phy_initialized: if PHY has been initialized correctly
-  * @mode: contains the current mode the PHY is in
-  * @update_seq_cfg: tuning parameters for phy init
-+ * @pd_list: list of power domains associated with the device
-  */
- struct qcom_snps_hsphy {
- 	struct device *dev;
-@@ -136,8 +139,82 @@ struct qcom_snps_hsphy {
- 	bool phy_initialized;
- 	enum phy_mode mode;
- 	struct phy_override_seq update_seq_cfg[NUM_HSPHY_TUNING_PARAMS];
-+
-+	struct dev_pm_domain_list *pd_list;
- };
- 
-+static void qcom_snps_domain_detach(void *data)
-+{
-+	struct qcom_snps_hsphy *hsphy = data;
-+
-+	dev_pm_domain_detach_list(hsphy->pd_list);
-+}
-+
-+static int qcom_snps_domain_attach(struct qcom_snps_hsphy *hsphy)
-+{
-+	struct dev_pm_domain_attach_data pd_data = {
-+		.pd_flags       = PD_FLAG_NO_DEV_LINK,
-+		.pd_names       = (const char*[]) { "core", "transfer" },
-+		.num_pd_names   = 2,
-+	};
-+	struct device *dev = hsphy->dev;
-+	int ret;
-+
-+	ret = dev_pm_domain_attach_list(dev, &pd_data, &hsphy->pd_list);
-+	if (ret < 0)
-+		return dev_err_probe(dev, ret, "domain attach failed\n");
-+
-+	return 0;
-+}
-+
-+static bool qcom_snps_is_fw_managed(struct qcom_snps_hsphy *hsphy)
-+{
-+	return hsphy->pd_list != NULL;
-+}
-+
-+static int qcom_snps_pds_enable_all(struct qcom_snps_hsphy *hsphy)
-+{
-+	int ret;
-+
-+	if (!qcom_snps_is_fw_managed(hsphy))
-+		return 0;
-+
-+	ret = pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[0]);
-+	if (ret)
-+		return ret;
-+
-+	ret = pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[1]);
-+	if (ret)
-+		pm_runtime_put_sync(hsphy->pd_list->pd_devs[0]);
-+
-+	return ret;
-+}
-+
-+static void qcom_snps_pds_disable_all(struct qcom_snps_hsphy *hsphy)
-+{
-+	if (!qcom_snps_is_fw_managed(hsphy))
-+		return;
-+
-+	pm_runtime_put_sync(hsphy->pd_list->pd_devs[1]);
-+	pm_runtime_put_sync(hsphy->pd_list->pd_devs[0]);
-+}
-+
-+static int qcom_snps_pd_enable_transfer(struct qcom_snps_hsphy *hsphy)
-+{
-+	if (!qcom_snps_is_fw_managed(hsphy))
-+		return 0;
-+
-+	return pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[1]);
-+}
-+
-+static void qcom_snps_pd_disable_transfer(struct qcom_snps_hsphy *hsphy)
-+{
-+	if (!qcom_snps_is_fw_managed(hsphy))
-+		return;
-+
-+	pm_runtime_put_sync(hsphy->pd_list->pd_devs[1]);
-+}
-+
- static int qcom_snps_hsphy_clk_init(struct qcom_snps_hsphy *hsphy)
- {
- 	struct device *dev = hsphy->dev;
-@@ -196,6 +273,8 @@ static int qcom_snps_hsphy_suspend(struct qcom_snps_hsphy *hsphy)
- 					   0, USB2_AUTO_RESUME);
- 	}
- 
-+	qcom_snps_pd_disable_transfer(hsphy);
-+
- 	return 0;
- }
- 
-@@ -203,7 +282,7 @@ static int qcom_snps_hsphy_resume(struct qcom_snps_hsphy *hsphy)
- {
- 	dev_dbg(&hsphy->phy->dev, "Resume QCOM SNPS PHY, mode\n");
- 
--	return 0;
-+	return qcom_snps_pd_enable_transfer(hsphy);
- }
- 
- static int __maybe_unused qcom_snps_hsphy_runtime_suspend(struct device *dev)
-@@ -316,6 +395,10 @@ static const struct override_param ls_fs_output_impedance_sc7280[] = {
- 	{ 1310, 0 },
- };
- 
-+static const struct override_param_map sa8255p_snps_hs_phy = {
-+	.fw_managed = true,
-+};
-+
- static const struct override_param_map sc7280_snps_7nm_phy[] = {
- 	{
- 		"qcom,hs-disconnect-bp",
-@@ -383,36 +466,9 @@ static const struct override_param_map sc7280_snps_7nm_phy[] = {
- 	{},
- };
- 
--static int qcom_snps_hsphy_init(struct phy *phy)
-+static void qcom_snps_hsphy_configure(struct qcom_snps_hsphy *hsphy)
- {
--	struct qcom_snps_hsphy *hsphy = phy_get_drvdata(phy);
--	int ret, i;
--
--	dev_vdbg(&phy->dev, "%s(): Initializing SNPS HS phy\n", __func__);
--
--	ret = regulator_bulk_enable(ARRAY_SIZE(hsphy->vregs), hsphy->vregs);
--	if (ret)
--		return ret;
--
--	ret = clk_bulk_prepare_enable(hsphy->num_clks, hsphy->clks);
--	if (ret) {
--		dev_err(&phy->dev, "failed to enable clocks, %d\n", ret);
--		goto poweroff_phy;
--	}
--
--	ret = reset_control_assert(hsphy->phy_reset);
--	if (ret) {
--		dev_err(&phy->dev, "failed to assert phy_reset, %d\n", ret);
--		goto disable_clks;
--	}
--
--	usleep_range(100, 150);
--
--	ret = reset_control_deassert(hsphy->phy_reset);
--	if (ret) {
--		dev_err(&phy->dev, "failed to de-assert phy_reset, %d\n", ret);
--		goto disable_clks;
--	}
-+	int i;
- 
- 	qcom_snps_hsphy_write_mask(hsphy->base, USB2_PHY_USB_PHY_CFG0,
- 					UTMI_PHY_CMN_CTRL_OVERRIDE_EN,
-@@ -463,7 +519,40 @@ static int qcom_snps_hsphy_init(struct phy *phy)
- 
- 	qcom_snps_hsphy_write_mask(hsphy->base, USB2_PHY_USB_PHY_CFG0,
- 					UTMI_PHY_CMN_CTRL_OVERRIDE_EN, 0);
-+}
-+
-+static int qcom_snps_hsphy_init(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *hsphy = phy_get_drvdata(phy);
-+	int ret;
-+
-+	dev_vdbg(&phy->dev, "%s(): Initializing SNPS HS phy\n", __func__);
-+
-+	ret = regulator_bulk_enable(ARRAY_SIZE(hsphy->vregs), hsphy->vregs);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_bulk_prepare_enable(hsphy->num_clks, hsphy->clks);
-+	if (ret) {
-+		dev_err(&phy->dev, "failed to enable clocks, %d\n", ret);
-+		goto poweroff_phy;
-+	}
-+
-+	ret = reset_control_assert(hsphy->phy_reset);
-+	if (ret) {
-+		dev_err(&phy->dev, "failed to assert phy_reset, %d\n", ret);
-+		goto disable_clks;
-+	}
- 
-+	usleep_range(100, 150);
-+
-+	ret = reset_control_deassert(hsphy->phy_reset);
-+	if (ret) {
-+		dev_err(&phy->dev, "failed to de-assert phy_reset, %d\n", ret);
-+		goto disable_clks;
-+	}
-+
-+	qcom_snps_hsphy_configure(hsphy);
- 	hsphy->phy_initialized = true;
- 
- 	return 0;
-@@ -495,7 +584,46 @@ static const struct phy_ops qcom_snps_hsphy_gen_ops = {
- 	.owner		= THIS_MODULE,
- };
- 
-+
-+static int qcom_snps_hsphy_fw_managed_init(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *hsphy = phy_get_drvdata(phy);
-+	int ret;
-+
-+	ret = qcom_snps_pds_enable_all(hsphy);
-+	if (ret) {
-+		dev_err(hsphy->dev, "failed to enable pds, %d\n", ret);
-+		return ret;
-+	}
-+
-+	qcom_snps_hsphy_configure(hsphy);
-+	hsphy->phy_initialized = true;
-+
-+	return 0;
-+}
-+
-+static int qcom_snps_hsphy_fw_managed_exit(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *hsphy = phy_get_drvdata(phy);
-+
-+	qcom_snps_pds_disable_all(hsphy);
-+	hsphy->phy_initialized = false;
-+
-+	return 0;
-+}
-+
-+static const struct phy_ops qcom_snps_hsphy_fw_managed_ops = {
-+	.init		= qcom_snps_hsphy_fw_managed_init,
-+	.exit		= qcom_snps_hsphy_fw_managed_exit,
-+	.set_mode	= qcom_snps_hsphy_set_mode,
-+	.owner		= THIS_MODULE,
-+};
-+
- static const struct of_device_id qcom_snps_hsphy_of_match_table[] = {
-+	{
-+		.compatible	= "qcom,sa8255p-usb-hs-phy",
-+		.data		= &sa8255p_snps_hs_phy,
-+	},
- 	{ .compatible	= "qcom,sm8150-usb-hs-phy", },
- 	{ .compatible	= "qcom,usb-snps-hs-5nm-phy", },
- 	{
-@@ -561,14 +689,42 @@ static void qcom_snps_hsphy_read_override_param_seq(struct device *dev)
- 	}
- }
- 
-+static int qcom_snps_hsphy_init_resources(struct qcom_snps_hsphy *hsphy)
-+{
-+	struct device *dev = hsphy->dev;
-+	int ret, i, num;
-+
-+	ret = qcom_snps_hsphy_clk_init(hsphy);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "failed to initialize clocks\n");
-+
-+	hsphy->phy_reset = devm_reset_control_get_exclusive(dev, NULL);
-+	if (IS_ERR(hsphy->phy_reset)) {
-+		dev_err(dev, "failed to get phy core reset\n");
-+		return PTR_ERR(hsphy->phy_reset);
-+	}
-+
-+	num = ARRAY_SIZE(hsphy->vregs);
-+	for (i = 0; i < num; i++)
-+		hsphy->vregs[i].supply = qcom_snps_hsphy_vreg_names[i];
-+
-+	ret = devm_regulator_bulk_get(dev, num, hsphy->vregs);
-+	if (ret)
-+		return dev_err_probe(dev, ret,
-+				"failed to get regulator supplies\n");
-+
-+	return 0;
-+}
-+
- static int qcom_snps_hsphy_probe(struct platform_device *pdev)
- {
- 	struct device *dev = &pdev->dev;
- 	struct qcom_snps_hsphy *hsphy;
-+	const struct override_param_map *cfg;
- 	struct phy_provider *phy_provider;
-+	const struct phy_ops *phy_ops;
- 	struct phy *generic_phy;
--	int ret, i;
--	int num;
-+	int ret;
- 
- 	hsphy = devm_kzalloc(dev, sizeof(*hsphy), GFP_KERNEL);
- 	if (!hsphy)
-@@ -580,24 +736,23 @@ static int qcom_snps_hsphy_probe(struct platform_device *pdev)
- 	if (IS_ERR(hsphy->base))
- 		return PTR_ERR(hsphy->base);
- 
--	ret = qcom_snps_hsphy_clk_init(hsphy);
--	if (ret)
--		return dev_err_probe(dev, ret, "failed to initialize clocks\n");
--
--	hsphy->phy_reset = devm_reset_control_get_exclusive(&pdev->dev, NULL);
--	if (IS_ERR(hsphy->phy_reset)) {
--		dev_err(dev, "failed to get phy core reset\n");
--		return PTR_ERR(hsphy->phy_reset);
--	}
-+	cfg = of_device_get_match_data(dev);
- 
--	num = ARRAY_SIZE(hsphy->vregs);
--	for (i = 0; i < num; i++)
--		hsphy->vregs[i].supply = qcom_snps_hsphy_vreg_names[i];
-+	if (cfg && cfg->fw_managed) {
-+		phy_ops = &qcom_snps_hsphy_fw_managed_ops;
-+		ret = qcom_snps_domain_attach(hsphy);
-+		if (ret)
-+			return ret;
- 
--	ret = devm_regulator_bulk_get(dev, num, hsphy->vregs);
--	if (ret)
--		return dev_err_probe(dev, ret,
--				     "failed to get regulator supplies\n");
-+		ret = devm_add_action_or_reset(dev, qcom_snps_domain_detach, hsphy);
-+		if (ret)
-+			return ret;
-+	} else {
-+		phy_ops = &qcom_snps_hsphy_gen_ops;
-+		ret = qcom_snps_hsphy_init_resources(hsphy);
-+		if (ret)
-+			return ret;
-+	}
- 
- 	/*
- 	 * Enable runtime PM before creating the PHY, phy_create() only enables
-@@ -617,7 +772,7 @@ static int qcom_snps_hsphy_probe(struct platform_device *pdev)
- 	 */
- 	pm_runtime_forbid(dev);
- 
--	generic_phy = devm_phy_create(dev, NULL, &qcom_snps_hsphy_gen_ops);
-+	generic_phy = devm_phy_create(dev, NULL, phy_ops);
- 	if (IS_ERR(generic_phy)) {
- 		ret = PTR_ERR(generic_phy);
- 		dev_err(dev, "failed to create phy, %d\n", ret);
-
--- 
-2.56.0
-
+Konrad
