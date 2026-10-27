@@ -1,104 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793103719;
-	b=rtrs9AZQDjDdgDE82XlHCfabwiOEHGggAVhMZD/HNjUAfQhbDWYrrzKVlxZrDuJ4Bhgm
-	 QMdwl8EqFcAqIReEVIjN+7856LXD3aKfAS+mV174pCQtjEdmTa0jS0HYJ0UhvCuM6M6ha
-	 P6wLYRug2pBPZxeE7cjrXSodzrzpXr4koRjJYoL1uyMgdQZXsKwfskRdUutWoNIStROO1
-	 IS1ooeJfHvUJlZKeGl19EU1uLrDd3iQYAkKOeH6dAolRAixTvn5er3xiIyVRtR1eMFKwN
-	 qwsS/tHl9w1hHGcl4edB7At6S9TByYmNjGqg2b/1FZMeIguX/CAF/xkjyl84INGn6fA==
+	t=1793103863;
+	b=pxn5edXafnkRy7DEvX2JFPId8F/0p49hjWGW/4uuAF78PeDSeEBF5GBoeDMzZVIJ27XA
+	 H1oAqmqEyRHzOBp+yIXNJfSA4beNe6H/rqao/SggXUUxnAKAleg6nD2rI0mWQ8Ph+IToF
+	 /IuQWXf8rLy76M2dcOjP+Ur+XC57aOGSfjKinac/Ee1+5+s5QfK9HdPufwa+79uW6wFt1
+	 JB6K38S6znPDmj2oFAAuiUgZ5GXrixsce36ZlNWaj6Qy+tm+u9P5+z6IcmWykVzTA+u68
+	 7cV9/1rwIsW4GBVwvU7N+soYp2yIN2ICsUhjrzWSqRYQBBFwxz4Uai5wuKRRfUmPT7g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793103719;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=CjWvn6AFi1A52TxbvgaZZpyJgGj9ZtMA7w6Z+oUCikU=;
-	b=w5iSJUFM3hz/b6O5VNgMt9oVepIPkk+ROLrgUfaeeQFtHPGciiiuK8g99TAgLwgJdEgK
-	 Ckw357MQYGjL1tqOZirqCllJYDdW44o3gF7HQJqOlg3MTYVn6Sm7tgnRVaebTnCqED/mT
-	 G/EYAqqVpIEb0aSrrhkQOTuLa29knW9Ut4O62qjB78+yJ7ifGYJntlnGt0eB4h30ClkHq
-	 0u5Gztf3aOLile27nBGgQE5jgIXs5OSxRzkmzezEVIRycn7jqiA7IDyE/bX0p+t+naaVi
-	 i9tbby9Xx4QOLdVwU9ztqdvmVmjvDJka8MOHtF0F3vpT3zkztYNsxrgyZooiETbp0Sg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793103863;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=5kyCU5vI0oFKj+uVJ2jgfn5MVpP1no6WgwcQf5t6lQQ=;
+	b=qrRHzReUC90TOKlIw+Y8I6N8B5cZZhMSn8IKNChXP8Dv19QZBxBsgVwilmGtmZm+ojZs
+	 5MspL/IYk1QfF7HXKgpnarf0fgGtnXPMmEL0gykortJQp3GrIyaHPOsXzs81YY7a7YOnD
+	 hGZ9JYOMrgp0lS+1k7ScD0HQaBOxyz/4gnahM5/RGXolhWkhcjGmD3/Cp1TiDt4S5RtO8
+	 KZfccoMEYguzNCUqwqgKFcXfxji5GalAU+CWHhsREvLYcjf6RZc3vcctO/sGvHVpp1ew0
+	 oLdIoMMZid+3pMMZ+g1Y1NCAT7FHqvjxk9sAcBT4/0gEju287hMTZ0e5o3Odc0DO/ig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=hEM7Vq9U;
-	arc=none smtp.remote-ip=209.85.128.44
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=icyvtZJs;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=K28xqHHF;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75B98606A31D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:21:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 75B98606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BB32606A31F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:24:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9BB32606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=hEM7Vq9U
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a5036bbac7so16001335e9.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 05:21:59 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=icyvtZJs;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=K28xqHHF
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAeCKV3026392
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:24:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=5kyCU5vI0oFKj+uVJ2jgfn5MVpP1no6Wgwc
+	Qf5t6lQQ=; b=icyvtZJsXjhz4DrqgWgbg18tiZ4ZjKbjJehTK127sa7yDnBhw8T
+	TT2vUD+9D4R+KUfZ1buGBYySWnFAK6M5XRTXDMDbBc8Ut1Wx/OhJtWnNF1EU+ko3
+	EP2az9xPWSHC3jok5bgSMy8wUsGBAXZHQBcpC8N3Z2j0TPfJl/RGEulayOhJHbeT
+	+aYHFJ1vKWwQ4gyaWMqTNXOBcHtrBEG2ONpEYe8KJPHgOref4mkxl/mLjkToiuCj
+	JGu/cjxDG6yzJXTYF4AGsOO1TrviSW68sZzwzqL8D8G3zcjBhLEV8lPipsKIPIK+
+	J+lUQR42D3qZp+7z5OA/I7W/LLhp65eoASA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjh91adt0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:24:21 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-359b81ad4e8so5914135eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 05:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793103718; x=1793708518; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CjWvn6AFi1A52TxbvgaZZpyJgGj9ZtMA7w6Z+oUCikU=;
-        b=hEM7Vq9UI83EhmjxiULTmQewGqr2XpeyKaHE4T3ujUWQ1sKYuM2vEMA1NcZKUceD65
-         qiNW3w/jA1selWoK0OXpToAzmjDj90pXA45+BSm6Bm0sS0MjJeEQ1k4oEjIM3UqL4AC3
-         vIJKGGxOPPGafaUfgbtzOCqSZuV8qmZQy0/luCwn0z8St1VZTTxpj74PMUpcfomeGq4G
-         x2hdcXV+YVPKmy2Euy7hLYdrilbjEJOxS+Jdn2l2yqlj3zw3QO7Rb+vKMBMC13JTQMfE
-         mKXdSjF4U9CzaMj1sIofPpONo/KUXYYbOgENENs5hNs4KAlJqB25q/uGL7b0FBymaW6q
-         CKdA==
+        d=oss.qualcomm.com; s=google; t=1793103861; x=1793708661; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=5kyCU5vI0oFKj+uVJ2jgfn5MVpP1no6WgwcQf5t6lQQ=;
+        b=K28xqHHFRg7JuUVFsoYOm50N3s8Yo3B0Kau0JTJukErl3LxGirWHqHaPFlLpY+Edlx
+         iESYyKO8ZHamHnGiU8p2GyimNy6DdmYRd1H3xTguMtmxrz0xzSC4ex/H27r2nOgukGRE
+         RpXx31UXHdcmG2pctXXuMldiekGKKK8omH2nSruNbG5yfcmayQpFwoYOwazEyPco2XvS
+         AU6A+Atus3zYoYwq4ZGQ7oZHsaux1v/OGgPsY8K4G4T1qSr0X0NCVVLJT6bgRFVeZino
+         1CXcSK5bAW88wUw+P5NVmc8TWGJY+CudMXrwkIlvWFTLEtbwolaJogTryJkifzR0W7HW
+         ev9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793103718; x=1793708518;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CjWvn6AFi1A52TxbvgaZZpyJgGj9ZtMA7w6Z+oUCikU=;
-        b=XC89Sr9RcfMP5bqXDOExdwX7Y7g3rgLSjqvhhkjFcSac9q7ZnZRz8cX0Jiu/dsfRdk
-         uQIaOsjFLvECNvFlts1gOdrmrw+GiTUtlI7a1WHMomL8JpFnC0vyxKODTBskT8IyMwUM
-         4X37HZ6dJHEx8qAwRKQsMXnHh7gKducdXPHAgGswbnj6jtkAMFgPNAIFUFFeGvm1bm4k
-         SXppg+NXpRBAHArsyKRpPphUsWAk8H3RK515H6jAq47HHcNv0I+TE3TP1zkUGus+6jOG
-         uoFIINm6HBo+Dq4NUKlkEnNnxAJFOSAlINKOWihsQqs6UvmUqzQT3EZDRcLWFaNpvbJj
-         6QMg==
-X-Forwarded-Encrypted: i=1; AKwUvBw+78oMNhPlEkVeOewJfZCakn/52OG43cB5wX0emMmJ9lkPhm8QtLKu3M/sd9oNoRg5o5hM+0fhEhcJhI0F@vger.kernel.org
-X-Gm-Message-State: AFq9FYJUUA+r4d4vEPWD6V4L/v0q49FPZ6wMuiSOKgXch4z9AbbiPbff
-	qxCOmAZU44tDOMduATgD2rq5ogEJfclfltE/1P6WvEh9M2e9OwXH7sNo
-X-Gm-Gg: AYBFou1l0YeNkPv+mXSMf0bBXrmG6OSsLXKbT7BhY52RpuWah02kGb/Zv2t8aaNGPUq
-	UiDICIN3klQyk99TF1241KcHrolo163AuvSxY4m53Xaz64YdwFKyGQAXUlYLXCGc2HRE02MPbzG
-	k9uQszLZx3heNClXVkQbNTdW+LXX/kaxKuK2l5UYgjh3/8Y42EdjhlSXQY15PdgAdpkF3Tsgg+L
-	wviRai02aGOoYHOVydlirZTqa/VJz2fraOw7k+78kAX0XqayVKjFAweA8/OKAhC9f1tdMDwIlSF
-	ENJ77wVdc6w970BccCYyzCXnBjf3scXsrNHuUO8MpnDn4kkd3/1xIxkot1FozgOJyPnwwicd8Gd
-	SmF54OPZjT61ciZ0Jit7QEpaC+3euAW7KM3ebD9P/37wpuYgadKJQ8C8SpZ5ePUStQZ1d0sz4lg
-	UC2KetZyAMh3AklB9kUVUTeaalevyFA/B3t8JzDEbAwqbXU3h4w0FBrgAJPSDXgFsiqnrLgaxh9
-	E8e0rVH9PO44geFVz0b5EZBkg6Na9JU59cZXdVOvnw7xZbbMwt/I3fCdx4B/XehWX6uLP2Y65ps
-	mtjYr2Y=
-X-Received: by 2002:a05:600c:4583:b0:4a2:1197:1de0 with SMTP id 5b1f17b1804b1-4a35ac963edmr205653775e9.19.1793103717674;
-        Tue, 27 Oct 2026 05:21:57 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a0bae01sm325465755e9.7.2026.10.27.05.21.56
+        d=1e100.net; s=20260707; t=1793103861; x=1793708661;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5kyCU5vI0oFKj+uVJ2jgfn5MVpP1no6WgwcQf5t6lQQ=;
+        b=KcD/6dZuSVnFwA0esxf2BDoAgMCyF3eygsxSCv9fGI3yQUA4WWJZEdVYqS6CXB2twu
+         L6ZPZ7sB3GGm8Dv6tb5uZJgHkuZzvtUWsRP68LQPqaAgZATXMCLFt0lcTVQDJEv+5aRr
+         PxOex6xL1Y30lIMsp09MG59niQrgIlJs4E3bbJ1FAidOMVYeieQY5yQdOxbdv4TFMHxZ
+         bGLCIK9JRzJmDMVHFyfpebmCenXciTurBPnSCKMuDUF81iL5mxs1+shKwk40DFweYsHH
+         M4kQaVu30yQEyX/fTbdTZ2jBS3quMv7DLtXhpJsERwCQvrMtDciPSc67xboO23dKMbXG
+         /NoA==
+X-Gm-Message-State: AFq9FYIV6LkhNnhtx84+/4MLFPIhdDPckKTHCBYptmJQ+ZNntCXWNCvW
+	aszeTkO/syIbrxn++yTjTCTOwS7RLlRKktoTmi2gpe+Z8PRCxxExZKT+X88KswYsZhzStb/eqFT
+	XQbPIN5qnCDPOFoecdcKsxweWbjjJIq5YzGgI9fTELD3qeDFIfc3GYESLKTA5uTdEHPdJ
+X-Gm-Gg: AYBFou1MBgTxEbsu1XbGSImWI9N7ged9pKYv7mxnQWlBEOClp7T03Ak9tG5ww484+yB
+	vjBTLrqfOwtCn/SXEgh3hhuIMgrpwkouThuw3DU0m8v7raLeQrY0pm8pk40oEceu8PxxvJBdaPy
+	Y8tUvFkT7+gpwH0Xj7/qAkInPPKwN2SA/DMwtkNLMrXH3YmAqq01UHiyJY7bgTUimxxdKu8wUOl
+	RfRHF9mtKBA7tcOe83tgzPSGkS9biKjiitelfMbxTmPD2SpGjX1PXtzBW0+T8MPWuOeb9GObENZ
+	Y/ovg6M4yeLHcmHOC9SAnI8G6DPFIVwwWuMLAbG+LAlR1/MyxSGGBB1C87vxg9pxcw1m+fg+30l
+	B7dJgaL/9Y/ei5MNEllG8CYs5yxBn48WzPMBiWFryhlv+BkxZ
+X-Received: by 2002:a05:7300:fc0f:b0:33c:16f1:2e11 with SMTP id 5a478bee46e88-369e845b068mr15222628eec.7.1793103860871;
+        Tue, 27 Oct 2026 05:24:20 -0700 (PDT)
+X-Received: by 2002:a05:7300:fc0f:b0:33c:16f1:2e11 with SMTP id 5a478bee46e88-369e845b068mr15222589eec.7.1793103860223;
+        Tue, 27 Oct 2026 05:24:20 -0700 (PDT)
+Received: from QCOM-IvKeorbwK5.na.qualcomm.com ([120.60.66.138])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-369e8daf444sm32822215eec.18.2026.10.27.05.24.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 05:21:57 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Oleg Keri <okerixx@gmail.com>
-Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Rob Clark <rob.clark@oss.qualcomm.com>,
-	Thorsten Leemhuis <regressions@leemhuis.info>,
-	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	regressions@lists.linux.dev
-Subject: Re: [PATCH] pmdomain: qcom: rpmhpd: don't clamp gfx and gmxc before sync_state
-Date: Tue, 27 Oct 2026 14:21:46 +0200
-Message-ID: <20261027122146.24778-1-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <20261021080517.2161-1-okerixx@gmail.com>
-References: <20261021080517.2161-1-okerixx@gmail.com>
+        Tue, 27 Oct 2026 05:24:19 -0700 (PDT)
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+        krzk+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, abel.vesa@oss.qualcomm.com,
+        mani@kernel.org,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: [PATCH 1/2] arm64: dts: qcom: glymur: Move the PCIe graph nodes to the board DTs
+Date: Tue, 27 Oct 2026 13:24:09 +0100
+Message-ID: <20261027122410.62219-1-manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -109,50 +118,123 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: gIISnB3c-AfyvfxuVH6sHqfqNrDt4UBL
+X-Proofpoint-GUID: gIISnB3c-AfyvfxuVH6sHqfqNrDt4UBL
+X-Authority-Analysis: v=2.4 cv=TuxzFzXh c=1 sm=1 tr=0 ts=6ae097f5 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=+eK/VBehCgFHFEY5YUZdYA==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=u5-EM3aH4ChXULmVINIA:9 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA0OSBTYWx0ZWRfX5g1R7g+ZH8qn
+ NawvsfNGqiw01BzwXlxlsrxETRzMB4aTLZNjIK5RBpbfbwnFFe/Sb5vejzMa0924Gk9aECbfBN3
+ WQOhSmIYgdO4T+UxttHRAEk7vxifcsvF5UCQbHFz68gccB027FmNwhvazyxCz/6ZpQDAdEvvnDo
+ IyU2FuI+ZJmVoBkgwKGhM3rGQs4lmJ8AQIiN/ivp5VQye8feOx14dk4fQJZnIShniIEVOrTwbgx
+ CPw6EHVWkwLZbOe4DH87oToep2mVKVvwEajXxHk7SDE7xZUdDiSYRZOTdFuUHf5xp2b6US+5iQO
+ CZpZ6WGHCyEQBxjhfIj1oCDy+UnNB6ZPhAoiIkhimpLAWsNyvv3CvZPVHAP8k6wGhP7mx5zyCzK
+ f2XkAatHRYtx0G1T3GudU43AlHToYtfW7r2vkz1/GuZrnaDMyKe9IA16p/0J1n103yyo9hUzrFo
+ u+6hIuEhF4HQy1gC7OQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA0OSBTYWx0ZWRfX2EWMygiCabSl
+ 3atrPyhy8dSTHrz28HyEKNQgmrOOS3kaV1cQVgz0bB/buyuphZ/HrNIka4Jv8fJ41kQHC3OPdMl
+ 7CWPJBhJcsxYM2oXI7/pu8Ugr7569oo=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-27_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 malwarescore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ adultscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610270049
 
-On Wed, Oct 21, 2026 at 10:05:17AM +0200, Oleg Keri wrote:
-> Until rpmhpd's sync_state every vote is clamped to the highest corner,
-> so that hardware the bootloader left running keeps the rail level it
-> needs until its driver takes over.  Nothing the bootloader leaves behind
-> runs on the GPU rails, but the clamp hits them anyway: the GPU clock
-> controller's probe runtime-resumes and suspends its GFX and GMXC
-> domains, and from then on both rails are pinned at their highest corner
-> until sync_state.
+glymur.dtsi describes an empty port/endpoint pair under each of the four
+PCIe Root Ports. Only the Zenbook A16 connects one of them, to the M.2
+Key E wifi connector on pcie4. The remaining three are dead nodes that
+no board ever wires up.
 
-SM8750 (Adreno 830) is hit by the same clamp, with a different symptom
-and without CLX, which is only enabled on X2-85 and A840 so far. The
-first GPU init succeeds, but when the GMU first boots under the clamped
-gfx vote, every ACD level runs at half the requested clock until the
-next reboot. msm.disable_acd=1 avoids it.
+These dead nodes add more churn compared to the duplicate nodes added in
+the board DTs (when other glymur boards gain connector support), especially
+when they get added to other transport nodes such as UART, I2C etc...
 
-OnePlus Pad 3, v7.3-rc5 plus board patches, msm as a module loaded by
-udev about 4 s after boot, GMU firmware 5.1.25. The clock was measured
-as drm-cycles-gpu over drm-engine-gpu in the fdinfo of a vkmark process
-keeping the GPU busy, at fixed devfreq levels. The four kernels below
-differ only in rpmhpd.c, and I alternated between them from boot to
-boot. In every boot in the table the first GMU boot came 62-81 ms
-before rpmhpd's sync_state:
+So drop the nodes from the SoC dtsi and only describe them in Zenbook A16
+DT.
 
-  devfreq (MHz)            342   660   1050   1100
-  without the patch        342   330    525    550   (10 boots)
-  with the patch           342   660   1050   1100   (11 boots)
-  local test, only gfx
-  left out of the clamp    342   660   1050   1100   (5 boots)
-  local test, only gmxc
-  left out of the clamp    342   330    525    550   (5 boots)
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+ .../qcom/glymur-asus-zenbook-a16-ux3607oa.dts |  8 +++++---
+ arch/arm64/boot/dts/qcom/glymur.dtsi          | 20 -------------------
+ 2 files changed, 5 insertions(+), 23 deletions(-)
 
-Every value was the same within 1 MHz across the boots. On one boot of
-each kernel I also went through all 14 OPPs. With gfx clamped, 525 MHz
-and below ran at the requested clock, 607 MHz at 539-558 MHz, and
-734 MHz and up at half. With gfx left out of the clamp, all 14 were
-within 1 MHz of the requested clock.
+diff --git a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
+index 939e1a927a79..aba1821c9375 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
+@@ -825,10 +825,12 @@ &pcie4_phy {
+ &pcie4_port0 {
+ 	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
+ 	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
+-};
+ 
+-&pcie4_port0_ep {
+-	remote-endpoint = <&m2_e_pcie_ep>;
++	port {
++		pcie4_port0_ep: endpoint {
++			remote-endpoint = <&m2_e_pcie_ep>;
++		};
++	};
+ };
+ 
+ &pcie5 {
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index f04058d2e089..e25d4cd3885c 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -3000,11 +3000,6 @@ pcie4_port0: pcie@0 {
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
+-
+-				port {
+-					pcie4_port0_ep: endpoint {
+-					};
+-				};
+ 			};
+ 		};
+ 
+@@ -3272,11 +3267,6 @@ pcie5_port0: pcie@0 {
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
+-
+-				port {
+-					pcie5_port0_ep: endpoint {
+-					};
+-				};
+ 			};
+ 		};
+ 
+@@ -3488,11 +3478,6 @@ pcie6_port0: pcie@0 {
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
+-
+-				port {
+-					pcie6_port0_ep: endpoint {
+-					};
+-				};
+ 			};
+ 		};
+ 
+@@ -3758,11 +3743,6 @@ pcie3b_port0: pcie@0 {
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
+-
+-				port {
+-					pcie3b_port0_ep: endpoint {
+-					};
+-				};
+ 			};
+ 		};
+ 
+-- 
+2.43.0
 
-In one more boot of the gmxc-only kernel, sync_state came 83 ms before
-the first GMU boot, and that boot ran at the full clock. So, as on
-Glymur, only gfx matters here, and only if the GMU first boots while
-the clamp is still in place.
-
-With vkmark's blur scene at a pinned 1100 MHz on the same boots, this
-is 414-421 fps without the patch and 831-866 fps with it.
-
-Tested-by: Vladyslav Tymoshchuk <tvlad744@gmail.com> # SM8750
