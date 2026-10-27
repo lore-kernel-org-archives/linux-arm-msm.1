@@ -1,97 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=31.220.73.82
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793134359;
-	b=bafyouqGggZCZd8JF+d7L+UQ4XrFiHXtlA1w1fpQ3sfP5WFMdxX6Zhk5ihdfoJSf+c19
-	 H28gHLIB/T27UwPv2RlcF3wXMTaymQ/luJiIR930lSZEcFmsVXEj6xUSXzkeo79sb8ngl
-	 ep1FNW/PJk45RErq83gdk/JOgQTIGAjAJB3G8jdv3xOzSUCmK080OydNHnPNNsOvXcII0
-	 epILyZ8lBFK69ReRIfAkhUe/jJPSTIWUssYPGuF83d11FM+srLYLyAf/PCyWggBKVADhG
-	 Knqxt+9XdzjoiOFQlgYpVxPgMNZ2p/rUkDtNLfxrQpnMMKm5ZSIOiHrha1HMk3uJmXw==
+	t=1793135101;
+	b=nCLs/1Dm8w8mCgOCU6LO376VPe56zB/gjPuBGaGTe2E+RhXBHI2bB0//TOkcpglmd71m
+	 DkKIjLhy6n581KqTI0vvY4batI9umidQIC3yDy/12KHcjR5YuejRhXp4CvrZCqci/GpRb
+	 UDp1uuDWoxVN0kj8aBZ/j4bnj2ViEaQ4KeuQQd63iLjkRPQjR1HnRQkrbXyP7TXwyYxmI
+	 L2VESdtAle50WD37gV0T0dTTVSNc4IWeB0gL8akGjfWUs90wJUlFtGUZ6/rmsbBcx06l2
+	 8qvrQssVBygUCo6ttAOG8QwxhAMBhYPOG1usiOhd+mtwgbFQWrZQX+WANYfMSr+Ii7w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793134359;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	a=rsa-sha256; c=relaxed/relaxed; t=1793135101;
+	h=Message-ID:DKIM-Signature:Date:MIME-Version:To:Cc:References:Subject:
+	 Content-Language:From:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=JAPuSSjBy2HiV0XHwgEt3aaV8Ughg4BjhBgy8A9BioY=;
-	b=COCsMq2EXK521qw0DVVV5rUT9cVIViU1Q/CbeIfXQ7HHBQb+twFCBCriKIWXHhunxSMO
-	 gOtH++Bywunz1XRBAJEuedC3Y1Zly9KKFKtWVBTfS7IfVkJWod+hJYxAtN819F/3K3uPV
-	 yuzJVyhNoV1tVm9egVWkl0zHbBbsWo8DVDxpWc8er/3nEzWb2cw2i5cW9SpUbJEGs3dEd
-	 vMN2U62AvmEI7PZTo91sOWAUI9mtTvhQc0CDwFU2W98izyFGgB5ikoLT+xI8DnSf64ehP
-	 txk+tcqeoiB3K6PhRoru3bWahOU1gKc/ZWR7kh6eLF4XRqxbsAZwJPhiWC2V2ffEt2A==
+	bh=FLUULcZ5Th52iRf5h59OCF/dLSjqO3QJ39mbKLqDk+w=;
+	b=XTtw30trCb5p6TF/llUfUHplDTs9dOFt5h1ft6UcIQ2ccJFphjBpCT5MuEFHADxpWSIg
+	 4NwSWqpmdj20/YomiYD0eHK+x67FQQtPdVCwywEgsdwForG6fDgpqPzUsU1AcWc0P39QB
+	 uQPWSJk527R0cmnY+Y3jfGWMkwnIsm2l864VKpKdeOtmIXpm7tXihGPs6enFZBlZW6auj
+	 JklMg0s1vxBucITnnEjOkLD3knAWq6Zi5v41gVCZQGEiG+rVUdoMvU4zanIrR23toc35a
+	 BwHQvbINR12f2f3cHvMO3UI0toPCSYgetXC078h0lkrCkk3z7izcDavzV4H01+pvpQg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o8+uIxak;
-	arc=none smtp.remote-ip=209.85.216.43
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=permerror header.from=robert.meijers.dev;
+	spf=pass smtp.mailfrom=robert.meijers.dev;
+	dkim=pass header.d=meijers.dev header.i=@meijers.dev header.a=rsa-sha256 header.s=november2021 header.b=T+Mr2MVB;
+	arc=none smtp.remote-ip=31.220.73.82
+Received: from mail.meijers.xyz (mail.meijers.xyz [31.220.73.82])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 957F3606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 20:52:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 957F3606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D245C606A31D;
+	Tue, 27 Oct 2026 21:04:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=permerror header.from=robert.meijers.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=robert.meijers.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o8+uIxak
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3ae0852df46so255391a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 13:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793134359; x=1793739159; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JAPuSSjBy2HiV0XHwgEt3aaV8Ughg4BjhBgy8A9BioY=;
-        b=o8+uIxakmfDagDkZCK7+K6/vRP/IVouu2zhyMfMqSNNIX8uO4j7UOSdKzAnJG10Qgg
-         TcZ0qI6eEWtQfCuXaxmrArt6DgXQAISp1+BzCg4MmL3coNG2Oa081uRLgqaSMIiS4GiY
-         hOjBeH/qnW9dN5trvA9hGcQKE1N51RrJGgVg5nGhH1aMJTlPtf4NG9qZukH5OylYQPkh
-         4nWMF2UckyXkbGyijuyO761Z7iu51tD0qaP9PyluGQbBM3+qZOpULIXkqZAs6XsUCn2p
-         7MZ77ZoeliWVVsTIgmRDtzJCJrKJ+mOLIZRFOEfFmco7vZDadczAUbT/floDWB0ZAqqK
-         YTDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793134359; x=1793739159;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JAPuSSjBy2HiV0XHwgEt3aaV8Ughg4BjhBgy8A9BioY=;
-        b=mchS6S7d14qbDbhcgRVfcDagEDcqT9Z+yzaS9ehYfnNo7cFeDa0G+z5P2nD+P8h1yf
-         apQThjQVw/c5Oi3toM7WKCCRPDYOrXWciP5IGOAJ2s3i50TIWrWMf89rnGEqytzgVgVW
-         3eF4nqfIY5RTYA24ERxcoAYGuseI9WhV1qY8v+mfrZczFjtv6prfn+VZjM3RRxaOvUqL
-         FZ6ouh1z+MHhVWYUetCwTemU0NkySXvSuNdxqP3QSTCVHStElh5gwAcy5RX+/Vf+GOZ1
-         NzIJ0osjCgl7jSBN+z0g4ph5zytBnDCaRALeM315nAYRG6hqqqbE2afLQ3Mny8wRHCms
-         vkvA==
-X-Forwarded-Encrypted: i=1; AKwUvBxY2tvWWAWB6YdF+P/QcFypTn0G4WTV6TTnWyEXLvd244ugwMded1dg1Zg65DZiThjcxK8vV9NTGqLLfvhK@vger.kernel.org
-X-Gm-Message-State: AFq9FYLyeneA6yqyC9tVgH1R7x1bg91jNl1dXVVE8NJP2buBiTqaQ/Og
-	pwT5iNrWQ9J2OACN8d88TbZ2iBGY0kcrgvQKDNl2JzT+OV7bf2U1Dt+a
-X-Gm-Gg: AYBFou3ZxD65yZYJ23EvwD3DqBezNxavFI0Iaf44E2oGyHOnzUyAXRjhIjg/TEPvccP
-	R6sH/6jrpgDumx0AksYPJ2CwZ4vouYSqQVU3bm5UR707QXVw7hE9t0jQfUIr19O8Cogaaa5Lpv2
-	r0e5l2Q+LncoVo3ECHxDdxTTb2Gt98V4u0ke+Cn2KeNGmwLYbU+fBKZJWKdOFBZNL6tUA2+QAg1
-	UOuSwNU6RMzDT9+vcDppiuBa0nLkE58LP29Vd9rKzyTgRAhkYW2qt9XMWh7FDPu0oieditPzALT
-	E4ZvIUawcozTk/zQEnQ7i6Og9t+WsbHU6/IiTkgtBp8kKTMKG30lkK3HcZlG21ZL2p1YCEb27TZ
-	rlnwBx7T4wj8kc8azIF6ZownAQGGEeBtiTn3pjmeqGU+Y+T/th2AROs+20QPm3yaccRcc/x0OKZ
-	EfB0jLn7CzvEE9NIVL5rn8AbN23YiAo3uHZKN2LdGh0JqD/w5y5l2XD/kqqb66tZ5/orPaCvL3K
-	ad2HahjVsXdlJDOQuVVFSQAp0Jn79tXyAb3kLnMP46gH9zlkdYRuE3+bifQYIzum22sxlgG2ULg
-	f+0ADsEZnT5NE7D27GG5YZG1bKVDeufs
-X-Received: by 2002:a17:90b:1c0a:b0:3ae:3b3d:c617 with SMTP id 98e67ed59e1d1-3ae5812dd39mr123478a91.29.1793134358980;
-        Tue, 27 Oct 2026 13:52:38 -0700 (PDT)
-Received: from debian.lan ([121.101.131.247])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae57bc67bbsm372192a91.3.2026.10.27.13.52.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 13:52:38 -0700 (PDT)
-From: Amir Hanip <killdeath104@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-arm-msm@vger.kernel.org
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Amir Hanip <killdeath104@gmail.com>
-Subject: [PATCH v2 0/2] arm64: dts: qcom: Add Xiaomi Poco M3 (citrus)
-Date: Wed, 28 Oct 2026 03:51:44 +0700
-Message-ID: <20261027205146.16384-1-killdeath104@gmail.com>
-X-Mailer: git-send-email 2.47.3
+	dkim=pass (1024-bit key, unprotected) header.d=meijers.dev header.i=@meijers.dev header.a=rsa-sha256 header.s=november2021 header.b=T+Mr2MVB
+Message-ID: <c329cd0a-1396-4a71-a0cb-6921427f7699@robert.meijers.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meijers.dev; s=november2021;
+	t=1793135096;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FLUULcZ5Th52iRf5h59OCF/dLSjqO3QJ39mbKLqDk+w=;
+	b=T+Mr2MVBqJTteemE/FpH+pdk14MnOWJ2BrL3gGV070LFD9pyzVzVHgoLn+6eiak3tye70T
+	bHo6baFlsIpY+KgOYYBLCXyKvyzx3EEowhD3L/LpG+ROAKzVokMx6/Gp1vygeqagqgQGhK
+	SNpbd+duEmX+LSwgvf7zjZPnxL5O9cY=
+Date: Tue, 27 Oct 2026 22:04:54 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -101,59 +53,78 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+To: yongxing.mou@oss.qualcomm.com
+Cc: abhinav.kumar@linux.dev, airlied@gmail.com,
+ dmitry.baryshkov@oss.qualcomm.com, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, jesszhan0024@gmail.com,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ lumag@kernel.org, marijn.suijten@somainline.org, quic_abhinavk@quicinc.com,
+ robin.clark@oss.qualcomm.com, sean@poorly.run, simona@ffwll.ch,
+ stable@vger.kernel.org
+References: <20260929-msm-dp-mst-v7-0-4b81473185e7@oss.qualcomm.com>
+Subject: Re: [PATCH v7 00/35] drm/msm/dp: Add MST support for MSM chipsets
+Content-Language: en-US
+From: Robert Meijers <linux@robert.meijers.dev>
+In-Reply-To: <20260929-msm-dp-mst-v7-0-4b81473185e7@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This series adds initial support for the Xiaomi Poco M3 (codename
-citrus), a smartphone based on the Qualcomm Snapdragon 662 (SM6115).
+Hi,
 
-Currently working:
-- UFS and microSD
-- USB host (OTG), limited to high-speed (SuperSpeed is untested)
-- WiFi
-- Bluetooth
-- Remoteprocs (ADSP, CDSP and modem)
+((Sorry, re-sending because the first was rejected for not being plain 
+text))
+(First up this is the first time I'm participating on a mailing list,
+so sorry in advance if I'm doing something wrong).
 
-The memory map for the ADSP, CDSP, IPA and GPU regions differs from
-the SM6115 defaults and follows the layout of the stock firmware.
+> Add support for Multi-stream transport for MSM chipsets that allow > a single instance of DP controller to send multiple streams. > > 
+This series has been validated on sa8775p ride platform using multiple > 
+MST dongles and also daisy chain method on both DP0 and DP1 upto 1080P. 
+ > > With 4x4K monitors, due to lack of layer mixers that combination 
+will > not > work but this can be supported as well after some rework on 
+the DPU > side. > > In addition, SST was re-validated with all these 
+changes to ensure > there > were no regressions.
+I have applied this patch series onto a near mainline 7.3 tree for the
+Xiaomi Pad 6s Pro ("Sheng"), with SM8550. But with these patches
+applied I don't have working audio, over USB-C to my (DisplayPort)
+monitor, anymore. If I disable MST support on the monitor audio works
+again. Debugging (using AI) reveals that the DP0 Jack is not reported as
+connected anymore when connected to the monitor, with these patches
+applied and MST enabled on the monitor. As shown, for example, by
+amixer:
 
-Not included yet: the display panel, touchscreen and the GPU display
-pipeline, which depend on drivers that are not upstream. Until then
-the display is only available through simple-framebuffer. Audio is
-not included either.
+$ amixer -c 0 contents | grep -i -A8 -B3 -E 'hdmi|displayport|jack'
+numid=208,iface=CARD,name='DP0 Jack'
+; type=BOOLEAN,access=r-------,values=1
+: values=off
 
-Firmware and userspace: WiFi, Bluetooth and the remoteprocs need
-device-specific firmware which is not part of this series. WiFi
-additionally needs qrtr, tqftpserv and rmtfs running in userspace,
-and the Bluetooth controller needs its BD address set from userspace.
+With MST on the monitor disabled this outputs "values=on". The same is
+also reflected by "pactl list cards" and "pactl list sinks" where
+HDMI/DisplayPort is reported as "not available" with MST enabled (and
+"available" when disabling MST).
 
-Tested on a Poco M3 booted from microSD with a v7.2-based kernel.
-The series is based on qcom/for-next, builds without new warnings
-with W=1 and passes CHECK_DTBS=y for
-qcom/sm6115-xiaomi-citrus.dtb. The existing dsi@5e94000 warning
-comes from sm6115.dtsi.
+(Again, suggested by AI) I also checked the ELD, which in both
+cases (MST on and off on the monitor) is identical, including audio
+information (like "speakers [0x1] FL/FR"). (Also, audio works both using
+an AMD and an Intel based laptop, in which case I can also choose
+whether to use "HDMI" or "HDMI 2" to switch audio output between two
+monitors, in daisy chain).
 
-Changes in v2:
-- Unrolled the wcn3950-pmu regulator scopes, used lowercase hex and
-  kept a blank line before 'status' (Konrad)
-- gpio-reserved-ranges: dropped <0 4>, the device boots fine without
-  it. Kept <14 4> (SE5 SPI), without it the device bootloops. Added
-  a comment (Konrad)
-- Kept citrus separate from lemon: reserved-memory, PM6125 regulators
-  and the wifi/bluetooth bits differ, and I can't test lemon (Konrad)
-- Patch 1/2: no changes
+So my foremost question is: should audio be supported in case of MST,
+after applying these patches? Or is this possibly out of scope?
 
-Link to v1:
-https://lore.kernel.org/all/20261027075116.41673-1-killdeath104@gmail.com/
+For clarity I would also like to note that without these patches
+applied audio over DP does work as well, irrespective of MST being
+on or off on the monitor (obviously always running as SST because of
+missing kernel support). Which would make me believe that no audio
+support in the same setup might be considered a regression?
 
-Amir Hanip (2):
-  dt-bindings: arm: qcom: Document Xiaomi Poco M3
-  arm64: dts: qcom: Add Xiaomi Poco M3
+Note that I do understand that me running a forked kernel on a
+(by upstream) unsupported device might also lead to issues or require
+changes for the fork. And that if audio does work with MST then this is
+something the maintainers of the fork should, most likely, fix. But
+from the cover letter and commit messages it is unclear to me whether
+audio support should work and/or has been tested when MST is in use.
 
- .../devicetree/bindings/arm/qcom.yaml         |   1 +
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../boot/dts/qcom/sm6115-xiaomi-citrus.dts    | 538 ++++++++++++++++++
- 3 files changed, 540 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm6115-xiaomi-citrus.dts
+Kind regards,
+Robert
 
--- 
-2.47.3
