@@ -1,84 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793067575;
-	b=peFZALH7pNcfE4FS/cuIRojLcIhsGM2EMqQoOZ3kARpB5YTC0WbXOyJw2MkKLUOWrlMk
-	 1m0sJmoFEIstfOepZiLR0ZRm1PVNOAvUA39GpSnUvUFtRgRL7TToCOngbNCl2N48dleC+
-	 xioZWAZNnJ0phqBoVO8Ze06CFJjkAxLW57Ysjmb3PWsdxAJ2QqhC6/EqG7hZzSnSIKi9j
-	 MYD5ymGraFuwOL88e8nbdTr5tc9GMAZ9bJ4L8fuO5GOJQ1NUkiYRm7sRlp763DlTXtVHm
-	 lTLIY8Hu1Oz94oZcZicQHD8dfcadbzQYx4O1gHKC5T5EUAc3qWUYg4bpiYDKXmLFWUw==
+	t=1793067576;
+	b=CUE8PE1GFqyZDHU7hTGGrO3f/7CZi3lh4j/94ivY9ga3H1ERTmIRdfAC9LaOAS2L85p4
+	 8VIUOyYOA2pHPtCW8+EeEfxNhL9BgWxxWuU2oIbxFvyr9fI7G08V9fMKqukPBwePnRAPd
+	 bAXxQMsIFcGDRxHnN+3O8rqQH9AqrPKLS3d+3eSeFMtdwD7ndkUutP+WQOlx1Plkvxiiq
+	 JyrAZELNPd1OXLIEaz5R7Tg9N1HzdCc22v4+VdgmEPYX5G9RcJz1U6jfXI/CW+aJLdGz3
+	 JAtPh4hOCkjLKOpaWwa+OPAHe0ruMlwoWYFR/8NT7GTpyCyps1ibgqeNTXRLIat3SNQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793067575;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793067576;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=FvGkGFPYz8+KYBcINAaK6j1K6Fdi7c7ydCjuXhI7sng=;
-	b=Lp+79GaNKoI5ccsePHBYuhaNARwfwdngV5HpRdmqHlcSbgmAMxaR4B+Lr3Nh1IkbZZFd
-	 3LwxpT02DtXAOvqpsIBDTUTTA7HBdWBG2Lj3w9BPx99b849hEoerwVvybbA4Qqytk5jo0
-	 +9IDPvQ3vHGzqVeTlCeKoykbnDR/fLrIk2utptt1kWs9K7PAc8YElh/oZBA6u6e146mPr
-	 FsppuXqXiWyjItDhCmfI4OzyhFYD1qGFjh+AZm1Y4qCpVULXWZD5EeVcfA42UwhQ+G4h8
-	 VQq7NOVbHBLU3n/PvkUTQFIK0QBD41Uw6PIbl317QmJazmsw1GCTov7BCdDrSYvSdkQ==
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
+	b=y3ZUqC5Q4SYo+p5xI/vQjPkrLTDqT6Nltqu4XUwKXpXVdxCCfCDf5DAvLpKuKLXp20I7
+	 3gOhjDmVunC75A69PFZfQzGpbULZ/ROmsfCG/FxEYtmSKVTlz4aU5zcCxvBVdV7zHao1j
+	 byHasBB7TwfEn0CVfuod3l6YqALU4RAPylfnunvOh8g3q31NYcKLZnwwZ8RrSZUDsmo8S
+	 YMqCSIpTXB3QSq+ZwxJSvjlL4v/OoeVhbUejbuP9AyhqUIwkLUl80bUo6fVBhKqHU7FML
+	 2Z405FhhO8luQdY1GZsS62VenIkwqubkOZ4mM7uS7k5DXJ9v91R6SuseRCJqG2uvglA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=DPp+dTyB;
-	arc=none smtp.remote-ip=74.125.224.45
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aYDYfTgx;
+	arc=none smtp.remote-ip=209.85.128.175
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BAA5606A31B
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 02:19:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2BAA5606A31B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CF6D606A323
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 02:19:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CF6D606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=DPp+dTyB
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-66fca0709caso3062047d50.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:19:35 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aYDYfTgx
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-8ab38a051aaso35141827b3.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:19:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793067574; x=1793672374; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=FvGkGFPYz8+KYBcINAaK6j1K6Fdi7c7ydCjuXhI7sng=;
-        b=DPp+dTyB+6pjzFXeNV4sR+rIXzySScLVo7ZDlen2RcX8F357FW7wJeD/GirUl9L5ni
-         WUtqHExapuHU685taOQDkLVWPDoBJ1HaTRPHSyxmWpT+yVXb/QPdSpm3k5/1oeFrLjwR
-         Sjr7mTp3wY2G0SVcBeZKNLF9bY6DReT6oOrhncTuI4oEaJzPjRUXzSI77TGFB46XTYGA
-         F2nIGp+NvUp9KoWeXb6qOCLyobIggJalyq+JVZyLPoWlDL5U53rsLn+NgbW/lFyot45L
-         kijEUFM0qv+Ug0fL2HBtCssGNEtveUCCTkpR2lfsOTht/EA6Ath705KU/3Nc3t83Ufya
-         dTRg==
+        d=gmail.com; s=20251104; t=1793067575; x=1793672375; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
+        b=aYDYfTgxhzNih+KCle5OtOY1DQZ369aokBe0Rqzdo5j/hFQOe1MypyJTghY7w+VYm/
+         M0XXqRTk8QJYAKHbr/zQwjtxd+f1j5z/pTFovlDvQwINK651iKJh60jIdQeS4BUeA1FD
+         weUO8PRTDBFve3SyaomNJ6t3PYGcOG14+rILLGEe9CoPaLSbAjBIy9QTvL/WeIXC7Ohh
+         +oSyb4kBg2ohivAjYgsCH1zUQQHkOwkOUyDZief9rBJxLQ+VPI5zoz2NMdDuSdIK5eDq
+         db24jCOC9sCaj3sGw6RQV9sptk1dbWuiSfrTpmUyyaUMQ5KpGmPrpYxtFgZi+vs/ye0j
+         vsrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793067574; x=1793672374;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FvGkGFPYz8+KYBcINAaK6j1K6Fdi7c7ydCjuXhI7sng=;
-        b=a6WfzGu25Ssk7LIiqk4ClrqbJ7Ji0OBb1jjatuWP9wz1zaTOUuhO3x5KhRpS9+ZKaM
-         v6UDD7lOpuaTpIgMsP0jILBVfO8DON1Qdrg/7AHQR6pCzm/Goj88q3MuXuzHNaw824++
-         8JJ11D2ZVnHk+dX6GWzF3NfP6jxY85slzeJLKhJW9TNdAmWR5sXLzlLPm/+C4J8peQro
-         Xev0CI3H+Qc+OQjmOzxmx4+g34xQD41OYuIHniNQVVCi50I1rIPyb5OBzggE93g7a5Cx
-         ipKQwfc7ftPe7LM0dFCfX0ANCkZB0fDdG4RtDhjM8RZcYXngrGjw+zizYoChQ5GdZJiv
-         HBDQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxfOzE+hkcr4yFM0hYPsQuN1x7Q9/AIwU2xAi2Wqssa/m7W8pusNGWVtaYSL5h7147Rm5JmUO6OKk8pPQuM@vger.kernel.org
-X-Gm-Message-State: AFq9FYJWdBuVXipxl/uQwzUATRTs2hiXwa5mLS71cePyzUjJSnqRflcG
-	IH9zGq/P3CCMPi5ruGQ3I0VUQEjYTKGbGOB3ikf/3wiFAUll13Qz6X3r
-X-Gm-Gg: AYBFou33r9WYBSlTRMTBBKJbzivtxDn7yMAHKgKrgzsweo+aIX4L+UGOR7EN9uflS47
-	ZMvewDWATwSxL2LBonfOcPNDsZudkgYJMwWzrn14mGOe0LScWET8oGVwVzP4Fmwm+J5M/bKLxVt
-	RdXHoWQWNAj2zOyyiVt0SuFuh+2pFGOimoVSwwLMLn+68fHT/j17x80k0ZnK4ivGl3UpeTQQuZg
-	o7RdLRIcrsOHzpJVg65uF6QCE/AGIzs027GwF0hSgW+biC10mMsr3oplArsLj630AMC5L7ACE/i
-	my+ioc4znS8clnyFYobF1hl4RNZ98zSNa019Wk0f9l4IVGOUmMOh6W1Cft963ke9hgxUxdO85/R
-	76c7x5hVWR4ebykt96uYT1xm4u0tYlPyV9opdGIvyT73wrB7YoN1r67CdlcXmcedPaAaP67w5ay
-	qgPDpu331MbkT7FuVjOvijSg7vk98TCGWtAvD76onqlggSrzbAXa6ilKl4shfutApvkstAWrHvl
-	/Hks5LGxKnXBi9Uknhgsbt83mB9pyd32weVXc3J6UxVmqNciWCxBD/ZEAQOA3pRH7gTigHZPX2s
-	sItfCcTOYpaNyl/wTFmKKR8Rv6GFJcpU
-X-Received: by 2002:a05:690e:138e:b0:675:5d66:765f with SMTP id 956f58d0204a3-67a45383866mr6850222d50.28.1793067573892;
-        Mon, 26 Oct 2026 19:19:33 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793067575; x=1793672375;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=DHrcVfVURsCK7PM42eHtwMFIpRh89A5AI9d7463hUf4=;
+        b=a5KetwvI3bKj09o3d3NK3/D4wUCTFRjU0abvs9PS6oPnv0Fzu9THL0r562RG+nZJZ/
+         +q60oe+MYQqtWwVao4V8qTq4c5HZA0sz+7fTmCioi1JJZ0xpLV5MExNsSfvWwRj0Vhve
+         k9+JEs51JtBvjHZAeUrZphT9mf0U7OE4i7nrMWvp+SvA2hjqXMdYpALF5qZk2aXlymom
+         Y69ksO9p4AfHqEBgv+shuaPyV4dIIpRjP5Pc5NsPcF+dXyePq9bJSexcUwCDmKfcomhg
+         fDNvinTUUcFXT9zaubxkgu0uPzCmIhyqbeovXXu0TMr7vtJm0AbeApCccP2wGdwPpCmE
+         kJ9A==
+X-Forwarded-Encrypted: i=1; AKwUvBxVYEXngy1ouTfpwN/07aC1Wtf0lP7vUvV93JXyw+X6LUqhYXh/qCfhkhcgUQ5zQKyIQbp1cj7xoFsMCMJY@vger.kernel.org
+X-Gm-Message-State: AFq9FYLYxxg2v92PxotqItu2bo4bEDcpQNuj0tyQ/8HWNLCFPiYhhFEW
+	CGQpsNfHE+JSvKdPvicZ1YG3JTOny3aaui6SlbEqhd7pI6sBazkBVker
+X-Gm-Gg: AYBFou2593ShzZoJ7BsfvV5iOZTcGojCoWWfy+XB7lc61cKVdCmnA+dBV8zAi5HOOJs
+	qqE/eShlL887uqw6rVmMBe4pRs5ahNY8IpX30lWpMRmVlCUfKvM8p0qidIPywHE2/6xBtzZNoqs
+	PrjUVRK4hR+mQrRGQVBU3cqsEk+4GKDDiZUrykp8B6fPNeDUJDCaNAzzIjD+QhySq+pX2UjlK/E
+	OYyY3YYF6Ct5VY2+cWJt4Sj1dXN+pkuDF7gpjCK0PbL5o4qpxFcrqaA84b/Y+Fqun4JmZFc50Ng
+	AwOKo6hj1evA33PleMe2It79eoz6HcZBXuCIR/b0WjmeI5sslPYI3oClYQEXk6e4XhcdR5gPbg2
+	jTv8FNjcgxBeRYIDqcBiwOX9DIIoO3z3enXmEjbIwSVLkTWbamAdMmz+dGFQoEDSE7TZVlxo5B1
+	xObpG3iDv50zsM8cw8xmlPT/Gl5lhYpICfrMJ9UpX8yHQR/JlcOb5RT87wwvBEGaRgdLBOFNHKv
+	BvOPlrFK8r7vrdB2K0w1r7f2gS8rTo3qr+Tw/eglUaPWZ6gyEpN1j9hZGjOrQ+ucIxQcO+YfZ+A
+	qv1sBm1jBLvejn+Z6KbmbTC+KSkUSZkG
+X-Received: by 2002:a05:690c:4028:b0:8b0:c673:9958 with SMTP id 00721157ae682-8b1669cb3a2mr50043147b3.3.1793067575123;
+        Mon, 26 Oct 2026 19:19:35 -0700 (PDT)
 Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a45ff8d6dsm4392528d50.1.2026.10.26.19.19.33
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b19e61d0cdsm5033647b3.40.2026.10.26.19.19.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 19:19:33 -0700 (PDT)
+        Mon, 26 Oct 2026 19:19:34 -0700 (PDT)
 From: Christian Cortner <ccortner@gmail.com>
 To: Bryan O'Donoghue <bod@kernel.org>,
 	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
@@ -87,12 +86,12 @@ Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Birk Skyum <birk.skyum@pm.me>,
 	linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org
-Subject: Re: [BUG] media: iris: resolution change handling stops ffmpeg's h264_v4l2m2m decoder on glymur
-Date: Mon, 26 Oct 2026 21:19:32 -0500
-Message-ID: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
+Subject: [RFC PATCH 0/5] media: iris: ffmpeg decoder flow changes, for reference only
+Date: Mon, 26 Oct 2026 21:19:29 -0500
+Message-ID: <20261027021934.22113-1-ccortner@gmail.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <36201ae2-1cee-4d8d-9381-dfc9013c522e@kernel.org>
-References: <20261026160952.22082-1-ccortner@gmail.com> <36201ae2-1cee-4d8d-9381-dfc9013c522e@kernel.org>
+In-Reply-To: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
+References: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,629 +101,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1676936801974189972=="
 Content-Transfer-Encoding: 8bit
 
---===============1676936801974189972==
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+These are the local changes behind my report "[BUG] media: iris:
+resolution change handling stops ffmpeg's h264_v4l2m2m decoder on
+glymur" [1], posted because Bryan asked for the code [2]. They are for
+reference only, not for merging, and carry no Signed-off-by, because I
+can't review or defend kernel code myself. An AI coding assistant
+(Claude, by Anthropic) traced the driver, wrote the changes, their
+commit messages and a test client, and ran the tests below, in a long
+interactive session that started from "make hardware video decoding
+work on this laptop". Each patch has an Assisted-by tag.
 
-On 26/10/2026 22:31, Bryan O'Donoghue wrote:
-> Err thanks for the bug report but, if you have a test-case and a
-> resolution - even of the code sucks and/or you don't understand it,
-> please post the code.
->
-> One of us can take up the task of finishing it off.
+Patch 5 does not work for most real streams, see [3]. It resumes the
+firmware through iris_vdec_start_cmd() while the driver's internal
+buffers are still sized for four frame buffers, so streams that need
+more, x264 at its default settings among them, end in a fatal
+firmware error. It is included only to show where the driver could
+resume a first source change itself; a working version would have to
+re-create the internal buffers first, or resume only when they fit.
+The commit message of patch 4 notes that re-creating them at a later
+VIDIOC_STREAMON(CAPTURE), in a different situation, made the firmware
+return nothing at all.
 
-Will do. The five changes follow as an RFC series in reply to this
-mail, not for merging and without a Signed-off-by, since I can't
-review them myself. First a correction to my report, and a bug that
-Birk's results led to. As before, I traced this with an AI coding
-assistant.
+The patches and the problems in [1] they address:
+
+  1/5  Don't flag an empty source change LAST buffer as an error  (2)
+  2/5  Update the CAPTURE stride and size on S_FMT(OUTPUT)        (5)
+  3/5  Signal V4L2_EVENT_EOS only at the end of a drain           (3)
+  4/5  Let a resolution change drain before stopping CAPTURE      (4)
+  5/5  Resume the first source change if it fits the CAPTURE
+       setup                                                      (1)
+
+Testing: the same changes, in the form that applies to the linux-msm
+laptops tree, ran on the glymur laptop from [1]; the functions they
+change are the same there and in media-committers next, apart from one
+line of context. These versions, on media-committers next, are
+build-tested only: each builds with W=1, sparse and smatch without new
+warnings, and checkpatch --strict warns only about the missing
+Signed-off-by and, because my clone is shallow, the commit ids in the
+Fixes tags. The H.264 and HEVC results in [1] came from clips encoded
+with -preset ultrafast. With x264-default clips at 640x360, 1024x576
+and 1280x720, the test client from [3] decoded bit-exact when it set
+up CAPTURE after the first event, so that patch 5 did not act. Not
+tested at all: other SoCs, and HFI gen1, which patches 3 and 4 touch.
+
+[1] https://lore.kernel.org/linux-media/20261026160952.22082-1-ccortner@gmail.com/
+[2] https://lore.kernel.org/linux-media/36201ae2-1cee-4d8d-9381-dfc9013c522e@kernel.org/
+[3] https://lore.kernel.org/linux-media/179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com/
+
+Christian Cortner (5):
+  media: iris: Don't flag an empty source change LAST buffer as an error
+  media: iris: Update the CAPTURE stride and size on S_FMT(OUTPUT)
+  media: iris: Signal V4L2_EVENT_EOS only at the end of a drain
+  media: iris: Let a resolution change drain before stopping CAPTURE
+  media: iris: Resume the first source change if it fits the CAPTURE
+    setup
+
+ .../media/platform/qcom/iris/iris_buffer.c    |   7 +-
+ .../media/platform/qcom/iris/iris_common.c    |   3 +
+ .../qcom/iris/iris_hfi_gen2_response.c        |  40 +++++-
+ .../media/platform/qcom/iris/iris_instance.h  |   7 ++
+ drivers/media/platform/qcom/iris/iris_state.c |   8 +-
+ drivers/media/platform/qcom/iris/iris_vb2.c   |  23 +++-
+ drivers/media/platform/qcom/iris/iris_vdec.c  | 117 +++++++++++++-----
+ drivers/media/platform/qcom/iris/iris_vdec.h  |   3 +
+ drivers/media/platform/qcom/iris/iris_vidc.c  |   1 +
+ 9 files changed, 176 insertions(+), 33 deletions(-)
 
 
-Correction
+base-commit: d7e7bca7169873b46e857c025c10f3336c1258d8
+-- 
+2.56.0
 
-Problem 1 in my report says that a client which sets up CAPTURE early
-decodes every frame when it sends V4L2_DEC_CMD_START after the LAST
-buffer, and the results say that ffmpeg decodes bit-exact with all
-five changes. Both were measured with x264 -preset ultrafast clips
-(Constrained Baseline), for which the firmware asks for three frame
-buffers. With x264's default settings, which Birk's clips probably
-used, it asks for six, and then the change for problem 1 (patch 5 of
-the series) fails: at 640x360 every ffmpeg run ends in five lines of
-
-  qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
-
-and ffmpeg then gets EIO and aborts. Patch 5 resumes the firmware
-through iris_vdec_start_cmd(), so it runs into the bug below. A client
-that sends V4L2_DEC_CMD_START after the LAST buffer at the start
-should fail the same way with these streams; I could not test that,
-because on my kernel patch 5 handles that source change. At 720p
-ffmpeg decodes these streams fine: there the first source change
-arrives before ffmpeg starts CAPTURE, and the driver takes its normal
-path.
-
-
-Resuming with V4L2_DEC_CMD_START does not grow the internal buffers
-
-When a resolution change raises the number of frame buffers a stream
-needs, and the client resumes with V4L2_DEC_CMD_START after the LAST
-buffer instead of reallocating CAPTURE, the firmware fails right after
-the resume with the same five errors. Step 6 of the Capture Setup
-sequence in dev-decoder.rst allows that resume when the CAPTURE
-buffers are large enough and there are at least as many as the new
-minimum, as here: 16 allocated, 6 needed.
-
-To reproduce, make one second of an x264 ultrafast stream (three
-frame buffers) followed by one second of an x264 default stream
-(six), both 640x360, so that the second source change raises the
-count at the same size:
-
-  ffmpeg -f lavfi -i testsrc2=duration=1:size=640x360:rate=30 \
-    -pix_fmt yuv420p -c:v libx264 -preset ultrafast -f h264 a.h264
-  ffmpeg -f lavfi -i testsrc2=duration=1:size=640x360:rate=30 \
-    -pix_fmt yuv420p -c:v libx264 -f h264 b.h264
-  cat a.h264 b.h264 > ab.h264
-
-and decode it with the attached test client, which sets up CAPTURE
-after the first event, the way GStreamer does (-d selects the device
-node, default /dev/video0):
-
-  gcc -O2 -Wall -o iris-drc-test iris-drc-test.c
-  ./iris-drc-test -i ab.h264 -s 640x360 -m late -o out.nv12
-  ./iris-drc-test -i ab.h264 -s 640x360 -m late -A -o out.nv12
-
-The first run resumes with V4L2_DEC_CMD_START at the second source
-change: the fatal errors, and only the first 30 of 60 frames (2 of 2
-runs). The second (-A) reallocates CAPTURE instead: all 60 frames,
-identical to "ffmpeg -i ab.h264 -f rawvideo -pix_fmt nv12" (2 of 2).
-With the halves swapped, so that the count falls from 6 to 3,
-resuming with V4L2_DEC_CMD_START works.
-
-The kernel was the one from my report, with the five changes. Patch 5
-acts only on the first source change, and kprobes showed that it did
-not act in these runs. None of the changes touches the resume or the
-internal buffers; on this path, patch 1 drops the ERROR flag from the
-LAST buffer, patch 3 the EOS event at the resolution change, and
-patch 4 adds a wake-up when DRC_LAST is set. I have not run this on
-an unmodified driver. Birk, if you have a moment, the client would
-show whether X1E80100 behaves the same; the fatal errors you saw on
-an unmodified driver might have the same cause, but I can't tell
-from here.
-
-Not verified, from reading the code: in this case
-iris_vdec_start_cmd() only resumes the firmware's ports. The COMV
-buffer, sized when it is created from buffers[BUF_OUTPUT].min_count
-or fw_min_count (iris_vpu3x_4x_dec_comv_size(), and
-HFI_PROP_COMV_BUFFER_COUNT), and in split mode the internal DPB
-buffers (iris_vpu_dpb_count()) keep that count. The reallocation
-path recreates both at VIDIOC_STREAMON(CAPTURE).
-
-Thanks,
-Christian Cortner
-
---===============1676936801974189972==
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="iris-drc-test.c"
-MIME-Version: 1.0
-
-// SPDX-License-Identifier: GPL-2.0
-/*
- * iris-drc-test - a V4L2 stateful-decoder client that follows dev-decoder.rst, with switches that
- * reproduce what ffmpeg's h264_v4l2m2m does, to separate client bugs from driver bugs.
- *
- *   -m late    set up CAPTURE only after the first SOURCE_CHANGE event (what GStreamer does)
- *   -m early   set up and stream CAPTURE right after OUTPUT STREAMON (what ffmpeg does)
- *   -E         on SOURCE_CHANGE, send V4L2_DEC_CMD_START at once (what ffmpeg does) and report it
- *   -R         do NOT send START again after the LAST buffer (what ffmpeg does); default: send it,
- *              as the spec's Dynamic Resolution Change sequence requires
- *   -F         (early mode) start CAPTURE before feeding the first access unit, so the firmware's first
- *              port-settings change always arrives with CAPTURE streaming (ffmpeg's losing side of the race)
- *   -S         on a SOURCE_CHANGE whose format no longer fits, stop CAPTURE and set it up again at once, without
- *              waiting for the LAST buffer (what ffmpeg's reinit does; the spec's Drain section allows aborting
- *              the implicit drain this way); default: wait for LAST first (Capture Setup step 7)
- *   -A         at a resolution change whose format still fits, reallocate CAPTURE anyway (STREAMOFF, REQBUFS,
- *              STREAMON) instead of resuming with V4L2_DEC_CMD_START: the driver's normal path, as a control
- *
- * Resolution changes: after every CAPTURE (re)setup the visible size is re-read (G_SELECTION, COMPOSE), so a
- * stream that changes size mid-way is written at its native sizes, like ffmpeg -noautoscale.
- *
- * Input is fed one H.264 access unit per OUTPUT buffer. The visible NV12 frames go to -o, for an md5
- * comparison with ffmpeg's software decode (-pix_fmt nv12).
- *
- * Usage: iris-drc-test -i s.h264 -s WxH [-m late|early] [-E] [-R] [-A] [-b capbufs] [-o out.nv12] [-d dev]
- */
-#include <errno.h>
-#include <fcntl.h>
-#include <poll.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <time.h>
-#include <unistd.h>
-#include <linux/videodev2.h>
-
-#define MAXBUF 64
-#define NOUT 4
-#define OUT_SIZE (2 * 1024 * 1024)
-
-struct mbuf { void *start; size_t len; };
-struct au { size_t off, len; };
-
-static int fd;
-static struct mbuf cap[MAXBUF], out[NOUT];
-static unsigned ncap_req = 16, ncap;
-static struct v4l2_format capfmt;
-static unsigned vis_w, vis_h;
-static FILE *outf;
-
-static int xioctl(unsigned long req, void *arg)
-{
-	int r;
-	do { r = ioctl(fd, req, arg); } while (r == -1 && errno == EINTR);
-	return r;
-}
-
-static void die(const char *what)
-{
-	fprintf(stderr, "FAIL %s: %s\n", what, strerror(errno));
-	exit(2);
-}
-
-static double now(void)
-{
-	struct timespec ts;
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	return ts.tv_sec + ts.tv_nsec / 1e9;
-}
-
-/* Split an Annex-B stream into access units: a new AU starts at a non-VCL NAL (SEI/SPS/PPS/AUD)
- * that follows a VCL NAL, or at a VCL NAL with first_mb_in_slice == 0 that follows a VCL NAL. */
-static size_t split_aus(const uint8_t *b, size_t len, struct au *aus, size_t max)
-{
-	size_t starts[65536], ns = 0, n = 0;
-	for (size_t i = 0; i + 3 <= len && ns < 65536; i++)
-		if (b[i] == 0 && b[i + 1] == 0 && b[i + 2] == 1) {
-			starts[ns++] = (i > 0 && b[i - 1] == 0) ? i - 1 : i;
-			i += 2;
-		}
-	size_t au_start = 0;
-	int seen_vcl = 0;
-	for (size_t k = 0; k < ns; k++) {
-		size_t hdr = starts[k] + (b[starts[k] + 2] == 1 ? 3 : 4);
-		if (hdr >= len)
-			break;
-		int type = b[hdr] & 0x1f;
-		int vcl = (type == 1 || type == 5);
-		int first_mb0 = vcl && hdr + 1 < len && (b[hdr + 1] & 0x80);
-		int boundary = seen_vcl && ((!vcl && (type == 6 || type == 7 || type == 8 || type == 9)) || first_mb0);
-		if (boundary && n < max) {
-			aus[n].off = au_start;
-			aus[n].len = starts[k] - au_start;
-			n++;
-			au_start = starts[k];
-			seen_vcl = 0;
-		}
-		if (vcl)
-			seen_vcl = 1;
-	}
-	if (seen_vcl && n < max) {
-		aus[n].off = au_start;
-		aus[n].len = len - au_start;
-		n++;
-	}
-	return n;
-}
-
-static int dec_cmd(unsigned cmd)
-{
-	struct v4l2_decoder_cmd c;
-	memset(&c, 0, sizeof(c));
-	c.cmd = cmd;
-	return xioctl(VIDIOC_DECODER_CMD, &c) ? -errno : 0;
-}
-
-static void setup_output(unsigned w, unsigned h)
-{
-	struct v4l2_format f;
-	memset(&f, 0, sizeof(f));
-	f.type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-	f.fmt.pix_mp.width = w;
-	f.fmt.pix_mp.height = h;
-	f.fmt.pix_mp.pixelformat = V4L2_PIX_FMT_H264;
-	f.fmt.pix_mp.num_planes = 1;
-	f.fmt.pix_mp.plane_fmt[0].sizeimage = OUT_SIZE;
-	if (xioctl(VIDIOC_S_FMT, &f))
-		die("S_FMT output");
-	struct v4l2_requestbuffers rb = { .count = NOUT, .type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, .memory = V4L2_MEMORY_MMAP };
-	if (xioctl(VIDIOC_REQBUFS, &rb) || rb.count < NOUT)
-		die("REQBUFS output");
-	for (unsigned i = 0; i < NOUT; i++) {
-		struct v4l2_buffer b; struct v4l2_plane pl[1];
-		memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl));
-		b.type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.index = i;
-		b.m.planes = pl; b.length = 1;
-		if (xioctl(VIDIOC_QUERYBUF, &b))
-			die("QUERYBUF output");
-		out[i].len = pl[0].length;
-		out[i].start = mmap(NULL, pl[0].length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, pl[0].m.mem_offset);
-		if (out[i].start == MAP_FAILED)
-			die("mmap output");
-	}
-}
-
-static void qbuf_cap(unsigned i)
-{
-	struct v4l2_buffer b; struct v4l2_plane pl[1];
-	memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl));
-	b.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.index = i;
-	b.m.planes = pl; b.length = 1;
-	if (xioctl(VIDIOC_QBUF, &b)) {
-		int err = errno;
-		struct v4l2_format f;
-		memset(&f, 0, sizeof(f));
-		f.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-		xioctl(VIDIOC_G_FMT, &f);
-		fprintf(stderr, "QBUF capture idx=%u failed (%s); buffer len=%zu, format now %ux%u sizeimage=%u\n", i,
-			strerror(err), cap[i].len, f.fmt.pix_mp.width, f.fmt.pix_mp.height, f.fmt.pix_mp.plane_fmt[0].sizeimage);
-		errno = err;
-		die("QBUF capture");
-	}
-}
-
-/* the visible rectangle of the decoded frames (G_SELECTION COMPOSE), kept in vis_w/vis_h */
-static void read_visible(const char *why)
-{
-	struct v4l2_selection sel;
-	memset(&sel, 0, sizeof(sel));
-	sel.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	sel.target = V4L2_SEL_TGT_COMPOSE;
-	if (xioctl(VIDIOC_G_SELECTION, &sel) == 0 && sel.r.width && sel.r.height) {
-		vis_w = sel.r.width;
-		vis_h = sel.r.height;
-	}
-	printf("[%s] visible %ux%u\n", why, vis_w, vis_h);
-}
-
-static void setup_capture(const char *why)
-{
-	memset(&capfmt, 0, sizeof(capfmt));
-	capfmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-	if (xioctl(VIDIOC_G_FMT, &capfmt))
-		die("G_FMT capture");
-	if (!strcmp(why, "early")) {
-		/* ffmpeg sets the CAPTURE format at init. Without this, iris's G_FMT after S_FMT(OUTPUT) reports
-		 * the new width/height with the stale sizeimage of its 320x240 default, and QBUF fails EINVAL. */
-		printf("[%s] G_FMT capture: %ux%u sizeimage=%u -> S_FMT NV12 (as ffmpeg does at init)\n", why,
-		       capfmt.fmt.pix_mp.width, capfmt.fmt.pix_mp.height, capfmt.fmt.pix_mp.plane_fmt[0].sizeimage);
-		capfmt.fmt.pix_mp.pixelformat = V4L2_PIX_FMT_NV12;
-		if (xioctl(VIDIOC_S_FMT, &capfmt))
-			die("S_FMT capture NV12");
-	}
-	struct v4l2_control ctl = { .id = V4L2_CID_MIN_BUFFERS_FOR_CAPTURE };
-	int minb = xioctl(VIDIOC_G_CTRL, &ctl) ? -1 : ctl.value;
-	unsigned want = ncap_req;
-	if (minb > 0 && (unsigned)minb + 1 > want)
-		want = minb + 1;
-	struct v4l2_requestbuffers rb = { .count = want, .type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, .memory = V4L2_MEMORY_MMAP };
-	printf("[%s] G_FMT capture before REQBUFS: %ux%u sizeimage=%u\n", why, capfmt.fmt.pix_mp.width,
-	       capfmt.fmt.pix_mp.height, capfmt.fmt.pix_mp.plane_fmt[0].sizeimage);
-	if (xioctl(VIDIOC_REQBUFS, &rb))
-		die("REQBUFS capture");
-	ncap = rb.count;
-	for (unsigned i = 0; i < ncap; i++) {
-		struct v4l2_buffer b; struct v4l2_plane pl[1];
-		memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl));
-		b.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.index = i;
-		b.m.planes = pl; b.length = 1;
-		if (xioctl(VIDIOC_QUERYBUF, &b))
-			die("QUERYBUF capture");
-		cap[i].len = pl[0].length;
-		cap[i].start = mmap(NULL, pl[0].length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, pl[0].m.mem_offset);
-		if (cap[i].start == MAP_FAILED)
-			die("mmap capture");
-		qbuf_cap(i);
-	}
-	read_visible(why);
-	printf("[%s] capture %ux%u stride=%u sizeimage=%u min_buffers=%d buffers=%u\n", why,
-	       capfmt.fmt.pix_mp.width, capfmt.fmt.pix_mp.height, capfmt.fmt.pix_mp.plane_fmt[0].bytesperline,
-	       capfmt.fmt.pix_mp.plane_fmt[0].sizeimage, minb, ncap);
-}
-
-static void free_capture(void)
-{
-	for (unsigned i = 0; i < ncap; i++)
-		munmap(cap[i].start, cap[i].len);
-	struct v4l2_requestbuffers rb = { .count = 0, .type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, .memory = V4L2_MEMORY_MMAP };
-	xioctl(VIDIOC_REQBUFS, &rb);
-	ncap = 0;
-}
-
-static void stream(unsigned type, int on)
-{
-	if (xioctl(on ? VIDIOC_STREAMON : VIDIOC_STREAMOFF, &type))
-		die(on ? "STREAMON" : "STREAMOFF");
-}
-
-static void write_frame(unsigned i)
-{
-	const uint8_t *p = cap[i].start;
-	unsigned stride = capfmt.fmt.pix_mp.plane_fmt[0].bytesperline;
-	unsigned scan = capfmt.fmt.pix_mp.height;
-	for (unsigned y = 0; y < vis_h; y++)
-		fwrite(p + (size_t)y * stride, 1, vis_w, outf);
-	for (unsigned y = 0; y < vis_h / 2; y++)
-		fwrite(p + (size_t)stride * scan + (size_t)y * stride, 1, vis_w, outf);
-}
-
-int main(int argc, char **argv)
-{
-	const char *dev = "/dev/video0", *infile = NULL, *outfile = "/var/tmp/iris-drc-test.nv12", *mode = "late";
-	int early_start = 0, no_retry = 0, feed_late = 0, abort_drain = 0, always_realloc = 0, opt;
-	while ((opt = getopt(argc, argv, "d:i:s:m:b:o:ERFSA")) != -1) {
-		switch (opt) {
-		case 'd': dev = optarg; break;
-		case 'i': infile = optarg; break;
-		case 'o': outfile = optarg; break;
-		case 'm': mode = optarg; break;
-		case 's': if (sscanf(optarg, "%ux%u", &vis_w, &vis_h) != 2) return 2; break;
-		case 'b': ncap_req = atoi(optarg); if (ncap_req < 2 || ncap_req > MAXBUF - 1) return 2; break;
-		case 'E': early_start = 1; break;
-		case 'R': no_retry = 1; break;
-		case 'F': feed_late = 1; break;
-		case 'S': abort_drain = 1; break;
-		case 'A': always_realloc = 1; break;
-		default: fprintf(stderr, "usage: %s -i s.h264 -s WxH [-m late|early] [-E] [-R] [-S] [-F] [-A] [-b n] [-o f] [-d dev]\n", argv[0]); return 2;
-		}
-	}
-	int early = !strcmp(mode, "early");
-	if (!infile || !vis_w || !vis_h || (!early && strcmp(mode, "late"))) {
-		fprintf(stderr, "need -i, -s and -m late|early\n");
-		return 2;
-	}
-	FILE *in = fopen(infile, "rb");
-	struct stat st;
-	if (!in || fstat(fileno(in), &st))
-		die("open input");
-	uint8_t *bs = malloc(st.st_size);
-	if (!bs || fread(bs, 1, st.st_size, in) != (size_t)st.st_size)
-		die("read input");
-	fclose(in);
-	static struct au aus[100000];
-	size_t naus = split_aus(bs, st.st_size, aus, 100000);
-	outf = fopen(outfile, "wb");
-	if (!outf)
-		die("open output");
-	printf("mode=%s early_start=%d retry_after_last=%d feed_after_capture=%d access_units=%zu\n", mode, early_start,
-	       !no_retry, feed_late, naus);
-
-	fd = open(dev, O_RDWR | O_NONBLOCK);
-	if (fd < 0)
-		die("open device");
-	struct v4l2_event_subscription sub;
-	memset(&sub, 0, sizeof(sub));
-	sub.type = V4L2_EVENT_SOURCE_CHANGE;
-	if (xioctl(VIDIOC_SUBSCRIBE_EVENT, &sub))
-		die("SUBSCRIBE source change");
-	sub.type = V4L2_EVENT_EOS;
-	xioctl(VIDIOC_SUBSCRIBE_EVENT, &sub);
-
-	setup_output(vis_w, vis_h);
-	int out_busy[NOUT] = { 0 };
-	size_t next = 0;
-	int cap_ready = 0, drc_seen = 0, stop_sent = 0, done = 0, epipe = 0, src_changes = 0, aborted = 0;
-	int eos_early = 0, eos_end = 0;
-	int frames = 0, empty_last = 0, errors = 0, early_ret = 1, retry_ret = 1;
-	double t_last = now(), t0 = now();
-
-	/* first access unit, then OUTPUT STREAMON (both clients do this) */
-	#define QUEUE_AU(i) do { \
-		memcpy(out[i].start, bs + aus[next].off, aus[next].len); \
-		struct v4l2_buffer b; struct v4l2_plane pl[1]; \
-		memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl)); \
-		b.type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.index = i; \
-		b.m.planes = pl; b.length = 1; pl[0].bytesused = aus[next].len; \
-		b.timestamp.tv_usec = next; \
-		if (xioctl(VIDIOC_QBUF, &b)) die("QBUF output"); \
-		out_busy[i] = 1; next++; } while (0)
-	if (!(early && feed_late))
-		QUEUE_AU(0);
-	stream(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, 1);
-	if (early) {
-		setup_capture("early");
-		stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 1);
-		cap_ready = 1;
-	}
-
-	while (!done) {
-		for (unsigned i = 0; i < NOUT && next < naus; i++)
-			if (!out_busy[i])
-				QUEUE_AU(i);
-		if (next >= naus && !stop_sent && cap_ready) {
-			int busy = 0;
-			for (unsigned i = 0; i < NOUT; i++)
-				busy += out_busy[i];
-			if (!busy) {
-				int r = dec_cmd(V4L2_DEC_CMD_STOP);
-				printf("DEC_CMD_STOP (drain) -> %d\n", r);
-				stop_sent = 1;
-			}
-		}
-		struct pollfd pfd = { .fd = fd, .events = POLLIN | POLLOUT | POLLPRI };
-		if (poll(&pfd, 1, 500) < 0 && errno != EINTR)
-			die("poll");
-		struct v4l2_event ev;
-		while (xioctl(VIDIOC_DQEVENT, &ev) == 0) {
-			t_last = now();
-			if (ev.type == V4L2_EVENT_EOS) {
-				/* EOS ends a drain; one before our DEC_CMD_STOP marks a resolution change as EOS */
-				if (stop_sent)
-					eos_end++;
-				else
-					eos_early++;
-				printf("EOS event (%s)\n", stop_sent ? "after our drain" : "BEFORE our drain");
-				continue;
-			}
-			if (ev.type != V4L2_EVENT_SOURCE_CHANGE)
-				continue;
-			src_changes++;
-			printf("SOURCE_CHANGE #%d changes=0x%x at %.1f ms (%s)\n", src_changes, ev.u.src_change.changes,
-			       (now() - t0) * 1000, cap_ready ? "CAPTURE already streaming" : "CAPTURE not set up yet");
-			if (!cap_ready) {
-				setup_capture("after event");
-				stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 1);
-				cap_ready = 1;
-			} else {
-				/* With CAPTURE streaming the driver may or may not start a Dynamic Resolution
-				 * Change; the LAST buffer, not this event, tells (handled below). */
-				if (abort_drain) {
-					struct v4l2_format f;
-					memset(&f, 0, sizeof(f));
-					f.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-					if (xioctl(VIDIOC_G_FMT, &f))
-						die("G_FMT on event");
-					if (f.fmt.pix_mp.width != capfmt.fmt.pix_mp.width ||
-					    f.fmt.pix_mp.height != capfmt.fmt.pix_mp.height ||
-					    f.fmt.pix_mp.plane_fmt[0].sizeimage > capfmt.fmt.pix_mp.plane_fmt[0].sizeimage) {
-						printf("  -S: format changed (%ux%u); STREAMOFF/realloc/STREAMON CAPTURE now, before LAST\n",
-						       f.fmt.pix_mp.width, f.fmt.pix_mp.height);
-						aborted++;
-						stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 0);
-						free_capture();
-						setup_capture("realloc-on-event");
-						stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 1);
-						continue;
-					}
-				}
-				{
-					/* the buffers still fit: keep them, but frames from now on use the stream's
-					 * visible size (the first event replaces the S_FMT placeholder) */
-					struct v4l2_format f;
-					memset(&f, 0, sizeof(f));
-					f.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-					if (xioctl(VIDIOC_G_FMT, &f) == 0 &&
-					    f.fmt.pix_mp.width == capfmt.fmt.pix_mp.width &&
-					    f.fmt.pix_mp.height == capfmt.fmt.pix_mp.height)
-						read_visible("event, buffers fit");
-				}
-				if (early_start) {
-					early_ret = dec_cmd(V4L2_DEC_CMD_START);
-					printf("  immediate DEC_CMD_START (ffmpeg) -> %d%s\n", early_ret, early_ret == -EBUSY ? " (EBUSY)" : "");
-				}
-			}
-		}
-		for (;;) {
-			struct v4l2_buffer b; struct v4l2_plane pl[1];
-			memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl));
-			b.type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.m.planes = pl; b.length = 1;
-			if (xioctl(VIDIOC_DQBUF, &b))
-				break;
-			out_busy[b.index] = 0;
-			t_last = now();
-		}
-		while (cap_ready) {
-			/* events before buffers, as ffmpeg does: a pending SOURCE_CHANGE is handled first */
-			struct pollfd pe = { .fd = fd, .events = POLLPRI };
-			if (poll(&pe, 1, 0) > 0 && (pe.revents & POLLPRI))
-				break;
-			struct v4l2_buffer b; struct v4l2_plane pl[1];
-			memset(&b, 0, sizeof(b)); memset(pl, 0, sizeof(pl));
-			b.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE; b.memory = V4L2_MEMORY_MMAP; b.m.planes = pl; b.length = 1;
-			if (xioctl(VIDIOC_DQBUF, &b)) {
-				if (errno == EPIPE) {
-					if (!epipe)
-						printf("DQBUF capture -> EPIPE (after LAST; ffmpeg treats this as end of stream)\n");
-					epipe++;
-					if (no_retry)
-						done = 1;
-				}
-				break;
-			}
-			t_last = now();
-			unsigned used = pl[0].bytesused;
-			if (b.flags & V4L2_BUF_FLAG_ERROR)
-				errors++;
-			if (b.flags & V4L2_BUF_FLAG_LAST) {
-				printf("LAST buffer: bytesused=%u flags=%s%s at %.1f ms\n", used,
-				       b.flags & V4L2_BUF_FLAG_ERROR ? "ERROR|" : "", "LAST", (now() - t0) * 1000);
-				if (!used)
-					empty_last++;
-				else {
-					write_frame(b.index);
-					frames++;
-				}
-				if (!stop_sent) {
-					/* a LAST before our drain: the decoder started a Dynamic Resolution Change */
-					drc_seen++;
-					struct v4l2_format f;
-					memset(&f, 0, sizeof(f));
-					f.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-					if (xioctl(VIDIOC_G_FMT, &f))
-						die("G_FMT after DRC");
-					int same = f.fmt.pix_mp.width == capfmt.fmt.pix_mp.width &&
-						   f.fmt.pix_mp.height == capfmt.fmt.pix_mp.height &&
-						   f.fmt.pix_mp.plane_fmt[0].sizeimage <= capfmt.fmt.pix_mp.plane_fmt[0].sizeimage;
-					if (same && always_realloc)
-						printf("  -A: format unchanged; STREAMOFF/realloc/STREAMON CAPTURE anyway\n");
-					if (same && !always_realloc && no_retry) {
-						printf("  format unchanged; NOT sending START again (ffmpeg)\n");
-					} else if (same && !always_realloc) {
-						retry_ret = dec_cmd(V4L2_DEC_CMD_START);
-						printf("  format unchanged; DEC_CMD_START after LAST -> %d\n", retry_ret);
-						qbuf_cap(b.index);
-					} else {
-						if (!same)
-							printf("  format changed (%ux%u); STREAMOFF/realloc/STREAMON CAPTURE\n", f.fmt.pix_mp.width, f.fmt.pix_mp.height);
-						stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 0);
-						free_capture();
-						setup_capture("realloc");
-						stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 1);
-						break;
-					}
-				} else {
-					done = 1;
-					break;
-				}
-				continue;
-			}
-			if (used && !(b.flags & V4L2_BUF_FLAG_ERROR)) {
-				write_frame(b.index);
-				frames++;
-			}
-			qbuf_cap(b.index);
-		}
-		if (now() - t_last > 5.0) {
-			printf("STALLED: no buffer or event for 5 s\n");
-			break;
-		}
-	}
-	{
-		/* an EOS for the final drain may still be queued */
-		struct v4l2_event ev;
-		while (xioctl(VIDIOC_DQEVENT, &ev) == 0)
-			if (ev.type == V4L2_EVENT_EOS) {
-				if (stop_sent)
-					eos_end++;
-				else
-					eos_early++;
-			}
-	}
-	if (cap_ready)
-		stream(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE, 0);
-	stream(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, 0);
-	fclose(outf);
-	close(fd);
-	printf("RESULT mode=%s E=%d R=%d S=%d: fed %zu/%zu AUs, frames=%d, source_changes=%d, aborted_drains=%d, DRC_LAST=%d, empty_LAST=%d, ERROR-flagged=%d, "
-	       "early_START=%d, START_after_LAST=%d, EPIPE=%d, EOS_early=%d, EOS_end=%d, %.0f ms\n", mode, early_start, no_retry,
-	       abort_drain, next, naus, frames, src_changes, aborted, drc_seen, empty_last, errors,
-	       early_ret == 1 ? 0 : early_ret, retry_ret == 1 ? 0 : retry_ret, epipe, eos_early, eos_end, (now() - t0) * 1000);
-	return frames ? 0 : 1;
-}
-
---===============1676936801974189972==--
