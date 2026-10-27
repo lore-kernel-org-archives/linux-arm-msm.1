@@ -1,53 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793107346;
-	b=GnaRgoXht2wiE3F2o95l96QrJVYqD+bc14BAjy9A+9EVMc0oNkTY+epZm69IzKqTj8OA
-	 TOCfQL6DdsxJxh/u1mEXAZ7mbCObfOWWjJZu+VacQbzy1atTcgCUBteHrArwWmrbC1ACn
-	 1KYoH6JyQdr+0zOGO+ZYgsafVgG9HIpohrJ8hjjNjKE0YaCYCW2GPEvyB8AAj+IREIzEV
-	 qqRxz4k78faNz43hW6cU9bexzqq/PWJfc2d9fhd9lSqFmp2ThwlM+mMw03FIDm87v9lbw
-	 XAx3+X2dcSKKt/ny1gJjiBTeEqVeLohu/2CBunAU0S83qjvE1FfbJRAWkodjFCsFIzQ==
+	t=1793107789;
+	b=Va5bPHLEHkxSZa/qMh1T8FuzGBUmq0UKMssNeVlsrqfnEp6/jRVDOOq2dCLtAfyn4+1p
+	 pRQKTQPISxce0b1tmi4Th/kKMRhW8Bj+OyYQykgCd0nu8rMC2rox6Mq605s5PqZDF4Z3x
+	 TcLbnpZemqjJRwYUMYD+lq367Zz2IoxrF1iyKJEhfbf59j4Sp3+YR4STnY18sWw8jC0XM
+	 QW8cApV6l+2z0rqKH82dL2FYM/XaWr51CQ3R7DZygXsB8vY2AqB6RLVDrydd/R0+71RGj
+	 kL2X1AKQIZRT5X3RdOk4XNYLaPWCr1tfMRje4SmaHo9ZUVyRZrqA26c4FjjNSX71CgQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793107346;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Xj67NiJh2Z4pdwze/JwyyrlvFS2Frq0bavp1aNAOF+Y=;
-	b=y3ZBdxLsPK2WIywQAKyM1BBTH8l6WLOHB/S9yG7WnQSAkUgb91lvApRy1qq6gplcSa7M
-	 pFs+cqvymC9x+kiJsjcj7hrVBH2i10cpbOgAENpep1GqKmZfjmT/ZB7tZ4VITsrAqFWnK
-	 b9PF7JRPSihjzwCD5m0v9+Nrr3UmViKTxcVvfUJ2nlVeP4rwcobxqrQMRPvHeNu4YSf5/
-	 V7a6iy45DJcdWXvph4Liy2ZDlHE7WyjAVuxdWlfPmp9zyDbUdpTe1W2tR8dUoIhtQ00yo
-	 +OVrut1YcfWJJgzAo5A8GeN4FMFYeDmsIqUv5J6kPN1kW/s+5dApWrL2LAAl4gRThpw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793107789;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=+S/FPM+nKVm2hgvH1mGORYvabxW96gUvOBqdZ925Miw=;
+	b=AZo4ktNjSCxBHajJU6tGaNaWaAotDw4a8yLQZVKXhl/76Y7NkQGdX58LXN7F17kMVI5n
+	 eAXcMyV1J0A8wwJhbgjEouP2Ns2r7Y0/Go6NnGDpXGlCzcpJ/T8QksMf/6B08s4GgAotP
+	 L40MRhpIXUNmXAhpmiCMA8y9pu9jdTqibareVD0j+YKbuxgg8R8/bV10N42Hpw30ht8ow
+	 CIp6EvtkAu/V3Wwzc7VOXQlXO0Zlmokf6aX4m0XNgN5BTBi60amXeR6Nc68WxuKgRVRi1
+	 v9N6kxP6fBm9SuDK6r8sXlyrDg95/Fjrdq2GqhBSHkUWhe+cGFCJ+pY17sq70Bq3FNw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mainlining.org;
-	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=mxxbttXc;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=eTsWZ5U5;
-	arc=none smtp.remote-ip=5.75.144.95
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B08B606A31D;
-	Tue, 27 Oct 2026 13:22:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9B08B606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=EdEw0nXE;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E7B660A2611;
+	Tue, 27 Oct 2026 13:29:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6E7B660A2611
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=mxxbttXc;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=eTsWZ5U5
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1793107318; bh=Xj67NiJh2Z4pdwze/Jwyyrl
-	vFS2Frq0bavp1aNAOF+Y=; b=mxxbttXc1kwRAw4uFr6Joln+wd89lpfwXB3f0rPAO4vYimMZh7
-	jvVbJ/fWa2pt91BX37u4bOR1QAyWdKL/UBi9irf9pvF6r1GsNgAAdAOBCggwJdYbYd8MGYbKBcb
-	IC8a5slECJdOA/6e+GRAJupr0Z3LlxDEoRrOPQqYt5QNtKh2g2rNfHOjHC4IEgG6U7P4aDgRLxE
-	4FrXQHIR1FTK9819rifvTRK2ku6pUXnTGP6noUTAxhSXGTmAep0w/Uo888MdzxZza7w9yo98LAC
-	w5cleacP1J8MXMNn+7DtOuZMy7sgE7iZVCS3leZn1nar8BkA2KG1+SoegpudNixb3pg==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1793107318; bh=Xj67NiJh2Z4pdwze/Jwyyrl
-	vFS2Frq0bavp1aNAOF+Y=; b=eTsWZ5U5a1kSPxUaMDFdlMnVdcfluYbi3UyR/neQ+3HarpYrgO
-	xKOLXAksCoxT2sfC1Nn2S6fCPflmtLkTAiCw==;
-Message-ID: <524ccb0f-8880-4552-8549-88a9d68e3faa@mainlining.org>
-Date: Tue, 27 Oct 2026 16:21:55 +0300
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=EdEw0nXE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=+S/FPM+nKV
+	m2hgvH1mGORYvabxW96gUvOBqdZ925Miw=; b=EdEw0nXEebnHQKlYWOGA143YXF
+	spbNwqPQ0iFNPXZYfMFXFCoQQkiwMy7ik+Pyx5sg03zOKds9/MZEOhKPdTK3k2Lk
+	8lSBJ/XhMf+um4Z9VUpmaIKwIwchpaXr43/xN+WRgCMNR6CdsEj9Srz8NUSnZaZA
+	yG8HSGlPG30ZA8wsE=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.177.11])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCXHkNIp+BqfmxRAA--.995S2;
+	Tue, 27 Oct 2026 21:29:45 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: linux-remoteproc@vger.kernel.org
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] remoteproc: qcom_q6v5_pas: release the DTB firmware after loading it
+Date: Tue, 27 Oct 2026 21:29:44 +0800
+Message-ID: <20261027132944.242550-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -57,221 +59,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 5/7] arm64: dts: qcom: Add initial support for MSM8952
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- Konrad Dybcio <konradybcio@kernel.org>, Amit Kucheria <amitk@kernel.org>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Bjorn Andersson <andersson@kernel.org>,
- Abel Vesa <abelvesa@kernel.org>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
- <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
- David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
- linux-pm@vger.kernel.org, linux-input@vger.kernel.org
-References: <20261011-msm8952-initial-support-v5-0-1857074992ec@mainlining.org>
- <20261011-msm8952-initial-support-v5-5-1857074992ec@mainlining.org>
- <cf9aa65d-5603-425e-b09e-0a5ae86fa551@oss.qualcomm.com>
-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
-Content-Language: en-US
-In-Reply-To: <cf9aa65d-5603-425e-b09e-0a5ae86fa551@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgCXHkNIp+BqfmxRAA--.995S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7KryDKF47Ww1fJFy8Gr47twb_yoW8Zw4fpF
+	4kAFWqkF4UGw4rGrZxJr4xur98uwsYq3y3Kr40kasayF4xZrykZrZ5JF4vqrs5CrWDtw13
+	Wa1xKr93JF1qg3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUkqb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
+	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r126r1D
+	MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
+	0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0E
+	wIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JV
+	WxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAI
+	cVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU86c_3UUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARENB2rfqlZqOAAvsu
 
-Hi Konrad,
+qcom_pas_load() requests the DTB firmware into pas->dtb_firmware and
+only releases it when qcom_mdt_pas_load() fails.  On the success path
+nothing drops the reference and the pointer stays set, so every boot of
+a remote processor that has a dtb image leaks the firmware buffer, and
+a second boot overwrites the stale pointer and leaks it again.
 
-Thanks a lot for review,
+qcom_pas_start() only needs pas->dtb_pas_ctx (it maps the spare carveout
+and authenticates through the PAS context), so the firmware buffer can
+be released as soon as it has been loaded.  Scope it to qcom_pas_load()
+and drop the struct member.
 
-On Mon, 26 Oct 2026 16:01:49 +0100, Konrad Dybcio wrote:
-> On 10/11/26 6:51 PM, Muzaffer Kadir via B4 Relay wrote:
->> From: Muzaffer Kadir <muzafferkadir@mainlining.org>
->>
->> Add initial support for MSM8952 SoC.
->>
->> AI help is used for calculating qfprom nodes.
->>
->> Downstream reference for port is [1] which is very lightly modified
->> version of [2].
-> 
-> Generally this looks good, couple more comments
-> 
-> [...]
-> 
->> +	soc: soc@0 {
->> +		compatible = "simple-bus";
->> +		ranges = <0 0 0 0xffffffff>;
-> 
-> this is equal to `ranges;`
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+ drivers/remoteproc/qcom_q6v5_pas.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Changing this to empty ranges would make ranges property
-to expect parent and child size-cells and address-cells to
-be equal but root size-cells and address-cells are 2 and soc
-size-cells and address-cells are 1.
+diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+index a005546c2..5a5dc5334 100644
+--- a/drivers/remoteproc/qcom_q6v5_pas.c
++++ b/drivers/remoteproc/qcom_q6v5_pas.c
+@@ -94,7 +94,6 @@ struct qcom_pas {
+ 	const char *info_name;
+ 
+ 	const struct firmware *firmware;
+-	const struct firmware *dtb_firmware;
+ 
+ 	phys_addr_t mem_phys;
+ 	phys_addr_t dtb_mem_phys;
+@@ -242,18 +241,20 @@ static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
+ 		qcom_pas_shutdown(pas->lite_dtb_pas_id);
+ 
+ 	if (pas->dtb_pas_id) {
+-		ret = request_firmware(&pas->dtb_firmware, pas->dtb_firmware_name, pas->dev);
++		const struct firmware *dtb_firmware;
++
++		ret = request_firmware(&dtb_firmware, pas->dtb_firmware_name, pas->dev);
+ 		if (ret) {
+ 			dev_err(pas->dev, "request_firmware failed for %s: %d\n",
+ 				pas->dtb_firmware_name, ret);
+ 			return ret;
+ 		}
+ 
+-		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
++		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, dtb_firmware,
+ 					pas->dtb_firmware_name, &pas->dtb_mem_reloc);
++		release_firmware(dtb_firmware);
+ 		if (ret) {
+ 			qcom_pas_metadata_release(pas->dtb_pas_ctx);
+-			release_firmware(pas->dtb_firmware);
+ 			return ret;
+ 		}
+ 	}
+-- 
+2.53.0
 
-The Devicetree Specification describes an empty ranges as:
-"If the property is defined with an <empty> value, it
-specifies that the parent and child address space is identical,
-and no address translation is required."
-(Devicetree Specification v0.4, section 2.3.8)
-
-So this change creates these warnings:
-/soc@0:ranges: empty "ranges" property but its #address-cells (1) differs from / (2)
-/soc@0:ranges: empty "ranges" property but its #size-cells (1) differs from / (2)
-
-I will keep this unchanged.
-
-> 
-> [...]
-> 
-> 
->> +		sdhc_1: mmc@7824900 {
->> +			compatible = "qcom,msm8952-sdhci", "qcom,sdhci-msm-v4";
->> +			reg = <0x07824900 0x500>, <0x07824000 0x800>, <0x7824e00 0x200>;
->> +			reg-names = "hc", "core", "cqhci";
-> 
-> Please break up these into one-per-line (also for properties below)
-> the last reg entry needs a leading zero
-> 
-> (in general one-per-line is cool)
-> 
-> [...]
-> 
-> 
->> +		usb: usb@78db000 {
->> +			compatible = "qcom,ci-hdrc";
->> +			reg = <0x078db000 0x200>,
->> +			      <0x078db200 0x200>;
->> +			interrupts-extended = <&mpm 58 IRQ_TYPE_LEVEL_HIGH>,
->> +					      <&mpm 49 IRQ_TYPE_LEVEL_HIGH>;
->> +			clocks = <&gcc GCC_USB_HS_AHB_CLK>,
->> +				 <&gcc GCC_USB_HS_SYSTEM_CLK>;
->> +			clock-names = "iface",
->> +				      "core";
->> +			assigned-clocks = <&gcc GCC_USB_HS_SYSTEM_CLK>;
->> +			assigned-clock-rates = <80000000>;
->> +			resets = <&gcc GCC_USB_HS_BCR>;
->> +			reset-names = "core";
->> +			hnp-disable;
->> +			srp-disable;
->> +			adp-disable;
->> +			ahb-burst-config = <0>;
->> +			dr_mode = "otg";
-> 
-> dr_mode = otg is default - you can drop it
-> 
-> [...]
-> 
->> +			pll_opp_table_c1: opp-table {
->> +				compatible = "operating-points-v2";
->> +
->> +				opp-499200000 {
->> +					opp-hz = /bits/ 64 <499200000>;
->> +				};
->> +
->> +				opp-806400000 {
->> +					opp-hz = /bits/ 64 <806400000>;
->> +				};
->> +
->> +				opp-960000000 {
->> +					opp-hz = /bits/ 64 <960000000>;
->> +				};
->> +
->> +				opp-1094400000 {
->> +					opp-hz = /bits/ 64 <1094400000>;
->> +				};
->> +
->> +				opp-1344000000 {
->> +					opp-hz = /bits/ 64 <1344000000>;
->> +				};
->> +
->> +				opp-1440000000 {
->> +					opp-hz = /bits/ 64 <1440000000>;
->> +				};
->> +
->> +				opp-1516800000 {
->> +					opp-hz = /bits/ 64 <1516800000>;
->> +				};
->> +
->> +				opp-1651200000 {
->> +					opp-hz = /bits/ 64 <1651200000>;
->> +				};
-> 
-> Drop the last entry for the same reasons you explained
-> 
-> [...]
-> 
-> 
->> +		a53pll_cci: clock@b1d0000 {
->> +			compatible = "qcom,msm8939-a53pll";
-> 
-> This needs a 8952-specific compatible (bindings-only fallback
-> is fine)
-> 
->> +			reg = <0x0b1d0000 0x40>;
->> +			clocks = <&xo_board>;
->> +			clock-names = "xo";
->> +			#clock-cells = <0>;
->> +		};
->> +
->> +		apcs2: mailbox@b1d1000 {
->> +			compatible = "qcom,msm8939-apcs-kpss-global", "syscon";
-> 
-> Likewise
->> +			reg = <0x0b1d1000 0x1000>;
->> +			clocks = <&a53pll_cci>,
->> +				 <&gcc GPLL0_VOTE>,
->> +				 <&rpmcc RPM_SMD_XO_CLK_SRC>;
->> +			clock-names = "pll",
->> +				      "aux",
->> +				      "ref";
->> +			#clock-cells = <0>;
->> +			#mbox-cells = <1>;
->> +		};
->> +
->> +		adsp: remoteproc@c200000 {
->> +			compatible = "qcom,msm8996-adsp-pil";
-> 
-> And likewise
-> 
-> also IMEM, DSI, RPMPD, RPMCC
-> 
-> [...]
-> 
->> +	thermal-zones {
->> +		aoss0-thermal {
->> +			polling-delay-passive = <250>;
-> 
-> TSENS sensors are interrupt-driven so you don't need polling
-> 
-> AOSS is surely the wrong name - that hw didn't come until years
-> later than 8952 was released. I can't find a mapping of the
-> sensors for this SoC right now, so either drop these or give them
-> some generic names
-
-Understood, I will change these to generic names
-(excluding known ones from downstream)
-
-> 
-> [...]
-> 
->> +	timer {
->> +		compatible = "arm,armv8-timer";
->> +		interrupts = <GIC_PPI 2 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
->> +			     <GIC_PPI 3 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
->> +			     <GIC_PPI 4 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
->> +			     <GIC_PPI 1 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>;
->> +		clock-frequency = <19200000>;
-> 
-> Drop this property, it's only needed for very broken FWs
-
-For other parts I will change them as requested.
-
-Best Regards,
-Muzaffer Kadir
