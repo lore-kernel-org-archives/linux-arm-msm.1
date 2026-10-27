@@ -1,130 +1,119 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793099170;
-	b=kmeWRI/wVyydPLLir9CC9c6zmuhNrGaVEwRydbG1YVYKtW0LNCxxuRnSG/qACpQHimxG
-	 BHKIzXUWnDfFeThcF8Er6uE/kEthAthByYxTooC/giQzUZU4OkiiVRD/zRDfjkqVlUHzt
-	 CxZGO6j2Dr2UUKfDyZ3QMG1IICkWc2ACfzKBm7ZeGX2I8FHUnVadwwpGhJkkJeBiqRDpM
-	 fyu+BkfPL37yYMQM9wgHMcc6ozi+VKa5azO97CW0sPSEKAdcrKUCVxyBvze+re+S6OxaV
-	 aBXzPDp3VUQpgANDKW2yP/K0m4ODEtEZvcnOXtdwZoQ/yWcN8wMMNh8QKVVlPB1rVJA==
+	t=1793099184;
+	b=EYet5hvWVyWWWK+Mwmtx4YcyO3l3Vjg2LSB1dr+h/68VDXbRcLl3Oul0axdAubTY3lJs
+	 agpQfBfFuxOWN+crymFxW/aRv48S6cwsQ1V8nyeOgcDOQT9jgFU+hToCQpJkHqlOSYGJM
+	 DEY2FgO+NCSTBa2xK0De0KodRzRoykeb4p7sL2pWXNtNZiI9GEAzzcw0teMmTT4MSo9IY
+	 BAbOtR3TJbmjkQV9KcMFrXI0azUdd9smXkDNgEr0hY/wiT8xPMKimDIEJA42e7533ChEq
+	 fRbr7NMM/guDd/xVPXlWYWd2604342g/x5+nqNnJ2Zmoeg+PeoGva5Oo8VA4jT8xTpg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793099170;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793099184;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
 	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=wIT2c8ssR3PQ2F/Yil9tuvb8L0yquFHB256Wm1sk66s=;
-	b=bV76+5h3Gjd1Er1YvXZtHPiUDrLnEXDB+gblUKp0gfIWwng2NJrgyKadFgz3/Ymbc/Kd
-	 P6d3HxOtWfq33dBq64ACtMSRmB+ZxKImU6KgwxtfbeqXkRCLa7z/CQPPb0Lj4mB8457O+
-	 Lx4vCjMc28daxv+ZkFjQ6KJPya43B6feNLspVdD2DsZUXoUIeQ+xcj3rUYXcgq1IMp0LE
-	 5zx9RRvEveJd8OAMyegX8tFTLkOfSkUxW02rBBnQbQIbsNLoS1yVWQjR76qlfySe71TjJ
-	 PPE1irSb0OPkUiedAMx3Fc3VUGj2rjPzS7SBw1Ye2H9SIJfc2d+i0N711p6pl3GL3Zw==
+	bh=OUuCOnLfKKTRSWCshc67FPxRhiZlMf4qzEdijvxDUEI=;
+	b=bzZ9+COKu4g4ycDbCyR7JWGcM9H3LzD5ITglNgYCjAOBJKx+TAo+Lws288jZ4thosuCA
+	 a65wuDzIklihTEhR4ttmnIr1HqTpzUABpHPA9ev65hb+A/4KCwRklZNntN0he8pPEelPT
+	 rhdeJPWo/gp63Tp2v7JSU4mI5w+1rMbklnc+uEz8qhIfqZb7lMk18CAT1gWy0OphLlXIV
+	 /trT8yO/en/ceyFRBIb0CLXukfNU0JdJ5FRAG7hldeC3RyImGw2PZZzYn8jcnVoFuPSvW
+	 ah1JEKEs5FPfkMntJ/BkWG4e02db+oPrLU1wMKaVR09RIM7w4lSwgp6TO2cnjUXr8dw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WGeU6VH+;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UniBw6lV;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FR7jJopP;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SwnvoreJ;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBED2606A31D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EBED2606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E040606A31D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1E040606A31D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WGeU6VH+;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UniBw6lV
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAeD601615077
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:08 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FR7jJopP;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SwnvoreJ
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69RAe4fF1922071
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	wIT2c8ssR3PQ2F/Yil9tuvb8L0yquFHB256Wm1sk66s=; b=WGeU6VH+oHYBNPf7
-	0Ij+Cxgo2XNvYPf+VLXcpOpPN2fUSuGYLGKC7jjXf9ujHoTB0J7pTH1b2l9AK+h2
-	ymZTBqCAy60wzTmwLuzyaKLKMBu0rEJfAnJV4igTynzjEFS+iHcrrcYq2xiJS2im
-	AukZyKxr6fiszdE28FPrBCqOtWOEWogV1vvRNA+GL23aHgJEgkTiwwnKkM9tjUvS
-	Ei8Ev0bhF+dpQ89uxH5yNw+ZC5TKGx9xdeUhObayvni3oFD8EeIUKU3B5l9FS5hC
-	IsEJCKh1AtDF49KEoKKv86QJceB5ZnKumMn1n60KyNeoRh2w6zCAdx0NoE34l/Wz
-	nVcs1A==
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=OUuCOnLfKKTRSWCshc67FPxR
+	hiZlMf4qzEdijvxDUEI=; b=FR7jJopPaFG8+umy4Wm07kD8u3SpE+wDPNDJcqlT
+	Qsi/4nOChDsA/BkeAsZYlAN8tt1feuXnDD8fNTb+oLGxX9ipeb74FsjZfZ4cnAt4
+	fv9kUL4Cac6AEArnlk2NgeZ5YL7TYjiUwrDX6rtB8dhF+3g2CAMEpHTgjj17X2i/
+	96t0Vw7SDoLbV4DjDLnVPO1xE+l3WGxIlTbDoGzMdZOUWw31oR37x33N8eDR1WRm
+	FVQ5Cp6Y+5cYE0ZkTJZ60EtUlgEukT3o5a0e882pUDjywB2K1WBtmybRO2KIusjJ
+	3/GvCmMMSl8WdL6RYEaq0Nh+koT4eIWBUKLHSTtxzml4cA==
 Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjqf5ru9p-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjrq68hub-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:07 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7bfa915da7cso779929137.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:06:07 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 11:06:22 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7bf71bbf197so3864660137.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:06:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793099167; x=1793703967; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wIT2c8ssR3PQ2F/Yil9tuvb8L0yquFHB256Wm1sk66s=;
-        b=UniBw6lVpQFU+I8Xsa9rgKS0Tui2RvKLJfjY3/VnmLXwp3lJ/J/PHl1LBNlZsZAKAB
-         ixhr6GOw1z1eNatMqh9Y/q0DxP2YHTto3mHh9cSFEG67WKFThjC1UHd29RAJULmgWHuj
-         VUK8vvxMHNyWdz8+enBM7lPzsev0MAzoVbRQnczlcZ4nisHd13f5hTMB3ijAH4+pi1cS
-         CjPH4fUQrXJwZ/chOCcM7eK8wCYkHiI5qgdc5PEoXjV5DDOOdcVwq/Ig9D0wZ8ucUQoJ
-         BP91A9LKvYLBBel86BMnYbq2UEp/sb2Yy6Rk1pxTg7qpuFBGY+8L8wQGwgkBOa/9ZF6w
-         X76w==
+        d=oss.qualcomm.com; s=google; t=1793099182; x=1793703982; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OUuCOnLfKKTRSWCshc67FPxRhiZlMf4qzEdijvxDUEI=;
+        b=SwnvoreJT5/UFYbR+X+ab/z6DR2uLs0BS5tB944RVi6uGboXguphQIBEAFDfbhw6DO
+         J3zJJgyd0kkhgXXglJNS9JpyxbIrFtryMxQce5C3YsDEf4HZGSY+riZPRP46lCkP/mx4
+         d8+z4bWpq8xoa0fZBwX9KgsBvPlsjArd8+l1RKkgi4pzdZDX2etXEh5PC7vimhqgB8NS
+         1ecrpF/dOiD1MX92TASOuNEo2PBqVXuj2waB5GHuTEeCFgLRFrGi4RxSdwTxcBe0+KoS
+         MuqIx11t3RWLoCte0azw9haZOBva33OQlAMY856I4fZFScYFOkc0t2xFenv52bQirwjI
+         3OHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793099167; x=1793703967;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=wIT2c8ssR3PQ2F/Yil9tuvb8L0yquFHB256Wm1sk66s=;
-        b=OdSCSGrCwpo/7Efun1f4C4tWRCCXeTZ0o9zy90CkqT6ThMzL62oGJnfmuTPs2eWzMi
-         Used4++yc+HQ3qnRdLXZfj9nfR87FYSl+QAz5vFJ6YkrtrfmBuGj4ahlgNtlAXudSGKX
-         XPC4842mvya336o0vMvMQo3BwFxYBml4/RpUJLHokO+3h6oHtwIH0g43vgz4YMbVgGPo
-         aMdEMUbpWew2WSBFzCD563eYrYUaec7YAM318a08qLeJjNl/tRGlu7a1QiRwE6kNQ2UJ
-         +lAcRsrye4dbgn8LY/i5L3hPo1Ym1X4o0k8UEe6wOf5BHdJEtUPubSUbUhP8sjwPr/Ev
-         l3zA==
-X-Forwarded-Encrypted: i=1; AKwUvBz4htArL7Q1jc39JkdbbG/RLeuUnxJkHS+couVOwBfpojPKyY4d+S99a09R5sQBb51sPXeNLfbVGvVvp5ws@vger.kernel.org
-X-Gm-Message-State: AFq9FYJVFdJuKoPPY0Q3pVp4Ds1L2/bVfibKqJ29y0hKq1fb1nO2e5vO
-	QGFPkhbSLSjOf5ukvkjagQ0h6rtXwNAd8knajJacVIHtKJ5wQIKQFUrllTsK7ZwytB59Ul7+JxJ
-	2b+8JCDhxoCaU+Szv8ppvzE4y/JdQNHz7d84SdbhxvZWSXbC4iYvFWzuPP+sq0VlsKnoc
-X-Gm-Gg: AYBFou1ZNU4N/gWtk0JphEHVSJQMcdIRXnh2FeNFiixmjNreuQuoxCj8WeAuTLsX4ts
-	UkcdkvmLyOfnMK3BUybxEzkGEencTofhNVeWyxor7ebQ8RBjxxFqgoX2vStveDukak5HlmKmh0z
-	AJuilwqmrlJXISyHvZvYd3suRS19tfCE5yv6qp9j1aFdttJqJmB5WpeDEbzq/KcSt/zrxqgdB1x
-	0fr0FQkR4OJlfNCYyC1/9byLpFfckwndRSoQxNaoD+Ytc45/DjIOHz7ZQWeWvI7KPumTCefDtHO
-	MBGR/lq9Rj0TTq3/pnF3A4al1TDVZ1gBrG0gRz7y9SBIykLALqfRdNTOYwOoGUsqAwutr4VvOcO
-	OVJ31B0KKgADSkstDrUxq/k9+LlzQchU5RgBPUmJ4guInpT+H+CDM7Bp9NvZEroyXjuInOfR3Zr
-	lJxhguZXwJ6hhO
-X-Received: by 2002:a05:6102:2910:b0:78a:4dff:7b3e with SMTP id ada2fe7eead31-7cea1474628mr693715137.15.1793099167059;
-        Tue, 27 Oct 2026 04:06:07 -0700 (PDT)
-X-Received: by 2002:a05:6102:2910:b0:78a:4dff:7b3e with SMTP id ada2fe7eead31-7cea1474628mr693707137.15.1793099166585;
-        Tue, 27 Oct 2026 04:06:06 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793099182; x=1793703982;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OUuCOnLfKKTRSWCshc67FPxRhiZlMf4qzEdijvxDUEI=;
+        b=EjncneHPo+LwPZWBcefRaLjnpwrpYkytYY4pAFxVh5oZY2K7+2cNK4yBEibgkL1Yr3
+         lzfN8Mw8iN3MJjO7/vACyZzbOqmO6382pZxXuC0v0Xre2LYW+pNuLFwehd2efhkR5cCu
+         hE1Go94nfLwZAxpptE6yREeNqaLalvqidSnJZb9bTuzf9eMCHsy9f+WohkOwf02Na/pZ
+         XQ+TKZp/YCX11fxQVwsg2RjLbnTPXALkADK56D2lkCn4V0zFxLUfQrL3Yx5CA5NrFBgY
+         gf5x/ZHBl/V7+Fw+lAbi62dyzj9EkNSQ73wWPcS0cea10cxQ2LccJ8mKQTBoN6yjhvMx
+         jKqQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzKecG7Ma/axkwD0NbOCFy5BzrlWww6wYPAwJmHlujLdDvkOkQuWo5bVw5ApZI64mkrr31s3kX+83kE8qdp@vger.kernel.org
+X-Gm-Message-State: AFq9FYLNfElQjT6e+k4hn92lPizjSn8G5fgGoMfXxmtunryqhlMbpGdH
+	XkOf3dtONecJRegFMtgoljG7wMeufMOmXf58qo4rL7gFD5N4o+PKvJeumCzsRuBp1Fea7JgMdOT
+	ERZjZzOWUXdEP0nOLHuHJN2+ir6s1WNcGPIvKqam41Fe3uPx/SvY4yQ+qo3pX5NenaeHB
+X-Gm-Gg: AYBFou3qgI6GfWtlzO9Xq8ZtYCliyNrRozKrwzp7RU2v4l7sml2riqdWWhbzDqrK/B1
+	kAUgpc2OH5tyqyMl6NIEfzZ333rOd0WDCNhyGavXfhZB5e7E6cB6jdedsnjLgyFkxFbVOQrMaF8
+	w7Tt5d4NtTp478g7NQXrvbf3yaWVPn8JTWOuUB5lL5QKnjuPluhcVjdjJwUGAcZk7beUlUe8iEQ
+	rQ0IoK47sUnqItSuvDilVfQxxDezf+C0+Hwz0Gd2MCX3DfLJ8gw6ke6Wsll5aaTvI+Z3xbhUbc0
+	8yowOWVSOW4eEeVOeuuYqwFcOAnwWKLXDBrDoPNZohVTB+jzhBgQb/PCSHShxkPmqjkwQ84s0La
+	e/svVkDU7sf6h5XUs8Zp6Q1qcxagMkaM7k2FZKjOGqHAyN0fAr+sxSYIkuJ84+g4QYtwm07h9KM
+	sieXfJjwlPfFgx
+X-Received: by 2002:a05:6102:3ec3:b0:7cc:2086:34e0 with SMTP id ada2fe7eead31-7ce5ca0e45cmr3417607137.4.1793099181986;
+        Tue, 27 Oct 2026 04:06:21 -0700 (PDT)
+X-Received: by 2002:a05:6102:3ec3:b0:7cc:2086:34e0 with SMTP id ada2fe7eead31-7ce5ca0e45cmr3417591137.4.1793099181477;
+        Tue, 27 Oct 2026 04:06:21 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7a9ea71sm2034967e87.81.2026.10.27.04.06.05
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ac709d1cf7sm21668971fa.15.2026.10.27.04.06.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 04:06:05 -0700 (PDT)
-Date: Tue, 27 Oct 2026 13:06:03 +0200
+        Tue, 27 Oct 2026 04:06:20 -0700 (PDT)
+Date: Tue, 27 Oct 2026 13:06:18 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Rob Clark <rob.clark@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-        Antonino Maniscalco <antomani103@gmail.com>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH 2/2] drm/msm: don't tear down shared VM mappings on
- handle close
-Message-ID: <xa6erwmfju7xmrsmg3vsafwhdhwvyqqwjsgq35hb4ecoiwffau@r2fb6ft223vl>
-References: <20260822-msm-fix-export-v1-0-917b3cbedd43@oss.qualcomm.com>
- <20260822-msm-fix-export-v1-2-917b3cbedd43@oss.qualcomm.com>
- <CACSVV00sJmmRqpTJUD4AfB5-LJRCtzdWDTKVCQwH+y-uYYYMbg@mail.gmail.com>
+To: Filippo Falezza <effeffe99@gmail.com>
+Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Manu Gautam <mgautam@codeaurora.org>,
+        Felipe Balbi <felipe.balbi@linux.intel.com>,
+        Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] usb: dwc3: qcom: Restore UTMI PIPE clock on resume
+Message-ID: <pudd4ilw5d7hgirwhmq7m5ezrmittfbw5lqjti4tbcjl5lf7l2@uynnc255niww>
+References: <20261027-dwc3-utmi-resume-v1-1-ca9f0aa65783@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -134,88 +123,117 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CACSVV00sJmmRqpTJUD4AfB5-LJRCtzdWDTKVCQwH+y-uYYYMbg@mail.gmail.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA0NCBTYWx0ZWRfX2gc/fhuKsLEm
- UwtBYhLDBjpfVOO+KK0uU2fn4hkzbDIGfOYGwwh+naD5wknmqRVduM33xDo+OZIC2rFIUtT2Md5
- +YyD33wXJ9NlwYS+Mr1niJy2bKqOXAw=
-X-Proofpoint-ORIG-GUID: 21k3Mb1Ry_7a8AqblB9CRvH9lFQM38Kf
-X-Proofpoint-GUID: 21k3Mb1Ry_7a8AqblB9CRvH9lFQM38Kf
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA0NCBTYWx0ZWRfX6zSDkPlgTTtg
- kL3IixmM0S2pJi4kJd+RP+9k+N/zHvWwgr3qqBEYVnnz2qMJFQXekw2qllb0Yg8GGwhBQMddBEN
- PDVrjIHvR0KQTjHUyoexhaWYSvUpKIzVkWn7yLjmzE9Dxr4BR2hIlyngx7Vt65JDvXwPMG1X/dq
- 8GGkVrjQ/VB9gQWBIp2H+rKYdbjmmJO2PGZR7s+8HYCJIWEzPptKaeMkRFMRKDhFvJuBszQQSh1
- nTHFFRbTiyCXu6bckVC3TiRi74/ca11yKare0R2hVyltXG/h/7tw3Jr3bDKgEMHxd0JnrXN6TYR
- 6QYm6JQL+vBBYUF4GENwG6SspLf8rJBdd+P2TLU0LylBV9zO4FY3Bav111yiZ6Jvn5amJo7NC0z
- QMWll1KGj97UW7ykmy4y1fUdJyX4PAmQ1hbB4npqupUMrdFL+YrsgxALO9q8ryRgpxWN3cUd11E
- eGxS91ZCORYtHTN2Q1A==
-X-Authority-Analysis: v=2.4 cv=UOFIjyfy c=1 sm=1 tr=0 ts=6ae0859f cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+In-Reply-To: <20261027-dwc3-utmi-resume-v1-1-ca9f0aa65783@gmail.com>
+X-Authority-Analysis: v=2.4 cv=RYwFmFtv c=1 sm=1 tr=0 ts=6ae085ae cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=g5l33MZIfMJ3XeZK2UMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=cGONFfNXx7BMzh4v7q4A:9 a=CjuIK1q_8ugA:10
  a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-GUID: jqatrfa4zHmpAvwZIU6DdanZlxvQf3zl
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA0NCBTYWx0ZWRfXyWtNyEs6c8ZK
+ yWTy3b0FsDNC3PVOHU0bQYSE10elERhUZmghVSv+VUX5o2YGvYf0CJre4PXptL5tUjCDD4RMW1a
+ Z15C5iGrLIMCyJT8tDGhEb3W14yX7UQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA0NCBTYWx0ZWRfXyLKz8Cw8ggww
+ FOYvFtQLZmfqfZykVdSAVToijUtT8qGxPtSoD+g3V0jRXm0cU/vsQz6OaJJTqAliAiFWbRjZnew
+ H32E+tvvwGpleH725uKZ8R9iXknlDbTsFzAgXmZj4IcwDZOMXulb9geFmTt4XEs1gkXsa5xT9w0
+ UEUrpMfRtJEWc7Ee/xDKHmw4X7s55n1ZUDYTqolRj6XZjaNfVvj0kHd27SJJJxIYVqXpsIiW6ZA
+ UWQw4mNYoqUp4M2VKfitLYtx44Ngch+8cmUHfOlkmE4l8+A/NVUS7Z9JXMRuyBLcwMS4ijAIkdU
+ Hry73SsbUnLWF7uyUQWL1uB9ojO9NwBaOxhVGT744M6AAPqj++vo6Ojeoq6TiyiZQSjRtSreoUD
+ TTmEAHXJzzkEMypNp70VDwE6p6i1qquMdH/qk8CY4nDg2UZKIu0RutoPYH5I4io4C+ZO3QjfMpt
+ SULQFuG6Gx5/fLgFGQw==
+X-Proofpoint-ORIG-GUID: jqatrfa4zHmpAvwZIU6DdanZlxvQf3zl
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-27_02,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 clxscore=1015 impostorscore=0
- spamscore=0 phishscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610270044
+ clxscore=1015 impostorscore=0 spamscore=0 phishscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 lowpriorityscore=0 malwarescore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610270044
 
-On Mon, Oct 05, 2026 at 07:54:32AM -0700, Rob Clark wrote:
-> On Sat, Aug 22, 2026 at 1:49 AM Dmitry Baryshkov
-> <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> >
-> > On targets (like A530 / MSM8996) without per-process pgtables
-> > msm_gpu_create_private_vm() uses the global VM, so all DRM files share
-> > one GPU address space.  msm_gem_close() unmaps the object from ctx->vm,
-> > which on those targets pulls the buffer out from under every other file
-> > that still has it open, and frees the iova for immediate reuse.
-> >
-> > A dma-buf imported into a second file hits this as soon as the exporter
-> > closes its handle: the importer's texture keeps sampling the old
-> > address, which the next allocation has taken over.  On a530 this is
-> > every ext_image_dma_buf_import sampling test, reading back all zeros.
-> >
-> > The VMA teardown a shared VM needs is the one already used for kms->vm
-> > -- defer it to the @vma_ref drop, when the last handle and dma_buf
-> > reference are gone.  That restores the pre-drm_gpuvm lifetime without
-> > reintroducing the reference loop, since a BO with a live vma_ref is held
-> > by userspace anyway.
-> >
-> > Fixes: 111fdd2198e6 ("drm/msm: drm_gpuvm conversion")
-> > Assisted-by: LLM
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> > ---
-> >  drivers/gpu/drm/msm/msm_gem.c | 13 ++++++++++++-
-> >  drivers/gpu/drm/msm/msm_gpu.c |  4 +++-
-> >  drivers/gpu/drm/msm/msm_gpu.h |  3 +++
-> >  3 files changed, 18 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/msm/msm_gpu.h b/drivers/gpu/drm/msm/msm_gpu.h
-> > index d27d54bdb7a7..7722776e9129 100644
-> > --- a/drivers/gpu/drm/msm/msm_gpu.h
-> > +++ b/drivers/gpu/drm/msm/msm_gpu.h
-> > @@ -223,6 +223,9 @@ struct msm_gpu {
-> >
-> >         struct drm_gpuvm *vm;
-> >
-> > +       /** @vm_shared: Has @vm been handed out as a context VM? */
-> > +       bool vm_shared;
+On Tue, Oct 27, 2026 at 01:21:42AM +0000, Filippo Falezza wrote:
+> Boards whose controller has no SuperSpeed PHY set
+> qcom,select-utmi-as-pipe-clk, and the glue then programs QSCRATCH
+> GENERAL_CFG so that the core's PIPE clock domain runs from the UTMI
+> clock. This is only done at probe.
 > 
-> nit, this seems unnecessary, just check if vm == gpu->vm
+> When the SoC reaches its deepest state in suspend-to-idle (CX power
+> collapse), the QSCRATCH registers lose their contents. On resume the
+> core is reinitialised with its PIPE domain unclocked, and the gadget
+> does not come back:
+> 
+>   dwc3-qcom a600000.usb: failed to enable ep0out
+> 
+> The link stays down until the driver is unbound and bound again.
+> 
+> Remember the property at probe and select the UTMI clock again in
+> dwc3_qcom_resume(), after the clocks and interconnect paths are enabled
+> and before the core is resumed. Move dwc3_qcom_select_utmi_clk() up so
+> that it is defined before its new caller.
+> 
+> Fixes: a4333c3a6ba9 ("usb: dwc3: Add Qualcomm DWC3 glue driver")
+> Signed-off-by: Filippo Falezza <effeffe99@gmail.com>
+> ---
+> Hello there,
+> 
+> this fixes USB peripheral mode after suspend on a Motorola Moto G 5G
+> Plus (SM7250), a phone with a USB 2.0-only port that I'm bringing up on
+> mainline. Its controller needs qcom,select-utmi-as-pipe-clk. The first
+> s2idle that reached CX power collapse broke the gadget: "failed to
+> enable ep0out" on resume, and USB networking stayed down until I
+> rebound dwc3-qcom by hand. Rebinding works because probe programs
+> GENERAL_CFG again, which is what this patch does in the resume path.
+> 
+> With the patch, the gadget (NCM plus ACM) reconnects after s2idle, and
+> the SSH session over the cable that I use for testing survives
+> suspend; the phone has run with it on linux-next since 11 October.
+> The other boards that use
+> qcom,select-utmi-as-pipe-clk should benefit as well, but I have only
+> tested this one, in peripheral mode. The legacy glue driver
+> (dwc3-qcom-legacy.c) has the same probe-only programming; I left it
+> alone because I can't test it.
+> 
+> The patch is on top of usb-linus (6b4b543fa187) and builds with W=1 for
+> arm64.
+> 
+> I wrote this patch and drafted this note with the help of an AI coding
+> assistant (Claude Code). The testing above is on the phone.
+> 
+> Thanks,
+> Filippo
+> ---
+>  drivers/usb/dwc3/dwc3-qcom.c | 45 +++++++++++++++++++++++++++-----------------
+>  1 file changed, 28 insertions(+), 17 deletions(-)
+> 
+> @@ -388,6 +406,15 @@ static int dwc3_qcom_resume(struct dwc3_qcom *qcom, bool wakeup)
+>  	if (ret)
+>  		dev_warn(qcom->dev, "failed to enable interconnect: %d\n", ret);
+>  
+> +	/*
+> +	 * The QSCRATCH registers lose their state when the controller's power
+> +	 * domain is collapsed during system suspend: select the UTMI clock
+> +	 * for the PIPE domain again, or the core can't run without a PIPE
+> +	 * clock ("failed to enable ep0out").
+> +	 */
 
-msm_gem_close() already checks if ctx->vm == priv->gpu->vm, but most
-msm_gem_vma_put() callers have no ctx: the last put often comes from
-msm_gem_dmabuf_release() or the fb cleanup. The teardown can't be
-skipped there either, as the VMA would keep the BO alive. The extra bool
-looks like the easist way to determine if the driver used a per-context
-VM or if there was a fallback to gpu->vm.
+This better fits the commit message. Please drop.
 
+With that:
+
+
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
+
+> +	if (qcom->utmi_as_pipe_clk)
+> +		dwc3_qcom_select_utmi_clk(qcom);
+> +
+>  	/* Clear existing events from PHY related to L2 in/out */
+>  	for (i = 0; i < qcom->num_ports; i++) {
+>  		dwc3_qcom_setbits(qcom->qscratch_base,
 
 -- 
 With best wishes
