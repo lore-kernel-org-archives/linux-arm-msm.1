@@ -1,56 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.85.9.111
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793138504;
-	b=Qrq0hsgSeksd6wjhEuPO8lYUq1/3XC7dUZNFc49gdTTFuWcYN8pN5DP4iuEr1BCemcP5
-	 I4y4bGKPvgNVz3tvH6GZkX92SQVroe7eEhPDI4b3+xYSxl65HId+hQRWUprLb+Ridijqx
-	 Ou3nAZCbDBAuD9gtyWlxO/+FvmHxcxuirXjaeOUC9dQhSPyxHGRf2yVUa6dc1MjG8RMog
-	 24jBQiZDPJDw4TwL9lwZqCwzOU/pNqGvIw1qq028vzL38ePRmXvjBEhO7URUxn04FgzRY
-	 JtrCx1MZ/seCuFRkEGVcNydFIlHXJxG/NLc6VDjgfeC0lwwYc9NulUYGaXArCcV6OnQ==
+	t=1793139977;
+	b=NLHqQgGZsRaxTQs79JXkzQroGNSOMnb+j2ilY0MjUdgm7xvqRVpKcdDMgBchhAu2hsdd
+	 kku7mLoVB7hLm8Z027liAnbPWDkEVvino0M6BbV8VwhQwNQo9QTKJdMcWT9VQvST4OV3H
+	 GUOeVrBvJKs+oSGqFlHeuIn8q4UkWsFNSSE7ijhvSveWj/z6VAAHWft3ujiP1hHb5+X4X
+	 CRdNa4dqBwqDFhtSt7RZfJI0UoggnHkTIqiFL/lqrD/OCpb3JKVvzPngS+wGu7r1k+VtZ
+	 d/xsDNOD6oy7FwcRgE7PyCSL7S1lsnJRcbNb4Yvm0KO50veq3x7gOIeAxncyaFJUVYw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793138504;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 Mime-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mime-Autoconverted;
-	bh=dOidzRaZztl5Ekhg11I0NkNl9u9xypPjQvEu9Osqbq0=;
-	b=5V5om5Xp76j8ClbSx0jJqA0u85mB2KyxhGYrVFm+WMDIVwT7IPcH6EoNpXL8LEY6LL0r
-	 0XrYWcVoQVcrUWjx5f5EAiqY9mB3nKI3j+ll0IRsUYjV/CVexURdVrZ/hg/1cYYp36nCr
-	 3FakevkypFkTrNSVU82kJeszDC7wo2IeE6whVnWbGjFo3M6h/OuTjgMQ7fi1GzG1539I7
-	 yI8RL1pXGkEcyyifXc8JxPyp73GExwyd86qR6bTccVJqLrHAzpOypIDuvnYMix34/wUCS
-	 Seapzb5QmAFy9d3Zf/JulN8ixNRxi1UohMTSYz0uiq6d4epaEqiC8Z5ZzF3jz0/uPVg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793139977;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=Hi1S5o6/5Hn+eb9Uz4vswpv5KcMHmoQwPjO3j1ggNbs=;
+	b=KfP4qmg+4ztCXEMb6AKkGeD96p4kSjhgvSLwZTAVSl3TrVL+E+lrkMkCu3Nesdue7kBK
+	 ts/9E8ls13WMSDv8h0Rs4kpc2tUHnBK09nVk9q2sytHh+NHv7dz4xJ7DCL0lM23Iipj21
+	 rqBUj+giXKhL0B0nvcJrSPZYgWOOafttGfXk9JoYXONIdVD/efY0x/qN4e08hArrQSPI6
+	 dxQbeqTQJWf+cp56HWZfYFMlMjf1tpx+j7YZvumXi+uWjU0fr5CIblW/4pcgTLocZfT56
+	 eKy89WIaJjuSXgKK2oAehPizVjTNYBLnuhF6Vki7Av11Lz95JnyyZPkiTHTfvXUJ5dw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=irl.hu;
-	spf=pass smtp.mailfrom=irl.hu;
-	arc=none smtp.remote-ip=95.85.9.111
-Received: from irl.hu (irl.hu [95.85.9.111])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QVSifXhF;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 8BD8B606A320;
-	Tue, 27 Oct 2026 22:01:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8BD8B606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=irl.hu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=irl.hu
-Received: from fedori.lan (51b68114.dsl.pool.telekom.hu [::ffff:81.182.129.20])
-  (AUTH: PLAIN soyer@irl.hu, SSL: TLS1.3,256bits,ECDHE_RSA_AES_256_GCM_SHA384)
-  by irl.hu with ESMTPSA
-  id 00000000000807E2.000000006AE11F3E.0002F670; Tue, 27 Oct 2026 23:01:34 +0100
-From: Gergo Koteles <soyer@irl.hu>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-  Rob Herring <robh@kernel.org>,
-  Krzysztof Kozlowski <krzk+dt@kernel.org>,
-  Conor Dooley <conor+dt@kernel.org>,
-  Bjorn Andersson <andersson@kernel.org>,
-  Konrad Dybcio <konradybcio@kernel.org>,
-  Arnd Bergmann <arnd@arndb.de>, Gergo Koteles <soyer@irl.hu>,
-  Griffin Kroah-Hartman <griffin.kroah@fairphone.com>,
-  Enrico Cic <enrico@privacyrequired.com>
-Cc: linux-input@vger.kernel.org, devicetree@vger.kernel.org,
-  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-  phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
-Subject: [PATCH 0/3] AW86224 haptic driver
-Date: Tue, 27 Oct 2026 23:01:22 +0100
-Message-ID: <cover.1793135056.git.soyer@irl.hu>
-X-Mailer: git-send-email 2.56.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F4A9606A31D;
+	Tue, 27 Oct 2026 22:26:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QVSifXhF
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 982A61F01828;
+	Tue, 27 Oct 2026 22:26:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793139977;
+	bh=Hi1S5o6/5Hn+eb9Uz4vswpv5KcMHmoQwPjO3j1ggNbs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=QVSifXhFjn8eJF2swarmFpOkNB9wFhZbCgDfBXFrTQdK3Gm7df82T4AuV9W8G4mSk
+	 dXvAIwgrQlEC0t4/K1At7qgul4PIg7wBSL+fAaCV7Rli56RkKv5HjLYUrhEmh8mYuw
+	 kA07W8RlgnXV8BqQpa1zUSpxhPLXEDxpwrupyX7rMqJpqz2OXGr+vsHNS57d+kjxaU
+	 hVI51J43YNl5xfQ6gl4OcvXgEgEIOCGHG1waDPf6BvKJ9WXP9ngRejmRxFpSwyHK1o
+	 2M9s9ohuZ2aWGyuPyhY464SqCqsHIjvBr3HJ6q/qD8T7xawS5XBl0IpyNfRn4RJLEg
+	 gCoBMP4PLHi4w==
+Message-ID: <cd9fcbf0-fc93-4c0e-b2b7-34c4057e5b56@kernel.org>
+Date: Tue, 27 Oct 2026 23:26:09 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,36 +50,88 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/5] media: iris: Don't flag an empty source change
+ LAST buffer as an error
+To: Christian Cortner <ccortner@gmail.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>, Birk Skyum <birk.skyum@pm.me>,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
+ <20261027021934.22113-1-ccortner@gmail.com>
+ <4Sunhzjffw3cqD9pTWQfGRsBoB9-FxgAMHNeS-RmLbNdPD2Ufk1spnI_codV5v6qtyyD0Go5uZFrAk6E_1EvCA==@protonmail.internalid>
+ <20261027021934.22113-2-ccortner@gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20261027021934.22113-2-ccortner@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mime-Autoconverted: from 8bit to 7bit by courier 1.0
 
-Hi,
+On 27/10/2026 03:19, Christian Cortner wrote:
+> When the firmware completes a source change, it returns the last capture
+> buffer from before the change flagged HFI_BUF_FW_FLAG_PSC_LAST, and that
+> buffer can be empty. iris_hfi_gen2_handle_output_buffer() sets
+> V4L2_BUF_FLAG_ERROR on every empty capture buffer returned while
+> streaming unless it carries HFI_BUF_FW_FLAG_LAST, the flag that ends a
+> drain, so the empty buffer that ends a source change reaches the client
+> flagged both LAST and ERROR.
+> 
+> The stateful decoder interface says of this buffer, as it does of the
+> one that ends a drain, that it "may be empty (with v4l2_buffer bytesused
+> = 0) and in that case it must be ignored by the client, as it does not
+> contain a decoded frame". With the ERROR flag, ffmpeg's h264_v4l2m2m
+> decoder reports "capture: driver decode error" and outputs a corrupted
+> frame.
+> 
+> Exempt HFI_BUF_FW_FLAG_PSC_LAST as well.
 
-This series enables the haptics of the Motorola Edge 30.
+I really had to read the commit log, the code and then the commit log 
+again to understand what this was saying.
 
-The first patch adds the binding documentation for the AW86224, which is 
-compatible with the AW86927 haptic driver.
+Significant reduction of prose and more concise statements.
+> 
+> Fixes: 7adc11e6abf6 ("media: iris: Send V4L2_BUF_FLAG_ERROR for capture buffers with 0 filled length")
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM sparse smatch
+> ---
+> Reference only, not for merging (no Signed-off-by); see the cover
+> letter.
+> 
+>   drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+> index f0782c4b1e6e..b4fe9066fcb8 100644
+> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+> @@ -390,8 +390,13 @@ static int iris_hfi_gen2_handle_output_buffer(struct iris_inst *inst,
+> 
+>   	buf->flags = iris_hfi_gen2_get_driver_buffer_flags(inst, hfi_buffer->flags);
+> 
+> +	/*
+> +	 * The empty buffer that ends a drain (LAST) or a source change
+> +	 * (PSC_LAST) is not an error, the client just ignores it.
+> +	 */
+>   	if (!buf->data_size && inst->state == IRIS_INST_STREAMING &&
+> -	    !(hfi_buffer->flags & HFI_BUF_FW_FLAG_LAST)) {
+> +	    !(hfi_buffer->flags &
+> +	      (HFI_BUF_FW_FLAG_LAST | HFI_BUF_FW_FLAG_PSC_LAST))) {
 
-The second one contains the driver. The AW86224 differs from the AW86927 
-in many respects, so writing a new driver seemed the simpler approach.
+If the analysis is correct then this fix makes sense.]
 
-The third one enables it in the sm7325-motorola-dubai-common DTS.
+Where do we get the conclusion from though - persumably from observing 
+packet types returned by firmware ?
 
-Gergo Koteles (3):
-  dt-bindings: input: Add compatibility for Awinic AW86224
-  Input: aw86224 - add driver for Awinic AW86224
-  arm64: dts: qcom: sm7325-motorola-dubai: Add vibrator support
+That would be a more convincing thing to put into the commit log than a 
+log declarative.
 
- .../bindings/input/awinic,aw86927.yaml        |   6 +-
- .../qcom/sm7325-motorola-dubai-common.dtsi    |  11 +
- drivers/input/misc/Kconfig                    |  12 +
- drivers/input/misc/Makefile                   |   1 +
- drivers/input/misc/aw86224.c                  | 582 ++++++++++++++++++
- 5 files changed, 608 insertions(+), 4 deletions(-)
- create mode 100644 drivers/input/misc/aw86224.c
-
--- 
-2.56.0
-
+>   		buf->flags |= V4L2_BUF_FLAG_ERROR;
+>   	}
+> 
+> --
+> 2.56.0
+> 
+---
+bod
