@@ -1,94 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793129779;
-	b=QinlOU2BrYgWQhx5IEARsp/BIaJV135ov5rSWP0H/RBiGEjGvwUCxKuNL7I2O5bvTtvT
-	 fe5TfFInwaa75dbg284ak7Z8mcjJmzAzkBAc+vfyq/Ev+ikbulVpfe6JiMay4IU8ljsAy
-	 z5OcdtWZvFRpnJJE80jLR34zzc20XTiVQ2yYBWqJ+VNm63q5B32rPAmXLBRgWXYQf9MPC
-	 xxM5XCaI9yMOLNTjEr83ZhwSA81VwKHdhCZMW2dZMULdMdau3V5bgXUiZIX77cPmh1YPS
-	 TU0GW8QX8zmxtQLwp3TjcxMVlf6YdOAc3rb2kRuuJMYaQRMhS37VNvimaSAK0EIaFMw==
+	t=1793131830;
+	b=CzZ+JszjrbbSx4XR8oO65XQwTdLC+XixUwXXZQ7hnpHaGR4rgJq5RIEihZ5Olt0HLFpV
+	 RgiZrvQefIlF412M+9ThFLO/zO1DQdZn8Tau3K419vXSdCLEfibaAmvALqQRr1jXcLwI2
+	 f24p4GStdunvRba3c2944nh8zAY6D9hpGvlc1aghF0o4JbseSopQkEXEFrObWgA/Q2m16
+	 3wFNW6GH2f1EFRz28+dE2QntosGHjlveeLJ2ajNX6WzLlR7Omaq3+BjywIURSeIioiVpB
+	 glSyHIGcSArzvyWiwU5Mw3NMx/gVmtvKHmQvm5I1DPZmO5TSKarMza7jxTAwqJLzTHw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793129779;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=VeGAm90AgmXouwn4W32/Qv5tF0RL+dNfBc4p7xQPPeA=;
-	b=KXLz/jgBxAhd3lKkLm8nlkQm+HL6yht6tUgiYU3KGGeNhXupUV8o1TXeu+rw0QUKiqeZ
-	 tfTEnC/GAHn2yZUzRqA65IgE0RZovv5N7X/NbmRIpcOxWTc5KEnzmL9KzVAOyxTXWsJUH
-	 iMQK0iTHWdj3tkhI8lTXTKEcLPLKX4S5McfIQ9LLNtuelNJfrxK2nTZl7wVb5bfv5/7wB
-	 URGcQPBkfTOIat1PoSWQq5iuubi3jh1jXAAWtkFB45uUAzbm29E5t7xZe0tvUQlMRH2jW
-	 dFM5uIR83RwNhDWqXhX8V9KFZF9OlbdQNHsQKeEJBpaZH1onVonrpc4Ud1EZAyR8yUQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793131830;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
+	b=CWzWTrFkSnHkiX3RDOUXN90DI1LvQD1BfvKTQlKcf1M6jfZqFWMfnV4X61ssM3rRPnN4
+	 OuM+b73So6xigCbR5yJdD5YSc3Rhkjnvo6Y4B9DsnDQSv2GWDQbYcdVGg0rL8oaWWv3Is
+	 swJgsCKVk32UziSb2OaNfGHzhiu9fbemZZHx9GISoVxgAdgT7K4bkfBHLbPNOB8E0ZUGB
+	 +oVflVY9gRbGLyFyPMH0QnJxGcI+E+uif/nDUpoWzU79VjAT/MVCq8jax3Iq6oNmnEO90
+	 5fcidXCGQ/UcJMV/jkLi8lGYJEZdg6eDtKp/3PI2v51PuGJDmj+v1Gos2k0dxwDZmIA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xN6SR6ap;
-	arc=none smtp.remote-ip=209.85.167.41
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5713B606A323
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 19:36:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5713B606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2066606A31A;
+	Tue, 27 Oct 2026 20:10:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C2066606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xN6SR6ap
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5bfc3292d90so237167e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 12:36:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793129777; x=1793734577; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=VeGAm90AgmXouwn4W32/Qv5tF0RL+dNfBc4p7xQPPeA=;
-        b=xN6SR6ap5IXfeCgA8OXe2bxckrC1vO7HqetaYx/ySe8B3Ppi/qI1AXBkkfczygyHHC
-         WjYGcZJaW0VjYK79le4mWgblVX8hVEFuNnKy+rS4iyIqTctNgjYPby59jB8eMUiCEjnw
-         qb87EpTATl9CEj1NEHtVvtHIObuv+iFfMAnov6qjNFoQZdp4xswiq/GHrsIE8121qLe1
-         Vo99Hp0nSCEBLKvpMECK09JKe0q98zOhzpkjCIY2HBL1x3z4Ysm+TRrkZYhVI4THw+li
-         bTKoJGAc2EVHNXf6Cd/SrMs/9ydn1UIKyVx/eFB2DyQYxchlfNVGt8FyKHCLLJL9exmT
-         06wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793129777; x=1793734577;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VeGAm90AgmXouwn4W32/Qv5tF0RL+dNfBc4p7xQPPeA=;
-        b=RQS7Lo4yjYZVxmYfH2eOyrl31R+GOuqMj90P8MZg71l0UaqOczEldfiGfpYK0aB3/s
-         OsoHoCYpObL4Ds4GLungknqBvb3nuq8JYJhYvnkdxwsiPgzkUfNDfqajt5yPcz8SEWLM
-         INVmApR1+mQOQDxTQD9r4DxEOkFy0i+/suO9pqg/5uCyifyQxww2b+XlCixHNQcOpYrC
-         f8N3I02FZZ6CdyJE2Q/z9znDAacC4nPN9CFWwAC6FZi1jAsKbNn3AYNayNiQK1kA5aYi
-         sdVxzqEV/KP4adwzMGzot57Q1Bq0WPrDnfCJt+VQrGQLh3UiSVT4NO1IGasJTPWgSyZk
-         6cJA==
-X-Forwarded-Encrypted: i=1; AKwUvBzIFLeArwL7Kd8wWT3AVKAaMqhi3fsNcHxSzMQM6V5M7qHOENiF1PDZWvtDTLMZ09fASdfp3G0zue0Y+qQ9@vger.kernel.org
-X-Gm-Message-State: AFq9FYK7FTju0BTVDwM5MjnXqICKZ1yZPgEuyyvHNBNrwdObWfc0obdG
-	Fy6I7muuIecRie/58h4RpoBbjtKvFC3D3weFMh6LZj9rzRWL/dNm7PQP
-X-Gm-Gg: AYBFou0OlPIAUBo3A3txuNs5tFT/z9gvze2cJSrei+dHo3X7Ax2fhKB85sP3vM1DZ+N
-	hCHVywAFJml9Kc/SFYzZAv6fU3lPhsH6hsRpXgu+RRcPWHkO473gIJTHn+IvWxc+QmUgX9sOV/f
-	oq7Ov7J88f//kbPgVmtxTJ6ELi+1uDaAC+TmvyEif5pJ+WPdNd6NCD15puawlc2an+FZVAGiv18
-	OQ2Dwm3VrlasJaQR/Dmib690UbMAdtXAfUfyqjFLa7/mxQ3TN4I79HVSBEVXtdtrJfrtfNGrAIx
-	f0kAwd+ydMOIiypeCbo/8CKKsZwcTA38H+5njEbUrINJ0iuZiRXTx2KKd9fUMFgvftjN25a/mFi
-	/Zkjly6izEFCwCUFa4crv+rhHlx13wVN48d8QOPl6MdP6n45HTAkoZC3odQLkaD+98L9jlI7zvh
-	NZsBpDwLEmRmrDEcIviODgWXAL1kb0gG0a4OD5wYJt2kt19OqcjW1UQJXxgHzX6ShUiCHIi/33z
-	g03Xy4ncgZkzewwksBKHc+lI6Z3JMqS2cGnTbHVq03PShC8LmuhNE0X7NKApIMFKi/Nlg+X243k
-	2hhIyeZ2MGgby/nKOhGljY1QoZOb
-X-Received: by 2002:a05:6512:304f:b0:5bf:b963:70fa with SMTP id 2adb3069b0e04-5bfcada2450mr124586e87.48.1793129777315;
-        Tue, 27 Oct 2026 12:36:17 -0700 (PDT)
-Received: from valor-verifone.verifone.com (balticom-242-238.balticom.lv. [83.99.242.238])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfca5a2a25sm158477e87.60.2026.10.27.12.36.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 12:36:16 -0700 (PDT)
-From: Stanislavs Nilovs <valorcool@gmail.com>
-To: brgl@kernel.org,
-	marcel@holtmann.org,
-	luiz.dentz@gmail.com,
-	lumag@kernel.org
-Cc: linux-bluetooth@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Bluetooth: hci_qca: Fix WCN3950 missing regulator release
-Date: Tue, 27 Oct 2026 21:36:15 +0200
-Message-ID: <20261027193615.1930624-1-valorcool@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 0F01A53401D6;
+	Tue, 27 Oct 2026 21:10:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1793131827;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
+	b=AMSDWnv+eT86kaPcLmdSSrGcPVkvj/ZcO4jb+7yLClOxs7tcuY9TQP2Ip6cowhu5cqsPG+
+	8TcIFM2qm3SNf2+p7C42SuA3rwNNL6QPqP5LqVRlccpUY1LuNGzaj60MvEARGysJbHme0+
+	tEOGW66lGAGo5gU4GW3ZeBn55pZ7rPw=
+Message-ID: <a60e8a48-9a02-404b-b4f4-8b8f0a4fec9b@ixit.cz>
+Date: Tue, 27 Oct 2026 21:10:26 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -98,57 +60,123 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ phone-devel@vger.kernel.org, mfd@lists.linux.dev
+References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+ <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
+ <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
+ <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
+ <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
+ <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-hci_qca driver is missing release of power regulators when module is
-powered off or serial device is removed. This issue is most noticeable
-during system shutdown, since the regulator core is firing a warning
-backtrace that regulator to be freed still has enable_count.
+On 19/10/2026 01:53, Dmitry Baryshkov wrote:
+> On Mon, Sep 28, 2026 at 04:54:08PM +0100, Bryan O'Donoghue wrote:
+>> On 27/09/2026 17:33, Dmitry Baryshkov wrote:
+>>>>> One major comment. As we see, on SMB2 PMICs parts of the Type-C
+>>>>> functionality are provided by the charger / FG device. I guess that on
+>>>>> SMB5 PMICs we will get the same problem once somebody tries to implement
+>>>>> additional charger features. Would it make sense to rework the PMIC TCPM
+>>>>> driver to be a composite driver, taking several components via the
+>>>>> existing Linux interface?
+>>>> As this gets decided from the QCOM side, I'm fine with whatever suits the
+>>>> hardware best.
+>>> Bryan, as you are a maintainer of the PMIC-TCPM? Would the use of
+>>> components be fine?
+>>
+>> I mean maybe. Would it not make more sense to land the TCPM functionality
+>> and then look into adding charging moving then ?
+>>
+>> i.e. finish off adding this piece first
+> 
+> The problem is that we already have SMB2 charger, which accesses the
+> same region. In theory it is possible to say that USB-C driver conflicts
+> with the charger "for now". In practice, I think, it might be better to
+> sort that out from the beginning. You didn't have this issue when
+> working on PM8150B support since we never needed charger for that PMIC
+> series.
 
-The issue was found with the help of Claude Opus 5 (Anthropic), which
-was asked to review drivers/bluetooth/hci_qca.c for the appearing
-regulator warning backtrace during system shutdown. The fix itself was
-generated by the tool and reviewed by me by applying it, building the
-code and verifying issue is not reproduced anymore.
+I looked into the smbx vs Type-C overlaps.
 
-Tested on real hardware, but not on Linux's master branch. Driver was
-backported to Linux 5.15 for internal testing and this is when the issue
-was noticed.
+I see that charger DCIN (0x1400) is mostly mirrors (both address and values) the 
+register set of USBIN (0x1300), thus I assume charger accessing these registers 
+is correct.
 
-Fixes: d5712c511cb3 ("Bluetooth: qca: add WCN3950 support")
-Signed-off-by: Stanislavs Nilovs <valorcool@gmail.com>
----
- drivers/bluetooth/hci_qca.c | 3 +++
- 1 file changed, 3 insertions(+)
+Type-C driver accesses 0x1300 but mostly different registers (with some 
+exception of initialization and smbx.c 'FIXME: This will be handled by the 
+type-c driver').
 
-diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
-index 7089e9b639b2..e22e2269efd7 100644
---- a/drivers/bluetooth/hci_qca.c
-+++ b/drivers/bluetooth/hci_qca.c
-@@ -2247,6 +2247,7 @@ static void qca_power_off(struct hci_uart *hu)
- 	power = qcadev->bt_power;
- 
- 	switch (soc_type) {
-+	case QCA_WCN3950:
- 	case QCA_WCN3988:
- 	case QCA_WCN3990:
- 	case QCA_WCN3991:
-@@ -2271,6 +2272,7 @@ static void qca_power_off(struct hci_uart *hu)
-         }
- 
- 	switch (soc_type) {
-+	case QCA_WCN3950:
- 	case QCA_WCN3988:
- 	case QCA_WCN3990:
- 	case QCA_WCN3991:
-@@ -2582,6 +2584,7 @@ static void qca_serdev_remove(struct serdev_device *serdev)
- 	struct qca_power *power = qcadev->bt_power;
- 
- 	switch (qcadev->btsoc_type) {
-+	case QCA_WCN3950:
- 	case QCA_WCN3988:
- 	case QCA_WCN3990:
- 	case QCA_WCN3991:
--- 
-2.53.0
+So that leads me to the conclusion that smbx should continue to access 0x1300 
+range, while Type-C must access the range. Only things which needs to be moved 
+from smbx to type-c is the type-c initialization.
+
+Do I get it correctly?
+
+Thanks
+David
+
+> 
+> But, then it's up to you and David.
+> 
 
