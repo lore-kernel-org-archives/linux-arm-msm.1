@@ -1,100 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.45
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793058938;
-	b=Wha0nREWefZwQElaZ3Udze4sHIk9lDLtoZU/BdXzub9FMujqZte8QkNEYxx4K7ZBJCP0
-	 WNXlNg0hBWiTS7Y8AVYsWMO1QOI4DcbXCHoOpG1gNS75k1d+eHBMfngwz0oDxo1nIsZxo
-	 LSyzkDNWUgCop+VL/CtVWvOqPiQ6y7+tigUXz++2t6c4qRuHbDQTufnPcfUu0jNfJReyg
-	 Xuz7X501AIvoEkaq3WcRl9G1yoFpV9o6D51BiKzPYtFtZgDGpmPEtUwk8qWc39QM1YXTq
-	 cBvgZrCckrCJOo4EqNeA7pgqo2iwly0O1ngJopiTKsKIgAsDV+2XGAoHSR/54BTstsA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793058938;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=ZzMX7mFcIWh7Kuz+dntrLxcfYo0Pt/pLtJ3pm/q59a0=;
-	b=Dhg7w3ibUw16kO8YtpyLybbEOnW3+riRNx4zmoZnKbs3tGjfw94H4s/mxoJ9aX73uZYk
-	 vmjx8SQeZC3Lv/yqtpBEvdtZzLmrDHbE8xw21ylZzlWAYHKB2mzMwAny69+YvjX16JVxV
-	 8LVkNPfCYqnSXUbtn3j9sXwxvxQhPxnYD8fXvptFbQprRPGbftl+O+TCMkMIEawy9N6a+
-	 zMZHHmKiQ8kjpcCvFG1z7wwT/7791vbkPA01eSof+kKnBtT0b4UjfStg1DqnMo3m6fFZi
-	 P1Z1P3J6FMyekiVBIAKEjXvnBsyXo2GyhulbGBvI/pOCNYAsaCXBYvwg16cIWuzn7AA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=TQpGK3pm;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.45
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.101
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793059432;
+	b=ESX1x9D9BwUHHHUfDMpD0xVEqlw3CuNcbcPTuc1jTnc1yCOEtNGKj+QAVED2iUJVkx/n
+	 v1UffXsHYhX6N+UVtVj2DUGpgeQxAkQhz0z0OESLOKPUsYH8lxSE7xQoljRTXb2YkjwqR
+	 GppAijftHHLA/qv5+g9EWi8XZtFSscxSTN1BhFk2AQFS5lP047Gm104fBrJ+0mSek1F/7
+	 EQN2Jm7cz6Ba4KlN7FRfmczSnPuqFjnLk2kLgpwKfm1tM8gdoXRr4y5RFyGLILMGcDgUr
+	 4mQBfp2XeNNC5jXo/sklRqC3A8RN4fkzSruL4mHE+SR+Kh6ghBko5ao4VrjwGVFUhqg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793059432;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=kueKbL7z9iLzTPubbIyuThS9hTpuVK3Jg4WyfhBW8ak=;
+	b=bX+C28n2QXhsSrAt9QBh7p/MB0J6SP8dkHaSs5pdWlPpbFCkOafzW5ZvlA+tBAzegnFV
+	 x1O/NnHRLgr4B8TpakdmIXIxNm15CJpGHYcVMiKycdEaZQn3R/+0x/Gb3DpZsvkiHc6VH
+	 28Y3Adu1z2WETGkvVrFO+KYblkpo73MAuwATf0ZLdL6ZgO/evxUhkHY5m7qC+KGKaYU+G
+	 sIK46LVcVty9gFF9qXCu5nbQk/wi2iyZLvbfQzuuF3L3diSIsdaoD0Xalyj9txmwaUMfA
+	 1HiJoyiwRH+YK7vVxJsvpkvYHRy2Gac0wD7ez9WgeifEj+CidLMSKM4adn7KtitJ5VQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=JMxy3ERP;
+	arc=none smtp.remote-ip=185.70.43.101
+Received: from mail-43101.protonmail.ch (mail-43101.protonmail.ch [185.70.43.101])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EEC3606A324
-	for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 23:55:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5EEC3606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D25606A31A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 00:03:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 55D25606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=TQpGK3pm
-Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-917c04630c2so39734716d6.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 16:55:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793058937; cv=none;
-        d=google.com; s=arc-20260327;
-        b=VeB4zWIW3yLVa0ss2VSK0xMOVKn0rXH58RboAnXAhmc/6RRv2RcHGi2mcGrpeJWJb4
-         iwL2GOWF3QEFkXcT/Ep3dpPLTHkPQUKwkZvvidq3AapbcuYzPQnpmohqcq2KEovfmtPu
-         EiuU/v8W6ymMOPGaL9ZtxgtuoTpRCqDSl4AYRkTk/De4+5iozUAx1RS0JFRb8lnffl+G
-         9fvQM5smXjulLh0ddp+I/0jLDr2b0lvJhJ+2am9MWNEcbFdiXILPmZCiRx/tREAdRUpB
-         1pAoSVcJdnTR42P3Y1rb/JjayIxlGAFO6URmAnFC7z/1hZD6SwV3Em8D0AvOxed4vSdQ
-         ZmPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ZzMX7mFcIWh7Kuz+dntrLxcfYo0Pt/pLtJ3pm/q59a0=;
-        fh=sQLx5C9b0xPQfcuPIY5KiiFqOgGjJIbQx8AR67fVIQE=;
-        b=eIc0vyZpY72O/CTXqNQKs2+7ftygJVsAGUk+lWcfd6c4szoQSUDnpUvAhecFbVotXr
-         oDhx4EKFov/XP2bGpgxC84H6iiFCkgiUDQocHUaq6xHLN1Xivcqk/98qvFbOi3wWDFRY
-         taYSQ5QZPsgO/8dff8ECo+eRHHXfxDdzhiTbYNHc8TdluSs0uwez0BHVDhRdmPqczkFI
-         /DE9bOpn/NzMp8CWIJXeWhPS4FpJLJzNi7CgVS4uF5FzCoBWh5yjPyhV6pgm8z9Ezy+y
-         ZrbOTUdw0mj0wqroXUrlKE8q7PI2UMonVcxsdIXam6ZiXpKAHJG/VHJGnMU05Pldu7Dr
-         lcIg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793058937; x=1793663737; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ZzMX7mFcIWh7Kuz+dntrLxcfYo0Pt/pLtJ3pm/q59a0=;
-        b=TQpGK3pmnxF9Uh6mGxtTM0eoOIkxVBX4Wm6rLvp8nWLojE4nxAZMlCEmoVe/K7O1IT
-         lwuyAQWdQRiI3GNV44n3R9H/UshrkWSTq6oD1vkhet1APzf+TpbIQ4vwSN3zzqTDfT37
-         Ed1rwH91/BFSMotyBHUJ7VCOgLkpiakvPiEM36ophgmxm6mUSd1mvTljS0SC/rl5+410
-         OK142PrbY9MR2EtBXmHC+KgoYWYfkAgFwgXH/cxyXo4KGJhsDsGJzkTrTuf2YDyiXvxq
-         kGGTVutZxXnosvs8t+mP2Baw0iZzSIYryGRjIidYlNcspZDzGGY18sntryGZFSDAi7Ny
-         3K1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793058937; x=1793663737;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZzMX7mFcIWh7Kuz+dntrLxcfYo0Pt/pLtJ3pm/q59a0=;
-        b=dnjwxZvjst3tIht5JpJ0MEHKSSIBFIN2f3XxtAeyQedKol0+JkbLSawX4oes5oZZHM
-         swSaG1Gw2qWaOLF2xIiaPHoK0osBZXjcUQKocY1dfwEaL03Ljd/peCVhPcCeAoSJNxJ4
-         lD33rfO01ONiq0Po+yt3e0XDIMrUtv9aQHwd/1cWFBNLBGvzLgpPV7sHBRabh4QTcNBI
-         Rwy2H1T45/FE8HxEu0SGeykbTvR5f+61Ap/PR9AfLnqPB1GkHFTydOppKIdIBhC2vrgN
-         HB3EtsEfzHlMkEV4l1Xdoz0stfy6YO+XHHD0MNZevxlEdBp+zNjtfhOD/O12V3d+bn2G
-         oJ+w==
-X-Forwarded-Encrypted: i=1; AKwUvByZgNHfQ+CMQWrbIHoFlyPEi51UhaXjms4omZZXUY3MINinGIaxdAaxJHW1EOrzsSQVDT7hYC1PETHoklnd@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ7CKvqFg+5xtxwlwDQdFddNTVL1G9J9xj9ZFtVeQRv/ObQsj2+
-	eDSoASPnvSVztRzFoB/dUh0yM0K2qZLXuqN3Tvo3ZNXG0cCCsyO9VQ8iR7djpERklY74fCpi4Bi
-	7ol7EDqY22mVOQhLxixhdK5IiV4MdHPo=
-X-Gm-Gg: AYBFou2Ce1F2QV/n21t2eG7JlLLnYTQiyGKOW7hfM9Pc5S1jr/IMVYTY+/HrRG1nGBH
-	Wfa+gCupb+qeFlHuhD72hNaLQJURaCnd/ZB/UeB43rgWPsLy7RotaaO+uWwMDWEr/59rn5kMioP
-	+OxvxUHn/Qozm3Yqzm9sdQZC/2oeyMbPuIGBwDVZcND8r0BpRJAs38PofJ5IjEUWhYz+tvwtVDG
-	hDMP6qyCkVE8PZDUS9QIXaJtwC+ww2N9OohOtobW9GD0vYcNIg8iMxIq1ssQUFTJTy+HlNTkcIp
-	mTQJm0ydzVvHTXfYJBEiV3Pnsu4YQYHwAMTQ+BMhoWjnQQEseyL/pt9Om5OemUykl+kqbSLtArx
-	k4z1MOq/tFr4X9Z0d23KLAIkEghdo7Avcs+vEOg==
-X-Received: by 2002:a05:6214:3c9d:b0:91b:a702:cc5b with SMTP id
- 6a1803df08f44-91c48d21df9mr142161736d6.7.1793058937159; Mon, 26 Oct 2026
- 16:55:37 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=JMxy3ERP
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1793059423; x=1793318623;
+	bh=kueKbL7z9iLzTPubbIyuThS9hTpuVK3Jg4WyfhBW8ak=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=JMxy3ERPAIfQaKuK7uM4547GcFAgiaOQ91z9zf1U+3+CykIHrJVS9F6X0DHyV5g3D
+	 0N26K7bu+Wli+qvJQ964pAunc8/u1x07uDewGivBJmrD5Omj75Cq1B8i9rkOiSokUD
+	 DG0sitYc3MRkOyv/bW6IW6o3FLK0iMPXOigP5fDXTqtdBq1S8Ad/32wpmzW+k+1Q50
+	 IqiU2eDqfNGHwyXnho+xG1ynSvZ9uoRMb7YMKl2w1Qkdb+ta0OVJpTUwC+6CTAKBQI
+	 w3sMGuGSqirW6i9Ot8GJqPJ8SxEzG+BSfFMbMeQa+PjzUOKxmDz4OIOBdE2FQiU28n
+	 bGwUWb8KGr1Lg==
+Date: Tue, 27 Oct 2026 00:03:40 +0000
+To: rob.clark@oss.qualcomm.com
+From: Alexander Koskovich <akoskovich@pm.me>
+Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, Jie Zhang <jie.zhang@oss.qualcomm.com>, Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>, Konrad Dybcio <konradybcio@kernel.org>, linux-kernel@vger.kernel.org, Marijn Suijten <marijn.suijten@somainline.org>, Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>
+Subject: Re: [PATCH v2 00/14] drm/msm/a8xx: GPU state capture support
+Message-ID: <HWs63_U2peTA6inCaYP8yY8D5MkYQ_f3KzN9-WXHzURewlVA-7MMJwkLffTUASri-OqRHtp0PI8PFdyUku_7PGxBaEyUbHda176jExmf2bo=@pm.me>
+In-Reply-To: <CACSVV02x=GDTH40C57B1Eg8_CfmCgDGD_BE4f1auwFf=3eQNCg@mail.gmail.com>
+References: <20261021204244.67160-1-robin.clark@oss.qualcomm.com> <FZvwtKTpIxRNzjzcqFf6bTw12mNTJvJZmg6j9lmi8MehHBt91NogIW8oQd5yFHN5DSL8yIWL8p_b1cJPAJC57ZFkoe2BOAh_Y3kwph5SV_A=@pm.me> <CACSVV02x=GDTH40C57B1Eg8_CfmCgDGD_BE4f1auwFf=3eQNCg@mail.gmail.com>
+Feedback-ID: 37836894:user:proton
+X-Pm-Message-ID: 720cc2e5cb292645419ebbeacaaf8b15780fbbbb
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,94 +64,138 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261026-msm-dpu-res-clean-v2-0-3d864435186e@gmail.com>
- <20261026-msm-dpu-res-clean-v2-1-3d864435186e@gmail.com> <498e2fa8-b707-4a06-9fe7-9e62253786c5@packett.cool>
-In-Reply-To: <498e2fa8-b707-4a06-9fe7-9e62253786c5@packett.cool>
-From: Xi Zhang <xz.ca.cn@gmail.com>
-Date: Mon, 26 Oct 2026 20:55:20 -0300
-X-Gm-Features: AclHuK8LbWKXuTefwbNDto9JuTcVHDIAbeMY8N4dmB0dUoKxhMwBSYQlkgp2Y_c
-Message-ID: <CABxuLgMHx+ZvkL=Rs7R2N=cO8Vtyc8FktZ4nUzmCRD=WdorWMg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] drm/msm/dpu: reset unassigned resource slots to
- NULL on topology update
-To: Val Packett <val@packett.cool>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Xilin Wu <sophon@radxa.com>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 26, 2026 at 8:04=E2=80=AFPM Val Packett <val@packett.cool> wrot=
-e:
->
->
-> On 10/26/26 5:25 PM, Xi Zhang wrote:
-> > While this is not currently the case, it may be possible that topology
-> > for cwb and dsc resource requirements change between mode set in the
-> > future.
-> >
-> > e.g. when dsc support is added to DisplayPort, dsc may be optionally
-> > enabled and disabled between different modes due to
-> > bandwidth requirements.
-> >
-> > Set unassigned resource slots to NULL on topology update to avoid
-> > issues in the future. It's good practice to do so anyway.
-> >
-> > Signed-off-by: Xi Zhang <xz.ca.cn@gmail.com>
-> > ---
-> >   drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 22 +++++++++++++++-----=
---
-> >   1 file changed, 15 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/=
-drm/msm/disp/dpu1/dpu_encoder.c
-> > index 0a6be69a3e83..8d2b4d2726f2 100644
-> > --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-> > +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-> > @@ -1205,9 +1205,13 @@ static void dpu_encoder_virt_atomic_mode_set(str=
-uct drm_encoder *drm_enc,
-> >                                                      ARRAY_SIZE(hw_pp))=
-;
-> >       }
-> >
-> > -     for (i =3D 0; i < num_cwb; i++) {
-> > -             dpu_enc->hw_cwb[i] =3D to_dpu_hw_cwb(hw_cwb[i]);
-> > -             cwb_mask |=3D BIT(dpu_enc->hw_cwb[i]->idx - CWB_0);
-> > +     for (i =3D 0; i < ARRAY_SIZE(dpu_enc->hw_cwb); i++) {
-> > +             if (i < num_cwb) {
-> > +                     dpu_enc->hw_cwb[i] =3D to_dpu_hw_cwb(hw_cwb[i]);
-> > +                     cwb_mask |=3D BIT(dpu_enc->hw_cwb[i]->idx - CWB_0=
-);
-> > +             } else {
-> > +                     dpu_enc->hw_cwb[i] =3D NULL;
-> > +             }
-> > [..]
->
-> I've mentioned in a reply to v1 that this was indeed affected by the DSC
-> changes in radxa's WIP, but missed the more relevant one:
->
-> This is already handled by the "drm/msm: fix SMMU fault dumps" series:
->
-> https://lore.kernel.org/all/20261024-fd-kms-fix-smmu-v5-0-a5b0b284aead@os=
-s.qualcomm.com/
->
-> Namely patches 5-8 ("drm/msm/dpu: clear the ... blocks ...")
->
-> Thanks,
-> ~val
->
 
-Thank you for the reference link!
+On Monday, October 26th, 2026 at 7:32 PM, Rob Clark <rob.clark@oss.qualcomm=
+.com> wrote:
 
-Also thanks for the radxa mention. I have some msm/dp dsc work
-for the older v7.2 kernel and could use those code reference.
+> On Mon, Oct 26, 2026 at 4:06=E2=80=AFPM Alexander Koskovich <akoskovich@p=
+m.me> wrote:
+> >
+> > On Wednesday, October 21st, 2026 at 4:54 PM, Rob Clark <robin.clark@oss=
+.qualcomm.com> wrote:
+> > >
+> > > I'd appreciate tested-by's on Hawi, Maili, Milos, and Pakala, since I
+> > > don't have these devices at-hand to test myself.  In particular, do
+> > > things look fine after the switch to generated nonctx regs.  To test
+> > > devcoredump, you can use the msm_recovery test in igt.. or just:
+> > >
+> > >   cat /sys/kernel/debug/dri/*/gpu > /dev/null
+> > >
+> >
+> > Tested this series on Milos, series as is works fine for initial boot, =
+navigating
+> > around GNOME & apps etc, but when I run 'cat /sys/kernel/debug/dri/*/gp=
+u', run
+> > into an oops.
+> >
+> > That is resolved after removing 0x20400-0x20487 from milos_gmucx_regist=
+ers,
+> > and removing 0x0f000-0x0f002 from milos_cp_cp_pipe_none_registers. Not =
+sure
+> > if access to these is restricted by TZ or something isn't configured ri=
+ght?
+> > These ranges don't seem to be described downstream in adreno_gen8_3_0_s=
+napshot.h.
+>=20
+> Thanks, yeah, there seems to be some things blocked by
+> tz/hyp/something, which are not blocked on glymur/el2.  I'll have a v3
+> soon, but still chasing down some of these details.
+>=20
+> >
+> > After that 'cat /sys/kernel/debug/dri/*/gpu' works and I get a dump, di=
+d observe these errors in dmesg after though:
+> >
+> > [   42.891106] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891142] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891157] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891171] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891184] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891198] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891211] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891224] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891237] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   42.891250] platform 3d6c000.gmu: GMU fence error: 0x0
+> > [   43.640122] ------------[ cut here ]------------
+> > [   43.640137] msm_dpu ae01000.display-controller: [drm] crashdumper ti=
+med out: status=3D5c00bd00 (-110)
+> > [   43.640222] WARNING: drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:115=
+ at CD_RUN+0x20c/0x594 [msm], CPU#3: cat/1929
+> > [   43.640419] Modules linked in: rfcomm q6apm_dai q6prm_clocks q6apm_l=
+pass_dais snd_q6dsp_common q6prm algif_hash algif_skcipher bnep snd_q6apm p=
+anel_raydium_rm69220 fastrpc qcom_pd_mapper ath11k_ahb ath11k mac80211 hci_=
+uart btqca bluetooth qcom_iris cfg80211 ecdh_generic msm ledtrig_pattern vi=
+deobuf2_dma_contig ecc v4l2_mem2mem drm_dp_aux_bus videobuf2_memops qcom_q6=
+v5_pas ocmem qcom_pil_info videobuf2_v4l2 pwrseq_qcom_wcn gpu_sched ipa pwr=
+seq_core qmi_tmd focaltech_ft3683g qcom_q6v5 drm_gpuvm videobuf2_common drm=
+_exec rfkill drm_display_helper ubwc_config cec qcom_common mdt_loader liba=
+rc4 nft_reject_inet nf_reject_ipv6 nf_reject_ipv4 nft_reject nft_ct nf_conn=
+track nf_defrag_ipv6 nf_defrag_ipv4 nf_tables uhid fuse usb_f_ncm u_ether s=
+pi_geni_qcom evdev libcomposite
+> > [   43.640750] CPU: 3 UID: 0 PID: 1929 Comm: cat Tainted: G S          =
+         7.3.0-next-20261026 #3 PREEMPT(full)
+> > [   43.640763] Tainted: [S]=3DCPU_OUT_OF_SPEC
+> > [   43.640770] Hardware name: Nothing Phone (3a) (DT)
+> > [   43.640778] pstate: 61400005 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BT=
+YPE=3D--)
+> > [   43.640787] pc : CD_RUN+0x20c/0x594 [msm]
+> > [   43.640972] lr : CD_RUN+0x208/0x594 [msm]
+> > [   43.641155] sp : ffff8000891c3990
+> > [   43.641161] x29: ffff8000891c3990 x28: ffffc3ee34aef850 x27: ffff000=
+809253000
+> > [   43.641180] x26: 0000000000000001 x25: 0000000000000001 x24: 0000000=
+000000020
+> > [   43.641198] x23: 0000000000000000 x22: 0000000000000000 x21: 0000000=
+000002114
+> > [   43.641216] x20: 0000000a28796b5c x19: ffff000813d7f000 x18: ffff800=
+0891ad078
+> > [   43.641233] x17: 3a74756f2064656d x16: 6974207265706d75 x15: 6468736=
+17263205d
+> > [   43.641250] x14: 3fffffffffffefff x13: 0000000000000003 x12: ffffc3e=
+e5c6649c0
+> > [   43.641267] x11: 3fffffffffffefff x10: 0000000000000003 x9 : 9e14538=
+c77bb2600
+> > [   43.641284] x8 : 9e14538c77bb2600 x7 : 2e30303031306561 x6 : 2075706=
+45f6d736d
+> > [   43.641301] x5 : ffffc3ee5cb061bf x4 : 0000000000000345 x3 : 0000000=
+000000000
+> > [   43.641318] x2 : 0000000000000000 x1 : ffff8000891c3790 x0 : 0000000=
+0ffffff92
+> > [   43.641336] Call trace:
+> > [   43.641343]  CD_RUN+0x20c/0x594 [msm] (P)
+> > [   43.641530]  a8xx_gpu_state_get+0xdc4/0x2698 [msm]
+> > [   43.641714]  msm_gpu_open+0xc0/0x134 [msm]
+> > [   43.641898]  full_proxy_open_regular+0xe0/0x1e8
+> > [   43.641913]  do_dentry_open+0x154/0x4d8
+> > [   43.641927]  vfs_open_consume+0x40/0x114
+> > [   43.641939]  path_openat+0x440/0x6a0
+> > [   43.641950]  do_file_open+0xdc/0x198
+> > [   43.641960]  do_sys_openat2+0x88/0x118
+> > [   43.641972]  __arm64_sys_openat+0x78/0xac
+> > [   43.641985]  invoke_syscall+0x6c/0x12c
+> > [   43.641997]  el0_svc_common+0x98/0xf0
+> > [   43.642007]  do_el0_svc+0x28/0x38
+> > [   43.642016]  el0_svc+0x4c/0x1ac
+> > [   43.642031]  el0t_64_sync_handler+0x6c/0xe4
+> > [   43.642043]  el0t_64_sync+0x1a0/0x1a4
+> > [   43.642056] ---[ end trace 0000000000000000 ]---
+>=20
+> Hmm, not sure about this, other than maybe whatever is causing GMU
+> fence errors is also causing the timeout?
+>=20
+> If you run something that keeps the gpu active (or disable ifpc), does
+> that help?
 
-Awaiting comments before removing the overlapping patches
-(1 and 5 of this series) which have more complete fixes in the
-series you linked. There may be other issues with my series that
-sashiko bot didn't find.
+Keeping GPU active doesn't seem to matter, get the fence errors either way.
+Though, if I disable IFPC then they go away.
 
-(I'm using the gmail web interface reply-all, hope it's doing the right thi=
-ng.)
+>=20
+> BR,
+> -R
+>=20
+
+Thanks,
+Alex
+
