@@ -1,83 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.10
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793063330;
-	b=SEWsNyZ/47s2L4tSuYrIKYgo/+tuAIygAqh3o7BiNRxRgz25E93vMD3FPUAfmv8x1T87
-	 R1YUIk9SPelH3fQheW7JSu080rqH/jvRILLGv260LJPDxYwtTQDJLMmZ2LqY8XBNXYjdC
-	 UxvOI0kBbvsIJVE/A1MHxnq1qq1Cy/nL0ddj6d147qa5/vS02wgjeKAbXmWjuPKQd2Hll
-	 k4/C21odM03hppX/L4Sr7spJfzMnEmI+0AFyy88XUNw32+nSPmgyaMplZRTgY3U9wxl7J
-	 6Ud//JgkE1NwjnjuZguBFBal5tLBAGvvwbE+1Ah/qnobks9TU6kpMERA9+p6xRbwuYA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793063330;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=N+FY3Xyt9LRFMWhhSp5zYlqrMv7mXqtxBXgGwZ12aGc=;
-	b=wL0smWpeF55wNmFvnbS8PRRDU/4bxt4MbFk9lPMTRKHc4s5L/qj0LVn24EYvO6R45fDK
-	 PjEiCculSbT9buPxZltzFXuqGOQ+oO6uC71RDzGTYLizfCwa3aD7KVOnBAVVTfhx3bRHE
-	 BsI3d6kUCZO0xxPIYaW9I8f57cQuYpuTdLs4pZ2UxkvLnlwflOsuMrcgleaUV3ifBQg+q
-	 58TQzb0RYzO9BH0Sq1vQXe0B5G6RlXFbWn9ydv2lfQiMWIk0xtwYoYIlIgiTmwrqyhdon
-	 TZVdXogrLCsKUnUHVO/T7YviYfiqOUJhJV3gNjQGogUB5Uzhn2Jpf8/lT98OYf8ajNg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=bB5YVJUC;
-	arc=none smtp.remote-ip=198.175.65.10
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793063675;
+	b=srI/zEPe4w2qof+BJ3JzO9MwljOqxjbWwAyud9GiK8YCeSODa/NH7JnHYix16A9V3R2O
+	 0PCDlLTa2lpM+kgQGru2URhB7IMMWWoRj7KLnziDFDybgCQ7a98mWuEwrH4c2SyqoVP1F
+	 yR5S5bi9N1m7tcgrFIAE0xzE1b7gjEo1RKku1IeItMi9xQiCK+pyRKPURL/hCDIMzw5JG
+	 m2cGB8Zfmc3gY2pL4IDkVPEsgjMYqagdB2KNeodEamUfXu2Z1dTEooHFcUZW4h3th58fD
+	 5WN81OfPIsut2qj6Bbonoa8OwpMs+U8sqMU0yMyS/pcsqNSnI51UsbgxgYW9EgFBqbA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793063675;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=jMsIChqulb9GIa12+hHaFUFMvoztx3aWdNCiyNkirSY=;
+	b=EhDM3yCyqqy/tfz2DuPyfvP/Ok8K/D/7PmCIzpFyPhLIs4FpvragQOLH2BR/e50d0lK+
+	 003WaY1YfNAdQa3jiMLAPbz0O+8JAZH8WapzdkGBReMyBpS+DkD5uNeEpwHxVStedE4Hp
+	 DaFYb7z1otTqtdX31HCEepOB0O0uEkLEmOYX82Kmg5K/dJ3mAU1iPj+XCbDb6/HC4JHpe
+	 BNpth4Gve0S9rn4kHxJvKeDNKLWAbfZMPWJw/rTJz9LURvT45N1HJyP8MIz633PEWZvpN
+	 hAowQtYF3xUJWZfa+pD1vXDl1I0bMkAcnhMt6S3Kp0BHijgvVIrvDhRMMrhUtGySjVQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f6NzlCru;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA66D606A31A;
-	Tue, 27 Oct 2026 01:08:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CA66D606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53E48606A31A;
+	Tue, 27 Oct 2026 01:14:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=bB5YVJUC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793063328; x=1824599328;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=oV4ISgvIUb/za+DawkDMzX6NLsw6XNdYHJqPyp8mAoA=;
-  b=bB5YVJUC8rfgKqSRevLb3DPNjDffoEs7H7S1Js97opFix8Xs2/r4XY5b
-   DGInkfYx1VXgGan3Hl+JciEoCbJ2pCPpUtynewbyLFtK0dyJ1djd0OhSZ
-   bO9aCBZXPtA//Yeysz3L88fF+0GsOFh8fOtyLk4Q6sWXO/1RZOjtRGdjv
-   MJMbfOAlxrnpsAQGW7grnl68mpG2pTpbE3pR6MC5FQH/bIrkXngwRn+9z
-   oyACUoGKKBdUG6YZYI+Zj2J4xxdXKufx+wxJ2vSKEJ7WbYm8binpYsA63
-   q9MJiUcsHJgDvboWmoVq7aa0GuKvQRcBCxjuepkrB+HABueD/WMMrN9l3
-   Q==;
-X-CSE-ConnectionGUID: Nk86K7KhQfSmpZ/F6dmXEg==
-X-CSE-MsgGUID: 1/VG+2fgSzCLo+u8/rChDA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11947"; a="1642310"
-X-IronPort-AV: E=Sophos;i="6.27,180,1787036400"; 
-   d="scan'208";a="1642310"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2026 18:08:48 -0700
-X-CSE-ConnectionGUID: bbmpIGSAQZ2xxEwuKNnKQg==
-X-CSE-MsgGUID: 4EBT/wssT+mH4Px8zY9Pgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,180,1787036400"; 
-   d="scan'208";a="4318562"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa007.jf.intel.com with ESMTP; 26 Oct 2026 18:08:45 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xLVgA-00000000Wey-1k3D;
-	Tue, 27 Oct 2026 01:08:42 +0000
-Date: Tue, 27 Oct 2026 09:08:17 +0800
-From: kernel test robot <lkp@intel.com>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>,
-	Stephen Boyd <swboyd@chromium.org>, Marc Zyngier <maz@kernel.org>,
-	Lina Iyer <ilina@codeaurora.org>
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH] irqchip/qcom-pdc: Handle ESPIs in qcom,pdc-ranges
-Message-ID: <202610270827.7SxHabHO-lkp@intel.com>
-References: <20261022-topic-pdc_map_espi-v1-1-7c481a42bac5@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f6NzlCru
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1793063674;
+	b=2lvkoI2Ca4K9NUvIrOg2rwO8ECQc871sdIYAKT4dhUKREp4IiKh46JeMyda99QI/FxCA
+	 de2gLciFEgoI4v/LoR4a0vNUGVNbR2+oIGoMCsL6wON6ai7hOQtslUTApjhQ3faHja8tB
+	 HwTCujXo/st8ApUo0ohOrDyDF89+nVKQwfk8uPSYaQi8CrlxN0lmxS55gCwFBADZL+58C
+	 3h0PGl05Uip0hxnYeJdRabIwke1DcSb93Vn+Hex4MYY9UA5mFWPdOYnAtU1AGMMLLck7H
+	 efypvKOGaAYmcbjyZah0prZejeQkcNkhXCCz3NPnvlrHp1dcHncczeUI/CuPXPmLrIQ==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793063674;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=jMsIChqulb9GIa12+hHaFUFMvoztx3aWdNCiyNkirSY=;
+	b=N/l948Eu5re927ZqPEI0jr0nIBUqsxt4WR7iwtvy8IAjyRPUk8jTcKCLqfPUapfERapL
+	 pquNs+4yIYjngWGFAYuWSQxpfISaxJzlz/ajDJqZLw53HQIH7d9Odu6KJoKC0ydDBKvGv
+	 QI/3loWWD4ZFyrNAc/5K4b4o8ksK587vszQ+fvLYWeV3jAzq4NooH8U6V4nEQiLmiU0s6
+	 1tj0JiLsmUiYzP+RolpPkcIV1/F5rlBPlZni+T+VSKeNGeWIFiIYzU3OR2jVaECdDvYu4
+	 Ozi0UmBQEdYSQYEBDvTubXFSvYlzdEuKUaODq3MymdPLhRjA95zkgTOmj1RXBmwlmRw==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id 555851F01825;
+	Tue, 27 Oct 2026 01:14:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793063674;
+	bh=jMsIChqulb9GIa12+hHaFUFMvoztx3aWdNCiyNkirSY=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=f6NzlCru5qtpXU6hmCipRQvJVJbjV5FRpqOmMzMJuX9z6Yev8tjfomVnt7rvRZa3t
+	 vgmBcThL4TP0meisMHFil8HdzbmnKBa56AevKMor5AuawGimZPwTZfwnztfM6HrsxU
+	 ce8FyrqLNx1FNAL75lScl/CHdNVQhfuMFTrpCq750SWU69UzWSCnvzHclUbK0IRksq
+	 BLffqw2KZegYS/NE9sqpFfYpw9TYDHVQTPeVFK9ha2V/g74YyX8A5GSSJPzdkbsiLK
+	 Z+HP2jMjrIVJfqihuSNS+t/GtJm6fXedUFkqX1QwgkWd16/3wpJspxP0wrfv9Kj5xD
+	 w/k3ogWadFmrQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id A5DCF44F22;
+	Tue, 27 Oct 2026 01:14:33 +0000 (UTC)
+From: Haipeng Lin via B4 Relay <devnull+jimmie.lin.gmail.com@kernel.org>
+Date: Mon, 26 Oct 2026 21:13:02 -0400
+Subject: [PATCH v2] drm/panel-edp: disable the backlight at probe
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -87,44 +82,150 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261022-topic-pdc_map_espi-v1-1-7c481a42bac5@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261026-sp11-bl-upstream-1-v2-1-efc84396adf1@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NQQqDMBBFryKz7pRMWkLtqvcoLhIz0QGjklhpE
+ e/e1AN08+F9+O9vkDkJZ7hXGyReJcs0FtCnCtrejh2j+MKglTak9BXzTIRuwNecl8Q2IiEbQ8a
+ amzdBQRnOiYO8D+mzKdxLXqb0OT5W+rV/dSuV8JfaBRtqG1z76KKV4dxOEZp937+Ogc2WtAAAA
+ A==
+X-Change-ID: 20261024-sp11-bl-upstream-1-e6616a68d6f0
+To: Douglas Anderson <dianders@chromium.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jessica Zhang <jesszhan0024@gmail.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Linus Walleij <linusw@kernel.org>, Sam Ravnborg <sam@ravnborg.org>, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ Dale Whinham <daleyo@gmail.com>, linux-arm-msm@vger.kernel.org, 
+ aarch64-laptops@lists.linaro.org, Haipeng Lin <jimmie.lin@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793063673; l=4890;
+ i=jimmie.lin@gmail.com; s=20261011; h=from:subject:message-id;
+ bh=Wc0k3oO67F3S7EDiEGmSzJEvwEL5CUGbgzDoGXTLcs8=;
+ b=+lS75aoCJDPrdFiEZL0w7xUoK2eON3nABsbxAPsz28j9zI94XDgBJQdLexqdioijrzqv2Zoxc
+ 8PH2eb3pR4aCab9gRf5IECpOmd6qj4Mb0NEo5JskcYdo1h4E3egOfbO
+X-Developer-Key: i=jimmie.lin@gmail.com; a=ed25519;
+ pk=3KDRF1RQ/9A7ZUVTdRVEZnVrGltdmq1bRocsOYeXezI=
+X-Endpoint-Received: by B4 Relay for jimmie.lin@gmail.com/20261011 with
+ auth_id=1164
+X-Original-From: Haipeng Lin <jimmie.lin@gmail.com>
+Reply-To: jimmie.lin@gmail.com
+Content-Transfer-Encoding: 7bit
 
-Hi Konrad,
+From: Haipeng Lin <jimmie.lin@gmail.com>
 
-kernel test robot noticed the following build errors:
+pwm-backlight can preserve the enabled state left by firmware to
+support a seamless display handoff. However, panel-edp does not support
+such a handoff. When probing a generic eDP panel, it powers the panel
+on to read its EDID. If display pipeline binding takes longer than the
+runtime-PM autosuspend delay, the panel is then powered off while the
+backlight remains enabled.
 
-[auto build test ERROR on 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64]
+On the Surface Pro 11 LCD (LGD0779), leaving BL_EN high across this
+power cycle appears to leave the backlight controller in an incorrect
+state: brightness is pinned near maximum with a greatly reduced
+dimming range. Subsequent brightness changes update the PWM duty, but
+do not restore it to normal. Cycling the backlight off and on at
+unchanged brightness restores the full range.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Konrad-Dybcio/irqchip-qcom-pdc-Handle-ESPIs-in-qcom-pdc-ranges/20261022-104402
-base:   2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-patch link:    https://lore.kernel.org/r/20261022-topic-pdc_map_espi-v1-1-7c481a42bac5%40oss.qualcomm.com
-patch subject: [PATCH] irqchip/qcom-pdc: Handle ESPIs in qcom,pdc-ranges
-config: hexagon-allmodconfig (https://download.01.org/0day-ci/archive/20261027/202610270827.7SxHabHO-lkp@intel.com/config)
-compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 186e70f4e6a1521991d2340d3d49b23b1beff11f)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261027/202610270827.7SxHabHO-lkp@intel.com/reproduce)
+The first drm_panel_enable() does not recover from this because
+pwm-backlight still considers itself enabled and leaves BL_EN high.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610270827.7SxHabHO-lkp@intel.com/
+Disable the backlight at probe, after acquiring it and before enabling
+runtime PM. This clears the firmware's enabled state so the DRM panel
+core turns the backlight on after panel power and video are ready at
+the first modeset.
 
-All errors (new ones prefixed by >>):
+This also turns off the firmware display at probe on systems where it
+previously remained lit until the first modeset.
 
-   In file included from drivers/irqchip/qcom-pdc.c:12:
->> include/linux/irqchip/arm-gic-v3.h:605:10: fatal error: 'asm/arch_gicv3.h' file not found
-     605 | #include <asm/arch_gicv3.h>
-         |          ^~~~~~~~~~~~~~~~~~
-   1 error generated.
+Verified on the Surface Pro 11 LCD by delaying display pipeline bind
+past the autosuspend timeout. BL_EN now drops at probe, before panel
+runtime autosuspend, and brightness control works at the first modeset.
+
+Fixes: 5540cf8f3e8d ("drm/panel-edp: Implement generic "edp-panel"s probed by EDID")
+Link: https://github.com/dwhinham/archiso-aarch64-sp11/issues/41
+Suggested-by: Douglas Anderson <dianders@chromium.org>
+Assisted-by: LLM
+Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
+---
+Can reproduce on an installed system on Surface Pro 11 LCD (X1P-64-100,
+LGD0779 LCD) by booting with modprobe.blacklist=phy_qcom_qmp_combo then
+loading that module manually after ~20s. This delays DPU component bind
+past the panel's runtime autosuspend timeout.
+
+A/B tested against the same v7.2 tree:
+
+- Unpatched: panel VDD off 3.5s..20.5s while BL_EN stays high.
+After the first modeset brightness is pinned near max brightness with
+a "collapsed" dimming range. sysfs brightness writes still reprogram
+the PMIC LPG. One bl_power off/on cycle at unchanged brightness 
+restores the full range.
+
+- Patched v2: patch provides the same full brightness range on boot
+(stalled or not) as the v1 patch. BL_EN drops at panel-edp probe,
+~1s before VDD cut, rises ~0.5s after panel power at the first modeset.
+
+Tracing and functional testing on the SP11 shows unchanged sequencing
+for fast boots (without artificial delay), DPMS off/on, and system
+suspend/resume.
+
+Panels with shared/always-on supplies and no panel enable GPIO
+may continue displaying the firmware framebuffer during the
+runtime suspend before first modeset. With this change panel-edp
+disables the backlight obtained through the backlight phandle at probe.
+The DRM panel core enables the backlight again at the first modeset.
+I have not tested this configuration.
+
+Testing on other panel-edp systems particularly with pwm-backlight,
+would be appreciated.
+---
+Changes in v2:
+- Disables the backlight once at probe instead of
+  in panel_edp_suspend() following Doug Anderson's suggestion.
+- Only disable the backlight obtained through the backlight phandle.
+  The driver's AUX backlight setup is untouched.
+- Link to v1: https://lore.kernel.org/r/20261024-sp11-bl-upstream-1-v1-1-d39bfaf9afbc@gmail.com
+---
+ drivers/gpu/drm/panel/panel-edp.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/drivers/gpu/drm/panel/panel-edp.c b/drivers/gpu/drm/panel/panel-edp.c
+index 94bc54c3833a..d019f4165674 100644
+--- a/drivers/gpu/drm/panel/panel-edp.c
++++ b/drivers/gpu/drm/panel/panel-edp.c
+@@ -21,6 +21,7 @@
+  * DEALINGS IN THE SOFTWARE.
+  */
+ 
++#include <linux/backlight.h>
+ #include <linux/debugfs.h>
+ #include <linux/delay.h>
+ #include <linux/gpio/consumer.h>
+@@ -918,6 +919,16 @@ static int panel_edp_probe(struct device *dev, const struct panel_desc *desc,
+ 	if (err)
+ 		return err;
+ 
++	/*
++	 * Backlight drivers may preserve the state left by firmware,
++	 * but panel-edp does not support seamless handoff.
++	 * Runtime PM may power off the panel before the first modeset,
++	 * leaving the backlight on.
++	 * Disable it here so the DRM panel core enables it in the correct
++	 * order at the first modeset.
++	 */
++	backlight_disable(panel->base.backlight);
++
+ 	/*
+ 	 * We use runtime PM for prepare / unprepare since those power the panel
+ 	 * on and off and those can be very slow operations. This is important
+
+---
+base-commit: cf61bef3801c3c9d0d8c39026b7b2fb242898a3a
+change-id: 20261024-sp11-bl-upstream-1-e6616a68d6f0
+
+Best regards,
+-- 
+Haipeng Lin <jimmie.lin@gmail.com>
 
 
-vim +605 include/linux/irqchip/arm-gic-v3.h
-
-7e5802781c3e109 Andre Przywara        2014-11-12  604  
-7936e914f7b0827 Jean-Philippe Brucker 2015-10-01 @605  #include <asm/arch_gicv3.h>
-021f653791ad17e Marc Zyngier          2014-06-30  606  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
