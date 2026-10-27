@@ -1,49 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793104760;
-	b=1+YBCgnBt3rJpA6ctP5GMssavKDlkPRJTzobUhxjRFNVxNyI3JC1lW99Ip2OETpjyfUy
-	 VI8w1MI8R9UukVUW2s4X9SxzSOfY8i5hN//0iD/B1Qq4ZtjNl8U+07rKi5RJeb1NNuJ4p
-	 soIcKRZJrK5ZOA5I9Lx6/0zX+bMb8Gr6LPm3uknSLK9VVg0jcGlFGlPqlqHMn07ek5Vs5
-	 s7q3y89J1Sl5FSO02uQGUO76++hQbNpwHs8knXFCHQADJEiQ1ujPq+jNwGDg6hse6xbib
-	 CDo4rhXq7CljqnMh6FkkMr3trBzgeNzydhQriYhrOzVoqgvUCSmeyA034zDWxc+d4ZQ==
+	t=1793104771;
+	b=3xcnUxV90zDHpAUw/TWAeuIrLsDfkFGdfvy2X5n994hb5++FFqlPnehiyMhocXxJWsB3
+	 Xl53oQ4JFu6PJrr0yKoOFE0mdsnuBBi3RpZdVhyQNBAMrAZrLtmqInfolkVP0TJXB3ZCQ
+	 QZpCuLbJKhnu+Tdl33gpS3jHkz2oxb0S6X0rw3lHYB49UbyXRThjhHpgQEuSHiIJmzPNf
+	 +taGiOgj961Mh4essQQwnhScEpX/E9yunaevgREJDESlwciv/P1Ea7kWgdD0s/YwbTbCp
+	 yOCRfBy8PolMhBhXpkc+ypbqi9FypKXCzq8eJXmvdnOfRu2TWBJwd2PMXBGJI2BCAKQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793104760;
-	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:To:Cc:X-Mailer;
-	bh=+WLa3149mYOJ97icd2XvjZK5rfR4zcVYMglbkstm6AI=;
-	b=YwlZq8CT+4Q3oCxyZZql7KfWpqxS364Vz+AqbgJj5vjNghe3BNKBkvTQW00MMTlHMRpq
-	 PN9lbLS+kc0+RL55I6hb6b3i+7y3Zx1vU3uyjZU6ehYpkPiq2xxY6c7DsgvAyvUQ+a1LE
-	 hH2TlBVJfaluT8eVadzdKTE080UR1hpCBRNi4jVsc5dgJyHRgBm62Vul0FBLE58MOu/HJ
-	 p5U71rPCSK05WUqfdAl9suS65DtTDSMvIEW5IDYnZEBvOSsLeclcKyzEnzbgAsTZY2cGQ
-	 wqByDLmlp6lwK8qbt3sfGcLSwERI/g/ntFD3xk4BmN5YwBI5+cuiYQa5iuAP+GXnlIA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793104771;
+	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer;
+	bh=gLWsRBjvb19o+i1rz/E7XkPpB1jiHd1XfulRbSJIA6k=;
+	b=SU56IOz/dHu93kN7WmjInJ1EGiw9zvMTV49PQTroZVGYMdNYYqEt80YZJ8cI6p5aVXp+
+	 aBBwlE3jmcletmoz9Cb1aHCtkbCvKzak+X2qYdbtQUBMzevRv/6Ci8Wa7onwx4sE047+Y
+	 UCCwKpyGFCDa3qXc8Hr4Nm7+ENsuVE5bgRZZeXvQBE7R1+uBKUJbejGHwlqyVeTYbWxvo
+	 GqNwaZ2MWx3Nj5RPzOMc8OdMdpoHLsA8AYrhjtmbZ2KhKy07tY1qzSdkmpncG5dLmaIS4
+	 N4gIpP0fA22pm0Vg1qpLFI+cmQdZJwTsBc1qOGFj6uytgSzjxKbiAjsT3d4mLaN5lhw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UwRmnKOd;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LiQZmoPH;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56CBA60A381E;
-	Tue, 27 Oct 2026 12:39:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64F1860A2614;
+	Tue, 27 Oct 2026 12:39:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UwRmnKOd
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D5E01F01828;
-	Tue, 27 Oct 2026 12:39:15 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LiQZmoPH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 222071F031E2;
+	Tue, 27 Oct 2026 12:39:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793104759;
-	bh=+WLa3149mYOJ97icd2XvjZK5rfR4zcVYMglbkstm6AI=;
-	h=From:Subject:Date:To:Cc;
-	b=UwRmnKOd093rhXtjRWWyKfEg2xCrZfYJ12EnXgleA9KvU0+R2cnl+/cubP8iKz4Ei
-	 lorCJ6KrrWlM76p9DBb+Bd9Nvh6GXop/NsyDT+znxI6OiUn5ozCjmEYzw+pBne5VkW
-	 +rit73S0tyiXA+rmA2SuIzgagsK1b0r4pl9HrTmZSK/zLIN8QiIomlcdcSsC1sSaDQ
-	 nG876QeVLGxsRP0SaGJvPG/2BdwGOpsNwI8t/lNLAUztrb/hlc/B7VIFnpiSwzTY2o
-	 BsHcgQu4p1BVKpiTutoSULFb0o5uSSvP9joIBSmJ4bvnJGeX+13wgpsJoTG1AFCc8D
-	 OuWBznAhxut3w==
+	s=k20260515; t=1793104770;
+	bh=gLWsRBjvb19o+i1rz/E7XkPpB1jiHd1XfulRbSJIA6k=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=LiQZmoPHeqs6344FI1juM7Jytp2h50dpczssPUaBGj74Jsd+paS9LeUeE8+tDcKnL
+	 A4Keb+I6jurohojmDof2uCejWpL2t3tF0oyHprr8D49uJjEq66lb4Puxx+xAscFMZS
+	 qVX/3rV2gfScu8vFBe85Rue50DiWd2G5coXCOJSQuheud6GdIbJULt9ZYDoIErudCI
+	 b0vE9QyBSdblkAFcFmpmNies/oByViw+v3Tq3JsMN+szQAhjLa+aRlPN5zD+bq215Q
+	 O6pPnIZ9WBvkqAGW5GAbvCDpWwAtZAJh2SwYTsbH6d+aJQsLD2IRokoJqTKXcTq9DG
+	 771XmlDcT1Vcw==
 From: Sumit Garg <sumit.garg@kernel.org>
-Subject: [PATCH v2 0/3] media: qcom: Skip SCM secure memory protection with
- OP-TEE PAS backend
-Date: Tue, 27 Oct 2026 18:09:02 +0530
-Message-Id: <20261027-pas-video-v2-0-5b52bca5add6@oss.qualcomm.com>
+Date: Tue, 27 Oct 2026 18:09:04 +0530
+Subject: [PATCH v2 2/3] media: qcom: Use PAS API for video memory
+ protection
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,9 +55,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGab4GoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
- vPSU3UzU4B8JSMDIzNDAyNz3YLEYt2yzJTUfF0z02Rz4zQTC6MkIwMloPqCotS0zAqwWdGxtbU
- AexwP5FsAAAA=
+Message-Id: <20261027-pas-video-v2-2-5b52bca5add6@oss.qualcomm.com>
+References: <20261027-pas-video-v2-0-5b52bca5add6@oss.qualcomm.com>
+In-Reply-To: <20261027-pas-video-v2-0-5b52bca5add6@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, 
  Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
@@ -71,54 +71,98 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
  Sumit Garg <sumit.garg@oss.qualcomm.com>
 X-Mailer: b4 0.13.0
 
-The Qualcomm peripheral authentication service (PAS) can be serviced by
-either the SCM (TrustZone) backend or, on OP-TEE based platforms, by the
-OP-TEE backend. qcom_scm_mem_protect_video_var() is only implemented by
-the SCM backend; with OP-TEE the TEE itself owns secure memory
-protection and does not service this call. Issuing it unconditionally on
-an OP-TEE backend fails firmware bring-up for the venus and iris video
-codecs.
+From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Patch 1 adds an optional PAS op along with a generic
-qcom_pas_mem_protect_video_var() wrapper. The SCM backend maps it to the
-existing SCM call, while backends that leave it unset get a no-op.
-Patch 2 switches the venus and iris drivers to the new API, so that they
-stay agnostic of the active PAS backend, and drops their Kconfig
-dependency on QCOM_SCM. Patch 3 folds the SCM call into the SCM PAS
-backend and drops its export.
+Replace the direct qcom_scm_mem_protect_video_var() calls in venus and
+iris with qcom_pas_mem_protect_video_var(), so that the call is only
+issued when the active PAS backend needs it. This allows the video
+codecs to bring up firmware with the OP-TEE PAS backend as well, with
+no functional change for the SCM backend.
 
-No functional change is intended for the SCM backend.
+As the video drivers no longer call into SCM directly, also drop their
+Kconfig selection of QCOM_SCM.
 
-Changes in v2:
-- Dropped the qcom_pas_get_backend() helper and the backend name
-  matching in the video drivers, as suggested by Konrad and Vikash.
-- Stubbed the video memory protection call via the generic PAS layer
-  instead, with the SCM backend reusing the existing abstraction.
-- Dropped the QCOM_SCM Kconfig selection from the venus and iris drivers.
-- Added patch 3 to drop the export of qcom_scm_mem_protect_video_var().
-- Link to v1: https://lore.kernel.org/all/20260911-video-optee-pas-v1-v1-0-7bbddaaac5ba@kernel.org/
-
+Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 ---
-Sumit Garg (3):
-      firmware: qcom: pas: Add optional video memory protection op
-      media: qcom: Use PAS API for video memory protection
-      firmware: qcom: scm: Drop export of qcom_scm_mem_protect_video_var()
+ drivers/media/platform/qcom/iris/Kconfig         | 1 -
+ drivers/media/platform/qcom/iris/iris_firmware.c | 5 ++---
+ drivers/media/platform/qcom/venus/Kconfig        | 1 -
+ drivers/media/platform/qcom/venus/firmware.c     | 3 +--
+ 4 files changed, 3 insertions(+), 7 deletions(-)
 
- drivers/firmware/qcom/qcom_pas.c                 | 27 +++++++++++++
- drivers/firmware/qcom/qcom_pas.h                 |  5 +++
- drivers/firmware/qcom/qcom_scm.c                 | 48 ++++++++++++------------
- drivers/media/platform/qcom/iris/Kconfig         |  1 -
- drivers/media/platform/qcom/iris/iris_firmware.c |  5 +--
- drivers/media/platform/qcom/venus/Kconfig        |  1 -
- drivers/media/platform/qcom/venus/firmware.c     |  3 +-
- include/linux/firmware/qcom/qcom_pas.h           |  2 +
- include/linux/firmware/qcom/qcom_scm.h           |  2 -
- 9 files changed, 61 insertions(+), 33 deletions(-)
----
-base-commit: 75a4de0d94f62bce938ebcacd8a7a8ed35a0439b
-change-id: 20261027-pas-video-65c73f482b20
+diff --git a/drivers/media/platform/qcom/iris/Kconfig b/drivers/media/platform/qcom/iris/Kconfig
+index 0996213e71e7..804d8d38341e 100644
+--- a/drivers/media/platform/qcom/iris/Kconfig
++++ b/drivers/media/platform/qcom/iris/Kconfig
+@@ -5,7 +5,6 @@ config VIDEO_QCOM_IRIS
+ 	depends on QCOM_SMEM || QCOM_SMEM=n
+ 	select V4L2_MEM2MEM_DEV
+ 	select QCOM_MDT_LOADER
+-	select QCOM_SCM
+ 	select QCOM_PAS
+ 	select QCOM_UBWC_CONFIG if ARCH_QCOM && QCOM_SMEM
+ 	select VIDEOBUF2_DMA_CONTIG
+diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c b/drivers/media/platform/qcom/iris/iris_firmware.c
+index ed2bd0e83797..16e19c65c7ba 100644
+--- a/drivers/media/platform/qcom/iris/iris_firmware.c
++++ b/drivers/media/platform/qcom/iris/iris_firmware.c
+@@ -5,7 +5,6 @@
+ 
+ #include <linux/firmware.h>
+ #include <linux/firmware/qcom/qcom_pas.h>
+-#include <linux/firmware/qcom/qcom_scm.h>
+ #include <linux/of_address.h>
+ #include <linux/of_reserved_mem.h>
+ #include <linux/soc/qcom/mdt_loader.h>
+@@ -241,12 +240,12 @@ int iris_fw_load(struct iris_core *core)
+ 
+ 	for (i = 0; i < core->iris_platform_data->tz_cp_config_data_size; i++) {
+ 		cp_config = &core->iris_platform_data->tz_cp_config_data[i];
+-		ret = qcom_scm_mem_protect_video_var(cp_config->cp_start,
++		ret = qcom_pas_mem_protect_video_var(cp_config->cp_start,
+ 						     cp_config->cp_size,
+ 						     cp_config->cp_nonpixel_start,
+ 						     cp_config->cp_nonpixel_size);
+ 		if (ret) {
+-			dev_err(core->dev, "qcom_scm_mem_protect_video_var failed: %d\n", ret);
++			dev_err(core->dev, "qcom_pas_mem_protect_video_var failed: %d\n", ret);
+ 			qcom_pas_shutdown(IRIS_PAS_ID);
+ 			return ret;
+ 		}
+diff --git a/drivers/media/platform/qcom/venus/Kconfig b/drivers/media/platform/qcom/venus/Kconfig
+index 7997b8aa427a..c4362eff954a 100644
+--- a/drivers/media/platform/qcom/venus/Kconfig
++++ b/drivers/media/platform/qcom/venus/Kconfig
+@@ -5,7 +5,6 @@ config VIDEO_QCOM_VENUS
+ 	depends on (ARCH_QCOM && ARM64 && IOMMU_API) || COMPILE_TEST
+ 	select OF_DYNAMIC if ARCH_QCOM
+ 	select QCOM_MDT_LOADER
+-	select QCOM_SCM
+ 	select QCOM_PAS
+ 	select VIDEOBUF2_DMA_CONTIG
+ 	select V4L2_MEM2MEM_DEV
+diff --git a/drivers/media/platform/qcom/venus/firmware.c b/drivers/media/platform/qcom/venus/firmware.c
+index 3c0727ea137d..d232fe5b28b4 100644
+--- a/drivers/media/platform/qcom/venus/firmware.c
++++ b/drivers/media/platform/qcom/venus/firmware.c
+@@ -13,7 +13,6 @@
+ #include <linux/platform_device.h>
+ #include <linux/of_device.h>
+ #include <linux/firmware/qcom/qcom_pas.h>
+-#include <linux/firmware/qcom/qcom_scm.h>
+ #include <linux/sizes.h>
+ #include <linux/soc/qcom/mdt_loader.h>
+ 
+@@ -255,7 +254,7 @@ int venus_boot(struct venus_core *core)
+ 		 * cp_nonpixel_start = venus_sec_non_pixel/virtual-addr-pool[0]
+ 		 * cp_nonpixel_size = venus_sec_non_pixel/virtual-addr-pool[1]
+ 		 */
+-		ret = qcom_scm_mem_protect_video_var(res->cp_start,
++		ret = qcom_pas_mem_protect_video_var(res->cp_start,
+ 						     res->cp_size,
+ 						     res->cp_nonpixel_start,
+ 						     res->cp_nonpixel_size);
 
-Best regards,
 -- 
-Sumit Garg <sumit.garg@oss.qualcomm.com>
+2.43.0
 
