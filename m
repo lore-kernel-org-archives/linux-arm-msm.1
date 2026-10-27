@@ -1,98 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793067591;
-	b=UL+W7hTnJ/z5xK5KCsp1dontDWomRd40EYdm8/t4V4Ta50YbANHj4RgHWxORz6dVxQMQ
-	 45O3WFbASFT5riC2ztk8u2PhaLNBXkmGehcCMcE5BO4Zr9cz6zLQph2zjiFuhf4uU09Cb
-	 j5wxo9kVMw3m+47bufyzBer2brYGFT/rgvxLgsbPD2QpYIfuMVlQJjMy9lXXyMvhNy9Xy
-	 mBstaLR3PLyAiF5UvAuEMty7WF4SKjvbOlVqJ/z4dGt7toCGpXSDvyb4/S1QF5X3PnE+R
-	 4XItILd6bFVu5N/WHBpnT9xQx0mgQMUhg67/zavz7phTMZoPjBS4wDJt4VmxfJFAJDg==
+	t=1793074102;
+	b=V2OKG+jgXH7K6EMimY5D4krmJ//NaPpXyXy1kxuaOpIKhVZA6C/2YjGZpkmAAIUXMIEt
+	 BKeAHqfWXYk0Sd+eqhqKb/NKj8FGiruzSwNyg/AqdsunNGzcx8ryVNYEUqJ/ReY6NM2ZE
+	 Dzgz+dpNjpX2hjgaQnB60KHR3IIjEKJp2/CLrZRmO9sItzkEk4rGB9xZju3rlgdj77L7k
+	 kb3uhFIESx0igx8x4ddKzSJX6EBgUIq4yyKVVnsqcOjm3Xh0ajwCty2dpTu52fBHG0ukl
+	 DTdWB9SnhJNEM+GTQkMw9p518WHHsOBHK30Am17qbfaSYpIhl3eTmyUPHg6F+pqrBkA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793067591;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=aIr6VGZCD6Zqdzf2id5/elaTDDhPeT2RkxyHsRz/MS0=;
-	b=5Ul4ARg02M0okMDfOHd9Z25QOBBUbGRFnTCjh8TLjY6d/subu1pNe9UMLwDTDsHI5cPr
-	 mZDi2NG7e41CPSPhAi0w7chPFoVnepblNc/8/ty5m6DkJ9eJAog453lWpVDyZugFpdaGC
-	 nnQ1MMGj1BCZvGkDDv1qT3U+ufF+81leEsbQpG+k30hKQ7rFMlaPFzCi2oBJt98Y/8aNw
-	 ImCO9ZOdb1821qZPtKw2dbr0kJ4y+abW8ZlJmedfsYqufR9ET2Pp/ojt/kjuqxiSM7Z93
-	 bLhcVPP9HvssdR3ts8vK6tVmzPThWBYvL9bZfAP44JGvM38dFQF/3JVKX3baOCH6jtw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793074102;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=RmQEj47q7VxsFN0LFghrtpu9Pl7/orbdB4gw0OrEDYU=;
+	b=imHY1KKNLNmirm1BK5vOdu5+GWFqzNQtSnKvaGHEnhylXw4l9GzmwpKHRudD0w/M5Xlj
+	 ds+9y2FiP74LXAb6HSDC42A9WfgVrF+joAopQhEPAhUlNvFJLDamE2aQqIZC8fuePQa6w
+	 zxHkh/Vfj2Wsj9QariJsdwkNKR9TJbP9MWoyVGjSBQr0+1klLwRwZ3MhlDSK1Zrl5WTV2
+	 h2pS/EU8EBwD382P7D83Q4G5YeVJTxyGO3R9AfOsxXO6xXe5zIHxmi4JiMuaTALGuR3Vm
+	 6spXGUElbVvLIrGj+Oj7tjK+CQidX3XrcVV7iS4nB/c/4EdCSCuik0bEtgCbMNbnHaA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=fnfAEFpv;
-	arc=none smtp.remote-ip=74.125.224.54
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EI3o1ZeF;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Pq2bvAL5;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19500606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 02:19:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 19500606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94E0B606A31A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:08:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94E0B606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=fnfAEFpv
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-676858d42f8so3230944d50.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 19:19:42 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EI3o1ZeF;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Pq2bvAL5
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69R2F2Nu512082
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:08:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	RmQEj47q7VxsFN0LFghrtpu9Pl7/orbdB4gw0OrEDYU=; b=EI3o1ZeF5MDC+pYX
+	VaemFAd4mZGQUeQXCmhGHfBbomSWN9sXVjW7HWZq289jFJ4NmrY1kmj50tTCmc1L
+	pR403LTE3foQ5tD5UJgRs0MPIZryrCYtIWpayVukEt+rHJu2jgZIozdarvKxTXF+
+	rjZoSOXb3CkoO6ARlnUc9PPBeYdyQHOGFcyPKhp1UWCWN2T2dEZdmmtiVrMqV7fa
+	eri7SSoZUszj1OqZYB5Te+gHoz7aotwmIZfgp6O8zqWx5Bu+hvdsLIyJsCqJb5P2
+	J+j2WNMvGPu3+dht4i8daLwDYPAZlT5OvfoKf6jnOGYm8uCuMFYPSernMlVZE5+c
+	YRjgcA==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hj4cpbqvg-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 27 Oct 2026 04:08:20 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-89e6ddd4554so2836316b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 26 Oct 2026 21:08:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793067582; x=1793672382; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aIr6VGZCD6Zqdzf2id5/elaTDDhPeT2RkxyHsRz/MS0=;
-        b=fnfAEFpvvDIV2ijkpO8JLhtLrA+HKcWBlfGMd+/xhZt26vLE6eWgPaDR9/NkwHQPp1
-         jz63oPbX48fcqTFcebLj3KOcIeFdirnDJSLZ2Ltaf+ho8oSRPw9sS900Kmk+COgz9Y77
-         E3LWzhjt7jByfD+w7GqmoysaRJ+bQsi+60RuJE+9LThW3IJ15cUVVPI+s89lP1It+rLA
-         mQW1KPX5FTJ/OPvXFxbclOF3U2qeF7RwzRD3yf6a1y28y9F2ZvtSZMcrEGsmJi+H252h
-         xyKlfwljwxn0np0vsKSfA1Nfm8ygzPz552YoIPpBAPXScdgIc9yrXim9F6JrEXs5bWAG
-         tPaA==
+        d=oss.qualcomm.com; s=google; t=1793074099; x=1793678899; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RmQEj47q7VxsFN0LFghrtpu9Pl7/orbdB4gw0OrEDYU=;
+        b=Pq2bvAL5JYldd/NNdVvFumNOEZFBK/gBvp3zr4sUt0zkNAXyj/IITRxwhjeY6WrOOV
+         O3SlB41PIKZt79pJTGd5MOiSMpHADxKtAsFaVbyq8tybSgiUf70jyHtC/4jl1wYWUZgn
+         qxTT5hz6oEnE0ssgkmHWSEoKvT7HI0lSdXlCtRmkYiF0WfVh2kuQONZvog9NQwfuEYvu
+         mUQxWArbi8w/f4aASwvwhN7Qk4hhNph538UbDfbhF8cXJgEolv8PYE48d61fYjWS+ttn
+         9cdLH5kuoYbsAK6e8Aq4+aEtNYzPucS6icdfnjH9R3IbG+6sPvSFffTHauCuhEIRs46U
+         uplQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793067582; x=1793672382;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aIr6VGZCD6Zqdzf2id5/elaTDDhPeT2RkxyHsRz/MS0=;
-        b=j2OSHnOt3zwLJtwWUTI0BceBzpIzPs5aAbZWrYQSJp4I0bO3MWD9LFhMZBcZFYrD6i
-         yPnZTlrVw2h32e67DuFDHqPJV+xu2wwCIED//Hm345qhLBspLZEXzB0VZzOabIuHzqz3
-         mp4qT+Tdgw1e9pSRRZSizU88Nv/ThWo0vUlOdPlW2dluBJ/tj9nmGXf0ux33gQrr1C3H
-         3Ja36UaNvKOe9E30rGL6PAXnq+rRy86MvRsuDE61HfQqxxnl//8OgFUBWpfiR4s5Zg0y
-         mEHNZywicYYakxmACEx7VGYjJTxxhmgRT6IIcZZEV2j3/VOR3+lDqphf2hyAPi/AaM8u
-         bbIA==
-X-Forwarded-Encrypted: i=1; AKwUvByAtNqiFbAPu0upkSv6xaEZ3BJVvYrmCuHK1G3UJHFbDbsbbegv4LIGjlzg2lHyEdU3Q9c5d6KC81MNOEss@vger.kernel.org
-X-Gm-Message-State: AFq9FYJbNyk9tjL/LNxYsXKeDycPfxjRW3pzmARguKs7yedpNyP4VxNC
-	6vGTuDq0lR3H9V8gU4VINPte99kvDnen+IE7rMvE7gAh7sv2oLIBkcfZ
-X-Gm-Gg: AYBFou2Uu5nv4a7EM9nkOZ/sMMdwQqubKgzndaZLyEP0hL+AacrOIrsWyonlZNYKTAF
-	bPcNWwA6yV/XdNhdRcM74InZDRfiBEuuIB3SXfyvITSnUGBRTk2AovFO2DxhSfCOdyaH1Fr0KGs
-	gUUnBIwd4WD6I5AzlWm7n5qO7RIa36xsyYSc5pPtOq7IKryY6EPO4tKouyB7hlEzSW2SaZUoHKk
-	M39mpyoswzNPA1J/rkTxmYbH3spNxw67sLewnZiB1fZNv9b0uO3kUjjI8dvkSWL/ByrlyNwIK7q
-	o0+1xv1GebaKgWSvwkPUQARhL6X3pKpzHBZeQ8MZuXYUkBtCkSygw+tfr11LnYbsTlr058AVy7n
-	eZPJgKjOme7g32sgraoSKMRzbrJrT+G8OXxE8sdI3QdtMims3tgF3rXz1WW8tjBoGFt6Hvaf27Z
-	8ZBMVcfCe3A7wUR2TUmnsn8lkbAaCufGK5JPmBkm73Ts3BFhX8MzOXWEtbu4HrLloheRdxUPVju
-	N/6IVv+XLJeDYDBYFzZP6UU4w308x/19Yn1WiQqBVevw0/8+3JFdEG2I6fIDHUpEPZp33SLSqYa
-	5LKrFI2Rbl1c1l6y6GmzTFQRBcE7M5Fq
-X-Received: by 2002:a05:690e:4513:20b0:679:aeed:88f4 with SMTP id 956f58d0204a3-67a4519a355mr2838973d50.11.1793067582040;
-        Mon, 26 Oct 2026 19:19:42 -0700 (PDT)
-Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67a462bd9e3sm4463789d50.19.2026.10.26.19.19.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 19:19:41 -0700 (PDT)
-From: Christian Cortner <ccortner@gmail.com>
-To: Bryan O'Donoghue <bod@kernel.org>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Birk Skyum <birk.skyum@pm.me>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [RFC PATCH 5/5] media: iris: Resume the first source change if it fits the CAPTURE setup
-Date: Mon, 26 Oct 2026 21:19:34 -0500
-Message-ID: <20261027021934.22113-6-ccortner@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261027021934.22113-1-ccortner@gmail.com>
-References: <179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com>
- <20261027021934.22113-1-ccortner@gmail.com>
+        d=1e100.net; s=20260707; t=1793074099; x=1793678899;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=RmQEj47q7VxsFN0LFghrtpu9Pl7/orbdB4gw0OrEDYU=;
+        b=xInHLuxw7bN2qmL4WmQBMevtLkcMr29v3wzbRsvQSi8Pvc4GNXgmWZlwFOWMRIquhX
+         VWZ3kKX7KCMDrTzZpp6Kj4U57KSooCCsQsPkbKAkuW3Gc18rgoBNvkUokTGxW6z/bXNo
+         dXQgmB7Xw3e65tQYPMAtzPrDz4wpbbYnLrbhs9gUaOjd0Os918PTs929pCX0AmVUg8jD
+         PTjXnghfLvWUm91jK4RWij817YOGUwLudJ/ovU2J+77F1L5m4SwkT4z+ahBdRzqITNS2
+         IeL/EIqhh3Etw7Yz7ErNlISC2TvBjk0HseBQ28+rg5n1wqE0b5Yr9jeSsAIo21OUpoqL
+         7Vsg==
+X-Forwarded-Encrypted: i=1; AKwUvBzmbyojcmdBHRIUdOu50U+ap84NzW88gLxoXChV9EGGldUMfwu6dPN14afX2QD/ylIGdItEfwkm7GKig5GG@vger.kernel.org
+X-Gm-Message-State: AFq9FYK5rMX9gV5yrrzxDsrRg0LXd7dV4cFvEAH0Mzg+wXlHfY4ozFsK
+	FnTyQ4Ymhewq+JHUZqP5G76wN6rKv8UrMa7ZjBqkrvpppSBQQrGeXJncH09lF87n8p1B89R0pSP
+	f8Mdx5DijvjE4m4Bh/R4S3SaKVOYOLLRkVNw1D1+Yeja8RwZfLIcLnXETaJ/EENBwNS0e
+X-Gm-Gg: AYBFou1oXypyJsQ1gFkNjhCFwYUH+6zz9PLa+8xmB+lx2/WFfDbK9APaQCqQ5gpeSYk
+	n5ZhEjmrdnI9oC2uGvvpFdBgJvEIiSKtdgL7nA2tz9kaObTx4qImBQ6Ipo0ucfOXZI8knBwOjI5
+	Enb6XqGxQCHMt2N6bHhzZGXwGMXbam+3qgNf2JNWG3vF3q8wg0P7wsx0bSN89PmR94807Vcw5g7
+	hIQufTPmrCQpZzNNSRmQ9Pni45VF8Gr5htI0YtZjoU/Ndd+BEkce7B8D4S3s5Tr2eJQXmMmoWDA
+	5LfivP0SWBJGvw+p1f2FMf3DmcA2gQIgzbgHMIODxBfEDkMvBu7Q8QfKgfal6VQ/N4pnmEwtPsb
+	dbQIm5YB2BjuVMPbFbwvPV380QgY55PQ3163lC+TDs1FWLbZ0wi+tYu6qhYeS
+X-Received: by 2002:a05:6300:4086:b0:3e1:482c:77ca with SMTP id adf61e73a8af0-3e7af80ec85mr7789138637.5.1793074099400;
+        Mon, 26 Oct 2026 21:08:19 -0700 (PDT)
+X-Received: by 2002:a05:6300:4086:b0:3e1:482c:77ca with SMTP id adf61e73a8af0-3e7af80ec85mr7789104637.5.1793074098942;
+        Mon, 26 Oct 2026 21:08:18 -0700 (PDT)
+Received: from [10.239.96.176] ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd8cccb7802sm2054232a12.22.2026.10.26.21.08.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 26 Oct 2026 21:08:18 -0700 (PDT)
+Message-ID: <ccce8847-6236-4b2d-a07d-f2345004de56@oss.qualcomm.com>
+Date: Tue, 27 Oct 2026 12:07:56 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,250 +115,124 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v22 12/14] arm64: dts: qcom: kaanapali: Add CCI controller
+ nodes
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        jeyaprakash.soundrapandian@oss.qualcomm.com,
+        Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20261024-kaanapali-camss-v22-0-7da3ea49c8a1@oss.qualcomm.com>
+ <20261024-kaanapali-camss-v22-12-7da3ea49c8a1@oss.qualcomm.com>
+ <CAFEp6-22zEVoTQ8ewQN4CGW9GARZB84Mp_-SO7KrteYERSew2w@mail.gmail.com>
+Content-Language: en-US
+From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+In-Reply-To: <CAFEp6-22zEVoTQ8ewQN4CGW9GARZB84Mp_-SO7KrteYERSew2w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDAxNiBTYWx0ZWRfXzvBP2eQYXEHm
+ /S97KXE3uWwJYSGR12vaa/6aXoLLgOT9iJAltdZROwW03N4Bv9Wuz/cIT5xyU8ANV1A4MsPSWHT
+ gHpOO7c6sSBKxhgWKQOEuUixXUGaCaF32gHq88rmFbfatu5PMjpuP5xLrM26RVa5FtyHN1d5epp
+ RgNG0OvCmiYjAriZx9cQQ7u+9XINBs0y1ZpvQKdEnw6IkXeQoub+izUffqsMCxQ+NT9TE2Jmp+v
+ sQu3t0JwsdzDDYxRPr9o2++NXG8eGVpqFIEqHLD6ggisThTXSJpdqFXyDwAfcnY++8G1hICaT4E
+ bSKjvo447uELgsCYr/fEMc5zLYjL/lhGT9YIaZQvTxGK/HD6s9Svfq4ys7Z3yLDartYwPsk0PXJ
+ +4SSK9vH2RUNdUqEjuVBc1oapCMOdKAAoRvrh8bByotIq0rvkBQQDSbnlqPr/s4Ay7Vq7uS3L0F
+ uJplhke5VDekeTOV4qw==
+X-Proofpoint-GUID: lgDl2iYe94eHqY0D5fbmNpmFgq21jhBW
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDAxNiBTYWx0ZWRfX/lzj8J8SjySv
+ 66s2Z+QKf8+RSM7zHqkEhgkW7h809XMGND3Zt6telIWhsgnHW4grf/7puMYApdRAZlxO0Ryy2Vw
+ kusN0cdkBUPSr/U+nBJq7nwbJU0GYao=
+X-Proofpoint-ORIG-GUID: lgDl2iYe94eHqY0D5fbmNpmFgq21jhBW
+X-Authority-Analysis: v=2.4 cv=TboDJhQh c=1 sm=1 tr=0 ts=6ae023b4 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=VpRCVQi9ATEJuri8zQAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-27_01,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 impostorscore=0 lowpriorityscore=0
+ spamscore=0 clxscore=1015 adultscore=0 malwarescore=0 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610270016
 
-The stateful decoder interface lets a client that knows the coded size
-of the stream set it with VIDIOC_S_FMT(OUTPUT) and set up the CAPTURE
-queue without waiting for the first source change event. A dynamic
-resolution change is then only triggered "If the values configured by
-the client do not match those parsed by the decoder"; vicodec, for one,
-raises no source change at all when the stream matches the CAPTURE
-format.
+On 10/26/2026 11:55 PM, Loic Poulain wrote:
+> On Sun, Oct 25, 2026 at 4:17 AM Hangxiang Ma
+> <hangxiang.ma@oss.qualcomm.com> wrote:
+>>
+>> Add the three Camera Control Interface (CCI) controllers present on the
+>> Kaanapali SoC. Each controller provides two I2C hosts used for camera
+>> sensor control, so define the controller nodes and their pinctrl states.
+[...]>> @@ -4534,6 +4645,198 @@ tlmm: pinctrl@f100000 {
+>>                          #interrupt-cells = <2>;
+>>                          wakeup-parent = <&pdc>;
+>>
+>> +                       cci0_i2c0_default: cci0-i2c0-default-state {
+>> +                               scl-pins {
+>> +                                       pins = "gpio110";
+>> +                                       function = "cci_i2c_scl";
+>> +                                       drive-strength = <2>;
+>> +                                       bias-disable;
+>> +                               };
+>> +
+>> +                               sda-pins {
+>> +                                       pins = "gpio109";
+>> +                                       function = "cci_i2c_sda";
+>> +                                       drive-strength = <2>;
+>> +                                       bias-disable;
+>> +                               };
+>> +                       };
+>> +
+>> +                       cci0_i2c0_sleep: cci0-i2c0-sleep-state {
+>> +                               scl-pins {
+>> +                                       pins = "gpio110";
+>> +                                       function = "cci_i2c_scl";
+>> +                                       drive-strength = <2>;
+>> +                                       bias-disable;
+>> +                               };
+>> +
+>> +                               sda-pins {
+>> +                                       pins = "gpio109";
+>> +                                       function = "cci_i2c_sda";
+>> +                                       drive-strength = <2>;
+>> +                                       bias-disable;
+>> +                               };
+> 
+> Why do we have a sleep state if it's identical to the default/active state?
+> Do you want gpio with pull instead?
+> 
 
-iris instead runs a full resolution change whenever the first source
-change finds the CAPTURE queue streaming, even if the parsed format is
-exactly the one the client configured: the client gets an empty LAST
-buffer, and decoding stays stopped until it restarts CAPTURE or sends
-V4L2_DEC_CMD_START. ffmpeg's h264_v4l2m2m decoder sets CAPTURE up early
-like this. When VIDIOC_G_FMT(CAPTURE) after the source change event
-shows an unchanged resolution, it resumes immediately with
-V4L2_DEC_CMD_START, as step 6 of the Capture Setup sequence allows, but
-iris rejects the command with -EBUSY until the firmware has completed
-the drain. ffmpeg does not retry, and stops at the -EPIPE that follows
-the LAST buffer, after a single frame.
+The sleep state is kept so that the CCI suspend path has an explicit
+pinctrl state to select.
 
-When the first source change after S_FMT(OUTPUT) finds CAPTURE streaming
-with the coded size, pixel format and stride the stream needs, and with
-enough buffers that are large enough, still queue the event, so that the
-client can read the parsed selection and colorspace, but resume the
-firmware in the driver once the drain completes: give the empty PSC_LAST
-buffer back to the firmware instead of returning it to the client, and
-send the same commands as V4L2_DEC_CMD_START. Later source changes, and
-any that does not fit, still take the full resolution change sequence,
-so a new visible rectangle, colorspace or minimum buffer count in the
-middle of a stream is not hidden from the client.
+As discussed in the v19 thread, SDA and SCL have external pull-up
+resistors on the board. Therefore, enabling the weak internal pulls is
+unnecessary.
 
-Fixes: 84e17adae3e3 ("media: iris: add support for dynamic resolution change")
-Assisted-by: LLM sparse smatch
+However, I agree that keeping an identical sleep state is redundant. I
+will change the sleep state to GPIO function with bias disabled, while
+the external pull-up resistors keep both lines high during suspend.
+
+Link: 
+https://lore.kernel.org/all/d30d2b5b-0034-47f0-8e93-9abde4dad118@oss.qualcomm.com/
+
 ---
-Not for merging, and not working for most streams: this resumes the
-firmware through iris_vdec_start_cmd() while the driver's internal
-buffers are still sized for four frame buffers, so streams that need
-more (x264 at its default settings needs six) end in "session error
-received 0x4000003: fatal error". See the cover letter and
-https://lore.kernel.org/linux-media/179306719855.20070.15625203453374418392.iris-rfc-reply@gmail.com/
-
- .../media/platform/qcom/iris/iris_common.c    |  3 +
- .../qcom/iris/iris_hfi_gen2_response.c        | 31 ++++++++++
- .../media/platform/qcom/iris/iris_instance.h  |  4 ++
- drivers/media/platform/qcom/iris/iris_vdec.c  | 56 +++++++++++++++++++
- drivers/media/platform/qcom/iris/iris_vdec.h  |  3 +
- 5 files changed, 97 insertions(+)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_common.c b/drivers/media/platform/qcom/iris/iris_common.c
-index 25836561bcf3..686bfe824e3a 100644
---- a/drivers/media/platform/qcom/iris/iris_common.c
-+++ b/drivers/media/platform/qcom/iris/iris_common.c
-@@ -204,6 +204,9 @@ int iris_session_streamoff(struct iris_inst *inst, u32 plane)
- 	enum iris_buffer_type buffer_type;
- 	int ret;
- 
-+	/* a stream stop cancels a pending iris_vdec_resume_src_change() */
-+	inst->drc_auto_resume = false;
-+
- 	switch (plane) {
- 	case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
- 		buffer_type = BUF_INPUT;
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-index b4fe9066fcb8..dd4200f63cdf 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-@@ -385,10 +385,25 @@ static int iris_hfi_gen2_handle_output_buffer(struct iris_inst *inst,
- 	buf->data_size = hfi_buffer->data_size;
- 	buf->timestamp = hfi_buffer->timestamp;
- 
-+	/*
-+	 * The driver resumes this source change itself, see
-+	 * iris_vdec_src_change_can_resume(): an empty PSC_LAST buffer goes back
-+	 * to the firmware, and one with data is not the last buffer.
-+	 */
-+	if (inst->drc_auto_resume && !buf->data_size &&
-+	    hfi_buffer->flags & HFI_BUF_FW_FLAG_PSC_LAST) {
-+		buf->attr &= ~BUF_ATTR_QUEUED;
-+		buf->attr |= BUF_ATTR_DEFERRED;
-+		return 0;
-+	}
-+
- 	buf->attr &= ~BUF_ATTR_QUEUED;
- 	buf->attr |= BUF_ATTR_DEQUEUED;
- 
- 	buf->flags = iris_hfi_gen2_get_driver_buffer_flags(inst, hfi_buffer->flags);
-+	if (inst->drc_auto_resume &&
-+	    hfi_buffer->flags & HFI_BUF_FW_FLAG_PSC_LAST)
-+		buf->flags &= ~V4L2_BUF_FLAG_LAST;
- 
- 	/*
- 	 * The empty buffer that ends a drain (LAST) or a source change
-@@ -672,16 +687,22 @@ static void iris_hfi_gen2_read_input_subcr_params(struct iris_inst *inst)
- static int iris_hfi_gen2_handle_src_change(struct iris_inst *inst,
- 					   struct iris_hfi_packet *pkt)
- {
-+	struct v4l2_pix_format_mplane cfg;
- 	int ret;
- 
- 	if (pkt->port != HFI_PORT_BITSTREAM)
- 		return 0;
- 
-+	cfg = inst->fmt_dst->fmt.pix_mp;
-+
- 	ret = iris_inst_sub_state_change_drc(inst);
- 	if (ret)
- 		return ret;
- 
- 	iris_hfi_gen2_read_input_subcr_params(inst);
-+	inst->drc_auto_resume = inst->sub_state & IRIS_INST_SUB_DRC &&
-+				iris_vdec_src_change_can_resume(inst, &cfg);
-+	inst->src_change_seen = true;
- 	iris_vdec_src_change(inst);
- 
- 	return 0;
-@@ -973,6 +994,16 @@ static int iris_hfi_gen2_handle_session_response(struct iris_core *core,
- 	if (dequeue)
- 		iris_hfi_gen2_handle_dequeue_buffers(inst);
- 
-+	if (inst->drc_auto_resume && iris_drc_pending(inst) &&
-+	    inst->state != IRIS_INST_ERROR) {
-+		int resume_ret = iris_vdec_resume_src_change(inst);
-+
-+		if (resume_ret) {
-+			iris_inst_change_state(inst, IRIS_INST_ERROR);
-+			ret = resume_ret;
-+		}
-+	}
-+
- 	mutex_unlock(&inst->lock);
- 	iris_inst_put(inst);
- 
-diff --git a/drivers/media/platform/qcom/iris/iris_instance.h b/drivers/media/platform/qcom/iris/iris_instance.h
-index 1013ed2911a1..db472f9f745f 100644
---- a/drivers/media/platform/qcom/iris/iris_instance.h
-+++ b/drivers/media/platform/qcom/iris/iris_instance.h
-@@ -58,6 +58,8 @@ struct iris_hfi_session_ops;
-  * @codec: codec type
-  * @last_buffer_dequeued: a flag to indicate that last buffer is sent by driver
-  * @drc_wq: woken when IRIS_INST_SUB_DRC_LAST is set
-+ * @drc_auto_resume: the driver resumes the current source change itself
-+ * @src_change_seen: a source change was reported since the last S_FMT(OUTPUT)
-  * @last_buf_ns: start time of received input buffer for current one second FPS window
-  * @frame_counter: input buffer counter for current one second FPS window
-  * @frame_rate: frame rate of current instance
-@@ -107,6 +109,8 @@ struct iris_inst {
- 	u32				codec;
- 	bool				last_buffer_dequeued;
- 	wait_queue_head_t		drc_wq;
-+	bool				drc_auto_resume;
-+	bool				src_change_seen;
- 	u64				last_buf_ns;
- 	u32				frame_counter;
- 	u32				frame_rate;
-diff --git a/drivers/media/platform/qcom/iris/iris_vdec.c b/drivers/media/platform/qcom/iris/iris_vdec.c
-index 472e8e50830d..db3e506de7c2 100644
---- a/drivers/media/platform/qcom/iris/iris_vdec.c
-+++ b/drivers/media/platform/qcom/iris/iris_vdec.c
-@@ -299,6 +299,7 @@ int iris_vdec_s_fmt(struct iris_inst *inst, struct v4l2_format *f)
- 		inst->crop.top = 0;
- 		inst->crop.width = f->fmt.pix_mp.width;
- 		inst->crop.height = f->fmt.pix_mp.height;
-+		inst->src_change_seen = false;
- 		break;
- 	case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
- 		if (!check_format(inst, f->fmt.pix_mp.pixelformat, f->type))
-@@ -371,6 +372,61 @@ void iris_vdec_src_change(struct iris_inst *inst)
- 	v4l2_event_queue_fh(&inst->fh, &event);
- }
- 
-+/*
-+ * dev-decoder.rst lets a client that knows the coded size of the stream set
-+ * it with VIDIOC_S_FMT(OUTPUT) and set up the CAPTURE queue without waiting
-+ * for the first source change event; a Dynamic Resolution Change is then only
-+ * triggered "If the values configured by the client do not match those parsed
-+ * by the decoder". The firmware pauses at every source change, so return true
-+ * if the driver should resume it itself: this is the first source change
-+ * since S_FMT(OUTPUT), CAPTURE is streaming, and @cfg, the CAPTURE format
-+ * before the change, still fits the parsed stream.
-+ */
-+bool iris_vdec_src_change_can_resume(struct iris_inst *inst,
-+				     const struct v4l2_pix_format_mplane *cfg)
-+{
-+	struct vb2_queue *dst_q = v4l2_m2m_get_dst_vq(inst->m2m_ctx);
-+	const struct v4l2_pix_format_mplane *parsed;
-+	struct vb2_buffer *vb;
-+
-+	parsed = &inst->fmt_dst->fmt.pix_mp;
-+
-+	if (inst->src_change_seen || !vb2_is_streaming(dst_q))
-+		return false;
-+
-+	if (parsed->width != cfg->width || parsed->height != cfg->height ||
-+	    parsed->pixelformat != cfg->pixelformat ||
-+	    parsed->plane_fmt[0].bytesperline != cfg->plane_fmt[0].bytesperline)
-+		return false;
-+
-+	if (vb2_get_num_buffers(dst_q) < inst->buffers[BUF_OUTPUT].min_count)
-+		return false;
-+
-+	vb = vb2_get_buffer(dst_q, 0);
-+
-+	return vb && vb2_plane_size(vb, 0) >= parsed->plane_fmt[0].sizeimage;
-+}
-+
-+/*
-+ * Resume a source change accepted by iris_vdec_src_change_can_resume() once
-+ * the firmware has completed its drain, with the commands of
-+ * V4L2_DEC_CMD_START, and give the PSC_LAST buffer that
-+ * iris_hfi_gen2_handle_output_buffer() kept back to the firmware. Called with
-+ * inst->lock held.
-+ */
-+int iris_vdec_resume_src_change(struct iris_inst *inst)
-+{
-+	int ret;
-+
-+	inst->drc_auto_resume = false;
-+
-+	ret = iris_vdec_start_cmd(inst);
-+	if (ret)
-+		return ret;
-+
-+	return iris_queue_deferred_buffers(inst, BUF_OUTPUT);
-+}
-+
- int iris_vdec_streamon_input(struct iris_inst *inst)
- {
- 	int ret;
-diff --git a/drivers/media/platform/qcom/iris/iris_vdec.h b/drivers/media/platform/qcom/iris/iris_vdec.h
-index 5123d2a340e1..0270456996d0 100644
---- a/drivers/media/platform/qcom/iris/iris_vdec.h
-+++ b/drivers/media/platform/qcom/iris/iris_vdec.h
-@@ -15,6 +15,9 @@ int iris_vdec_s_fmt(struct iris_inst *inst, struct v4l2_format *f);
- int iris_vdec_validate_format(struct iris_inst *inst, u32 pixelformat);
- int iris_vdec_subscribe_event(struct iris_inst *inst, const struct v4l2_event_subscription *sub);
- void iris_vdec_src_change(struct iris_inst *inst);
-+bool iris_vdec_src_change_can_resume(struct iris_inst *inst,
-+				     const struct v4l2_pix_format_mplane *cfg);
-+int iris_vdec_resume_src_change(struct iris_inst *inst);
- int iris_vdec_streamon_input(struct iris_inst *inst);
- int iris_vdec_streamon_output(struct iris_inst *inst);
- int iris_vdec_qbuf(struct iris_inst *inst, struct vb2_v4l2_buffer *vbuf);
--- 
-2.56.0
-
+Best regards,
+Hangxiang
