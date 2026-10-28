@@ -1,55 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793218851;
-	b=EL2MeAvxo5Lfvu5/Xf8/Th2Z/fF2BxemT5yj6m3lbE5kKG+BA6o+ywasgcs1pJCKbsdc
-	 /3vdyyiCQZqZCGN4nLIQFrm0e9w2PaK3cGO+UbFJeBij5w2+QWZgdcUhUghG8GHswxnZk
-	 K+AORLQcO7vrsdRia3sa68kLCMkOjqbL7X8OLpAelkGXLDxqinC63pbc5LO01hwiEiiRh
-	 L0A2qh4P/geHg0yuEdHnfbF08OA3sxW0J1W79pSOVwG4uTh7e/wjDCghxzh6f5qjdEdQl
-	 5m2npXoztAbUUFJa87qv5W9F6hfLhYC+TSs++zi5r0IY39xH7sZ0tObqPWc7Ub2zxGQ==
+	t=1793219261;
+	b=e45j5019Fx5ewqcrvNz6iff55XCaSbqpDGAku4rnQ2NcabCq0Piv6y97UqJ73he+zaZJ
+	 j5YMR+J7OnrchfJfM78mi/yfpjzYzXqEV+99QhR9arh6B7TzqpLnHodvhrQTUzh0uvh+0
+	 cfjYDIa6lWyRSBQlHjlL5IqbmW68FJv8tRB4hLxu9A6odpQP/s6qOfomt4ZS9Qg//FtDs
+	 7TKLHyMsMqme+0FDbTvGTAwoblpLJipLDedBwpNk/2S9euG7aFuyTL2JTSygJb99lbMzm
+	 PkIsoOwVzlDtWvCkWzmjD1kdvJaQe09l+yKPc59uL71X3UVK+3Jr+vwVRkHVoLtX0IQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793218851;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=HU+qXfg6wycCYQniedMIEmjTS1Z2726jpgVHTUVK7ng=;
-	b=m3qlryQGLfKEL7wmJRv6LpYJD0q8vlSo/QY0YxM1PGfciwP3k0YdlOhWKgNZ7rAbvcLP
-	 60XPU9/YotnhJGG6/IyYusbZWty2cgLZNSBoOOUl9bX6KpPl3wdB0rpDkV10oSVp7uwwe
-	 jcQ9epYzXUVkIQGk1tVoqq4fXP86xoSTXL1E0cP282pig7im1ID9bbq4MV7wyrC431vMK
-	 LTQZyONJwZvFnY5OHn5QnQC6CKIGDldBYTxw4muMYxI9UJe31D0wHJ2TR559vDamgzcXF
-	 2I03nFXQVFmXAujHIIolY+X4SWfLy3swMLwT5quy+9OjtkIuTYEHOpXq+xHz3Xmkn7w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793219261;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=rx9oUa//NkWEEfC3LpDAEDMmspM2Y7f77XuuxNJnUYY=;
+	b=gwaN62Ai7rP4t6v+E+05Ttq/jhIOP/2Sc5XSZHn/uRj00X6axJKrZy9DW4tNiEj4ucXU
+	 XtQBu6Dw1Exi1NQftd4RXg9G59lS/TuJL2fMP9K5fpB9jXmSlDiAufunoMywGP2UvOBsF
+	 RpSOIbVl+5Rc6+9tHmXoG5G6zCmdrmwoRUy5jEPLhLu/VYKj3S7GrCX9NhxvFztKT8Udw
+	 jiXqoJSq8QGKxNzvPw+09oijBNHKiucw2zKV/gdZrQDMMTnqleCV8l9m9VjIClsgt5y7Z
+	 pFI+wuVbLUZaDLmeP0HfS6DheLGrW90iD2vUXxDlCeIfHyG09I+ZSPPTPVzmb8NagMA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mainlining.org;
-	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=CirN4+QV;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EBN+KCVn;
-	arc=none smtp.remote-ip=5.75.144.95
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MrB8XHqr;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80EFB606A31C;
-	Wed, 28 Oct 2026 20:20:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 80EFB606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98040606A322;
+	Wed, 28 Oct 2026 20:27:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=CirN4+QV;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EBN+KCVn
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1793218844; bh=HU+qXfg6wycCYQniedMIEmj
-	TS1Z2726jpgVHTUVK7ng=; b=CirN4+QV351ZyXu2HTuYKRSaqkmkEF2PHzX9UAQ6G6xouh/VPf
-	W38u1VmBkC3hMDZoMGlxezDoPqqOdmPnATvE89DFcCPavvutr4kKdJuzw6GtCslSzfOJ4f9ELVW
-	V8hhZRtEavbMeNwRL3k/y6mX2WexLUIYws9DwP8HgKUqXaOom4Vrq+Nf6lMUSMWFtSAC8FwOhVY
-	yVYgHC2F2ZcOWR5+2THtIo5+4Ao+LoMzL4B6eJNdtKKFeiUucj2LUP4m0fie9JVvPkqJGJE644G
-	SrF73tQCtKAH+xiU4+l7vOkPdPoroLWst/8uLajZXNyC/xyNsYKtbOiR8IsDrhkPdXg==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1793218844; bh=HU+qXfg6wycCYQniedMIEmj
-	TS1Z2726jpgVHTUVK7ng=; b=EBN+KCVnR1JtQjyLx1YCHgK8n87kTvLIhbrQbzuMLuQvIOGkzT
-	ieva4F948/mbcdxK0LX/we00wk46Ji1vAXAg==;
-From: =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
-Date: Wed, 28 Oct 2026 21:20:41 +0100
-Subject: [PATCH] soc: qcom: pd-mapper: Add support for SM6125
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MrB8XHqr
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 925FF1F01825;
+	Wed, 28 Oct 2026 20:27:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793219261;
+	bh=rx9oUa//NkWEEfC3LpDAEDMmspM2Y7f77XuuxNJnUYY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=MrB8XHqr9e5crOcv43D6XAtsg0lB+GF5V1m5wADOIMtiXDhYIlcCS58gGXfy4c1kG
+	 Ks0dz1f681UTDLHfEOQ5e2+HmS2AuS6pIHYMyLe/3/BrMKgckRAmFfr/pyK+kUlG0t
+	 ZEUxzCJ7gLJ12LCEJoQ3e+K0EO7Ic4wefxhzJjqKEOso+J07Y2XqjU8nEOUX4DUjeC
+	 W5eMyj6LjSJk4Zou2RVG2jC4lW8CqfgOwM+C4yC7kywctbo5MamLMYULuPiE6KdUO/
+	 1WuzkBGUXdm5yti8SXd5s8ybZl5IowQp/YR7FlU0TVgNnZ2+dr+DMfH7udHojoXijj
+	 vBz0cM39x856Q==
+Message-ID: <cb1b7f4e-f03d-4422-b4ae-4228fe9f86ab@kernel.org>
+Date: Wed, 28 Oct 2026 22:27:35 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,52 +51,61 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261028-sm6125-pd-mapper-v1-1-af9a645b4b8a@mainlining.org>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDMBBA4avIrDtgBuPfVUoXaRx1BDVkqhTEu
- zfV5bd47wDlKKzQZgdE3kVlXRLMIwM/umVglC4ZKKfS5FSjzqUhi6HD2YXAEYueyfqGnC0qSFm
- I3Mv3Wj5ft3V7T+w//w+c5w/878OndAAAAA==
-X-Change-ID: 20261028-sm6125-pd-mapper-4fe25c92a547
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793218843; l=1209;
- i=barnabas.czeman@mainlining.org; s=20240730; h=from:subject:message-id;
- bh=Z0hCoLpzXP7AJHenSbzeikQ5TFkrunfRaaLnnVerLOs=;
- b=+KV7hynXIA67RaOsf4PHf/Zx++NyOXPLTnB++nR3dPkXvJfjzGctARzjadtT857z48Syx4UYY
- 4A3IdJvvjH2BDuh4SL0sg5rFHeqxykuEq1tWWHTHXwAnHggN+r/2+/C
-X-Developer-Key: i=barnabas.czeman@mainlining.org; a=ed25519;
- pk=TWUSIGgwW/Sn4xnX25nw+lszj1AT/A3bzkahn7EhOFc=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/8] dt-bindings: display: panel: novatek,nt36672e:
+ Document the reset GPIO polarity
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Ritesh Kumar <quic_riteshk@quicinc.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, Conor Dooley <conor+dt@kernel.org>,
+ devicetree@vger.kernel.org, Abel Vesa <abelvesa@kernel.org>,
+ linux-arm-msm@vger.kernel.org
+References: <20261028095151.1682096-1-vz@kernel.org>
+ <20261028095151.1682096-2-vz@kernel.org>
+ <20261028-seagull-of-illegal-prestige-6cbbfa@quoll>
+ <07c2c10c-f442-480d-b545-666069c06e91@kernel.org>
+ <61e36fb1-6959-4c69-9afb-53264ff9331d@kernel.org>
+From: Vladimir Zapolskiy <vz@kernel.org>
+In-Reply-To: <61e36fb1-6959-4c69-9afb-53264ff9331d@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add support for the Qualcomm SM6125 SoC to the protection
-domain mapper. SM6125 shares the same protection domain
-configuration as SM6115.
+On 10/28/26 16:59, Krzysztof Kozlowski wrote:
+> On 28/10/2026 15:56, Vladimir Zapolskiy wrote:
+>>> We might fix it at some point, so not sure if it is worth documenting in
+>>> the binding. And what about usage of this binding in other projects
+>>> which implement it correctly?
+>>>
+>>
+>> In the upstream there is only one user qcm6490-idp.dts, and changing
+>> the polarity will be an ABI breaking change, unfortunately.
+> 
+> And all other projects?
+> 
 
-Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
----
- drivers/soc/qcom/qcom_pd_mapper.c | 1 +
- 1 file changed, 1 insertion(+)
+It might be a challenging task to check usage of "novatek,nt36672e"
+compatible display panels in all other projects. I've asked about it:
 
-diff --git a/drivers/soc/qcom/qcom_pd_mapper.c b/drivers/soc/qcom/qcom_pd_mapper.c
-index 64ca99d7fad9..c1b7438541da 100644
---- a/drivers/soc/qcom/qcom_pd_mapper.c
-+++ b/drivers/soc/qcom/qcom_pd_mapper.c
-@@ -652,6 +652,7 @@ static const struct of_device_id qcom_pdm_domains[] __maybe_unused = {
- 	{ .compatible = "qcom,sdm845", .data = sdm845_domains, },
- 	{ .compatible = "qcom,sm4250", .data = sm6115_domains, },
- 	{ .compatible = "qcom,sm6115", .data = sm6115_domains, },
-+	{ .compatible = "qcom,sm6125", .data = sm6115_domains, },
- 	{ .compatible = "qcom,sm6350", .data = sm6350_domains, },
- 	{ .compatible = "qcom,sm7150", .data = sm7150_domains, },
- 	{ .compatible = "qcom,sm7225", .data = sm6350_domains, },
+* https://chatgpt.com/uc/6ae25571-2ef0-83ea-81e5-2522e70c4a93
 
----
-base-commit: 151a134a4e6ec66f69db8750c66006f5207f7a9d
-change-id: 20261028-sm6125-pd-mapper-4fe25c92a547
+The check gives this info:
 
-Best regards,
---  
-Barnabás Czémán <barnabas.czeman@mainlining.org>
+1. Linux kernel - invalid GPIO polarity in the driver and qcm6490-idp.dts,
+2. Android - invalid GPIO polarity in the copied driver and qcm6490-idp.dts,
+3. FreeBSD - invalid GPIO polarity in the copied qcm6490-idp.dts, no driver.
+
+Please let me know, if there are other projects to check. To my
+understanding the RESET_N polarity cannot be corrected anymore,
+and the best option is to clearly document a difference between
+the device and its dt-binding documentation.
+
+-- 
+Best wishes,
+Vladimir
