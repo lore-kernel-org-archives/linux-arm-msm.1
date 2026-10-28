@@ -1,86 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.2
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793155677;
-	b=B78lsA18+6T9DE0v/YoGtp3nWL/cHEYMxfdOls/3VwyTjwfbYJrn0NrhRxdXXeCaV8Xk
-	 n/tnyRu7MlssMOMFkotzJHl20m4+thftLG635NQCVsTA5cK7BokKZ632zENkNa7Kf4VZF
-	 Gbqb78FUb2FLtbE+og2VuoXm1Y4Y6+0Vp76vNcIcFMaI+c2dlpCn/wUwRlf6joSdf1x6T
-	 TGNwpplK6kHRWjE8lqB5gmHAp7Nxr+3xcMG6Q7t2fqIspvIfbcYi6ZM9L0xvyeSUY1/ES
-	 536VnirMcGYHDy0yyZ2UxsG7b8ouVTg0CfG8yX2iwaFT3Zof+o8TGsg6SFCZyfPjg4g==
+	t=1793156702;
+	b=Jh/QGu3NALsEyv/ULX7nhpLqyr+49F1ARvLSr5ZHow7ovwK0joVTgL/K9fTkI6fT33tI
+	 gLrAcrx7N+74KPJ3sVJqMuikEH6DZsf3KkTlTucSAm8lzVHDpsuKSVLh5AUOSbf1il25Y
+	 0KXhGCm4ki94mOZQzHeDjGdfxn19f3R5+OnaXwA0Zxrsz6O/ZlOvnAzP37mOitVA//eIr
+	 L6md9qImYXNBEPrdpxwPT4YTbni3AXHVuTYAl3XW9rFeG6UwGWevdTUHei5AQI0pQkSOC
+	 f+Vbc29T+C2ku9wP0NHC00+YZ+6OQYsJQ11xqlGB/nnXZCan1BlTwHYjsF616KFApZw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793155677;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=aLDoyBImqnKYh8grtafx499cDn4CNnRfNPQG4lCfyOc=;
-	b=eOb3Utmrx05egJju39753kazAhDtH/rh8pO6uhOm5+lFeIUftutrRN6rasdtOiiPug9f
-	 pwqmn6zGrW0HD4AIvzOZnkww69t4cgO/01gdmh8joILzNIQcACjK0xLigNcA6/MIv8xlH
-	 8Fbm6b/uHqxV/XvnMC/JWjoS1M7QpT6zaqA/xYT3pjwHezCQeHaoBP5ZclL4wVM2ZeUlR
-	 hizDIRwWkDV8psMKOaAmEaD9mBuBx9+UaGdR0nNq0mCcomQeCem8jTMBVxwpI53ebEsqb
-	 X9Cq84HIVKPo4Qq4C7xwtQpFuC/8EIskrZ55ZStJAyyJ/M7eBhWJW7sQXwCT0Mg5I4w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793156702;
+	h=DMARC-Filter:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:
+	 X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=QmKBIsPj275zjC+RHeRaYLF2SPXRKuXi+F+O6Y1Ma/A=;
+	b=M/9aXjp9sScGT5el3Kg1Bm6ekEekgaC4muieVSf9z9pYq6TWg7n0h7d0l/mu/ScHlYPq
+	 vn22SpcBmsigqUYQov9rpGZGjNn5H90O4KJJRRa19pnUDFyhVOwjTeSBQfeD20cU6/sFx
+	 pP4gfKNkBaNbTomF8EfOGR5JfIpsvCR5dnAkL2dzjZTOfk41xPbtFRyT6vGo4DfzWVlQk
+	 DA1qfsPFz4a6X0huVeoByJeuxRfSM4Ycooc7jke4FpmVzdsYL+Wzt4tnofT/UUkOr6aUp
+	 hG1jG3KOppXrVl3U96fZX2O+AuYzmLzYSm34oa0YNG6Xu0stN1t3KQqjG16g71ddZvA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FAefAoag;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=QQ1aOpqD;
+	arc=none smtp.remote-ip=117.135.210.2
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40CE6606A31A;
-	Wed, 28 Oct 2026 02:47:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 40CE6606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4CE0606A31A;
+	Wed, 28 Oct 2026 03:04:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C4CE0606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FAefAoag
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69S0itrn3816350;
-	Wed, 28 Oct 2026 02:47:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=aLDoyBImqnK
-	Yh8grtafx499cDn4CNnRfNPQG4lCfyOc=; b=FAefAoagdNUDI42shPlt8S+vFu6
-	STYy9yf3dV9RdZYqe5T2hMpuMHV6G3QPwL6UwXQIUcPb5CrkIXaLC04kNCoRwGFe
-	ibguR281Q4zLfCbpI7dEu3VTBnX56omsMD9E0/5P2nWEuj5h4ybKZeZ7MDIl/X1j
-	ZJr3w1e+XDSkPouekpv73RZUDLS1WhMFvpayeVo3UQ/JBJ1iHX6lGtV3viCrUOFY
-	PlPa6XrIBYGqGNmlS3s2/556N4SB0KkAVmj1+Qu+rmS9mR9lbCTrxfc4wunD6FVM
-	6PRj+TEjYPT6/37x0DG4pIRPFJF3YpboDTh7NEm7kP5vW38OGjX29Q4Y3xw==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjst1knq9-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 28 Oct 2026 02:47:44 +0000 (GMT)
-Received: from pps.filterd (aptaippmta01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69S2lgwQ2632315;
-	Wed, 28 Oct 2026 02:47:42 GMT
-Received: from ap-kernel-sh03-lnx.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 69S2lfPB2632306
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 28 Oct 2026 02:47:42 +0000 (GMT)
-Received: from ap-kernel-sh03-lnx.qualcomm.com (localhost [127.0.0.1])
-	by ap-kernel-sh03-lnx.qualcomm.com (Postfix) with ESMTP id CC7784055E;
-	Wed, 28 Oct 2026 10:47:40 +0800 (CST)
-From: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-To: Mark Brown <broonie@kernel.org>, Srinivas Kandagatla <srini@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        shengchao.guo@oss.qualcomm.com, mohammad.rafi.shaik@oss.qualcomm.com,
-        bartosz.golaszewski@oss.qualcomm.com,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-Subject: [PATCH v3] ASoC: qcom: audioreach: support multichannel PCM formats
-Date: Wed, 28 Oct 2026 10:47:20 +0800
-Message-ID: <20261028024720.981971-1-zhangfei.gao@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261026082534.986449-1-zhangfei.gao@oss.qualcomm.com>
-References: <20261026082534.986449-1-zhangfei.gao@oss.qualcomm.com>
+	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=QQ1aOpqD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=QmKBIsPj275zjC+RHeRaYLF2SPXRKuXi+F+O6Y1Ma/A=;
+	b=QQ1aOpqDWE8FU3TPOhW+MfG6j6+N0eoK3n+xE4A/cpC2NORjs2103GBylGScI5
+	q8c0cxRwAm6kYho2xTHspJS4gAcZRiDhhuVMJ/CBYYkW7Kvn3hy/IMDIL5HpB68D
+	/SsVO2fsRmuU7tlU/QFtZKHwEc8PRZPRLuLQieOhufzIw=
+Message-ID: <e89439cb-b4cc-44ca-99bd-977e4d659e47@163.com>
+Date: Wed, 28 Oct 2026 11:04:11 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,270 +51,173 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/16] PCI: dwc: Add pcie_cap field and caching helper
+To: Shawn Lin <shawn.lin@rock-chips.com>, bhelgaas@google.com,
+ lpieralisi@kernel.org, kwilczynski@kernel.org, mani@kernel.org,
+ jingoohan1@gmail.com
+Cc: imx@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
+ linux-amlogic@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, sophgo@lists.linux.dev,
+ linux-riscv@lists.infradead.org, spacemit@lists.linux.dev,
+ linux-tegra@vger.kernel.org, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261027122827.2725643-1-18255117159@163.com>
+ <20261027122827.2725643-2-18255117159@163.com>
+ <80f85ae9-7162-4940-8dec-690bc00098b4@rock-chips.com>
+Content-Language: en-US
+From: Hans Zhang <18255117159@163.com>
+In-Reply-To: <80f85ae9-7162-4940-8dec-690bc00098b4@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=HJ1WhYtv c=1 sm=1 tr=0 ts=6ae16250 cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=Sw036wB_Sbj6ZPNlFA4A:9
-X-Proofpoint-ORIG-GUID: eoAwt-FAT8ojgDC7re-7NPcKMN5mq4Z0
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDAxMCBTYWx0ZWRfX6xy1zjJzDvQp
- Z7L0XY7/4wbOmWmwi1Ir1MIopNwLHBIM0bTZ0HpBvUh46mAT6fwjLuQ3uQhnXeuHvMJ08usXjoF
- wrlZIvP9NZ8AMzQTrvRWVoJfmsIYnyE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDAxMCBTYWx0ZWRfX+o2O92Js1/TV
- T01k5NScTr5t6b6pWoirjVg7jN62mtrNSEdiDIgLRC3oA1VPSReUmcQVEhrMda3FloUH4SIlsb6
- 69knpg1GLxq0E7sW/ktzdGR8k2+VtcMtyFSiG+0erp1hCcYU0wxqAUI3SdtqvoM1BkUSazwHxb3
- ZFy9I40LF1hwKYYYENxEb2dciZGKqboRxDxFc3awp9pcW6Fkzkxr11x5qWvFSReEKotkhwUGlF9
- 1fCGn+hWA0KNlR621FLaoOJYwSdN9vCI78QgDcyfpzeO5lknaRcIu+IZRsavwXCerDvQ7lxL+xl
- kCgH2zNmfsrdYioFA0z0i4Td+i+NTyUqGwA+a8wH78gVrMpMxjMHdY2kw1FR62UH+XT5YUDd5AM
- T+5fy16rguSOrgiRr+AZfM+/fxANleKqyq56tvGvcUNZO9nV6dMx3J4BhGwdDTu7JXh1/zdkxVJ
- jk4QnONOwGh5l4YPk2g==
-X-Proofpoint-GUID: eoAwt-FAT8ojgDC7re-7NPcKMN5mq4Z0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-28_01,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 spamscore=0 phishscore=0 clxscore=1015
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610280010
+X-CM-TRANSID:PCgvCgDnL4srZuFqgH73CA--.31342S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3WF1rtF48GFWUGF4rAF4kXrb_yoW7Kw15p3
+	yUtF1akFs8JrWav3W2v3W3JF1a9as3JFW7Jwn3Gw13Zr9xur1xKFy0yrWYkF17Crs2gw1j
+	9r4jqa4xCrs8AFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UuwZcUUUUU=
+X-CM-SenderInfo: rpryjkyvrrlimvzbiqqrwthudrp/xtbC7A23W2rhZi2d5QAA31
 
-AudioReach currently rejects PCM streams with more than four channels in
-the PCM and shared-memory media format paths.
 
-This prevents TDM links that expose more channels, such as the 6-channel
-playback path used on SA8797P Ride, from being configured.
 
-Reuse q6dsp_map_channels() to support multichannel PCM formats and use
-the common PCM channel limit definition.
+On 10/27/26 21:12, Shawn Lin wrote:
+> Hi Hans,
+> 
+> 在 2026/10/27 星期二 20:28, Hans Zhang 写道:
+>> The DWC PCIe core and its platform drivers repeatedly call
+>> dw_pcie_find_capability(pci, PCI_CAP_ID_EXP) to obtain the offset of the
+>> PCI Express Capability structure. Besides being verbose, that performs a
+>> DBI read every time, including in paths that run repeatedly such as link
+>> up polling, suspend/resume and interrupt handlers.
+>>
+>> Add a pcie_cap field to struct dw_pcie and a helper
+>> dw_pcie_get_pcie_cap() that performs the lookup on first use and caches
+>> the result for the subsequent calls.
+>>
+>> The lookup is deliberately done lazily, at the first place that needs the
+>> offset, instead of at a fixed point during controller initialization.
+>> This guarantees that the DBI read happens exactly when the open coded
+>> dw_pcie_find_capability() call it replaces used to happen, so no DBI
+>> access can be made before the controller clocks, resets and power are
+> 
+> 
+> With the controller inaccessible (clocks/power gated), what a DBI
+> read returns is platform dependent, most integrations just hang the
+> accessing CPU, like Rockchip's SoCs, others might return zero or
+> garbage. Zero self-heals as the commit message describes, but a garbage 
+> non-zero lookup would now be cached indefinitely, so every later caller
+> would use a bogus offset?
+> 
+> Perhaps the "TX Interface Progression Detection Features" of dwc IP
+> could help return a dedicated value? I don't know, so I need to check
+> it internally. I will get back to you later.
 
-Signed-off-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-Reviewed-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
----
+Hi,
 
-v3: reuse PCM_MAX_NUM_CHANNEL to replace AR_PCM_MAX_NUM_CHANNEL (Srinivas)
-v2: reuse q6dsp_map_channels
+Thanks for the review.
 
- sound/soc/qcom/qdsp6/audioreach.c       | 36 ++++---------------------
- sound/soc/qcom/qdsp6/audioreach.h       |  5 ++--
- sound/soc/qcom/qdsp6/q6apm-dai.c        | 12 ++++++---
- sound/soc/qcom/qdsp6/q6apm-lpass-dais.c | 11 +++++---
- 4 files changed, 24 insertions(+), 40 deletions(-)
 
-diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
-index d2dc5d37bccf..e6f077a5b750 100644
---- a/sound/soc/qcom/qdsp6/audioreach.c
-+++ b/sound/soc/qcom/qdsp6/audioreach.c
-@@ -306,22 +306,6 @@ void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uint32_t opcode, uint32_t token
- }
- EXPORT_SYMBOL_GPL(audioreach_alloc_apm_cmd_pkt);
- 
--void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels)
--{
--	if (num_channels == 1) {
--		ch_map[0] =  PCM_CHANNEL_FL;
--	} else if (num_channels == 2) {
--		ch_map[0] =  PCM_CHANNEL_FL;
--		ch_map[1] =  PCM_CHANNEL_FR;
--	} else if (num_channels == 4) {
--		ch_map[0] =  PCM_CHANNEL_FL;
--		ch_map[1] =  PCM_CHANNEL_FR;
--		ch_map[2] =  PCM_CHANNEL_LS;
--		ch_map[3] =  PCM_CHANNEL_RS;
--	}
--}
--EXPORT_SYMBOL_GPL(audioreach_set_default_channel_mapping);
--
- static void apm_populate_container_config(struct apm_container_obj *cfg,
- 					  const struct audioreach_container *cont)
- {
-@@ -760,7 +744,7 @@ static int audioreach_codec_dma_set_media_format(struct q6apm_graph *graph,
- 	intf_cfg->cfg.intf_index = module->hw_interface_idx;
- 	intf_cfg->cfg.active_channels_mask = 0;
- 	/* Convert the physical channel mapping into a bit field */
--	for (i = 0; i < AR_PCM_MAX_NUM_CHANNEL; i++)
-+	for (i = 0; i < PCM_MAX_NUM_CHANNEL; i++)
- 		if (cfg->channel_map[i])
- 			intf_cfg->cfg.active_channels_mask |= BIT(i);
- 
-@@ -883,7 +867,7 @@ static int audioreach_mfc_set_media_format(struct q6apm_graph *graph,
- 	media_format->bit_width = cfg->bit_width;
- 	media_format->num_channels = cfg->num_channels;
- 	/* Convert the physical mapping to a logical mapping of the channels */
--	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < cfg->num_channels; i++) {
-+	for (i = 0, j = 0; i < PCM_MAX_NUM_CHANNEL && j < cfg->num_channels; i++) {
- 		if (!cfg->channel_map[i])
- 			continue;
- 		media_format->channel_mapping[j++] = cfg->channel_map[i];
-@@ -1185,11 +1169,6 @@ static int audioreach_pcm_set_media_format(struct q6apm_graph *graph,
- 	int payload_size;
- 	int i, j;
- 
--	if (num_channels > 4) {
--		dev_err(graph->dev, "Error: Invalid channels (%d)!\n", num_channels);
--		return -EINVAL;
--	}
--
- 	payload_size = APM_PCM_MODULE_FMT_CMD_PSIZE(num_channels);
- 
- 	struct gpr_pkt *pkt __free(kfree) =
-@@ -1218,7 +1197,7 @@ static int audioreach_pcm_set_media_format(struct q6apm_graph *graph,
- 	media_cfg->q_factor = mcfg->bit_width - 1;
- 	media_cfg->bits_per_sample = mcfg->bit_width;
- 	/* Convert the physical mapping to a logical mapping of the channels */
--	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < mcfg->num_channels; i++) {
-+	for (i = 0, j = 0; i < PCM_MAX_NUM_CHANNEL && j < mcfg->num_channels; i++) {
- 		if (!mcfg->channel_map[i])
- 			continue;
- 		media_cfg->channel_mapping[j++] = mcfg->channel_map[i];
-@@ -1275,11 +1254,6 @@ static int audioreach_shmem_set_media_format(struct q6apm_graph *graph,
- 	int i, j;
- 	void *p;
- 
--	if (num_channels > 4) {
--		dev_err(graph->dev, "Error: Invalid channels (%d)!\n", num_channels);
--		return -EINVAL;
--	}
--
- 	payload_size = APM_SHMEM_FMT_CFG_PSIZE(num_channels) + APM_MODULE_PARAM_DATA_SIZE;
- 
- 	struct gpr_pkt *pkt __free(kfree) =
-@@ -1313,7 +1287,7 @@ static int audioreach_shmem_set_media_format(struct q6apm_graph *graph,
- 		cfg->endianness = PCM_LITTLE_ENDIAN;
- 		cfg->num_channels = mcfg->num_channels;
- 		/* Convert the physical mapping to a logical mapping of the channels */
--		for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < cfg->num_channels; i++) {
-+		for (i = 0, j = 0; i < PCM_MAX_NUM_CHANNEL && j < cfg->num_channels; i++) {
- 			if (!mcfg->channel_map[i])
- 				continue;
- 			cfg->channel_mapping[j++] = mcfg->channel_map[i];
-@@ -1436,7 +1410,7 @@ static int audioreach_speaker_protection_vi(struct q6apm_graph *graph,
- 
- 	cm_cfg->cfg.num_channels = num_channels * 2;
- 	/* Convert the physical mapping to a logical mapping of the channels */
--	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < num_channels; i++) {
-+	for (i = 0, j = 0; i < PCM_MAX_NUM_CHANNEL && j < num_channels; i++) {
- 		if (!mcfg->channel_map[i])
- 			continue;
- 		/*
-diff --git a/sound/soc/qcom/qdsp6/audioreach.h b/sound/soc/qcom/qdsp6/audioreach.h
-index 587f14ce71d2..9f4166ebdc10 100644
---- a/sound/soc/qcom/qdsp6/audioreach.h
-+++ b/sound/soc/qcom/qdsp6/audioreach.h
-@@ -6,6 +6,7 @@
- #include <linux/soc/qcom/apr.h>
- #include <uapi/sound/snd_ar_tokens.h>
- #include <sound/soc.h>
-+#include "q6dsp-common.h"
- struct q6apm;
- struct q6apm_graph;
- 
-@@ -805,7 +806,6 @@ struct param_id_hw_ep_power_mode_cfg {
- #define PARAM_ID_HW_EP_DMA_DATA_ALIGN	0x08001233
- #define AR_HW_EP_DMA_DATA_ALIGN_MSB	0
- #define AR_HW_EP_DMA_DATA_ALIGN_LSB	1
--#define AR_PCM_MAX_NUM_CHANNEL		8
- 
- struct param_id_hw_ep_dma_data_align {
- 	uint32_t dma_data_align;
-@@ -998,7 +998,7 @@ struct audioreach_module_config {
- 	u16	nslots_per_frame;
- 	u16	slot_width;
- 	struct snd_codec codec;
--	u8 channel_map[AR_PCM_MAX_NUM_CHANNEL];
-+	u8 channel_map[PCM_MAX_NUM_CHANNEL];
- };
- 
- /* Packet Allocation routines */
-@@ -1009,7 +1009,6 @@ static inline u16 audioreach_gpr_dest_domain(gpr_device_t *gdev)
- 
- void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uint32_t opcode,
- 				   uint32_t token);
--void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels);
- void *audioreach_alloc_cmd_pkt(int payload_size, uint32_t opcode,
- 			       uint32_t token, uint32_t src_port,
- 			       uint32_t dest_port);
-diff --git a/sound/soc/qcom/qdsp6/q6apm-dai.c b/sound/soc/qcom/qdsp6/q6apm-dai.c
-index 58beaf906b9f..83594b693569 100644
---- a/sound/soc/qcom/qdsp6/q6apm-dai.c
-+++ b/sound/soc/qcom/qdsp6/q6apm-dai.c
-@@ -21,6 +21,7 @@
- #include <asm/div64.h>
- #include <asm/dma.h>
- #include "q6apm.h"
-+#include "q6dsp-common.h"
- 
- #define DRV_NAME "q6apm-dai"
- #define POS_BUFFER_BYTES	4096
-@@ -344,7 +345,10 @@ static int q6apm_dai_prepare(struct snd_soc_component *component,
- 	cfg.num_channels = runtime->channels;
- 	cfg.bit_width = prtd->bits_per_sample;
- 	cfg.fmt = SND_AUDIOCODEC_PCM;
--	audioreach_set_default_channel_mapping(cfg.channel_map, runtime->channels);
-+	ret = q6dsp_map_channels(cfg.channel_map, runtime->channels);
-+	if (ret)
-+		return ret;
-+
- 	if (prtd->state) {
- 		/* clear the previous setup if any  */
- 		q6apm_graph_stop(prtd->graph);
-@@ -1007,8 +1011,10 @@ static int q6apm_dai_compr_set_params(struct snd_soc_component *component,
- 		cfg.num_channels = 2;
- 		cfg.bit_width = prtd->bits_per_sample;
- 		cfg.fmt = codec->id;
--		audioreach_set_default_channel_mapping(cfg.channel_map,
--						       cfg.num_channels);
-+		ret = q6dsp_map_channels(cfg.channel_map, cfg.num_channels);
-+		if (ret)
-+			return ret;
-+
- 		memcpy(&cfg.codec, codec, sizeof(*codec));
- 
- 		ret = q6apm_graph_media_format_shmem(prtd->graph, &cfg);
-diff --git a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c b/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
-index 83f2711bceea..9a3994a4f475 100644
---- a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
-+++ b/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
-@@ -94,7 +94,7 @@ static int q6dma_set_channel_map(struct snd_soc_dai *dai,
- 			return -EINVAL;
- 		}
- 
--		if (tx_num > AR_PCM_MAX_NUM_CHANNEL) {
-+		if (tx_num > PCM_MAX_NUM_CHANNEL) {
- 			dev_err(dai->dev, "invalid tx num %d\n",
- 				tx_num);
- 			return -EINVAL;
-@@ -147,7 +147,9 @@ static int q6hdmi_hw_params(struct snd_pcm_substream *substream,
- 	cfg->bit_width = params_width(params);
- 	cfg->sample_rate = params_rate(params);
- 	cfg->num_channels = channels;
--	audioreach_set_default_channel_mapping(cfg->channel_map, channels);
-+	ret = q6dsp_map_channels(cfg->channel_map, channels);
-+	if (ret)
-+		return ret;
- 
- 	switch (dai->id) {
- 	case DISPLAY_PORT_RX_0:
-@@ -173,11 +175,14 @@ static int q6dma_hw_params(struct snd_pcm_substream *substream,
- 	struct q6apm_lpass_dai_data *dai_data = dev_get_drvdata(dai->dev);
- 	struct audioreach_module_config *cfg = &dai_data->module_config[dai->id];
- 	int channels = hw_param_interval_c(params, SNDRV_PCM_HW_PARAM_CHANNELS)->max;
-+	int ret;
- 
- 	cfg->bit_width = params_width(params);
- 	cfg->sample_rate = params_rate(params);
- 	cfg->num_channels = channels;
--	audioreach_set_default_channel_mapping(cfg->channel_map, channels);
-+	ret = q6dsp_map_channels(cfg->channel_map, channels);
-+	if (ret)
-+		return ret;
- 
- 	return 0;
- }
--- 
-2.43.0
+You are right that the cache must not turn a bogus value into a permanent
+one. Some details and one change in v5:
+
+- dw_pcie_get_pcie_cap() is only called at the sites that previously
+   called dw_pcie_find_capability() directly, so this series does not add
+   or move a DBI access. It does not try to fix the "DBI accessed while
+   the controller is inaccessible" problem; that behavior is platform
+   specific and pre-existing.
+- dw_pcie_find_capability() already rejects offsets below the standard
+   header, unaligned offsets, and entries whose capability ID is not
+   PCI_CAP_ID_EXP, so a bogus value has to look like a valid capability
+   entry to be returned at all.
+- To make sure that a transient bogus read cannot stick anyway, v5 only
+   caches the offset after the capability ID has been read back at that
+   offset. If the read-back does not confirm PCI_CAP_ID_EXP, the offset is
+   still used for the current access (same as the open coded search
+   before), but it is not cached, and the next call searches again - the
+   same self-healing behavior as the zero/not-found case.
+
+If the DWC IP has a reliable way to tell whether the core is accessible
+(the "TX Interface Progression Detection" feature you mentioned), that
+would be even better than validating the value. I would be glad to use it
+if you can share the details; it probably deserves a separate patch so
+that all DBI accesses can be guarded, not only this lookup.
+
+Best regards,
+Hans
+
+> 
+> 
+>> enabled. This matters for endpoint controllers such as qcom-ep and
+>> tegra194, where DBI is only accessible after PERST# is deasserted, and it
+>> also means platform drivers do not have to call the helper from a
+>> specific callback at the right time.
+>>
+>> The cached value is accessed with READ_ONCE()/WRITE_ONCE(), because the
+>> first lookup may be triggered from different contexts, for example the
+>> qcom-ep global IRQ and PERST# IRQ handlers. A concurrent lookup stores
+>> the same value, so this race is benign.
+>>
+>> A return value of 0 means that the capability is not present. This
+>> cannot happen on real DWC hardware, where the PCI Express Capability is
+>> mandatory, so a negative result is not cached separately: it only causes
+>> the search to be repeated, which does not affect correctness.
+>>
+>> Signed-off-by: Hans Zhang <18255117159@163.com>
+>> ---
+>>   drivers/pci/controller/dwc/pcie-designware.h | 34 ++++++++++++++++++++
+>>   1 file changed, 34 insertions(+)
+>>
+>> diff --git a/drivers/pci/controller/dwc/pcie-designware.h b/drivers/ 
+>> pci/controller/dwc/pcie-designware.h
+>> index 0735ae940924..fa31e8b763bc 100644
+>> --- a/drivers/pci/controller/dwc/pcie-designware.h
+>> +++ b/drivers/pci/controller/dwc/pcie-designware.h
+>> @@ -592,6 +592,8 @@ struct dw_pcie {
+>>        * use_parent_dt_ranges to true to avoid this warning.
+>>        */
+>>       bool            use_parent_dt_ranges;
+>> +
+>> +    u8            pcie_cap;    /* Offset of PCI_CAP_ID_EXP */
+>>   };
+>>   #define to_dw_pcie_from_pp(port) container_of((port), struct 
+>> dw_pcie, pp)
+>> @@ -830,6 +832,38 @@ static inline void dw_pcie_dbi_ro_wr_dis(struct 
+>> dw_pcie *pci)
+>>       dw_pcie_writel_dbi(pci, reg, val);
+>>   }
+>> +/**
+>> + * dw_pcie_get_pcie_cap() - Return the PCIe Capability offset
+>> + * @pci: DWC instance
+>> + *
+>> + * The offset of the PCI Express Capability structure is read once from
+>> + * the DBI configuration space on the first call and cached in
+>> + * @pci->pcie_cap for the subsequent ones.
+>> + *
+>> + * The lookup is done lazily at the first place that actually needs the
+>> + * offset, so the DBI read happens exactly when it used to happen before
+>> + * caching was introduced, i.e. never before the controller's clocks,
+>> + * resets and power are enabled.
+>> + *
+>> + * DWC PCIe controllers always implement the PCI Express Capability, 
+>> so a
+>> + * return value of 0 means that the hardware is not usable. Callers that
+>> + * check the returned offset keep working, and the (never expected)
+>> + * lookup is simply repeated on the next call.
+>> + *
+>> + * Return: the cached offset, or 0 if the capability is not present.
+>> + */
+>> +static inline u8 dw_pcie_get_pcie_cap(struct dw_pcie *pci)
+>> +{
+>> +    u8 cap = READ_ONCE(pci->pcie_cap);
+>> +
+>> +    if (!cap) {
+>> +        cap = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
+>> +        WRITE_ONCE(pci->pcie_cap, cap);
+>> +    }
+>> +
+>> +    return cap;
+>> +}
+>> +
+>>   static inline int dw_pcie_start_link(struct dw_pcie *pci)
+>>   {
+>>       if (pci->ops && pci->ops->start_link)
 
