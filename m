@@ -1,58 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.85.9.111
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793219883;
-	b=JBY09OvNBr63RtLp26bU1PRwSiAjrUJgNv9hAQPuPATXl6Iw1GFTHY70Hc6Ld3lBckA7
-	 o7pM81/8JATicGcUxKZ20HsmcJ8HtpPeYW8o5RpSxAngufv/ZEP+6Rm9I5WFBD+0GhNSe
-	 bd61gSdGqMxycpO/4xT02cR/1tzGKgUHueC+e7GoWXRTzjJhebN7LUTTOTJRLneG4grJX
-	 09tdpsyDXF8I+G/fuNN/MUORSywKB8YI7iYEYkeuLQczmrb4ShVM1AqyuaKTh/jTzneL/
-	 t838Cyrh64hqTxMgbRvIykyvlUZcRwPCbErUpeLt5YSjHwXPluANYtFK1Tn6JuprrKw==
+	t=1793220357;
+	b=pYxr4g0kxUlMaiaNky0U6A3q2yUr+R91uWZJiyOPx115gntgZgZRsfkxUDFNWYi+E/cT
+	 SN5kBxLBoushrOOpIkoLcsgJePT4GQWuYj3vDp7ez18eIKniiggvDfR1ODU8263iIwU0z
+	 a020mKPBuxFm9CVmH6iYXvaIuWdfvplo3manpFyvpdShNMKPvCuvDWuyxp95seUcTcbKc
+	 +rEvJVFTN//lIo5DK71JRqx15u1ensZUK+2aEjq2Nb4OuJx/3NYbp4tSySpeF1e0cRpdx
+	 KsZ8e5q7L5L38N2zZ2LQNFTAPGlvqIFlr7T9VDek4D7Iw1CiFtdx+yvOqy4jG8osSmg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793219883;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:Mime-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mime-Autoconverted;
-	bh=5Z8xc5iZbZjGU1H//ZPrrOHlU//d9GC4pHRAkgW+VWU=;
-	b=Z0V/kXgN7CqhHtJWmM/KUUmVsroy4T0XZqC+Wr0QUJm8VcEk6bYt61c0G8wPHSaw+BVn
-	 FQ8tESrk845cDSrY8suBczKXLf5sP6kMjjryHac1/KvsJIFC8fkLDwdTicivi9Np+cDzA
-	 5IUvqPAgF75dV1DqBuL+3BSKF9VJpuTG9PMI/fBOlqZ6EgK2BVzF9Srpkt6MzhLnTKQ/j
-	 ymAPr56EeXmRy80gZCONgJTwC4df0kIGzAKynZIe4Wy5DODyEMcx5xlzEJsJk//ZAe27F
-	 LwdiXBGIQkuuRNdhAXcJqtaDXoQryjUNEoM3WZaArGmRQ5rTEGgFdbIEKH1w7YPCeXA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793220357;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=EP6xULgbpkKbbLO4g2dHiDHxnCrHcDloPLKgANcrRB8=;
+	b=aN4GzHlPHBnWiKH+wQzl87DM9OzObMdtwwJAw3zyene3Zv+7OWFQRwIFQsFUCy2BMHCa
+	 +0gqEkYCFjB90JyVn7WuML+mNKS/nXGoy66Emrzm0ajA14wTIFpmLvjr7dLEiPik8heah
+	 avbh9bZs7OQL2h85SamaDozXBtnNzJGmvS9nPcbD2BUrXkYOVxae/DEmSOerSFWHNeTVU
+	 dapMZIpOdlY6PmfhFDrpE0HFc7frpbh5gr4pCFT6WSskP0wONQM7s8/T05c9ex/dwuNIp
+	 dIsz8d+Q9lbKnMWGj3jedjubi605aP9s8RCtwulzH06FZsjm01gHFGci/xdUmZ8SIDg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=irl.hu;
-	spf=pass smtp.mailfrom=irl.hu;
-	arc=none smtp.remote-ip=95.85.9.111
-Received: from irl.hu (irl.hu [95.85.9.111])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Cx5URFdN;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="MLBUDz7/";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 4D6CC606A324;
-	Wed, 28 Oct 2026 20:38:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D6CC606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=irl.hu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=irl.hu
-Received: from fedori.lan (51b68114.dsl.pool.telekom.hu [::ffff:81.182.129.20])
-  (AUTH: PLAIN soyer@irl.hu, SSL: TLS1.3,256bits,ECDHE_RSA_AES_256_GCM_SHA384)
-  by irl.hu with ESMTPSA
-  id 0000000000080909.000000006AE25D28.000329C8; Wed, 28 Oct 2026 21:38:00 +0100
-From: Gergo Koteles <soyer@irl.hu>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-  Rob Herring <robh@kernel.org>,
-  Krzysztof Kozlowski <krzk+dt@kernel.org>,
-  Conor Dooley <conor+dt@kernel.org>,
-  Bjorn Andersson <andersson@kernel.org>,
-  Konrad Dybcio <konradybcio@kernel.org>,
-  Arnd Bergmann <arnd@arndb.de>, Gergo Koteles <soyer@irl.hu>,
-  Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-Cc: linux-input@vger.kernel.org, devicetree@vger.kernel.org,
-  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-  phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht,
-  Enrico Cic <enrico@privacyrequired.com>
-Subject: [PATCH v2 2/3] Input: aw86224 - add driver for Awinic AW86224
-Date: Wed, 28 Oct 2026 21:37:37 +0100
-Message-ID: <33b6ca5aa4186eab554d68a0693a58f1c5c44cdf.1793218514.git.soyer@irl.hu>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <cover.1793218514.git.soyer@irl.hu>
-References: <cover.1793218514.git.soyer@irl.hu>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DC94606A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 20:45:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7DC94606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Cx5URFdN;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MLBUDz7/
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69SIPNoB1942145
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 20:45:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	EP6xULgbpkKbbLO4g2dHiDHxnCrHcDloPLKgANcrRB8=; b=Cx5URFdN2cNg87ly
+	4km/gBAr1vP3quNlgWTQUPHqp2DGyuTrdh0UZgUkt5DIzUaMfRxl6IhNHdmXgJz2
+	/ONVKUl2soONKkTL5RHtlwVtqpyqgjfTITcZz3wJPLUS5/PpGUq7nq4+TrKg0p9q
+	gawfFjdx5BXN69YzmZC+vKWk+tu4ip2Th7eE61AM1yWZj6XBZLaEUsTwIdSuwATU
+	2C4pbO4wkG4ngEpdKdYo93Mtf87/H6L63Mcvvj+Tj+qFHxByQV5an0NMn+73J2t5
+	yfqimq4AqZ8KpgdZijXWcUEzy3zqZNwaHOR88K9oyaYm9zG93wxH4JAUnNQmfsQF
+	f+SPYw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkbhwbe8y-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 20:45:56 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-351788121cfso3514632eec.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 13:45:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793220356; x=1793825156; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EP6xULgbpkKbbLO4g2dHiDHxnCrHcDloPLKgANcrRB8=;
+        b=MLBUDz7/Pmfc+g+B8cJgfY8zWPI+XTENqaffLdASkjakYxFd1inwaCa11NsKdOk8YW
+         1ATH13bu0D1o9/Sd9TzD3kZBqHKqjOufTDovfppAnid0ujMMTR9EIHOKZUz7C3EIb/bE
+         bMHe6oO5eefsG/oP7JCgoTJGQ5GSbKTtAJpEnhS+9Ykc9YLLCpVJoU+CGr3Obu0Upvjy
+         0xD1vuZC7vPjYfdi1SrGEZ5nwmyJLPLEGOzsEv2Xj/kJ5AZsFA0yZHuP8T6niHgUBBMn
+         2/Qm3H/gP9jbDKU3Vh8rxO+7Jt3QepMVFBR4un4fLRaF3BCEtnaVHr8CtlFY3r4gnKiw
+         PvDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793220356; x=1793825156;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EP6xULgbpkKbbLO4g2dHiDHxnCrHcDloPLKgANcrRB8=;
+        b=NfdM1SyY6u4HqYxS492I7b2vIK1Od2NNdhw6cNFpWIs2nhQsQKcnLMyVcOKRkKGVnT
+         e6lNGQvWl5IxAiRBAsGo0fXPpe4c4B/bzJHGpaZYoPNS37vyICqYEAZ4iLrIMzOaT/zX
+         hWg4/tyiEJd2n70mAtjtMcHAXL58MYmjXqxsSZaGi+ED3O+9xMqtJN09S9UCoErfPjiO
+         2l9YGY5i3j/6LW0kL9mwZ7f+A/ptkhlV799BGfsglmexGbdblTyLJpU0Dg7FtJN5JsNi
+         WRH3R75cS1TIHTR373zEPoHpJzlQ87H3FysDlrXdHkK62dQqOxpEyp5HCAYW9DoxazG4
+         znBQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzz+qt+iAK5fkhwSgS12ktk05615VO5H8WxCod8WOYd76GNjienfwacap1iQ74Oss6BMVWMt7J+Sx6XUg+L@vger.kernel.org
+X-Gm-Message-State: AFq9FYJXKl6jNkAt6oygnBrrqBggI7ivX1jUGlPUNgq5P8Frcy3Y2g3Z
+	8THS9p2gsgyt9/XkoKJPk5yOPZwPgszSsSf46t3Evs5D5DMDbwgwJ7jdQvAEvgT3CGfx6urbIUo
+	INsFYvbk2SVPX03KngnmY7p3xFIXodPJT6NuvJIbPljTkiti/1mDDf7C7gVFpA4cY1y4A
+X-Gm-Gg: AYBFou2BOlfaCghna/cFVs5Ujc1QKQYVknA5Ic32qq62RkK+35iergEzBICEDC21+bQ
+	hbKhy0xT4nDkfDn1UYbfPc3VaX3l/sdiogeG+FyvEUql96cbeUH7gCn10mR5BkLjZqmCCm/JR11
+	dQTrz3A9iZ83XAOr/yyf98upcbGx+IHzo5UyRFgZw/W9ZEH7QjEd4KRNiCwsYaV6RbC0kutTzz+
+	ZHX1F5eKOm4XFVXbdMsrukU1r28MVhxjDPabaxA3/D58N2JlqSfKB6gPag7vGOqSHFyGe9wNatY
+	r2TUZhMqZpt2qW4nU6V463wldMwG8dcZ6psSBbv3wTGirQC20F8KZjKAwE/BTG1H170IjYicSMp
+	fLzITtFjDUGvmHLruP4dW89CGdZOOF4UxBBKPjCJDn8HayR2FH7pqCIP2MyDDWIrhIVV8XkNXiR
+	g/7AFjlEzkivboFi9urvHxEJZdc4lnfE8=
+X-Received: by 2002:a05:701b:240f:b0:16b:fdbf:4a9c with SMTP id a92af1059eb24-1a6cd7799damr3970911c88.23.1793220355805;
+        Wed, 28 Oct 2026 13:45:55 -0700 (PDT)
+X-Received: by 2002:a05:701b:240f:b0:16b:fdbf:4a9c with SMTP id a92af1059eb24-1a6cd7799damr3970883c88.23.1793220354960;
+        Wed, 28 Oct 2026 13:45:54 -0700 (PDT)
+Received: from [10.71.181.181] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1a75f7fb28csm10326914c88.18.2026.10.28.13.45.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 28 Oct 2026 13:45:54 -0700 (PDT)
+Message-ID: <1cb79561-39bd-481c-88d5-a05135f5dee7@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 13:45:53 -0700
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,652 +115,80 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-X-Mime-Autoconverted: from 8bit to 7bit by courier 1.0
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] phy: qcom-mipi-csi2: Add support for single
+ power-domain SoCs
+To: Bryan O'Donoghue <bod@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        gjorgji.rosikopulos@oss.qualcomm.com,
+        hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com,
+        jigarkumar.zala@oss.qualcomm.com, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <ZW6-XDf5dgEFD66QI7ZA8WIK_alWTQD2RWolsXjlSql7pO5IUj9PM1T95LMfBd2Y3zKxRhDXXde1R4asZWzgKw==@protonmail.internalid>
+ <20261028052047.2738893-1-anusha.nandi@oss.qualcomm.com>
+ <58599b61-a56b-4d6b-b09f-03d813a64c1c@kernel.org>
+Content-Language: en-US
+From: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
+In-Reply-To: <58599b61-a56b-4d6b-b09f-03d813a64c1c@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: VRtEoXBDA0a-DQwA-DMjLlYeZsFyEUJi
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA4MiBTYWx0ZWRfX6syFqk1tOfpd
+ 84VYapaKRqizsuOX7o2iGYCnAXN/bM/3hEgYBGqxulCYYfcTfLNuPMaiLKIS3d4f15fto916mhe
+ eo3tZ20U9/q5cbm6pTnZSjpiGSwxWJ8=
+X-Authority-Analysis: v=2.4 cv=V+joQuni c=1 sm=1 tr=0 ts=6ae25f04 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=GEq5pLaLegoqB_85s88A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-ORIG-GUID: VRtEoXBDA0a-DQwA-DMjLlYeZsFyEUJi
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA4MiBTYWx0ZWRfX14wM0MdhX2ne
+ Qcl214cNSDX3cgPtEtSXPE47UcnJWNe0w6jCcss6o13hqHzNxa9ERx0X2UVqb7LwBVNeuH9xLQZ
+ vKvTVew7O2DkDBJJczDqJSZ5+CH/BvIMuDdb9f+j58NbPYfz9fbZVJiFvimntr+X7n5uSBrnyFr
+ zLD57NpWm4w6O6U6PlTcunlrYAvGblDj053g85oVDuOdEdx8Z7aqCA7mZBkAds6EFb13KRRIkJF
+ te5fpffI49CyfEZI29j7V5O3MD8g9Da1BdyIUm8WPMBhxs28wiGe98pRKUB38OpoGN8+VStp+CV
+ UJGykzgGGwAtmmaaYAHXIOTZdc/u5rMp5g2FQYL0Wz1KtisB6CMoHOJr26ZDSFWkOfHfih3fVU1
+ FYlY4V0+gIUH5nhzc4oT6gJntjsNqlnbNtXnIVdUshdkRgBl1IWDPPc+DkdVCCKU/dL9up1LZlt
+ pXm9Me0X8H+ISYmDliA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-28_06,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 clxscore=1015 bulkscore=0
+ phishscore=0 impostorscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280082
 
-Add support for the I2C-connected Awinic AW86224 LRA haptic driver.
+Good catch, yes. I'd dropped the NULL-list check for the
+multi-genpd case too, when it should only have been loosened for the
+single-genpd case this patch actually touches. Applied.
 
-The chip supports multiple modes of which only RAM mode is implemented.
+Regards,
+Anusha
 
-Tested-by: Enrico Cic <enrico@privacyrequired.com>
-Signed-off-by: Gergo Koteles <soyer@irl.hu>
----
-Changes in v2:
- - rename AW86224_BASEADDR{H,L}_VAL to AW86224_RAM_BASE_ADDR_{H,L}
- - calculate AW86224_RAM_BASE_ADDR_{H,L} with code
-
----
- drivers/input/misc/Kconfig   |  12 +
- drivers/input/misc/Makefile  |   1 +
- drivers/input/misc/aw86224.c | 582 +++++++++++++++++++++++++++++++++++
- 3 files changed, 595 insertions(+)
- create mode 100644 drivers/input/misc/aw86224.c
-
-diff --git a/drivers/input/misc/Kconfig b/drivers/input/misc/Kconfig
-index 169768e3d5bb..f96972176c0b 100644
---- a/drivers/input/misc/Kconfig
-+++ b/drivers/input/misc/Kconfig
-@@ -126,6 +126,18 @@ config INPUT_ATMEL_CAPTOUCH
- 	  To compile this driver as a module, choose M here: the
- 	  module will be called atmel_captouch.
- 
-+config INPUT_AW86224
-+	tristate "Awinic AW86224 Haptic Driver Support"
-+	depends on I2C && INPUT
-+	select INPUT_FF_MEMLESS
-+	select REGMAP_I2C
-+	help
-+	  Say Y here if you have an Awinic AW86224 haptic chip.
-+	  One should find "awinic,aw86224" node in the board specific DTS.
-+
-+	  To compile this driver as a module, choose M here: the
-+	  module will be called aw86224.
-+
- config INPUT_AW86927
- 	tristate "Awinic AW86927 Haptic Driver Support"
- 	depends on I2C && INPUT
-diff --git a/drivers/input/misc/Makefile b/drivers/input/misc/Makefile
-index 1339619f0769..3bcdc8ea4b53 100644
---- a/drivers/input/misc/Makefile
-+++ b/drivers/input/misc/Makefile
-@@ -23,6 +23,7 @@ obj-$(CONFIG_INPUT_ATC260X_ONKEY)	+= atc260x-onkey.o
- obj-$(CONFIG_INPUT_ATI_REMOTE2)		+= ati_remote2.o
- obj-$(CONFIG_INPUT_ATLAS_BTNS)		+= atlas_btns.o
- obj-$(CONFIG_INPUT_ATMEL_CAPTOUCH)	+= atmel_captouch.o
-+obj-$(CONFIG_INPUT_AW86224)		+= aw86224.o
- obj-$(CONFIG_INPUT_AW86927)		+= aw86927.o
- obj-$(CONFIG_INPUT_BBNSM_PWRKEY)	+= nxp-bbnsm-pwrkey.o
- obj-$(CONFIG_INPUT_BMA150)		+= bma150.o
-diff --git a/drivers/input/misc/aw86224.c b/drivers/input/misc/aw86224.c
-new file mode 100644
-index 000000000000..a98775ab1899
---- /dev/null
-+++ b/drivers/input/misc/aw86224.c
-@@ -0,0 +1,582 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2026 Gergo Koteles <soyer@irl.hu>
-+ *
-+ * Partially based on aw86927 driver
-+ *	Copyright (C) 2025 Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-+ *
-+ * Partially based on vendor driver:
-+ *	Copyright (c) 2021 AWINIC Technology CO., LTD
-+ *
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/bits.h>
-+#include <linux/delay.h>
-+#include <linux/gpio/consumer.h>
-+#include <linux/i2c.h>
-+#include <linux/input.h>
-+#include <linux/module.h>
-+#include <linux/regmap.h>
-+#include <linux/types.h>
-+
-+#define AW86224_RSTCFG_REG			0x00
-+#define AW86224_RSTCFG_SOFTRST			0xaa
-+
-+#define AW86224_SYSINT_REG			0x02
-+#define AW86224_SYSINT_UVLI			BIT(5)
-+#define AW86224_SYSINT_OCDI			BIT(2)
-+#define AW86224_SYSINT_OTI			BIT(1)
-+
-+#define AW86224_SYSINTM_REG			0x03
-+#define AW86224_SYSINTM_FF_AEM			BIT(4)
-+#define AW86224_SYSINTM_FF_AFM			BIT(3)
-+#define AW86224_SYSINTM_DONEM			BIT(0)
-+
-+#define AW86224_PLAYCFG2_REG			0x07
-+#define AW86224_PLAYCFG2_GAIN_MAX		0x80
-+
-+#define AW86224_PLAYCFG3_REG			0x08
-+#define AW86224_PLAYCFG3_PLAY_MODE		GENMASK(1, 0)
-+#define AW86224_PLAYCFG3_PLAY_MODE_RAM		0
-+
-+#define AW86224_PLAYCFG4_REG			0x09
-+#define AW86224_PLAYCFG4_STOP			BIT(1)
-+#define AW86224_PLAYCFG4_GO			BIT(0)
-+
-+#define AW86224_WAVCFG9_REG			0x12
-+#define AW86224_WAVCFG9_SEQ1LOOP		GENMASK(7, 4)
-+#define AW86224_WAVCFG9_SEQ1LOOP_INFINITELY	0x0f
-+
-+#define AW86224_GLBRD5_REG			0x3f
-+#define AW86224_GLBRD5_STATE			GENMASK(3, 0)
-+#define AW86224_GLBRD5_STATE_STANDBY		0
-+
-+#define AW86224_RAMADDRH_REG			0x40
-+#define AW86224_RAMADDRH_MASK			GENMASK(3, 0)
-+
-+#define AW86224_RAMADDRL_REG			0x41
-+
-+#define AW86224_RAMDATA_REG			0x42
-+
-+#define AW86224_SYSCTRL1_REG			0x43
-+#define AW86224_SYSCTRL1_EN_RAMINIT		BIT(3)
-+
-+#define AW86224_SYSCTRL2_REG			0x44
-+#define AW86224_SYSCTRL2_STANDBY		BIT(6)
-+
-+#define AW86224_SYSCTRL7_REG			0x49
-+#define AW86224_SYSCTRL7_GAIN_BYPASS		BIT(6)
-+
-+#define AW86224_CHIPID_REG			0x64
-+#define AW86224_CHIPID_H			BIT(6)
-+#define AW86224_CHIPID_H_AW8622X		0
-+
-+/* default value of RAM mode base addr */
-+#define AW86224_RAM_BASE_ADDR			0x800
-+#define AW86224_RAM_BASE_ADDR_H			(AW86224_RAM_BASE_ADDR >> 8)
-+#define AW86224_RAM_BASE_ADDR_L			(AW86224_RAM_BASE_ADDR & 0xff)
-+
-+enum aw86224_work_mode {
-+	AW86224_STANDBY_MODE,
-+	AW86224_RAM_MODE,
-+};
-+
-+struct aw86224_data {
-+	struct work_struct play_work;
-+	struct device *dev;
-+	struct input_dev *input_dev;
-+	struct i2c_client *client;
-+	struct regmap *regmap;
-+	struct gpio_desc *reset_gpio;
-+	u16 level;
-+	bool running;
-+	bool suspend;
-+};
-+
-+static const struct regmap_range aw86224_volatile_registers[] = {
-+	regmap_reg_range(AW86224_SYSINT_REG, AW86224_SYSINT_REG),
-+	regmap_reg_range(AW86224_GLBRD5_REG, AW86224_GLBRD5_REG),
-+	regmap_reg_range(AW86224_RAMDATA_REG, AW86224_RAMDATA_REG),
-+};
-+
-+static const struct regmap_access_table aw86224_volatile_table = {
-+	.yes_ranges = aw86224_volatile_registers,
-+	.n_yes_ranges = ARRAY_SIZE(aw86224_volatile_registers),
-+};
-+
-+static const struct reg_default aw86224_regmap_defs[] = {
-+	{ AW86224_PLAYCFG2_REG,		0x80 },
-+	{ AW86224_PLAYCFG3_REG,		0x04 },
-+	{ AW86224_PLAYCFG4_REG,		0x00 },
-+	{ AW86224_WAVCFG9_REG,		0x00 },
-+	{ AW86224_RAMADDRH_REG,		0x00 },
-+	{ AW86224_RAMADDRL_REG,		0x00 },
-+	{ AW86224_SYSCTRL1_REG,		0x04 },
-+	{ AW86224_SYSCTRL2_REG,		0x28 },
-+	{ AW86224_SYSCTRL7_REG,		0x14 },
-+};
-+
-+static const struct regmap_config aw86224_regmap_config = {
-+	.reg_bits = 8,
-+	.val_bits = 8,
-+	.max_register = 0x80,
-+	.cache_type = REGCACHE_MAPLE,
-+	.reg_defaults = aw86224_regmap_defs,
-+	.num_reg_defaults = ARRAY_SIZE(aw86224_regmap_defs),
-+	.volatile_table = &aw86224_volatile_table,
-+};
-+
-+/*
-+ * Sine wave representing the magnitude of the drive to be used.
-+ * Data is encoded in two's complement.
-+ *   round(84 * sin(x / 16.25))
-+ */
-+static const u8 aw86224_waveform[] = {
-+	0x00, 0x05, 0x0a, 0x0f, 0x14, 0x1a, 0x1f, 0x23, 0x28, 0x2d, 0x31, 0x35,
-+	0x39, 0x3d, 0x41, 0x44, 0x47, 0x4a, 0x4c, 0x4f, 0x51, 0x52, 0x53, 0x54,
-+	0x55, 0x55, 0x55, 0x55, 0x55, 0x54, 0x52, 0x51, 0x4f, 0x4d, 0x4a, 0x47,
-+	0x44, 0x41, 0x3d, 0x3a, 0x36, 0x31, 0x2d, 0x28, 0x24, 0x1f, 0x1a, 0x15,
-+	0x10, 0x0a, 0x05, 0x00, 0xfc, 0xf6, 0xf1, 0xec, 0xe7, 0xe2, 0xdd, 0xd8,
-+	0xd4, 0xcf, 0xcb, 0xc7, 0xc3, 0xbf, 0xbc, 0xb9, 0xb6, 0xb4, 0xb1, 0xb0,
-+	0xae, 0xad, 0xac, 0xab, 0xab, 0xab, 0xab, 0xab, 0xac, 0xae, 0xaf, 0xb1,
-+	0xb3, 0xb6, 0xb8, 0xbc, 0xbf, 0xc2, 0xc6, 0xca, 0xce, 0xd3, 0xd7, 0xdc,
-+	0xe1, 0xe6, 0xeb, 0xf0, 0xf5, 0xfb
-+};
-+
-+struct aw86224_sram_waveform_header {
-+	u8 version;
-+	__be16 start_address;
-+	__be16 end_address;
-+} __packed;
-+
-+static const struct aw86224_sram_waveform_header sram_waveform_header = {
-+	.version = 0x01,
-+	.start_address = cpu_to_be16(AW86224_RAM_BASE_ADDR +
-+			sizeof(struct aw86224_sram_waveform_header)),
-+	.end_address = cpu_to_be16(AW86224_RAM_BASE_ADDR +
-+			sizeof(struct aw86224_sram_waveform_header) +
-+			ARRAY_SIZE(aw86224_waveform) - 1),
-+};
-+
-+static int aw86224_wait_enter_standby(struct aw86224_data *haptics)
-+{
-+	unsigned int reg_val;
-+	int err;
-+
-+	err = regmap_read_poll_timeout(haptics->regmap, AW86224_GLBRD5_REG, reg_val,
-+				       (FIELD_GET(AW86224_GLBRD5_STATE, reg_val) ==
-+				       AW86224_GLBRD5_STATE_STANDBY),
-+				       2500, 2500 * 100);
-+	if (err) {
-+		dev_err(haptics->dev, "did not enter standby: %d\n", err);
-+		return err;
-+	}
-+
-+	return 0;
-+}
-+
-+static int aw86224_play_mode(struct aw86224_data *haptics, u8 play_mode)
-+{
-+	int err;
-+
-+	switch (play_mode) {
-+	case AW86224_STANDBY_MODE:
-+		/* Briefly toggle standby, then toggle back to standby off */
-+		err = regmap_set_bits(haptics->regmap,
-+				      AW86224_SYSCTRL2_REG,
-+				      AW86224_SYSCTRL2_STANDBY);
-+		if (err)
-+			return err;
-+
-+		err = regmap_clear_bits(haptics->regmap,
-+					AW86224_SYSCTRL2_REG,
-+					AW86224_SYSCTRL2_STANDBY);
-+		if (err)
-+			return err;
-+
-+		break;
-+
-+	case AW86224_RAM_MODE:
-+		err = regmap_update_bits(haptics->regmap,
-+					 AW86224_PLAYCFG3_REG,
-+					 AW86224_PLAYCFG3_PLAY_MODE,
-+					 FIELD_PREP(AW86224_PLAYCFG3_PLAY_MODE,
-+						    AW86224_PLAYCFG3_PLAY_MODE_RAM));
-+		if (err)
-+			return err;
-+
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
-+static int aw86224_stop(struct aw86224_data *haptics)
-+{
-+	int err;
-+
-+	err = regmap_write(haptics->regmap, AW86224_PLAYCFG4_REG, AW86224_PLAYCFG4_STOP);
-+	if (err) {
-+		dev_err(haptics->dev, "Failed to stop playback: %d\n", err);
-+		return err;
-+	}
-+
-+	err = aw86224_wait_enter_standby(haptics);
-+	if (err) {
-+		dev_err(haptics->dev, "Failed to enter standby, trying to force it\n");
-+		err = aw86224_play_mode(haptics, AW86224_STANDBY_MODE);
-+		if (err)
-+			return err;
-+	}
-+
-+	haptics->running = false;
-+
-+	return 0;
-+}
-+
-+static int aw86224_haptics_play(struct input_dev *dev, void *data, struct ff_effect *effect)
-+{
-+	struct aw86224_data *haptics = input_get_drvdata(dev);
-+	int level;
-+
-+	level = effect->u.rumble.strong_magnitude;
-+	if (!level)
-+		level = effect->u.rumble.weak_magnitude;
-+
-+	haptics->level = level;
-+
-+	schedule_work(&haptics->play_work);
-+
-+	return 0;
-+}
-+
-+static int aw86224_update_gain(struct aw86224_data *haptics)
-+{
-+	return regmap_write(haptics->regmap,
-+			    AW86224_PLAYCFG2_REG,
-+			    haptics->level * AW86224_PLAYCFG2_GAIN_MAX / USHRT_MAX);
-+}
-+
-+static int aw86224_play_sine(struct aw86224_data *haptics)
-+{
-+	int err;
-+
-+	err = aw86224_play_mode(haptics, AW86224_RAM_MODE);
-+	if (err)
-+		return err;
-+
-+	err = regmap_update_bits(haptics->regmap,
-+				 AW86224_WAVCFG9_REG,
-+				 AW86224_WAVCFG9_SEQ1LOOP,
-+				 FIELD_PREP(AW86224_WAVCFG9_SEQ1LOOP,
-+					    AW86224_WAVCFG9_SEQ1LOOP_INFINITELY));
-+	if (err)
-+		return err;
-+
-+	err = aw86224_update_gain(haptics);
-+	if (err)
-+		return err;
-+
-+	err = regmap_write(haptics->regmap, AW86224_PLAYCFG4_REG, AW86224_PLAYCFG4_GO);
-+	if (err)
-+		return err;
-+
-+	haptics->running = true;
-+
-+	return 0;
-+}
-+
-+static void aw86224_close(struct input_dev *input)
-+{
-+	struct aw86224_data *haptics = input_get_drvdata(input);
-+	struct device *dev = &haptics->client->dev;
-+	int err;
-+
-+	cancel_work_sync(&haptics->play_work);
-+
-+	err = aw86224_stop(haptics);
-+	if (err)
-+		dev_err(dev, "Failed to close the Driver: %d\n", err);
-+}
-+
-+static void aw86224_haptics_play_work(struct work_struct *work)
-+{
-+	struct aw86224_data *haptics =
-+		container_of(work, struct aw86224_data, play_work);
-+	struct device *dev = &haptics->client->dev;
-+	int err;
-+
-+	if (haptics->level)
-+		if (!haptics->running)
-+			err = aw86224_play_sine(haptics);
-+		else
-+			err = aw86224_update_gain(haptics);
-+	else
-+		err = aw86224_stop(haptics);
-+
-+	if (err)
-+		dev_err(dev, "Failed to execute work command: %d\n", err);
-+}
-+
-+static void aw86224_hw_reset(struct aw86224_data *haptics)
-+{
-+	/* Assert reset */
-+	gpiod_set_value_cansleep(haptics->reset_gpio, 1);
-+	/* Wait ~1ms */
-+	usleep_range(1000, 2000);
-+	/* Deassert reset */
-+	gpiod_set_value_cansleep(haptics->reset_gpio, 0);
-+	/* Wait ~8ms until I2C is accessible */
-+	usleep_range(8000, 8500);
-+}
-+
-+static int aw86224_haptic_init(struct aw86224_data *haptics)
-+{
-+	int err;
-+
-+	err = regmap_set_bits(haptics->regmap,
-+			      AW86224_SYSCTRL7_REG,
-+			      AW86224_SYSCTRL7_GAIN_BYPASS);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static int aw86224_ram_init(struct aw86224_data *haptics)
-+{
-+	int err;
-+
-+	err = aw86224_wait_enter_standby(haptics);
-+	if (err)
-+		return err;
-+
-+	err = regmap_set_bits(haptics->regmap,
-+			      AW86224_SYSCTRL1_REG,
-+			      AW86224_SYSCTRL1_EN_RAMINIT);
-+	if (err)
-+		return err;
-+
-+	/* AW86224 wants a 1ms delay here */
-+	usleep_range(1000, 1500);
-+
-+	/* Set start of SRAM, before the data is written it will be the same as the base */
-+	err = regmap_update_bits(haptics->regmap,
-+				 AW86224_RAMADDRH_REG,
-+				 AW86224_RAMADDRH_MASK,
-+				 FIELD_PREP(AW86224_RAMADDRH_MASK,
-+					    AW86224_RAM_BASE_ADDR_H));
-+	if (err)
-+		return err;
-+
-+	err = regmap_write(haptics->regmap,
-+			   AW86224_RAMADDRL_REG, AW86224_RAM_BASE_ADDR_L);
-+	if (err)
-+		return err;
-+
-+	/* Write waveform header to SRAM */
-+	err = regmap_noinc_write(haptics->regmap, AW86224_RAMDATA_REG,
-+				 &sram_waveform_header, sizeof(sram_waveform_header));
-+	if (err)
-+		return err;
-+
-+	/* Write waveform to SRAM */
-+	err = regmap_noinc_write(haptics->regmap, AW86224_RAMDATA_REG,
-+				 aw86224_waveform, ARRAY_SIZE(aw86224_waveform));
-+	if (err)
-+		return err;
-+
-+	/* Disable SRAM init */
-+	err = regmap_clear_bits(haptics->regmap,
-+				AW86224_SYSCTRL1_REG,
-+				AW86224_SYSCTRL1_EN_RAMINIT);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static irqreturn_t aw86224_irq(int irq, void *data)
-+{
-+	struct aw86224_data *haptics = data;
-+	struct device *dev = &haptics->client->dev;
-+	unsigned int reg_val;
-+	int err;
-+
-+	err = regmap_read(haptics->regmap, AW86224_SYSINT_REG, &reg_val);
-+	if (err) {
-+		dev_err(dev, "Failed to read SYSINT register: %d\n", err);
-+		return IRQ_NONE;
-+	}
-+
-+	if (reg_val & AW86224_SYSINT_UVLI)
-+		dev_err(dev, "Received an Under Voltage Lock Out interrupt\n");
-+	if (reg_val & AW86224_SYSINT_OCDI)
-+		dev_err(dev, "Received an Over Current interrupt\n");
-+	if (reg_val & AW86224_SYSINT_OTI)
-+		dev_err(dev, "Received an Over Temperature interrupt\n");
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static int aw86224_detect(struct aw86224_data *haptics)
-+{
-+	unsigned int chip_id;
-+	int err;
-+
-+	err = regmap_read(haptics->regmap, AW86224_CHIPID_REG, &chip_id);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to read CHIPID register\n");
-+
-+	if ((chip_id & AW86224_CHIPID_H) != AW86224_CHIPID_H_AW8622X) {
-+		dev_err(haptics->dev, "Unexpected CHIPID value: 0x%x\n", chip_id);
-+		return -ENODEV;
-+	}
-+
-+	return 0;
-+}
-+
-+static int aw86224_probe(struct i2c_client *client)
-+{
-+	struct aw86224_data *haptics;
-+	int err;
-+
-+	haptics = devm_kzalloc(&client->dev, sizeof(struct aw86224_data), GFP_KERNEL);
-+	if (!haptics)
-+		return -ENOMEM;
-+
-+	haptics->dev = &client->dev;
-+	haptics->client = client;
-+
-+	i2c_set_clientdata(client, haptics);
-+
-+	haptics->regmap = devm_regmap_init_i2c(client, &aw86224_regmap_config);
-+	if (IS_ERR(haptics->regmap))
-+		return dev_err_probe(haptics->dev, PTR_ERR(haptics->regmap),
-+				     "Failed to allocate register map\n");
-+
-+	haptics->input_dev = devm_input_allocate_device(haptics->dev);
-+	if (!haptics->input_dev)
-+		return -ENOMEM;
-+
-+	haptics->reset_gpio = devm_gpiod_get(haptics->dev, "reset", GPIOD_OUT_HIGH);
-+	if (IS_ERR(haptics->reset_gpio))
-+		return dev_err_probe(haptics->dev, PTR_ERR(haptics->reset_gpio),
-+				     "Failed to get reset gpio\n");
-+
-+	/* Hardware reset */
-+	aw86224_hw_reset(haptics);
-+
-+	/* Software reset */
-+	err = regmap_write(haptics->regmap, AW86224_RSTCFG_REG, AW86224_RSTCFG_SOFTRST);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err,	"Failed Software reset\n");
-+
-+	/* Wait ~3ms until I2C is accessible */
-+	usleep_range(3000, 3500);
-+
-+	err = aw86224_detect(haptics);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to find chip\n");
-+
-+	/* Disable FF_AE, FF_AF, DONE interrupts */
-+	err = regmap_write(haptics->regmap,
-+			   AW86224_SYSINTM_REG,
-+			   AW86224_SYSINTM_FF_AEM |
-+			   AW86224_SYSINTM_FF_AFM |
-+			   AW86224_SYSINTM_DONEM);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to configure interrupt masks\n");
-+
-+	err = devm_request_threaded_irq(haptics->dev, client->irq, NULL,
-+					aw86224_irq, IRQF_ONESHOT, NULL, haptics);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to request threaded irq\n");
-+
-+	INIT_WORK(&haptics->play_work, aw86224_haptics_play_work);
-+
-+	haptics->input_dev->name = "aw86224-haptics";
-+	haptics->input_dev->close = aw86224_close;
-+
-+	input_set_drvdata(haptics->input_dev, haptics);
-+	input_set_capability(haptics->input_dev, EV_FF, FF_RUMBLE);
-+
-+	err = input_ff_create_memless(haptics->input_dev, NULL, aw86224_haptics_play);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to create FF dev\n");
-+
-+	/* Set up registers */
-+	err = aw86224_play_mode(haptics, AW86224_STANDBY_MODE);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err,
-+				     "Failed to enter standby for Haptic init\n");
-+
-+	err = aw86224_haptic_init(haptics);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Haptic init failed\n");
-+
-+	/* RAM init, upload the waveform for playback */
-+	err = aw86224_ram_init(haptics);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to init sram\n");
-+
-+	err = input_register_device(haptics->input_dev);
-+	if (err)
-+		return dev_err_probe(haptics->dev, err, "Failed to register input device\n");
-+
-+	return 0;
-+}
-+
-+static int aw86224_suspend(struct device *dev)
-+{
-+	struct aw86224_data *haptics = dev_get_drvdata(dev);
-+
-+	if (haptics->suspend)
-+		return 0;
-+
-+	disable_work_sync(&haptics->play_work);
-+	aw86224_stop(haptics);
-+	haptics->suspend = true;
-+
-+	return 0;
-+}
-+
-+static int aw86224_resume(struct device *dev)
-+{
-+	struct aw86224_data *haptics = dev_get_drvdata(dev);
-+
-+	if (!haptics->suspend)
-+		return 0;
-+
-+	haptics->suspend = false;
-+	enable_work(&haptics->play_work);
-+
-+	return 0;
-+}
-+
-+static DEFINE_SIMPLE_DEV_PM_OPS(aw86224_pm_ops,
-+				aw86224_suspend,
-+				aw86224_resume);
-+
-+static const struct of_device_id aw86224_of_id[] = {
-+	{ .compatible = "awinic,aw86224" },
-+	{ /* sentinel */ }
-+};
-+
-+MODULE_DEVICE_TABLE(of, aw86224_of_id);
-+
-+static struct i2c_driver aw86224_driver = {
-+	.driver = {
-+		.name = "aw86224-haptics",
-+		.pm   = pm_sleep_ptr(&aw86224_pm_ops),
-+		.of_match_table = aw86224_of_id,
-+	},
-+	.probe = aw86224_probe,
-+};
-+
-+module_i2c_driver(aw86224_driver);
-+
-+MODULE_AUTHOR("Gergo Koteles <soyer@irl.hu>");
-+MODULE_DESCRIPTION("AWINIC AW86224 LRA Haptic Driver");
-+MODULE_LICENSE("GPL");
--- 
-2.56.0
+On 10/28/2026 2:58 AM, Bryan O'Donoghue wrote:
+> On 28/10/2026 05:20, Anusha Arun Nandi wrote:
+>> -    if (ret < 0 || csi2phy->pd_list == NULL) {
+>> -        if (ret == 0)
+>> -            ret = -ENODEV;
+>> +    if (ret < 0)
+>>           return dev_err_probe(dev, ret, "Failed to attach power-
+>> domain list\n");
+>> -    }
+> 
+> Shouldn't this be
+> 
+> if (ret < 0 || ( csi2phy->soc_cfg->num_genpds > 1 && csi2phy->pd_list ==
+> NULL) {
+> 
+> i.e. you are dropping the NULL check for the case of multiple power-
+> domains.
+> 
+> ---
+> bod
 
