@@ -1,93 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.51
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793209874;
-	b=rta/CkUUwSegq7yduyczXD447o3edY+r0vdGEzS4j2GMREolTZHwWJNTkX89R4nRnIKW
-	 3cFH1yq99HFHPTE72F5IP3228RINnpjUHCaJZ3o+bSwD/OduTJNUBpWcrj+Jjj8UOD1EG
-	 zEYB6QwKowho/8BYetU8ilAdhoh/zohv+PanSPMTY7ZWJwGaHFSabD/poUCRkbKJzNGvj
-	 Z9Ud00BpRp/2RAsmeG6QFHQizOKSGlrHOWDh2pjxwDNDt9KxIg8bucSGC48ItXJpVNelz
-	 DKzw3LGz2dmdCKI9asRtQ51/q6BDV3F/I5T+TRUNiP/Sz3dzTwCGmmY68/8HhaLlVMA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793209874;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=v43fYjL5X0v05WZ0mlxoCxASofy9eK+d0SvMy+pQcbs=;
-	b=qktZ2tjbjcfL0Z0T5J5Jjoj2sLx6l8pYwuIfQM6tohSCE0gK2dY5re1ozZGbEePSHZEN
-	 oIVC7pusOEmJjaPcqABqXjREs1IYRgpSEarqEsFsYNspiVhlGRU0Q5V+7Gl/dz61US888
-	 VDM4E20jH/uysb444jW/xLj3nM0axGK9UgnHrD62+bifnBn9g8CTTvXxuhoNerKgcozXT
-	 MDaEMbvaTYwgi5c0pd/Ma5ZZaIIIXTGfzyFZl7GHABSO17FTPhRx4Qf2aAX19UtMIhzYd
-	 7NGuwU8bFNGVI5JDzUNmJfzIh5xyiJZrBJQFYbmWO+cZh7qTvjjW9v1Jlg0gA100y3A==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qhU6RbdQ;
-	arc=none smtp.remote-ip=209.85.218.51
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.66.25
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793210010;
+	b=hPYAVG44g1jAJz8k2gcy7w8VtXGBx9KgSFl5CBv4Zza11NHS4buofX3IATATx/FmESsm
+	 Y0d5S1Mh/tz0e7eNHVhWLo3eUkXvRzA/WajRYKyOFuSXkWD7El0GxGG5yJon9fpmLAmv/
+	 szszEeFBo/S+5Rq+SL/hS1SQkmG2qGfGiaMpdIsxNZj01x2+LgGznYKP0c6BqocCcSb4b
+	 5QFpQfz3YMIVvMd7RT/Bs90dBJr0EooRnCLgaNbwsgD0xtF6uWP9W2wOgRYm5IJJqy2QA
+	 V5R/E3r5k5UwoHgUSv8x38Rk+Zk2fo0lU40s5UMpK9OrdY3xh+eyrV7q9tXJWdvUf9Q==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793210010;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Message-ID:Date:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
+	 X-Microsoft-Original-Message-ID:MIME-Version:
+	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=m4hzMB1si+6blEe2VXoDa81ATnUMHdu3V+j4DDJl1Zg=;
+	b=bSQGfgBW4m4P5uBP+hIMtoUZTBJNh/77I5bPzXiAkD0Dxb2Idhvm+MzKYTKmanf3C3YN
+	 ugT5lAIlS02m70ISiAri+U2SCu5snlfN8XFyTvdOGs+12orLO5xCxmIgQJrQCTZpiAcn7
+	 lNMogRYIrv+JFVGFD2wKAljnwxR8PoAv7RsYsqpj3R3Xj0EE8SSv11FccYyLcDuJGWpid
+	 E5gZDtd+2KC2U7BmcKfBFfjzBfXflPy2WDmjMesgk8xbLvPms/SNATtOxttUu4P+wQjrQ
+	 GrxwXsPfbkB8rEtVj/Ob+x6QSsZhsMqWthtIHHaDZKP/Nxlk7aLt3+83N+mWhrcbTlQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=outlook.com;
+	spf=pass smtp.mailfrom=outlook.com;
+	dkim=pass header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256 header.s=selector1 header.b=Q0pI7Jua;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.66.25
+Received: from OS0P286CU010.outbound.protection.outlook.com (mail-japanwestazolkn19011025.outbound.protection.outlook.com [52.103.66.25])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF4A9606A31C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 17:51:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BF4A9606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3560606A31D;
+	Wed, 28 Oct 2026 17:53:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D3560606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qhU6RbdQ
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c38ac26cc5dso198129266b.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 10:51:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793209872; x=1793814672; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=v43fYjL5X0v05WZ0mlxoCxASofy9eK+d0SvMy+pQcbs=;
-        b=qhU6RbdQJAKZPYeaKCVijSIJGr9OuX/EQ0LJd6gSPl4nqmSzwKLostYWUbNFO0Xe2z
-         tMBsjg6I1v2SZwHy0QWmmfmlYZ+sEaHwJzcAS3/e67krUJbK5K+QWJakBQ4DhXb4CYuh
-         iPkRz872v6VXDIoDRZMVkmK0IgZQy5u+jgsC5kDPWdqKbdbHuBqI8AyZ3oevfOJsalSJ
-         6xEB5Pe1apDN8IklvF9Td2mTFGx40/ZQFYc0grt+s3HF0rLtqFb2c8i+TwHiU9GQw6px
-         iLXz+ssw38/M7jHsGfUvDzxNIoiO8Xse/6mk65QPO7YwLMV3H3XD0ivjYjua1h3Z1cU4
-         oJOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793209872; x=1793814672;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=v43fYjL5X0v05WZ0mlxoCxASofy9eK+d0SvMy+pQcbs=;
-        b=sJvtctIu/y1aLs7pLDGGbPbzx6iJGdaD+TINSPW57Nt50OiY4QNiC0cjQ2bYpXYw1W
-         scZAr91YaoujCEdrbMwEeCz72hFOvZrh308EYgDFs51kCJTjS7hVD3dbWi5ivTro8s4q
-         WU+C2SAH2tcIgEFGfRdksJOo5TIpuYY9KthGzs8M+EcKlOQsU91d0GajA/DjVo9oxh4x
-         mmrTNOYw/74Ce1hgrTaY39dZqMFFrlQodzcEMWDad5kZcJKhZ+99McAYZGC0JblGUZIi
-         WNxiyraBLi7zk5PyelpCO05hDE8Ok/ubpl0eW8IKVBCayamhUM7eWuPRyYOUWEE82vwZ
-         AX+A==
-X-Forwarded-Encrypted: i=1; AKwUvBwZu/kL4SeEAWcfP5s32hfr1xkwVfBAlVZ03sCsfrC3VFXSYOg+IcAMORkm0i9RvEGkuAdsz/O5Hnh/Vn+u@vger.kernel.org
-X-Gm-Message-State: AFq9FYIa4NwpjeELt1Hvqg+IHl3ZxV4OyDpowENcHcuN5u3Uq1XLHQN+
-	e3l+kmlwZQ3XuxuoZNAzMnSFBj8gxqQf4GEZ01AHD6cZpOo9WjhuoG5/VTMt0FGO
-X-Gm-Gg: AYBFou2LSwfivQMKzyPOkRdBOfehcu3nhKy4vrUSrEJ6HsA0XlmxntkUKlEmOiAChe+
-	pSjulvkj+CurlLkRzoiyRQaBQmXjfU8hVTsTLAAzabpCA9Uxp5U85TBymIK4TO2ImL1F4A8mTK2
-	+l7t8fy+1S1n3qtAygdBw9VC4RbkcmEgL7fGsMiNAKCQ6txsEWMkTFESjjFdm69b6XQiSktm1LM
-	Vzf6U72UqxHKVfw+fZxOSljiRRs0bgIsKr1zxYeEanVcPZtz4hcUMvH5Ednj7I7AvVWEbnJQUTe
-	z9VM6BViSHga+QB6tY3uP+iFbG6M5I5igIHgCwdGTUndcUitFd4Q2iLB1YdfNHw2lhVuXEBacG+
-	D4trlucmvenSwj5yCx3oZqdaYkR427t07PUDhqeIp6N24OzqxQIsmhL/cb2Dt78dVSIgTzb4H4c
-	J2ST69EMq2GLczYMPSjkFjtafiOBEZgrnb7eH69ZKZ8clX6JrPnsqM0yAc6fvWqig1jOF6LAH9P
-	BRM7zTkN7v5Rskh5o/keuuaaBe10xu0kn9Ot9WY43td/lcEHlIJWxvq9mEBuzSNo0w3cTZXnsA2
-	/Hn+SVejhPchS0RNeu+9xFnovctLJGkhlL60YOcPHofRBeNC2MXB1LfnpC7CLjHDc0yIKgfqBs1
-	HBseRYWrR7H/slg==
-X-Received: by 2002:a17:907:d516:b0:c25:2688:8212 with SMTP id a640c23a62f3a-c49bd9ce44dmr320000866b.0.1793209871794;
-        Wed, 28 Oct 2026 10:51:11 -0700 (PDT)
-Received: from cachyos-x8664 (2a02-a44f-6bd8-0-365-d763-c748-da6c.fixed6.kpn.net. [2a02:a44f:6bd8:0:365:d763:c748:da6c])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd4e9995sm629906566b.15.2026.10.28.10.51.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 10:51:11 -0700 (PDT)
-From: Senna <sennas1633@gmail.com>
-X-Google-Original-From: Senna <Sennas1633@gmail.com>
-To: mhi@lists.linux.dev
-Cc: mani@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Senna <Sennas1633@gmail.com>
-Subject: [PATCH] bus: mhi: ep: aggregate raw buffer completions
-Date: Wed, 28 Oct 2026 18:51:00 +0100
-Message-ID: <20261028175100.83406-1-Sennas1633@gmail.com>
-X-Mailer: git-send-email 2.56.0
+	dkim=pass (2048-bit key, unprotected) header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256 header.s=selector1 header.b=Q0pI7Jua
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kjnDgkXGFxMGuxV1A3VRVlLAd47fAzJOXcMRKBeE1115IOXSkm3h+KPG1njZlkEM/MImDel/nA+IF9Yi5f8aVWUfUrlqnWueTVCnNF1tUhvMlYzUFlcRHvAHRg/v3P/rHKUjRO3zuVfGw5aH/1vDXxLN/RgVICLkoMq/vkrkzTU/DvSyXmccQj//jw/8Hd53jrRKJ4iLSWZ5/pv2NRIBrmZuspfLbFOdiqSxv2z1PF5bFen+zJLJcUy5dj6M5qgP33tZVBMXiFJOdX7++IJlyoje43svUJ3z1fAcX0FFgN5n0obnUOKx1bnOnBDk3CeEO+wzkqfhDZHMF5Qk7RlfLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=m4hzMB1si+6blEe2VXoDa81ATnUMHdu3V+j4DDJl1Zg=;
+ b=AQuugZvXtIqLqzMORFypstr3s2N7+h06phs01nfQQEAeCbQQ+Lv6JUJ8v5JqPkGxC0LKimIsmtmoA2mXaQhmGRe9UDx6TwoWlfpeV9k47qt62NmzNgRBXZAMG4SvOMYUC6n4CSXjt+aLnrNzmyvl8O+wW0xJWidAi8bo967KCTpFzRNEZXEdSb/xCu3lMoLHbmCz7ExnEfivwMaIN1GV3YlQB3JXIJmcAQ1+wJQ8EcjxBxVLb6a7mCEselUJ0sUV8lhV0VjYg5i8lsd4mHGJwGK2068TwZ6CSKDBm+jcjyQAPbU8NJ1WdW3ikLtTF4FKi+zeg5ijvJgqfQLZzaWYNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=m4hzMB1si+6blEe2VXoDa81ATnUMHdu3V+j4DDJl1Zg=;
+ b=Q0pI7Jua4C7J/lcMApzXyuHkZi+RAAbWQBoadayd+m0pASPN4VvB2x6dU6K5agNCtb/SnEzBQV+LkTLXpfGfn3q/rmIcWl2owJLcpp374BiEqssimjy+Wao8QVmujnZyxsnNmL87ZTn0N+bYlQ4P300IpipVbeTugRAnpZm9YYZFLfedS24auf6+8BoxAP2HV3n0g9bwIrdE3Sd5MEpSogcL9XP/2zzXVIpfIXOEtL0W9SsGNlVlTCOl6jw4fmnrYONB2OoTbymxfhvY/Rlb05FotSqq2kZwxX/so7toJliTOWPluxBlyUXmcVQQsVmQogY7i+o9wU3E8uFnWEgx3w==
+Received: from TY4PR01MB14006.jpnprd01.prod.outlook.com (2603:1096:405:207::7)
+ by OSZPR01MB8153.jpnprd01.prod.outlook.com (2603:1096:604:164::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Wed, 28 Oct
+ 2026 17:53:24 +0000
+Received: from TY4PR01MB14006.jpnprd01.prod.outlook.com
+ ([fe80::dc34:4880:849e:e4bd]) by TY4PR01MB14006.jpnprd01.prod.outlook.com
+ ([fe80::dc34:4880:849e:e4bd%6]) with mapi id 15.21.0569.007; Wed, 28 Oct 2026
+ 17:53:24 +0000
+Message-ID:
+ <TY4PR01MB140065214AE2B04B2A7D9235BA66F2@TY4PR01MB14006.jpnprd01.prod.outlook.com>
+Date: Thu, 29 Oct 2026 04:53:19 +1100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFT 0/5] drm/msm: Attach a driver to GMU
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+ Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20260513-gmu-sync-state-fix-v1-0-6e33e6aa9b4f@oss.qualcomm.com>
+Content-Language: en-US
+From: Akisaira <akisaira@outlook.com>
+In-Reply-To: <20260513-gmu-sync-state-fix-v1-0-6e33e6aa9b4f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SY5P282CA0066.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:203::11) To TY4PR01MB14006.jpnprd01.prod.outlook.com
+ (2603:1096:405:207::7)
+X-Microsoft-Original-Message-ID:
+ <f87e4d81-2b44-4c05-a4ec-93d985d6de1d@outlook.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -97,288 +104,114 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY4PR01MB14006:EE_|OSZPR01MB8153:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9858ef7c-f928-42c2-62f7-08df351c5c4c
+X-Microsoft-Antispam:
+	BCL:0;ARA:14566002|24071999003|19110799012|5072599009|6090799003|15080799012|23021999003|24121999003|25031999004|39105399006|22091999003|8060799015|20031999006|24021099003|25010399006|4140399003|3412199025|440099028|12091999003|25131999003|40105399003|41105399003;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TS9hOEVsSkMyMk1zT1B3aVZhUlN0YlYxelNYV0lGZUQ2enlzYm9YK1h0d3pM?=
+ =?utf-8?B?K1Vjdi9ZYWJENFYvZUZnTU9iU0FLUUd4KzMzUmZabzE1SjFmQjVNYlhOVmVh?=
+ =?utf-8?B?TlJPNzEvb3NqL29nNTVqOWhaM0xsaUlnMHNjenNWZkFFRFUzdU1GTkVTNG4v?=
+ =?utf-8?B?cEJNTG5PVmZ2SEVxVWc2V0owbFpTVHdhOWRPMVlmclorUGMwcHBSLzdQc3Rx?=
+ =?utf-8?B?TmpUN05OSEdkZzVmMHRhUEpQWjVYUEVnbks1UzhBalhFbGpCQ0RwenlueUhE?=
+ =?utf-8?B?c1oyQmt3dklXVGlUc0w2SEJEWjRHR3VFK3B6TVZDb1JGRWNGVzVHeExHUVRw?=
+ =?utf-8?B?dWo3V0ZVanJvckR5OHNBUm1sY1lkNEpZN0k3SXZiS2YySlUyQytEV1crYVNH?=
+ =?utf-8?B?QlQxWDNWelVJMlJ2bjY5SUR1VWR5Y3pQRW5Eb2NvdWJGS0RLNm9ud2loYkJn?=
+ =?utf-8?B?b3JFbGpyR2xWWGVKQzNKUUN5ZXdraWFscEc4a01UQ0lXR3k5bXErdHRuODFU?=
+ =?utf-8?B?cFhWQjF5V2Jhci9SbnVrZ1YwSlJNcXhPL0Qyam9NTi8zWVlnV2o0SVg0VnBk?=
+ =?utf-8?B?WFgwV002Sm1nZTBSY1lUV3FweWg4VVhrcnlmcVVpNEdWbFl2RjVtV3gxaC9W?=
+ =?utf-8?B?U1JhbEN2R1I4MlNuSmlML2hZQi9UbXlDTVBMVWp4RUpLUW1VcUJsb09wbGFP?=
+ =?utf-8?B?bHdGdDBZK2VXVGc0RWtDTDcxWlU1a1NaZGt3WXFoL0hFQWtlY1Nyb0xiZWFs?=
+ =?utf-8?B?MFVOTU9aVXozNkFPd2ZIMzV1b3lyS2NqVVdNZjAxbGw3NHV5Q1lsQlZMUVB0?=
+ =?utf-8?B?QUxhVVNodVdXTnUwRXZJN0h1cUorc0svK21VaUQrRUw5VkZGUWRNand5R0Q2?=
+ =?utf-8?B?c2gxUE1mN3ZxY1NERmFKRkpURHErZ0w2Q1pGL3lsZ2VhWENxclhZTFBwbHpw?=
+ =?utf-8?B?WjRFZTlBQVQrTmpWbXpVSXBUUUQxVzZGWWloazZaRjR5YkJVdG5lYlNVdHhD?=
+ =?utf-8?B?dlJQdjlGdDZieU9nZzlGelhLQWIxbjcwRjBwbHRmaU5LUzhsN3ZPZ2NVMVha?=
+ =?utf-8?B?cGRIVXlVTzllTWswU045ZVNhOEhTZHJWVjF6UmI5RlV2UHc2bGRnRjRlSmRL?=
+ =?utf-8?B?RnBrUlh6R0c0bEZlOFFDcXVKcXFhdTZ3QzdodWJOVkRJMjREWDJ2UW96S1Vs?=
+ =?utf-8?B?YTdOQ0hLaWNwN2VUM3VidlZiQ0dWOGFFS2FQb2pOeUVTRjd4V0hubUl5Rll3?=
+ =?utf-8?B?OGRJb3JFeUFJbkR1NU1pSjZqSWJrV0ZPMjg1TmVKb2wvdm1TbkQ3NCt6WEFR?=
+ =?utf-8?B?MlNRdERVUUh5Z3hVeHJmMEJSaTNZNEFqSXVheXRrUWJUalE4aXJZNTdqMzFw?=
+ =?utf-8?B?ZCtuOUZLWFpsVHVtZjdvV3htcXVOMXI5dzNqN28vRGxyRXlYcUZzamhtWitI?=
+ =?utf-8?B?VEVMd2F3Rzl6b3pPT280TjFESml4anFCblZESHYvSmp5a0lvdTgwUEFyNTNO?=
+ =?utf-8?B?SGR4MkpZcmlHaUdVNzJNb1gralJkNFlsR2gxSFNHWFduWVlnYTdWZEc4VzZQ?=
+ =?utf-8?B?Y3dlQXVPWlFIQm1LS29RZVJ2MGhKQWlpWEVKZEo0SUxRUFNXUHVXRXltOXV5?=
+ =?utf-8?B?VUNEYS80VWRPbWVONXFKVnRQVHdsUnc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZGloZVEyRGJHUGs5U0IvdzBRSUUxeWIxdFBtanUxdkQ0ZVRiWkVzYjVXZTVj?=
+ =?utf-8?B?TTZSUVhCQjU1OFppK1dYelBKaTZoVExmdGY1dFo0VlVUUnRyN2RHYWEyS2hy?=
+ =?utf-8?B?eEtDZ2wwcGRkSEI5bWEyZHhWMEJUWThSNExWc3VZL3VZWVFIdG9jNUROdjRR?=
+ =?utf-8?B?VFh0SmZqVmtRV1JndE5VdHBHMHhzWjNhQ0VFamlua0tnTzFNM0hYOG5sTXR6?=
+ =?utf-8?B?Qk55MktTWmlrSS9ZV3VIRDhGN3NQeDhxQ3BTaUJ5S21kMHc0UXpHNktleHNp?=
+ =?utf-8?B?RXZudTVBTnlESXpoZkFpbStHTHI5SDFqUTBhdjlMT2xLcUkxT2daVU0rZXFP?=
+ =?utf-8?B?cWIvdDdyMmRmNk0xT0xUSEU1MElHNmZLUnZONWFVTXFqUHhCMHp3L3RUQk5q?=
+ =?utf-8?B?WGR1WkVMNXpqZi9FVXZtVXI1ckVCZWtPQUV4M0Vzd2hFQjE3TmJGVWtEajQx?=
+ =?utf-8?B?ZHErejlRSDhRakFwRkExS2QvWWFCa1RkaDl4M21HcUZaL0lYbnVGaTJwb2FP?=
+ =?utf-8?B?Ui9Bb1lXd0pyeEtzWUlxUVhPS1FWdGhQOXoyeGVuQ1A5R3p0cUZZTjJmYWhB?=
+ =?utf-8?B?a1hTeDFDZUJaZ3ZrK2ZscGVkaXVoQVIvaTlYRW02MTBMVVBBbU9HL3NHaURa?=
+ =?utf-8?B?REhzSVVRTWFPd3NmQUJnZ2NGckpmZDIvb2h4ZFlSVmFERDRGL3lpa3NhSGNH?=
+ =?utf-8?B?K284N1JWWkNseUZOVW10ejRHMDY5K05rcE82WFpjRm9NdFh2WTBHWndIcHhS?=
+ =?utf-8?B?TXdQMFpmaWlSb3k2SER0WC9VMUh2dWFNRFd3dFRLOGpZcFJTZ2c2UHlyYll2?=
+ =?utf-8?B?RGVTR3ZQd1hWQ1BMc3ZXMnJJWG9XNDE0aUdmR3ZzaXBoRG5FTFZIQnJpcTNz?=
+ =?utf-8?B?VVJxZHREL2hZMzhFRGtMSVJpV01Eb3p1UnljWXlzSnI4ckh4V2Nqc0kxUFJq?=
+ =?utf-8?B?SXBNTmxNWTMxVlBkRmJ1UWJnYys3Smo5L1VaY1FVak9xejFwTVBJUmhlYlUx?=
+ =?utf-8?B?UU53QlJkemtnTnZZUFY3RWdKV2J4SW5jcXZFN1paa3d1S1ZSZlF2SkRFZ0JK?=
+ =?utf-8?B?RExkQlVGWDlVUWFpSDd6NkRmTmhHMkNqU0RDbXRvYmVaa0xTYjhqTkxJVEVF?=
+ =?utf-8?B?QkVqVlFpeWpELzBjN0RUN3NzSEJvVjdjbUVDNlcrNjlYRXROckJtVVJDN0JZ?=
+ =?utf-8?B?UzJDbVNzT1loREZ1cXJlOGxNdjVEaUFHL0NWTmFrUWcvSThFbm9WSERoeDgr?=
+ =?utf-8?B?R09oL3VDR3FWYmxGV0dRUWtIMTU3c2lIYnBSTjhDSXJVTVVaVDJERkFmYkxl?=
+ =?utf-8?B?K211Tng5MjBPWUczRHNDREtqc3lUd2p5TWJtblBtV0M2UUJGVXJISWhyK2NY?=
+ =?utf-8?B?OUd1NUR3ZEdHNzRxRXUxQlc2UEkzc0dIQ3hLSXBtMlhxbG1obWZZTURQU3E1?=
+ =?utf-8?B?RlNoVy9hS1d6MUhlZ1d1L3hCMWJKUmlYOVUzbE9ld3hFQ2RGK25uaFNObHhy?=
+ =?utf-8?B?bGY0M04xeG5wTzVLYTRkbVpicG8xeVp5ckdOaEc5NU4zVXgyZE4rNnMvZndU?=
+ =?utf-8?B?ZVZJLzBYTXJWNmZPbndQRU83c3pCeXVxV3BlZjVEMXc0U29DNVBDRXhVSXdx?=
+ =?utf-8?B?WnlhUkFuVTZqNVlYT0o5d2F0bmhCSURha0d3d1V6R0FmQVJSZ1hEQkdyaXZw?=
+ =?utf-8?B?RXV6WFNvZFVsRjFpRTVPZGlRY1p4dTdibzhXRERrQTAzcDNWbkFkdTlOOXZZ?=
+ =?utf-8?B?UWhFVXc2cC9GR3hUeHZqTE0xQUE5Z0prTXV4TzFYbGZuVUxjWmljVldIeWdo?=
+ =?utf-8?B?ZFRXUjMraWEzRjRlNm9tY2l0SXZsUkRLQ29pUm9LUDZ4bGY1M2Q4RWVxMjlh?=
+ =?utf-8?Q?uSVcRT+kBORv+?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9858ef7c-f928-42c2-62f7-08df351c5c4c
+X-MS-Exchange-CrossTenant-AuthSource: TY4PR01MB14006.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 17:53:24.0137
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSZPR01MB8153
 
-Aggregate raw-buffer completions in the endpoint core and invoke the
-client callback once after all accepted TREs complete. This prevents
-the loopback worker from freeing a buffer still referenced by an earlier
-asynchronous submission.
+On Wed, May 13, 2026 at 02:22:55AM +0530, Akhil P Oommen wrote:
+ > With the introduction of sync_state in the genpd framework, any consumer
+ > device of GCC and GPUCC which is not bound to a driver will result in
+ > bootup warnings like below:
 
-Fixes: 0b1883ca75c0 ("bus: mhi: ep: clients: Add loopback driver for data path testing")
-Signed-off-by: Senna <Sennas1633@gmail.com>
----
- drivers/bus/mhi/ep/clients/loopback.c |   4 +
- drivers/bus/mhi/ep/main.c             | 131 ++++++++++++++++++++++----
- include/linux/mhi_ep.h                |  19 ++--
- 3 files changed, 130 insertions(+), 24 deletions(-)
+Tested on SC8280XP (Huawei MateBook E Go, gaokun3, Adreno 690) running
+Android, on top of v7.2.9. Patch 5 needed a small fixup there:
+a6xx_gpu_init() declares the GMU node with __free(device_node), so the
+explicit of_node_put(node) at the end goes away.
 
-diff --git a/drivers/bus/mhi/ep/clients/loopback.c b/drivers/bus/mhi/ep/clients/loopback.c
-index c7452428d0b7..6f6a1b5a51c4 100644
---- a/drivers/bus/mhi/ep/clients/loopback.c
-+++ b/drivers/bus/mhi/ep/clients/loopback.c
-@@ -71,6 +71,10 @@ static void mhi_ep_loopback_ul_callback(struct mhi_ep_device *mhi_dev,
- static void mhi_ep_loopback_dl_callback(struct mhi_ep_device *mhi_dev,
- 					struct mhi_result *mhi_res)
- {
-+	if (mhi_res->transaction_status)
-+		dev_err(&mhi_dev->dev, "Downlink transfer failed: %d\n",
-+			mhi_res->transaction_status);
-+
- 	kfree(mhi_res->buf_addr);
- }
- 
-diff --git a/drivers/bus/mhi/ep/main.c b/drivers/bus/mhi/ep/main.c
-index 4be20c368536..ec3f5cca66e7 100644
---- a/drivers/bus/mhi/ep/main.c
-+++ b/drivers/bus/mhi/ep/main.c
-@@ -14,6 +14,8 @@
- #include <linux/irq.h>
- #include <linux/mhi_ep.h>
- #include <linux/module.h>
-+#include <linux/refcount.h>
-+#include <linux/spinlock.h>
- #include "internal.h"
- 
- #define M0_WAIT_DELAY_MS	100
-@@ -504,7 +506,17 @@ static int mhi_ep_process_ch_ring(struct mhi_ep_ring *ring)
- 	return 0;
- }
- 
--static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
-+struct mhi_ep_buf_tx {
-+	struct mhi_ep_device *mhi_dev;
-+	void *buf;
-+	refcount_t pending;
-+	spinlock_t lock;
-+	size_t bytes_xferd;
-+	int status;
-+	bool queued;
-+};
-+
-+static int mhi_ep_send_buf_completion(struct mhi_ep_buf_info *buf_info)
- {
- 	struct mhi_ep_device *mhi_dev = buf_info->mhi_dev;
- 	struct mhi_ep_cntrl *mhi_cntrl = mhi_dev->mhi_cntrl;
-@@ -512,42 +524,101 @@ static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
- 	struct mhi_ep_ring *ring = &mhi_cntrl->mhi_chan[mhi_chan->chan].ring;
- 	struct mhi_ring_element *el = &ring->ring_cache[ring->rd_offset];
- 	struct device *dev = &mhi_dev->dev;
--	struct mhi_result result = {};
- 	int ret;
- 
--	if (mhi_chan->xfer_cb) {
--		result.buf_addr = buf_info->cb_buf;
--		result.dir = mhi_chan->dir;
--		result.bytes_xferd = buf_info->size;
--
--		mhi_chan->xfer_cb(mhi_dev, &result);
--	}
--
- 	ret = mhi_ep_send_completion_event(mhi_cntrl, ring, el, buf_info->size,
- 					   buf_info->code);
- 	if (ret) {
- 		dev_err(dev, "Error sending transfer completion event\n");
--		return;
-+		return ret;
- 	}
- 
- 	mhi_ep_ring_inc_index(ring);
-+
-+	return 0;
-+}
-+
-+static void mhi_ep_buf_tx_put(struct mhi_ep_buf_tx *tx, size_t bytes_xferd,
-+			      int status)
-+{
-+	struct mhi_ep_chan *mhi_chan = tx->mhi_dev->dl_chan;
-+	struct mhi_result result = {
-+		.buf_addr = tx->buf,
-+		.dir = mhi_chan->dir,
-+	};
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&tx->lock, flags);
-+	tx->bytes_xferd += bytes_xferd;
-+	if (status && !tx->status)
-+		tx->status = status;
-+	spin_unlock_irqrestore(&tx->lock, flags);
-+
-+	if (!refcount_dec_and_test(&tx->pending))
-+		return;
-+
-+	if (tx->queued && mhi_chan->xfer_cb) {
-+		result.bytes_xferd = tx->bytes_xferd;
-+		result.transaction_status = tx->status;
-+		mhi_chan->xfer_cb(tx->mhi_dev, &result);
-+	}
-+
-+	kfree(tx);
-+}
-+
-+static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
-+{
-+	struct mhi_ep_buf_tx *tx = buf_info->cb_buf;
-+	int ret;
-+
-+	ret = mhi_ep_send_buf_completion(buf_info);
-+	mhi_ep_buf_tx_put(tx, buf_info->size, ret);
-+}
-+
-+static void mhi_ep_skb_completion(struct mhi_ep_buf_info *buf_info)
-+{
-+	struct mhi_ep_device *mhi_dev = buf_info->mhi_dev;
-+	struct mhi_ep_chan *mhi_chan = mhi_dev->dl_chan;
-+	struct mhi_result result = {
-+		.buf_addr = buf_info->cb_buf,
-+		.bytes_xferd = buf_info->size,
-+		.dir = mhi_chan->dir,
-+	};
-+
-+	if (mhi_chan->xfer_cb)
-+		mhi_chan->xfer_cb(mhi_dev, &result);
-+
-+	mhi_ep_send_buf_completion(buf_info);
- }
- 
- /* TODO: Handle partially formed TDs */
- static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
--			void *cb_buf)
-+			void *cb_buf, bool aggregate)
- {
- 	struct mhi_ep_cntrl *mhi_cntrl = mhi_dev->mhi_cntrl;
- 	struct mhi_ep_chan *mhi_chan = mhi_dev->dl_chan;
- 	struct device *dev = &mhi_chan->mhi_dev->dev;
- 	struct mhi_ep_buf_info buf_info = {};
-+	struct mhi_ep_buf_tx *tx = NULL;
- 	struct mhi_ring_element *el;
- 	size_t buf_left, read_offset;
- 	struct mhi_ep_ring *ring;
- 	size_t tr_len;
- 	u32 tre_len;
-+	bool queued = false;
- 	int ret;
- 
-+	if (aggregate) {
-+		tx = kzalloc_obj(*tx, GFP_KERNEL);
-+		if (!tx)
-+			return -ENOMEM;
-+
-+		tx->mhi_dev = mhi_dev;
-+		tx->buf = cb_buf;
-+		refcount_set(&tx->pending, 1);
-+		spin_lock_init(&tx->lock);
-+	}
-+
- 	buf_left = len;
- 	ring = &mhi_cntrl->mhi_chan[mhi_chan->chan].ring;
- 
-@@ -576,8 +647,14 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 		buf_info.dev_addr = buf + read_offset;
- 		buf_info.host_addr = MHI_TRE_DATA_GET_PTR(el);
- 		buf_info.size = tr_len;
--		buf_info.cb = mhi_ep_buf_completion;
--		buf_info.cb_buf = cb_buf;
-+		if (tx) {
-+			refcount_inc(&tx->pending);
-+			buf_info.cb = mhi_ep_buf_completion;
-+			buf_info.cb_buf = tx;
-+		} else {
-+			buf_info.cb = mhi_ep_skb_completion;
-+			buf_info.cb_buf = cb_buf;
-+		}
- 		buf_info.mhi_dev = mhi_dev;
- 
- 		/*
-@@ -595,9 +672,12 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 		ret = mhi_cntrl->write_async(mhi_cntrl, &buf_info);
- 		if (ret) {
- 			dev_err(dev, "Error writing to the channel\n");
-+			if (tx)
-+				refcount_dec(&tx->pending);
- 			goto err_exit;
- 		}
- 
-+		queued = true;
- 		buf_left -= tr_len;
- 
- 		/*
-@@ -609,23 +689,42 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 
- 	mutex_unlock(&mhi_chan->lock);
- 
-+	if (tx) {
-+		tx->queued = true;
-+		mhi_ep_buf_tx_put(tx, 0, 0);
-+	}
-+
- 	return 0;
- 
- err_exit:
- 	mutex_unlock(&mhi_chan->lock);
- 
-+	if (tx) {
-+		if (queued) {
-+			unsigned long flags;
-+
-+			spin_lock_irqsave(&tx->lock, flags);
-+			tx->queued = true;
-+			tx->status = ret;
-+			spin_unlock_irqrestore(&tx->lock, flags);
-+			ret = 0;
-+		}
-+
-+		mhi_ep_buf_tx_put(tx, 0, 0);
-+	}
-+
- 	return ret;
- }
- 
- int mhi_ep_queue_skb(struct mhi_ep_device *mhi_dev, struct sk_buff *skb)
- {
--	return mhi_ep_queue(mhi_dev, skb->data, skb->len, skb);
-+	return mhi_ep_queue(mhi_dev, skb->data, skb->len, skb, false);
- }
- EXPORT_SYMBOL_GPL(mhi_ep_queue_skb);
- 
- int mhi_ep_queue_buf(struct mhi_ep_device *mhi_dev, void *buf, size_t len)
- {
--	return mhi_ep_queue(mhi_dev, buf, len, buf);
-+	return mhi_ep_queue(mhi_dev, buf, len, buf, true);
- }
- EXPORT_SYMBOL_GPL(mhi_ep_queue_buf);
- 
-diff --git a/include/linux/mhi_ep.h b/include/linux/mhi_ep.h
-index 852f331f03fd..ac4f484373ee 100644
---- a/include/linux/mhi_ep.h
-+++ b/include/linux/mhi_ep.h
-@@ -307,16 +307,19 @@ int mhi_ep_queue_skb(struct mhi_ep_device *mhi_dev, struct sk_buff *skb);
- /**
-  * mhi_ep_queue_buf - Transfer buffer contents to host over MHI Endpoint
-  * @mhi_dev: Device associated with the DL channel
-- * @buf: Buffer to be queued. On success, ownership passes to the MHI stack;
-- *       the caller must not free @buf until the DL transfer callback fires
-- *       with result->buf_addr equal to @buf. On failure, the caller retains
-- *       ownership and must free @buf.
-- *       Note: if @len spans multiple host DL TREs, the DL transfer callback
-- *       fires once per TRE, each time with result->buf_addr equal to @buf.
-+ * @buf: Buffer to be queued. If at least one TRE is queued, ownership passes
-+ *       to the MHI stack and the DL transfer callback fires once after all
-+ *       queued TREs complete, with result->buf_addr equal to @buf and
-+ *       result->bytes_xferd equal to the total completed bytes. If queuing
-+ *       fails before any TRE is accepted, the caller retains ownership.
-+ *       A failure after a TRE has been accepted is reported through
-+ *       result->transaction_status in the callback.
-  * @len: Size of the buffer
-  *
-- * Return: 0 if the buffer contents have been transferred successfully, a
-- * negative error code otherwise.
-+ * Return: 0 if one or more TREs were accepted, including when a later TRE
-+ * submission fails. In that case, the callback reports the error after all
-+ * accepted TREs complete. A negative error code is returned if no TRE was
-+ * accepted and no callback will be issued.
-  */
- int mhi_ep_queue_buf(struct mhi_ep_device *mhi_dev, void *buf, size_t len);
- 
--- 
-2.56.0
+Without the series, GCC and GPUCC report
+
+   gcc-sc8280xp 100000.clock-controller: sync_state() pending due to 
+3d6a000.gmu
+   gpu_cc-sc8280xp 3d90000.clock-controller: sync_state() pending due to 
+3d6a000.gmu
+
+and six unused GDSCs (ufs_phy, ufs_card and the four
+hlos1_vote_mmnoc_mmu_tbu_* ones) stay on unless
+fw_devlink.sync_state=timeout is given.
+
+With the series, 3d6a000.gmu binds to adreno_gmu, both sync_states
+complete without the timeout, and the six GDSCs are off. The GPU works
+(ANGLE on Turnip), GPU and GMU runtime suspend when idle, and a game
+session followed by five s2idle cycles gave no GPU or GMU errors.
+
+Tested-by: Akisaira <akisaira@outlook.com> # sc8280xp-huawei-gaokun3
+
+Thanks!
 
