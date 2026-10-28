@@ -1,46 +1,46 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793158882;
-	b=eyzBO8TtBdKkNxUr0ocH2mIBoQFNg69yIVVBHekSMTxDyVCKaKrlS/57ZzyQHDd+BZYw
-	 ReEb4RC1rtKLc9O3ZZvuzoQqodGdFBB4giolV/1XDSfKQ0v5VB/FihtcL3s/AXKq/er67
-	 0cShtDUJl3HtI8WIQ/o/Pu3CGHosLb2VZxrF1oCasKv91dEFQuxpIUCXZivL2gcF8HTqG
-	 yH+X+Te9LOZ6ReAjLhVpIxM44wUhP33mhZDhgBKBUhc0k6YtNhG7UDSMWjQRR4gfnyHMM
-	 9I3MsxxMjlauEWoLWgDMTmr0+UmXrUmRJ0USx1P5C22Tcp7+qtnwu7Se5y2C8M414Zg==
+	t=1793158881;
+	b=bFIrB26u790Yrh2DyGsJufkr1lVz9UzLtbKik8NqObLbdAT77yuumDWCbuY3OSyNua9R
+	 ap9OhX6SgAwx2DCsg+a/RVoFGHJSDb+3TKfPoSPPTDerGRXJtSywCQIzz06FoeGA4JrtT
+	 qtSAj2bHpD4K7WEIabRmV+zTNtAeunNi8I/1tjNs5jdvyJpngr5K4+Ja7BOJUioV7O0pO
+	 W8ITfQiWNkA3d/qtwmbqneDfbdc1qSphl3G2FU/252GpHeEy3LxVAH9HXyMzehb2PYa//
+	 tTOlvQNkB693oXzEibo5CFiqhsGKc5HFNgLdfERtWyeo6eWxqqIQJ/NVc2pEGRg7GrQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793158882;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793158881;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
 	 X-CM-SenderInfo;
-	bh=dvaUQlg4+H4XNXm3Q0CN6g0pDrqka5ZZ/lTHw0ML2SE=;
-	b=1ZoohfbAnI3pAPN+oTYFnPhkzNKRJSrUeMkVOCCDtjM35QSLvykSCxT3eiSBd3Yrgja9
-	 zs8t6/hgW3OfXEazYlBSiKhNMVcH75sE9vP+/hOJPQ5hC2vytWDjky35B49+RV2e6kQ/1
-	 PA5CP7mBMSzACespyMU8qsPXE7pGHWkEIG4JFKgdgP2ZM/2ZxBNW1nFZP4m7y/1PMB0Jz
-	 DqyGNH1i+ui2K6UNI1DD9vOPKxcHllFum4GQV5O9Wz3gEuhd7XOM6tBrRjKDMUNyZzHoE
-	 ska1Z5YUz214pwZkbHuGhq7iXAa0c89iQ27HLGirD4KWSvR2bHgzxTOFAyPh4/PQdbA==
+	bh=qNIYdo0QTw7MYwq6uSkCBhOdOivMefRpPYVKU2rOFlY=;
+	b=MYgI41G5nTr3B2cjJukWZcc+UoErekPGThAdXkoQcA/L4PIHQW/LDGQOkB4tARmAR4Pv
+	 VE1PviInE4IdFyeBSZkbVx7NVxMW1QyBbW8lv/7Yu4phME3Dio78DY0H1szo+I7TLj//O
+	 Q3kJHwsJ36rt9lFeFyE85a7MF16sKbBHyZzxgP8TLRxJJ8umZSd99m6I8g2dApsZ3+1LO
+	 50j5cUINN/smuHz2gb9uUdtbZn62aDwfneTNMVa/gASJhHgv1+aKeya5Ri62t8Y2tGWc0
+	 J+6S/GVuVxC5cI8wHiM5pg19Gur5iOb7oS/v+UaYhpUBtZB6aDC0SJ92V9BxpBdPh6Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=mail.ustc.edu.cn;
 	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iKZ14VEF;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=rlgYrWUM;
 	arc=none smtp.remote-ip=202.38.64.46
 Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7759606A329;
-	Wed, 28 Oct 2026 03:41:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7759606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31478606A322;
+	Wed, 28 Oct 2026 03:41:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31478606A322
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iKZ14VEF
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=rlgYrWUM
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
 	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=dvaUQlg4+H4XNXm3Q0CN6g0pDrqka5ZZ/l
-	THw0ML2SE=; b=iKZ14VEFdIIiSKQ0tHq5hHS/BYrjmthds2Lkp8/gLBVxc0UzFr
-	FldvBpVUtplGUtF0aAe+Q2BgB+XEy+67zmHCSTFXZe88Fl4jnm6NMNUUV0mB39i4
-	ukypCIttmW9SkVUUfS4+qcYfux4chgKgMIbECH0/PpdpF78Py9e5B49P8=
+	Content-Transfer-Encoding; bh=qNIYdo0QTw7MYwq6uSkCBhOdOivMefRpPY
+	VKU2rOFlY=; b=rlgYrWUM90SsWokaHwZAhgtqNzl58kIR/6wWKxMP32xt/CQF8m
+	cBhhK8keT9jM5y1ypxpM+b8Mxxi2QeWXD4kf9NCVGLOii6HgqQR1suoI1BlPRkbi
+	XU37d8H45th/ndjMiXAh/MwWJJYr1loZteS/GXjrYhbYsWZa/wNSEN2p8=
 Received: from xuqianhui.ustc.edu.cn (unknown [114.214.180.23])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgA3szfSbuFqyQlWAA--.2887S11;
-	Wed, 28 Oct 2026 11:41:17 +0800 (CST)
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgA3szfSbuFqyQlWAA--.2887S8;
+	Wed, 28 Oct 2026 11:41:10 +0800 (CST)
 From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 To: 'Bryan O'Donoghue' <bryan.odonoghue@linaro.org>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -54,9 +54,9 @@ Cc: Rob Herring <robh@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 9/9] arm64: dts: qcom: sm8750: add the camera subsystem
-Date: Wed, 28 Oct 2026 11:41:05 +0800
-Message-ID: <20261028034105.326535-10-xiaqinghuan@mail.ustc.edu.cn>
+Subject: [PATCH 6/9] media: camss: video: check that a buffer is DMA contiguous and add a prepare hook
+Date: Wed, 28 Oct 2026 11:41:02 +0800
+Message-ID: <20261028034105.326535-7-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn>
 References: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn>
@@ -70,11 +70,11 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgA3szfSbuFqyQlWAA--.2887S11
-X-Coremail-Antispam: 1UD129KBjvJXoWxtrW3KFyfGF1xZFy3Zr4ruFg_yoW7uF47pF
-	4xCFW5Grs7t342kay7C3W8XF1xAay8u3WkJr9rJF12yF4fur4UKr4I93WSkF15tay8Xay2
-	v3W5Wr18JFW5Zw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmEb7Iv0xC_tr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+X-CM-TRANSID:3pYKCgA3szfSbuFqyQlWAA--.2887S8
+X-Coremail-Antispam: 1UD129KBjvJXoWxWw1DurWrurWrGF4rGr4rZrb_yoW5XFWkpF
+	WrKrW5GFW2qF4UAw4xJw4UuF4aywnYga4UGrW7Zw1Yk3Z5tr13ur45KFyayrW5JryxKF17
+	tr4jq3yfuF4YvFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUmCb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
 	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
 	8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
 	jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI
@@ -85,212 +85,81 @@ X-Coremail-Antispam: 1UD129KBjvJXoWxtrW3KFyfGF1xZFy3Zr4ruFg_yoW7uF47pF
 	1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r48MxAIw28IcxkI7VAKI48JMxC20s02
 	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
 	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
-	6r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcI
-	k0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4U
-	JVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU8_b15UUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARENB2rg+9YEMABNsE
+	6r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7
+	xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_
+	Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07jzyIUUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARENB2rg+9YEMABKsD
 
-Describe the camera subsystem as the single platform device the camss
-driver binds to: the SM8750 block has four CSID, six CSIPHY, three VFE and
-two VFE lite instances, all behind one register window, one clock and one
-power domain list, with one interrupt per instance.
+The write master of the newer VFE generations can only be programmed with
+a buffer whose payload is physically contiguous, because the frame
+increment registers describe one linear address range.  Check that the DMA
+mapping of every plane is contiguous for at least sizeimage bytes and
+reject the buffer otherwise, instead of silently writing past the end of
+the first scatterlist entry.
 
-The node is left disabled; boards enable it and describe their sensors and
-CSIPHY ports on top.
+Also let the SoC code add its own alignment requirements to a queued
+buffer through a new prepare_buffer() video operation, which runs after
+the generic checks.
 
 Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 ---
- arch/arm64/boot/dts/qcom/sm8750.dtsi | 179 +++++++++++++++++++++++++++
- 1 file changed, 179 insertions(+)
+ .../media/platform/qcom/camss/camss-video.c    | 18 +++++++++++++++++-
+ .../media/platform/qcom/camss/camss-video.h    |  1 +
+ 2 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8750.dtsi b/arch/arm64/boot/dts/qcom/sm8750.dtsi
-index dd738d13d..12dcf2f33 100644
---- a/arch/arm64/boot/dts/qcom/sm8750.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8750.dtsi
-@@ -3495,6 +3495,185 @@ dispcc: clock-controller@af00000 {
- 			#power-domain-cells = <1>;
- 		};
+diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+index 0852eb6f1..027cf024f 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.c
++++ b/drivers/media/platform/qcom/camss/camss-video.c
+@@ -155,7 +155,10 @@ static int video_buf_init(struct vb2_buffer *vb)
+ 	const struct v4l2_pix_format_mplane *format =
+ 						&video->active_fmt.fmt.pix_mp;
+ 	struct sg_table *sgt;
+-	unsigned int i;
++	struct scatterlist *sg;
++	dma_addr_t end;
++	unsigned int i, j;
++	size_t contiguous;
  
-+		camss: isp@ad27000 {
-+			compatible = "qcom,sm8750-camss";
+ 	for (i = 0; i < format->num_planes; i++) {
+ 		sgt = vb2_dma_sg_plane_desc(vb, i);
+@@ -163,6 +166,16 @@ static int video_buf_init(struct vb2_buffer *vb)
+ 			return -EFAULT;
+ 
+ 		buffer->addr[i] = sg_dma_address(sgt->sgl);
++		end = buffer->addr[i];
++		contiguous = 0;
++		for_each_sgtable_dma_sg(sgt, sg, j) {
++			if (sg_dma_address(sg) != end)
++				break;
++			contiguous += sg_dma_len(sg);
++			end += sg_dma_len(sg);
++		}
++		if (contiguous < format->plane_fmt[i].sizeimage)
++			return -EINVAL;
+ 	}
+ 
+ 	if (format->pixelformat == V4L2_PIX_FMT_NV12 ||
+@@ -193,6 +206,9 @@ static int video_buf_prepare(struct vb2_buffer *vb)
+ 
+ 	vbuf->field = V4L2_FIELD_NONE;
+ 
++	if (video->ops->prepare_buffer)
++		return video->ops->prepare_buffer(video, vb);
 +
-+			reg = <0x0 0x0ad27000 0x0 0x2b00>,
-+			      <0x0 0x0ad2a000 0x0 0x2b00>,
-+			      <0x0 0x0ad2d000 0x0 0x2b00>,
-+			      <0x0 0x0ad6d000 0x0 0xa00>,
-+			      <0x0 0x0ad72000 0x0 0xa00>,
-+			      <0x0 0x0ada9000 0x0 0x2000>,
-+			      <0x0 0x0adab000 0x0 0x2000>,
-+			      <0x0 0x0adad000 0x0 0x2000>,
-+			      <0x0 0x0adaf000 0x0 0x2000>,
-+			      <0x0 0x0adb1000 0x0 0x2000>,
-+			      <0x0 0x0adb3000 0x0 0x2000>,
-+			      <0x0 0x0ad8b000 0x0 0x400>,
-+			      <0x0 0x0ad8c000 0x0 0x400>,
-+			      <0x0 0x0ad8d000 0x0 0x400>,
-+			      <0x0 0x0ac86000 0x0 0x10000>,
-+			      <0x0 0x0ac96000 0x0 0x10000>,
-+			      <0x0 0x0aca6000 0x0 0x10000>,
-+			      <0x0 0x0ad6e000 0x0 0x3000>,
-+			      <0x0 0x0ad73000 0x0 0x3000>;
-+			reg-names = "csid0",
-+				    "csid1",
-+				    "csid2",
-+				    "csid_lite0",
-+				    "csid_lite1",
-+				    "csiphy0",
-+				    "csiphy1",
-+				    "csiphy2",
-+				    "csiphy3",
-+				    "csiphy4",
-+				    "csiphy5",
-+				    "csitpg0",
-+				    "csitpg1",
-+				    "csitpg2",
-+				    "vfe0",
-+				    "vfe1",
-+				    "vfe2",
-+				    "vfe_lite0",
-+				    "vfe_lite1";
-+
-+			clocks = <&camcc CAM_CC_CAMNOC_NRT_AXI_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_RT_AXI_CLK>,
-+				 <&camcc CAM_CC_CAM_TOP_AHB_CLK>,
-+				 <&camcc CAM_CC_CAM_TOP_FAST_AHB_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_RT_TFE_0_MAIN_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_RT_TFE_1_MAIN_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_RT_TFE_2_MAIN_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_RT_IFE_LITE_CLK>,
-+				 <&camcc CAM_CC_CSID_CLK>,
-+				 <&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
-+				 <&camcc CAM_CC_CSIPHY0_CLK>,
-+				 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY1_CLK>,
-+				 <&camcc CAM_CC_CSI1PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY2_CLK>,
-+				 <&camcc CAM_CC_CSI2PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY3_CLK>,
-+				 <&camcc CAM_CC_CSI3PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY4_CLK>,
-+				 <&camcc CAM_CC_CSI4PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY5_CLK>,
-+				 <&camcc CAM_CC_CSI5PHYTIMER_CLK>,
-+				 <&gcc GCC_CAMERA_HF_AXI_CLK>,
-+				 <&gcc GCC_CAMERA_SF_AXI_CLK>,
-+				 <&camcc CAM_CC_TFE_0_MAIN_CLK>,
-+				 <&camcc CAM_CC_TFE_0_MAIN_FAST_AHB_CLK>,
-+				 <&camcc CAM_CC_TFE_1_MAIN_CLK>,
-+				 <&camcc CAM_CC_TFE_1_MAIN_FAST_AHB_CLK>,
-+				 <&camcc CAM_CC_TFE_2_MAIN_CLK>,
-+				 <&camcc CAM_CC_TFE_2_MAIN_FAST_AHB_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>,
-+				 <&camcc CAM_CC_QDSS_DEBUG_XO_CLK>;
-+			clock-names = "camnoc_nrt_axi",
-+				      "camnoc_rt_axi",
-+				      "cpas_ahb",
-+				      "cpas_fast_ahb",
-+				      "cpas_vfe0",
-+				      "cpas_vfe1",
-+				      "cpas_vfe2",
-+				      "cpas_vfe_lite",
-+				      "csid",
-+				      "csid_csiphy_rx",
-+				      "csiphy0",
-+				      "csiphy0_timer",
-+				      "csiphy1",
-+				      "csiphy1_timer",
-+				      "csiphy2",
-+				      "csiphy2_timer",
-+				      "csiphy3",
-+				      "csiphy3_timer",
-+				      "csiphy4",
-+				      "csiphy4_timer",
-+				      "csiphy5",
-+				      "csiphy5_timer",
-+				      "gcc_axi_hf",
-+				      "gcc_axi_sf",
-+				      "vfe0",
-+				      "vfe0_fast_ahb",
-+				      "vfe1",
-+				      "vfe1_fast_ahb",
-+				      "vfe2",
-+				      "vfe2_fast_ahb",
-+				      "vfe_lite",
-+				      "vfe_lite_ahb",
-+				      "vfe_lite_cphy_rx",
-+				      "vfe_lite_csid",
-+				      "qdss_debug_xo";
-+
-+			interrupts = <GIC_SPI 601 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 603 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 605 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 376 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 448 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 122 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 89 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 433 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 436 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 457 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 606 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 377 IRQ_TYPE_EDGE_RISING>;
-+			interrupt-names = "csid0",
-+					  "csid1",
-+					  "csid2",
-+					  "csid_lite0",
-+					  "csid_lite1",
-+					  "csiphy0",
-+					  "csiphy1",
-+					  "csiphy2",
-+					  "csiphy3",
-+					  "csiphy4",
-+					  "csiphy5",
-+					  "vfe0",
-+					  "vfe1",
-+					  "vfe2",
-+					  "vfe_lite0",
-+					  "vfe_lite1";
-+
-+			interconnects = <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_CAMERA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
-+					<&mmss_noc MASTER_CAMNOC_HF QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&mmss_noc MASTER_CAMNOC_SF QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&mmss_noc MASTER_CAMNOC_NRT_ICP_SF QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
-+			interconnect-names = "ahb",
-+					     "hf_mnoc",
-+					     "sf_mnoc",
-+					     "sf_icp_mnoc";
-+
-+			iommus = <&apps_smmu 0x1c00 0x00>;
-+
-+			power-domains = <&camcc CAM_CC_TFE_0_GDSC>,
-+					<&camcc CAM_CC_TFE_1_GDSC>,
-+					<&camcc CAM_CC_TFE_2_GDSC>,
-+					<&camcc CAM_CC_TITAN_TOP_GDSC>;
-+			power-domain-names = "ife0",
-+					     "ife1",
-+					     "ife2",
-+					     "top";
-+
-+			dma-coherent;
-+			status = "disabled";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+		};
-+
- 		camcc: clock-controller@ade0000 {
- 			compatible = "qcom,sm8750-camcc";
- 			reg = <0x0 0xade0000 0x0 0x20000>;
+ 	return 0;
+ }
+ 
+diff --git a/drivers/media/platform/qcom/camss/camss-video.h b/drivers/media/platform/qcom/camss/camss-video.h
+index d3e56e240..af046ecb7 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.h
++++ b/drivers/media/platform/qcom/camss/camss-video.h
+@@ -28,6 +28,7 @@ struct camss_buffer {
+ struct camss_video;
+ 
+ struct camss_video_ops {
++	int (*prepare_buffer)(struct camss_video *vid, struct vb2_buffer *vb);
+ 	int (*queue_buffer)(struct camss_video *vid, struct camss_buffer *buf);
+ 	int (*flush_buffers)(struct camss_video *vid,
+ 			     enum vb2_buffer_state state);
 
