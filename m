@@ -1,48 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793217881;
-	b=qwqCVBeeQViazcfbwJfzuIbpn1XQAP2doD9F8lkY7xn2pggUOoOgxnCVeQX5hOLP65aQ
-	 roNZrnYC9JIL2uAcAB8gpWiULZniQIyG7zkKbcV6dKuDURRpd5aGcr4PiseL5ljXDP10Z
-	 3XnEZIdBl4OtaQm67eQSQaqJBjE7iI62QSHAxdKzNrFhs5B3Mbo+AVyT9ghCPIfm86uak
-	 u4zSHxk9Vwhj1AKIvB8zzrkiJCFEK+1nP6F4pPuAecOs8cbLGp7UXGJyJfVwa/dLX8uhd
-	 vJ8fIRoqavn+K/WJNDkDIoeVe/OB8A3QQKNe5U5PYiohdztiYkbS0AuQMIdxmltcHJg==
+	t=1793218851;
+	b=EL2MeAvxo5Lfvu5/Xf8/Th2Z/fF2BxemT5yj6m3lbE5kKG+BA6o+ywasgcs1pJCKbsdc
+	 /3vdyyiCQZqZCGN4nLIQFrm0e9w2PaK3cGO+UbFJeBij5w2+QWZgdcUhUghG8GHswxnZk
+	 K+AORLQcO7vrsdRia3sa68kLCMkOjqbL7X8OLpAelkGXLDxqinC63pbc5LO01hwiEiiRh
+	 L0A2qh4P/geHg0yuEdHnfbF08OA3sxW0J1W79pSOVwG4uTh7e/wjDCghxzh6f5qjdEdQl
+	 5m2npXoztAbUUFJa87qv5W9F6hfLhYC+TSs++zi5r0IY39xH7sZ0tObqPWc7Ub2zxGQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793217881;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=Q3s3vyP8vBmAG+3+GRcBEUoLZCzAu/EWT8yfEdr3bGc=;
-	b=AbSOsseYd4J/w3o3dFCtgZzYvQFyNg/MlR9GX6KMc3WHVEyM2Y7fKHHKWrCFHwd9pAlQ
-	 Y8mDWpU6S43MblBRUkGzZtp1K8hM+eVkGNEhE86RUQV80gYJZZc/WI7PGbUnD7+x+d3Wz
-	 sqYvImHeqQUjjaIAo3tF64gTSFwCnOWvxxOvDg1Zsgugqr9YIfgKKKlSoCEwKk6PjLxmV
-	 89O5arIP/yQsnalJtaw22V3iF6xQYP7nbzDPmUJ2QnxryXLzoFu/QwqWbXDhWmJAD4p5L
-	 Db0SuaEdYdCiys0dXemri9/7YjPiRGUNizgOGJHW2lcCbSUCDgHzmqqFdG4EpImZBZg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793218851;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=HU+qXfg6wycCYQniedMIEmjTS1Z2726jpgVHTUVK7ng=;
+	b=m3qlryQGLfKEL7wmJRv6LpYJD0q8vlSo/QY0YxM1PGfciwP3k0YdlOhWKgNZ7rAbvcLP
+	 60XPU9/YotnhJGG6/IyYusbZWty2cgLZNSBoOOUl9bX6KpPl3wdB0rpDkV10oSVp7uwwe
+	 jcQ9epYzXUVkIQGk1tVoqq4fXP86xoSTXL1E0cP282pig7im1ID9bbq4MV7wyrC431vMK
+	 LTQZyONJwZvFnY5OHn5QnQC6CKIGDldBYTxw4muMYxI9UJe31D0wHJ2TR559vDamgzcXF
+	 2I03nFXQVFmXAujHIIolY+X4SWfLy3swMLwT5quy+9OjtkIuTYEHOpXq+xHz3Xmkn7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcx0sYUq;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=mainlining.org;
+	spf=pass smtp.mailfrom=mainlining.org;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=CirN4+QV;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EBN+KCVn;
+	arc=none smtp.remote-ip=5.75.144.95
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83F5E60A2600;
-	Wed, 28 Oct 2026 20:04:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80EFB606A31C;
+	Wed, 28 Oct 2026 20:20:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 80EFB606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcx0sYUq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DF9A1F031E7;
-	Wed, 28 Oct 2026 20:04:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793217881;
-	bh=Q3s3vyP8vBmAG+3+GRcBEUoLZCzAu/EWT8yfEdr3bGc=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=gcx0sYUqCauiyOxmBrJ5H6SLHnrk5IP1FZ5lXunQ7FFEoY4uDORC7HS/9wQ6RaNVN
-	 W7ZH6AHTmLQbv34bXymsb3ZYB2E+42MNBEfm4g+8fmg5docoFfIfoGSfq5jmvvhatj
-	 PxePXGunU/gPScBsYhkwRlkyguAFfBeAqW+1SojkV/VNVAnmkzRXSaa7GPGn17krBY
-	 cnCHEvD7lf4PM4Fxh6SAduNxOlViwwSeCTbyGpEJo3qQFcaBfQScyoFQIcHr7wiWU0
-	 F2qRJ41GA1oWG3sOP6N0hTRwZgJjT0VizVkZfcOEFE4X3a4qjh7u3xyN2PpQl6LVBs
-	 gnVLD3u0ldIfg==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Wed, 28 Oct 2026 21:04:26 +0100
-Subject: [PATCH 3/3] arm64: dts: qcom: glymur-crd: Drop L4F0
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=CirN4+QV;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EBN+KCVn
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
+	h=To:Message-Id:Subject:Date:From; t=1793218844; bh=HU+qXfg6wycCYQniedMIEmj
+	TS1Z2726jpgVHTUVK7ng=; b=CirN4+QV351ZyXu2HTuYKRSaqkmkEF2PHzX9UAQ6G6xouh/VPf
+	W38u1VmBkC3hMDZoMGlxezDoPqqOdmPnATvE89DFcCPavvutr4kKdJuzw6GtCslSzfOJ4f9ELVW
+	V8hhZRtEavbMeNwRL3k/y6mX2WexLUIYws9DwP8HgKUqXaOom4Vrq+Nf6lMUSMWFtSAC8FwOhVY
+	yVYgHC2F2ZcOWR5+2THtIo5+4Ao+LoMzL4B6eJNdtKKFeiUucj2LUP4m0fie9JVvPkqJGJE644G
+	SrF73tQCtKAH+xiU4+l7vOkPdPoroLWst/8uLajZXNyC/xyNsYKtbOiR8IsDrhkPdXg==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
+	h=To:Message-Id:Subject:Date:From; t=1793218844; bh=HU+qXfg6wycCYQniedMIEmj
+	TS1Z2726jpgVHTUVK7ng=; b=EBN+KCVnR1JtQjyLx1YCHgK8n87kTvLIhbrQbzuMLuQvIOGkzT
+	ieva4F948/mbcdxK0LX/we00wk46Ji1vAXAg==;
+From: =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
+Date: Wed, 28 Oct 2026 21:20:41 +0100
+Subject: [PATCH] soc: qcom: pd-mapper: Add support for SM6125
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,58 +60,51 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261028-topic-sip_cob-v1-3-80ab6704aca3@oss.qualcomm.com>
-References: <20261028-topic-sip_cob-v1-0-80ab6704aca3@oss.qualcomm.com>
-In-Reply-To: <20261028-topic-sip_cob-v1-0-80ab6704aca3@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261028-sm6125-pd-mapper-v1-1-af9a645b4b8a@mainlining.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDMBBA4avIrDtgBuPfVUoXaRx1BDVkqhTEu
+ zfV5bd47wDlKKzQZgdE3kVlXRLMIwM/umVglC4ZKKfS5FSjzqUhi6HD2YXAEYueyfqGnC0qSFm
+ I3Mv3Wj5ft3V7T+w//w+c5w/878OndAAAAA==
+X-Change-ID: 20261028-sm6125-pd-mapper-4fe25c92a547
 To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793217867; l=925;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=JS3FNFIi9esp7f9Kht/RpkwT9TfG46P50EzDHd7aBOM=;
- b=ToRXKjfFf8DVD9KInReylVfvl9nw9KqkOLb4XM9/qP8fQ4t3c8kVJ7BUuLbMrFUl0aq272IV1
- TNpInbTjxmvAsjm8ClbKD1wmUxg/7W09ejjYCkwHb5EviRFE8pLNC+d
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793218843; l=1209;
+ i=barnabas.czeman@mainlining.org; s=20240730; h=from:subject:message-id;
+ bh=Z0hCoLpzXP7AJHenSbzeikQ5TFkrunfRaaLnnVerLOs=;
+ b=+KV7hynXIA67RaOsf4PHf/Zx++NyOXPLTnB++nR3dPkXvJfjzGctARzjadtT857z48Syx4UYY
+ 4A3IdJvvjH2BDuh4SL0sg5rFHeqxykuEq1tWWHTHXwAnHggN+r/2+/C
+X-Developer-Key: i=barnabas.czeman@mainlining.org; a=ed25519;
+ pk=TWUSIGgwW/Sn4xnX25nw+lszj1AT/A3bzkahn7EhOFc=
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Add support for the Qualcomm SM6125 SoC to the protection
+domain mapper. SM6125 shares the same protection domain
+configuration as SM6115.
 
-This is VDD_LPI_MX, already controlled by RPMH as an ARC/RPMHPD.
-Drop it.
-
-Fixes: a5ad8a8e473c ("arm64: dts: qcom: Commonize Glymur CRD DTSI")
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
 ---
- arch/arm64/boot/dts/qcom/glymur-crd.dtsi | 7 -------
- 1 file changed, 7 deletions(-)
+ drivers/soc/qcom/qcom_pd_mapper.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
-index 422ed0308147..422b3778c22a 100644
---- a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
-+++ b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
-@@ -390,13 +390,6 @@ vreg_l17b0: ldo17 {
- };
- 
- &rpmh_vregs_f_e0 {
--	vreg_l4f0: ldo4 {
--		regulator-name = "vreg_l4f0";
--		regulator-min-microvolt = <1080000>;
--		regulator-max-microvolt = <1200000>;
--		regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
--	};
--
- 	vreg_s7f0: smps7 {
- 		regulator-name = "vreg_s7f0";
- 		regulator-min-microvolt = <1320000>;
+diff --git a/drivers/soc/qcom/qcom_pd_mapper.c b/drivers/soc/qcom/qcom_pd_mapper.c
+index 64ca99d7fad9..c1b7438541da 100644
+--- a/drivers/soc/qcom/qcom_pd_mapper.c
++++ b/drivers/soc/qcom/qcom_pd_mapper.c
+@@ -652,6 +652,7 @@ static const struct of_device_id qcom_pdm_domains[] __maybe_unused = {
+ 	{ .compatible = "qcom,sdm845", .data = sdm845_domains, },
+ 	{ .compatible = "qcom,sm4250", .data = sm6115_domains, },
+ 	{ .compatible = "qcom,sm6115", .data = sm6115_domains, },
++	{ .compatible = "qcom,sm6125", .data = sm6115_domains, },
+ 	{ .compatible = "qcom,sm6350", .data = sm6350_domains, },
+ 	{ .compatible = "qcom,sm7150", .data = sm7150_domains, },
+ 	{ .compatible = "qcom,sm7225", .data = sm6350_domains, },
 
--- 
-2.56.0
+---
+base-commit: 151a134a4e6ec66f69db8750c66006f5207f7a9d
+change-id: 20261028-sm6125-pd-mapper-4fe25c92a547
 
+Best regards,
+--  
+Barnabás Czémán <barnabas.czeman@mainlining.org>
