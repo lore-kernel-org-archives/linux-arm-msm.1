@@ -1,71 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793157961;
-	b=cRPuxLwR5o/Hi8vCXZbQkUv33Txuf2rnb73rJDm8RZfU3Wr2APvs3IFjllxkNnExMwMF
-	 QM5Z6tG+J/pAm44OOK68/KJgnFxbnpz+Xs4TOEAB+J2gHHocBxFQvy0jjykS0/llXWenY
-	 MrChOaPdguL9BehR1EvEk6W2xM74FHwZShXD8qEmiaywyip+SPh7C/roQNArnoVjgbt8m
-	 wjMa0a15bpoW1ZCto5lvtqMev+WtpoJnqFdK24rhb6eLQpwwuTuKc/x0CQBjJkjQtTdD3
-	 lECs3REHs5f8TTX3uW9+Oti6v9Kek7aWBOAyRS7iuaNC0LTeUY1i3aCwvuxKxwwcXxA==
+	t=1793158180;
+	b=BWwRpECWe+4vmIolqnY5R16BewBYbDrYWP1kqBxyziUyRezOS1Kw7joSC3WIGW3GbLfA
+	 sr0f6D8UWQyrUiEVHwpxbT26O4PY03Itw/2DGdb16+S8q0wVPOPoZa9LfCcfKEwB5vYNg
+	 7yeUIVQPAAb06mbRwqvVDbfPvqGIshZupkxw+TdkvTWWSsSeAq2Beh5CE3XyU899GNBid
+	 1bIucOUVwm0e+zxF5iQu2PzvZLNx2fhBqNtn0BvrkoonScDK+FXB+hCueHVEQIlJLG7DQ
+	 n8q6ngkVngAi5cAtuCLwpcTF8wkL16BuDuNyk4NnWbF5DIJT3EFUdwTCv7ck5XxUIDw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793157961;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793158180;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=/vK5C+z753Ldc2efhljC24upKDWY/ID73cW01PyfTLw=;
-	b=IwGbGy44RthLZLazIst29O3xkcnmycIgo6PpytfLjncwjL4RnekAZu4+sg//bpWjNUeh
-	 bjARr49Jss4/lXs0IxuaAekyBVTwdtSidqK5JyYja4ubvmSMpMPiJQ5y32rFIVHSDn9wR
-	 WINprCbLJR9CcBSnbVnTH3yLoVk/AUQuDjqDHCK0FySApgyjaIutwoa2mIJsjMFCt0l4q
-	 MpQAacBCMMipX5n13nDebWCb94WnpqvhLsvoG3IqhM66rCOf79P8D3cCpXhS6l4jmgDHZ
-	 2+jNhNozVLjh9p1lR1VKJLmwHj3QkMaVmdvzcBILogBv6R/l6hcoV2K1cpruu1/4/6A==
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=vEj7FK67g3rIaaz5Lq/NNY45PcOS57ENcFCjo3BtHwA=;
+	b=4PU6XQ7kbs1sKe4a9kDftX149iiLnhgk9+oktAjq28SDurPj564pSKhnF0yaRMlieQpF
+	 0Xya8pzBMhz+bI3NjfAU2TBzf0JVMkzYNocghkf7kX0qo/Jr41bWKvsswrlsyVwv1qEte
+	 0SpKj3CBcHB0IgIzJj6AXGArS7aUqYNqlJGBwvHQaODb9ut8gYcq6nE/EcB5F1Zh0F0dI
+	 aMqi+hHds5yT9lllVADDPRJvkYxyI8bZgcT73pEOwwsoGv9bA571QRY/u3JLNTuxb02cw
+	 EgBQqSm2txhE1/f8VMTY1Z0ZdsedFeH8au14okRglVGpjameCuzSiK6LPUkXQgRi5VQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F2ZYoHu4;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d6BjhZcd;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 637BD606A31F;
-	Wed, 28 Oct 2026 03:26:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6386C606A31A;
+	Wed, 28 Oct 2026 03:29:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F2ZYoHu4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B75A91F01825;
-	Wed, 28 Oct 2026 03:25:57 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d6BjhZcd
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 948061F01825;
+	Wed, 28 Oct 2026 03:29:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793157961;
-	bh=/vK5C+z753Ldc2efhljC24upKDWY/ID73cW01PyfTLw=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=F2ZYoHu4Ke5redW7yT1lepvi8XuyJXVY8kB2Soz01LWCk2/3Jr1wWQMm4V93gWhtz
-	 gpIbdrL/+0Uc4zbhgIK+4Q/e/HSh1lXeavy6rrtWahva4Xra0jhcg3LlUfvSjbMUxS
-	 fvFHO/agzt46sG9c09v8s4ST07qqLjiK0647TAMEiTRLvh6XpDPVeMlK9bF3YqWRTa
-	 bw7jRrdpQTIdh7jnxShSvJCZcAEqm5zCE0+1ObOGYdVA6w2uZMEYnbjS+L2fk4uQCp
-	 iMXNm7TCMgEUFIz8BdGxBUD/kJLbSSpeGm/mZ/AMqTEI54J20tdGMectcotGrzykh1
-	 c8rYwIsH8pDaQ==
-Date: Wed, 28 Oct 2026 03:25:53 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Rupesh Majhi <zoone.rupert@gmail.com>
-Cc: Alex Lanzano <lanzano.alex@gmail.com>, Andy Shevchenko
- <andy@kernel.org>, Benson Leung <bleung@chromium.org>, David Lechner
- <dlechner@baylibre.com>, Guenter Roeck <groeck@chromium.org>, Jagath Jog J
- <jagathjog1996@gmail.com>, Javier Carrasco
- <javier.carrasco.cruz@gmail.com>, Jean-Baptiste Maneyrol
- <jean-baptiste.maneyrol@tdk.com>, Jerome Brunet <jbrunet@baylibre.com>,
- Jinseob Kim <kimjinseob88@gmail.com>, Kevin Hilman <khilman@baylibre.com>,
- Lorenzo Bianconi <lorenzo@kernel.org>, Martin Blumenstingl
- <martin.blumenstingl@googlemail.com>, Matti Vaittinen
- <mazziesaccount@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Remi Buisson
- <remi.buisson@tdk.com>, chrome-platform@lists.linux.dev,
- linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-kernel@vger.kernel.org, Marco Elver <elver@google.com>, Bart Van
- Assche <bvanassche@acm.org>
-Subject: Re: [PATCH v4 2/9] iio: core: annotate the conditional mode claims
-Message-ID: <20261028032553.2e865b19@jic23-hlaptop>
-In-Reply-To: <20261028031834.2ff7e6bf@jic23-hlaptop>
-References: <20261027124954.110697-1-zoone.rupert@gmail.com>
-	<20261027124954.110697-3-zoone.rupert@gmail.com>
-	<20261028031834.2ff7e6bf@jic23-hlaptop>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=k20260515; t=1793158180;
+	bh=vEj7FK67g3rIaaz5Lq/NNY45PcOS57ENcFCjo3BtHwA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=d6BjhZcdkiF7NzVN/VdODtDgSYU2T3vnRqqnNrciDnvB4d7eKRegdXZ2loH+5vPv+
+	 Czm1V91BEUUCCmC7iAvk92u2RC2Ba+IQNpCkPBHAxYEH9pERkkrZbW/LJtdynShcHV
+	 2UFg33kCflug53Ch2Rr7Y7iQIJH4DUZLk+QEuKOGaK0+73a66xuakEAO+9rtB8bgGk
+	 SRQA3101JBL9pJEd0MwT4sWO6h2cp69nn+ycpVBWv9xlY/vs8z93mlar3Nfi0C6u0Z
+	 ielLuh7Edi9767f2xt5OnZxaLLB0fqCVUsIk2WRMl3NB1vQRa7CSiNgwtkExD9jsfz
+	 edQKopALHlMNw==
+Date: Wed, 28 Oct 2026 04:29:31 +0100
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Taniya Das <taniya.das@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: gcc-eliza: Use retention for PCIe power
+ domains
+Message-ID: <76mvypefoe6l5c26xdycrxcyrtkpxmnybi6bm5xyudqqcbawg6@5dzvmwkhqk2e>
+References: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
+ <273f7f8c-e24d-4322-a418-4fd5ed84b0bd@oss.qualcomm.com>
+ <e255ml7kf2pyjnw4k3ssi3jp4hkovw7x62cln6n3xbf7tz5q7y@ijqwv75233a6>
+ <CAFEp6-3YP29y5JYp+6Cw3T7bGEJHjfGD9mYsiQXGaTSegsMWXQ@mail.gmail.com>
+ <hmslxyt7kj3w2lyniw5sup2dcjfvsndckwhrrrk2v5ofpry6zz@nrjflylnt77j>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,170 +67,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <hmslxyt7kj3w2lyniw5sup2dcjfvsndckwhrrrk2v5ofpry6zz@nrjflylnt77j>
 
-On Wed, 28 Oct 2026 03:18:34 +0000
-Jonathan Cameron <jic23@kernel.org> wrote:
-
-> On Tue, 27 Oct 2026 14:49:47 +0200
-> Rupesh Majhi <zoone.rupert@gmail.com> wrote:
-> 
-> > iio_device_claim_direct() and iio_device_try_claim_buffer_mode() hold
-> > the mode lock only when they return true, but carry no annotation. With
-> > context analysis on, each caller that releases the claim is reported
-> > for releasing a lock it never took.
+On Tue, Oct 20, 2026 at 03:41:54PM +0300, Abel Vesa wrote:
+> On 26-10-14 14:09:04, Loic Poulain wrote:
+> > On Wed, Oct 14, 2026 at 1:59 PM Abel Vesa <abel.vesa@oss.qualcomm.com> wrote:
+> > >
+> > > On 26-10-12 14:58:43, Jagadeesh Kona wrote:
+> > > >
+> > > >
+> > > > On 10/12/2026 1:29 AM, Abel Vesa wrote:
+> > > > > When resuming from system suspend on Eliza CQS EVK, gcc_pcie_0_gdsc
+> > > > > gets stuck off when powering back on, preventing the system from resuming.
+> > > > >
+> > > > > Use retention for all four PCIe GDSCs, as on SM8550, to preserve their
+> > > > > state across suspend and allow the system to resume.
+> > > > >
+> > > > > Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
+> > > > > Assisted-by: LLM
+> > > > > Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> > > > > ---
+> > > > >  drivers/clk/qcom/gcc-eliza.c | 8 ++++----
+> > > > >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > > > >
+> > > >
+> > > >
+> > > > Hi Abel,
+> > > >
+> > > > Using PWRSTS_RET_ON keeps the GDSC forever ON after first enable and the GDSC never
+> > > > collapses.
+> > > >
+> > > > For similar issue on Lemans (pcie_0_gdsc gets stuck off when powering back on), picking
+> > > > the below changes from PCIE side helped to power ON the GDSC properly without any issue.
+> > > >
+> > > > https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
+> > > > https://lore.kernel.org/all/20260729071514.859778-1-manivannan.sadhasivam@oss.qualcomm.com/
+> > > >
+> > > > Can you please try if above changes are helping on Eliza also?
+> > >
+> > > Thanks for the hint. Mani's patch (v2) is already upstream, so just enabling
+> > > CONFIG_HOTPLUG_PCI_PCIE did the trick.
+> > >
+> > > Suspend/resume works fine now on Eliza, so this patch can be ignored then.
 > > 
-> > Mark both __cond_acquires(true, indio_dev), the token that
-> > __iio_dev_mode_lock() acquires. Sparse no longer reads these
-> > annotations, so drop the comment about it.  
-> Hi Rupesh,
+> > So should the retention configuration above be conditional on
+> > CONFIG_HOTPLUG_PCI_PCIE, or should we simply depend on
+> > CONFIG_HOTPLUG_PCI_PCIE?
 > 
-> The history of the definitions of these being in the header at
-> all was to make them visible enough to sparse that it could
-> figure out the locking and 'mostly' give good coverage.
-> 
-> Given that's no longer necessary, maybe it makes sense to make
-> the implementations private. It doesn't really help us that
-> much as those nasty helpers are still needed for the
-> rarely used guard that claims the current mode.
-> 
-> So maybe it's worth this maybe not...  Anyhow, perhaps one for
-> another day given I don't think it helps this effort.
-> 
+> None. I think QCOM_PCIE should select it.
 
-> diff --git a/drivers/iio/industrialio-core.c b/drivers/iio/industrialio-core.c
-> index e9a5d1d905c1..04c194bdda87 100644
-> --- a/drivers/iio/industrialio-core.c
-> +++ b/drivers/iio/industrialio-core.c
-> @@ -2269,6 +2269,33 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev)
->  }
->  EXPORT_SYMBOL_GPL(__iio_dev_mode_unlock);
->  
-> +bool iio_device_claim_direct(struct iio_dev *indio_dev
-> +{
-> +       __iio_dev_mode_lock(indio_dev);
-> +
-> +       if (iio_buffer_enabled(indio_dev)) {
-> +               __iio_dev_mode_unlock(indio_dev);
-> +               return false;
-> +       }
-> +
-> +       return true;
-> +}
-> +EXPORT_SYMBOL_GPL(iio_device_claim_direct);
-> +
-> +bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
-> +       __cond_acquires(true, indio_dev)
+Nope. It should be selected by defconfig [1].
 
-Dropping that marking. Turns out I even failed to build test this...
+Just to clarify on how the hotplug support is fixing this issue. Once we enable
+the hotplug driver, the Root Port will be allowed to enter D3Hot during suspend,
+which is a pre-requisite for powering off the PCIe devices and the controller.
+So once all the conditions are satisfied, the controller and devices will be
+powered off. So even if the PCIe GDSC gets powered off at the end of suspend, it
+won't affect PCIe devices as they already lost their power. So we don't need
+GDSC retention.
 
+But that being said, if any of the PCIe devices support wakeup like WOL from
+D3Hot, then we do not power off the controller and devices. In that case, GDSC
+retention would be required to keep the controller/device state intact. You can
+reproduce this issue by enabling wakeup for the PCIe device from sysfs and
+attempt suspend.
 
-> +{
-> +       __iio_dev_mode_lock(indio_dev);
-> +
-> +       if (!iio_buffer_enabled(indio_dev)) {
-> +               __iio_dev_mode_unlock(indio_dev);
-> +               return false;
-> +       }
-> +
-> +       return true;
-> +}
-> +EXPORT_SYMBOL_GPL(iio_device_try_claim_buffer_mode);
-> +
->  /**
->   * iio_device_get_current_mode() - helper function providing read-only access to
->   *                                the opaque @currentmode variable
-> diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
-> index ca91f5a64626..b9e4888e18bc 100644
-> --- a/include/linux/iio/iio.h
-> +++ b/include/linux/iio/iio.h
-> @@ -718,18 +718,7 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
->   *
->   * Returns: true on success, false on failure.
->   */
-> -static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
-> -       __cond_acquires(true, indio_dev)
-> -{
-> -       __iio_dev_mode_lock(indio_dev);
-> -
-> -       if (iio_buffer_enabled(indio_dev)) {
-> -               __iio_dev_mode_unlock(indio_dev);
-> -               return false;
-> -       }
-> -
-> -       return true;
-> -}
-> +bool iio_device_claim_direct(struct iio_dev *indio_dev) __cond_acquires(true, indio_dev);
->  
->  /**
->   * iio_device_release_direct() - Releases claim on direct mode
-> @@ -753,18 +742,8 @@ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
->   *
->   * Returns: true on success, false on failure.
->   */
-> -static inline bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
-> -       __cond_acquires(true, indio_dev)
-> -{
-> -       __iio_dev_mode_lock(indio_dev);
-> -
-> -       if (!iio_buffer_enabled(indio_dev)) {
-> -               __iio_dev_mode_unlock(indio_dev);
-> -               return false;
-> -       }
-> -
-> -       return true;
-> -}
-> +bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
-> +  __cond_acquires(true, indio_dev);
->  
->  /**
->   * iio_device_release_buffer_mode() - releases claim on buffer mode
-> 
-> 
-> > 
-> > Signed-off-by: Rupesh Majhi <zoone.rupert@gmail.com>
-> > ---
-> > Cc: Marco Elver <elver@google.com>
-> > Cc: Bart Van Assche <bvanassche@acm.org>
-> > 
-> >  include/linux/iio/iio.h | 9 ++-------
-> >  1 file changed, 2 insertions(+), 7 deletions(-)
-> > 
-> > diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
-> > index 9b63785d5aec..ca91f5a64626 100644
-> > --- a/include/linux/iio/iio.h
-> > +++ b/include/linux/iio/iio.h
-> > @@ -707,13 +707,6 @@ int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp);
-> >  void __iio_dev_mode_lock(struct iio_dev *indio_dev) __acquires(indio_dev);
-> >  void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
-> >  
-> > -/*
-> > - * Helper functions that allow claim and release of direct mode
-> > - * in a fashion that doesn't generate many false positives from sparse.
-> > - * Note this must remain static inline in the header so that sparse
-> > - * can see the __acquires() and __releases() annotations.
-> > - */
-> > -
-> >  /**
-> >   * iio_device_claim_direct() - Keep device in direct mode
-> >   * @indio_dev:	the iio_dev associated with the device
-> > @@ -726,6 +719,7 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
-> >   * Returns: true on success, false on failure.
-> >   */
-> >  static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
-> > +	__cond_acquires(true, indio_dev)
-> >  {
-> >  	__iio_dev_mode_lock(indio_dev);
-> >  
-> > @@ -760,6 +754,7 @@ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
-> >   * Returns: true on success, false on failure.
-> >   */
-> >  static inline bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
-> > +	__cond_acquires(true, indio_dev)
-> >  {
-> >  	__iio_dev_mode_lock(indio_dev);
-> >    
-> 
-> 
+So to cleanly fix this issue, we need the PCIe controller driver to signal
+retention state to the GDSC driver or the GDSC driver has to figure this on its
+own and configure retention accordingly.
 
+- Mani
+
+[1]  https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
+
+-- 
+மணிவண்ணன் சதாசிவம்
