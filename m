@@ -1,60 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793186893;
-	b=xFunJSQ7a8vaCM9LTaYpXVPPQa9HPdG89wH2EfV5aDkZbieYwuid5Ksoc+BjOyCpjDYp
-	 a1BkqMpc33gFXw0KLgCg4/d1Adux7MI58aWZL1wjcvZoWvTi+Qe8TzlQZMArFqMQmJnGm
-	 iilOr9PFIFUKUI1469DcEFqEuhsdA//x9LNvgvCxjQFIh+56Rpsgj6tPND4aESkszpnUR
-	 EdlXW/zw4mSNkuqV3HkeCzW1AXHSV4CaHiZg9dwewCAPrklVEuY5Qs+kqR256jwbiMDfh
-	 wQRQ3hHRrAUeWaSnmNtnxu8Ay3RHFyikAgGMCLUfdziKhVl2QgulhD90x3uWpUPzA4Q==
+	t=1793187339;
+	b=Zf3TyOPwyI/FFbi3mvLeN+fLAw2jns3ku1Y/DnefCgc98/gIkMNQkxGfm4QSLh5b0Y6z
+	 VbjswZBUWA35Sw6Oh/qz0RfjRdvUBlJkBo3RMmdYkoW4AIl0kTEdPOeRSyr/ayQnT4CQd
+	 DzHS3CmdLlI7Ruz7WFWQ6hq8nbjovonamtstxbnwbDAFB40GijBE1zcMtMN2dE7ZyiW1y
+	 /78eVO4AR26G2dDM1vMWjUhQvtf5rhcrtpCdYpCdh7iQ5jFlGOJ7PSll7ChzK1TfJX3BC
+	 9tbp9r+phiOaRq0AgGmUWh70DVYvPpMo2jjmB+yF/wI+YGCWk9fI/964YKJtrSsOZdQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793186893;
-	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
-	 Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=DwZ3RVMiQTAuP+GZ8Hc0hnOIdJwPtlJFIaiRjOM9wYE=;
-	b=sW7OJH9wYhwL7ZfHtzVCzUOgbFt5/gnP2MOoMj6nFYqysanUvJgdfvGoGVtICzPaSnmi
-	 iRpqeioU3v/uY8mInCDYk7tE+zkRDjIpP7ZgKnJD9n3BenUPQoxHiO51UDY5F73MqVRg6
-	 L9int3HqYWxPBYHv316b9XOqyfA58R+fwh19hA8PZ+qZg+VAL23POd1/jLwtEtMwznSb5
-	 GzKQk/7L3CzkphXOfZndb6I0fqqyvE7H8Fv+PWV/LmkO2WI6LcvuHopXOxpaQjE9n5rRz
-	 7hc6hsy3jFye9Xh4leV8IcVC65f6O4qhvryA99DSzIDaZ96GLTLLOPrCwGT2t1sFazw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793187339;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=JUxgy1qRD86ZxMGDKv05wIfS/1ugnuo1jwVn/XUQAUQ=;
+	b=JWPjFfiu5ZHF7oCxBewGu1zbEktkouIHgOIMcJsCovss28MjdjgKZW8stiQf+QjwbJ+x
+	 NhOve2tScErWxoMPIJUhg+3D1QUn1LCaAEb7uV+1ja2+keVBgNInR7AToKCwo2Dxp3kNe
+	 HY52YrzzhlkJzD7tGRZfv7XtcIywpeyJ3mJ34sZRYSjBb1oMH3WsLalpIiOSnt7sSXbph
+	 w5BALj16UFmIZNW+R1ll8bgeoHzAigiyCdswrBj2fhZrDrupoYQnMuyfe7UTSONOpZ58/
+	 mALwAVJfrnFs/s+qWJ+D2cq1GuR28klTwYALUR57fNybPMbVjnQmGOqq2Svqyo6+qzQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gOmBGoBt;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F6uxqfuC;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A6FF606A31A;
-	Wed, 28 Oct 2026 11:28:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B1D2606A31A;
+	Wed, 28 Oct 2026 11:35:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gOmBGoBt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF3081F031E1;
-	Wed, 28 Oct 2026 11:28:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F6uxqfuC
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 160E21F01825;
+	Wed, 28 Oct 2026 11:35:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793186893;
-	bh=DwZ3RVMiQTAuP+GZ8Hc0hnOIdJwPtlJFIaiRjOM9wYE=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=gOmBGoBt893TaQzCu8MV5OPli7hFcrYAjOw+80Naqs/mSitJDCDKGIBwNum6R/rXf
-	 IjhYEupgcXAJBR7s17W7xZKhKPZypp7nZAc1osVtxxtIGDSyjKvOx3GJ7EzZkOWcUV
-	 +q93Wx3hUVPDhxIscukdYL8yG4uQp1VRE8iBQKa6hstMXqm2pE26sOvYlpKL2oWgNY
-	 VmbomhwNXXhnM3v0Lk2JT6B5cmJvPS9qYsc1bypTMqbiDvKi2Q7YsHb4HverIcW1yI
-	 3CsK1S3kqiaO/+LC8F2EH7PbHgx98QbetGqhdP6GxvSV4KrtitWKCvTstqZ75oaO+X
-	 qMRYOiCWxfi4w==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id 2E0F31FF23F9;
-	Wed, 28 Oct 2026 11:28:11 +0000 (GMT)
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, Filippo Falezza <effeffe99@gmail.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261027-sm8250-rx-gain-v1-1-386ee6d971db@gmail.com>
-References: <20261027-sm8250-rx-gain-v1-1-386ee6d971db@gmail.com>
-Subject: Re: [PATCH] ASoC: qcom: sm8250: Limit RX digital gain to 0 dB
-Message-Id: <179310138476.199157.12004558971024027004.b4-ty@b4>
-Date: Tue, 27 Oct 2026 11:43:04 +0000
+	s=k20260515; t=1793187338;
+	bh=JUxgy1qRD86ZxMGDKv05wIfS/1ugnuo1jwVn/XUQAUQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=F6uxqfuCLgZDap3U0SMr7iZV1wNYsmDKH4ZCcjATHHDdpGqaIgaPhWk0RBnBPf73K
+	 c2ZYF4UGiF7NTAjgC/mlBwmqaLveiUkmJY5g+bfH08pZuVw4dqjb0erpx0/QET8yqa
+	 Lu00SmcX8Oq5nizhCVMlaFr4CxPSTeLBQtGo7j8ROcUUv4YgxBo6BcVN5De3zRL5ss
+	 o2ENpAaEOD72nOfZfIqLsDdB1znBo9hKRWv6J59zgaT2zA3M7auRu2GE9OlYBxdG0j
+	 1Oe7eURiqDeV1m7iM2fwdNao0ZOrtPl95oyJ8KVNGt8jp1Ad3KBiWYVq+2IkDIA1fa
+	 cy2tFiu/qDO6w==
+Date: Wed, 28 Oct 2026 12:35:35 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Robert Marko <robimarko@gmail.com>
+Cc: andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org, 
+	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org, 
+	conor+dt@kernel.org, konradybcio@kernel.org, taniya.das@oss.qualcomm.com, 
+	ansuelsmth@gmail.com, john@phrozen.org, linux-arm-msm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/4] dt-bindings: clocks: qcom,gcc-ipq8074: Allow CMN
+ PLL bias clocks
+Message-ID: <20261028-screeching-magnetic-mongoose-52ad2f@quoll>
+References: <20261026120920.1667982-1-robimarko@gmail.com>
+ <20261026120920.1667982-2-robimarko@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,46 +61,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1119; i=broonie@kernel.org;
- h=from:subject:message-id; bh=dTlSEsmiJQPp2W18QXY40obJ0H6L3X/HPCQDrxajihs=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLIe3vG+sOp/kuERvsv89VFG+wX//tdWuLWFSXV/9EP5v
- o8fzD6v6yhlYRDjYpAVU2SJy+J+WV/yeg3fwYVtMHNYmUCGMHBxCsBE0h4y/FN3PXFtxcvb094b
- BSc82si8oEDxneDVBUoBy57t1dx1Y81nhv91LEw2N8qsRLZrue9r27SBee2OB42Ftrbze/9/72G
- 3M2ECAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261026120920.1667982-2-robimarko@gmail.com>
 
-On Tue, 27 Oct 2026 01:33:56 +0000, Filippo Falezza wrote:
-> ASoC: qcom: sm8250: Limit RX digital gain to 0 dB
+On Mon, Oct 26, 2026 at 01:08:13PM +0100, Robert Marko wrote:
+> CMN PLL in IPQ8074 provides 2 fixed clocks to the GCC clock controller.
+> In order to describe this in DTS, allow passing them as the inputs to GCC.
+> 
+> This has a benefit that it avoids doing a global matching by name.
+> 
+> Signed-off-by: Robert Marko <robimarko@gmail.com>
+> ---
+> Changes in v2:
+> - Keep the existing four-clock form valid with minItems: 4.
+> - Drop the _clk suffix from the new GCC input names.
+> - Correct the NSS NoC bias clock description to 461.5 MHz.
+> 
+>  .../devicetree/bindings/clock/qcom,gcc-ipq8074.yaml         | 6 ++++++
+>  1 file changed, 6 insertions(+)
 
-Applied to
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
-
-Thanks!
-
-[1/1] ASoC: qcom: sm8250: Limit RX digital gain to 0 dB
-      https://git.kernel.org/broonie/sound/c/55df18877471
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
+Best regards,
+Krzysztof
 
