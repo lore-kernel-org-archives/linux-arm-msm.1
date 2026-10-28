@@ -1,47 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793181617;
-	b=i8L8cHF3SdEsYNKCLso//5hccF9RYESJBzc8AIOBeSQF1+8eFS0KdGQuJDPEl5W3jizw
-	 EE0lIl2W7SsF2aOBowgdmA9RLBOxks5mynfOa8e81xUJQWaCpyd6o/Cyo4+PGknYpw9WV
-	 bK+yTHkPI+yzQ1Wm4pm6Gk5vdAxM6kjF99CoBNftTkqWNgsuvWOKFBc3e4X0e18M9vvq+
-	 i6BHovsS5PdOUkjVpzDjZPammnASZlR2/708wC+GQT+6YJu/A7/F/yuecHeCmmykf6osl
-	 QOWmhJ6atH9rcQVj14gIqfG3nl59hDL38XHHK3zqEUoYr+SJ00pYDrFO6yW2BdzUl6Q==
+	t=1793182099;
+	b=1Hkvj7VghxmJCFhbRPW5MIBVUklf2wGHFyIvxYeF7zY/PMZDNqb8JDW7edDwxICje9zz
+	 hLnYm3ETGNOOuyLL/p2YGvcOxR/T8hGHY25yi6OPDEmPnLdkoNK5qCYhZE0vdBkG5vGlO
+	 g0hLVtixGsAeBWfTxmUXGmctxam2iv6jUFanmik6gEEyUSlO/pzxjs1RNLiDJzn7J5amc
+	 yi+xqBhifTV6+w9otGnYoBC7Z8DniJpAtg0F6Bj54118SRnx4gAHcjdnYZmAft5shqpCs
+	 KUpptF7/u+jvjM/Fv83IKg/J66Xqgyn0qh+rThXDr0lItwcfQaMeOR5E9dFYk1RHzdg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793181617;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=s5fN7zqfY0FT1clO7TLSZQSrDeAgwSiZ8frqUs18I+w=;
-	b=hVJXCkaWRUFyQVNcRWQI74Rz43USTeZXlfz2nRg6rM0NZn5Hv2DWedi975wtXCLxx/Yv
-	 Kh8LeCmMc2p/8myIB7VPgEn17fT6aE7kzquIE22fA1z7QlGWO0CeYo+jWU7sWMUYgowK4
-	 W9/u+mGVbbpPoovr1kW44eHlEv+VYI6a2J7N6eQtPBp14/SrUX5yprvTsB3bIxoqFrr4l
-	 EnSQPz9IdiitfROqZmKGp5UcP+faKh63VGqxZxIXIdnSKijuUKwrHRgKeANRwyu+Wxi+w
-	 BR32MGn1kA3Ze2pBzUvjQK4Jx8GjnlxLwizohWYRVoAUT/eEPXP4hM/VTS69Q4PyDdg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793182099;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=Yw7pE9Jfr5b4VeVQuAsVUZi1Dy0jJV/jL5g1YIwpO3Y=;
+	b=HnfGR9QQ7bEIqIk4Fz8KBv9UkjKMdpov/G4uM+8obIkUQbnUoh5tdQ0L2SZsdLXvy/in
+	 9azBl5YZMb8PzopxYW1D73VQy8NR98W0MpiHyn+OUMXXH1QaHMRfoGEd4QfuWxMVZ1UrS
+	 1jdj2q0axNClXn2aKEPs0y2KP/uzkMoP3iW+EyUeRVKkdEnZVnA0QY1OgWEhG6yLZ1nIG
+	 MMzWZgjk/H61oJlliGSbW683dbnTbU9RR41BVyNVkqaBdVUfoJwTftHSq8c2ih6I79m6t
+	 w+HItmIfK0FBHJzWcRUFlmBbqvd/U3/ZHPL1qfF323ySU1e9qRd4tP1+yYIha2GKdBQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VREr7TVD;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=none header.from=fielding.dev;
+	spf=pass smtp.mailfrom=fieldingdsp.com;
+	dkim=pass header.d=fieldingdsp-com.20260707.gappssmtp.com header.i=@fieldingdsp-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=fm5lcbI6;
+	arc=none smtp.remote-ip=209.85.218.47
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7F5D606A31D;
-	Wed, 28 Oct 2026 10:00:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC8E2606A31A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 10:08:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC8E2606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fielding.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fieldingdsp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VREr7TVD
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0894D1F01825;
-	Wed, 28 Oct 2026 10:00:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793181616;
-	bh=s5fN7zqfY0FT1clO7TLSZQSrDeAgwSiZ8frqUs18I+w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=VREr7TVD5CF7eXhkDuIrS0jvFsTToXJQ1D6dX3B9ctvGLS2GJDAfl+Llmut+NVSgC
-	 7xl+i8jOrBIOKUm+zj859JULbrB7CSAI4mdOEteaIGg8EAKlZBIPxFo0NhF8gW9dV5
-	 bQ0l80qDVMpSfIqycysPDfsaCPRe2YVRCmTvHGyv14A5HeHTH/9ZdXKwUXxkyDQR3O
-	 J6FjkPq9I6ws5p5CoJ5AKUCDRm0pMxWy9RQQYL8J122ss4rlDmHUCce/l1Jt73uaFb
-	 qKNvDLdJC49GBwGBynIKutNr5y+QFnaqFLfWwgrVaYxaOszFi0W0J6m9XRVH7S0D3f
-	 FT1YvbaeWI/DA==
-Message-ID: <6ae04312-5c60-40f9-8468-4cb0674c0949@kernel.org>
-Date: Wed, 28 Oct 2026 10:00:13 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=fieldingdsp-com.20260707.gappssmtp.com header.i=@fieldingdsp-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=fm5lcbI6
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c4395d31228so110436666b.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 03:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fieldingdsp-com.20260707.gappssmtp.com; s=20260707; t=1793182096; x=1793786896; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Yw7pE9Jfr5b4VeVQuAsVUZi1Dy0jJV/jL5g1YIwpO3Y=;
+        b=fm5lcbI6HWmtkh9Xqi1j3jnaaS6voph8kCnlEwBe1SCnkbabeBPmMuJpSo1VegBOtw
+         BhQ8Da6SN/mWaauLGWaxGNpLJLFplEsrWJjxMdrNhkYlQb6JWgKpDDf8DdTeEjy2bywq
+         HHoqdJIwr7vWjLSjeAKLCMfolPdmnDmZQyvCrKWJ/Qg/pOdbcf3/qODTdfDy4+Y0Rdd7
+         xCNTRvfZvjSIhUYx92qhPIaZ2uBX78rYlGPKxuDZGJWn7nM2HSzx8SUVQPzY9Yptcz2h
+         qzYmmR0+WR11CtD3JKwY1NnBZqi8TJdacgNZqh8yeEhz+6uMHlZGMkEuX3WYCq6ItJmF
+         OUrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793182096; x=1793786896;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Yw7pE9Jfr5b4VeVQuAsVUZi1Dy0jJV/jL5g1YIwpO3Y=;
+        b=cGJs6RjH1OO07xbCbyWHNKCuYdZF4FAizOAR3w2mHAjgZdMtCy44NLP01wfAeYJspu
+         GdHsNsGt9DqfPjXoSRnZz+J+o0cNdAvgQiQYJKWuqazUaLJmPx+QvqEZk6waCC7S37X9
+         pGquYS9TAJnDCPJZOlgYr3ueQ0WuqjZuaeRTJSIYdIxwYVWe2SH2K1zB2EyXEaBRGw+h
+         omNpri6Hva99QSwK3qc9MlYwzA8Pt6Ie8rGiZweTyTdIQf5HgVptS/tfqy4E3kfeVjdp
+         a9uyCdiAApq1H7WAPIo8Tzv1i4GOFX5F4TGxT1ymbJxJXLTClsDo7Srhj8a6tsiIQlUP
+         ULjQ==
+X-Forwarded-Encrypted: i=1; AKwUvBz/THMx6P42yr42wMmfoWNtICiGIpkeyehYV6FToEtJdElqSjKgBheby4s19qHYyksqDlSqK+WIvLGDA3jf@vger.kernel.org
+X-Gm-Message-State: AFq9FYIRydBm16QFoqfNOi+9hoNTgUsKcdgSEb1fQ7krciZClCc3Y8by
+	/Dj1tRUOKBBpZngX9GgSkkoHfC2o0ULcVuOllJ6DFOuNMXUJfGRPPlGlWgn2/9qdx3Y=
+X-Gm-Gg: AYBFou0Aw8pX+DYmFJUmMyhmrIymkXfCaOZIi4R3Mjjm3NlY+S53Led87FVvw84cNlg
+	JgMhdXmprvR3Ph1FiYpN1eNB0cc1+5NTqcW77+/9NRaUJkBaP6WjF40mAqQe+/78/tfzICRkTc+
+	ol0xHPb31IFm23HSvywUf4DIkksTK6hB2rzAnlINqZUhVeZwB+DpZwopcSeHP1akd1ySlLZCLPy
+	ilq/BSkjVKTqvE0T1rylf1HTXHMIRFCAN/bqqHOLLLiKQ637PeTCuRe1TzhNzVFvm7+zrN9pNc4
+	pAqqGxEw/0D5Z9GsA8kPDDuAsPBNHMB1DMXjPTpFVQRSTyGtQrVJt6G1j2TaVxjb7wcu2Hj8xnj
+	r5OaBWhRdJcRPD8anpFFk5yNJXl7qXXjgkr9weIN0fOR1rU2xIt6OXs1WsV26aluPN4MsiJ7bgo
+	9ZLWXuJdJgTTY5N1RmFGKx5uHh4muWN5SoTQjgil/oF4R3jyrc8JlUmBZrZEX91gkV6cBGsEGCx
+	0UA1ZegUJ0q6oG77fQeG2yIvjOuv7iy78UtSFqyjBvD2ntMMehP1puwo2w4ABLrKPjUAtUAuqfa
+	i0x4wjBqvMpVMlanLlXr3/L3S4I34oflC52yMlC8sZkUH6qBLtkxohSkEbTKVs0rurJuJpfAwss
+	ZJTgIL+8lFx+d3P6CVLZ1FYhwSCq9qMQHqxqR6t57JhCeFe2C
+X-Received: by 2002:a17:907:3f11:b0:c3f:c878:7c1d with SMTP id a640c23a62f3a-c49bdf2b6ddmr158720666b.9.1793182095755;
+        Wed, 28 Oct 2026 03:08:15 -0700 (PDT)
+Received: from kneiselgnabe.duckdns.org (p5b03fe53.dip0.t-ipconnect.de. [91.3.254.83])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd7975b2sm588434366b.73.2026.10.28.03.08.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Oct 2026 03:08:15 -0700 (PDT)
+From: Fabian Renn-Giles <fabian@fielding.dev>
+To: srini@kernel.org,
+	broonie@kernel.org
+Cc: lgirdwood@gmail.com,
+	neil.armstrong@linaro.org,
+	krzysztof.kozlowski@oss.qualcomm.com,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Fabian Renn-Giles <fabian@fielding.dev>
+Subject: [PATCH] ASoC: qcom: qdsp6: clear stale channel_map entries
+Date: Wed, 28 Oct 2026 11:07:08 +0100
+Message-ID: <20261028100708.6808-1-fabian@fielding.dev>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,115 +101,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 0/4] media: iris: decoder fixes for resolution
- changes
-To: Christian Cortner <ccortner@gmail.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>, Birk Skyum <birk.skyum@pm.me>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <-D3aZIsoO4_H5CdnB-7Co7GWmm5F9FuU6aFuhXWogBXhfqNOaqC2Y8tkBxT9ljDcy84UAX1jmUWGl7NtGUG6Mg==@protonmail.internalid>
- <20261028034335.26075-1-ccortner@gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20261028034335.26075-1-ccortner@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 28/10/2026 03:43, Christian Cortner wrote:
-> Four fixes for iris decoder problems at resolution changes, reworked
-> after Bryan's review of v1 [1]. There is no Signed-off-by from me,
-> since I'm not a kernel developer and can't vouch for the code; please
-> take over whatever is useful. An AI assistant wrote the code and the
-> logs (Assisted-by in each patch). I'm happy to test.
-> 
-> Tested on glymur (Zenbook A16, laptops tree 65f4ae73 with these four
-> and the iris patches listed in [2]): v4l2-compliance passes, and
-> GStreamer and a spec-following client decode bit-exact across
-> resolution changes. ffmpeg's h264_v4l2m2m still stops at the first
-> source change when it sets up CAPTURE early (problem 1 in [2]).
-> Build-tested on media-committers next with W=1, sparse and smatch.
-> 
-> Changes in v2:
-> - 1/4: shorter log, with the traced firmware flags (Bryan)
-> - 2/4: shorter log (Bryan)
-> - 3/4: one helper for the EOS check (Bryan)
-> - 4/4: comment states the 500 ms limit, no domain check, warn on
->    timeout (Bryan)
-> - v1 5/5 dropped: too much for stable, and broken (Bryan)
-> 
-> [1] https://lore.kernel.org/linux-media/20261027021934.22113-1-ccortner@gmail.com/
-> [2] https://lore.kernel.org/linux-media/20261026160952.22082-1-ccortner@gmail.com/
-> 
-> Christian Cortner (4):
->    media: iris: Don't flag an empty source change LAST buffer as an error
->    media: iris: Update the CAPTURE stride and size on S_FMT(OUTPUT)
->    media: iris: Signal V4L2_EVENT_EOS only at the end of a drain
->    media: iris: Let a resolution change drain before stopping CAPTURE
-> 
->   .../media/platform/qcom/iris/iris_buffer.c    | 26 +++++---
->   .../media/platform/qcom/iris/iris_buffer.h    |  1 +
->   .../qcom/iris/iris_hfi_gen2_response.c        |  7 ++-
->   .../media/platform/qcom/iris/iris_instance.h  |  3 +
->   drivers/media/platform/qcom/iris/iris_state.c |  8 ++-
->   drivers/media/platform/qcom/iris/iris_vb2.c   | 26 ++++++--
->   drivers/media/platform/qcom/iris/iris_vdec.c  | 61 ++++++++++---------
->   drivers/media/platform/qcom/iris/iris_vidc.c  |  1 +
->   8 files changed, 91 insertions(+), 42 deletions(-)
-> 
-> 
-> base-commit: d7e7bca7169873b46e857c025c10f3336c1258d8
-> --
-> 2.56.0
+Since commit c663014e452d ("ASoC: qcom: audioreach: compute active
+channel maps from channel_map"), the codec DMA active_channels_mask is
+built from the non-zero entries of the channel_map instead of from
+num_channels.
 
-Thank you for your bug report and suggested fixes.
+audioreach_set_default_channel_mapping() only writes the first
+num_channels entries, and q6dma_set_channel_map() only the first
+tx_num/rx_num entries. The per-DAI module_config in q6apm-lpass-dais is
+persistent, so entries written by an earlier, wider configuration
+survive a later narrower one. E.g. after a 4 channel setup, a 2 channel
+capture on VA_CODEC_DMA_TX_0 keeps the map 01 02 04 05 and sends
+active_channels_mask = 0xf with num_channels = 2. The DSP rejects the
+graph start:
 
-I will mark is as under-review and ensure we do Closes: and 
-Suggested-by: with whatever lads upstream.
+  qcom-apm gprsvc:service:2:1: DSP returned error[1001002] 1
+  q6apm-lpass-dais ...: Failed to start APM port 110
+  MultiMedia4 Capture: ASoC error (-22): at dpcm_be_dai_trigger()
 
+which breaks the built-in DMIC capture on the Lenovo Yoga Slim 7x
+(X1E80100).
+
+Clear the whole channel_map before filling it in both places.
+
+Note: this is my very first contribution to the linux kernel so I
+may be new to some of the processes. I apologize in advance.
+
+Fixes: c663014e452d ("ASoC: qcom: audioreach: compute active channel maps from channel_map")
+Signed-off-by: Fabian Renn-Giles <fabian@fielding.dev>
+Assisted-by: Claude:claude-sonnet-5-5
 ---
-bod
+Tested on a Lenovo Yoga Slim 7x (X1E80100): built-in DMIC capture on
+VA_CODEC_DMA_TX_0 (MultiMedia4 Capture) failed with the DSP error above;
+with this patch repeated arecord runs work. Based on broonie/sound.git
+for-next (d34a818a331f).
+
+ sound/soc/qcom/qdsp6/audioreach.c       | 6 ++++++
+ sound/soc/qcom/qdsp6/q6apm-lpass-dais.c | 2 ++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+index d2dc5d37bccf..4ac65d9b5543 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.c
++++ b/sound/soc/qcom/qdsp6/audioreach.c
+@@ -308,6 +308,12 @@ EXPORT_SYMBOL_GPL(audioreach_alloc_apm_cmd_pkt);
+ 
+ void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels)
+ {
++	/*
++	 * The active channel mask is derived from the non-zero entries, so
++	 * stale entries from a previous, wider configuration must not survive.
++	 */
++	memset(ch_map, 0, AR_PCM_MAX_NUM_CHANNEL);
++
+ 	if (num_channels == 1) {
+ 		ch_map[0] =  PCM_CHANNEL_FL;
+ 	} else if (num_channels == 2) {
+diff --git a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c b/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
+index 83f2711bceea..12f139af8ca0 100644
+--- a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
++++ b/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
+@@ -99,6 +99,7 @@ static int q6dma_set_channel_map(struct snd_soc_dai *dai,
+ 				tx_num);
+ 			return -EINVAL;
+ 		}
++		memset(cfg->channel_map, 0, sizeof(cfg->channel_map));
+ 		for (i = 0; i < tx_num; i++)
+ 			cfg->channel_map[i] = tx_ch_mask[i];
+ 
+@@ -123,6 +124,7 @@ static int q6dma_set_channel_map(struct snd_soc_dai *dai,
+ 				rx_num);
+ 			return -EINVAL;
+ 		}
++		memset(cfg->channel_map, 0, sizeof(cfg->channel_map));
+ 		for (i = 0; i < rx_num; i++)
+ 			cfg->channel_map[i] = rx_ch_mask[i];
+ 
+
+base-commit: d34a818a331f7e270fa9dc3db3d96f6a0d4fa7ab
+-- 
+2.55.0
+
