@@ -1,55 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793195409;
-	b=IYgoSYKxDeNnkmSYWQVe+UT8BcK0REU2EjbaCGwv0FM7zOXS64k37wfShOigKqZ1Sb5p
-	 xJmWerukzxVpYz7/lWxpL7N6OitFeYkg38oYyASsybWFmugDVrJMUJfRIGocGfYSA4Fgd
-	 g/ik59ZiPaAqeaHMO7d6ybIEsJXGYu7eqlhK4XmTdYHhuqZHk+sZx+1AFudBDgKUd21Vc
-	 H/YkpSHci8XWJ3lR16w9ed0pbz2/kfSXTHdQXjMHeH8I9sl6mnD6P20pTcjHnEh7/Z4ac
-	 xeZpJ3m9v7eRReRPDyrbSjDgDFd4NB0pIVF8X8AEZVfrHgD8/uJfxhLWwSKK+bh/PjA==
+	t=1793195807;
+	b=eSPSnh1Qf5G0Sn4lnWJuWQ7TA12Wg1JDgY8qsK//nh2VKTqd2DlVSaMyuLySYpj457Ux
+	 N2UAaS3QaTgFq+06f4oewXudZ7/QjjmU+XyAHRigIKqI+DJXyZ1CTK1xTDmg9npzSXeCl
+	 6WPUOfMahM8LllX8L8RvDzWzAk/EdHPFNDUwEvQL65wVYLfBpAPSSrtkAipFB1Hh68WKL
+	 mw14epFYD9cylplWwi/FwXCsdDbGiIelljRx64wq+7+8aqsn61EciBM71B2IFcj9olLGr
+	 21xJfS/W92mN1iwXOhLUuyJezd6YeTJK/ImR1DTIro83G+4WmDO5FVKluEGIbS/UnXA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793195409;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793195807;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=JdWNP8JpkypifgTIvG1V7ARGk/pgBkZ3PALw6mjNWMY=;
-	b=D+fhbubuw99jWVg8RY9CU7ggPFCtb1/VJpOcYBfppi2RoSZFUs65xQJOi83f4uQ5lviv
-	 fyNY/DxkzcmA59RiiQV7uwvZIjcmsvE5FMrWRBSoNJRDqYfRRH6NPlDVeUOivTTy/4HlR
-	 J4J+Uz7vtO4SyQeUCtFEGpkfuus7MOdEU+GogFi3GnFoOrXOM6OOiQzS5pnUU8Ycd3zcJ
-	 xWnhlE2j+9/vIEpwQma3bVh93EGLqQUvGG8C4U4g523qCjGA/wx+O7ZxHach5CyH2tktQ
-	 WK0/v72pAR5K4gEoTxtGh0y+VkJsPbhuyLI60Bh38sr2xZyE1A7TrZdRpJUh4Nra8Dw==
+	bh=WK5sk39IWL7HCAndDbLDTrsiR8zV8GUj6O6QAjBlZ4A=;
+	b=CIft06c5qydcq/JQ/Q/lX90GQFOIeAK1/m11B2YhhhIPtHAtKprkb0dK4e5d7W5l9+Z2
+	 oaUna6ZMOARBe43mMI2HExhnOYVgU8lEIG+6w2N0u2WTg1nlVqEvsFL+piOf6MQ1cvtE6
+	 10zyOnESdDgDRGHtAEegaezpfjPuREu6J7r75suD0hjJtvr524TgzdDto/73KSIKs8Nae
+	 lbTE+xCvlt+skVOSm5ACyzz084J+b8MlUm2LtOcom/x9TS2H27DVJY0Zb7yzvLh7VtkL5
+	 1cfRjjHBXcJfLhnJhKsgTl2WyZCfwUp4vZxYcmv6hT3edYUKhDJmwP4r29VD47ThPxw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lfZBBmss;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=esQ7Oyto;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23D00606A31A;
-	Wed, 28 Oct 2026 13:50:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D504E606A31D;
+	Wed, 28 Oct 2026 13:56:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lfZBBmss
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D0F91F01825;
-	Wed, 28 Oct 2026 13:50:07 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=esQ7Oyto
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BAE51F01825;
+	Wed, 28 Oct 2026 13:56:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793195408;
-	bh=JdWNP8JpkypifgTIvG1V7ARGk/pgBkZ3PALw6mjNWMY=;
+	s=k20260515; t=1793195806;
+	bh=WK5sk39IWL7HCAndDbLDTrsiR8zV8GUj6O6QAjBlZ4A=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=lfZBBmssFuY5GIeH/+TA0vjEn/RvC3hK32p0OtU44e7VVztf2H/TVIKTl7n/IkTMP
-	 MIQNE9vhYFOibv8O6tYh3unfpZUeHugTk8zIEc1GmralXr6pPWl2kRV7TW7xNmqEXh
-	 zB/f4e3p4vhhrHu2xO3WuRwbqunNRYoBSNfuJ1DR8lZJnu3PnaM5khvwTgtOGGZWsr
-	 xMN8JKQi1KYSOAP3qYsHXLycqAylILTRm2jL+3Ak8Nu+5nP2QKgWOiNUJVVyfNtrpz
-	 dMspbLdB7bcQvrBg60cilk1c0xVCxYXtnckuDCs1rw5+nubANVKNVdx4ZO18l3MUzS
-	 jrxPdk/slN7yQ==
-Date: Wed, 28 Oct 2026 14:50:05 +0100
+	b=esQ7Oyto5mB0VOu0lcCdAArHJ2Dcs9mkwBLhZQONuSOEpbtRNx6+aIWdIzF92J/TN
+	 YukRaoZhT+qqPxUsJmrdgNvqAWHWoQe58CDceeAn6jMOZ91keFnI/NJMmyKQ+kTpvG
+	 w0sTMupoccSzq6Y4YP1a6GnXOoLkKCBBuSxkCXC4UtdKXH3f252NMw/gKqe1EWgeyL
+	 4YC77oqleuOIBGr+z5ACZhK/y3RGC9U8p6QVbUtWqoNCcUYg9urXCaGCZxmT6V2sE/
+	 F/laMIdw7IJtdNL4LTCHnum2ch7zydOSeVTQVKKwbF4l+YcxYYMYg+sEUHAbY6+/ar
+	 M4YD29OapLDfg==
+Date: Wed, 28 Oct 2026 14:56:42 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, andersson@kernel.org, konradybcio@kernel.org, 
-	abelvesa@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Subject: Re: [PATCH 1/4] dt-bindings: arm: qcom: Add Mahua QCB
-Message-ID: <20261028-satisfied-strange-bullfrog-f3c1fd@quoll>
-References: <20261027114955.1266499-1-sivansh.gupta@oss.qualcomm.com>
- <20261027114955.1266499-2-sivansh.gupta@oss.qualcomm.com>
+To: Vladimir Zapolskiy <vz@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Ritesh Kumar <quic_riteshk@quicinc.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, dri-devel@lists.freedesktop.org, 
+	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, Abel Vesa <abelvesa@kernel.org>, 
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 1/8] dt-bindings: display: panel: novatek,nt36672e:
+ Document the reset GPIO polarity
+Message-ID: <20261028-seagull-of-illegal-prestige-6cbbfa@quoll>
+References: <20261028095151.1682096-1-vz@kernel.org>
+ <20261028095151.1682096-2-vz@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,22 +67,49 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261027114955.1266499-2-sivansh.gupta@oss.qualcomm.com>
+In-Reply-To: <20261028095151.1682096-2-vz@kernel.org>
 
-On Tue, Oct 27, 2026 at 05:19:52PM +0530, Sivansh Gupta wrote:
-> From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+On Wed, Oct 28, 2026 at 11:51:44AM +0200, Vladimir Zapolskiy wrote:
+> The reset GPIO of NT36672E panels has been described as active high since
+> the binding was added, also see the example and the QCM6490 IDP board
+> device tree, however actually it serves as the active low signal, also
+> panel-common.yaml expects active low reset GPIOs to be described as such.
 > 
-> Document the Mahua QCB (Qualcomm Compute Board) board id, an open
-> form-factor Mahua board intended for compute bring-up and power/signal
-> measurement.
+> Document the active high description of the reset GPIO explicitly as
+> the exceptional deviation from the actual signal polarity, any new devices
+> will use it in the same way as the existing ones.
 > 
-> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-> Signed-off-by: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
 > ---
->  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
->  1 file changed, 1 insertion(+)
+>  .../bindings/display/panel/novatek,nt36672e.yaml         | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt36672e.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt36672e.yaml
+> index dc4672f3d01d..45743376995b 100644
+> --- a/Documentation/devicetree/bindings/display/panel/novatek,nt36672e.yaml
+> +++ b/Documentation/devicetree/bindings/display/panel/novatek,nt36672e.yaml
+> @@ -24,7 +24,14 @@ properties:
+>    avdd-supply: true
+>    avee-supply: true
+>    port: true
+> -  reset-gpios: true
+> +  reset-gpios:
+> +    maxItems: 1
+> +    description:
+> +      GPIO connected to the reset pin of the panel. The GPIO must be described
+> +      as active high (GPIO_ACTIVE_HIGH), the asserted state releases the panel
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+I disagree that it has to be active high, because, since we do not
+represent pin inverters in DT, it depends on board layout. Wording would
+need to be correct if this stays.
+
+> +      from reset. Note that the RESET_N pin is in fact an active low signal,
+> +      the inverted description is kept for compatibility with existing device
+> +      trees, while it deviates from the convention of panel-common.yaml.
+
+We might fix it at some point, so not sure if it is worth documenting in
+the binding. And what about usage of this binding in other projects
+which implement it correctly?
 
 Best regards,
 Krzysztof
