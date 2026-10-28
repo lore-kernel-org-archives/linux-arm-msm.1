@@ -1,111 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793181134;
-	b=D5+o/F2NwtmPGUjjZbmGi6iWrUYu8o3+JcVxTWfY3LXaa9MxPKauPRT1iGuSsYM4oR8Q
-	 LBWyuGqa7ePcD+sIrV6+bcDm2VN/gDp0hN9wcFpb7cls6j9cJ0rspz7A9wUWEj3Hg/cPO
-	 zWYW3mLx37sAOfJWNz0rjNr48QTaGohfBmYZtb9jPEJkIktR2tu0dcA9Mmv+A0fbgvAIE
-	 CuO8TQgezqu+ZBxcL9+UJwwcNsIA5dfoVtw4HA+66r5dL+90fx/SP58EsnZcL2jytLpwY
-	 6v/Ii8AfWbke73k6HNCIM34cMvI0oim5YLsQ/n9gdI1oi7b+n5ocMX3T7mBOkCpWRPA==
+	t=1793181136;
+	b=QWaRZiMn+el34zRsQ0FJa6l2KGeUFO0YSeRin5xRF3VxYtbOlvCffnLXkENmap4PciCD
+	 AB0fUsGN2T2QA9WM0hXZvvsTCSB56L6rj0AayASwIlzXrhCE8qwTVNUPm6OfYl7qKcwt+
+	 hnPl+4Q9qwJNdmmXwQpKbUkHchNcBVJGzArIaBFHP0Xbf9ccqZBYYu6HDtG8ufZen1egN
+	 4tTJDD1r7+q87sMlenBPsViQt3h9feDuyC75PzaaPGU6q1tR2EwNaAPfQS8Y0krQC/FPY
+	 QM/3OadZ1cEjcW0pFA3MGMuBAQH5V0JoVmJiMPpzKTwigO5tqIgku45XKtHYepQkn8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793181134;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793181136;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=IfDKzNsgAHeLY6I7naXl/Ti8gw1wunbFLanBQnyLppA=;
-	b=PaeNy4IhPU/jQwjMqfQGYLEl1jzH1bnfZt34YgwAQoGrGWWtmIzXRjqnx85Yd8Q7z2Vx
-	 DGEsIU9dtFkOeGOGvPEEigDdjaovSFlV+xBFPKKhaVxDwRiCoWNa5XHP4xMekBj5iOfmC
-	 tV0scZcxDNmAQuIHwLzeMuvZa2iqcnhAb3T+aP9sH+J9q+YHa0frB/TY1JGeokG99/jd4
-	 PQT8520h+r7/gddtyef/K2ufmbdmw9Kb2LiOx7B1Ls+aBfo2QRf7g0KujXM5qigzAH90u
-	 P6XsZ6UxG+WACFxJCc1f6QyqYUdEdvE11G6PmLNDINL5Jeni/YJvhYx2pTDgfatWo9g==
+	bh=+WA3U3sUuE5dh8dNgrTZ6JUDGlRkXnB+4Gzwut2u3nc=;
+	b=p0FnqPmrqRlaVgxbew93Leqr4kzA3/F3upe+WlCAbrWOhNedCkCK4B0hlJruZbPqQAYc
+	 ijN4NgryA0NQwiQiMoY7otOZDUAfnpltgqa3GxlfhpEU7wWwwzCbbZbrruLWV3+X4Jl3H
+	 L3ECELjLHkCxakj8QsLfIcPgxabOYrLddD18sHo4mGys+pVAbpiuXnSLqICQZFWOaTvyA
+	 x4hYBmkGm9LgxUF73ErIHOzv+75MTq70Yq9ZXh/1LUWo76SvE4fTfUg04veZ+8J8QKiDo
+	 cZ3InnKXfQNxc/ZzvfYvE5ddRp7rUeu30uqy1+ps2cWYlv8hEg+Ia4LXYz9/O94wjxw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="o8lMw/aM";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RJRRgqg8;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BPspIupc;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V1DW7NLW;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28240606A324
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 28240606A324
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DF33606A331
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9DF33606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=o8lMw/aM;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RJRRgqg8
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69S8K75I1667693
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:13 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BPspIupc;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V1DW7NLW
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69S8K8J43892829
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=IfDKzNsgAHeLY6I7naXl/T
-	i8gw1wunbFLanBQnyLppA=; b=o8lMw/aMs1SPxXVNchecSlFSlZ42GWcqNlQyPH
-	hwJrPI5O1kaHSbYpH0sUcnQcYyNW2hHL+4jnV7q4dkHEEsFXXOYgzfeNx78u2ILj
-	aMYhggByYTWkLMKfcnw/GKtzhztPfHShz4yv+pwLHP6zAWBYV6mk9H/DtaGM6o7J
-	xhteXrBCIiGz9d50rZmh6BxP2zW1i1e0+c0sNSkpcnWZ7zFcd4WhDg2Mqz2dHYRb
-	a7INfbG/iIX9VYaND3IV27iA4QOVbQ6CEry/u2Q4ACDg5R7Wb2QAC3pVm47pM3Ni
-	2/ZdwboAfxfxxZ7K3ck0C8V2n1Eu2pDgmpezi54daDptvqiA==
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	+WA3U3sUuE5dh8dNgrTZ6JUDGlRkXnB+4Gzwut2u3nc=; b=BPspIupcSsvi9haB
+	HEmX2Rdz2Wh7xh2QeYMqT0HYM2hqzT4OH9tW9+7+TqdTcjD93Y0VYYax0/0CH29p
+	8lCF832cadaNYTkohSy/P36xpKZJJ6zs2uIuUT2NG8TkpNiNxbew91I3fDUd2xc+
+	kpyQz64yewtWn65MARq4/AYYfQaAQTMOGGu9PcggPgtIWNGjr54sQhQLC5jwbu+4
+	6txX5VmEGSfX+XTKkGl2KssdLuc89vmILik5k4TVM5kOHxBnWdLonITJwWgDCqsr
+	cNjxU0lvXGbuqbkm3M61azBVcLLZmLESPD8GWVBlcBe+ri67DkeZEB920Q0YHmYw
+	OyH0yw==
 Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk12ptyjc-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk6f91u19-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:13 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb93c874bso355551885a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 02:52:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:52:14 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb7f9bb86so133718485a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 02:52:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793181132; x=1793785932; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=IfDKzNsgAHeLY6I7naXl/Ti8gw1wunbFLanBQnyLppA=;
-        b=RJRRgqg8JAcll22pYb5ZJ9xWecZrl4OBsPAb+sz5SLdk7kF0WmKjawYgCctPCN/jIU
-         3LZqsP+D6dKLsY60JJ+CkgHDOJgvkpMHrWOHey7iBH26d1BBXdRsG4GXs6vCA9eb3BE1
-         dBM2fQVocBe0gJcq4dp4lBA7BkJ8xJhujT4VSAtHl3Fn3iHCWuP1E4oqTWt4iwoOS1/Q
-         X+ZzzrZPkfTc2mvnvrHbEy8U7zSWhWZVsp4eE+yQ41HBTL2XKoUUQ0imwyz4sgxQD56U
-         xusume097vSguyTUamjEcioWdYqkx1CMVxPKvf/ZGORatNqNCPulzU9ClDU9WlWHfcO7
-         gyxg==
+        d=oss.qualcomm.com; s=google; t=1793181134; x=1793785934; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+WA3U3sUuE5dh8dNgrTZ6JUDGlRkXnB+4Gzwut2u3nc=;
+        b=V1DW7NLWm10Jvk03QQ/3RvAhA5pPeFNGHqO9wsTSfM/Tatrqzn+/oQ9fMiimb6mPeN
+         +O/Oau3qdQgRmxd4QROowpwxnxwInb+Wr/JTvR5hMwVm/7p7GTRutwOX/z2lqWIzfMu8
+         GHJgbVgZHMLx7SO38fKE99NWST3H/DeDlENttq4oL1XIIPMAbo3GfKawKHAQ3Ye0VZLr
+         fX8oXamk4HcZdMsEfsoN4lRLHQ3WFY1h+OIM63fNp3e6f1Ldei2hVEOPZ0apdKeg5e35
+         DzmD3Xd3ebvOO8yFH3BmuECKlYeR1JY4P5h0TNfRSmB72Q3x+ZAmIi8MbmE2F7jHuXbU
+         hFCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793181132; x=1793785932;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=IfDKzNsgAHeLY6I7naXl/Ti8gw1wunbFLanBQnyLppA=;
-        b=VPPEKh/Jo/jsE3XPuy5EFFnSMeNuirfBg/nHtV2lS5aonIMR5V4zpeW1kJ4wsEUEPc
-         rENWlKORGhYMlCDFcpeeX8AdAlqUKqUJ6xpV8bnMBGuldVDVV3cYqc86EJszaE2n+pxr
-         u2R3kfMXAMPGSYBSFhxLCcZAkJb5kj7akJbofHG9GIcur9tQwRWCzppJvmGwfpuj8bHY
-         qo/kWW2ep2xAbYVct9cH7sfmM3uR6AcI1mOjhQSfZg1cJ42ZPRJYtZXdxdDY6D/ppR82
-         lfTbW0uqtD0a9M6i2nRjjml8seD5OgntyLrkd6VJlsJgcSNDmKXvVG7nQn+m3GVWfiJU
-         RXaw==
-X-Forwarded-Encrypted: i=1; AKwUvByJNxqRqLiFT9pMOMVS0H6Htaqg3RbxmDYY9XTnquo0sYtkFm3Zq0eazJti42RD/HfkYTmlX0qydd2+qLA8@vger.kernel.org
-X-Gm-Message-State: AFq9FYIJRkRy3biO853CqIlwjGbjOQVbyEgvwFbi9GX4zNiycNRJ3VK6
-	7A5Rr3Wd/9qvWFY4k3E9ULMxd1wP6H5v/GzEkjsJyPi0tb5HTesYlBD0cZoO7Oei3HCkhLyl13u
-	9lcB13J5J6jboAGnXOmq3Hd3ppWnFyiwZB5JBoEwfJdW6ToP3OutD8bPyUY6dQNGPSlBS
-X-Gm-Gg: AYBFou1yrBEZ0P4WojwhY68PQxn1jzZhOQNUsQpKfqFxtLvXp9N4MKVLQuY2/GBd7ux
-	HST3bAlvs+9Gc++GScYIManspqKqycZ2vqaYGtvBChPUfzT1gdM69g9j0ExZEBaMbYn092f/FpS
-	fwdvghnXe7DKfknoYgyt1Bxx6hsQxlAFkJZhFWS7W0GmkGfiE6ts2YRbP6Dxf2o+DagSNwQJQTE
-	DfRYRHfNR5bo+LkB9GAS3T/BYVA26lK5aJ/pvjE6oK5ZECMa4A3JiMlNyIWW2Q4Id4rASg9ORnt
-	dgsuJzmAeGUhTv5WH2TS77E+jKphqwE5xDoHcvPAkFBTLRYd9LXyA4qKVnGiSDoKn6LX2HCJ2Nz
-	wA7o/JPBXAFwESLYaMLNeZEwFZyvvkBVn+ZcQchTUe7m7/O7odXCe6VbrXa0=
-X-Received: by 2002:a05:620a:470d:b0:93c:d209:4ea1 with SMTP id af79cd13be357-943f4b8ef57mr892402685a.24.1793181132123;
-        Wed, 28 Oct 2026 02:52:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:470d:b0:93c:d209:4ea1 with SMTP id af79cd13be357-943f4b8ef57mr892399585a.24.1793181131501;
-        Wed, 28 Oct 2026 02:52:11 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793181134; x=1793785934;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+WA3U3sUuE5dh8dNgrTZ6JUDGlRkXnB+4Gzwut2u3nc=;
+        b=KY9O+bR0xTBU8IfFIN2MC6q5ZxHDwYfVhicWVcHF4xrweOZbXZl1Z0lnIXOsJl/2n0
+         Y4i4qU4/3OcEu4KzLHIGRksdZXfrb1/gvmSIYAdyZZkIGXeLxpkrIaL5RSmwd//cPFoK
+         bXkycRo6Hdnth6tgmQGpQOKGm5EOnBz4HQrIzUx9mq6DIaGttUDk8136JvFrYyGL7ZeP
+         mmrB5blVh+4W8Yw6mKMb9bozs0egRIJf7vA+qdLMKqvlQ4qUBKVUyzfGcfZYtCrBrfaz
+         YS4Wda+ZzELFDha2iuxhLyUdRFllyfOB3IeXG7M1sVMN2BzGau3b0Oamlo0gWhM5B+Ln
+         ZK5A==
+X-Forwarded-Encrypted: i=1; AKwUvBy42hdD5EEhq69sFGC5DrParOpQBrKl024kncLuq/mxnd3NfUHMBOQ6WVnQD6PzyfhzYBIoK3fMPhVpYkEV@vger.kernel.org
+X-Gm-Message-State: AFq9FYLadiosk6FeUG+xUl9L0+eJoByd+7vX0VtE3FKKKWjCPsJsKy9I
+	ntypkg4L371PSCIBRrHSZz0a/DHJChKJ+7e61JoCP9V1dYgzjQKEM1AweLPVrQDm2IC8nSYEtl9
+	sxbt1mPikZAcYFNKrXmVuGIAhbu2ybJcS/2mlFOOuIVPZflkL9pU3pLBNSWI8OV2ZpO+y
+X-Gm-Gg: AYBFou2gRsuI+KGsSX4Yf/qtM3/YU3a1CD44O4o0oS1elEq23PEFqr3nQbJ5A6YPY3U
+	a9vKnifGey709GkAwxBvW7UMv6FGGsALGKt63wfHf+zdg9PFM1J8LlU+BPf/v7wpLM1O0jQ6bXH
+	COTPq8klEOiGm2AVUTmaZsjYpvfgkvy2AqoIJvVuv1FH38HTku5ljCTxJ9YoCvZvXF9GF72/UNC
+	8uX3Q+tky5naKyLJKY0YDBQUb5Ib3K+kzFduEN4/eE5sjheAErL7arlGHbELGI4+ItxHLuiY6F4
+	YNZjSe4S+G85Wi8yLyw0fMYYmvS/F6XdMkR//CDIQVV8aQqnCPT8HlfT2b6WkgdWWdRskIv7mMe
+	gqxQnq07ajwZ6OGkiJpjrlR1tCqPjMl7S9lDs6pIX7uiRaTlaayT/pdVZjeQ=
+X-Received: by 2002:a05:620a:45a2:b0:939:a003:7127 with SMTP id af79cd13be357-94408d61863mr227266485a.52.1793181133693;
+        Wed, 28 Oct 2026 02:52:13 -0700 (PDT)
+X-Received: by 2002:a05:620a:45a2:b0:939:a003:7127 with SMTP id af79cd13be357-94408d61863mr227261585a.52.1793181133055;
+        Wed, 28 Oct 2026 02:52:13 -0700 (PDT)
 Received: from [127.0.1.1] ([188.27.161.187])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebd48e0sm27966715f8f.38.2026.10.28.02.52.10
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebd48e0sm27966715f8f.38.2026.10.28.02.52.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 02:52:10 -0700 (PDT)
+        Wed, 28 Oct 2026 02:52:12 -0700 (PDT)
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: [PATCH RFC 0/3] clk: Restore the clocks of a provider after a
- hibernation
-Date: Wed, 28 Oct 2026 11:52:03 +0200
-Message-Id: <20261028-b4-clk-restore-after-hibernation-v1-0-86cf62747a7f@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 11:52:04 +0200
+Subject: [PATCH RFC 1/3] clk: Add a way to restore the clocks of a provider
+ after a power cycle
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,10 +118,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMPF4WoC/yWNQQrCMBBFr1Jm7UATq4JbwQO4FRdJOmNHJS0zU
- YTSuxt1+R7892cwUiGDfTOD0ktMxlzBrRpIQ8hXQukrg2/91rV+jbHD9LijkpVRCQMXUhwkkuZ
- Q6hh3HTO7nsKGPdTMpMTy/l2c4XQ8wOUv7RlvlMo3DsvyAX4bTEeJAAAA
-X-Change-ID: 20261023-b4-clk-restore-after-hibernation-74fff1dea5f2
+Message-Id: <20261028-b4-clk-restore-after-hibernation-v1-1-86cf62747a7f@oss.qualcomm.com>
+References: <20261028-b4-clk-restore-after-hibernation-v1-0-86cf62747a7f@oss.qualcomm.com>
+In-Reply-To: <20261028-b4-clk-restore-after-hibernation-v1-0-86cf62747a7f@oss.qualcomm.com>
 To: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
         Jerome Brunet <jbrunet+clk@baylibre.com>,
         Russell King <linux@armlinux.org.uk>,
@@ -132,115 +132,173 @@ Cc: linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
         Konrad Dybcio <konradybcio@kernel.org>,
         Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3115;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4249;
  i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=w3jz68RcqMoy8uBJpAr2vq/NID/jlj1n+38Cjr6e8wM=;
- b=kA0DAAoBG19EyQCVFVYByyZiAGrhxcajhPRtnl1/P5MpMKjmO3wAHx5nIclRP9Qb42we8Rrlr
- YkCMgQAAQoAHRYhBE7z7hFOeo8qyqfRuBtfRMkAlRVWBQJq4cXGAAoJEBtfRMkAlRVWk9EP+IFt
- h4alqJRTEr965fdzj2YzwsdsX3SVxZYw3KmWbKdsZigTS1ySR5J7dYXE+BgeNV+uTYQzUFrmhEO
- B/w25Z6I/slmPJy8WFfBzPssY7i12jKR/hukbD9/hdd9j83CkXTrUo7IEBT0VH8Xxwo+3VPSAbw
- yiPBAzNu6cIWiwcmkhm63v7gygYQoD8kYNGlI7ODjLpSRfVQv3KCs1KQmXcYrpuXZ6JxRkcLywK
- UKcG4Qs6GT3GVvnt+c6qu4QjyZ9899Nx+zExyFuv7QzxlAz+p09W74kkgdlp1DRjfEzNdI2zsZO
- NknRQI0ZGK2vGOi3P5hXpgyHgkMyZPcAw3uzzmuo+USDinqeXTa+PwZqDcNIpfJUEF7z93RN06s
- 5YaR2lrxoSe2M4apKmPRFBdxLGHlbQodq0v3qy5fumkOYuc+DQc5bZUls3DipGkJKRckB17iVbZ
- ni9IXE43ySAAUp2jECfaa0gR+GHEQHQ44UZ4mUzBBwhJooo6W5hsXPrVc496sMKH37wg1cdkfR7
- h6KvcwsbzRjiIi0KnYwOis7DNRLkV7UhpkAJu5Es8OWh96ZIkU1UM4qnTG2T8XaMg4h1Dmrb2aC
- kn0qzndII7d3fkjPz+gSWFs+Q8oLmVs69biJMe++R2M1rzbEyoZ3fnPz75UwrrXOAfGSkPF9Uz6
- ImkM=
+ bh=R7OPp69UUHsoM45Tq0LsjlUIHam/eQ9Eg5jV4WSy1Bw=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq4cXH40jsyfn2uWVVpD4XgtFR05IskSEQurpPN
+ nkWkSXSe/eJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauHFxwAKCRAbX0TJAJUV
+ VoOOD/99mJfp2dYwERaYqebAnLDY62/wxdKdDrQNlryNiQ2eIgvF//s6rfXNKd3GK/BI2ly7ZKv
+ J0ceS0JzmNb+Af4Q5rlMMqoYd8t1AtWDzcCkxICsHZ8ZBu5ir8A9McXBa8p8KJZiO7w9UVtEKPo
+ iyliTpC7rSXYZpcO6V04yG88gdrR4URwtTlxzS1E4zWmflT2PCIHNxOy/ZD7GQinEY0nwwGjf8z
+ hpgx93zHAkwdJCtSqsEzWvpKm9zotMbCtYi/UQjRAhimLV22qkcNQ+xclMgnJKo/yDT/hFOVIgX
+ HzSumtJgHo9/8Aps1iEiFZBAycLilB3xzeT0axHkqMVFd6mYdrc+hJ38Y4r9GILEfbWcnQ3W5n6
+ TbRQYM8G9a8auk09MhwmrSiSWqVj51tyVWgRlr5M5Sa9mcxuuB9KOoif9OT+OkNJrZFMTfoAFMr
+ QkguIAGr6JvMqMoDa7xIJM00//1ZtGLYmVvNcb0NDTgAIfTso23XsTF+xn4yDP5Fv4/fP47cY/I
+ nafjbt5kF+VVayAC6L26Hf1gdWL5dLI9IczJuKJPead1H9xrlZiSiLTURKAdfgD9JS4s1YQSUUF
+ YieHJqxvlsGwkHYoCLlNW8x9Q0f6+OQEn+COsiSkv8DwIsgkbh6dxg0UuV1rI3bhV68EUOEfAg/
+ dx0u8b0Tz69/DqA==
 X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
  fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-ORIG-GUID: pLUFrGw5BClSQIlmG21Ch3zdvToqoW4m
-X-Authority-Analysis: v=2.4 cv=DtDDa2/+ c=1 sm=1 tr=0 ts=6ae1c5cd cx=c_pps
+X-Authority-Analysis: v=2.4 cv=frhJ914f c=1 sm=1 tr=0 ts=6ae1c5ce cx=c_pps
  a=50t2pK5VMbmlHzFWWp8p/g==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
- a=mQFjCgyIq3-au8Xv:21 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=ktzcv0D_gfG26edE9_0A:9 a=QEXdDO2ut3YA:10
+ a=clSAYKwqOTSjvecp:21 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=iZGjZ6MVmCN8NQm4dLAA:9 a=QEXdDO2ut3YA:10
  a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDAzOSBTYWx0ZWRfX/BJB4O7+rwk2
- OC2OftXFo3st6Y9B+4jqXlAOLoUYyNiZe+sa7qOXWT1tmDi4fpWVsNMhgVJ5QNx18M5wq1mReYJ
- 5vWTUTsOJLuiDB3fqdp0isr8B8RUA49zdHAHN/u+swDFmKwhHuno1qDn5lkOi/uKRP1ERD2uNgo
- z0YEISjRn+/pit0jGyjRjINV/yp+gOjLbVcMRblEl2e6b47dQirO1RrKYrufNbX3NU3u3swnc5z
- hgfUo3v3R/YPmIJc+zr0lj1v9RcZnQjgKB/lJUS25LQCsWV8x6vc3oObW3VSkuwvHNX8z8CGXZx
- d8mpv8RaA+47xF5hVU88/WJKCwd1nc/SGXXV8G7qSnXdxMQMrAVZTLhiTlMRSsXl360aDApoE1j
- hn8lVdsTiX2bSSy8n+Ay3KrLmFida2SZCq7LIyL63xOaggJWz5bCBbtOeYU6aCjZ7i5uGeuLDsA
- tuBF2UTObRtXzIpFZRw==
-X-Proofpoint-GUID: pLUFrGw5BClSQIlmG21Ch3zdvToqoW4m
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDAzOSBTYWx0ZWRfX0sH5SybO99Eb
- StvowzE7TQ6RQ68FtrpG0OLp3fjQ88bmqu/bgdeCpQsdSSAHJn789Km2n4zmQ7aClexHrcAL1W6
- 4Eugj/rg5pt0bZPL4AM8nnupUybCLnw=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDAzOSBTYWx0ZWRfX7WZgzIl8ymn0
+ YVMlLjxKX7sZOnR59+Jdn0vvjZ4fHbSj2HgzfHHH5rv3Tes+XaOD9lW8aMfk6iLHkKVPyndxCmK
+ J7Y6tDfUML7GcKlcuAZoQTt0aVWVCoY=
+X-Proofpoint-GUID: OydMZ7J_YQ3HNulXuCj358nRL_QFuJ79
+X-Proofpoint-ORIG-GUID: OydMZ7J_YQ3HNulXuCj358nRL_QFuJ79
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDAzOSBTYWx0ZWRfXzUAEXCr3cnS4
+ eLTRZVezb6DESZsoWN0SxGs855ReW6f3vKpRTuqx1zEUQgbU71wdKJyX5TW3D9RRH3XMuBa4d25
+ hnwn9NY09WshHuoCAa/ECcFGZXdZFc77CNdzM244OP2tMLnd1EoM+QbziiTS+i79aIQWdNQC4A3
+ hcczq3F8GsskYg4wfzm521VGyCEVc6Nijttz5/NJMwzwBopAPjF9pPo86LnD5QALljp7VECNprV
+ TuO8QvpM0HceKezdavY/UGnn2WvU/v8VTcGjj4Zaor7alZKcAI1YMZMdu2IFNOl0Y1ZQy7Ov0F0
+ IMiR4CilAwsSlZ6kqBHWXmtjhmxUc9v3ua1wyiUaTyIAT7Ra1GGe2C2gvVMhb68k9XxtTeXQ7JN
+ 13f80IWUO7CG8+8+dD+hrR/3O773Vka0/kUW6atL6Ll5y1ZFwHRsz6dUQTv/huWSW87DVkGaoYm
+ ohWDT5VsHbO8hMdmrlQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-28_03,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 adultscore=0 phishscore=0 malwarescore=0
- suspectscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ malwarescore=0 clxscore=1015 suspectscore=0 adultscore=0 phishscore=0
+ impostorscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280039
 
-When a hibernation image is restored, the clock hardware has been through
-a power cycle and a boot kernel, while the clock framework in the image
-still holds the rates, parents and enable state the consumers asked for
-before the image was created. The consumers ask for the same rates again
-when they resume, the framework sees no change, and the clocks the boot
-kernel did not touch keep whatever the boot firmware left in them.
+When a hibernation image is restored, the hardware has been through a
+power cycle and a boot kernel, while the clock framework still has the
+rates, parents and enable state the consumers asked for before the image
+was created. The consumers, when resumed, ask for the same rates again,
+which the framework sees as no change and never programs, so the clocks
+the boot kernel did not touch keep whatever the boot firmware left in
+them.
 
-Whether the kernel that loads the image probed a given controller at
-all depends on whether its driver is built in or available from the
-initramfs. On the Qualcomm Glymur CRD, the display clock controller
-driver is a module that it does not probe, so after the restore the DPU
-runs at the 333MHz the firmware configured the PLL for instead of the
-717MHz the framework believes it runs at, underflows, and the panel
-shows a solid blue screen.
+The existing clk_restore_context() depends on every clock implementing
+the restore_context operation and acts on all clocks at once, which does
+not fit a provider that can only touch its own registers once its power
+domain is back.
 
-The first patch adds clk_restore_context_dev(), which re-applies the
-cached state of the clocks registered by a provider device, parents
-first, as an alternative to the global clk_restore_context() that
-depends on every clock implementing the restore_context operation. The
-second one adds a hibernation restore callback to the Qualcomm clock
-controller common code, which redoes the probe time configuration and
-restores the clocks, and the third one uses it for the Glymur display
-clock controller.
+Add clk_restore_context_dev(), which re-applies the cached parent, rate
+and prepare/enable state to the hardware of the clocks registered by the
+given device, parents before children. It is meant for the hibernation
+restore callback of a provider, so it is declared in clk-provider.h.
 
-Sent as RFC, as the same applies to every clock controller and I would
-like to know whether this is the right level to handle it at before
-wiring up the rest. In particular:
-
-- Instead of programming the cached state into the hardware, the
-  framework could read the parents and rates back from the hardware
-  after the restore, so that the consumers asking for the same rates
-  again go through the normal clk_set_rate() path. Would that be
-  preferred?
-
-- Programming the cached rate of a clock that is not enabled may not
-  work on every clock type, for example on an RCG whose source is off.
-
-- The Qualcomm callback finds its state through devres, which only
-  covers drivers that call qcom_cc_really_probe() once per device.
-
-Clocks left enabled by the firmware but not by the framework stay
-enabled, and the phase and duty cycle are not restored.
-
-Prepared with help from an LLM-based assistant.
+The restore_context operation is not used, as it relies on a previous
+save_context, which only clk_save_context() does. Clocks left enabled
+by the firmware but not by the framework stay enabled, and the phase
+and duty cycle are not restored.
 
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
-Abel Vesa (3):
-      clk: Add a way to restore the clocks of a provider after a power cycle
-      clk: qcom: common: Restore the clock controller after hibernation
-      clk: qcom: dispcc-glymur: Restore the clocks after hibernation
+ drivers/clk/clk.c            | 68 ++++++++++++++++++++++++++++++++++++++++++++
+ include/linux/clk-provider.h |  2 ++
+ 2 files changed, 70 insertions(+)
 
- drivers/clk/clk.c                | 68 ++++++++++++++++++++++++++++++++++++++++
- drivers/clk/qcom/common.c        | 52 +++++++++++++++++++++++++++++-
- drivers/clk/qcom/common.h        |  2 ++
- drivers/clk/qcom/dispcc-glymur.c |  2 ++
- include/linux/clk-provider.h     |  2 ++
- 5 files changed, 125 insertions(+), 1 deletion(-)
----
-base-commit: f1ac44c32cba88ad65dcecd4a279661d14e93651
-change-id: 20261023-b4-clk-restore-after-hibernation-74fff1dea5f2
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index 4d2cc86bfbeb..316c3c85f247 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -1449,6 +1449,74 @@ void clk_restore_context(void)
+ }
+ EXPORT_SYMBOL_GPL(clk_restore_context);
+ 
++static int clk_fetch_parent_index(struct clk_core *core,
++				  struct clk_core *parent);
++
++/* Program the cached parent, rate and prepare/enable state into the hardware */
++static void clk_core_restore_state(struct clk_core *core)
++{
++	struct clk_core *parent = core->parent;
++	unsigned long flags;
++	int index;
++
++	lockdep_assert_held(&prepare_lock);
++
++	if (parent && core->num_parents > 1 && core->ops->set_parent) {
++		index = clk_fetch_parent_index(core, parent);
++		if (index >= 0)
++			core->ops->set_parent(core->hw, index);
++	}
++
++	if (core->rate && core->ops->set_rate)
++		core->ops->set_rate(core->hw, core->rate,
++				    parent ? parent->rate : 0);
++
++	if (core->prepare_count && core->ops->prepare)
++		core->ops->prepare(core->hw);
++
++	if (core->enable_count && core->ops->enable) {
++		flags = clk_enable_lock();
++		core->ops->enable(core->hw);
++		clk_enable_unlock(flags);
++	}
++}
++
++static void clk_core_restore_context_dev(struct clk_core *core,
++					 struct device *dev)
++{
++	struct clk_core *child;
++
++	if (core->dev == dev)
++		clk_core_restore_state(core);
++
++	hlist_for_each_entry(child, &core->children, child_node)
++		clk_core_restore_context_dev(child, dev);
++}
++
++/**
++ * clk_restore_context_dev - restore the clocks of a provider after poweroff
++ * @dev: the device that registered the clocks
++ *
++ * Program the cached state of the clocks registered by @dev back into the
++ * hardware, parents before children, after a power cycle the framework does
++ * not know about, such as a hibernation restore.
++ */
++void clk_restore_context_dev(struct device *dev)
++{
++	struct clk_core *core;
++
++	clk_prepare_lock();
++
++	hlist_for_each_entry(core, &clk_root_list, child_node)
++		clk_core_restore_context_dev(core, dev);
++
++	hlist_for_each_entry(core, &clk_orphan_list, child_node)
++		clk_core_restore_context_dev(core, dev);
++
++	clk_prepare_unlock();
++}
++EXPORT_SYMBOL_GPL(clk_restore_context_dev);
++
+ /**
+  * clk_enable - ungate a clock
+  * @clk: the clk being ungated
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index a355d1ee5189..c3a095e8da5a 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -1439,6 +1439,8 @@ void clk_unregister(struct clk *clk);
+ 
+ void clk_hw_unregister(struct clk_hw *hw);
+ 
++void clk_restore_context_dev(struct device *dev);
++
+ /* helper functions */
+ const char *__clk_get_name(const struct clk *clk);
+ const char *clk_hw_get_name(const struct clk_hw *hw);
 
-Best regards,
---  
-
-Abel
+-- 
+2.54.0
 
