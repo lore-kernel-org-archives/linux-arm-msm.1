@@ -1,63 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793158180;
-	b=BWwRpECWe+4vmIolqnY5R16BewBYbDrYWP1kqBxyziUyRezOS1Kw7joSC3WIGW3GbLfA
-	 sr0f6D8UWQyrUiEVHwpxbT26O4PY03Itw/2DGdb16+S8q0wVPOPoZa9LfCcfKEwB5vYNg
-	 7yeUIVQPAAb06mbRwqvVDbfPvqGIshZupkxw+TdkvTWWSsSeAq2Beh5CE3XyU899GNBid
-	 1bIucOUVwm0e+zxF5iQu2PzvZLNx2fhBqNtn0BvrkoonScDK+FXB+hCueHVEQIlJLG7DQ
-	 n8q6ngkVngAi5cAtuCLwpcTF8wkL16BuDuNyk4NnWbF5DIJT3EFUdwTCv7ck5XxUIDw==
+	t=1793158876;
+	b=wtOMBxmScmO9dz2l4xEW2hvdkzm+jELnKTxHf2tcqX26JnwPUcQiBilwl/XJdSPjeKVa
+	 CS7bQ33WzTJZdr2/3KLK/WM02tukWFimcP+aHyhKQUdttdUymCo76/PUZiH7eLMkg3X52
+	 E7JsPvyrwPxoXRTjEcu7bQueQSoK6XqREd9uErZetT44d3kEcjK0RTfYauTQ5ArcUDpvk
+	 b7E33okl13r/Z5o6J0cMf8p029QndpDyyyyEbFyHoYYSTH3tk9ZzAX2KPXYqjVg2pOW9p
+	 tiESNUcxbZPVW7aQXHqnFcrr8B+9zjD9XaDo3sozUvrOG/OFOD3v12SuxftGE6iQRrg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793158180;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=vEj7FK67g3rIaaz5Lq/NNY45PcOS57ENcFCjo3BtHwA=;
-	b=4PU6XQ7kbs1sKe4a9kDftX149iiLnhgk9+oktAjq28SDurPj564pSKhnF0yaRMlieQpF
-	 0Xya8pzBMhz+bI3NjfAU2TBzf0JVMkzYNocghkf7kX0qo/Jr41bWKvsswrlsyVwv1qEte
-	 0SpKj3CBcHB0IgIzJj6AXGArS7aUqYNqlJGBwvHQaODb9ut8gYcq6nE/EcB5F1Zh0F0dI
-	 aMqi+hHds5yT9lllVADDPRJvkYxyI8bZgcT73pEOwwsoGv9bA571QRY/u3JLNTuxb02cw
-	 EgBQqSm2txhE1/f8VMTY1Z0ZdsedFeH8au14okRglVGpjameCuzSiK6LPUkXQgRi5VQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793158876;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=UoIZl448FJJkqJPP3ijtv3pIg6dmLp5Be/uRBZcH2Mw=;
+	b=neVVWpu1YkY/8FeRPOlcX++o88fnlRdo4KdK9pGzLc0s94QlzRWMBfCKKkAv7EJvQNhy
+	 +lgm3D6tHNk/2+xY5l4cqA+excXnaAmlRibQmYsKenL2Jc1ImRQZ1w3/5TZ76+xsPvudC
+	 3OuC0gZLvY7A+eOU3BkJz0uKbG+S9TFpNADuQgujBWBufL/i2rxv/zmF95MWPczveYAfe
+	 FgOfGQ99+F2fTksV5/evENp8AJTv85aNIxhR3FdhppM9jUOZ7Zd/v2fqHDMKDWYOPcWOk
+	 8mWlVaHW+fWZXIS9jDGQ7CMrfZCRKVOg2jPBn+VcLJwgiZQYTJt2UbCFfoZ1M3lgZvw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d6BjhZcd;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6386C606A31A;
-	Wed, 28 Oct 2026 03:29:40 +0000 (UTC)
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=ZUL+szct;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 38DD6606A31A;
+	Wed, 28 Oct 2026 03:41:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 38DD6606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d6BjhZcd
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 948061F01825;
-	Wed, 28 Oct 2026 03:29:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793158180;
-	bh=vEj7FK67g3rIaaz5Lq/NNY45PcOS57ENcFCjo3BtHwA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=d6BjhZcdkiF7NzVN/VdODtDgSYU2T3vnRqqnNrciDnvB4d7eKRegdXZ2loH+5vPv+
-	 Czm1V91BEUUCCmC7iAvk92u2RC2Ba+IQNpCkPBHAxYEH9pERkkrZbW/LJtdynShcHV
-	 2UFg33kCflug53Ch2Rr7Y7iQIJH4DUZLk+QEuKOGaK0+73a66xuakEAO+9rtB8bgGk
-	 SRQA3101JBL9pJEd0MwT4sWO6h2cp69nn+ycpVBWv9xlY/vs8z93mlar3Nfi0C6u0Z
-	 ielLuh7Edi9767f2xt5OnZxaLLB0fqCVUsIk2WRMl3NB1vQRa7CSiNgwtkExD9jsfz
-	 edQKopALHlMNw==
-Date: Wed, 28 Oct 2026 04:29:31 +0100
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Taniya Das <taniya.das@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=ZUL+szct
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:
+	Content-Transfer-Encoding; bh=UoIZl448FJJkqJPP3ijtv3pIg6dmLp5Be/
+	uRBZcH2Mw=; b=ZUL+szctEaB4d/NHNvDONovnLlsX0oPZszgNQJHFynnOUqsCR9
+	ODe437MkBLzTApovgVbEt8Hxe+EoisTVMjcDz6VD2VPvvj5ueRLLuhKwP7JFMY7p
+	XVr0DCD32PV/FYMPs05oibsWb8956pbEpMRCewwW2uQWQjIa0vT9GCrJ8=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.180.23])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgA3szfSbuFqyQlWAA--.2887S7;
+	Wed, 28 Oct 2026 11:41:09 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: 'Bryan O'Donoghue' <bryan.odonoghue@linaro.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc-eliza: Use retention for PCIe power
- domains
-Message-ID: <76mvypefoe6l5c26xdycrxcyrtkpxmnybi6bm5xyudqqcbawg6@5dzvmwkhqk2e>
-References: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
- <273f7f8c-e24d-4322-a418-4fd5ed84b0bd@oss.qualcomm.com>
- <e255ml7kf2pyjnw4k3ssi3jp4hkovw7x62cln6n3xbf7tz5q7y@ijqwv75233a6>
- <CAFEp6-3YP29y5JYp+6Cw3T7bGEJHjfGD9mYsiQXGaTSegsMWXQ@mail.gmail.com>
- <hmslxyt7kj3w2lyniw5sup2dcjfvsndckwhrrrk2v5ofpry6zz@nrjflylnt77j>
+Subject: [PATCH 5/9] media: camss: csid: report frame starts from CSID
+Date: Wed, 28 Oct 2026 11:41:01 +0800
+Message-ID: <20261028034105.326535-6-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,81 +69,267 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <hmslxyt7kj3w2lyniw5sup2dcjfvsndckwhrrrk2v5ofpry6zz@nrjflylnt77j>
+X-CM-TRANSID:3pYKCgA3szfSbuFqyQlWAA--.2887S7
+X-Coremail-Antispam: 1UD129KBjvJXoW3Jw4ktFWDGw4kXry8Cw1xKrg_yoWfZw4rpF
+	WkK3sIkr45XF47uw17Jw1UZF4aywnY9ayjkrWkA34S9w15Kry7tF4xKFy5try5Cryqk3W3
+	Ar4UtayUua13uFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUmCb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+	8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
+	jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI
+	8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E
+	87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64
+	kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm
+	72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI
+	1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r48MxAIw28IcxkI7VAKI48JMxC20s02
+	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
+	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
+	6r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7
+	xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_
+	Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07br_-QUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARENB2rg+9YEMABJsA
 
-On Tue, Oct 20, 2026 at 03:41:54PM +0300, Abel Vesa wrote:
-> On 26-10-14 14:09:04, Loic Poulain wrote:
-> > On Wed, Oct 14, 2026 at 1:59 PM Abel Vesa <abel.vesa@oss.qualcomm.com> wrote:
-> > >
-> > > On 26-10-12 14:58:43, Jagadeesh Kona wrote:
-> > > >
-> > > >
-> > > > On 10/12/2026 1:29 AM, Abel Vesa wrote:
-> > > > > When resuming from system suspend on Eliza CQS EVK, gcc_pcie_0_gdsc
-> > > > > gets stuck off when powering back on, preventing the system from resuming.
-> > > > >
-> > > > > Use retention for all four PCIe GDSCs, as on SM8550, to preserve their
-> > > > > state across suspend and allow the system to resume.
-> > > > >
-> > > > > Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
-> > > > > Assisted-by: LLM
-> > > > > Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> > > > > ---
-> > > > >  drivers/clk/qcom/gcc-eliza.c | 8 ++++----
-> > > > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > > > >
-> > > >
-> > > >
-> > > > Hi Abel,
-> > > >
-> > > > Using PWRSTS_RET_ON keeps the GDSC forever ON after first enable and the GDSC never
-> > > > collapses.
-> > > >
-> > > > For similar issue on Lemans (pcie_0_gdsc gets stuck off when powering back on), picking
-> > > > the below changes from PCIE side helped to power ON the GDSC properly without any issue.
-> > > >
-> > > > https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
-> > > > https://lore.kernel.org/all/20260729071514.859778-1-manivannan.sadhasivam@oss.qualcomm.com/
-> > > >
-> > > > Can you please try if above changes are helping on Eliza also?
-> > >
-> > > Thanks for the hint. Mani's patch (v2) is already upstream, so just enabling
-> > > CONFIG_HOTPLUG_PCI_PCIE did the trick.
-> > >
-> > > Suspend/resume works fine now on Eliza, so this patch can be ignored then.
-> > 
-> > So should the retention configuration above be conditional on
-> > CONFIG_HOTPLUG_PCI_PCIE, or should we simply depend on
-> > CONFIG_HOTPLUG_PCI_PCIE?
-> 
-> None. I think QCOM_PCIE should select it.
+The CSID of generation 980 moves the capture interrupts away from the VFE:
+that VFE has no useful interrupt sources, and the CSID reports RDI buffer
+done, register update completion and CAMIF start-of-frame per CSI2 stream
+instead.
 
-Nope. It should be selected by defconfig [1].
+A buffer is only complete once its frame started, and the sequence number
+of a frame is defined by its start: turn the CSID start-of-frame interrupt
+into the frame start source.  camss_frame_start() forwards it to the
+paired VFE, which raises V4L2_EVENT_FRAME_SYNC on the video node,
+increments the sequence only there, and marks buffers done before their
+frame started as erroneous.  A start-of-frame may also follow an as-yet
+unhandled completion, so the end-of-frame and start-of-frame timestamps are
+compared and the completion reported first in that case.
 
-Just to clarify on how the hotplug support is fixing this issue. Once we enable
-the hotplug driver, the Root Port will be allowed to enter D3Hot during suspend,
-which is a pre-requisite for powering off the PCIe devices and the controller.
-So once all the conditions are satisfied, the controller and devices will be
-powered off. So even if the PCIe GDSC gets powered off at the end of suspend, it
-won't affect PCIe devices as they already lost their power. So we don't need
-GDSC retention.
+Hardware generations that still report frame starts through the VFE keep
+the previous behaviour, as the new vfe_hw_ops callback is only provided by
+VFE implementations that need it.
 
-But that being said, if any of the PCIe devices support wakeup like WOL from
-D3Hot, then we do not power off the controller and devices. In that case, GDSC
-retention would be required to keep the controller/device state intact. You can
-reproduce this issue by enabling wakeup for the PCIe device from sysfs and
-attempt suspend.
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+ .../platform/qcom/camss/camss-csid-980.c      | 25 +++++++++
+ drivers/media/platform/qcom/camss/camss-vfe.c | 54 ++++++++++++++++++-
+ drivers/media/platform/qcom/camss/camss-vfe.h |  3 ++
+ drivers/media/platform/qcom/camss/camss.c     | 12 +++++
+ drivers/media/platform/qcom/camss/camss.h     |  1 +
+ 5 files changed, 94 insertions(+), 1 deletion(-)
 
-So to cleanly fix this issue, we need the PCIe controller driver to signal
-retention state to the GDSC driver or the GDSC driver has to figure this on its
-own and configure retention accordingly.
+diff --git a/drivers/media/platform/qcom/camss/camss-csid-980.c b/drivers/media/platform/qcom/camss/camss-csid-980.c
+index 45f3b3786..8acc1efea 100644
+--- a/drivers/media/platform/qcom/camss/camss-csid-980.c
++++ b/drivers/media/platform/qcom/camss/camss-csid-980.c
+@@ -108,6 +108,7 @@
+ #define CSID_CSI2_RDIN_IRQ_CLEAR(rdi) \
+ 	((csid_is_lite(csid) ? 0xF4 : 0x11C) + 0x10 * (rdi))
+ #define		INFO_RUP_DONE				BIT(23)
++#define		INFO_CAMIF_SOF				BIT(4)
+ #define CSID_RDI_TOP_IRQ(rdi)		BIT((csid_is_lite(csid) ? 8 : 16) + (rdi))
+ #define CSID_RDI_IRQ_PATTERN(rdi) \
+ 	((csid_is_lite(csid) ? 0x548 : 0xE50) + (csid_is_lite(csid) ? 0x100 : 0x200) * (rdi))
+@@ -295,6 +296,8 @@ static void csid_configure_stream(struct csid_device *csid, u8 enable)
+ 		if (csid->phy.en_vc & BIT(i)) {
+ 			u32 mask = readl(csid->base + CSID_CSI2_RDIN_IRQ_MASK(i));
+ 
++			writel(INFO_CAMIF_SOF, csid->base + CSID_CSI2_RDIN_IRQ_CLEAR(i));
++			mask = enable ? mask | INFO_CAMIF_SOF : mask & ~INFO_CAMIF_SOF;
+ 			writel(mask, csid->base + CSID_CSI2_RDIN_IRQ_MASK(i));
+ 			mask = readl(csid->base + CSID_TOP_IRQ_MASK);
+ 			mask = enable ? mask | CSID_RDI_TOP_IRQ(i) : mask & ~CSID_RDI_TOP_IRQ(i);
+@@ -327,6 +330,18 @@ static void csid_subdev_reg_update(struct csid_device *csid, int port_id,
+ 		__csid_aup_update(csid, port_id);
+ }
+ 
++static u64 csid_read_timestamp(struct csid_device *csid, u32 offset)
++{
++	u32 hi, lo;
++
++	do {
++		hi = readl(csid->base + offset + 4);
++		lo = readl(csid->base + offset);
++	} while (hi != readl(csid->base + offset + 4));
++
++	return (u64)hi << 32 | lo;
++}
++
+ /**
+  * csid_isr - CSID module interrupt service routine
+  * @irq: Interrupt line
+@@ -359,6 +374,16 @@ static irqreturn_t csid_isr(int irq, void *dev)
+ 			if (val & INFO_RUP_DONE)
+ 				csid_subdev_reg_update(csid, i, true);
+ 
++			if (val & INFO_CAMIF_SOF) {
++				/* A new SOF may follow an as-yet unhandled completion. */
++				if (done && csid_read_timestamp(csid, CSID_RDI_EOF_TS(i)) <
++				    csid_read_timestamp(csid, CSID_RDI_SOF_TS(i))) {
++					camss_buf_done(csid->camss, csid->id, i);
++					done = false;
++				}
++				camss_frame_start(csid->camss, csid->id, i);
++			}
++
+ 			if (done)
+ 				camss_buf_done(csid->camss, csid->id, i);
+ 		}
+diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
+index d1b66033a..f42fc56e7 100644
+--- a/drivers/media/platform/qcom/camss/camss-vfe.c
++++ b/drivers/media/platform/qcom/camss/camss-vfe.c
+@@ -444,6 +444,34 @@ u32 vfe_hw_version(struct vfe_device *vfe)
+ 	return hw_version;
+ }
+ 
++void vfe_frame_start(struct vfe_device *vfe, int wm)
++{
++	struct v4l2_event event = { .type = V4L2_EVENT_FRAME_SYNC };
++	struct vfe_output *output;
++	struct vfe_line *line;
++	unsigned long flags;
++
++	spin_lock_irqsave(&vfe->output_lock, flags);
++	if (vfe->wm_output_map[wm] == VFE_LINE_NONE)
++		goto out_unlock;
++
++	line = &vfe->line[vfe->wm_output_map[wm]];
++	output = &line->output;
++	if (output->state != VFE_OUTPUT_ON)
++		goto out_unlock;
++
++	/* Count frames even when there is no buffer available for capture. */
++	event.u.frame_sync.frame_sequence = output->sequence++;
++	output->frame_started = true;
++	spin_unlock_irqrestore(&vfe->output_lock, flags);
++
++	v4l2_event_queue(line->subdev.devnode, &event);
++	return;
++
++out_unlock:
++	spin_unlock_irqrestore(&vfe->output_lock, flags);
++}
++
+ /*
+  * vfe_buf_done - Process write master done interrupt
+  * @vfe: VFE Device
+@@ -478,7 +506,13 @@ void vfe_buf_done(struct vfe_device *vfe, int wm)
+ 	}
+ 
+ 	ready_buf->vb.vb2_buf.timestamp = ts;
+-	ready_buf->vb.sequence = output->sequence++;
++	if (ops->frame_start) {
++		ready_buf->vb.sequence = output->sequence - 1;
++		if (!output->frame_started)
++			state = VB2_BUF_STATE_ERROR;
++	} else {
++		ready_buf->vb.sequence = output->sequence++;
++	}
+ 
+ 	index = 0;
+ 	output->buf[0] = output->buf[1];
+@@ -544,6 +578,7 @@ int vfe_enable_output_v2(struct vfe_line *line)
+ 	output->state = VFE_OUTPUT_ON;
+ 
+ 	output->sequence = 0;
++	output->frame_started = false;
+ 	output->wait_reg_update = 0;
+ 	reinit_completion(&output->reg_update);
+ 
+@@ -1972,8 +2007,23 @@ static int vfe_link_setup(struct media_entity *entity,
+ 	return 0;
+ }
+ 
++static int vfe_subscribe_event(struct v4l2_subdev *sd, struct v4l2_fh *fh,
++			       struct v4l2_event_subscription *sub)
++{
++	struct vfe_line *line = v4l2_get_subdevdata(sd);
++	struct vfe_device *vfe = to_vfe(line);
++
++	if (!vfe->res->hw_ops->frame_start ||
++	    sub->type != V4L2_EVENT_FRAME_SYNC || sub->id)
++		return -EINVAL;
++
++	return v4l2_event_subscribe(fh, sub, 16, NULL);
++}
++
+ static const struct v4l2_subdev_core_ops vfe_core_ops = {
+ 	.s_power = vfe_set_power,
++	.subscribe_event = vfe_subscribe_event,
++	.unsubscribe_event = v4l2_event_subdev_unsubscribe,
+ };
+ 
+ static const struct v4l2_subdev_video_ops vfe_video_ops = {
+@@ -2080,6 +2130,8 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
+ 		v4l2_subdev_init(sd, &vfe_v4l2_ops);
+ 		sd->internal_ops = &vfe_v4l2_internal_ops;
+ 		sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
++		if (vfe->res->hw_ops->frame_start)
++			sd->flags |= V4L2_SUBDEV_FL_HAS_EVENTS;
+ 		if (i == VFE_LINE_PIX && vfe->res->is_lite == false)
+ 			snprintf(sd->name, ARRAY_SIZE(sd->name), "%s%d_%s",
+ 				 MSM_VFE_NAME, vfe->id, "pix");
+diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/media/platform/qcom/camss/camss-vfe.h
+index c402ef170..621eee07d 100644
+--- a/drivers/media/platform/qcom/camss/camss-vfe.h
++++ b/drivers/media/platform/qcom/camss/camss-vfe.h
+@@ -77,6 +77,7 @@ struct vfe_output {
+ 	};
+ 	enum vfe_output_state state;
+ 	unsigned int sequence;
++	bool frame_started;
+ 
+ 	int wait_reg_update;
+ 	struct completion sof;
+@@ -118,6 +119,7 @@ struct vfe_hw_ops {
+ 			     struct vfe_line *line);
+ 	void (*vfe_wm_stop)(struct vfe_device *vfe, u8 wm);
+ 	void (*vfe_buf_done)(struct vfe_device *vfe, int port_id);
++	void (*frame_start)(struct vfe_device *vfe, int port_id);
+ 	void (*vfe_wm_update)(struct vfe_device *vfe, u8 wm, u32 addr,
+ 			      struct vfe_line *line);
+ };
+@@ -286,6 +288,7 @@ int vfe_enable_v2(struct vfe_line *line);
+  * @wm: Write master id
+  */
+ void vfe_buf_done(struct vfe_device *vfe, int wm);
++void vfe_frame_start(struct vfe_device *vfe, int wm);
+ 
+ /*
+  * vfe_get_output_v2 - Get vfe output line
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index 2123f6388..92d536986 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -5044,6 +5044,18 @@ void camss_buf_done(struct camss *camss, int hw_id, int port_id)
+ 	}
+ }
+ 
++void camss_frame_start(struct camss *camss, int hw_id, int port_id)
++{
++	struct vfe_device *vfe;
++
++	if (hw_id < 0 || hw_id >= camss->res->vfe_num || port_id < 0)
++		return;
++
++	vfe = &camss->vfe[hw_id];
++	if (port_id < vfe->res->line_num && vfe->res->hw_ops->frame_start)
++		vfe->res->hw_ops->frame_start(vfe, port_id);
++}
++
+ /*
+  * camss_register_entities - Register subdev nodes and create links
+  * @camss: CAMSS device
+diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/platform/qcom/camss/camss.h
+index ef45eea00..6a17ec027 100644
+--- a/drivers/media/platform/qcom/camss/camss.h
++++ b/drivers/media/platform/qcom/camss/camss.h
+@@ -178,6 +178,7 @@ int camss_vfe_get(struct camss *camss, int id);
+ void camss_vfe_put(struct camss *camss, int id);
+ void camss_delete(struct camss *camss);
+ void camss_buf_done(struct camss *camss, int hw_id, int port_id);
++void camss_frame_start(struct camss *camss, int hw_id, int port_id);
+ void camss_reg_update(struct camss *camss, int hw_id,
+ 		      int port_id, bool is_clear);
+ 
 
-- Mani
-
-[1]  https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
-
--- 
-மணிவண்ணன் சதாசிவம்
