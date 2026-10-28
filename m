@@ -1,121 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793175177;
-	b=WYvIvnb7b14FjoczzX3az2NztE9sXinxQO7PsGX3vNlTiq/9uyqDiLZOqtO7Sdb0MhUV
-	 UlKCmCMV8C97w19zYhXpGpFvx8RkDxBBBNFS1951qYcWfEaDuHTcL77YveTqnvw8vp9O/
-	 JP+MlZIfG3z+Ce2T5r7eDXp3eZDXtfjx+S0v12lH1+zpj1IgOnxuVPWehsQ8JJo69PPCI
-	 9mUqDifdoZQq54NA3oLUB9R1dkfjh+uzfCF/ZUXV7mp0US87F9saf2/rLTdvmsLE5CUdS
-	 7KREHXxMeXtew5ajY7dpsgXBxg7eA0YgsUs0txhsz2BVjwoB9/527GWE9yikSrMJfLQ==
+	t=1793175938;
+	b=YVgnkSGZsQmdY/gn9raQCJyJpCfbrQcpyNxWe89gNTvl7k+/AAvsAxO/bRpFmEOB59Po
+	 oeMRY4eQMQqcZ9MsxRQjfH6Dg4MJVrgcsjuv6hFu3lgxNHmwE8t+Mdp9U4cYL/Wjefdy/
+	 Akyo4tbj3B1kNz3V60gHGI2QjEvr4eB8ak6N6HzT0/FSo3uI8DkSbpjmhbHIsCGkJlU3H
+	 kg3rSYae4UnIch3FH3cRTa2CXh0E2IjFQrHJSMSs6CZJ0OUbgQq6/VXWvCVUldKKMCj8/
+	 +cNS4yIbKFchTLWlkfOCfyLsVpMKL1kw/JxfIUPs9Vjp2ZPiwQJcWLxua1JcNwZRMHg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793175177;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:X-Developer-Signature:
-	 X-Developer-Key:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=qyDQUFF2Id/JL1J8lTWcyQHlP4OzxlWsI56SmrkK9Jk=;
-	b=l3pgVyKuUO9I3Alssf58l26YPqMoWAPSRkzrTAk02Ll0wuT7epOovcVLMZBhiLi2PPIJ
-	 gIjvDDpHNMni4zvkO6BYt+qP7PEoV1OmAqNz++oxwL5nVGSlGy5PDHi6ssqS8P/avucWo
-	 REH5BhLyQK5Dp2JLEDXotOgdWDwr0Xg98LvoonKpVpRlbJ2cBSd4ZmeBA0n8oetYxGnTj
-	 Xv6xhBNh6dbgrIZ3lq0UXxgR9sFvRFD8lMsQyS/3xi/Koog18LDxHAWdMDjbQC71YalcL
-	 x4mFBmx3ezr4PAcCE5UXgbaU7zWFqwvq5ElLX/3Zhdu7+F3x6VmKhz+cZSqqtUC7v1Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793175938;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:Received:Received:From:In-Reply-To:
+	 MIME-Version:References:Date:X-Gmail-Original-Message-ID:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
+	bh=05l+8JW812QvmCS5ASRMEsto/MViEuxLP3EanVEdMuk=;
+	b=IdaQDLoRLJZ2NUByDADGL1vN/BLVmFN/Cg5eiB++JTI7XU/Ps60fh9FPCYz9Md8Mni8x
+	 lGJlcSbE1r1Z47ECum8yUpCXIWoGlqClp0C+SiROKmfLt266u7DIh2dkzZxZVUluhpjaY
+	 LeoZdL6lIboAocenbFE4tDtI/RC/Kn7TvXPN7K14u2TGOE/IDl0xB2lVvEevXzkIe0ipN
+	 LuXKcDbotd2//rMTMUK5n/9FUAkuY6WSGc9rQXANYJZ3/sSe2mR7o+kPCmstEESWZTyPR
+	 XZKLID3Gh4ew1EFPaKrKA4hdhrl9+O3mLZZYWniCTiu9RKJZUTb5Vy9L8K7HYL2+x6w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZfQXcz2p;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cNv2EDOT;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jh5UxeZ1;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCD21606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 08:12:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CCD21606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73BBC606A31A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 08:25:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZfQXcz2p;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cNv2EDOT
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69S4Q9xT2753513
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 08:12:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=qyDQUFF2Id/JL1J8lTWcyQHlP4OzxlWsI56
-	SmrkK9Jk=; b=ZfQXcz2pF3kgHWDp9VrfXW0NkFEso1q1QljvEXXSvaIq2aYTmB/
-	PHB03hJJgGtkmbUWISDDe1iiyEQvjh+m9PxhNEzBO4eSgSQ3vo9b6zbe+X7OVjqA
-	HeFGCsu6DWfCuuMHiujvOimGwc2TossBKvj+byweYHMw8J/u16Wnpp5900CZLfAo
-	kE+PuJAdZc51lecKf+5ELfAmAkd13k51AqjWY66aEh7J7gFDomYOkSWw6SgD59IU
-	6I503z0EY+w4E1vda9HfFmHmc+hH7zAmqHk8sKrnPYxKn3Kog3f+4jjjmwUQT9uM
-	Dkn/VJm8+V89xcrKbLuT1FxrySRAS2OaPvA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjy713732-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 08:12:55 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb71b1443so135086685a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 01:12:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793175175; x=1793779975; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qyDQUFF2Id/JL1J8lTWcyQHlP4OzxlWsI56SmrkK9Jk=;
-        b=cNv2EDOT97A+yNuoCbteN4zGiglZ06L0FTJOOjJYwCbvfBn5DMyG0y8HiJe4jXWzMT
-         QFFvAEM4TGLGuztVjXm0wmHRLe71dmU9+n+/wmApIIqyh+Cb1W919FSzSZVvqOVcSv2I
-         nJHXK89o0Lw9oqaj9voBYdeIjiw3pj5lEATHj/E1nErk03QSNb1gOV+N5T/2chbwgcON
-         522xB0EWgoEvoHmMcYLmQ45ZmKX+MBPsL3i+OYFZmonJE+Y37isHOOql/iX187Jj9tu6
-         +ckYYoNAfBEgw2ob/LPoio6A+pI7MmZMRk7lOAS+k/zpW7BvZcP+2fwoJwcTG6yPS83g
-         nXnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793175175; x=1793779975;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qyDQUFF2Id/JL1J8lTWcyQHlP4OzxlWsI56SmrkK9Jk=;
-        b=qbHIii2LtcU+9p2mL7QwFSn4TJdtFf7i4plXBXtdb2Fh1ue/T4Soa6wt1104mlEPB2
-         4vs/7dEjzJX/EJfyGJPwQ3ww/PkNzf/4ijYpiUsd57dh9nvCv/3Vygg4AGzOLZESxmz6
-         HyD3SFOMNBfEuZejlWPmZW2yW/A/b2JtwjHbU4xb6gvVxUwCYaCY/BAlqjDncNPGcY2t
-         qJmE2VX2nhEgWf1Sr2tV2ycZf8D1mx41vv9U2ztCQKRHU+t1ck+uXTyL9gzDLNj0WTPj
-         L4KNDKQOi91jnhQS2Kk65FO9QkIwYRtqLFLfPr9tqjApS4z7xX+OY1Bsog+P4k4ubBAB
-         rhxg==
-X-Forwarded-Encrypted: i=1; AKwUvBzMazhDhZdsxgBHmY52itfwYPeQ9ccFZnRWaaHbz0fIL2tqxPd8N+b/jgn6LqFz9pD1dznu/DG1U83AoGss@vger.kernel.org
-X-Gm-Message-State: AFq9FYIRHzvhVB9/8tyg5IZsdlKBOghifaI0kahs1OZ6wxPEIjdyIfMk
-	eqeRFmhD/ip3K+XDv06IzN7dL4cRNty+ZhUWsNsPnf9z7zO//pDHc2EoA/mW8kNae41JRChFoYM
-	4/WSyO5gJ4zg+7ACZjQxUHUqkkKfj5bFcf0RECr7AQyQ2GAsZgxwytuV5pqNkPjCHZvW4
-X-Gm-Gg: AYBFou2/qTlJ3uILH9z1qMpzbTfXn6nEqTCplszUm3BIywa5FopxnxwD3qe+Quo+2e+
-	OUTvg/ncrWP94qS7FB909fvla7Smw514e8LUQEBddvpy1rXMllXBPTJdH4YLuZnxEgc9Y1w8ktT
-	ZrXHXlETSfc4IH7Xc2CLhWhWibpFWxM0EaBGDJJrzRtFEJxieydkg9iE1OqabUQ0VqBXHdRVvky
-	S4e0DPevEtsqAl5xJ7zsMELSUCVTMgAjke86+3qnRu6snD4lmlGVndV38qegycbKt7ua54LsnaD
-	9ScOVI91kIOMOg5DvmM45xvt8bYUgPCBuR7Sgedr/YJcRS2vaSldvf3HicwIU9DaHrsG7sk+of/
-	puGfR4NLap7zdFyhI4r+B2FNzk93ZJHeC1IMM23RC2xYCHOredttWea5W589V/A==
-X-Received: by 2002:a05:620a:6013:b0:93f:18ba:bf78 with SMTP id af79cd13be357-94408d1f56cmr185550085a.69.1793175174850;
-        Wed, 28 Oct 2026 01:12:54 -0700 (PDT)
-X-Received: by 2002:a05:620a:6013:b0:93f:18ba:bf78 with SMTP id af79cd13be357-94408d1f56cmr185547185a.69.1793175174309;
-        Wed, 28 Oct 2026 01:12:54 -0700 (PDT)
-Received: from quoll ([178.197.218.7])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3cfasm27072976f8f.17.2026.10.28.01.12.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 01:12:52 -0700 (PDT)
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Barnabas Czeman <barnabas.czeman@mainlining.org>,
-        Shawn Guo <shawn.guo@linaro.org>,
-        Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
-        Luca Weiss <luca.weiss@fairphone.com>,
-        Danila Tikhonov <danila@mainlining.org>, linux-arm-msm@vger.kernel.org,
-        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [PATCH] dt-bindings: interconnect: qcom: Relax child node name pattern
-Date: Wed, 28 Oct 2026 09:12:44 +0100
-Message-ID: <20261028081243.38562-2-krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jh5UxeZ1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F4D11F031E0
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 08:25:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793175937;
+	bh=05l+8JW812QvmCS5ASRMEsto/MViEuxLP3EanVEdMuk=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=jh5UxeZ1SiyWyhZKrGsTkAzISKGPgJzuHiQjD/CYuFRgCLjIUR4rvYsQlagvkehTX
+	 AoImjCrz/jrmRZWqqkwlkiTTmHGQcA13o66ATdXUXGMGVTNEfHbPfINtsYDQIreQv7
+	 8Hg//W1tQYaDp+WuBPFrbVuUdiajFX0zCTQBAxXIdK5fWL36Sxc4vn51ZYmUEmUPRK
+	 fdosq++7MQwEk6lAW4ydudWaxq6flnmDG9jGJNoEDLgqtAKlvcMb2ZfRpFNzUCMu/u
+	 o5zPzTmtXIj+LwG9ANVDcNHYa7166zyzBo6CBh34bjNehhTv2d8OyDxO5ObEJmrUxp
+	 19bkzFKFiwQvg==
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3a49a022221so3989221fa.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 01:25:36 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBysiCKqhSiHubD2HbuKSnw+bcmhqzxg1ZFRtq35OcAGMALkZnAeis89vK9YRPsxsK4QB39Wpwu+btSbJ568@vger.kernel.org
+X-Gm-Message-State: AFq9FYIy8xQzAos2vbaDdQ78CuS874pmR2m4mrRfGlkQM6cLq/x5pGzW
+	wcCz6lAgHiYpa/thxyYtQJzR9uS38l9R72nvXBDW3fjCI13uu7/VtsYL9IFoob2bK4EKo76cRoE
+	UfSd6VQQ/FEvHem9Sl4mOge5jFTElIU5PT8LplCVJvw==
+X-Received: by 2002:a05:651c:198e:b0:3a9:87c0:7737 with SMTP id
+ 38308e7fff4ca-3ac9cf81e73mr3153621fa.21.1793175935670; Wed, 28 Oct 2026
+ 01:25:35 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 01:25:34 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 01:25:34 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <at8Q9umfE2AP24lI@QCOM-aGQu4IUr3Y>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,165 +65,38 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5321; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=uUqlSTmTFtXhLMYp1LUAp5AuvOZCnusljum3tVLZO3I=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBq4a57siYh18pb2JBnQeoruZi8r1IPtsM+O04l1
- yCZv9vFs56JAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCauGuewAKCRDBN2bmhouD
- 1xmVD/9BheKSHIfPCUlrZWpdWQ4iY91ANpbyRdFKdONVcbu/flx71Vt8FSCikEq7MQtfmvxMgje
- xtzW1Vy0o0gCsLjU2aOemIjxBjFU8iFIGYv9nGS9V06VaXz006zZTkoiBu73+80As8KBAP7xX1a
- arV783trROSimoaSHVhEm0xzv1JzTxGXDl5VTqLUenD+vQuYFLcyTv0/YlQfAzGOvBYHi4pg7wb
- Ju1N75LEfEOWvCu4gj/rCGvBcviJvtcrAp7LmDTOXqUKUw7BSbViqpVp0QMzE6CZO8rqAFp+9UO
- BaiOqYJXkD6wOTD1p0NVRBgOCf3YlZlMDJmvSn2vPZqQG3332OPCBgvPOoHdB0+GkTQaP4v0+w2
- Q36yrlKfbbVKtTZ1rytw2RHeQ72OVq+dmI36oAzEUqGqCYf/S8ghE5+IXNM8ycVhRikl39ndFMy
- ATUEdWxGQeEPPpw/rC4jLt0tS+QACZN0HroPh//wZ2SsLY3TDtc/Y28bWLJoXbIImFDUOvhlk3s
- EgSft5+nrIQiHtjrsyEiISKNmmsNZT8pjs/Gyos2+0K9G13eK1jrtMxdyLT/H443mIQ1xPGFDYv
- zi6307QH9ncuWAaYEP96KPC72BVNT1kI+toSjgX2uvofcZPGz1o+lotTg1BSmHnLrbflQyKvpoc Y2pGE7x5ClTJMNg==
-X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDAzMiBTYWx0ZWRfXxgLnqZ04wViR
- rK5zuDY+ygmb3ic0+6M/6FEVCc03gbkMyFX3PvZNYzQG2MPL8EmB8c3u5//A3roxD6QIITidZUA
- 9r5zQHKr/5pTAjUdanZhu2WExnvljCM+N4leA1ejpMEFt1vYHStGtX3aW3PFeQAWq79XvZP5zgd
- UdqF4U6KCsx5DfIULUENbhQKi0I1y1zYm5kU+Uxs6A7WsVlnNFvCfHTARGHUHvbXYeBtG4BIHa8
- hllrV+lxxLT0LcM/JvqUuIfkBzKGXFpDb+WJg4Q3GMlDSaXIkpeErwp6PASg2vkxGch0O+beuK8
- I5tJKGmo1GreIzr/GxEr8FTLsZuAEXqg60uAv4dK8AjGAD9RqQex++1t/MUMKc/EpL8x3VagRSz
- 7nyX0HV0iToH2OY3lP02qQfZ3v/CGLtheAhLSgpUox5ptd5v9Gadro0oXnQvIjTtrnZFjIGnh9E
- nHoXL+iSpX5Pg1GWOYw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDAzMiBTYWx0ZWRfX5Jx3fGPul0mD
- NjSQobyGmOWwhHV99yuXAnoOfB/SBDEPoY7Es87mWXJILgD5JuXjYPGO3PTRjO43ZeXZnMevU2L
- WGXuSC2/9fW2iwnwlU2AWY4XjET7Zpg=
-X-Authority-Analysis: v=2.4 cv=JspkP84C c=1 sm=1 tr=0 ts=6ae1ae87 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=uyPgTw0bjBTS2cVxpiNm5w==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=KVRzILKH43C-bKGDRGIA:9 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-GUID: ymrtybl96qPAiKILFnTfwatQPmVGAmPc
-X-Proofpoint-ORIG-GUID: ymrtybl96qPAiKILFnTfwatQPmVGAmPc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-28_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
- spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280032
+References: <20261023-sa8255p-emac-dts-v1-0-a34d778ce9ac@oss.qualcomm.com>
+ <20261023-sa8255p-emac-dts-v1-2-a34d778ce9ac@oss.qualcomm.com> <at8Q9umfE2AP24lI@QCOM-aGQu4IUr3Y>
+Date: Wed, 28 Oct 2026 01:25:34 -0700
+X-Gmail-Original-Message-ID: <CAMRc=McYTWmV6iAbm97C-xs1vh9Atvy-LivQBW10iHQh5+rPzQ@mail.gmail.com>
+X-Gm-Features: AclHuK_avRcSyuEchrSyhnDYEBcfCksI2Ibe_hZLUqTV6ryNiIHPJk3TgyKxUG0
+Message-ID: <CAMRc=McYTWmV6iAbm97C-xs1vh9Atvy-LivQBW10iHQh5+rPzQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] arm64: dts: qcom: lemans: make the emac compatible
+ specific to the embedded variant
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Some Qualcomm SoCs interconnect nodes have a one child, thus that child
-should be named 'interconnect' just like the parent, not
-'interconnect-0' or 'interconnect-foo' (see Devicetree specification on
-generic device node naming).  Ideally the child should be just a
-property, not patternProperties, but that would be an ABI change.  Relax
-the pattern for children to allow the correct naming.
+On Mon, 26 Oct 2026 09:36:06 +0100, Shawn Guo
+<shengchao.guo@oss.qualcomm.com> said:
+> On Fri, Oct 23, 2026 at 11:02:23AM +0200, Bartosz Golaszewski wrote:
+>> The embedded and gearvm variants of the ethernet MAC use different
+>> compatibles so move the one for sa8775p into lemans-embedded.dtsi and
+>> make place for the gearvm variant to be placed in lemans-gearvm.dtsi.
+>>
+>> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>
+> Do we run into any problem if lemans-gearvm.dtsi simply overwrites
+> the compatible without this patch?
+>
 
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
----
- .../devicetree/bindings/interconnect/qcom,msm8939.yaml         | 2 +-
- .../devicetree/bindings/interconnect/qcom,msm8953.yaml         | 2 +-
- .../devicetree/bindings/interconnect/qcom,qcm2290.yaml         | 3 +--
- .../devicetree/bindings/interconnect/qcom,shikra.yaml          | 3 +--
- .../devicetree/bindings/interconnect/qcom,sm6115.yaml          | 3 +--
- .../devicetree/bindings/interconnect/qcom,sm6350-rpmh.yaml     | 2 +-
- .../devicetree/bindings/interconnect/qcom,sm7150-rpmh.yaml     | 3 +--
- 7 files changed, 7 insertions(+), 11 deletions(-)
+Technically no, but then lemans.dtsi is incorrect as the MAC compatible depends
+on the firmware variant. I'd move it if you're already touching the files
+anyway.
 
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,msm8939.yaml b/Documentation/devicetree/bindings/interconnect/qcom,msm8939.yaml
-index 534644cccdcb..f8ecfe60a8a3 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,msm8939.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,msm8939.yaml
-@@ -33,7 +33,7 @@ properties:
-     maxItems: 1
- 
- patternProperties:
--  '^interconnect-[a-z0-9\-]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     $ref: qcom,rpm-common.yaml#
-     description:
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,msm8953.yaml b/Documentation/devicetree/bindings/interconnect/qcom,msm8953.yaml
-index 56cdb77b369a..538115048d99 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,msm8953.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,msm8953.yaml
-@@ -35,7 +35,7 @@ properties:
-     const: 2
- 
- patternProperties:
--  '^interconnect-[a-z0-9\-]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     $ref: qcom,rpm-common.yaml#
-     unevaluatedProperties: false
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,qcm2290.yaml b/Documentation/devicetree/bindings/interconnect/qcom,qcm2290.yaml
-index b6c15314c5c5..72b060a4a193 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,qcm2290.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,qcm2290.yaml
-@@ -26,9 +26,8 @@ properties:
-       - qcom,qcm2290-cnoc
-       - qcom,qcm2290-snoc
- 
--# Child node's properties
- patternProperties:
--  '^interconnect-[a-z0-9]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     description:
-       The interconnect providers do not have a separate QoS register space,
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,shikra.yaml b/Documentation/devicetree/bindings/interconnect/qcom,shikra.yaml
-index a0c26de94ccf..456b56222866 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,shikra.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,shikra.yaml
-@@ -31,9 +31,8 @@ properties:
-     minItems: 1
-     maxItems: 4
- 
--# Child node's properties
- patternProperties:
--  '^interconnect-[a-z0-9]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     description:
-       The interconnect providers do not have a separate QoS register space,
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,sm6115.yaml b/Documentation/devicetree/bindings/interconnect/qcom,sm6115.yaml
-index cdae0acf3a1d..0024fd29c0bc 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,sm6115.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,sm6115.yaml
-@@ -31,9 +31,8 @@ properties:
-     minItems: 1
-     maxItems: 4
- 
--# Child node's properties
- patternProperties:
--  '^interconnect-[a-z0-9]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     description:
-       The interconnect providers do not have a separate QoS register space,
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,sm6350-rpmh.yaml b/Documentation/devicetree/bindings/interconnect/qcom,sm6350-rpmh.yaml
-index 2dc16e4293a9..c62816917862 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,sm6350-rpmh.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,sm6350-rpmh.yaml
-@@ -32,7 +32,7 @@ properties:
-     maxItems: 2
- 
- patternProperties:
--  '^interconnect-[a-z0-9\-]+$':
-+  '^interconnect(-[a-z0-9\-]+)?$':
-     type: object
-     description:
-       The interconnect providers do not have a separate QoS register space,
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,sm7150-rpmh.yaml b/Documentation/devicetree/bindings/interconnect/qcom,sm7150-rpmh.yaml
-index 978930324bbf..ec08000abc96 100644
---- a/Documentation/devicetree/bindings/interconnect/qcom,sm7150-rpmh.yaml
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,sm7150-rpmh.yaml
-@@ -34,9 +34,8 @@ properties:
-   reg:
-     maxItems: 1
- 
--# Child node's properties
- patternProperties:
--  '^interconnect-[0-9]+$':
-+  '^interconnect(-[0-9]+)?$':
-     type: object
-     description:
-       The interconnect providers do not have a separate QoS register space,
--- 
-2.53.0
-
+Bart
