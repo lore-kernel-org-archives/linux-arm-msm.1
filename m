@@ -1,109 +1,124 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.44
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793205174;
-	b=duP2BYZJiLrOX5T1podwiv1X8hGPQS284oMrxIwrkxj+qD9/UAPbFsa9UsPAja6tNCLA
-	 xTqFZSi447R/hLgV5cAIVOnbwKX9fknGDtmcyUIEDDdBG1KYws8OY/eiyCmyKfXR0PCob
-	 alY2vXGnD5l2HD4hAcEDJU/9JBxRBr2UvlboHTGBxmXy4NSsodxl6pM/2Z3SsoTFqimVf
-	 5YHe9IEJNzwYk85HuDBSBonKhQhsw+6fIbPEaIjFOPfld4nO8VgTMmw5thTxfqN1Kppzl
-	 E6kE3F4xF+VCb4EjiW+RxtxfoIPhWERl5ENaUyuTQxrhuziupurd8Beb0qTYlEI3c5Q==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793205174;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=R00ordqkFY/Q4J67BElD5gXinfK7jxEiPvEKeWad1ok=;
-	b=wn698LlNDDN+iEgY+IEHyF0FvJVFsJa9+qxK+ZICPgn+NW9jqp4qFyfX8N4zy7RWbdzO
-	 mOcMQ9uuGCk3nv3lvAq62mwdvESTFpnzdWiDnQzCCxSQOv6ltEAu4i6/zKSGOM0Hj9vKs
-	 dCDI8mDSUw+mtKDdULg14coCrgzBRzHRfLP1fT15ob1n/EU68xfoASUCpOib1DmrSJfAb
-	 grF/lDUp7Mw0Lz5KFah6FJprfCLjjrFAyChPJ+v6qCAnHT0wCwVKYwBmEG1E9mK3gAQcd
-	 grVh1RC3dIq+iCvuqwiY0nbIMdbD7UHmugfif/1fvHmg96NaYO7HW8uhtBMg47G5G/A==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=fielding.dev;
-	spf=pass smtp.mailfrom=fieldingdsp.com;
-	dkim=pass header.d=fieldingdsp-com.20260707.gappssmtp.com header.i=@fieldingdsp-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=eXbHX832;
-	arc=none smtp.remote-ip=209.85.208.44
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793205389;
+	b=bJSVSmUBU+jbE2Edcr9zaZuA1HrU7Jkhtv1Wld+ZrMAn514MQiQKIjo0p36CSG4kYt12
+	 Dg7n2bF47UPXmPIUSXzgRl9YIMBwd4xuyRS55BNYQJLgqyq61wUYsulr1urTR2e7tkjBp
+	 P2XV8ZfSs6KxlKPH8e0ZiWnya7831bgaSAcNfWUFiXl5DbUH1mEA7oryzX0/oGZsFQZ7l
+	 D8IGgP4Cc4YrmaiK0zGLI5tr2orf1ptcLKF0qo+nnBpnlmgFk1IVJtvv7SPlHpWcewx+e
+	 ez+6n6s6jxxNXLMYI7kPVRsNSVJ6xIYJOu0W1quj6eDIyIMT3XuwyXO9w6NwHGEDqiw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793205389;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=q5t3Rh9YkGOdmO6RznnXKL/OB+E6bNdFE1taktSfjrQ=;
+	b=ja1M9U9F/GQ+i3ojTPSZiDUNxD5DnJMzbEsBqFfEda7BHlgn2v9snDlxMat7lI/4Entv
+	 codkBatYiYXLdkYEgHF/LvhEh+bIeitcOVDIGF1cEYRFIhbzFWOZazFmw/4L/78nTSHvb
+	 QXreDEDtzP7IJ7Nd3ppe9NBLGxT5vKgwp5haEul02fiLzMsT4ttAFZAbJwMXPyZYmzjFP
+	 WeH3qf9YlX9D0b8CHaDOxarbiGFEBJjsvPx3PQa/SVDQmxP8lSJ66ob8ieUoIyKeekLUI
+	 xiW+ep36B9tfIuBn+V2j2bEzmKq7lh5HgtuNF2pBGJr3ZRNKIyLyH5UzU3wuuyO/Bzw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cOzzyruz;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eaDKKqAi;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6C85606A31A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 16:32:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A6C85606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fielding.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fieldingdsp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0812F606A331
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 16:36:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0812F606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=fieldingdsp-com.20260707.gappssmtp.com header.i=@fieldingdsp-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=eXbHX832
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6afbc363efeso1913965a12.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:32:48 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cOzzyruz;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eaDKKqAi
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69SFB4B42070701
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 16:36:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	q5t3Rh9YkGOdmO6RznnXKL/OB+E6bNdFE1taktSfjrQ=; b=cOzzyruznl/3f+kd
+	dF8gHc4ZnOyeaQuF2Wzu+i1zbM2sU17jP2pI56YSWaZCcndRivqpYnA0iUAF7t5R
+	dR4koZyQ7itVu6aj1uhpT5IclnlqeqgIUaqnfh06ic7KoVCQLuUXSg+F6neRTUpg
+	kJOqf99d1xlzYx5FxsO//GZMilHJvro/YNXBLW3h4yeCTXxlI1qd1ctEhF+vQJlZ
+	8WXxQ19Ajyb/ZHNqXsa8wYI6oC8hR4bbBJr7hdQYpQh957PukZDYaXLKDTgZdcml
+	3KMJjQ+hURRL8V4vbToS2yodWc4Tmgr/D+gm8enyenPi3XNO/L37vYWIhvhyV869
+	hy7VDw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk7g7k8jv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 16:36:27 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f20addba1so197414885a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 09:36:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793205387; cv=none;
+        d=google.com; s=arc-20260327;
+        b=TLi5DtpU909oAKwKQ4+/fB/k8AY3bn6+NAO6V6xEfNrQ9oiZUSL0dPF0lWNNb5tsVO
+         Ffq7fdWnbTox/rTMiEpvXPDr6oJfx/zY1WdZkMe606v2X7RkCDeWUIaLeDyzKFdFwzad
+         qe2Nq6IYFIvB/p3SWtp/e9RcNcuVXL6kYJnOyAy6iex2nH8GARpF1TRrYXBsYu7dVvlU
+         xiZOcd57l/EEDqGnGEVSPr37g7Kqd72ApWN+IC6lP4yRsVMwXGa/7P6Z2qm3FfTRDoX2
+         OA/Qkdo+9mL6aNE29bY5eAVh/RY3JcnvKra9dkMKStFnYJ6a974T63gs2By9AHfproEr
+         KDSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=q5t3Rh9YkGOdmO6RznnXKL/OB+E6bNdFE1taktSfjrQ=;
+        fh=xXMypC3RPefjyazpeNbzXQLPNemfgWvzgtnmpKgWPZM=;
+        b=PItntTcNsSTgvUJrmn0jT5AOBwomG5yfYYpF+gAygnpuYa6ca0ZxhUI3bti5WeRRJl
+         WT9I5BGfyLWuU6un955hl9M1LhdXqS7bzmQnEqBZt0Kd/Ia0QY4LgQZ6QpYvE/+D0Uum
+         ZqeYmYl8FQ2VPGJzsUniJJSf2TSl2qlHeYIyVKLdtMzXafiivkWCEWb/XGI9NWbBag3A
+         mTIs8cj8n1Xg4sWZigznvNYvTt75M+5y8/ag9ZCT/y+EkopTusMv1ykXxAxbdAg91xfW
+         8WyKBIRrEkEx2xCn6Ss7Qugr9fQTm8y+b0Jxjf5HGAOdR2rLxwYBNb4GjTD47MluXj/G
+         3KOQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fieldingdsp-com.20260707.gappssmtp.com; s=20260707; t=1793205167; x=1793809967; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=R00ordqkFY/Q4J67BElD5gXinfK7jxEiPvEKeWad1ok=;
-        b=eXbHX832eO7KCEIcf9QIePPynNTj3zpEb16xJdYbSQOpkoowvXm2FC7H6N9IvePrjc
-         NYQ2YsaKAWrn2bA552yqC0m4jx9nYIEsJ+kAosssFdnCwTnhd1wrP5purilJVqmg7IW/
-         9PyvNGGsC/J8INfibywsqgTj/qEsPfMTfKHOw4dM8efcKWBLZMUAodnHQ54JjxrTf6rN
-         cUXimDERsjEyUBueSdi1MiLTD5lh4jvrY5h0wazj9l3ROl/0fZ8OLDTM2Vd6t6/kkAK3
-         OMu88H+ojqLazQ53GiyqfkVyj8dVS6lmsTdc9R8SFLBxu3UN0Fq7XJUuj66hC7CQ5WNn
-         GpBQ==
+        d=oss.qualcomm.com; s=google; t=1793205387; x=1793810187; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=q5t3Rh9YkGOdmO6RznnXKL/OB+E6bNdFE1taktSfjrQ=;
+        b=eaDKKqAimoKXzHBvGTzw7/eOwOWxuwo+uodnhWumVpLTcMvC0z7hPY4+8GOhZMS3aY
+         X+FOFOqViaAYip5I+8xuA9fdDrMsPakSPJweijA+fZLk4HzoK5kiwgsxFZHKltcz1+H0
+         tMJHPAIcozBFN0B/DtXTsW7iK2jR1tQp353mLWouz7AHAr2FAF2F9cFR2rNYufyKYkCz
+         Pd0tIXOIeuYacYZiB2XhqNtiuWXOTpdfruQ8+UxoOj5vXrPVjOMW3TahOnR0k/qkWxG2
+         HsoTunswRH7ubdGN5LFtml0WmTbgzeqXiKOdXkFIbSj6RU8H9t9GNb6kNUbn1mGeuRPk
+         YsjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793205167; x=1793809967;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=R00ordqkFY/Q4J67BElD5gXinfK7jxEiPvEKeWad1ok=;
-        b=q8HjhR5tlmlCsEPD7ltl5ekJmpn8DBXVPh8o2RzNQxHXBR2VFZrzfZt+uPUVe9tcat
-         h5Vqz97rEo3MLFRKz7xdwceUstmhDV5nnBSq4jA2JcShfySharDRLCKxFGoRAmkvIV9o
-         Id0ZZSulY7C4rcm5xuTetrVfYIE6NqFPVdHyzMd0IZAwHoYLXVyvaD4MHbQ7Vev5zby+
-         4KUEf4EWnSyntD1vM2WSbKNLaTzp1KH/UTVlks6/Ual0l/htfEzTJnCjvnFJ/MMGFFYB
-         1u7aNcPY3Kgi3hZOwISmHROd6Au1/MQcg8/VMSQ4ttoT1PUiUypgq++wsOXmCdVbl0uG
-         Cg+A==
-X-Forwarded-Encrypted: i=1; AKwUvByYXdKKGQi8od/9ktzI5FiNZOBV59oNBUWVpag8NC/y8o7YObcCrR48/fmlI5tFEBlQcrBCyO0hPj04icRG@vger.kernel.org
-X-Gm-Message-State: AFq9FYKgD5w8zhnCeFMRMNmWIoQEyjlUDAcrRqj1MSB1tlVk7Zued4zA
-	rSlEHS0WqvqKW4odKHJo38eSa4Ym0eWfh1GvHGNTAY7LBQ1qjumKKZHPKeGjQA3PN3o=
-X-Gm-Gg: AYBFou38JSKXvIrTycY04t/HBLB8+law7E6pNmX2mrdNh9S0s8smJfWdwvBYfeHli6F
-	rMpEGzXBaribClMt6fg60mZ+Ubvv/oiaMEX4FKbgSOsEO8G//MawNHQhP6tkMOTXhxAnaCy7LfJ
-	D8YQuALm8i4v15PTuv7YaazlBeOHOonCWCWCys1Gz2nxIkqiZZRhiH35Zr9oc6TNHZ9J1ocN3Oa
-	KEREp21mVxHmBCYmgKkV2RwdDVh0lIxmnb/hj/p6WPtaKCKhNRIaQtU4J3+tJMXqxxh1Z0AGq4c
-	dbUVRURsQU0FhrfwH/hI6mCFxAylcWI9xcxLOuLgTzFP2Pg2opzTPK+Dk3Qylw/CP4bFZ5XXIg6
-	XqmLbr8dlcxT58e3/EcUd4CrlQTjCdvujMTQqip6zgYv2Dyvc4IWG72E3+raPKlvC1OCDUi5R5j
-	VxZjWdwm27O9TaJgxvnRCo65Ia1gz/hJePUd/JOMDz4FF0lCWo1sFuYCKrP38ZOJWu51EfATJM3
-	K9q9c6jD3UYP6GgmmMOgGeJAjNKDV7OndZ8MFIgQyr1pOalfTFUUq1gb/Ms+p+qq6C1k6gvtFpx
-	FSGgfX+6wPdbZG1nYxXwNihy7x1oZbqkVj0TZ4v9pSk9tAOZGtuyBRttnpCQq4YOvnXRyhDUhUe
-	HgJXA5mPEGaHDM3pEOvDDLZ3tl/M/
-X-Received: by 2002:a17:907:2d25:b0:c26:19de:9aec with SMTP id a640c23a62f3a-c49bdfd85b2mr258903766b.43.1793205166976;
-        Wed, 28 Oct 2026 09:32:46 -0700 (PDT)
-Received: from kneiselgnabe.duckdns.org (p5b03fe53.dip0.t-ipconnect.de. [91.3.254.83])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd4e89cesm637108266b.13.2026.10.28.09.32.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 09:32:46 -0700 (PDT)
-From: Fabian Renn-Giles <fabian@fielding.dev>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Alexey Klimov <alexey.klimov@linaro.org>,
-	Ravi Hothi <ravi.hothi@oss.qualcomm.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH 00/23] ASoC: qcom: AudioReach Active speaker protection for WSA884x
-Date: Wed, 28 Oct 2026 17:31:52 +0100
-Message-ID: <20261028163152.26892-1-fabian@fielding.dev>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
-References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1793205387; x=1793810187;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=q5t3Rh9YkGOdmO6RznnXKL/OB+E6bNdFE1taktSfjrQ=;
+        b=aKhrdJfAWBiLGYg0r68PSzbnZNoGm8HJhDtw9D76tDQF34pobiyW7PdAoYCqS3/ZXj
+         3BYKo4Z8776yIv3aXwrYgVwOg3IJWHB2a6qY3KQ3b6pR+nynfQ91V3LWfhGmaFD6uWKP
+         78u6max/gmTUw8VuciGgbaHEWvuiCoKVdNYlLYBKDf/bs0mEzcnizYURkAsaftDzz5ur
+         mxuJrJEy2yMCf8bm3mwuT4mF8vjm594Z6bzr0w/cszf3u9yhxLIVF85EUD2UGxDXxwbz
+         /qzJOjfHkEUroqTeDFqu46YvjOVY8GuoxRBNq2jGA+MMPPKlvSU8TZBtgYeCa1Gk0F64
+         Arfw==
+X-Forwarded-Encrypted: i=1; AKwUvByaFTINGNHc6ZNsOjBCZ9mHMcHEmQYEqEHOh+6Z+WRop2UXrUbLSDnEHMjzEXVZxDnuyp/PlVpqbBAf0skA@vger.kernel.org
+X-Gm-Message-State: AFq9FYKaT3JIYbjCEscOlrunwEUNvTf+cPq9UJDR2SbYVWYs5yAsaEWL
+	U2RGQr/qajgbTAJJEcpNi39U3gOfcQJReRm2aRM8zF1K/cMU8Afh157pk5MS3OyIkll0xksXThK
+	H4AV+Ak4LnJzihn0KniEr49gXDgdb84SVYEwauGLJG+u3HuhaKQRj3zrMSZeswwPbwTe1DhPwAL
+	L48muL3obV+9GkC1Z1MWSPm40PZXMTtsBOyv+chwa/qWQ=
+X-Gm-Gg: AYBFou0wIOZme6SBWyx/eutE+GYwNdbyCNcwdB3BaRLPXcUuu2Ztvh9QShXykxqb8Lo
+	nG6b0drdhN7mCur+GfLOSHrWyANewYd+C0DVJLIGlMDBG8mqMfT7rOBVx6nnbJbfZVf1jP1PpW6
+	9yfAGX8pp5qWtEfDej5xGW4KsZKQ9UNopbAIOF6OIpI+fN5yxsM49rohmFbKkR0E6BqJIEQ3BZR
+	4SecEmUICWsZ3WJSpWOikpi9BtgfIiT5x14RvRss7Rf9X6H0zmBtkBpDAxu3xG+P/8p1CNxPT2m
+X-Received: by 2002:a05:620a:46a6:b0:93f:2b23:481b with SMTP id af79cd13be357-94408aa219dmr459954885a.22.1793205387006;
+        Wed, 28 Oct 2026 09:36:27 -0700 (PDT)
+X-Received: by 2002:a05:620a:46a6:b0:93f:2b23:481b with SMTP id
+ af79cd13be357-94408aa219dmr459949185a.22.1793205386506; Wed, 28 Oct 2026
+ 09:36:26 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,66 +128,217 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261028-kaanapali-camss-v23-0-95f250b18612@oss.qualcomm.com> <20261028-kaanapali-camss-v23-4-95f250b18612@oss.qualcomm.com>
+In-Reply-To: <20261028-kaanapali-camss-v23-4-95f250b18612@oss.qualcomm.com>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 17:36:15 +0100
+X-Gm-Features: AclHuK_qZnIsa3_FMMHTiw2iXEoQpzgN5rjHWMbnvqMU6BVIbLYMNtYuWHeQqVU
+Message-ID: <CAFEp6-1QvF+=XQQrdDQS0kM8f1zoz3s3MZECOOdmYjAaJeBZQQ@mail.gmail.com>
+Subject: Re: [PATCH v23 04/15] media: qcom: camss: Add addr_update hooks and
+ guard CSID reg_update
+To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: "Bryan O'Donoghue" <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        jeyaprakash.soundrapandian@oss.qualcomm.com,
+        Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA2NiBTYWx0ZWRfX3v2ysKzumygD
+ 51CndNT8DWpMQUJp3vaCNwy3GUsvu2R9ug+B073ETCBpLSLDuIl1PtLOD2wCRNlkR4CJSPoHLgp
+ QPcqN5w3kXBlpy7B18EwBF+0jgRNE1I=
+X-Authority-Analysis: v=2.4 cv=SoIFe/O0 c=1 sm=1 tr=0 ts=6ae2248b cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=vOQjydwpf4klcLd5GhIA:9
+ a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: 7lBANQVLQd4Frv-V6_Xs8LWF8UKo86tH
+X-Proofpoint-ORIG-GUID: 7lBANQVLQd4Frv-V6_Xs8LWF8UKo86tH
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA2NiBTYWx0ZWRfX2ZoQ/u1EmHe1
+ HnC5OrbgTBDJ6hIYFO0ilRqSjWo+kuilS75++JfHSOXuu0I+mDReRjciCTMWubEj38aTtPSOFTe
+ p7YV+PM9WArFKGxREhsA8rNRUeCk4cpqSNbtShrp4z3QzvUTteS90w5HwbGC1XbeLTGK4kr+wHD
+ wPdw2O4bKgL7drW7pXzqbMOhgHt3/mFF/7lz4LwoLgJYOISModUl7nVJEId/byI7wejq3L4AvQS
+ J6bb6uQ7fNYXO+uh47uKWxipDzBOitobsQZFDKgS1xSgoEKn99SHHpPzMDeWFIaTwBDUx7gOB1z
+ XzN2/EOVZfu7YwSIaJAmfxf7xKrcpCul2DllLcjQJpor0on27N/N/xPDxuPuaVF+BRUlk+CUvuM
+ PrA2IffhhlC77iyeaQSvrJRVhLQysjMLKyUQ89/VdvIetO9/7DOYs5SrfPq1qeXv/rg4ojP94Tu
+ lqoED36A/WVIytkSGpQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-28_05,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 spamscore=0 phishscore=0
+ impostorscore=0 adultscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280066
 
-Hi Srinivas,
+On Wed, Oct 28, 2026 at 4:21=E2=80=AFPM Hangxiang Ma
+<hangxiang.ma@oss.qualcomm.com> wrote:
+>
+> From CSID 680 on, CAMIF was moved into the CSID and the CSID became
+> responsible for issuing RUP commands. Starting with CSID 980, RUP and
+> AUP are issued separately, and each command must have its corresponding
+> SET bit asserted in RUP_AUP_CMD; otherwise, the hardware ignores it.
+>
+> CSID 980 and newer require a specific stream-on sequence. After the RX
+> is configured and before the RDI path is enabled, the CSID must first
+> issue an AUP and then a RUP. A RUP issued before that point would leave
+> the VFE without a BUF_DONE event. Therefore, once addr_update is set,
+> the VFE must skip the initial RUP during stream-on.
+>
+> Add addr_update hooks and camss_addr_update, and make camss_reg_update
+> handle a missing callback safely. The VFE keeps issuing its initial RUP
+> during stream-on and behavior is unchanged if nullify addr_update. The
+> skip takes effect once a generation that sets addr_update is enabled.
+>
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
 
-I tried this series on a Lenovo Yoga Slim 7x (X1E80100/Hamoa, 4x
-WSA8845, Linux 7.3.0 based tree). I found one bug and have one open
-problem.
+Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
-1. Over-read in audioreach_get_module_priv_data() (oops on topology load)
-
-The function allocates
-struct_size(pdata, data, le32_to_cpu(mod_array->size)) and then
-memcpy()s from the topology blob. It crashed on the first load of a
-topology containing the speaker protection module config blob. The
-cause is in the size computation. data[] is __le32, so struct_size()
-counts elements while mod_array->size is in bytes. The allocation is
-4x too large and the memcpy runs past the topology data. This is what
-I used instead:
-
-	size_t len = sizeof(*pdata) + le32_to_cpu(mod_array->size);
-
-	pdata = kzalloc(len, GFP_KERNEL);
-	if (!pdata)
-		return ERR_PTR(-ENOMEM);
-
-	memcpy(pdata, ((u8 *)private->data + sz), len);
-	return pdata;
-
-2. Slim 7x bring-up: V/I feedback never reaches the DSP
-
-DT changes for the Slim 7x:
-- The WSA codec list is extended with the VISENSE ports
-  <&swr0 10>, <&swr0 11> on the left pair and the mirrored ports on
-  swr3. The speaker nodes get #sound-dai-cells = <1>.
-- The static port-mapping is <1 2 3 7 10 13> / <4 5 6 7 11 13>. On
-  Hamoa the din ports are 10 and 11, versus 12 and 13 on Glymur.
-- I cloned the CRD topology and UCM, using 4 speakers, with the
-  WSA_CODEC_DMA_TX_0 VI capture at S32_LE/8 kHz.
-
-What works:
-- The card probes and the SP/VI controls appear.
-- Normal playback through the SP graph runs without errors.
-
-What doesn't:
-- Calibration (Operation Mode set to Calibration, then silence
-  played) times out waiting for V/I. R0/T0 stay 0.
-- I read back the SoundWire master and slave port registers, the WSA
-  macro SPKR_PROT TX path enables, and the DSP module config. They
-  all looked as intended.
-- With the SP graph active, the amp stays gated and playback is
-  silent. This matches the calibration never completing.
-
-Question: is there anything Hamoa-specific on the VISENSE path (din
-port numbers or channel masks, the macro TX decimator routing,
-multi_direction_codecs handling) that I should check? I can run any
-debug patches you want on this machine.
-
-Unrelated noise: SoundWire parity errors/clash messages appear in the
-logs, but they also show up without the series applied, so I don't
-think they relate to it.
-
-Regards,
-Fabian
+> ---
+>  drivers/media/platform/qcom/camss/camss-csid.h |  8 ++++++++
+>  drivers/media/platform/qcom/camss/camss-vfe.c  |  9 ++++++++-
+>  drivers/media/platform/qcom/camss/camss-vfe.h  |  3 +++
+>  drivers/media/platform/qcom/camss/camss.c      | 15 ++++++++++++++-
+>  drivers/media/platform/qcom/camss/camss.h      |  2 ++
+>  5 files changed, 35 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/med=
+ia/platform/qcom/camss/camss-csid.h
+> index 5296b10f6bac..2f7e593defed 100644
+> --- a/drivers/media/platform/qcom/camss/camss-csid.h
+> +++ b/drivers/media/platform/qcom/camss/camss-csid.h
+> @@ -137,6 +137,14 @@ struct csid_hw_ops {
+>          * @is_clear: Indicate if it is clearing reg update or setting re=
+g update
+>          */
+>         void (*reg_update)(struct csid_device *csid, int port_id, bool is=
+_clear);
+> +
+> +       /*
+> +        * addr_update - latch buffer address update through AUP
+> +        * @csid: CSID device
+> +        * @port_id: Port id
+> +        * @is_clear: Indicate if it is clearing addr update or setting a=
+ddr update
+> +        */
+> +       void (*addr_update)(struct csid_device *csid, int port_id, bool i=
+s_clear);
+>  };
+>
+>  struct csid_subdev_resources {
+> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/medi=
+a/platform/qcom/camss/camss-vfe.c
+> index 2680a9914765..4f8867daea4c 100644
+> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
+> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
+> @@ -487,6 +487,8 @@ void vfe_buf_done(struct vfe_device *vfe, int wm)
+>                 ops->vfe_wm_update(vfe, output->wm_idx[0],
+>                                    output->buf[index]->addr[0],
+>                                    line);
+> +               if (ops->addr_update)
+> +                       ops->addr_update(vfe, line->id);
+>                 ops->reg_update(vfe, line->id);
+>         } else {
+>                 output->gen2.active_num--;
+> @@ -525,6 +527,8 @@ int vfe_enable_output_v2(struct vfe_line *line)
+>
+>         spin_lock_irqsave(&vfe->output_lock, flags);
+>
+> +       if (ops->addr_update_clear)
+> +               ops->addr_update_clear(vfe, line->id);
+>         ops->reg_update_clear(vfe, line->id);
+>
+>         if (output->state > VFE_OUTPUT_RESERVED) {
+> @@ -552,7 +556,8 @@ int vfe_enable_output_v2(struct vfe_line *line)
+>                 output->gen2.active_num++;
+>                 ops->vfe_wm_update(vfe, output->wm_idx[0],
+>                                    output->buf[i]->addr[0], line);
+> -               ops->reg_update(vfe, line->id);
+> +               if (!ops->addr_update)
+> +                       ops->reg_update(vfe, line->id);
+>         }
+>
+>         spin_unlock_irqrestore(&vfe->output_lock, flags);
+> @@ -588,6 +593,8 @@ int vfe_queue_buffer_v2(struct camss_video *vid,
+>                 output->buf[output->gen2.active_num++] =3D buf;
+>                 ops->vfe_wm_update(vfe, output->wm_idx[0],
+>                                    buf->addr[0], line);
+> +               if (ops->addr_update)
+> +                       ops->addr_update(vfe, line->id);
+>                 ops->reg_update(vfe, line->id);
+>         } else {
+>                 vfe_buf_add_pending(output, buf);
+> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/medi=
+a/platform/qcom/camss/camss-vfe.h
+> index ae9dad353a37..8312e4c91e98 100644
+> --- a/drivers/media/platform/qcom/camss/camss-vfe.h
+> +++ b/drivers/media/platform/qcom/camss/camss-vfe.h
+> @@ -99,6 +99,9 @@ struct vfe_line {
+>  struct vfe_device;
+>
+>  struct vfe_hw_ops {
+> +       void (*addr_update)(struct vfe_device *vfe, enum vfe_line_id line=
+_id);
+> +       void (*addr_update_clear)(struct vfe_device *vfe,
+> +                                 enum vfe_line_id line_id);
+>         void (*enable_irq)(struct vfe_device *vfe);
+>         void (*global_reset)(struct vfe_device *vfe);
+>         u32 (*hw_version)(struct vfe_device *vfe);
+> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/pl=
+atform/qcom/camss/camss.c
+> index c54185c93a8a..be58a39f4a8b 100644
+> --- a/drivers/media/platform/qcom/camss/camss.c
+> +++ b/drivers/media/platform/qcom/camss/camss.c
+> @@ -5049,7 +5049,20 @@ void camss_reg_update(struct camss *camss, int hw_=
+id, int port_id, bool is_clear
+>         if (hw_id < camss->res->csid_num) {
+>                 csid =3D &camss->csid[hw_id];
+>
+> -               csid->res->hw_ops->reg_update(csid, port_id, is_clear);
+> +               if (csid->res->hw_ops->reg_update)
+> +                       csid->res->hw_ops->reg_update(csid, port_id, is_c=
+lear);
+> +       }
+> +}
+> +
+> +void camss_addr_update(struct camss *camss, int hw_id, int port_id, bool=
+ is_clear)
+> +{
+> +       struct csid_device *csid;
+> +
+> +       if (hw_id < camss->res->csid_num) {
+> +               csid =3D &camss->csid[hw_id];
+> +
+> +               if (csid->res->hw_ops->addr_update)
+> +                       csid->res->hw_ops->addr_update(csid, port_id, is_=
+clear);
+>         }
+>  }
+>
+> diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/pl=
+atform/qcom/camss/camss.h
+> index 7dc2fd9f03e0..431afeb381aa 100644
+> --- a/drivers/media/platform/qcom/camss/camss.h
+> +++ b/drivers/media/platform/qcom/camss/camss.h
+> @@ -182,5 +182,7 @@ void camss_delete(struct camss *camss);
+>  void camss_buf_done(struct camss *camss, int hw_id, int port_id);
+>  void camss_reg_update(struct camss *camss, int hw_id,
+>                       int port_id, bool is_clear);
+> +void camss_addr_update(struct camss *camss, int hw_id,
+> +                      int port_id, bool is_clear);
+>
+>  #endif /* QC_MSM_CAMSS_H */
+>
+> --
+> 2.34.1
+>
