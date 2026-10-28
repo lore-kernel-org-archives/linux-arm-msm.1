@@ -1,65 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793188688;
-	b=aD/xopRvbYltIHBk1QHmdUscIdgJhhdZeBbzk/8dOqiMY4R1irL2YjrVWOu530fvhQil
-	 lyPycVdKylxm6QGRe52Sodyi57YpnUnyAFiG4XICutrxoEmaBJMLBIPUIaRnNn7PkxVmM
-	 segfSHY48IDams82XB5kODoeimH+4SeDeiyzWDeAZ0iEwouNhRsILByHUMvjnj7Jlznrr
-	 YVR8XOYrvHGINBUd+AgS7gft5kGogSplGfG1WFakzuzO80Nxt2goFf6FjsmA+D1i0LzdE
-	 F4fxU6rSJOUMFxYQSrxNq8f/TlnU9kpYXdJNmCAR2YNbn9c78tVpknSu1a49juaVQsQ==
+	t=1793188853;
+	b=2arFmd47VXUBSQE9mUWvFETXK3RjWHTg3R1TicSaoiRTpJFyJH5/HnYZYQ/OPr3pKPoR
+	 HzjkuzOqp88r9gRfytPQbZ8d90E2kAcRM0oT/a41RKHkE/gehc5izY/d/GIg4kJ4xuw6p
+	 KBq4R3RNueGv95QQXlGNV3+CGhhE3RR0XxI1CyGjNoUJ1Vw6CyQv72qQkkVBus3AIhlS6
+	 5ntgmrXjIV/Vaze0dl+f73qSdmaJm+7w6kXEYNd12vOMGYpIphX6DICd39iwH/Y8HYW7J
+	 k3g7dt9CigX8iV05A0NJJTX+AgiogkC493UZ/ztylZepm3nf5QA9ShXxMVF0n7flRuw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793188688;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
-	 X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=0rd0eq+HWmPKSTWPxG5jNO/1HvtIEnxtmy7jSKAuMZU=;
-	b=Ce5Mdbhc4GAv2IK+wIaq7nqyrnekylqByEzN18EWr+k05cS03jfxtToYu7KDaMXhz5SL
-	 ybsB1kkSXympS9bYwVMnVnVA4M/y3umSEUFYIRtogDUhtiL3TZBlZDmvU1x/dCl/qEwQ2
-	 4SSou63ztZTpaA0yr5S7mhp7R5tHHV6LIYufZuL1izeEisBjQVZMPG6iL1VMKJy2YC3pd
-	 R/pKk5/QPVyIE2b2XWuI6vLEWJ8xMjnhYbV7diF6WttUMqUexIouyyvRGCvizAVR79j5J
-	 R+2bQq9JCVcKY9cUXS6Zih495JJOgId6XxTeVo7aOH21GG5SKqIx4keWmnikCfrdoKQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793188853;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=rG1EGZ3f728DsRaOfC0x4QVyGbD2+1X/bwKlZnMEkj0=;
+	b=I5cvWwDoX49EyiqDUMitFeF+bSspvWGe5jEuJ+I2dH/QKywOmh+LGMx6h18wytbC9DOQ
+	 xekKn8d27G9S0GHgitLiJaQQ4i6/wDaek2UBYPS5PXsZ8TyxS+T1VatkfBf6HhyWWVjwj
+	 9M+akncyG1Wo0F2+nFuvdjgKDRlOI5p3Vcix1PZKxuQ+aKSz7zdrdy1Ilk6GVnnxRQSpY
+	 C/LdjivmQ2uxvpjXNYjNsJX2A6PHZYHTDsemQUqby9NtS81aZl1fGEYxGB4EXnGz6qW4X
+	 hbU6VMzdZT6QYrAb0yRQd3uUqtSdnRujyGtRAmwWWDD2QMULUosb619DSuhjiGWGo1A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=xH1CgE2W;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35553606A31C;
-	Wed, 28 Oct 2026 11:57:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 35553606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OhNv9KAt;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LVxZPrTe;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B42F9606A320
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 12:00:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B42F9606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=xH1CgE2W
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OhNv9KAt;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LVxZPrTe
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69SBe4xs2082635
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 12:00:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	rG1EGZ3f728DsRaOfC0x4QVyGbD2+1X/bwKlZnMEkj0=; b=OhNv9KAtxifJpUim
+	+T6V1PHmy5dVGXL+97jf5tqZgkS6ZTc40iX8pl2e9+7gHvtGmHmMnx1ITqCe4G8c
+	1vgxQ+1BRG8C7KVKsuO7tDSDtlKXri3EyS7bJiif4CuJ+hu6LoFfo9GO8PMmjkAb
+	cV2We5AMY9WsZ/FPfX0wwkESorBMhoTvnjM6Tq4JJ51JZGIF4GyxYsVwR1ZwH334
+	oXbuSoCb6DtPfIQwblfqXgmWg0MBadEcC3dZr5mZI/XgRaAbe66Dv2G88aO5UICb
+	a/S7c/VxTI+APpwbFr9a20EYuIPMjE/kvGkmWVttkUTsVkrl4UxZAELnP2vp/EyL
+	stTsRQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjyjpuux8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 12:00:51 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-5350173dc7aso2391971cf.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 05:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:Content-Type:
-	Content-Transfer-Encoding:MIME-Version; bh=0rd0eq+HWmPKSTWPxG5jN
-	O/1HvtIEnxtmy7jSKAuMZU=; b=xH1CgE2WFNhu+WDMbiZ6GUyJcTDyQTv92AAWk
-	OOegw6PiBMAQEyBkcC6Mt2ZXg2/P1C35aebPlGF4jTnToWxnPFiGiuO7nBdplDBR
-	jKA8gfLR24cgw44ZYrE+DRGHDCWaiEFVKsFwj+RVoZ0JyKZr2MHNSc7UJx7aFTtu
-	RNzcYA=
-Received: from [127.0.1.1] (unknown [114.214.180.23])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgDHST5F4+FqCs5YAA--.2697S2;
-	Wed, 28 Oct 2026 19:57:57 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-pm@vger.kernel.org
-Cc: Sebastian Reichel <sre@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject:
- Re: [PATCH] power: supply: qcom_battmgr: do not report power_now on SM8750
-Date: Wed, 28 Oct 2026 19:57:57 +0800
-Message-ID: <179318867727.88971.13007415873000488463@mail.ustc.edu.cn>
-In-Reply-To: <84483ae1-1fbb-4219-a829-5867feb8bb17@oss.qualcomm.com>
-References: <20261013002124.332111-1-xiaqinghuan@mail.ustc.edu.cn>
- <5bf3636d-be7a-4800-9914-808d2fc5ebd9@oss.qualcomm.com>
- <52fc4222-508d-4acf-b38a-7b4e5aeff3cb@oss.qualcomm.com>
- <63cf18bc-5c89-4a55-aa15-2550dc47c155@oss.qualcomm.com>
- <179276335779.97093.2561281074827129812@mail.ustc.edu.cn>
- <179276342356.98176.10645303509497652146@mail.ustc.edu.cn>
- <84483ae1-1fbb-4219-a829-5867feb8bb17@oss.qualcomm.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=oss.qualcomm.com; s=google; t=1793188850; x=1793793650; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rG1EGZ3f728DsRaOfC0x4QVyGbD2+1X/bwKlZnMEkj0=;
+        b=LVxZPrTeEa9+02E4oQjBl55yT2Q6xBaLx8FfUezGSkDIvRLmGxSCFaVeVgQuUkuEV+
+         QZdo8ZvtSTDZYciVC3Npmk1dDJm6D6mDpjam4oeX+hRz5I8wkzejvdaYtBMb4pl8xIs1
+         1w7YJ0W7ZhXbDPBUIzHLBrHFH+yY0D7T0wVS5saBuooC0l7cqglf+wNq0TgHlRZ2JDpz
+         QiX0aoqIhoBkWhFa5skyFE+WLUKg+SH8C+cB95a9lCQm49H7Djh9Ant69IrMwAm9EtcT
+         ATBB7SA6tnazZ52tnCOaf6AsSJPuapDWjBnlnmUENDAHIln3NNGZZPAORJAopbj/+ZOG
+         d5Fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793188850; x=1793793650;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rG1EGZ3f728DsRaOfC0x4QVyGbD2+1X/bwKlZnMEkj0=;
+        b=nEvpEM8Co7VBYp7CXoCV5MANXSZrO3VduYug7nbsCC0YY/uc63MlrHHtVB5Xm3HMb2
+         BS06j9/Qdo6MOeI6Kl8Sdz8YA3w7VUMGPVsmvRL+2Mm1P1jBfDzJXchlTCt8+XRZnomH
+         NHJZJ4gDiCcqQNbBqS1E9+NIksmc+SKsmexick9mcWUqW4xbluSsbtaP/O7C13aFRp6J
+         Y9Vfw6OEAL4FlWnSZjK5txeZWMww/e99fqDl/U+EEHVXSsG2V6CdZURTHdU9JYlFIQtQ
+         +rtaKyMKia46+Dv+1b42uYNWX2c9N1fUpsC321iNeKSzd3of4pUU0xeQQgojjESDihhu
+         +bCw==
+X-Forwarded-Encrypted: i=1; AKwUvBxd01mvRM2xts06ZRxgzvSgNJ+WNH4b7GdDIs76R1fLwxV/KY41Zo/9xk4hIZpGmJhrmAk/1mr21/Qk/ilJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJv8wmWfyJMvR8d3zdbFtQywlFTaWjOf7S7T5o5zgutl5Dkl09s
+	yuovHwFp+lPqY0GdmCLJvqjmFt3AohbUYRsgYN3LkR/UGQ9eKRwWkv3BUhoYIbHhtXc19CY2xet
+	G70fKJyNQ/luMpCYkQXxp8Wy5WP+Of7dZqnFV/tcfxbZoIR6LYF1DSkJn+iG/AoLT9v8hMW53p/
+	VO
+X-Gm-Gg: AYBFou2bwkl/QpRauJK7SC4qycQU3iRVlgEJC/ZD+f8mOt2LGWxxsEnFBoAPO8077VG
+	ipHapkGLt2hd6xBzwrurMZyiR3JPGFFAYOzv0pU23c/E5l1WNCX94/7FtfMyc1QkefyyTfZpN/l
+	gNR/9Pgc//iTGkJZVlP8tqzlUJXW5FxfCrsv7eWFOg+83NnrzAJ83FZRTYHjQ+pTs/CTe7z0myI
+	wgBFcFquZPgtZ00I6skcjXc4GHtALcmaWdj94Xzig8ynum6404npp/GC3JLNtDlW4SotyEZ3D2b
+	WGY/P/L88+NUzB0ZsJ/eTUmwNpWqXyGCqekurHvTo9Cm6vvsOKHhL7caScj4UIMy/8uMCug3yh2
+	rpxshVrcE+cRT+tg/YtEtowY0Fkz3K3rdoaF6tPl+eII/NqaGLuWFULvoXxiWgwPxIk2yR4k=
+X-Received: by 2002:a05:622a:ea08:10b0:535:1e4b:53ed with SMTP id d75a77b69052e-53fcd67de6fmr35057411cf.5.1793188850117;
+        Wed, 28 Oct 2026 05:00:50 -0700 (PDT)
+X-Received: by 2002:a05:622a:ea08:10b0:535:1e4b:53ed with SMTP id d75a77b69052e-53fcd67de6fmr35056201cf.5.1793188849349;
+        Wed, 28 Oct 2026 05:00:49 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd649997sm587051766b.42.2026.10.28.05.00.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 28 Oct 2026 05:00:48 -0700 (PDT)
+Message-ID: <08f2bca4-621c-4b99-b9ea-e1871005f7d6@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 13:00:46 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,91 +116,73 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgDHST5F4+FqCs5YAA--.2697S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxuryxGryfGr4kCFWxJr47Arb_yoW5ZrWfpa
-	yrtrnYkw1vyFWrCryUtr47Ca4Ygrs3AFy5Kr9Fv3sYva15Ar17tr1kKFn8Wr97Crn3XF4x
-	t3Waqwn3WF13CaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvFb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkF7I0En4kS14v26r126r1DMxkI
-	ecxEwVAFwVW8KwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
-	02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_
-	Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
-	CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v2
-	6r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvj
-	xUg_gCUUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREOB2rg+9ZfJwBgsm
+User-Agent: Mozilla Thunderbird
+Subject: Re: Adreno 829 (SM8845) zap shader: PAS init rejected by TZ under
+ Gunyah
+To: Venkat Yadlapati <venkat.yadlapati@hotmail.com>, james.wilson@posteo.net
+Cc: akhilpo@oss.qualcomm.com, andersson@kernel.org,
+        freedreno@lists.freedesktop.org, konradybcio@kernel.org,
+        linux-arm-msm@vger.kernel.org, lumag@kernel.org,
+        rob.clark@oss.qualcomm.com, sumit.garg@kernel.org
+References: <DMBYHSAP8KY7.K9L1DON3KDR4@posteo.net>
+ <TYCPR01MB1184706197E878D59F9E82E629F642@TYCPR01MB11847.jpnprd01.prod.outlook.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <TYCPR01MB1184706197E878D59F9E82E629F642@TYCPR01MB11847.jpnprd01.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA0NyBTYWx0ZWRfX6ny9J1vcMh6t
+ OOJT72iDe1U3IP/BUDnqo3Oh2HLNT33tGt6BB+ywUB0X3BXoRGFrhL+xbT2RL5S0WP8tfNjm78Q
+ uSCGPR8cahUIxKOvA8luLtTmVcNsnM79qsxzbqtOH026b4HVMn2chHjFZWIR6JeRTrw1e+qn+yD
+ AcyoM0xHCAgQGEcSSzTCo4IJhpnhWaZFmvifYHt6qd6Dj9Yva5RGtjpSiMUh3cK834z8zEukabr
+ z5JsU8uerP6pssl+gAmfPMNKO0vHiwdPPMv417H/RmKWriX8ol+g2KvsYAnsXvERtD6sM5h4Kzg
+ 7Etp8rJO/4nLc8w4vZSMVT6VZq/R/5ZuLbtQPabfmTbh2p+94jPFw4ZlJ59yeMSod3B+4+35C3Z
+ oocdexEYtkugWqxVsddvBWNKGUUFT+MSZZ+nYN698Kg4bhXSVpC1oBXph5ri/bstjsYWrg27ITq
+ eacyePkzStVIxiS4VLA==
+X-Proofpoint-ORIG-GUID: AM63MdigWgbYfk1kilbs23i1YnnWpNzs
+X-Proofpoint-GUID: AM63MdigWgbYfk1kilbs23i1YnnWpNzs
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA0NyBTYWx0ZWRfX6YgihUDe1FSG
+ GeUQzdRNt5gFJYn3yL/Cz1uO6TzlkK3fJuIFQQF7FqaYlZdQ3xGrUIqG7UdnciB5EV80fysDlCj
+ 8vD5ogj8FCMzpzTNuUxd0lVJa7M3Gzs=
+X-Authority-Analysis: v=2.4 cv=JodkP84C c=1 sm=1 tr=0 ts=6ae1e3f3 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=lWCXY_QA7bm2s73i-iYA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-28_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 clxscore=1015 malwarescore=0 bulkscore=0 suspectscore=0
+ priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280047
 
-Hi Konrad,
+On 10/23/26 5:10 PM, Venkat Yadlapati wrote:
+> Hi James,
+> 
+> Thanks for the heads up. To avoid duplicating work, here is what I have
+> on a Motorola Signature (SM8845 "alor"), none of it posted yet:
+> 
+>  - TLMM driver and binding (205 GPIOs, own GPIO->PDC wakeup map), alor PDC
+>  - SoC dtsi on top of kaanapali.dtsi, plus the board DT
+>  - gpucc variant, A829 catalog, panel, touch, DSI1
+>  - UFS, USB, SMMU, charging, audio and modem work on hardware
+> 
+> I used the downstream codename "alor" for compatibles and file names.
+> What do you use?
 
-You are right and my previous mail was wrong. I checked the repository
-you pointed at and the battery/QBG path is there. Correcting it properly,
-including why I got it wrong.
+Please use the name "molokai"
 
-What I did before was a partial clone with a sparse checkout limited to
-the display, mmc and audio paths. drivers/power was never materialised,
-so "there is no drivers/power/supply vendor code in the drop" was an
-artefact of my own checkout, not a property of the repository. That is my
-mistake and I should have caught it before writing it down.
+Konrad
 
-Checked now with the GitHub contents API on main (tip 210981a0ad74,
-last push 2025-11-09), no full clone:
-
-  drivers/power/supply/qti_battery_charger.c     70657 B
-  drivers/power/supply/qcom_battmgr.c            39375 B
-  drivers/power/supply/qcom/qti-qbg.c            78872 B
-  drivers/power/supply/qcom/qbg-core.h
-  drivers/power/supply/qcom/qbg-sdam.c
-  drivers/power/supply/qcom/qbg-battery-profile.c
-  drivers/power/supply/qcom/battery.c
-
-The same commit is the one I have locally and git ls-tree lists all of
-them, so the content was in the tree I already had.
-
-On your three questions, now with the sources in hand:
-
-- Which channel does the vendor actually build? CONFIG_QTI_BATTERY_CHARGER=m
-  in both arch/arm64/configs/vendor/sun_perf.config and sun_le.config
-  (sun = SM8750). CONFIG_BATTERY_QCOM_BATTMGR=m appears only in the generic
-  defconfig, so the SM8750 build does not use the upstream-shaped driver.
-
-- Is the property remapped? I do not see a remap. qti_battery_charger.c has
-  BATT_POWER_NOW at enum value 22, maps it to POWER_SUPPLY_PROP_POWER_NOW,
-  and read_property_id() sends that id unchanged to the PMIC GLINK
-  firmware. Upstream qcom_battmgr.c also uses 22 for the same slot, so both
-  channels address the same property id; nothing in the vendor driver
-  renumbers it.
-
-- Does that mean power_now is trustworthy on this board? No, and I am not
-  going to claim it. The vendor driver answering slot 22 only shows that
-  the firmware has an answer for it. It says nothing about whether the
-  value tracks load.
-
-Two things that do not change:
-
-The vendor's own qcom_battmgr.c is an older copy - enum qcom_battmgr_variant
-has only SM8350 and SC8280XP, no SM8750 - so there is still no
-upstream-shaped reference implementation for this SoC to compare against.
-
-And qti_battery_charger.c is downstream-only: it includes
-linux/soc/qcom/qti_pmic_glink.h, linux/soc/qcom/battery_charger.h and
-linux/soc/qcom/panel_event_notifier.h, none of which are upstream, so
-qcom_battmgr cannot reuse it. Same conclusion as before, just reached with
-the sources in front of me instead of behind my own checkout mistake.
-
-So the question from my previous mail still stands, now asked with better
-information: would you take the conservative version - add the SM8750
-variant, do not register POWER_NOW at all, no claim about what the slot
-means - or would you rather I keep the property and only fix the commit
-message? If you would prefer the numbers first, I can print slot 22 next
-to current_now and voltage_now in one sample and post that before sending
-anything.
-
-Sorry for the noise, and thanks for the pointer.
-
-Qianhui Xu
-
+> Do you want to post the SoC base (clock, pinctrl, interconnect, dtsi)
+> and I rebase on it? I would first diff my TLMM/PDC against yours. Or I
+> post TLMM/PDC since it is tested on hardware, your call.
+> 
+> Separately: I carry a hack disabling icc-rpmh QoS programming, because
+> with it the display dies at boot. Do you have a tree with your
+> interconnect driver that I can test?
+> 
+> Venkat
