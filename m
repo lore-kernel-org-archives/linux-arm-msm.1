@@ -1,72 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.2
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793156884;
-	b=CVAvN/17CxogrWHq9wt66lm9toyUqIjd+sMNzTtjf2BnrCMjfNYeX1Y9b0hIfwZrdyHp
-	 L0qL6SP6FxtUr24XlrAlAgYCu2y4C3QTpUWLUBXwV5BfVrfMjnaocMNgIQbDc5fO0pbIg
-	 mTKQDquPhZE5p/Q08qEWLfjVz2xNKdKhzGl4O1bf1R49DVyAm8TwFaL81js4Oif0T1/Tk
-	 Mwld0PtGqIgUznKcb0CTcobj4H+vKUc4DRPST+029jJ6ZRy4xnHSlzn5KjH8WwdWDF8mm
-	 HJ9whLWTlHEV1SsHSGeUdfemRwOSKSKiTKIRd89hzKYB4c8zZjpxwiDEFFFXhsqLqSw==
+	t=1793157525;
+	b=ZIFFYCSraEKJ6qBPWR0BukNrPRIicIg8bgeVTkz/KcESG8oGOpQ18SU2u4GxLV7VkEm0
+	 Cu8fEcJFDw/aQe9kGqDcH/o3NpfKr+pj3Fa+oMtfI9YGOHv1BkQQb0n+BgfQ8rEfnB+A9
+	 nJA1GdTE047jWA/gC5yP9ltdKl+YaoK3GF82oObSYV5y7j6x1ZMiDIHlh6m5+quuDuPyC
+	 Jd0BUM1vlegMUVjhMYfzPOSjlhMBXwNFmc5r/Q+w4yQ+MTIFMf/tHQEEoeGsNQai5WbBq
+	 tWh4Hx7FpYZR36j8pKSNmCDjNic19qKwMIL7keQM0puNHaUkaUPh3i9UDCxmR8mPE1A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793156884;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=uGOww8cTZ+dmcRduWhvlBtmVa5S9Xqh7rcDtCCMSFaU=;
-	b=IVTFTu1LOdT8mocFyr2+hYjfd5dTv4LO13kZRjKtVILdrlvs+Cslnr7cfGStFijgUhPc
-	 adcpezR7y+LfShGSKzaD8JCbQxX9NvMhXu/beVGwqzSf+btPNSOVbkV4UyptywrxQqE6w
-	 oyzi4E1m9d/oCYRuggSWpmBHDOrswW64qiJZ9N4C4xxo7ih+ZXo6pRsDfWogsKj4Aiznt
-	 O4K1dxT0sWmqUgYFUOzqUYe9kOc4/CNT35kV7jCUGGZlBiIzw8D2WdnKegxos0XdSWGjt
-	 wpeZYSbmDrGEocFoYeOSh+wVNgZUPX/3/wbg757Sv//lzTaOyOBuOzKjVGajoQqW0hw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793157525;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=0yRzutRdG3ui1l9nm3eCsz3wlEwTD8dCkFjiiMx3rLE=;
+	b=0U8GZnG6uHeRF1uFOQMQvq4ny5eoYrLTach7PTmu5gSMzqMeWLDE+y3u/zcLIZX+MJo0
+	 Kr+n2m4UNw4xS0rH/+YPI2AfT8t9LKvQRzYf3nwk6pDn19GiXRvPEnOu+i0ONN9f/UWC2
+	 rOsyla/C9kHEZwfj3wsQtE5wjfejLf7UrXxrjZ6A0oXdfCL5lpZqUOqkw1C353Ixj1C6B
+	 wCHVwF57ES33wpZtXrMtA2Kuqpz9/fbqBeCtLDbha5gcMAUQxL8L8P9NQf70G1Zr3oSrr
+	 c/74qsuP1H6G3Y7fhvRK8QPLdWR0bC0NuMX9ErfBJ57FbQ+ntHEIloWXXwUktEyOFAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=163.com;
-	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=RSwjLMSz;
-	arc=none smtp.remote-ip=117.135.210.2
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fS0J2LXS;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC672606A325;
-	Wed, 28 Oct 2026 03:08:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DC672606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AAC6606A31A;
+	Wed, 28 Oct 2026 03:18:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=RSwjLMSz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=uG
-	Oww8cTZ+dmcRduWhvlBtmVa5S9Xqh7rcDtCCMSFaU=; b=RSwjLMSzAQnxak8cmk
-	7cG9+kuYA6fM6xiN80akLhw8s7Dr7paowbfmps8cOdj+m4q4E3/iC+HYPXjScxR7
-	CJJfX/W9z09f3QH56i8pO5ywPoHHyAS3UdLaxVepcGDglSHUjPxK4SmXu7KmviBi
-	lwzcQRd5cGDFhgdUvc+MwLEC0=
-Received: from Precision-7960.. (unknown [])
-	by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id _____wDXT8PnZuFq9rwVDg--.12376S2;
-	Wed, 28 Oct 2026 11:07:20 +0800 (CST)
-From: Hans Zhang <18255117159@163.com>
-To: bhelgaas@google.com,
-	lpieralisi@kernel.org,
-	kwilczynski@kernel.org,
-	mani@kernel.org,
-	jingoohan1@gmail.com
-Cc: imx@lists.linux.dev,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-amlogic@lists.infradead.org,
-	linux-rockchip@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	sophgo@lists.linux.dev,
-	linux-riscv@lists.infradead.org,
-	spacemit@lists.linux.dev,
-	linux-tegra@vger.kernel.org,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Hans Zhang <18255117159@163.com>
-Subject: [PATCH v5 16/16] PCI: dwc: ultrarisc: Use cached PCIe capability offset
-Date: Wed, 28 Oct 2026 11:06:52 +0800
-Message-ID: <20261028030652.2917756-17-18255117159@163.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261028030652.2917756-1-18255117159@163.com>
-References: <20261028030652.2917756-1-18255117159@163.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fS0J2LXS
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E861D1F01825;
+	Wed, 28 Oct 2026 03:18:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793157525;
+	bh=0yRzutRdG3ui1l9nm3eCsz3wlEwTD8dCkFjiiMx3rLE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=fS0J2LXShzRXImGzjFcnR0OE0DW0HQ6xp8hYJPlJXja1o4iKrHYrqq8XYGfL/FgQC
+	 jmRcYwKu/RHbF7kve5zOTB73ZoT6rSep3vps1xwYvK+2Fpzxhv3UUX+UPHl9PadEd0
+	 Sac61LnaTMGHD3n8OqDqCqs+c+uHT19RuZk/SEyGL7PPu54SCMAzrreyL6ew/9adxx
+	 EeG7Tak4ucY+H6UXxMqkgpfWh6ugrGrQBbjhQq8/HrxyEANQefBNWmDuwYnuJ2dilf
+	 BZw/XIpnRhSLF6z3QxVDkLiM1AI9/5elrI6sFXeF4XYuOV0Wb64pzXoDQ4J5IMgKz2
+	 C2FpFaAUAEsvg==
+Date: Wed, 28 Oct 2026 03:18:34 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Rupesh Majhi <zoone.rupert@gmail.com>
+Cc: Alex Lanzano <lanzano.alex@gmail.com>, Andy Shevchenko
+ <andy@kernel.org>, Benson Leung <bleung@chromium.org>, David Lechner
+ <dlechner@baylibre.com>, Guenter Roeck <groeck@chromium.org>, Jagath Jog J
+ <jagathjog1996@gmail.com>, Javier Carrasco
+ <javier.carrasco.cruz@gmail.com>, Jean-Baptiste Maneyrol
+ <jean-baptiste.maneyrol@tdk.com>, Jerome Brunet <jbrunet@baylibre.com>,
+ Jinseob Kim <kimjinseob88@gmail.com>, Kevin Hilman <khilman@baylibre.com>,
+ Lorenzo Bianconi <lorenzo@kernel.org>, Martin Blumenstingl
+ <martin.blumenstingl@googlemail.com>, Matti Vaittinen
+ <mazziesaccount@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Remi Buisson
+ <remi.buisson@tdk.com>, chrome-platform@lists.linux.dev,
+ linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Marco Elver <elver@google.com>, Bart Van
+ Assche <bvanassche@acm.org>
+Subject: Re: [PATCH v4 2/9] iio: core: annotate the conditional mode claims
+Message-ID: <20261028031834.2ff7e6bf@jic23-hlaptop>
+In-Reply-To: <20261027124954.110697-3-zoone.rupert@gmail.com>
+References: <20261027124954.110697-1-zoone.rupert@gmail.com>
+	<20261027124954.110697-3-zoone.rupert@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,38 +74,160 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wDXT8PnZuFq9rwVDg--.12376S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Cr18Aw18ur17KF4rWF47XFb_yoW8JFy3pa
-	yaqr1YyF1kJr4Yyws2ka4DWF12q3ZxAryDJan7Kr13ZFyakrWUX34vk34rtFnFkF4UKr1Y
-	kw4FyFy7G3WrXwUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pirWriUUUUU=
-X-CM-SenderInfo: rpryjkyvrrlimvzbiqqrwthudrp/xtbC7AnmimrhZunUcQAA3o
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-ultrarisc_pcie_host_init() runs from the .init callback with the
-controller already enabled. Replace the capability search with
-dw_pcie_get_pcie_cap(). Since the lookup is performed lazily at the
-point of use, the driver no longer depends on any earlier caching step
-and the offset is always valid here.
+On Tue, 27 Oct 2026 14:49:47 +0200
+Rupesh Majhi <zoone.rupert@gmail.com> wrote:
 
-Signed-off-by: Hans Zhang <18255117159@163.com>
----
- drivers/pci/controller/dwc/pcie-ultrarisc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> iio_device_claim_direct() and iio_device_try_claim_buffer_mode() hold
+> the mode lock only when they return true, but carry no annotation. With
+> context analysis on, each caller that releases the claim is reported
+> for releasing a lock it never took.
+> 
+> Mark both __cond_acquires(true, indio_dev), the token that
+> __iio_dev_mode_lock() acquires. Sparse no longer reads these
+> annotations, so drop the comment about it.
+Hi Rupesh,
 
-diff --git a/drivers/pci/controller/dwc/pcie-ultrarisc.c b/drivers/pci/controller/dwc/pcie-ultrarisc.c
-index 523f454c6c524..915305bd88df4 100644
---- a/drivers/pci/controller/dwc/pcie-ultrarisc.c
-+++ b/drivers/pci/controller/dwc/pcie-ultrarisc.c
-@@ -56,7 +56,7 @@ static int ultrarisc_pcie_host_init(struct dw_pcie_rp *pp)
- 	FIELD_MODIFY(PORT_FLT_SF_MASK, &val, PORT_FLT_SF_VAL_64);
- 	dw_pcie_writel_dbi(pci, TIMER_CTRL_MAX_FUNC_NUM, val);
+The history of the definitions of these being in the header at
+all was to make them visible enough to sparse that it could
+figure out the locking and 'mostly' give good coverage.
+
+Given that's no longer necessary, maybe it makes sense to make
+the implementations private. It doesn't really help us that
+much as those nasty helpers are still needed for the
+rarely used guard that claims the current mode.
+
+So maybe it's worth this maybe not...  Anyhow, perhaps one for
+another day given I don't think it helps this effort.
+
+diff --git a/drivers/iio/industrialio-core.c b/drivers/iio/industrialio-core.c
+index e9a5d1d905c1..04c194bdda87 100644
+--- a/drivers/iio/industrialio-core.c
++++ b/drivers/iio/industrialio-core.c
+@@ -2269,6 +2269,33 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev)
+ }
+ EXPORT_SYMBOL_GPL(__iio_dev_mode_unlock);
  
--	cap_exp = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
-+	cap_exp = dw_pcie_get_pcie_cap(pci);
- 	val = dw_pcie_readl_dbi(pci, cap_exp + PCI_EXP_LNKCTL2);
- 	FIELD_MODIFY(PCI_EXP_LNKCTL2_TLS, &val, PCI_EXP_LNKCTL2_TLS_16_0GT);
- 	dw_pcie_writel_dbi(pci, cap_exp + PCI_EXP_LNKCTL2, val);
--- 
-2.43.0
++bool iio_device_claim_direct(struct iio_dev *indio_dev)
++{
++       __iio_dev_mode_lock(indio_dev);
++
++       if (iio_buffer_enabled(indio_dev)) {
++               __iio_dev_mode_unlock(indio_dev);
++               return false;
++       }
++
++       return true;
++}
++EXPORT_SYMBOL_GPL(iio_device_claim_direct);
++
++bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
++       __cond_acquires(true, indio_dev)
++{
++       __iio_dev_mode_lock(indio_dev);
++
++       if (!iio_buffer_enabled(indio_dev)) {
++               __iio_dev_mode_unlock(indio_dev);
++               return false;
++       }
++
++       return true;
++}
++EXPORT_SYMBOL_GPL(iio_device_try_claim_buffer_mode);
++
+ /**
+  * iio_device_get_current_mode() - helper function providing read-only access to
+  *                                the opaque @currentmode variable
+diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
+index ca91f5a64626..b9e4888e18bc 100644
+--- a/include/linux/iio/iio.h
++++ b/include/linux/iio/iio.h
+@@ -718,18 +718,7 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
+  *
+  * Returns: true on success, false on failure.
+  */
+-static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
+-       __cond_acquires(true, indio_dev)
+-{
+-       __iio_dev_mode_lock(indio_dev);
+-
+-       if (iio_buffer_enabled(indio_dev)) {
+-               __iio_dev_mode_unlock(indio_dev);
+-               return false;
+-       }
+-
+-       return true;
+-}
++bool iio_device_claim_direct(struct iio_dev *indio_dev) __cond_acquires(true, indio_dev);
+ 
+ /**
+  * iio_device_release_direct() - Releases claim on direct mode
+@@ -753,18 +742,8 @@ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
+  *
+  * Returns: true on success, false on failure.
+  */
+-static inline bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
+-       __cond_acquires(true, indio_dev)
+-{
+-       __iio_dev_mode_lock(indio_dev);
+-
+-       if (!iio_buffer_enabled(indio_dev)) {
+-               __iio_dev_mode_unlock(indio_dev);
+-               return false;
+-       }
+-
+-       return true;
+-}
++bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
++  __cond_acquires(true, indio_dev);
+ 
+ /**
+  * iio_device_release_buffer_mode() - releases claim on buffer mode
+
+
+> 
+> Signed-off-by: Rupesh Majhi <zoone.rupert@gmail.com>
+> ---
+> Cc: Marco Elver <elver@google.com>
+> Cc: Bart Van Assche <bvanassche@acm.org>
+> 
+>  include/linux/iio/iio.h | 9 ++-------
+>  1 file changed, 2 insertions(+), 7 deletions(-)
+> 
+> diff --git a/include/linux/iio/iio.h b/include/linux/iio/iio.h
+> index 9b63785d5aec..ca91f5a64626 100644
+> --- a/include/linux/iio/iio.h
+> +++ b/include/linux/iio/iio.h
+> @@ -707,13 +707,6 @@ int iio_push_event(struct iio_dev *indio_dev, u64 ev_code, s64 timestamp);
+>  void __iio_dev_mode_lock(struct iio_dev *indio_dev) __acquires(indio_dev);
+>  void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
+>  
+> -/*
+> - * Helper functions that allow claim and release of direct mode
+> - * in a fashion that doesn't generate many false positives from sparse.
+> - * Note this must remain static inline in the header so that sparse
+> - * can see the __acquires() and __releases() annotations.
+> - */
+> -
+>  /**
+>   * iio_device_claim_direct() - Keep device in direct mode
+>   * @indio_dev:	the iio_dev associated with the device
+> @@ -726,6 +719,7 @@ void __iio_dev_mode_unlock(struct iio_dev *indio_dev) __releases(indio_dev);
+>   * Returns: true on success, false on failure.
+>   */
+>  static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
+> +	__cond_acquires(true, indio_dev)
+>  {
+>  	__iio_dev_mode_lock(indio_dev);
+>  
+> @@ -760,6 +754,7 @@ static inline bool iio_device_claim_direct(struct iio_dev *indio_dev)
+>   * Returns: true on success, false on failure.
+>   */
+>  static inline bool iio_device_try_claim_buffer_mode(struct iio_dev *indio_dev)
+> +	__cond_acquires(true, indio_dev)
+>  {
+>  	__iio_dev_mode_lock(indio_dev);
+>  
 
