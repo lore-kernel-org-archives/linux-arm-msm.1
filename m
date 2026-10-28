@@ -1,66 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793226905;
-	b=DriqD5JNNhsikqUhftkMJjxhbRJ+el5JsIFG5KvyT58m1zrM1wTwshtKMW4Nc+7QOE/1
-	 bAulUYxuhDaXkGhBqYp+0F//4dEuy/kl4t4ljKC0ABCFB5HPL9nKoAQGjGEOefkR8bwTK
-	 RjqMphI5IV9DEzU0H0xb4275lVzxZ5ioBr0YTWu4uEtDbBMZlEHzGGbyxxOCvixzOS2Me
-	 zOaF/5VGxAkABphF/5jTl+GeQ8TmY+Irc+Q5kgtgm4Xp8suHQHI7a0+L/6kWMR7yor+pK
-	 TfOqUZoB47xaT2XFC5nX8VNhOEXMbTBtrbCNV/RcDO9LWmClxsV+lReK1DAh1BsruVA==
+	t=1793227146;
+	b=0IJtW4i3p29bcjDvA6AnDQQLFm7KassBNTslwmMhn+evZRMg5qfEv6R4HxyGMnp8gbLI
+	 vKad3yTNfPvKXAE0SX3R+DcMlp831BG4QzVj/gXBI0F2zkISbrRm8p1Bwx2jI0r91Au3w
+	 OObvVSw9RXDb5ZGCxzu2nXHQbas9sQLINH0k0gYAtugY83jvdUBJOWZ6bHiznBrzLNiRq
+	 d7eYRKvXveKYzzJGBrHf022Km8hPv5JtcbQzZN4AhucqE+KjZhYGMJD2Jksfi8tsgxRTv
+	 mi6vMvlN3GMm4a0ZxWc6R78N6c5SPd64EjfdR6XYcNdjyIFcNifHcYdIEU6ftcJsiPA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793226905;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793227146;
 	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
 	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
-	bh=IKT3fon1/d2i1xCKh6MuLfmxqe3zW+ARzjd8XukPj2w=;
-	b=00/TRi6iW0ZuY3XSubnm7bu2Gn6wU+ILgNuBW71M8W16kXszc7EMA6FbjCK/koFXTuvB
-	 MeP0ww1T05/KH81q/1cLXwgZYErjI3INAog0T4IC0gjYslBqhpQcUB4IrSe52ZNX85+G4
-	 S6Nhb6/1S/gOr35xzhsmc4k+fzEtcdjo72jiMZZkCRAUqGUWYWI0iM9v8zV36X26fskfv
-	 +WXjWJ3O3Lx7Yse2Uw3vbUdqw525Lh1Gdk9bUH4gtdY4XvMXG4DVkSTW4apgKLmt0WEOW
-	 sgAhK/5c/jzM2Yletie0pvVeDYCEeh6609eTIMbAsyBWi6ohUDG/x1jCsnuX4r9LtJg==
+	bh=+pN3yifX0ZWEqqItPU6PdYRevZHvDImE7qVI1Pf4LGA=;
+	b=OrpLHUTkAn83/cRW8KV9HfrKLymDRHxTQjXHu2DWS/HZ1t3mFz4CeVTyMRt2z86Oplov
+	 GXMSbP7OFHc9cTMSx9yiGF8WIIDCh+c0tooooPuNvDiyDBjlydtkmFht26HJtv907RdNP
+	 eBo7SNlCoZVGdyX/1RO6UsjgGiWm/10SRjaEBszsGw8n3vndpHAdrXSvcVZ/VQd0Y7CUE
+	 SlTMf4EmXIUpMAARj6cQcO3204cvyfv4C01efyCwUxjvV9/Ox1JYElagaCoDbPHHOxg6A
+	 +Yp4fR2rOcKZ1NYi5QyzhYZYecvzeR02Ubj+cAFfO78g/sFM9oyrLiCqVFZ/uKCzLJA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=samsung.com;
 	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=uzgUEhhN;
-	arc=none smtp.remote-ip=210.118.77.11
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=Jp2tqFYL;
+	arc=none smtp.remote-ip=210.118.77.12
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEEBE606A31A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 22:35:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AEEBE606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C386606A31D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 22:39:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9C386606A31D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=uzgUEhhN
+	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=Jp2tqFYL
 Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261028223456euoutp01238351fb3f1b9da35a38884472cf2233~i0lxuaQbL2793527935euoutp01N
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 22:34:56 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261028223456euoutp01238351fb3f1b9da35a38884472cf2233~i0lxuaQbL2793527935euoutp01N
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261028223903euoutp0207f24fa2079a89d629ea25f836bc6682~i0pX7ivEs2439624396euoutp02u
+	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 22:39:03 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261028223903euoutp0207f24fa2079a89d629ea25f836bc6682~i0pX7ivEs2439624396euoutp02u
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1793226896;
-	bh=IKT3fon1/d2i1xCKh6MuLfmxqe3zW+ARzjd8XukPj2w=;
+	s=mail20170921; t=1793227143;
+	bh=+pN3yifX0ZWEqqItPU6PdYRevZHvDImE7qVI1Pf4LGA=;
 	h=From:To:Cc:Subject:Date:References:From;
-	b=uzgUEhhN2VPvwWc7NCk977UDCWc0R+7u+3YrjcvLkdVWAsx9TGwmfmIxZ6WHGJyBa
-	 Tfzhr+KwybuckEPex05F6nwZuXSSs6y2UOa4Fg4yrhySSB0vwF0f2MBbH3WjnGR4dG
-	 2bHzXTMbYUs+Egio1F0OgioVsRKYd94GZ2BWr0TA=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20261028223455eucas1p29b3028675c392f6c0ee012f08963ab3f~i0lxdtLPe2611426114eucas1p2G;
-	Wed, 28 Oct 2026 22:34:55 +0000 (GMT)
+	b=Jp2tqFYLGKGkWC4Dd6UbLre1yTZYdDCbFI04NZBibtZdHQzHxDKmoWso3n9gXzIIA
+	 YGz2nZLxh/gHAchFVNCMxUsJe5SfkzqwElhfWfhHHRFmbMjWBjWU2SEAfiZHrisNcw
+	 edGH6IrmMhqpe4bDAO0I7bUKjsnRxEVUKaHUzc54=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20261028223902eucas1p191e23afb4afaa13275f6182ee6cda2b2~i0pXqiekH0296402964eucas1p1X;
+	Wed, 28 Oct 2026 22:39:02 +0000 (GMT)
 Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261028223455eusmtip23dad5630755bebd4db06b58c16fce3fc~i0lxDv6z01026810268eusmtip2G;
-	Wed, 28 Oct 2026 22:34:55 +0000 (GMT)
+	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+	20261028223902eusmtip194719eaa8712d720d83da28b83ec1567~i0pXUBnEr1563515635eusmtip1V;
+	Wed, 28 Oct 2026 22:39:02 +0000 (GMT)
 From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Bjorn Andersson
-	<andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Stephen Boyd
-	<sboyd@kernel.org>, Taniya Das <taniya.das@oss.qualcomm.com>, Krishna
-	chaitanya chundru <quic_krichai@quicinc.com>
-Subject: [PATCH] clk: qcom: gcc-sc7280: Use retention for PCIe0 power domain
-Date: Wed, 28 Oct 2026 23:34:43 +0100
-Message-ID: <20261028223444.2683120-1-m.szyprowski@samsung.com>
+To: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Srinivas Kandagatla
+	<srini@kernel.org>, Vinod Koul <vkoul@kernel.org>, Bard Liao
+	<yung-chuan.liao@linux.intel.com>, Pierre-Louis Bossart
+	<pierre-louis.bossart@linux.dev>
+Subject: [PATCH] soundwire: qcom: decide about clock stop support on runtime
+ suspend
+Date: Wed, 28 Oct 2026 23:38:49 +0100
+Message-ID: <20261028223850.2683359-1-m.szyprowski@samsung.com>
 X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -72,60 +73,109 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261028223455eucas1p29b3028675c392f6c0ee012f08963ab3f
+X-CMS-MailID: 20261028223902eucas1p191e23afb4afaa13275f6182ee6cda2b2
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261028223455eucas1p29b3028675c392f6c0ee012f08963ab3f
+X-RootMTR: 20261028223902eucas1p191e23afb4afaa13275f6182ee6cda2b2
 X-EPHeader: CA
-X-CMS-RootMailID: 20261028223455eucas1p29b3028675c392f6c0ee012f08963ab3f
-References: <CGME20261028223455eucas1p29b3028675c392f6c0ee012f08963ab3f@eucas1p2.samsung.com>
+X-CMS-RootMailID: 20261028223902eucas1p191e23afb4afaa13275f6182ee6cda2b2
+References: <CGME20261028223902eucas1p191e23afb4afaa13275f6182ee6cda2b2@eucas1p1.samsung.com>
 
-As the PCIe host controller driver does not yet support dealing with the
-loss of state during suspend, it keeps the link up and the resources on
-when an endpoint is active. However, only gcc_pcie_1_gdsc was switched to
-retention by commit 1a58ee1330b2 ("clk: qcom: gcc-sc7280: Update the
-.pwrsts for PCIe GDSC"), so gcc_pcie_0_gdsc is still powered off during
-system suspend and the controller loses its state.
+The controller decides whether to use the clock stop mode for runtime PM
+based on the clk_stop_mode1 property of the attached peripherals, but
+evaluates it only in qcom_swrm_enumerate(). This is racy and wrong:
 
-On QCS6490 (Thundercomm RubikPi3), the Renesas uPD720201 xHCI controller
-on PCIe0 doesn't survive suspend to RAM:
+- The property is set by the peripheral driver in its probe, which may
+  run after the device has been enumerated on the bus. On Qualcomm RB5
+  both WSA8815 amplifiers share a single powerdown GPIO, so probing the
+  first amplifier powers up the second one too, which then attaches and
+  gets enumerated before its own driver has set clk_stop_mode1.
+  wsa881x_probe() also de-asserts the powerdown GPIO before setting the
+  property, so the race exists even for a single amplifier.
+- The flag is reset for each enumerated device, so only the last one
+  is taken into account.
+- The flag is never re-evaluated once the peripheral drivers probe, as
+  the slave status doesn't change then.
 
-    xhci-pci-renesas 0000:01:00.0: Unable to change power state from D3hot to D0, device inaccessible
-    pcieport 0000:00:00.0: Recovering Root Port due to Link Down
-    xhci-pci-renesas 0000:01:00.0: Controller not ready at resume -19
-    xhci-pci-renesas 0000:01:00.0: PCI post-resume error -19!
-    xhci-pci-renesas 0000:01:00.0: HC died; cleaning up
+When it ends up false, the controller enters clock stop on runtime
+suspend, disables its clock and loses its state together with the WSA
+macro. The clock stop exit path in runtime resume doesn't reinitialise
+the controller, so the link never comes up again and the playback
+fails:
 
-Use retention for gcc_pcie_0_gdsc too, like it is already done for
-gcc_pcie_1_gdsc.
+  qcom-soundwire 3250000.soundwire: swrm_wait_for_frame_gen_enabled: link status not disconnected
+  qcom-soundwire 3250000.soundwire: link failed to connect
+  wsa881x-codec sdw:1:0:0217:2110:00:3: Initialization not complete
+  wsa881x-codec sdw:1:0:0217:2110:00:3: ASoC error (-110): at snd_soc_pcm_component_pm_runtime_get() on sdw:1:0:0217:2110:00:3
 
-Fixes: a3cc092196ef ("clk: qcom: Add Global Clock controller (GCC) driver for SC7280")
-Fixes: 1a58ee1330b2 ("clk: qcom: gcc-sc7280: Update the .pwrsts for PCIe GDSC")
+Evaluate the clk_stop_mode1 property of all peripherals on the bus at
+runtime suspend instead, when their drivers had a chance to set it, and
+use the same decision in the matching runtime resume.
+
+Fixes: 74e79da9fd46 ("soundwire: qcom: add runtime pm support")
 Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
 ---
 The issue was analyzed and the patch was prepared with LLM assistance.
-The fix was tested on the real Thundercomm RubikPi3 board.
+The fix was tested on the real Qualcomm RB5 board.
 
 Best regards
 Marek Szyprowski, PhD
 Samsung R&D Institute Poland
 ---
- drivers/clk/qcom/gcc-sc7280.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/soundwire/qcom.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-sc7280.c b/drivers/clk/qcom/gcc-sc7280.c
-index 78399993cdce..9e141a7ac424 100644
---- a/drivers/clk/qcom/gcc-sc7280.c
-+++ b/drivers/clk/qcom/gcc-sc7280.c
-@@ -3101,7 +3101,7 @@ static struct gdsc gcc_pcie_0_gdsc = {
- 	.pd = {
- 		.name = "gcc_pcie_0_gdsc",
- 	},
--	.pwrsts = PWRSTS_OFF_ON,
-+	.pwrsts = PWRSTS_RET_ON,
- 	.flags = VOTABLE,
- };
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 6e0c5fb10efa..2745900dc241 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -723,14 +723,10 @@ static int qcom_swrm_enumerate(struct sdw_bus *bus)
  
+ 		sdw_extract_slave_id(bus, addr, &id);
+ 		found = false;
+-		ctrl->clock_stop_not_supported = false;
+ 		/* Now compare with entries */
+ 		list_for_each_entry_safe(slave, _s, &bus->slaves, node) {
+ 			if (sdw_compare_devid(slave, id) == 0) {
+ 				qcom_swrm_set_slave_dev_num(bus, slave, i);
+-				if (slave->prop.clk_stop_mode1)
+-					ctrl->clock_stop_not_supported = true;
+-
+ 				found = true;
+ 				break;
+ 			}
+@@ -1858,12 +1854,31 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
+ 	return 0;
+ }
+ 
++static bool qcom_swrm_clock_stop_not_supported(struct qcom_swrm_ctrl *ctrl)
++{
++	struct sdw_slave *slave;
++
++	list_for_each_entry(slave, &ctrl->bus.slaves, node) {
++		if (slave->prop.clk_stop_mode1)
++			return true;
++	}
++
++	return false;
++}
++
+ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
+ {
+ 	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(dev);
+ 	int ret;
+ 
+ 	swrm_wait_for_wr_fifo_done(ctrl);
++
++	/*
++	 * Decide here and not at enumeration time: the properties are set by
++	 * the peripheral drivers on probe, which may happen after the device
++	 * has been enumerated. The matching resume uses the same decision.
++	 */
++	ctrl->clock_stop_not_supported = qcom_swrm_clock_stop_not_supported(ctrl);
+ 	if (!ctrl->clock_stop_not_supported) {
+ 		/* Mask bus clash interrupt */
+ 		ctrl->intr_mask &= ~SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET;
 -- 
 2.43.0
 
