@@ -1,109 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793206949;
-	b=OspTXsnvrEzRZ0werO7TNcoxLJdnz1uI89Nsux9I20APjcDT7NXsqwEN8J6KQkPhnS78
-	 VDitkf5sDTS3pPzerxsPlmbqSlPMOWokqm/0tny3QKd/j8WAy/CkkxnJw8VLSypGx29Ii
-	 rKauqdaJjBNvelGmeTc+Fb6FR+njvDlTKwqYv2T5dfWee0tOcX4LPQq3UL+Zhh87KMS8n
-	 4e9DRp+px6Q2rgvCBwhHyR4+Q+VfHXNvJyhRD/sS6x8ggg97JglgQFGxf9oqcruyiBNHP
-	 ORlxsC2OVm6kvcXeONeEYsQonfpJukRGvnls6ApO0q15W2xKej3sblTWrWYUJsIadFQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793206949;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=r59FKrnAgpwtFUEMnG3WnE+uI3opwTysJe+70bauFCI=;
-	b=Jdz5WpvT0aPvkydspkMxe5a+Bsq9DP4c7T63lZQo4eHUJoFA/u3DeQmsL8MG/UtU+wcp
-	 ONgSkczev8hfV/82Z1H6mDvvdMyEf14ynWqp1efstlHuhw/JoTliV0UARv9K6YjjSSGGU
-	 R35+lckGwWaR7sIj/bS+4xPawpkELVlB4k9RyBGXzyFtt2sALZPOpL+/TKQon/CB2E4fG
-	 7/Mq0yaQD6WQbaB/EPh1RZ51h4kmwp8nqkGSgyf9f/jNuFvGaInUPHRt3hfh12qKFN4Kb
-	 G1Cwvx4cQf4yFUTq5GKtW+9Grzvq9eYIgU993OHTAm5HXhL1T1LuxAksp/tHQmvo2Ug==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GgxTOODj;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QdGl9bVR;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.130.16
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793207158;
+	b=CfDYQWlkSCm3rdvrd/3UQvW199nieZKDfahTzBc/PdM0+Uh0vscW1z/izGFmOjE5r9d0
+	 O+4mghlT0W33+iNM+6vDumDE1lsMBE5T8e9ePxWo1GYAKHZF+07SYk8JkJX+7mGaa0xpt
+	 8bX2hFkEPsDCeh93wM6n/H2HmiH97s9OhSwXvjieIOEyIq2ilb4wgDJqshhY1yHk+j1pF
+	 hvS2uvYavFnQ95pjccyKWxYq6byNGPH3GKYDSnMd7RMKrteNtTSg3nmVarRTs8HQsIvFc
+	 f2BQqUrdHwqKx3+ubyfGbwnMt6KolXwbiGA+hLvSCUCnrfVFpt+FD5RqZjwijpX8YMQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793207158;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:Content-Type:Content-Disposition:
+	 In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=CUmnbaCJ7pd5NBAxcV9NjP+78L98ZBtyC/aojqVMqfg=;
+	b=kZZvoIvWM9ZwH40PqQGioCjF+zPwW8EufgtxNrzjhMVf4j1ootNAUQD9j21e78V0Qtv/
+	 ctwNTe3u4DKNh1sJH6MhYVdPLEwBFriaIyGjWo2xxYNhtls+Gk/Fl0KM0qGDxMrvUhfq6
+	 q2gWUvJyvWD5nN91K0I0xHgcQ15E+nTmEgFeZgnIkgqGC9B7JGMGxRuS/pf+7ajfy+BUa
+	 CoYyN4Vq03urCIQqukranAmBoEeGxqf6k16CPaJBzhW+9fQGjnPy0jYQY3XIUWlzGlaaI
+	 ngZRCyykYz2a86ElwgjKC4fTYAdDBPhVReW9hqgB9qS6F+LmOA94pyPopachL9cXpTA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.nxp.com;
+	spf=pass smtp.mailfrom=oss.nxp.com;
+	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tJ1nuE7g;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.130.16
+Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazon11011016.outbound.protection.outlook.com [40.107.130.16])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07A09606A31A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 17:02:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 07A09606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5516606A31D;
+	Wed, 28 Oct 2026 17:05:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5516606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GgxTOODj;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QdGl9bVR
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69SFAZgl1458862
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 17:02:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	r59FKrnAgpwtFUEMnG3WnE+uI3opwTysJe+70bauFCI=; b=GgxTOODj+CQTvzoa
-	+iMMYh4OZDS31jfoUd5g7+3NVuiEthNoiK6u4AIq3TkrJ0QmcZHsdHsrfpot+iD9
-	wnUIim2fvXNGWdjH5837AI+T4Yvyx8yKFF15elWutpv4oX94UIMtXq+dyJdDMzyk
-	qzxlVdaqk6zBddTv95/QIkfDjnaBDid7qTaYrJC2AVk+83zt87fzYEysY49bxsSp
-	XvdBW1YI+WpI/AQNP/eVkl7WvFjuQmgsApTbFaIu+tq7Am6A9+EZYngaWc9SlQ43
-	d6Da2sEyI7RpH3kr03b0vXxopqEXSxmgaIv0oK3LXrgXjfTo+jHt55TbRBKTJPkX
-	HbTOwg==
-Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk82tu87t-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 17:02:27 +0000 (GMT)
-Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-46788f14fe6so200834fac.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 10:02:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793206947; x=1793811747; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r59FKrnAgpwtFUEMnG3WnE+uI3opwTysJe+70bauFCI=;
-        b=QdGl9bVR3Z1QKS9Nne1jXnwgZrVVvTe5a0nZjVaGe4pFWd7/2O5ePK6s+MMJ/r5pKw
-         EAYwtweGTJRgdXFsiqD5SMNQBFPdwrLfdAbhHrG8vqT08uKHhW/ruMnJM//AOnhQvZOu
-         y29heBTeJJjOtXl05RY3n4FV5GzdyDSJx9qkN1mE3UCSq48f2Uv9u0z7cxAcKSfLxrca
-         FEdY+wOunD2IKBejkDGOZgB2Z4AcIwwESocHK43hY6zjZxduw0Swg+W4q4zrdDIL0wuF
-         JrFMEgRkL5C129tpnbY63ymyiROziIXjNJfSh2HMPUh4wTEqAftRN4FLix19ptRhgtDg
-         HwXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793206947; x=1793811747;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=r59FKrnAgpwtFUEMnG3WnE+uI3opwTysJe+70bauFCI=;
-        b=tVvHl0+jvnYRxfJeU4PF3MADuNZAyTCyNOH82Tc9PbkFM8pv2KpTtou1OPN5H6Djir
-         VRsPwkrD0Sg1T6GGEC4hMclHHfy/UPPaOgsg1JJIGdCVearw2PBGXzCmAmEyqyNGLJRB
-         TEJmzg1D5InSzeKokPKPiVGq1QQ8vE/+fI7zsfdbSmIs1e4DL6dGjuAytQr3McoYrRbl
-         qlrIflLIdXcgXOUvd4gVFuujpAMb55SL3c3KiFF1WPiAk7aWrKonI4fvMUEjf/0/90BP
-         3PDNqo797sOdeS90v3nNH7rkbbMJCO6tq78HShhiOu9CVzYmaNL0OwJFROtrWaeX362y
-         yr6Q==
-X-Gm-Message-State: AFq9FYIaZ1fJy5HU/n7VRVJHSFHYd3IKbsEDYyVEeP8M9wBSeG3/oUC+
-	0//8regygrkVyfiBedQ3tdtcEpPNMi6agqiNri6stZiO2k+PBuT5UKLN1CGLyI+3jZnRy+kf8EG
-	KqsFoeS4X4q/Z1NFCRRaSjapI4bSBSDNt3EMAFI0eS4mohoBKwPRjeivnbOGjYvp/2hYn
-X-Gm-Gg: AYBFou017kd6iWHTO8i/BQhmIjXQEUpBg6EBx5CnROFmDiGRFnXAJdPMKM3ej6HUqTb
-	FkyE4tL/Zipncbb4W4KgThAJiecxZBcgYQ2+qIJRHrJUeEMcb3r/Gx/+xs8fak+Rz4XGjfzR0EE
-	L2bWHVmi3zywHfzWiEzbDeRGSpZ1g783VMANUNiiaBqNwmeJoyZioQjeBkP4XqWvyPF5aBs4cLF
-	dfsPNEdov/AELSfbp0DgooBNDaD75i+ZLsUs2QK8A1ip+/4B1+aH3TdmMwtXi5vsZYonooJsquD
-	zsb3ecMgUYh6ZpkhQ9tL3Xg9tzSmrAL+H85XKGITzVoJ8jMxqph/q5rC7FkR+l5WS/k9yPiD9fg
-	TFHE+XXacxyyFP9FF6R2JC20XOPdvLKsuXqNWvcC9bkQ7Gad68lRVpnVfKkZ6Z1PxTF0gGxw=
-X-Received: by 2002:a05:6808:bc1:b0:4f8:4a95:991d with SMTP id 5614622812f47-5637fee0c79mr2973072b6e.2.1793206947278;
-        Wed, 28 Oct 2026 10:02:27 -0700 (PDT)
-X-Received: by 2002:a05:6808:bc1:b0:4f8:4a95:991d with SMTP id 5614622812f47-5637fee0c79mr2973038b6e.2.1793206946735;
-        Wed, 28 Oct 2026 10:02:26 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b4964203bcsm1733841a12.23.2026.10.28.10.02.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 28 Oct 2026 10:02:24 -0700 (PDT)
-Message-ID: <efe7cb6e-f4cf-462f-bb04-e3aa162b1158@oss.qualcomm.com>
-Date: Wed, 28 Oct 2026 18:02:22 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=tJ1nuE7g
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JC3Oo7nvV7rwtdaTTV1kIdirpfPPviRcc3XhNQzWjbAVUSyFBHbgNQphnWLcRZc1aZrPvoksfdY3JoRCbVRLw/sKj/vDVv9//ngIzoyWu8BCs8Y3eI+WvLW3a+XrEPspipN8bCxy/AVTUiTgwtJAhM8Tq12nPn7ENfQE+yjEuOgkisx3RHZpMix2N1j7C0uaziOlEdV2AL/kKeiAXKXTIhvHohBZdZ9i24DnJyH6QPMCyT5bSU07iGNYg1+HlWCHSmmY113cX5ZUumBuWrnL27OfN472Iwv/OQon0tX0ZYJG+UvVtpgNZuWyws4Iyj62Deln9WNTPEDzPMywVumO4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CUmnbaCJ7pd5NBAxcV9NjP+78L98ZBtyC/aojqVMqfg=;
+ b=bzp6BVsb8q16t665R1bSD3AeThTD81k8PX+rgaW83AJK2PN+5DdXgMZe6hpFr6YG4aRJQxJdwi2puiaph4NEpN+lRLf4UMqhcjKLhjRRd51Xb33nD6BksYK+DDBg8H0eETAV1+xbEWtF+uvKt01bQb8AXouU6Ju3tlscNutg6kA/6A5JBhoZaACL7/tPXzhAziiTQb4SViNJ7hVdhvNWRpD70X+MOoauVIG/u/Opzf/BwUjJZcMj50e3Z9WOe+1cFd5mOLqM/9qSmvuaPZ/gN36FY4djdybYWM1bI1ALGupDAVURkOP1+Lg5lL04NMPxJGbCi9h8jQOlYLgdVcDjuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CUmnbaCJ7pd5NBAxcV9NjP+78L98ZBtyC/aojqVMqfg=;
+ b=tJ1nuE7g08SAB+xfuw+gj9haHbvrzMvwYnncO/x/IrnvRvdCdfMPqV2Hh4cR4Q2/GcrSvsqgt/u0a7Sekmnuj/cI2fsxnjjmZXxS+YETSdk26FQ6Gu9doz0NCP5z60kwi4yyuB4XelBEZ8+X14oEDBzb+6/WN6207kTl+K6XwsFLc8dD8I7q0ZCTmz1djenD8KILcMDxstubewgXg4h4RzjnioE3Ne4AnerE2gkm4Lxymlrd8R5s0TKacWZmiq4m+BBP68dF3S/XyrEX1WUv7JfHQuIz8ckEi15n6dL3Tt3CtUJ19AduieInyvbIdjTeM1ZJXuL8/kcd1OJAPTWV9A==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MI3PR04MB12438.eurprd04.prod.outlook.com (2603:10a6:290:76::14)
+ by OSKPR04MB11341.eurprd04.prod.outlook.com (2603:10a6:e10:98::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Wed, 28 Oct
+ 2026 17:05:54 +0000
+Received: from MI3PR04MB12438.eurprd04.prod.outlook.com
+ ([fe80::c715:c32:8bb1:b70b]) by MI3PR04MB12438.eurprd04.prod.outlook.com
+ ([fe80::c715:c32:8bb1:b70b%6]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
+ 17:05:54 +0000
+Date: Wed, 28 Oct 2026 13:05:45 -0400
+From: Frank Li <Frank.li@oss.nxp.com>
+To: Li Ximo <lixicaicai@gmail.com>
+Cc: Sinan Kaya <okaya@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+	Frank Li <Frank.Li@kernel.org>, dmaengine@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org, Wang Haoran <haoranwangsec@gmail.com>
+Subject: Re: [PATCH] dmaengine: qcom: hidma: fix wild pointer stored in
+ mchan->running when active list is empty
+Message-ID: <auIrac9AMf1Jwwt3@lizhi-Precision-Tower-5810>
+References: <20261023073154.744365-1-lixicaicai@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261023073154.744365-1-lixicaicai@gmail.com>
+X-ClientProxiedBy: SJ0PR13CA0098.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c5::13) To MI3PR04MB12438.eurprd04.prod.outlook.com
+ (2603:10a6:290:76::14)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,100 +98,138 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: talos: Mark USB controllers as DMA
- coherent
-To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-References: <20261021-talos-dma-coherent-usb-v1-1-df0400a2c64d@oss.qualcomm.com>
- <79ade748-b8fa-4d9f-9ac5-7f1635cf8109@oss.qualcomm.com>
- <fdacbf99-6d6b-4eab-a914-ce629b7c738f@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <fdacbf99-6d6b-4eab-a914-ce629b7c738f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: Jv4KlqqM7m7CgJtTA5rpygMfRCp_uBhv
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA2NyBTYWx0ZWRfX5e8EkpR0S8J9
- rSmkVMmInEn+QdYu3DsibGA6pmhee53tt15sfdd9MrJUvYYgyuVK3F3LP54qBkSW/R+jFIJWbHq
- 5fu5lFIuyA3vaI2j72ygyBHO3sp5t7w=
-X-Authority-Analysis: v=2.4 cv=Tr1zFzXh c=1 sm=1 tr=0 ts=6ae22aa3 cx=c_pps
- a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=d7WKDHGJSlPa2Yu6rV0A:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
- a=1zu1i0D7hVQfj8NKfPKu:22
-X-Proofpoint-ORIG-GUID: Jv4KlqqM7m7CgJtTA5rpygMfRCp_uBhv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA2NyBTYWx0ZWRfX0otm+O69m6v0
- W62g/SnUdoxG6unTiTBvTavwyTGET47ufhE8tSzixG6BURRVG9K1BJuvxrpUBU7SW3etk3se7+a
- NZSsy8QZHLkx6b+gCiZ4y47mSnHkblOA45DPxJbqBzeJMzxGz4X+d4+92QpeEROdr4aJOlvYlV2
- sM9mYZe+TSNw+yw2Vx2ko2cYOR9YE7KIz+azvY0JeCaYM1yD8fQOAvkK/DkrSZRTmCVhNfb7vRm
- ybuKPY1sALVeWTrLDRXxe88jg1L7qUQHOzuvw6E5wpy/6lOjmHuI34/+7xZheXE+8gW3vgrXutr
- w4wrKsyPQG8npfB4/5TujaOzGH4oeFnby55fHaOJRpqJseiM/klHDq0FsVu/iTj1GNksO8YVkj9
- wWwAtsoyBxIrpKCXV3x2DrZY42u9qx2RN4s8u3/5Qui24IA+hgM6G6yAqqTK1BS4kOenaLKs0I2
- k1UaGLhdal4v6U1CQDA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-28_05,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 spamscore=0 clxscore=1015 phishscore=0
- impostorscore=0 malwarescore=0 adultscore=0 suspectscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280067
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MI3PR04MB12438:EE_|OSKPR04MB11341:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0abd5cd-2381-449d-c4c1-08df3515ba35
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|19092799006|1800799024|366016|23010399003|6133799003|18002099003|22082099003|56012099006|5023799004|11063799006|261026140227099003|261026121527099003|261021121427099003|261021123027099003|10067099003|261022105027099003|261022075727099003|261009223027099003|261028144727099003;
+X-Microsoft-Antispam-Message-Info:
+	f20I0TM/ORbd5ws+Q4Bxrw+CY7PxFnKDCS5lpbjuGopnl5N3jN9/tNedum6+HQHT/zfmN8vi+7L19PWIUbvG92CH0aqwfwl5I0Y1WBCM7WZi6GerylX2pWfhRvw0kqomKWYtS5CT8McEubciBUgXG/iC1W88Iz8C6nrVa9f6r2it+2azPwH5G+JCwRrXomMfo6gmfKi+Gy6M8KC49ImfDPLSBCg2fN7qaO1tpkAgBhbzl3CsgWqgc23jSErdGJFt8mPUn5PH+z6LTBKp6Tadcwo4pJX9uuUJStKh0C+adqjqnFzJwep8yBQEXXvCLipjdROz4uyL4Is3+FBVB1KKVGMee4W4TUXHag6QH6nIHD9U7bTbHq7JGcNNkLtnGtXRaotjzJk6GuQL+Sd5XpUmws2FtiLypprRWaUhBppj0qEu6PAhIGzcTU+lAiqcN9NXFBlllA7a1io4ExcpIy0m6HFVEDCy4/1sk9H1FA70c8hlt5DSBF1bK06+2Bd2MdMX3FBV21CK1Pz4il/DJDzBQngvIlczFMQzkbY14QwDroH+bxhvXvXZUa/TtPcHkDLE7+zijVasOtfami+AjaVld6I18NDhB6DOUF1J8ZYxq5UQ9JK5Ei4kjRrcBuVwoETXrDt1x5i9flOuP/D6h+zwlrXPu0MRFizqrQjETTAPtXo=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MI3PR04MB12438.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(19092799006)(1800799024)(366016)(23010399003)(6133799003)(18002099003)(22082099003)(56012099006)(5023799004)(11063799006)(261026140227099003)(261026121527099003)(261021121427099003)(261021123027099003)(10067099003)(261022105027099003)(261022075727099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?il7eNoMELBnROmYi+RaTMgaaKxVrMeLtOzUeDz3b5RXNu8RyqPhSzPcS6Nsn?=
+ =?us-ascii?Q?/5BnaCSHVrkL2vNfDrUHAU4fmiyGS93YXn5qzU+S86po7XEFazOHxI4JNQqA?=
+ =?us-ascii?Q?o2oT9ndr7niU++t6RO5dmw0kD1ekfPjIxfsy7dNe2gJGhquyuI4nEu9vxX0s?=
+ =?us-ascii?Q?QvsnJGyI0xcqiYmAcAneN2iN1vBCrU4RKbox1/LyaAxR8eiGVEV0n0PhwV71?=
+ =?us-ascii?Q?mkKOt/CiGCxyDoP5XaEmBtFBygj+ZtH5SlP4dV7p7oHMvnNeD5rFRzyEl720?=
+ =?us-ascii?Q?UzUU9W31iSxKaKLpR/peu5gBfoXz7/FbkoGXgJC57eFLbUT770l9QsUBODDg?=
+ =?us-ascii?Q?TD63pusjDizdyaWdFDeMo78V6Gh56PRkNiOeTIARR7Eo1uCpd61bC4RsnI10?=
+ =?us-ascii?Q?z9qaU0rcxDC967iYNUF9MDacIKjEX4U2RV+ntlZu5paQ1rXdEOlkGwFE75vg?=
+ =?us-ascii?Q?EuFt3K2c5+DIrk8yhFZxOQ5x4GnLZ/3yU8jELmfYj1F+Ung7w85qMFNNvGG/?=
+ =?us-ascii?Q?zRcCY0Vy57RMdD1gdE2o3eIsl8mzUZNNQD4zdb0vjdFhvTR/+wvVejQw8uDm?=
+ =?us-ascii?Q?Fbq6jpbU9+Iu+MooHXsLs3jkQZl3C6uBAEBNtOl18dPjRg1BUO5AD0lZ/QmV?=
+ =?us-ascii?Q?vMWT4LvzNcke9Amz5oNZJgDheGISqPsUfUA97u4lLG3fHn9a6jQZsT5tYT7k?=
+ =?us-ascii?Q?mhk7NTL9x3UMfbAQDfD/wTgcbm8ezyADbrvUsPXcEtsNYfhNvktWkJc8iAB4?=
+ =?us-ascii?Q?knJyc6FbqS/A2d8D9euNELbu2nbAIMYMZTawphJzjvQdBuiUD0CgjrKoc6Z8?=
+ =?us-ascii?Q?OFQAmKEkK9KkUcgSD04ODwUjCqj5ZrysH6BPnHRP4zfFUXGOUbDaGy9Wrqwg?=
+ =?us-ascii?Q?9HGZW/dUHmucXhlsAYDsY4Wj7W6h6ojZkimmXJEb18vXpMQh8Bmvt+qEtIDi?=
+ =?us-ascii?Q?cU68e3DzU2ypiupYu3gIt5FfqG0oM8CHx/kVfSamXPJRL79VsMvBkzc0Qffk?=
+ =?us-ascii?Q?Q26RxavndlD2TA4hY8PzRHF5QWMwhza77x7bCe5y1pOj1lburCVrAq7O19kS?=
+ =?us-ascii?Q?5SbvVlMyIQorttBBoGgdPbnUlfye8KnfN+d7n6TBCZy9cWF7s2ykk9rC0DsX?=
+ =?us-ascii?Q?m2jt0DZdStVHD9pb9WSnvtvS9GMCnCDOzLL3bfgTmpGPXkEwMqPJwOI7kNzb?=
+ =?us-ascii?Q?4mTwFaBxhHfHXIhZiJGcKmhT2DJJjJBnNItMUjAsFpNaqxf/5J6E//HhfEUg?=
+ =?us-ascii?Q?9krNFo6+Mge2P+ZHr1inZEVuarjbAPP67XkHR+4dWQbHvD9x2slzx0jyPiyv?=
+ =?us-ascii?Q?8426Rd15BNt8AB/0z4wJuHwcbx/i93MS55XkrYZQQVrQud2U/hw4JoJNgyh9?=
+ =?us-ascii?Q?8/Uj98MFxkSlsK6xuUYvY7QdWzXOMe/AUdEWLj1Gv2y7ZTU3SyIUAfg040om?=
+ =?us-ascii?Q?ngN7AGkL3vhg6SSOz9Qi2qk4Pa2rPIXTWxYt3wup0+C38q9jwnVbgC5yJyYp?=
+ =?us-ascii?Q?QZoWKCi+Tg7knZ11zNILngzbc2TKc6bgiC+XHvBbYNDGKsq5u5fsBXrfJd29?=
+ =?us-ascii?Q?TrfOWtZGPFCc18D70zU89jxjBwCdidVwGvC6NMFTSTu0aW/4Wg88TzuoyxFh?=
+ =?us-ascii?Q?Jar0d8smfvEUR7N43UKM2VzRBuL94MUnCRvXVUw+i8cpX63yH6RsTV9iy/Yp?=
+ =?us-ascii?Q?d+JHGCKXaejXXJ5aEIefZ+tmsX9d8KDxEqkIBUdFLYL8pFyM3QV8kpfs4Z8W?=
+ =?us-ascii?Q?7KVzs5FFH9kRarjzfvUCl5nRQc6SD5VNnB3pgrg+u1jPcr7pOhzg?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0abd5cd-2381-449d-c4c1-08df3515ba35
+X-MS-Exchange-CrossTenant-AuthSource: MI3PR04MB12438.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 17:05:54.5196
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MGijBDq4wMtTgeeUxD7RWQiwhoJqacilaCy0lw4VmaqGzNo+UYRRe/OJa6hzOTBb0rbgDfDZh9rRjtGd3eGcNMia1YX5IfT2Ma5nJJFgm5T0WKOLRET/UF/L6rzCvFGS
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSKPR04MB11341
 
-On 10/28/26 6:01 PM, Krishna Kurapati wrote:
-> 
-> 
-> On 10/22/2026 1:51 PM, Konrad Dybcio wrote:
->> On 10/21/26 7:28 PM, Krishna Kurapati wrote:
->>> Both USB controllers on Talos are DMA coherent. Add property indicating
->>> the same.
->>>
->>> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
->>> ---
->>
->> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->>
->> I asked an LLM to find is_rpmh && !dwc3_dma_coherent. It gave me:
->>
->> - kodiak
->> - lemans
->> - monaco
->> - qdu1000
->> - sc7180
->> - sc8180x
->> - sc8280xp
->> - sdm670
->> - sdm845
->> - sdx75
->> - sm6350
->> - sm8150
->> - sm8250
->> - sm8350
->> - sm8450
->> - talos (fixed by this patch)
->> - qcom-sdx55
->> - qcom-sdx65
->>
-> I am sure for the following:
-> 
-> sdx65
-> sdx75
-> lemans
-> sm8450
-> qdu1000
-> kodiak
-> sm8350
-> 
-> I can send a series for these patches if that is fine.
-> But the others I need to confirm.
+On Fri, Oct 23, 2026 at 03:31:54PM +0800, Li Ximo wrote:
+> From: Wang Haoran <haoranwangsec@gmail.com>
+>
+> While auditing list_first_entry() users we found two call sites in the
+> HIDMA driver that invoke it on mchan->active without verifying the list
+> is non-empty. list_first_entry() never returns NULL: on an empty list
+> head->next == head, so container_of() produces a bogus non-NULL pointer
+> into the enclosing hidma_chan structure instead. That wild pointer is
+> stored into mchan->running, and is later dereferenced in
+> hidma_tx_status() where "if (mchan->running) runcookie =
+> mchan->running->desc.cookie" passes precisely because the pointer is
+> not NULL, yielding an out-of-bounds read / memory corruption.
+>
+> The list can be empty at both sites on entirely normal paths. In
+> hidma_callback(), the completed descriptor is first moved from active
+> to completed; when it was the last active descriptor, the subsequent
+> list_first_entry() runs on the now-empty list. In
+> hidma_issue_pending(), a client calling dma_async_issue_pending()
+> without any queued descriptor leaves both queued and active empty, and
+> the "if (!mchan->running)" branch then fetches the "first" entry of an
+> empty active list.
+>
+> Fix both sites by switching to list_first_entry_or_null(), which
+> returns NULL for an empty list. This makes the existing NULL check on
+> mchan->running in hidma_tx_status() effective, so the paused-channel
+> cookie query takes the -EINVAL path instead of dereferencing a wild
+> pointer. Both call sites already run under mchan->lock, so no
+> additional locking is needed.
+>
 
-Please send for the ones you're sure and please follow up for
-the rest
+Can you use simple words.
 
-Konrad
+dmaengine: qcom: hidma: fix memory corruption when active list is empty
+
+list_first_entry() does not check if the list is empty. When mchan->active
+is empty it returns a bogus pointer, which causing memory corruption.
+
+Use list_first_entry_or_null() instead.
+
+Frank
+
+> Reported-by: Wang Haoran <haoranwangsec@gmail.com>
+> Reported-by: Li Ximo <lixicaicai@gmail.com>> Signed-off-by: Wang Haoran <haoranwangsec@gmail.com>
+> ---
+>  drivers/dma/qcom/hidma.c | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/dma/qcom/hidma.c b/drivers/dma/qcom/hidma.c
+> index c939635be..925c912e0 100644
+> --- a/drivers/dma/qcom/hidma.c
+> +++ b/drivers/dma/qcom/hidma.c
+> @@ -176,8 +176,9 @@ static void hidma_callback(void *data)
+>  		queued = true;
+>
+>  		/* calculate the next running descriptor */
+> -		mchan->running = list_first_entry(&mchan->active,
+> -						  struct hidma_desc, node);
+> +		mchan->running = list_first_entry_or_null(&mchan->active,
+> +							  struct hidma_desc,
+> +							  node);
+>  	}
+>  	spin_unlock_irqrestore(&mchan->lock, irqflags);
+>
+> @@ -238,9 +239,10 @@ static void hidma_issue_pending(struct dma_chan *dmach)
+>  	}
+>
+>  	if (!mchan->running) {
+> -		struct hidma_desc *desc = list_first_entry(&mchan->active,
+> -							   struct hidma_desc,
+> -							   node);
+> +		struct hidma_desc *desc;
+> +
+> +		desc = list_first_entry_or_null(&mchan->active,
+> +						struct hidma_desc, node);
+>  		mchan->running = desc;
+>  	}
+>  	spin_unlock_irqrestore(&mchan->lock, flags);
+> --
+> 2.30.2
+>
