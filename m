@@ -1,56 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=111.22.67.151
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793187419;
-	b=uSAcS3s356uxGhPmmW+i7SOXKsTOPLI2f4h3ni9zjjfA9jHNFqXJ8uqRA6roLyeE5SOw
-	 ZfSOjhBeWo2oHbOzMXRCbCTdLK/89kqyp+mp8Y9GbrTWD6b8y5nfIr4re0J4MRNh6a/Gx
-	 /c5+vUraSDx6wqFkicIJiLpxK16US8DyCJ4RabBIZaCkdRqX67tO41JZqXmdE1GIbXFQi
-	 oJoD4yteoC/rJc0zxw8SfEaUz3FaJYEvRL8jk8EaFcbo17pVwhvmJw7HHVsSf8zzqxKB0
-	 kHEr4CSZvdYFqM/9x59vgL+ZAUEIqCLi7KOwghr52AeTl2UnbYTAKt+12NJseAI8ebw==
+	t=1793187907;
+	b=f+y5Ny5kcKdsuzwW3r32roZN4IaGYKleojVWtYpff+nn0CNI1WG5v10wnnXGpuvkd644
+	 Syu7anUUvVrbytDdYRMo26+kWLUF9L3UItpJni4++N/bosmxBFSzw9Idi2SaZj+0JBvJt
+	 PwP9dQMxvn/mDg1W/f5AbZmIrUB0UMIAaOXFA9Et66AmexnD3X2Ww3t4KKsXDXnYJonQ9
+	 yRcrj3bldbg4unPnTY6dmlsDLvAyca1dKTg1IOONYSoWcVOw+LcXinRI5c0M0ZuWtUEQn
+	 4+n7H4PoamCUu3fQAqe740rJx3L+SOINWlb5GiiEBDmU80CWkjds4eGqOk2HZBAtH8g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793187419;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=kfHM+Ph/Km0Aq79HeXUuCHDrcDepQgLg0imUjp9EssQ=;
-	b=Ot05S9y2P2rD8Y8NnWmHP3ozOHnp4f3+FL0M+BqdyrJ5zzm17nvnpQXsAj0dojWTKvxX
-	 1JjOk0yE3gx7RhXb/ZSIYWZi+2t2U13GT2IlzVEXTvvVfv7VPb2tjGu1/29UEavwunXaN
-	 QhhvKv3/OGuYjZ6OC9Yc+U7U0wRIVGYBtoYzdWXihKd8EZXALnzbHJtPsHQqUBcA1SWY6
-	 wKGFShQFL3Ox7QLmkkVEKBuD4RD1a2jxqUQ1ckD63NyvzfcPd900wWNUwDLNjethGrrir
-	 9PAaAxlPSCqkVwnUm6m9nJTpvBE43XlVVDEURnAgYkePZoDOWd+sSbgIb1sKvStgRCQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793187907;
+	h=DMARC-Filter:DKIM-Signature:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:
+	 X-RM-TRANSID:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:X-RM-TRANSID:From:
+	 To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=QzHKW9rtLc5pIwwuROz+fvid8PAGUaQuBRU6aD/H4fQ=;
+	b=vUKSGv/fK3KIVyZm1iq5FEBriFY6vihvVOq8BMnHJ+D5Aou3p/M/W+C8lQJK1CVzTx8k
+	 APIMFbuNQLkBhwWFUm4km3OgW3IUQ9v+aCQSuoPf02ilI4+YokL2FzgHn9tkHh7JGlBEP
+	 g/pl3/F8k+ieMxp3uKO+Q4N7o+QdSplm04HUL0j30exwI+WjCp19PisfrdCORRBrwSLxY
+	 Xpdyit4GtWTpejr7hPfB5gWZlJ1yDoO3/EOPy2qBTy3cla0tRhVSkvtQBSso0qXZ++qlR
+	 +R4p74R5kX0Odr3iANr1tzBH/wvliXS3UW1Q+OwA2n9fVZWJb+JQ0cUkvo/tx38nvwg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XCuM+a8Q;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B700606A31E;
-	Wed, 28 Oct 2026 11:36:58 +0000 (UTC)
+	dmarc=pass header.from=cmss.chinamobile.com;
+	spf=pass smtp.mailfrom=cmss.chinamobile.com;
+	dkim=pass header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=bchd9uPa;
+	arc=none smtp.remote-ip=111.22.67.151
+Received: from cmccmta8.chinamobile.com (cmccmta8.chinamobile.com [111.22.67.151])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 11E1A606A32C;
+	Wed, 28 Oct 2026 11:45:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 11E1A606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmss.chinamobile.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cmss.chinamobile.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XCuM+a8Q
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C09DC1F01825;
-	Wed, 28 Oct 2026 11:36:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793187418;
-	bh=kfHM+Ph/Km0Aq79HeXUuCHDrcDepQgLg0imUjp9EssQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=XCuM+a8QFkySvyLuwDpXsfZSze5DWtYlnIu/VwcyYFveUJVJhx09AoEsqgaX9lDhJ
-	 bZCvP037+kc6GHS9JqNJ3+t5zU94D2w8BeAfwvje48RoUGHgB51Obh0SQDsITbRrev
-	 3BEI+k+JmFNfq4l8vgmcbx7Ql+srhbftkN4uADT/7/d/gS/GYIj69uUtWyige5l3+T
-	 4TD6Uc6vpoOxbp/WpAY/RreyXTNxYWIFjseRCEJxEw9aTa2brX5G5S1u2QCEdVo5Ao
-	 4Gi8//cKVZQ1pocuKfe3clRcROfoX1e8E8iOp51oT9CQyjtNy41MtCAFYXXBvuUP76
-	 UO0cOEsYWkzpw==
-Date: Wed, 28 Oct 2026 12:36:55 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Jeff Roach <jeff.roach0@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
-Message-ID: <20261028-beagle-of-perfect-tranquility-1305ef@quoll>
-References: <20261026154001.9323-1-jeff.roach0@gmail.com>
- <20261026154001.9323-2-jeff.roach0@gmail.com>
+	dkim=pass (1024-bit key, unprotected) header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=bchd9uPa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=cmss.chinamobile.com; s=default; l=0;
+	h=from:subject:message-id:to:cc:mime-version;
+	bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+	b=bchd9uPaxgu4WoejKkBT0DJtjE6+3sYpwtRJ24fInJ13Y53eJYG3OyHd+NwtnypcZ5zNKfRVQmV7a
+	 qz8GvVOFNfrhdailOsftmPKSwfZzeDSFgWTDxVW1Hso2l75LKpzSFDi3b1uuzOFdM/penVlDD3pvTe
+	 /R3TtA8aGhrxTdIk=
+X-RM-TagInfo: emlType=0                                       
+X-RM-SPAM-FLAG:00000000
+Received:from spf.mail.chinamobile.com (unknown[10.188.0.87])
+	by rmmx-syy-dmz-app06-12006 (RichMail) with SMTP id 2ee66ae1e03ee2d-2e102;
+	Wed, 28 Oct 2026 19:45:03 +0800 (CST)
+X-RM-TRANSID:2ee66ae1e03ee2d-2e102
+X-RM-TagInfo: emlType=0                                       
+X-RM-SPAM-FLAG:00000000
+Received:from FHA-W6400298 (unknown[10.55.1.71])
+	by rmsmtp-syy-appsvr07-12007 (RichMail) with SMTP id 2ee76ae1e03d4e9-0609f;
+	Wed, 28 Oct 2026 19:45:03 +0800 (CST)
+X-RM-TRANSID:2ee76ae1e03d4e9-0609f
+From: Tang Bin <tangbin@cmss.chinamobile.com>
+To: srini@kernel.org,
+	lgirdwood@gmail.com,
+	broonie@kernel.org,
+	perex@perex.cz,
+	tiwai@suse.com
+Cc: linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	tangbin@cmss.chinamobile.com
+Subject: [PATCH] ASoC: codecs: lpass-rx-macro: fix PM ref leak in swclk_gate_enable
+Date: Wed, 28 Oct 2026 19:45:00 +0800
+Message-ID: <20261028114501.2192-1-tangbin@cmss.chinamobile.com>
+X-Mailer: git-send-email 2.52.0.windows.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,21 +73,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261026154001.9323-2-jeff.roach0@gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 26, 2026 at 10:40:00AM -0500, Jeff Roach wrote:
-> Document the HP OmniBook X 16-cp1 laptop, based on the Qualcomm Mahua
-> (Snapdragon X2 Elite, 12 cores) SoC.
-> 
-> Signed-off-by: Jeff Roach <jeff.roach0@gmail.com>
-> ---
->  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
->  1 file changed, 1 insertion(+)
+swclk_gate_enable() calls pm_runtime_resume_and_get() (incrementing the PM
+usage counter and, via of_pm_clk_add_clks, enabling mclk) before
+rx_macro_mclk_enable(). On rx_macro_mclk_enable() failure it called
+clk_disable_unprepare(rx->mclk) and returned, leaking the PM usage counter
+and potentially unbalancing the clock that the PM clock domain also
+manages. The sibling tx-macro/va-macro drivers call
+pm_runtime_put_autosuspend() here; do the same.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Fixes: e38cbb75248a ("ASoC: codecs: lpass-rx-macro: Propagate regcache_sync() errors")
+Signed-off-by: Tang Bin <tangbin@cmss.chinamobile.com>
+---
+ sound/soc/codecs/lpass-rx-macro.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Best regards,
-Krzysztof
+diff --git a/sound/soc/codecs/lpass-rx-macro.c b/sound/soc/codecs/lpass-rx-macro.c
+index 282a6aaa9..1737d525c 100644
+--- a/sound/soc/codecs/lpass-rx-macro.c
++++ b/sound/soc/codecs/lpass-rx-macro.c
+@@ -3681,7 +3681,7 @@ static int swclk_gate_enable(struct clk_hw *hw)
+ 
+ 	ret = rx_macro_mclk_enable(rx, true);
+ 	if (ret) {
+-		clk_disable_unprepare(rx->mclk);
++		pm_runtime_put_autosuspend(rx->dev);
+ 		return ret;
+ 	}
+ 
+-- 
+2.52.0.windows.1
+
+
 
