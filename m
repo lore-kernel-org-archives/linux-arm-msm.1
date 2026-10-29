@@ -1,69 +1,122 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=31.44.14.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793302504;
-	b=xzEXb1UeXR7CIaZ/JTeRSLIznPm1lznP9f7IYnF0zgdSd5uSpI3HuhdApDimpKyEBnf2
-	 52QgGvAAjnH+orl4VuclkaaIK4D/0TnqpgtrOdTeEesx3ku0ckpuuXF2cvSwAyekvfjsg
-	 EqjfS5UQJ6gYHRQPhTYIvSxMZhFrRe4wB/B5tEdKihxvPNewOz1rq88b93oXbjh7h5cRP
-	 0hO4JvmHqLA9EOQ6g0jNgjYBnhydIiTwt7tyMusW4HyUBYwUkZ/FLPNg0bapY3gV5B2fq
-	 Jo9pP5DxOPa1t+ORnHxpbdTDhug8kR+eQcL9d12IwsiuBV48coGfty4YaM1X5lxfhAA==
+	t=1793305071;
+	b=eXYnwgP+haixfib655k1v3A1dc4r5DjaKVBKpGzGUatVxF5AwOzt1/tjLib8qljwT/rP
+	 ry7XcvVODCA7vc1ljuo5TYGgU1nJhdCc7AuqOVRVo8SIfIkjxNwQZplT32FUb0bJmqbt0
+	 qVF2vXY/V5A+5ddTdS6hWoE+hP4IbaHVTb8EFcVS55jPh2TIOj3PLeyPLfi3cdb0gS87w
+	 SGCmHc8v5q91AU4DK5XMke18B0bc5SyIVdXftHadvC74AL/LmuqLSm+Wz3WuFL9JfOKUH
+	 qzcBemCi/Un/T3TSboLsz4xoTiVNSJhJRefb3GIZ7WderWrJllOMLVM5CIX/+d2b+yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793302504;
-	h=DMARC-Filter:Received:Received:X-Yandex-Fwd:DKIM-Signature:From:To:
-	 Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=DWUyaicLfOcratOVaBCdZhUzQQOEKathswZorNrCFE4=;
-	b=0LKfguKuOHkhjxAYceprWlsZB3Cry73/nj65n6c7S8BQmi7jsPE8iZM6XcAXTZlBoNto
-	 vQhfueN1KigZukmLjZZ5QLdoAkgSsXvPtaJsZ0NabihSDPZxKIwhuvxgrKT0Mj52Inr3Y
-	 Lw6SzZ6ekQVVtN0W9UlLdieqrQWlK6qZ0u58tW7rIA43m0MuXd7c7FjctUzv0CPs9fHW2
-	 GHaNztxFJbT21gfjopQdqGB1gb8ThJTqMmU+VFMP4rixe9SAceJnq2sfCCJS7d062iCId
-	 nBBX4fiZRpPiI6j9IFfDMHSkUeQx9WFzZGWJ+v8dAdo4mcWgt+1gbTMoG3GJ504d1og==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793305071;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=4/SZ45DNk5ZF2RjfLf1m3kZqYrfwnIVOQiVIA5lFy5A=;
+	b=r7WT53fTPj9S6E0RVzYfQpjBjWzXa15VZeOqwZ9vGIzC0St5FoZj/B5yiD9vaa7mtTLj
+	 If26TNBL0+sXF1IEqtYOE3gNEG+Gz1vEgUUE+b35JSCcnJw7vzIPbUgsMNfEErrBEF58h
+	 TLN+qu+vr12gzP7oX4WRr4MrUl6sE/0e5E+2lOIkK6hM75Uyu1nbqYAw4PZ2fcmoQfrmb
+	 HS4keMJrtfkrkPxsdOYZ+BWQUg5g3bvDfkd9w0GVI6KuQGZ1NOcD3PrP+0DYOXP1NVE/t
+	 BrP6JglghgUChWM47oaWEuH1LchAGppFSqD1+N6KhLj3oYa2KfMcTDVqkXG/lVjz2Sw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=yandex.ru;
-	spf=pass smtp.mailfrom=yandex.ru;
-	dkim=pass header.d=yandex.ru header.i=@yandex.ru header.a=rsa-sha256 header.s=mail header.b=Hs16mx+A;
-	arc=none smtp.remote-ip=31.44.14.18
-Received: from forward502d.mail.yandex.net (forward502d.mail.yandex.net [31.44.14.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ChwukNLo;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Erxnkm3V;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D26DD606A338;
-	Thu, 29 Oct 2026 19:35:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D26DD606A338
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yandex.ru
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yandex.ru
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFED8606A322
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 20:17:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EFED8606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=yandex.ru header.i=@yandex.ru header.a=rsa-sha256 header.s=mail header.b=Hs16mx+A
-Received: from mail-nwsmtp-smtp-production-main-34 (mail-nwsmtp-smtp-production-main-34.iva.yp-c.yandex.net [IPv6:2a02:6b8:c0c:2499:0:640:3812:0])
-	by forward502d.mail.yandex.net (postfix) with ESMTPS id E6E49C014E;
-	Thu, 29 Oct 2026 22:34:53 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-34 with ESMTPSA id NYpk4nSh00U0-yggWupvt;
-	Thu, 29 Oct 2026 22:34:53 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
-	t=1793302493; bh=DWUyaicLfOcratOVaBCdZhUzQQOEKathswZorNrCFE4=;
-	h=Message-ID:Date:In-Reply-To:Cc:Subject:References:To:From;
-	b=Hs16mx+AKpbnw444v21SnTuRFA0QB0iohy/iIz/H8UJJKdnIjiS/8X2MvDBOe7xq0
-	 abIhUuBVLm3o72XXgZIz7mNRrW6DITjKF+Dwx5WJi8lAYVcYJfjKFQFB8wwGj0KrJY
-	 RYv+i4fTIDx9DB8SsE1twCSe+XFI13u3tLbCLKys=
-Authentication-Results: mail-nwsmtp-smtp-production-main-34; dkim=pass header.i=@yandex.ru
-From: Kupreenko Danila <keckerz@yandex.ru>
-To: sre@kernel.org
-Cc: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	andersson@kernel.org,
-	konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	linux-pm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v2 3/3] arm64: dts: qcom: tiare: describe CW2017 fuel gauge
-Date: Thu, 29 Oct 2026 22:34:17 +0300
-Message-ID: <20261029193417.551058-4-keckerz@yandex.ru>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ChwukNLo;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Erxnkm3V
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69TJkP8v775670
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 20:17:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=4/SZ45DNk5ZF2RjfLf1m3kZqYrfwnIVOQiV
+	IA5lFy5A=; b=ChwukNLoLCTLlXDyzf6shcNKytw98YN8RStYniIAH6u12rAdKpf
+	wHigsSlkU1UDCDo3DhHJIp2mDyjC3iNj1i4q+uIKRdUBFNlW/CvbrB1XoU/SNrCL
+	Cg/M6Z7doIGklIDowi1Hgl29RkLtg9cNB/aDlZ/PInqJOJS+g8YdS1m//OczWOFW
+	sAYzFWfpe7IBl5Z79iPAXmEbYAWKvS/XNP306w2TD8oPepOZZKJe6WJ1nOIeQ+EA
+	mVePCdZdxe1bSlImx7ksmgWVzPpiO90MQvIdOIWpieVhHzhNhKgTNB3JOA5TCuRN
+	sx8Bunax6bGlnCNQvqZGLnYec+uCy2yHMcg==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hmchhr443-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 20:17:49 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc7e92f36f9so1917906a12.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:17:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793305068; x=1793909868; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4/SZ45DNk5ZF2RjfLf1m3kZqYrfwnIVOQiVIA5lFy5A=;
+        b=Erxnkm3VwpQglmVfOQYHDA1oJvzHh2qGHisgcITFQVPpSqeiJ32YLFdH2uligf5jOQ
+         xKpGx9rMV+hhc8tGI57WcI/aAgf/kfwopNX/OcHbj2cGKgoYkOUV8BwmgdmZSXV2IPmP
+         76Rzhn57GUqn1yk2FCQPXOjzhmm9etNk9+wTBsLOv6gSn8v7oiFtxGCUJYKrV3MIrKzr
+         F7vcYut31TEZaWitnCwx45R2JkLdbg/eKOSRhmYoVilYidp77LXNav2zgFh1GyRuDqZB
+         jgV5tm6U5mzNSitGb2JpyBPqSZUiFVa48icSSc6ncpToFbkdZmqualAv2rNPpqrbRb+L
+         pvyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793305068; x=1793909868;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4/SZ45DNk5ZF2RjfLf1m3kZqYrfwnIVOQiVIA5lFy5A=;
+        b=QF5OlidbYkhMbgzt7Yivg45c4YF8dWTv5nTO5g8FDmbNkyAKz/QEGrwqJjy3broBVe
+         vRdJJPaK7uPWQleybi8zh5aycpwzC25fuTgM7Cj6S2ghNPFuSFpp7ee+OXB5kiyLIGvU
+         xUmmM79hd0Ggkajxw4GSH2KjaHiIwLQSeXcu3gQAjNFoB+OUBybNHbv42NIKiVvwMLTe
+         c4F4lqCAydOTs2Aogk3NiOMuS7ulR4+xB84uN3L5YHrJzychbTp1qqAJ6KSePXDP7tba
+         Mak6kPTd8lQ7Y13GpKEJL5wSj2PYP9tKWwD2kDjvyeNEg+t9nd4rCjJM7QgBMbgJPHWH
+         k9OQ==
+X-Gm-Message-State: AFq9FYKcDXu0aIEBIi8cM7BFxe+c6eue+bbDzJUnHAW0E/jray9P5PAe
+	aWRe+bcDcLVRAIDZO4z7v9Wzg+aDqsseEBZ6dQI/5LsSCZfcUpp4M9p8Iwf7FZalSlrppMFPsOb
+	MMEKKXObdfatP+h/Q6HH6tKJCPu5RjL8JDUErzTX4Jh49/laW5gGR1YJ1QTyoZAzJ6URx
+X-Gm-Gg: AYBFou3l8RbSCgkbWgWhwU5Mi3wXBa3Pf6or6iKKZqoJsjb0nNDJqNRi3QSDJzrko21
+	lT4S7UmlmGjqUtrEFtzCChHg79yYNOCWDYNlK7L5dBOWyOEBzkfNBuH4iCmiRCHW7fz7u9kBkOl
+	GeXwwgXeBMr22omZWrOcijSwB6UUVJS8t8cZ6dHDb29ZNB8h+6xfHic5WFQFizloGkuAtl9dsxV
+	2S0vqKaUuTovfMqOB7y+N9UQD/TvScTEv/rNXbXfkQQGllto6eKHUHbckxwVYobzNVAj8ReHj2K
+	8GHmCFq8yGE76P2GXRDNN3sfOpYvl/Qu5Pog+3UvHT+tEWWO/ort4wI5X4ppZnY5yA5359zvxIG
+	nsal6SAp95cpkw6npzEmmlmVcjoGlJX0UXhlTua5AA4yJeQ4MsoQqfCJ9UBX6SIdbq0LM2elpMM
+	227UuCj+H7WfLf3pj3T4MhYw==
+X-Received: by 2002:a17:90b:1188:b0:3ad:b7d1:8631 with SMTP id 98e67ed59e1d1-3ae897eb75bmr46544a91.17.1793305068338;
+        Thu, 29 Oct 2026 13:17:48 -0700 (PDT)
+X-Received: by 2002:a17:90b:1188:b0:3ad:b7d1:8631 with SMTP id 98e67ed59e1d1-3ae897eb75bmr46536a91.17.1793305067875;
+        Thu, 29 Oct 2026 13:17:47 -0700 (PDT)
+Received: from localhost (c-67-168-198-145.hsd1.or.comcast.net. [67.168.198.145])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae8803a80asm96244a91.3.2026.10.29.13.17.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2026 13:17:47 -0700 (PDT)
+From: Rob Clark <robin.clark@oss.qualcomm.com>
+To: dri-devel@lists.freedesktop.org
+Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+        Alexander Koskovich <akoskovich@pm.me>,
+        Jie Zhang <jie.zhang@oss.qualcomm.com>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        linux-kernel@vger.kernel.org (open list),
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>
+Subject: [PATCH v3 00/16] drm/msm/a8xx: GPU state capture support
+Date: Thu, 29 Oct 2026 13:16:10 -0700
+Message-ID: <20261029201730.151754-1-robin.clark@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261029193417.551058-1-keckerz@yandex.ru>
-References: <20261029193417.551058-1-keckerz@yandex.ru>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -74,43 +127,148 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDA3OSBTYWx0ZWRfX9f4svZ9M3Q7S
+ enBzCgUesywdZYOrVchJa1D9lmemettZPTVXSzUvc+JY0y3cTqE6j3OFSXXQMxAHkPC4LutJ/WR
+ 9YY0eiMxjVmXXPihMjei10osXhEH69Q=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDA3OSBTYWx0ZWRfX31FWA490a2/F
+ yNfVxIspn/JSyKrwB0sO+MdFTtUNOoe+6yzJPkiuAhOWeevZmr3d8X/RMBidXrj5P4lnhhMlyfm
+ eEL25eO4fQC2GfdMhiXQTlp+PqXzn+QVSTYenXENBEoB+tb4sh2fYvxtdIpisIk8mWKsxOBNAYT
+ iLtaDW8UYxUWkj50z62cWL8bONcMAuQ2uJvJrTkbj0BASFIvJIb70ldkR4k+qW+pj/5+rl+HEnu
+ /zjNfso59B6G56FHQg/3uHslsY2231deE3zT7JVGaxZoMuwCYC3dVOdQOeY0EyRDM0c9ND/lkrU
+ x+Ovb0t3zDInsgB8vKZyAUEvtPJCcqnCP4azdKEdn23ws20hvhG7hS+P3Ke2CE9jmbGTTzDf53N
+ jy15zGYZlKlbbvcwVXTo+oYhunRcP97e7VvdyaNokLijF8TeZpICc+9bWhNofr2FNlDi4YTu0CJ
+ J74i4ylasl8CE++mq9A==
+X-Proofpoint-ORIG-GUID: eIi2nkRxiHpEOFChV4rq1QeMUtrnZ8bj
+X-Authority-Analysis: v=2.4 cv=ffc4WEQF c=1 sm=1 tr=0 ts=6ae3a9ed cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=e5mUnYsNAAAA:8
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Xe6-QGUCc6mO8dw4QqkA:9
+ a=x9snwWr2DeNwDh03kgHS:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-GUID: eIi2nkRxiHpEOFChV4rq1QeMUtrnZ8bj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-29_06,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610290079
 
-From: Kupreenko Danila <Keckerz@yandex.ru>
+This series introduces gen8 devcoredump support.  Compared to previous
+gens, it:
 
-Enable the I2C controller at 0x7af5000 and describe the CW2017 at 0x63.
-The controller mapping and gauge response were demonstrated on Redmi Go
-with Linux 7.1.3. The independent monitor also registered power_supply
-on that kernel. No charger node or battery profile is added.
+1. Switches to generated tables.  Compared to hand modifying headers from
+   kgsl (which were originally generated, then adjusted a bit by hand before
+   adding to kgsl tree.  And then copied to drm/msm and lightly modified
+   some more in the process).
 
-The resulting mainline DTB is host-built and schema checked; it has not
-been booted on the device.
+   In the process, we also switch to generated cp_protect tables.
 
-Assisted-by: LLM
-Signed-off-by: Kupreenko Danila <keckerz@yandex.ru>
----
- arch/arm64/boot/dts/qcom/msm8917-xiaomi-tiare.dts | 9 +++++++++
- 1 file changed, 9 insertions(+)
+2. Aligns to the "snapshot" format that kgsl/etc use for hw state capture.
+   The non-generation specific bits (SMMU fault info, capturing relevant
+   BOs, etc) still works as before.  Everything gen8 specific gets encoded
+   as "snapshot" sections, ascii85 encoded in the resulting devcoredump
+   file (similar to captured BOs).
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-tiare.dts b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-tiare.dts
-index fe8442300..6d72a4763 100644
---- a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-tiare.dts
-+++ b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-tiare.dts
-@@ -14,6 +14,15 @@ / {
- 	qcom,board-id = <0x1000b 1>;
- };
- 
-+&blsp2_i2c1 {
-+	status = "okay";
-+
-+	fuel-gauge@63 {
-+		compatible = "cellwise,cw2017";
-+		reg = <0x63>;
-+	};
-+};
-+
- &pm8937_l22 {
- 	regulator-min-microvolt = <2850000>;
- 	regulator-max-microvolt = <2850000>;
+3. Try to make it easier to at least compare kgsl snapshot code with
+   upstream, for porting fixes/etc.  State capture is tedious and mind-
+   numbing, and the last thing you want to do when debugging a GPU hang
+   is going down the rabbit hole of having to first debug gpu state
+   capture.
+
+   However, I don't love kgsl_snapshot_add_section().  It does avoid
+   duplicating snapshot header stuff everywhere.  But the ergonomics
+   are not great.  So instead I went with "align with what I wish kgsl
+   looked like..
+
+The mesa/crashdec side of this is at:
+
+   https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/45304
+
+I'd appreciate tested-by's on Hawi, Maili, Milos, and Pakala, since I
+don't have these devices at-hand to test myself.  To test devcoredump,
+you can use the msm_recovery test in igt.. or just:
+
+  cat /sys/kernel/debug/dri/*/gpu > /dev/null
+
+NOTE: I'm still tracking down some descrepancies compared to kgsl.  I
+      think at least we should be matching on the excluded access-
+      protected regs, so hopefully collecting a devcoredump doesn't
+      make things go boom.  Tested on glymur (windows fw) and on
+      kaanapali MTP (android fw).
+
+NOTE: Uses $codename for generated file/table names, rather than continue
+      to perpetuate the equally meaningless gen8_x_y naming from kgsl into 
+      upstream.  At least the codenames are familiar upstream and this
+      removes an extra level of name translation.
+
+v3:
+- Drop generated nonctx list for now
+- Exclude access protected registers
+- Shuffle around some debugbus blocks to match kgsl
+- Use CP_PROTECT_PIPE regs to pickup the extra spans if we exceed the
+  64 CP_PROTECT_GLOBAL regs
+- Inhibit IFPC for gpu debugfs dump
+- Fix cx_dbgc capture
+- Misc other small fixes
+- Link to v2: https://lore.kernel.org/all/20261021204244.67160-1-robin.clark@oss.qualcomm.com/
+
+v2:
+- Fix incorrect protect list for Kaanapali
+- Use __free() for snapshot_sect finalization
+- Fix missing early return error path in gen8_snapshot_mempool()
+- Fix aperture setting in gen8_legacy_snapshot_mvc()
+- Fix first_slice in gen8_snapshot_mempool()
+- Remove GBIF regs in generated nonctx list
+- Link to v1: https://lore.kernel.org/all/20261020204728.28844-1-robin.clark@oss.qualcomm.com/
+
+Rob Clark (16):
+  drm/msm: Import adreno_snapshot.h
+  drm/msm/a8xx: Export aperture helpers
+  drm/msm/a8xx: Add a8xx_aperture_acquire_raw()
+  drm/msm/a8xx: Export slice helper
+  drm/msm/a8xx: Add missing a850 ifpc reglist entries
+  drm/msm/a8xx: Allow nonctx reglist to include GMU regs
+  drm/msm/a8xx: Stop getting GMEM_PROTECT from nonctx list
+  drm/msm/adreno: Fix PROTECT span length
+  drm/msm/adreno: add temporary __maybe_unused
+  drm/msm/a8xx: Import generated headers
+  drm/msm: Inhibit IFPC for state snapshot
+  drm/msm/a8xx: devcoredump state capture support
+  drm/msm/a8xx: Add all CP_PROTECT_PIPE to pwrup reglist
+  drm/msm/a8xx: Use CP_PROTECT_PIPE regs
+  drm/msm/a8xx: Switch to generated protect regs
+  drm/msm/adreno: Remove temporary __maybe_unused
+
+ drivers/gpu/drm/msm/Makefile                  |    4 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |    7 +
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.h         |   14 +-
+ drivers/gpu/drm/msm/adreno/a8xx_catalog.c     |  398 +--
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c         |   65 +-
+ drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c   | 1402 ++++++++++
+ .../gpu/drm/msm/adreno/adreno_gen8_snapshot.h |  576 ++++
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h       |    2 +
+ drivers/gpu/drm/msm/adreno/adreno_snapshot.h  |  529 ++++
+ .../drm/msm/adreno/catalog/adreno_glymur.h    | 2307 ++++++++++++++++
+ .../gpu/drm/msm/adreno/catalog/adreno_hawi.h  | 2387 +++++++++++++++++
+ .../drm/msm/adreno/catalog/adreno_kaanapali.h | 2317 ++++++++++++++++
+ .../gpu/drm/msm/adreno/catalog/adreno_maili.h | 1882 +++++++++++++
+ .../gpu/drm/msm/adreno/catalog/adreno_milos.h | 1977 ++++++++++++++
+ .../drm/msm/adreno/catalog/adreno_pakala.h    | 2161 +++++++++++++++
+ drivers/gpu/drm/msm/msm_debugfs.c             |   10 +
+ drivers/gpu/drm/msm/registers/adreno/a6xx.xml |    4 +
+ 17 files changed, 15726 insertions(+), 316 deletions(-)
+ create mode 100644 drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c
+ create mode 100644 drivers/gpu/drm/msm/adreno/adreno_gen8_snapshot.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/adreno_snapshot.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_glymur.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_hawi.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_kaanapali.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_maili.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_milos.h
+ create mode 100644 drivers/gpu/drm/msm/adreno/catalog/adreno_pakala.h
+
 -- 
 2.56.0
 
