@@ -1,78 +1,50 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=18.194.254.142
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793266883;
-	b=WUx5X4zYb1ApjxQdCfwBNEbbDwlkUaga4p6nQeblqAk/f7B8VMm5ZoBJJzOFCEmdcHjA
-	 KoGn08BhRmzY30hxRRIuQ0c9wS0BUCXM1x2Wr1bn5F0Lds9qwaLXoE6RETBjeN0jc4uKN
-	 70/VmJDcqVVgABpCxcoJnoHIKqR3h/OLggNpfE0wQsIKpYfoAjO+4+AkfBZ5hyZyFJhW1
-	 cx+AExY0mZ6fcG+cgK+Xf2UnilrDTmWnAiTu9+z1/m6s0Onde+oCGLkSjU1K29+Ywm9cY
-	 J6tSCjXt8mwnHsayy3PQrhuxVJ9c+/SM1roASCCuG++sfSofQL3T9ZVFvpkEfPIWdTQ==
+	t=1793267115;
+	b=xoH2AKDUWBoYGeWN+zA/C0Y36R3WE6dpXQmnQTZhcG2zfEm+DBZhup+lnO4p6uYE1+1f
+	 SEdGB5SLlncXl1wOLqax+azdyT8neAqGxaN0mH4g/4pKtLuBgEHc+PNldXd5fhV/nb5+5
+	 vKB3fGJKQlvnkj+9egG5vD1xtYwWC8tOwjqGeU2hrf29R1V/0/8u85EIns394Qit7RYMd
+	 wXeN+WNXTg8EsZ0mbuGe0jx11f5Bdai2DJEB/be/ECwsOXbZT58QQhd/sBZK4/q7jWNQI
+	 aB4ftWrc7KuY16rdMyDHv16iDKXn8c5qWxU5RCAnEbZPn8bMfAFaT5+ZGbVHsTlMT1A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793266883;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
-	 X-QCInternal:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=JTHGoOuncVyyz23SHRQpWBGo31F+kUVmJ+b/5MlFdEA=;
-	b=THbSuaNVJbDESUlhXZQhQEIU7Vdb6pNWLils/v4UDhGE4ng1o+a+SPGWmnWR6GlYCfcp
-	 NNsjcbTmzry/YGSGOREVeUu1prgYcC5hvNfMKN5E80sH+hHkTLiHO8P4oWwV6rU4uuo3q
-	 NB9a40OfsgMi9+0XTXYOAWig/aNUQZAbNpwZfivwpcJGxPmlhHZiYvkTRvS3Hy2soJBC2
-	 kNsdVPBtj1IowDwqXAJVjTptw3+ocYsymVWrU8Gvz8r1eF0LOdeI7hCOb2wwsl0bmbtse
-	 EQYckeMY/djWODtnJyoaEJjWIjlvTbstmO3IIpKNa/7KreIYG1Vsq8wWNhT9q1nds9w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793267115;
+	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
+	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:
+	 X-QQ-RECHKSPAM;
+	bh=I6pGS9HlPdajy6JVHzNvNG5YnPfZi+MQBITdwkrjbpg=;
+	b=3spxHI+sQt0oB4PG7RBGdN7dALuCy3OFB6Y9hzBMDLekehA9KWycd5yMznKn+8ztT2oF
+	 6uVryobl/Y0ysQTrKwPrEvI0zMGFntq6aLBzjqgd0jLHSpLvViIRPg+Sh0/IC7v8D0Gm5
+	 UgNL6B0W7OREZLjpN1oZFXpYE/cB7P3s7sXR6V6zMy7Eh4mDW9znlMQZg917b1YkFWcVL
+	 F8/nWTX4e7jaFDotZnhpNWnRYIWmubIYAIGUr6WAntzl3ZlOG1kFgwoEiMIBqdb0YKhyr
+	 hoIBWSZpseqRZN9ncf3mosdO+QyjPJKWRr3nbJnbr8dVWW1VLip8KvKhSiTktESc2Ww==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KsgjQtZI;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=radxa.com;
+	spf=pass smtp.mailfrom=radxa.com;
+	arc=none smtp.remote-ip=18.194.254.142
+Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FA98606A31A;
-	Thu, 29 Oct 2026 09:41:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7FA98606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KsgjQtZI
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69T8vHUJ3766082;
-	Thu, 29 Oct 2026 09:41:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=JTHGoOuncVyyz23SHRQpWBGo31F+kUVmJ+b
-	/5MlFdEA=; b=KsgjQtZIuiozwswFr59FMp1BTN3qP4PWmyEZFrC3JBvco2K3E3v
-	9I3jfmLNX3ctVFtWrNxyZVHZvQFg3l5XC5Z8NNdSRx1F0MKY8cTVJ4YKj6i6VXPu
-	Nhqqo6m2WeNJfW0ISF9s02tPIHxGDhB1bYLW6FcMSIUlSc1/vHfrDOunVPPzUXPL
-	/X0HUVZG0f3I6hR3VoCOdrQCxyjQuIa/sMwwx3YqBL7W+jcGrDxwjuqr6ZFi7auz
-	G4OxkVUJM/VTsKn5X1oqTsri9gsr+QgSKCiPleJqagzDJrG6Pcn5rZbjpCL/bdML
-	DWFNc7Q/x4ZclFkzaglEWft5Sy7WvkMs65g==
-Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkpgptxqd-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 29 Oct 2026 09:41:18 +0000 (GMT)
-Received: from pps.filterd (aptaippmta02.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69T9fGWO680360;
-	Thu, 29 Oct 2026 09:41:16 GMT
-Received: from bt-iot-sh02-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 69T9fFlO680353
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 29 Oct 2026 09:41:16 +0000 (GMT)
-Received: by bt-iot-sh02-lnx.ap.qualcomm.com (Postfix, from userid 4467392)
-	id 2ACBE279AC; Thu, 29 Oct 2026 17:41:15 +0800 (CST)
-From: Jinwang Li <jinwang.li@oss.qualcomm.com>
-To: Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Cc: linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, cheng.jiang@oss.qualcomm.com,
-        quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
-        shuai.zhang@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com,
-        jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com
-Subject: [PATCH v1] Bluetooth: L2CAP: Ignore connection responses with wrong ident
-Date: Thu, 29 Oct 2026 17:41:04 +0800
-Message-Id: <20261029094104.2952304-1-jinwang.li@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2E2C606A31D;
+	Thu, 29 Oct 2026 09:45:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2E2C606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpip4t1793267081t50177237
+X-QQ-Originating-IP: NhZPlk1+WIs/nEBYGHCH1CYwxEn5UdbQk/jw1hYepC4=
+Received: from [192.168.30.244] ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 29 Oct 2026 17:44:38 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 16080051997495535406
+EX-QQ-RecipientCnt: 31
+From: Xilin Wu <sophon@radxa.com>
+Date: Thu, 29 Oct 2026 17:44:28 +0800
+Subject: [PATCH v3 1/4] arm64: dts: qcom: sc8280xp: enable PCIe ECAM and
+ 64-bit memory
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,68 +54,184 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDAzNyBTYWx0ZWRfXz75S4wTudydg
- gYuyP2AtAjlcWdvkpDMlJJ9y46PCAbiL1KSgoOxUARIJktLRjc28ALEn5UA95tioZvS3IX0WsQm
- JhFNKk/2QQ+AhbP+6FU/750AdxwQgABDQCgsuuj4RBdUOX9tMI/Pk8YOa+7KcWCth+DYPtvS/wO
- prLToRBR7FLEH71HXwcGmPkv8nSCTEvT5ZUlg3iV72l4yoVfT64N0Bm4k9eZumtuLmMfiI4KJ1d
- JvkyIxR6tJv02Vx/5hGEPHY7xEKwo6gFW8bOz1GUQ4FtiKqCZaIYt16QxvDCuwwHxH+61ZV/vL5
- Rwi5yOcIDe2Uev0NT/K1STZx/SXfnQVtS1sftwZ4VqBRKihABCgV6oVflRXUraJCK0VFjaMBwFv
- C32661Z83R4QlmJLb8bSYp2NC5Z/abkrntiYHIZ7DW60mcC9JGuKHwmgIqJ+HsZ9u0+5cBqrb1R
- R0asKaPDxhw2FBm9a4Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDAzNyBTYWx0ZWRfX7TJAUK0LEgCA
- LXMTFktHY5CQWQ1J8vhh3w5eVJWrsFK7mQnZxKIgL1MtFB5G0OWWtW1dijbg3DqxJgIUSD2bPgU
- fZ+DsLkOAMaZNzfMdfoLWnXzw5UaWh4=
-X-Proofpoint-ORIG-GUID: 9GbqUGv2ghJh9jGwKREdmPenurSfUUQk
-X-Proofpoint-GUID: 9GbqUGv2ghJh9jGwKREdmPenurSfUUQk
-X-Authority-Analysis: v=2.4 cv=T4oZ3PKQ c=1 sm=1 tr=0 ts=6ae314bf cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8 a=p-q-TKNVD4YfABw5gyUA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-29_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- clxscore=1011 lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610290037
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261029-q8b-dts-v3-1-655696dfec45@radxa.com>
+References: <20261029-q8b-dts-v3-0-655696dfec45@radxa.com>
+In-Reply-To: <20261029-q8b-dts-v3-0-655696dfec45@radxa.com>
+To: Bjorn Helgaas <bhelgaas@google.com>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Abel Vesa <abelvesa@kernel.org>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>, 
+ dragon@radxa.com, Xilin Wu <sophon@radxa.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5116; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=ZKeyJhuJk5Q9HhRIB0I7m7yyN1y8Ot222NY5V9safMA=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFmPRRu90jdsX59iVaX6QvHgk1Ufind9aOY/9/UNe5oC7
+ +SENR8Wd5SyMIhxMciKKbIoxDPMZa/MvfZUrFQPZg4rE8gQBi5OAZjIsU8M/+ztjvXcF7Gfc1hq
+ 0x0PliafqMx5eZc6VO57pd5NznefZcLIcCLMpP2ekk1MrsSN7bqGkzbcVS0+4mlxwFH3mlfFk85
+ 4PgA=
+X-Developer-Key: i=sophon@radxa.com; a=openpgp;
+ fpr=205F009D07796DD6E516752E32C31567AD9E324E
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: MLnLowx4CbXM9c1jenNX3SLALNkVFZdBwcEO69+0Tmm7Bc7ofMOr5fA2
+	AYZNxxgbjTgyC6EYnrs1e6N7+9UGWU7y0vb2ORZS6/FjidWq8t/C3i5n3WlvmsfIzgu/0Cn
+	gDCo+yXaA9V47I/QvpWAZ9iwf5U6QLUgkOGjyCCCLK4TIJypnmzzxQbo3qQvAA421yfB/Rm
+	4JjjzyTzSka6J0cizxw2P6E4D3f0lzbiI7ahyT+4OOBvVbz5jg8yt3/+Ucg8CLXUnmXMSiK
+	9u+0hiqSGqqtLHjC8ztWN4ngSYo1sfC21PHu+3Mzn6lUhRJqGa4IZwwPBiHild+OHVyjWXw
+	o1cLzrB1yIqJyPDQXyBlobY5DHASpPmDHoAt1a4/xsffydRHr5W0CHSRjfTD1ickNbWJ70M
+	YjQ5VgKbpe0bfN5yFUOOJroTLeG1fka9NAnziztyUWa5ruAygRTyY7KtiYW/RyjyqUetro8
+	41kXQ9wMwdoNVvVo351mYcfgN/Kn5BXnZ2lyEJ18pb1zcEA6EBS8123Zf9FWd1/3XvRrrZ/
+	I+ZZcdAojphKb3utsLHbE2QbNmrMUN4B+LA8c8UTPYPb9Rcs0dqsHllbphK3Rj5PMqIbbnn
+	/PGBtE1nK87Uojy94Xk/ibXASLMjRvd4oGBWdIvLyk0AJhu2Wg9TI9tdflKm7BTV+eh+l10
+	n51G/RYtJooviI83HaD3E6XxbBEzHq5xfDNAHJ3I/yTK2kidTuwav1CXIyz/JD2InuBCr+P
+	B4PGX2T2w/0F5+i9ecTfNKq8uY90m3T+cL4C0miJzjXwfzgmp2TXN1R3gVqgm4f6jExsalV
+	eGYmyoeiYUG0oLVsKN+F3SqQg9SS64vpg/qS8MQpdaGrYHXEc4vbe7u7e8tMgrKJ1Ddmm7c
+	lIWY0ZmprRyf/pdiQlMQVQBCfealHtjRFKRa3yY/qejYdPAxiLUH0tGOYlIcr7/psNydnJK
+	AuojOiYbgKVyHKEBM94AsowNcXE6xFNk2aPFq175iSqWxw6odjxz+1SNa3OlxJgFUiWY4sy
+	8/yv/KrBY0MNVkIBRj9rFmUAt1z6lLhKJG3kgfT7KEemb3xflw5p5TdNlhEEiVOYrzN+kpi
+	TeN5xRhesAA0VY9Yj70k7Wa2OvMRLRg65TzHblcm+rifx66hwXqQMc=
+X-QQ-XMRINFO: Nq+8W0+stu50tPAe92KXseR0ZZmBTk3gLg==
+X-QQ-RECHKSPAM: 0
 
-L2CAP/COS/CED/BI-28-C requires the IUT to ignore a Connection Response
-that carries an invalid Identifier.
+Enable ECAM to avoid reprogramming iATU on every downstream configuration
+access, reducing latency and CPU utilization. Add 64-bit memory windows
+for devices with large BARs, such as discrete GPUs.
 
-l2cap_connect_create_rsp() only checks that a connection request is
-outstanding, not that the response answers it. Add an ident check
-against the pending request so that a mismatched response is dropped.
+Preserve the SA8540P PCIe2a and PCIe3a address maps to avoid regressions
+due to firmware differences.
 
-Signed-off-by: Jinwang Li <jinwang.li@oss.qualcomm.com>
+Signed-off-by: Xilin Wu <sophon@radxa.com>
 ---
- net/bluetooth/l2cap_core.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ arch/arm64/boot/dts/qcom/sa8540p.dtsi  |  9 +++++++++
+ arch/arm64/boot/dts/qcom/sc8280xp.dtsi | 25 +++++++++++++++----------
+ 2 files changed, 24 insertions(+), 10 deletions(-)
 
-diff --git a/net/bluetooth/l2cap_core.c b/net/bluetooth/l2cap_core.c
-index 83b622a42811..70ad30b091e4 100644
---- a/net/bluetooth/l2cap_core.c
-+++ b/net/bluetooth/l2cap_core.c
-@@ -4480,11 +4480,11 @@ static int l2cap_connect_create_rsp(struct l2cap_conn *conn,
+diff --git a/arch/arm64/boot/dts/qcom/sa8540p.dtsi b/arch/arm64/boot/dts/qcom/sa8540p.dtsi
+index 23888029cc11..e5393a237497 100644
+--- a/arch/arm64/boot/dts/qcom/sa8540p.dtsi
++++ b/arch/arm64/boot/dts/qcom/sa8540p.dtsi
+@@ -180,6 +180,15 @@ &gpu_smmu {
  
- 	lockdep_assert_held(&chan->conn->lock);
+ &pcie2a {
+ 	compatible = "qcom,pcie-sa8540p";
++	reg = <0x0 0x01c20000 0x0 0x3000>,
++	      <0x0 0x3c000000 0x0 0xf1d>,
++	      <0x0 0x3c000f20 0x0 0xa8>,
++	      <0x0 0x3c001000 0x0 0x1000>,
++	      <0x0 0x3c100000 0x0 0x100000>,
++	      <0x0 0x01c23000 0x0 0x1000>;
++
++	ranges = <0x01000000 0x0 0x00000000 0x0 0x3c200000 0x0 0x100000>,
++		 <0x02000000 0x0 0x3c300000 0x0 0x3c300000 0x0 0x1d00000>;
  
--	/* Only accept a response to a connection request we sent and that
--	 * is still outstanding. A channel waiting in BT_CONNECT for security
--	 * or the feature mask has not sent one yet.
-+	/* Only accept a response matching a connection request we sent and
-+	 * that is still outstanding. A channel waiting in BT_CONNECT for
-+	 * security or the feature mask has not sent one yet.
- 	 */
--	if (!l2cap_chan_connect_pending(chan))
-+	if (!l2cap_chan_connect_pending(chan) || chan->ident != cmd->ident)
- 		goto done;
+ 	linux,pci-domain = <0>;
  
- 	switch (result) {
+diff --git a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
+index d17475c3e66c..0c4abf60d1d2 100644
+--- a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
++++ b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
+@@ -2161,13 +2161,14 @@ pcie4: pcie@1c00000 {
+ 			      <0x0 0x30000000 0x0 0xf1d>,
+ 			      <0x0 0x30000f20 0x0 0xa8>,
+ 			      <0x0 0x30001000 0x0 0x1000>,
+-			      <0x0 0x30100000 0x0 0x100000>,
++			      <0x4 0x00000000 0x0 0x10000000>,
+ 			      <0x0 0x01c03000 0x0 0x1000>;
+ 			reg-names = "parf", "dbi", "elbi", "atu", "config", "mhi";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			ranges = <0x01000000 0x0 0x00000000 0x0 0x30200000 0x0 0x100000>,
+-				 <0x02000000 0x0 0x30300000 0x0 0x30300000 0x0 0x1d00000>;
++				 <0x02000000 0x0 0x40000000 0x4 0x10000000 0x0 0x10000000>,
++				 <0x03000000 0x4 0x20000000 0x4 0x20000000 0x0 0x20000000>;
+ 			bus-range = <0x00 0xff>;
+ 
+ 			dma-coherent;
+@@ -2273,13 +2274,14 @@ pcie3b: pcie@1c08000 {
+ 			      <0x0 0x32000000 0x0 0xf1d>,
+ 			      <0x0 0x32000f20 0x0 0xa8>,
+ 			      <0x0 0x32001000 0x0 0x1000>,
+-			      <0x0 0x32100000 0x0 0x100000>,
++			      <0x4 0x40000000 0x0 0x10000000>,
+ 			      <0x0 0x01c0b000 0x0 0x1000>;
+ 			reg-names = "parf", "dbi", "elbi", "atu", "config", "mhi";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			ranges = <0x01000000 0x0 0x00000000 0x0 0x32200000 0x0 0x100000>,
+-				 <0x02000000 0x0 0x32300000 0x0 0x32300000 0x0 0x1d00000>;
++				 <0x02000000 0x0 0x40000000 0x4 0x50000000 0x0 0x10000000>,
++				 <0x03000000 0x4 0x60000000 0x4 0x60000000 0x0 0x20000000>;
+ 			bus-range = <0x00 0xff>;
+ 
+ 			dma-coherent;
+@@ -2383,13 +2385,14 @@ pcie3a: pcie@1c10000 {
+ 			      <0x0 0x34000000 0x0 0xf1d>,
+ 			      <0x0 0x34000f20 0x0 0xa8>,
+ 			      <0x0 0x34001000 0x0 0x1000>,
+-			      <0x0 0x34100000 0x0 0x100000>,
++			      <0x4 0x80000000 0x0 0x10000000>,
+ 			      <0x0 0x01c13000 0x0 0x1000>;
+ 			reg-names = "parf", "dbi", "elbi", "atu", "config", "mhi";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			ranges = <0x01000000 0x0 0x00000000 0x0 0x34200000 0x0 0x100000>,
+-				 <0x02000000 0x0 0x34300000 0x0 0x34300000 0x0 0x1d00000>;
++				 <0x02000000 0x0 0x40000000 0x4 0x90000000 0x0 0x10000000>,
++				 <0x03000000 0x4 0xa0000000 0x4 0xa0000000 0x0 0x20000000>;
+ 			bus-range = <0x00 0xff>;
+ 
+ 			dma-coherent;
+@@ -2496,13 +2499,14 @@ pcie2b: pcie@1c18000 {
+ 			      <0x0 0x38000000 0x0 0xf1d>,
+ 			      <0x0 0x38000f20 0x0 0xa8>,
+ 			      <0x0 0x38001000 0x0 0x1000>,
+-			      <0x0 0x38100000 0x0 0x100000>,
++			      <0x4 0xc0000000 0x0 0x10000000>,
+ 			      <0x0 0x01c1b000 0x0 0x1000>;
+ 			reg-names = "parf", "dbi", "elbi", "atu", "config", "mhi";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			ranges = <0x01000000 0x0 0x00000000 0x0 0x38200000 0x0 0x100000>,
+-				 <0x02000000 0x0 0x38300000 0x0 0x38300000 0x0 0x1d00000>;
++				 <0x02000000 0x0 0x40000000 0x4 0xd0000000 0x0 0x10000000>,
++				 <0x03000000 0x4 0xe0000000 0x4 0xe0000000 0x0 0x20000000>;
+ 			bus-range = <0x00 0xff>;
+ 
+ 			dma-coherent;
+@@ -2606,13 +2610,14 @@ pcie2a: pcie@1c20000 {
+ 			      <0x0 0x3c000000 0x0 0xf1d>,
+ 			      <0x0 0x3c000f20 0x0 0xa8>,
+ 			      <0x0 0x3c001000 0x0 0x1000>,
+-			      <0x0 0x3c100000 0x0 0x100000>,
++			      <0x5 0x00000000 0x0 0x10000000>,
+ 			      <0x0 0x01c23000 0x0 0x1000>;
+ 			reg-names = "parf", "dbi", "elbi", "atu", "config", "mhi";
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+ 			ranges = <0x01000000 0x0 0x00000000 0x0 0x3c200000 0x0 0x100000>,
+-				 <0x02000000 0x0 0x3c300000 0x0 0x3c300000 0x0 0x1d00000>;
++				 <0x02000000 0x0 0x40000000 0x5 0x10000000 0x0 0x10000000>,
++				 <0x03000000 0x5 0x20000000 0x5 0x20000000 0x0 0xe0000000>;
+ 			bus-range = <0x00 0xff>;
+ 
+ 			dma-coherent;
+
 -- 
-2.34.1
+2.56.0
 
