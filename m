@@ -1,11 +1,11 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1793267737;
-	b=OD7D4UQ7uBk29twHkzRupa/7hdICs/royy6nFQYH7hbUF+6ms4YIZRoSvg7tZcSsSjDd
-	 l+6KHwBND/MFYMV6HPDMXTVXxrAWlwU8YQhwKoCmlr+hpmHOs/l+E9g0IlCs3bwMjhvwx
-	 GMIGrFBefuH71VZZA6c80qdwRvBdwTsLlx9jlml8DUb1ED03Kc9dNSSvkKCXtSnytu/9T
-	 IVdaTRr2E3ZeefC8MztB8AclmaJAZdafva4tdcdulGdjHDuPpyILdMaZCmEqbBJVOPhq0
-	 uUDDsWlxyL9Dqf97/JPriKVuoZA8LzPqSoQ5PrVPA65sS8nuqd+hZQizaBkhucj5whw==
+	b=a+9kP6TirEh3id0C63I/NSmgcHD02Z20kWlKLXN5ETmrSvqHvXXfTxdw+MJqkjfZeRxi
+	 P0w9MNA22bCG6ay2gRJr7i6RnGKV1SlC4cwwKmq3Af/BuEmOj7AzgvW58kcs8wC0n2qMF
+	 LJsjBgfmkK6L+lQFI83840q2QTBUCzwNAMnX1XdDLkfREgHI7dGP1/T0YzciaOYEiU3+y
+	 5/0MT5F3ie69Jn6ZT6M0dVSLSzcA3VfwNZqhOTVgY9Egb+i8dFk9Ml+ktelnwlSwpkPnw
+	 RDrWa2pCrn0xEZs+THzpRWUg+su62tc+ThqO6xhigRW5paNgP3RyXdgZEVruKSg78Zw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1793267737;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
@@ -13,77 +13,77 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 From:X-Google-Original-From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=tsHJAqJzVJK5StZwQ/IGYfPmYXMlz4wWAMnosjbM5LM=;
-	b=sv9pZTp+hPrS9D5LB7bnc5kzr+lWTQExjnBQx779KcQ+8L7t6I6TgWZQUtIseoo9ccvR
-	 ePeOZuGKY6toreBBbCsS84ewokNC+/ZgFjU9iRYxSfQAVBKd5UNAgDPpdUew4r9xN/9o/
-	 s9tAXWsR2JEanfPCrpy61uAlw+XosbTSysGSbDKIKF766si2cUlkcM/nHx7Vs5f+jhQaA
-	 Kdn6jO27rpp5tY/jjjxa4p3jhStFTqpUHKbTsKJlS7W0HwKA/D6qFFes8j7NUNxAESVB/
-	 1ymZ+co0mp2L8E7YGp8BnVkU8gc718FU07BY8Ijted1Z2wj0RnfP1kE26QmvR2++8aw==
+	bh=PrCbcHJkhdjSbNCRqk8yeYIRKNcSPa31zVUyGmEiOBA=;
+	b=J8FNwR3i2HhdEytcGAFL8Uhs283278LWR5XO8NSNNJPlhdWeicXlnoNau8nVMy4bx0nk
+	 9/HJdXsVNs/CRSwQ92NV/Y7q7sL2eHNw1OqjDDannf3JjwAi95p7g/aOXA6XxM4abwhjm
+	 2dCuDquDNKq47rjrfFiV7gcN4RLyBdoLLM20kHXfXr5v5/G5HNqyatGrUevYjbX4C9WuM
+	 zL+PdAfBIytEBUGSf9Qho+LjlbyOhb0EL27EaI6KuJs4x0TtiBCrS89kfSUZxBPX+1vwL
+	 gNOesKhMnZq3gZppPNMDN9EGjjE0uypyPtGp6lFRnRlc/zhL/KPcsNMe/pYcndPd/qg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="CGMUh/mk";
-	arc=none smtp.remote-ip=209.85.221.53
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="w/dWBbx+";
+	arc=none smtp.remote-ip=209.85.221.50
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C03F60A3829
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 09:55:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5C03F60A3829
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2223360A3839
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 09:55:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2223360A3839
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CGMUh/mk
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48e00eee27dso1405618f8f.0
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=w/dWBbx+
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-48e20ed3b9dso1477769f8f.2
         for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 02:55:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google; t=1793267735; x=1793872535; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tsHJAqJzVJK5StZwQ/IGYfPmYXMlz4wWAMnosjbM5LM=;
-        b=CGMUh/mk8Rdot8aWrDqkerskWgkN1ZWGTn+KNcvoW7PSLUH5L01ik6TMFJ8Xe5qLlF
-         J/7wxzL/Qrvb6be16BQPsKJ1BDpMpgRwBbGGyskXymZ2yX0WkNJImR0laaDQOfuvc3yN
-         hZZnV29Ai6/AkdrP+VtJa+6KF0+J9pHgIw0U7al0N1F6GiZTxWTylLG35otQKPeO9d6s
-         OrIkNBSE4L7uyZvtm8vCPzolIQB0DlH2I86j3x7ZCj8x1DS28diXZD7jES7kj32fgDe8
-         10eUPH4p3FpB9oKR6OB7q3MaXR7xfJsUA9l4aVOoxdaQZH2qE7yZSK54cFk9L9nMEMKa
-         CHDQ==
+        bh=PrCbcHJkhdjSbNCRqk8yeYIRKNcSPa31zVUyGmEiOBA=;
+        b=w/dWBbx+CovOJKWQFEnbdicxeJ5/ehGu7760QZ51KYotDAAc4mtgqCtarSBZH1/oAU
+         ip+Xs2ydYAOcGXxMRQFcaxbzxFjOCnQcMQ/xe1UwBBgVdCW1j7UVY9khh2sFENYKRUpm
+         +KOPpjGAKTOyLh+LXJEzWQiaeDS1UEAqMntso7a5ZE9TwqgKNer1AjnTtWCvuK9xrwXS
+         1bQkFGhFiHY3JOk3jRN5y0CTSqO2HsletEYsx4PwtN5Kafne6vq8FTeq/PBp4BLozZls
+         8h4pUao6y7Is+WS7EGHn2PNQtM4LMCZ9uNJAARU27ZlejYNasKJp6odIpME0h/6DdlrQ
+         pDoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1793267735; x=1793872535;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tsHJAqJzVJK5StZwQ/IGYfPmYXMlz4wWAMnosjbM5LM=;
-        b=J5+wo21CWAciQ+wTH8KmXykRDYJfS5dT2XpiWd9vjYuBbzWB9PQGLIrpWTOjcFh4nP
-         alj5xSftEqg8Z1zdMvcuu4Vi5ZiPP2Yw/CLBRtG6j7gIQPQzGDopOIXM6UAPBwjyQxyy
-         2ksiVbFGDOW9Jo9ny3Tm+zIqzjZmd3X7LHc30T+1OV9MJH68Kck0jr3QBSEKtK8SgDB+
-         oqEetNyVPj+xErQ3xhCtiZUuVxSUjhvJ6gdOzay+7Ssxcy7t0k305B36PnXz9thonJZd
-         GgW12dicdyf8GqnX5SgiP0xlY66pmDkwYHy2S1jke7nBZ1xWfftosfUx7/aBo6D8EKfz
-         l+BA==
-X-Forwarded-Encrypted: i=1; AKwUvBw7i+ISc4g5PX/xNeeFJgQgA3gMZUHg0/8HwHET+u9BWVi8xuqMh4d73p1TygaWQmErd/Aq2AjEgCLkVapt@vger.kernel.org
-X-Gm-Message-State: AFq9FYLZc7o2FjTe32fniYcbBzA1uoDLFgcFnrMOPygTItzJ9YxAmQyv
-	UL6Gu4GNSQ8gVD38MN+e70Wo/o1DIbp055/qLMDaro9cT471ZsM4BgnB8WjjMQv9VzE=
-X-Gm-Gg: AYBFou2M1QQXF8TwD1uBnOwQTXSqCpJxy7e4tKKesRi0Zv9nP7p8VYep/NTOjujD7QN
-	Hf9wkh1mXhWUsCAsl32aNs00lK5HBGDSdEYwebv2n2M6HSMkpfVVMYQb4zcG7acY8AKZ53M+1KR
-	pDi6LXh1g9jJaWMVSfOn4zm57YEGkopVYkD7ZZnSROfaz05UJw7rzXuCASzDiLEpx9Dr6vBwO/9
-	TwPAmtsGt9Dm9SPRkKYTjr9Pf2KWEiY1HHV00Jrmqm9PgazOacCSSZZGTW0jgje90GWHqBXYJzE
-	4vQiYXmy3PZQNB5ihhgipFjKwXAL0LV5dQhjs4Vvn4fJTltam2XJsedE81g+jVEbL7l/LvT3j0c
-	96qsiBMc14ZowJPQaytcgKegmKO4CoY0SjyuCOptZPUv3XSVRM/cKmKOCJO3Hut9kJzG/YduGSm
-	Rt1+TeAp6HztMUkPoVMkBkrI6eIOdisn3Y+3mygMYePNJ4pBZLq2Qq/YxMl0OuWrPNGg7SKEMYT
-	9K9/OE9QKgXvfeW2DbAG9D5dqKc4l8jNnn6lMdfhkFaBIuBGTU1Y5G0b+6GPhwJ01BMEPryxJxK
-	ZL12P83yoQSPumh2gAo=
-X-Received: by 2002:a05:6000:4281:b0:48d:bae6:d7ba with SMTP id ffacd0b85a97d-48e5d5c7104mr10359040f8f.26.1793267734616;
-        Thu, 29 Oct 2026 02:55:34 -0700 (PDT)
+        bh=PrCbcHJkhdjSbNCRqk8yeYIRKNcSPa31zVUyGmEiOBA=;
+        b=HT3o3dKC2iW410Q4Eev4GjXVaYErQ24/Xhx1cczSZt04TTGQ2jysopNQgWBAHZZXde
+         RLQ7PE5WB+BlnEbiqhxLzcXTOJFbZmPvcYZhnanW8hkZ5FeKmCvSwN4b1iY48qofXkJ+
+         6qaVJDHcLakw3IzGx5YrXsg/uOPybLg7b0Y6+JdEn3TNlsv3HHj1zjxerZPjaxk7HVCJ
+         PQZNfnjXELAGtaGcPolnfHpf3t4ZUhjCRkx0WwrZ9CGDQgbir4kkbJ9AelgfTSiWddan
+         Xa0CFrQ6OlHgqKtwI5mmxAABT76B3GfNqhS/xtMhmRfisWSYo4OoKyLC8V0HCJksUn2s
+         Jw4g==
+X-Forwarded-Encrypted: i=1; AKwUvBwcMuqnuf2O5pMzKG8QablNp+hD/hsPwNNQMTquFOydeyDt7MX1UeZ8GO1uAfTWUuJXZFxLvC+u1O7G9tpK@vger.kernel.org
+X-Gm-Message-State: AFq9FYLxeiSKDhcQDkkw/mlQa6M62lEvDb++Ce+qtOv+jL394jdjRAGC
+	Nn//+ANsW5EqldgEwUheroSYbYXaqmd/Ff6G0pdxNsL1VTa9MmTuJR1Fq/ePS7MFTh0=
+X-Gm-Gg: AYBFou3NPNdtyZRTQWhRDrC6Lpweq1CSQ6trK4TaKet5F6L5ijRzOEvlyTi+YasZ/Qf
+	VGeeMhPJO+y2edpPo2eTPQcZBwJa6C9FB4iEHfcPtKtQ30n/8L2miq/+JveJnxqcbYO8WtN0+4c
+	u2uT4+J7ZGJJIpdAuwzW9ZDp5dq44ZskLIKFMnYmLV5+a+SSNGhCENZkNOa9+J52IT3bZ1GLjaN
+	BJbVNCbZUQTs2XCReQaszpMaTZdy5i5G71VuSLCrg/SQrzvbiSliXe39iH3a7VHI8y2TPr1xsK6
+	fSCJ7fEFiy28M8rs8MAQygCX58nZoxb07lcCzzRKM3JRSuzTKKxH6zFM4h76bMbOuzvhedBsgJ4
+	M5PCppPl5im2ZbiIzFxDRImODhCfRohEMQEQnDMyt8kxur20+MEKdbhFrAa4CzlJiWJQjsM2xF/
+	pGqTrBJuKPL/3ZSQ8x/mp1uiHXksPpEwsS68IVXZojk2I+yZMH4PwmExsyfMnN+fv1KnTUQaIDX
+	l+MRHYXS+2cYhNpIHl02JXiAZut5KgAJArqwsvnEqrGl5vN3jhlpE9qV4xrG0PjkdgUiYZIyFD4
+	Tqa7rcHyljX6THId+gY=
+X-Received: by 2002:a05:6000:4007:b0:48d:f1b3:c02e with SMTP id ffacd0b85a97d-48e5d2f1f5fmr12175285f8f.25.1793267735461;
+        Thu, 29 Oct 2026 02:55:35 -0700 (PDT)
 Received: from [127.0.0.1] ([64.43.45.156])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ecd37f4sm40437160f8f.44.2026.10.29.02.55.33
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ecd37f4sm40437160f8f.44.2026.10.29.02.55.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 02:55:34 -0700 (PDT)
+        Thu, 29 Oct 2026 02:55:35 -0700 (PDT)
 From: bryan.odonoghue@linaro.org
 X-Google-Original-From: bod@kernel.org
-Date: Thu, 29 Oct 2026 09:55:16 +0000
-Subject: [PATCH 07/14] media: qcom: camss: csid-680: Enable RDI SOF
+Date: Thu, 29 Oct 2026 09:55:17 +0000
+Subject: [PATCH 08/14] media: qcom: camss: csid-680: Enable RDI EOF
  tracking
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -96,7 +96,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-v4l2-frame-sync-v1-7-d37992559c58@kernel.org>
+Message-Id: <20261029-v4l2-frame-sync-v1-8-d37992559c58@kernel.org>
 References: <20261029-v4l2-frame-sync-v1-0-d37992559c58@kernel.org>
 In-Reply-To: <20261029-v4l2-frame-sync-v1-0-d37992559c58@kernel.org>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
@@ -106,74 +106,55 @@ To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1813; i=bod@kernel.org;
- h=from:subject:message-id; bh=akubu0rGSbK8Bi55Bu6Z8+I5lQw1Ol8/ItTGES6zVpo=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq4xgLFgesLqwuGjFWWlQwZXxMNo/ISsxJqcmXv
- HII85wXXZKJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCauMYCwAKCRAicTuzoY3I
- OsRzEACdcOEGVv8/MUuatktqnQOB1z7ppKozXH/zCqjTbd3hSK8Nx15HnQb/Jz/ibaTGNjXmj0w
- 3BE9wwV598sHQqKGK5oNb3qQwXJVUlfkUO9IW8jEg01HDwSdiemAi2EHSdQuDpr5MA4155cw5Cu
- dXb9hWv1WCQ+/vt+bl82lJfS8RPxhmErB29eG4e5wnFSj1Ejkyz+GV8cR+wK8vjGenhR0h3h2Zd
- gQjkRnT3ltYVVfHpTTBHdiQlfkhrTfmkBESWGAriaKGf2hFEgnkWH6dFdWyT6b8pStwRKMIB3Ty
- cQOQOfuXk64kCtelBJEJMp4P7YiPcxvJ0ISFpOFfSJWKyj9X6BUlBhoNuUMidBd2zfxsBHAVf8l
- fWHZJT6NQQPe0Am3mrLpK/GcXfLczhqfpHOqEOBnesQXON1tChcTw51VntvpDIZVa1cQdeqQPDz
- 82Y1eh4j0HjVtf0tS4UOaOkjRyDE4UnVWhBNyxU3lvRHRlJY6uqRutm8bPF0HOYePpO8dbGwBQc
- SmOcIBRO3Cy4uQ5+tw4LuNDQT7R0ZPydS99r94xfKzerJEnuJKyJcgHz+LjQa2JkmHvGEI2+NZV
- MnTQIyXNrj9d3FvOpD7YeZ+L+6fgFOT1pn8RrU3l3Q8Hy4Y4ijwPL3SEpNLR5lBOn7diUKOyWHp
- w3AjDem/w8H89TA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1348; i=bod@kernel.org;
+ h=from:subject:message-id; bh=dXv09uQCEs8qUF2K5KWFAC6wPULB4r2M9kbjuOqOpSU=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq4xgMmujgVpNlGYSXf65flgvekHI0BhlteX5PA
+ vkLV+9gUsWJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCauMYDAAKCRAicTuzoY3I
+ OhGxEADBYyhwfefWhvg1ebub1C1XooYs4mQe53MG7nHMeZa2El09YtafgxMVfqLcF6e6Jrm56ev
+ kZi550Ck0+6H9Gka8eUMJes90PUbtu9Sh6RtBWV/gqLGWuF0mgu/NYjVhKIoWnIynXKyxoxI3Gm
+ 53UrwXcJeQNGl9Ve/f5+gcsl7rjYc55VtK+x1nYTGseFiSlXCsn/VMX2UjCLFzlJdfXhH+SXJG8
+ b5oQImi32ku1ZGZfaCWKwoyn83ynhDYih4FPgvjtJwsLCybjc4GU+1mBKsX+VsujWtlE0YcDssf
+ EPOseSPFrSBrRbbZeQjPPHLoHZO4oKqQtl2ELE6HcQ+qQ90rwFsmoBkx8fFxjZajQ89cD2eDHE+
+ bxJdnj91e2CxfzB/sIRANZWho0Me4JYH/zOTSq4hcmM8SzM6kQp1XhYUtPvFqe5NV8LyR4IhUWp
+ KM5EP1cW/R54IWRssFCkJyM6ZUzn6E1z0vaighKba4JZ6BRv4KTzabAZL8xoeKxlrLm9PpKbQem
+ kV3gao7gboLykWFoMlLm7DLhmWFvvTJQnuArgtzLNZvpk5XQdoo7zZpTqLi5ynTDWGLqzLXpNwP
+ BgbcrpYr0Usw2SHhZyrdX9DYyLjB6bu5yr4J8iu4TzbT4pKU6hu8cWQ7+XnYzT1ljZcqQu8Fn8f
+ Na8cQamoqlOZIPw==
 X-Developer-Key: i=bod@kernel.org; a=openpgp;
  fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
-Similarly to the sm8650 we can quite easily switch on V4L2_EVENT_FRAME_SYNC
-for x1e/x2e which uses csid-680.
-
-Do so now.
+Enable the EOF interrupt and notify csid_eof_event() to drive the
+vb.sequence.
 
 Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 ---
- drivers/media/platform/qcom/camss/camss-csid-680.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ drivers/media/platform/qcom/camss/camss-csid-680.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/media/platform/qcom/camss/camss-csid-680.c b/drivers/media/platform/qcom/camss/camss-csid-680.c
-index 345a67c8fb947..452640e72f6d5 100644
+index 452640e72f6d5..2113ce13eb56f 100644
 --- a/drivers/media/platform/qcom/camss/camss-csid-680.c
 +++ b/drivers/media/platform/qcom/camss/camss-csid-680.c
-@@ -296,6 +296,20 @@ static void __csid_configure_rdi_stream(struct csid_device *csid, u8 enable, u8
- 	writel(val, csid->base + CSID_RDI_CFG0(port));
+@@ -303,9 +303,9 @@ static void __csid_configure_rdi_irq(struct csid_device *csid, u8 enable, u8 rdi
+ 	val = readl(csid->base + CSID_CSI2_RDIN_IRQ_MASK(rdi));
+ 
+ 	if (enable)
+-		val |= CSID_CSI2_RDIN_INFO_INPUT_SOF;
++		val |= CSID_CSI2_RDIN_INFO_INPUT_SOF | CSID_CSI2_RDIN_INFO_INPUT_EOF;
+ 	else
+-		val &= ~CSID_CSI2_RDIN_INFO_INPUT_SOF;
++		val &= ~(CSID_CSI2_RDIN_INFO_INPUT_SOF | CSID_CSI2_RDIN_INFO_INPUT_EOF);
+ 
+ 	writel(val, csid->base + CSID_CSI2_RDIN_IRQ_MASK(rdi));
  }
+@@ -413,6 +413,9 @@ static irqreturn_t csid_isr(int irq, void *dev)
+ 		if (val & CSID_CSI2_RDIN_INFO_INPUT_SOF)
+ 			csid_sof_event(csid, i);
  
-+static void __csid_configure_rdi_irq(struct csid_device *csid, u8 enable, u8 rdi)
-+{
-+	u32 val;
-+
-+	val = readl(csid->base + CSID_CSI2_RDIN_IRQ_MASK(rdi));
-+
-+	if (enable)
-+		val |= CSID_CSI2_RDIN_INFO_INPUT_SOF;
-+	else
-+		val &= ~CSID_CSI2_RDIN_INFO_INPUT_SOF;
-+
-+	writel(val, csid->base + CSID_CSI2_RDIN_IRQ_MASK(rdi));
-+}
-+
- static void csid_configure_stream(struct csid_device *csid, u8 enable)
- {
- 	int i;
-@@ -307,6 +321,7 @@ static void csid_configure_stream(struct csid_device *csid, u8 enable)
- 		if (csid->phy.en_vc & BIT(i)) {
- 			__csid_configure_rdi_stream(csid, enable, i, 0);
- 			__csid_configure_rx(csid, &csid->phy, 0);
-+			__csid_configure_rdi_irq(csid, enable, i);
- 			__csid_ctrl_rdi(csid, enable, i);
- 		}
- 	}
-@@ -395,6 +410,9 @@ static irqreturn_t csid_isr(int irq, void *dev)
- 		if (val)
- 			writel(val, csid->base + CSID_CSI2_RDIN_IRQ_CLEAR(i));
- 
-+		if (val & CSID_CSI2_RDIN_INFO_INPUT_SOF)
-+			csid_sof_event(csid, i);
++		if (val & CSID_CSI2_RDIN_INFO_INPUT_EOF)
++			csid_eof_event(csid, i);
 +
  		if (val & CSID_CSI2_RDIN_RUP_DONE)
  			csid_rup_complete(csid, i);
