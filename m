@@ -1,88 +1,89 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793281993;
-	b=rRNOvQsZ7086Z7DAdkRtHowWMSV4vFm147gZMSln2xjtSCz9PD47A2w3vesMCHp6P/c+
-	 4XcwoJ6+9c2ST7bIWnoaTuOgCJwixBIm4df54jRdSWy6iR/f9z8G+Zr3H7NQJol6qKhN2
-	 63efFRnpP4tQRlEjyCG8dbAaVO7Y7W76OZMMgEBEiE53TnA5LYdQa1qt2hVWv1PgpTMXu
-	 kBnq+6LxmW54q2GNCH7n2yhMhdYBnZHt0FH7VKGCltu4c6PXLeBfBm3XOU7C6zTaCUomP
-	 0r9S1FBskXC/NBDjUo5vkKmbX2N5eZGup8bIBIX7g3aB58WyjiFszdJ91H7ogiHSGOQ==
+	t=1793281990;
+	b=2g2ZfCfr66C3MbjKxLZsg17bOfaU5S+IAfh1iUquVtCkkOcQRzyCQ8srcJNUGB06iJs/
+	 m0FQQoh+Xk4GEK75Fg/ISlwq2qL9Dh68YlXzdy66G4QuWLxArRhlKUOknulGyi33cFBfD
+	 9NaVszxZYOSmIA9xQF71LkBFgMS3mJek/isb6dEfU9AaJaFMGB/F1q95ru3PnHWSsJ5QR
+	 hT7qjlMfoJ3N1q0NRSSLNVnCNnaYPyqxDncdare1tToPd7rsRN+NJpjhXdipaeXtUocMu
+	 up0XJKU4F6IYnGYRnS8zGxhCf3Qr0UaxS3GRxfHDQmBYu6ZaF4z8cSx0IfbK0llpzqA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793281993;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793281990;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=T/SMmhEanFf2ZRlLzrXMdAPzQTHRLaYYpOnEMjr9oaE=;
-	b=AtQj0Giof3nI8+xwizbDl14AnV59C/8QLLZAXdDjK2+sJAEdSpdaQqKQl+GwcpS/z340
-	 gJpgLQmei3Sg2pMaCJ8PdDLnbYK0ZZL9BIs6YTSe8KRkzAmDJjPRpL4Y45hofQzYRPXpY
-	 nBc7DwBFGtnGDk1H+M5GIsaEnKjoSDjo9Fh4OSkXzkJwbtpCGjuRzRQnGKco5VfG/wZzT
-	 AS0EDNpfOnS2sV78i8R5WOWbW553no79+HzYZNFg/jSutsXk+pvPAZkmP3fMjfnfI/jZW
-	 n+1qq5cWpq5hCyOBT1F62xA/JbuCsRZCScOdRtJeQE9NECE/3/xwk1QO8+ejR024ZYw==
+	bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
+	b=ZyLmmNk5MplHjL22ip1j3vYY+nNUWnuyVYVtgRreYkkxpVfD0SvY/G8DdNMIJbzsJzFm
+	 MKxIYEH2rVfM+5JdIW8nqRIoorGIysVtZnEpfQLvXrw5xOPjB6N/2Lv/NNaWXTbC/QxTD
+	 sRAC1lHaGWKpYFNtxZB2Tvz7CCMH2LyvWgthjfOMqahzo1h97eAD4UbhocMRanJBgwkLh
+	 eTiZZHg0F0CmxN2B4t7sbitbVH7NSZl3M+FkqTTFJchFZIHcPJIt9rdZY8PpQMofqg85p
+	 SrL5ybNYlYm53R0ojS15t4XH6eE0tisFMCGOmr1JHYeHvc6KX0x4pGQh3d0gLc+1LOA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=s3KEag0y;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XtMRmSyY;
 	arc=none smtp.remote-ip=209.85.221.51
 Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5CCC60A380E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5CCC60A380E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DA1E60A3806
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5DA1E60A3806
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=s3KEag0y
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48df8fe8513so1810027f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:12 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XtMRmSyY
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48dfb76b304so391162f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793281991; x=1793886791; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793281989; x=1793886789; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=T/SMmhEanFf2ZRlLzrXMdAPzQTHRLaYYpOnEMjr9oaE=;
-        b=s3KEag0yDnYz0U77lRR+6mYCT6xP8Wrf2rzYrQz7WTFHhYg4wu+8jAAhe+xm/9FqGH
-         ZFQ6MVbK2rEMT8AYRwoARD/yBPkDUQocu+YHDUa9wDKH6+HxDRNXWqvUyfoL6HCPoWV9
-         XEoeRnqdKqJuXjkpNIF4R6DU9xlDTs6u3LnD5gWTJWm4magjfR9ZfWO9D4VMWuYpRcpC
-         wQaiP/WONLVDza2w0GdRZp5mHXfptS9IjgR6TA+KqQ/9whYYPbG6XOxMVXt6oa6XqJdX
-         yWeY5L0hlfJdBHIQZ2efD8Bh6Eaq0pnANLKaU0zJJ3Ag/h806ghlr9ZUToPfRsaRtDFT
-         Z9+A==
+        bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
+        b=XtMRmSyY4kIgLF8Gi8D5p63d/yjBO/9fVq1esnLLoU0GJLrVtihKf/btKMZSRPrwl9
+         FKqssf9a5GRgYQO2LaNcgQmORqa/vCW0Qx2EVjJxpSXKEY8H4uOTeYG1RifJkBy1REZ6
+         pcLHZEbNNKiW7SnzYzSGqGJlgzQfapSugzhS3I5BcsbKTjTdCLuVxMq6ZirmjVpx2io9
+         x3w/4xuaoVc0aw8ildU8T5J3fG5NLULebjOWybvdz3GVRfUgTbwW9ubSiKsxOr5hfidd
+         Tg6bkZIOqa85wZNVqvxcLxQkChG7rnTY+OOXeNVHSppOGEbUgjxxZdd4LZuUDhP3XKiz
+         A1JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793281991; x=1793886791;
+        d=1e100.net; s=20260707; t=1793281989; x=1793886789;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=T/SMmhEanFf2ZRlLzrXMdAPzQTHRLaYYpOnEMjr9oaE=;
-        b=am6RqAlB/R3uttU1/h37QYlnVTCQ5KheTlL7eGv6U4PGqqcYXbE84AXsJIl8dv18st
-         FkoxoeovGFFWG/XZ+HYYqeTFxKU6/xoTvP6fi330bKuSa+MQT3JYCTHpnm/6jCnszHJP
-         EVmaDZtJOv3nZ60uAdrCy85SUBUv3zIlWdw14pjMtDlTBvWOy0e2qkryE5ljrgTry8XJ
-         /astatez882IU3BcrjXi1N4m7ppg44R+fag859nlt6Rvj09kNk/E6A4O67CaHvj1TYvr
-         kQJ9fib5V/5nPiuRp+T5GBfm745fcIAWZY1iBRfwRSoNOeoRpMlmI4byX1o1/+7gc67d
-         lmww==
-X-Forwarded-Encrypted: i=1; AKwUvBykKgVAykgULdlA7nf/foSDOT+k4eIi/GwTn156x9dw3JSlKFMu7LJQ/kA9hAzmd96C3WIpArLxlc2cGdZ1@vger.kernel.org
-X-Gm-Message-State: AFq9FYJwKrTp4nVca0dKVNNmsV+iuWnur7IeMP5zzbJJkvikQ1rmvRqq
-	m+Hm12BCmPKPyNZYmboPnpEHzMgqp8iYVP4x/LTvUY8zHSaiHH/EC0M=
-X-Gm-Gg: AYBFou31HSV5asUNVYawm01/U+CzkPVLlBkM6UPqlisTtDcBojPvFRDUaEr65SIOlNZ
-	cp+0VLKJ4EGZZuR2BVjkA/rMsIm7xqN+e59EuSx5YuRErySPQis0ZYniPV7sYCUiwLXsj/3xkiG
-	OLA1MXdotLjMN4nJzmT0Sto3SOBloIgDfVWBgw9LmN+eQmu7ZJ24/zvKwUeKDYp7tq2/TrEg8Z+
-	O2t1B3lpLjwv/GCf0tJjbyV5pqtHA1nIuBfXpBZCMxQf+bk8vu34rLIB34enmguNbx3XqPSbmDE
-	UAC/TuEr/T4/4jDl67Upb8LRjBFGgP4S5k72kB7P+ghPnsdExB7+fGCqtsb6+Y37Twj9FpYVZhU
-	ocGlJ+svhoYMGUl+13SPdotvVfsyDtmItNVUNJJiPdy2lPOvSI7IWF0tfcnBCs+ILrIf1okIyeP
-	KZXYHunEB5pgOtK8uY4z4HZoToQ+D7PonB95dTXXRcBwnvxYa7FNjfeaD31LLBkk7r0ja6SV3cb
-	pKX7ZZBbz5HmJayPQGDttce5tea/GfF7rUmQdl7o0n8JVijpQ4fEosoz0voDNpiv8lYTDFIqnoi
-	XgEDl/MPnSRIVqqv3lipHCNjMrEaYZMuWHFxHnTV7Vakrg==
-X-Received: by 2002:a05:6000:989:b0:48b:123e:2f5c with SMTP id ffacd0b85a97d-48e5d2f2222mr13148384f8f.29.1793281991354;
-        Thu, 29 Oct 2026 06:53:11 -0700 (PDT)
+        bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
+        b=zCOQukgyFF4KTvwh4PGSgJZZRDuzVCn63TJtpyXOFCXvROh+9ySXIspLRX3ntCs3I6
+         3vv8tU0OhRoDl8khgZrTxZbKnXfnC2ry3YML2jEauWCuYFETlZufr5I/YayGsbn9jsEJ
+         dGH/ksC+mCreu5W824JbxGY7h2usfW9Q8jFBbBYIDVIeowsRtEYAYWUwpzMrffguaHf2
+         5/uSG+Vs4+QFjirycWc5DcViQAmqROCwhwJGVWKzHkh8jyrXMxZJxdzieA6BDzKMDrCF
+         qvN1o8n+QtgvNwcVBhsYwvsn1k+VnZOvJ3djZj6386LsViLvdc7bilIKEP19M+027omn
+         9AtA==
+X-Forwarded-Encrypted: i=1; AKwUvBxSjXCWHriCu9jj2Qfw2sE3ccMMuvb+0qT3cDY+YZSvIvd71kRb7gVu18WkMCaqqdeqlcB7Lwk+Qu200LIk@vger.kernel.org
+X-Gm-Message-State: AFq9FYKtAPbOg4gAoKHdNGSr/jmGNmTGS4lYdAFdIWmNF6h3Qjzc2wwh
+	1TGaYhE0ZUnnyfN2Lsx/2L54zhZPSmOHyzOC+QCjvCGLx5RU2wc4yl8=
+X-Gm-Gg: AYBFou12nRSZ0VuYPWUIGlffIyeeM3m/6uZ5U/wc/OMrf375YtuiY5zEh+QJrDjkMe5
+	e6raz5xrJRvhvgklspjr/j/fu4maZrXSxu1hp3HgxGDacEGwYA+woUN4FyrW4kB19ryUkOtAWD4
+	yNkMTNIGf/K7hORyyM8Pd09YzAU76WX5tON9MtGXO3Yn7T/IBWoH5uabFC43TQ6c79a5pTsLgNe
+	31osjcMjQKydDkf3K47Sj92UlQQC0V0RFFTRS+sv4ttCYmA2WYzW2HATuNHuWXAMzURmb4oVcL6
+	WX2pbpf00j6J7trBP+Kj0XmvhykfAtFpwBu2ATXv/h9ZPciWIjcfoPFcLFaCHcuwVDemlryPRU/
+	CE4t1dg815pcod4ECbY599hGjz10OXymWC1YfsY0EW45VAm+ioNOVXHVhXwnFuTVS3Q7j1Hfa71
+	VSW/wq/cf0uBdjJn0IGtkGWDUHOHFRKPOJuD7Y0WhPu9MGTvhrCn6EsCMDhOVKlZGwpuOQGu5m4
+	wOiJ5C64JLH8vZuteMVMO4q1JiJop0oVkidWmBtF8ittrf8GqQp9TBxFruGAMDcb1Z8w5ay2hqE
+	YrykOGSqaFTSpCjnIVMD89K5oosJK17AVHc/MQjEF96Mvw==
+X-Received: by 2002:a05:6000:2806:b0:48d:ff0d:cfa5 with SMTP id ffacd0b85a97d-48e5d5e237bmr9297013f8f.47.1793281988693;
+        Thu, 29 Oct 2026 06:53:08 -0700 (PDT)
 Received: from [192.168.1.67] ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.08
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 06:53:10 -0700 (PDT)
+        Thu, 29 Oct 2026 06:53:07 -0700 (PDT)
 From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-Date: Thu, 29 Oct 2026 14:52:42 +0100
-Subject: [PATCH RFC v2 05/14] firmware: qcom: scm: Configure LPAC aperture
+Date: Thu, 29 Oct 2026 14:52:41 +0100
+Subject: [PATCH RFC v2 04/14] arm64: dts: qcom: sm8650: move smmu sid 1 to
+ new lpac device
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -94,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-descriptive-name-lpac-upstream-v2-5-a21a5c850961@gmail.com>
+Message-Id: <20261029-descriptive-name-lpac-upstream-v2-4-a21a5c850961@gmail.com>
 References: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 In-Reply-To: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
@@ -116,110 +117,53 @@ Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
  dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
  devicetree@vger.kernel.org, Anna Maniscalco <anna.maniscalco2000@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=4016;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=1186;
  i=anna.maniscalco2000@gmail.com; s=20240815; h=from:subject:message-id;
- bh=ivUR5Pb7Po44Alwx0ZT6ubl1ZzDqmOPjsdTHTPY8+aE=;
- b=CzZBZhvXfsPR7VJKCtyL4sntORzIwyrw5dpz/xoNsZ5uORTwXp8jhcD9HDV0cCBFD+qYUv+9N
- gi7Oj1wgVHTBJ0bjH6egCOnjdXcy2F6zKpvCrmki17UM3EuffiJgPc1
+ bh=m8LjyZqlFLsxlRip5l3NXkwO7GG8cECPX+LNQd1tpmo=;
+ b=ARxR4H9sfFo+nvh8rZ3WMz/5vBOcWptYc4QScQ6BwDzQQ9ZqJR17Rkbis3J/NCOw2T3Y+DXYV
+ 1uradRrW6R5Bl+J4M4CED5l+9lrrUHdMAtWHma7WA0JnTxjPc/6/H28
 X-Developer-Key: i=anna.maniscalco2000@gmail.com; a=ed25519;
  pk=0zicFb38tVla+iHRo4kWpOMsmtUrpGBEa7LkFF81lyY=
 
-In order to be able to update the SMMU registers from CP for page table
-updates we need to configure the LPAC aperture to include the context
-bank that will be associated with SID 1.
+Previously both SID 0 and 1 where associated with the same domain.
+
+When LPAC is not used this is needed so firmware can acces memory when
+initializing using the same page table as GFX.
+
+To use LPAC however we need to move SID 1 to a different device.
 
 Signed-off-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 ---
- drivers/firmware/qcom/qcom_scm.c        | 18 ++++++++++++++++++
- drivers/gpu/drm/msm/adreno/adreno_gpu.c |  6 ++++++
- drivers/gpu/drm/msm/adreno/adreno_gpu.h |  1 +
- include/linux/firmware/qcom/qcom_scm.h  |  1 +
- 4 files changed, 26 insertions(+)
+ arch/arm64/boot/dts/qcom/sm8650.dtsi | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 9b06a69d3a6d..92093399f20d 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -1204,6 +1204,7 @@ int qcom_scm_restore_sec_cfg(u32 device_id, u32 spare)
- EXPORT_SYMBOL_GPL(qcom_scm_restore_sec_cfg);
+diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
+index 1604bc8cff37..f47d1dbd06da 100644
+--- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
+@@ -4144,8 +4144,7 @@ gpu: gpu@3d00000 {
  
- #define QCOM_SCM_CP_APERTURE_CONTEXT_MASK	GENMASK(7, 0)
-+#define QCOM_SCM_LPAC_APERTURE_CONTEXT_MASK	GENMASK(7, 1)
+ 			interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH 0>;
  
- bool qcom_scm_set_gpu_smmu_aperture_is_available(void)
- {
-@@ -1229,6 +1230,23 @@ int qcom_scm_set_gpu_smmu_aperture(unsigned int context_bank)
- }
- EXPORT_SYMBOL_GPL(qcom_scm_set_gpu_smmu_aperture);
+-			iommus = <&adreno_smmu 0 0x0>,
+-				 <&adreno_smmu 1 0x0>;
++			iommus = <&adreno_smmu 0 0x0>;
  
-+int qcom_scm_set_gpu_smmu_lpac_aperture(unsigned int context_bank)
-+{
-+	struct qcom_scm_desc desc = {
-+		.svc = QCOM_SCM_SVC_MP,
-+		.cmd = QCOM_SCM_MP_CP_SMMU_APERTURE_ID,
-+		.arginfo = QCOM_SCM_ARGS(4),
-+		.args[0] = 0xffff0000 | (1 << 8 | context_bank),
-+		.args[1] = 0xffffffff,
-+		.args[2] = 0xffffffff,
-+		.args[3] = 0xffffffff,
-+		.owner = ARM_SMCCC_OWNER_SIP
-+	};
+ 			operating-points-v2 = <&gpu_opp_table>;
+ 
+@@ -4158,6 +4157,12 @@ gpu: gpu@3d00000 {
+ 
+ 			status = "disabled";
+ 
++			lpac: lpac {
++				compatible = "qcom,lpac";
 +
-+	return qcom_scm_call(__scm->dev, &desc, NULL);
-+}
-+EXPORT_SYMBOL_GPL(qcom_scm_set_gpu_smmu_lpac_aperture);
++				iommus = <&adreno_smmu 1 0x0>;
++			};
 +
- int qcom_scm_iommu_secure_ptbl_size(u32 spare, size_t *size)
- {
- 	struct qcom_scm_desc desc = {
-diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-index 1dedeb19946e..65d34d0cfc38 100644
---- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-@@ -658,6 +658,7 @@ struct drm_gem_object *adreno_fw_create_bo(struct msm_gpu *gpu,
- int adreno_hw_init(struct msm_gpu *gpu)
- {
- 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
-+	const struct adreno_info *info = adreno_gpu->info;
- 	int ret;
- 
- 	VERB("%s", gpu->name);
-@@ -668,6 +669,11 @@ int adreno_hw_init(struct msm_gpu *gpu)
- 		ret = qcom_scm_set_gpu_smmu_aperture(0);
- 		if (ret)
- 			DRM_DEV_ERROR(gpu->dev->dev, "unable to set SMMU aperture: %d\n", ret);
-+		if (info->quirks & ADRENO_QUIRK_LPAC) {
-+			ret = qcom_scm_set_gpu_smmu_lpac_aperture(1);
-+			if (ret)
-+				DRM_DEV_ERROR(gpu->dev->dev, "unable to set lpac SMMU aperture: %d\n", ret);
-+		}
- 	}
- 
- 	for (int i = 0; i < gpu->nr_rings; i++) {
-diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.h b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-index 1f201322cb6e..ec234a483036 100644
---- a/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-+++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-@@ -64,6 +64,7 @@ enum adreno_family {
- #define ADRENO_QUIRK_4GB_VA			BIT(6)
- #define ADRENO_QUIRK_IFPC			BIT(7)
- #define ADRENO_QUIRK_SOFTFUSE			BIT(8)
-+#define ADRENO_QUIRK_LPAC			BIT(9)
- 
- /* Helper for formating the chip_id in the way that userspace tools like
-  * crashdec expect.
-diff --git a/include/linux/firmware/qcom/qcom_scm.h b/include/linux/firmware/qcom/qcom_scm.h
-index 5747bd191bf1..70fb93e303e2 100644
---- a/include/linux/firmware/qcom/qcom_scm.h
-+++ b/include/linux/firmware/qcom/qcom_scm.h
-@@ -100,6 +100,7 @@ int qcom_scm_io_writel(phys_addr_t addr, unsigned int val);
- bool qcom_scm_restore_sec_cfg_available(void);
- int qcom_scm_restore_sec_cfg(u32 device_id, u32 spare);
- int qcom_scm_set_gpu_smmu_aperture(unsigned int context_bank);
-+int qcom_scm_set_gpu_smmu_lpac_aperture(unsigned int context_bank);
- bool qcom_scm_set_gpu_smmu_aperture_is_available(void);
- int qcom_scm_iommu_secure_ptbl_size(u32 spare, size_t *size);
- int qcom_scm_iommu_secure_ptbl_init(u64 addr, u32 size, u32 spare);
+ 			gpu_zap_shader: zap-shader {
+ 				memory-region = <&gpu_micro_code_mem>;
+ 			};
 
 -- 
 2.56.0
