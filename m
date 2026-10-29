@@ -1,89 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793281990;
-	b=2g2ZfCfr66C3MbjKxLZsg17bOfaU5S+IAfh1iUquVtCkkOcQRzyCQ8srcJNUGB06iJs/
-	 m0FQQoh+Xk4GEK75Fg/ISlwq2qL9Dh68YlXzdy66G4QuWLxArRhlKUOknulGyi33cFBfD
-	 9NaVszxZYOSmIA9xQF71LkBFgMS3mJek/isb6dEfU9AaJaFMGB/F1q95ru3PnHWSsJ5QR
-	 hT7qjlMfoJ3N1q0NRSSLNVnCNnaYPyqxDncdare1tToPd7rsRN+NJpjhXdipaeXtUocMu
-	 up0XJKU4F6IYnGYRnS8zGxhCf3Qr0UaxS3GRxfHDQmBYu6ZaF4z8cSx0IfbK0llpzqA==
+	t=1793281997;
+	b=zARbueKdrBLBV2ZKSaDdw4agO2y8FyFCGxlC09Jb1ALIAfr7kkD9Ldv1/Aeit+QhQlsE
+	 l+/LLw4BAcLd9TomE5PZefmhq2GrEF3XXpNudR4DIH2+IlP2oe4310/hRcnXwPPBKWgaG
+	 Dv8IamJEb3flWiJ7oZUlOQCc6SyphnZ+utupTAcW0ub0ch+Ntz67Rc/u7GnGoHnZoNs8s
+	 930fGTfscxbHdNPsGXYJNH5muzqc+qOpyt+KHb9BkILOi88vPVo//iKU/zIqPsiVW1KoG
+	 Teh2CKUP1/aB6SiflVORktw/bLA7pKw3DvgsUeQ7w2ai/+E32juQyiLxLVg1tM6ah6A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793281990;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793281997;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
-	b=ZyLmmNk5MplHjL22ip1j3vYY+nNUWnuyVYVtgRreYkkxpVfD0SvY/G8DdNMIJbzsJzFm
-	 MKxIYEH2rVfM+5JdIW8nqRIoorGIysVtZnEpfQLvXrw5xOPjB6N/2Lv/NNaWXTbC/QxTD
-	 sRAC1lHaGWKpYFNtxZB2Tvz7CCMH2LyvWgthjfOMqahzo1h97eAD4UbhocMRanJBgwkLh
-	 eTiZZHg0F0CmxN2B4t7sbitbVH7NSZl3M+FkqTTFJchFZIHcPJIt9rdZY8PpQMofqg85p
-	 SrL5ybNYlYm53R0ojS15t4XH6eE0tisFMCGOmr1JHYeHvc6KX0x4pGQh3d0gLc+1LOA==
+	bh=WpY7be90G/SGk1dVlALZpqn7ki65kr0ccX4qFPemUo8=;
+	b=RKiYRFseSvvcI+x+KQxhUW1yuOljs8d4v/Pbkqy5YKlUmE7tpxa7VVwUpvZCEzbdB8Rx
+	 dRShZ2yGBRTGD3PKU7In/1HM/UwinqUZYmCyyDtIWVzSxG9GcVMdbYBrPRWUaYQgAnFC+
+	 rYoLxK3OybW/obrKZg9FRKMJfF9LOuI91mbm3LVuv34RVFoVNF68/8vnW7btRNREL2oKc
+	 dYsC7bP3nKmqLQwYZnXggmk3Go/0KoScP78jVhC+P08UJA7Nj3Gf1Px/Fb1d5o7qZv6xs
+	 KhjuSNOrDrzMzMH7fvlxJapkd2FUjsEZiV38uyI2BhXp6zqEJgXNzHGr6LkBe8w60Qw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XtMRmSyY;
-	arc=none smtp.remote-ip=209.85.221.51
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XdXI0uiV;
+	arc=none smtp.remote-ip=209.85.221.44
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DA1E60A3806
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5DA1E60A3806
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24692606A33A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 24692606A33A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XtMRmSyY
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48dfb76b304so391162f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:10 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XdXI0uiV
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48bbb06e746so1000797f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793281989; x=1793886789; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793281994; x=1793886794; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
-        b=XtMRmSyY4kIgLF8Gi8D5p63d/yjBO/9fVq1esnLLoU0GJLrVtihKf/btKMZSRPrwl9
-         FKqssf9a5GRgYQO2LaNcgQmORqa/vCW0Qx2EVjJxpSXKEY8H4uOTeYG1RifJkBy1REZ6
-         pcLHZEbNNKiW7SnzYzSGqGJlgzQfapSugzhS3I5BcsbKTjTdCLuVxMq6ZirmjVpx2io9
-         x3w/4xuaoVc0aw8ildU8T5J3fG5NLULebjOWybvdz3GVRfUgTbwW9ubSiKsxOr5hfidd
-         Tg6bkZIOqa85wZNVqvxcLxQkChG7rnTY+OOXeNVHSppOGEbUgjxxZdd4LZuUDhP3XKiz
-         A1JQ==
+        bh=WpY7be90G/SGk1dVlALZpqn7ki65kr0ccX4qFPemUo8=;
+        b=XdXI0uiV0ZwTd9Wa3AVe8BbXXAxv1zWCaXkMKoaY80znZIIZrzYEfmcCzvWj+5Zm4k
+         ztmZhqI0ftUqS7EyiHCrspnfFV+wJCT3zsHo7Tv0T906QAxsHJlB6tcXUHyNQUadTmYV
+         hnGXrOz+RzyfYvTy/TY+KHu6Iku22IehZklIyuUnj2W0Padnj7srM56WWTX28iDGeIGz
+         gv45OgI4AkKWESn3MJqXmLxza+b4ml15fCMz2nhGO5Dg+1yAYxufF3hJD8NbEPppOYKJ
+         HEFt8+buX3/ImND6YerrHO0wJH88YB1TmFlrNzB9H5pc1yVfF4v89tFBSrZ9Zw2NGOf/
+         BZ9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793281989; x=1793886789;
+        d=1e100.net; s=20260707; t=1793281994; x=1793886794;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hqI3xUsD2cNMA3OqjFeaiLeXLoIzktOWAoDJXR6bb7g=;
-        b=zCOQukgyFF4KTvwh4PGSgJZZRDuzVCn63TJtpyXOFCXvROh+9ySXIspLRX3ntCs3I6
-         3vv8tU0OhRoDl8khgZrTxZbKnXfnC2ry3YML2jEauWCuYFETlZufr5I/YayGsbn9jsEJ
-         dGH/ksC+mCreu5W824JbxGY7h2usfW9Q8jFBbBYIDVIeowsRtEYAYWUwpzMrffguaHf2
-         5/uSG+Vs4+QFjirycWc5DcViQAmqROCwhwJGVWKzHkh8jyrXMxZJxdzieA6BDzKMDrCF
-         qvN1o8n+QtgvNwcVBhsYwvsn1k+VnZOvJ3djZj6386LsViLvdc7bilIKEP19M+027omn
-         9AtA==
-X-Forwarded-Encrypted: i=1; AKwUvBxSjXCWHriCu9jj2Qfw2sE3ccMMuvb+0qT3cDY+YZSvIvd71kRb7gVu18WkMCaqqdeqlcB7Lwk+Qu200LIk@vger.kernel.org
-X-Gm-Message-State: AFq9FYKtAPbOg4gAoKHdNGSr/jmGNmTGS4lYdAFdIWmNF6h3Qjzc2wwh
-	1TGaYhE0ZUnnyfN2Lsx/2L54zhZPSmOHyzOC+QCjvCGLx5RU2wc4yl8=
-X-Gm-Gg: AYBFou12nRSZ0VuYPWUIGlffIyeeM3m/6uZ5U/wc/OMrf375YtuiY5zEh+QJrDjkMe5
-	e6raz5xrJRvhvgklspjr/j/fu4maZrXSxu1hp3HgxGDacEGwYA+woUN4FyrW4kB19ryUkOtAWD4
-	yNkMTNIGf/K7hORyyM8Pd09YzAU76WX5tON9MtGXO3Yn7T/IBWoH5uabFC43TQ6c79a5pTsLgNe
-	31osjcMjQKydDkf3K47Sj92UlQQC0V0RFFTRS+sv4ttCYmA2WYzW2HATuNHuWXAMzURmb4oVcL6
-	WX2pbpf00j6J7trBP+Kj0XmvhykfAtFpwBu2ATXv/h9ZPciWIjcfoPFcLFaCHcuwVDemlryPRU/
-	CE4t1dg815pcod4ECbY599hGjz10OXymWC1YfsY0EW45VAm+ioNOVXHVhXwnFuTVS3Q7j1Hfa71
-	VSW/wq/cf0uBdjJn0IGtkGWDUHOHFRKPOJuD7Y0WhPu9MGTvhrCn6EsCMDhOVKlZGwpuOQGu5m4
-	wOiJ5C64JLH8vZuteMVMO4q1JiJop0oVkidWmBtF8ittrf8GqQp9TBxFruGAMDcb1Z8w5ay2hqE
-	YrykOGSqaFTSpCjnIVMD89K5oosJK17AVHc/MQjEF96Mvw==
-X-Received: by 2002:a05:6000:2806:b0:48d:ff0d:cfa5 with SMTP id ffacd0b85a97d-48e5d5e237bmr9297013f8f.47.1793281988693;
-        Thu, 29 Oct 2026 06:53:08 -0700 (PDT)
+        bh=WpY7be90G/SGk1dVlALZpqn7ki65kr0ccX4qFPemUo8=;
+        b=VhyMJSadt3/jh4GaDiMB6ZipxWTwOx6PpY85hR8Rxir41KAn+kLZUMK0IDqavn7ORQ
+         icRzz9JYx/DuNSyTB5Nfj1kR8HdIUoytLkJNNdWEPFkZIS+Q7f0ap4gc3HoHcy5vbw9X
+         ULcHeGwPsCNDRhSajszAsk1NrZRqIccui4TQs1i0kUGk1pIw4LvZbpHlA4TT4JkYJd/p
+         KibuF6B70CizKSSbxYreuMfTQJyKsJ1cH2BlQJUTXCmaetGrCZAcaQvK8T48qn0XMOnd
+         JrbxZNtLtTndAjKVH9EdalrIbcZmJktp+gaNMzw4G8nTT+jY7gkrYgAqflvkXIrWAS7o
+         m23Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwmFLbbRyPYEJ0dXuliweKK/QcZ8AG3GAi4v9MMoSdaulXdlB/YZmvO9HUUoK/QxhK9Ky2Ne8u/rkSCkk5t@vger.kernel.org
+X-Gm-Message-State: AFq9FYL49tDFYep0V4XiuSxGN08IuNRNsEepj1ubnFKUuNq6FErbTk3h
+	WUs125l6cmyb+wuYcjp3sFsPZv7nLXx65oSBcHsxhqd3WuTqQUS//RA=
+X-Gm-Gg: AYBFou0LWfSos3Q3/kmmayj4TpVgfpW4xQaOLOfzb420RIyjoqZ2ULnZ9IOkyxs16lv
+	AVhR3kBlyP9MXnZWAF3qy5a+8px2syhxcMXiu8NV7c74q0RfZ8ZqGTH1BsPKuT0fkQXeOCd141C
+	Rjl5Mk+lygZ9sgpnGFIYL9wJvA95IngQL4ylF2fm4nkvpN3SLECIp3Kax9Wj+S+54MyMMLHQVws
+	1IVXQQn975GPv2l/dCel3KhNzFzQat7/9y/F9WRw5DtoZJsacchy++T6MdNHOst32I4+fUXJvgt
+	1ruesdYAAwfF+3pBAGXY8l5sZ0atExVYgC4FpZiXbPwbsCajkIcDG9B6Hy8gWQWUzy5GP47Otms
+	PDFJ+4XoQ7/+mUsEjC6OONvF/gv1XPcbCu6ioTpgcaYPjFUIc+XJrHW4DqWaCcbUAFXtnu/1ABG
+	vBRsd/Ru7vcTW5JbG1R8zS32jdauGL3ytukAYtx7Mxo4kjtpnUiYEFzrlO3JSuHtt1UW8uqKX/X
+	UtG1CjD9EgG3If3Wfct7EF0jEv8yH73sPzeji9ZKSlXOKO6e7/NPC3z/+eoq5axxX2/x8pMTOSh
+	Av1AHbsC8DMzEEHoNT8zpJRZbtV31ROXTAWHkMRoxRWH+w==
+X-Received: by 2002:a05:6000:4715:b0:48d:f383:2356 with SMTP id ffacd0b85a97d-48e5d5d16afmr13493554f8f.53.1793281994421;
+        Thu, 29 Oct 2026 06:53:14 -0700 (PDT)
 Received: from [192.168.1.67] ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.05
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 06:53:07 -0700 (PDT)
+        Thu, 29 Oct 2026 06:53:13 -0700 (PDT)
 From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-Date: Thu, 29 Oct 2026 14:52:41 +0100
-Subject: [PATCH RFC v2 04/14] arm64: dts: qcom: sm8650: move smmu sid 1 to
- new lpac device
+Date: Thu, 29 Oct 2026 14:52:43 +0100
+Subject: [PATCH RFC v2 06/14] DEBUGGING: print contextbank and other ttbrs
+ on fault
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-descriptive-name-lpac-upstream-v2-4-a21a5c850961@gmail.com>
+Message-Id: <20261029-descriptive-name-lpac-upstream-v2-6-a21a5c850961@gmail.com>
 References: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 In-Reply-To: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
@@ -117,53 +117,67 @@ Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
  dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
  devicetree@vger.kernel.org, Anna Maniscalco <anna.maniscalco2000@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=1186;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=2450;
  i=anna.maniscalco2000@gmail.com; s=20240815; h=from:subject:message-id;
- bh=m8LjyZqlFLsxlRip5l3NXkwO7GG8cECPX+LNQd1tpmo=;
- b=ARxR4H9sfFo+nvh8rZ3WMz/5vBOcWptYc4QScQ6BwDzQQ9ZqJR17Rkbis3J/NCOw2T3Y+DXYV
- 1uradRrW6R5Bl+J4M4CED5l+9lrrUHdMAtWHma7WA0JnTxjPc/6/H28
+ bh=dH+it9hPPDLJzOx0q/+eo2IfgBzUDyQPf1+n9ilF6yo=;
+ b=rSQ/TIKRIiV2aSX7/+jAtk7J1jcL0JxB8zRWLfn1sl11ELATT02XD6e/9sRnBZS+9corw6Stl
+ Oo1uS/fWy8LCZ5C5THVWfEq4MkKG8/9Q7VkA0Io7j8QvOp628/2VM06
 X-Developer-Key: i=anna.maniscalco2000@gmail.com; a=ed25519;
  pk=0zicFb38tVla+iHRo4kWpOMsmtUrpGBEa7LkFF81lyY=
 
-Previously both SID 0 and 1 where associated with the same domain.
-
-When LPAC is not used this is needed so firmware can acces memory when
-initializing using the same page table as GFX.
-
-To use LPAC however we need to move SID 1 to a different device.
+Faults can now come from different context banks so print that
+information as well.
 
 Signed-off-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/sm8650.dtsi | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c    | 4 ++--
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 4 ++++
+ include/linux/adreno-smmu-priv.h           | 2 ++
+ 3 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-index 1604bc8cff37..f47d1dbd06da 100644
---- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-@@ -4144,8 +4144,7 @@ gpu: gpu@3d00000 {
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+index 65d34d0cfc38..4389559e1d17 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+@@ -329,8 +329,8 @@ int adreno_fault_handler(struct msm_gpu *gpu, unsigned long iova, int flags,
+ 	else if (info->fsr & ARM_SMMU_FSR_EF)
+ 		type = "EXTERNAL";
  
- 			interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH 0>;
- 
--			iommus = <&adreno_smmu 0 0x0>,
--				 <&adreno_smmu 1 0x0>;
-+			iommus = <&adreno_smmu 0 0x0>;
- 
- 			operating-points-v2 = <&gpu_opp_table>;
- 
-@@ -4158,6 +4157,12 @@ gpu: gpu@3d00000 {
- 
- 			status = "disabled";
- 
-+			lpac: lpac {
-+				compatible = "qcom,lpac";
+-	pr_warn_ratelimited("*** gpu fault: ttbr0=%.16llx iova=%.16lx dir=%s type=%s source=%s (%u,%u,%u,%u)\n",
+-			info->ttbr0, iova,
++	pr_warn_ratelimited("*** gpu fault: cb=%d ttbr0=%.16llx cb0_ttbr0=%.16llx cb1_ttbr0=%.16llx iova=%.16lx dir=%s type=%s source=%s (%u,%u,%u,%u)\n",
++			info->contextbank, info->ttbr0, info->cb0_ttbr0, info->cb1_ttbr0, iova,
+ 			flags & IOMMU_FAULT_WRITE ? "WRITE" : "READ",
+ 			type, block,
+ 			scratch[0], scratch[1], scratch[2], scratch[3]);
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+index 48a590aaeb5e..ae6152bddf8f 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+@@ -136,6 +136,10 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+ 	info->cbfrsynra = arm_smmu_gr1_read(smmu, ARM_SMMU_GR1_CBFRSYNRA(cfg->cbndx));
+ 	info->ttbr0 = arm_smmu_cb_readq(smmu, cfg->cbndx, ARM_SMMU_CB_TTBR0);
+ 	info->contextidr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_CONTEXTIDR);
++	info->contextbank = cfg->cbndx;
 +
-+				iommus = <&adreno_smmu 1 0x0>;
-+			};
-+
- 			gpu_zap_shader: zap-shader {
- 				memory-region = <&gpu_micro_code_mem>;
- 			};
++	info->cb0_ttbr0 = arm_smmu_cb_readq(smmu, 0, ARM_SMMU_CB_TTBR0);
++	info->cb1_ttbr0 = arm_smmu_cb_readq(smmu, 1, ARM_SMMU_CB_TTBR0);
+ }
+ 
+ static void qcom_adreno_smmu_set_stall(const void *cookie, bool enabled)
+diff --git a/include/linux/adreno-smmu-priv.h b/include/linux/adreno-smmu-priv.h
+index d83c9175828f..5d6de4b4de06 100644
+--- a/include/linux/adreno-smmu-priv.h
++++ b/include/linux/adreno-smmu-priv.h
+@@ -32,6 +32,8 @@ struct adreno_smmu_fault_info {
+ 	u32 fsynr0;
+ 	u32 fsynr1;
+ 	u32 cbfrsynra;
++	u32 contextbank;
++	u64 cb0_ttbr0, cb1_ttbr0;
+ };
+ 
+ /**
 
 -- 
 2.56.0
