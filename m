@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793257654;
-	b=CUo50H1iYcNZ0XcV92Smai+6lk0De2g2T9gIZAKZxmaD7lbaDtX/+1PDlmeq4ruICqCU
-	 Gw0pKTCCj2uO1TjeYppspV5McXWycmFktrUdOnlllot6dnoRgdGKYpMVnxEWkp2ZQjo/w
-	 KXPcd/LAVUJUSgy7iYBSbgekV/hMR9kOJZwMRI9msjsnMj+ClCjrSmeLmxf7YrAbsrzHd
-	 33Tglg0qJSP/R+ZyDrcl0zFtr6PiOH/dCnhSKnqOP01tyP+VBVvB6O6eZnEc/IM+xb1HS
-	 WQKzK4x5MeY0ylY3R7qdGySO52gZcjvObQX5I8QUSfSigRaiACm2luXuiEVpwutX7Ag==
+	t=1793258011;
+	b=ZWRB9RZ4acVzg17LzEeBLAPfHGYOt49scmMXt08o6RBQt0agU6COJKtOBjv8PaMEvutT
+	 pro0qVOzFUd/1MEkJGwVcPU0dhd4MhXxnZ45bTkjGIy86i4o9kn75YDu5g6fMEi5zTN7L
+	 IRT9/EnEOe0b4vXS90Fnu0vmW7w6ojzbyIJZNBgnzdJKYAptfsN3VYqYPUIJOkxS/lk6Z
+	 xwVrqN0phCnB2RdYRZ03heo4vtrLJOSKVXjP0dDTt5SLlZ4Zu4cUr8+eg6pE03Kpp6aE+
+	 11cuZXgsAhhcwY/1iMPOP6/RQ1Z7DI1F/Ie0VW+IruYIwNWSD4JfWt37bGJ670Af5Gg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793257654;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793258011;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=fCqPovCUaMSKnEyTs0813ILdLCl30RRGnjF8iUllIzE=;
-	b=UTO/x1IDLQCnRSzUWD+J1C7f+4De3Sp9yRLuhezM+uv6/5ubnd5Z8j5Qy/2hEPf4QMKL
-	 BZ+L2h3RDBMuTl+oLhX/YaUHT3hUwq3xHT4IeNl1prZoAwERkpFik0Q20opZiF0IE4Zkh
-	 vPPn9JliPIcE3NAtubUUAat9br1zQMYU2glbdTlB6PB0Run47V3HM+/3zdxSk1oX7hAv5
-	 z3V8kKAxE7y+ta+ciF+wCl1fE9qhZ8mG46xNWUkPCWDZtc2iPzLNEB+1eFCow44Mu9jcD
-	 0z9c/GlDU3LIj3gZxFQ3/u2CkqEFcWg8u3Jx7i280cdVrI7F2XKCxo0/MoiczbgpO9g==
+	bh=3r0sTD4xXYngNyBjXhJZ1mZP/HPOUsWQVKUXF5NmqT4=;
+	b=By3jlvbmqtAAaRamc2c3CPE5jWAegAvglQfs36TVpmzGSYjl+yGel8KUTRH5qnhjKfgc
+	 hDhb7LWRymTSxZAm11WmRnIRqXIXaXLz2TcbZEUUqBcJjMBPHS6sCT1jiBNDxh0CVG//2
+	 vFm24B1AmPxxKysCOH019rnfPHE2z6ufrgnzJSLjuhvAuzeca4svv1Ewi/Yg5czHWledW
+	 R3Q+17xfaxJlQlgOsv2qki4FLkpwzwd6WOUn8UzoR8haj4vzpD31ow3E0wb83WVrzWFWT
+	 V0gPwnIholx0a390onfFG38Dari665zXsnNo841kGjWWfbMG+tenHeEe8WmTnhqxIkQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b5ZQ4uOS;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="BkUZqu/4";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1557D606A31A;
-	Thu, 29 Oct 2026 07:07:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 104EF606A326;
+	Thu, 29 Oct 2026 07:13:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b5ZQ4uOS
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EBD51F01828;
-	Thu, 29 Oct 2026 07:07:29 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BkUZqu/4
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C340E1F01825;
+	Thu, 29 Oct 2026 07:13:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793257653;
-	bh=fCqPovCUaMSKnEyTs0813ILdLCl30RRGnjF8iUllIzE=;
+	s=k20260515; t=1793258010;
+	bh=3r0sTD4xXYngNyBjXhJZ1mZP/HPOUsWQVKUXF5NmqT4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=b5ZQ4uOSwVo0TKfcMA8KM+g/qKqoUOM/CiH6Hk68YncwF3UMlzEr4uaNSrvccoVle
-	 +zDWiIwh6E0IXcFTW4sSfdeqU9nypc1CAurWs6po+btYPCitbnC+mAcmOrT2HSCY+E
-	 eNY8aUae00Md3abpJimfu8q17tY5La0AZibAVK/d5yz1dJVZXSFuVUIkZu4eQckQHL
-	 ZohkPtm7QpW8OpTA+ipZGJXMgabWyWy3pAe1kYCKqJWtIeHlRl/9+nNpg16iOWX4Vw
-	 3s8iqQa3gsd5KEEFgCy36qCD9PdtdaR94aJnGXXaW1n/xTU3V+Mn6lCnrnvXMl5qP8
-	 zLS6xoHEdUXwQ==
-Message-ID: <fe9765cf-ef10-4068-ad43-26346d842c12@kernel.org>
-Date: Thu, 29 Oct 2026 08:07:27 +0100
+	b=BkUZqu/4qyv3PhSpJPbyDYUwXttuWiMHwuFTs2ij3f18xiCfSj4SIamwfgfnbL1fj
+	 nt+dz6tTabGffT8UNvGnSs+PRQyjY72B8PClwU6A7DWqqv/KMA7Wh/q7LG1KnqJpbN
+	 DSQOzq26B5ioS4Ya5FEk1s57RQXuAAcHhDljbH2HWIzR9OahiOmPYy4vmbj4C6qGjq
+	 FeTR1O4VkNa4I/Uua3GNS8sN+cBGky9yhfve/xUPD25xaMTlzjQLpnXiXZIBix++dW
+	 s9Ot43C1j0CxrW9nd+WA1MPw0G80D+gqz1nUqYFM0umIpCmOMTBPowWDQioVdRr3A0
+	 bcnVtKBh+udHQ==
+Message-ID: <b317d102-0075-4531-847d-f5eff25ce5e9@kernel.org>
+Date: Thu, 29 Oct 2026 08:13:23 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,17 +52,19 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/9] media: camss: add SM8750 support
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>,
- Bryan O'Donoghue <bod@kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <179325717815.489400.16602455641444097904@mail.ustc.edu.cn>
+Subject: Re: [PATCH v2 1/3] dt-bindings: input: Add compatibility for Awinic
+ AW86224
+To: Gergo Koteles <soyer@irl.hu>, Dmitry Torokhov
+ <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+Cc: linux-input@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
+References: <cover.1793218514.git.soyer@irl.hu>
+ <ceec2d2a29dd6cdfd984b964ad3a91601490a76e.1793218514.git.soyer@irl.hu>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -108,14 +110,20 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <179325717815.489400.16602455641444097904@mail.ustc.edu.cn>
+In-Reply-To: <ceec2d2a29dd6cdfd984b964ad3a91601490a76e.1793218514.git.soyer@irl.hu>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 29/10/2026 07:59, Qianhui Xu wrote:
-> Answering the open points in one message, short.
+On 28/10/2026 21:37, Gergo Koteles wrote:
+> Add the AW86224 haptic device to the binding documentation for the
+> AW86927 and AW86938, as this binding needs the same properties.
+> 
+> They are not compatible though, because the chip identification works
+> differently compared to the 86927/86938
+> 
+> Signed-off-by: Gergo Koteles <soyer@irl.hu>
 
-What are you referring to? I'll just drop this.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
