@@ -1,113 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793247589;
-	b=hbolCD3U8T/QihiVfbjlJwqtFtRmw9X5HJt6gncF4w9zNW0q9raH8v/Q0Ts7FrUlW1ns
-	 lQOfcs4KGFgnHkopflyHKiPS6UJv3hgPsl0/aBZQjwrYupQ0bgTlXVLwV5v1uijbDmTAv
-	 rVkxEXHQdCIOwy4qn19UIAuXAfU/J1WadHP+Z872XPwlrHj4DfdF2WhhMwMe2WO3z4/Bk
-	 J1oZyFgOgXx2tKn3fONdZThay1i9btd87aU/uIEkF7/bua+17c9CaxMv+JkDB38/dLUEd
-	 sZpeb3heFfmm56ifVyJOUZLCLpnIrVPEowoVLervHeJcEHrYkVKGYV7TKL0sGtpQ+ag==
+	t=1793247585;
+	b=XcssBZduW787DjUnFHPHhA80+Z2DuM4Zxc6hXJ2n7qKN6rSwugqBreKjDkSeUDoOIHvy
+	 p3pkBVcfBvml3cC1i/UggiNo5//YFIq0xu+Zl6BerdVX62S/wBb9ZJ8f+lji5tjg7jBOc
+	 SUKXDA2rJvq9An8rrolqu/piUsQARQ2Zb5ZrlFskay906yo8F048YyHYTn0HUs3ccTpqh
+	 8i2UdNatK8tHYSfN5pQfmrs0R/MrIgZFYkq/v6C3uat+pvHRbmBCI8RxyG2tUsqpdjhp4
+	 gansNPR0eWq73u4fq51BEvfxxbuusguaRGuGNWBe0nY+1NoWjsuQiDrcp44eu8/kJLA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793247589;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793247585;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Sz+6Kcub7kDVCrdSqvP71/UKnkp6RLiDhWqxwmv1ciI=;
-	b=t42Q1gr0uMAM239DQ61S+Kzok9Xh5LXdv1Oqocb0jUZNWEYf/hopZP+mT+w7X1VwH56K
-	 ElJNeiSsQIukpWp9iQWPb9/uWF2kxttvtVGUcBtAmbttTwgGR7VDmr0SuVCs8NWMLRa7d
-	 nHq+rOeBvst//VYNoEYVQ8HUuyI9ePkifVP5qV0nfUFfSULLU0k/9+LcOZ8DAIwIzNa53
-	 U9auroVOqCM9PgQD6nVOxM0en7N/etVbP+IICy8Q0zoqM0X5nM8BcEkNhoHMs49cGfwMQ
-	 gVgsVF89XmyZq3tq6EWGcaAGxalVjZwIF5SVcAKddhVpfuYLgd1c1+KVc6NMZbJjbQg==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=vtdbgHkkmkI6BxWyVf0K70f1fLFUUYjVeM62+DS5GOg=;
+	b=u7x36jhmYWlmT/12CRNCYpW+D4fSPsY/yJ7M6Va2iOFUpJicD/cI+buVocoLTHRL/efn
+	 rkpnCO84Rs6QkJjWhGQSv8wUpalMvsz3weEMgMAULXGUxzGdTp1s5n3Fl2kTklVtQDDot
+	 YfcXtiycIXh+XjP97LbSkXRRh4tTiHcuiE/4y5CXcv/xHBXX7Ixsjf030BC+lF9keq6J/
+	 nASnuvQYbQqv+NrJVQQ1hcqjP+UVggDWLEMNDkPOWl/9OpFIvWxukrwsXbwTdzptWjqZC
+	 AC8dqG9XOxi6cDQuJzJ5J9ApK2M0GjrEHJ6dvGymmo9mS28py0W11evdBOR1VRJ2kMA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=j3HLayWF;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cTOXfXHW;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mEUXBQkD;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VR2KOB7V;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B4B4606A31A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5B4B4606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A9DD606A323
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9A9DD606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=j3HLayWF;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cTOXfXHW
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69T1jLZx2886470
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:47 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mEUXBQkD;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VR2KOB7V
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69T1jedS3920318
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Sz+6Kcub7kDVCrdSqvP71/UKnkp6RLiDhWqxwmv1ciI=; b=j3HLayWFhlPDjyAj
-	j9hwoWTnp0m48SVsdVRhPsqD+ifwAsEo7+UpuiuD4gkOVYZqBYoIShf66N6ATYnB
-	CDhqptJGWFq+SxEm1J/MT/4ofbuUDXlpUlLG1mWFNfz0iRq8lj5PQeGjkeBW1DLL
-	GV9XNuCeylU6MCOqtQdJvAdC0ZA7K2z6xwAP7tw3RQ3z/wEVB8Br4xGpvSTuM6jt
-	ExZOAwGhG+mHTNugz449fwKr7rK6eU3BtLEn0e5JyEzr0slTsYprgl8svC6Ue5rN
-	lHuZT3TydThfXI5T9mzBAW92JxBSfPfCw9cVgtroH4HcLXlbzoIYXQH/bA2Z4cMV
-	1uLVaw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkut3gmqf-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=vtdbgHkkmkI6BxWyVf0K70
+	f1fLFUUYjVeM62+DS5GOg=; b=mEUXBQkDv5KiiyBa0l7FgDNzMwMOkxu7jm4hNV
+	zmH9MtAgHJUehtYtDndR9U1GOlRq9Uer4DRUXIDIMhOf0CfpO6u3Qt8RlfMdf36r
+	RqCbigf3o7XI4XYIPqkSojGSx2pafuqMHs9WZAfgdI/DYoatkuOk7r05BI7NfGNI
+	Y0VubZuonix+l2sisQGPvS9QQAcGZaiItC/wLDkCd+L+I/2lcfrlfRoYAxH9KKq/
+	zSRO/XEwV/oFnbfUygLrDGiPYdASFiWJN79eMoA+kwYUYUhvrcu0VkLnwbCZjMdQ
+	Op54ukTbUUJGjxkQ/S1rmdJfygy10SGvW4jZ4H1abeMyX96g==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkkehtubk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:47 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30c0d568830so3413269eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 21:19:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 04:19:43 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3662e7a9299so6835789eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 28 Oct 2026 21:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793247587; x=1793852387; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Sz+6Kcub7kDVCrdSqvP71/UKnkp6RLiDhWqxwmv1ciI=;
-        b=cTOXfXHWzTZsbxpvsKTfL1m8HCdQwbZBadnRLQSnw3zedns/N3Lh4aekzMoQ9RJD6n
-         9kZXA+5nDsBIJMrJkkl4iKyN2FkQUzB5Fgt4OkmLRmfxNnoH6DXs4do+DeZRtY4zAlrQ
-         3RZVWFe8hVqIahL7mkGX8V6ZBDRoQK7cK0vztFX0PWz5dzkX5YowlA7yiUfoGTN07LQK
-         vbSXbuLvLJPzaPIhyqfoZI+C+mrAYhjj5qnEKYYWPiO285T/bkggF/XerITGmU08NPg2
-         8HmuzVp+T9Wvqi2C3Jpa0eS/2nxIzningD1Wv/rnh+3YY3I+3MKtUIjQk8W4V72y23Si
-         x1Sw==
+        d=oss.qualcomm.com; s=google; t=1793247583; x=1793852383; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=vtdbgHkkmkI6BxWyVf0K70f1fLFUUYjVeM62+DS5GOg=;
+        b=VR2KOB7Vfgi/TF/D23xxnroeZuiKG8PnDdXMR3a9iC84ni1MJnUbxEZTyeAhN2Tvc+
+         lQhDR41+Lwfzd8KHdGruQ6F0IqkdIpFoAz60u+71v+Vkf6x8u/22rBrLhDoRrghBwHPi
+         ZiLceK6uxyfFcJbmOOyiswa13FFOKpbrtxvzEQItPZj0h15qe4U7P4EyrP3jI78zySfd
+         gHOW9TtwlGHlvaqllarC93IakK8LEom4q+oMxGQT5BEA8yfLIWuV+sIA2hK8souGLAgp
+         C+dm1SJLlJTNeDCva/qmfpWNTKPFAxnAOWrWKuq7ZWURsALZ79f9/XgRwdJmqnQrqkfj
+         jQtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793247587; x=1793852387;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Sz+6Kcub7kDVCrdSqvP71/UKnkp6RLiDhWqxwmv1ciI=;
-        b=yZUIslU4wFPAZBJl2h/ZXCSGauQw4SCnlr7Cgg+lDtu2vjsyB055ki1olM08YMZBK3
-         rN6Q+wNxwWUW8RjZsbhhewKT+I5n/TKNowB21MTXOC0TKjAQ/NuInXJFHbGvH0NLMT9m
-         jr8I7iLwoMMeP2aM9/wbjVn7WoYmGWe3aY+Z/M5IjitqrojVHOYd1TSbQGaqbsaAd3vW
-         wJZ5Di4Fa/uZm2tctbonRnPmKVSeJxuUiw+FQH/yNAna0NRhpUV7RofyI8VtAgE9DEKJ
-         2bum8NWKsTTL4LmkLgZ0gDsme2OEN/A+RP2KR/VzxJ6OlmGbPSCT26umpDwVsp/kjMKj
-         o+ig==
-X-Forwarded-Encrypted: i=1; AKwUvBx1nwiWdJlrlc4xQnKG3O2HXyg4dawQ9e4TYKy7Az3FShq+F77yavZBxmvjzNJe2RixF3OTUcwWWYZ3vnat@vger.kernel.org
-X-Gm-Message-State: AFq9FYK6Glv2RkDJPv/G40N/D4etE80MdplV9ZXPEt8gHRjki1SiO/N0
-	pH1y2/qA+k0UynT8C+XNfaLY+BsUbLVA/418fNHDD4RG3FmZ2reM1rP0VGXkXj454fMll62O9mf
-	a22JUZpys8drchDR1FBWv0jfO0VZARqOGfHT5p8MWto77/iFCmrBP5ndWHmjnILUIcxEd
-X-Gm-Gg: AYBFou0WwVJOzBx4i9QLJKWASk1YO+tux1mxCzSA9s0wGpz+7MmVAXyy/0KwWZA6vvs
-	nj0fagJJA776dehlg7rIrA3vLZE9KykdQjqvHyWjHgA46mqJg5oO/dCMlbwV+RqEuOT2MNAdlgA
-	sv2in8zE5pDm8Nht1S+kXWyIkpwhyYwaeGQl8eGk/FlTJ0wCE+x6JZ6E+ypNAwKxfGTxQwR+e7D
-	gqZixwQjDzzViSlXmEz/hVsxgo0LmXOsEZ//AlfdqDdr/DjqR6SjOb6JDx9WBq4or9pshZ3tECf
-	wkNIshIA4o9IaOe+4qU/FLB0KN3Mta9V44hVnf1CdutUjFPC4DpFey1JwAgVvQQxM2vIxhmbOgt
-	ND+DjcN0w05h4hNHn99euEl0FSpNz+baaHtez+//S9Ax9ExnFvUtHsyvhXTSi943eJTfYZrqxea
-	ncwu9OAh8=
-X-Received: by 2002:a05:693c:6016:b0:36a:1add:64aa with SMTP id 5a478bee46e88-36a2036d285mr5438533eec.9.1793247586781;
-        Wed, 28 Oct 2026 21:19:46 -0700 (PDT)
-X-Received: by 2002:a05:693c:6016:b0:36a:1add:64aa with SMTP id 5a478bee46e88-36a2036d285mr5438496eec.9.1793247586125;
-        Wed, 28 Oct 2026 21:19:46 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793247583; x=1793852383;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=vtdbgHkkmkI6BxWyVf0K70f1fLFUUYjVeM62+DS5GOg=;
+        b=pDgAZUqafwgm1mftV1yS6MgJU/5ns75J9vvqu+f3/Q4pdLrU/f/adBpXsdVyJyuGEx
+         Lb2Ttu/nTXg8zJloWeqY5Ey8YnmwLlTScXuNjOCsk4V91kgyUzbqThzj4WoclKlEtSQm
+         K3zVdWzrsJ0NFgy/rSli97CStBY/mOo2Dms2YTEWYG3H930Sotk0FmK1fg21oh55tW4V
+         8/8V3wBtEIomRR9O3m402bBwFVh25BG0tadNam0SQrQEnK3mpZiHiDGjohDzAkQVm9gM
+         XxxpQo3ThDC/VKK1RKl7+XzSeMk2toghkbJaf5+B9xqnU/spzLwAIwrFNPVbFMs1Aka8
+         Mx1w==
+X-Forwarded-Encrypted: i=1; AKwUvBw9J2XUxyuRi9A8ki168/k1xkZRZKmJIdUWBnoD9DyYhmFWdXRcQrOgVgk/yK0yDYctjbfULooAcxeuHYmK@vger.kernel.org
+X-Gm-Message-State: AFq9FYK0iDT82R7t9DvClL8RgEvOEnMU/cepIcare7kWpgMTGk/lSpge
+	c5WEyJK4ymwdxeee7qGbeBebGeVlmq+Yu2IAeojWFLUGe6W62Gre3bL3oy/xcGPqVQbSggB7RqN
+	ufN8EPxV9ff7iLgS+nRn26rTpDq8DZZvNBRf57Jp4NfjO7UH74ghAz1Awf5z+cpIj2vsY
+X-Gm-Gg: AYBFou0voEYeRn4uzCQySEwrsC42qC0Kv95iJRufsBBq91TfqSvAtz6uq6Y3HIpTxyF
+	2a1Mdc4wJq/leEbhpEEbvLBHtHS/98+Ppg0ERBBpwKMrN3G9mI+clVS1a3EKJzel9KzpTYwfC6X
+	Nhmw56tgBnqgAARhpfhMkXKn1S21McDecygt2QX51FIFYoz5odBitXeDgBJKRXEfieOnNnY0Eit
+	xru0SwmeaD3PfqKFtDd2DewtV9sxW8T4jwjuPgLCHKTAQODN2/x2X9Ri8T+AKf9++V1emr/2SvK
+	g4A4trip+ISrhiiSwG6qaMbKvb+EDBm9mlpecHVKQFi5w2dvIPuFqDojnWP7Mvhlxc4puBrYcbN
+	WNhRdT0lLf8eRhTs+mNq8qBdMpldBoq8vchOyBUzV0IUYzoFhMmi45u7vgrNBqw3j9pzfSbScXI
+	rlVwlroMg=
+X-Received: by 2002:a05:7300:56a7:b0:343:fb75:a5f2 with SMTP id 5a478bee46e88-36a203ac526mr5213820eec.9.1793247582851;
+        Wed, 28 Oct 2026 21:19:42 -0700 (PDT)
+X-Received: by 2002:a05:7300:56a7:b0:343:fb75:a5f2 with SMTP id 5a478bee46e88-36a203ac526mr5213789eec.9.1793247582229;
+        Wed, 28 Oct 2026 21:19:42 -0700 (PDT)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a237be80csm27504539eec.2.2026.10.28.21.19.42
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a237be80csm27504539eec.2.2026.10.28.21.19.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 21:19:45 -0700 (PDT)
+        Wed, 28 Oct 2026 21:19:41 -0700 (PDT)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Thu, 29 Oct 2026 09:49:27 +0530
-Subject: [PATCH v7 1/3] PCI: host-common: Fix early bus-walk exit in
- d3cold_possible()
+Subject: [PATCH v7 0/3] PCI: qcom: Implement shutdown() to avoid SMMU/NoC
+ errors on reboot
+Date: Thu, 29 Oct 2026 09:49:26 +0530
+Message-Id: <20261029-shutdown-v7-0-3fd7a76a6991@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,111 +118,135 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-shutdown-v7-1-3fd7a76a6991@oss.qualcomm.com>
-References: <20261029-shutdown-v7-0-3fd7a76a6991@oss.qualcomm.com>
-In-Reply-To: <20261029-shutdown-v7-0-3fd7a76a6991@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAE7J4moC/3XQy27DIBAF0F+JWIcIhoftrvofVRc8hpoqMa2x3
+ UaR/z04XZRFvEG60j13JG4k4xgxk5fDjYy4xBzTUEJzPBDXm+EDafQlE2CgWQtAcz9PPv0MNGD
+ LRedDANuQUv8aMcTfx9Tb+1/Os/1EN21+a/QxT2m8Pm4tsPWezC5AGVXAjG4Dt9Ko15Tz6Xs2Z
+ 5cul1N5yLa+iNrLyoviW+64tLYx3IQdL2uvKy+LR6sCdl4qaXDHq3/fMVV5VXxgTlsTDPdy776
+ ufVd5Xbwuf2o9BwFCP/Hrut4B3NOQGrkBAAA=
+X-Change-ID: 20260822-shutdown-fe8139dff2b7
 To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>,
         Lorenzo Pieralisi <lpieralisi@kernel.org>,
         =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
         Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
 Cc: konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793247578; l=2329;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793247578; l=3648;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=Z62C1KjgkUfHo1yhmxjksV4K46Bz6P+GsVAjd37UQdg=;
- b=Iw7LeukSpt3ZcOOgYAGwfrqVem8LSplH+ckiEld+aTBOcm5/X8ru5QHX0hg+feBVnO8nouRWy
- M5L7nVlaI7TA5T3pLpwySqagPe9UYZQ6vEtQbeIgfqLM79bq9UlXSrN
+ bh=uRZgPWgYEoLVldUGAfakdjG4uT/MDZgecW4/9yDGcBM=;
+ b=bT6Xaze3KWenOsMaOUYwqHiFc5Uldsm9VDZ/llFDDG26Dim9BVoTN1ogdB/wsgayULB0ji9rH
+ LDk8DNaQcMKB1Zt12jvzGZozXuCW1GjY+IbSvsEf3hIfW1M5cYvwBX9
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDAxNiBTYWx0ZWRfX0G0E1LHAVc5L
- EuvXuv0ja+GWGHkEhDLMA9TkbysDCPIy2HDRR0LZebmW2ELtkzMrZDv+XHjmwrO1ETTHmNVHiCJ
- PjTNedXU4LGK9O/FmMwJPsbZvq+c52E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDAxNiBTYWx0ZWRfX1syAqi2AUT5V
- gVoY3JWKpZwLC5exDHbEsP9gRnEgnyO5gSsrfUF3f55zqVlM4PuFUi5cAFhMvXsqJoonAbHIzbh
- ILMPsmpvy5jz0PCFO9BRWsjJZ5saLLGZSkfndC6fu7lE8aiGAcEnlubNR251RgNNEoT/D7v80W0
- ROoZpCxGOO7UuPEVVL1g4Fxlj+CsJa6GRc24VYbwluUD775Aiq6fS1x6skJQAoD+2CchQTb0ATX
- WVIKSSM9NNhZtfbpN344Wgv2RVbVSqTLM+CZyifQ7GOo5OML+SGQOXVn2O1F4vZLtKHLdSwGe3P
- fWXxPQJpirEe5YUQr2rxibGA4ozixQN15vt7xSZdEc4M+m7ycFTkkTIj4fzRL5d6yYrcBcVbY8W
- K0tIt4P8W57tF7sH8YQAWrLwMuwpF3Z+jBXNQPnH87wOJFXx6K9Z+TmkLyuEhaUB1mzt3GOhY21
- se/OdZGC7MupAnBU37g==
-X-Proofpoint-ORIG-GUID: j3TtVEvB9T5zp7Jqw77vsMQPArUSASsh
-X-Proofpoint-GUID: j3TtVEvB9T5zp7Jqw77vsMQPArUSASsh
-X-Authority-Analysis: v=2.4 cv=HYSB3SE8 c=1 sm=1 tr=0 ts=6ae2c963 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-ORIG-GUID: fE2BtytUQFY9Z9Tl8G5EtFPnZ5cDq95p
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDAxNiBTYWx0ZWRfX2NO07KYA1RZF
+ VetyZDbPnunCRO0PapSuU6CJ0LrCS9aUmRithJK0509TBur4ypVBumvghO9d7CZCdCFVHiJV5vb
+ oXYasVPnjtnrHOdAvpI3kaoAQAEm9VoagQ6uCe0COcMeXVDqrlqNM+9tO5jnbucabtVBreGTxUr
+ nDAj0WOCt2dP0shNrS8DHRkxmo3+cz8UhnPCJB0+aaf5tlqnp6n+Djm063WDKMUIyM7XPxPE/8I
+ JcGekgXKFc8LYlLmUrGBilvbTu17RPG+Kof1eprMnJiCg5eZ6cvkG0Xf/pOsU50YBQFyGwn4rMN
+ KGl1TsOJIOnV2Ek51rK/dYei3V4njdFf4og2tjMJYwdF4f0jCXwqYfVGut5u8JVg2ldTk1thG9B
+ ULPtJx/a+n9fjHsx0gsldO2b0gV/XqklhNpcSP1z/yZOc1DdgkTF7IclKmkTS1jtkf9z5makf1r
+ SR697bsK5WcwxfjwRXQ==
+X-Proofpoint-GUID: fE2BtytUQFY9Z9Tl8G5EtFPnZ5cDq95p
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDAxNiBTYWx0ZWRfX6zROT+V2ibUH
+ PPc0u5Tn6RuXrl1HT32euwdYX6yGblVdmJv8BE586/NgZVlPBW7u6lw6xYfC+5+PekWkrw9EJQi
+ wEOz0n3PbQElwggOexN1c1dd7lZ42aw=
+X-Authority-Analysis: v=2.4 cv=bYv+w+PB c=1 sm=1 tr=0 ts=6ae2c95f cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=RIIKlrP-v3AzcS8hWasA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=7FPx-eIICnbx9kjoaAIA:9
+ a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=FO4_E8m0qiDe52t0p3_H:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-29_01,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 adultscore=0 suspectscore=0 clxscore=1015
- spamscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610290016
 
-__pci_host_common_d3cold_possible() returns -EOPNOTSUPP for the first
-downstream device it finds outside PCI_D3hot, and pci_walk_bus() aborts
-the walk as soon as its callback returns nonzero. Any device enumerated
-after the disqualifying one -- including a wakeup-enabled, PME-from-D3cold
-capable endpoint -- is then never visited, so pme_capable can come back
-false even though such a device exists on the bus.
+During system shutdown/reboot, power/clocks to the PCIe controller get
+removed regardless of link state. If the link is still up when that
+happens, it can trigger SMMU or NoC errors.
 
-Since pci_host_common_d3cold_possible() already returns false whenever
-any device disqualifies D3cold, aborting the walk buys nothing for the
-plain suspend path: the overall bool result is unaffected. But it
-silently drops pme_capable detection for any device ordered after the
-disqualifying one.
+This series adds a shutdown() callback to the Qualcomm PCIe host driver
+that forces the link into L2/D3cold before shutdown proceeds, reusing
+the existing suspend_noirq() path.
 
-This matters for the upcoming shutdown path in particular: unlike plain
-suspend, shutdown forces the link into L2/D3cold regardless of whether
-pci_host_common_d3cold_possible() itself allows it (see the following
-"force_d3cold" changes), so at shutdown time it's common for an
-endpoint to still be in D0 and disqualify D3cold while a later,
-PME-capable device is never visited. dw_pcie_suspend_noirq() still
-uses "pme_capable" to set pci->pp.skip_pwrctrl_off, so an inaccurate
-result here can cause Vaux/wakeup support to be dropped for a device
-that actually supports PME from D3cold.
+Patch 1 fixes pci_host_common_d3cold_possible()'s underlying bus walk,
+which aborts as soon as it finds a device outside D3hot and can
+therefore miss a later PME-capable device -- something that becomes
+common once patch 3 starts forcing D3cold entry during shutdown while
+endpoints may still be in D0.
+
+Patch 2 adds a force parameter to  dw_pcie_suspend_noirq() so that callers can
+set to make dw_pcie_suspend_noirq() force L2 entry during shutdown/
+reboot, skipping the D3cold capability check that can otherwise leave
+the link up if any endpoint hasn't suspended yet.
+
+Patch 3 adds qcom_pcie_shutdown() and wires it up as .shutdown.
 
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- drivers/pci/controller/pci-host-common.c | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
+Changes in v7:
+- rebased on pci.
+- Link to v6: https://patch.msgid.link/20260909-shutdown-v6-0-62b7bd123236@oss.qualcomm.com
 
-diff --git a/drivers/pci/controller/pci-host-common.c b/drivers/pci/controller/pci-host-common.c
-index a23907a875e5..c2c852c64aa8 100644
---- a/drivers/pci/controller/pci-host-common.c
-+++ b/drivers/pci/controller/pci-host-common.c
-@@ -275,21 +275,16 @@ static int __pci_host_common_d3cold_possible(struct pci_dev *pdev,
- 		return 0;
- 
- 	if (pdev->current_state != PCI_D3hot)
--		goto exit;
-+		*flags &= ~PCI_HOST_D3COLD_ALLOWED;
- 
- 	if (device_may_wakeup(&pdev->dev)) {
--		if (!pci_pme_capable(pdev, PCI_D3cold))
--			goto exit;
--		else
-+		if (pci_pme_capable(pdev, PCI_D3cold))
- 			*flags |= PCI_HOST_PME_D3COLD_CAPABLE;
-+		else
-+			*flags &= ~PCI_HOST_D3COLD_ALLOWED;
- 	}
- 
- 	return 0;
--
--exit:
--	*flags &= ~PCI_HOST_D3COLD_ALLOWED;
--
--	return -EOPNOTSUPP;
- }
- 
- /**
+Changes in v6:
+- remove return 0 in d3cold_possible() (konrad)
+- use force as a paramter instead of the element (Mani)
+- couple of nits (Konrad)
+- call pm_runtime calls for firmware managed one also as we are enabling
+  pm_runtime_enable and get for that also.
+- Link to v5: https://patch.msgid.link/20260905-shutdown-v5-0-f0c6bafa1d4f@oss.qualcomm.com
 
--- 
-2.34.1
+Changes in v5:
+- use a flag/parameter Instead of poking the system states (Mani)
+- Fix pme_wakeup issue by walking through entire bus (Sashiko)
+- Fix Irq free issue by using dwc free msi API (Sashiko)
+- Link to v4: https://patch.msgid.link/20260826-shutdown-v4-0-eb5fe9d454ae@oss.qualcomm.com
+
+Changes in v4:
+- removed goto d3cold, (Konrad & Sashiko for PME error)
+- Disabling MSI IRQ's (Sashiko)
+- Link to v3: https://patch.msgid.link/20260824-shutdown-v3-0-81c14bb7a1af@oss.qualcomm.com
+
+Changes in v3:
+- Added null point check and use pm_runtime_put_sync (Sashiko).
+- Link to v2: https://patch.msgid.link/20260822-shutdown-v2-0-520a68f1b4a5@oss.qualcomm.com
+
+Changes in v2:
+1) don't remove the endpoint pci dev's only keep link in D3cold.
+Link to v1: https://lore.kernel.org/all/20250401-shutdown-v1-1-f699859403ae@oss.qualcomm.com/
+
+---
+Krishna Chaitanya Chundru (2):
+      PCI: host-common: Fix early bus-walk exit in d3cold_possible()
+      PCI: dwc: Force L2 link entry on shutdown/reboot without D3cold check
+
+Manivannan Sadhasivam (1):
+      PCI: qcom: Implement shutdown() callback
+
+ drivers/pci/controller/dwc/pci-imx6.c             |  2 +-
+ drivers/pci/controller/dwc/pci-layerscape.c       |  2 +-
+ drivers/pci/controller/dwc/pcie-designware-host.c |  9 +++---
+ drivers/pci/controller/dwc/pcie-designware.h      |  4 +--
+ drivers/pci/controller/dwc/pcie-eswin.c           |  2 +-
+ drivers/pci/controller/dwc/pcie-nxp-s32g.c        |  2 +-
+ drivers/pci/controller/dwc/pcie-qcom.c            | 37 ++++++++++++++++++++++-
+ drivers/pci/controller/dwc/pcie-rcar-gen4.c       |  2 +-
+ drivers/pci/controller/dwc/pcie-stm32.c           |  2 +-
+ drivers/pci/controller/dwc/pcie-ultrarisc.c       |  2 +-
+ drivers/pci/controller/pci-host-common.c          | 13 +++-----
+ 11 files changed, 53 insertions(+), 24 deletions(-)
+---
+base-commit: 17bb0e2f6c8043f70a693a5f3797471cbed354c8
+change-id: 20260822-shutdown-fe8139dff2b7
+
+Best regards,
+--  
+Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
