@@ -1,89 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793281999;
-	b=DSsrhpIez/qR339q+LxHEeaCw0xNhMkptjUQKWHj98n/f89x25whi8rq5CIKt/yQixpS
-	 G6yzhURKPnXWejpcDmVz84ZCOHsEoIDaV8dqmPxvbLRf+ECxPghaoxPoD3r4QSswvM13f
-	 RjHBcxhCbJ/vs2q03HNtw/Q1EPthc/glgxrEWJPCFGacQv5iN8z5VJfk/+4v+KiukEIZd
-	 05oKGycyHqYHnlHwcOsK+dcxPtIWpm3x98qnGq6XeheAH0g28oYs1K6n20W7289/ikaVz
-	 zXezK40BLk6ju1o9uXa5LNvFcYVhVfTDfb/kyn9RNzdMC/N/Nz1ofvvIhqpI9IL/n+Q==
+	t=1793282003;
+	b=SEQaCdf0jvO9sZIWQxBZkTZT4dB2z1E8A945T/2hrCJ5ua+OvSe4IKwMYtiIv9gJlLIe
+	 5gaoTqtzKrhicv8YekuL6y3GttaVh+NV8Uvi5LCt+ylfxGcmo2EbFhvt6bEVK3H6G9HSQ
+	 vg7VdH1SDTdGgHsngT4TUIibvqL/cTNGasdX9qmzwmso6K8gGqIJtfL7cp/DLPM5YK+KQ
+	 cTsp33kiJDsEP7sh7I3A1NOjYevc0KjnDxvvq2fZZhnXV8q5XoJDfFHlm3aFrsbibG2qd
+	 mEqUqyesmi4D8oKiuY0fTd9p2E0jZs4w4H9Wo0bMfSJ9CxpgR59P58xUHsRbuY0VbSw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793281999;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793282003;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=rFW0YNxgIXO3yK9W7NnNeF63YsxO45UeDwCNLoLZDXE=;
-	b=FPE2OxEAo52aeyOukPvtTnk6C+SUNapLCTEnK2PwI66Gpxzr007soGchPi94NS3M64Ue
-	 4I9A+rwYMxMoIFGWdW7NMrRAO3E5KHZMUzZbce3l/sNkhxnpVRs/EXwGCOXjESuwvRiEf
-	 agQXwa70Yf+Y6bSoG9LppfWYPA0ibvvxdLgFHO+SvhPVaLsaK6vpf0XTZM3V9wLFltoqe
-	 mb06AMZ6PHkk9ETHvUEgpOrPByHEM7Swhbp0795dfSesbVCcskn/QYLLpp6VQmToFIOiH
-	 2fm/NtVdWUFtRB9XW7UrZglOqb04R8OabD+0w1vT8yq5QOeZ7gF3nlMN0fVcMNFvyhQ==
+	bh=F6iyjptvh4HoJM36iNO76ddk9CmJXz5lBV2KpfdHPWQ=;
+	b=CNasMYHlW1h7hIqx9Su00suTGY5e852RX3gs7iU7uZCEEVYGWEN2eWRYFXDREQgA4g2Y
+	 cP2j919jNV6xV8AH3d/IdmtZ8BiybmKIfoIsvdwcoiX0lT2t3wUZAC3r9kYDftdZ0aJSv
+	 g/HD8teIyBDVGF1HPXo3hhjMZ6UBQatJEj4Tp12lRaP57Y5N6JR5U0z4c/jUF+f4ChUnL
+	 kG9E9Bo9EePMecTPUvArnnnQ/Mnsl832Zh8lPBS4Vo5Y1s8mReYZYoP65fJpk12kxfQnF
+	 nGXAmx77iHjEUTjc3EFm1l0giG0QwSEK7/8Bug7GPpZOV5kEjJYStb4ywHFPVaRgPkg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gRRfYxUF;
-	arc=none smtp.remote-ip=209.85.221.53
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UfFtODtI;
+	arc=none smtp.remote-ip=209.85.128.47
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C271560A3838
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C271560A3838
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 283F260A5BD5
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:53:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 283F260A5BD5
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gRRfYxUF
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48e0d1da913so523156f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:18 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UfFtODtI
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a5087a5348so20351355e9.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793281997; x=1793886797; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793282002; x=1793886802; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rFW0YNxgIXO3yK9W7NnNeF63YsxO45UeDwCNLoLZDXE=;
-        b=gRRfYxUFQqwTkUT2oyeXYOUkBjicevEGc3PmbdOaYe4q525sM4GW1KHH/GZLMjZqxe
-         cfIPkORDTIG6BYAy6VV0m89jmebmE4y5YMRVP55FKwHQf4NSXd0tGra8SfLioopUOoPa
-         ORfS1uUt94DVUdWZA6okIiPnR1Ud85iMh+TC8ns0LYMrPETP8MW8svSr7lO0OrylXIvQ
-         0tEhcDm3kkGY3aF1ZM+v+RjbQgMKbOsl6iEuxvBgtUpITXwjGmUb7AxYhgTHKAJuWpeO
-         HQu3X4rwffKavXmno+LcnmaOq0Z4ZL/UZpM8D0dPodlH/A2LFz5fH+sAoashAsLevwSS
-         GPfQ==
+        bh=F6iyjptvh4HoJM36iNO76ddk9CmJXz5lBV2KpfdHPWQ=;
+        b=UfFtODtI+om2m2VG0IwwyR7Ee3t2Tszhx0rPZbmSS7+GfanhfyAAHbx41uxOjyJOaD
+         B977Tjxl82vcQqjpp7OJSJtHz/BUyFtL77KCTVCQoa0ep8TtZmfK2pee8DHorWLJEfxn
+         MV/KdNZJrK8mk89XI5+6R0JNgIX21q24FfkWhGzseJ4TRlVXlVT5FcWbsv9arR7SlvBA
+         TKOM1bYiHUay11A5D32+YRZMGEfUVUdTifJXzL4DiLkj8fnfnDfWBd+h6/M+DkD7O7Dg
+         tBSeYsG2vXoDVCAY+P9UbA04Hzmw0FjvYLo32Sofh4AxszVI08ZAb6Jvl8Mbx5gBrRSz
+         IrIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793281997; x=1793886797;
+        d=1e100.net; s=20260707; t=1793282002; x=1793886802;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rFW0YNxgIXO3yK9W7NnNeF63YsxO45UeDwCNLoLZDXE=;
-        b=UxaqaSeRXCin85JHF9Gsrp/W+qbV94GqtBHLnRnfOsHpEOKwbrqjjC/5H1j+l+NxG4
-         aSV53+J5o7Y+EXb5u8hr9GCsqx5G1rrHu7Ou0EqUUEojkV/UUBeKHoa7I/+b2qpxQRpu
-         CzVPmWdNwP2xX5vILLkq9n6YypoDs1jWzWc2v8shMlGpUVUrSOGtqHhowmCpmYUmyNvd
-         O7lSTpYUDhKi6xRzfSZe8JFvqdGr0Owy6YJ4EcRPsGjVJZSy/7X6MfvRbcTrvQTiiRBJ
-         FZh+X9lC3nOJ+jQJOpN/eyH3LIywlyiiiReTUOnQH+Lh4WNIJLtdLmzsF8gaGS8k9Ts9
-         FvUg==
-X-Forwarded-Encrypted: i=1; AKwUvBxmaqp2Sfvx66hleIQEIH3sCKw06PYnSQmb7UcgrqT5I8kRcXC7x/Em4TrejvhAtSDwQrXwW/XH/t6M1gtM@vger.kernel.org
-X-Gm-Message-State: AFq9FYJuun8Eo1G68GQZkA4pDJydMdrwozVWlU73JSbZ9MAX1GojrbVj
-	QAlWL8VZ5hzD+J3J7m8zr3brU9QndrsU5JHxfHHGZAohBpE1AFssaQQ=
-X-Gm-Gg: AYBFou0a+dCRLFGPHTvPF73ofcE+19wd3Q+l9Tb+3SHGj4yhlnjoZs1Q4HSDGS/DFNZ
-	f22j3xv/zRJ8W8NN992nsRpYUN67Y0GSEsUGIEkEr26snw/sASp9yV/Gs/x4X7Ufaj/ElHt8VPa
-	a92giK8x3JHAbUIUdTFpUQw2dp05pY3sHftIX3GDiAbgK7YYU4aFHUalgm/NHiEqARZ2WPx4viR
-	aXIWPk7zQ5u3GC7wVgDG+xFKNRXT995hS246SMokBvaDRltStDuhONEF7lZ2d/OR6vXNT+Br79c
-	Z6i872IZKF/XQGa6fn3NTRc+y1m7blqe8sjf6SNO2B0xDFLPXubweN6ETpophR7fpZmcyWpMA/6
-	Pzr55EA02FLKzGvbSK7R/jwESoou+c2uTypLiWl7FKoZQeOt6MxOj0bfYnmSi3+aYya1hKnxazN
-	HCCOCmzWQmWyw4Hx1XCfSjaaEUIwSvq5ygEDGfOSoxHqsG1TbaWJ9kmoA1IVpd8hdJ4+URHMfxC
-	kNRGkvGSaiiMgChgkkGOyzmlNGyW0HY2FbjkFFVtIl06lj0vPtUT7O7lh7zRO0NLnVi9EZkBvDl
-	7aaKPHVn6scJKer4Qh35v+XuOpnY3mXQ+zTRhC4s2yI6/w==
-X-Received: by 2002:a5d:5b91:0:b0:48e:60a7:e0bd with SMTP id ffacd0b85a97d-48e649933c7mr5094994f8f.17.1793281997067;
-        Thu, 29 Oct 2026 06:53:17 -0700 (PDT)
+        bh=F6iyjptvh4HoJM36iNO76ddk9CmJXz5lBV2KpfdHPWQ=;
+        b=oR4yD0VuzbYT2IqaMvfzwr0jyV0xc5ZZXLhlqywZE+K2x7MHS9miRHxLrWnD/8ph8+
+         9Y3LNWh1U29ndLouiNk/WfWxxLysvgPCCc3O0nNZUKt6zZD5lA7e+9CEMLqgCDQCu0U/
+         EIyVouAq7RmStoWVkpGTYlq3kO3IDg0PQNllzAM5Ll+Aezc/kA1MmiWDi5btmUsN3KE8
+         MaUtjR8G5yTrCPHltbJQbWCOgoF56sBGn/CNJjbW5mOCLtuYbvAx3Qs4ieOIgJDMwGH3
+         IFl1cesj0FP0924TmhI2yvL1VrDI1de0B8EnBLbvcCn04vvgev9zaOoYr28gKaL1fBZL
+         hQCw==
+X-Forwarded-Encrypted: i=1; AKwUvBxuquNdnOYuyXnDnbuaPB9ovgU1QExi/UOECJ7+PyFu2tIL9/emBYHAI7ra8rz6uljRLF1cnU+zwMzU2lQb@vger.kernel.org
+X-Gm-Message-State: AFq9FYKW0SgQpJ97EcK4nrCqGm1MeGi3saeLfeQdJATN40sTEmYdLAkC
+	6uTIfz+aERHQtZGDlViE7d+0y8w2NGbreoWkJFu3EqUFrV7IRPprOAk=
+X-Gm-Gg: AYBFou0eVVt3NyWTyy6rk/CmWGyhs10ZRodzB3MqsD9yDBOZ4+ufb7+j6JL0kmcckAC
+	VzQEAH7Qo1oJ17sYGcGM7sAdVzFKxTN8WdEr5OKqmM00avQiYBuAHi/CKcfMLjm/7Z6bfHXI5/r
+	C7byWaMV7lsOOkw2TYSGbJru5rGRaDbzCJHh4CL0ZGzYprFuxXwXBSI8B/dyMp3WyKbxoh54xKX
+	dsun6WGUBdlivFxjhcwK/HioqU5HBKo0pMdPpufMqwo42+wNyTGc++/FQEnwG3P6oJq3fSGhbFA
+	CDwd1Kl/69tDu7MUnLJBrkOZpkjZzPEQ+iZfuDGtmqf/j9kzDZI3HTW88MG3MHRpyNG395FPZLG
+	8aI8h79RjZ4m8iLlPGYwD1Op7wMz+ubBEmpUccZRiFdnc49RK3hqFTb2Vwxmvg4SvN42Fkhla/O
+	GngPCdGb1ctzmBETEyYrCLavHZiQxokPkXh03nQ2V/2jR44LlC8XAKBcrtKrrol7vW90dCThwjJ
+	7ugg60EjPASxmO7M8PLVT27BREw+haG1FitqtFSHzSIjnY5BsBg6qX7x2ie6KfEEDxfrkIiNhey
+	RHJDVPPRhhowj6umAcD+7AAw6Y1yKzrqRU1rHS2VIlZgrw==
+X-Received: by 2002:a05:600c:19c8:b0:4a2:150f:160f with SMTP id 5b1f17b1804b1-4a967d96ed4mr130087105e9.25.1793282001580;
+        Thu, 29 Oct 2026 06:53:21 -0700 (PDT)
 Received: from [192.168.1.67] ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.14
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e3ebc3dcbsm33456468f8f.14.2026.10.29.06.53.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 06:53:15 -0700 (PDT)
+        Thu, 29 Oct 2026 06:53:19 -0700 (PDT)
 From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-Date: Thu, 29 Oct 2026 14:52:44 +0100
-Subject: [PATCH RFC v2 07/14] iommu: arm-smmu-qcom: Fixed mapping between
- sid and cb for gpu and lpac
+Date: Thu, 29 Oct 2026 14:52:45 +0100
+Subject: [PATCH RFC v2 08/14] temp: add LPAC regs
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,7 +94,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-descriptive-name-lpac-upstream-v2-7-a21a5c850961@gmail.com>
+Message-Id: <20261029-descriptive-name-lpac-upstream-v2-8-a21a5c850961@gmail.com>
 References: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 In-Reply-To: <20261029-descriptive-name-lpac-upstream-v2-0-a21a5c850961@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
@@ -117,89 +116,76 @@ Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
  dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
  devicetree@vger.kernel.org, Anna Maniscalco <anna.maniscalco2000@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=2537;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793281977; l=3442;
  i=anna.maniscalco2000@gmail.com; s=20240815; h=from:subject:message-id;
- bh=ddmhwqAVzi4UvZ7es6VT6qKlZqL0nH2dFG7G9BUrboU=;
- b=bSLxcYA1Hg7TlJKZ47oBfv1YRksocS8fOUT+GDiqsMJuS2PEP6fGuu8UQ7sr0kvqrRp2ErWZv
- hi5jOvHNIWgDaeJxu8pdrMCwt9FmVwlER2SJfgdk1R9+hQIkj2UjR5Z
+ bh=RZEFtq/LXNa59m6pbHJ662cjcscb6GjQIUaPl2ZCGCY=;
+ b=Gg0EOPcUOgQpNZut9lNNaoRdNIuSBEJgfuo2weKWP2BE2uB9+coUCffV36k/9B33kt5L/B+7s
+ HpwtMjcdQ9CCbIIPIywq4tqFWNV27VuvFgGbiHV02csNFC4O1QaG7Tn
 X-Developer-Key: i=anna.maniscalco2000@gmail.com; a=ed25519;
  pk=0zicFb38tVla+iHRo4kWpOMsmtUrpGBEa7LkFF81lyY=
 
-We want to map context bank 0 to SID 0 and context bank 1 to SID 1 as it
-makes it simpler to deal with.
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/39416
+
+should we merged and we should sync to mesa instead
 
 Signed-off-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 ---
- drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 31 ++++++++++++++++++++++++------
- 1 file changed, 25 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/msm/registers/adreno/a6xx.xml | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-index ae6152bddf8f..9413b748e79d 100644
---- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-+++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-@@ -225,6 +225,24 @@ static void qcom_adreno_smmu_set_prr_addr(const void *cookie, phys_addr_t page_a
- #define QCOM_ADRENO_SMMU_GPU_SID 0
- #define QCOM_ADRENO_SMMU_LPAC_SID 1
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+index 3349c01646e1..bb49f6a61a9a 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+@@ -276,6 +276,11 @@ by a particular renderpass/blit.
+ 		<bitfield pos="1" name="ACCESS_FAULT_ON_VIOL_EN" type="boolean"/>
+ 		<bitfield pos="0" name="ACCESS_PROT_EN" type="boolean"/>
+ 	</bitset>
++	<reg32 offset="0x0B09" name="CP_LPAC_PROTECT_CNTL">
++		<bitfield pos="3" name="LAST_SPAN_INF_RANGE" type="boolean"/>
++		<bitfield pos="1" name="ACCESS_FAULT_ON_VIOL_EN" type="boolean"/>
++		<bitfield pos="0" name="ACCESS_PROT_EN" type="boolean"/>
++	</reg32>
  
-+static bool qcom_adreno_smmu_is_lpac_device(struct device *dev)
-+{
-+	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+	int i;
+ 	<reg32 offset="0x084f" name="CP_PROTECT_CNTL" type="a6xx_cp_protect_cntl" variants="A6XX-A7XX"/>
+ 	<bitset name="a8xx_cp_protect_cntl" inline="yes">
+@@ -333,6 +338,11 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x0845" name="CP_CRASH_DUMP_STATUS" variants="A8XX-"/>
+ 	<reg32 offset="0x0908" name="CP_SQE_STAT_ADDR" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x0909" name="CP_SQE_STAT_DATA" variants="A6XX-A7XX"/>
++	<reg64 offset="0x0b00" name="CP_LPAC_RB_BASE" variants="A7XX-"/>
++	<reg32 offset="0x0b02" name="CP_LPAC_RB_CNTL" variants="A7XX-"/>
++	<reg64 offset="0x0b04" name="CP_LPAC_RB_RPTR_ADDR" variants="A7XX-"/>
++	<reg32 offset="0x0b06" name="CP_LPAC_RB_RPTR" variants="A7XX-"/>
++	<reg32 offset="0x0b07" name="CP_LPAC_RB_WPTR" variants="A7XX-"/>
+ 	<reg32 offset="0x090a" name="CP_DRAW_STATE_ADDR" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x090b" name="CP_DRAW_STATE_DATA" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x090c" name="CP_ROQ_DBG_ADDR" variants="A6XX-A7XX"/>
+@@ -521,6 +531,7 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x0b29" name="CP_SQE_AC_STAT_ADDR" variants="A7XX"/>
+ 	<reg32 offset="0x0b2a" name="CP_SQE_AC_STAT_DATA" variants="A7XX"/>
+ 
++	<reg32 offset="0x0b30" name="CP_LPAC_CHICKEN_DBG" variants="A7XX-"/>
+ 	<reg32 offset="0x0b31" name="CP_LPAC_APRIV_CNTL" variants="A7XX"/>
+ 	<reg32 offset="0x0b34" name="CP_LPAC_PROG_FIFO_SIZE" variants="A7XX"/>
+ 	<reg32 offset="0x0b35" name="CP_LPAC_ROQ_DBG_DATA" variants="A7XX"/>
+@@ -1207,6 +1218,7 @@ by a particular renderpass/blit.
+ 	<reg64 offset="0x0E08" name="UCHE_TRAP_BASE" variants="A8XX-"/>
+ 	<reg64 offset="0x0E0B" name="UCHE_GMEM_RANGE_MIN" variants="A6XX-A7XX"/>
+ 	<reg64 offset="0x0E0D" name="UCHE_GMEM_RANGE_MAX" variants="A6XX-A7XX"/>
++	<reg32 offset="0x0E12" name="UCHE_DEBUG_CNTL_1" usage="cmd"/>
+ 	<reg32 offset="0x0e17" name="UCHE_CACHE_WAYS" variants="A6XX-A7XX" usage="init"/>
+ 	<reg32 offset="0x0e04" name="UCHE_CACHE_WAYS" variants="A8XX-"/>
+ 	<reg32 offset="0x0E18" name="UCHE_FILTER_CNTL"/>
+@@ -4406,6 +4418,8 @@ by a particular renderpass/blit.
+ 
+ 	<array offset="0xaec0" name="SP_PERFCTR_HLSQ_SEL_2" stride="1" length="6" variants="A7XX-"/>
+ 
++	<reg32 offset="0xaf84" name="SP_LPAC_CHICKEN_BITS_2" variants="A7XX-" usage="cmd"/>
 +
-+	/*
-+	 * LPAC will always use SID 1
-+	 */
-+	for (i = 0; i < fwspec->num_ids; i++) {
-+		u16 sid = FIELD_GET(ARM_SMMU_SMR_ID, fwspec->ids[i]);
-+
-+		if (sid == QCOM_ADRENO_SMMU_LPAC_SID)
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- static bool qcom_adreno_smmu_is_gpu_device(struct device *dev)
- {
- 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-@@ -237,8 +255,7 @@ static bool qcom_adreno_smmu_is_gpu_device(struct device *dev)
- 	for (i = 0; i < fwspec->num_ids; i++) {
- 		u16 sid = FIELD_GET(ARM_SMMU_SMR_ID, fwspec->ids[i]);
- 
--		if (sid == QCOM_ADRENO_SMMU_GPU_SID ||
--		    sid == QCOM_ADRENO_SMMU_LPAC_SID)
-+		if (sid == QCOM_ADRENO_SMMU_GPU_SID)
- 			return true;
- 	}
- 
-@@ -313,12 +330,14 @@ static int qcom_adreno_smmu_alloc_context_bank(struct arm_smmu_domain *smmu_doma
- 	 */
- 	if (qcom_adreno_smmu_is_gpu_device(dev)) {
- 		start = 0;
--		count = 2;
-+		count = start + 1;
-+	} else if (qcom_adreno_smmu_is_lpac_device(dev)) {
-+		start = 1;
-+		count = start + 1;
- 	} else {
- 		start = 2;
- 		count = smmu->num_context_banks;
- 	}
--
- 	return __arm_smmu_alloc_bitmap(smmu->context_map, start, count);
- }
- 
-@@ -363,8 +382,8 @@ static int qcom_adreno_smmu_init_context(struct arm_smmu_domain *smmu_domain,
- 	if (client_match)
- 		qcom_smmu_set_actlr_dev(dev, smmu, cbndx, client_match);
- 
--	/* Only enable split pagetables for the GPU device (SID 0) */
--	if (!qcom_adreno_smmu_is_gpu_device(dev))
-+	/* Only enable split pagetables for the GPU and LPAC devices (SID 0 and 1) */
-+	if (!qcom_adreno_smmu_is_gpu_device(dev) && !qcom_adreno_smmu_is_lpac_device(dev))
- 		return 0;
- 
- 	/*
+ 	<!--
+ 	The downstream kernel calls the debug cluster of registers
+ 	"a6xx_sp_ps_tp_cluster" but this actually specifies the border
 
 -- 
 2.56.0
