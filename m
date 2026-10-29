@@ -1,64 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793239388;
-	b=E6O+8ILoqfbazEbG4fRg44/F2tZnDsprcyIkdyavyjhWaSEwC6WxGqra7TgJiH5mXTqQ
-	 xpM9StHlmlY09KIIRxFulUFvvnQLB9JR3P/GQxtBBZqqwGJvtyX/xWpvbmJYttr383Ll6
-	 Cd/skiUbLAvf/kBBkeHxiSXopCRCK0DQShC8trgUZcXMG3nd4EhyIW1Q0NOnuJOodUcob
-	 AKMPqb5B20iy2mwyJey42cnWjIDMJxtd+8I2gcvrgSONd1LS/R0Z91dZBIPPIeBtSnv8m
-	 5aR9bdiLv6braMDW9nSwBkcPXzjjbGLQO6gQ8zULRmGJ1HlDYgpHnZhj7Jfhp2cOu7g==
+	t=1793239387;
+	b=iHB9RPOqVQxRqtJ5KIM3VsdXzPwvEstAcxvV3KRbo6tdFiLPfpkFJz9EgPxxSOJpufJj
+	 wcHf7BgxhwseGlqc6diKDwLmW5o4eiZxUaq+mDa9b3vDNNH7EfclIto4NmbLUtm8izsYz
+	 gaEJDkzHx/LbdMPvKNl2D1L+cV2Gue1EeyyA3sqlNLzyPx1z2M44hN+sefyjBKsnjpHUD
+	 e3NCR4NWb1KYSMGV+gQ3To35J6k56mG8T2ZP3fAg0andxIw24IqcAPq4oP8w0R2w4pxPd
+	 kqSpDywov+fyUcogVnEUHZ91v3Imiy3BB9/UxdkLd3bVzqqM1blRrmbcGN1vi5O6R/A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793239388;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793239387;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=hsjzbJh0YAhA7aU91BVufRu1UhrX9+xX2rsFcUjkoRE=;
-	b=lkSAwRhDyZjaV6xEZPHgcAgaeFaOfMvrHcXjHvtIM1kBPAD4ahk2nPL2Ns3aboWMF75d
-	 fPVWIc9t8732fA/Ek/6ehgz09XvGLplMqY4NjIX+2bggsxdVuZ9M899BEkCKFFy/KJ60A
-	 j067qhNzC5BpgdFtgIt7k9h9JhAyRALTScXrcVLNz65tfYqUegeoQzrR/BD+1q0JZpuEn
-	 ZWI9/7uDmPg12z9n4i26nWSBGLO7PXwBtOqB/7pPr5GtOloAv3bxxWfaLgcqOGP8DrlVx
-	 rEQwc3oq+dyh4dzuygYcN5PlAEwPNn1QWUalsEKjtWcbCrn/F/MXeyXIcWcrUHR5NSg==
+	bh=82EWEmTBFTHlp3Xbk9DdfBWQDqYO1PeqHpfQuSaH6o8=;
+	b=Q5yMS6XwOdl1bHzg9TkNR3cbyPDenwPyTZJ5CfjdE94HXyB1UsJf29XI8D/jsX1zIQfl
+	 xCydqEevisakWn8/8tyUicIBXzV+eMpWlYBbPJfoabWLdf2Up2WMJonOmS26e7A5suh9m
+	 iIcn9wQXv90v5XhSy+N4/sYkC976iYZ+UFfUPo0ly0wihHUjngWflVnMbIcf70e/JJXir
+	 G3/75usJkK92X0fIOwm57+S77OPL8QBy+vipXC/eol90x8B9ak5vkr+ZMTzm3kGULfvKw
+	 KlH5FyusCvsWkkg6/g3V2OdycuPScpirVMKZ9BFmfbRaSbDBb2jDA3RvKMHnA8oGYmA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BhyW3HU5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DCXGBdls;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A31ED606A329;
-	Thu, 29 Oct 2026 02:03:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BhyW3HU5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 016201F01828;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13B6E606A31C;
 	Thu, 29 Oct 2026 02:03:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DCXGBdls
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5937F1F01829;
+	Thu, 29 Oct 2026 02:03:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793239388;
-	bh=hsjzbJh0YAhA7aU91BVufRu1UhrX9+xX2rsFcUjkoRE=;
+	s=k20260515; t=1793239386;
+	bh=82EWEmTBFTHlp3Xbk9DdfBWQDqYO1PeqHpfQuSaH6o8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BhyW3HU51R1W0N1kp8nr9+0HbArY2fdiqtHKdkCZMaom2TO8N3ppO1ACicN8tIHOQ
-	 lNLYyfATDJkfx8hkrKZ72FHifFU0fMmNmoQ8QOS0xT0tcoGC+FZtoijVyvLyGud88r
-	 GpygPEm8zISLgBpLwhgtyal+bY7DZ+W7c3PW9hvEwmwxEfgDWMBqwYRc9935qh1gU9
-	 jEHK6AJbhjC/QSTqWXGip0izUq+qUIZp7vr1O2CrKFxHOIT7LqUcr8l9EEY6TekoxY
-	 omhu9GtdZLJSPHPoLaVZoPfslfSzESDEcZzl9Nlx/ypCi1YSHf4eD9qXdaZVkFjh9C
-	 VZuirgcZD3/Iw==
+	b=DCXGBdls4rNx+a5PDTFNAov6fZxMx8gV51xcRKLX9ieFKyMYjnNT/p5N973wDwERG
+	 wYTe8o4yQynY7q6ihffPul38/8wj3TuDPWHCTmP9kmHnok7yjaO/stXmzPNTSn3JVG
+	 6fKCfZBXMgj585GRyek361zkvugL6eHkW0arf5qYr2NuZPptsvrCi58a5rcrFVRyJK
+	 Lw/6HFqXxyxRDDXt3zI8kYIjkHcEEceO/tAWtY7wvTvy4FqmyEB+YWQI+VdYrDgszf
+	 Mu8cThzts2uR7cwbE8FFhQ9lRg0tUsepaswmp0i4gJMYa3Bmx+0EZDNbBOjPA6aho1
+	 8L/svisLTTUIQ==
 From: "Martin K. Petersen (Oracle)" <mkp@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Alexander Koskovich <akoskovich@pm.me>
+To: James.Bottomley@HansenPartnership.com,
+	Joonhoe Kim <26rote@gmail.com>
 Cc: "Martin K . Petersen" <mkp@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
+	alim.akhtar@samsung.com,
+	bvanassche@acm.org,
+	beanhuo@micron.com,
+	stanleyjhu@google.com,
+	peter.wang@mediatek.com,
+	can.guo@oss.qualcomm.com,
+	mani@kernel.org,
 	linux-scsi@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] scsi: ufs: qcom: Power down UFS during system suspend on Milos
-Date: Wed, 28 Oct 2026 22:02:45 -0400
-Message-ID: <179323465394.491807.15697827904056465787.b4-ty@b4>
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] scsi: ufs: core: Fix a deadlock between clock scaling and device commands
+Date: Wed, 28 Oct 2026 22:02:44 -0400
+Message-ID: <179323465378.491807.15412315305334194970.b4-ty@b4>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261005-milos-ufs-suspend-v1-1-a6f8b89d5b63@pm.me>
-References: <20261005-milos-ufs-suspend-v1-1-a6f8b89d5b63@pm.me>
+In-Reply-To: <20261016124608.46-1-26rote@gmail.com>
+References: <20261016124608.46-1-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,21 +73,27 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
-On Mon, 05 Oct 2026 17:02:06 +0000, Alexander Koskovich wrote:
+On Fri, 16 Oct 2026 21:46:08 +0900, Joonhoe Kim wrote:
 
-> On Milos the UFS PHY GDSC is turned off on every system suspend and the
-> PHY loses its register state, so exiting hibern8 on resume fails:
+> Since commit 08b12cda6c44 ("scsi: ufs: core: Switch to
+> scsi_get_internal_cmd()"), device management commands go through
+> blk_execute_rq() on the pseudo SCSI device, which shares the tagset
+> with the logical units, while ufshcd_dev_man_lock() holds
+> clk_scaling_lock for reading.
 > 
-> ufshcd-qcom 1d84000.ufshc: pwr ctrl cmd 0x18 with (MIBattribute 0x0, mode 0x0) failed, host upmcrs:0x5
-> ufshcd-qcom 1d84000.ufshc: ufshcd_uic_hibern8_exit: hibern8 exit failed. ret = 5
-> ufshcd-qcom 1d84000.ufshc: __ufshcd_wl_resume: hibern8 exit failed 5
+> ufshcd_clock_scaling_prepare() and ufshcd_pause_command_processing()
+> quiesce the tagset before taking clk_scaling_lock for writing. A device
+> management command holding the lock for reading at that point is never
+> dispatched and never times out, so the writer waits forever with all
+> logical units quiesced. On a Lenovo Legion Tab Y700 Gen 5 this ended in
+> a hung task panic.
 > 
 > [...]
 
 Applied to 7.4/scsi-queue, thanks!
 
-[1/1] scsi: ufs: qcom: Power down UFS during system suspend on Milos
-      https://git.kernel.org/mkp/scsi/c/fb2a238f15f0
+[1/1] scsi: ufs: core: Fix a deadlock between clock scaling and device commands
+      https://git.kernel.org/mkp/scsi/c/2327df6d2a29
 
 -- 
 Martin K. Petersen
