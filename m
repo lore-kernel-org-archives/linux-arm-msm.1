@@ -1,66 +1,66 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=203.205.221.209
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=203.205.221.205
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793260457;
-	b=2QIpeVwW3wIiWO6+8B2dyG2j1uz7Yj13ZCSifoxhBc4eT1ViREKwbm5FBbNtbLKo3tKG
-	 +eMtf+4Kgvs6wtnJLJFqREUN8uhGGVEvSHqkt8LswLpe7igmtrJ4D5TCqELGz92m79KWB
-	 k6Dx/1R8z/y+Mij2K2xUkANG/2W4Z13oNGdp9Cj/pZECOSRNabKKcmuxArljIMUTu7AT5
-	 tXZm/ug4JOKBHUyuIdCmUuL+eeiIzj2NAwOWuMyRabHLTP8PUJkyaIETDSsjq9E66iVjs
-	 8jBuDWwKoXnLLDWwjcXSwXcsqAN2nemgsKatR3Y/5ki90pn6bcy8jx5nWWkbQsq0OAg==
+	t=1793260460;
+	b=ZFWC00hAUxOYgHVgGdSg6/tMQFLhmTZkD4Cl/kJLizo3tuKBAF9Lk4hajhr8YHWnRc0r
+	 BNmA3gOpzi7eFMZEt2h0NmdwtZa89cS6Y5klvmelAHLynvouQrR4gNKXlUUw5REdQPR/0
+	 zmXqDGBE9hVQnNQhNu6xI2j+W0AHQizWII1eLPK3zmcWUVWt8kVS/J+fG1AOMK/Vxs3rL
+	 fpr4OX0OkN/0Oxmos6biA64QbCXuiFz9eL33jHVVdYm2jz8Tnp8jcQodAoip+ezHvhSYL
+	 an3ATQXmEkAD4UcbLRtaXRRKHodF9xQhQ25FaCIJmvwefROYHiL6A+f3qc9Jhk1RyyQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793260457;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793260460;
 	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
 	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:
 	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=LrVJrASEPDAnWNObrp4qXrz8WW/eaSb8dl6O3NDVmxg=;
-	b=fCJ1YMUXb3GulejkHb1aKEIg+QHx02SbaWUv70hpDP+r4ii0ylfQLTqRsjDzEUji7ZRg
-	 B5qGEes3mhSpsh5MpnynpEt2GxukW5V3pw1301LzZOjyK5Ra6Kvqi5ywn2eCn78zP7uEF
-	 SCG70R0Ldu0AcVaka8qS99iEV6k/roHiAzXh8r01Oxw8fuI0vfKVqN2jGxOaJf6SKpFR6
-	 GLtyxgcN3TIM0jWeaneuyjWNiZUgnZYJYC4tkV5C7e6tIVaby1kmS5/h5ZdMPtbzTz/KF
-	 rw5n5pqEEQ0dFhrWF8Nyjv/9sJdBsdaSD5ZJNbYRQq2Au8uC+fRDwxOQwVWolVaQG4w==
+	bh=zarMwuSQY4X5KqyFYldbtD6By9egYAYuPFBFtzqZucg=;
+	b=YNPBJLOCxzAu6ceSQRuzzsVbOPW5y4gcxLj2RnPIC/qei+L2BZEPsVBH1hwHWhwOiwiV
+	 uHBSTqiQzgmJeoIsQvPpzUTojK9iZ9+aMsjKlN/eO6n7AenqVra9CF4bd0O2d3LlbEfe0
+	 HoT2KmVxlkEimFBWSPyYi/hU7M8LWt82mZ5UW1JtTOUk5wEnUmYPczITSWiqPg3kEAGT2
+	 76TON64+Rl40b/mE2ktNlHzMyrUM4vrWqTerlV/uQ8GiIsgG/x8PFvLwAVMMToDfgnEUq
+	 57OvuFBXPzfI5XHS5EaShrgGvEpSoB0/jnrmULSg0n1i2oSO+TbqNcPJm7qWsSLpcrA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=qq.com;
 	spf=pass smtp.mailfrom=qq.com;
-	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=W3Z6vY6T;
-	arc=none smtp.remote-ip=203.205.221.209
-Received: from out203-205-221-209.mail.qq.com (out203-205-221-209.mail.qq.com [203.205.221.209])
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=gwRtz7S2;
+	arc=none smtp.remote-ip=203.205.221.205
+Received: from out203-205-221-205.mail.qq.com (out203-205-221-205.mail.qq.com [203.205.221.205])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3030860A5BCC;
-	Thu, 29 Oct 2026 07:54:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3030860A5BCC
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01F6560A6F50;
+	Thu, 29 Oct 2026 07:54:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 01F6560A6F50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=W3Z6vY6T
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=gwRtz7S2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1793260448; bh=LrVJrASEPDAnWNObrp4qXrz8WW/eaSb8dl6O3NDVmxg=;
+	t=1793260451; bh=zarMwuSQY4X5KqyFYldbtD6By9egYAYuPFBFtzqZucg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=W3Z6vY6TZfHAy4Y+vPcSyooBMikEHi52D0m+7YuCYNRgfX6FlWK6muPjrXxx64N+U
-	 A6sc6wJoYN7Q4nUK+ZH10BMkTh7q/UoanX50F6UcqH73jn21/8QlTAeabUpo+4pAio
-	 RkeGaSWY1zAt5bG6AfXcVywiHcGkgREymcxSbXAU=
+	b=gwRtz7S2yWAzintgqkHs+NkdsAPTsZb3L5fgNaeFDpfHr5W8L57KNqk8Ldl8Uh5GJ
+	 WcVu4dPw+WODBuMo2TkKxUZBLBsL6jNcJaZFtYrScqqCRkacCgZjT5YUNoRwo/tIcE
+	 g8oNliDNKUmI5U6m9gunXs8rNkelUAUzow3Y8cHU=
 Received: from shuai-VMware-Virtual-Platform.. ([171.8.225.58])
-	by newxmesmtplogicsvrszc56-0.qq.com (NewEsmtp) with SMTP
-	id D859381F; Thu, 29 Oct 2026 15:54:05 +0800
-X-QQ-mid: xmsmtpt1793260445teksvypk4
-Message-ID: <tencent_3B08CBAEFC7B931B6E90D8D8C4BF3BB1B406@qq.com>
-X-QQ-XMAILINFO: Nm45YswcjhU8BGGHyu3meqLQYIY8JWZJk2uFMM7hVoKjeFDhPGQ5iaBRydXQlX
-	 6ysxzfp8GF9U0uLGslMwuDHRF8YCzqmyEX6yRa098A90l59tqR69MUJmgLNU2l3HRSFBT4fOLBTV
-	 kL5M8C6qLfPVUwCayo3/PXhtatIymY/WMLyQRHjQBMucJO5A3SoV6RGPcgpYGAIb/37AR95sXZ7R
-	 +fgERJ6QDkMBqBSBbvBawh4aX4JPNC8ovL13Nri6vcDkTwijbDLPYmKoNPHa+1GMceo9bD+lCB/t
-	 99cJP4dItZKTLUOMa3r1D/JbGorFwpe6668ty3iA2jJEYG45ED+ys9/hrzzfsFu28nxZLj0FuKGb
-	 MAEfcIAqG6LBSyaEKsgYV7pmcq2dbaeNDTZJPepVRLcls8FHDQv0p8kb0PvssRJPhS7mD1q2+W9v
-	 8tCuVNkEfuIWMQMr7FUg/hmxQ6vFToQeHMzl59eaLcc3fl6uonguJlDTQOYuMW3jDXCeuPzDPGyE
-	 DhetIZeLXUBDK8OVvTWg5hZoL7IF48UnzcHrTId32ELzKy3EO/bVHyhb3HkNuWCRMYctxyWrJAQx
-	 Z47oP6my2qKajZbGXgePtnctxBeJ+C00h3jhTMlyU/HBMaHTRj/JmTMyvXG/MbNyhYlXV2n74IMx
-	 luI5FcueViqws2SQXx7OgwiViqz/j+n2GaIt2Zp8pN7InI3FP54mmJB9FyASV4INW+ox6K+WMbTF
-	 mkTd+SO27OAjNdrNTgJzZTkkNxKlw7wELSRWSANSDYd6OYy0w2vSHdmUtEmFr/0Lyza2W/8xouaY
-	 p8wjruLLucmoAD1pP4A4PT5N+7dFHz3e9DJcyRjMb9qdM6Gl+JTcAKemc6rUPPCUUknvtA98k8Yv
-	 LpXlD1dhmRwkYSGFu99gwNvIuunT4W7+5RJJfg+8Hb5cN576dtFGY08tUDycD9ov1146p3LcvPyT
-	 kEtHK2S9yOE3qYmVRjpbuXBcImtcRgqi+GXRupr84rKVnYzxm9fDN3F2gkT7J6Tph4aOFo1Z7gOK
-	 p/JNEYxhvBK6e1E0ZyBR1F0EUeF0GRmem5uQOk2KQIAc8kqE9WK69bM4Cxc3GcNQXZ2FmEJGIKai
-	 h6BIb3SVOI5MZjwBcPvze8a4RC8xb5u2fc0RIFbWntUuExUxQ=
-X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+	by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
+	id D879DC34; Thu, 29 Oct 2026 15:54:07 +0800
+X-QQ-mid: xmsmtpt1793260447t1r6eh427
+Message-ID: <tencent_448218F104903BBC74140B91BC5B93362E06@qq.com>
+X-QQ-XMAILINFO: NZDLPLkmlc+zhVmsY/wjaXxHdQKTrxnCdbnghMeDGbidoY68qzMmo5Q0QIikMN
+	 gOyOY590ZsRIb/AEHSDoHJNFnh7QdEsK3SVybAK7VRFmu1zAr6xb7CnwK+/73om6/OtH+gPQULGL
+	 Epl0evOQeXm2csp+4g5YfEVPY4G0T9lC6jLz4Ww+eYvm9aPKGEy2hOwbZW/2ipC80oV3Ps3VHHEU
+	 lhjf6610nUTEfwPszrLB4nr2thnKLDfz4WQC8VrixehUaJZ9s9weJx4uC8I5qFg83l5/TEEUMUh0
+	 6aSZI1madTT8xAdF0pFndIzHWi7vXS8FxV/Hq2fNxfHRu0NlGBf2FviG9g/Rf1QSl/kFGIx1KEOw
+	 4E2r4pzpxKczhtYKycTrElutmchn5vjAKe53o1E8q2qkpa3JzbakstJNLQNttoG1tP9hG8yKHhJv
+	 2CDIsEYYvkPJgmEXFRCHMfe9ri8QXZ+Ut00SBjJ92cwpl8EI2dPY8JxG33eqQFQsvd3lHZi9u/5c
+	 peZ7o1pABwqyD3CKPatRBv6kgn6Hg7GDa3EgcgQ3ZrLKcMNBfqMJbCVtHEspiND2ZghmFtYF2N+E
+	 pLs/E1MYj3CmnpvKAtHevhjo8svXEROlt+pn2l/cNoJ7T/kVgFrBdUscBR1LpaHS3cnuQGDpWH3K
+	 geVGk1bgu1qviU1sJcTl+26g/vzzv80A09ni5VNTMKvJUl8eYiujshlOv1MeDFoFKmq0FRmSA7Gg
+	 3ioPKnCc/PLA2FZE3nvfinhALuvtQp7zjSm5EBRpCFt86diLmaFRGxaZizDAT0s3zlzLuLl01Zk/
+	 hKxBCuJ9qnAGj6XrHZo7/GyKJ9FBnEDRoJ/MX0eREkbQmqwyup7p6qzoCBARwQbSgtR44S5mt1Pv
+	 n7m+cYqhh6d5JZ4jmQ/8oytJPv5iknBRuJIbXsTtVUMFG/gLsHPunVvRX+hbBe/fB1UT1+MF4M7z
+	 5Lgg5GJV6SOC9cXskFs0i2SdP0erfzlS9qnrLR2vsKDBbTWqkVH6+aCpgIskGH66FO/vWRqvs5wj
+	 dXNeZTfGpf7BJElm7thOhVaX9xr+PGnuAdSKc0FaZSi0zwtBB36gb0ewQDwEugJ1yhIefb69cF9a
+	 89eOMadzSNxsuyjiU1jY04bnyfUQrPjfZLTLE6
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
 From: Shuai Liu <847807867@qq.com>
 To: linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org
@@ -72,12 +72,12 @@ Cc: Shuai Liu <847807867@qq.com>,
 	Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 8/9] media: camss: vfe: add the gen4 block and SM8750 camera subsystem
-Date: Thu, 29 Oct 2026 15:54:05 +0800
-X-OQ-MSGID: <20261029075405.2907239-1-847807867@qq.com>
+Subject: Re: [PATCH 9/9] arm64: dts: qcom: sm8750: add the camera subsystem
+Date: Thu, 29 Oct 2026 15:54:07 +0800
+X-OQ-MSGID: <20261029075407.2907313-1-847807867@qq.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261028034105.326535-9-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn> <20261028034105.326535-9-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <20261028034105.326535-10-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261028034105.326535-1-xiaqinghuan@mail.ustc.edu.cn> <20261028034105.326535-10-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -92,51 +92,25 @@ Content-Transfer-Encoding: 8bit
 
 Hi Qianhui,
 
-The gen4 write master programming itself matches the gen3 conventions
-(the FRAME_INCR >> 8 formula, the 256-byte unit addressing, RDI_WM()
-offsets), so only three things stand out:
+The node itself matches the binding from patch 1: 19 register ranges,
+35 clocks, 16 interrupts, four interconnects and four power domains all
+line up with qcom,sm8750-camss.yaml, so from a schema point of view
+this looks right.
 
-1. The interconnect table does not match the binding
+One nit in the commit message:
 
-The binding in patch 1 and the DT in patch 9 declare four interconnect
-paths for sm8750-camss:
+> the SM8750 block has four CSID, six CSIPHY, three VFE and
+> two VFE lite instances
 
-  ahb, hf_mnoc, sf_mnoc, sf_icp_mnoc
+The node describes five CSIDs (csid0, csid1, csid2, csid_lite0,
+csid_lite1), not four - three full plus two lite.  The VFE counts
+(three full, two lite) are correct.  Patch 1/9 and 8/9 carry the same
+miscount in their commit messages.
 
-but icc_res_sm8750[] only contains two entries (ahb, hf_mnoc), and
-camss requests paths by the names in this table, so the sf_mnoc and
-sf_icp_mnoc paths never receive any bandwidth vote.  For reference,
-sm8650 keeps the binding and the driver in sync: both declare exactly
-ahb and hf_mnoc.
-
-Please either add the missing entries with real bandwidth numbers, or
-reduce the binding and DTS to the two paths the driver actually votes
-on.  As posted, the extra DT paths are dead weight and the bandwidth
-they are supposed to guarantee is never requested.
-
-2. The commit message miscounts the instances
-
-The message says "two full and two lite CSIDs" and "two full and one
-lite VFEs", but the binding, the DTS and this patch's own resource
-tables all describe three full CSIDs (csid0/1/2) plus two lite
-(csid_lite0/1), and three full VFEs (vfe0/1/2) plus two lite
-(vfe_lite0/1).  Patch 1/9's message has the same numbers.  Please fix
-the commit messages.
-
-3. vfe_prepare_buffer() rejects formats at buffer-queue time
-
-The 256-byte alignment of pix->plane_fmt[0].bytesperline * pix->height
-is a property of the negotiated format, not of a particular buffer.
-Format negotiation does not guarantee it: camss_format aligns
-bytesperline per format (5 bytes for RAW10) and height is not aligned
-at all, so plenty of resolutions pass try_fmt/s_fmt and then fail every
-QBUF with -EINVAL and no explanation.
-
-Suggest enforcing the constraint where the format is chosen: either
-round bytesperline up to a 256-byte alignment for gen4 (which makes the
-payload 256-aligned for any height), or reject unaligned formats in
-try_fmt/s_fmt with a clear message, and keep only the per-buffer
-address alignment check in prepare_buffer().
+Minor: the node declares the camera subsystem as "isp@ad27000".  The
+existing qcom camss nodes use "camss@" or "isp@" inconsistently, so
+this is fine, just noting it for the record since the binding example
+matches.
 
 Thanks,
 Shuai Liu
