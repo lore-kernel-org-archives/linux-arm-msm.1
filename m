@@ -1,111 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793284926;
-	b=2aKWjqo2ZX+AOFBdki+mNsJv1jfcuZsiX1fqlLTbwAop248BVrhn1nx6Bvj3LphU9XxV
-	 l8SpmKqw41+tS+2GLRK5D0F7ZsWFKdE/E0OP3v8Lc2MI7XIeM3W/BWlVjJt9aVmITQx95
-	 TK1AGQ16AJiVxSfCht83e57AQQfZYIg6yIy3MlQCS+bEgQuwtKOTxUtEevME9kkN46aTm
-	 SEbk/fHI+uQyLHhke7x/NzVNbnp0M1GNPjkc22gfixVJ4Me9G6pwk03Z/mrP0Z9e+I1zh
-	 H8Gp5MpvNO6b5h+aaSE2TQ59FesI6LDmTNBZtm3TVsF1HkgbNRniiKK69/cKyopPnUw==
+	t=1793285085;
+	b=AejaRvGHnfubIBtfX8toIeNjvulu6HYnDIcR6oInEJdoW8GcI+BadVWcsBD2t/KcrgqF
+	 8Q/XqUaXaflJ9BAFgFiJVuAvaVjTUqNJkbLNbiK6shHUNU5o864V/F6P4KIiYnova4OSM
+	 oiiuNNYvwYCirAfgz/pX9nIVMi5ZmPnIkVjb6xidwEn7d9QA74q8uLMwBEbAB9dr9EOvw
+	 JN+H+nE/nlNTwoPCLrWTnst5e/LYWkuOF9U5OXWZAvI/rzE1XAn0ZsoVmy0s1FXc6Dw6+
+	 7dtxGaCGX2d9kZ8ZoWiAXk0Spgm8PQv/DgdvChoVAm175EDGvJte/dZvVwktnHOGpWg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793284926;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=e8t5Xq9tCKUo9Qzu4LPifkPJjmKDzJOtBLM/fPK1Urg=;
-	b=OJBbOIlJSRedNTmrEFVkM17sQXWxHEUBpXz5kCYYQo51dzVnSccBAxRQpHn/YkO0XV/E
-	 k7vTpoSpPlZLcT4dmn1HUUJVTLwreLkD8NReaFq/s83iVBwLBBG5v1RmZujkSFXBuizAT
-	 RRJRunHMVvMZ1GxWKHQQiTlEccd2FYVJbHzAZF6PIV8S6TrwRU3/llW2MHaMO2Igk1THN
-	 9Jw9OespTxKBgxwzqudta2oe/kBtcXWabCwcAtUf6JD04cbw15QVX7sQWGcC77Km2fgDI
-	 lE5bM6fUac/KIGGug3iP2Lu/swGZixQC7JuVUXWJLZ4/mV8VhIs6FjI5p5T8BmBV44g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793285085;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=VXJiIJztfvKEYzgXyd91oDviaSHCAjxYzQPx+8XFimc=;
+	b=QJX8PwZwyeLsNTsEUH/ALzbDaQKf3yoaNKTEhj3HDkMV9cnJV5/JOXGLbTdTNH7rbDLg
+	 l6nx+L9uUorfwvTVyu58ehZgNur95pahNHRccG8mR5lIr7e/eDBXIbcEI0rOfyBP46YHL
+	 Jnv1yilEWeMKXPn1fWF3cb8EEloRZTD+D1dbCYIO3bIMhmRoX9YJXCrAGNv3oM4c+MICp
+	 rsvCVzHTQAUxc0BJY74BksQuFdigl4xQehS0f+8bXa99s6x+bR7cU/D3tM8Srx9nUy5Cn
+	 q1kGaxdUZrwQJ67yM66uKLnLsG+SWeO2X5SFJKCOMwGGTPCndwSj/rYaAuwCxK4jfHw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ne6kKYZk;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="CO+mK/Yh";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=f35w1GXN;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D691606A31E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 14:42:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D691606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6713606A32A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 14:44:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B6713606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ne6kKYZk;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CO+mK/Yh
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69TCdwkM067941
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 14:42:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=e8t5Xq9tCKUo9Qzu4LPifk
-	PJjmKDzJOtBLM/fPK1Urg=; b=ne6kKYZkf6lbtSRyfU2iZImCOOIK3M/HA7Nf6d
-	fx/zGjGG5Dc04Ph+A52K9kIIrFi99nJH6MASEGwgoMsIu9PKL5L47NlakJS4wwM5
-	Z2Je8KFDZ8elH9kDuZIHdO26BfIXuD6592EgffarG0/DXclnlgPYquy2FiiDW4Et
-	+RsmWyi7FQu1PkZdtJlmU7SphT8ErjOzKrLeGS/0wWXgjIn6kgLuCAzYHcwSuE+e
-	tBf6a/FmLHWKl3aSYaarEPOd8Pm/Ib1scvut8686yaQ6YnQWPTySgz8anmbM+RPu
-	ZnO9tq0AVuABuqhTjyuwGf20u5dIs+WneAjJt3K5+3jx1Nxw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkxsht94k-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 14:42:04 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc73895c7d5so2366626a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 07:42:04 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=f35w1GXN
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2069b9710so21182865e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 07:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793284923; x=1793889723; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=e8t5Xq9tCKUo9Qzu4LPifkPJjmKDzJOtBLM/fPK1Urg=;
-        b=CO+mK/Yh8z/jRm3PeFsqk3VvQ/xwUlFt7oVYjySgohwiytFmOaXSL59pwY3nr4z+LM
-         zn9vLoAGmlGB+Br4o+72/R33OHHUxFoyj/ay7OAs/1HMr+2usPq4UqvZQ89no2F3hDy0
-         bJmc4w2HYd7WIMPdsCbBaTROjZq4yNptS+gbddbJVYzOSNc4hEY2tzGNmScHbocpprLl
-         k7bGiFvyq2TSvfa0TE38JWvZdXvAFw/9W6aNTgQZCPgDoHHGKnTiWKeCbK0JggDetWbY
-         +B0ysxV5u/lZw8WsSRusFt5/Ptk0gyumjUuLGMGqg9l06Q/bnf0ArSo/AEQtqB5BDXIH
-         Msnw==
+        d=linaro.org; s=google; t=1793285083; x=1793889883; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=VXJiIJztfvKEYzgXyd91oDviaSHCAjxYzQPx+8XFimc=;
+        b=f35w1GXNb+QP3vb1z/ZT4B9wxGtYH3rCUt78LQMgmP14X/rgFyiKTLepY9jvV7Ntkz
+         rolvC3pUztbkQQFX73wE06y9kP00UY1/mHlLshrZUbGqmUrPAIF1IZZGFFSLHF1HeoaO
+         meNgj5byKe2ntEP7bZOmVVl9z/8qWRTwo8R9XQFOq3brfm0pntzSg2oTHi8YB3XfDabD
+         czmZ2dSvLzi/f3IlDItTAHSkUfm8wnR4HG237kx889Q48ee3Eicf5UJnNVWVTRKD8V2h
+         LsHO9hTjEZa34zvE8owpPVPwNOpKjX/Cd0zF1Ma2MfXcytH+3pirIJFUbvFBF8ekSX05
+         VQMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793284923; x=1793889723;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=e8t5Xq9tCKUo9Qzu4LPifkPJjmKDzJOtBLM/fPK1Urg=;
-        b=TZQk2O9QqwgHP6V1DHsAPccA+OQMlmNJgWbGPQEewu7NZ/0kv5NxdLzfC/bvZrdC18
-         bJGmq3YW8WPwYqr1zPn1W1cA+sP6pQo94SSx8jzC7CkRvs5++sVrWcfKRNn5EaLo8uBh
-         SYmWa7zASQuGjhwjsDO5qFoF63HuxtVUWrTQjaQfh03Mj5URas+TsyXUZRhQiZpyDdm+
-         yfHtpgF4G9+4CIRqTpB7cygrCsAUJXjKPmcDbDTbMmOvGZKmhGqcrbROjTPX8nExTOxv
-         +GH0byZwLeYX+1HiXqU49iIysc8FZVGXJDENIhWQ3NY+QSP0MhS20kQ6pKCtvTy5NRRj
-         eufA==
-X-Forwarded-Encrypted: i=1; AKwUvByX4CJxibmsS23MGD5tndOzx3LgiqpoqzNmMRX9Jvpqq/3vKPM0A1CN20Jvz58MxA8PUQiNEMw8TjEl4xj8@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ1AHT7EXhs9pUWmEZllviNX+cRCvRg20SpQ6eYpqhWMAr6c8tG
-	2iTomVjkAmi5oDjj6Z5XjLoopjhvGKmxyHPcJ98zx0obMmBh1r5XZUUDeOLy3uxThHX/pPgFoea
-	PLDLx9CCg5UnVDSl9HwHuzY6hBuQ4l9Cdp7GYhCAmY2nU/sCy6JLpIrq5Fi9Cj9lfvMMO
-X-Gm-Gg: AYBFou0ful0QoqE/1EtaLwg7dxB3YMaJrxHbQ7dv0Rlso+yI+yVERNrlZJJ/bLr9p89
-	/JUnVFBR+R94Uhzfqd4NhgFHw6xc+0xt6bDAkngmrSMa/I3QOfgxeTYcsrN6KhbSItUe004zO1E
-	m2n9Qi4SQpSCm/morJNuF40zjD2M+TgJY/Y5c7wKQJ0ciQkour7hc28BCJjm+h2Fq/2OGKs5lKH
-	5mMG7rbhXSe4n+UOgsvet6LttryXUgsoyFx88deSZIatOgSQY7diLdc0Y2BICfNoV7nWJy8Cn4L
-	s0QjWOS/qDqNd+Ctsu9yKCri4vXyqEBa18j/jQNmdDR8HAqZ1GT5XWdhK9aoX3lVyAhiw3ziG8G
-	Wts0fZKzTIX5xP35refs6kEN9TDRjfrJEsdYuLy53yLNo2ORuZS+TBa3iaCbG1YMuAgN9hs6Yn/
-	0vZmI1pdo=
-X-Received: by 2002:a17:90b:5404:b0:3ad:6090:a183 with SMTP id 98e67ed59e1d1-3ae57f629eemr4725563a91.16.1793284923048;
-        Thu, 29 Oct 2026 07:42:03 -0700 (PDT)
-X-Received: by 2002:a17:90b:5404:b0:3ad:6090:a183 with SMTP id 98e67ed59e1d1-3ae57f629eemr4725539a91.16.1793284922659;
-        Thu, 29 Oct 2026 07:42:02 -0700 (PDT)
-Received: from hu-vkatoch-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd8cccde306sm5444510a12.30.2026.10.29.07.41.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 07:42:01 -0700 (PDT)
-From: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-Date: Thu, 29 Oct 2026 20:11:45 +0530
-Subject: [PATCH] arm64: dts: qcom: sm8750: Fix iommu stream ID masks for
- CDSP compute CBs
+        d=1e100.net; s=20260707; t=1793285083; x=1793889883;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VXJiIJztfvKEYzgXyd91oDviaSHCAjxYzQPx+8XFimc=;
+        b=iVQoduw6hyvb2pdowTjO9WIn493MA9yiGEvbZ5VjKPiXQHgXEOFTJI0AwnryqaVX3Q
+         Brzfj+aSrTeYsgcm30oUXVAkEk4joJrrzmI5Mbari1/ezo5fShppdZiPkVS+MgE1vSV4
+         13/ql7DrdWbiz/MWwGiSo/zNIwFaHWciun9u1cQrVppSEDGDh840AWSjboRczR5QlKSv
+         eT7IM18ZoYFJXpwokJOU1ESENqGGvkwdQomYatI2WaStAmw8fNEBxqrF8GD2xblp3Ey3
+         3Ph/D5JqHRTt0KjPsM6sSb0A2bFrDBWFPBa7qxDb46KaNpfjilLzJS38i1hXgWtjfU4G
+         ctQw==
+X-Forwarded-Encrypted: i=1; AKwUvByI5xtDatlklnSqQYMW7pML0LnEvnDGH5Csj+3w4xgX/L8WLmzTFb6bm7td9Q0GWXXXGFJMYc/iCg3RqY3S@vger.kernel.org
+X-Gm-Message-State: AFq9FYIe6AW3HlQ70mv1V8o3pcOKCksHch+2diqLGJkZyvXKpNx79OTj
+	/OQp13zIUPrieZ5bklWxNaqjrwla85bl9ale2G1JjPB2XbvZbI5N1lEwj7yEUSUusdw=
+X-Gm-Gg: AYBFou3Bt66gYh84OKkHhBlzF+SJJC2udkV3TtRRv0lVCHKmM6L1eChNpMuu/aPcLd2
+	KcoltU0fq/4KzXAz3kOaGxeQhdtAc2jDp5O0Xoe58JT4RjfPvviU14uWLGEmA2t1FBJz01cH7iq
+	Q3E0+4t4tcRWuB/duwHCrD/bYI2tIZXdHchZZkCZKY/3KFo5Wox0x1TKYM3/K6dFKrb+48Xh/cs
+	Psy8YOu/70zZ8umio/rhsSkEMglI+uNxQ60qRND0N1ilexH8j/ZMmxJ5Sy8oqB4DGXwKxFyp+5l
+	8kSqtaj5nrkiGBLc8BvJaQeKNfy248cmGK2w3//90jVhiYFzM5rbQfY8x77c5kDICJN+ak4sLoh
+	nTTL1ba+JAX6Oi/ILzbqrQg3LUa4KfLH4U3jqaj4CCkPIjEsYaCtFmYIdP86pH2+6Bf7VvH/5zB
+	aWQF6rxar8ohEdF00uMNmZu+TkUc2iGVRGXwIOnlrr3GwNacjaIxA8swbcakJaDmmkHxHRPlNbp
+	HIX4edm3dhURH9Objb84Nk8CT8NkibFOdR0ihlc0CV73bDSDy8BWVKrf16U1Zl1fb+Ljz6FFYuu
+	oNCl1zbepNh1UtDtD9mzu3UCjvMhLhpnlQGTd60H
+X-Received: by 2002:a05:600c:4445:b0:4a3:5a91:5f64 with SMTP id 5b1f17b1804b1-4a9674e5f2fmr123956765e9.27.1793285082985;
+        Thu, 29 Oct 2026 07:44:42 -0700 (PDT)
+Received: from [192.168.0.167] ([64.43.45.156])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a96a32eef4sm80961585e9.3.2026.10.29.07.44.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 29 Oct 2026 07:44:41 -0700 (PDT)
+Message-ID: <22d2cfcd-045d-48dd-bbde-c1ac2d958737@linaro.org>
+Date: Thu, 29 Oct 2026 14:44:40 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,105 +90,107 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-sm8750-fix-sid-masks-v1-1-5ed50a1a0342@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAChb42oC/x2MSQqAMAwAvyI5G6h1ifoV8VA1ahAXGhBB+neLx
- 4GZeUHZCyu0yQueb1E5jwhZmsC4umNhlCkyWGOrzNgGda+pNDjLgyoT7k43xdkSFTRUuRsIYnp
- 5jsK/7foQPiAYNIlmAAAA
-X-Change-ID: 20261029-sm8750-fix-sid-masks-f27747b63ab7
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Dmitry Baryshkov <lumag@kernel.org>
-Cc: Bharath Kumar <bkumar@qti.qualcomm.com>,
-        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
-        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>,
-        stable@vger.kernel.org,
-        Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793284916; l=1494;
- i=vinayak.katoch@oss.qualcomm.com; s=20260609; h=from:subject:message-id;
- bh=h07EQK/xjhAXyzeFzx54Qn5dbimvAn0bx8lbX7X9MlU=;
- b=9m1at5bw4yfQfYCvWAgQQvecRPHuKtU/OdE1RDwj4J1gR+uHAd5f7du/+bEmobNS36WKi1bfK
- AdvIlK5154fD4aGI16+zrs57MbjXIy+Ysa8PhGTuDIhKUAlGl5MKPQj
-X-Developer-Key: i=vinayak.katoch@oss.qualcomm.com; a=ed25519;
- pk=UrGeKKxjIjpHZIjsbQKS/8rrVaP9KVGki69pFclCH08=
-X-Proofpoint-GUID: iMCA0SBrsvWew0-KpE1h_UQU6XDoyANW
-X-Authority-Analysis: v=2.4 cv=H6BOUOYi c=1 sm=1 tr=0 ts=6ae35b3c cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=t4KJ5oeoZsrh8uawLdoA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDA1NyBTYWx0ZWRfXxojaYPN/KigU
- Qdr0fWOJhCGyyy/U+WfDH/jKw16Ao2HPqXHEr8XfbVm6y/s+ZdHjBtHZBhT+8sovYWm4+4L3StK
- ma9t6d6vsfBR2Nw8MY/UKAwuB43GqoY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDA1NyBTYWx0ZWRfX4VJAESCiYBNm
- mVFKqyn88GtXvllt2gux1Rt8CjpN54uSLQqQl5+gZiWcRGCAVV/Ui7SF4jO0ZlX2V07g+E3HG1S
- 3vNvXNGnJU7YjPP7nz4jpadCgIkqAs2TVihWw0TMBqaHXFOhYaksCeprtRn7wS+ImDISNsmIOON
- cw6SSxL3Emk02SOxhf+e72uwTAroOzQf7EJ4DOxF6tkE24Lwuyn0JSWfjlPsfFhK1SBKNgMa9rk
- Wttz+xz00p/DvwpHyFbRvH+OFaqqXJL8TZqGrDUHrZcJmjzUiX+PU87UaSTK3HDpbuyhYqHi+pl
- 2Z8p/HiYRfex4GLvVh00w4Bs4FlbBdLCX8kbFvgU/wffup02SKZuyiZGN+hVANVGMbVyJRwZohH
- xvM6In9TXiZx3IfXP/76zjnUa7LfvVwoJ9cx+vVU0TkP1u0kcLSIPXQ4/ZW0N+sBDr79qv1iF9J
- kv4YTPnBDiytbHPFfzw==
-X-Proofpoint-ORIG-GUID: iMCA0SBrsvWew0-KpE1h_UQU6XDoyANW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-29_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 spamscore=0 impostorscore=0 bulkscore=0
- priorityscore=1501 lowpriorityscore=0 suspectscore=0 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610290057
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/14] Add SOF/EOF sequence logic
+To: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
+References: <20261029-v4l2-frame-sync-v1-0-d37992559c58@kernel.org>
+ <05313835-c868-45b1-b246-f98cfb8a1d6a@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <05313835-c868-45b1-b246-f98cfb8a1d6a@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The stream ID masks of compute-cb@12 and compute-cb@14 are wrong, so
-these two context banks fail to probe.
+On 29/10/2026 13:28, Gjorgji Rosikopulos (Consultant) wrote:
+> Hi Bryan,
+> 
+> On 10/29/2026 11:55 AM,bryan.odonoghue@linaro.org wrote:
+>> This series enables SOF AND EOF event tracking making use of both events.
+>> Whilst the code is actually very simple the functionality we want to build
+>> off of that simple code is not.
+>>
+>> - SOF
+>>    Serves two functions. Firstly. Informing user-space of CSID SOF events.
+>>    Standard Linux V4L2_EVENT_FRAME_SYNC is trigger from this event.
+>>    User-space wants to capture this trigger because it allows user-space to
+>>    better align the time a frame begins to events elsewhere such as IMU
+>>    event timestamps.
+>>
+>>    That functionality is directly applicable in this series.
+>>
+>>    However we will also build on the SOF event in later patches to allow us
+>>    to begin programming of shadow-registers for the next camera frame.
+>>
+>>    When the EOF event happens, we switch from one shadow bank to the next.
+>>    This is only possible if you have the SOF event.
+>>
+>>    So SOF serves the immediate purpose of timestamp alignment in user-space
+>>    as well as the 'evil plan' to trigger off of it programming camera
+>>    parameters for the next frame.
+>>
+>> - EOF
+>>    EOF even on its own is useful because it allows us to increment
+>>    vb.sequence for each frame as per the spec not just when we have
+>>    buffer-data.
+>>
+> It is great to finally have V4L2_EVENT_FRAME_SYNC support in CAMSS. 🙂
+> 
+> I would like to share my opinion on tagging vb.sequence at EOF.
+> 
+> The EOF event is received from the CSID decoder when the EOF short packet
+> is decoded. In contrast, buffer completion is reported when the write
+> master has finished writing the corresponding buffer.
+> 
+> Because the processing pipeline includes buffering and line buffers,
+> buf_done on the pixel path may be received after the EOF.
+> Conversely, when cropping is enabled on an output, buf_done may be
+> received before EOF.
+> 
+> That is why using EOF to assign the buffer sequence may result in inconsistent
+> sequence numbers across buffers.
+> 
+> I would propose:
+> 
+> SOF
+> Increment the frame sequence and generate the V4L2_EVENT_FRAME_SYNC event
+> for userspace.
+> 
+> REG_UPDATE
+> Once REG_UPDATE occurs, we have a guarantee that the configuration for the
+> new frame has been latched. At this point, we can iterate over all active
+> buffers being processed and assign them the current sequence number.
+> The bus-write active-status register indicates which address is currently being
+> processed by the bus-write engine and could also be used to detect frame skips,
+> if necessary.
+> 
+> BUSWR_DONE
+> Complete the corresponding buffer as usual. Optionally, we can verify whether its
+> sequence has already been updated. If it has not, we can determine how the buffer
+> should be handled.
+> 
+> This approach ties the buffer sequence to the point at which the frame configuration
+> is latched, rather than to the arrival of EOF, which may not be ordered consistently
+> with buffer completion.
 
-Fix the masks:
- - compute-cb@12: SID 0x0c2c, mask 0x20 -> 0x0
- - compute-cb@14: SID 0x0c0e, mask 0x20 -> 0x40
+Come to think of it, I'm not entirely sure an EOF or reg-update 
+additional variable is required.
 
-Fixes: 58471055ae76 ("arm64: dts: qcom: sm8750: Add CDSP")
-Cc: stable@vger.kernel.org
-Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+SOF.seq should do.
+
+- Reading SOF.seq @ crop is fine because the SOF.seq always preceds
+- Reading SOF.seq @ buf_done is fine ditto
+- Reading SOF.seq for params return stamping is correct
+- Reading SOF.seq for stats frame correlation is also correct
+
+We want the EOF signal but we don't need a second seqno to accompany. 
+And with one source of seq truth we don't need to change the point at 
+which we latch since pre-frame-drop SOF < everythign else.
+
 ---
- arch/arm64/boot/dts/qcom/sm8750.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/sm8750.dtsi b/arch/arm64/boot/dts/qcom/sm8750.dtsi
-index cf947acc5760..de9d9bf3ca4b 100644
---- a/arch/arm64/boot/dts/qcom/sm8750.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8750.dtsi
-@@ -6497,7 +6497,7 @@ compute-cb@12 {
- 						compatible = "qcom,fastrpc-compute-cb";
- 						reg = <12>;
- 						iommus = <&apps_smmu 0x196c 0x0>,
--							 <&apps_smmu 0x0c2c 0x20>,
-+							 <&apps_smmu 0x0c2c 0x0>,
- 							 <&apps_smmu 0x0c0c 0x40>,
- 							 <&apps_smmu 0x19cc 0x0>;
- 						dma-coherent;
-@@ -6518,7 +6518,7 @@ compute-cb@14 {
- 						compatible = "qcom,fastrpc-compute-cb";
- 						reg = <14>;
- 						iommus = <&apps_smmu 0x196e 0x0>,
--							 <&apps_smmu 0x0c0e 0x20>,
-+							 <&apps_smmu 0x0c0e 0x40>,
- 							 <&apps_smmu 0x19ce 0x0>;
- 						dma-coherent;
- 					};
-
----
-base-commit: a39c950806213f6861d00f90729acaaa21f2d95a
-change-id: 20261029-sm8750-fix-sid-masks-f27747b63ab7
-
-Best regards,
--- 
-Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-
+bod
