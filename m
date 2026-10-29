@@ -1,85 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.44
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793297495;
-	b=j3rbf5B838MGk3p6SWCCL9ob334Ouu0QSig+uuXdn2Tw/Fu7ce0gV/6kZgkmV60lbv6q
-	 V4NdSbLWvOQKieE19UlfQMYHjJLw8KSgdUaoG1t4Mgqcb+m/pfEhSQ8e6VyuHs9aw3Y50
-	 xUtXCr49U4QFvIIZsmTWGMqGYPY8jUNiC7daXvOz7jif6/m3Apy8pDv1iJdfUhJr02Tby
-	 4di1pudxWA2yYYcz6rNzftxdA+4sDy3yQkWk7wSQOLuAPMTTeZmpk1kfHQgkw97ZHpEpd
-	 a0eSca5MmlrlIjiruDTzpMceLz+sFBUp+QyCtMEKPVF0yoEWR7spW3M06ohkqb1QExw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793297495;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=gLjComLCp2esLTingR9be9ipRIp36YyskRA+PmDaCHo=;
-	b=qp2M7jHse5bclRDdys0n+odfpq03sPcroanFxSKvku3/i7TnJGZEcgWJsbUqKblY4o4Z
-	 2XwInfidVWnbdM3OWZNPXUt3eLn2mdHftSVGqrh1jOGSOYLKE0LaQ+q1zqsXhlzRwQuTI
-	 2AbKju8MyDs2gED0Lwp4gGg3nGRCRgiWEOuRS5bP+WMUwxn3XOeuHtl+3/1Yg+79o0jLu
-	 YjWS9f37tsu85UYEdFc8/+xqcj4TtmeO4ng//fDBnZgGeA6xD1QAyiI6FAcDO/hLZKEkg
-	 CvRktiBtsZs0X5CIJbnOrQQG+KwYJbabp/aLm7Rzz8PZcD7DGdK6MwCjXDq+JN38s9g==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ieee.org;
-	spf=pass smtp.mailfrom=ieee.org;
-	dkim=pass header.d=ieee.org header.i=@ieee.org header.a=rsa-sha256 header.s=google header.b=fdZANVTe;
-	arc=none smtp.remote-ip=209.85.161.44
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793297548;
+	b=z3Xy1ToutTJJJvN5g2ZrO/LkGf05a+NvZcDlWIESqTap48ToE1q37SSX1pcez62w7TZk
+	 KGcUDYNvgGesNmbRhKDgrcHNrr0NBiyGpoaIJRfv62kUxO3yhLPCewTbachXnf95BSrJu
+	 Z58k7LKJgye0m6+0Qtj9NF3nm3y5inzAHRF5M6sH5W2zrumNpy1NDf+pHeieapNxIPsCO
+	 l1J3bVO8MSdc2SORIG38bnE51gE5q59JpmYs2N/iP7T+bR8iFBaEhh/jUMQqquEPFnwVA
+	 72qXRPLFbSKkJKTvWU932xvWUJKgVuTSGffQ6yVF1QTsgjmI8fXFNA95do6jWe+MtmA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793297548;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=Vc+dk4sXUAznOiMsvmZSS0emw2t3qJrqqCqk1XvgqYs=;
+	b=v36ruXcCboulj34qlHA4SI0gg95gWtJAhf9JjHAXnUfigvTY2URWD7ltcgOzwpv17qlP
+	 4r/5eg9Bx2BSiHtdBYEAUwnK+XSRtxvP/M2WZW8/qof+7Sp8WOKEbppFFkLaEzgBbNckv
+	 8cwt6cMpm+5MeRQcqLz7bX/vb9FrYCDQl2tagFs391v8ekEQLh6o0MHmsKyMA6zFY4AJS
+	 yiJcDOKQ6BA5lDSU+0Aw5vgG6vPHoIeLtQmiU/ZLAkR+P0r38rC0zomdgURKnyXqFKiDm
+	 Dx3fjwZEHgWVc8huFPVE42r6HH7F0OW93irS+ckPZSwUTyfXDaBH7T5R7szymNVmy5g==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cIzgPmtW;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 317BE606A31A;
+	Thu, 29 Oct 2026 18:12:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cIzgPmtW
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1793297547;
+	b=oDBCn3IKh/jOMEo+O5TGEpdSCElDKBsZcHW15AIqx9LxxxEvXBWaqOovD+E2ihtrzOT9
+	 8Yk7pcCBl2yRcMJUicDYrT0PemI8dGj6hnssYjWdgZ2tpff8/L/QPkMK1ra51mwpyIxyJ
+	 jwz1ZCjxmq7xOzYoDrzHe2ldVDFpd49HG9Sb8x13APK9/aGkZyslWPpdGlRk7WVdf9o2f
+	 TzLhCOaWXMrHZO5avR5pVaqguwYWee+AHdRIePe4H2kdXvlRSi2qS6OMPsol1npQhr67i
+	 86tr+3Yt4oPj7xEE7MclZuRtqhEQcWon3Vyrw8a4wRIuHr1F192jTft26sgjekm+psA==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793297547;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=Vc+dk4sXUAznOiMsvmZSS0emw2t3qJrqqCqk1XvgqYs=;
+	b=RA5FKBXBzVrdVeJWH+8bh1xCBk6lo+mdLwYdKyeSsF/bb8jfpG9iWSgT7Y0EIrIaKuaY
+	 6qBUs0MK3naReOXHv28ISvSXuOTpriPdzbSqWLNA1sAdkA8FX3SoGHrIFz/MMZ4HqNRrh
+	 Cn8TaSv74+wWrMMZbq6vteqQKL58lgceHBKEqFVRgJcVBWj6U0RXmFiLD3PmRMID9wf3X
+	 P6DE3fPbpqefsi6Ak7PCNAth/Dw3+Z8XYD6PixGtMxwWb5zSMKirwObTL7SHWS8jlW25h
+	 hjkXsa5rIFe14vdS7hEXOa/BSb54ixOSinNwfYRB6eO4cHMYCQup+DYRlK2bni0M6hg==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7521C606A31E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 18:11:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7521C606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ieee.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ieee.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ieee.org header.i=@ieee.org header.a=rsa-sha256 header.s=google header.b=fdZANVTe
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-6faddda49e7so2074123eaf.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 11:11:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ieee.org; s=google; t=1793297492; x=1793902292; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gLjComLCp2esLTingR9be9ipRIp36YyskRA+PmDaCHo=;
-        b=fdZANVTefeMje8xR+EIuw4/nI7763+/Yz/5vlZWfvSqosuhvndQtMIEStX/ApdcvQH
-         Kadsyxyirf7upD8Zk5eCu1Q/ykSha+nTzbhn2gDuzn2Q65BnAf5Gi6sSFrIpTK3q6+35
-         CULybsUQ6m4ZK2vmknVFnSgzKIJGwv2V1SqIw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793297492; x=1793902292;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gLjComLCp2esLTingR9be9ipRIp36YyskRA+PmDaCHo=;
-        b=kV7GrM2voi/emSbUjCn4fqv2NrxhEoGZJ5i+QXP8DpRIL3YY3TM51ilh8ot7efDs6U
-         tA+sQwWjLVPzgAUZEQkSucccc7tJ/+5kQ4G/4hF2GaOCTLCJms0adybNJNaO9viCNmRL
-         XE9XLLy8HTs8hRqdFdSn5svg0xN1QFcIrxwVfbUlUFbFdWKoXlv3OhNiYMkyLDlGRb1S
-         D87H4+i8IZt+flCe/YuTP9aI5AWOltE/WsvoNHyAw1arIYuFfo08Fnr37I5tIaPJZPNB
-         VCy7EeW8LI+EB0+MiCQ8sEfEgdOTiBBBayc8qtqnel7TyG6MWCYouNYRRhBQ1Z2niyMH
-         Vdvg==
-X-Forwarded-Encrypted: i=1; AKwUvBxOcGaMb1hrkqct/AaBsh80WUylHvU02q4SY1lzVUagyToQ6CX402x+LmYyDBuZo2ie1o6Pudzh3U9nPC0T@vger.kernel.org
-X-Gm-Message-State: AFq9FYKsJz2v2FVYdAOEGnYVIMHSNVSV0ApqkwoloLLxN+kfGntM0k7I
-	v2n5QLsEsGrVCPwafWlE17cGCzX3ftAxH1MQLnir+fHNvqKKnsww3+unsTo6/Ncubw==
-X-Gm-Gg: AYBFou2Ri2PyQr6D6dJHBZD+eZOruA1LX+HBH1u3ThfZnKMsbdGgRCTAimnhFnux6BK
-	O/Anld2YGbEHwglGmziGGsREKRpPhc1Ey9kJM6bKgNqMuTWs9jNuz8ms8oGN7ENk51oXY62Zo8H
-	JtEm7/ZNi+d9bGTbbPkSiLzPQYRfwYZeUdj2i3JFuSoWT8YBPMmXBEhNHcH7HsuQdeQ+ic6k8OW
-	WYqJUII99tzfdJCzA9EsJHUoGFS6a2pSJPsN5g2VjcwdXgBAW6idTykznw/sAimWH9lqR9GOqMi
-	SzccVXW79rxlPClmHiuGkGJxd8FmAl3PuYb6Zxb15RxZkXwnvmFVIcxjKHBBrA77LqoRjeudL9c
-	Bo4ZAP/uj1cyji5diXk6BKMbG8nurRgr58SRmNPJX6zL5ZHWGfjJqy1fQC29pswM8Uuz6E5eajb
-	lAqj8s3gee1dHbM9LzrJGUvGBFwxgTcbKe41xGqVfVsznEO/VRfR4AatLK4k6BetD6Zh9Mju6lY
-	ICpT3uVwBJOraC8pXl9jmgIJg24VtW0G0qh4YTBgWhtQAp5yKkuQt6d3gKa7Hyz260JtxrsFQBu
-	d+3YaCkvsqdpnP7/e6PHDjU1on4Yv2FpdW3QVxcw7LaIFQ==
-X-Received: by 2002:a05:6820:5710:10b0:6de:aeea:5c89 with SMTP id 006d021491bc7-714f288a10fmr36729eaf.23.1793297492247;
-        Thu, 29 Oct 2026 11:11:32 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.googlemail.com with ESMTPSA id 586e51a60fabf-4a904856f09sm130363fac.3.2026.10.29.11.11.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 29 Oct 2026 11:11:31 -0700 (PDT)
-Message-ID: <4c7a6635-7382-4e57-ae16-6bc2ee694f46@ieee.org>
-Date: Thu, 29 Oct 2026 13:11:29 -0500
+	by smtp.kernel.org (Postfix) with ESMTPS id 36A501F01824;
+	Thu, 29 Oct 2026 18:12:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793297547;
+	bh=Vc+dk4sXUAznOiMsvmZSS0emw2t3qJrqqCqk1XvgqYs=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=cIzgPmtWSPM9ByY4xVnebopFV8nPtmzVizGxn1LMaHsOniW0oKpegm3Gya9xjHpzx
+	 QodWmKH17/l6cf426VcBSgPUJaTf1nCU9RHpL+Qy6gJNdl1NydYvXm3FlsvPq3Np3z
+	 ShZG09uXCW14tn59McdG3fTNHCGIsl7AGe+w36fbVHY9uCQXCnbZoE/W/5R53YEor8
+	 yZw26XqvoGZtdjT1E1OCJiAk+nXLjeZvC3fTqw+3PrndYQHG2DisZXlATBU7EWM/yF
+	 1pzUQXL7nEqjHKsEgAOZj/PZ5+s97uyRxt8gG7LUebNbeoXujxCiuNqzMUponctIxR
+	 5IPzJioEHCSbw==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id BB16A45935;
+	Thu, 29 Oct 2026 18:12:26 +0000 (UTC)
+From: Vladlen Grachev via B4 Relay <devnull+webholt.gmail.com@kernel.org>
+Date: Thu, 29 Oct 2026 18:12:17 +0000
+Subject: [PATCH] arm64: dts: qcom: msm8996-oneplus-common: Drop LVS2
+ voltage constraints
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,161 +83,87 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] PM: runtime: change stub pm_runtime_get_if_active()
- return 1 when !CONFIG_PM
-To: Frank.Li@oss.nxp.com
-Cc: Frank Li <Frank.Li@nxp.com>, "Rafael J. Wysocki" <rafael@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Andrzej Kacprowski <andrzej.kacprowski@linux.intel.com>,
- Karol Wachowski <karol.wachowski@linux.intel.com>,
- Oded Gabbay <ogabbay@kernel.org>, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, Matthew Brost <matthew.brost@intel.com>,
- Thomas Hellstrom <thomas.hellstrom@linux.intel.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Alex Elder <elder@kernel.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
- Rob Clark <robin.clark@oss.qualcomm.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Guenter Roeck <linux@roeck-us.net>, Guan-Yu Lin <guanyulin@google.com>,
- Mathias Nyman <mathias.nyman@linux.intel.com>, linux-pm@vger.kernel.org,
- linux-usb@vger.kernel.org, dri-devel@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-hwmon@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
- linux-media@vger.kernel.org, linux-staging@lists.linux.dev,
- netdev@vger.kernel.org, imx@lists.linux.dev, Rob Herring <robh@kernel.org>
-References: <20261029163044.3062958-1-Frank.Li@oss.nxp.com>
-Content-Language: en-US
-From: Alex Elder <elder@ieee.org>
-In-Reply-To: <20261029163044.3062958-1-Frank.Li@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261029-op3t-lvs2-fix-v1-1-42ca9d992c20@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MQQqAIBAAvyJ7bsHMIvtKdAhbayFSNCQI/550n
+ IGZFxJFpgSTeCFS5sT+qtA2AuyxXjshb5VBSTW0Uhn0obvxzEmh4we1tqORvaVOO6hNiFT1/5u
+ XUj6vgMRpXwAAAA==
+X-Change-ID: 20261029-op3t-lvs2-fix-44c8905ce34f
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Vladlen Grachev <webholt@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793297541; l=2127;
+ i=webholt@gmail.com; s=20261029; h=from:subject:message-id;
+ bh=HebHQtTCozbcTjBAD2cRWkL8+SEDKdyhDnbeViDQK38=;
+ b=lRJ+qH7Rt37iPLxVprrqAsVq6NOKR62bVoWBe6x0IUwCAw+I7n+az0QKhhiMKSpk3JylSNISV
+ ywt0RvU0gRpBXfNeZ2dkJoqiJ32HYRIyFz25kCtcPCOvcOlCF1H9zNU
+X-Developer-Key: i=webholt@gmail.com; a=ed25519;
+ pk=8kq937AiLEx3pRQ9J+BUXm28cQqT4RyMTPY5dyb04kc=
+X-Endpoint-Received: by B4 Relay for webholt@gmail.com/20261029 with
+ auth_id=1356
+X-Original-From: Vladlen Grachev <webholt@gmail.com>
+Reply-To: webholt@gmail.com
 Content-Transfer-Encoding: 7bit
 
-On 10/29/26 11:30 AM, Frank.Li@oss.nxp.com wrote:
-> From: Frank Li <Frank.Li@nxp.com>
-> 
-> When CONFIG_PM is not enabled, all devices runtime PM state should be
-> treated as active.
+From: Vladlen Grachev <webholt@gmail.com>
 
-Should be treated as if runtime PM were enabled for the device,
-and the runtime status is active.
+Since commit 27880745470a ("arm64: dts: qcom: msm8996-oneplus: Add SLPI
+VDD_PX"), OnePlus 3T no longer boots: the PM8994 RPM regulator device
+fails to probe, so UFS, USB and the display never come up and the phone
+hangs on the bootloader splash screen:
 
-It's a subtle distinction but the previous behavior returned
-EINVAL, which means "runtime PM is disabled for the device".
+  lvs2: failed to get the current voltage: -EINVAL
+  qcom_rpm_smd_regulator remoteproc:glink-edge:rpm-requests:regulators:
+    lvs2: devm_regulator_register() failed, ret=-22
+  qcom_rpm_smd_regulator remoteproc:glink-edge:rpm-requests:regulators:
+    probe with driver qcom_rpm_smd_regulator failed with error -22
 
-Anyway, for the IPA use of this function, this looks correct.
+The switch LVS2 cannot report its voltage, so the regulator core asks
+its input supply, vdd_lvs1_2, which is not described on these
+boards. Checking the 1.8 V constraint then fails with -EINVAL, and the
+RPM regulator driver aborts the probe of all PM8994 regulators.
 
-Acked-by: Alex Elder <elder@riscstar.com>
+Drop the constraints, like apq8096-db820c, which describes LVS1/LVS2
+without them. Keep the node, so that the SLPI still gets its px-supply.
 
-> 
-> __pm_runtime_resume() returns 1 (called by pm_runtime_get()).
-> pm_runtime_get_if_active() is the try-and-get version of pm_runtime_get().
-> stub pm_runtime_active() also returns true. So pm_runtime_get_if_active()
-> should return the same value as the stub pm_runtime_get(), which is 1.
-> 
-> Analysis of all callers and their behavior with old (-EINVAL) vs new (1):
-> 
-> Pattern A: if (!pm_runtime_get_if_active(dev)) -- no impact
->    Both -EINVAL and 1 are non-zero, so !ret is false in both cases.
->    Callers: drivers/accel/ethosu/ethosu_perfmon.c,
->             drivers/gpu/drm/msm/adreno/a6xx_gmu.c,
->             drivers/gpu/drm/msm/msm_perfcntr.c,
->             drivers/gpu/drm/v3d/v3d_mmu.c,
->             drivers/gpu/drm/v3d/v3d_perfmon.c (x4),
->             drivers/media/i2c/gc08a3.c gc05a2.c og0ve1b.c ov6211.c,
->             drivers/media/i2c/ccs/ccs-core.c s5kjn1.c lm3560.c (x2),
->             drivers/media/i2c/s5k3m5.c thp7312.c imx283.c ov64a40.c,
->             drivers/media/pci/intel/ipu6/ipu6-buttress.c,
->             sound/hda/core/device.c
-> 
-> Pattern B: if (!ret) after get -- no impact
->    Both -EINVAL and 1 are non-zero, !ret is false in both cases.
->    drivers/gpu/drm/amd/pm/amdgpu_pm.c (comment says "allow access"
->      in kernels without CONFIG_PM), drivers/pci/pci.c
-> 
-> Pattern C: ret > 0 / ret <= 0 / ret != 1 checks -- FIXED
->    drivers/usb/core/offload.c: checks (!= 1), old -EINVAL caused
->      -EBUSY even with !CONFIG_PM. Fixed: now returns 1, proceeds.
->    drivers/accel/ivpu/ivpu_job.c: drm_WARN_ON(<= 0), old -EINVAL
->      spuriously triggered WARN. Fixed: 1 > 0, no warn.
->    drivers/gpu/drm/i915/intel_runtime_pm.c: checks (<= 0), old
->      -EINVAL triggered error path. Fixed: 1 > 0, correct path.
->    drivers/accel/ivpu/ivpu_sysfs.c: (> 0), old skipped freq read.
->      Fixed: proceeds correctly without CONFIG_PM.
->    drivers/gpu/drm/xe/xe_pm.c: wraps (> 0), all xe callers
->      (xe_bo.c, xe_shrinker.c, xe_vsec.c, xe_ggtt.c, xe_guc_ct.c,
->      xe_pxp.c) now correctly treat !CONFIG_PM as active.
->    drivers/net/ipa/ipa_smp2p.c: power_on = (> 0), now correctly true.
->    drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c: (> 0), now correctly
->      executes stall register update.
->    drivers/staging/media/ipu7/ipu7-buttress.c: active (<= 0) early
->      return now skipped, correctly proceeds.
-> 
-> Pattern D: explicit -EINVAL check
->    drivers/hwmon/prom21-xhci.c: checks (> 0) then (== -EINVAL).
->      Old: took -EINVAL fallback. New: takes (> 0) fast path.
->      Both succeed when CONFIG_PM is disabled; functionally equivalent.
->    drivers/hwmon/eic7700-pvt.c: call is guarded by IS_ENABLED(CONFIG_PM),
->      stub is never reached. No impact.
-> 
-> Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> ---
-> Cc: "Rafael J. Wysocki" <rafael@kernel.org>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Andrzej Kacprowski <andrzej.kacprowski@linux.intel.com>
-> Cc: Karol Wachowski <karol.wachowski@linux.intel.com>
-> Cc: Oded Gabbay <ogabbay@kernel.org>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Tvrtko Ursulin <tursulin@ursulin.net>
-> Cc: Matthew Brost <matthew.brost@intel.com>
-> Cc: "Thomas Hellstrom" <thomas.hellstrom@linux.intel.com>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: Alex Elder <elder@kernel.org>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Robin Murphy <robin.murphy@arm.com>
-> Cc: "Joerg Roedel" <joro@8bytes.org>
-> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
-> Cc: Sakari Ailus <sakari.ailus@linux.intel.com>
-> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-> Cc: Guenter Roeck <linux@roeck-us.net>
-> Cc: Guan-Yu Lin <guanyulin@google.com>
-> Cc: Mathias Nyman <mathias.nyman@linux.intel.com>
-> Cc: linux-pm@vger.kernel.org
-> Cc: linux-usb@vger.kernel.org
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: intel-xe@lists.freedesktop.org
-> Cc: linux-hwmon@vger.kernel.org
-> Cc: linux-arm-kernel@lists.infradead.org
-> Cc: iommu@lists.linux.dev
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: linux-media@vger.kernel.org
-> Cc: linux-staging@lists.linux.dev
-> Cc: netdev@vger.kernel.org
-> Cc: imx@lists.linux.dev
-> Cc: Rob Herring (Arm) <robh@kernel.org>
-> ---
->   include/linux/pm_runtime.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/include/linux/pm_runtime.h b/include/linux/pm_runtime.h
-> index 64921b10ac74f..de9e7518ecef2 100644
-> --- a/include/linux/pm_runtime.h
-> +++ b/include/linux/pm_runtime.h
-> @@ -280,7 +280,7 @@ static inline int pm_runtime_get_if_in_use(struct device *dev)
->   }
->   static inline int pm_runtime_get_if_active(struct device *dev)
->   {
-> -	return -EINVAL;
-> +	return 1;
->   }
->   static inline int __pm_runtime_set_status(struct device *dev,
->   					    unsigned int status) { return 0; }
+Describing vdd_lvs1_2-supply as S4, as done on other MSM8996 boards,
+would also work, but it would only serve the constraint, which has
+nothing to enforce on a switch.
+
+Tested on OnePlus 3T with the msm8996-mainline kernel based on v6.19.5.
+
+Fixes: 27880745470a ("arm64: dts: qcom: msm8996-oneplus: Add SLPI VDD_PX")
+Cc: stable@vger.kernel.org
+Signed-off-by: Vladlen Grachev <webholt@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi
+index 7a3f8afae..98fc45dc8 100644
+--- a/arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8996-oneplus-common.dtsi
+@@ -497,8 +497,6 @@ vreg_l32a_1p8: l32 {
+ 		};
+ 
+ 		vreg_lvs2a: lvs2 {
+-			regulator-min-microvolt = <1800000>;
+-			regulator-max-microvolt = <1800000>;
+ 		};
+ 	};
+ };
+
+---
+base-commit: f5672a3dff0291d6a45eb0c258b9d2baeb4dc577
+change-id: 20261029-op3t-lvs2-fix-44c8905ce34f
+
+Best regards,
+-- 
+Vladlen Grachev <webholt@gmail.com>
+
 
