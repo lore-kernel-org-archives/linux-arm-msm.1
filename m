@@ -1,66 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793239387;
-	b=iHB9RPOqVQxRqtJ5KIM3VsdXzPwvEstAcxvV3KRbo6tdFiLPfpkFJz9EgPxxSOJpufJj
-	 wcHf7BgxhwseGlqc6diKDwLmW5o4eiZxUaq+mDa9b3vDNNH7EfclIto4NmbLUtm8izsYz
-	 gaEJDkzHx/LbdMPvKNl2D1L+cV2Gue1EeyyA3sqlNLzyPx1z2M44hN+sefyjBKsnjpHUD
-	 e3NCR4NWb1KYSMGV+gQ3To35J6k56mG8T2ZP3fAg0andxIw24IqcAPq4oP8w0R2w4pxPd
-	 kqSpDywov+fyUcogVnEUHZ91v3Imiy3BB9/UxdkLd3bVzqqM1blRrmbcGN1vi5O6R/A==
+	t=1793239399;
+	b=w5ldjQbWnF2WfaAwvO75GYGkrI5TNQ2sXTdxEpHD48ALiYADsjow0+UBcJj7WSmJq7oW
+	 s7sXMmYOtC6KSAK4HTNdwYByYr6moDfuJ679aHYxGnYXDW2JomeF1Dsjilodakb6jFqHf
+	 ZHpusJxnD2Qgcn851y8Hm8JE/B8IQ3JlFqGXz97V51kNHWhq/m2uUP7C0UqyCyHjifUTn
+	 yNKD/sb+6jZ6Hr8DStwRBmvrJQxY2pXLMXM1XIR8ZciUCuKWTqRyYddrYBcYcK+U5p5eF
+	 E/8C8pwptGpvFAoU5STclKcNSp70UoiBL0kntZ/th7lJc1UFQsM4e9bMW2t/T29s7lw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793239387;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793239399;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=82EWEmTBFTHlp3Xbk9DdfBWQDqYO1PeqHpfQuSaH6o8=;
-	b=Q5yMS6XwOdl1bHzg9TkNR3cbyPDenwPyTZJ5CfjdE94HXyB1UsJf29XI8D/jsX1zIQfl
-	 xCydqEevisakWn8/8tyUicIBXzV+eMpWlYBbPJfoabWLdf2Up2WMJonOmS26e7A5suh9m
-	 iIcn9wQXv90v5XhSy+N4/sYkC976iYZ+UFfUPo0ly0wihHUjngWflVnMbIcf70e/JJXir
-	 G3/75usJkK92X0fIOwm57+S77OPL8QBy+vipXC/eol90x8B9ak5vkr+ZMTzm3kGULfvKw
-	 KlH5FyusCvsWkkg6/g3V2OdycuPScpirVMKZ9BFmfbRaSbDBb2jDA3RvKMHnA8oGYmA==
+	bh=nloenklXV41sAe2Qb7vhaRtqVy0cuZ6og1wsgUkifo8=;
+	b=F1jahqplbNwZV1PRC+SxOdfrSWq1PwEH8lEFhPAQsgijEOdyuzWalcDv2Qai4hXKvTzk
+	 OL4A8Bi/GHhqTz4g8qfp3cvsrjMjd9FEYwXspgasgsNRTSXSbxmw0Eh1z6Iuk3uC4faVh
+	 o4clxYjYnzuXXxp9ErAdymqDOxDQahFxYU5t2xUNPCUYN8eMAX9ndiMWLH8jfPXgd7Bfa
+	 QJbqmJ4oTRrgBcoKYeiGUZ59vyJgTeLLIqLV7qTKHXeZqKCgeVLl5vzvbLqPYSD2vvicX
+	 kiqw2OaII+XBeG68r9bRwV8stFyly9SdrY07DocE46QE5uIiVLc1OHHZQ80qU25vzEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DCXGBdls;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m83POaf7;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13B6E606A31C;
-	Thu, 29 Oct 2026 02:03:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31FF9606A333;
+	Thu, 29 Oct 2026 02:03:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DCXGBdls
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5937F1F01829;
-	Thu, 29 Oct 2026 02:03:05 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m83POaf7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E9831F031E1;
+	Thu, 29 Oct 2026 02:03:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793239386;
-	bh=82EWEmTBFTHlp3Xbk9DdfBWQDqYO1PeqHpfQuSaH6o8=;
+	s=k20260515; t=1793239398;
+	bh=nloenklXV41sAe2Qb7vhaRtqVy0cuZ6og1wsgUkifo8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=DCXGBdls4rNx+a5PDTFNAov6fZxMx8gV51xcRKLX9ieFKyMYjnNT/p5N973wDwERG
-	 wYTe8o4yQynY7q6ihffPul38/8wj3TuDPWHCTmP9kmHnok7yjaO/stXmzPNTSn3JVG
-	 6fKCfZBXMgj585GRyek361zkvugL6eHkW0arf5qYr2NuZPptsvrCi58a5rcrFVRyJK
-	 Lw/6HFqXxyxRDDXt3zI8kYIjkHcEEceO/tAWtY7wvTvy4FqmyEB+YWQI+VdYrDgszf
-	 Mu8cThzts2uR7cwbE8FFhQ9lRg0tUsepaswmp0i4gJMYa3Bmx+0EZDNbBOjPA6aho1
-	 8L/svisLTTUIQ==
+	b=m83POaf7re5Zyzk+EeIRf6CNfBQGKJpLVAoF8xJIHQN9JDiW0D9fjZU7YBAW72NsV
+	 Mf15bPfZsiqJdZ84gE+LdFaY/GAN0O967KVIUJTbKdFtnXOx9U+N35dOVOVO99mtcB
+	 ILIi2uLSepVaDzr8r+svuNto9o5Wt5fzD3R2cKlcpbDdkUYpEeJADrJK6PvRSgGd+t
+	 F8O2Z0PFzxY3tyNA4CfX+ZWGm8qGLgfmFhP0fqJD3kASmqisQn1gxum/pNhDjkc5e7
+	 0oInenXHvpordn0mMjbKhL6GgoiLFBL6R6UNOxdU3DZ7rBkpdI7dudrL7uNFxUxD5d
+	 c3aUxStiHTn5Q==
 From: "Martin K. Petersen (Oracle)" <mkp@kernel.org>
-To: James.Bottomley@HansenPartnership.com,
-	Joonhoe Kim <26rote@gmail.com>
+To: Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Avri Altman <avri.altman@sandisk.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	gopikrishna.garmidi@oss.qualcomm.com,
+	jagadeesh.kona@oss.qualcomm.com,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
 Cc: "Martin K . Petersen" <mkp@kernel.org>,
-	alim.akhtar@samsung.com,
-	bvanassche@acm.org,
-	beanhuo@micron.com,
-	stanleyjhu@google.com,
-	peter.wang@mediatek.com,
-	can.guo@oss.qualcomm.com,
-	mani@kernel.org,
-	linux-scsi@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH] scsi: ufs: core: Fix a deadlock between clock scaling and device commands
-Date: Wed, 28 Oct 2026 22:02:44 -0400
-Message-ID: <179323465378.491807.15412315305334194970.b4-ty@b4>
+	linux-scsi@vger.kernel.org,
+	nitin.rawat@oss.qualcomm.com,
+	sibi.sankar@oss.qualcomm.com,
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v4 0/5] Add UFS support for Glymur Qualcomm SoC
+Date: Wed, 28 Oct 2026 22:02:53 -0400
+Message-ID: <179323465371.491807.4239694363801616676.b4-ty@b4>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261016124608.46-1-26rote@gmail.com>
-References: <20261016124608.46-1-26rote@gmail.com>
+In-Reply-To: <20261009-glymur_ufs_qcb_enablement-v4-0-9a6ce83195b7@oss.qualcomm.com>
+References: <20261009-glymur_ufs_qcb_enablement-v4-0-9a6ce83195b7@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,27 +86,18 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
-On Fri, 16 Oct 2026 21:46:08 +0900, Joonhoe Kim wrote:
+On Fri, 09 Oct 2026 16:05:52 +0530, Pradeep P V K wrote:
 
-> Since commit 08b12cda6c44 ("scsi: ufs: core: Switch to
-> scsi_get_internal_cmd()"), device management commands go through
-> blk_execute_rq() on the pseudo SCSI device, which shares the tagset
-> with the logical units, while ufshcd_dev_man_lock() holds
-> clk_scaling_lock for reading.
-> 
-> ufshcd_clock_scaling_prepare() and ufshcd_pause_command_processing()
-> quiesce the tagset before taking clk_scaling_lock for writing. A device
-> management command holding the lock for reading at that point is never
-> dispatched and never times out, so the writer waits forever with all
-> logical units quiesced. On a Lenovo Legion Tab Y700 Gen 5 this ended in
-> a hung task panic.
-> 
-> [...]
+> This series adds the DT bindings, device tree support for the UFS PHY
+> and UFS Host Controller, along with the required PHY driver updates to
+> enable UFS support on the Glymur Qualcomm platform.
 
 Applied to 7.4/scsi-queue, thanks!
 
-[1/1] scsi: ufs: core: Fix a deadlock between clock scaling and device commands
-      https://git.kernel.org/mkp/scsi/c/2327df6d2a29
+[1/5] dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Document Glymur QMP UFS PHY
+      https://git.kernel.org/mkp/scsi/c/e6c68aac2f7a
+[2/5] scsi: ufs: qcom: dt-bindings: Document Glymur UFS controller
+      https://git.kernel.org/mkp/scsi/c/7cd44f40fe19
 
 -- 
 Martin K. Petersen
