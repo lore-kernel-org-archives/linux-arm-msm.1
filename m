@@ -1,69 +1,124 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793277173;
-	b=OkkyW+3Mkk2jNYt8KxdAR9VO7z/C7zHVqQZucB1Xsc1DQr/590MbOoy7QpOwSD1MlBVn
-	 Pp1e0Ls0eSlIvEIm9g7MP3xzTBKpTKhpGG8qjWlEly3CR82lupzEa+Z/P+eIsGyg0jeWR
-	 JaijBr7s8qkc6YLOyM3ZAj3IHhT53cmVIL2cHvn9qlX8POTTLtfdfg9FvBX04sWnL+5c1
-	 5uezE6b9kU8vZodANQTVFTM3Dl95UvEXcsGFrh4E2s1vVxPBJ7swmh04gafC/ryrJgety
-	 4d/zG8HMAs2QoK63uwql0+jJQssoUqRd2y+THOVWOYjCy/4smzeli+YzDo/8Vbu0qog==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793277173;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=Tg3R13sknH4kBiLkdZSxbk4Ng4+LLPOpweq6+Jw9GaU=;
-	b=SuVB60LHdFaJiqRKnTLz+Prw5OxSEbG1q+6Xjyyt6ebro4Fj9aDgACeRTpBC5Ntztnkg
-	 2dA/UKKAW1WdV4etZxi/Tl5zrHkvFYMBXmeqmvN6QtPHvdYeVBbP50ogMjLCp4bNBTRO1
-	 wDk4wsD3mEE3/ZCkHVgOC2t0ST546WBqRh0okaYfZbyibWVwlVfdTHqNsx91u6tX09d6Y
-	 X1tN+oeCWSHXOTg/f9PNLxRiLHClQxQswtCQpq3W+KSb0cXWMu3Kiku1ZLd3PFZWcTN/O
-	 HrwcTuWgJjj7Il4pOin8fiJG+rLggb+qDEqi+zTQG6Vw9SbIl6jYhc4/LwZiZmMac1Q==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b="pRf/rnIy";
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4DB5B606A31E;
-	Thu, 29 Oct 2026 12:32:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4DB5B606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793278881;
+	b=rIKHKVPlzAYKTSLv5RfbkawNIzvx1vuE+KDoJEwJ5pdwoyYxzUU+Xp9m7vKMyh+YzUfK
+	 EWRdLbApAy0iCL0X8ZZmA2Po2o5mqPSZEgw8lIQBrN9JnKcW61SpZMX30d+ZUfgB1mOpu
+	 7XPRkmG8ERJtZ3ZQlpXM7VbUq94hECQQMVf1Ms8C+Fh7IMV2OSJvJTdtQuyUEA4LDS+w8
+	 K0v2yPRZEYS/UCwsOewjU5fP/NG74uiDpeS3lC5XAK4GW/p3ROAPa/EbG9geC20WcaJnB
+	 Yw8/BSO06Z4fon9lB/0iR03OgbrTUobnNYKq9TkN53VGuLXKMtm/tCjuPAsqeA5r58Q==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793278881;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=sCqBj1P3O29v2Iuw4QofabghHgJM2zebox9CahTqtSY=;
+	b=EHvSZIFUZo7FgO4xYQ5gwsiOlrstXD3XD1AkYTctYo6BNM0n5Ej9meA6Z8lzOx9LtQhG
+	 cAkuEFfiKhVdNzmcVhgTv2gFYWd9ml3hX/8zSfXBfUUfdHehPRe/C/ckPyU7mqVgIGRZV
+	 n4g7OKNMzERBSsoamI/7C3K+q/8BzsY5HhIJUGKCkGKOhs/236qXzUNXNi7YjZL0ppKDV
+	 /ICXZ18sIDjM9dUDEt+kxdmnzBkU2wbkReoETKhf6AozuVL66XWyUoEd2Yn/rAliHcG/U
+	 qkP7dbJk8ErOWIdvFvoMZ0W6WJbDz4nFKbE26CAhQmglQKyq0I3x9TkPll+cZgMJCAg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ns1FYDU2;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JnHMbIXN;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D472606A31F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:01:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D472606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=pRf/rnIy
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ns1FYDU2;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JnHMbIXN
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69TCdxOg067948
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:01:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	sCqBj1P3O29v2Iuw4QofabghHgJM2zebox9CahTqtSY=; b=ns1FYDU279IfpQgI
+	5Xn4h2MdKmuH+/u47439F3pYrN9ZIfaGfINpAuaShNOCWkF4Bc0lRzVXnUlIyHYL
+	E2xPmefscZQNq2QupAGPPTw1/XQDMLZQgN00sIkzhP6/cEbKOwFoYwCYCTIwcNfL
+	17hidvGCkZFvFOWUF7ZkuhXzVLNW4x3g84gAJIyArxWiz0czk4S4WucifBOn3qZU
+	65SZY7arYllhpmon8p1Fh90/PzWxPNUv1QyG/nRo/DRCgbzNFf76+88UV5G6JNPc
+	+eYi3U4KNCe+BOtxD+8+jCxgjp8OHbrpwVkpsNbyidoqq0TYmRJgO1GEB0r/WMBQ
+	h+bOFQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkxshsubc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 13:01:20 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93caf7856ffso475880085a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 06:01:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793278880; cv=none;
+        d=google.com; s=arc-20260327;
+        b=RJIXXpKGZc5HX0NqKvKYlWaD9pOVV/uC5gkdj+jZdi3QvZnXRv7Er+mlwOKWNPjNmJ
+         uJ/UlLOa3SUWXNUdYhUXwuDhcFwtwodOVpNSRImDwfIkb4fBNgEwMu5sJeKE/aS9UP6i
+         CEkLAVZZxbAVMpB0imWKqX/YdisI10RDfhqaKsYiwtnMRs64kFwjauctqP6gQHF36rkS
+         C1e/7h6GzYaCxLmgyutFTsuskeYDLUh34oMkETSj7JQE0l+KkcL7q889b1FeIKVkfNBs
+         7bvkCIoHaUXmhlUwvY4UGh4nMg/dPskVF6l2tTWFjrna8gm7iYaGC18I828gaAXADYEY
+         F0Lw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=sCqBj1P3O29v2Iuw4QofabghHgJM2zebox9CahTqtSY=;
+        fh=me5et8LnWXPXN7udDorRrpORMIMDq0lpitcw1vHugjw=;
+        b=c6+IFp2ocgwwfICxFtbAB+lnDx9Jf0c4TBVbdrXvz9nSYO6Sm/a3g+QZ2/3DiabU3x
+         1j6aG5iL4AZIbeJrVbHL3LqwAdUz/DAcKlfV/B9Jz/daFKzprhgrQQmMm8wKThAqVPMA
+         sC+TfGqA32dcGBRZ41DdfBnkVsoECQzmT/ZUb4rWqSwL3wOI4Vy4zSwMx2QVjxC9esuZ
+         VK9+CXbcbO4xSBY1mHD2t3b877IjNXvsB2uVMn3kr+XoeqBIj83wPAmYOLPXs9swUSAg
+         Uo4egFlL+gEb3d8k/yC4qZeIkOWqmo7Km6pwZdmM7dge2t4xEjCP7stIJpGZk6GnnoZG
+         YjlQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=Tg3R13sknH4kBiLkdZSxbk4Ng4+LLPOpwe
-	q6+Jw9GaU=; b=pRf/rnIy4LeIUW3561wiAS2tbbl4dSixwn49ME3OlwM99hxDI/
-	QViAkwolNRP5gwnlyxwpsh1JDho4joeoUcA5NaCiQHx5Eb5968+/D1+WwEOWq6mA
-	Y0BIIE2KpCEARGyNoL+zZlPTPEf/T+FcVkz9oZyMKPkRqrdGE9IBPCiCc=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.224.240])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgCnHjPmPONqmPdgAA--.889S4;
-	Thu, 29 Oct 2026 20:32:39 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/3] drm/msm/mdss: reset all block resets described in DT
-Date: Thu, 29 Oct 2026 20:32:37 +0800
-Message-ID: <20261029123238.29877-3-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261029123238.29877-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261029123238.29877-1-xiaqinghuan@mail.ustc.edu.cn>
+        d=oss.qualcomm.com; s=google; t=1793278880; x=1793883680; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=sCqBj1P3O29v2Iuw4QofabghHgJM2zebox9CahTqtSY=;
+        b=JnHMbIXN/f0KD8mBtIBXQwUVOIvtU45tSlnHC4zEIqN3fU182XFZYAYOESFv7HLOH4
+         /GVAJGpgjiVH6+tmj81P2GgZHwqF846iSv1uqfsvOwxnhsg4J9vO6cYKiu0rv/FFDwBW
+         M+4pFDGzLEQJpgJ2aPSKD6r3j2DG5nAhm0pNGmTzvIg5iV30ohiF+DH3A20hF55XvLGW
+         9CjmQS2KWyOYZW68zjCvtOYpStXYoLgP2SBHh6yxKmSiJu6sFw3cX4oHEZzVw//3zTLk
+         nufa11BERYCbgzzdGPRd0HOzl6Xf2JANlLLUC+RpOu0Zgm9Y/dhkZFV6LItidQ2KUOQp
+         h6fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793278880; x=1793883680;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=sCqBj1P3O29v2Iuw4QofabghHgJM2zebox9CahTqtSY=;
+        b=0ifQROagEmX0+3ui4B3VzlCJRSL2TUm4KQYTuGzTIgcQwX5tpf0okt+5OTpbyAfVMh
+         WWs32NBWb8kGB85ptJTwN2vSt2WXY8KJA7e+GRIO+q0TKlR6IxSJaaWhfLUKhA8Pn2Gb
+         xcaEZ5pM0VVeEwVHCMadbjlUvh2+4ZrYph2/ys5KNhMkcCbBT2+BKVY5GSZJsshnaxze
+         Rb2RvP7dajSHMZxee2bfQdOpQVZ1CQl/OWwxA+xzcPQj3jCPuk+mAIEpXlkFHOolsyzN
+         vbqWUxIHjJKZYEU064x7DbBAEhzHtQFRgD3JQUqzVwZWRkS1iWXF6XJ9pI6kcqBIHrEs
+         B+9w==
+X-Forwarded-Encrypted: i=1; AKwUvBy4yTmbtep/bCwzEE/tdO2YrzsMYJJs9H1NYTdS6Jd0fe0J8toJZzfCugw2J+cqAfnKfVFAWv+zbDyZ4XG7@vger.kernel.org
+X-Gm-Message-State: AFq9FYIy2swHM7hQ4SZ6CbqYUs2pFVFOBwqFwL3rcXZRZ4KPVSLwO34d
+	ZW0MMqM2Nf2L51LGi5uTB07/ls78mfm+HJITIyZ7j5zcDnnrQPx1PSoNNZqDs8ViD7eQRmvdT4H
+	jUjucPgVM5mQtQQ1Y+bKX1oQeTPk8aYEeVzn15F+5z7vc22o8liiQaZfwQFedWuG9N7DOAOmyCC
+	UALVLklJcU3cZJylbzE/rKGIWbEgLAO5z6TuLfDvsTQ0o=
+X-Gm-Gg: AYBFou1UO6cKC52JMLqAoINGQY30SO0Ny+ATZqV5sKDIsSGdpI1cG7ZLfsFyaeIxV3W
+	IxbXy1VrZ9HTQwJh+lk8EipEVsl3vZsoDEYFxaI/Qzs6Mt2+5Nqt8GMx8OIOHyBnckTZ/EyFJh6
+	9Ce+frin38SGXfiJnzFj1Izsr6olFMiOJKmsNMG5q+WHlHpQg8Fpol3iHGffIZEa/5CLtAcBXSF
+	Y4bckb76VPA2cE9ku5acyOh4VH27DsKepL5/YUM/XgVCuAEhgMynLQMHp0W5w==
+X-Received: by 2002:a05:620a:1725:b0:93e:fb96:68f5 with SMTP id af79cd13be357-94408a8c3b1mr790980185a.32.1793278879036;
+        Thu, 29 Oct 2026 06:01:19 -0700 (PDT)
+X-Received: by 2002:a05:620a:1725:b0:93e:fb96:68f5 with SMTP id
+ af79cd13be357-94408a8c3b1mr790970785a.32.1793278878266; Thu, 29 Oct 2026
+ 06:01:18 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,88 +128,142 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgCnHjPmPONqmPdgAA--.889S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxZF1ktrWDur47Gr17Kry7GFg_yoW5GF4kpF
-	s8Ja4ayr4qga1fZa1jy3W8uFyFk393KryUGwsxG34UA3W3J3yrJr9rKFW5tFWDJFyxAF90
-	yFsxGFWruF1qyrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmmb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUXwA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7
-	CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6ryUMxAIw28IcxkI7VAKI48JMxC20s026xCa
-	FVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_Jr
-	Wlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I
-	6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r
-	1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1U
-	YxBIdaVFxhVjvjDU0xZFpf9x07bOyCAUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREPB2riTVZTsQBRs4
+References: <20261029123107.28705-1-xiaqinghuan@mail.ustc.edu.cn> <20261029123107.28705-3-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <20261029123107.28705-3-xiaqinghuan@mail.ustc.edu.cn>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Thu, 29 Oct 2026 14:01:07 +0100
+X-Gm-Features: AclHuK9HHjKdAV_87O7vafl7ryiBF0S_hg2q2SY-cNvI08xHiOvoE__qojfybps
+Message-ID: <CAFEp6-0sLQfiNP8e+3+ZEXnjPG4GzJSPtiyEGfG2tXt-DuptGw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] media: camss: video: check that a buffer is DMA
+ contiguous and add a prepare hook
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: linux-media@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+        "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: bBMy9NR8Bh4d8dvI33LwZ35j7b33OPhZ
+X-Authority-Analysis: v=2.4 cv=H6BOUOYi c=1 sm=1 tr=0 ts=6ae343a0 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=5jp7TkJpA6SZ9Z3lt2IA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDA1MCBTYWx0ZWRfX0E3D9zooigtu
+ rQQbigJptzG6eGPtJIyyRhsJvGuFdPsMh3PHBaf/x4HviYe0OLg52sNbQL8lS5kA80LmV+wSRc3
+ TzSKG/4fi9EJgt6vbjQ8gBayGXH/fsg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDA1MCBTYWx0ZWRfXzkI7NX8YzH8K
+ zEqqvwpczFSx+MUU/ElnMTE7x5aJO64/+1qWIC3SkCvlF/fzFJfGoEw8y0hX0KOr6xO6nuRtVtj
+ MEBPbzEPYs3PBuyS71JGv/7/tm1PKH0rR4MH9NjLIFENIO+iW3DjCJ92sbu9IPC2PpIZ7avIGR1
+ eWQWBZea8RSFRoPFg6Rl3HS9CObumOgBJGCCXJjMquHGZQ81tZc/sae5eEYuVt7HP9KfD4IwqVL
+ cdUptWXJh0LKWCHBhBIzHrB+VPiwFstZzm721B5Tv0gs282gBetvaiRu/Q+YhJHG7k+h14t9pZo
+ lt9jeiIkFPRXWGJdixTEHw2m9GVaMAexa1K5mZInrwg3s6l0pNxooZEk6btA8soD9NxW3gIDowh
+ CvAVy+xAAQm39Jg0ND0XLK3zHHrJaxNIZHy3Q5zXHVFZUyEYX6e9+FbizagvVcixF4odledsA9G
+ IgqOLZhCgAVijH/PX6w==
+X-Proofpoint-ORIG-GUID: bBMy9NR8Bh4d8dvI33LwZ35j7b33OPhZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-29_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 spamscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610290050
 
-msm_mdss_reset() acquires only the first reset listed in the MDSS
-device node.  Platforms can describe additional MDSS block resets: the
-SM8750 display clock controller provides resets for the MDSS core INT2
-interrupt controller and for the MDSS RSC, which can be left out of
-reset together with the MDSS core when the bootloader hands over with
-the display block still running.
+On Thu, Oct 29, 2026 at 1:31=E2=80=AFPM Qianhui Xu <xiaqinghuan@mail.ustc.e=
+du.cn> wrote:
+>
+> The write master of the newer VFE generations can only be programmed with
+> a buffer whose payload is physically contiguous, because the frame
+> increment registers describe one linear address range.  Check that the DM=
+A
+> mapping of every plane is contiguous for at least sizeimage bytes and
+> reject the buffer otherwise, instead of silently writing past the end of
+> the first scatterlist entry.
 
-Switch to the reset control array API so that every reset listed in the
-device node is asserted and released as one group.  Devices without a
-reset in DT are unaffected, and for devices describing a single reset
-the assert/deassert sequence is unchanged.
+Have you tested the non-contiguous case? It=E2=80=99s a bit surprising to m=
+e,
+since the device-visible IOVA is still contiguous.
 
-The resets are driven from the display driver rather than from the
-display clock controller: the clock controller supplies the MDSS clocks
-and power domain, so it probes first and has already programmed its
-PLLs when MDSS probes.  The block resets do not touch the PLL registers
-and no display pipeline is running yet, so the PLL configuration
-survives the reset.
+Perhaps this is related to frame subsampling, in which case the frame
+buffers themselves would need to remain contiguous to take advantage
+of the hardware frame-increment mechanism. But even then, the relevant
+address space from the hardware's perspective should still be the
+IOVA.
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- drivers/gpu/drm/msm/msm_mdss.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+Regards,
+Loic
 
-diff --git a/drivers/gpu/drm/msm/msm_mdss.c b/drivers/gpu/drm/msm/msm_mdss.c
-index 9087c4b290..59343987bc 100644
---- a/drivers/gpu/drm/msm/msm_mdss.c
-+++ b/drivers/gpu/drm/msm/msm_mdss.c
-@@ -306,11 +306,22 @@ static void msm_mdss_destroy(struct msm_mdss *msm_mdss)
- 	irq_set_chained_handler_and_data(irq, NULL, NULL);
- }
- 
-+/*
-+ * The MDSS block resets are driven from the display driver, not from the
-+ * display clock controller: the clock controller supplies the MDSS clocks
-+ * and power domain, so it probes first and has already programmed its PLLs
-+ * when MDSS probes.  The block resets do not touch the PLL registers and no
-+ * display pipeline is running yet, so the PLL configuration survives the
-+ * reset and nothing visible can glitch.  Bootloaders that hand over with
-+ * the display block still running (PLLs locked, blocks out of reset) are
-+ * returned to a known-zero state before any display hardware is programmed.
-+ */
- static int msm_mdss_reset(struct device *dev)
- {
- 	struct reset_control *reset;
- 
--	reset = reset_control_get_optional_exclusive(dev, NULL);
-+	reset = devm_reset_control_array_get(dev,
-+					     RESET_CONTROL_OPTIONAL_EXCLUSIVE);
- 	if (!reset) {
- 		/* Optional reset not specified */
- 		return 0;
-@@ -327,8 +338,6 @@ static int msm_mdss_reset(struct device *dev)
- 	msleep(20);
- 	reset_control_deassert(reset);
- 
--	reset_control_put(reset);
--
- 	return 0;
- }
- 
--- 
-2.53.0
-
+>
+> Also let the SoC code add its own alignment requirements to a queued
+> buffer through a new prepare_buffer() video operation, which runs after
+> the generic checks.
+>
+> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+> ---
+>  .../media/platform/qcom/camss/camss-video.c    | 18 +++++++++++++++++-
+>  .../media/platform/qcom/camss/camss-video.h    |  1 +
+>  2 files changed, 18 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/me=
+dia/platform/qcom/camss/camss-video.c
+> index 0852eb6f13..027cf024f9 100644
+> --- a/drivers/media/platform/qcom/camss/camss-video.c
+> +++ b/drivers/media/platform/qcom/camss/camss-video.c
+> @@ -155,7 +155,10 @@ static int video_buf_init(struct vb2_buffer *vb)
+>         const struct v4l2_pix_format_mplane *format =3D
+>                                                 &video->active_fmt.fmt.pi=
+x_mp;
+>         struct sg_table *sgt;
+> -       unsigned int i;
+> +       struct scatterlist *sg;
+> +       dma_addr_t end;
+> +       unsigned int i, j;
+> +       size_t contiguous;
+>
+>         for (i =3D 0; i < format->num_planes; i++) {
+>                 sgt =3D vb2_dma_sg_plane_desc(vb, i);
+> @@ -163,6 +166,16 @@ static int video_buf_init(struct vb2_buffer *vb)
+>                         return -EFAULT;
+>
+>                 buffer->addr[i] =3D sg_dma_address(sgt->sgl);
+> +               end =3D buffer->addr[i];
+> +               contiguous =3D 0;
+> +               for_each_sgtable_dma_sg(sgt, sg, j) {
+> +                       if (sg_dma_address(sg) !=3D end)
+> +                               break;
+> +                       contiguous +=3D sg_dma_len(sg);
+> +                       end +=3D sg_dma_len(sg);
+> +               }
+> +               if (contiguous < format->plane_fmt[i].sizeimage)
+> +                       return -EINVAL;
+>         }
+>
+>         if (format->pixelformat =3D=3D V4L2_PIX_FMT_NV12 ||
+> @@ -193,6 +206,9 @@ static int video_buf_prepare(struct vb2_buffer *vb)
+>
+>         vbuf->field =3D V4L2_FIELD_NONE;
+>
+> +       if (video->ops->prepare_buffer)
+> +               return video->ops->prepare_buffer(video, vb);
+> +
+>         return 0;
+>  }
+>
+> diff --git a/drivers/media/platform/qcom/camss/camss-video.h b/drivers/me=
+dia/platform/qcom/camss/camss-video.h
+> index d3e56e240a..af046ecb7f 100644
+> --- a/drivers/media/platform/qcom/camss/camss-video.h
+> +++ b/drivers/media/platform/qcom/camss/camss-video.h
+> @@ -28,6 +28,7 @@ struct camss_buffer {
+>  struct camss_video;
+>
+>  struct camss_video_ops {
+> +       int (*prepare_buffer)(struct camss_video *vid, struct vb2_buffer =
+*vb);
+>         int (*queue_buffer)(struct camss_video *vid, struct camss_buffer =
+*buf);
+>         int (*flush_buffers)(struct camss_video *vid,
+>                              enum vb2_buffer_state state);
+>
