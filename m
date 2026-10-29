@@ -1,93 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793275368;
-	b=QJbEt2obRnLJepEV04+0+GurmCFe5ay8eElxz894aG3TP9mzi2KS5+j5ZGoWCuFvrsc7
-	 V9BSkJLvZKpyreGmat5QifzfDuFL+CgDihLakRzKQcbqEq7YV9RNTz8cAFJiXR/PozdJL
-	 PtXugoE0V59JcoRYvzsb18PLLBmzh1sVm+Kom320Q0JMmcRsvA54N+ksRa5BTF6G48+tJ
-	 zIb+IVbEiexCYBwOkOw9ax6ITpw8zpHZYEt5ghYPRMPNkKp37JwMRSkDnfHKsX2e1ZtrB
-	 qraeF36TKrJvbmIG23xRs4935g+aGnHrwe4MnPX+9IHyYp2BBL2pCnWCvA90Ox/017A==
+	t=1793277080;
+	b=5t2KAP7Cnm3fxboMtRRrZsxrkaElaPwyeZ8u/w/se8flnnnjBLESQA3XENXfA7IbUz1+
+	 +cVMP+9lcZpWeZnTewxF8FHzfX291qsvW/gvuwkPw/Y5EZKe0GtSP7YxQ2Iazuvk90AcQ
+	 pu7TajtoGu+9/9DHXCetakUjblrT/Mm9ryBdUX34tsp3ZVFj67XJ8gDKcHdIoQtH3AY3r
+	 Ssrj1p1IeuuHPrFM5qfI6N5Sn6ppYViJh7PWiDX+uzdT5kkiX8AWQRLeJ6I/75CLbVxNv
+	 BksKD4cv0uJJY1jcMg2ahD+TLp7+qaidoRBCrRRLF2TWYIAixLMT+5Vw4PXy4oJ/9QQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793275368;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:Date:To:cc:
-	 Subject:In-Reply-To:Message-ID:References:MIME-Version:Content-Type;
-	bh=T8Eng3qwLEeUoVGvRshX3rc6PfkWjqVrwxy3a8uah8E=;
-	b=nDtdxZSmpxeIXVGfxKyS7qAw0N/dAnw+Rs0HcBEyEqSQ+XAxxUAm86KBiIegWpEKTUxX
-	 Szzsq7hKBUxOP0DX+NPiFz1Zw8tArKxgzT9LlvPt2GBBc8dB85x9SRjP6G4y2VhfiK5kX
-	 3QIbr9gVyQBdS0aApR3gmbd9anb0laBosfnepvBZDTMomBvhwoAi8xO9neqeqtLBJaTk9
-	 Z2Y8e8BwyiR2RRbMfnrRO4w8Al6hwiVfRi1R/05FwQlbGKdyzRs23xZ2tiKOBBsc/o/4d
-	 K9eJzZX8shX2xw6rvN5AbQZySZju3yQsk4SMs8TQPqM1flmEY0lu3DhZ+BUOb/Ul7TA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793277080;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=x1c5YzEVioBo2uLqMIE3MXPESXSecJhUFVg+vvEICo0=;
+	b=KuHz66dFeo0+3kIJ7DzELs6hlFZV3g9U5iO7RvcKsqsjMJlX5e+hz2HnbOQV1RaFmJb6
+	 1/JovDZbg7VeAR+NQQ01diBmsPweaBj7bXpyUm2l5CXeejS94VZpkDCSWk4qhI7dKB7nS
+	 yQ9hCeDcx9R+gnIhyvUI2o5AkNwTpkO7kkHjaHePTkZZIQIB/Ee1npts098r6Mt7JXz8F
+	 /Eu40ef8wPyoqnQWzpdohVUpfBkhcVDKMWJttvgkdzjRd77G/VGyRIyucuWwR2eAfuO80
+	 ixpZ9ftWc6Gb5b/FZfAnzKWtFR8wqQ6/NVBaUyKWVranKgpsDhtrDb0mWyZpgwDfC8w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=HVshlDIf;
-	arc=none smtp.remote-ip=198.175.65.13
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF9FF606A31C;
-	Thu, 29 Oct 2026 12:02:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF9FF606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=r4t844eW;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 706EE606A31E;
+	Thu, 29 Oct 2026 12:31:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 706EE606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=HVshlDIf
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793275368; x=1824811368;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=Jr2MXl655ILtgT8HMWCdbmGSBcxTaDURabb84rT89Ow=;
-  b=HVshlDIfwMq7dWyS01r21mm6Jr+jt/Mx7JadIRclyT4GcS9RGNW8cshO
-   l0dPgzL1IGG52XslL4X7/1j8h1QTZuYyQxX2idTk/J3iPIyCPtUPKdmRs
-   YUTpIDWL/xfFCdcSX4FjdIBjbM5RyHFpZIqYIecHRe64bIdVKNk9I+7NW
-   IrbZPbYbfqwl4oyyDJvsNAuP4jlGxyzUnk3SEtUSOeQuMF9PWks2GJAPy
-   pGkTNzzMswYJ3XjcoGqEBFIL1GxOTX6GbQspqNUttOZM0m6QLyZ1kIf89
-   J+xQpxns1V9CzQ+afaw6CivTb/hQqE0yDq3QczY8FOcotUftbrAVVb/eF
-   g==;
-X-CSE-ConnectionGUID: yRnH3SFWTqmGsXDAn4S4Mw==
-X-CSE-MsgGUID: +AYEsR0xTBS96OLdC0Uwng==
-X-IronPort-AV: E=McAfee;i="6800,10657,11949"; a="1892994"
-X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
-   d="scan'208";a="1892994"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 05:02:47 -0700
-X-CSE-ConnectionGUID: ifwCoafmRViVOiPhHZbVrg==
-X-CSE-MsgGUID: ZIdt35McRE6q3dwbWX6XdA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
-   d="scan'208";a="5261488"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.149])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 05:02:37 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Thu, 29 Oct 2026 14:02:31 +0200 (EET)
-To: Yin Li <yin.li@oss.qualcomm.com>
-cc: James Morse <james.morse@arm.com>, Rob Herring <robh@kernel.org>, 
-    Shanker Donthineni <sdonthineni@nvidia.com>, 
-    Ben Horgan <ben.horgan@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-    Conor Dooley <conor+dt@kernel.org>, 
-    Catalin Marinas <catalin.marinas@arm.com>, 
-    Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-    "Rafael J. Wysocki" <rafael@kernel.org>, 
-    Danilo Krummrich <dakr@kernel.org>, 
-    Reinette Chatre <reinette.chatre@intel.com>, 
-    Fenghua Yu <fenghuay@nvidia.com>, Jonathan Cameron <jic23@kernel.org>, 
-    Bjorn Andersson <andersson@kernel.org>, 
-    Konrad Dybcio <konradybcio@kernel.org>, Gavin Shan <gshan@redhat.com>, 
-    Andre Przywara <andre.przywara@arm.com>, Drew Fustini <fustini@kernel.org>, 
-    Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>, trilok.soni@oss.qualcomm.com, 
-    aiqun.yu@oss.qualcomm.com, ganapatrao.kulkarni@oss.qualcomm.com, 
-    Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>, 
-    Huang Yiwei <huang.yiwei@oss.qualcomm.com>, 
-    linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
-    LKML <linux-kernel@vger.kernel.org>, driver-core@lists.linux.dev, 
-    devicetree@vger.kernel.org, kernel test robot <lkp@intel.com>
-Subject: Re: [PATCH v4 2/6] arm_mpam: Fix MSC MMIO window size off-by-one
- with resource_size()
-In-Reply-To: <20261028-mpam-resctrl-dt-knp-support-v4-2-bdda1e445cba@oss.qualcomm.com>
-Message-ID: <629fcaca-66ad-bcc6-fbe2-bd80e9822c94@linux.intel.com>
-References: <20261028-mpam-resctrl-dt-knp-support-v4-0-bdda1e445cba@oss.qualcomm.com> <20261028-mpam-resctrl-dt-knp-support-v4-2-bdda1e445cba@oss.qualcomm.com>
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=r4t844eW
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=x1c5YzEVio
+	Bo2uLqMIE3MXPESXSecJhUFVg+vvEICo0=; b=r4t844eWHMfdfunAIR/8+LRyZW
+	zO8l73XYKo7DgWIIACvvBQHHI6GKFhO3iTT6S8t+kqOgAgDRvm5ReOUFS1sh98rP
+	6zJs7YxJM93X+OjosLnQAE2Z03FjSRSiDg4UBaJxMnkO7FNjqbdPx4JXl3TkS05T
+	wNmc4offN4W2ucF0E=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.224.240])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgC3OD2LPONqnPVgAA--.841S2;
+	Thu, 29 Oct 2026 20:31:08 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: linux-media@vger.kernel.org
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] media: camss: three fixes for the CSID power and VFE streaming paths
+Date: Thu, 29 Oct 2026 20:31:04 +0800
+Message-ID: <20261029123107.28705-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -97,62 +61,85 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-96330462-1793275351=:1322"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgC3OD2LPONqnPVgAA--.841S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fKr43KrW8Xr1xXFyxKrg_yoW5AFyrpF
+	WfKas8GrZ8GFyxAw4xX3WUXFWrtwn3Zay7tF1j9asY93W5ZryjqrWUKas0qa4UCrW8Z3W2
+	vrW2y3s7uFs0qFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvIb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
+	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r126r1D
+	MxkIecxEwVAFwVW5JwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s
+	026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
+	JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20x
+	vEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE
+	14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
+	9x07bYdbnUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREPB2riTVZTsQBLsi
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+These three patches are fixes found while bringing camss up on a new SoC,
+but none of them depends on that new SoC support: each one is against code
+that already exists in mainline and can be reviewed on its own.
 
---8323328-96330462-1793275351=:1322
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+As posted earlier, the SM8750 specific patches of the previous series are
+withdrawn and that work stays with the existing upstream series:
+<179325717815.489400.16602455641444097904@mail.ustc.edu.cn>.
 
-On Wed, 28 Oct 2026, Yin Li wrote:
+1/3 csid: the power-on path repeats its cleanup sequence in every error
+    branch and gets the first one wrong: when pm_runtime_resume_and_get()
+    fails, the parent device reference taken by parent_dev_ops->get() is
+    never dropped, so the VFE stays powered.  Fold the four open-coded
+    blocks into a single label chain and route the pm_runtime failure
+    through the parent put as well.
 
-> struct resource uses an inclusive end address, so the window size is
-> end - start + 1. do_mpam_msc_drv_probe() computed it as end - start,
-> which is one byte too small.
->=20
-> mapped_hwpage_sz is used by the register access bounds checks, which
-> have the form "offset + width > mapped_hwpage_sz". With the size one
-> byte too small, an access to the last register in the window is
-> incorrectly flagged as out of bounds: for a 0x1000 window, a 4-byte
-> access at offset 0xFFC (bytes 0xFFC..0xFFF, legal) computes
-> 0xFFC + 4 =3D 0x1000 > 0xFFF and falsely warns.
->=20
-> Use resource_size() so the size is correct. The ">" bounds checks are
-> correct as-is once the size is accurate and are left unchanged.
->=20
-> Fixes: f04046f2577a ("arm_mpam: Add probe/remove for mpam msc driver and =
-kbuild boiler plate")
-> Reported-by: kernel test robot <lkp@intel.com>
-> Closes: https://lore.kernel.org/oe-kbuild-all/202609030809.ObirDhR3-lkp@i=
-ntel.com/
-> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
-> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-> Reviewed-by: Ben Horgan <ben.horgan@arm.com>
-> ---
->  drivers/resctrl/mpam_devices.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_device=
-s.c
-> index 347a5a6d6a1d..0f984fcbcae9 100644
-> --- a/drivers/resctrl/mpam_devices.c
-> +++ b/drivers/resctrl/mpam_devices.c
-> @@ -2508,7 +2508,7 @@ static struct mpam_msc *do_mpam_msc_drv_probe(struc=
-t platform_device *pdev)
->  =09=09=09dev_err_once(dev, "Failed to map MSC base address\n");
->  =09=09=09return ERR_CAST(io);
->  =09=09}
-> -=09=09msc->mapped_hwpage_sz =3D msc_res->end - msc_res->start;
-> +=09=09msc->mapped_hwpage_sz =3D resource_size(msc_res);
->  =09=09msc->mapped_hwpage =3D io;
->  =09} else if (msc->iface =3D=3D MPAM_IFACE_PCC) {
->  =09=09u32 mpam_fb_msc_id;
+2/3 video: the write master of the newer VFE generations can only be
+    programmed with a physically contiguous payload, because the frame
+    increment registers describe one linear address range.  A buffer whose
+    plane was not contiguous was silently written past the end of the
+    first scatterlist entry.  Reject such buffers instead, and add a
+    prepare_buffer() video operation so SoC code can add its own
+    alignment requirements after the generic checks.
 
-Reviewed-by: Ilpo J=C3=A4rvinen <ilpo.jarvinen@linux.intel.com>
+    For the contiguity requirement that Bryan asked to see cited: the
+    downstream write master driver (camera-kernel
+    drivers/cam_isp/isp_hw_mgr/isp_hw/vfe_hw/vfe_bus/cam_vfe_bus_ver3.c)
+    programs each write master with a single frame increment of
+    stride * height (line 3865) and aligns it to 256 bytes (line 3908),
+    with no per-fragment addressing.  If this citation is not considered
+    sufficient, patch 2/3 will be dropped.
 
---=20
- i.
+3/3 video: when one subdevice fails to start, the ones already started
+    further up the pipeline were left streaming and the next start tried
+    to start them again.  Factor the teardown loop out of
+    video_stop_streaming() and run it from the error path; also keep
+    stopping the remaining subdevices when one of them fails to stop
+    instead of returning early.
 
---8323328-96330462-1793275351=:1322--
+All three are build tested with W=1 on drivers/media/platform/qcom/camss/
+and apply cleanly on v7.3-rc7.  They touch only camss-csid.c and
+camss-video.c, which no patch of the Kaanapali series (v23) or of the
+SM8450 series changes, so they apply independently of both.
+
+This series intentionally contains no SoC enablement, no DT binding and no
+CSIPHY change; those are being discussed in separate threads.
+
+Qianhui Xu (3):
+  media: camss: csid: unwind the power-on path through a single error
+    label
+  media: camss: video: check that a buffer is DMA contiguous and add a
+    prepare hook
+  media: camss: video: stop the subdevices already started when a start
+    fails
+
+ .../media/platform/qcom/camss/camss-csid.c    | 45 +++++------
+ .../media/platform/qcom/camss/camss-video.c   | 78 +++++++++++--------
+ .../media/platform/qcom/camss/camss-video.h   |  1 +
+ 3 files changed, 68 insertions(+), 56 deletions(-)
+
+-- 
+2.53.0
+
