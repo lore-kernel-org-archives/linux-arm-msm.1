@@ -1,50 +1,50 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.204.34.129
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.207.19.206
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793246315;
-	b=GbGMBW9wjOm4cRNMiOgYzYGeHstp7jSmht5/717+OR4wFf69sZz6u4HFzgyAhfUkgEKa
-	 L7msRKnJh5XH3hUOzIocuHvDM4oTe2CdItk7EhBBAoIDigUXzGrQy7U3TKfWGUylU52ks
-	 nm1lY2JOWenbAM/7NjHGlcxhdAlYVO/kvkNAs7HGhv5Qa2geFbBISFAgX1uJM8+5LJDke
-	 aijt8mp2Wzx5EATPBuY7y7zM3p+trHi0CeRqrCfN6I/pi+cDIyrlVlLNMW32F8JZTXdTt
-	 uL9MS0njm1uoX0xe254Wg99Vwzar29U9WcZpMOtw3B3QYUuDi7OU+cG9IVZvhwHk1lw==
+	t=1793246319;
+	b=qTlPTN2AaaBlBpEcfJU4Bqoopju6Cv14L20zuG0aLk/fsG3eeY8bO0VqebyrGfjHBKZ/
+	 AQcOacq3EvadciBMwX45Lx9uZaG8ZXICd495lG/oc3Gz+5ZLIcI+1YsLphhczKKuQlPwE
+	 2XC+CFIRd2j3o8QnaQRzObtwB3A2o1jZVkddpNEI9eMTQ0tXIhKhkDnlPE5EOr9Veh8nD
+	 8CHeOfTY+LFquhfB8l2+At6upGvlg2edaeCNR9CvjTTVoXz6cnIdCTXlPrBjak3Gn0NE2
+	 lbkcxpXYsNfWZby2FQU712geYo7xncf9L4pYPuGjaSKJXlU2tFXSVepGbh6T8CfEzoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793246315;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793246319;
 	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
-	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:Subject:Date:
-	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:
 	 X-QQ-RECHKSPAM;
-	bh=rKWWlLamxsX6C+wWQ3RjHbZhUn4fZF4PoHH6nfAH94E=;
-	b=0IPp8k/M6RTI06cxCLpnFSzBjCRCM9EahhmyyEZgvbPd8/+aR+o+QRWey+kQb8wDu/go
-	 xaU0lDM1+ZJXptKzAQXswp/vih/SIW9fez6cOkRkPDVrbm7UD4ZsiCDSY6wLc/ZMJbXIa
-	 mE1xj8w7J+BKK1kbzYllO/jCX1yFDF8t6qFEBch6hf0s93qsBPMvt8Z3HBmPEQuXxrv2w
-	 hKdwYaD/5Q9TG4gj9vyoe47o5NIGcxTQM+qOgE9xo//b/fGqoFB7PanAkOJgCw+Mzqi1h
-	 bvIj4wvG5poa5hdBXfsWjHtFCPRYTjclb1tY6gwVFZgUWYREJDUIovxks6a48/ogeAA==
+	bh=BFyLvxz4SXBn37Mm+VHu0liQCJYb3+5Wnq/m/6TzgMQ=;
+	b=RMwvPQXbf5RIIJv1dVjO6qpkwbHH4CQxNTIJdPZN3AmM3hD+EmXDLt0lspYPPp7gyvt3
+	 M7EbarZIu9hc/9M8rz4Smczc+MwD6kYe47/k0ViGRj73in6T7gMXBwGyI6xE0il4GX1zu
+	 wn4iZQ7fa8rexay+S/alLYy1Dr6rDD0PSzLfFLlmcpZ6k1RoxxEk04/RYXz5g+TayriJf
+	 C7ZTeex0C4RFSAXkMr6Bx8frsbnQk75oQjTgYMuoDlrYktGJGDGNacfNc/68lwfdQ4Z8D
+	 p5u+5N1yVn6vF33M1k+fvQM8UTk9tzgKly1xpNw92JW+wcePapAtsSs4xpJAISRwwCw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=radxa.com;
 	spf=pass smtp.mailfrom=radxa.com;
-	arc=none smtp.remote-ip=54.204.34.129
-Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+	arc=none smtp.remote-ip=54.207.19.206
+Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57D35606A31A;
-	Thu, 29 Oct 2026 03:58:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 57D35606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6877C606A32D;
+	Thu, 29 Oct 2026 03:58:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6877C606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip2t1793246292t02f385cd
-X-QQ-Originating-IP: rULgPPENo6ArHONBhIWMKTzJXA2vLyYppYXaz9Xwn9A=
+X-QQ-mid: zesmtpip2t1793246298t9a167de4
+X-QQ-Originating-IP: nweIdh7gutCYAe23QkulISMAwB3Hw2QnoC6AogDnQUc=
 Received: from [192.168.30.244] ( [localhost])
 	by bizesmtp.qq.com (ESMTP) with 
-	id ; Thu, 29 Oct 2026 11:58:09 +0800 (CST)
+	id ; Thu, 29 Oct 2026 11:58:16 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 11119534971111730702
+X-BIZMAIL-ID: 8137748758459802009
 EX-QQ-RecipientCnt: 17
 From: Xilin Wu <sophon@radxa.com>
-Subject: [PATCH 0/5] media: iris: HFI gen2 features and fixes for VA-API
-Date: Thu, 29 Oct 2026 11:58:05 +0800
-Message-Id: <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
+Date: Thu, 29 Oct 2026 11:58:07 +0800
+Subject: [PATCH 2/5] media: iris: allow larger capture buffer pools on HFI
+ gen2
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -56,10 +56,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBCF4avIrE3SdkG5ilgUg7Eo6SCSxt0Vy
- y8v/4sgFJgE6ixCoJOFV5+g8wz62fmJkIdkMMoUWpkKObDg6XDkiwSttqRUUTpnLKRmC/QNKWn
- a33J0C/X7ewL3/QAZkAkUcQAAAA==
-X-Change-ID: 20261029-iris-va-fixes-818e0067aa28
+Message-Id: <20261029-iris-va-fixes-v1-2-44a2783f782b@radxa.com>
+References: <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
+In-Reply-To: <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
 To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
  Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
  Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
@@ -73,71 +72,61 @@ Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  Loic Minier <loic.minier@oss.qualcomm.com>, 
  Jason Pettit <jason.pettit@oss.qualcomm.com>, Xilin Wu <sophon@radxa.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1726; i=sophon@radxa.com;
- h=from:subject:message-id; bh=2pUM++6EuMSmkspbChFs2KGAGKrtuCEl/obXrPZ7zqU=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFmPjgQq7Z9UvHJvimDKuRcT57wTV8vheMt78u8HfqvIB
- FN/8aj5HaUsDGJcDLJiiiwK8Qxz2Stzrz0VK9WDmcPKBDKEgYtTACYy6TzDP+X+7vu5Fk1+yxJD
- WiKbqhWXB8Up3uY815x7T3GxnmGJNcNfifq4BTZr/F83fxRKY2oSyzOTdhBtvMqkqhlzS/aa2gx
- WAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1038; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=zBt5EWF02554zl4wui+IeGIlpE3r7mVcyNeUaq/LzB8=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFmPjgTZVMpNWXdg0sPfZ72vx23a2GrTPG3vevvJJvPXs
+ D55qW8Y0FHKwiDGxSArpsiiEM8wl70y99pTsVI9mDmsTCBDGLg4BWAi1vIM/8slBJbaGzXujZG3
+ uMV/hX3XWvccyYzLbsfCDijf2Pfl0xVGhq0tP18IbH7x5ETW0ox7y/gfKkim8+3QnP7I73I1j7u
+ 7PR8A
 X-Developer-Key: i=sophon@radxa.com; a=openpgp;
  fpr=205F009D07796DD6E516752E32C31567AD9E324E
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: NN51gi9eLBwaCQCmDAt14waHv10ZhQy/mjdaYMzlggCxF8Dmdq7bi5z+
-	E74k6kE6cz6Br0vh59UCszXyVT1T4KaMHLf/ZJnsK+qcB40dJVRFkPXsLLPOKInZMNIFI4Z
-	ixvko1UVlOk+tKQgD5h/SZPVjasUmhxxymVKl3Y2oxpR7e7QsYG4Yiv+Dvv4Viw2oCCy/Vo
-	1adJCOuAIr+qp8QSzASUoz2EWfOh7mGaye8E3o3T48K29fGtF+k5enH4vDJN61pINua6zca
-	8Su8hYAnFXDYOLptS8gFX5kVbf6cXXbP/b063vUvfQbH+5gAaOMRI8gwOuzYHHgyXn+nBub
-	zAd7Tzpw5InbdGOSm7W8BCWpvpNIsypIEc7+anfpPvBJN+9G/Cx0GCaF/ap62kwwioJ/b5a
-	w3a27+jovTk02Rwa966Ik60n73PJgIs1eRUWu47Q9aBjqUFkfH2gdn4nrYgvEl0cjs4uzfS
-	n9vqs9RNjJn/uBDGYOSDpNi7ITdwfyqBlYhSv1CnmktHLAULQkuSVVzlKn9tC1N3J0Ouvb6
-	TxbAX9qfY0wk/JPW9NSbKbFkumImb1hSnIw6hIE33HF8jOSXOT2VoW7MeEfUpnj8hZXJpPT
-	l9zEbOvfuPEzUh+Cevnoc9PK8S71MhAp7jujy59CYpdouRDgnEAzKB0V3TNCXxwBdUhICNY
-	xC73bH8JeWslddl6BpnrBc8WZmnwDHmYyEAef1K4sKP807ocATKPsVTTfv1J6+CT3h+pW5u
-	7/fvOzuSS8GBuWPhhM3YoxdCAlqJinHZ4y3inwlUkh26lO2uMBnboea8u6bsNSj7zQo6Cem
-	k3/g2488L0G1tSnhsi4bIJcEmxVlXoUFYjyAUfv0MKGIHlYaPWxOsZfWyLGGN0h1MDuYXVI
-	lHvBURjnOmnPHD7OAKnCnoBO2l83Uy1//MSTUeoBwv20/eLkLpN5TBC1B05fe4mWSZOvQ5r
-	wKVTzRdfSza9s0Z8ncoBssEyUcp3Mv1QVQ+oDKFih0+XZVPztyLWZnkBHeZV4fV0YrKr3mZ
-	rZIdpLEosp9fADU2QXCtj9yLZI5/safbYgUE0Hqb0CigkykrpT
-X-QQ-XMRINFO: Mp0Kj//9VHAxzExpfF+O8yhSrljjwrznVg==
+X-QQ-XMAILINFO: NmRjDopJZVxOniNVEP/DuHqvmxWTJff6es9/tHb3fB4XiE/wc5r/yCMA
+	PGWI6UB/FwKv+CF6+d3Fu5rIpkZapcqCxlNGoI8fwn54nT+SqKj6dQTGs5oW2cR/d3dIkBb
+	v0XWPzcrXffkwmbLXQcsQIw9tQk9DNZPrRjRFo7HjGjwle+XVDSpJid23sNMv7omxoSpYi6
+	7Ji+27At+tFsL3MVUp0mAakFH16rQ57bGeNt3Zpf5+i4VfhNYodd8DQlNuqBdIp2C/k04hN
+	QzRJAb+VS1cb1WIyhGsi/Kuo7qOU3FHo2LSLRNSUvUwMNRYmq0pE8i/6+jxUX00GV+/1sA9
+	0bHzxCWp6bYHPwjVIHnCWkGe/yzRAXW0ZUNBYuPgpvAGB8U9vYWZrk9dlEak8dFL3P2vfoX
+	lUONErL+6/e4A0fMF/kDmLMPfK6HVUcuiJ1Kt2HBePaJwBPLuVYUhqdksVu5EywIjoY5RmM
+	GyOoSpdBMe8Xk4J/fKuc06tPfk0ZVFXG4dNKAXPsA0tdz2oP0flDClWl/jy9JmUrjODsXx/
+	RQzj47j+lM38lO+N+The9ylw/Fauh+JgqEo1MwXPdB1VvOOV9/MF1AD2ntb7TRNqMjNa0q+
+	fKSb7auisSQVefApzIOxaAOCHEjdlVr9KRVX7F2mLQte8XZC52VpqI9AldEGVw6Z0hn5Swg
+	3bEOb1gWTyUSsLxHdIDr6udW3UoF0RXz51ks/F2oEyUPVgvKZFeE8oLb+BEwIlUrid3hKpA
+	6S186ThVSZeJQnyVbStSN2D1FdGtjvWV+N9Dd5AvylOo+I7JfC74XjLdbVUWy8CcTKXIlj4
+	r6dHVSDGqgVhBzK6rJ6gF9L1p84LK57KLZ9mcSHu3aNhswKGrkiPX+fKtfZHioJo6j6fHev
+	pOS7tb5Vh53xdTBOAUGhv8P0MGhME4ftHPG7EZG3Xp8Q3A8hQZlZH56VrM7Uvw3xcz2oRB6
+	Bwr/uWrJ/6FAY90mXOmvwCdmOfeGKpMnZ444bF3LHac3bp6vptAoNA0axcksRAqhi9jPHTg
+	2j8fiYFqkwYhcODXspXrhytOxT+MldPO7I5IrmYGKHopeAmK2eLfjTj3i4R40Ljz186NaWR
+	g==
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
 X-QQ-RECHKSPAM: 0
 
-This series adds features and fixes to Iris HFI gen2 to support
-qcom-va-driver [1], a userspace VA-API backend for the V4L2 stateful codec
-interface.
+VLC with VA-API frame threading can require more than the default vb2
+limit of 32 CAPTURE buffers.
 
-It enables decode-order output and larger CAPTURE buffer pools for VA-API
-clients, and exposes encoder deblocking controls. It also fixes
-error-buffer timestamps and handling of non-display AV1 and VP9 pictures,
-which affect both VA-API and direct V4L2 clients.
-
-[1] https://github.com/radxa-pkg/qcom-va-driver
+Raise the HFI gen2 decoder CAPTURE queue limit to 64 buffers.
 
 Signed-off-by: Xilin Wu <sophon@radxa.com>
 ---
-Xilin Wu (5):
-      media: iris: support decode-order output on HFI gen2
-      media: iris: allow larger capture buffer pools on HFI gen2
-      media: iris: Add deblocking filter controls for HFI gen2
-      media: iris: Preserve timestamps on error buffers
-      media: iris: Recycle decoder buffers for non-display pictures
+ drivers/media/platform/qcom/iris/iris_vidc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
- drivers/media/platform/qcom/iris/iris_buffer.c     |   3 +-
- drivers/media/platform/qcom/iris/iris_ctrls.c      |  93 ++++++++++++++
- drivers/media/platform/qcom/iris/iris_ctrls.h      |   1 +
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 136 +++++++++++++++++++++
- drivers/media/platform/qcom/iris/iris_hfi_gen2.h   |   2 +
- .../platform/qcom/iris/iris_hfi_gen2_command.c     |  29 ++++-
- .../platform/qcom/iris/iris_hfi_gen2_defines.h     |   9 ++
- .../platform/qcom/iris/iris_hfi_gen2_response.c    |  47 ++++++-
- .../platform/qcom/iris/iris_platform_common.h      |   8 ++
- drivers/media/platform/qcom/iris/iris_vidc.c       |   3 +
- 10 files changed, 325 insertions(+), 6 deletions(-)
----
-base-commit: 151a134a4e6ec66f69db8750c66006f5207f7a9d
-change-id: 20261029-iris-va-fixes-818e0067aa28
+diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+index 05aab6e3005d..8c96b007b391 100644
+--- a/drivers/media/platform/qcom/iris/iris_vidc.c
++++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+@@ -140,6 +140,9 @@ iris_m2m_queue_init(void *priv, struct vb2_queue *src_vq, struct vb2_queue *dst_
+ 	dst_vq->drv_priv = inst;
+ 	dst_vq->buf_struct_size = sizeof(struct iris_buffer);
+ 	dst_vq->min_reqbufs_allocation = MIN_BUFFERS;
++	if (inst->domain == DECODER &&
++	    inst->core->iris_firmware_data == &iris_hfi_gen2_data)
++		dst_vq->max_num_buffers = DEFAULT_MAX_HOST_BUF_COUNT;
+ 	dst_vq->dev = inst->core->dev;
+ 	dst_vq->lock = &inst->ctx_q_lock;
+ 
 
-Best regards,
---  
-Xilin Wu <sophon@radxa.com>
+-- 
+2.56.0
 
