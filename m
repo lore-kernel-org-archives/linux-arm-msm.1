@@ -1,131 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=80.241.56.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793269744;
-	b=QDf7E+HWqveHk5Ly8fi8hOvsV2tvSkENnmIOaC8YKtsmH5y/V4re/gb2rMlkCsIRGrQ7
-	 K3RVTZl9Tx8z/yYq74Taj1gGt2qJrnU66RGPe0xwhoGIEbodBte6H8BvzsAygcWx+j5he
-	 /oYRSRNkahgqt3mrI4iixiHz0AfsFajxxfpd6tIzqWwWfDPiMVoPVky4rvD+iyxUQtwkJ
-	 ukcPTxNzmWb6GArOp255SMqdjM8374LwldwAAGEzYrZcpKOIWLH1cyaFySBeq/10Jsvz7
-	 TXctPMX7nd5gyTxQ2VF6FJGxAleN4RhCqXywTzMlaqLXt17BmCElV1qRLoEqLZ8r5dA==
+	t=1793269840;
+	b=Nbax2+Gvl4aHfOxeBBDKmiWNCvuIYIwvbtQ8s3BhXntP/bXtLCCAcLq1fNTUdTJeaPe6
+	 lkYFBxPs4D87ZNbW85Anw2gdH8eQFa28f5QEy8rcW+bv68MradiDVSwfZrq5xKmMW8iae
+	 uEj385CsswbexWjpPr0ghfDAbYdYKNRbe7zolCdJQ3oTnRxuuGk26HhmbZLQBUNUKVt/t
+	 AoOzXd1Ocv356IgNu9GiTijqh2AGoSBQ14q4v/lBfsTexAPtQ/YuPHM2fogK/7NTea4uH
+	 B7EXDJXkZGjrgUUNresiT2QgC5R2PgrwFNVowD5yD8DfU4Ku820vfKPabvQvC2Ffg9w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793269744;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Subject:From:
-	 Reply-To:To:Cc:Date:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:User-Agent:MIME-Version:X-MBO-RS-META:
-	 X-MBO-RS-ID;
-	bh=PQfG2Km+YKrxCDPAAbbWYdryEevMUab9CWpj+Sh05TA=;
-	b=Xs+iTgw6VhhYUbyhejm/DW4DfoY0qUIGeXMPidvnBzLO5IqbxsMgHOU2H3GxMRFNKo+O
-	 GlV3s1tFk5Max++syaR3DWVZdUG8uA4yYDsCDSyp+3PC7TadA0+tQ/aUWj93x07PAXbwM
-	 5rSOTRTPaZgVceh5wIRjfwbb9O6Pwcu6uCfBjvJvcr+CSNWf+0nAf7zWWb2haZJwYHBST
-	 +mRf+fCIakCbQPMI987SDXHaGI7bLV4nn9FrrEN5XDBXZEQ0Ssixlr46GYLkok3oDRI42
-	 jtxBKTdurv0S6O8Bd9MD003wG1hanb50Dka5Y3jbb0MwPIAS8DTQedqxokKDmwQJCzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793269840;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=VcgPlgE6agKdSoEX7o8ZEBSDHZPyD8maBq9HFQn14+s=;
+	b=xYR57zcEmxSg03eSmpwIWYN9J+42e6pciUIuVeU1PESWbA4+57uWmaJxzvovtOQGlP/T
+	 38pkBM1XtNyvxPcmwU3aVP+REFVQ/YXQrWIa162EOofXtoy4N6O8TAsMIIYbWvuENFIuL
+	 LKpslFmhyGo2/1HT3weT9zIdBqIxgW1+4Q3FG55vbTN0ZCHdpdWNPzP7PJWqxHMxUzkiO
+	 hvHPg9oJYcYxuWVa4MWF70lb8Yw4GuklPoLSQ/dZo+8KYJy5MxLnh54LZzpbw3FQK1Cxj
+	 qCIp+JhKiYxZ+KrjWCIx6sQBMTS5Qah+5u5aQwdhOK628WuuGj2fIL0yI0sPg70H4qw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mailbox.org;
-	spf=pass smtp.mailfrom=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=owjb1PqO;
-	arc=none smtp.remote-ip=80.241.56.172
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="oViIK/3a";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1255B606A31C;
-	Thu, 29 Oct 2026 10:29:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1255B606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0012606A332;
+	Thu, 29 Oct 2026 10:30:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=owjb1PqO
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [IPv6:2001:67c:2050:b231:465::1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jFgSW3XgszMlJf;
-	Thu, 29 Oct 2026 11:28:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1793269739; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PQfG2Km+YKrxCDPAAbbWYdryEevMUab9CWpj+Sh05TA=;
-	b=owjb1PqOwF30L04GcK9Gww366AX2aDnKYxBGxkid6fiIMNw14Fg6DhRRdvbRSRfBeVSMQl
-	WaxlytFFpjs1RJoZ5N45Sz33bL9w1qJBlyeR1eU5rt65f55C6aO6qdifwEcZ130ppK53tP
-	pSveThL3uREOnABjLcdpsunrn9gRUFcZLXwXOSMIY/Byy+6Sd2LBtfvMGzoSgr9hC9w0Ly
-	5xXQ0diqvtpnZBddkWZNE4v0Z6yBzfp+Ldvy08kYgCZJDjkf6XZXF1wQdHfrhUyKVv7ICE
-	Oy4tVehaRM110/poQ6AB8ew8cPWmwyLlOdtLmIRxn5M7f9zit58chkxeIOjPjA==
-Message-ID: <3565783722927fa48a30f48b063ef99bcd703eab.camel@mailbox.org>
-Subject: Re: [RFC PATCH 0/6] dma-buf: Phase out is_signaled() race
-From: Philipp Stanner <phasta@mailbox.org>
-Reply-To: phasta@kernel.org
-To: Lucas Stach <l.stach@pengutronix.de>, Philipp Stanner
- <phasta@kernel.org>,  Min Ma <mamin506@gmail.com>, Lizhi Hou
- <lizhi.hou@amd.com>, Oded Gabbay <ogabbay@kernel.org>,  "Rob Herring (Arm)"
-	 <robh@kernel.org>, Tomeu Vizoso <tomeu@tomeuvizoso.net>, Karol Wachowski	
- <karol.wachowski@linux.intel.com>, Andrzej Kacprowski	
- <andrzej.kacprowski@linux.intel.com>, Sumit Semwal
- <sumit.semwal@linaro.org>,  Christian =?ISO-8859-1?Q?K=F6nig?=	
- <christian.koenig@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex
- Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter	 <simona@ffwll.ch>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>,  Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Russell King	
- <linux+etnaviv@armlinux.org.uk>, Christian Gmeiner
- <christian.gmeiner@gmail.com>,  Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi
- <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, Alessio
- Belle	 <alessio.belle@imgtec.com>, Luigi Santivetti
- <luigi.santivetti@imgtec.com>,  Qiang Yu <yuq825@gmail.com>, Rob Clark
- <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov	 <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang	
- <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten	
- <marijn.suijten@somainline.org>, Lyude Paul <lyude@redhat.com>, Danilo
- Krummrich <dakr@kernel.org>, Boris Brezillon
- <boris.brezillon@collabora.com>, Steven Price	 <steven.price@arm.com>,
- =?ISO-8859-1?Q?Adri=E1n?= Larumbe	 <adrian.larumbe@collabora.com>, Liviu
- Dudau <liviu.dudau@arm.com>, Dave Airlie	 <airlied@redhat.com>, Gerd
- Hoffmann <kraxel@redhat.com>, Matthew Brost	 <matthew.brost@intel.com>,
- Natalie Vock <nat@pixelcluster.dev>, Arun Pravin	
- <arunpravin.paneerselvam@amd.com>, Matthew Auld <matthew.auld@intel.com>, 
- Thomas =?ISO-8859-1?Q?Hellstr=F6m?=	 <thomas.hellstrom@linux.intel.com>,
- Melissa Wen <mwen@igalia.com>,  =?ISO-8859-1?Q?Ma=EDra?= Canal	
- <mcanal@igalia.com>, Dave Stevenson <dave.stevenson@raspberrypi.com>, 
- Raspberry Pi Kernel Maintenance	 <kernel-list@raspberrypi.com>, Dmitry
- Osipenko <dmitry.osipenko@collabora.com>,  Gurchetan Singh
- <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Zack Rusin
- <zack.rusin@broadcom.com>,  Broadcom internal kernel review list	
- <bcm-kernel-feedback-list@broadcom.com>, Thierry Reding	
- <thierry.reding@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, 
- Jonathan Cameron	 <jic23@kernel.org>, David Lechner
- <dlechner@baylibre.com>, Nuno =?ISO-8859-1?Q?S=E1?=	 <nuno.sa@analog.com>,
- Andy Shevchenko <andy@kernel.org>, Greg Kroah-Hartman	
- <gregkh@linuxfoundation.org>, Sunil Khatri <sunil.khatri@amd.com>, Kees
- Cook	 <kees@kernel.org>, Jesse Zhang <jesse.zhang@amd.com>, Timur
- =?ISO-8859-1?Q?Krist=F3f?=	 <timur.kristof@gmail.com>, Srinivasan Shanmugam
- <srinivasan.shanmugam@amd.com>,  Kexin Sun <kexinsun@smail.nju.edu.cn>,
- Prike Liang <Prike.Liang@amd.com>, David Rosca	 <david.rosca@amd.com>,
- Krzysztof Karas <krzysztof.karas@intel.com>, Marco Crivellari
- <marco.crivellari@suse.com>, Shixiong Ou <oushixiong@kylinos.cn>, Jouni
- =?ISO-8859-1?Q?H=F6gander?=	 <jouni.hogander@intel.com>, Thadeu Lima de
- Souza Cascardo <cascardo@igalia.com>,  Pierre-Eric Pelloux-Prayer
- <pierre-eric.pelloux-prayer@amd.com>, Joel Fernandes
- <joelagnelf@nvidia.com>, Al Viro <viro@zeniv.linux.org.uk>,  Neill Kapron
- <nkapron@google.com>, Michael Bommarito <michael.bommarito@gmail.com>, Sam
- Day <me@samcday.com>,  Gabriel Prostitis <prostitisgabriel@gmail.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	linux-media@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
-	etnaviv@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
-	imagination@lists.freedesktop.org, lima@lists.freedesktop.org, 
-	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
-	nouveau@lists.freedesktop.org, virtualization@lists.linux.dev, 
-	spice-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
-	linux-tegra@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-usb@vger.kernel.org
-Date: Thu, 29 Oct 2026 11:28:39 +0100
-In-Reply-To: <abca3f0039b07999e29558690c27fef23292bea3.camel@pengutronix.de>
-References: <20261029095542.1526750-3-phasta@kernel.org>
-	 <abca3f0039b07999e29558690c27fef23292bea3.camel@pengutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 (3.60.2-2.fc44) 
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oViIK/3a
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5D991F031E0;
+	Thu, 29 Oct 2026 10:30:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793269839;
+	bh=VcgPlgE6agKdSoEX7o8ZEBSDHZPyD8maBq9HFQn14+s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=oViIK/3a1Q8yGtFgD32YBrch+a9sgt+lm9T+pDppylWeJk6ti7iOD7hzbxRvDmpiA
+	 2WQsPEODjwx3o+CioVsHCqIIGUTIjobutuhAcRLu8oRpUDfAiusIbFy/T9zt1pLwPn
+	 2NAkbOauJfE8QGLljzQFdksD5Xmv18Sl3nHH1lLYwMwjz/hg797tEgKjuLcqlqaBej
+	 Ix3on8LNBb/j6BCa+ZCdutULurMQeFrYGSz/ReysEd5Ov7LZpxoQL/SFa9AzqjkFuI
+	 ymVb48dtr5rfZutqhQ/tn8DaXHeSh5FuQBvY1XOTAj6GqgKQGLcVGPwLpc8e19ClfO
+	 hdpeRJJnzDoNQ==
+Message-ID: <9e64390b-1c67-4a0d-b9f0-22c8de86bb6d@kernel.org>
+Date: Thu, 29 Oct 2026 12:30:33 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -135,40 +51,83 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MBO-RS-META: j7weafhpcaunystyo7r38dam3cyszcnz
-X-MBO-RS-ID: 051d97976afa34da498
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/8] dt-bindings: display: panel: novatek,nt36672e:
+ Document the reset GPIO polarity
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Ritesh Kumar <quic_riteshk@quicinc.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, Conor Dooley <conor+dt@kernel.org>,
+ devicetree@vger.kernel.org, Abel Vesa <abelvesa@kernel.org>,
+ linux-arm-msm@vger.kernel.org
+References: <20261028095151.1682096-1-vz@kernel.org>
+ <20261028095151.1682096-2-vz@kernel.org>
+ <20261028-seagull-of-illegal-prestige-6cbbfa@quoll>
+ <07c2c10c-f442-480d-b545-666069c06e91@kernel.org>
+ <61e36fb1-6959-4c69-9afb-53264ff9331d@kernel.org>
+ <cb1b7f4e-f03d-4422-b4ae-4228fe9f86ab@kernel.org>
+ <20261029-calculating-imaginary-wolf-ccb2a2@quoll>
+From: Vladimir Zapolskiy <vz@kernel.org>
+In-Reply-To: <20261029-calculating-imaginary-wolf-ccb2a2@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2026-10-29 at 11:23 +0100, Lucas Stach wrote:
-> Hi Philipp, hi Christian,
+On 10/29/26 11:49, Krzysztof Kozlowski wrote:
+> On Wed, Oct 28, 2026 at 10:27:35PM +0200, Vladimir Zapolskiy wrote:
+>> On 10/28/26 16:59, Krzysztof Kozlowski wrote:
+>>> On 28/10/2026 15:56, Vladimir Zapolskiy wrote:
+>>>>> We might fix it at some point, so not sure if it is worth documenting in
+>>>>> the binding. And what about usage of this binding in other projects
+>>>>> which implement it correctly?
+>>>>>
+>>>>
+>>>> In the upstream there is only one user qcm6490-idp.dts, and changing
+>>>> the polarity will be an ABI breaking change, unfortunately.
+>>>
+>>> And all other projects?
+>>>
+>>
+>> It might be a challenging task to check usage of "novatek,nt36672e"
+>> compatible display panels in all other projects. I've asked about it:
+>>
+>> * https://chatgpt.com/uc/6ae25571-2ef0-83ea-81e5-2522e70c4a93
+>>
+>> The check gives this info:
+>>
+>> 1. Linux kernel - invalid GPIO polarity in the driver and qcm6490-idp.dts,
+>> 2. Android - invalid GPIO polarity in the copied driver and qcm6490-idp.dts,
+>> 3. FreeBSD - invalid GPIO polarity in the copied qcm6490-idp.dts, no driver.
+>>
+>> Please let me know, if there are other projects to check. To my
+>> understanding the RESET_N polarity cannot be corrected anymore,
+>> and the best option is to clearly document a difference between
+>> the device and its dt-binding documentation.
+> 
+> It can be correct, just with impact so we choose not to, but
+> nevertheless hardware wants different polarity, so you should not state
+> in the binding the incorrect one.
+> 
+> This property corresponds to the hardware, not chosen SW implementation.
+> 
 
-Jo Lucas
+Here by the hardware do you mean a "novatek,nt36672e" compatible panel
+hardware, or a board hardware like sm8450-hdk?
 
->=20
-> Am Donnerstag, dem 29.10.2026 um 10:55 +0100 schrieb Philipp Stanner:
+Its the panel hardware property to get a reset signal with the proper
+polarity (in the ideal world it's taken from the panel datasheet), then
+1) this description is missing in the panel dt bindings documentation,
+2) if added, this description would contradict to the panel datasheet.
 
-[=E2=80=A6]
+It would make sense to document it, and that's the intention of this
+particular proposed change.
 
-> I think we would all be interested in the actual use-case that's
-> sensitive to this kind of latency.
-
-Me too.
-
-Let me use this opportunity to stress that in the future, in DRM,
-whenever we have [to accept] a racy "optimization", both commit
-messages and code comments must document why it exists and who
-requested it with what proof.
-
-Would save us lots of time when those things are discussed >5 years
-later.
-
->=20
-> However, I wonder if this is even an issue anymore with the lock
-> inlined into the fence structure.
-
-Almost no one uses inline-lock so far. So unfortunately, we might
-regress old drivers, maybe.
-
-But sounds as if you're in favor of phasing the locklessness out :)
-
-
-P.
+-- 
+Best wishes,
+Vladimir
