@@ -1,96 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.173
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793323945;
-	b=QbN8UnaKJXsKriS7ZsO6Xo/aOKPehU7M6uT+US4U4osWa8wE/YJvJbzqU5ZqmSPbZraK
-	 w2SCdgjizqHx7E4BWDmIiG/P7X8b8z2LunMulYSrM5np5CE5E+j22NsiOYNDM2yEbwB9s
-	 V1LuVQ7yMD5wbq7AsYsl8HgPvJQY8fEtmy5ubkhyZoE2v+NXrZbcLKM9AFV/f9Jgj+pY2
-	 W8s545BWAunC6LWuNdUoCMpJzm3INJzwWDWcC4pjUnnoVS8wHihQ8cno9MYSyJZkAYFKj
-	 uyJXQpJWnuHogod2PktkeRtqpWYQUaqGpG6eowm5JczJS9boWPyxtp8x6YGQgB1GeOA==
+	t=1793324437;
+	b=ZVACqxiSWzOiie/aD7VIeuDjoHo1/gc+U+ufSLma5K2eE7dNtBGCB2WDnz7nsLcC2ZNE
+	 6MtgkWCVXUZrxFyZmSMG5yvuqRoy0qrNXg/qdUgeHxJuI3O60iW4zFIIsl6IzGyxRXZai
+	 PWmKJF4AYRLktNLiG2Kaas3mn5KKtpovorC0QviAajECkgwkqxF/yBrRrgwItwGxzXZZU
+	 I9fayoVD6Rbz+Vi8/BXej243yNlKWMkkWVd5wsGqfR3VCNNUeZLA1/lLINGBs+/YPjQJg
+	 wXw9uwUOcC+06LUEVGDWRe4EoofluKeQWq96/KVwjpPlZaOOoNg9xbeqirkzVKBGeGg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793323945;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793324437;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:
-	 X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=Nq5H3D0euCZbOqXD7Z9fPhPXwWstdtaDfGJwD5+ZOc4=;
-	b=477ajZ/d+F2vLHABJVKSMM77wsG4LdTpw74IVdX0CIuskB9DmlZlJX2luknNTb7YVO48
-	 WiF9fi1VJbwIh4+zaDYnDPB8IlK81ydn3uBrprf9SAwidTybK1OQcH/Y/nK6/HYX/0re3
-	 aT/8HWU2Y+v1jKzDciWjkBRWBJsr+OQwGv/IlznWoOxKvsqDaU81J5ro5SkKpYOVJdWuh
-	 hq8cjR0uFiwZhA1yCVOc8VaO15iX/9rfzN5crIphMj0H1t9zQXiFWT2SjACYma5e6Td2b
-	 Pbc501mWnPev2/gdJpKWnkyZRCRtMXTRoh+M6eb6InlbK8Pt/hZfpVQ4n8d7+U+eEBg==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Received:X-Forwarded-Encrypted:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=HmOxxSAaFjRQ16uV6mrLf8vylHogbNzAJ0HDl4YQB3g=;
+	b=mtc7Hdcb+ikkdH6/AsZFqAKFTdiipzEt0d1fZ2S1Tm/cKp2lnoTepS6gJmcoJbBtfI6o
+	 WZapseCRYloHz9RpdwjxJBvSKU2fFQOw/JEjUULudeOzXCuWLqAPsPsEyIe+6XlRmv711
+	 kxwqpz/qloGIUieEtTeew4dS9M/qzPdf0BsPF9SxEWYXQsonvD95Wfe72/j6o5AVet+Vg
+	 FnAnHahcU0tLKb04gy+7ZAlFo4DnYpMCi7CFMLGooW1WH5VN+SlM6PVSMxk6EJpCG+7Er
+	 MbIapXuKDEPj/Z7aJyUyLM0ECro8JOrfDhXQ1ShuW32b23QA2pUnzT8kQ+fiekWmydQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="e6/bSjPE";
-	arc=none smtp.remote-ip=209.85.214.173
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	dmarc=pass header.from=chromium.org;
+	spf=pass smtp.mailfrom=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=KTPs0Fn+;
+	arc=none smtp.remote-ip=209.85.218.44
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E96AB606A31D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 01:32:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E96AB606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A36C606A31A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 01:40:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4A36C606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=e6/bSjPE
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2e9f6a16aedso1322865ad.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 18:32:24 -0700 (PDT)
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=KTPs0Fn+
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c4322d310e7so22759866b.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 18:40:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793323944; x=1793928744; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Nq5H3D0euCZbOqXD7Z9fPhPXwWstdtaDfGJwD5+ZOc4=;
-        b=e6/bSjPExYAE08iP9BXgZtCJA/pAPuh+uQXUpMG6VAw4Rx/+O371EsVOT1hWKh4E/2
-         5P7vwmC8HEMRm6FEKkjRilzkgATY3qs8I0Ldm6YYIH4+I517NqZSCT1C4g0nc/pMfZIe
-         F8uuFmjfKqXMBlwpzoWNUUkF8q9VIdFmSZM9WDIeqEOK4OPmCpN8tnib5I4dWgMVZ7kG
-         J6GeA3Av1zVevFv1tcCC2Z7bHwXnOmb30Z+oB0K9t8NhoPOS3Uc1I59TAz3afWYoFsm8
-         fwEIx3YY//Bw/RubdhzKATFpUsinkz0Ckcq5GYguAUWpMK6WCqCiri32rY7UJcuPx9fF
-         lnBA==
+        d=chromium.org; s=google; t=1793324436; x=1793929236; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=HmOxxSAaFjRQ16uV6mrLf8vylHogbNzAJ0HDl4YQB3g=;
+        b=KTPs0Fn+qr16i55kBm2FizWfZDcirE6uJ9I3QPUiJOIMnqsGL92j9U26Jhh3tJ4POU
+         /CliQpr2kL8qKQsTEvRcfneMNlfjNTTqz9NZP1QPKJ0cjXGSCbr9Ps0Civs3E2Vzfxva
+         /aJZA/JRce62EkRy0EkKayL9Ds88O76k9zP+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793323944; x=1793928744;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Nq5H3D0euCZbOqXD7Z9fPhPXwWstdtaDfGJwD5+ZOc4=;
-        b=xKfrQdTl2z9slg8GOPiR6IPkVSJfkEPs6abHhsh/6TANFkoDghm1FVk/7DIgIQqmxm
-         Er1QTd7eHJnjRXh11MT3+oNCyu9ZyB9XOny41dSJZD0XlsbCAZ4u9pea+qWx+j9Ja0hJ
-         6KCTcaf53i0/AR3rH/OugoXaf5u/U9UYnUk3V8z18fZ4m53JPWaU9ocr88Yr+FMc0r0R
-         ZNCu6HOt7U3+qR8YaYeuHtB1SsA8emcxaNoUtB9IsCO+qyjqR6MRJ33kYBNHdfCwypVQ
-         hzU9RBBoFTguXIgaRUfqsgtbPb4VwhgRn1zzo5bWC8Tib//z7gUWFUGp9iXeseZblU1m
-         Tyyg==
-X-Gm-Message-State: AFq9FYJjkiHT4gaKNiVZTDxFPmaDtmmJT1Ed8K4w71WE2YwtLlcbfMNb
-	OcWXY42CxEiAtalDAiI9Qzwmp+XmAO6PGbv2BcoID8kpp2KRF6IDF1aP
-X-Gm-Gg: AYBFou22osxBD9DA/u0ZtcH0A18bZhwWP/xQmiatYw/3owrwv5HHTJgp2EN597gXWUL
-	3rLMx9npzW12sP8lEw0nLHI70KZPbWxEY28I2S5nvnqf6s64DFVjEaGXXS7xFVOLfFl18I+jQDh
-	bIcMv+F1iut+hmeH8nLxabITiOY3vZMTBOfI8UWs2kufzHt3VyL8/I5AZ7h4zoAxbRAhL6s8kxc
-	bKFWrSMv5Gg4p0pETA+0vXwB8d6tzSoARsehcLVwP5wcxUQ9d9K1P4/CI0CHsoV2RuPD+CLU31W
-	Yx7Kq6H56/bq0IjaxsbQ1cXIFqnNSKAYMXmVrGQNS3ENsDSiwP9ARR+7UPLvsdGjre+TfQeMOVj
-	QdG5SpgKtKlxw3ZK0DjURoSBf9vLu1MvvvCA7RR2zWHv1Ir0pYK2rJl2kM0hgBineNX2euz2axB
-	Ktx3VrqAaUj0J325sVPgdw+ODjB5E4o3EDFCYXMm76g8oNU0dtplw/nAOTlhTHnd4aUoCCngZ0m
-	YumMZaQ9JavA2Jbu7mTNxQsXx+121gciZDq5fDv187mYBzyAF4YqEhZBWfjWynWw3K6gGqxQFHY
-	k49icH1RB3r6p9EgqKBVsqfRhSnrOuXeB6UbQAXZqKhx
-X-Received: by 2002:a17:903:37ce:b0:2e9:7719:4104 with SMTP id d9443c01a7336-2eb36395be1mr10276435ad.8.1793323944232;
-        Thu, 29 Oct 2026 18:32:24 -0700 (PDT)
-Received: from localhost.localdomain ([240c:c983:5:4bbd:2481:c7c4:68af:3])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2eb392b15f0sm911575ad.73.2026.10.29.18.32.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 18:32:23 -0700 (PDT)
-From: ShiTou Hong <redstone.dcity@gmail.com>
-X-Google-Original-From: ShiTou Hong <dc_redstone@outlook.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org,
-	conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	ShiTou Hong <dc_redstone@outlook.com>
-Subject: [PATCH v3 6/6] arm64: dts: qcom: sm8250-hdk: Add PM8150b LEDs
-Date: Fri, 30 Oct 2026 09:31:35 +0800
-Message-ID: <20261030013135.158157-7-dc_redstone@outlook.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261030013135.158157-1-dc_redstone@outlook.com>
-References: <20261030013135.158157-1-dc_redstone@outlook.com>
+        d=1e100.net; s=20260707; t=1793324436; x=1793929236;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HmOxxSAaFjRQ16uV6mrLf8vylHogbNzAJ0HDl4YQB3g=;
+        b=Zfcc0hjgqOso5sURnkAPJm/cFo/lzQpOqUikfucKX2DPAi35/8/s624UJBTScRLtxw
+         XAMvKpy4RIEQexCtV7TSP8rwG/aXXBj4p7T87ib8Lo/MJL12u67G5N+xEyOjhNP8uj82
+         TDKB8CP+1iOuNhMZ03vYe7wqlm0uTazyBgnh25mJR8/zEPAtVRvbE8XATJTdOJhVLDnp
+         HncTy3PYb56O6RNqRNQH68tkZIfEInrkFTzkZSjHrS06rauWkWlH8sAOU/BDMwF5atiA
+         4y+eubKYNaxH3x3KiUuhBFHYsyUe6sHQkchXQjfti4NMzYQ906WWzHwjTHh+C+jadrUy
+         k2hA==
+X-Forwarded-Encrypted: i=1; AKwUvBzhfqoK9g8IZ3q2nDtXpPfk4+oVONLfSvMktQqG261fTq9eMwxcqUQzckfBhJt1Aqg9HRmcO5nnZ/nTsBtz@vger.kernel.org
+X-Gm-Message-State: AFq9FYKclSukHkfvtD4RQumOyL2z/SxAf4L+58eBi9e+5WIhEDIDOe3T
+	35JRekiuQyNG+BO+Wxa0dvnTj12HC0w1i/JsJAq93+B34AXTlKkT2HbSc7/KXyckztF/f92D9Vl
+	PP6WbLuMS
+X-Gm-Gg: AYBFou3Z9yWOnXt/BlHewVCjBoZ8gV6xsijn/XHELeQ49lU40mC4C6gHZVKs0YQjZBF
+	ZUV+OIVn2KpO67TFaSLrZRMehoy7uZlnw5KyR82Oac4cVta9txhqWncRkhTMKlFfno0DbPQ6Beq
+	Y8T5Rk0VVGTFPBEcBtehas6MwxtfopEAHhveKYw8u07/S/nm9vu8p1Tb6GIXoR81bDHlrbCDzkP
+	hkwJCAzAs4sHVBwGNrdGr6gFC0ehpnmZBWBI4Ax0svXjdwOtdmyIjbnvIT7rCIV1AdACJZl1G+2
+	gyWZLq0RJD4m2o/U+Pn6hr4hjUj/4QteKvUfKw2nyXtsyMjEYlZoMOiClkmKwetvxzejU91WLKF
+	6CLOl7UOrdsaq6i0UHF5KJMnCSJE0ymgzXxekdT4gl5HRxiaX9WIh4BqGG37ujXyJps/wWLkVCy
+	Ls7NjjMLftBivyORRD2D9lAnXFZOvQyp38CLmje5GuIJi8Ab+pzJCa8ic14AHb87uaR+PlALGG9
+	6+FAnRoldVTlxEPR55dl6EtKdQ99dx8zwXRRbUcTlW9ElfkWZ3dFNWZnhKi1f5jGQMn/MqmO0oA
+	TSZ5XjB3/4+28pdUOIp+LELe+ERTJWVMz0D/Usinlis/P8ItEh9Z39tWbnfauKSZJzFT
+X-Received: by 2002:a17:907:9612:b0:c3f:8c92:3b51 with SMTP id a640c23a62f3a-c4ca793c5f9mr71677966b.4.1793324435689;
+        Thu, 29 Oct 2026 18:40:35 -0700 (PDT)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com. [209.85.128.48])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4cabcfdc3csm6670766b.17.2026.10.29.18.40.33
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 29 Oct 2026 18:40:34 -0700 (PDT)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a2000d5fb1so706915e9.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 18:40:33 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxMTIolpaxl0YbCkjY/VYdYdbhG3nZ0JOmfcvLSU0njoqyNFM5ictTjXd7bTb4ZQhlKie1Ho8f1buyku6zo@vger.kernel.org
+X-Received: by 2002:a05:600c:6384:b0:4a1:702f:c736 with SMTP id
+ 5b1f17b1804b1-4ac150b20famr15395995e9.3.1793324432913; Thu, 29 Oct 2026
+ 18:40:32 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,58 +94,143 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261026-sp11-bl-upstream-1-v2-1-efc84396adf1@gmail.com>
+In-Reply-To: <20261026-sp11-bl-upstream-1-v2-1-efc84396adf1@gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 29 Oct 2026 18:40:19 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=U2sZaobJMHCimqB5Kw0fZ_-7=9tHAxT-KrSP8uQiY-vw@mail.gmail.com>
+X-Gm-Features: AclHuK-a_bsoEb-o0aETxELr_2WmGe4RidhWC24wa7LjtqTEfpGeuw0FK2upUAE
+Message-ID: <CAD=FV=U2sZaobJMHCimqB5Kw0fZ_-7=9tHAxT-KrSP8uQiY-vw@mail.gmail.com>
+Subject: Re: [PATCH v2] drm/panel-edp: disable the backlight at probe
+To: jimmie.lin@gmail.com, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Maxime Ripard <mripard@kernel.org>, Linus Walleij <linusw@kernel.org>
+Cc: Jessica Zhang <jesszhan0024@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Sam Ravnborg <sam@ravnborg.org>, dri-devel@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>, 
+	linux-arm-msm@vger.kernel.org, aarch64-laptops@lists.linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There are 2 LEDs controlled by PM8150b on sm8250-hdk
-which are not added in the dts file.
-The LED1 is for heartbeat indicator,
-the LED2 is for wifi activity.
+Hi,
 
-Enable the LED controller of PM8150b,
-add the LED nodes with proper triggers into it.
+On Mon, Oct 26, 2026 at 6:14=E2=80=AFPM Haipeng Lin via B4 Relay
+<devnull+jimmie.lin.gmail.com@kernel.org> wrote:
+>
+> From: Haipeng Lin <jimmie.lin@gmail.com>
+>
+> pwm-backlight can preserve the enabled state left by firmware to
+> support a seamless display handoff. However, panel-edp does not support
+> such a handoff. When probing a generic eDP panel, it powers the panel
+> on to read its EDID. If display pipeline binding takes longer than the
+> runtime-PM autosuspend delay, the panel is then powered off while the
+> backlight remains enabled.
+>
+> On the Surface Pro 11 LCD (LGD0779), leaving BL_EN high across this
+> power cycle appears to leave the backlight controller in an incorrect
+> state: brightness is pinned near maximum with a greatly reduced
+> dimming range. Subsequent brightness changes update the PWM duty, but
+> do not restore it to normal. Cycling the backlight off and on at
+> unchanged brightness restores the full range.
+>
+> The first drm_panel_enable() does not recover from this because
+> pwm-backlight still considers itself enabled and leaves BL_EN high.
+>
+> Disable the backlight at probe, after acquiring it and before enabling
+> runtime PM. This clears the firmware's enabled state so the DRM panel
+> core turns the backlight on after panel power and video are ready at
+> the first modeset.
+>
+> This also turns off the firmware display at probe on systems where it
+> previously remained lit until the first modeset.
+>
+> Verified on the Surface Pro 11 LCD by delaying display pipeline bind
+> past the autosuspend timeout. BL_EN now drops at probe, before panel
+> runtime autosuspend, and brightness control works at the first modeset.
+>
+> Fixes: 5540cf8f3e8d ("drm/panel-edp: Implement generic "edp-panel"s probe=
+d by EDID")
+> Link: https://github.com/dwhinham/archiso-aarch64-sp11/issues/41
+> Suggested-by: Douglas Anderson <dianders@chromium.org>
+> Assisted-by: LLM
+> Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
+> ---
+> Can reproduce on an installed system on Surface Pro 11 LCD (X1P-64-100,
+> LGD0779 LCD) by booting with modprobe.blacklist=3Dphy_qcom_qmp_combo then
+> loading that module manually after ~20s. This delays DPU component bind
+> past the panel's runtime autosuspend timeout.
+>
+> A/B tested against the same v7.2 tree:
+>
+> - Unpatched: panel VDD off 3.5s..20.5s while BL_EN stays high.
+> After the first modeset brightness is pinned near max brightness with
+> a "collapsed" dimming range. sysfs brightness writes still reprogram
+> the PMIC LPG. One bl_power off/on cycle at unchanged brightness
+> restores the full range.
+>
+> - Patched v2: patch provides the same full brightness range on boot
+> (stalled or not) as the v1 patch. BL_EN drops at panel-edp probe,
+> ~1s before VDD cut, rises ~0.5s after panel power at the first modeset.
+>
+> Tracing and functional testing on the SP11 shows unchanged sequencing
+> for fast boots (without artificial delay), DPMS off/on, and system
+> suspend/resume.
+>
+> Panels with shared/always-on supplies and no panel enable GPIO
+> may continue displaying the firmware framebuffer during the
+> runtime suspend before first modeset. With this change panel-edp
+> disables the backlight obtained through the backlight phandle at probe.
+> The DRM panel core enables the backlight again at the first modeset.
+> I have not tested this configuration.
+>
+> Testing on other panel-edp systems particularly with pwm-backlight,
+> would be appreciated.
+> ---
+> Changes in v2:
+> - Disables the backlight once at probe instead of
+>   in panel_edp_suspend() following Doug Anderson's suggestion.
+> - Only disable the backlight obtained through the backlight phandle.
+>   The driver's AUX backlight setup is untouched.
+> - Link to v1: https://lore.kernel.org/r/20261024-sp11-bl-upstream-1-v1-1-=
+d39bfaf9afbc@gmail.com
+> ---
+>  drivers/gpu/drm/panel/panel-edp.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/panel/panel-edp.c b/drivers/gpu/drm/panel/pa=
+nel-edp.c
+> index 94bc54c3833a..d019f4165674 100644
+> --- a/drivers/gpu/drm/panel/panel-edp.c
+> +++ b/drivers/gpu/drm/panel/panel-edp.c
+> @@ -21,6 +21,7 @@
+>   * DEALINGS IN THE SOFTWARE.
+>   */
+>
+> +#include <linux/backlight.h>
+>  #include <linux/debugfs.h>
+>  #include <linux/delay.h>
+>  #include <linux/gpio/consumer.h>
+> @@ -918,6 +919,16 @@ static int panel_edp_probe(struct device *dev, const=
+ struct panel_desc *desc,
+>         if (err)
+>                 return err;
+>
+> +       /*
+> +        * Backlight drivers may preserve the state left by firmware,
+> +        * but panel-edp does not support seamless handoff.
+> +        * Runtime PM may power off the panel before the first modeset,
+> +        * leaving the backlight on.
+> +        * Disable it here so the DRM panel core enables it in the correc=
+t
+> +        * order at the first modeset.
+> +        */
+> +       backlight_disable(panel->base.backlight);
 
-Signed-off-by: ShiTou Hong <dc_redstone@outlook.com>
----
- arch/arm64/boot/dts/qcom/sm8250-hdk.dts | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+While still feeling a little ugly, I can't think of anything better to
+do in this case. Thus I'd say:
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-index f25447f1d..58b58fca4 100644
---- a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-@@ -7,6 +7,7 @@
- 
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- #include <dt-bindings/usb/pd.h>
-+#include <dt-bindings/leds/common.h>
- #include "sm8250.dtsi"
- #include "pm8150.dtsi"
- #include "pm8150b.dtsi"
-@@ -618,6 +619,24 @@ &pcie2_phy {
- 	status = "okay";
- };
- 
-+&pm8150b_lpg {
-+	status = "okay";
-+
-+	led@1 {
-+		reg = <1>;
-+		function = LED_FUNCTION_HEARTBEAT;
-+		color = <LED_COLOR_ID_GREEN>;
-+		linux,default-trigger = "heartbeat";
-+	};
-+
-+	led@2 {
-+		reg = <2>;
-+		function = LED_FUNCTION_WLAN;
-+		color = <LED_COLOR_ID_RED>;
-+		linux,default-trigger = "phy0tx";
-+	};
-+};
-+
- &pm8150b_typec {
- 	status = "okay";
- 
--- 
-2.47.3
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
+I'd prefer to get a second opinion from someone else in the DRM
+community to make sure I'm not missing something, though. Neil,
+Maxime, or Linus W maybe?
