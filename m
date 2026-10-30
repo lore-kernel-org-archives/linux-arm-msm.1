@@ -1,85 +1,81 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793359624;
-	b=A9WfqGztXihoSroeAPvJQ4oeM+SVGW5qNih+dGP8wbqVC5MXZlSxNoxRR7UjLMz8ldce
-	 UpQQqTevvukWZeGZ7dUmlt7F9YYp/SaK16I85ytMIpIrrheDW5QLh3Fl+6dx82AYTDuq1
-	 +0LrJgxOTTXQ1LrKcNx2RxspR5Mtcim9dHXas4fX/zuiAuN6+c7ANt7qgmCDr2uG6L7S/
-	 VFg8RXrDohwkLG+IZ1P1lPsXwHAJzXxGP7vNUFsRuDBNKu/y9AXSg0Hu5nQQzJVTN7L1Z
-	 KP9ssro6gTNyxGpInVH8JGv4QR38jOCKB3QgKzKsVErxLKiaahI/pfcKlcAmnEhs96Q==
+	t=1793360672;
+	b=c3lChteatUb+fYCoLZ6MvutcfB0Zaa3I2zHbnXPUUi5wkXqL1pjDVp9u7wGGtnKnrrRt
+	 eCeZzPcRmAcYAHRjD0f0Kszo68sM2H2zeRfH4A1rIbxD9QqZSS4Wcukm/EuB2fO4SWZJ6
+	 SAvsrlwX4GqH/r+qAx/EHDVG3o3PdB4yOLfk2NtwV6SMfR1HEUHpok4MW93a45iiJ6zgC
+	 I2b/F7GEz7fOoG+SVpJ5l2GHoHVG2ZWmAGvBoGM4xCMf3JrJQacaaWVNTS8za9nKyH5XL
+	 8ibEet+qL/GI+18VFJxQoQraoJfGnedfbwCcuq6Af7oCeyRHgYMYzY0n9tBDes7kliQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793359624;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=aqTUG3MhRPMe3T+iwrEz6qtbFX2SNbhZovF7I8ufp5w=;
-	b=q81+73HXLWiLjvjHLYiKor8s5hmHRvveGPW7W/dg2WJnVNjUA0IXFt7xC4U00f6NdkWv
-	 FSOVR9sg8rRM8htAcj7HnH0mapK1bCrsCXymRbswHhRlBe24HzNaEZmKsUJLHd6n0dZeD
-	 leg1qy1f8qtT1i23zLiwYrYt5ftT6rTEKhlOa67iJrAT2K0Ll4iCsUfPQaABTr1XFDjgW
-	 KTbhsbw8aPHR9EcInmD9eojRw8/NQCwZVaGKlWMZFbmlwNu7eRNvC1IjWE/7vXjzfB38d
-	 B672Xj2cLgzfcnNZWGMUYw72BJVkdaKh3quWXMwZCJkPTHSwezHt9NVhitirYIWZFgQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793360672;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=u22L97/jeI13IB20ysbQZcY423yThcHnEYQlKHEzxLc=;
+	b=gS+kucei7Z6HMG27q7M5/Sl5rccD69VDEuloR30z8M2jdkfjA0STkSQkd1Eh43Otlxm2
+	 Nvi55IkfWFQtrsqwEbqP3mZREBSluMhvSoAjAyX6qfn0HGvl0C+4nAZHLP9Yrz/00d779
+	 QBPNxeaJeBJ5F2rwgsaP9jcesyp3+XyGb2eTFhknTMyWW7rtotv2/yF2AJL5f93kU8sW0
+	 Dl9AQMzk1CFqSZgtiGcO85XJ0jnhB7a/DsvMkanlw4tIuQi3GgiV+ip2h8m/sCCPbtwnY
+	 k6YAzGqPaSnX+vHUVbhdtTCGb8SZADCzxAGtPI8y/7c1zWkzXrkWkqffilswO36nRrQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=icHbeicO;
-	arc=none smtp.remote-ip=198.175.65.19
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=POEHrrX+;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ECAF606A324;
-	Fri, 30 Oct 2026 11:27:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6ECAF606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84F8606A31A;
+	Fri, 30 Oct 2026 11:44:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=icHbeicO
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793359623; x=1824895623;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ncUJX/DtM5+A/RZso1ZcCWeMShn2h681nclm+TFp2D4=;
-  b=icHbeicO6worMvpJs8478JFSMcVXmiaoQWQHv7TYSfbP3NVfmSgT64ZN
-   zQKyvuDR/KFBMLa5u6gcC7SrSQPkelHB8lBWj8o5zpWG4P+LgPjPppnG+
-   BVcLwC6j8v/7VnGR7owikDIqxVzk4Aenf7Ry8vgU5QgPIJI8oxinfEIfq
-   PCdyy7GCTtnmcyKmGCgY6LOomPJOovHTv6sEtFf46JpZq7cR3vKWMQfi+
-   yr8/t9eiGe8QOUmP0WdxShO3aA0omk5xzfv14rHlVFtRHcQ+3dT5nFuyy
-   i0M/2GPTSr4k/eMVxCgb3cmDaJSoifFevYXcr2T7SYHnjM5aLXrhL/dva
-   g==;
-X-CSE-ConnectionGUID: sm1j/aRbSSq3Q5ycO0LLaQ==
-X-CSE-MsgGUID: OrO9/KyMS/KdPfNzTiYldg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11950"; a="2147038"
-X-IronPort-AV: E=Sophos;i="6.27,186,1787036400"; 
-   d="scan'208";a="2147038"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Oct 2026 04:27:02 -0700
-X-CSE-ConnectionGUID: pMjUirJuRP2pYbMl8LVzGA==
-X-CSE-MsgGUID: bOa7RV4yQu22DE/uMwHFGA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,186,1787036400"; 
-   d="scan'208";a="5539917"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa003.fm.intel.com with ESMTP; 30 Oct 2026 04:26:58 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xMkl6-00000000bea-25Xt;
-	Fri, 30 Oct 2026 11:26:56 +0000
-Date: Fri, 30 Oct 2026 19:26:29 +0800
-From: kernel test robot <lkp@intel.com>
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	Jingoo Han <jingoohan1@gmail.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>, Bjorn Helgaas <helgaas@kernel.org>
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Subject: Re: [PATCH v7 3/3] PCI: qcom: Implement shutdown() callback
-Message-ID: <202610302144.Iwq8RoDq-lkp@intel.com>
-References: <20261029-shutdown-v7-3-3fd7a76a6991@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=POEHrrX+
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C4AD1F0093A;
+	Fri, 30 Oct 2026 11:44:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793360671;
+	bh=u22L97/jeI13IB20ysbQZcY423yThcHnEYQlKHEzxLc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=POEHrrX+sPBo41n1mG2oZ7jZsPptJNOYuklpaJCho15lUx/hky0vAto0IGN9wUGU6
+	 ND1CBDe5rZnFil1HZM1tjiLOFUAleLd3OoRXz2gYSIc3S0vbxzEcjwCfDh4zVMpSsf
+	 EQlNPouP+PVpC+k2CwhIb/KtciGpEkUOTO8XdOVMGJFbCRhD4vWJqa17k4GdbY1Vlc
+	 +22QWJSEiJS+ic6dfb3qVSAJmBMrYs3nndjOrrxn5UsvH0+zvXfwafKrObb+dlFg75
+	 QjOl3vEY9Q5kPpMymCryWXA4Z8a6csZvMkbqWCkAqIOAa8OUIZNXAetDK6xKKo0Mfo
+	 yZ+wl5iCt+jdg==
+Date: Fri, 30 Oct 2026 12:44:28 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Rob Clark <robin.clark@oss.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, Frank Li <Frank.Li@nxp.com>, Vinod Koul <vkoul@kernel.org>, 
+	Yinbo Zhu <zhuyinbo@loongson.cn>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Jonathan Cameron <jic23@kernel.org>, 
+	David Lechner <dlechner@baylibre.com>, Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Kevin Hilman <khilman@baylibre.com>, Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
+	Tiffany Lin <tiffany.lin@mediatek.com>, Andrew-CT Chen <andrew-ct.chen@mediatek.com>, 
+	Yunfei Dong <yunfei.dong@mediatek.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, Andrzej Hajda <andrzej.hajda@intel.com>, 
+	Ryder Lee <ryder.lee@mediatek.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Bjorn Helgaas <bhelgaas@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+	Eric Anholt <eric@anholt.net>, Kuogee Hsieh <quic_khsieh@quicinc.com>, 
+	Peng Fan <peng.fan@nxp.com>, Aakarsh Jain <aakarsh.jain@samsung.com>, 
+	Abhinav Kumar <quic_abhinavk@quicinc.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+	freedreno@lists.freedesktop.org, imx@lists.linux.dev, dmaengine@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-iio@vger.kernel.org, linux-amlogic@lists.infradead.org, 
+	linux-media@vger.kernel.org, linux-pci@vger.kernel.org, linux-mediatek@lists.infradead.org
+Subject: Re: [PATCH] dt-bindings: Fix property name typos in if/then schemas
+Message-ID: <20261030-musical-modest-butterfly-e7734f@quoll>
+References: <20261028120216.2657397-1-robh@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,96 +85,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261029-shutdown-v7-3-3fd7a76a6991@oss.qualcomm.com>
+In-Reply-To: <20261028120216.2657397-1-robh@kernel.org>
 
-Hi Krishna,
+On Wed, Oct 28, 2026 at 07:02:12AM -0500, Rob Herring (Arm) wrote:
+> Property names within if/then schemas currently go unchecked whether
+> they have a type defined or match what's in the top-level schema. Adding
+> a check finds a number of instances of typos. The typos result in the
+> schema having no effect on constraints.
+> 
+> With this, fix the mediatek,vcodec-encoder 'clocks' count constraint
+> exposed by the name correction.
+> 
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+> ---
 
-kernel test robot noticed the following build warnings:
+I just git grepped kernel sources and weirdly no one made a typo in
+"clocks" of forgetting the second letter. We became way too polite :).
 
-[auto build test WARNING on 17bb0e2f6c8043f70a693a5f3797471cbed354c8]
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Krishna-Chaitanya-Chundru/PCI-host-common-Fix-early-bus-walk-exit-in-d3cold_possible/20261029-094927
-base:   17bb0e2f6c8043f70a693a5f3797471cbed354c8
-patch link:    https://lore.kernel.org/r/20261029-shutdown-v7-3-3fd7a76a6991%40oss.qualcomm.com
-patch subject: [PATCH v7 3/3] PCI: qcom: Implement shutdown() callback
-config: s390-allmodconfig (https://download.01.org/0day-ci/archive/20261030/202610302144.Iwq8RoDq-lkp@intel.com/config)
-compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project c2ea4440d4b64c148de4fdfca1fc2c437a0701e4)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261030/202610302144.Iwq8RoDq-lkp@intel.com/reproduce)
+Best regards,
+Krzysztof
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610302144.Iwq8RoDq-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/pci/controller/dwc/pcie-qcom.c:2463:6: warning: variable 'pcie' is used uninitialized whenever 'if' condition is true [-Wsometimes-uninitialized]
-    2463 |         if (pcie_cfg && pcie_cfg->firmware_managed) {
-         |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/pci/controller/dwc/pcie-qcom.c:2481:6: note: uninitialized use occurs here
-    2481 |         if (pcie)
-         |             ^~~~
-   drivers/pci/controller/dwc/pcie-qcom.c:2463:2: note: remove the 'if' if its condition is always false
-    2463 |         if (pcie_cfg && pcie_cfg->firmware_managed) {
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    2464 |                 /*
-         |                 ~~
-    2465 |                  * Firmware owns the link teardown and clock/PHY shutdown in
-         |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    2466 |                  * this mode; Linux only owns the chained MSI IRQ(s), which
-         |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    2467 |                  * still need to be masked off before shutdown proceeds.
-         |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    2468 |                  */
-         |                  ~~
-    2469 |                 pci = platform_get_drvdata(pdev);
-         |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    2470 |         } else {
-         |         ~~~~~~
-   drivers/pci/controller/dwc/pcie-qcom.c:2460:24: note: initialize the variable 'pcie' to silence this warning
-    2460 |         struct qcom_pcie *pcie;
-         |                               ^
-         |                                = NULL
-   1 warning generated.
-
-
-vim +2463 drivers/pci/controller/dwc/pcie-qcom.c
-
-  2456	
-  2457	static void qcom_pcie_shutdown(struct platform_device *pdev)
-  2458	{
-  2459		const struct qcom_pcie_cfg *pcie_cfg = of_device_get_match_data(&pdev->dev);
-  2460		struct qcom_pcie *pcie;
-  2461		struct dw_pcie *pci;
-  2462	
-> 2463		if (pcie_cfg && pcie_cfg->firmware_managed) {
-  2464			/*
-  2465			 * Firmware owns the link teardown and clock/PHY shutdown in
-  2466			 * this mode; Linux only owns the chained MSI IRQ(s), which
-  2467			 * still need to be masked off before shutdown proceeds.
-  2468			 */
-  2469			pci = platform_get_drvdata(pdev);
-  2470		} else {
-  2471			pcie = platform_get_drvdata(pdev);
-  2472			pci = pcie->pci;
-  2473	
-  2474			if (pcie->global_irq)
-  2475				disable_irq(pcie->global_irq);
-  2476		}
-  2477	
-  2478		if (pci->pp.use_imsi_rx)
-  2479			dw_pcie_free_msi(&pci->pp);
-  2480	
-  2481		if (pcie)
-  2482			dw_pcie_suspend_noirq(pcie->pci, true);
-  2483	
-  2484		pm_runtime_put_sync(&pdev->dev);
-  2485		pm_runtime_disable(&pdev->dev);
-  2486	}
-  2487	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
