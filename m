@@ -1,64 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=82.65.109.163
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793367104;
-	b=AyT83XDb4Axq6K6JWF8bLkyZmbdPigithlv546hBxaJjSrNZrPny4unCUaO6paMSEEZ6
-	 WtxEXQUoJdGLuhIeNDoUrWw88Ge4SqrDCtIGMtKL2S8uWMpxXUgDBaZb+g0JwBs5OPBlI
-	 4zsde0dxKsXRTkKgpJqSWJ8E0WU/wp02Ldz497YQMySYtq08bRdYI9SBf/QYxKbGQg4iu
-	 IuODsjcxmKLcS39uNl+WDJojb4JsV3x7hI8w8mAZrNK+zuVVifnqeZzWUo671CLvTQ2Es
-	 N5B8Ub7d6Q5UL+O7DIicxoae5aw9B2cfWiqcmysKXxLc7abjEv6YACQcYsbbmtdr/5w==
+	t=1793367391;
+	b=RXigKXXjoB4+Bzz9TYgC6woGJK/1HqBx9uuWb+iBg79W/pLU3wL6+uRa4VkvtT+r00ZM
+	 m46Al5V0ZkdAbAb39jmJ0TnhVLtRJUSWjNQoCY2x8Zjpslihnx3/aZEF3sTBrCX6/NCpL
+	 2Yyd7RagmQ6ZW5q614RbKhzBjygIEafD+jYsc9J5Oo62GdAjd9++mSobOpZ5kX4b00lVA
+	 ofDu+3yjiZHBpaUNSFOzR7IhG+/iq3Pu85a9jXnrlmg5t4Lz0OT3DDmxfal5yPpb8hJNs
+	 4FVGyp8Q3M1hUWM5hIyG4dfgKgLt9bZ5lICkjaDL/1rVJvAbAgE0Dzs1+DzES5bQiRg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793367104;
-	h=DMARC-Filter:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:Jabber-ID;
-	bh=tlEiADi4+8g0idHc+u87QI/42EGWWf/uchgiFaBfvoE=;
-	b=QQw/4plT/GntTUhDujWpG8LS0tb1fOTTi13zZB0djGlsfYowFiJL0b/Qsnt+EEIiaENl
-	 kztIlhMWTv6ar0hYwGCLTA02m/1kvIUHitea22+GSQCyzthG9l4EdE2TQejJo/VzhhUho
-	 og0sPN2iqvhCBfHKpf1TePgoL8YzkkDfGtHVIVo3yynXwphdwfJ9iwgp89htdQ52RyLWk
-	 nsSIk3lcy92/ZXT6JdOF7ANpdUCKjBWFmIerBUAbfbgZCASyiWiZhFJOkK0Hf1grkKO2I
-	 PvseZk6fr5oGN3jfjnQTQxnEwGbjXLMLxwApAhn4/iXqHzlG6jzVu7X4L3L1ClBvOpw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793367391;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=bDw/seaI0N+rrlS6TXD0Zx/J/W0wD25HCs9aCm/Vs80=;
+	b=e24cmkKYi0RX3k0oNaFILUaEaeC5fCEJ47FJHS0Lp8rI6BuQoDHGRiKXLxdSZXdkQTOC
+	 HJX+Zn4miPlPWZQvLWpO9u9nhKCUXUwzeoDQ/vU07zfxwhvh48vxY5RVnsT/oYozrLtRw
+	 +Ek/0iPeHNNCsnqBRBCgGikZ9uvzNFjLciGQ04HsMkrq3JDooaFmNHPXGeFNRZC2Z8b5V
+	 98+Ep2EsMDc30gqNbyA9HrNJ9U4N7iPkJvl+viI8wOfpqOMQ0GoBnx9mWhJ2mObkfOztY
+	 shvhjCHbcK9c2UHTMey7lC/3QRZ/b9DIsQbaerO+R+PU+xH2G3Je2bBWbaI1mb4HiJQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=linkmauve.fr;
-	spf=pass smtp.mailfrom=linkmauve.fr;
-	arc=none smtp.remote-ip=82.65.109.163
-Received: from linkmauve.fr (linkmauve.fr [82.65.109.163])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kfnwA6ex;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBCC2606A32E;
-	Fri, 30 Oct 2026 13:31:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CBCC2606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
-Received: by linkmauve.fr (Postfix, from userid 1000)
-	id 91F417229E1B; Fri, 30 Oct 2026 14:31:40 +0100 (CET)
-Date: Fri, 30 Oct 2026 14:31:40 +0100
-From: Link Mauve <linkmauve@linkmauve.fr>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-	rust-for-linux@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH RFC] drm/msm: move VM_BIND op validation to Rust
-Message-ID: <auScPBpT79XKnBph@desktop>
-References: <20261026-topic-vm_bind_rs-v1-1-6581465f2428@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84CC606A31D;
+	Fri, 30 Oct 2026 13:36:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kfnwA6ex
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 884971F00A16;
+	Fri, 30 Oct 2026 13:36:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793367390;
+	bh=bDw/seaI0N+rrlS6TXD0Zx/J/W0wD25HCs9aCm/Vs80=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=kfnwA6exaXecOku2Q6ROHnNqmyEoUwg6tUDjh5jtDWyFplS/0GdpjgNtnrDmlUT4C
+	 LB4unvXILyfbx8m5Rc/bYxZlNDP4D5AZsjV3pxKh4nS1tFBBc509NOsafAl+tcPncK
+	 czGuEyv03P7FXeDBCb4EEg32AGmZaSNL2en5XKNysaDn1wxxsyvFP1C26QqMtM/nlO
+	 mhsQRlRBdN/jQ3rbe3LFjcfoNDC4j07udZSxsl/vpUOI6k9StdKq0U9HNJI5d5Dd5q
+	 Scq/lcQXo6YB09hZ1yUxKlnG27/vTfqgA6xJzQiXt9iY4x7TcyWfgAoXwNtyUWZsuU
+	 GgbAfSydfwsFA==
+Message-ID: <f71369ca-5963-41c7-9103-dd39a7369e38@kernel.org>
+Date: Fri, 30 Oct 2026 14:36:23 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,232 +51,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261026-topic-vm_bind_rs-v1-1-6581465f2428@oss.qualcomm.com>
-Jabber-ID: linkmauve@linkmauve.fr
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] dt-bindings: spi: qcom,spi-geni-qcom: Document QSPI
+ support
+To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
+ Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261030-qspi_dt_binding-v1-1-5249111cf870@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261030-qspi_dt_binding-v1-1-5249111cf870@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 30/10/2026 14:30, Jyothi Kumar Seerapu wrote:
+> Add the "qcom,geni-qspi" compatible to identify GENI Serial Engine
+> instances configured for QSPI operation.
+> 
+> The compatible also allows the driver to select the appropriate protocol
+> firmware when the Serial Engine is unconfigured (GENI_SE_INVALID_PROTO),
+> distinguishing between SPI and QSPI firmware.
+> 
+> Signed-off-by: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
 
-On Mon, Oct 26, 2026 at 12:40:02PM +0100, Konrad Dybcio wrote:
-> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> Much of the VM handling code is a headache to read and maintain.
-> There's a soup of mixed-signedness/size types which need to be compared
-> and added and getting that wrong in C is very easy.
-> 
-> The "(range + obj_offset) > obj->size" check could wrap for a large
-> obj_offset, which let an out-of-range map be accepted and then mapped
-> as nothing. Oxidize it and use checked_add() to fix that.
-> 
-> This commit is a "get the foot in the door" type change to make sure
-> that folks building kernels for Qualcomm SoCs have their Rust setup
-> ready. It may/should be extended to the wider mm code once the
-> appropriate abstractions are finalized.
-> 
-> Worth noting, the C UERR() macro expands to dev_dbg() and the Rust
-> implementation for that currently doesn't support dynamic_debug.
-> 
-> The DRM_BRIDGE dependency is dropped because including RUST exposed
-> some spaghetti dependencies ending at DEBUGFS and it's enabled anyway.
-> 
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> ---
-> (if this is rejected we may just patch the C code).
-> 
-> Notably, this will regress some ancient configurations:
-> -- arch/arm/Kconfig
->     select HAVE_RUST if CPU_LITTLE_ENDIAN && CPU_32v7 && !KASAN
-> 
-> Smoke-tested on Glymur
-> ---
->  drivers/gpu/drm/msm/Kconfig        |   2 +-
->  drivers/gpu/drm/msm/Makefile       |   1 +
->  drivers/gpu/drm/msm/msm_gem_vma.c  |  66 +++------------
->  drivers/gpu/drm/msm/msm_vm_bind.h  |  16 ++++
->  drivers/gpu/drm/msm/msm_vm_bind.rs | 160 +++++++++++++++++++++++++++++++++++++
->  rust/uapi/uapi_helper.h            |   1 +
->  6 files changed, 188 insertions(+), 58 deletions(-)
-> 
-[…]
-> diff --git a/drivers/gpu/drm/msm/msm_vm_bind.rs b/drivers/gpu/drm/msm/msm_vm_bind.rs
-> new file mode 100644
-> index 000000000000..164208e0a1b4
-> --- /dev/null
-> +++ b/drivers/gpu/drm/msm/msm_vm_bind.rs
-> @@ -0,0 +1,160 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +//! VM_BIND operation validation for the MSM driver.
-> +
-> +use kernel::{
-> +    bindings,
-> +    device::Device,
-> +    error::code::EINVAL,
-> +    prelude::*,
-> +    uapi, //
-> +};
-> +
-> +/// Validates a single VM_BIND operation.
-> +///
-> +/// Returns 0 if the operation is valid. Otherwise logs the reason and returns
-> +/// `-EINVAL`.
-> +///
-> +/// `page_size` is the granularity that `iova`, `obj_offset` and `range` must be
-> +/// aligned to. It is the GPU's alignment rather than the CPU's, but no known qcom
-> +/// SMMU lacks support for the CPU's smallest page size.
-> +/// `range_valid` is the result of `drm_gpuvm_range_valid()` for this operation.
-> +/// `prr_supported` is only consulted for `MSM_VM_BIND_OP_MAP_NULL`.
-> +///
-> +/// # Safety
-> +///
-> +/// `dev` must point to a live `struct device`.
-> +#[no_mangle]
-> +pub unsafe extern "C" fn msm_vm_bind_check_op(
-> +    dev: *mut bindings::device,
-> +    op: u32,
-> +    handle: u32,
-> +    obj_offset: u64,
-> +    iova: u64,
-> +    range: u64,
-> +    flags: u32,
-> +    page_size: u64,
-> +    range_valid: bool,
-> +    prr_supported: bool,
-> +) -> c_int {
-> +    // SAFETY: The caller guarantees that `dev` is a live `struct device`.
-> +    let dev: &Device = unsafe { Device::from_raw(dev) };
-> +
-> +    match check_op(
-> +        dev,
-> +        op,
-> +        handle,
-> +        obj_offset,
-> +        iova,
-> +        range,
-> +        flags,
-> +        page_size,
-> +        range_valid,
-> +        prr_supported,
-> +    ) {
-> +        Ok(()) => 0,
-> +        Err(e) => e.to_errno(),
-> +    }
+Where is any user of this? You speak about driver, but there is no driver.
 
-I think we usually use kernel::error::from_result() instead of a match
-block in this situation.
-
-> +}
-> +
-> +fn check_op(
-> +    dev: &Device,
-> +    op: u32,
-> +    handle: u32,
-> +    obj_offset: u64,
-> +    iova: u64,
-> +    range: u64,
-> +    flags: u32,
-> +    page_size: u64,
-> +    range_valid: bool,
-> +    prr_supported: bool,
-> +) -> Result {
-> +    let aligned = |addr: u64| page_size.is_power_of_two() && (addr & (page_size - 1)) == 0;
-> +
-> +    if flags & !uapi::MSM_VM_BIND_OP_FLAGS != 0 {
-> +        dev_dbg!(dev, "invalid flags: {:x}\n", flags);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    if !aligned(iova) {
-> +        dev_dbg!(dev, "invalid address: {:016x}\n", iova);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    if !aligned(obj_offset) {
-> +        dev_dbg!(dev, "invalid bo_offset: {:016x}\n", obj_offset);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    if !aligned(range) {
-> +        dev_dbg!(dev, "invalid range: {:016x}\n", range);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    if !range_valid {
-> +        dev_dbg!(dev, "invalid range: {:016x}, {:016x}\n", iova, range);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    // MAP must name a handle; UNMAP and MAP_NULL must not.
-> +    match op {
-> +        uapi::MSM_VM_BIND_OP_MAP => {
-> +            if handle == 0 {
-> +                dev_dbg!(dev, "invalid handle\n");
-> +                return Err(EINVAL);
-> +            }
-> +        }
-> +        uapi::MSM_VM_BIND_OP_UNMAP | uapi::MSM_VM_BIND_OP_MAP_NULL => {
-> +            if handle != 0 {
-> +                dev_dbg!(dev, "handle must be zero\n");
-> +                return Err(EINVAL);
-> +            }
-> +        }
-> +        _ => {
-> +            dev_dbg!(dev, "invalid op: {}\n", op);
-> +            return Err(EINVAL);
-> +        }
-> +    }
-> +
-> +    if op == uapi::MSM_VM_BIND_OP_MAP_NULL && !prr_supported {
-> +        dev_dbg!(dev, "PRR not supported\n");
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    Ok(())
-> +}
-> +
-> +/// Checks that `[obj_offset, obj_offset + range)` lies within an object of
-> +/// `obj_size` bytes.
-> +///
-> +/// Returns 0 if it does. Otherwise logs the reason and returns `-EINVAL`.
-> +///
-> +/// # Safety
-> +///
-> +/// `dev` must point to a live `struct device`.
-> +#[no_mangle]
-> +pub unsafe extern "C" fn msm_vm_bind_check_bo_range(
-> +    dev: *mut bindings::device,
-> +    obj_offset: u64,
-> +    range: u64,
-> +    obj_size: u64,
-> +) -> c_int {
-> +    // SAFETY: The caller guarantees that `dev` is a live `struct device`.
-> +    let dev: &Device = unsafe { Device::from_raw(dev) };
-> +
-> +    let fits = obj_offset
-> +        .checked_add(range)
-> +        .is_some_and(|end| end <= obj_size);
-> +
-> +    if fits {
-> +        return 0;
-> +    }
-> +
-> +    dev_dbg!(
-> +        dev,
-> +        "invalid range: {:016x} + {:016x} > {:016x}\n",
-> +        range,
-> +        obj_offset,
-> +        obj_size
-> +    );
-> +    EINVAL.to_errno()
-
-Same here, the whole content of this function could be wrapped in a
-from_result().
-
-> +}
-[…]
-
-Thanks,
-
--- 
-Link Mauve
+Best regards,
+Krzysztof
