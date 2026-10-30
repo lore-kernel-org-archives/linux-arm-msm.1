@@ -1,56 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793352508;
-	b=neURCw4HwvmPm+8n/hlMvgrZ85GW7x/gcDlL1mHLgLHT6ML4tJomrI222VTNeXtq2vKz
-	 lFswIN9tlU0v3a5j3rMQHHgAff7Z535/wPgXoiSZMhQSiceE911BcmjInasEsrwZU9L4K
-	 fr2MUZe2D/Cekrh9NBn89vTR0lmPQqPlrfNdSSg8qHGhJf5uozFNA6klnLB3u3MyVBhE3
-	 +dMZxs2u2MRZe+IBVYxXkWBlRNtu+F93cH8VtHmO9L9uDMv3G8J9lYGy3uWH9xXqtHPaA
-	 CFHdAXAsMiSOd5h1lxVp8GvG5pTG+r1KyJ7iiGUc402M/8UR9N+dzoPwe2TvVJ0vTgw==
+	t=1793352591;
+	b=AWx0znTt6ECc6Taqn/AvWPYznAu2/cuRjJyt7Rtis4187rnitfdpG6xVp/Wuny+fPnTK
+	 t4Qbtj7ZiHuzbwy/Q1AnKiIWG/9Bn6JdqohceaYLJM+GzuBK2ewbNnCwkoosZdW4QkLVG
+	 R3csd4Xq54rQ9YHeAhpeDm8y0fvrmg2SCw/JNL8dnZ492nSd5Vd4W69INx+sR/NPuJIFf
+	 BZ8i7+YRgeimtDyNEiyQnE1B/4G9LPQpv3BhVkoIkuUORl5taucl6dBzVR4fUsAf3BcX9
+	 vYgLOpol+OiOLwSgzBDvEqfdOROyvSJzokwn8E+qtOqfcpVR6i6wqCgtdHAA0YlNoJw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793352508;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793352591;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=KWBaHlS621pvpJf4ngK+XZKBR/fw7GxlM1n+lgz2A0w=;
-	b=SNFyurXwBI2DmyAkamDXlkXmcZvgq5sZGFOVBcvmaJnw0dsmKgfFkorY8OUcXxBSZTK+
-	 iVIvrjnzz4HtRtOmUM6jDzXwdeec495Tsy5SV7Fd3INX+SnHT6/y4X7HnDFYv70/qNs12
-	 9N2TILfTWzs7KGvsDokoh+4SdztjkzjD28wjvn6Pn4dbVUoV5w0ITDdaXIH+pn3pyDAL3
-	 asPiJeNhfKxOTcwxmzOOtiJAhQnOOyjBFT+vzAB5Iy9zHr/ORgxUxnW+LSBc220hDXvh2
-	 Oc9U0CjirR3t660B2HcE+wv6Xe9dy2U6sDFpx7XhR/POU2SbuEZBlw6b1GEhT+bOC4g==
+	bh=AUW/VefxPVhSKqc9QwRcesaDMHJU1FaYetMkH8pU5n0=;
+	b=3u5cXovfwkRKlHiJIJip4SsZPFV11NZ9rvQDohNATwAsaAganhTIElDgTQZW6ObJXNVb
+	 MRVraUnN93w+OUnAwaynfN/ERuFZYXYHZgG9qGViiSXUxlEC46DnyjiDsSpkp8UyuOyle
+	 k1jhR00h4wEjlttCug3hU9QKAV7NwwfRA0D1vApAu6caF7S/SRRVWtRxuRr0Lkh+oidOS
+	 UyxcMos/zxUCjjERNIhkp42tl66WWR/UdJHVKjjwZ0Cl7tEfvoRKdWYvfyGsu3T9uwNMC
+	 olAxtyTtBCgi7rxXDnLfi/paU8LsVAWmencr2BC4grm6gC/z0XY6DOa6IXmX2QeXTYg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mBHaHZfb;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fMNCQR25;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EF9E606A31E;
-	Fri, 30 Oct 2026 09:28:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34673606A31E;
+	Fri, 30 Oct 2026 09:29:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mBHaHZfb
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CE8A1F00A1C;
-	Fri, 30 Oct 2026 09:28:23 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fMNCQR25
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFEF71F000C1;
+	Fri, 30 Oct 2026 09:29:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793352507;
-	bh=KWBaHlS621pvpJf4ngK+XZKBR/fw7GxlM1n+lgz2A0w=;
+	s=k20260515; t=1793352590;
+	bh=AUW/VefxPVhSKqc9QwRcesaDMHJU1FaYetMkH8pU5n0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mBHaHZfb6IMIuKHjCxzr9pBUwXJPeQkZ/lc606u28zChC4RUNwuwm7uvqgwhDwq5m
-	 e+skI0VC+OAuozKB6QfTtB9JWjOJLJXJc/k+2plHfdmMowu0MCY0JSPyekH0Wgljfm
-	 NEicKF8WIJhIVH2YLqs57bvqE2joSE/4alX0wIohNaC2zgm1wyUzJZcw+xrHhHo4U8
-	 UiL8MtLhyiaODNThBxMIIvGZPgmElbtcCCt+/WY7mUJ7k5l1v7mG+1D2sdbm0H+LsE
-	 wLCyFwm/WKNVIRSd2mgLRZppql5/sZQDQZr1bH20/nZTPR5Wx75Dsizv/j+uQrlJQ7
-	 GuyDlGvk0qoYA==
-Date: Fri, 30 Oct 2026 10:28:21 +0100
+	b=fMNCQR25otJ8OHxoM4l3W/R3uJxbKp7btHDNJ18HY/kk3aiKkE+E/ii9IAtLA9lAX
+	 pQJ1+60uScGX9IP6qEmxA5zWjgLOL25FjV7RR5nko+n7a5BJjLo9NDSKjsFCJ/Bxuj
+	 7Emq//dbCIZPCI/gzfdG8jj+tRqUFAeCDlzb1Fd6wjSXusn2XHqlVjD4maiL2WAPDq
+	 DG23/Zw2vJYDDLJ/CWnpcQL+D8WiNlS10Opk4dbWyqWlipvua/3PbIFIJYdp+nG+dp
+	 tVCW2LL9fijHPpqcpzYXGtgFOvC5O1O/7ZYC8EiFQQ00aAzJU4WebX6WgsY5munY21
+	 gZ91vWDAZN0LQ==
+Date: Fri, 30 Oct 2026 10:29:44 +0100
 From: Bartosz Golaszewski <brgl@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>
-Subject: Re: [PATCH RFC] arm64: dts: qcom: nord: add ADC-TM thermistor
- channels for Nord PMICs
-Message-ID: <6drdycuoo4n4qssp3axrij5xrftvg6w24z4oa5xw6wmtayknk2@mwz62l7bnvhg>
-References: <20261028150103.520428-1-shengchao.guo@oss.qualcomm.com>
+To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
+Cc: Marcel Holtmann <marcel@holtmann.org>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, chejiang@qti.qualcomm.com, quic_chezhou@quicinc.com, 
+	wei.deng@oss.qualcomm.com, jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com
+Subject: Re: [PATCH v3 0/2] Bluetooth: hci_qca: Reopen port after power on
+ for QCA2066
+Message-ID: <ygy2hd47c3tb4vr2joiiy4bbg7rd4pn66x3co7iifv65cvnrf7@g36i65agh6p3>
+References: <20261028111839.2148515-1-shuai.zhang@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,46 +61,43 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261028150103.520428-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20261028111839.2148515-1-shuai.zhang@oss.qualcomm.com>
 
-On Wed, Oct 28, 2026 at 11:01:03PM +0800, Shawn Guo wrote:
-> From: Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>
+On Wed, Oct 28, 2026 at 07:18:37PM +0800, Shuai Zhang wrote:
+> QCA2066 needs the serial port reopened after the controller is powered
+> on, otherwise the host and the controller run into RTS/CTS
+> synchronization issues.
 > 
-> PMAU0102 (Kai_MV) and PMM8650AU's Kobra_MM ADC5 Gen3 controllers only
-> expose REF_GND/1P25VREF/DIE_TEMP calibration channels; none of their
-> AMUX thermistor pins are wired up, so none of the board thermistor
-> rails feed the thermal framework.
+> Patch 1 reopens the port in qca_power_on() for QCA2066, as in v2.
 > 
-> Only 3 AMUX pins are actually wired to thermistors on Nord, all on
-> Kai and none on Kobra: Kai instance E's AMUX1 (SDRAM3 THERM) and Kai
-> instance I's AMUX1/AMUX2 (SDRAM1 THERM, UFS THERM). Kai's other AMUX
-> pins are either DO_NOT_USE or wired to voltage-rail monitors, not
-> thermistors, so add only these 3 channels.
+> Patch 2 keeps HCI_UART_PROTO_READY in sync with the port state, so that a
+> port which failed to reopen is not closed or flushed again.
 > 
-> Add #thermal-sensor-cells = <1> to the two Kai adc@ nodes that gain
-> a channel, the new AMUX1[/AMUX2]_THM channel(s) with qcom,adc-tm,
-> and a per-channel thermal-zone for each, following the existing
-> Gen3/Gen4 board pattern of a direct thermal-sensors phandle into the
-> ADC channel.
+> Changes in v3:
+>  - Patch 1 is unchanged from v2.
+>  - Add patch 2. If serdev_device_open() fails during the reopen, the
+>    port stays closed but HCI_UART_PROTO_READY stays set, so the later
+>    serdev_device_close() and hci_uart_flush() use a closed port. Keep
+>    the flag in sync with the port state and skip the port flush when
+>    the port is not open.
+>  - Link to v2:
+>    https://lore.kernel.org/all/20261016022302.4003647-1-shuai.zhang@oss.qualcomm.com/
 > 
-> Signed-off-by: Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
+> Changes in v2:
+>  - Use a separate case for clearer logic.
+>  - Link to v1:
+>    https://lore.kernel.org/all/20261015092224.262158-1-shuai.zhang@oss.qualcomm.com/
+> 
+> Shuai Zhang (2):
+>   Bluetooth: hci_qca: Reopen port after power on for QCA2066
+>   Bluetooth: hci_qca: Don't use the serdev port after a failed reopen
+> 
+>  drivers/bluetooth/hci_qca.c    | 46 +++++++++++++++++++++++++++++-----
+>  drivers/bluetooth/hci_serdev.c |  6 +++--
+>  2 files changed, 44 insertions(+), 8 deletions(-)
+> 
+> -- 
+> 2.34.1
+>
 
-...
-
-> +
->  		pmau0102_f_thermal: pmau0102-f-thermal {
->  			polling-delay-passive = <100>;
->  			thermal-sensors = <&pmau0102_f_mbg_temp>;
-> @@ -501,6 +545,42 @@ trip0 {
->  			};
->  		};
->  
-> +		pmau0102_i_sdram1_thermal: pm-i-sdram1-thermal {
-
-Existing thermal zone nodes use the "pmau0102" prefix.
-
-With that:
-
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
