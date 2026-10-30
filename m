@@ -1,111 +1,110 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793380212;
-	b=QS+U6z9Bc2stBvximgcNzkyMPCKo9+MwMh/Uaw6S3H1CahaGyxFSIDJj8bY3jbEHMXTV
-	 gc2R01XMswGuOi2xSuyIUeMLIWu2SCx+y7OzSMo7y3JCniQv6os8xusQApMhTtjSPGwys
-	 SUpZx8db6KlDUWZ9jfgveUb5KUtF7jVx8/ZZQMOYQnrWsGBMck4J0JM7anwLh/191Jl/L
-	 /sU6reIOwDnxnuBrwFeqquWd82eLqtcaBG5+9uBXUxqu0h+3xWoeyhK4OBAcLuaGJzMZO
-	 LcdD3UgQ+smClYHDO+/hD4ioW4VPZx/T1iP4TDRNrKsS0dUc8ygCg0KuwPX3fIIW/WQ==
+	t=1793380205;
+	b=4dDeALnX4uie2/m6EF/WOk29mW9vUJKEpaujXJVYr8V8L9DXSvD9gfk7Jqh/AzpGIJt6
+	 DUH/m5P9Yjaow3MhY7grKpQJO5JwOif6MD1kTlEUJx9W8lLjKMqkmsTgNwDBXFZT961iS
+	 hrIocMVpAMxEyrbiBzNf7kcKH2GQgN9vPi7zF3kSFpJfK8FviaaTBgEYxZQapDtd4rhEX
+	 Ft9bgKnj5rECRWqPRJp5JakrmSy0lOn7by4YP8ezbX0zzFZ2FFX8eX9qBV3OIAllXb5Nh
+	 auEm/gtG5NHLl8AGQIGKGGTsjTYA8no3LflXRI/tzMqRl4eU1I1L2xe8GzvfuRie3ww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793380212;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793380205;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=WtDfSiAyMCJxbIHdUxSc4iYPCHHVnbHwzdCobB9y9Ng=;
-	b=ge29JlBdRBVuA19wY4LK6N4pCH++4Xjr4ldwEhCYp8baZBzSAzr+zfIQ3CA51Bzr4VvU
-	 KrdUqqzfEr6X2GvBMvYe6+LbcGUJGyPCawIcZTwSTwCveFjmQ9hBBtQshnCpUsZCeD3rk
-	 yuwfetjL4TvdkvZf1aEjEeK81UB+zBQAwu7e9ChHofK7crernR42arS2nzcErCh6GR/QP
-	 SU/TvCzKA7ootRPcvEERd8e5AbS7dyHw7ulz5whZFPrzxC5bFpu/LtNWbFYu2OFCAtOyZ
-	 IGKXwrgkSsOpvZZrKFyQJQw6X5uC6WUoe8oVZxlXHw+jnZnfiGCHcS4D5OA5js5Kkog==
+	bh=EOWyfjg320LsKD74ASlFLIJyIS4lGcmnKVpPXhAJO90=;
+	b=nKR9vE2hOUrSXe+McJg/lAgVyBMaaEpun/L6JyEuGTthDcJJaAPgPCX+SelP9A1GBOyo
+	 jsiak3IYpPIeEupG+V52HH6f2AYEOlZC6SPoxyQAXJKAQqT4ZcFcbthDQ9KDSTA8d3Fr4
+	 sJsYNVSoGgyFDywHIscj+Cqn/wPnTzdnQuqcXRHKeyhW3YL8z4DtigiaMrGtrT5G1BHaS
+	 ypYd5/wSfnD28pyS9cL9GlCT6q5s5Uu9DkbHHbZPkul7M3LyHAiDkbNROojbtkUfUdR+R
+	 tKSFZ2srhE5vwayoPjOrHvtBneHVellK8uhscUig3r+H5kh3+fru9FfXi9Rd3FbHP6w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=T0NSkmwz;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VXQa1DL5;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JfLf0274;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QonYggbX;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06968606A327
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 06968606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0632606A32D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0632606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=T0NSkmwz;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VXQa1DL5
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69UERBo22494589
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:11 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JfLf0274;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QonYggbX
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69UERAHT4102848
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	WtDfSiAyMCJxbIHdUxSc4iYPCHHVnbHwzdCobB9y9Ng=; b=T0NSkmwzPaLPGzOU
-	7ikUSz6iH7my4VOU2Ye2Eq5K19kb7zb+5fCnDFJ8ejMS29VGCIwgr8dr4s8KDEGU
-	NdE/OoUQnkSwwL+n89KhrodQ7zgIfvrQXLsNNruaXFd+s/ZZ8sez1iBN00zwXN1m
-	ZykcU15gAwZFnosmVp8JFoA+700WHn73xDZHzh/SaXZ8VsrWq7BXIQuUb5SaTZX1
-	dOX4hQgHeu3RzX0X1tp3vVxLOTJvY5tj/Il+UHcEx/YvWLJjumIkSxxIE6co3MV7
-	MD2vDdcLU2AUBCL45HFLkjMBwN25XVf6O2kpglGxVYxHZ047EPTAOzirrYLqZ+L1
-	mT/6ow==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6p46ku-1
+	EOWyfjg320LsKD74ASlFLIJyIS4lGcmnKVpPXhAJO90=; b=JfLf0274sJkJhp0e
+	MpthktA3hCXfL601o8AhP8utAJxsqLWLvT8cAbJ8UCxw49uft/r5x3p0nITHHemH
+	uoYZiw6PnBzU0j9uT/yR0ktYe9/NnU4Yjmlnuy5YrzeX6txG9hfAhLskFAvWC+5+
+	h8pttzgL34wtBJ0npBcG7N2f0AO63ONo0aLMo4F8zz5vZtxla49hOyk5MD01wcpU
+	70D7wuGIvhKf2ov2A1iBILuBelpVqmz3yKZiB+15MRnloMxP/9uz7VjHPlMdplj1
+	j/qTl4UoNgd+n7zOuZkZkJyoIZor0VBzKrAJzH4wzsRxkSTWrXgHWXFNkMqpUqoy
+	mbfboQ==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6qm5fw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:10 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1a71dd190b0so3102057c88.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 10:10:10 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 17:10:03 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-1aa0fb7f157so1452417c88.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 10:10:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793380210; x=1793985010; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793380203; x=1793985003; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WtDfSiAyMCJxbIHdUxSc4iYPCHHVnbHwzdCobB9y9Ng=;
-        b=VXQa1DL5+It93VqpGjjZcw9hz3pkEclrC6L4qdO5I7GUSEHvx6luc9LXjDFDEdjICs
-         l54wnkw33YxARKMTBZj4FrSgHJcF+e3Z94r5X8koJx91IQrV32UG6bEMJ24WfsylfBeB
-         epzH20As0xn4QgQSkDVXjdJ9jKaRHrL/Era4f54J2vsWeGVix1wQyAG0Uy3ScfpQGRr7
-         zpVpHgZDVdjpkIAZtgxDjkbSb6O0zt6ndJ21M14L2RhyFKXTQMGD7Yjg0jfHfIa6kWS9
-         iXE8PBw/gFAb9XDghUjyRf6rF6wPu2JXpIU4NNcDtJbZyHfufujHlGYA81lb6HW3ccJ3
-         M3ZQ==
+        bh=EOWyfjg320LsKD74ASlFLIJyIS4lGcmnKVpPXhAJO90=;
+        b=QonYggbXIzlEfMfL2BQlubh5T/fFr6MyrVpXfEMK2xcusRgmsNC7nrv9dub0VBabl6
+         wTM7oGZQR1PRgSM/gnF+qF4p1Br1Gp472918ZRFRbtmrkiKLciL8fvzpAXNuvJKsvXCc
+         rNfd42jZU+q4lyoX967h035j4bPr6+mNhYQR848zP+7BytByTapdhpdv0sTCYkpqFD1H
+         GOvlnOe02F3ez9ISzENXWJA1oipYl6qYuGMOR34mu1XOcxU+yBFuxetzvFQVXzKpfat2
+         VxI4tdHKvri1QnSnXTCxiNsMVnLY3WYD1zepmrko36LCTVDrlxfHz8eDt3haiglo5veB
+         OHbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793380210; x=1793985010;
+        d=1e100.net; s=20260707; t=1793380203; x=1793985003;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=WtDfSiAyMCJxbIHdUxSc4iYPCHHVnbHwzdCobB9y9Ng=;
-        b=SuqEXgin4vxarcVUlz3mozLwrTbkJZzMEGDU5uVd4KGkYkmdGDz5iom3GZtaIU18mB
-         weNQ3NDYKOSIG/pdR6wzHz+bZ25YO8yS+Q2JYyFi8TWe8huouTXM9pnJHecrYk+7HiRM
-         zeRXivh2JmaAlh94akBtcSdH1e22MhInCtH5EK1ehOZaHvPAwFzG4be3nc2KKfivw2fc
-         ok+bjmiBqX9sOgAsRn7l+c1gEFhI6GBvbGpoLAdhHyhTvkYF06r128u8HiLUIBbDxPpm
-         nA/C+aRceDmN+kF5ec6LGHkRmwCLsecy8x4UgfH0cSggXJwhvdHuwBvS9fVFhIoJAo3R
-         /lIQ==
-X-Gm-Message-State: AFq9FYJCdV8ZG9/zQSCibXE7y0YvpShAElfCxIwZyHHCQARx9MXd633L
-	hc9lEUXqKtwIPNfv8F6BQ6Glye6zFBn2pppXNxGmKwIinFubaKRmSW7Ve1rUXjwBQdBUlcnVoOK
-	9/65obkhWMQobAlEtJstmOQTtV0+x7GJz+GDfauYQBUwzlj635EfBIXqX2TAb9FcH7WPb
-X-Gm-Gg: AYBFou26zFxNXXEO86+ghTD4gyR8nm25QGDETqkJJHO0L1QIP1FBXeafWBb4KPjD21X
-	oreA/kHKrANfckskIs8pViFKoCtQq/H0bgxHugYiuKuuKLJu5kMHMe6SXt/Dy373jgy9WIgxJOV
-	+pR4qaDYOTye/GCFnNMny6osW294qKMsbMZHeQ6kHFxur6dkh6Dt4CnkVHOwHzOFjxJYiYA712Z
-	3/Xx+qxdh19rValHHA0A37B5PCGXeoc8J/MMM6Vi2ucyjGEkj3hsWvEpxrDCn2UPV3e5SXNZpwq
-	f03d7udptNfvh5peZWAHrienquTAupxs/vzHd2g8+znrYUOQ/ULknP2jHN6MMBm/lhVQnqC9tkZ
-	6FeSnNW9VPDoH6EjR4J2519bdKdeGgwuPfJNqJvxOMxfX6XbD4cKznglt4SP0M1i9161IMhB7jA
+        bh=EOWyfjg320LsKD74ASlFLIJyIS4lGcmnKVpPXhAJO90=;
+        b=0/cEajBi6Cjdi0zZa+EYAbECTMBzLbstltJwiORrpCZb4QRjdNzu4GuwiF05tX+Rp+
+         O7SE+j/Jyk4QiuGfcR3Hpz5RSAqI7ZZqM9IM7M3tUZTvd63vxKa7js2zby43+wAWibc0
+         2mM1dU0SRHCe1uBoMLe/CSQ+CrmZC1k0WlVITBSFva+kOne2FfvXBjBxFGV9WfXHpj5n
+         z2KRSliiel0rEYyRpmSf9Af+gDRF8BRPjbUEVcKbEROD78SSrTgVs2J/WyS741GmsPBW
+         pNkZbMh3nuu13XW44QUYGI83gmjy7YszJnnudxpGQrKp6NmXZULT5tdgmAFOhTmHSrNG
+         HOvA==
+X-Gm-Message-State: AFq9FYKEPyt4HfTDD1Yl2xyIT1wVBU3PRxbHCwCRqyYU0k1N9FDWvEaI
+	tg4597jVzxw94e+2fa40M7YaGDbXKOQotULd2khvlCytemQZ2APTK0slIGz6OB2rq0sLwtEHYJT
+	Y9xvpbGNYZDwcmrseIRXvTJjP+vnwv5/2jChMpoDIEQi/p+6G1dFCUaupFqYR/vbGEYLB
+X-Gm-Gg: AYBFou245XGZZOJozz1yMJbSn2Cib6uvR1s2S1LWAn+q1Oksu0tJjotSyC8v5DArY02
+	gFLjMOs/PnF2zZgwk8t7y+/aah4+g2HUJaGLcdImkYW6Q3eplVGL6Jtp1Gdm6U2gxp6HgavkcYv
+	5XBtY1jCjirhT4EmdHnkIRXMhDt7AiMf8CMDupGvPTuzWquz7BwmW86P/11r4qwA/WKhWk4L7tt
+	pNpeU2wKW38Ugdu9A8rrYcSr/wGRclxQLVY6m0yjWt+CfKgXQ0eceStqCRmivLkTkvpg4cmkj6S
+	cD+pb3+QfyxhDL4QbKriwxs7O0AuvcUhaoAFNYs2fsoW3aWDwp1LPvDNh26LYWig3p+Ud2THoSt
+	1etdjyXJ8OIgFIaNCvgwSGvANiqmznB7ZIaOUKi6sptBvk3m2QBtrd8QP3Cbm4m7oB2mDRIr38Q
 	==
-X-Received: by 2002:a05:7022:ed09:b0:17d:7b45:f927 with SMTP id a92af1059eb24-1ac5c2727e4mr3669385c88.33.1793380209400;
-        Fri, 30 Oct 2026 10:10:09 -0700 (PDT)
-X-Received: by 2002:a05:7022:ed09:b0:17d:7b45:f927 with SMTP id a92af1059eb24-1ac5c2727e4mr3669330c88.33.1793380208649;
-        Fri, 30 Oct 2026 10:10:08 -0700 (PDT)
+X-Received: by 2002:a05:7022:3f0d:b0:18a:8164:ce4 with SMTP id a92af1059eb24-1ac4fb0c60amr4017424c88.0.1793380202683;
+        Fri, 30 Oct 2026 10:10:02 -0700 (PDT)
+X-Received: by 2002:a05:7022:3f0d:b0:18a:8164:ce4 with SMTP id a92af1059eb24-1ac4fb0c60amr4017380c88.0.1793380202065;
+        Fri, 30 Oct 2026 10:10:02 -0700 (PDT)
 Received: from hu-akhilpo-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac194b5437sm9481168c88.13.2026.10.30.10.10.02
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac194b5437sm9481168c88.13.2026.10.30.10.09.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 10:10:08 -0700 (PDT)
+        Fri, 30 Oct 2026 10:10:01 -0700 (PDT)
 From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Date: Fri, 30 Oct 2026 22:39:26 +0530
-Subject: [PATCH v2 5/8] drm/msm: Always use component model for standalone
- GPU
+Date: Fri, 30 Oct 2026 22:39:25 +0530
+Subject: [PATCH v2 4/8] drm/msm/adreno: Simplify adreno_probe()
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,7 +116,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261030-gmu-sync-state-fix-v2-5-89d3082d97af@oss.qualcomm.com>
+Message-Id: <20261030-gmu-sync-state-fix-v2-4-89d3082d97af@oss.qualcomm.com>
 References: <20261030-gmu-sync-state-fix-v2-0-89d3082d97af@oss.qualcomm.com>
 In-Reply-To: <20261030-gmu-sync-state-fix-v2-0-89d3082d97af@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
@@ -137,173 +136,91 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
         Akhil P Oommen <akhilpo@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793380169; l=4464;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793380168; l=1922;
  i=akhilpo@oss.qualcomm.com; s=20240726; h=from:subject:message-id;
- bh=U9ojTQB94Ke42+FWj/Kd9ZSdUBJo1oU4ms+Faog05Fg=;
- b=9UAOSfgUgO894d0PjxIZr6P3k7jDFVUKk71nUfqlQFhBvHbXi6XnOHXN4CutsWWwp6OFy5vOf
- gOLje3CxNO2BWjO1eQ/ZR1Xb56z/649FH0nDgwNoklvXCxsM7fNLnrI
+ bh=4IwBjgmZtlASF3bKahjtC27XmmmLfOr5jE0Tf4p3+0I=;
+ b=31I4AziRK5+9Pqar0RIswLtFl79uUaePJYhCKxMRgXVX1k0FJpRaM+TKifUzVhcEok2rF8Hgl
+ uGnViKYuy9zANDEc5IhfAhhJiKWOlXyNh99TCwEKNRodCkO8rXfN/Yv
 X-Developer-Key: i=akhilpo@oss.qualcomm.com; a=ed25519;
  pk=lmVtttSHmAUYFnJsQHX80IIRmYmXA4+CzpGcWOOsfKA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDA2OCBTYWx0ZWRfX66WFez1DxAK6
- sMstGe6T0bkR5DxIIes98UaXljR5rPUiqpEUXad3nrFSIe74R5Vzrel1zLroVZDxaFVQziNFNFx
- RT2YMad3zPTDY/7W5njt7YrkgYg3uJPA3u5IBFzYwy/NJ+hvdmk+3S3WS3oVIcIdH+S9GO6y/I9
- sjtQLrrCZyfOuHJZN7juAUzBfHSbBRUHIiuoQoDkj3mAEBixTQqmXJxHprIBOgHIabiJ5hx9Fiq
- Tz9iIhQspAUEMT4KyMa19YKnKQIjebA5bTYDVIhtm+9ozkNQQT4sGVr7sYtIXHoNL4krDV4pJbu
- u1azGDRHoK/Ex95SVLdu+1s0ggRbIALVJ6vYzHj+PZs3mAYE8u++at7de+pQc01ID84V7XFRDeq
- sFZv/hoZTPjHwiRLzdWZQUDpK/1EMzcmM7mWSBy7rIvd/xZMygHShAviP1Djm8R3/OpR/EPKnYh
- 7QW2uR11w7JmH8/yHKA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDA2OCBTYWx0ZWRfXxFnb1OgOxvYy
- 4ZcklkDw/9oP3rNanSE8jrkky51sHxbyF+Xz6jyeEI3XN0dE1uT1JTrLISVKo8e6mcL9w6cOiX5
- OQ+5WkmjRuhFLYOaQXMCy+mzmn6OFX8=
-X-Proofpoint-ORIG-GUID: uz5gQwU2fq7j-9vXmJADWXDRxUYSukWQ
-X-Proofpoint-GUID: uz5gQwU2fq7j-9vXmJADWXDRxUYSukWQ
-X-Authority-Analysis: v=2.4 cv=TL3Q2Fla c=1 sm=1 tr=0 ts=6ae4cf72 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDA2OCBTYWx0ZWRfX1+TvbhcS3wzk
+ dutwL/1C3nMDnvvhe/Et0VpM1CpYvTjfUsa7HB0C3/Khs1/WHNN0YLQ8F5GDp7HgM2hy5Oby3D2
+ LSizHtJnnJnVpYeCu5XUZS/URqjcr6pc0JoosJGjobNJkmtoMMIHle2OtTGoMruv9MOk+oINP+4
+ FHjBvoq9/KbTPiCFgfVYJvjVWEeepsmICk/mHXeKZI9zoicwUXUZMcuKWABgreMepchq8MCD+GF
+ pJyiwKzDMkge5n4r8UOQeXSN0W05N3BBI+GbOVUES+tcgT0vSS1YTnMCuR+D51kJoM3lBWvhyrv
+ 20iptEO+/wwd5CTu5YuP4bMvLJTnf+SSKVUzrYDXWRUH6FzbeyqaRHjWCQZwY/a+bgN/GwFxEuG
+ +0xbMqkHzej4wJBuae5mEVkvVzKlqnxtBhewxWwNLMXC1ayRGU+ycBftpeDlT7Ugg7RWRi9/+eb
+ 4MebywqCmZSZJ6KyY4A==
+X-Proofpoint-ORIG-GUID: swFSpoBVMZXB1aU0IKoYtjsVE_brX9we
+X-Authority-Analysis: v=2.4 cv=IeoSymqa c=1 sm=1 tr=0 ts=6ae4cf6b cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=_hlE4qLb6NvLkdTQTB4A:9 a=QEXdDO2ut3YA:10
- a=vBUdepa8ALXHeOFLBtFW:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=7EupJXidagRHOzv49WEA:9 a=QEXdDO2ut3YA:10
+ a=Kq8ClHjjuc5pcCNDwlU0:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDA2OCBTYWx0ZWRfXwnmCHifprT3q
+ fBNZFEA+SUkbQVdcOXeEJmhEybzb5CKctptUjoTipdwBgyhfsUfyWLnbYJNdUeiuB4Bf6l2qwDn
+ y0zjwVHmhF7He74BZU/YzAwwH2vbhqg=
+X-Proofpoint-GUID: swFSpoBVMZXB1aU0IKoYtjsVE_brX9we
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-30_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1015
- adultscore=0 bulkscore=0 malwarescore=0 phishscore=0 suspectscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610300068
+ clxscore=1015 suspectscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610300068
 
-To prepare for adding the GMU as a peer component, turn the GPU pdev into
-both a component master and the sole component of itself in this path.
-A follow up patch will introduce GMU as a component device.
+Now that it is possible to auto detect and create separate drm device
+for a "GPU + no display" case, drop the special check for "amd,imageon"
+compatible string in adreno_probe().
 
 Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/adreno/adreno_device.c | 26 +++++++++++++---------
- drivers/gpu/drm/msm/msm_drv.c              | 35 +++++++++++++++++++++++++-----
- drivers/gpu/drm/msm/msm_drv.h              |  6 ++---
- 3 files changed, 47 insertions(+), 20 deletions(-)
+ drivers/gpu/drm/msm/adreno/adreno_device.c | 8 ++++----
+ drivers/gpu/drm/msm/msm_drv.c              | 6 +++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/adreno/adreno_device.c b/drivers/gpu/drm/msm/adreno/adreno_device.c
-index 34718adefbfd..6b694b8bf8e3 100644
+index cdf26b38b904..34718adefbfd 100644
 --- a/drivers/gpu/drm/msm/adreno/adreno_device.c
 +++ b/drivers/gpu/drm/msm/adreno/adreno_device.c
-@@ -271,24 +271,30 @@ static const struct component_ops a3xx_ops = {
+@@ -271,12 +271,12 @@ static const struct component_ops a3xx_ops = {
  
  static int adreno_probe(struct platform_device *pdev)
- {
--	if (msm_separate_gpu_kms_components())
--		return msm_gpu_probe(pdev, &a3xx_ops);
-+	int ret;
-+
-+	if (!msm_separate_gpu_kms_components())
-+		return component_add(&pdev->dev, &a3xx_ops);
- 
- 	if (!adreno_has_gpu(pdev->dev.of_node))
- 		return -ENODEV;
- 
--	return component_add(&pdev->dev, &a3xx_ops);
-+	ret = msm_gpu_probe(pdev);
-+	if (ret)
-+		return ret;
-+
-+	ret = component_add(&pdev->dev, &a3xx_ops);
-+	if (ret)
-+		msm_gpu_remove(pdev);
-+
-+	return ret;
- }
- 
- static void adreno_remove(struct platform_device *pdev)
  {
 -	struct device_node *node = pdev->dev.of_node;
 -
 -	if (of_device_is_compatible(node, "amd,imageon") ||
 -	    (msm_separate_gpu_kms_components() && adreno_has_gpu(node)))
--		msm_gpu_remove(pdev, &a3xx_ops);
--	else
--		component_del(&pdev->dev, &a3xx_ops);
-+	component_del(&pdev->dev, &a3xx_ops);
 +	if (msm_separate_gpu_kms_components())
-+		msm_gpu_remove(pdev);
+ 		return msm_gpu_probe(pdev, &a3xx_ops);
+ 
++	if (!adreno_has_gpu(pdev->dev.of_node))
++		return -ENODEV;
++
+ 	return component_add(&pdev->dev, &a3xx_ops);
  }
  
- static void adreno_shutdown(struct platform_device *pdev)
 diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
-index e0c0f1248d1b..dbb6c70473bf 100644
+index e25ef578d2b3..e0c0f1248d1b 100644
 --- a/drivers/gpu/drm/msm/msm_drv.c
 +++ b/drivers/gpu/drm/msm/msm_drv.c
-@@ -1182,10 +1182,25 @@ int msm_drv_probe(struct device *master_dev,
- 	return 0;
+@@ -115,11 +115,11 @@ static bool msm_separate_gpu_kms_auto(void)
+ 	int gpus = msm_count_gpus();
+ 	int display_subsystems = msm_count_mdss() + msm_count_mdp4();
+ 
+-	if (gpus <= 0 || display_subsystems <= 0)
++	/* Single card if there is exactly one GPU and one display subsystem */
++	if (gpus == 1 && display_subsystems == 1)
+ 		return false;
+ 
+-	/* Single card if there is exactly one GPU and one display subsystem */
+-	return gpus > 1 || display_subsystems > 1;
++	return true;
  }
  
--int msm_gpu_probe(struct platform_device *pdev,
--		  const struct component_ops *ops)
-+static int msm_gpu_drm_bind(struct device *dev)
-+{
-+	return msm_drm_init(dev, &msm_gpu_driver, NULL);
-+}
-+
-+static void msm_gpu_drm_unbind(struct device *dev)
-+{
-+	msm_drm_uninit(dev, NULL);
-+}
-+
-+static const struct component_master_ops msm_gpu_drm_ops = {
-+	.bind = msm_gpu_drm_bind,
-+	.unbind = msm_gpu_drm_unbind,
-+};
-+
-+int msm_gpu_probe(struct platform_device *pdev)
- {
- 	struct msm_drm_private *priv;
-+	struct component_match *match = NULL;
- 	int ret;
- 
- 	priv = devres_alloc(msm_drm_priv_release, sizeof(*priv), GFP_KERNEL);
-@@ -1201,13 +1216,21 @@ int msm_gpu_probe(struct platform_device *pdev,
- 	if (ret)
- 		return ret;
- 
--	return msm_drm_init(&pdev->dev, &msm_gpu_driver, ops);
-+	/*
-+	 * The GPU pdev acts as both the component master and the sole
-+	 * component (added by adreno_probe()). Future patches add the
-+	 * GMU node as a second component on this same master.
-+	 */
-+	drm_of_component_match_add(&pdev->dev, &match,
-+				   component_compare_of, pdev->dev.of_node);
-+
-+	return component_master_add_with_match(&pdev->dev, &msm_gpu_drm_ops,
-+					       match);
- }
- 
--void msm_gpu_remove(struct platform_device *pdev,
--		    const struct component_ops *ops)
-+void msm_gpu_remove(struct platform_device *pdev)
- {
--	msm_drm_uninit(&pdev->dev, ops);
-+	component_master_del(&pdev->dev, &msm_gpu_drm_ops);
- }
- 
- static int __init msm_drm_register(void)
-diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
-index 107d0efb62ce..e70fd617f1e0 100644
---- a/drivers/gpu/drm/msm/msm_drv.h
-+++ b/drivers/gpu/drm/msm/msm_drv.h
-@@ -529,10 +529,8 @@ struct msm_drm_private *msm_drm_get_priv(struct device *dev);
- int msm_kms_pm_prepare(struct device *dev);
- void msm_kms_pm_complete(struct device *dev);
- 
--int msm_gpu_probe(struct platform_device *pdev,
--		  const struct component_ops *ops);
--void msm_gpu_remove(struct platform_device *pdev,
--		    const struct component_ops *ops);
-+int msm_gpu_probe(struct platform_device *pdev);
-+void msm_gpu_remove(struct platform_device *pdev);
- int msm_drv_probe(struct device *dev,
- 	int (*kms_init)(struct drm_device *dev),
- 	struct msm_kms *kms);
+ bool msm_separate_gpu_kms_components(void)
 
 -- 
 2.55.0
