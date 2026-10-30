@@ -1,86 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793314959;
-	b=ZNH1vG+Whv4rXdvdJqfbnYENqiMxCwotssrktW44ZjAurTkFeD17MkKeIJufMcxAUGPX
-	 QIhG0QKSw61ac5KFbrXGHvKvEE5o/1D1XAA1P8Zuw2idpMW9QUtL+rDHxYc7s6rqHBJE6
-	 8fQWOO+jzIb+w6XFDiZaqCrt1W68K3/1eeVg9WPpzy6RNC5YivXVKY41cI6Ns6wtFUbAn
-	 8i0Hy5LTQOiwqs47sz05bfaM8Fm2PDyhkgDWPuQXvkhTx2wzNXGwctr9nm1ZEjO8MeZ0I
-	 1nV0O2wUR2xUum1zfm3cj1LhKQok/qW7brhMXs/6L5TsjO11yBZubGylZbcbFSWzg+g==
+	t=1793321358;
+	b=aNEh4s6DMf4ywRoQvZDwTkRxlIBlMoY1DzTKl+JDMC8ofKahLV8JsFjdmZfDQzlCDJtG
+	 kOAOtBThaEmlOFxKF3J6sVPyJ4P5HNqEL4Ansnx0NZk+N5poXA7JXlyr+T8cg7YGSyI6W
+	 E5wsmgdJt0jcXZwmxgBVBVxIY3+w0WJnQEpbVX0kA0GmvL0zh7CwheYBJ2NOMCMsSyRcF
+	 lOLDwQcLie6mZaBc6r2xdnM+/rsVzd4CeQjJ64KGJTu0n+DcgexcrBTkRTOQRX3r/c524
+	 zdAjEQtJUSGvIa0sTE3v1g5KBYRiQikaNFmYHTMHX5gcYVXVD7I6eOUcLNhylkflIAA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793314959;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793321358;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
-	bh=pdQPJwzRJN+nwSRrKcHiePRwRlhix19hahTM/4bzC3U=;
-	b=J6zgNNlLSciXrGb+2rCk+sg4TgAzA40+UaM9RcJGD0z1Q9rqKiEu+/VR9Dhg8HyAXo6l
-	 Z48SQqfIxW/7Dlur6C2fV0ra8fVr6uLpiLVIkUH2IqVrpMJ23u1dreMWXhQa8CUff/Rgv
-	 XYlcD8DacdXIaag2RRdJFW6dNEuCFuHL9zo4NsYDGn2w9if0zzT1FN1+lSzWqwins+O+x
-	 SzrHl0RIORSfxoDy6cxZeGtLNd+FDG9B3np2SMnDfV2d6zaOgtBEmawLNUA6BMEL+ia7T
-	 WQz+DJtkUigs6ADQ6TwHRoMfJpRbeNV8VMPmrn0nzjmbbT3X9Gh1oc3fpFyIFBiYGIw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
+	b=vSMOXukaerduPBXdNEPXbomOjq78p2c1l10zvOSYcntj13R5yc9/h2nf5ulCmhm7NIrJ
+	 w67enFfI8jLUYBkFj00Z80t0bFr/fohWRVp3zniggk3aPFMTIs15R4tj2J66zd+ka8o/U
+	 mp7HIyYmhP+S+SdXGz9vqxRt3UW6EjSA/XDCNAAJ5fULOMiQZenD4CQR/y/XUxr3A0F7y
+	 gX2m0A7gsjQlX28Txw4K9CK6eEaVr4LliuKb00zAJGo7ofYQJrsjhrFHWsxtA4JakqeTA
+	 hHDLh08z4+Zurq9hnVRKHfi3vhIvY2bjhc4qJbmBSwuGqaVcyeh1BKVgvvLKvLjFQCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NAzLNtKm;
-	arc=none smtp.remote-ip=209.85.222.170
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZAPRZtIN;
+	arc=none smtp.remote-ip=209.85.128.50
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4CE7606A31D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 23:02:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4CE7606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43D75606A320
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 00:49:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 43D75606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NAzLNtKm
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-93f1f8f59a1so1146485a.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 16:02:38 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZAPRZtIN
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a5036bbac7so562995e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 17:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793314958; x=1793919758; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=pdQPJwzRJN+nwSRrKcHiePRwRlhix19hahTM/4bzC3U=;
-        b=NAzLNtKmCsF0IKPMBCGp4+IcOcKUbrxqzpMPhSHot9YZrrD7fDW6aqmudJfyu7IG8R
-         qQX63gDLg/ORm7+PWOUwW4IwEAHpUFmtBk91+smAEsZ0qYgNPdXt5gYR29qeJjQUmN0/
-         +jVX4RcZNIdKE1QYKjcSsgZCK2/TeGyu5zP0WT3EmwxLdvzsFUEnMhxJbOS/75BZq6X2
-         rwUbWV64rufl8eJJDGOx0kYyikuipmgTHXz6HDjVcG7lQKbZzlpM9+zNivbIxJJ8+rdB
-         K/6dJSbREdsozfMcdC4ADmD/sIPtrnoF4Yd3cZFXOnRrzwGiNEUMkKc8D+gj4FV5jkPK
-         jsaw==
+        d=gmail.com; s=20260707; t=1793321356; x=1793926156; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
+        b=ZAPRZtINaBu5ACaiUNxrIJuRhA6KMJwNCSPkWmCoxJb5c0gEk2peNiYOZsGK01uWY+
+         JK2ZnAiLSAb9wgzwQu7wlc/KNmORiIqCLdKJ3V8rp7OCu2nPXGMI65YfO0UVDSWkwKkp
+         hggTvq/kdfxRCvNZXPbWV4c/lNt1Hm1ObLO2YGUQKgYtgcBHu04P9jxnZNCY0PN0oSEQ
+         nVwCfT7dBNFZlMs9EANTSKKJlMKgmsmpFutOSXyPi/LG2hHCLJp2KJ+chRrqTAAefj1G
+         yfSySWiT44U8rH86j9iyZgk+d494y2/QJjxmmj9c2MmCUSbD2UoszDsaxxy73i5hvuJQ
+         NSTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793314958; x=1793919758;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=pdQPJwzRJN+nwSRrKcHiePRwRlhix19hahTM/4bzC3U=;
-        b=Y/3dBUpT46D/x6zzwp3M7R7nPFGw2Gs7/jpeZRlqBRuMzUv151PI3zDJ+GuOvA7Sbe
-         1ZVGA/koN0LN+JP8yqLQa+t6ZDM8nnPxI3acY9unE1m9kZp/3V1BwM7qHaosOExzB5am
-         p2InYzajm/XbOOhYWtqHEDBxg/YANmZeTWxsKFMvARD10Vmw44tT4IZRCPPw/rYz0ZCZ
-         LBIr8/oF3rV3eTp1B14lHRrXqPU9ahD4033+hx2Dwqt6Djex8scUzzWzUhcMe6dMiVMR
-         qp3SSUWhsCYgPTm74KiBSw4Ch6/ly4tQhuvxrg8S+MBX5JQRZ+3+paY1sHo2A3mLpDHe
-         IXzA==
-X-Forwarded-Encrypted: i=1; AKwUvByRBrxKdABKZgvVRQlULUgMPIrNqS1KPYdrISSePCNNcaQ2jscXgG4H6eGGRigPf2vnhslDrXS3GqLrBlLk@vger.kernel.org
-X-Gm-Message-State: AFq9FYIk6up6C1e4XlOp9qGwpaMIywSBqIExduw+sZm/IYNpQcpXZB+d
-	jeJWwDDZ2yyaZC6aHVOx2Vt4Pfa4CWj36h93wc2aG9fBFhpMvlsE1Vnp
-X-Gm-Gg: AYBFou2tcIqr1Fp+UG7EBr/BHnBkQ1VXMOfK4hbb2ehQqn4KHzTmOashvTVFoKBLVcP
-	GmWONSocGQ9mDsWjlzS0c3DYBd9uPLT0goLRnlHq28c4sS5EcUCyDViXSAnrOoetKhm9Sfg79uW
-	YNTKheXWPU1LHQECPJmc426riO7RtxnCc0H0qxm/P/ZcU1OSyhF3mqvx/h8ER7pVfRoZT/aiJoe
-	Fqj7u7PI5P3HhhUKQ7ZJFXbq9QQG15XsqmYTEd4JmjQ6PXnzCpzCXm2HqFlnQi4HygfTun0//B6
-	nNC2qJZFmIAHDulY7uyJRD14iXnyyNGks6dBwrTXaLJTzROm83nVEt5qnihJRNYRyXotVthRVES
-	zBxMJSnNnLmgHUrKzksgnReY93F+Xm8m+auR5JzvfDOp0riOUo0fJQojo0ebRWUSON+d8uky6HL
-	ibKHAbGukSo7kD82SzSzsW/aWv6uf30F5y9j1/uWuBWIekZizAf6C9THso+SVF47XaH/aZEVvgT
-	EYKCm9jIacUEhWiKG4qFV78/nUZceEgZejlqlsYBDsG9y+0RbaWaYbbdQZkTGHJxjasjR3EI1Jt
-	c1n6mZ5QG9/gcPloOjSNBUEPIqlW0ps5Coc2VnTZ94rnRD/7SfOmyLX7ZoKS3K+sQA==
-X-Received: by 2002:a05:620a:870e:10b0:940:f21a:eb64 with SMTP id af79cd13be357-944216f3e4amr127183785a.5.1793314957732;
-        Thu, 29 Oct 2026 16:02:37 -0700 (PDT)
-Received: from [192.168.50.231] ([142.255.23.46])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-94424133d61sm2791485a.3.2026.10.29.16.02.36
+        d=1e100.net; s=20260707; t=1793321356; x=1793926156;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
+        b=De/fET8gSlIfyWJnyj6MoAokDhPa+a6+2XFNpX8TdpsrF0aaHZdsbVIAQ0spIusuwQ
+         KTtvwYBvi29UaA/ieFjG0i7PzrdKltJwt1Mqh/TK/+HCDFCXs5ur7P5M3q0/YwKM1J79
+         Wmui/GwjCu4kL+7CD4gnGa/cL5oFzoA6VFmXg3V/uAnT/TT5n3XTQTnnh6iVQrPBWE4W
+         1PYu4szytN6za4erc0rTfQBNvlHxobfZlQdMsfPBg7q2+Zbm0G9etY7oBFxfWN2waiOc
+         gjuAUexkAvFUaY2i3uQ+UBZfGltGUsqJvcHlHM99Yp6tf2eZVqW7nhNw3gJlD5xMVQTr
+         nC9Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxiGr51T89WGYLuVjr/ipF80ibUa9WQ8Z3tj7ted2rLEJfjZXuRVLCzxzop1f9apX7qskhNQEfrTzaKQAJH@vger.kernel.org
+X-Gm-Message-State: AFq9FYISEauQLZPH7TOvDl0a0ODTJ26/3UDhX+TkfSxbpTaM+1/e7pRp
+	Nuh61gVdP1aHbb7JmenvHAc5tzUdo3s1zGTeaXE52osTZ0ZcYjsK8fw7
+X-Gm-Gg: AYBFou0ZznUnQLk4ncWifulTjj3FwXnD1tJuTtr+JX7ELL8slmLQt1HUFK+P+EHRPao
+	zPLCwcu/241hXxsffo0so1ynNmT3K61LtMlay5tD0Rc1pvt6i1i6edZvmA5UQed3HZbA0HoWLao
+	oziB0JilaNPEY8TLjT3DzoiosCovSbDhVJOiiPIhoomHMzIOsJ9n2/mjjBl3+Mfr7Pb6nPzUZp8
+	doAOEABBR1n5UGdD7K3acDyMvoh/kOI/y+AWIQRllAiTqGMYSEsXo8DVahrmiYpzaPFVujpH+sk
+	kGiGtltI7/hdgMwiYeQYkwoKM5YO2Rrd4NwC2vVTFL3wqysWubnSLtw41vOa3R0IpZ97B9jYHYi
+	Gj1/UN0p0xW5asoZT8hOa0Lx/hbwzPOZO5ENAYtZX2jzbarUW1p6gFSJtXVz6cyPzE9Xyuiw8Rg
+	Hz+BT/vXH4YeXoIobgWD0UvTOhV7LE3woGl823M2Dy0TuoYuMAIZK9H8tZYatq5D99q7mouUBhc
+	o8z4t3s5+o33T8ga14EAYjzzfYwBJV1tqyD9mhZKDqtZHWQEi5ao+bMbfOWvkQHJssrtLn9L0H0
+	7SvCqbiI0lTt/Hs7XXnKuTQdq9+xXiJlZQcyrktOkGw3x0lGa+BYs+TZISznbKaatuJd146lh5E
+	x8EYvSWDEWh5qEVA=
+X-Received: by 2002:a5d:5d06:0:b0:48e:2a04:4ea3 with SMTP id ffacd0b85a97d-48e6e2c05e3mr2211332f8f.8.1793321356382;
+        Thu, 29 Oct 2026 17:49:16 -0700 (PDT)
+Received: from iamyoubutArch (smal-20-b2-v4wan-173097-cust1152.vm20.cable.virginm.net. [77.97.36.129])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b728ddsm158055f8f.9.2026.10.29.17.49.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 16:02:37 -0700 (PDT)
-From: Connor Abbott <cwabbott0@gmail.com>
-Date: Thu, 29 Oct 2026 19:02:30 -0400
-Subject: [PATCH v2] drm/msm: Fix GMEM_BASE on a8xx
+        Thu, 29 Oct 2026 17:49:15 -0700 (PDT)
+From: Filippo Falezza <effeffe99@gmail.com>
+To: Sreeshankar K <sreeshankar0910@gmail.com>
+Cc: Filippo Falezza <effeffe99@gmail.com>,
+	andersson@kernel.org,
+	sboyd@kernel.org,
+	bmasney+clk@redhat.com,
+	jbrunet+clk@baylibre.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	rafael@kernel.org,
+	viresh.kumar@linaro.org,
+	konradybcio@kernel.org,
+	danila@mainlining.org,
+	davidwronek@gmail.com,
+	mani@kernel.org,
+	robimarko@gmail.com,
+	linux@gurudas.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org
+Subject: Re: [PATCH v11 0/5] Add initial support for Qualcomm SM7250 SoC
+Date: Fri, 30 Oct 2026 00:48:43 +0000
+Message-ID: <20261030004903.1068342-1-effeffe99@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261016042432.824-1-sreeshankar0910@gmail.com>
+References: <20261016042432.824-1-sreeshankar0910@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,64 +117,57 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-drm-msm-gmem-base-fix-v2-1-26b338471b46@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNQQ6CMBBFr0Jm7Zi21oKuvIdhUcpYJnGAtIZoC
- He3cgGX7yX//RUyJaYM12qFRAtnnsYC5lBBGPwYCbkvDEYZp5W5YJ8EJQtGIcHOZ8IHv5F0Z5T
- VjSfXQNnOiYreu/e28MD5NaXPfrPon/1XXDRqPNnaWRPOrlbhFsXz8xgmgXbbti/Yy28iugAAA
- A==
-X-Change-ID: 20261029-drm-msm-gmem-base-fix-e1b20418ae68
-To: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, Connor Abbott <cwabbott0@gmail.com>
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 
-This was missed during initial bringup because GMEM_BASE is not used
-anymore for textures on a8xx. However other things such as mesh shading
-still use the GMEM aperture. Fix it to match the value programmed into
-the registers.
+Hello Sreeshankar,
 
-Fixes: 288a93200892 ("drm/msm/adreno: Introduce A8x GPU Support")
-Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
----
-Changes in v2:
-- Fix enum name
-- Link to v1: https://lore.kernel.org/r/20261029-drm-msm-gmem-base-fix-v1-1-347642c5670c@gmail.com
----
- drivers/gpu/drm/msm/adreno/adreno_gpu.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+I'm bringing up mainline on a Motorola Moto G 5G Plus (XT2075-3,
+"nairo", SM7250), and your series is the base of it: I carried v9 and
+have now moved to v11, on top of next-20261021. On top of it I have the
+rest of what the phone needs at SoC level: TLMM, the apps SMMU, USB 2.0,
+UFS, SDHC, the GPU and display, interconnects, IPCC/AOSS, the modem,
+Wi-Fi, IPA, TSENS and the ADSP with the LPASS codec macros.
 
-diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-index 5832dc25d6bf..5b05386ecffe 100644
---- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-@@ -382,7 +382,9 @@ int adreno_get_param(struct msm_gpu *gpu, struct msm_context *ctx,
- 		*value = adreno_gpu->info->gmem;
- 		return 0;
- 	case MSM_PARAM_GMEM_BASE:
--		if (adreno_gpu->info->family >= ADRENO_6XX_GEN3)
-+		if (adreno_gpu->info->family >= ADRENO_8XX_GEN1)
-+			*value = SZ_64M;
-+		else if (adreno_gpu->info->family >= ADRENO_6XX_GEN3)
- 			*value = 0;
- 		else
- 			*value = 0x100000;
+With v11 in place of v9 (only the GCC driver differs), plus the two
+sm7250.dtsi changes below, the phone boots with no stuck clocks or GDSC
+errors, and the clock messages at boot are the same as with v9. UFS, the
+SD card, the USB gadget, the GPU and display, Wi-Fi, the modem with SMS
+and calls, and audio all work, and three s2idle cycles resume with USB,
+UFS and Wi-Fi intact, as does a wakeup by SMS.
 
----
-base-commit: 9c31496a57579d0a46e1eabb8f53ec735b72d180
-change-id: 20261029-drm-msm-gmem-base-fix-e1b20418ae68
+Tested-by: Filippo Falezza <effeffe99@gmail.com> # Motorola Moto G 5G Plus (SM7250)
 
-Best regards,
--- 
-Connor Abbott <cwabbott0@gmail.com>
+Two changes to sm7250.dtsi that I carry for the phone:
 
+The cpu-map puts core6 in cluster1 and core7 in cluster2. The kernel
+then prints "/cpus/cpu-map/cluster1: empty cluster" and drops the whole
+cpu-map, since it looks for core0, core1, ... in each cluster. SM7250
+is a single DynamIQ cluster, so I put all eight cores in cluster0, as
+sm8250.dtsi does. This is the same thing the review bot raised on 5/5.
+
+The cluster idle states: the downstream lito devicetree uses the modes
+0x224 and 0xc24 for the two cluster power-collapse states, which gives
+arm,psci-suspend-param = <0x41002244> and <0x4100c244> rather than
+<0x41001244> and <0x4100b244>. With those values the RPMh sleep stats
+show the SoC reaching CX collapse and AOSS sleep in s2idle. I haven't
+checked what the current values do.
+
+I'm happy to send both as patches on top of your series, or you can
+fold them into the next version, whichever you prefer.
+
+On 2/5, the bot's point about ftbl_gcc_cpuss_ahb_clk_src looks right to
+me: v11 changed its source from P_BI_TCXO to DT_BI_TCXO_AO, but the
+table entry needs the parent map's source value, which is P_BI_TCXO.
+Nothing sets that rate on the phone, so I can't confirm it at runtime.
+
+Once your series is in, I'd like to send the remaining SoC support and
+the board devicetree, so that sm7250.dtsi has a board using it. Are you
+working on any of those parts yourself? I'd rather not duplicate your
+work, and I can send them as a series that depends on yours in the
+meantime.
+
+I did the testing and wrote this note with the help of an AI coding
+assistant (Claude Code); the results are from the phone.
+
+Thanks,
+Filippo
