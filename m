@@ -1,48 +1,48 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793354685;
-	b=5qRsVzwiZORgRmQ8B9hFeQtwFuBvMH+GnA3MUDIQdyPikywuks9SZvVRPUMb1nF0WCRG
-	 FBrDoKgIntVCpSiNdZr6kIKjEYh37hT5T0AiGjauJfbmQsXhh7JVDTM2abzqBrpnuZak1
-	 rRKAwEO2w4RCgMnyIF5UY6AvIkOhsPJW/jquqjZF/OuEg+Qr9nmpxJ1IwhOogqGAPoUzF
-	 M/kDhytgBw9/MEhFyXdDT5ZMKUhFSllWYtwMs0KMD1OMr1s0gQ+ulVRgasAxhf8NTfb9I
-	 L0Oru7G6mhOMJv4fuD1nju1YrR14MJnPggTdO2DXa14odcftD6GieP6F1DZ9+PJytQg==
+	t=1793354690;
+	b=iFMnZ0ut1sG4/UvNO7ZLnh+z2oU2LWIfDMaxvKZWIeu2jX4Bsbk7OPiEfiKLK6fTGzkj
+	 Hvasa1tIODFuUPqkgEtcjckxe5w4GNhegeB9JsZKQnxFVtpZQNdinhuS0TzD0vsxo2AnQ
+	 m5W8+l54/z4Fk9fY6VBBnYxhSOV0fd6e1GyKhMPqWeq6S15YkQu+t0Snw8YYzSepGswKT
+	 2uM+rqqEMuQL1jk3kkuicfG8wbPwN1W4WDv3y9DtkBoLl+ETXmrE9+6cnecykSKYl3NjP
+	 bNrL9kM3OZzfB41uk0M+OjPU9l7jAwx3y8n2ekBzGkOhxINwr7uDZKE/alY5CzLUaEQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793354685;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793354690;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=2Km72riBSxbB78ZLWTvdk5C/oNGGA8nwjAjVFneM95Y=;
-	b=yvG1pAB2dWT27q5SKmc5x+G6vhawaufPkDiMJEOtfZFpmpqqBc5rze5ox07sHLF/h+dT
-	 Vdwj7ucl63+hRd7WJ+HH52km9xQAgmWzlQlb517DgBIGITF9u5TOMbONOWvN6tdrlSpu6
-	 2Y2kEBd+Ne+YolJKxCqIVUQhWZikDS+abQvJhW0Zc0i2zK7siRkJW4H1coTSVreKRq1iT
-	 4C6YS0A+q30OiU21v/4690wznm2SIg6oWvitxtCoG5J0cub2XaclomuWcSvEA9KQNosUe
-	 XYnUXZgmmOgIiL7qJMdSvd5Jq5bebaaAgbz3PKRZXDa695JZgjGXwjLsnYMll8bc1qQ==
+	bh=eNr9dnCkIR9pj1WBZtZvQl4J+dfCkPAYIU8zKR6mMjo=;
+	b=l9t7veLeFHB7rBuu6UceTvOVE1x9C1x0QhRTRpwUph0AxYagQF4oD55AzqtfyoNByW5L
+	 4CKa+QyiPbT+yJcueM+C64EWr4As/HN7c8fCtwjcRXTQhaNfcXbwS9XBgMqRjYTY3VxU3
+	 EGkwoJVnds3cfwmlevvaDRxpkQS94PYc9Nkt7E2CHlWS2gc6VQGyYyUjdR1AR1+gJ4AmM
+	 IQwCt713mVOiCQbz85tLIRto5VTb7T3sxdwFBN8Tm/vlZ0Z9qh1vz4OgvjNtEIbC/WyOu
+	 GAnxq8WyLSmpxbx61GR2fGNdD0z+my7rJOerWMtQMpxgMN3F/Rsu5L5SJ6Hd0B8I9Mg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FCPb1mPN;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PmCAs8AD;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFE3B606A31E;
-	Fri, 30 Oct 2026 10:04:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A97B606A31D;
+	Fri, 30 Oct 2026 10:04:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FCPb1mPN
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3795E1F00A02;
-	Fri, 30 Oct 2026 10:04:41 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PmCAs8AD
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F26F1F00A02;
+	Fri, 30 Oct 2026 10:04:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793354684;
-	bh=2Km72riBSxbB78ZLWTvdk5C/oNGGA8nwjAjVFneM95Y=;
+	s=k20260515; t=1793354689;
+	bh=eNr9dnCkIR9pj1WBZtZvQl4J+dfCkPAYIU8zKR6mMjo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=FCPb1mPNobjkY5vELG7orR/HMCbSFjB/biiI52tJv0j694wfZVksoQl+m4EW9OlFd
-	 OQZ6B2sYzvXJxiIiiPPTE+tCS6tE+2UxLSK9vINyGnQmxgZaLqtScnYKT18Qa8Qyfc
-	 e8lTjCM/NMNp2hI9xokY5ib4cs/dXubBPokUEX7EpU4DC+m+OI6i5pBZJl2YluQ2Y7
-	 TZ3+4LztiMbfTIh8C4rIPLhOVqC+huScsQ2KCl7sU032USK0NrOvMowearFL7sQSGu
-	 JsVRx8fKAAklFaJ3dwOV3Xn1hgsqndf9vXMhSfyNo9HUNR9Q4+lOee8rpyQ1srfv/N
-	 6iJoQ4ptK7N7A==
+	b=PmCAs8ADe3gd6k1AMqbkC6jqNhWQCHfHZQEBOaduu7zg/vByPpU41OFQGciBE7T2j
+	 9kEEe4d7zfenXu11R9Ocs0F1Ohkk/TgOOPC49an96wE7l4cE9kZQdJ8dyILN0NytHj
+	 iL8+tb/dVmrHX7EvktKJC7LYm5LxGoe0lzC8pqzHxYN/uUq0SInU2T0AAMi9D52wFq
+	 MefFbKoDqZJJc2GBmwvSLmkOxpTx8IWfQPJE740QHY0a7mRfSnstS16JatzkCPzjQy
+	 QprQByW3XFHWCRdGc2sUPPs3U+ddutV8jSlLD3/+NvD4FRSXb5f8DlSKeY0m1SFVoJ
+	 2KtPbY6LKviqQ==
 From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Fri, 30 Oct 2026 11:03:59 +0100
-Subject: [PATCH 3/8] drm/msm/a6xx: Expose GMU IFPC entry count in debugfs
+Date: Fri, 30 Oct 2026 11:04:00 +0100
+Subject: [PATCH 4/8] drm/msm/a6xx: Add A6xx IFPC support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -54,7 +54,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261030-topic-a6xx_ifpc-v1-3-6992841a9a32@oss.qualcomm.com>
+Message-Id: <20261030-topic-a6xx_ifpc-v1-4-6992841a9a32@oss.qualcomm.com>
 References: <20261030-topic-a6xx_ifpc-v1-0-6992841a9a32@oss.qualcomm.com>
 In-Reply-To: <20261030-topic-a6xx_ifpc-v1-0-6992841a9a32@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
@@ -69,205 +69,228 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793354666; l=6722;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793354666; l=7868;
  i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=0aOndrWHEh4zmhYvnE2Brc3+1iBno8gF1nV/vdEKIg8=;
- b=ZGf0PjmtGTpEi37/Ql36ujTyjuCBH7+uD5vtcWnN0RneNAXSlzsZLiM2fzjaZkGMPVrgvbTA1
- sjsUNkhMhFsAd6V17WTmaNE2mNp2ICVg+rtRFNxXL1wPUWfNh4ZxQJV
+ bh=tzqff6PXIby6DnSjlBute6+JeM8A+PAtyWC2JBC9/rM=;
+ b=6GdvVnMyqDYL/4+NC3GRXOYzGvBun8BsYY5ag8FO7inMBIKWO4d1uJ+ZrST1fqLWi5P1coFcj
+ HlJCxlrkzJ5Af/aA4ks7VBzAPeNoUkMCYK7T61g/dtLDTIY+Y8M3M1P
 X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
  pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Add a read-only debugfs file, ifpc_count, that reports how many times
-the GMU has entered IFPC.
-
-The count is accumulated from the GMU XOCLK_4 power counter. The
-counter is selected in hw_init, and the delta is folded into the total
-from the busy callback, so the value advances whenever devfreq samples
-the GPU.
+IFPC is largely supported by the current upstream driver, add the
+missing plumbing that's specific to A6xx, based on kgsl.
 
 Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/Makefile              |  1 +
- drivers/gpu/drm/msm/adreno/a6xx_debugfs.c | 23 +++++++++++++++++++++++
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c     | 30 ++++++++++++++++++++++++++++++
- drivers/gpu/drm/msm/adreno/a6xx_gpu.h     | 10 ++++++++++
- drivers/gpu/drm/msm/adreno/a8xx_gpu.c     |  9 +++++++++
- 5 files changed, 73 insertions(+)
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c             | 97 +++++++++++++++++++++--
+ drivers/gpu/drm/msm/adreno/a6xx_hfi.c             | 11 ++-
+ drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml |  1 +
+ 3 files changed, 98 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/Makefile b/drivers/gpu/drm/msm/Makefile
-index 1e246616f83f..afd42e5bda00 100644
---- a/drivers/gpu/drm/msm/Makefile
-+++ b/drivers/gpu/drm/msm/Makefile
-@@ -30,6 +30,7 @@ adreno-y := \
- 	adreno/a8xx_preempt.o \
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+index e7c3da5d3ac6..8ea9ab5b9886 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+@@ -647,6 +647,7 @@ static void a6xx_set_hwcg(struct msm_gpu *gpu, bool state)
+ 	unsigned int i;
+ 	u32 cgc_delay, cgc_hyst;
+ 	u32 val, clock_cntl_on;
++	u32 gmu_wfi_config;
  
- adreno-$(CONFIG_DEBUG_FS) += adreno/a5xx_debugfs.o \
-+	adreno/a6xx_debugfs.o \
+ 	if (!(adreno_gpu->info->a6xx->hwcg || adreno_is_a7xx(adreno_gpu)))
+ 		return;
+@@ -674,12 +675,20 @@ static void a6xx_set_hwcg(struct msm_gpu *gpu, bool state)
+ 	else
+ 		cgc_hyst = 0x5555;
  
- adreno-$(CONFIG_DRM_MSM_GPU_STATE)	+= adreno/a6xx_gpu_state.o
++	/* TODO: Also A620 */
++	if (adreno_is_a640(adreno_gpu) || adreno_is_a650(adreno_gpu))
++		gmu_wfi_config = 0x2;
++	else
++		gmu_wfi_config = 0;
++
+ 	gmu_write(&a6xx_gpu->gmu, REG_A6XX_GPU_GMU_AO_GMU_CGC_MODE_CNTL,
+ 			state ? adreno_gpu->info->a6xx->gmu_cgc_mode : 0);
+ 	gmu_write(&a6xx_gpu->gmu, REG_A6XX_GPU_GMU_AO_GMU_CGC_DELAY_CNTL,
+ 			state ? cgc_delay : 0);
+ 	gmu_write(&a6xx_gpu->gmu, REG_A6XX_GPU_GMU_AO_GMU_CGC_HYST_CNTL,
+ 			state ? cgc_hyst : 0);
++	gmu_write(&a6xx_gpu->gmu, REG_A6XX_GMU_CX_GMU_WFI_CONFIG,
++			state ? gmu_wfi_config : 0);
  
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_debugfs.c b/drivers/gpu/drm/msm/adreno/a6xx_debugfs.c
-new file mode 100644
-index 000000000000..a3f622cb189f
---- /dev/null
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_debugfs.c
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include <linux/types.h>
-+#include <linux/debugfs.h>
-+
-+#include <drm/drm_file.h>
-+
-+#include "a6xx_gpu.h"
-+
-+void a6xx_debugfs_init(struct msm_gpu *gpu, struct drm_minor *minor)
+ 	if (!adreno_gpu->info->a6xx->hwcg) {
+ 		gpu_write(gpu, REG_A7XX_RBBM_CLOCK_CNTL_GLOBAL, 1);
+@@ -878,6 +887,43 @@ static void a7xx_patch_pwrup_reglist(struct msm_gpu *gpu)
+ 	a6xx_gpu->dynamic_sel_reglist_offset = dyn_pwrup_reglist_count;
+ }
+ 
++static void a6xx_patch_pwrup_reglist(struct msm_gpu *gpu)
 +{
 +	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
 +	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
++	const struct adreno_reglist_list *reglist;
++	void *ptr = a6xx_gpu->pwrup_reglist_ptr;
++	struct cpu_gpu_lock *lock = ptr;
++	u32 *dest = (u32 *)&lock->regs[0];
++	int i;
 +
-+	if (!minor)
-+		return;
++	lock->gpu_req = lock->cpu_req = lock->turn = 0;
++	lock->list_length = 0;
 +
-+	if (!(adreno_gpu->info->quirks & ADRENO_QUIRK_IFPC))
-+		return;
-+
-+	debugfs_create_u32("ifpc_count", 0444, minor->debugfs_root,
-+			   &a6xx_gpu->ifpc_count);
-+}
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-index 48d3ee4d55d9..e7c3da5d3ac6 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-@@ -1338,6 +1338,11 @@ static int hw_init(struct msm_gpu *gpu)
- 			GENMASK(7, 0), 0x4);
- 	}
- 
-+	if (adreno_gpu->info->quirks & ADRENO_QUIRK_IFPC) {
-+		a6xx_gpu->ifpc_counter_last =
-+			gmu_read(&a6xx_gpu->gmu, REG_A6XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_4_L);
++	/* Static IFPC-only registers */
++	reglist = adreno_gpu->info->a6xx->ifpc_reglist;
++	if (reglist) {
++		for (i = 0; i < reglist->count; i++) {
++			*dest++ = reglist->regs[i];
++			*dest++ = gpu_read(gpu, reglist->regs[i]);
++		}
++		lock->list_length += reglist->count * 2;
 +	}
 +
- 	/* Select CP0 to always count cycles */
- 	gpu_write(gpu, REG_A6XX_CP_PERFCTR_CP_SEL(0), PERF_CP_ALWAYS_COUNT);
- 
-@@ -2334,6 +2339,17 @@ static void a6xx_destroy(struct msm_gpu *gpu)
- 	kfree(a6xx_gpu);
- }
- 
-+void a6xx_ifpc_count_update(struct a6xx_gpu *a6xx_gpu, u32 cur)
-+{
-+	/* A counter below the last sample means the GMU restarted it */
-+	if (cur >= a6xx_gpu->ifpc_counter_last)
-+		a6xx_gpu->ifpc_count += cur - a6xx_gpu->ifpc_counter_last;
-+	else
-+		a6xx_gpu->ifpc_count += cur;
++	/* The CP sees IFPC-only and IFPC + preemption as one list from list_offset */
++	lock->list_offset = lock->list_length;
 +
-+	a6xx_gpu->ifpc_counter_last = cur;
++	/* Static IFPC + preemption registers */
++	reglist = adreno_gpu->info->a6xx->pwrup_reglist;
++	if (reglist) {
++		for (i = 0; i < reglist->count; i++) {
++			*dest++ = reglist->regs[i];
++			*dest++ = gpu_read(gpu, reglist->regs[i]);
++		}
++		lock->list_length += reglist->count * 2;
++	}
 +}
 +
- static u64 a6xx_gpu_busy(struct msm_gpu *gpu, unsigned long *out_sample_rate)
+ static int a7xx_preempt_start(struct msm_gpu *gpu)
  {
  	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
-@@ -2347,6 +2363,11 @@ static u64 a6xx_gpu_busy(struct msm_gpu *gpu, unsigned long *out_sample_rate)
- 			REG_A6XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_0_L,
- 			REG_A6XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_0_H);
- 
-+	if (adreno_gpu->info->quirks & ADRENO_QUIRK_IFPC)
-+		a6xx_ifpc_count_update(a6xx_gpu,
-+			gmu_read(&a6xx_gpu->gmu,
-+				 REG_A6XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_4_L));
-+
- 	return busy_cycles;
+@@ -898,13 +944,43 @@ static int a7xx_preempt_start(struct msm_gpu *gpu)
+ 	return a6xx_idle(gpu, ring) ? 0 : -EINVAL;
  }
  
-@@ -2818,6 +2839,9 @@ const struct adreno_gpu_funcs a6xx_gpu_funcs = {
- #if defined(CONFIG_DRM_MSM_GPU_STATE)
- 		.gpu_state_get = a6xx_gpu_state_get,
- 		.gpu_state_put = a6xx_gpu_state_put,
-+#endif
-+#if defined(CONFIG_DEBUG_FS)
-+		.debugfs_init = a6xx_debugfs_init,
- #endif
- 		.create_vm = a6xx_create_vm,
- 		.create_private_vm = a6xx_create_private_vm,
-@@ -2889,6 +2913,9 @@ const struct adreno_gpu_funcs a7xx_gpu_funcs = {
- #if defined(CONFIG_DRM_MSM_GPU_STATE)
- 		.gpu_state_get = a6xx_gpu_state_get,
- 		.gpu_state_put = a6xx_gpu_state_put,
-+#endif
-+#if defined(CONFIG_DEBUG_FS)
-+		.debugfs_init = a6xx_debugfs_init,
- #endif
- 		.create_vm = a6xx_create_vm,
- 		.create_private_vm = a6xx_create_private_vm,
-@@ -2921,6 +2948,9 @@ const struct adreno_gpu_funcs a8xx_gpu_funcs = {
- 		.gpu_busy = a8xx_gpu_busy,
- 		.gpu_get_freq = a6xx_gmu_get_freq,
- 		.gpu_set_freq = a6xx_gpu_set_freq,
-+#if defined(CONFIG_DEBUG_FS)
-+		.debugfs_init = a6xx_debugfs_init,
-+#endif
- 		.create_vm = a6xx_create_vm,
- 		.create_private_vm = a6xx_create_private_vm,
- 		.get_rptr = a6xx_get_rptr,
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
-index 79912a33e17c..8f0cb168a535 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
-@@ -139,6 +139,10 @@ struct a6xx_gpu {
- 	spinlock_t aperture_lock;
- 
- 	u32 slice_mask;
++/* Select whether multiple hardware contexts can run at once or are serialized */
++#define CP_INIT_MAX_CONTEXT BIT(0)
++/* Enable register protection mode */
++#define CP_INIT_ERROR_DETECTION_CONTROL BIT(1)
++/* Header dump information, reserved */
++#define CP_INIT_HEADER_DUMP BIT(2)
++/* Default Reset states enabled for PFP and ME */
++#define CP_INIT_DEFAULT_RESET_STATE BIT(3)
++/* Drawcall filter range */
++#define CP_INIT_DRAWCALL_FILTER_RANGE BIT(4)
++/* Ucode workaround masks */
++#define CP_INIT_UCODE_WORKAROUND_MASK BIT(5)
++/* Disable the save/restore of performance counters across preemption. */
++#define CP_INIT_OPERATION_MODE_MASK BIT(6)
++/* Register initialization list */
++#define CP_INIT_REGISTER_INIT_LIST BIT(7)
++/* Register initialization list with spinlock */
++#define CP_INIT_REGISTER_INIT_LIST_WITH_SPINLOCK BIT(8)
 +
-+	/* Total GMU IFPC entries, accumulated from the XOCLK_4 counter */
-+	u32 ifpc_count;
-+	u32 ifpc_counter_last;
- };
- 
- #define to_a6xx_gpu(x) container_of(x, struct a6xx_gpu, base)
-@@ -254,6 +258,12 @@ struct a7xx_cp_smmu_info {
- #define A6XX_PROTECT_RDONLY(_reg, _len) \
- 	((((_len) & 0x3FFF) << 18) | ((_reg) & 0x3FFFF))
- 
-+#ifdef CONFIG_DEBUG_FS
-+void a6xx_debugfs_init(struct msm_gpu *gpu, struct drm_minor *minor);
-+#endif
++#define CP_INIT_MASK (CP_INIT_MAX_CONTEXT | \
++		CP_INIT_ERROR_DETECTION_CONTROL | \
++		CP_INIT_HEADER_DUMP | \
++		CP_INIT_DEFAULT_RESET_STATE | \
++		CP_INIT_UCODE_WORKAROUND_MASK | \
++		CP_INIT_OPERATION_MODE_MASK | \
++		CP_INIT_REGISTER_INIT_LIST_WITH_SPINLOCK)
 +
-+void a6xx_ifpc_count_update(struct a6xx_gpu *a6xx_gpu, u32 cur);
+ static int a6xx_cp_init(struct msm_gpu *gpu)
+ {
++	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
++	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+ 	struct msm_ringbuffer *ring = gpu->rb[0];
+ 
+-	OUT_PKT7(ring, CP_ME_INIT, 8);
++	OUT_PKT7(ring, CP_ME_INIT, 10);
+ 
+-	OUT_RING(ring, 0x0000002f);
++	/* Enabled ordinal mask */
++	OUT_RING(ring, CP_INIT_MASK);
+ 
+ 	/* Enable multiple hardware contexts */
+ 	OUT_RING(ring, 0x00000003);
+@@ -919,9 +995,12 @@ static int a6xx_cp_init(struct msm_gpu *gpu)
+ 	/* No workarounds enabled */
+ 	OUT_RING(ring, 0x00000000);
+ 
+-	/* Pad rest of the cmds with 0's */
+-	OUT_RING(ring, 0x00000000);
+-	OUT_RING(ring, 0x00000000);
++	/* Operation mode mask */
++	OUT_RING(ring, 0x00000002);
 +
- extern const struct adreno_gpu_funcs a6xx_gpu_funcs;
- extern const struct adreno_gpu_funcs a6xx_gmuwrapper_funcs;
- extern const struct adreno_gpu_funcs a7xx_gpu_funcs;
-diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-index f892731cd3d3..ba81a1c9c551 100644
---- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-@@ -680,6 +680,10 @@ static int hw_init(struct msm_gpu *gpu)
- 	gmu_write(&a6xx_gpu->gmu, REG_A8XX_GMU_CX_GMU_POWER_COUNTER_SELECT_XOCLK_1,
- 		  FIELD_PREP(GENMASK(7, 0), 0x4));
++	OUT_RING(ring, lower_32_bits(a6xx_gpu->pwrup_reglist_iova));
++	OUT_RING(ring, upper_32_bits(a6xx_gpu->pwrup_reglist_iova));
++	OUT_RING(ring, 0);
  
-+	if (adreno_gpu->info->quirks & ADRENO_QUIRK_IFPC)
-+		a6xx_gpu->ifpc_counter_last =
-+			gmu_read(gmu, REG_A8XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_4_L);
+ 	a6xx_flush(gpu, ring);
+ 	return a6xx_idle(gpu, ring) ? 0 : -EINVAL;
+@@ -1485,8 +1564,12 @@ static int hw_init(struct msm_gpu *gpu)
+ 	/* Enable the SQE_to start the CP engine */
+ 	gpu_write(gpu, REG_A6XX_CP_SQE_CNTL, 1);
+ 
+-	if (adreno_is_a7xx(adreno_gpu) && !a6xx_gpu->pwrup_reglist_emitted) {
+-		a7xx_patch_pwrup_reglist(gpu);
++	if (!a6xx_gpu->pwrup_reglist_emitted) {
++		if (adreno_is_a7xx(adreno_gpu))
++			a7xx_patch_pwrup_reglist(gpu);
++		else
++			a6xx_patch_pwrup_reglist(gpu);
 +
- 	/* Select CP0 to always count cycles */
- 	gpu_write(gpu, REG_A8XX_CP_PERFCTR_CP_SEL(0), 1);
+ 		a6xx_gpu->pwrup_reglist_emitted = true;
+ 	}
  
-@@ -1354,6 +1358,11 @@ u64 a8xx_gpu_busy(struct msm_gpu *gpu, unsigned long *out_sample_rate)
- 			REG_A8XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_0_L,
- 			REG_A8XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_0_H);
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_hfi.c b/drivers/gpu/drm/msm/adreno/a6xx_hfi.c
+index 6b34e704a70d..b07ba7233c2e 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_hfi.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_hfi.c
+@@ -855,7 +855,7 @@ static int a6xx_hfi_feature_ctrl_msg(struct a6xx_gmu *gmu, u32 feature, u32 enab
  
-+	if (adreno_gpu->info->quirks & ADRENO_QUIRK_IFPC)
-+		a6xx_ifpc_count_update(a6xx_gpu,
-+			gmu_read(&a6xx_gpu->gmu,
-+				 REG_A8XX_GMU_CX_GMU_POWER_COUNTER_XOCLK_4_L));
-+
- 	return busy_cycles;
- }
+ #define IFPC_LONG_HYST 0x1680
  
+-static int a6xx_hfi_enable_ifpc(struct a6xx_gmu *gmu)
++static int a7xx_hfi_enable_ifpc(struct a6xx_gmu *gmu)
+ {
+ 	if (gmu->idle_level != GMU_IDLE_STATE_IFPC)
+ 		return 0;
+@@ -1059,6 +1059,7 @@ static int a6xx_hfi_start_v1(struct a6xx_gmu *gmu, int boot_state)
+ 
+ int a6xx_hfi_start(struct a6xx_gmu *gmu, int boot_state)
+ {
++	struct a6xx_gpu *a6xx_gpu = container_of(gmu, struct a6xx_gpu, gmu);
+ 	int ret;
+ 
+ 	if (gmu->legacy)
+@@ -1081,9 +1082,11 @@ int a6xx_hfi_start(struct a6xx_gmu *gmu, int boot_state)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = a6xx_hfi_enable_ifpc(gmu);
+-	if (ret)
+-		return ret;
++	if (!adreno_is_a6xx(&a6xx_gpu->base)) {
++		ret = a7xx_hfi_enable_ifpc(gmu);
++		if (ret)
++			return ret;
++	}
+ 
+ 	ret = a6xx_hfi_send_thinmem_config(gmu);
+ 	if (ret)
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
+index 4f934c194f73..e5fe940d6cbf 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
+@@ -68,6 +68,7 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	<reg32 offset="0x1f82d" name="GMU_CM3_CFG"/>
+ 	<reg32 offset="0x1f840" name="GMU_CX_GMU_POWER_COUNTER_ENABLE"/>
+ 	<reg32 offset="0x1fc10" name="GMU_CX_GMU_POWER_COUNTER_ENABLE" variants="A8XX"/>
++	<reg32 offset="0x1f802" name="GMU_CX_GMU_WFI_CONFIG"/>
+ 	<reg32 offset="0x1f841" name="GMU_CX_GMU_POWER_COUNTER_SELECT_0"/>
+ 	<reg32 offset="0x1f842" name="GMU_CX_GMU_POWER_COUNTER_SELECT_1"/>
+ 	<reg32 offset="0x1fc40" name="GMU_CX_GMU_POWER_COUNTER_SELECT_XOCLK_0" variants="A8XX-"/>
 
 -- 
 2.56.0
