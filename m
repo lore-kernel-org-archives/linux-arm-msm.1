@@ -1,113 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.179
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793321358;
-	b=aNEh4s6DMf4ywRoQvZDwTkRxlIBlMoY1DzTKl+JDMC8ofKahLV8JsFjdmZfDQzlCDJtG
-	 kOAOtBThaEmlOFxKF3J6sVPyJ4P5HNqEL4Ansnx0NZk+N5poXA7JXlyr+T8cg7YGSyI6W
-	 E5wsmgdJt0jcXZwmxgBVBVxIY3+w0WJnQEpbVX0kA0GmvL0zh7CwheYBJ2NOMCMsSyRcF
-	 lOLDwQcLie6mZaBc6r2xdnM+/rsVzd4CeQjJ64KGJTu0n+DcgexcrBTkRTOQRX3r/c524
-	 zdAjEQtJUSGvIa0sTE3v1g5KBYRiQikaNFmYHTMHX5gcYVXVD7I6eOUcLNhylkflIAA==
+	t=1793323922;
+	b=uP+T58JCm2UGwlHfnPx+zT2cfqQ64ek0DCb+zs2p+8wVKclfhmfKwf2OR1BQZyiT8+Zw
+	 D3v7HQvXc1tqi2g1J6gvfcHrKDDwbV/ID1Kxo0rm7d7PjC8BYoIshKnUQsyNsVWi+OZzU
+	 U3Io/IghpjcZX8UgYvKxAoT4sRPVI/Ocn/ZtjHO6sto4NLT4IfyuwUDgyImGhtLKsF14N
+	 qsSZHE5jUhDiMo4Wr8ezY7NBz6FqYD1j3NkQnzoJ38rGgPDzLkM7teJnN/sOpH9aHuKN4
+	 EMNFTjkO0wfTBJE+jVtgOyWmB/+PGnouU11REbTvQfWn9zvvHYk7oCaCVNGS9UqOXxA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793321358;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793323922;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:
+	 X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
-	b=vSMOXukaerduPBXdNEPXbomOjq78p2c1l10zvOSYcntj13R5yc9/h2nf5ulCmhm7NIrJ
-	 w67enFfI8jLUYBkFj00Z80t0bFr/fohWRVp3zniggk3aPFMTIs15R4tj2J66zd+ka8o/U
-	 mp7HIyYmhP+S+SdXGz9vqxRt3UW6EjSA/XDCNAAJ5fULOMiQZenD4CQR/y/XUxr3A0F7y
-	 gX2m0A7gsjQlX28Txw4K9CK6eEaVr4LliuKb00zAJGo7ofYQJrsjhrFHWsxtA4JakqeTA
-	 hHDLh08z4+Zurq9hnVRKHfi3vhIvY2bjhc4qJbmBSwuGqaVcyeh1BKVgvvLKvLjFQCg==
+	bh=QkGJO+kgqaCulrnXtUJH9iL49QSQWCoACVPD9LkI2pI=;
+	b=Z7QF3noxzCgY2j859Y3Ete5+EqOS9M6yGaoo6kHmwemU9LGxjxloylqM4e2oYWPQoNXl
+	 vG0Ddr9FumzjMqEHJP3/kdyYwXDqP9Vz8p5EineUlVgk3Hh38FOoc04oFejGBKMzm846R
+	 lfIHjETyYYdi2CYylOMpvPTk4UJd5fF9HSIc7V2j1+qVw+6t+f/t/SaC9O+dotJiE0Beb
+	 e02rkY6CWA4X4FcoByhfLyzLuRvFxwlBjPgxrWf5Or6LBLj6JgMUFT5dqIBdU/fG+pjq8
+	 /vUbe9Hd3BMTp4LX6xUmB0mVF7H5Q6COV57Isx2xj2g1I7y6zwr2Ays+zY+rW2Tb4wg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZAPRZtIN;
-	arc=none smtp.remote-ip=209.85.128.50
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WIC0P2E9;
+	arc=none smtp.remote-ip=209.85.214.179
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43D75606A320
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 00:49:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 43D75606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8212606A31E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 01:32:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E8212606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZAPRZtIN
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a5036bbac7so562995e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 17:49:18 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WIC0P2E9
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2e5fb79ce82so1306195ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 18:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793321356; x=1793926156; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
-        b=ZAPRZtINaBu5ACaiUNxrIJuRhA6KMJwNCSPkWmCoxJb5c0gEk2peNiYOZsGK01uWY+
-         JK2ZnAiLSAb9wgzwQu7wlc/KNmORiIqCLdKJ3V8rp7OCu2nPXGMI65YfO0UVDSWkwKkp
-         hggTvq/kdfxRCvNZXPbWV4c/lNt1Hm1ObLO2YGUQKgYtgcBHu04P9jxnZNCY0PN0oSEQ
-         nVwCfT7dBNFZlMs9EANTSKKJlMKgmsmpFutOSXyPi/LG2hHCLJp2KJ+chRrqTAAefj1G
-         yfSySWiT44U8rH86j9iyZgk+d494y2/QJjxmmj9c2MmCUSbD2UoszDsaxxy73i5hvuJQ
-         NSTA==
+        d=gmail.com; s=20260707; t=1793323921; x=1793928721; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=QkGJO+kgqaCulrnXtUJH9iL49QSQWCoACVPD9LkI2pI=;
+        b=WIC0P2E9KkJ1uxcE5cLksyz39hhtiUmsnSNL+ZzvDtS+6nQCBPM3FA4iQ0mH2kv/i3
+         3Him82UzE+pgSUNQT76hLQElesMffpDb18NLv1x2PJ1v3HtGDsYLR6fxKy2lSbdTlQh2
+         vpglfKEZdQcjJDFVdvPbOfBeWsqT0SZyvETGb/nlPIA9LGVMsL4FIhi/kwnkoSf/4s3D
+         B0v/rZY21OnvfhSNoZ9HM859eaHuy68xVE1gGMquwZ9HHqAz7bhOU17bN4FD1eoLL2if
+         1cUWnR+W700jDDvZ9D/DajYxTRYBqi5r70QrqTkkTP+YhQIKAK7V8kLaIOPy5wlA0ywJ
+         nIDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793321356; x=1793926156;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NR3OLn3RRpm9Cqw7PJJDQ7C1uwyBOEL9xRH2ABlyeNw=;
-        b=De/fET8gSlIfyWJnyj6MoAokDhPa+a6+2XFNpX8TdpsrF0aaHZdsbVIAQ0spIusuwQ
-         KTtvwYBvi29UaA/ieFjG0i7PzrdKltJwt1Mqh/TK/+HCDFCXs5ur7P5M3q0/YwKM1J79
-         Wmui/GwjCu4kL+7CD4gnGa/cL5oFzoA6VFmXg3V/uAnT/TT5n3XTQTnnh6iVQrPBWE4W
-         1PYu4szytN6za4erc0rTfQBNvlHxobfZlQdMsfPBg7q2+Zbm0G9etY7oBFxfWN2waiOc
-         gjuAUexkAvFUaY2i3uQ+UBZfGltGUsqJvcHlHM99Yp6tf2eZVqW7nhNw3gJlD5xMVQTr
-         nC9Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxiGr51T89WGYLuVjr/ipF80ibUa9WQ8Z3tj7ted2rLEJfjZXuRVLCzxzop1f9apX7qskhNQEfrTzaKQAJH@vger.kernel.org
-X-Gm-Message-State: AFq9FYISEauQLZPH7TOvDl0a0ODTJ26/3UDhX+TkfSxbpTaM+1/e7pRp
-	Nuh61gVdP1aHbb7JmenvHAc5tzUdo3s1zGTeaXE52osTZ0ZcYjsK8fw7
-X-Gm-Gg: AYBFou0ZznUnQLk4ncWifulTjj3FwXnD1tJuTtr+JX7ELL8slmLQt1HUFK+P+EHRPao
-	zPLCwcu/241hXxsffo0so1ynNmT3K61LtMlay5tD0Rc1pvt6i1i6edZvmA5UQed3HZbA0HoWLao
-	oziB0JilaNPEY8TLjT3DzoiosCovSbDhVJOiiPIhoomHMzIOsJ9n2/mjjBl3+Mfr7Pb6nPzUZp8
-	doAOEABBR1n5UGdD7K3acDyMvoh/kOI/y+AWIQRllAiTqGMYSEsXo8DVahrmiYpzaPFVujpH+sk
-	kGiGtltI7/hdgMwiYeQYkwoKM5YO2Rrd4NwC2vVTFL3wqysWubnSLtw41vOa3R0IpZ97B9jYHYi
-	Gj1/UN0p0xW5asoZT8hOa0Lx/hbwzPOZO5ENAYtZX2jzbarUW1p6gFSJtXVz6cyPzE9Xyuiw8Rg
-	Hz+BT/vXH4YeXoIobgWD0UvTOhV7LE3woGl823M2Dy0TuoYuMAIZK9H8tZYatq5D99q7mouUBhc
-	o8z4t3s5+o33T8ga14EAYjzzfYwBJV1tqyD9mhZKDqtZHWQEi5ao+bMbfOWvkQHJssrtLn9L0H0
-	7SvCqbiI0lTt/Hs7XXnKuTQdq9+xXiJlZQcyrktOkGw3x0lGa+BYs+TZISznbKaatuJd146lh5E
-	x8EYvSWDEWh5qEVA=
-X-Received: by 2002:a5d:5d06:0:b0:48e:2a04:4ea3 with SMTP id ffacd0b85a97d-48e6e2c05e3mr2211332f8f.8.1793321356382;
-        Thu, 29 Oct 2026 17:49:16 -0700 (PDT)
-Received: from iamyoubutArch (smal-20-b2-v4wan-173097-cust1152.vm20.cable.virginm.net. [77.97.36.129])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b728ddsm158055f8f.9.2026.10.29.17.49.14
+        d=1e100.net; s=20260707; t=1793323921; x=1793928721;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QkGJO+kgqaCulrnXtUJH9iL49QSQWCoACVPD9LkI2pI=;
+        b=JnM2GWEj/W3RSWIjsGT5JpYwIgbcgIOBZ00BzAT4Ki75c4gmxPVaqgqoxWBo6WGxUh
+         RbV51FZSTk9ZMW372niRaZCFmDZr9L1WZO9SEvAyzjsbF74m6FUV2QVMwD+r2hp5t2Rk
+         vn9hu8EHJtLjx1bhkkeiwjDBNOhL9Ecc+MzEg0MTXR3mWjGmcdEetEVw4vTGFzBx5b5H
+         yEzDwphEZorthdBvRghNNg+36UNZ05ZPDf8WD+jYNu0Ujb5wKQclTvXIePNVZDVHnb2k
+         zXrLLJzKvp1t+DZBzDziuI5t449eHppEVzC23k+FmtVQj0BFOkAaBVLhSYBxJL3JEjUz
+         t51w==
+X-Gm-Message-State: AFq9FYLsfM4ey+zml2JkIyMTi5HgmQTVPH4sWpeZ+NwigrE3oiDcfJiH
+	MOquSUJhFYWy+FlYCavWcZq8+9RlyzAHQEfP+r7UpeQVDUql44yu08rC
+X-Gm-Gg: AYBFou2XkADLllZMkX2r3uUUEcZM4bab9Z1nB5soZzyZbWbpRLdk8FrPz45ej2FQhMW
+	1CCbo+bJDiYnejFfVLdB3puG+ZwqTErNBmm8cZhqEASF4TjKjPga+ArQyVXdV1RQcNWQU3Lpsks
+	k+yY6+h+DR1pdE/Xx9IhpOyeBd8u/xm+AT7TZ9arq3sdaRXFBiT+7Mz8TteLq6+G5MoKVUoUX5d
+	R0AvNqz7KoUfLsdiwT2aWqgPm6FrFk7XqHtNl6bhxRvIvQqElxx35R5O2d1/26JrRf/8FaBj/Tn
+	Q0vy1cqgQyyRJOngzoDzRsbTjkifcb2YTmgHp9kDdD77FTXAHCmoZ83SCrqpBeofl3V/nCRjV49
+	pJA85oF2w8FTe+yyFxRkX/AikRZfTaBS0jPF7l6IhU/AP6O+6wg4uC+EV22Jpa/y4BWONUjCBwV
+	JZw7jIask6iFlBOAjMuN/dbYlAXGIz1frK3dS0LdWp6HPnNwWJCYrLkGY8RC09Xw7ikSt1m6Jix
+	GmJyQ50vsXjs0VIbrL7+nPYATG+Ugk3wQ0uw4WOlZUH9GAHxlmIDlJesCpz+JUgJEsv8lEYJlVQ
+	MgPr7xUUhDLiTkM6OyL4Y2rKDsSrd/Ga2kVCcQvfi+c=
+X-Received: by 2002:a17:902:c405:b0:2eb:1e07:adb6 with SMTP id d9443c01a7336-2eb364b8b76mr10600705ad.26.1793323921214;
+        Thu, 29 Oct 2026 18:32:01 -0700 (PDT)
+Received: from localhost.localdomain ([240c:c983:5:4bbd:2481:c7c4:68af:3])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2eb392b15f0sm911575ad.73.2026.10.29.18.31.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 17:49:15 -0700 (PDT)
-From: Filippo Falezza <effeffe99@gmail.com>
-To: Sreeshankar K <sreeshankar0910@gmail.com>
-Cc: Filippo Falezza <effeffe99@gmail.com>,
-	andersson@kernel.org,
-	sboyd@kernel.org,
-	bmasney+clk@redhat.com,
-	jbrunet+clk@baylibre.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	rafael@kernel.org,
-	viresh.kumar@linaro.org,
+        Thu, 29 Oct 2026 18:32:00 -0700 (PDT)
+From: ShiTou Hong <redstone.dcity@gmail.com>
+X-Google-Original-From: ShiTou Hong <dc_redstone@outlook.com>
+To: andersson@kernel.org,
 	konradybcio@kernel.org,
-	danila@mainlining.org,
-	davidwronek@gmail.com,
-	mani@kernel.org,
-	robimarko@gmail.com,
-	linux@gurudas.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
+	conor+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v11 0/5] Add initial support for Qualcomm SM7250 SoC
-Date: Fri, 30 Oct 2026 00:48:43 +0000
-Message-ID: <20261030004903.1068342-1-effeffe99@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261016042432.824-1-sreeshankar0910@gmail.com>
-References: <20261016042432.824-1-sreeshankar0910@gmail.com>
+	ShiTou Hong <dc_redstone@outlook.com>
+Subject: [PATCH v3 0/6] arm64: dts: qcom: sm8250-hdk: Enable additional peripherals
+Date: Fri, 30 Oct 2026 09:31:29 +0800
+Message-ID: <20261030013135.158157-1-dc_redstone@outlook.com>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,55 +99,40 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hello Sreeshankar,
+This series enables additional peripherals on the Qualcomm SM8250 HDK.
 
-I'm bringing up mainline on a Motorola Moto G 5G Plus (XT2075-3,
-"nairo", SM7250), and your series is the base of it: I carried v9 and
-have now moved to v11, on top of next-20261021. On top of it I have the
-rest of what the phone needs at SoC level: TLMM, the apps SMMU, USB 2.0,
-UFS, SDHC, the GPU and display, interconnects, IPCC/AOSS, the modem,
-Wi-Fi, IPA, TSENS and the ADSP with the LPASS codec macros.
+It wires up the SDHC2 controller, the LT9611UXC HDMI bridge, the FSA4480
+USB-C protocol chip, the PCIe ports, QCA6390 Wi-Fi/BT support, and the
+PM8150B LEDs in the SM8250 HDK device tree.
 
-With v11 in place of v9 (only the GCC driver differs), plus the two
-sm7250.dtsi changes below, the phone boots with no stuck clocks or GDSC
-errors, and the clock messages at boot are the same as with v9. UFS, the
-SD card, the USB gadget, the GPU and display, Wi-Fi, the modem with SMS
-and calls, and audio all work, and three s2idle cycles resume with USB,
-UFS and Wi-Fi intact, as does a wakeup by SMS.
+Signed-off-by: ShiTou Hong <dc_redstone@outlook.com>
+---
+Changes in v3:
+- Move the omitted `status` properties to the end of the nodes
+- Reordered the root nodes alphabetically which were also omitted in v2.
 
-Tested-by: Filippo Falezza <effeffe99@gmail.com> # Motorola Moto G 5G Plus (SM7250)
+Link to v2: https://lore.kernel.org/all/20261027080758.3990418-7-dc_redstone@outlook.com/
 
-Two changes to sm7250.dtsi that I carry for the phone:
+Changes in v2:
+- Add a cover letter to the patch series.
+- Reordered nodes alphabetically
+- Drop `output-low` and `output-high` properties of the LT9611UXC pinctrl node.
+- Move the `status` properties to the end of the nodes.
 
-The cpu-map puts core6 in cluster1 and core7 in cluster2. The kernel
-then prints "/cpus/cpu-map/cluster1: empty cluster" and drops the whole
-cpu-map, since it looks for core0, core1, ... in each cluster. SM7250
-is a single DynamIQ cluster, so I put all eight cores in cluster0, as
-sm8250.dtsi does. This is the same thing the review bot raised on 5/5.
+Link to v1: https://lore.kernel.org/all/20261023072832.2642647-6-dc_redstone@outlook.com/
+---
 
-The cluster idle states: the downstream lito devicetree uses the modes
-0x224 and 0xc24 for the two cluster power-collapse states, which gives
-arm,psci-suspend-param = <0x41002244> and <0x4100c244> rather than
-<0x41001244> and <0x4100b244>. With those values the RPMh sleep stats
-show the SoC reaching CX collapse and AOSS sleep in s2idle. I haven't
-checked what the current values do.
+ShiTou Hong (6):
+  arm64: dts: qcom: sm8250-hdk: Enable the sdhc_2 port
+  arm64: dts: qcom: sm8250-hdk: Add LT9611UXC HDMI bridge
+  arm64: dts: qcom: sm8250-hdk: Add FSA4480 USB-C protocol chip
+  arm64: dts: qcom: sm8250-hdk: Enable the PCIe ports
+  arm64: dts: qcom: sm8250-hdk: Add support of QCA6390
+  arm64: dts: qcom: sm8250-hdk: Add PM8150b LEDs
 
-I'm happy to send both as patches on top of your series, or you can
-fold them into the next version, whichever you prefer.
+ arch/arm64/boot/dts/qcom/sm8250-hdk.dts | 460 +++++++++++++++++++++++-
+ 1 file changed, 444 insertions(+), 16 deletions(-)
 
-On 2/5, the bot's point about ftbl_gcc_cpuss_ahb_clk_src looks right to
-me: v11 changed its source from P_BI_TCXO to DT_BI_TCXO_AO, but the
-table entry needs the parent map's source value, which is P_BI_TCXO.
-Nothing sets that rate on the phone, so I can't confirm it at runtime.
+-- 
+2.47.3
 
-Once your series is in, I'd like to send the remaining SoC support and
-the board devicetree, so that sm7250.dtsi has a board using it. Are you
-working on any of those parts yourself? I'd rather not duplicate your
-work, and I can send them as a series that depends on yours in the
-meantime.
-
-I did the testing and wrote this note with the help of an AI coding
-assistant (Claude Code); the results are from the phone.
-
-Thanks,
-Filippo
