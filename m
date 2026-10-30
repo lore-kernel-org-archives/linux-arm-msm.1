@@ -1,49 +1,48 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793354704;
-	b=IfXKo8TAufNLtAmwPUBU4bGaptxrpeUP3sHZWY6zi+DN6Ve7UaLlON8Lie9Npqflc7gt
-	 Q80obFZlcDb+nFKV4sK814y9qdLc7a2DjvjwlZDmITPRGgLPzkCPt18gUj7S3LTglRYtX
-	 1b8hphDdIIOLg+WXSlDFf+9W387KHfGQkAyWC/THtStryn9gh53G/yvQ4nURPIcmGBS41
-	 YNtbvK/ZNTgPeR7wlh6T69tv/fPfKVxHqddSeJARPqY7wnGaqmlty3luwZ2ixHPQT6uc3
-	 j5rYWtEdkl1xgVuhXHAEUjh/lMbvtwY8WzbHO8QncDKzFnUyyA9Drlg/wy2dBLj4MYg==
+	t=1793354708;
+	b=Xc61V2aGqdbWzHEnw0sV/KgHUEZTF/mHiiEFQxdyoIxMKYoN++4jj0gFSsKCyiE/AfSn
+	 q8NFrjujxgoLprtjM0PGIu+Eyz+kk7H6W4eJAM2QO+FIQnQy1xxo26n7GJwg+Hf2N76bO
+	 6HpBp9VeYbBCFCjveD4yx5CacLT8Qmvh36AX3kwE5xG2xFOtPXgv7B1DzzP2q5LmlC23B
+	 pKgg++0CnfrUZ14qGiB3Hh740nzl0GWK3nqQWogXl4GX166VcibG6lTyt78h8HUQx/UfH
+	 YbBeZYYeCD4TXwVhNwAUlQYdOIpodgj1h0oQJbDtKABUDX0z7y78LmQoIV1XiVObUyQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793354704;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793354708;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=zs5Q1r6rP4M3nW9zmS+I8v/AXcQ97mITv2VrCDez6vc=;
-	b=yb3MBNGobG0dd2Je4DGcxceN1LS7S9DnVbeP6qmVlELWHTzwfNzrFz2INeXlbWxI/9uf
-	 +H/7JtCbsjqMkjAnYwRVTFGZps4N1q/WlwSCkVtqafHoBNdWVxD+tkEpEn2BzvOqI12OF
-	 wBZlo8wTj4wzv/DGhO6IKdci4EvZWg4v8Ld6RJoDis0e3ZmO25Pefvrt5I3x7fIbCa2CI
-	 zppoAz6V1oq2sTnhNeqVmspMVzqAfwvkFFkUzXHyz9+NQaLunMArXaAnvLGvkN2DYmLsF
-	 3Myy/H5BY1y77Y80miQtlRQoxfBmCk8tUK+MyCQ8E8QSAPm3ytGoOg2xV06Sub3c/Gg==
+	bh=uXANpd37Cwct/XYEMrUojU13RnTVzqQRUO49MH414bM=;
+	b=jePWmVuoGtQrsmFEFyLwd2xrsaqDyipK9OsaEreypEUZ+/Le9st5htr+3vhwUFjEDT9w
+	 vGzwZrXnni+LMR9p4vkShPRnR/OY4+xHuhwZvYZvVoc86fYHRb42shb7xGr/NJ6DIH4M/
+	 Xa7hajSzBvjHt0d8f1wSnj53tK7C8KJGzFlV4NQrrOc3jXyOiF2dKSg0hdthuD4nYEboI
+	 GzpuUz8dNxsvj1KOM7TwRk5SPVPW1nmOqchpGsCAJXADwFw6RY5Y1HtehGvEigSJkL8Ys
+	 LX31ghT/hK1QPK00C85x3XF4nmO/t5THE19u3gxYPxoyDjeo+QfcCra86LjFoWshNQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i73aYAik;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Fq6KzKvC;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B90960A2606;
-	Fri, 30 Oct 2026 10:05:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CDD3606A32E;
+	Fri, 30 Oct 2026 10:05:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i73aYAik
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D744E1F00A16;
-	Fri, 30 Oct 2026 10:05:00 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Fq6KzKvC
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B61151F00A15;
+	Fri, 30 Oct 2026 10:05:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793354704;
-	bh=zs5Q1r6rP4M3nW9zmS+I8v/AXcQ97mITv2VrCDez6vc=;
+	s=k20260515; t=1793354708;
+	bh=uXANpd37Cwct/XYEMrUojU13RnTVzqQRUO49MH414bM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=i73aYAikOPfdNlKf951IH6CtoxWLiSQioCbt2XC4WODEmfnH2ysKg87l7yA/3h6Zd
-	 6BPU+LJf5SqvjnCyQb6FHdrdVIE/T8DaZSXfsv89UaX+IPHYJ+n5Lzoml8D08s4jel
-	 GFISmzehkvH5wK24lg0Bdv5ARioUk8GzB3EqVXKXeC689Yms9B2AblKtTR7aX3J4sh
-	 JyerXIrcplCeHK81rSb0ZvcbnZeWWn0iFgbbcDUX7gVJNotioEdclSosGGvFbDg6wH
-	 /tQ4MNCEK0SdLY6/tMgKHuSNPyy+qYnUddnl3NFKEcyz+HUZynJ97dYJzqQm6k430L
-	 nrcuhbIyOAKNw==
+	b=Fq6KzKvC0OSv4kJ8BggJ28ffUYWzBX0hsh4aBDAV2V2dFG4O7vG8Q2dzzqq8pVmpS
+	 CK+sAs5tIvey4a+irk4a9vA6mGqyv0gcdiEZXWU5rv8wlBoZMBy1S5rG1/ox9SAsUR
+	 KCBl9qcBw60Ye9iwRBViFbgDVYEHBnnyjWinJ6r+iEv4NXMn7W0dd1ddGXBlrBcpnu
+	 7uxflcb1UzQ6vnKiL+qywdqSlQN9tyeo4r4JDsefLx1O0iBzsOSkT8d6bt4m5HkYaq
+	 PdBkooTcfXRWTlA4Tt72snC8JwzBPgbU6zoIaI+d+F7om9OmlU+R3ofu7OBssqS9fD
+	 v9lodZRSQcv1g==
 From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Fri, 30 Oct 2026 11:04:03 +0100
-Subject: [PATCH RFT 7/8] drm/msm/a6xx: Add IFPC tables for Adreno 650
- family
+Date: Fri, 30 Oct 2026 11:04:04 +0100
+Subject: [PATCH RFT 8/8] drm/msm/a6xx: Wire up IFPC on A615-family GPUs
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,7 +54,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261030-topic-a6xx_ifpc-v1-7-6992841a9a32@oss.qualcomm.com>
+Message-Id: <20261030-topic-a6xx_ifpc-v1-8-6992841a9a32@oss.qualcomm.com>
 References: <20261030-topic-a6xx_ifpc-v1-0-6992841a9a32@oss.qualcomm.com>
 In-Reply-To: <20261030-topic-a6xx_ifpc-v1-0-6992841a9a32@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
@@ -70,209 +69,116 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793354666; l=6661;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793354666; l=3728;
  i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=W27p5ieY61FQiZHXylnSdOSb9we191DjVUaNV5hwHYc=;
- b=BBE0fWnTzwfVeqkI4CCMzMd+evRCB0/b2ljpj5jwnTrYuAOOnb8Ocl4YjW5k/OqNEgFYqFAyK
- vkswZEaWk0DCOIW9XuDpHWDa9y4izG357VmCpqj0wx6Cahczwydcrrp
+ bh=7+mQhNOKwZ569zUjyDExjz0WvGK+xLO8MfwYOD29iQ8=;
+ b=6mY+eOBczsyZyU4GTHYPtvV31HzVN9slpW2hH7LAey1Vd0cQajYhucnpcJ5bBfcOhYYX4r3qp
+ X+0ZEySZfMQC3jcOd9hY2NcOEJP7TVxh1LNWQRn3KOnF3aM2wJJI2FP
 X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
  pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Fill out the register tables to enable IFPC on these SKUs.
+They reuse the existing tables, so just wire them up.
 
 Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 122 +++++++++++++++++++++++++++++-
- 1 file changed, 118 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-index 89829fa8f4f4..2d59f7735c90 100644
+index 2d59f7735c90..257771d4eb4d 100644
 --- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
 +++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-@@ -851,6 +851,108 @@ static const u32 a640_pwrup_reglist_regs[] = {
- 
- DECLARE_ADRENO_REGLIST_LIST(a640_pwrup_reglist);
- 
-+/* A650-family IFPC state also includes CP_PROTECT registers 32-47. */
-+static const u32 a650_ifpc_reglist_regs[] = {
-+	REG_A6XX_CP_CHICKEN_DBG,
-+	REG_A6XX_CP_DBG_ECO_CNTL,
-+	REG_A6XX_CP_PROTECT_CNTL,
-+	REG_A6XX_CP_PROTECT(0),
-+	REG_A6XX_CP_PROTECT(1),
-+	REG_A6XX_CP_PROTECT(2),
-+	REG_A6XX_CP_PROTECT(3),
-+	REG_A6XX_CP_PROTECT(4),
-+	REG_A6XX_CP_PROTECT(5),
-+	REG_A6XX_CP_PROTECT(6),
-+	REG_A6XX_CP_PROTECT(7),
-+	REG_A6XX_CP_PROTECT(8),
-+	REG_A6XX_CP_PROTECT(9),
-+	REG_A6XX_CP_PROTECT(10),
-+	REG_A6XX_CP_PROTECT(11),
-+	REG_A6XX_CP_PROTECT(12),
-+	REG_A6XX_CP_PROTECT(13),
-+	REG_A6XX_CP_PROTECT(14),
-+	REG_A6XX_CP_PROTECT(15),
-+	REG_A6XX_CP_PROTECT(16),
-+	REG_A6XX_CP_PROTECT(17),
-+	REG_A6XX_CP_PROTECT(18),
-+	REG_A6XX_CP_PROTECT(19),
-+	REG_A6XX_CP_PROTECT(20),
-+	REG_A6XX_CP_PROTECT(21),
-+	REG_A6XX_CP_PROTECT(22),
-+	REG_A6XX_CP_PROTECT(23),
-+	REG_A6XX_CP_PROTECT(24),
-+	REG_A6XX_CP_PROTECT(25),
-+	REG_A6XX_CP_PROTECT(26),
-+	REG_A6XX_CP_PROTECT(27),
-+	REG_A6XX_CP_PROTECT(28),
-+	REG_A6XX_CP_PROTECT(29),
-+	REG_A6XX_CP_PROTECT(30),
-+	REG_A6XX_CP_PROTECT(31),
-+	REG_A6XX_CP_AHB_CNTL,
-+	REG_A6XX_CP_PROTECT(32),
-+	REG_A6XX_CP_PROTECT(33),
-+	REG_A6XX_CP_PROTECT(34),
-+	REG_A6XX_CP_PROTECT(35),
-+	REG_A6XX_CP_PROTECT(36),
-+	REG_A6XX_CP_PROTECT(37),
-+	REG_A6XX_CP_PROTECT(38),
-+	REG_A6XX_CP_PROTECT(39),
-+	REG_A6XX_CP_PROTECT(40),
-+	REG_A6XX_CP_PROTECT(41),
-+	REG_A6XX_CP_PROTECT(42),
-+	REG_A6XX_CP_PROTECT(43),
-+	REG_A6XX_CP_PROTECT(44),
-+	REG_A6XX_CP_PROTECT(45),
-+	REG_A6XX_CP_PROTECT(46),
-+	REG_A6XX_CP_PROTECT(47),
-+};
-+
-+DECLARE_ADRENO_REGLIST_LIST(a650_ifpc_reglist);
-+
-+/* A650-family restore state adds bicubic weights and UCHE_CMDQ_CONFIG. */
-+static const u32 a650_pwrup_reglist_regs[] = {
-+	REG_A6XX_VSC_ADDR_MODE_CNTL,
-+	REG_A6XX_GRAS_ADDR_MODE_CNTL,
-+	REG_A6XX_RB_ADDR_MODE_CNTL,
-+	REG_A6XX_PC_ADDR_MODE_CNTL,
-+	REG_A6XX_HLSQ_ADDR_MODE_CNTL,
-+	REG_A6XX_VFD_ADDR_MODE_CNTL,
-+	REG_A6XX_VPC_ADDR_MODE_CNTL,
-+	REG_A6XX_UCHE_ADDR_MODE_CNTL,
-+	REG_A6XX_SP_ADDR_MODE_CNTL,
-+	REG_A6XX_TPL1_ADDR_MODE_CNTL,
-+	REG_A6XX_UCHE_WRITE_RANGE_MAX,
-+	REG_A6XX_UCHE_WRITE_RANGE_MAX + 1,
-+	REG_A6XX_UCHE_TRAP_BASE,
-+	REG_A6XX_UCHE_TRAP_BASE + 1,
-+	REG_A6XX_UCHE_WRITE_THRU_BASE,
-+	REG_A6XX_UCHE_WRITE_THRU_BASE + 1,
-+	REG_A6XX_UCHE_GMEM_RANGE_MIN,
-+	REG_A6XX_UCHE_GMEM_RANGE_MIN + 1,
-+	REG_A6XX_UCHE_GMEM_RANGE_MAX,
-+	REG_A6XX_UCHE_GMEM_RANGE_MAX + 1,
-+	REG_A6XX_UCHE_FILTER_CNTL,
-+	REG_A6XX_UCHE_CACHE_WAYS,
-+	REG_A6XX_UCHE_MODE_CNTL,
-+	REG_A6XX_RB_NC_MODE_CNTL,
-+	REG_A6XX_TPL1_NC_MODE_CNTL,
-+	REG_A6XX_SP_NC_MODE_CNTL,
-+	REG_A6XX_PC_DBG_ECO_CNTL,
-+	REG_A6XX_RB_CONTEXT_SWITCH_GMEM_SAVE_RESTORE_ENABLE,
-+	REG_A6XX_UCHE_GBIF_GX_CONFIG,
-+	REG_A6XX_UCHE_CLIENT_PF,
-+	REG_A6XX_RBBM_GBIF_CLIENT_QOS_CNTL,
-+	REG_A6XX_RBBM_PERFCTR_CNTL,
-+	REG_A6XX_TPL1_BICUBIC_WEIGHTS_TABLE(0),
-+	REG_A6XX_TPL1_BICUBIC_WEIGHTS_TABLE(1),
-+	REG_A6XX_TPL1_BICUBIC_WEIGHTS_TABLE(2),
-+	REG_A6XX_TPL1_BICUBIC_WEIGHTS_TABLE(3),
-+	REG_A6XX_TPL1_BICUBIC_WEIGHTS_TABLE(4),
-+	REG_A6XX_UCHE_CMDQ_CONFIG,
-+};
-+
-+DECLARE_ADRENO_REGLIST_LIST(a650_pwrup_reglist);
-+
- static const struct adreno_info a6xx_gpus[] = {
- 	{
- 		.chip_ids = ADRENO_CHIP_IDS(0x06010000),
-@@ -1068,7 +1170,8 @@ static const struct adreno_info a6xx_gpus[] = {
+@@ -1012,7 +1012,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			[ADRENO_FW_GMU] = "a630_gmu.bin",
+ 		},
+ 		.gmem = SZ_512K,
+-		.quirks = ADRENO_QUIRK_4GB_VA,
++		.quirks = ADRENO_QUIRK_4GB_VA |
++			  ADRENO_QUIRK_IFPC,
+ 		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
+ 		.funcs = &a6xx_gpu_funcs,
+ 		.zapfw = "a615_zap.mdt",
+@@ -1021,6 +1022,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x0018000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
+ 		},
+ 		.speedbins = ADRENO_SPEEDBINS(
+ 			/*
+@@ -1044,7 +1047,8 @@ static const struct adreno_info a6xx_gpus[] = {
  		.gmem = SZ_512K,
  		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
  		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
--			  ADRENO_QUIRK_HAS_HW_APRIV,
-+			  ADRENO_QUIRK_HAS_HW_APRIV |
+-			  ADRENO_QUIRK_4GB_VA,
++			  ADRENO_QUIRK_4GB_VA |
 +			  ADRENO_QUIRK_IFPC,
  		.funcs = &a6xx_gpu_funcs,
- 		.zapfw = "a620_zap.mbn",
+ 		.zapfw = "a615_zap.mbn",
  		.a6xx = &(const struct a6xx_info) {
-@@ -1077,6 +1180,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 			.gbif_cx = a640_gbif,
- 			.gmu_cgc_mode = 0x00020200,
- 			.prim_fifo_threshold = 0x00010000,
-+			.ifpc_reglist = &a650_ifpc_reglist,
-+			.pwrup_reglist = &a650_pwrup_reglist,
+@@ -1052,6 +1056,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x00180000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
  		},
  		.speedbins = ADRENO_SPEEDBINS(
- 			{ 0, 0 },
-@@ -1180,7 +1285,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 		.gmem = SZ_1M + SZ_128K,
+ 			{ 0,   0 },
+@@ -1071,12 +1077,15 @@ static const struct adreno_info a6xx_gpus[] = {
+ 		.gmem = SZ_512K,
  		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
  		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
--			ADRENO_QUIRK_HAS_HW_APRIV,
-+			  ADRENO_QUIRK_HAS_HW_APRIV |
+-			  ADRENO_QUIRK_4GB_VA,
++			  ADRENO_QUIRK_4GB_VA |
 +			  ADRENO_QUIRK_IFPC,
  		.funcs = &a6xx_gpu_funcs,
- 		.zapfw = "a650_zap.mdt",
  		.a6xx = &(const struct a6xx_info) {
-@@ -1189,6 +1295,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 			.gbif_cx = a640_gbif,
- 			.gmu_cgc_mode = 0x00020202,
- 			.prim_fifo_threshold = 0x00300200,
-+			.ifpc_reglist = &a650_ifpc_reglist,
-+			.pwrup_reglist = &a650_pwrup_reglist,
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x00180000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
  		},
  		.speedbins = ADRENO_SPEEDBINS(
- 			{ 0, 0 },
-@@ -1207,7 +1315,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 		.gmem = SZ_1M + SZ_512K,
- 		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
- 		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
--			ADRENO_QUIRK_HAS_HW_APRIV,
-+			  ADRENO_QUIRK_HAS_HW_APRIV |
-+			  ADRENO_QUIRK_IFPC,
- 		.funcs = &a6xx_gpu_funcs,
- 		.zapfw = "a660_zap.mdt",
- 		.a6xx = &(const struct a6xx_info) {
-@@ -1216,6 +1325,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 			.gbif_cx = a640_gbif,
- 			.gmu_cgc_mode = 0x00020000,
- 			.prim_fifo_threshold = 0x00300200,
-+			.ifpc_reglist = &a650_ifpc_reglist,
-+			.pwrup_reglist = &a650_pwrup_reglist,
+ 			{ 0,   0 },
+@@ -1102,6 +1111,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x00018000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
  		},
- 	}, {
- 		.chip_ids = ADRENO_CHIP_IDS(0x06060300),
-@@ -1227,7 +1338,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 		.gmem = SZ_1M + SZ_512K,
- 		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
+ 		.speedbins = ADRENO_SPEEDBINS(
+ 			{ 0,   0 },
+@@ -1127,6 +1138,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x00018000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
+ 		},
+ 		.speedbins = ADRENO_SPEEDBINS(
+ 			{ 0,   0 },
+@@ -1143,7 +1156,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 		},
+ 		.gmem = SZ_512K,
  		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
--			ADRENO_QUIRK_HAS_HW_APRIV,
-+			  ADRENO_QUIRK_HAS_HW_APRIV |
+-			  ADRENO_QUIRK_4GB_VA,
++			  ADRENO_QUIRK_4GB_VA |
 +			  ADRENO_QUIRK_IFPC,
+ 		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
  		.funcs = &a6xx_gpu_funcs,
- 		.a6xx = &(const struct a6xx_info) {
- 			.hwcg = a690_hwcg,
-@@ -1235,6 +1347,8 @@ static const struct adreno_info a6xx_gpus[] = {
- 			.gbif_cx = a640_gbif,
- 			.gmu_cgc_mode = 0x00020200,
- 			.prim_fifo_threshold = 0x00300200,
-+			.ifpc_reglist = &a650_ifpc_reglist,
-+			.pwrup_reglist = &a650_pwrup_reglist,
+ 		.zapfw = "a615_zap.mdt",
+@@ -1152,6 +1166,8 @@ static const struct adreno_info a6xx_gpus[] = {
+ 			.protect = &a630_protect,
+ 			.gmu_cgc_mode = 0x00000222,
+ 			.prim_fifo_threshold = 0x00018000,
++			.ifpc_reglist = &a630_ifpc_reglist,
++			.pwrup_reglist = &a640_pwrup_reglist,
  		},
  		.speedbins = ADRENO_SPEEDBINS(
  			{ 0,   0 },
