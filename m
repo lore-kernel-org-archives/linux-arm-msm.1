@@ -1,60 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793357489;
-	b=Njtq/+QOsjbgFI6+E84hc0GG1MXtoP8JP6HbdaPGq8BRsFUaxFdWV/RB7edWDzObumjV
-	 KJKLZtJYpk8Vytntsyk+Rp3EaW4fOP9GY880Nu8TXl0d40HTK3xSO3c5/LNz6aU0Kszis
-	 2KRPFt15KCh0FqqvdTnxV123I3wV6H+VFuykcLCcxVKdmZekgzu61nmJ7OuE8BhuymICl
-	 Xnvwk10FqsOQp0gTvB99LXmLQoZNQRh6Fcwzswpk6mE9l6e0V7xc+yuc8sDoORHzqpEiP
-	 6Um3x4IO2ZTSeo78MBCxuGV9k7YTQuVgiIkE6wCgIbSDij/kdt4gaDgwEkDZjS9+SYQ==
+	t=1793357569;
+	b=cqNP0wNXie5Pfd4JWDgUcMf49nvZtFPAppfxSJN5+3qQs5oEYn7/OZyv0Lral8Qed3He
+	 29Rt0u/uzYxemtCB7ZtR5ZjessTS/9Don5jyPlm1LJYO3ukOAicILOrlQUbZVGJihmtln
+	 9PxxxtErKZ1n3AHtrasZvkdPj0OcnyqLewcb6MDuII0Ep9nvZFSlR/jJN+VUqCGA70Oll
+	 ppCR6nK+0gna2BhSz7o00q7iNX0y7eeCrBlsnQ0WBHGDmgFn4R8RIizhdHLTaNeteFxnO
+	 uPHsiixliM6Of8oBejsja/3QVkOkec3elvvd8tVGZ1K/dU0DbT46XPv2TzXmRmq5KDQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793357489;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=jkfuOKxXS+BlqNqolHs8RWJ+BPSZy5raixNz8ZoqJJU=;
-	b=VC3YqUA/gnGktjLZwS6yqEiXc5rkXC0K/zxhgPuFwv8KFLuvlI33DyPJELdKltQ+foEd
-	 NfURFbVk0xnKOoEGTU65/Je2pqwxmQ3rsrVfnYSPgaYxlHW8miqqQtrudjsMuQ1pztmZO
-	 DTAgIG/ixCWaDWIoj5AFu4dobu1UWhTMvtVlZXKEARa3S3SyUiCFGAyi7G5Ga8q5gpGyu
-	 +yTUpCNydb5dgL9bmI/zFAPUCxyyd65kYBiJyeu9l658rgp1BHZmqwM1sOSWACAgh+ZqC
-	 9wnZjLB1BiTbiZv9h5IQ483Ed5Hqky4eDhW6KCC01ZKVeENHvpT6VlMfX9gu4KmUrhw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793357569;
+	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=VWWIKenWYGAvFi1WPCrXVd8dBP5bg662+zHZf9OO99A=;
+	b=bHjm3BeIYPfnq3PNS8ckr5VjdY+tAGXnEyypW6A7fKVfjb88Ywe0a5gBc8W9oAYrEuao
+	 r570k0URDky7xuIr+oZwZVEkHD11QQVI6xhcgsOXM32eJYc2zxXygZWjwKK4fcZyCredJ
+	 diqqSA6v/X3dgTfZYUcup+/lFSugmHVA4nEtIcwcBgO2bgNYBtPdJHtDcSmQCAfnCPkng
+	 mvd3Xtap7RRfLlh3AUNe+1kIFTXRvgwuzgRrVbZfrAV1sQOakA+Es4kkff9I8XhbC9iV7
+	 KOZFJ3KewxxhvDXJmxONhXOQRIa1HCeAt02z1hYjIPHmbsih4h1rGgNHYFUHKIgRKZA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XNeup1EP;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TDJDFZD6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBCAA606A337;
-	Fri, 30 Oct 2026 10:51:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BAB9606B973;
+	Fri, 30 Oct 2026 10:52:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XNeup1EP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 083E41F000C1;
-	Fri, 30 Oct 2026 10:51:26 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TDJDFZD6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28DF61F00A02;
+	Fri, 30 Oct 2026 10:52:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793357488;
-	bh=jkfuOKxXS+BlqNqolHs8RWJ+BPSZy5raixNz8ZoqJJU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=XNeup1EPnFn6Wo4XuRDs3Y9KCR3BdgdTDuA1QiACwm9qOTkXt1VNjiUpLZZC8UBrD
-	 KJ0TAqcIyzK0j5iOQNDaJLvNhkyNSkMsc82WA2XVkTOXG/vH4xv/NeqWQYWwpswxwI
-	 +oxiz24wjXhOGfYBGX3An+nd+WvslBLCHLR+fdV4iPN3PKT2vzEgxhflKudfFQu7qx
-	 S8djJFsv/xBGlCXuK4xSsYpPQV/2RLCbhgG1zb1iqAVCmdrQS10CuCtZJsa6SSmlv0
-	 j2ZttSrXvIuTVBDMCvichBboYBrQJHUOaM52nQQ/PPz2A2CTHtAhUirh0FbAYwEkLz
-	 MgnJrFh1E54Nw==
-From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-arm-msm@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Subject: [PATCH 10/21] soundwire: qcom: Serialise ctrl->intr_mask updates
-Date: Fri, 30 Oct 2026 10:46:49 +0000
-Message-ID: <20261030104840.3361217-11-lee@kernel.org>
-X-Mailer: git-send-email 2.56.0.317.g454f8302e1-goog
-In-Reply-To: <20261030104840.3361217-1-lee@kernel.org>
-References: <20261030104840.3361217-1-lee@kernel.org>
+	s=k20260515; t=1793357569;
+	bh=VWWIKenWYGAvFi1WPCrXVd8dBP5bg662+zHZf9OO99A=;
+	h=From:Subject:Date:To:Cc;
+	b=TDJDFZD6fUIoHeoy4y+TlzMzz8/kIdhYIS5yHqL1cih++U2j0vJYwGlNR8xSWH0aC
+	 4zGq4U1E/56V+G6IPhL+aK4B+28ePkqGrheN2jivlpIHZNGmUU4U98Le8KzwAR0sJa
+	 Z5aK29K2EPA0ER7H/vRoEU2Ar2iUpOEXJZema6W05bMwV2JCH5R3w/1x5PpfMiN4NE
+	 k+cvcHxbFNflUAF5UQUkV1I0HLMI1F+msSaiLDU0cRudHB5FCyOPWR4J+VUH7b7Jgx
+	 xp0JYJ02KXy6vK/bcSs0hTU3IUVwWUij/xi+Oy7VJ6BHiCgDOrRCDhIdV237X7KV+I
+	 GvXtcQlHNY2+A==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Subject: [PATCH v2 0/3] Commonize Glymur regulator settings for fixed rails
+Date: Fri, 30 Oct 2026 11:52:32 +0100
+Message-Id: <20261030-topic-sip_cob-v2-0-159e29e97c82@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,163 +53,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNwQ6CMBBEf4Xs2ZJSBIkn/8MQ05ZF1gjFLjQaw
+ r9b8OxlkpfMvFmA0RMynJMFPAZickMEdUjAdnq4o6AmMiipykyqSkxuJCuYxpt1RpRF0+a5KrB
+ RFcTN6LGl9+671j/m2TzQTptka3TEk/Of/TBkW++fO2RCikpqU57kUVudXxxz+pr107q+T2NAv
+ a7rF9FRsPDDAAAA
+X-Change-ID: 20261028-topic-sip_cob-65df3325ed28
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>, 
+ Pankaj Patil <pankaj.patil@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793357562; l=2739;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=/mq2+qwGS+4I+uenrleeNKcBCJBnJ5xIMJRRsK8gdGM=;
+ b=RJCbe3pEt3Nn7k7gBvqLb+V2JjCkkeFONnpZIQlaxgFJ57ibBQtRvsGpSnAnadiVHZASGFikS
+ nGAfx6Lag02DKsopkVv2VpMYd+j06TdYWklcNPNXwQVqXWd8mj9tMRL
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-qcom_swrm_irq_handler(), swrm_runtime_suspend(), and
-swrm_runtime_resume() concurrently read, modify, and write
-ctrl->intr_mask and program the interrupt enable registers without
-synchronisation.  Overlapping read-modify-write updates can clobber
-interrupt mask bits and leave the hardware interrupt mask out of sync.
+Certain rails are predefined and will ALWAYS have to be the same for a
+given PMIC configuration (due to electrical and other requirements).
+Factor these out to remove a layer of pain when creating DTs and let
+one have a better way to reason about the settings across the platform.
 
-Add ctrl->intr_lock to serialise accesses to ctrl->intr_mask and its
-associated interrupt mask register updates.
+Glymur-SiP will be the next target after/if this is accepted
 
-Fixes: 74e79da9fd46 ("soundwire: qcom: add runtime pm support")
-Closes: https://sashiko.dev/#/bug/linux-ea523727-6467-42aa-850f-8f838e4b84a8
-Cc: stable@vger.kernel.org
-Signed-off-by: Lee Jones <lee@kernel.org>
+Depends on the (reviewed and awaiting merge) Mahua QCB series:
+https://lore.kernel.org/all/20261027114955.1266499-1-sivansh.gupta@oss.qualcomm.com/
+
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- drivers/soundwire/qcom.c | 25 +++++++++++++++++++++++--
- 1 file changed, 23 insertions(+), 2 deletions(-)
+Changes in v2:
+- Fix regulator ranges, boot test on glymur-crd-cob now
+- Streamline Mahua setup (all Mahuas are CoB)
+- Fix leftovers (Sashiko)
+- Remove L4F0 from all Glymur/Mahua DTs
+- Rebase on the Mahua QCB patchset
+- Drop reviews from p1/p2 due to an invasive rebase
+- Link to v1: https://patch.msgid.link/20261028-topic-sip_cob-v1-0-80ab6704aca3@oss.qualcomm.com
 
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 555045b32a25..cfa3466ff8e1 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -202,6 +202,8 @@ struct qcom_swrm_ctrl {
- 	struct completion enumeration;
- 	/* Port alloc/free lock */
- 	struct mutex port_lock;
-+	/* Interrupt mask and broadcast completion lock */
-+	struct mutex intr_lock;
- 	struct clk *hclk;
- 	int irq;
- 	u32 ee;
-@@ -784,7 +786,9 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 
- 	ctrl->reg_read(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_STATUS],
- 		       &intr_sts);
-+	mutex_lock(&ctrl->intr_lock);
- 	intr_sts_masked = intr_sts & ctrl->intr_mask;
-+	mutex_unlock(&ctrl->intr_lock);
- 
- 	do {
- 		for (i = 0; i < SWRM_INTERRUPT_MAX; i++) {
-@@ -820,10 +824,12 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 				dev_err_ratelimited(ctrl->dev,
- 						"%s: SWR bus clsh detected\n",
- 						__func__);
-+				mutex_lock(&ctrl->intr_lock);
- 				ctrl->intr_mask &= ~SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET;
- 				ctrl->reg_write(ctrl,
- 						ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 						ctrl->intr_mask);
-+				mutex_unlock(&ctrl->intr_lock);
- 				break;
- 			case SWRM_INTERRUPT_STATUS_RD_FIFO_OVERFLOW:
- 				ctrl->reg_read(ctrl,
-@@ -863,20 +869,24 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 				dev_err_ratelimited(ctrl->dev,
- 						"%s: SWR Port collision detected\n",
- 						__func__);
-+				mutex_lock(&ctrl->intr_lock);
- 				ctrl->intr_mask &= ~SWRM_INTERRUPT_STATUS_DOUT_PORT_COLLISION;
- 				ctrl->reg_write(ctrl,
- 						ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 						ctrl->intr_mask);
-+				mutex_unlock(&ctrl->intr_lock);
- 				break;
- 			case SWRM_INTERRUPT_STATUS_READ_EN_RD_VALID_MISMATCH:
- 				dev_err_ratelimited(ctrl->dev,
- 					"%s: SWR read enable valid mismatch\n",
- 					__func__);
-+				mutex_lock(&ctrl->intr_lock);
- 				ctrl->intr_mask &=
- 					~SWRM_INTERRUPT_STATUS_READ_EN_RD_VALID_MISMATCH;
- 				ctrl->reg_write(ctrl,
- 						ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 						ctrl->intr_mask);
-+				mutex_unlock(&ctrl->intr_lock);
- 				break;
- 			case SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED:
- 				complete(&ctrl->broadcast);
-@@ -910,7 +920,9 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 				intr_sts);
- 		ctrl->reg_read(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_STATUS],
- 			       &intr_sts);
-+		mutex_lock(&ctrl->intr_lock);
- 		intr_sts_masked = intr_sts & ctrl->intr_mask;
-+		mutex_unlock(&ctrl->intr_lock);
- 	} while (intr_sts_masked);
- 
- 	clk_disable_unprepare(ctrl->hclk);
-@@ -952,11 +964,13 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 	/* Enable Auto enumeration */
- 	ctrl->reg_write(ctrl, SWRM_ENUMERATOR_CFG_ADDR, 1);
- 
-+	mutex_lock(&ctrl->intr_lock);
- 	ctrl->intr_mask = SWRM_INTERRUPT_STATUS_RMSK;
- 	/* Mask soundwire interrupts */
- 	if (ctrl->version < SWRM_VERSION_2_0_0)
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_MASK_ADDR],
--				SWRM_INTERRUPT_STATUS_RMSK);
-+				ctrl->intr_mask);
-+	mutex_unlock(&ctrl->intr_lock);
- 
- 	/* Configure No pings */
- 	ctrl->reg_read(ctrl, SWRM_MCP_CFG_ADDR, &val);
-@@ -997,8 +1011,10 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 			0xFFFFFFFF);
- 
- 	/* enable CPU IRQs for the selected EE window */
-+	mutex_lock(&ctrl->intr_lock);
- 	ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
--			SWRM_INTERRUPT_STATUS_RMSK);
-+			ctrl->intr_mask);
-+	mutex_unlock(&ctrl->intr_lock);
- 
- 	/* Set IRQ to PULSE */
- 	ctrl->reg_write(ctrl, SWRM_COMP_CFG_ADDR,
-@@ -1689,6 +1705,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	ctrl->dev = dev;
- 	dev_set_drvdata(&pdev->dev, ctrl);
- 	mutex_init(&ctrl->port_lock);
-+	mutex_init(&ctrl->intr_lock);
- 	init_completion(&ctrl->broadcast);
- 	init_completion(&ctrl->enumeration);
- 
-@@ -1854,6 +1871,7 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
- 			SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET);
- 
-+		mutex_lock(&ctrl->intr_lock);
- 		ctrl->intr_mask |= SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET;
- 		if (ctrl->version < SWRM_VERSION_2_0_0)
- 			ctrl->reg_write(ctrl,
-@@ -1861,6 +1879,7 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 					ctrl->intr_mask);
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 				ctrl->intr_mask);
-+		mutex_unlock(&ctrl->intr_lock);
- 
- 		usleep_range(100, 105);
- 		if (!swrm_wait_for_frame_gen_enabled(ctrl))
-@@ -1882,6 +1901,7 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
- 	swrm_wait_for_wr_fifo_done(ctrl);
- 	if (!ctrl->clock_stop_not_supported) {
- 		/* Mask bus clash interrupt */
-+		mutex_lock(&ctrl->intr_lock);
- 		ctrl->intr_mask &= ~SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET;
- 		if (ctrl->version < SWRM_VERSION_2_0_0)
- 			ctrl->reg_write(ctrl,
-@@ -1889,6 +1909,7 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
- 					ctrl->intr_mask);
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 				ctrl->intr_mask);
-+		mutex_unlock(&ctrl->intr_lock);
- 		/* Prepare slaves for clock stop */
- 		ret = sdw_bus_prep_clk_stop(&ctrl->bus);
- 		if (ret < 0 && ret != -ENODATA) {
--- 
-2.56.0.317.g454f8302e1-goog
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Abel Vesa <abelvesa@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+Cc: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+
+---
+Konrad Dybcio (3):
+      arm64: dts: qcom: Unify Glymur/Mahua regulator handles
+      arm64: dts: qcom: Consolidate Glymur CoB power grid
+      arm64: dts: qcom: glymur: Drop L4F0
+
+ .../dts/qcom/glymur-asus-zenbook-a14-ux3407na.dts  | 236 +-----------
+ .../dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts  | 232 ++++++------
+ arch/arm64/boot/dts/qcom/glymur-cob.dtsi           | 311 ++++++++++++++++
+ arch/arm64/boot/dts/qcom/glymur-crd.dts            |  30 +-
+ arch/arm64/boot/dts/qcom/glymur-crd.dtsi           | 395 +++++---------------
+ .../boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts    | 225 +----------
+ .../boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts    | 328 +++-------------
+ arch/arm64/boot/dts/qcom/glymur-qcb.dts            |  22 +-
+ arch/arm64/boot/dts/qcom/glymur-qcb.dtsi           | 305 +++------------
+ arch/arm64/boot/dts/qcom/mahua-crd.dts             |  27 +-
+ .../qcom/mahua-lenovo-thinkpad-t14s-gen7-lcd.dts   | 412 ++++-----------------
+ arch/arm64/boot/dts/qcom/mahua-qcb.dts             |  34 +-
+ arch/arm64/boot/dts/qcom/mahua.dtsi                |  29 +-
+ 13 files changed, 745 insertions(+), 1841 deletions(-)
+---
+base-commit: d2f52f33c6c98b2c9c9b763de84c5e0875bcbce3
+change-id: 20261028-topic-sip_cob-65df3325ed28
+
+Best regards,
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
