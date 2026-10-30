@@ -1,76 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793346345;
-	b=sIF2ChSIWIHduLhCuyNpeJ93AaFyntYWU0TkGRKRLRYgfm5dFAVtA6rKz1HkwE1z6kR8
-	 Sk1DOwNCGn+WsbzYyH6PCR9lQujq/01wILl1F9xFivYRttoWHK3Ybvvtcfqw6g7IRu7NJ
-	 JMr4iPExjD/ddXV9dcGa+tXxaVbvh388G7jcdM96wpQrlWbTlBxE/HmN8YEoCBVoUCcxJ
-	 m8JdfHCiXA1bygz/cyoAFWOHStuU2ZgFaJ4CuiDi9V/b9jMymNeUfdRDqVnIHp5MiSAKn
-	 UlZyHXY5RTR5NyCCEbuapPua8LBISEWQMf41pusEiejr+w4dsNZ/XR/1pUzLKuhGXMA==
+	t=1793348339;
+	b=vWARb85smxwlSnP3RkjeqZ++7SLkxrFlL+eN/q+ggc/L5Q+QUd9W/dq517hcJgwkoAty
+	 Fco2LZ1ykVmZk+FHZY7v1XVEWbFRXotWbaVLuY2/lnxa3nUsiuctec1JxhpZ8FAE4ajUk
+	 5NtqDsPCN6AF3XfmSzEHQ3+F5FXc3ivXEXEPLWonuI7udLYBkmMRR01TnIB+KaV9vXfai
+	 bSfeVBfU6aZIEKv14pUPR6FXi9ud0w0kvDyS1L6O0hFet6WnLeQVFUnqZw7kEbD2DXNCw
+	 P8SD1LTZbe1HxlfqKcIDRxzZR5kmTvzB8VYK1XwuBKbXn5PdIlzV7no6YP5R5JUzZhg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793346345;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
-	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
-	bh=MGbJXiJFi31yIeTwiAlfmLLlnxlqKdJgzbKeOHsVxXA=;
-	b=r32jYQ8kpRw9YUjlLyq2pZBBZQ/e0pqYzVIYy/yS2GGddrGCq7cBBLBfpwjtfGiR/vmu
-	 WmfiNIy972MHfiiy2dg+CwvQjXTNG09jjC3dfwINRut77W6PZN1XWV8Z2KV3xF/yt1WTN
-	 mxMPjwHdSN296c/oFfksXy3mj2wSZSLw4TJsse2yjZzXAkJKkayPtEZfOZ4NFlUvDitya
-	 EJ6e52TM1cjjEp6MyW9yGmv4cP5J83MwgVYYv+hi0arUmIcRfBlNo4th/vMg7XdlU4fDP
-	 kxDRynKBDTaR9VZxx4lJFshMokV11PZOJRErsQLcc3xFl+8pDBcQXeDwzwwQOHJKsZg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793348339;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Mb9nK7C88AA0XX7+dkq9DLF84KPAyUNf2hmpuTFCm7A=;
+	b=wTR2UaW2wQQigE1RsMhiREjrW31u3f9Ef0Y/u6urDt+OiDxOhhMtIeSn9M3ilsAilmzo
+	 XWk4GSHL4QYE897dULFiazTydWOZlpGmlSi2EfcPpO9faNStybrabG6fzIt7Zr2KrjWyt
+	 xBEH7aVnmJ72ZF9S5RDctKwb/DxsNEG/t6XVUYVGWraRUFmG/xY6l8bWvgpQp2SkDaA7g
+	 53LjvHu4r3OLgrQ30npwHZACFC5p8tJ6b8yUrSLPw1Q3lwMtEyhKlhqd8HjEMgG2KccFg
+	 52FMXqX1RLL5yiH/Esl8KNb3pZR476S68MB4y/fWBTndueDWAyqQakP2fOJVyM8tnWw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=vAymN4aF;
-	arc=none smtp.remote-ip=210.118.77.11
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aGi+krf7;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 539E2606A31A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 07:45:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 539E2606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 888C7606A31A;
+	Fri, 30 Oct 2026 08:18:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=vAymN4aF
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261030074535euoutp01fcb828b5e2dac66d7f539c5a354adc49~jPv16ZATz2698926989euoutp01Q
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 07:45:35 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261030074535euoutp01fcb828b5e2dac66d7f539c5a354adc49~jPv16ZATz2698926989euoutp01Q
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1793346335;
-	bh=MGbJXiJFi31yIeTwiAlfmLLlnxlqKdJgzbKeOHsVxXA=;
-	h=From:To:Cc:Subject:Date:References:From;
-	b=vAymN4aFGzNvAaFiV9K/kAJeIecunRmnvMio0iBO0taTwcppQM4cq1rOkr5wwBija
-	 uZdmeIrUy0LGrZjbwvrzDjLpt42lgRt119H4pKWl7W64YQKQQJuwv43eXwGj5PP78E
-	 6Ne46PVFUKJlj22vrIO/WXF7SlHYx49NONu+531U=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261030074534eucas1p152cccb0576c7a59dc713845077353904~jPv1h4bJu0876108761eucas1p14;
-	Fri, 30 Oct 2026 07:45:34 +0000 (GMT)
-Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20261030074533eusmtip1e981b5adbd76f64066708854250e130a~jPv0rz1Ek0978809788eusmtip1V;
-	Fri, 30 Oct 2026 07:45:33 +0000 (GMT)
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: dri-devel@lists.freedesktop.org (open list:DRM DRIVERS),
-	linux-arm-msm@vger.kernel.org
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Andrzej Hajda
-	<andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
-	Robert Foss <rfoss@kernel.org>, Laurent Pinchart
-	<Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, Jernej
-	Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
-	<luca.ceresoli@bootlin.com>, Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>, Sam Ravnborg <sam@ravnborg.org>,
-	Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>, Bjorn
-	Andersson <andersson@kernel.org>, Hongyang Zhao
-	<hongyang.zhao@thundersoft.com>
-Subject: [PATCH] drm/bridge: lt9611: Don't override ADDR strap when strapped
- low
-Date: Fri, 30 Oct 2026 08:45:17 +0100
-Message-ID: <20261030074518.516993-1-m.szyprowski@samsung.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aGi+krf7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDAB71F000C1;
+	Fri, 30 Oct 2026 08:18:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793348339;
+	bh=Mb9nK7C88AA0XX7+dkq9DLF84KPAyUNf2hmpuTFCm7A=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=aGi+krf7xcDXjZG+aCrcGgkyMEdP0I3fr312ylcIHL5Et2iKMPq8Fw7kIY64ar+uR
+	 KoIYVG7NZPLH+o7p19hommRYKC4Nz90DVmSr4bGhrvD1k+njk7BD0EIemrLvqkAcl6
+	 dAAKbGpEfLhQF/63qbcJv/CnWcp6jdJcxYnCaI4SFLeDS/x5YEhEXxkDoEeCRgxvD0
+	 cy/G3LljTTFpRAKYc36ayAwb6RKh15aYm8qnKjwC+juFRSnioV2XLb6CUnDtLnVtQB
+	 ZhXHPJdE63+YBhHN6LHdXdnLnK5stfFGsL5S94nkKjGosdRlpyVVTGSkHfj0NDhViZ
+	 KmZQI/iHYHJ9A==
+Date: Fri, 30 Oct 2026 09:18:55 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Cc: Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	"Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
+	Robin Murphy <robin.murphy@arm.com>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Rajendra Nayak <quic_rjendra@quicinc.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Jassi Brar <jassisinghbrar@gmail.com>, Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Krishna Manikandan <quic_mkrishn@quicinc.com>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>, 
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+	David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
+	linux-watchdog@vger.kernel.org, linux-clk@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	freedreno@lists.freedesktop.org, linux-remoteproc@vger.kernel.org, linux-input@vger.kernel.org
+Subject: Re: [PATCH v7 03/11] dt-bindings: watchdog: qcom-wdt: Document
+ MSM8952 watchdog
+Message-ID: <20261030-encouraging-diligent-kudu-dbd1a7@quoll>
+References: <20261030-msm8952-initial-support-v7-0-ad748ace375d@mainlining.org>
+ <20261030-msm8952-initial-support-v7-3-ad748ace375d@mainlining.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,106 +77,20 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261030074534eucas1p152cccb0576c7a59dc713845077353904
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261030074534eucas1p152cccb0576c7a59dc713845077353904
-X-EPHeader: CA
-X-CMS-RootMailID: 20261030074534eucas1p152cccb0576c7a59dc713845077353904
-References: <CGME20261030074534eucas1p152cccb0576c7a59dc713845077353904@eucas1p1.samsung.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261030-msm8952-initial-support-v7-3-ad748ace375d@mainlining.org>
 
-lt9611_sleep_setup() writes 0x8023 = 0x01, which overrides the ADDR
-strap and moves the chip to I2C address 0x3b, and then configures the
-ADDR pin as an output (0x8157/0x8149). On boards where the pin is
-strapped low (address 0x39, e.g. Thundercomm RUBIK Pi 3) the chip
-becomes unreachable as soon as the bridge is disabled: all further
-register accesses NACK and on resume the bridge fails with "power on
-failed", leaving HDMI dead until reboot.
+On Fri, Oct 30, 2026 at 12:02:34AM +0300, Muzaffer Kadir wrote:
+> Document the watchdog found on MSM8952.
+> 
+> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
+> ---
+>  Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 
-Skip the address override and ADDR pin setup when the device sits at
-the low-strap address.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-While touching this driver, also fix the misleading error messages in
-atomic disable path.
-
-Fixes: 23278bf54afe ("drm/bridge: Introduce LT9611 DSI to HDMI bridge")
-Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
----
-The issue was analyzed and the patch was prepared with LLM assistance.
-The fix was tested on the real Thundercomm RubikPi3 board - the HDMI
-display now comes back after system suspend/resume cycle.
-
-Best regards
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
----
- drivers/gpu/drm/bridge/lontium-lt9611.c | 24 +++++++++++++++++++++---
- 1 file changed, 21 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/bridge/lontium-lt9611.c b/drivers/gpu/drm/bridge/lontium-lt9611.c
-index 2d1a28261037..9e4f45d9f6d3 100644
---- a/drivers/gpu/drm/bridge/lontium-lt9611.c
-+++ b/drivers/gpu/drm/bridge/lontium-lt9611.c
-@@ -35,6 +35,9 @@
- 
- #define LT9611_4LANES	0
- 
-+/* I2C address with the ADDR pin strapped low */
-+#define LT9611_ADDR_LOW	0x39
-+
- struct lt9611 {
- 	struct device *dev;
- 	struct drm_bridge bridge;
-@@ -440,10 +443,13 @@ static void lt9611_sleep_setup(struct lt9611 *lt9611)
- {
- 	const struct reg_sequence sleep_setup[] = {
- 		{ 0x8024, 0x76 },
-+	};
-+	const struct reg_sequence addr_pin_setup[] = {
- 		{ 0x8023, 0x01 },
- 		{ 0x8157, 0x03 }, /* set addr pin as output */
- 		{ 0x8149, 0x0b },
--
-+	};
-+	const struct reg_sequence power_down[] = {
- 		{ 0x8102, 0x48 }, /* MIPI Rx power down */
- 		{ 0x8123, 0x80 },
- 		{ 0x8130, 0x00 },
-@@ -452,6 +458,18 @@ static void lt9611_sleep_setup(struct lt9611 *lt9611)
- 
- 	regmap_multi_reg_write(lt9611->regmap,
- 			       sleep_setup, ARRAY_SIZE(sleep_setup));
-+
-+	/*
-+	 * The ADDR pin selects the I2C address and addr_pin_setup overrides
-+	 * it to high (0x8023 bit 0), which moves a chip strapped low over
-+	 * to 0x3b and makes it unreachable. Skip it in that case.
-+	 */
-+	if (lt9611->client->addr != LT9611_ADDR_LOW)
-+		regmap_multi_reg_write(lt9611->regmap, addr_pin_setup,
-+				       ARRAY_SIZE(addr_pin_setup));
-+
-+	regmap_multi_reg_write(lt9611->regmap,
-+			       power_down, ARRAY_SIZE(power_down));
- 	lt9611->sleep = true;
- }
- 
-@@ -712,12 +730,12 @@ static void lt9611_bridge_atomic_disable(struct drm_bridge *bridge,
- 	/* Disable HDMI output */
- 	ret = regmap_write(lt9611->regmap, 0x8130, 0x6a);
- 	if (ret) {
--		dev_err(lt9611->dev, "video on failed\n");
-+		dev_err(lt9611->dev, "video off failed\n");
- 		return;
- 	}
- 
- 	if (lt9611_power_off(lt9611)) {
--		dev_err(lt9611->dev, "power on failed\n");
-+		dev_err(lt9611->dev, "power off failed\n");
- 		return;
- 	}
- }
--- 
-2.43.0
+Best regards,
+Krzysztof
 
