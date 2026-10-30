@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.49
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793377272;
-	b=mDRc6am9Wz2HSORovrAlK8dNTiBC+rpFyh8foD1iPDdYj+S5QJvSxzYR3xhSSRayokgv
-	 oAauDv/S/CV1x5gIDuy4ub6u0WMsL2M/ZzhquI8svob8SMGiL/rcq3ppxGh7ofytFpGCT
-	 R1M6HIkZn5y/ZZZga7qquqx1CmpUEdGCOLn2Sc5zPvOvAjJNR1JX3ctLhDvn5FSbMI6Br
-	 7Q7wqfJh4RyY4uHpUnboFsva8JADArpJ1TnKMUkM++nldZZ5MW7zh5zfA/3450vWpQY/7
-	 tuqC14rOU8+OOw/5PwWGjWtkUmGCMmlTG88+b1dKaS3A9M+N1owITUDbP8pc/yW2T6g==
+	t=1793377277;
+	b=nUbUlnaY72Fzq+5jsUb6jpazQQLrLTHXDxw9+nQo/4Q2AT8tViVFoYEcnnP8Luc5XGx2
+	 0ZfoJQ7SONNdOIOCjzFuUslE1y4JU7GQfkTFQHjnlbEjsUgeIp2uQNq57Wj0kSzet144c
+	 qXN1L8tLKL6XfAXHRYCm/gaWhfdtqVC5qJe3HbDP2Rxjb4eSysajHHiCgas/9yNIvaLUc
+	 WRrJ5eE8x20vwWgu8kzQz2YMDKQgUQaXW87bttwMv47eRZrp3zlY5lPqAQzKsEYTM3+75
+	 xyuPS28TaKMttVMU5B3JaRVE2WcKj9IwOhkOXOaHg2hoMR6hDb+DgveE5SxMBqHjb3w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793377272;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793377277;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=OLRD/nhwFUuDTpwXog0Q7Wc+ALgde2fM6C+mADcBMYM=;
-	b=D+ciTRQtKbIah2Xzy+z+XsHFz6rFVoO2oT9/nTCx5zIKxbRWr0dD2Dp9/Z7GSg7mNgiB
-	 pttiFrEH3Q74sIBqbfFTtwDWjLVdIAtMF7n8Q+QiJP9XmliWiBpPw80cTZ9U1zjtSkpV3
-	 clFydv1Nv3WvLTBcEZbNkhktkyMIzWguSK9J8h8qE45gQoZfnIz+WV1dZ6hM8v5fzaOkW
-	 Aqe+w44JUDF3P5Drfy660O8gP9tKleOB+MqsgXUFnphDXALeYhkrWhf/XG7gawGXx2pUR
-	 kovjhtWq1ChZkvs/Fs05vwcu4pqpzPpnbIAr9wZ5kxJ0S/Zr7U5gR5NmkC/IgnXtyww==
+	bh=NiCv4TzAu5z9UeTUiidIChOBFFfvn1mb27PyQpvB9kE=;
+	b=PszMZvURVNlR4O5I6MdtW7q65WsG2K1jnhQP1gCW81NOOxha3eOImPJmMPisuLYOBMVH
+	 x93IJLDNbL8e4E1e9pcSHaUT91cMGuS4nTtGCZ+KLQFnNfPXD2TvhmCp4+/yIm/oTpprI
+	 zDW+EtaKU6/SwCyvNBnpZP3YepcEVHuy23dktvX2lJAhRMe9jqDvxz3/1CQteerQ4/VsS
+	 f/b7DTx5b0KRsfuuHCmUbX8ogIm/72bRQ/nlTff5aa1qQjet527h6vY6nq1W8SNFhhoN3
+	 6nLtZzu479EMLP/cPZmqUgcWUXlkkz4ZQ/X51JbQWMQKI8RmVndbmJsC56mGV+Lis2A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tAevl8Y+;
-	arc=none smtp.remote-ip=209.85.160.48
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o2AFWnrQ;
+	arc=none smtp.remote-ip=209.85.160.49
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31A38606A33B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 16:21:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31A38606A33B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79861606A331
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 16:21:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 79861606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tAevl8Y+
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-4a755bbe158so623300fac.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 09:21:11 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o2AFWnrQ
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-4a75171af39so225756fac.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 09:21:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793377270; x=1793982070; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793377275; x=1793982075; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OLRD/nhwFUuDTpwXog0Q7Wc+ALgde2fM6C+mADcBMYM=;
-        b=tAevl8Y+5DrICexIk5cjnG2iKmtgb0MM1HxmwMduH30mPH5r2hIJWjSoii84r/jQUI
-         V1rGi991IrBGJt88WHX1H9a2vcOCv47S1x4oXEgqV77SSnh+BfG1ekpj22ViyvjukgkF
-         kUK6T7NwJXkHWmNNpc+qc5cVRhYrutEdvSJe6HvsgC5/lllKwS9SvErtr5o5fqC+uR1v
-         Fsrp7l/p8ba5DHF4UXOLtOPiM0alHjw4jDCm00yCC42zEFCRNnQpPjp5jSjcrflVqIU0
-         ZOBWNy2B556H8GeJzGXgfPA61u8hWu5mcYKC16nvtn8XbtfgB8i5JZWcdE/2TGZgKnYm
-         mJCQ==
+        bh=NiCv4TzAu5z9UeTUiidIChOBFFfvn1mb27PyQpvB9kE=;
+        b=o2AFWnrQOwPhuS49gaxhb1HgLi4Eu7sqSP3MFnax3w6vq/4ch92RT3cUpbl899YW4l
+         Oe1p7MCHutef6NUdpbJcWfBWfIF3ythh7UDTq91BMd98rvXFr7lFcZK04V9TxKcT9FzN
+         n5gU9QShTcXbP8SPbFgA/9kfoFbSOvwll0KfLOt3QsgLVfLAuRFJ1CKjMNAsjI/4NJQu
+         5TnUOp/wzKiDiP5KLNzVP1Fx/Zu8ENGgv9tvb4uOy9JKpUTyWIR/o0WK9da/nFewanZb
+         rc4ayD2XcL7E1N4Qc9qSJmgf2SVn6swyhY+o4tV3ynhICQfdWAhnnkLmn8Jpihn92xNd
+         7ylQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793377270; x=1793982070;
+        d=1e100.net; s=20260707; t=1793377275; x=1793982075;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OLRD/nhwFUuDTpwXog0Q7Wc+ALgde2fM6C+mADcBMYM=;
-        b=QKyGBHZTzoOEAFShMF1opBSjmXI76AlAlRkuGv+MTPS0r7YKPVr0Z4pHQaezNmEQf6
-         m5KZ1UUns8LSwOs4AyXRmHqIKlbHEXc8WAEDbgBwgf7qaCBUDH+tTf8iAS5zNqkvMcRY
-         VMN2RcwiW1N9llqshmGcipforj5s688wVBOkF9v42zD3A49qjKuacIqibTSMRnHRUMLb
-         UgNzkV7Pl5ieEAm/k3XOLfTaWHo/fZVHDkIkN20fJT0iJugFTnTWpH0sWls4pbCWHSB2
-         /jfp7S5Ph7yT/YrDnNHadRFD8JAJ51OwXo3Va7ZoI9boTDCXNOHjI4mgHe+tJ2QQpy8E
-         lSWQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzYRLkN2SFOe047UEO8pubM1iDy78Hg4Geg5+AsiD8O0v/3C3fXwp7l6+Xer1DOu3oXxBXDt9AjRTN9MacI@vger.kernel.org
-X-Gm-Message-State: AFq9FYLS9CLxE6nYv17mBOfTj+4Rk8S2jpo86kJntNLqx+8ZjSBLCmOM
-	LQL5kZ7hvFF0Eo/UgvSsL5Naz/Mre7ye+3DivLrgoTCgQ7o3xBrRjpY5
-X-Gm-Gg: AYBFou047oc1WEnPXHadi/sFh+A+QD/V0xfKRRd3zyn/M6Syi8IgZNyL6yqyVhWdSYD
-	BAvXZO7eNqPySs34jo1YHGFR+PuG9QYL3erlbZeeX6foxELEUaaZSAz89vO4fM/eGQBiXjfcmJR
-	7vZWJu4cWED0oZt18Digb46JZlPhNNRXSCkrqK9FcKyDr0jyrtYWVsl2GRHB8w8SnLUjSeB3qsF
-	mlH2JKy1M+rIPXUdwfeOU8e4r5RejLSTH4CoQIyPWdsHHOwDRjuktUrEO/hVLF3JEOrDX/xxltz
-	Em1wPWU0gkwcaU70lf3hrk67tS/nCKnTfTAhiCtIwcemrXuBeoa8UWS2nfZN/NE3+DfIhlS+9n1
-	rONLxP7wo623+2cMYzAt6xJitvKJ4VaO+6bvn5cQGegn1HPiI8/kgwcN1hV451zNuuGFkHyn5DK
-	ihPCkOlVikhrGEMY6WX9eUnHk6b+v7AFXWxZC9xwo1ejDH7xKurf7iOBkE6OnaH6IlJ/pHbD7+Z
-	aAJVMMBX5KbqWkwrJP5vmbJRe/2AP6zYMZ9lGR+OfewKoRiW3uX1kWC41JWtetyTV70zAgPjeK4
-	ozqc13KHya6CtYvg7hMq95sO/XataND36r3i0Z+Ns78Z/W9CoIqmcDkxuDoT1LW00EroH9D6Tdq
-	SrJEowqKbPzPLlyzq4REW0hG+rUBX3TE3aNrmhurW57YzZDYYDJPO8XTaHTMP8ZTLWOtksnQIOq
-	3Wk60kN6yOkAB+RcR7
-X-Received: by 2002:a05:6871:5224:b0:470:e96b:43e6 with SMTP id 586e51a60fabf-4a90775db3amr1316890fac.18.1793377269740;
-        Fri, 30 Oct 2026 09:21:09 -0700 (PDT)
+        bh=NiCv4TzAu5z9UeTUiidIChOBFFfvn1mb27PyQpvB9kE=;
+        b=yfyiQ1zy0NQxn7gl/y9JKfqfScCgOOKuVv92IMZ2X47YDtORfYqwDaa1goUomy4Wql
+         Em207c/G02nJKEakCESUv9rsTMJPRTo5TtRezQU6fLmjMrRg8eGfgYy/MdhzQYUk5QdG
+         1A2tisQJaIsClNJ6KoEZ7hGkMb77+Zs2LmK5rXE0SXaFa/PaGIuOsWq0Z08I23HZYKmw
+         0pBKomQ8lhLB8HPIsAWzkZ4oWVXDR4WPkChHkwx53zYf+relSayWYYmFBjQVCDigbtZ/
+         bY57nvAhKkC2x8lIYCxTr9QSw2ITnwikUi2GBYpHkmUEBiXye2KeVi6SLu3yzctT+p5o
+         nLJQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzRm1egl+tOGm6TzTiOKQAWbLxyxZDhW47Xa665ihnF2kugo4FQ5ylCZYLZ/xw6cg1/b0udcU5netm2rG/W@vger.kernel.org
+X-Gm-Message-State: AFq9FYIEc2IYJ+UspR9w8AGqNuOF9nQyfhSAS/tFUFXrZSGrWlcYtd2t
+	G0Co4cm80rLY5w07c2s+8tC1cjaHoU3Ot1hynryx3HvnYXUmlqM/GNWF
+X-Gm-Gg: AYBFou2ezt6FZmyJ6cVPi4hK2l63TTMoo7hO8qAuqrTHO90v87CqEAz8wqpiYZ8z0y6
+	5q8orK+hK/rZfGKvkaJGsdDHWMsFVoa+vmJTX1kvx6nXudRrYT9t0PIrrmu9qrwkBiDAhW6p6VZ
+	QWSGk7NdqXUxJIo0CoCSH7byeXNu3zJUmYgDACRIhRB6xyIxmBKsZBtC5u2NzSBvLVtr9tgGSnO
+	clx5/WVTxVDhBr+vBGb0MVfhmRkzK9GEtj0Ed6g5jCnKDhggsIGXrwuKFVR+Hgo4SYcxE4s48iC
+	aCmRq8vjSTFScuUnp+hBr4C3NdeT5ejr9Qqdt0x7kjXxMocpjCrjIpzgPdgqJPNw6T+l+bqrAjk
+	FAK8H4i8XMat+QpAxLxbLTwEAaecEJliuzvrUziajuJNf76I93mqg8fcuCACWqQP/1wXzRM/cfB
+	lXx9opb4sCHqZ4nYtzuKKKaxwE+s+xD5iaB6FUDTGCcmbcEsWZy+USl61+/iprLgSr76DQ9+d1G
+	LfK9Jrcsw0F4lq/dyt8JeXJtaH+bHdXG0mJJfxlUQ0kwsJ+iPY4Zg9jjg3zw2v7rKjvXXMNsR1A
+	6cuCjp0hhsucv/1M7yF/EEg5QTv1dWur6WuFQVJBhJTCRTapIB6PP5Z1pMF37xtU8XvofSRJsdh
+	fKtCTWHF0wiKwG81PYWPDJEDyF5/eoRP5BF51y/OSJFvEXDOAb7UdCr+T23tkqRJm5GtvGOElbn
+	i0p8uTCCTbY6tmyOg=
+X-Received: by 2002:a05:6871:3149:b0:4a7:4323:3fe1 with SMTP id 586e51a60fabf-4a9075f9d96mr1952103fac.20.1793377275138;
+        Fri, 30 Oct 2026 09:21:15 -0700 (PDT)
 Received: from brev-9gdpyq8lp.ap-south-1.compute.internal (ec2-3-110-210-194.ap-south-1.compute.amazonaws.com. [3.110.210.194])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a92167b03csm322536fac.2.2026.10.30.09.21.04
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a92167b03csm322536fac.2.2026.10.30.09.21.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 09:21:09 -0700 (PDT)
+        Fri, 30 Oct 2026 09:21:14 -0700 (PDT)
 From: Samarth Narang <samarth.colleges@gmail.com>
 To: Miquel Raynal <miquel.raynal@bootlin.com>,
 	Vignesh Raghavendra <vigneshr@ti.com>,
@@ -95,9 +95,9 @@ Cc: Richard Weinberger <richard@nod.at>,
 	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org,
 	Samarth Narang <samarth.colleges@gmail.com>
-Subject: [PATCH v2 3/6] mtd: rawnand: stm32_fmc2: retire data DMA before unmapping on errors
-Date: Fri, 30 Oct 2026 16:20:38 +0000
-Message-Id: <20261030162041.2998170-4-samarth.colleges@gmail.com>
+Subject: [PATCH v2 4/6] mtd: rawnand: omap2: terminate DMA when prefetch cannot be enabled
+Date: Fri, 30 Oct 2026 16:20:39 +0000
+Message-Id: <20261030162041.2998170-5-samarth.colleges@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261030162041.2998170-1-samarth.colleges@gmail.com>
 References: <20261030162041.2998170-1-samarth.colleges@gmail.com>
@@ -112,80 +112,43 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When ECC descriptor preparation or submission fails in
-stm32_fmc2_nfc_xfer(), the driver unmaps the data scatterlist without
-terminating the previously issued DMA descriptor. The descriptor may
-remain queued and execute when the next page operation starts,
-potentially writing into a buffer that has already been unmapped and
-returned to the NAND core. The timeout paths have a similar issue, as
-they use dmaengine_terminate_all(), which does not guarantee that DMA
-has stopped before the buffer is unmapped.
+When omap_prefetch_enable() fails because the prefetch engine is busy,
+omap_nand_dma_transfer() unmaps the buffer and falls back to a CPU copy
+without terminating the previously issued DMA descriptor. The descriptor
+may therefore continue accessing the unmapped buffer, while its callback
+could also signal info->comp for a subsequent transfer.
 
-Terminate the outstanding data descriptor on ECC error paths and use
-dmaengine_terminate_sync() on timeout paths, ensuring that DMA has
-stopped before the associated mapping is released.
+Terminate the DMA channel with dmaengine_terminate_sync() before
+unmapping the buffer, ensuring that the outstanding transfer has stopped
+before the fallback path proceeds.
 
-Fixes: 2cd457f328c1 ("mtd: rawnand: stm32_fmc2: add STM32 FMC2 NAND flash controller driver")
+Fixes: 03d3a1df6da6 ("mtd: nand: omap2: Start dma request before enabling prefetch")
 Assisted-by: LLM
 Signed-off-by: Samarth Narang <samarth.colleges@gmail.com>
 ---
- drivers/mtd/nand/raw/stm32_fmc2_nand.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+This issue was identified by a research static analyzer for DMA
+lifecycle ordering and has not been validated on hardware.
 
-diff --git a/drivers/mtd/nand/raw/stm32_fmc2_nand.c b/drivers/mtd/nand/raw/stm32_fmc2_nand.c
-index c08d6b176..82d630106 100644
---- a/drivers/mtd/nand/raw/stm32_fmc2_nand.c
-+++ b/drivers/mtd/nand/raw/stm32_fmc2_nand.c
-@@ -915,6 +915,7 @@ static int stm32_fmc2_nfc_xfer(struct nand_chip *chip, const u8 *buf,
- 						   DMA_PREP_INTERRUPT);
- 		if (!desc_ecc) {
- 			ret = -ENOMEM;
-+			dmaengine_terminate_sync(dma_ch);
- 			goto err_unmap_data;
- 		}
+ drivers/mtd/nand/raw/omap2.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/mtd/nand/raw/omap2.c b/drivers/mtd/nand/raw/omap2.c
+index 552f36da7..b6bd4386c 100644
+--- a/drivers/mtd/nand/raw/omap2.c
++++ b/drivers/mtd/nand/raw/omap2.c
+@@ -417,9 +417,11 @@ static inline int omap_nand_dma_transfer(struct nand_chip *chip,
+ 	/*  configure and start prefetch transfer */
+ 	ret = omap_prefetch_enable(info->gpmc_cs,
+ 		PREFETCH_FIFOTHRESHOLD_MAX, 0x1, len, is_write, info);
+-	if (ret)
++	if (ret) {
+ 		/* PFPW engine is busy, use cpu copy method */
++		dmaengine_terminate_sync(info->dma);
+ 		goto out_copy_unmap;
++	}
  
-@@ -922,8 +923,10 @@ static int stm32_fmc2_nfc_xfer(struct nand_chip *chip, const u8 *buf,
- 		desc_ecc->callback = stm32_fmc2_nfc_dma_callback;
- 		desc_ecc->callback_param = &nfc->dma_ecc_complete;
- 		ret = dma_submit_error(dmaengine_submit(desc_ecc));
--		if (ret)
-+		if (ret) {
-+			dmaengine_terminate_sync(dma_ch);
- 			goto err_unmap_data;
-+		}
- 
- 		dma_async_issue_pending(nfc->dma_ecc_ch);
- 	}
-@@ -939,9 +942,9 @@ static int stm32_fmc2_nfc_xfer(struct nand_chip *chip, const u8 *buf,
- 	if (!wait_for_completion_timeout(&nfc->complete, timeout)) {
- 		dev_err(nfc->dev, "seq timeout\n");
- 		stm32_fmc2_nfc_disable_seq_irq(nfc);
--		dmaengine_terminate_all(dma_ch);
-+		dmaengine_terminate_sync(dma_ch);
- 		if (!write_data && !raw)
--			dmaengine_terminate_all(nfc->dma_ecc_ch);
-+			dmaengine_terminate_sync(nfc->dma_ecc_ch);
- 		ret = -ETIMEDOUT;
- 		goto err_unmap_data;
- 	}
-@@ -949,7 +952,7 @@ static int stm32_fmc2_nfc_xfer(struct nand_chip *chip, const u8 *buf,
- 	/* Wait DMA data transfer completion */
- 	if (!wait_for_completion_timeout(&nfc->dma_data_complete, timeout)) {
- 		dev_err(nfc->dev, "data DMA timeout\n");
--		dmaengine_terminate_all(dma_ch);
-+		dmaengine_terminate_sync(dma_ch);
- 		ret = -ETIMEDOUT;
- 	}
- 
-@@ -958,7 +961,7 @@ static int stm32_fmc2_nfc_xfer(struct nand_chip *chip, const u8 *buf,
- 		if (!wait_for_completion_timeout(&nfc->dma_ecc_complete,
- 						 timeout)) {
- 			dev_err(nfc->dev, "ECC DMA timeout\n");
--			dmaengine_terminate_all(nfc->dma_ecc_ch);
-+			dmaengine_terminate_sync(nfc->dma_ecc_ch);
- 			ret = -ETIMEDOUT;
- 		}
- 	}
+ 	wait_for_completion(&info->comp);
+ 	tim = 0;
 -- 
 2.34.1
 
