@@ -1,111 +1,109 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793341285;
-	b=CqIQ3MzjM646AWDXHnjylt4rnOzC8cHVAzdcdM98WZp8gbKc+EtDQGsqUO4AwcyUfPIZ
-	 3Rng1rMoLcANznRIO12FVH/Npog7RpD+Bb7DlIKFe0ZGCJtbsMGWVwrdMocxkr1CsUJVu
-	 hPH5SkhWhEzifqGjmmmUL2W1tWm5trAq4AeVOIqBX2matQ9akCW8wIXlRf7fJsDwZ9Vzm
-	 wQDGMh7xB6QzZ/wNjRoSlEExmiAOfhGcHMfuumKdwbEGEYha9/DNdES4L7MMj50dcmh0e
-	 L6VZE4EYvA6w+szY4Y9JuL+dB75tfJ78JRX7cnr3b6bGAeSVAtexWYoa6Qs6AApKh+w==
+	t=1793341291;
+	b=YIzqkPKVxLZmW/9ZkUbc1WAmyGumVe3fZQY2DnDjQK558sWZ2ZhcaZEGQp/rCTdlI3AH
+	 ONv+9UziAW1xCBcAldIgEqld+5Us4U/p+IaGk42U1Js71gXB5X+QeEOc0uUckjfdd88H8
+	 da4OusPOmuTbQuOFhd6BAn5oaDNguFSqWybRspmjKv9VS3R2SDuA6qPyB0id9d0CqX8Nu
+	 5DV87GS54WYNV9XfNCfF8I5pit5CIYLW1BDRWD/k2jOxvhlDPTQxH999bzJC29UVSxYMi
+	 2HnlijEyaWikDXXkEUyykliYePWgbluDeRQE81f6s+HCu398hMyzorcdE9zOytYw9Gg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793341285;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793341291;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=FsXK1O0HJYviQ0L+PescLIZvVO2QJTar+nEOAo7BaRs=;
-	b=lRqYHhxzq1SbwYSEeDeS2f7FjUtZzXVMFGdBCiAqlTaGI928DIE6zhcNOPtOuW7Y0HYv
-	 GMbWJW7Gia448Brct4Graec8793K2dJMuZzqyT3OFV8Bvr6fSZ9zV9EHzzCuPfU+ACCjb
-	 30jkzNtDLZWNcA+bVjwqGwYZoX9iLS4ERHs2zp4GInK7RnGZeZz/PeGcoDQSZtbR2XF+Q
-	 Hm4NpLKRmfLDLToN4f8tawFACiyprq3RJNEEN7Nz5mtWqhgkPFm5bY1b92fsIpAliOiGV
-	 6BJaxQfk2I/wBiNDweunwCvuqaV0LfWNXdOASXX9CdmroN1hcO5+0XqYkidUn1n8VkQ==
+	bh=RgmjaHKT+8xjtXoW72r5gl9u8NYf/R6DKfCNFrT8aco=;
+	b=4z150UaPl7jHlncfgSdT63B/umtuJJExxVM2T4uZkmNDiHivquse/AE4kr51TajMLhfn
+	 3I3lc1Az0ZZxbarUJyAxxCYCRMZ/v36wmXBqxcoUiaT6Ru5NsYjNEoIql96/qwrMfrCMH
+	 xFfYzv/NH59x+mziKsByteTEHkULBj2u1hPbkdzFIVdh07aeaSQ6okF8bd1yJ3vfcMlCY
+	 VCC11dGxGqLmF3576pm2ELVPZpYAs0evWtqjbQZUEJ3D4KNJvn+5VhbYnjIxYnxV5KC2v
+	 xSnbwkqY5+crAoZ/RuOOpSioK5i8yYeOD6InyrBmOrI4z9vmm/VvAFMSp/2ZnzWct8A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=a0ggboqO;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dgxJmwWO;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Q0lMVd8i;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AaAwP7Ds;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBC7B606A320
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BBC7B606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0B16606A338
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0B16606A338
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=a0ggboqO;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dgxJmwWO
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69U5F2OE1738744
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:24 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Q0lMVd8i;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AaAwP7Ds
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69U5Fctj3346041
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FsXK1O0HJYviQ0L+PescLIZvVO2QJTar+nEOAo7BaRs=; b=a0ggboqOmG+psuGi
-	VA57s0V6rnM/0Wsg2IUq5MCaJACkI48OXk0ygJKRwd+GgdQw5ydPhoyjF4z2DiwM
-	N2mAVmR3mR34b2ndN/v9ygZVA6Yn9QPhPmhqcBUbLs6+xVUjBiLsAGQGYmKPPKRM
-	onmdkePp5nIBqoZe5ejToW+K4i98kw2ELw25iWbrFnq82Rl/xBaKvInShdL1RIFR
-	9HLB5JJdh3ZYEeS+aNIjFOk5FHKGgz6xAm1H3U/pQz9Z0oPDDj0mMaDHB/LlHHA9
-	Q1sBWVcUR94jkvFb8R/xyRlYRnFK9uRCQQ/6/YtngR72eVKk3HGqEwu/XZWgbUpZ
-	+p5QuQ==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6qhgsw-1
+	RgmjaHKT+8xjtXoW72r5gl9u8NYf/R6DKfCNFrT8aco=; b=Q0lMVd8i9PEtZ62V
+	iawUO3S838i5fqp3bVT0qLx17O0ZZB3Mcv/x9gqAX6Pz9knoq4Wg7sDitSk2sEaG
+	omXBwq6F3utCEwQZ0dl/n4L9cUUJKXnXPVcBbqXAB10sDrJeEYyu0IcBWjgMBHVS
+	DoNAnEFH3c9W2KG0TcPz4h8UwMhCCFMXlqH96JNEhnUsxrwLhJfxikMW79jF6Jyh
+	dG2jjnECE3LQCMw7qh+NxJ7bWqZvdALHOxylXI+5h6XANHzr2X8yxhdqhf/ApDPK
+	QCwRpR9zjzaq5lc5rsZSOK90t4yKN6pu74grSGDjCbwDG0yppJyGP3noBrn4snKF
+	xlQqrA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme751fye-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:23 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8a0688a43d3so283736b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 23:21:23 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 06:21:29 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8a59717b0c0so297279b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 29 Oct 2026 23:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793341283; x=1793946083; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793341289; x=1793946089; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FsXK1O0HJYviQ0L+PescLIZvVO2QJTar+nEOAo7BaRs=;
-        b=dgxJmwWO84TTnIFYlPI5Teov6PndJIVzCjwy7Uj7X0Ik0Cjd3MQxnuARg4/ohpvWVg
-         qkA1MyJDm0Kfa7abYSfKW8sgMHDpOzefJRq5mWsA7mkKbpEit1GedhmnM1AkfQy76BKZ
-         Ic4v8nybYpEHYvZyDodWeZsk0z+xRLSTYsWDHLaUHle1C/VoP4F1/mBe3SzJX78nX+yj
-         jdjR7soD5RLfFEXTOTxxhwEoEPfx7tjcsRnApCWlAPQa+tGV4+mefnahGn/+ep89KPVS
-         17l5bdehyAnT8hmQXQR5yflNLrkka28W+rSx+I29FuVSmrFABdCYugdwJSD81OffQqxK
-         NkQA==
+        bh=RgmjaHKT+8xjtXoW72r5gl9u8NYf/R6DKfCNFrT8aco=;
+        b=AaAwP7Ds7zpA/DZpilM8UXsckRHC5b7WWiEaHDm//TMqSRxj7Zblph7YeXo3cf2MUU
+         TIHNB9aFfR2/d3sznGiou2aNenTuhqPd6mpXIQt0B4bbEBWLC/GQ2ZyOf9eGxF7Cj9rG
+         QWv4Nuikr/+ZsnpYwqNUwq5aDhZuR1dIzKTLfpmLjpJH/F6nrM3tv21iLrNEkjyDSAGf
+         c3XarUjuhipktnqsFvZ3JxfoHaKKboHL4ZrRwQ7gRSnpmkgHqL1yZmR6iBxV36gpww1r
+         D4BBlzQzaEDbhQFKMjYFEX4FglXZnvOhR/2V4l114/NBLJW3XqX26lGOrs/MrcceZ8Q/
+         N/PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793341283; x=1793946083;
+        d=1e100.net; s=20260707; t=1793341289; x=1793946089;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FsXK1O0HJYviQ0L+PescLIZvVO2QJTar+nEOAo7BaRs=;
-        b=ne+ib3qudsAZZwOanYMb+oG1tq7BLyllBBnfP2i/lCR7NyKDBRVCiJCqBEepRRAprX
-         7YwsLrDO0gWa2MH+82JI44Vn9TnpPnQuATRp4mm3ZFEL6b7aKJtuKPeUJQ/kel6MMrFu
-         M6NAszv2C/FibNI0YkSX4joPkDwciltCCHeHWdQ7gTKuGdj7BYMgFlQ+MK+qM7cXcRy8
-         XFCvpOftAQXg+ryYcLrLaknbohOKOPr/zdHHcAOaaw3lJDwVjxw80jPwGoW5fpTewTyn
-         ox02ZfypEcYABAYpvFxyk8eMjOjeIsIjXc/vd+Dp1eTzYORDXKknMt6Z50DvgYQjChfT
-         0p6w==
-X-Gm-Message-State: AFq9FYLnfXDx2n/RdsIfuXtSJdadWSW4zGVJaBQcWdU760kE/wSjwYLw
-	Y6Sq8Q7S4Svir+RFtlNPOz9fbozqXK/C79iLfCywGjLINvQFGTMKImWsEpLNh8yJ5MxuKwMd2fS
-	SCJZPi+ddOrW2tXRpuyITyiG66xQz55R/E+sefslvJaoNNXMcpUOmdtIgOIFhwZUP6Kl6JhLFVd
-	Zm
-X-Gm-Gg: AYBFou2k+NdIRwZxyJkceayha5iSm/s0mnHoduz7KH+VL1cD7V1ZnFyGCT9WFqD4MB/
-	Wquan9O3OI+alfJwtsvAyin3Gs0VcCPY/+gG9NXcL2Bmw8uIIYgh0A4nhQELUwnlu6u4S3XZAVd
-	Gt3sqhlVPeImh1H3ZbRld8gIlgsX6N9r4nJ5rMPxbzteLUvwRANS/cLgEJU84465JuTJM+t1X2S
-	VcLsSdHtvLDy4QB+GWQ0ZseHx5h5SsJameiNzZpDs5X101HLiJAXLqqftz9H0u1yMB0omPQqWIS
-	6P1FWfOKQ/tQGN05zSrvnfP03+55cFYnrP48debkimV2YdCnws8VF6ZR1mmzhOzNbt+vOYtpHd0
-	0oaW3Dihwvz7/riC6l3hzktNMSkuW4tvDPw22xkXju33BSFEguSVbr3daNzHJl4hlR34=
-X-Received: by 2002:a05:6a00:10d4:b0:89f:28c3:aab0 with SMTP id d2e1a72fcca58-8a9bf61f237mr1085866b3a.40.1793341283237;
-        Thu, 29 Oct 2026 23:21:23 -0700 (PDT)
-X-Received: by 2002:a05:6a00:10d4:b0:89f:28c3:aab0 with SMTP id d2e1a72fcca58-8a9bf61f237mr1085850b3a.40.1793341282807;
-        Thu, 29 Oct 2026 23:21:22 -0700 (PDT)
+        bh=RgmjaHKT+8xjtXoW72r5gl9u8NYf/R6DKfCNFrT8aco=;
+        b=jM/YilCOKwGLVeh0aRHKKMdxC9T86VgcTJjUvn23pUdLkFLwbS6nYqJwUK65Yt4/4y
+         V0qVxv0YXDE3k0Ia8T+/NqNtQEjqa5OiPTwE19HfZllGNCevbnHRTLbxb7gt4SPR7Avr
+         23Gu16pSeGEOL5w1tHzR5l5tM7EJTw20aytEDghj2Qywb8jLTYC3C7ul5IJw8yu3Pq7Z
+         cmZpRezRGtwF66LJ1AHGCj1URyC8xJ8WgQlZgYgqTleUnwpdu26fHlUeViroNRwSur6F
+         P/qNSQNXtynOdpvOncjPp5yOzBXcKsNe5wqM7MK2NXriPNe8Ypn200zfQEXRKYhaYmng
+         5VcQ==
+X-Gm-Message-State: AFq9FYK3OXdODaiiiQbZx2cn9X7KP9Guc57I7VguEyezxKU1181OFojv
+	e86RZj9qFBpZdSiNC81mNE7gY+BxgM4oY3w1QCm6mT/LIDNOFHWFbf2wn0rDuH2CBnjm9IyIsym
+	tOuVqSicZzfmTuW+N1sRR5b7iDfR8znJj8/QH4vtwuKAPumx2oLlCEJVev1C+TQo6xyWH
+X-Gm-Gg: AYBFou1pHXQ8cS7xqm8D5us+4m5h/rf2nXbNK6xVwG99WEx8T6qV31LXEhXIrrP0/5F
+	T3lZaXy0ebMFnlY+pqo6wbUE59goNq+ZQfiFEOhZ5HA2UG4T+v2kiH1dX38I8tf3+Fm/6uA4D50
+	f3Z7cB89VRER+MhjsXIcM4qBg9Z7zOGUtjJ5PtCFiEArFYbu5mB15exsUUZjOzkqdlJf43OE9jL
+	R4qn/BXmvgsSAa0fZDU7niz1jbGJys0i8GtyYZFeQSQQoBVpMvAQ5vA/4Y/drnIItInGNXRyx8R
+	/oHQXE+C+3I/LuScyonLC1khVOsnEhuICYwLkcXg9obEkSlG85MeaqzGN97Qrx7v5oGV8DtBqvi
+	Xq2cIYqqQzvg1C4c8/Z4GLYfpGmyw1NjsLc3F6R4sJNfp+GbLruqVDsOI+F6tB4otnqg=
+X-Received: by 2002:a05:6a00:a87:b0:87c:e44e:5694 with SMTP id d2e1a72fcca58-8a9be48bae6mr1062373b3a.21.1793341288880;
+        Thu, 29 Oct 2026 23:21:28 -0700 (PDT)
+X-Received: by 2002:a05:6a00:a87:b0:87c:e44e:5694 with SMTP id d2e1a72fcca58-8a9be48bae6mr1062351b3a.21.1793341288405;
+        Thu, 29 Oct 2026 23:21:28 -0700 (PDT)
 Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a9ef08b936sm351163b3a.13.2026.10.29.23.21.17
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a9ef08b936sm351163b3a.13.2026.10.29.23.21.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 23:21:22 -0700 (PDT)
+        Thu, 29 Oct 2026 23:21:28 -0700 (PDT)
 From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Fri, 30 Oct 2026 11:50:51 +0530
-Subject: [PATCH v3 3/7] regulator: pm8008: Add mode voting support for
- PM8010
+Date: Fri, 30 Oct 2026 11:50:52 +0530
+Subject: [PATCH v3 4/7] mfd: qcom-pm8008: Drop GPIO support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,7 +115,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261030-pm8010_i2c_support-v3-3-995ed1ec7a72@oss.qualcomm.com>
+Message-Id: <20261030-pm8010_i2c_support-v3-4-995ed1ec7a72@oss.qualcomm.com>
 References: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
 In-Reply-To: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
 To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -134,179 +132,121 @@ Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
         Oleg Keri <okerixx@gmail.com>, Burke Cates <burke.cates@gmail.com>,
         Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793341260; l=4483;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793341260; l=2803;
  i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=tHHgTISLfM+T4SJmOLlmYYBACZZHmxw+90f4UR9hBoo=;
- b=BimwX38dbCkungPzRaMM/QWdjnVXFdBexA4R87ih3fXcdSL5WBUYAzu4zn6SiULshvfBsMmK9
- IHeY4diBFTgCFFGccT3qpZpUDHTPP6rQBZCWAlc1of6fnPiPg38owwh
+ bh=7mLpR3X9sn5PkU9srryIPwK4wU4oxVAA/ffDfHVmy3Y=;
+ b=3VC6SDP1ZyUjeKHAJKTRxNVFsCVnabMXGvo7hun8OFtJKAlg2iTU1gbcQu20nFLXuq86EFP03
+ kqIJgVur52oAMVguZjEJm8HH9garGe0hLQBjD7Xjy5DEgQy/HY1Bd3v
 X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
  pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDAyNSBTYWx0ZWRfX7dMdXfkWUrXx
- wnZBxFGPiP1BDjBFyv05k/gqikGeMdtLY1c1r4qLM2mIQS/ORsgJx9J/7oxEgrVjujsoZO4/kT9
- r/s43rTfg/OEsXhKj21I18pF44CYWla1Bq+sMhE+bkvGW566Lo/6OyxYc2dRrmjfCyjWvocw8W9
- 6Kc/L4G5SgQgKrwl4w4B3rl9cmuu/b9jTU1oZqGmC6G/d8DfngbZP9Ni0rpolIk9ofpRMbOvGQV
- uqXpNVYcRrjqxveDPw06jnVNQ+O0bbM7I0iaBqVKOTiGKCK7vIbhgfrgFUB1fe0h/JBXMnH32IC
- c2doSb6Nn+tG1swkVU3Mj/xYEBYJnvKaa/U25OgWLlNqLWC1viOuYaGcW9hz7V22yO+FxxJjyR5
- USnRmZ47D+x15sSmKhj0QiBMTWB/FVceazw/iZ8nHC58V066BxARHpH9omsxrPsQ1hLxyeVwxjp
- qBRR4gu2FdTk6lQaAng==
-X-Proofpoint-GUID: 5ujHbA91nia5qlV9jK0n1ywj2hsIn8na
-X-Proofpoint-ORIG-GUID: 5ujHbA91nia5qlV9jK0n1ywj2hsIn8na
-X-Authority-Analysis: v=2.4 cv=IumL47/g c=1 sm=1 tr=0 ts=6ae43763 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: VrJUpAMOIyG3kv7RX9K2g6OoakjQJoc1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDAyNSBTYWx0ZWRfX3ncWPQkTi4sc
+ TqwRswDO8dDDfZ4Nbim53H9IfM6LBva6tzN3dnumfifEDL0irn89J3urX64QAGsWO+3k9xdHhus
+ 8dHHCEG7ntg5e2IZEuwgFg2y8I59IFodSr0ASj42Til+igyrPu0j9Dw6yIi1ulx/9UFXIBHNkV2
+ YE3CNv7JbxdeeGLkHI9tkKfw0HfHgUiEecWxbst7rsMxFxIcfsOYkba7iEAbbNwOetGttJTHrI4
+ S/adjPY6OI8T0TIOxyNsH2CfNzN+HCRjBEC04I2xj0rZocIt8nIEkCDiETKz5OpZRcstdIiFbcv
+ 23mKKfX4PP56ilb/T9BwIJC1xlwp5kdXS21sJzdy7hArgjPnaWPUAiTvRbvFrWng2aVNM+BI3va
+ rp83hx9ZED7ZkTN5KLJqbZpZXsMaxs/wPt+4pgwAL70+aQYF28b3f01rm+pUYNOa1jGnqcHYfoj
+ e6beH/9IUNAWNPoCAdQ==
+X-Proofpoint-ORIG-GUID: VrJUpAMOIyG3kv7RX9K2g6OoakjQJoc1
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDAyNSBTYWx0ZWRfX7KCPZJlJ8RMw
+ u20yMb1cj+XEBNQdVzxeFCtaewrR6qxoo3+62mMKYgL/ZoRrgsR/uE1JyLMKmw8qkjoBmmGFj0M
+ sR7GBSFqHFkbq0uFOCvd3VQT748vAOk=
+X-Authority-Analysis: v=2.4 cv=KdtHIgYD c=1 sm=1 tr=0 ts=6ae43769 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=azaBX0EM9DmJuHldzdsA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDAyNSBTYWx0ZWRfX/JN977YyJlSq
- U+07swgSmymM+olhjiT8gVI5SRRAEbC2lJrFWN5pPeTOR+rIEAcxrCiwlP4sHTPa9HOfSwD9maB
- G71n/AH805VjiDeq1SobEC098D4W1O0=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=-NFQ3DzUh64S9De9z5UA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-30_02,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 clxscore=1015 spamscore=0 bulkscore=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610300025
+ impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0 phishscore=0
+ suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610300025
 
-From: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
+GPIOs used on PM8008 and also the upcoming PM8010 have fixed
+functions (reset and interrupt input functionality) so it is
+not useful to expose them for general-purpose usage. Drop the
+GPIO MFD cell and associated peripheral definitions.
 
-Implement set_mode/get_mode support for PM8010 LDOs using the mode
-control and status registers to allow clients to vote for LDO modes.
-Mode voting is not supported in the PM8008 LDOs.
-
-Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Tested-by: Burke Cates <burke.cates@gmail.com> # ASUS Zenbook A16 (UX3607OA)
 Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 ---
- drivers/regulator/qcom-pm8008-regulator.c | 74 ++++++++++++++++++++++++++++++-
- 1 file changed, 73 insertions(+), 1 deletion(-)
+ drivers/mfd/qcom-pm8008.c | 16 ----------------
+ 1 file changed, 16 deletions(-)
 
-diff --git a/drivers/regulator/qcom-pm8008-regulator.c b/drivers/regulator/qcom-pm8008-regulator.c
-index b484c0f73eea..3db825e93731 100644
---- a/drivers/regulator/qcom-pm8008-regulator.c
-+++ b/drivers/regulator/qcom-pm8008-regulator.c
-@@ -24,6 +24,11 @@
- 
- #define LDO_VSET_LB_REG			0x40
- 
-+#define LDO_MODE_CTL1_REG		0x45
-+#define MODE_PRIMARY_MASK		GENMASK(2, 0)
-+#define LDO_MODE_NPM			7
-+#define LDO_MODE_LPM			4
-+
- #define LDO_ENABLE_REG			0x46
- #define ENABLE_BIT			BIT(7)
- 
-@@ -46,6 +51,7 @@ struct pm8008_match_data {
- 	const bool has_stepper_ctl_reg;
- 	const struct pm8008_regulator_data *regulator_data;
- 	const int num_regulators;
-+	const struct regulator_ops *ops;
+diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
+index 60204cc9a2dc..2d6c01cf54f3 100644
+--- a/drivers/mfd/qcom-pm8008.c
++++ b/drivers/mfd/qcom-pm8008.c
+@@ -31,19 +31,13 @@
+ enum {
+ 	PM8008_MISC,
+ 	PM8008_TEMP_ALARM,
+-	PM8008_GPIO1,
+-	PM8008_GPIO2,
+ 	PM8008_NUM_PERIPHS,
  };
  
- static const struct linear_range pm8008_nldo_ranges[] = {
-@@ -134,6 +140,57 @@ static int pm8008_regulator_get_voltage_sel(struct regulator_dev *rdev)
- 	return regulator_map_voltage_linear_range(rdev, uV, INT_MAX);
- }
+ #define PM8008_PERIPH_0_BASE	0x900
+ #define PM8008_PERIPH_1_BASE	0x2400
+-#define PM8008_PERIPH_2_BASE	0xc000
+-#define PM8008_PERIPH_3_BASE	0xc100
  
-+static int pm8010_regulator_set_mode(struct regulator_dev *rdev, unsigned int mode)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+		val = LDO_MODE_NPM;
-+		break;
-+	case REGULATOR_MODE_IDLE:
-+		val = LDO_MODE_LPM;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return regmap_update_bits(preg->regmap, preg->base + LDO_MODE_CTL1_REG,
-+				   MODE_PRIMARY_MASK, val);
-+}
-+
-+static unsigned int pm8010_regulator_get_mode(struct regulator_dev *rdev)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+	int ret;
-+
-+	ret = regmap_read(preg->regmap, preg->base + LDO_MODE_CTL1_REG, &val);
-+	if (ret < 0)
-+		return REGULATOR_MODE_INVALID;
-+
-+	switch (val & MODE_PRIMARY_MASK) {
-+	case LDO_MODE_NPM:
-+		return REGULATOR_MODE_NORMAL;
-+	case LDO_MODE_LPM:
-+		return REGULATOR_MODE_IDLE;
-+	default:
-+		return REGULATOR_MODE_INVALID;
-+	}
-+}
-+
-+static unsigned int pm8010_regulator_of_map_mode(unsigned int mode)
-+{
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+	case REGULATOR_MODE_IDLE:
-+		return mode;
-+	default:
-+		return REGULATOR_MODE_INVALID;
-+	}
-+}
-+
- static const struct regulator_ops pm8008_regulator_ops = {
- 	.list_voltage		= regulator_list_voltage_linear_range,
- 	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
-@@ -143,6 +200,17 @@ static const struct regulator_ops pm8008_regulator_ops = {
- 	.is_enabled		= regulator_is_enabled_regmap,
+ #define PM8008_TEMP_ALARM_ADDR	PM8008_PERIPH_1_BASE
+-#define PM8008_GPIO1_ADDR	PM8008_PERIPH_2_BASE
+-#define PM8008_GPIO2_ADDR	PM8008_PERIPH_3_BASE
+ 
+ /* PM8008 IRQ numbers */
+ #define PM8008_IRQ_MISC_UVLO	0
+@@ -52,8 +46,6 @@ enum {
+ #define PM8008_IRQ_MISC_OTST3	3
+ #define PM8008_IRQ_MISC_LDO_OCP	4
+ #define PM8008_IRQ_TEMP_ALARM	5
+-#define PM8008_IRQ_GPIO1	6
+-#define PM8008_IRQ_GPIO2	7
+ 
+ enum {
+ 	SET_TYPE_INDEX,
+@@ -84,15 +76,11 @@ static const struct regmap_irq pm8008_irqs[] = {
+ 	_IRQ(PM8008_IRQ_MISC_OTST3,   PM8008_MISC,	BIT(3), IRQ_TYPE_EDGE_RISING),
+ 	_IRQ(PM8008_IRQ_MISC_LDO_OCP, PM8008_MISC,	BIT(4), IRQ_TYPE_EDGE_RISING),
+ 	_IRQ(PM8008_IRQ_TEMP_ALARM,   PM8008_TEMP_ALARM,BIT(0), IRQ_TYPE_SENSE_MASK),
+-	_IRQ(PM8008_IRQ_GPIO1,	      PM8008_GPIO1,	BIT(0), IRQ_TYPE_SENSE_MASK),
+-	_IRQ(PM8008_IRQ_GPIO2,	      PM8008_GPIO2,	BIT(0), IRQ_TYPE_SENSE_MASK),
  };
  
-+static const struct regulator_ops pm8010_regulator_ops = {
-+	.list_voltage		= regulator_list_voltage_linear_range,
-+	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
-+	.get_voltage_sel	= pm8008_regulator_get_voltage_sel,
-+	.enable			= regulator_enable_regmap,
-+	.disable		= regulator_disable_regmap,
-+	.is_enabled		= regulator_is_enabled_regmap,
-+	.set_mode		= pm8010_regulator_set_mode,
-+	.get_mode		= pm8010_regulator_get_mode,
-+};
-+
- static int pm8008_regulator_probe(struct platform_device *pdev)
- {
- 	const struct pm8008_match_data *match_data;
-@@ -185,7 +253,9 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 		desc->supply_name = data->supply_name;
- 		desc->of_match = data->name;
- 		desc->regulators_node = of_match_ptr("regulators");
--		desc->ops = &pm8008_regulator_ops;
-+		desc->ops = match_data->ops;
-+		if (desc->ops == &pm8010_regulator_ops)
-+			desc->of_map_mode = pm8010_regulator_of_map_mode;
- 		desc->type = REGULATOR_VOLTAGE;
- 		desc->owner = THIS_MODULE;
- 
-@@ -231,12 +301,14 @@ static const struct pm8008_match_data pm8008_data = {
- 	.has_stepper_ctl_reg = true,
- 	.regulator_data = pm8008_reg_data,
- 	.num_regulators = ARRAY_SIZE(pm8008_reg_data),
-+	.ops = &pm8008_regulator_ops,
+ static const unsigned int pm8008_periph_base[] = {
+ 	PM8008_PERIPH_0_BASE,
+ 	PM8008_PERIPH_1_BASE,
+-	PM8008_PERIPH_2_BASE,
+-	PM8008_PERIPH_3_BASE,
  };
  
- static const struct pm8008_match_data pm8010_data = {
- 	.has_stepper_ctl_reg = false,
- 	.regulator_data = pm8010_reg_data,
- 	.num_regulators = ARRAY_SIZE(pm8010_reg_data),
-+	.ops = &pm8010_regulator_ops,
+ static unsigned int pm8008_get_irq_reg(struct regmap_irq_chip_data *data,
+@@ -180,7 +168,6 @@ static const struct resource pm8008_temp_res[] = {
+ static const struct mfd_cell pm8008_cells[] = {
+ 	MFD_CELL_NAME("pm8008-regulator"),
+ 	MFD_CELL_RES("qpnp-temp-alarm", pm8008_temp_res),
+-	MFD_CELL_NAME("pm8008-gpio"),
  };
  
- static const struct platform_device_id pm8008_regulator_id_table[] = {
+ static void devm_irq_domain_fwnode_release(void *data)
+@@ -252,9 +239,6 @@ static int pm8008_probe(struct i2c_client *client)
+ 		return ret;
+ 	}
+ 
+-	/* Needed by GPIO driver. */
+-	dev_set_drvdata(dev, regmap_irq_get_domain(irq_data));
+-
+ 	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, pm8008_cells,
+ 				ARRAY_SIZE(pm8008_cells), NULL, 0,
+ 				regmap_irq_get_domain(irq_data));
 
 -- 
 2.43.0
