@@ -1,60 +1,126 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793354291;
-	b=yDTXolMFrgbP35RzY8lULEJE959dy4HKifI7CtU6/2uPIspk4DovY6LzSa8zkKEVS61b
-	 FIOBjCamCVby7lozu8kkunO39YImgXs3pcyreUBlhACM2gT9eBAI+aiCojAX/9Xy//8rO
-	 +n+NsF/jPWC5/kHY0r8w1aSDxdNcOznpakKQG1N4iL1EKPx6gfIq9/93wNJzmM5kaAIDE
-	 Ov6x7Zapl3wWkisQl63i/k4v7Sc+r4rJO5ycpKRs/tymrHtrOIoHOWRaDf5eord+eHuVq
-	 lBcGEyXENRIWcE6RHVyH95MB6TP/zVzfOPZ2pLMvi7vu0wlfEpI55fS6k5on6H10eWw==
+	t=1793354561;
+	b=vvrnL8EsITW4R9pcPCg2D2K+HSTLef9flSVQdF9Uidwqt9JBanZimY3prW0DRCCmJFNG
+	 zEVC1qyrQntG8ayf2Knn4ObipMlkLO4T1fkeJ66ncybxnSt4b5WH4fXPqE4OTNlRrmMVb
+	 Dl6YaDpOZbqZRH0zOxPqbAD1oQwUhy8rO9sQWZr5LLF6TYvo4eRQO2vHU/pwIFet8i2iK
+	 6Dt38fybAfl+DrZIKAIxqQu0+2NpP8i8HTFX2Yw8dC15w6K6qqpYCBPfiok4Rlvza08og
+	 Pt0HTT2/0gzLbu9rVXhbhTbZvkK9jUA4Sp9Kw2ZxcmN++0VX++HK0oK5WyL9c9sGS9Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793354291;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 Content-Language:From:In-Reply-To:Content-Transfer-Encoding:
-	 X-CMS-MailID:X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:
-	 X-CMS-RootMailID:References;
-	bh=yNhU8GgQUg1o1nYtT+CT1yyH9rXOeQLdJVtY/2QBf5A=;
-	b=xPp6h4D3Fy0dDOS1maN0Hp3osdO2qaY296ptKho3kWRuX1oxCmR0Ek01eTC0FC4vzy90
-	 lGqfy9EoN/rfwKGqbhbvarhwS4kgLqVVF6Y1znhueewJWpGE5E7e81/cOg2rBWzkXHuK2
-	 s2InFTF0AH1hJKxeWdRi+8F5LxIqYg2R+uISfl0zWHjiHz3OcjtJBNqKYh4rGGQBB9+SN
-	 EAZcGldrTScLGoxX11pw+mthqDV9ABEM/1a8XB0WHSlMCKxOqPVssx7Wem+cdAATzACiW
-	 85z9HD/tUxCs41fWirHByOmVi4SvNELB92+6dSxs7nMabk2sK31nAbHAuDWv8fMwH1g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793354561;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=XPOou6CQafNHNZDV+h/LKdSD2kkWtiLvC6RPPBJtYFA=;
+	b=NNO66VitW56/BBwsrm9Ctpu6/jHsiUI4eM2MmNH2rINzZYSzSqxQrlJOO0/ZIFATotSR
+	 fUgqckjm5kRXHtoY4O6V1eRrlT7LZAT1s3u5PcSUdSobZt6+lGC5xfk6keEiIHd0PomLu
+	 npKeYu+wjDepaUZMHqz58h+iG2wBPn6L9ksRmyhiEnPE1XASrQAQo4OnbCHDbrS09AZrh
+	 nc+hDOtXRxAYLDDSZe42Q4jgjvC3Wf5kiK6wIkQbmnaGW6Ff723gV9Yr9dYTksEmU5sn9
+	 tXRnkCOkky9xR3NeaG6mpvUWp0Qnn82f+xSo41k1BPg+asMQvwIhu7Z5Nz3R9/awYSA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=NtvUXfff;
-	arc=none smtp.remote-ip=210.118.77.12
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KBFHhwPY;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U4giFQcw;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A042F606A31D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 09:58:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A042F606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C302E606A320
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 10:02:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C302E606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=NtvUXfff
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261030095806euoutp02dd8381ee28e3f873b2df9cb6d8fab2a0~jRjjPFZCl1460014600euoutp02P
-	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 09:58:06 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261030095806euoutp02dd8381ee28e3f873b2df9cb6d8fab2a0~jRjjPFZCl1460014600euoutp02P
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1793354286;
-	bh=yNhU8GgQUg1o1nYtT+CT1yyH9rXOeQLdJVtY/2QBf5A=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=NtvUXfff5dKjwBX0uM7X8ZM/3/RbE2GOv0oE+FmvpIbQNd3CHiOOEO4VCDVdLDCJh
-	 wXiSS4SadpXPwkLFCjZFTahhsAikSSMdcmoPyeBU7QSd3ZjrRRQ73pTT3c7eqLKjyG
-	 d9ZofaBWa24bwsKrH1ZIERUYMC9SzueXqIg4BGmo=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94~jRjjGqrbL2917029170eucas1p1k;
-	Fri, 30 Oct 2026 09:58:06 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20261030095805eusmtip1ac47d4a4931e52d5610654736cf914b2~jRjik2heC1953319533eusmtip1E;
-	Fri, 30 Oct 2026 09:58:05 +0000 (GMT)
-Message-ID: <01841455-880c-4477-ac69-ea8c117cc6cd@samsung.com>
-Date: Fri, 30 Oct 2026 10:58:05 +0100
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KBFHhwPY;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U4giFQcw
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69U8F9Ye3267865
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 10:02:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=XPOou6CQafNHNZDV+h/LKdSD
+	2kkWtiLvC6RPPBJtYFA=; b=KBFHhwPYr++jbg4TF3vSjdJW1POzBYkAi3+RvfSd
+	RtzlrtdMwBBDIaJx7+ddGCxoPXXfmqWm7EkxNxwTiKaEcrFSpMBa4iZEtM3d+eTU
+	BIylE7jUINtqtnmJpg37mM2mJdqS08SL1ZjE755XYPuNUalOxi3xRMeTeZKKCjeZ
+	EbOL8tbpLV2lQgWI7m+wpdOue51XGnlbu50aUMb0EZ0v4QVqy4tmZbIl9PIM0J+J
+	eiSzVyUm/6rX/jfH+EPgir2UQbmcjw40pAZwGygoR1r5wIuOiTq6yMx1YdVlZIEN
+	ad4DhGtxKOQRaFQQ5SMFS0d4E87WWuYt78zNnAjLxqNc6A==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6qjcpn-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 10:02:28 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso1467276eec.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 30 Oct 2026 03:02:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793354548; x=1793959348; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=XPOou6CQafNHNZDV+h/LKdSD2kkWtiLvC6RPPBJtYFA=;
+        b=U4giFQcwsLt8O88iH6fF/3J5vLMK0AZLuczdL4lXN18ry31u43LCXFz/OcNNCU3BQA
+         CzcnAoyfclP5+Pk4yXSPHrW1OGIB32+aO1klCCIDdHXz3xcaIZkHJpwFYXnttyCXsTG9
+         cAhffzpEQDariNokkBMlEFusJlkBcDoBaVZZMxgtv0rDWcgSfBBod0RhJMk0mD6zReFc
+         Iv/CA6aOe5AJ2ojj8/YMkJ0dsaDJ9UsWTgS52GqP3hzpPUKwPqdV+yjLoFpM0UEho4d7
+         kAl2HTnDCtmM++K98RA8v7+sJkl49OfeY4iIClunqZ3LpTuBX3EwQXl9zU2idNHqlNyY
+         qsbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793354548; x=1793959348;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XPOou6CQafNHNZDV+h/LKdSD2kkWtiLvC6RPPBJtYFA=;
+        b=Tew2keXHIqdskp17mXLav83RBFcJhQZD+GaB+Ril0iJ49oIMF04Hhh72e7+rB1eehM
+         YP5zK/xhLzPGKqtOOz9XQ9fmClCEUHCwJt2++BitAohL+oYbjyYg2Jug4qLS9rF/49db
+         5dq9XqCfOal2sthoC6EL1R/TRodMbr0EBBWeuJ8ccX5hy8ccuRqF27oFcNpaJWxV91SK
+         H+YqWu47KFoVNHj/diWhn8ZxnS04B5PP1y2SaSP2+uMlK/KzD9vhojzcqdQjq8kZ6o2U
+         Ay3qo9vFtD11YE5PLpd7ibebaSk+lW6ZkPQ+iAWh4PSjQ0ZcptnbURKK45mXIAvrl5Fx
+         Uhkw==
+X-Forwarded-Encrypted: i=1; AKwUvBx2mEx6bIChbhvWR1F1X50CnrVyoi137M8Yvl6X1EmgF/QHfK4HBX6A4tBaAbvTL7lIPT2EXrOsiPlBrRA8@vger.kernel.org
+X-Gm-Message-State: AFq9FYJn9aIt4UM84MhExj6YBHd5pnGGt7Obo1wNThQI47SeblhRBczz
+	v8gfi9IQB94ETfRklq1OEG9mlYwoM/lQE0zbsLhSBeYRjlqc/ZZLSWhvUDHArYDuJpyuEdlqK2Q
+	meAbLcYP0Hvqh5SQh/akUuQJEATLaWvhZvNYueJYycqyfedchOgaOtlAoIvvyi7bupwVd
+X-Gm-Gg: AYBFou1wOKDa+50kf7QCz6Ol/3tEpuBLdap334px6EfAY+mWrnV3vQ21Gpm5vI4J0yq
+	NOoCsrbqYX+uR0bXucX1De/mrg1nsnuKd4DMUB9HgPWwDuhkJ3HqE+pgh1VuzdsFynowe9vXkuM
+	N1jSQgNR3+uuRZRHoA/tIDz+35fpl0xUNMetK412QCGzQ0XcImWO22Qpzw9cLMuNTRSe7lv4FAK
+	OA1iR8ZpVg0+TLlc+je77XFNQmHNuiqTH01UvkNdrPnBl5+D+NbPzrakbDCtcJDjQJxBcdeul3v
+	p3gN+dRtzcdc13v7hDtVbKa/HWpTHtC6VZcKeQtAOmqr/nBLL1yaWu6Y6f4yqIGJRKxPkWgilly
+	ZSfi9xKQd+ht9HZFn1lUMxJOGEiCCm2u3BRzG37wS0DeAHdp5fgOe+6bYEu+YXvpIW2EY+76B7u
+	w0PfGcLRjo8z09OrU=
+X-Received: by 2002:a05:7301:6183:20b0:36a:1089:9836 with SMTP id 5a478bee46e88-36a423c8988mr2702552eec.15.1793354547646;
+        Fri, 30 Oct 2026 03:02:27 -0700 (PDT)
+X-Received: by 2002:a05:7301:6183:20b0:36a:1089:9836 with SMTP id 5a478bee46e88-36a423c8988mr2702509eec.15.1793354547051;
+        Fri, 30 Oct 2026 03:02:27 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42aa8999sm6925218eec.29.2026.10.30.03.02.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Oct 2026 03:02:26 -0700 (PDT)
+Date: Fri, 30 Oct 2026 18:02:19 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Sasha Levin <sashal@kernel.org>
+Cc: stable@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jeff Johnson <jjohnson@kernel.org>,
+        Rameshkumar Sundaram <rameshkumar.sundaram@oss.qualcomm.com>,
+        Yingying Tang <yingying.tang@oss.qualcomm.com>,
+        Baochen Qiang <baochen.qiang@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>, ath12k@lists.infradead.org,
+        linux-wireless@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Pavankumar Nandeshwar <pavankumar.nandeshwar@oss.qualcomm.com>,
+        Aaradhana Sahu <aaradhana.sahu@oss.qualcomm.com>,
+        Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Subject: Re: [PATCH 7.3.y] wifi: ath12k: Increase RXDMA buffer ring size for
+ default memory profile
+Message-ID: <auRrK4JWN-7rUcG5@QCOM-aGQu4IUr3Y>
+References: <20261029095541.685879-1-shengchao.guo@oss.qualcomm.com>
+ <2026-10-29-1-daily-reply-0011-ath12k-rxdma-ring-7-3@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,243 +130,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH v5 1/4] gpio: shared-proxy: Fix race between concurrent
- first users
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>, Linus Walleij
-	<linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20261028123448.510401-2-shengchao.guo@oss.qualcomm.com>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94
-X-EPHeader: CA
-X-CMS-RootMailID: 20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94
-References: <20261028123448.510401-1-shengchao.guo@oss.qualcomm.com>
-	<20261028123448.510401-2-shengchao.guo@oss.qualcomm.com>
-	<CGME20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94@eucas1p1.samsung.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2026-10-29-1-daily-reply-0011-ath12k-rxdma-ring-7-3@kernel.org>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDAzOSBTYWx0ZWRfX+qAstjZEjU3D
+ eU7B3y3Bjv9MEfy7XEqOGOBblHdJmnGp962TZAxYQZH+ETGYgQraMMXsnHPCFxqjeKUZX5iIwbz
+ iOoJtHB5hcSEHb67eYmdlZlHryu8dP4xE3LYvttAY+Z6lnNtF+ifl1+uuApeWPOEYYD9tjSlkjG
+ 1YDQScF3TCD0hav28nPCS3LEASCk/TWPRYC6uNHRXmeqOd+R2r53vUqfoKU2YBjG2h07AdK6B84
+ ScMXzRMhmg/Wje++AjpxOsV6ez6UOXbtHBp8fuiF0TCWc3JLFseQuyPxZDb3tKUjtnIP0/drxdB
+ 7grvCrkyoOTDe8ZQFIIcgUaI1nab52e/c304vPRUJBQwrbCCx2zTiCHu5F3HVbERLFcs1Vchws5
+ UVJE/bRmFbv2OwAAPfhc1bmG/uyxB7KALKgnvppILKNyTo5I1czmID/1XPaEOX5F9RLG6Joyxj5
+ DZ603uCfLnxgB+5YLnQ==
+X-Proofpoint-ORIG-GUID: gnbwMmwtEyJQ_SZZv44a1AX2pkZ20drk
+X-Authority-Analysis: v=2.4 cv=IeoSymqa c=1 sm=1 tr=0 ts=6ae46b34 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=3Y6tUoXcgYOYlkcqMpIA:9 a=CjuIK1q_8ugA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDAzOSBTYWx0ZWRfX1X0F642U9F9c
+ DQMk2v6ofAS1GxI4EqDb56E0usQAEPHsghK0ySPg4goip6RwdPDAuJxjFBTp8OqLtF9+umQBbzC
+ KT+5KGlVHPmV232GZAux43+VdXpTlVc=
+X-Proofpoint-GUID: gnbwMmwtEyJQ_SZZv44a1AX2pkZ20drk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-30_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610300039
 
-On 28.10.2026 13:34, Shawn Guo wrote:
-> The proxy lets a consumer set the line direction and reset the
-> default value and vote tally only when usecnt == 1, i.e. when it is
-> the sole requester. But request() and direction_output() take the
-> descriptor mutex separately. When two consumers probe concurrently,
-> both request the line before either configures it, both see
-> usecnt == 2, both fall into the shared path, read back the still
-> unconfigured direction (input) and fail with -EPERM.
->
-> On Nord RRD the two DAC supplies are reg-fixed-voltage regulators
-> sharing tlmm GPIO 41. They probe asynchronously and intermittently
-> both fail, leaving the codecs without supplies:
->
->   reg-fixed-voltage regulator-3p3-dac: setup of GPIO (default) failed: -1
->   reg-fixed-voltage regulator-5p0-dac: setup of GPIO (default) failed: -1
->
-> Requesting the line is not evidence that a consumer has claimed it.
-> Instead, count proxies that have actually configured the line (set its
-> direction or voted for a value) in a new cfgcnt, with a per-proxy
-> configured flag, and allow (re)initialization only while no other
-> proxy has done so. A consumer obtained with GPIOD_ASIS that votes via
-> gpiod_set_value() without ever setting the direction counts as
-> configured, so a later user can never reset def_val/votecnt behind its
-> vote. The count is dropped when the proxy frees the line.
->
-> Fixes: e992d54c6f97 ("gpio: shared-proxy: implement the shared GPIO proxy driver")
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+On Thu, Oct 29, 2026 at 02:43:18PM -0400, Sasha Levin wrote:
+> > commit 15f7603b69a83a0acc7fcc8992ecbea6110f9424 upstream.
+> > commit 643f0bf936176c114d5631da7547e991b5d99f10 upstream.
+> 
+> Queued the upstream chain for 7.3 as Greg asked, rather than the folded patch,
+> thanks.
 
-I've hit the same issue on RUBIK Pi3 board, see:
+Awesome! Thank you, Sasha!
 
-https://lore.kernel.org/all/20261028222803.2682808-1-m.szyprowski@samsung.com/
-
-This patch fixes it, so feel free to add:
-
-Tested-by: Marek Szyprowski <m.szyprowski@samsung.com>
-
-
-> ---
->  drivers/gpio/gpio-shared-proxy.c | 78 ++++++++++++++++++++++++++++----
->  drivers/gpio/gpiolib-shared.h    |  1 +
->  2 files changed, 70 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/gpio/gpio-shared-proxy.c b/drivers/gpio/gpio-shared-proxy.c
-> index bc69b8729d19..2e9ccd8a8d83 100644
-> --- a/drivers/gpio/gpio-shared-proxy.c
-> +++ b/drivers/gpio/gpio-shared-proxy.c
-> @@ -21,9 +21,37 @@ struct gpio_shared_proxy_data {
->  	struct gpio_chip gc;
->  	struct gpio_shared_desc *shared_desc;
->  	struct device *dev;
-> +	bool configured;
->  	bool voted_change;
->  };
->  
-> +/*
-> + * A proxy may (re)initialize the line - set its direction and reset the
-> + * default value and the vote tally - only while no other proxy has set the
-> + * direction or voted for a value. Requesting the line is not enough: consumers
-> + * may request concurrently, so counting requests lets every one of them
-> + * conclude that it is not first.
-> + */
-> +static bool gpio_shared_proxy_may_init(struct gpio_shared_proxy_data *proxy)
-> +{
-> +	unsigned int cfgcnt = proxy->shared_desc->cfgcnt;
-> +
-> +	lockdep_assert_held(&proxy->shared_desc->mutex);
-> +
-> +	return !cfgcnt || (cfgcnt == 1 && proxy->configured);
-> +}
-> +
-> +static void gpio_shared_proxy_mark_configured(struct gpio_shared_proxy_data *proxy)
-> +{
-> +	lockdep_assert_held(&proxy->shared_desc->mutex);
-> +
-> +	if (proxy->configured)
-> +		return;
-> +
-> +	proxy->configured = true;
-> +	proxy->shared_desc->cfgcnt++;
-> +}
-> +
->  static int
->  gpio_shared_proxy_set_unlocked(struct gpio_shared_proxy_data *proxy, int value)
->  {
-> @@ -117,6 +145,11 @@ static void gpio_shared_proxy_free(struct gpio_chip *gc, unsigned int offset)
->  
->  	proxy->shared_desc->usecnt--;
->  
-> +	if (proxy->configured) {
-> +		proxy->configured = false;
-> +		shared_desc->cfgcnt--;
-> +	}
-> +
->  	dev_dbg(proxy->dev, "Shared GPIO freed, number of users: %u\n",
->  		proxy->shared_desc->usecnt);
->  }
-> @@ -131,7 +164,7 @@ static int gpio_shared_proxy_set_config(struct gpio_chip *gc,
->  
->  	guard(mutex)(&shared_desc->mutex);
->  
-> -	if (shared_desc->usecnt > 1) {
-> +	if (!gpio_shared_proxy_may_init(proxy)) {
->  		if (shared_desc->cfg != cfg) {
->  			dev_dbg(proxy->dev,
->  				"Shared GPIO's configuration already set, accepting changes but users may conflict!!\n");
-> @@ -155,15 +188,21 @@ static int gpio_shared_proxy_direction_input(struct gpio_chip *gc,
->  	struct gpio_shared_proxy_data *proxy = gpiochip_get_data(gc);
->  	struct gpio_shared_desc *shared_desc = proxy->shared_desc;
->  	struct gpio_desc *desc = shared_desc->desc;
-> -	int dir;
-> +	int ret, dir;
->  
->  	guard(mutex)(&shared_desc->mutex);
->  
-> -	if (shared_desc->usecnt == 1) {
-> +	if (gpio_shared_proxy_may_init(proxy)) {
->  		dev_dbg(proxy->dev,
-> -			"Only one user of this shared GPIO, allowing to set direction to input\n");
-> +			"No other user configured this shared GPIO, allowing to set direction to input\n");
->  
-> -		return gpiod_direction_input(desc);
-> +		ret = gpiod_direction_input(desc);
-> +		if (ret)
-> +			return ret;
-> +
-> +		gpio_shared_proxy_mark_configured(proxy);
-> +
-> +		return 0;
->  	}
->  
->  	dir = gpiod_get_direction(desc);
-> @@ -176,6 +215,8 @@ static int gpio_shared_proxy_direction_input(struct gpio_chip *gc,
->  		return -EPERM;
->  	}
->  
-> +	gpio_shared_proxy_mark_configured(proxy);
-> +
->  	return 0;
->  }
->  
-> @@ -189,18 +230,20 @@ static int gpio_shared_proxy_direction_output(struct gpio_chip *gc,
->  
->  	guard(mutex)(&shared_desc->mutex);
->  
-> -	if (shared_desc->usecnt == 1) {
-> +	if (gpio_shared_proxy_may_init(proxy)) {
->  		dev_dbg(proxy->dev,
-> -			"Only one user of this shared GPIO, allowing to set direction to output with value '%s'\n",
-> +			"No other user configured this shared GPIO, allowing to set direction to output with value '%s'\n",
->  			str_high_low(value));
->  
->  		ret = gpiod_direction_output(desc, value);
->  		if (ret)
->  			return ret;
->  
-> +		/* Only this proxy can have voted, so the tally is ours to reset */
->  		shared_desc->def_val = value;
->  		shared_desc->votecnt = 0;
->  		proxy->voted_change = false;
-> +		gpio_shared_proxy_mark_configured(proxy);
->  
->  		return 0;
->  	}
-> @@ -215,7 +258,13 @@ static int gpio_shared_proxy_direction_output(struct gpio_chip *gc,
->  		return -EPERM;
->  	}
->  
-> -	return gpio_shared_proxy_set_unlocked(proxy, value);
-> +	ret = gpio_shared_proxy_set_unlocked(proxy, value);
-> +	if (ret)
-> +		return ret;
-> +
-> +	gpio_shared_proxy_mark_configured(proxy);
-> +
-> +	return 0;
->  }
->  
->  static int gpio_shared_proxy_get_cansleep(struct gpio_chip *gc,
-> @@ -230,10 +279,21 @@ static int gpio_shared_proxy_set_cansleep(struct gpio_chip *gc,
->  					  unsigned int offset, int value)
->  {
->  	struct gpio_shared_proxy_data *proxy = gpiochip_get_data(gc);
-> +	int ret;
->  
->  	guard(mutex)(&proxy->shared_desc->mutex);
->  
-> -	return gpio_shared_proxy_set_unlocked(proxy, value);
-> +	/*
-> +	 * A GPIOD_ASIS consumer may vote without ever setting the direction;
-> +	 * count it as configured so a later user can't reset its vote.
-> +	 */
-> +	ret = gpio_shared_proxy_set_unlocked(proxy, value);
-> +	if (ret)
-> +		return ret;
-> +
-> +	gpio_shared_proxy_mark_configured(proxy);
-> +
-> +	return 0;
->  }
->  
->  static int gpio_shared_proxy_get_direction(struct gpio_chip *gc,
-> diff --git a/drivers/gpio/gpiolib-shared.h b/drivers/gpio/gpiolib-shared.h
-> index 618756f6c6aa..ae10506b7029 100644
-> --- a/drivers/gpio/gpiolib-shared.h
-> +++ b/drivers/gpio/gpiolib-shared.h
-> @@ -41,6 +41,7 @@ struct gpio_shared_desc {
->  	struct gpio_desc *desc;
->  	unsigned long cfg;
->  	unsigned int usecnt;
-> +	unsigned int cfgcnt;
->  	unsigned int votecnt;
->  	int def_val;
->  	struct mutex mutex; /* serializes all proxy operations on this descriptor */
-
-Best regards
--- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
-
+Shawn
