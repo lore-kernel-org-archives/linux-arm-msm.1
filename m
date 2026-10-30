@@ -1,60 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.17
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793358154;
-	b=1ocjEMn8HqvQ2SOXvRT2XJiuguI03x6z4wSIi4gDjSjAMSPyq9WXFcsM48KaduRevNNd
-	 9Wtx9C7mAUD44tfqnH+SP9nP3H5VYTJFRBB/OCJh2iRJ1JDOdA3COfYZluqWhh87s7/Hv
-	 +i6thwajfoZvSxjP9pdhmFnTcLPHCMERxWsHyQc9u/Jpd38ZQo7iXX3lb/c3KY0AMMQ1k
-	 HoZvuT5R2U5+NK+jYeaCeFe9kB7ovmvxr0aq3w1Xpc1frmZabKyZNqtT0CWUHnuoiSsWY
-	 unz5tD5NCQhXv/1QkqWBs/pz5K+K4K0LYDRrkLMzOZmMOT2HmlxW+PwbDB1YmOezPLA==
+	t=1793359359;
+	b=vvWfgsQSkBCMwMqgt1xPoPTGIgcew/gM9Sl0KYJP4QtuZTkceCaAmigqrppif2YIgDvf
+	 /1VKInz/Jd5B8pIL+HzERwOQ0i0IE8Ox/wM/DjqeKAdWCN9BV2ovv9L+2uEJTuK7olWfY
+	 n87z1PgxHWP8mt4qxTujYTWFNziEHQEtLW2CiT5ujSSI//oxhRz4wXjIE/KV6vhDQSy5+
+	 DZVhhoh0tbImAOFFP2zFgu9qCVWQtVHg+0OhXbjm2SGuElbjjDQ+mVDXTetybxRMPfMHS
+	 ztDL1Y1PWk7iJ55Gd3tQ5RMF/L8R4XNcpt/w6LBK2PKf1ull9HiQEqB8YE80exdzdaw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793358154;
-	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=n/U4UFdhwELj1O+Vs6zyp8TwuLl7zda066w0LeaYSGQ=;
-	b=OWFYlESIgrrK++qMMaMgP36tS5FpzqWyQYN0csHkhPNDy02SjeSuwJ3pU0E81Nojl+Xj
-	 fD6huR1Ouqb8I2tE6jIwMNZzibA0PjgZbEF7eAhTw4VPsWdwPjxFrVE5c5FWL90pnCRxG
-	 zvUAy1m3cHmx3y873LdRZ1O98EsBtwbDiyCVEyfzm8TvE1nf6I0tlis3VenvvmKxhRFi9
-	 PuFZfAOgOb+lUSXdMunEFZ5xHRGlOa/UDmSz+x4CWTtSbTrsFaOun+S6DrsNBoYKe3icZ
-	 +bONnCGnml/s2B1ERJjAuDSxN6LkX7pILYEcZJLOXeMhfV3w3rVozlOKjaG+xfskl9w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793359359;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=yJqDl0TWWpvU7A0NfZvQiMiQvyoQM27Wt5aSa3fPKKo=;
+	b=DOXsFWdI7/U87GBqgqikaMXeKGO6v/AlQ7Xj+D9Blhn5k1yHbbDqVWDHEFyK6yMVn2q0
+	 fEFrxtNjEjneN/c8iCIGKo5nEavSxO/pYEMNeICinzP9NfeT0R0qzstXCMjB+MYz5aqF4
+	 ZiBb49jIBoChoWkm9c31TMEkbryuSBwgwhIBJLqYoVn9k6+BtZbt5oPVdNIY9cxaPES4t
+	 iT8RNfKEoOKTn+n0HayLpQoWaMSHYRGec8b+4KlX/5guZcHVFZagKRpijDfSIen3UKqSz
+	 LippAFME+MFDGcE5yYNAv18yvFI650/282ub5E3woHgzUA7quesgHuhzBUeY5dL7mLw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=nxsw.ie;
-	spf=pass smtp.mailfrom=nxsw.ie;
-	dkim=pass header.d=nxsw.ie header.i=@nxsw.ie header.a=rsa-sha256 header.s=protonmail2 header.b=SZUIkM2+;
-	arc=none smtp.remote-ip=185.70.43.17
-Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a3BSZfY+;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5944B606A335;
-	Fri, 30 Oct 2026 11:02:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5944B606A335
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxsw.ie
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4218C606A31C;
+	Fri, 30 Oct 2026 11:22:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=nxsw.ie header.i=@nxsw.ie header.a=rsa-sha256 header.s=protonmail2 header.b=SZUIkM2+
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxsw.ie;
-	s=protonmail2; t=1793358150; x=1793617350;
-	bh=n/U4UFdhwELj1O+Vs6zyp8TwuLl7zda066w0LeaYSGQ=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=SZUIkM2+aqn1kcSOJTL0DRdGbW6vqyDRYAdQwHuCrQ7NcnO5Qe5zQ36kUXeTpjfdE
-	 hyS4fnVlw/edLaq6DljE5GgmA4VNPxF2KNUMO7FSx1gIct4gS18aniUORsuqovnSlT
-	 dagJgcNh/J2G6uoloGn+0KyGbTj1DeYOHW+siR2BAMJg0QNu0YpqnbAfA0sqO1IP0k
-	 waRrrwFs+rHmZ/AYFWvH7JM+qKkQop+yVQwXT0QMiLUyiynI0lL4H979kJ8deNFGgn
-	 cu/Pc/whOiDTcsDEIwOcICS0amGRK1WgqHH8YmkI1TySvkJZBUS1Gv+wrgFdgElqPB
-	 LCVhXWKjo3J7g==
-Date: Fri, 30 Oct 2026 11:02:23 +0000
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Todor Tomov <todor.too@gmail.com>, Hans Verkuil <hverkuil@kernel.org>
-From: Bryan O'Donoghue <bod.linux@nxsw.ie>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v2] media: qcom: camss: vfe: Clear active buffer pointers after flushing
-Message-ID: <2e978b38-bfeb-4120-8ffe-285d7afc8195@nxsw.ie>
-In-Reply-To: <20261030-camss-fix-v2-1-51fe96b348cf@oss.qualcomm.com>
-References: <20261030-camss-fix-v2-1-51fe96b348cf@oss.qualcomm.com>
-Feedback-ID: 136405006:user:proton
-X-Pm-Message-ID: bb788ac2e24ef4863756b9a446a9821755acd510
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a3BSZfY+
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3E3B1F000C1;
+	Fri, 30 Oct 2026 11:22:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793359358;
+	bh=yJqDl0TWWpvU7A0NfZvQiMiQvyoQM27Wt5aSa3fPKKo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=a3BSZfY+Y1EQAwV6Wq+uGYr94s4Hno6DW3nPAPWNAt3qF07f9yM3Gh2YsZUee1ngI
+	 9xqNwU3PhvvAmOutw2yA/nQ3r3UuHZNgmvtFml45qPHvAZIEaQztd8Jp9ObQ+vmP/p
+	 xlQqoZdorP5J0zm+HFlAwpCCu2goVvBuJdwwaxxhrHCexYdIg/AMu68Nfl8JkHh61Z
+	 BNeEexvORDA/R64QAJM28/4KLP8pWXPj2DnGjERiV4SKZUE+yDCDqNVZXRAsuh9C3g
+	 DeTuBQgMGtkD6JDS4i7Exscr0gF1SvzgrzGB0xDqOGoE/M8wy6B814On0OUmwefOYU
+	 lRxz27NWojIAw==
+Date: Fri, 30 Oct 2026 12:22:33 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
+	Linus Walleij <linusw@kernel.org>, linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 1/4] gpio: shared-proxy: Fix race between concurrent
+ first users
+Message-ID: <svjb2ivlopgphqueanfjykfedqejyr4akxbo4y4eycuf5qesxq@3efk7hu6xeft>
+References: <20261028123448.510401-1-shengchao.guo@oss.qualcomm.com>
+ <20261028123448.510401-2-shengchao.guo@oss.qualcomm.com>
+ <CGME20261030095806eucas1p1227bd86bd46487d5dfdbe36bd4df8e94@eucas1p1.samsung.com>
+ <01841455-880c-4477-ac69-ea8c117cc6cd@samsung.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,68 +61,50 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <01841455-880c-4477-ac69-ea8c117cc6cd@samsung.com>
 
-On 30/10/2026 09:47, Loic Poulain wrote:
-> vfe_flush_buffers() returns all active buffers to vb2 but it leaves
-> output->buf[0] and output->buf[1] pointing to the completed buffers
-> despite the lost of ownership.
->=20
-> This can lead to subsequent flush or completion paths operating on
-> stale state and potentially completing the same buffer more than once.
->=20
-> Clear the buffer pointers explicitly.
->=20
-> Note: vfe_enable_output_v2 is supposed to overwrite those pointers with
-> pending buffers when streaming is restarted, but nothing guarantees that
-> enough pending buffers will be available to overwrite all entries.
->=20
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Closes: https://sashiko.dev/#/bug/linux-e617a776-3d96-47cb-8d60-a769340c2=
-5a7
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> Fixes: 4c98a5f57f90 ("media: camss: Add VFE files")
-> ---
-> Changes in v2:
-> - Remove unrelated changes/diff from this patch
-> - Link to v1: https://lore.kernel.org/r/20261030-camss-fix-v1-1-ecc170342=
-d0d@oss.qualcomm.com
-> ---
->   drivers/media/platform/qcom/camss/camss-vfe.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/medi=
-a/platform/qcom/camss/camss-vfe.c
-> index 2680a9914765fa2c8f3c2b38a5f4f0e0bcf4d873..8e297e2bcafcbf30b09fc2ad6=
-e57f484a4e41898 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-> @@ -1187,11 +1187,15 @@ int vfe_flush_buffers(struct camss_video *vid,
->=20
->   =09vfe_buf_flush_pending(output, state);
->=20
-> -=09if (output->buf[0])
-> +=09if (output->buf[0]) {
->   =09=09vb2_buffer_done(&output->buf[0]->vb.vb2_buf, state);
-> +=09=09output->buf[0] =3D NULL;
-> +=09}
->=20
-> -=09if (output->buf[1])
-> +=09if (output->buf[1]) {
->   =09=09vb2_buffer_done(&output->buf[1]->vb.vb2_buf, state);
-> +=09=09output->buf[1] =3D NULL;
-> +=09}
->=20
->   =09if (output->last_buffer) {
->   =09=09vb2_buffer_done(&output->last_buffer->vb.vb2_buf, state);
->=20
-> ---
-> base-commit: f1ac44c32cba88ad65dcecd4a279661d14e93651
-> change-id: 20261030-camss-fix-4972697ef90e
->=20
-> Best regards,
-> --
-> Loic Poulain <loic.poulain@oss.qualcomm.com>
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+On Fri, Oct 30, 2026 at 10:58:05AM +0100, Marek Szyprowski wrote:
+> On 28.10.2026 13:34, Shawn Guo wrote:
+> > The proxy lets a consumer set the line direction and reset the
+> > default value and vote tally only when usecnt == 1, i.e. when it is
+> > the sole requester. But request() and direction_output() take the
+> > descriptor mutex separately. When two consumers probe concurrently,
+> > both request the line before either configures it, both see
+> > usecnt == 2, both fall into the shared path, read back the still
+> > unconfigured direction (input) and fail with -EPERM.
+> >
+> > On Nord RRD the two DAC supplies are reg-fixed-voltage regulators
+> > sharing tlmm GPIO 41. They probe asynchronously and intermittently
+> > both fail, leaving the codecs without supplies:
+> >
+> >   reg-fixed-voltage regulator-3p3-dac: setup of GPIO (default) failed: -1
+> >   reg-fixed-voltage regulator-5p0-dac: setup of GPIO (default) failed: -1
+> >
+> > Requesting the line is not evidence that a consumer has claimed it.
+> > Instead, count proxies that have actually configured the line (set its
+> > direction or voted for a value) in a new cfgcnt, with a per-proxy
+> > configured flag, and allow (re)initialization only while no other
+> > proxy has done so. A consumer obtained with GPIOD_ASIS that votes via
+> > gpiod_set_value() without ever setting the direction counts as
+> > configured, so a later user can never reset def_val/votecnt behind its
+> > vote. The count is dropped when the proxy frees the line.
+> >
+> > Fixes: e992d54c6f97 ("gpio: shared-proxy: implement the shared GPIO proxy driver")
+> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> 
+> I've hit the same issue on RUBIK Pi3 board, see:
+> 
+> https://lore.kernel.org/all/20261028222803.2682808-1-m.szyprowski@samsung.com/
+> 
+> This patch fixes it, so feel free to add:
+> 
+> Tested-by: Marek Szyprowski <m.szyprowski@samsung.com>
+> 
+> 
+ 
+Thanks, I'll queue this instead of your patch as it's more
+comprehensive.
 
+Bart
