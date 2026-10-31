@@ -1,58 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793458992;
-	b=d+hXqBUHjiMojdpjdVj3UhMrQ0VKQaUsWhoe3yyCsdWAKHur8yuy82l2oMugWqg5DQzg
-	 59WYWG5VQCc4xbLOr7IQi+FQn1QDQDF6JepvK05PrdgBP+eryH1mZ2tmceFL6a6H0yntH
-	 FXY2L42S8+BeeUdDvueBRbb6QhS9gfE5GJh4qMX3r/ud50UbBESVdvPcScGAmQw1Mg7HR
-	 Smaj7ZtxSNRlCa9bqFySfKv2q+E+QRNiz2iv5KIkCx99Xv9KHZJWnoIbTK8tp/+EW9Yvl
-	 V/C9EqvUN4tt2PyIXOWkVeX4ZZ9ypxQS1NEIRzpDOBQPj0dN4fAbLHdlQ0cfB78LiNA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793458992;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=YHf42dT4GUuGEkFrxXMEdkY9Ofr+uP3rQXVMmCvRrVM=;
-	b=xBwmEOA2XzT5UZ7U3Ya1kUq6GmBLAg+d3LW+0bXzU57pIaEeHZnfpAvI8hhw16dLhVS7
-	 KO9OcxBD5VrPXeZ7POMODSfRZV26OaYA6KGIG6EQXYAOtp3m7Y2siUfrpnVmdNVGih+EK
-	 xVoQrXAyFfzK5w8keBigf3GQLYbGaGDpPr7/asZjH8WioMMu1gZ+r+hnBkKBPbH5npkXc
-	 U2dwb0axWWKgpPoIkpNTRLgp5Uw9APHb3zFiejRVNAoukWnMKOLgwiJLXA51+Xd+RiNAE
-	 2XT17H4oBY5kOTxyYMoE9rUcdg81IRFgWoWc1UNNNUuM4CHlk+Yr07/BFBDCrjTVelw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=rU1B7S3f;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87F24606A31F;
-	Sat, 31 Oct 2026 15:03:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 87F24606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793459123;
+	b=FLwk1WYCwWHjUU4XOyVc0xa2rMJ4Z5qUNj7+qhJcZnEqR0G6B+f6wVLA2AB7dnNZ2lXY
+	 xzZ76Tm0PpguFYhPOP9NIF9ZfzTjPufjBspbjU1RhX4JTPcm2WSHP7O4YXiefVsNhbTBy
+	 mf4aqlWjFJZmCBDXH1pdLkNaCclgPiFMzD27vJfXyKb6A/2F2SrFpVJnzg9xQeZRkEbNZ
+	 m2VyK9nvUHYrg1BTnrkPTi4woLPxJ5jEQ4J2I/VIpNcmwmntpRi8nL+oVzX6Myd2VzuVc
+	 4FrnpJaEpkfNdSIWi969MF2+xZv4yvA9gMiRF2nFLxAGY/Kj88Tz+/DU6SmbGeyadPg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793459123;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=XiBVYY9Pj1d3wCyHUQPb6/u7BjXKfayo72bDkp0mxRc=;
+	b=MLtKuh4nrMUhCXcnoK+cgV2Xd/QXYhNYbCRcrTWIaDxATmmVzcRQ04CPxACocEqpvRXM
+	 E3tr3WPS2TxjJMjtw0hSWfOqyO+gIBdoMX4QJrEnCFthbfiQoxhzde65b0LYrGzJSQkCh
+	 LFRoQt81y1dq5BaKgnk9Jh/W3JDp/sQqBr+2J4XtQTkF9LSxTdzejwOLkTNrtqqqURmr+
+	 2CYTA8zuS5pdXY34VAAp1b8jpSsGIHp3PQw2oKTciReRXJ4z5IDhw/CBed4arMBh+5Vwv
+	 q1BnP0aTXeRoAv/P1XM6EwjK7IGYxX9DKZ7CLxD6ZKedA/uSkOyeGftTE4GJ+ESI8UQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Vg8PaQQ6;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E886606A324;
+	Sat, 31 Oct 2026 15:05:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=rU1B7S3f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=YHf42dT4GUuGEkFrxXMEdkY9Ofr+uP3rQX
-	VMmCvRrVM=; b=rU1B7S3fm56HwmhW44Z6C+QUmSP8v53TML5bV533kfyfn62aPn
-	ouvy9sFkKrm/LpDv189XhbqiQYF3NvAG2TP7FtA/7qt/mW4A6rPNqgM31pqgr8eJ
-	7N6zGlZWirqEzJ4syKT2nFJ/0byxVktz2M8uaDTo8DHQeebTv87ixzlxk=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.177.113])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgDHS0ApA+ZqqSNvAA--.5005S4;
-	Sat, 31 Oct 2026 23:03:06 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Rob Clark <robdclark@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 2/5] drm/msm/dsi: add per-SoC bonded command-path config
-Date: Sat, 31 Oct 2026 23:03:02 +0800
-Message-ID: <20261031150305.1107572-3-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261031150305.1107572-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261031150305.1107572-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Vg8PaQQ6
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1793459123;
+	b=NK9b7+a3GQe0wzAcRPPks/c/FRs1JYyceMsN503QwnEngTIJ1tDu/0X1fXPFhLozP90s
+	 HEiRciMB5bAIfwHGRzDts41dYW4O0Lav6fe3mxUSWSrswRnE8T884MPKDHbpXDQo4rcBN
+	 +nx9gIIMYiqc1Woyi4VYWCHvh4GGKXPdQ2x56jUGA8olCmHS8PdvF7oZpCp+5xroZKCkZ
+	 BqAhJ4jhA7VYJ2moNGoxytAbRMs9E+cNSbQ9mGz8AzbwYTa4NC2epyjWWD6QxpAIykczc
+	 AKzmYqsXZ4hs9/WWJTy+BppDMWP4iDxL6Z5ehHotza8FbIlT45iVognM+r7NG0ywk+w==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793459123;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=XiBVYY9Pj1d3wCyHUQPb6/u7BjXKfayo72bDkp0mxRc=;
+	b=n1SWR0XEOCzlnJrzasFcarAP9jNCNgI8+cuT6T1/4OqSEAxPm70CYBsAzUVbJU8NnBw8
+	 i8T9SsQIXWydNaZAaomavyKbr5FRVuXAUFF1+3/NoWDB5LAlML4QdFUh8fXynaSA/JnQJ
+	 nqwLsAwpxrrfMdhoBA1ZreDa7XtRzCv4OJxyRbF71eOeiox52QAuMpYijfePP2uP2EAP3
+	 pMzpSXAwrjsYGWMu44aN8Suzy+ukc9bX8MvvOihLoNtdwOW/M7maiqdV85o+4qyWlQvbK
+	 /sfCGJKwucPyykGPunIHx8gpjuIFW0QFueA61WpmjMDQAYZ51mCSaMuSFtxLHxv/PDA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id 036521F00A15;
+	Sat, 31 Oct 2026 15:05:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793459123;
+	bh=XiBVYY9Pj1d3wCyHUQPb6/u7BjXKfayo72bDkp0mxRc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=Vg8PaQQ6KknMYMIX5rvEH5fHN5UVoSUGr/G6lNuXA8wLDbJM1r3qUtiKwL1bCXARy
+	 m8ZC6ZfeMK+UNGHST486ZXDBUDo6DGeZoeBovh4VRZMciBIVwyguLSxQua9Bwk1faO
+	 P5/Vj7S4lxqrESHpJWTocYOLS2hgyKnsomUhQsN3uzc/ayIE86c/Z/K/ZmydcGL0AL
+	 KDDO9XsuI5YCzGhk/bnBAYHhXWUBttHtlPuDuvopIFp6wU1BVVDpJaNgeiukbY3HGF
+	 MpS5Idf8QKV9w3Y7JrgKAUS4sNPBQ/3+UaxwSEdF1ciWo4tluA3e9PGGmXhNHp0Uzd
+	 muSr5++17PHig==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 77EEF45F0F;
+	Sat, 31 Oct 2026 15:05:21 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sat, 31 Oct 2026 16:05:01 +0100
+Subject: [PATCH 04/11] arm64: dts: qcom: pmi8998: Add node for PMIC VBUS
+ booster
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,203 +83,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgDHS0ApA+ZqqSNvAA--.5005S4
-X-Coremail-Antispam: 1UD129KBjvJXoW3AryUAry8WF48WrWfJFW5ZFb_yoWxKw1DpF
-	WYqw15tr4kA3ZI9wsxtF1UC3WrAFnavayxJ3srGwnxAwnxtw1UXF4v9a43KFy7ta48Jr1a
-	va1kAryUGF1kJrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUPIb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUXwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVW8JVWxJwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2xSY4
-	AK67AK6ryrMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
-	rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtw
-	CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr
-	0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x07b2
-	T5LUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARERB2rk8FY0gwAHse
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261031-pmi8998-vbus-v1-4-4d805e5a0f27@ixit.cz>
+References: <20261031-pmi8998-vbus-v1-0-4d805e5a0f27@ixit.cz>
+In-Reply-To: <20261031-pmi8998-vbus-v1-0-4d805e5a0f27@ixit.cz>
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>, 
+ Robin Snyders <robin@snyders.xyz>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Sebastian Reichel <sre@kernel.org>
+Cc: Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ linux-pm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1178; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=HpvL6iFTwrelyJpOxklGc3G9PcqLuzIuZ5tvJd9wb+c=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq5gOvX660ezv4WbP314Ec4yNJVhTKt2nRttV2f
+ EGDQsFCJB6JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCauYDrwAKCRBgAj/E00kg
+ cg6oEACYSSRn0je6bPBHxaafWX0LcMljCeYF+zilR36komre2XX4m703G6rYow8qbisD4kNZClU
+ wFqQr/U016Dqx9FOELaxZ1G+GaXP9cb5XmpDThPdhM8xq6YvcXaJ8CKSbwfsnEPVYXBqF7dB6R3
+ G45IjpCqlcXNmhv1ahvf3IpyGdX/3/3c2rZXU8aUMnir4jTeKhjVagnz4nxVcIJ5AyZR0l+awTM
+ hqbe83sEsIvEQjJp8R5XZbImUxSTuSpKZMYpuWlxVeSoEBmyc0l1PtFUvNuAvPvqkXoByKCZ7nw
+ 4FEnJRlOfZs3kJqrgeSidJW0nvvsgMxH284Xmo87iSuhmX/cPEGg8xoH/RSbjCe0vAIxiLm4GJC
+ iT1qBnSxKgEHlN3UxSHIN6aJ3sz706QuFALWMr4xhIwXgnXUSbqxAS9npHuNjcNDrXygEb7FsiE
+ bzt7qejpw9kH2Dn2lU6II9n9+DkPELNHTfrzYGS/ewSCH51d1crDK4ayPLldXYlTzF2RCVomEtO
+ ZQqdDwONac7UNxwxN0HlRJER5Mi2tPqbYRnBVYOzKNnTJPjhHSVRlpYZdKXdvCQ01WfxngGif5a
+ xt85hRjiKyJg8oGrxGgwekTmrNyhzAiCnzjIdqgG8SSZen4cr9q/qVXI3seKFOfOnM/yCsxpRzk
+ AINIqMmoKwyuPmA==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
+Content-Transfer-Encoding: 7bit
 
-The bonded command path carried its constants inline: the error-mask bits
-in dsi_cmd_error_prepare()/dsi_cmd_error_cleanup(), the CMD_DMA_CTRL bits
-staged before a broadcast and the peer poll budget. Those are controller
-facts, so they belong in the existing per-SoC table next to the regulator
-and bus-clock data rather than in the driver body.
+From: David Heidelberg <david@ixit.cz>
 
-Add struct msm_dsi_bonded_cfg and hang it off struct msm_dsi_config.
-SM8750 reports DSI 6G v2.9, which selects the sm8650 cfg entry, so the
-bonded data is attached there with values copied verbatim from the
-current code. Use remains gated on the sm8750 compatible, so behaviour is
-unchanged.
+Add the required DTS node for the USB VBUS output regulator, which is
+available on PMI8998. This will provide the VBUS source to connected
+peripherals.
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- drivers/gpu/drm/msm/dsi/dsi_cfg.c  | 26 ++++++++++++++++++++++++++
- drivers/gpu/drm/msm/dsi/dsi_cfg.h  | 22 ++++++++++++++++++++++
- drivers/gpu/drm/msm/dsi/dsi_host.c | 22 +++++++++++++++-------
- 3 files changed, 63 insertions(+), 7 deletions(-)
+ arch/arm64/boot/dts/qcom/pmi8998.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/gpu/drm/msm/dsi/dsi_cfg.c b/drivers/gpu/drm/msm/dsi/dsi_cfg.c
-index da3fe68244..640ebe8244 100644
---- a/drivers/gpu/drm/msm/dsi/dsi_cfg.c
-+++ b/drivers/gpu/drm/msm/dsi/dsi_cfg.c
-@@ -4,6 +4,7 @@
-  */
+diff --git a/arch/arm64/boot/dts/qcom/pmi8998.dtsi b/arch/arm64/boot/dts/qcom/pmi8998.dtsi
+index cd3f0790fd420..86640ea6e592c 100644
+--- a/arch/arm64/boot/dts/qcom/pmi8998.dtsi
++++ b/arch/arm64/boot/dts/qcom/pmi8998.dtsi
+@@ -24,16 +24,23 @@ pmi8998_charger: charger@1000 {
  
- #include "dsi_cfg.h"
-+#include "dsi.xml.h"
+ 			io-channels = <&pmi8998_rradc 3>,
+ 				      <&pmi8998_rradc 4>;
+ 			io-channel-names = "usbin_i", "usbin_v";
  
- static const char * const dsi_v2_bus_clk_names[] = {
- 	"core_mmss", "iface", "bus",
-@@ -194,6 +195,24 @@ static const struct regulator_bulk_data sm8650_dsi_regulators[] = {
- 	{ .supply = "vdda", .init_load_uA = 16600 },	/* 1.2 V */
- };
+ 			status = "disabled";
+ 		};
  
-+/*
-+ * Bonded command-path data. Values are copied verbatim from the vendor-derived
-+ * in-tree code; the SM8750 compatible check in dsi_host.c/dsi_manager.c still
-+ * gates every use until the master link moves into this table as well.
-+ * TODO(doc): err_clear_bits/err_cleanup_bits touch bits that dsi.xml does not
-+ * describe (see reports/b5-per-soc-cfg-design-20261027.md, RFC-SCOPE R1).
-+ */
-+static const struct msm_dsi_bonded_cfg sm8750_dsi_bonded_cfg = {
-+	.master_link_id = DSI_0,
-+	.cmd_dma_ctrl = DSI_CMD_DMA_CTRL_BROADCAST_EN |
-+			DSI_CMD_DMA_CTRL_FROM_FRAME_BUFFER,
-+	.err_clear_bits = 0x001f0200,
-+	.err_cleanup_bits = 0x44440400,
-+	.poll_timeout_us = 5000,	/* 500 polls, 10 us apart */
-+	.needs_link_clk_bump = true,
-+	.needs_sw_reset = true,
-+};
++		pmi8998_vbus: usb-vbus-regulator@1100 {
++			compatible = "qcom,pmi8998-vbus-reg", "qcom,pm8150b-vbus-reg";
++			reg = <0x1100>;
 +
- static const struct msm_dsi_config sm8650_dsi_cfg = {
- 	.io_offset = DSI_6G_REG_SHIFT,
- 	.regulator_data = sm8650_dsi_regulators,
-@@ -203,6 +222,13 @@ static const struct msm_dsi_config sm8650_dsi_cfg = {
- 	.io_start = {
- 		{ 0xae94000, 0xae96000 },
- 	},
-+	/*
-+	 * SM8750 reports DSI 6G v2.9, i.e. it selects this very table entry, so
-+	 * the bonded data has to hang off it. Its use is still gated on the
-+	 * "qcom,sm8750-dsi-ctrl" compatible, so an actual SM8650 keeps taking
-+	 * the regular command path.
-+	 */
-+	.bonded = &sm8750_dsi_bonded_cfg,
- };
- 
- static const struct msm_dsi_config kaanapali_dsi_cfg = {
-diff --git a/drivers/gpu/drm/msm/dsi/dsi_cfg.h b/drivers/gpu/drm/msm/dsi/dsi_cfg.h
-index ccf0667960..c8813a738b 100644
---- a/drivers/gpu/drm/msm/dsi/dsi_cfg.h
-+++ b/drivers/gpu/drm/msm/dsi/dsi_cfg.h
-@@ -41,6 +41,26 @@
- /* Maximum number of configurations matched against the same hw revision */
- #define VARIANTS_MAX			2
- 
-+/**
-+ * struct msm_dsi_bonded_cfg - per-SoC data for the bonded command path
-+ * @master_link_id: link that drives the broadcast; not the probe order
-+ * @cmd_dma_ctrl: CMD_DMA_CTRL bits both engines need while staged
-+ * @err_clear_bits: error-mask bits set before a command
-+ * @err_cleanup_bits: side-effectful FIFO status bits written after a command
-+ * @poll_timeout_us: the peer is polled, never completed through its IRQ
-+ * @needs_link_clk_bump: command-time link clock vote for this generation
-+ * @needs_sw_reset: this generation needs the stock controller reset sequence
-+ */
-+struct msm_dsi_bonded_cfg {
-+	u8 master_link_id;
-+	u32 cmd_dma_ctrl;
-+	u32 err_clear_bits;
-+	u32 err_cleanup_bits;
-+	u32 poll_timeout_us;
-+	bool needs_link_clk_bump;
-+	bool needs_sw_reset;
-+};
++			status = "disabled";
++		};
 +
- struct msm_dsi_config {
- 	u32 io_offset;
- 	const struct regulator_bulk_data *regulator_data;
-@@ -48,6 +68,8 @@ struct msm_dsi_config {
- 	const char * const *bus_clk_names;
- 	const int num_bus_clks;
- 	const resource_size_t io_start[VARIANTS_MAX][DSI_MAX];
-+	/* NULL when the SoC has no bonded command path */
-+	const struct msm_dsi_bonded_cfg *bonded;
- };
- 
- struct msm_dsi_host_cfg_ops {
-diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
-index 5405173a43..a3e9882c22 100644
---- a/drivers/gpu/drm/msm/dsi/dsi_host.c
-+++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
-@@ -2345,12 +2345,19 @@ void msm_dsi_host_bonded_wait_video(struct mipi_dsi_host *host)
- 	dsi_wait4video_eng_busy(to_msm_dsi_host(host));
- }
- 
-+static const struct msm_dsi_bonded_cfg *
-+dsi_bonded_cfg(struct msm_dsi_host *msm_host)
-+{
-+	return msm_host->cfg_hnd->cfg->bonded;
-+}
-+
- static void dsi_cmd_error_prepare(struct msm_dsi_host *msm_host)
- {
-+	const struct msm_dsi_bonded_cfg *bonded = dsi_bonded_cfg(msm_host);
- 	u32 val;
- 
- 	val = dsi_read(msm_host, REG_DSI_ERR_INT_MASK0);
--	val |= 0x001f0200;
-+	val |= bonded->err_clear_bits;
- 	dsi_write(msm_host, REG_DSI_ERR_INT_MASK0, val);
- 	wmb(); /* Stock completes the error-mask write before stale clear. */
- 
-@@ -2360,13 +2367,14 @@ static void dsi_cmd_error_prepare(struct msm_dsi_host *msm_host)
- 
- static void dsi_cmd_error_cleanup(struct msm_dsi_host *msm_host)
- {
-+	const struct msm_dsi_bonded_cfg *bonded = dsi_bonded_cfg(msm_host);
- 	u32 val;
- 
- 	/* Stock mask_error_intr(0x2, false) W1C-clears FIFO errors. */
- 	val = dsi_read(msm_host, REG_DSI_FIFO_STATUS);
--	dsi_write(msm_host, REG_DSI_FIFO_STATUS, val | 0x44440400);
-+	dsi_write(msm_host, REG_DSI_FIFO_STATUS, val | bonded->err_cleanup_bits);
- 	val = dsi_read(msm_host, REG_DSI_ERR_INT_MASK0);
--	val &= ~0x001f0200;
-+	val &= ~bonded->err_clear_bits;
- 	dsi_write(msm_host, REG_DSI_ERR_INT_MASK0, val);
- 	wmb(); /* Complete overflow unmask before stale-error clear. */
- 
-@@ -2553,8 +2561,7 @@ void msm_dsi_host_bonded_cmd_stage(struct mipi_dsi_host *host,
- 	val &= ~(DSI_CMD_DMA_CTRL_BROADCAST_MASTER |
- 		 DSI_CMD_DMA_CTRL_WC_SEL | DSI_CMD_DMA_CTRL_PACKET_TYPE |
- 		 DSI_CMD_DMA_CTRL_LOW_POWER);
--	val |= DSI_CMD_DMA_CTRL_BROADCAST_EN |
--	       DSI_CMD_DMA_CTRL_FROM_FRAME_BUFFER;
-+	val |= dsi_bonded_cfg(msm_host)->cmd_dma_ctrl;
- 	if (master)
- 		val |= DSI_CMD_DMA_CTRL_BROADCAST_MASTER;
- 	if (msg->flags & MIPI_DSI_MSG_USE_LPM)
-@@ -2636,10 +2643,11 @@ int msm_dsi_host_bonded_cmd_wait_master(struct mipi_dsi_host *host, u32 len)
- int msm_dsi_host_bonded_cmd_poll_slave(struct mipi_dsi_host *host)
- {
- 	struct msm_dsi_host *msm_host = to_msm_dsi_host(host);
-+	u32 timeout_us = dsi_bonded_cfg(msm_host)->poll_timeout_us;
- 	u32 status = 0;
--	int i;
-+	u32 elapsed;
- 
--	for (i = 0; i < 500; i++) {
-+	for (elapsed = 0; elapsed < timeout_us; elapsed += 10) {
- 		status = dsi_read(msm_host, REG_DSI_INTR_CTRL);
- 		if (status & DSI_IRQ_CMD_DMA_DONE) {
- 			dsi_cmd_dma_intr_update(msm_host, false, true);
+ 		pmi8998_gpios: gpio@c000 {
+ 			compatible = "qcom,pmi8998-gpio", "qcom,spmi-gpio";
+ 			reg = <0xc000>;
+ 			gpio-controller;
+ 			gpio-ranges = <&pmi8998_gpios 0 0 14>;
+ 			#gpio-cells = <2>;
+ 			interrupt-controller;
+ 			#interrupt-cells = <2>;
+
 -- 
-2.53.0
+2.55.0
+
 
