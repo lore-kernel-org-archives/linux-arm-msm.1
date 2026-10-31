@@ -1,13 +1,13 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793483274;
-	b=M8l5Og67vNlrPoszDP87nTNQ6MsUbmhR4iHhPNpzzc0H/nGZCSGTGvn3+Waj2WjeLJJS
-	 Bfl0cIgsR0Mwwp6Cl4oQwKtT7L/skBr6JvuXFOgp13zez+tvnQrHQDm/JjY+YlFFVjq3y
-	 KxWZiXOp27IAleloIeDqbA7Alj2JGFYL20MUhGHdfRVmpjrT96HIEgPTvzvDo7m+IlrM7
-	 n6hhI2naLe5sGKTGJ8/CIE4wpiR3bXbWfUfrH1JEKu8VA4paqIuQQw/HEn30F8V0jBGtF
-	 Kbb2Xa/wVCT7p20X+MrrEshf7rfmqsLvr3qlQEQbc3Zmu0I3Lc3+x59Tt9DhaTOb8MA==
+	t=1793483293;
+	b=qewOpSy0WZ0DYBLGOzqIvvcpwAa+B50dwIBtfb7OyXfBYRTfY861nLitODirDH6Bg7nV
+	 2sLnmGmRmDEVHL41LOdcA8vnuy3qlbrHVszh34lImZm7d6udRUtLIlLMFOyOywfoJwwqn
+	 RWEGfgY/jU2eKcp1l3wBWrS9aGoU3bwtm8QTpoIvf+RcqVCTAt44WEKHSPheXb88ac3FB
+	 mB0/fXX2cfVwq1NklX0j/K8hVOM2c0qzdNmaUnIDex5P72ZY6KpnOMOIn2nqXt3zMOSKN
+	 UO7xob6UT6Fp+4BC0UyXOlF5fNOVPgIgnzA+H3VgbRQe+01NoRFy0hI2SNMNd2IVe1A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793483274;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793483293;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:Date:From:To:Cc:Subject:Message-ID:
@@ -16,92 +16,92 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
 	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=UqYmn+dWGZ+bizn6nanBskc0M3ILH51untQXz8qg9Lw=;
-	b=lrpDMS7G6qpanCAP9X1kdqv9VDAYV6jtQHnnMKgtbEpv0ulc9jhwMFr7PIh32NSuB4Ut
-	 gw9UScuefu4hOm5pth5z0f1G5cTpa7+bQco4Qv6W9pSzjF6W1BH37RspMDgVwMSKp7Zab
-	 36rUecpu8VjfZ+zAlDiEpypOTk1Dl3oIFGtRD2enwiWlGN7usRezw1N7wX/F4r+TVeYQX
-	 gG3w8azl2yR5wRpDrkK4kFx3DYvprucfH30GWAJyU88nsbSjuXs00ch15EjRcAU78gxlw
-	 WTB8vBD08ohLdyZODGXJYfRMjNbbY83VkRUGZt5sGTQy27IptLYd8Iv23IpfX0qexhA==
+	bh=4EItL5xvGpqO6UWOBBCZmsuFutwBGP9FjsFh6RXA9XA=;
+	b=XzkYilBVqR7me2wQk0gKifxxxnGIGBzSCp0/ptUO0SCcYo1ftRGa8Vp2coLqMbEamg02
+	 Fnga6Rhj52J0K5r+SjR29kqmP71APd6zNuINVvXNk8TFvDmvDtRhLrRHCphLjHynVsoc7
+	 QJIxhoA3zQv+wwfIec6Z6p2twUEv8J7Nn4JTOi3e6SOa4KDYXIsPbxpaZ/JTmfaUEOZTy
+	 GGZtSTPWvV30eaNo4f40TVlRBbfgrwA9yoReCIj4C6//MWZ32DWHJedTQv8+FAUKuiszh
+	 A7VRkgL6o7/jlCtmka74sZQKa583juMe3h2RpwWOGP56Z04xt/lHSlxkwVIev2g1EqA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=M2SSwTqG;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LjBrbGBJ;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YN5aJTzg;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ff5nXpYw;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E833606A31D
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:47:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E833606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF421606A31D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:48:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BF421606A31D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=M2SSwTqG;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LjBrbGBJ
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YN5aJTzg;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ff5nXpYw
 Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69VJFxXD2000772
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:47:53 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69VJFHe01997024
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:48:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=UqYmn+dWGZ+bizn6nanBskc0
-	M3ILH51untQXz8qg9Lw=; b=M2SSwTqGeuA0H/yPvVtef+Mp8xkHwwFekiHn0kBD
-	IXkY8io9I7OOYrQNJc9veFLHQb/MO5gVqbJ5k0W/pdOnBUfT/j1tjPj2FdmaR+X6
-	VvCxH97ZunhjVXdQFnvieF2sLRVVX/hTfOBcMkH3nuOVxn4QgzIJt1xrERdxXyOs
-	03MMKpdvcPhhoWPCgvmJS4h8+xe0kGrSxOJ+Dix7JzCr/EMKLx78H0/zKj8ugeEb
-	yCzE9/SlZ2sSogLTZlqalPlDO1WmzEuIcurm/8MOhU4MpCXTNVh6WJtR81AWSksU
-	PBQuRM6eem+E2fV3GqzAYiYK4JgrlP9tWYQs3mYgU2zMVw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn9m99x2h-1
+	:references:subject:to; s=qcppdkim1; bh=4EItL5xvGpqO6UWOBBCZmsuF
+	utwBGP9FjsFh6RXA9XA=; b=YN5aJTzguTybW9G+mlI0XJtw+n6bdR+mgrsGe4kH
+	a8Dyzz44XUjSs7EpHb6Uj13LvRztzPUNAERCSCVsjO4uQzUyrOoht1lktdmwIwJN
+	IB23nBH8TUFg9jCQboo1dkPIHs1ouP3XJ5POq+XgPz1aMiVzUjJZ+Ix5Epq27NKv
+	sKdmwHSFLUHcMEu+UbIgQsUykWcPsemrV1fICWURhTyLU9ULzLIQS0+hnvQ3Jocx
+	VuhbN/GN4A9+yQpGPF1gvjP43XD/mhfDm0Wfp0x+PVMVgtS4JS90CW47Qhkil74N
+	u96yuT7J7TiTdXdJNKdFseH5+s4+L7EdbKpP302HsMVCEQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn9m99x39-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:47:52 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f6f4fe531so307008785a.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 14:47:52 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 21:48:11 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2373e9b4so180957385a.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 14:48:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793483272; x=1794088072; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793483291; x=1794088091; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=UqYmn+dWGZ+bizn6nanBskc0M3ILH51untQXz8qg9Lw=;
-        b=LjBrbGBJE+MS6r5K3/JcH4yrxJaBRxVBEF0oxUcYe8GCIkxb45rQ6JHlhkFKjZDL5o
-         ytEuLWQ/ZHGpcQr/j7ymTfjwMM4pIwSnoTFTpfQW/76wPKTUC0OpByUpG9NPNfUPF1u0
-         5fLQXFlBpDTrzi6azjEJxe84rtkOq6Vq1KttsoMzvCueRizoHxV9F6sASUJK9aTFgmlI
-         sO6/WsOO1Al7I0qpkDfD0bExraem0jyUJdZITNaN/AHgCfz065F9gTab/U3T7hYVA2RE
-         NqtY2gxowlCDfOPVHKZhqSo6WyCrZqVByrQN4Fkbo1ROqenHPwMUlwbeh7LMmDITGgVu
-         /qFA==
+        bh=4EItL5xvGpqO6UWOBBCZmsuFutwBGP9FjsFh6RXA9XA=;
+        b=Ff5nXpYwnYEr6e5KbW+B3PvK0xjSoccwciobXjCTwS4s/CLEWZxQmka53A1cRWfGWj
+         VfAL1LkIio4GihDsDomzy2EF6IT6AiTCvOJdrXfpOYzSoZrttEjeWFVhQ1jOEQXaCki9
+         Js/NIVZOwOr3WUxy3WJlBEWg6QCg89V7f52pxhdn+bMUFyl1FJXVNxgd86Af9mYL1n7j
+         6nzeZyYcJbIRkYTCJaJrpSj5Da33kfGx18gsHG0lj1jie8jFzhawBOGVhuZ1ogEpVk+B
+         cZ6z+o1Z2nFtcSCGPlfHtc2Zwz1wOGs3W1VfDHrnqvfxpZWQhIP7B3DwH1m1Xs7QK2YE
+         4rCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793483272; x=1794088072;
+        d=1e100.net; s=20260707; t=1793483291; x=1794088091;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UqYmn+dWGZ+bizn6nanBskc0M3ILH51untQXz8qg9Lw=;
-        b=b0xqPPQ2yCnTgnC9APSWRoaMEyrkzHbkpX7IAhMeottxkm7vv6us7mizPSoAF7gROz
-         t7FV9jgKKls8ks46QGe9PuQDfF9UTQ/uLUClyot5+FjHBfoIHjvez978QtNaAfinGEs9
-         RwDyRwahEOFCsHkDIVTnBIRzBlj1WDOnR8D/skLDkcO2vhvZWuZGHTtGmSq6r5xyBeTG
-         f8UrbAJgl5wpq0LqxyNfg1OOYk1H4NSj+EIKv+oCWTGxEyo5rzLxur0KCj5Hp76LZHDm
-         VSO1eLPGo1XUSv+zUsb+xMYvd4vX+I77RLp2r0w5agOOSU44p4T6PVjhNhHvnt8FO1w2
-         6FmQ==
-X-Gm-Message-State: AFq9FYLMWkQiBDNPAXq+tNOLHJbQjIalQ1aOlZELW4k/ux2yKyqS3SOq
-	ieWz3TN4wIH4MaImqwI2orP4k+Wnj9sabJgKZ3LIpz0C9pdrlZ5lIfmNT/pfp68h41M6oZ403K2
-	Ou5H6svzq8mWcpAEjmX1X+GtolFTOI/oIAf/jDRvdrMqft2CR/Xy/b3HS5K8QqXy235q7
-X-Gm-Gg: AYBFou2OPrqOL01wXlaqBd5r1VtxS8bu9+GeM15mkTi4N4cornosbttHD5U11qvQ9sP
-	fgYHc4oMu5LS66kctA/ET07LOwClf0HiWXB5W2+UZ3Xoqg8ZWjaxAHjJ/srL1gkRBpNvNtuhD3w
-	r/sz2LGn4tdTBk4yI7S/xqm3DtdDvcYBNZpdTUpdyjx9Eg0Wy57rmvOv98mXBbYV2O7MfRwEQcD
-	TUTbUKMWycNFe08EwFOKosf32MhVa7QQAQMyFeYF1txl0dgw6bw6NMaNz2hUPWSSrgy82MjXL4b
-	RQxq7t71GpXwDYPBHryX0qw00xUTCWk2z5U7wmYb8XPTzwUbmwxZUKdPrpJvbcriIBJS1boQQhb
-	87iUemEmiIA8LOhHPdrXobYuwLCoTZ/ZzEm7qmcPBCtFiW9kson80F1gKsc4qZdnvhNVcuVQ7Ro
-	8b2p4+xgm/CAXB29gkEdPWeMjmGGfLYShLJKcQx81cUQmVznKRYN8XA7apm9K7hQ==
-X-Received: by 2002:a05:620a:28c7:b0:93b:d7a3:45cc with SMTP id af79cd13be357-9442178def2mr985862885a.53.1793483271679;
-        Sat, 31 Oct 2026 14:47:51 -0700 (PDT)
-X-Received: by 2002:a05:620a:28c7:b0:93b:d7a3:45cc with SMTP id af79cd13be357-9442178def2mr985860485a.53.1793483271221;
-        Sat, 31 Oct 2026 14:47:51 -0700 (PDT)
+        bh=4EItL5xvGpqO6UWOBBCZmsuFutwBGP9FjsFh6RXA9XA=;
+        b=OX5wGiuP1R4aQejlxvy+/xsivW7coeyTZrnmBbWdiI94eoCobAgFmLOyHL6HXqTwZ8
+         7VJNzWPE4QjlVzbMBnJDVnHh9Ki5pU5LdguzU4Q7bRxpxCEtlCljlgyFzALc5Ib7anQW
+         0Yp4SuNABxSkB/SWGQhVEcHMUv78C574F7nBWJCAhteX46knAELcEs3lLeg6dNIU7UqK
+         j1/XIGq/3gdosFcdCA8UIAjiE7r644sF59XHQtFuBGYH8wxcB2sXtVEtpZZkWLed4F9e
+         22sOij7XFia7NKy7+h8ygQMN4l0RYum4TazR6IaKNxTjDRwGL0qSn933dXYIjWZwM/bh
+         d5Cw==
+X-Gm-Message-State: AFq9FYKohpQRDJV4CtaKqKokBxUNUEJonI+ZZksYrKjgH4HCfySaKX4w
+	SVxjww6VlT/A4p36oIJQC8qsynmhqhEItE/wkEKFIT3jF9iNqBgEkMv0yfADxrEh62lLeQQ4LSP
+	j+grPv/ePEQeZjXnCGGbf1Pkstb6U7dScoQG1COrN5JAh8DVWhQb2aUn0Mh5wi4qDYK6W
+X-Gm-Gg: AYBFou2xVXPa8TFQSCAyueGOg8NuwrHlSgnL60JIGrvzLvrcmJOFFM6/K0VoKsGRsQ8
+	uTFRcl+cwYW28D2dvpqx/lqCaPP+FfQWdW/ruShLvqzbxDPH/rDapJTTtAo36k2rKnaW+bfaO2d
+	yq901HhNXC/T04scJ7C9atUAbSFbVUrE1uH0R00xvRnLAuMnHfXPgyf3wEr5uh+PBS/6PaUGpCv
+	dRUxTJYUS0I99RFsGa8nmUwSOvortCnIY6h8PiCSgTOOwmGskoY+EnXPtHihsbuwyh/dnYw/6ml
+	OlI23lNN1FFK+Q1L5Y4D2ktA2mmJ7UDcBe62JW8BVIusP5GlLctBn/AiD65aiohjhkdsbNZBHaJ
+	R4WjFfPuNTk1+H7X3gBVAAHJ57ggjtn+RJVsOBrmTwmp+b3LJmoyf3mLFkD8o3ZTwDDQafeVsea
+	gixBBb99pnvwAY+/2MI4bRoNjRoP1nZUM+1rcG65E6UMrg3lx2rqIufTXOcFPjFg==
+X-Received: by 2002:a05:620a:29c1:b0:93f:228c:52fc with SMTP id af79cd13be357-9442175b13emr960250185a.58.1793483290811;
+        Sat, 31 Oct 2026 14:48:10 -0700 (PDT)
+X-Received: by 2002:a05:620a:29c1:b0:93f:228c:52fc with SMTP id af79cd13be357-9442175b13emr960246385a.58.1793483290275;
+        Sat, 31 Oct 2026 14:48:10 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfe04edd72sm758554e87.1.2026.10.31.14.47.48
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfe073e5e6sm790440e87.57.2026.10.31.14.48.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 14:47:48 -0700 (PDT)
-Date: Sat, 31 Oct 2026 23:47:47 +0200
+        Sat, 31 Oct 2026 14:48:09 -0700 (PDT)
+Date: Sat, 31 Oct 2026 23:48:07 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -117,11 +117,11 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         Konrad Dybcio <konradybcio@kernel.org>,
         Taniya Das <taniya.das@oss.qualcomm.com>, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/3] drm/msm/mdss: reset all block resets described in
- DT
-Message-ID: <odog4t5j3y7j4tatqsiywfj27iufeazkzp3vtfvzce2knct25n@ephs3ngmt2i6>
+Subject: Re: [PATCH v2 3/3] arm64: dts: qcom: sm8750: describe all MDSS block
+ resets
+Message-ID: <dkwloahmxcka2ykjdrf6nh6d6cde6zgd7fe5s763h7s6nv3eqe@pm32d33ghgbb>
 References: <20261029123238.29877-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261029123238.29877-3-xiaqinghuan@mail.ustc.edu.cn>
+ <20261029123238.29877-4-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -133,25 +133,25 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261029123238.29877-3-xiaqinghuan@mail.ustc.edu.cn>
-X-Proofpoint-ORIG-GUID: Idbnfz7VIpJSBzas3dhLB2Z0jmYPUWsK
-X-Proofpoint-GUID: Idbnfz7VIpJSBzas3dhLB2Z0jmYPUWsK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA4NiBTYWx0ZWRfXyf4m8x3fVJ0u
- 7rGPChVr27HC2D6v0OwrXgj6DoQfAkAn+3e72UI3ksGcAAd1FcLfCsiowfTrPGh9LQHTkYvsqJE
- Ck5HXPpfPgl+2OGhSMLWxgmGVk+msRioACd/3cvA6dEOLCxY1FKxoNf+pBmV6rIhRjTqNfGeD85
- 009W41NydBPKC91gPvCDoy0V0mjkeXm+mQbN24jC5VnwDbD9vs0j2bm/G0AViy6Hr1VbBtIl2r1
- SYLmZKRtPN/A1EE+LSlnVyW74/MXDNsG51Eq5aYrLNLSr7dhzQlmIiey5PZuyxDQsfEOncYEWtK
- PeAQw/R68hbCJ6Z80oQt4pvQtffgEsCaJ2HURnU84lioxwhTLdln8dwHhgUy1S6RBWIUjzv4lSy
- O3Bdo5HSgwhN5KTecdR0tur4H8enMbUik3AFg+ipX25smnIgcpiNojzfY6ZK/giTIUA9qiWfZ0x
- ba8iOj+QsEP2jlhSFvg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA4NiBTYWx0ZWRfXy67dADS3ySkA
- 1Dtz5kgvsi2i+K+tDZL314dJGi7oYnpVnAAZsxFEQNFNvqwHWACNU+F1UA4oh0BUL66new+22mH
- 5l/WO65wuTIO9cD2q4oxJ9fvJJ+7leQ=
-X-Authority-Analysis: v=2.4 cv=cfVHPXDM c=1 sm=1 tr=0 ts=6ae66208 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20261029123238.29877-4-xiaqinghuan@mail.ustc.edu.cn>
+X-Proofpoint-ORIG-GUID: oBS7gjriAwxUkM1IVvniSMrbnFW1Vsar
+X-Proofpoint-GUID: oBS7gjriAwxUkM1IVvniSMrbnFW1Vsar
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA4NiBTYWx0ZWRfX36/uFDZlanjh
+ 1/A8t8poHR1EsViTb0wAWj/R/YCbPEWNNAphWjvrEtHfXoOkgzlgNgwMvM5qJTrtzx98PzwlNOR
+ WFTj5GElM/N4qvv8gJSQAi7UAER10Q4x/dlKfvp9j8wKhhI0XyR0nZbmYtijaA8MNzCvEs8luuu
+ vIIg4uAjz+OGE0MAIExWZZotJWPVcLFxFnJNv8os1yGchmCfo14mMpkiHaa+G9B8QBKAFRZHM9T
+ QfBNK8LwsrWhfqTE7LDEQeRdbVl2u3k0D0F1ZwaKX/wnQ2lHdJmDB+mSs6CAn13fErs8236DkAl
+ xpHDtYVcaGeLh/Pt4ZfOlF792A2KyVp4FOYAkLAe9Tq/B0WRSudvC3r6mty/T7iLGMMfmpbMBWD
+ R27H0cAjMWFFqK/ruZ1PWoIZJlLst/VI9MgklvdTBht/EvnqOiHd6hMcBZwrlg5ABFTHLv1S/vA
+ xG1RjQ68RBN6Kkg4uiA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA4NiBTYWx0ZWRfX3q/LUX2nX9ZY
+ h7Wu5buZ+pbz7LkfIVKK8cU5tiRMAro9HIdfc/f3rO3CTMqQJyaXE3JjITvUf8AwMizs/cmguRn
+ 6RiHppmTzTZhZCGGpQEME4hO/7Jo3cE=
+X-Authority-Analysis: v=2.4 cv=cfVHPXDM c=1 sm=1 tr=0 ts=6ae6621b cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=XGdKMLjMlLx_IEht72YA:9
- a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=b0wOoaS58wixzsa18XgA:9
+ a=CjuIK1q_8ugA:10 a=NFOGd7dJGGMPyQGDc5-O:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-31_05,2026-10-21_02,2025-10-01_01
@@ -161,72 +161,49 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2610310086
 
-On Thu, Oct 29, 2026 at 08:32:37PM +0800, Qianhui Xu wrote:
-> msm_mdss_reset() acquires only the first reset listed in the MDSS
-> device node.  Platforms can describe additional MDSS block resets: the
-> SM8750 display clock controller provides resets for the MDSS core INT2
-> interrupt controller and for the MDSS RSC, which can be left out of
-> reset together with the MDSS core when the bootloader hands over with
-> the display block still running.
+On Thu, Oct 29, 2026 at 08:32:38PM +0800, Qianhui Xu wrote:
+> The SM8750 display clock controller provides, beside the MDSS core
+> reset, block resets for the MDSS core INT2 interrupt controller and for
+> the MDSS RSC.  On devices whose bootloader hands over with the display
+> block still active (PLLs locked, MDSS core / INT2 / RSC out of reset),
+> the kernel so far reset only the MDSS core and left the INT2 and RSC
+> blocks in the state left behind by the bootloader; command-mode panel
+> initialisation then fails with command DMA timeouts and the display
+> comes up as backlight only, without a DRM device.
 > 
-> Switch to the reset control array API so that every reset listed in the
-> device node is asserted and released as one group.  Devices without a
-> reset in DT are unaffected, and for devices describing a single reset
-> the assert/deassert sequence is unchanged.
+> Describe all three block resets so that the MDSS reset returns the
+> whole display subsystem to a known state before any display hardware is
+> programmed.
 > 
-> The resets are driven from the display driver rather than from the
-> display clock controller: the clock controller supplies the MDSS clocks
-> and power domain, so it probes first and has already programmed its
-> PLLs when MDSS probes.  The block resets do not touch the PLL registers
-> and no display pipeline is running yet, so the PLL configuration
-> survives the reset.
+> The reset runs after the display clock controller has programmed its
+> PLLs (the clock controller supplies the MDSS clocks and power domain,
+> so it always probes first).  The block resets do not touch the PLL
+> registers and no display pipeline is active at this point, so the PLL
+> configuration survives the reset and nothing visible can glitch.
 > 
 > Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 > ---
->  drivers/gpu/drm/msm/msm_mdss.c | 15 ++++++++++++---
->  1 file changed, 12 insertions(+), 3 deletions(-)
+>  arch/arm64/boot/dts/qcom/sm8750.dtsi | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/msm/msm_mdss.c b/drivers/gpu/drm/msm/msm_mdss.c
-> index 9087c4b290..59343987bc 100644
-> --- a/drivers/gpu/drm/msm/msm_mdss.c
-> +++ b/drivers/gpu/drm/msm/msm_mdss.c
-> @@ -306,11 +306,22 @@ static void msm_mdss_destroy(struct msm_mdss *msm_mdss)
->  	irq_set_chained_handler_and_data(irq, NULL, NULL);
->  }
+> diff --git a/arch/arm64/boot/dts/qcom/sm8750.dtsi b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+> index dd738d13df..950c528bc4 100644
+> --- a/arch/arm64/boot/dts/qcom/sm8750.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+> @@ -3071,7 +3071,9 @@ mdss: display-subsystem@ae00000 {
+>  				 <&gcc GCC_DISP_HF_AXI_CLK>,
+>  				 <&dispcc DISP_CC_MDSS_MDP_CLK>;
 >  
-> +/*
-> + * The MDSS block resets are driven from the display driver, not from the
-> + * display clock controller: the clock controller supplies the MDSS clocks
-> + * and power domain, so it probes first and has already programmed its PLLs
-> + * when MDSS probes.  The block resets do not touch the PLL registers and no
-> + * display pipeline is running yet, so the PLL configuration survives the
-> + * reset and nothing visible can glitch.  Bootloaders that hand over with
-> + * the display block still running (PLLs locked, blocks out of reset) are
-> + * returned to a known-zero state before any display hardware is programmed.
-> + */
+> -			resets = <&dispcc DISP_CC_MDSS_CORE_BCR>;
+> +			resets = <&dispcc DISP_CC_MDSS_CORE_BCR>,
+> +				 <&dispcc DISP_CC_MDSS_CORE_INT2_BCR>,
+> +				 <&dispcc DISP_CC_MDSS_RSCC_BCR>;
 
-The comment should go away. AI agents like to insert lengthy comments.
-they are useless.
+Please drop the RSCC reset
 
->  static int msm_mdss_reset(struct device *dev)
->  {
->  	struct reset_control *reset;
 >  
-> -	reset = reset_control_get_optional_exclusive(dev, NULL);
-> +	reset = devm_reset_control_array_get(dev,
-> +					     RESET_CONTROL_OPTIONAL_EXCLUSIVE);
->  	if (!reset) {
->  		/* Optional reset not specified */
->  		return 0;
-> @@ -327,8 +338,6 @@ static int msm_mdss_reset(struct device *dev)
->  	msleep(20);
->  	reset_control_deassert(reset);
->  
-> -	reset_control_put(reset);
-> -
->  	return 0;
->  }
->  
+>  			interconnects = <&mmss_noc MASTER_MDP QCOM_ICC_TAG_ALWAYS
+>  					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
 > -- 
 > 2.53.0
 > 
