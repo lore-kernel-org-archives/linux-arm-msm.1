@@ -1,94 +1,122 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.42
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793470447;
-	b=C7X9tneOjVgI56DVY6re2waKPz0kW5pDf7nN9yLrqLm4kbgFfz60mBMoIAZ6cojyLpwy
-	 ZvY+A3pFfwCGU5L/+bPAdpDS44CsVoWFJA72MOpePo6kPYDklts2eKbO6CPo/AApQNQy9
-	 SNkAoC1qpf2OUiBLrAGv6hKE/gADYehF/vQLVvDsW7NDZjrWw7EDfk+DYoSQYdvmwLlar
-	 71o5P2r61FJoIt+R4MkyAzy6KSUd7v1xxTGG9g6LeCcmafJGduAldFbad22fOB6aQY2d8
-	 us5UQEEJFwt/WPbCbrexIPvuufb0ISLZhR2yd8Akoe1JVZfcqffJ/n+GSS4zO787W5Q==
+	t=1793477778;
+	b=Nj1e0B/nXV6zfa3+Ppp6VnOWsg1Vx++gfvypK5sfKqTjXjVqVIX9w7tHlLpj7ibFslDI
+	 /GjnV43BmPWAw5N6+sPjEdfCPRQzUxW2frN4FXDmAoH7NzaYkS9mxB4hEGD4xiJDj+i53
+	 y6NwZmMiJ9x7GtacMbvOWwOlm6+83Ogdbghl2FtqU4IYOQ5irpa1v2Hq9ukvHY4/KId+X
+	 MlJxOB/RJOAJxZZLSbF5ZwJVmnDFivTxC4eJR8bVoN9l79RspXFaE1fO3lPOeML/Nh9gj
+	 jtJEfp4d/Tq+1XJmUvc8GRTs2iWJAapNjwRDsEivZFk81kYBiEZH0bJMj9yTWvhLwwg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793470447;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=HPgaghJrkhjhaTCDh5OHrX3iYY4k72sTTxon4CKmpQM=;
-	b=48Fat5PQJg83QazX0PJhfWZpkEQfX2p9GSyKsJusE7hSZGowbHa/HJ3/Ux37xr/uFAnr
-	 uT9LG0u7kSz/hkFpul04LhHn22Lr/Mg4nsBYcGdFRVItRihycQzUWxAXGG3bonh9rkfdT
-	 DUSFzJRuFySQa4xmaODf8AwwmSLz1QExhcHUN03csr4cqcPcewNfSkH0X4Gx4UPpk/rH/
-	 ZJ90I/61Y+PVttU+LHXqyqBak4jZ45dYh7Of9y5IaWriruYfLYvKVwfyWE5ObaIAsxMGg
-	 nTFtL5kbZ7bh71BmsdeBFzf6Tc6BbLKbkrgnKF8V5xtWLI08IK5JNEU9Wj9CX46J/eA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793477778;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=zBj1fz6dn0KLQxS/D7NUgC3xxLKtXpvBo8Hz0gUq6W8=;
+	b=VYe1s/tv1uH9McHgcgCA+xwacpB6zSMfHw7pulQv6AROfmANPxds56XPoZ481GWlrC0Z
+	 83VzskdBTbQthDreuS9OVBqQsGucVzda4jEkJgvMf+cLjCtTlJ4jyi0fvjbtU0K9JgoeT
+	 JUL8cxyL5RULlQuHKbGsO8eQ55zvy8ApaLf3W+frlQmGkhJ8udBufdjMdyHeglY69MBIF
+	 StIlSZ3P4L+GxZtHwd93q8RzeM78zdUzxFUu3ZAcJBmjJI9oUsORxm99T817+ww3/M1L6
+	 xDAtDsCHVd3i0L2eHIq0NkrXhRYelRNa5NG4HcT67O1bAKxJXcZCVoJr424AnSekbOA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pxk1CREa;
-	arc=none smtp.remote-ip=209.85.208.42
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VygcVeeb;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bIVanoOa;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5E99606A32E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 18:14:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5E99606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9624E606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:16:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9624E606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pxk1CREa
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6b1ab2ad719so2369044a12.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 11:14:06 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VygcVeeb;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bIVanoOa
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69VJEstF3532734
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:16:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	zBj1fz6dn0KLQxS/D7NUgC3xxLKtXpvBo8Hz0gUq6W8=; b=VygcVeebGI/ri9YQ
+	fhErQBAM0zlmBh+3G/AO6X8Iht8tVCCqHroXDlWGB6A5COKcG7ZiiO8NAwwlh9MY
+	y26uUS11faVLGvYd7XQqcamy+LLSsWunkK/qlm7Vcni7i8QpXdGZf6uzxxNC7iN3
+	qjqCJswC6pu/TFUCIOIzw0OKktEhsxqyiGoKknSR+ddBhNfsfopYl+4nOoYJ1Z9B
+	DQ5TLrLIbNOfcD2SpxBOdFlSkMHMVhCUYXVdGk3XDZnIwgZebB6f0Q98XaXTU+nc
+	1lzPF9OZke8Is/ceATWUw2dG4/vW12NQ5+7cOSJ1tXI7wUssJR56QVSWae/93hT9
+	M9rkTg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7b6j46r-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:16:09 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93caf6c528aso258705785a.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 13:16:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793470445; x=1794075245; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HPgaghJrkhjhaTCDh5OHrX3iYY4k72sTTxon4CKmpQM=;
-        b=pxk1CREaAn+Ydq1Xtzsw1IeQ76JrjXZKYdf/JV7eT7NFm06pzFepWt/TS3NETsD7W4
-         elpHW1g0db2SadEnLX8R7cazDIjHb7JTHZmQSRToQjF193+QdJRj7tkG+reKNkDXlypq
-         7Bvh3AhL9K2qbYLGn3RzwlECJHWfZQ6+yWf5hBr7Yj2Zi1UDTTMVVn5/OeBW+aWzB5Do
-         TSD+QN/DZbeSHuu7haWKePj00P2Y7YAV/hIBHY+YaMsNEu/77AaYhzKFMDquGWNxnmb8
-         JL3tHHCg8FVj/nQrKBtHYj2pIpMqap+NvkPo50j8fCMXRtStR6jQ1ovjYnmZt4YNQtUf
-         jYUg==
+        d=oss.qualcomm.com; s=google; t=1793477769; x=1794082569; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zBj1fz6dn0KLQxS/D7NUgC3xxLKtXpvBo8Hz0gUq6W8=;
+        b=bIVanoOa0vzaexjnqqPTRZwjUB9qlv7AS9w0wC9RMCE2R+KpbKZD06ztEg71CvJhnv
+         w/RDzNowSjy45ImSh4Wypu5s7Opw8lyspYrWaRqndA2qnqQaZcTj9w0HVOC5e85O2bfj
+         at9F3ThFJUpL8o/qmSeuDyP8NVmEPuo6hfdDjRxhepTaJRsEiNG+DJeV0tyCm4b4bUt6
+         P2bC53GnI42AzIarj5DNIg3a8Xn1wa1PWSA1i0wCc26lFlZzg7V0lBPNyb0GIB9yXbTh
+         xvCpaOqVKPsrs+3aCVYYYA+62ZJOe3oHg+F8oVeA2/yqWMGjhpA82NUN7RjnGgztp1f4
+         Jz3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793470445; x=1794075245;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HPgaghJrkhjhaTCDh5OHrX3iYY4k72sTTxon4CKmpQM=;
-        b=qu99G6p4diz+S829bihLABgt1wI7N47ZFgczwtFwnEYPlzuNpAbAVA5nsG4fnmSuJl
-         mLPG53iXQZM/Uiusirij48X95iFH3PNlZYSwwld9Xm4T497Rw5OeKko71K/0E3C5menG
-         DxnJB0OWcESo/gbjQ2anI/W2CS7qDcHrPc2GZIWMRm55HIKy2LDtk7U6eTHruSp+VbVC
-         oko9rEfzKyCAPx9tmP7+I6BAEfESRhH+2+cvQxZDTczkyS156vTSengoRYwTtG5FZVw7
-         ORRlMq/M5x/ViDrYx3Za4t0SH5GE0GhaVltsfMRrKRr5qPvCCbf4G9m4HMTM4FuyT0J6
-         6lzw==
-X-Forwarded-Encrypted: i=1; AKwUvBxko/6jolWT0ffsyW9KpYXWDZO8w6AGrkTxyR4L74rgu9E85WW/lrjAqAz13wkvDBY9YbKxGvKXvs75hBae@vger.kernel.org
-X-Gm-Message-State: AFq9FYKB+ejjR6NubLBZzhUcYebveue07o58ZxmSDHmzB9pX7GYmD5lh
-	rvhmEyH6DmTDO3UGnNpsT43JRvI1vb0zUV6ik8XX62vjnsGp1/3OVxGKqqQZB+xyJS0=
-X-Gm-Gg: AYBFou0eqi8BqS8MK8cFyv2mpze3pPX59UHYSfhFnX1SXPv4419Nx7dCZj2j21dfKaZ
-	2onsbVxWlRNrJosFWEREBG3yKp11MCN+xjiuDNz/nc+FyNte+sAokjlgQX2GqfIoS9RdcfbfYOh
-	QI11P03DY6Z0KlvsBCjc7ZNqnEc5VVMh/Ozy4wQzyKy+4fARXiBzj5o7PLIQRgyAkaKDB+g9km2
-	CDM/BVUVp5eTyXaVUdEhbmiu47KrKszk48bvb5ByH3teMcKgHF2J/rNk53wT+lSlZ7DfWKg0mRX
-	QsoNQKreguz9u0Ssyp42kVptupSvDwWmLLEjzX/ovRhLrltNOiAASLVNN89px5UhTqW1JwcWFq8
-	w3hhOJgM7vUBD+uHtEZ3cSc9dN7fgdGMuy4zJzT164TD+oLNTuYzN+69ppb6U/UHWEeceGGNzL/
-	gWDL4xSRH/iLeEIlgHpSxdt/+zGLIfxV/QoOsknT0Lf6uBBPGoxoxImN0xK5EktlOpth/pZVhdh
-	7ozCGKtPIvxClzIielMgUM3fYUm7G/PefvgESXEUo+gVYZ9/AcTPsss0pxHm1nXIzlAqlIQWoF8
-	1jplBrR7poFUnE0xH2g56nxWFlkRXTlrgVnJYoSL4boCyVyISaP+1q9raNGRv9o4odIayOredp6
-	SmOFVoQl0RAXL4kbY
-X-Received: by 2002:a05:6402:15:b0:6b3:a1ad:ef6d with SMTP id 4fb4d7f45d1cf-6b4d33c6910mr3217700a12.6.1793470445038;
-        Sat, 31 Oct 2026 11:14:05 -0700 (PDT)
-Received: from cachyos-x8664 (2a02-a44f-6bd8-0-365-d763-c748-da6c.fixed6.kpn.net. [2a02:a44f:6bd8:0:365:d763:c748:da6c])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b4ec9eeb26sm1223499a12.9.2026.10.31.11.14.03
+        d=1e100.net; s=20260707; t=1793477769; x=1794082569;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=zBj1fz6dn0KLQxS/D7NUgC3xxLKtXpvBo8Hz0gUq6W8=;
+        b=Jh2EATwthqgr+h9Nex9Dgsc3qoXG1V5nFhYp0b/XHP6H2cmRGEJQvtYtJe7Jg7K873
+         iaHG7O5rbTqpdJKD/crAhfPCJzZpnPxsxiciGSWbjdWP2VxWT3mNpHgjZGb+7E0AA5rp
+         uDvaoROaF2wRZszk+3T9un9M/4ZZy8KSlHAohPP3rCf+Rkbfvti/OSeVqgowUlmEug3Q
+         WFil1AnBfubowHvfqmC9zzTHKprm/uwwvNdpNQqdkMLLY6UCZINai/JtKiOJH40/SVM7
+         +gfCVgT34ufOuA+7uvoiUEbCqSMQtaBn7FX7DtM3HW2Au8gbrRJn68DPVNSHiedvEq//
+         6Clw==
+X-Forwarded-Encrypted: i=1; AKwUvBxZhswhea84hXNrtApe2WrYOMp6LocV2xV5R2gBADO1rFyOhnVxTpjptWN8oEBEAB3uitiHzhLJOmeAsU8K@vger.kernel.org
+X-Gm-Message-State: AFq9FYI6AIe4Qzn/NemZxn2XTnI1S360JElnd8EHpile+LE8rEnzGTi4
+	KNBE4S03ezIsg6e1zmRRr5lHHtO53xo+/lkCsDm25mwT2spwhqjxLbuxDTc39xbktzblAqU0kdq
+	ScA32VmGnO2dMtjAI5gh86JrNlpl1Hsk2J16EumV3zzYRlcEwOcDRYOmKrca8MvjkySiU
+X-Gm-Gg: AYBFou0CZMTxlQKZF2n3bIAPUmRtAdnkSWKOKkS42kP+tgVXX+URATXqO1k/up/knEW
+	LKdUzrgBSl4M+x1EwUxUGDshLZ+gsY2RFbyX/DwI3i/niw078u+H2umX6g0Y15vpb+XnoA30mPV
+	tq66UWWD7fFEMIGMtFNKjO3570BK1orO8HBg14KQe8gmRxSFPQOiBtr1vzXStHS4ZPIfrT2ERTt
+	4ebEPAekU8auDSHnQg7Qo/mnV/wEQ2SXXS/VeApzgfPXNS7m8vFp8fH++yz0dHLUiEHpglvze3O
+	FcvXi7rG414GCZ/43V9Fq9rQalFjRXkTjgYEIC1be22KjcW9qWCkS25l8AgFkAMDhA6RInKCT7o
+	JFBzYeSN2zx5sKR8RrrRWcGUQMPZVnbkBuje3PHfaRfGV15Z6I+SdtD5CK6QRpoWfhiuqizqJio
+	1mqha7zw3CZkpaRPy6BiL/rUiwgIXT5GgV32u7Ai6Qs/lp22PcrQ5Y0n590fnEdQ==
+X-Received: by 2002:a05:620a:4611:b0:93e:c12c:9dcc with SMTP id af79cd13be357-94421760e17mr1055212885a.76.1793477769030;
+        Sat, 31 Oct 2026 13:16:09 -0700 (PDT)
+X-Received: by 2002:a05:620a:4611:b0:93e:c12c:9dcc with SMTP id af79cd13be357-94421760e17mr1055210585a.76.1793477768621;
+        Sat, 31 Oct 2026 13:16:08 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfe0752a30sm731130e87.78.2026.10.31.13.16.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 11:14:03 -0700 (PDT)
-From: Senna <sennas1633@gmail.com>
-X-Google-Original-From: Senna <Sennas1633@gmail.com>
-To: mhi@lists.linux.dev
-Cc: mani@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	sumit.kumar@oss.qualcomm.com,
-	Senna <Sennas1633@gmail.com>
-Subject: [PATCH v2] bus: mhi: ep: Complete multi-TRE DL transfers after all TREs finish
-Date: Sat, 31 Oct 2026 19:12:08 +0100
-Message-ID: <20261031181208.19403-1-Sennas1633@gmail.com>
-X-Mailer: git-send-email 2.56.0
+        Sat, 31 Oct 2026 13:16:07 -0700 (PDT)
+Date: Sat, 31 Oct 2026 22:16:05 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Guido =?utf-8?Q?G=C3=BCnther?= <agx@sigxcpu.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Arnaud Ferraris <aferraris@debian.org>, phone-devel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: sdm670-google-common: set chassis-type
+ property
+Message-ID: <ucyymr5uvakzqalebjvx4cnxaqi7d66urnjcogjm7jdgcmohu4@63uj25mpulyn>
+References: <20261030-pixel3a-handset-v1-1-0ad9b0d17a76@sigxcpu.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -98,330 +126,54 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261030-pixel3a-handset-v1-1-0ad9b0d17a76@sigxcpu.org>
+X-Proofpoint-ORIG-GUID: k9jPpVRnfErelDQjAQtZC4sXrN8ZPJVG
+X-Authority-Analysis: v=2.4 cv=QuvLTlyd c=1 sm=1 tr=0 ts=6ae64c89 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=8nJEP1OIZ-IA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=xNf9USuDAAAA:8
+ a=ze386MxoAAAA:8 a=EUspDBNiAAAA:8 a=2Uk1DsieHeZNntOzPjsA:9 a=3ZKOabzyN94A:10
+ a=wPNLvfGTeEIA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=iBZjaW-pnkserzjvUTHh:22
+X-Proofpoint-GUID: k9jPpVRnfErelDQjAQtZC4sXrN8ZPJVG
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA4MCBTYWx0ZWRfX83GLISzZJFD0
+ kkG5nCqGCrSRtBU9nLmli0Oe++farTq22QFo42XvrLsqI8AqXswTAs0d4BOR3CMqjiKiK/v9xB2
+ 5ADzXsNW63dtm++g6GdsBhOm6W6mpQc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA4MCBTYWx0ZWRfX1+KyEhSLEuZy
+ pBDDaEQoAeuxmMWZsOhjISvhKAvOC3hDxK70A87D1HfdKwmkASU63yYaAaMThJ5356/hcRT3x6D
+ 4XIWeOHTANfhpWYeTDP+mKnYvJfjLAn1LLSThf/s7+dZhMxw6wJrk9njBc+z+25vzHGMC31D4Xh
+ WNZia4GqvkuN6hQ1CJxjaYPNSSAZBekLW2U/WT3pt5FlL/aBj/j38N1O7m8ugFS2fUp4Y7Aqncl
+ uV1lutUqkvN2rKBi1jgZzzrtCiSgC55wAfeRngZ7ogsSLb01JIn/wiwMmvTCgxj6ouF6VzQhhC9
+ NSzdFS8eOzDsbluVny4TUs27wIr2VhH5d15kwyVNSgGB+HV0M88H2n11ZWwWL42+zahsqABzVOA
+ hd23Kxz8UUYkDT4Ihqr3fU+6xj1tEH6GzqZuL4uEtBwMKzd+/mxKunJ1z30yP2S+gkt71M9aIMM
+ tr7JZeCUTflx2kWeuyA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-31_05,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 priorityscore=1501 malwarescore=0 spamscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2610310080
 
-A buffer that spans several host TREs is written once per TRE, and the
-client callback runs from each completion. A client that frees the
-buffer from the callback, like the loopback driver, frees it while
-later TREs still reference it and frees it again on the next callback.
+On Fri, Oct 30, 2026 at 10:27:38PM +0100, Guido Günther wrote:
+> From: Arnaud Ferraris <aferraris@debian.org>
+> 
+> The Pixel 3a/3a XL are mobile phones, we should ensure userspace can be
+> aware of that by setting the `chassis-type` property.
+> 
+> Signed-off-by: Arnaud Ferraris <aferraris@debian.org>
+> Signed-off-by: Guido Günther <agx@sigxcpu.org>
+> ---
+>  arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
 
-Check up front that the TREs queued by the host can hold the whole
-buffer, so a transfer does not run out of TREs halfway. Then track the
-outstanding TREs of each transfer with a refcount and call the client
-callback once, after all accepted TREs have completed. This does not
-depend on write_async() completions being in order.
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
-The queue functions now return 0 once at least one TRE has been
-accepted. A later submission failure is reported through
-transaction_status in the callback. A negative return still means
-nothing was accepted and no callback will be issued. The path is shared
-by raw buffers and SKBs, so both get the same handling.
 
-A partial submission can still leave the host with OVERFLOW events and
-no closing EOT. Fixing that needs a write_async() op that takes all
-TREs of a buffer at once.
-
-Fixes: f9ff616f5747 ("bus: mhi: ep: Add mhi_ep_queue_buf() API for raw buffer queuing")
-Suggested-by: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
-Signed-off-by: Senna <Sennas1633@gmail.com>
----
-
-Notes:
-    Link to v1: https://lore.kernel.org/all/20261028175100.83406-1-Sennas1633@gmail.com/
-
-    Changes in v2:
-    - Check TRE room up front, as suggested by Sumit
-    - Complete the client callback once after all accepted TREs finish, using a refcount, instead of relying on in-order completion
-    - Report a later submission failure via transaction_status and document it
-    - Also covers SKBs, since both share mhi_ep_queue()
-    - Dropped the loopback.c error print from v1
-    - Not tested on hardware; found by code inspection.
-
- drivers/bus/mhi/ep/main.c | 143 +++++++++++++++++++++++++++++++++-----
- include/linux/mhi_ep.h    |  30 ++++++--
- 2 files changed, 147 insertions(+), 26 deletions(-)
-
-diff --git a/drivers/bus/mhi/ep/main.c b/drivers/bus/mhi/ep/main.c
-index 4be20c368536..a4b0ef2fa4d9 100644
---- a/drivers/bus/mhi/ep/main.c
-+++ b/drivers/bus/mhi/ep/main.c
-@@ -14,6 +14,8 @@
- #include <linux/irq.h>
- #include <linux/mhi_ep.h>
- #include <linux/module.h>
-+#include <linux/refcount.h>
-+#include <linux/spinlock.h>
- #include "internal.h"
- 
- #define M0_WAIT_DELAY_MS	100
-@@ -504,7 +506,33 @@ static int mhi_ep_process_ch_ring(struct mhi_ep_ring *ring)
- 	return 0;
- }
- 
--static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
-+struct mhi_ep_buf_tx {
-+	struct mhi_ep_device *mhi_dev;
-+	void *buf;
-+	refcount_t pending;
-+	spinlock_t lock; /* protects bytes_xferd and status */
-+	size_t bytes_xferd;
-+	int status;
-+	bool queued;
-+};
-+
-+/* Check that the TREs queued by the host can hold @len before queueing any */
-+static bool mhi_ep_queue_has_room(struct mhi_ep_ring *ring,
-+				  struct mhi_ep_chan *mhi_chan, size_t len)
-+{
-+	size_t rd = mhi_chan->rd_offset;
-+
-+	while (len && rd != ring->wr_offset) {
-+		struct mhi_ring_element *el = &ring->ring_cache[rd];
-+
-+		len -= min_t(size_t, len, MHI_TRE_DATA_GET_LEN(el));
-+		rd = (rd + 1) % ring->ring_size;
-+	}
-+
-+	return !len;
-+}
-+
-+static int mhi_ep_send_buf_completion(struct mhi_ep_buf_info *buf_info)
- {
- 	struct mhi_ep_device *mhi_dev = buf_info->mhi_dev;
- 	struct mhi_ep_cntrl *mhi_cntrl = mhi_dev->mhi_cntrl;
-@@ -512,25 +540,55 @@ static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
- 	struct mhi_ep_ring *ring = &mhi_cntrl->mhi_chan[mhi_chan->chan].ring;
- 	struct mhi_ring_element *el = &ring->ring_cache[ring->rd_offset];
- 	struct device *dev = &mhi_dev->dev;
--	struct mhi_result result = {};
- 	int ret;
- 
--	if (mhi_chan->xfer_cb) {
--		result.buf_addr = buf_info->cb_buf;
--		result.dir = mhi_chan->dir;
--		result.bytes_xferd = buf_info->size;
--
--		mhi_chan->xfer_cb(mhi_dev, &result);
--	}
--
- 	ret = mhi_ep_send_completion_event(mhi_cntrl, ring, el, buf_info->size,
- 					   buf_info->code);
- 	if (ret) {
- 		dev_err(dev, "Error sending transfer completion event\n");
--		return;
-+		return ret;
- 	}
- 
- 	mhi_ep_ring_inc_index(ring);
-+
-+	return 0;
-+}
-+
-+static void mhi_ep_buf_tx_put(struct mhi_ep_buf_tx *tx, size_t bytes_xferd,
-+			      int status)
-+{
-+	struct mhi_ep_chan *mhi_chan = tx->mhi_dev->dl_chan;
-+	struct mhi_result result = {
-+		.buf_addr = tx->buf,
-+		.dir = mhi_chan->dir,
-+	};
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&tx->lock, flags);
-+	tx->bytes_xferd += bytes_xferd;
-+	if (status && !tx->status)
-+		tx->status = status;
-+	spin_unlock_irqrestore(&tx->lock, flags);
-+
-+	if (!refcount_dec_and_test(&tx->pending))
-+		return;
-+
-+	if (tx->queued && mhi_chan->xfer_cb) {
-+		result.bytes_xferd = tx->bytes_xferd;
-+		result.transaction_status = tx->status;
-+		mhi_chan->xfer_cb(tx->mhi_dev, &result);
-+	}
-+
-+	kfree(tx);
-+}
-+
-+static void mhi_ep_buf_completion(struct mhi_ep_buf_info *buf_info)
-+{
-+	struct mhi_ep_buf_tx *tx = buf_info->cb_buf;
-+	int ret;
-+
-+	ret = mhi_ep_send_buf_completion(buf_info);
-+	mhi_ep_buf_tx_put(tx, buf_info->size, ret);
- }
- 
- /* TODO: Handle partially formed TDs */
-@@ -541,11 +599,14 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 	struct mhi_ep_chan *mhi_chan = mhi_dev->dl_chan;
- 	struct device *dev = &mhi_chan->mhi_dev->dev;
- 	struct mhi_ep_buf_info buf_info = {};
-+	struct mhi_ep_buf_tx *tx;
- 	struct mhi_ring_element *el;
- 	size_t buf_left, read_offset;
- 	struct mhi_ep_ring *ring;
- 	size_t tr_len;
- 	u32 tre_len;
-+	bool queued = false;
-+	unsigned long flags;
- 	int ret;
- 
- 	buf_left = len;
-@@ -553,14 +614,32 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 
- 	mutex_lock(&mhi_chan->lock);
- 
--	do {
--		/* Don't process the transfer ring if the channel is not in RUNNING state */
--		if (mhi_chan->state != MHI_CH_STATE_RUNNING) {
--			dev_err(dev, "Channel not available\n");
--			ret = -ENODEV;
--			goto err_exit;
--		}
-+	/* Don't process the transfer ring if the channel is not in RUNNING state */
-+	if (mhi_chan->state != MHI_CH_STATE_RUNNING) {
-+		dev_err(dev, "Channel not available\n");
-+		ret = -ENODEV;
-+		goto err_unlock;
-+	}
-+
-+	/* Don't start the transfer if the host TREs can't hold the whole buffer */
-+	if (!mhi_ep_queue_has_room(ring, mhi_chan, len)) {
-+		dev_err(dev, "Not enough TREs available\n");
-+		ret = -ENOSPC;
-+		goto err_unlock;
-+	}
- 
-+	tx = kzalloc_obj(*tx, GFP_KERNEL);
-+	if (!tx) {
-+		mutex_unlock(&mhi_chan->lock);
-+		return -ENOMEM;
-+	}
-+
-+	tx->mhi_dev = mhi_dev;
-+	tx->buf = cb_buf;
-+	refcount_set(&tx->pending, 1);
-+	spin_lock_init(&tx->lock);
-+
-+	do {
- 		if (mhi_ep_queue_is_empty(mhi_dev, DMA_FROM_DEVICE)) {
- 			dev_err(dev, "TRE not available!\n");
- 			ret = -ENOSPC;
-@@ -576,8 +655,9 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 		buf_info.dev_addr = buf + read_offset;
- 		buf_info.host_addr = MHI_TRE_DATA_GET_PTR(el);
- 		buf_info.size = tr_len;
-+		refcount_inc(&tx->pending);
- 		buf_info.cb = mhi_ep_buf_completion;
--		buf_info.cb_buf = cb_buf;
-+		buf_info.cb_buf = tx;
- 		buf_info.mhi_dev = mhi_dev;
- 
- 		/*
-@@ -591,13 +671,19 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 		else
- 			buf_info.code = MHI_EV_CC_EOT;
- 
-+		/*
-+		 * If a later write_async() fails, accepted TREs still reference
-+		 * the buffer and the host may see OVERFLOW without a closing EOT.
-+		 */
- 		dev_dbg(dev, "Writing %zd bytes to channel (%u)\n", tr_len, ring->ch_id);
- 		ret = mhi_cntrl->write_async(mhi_cntrl, &buf_info);
- 		if (ret) {
- 			dev_err(dev, "Error writing to the channel\n");
-+			refcount_dec(&tx->pending);
- 			goto err_exit;
- 		}
- 
-+		queued = true;
- 		buf_left -= tr_len;
- 
- 		/*
-@@ -609,11 +695,30 @@ static int mhi_ep_queue(struct mhi_ep_device *mhi_dev, void *buf, size_t len,
- 
- 	mutex_unlock(&mhi_chan->lock);
- 
-+	tx->queued = true;
-+	mhi_ep_buf_tx_put(tx, 0, 0);
-+
- 	return 0;
- 
- err_exit:
- 	mutex_unlock(&mhi_chan->lock);
- 
-+	if (queued) {
-+		tx->queued = true;
-+		spin_lock_irqsave(&tx->lock, flags);
-+		if (!tx->status)
-+			tx->status = ret;
-+		spin_unlock_irqrestore(&tx->lock, flags);
-+		ret = 0;
-+	}
-+
-+	mhi_ep_buf_tx_put(tx, 0, 0);
-+
-+	return ret;
-+
-+err_unlock:
-+	mutex_unlock(&mhi_chan->lock);
-+
- 	return ret;
- }
- 
-diff --git a/include/linux/mhi_ep.h b/include/linux/mhi_ep.h
-index 852f331f03fd..76f77b35dfde 100644
---- a/include/linux/mhi_ep.h
-+++ b/include/linux/mhi_ep.h
-@@ -300,7 +300,16 @@ bool mhi_ep_queue_is_empty(struct mhi_ep_device *mhi_dev, enum dma_data_directio
-  * @mhi_dev: Device associated with the DL channel
-  * @skb: SKBs to be queued
-  *
-- * Return: 0 if the SKBs has been sent successfully, a negative error code otherwise.
-+ * The DL transfer callback is invoked once after all accepted TREs for the
-+ * SKB complete. If submitting a later TRE fails after at least one TRE was
-+ * accepted, the callback reports the error through
-+ * result->transaction_status.
-+ *
-+ * Return: 0 if one or more TREs were accepted. When the client callback is
-+ * registered, it is invoked after all accepted TREs complete. If a later
-+ * submission fails, check result->transaction_status in the callback. A
-+ * negative error code is returned if no TRE was accepted and no callback will
-+ * be issued.
-  */
- int mhi_ep_queue_skb(struct mhi_ep_device *mhi_dev, struct sk_buff *skb);
- 
-@@ -309,14 +318,21 @@ int mhi_ep_queue_skb(struct mhi_ep_device *mhi_dev, struct sk_buff *skb);
-  * @mhi_dev: Device associated with the DL channel
-  * @buf: Buffer to be queued. On success, ownership passes to the MHI stack;
-  *       the caller must not free @buf until the DL transfer callback fires
-- *       with result->buf_addr equal to @buf. On failure, the caller retains
-- *       ownership and must free @buf.
-- *       Note: if @len spans multiple host DL TREs, the DL transfer callback
-- *       fires once per TRE, each time with result->buf_addr equal to @buf.
-+ *       with result->buf_addr equal to @buf. If no TRE is accepted, the
-+ *       caller retains ownership and must free @buf.
-  * @len: Size of the buffer
-  *
-- * Return: 0 if the buffer contents have been transferred successfully, a
-- * negative error code otherwise.
-+ * If @len spans multiple host DL TREs, the DL transfer callback fires once,
-+ * after all accepted TREs complete. If write_async() fails on a later TRE
-+ * after earlier TREs were queued, those transfers remain in flight and still
-+ * reference @buf, and the host sees OVERFLOW events without a closing EOT.
-+ * In this case, the callback reports the error through
-+ * result->transaction_status.
-+ *
-+ * Return: 0 if one or more TREs were accepted. The client callback is invoked
-+ * after all accepted TREs complete and reports a later submission failure
-+ * through result->transaction_status. A negative error code is returned if no
-+ * TRE was accepted and no callback will be issued.
-  */
- int mhi_ep_queue_buf(struct mhi_ep_device *mhi_dev, void *buf, size_t len);
- 
 -- 
-2.56.0
-
+With best wishes
+Dmitry
