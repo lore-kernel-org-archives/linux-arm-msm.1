@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793450379;
-	b=vtyHlgm5+XYTZE3/0EkSRSBi+ufq6U/qBmAh39b6XmGB6eS7+8qHVdNtLtzXqMxJzeB3
-	 mHpSSFoJWiCCkVtTJCGOy9l5uDZw3Tr4laEg2zS62F3QGEUEd6cinOzXkDmJfyxXUJqse
-	 Imp1fOgDCtCc2qf3bTiYmWgSk2SYrFfzwVPiRfc2qVRj/yJC9Qg40omz7bTWIgY7MvRHR
-	 nUJrfYL7TNBofth/2pAUdQncjhFYhT2fk4MVYRK/JfA4kGLgbE3hZytBWyFsT+LXIMcqL
-	 80DWXvZPURRXlde1BUnUxnpcbI3IO4Lge4a61bU1z9qDTh03zL6n9wuQiD3yHbEdQRQ==
+	t=1793450385;
+	b=yulJ8Tw7oy29oOB3VKiS3LKAJtA7rfoWIZf+XZ22+UOFh7susHZkYWrD1H6z8BAUtiCW
+	 TRbZVvqp2Fsbbx+TlV+88Dz75DYx+RaxV1gSHvrKVOWBG6Mnjmyms8R6jXb651oUp9X1u
+	 49K6wFvXAFRZEROkvOTBWTvZT/pqk2E5CSMV6ZoOKKjG1C7YGaSeNiE+3wVRDOSHGBLNA
+	 OfWLhaawmI+UfsYn+Q/QBN76OMgUBFRe9k+pwgzTI1M4LW3+8o0KwPxftgSJlT2DnwJ/c
+	 5exm//MQApnsUZUo+IWtKYUDLOwfKzdd5/XNn4YKU+LJ8ANfVgB0RM5v0BgvMj6gpLw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793450379;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793450385;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=cnXM6OEqfvGVRy4AJACjTgyVnlWSquVpMq023G3i6Do=;
-	b=Am9u2Ik8Qzd8yMGItFpgm9mgwAKfGwYHfn/FJPa9GH4vV6t9IRPk1cm1KDDhUNKGJAkP
-	 o7iBVUc6qlKRn5Z1gpCm7he022b89n/nSVHDegcE7o/RovauXiR6dDgr4FV28lNtC36wU
-	 TlbJOizRBFNorCr4JKodhwGMSsJwXU3y38OBl6V+eYWqb22KSQjxMH6Y1xC9VR9MLRB1G
-	 zlLtyZEWVJoQczE9lNXBnuRyr7KgGF0kguug0iUT1B4dDFeAslMHkJU50Qjr5iPNT3X0W
-	 fiAR/BUXY19uFkRODJlZDggQWPAErqPQHyWaIqzboUuSg9+lparfiAp8W0WzFfZAyhQ==
+	bh=9lYqqX+robUheapeipscKVQntLqlVNgi48T6H+L8K2Q=;
+	b=ZhrsnJYS7lT00VUWirIEwjM28GU3lG3ccQ2r6JBTBOknZlwBsJyH5DF16l0jvm4KWVMA
+	 izZoWzT9onUiKEB91ARU+INtTBuDYB8IXzflimBf7uQfuZSjLe61A3JKsrq6cSs37XFiF
+	 H52OdWwI8YxHZz22sM1/LEWlhbGEx1SD81fM47nyJoOLMUiQpKoFZRHBNQE1/YzN9jwII
+	 koAebt4UDLz1UqwQvzhJ8gs2wV/h48zWLTxNkBW9JzEezWxUh9rQUyxwewJcC8Am/hulI
+	 NPrL4ZOqU3DwadwivjjAmUqEwhWkkq4AyC4Lup1GoTl7E+hT2npSnuHZaBs7ennU37Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="noT1P/WW";
-	arc=none smtp.remote-ip=74.125.82.175
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gOrUj+85;
+	arc=none smtp.remote-ip=74.125.82.170
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05601606A321
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 12:39:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 05601606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2AA1606A322
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 12:39:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F2AA1606A322
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=noT1P/WW
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-36a2551d7b5so3419679eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 05:39:38 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gOrUj+85
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-3514b90bb89so3072541eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 05:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793450378; x=1794055178; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793450384; x=1794055184; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cnXM6OEqfvGVRy4AJACjTgyVnlWSquVpMq023G3i6Do=;
-        b=noT1P/WWygxujj5N7CXMhW9KUUVBrILgHD3cyISauVEk/333TsPoEAmqe+vPvqtcRg
-         vjg3LueDnm5cH58bO/1RkjL3Zyyhyet/YpGCw85fQZ6clqc8g5c2VvITHO7H4/IZHghP
-         i3ItIumFpvLEMSn4TI/dPT0noFcxzmIels6683DS2IBe5sMFlIEcJ42hA8J58SCDMMXN
-         oj8Hzu6Lei9XwPEZ1sIQjePY5nh4oDk7mBgwrJAybwT8ux/aOkmsmwM6NttyskzXEH/9
-         b3V0q5e0X3miPnQ6m9M4hqBfxNIorRAN2b+on7ZzhuGhOBDcR88eVf6j4nCw6rBNPPVt
-         likQ==
+        bh=9lYqqX+robUheapeipscKVQntLqlVNgi48T6H+L8K2Q=;
+        b=gOrUj+8519T2pA46LxOphlK1zNFHwSN41ceBiRGJAgYAb5PSzf7IzjnkBf4OH/X4N0
+         p6oBNz6J7VIsngicPqtxG/17AOwKIq7cl5/ISU9x4OPErIOcGINgrkKF6t3DwBkFgpSN
+         o4O3SHgkqsosqoaSquQdPSH+3kfb2VqMsnUkEfVjZRc9rJp20boJZKeTjac491DsYIub
+         msYaNqqw6ER6GxNFDtA8qmu23PvlDuN/kwhYo5NwBq1VCk0m+qbn/FFNtlHaVCJOAIGx
+         PLg9dqwGx6snsttOmfsuPjcSLJfSexSnpQhw1uoP5o8ntynqvRcGT8THTK047zi/zi94
+         xWlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793450378; x=1794055178;
+        d=1e100.net; s=20260707; t=1793450384; x=1794055184;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cnXM6OEqfvGVRy4AJACjTgyVnlWSquVpMq023G3i6Do=;
-        b=Ju88U7Gz5wXoFgmkn+IkD4R9+zmmry1XXzLf1c0XDH/Q5aRZyGWzAaUpdVXOdg5SmU
-         pcEudiCnLR9qmmdyXnz3MuLXIbqmV6lyRf/YezW9n5Gjl0Tr46gBFQvymnm0Czf7HANj
-         Ozt/abIo13ADnMMRcD/LiYrZl23PLXgTT8RXQ7KogBbvZk+HFvVzUwMoNpLyZH/08kEI
-         8gYf5nZMzJIXpwjp6I4wfuNYfhNbKFlm+dGhXmIPYGmgS/YmoVhaJgH0WkmDlnngQeVM
-         8kZJqAlbHoySYkImBf95/24K0NwDt1Iw2qDjKYNY9cokZ3Fc9175e7yW+1pxtd9mXW+2
-         NoRg==
-X-Forwarded-Encrypted: i=1; AKwUvBxrM8AUrnEgsV+Pr2u1dhEyV5q1F2L9VXy4WCJH5OlaKr667+sQCbvy0PyhJo3C98300Y7N+XgmV4EyxOpy@vger.kernel.org
-X-Gm-Message-State: AFq9FYJYjqEQAaLMKhuedA4Nv2OyDeJ+Bta0YGD4ZWPHoEmyj963W8Ps
-	tu9iOdtx5Ocf4wrkm571ekqNFeDrpRdlauKlUrId0JKXvyjAOH72oI9H
-X-Gm-Gg: AYBFou1zuh8EhoTNlnDPpZ+AzW0XQixb8j0rhaj4ahd07grmMWsqff0Sj8u5oTSjdax
-	o3Bq9yIbpNR9LYJBFck3Y2EK7yAGWgZL0nbStAnmLsXsLate0CNSNIN18n/CVp3lyIB9MeDe47M
-	aUtJIw7dDLgp7W/IjJB9ltugFqoS+kPXZIkf4kFuw4QgR+bWNQwbPos8Cxt1ndJC3EMUrNCQENf
-	rquDitjH4ilYMz6MHS0/lGBIW5PcRjv2WuM5rT8mdlZnIc4gl1X3GalCKnJy609CHoJH9261ZAy
-	C73Kf84ZIpunv9PEeq9aKhgrx/tbn7H82SlLWeaQdFBsX415zegP1Q6hiDz0rjZ9uCKRaGU5yp5
-	FHFjM8S2PN/b2IK6yYTmvAHP/N20dQI7KY7SsA8zLiUhViFAKPChooHfrQg3mjKATX5vNYdkyeM
-	h/++GceLpzWkjmSx3NK++Y3GmGsyylDU9n8nERwZW68nz9yOM3zP7UH8+06tjymhCFcRkhMBUhB
-	+OH38Q/ZiXfCWbfKwCkoAJgh+F5sRXfUp5vMoRNrVzFSy6x67Vpn0FdhjdMUXVmlPLwgtNTlGfb
-	oYp4+j7qY4UorX7ZwS9pKqdoMERfjoFr7d4WB2ex10eivEC4vsUxpx+QMqLDF5hQipHMEUb7Bzz
-	Pe9D5aTRDeR/WsKQtD+jPCTfPezWrAfFL/YKZuF3Nzvvm9tKRTJ3HgjysqyseKs4erSafkbxds5
-	68jrkABKQYXNdpJg==
-X-Received: by 2002:a05:701b:271b:b0:148:ece:8cc3 with SMTP id a92af1059eb24-1a94adc93b7mr10542506c88.24.1793450377950;
-        Sat, 31 Oct 2026 05:39:37 -0700 (PDT)
+        bh=9lYqqX+robUheapeipscKVQntLqlVNgi48T6H+L8K2Q=;
+        b=Sty4r000s+/c2pU8IVLcxSUzhlMCH511cBntcCiet9t3QB97+Ahv+kceREf8PxpZH+
+         0eYUTrpGYy719YeMVUBQlrfuGSuTZGCNygGB2+/Gb8tY07Z1CPcMcyZUjZwoWqAWNRBE
+         6os/djbPS127cpTxiT/mjFUzhJDg7G9eZjv0GI7vIw03jOudL+d4AB/jEJzAlv6Ot2uC
+         z0V/najpgds/UhPPc4CtxTPZaQomCWfSUq5X1afHKZYc8rSICn1vi+k+R7qiQgFRScN1
+         QlGmB2P5SZAQsY8Q9hMie2DFE6aZxG0ZWu+XG4eoPonT3JkTq1yAb5DbQdCf0K+tpAFS
+         hsvw==
+X-Forwarded-Encrypted: i=1; AKwUvBwaLSf1pW52WV4yGVROGoBkKNkZkjD8FmgGou+n/ZLscfKAjd+dl03mAJ2Ay0mX4Q0TKo6iV9uEHZPvePVi@vger.kernel.org
+X-Gm-Message-State: AFq9FYLYWqOdX38/QdMVqumUn/GKzL17T2PS8D0fO6KtkAqvmL2G8BPt
+	SmbbEPQOgBtCFWuXkPU2hCo7mDHv2GSHGQvTLYuSWv+XNHIOqbV8lGdx
+X-Gm-Gg: AYBFou202Tt+TkrchTr829gp9AtWCBeaU495ga59bXUwPu88NPRA3RIPYmbUihceQSo
+	BbTj+4iNmv9kAccG6gHU8lImGgQUvbuv7CxDnp9e9m1jwVrlt9gz2LesAQMUjlm+/GqSWlK1O1L
+	CdwQwnPobjmKIXdFEENmKjPh3naPCauu+0RVAwuuNcl10n9d9U84IRMIvwuAS7VLmhH5v37bpuQ
+	xCsKejmDHp8NOIWfUi1n3CB+8sjYvhror8YnusfFolq1pSPB9vhfbbMJwdTKnIJXc+6oqavxQNj
+	/nPZUZisenVu53RIPGvRAQ3yfP797nFauq4hSr31v94zusfUu7a+OXf5knY4wJdoVH5d3+gc5yt
+	aSUP4EO5zPw5c0UV9hrRFpMd3ttQrcM9kmUC/E/yMvXP77ZRzXOKIzxCxxIDGVHJlqHxWvVoc+K
+	sQ6rs62GdKZk06bcLNb693x07CqOXOyZukCnoP9xISHW4pppQN38L9Rd82jiV6+a/xzjlCRkkz6
+	OHb27ms+BRGXmoF6jzAfv1PL7UTB1+njfWwpJNeqeThJD6t5gMxTbPhp4sgw4fTuCcET3f4A7F5
+	/nPAiGWIZRkaacwoDNTrkK5oJ1HVgwfrU2lYyVuH8R34/LTwT1JwI1Or4+Ltz+q/Q2So/9MoJr/
+	U1eeJrRe2x7saf4dsi93mD4wam66ysULuk5yXBil1Bl008D7PHaLiJoJ2iFB+nK0apl6TNhPt4U
+	rSsgRcNYblYQkr6Q==
+X-Received: by 2002:a05:7022:ef07:b0:188:ea93:6cf9 with SMTP id a92af1059eb24-1ac5eea1fe9mr8982380c88.43.1793450383881;
+        Sat, 31 Oct 2026 05:39:43 -0700 (PDT)
 Received: from brev-9gdpyq8lp.ap-south-1.compute.internal (ec2-3-110-210-194.ap-south-1.compute.amazonaws.com. [3.110.210.194])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854da78sm21566039c88.6.2026.10.31.05.39.32
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854da78sm21566039c88.6.2026.10.31.05.39.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 05:39:37 -0700 (PDT)
+        Sat, 31 Oct 2026 05:39:43 -0700 (PDT)
 From: Samarth Narang <samarth.colleges@gmail.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jiri Slaby <jirislaby@kernel.org>
@@ -100,9 +100,9 @@ Cc: Samarth Narang <samarth.colleges@gmail.com>,
 	linux-tegra@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 3/5] serial: sprd: fix TX kfifo underflow on flush
-Date: Sat, 31 Oct 2026 12:39:09 +0000
-Message-Id: <20261031123911.3784690-4-samarth.colleges@gmail.com>
+Subject: [PATCH 4/5] tty: serial: msm: fix TX kfifo underflow on flush
+Date: Sat, 31 Oct 2026 12:39:10 +0000
+Message-Id: <20261031123911.3784690-5-samarth.colleges@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261031123911.3784690-1-samarth.colleges@gmail.com>
 References: <20261031004733.3345841-1-samarth.colleges@gmail.com>
@@ -119,100 +119,90 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 uart_flush_buffer() resets the transmit kfifo under the port lock before
-calling the driver's flush_buffer() hook. Since sprd_serial does not
+calling the driver's flush_buffer() hook. Since msm_serial does not
 implement this hook, an outstanding TX DMA transfer may complete after
-the flush and call uart_xmit_advance() using the flushed transfer's
-tx_dma.trans_len. This can advance the kfifo tail past its head, causing
-kfifo_len() to wrap and the driver to transmit stale buffer contents.
-The same issue was fixed in 8250 by commit 9e512eaaf8f4 ("serial: 8250:
-Fix fifo underflow on flush").
+the flush and call uart_xmit_advance() using the flushed transfer's byte
+count. The existing check for a stopped transfer relies on tx_sg, which
+the flush does not clear, so it does not catch this case. The kfifo tail
+then advances past its head, causing kfifo_len() to wrap and the driver
+to transmit stale buffer contents. The same issue was fixed in 8250 by
+commit 9e512eaaf8f4 ("serial: 8250: Fix fifo underflow on flush").
 
 Since the TX buffer is mapped separately for each transfer and the flush
-hook runs under the port lock, DMA cannot be terminated and its mapping
-safely released synchronously from the hook. Instead, leave the
+hook runs under the port lock, the driver cannot synchronously terminate
+DMA and safely unmap the buffer from that context. Instead, leave the
 outstanding transfer running and mark it as flushed, allowing the
 completion callback to unmap the buffer without advancing the kfifo.
-Apply the same check in sprd_stop_tx_dma() if the transfer is stopped
-before completion. With this approach, the data already queued for DMA
-before the flush may still be transmitted.
+Clear the flag when preparing the next transfer. This avoids the kfifo
+underflow, although the data already queued for DMA before the flush may
+still be transmitted.
 
-Fixes: f4487db58eb7 ("serial: sprd: Add DMA mode support")
+Fixes: 3a878c430fd6 ("tty: serial: msm: Add TX DMA support")
 Cc: stable@vger.kernel.org
 Assisted-by: LLM
 Signed-off-by: Samarth Narang <samarth.colleges@gmail.com>
 ---
- drivers/tty/serial/sprd_serial.c | 24 ++++++++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
+ drivers/tty/serial/msm_serial.c | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/tty/serial/sprd_serial.c b/drivers/tty/serial/sprd_serial.c
-index 3fdf5939a62c..718732b683f1 100644
---- a/drivers/tty/serial/sprd_serial.c
-+++ b/drivers/tty/serial/sprd_serial.c
-@@ -133,6 +133,7 @@ struct sprd_uart_port {
- 	struct clk *clk;
- 	struct sprd_uart_dma tx_dma;
- 	struct sprd_uart_dma rx_dma;
-+	bool tx_flushed;
- 	dma_addr_t pos;
- 	unsigned char *rx_buf_tail;
- 	const struct sprd_uart_data *pdata;
-@@ -236,13 +237,15 @@ static void sprd_stop_tx_dma(struct uart_port *port)
- 	dmaengine_tx_status(sp->tx_dma.chn, sp->tx_dma.cookie, &state);
- 	if (state.residue) {
- 		trans_len = state.residue - sp->tx_dma.phys_addr;
--		uart_xmit_advance(port, trans_len);
-+		if (!sp->tx_flushed)
-+			uart_xmit_advance(port, trans_len);
- 		dma_unmap_single(port->dev, sp->tx_dma.phys_addr,
- 				 sp->tx_dma.trans_len, DMA_TO_DEVICE);
- 	}
+diff --git a/drivers/tty/serial/msm_serial.c b/drivers/tty/serial/msm_serial.c
+index bfa44b01c3e9..a9eca971e9ff 100644
+--- a/drivers/tty/serial/msm_serial.c
++++ b/drivers/tty/serial/msm_serial.c
+@@ -185,6 +185,7 @@ struct msm_port {
+ 	bool			break_detected;
+ 	struct msm_dma		tx_dma;
+ 	struct msm_dma		rx_dma;
++	bool			tx_dma_flushed;
+ };
  
- 	dmaengine_terminate_all(sp->tx_dma.chn);
- 	sp->tx_dma.trans_len = 0;
-+	sp->tx_flushed = false;
+ static inline struct msm_port *to_msm_port(struct uart_port *up)
+@@ -428,6 +429,19 @@ static void msm_stop_tx(struct uart_port *port)
+ 	msm_write(port, msm_port->imr, MSM_UART_IMR);
  }
  
- static int sprd_tx_buf_remap(struct uart_port *port)
-@@ -273,7 +276,9 @@ static void sprd_complete_tx_dma(void *data)
- 	dma_unmap_single(port->dev, sp->tx_dma.phys_addr,
- 			 sp->tx_dma.trans_len, DMA_TO_DEVICE);
- 
--	uart_xmit_advance(port, sp->tx_dma.trans_len);
-+	if (!sp->tx_flushed)
-+		uart_xmit_advance(port, sp->tx_dma.trans_len);
-+	sp->tx_flushed = false;
- 
- 	if (kfifo_len(&tport->xmit_fifo) < WAKEUP_CHARS)
- 		uart_write_wakeup(port);
-@@ -555,6 +560,20 @@ static void sprd_stop_tx(struct uart_port *port)
- 	serial_out(port, SPRD_ICLR, iclr);
- }
- 
-+static void sprd_flush_buffer(struct uart_port *port)
++static void msm_flush_buffer(struct uart_port *port)
 +{
-+	struct sprd_uart_port *sp = container_of(port, struct sprd_uart_port,
-+						 port);
++	struct msm_port *msm_port = to_msm_port(port);
 +
 +	/*
 +	 * The kfifo has been reset. Let the running transfer finish, so that
 +	 * its buffer is unmapped only once it has stopped, but do not advance
 +	 * the kfifo for it.
 +	 */
-+	if (sp->tx_dma.trans_len)
-+		sp->tx_flushed = true;
++	if (sg_dma_len(&msm_port->tx_dma.tx_sg))
++		msm_port->tx_dma_flushed = true;
 +}
 +
- static void sprd_start_tx(struct uart_port *port)
+ static void msm_start_tx(struct uart_port *port)
  {
- 	struct sprd_uart_port *sp = container_of(port, struct sprd_uart_port,
-@@ -946,6 +965,7 @@ static const struct uart_ops serial_sprd_ops = {
- 	.get_mctrl = sprd_get_mctrl,
- 	.set_mctrl = sprd_set_mctrl,
- 	.stop_tx = sprd_stop_tx,
-+	.flush_buffer = sprd_flush_buffer,
- 	.start_tx = sprd_start_tx,
- 	.stop_rx = sprd_stop_rx,
- 	.break_ctl = sprd_break_ctl,
+ 	struct msm_port *msm_port = to_msm_port(port);
+@@ -479,7 +493,8 @@ static void msm_complete_tx_dma(void *args)
+ 	}
+ 
+ 	count = sg_dma_len(&dma->tx_sg) - state.residue;
+-	uart_xmit_advance(port, count);
++	if (!msm_port->tx_dma_flushed)
++		uart_xmit_advance(port, count);
+ 	sg_init_table(&dma->tx_sg, 1);
+ 
+ 	/* Restore "Tx FIFO below watermark" interrupt */
+@@ -503,6 +518,7 @@ static int msm_handle_tx_dma(struct msm_port *msm_port, unsigned int count)
+ 	int ret;
+ 	u32 val;
+ 
++	msm_port->tx_dma_flushed = false;
+ 	sg_init_table(&dma->tx_sg, 1);
+ 	kfifo_dma_out_prepare(&tport->xmit_fifo, &dma->tx_sg, 1, count);
+ 
+@@ -1549,6 +1565,7 @@ static const struct uart_ops msm_uart_pops = {
+ 	.set_mctrl = msm_set_mctrl,
+ 	.get_mctrl = msm_get_mctrl,
+ 	.stop_tx = msm_stop_tx,
++	.flush_buffer = msm_flush_buffer,
+ 	.start_tx = msm_start_tx,
+ 	.stop_rx = msm_stop_rx,
+ 	.enable_ms = msm_enable_ms,
 -- 
 2.34.1
 
