@@ -1,46 +1,46 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1793429742;
-	b=O/LoDaJAqnqtrM9zjlqpkd8OvSxXT0XjhXJ/woXM0VdkgToZqC+GWNlid8VgfQ57hog2
-	 MqJ2cqGejTy0umqbpHDwEGjZSJuIm7GTa1DyRe8TTGJ2AvldLR5p00hEPIeoHQcPsJvwb
-	 fSKeAbW0x3suM3TE2JKMuO1TvwK5eEtu0wTYyfwdzUcSaISS66ONAYB3jATnuPJ6kYzD/
-	 8N+gp0yCao3g2LQwUXtMYm4aW2Ubl4zbpUDvqt9qs5azYW2vNdOwgY2+J8PwMDzpnNBUD
-	 2l4L4LupOcQyAXKjwHsbMwmFFnN01+n+UlAGa6b2+Nfnx1Y3ioacfwdw7d+9nxK/drg==
+	b=IKGQkxURHng/bZr2MUPnevz+8626IdMxzWCkw5KWviioKhvNBceL4mJGLC6IoqF78kaB
+	 /NYrT/OE9vXjCeA2thkUmPf8F5350STWjEC9WlShslDIi2/vbDHZXQ+2YzqgkgLQXXI0c
+	 2VXpHEwjFk+9zEafi61D8yRfikx//Ze5ACps5Id1rhnEHidx+cuPESLBgMeoWS4yvagOZ
+	 9/xeC/N2siB/oudWx4zb2Vk8XK5aRG1gwCFEEarYpjvaVudh+bEEDoWWJ/SJ3kNAqVxY2
+	 6kEh7LMuMmGh16RuqMqtYtUZo84zZAnx+8TUir32YAAzGtteUVIi8iUOlL9mdzTzuOQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1793429742;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
 	 X-CM-SenderInfo;
-	bh=a7jemQyT7LfB3Ed1PQqf5uO2W5QbjRHcY2qO+/5nEMM=;
-	b=GxA3iPCXfhrlA+ZseAKXSvqyPKqS+S6wEKEuOtceDmCjLUlFU4mGU3xAS3IH40V96ns3
-	 pUQ3GJHTEmN1m36N+ScG6CjIRaxyCBOPWTm546FTDoIMpnc6VtMpcBlI1XR8k9hYuxMg+
-	 GUYIu8+gdngz53YTXLovEAeAt9teSKUNQmsK6HCqST3rzOFmPbsnBOBedMXqlGCld072T
-	 jK8li8x/V/vTKwImRzJWIxdLWZ8hEfbpSVt7RZB7RZ4NRG2f2OOmkJv87T6wjrceGJmO8
-	 dNyI+VPhOnmoeoikGhLUn+sJtGR78HZ0ii6Z26jCJzxsfrFSnY40FH+Tc88MxaphRwg==
+	bh=SEdjEblr5JTv/01ovHqdBX7PXNay+Hg4j6hwQn/V0PA=;
+	b=19S0T6iCeuX4UnChXRRV0/cw3Gc/q4biRVIC6CisY7TIowCDZbEpoJw0DrznvkNpjmKC
+	 4EweOsGYl3YkyXXJAghBFDYPmAGD0EZ6qs7buNHoSwAQl2tNllPsu9u0H7AdSfn1zdFkY
+	 WljfROSacfavXP1T2Eeu96MLQnYgXtP1SgHbw6sZdCSG/JLR/HPAqJL7j3sKR2h+4ZMXP
+	 bnzD+tezSeOupHGy6HHnCv9dFy3r31sBcIjNlL/QJAyA1GWU1fCGS9f5Rxo9Vzy+sFkKi
+	 aQZvI0NsiFwTi3ESCCo0f38mElYQs4XbUg+dq85vsRP08Qu4Hw3sxs/BzNaInlKSkdw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=mail.ustc.edu.cn;
 	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=ka6ZeFwT;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KWCCTvpn;
 	arc=none smtp.remote-ip=202.38.64.46
 Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12CCB606A31A;
-	Sat, 31 Oct 2026 06:55:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 12CCB606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E91CE606A31F;
+	Sat, 31 Oct 2026 06:55:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E91CE606A31F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=ka6ZeFwT
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KWCCTvpn
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
 	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=a7jemQyT7LfB3Ed1PQqf5uO2W5QbjRHcY2
-	qO+/5nEMM=; b=ka6ZeFwTyHOI0RYLN+0QxDvNtm8Dcm7evdbfY3AW9FGYe1JmP/
-	3wh1UKkP6nm7COSLgMesqPNQ03prnaxrSl6E+QHgpXXp7vT1gq82ncY8biYwX7LS
-	LCb0/ZmA4j3ODVGzRIhDN6ESxPNNdIx3BHShxEYfBs884NYuGrH1mNK4Y=
+	Content-Transfer-Encoding; bh=SEdjEblr5JTv/01ovHqdBX7PXNay+Hg4j6
+	hwQn/V0PA=; b=KWCCTvpnJ2cuej5+Ww8I2GWBGIfJBSBhAR/Ze4RaMZYZAY1aBW
+	o53+eVWLYsB7nuglyAwUEbtR9QqvkHfOP02qILghocaY++5/ouvabJms2dKDMW1H
+	d5G2u0RX79zaQ1ecX/uyp08yePh4mjN64KE4Rgo+Hj5yV3OmpXKlFF3/8=
 Received: from xuqianhui.ustc.edu.cn (unknown [114.214.177.113])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgCH_THmkOVqQXFtAA--.295S3;
-	Sat, 31 Oct 2026 14:55:34 +0800 (CST)
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCH_THmkOVqQXFtAA--.295S6;
+	Sat, 31 Oct 2026 14:55:37 +0800 (CST)
 From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 To: Mark Brown <broonie@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>
@@ -50,9 +50,9 @@ Cc: Krzysztof Kozlowski <krzk@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v4 1/4] regulator: dt-bindings: willsemi,wl2868c: add the WL2868C camera PMIC
-Date: Sat, 31 Oct 2026 14:55:31 +0800
-Message-ID: <7f2062a377f701fbaa649f31c954edcce15b4d12.1793427040.git.xiaqinghuan@mail.ustc.edu.cn>
+Subject: [PATCH v4 4/4] arm64: dts: qcom: sm8750-lenovo-elden: describe the WL2868C regulators
+Date: Sat, 31 Oct 2026 14:55:34 +0800
+Message-ID: <9ef48d26aa4480b2dc1e20ad7af55f51aa22fec7.1793427041.git.xiaqinghuan@mail.ustc.edu.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1793427040.git.xiaqinghuan@mail.ustc.edu.cn>
 References: <cover.1793427040.git.xiaqinghuan@mail.ustc.edu.cn>
@@ -66,147 +66,247 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgCH_THmkOVqQXFtAA--.295S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxCrW5JF45urykZr17WF4kZwb_yoWrJFW5pa
-	98uFsrKr4FgF1xW3yxKa48uw1agF9Yyr9Yyr1UAry8Ka98Jasaq3sIkwn8Z3W5AFy8JFZF
-	kF9F9r47tF1ru3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUPIb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
+X-CM-TRANSID:3pYKCgCH_THmkOVqQXFtAA--.295S6
+X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1rXr15Xr45Jw18uFW3ZFb_yoW7KF18pa
+	nrZrs5Cryv9F1rKw4Yqa4I93Z5Wws5CaykCryjkFW5CrWFkFyDKFnFyryrJFyrJr4xAw48
+	JFsxZr9FyFnFyw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUPqb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
 	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2xSY4
-	AK67AK6r47MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
-	rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
-	CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr
-	0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x07j3
-	nYrUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREQB2rk8FYCLwA6s4
+	8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
+	jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI
+	8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E
+	87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64
+	kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm
+	72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2
+	xSY4AK67AK6r47MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E
+	5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtV
+	W8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY
+	1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
+	0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
+	07j4GQhUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREQB2rk8FYCLwA9s-
 
-The WL2868C is an I2C-controlled camera power management IC from Will
-Semiconductor. It provides seven programmable LDOs: LDO1 and LDO2 are
-fed from a shared VIN12 input and cover 0.496 V to 1.512 V, LDO3 and
-LDO4 share VIN34, and LDO5 to LDO7 each have their own input, covering
-1.504 V to 3.544 V. All outputs are programmable in 8 mV steps and are
-gated by per-output enable bits with a chip-wide SYS_EN master. The
-chip also exposes an optional active-low RST_N input.
+The Lenovo Legion Tab (TB322FC) is an SM8750 tablet. Its camera
+devices are powered by a WL2868C camera PMIC on i2c10: LDO1 feeds the
+rear sensor DVDD, LDO2 the front sensor DVDD, LDO3 the front sensor
+AVDD, LDO4 the rear sensor AVDD, LDO5 the VCM VDD, LDO7 the DOVDD of
+both sensors and the VCM VDDIO, all at fixed voltages including the
+offsets programmed by the stock firmware. LDO2 and LDO3 are wired to
+the front sensor, whose binding is still pending, so its node follows
+with that series. LDO6 is not wired out on this board.
 
-Its user on the Lenovo Legion Tab (TB322FC, SM8750) is the camera
-subsystem: the rear samsung,s5kjns sensor takes DVDD from LDO1, AVDD
-from LDO4 and DOVDD from LDO7, and the rear giantec,gt9764 voice coil
-motor takes VDD from LDO5 and VDDIO from LDO7. The front sensor is
-powered from LDO2, LDO3 and LDO7, but its binding is still pending, so
-its supply wiring follows with that series. The board DTS patch of this
-series describes the supply wiring that is documented; LDO6 is the only
-output with no user on this board.
+The rear camera hangs off cci0 with the VCM. The front camera hangs
+off cci1 and arrives together with its binding.
+
+i2c10 is a GENI I2C controller inside the qupv3_2 wrapper, so both
+qupv3_2 and its gpi_dma2 parent are enabled alongside, otherwise
+i2c10 never populates and the regulators would never register.
+
+The board clocks (XO, sleep clock and the two divided CXO derivatives)
+that the SM8750 dtsi consumes are described here, as done on the other
+SM8750 boards; the board compatible was registered in the binding
+patch of this series.
 
 Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 ---
- .../devicetree/bindings/arm/qcom.yaml         |  1 +
- .../bindings/regulator/willsemi,wl2868c.yaml  | 79 +++++++++++++++++++
- 2 files changed, 80 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/sm8750-lenovo-elden.dts     | 175 ++++++++++++++++++
+ 2 files changed, 176 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index ff8a35df78..41d5e65c4e 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -1168,6 +1168,7 @@ properties:
- 
-       - items:
-           - enum:
-+              - lenovo,elden
-               - qcom,sm8750-mtp
-               - qcom,sm8750-qrd
-           - const: qcom,sm8750
-diff --git a/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 1c86e7e98f..a18fea7beb 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -406,6 +406,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-hdk-rear-camera-card.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-hdk.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-mtp.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-qrd.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-lenovo-elden.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-mtp.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-qrd.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk.dtb
+diff --git a/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts b/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
 new file mode 100644
-index 0000000000..96541870cd
+index 0000000000..de186b4477
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
-@@ -0,0 +1,79 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/regulator/willsemi,wl2868c.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
++++ b/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
+@@ -0,0 +1,175 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026, Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
++ */
 +
-+title: Will Semiconductor WL2868C camera power management IC
++/dts-v1/;
 +
-+maintainers:
-+  - Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
++#include <dt-bindings/gpio/gpio.h>
++#include "sm8750.dtsi"
 +
-+description:
-+  The WL2868C is a camera power management IC with seven programmable LDOs.
-+  LDO1 and LDO2 share the VIN12 input and cover 0.496 V to 1.512 V; LDO3 and
-+  LDO4 share VIN34, and LDO5 to LDO7 have one input each, covering 1.504 V to
-+  3.544 V. All outputs are programmable in 8 mV steps.
++/ {
++	model = "Lenovo Legion Y700 Gen4";
++	compatible = "lenovo,elden", "qcom,sm8750";
++	chassis-type = "tablet";
 +
-+properties:
-+  compatible:
-+    const: willsemi,wl2868c
++	clocks {
++		xo_board: xo-board {
++			compatible = "fixed-clock";
++			clock-frequency = <76800000>;
++			#clock-cells = <0>;
++		};
 +
-+  reg:
-+    maxItems: 1
++		sleep_clk: sleep-clk {
++			compatible = "fixed-clock";
++			clock-frequency = <32000>;
++			#clock-cells = <0>;
++		};
 +
-+  reset-gpios:
-+    maxItems: 1
-+    description: Active-low RST_N input.
++		bi_tcxo_div2: bi-tcxo-div2-clk {
++			compatible = "fixed-factor-clock";
++			#clock-cells = <0>;
 +
-+  vin12-supply:
-+    description: Input supply for LDO1 and LDO2.
++			clocks = <&rpmhcc RPMH_CXO_CLK>;
++			clock-mult = <1>;
++			clock-div = <2>;
++		};
 +
-+  vin34-supply:
-+    description: Input supply for LDO3 and LDO4.
++		bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
++			compatible = "fixed-factor-clock";
++			#clock-cells = <0>;
 +
-+  vin5-supply:
-+    description: Input supply for LDO5.
++			clocks = <&rpmhcc RPMH_CXO_CLK_A>;
++			clock-mult = <1>;
++			clock-div = <2>;
++		};
++	};
++};
 +
-+  vin6-supply:
-+    description: Input supply for LDO6.
++&cci0 {
++	status = "okay";
++};
 +
-+  vin7-supply:
-+    description: Input supply for LDO7.
++&cci0_i2c0 {
++	clock-frequency = <400000>;
 +
-+  regulators:
-+    type: object
-+    additionalProperties: false
++	rear_lens: lens@c {
++		compatible = "giantec,gt9764";
++		reg = <0x0c>;
++		vddio-supply = <&camera_ldo7>;
++		vdd-supply = <&camera_ldo5>;
++		giantec,aac-mode = <0x40>;
++		giantec,aac-timing = <0x7c>;
++		settling-time-us = <7000>;
++	};
 +
-+    patternProperties:
-+      "^ldo[1-7]$":
-+        type: object
-+        $ref: regulator.yaml#
-+        unevaluatedProperties: false
++	rear_camera: camera@56 {
++		compatible = "samsung,s5kjns";
++		reg = <0x56>;
++		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
++		assigned-clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
++		assigned-clock-rates = <19200000>;
++		reset-gpios = <&tlmm 11 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&rear_camera_default>;
++		dovdd-supply = <&camera_ldo7>;
++		dvdd-supply = <&camera_ldo1>;
++		avdd-supply = <&camera_ldo4>;
++		lens-focus = <&rear_lens>;
++		orientation = <1>;
++		rotation = <90>;
 +
-+required:
-+  - compatible
-+  - reg
-+  - regulators
++		port {
++			rear_camera_ep: endpoint {
++				data-lanes = <1 2 3 4>;
++				link-frequencies = /bits/ 64 <672000000>;
++			};
++		};
++	};
++};
 +
-+additionalProperties: false
++&gpi_dma2 {
++	status = "okay";
++};
 +
-+examples:
-+  - |
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
++&qupv3_2 {
++	status = "okay";
++};
 +
-+        pmic@2f {
-+            compatible = "willsemi,wl2868c";
-+            reg = <0x2f>;
++&i2c10 {
++	status = "okay";
 +
-+            regulators {
-+                ldo1 {
-+                    regulator-max-microvolt = <1128000>;
-+                    regulator-min-microvolt = <1128000>;
-+                };
-+            };
-+        };
-+    };
-+...
++	pmic@2f {
++		compatible = "willsemi,wl2868c";
++		reg = <0x2f>;
++		reset-gpios = <&tlmm 126 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&camera_pmic_default>;
++
++		regulators {
++			/* Voltages include the offsets programmed by stock firmware. */
++			camera_ldo1: ldo1 {
++				regulator-name = "camera_ldo1";
++				regulator-min-microvolt = <1128000>;
++				regulator-max-microvolt = <1128000>;
++			};
++
++			camera_ldo2: ldo2 {
++				regulator-name = "camera_ldo2";
++				regulator-min-microvolt = <1288000>;
++				regulator-max-microvolt = <1288000>;
++			};
++
++			camera_ldo3: ldo3 {
++				regulator-name = "camera_ldo3";
++				regulator-min-microvolt = <2816000>;
++				regulator-max-microvolt = <2816000>;
++			};
++
++			camera_ldo4: ldo4 {
++				regulator-name = "camera_ldo4";
++				regulator-min-microvolt = <2824000>;
++				regulator-max-microvolt = <2824000>;
++			};
++
++			camera_ldo5: ldo5 {
++				regulator-name = "camera_ldo5";
++				regulator-min-microvolt = <2808000>;
++				regulator-max-microvolt = <2808000>;
++			};
++
++			/* LDO6 is not wired out on this board. */
++			camera_ldo7: ldo7 {
++				regulator-name = "camera_ldo7";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++			};
++		};
++	};
++};
++
++&tlmm {
++	gpio-reserved-ranges = <39 1>, <74 1>;
++
++	camera_pmic_default: camera-pmic-default-state {
++		pins = "gpio126";
++		function = "gpio";
++		bias-disable;
++	};
++
++	rear_camera_default: rear-camera-default-state {
++		mclk-pins {
++			pins = "gpio92";
++			function = "cam_mclk";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		reset-pins {
++			pins = "gpio11";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++	};
++};
 -- 
 2.53.0
 
