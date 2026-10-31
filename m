@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793459124;
-	b=DtBkb2Qy5XcNdA52BST3Ui6GAGnbktbmh+ZvXp3ypk9XVMOuzKv8T5MGH4gjrj49kxlK
-	 bRfWBQLhc4o0OE9qiwEx3EtsKfMoL9QofY48DARST5yWlgYrpwEf/WWBF7SPcIdvYD/U2
-	 XH5nSLPmp2MdsyrzKFrHlaV4dWqAX1CJtzyU0ZGArAjG3z1+9BmCIvn9c4QLuuWof1vN+
-	 fyU3lqJts9AjeBYcN+nhPfWONWAyJMLRaTBmB1dtOeya8SsHVLghb4SN3nBXVnvoKKw7q
-	 V7c/xJlqXvK3hoNG0Akvl+GEpKQqO5LLieOSctBRYp4sawapi7ngu40tLrZXmSbqANg==
+	t=1793459125;
+	b=PrJ7yn7uaSVzexvMS7psYLXYfjRhPU1RqzCLc/k6p8sqrwJKLcfWvAnO7JmXyk5LdgNL
+	 hBhm20ACHUeOz9O7lmVgXi0Dgc4lxoTue6RGnVf1+HJZHfTwJAgrqYIqf2zdpBrV+9k2P
+	 7BIj3TWf22O02Jqi0WRZwbO1jxaD/XNWTX3h70q1X3h/1H0NDdyelWMk0lwD8ecZBvGiU
+	 goDICXYzB4dEnJcfrKvI8CVSYe9FavH57e/YKu8/Nzg+fTTPHi7S/+L++pje3zt1yR92J
+	 SfrpONly3wB/bkj+iZmJUi5TvitDhdEOEeMqFlxCgPNDjlIDOG2dRBn/mP6pME359ww==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793459124;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793459125;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=OQ7srUuIftjup119qlM7sUBQxwd3uqhTJy8umEpMnLI=;
-	b=o7/IqsPgNekjZlLIzafvs7jOjbFbc+hE+KJMtuaKzpIeJSrql8NbCEOVisiZXAjiXswj
-	 K0LUddubbcd4gjVIhoT+oHNhWRPeSY1Ef/OIFtzYjoprPtYBFH5PkUrQ4D1GofydCC/aK
-	 0Deuq2LO7mJ4ZvVWa91A/0tMsctT1MRXySJE3mCYu3PYQD2xWOAhZ3Xc5s/rhiPQDBhHk
-	 DEdtTJWFEBqaJsfJltiMWGf5p8GwKXynbkj6rBCMIxxzF0znoktSBLEWKzfNQMeOnI9dr
-	 VDCiIBR9P7pf2pVer+M1JPywDGIPMZwJnuJGSYGKVXl4VOpxgORP0/VAlARhkvB6vTw==
+	bh=GOtB/aqTsvf6bQGU9dL2JqihPsMclbo/24c9lDiPZws=;
+	b=wqc6sN5zJOuhB5TyVXaZpc8ERpv184E+DwHHNwHnkxM9YG4jnbhStpeuohxHxQm7lZfB
+	 ZZ/huPKiVlhgGWalAD/NR2LRxriY/gnZuYknyl4D10l1+YYrAVIadFXShPgiRMh3KSmim
+	 GIHjFKO8wJewzjQrN1F3F2DYXCblOtxY4APyBU/xAw+h0PXe2n8IMCJQbKQ1QOdnPpkBX
+	 H9kAb/Ut3C/TYHIzQKUz+YBByYZ2ku3hqxtOHibvDaisRBUNX1d+B0UxdJqUIhizpHPw7
+	 DMBez9i6kMPiD4+P12y4hPrHQi5r8KIMCgRMl7qnhytqldLVsX9wWWO3aVIibNaBYNA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZbX+lbev;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="PuF/mwd0";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E853606A323;
-	Sat, 31 Oct 2026 15:05:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04FC360A2609;
+	Sat, 31 Oct 2026 15:05:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZbX+lbev
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PuF/mwd0
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793459123;
-	b=fFdDvcO+T7VuWNJkWuEPhg8q+8O7DWh9YXEdIwVVgmn3hCz398nfPgI0/sNy3SUJCGxB
-	 dITm98C2sYHEHD0642ZoaJByuy5SL8zoMx8zH+hRJU/fmcALAC8gN1TIPFlpZokNvaaJ5
-	 pwgxqOSvhkCL41nMbpQNioT+bWunKLjEA83CUeN37ew5GJ5pvMrqWWXH/oM5hBUCDXarz
-	 gm8Oq6QzOGH8RJrLpgBWlbm5zQzEyrz8qU8ygCugMF7QIMZKyzJjXV9RR1QA+mzEQbNRF
-	 1wc/OHAn7KMiHY30GGhlAMa34fRvOWV9Cnb6efiP6j5iQc03kDs//x80ePQCnyJtBoQ==
+	t=1793459124;
+	b=biXMQJNcEhWkdYXXx+RXrE+9i40STobhPcui6xIzUAz5A75Rs6EmR9PfKXwZclkh9VD3
+	 a+REpb3SqUPFAKWS1wqOHUNMfgFrj8OCgBmRLC8koTrCxcGN0AkdmsiKSFl1H/X29MXl+
+	 D8DUCk8Vz0GtU0r6wLnAjzUo+sxvDvSCkVzD4dSowXd79hWcau+Krf3mwgkAaUb7aQLK6
+	 m9sy/i3jgcpexajX2lEm78U11u8vkiLZ86h/98ADzmE0LdINyQI+8E4OP1bzQYjy/+Kyh
+	 9xfRLZdLvqccxb7U5/S6mDeSBt5M8RV/HtehpwAwWasULdU8RIz5XKyebsJK3zHYnWg==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793459123;
+	c=relaxed/relaxed; t=1793459124;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=OQ7srUuIftjup119qlM7sUBQxwd3uqhTJy8umEpMnLI=;
-	b=1kemFHTxwoW5JSt9XTreuqckVaGv15jNcf3Ny8AKNTZ+6zWxGQ1UNlYhYdUeKBSHeN0l
-	 VdUj+oAqyoZDEWqQdpNbLQgzCpqIgTl9J9t4wS3n/d/f9ruyPlDH+lwDNnlJiGz0KGoRM
-	 1sPDfkm8eqeVYDTlg63dRL4LngkMUM9apRYUwLXoGP2DRhEwiLqNK8glqNSe3uekDELoG
-	 Czkw/wfcY7OYTUF6nDrRHG9cZxM1cJCZPr6P2YE+rb6K4Y+JSr7icAgXlED/lyoQEMYko
-	 iqisaA4t9FTdwOZj5w+b+o71BrWaJffpkPRnkJ+/M78N/CMTcMZfjt0lYuwKPPDehQQ==
+	bh=GOtB/aqTsvf6bQGU9dL2JqihPsMclbo/24c9lDiPZws=;
+	b=eW2EiaeIC+jTJ+0dmowRPSV+JxDKnWfmwov5bEyd2K1H3jdRVa7Dvv/lsesLlL6+pK7k
+	 f8mYZHMrZ/o/dn630TIZGZigiuwfckLt/9x+0FiqcoUiVoLNt778ERp/3w49D36rEIMKj
+	 ux8BpBVr1u+QoGZsvteIkeTxCNKwUhElB2MXjl5wze73P/6wZXSfTlve6vh8LawzNSZdF
+	 mM/OmlEMTGZ3zx3XPZaP9G8LPnPRftwJ0oeioYQN3fHC4eZQiEM1lNtbZxT4PCAWjLhhZ
+	 JMxpdOEFKYyAJ8FasmX4zf/leyWbaTm896IznwtMIotq1Y0lhwZxsU7YxhpV0xU0lWg==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id E91591F00A02;
-	Sat, 31 Oct 2026 15:05:21 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id C07D11F00A1C;
+	Sat, 31 Oct 2026 15:05:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793459123;
-	bh=OQ7srUuIftjup119qlM7sUBQxwd3uqhTJy8umEpMnLI=;
+	s=k20260515; t=1793459124;
+	bh=GOtB/aqTsvf6bQGU9dL2JqihPsMclbo/24c9lDiPZws=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=ZbX+lbevs4FPee9i/WqorCeWn9X0eP7+Y89Cyegr6d5tUlWBj9WrH37doAqvTRt3R
-	 P6qz+XbHHB17l4etW/3/SrO+hV6bxQZH/DqlZqKDkTLfG+vTg8iubHDlWLucWUoyCv
-	 Fl6PLT4aFX6AidK8ggT+mfwbRXyS3MpHvSSiADgqAW1ONILofiYNVAYcUNr10lg+L1
-	 gCkhBc85wO45yUtantp1FlmJWe3GEnkMkCjWmEOd+YJ0fDkXgtKBTXiIU05GdiZSPs
-	 F460njqZMbK9AJAB6FWlOSbAHRAP5KiTkEymcm7+5UiO9jXx/IK0YyEBOKGubgZUtE
-	 8j2nzoN7iWEbw==
+	b=PuF/mwd0m6dyAWE2TF2top72KrLwayM7agGbm9d/YLovOcMsxDaw4riGlMoHB9Zzq
+	 9CRlTrUjgPrb1ZE33TGdinukWXaGw3x/s8S2d1xRh224KQrSjOJugGyVgLz3/BVKf7
+	 DAi62+XHibwe/fnsHOofV15VFQY9YBizbdCD5LdC9eskfJVL0RtafNG8mkIi6s+Icr
+	 +lvtmO8S/hvDqaIOP1SD6DgMlQpKbuXuqqxvq4x1R7f9mru5EFLAh0CcgCY5BkIy/b
+	 eITbyxdA7m1mfd28r05B57BmrePQ2X56mVlZotuGfZmEUe4x+n1zaujzW26nNdnbS+
+	 Iw4Esh0alw7WQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 5FD8D45F07;
+	by lkml.kernel.org (Postfix) with ESMTP id 9E9A345F1B;
 	Sat, 31 Oct 2026 15:05:21 +0000 (UTC)
 From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sat, 31 Oct 2026 16:04:59 +0100
-Subject: [PATCH 02/11] power: supply: qcom_smbx: Do not interfere with vbus
- driver
+Date: Sat, 31 Oct 2026 16:05:04 +0100
+Subject: [PATCH 07/11] arm64: dts: qcom: sdm845-oneplus: Enable vbus
+ support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261031-pmi8998-vbus-v1-2-4d805e5a0f27@ixit.cz>
+Message-Id: <20261031-pmi8998-vbus-v1-7-4d805e5a0f27@ixit.cz>
 References: <20261031-pmi8998-vbus-v1-0-4d805e5a0f27@ixit.cz>
 In-Reply-To: <20261031-pmi8998-vbus-v1-0-4d805e5a0f27@ixit.cz>
 To: Alexey Minnekhanov <alexeymin@minlexx.ru>, 
@@ -102,21 +102,21 @@ Cc: Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org,
  linux-pm@vger.kernel.org, phone-devel@vger.kernel.org, 
  David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2282; i=david@ixit.cz;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1021; i=david@ixit.cz;
  h=from:subject:message-id;
- bh=dUkU3R9RyGH/loLEEUiFubUZ7mMUCTgOR92p1j1B+OM=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq5gOvGdpqmOloYmuL0212waKARR5qo3EmQUcJt
- en3iUVZ5OCJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCauYDrwAKCRBgAj/E00kg
- cjIlD/9rofNJQD8SD3e06jMVuKiEh7lpCYsDtNsDrDQne7M8fm6dHd7DSytF4OeDVKuHy7TojMJ
- 4pvvBpNY+18QbCYhbGKmMWyBSjjvjxmZyHkYn0p1JGKmEJIlCGx3PPzQRwds2HU3RrrYBP3epBF
- x/5SYUuqAx/iOmPGVDoRBvFbJc8oTGY9JU+/kFJQEznKcvc13VQBbdopus3Vo0HatZk6lTbj4UU
- LzFQC7luRdogqVEjoAYAaQNibwZEnNR1pULpskULFNTdckGpIJzLajuiyfNvO02pquYoMr7oElT
- k4w2meJulMk2nQNNhtp1KFTgt5CtwvsV1woQZPpHsMjc92bekgAeVJgSg3Fil4MvEyT2fk3jpBk
- XYt1onoxCebfNj1V/2+kXUv0RVx9rEm/hbbAH7IxQMRGZbCdpwbh163YVSssaUY0fP9um2hAup+
- ovO3xAKnJpr4QCDEXHKau6u6XWToyM8Zajvo3YyFQOm7vtTd1dx+/Z87t7pjNbMRJRcpw5+bRYm
- ZT7qtx/zIN9F1M25UBuGbnfZ939o32R+D5DP/I1HFjJAb1+vAboGzHZ+CfpWywQq0KZLRzWvJOj
- KOomUtHQAJ2ue0EX1f6YxHBkNhMGuymNxZcdR/ZDVvJjYSiSs7z2vkYkfJ8oL0CF7owMgfxCsbR
- 9Slqu/WinEHwKTw==
+ bh=qtK8U0DG1cRkdsACHAr+c1jMalJb+5fDCyLN85kWDvA=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq5gOvumnNkjX9xEkWmSZ03N2FQLW1h7MKYlPAb
+ XF0klZkU26JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCauYDrwAKCRBgAj/E00kg
+ crq+EACg6Q0/DvGX7+HThl0wRuAbMDl1EQfhjxmcDDlxUq/vORmUwxVfpyUFldpcSFZlBTYlzzW
+ GM8+XbKePDKCY5XXcUZ0JEmUB9b0o6UnnAkvlEzXveYSwwWo2y8FWRDC+GJXBVOVgKTfDNFD4Q1
+ T6ovUgq9h97lesdOLVaQYjHVawqI17yPArry2BNA/nvrlwzTgD+YjnMwFnNQ5draqjOMvwRDvpm
+ jwgD1vFDYv+yvn+4jcQVDR1XdBsNjfvDv5vfyaE55nuXbLiHJZLKNIThMg77B0+WANso1U12UEV
+ 54nTjMg2+m54LvdkDPQ5rWrZ5GG2qo/3K/B+hfGzTza5gL15kDBG3bzm6CJgsdCVcnjA2+clIZf
+ 9XC0mFbJgcUsEFCrWmZyVsqq6NmfB8d+gs7VNY20UmPbg33M0QiVre86+6deTp2K9UjjXFHXNr9
+ e7FzDtNolJ9mhRnrEpJsHb7LYjXKkH6OUKdhguH8FyFaSJNnNx7FJtjFc1p2Lguh38mKpy69U6R
+ mzLn7z0VcR0znXZF+fvx5Yxt7Lt1zGTOOvBNYukCPZKpJ2YLgQzZO43cxadT1NMBHNarRtKxS81
+ DdTWKqYTmB7/MQ1j9E1MnDZm2Qj0Brl5Em0pHY04D8vKyUcWOmklsyVgoerkPntQ+iVdIcnJh3j
+ Vo0GQGrfLh3Kjxw==
 X-Developer-Key: i=david@ixit.cz; a=openpgp;
  fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
 X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
@@ -126,66 +126,42 @@ Content-Transfer-Encoding: 7bit
 
 From: David Heidelberg <david@ixit.cz>
 
-Charger should not touch bits handled by OTG block handled by the vbus
-driver.
+On this device, vbus was setup and switched off by the charger driver.
+Enable proper driver.
 
 Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- drivers/power/supply/qcom_smbx.c | 14 --------------
- 1 file changed, 14 deletions(-)
+ arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom_smbx.c
-index 52bb5a6eb145d..9c071a79a16c2 100644
---- a/drivers/power/supply/qcom_smbx.c
-+++ b/drivers/power/supply/qcom_smbx.c
-@@ -96,28 +96,16 @@
- #define USBIN_ICL_CHANGE_RT_STS_BIT			BIT(6)
- #define USBIN_SOURCE_CHANGE_RT_STS_BIT			BIT(5)
- #define USBIN_PLUGIN_RT_STS_BIT				BIT(4)
- #define USBIN_OV_RT_STS_BIT				BIT(3)
- #define USBIN_UV_RT_STS_BIT				BIT(2)
- #define USBIN_LT_3P6V_RT_STS_BIT			BIT(1)
- #define USBIN_COLLAPSE_RT_STS_BIT			BIT(0)
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
+index 1df09da3c4d71..4996ce24fee36 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
+@@ -660,16 +660,23 @@ led-1 {
+ 		color = <LED_COLOR_ID_YELLOW>;
+ 		led-sources = <2>;
+ 		led-max-microamp = <500000>;
+ 		flash-max-microamp = <1500000>;
+ 		flash-max-timeout-us = <1280000>;
+ 	};
+ };
  
--#define OTG_CFG						0x153
--#define OTG_RESERVED_MASK				GENMASK(7, 6)
--#define DIS_OTG_ON_TLIM_BIT				BIT(5)
--#define QUICKSTART_OTG_FASTROLESWAP_BIT			BIT(4)
--#define INCREASE_DFP_TIME_BIT				BIT(3)
--#define ENABLE_OTG_IN_DEBUG_MODE_BIT			BIT(2)
--#define OTG_EN_SRC_CFG_BIT				BIT(1)
--#define CONCURRENT_MODE_CFG_BIT				BIT(0)
--
--#define OTG_ENG_OTG_CFG					0x1C0
--#define ENG_BUCKBOOST_HALT1_8_MODE_BIT			BIT(0)
--
- #define APSD_STATUS					0x307
- #define APSD_STATUS_7_BIT				BIT(7)
- #define HVDCP_CHECK_TIMEOUT_BIT				BIT(6)
- #define SLOW_PLUGIN_TIMEOUT_BIT				BIT(5)
- #define ENUMERATION_DONE_BIT				BIT(4)
- #define VADP_CHANGE_DONE_AFTER_AUTH_BIT			BIT(3)
- #define QC_AUTH_DONE_STATUS_BIT				BIT(2)
- #define QC_CHARGER_BIT					BIT(1)
-@@ -804,18 +792,16 @@ static const struct smb_init_register smb_init_seq[] = {
- 	  .val = VCONN_EN_SRC_BIT },
- 	/*
- 	 * Disable Type-C factory mode and stay in Attached.SRC state when VCONN
- 	 * over-current happens
- 	 */
- 	{ .addr = TYPE_C_CFG,
- 	  .mask = FACTORY_MODE_DETECTION_EN_BIT | VCONN_OC_CFG_BIT,
- 	  .val = 0 },
--	/* Configure VBUS for software control */
--	{ .addr = OTG_CFG, .mask = OTG_EN_SRC_CFG_BIT, .val = 0 },
- 	/*
- 	 * Use VBAT to determine the recharge threshold when battery is full
- 	 * rather than the state of charge.
- 	 */
- 	{ .addr = FG_UPDATE_CFG_2_SEL,
- 	  .mask = SOC_LT_CHG_RECHARGE_THRESH_SEL_BIT |
- 		  VBT_LT_CHG_RECHARGE_THRESH_SEL_BIT,
- 	  .val = VBT_LT_CHG_RECHARGE_THRESH_SEL_BIT },
++&pmi8998_vbus {
++	regulator-min-microamp = <500000>;
++	regulator-max-microamp = <1500000>;
++
++	status = "okay";
++};
++
+ &q6afedai {
+ 	dai@22 {
+ 		reg = <QUATERNARY_MI2S_RX>;
+ 		qcom,sd-lines = <1>;
+ 	};
+ 
+ 	dai@23 {
+ 		reg = <QUATERNARY_MI2S_TX>;
 
 -- 
 2.55.0
