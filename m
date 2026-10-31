@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793450360;
-	b=Q9vXHJ8gidAbqAyP5QtGDI9RuWWTyxd1GmDrO5KmogNj12zFNIRFu8w/rS3park2ALMi
-	 zMh51vFKtqM0bL5ESg3iRD86HfMIyuG2DeT4Nf5Z30HoLsVCdkCvBJCmnn529Edl08ccK
-	 VOIb8OT8ipTSpS9IfROsUMIjpdw27ylap8KYB/bNDj/hvE4UTlPFjX8o75khTdDDJwpUR
-	 DKU3RFiJyKbT3rSrnKypEC4MPEpc1QF3qfBXqYtpEQFHOzkvx1i9CHlQl/zGxZIfG9RoV
-	 p3aNUaZyP5FrBQ+8hOF60OatrS3v/yOpJUjXsbMopCzMPMBuNc1eo4jnA39bKMt4oEQ==
+	t=1793450367;
+	b=Z0yDif57ZbSuH439Fj/hEmy+sKoXB0c2VZeRLAHr8rE/Ik4GSXs1eLWdJ0bYACMYHvm/
+	 wz8JQ9e1OSa0UuBo/YaagJXAzwWTZawu/4CQXfkQSbcKWwgxugRnfqEEgZo/tLqycMO40
+	 HHd7dSxqSVCOD+MqvqGWUNldEwVOZTmuMS9X+kSTKjx/gdKa6gFL0GKyoS+234/+o3UXA
+	 xymy5S5FpGWZbPJ2g1svcnoj0XvjdhvuPFSQg9d/qq4/e/qhvwTpAaOTDtAlzTnkB2mPj
+	 kOA9ixTlL23XlkQMbJiPh+t4GC2lI8xR2XvygbaTQYtE7CJE9Y1ZAU10qhwOpWulmJA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793450360;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793450367;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=p+SP5aC6kFf2m6+Y0UAcy1XbuoZimqxQ+Qboov/RQdw=;
-	b=2IPUwK9FlbQNK+kdejXXeWMMkR7oKNiK9sQ+jBbihuNYwvIEG4cNRD7egc5h2zV5LnNz
-	 +7eakIzqL/VcqUrG457Dwx9Ktm6Dblyh4K5ltGWqVVzpeBVwzHiAlkCSUfUjRBxAGqVLD
-	 ozOHgTWLmfbcr3Aoo1W3lLDEHohZYKzH/gXw0jxFARtnuwNNqOEfft+sjsOyzSa1W3edP
-	 1uOHO4koAGCXBNHhecTgh1sh6flUO+OnOKXIhf+A6mX1aDygWAjIo+HTWufU3LCDVcA8i
-	 C8DwTIqCpHSoHKTFMA59jBGB+hnHfYhS+W0eSAy57ytaeTKhT98OGsQzNyaTEHoT+Ow==
+	bh=uvdMMWuBJgZn2yb+YVIOL/4xZHnwlAFydQfLAoaMsLI=;
+	b=Os14sY97+0KeK6bTry5R6eXzs8Bl0+iwR0yhN21hUgP6ld6RBUwToof+dEgyfVtjWa/C
+	 vaC0Tafc+zhrhm9xRQEqBIeElj5YkVdRsvRBvChpMHipvvEmzbtziA655SgZp0cnvzWys
+	 H7En2jh3LhMh4DbemB+gDihc7wCT56q6AkYDP0PA1E8xkJQAnd1PQ6gTBbCkpuD+vfHSP
+	 rG1NW5OS9QRAWEC2Z56AL3hf86FjCmslUxCcm0rKFvG1Mq4prTDBhNFQrPCR810TYEtf2
+	 6zFgsBkb1trKDArV/CoPrbtvT1UXFtQOVLmWT7poCl/YpZrlnzJgPxET4Ly7UM5vP1g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xKL4FZYZ;
-	arc=none smtp.remote-ip=74.125.82.52
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="i8vqxDj/";
+	arc=none smtp.remote-ip=74.125.82.182
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69855606A323
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 12:39:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69855606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6832606A31A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 12:39:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C6832606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xKL4FZYZ
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-1aefd1bf74aso374055c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 05:39:20 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=i8vqxDj/
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-36a0f27c9f4so2764031eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 05:39:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793450359; x=1794055159; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793450366; x=1794055166; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=p+SP5aC6kFf2m6+Y0UAcy1XbuoZimqxQ+Qboov/RQdw=;
-        b=xKL4FZYZxZ2DMFO63mud1fJJvL8ljHKd1cSzKueTBjZ5KWdT9ssOnP0v+oXC+Q0hZo
-         Qs+PHJ9Klrp7eA+ZXpy9jf3Dvec5+bt97LOlRXjZ2Q/ZQk3duWOE8JWGvfSgl57vgWch
-         JCwhFXX9MgJGW590FuwNWfZumZRtLkpFT5T7+6Bz4lAo+aIOdOUI37/Kc3CAmRyY4HcK
-         W41yN4QDz1O5X8AHfcEF+5+xoVAARl8Hp+FsH+KuRBB/WuH0FK/KGowokkDV3UY6/ekT
-         v7y6LWO5F42Vjer5ob4L76hFwBAGTlmtyimH5jt8uYFW8EL+iFHLnr9Tu8b/QEml5OWf
-         mHPQ==
+        bh=uvdMMWuBJgZn2yb+YVIOL/4xZHnwlAFydQfLAoaMsLI=;
+        b=i8vqxDj/OUDJ1iQa7GwdkezQ2bdVTg2TW5UH+uRGHmgDt64Tf6eQQH+vruS93m5WCW
+         qW+JBf2KzhXySFZYomRP0Ax7toZf1WMPxxt9QHqp2bkyfYjwWoTnLxn+/qA+FYbnWdOy
+         Wl4Mfpu/HXfjiROPPAOVIseUjKHClJwZcEiN87ym1oRxh0isvc+cawWTxzdU8ZWGIZzO
+         ngKVY7BHtTJccDsQHVgv1EHBw/jPrfFsZx1gCeD1q6c9TQTgUxKxBUxMYhARjHh2o1s7
+         rUOxjeGB8BhyVzXA5SMe1mlF8LTo9V7aOm5KyfAetaE/B8YGInq6fMaj8f/d8d+RlMNa
+         Wtrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793450359; x=1794055159;
+        d=1e100.net; s=20260707; t=1793450366; x=1794055166;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p+SP5aC6kFf2m6+Y0UAcy1XbuoZimqxQ+Qboov/RQdw=;
-        b=X4xJoF/OnWiPHfwZchKPVUc4FAuN80Qmaopu4Ptqhx3aSe7vEdIRZ1GGXSr9RZCk0C
-         PXmKuruNMrJb+BITameU8Mqcyo5a7jjkmrr6Ztcsghq3VbVLP0GrpXlYmReOxeiOO2Eu
-         4tDdnqICeLtpO9JH4K9YX9lo93z/ZlHyw8mRCc0DGfNEfWtKowYRxq8bCCzzoALgQVPY
-         yiuMlOv5lKiSAHM04pHAnABwU0ed7PSeO3i4+xMDc5Xd5C4Pq1JTt/Y60dWIeT7s5mSe
-         J1ylxPs2ck5yKncR4GVkd9tUa/cM60t+C40wnOvdfj7YclFRNiLAW+7qzThMNDsmWNDj
-         CQVQ==
-X-Forwarded-Encrypted: i=1; AKwUvByU6X4ef/r7EGF8aBi326AGuolmR1PCYlfqUYNpqhHHllS/69CHKUCCD6iZrovH6EaN2VqSU+Ru0OvW1gaf@vger.kernel.org
-X-Gm-Message-State: AFq9FYJakw9o/fgtrdtHcGk4LRQPvxrv1zUlQY5f3NQ1M471KMJyyO/D
-	LA6dcyc71tQE5Zp4Ebw9zZRU20y7gniysezV9pok2HpbYBEjss0rX/hQ
-X-Gm-Gg: AYBFou0TDTRW9jgzrVrl/wlg6lyohHaEe/v3vORHxwoTPA8fkjGK1MBAaRb/z8PgXj5
-	pQhbGBb4YqiXLsOLLYyRmnfT4Zx/qbh9755wNtb0eAmCcne2jWn9UsPEWtSjff1YBCd73A2Ukzo
-	oIxxPmVlgMo13bA+uLUZq6KOWq3Mfs8Kclqdi4CLlW7jaOmeUNWamT8FEofwUlxAdb6eFmrgR3j
-	tuVrwsmkE2rQRb6Y8dQF1C8rM9c5L/zV4+KAfJXpL4Rojdy8ep0O7qJEZWS9GNOXMJ0ziO+65nI
-	SLx5LG9QXrhE4uxgK1t7mxWzroLRrnSP+/UU7niLG2cv4kwJqP5hprDFCNZzDvmj6xXyt5w93vp
-	S3l3Lq6u9uKkLT3rQdGJ3G9Q4ilA+EulQJaHBhB2ZpiPsKfhBLNp6zsR6dtvRan/gTTgt8p+MYu
-	ENJ68/xRkmdO/HtIIsRIP2TAfWz8Ph4CA5pdij9x2pKm2szxNDGbdaz5esZeHudNz6Yw7Nvvxkr
-	Oi/fPyWB/3NqOi08iyZXxmdcY6S1RbYZwfi1ckiDFAOVky+f18u3aibU9tJ39MA/EQCFtldNB8t
-	F2iMZ/+h9HDmfESCS5tzormjVf2r63qdqaNQG3kGzhPzICssxlQTKWcNZqdkx+F+WPSWh2DWs1e
-	5aQXQvSHcbFV20wmwIAX2W8I+60HApWpCei1GXUlO8WV5fO9Ow9PJsdQhNzWpNpujbZMikQNJod
-	VLO3JlA13fk9rY3Q==
-X-Received: by 2002:a05:7022:f507:b0:1ab:90a8:87a2 with SMTP id a92af1059eb24-1ad1077e9a6mr5123543c88.11.1793450359362;
-        Sat, 31 Oct 2026 05:39:19 -0700 (PDT)
+        bh=uvdMMWuBJgZn2yb+YVIOL/4xZHnwlAFydQfLAoaMsLI=;
+        b=mXvysqPULixCZ0dvhEpPZ25s7w5bYDbvTa56U6JRIr0gWIjb/wLbTWzE8ZcDOaLFGk
+         jLpvGGzv0sYqoviDc34YZVu5djPEddD66hIFPWpNnhgyAVW2HrnDBYtuiUA3lW0TYKJf
+         qzfGSZ8U0e0mlS2B00QiAkZrIk+skLFke4M6KthFIsezWGllprLZIne7dVI3//N6U42u
+         7I7gU4Ko6vt2gUykH1o/CQzWs8t3BxiIoIlJx697BYYRHo4wcnKExlp/RcwbTq43yU3S
+         cTF2tzQdC3gcWnLa52vk0QWc9LGp+WhLMPtM23UGaX9Gh96P7yXqy1yEbICm0WrKALYl
+         B1AQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw1XgEQuVkrBbMlljZnJezBC4oifTw401nDY5XEHzX2W0lTGy2vepzIMnphbe5U5swZD5hbwaJ6OcEMi9tf@vger.kernel.org
+X-Gm-Message-State: AFq9FYKtox1JCrTFilvr5dOJ4bKMAcdVpG0TvQ23rsa4kDzzutyR0rp9
+	tdJBsupehAa8zj88iecxzKYLElK8WsvygF3BQyEPVKyPN0H2IVmvplk8
+X-Gm-Gg: AYBFou3VrZViXZgX8LUdgZLuImLtdxVHcN98XGNGp5JSb+3Ks61q7fgjJDosknFwr/a
+	xAOnGLj3OjNUJu4kgRhOcKPPmbM6xmMY9LZxNYMjGwHAKL5XqWmQDxjbhIzhRTJ7/L12CBQJDNy
+	uJr1VzInx4dsnhZ5ebUXxxNEFFJd7ekWWNJ4lGPSmaPzVANfsZBuKlHL580c13t5SxNfhLbCQss
+	FDWnaJy6OcnoLImoAx1iZGpgKpDo60G2C6VtpqdzaYx38nVI/LNdxPZ41NUNcXJDIjhjgvZafa7
+	tZD2iQr8+Nlwfap1H/WJf8d0hPxCt2gmRWDwJv4UVx6KGzmjNlSH3Rgln2YHijjBMVc0Qqj5nIv
+	Rakmu8nlp+RFIZ332r8Tqu5wMzHcP+TRlW6HbpHZAhgxV5a/xk4IUBI2YJrSCA8Pk1/zCJWfo9i
+	y4kU/7SYibpK24rAGoAusJ1/uv/+0w++BRrxFKFpie68lVNWWqjctrxC9DxlYFlpcyZxQSkudeG
+	N5SeF++lH92tnLIHTCeLOR3hhZ6mPtNeDKjSvOujcp28vrC8BvCRhpSjazDLz0xcLgheLoD8HL0
+	Gm2Q9kD1BzC/98b+0Dx7ZqktW7wXJM4ltWMv24De2ETXdYQlAGMLDl0/nG2LdWGilp0RsVjga/I
+	sLWJG2Nyuoe9+uTGu7TVu8C8Yss7c22qkPjWidOWOKV3QOcAyn/lULUA9nC5tVrudj0B6eSc00Z
+	w9UxW9ekstG84xkQ==
+X-Received: by 2002:a05:7022:b053:10b0:190:da74:2c89 with SMTP id a92af1059eb24-1ac5bda4447mr7716798c88.21.1793450365870;
+        Sat, 31 Oct 2026 05:39:25 -0700 (PDT)
 Received: from brev-9gdpyq8lp.ap-south-1.compute.internal (ec2-3-110-210-194.ap-south-1.compute.amazonaws.com. [3.110.210.194])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854da78sm21566039c88.6.2026.10.31.05.39.13
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854da78sm21566039c88.6.2026.10.31.05.39.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 05:39:18 -0700 (PDT)
+        Sat, 31 Oct 2026 05:39:25 -0700 (PDT)
 From: Samarth Narang <samarth.colleges@gmail.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jiri Slaby <jirislaby@kernel.org>
@@ -100,12 +100,13 @@ Cc: Samarth Narang <samarth.colleges@gmail.com>,
 	linux-tegra@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 0/5] serial: fix TX kfifo underflow on flush in five drivers
-Date: Sat, 31 Oct 2026 12:39:06 +0000
-Message-Id: <20261031123911.3784690-1-samarth.colleges@gmail.com>
+Subject: [PATCH 1/5] tty: serial: samsung: fix TX kfifo underflow on flush
+Date: Sat, 31 Oct 2026 12:39:07 +0000
+Message-Id: <20261031123911.3784690-2-samarth.colleges@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261031004733.3345841-1-samarth.colleges@gmail.com>
+In-Reply-To: <20261031123911.3784690-1-samarth.colleges@gmail.com>
 References: <20261031004733.3345841-1-samarth.colleges@gmail.com>
+ <20261031123911.3784690-1-samarth.colleges@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,55 +118,87 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series addresses the TX kfifo underflow reported in the parent
-thread, where uart_flush_buffer() resets the transmit kfifo but a
-completion callback from an earlier DMA transfer may still call
-uart_xmit_advance() using the byte count from before the flush.
+uart_flush_buffer() resets the transmit kfifo under the port lock before
+calling the driver's flush_buffer() hook. Since samsung_tty does not
+implement this hook, an outstanding TX DMA transfer may complete after
+the flush and call uart_xmit_advance() using the old transfer's byte
+count. This can advance the kfifo tail past its head, causing
+kfifo_len() to wrap and the driver to transmit stale buffer contents.
+The same issue was addressed in 8250 by commit 9e512eaaf8f4 ("serial:
+8250: Fix fifo underflow on flush").
 
-The fixes take two approaches depending on how each driver manages its
-TX DMA mappings. In samsung and tegra, which map the TX buffer once,
-samsung's new flush_buffer() terminates the outstanding transfer, as
-tegra's already does, following the approach introduced in 8250 by
-9e512eaaf8f4. A completion already in progress skips the kfifo update if
-the transfer has since been retired by flush_buffer() or stop_tx().
+Add a flush_buffer() hook that terminates the outstanding TX DMA
+transfer and clears tx_in_progress. Since the TX buffer remains mapped
+while the port is open, DMA synchronization is not required before
+returning from the hook.
 
-In sprd, msm, and pch_uart, which map each transfer separately,
-terminating DMA there would leave the flush hook to unmap a buffer the
-controller may still be reading. These drivers therefore leave the
-transfer running and mark it as flushed, allowing the completion
-callback to unmap the buffer without advancing the kfifo. This means
-that the data already queued for DMA before the flush may still be
-transmitted.
+A completion that is already running when the flush occurs may have
+calculated its byte count before taking the port lock, so it must skip
+the kfifo update if the transfer has since been retired by either
+flush_buffer() or stop_tx(), which already advances the kfifo itself.
 
-All five patches have only been compile-tested with arm64 defconfig and
-the relevant drivers enabled, including pch_uart through COMPILE_TEST,
-using W=1 with no new warnings. I do not have access to the affected
-hardware, so testing by someone with suitable devices would be
-appreciated.
+Fixes: 29bef7990845 ("serial: samsung: add DMA support for TX")
+Cc: stable@vger.kernel.org
+Assisted-by: LLM
+Signed-off-by: Samarth Narang <samarth.colleges@gmail.com>
+---
+ drivers/tty/serial/samsung_tty.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-One race remains, which is also present in the 8250 fix: a completion
-may already be running when the flush occurs but acquire the port lock
-only after a new transfer has started, potentially mistaking the new
-transfer's state for its own. Preventing this would require tracking
-individual transfers, for example with a generation counter, which I
-have left out of this series to keep the changes focused.
-
-Samarth Narang (5):
-  tty: serial: samsung: fix TX kfifo underflow on flush
-  serial: tegra: don't advance the TX kfifo for a flushed transfer
-  serial: sprd: fix TX kfifo underflow on flush
-  tty: serial: msm: fix TX kfifo underflow on flush
-  serial: pch_uart: fix TX kfifo underflow on flush
-
- drivers/tty/serial/msm_serial.c   | 19 ++++++++++++++++++-
- drivers/tty/serial/pch_uart.c     | 27 +++++++++++++++++++++++++--
- drivers/tty/serial/samsung_tty.c  | 22 ++++++++++++++++++++++
- drivers/tty/serial/serial-tegra.c |  8 ++++++++
- drivers/tty/serial/sprd_serial.c  | 24 ++++++++++++++++++++++--
- 5 files changed, 95 insertions(+), 5 deletions(-)
-
-
-base-commit: 36aad21d50d1af3f6954bb0c988257a908202477
+diff --git a/drivers/tty/serial/samsung_tty.c b/drivers/tty/serial/samsung_tty.c
+index 640f85e2d636..2bea7ef078d2 100644
+--- a/drivers/tty/serial/samsung_tty.c
++++ b/drivers/tty/serial/samsung_tty.c
+@@ -317,6 +317,20 @@ static void s3c24xx_serial_stop_tx(struct uart_port *port)
+ 	ourport->tx_mode = 0;
+ }
+ 
++static void s3c24xx_serial_flush_buffer(struct uart_port *port)
++{
++	struct s3c24xx_uart_port *ourport = to_ourport(port);
++	struct s3c24xx_uart_dma *dma = ourport->dma;
++
++	if (!dma || !dma->tx_chan || ourport->tx_in_progress != S3C24XX_TX_DMA)
++		return;
++
++	/* The kfifo has been reset: the completion must not advance it */
++	dmaengine_terminate_async(dma->tx_chan);
++	async_tx_ack(dma->tx_desc);
++	ourport->tx_in_progress = 0;
++}
++
+ static void s3c24xx_serial_start_next_tx(struct s3c24xx_uart_port *ourport);
+ 
+ static void s3c24xx_serial_tx_dma_complete(void *args)
+@@ -339,6 +353,12 @@ static void s3c24xx_serial_tx_dma_complete(void *args)
+ 
+ 	uart_port_lock_irqsave(port, &flags);
+ 
++	/* Already retired by stop_tx or flush_buffer */
++	if (ourport->tx_in_progress != S3C24XX_TX_DMA) {
++		uart_port_unlock_irqrestore(port, flags);
++		return;
++	}
++
+ 	uart_xmit_advance(port, count);
+ 	ourport->tx_in_progress = 0;
+ 
+@@ -1682,6 +1702,7 @@ static const struct uart_ops s3c64xx_serial_ops = {
+ 	.get_mctrl	= s3c24xx_serial_get_mctrl,
+ 	.set_mctrl	= s3c24xx_serial_set_mctrl,
+ 	.stop_tx	= s3c24xx_serial_stop_tx,
++	.flush_buffer	= s3c24xx_serial_flush_buffer,
+ 	.start_tx	= s3c24xx_serial_start_tx,
+ 	.stop_rx	= s3c24xx_serial_stop_rx,
+ 	.break_ctl	= s3c24xx_serial_break_ctl,
+@@ -1703,6 +1724,7 @@ static const struct uart_ops apple_s5l_serial_ops = {
+ 	.get_mctrl	= s3c24xx_serial_get_mctrl,
+ 	.set_mctrl	= s3c24xx_serial_set_mctrl,
+ 	.stop_tx	= s3c24xx_serial_stop_tx,
++	.flush_buffer	= s3c24xx_serial_flush_buffer,
+ 	.start_tx	= s3c24xx_serial_start_tx,
+ 	.stop_rx	= s3c24xx_serial_stop_rx,
+ 	.break_ctl	= s3c24xx_serial_break_ctl,
 -- 
 2.34.1
 
