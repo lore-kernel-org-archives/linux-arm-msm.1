@@ -1,109 +1,98 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793463876;
-	b=HVv5F/sUHQcKHUb+shFK1lpkwVZ5Qwv70ng7rMvUmsqHigRYcDQSLG44vBXa/+NNwLJu
-	 x2xOh1b9jru1oP7+0wF5bUUHGBn73WKf1yUKC5niUGiTB2tORsj/OmssjA8pFTxKPidrO
-	 1sbJ4QL7n+K2uo6RS91o03qQ+5CeDO2WgGYx3RV+dTQ9zfPOZa+3YFYDdvZIHsWgjUXYl
-	 4CCcYw1NuowKaWqcLVhAnKqHsQ3vWj0iqs7peBBhNOTzq1FwI5dHpkEokf0tLYDGLYk+9
-	 K0xJmy/1P3PzBqeTfx0lltDLUX2QX8WH6muWX9JDUadH0HD0olL6hjrTjkKCP4tXfdQ==
+	t=1793463874;
+	b=z83fKi8gV+lMZZ84dJfasCJMo9wsmbWTAWGVQw8Ifqkn6It2cyBvvmc38hwnPyVuZ6NS
+	 UjNN6K8IORmzPmobZmNxo238QeLovBZdPBRfTN+sFd9eUaMRekwJVi7Afw74xddX5/M7i
+	 lz45iOHzVV1nEYQnsPIXpRaMVV6Bo6QCHjmCzySEwsY885irw27R9C5/LZ2kKAN7eIe9P
+	 Vtb8QFAWDGZEAW/g5VBd/QPP11kacJd58ihFvv61g1ATB1th3q+utHXnwCC/GCDVGfOG4
+	 /FHHBPeR40Z2whFdfGjxUnjNi3jCpvlUHxcf5UBhVqmJHIxdEp4lwxvmCokyR09UpAQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793463876;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793463874;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-ID:X-Mailer:In-Reply-To:References:Content-Type:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
-	b=CW4SrPsIBvF/qm9GU38NGO+iU9xllitzCIy5LhQQhSJmSyh8QEdYtgpFewe/SdxBTU6T
-	 r9YcBhO7ZhFBhJpvVClJ1Er8Zx3Nb1nNM8wSSfjLLjhnN3twb5OunGPr6ANwgMH3z64JY
-	 066rep5DA8oWlTbjqPPdK94IRjxyFODxaTtnkP0NlNH9XnhY5U6UlH4orYOJIkqYkIHHV
-	 GVRNF8yy3E4X+i5wSVuPFvl2UHrOS5jayvjnEwo18KqYbZIWZ/8DQHAJ3WcwUK9wcwl6o
-	 dC8eLjdeTQU2o3XkmeSH4Hkp91EY8HjkvTj60uKKBl0J6hg7qrRnCgFXmIht5m3UuKw==
+	bh=wIweVJYcGEf+JF0pxNSl1gtpRzcg8XL5MMMTo3haHAQ=;
+	b=5EzeFYgzY2TOXGifP70PkSeKmVtVMLnhRAPRGO1l4bTBUnmATJ5BzszQ2GFeCo9SzOu9
+	 UINgE4r4g8z1B5Ox6rx3sJRXaI5aoJP6ZrqlfTS1/Pr/PFXv/rRW3FVRheBoyg5alphwG
+	 m0p6vSznms17fMdrN4+KBQF0GE/wYeMfr+PYoglBr9LirrJHyRRKPIAzXOeMRbUkKTBTj
+	 1YGSI+EIwGLHUgzvpbih+LLqXHcHvAGivphzik+Kzzbt1X/ahbFc18WzniT+2P5M9zLlc
+	 a4PxbCtLbGrlljpcBbcbWsSCsiOBEIgZ7QS10pS8YDofZD/CLXQlGx0gHbZyVJR16KQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lGqGKHJz;
-	arc=none smtp.remote-ip=209.85.222.170
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pRWIBA2S;
+	arc=none smtp.remote-ip=209.85.219.44
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55EF3606A33A
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 16:24:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 55EF3606A33A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D50C606A31C
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 16:24:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2D50C606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lGqGKHJz
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-93a40a9a01aso345043585a.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 09:24:36 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pRWIBA2S
+Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-91c847584b8so23812706d6.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 09:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793463875; x=1794068675; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793463873; x=1794068673; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:content-type:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
-        b=lGqGKHJzDGXW17jD1pryPBA87LDIwWyOzi8ssjyyiVNdhFFuW5BBmlnYMDlxTFxKTt
-         PI7yyIZlXQ2rk3UiSv2OD0mL2nqff5KNMDWzhASTkZtDlOVR0qbZ75V/EvbO0d7VhEeR
-         LuDxSX84IBSJYV7vwANkLCkq5ODi5x1RypITAppVUuEhdPormTQR+OqrF5fIKaebEseV
-         4zGWOGDG0wiOz7ZwvEYqWs9h6r6vNXPiSWW3by6mIzIUA9xOOxKIp7yYXOjl+teB3K85
-         1sZovvR5gYzTsezBib9nOY7Ie0npgraHz0HAAThVt9wRL7/++PwiEluIX4vXC07q7tSS
-         LUrg==
+        bh=wIweVJYcGEf+JF0pxNSl1gtpRzcg8XL5MMMTo3haHAQ=;
+        b=pRWIBA2S2QtzRQU55NrtkPIug7wojsi4Ze95NtY70HubFtZ6lHj04hhPHBGGgz6yDE
+         ucGLO4fjJ91JJpmkkN89GlFyE1VfAPpCNxq6YCOkw+QeNSDbWMlsNn2thPfmChu19F1d
+         jIl5q3JmYdR8tawjjyaJyKE6NiMtBrv4aZVyOZRtsVFFpxOWItJD5Fqpv9ZZiQ85qJ5/
+         A0DVSDtvTmTC1J5JsyVnB0EC69JLfALXC+E943Zozn8m5pWqDl2ToeEmpnKJOXIIMDmj
+         wRE0tsQKuYbtTWPr3DxUJbrDyVbeyf2vw06m6GoLIlM219xbnVIyArr9pd15WTgOjVbZ
+         iJAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793463875; x=1794068675;
+        d=1e100.net; s=20260707; t=1793463873; x=1794068673;
         h=content-transfer-encoding:mime-version:content-type:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
-        b=XKEjhLnNqC8lpDFNeBJNPheNoj2FctLcLlkDa2ygpltCu3eCdSVNVjIy75/oTxaqHh
-         ah92EBczcX5O/PZ5fb1CNTf7KzWQYw4g0QIYIuFVHeMjiCFO8tHIR7l7SOKYm5p+fEGI
-         YuhlYHJCS3HwjFI887q6gyKWBAVl9Muz3etQkEPZk4J45PLYDlJmmuqIUvjO1EJTRIG9
-         jlPM2nADCCgAh8nGVs8Uo9q0LHlKo3bRoM62oYAujycwkzIVgguNN6yKRiAJqudSKNiB
-         LQ4rVQuut9HIIH/bfLtCwWgyiKDbUNUX9Y8Be/1u3u5QcEc8WVCacYNzNCfXOyAaYvtu
-         QAog==
-X-Gm-Message-State: AFq9FYK5XCrszHtO8oUF6PPsFuWCJCCq1kAEHloou5g3Cr6/12vRD93y
-	reo5AWdTYL4EEk5LQVhIqaO/oJabkiAs2vm6nQmZuRuxEoUbpKtb0ELN
-X-Gm-Gg: AYBFou2edK+6iiEKzfgWkcjd0Covdw+RT8ohggjaGnq6BbLY2k0d+wPo4JZZz9RyGSY
-	HOz2VSYWJy0hnb4QY0VftUIyOwvTNo0jZWNgyqEOYvdJQgOcVXIY5R4zXpA6s23yIqMj/Rl73In
-	jUmvFLnpVJNb8b3NaV1nY4m54E+pdwiwV5ywtnPc4dFV9ka7JimSYb8x+UgimE9dF1rhpLTHetx
-	va+DiePa0iFHuQrJDQNI+/RdQoUK5HVAY1hnAOTB99dcDKaerPwgWsD+qvgEYXEqMlhSVnbXtYG
-	j/y1UblQhu9sern/eQmidMgQGQC1HpAGyvNPAC3KwFHSX2nOzNL8lCGyHbcpPjNalPp81u4LbMp
-	rDdYLrVC899j3HGtrxhKakRZMM20qXbBjqnSmrhQeNl+NdVEbpiTLfIuhwJSvIwKptNwqmXDg/I
-	Isl5StIGmXcM+GyX+4uopbpsfyIPXZF2cVJbvO/URoUaey3imtpYHQubHmNRz8CS/wRiS5wjjw/
-	4KRDZ+xcvD/iTgaxC9kZYSeThJQvwXcqFEc3h374642+PIlhjPJ/Pe3iNMGG3w2ig1nfZxfq/yW
-	9xnwkPSCfsTAWIkn1g+zZciw/QMuOJmuP/pbdpO6mdF2ABY80Y0hVGsVcGhUf9AvE67BfNLvrL0
-	QRqM5xg==
-X-Received: by 2002:a05:620a:1999:b0:93c:891b:90f1 with SMTP id af79cd13be357-944133ab8aemr1377062085a.26.1793463875288;
-        Sat, 31 Oct 2026 09:24:35 -0700 (PDT)
+        bh=wIweVJYcGEf+JF0pxNSl1gtpRzcg8XL5MMMTo3haHAQ=;
+        b=WUzc8TNiEfjtX+IXrs5vAt/ugOwjkEYZ2LcWxuuxVAiaf1vEprC4eIF3ewSR0CZn7T
+         ykJ8FO8PQSzHXyr7dg5sEpBUBhdObyLCWZdWExG7tsirUqRtCmbGuUaRyruU49khqfjR
+         WRw9wxi2txnckqOpMCQBghd1Dqkpdfv2Evip2+x2nP7jMwiT2GcDMX5lWJAk8WS4gAD/
+         K/u9OUXjrkK6ysu+kBCXNHc915ihGdXzP6vjMh86MudfW9JnSuqRctUKvNmmdGT4tEeW
+         VssIUy6JpnPbPS+z5iAbNmzdCmv5OupYlNE/SQOSan2ju3C7kvWhPPyliGqqPj6vGFm0
+         p7XQ==
+X-Gm-Message-State: AFq9FYLyT8ocL4C2kNY9pmqmCNQjTYKfRDeAqwRVoKdSyTsZXgakSXp9
+	ep2kABBbCkc+sD9F9Bq2+FarVDBUOBaWaC+foOj454GyS4+VfowGJU1l
+X-Gm-Gg: AYBFou3CRYF20qqKdo3uquS3mRhAHUOCXvDQWRRmQeDzzfU+O6QcMeTm1TxffQz+TO2
+	LtVXkcgSG+QPtb3iqZBmvAC4EGs4ygSX78dnMNhBtYd1Ou/nzTbj0yNJfDu/3So0Aogg9XVo2n2
+	0SYtOhHXpZZ1ZIL5IRLOTPkX6q3S+98FsZiH4VilnExYzd/WkVEw002xiHG8gZlT8CUT076CwV7
+	dbaAvzEEmWuM8H6ldwHjTbc05t97jF0cX60Vau+2dijHdr7ehaECQxysRqj07BIZHzYwvhyMKFn
+	H5hhQ6ChQjmG4r3VQZeXYBayBF64CAUuIJRDQ07nleFhP5P6KMvDGkPIQRh49AvSmIQakVB3Xed
+	OD6QhVR+qmq8tMSCBZnPVPP1+UjRDB2Ldma58qGcDZh2fglhi9YDstGgDHJ/w1WOB/Ua8KEomol
+	90wp+Jfr3eRTbswOsj2PA9BGHF9dOW2qpYkDn6grTeAjdEGSUycpEbXJ8qpMHkMLFg7G/5k9uKf
+	HLzqXAJUMFkUuhuS6TpOamvjjenoplX+Gvt3g4RBAuKcghrhirTZz0X4FvNgWZZ18KpBAret5pW
+	wYpuy8cmRdZHjP8KlFhaG0kMek2uGZjoXAgo8ozloFiSnRUA9uPVqTdp8qCcFzhCK3pjiqrwMSY
+	V0Z0czg==
+X-Received: by 2002:a05:6214:1d0c:b0:917:99d1:bda2 with SMTP id 6a1803df08f44-91ca4af9845mr87259526d6.8.1793463872919;
+        Sat, 31 Oct 2026 09:24:32 -0700 (PDT)
 Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-94425ad7431sm414076885a.40.2026.10.31.09.24.34
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91ca807047bsm44369856d6.39.2026.10.31.09.24.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 09:24:35 -0700 (PDT)
+        Sat, 31 Oct 2026 09:24:32 -0700 (PDT)
 From: Christian Cortner <ccortner@gmail.com>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Lee Jones <lee@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>
 Cc: linux-arm-msm@vger.kernel.org,
-	mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-	Oleg Keri <okerixx@gmail.com>,
-	Burke Cates <burke.cates@gmail.com>
-Subject: Re: [PATCH v3 0/7] mfd: qcom-pm8008: Add support for PM8010 over I2C
-Date: Sat, 31 Oct 2026 11:24:34 -0500
-Message-ID: <179346368316.44447.5094215662368347048.x2e-share-pm8010@gmail.com>
+	linux-phy@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] phy: qcom: edp: update v8 power-on programming sequence
+Date: Sat, 31 Oct 2026 11:24:31 -0500
+Message-ID: <179346367993.44447.8683103034067826560.x2e-share-edp@gmail.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
-References: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
+In-Reply-To: <fc3d0dfc-20cb-4289-a0dd-67ace50d42d8@oss.qualcomm.com>
+References: <20260622-glymur-edp-phy-v1-0-814b45089ac9@oss.qualcomm.com> <20260622-glymur-edp-phy-v1-2-814b45089ac9@oss.qualcomm.com> <fc3d0dfc-20cb-4289-a0dd-67ace50d42d8@oss.qualcomm.com>
 Content-Type: text/plain; charset="us-ascii"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -116,7 +105,22 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Tested-by: Christian Cortner <ccortner@gmail.com> # Asus Zenbook A16 (UX3607OA)
+Hi Konrad, Bjorn,
 
-PM8010 at 0x08 on i2c5, no interrupt in DT: it probes, and its
-LDO4 and LDO7 power the front camera (ov02c10, 720p at 30 fps).
+On the Asus Zenbook A16 (glymur, eDP at 5.4 Gbps), this series with
+Konrad's TXn_LDO_CONFIG value (0x91) fell back to 2 lanes on 14 of
+120 link enables, with bit errors on lanes 1 and 3.
+
+The firmware ends power-on with five registers set differently:
+
+  DP_PHY_CFG_1             0x2f -> 0x0f  (the bit 5 Konrad flagged)
+  DP_PHY_TX2_TX3_LANE_CTL  0x05 -> 0x00
+  TXn_RESET_TSYNC_EN       0x0a -> 0x03
+  DP_PHY_TSYNC_OVRD        0x3e -> 0x10
+  DP_PHY_CFG after DCC     0x09 -> 0x19
+
+Writing the firmware values at the end of power-on, all 120 enables
+over two boots trained 4 lanes cleanly, and 10 of 10 resumes. Which
+register matters is not known. Happy to test a revision.
+
+Christian
