@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793445750;
-	b=QfvNmkgzm98QzepnYuJa8N16K4pDJ6XKze+vlHMaLFVUBVlp1ZF8Sn95wF0FJnKpf3wA
-	 Sm2Vcfxo6fbMUUB9lIS863Rwm6YjwwXa4kfOngVTPfBUkf0hw5xx0RWhPkZNnfQgaoN30
-	 ewZcIN5ChZo9F2ycIJYBaX69J7q1Q1voITzdKwCpE2ademVCUhal2IlxevzeJ/avnOYL/
-	 vrdX/q+8lnV/x6/NrtkpFV8nae/Mlc3Z+0dw0kgWWnboaL17aKKIkiQoDYYMJWvnCz90B
-	 zluOd4KFCupbKgxISH2JO07G9P0433j5tMK3O97CNZVRNFkPv3LgylatFpYNZEjpg/A==
+	t=1793445747;
+	b=rT4NaCJ7TOwxgg5Qg4Q1vIV2gu5/zPdOszTcYaaf6zcwVlzPdvgRT0vNCgJywGmr+V84
+	 kCqXVZ12kyIe813mTpxNdtOdHaiMuVgSY2FL05yWxPinxy+wDkLyEP5srargSpo37wE0t
+	 jujn6ZOnJwevzWxI98HMQmxXo7i8gnpQtC7tBSaDlH3sU5tnu+2Yc+7dJRrkwCqUoCawc
+	 5JSY2RY+S3XsQLd995GvhNCgr0Z1GJfyfbNk8L1Hwg17EZaD+rMe29fn33Ks1dWj6uZN4
+	 oJ6m+F8q/hTo7eGLMWb56H6A9JUNkW8IDxUuGGtWyaPN4NcGYMkacbYSI1u+H3AW7AA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793445750;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793445747;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=8JBgjbAiNKzEfjsqgd6C6n3aL2nG6tu2D9Z/SOgJ6U8=;
-	b=i6EIubMiMOOJj3/I7QNEFjWIYIK0RiFGFKUjoy4HfaBoG3NT6shZl+5Hrs5zAUPYgflH
-	 gzdkMkitW8k3GRkHN9Hb/YqI6tHbllpFvyilphl0Hi5iWLS8CkpVhZwswkMiMOs452uVW
-	 kVpzylrumjPqznNv8EJ6XAV+tMZDH3BD8P5aiwBu2bAf4eK3IW4KKkyqNXI0yfmWZXtIg
-	 WOtts9qNM9VV+RcA9GTuooD5ljU2auHbg27viRK0jgG/16QaBYSAAdldJJs/AKxqVBABv
-	 Imoj6YhLQ9H0SGLwaGmHTxLw6/MPREpApq8gh+UWRx5/uU2jB01hVr2df+Cv/Bu9TpA==
+	bh=tpErthRmnc/Sd165TRJRy3hTqpBnrdJ3knKfPzqq1g0=;
+	b=RfFYO5vtHc3JDb9VQTKw3X269AgHl3giswcbFRDsoUaZSLJkNQ1toPHzJMoUEK3xNBFG
+	 hI1tYiAIDi2LmiyNx3zc9TZI5fUAZwKD9ZGhq3cGdVimG7MeFXmMsVw8lNY09HxmKGk14
+	 zQyHjLvU+soc3PN2B4C9qPxuruEnXeWLQbl813b+Nv6xITAVTqag6Kt1jyuQ2DvLAN/0I
+	 3JhwzWJ8b7SWCOShwD96LFXNE6e56gI42z4zfRn8WVXEK3pusovuhcV9aQ+hIsiplBUTQ
+	 jYszV+Px4pS6Ynb3pQXeo7SmLTDjzvQXbu7GKythcjYJ68GD/UR7LUWfgqnFCxK0D2A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=QdjuGpm3;
-	arc=none smtp.remote-ip=209.85.208.180
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=smYomg76;
+	arc=none smtp.remote-ip=209.85.167.47
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40B04606A33B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 11:22:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 40B04606A33B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EC3E606A32E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 11:22:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3EC3E606A32E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=QdjuGpm3
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-3ab43d1dbceso2744501fa.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 04:22:29 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=smYomg76
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5be41a7aba4so191823e87.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 04:22:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793445748; x=1794050548; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1793445744; x=1794050544; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8JBgjbAiNKzEfjsqgd6C6n3aL2nG6tu2D9Z/SOgJ6U8=;
-        b=QdjuGpm3AtA2n9CkeDY/hf9+Jwq8FSHcJT+66e3eOkqgvFOTaBpTPdjI/nkVoST2wO
-         EJCtdZ0b0r2ESLmAIUPNC2BbvqrkU7gbWQ6B8gvkVZQzUpMQRaY2fK4OwOvhCG9+j/ys
-         MGs1OYTlHq2P7XcUVbWPfva///1Z1MA/p6+Uy5JedhF+2uXbzNVXf8FEK2WbuwuXwBFc
-         y1JnNpwFjt8ngU2rkEKTHqcmk+0X6jTdQyWUu96N0XVekjYlV9/nBN55oBKrEdD1aNw0
-         eCnlH9zos6U4I3D59NDa1Q55ts/6mNBPre1Eg0UILOOojVFmSaWBUsJXq2DifWfZzPvy
-         ePQg==
+        bh=tpErthRmnc/Sd165TRJRy3hTqpBnrdJ3knKfPzqq1g0=;
+        b=smYomg76JlBtZyAHVkitLrlxUqVrHWOxG9QTciE1UGoSL6VtHE7yoLtH8ZrLPOE3ER
+         LdAI5hhpM0xD6zCf8ReZkvWqaZ/EsQp9AJw5N3C9PY61euVM/CutyRl6mutSikSNhkzW
+         7ODUxC6ClmoF25ubjB0Xf1cuZPhfu8XLXSaSpP1wtEaD0pFAh1fOCj4l2B4VlHbdduFB
+         V9mXBkmygJw0oY2gVtkMlCKduJrFaA8lme5PrH/4MBTh2nZzDck6nF4kPj6trRDpdRTK
+         qFrVDOrC5RBZ5hzAg63fOqm2dbswqg3Tch6gWHjKeZ/TQZsIuNFY3efD4FSKglhRrNaE
+         7Y8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793445748; x=1794050548;
+        d=1e100.net; s=20260707; t=1793445744; x=1794050544;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8JBgjbAiNKzEfjsqgd6C6n3aL2nG6tu2D9Z/SOgJ6U8=;
-        b=fMTfHWjL8a/dkzAphnDzPAaVgSnTxBew7ZRY6fKDitpRWU0/cSfkdtc5Jw/+c6MRJt
-         ous1iZWv2kapTusHIInr3NwjtOTnMklWB/saufTiSdBRiri96DJgK3X+NcYxoS5z+CoP
-         lVJe8tkymdqQwvuy9biM0W6+cBqfQesqLpGwB/rl8wHGUaGdQtOmwyeNnlgnBo7QpFK2
-         XbiRP41/f44o7sPE9EsHmW2ZZubGfh47u9N8NOYA8OjqSkOfISkM45WXNt5hxGJatR+D
-         EIhKEefr9zry4MVa06TWnZdJBDmnKNwhobfaZzu2nRp34NVvt+dpV091ADNG2+8Z5lC/
-         tjZQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz9XQwaXEG2g6J72ehIsL9Yg1gKdbo2qxC+mw3pFlcKCLpYKvLniEs0B6g+P6rFgoGVHPzoLix19wixHyNY@vger.kernel.org
-X-Gm-Message-State: AFq9FYKeOB2Dsp99JE6pyMCeDZ4gEiJyrBdQiyqLlYTe3STUglzuiwmw
-	G0G1z/+G+N2/D34JXWygWTe9x+mrPPm/mPQrY9UXAhA7DtvYjd7kfSNUtmzadsvEq0M=
-X-Gm-Gg: AYBFou1/F5I+2amzRDZh39evsHyU9LfeJK1vzY3y/CZh/UnsRqFC+tTlK+iz/RGnwbX
-	8aw5rh6uj03P/wW3fMrWXM5CVFs2MUEtG6okUs7Xj4UxQFOIjyrv7ayUWuDm+ZsAxI7JBv4kxv7
-	vfuFpjndUy3mWOIyKUBrlSNl7asxRkssKesjrsk8pxVbEgONLJ/qtJTpUx7ZM3pTsSm1YFtEmxl
-	MV+NCKFxFuubEkcEbY2CFHgjrteYlieepIXF9beoPBcQhe7NHYy+S9h/eJSUX730R6y94S2ggsr
-	+jXbaKDc8OM9Xp8RvznjmdeeWyVwWQPO+SR8PrdX1MwU7nJ9iNZ91bOYNqjEUlkW94zzS36rok7
-	Zq4VrF7VLcXz2L5LQxm7+jy48BJ9HrvWW2TSHmUeCwYlpvEXuF5Uu4LFWsT/efa6ZZyJJ5eD94z
-	Z0iBLRf8ptsazuxzXrPCPTTDeQQAQ8o7mXu/9y9NF2y/2TM8igNxAlB/FYGHdxoKVv6EVAaEwFU
-	Q8uJ2mtMZLi/U4ENiAqdhm4Uk5Hc+TUoHjHnqPbGRDLpuQshVISQ6GaEnRN4Gz/nnKorWcwA+Ny
-	GSkKhJpUKapde1R43t8cu7+hfy7iQcpMxqyH2j4seZw9uRCzZU17m+jH3HaCzlkeGrZpfA==
-X-Received: by 2002:a05:6512:3a8d:b0:5be:4d62:4e65 with SMTP id 2adb3069b0e04-5bfd9566ff6mr1862293e87.6.1793445748364;
-        Sat, 31 Oct 2026 04:22:28 -0700 (PDT)
+        bh=tpErthRmnc/Sd165TRJRy3hTqpBnrdJ3knKfPzqq1g0=;
+        b=S4lJ3LMNQpH9CjdOtzPwHKU/pJUwam3IehddF0cP58ruSQVGBKm3pDF89PQ96JSTvp
+         MHIDKOyzsXYgjhdPpzZUXogwvig09znC34oT3wxAfUTVIbr+st2fHok+HdPfNFpBvwJa
+         ej70aoR1cW++8Z3BaGKwuPBbtRFchBr4g+/o1T7gM1QSKj7LsnhZWY6+QNSBXPSGIJ3q
+         6nEON1J32zHXmKItBT1Vk7dviEhy1Lm2W4sDNFtYcjUe/sf19N6KucGrtWtjvY+O25sB
+         vJ5kYMnD1ed1tthZsmzMOHcEsJ9Y57RFsyfBtY5baF1iID7PC109ExVg28hyhQOeOqQD
+         G8Hg==
+X-Forwarded-Encrypted: i=1; AKwUvBz36l0epyjjt102Y4HP9umavjpkMLhLfK0ri2by0sWF9W9WNIiy3Qb6YXFTiBTX0SpmXKN6wprfc78WzHJb@vger.kernel.org
+X-Gm-Message-State: AFq9FYIgDgxJrSdrOdczOxKUb+TMpkwJnODkG8DBWcCjtrkZatZkP9Hk
+	ton20G2dCU8ujaSggJifjfTmUuu/mAwpI6s3I+sakUlTpGJhZxZ9vDuhsxmMHZ2uYxI=
+X-Gm-Gg: AYBFou0M5nAdyI4rFdYsrNQDRrWPC/AIcdE9FReUWedYsme+kbuuYVL6eEozZCkbsh1
+	SWheUJ5U0EBJ9gB1jdUGm0INd1TKfrCpQ0AAihW7N3Xkw83VtqMI21h5cH+/1MvBNF526Vz9bsb
+	GOPS0ewNMSDcA/nPdcTYbXo0A1CYwxpIc7y1vKA79gmlqQRYbui27o+FfOu6LpXPndWZ7Bw+AlZ
+	6UszBy/05+hukpMSserYlD8kgOUR1mC8EdKERpn0J8h2RlxBcz7FLR8HihfSHzAh3g6wXsxpBr/
+	O3Bo7JXni7eueX48z7HcQTjE2+pbGbXBMwb3fvHn5X+TOAGq9TrPIbvVlhPCBYLOkDwWObjVbcB
+	CToToWyeZUkRbKMrhE5IeWrUJcD4vQrQ2aAFbkuYNgzpnCjQcHT6wFCQ7287oKtj4LA3zQwetZb
+	do/NvUcc4zMSeeFsgrbhoZkrRgeUAwv3ZQdrtlKJXotcNC7KxNGFsGhbJx4C2qeY7vXVS1QR/5l
+	zmuQELcALLWouMA+oZYRj1N9RuBGwcLoc6a4Do1fnA0ZuzA6CQgOwLO0pS9KiptPikJzBylJUIA
+	djFQHtIXKRjpKDbpgvNgiNZt4BOcNdrBADN3HZflKTwHWNchg7XzWNzpKOPgIxejiQBM8cA=
+X-Received: by 2002:a05:6512:3e20:b0:5bf:d237:449d with SMTP id 2adb3069b0e04-5bfd94c8826mr1847404e87.0.1793445744234;
+        Sat, 31 Oct 2026 04:22:24 -0700 (PDT)
 Received: from thyme (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfe074aad9sm538469e87.75.2026.10.31.04.22.27
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfe074aad9sm538469e87.75.2026.10.31.04.22.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 04:22:28 -0700 (PDT)
+        Sat, 31 Oct 2026 04:22:23 -0700 (PDT)
 From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 	Loic Poulain <loic.poulain@oss.qualcomm.com>,
@@ -92,9 +92,9 @@ Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	linux-media@vger.kernel.org,
 	devicetree@vger.kernel.org
-Subject: [PATCH 6/6] arm64: dts: qcom: sm8650: Add CAMSS test pattern generators
-Date: Sat, 31 Oct 2026 13:22:03 +0200
-Message-ID: <20261031112203.545319-7-vladimir.zapolskiy@linaro.org>
+Subject: [PATCH 2/6] media: qcom: camss: Skip TPG if its registers are not described
+Date: Sat, 31 Oct 2026 13:21:59 +0200
+Message-ID: <20261031112203.545319-3-vladimir.zapolskiy@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261031112203.545319-1-vladimir.zapolskiy@linaro.org>
 References: <20261031112203.545319-1-vladimir.zapolskiy@linaro.org>
@@ -109,63 +109,42 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Describe register spaces of three test pattern generator (TPG) blocks
-found in Qualcomm SM8650 CAMSS and the non-real time CAMNOC AXI clock,
-which is needed to get TPG output written to VFE.
+If TPG is supported on a platform, CAMSS probe fails on a device tree,
+which does not describe TPG I/O regions. However support for TPG can be
+added to platforms with functionally CAMSS at a later stage, thus
+registration of TPG subdevices should be skipped for sake of backward
+compatibility with old platform CAMSS device tree nodes.
 
 Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 ---
- arch/arm64/boot/dts/qcom/sm8650.dtsi | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ drivers/media/platform/qcom/camss/camss.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-index 86fbb0fd6472..f40ba0880c90 100644
---- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-@@ -5463,7 +5463,10 @@ camss: isp@acb6000 {
- 			      <0 0x0ac71000 0 0xf000>,
- 			      <0 0x0ac80000 0 0xf000>,
- 			      <0 0x0accc000 0 0x2000>,
--			      <0 0x0acd1000 0 0x2000>;
-+			      <0 0x0acd1000 0 0x2000>,
-+			      <0 0x0acf6000 0 0x400>,
-+			      <0 0x0acf7000 0 0x400>,
-+			      <0 0x0acf8000 0 0x400>;
- 			reg-names = "csid_wrapper",
- 				    "csid0",
- 				    "csid1",
-@@ -5480,7 +5483,10 @@ camss: isp@acb6000 {
- 				    "vfe1",
- 				    "vfe2",
- 				    "vfe_lite0",
--				    "vfe_lite1";
-+				    "vfe_lite1",
-+				    "tpg0",
-+				    "tpg1",
-+				    "tpg2";
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index c54185c93a8a..cf4687a20dba 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -4965,7 +4965,7 @@ static int camss_link_entities(struct camss *camss)
+ 		}
+ 	}
  
- 			clocks = <&camcc CAM_CC_CAMNOC_AXI_RT_CLK>,
- 				 <&camcc CAM_CC_CPAS_AHB_CLK>,
-@@ -5514,7 +5520,8 @@ camss: isp@acb6000 {
- 				 <&camcc CAM_CC_IFE_LITE_CLK>,
- 				 <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
- 				 <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
--				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
-+				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>,
-+				 <&camcc CAM_CC_CAMNOC_AXI_NRT_CLK>;
- 			clock-names = "camnoc_axi",
- 				      "cpas_ahb",
- 				      "cpas_fast_ahb",
-@@ -5547,7 +5554,8 @@ camss: isp@acb6000 {
- 				      "vfe_lite",
- 				      "vfe_lite_ahb",
- 				      "vfe_lite_cphy_rx",
--				      "vfe_lite_csid";
-+				      "vfe_lite_csid",
-+				      "camnoc_nrt_axi";
+-	for (i = 0; i < camss->res->tpg_num; i++) {
++	for (i = 0; camss->tpg && i < camss->res->tpg_num; i++) {
+ 		for (j = 0; j < camss->res->csid_num; j++) {
+ 			ret = media_create_pad_link(&camss->tpg[i].subdev.entity,
+ 						    MSM_TPG_PAD_SRC,
+@@ -5434,7 +5434,10 @@ static int camss_probe(struct platform_device *pdev)
+ 	if (!camss->csiphy)
+ 		return -ENOMEM;
  
- 			interrupts = <GIC_SPI 601 IRQ_TYPE_EDGE_RISING 0>,
- 				     <GIC_SPI 603 IRQ_TYPE_EDGE_RISING 0>,
+-	if (camss->res->tpg_num > 0) {
++	/* TPG register spaces may be not described in old device trees */
++	if (camss->res->tpg_num > 0 &&
++	    platform_get_resource_byname(pdev, IORESOURCE_MEM,
++					 camss->res->tpg_res[0].reg[0])) {
+ 		camss->tpg = devm_kcalloc(dev, camss->res->tpg_num,
+ 					  sizeof(*camss->tpg), GFP_KERNEL);
+ 		if (!camss->tpg)
 -- 
 2.53.0
 
