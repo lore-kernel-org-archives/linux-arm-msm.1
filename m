@@ -1,116 +1,117 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793478104;
-	b=xvcV1SvVqI4ibZQdXqyGHKEs3A7OA3bSTVCfvOKSUI9WSOhFCrQb4r7csf+l4cBNIEHT
-	 3JL50SG3FnL+3GlGNNYUicZE/9DT2dN5l587h9DL1inMIbL1eqlQdPyntOPLPE0ibRfBW
-	 gK8TGPZHrTAlNQRaCvtMFF9X7SVmo9RLuVwCPaGxa/R5/X1alsseTviNLVXCJECjqYqqD
-	 c736R1ItPsrQ84RTgHw0ggviKjnmIMbxtUCqaRA5c9Pkced/ckxFeef+3cuzzYr2NQ9pX
-	 PoVqK0vGrv28BQofuabw3Mp98iTQ37YYmvRoGFf7RtDCh1t4n7+/NfMNI7Aoq8fP+1A==
+	t=1793478276;
+	b=iVH8ushG5UmP2V9EphqWJAWVG4YyzF9ojsl3Fxvky7ZE2SNW8hwtXERvTWsiUkEvZcPY
+	 7I5npFLgtLZiwXhmMvgNge6JG2VyYoxrW2x7kyORTPZq7ETMdAbbcKl5T77q3XXGH/MZR
+	 mCpM0msz1yvVnBaxVB6O8Gdo774lonEYbc/zam0KEnvn/cPy0q2oNKUPg7ggs95shMnK4
+	 V9smHhk1fzwKWLkFghtkpGAXgj0ol0tQFQEt0Em8vgU1HECodHBXId5zfHFjxnG9PbRjG
+	 SU3x8RzM425AnNneeBfiYywY9Zq8kqguBtcmiw5rNeEXhituD4gd+UBj8DoGhgzaJmA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793478104;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793478276;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
 	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=B3Xi0jd2KnKgrPJ6ep80cd3l+8cBf4DAA514CH+g2eY=;
-	b=pQXRrDfm5LA5LRHlzHWbpj6B2GgTruwKKlvGkJICZGSyutWc2gTgJ+vT+LQi3269klJG
-	 YMcBJEitVdUxXyqK9wS8i158nFTeWFH/cuWHZojLcY0HL9rJ4qH0ksUY6MqlWwpk2nHmm
-	 URerKCPoO/1Go3xPN78w6zATFrXFxdULgEDDFuJeIRikav1fXfQzyPiJ+QTjwHjpIOkbZ
-	 9HKzTu3SzAnsIKTiQ7a+YXBprRDDGYXaTPXDqzG38JcXmovHluf3j6gpvCu0ywIhBHATO
-	 iPYcrbed35WQ65BJDm+gls8iH/NOOfDzgvBcJD0lZeWdp7C3mhlCImd8IjNpCboQ+Vg==
+	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=LC+7yPvVyik4+Gpd7nEEb6EXAVPzoW8RCDIH4uELTVY=;
+	b=MLY1X0fzWcFcge2sCi1BvJGU/0HZyDSN/4mdMfyqiegKdt6QnI6Xw9/E+my0ceTGkaVI
+	 lbXTf7Gt1W3zJ4RMj2+x2x8ddM0T2Dj1+EpQN2pAMFwWiuPXytqidP4KRqP64xVU7o22a
+	 Ui8QUnqnvdWehOJhWvwq5T3iKprj1deYm/ult6lQnaPOQKbSHO+H98rmJ8Th5bdBlLNFV
+	 echaMRtrvq6sbriNMRHXb1Y9bnzTywjl1n2KNPbbWl37Rq6tsZJ6lZ90Ud1eS9hu+ZbX6
+	 IhQh8BFddjn8RjOWCYyooVHQkzOVXVFTkooGq7KPkDY5TKps8cOogq/UzZKRNCm/jnQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kv4OSASr;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TMHyrNKS;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CLUZaKpj;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LWo3pBW5;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EAFD606A31A
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:21:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7EAFD606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3D7F606A31C
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:24:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D3D7F606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kv4OSASr;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TMHyrNKS
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69VJFQbb3557616
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:21:42 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CLUZaKpj;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LWo3pBW5
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69VJF5Z53976312
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:24:35 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=B3Xi0jd2KnKgrPJ6ep80cd3l
-	+8cBf4DAA514CH+g2eY=; b=kv4OSASrS3Cpiq2h1eVHDFVrHfu35u0+0ecLTj2Q
-	aExk9rf+knDIy8Ltfu8OZ425fp+lHKY57/8876eOh6fVgg4FDVN5dLmAb+E2MTqh
-	bHRfoU6CBKwYM655l/oQlUrX0w1NEHMvTC1G25M1ztdj9yuycmAS01IoJcE3UPRD
-	JoGlElNz+wBWLHqDxmGv3qd5OMrmpESTQYlux0gFE6vzh8nOp36ob/W1nacZ0r1r
-	gnMTyZRMIn1enExLZnAVVxQvSZw4g2KVLIlYY4NW3qhF2NpXWUQ/VNbegbsykIb8
-	8zni7U1/cqvBTlQiSvo2Om+38WL1ioy6cv++FaON/3k7NQ==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7wxj241-1
+	:references:subject:to; s=qcppdkim1; bh=LC+7yPvVyik4+Gpd7nEEb6EX
+	AVPzoW8RCDIH4uELTVY=; b=CLUZaKpj1g6ex8FCQS9pJcuDpv4TWX1jzc6/jDUi
+	FcLRQVpCsXqEfFD4fRBfDD4ODU/Ls5M2UzJGJ5KmxZ7JYmAFXz6jhMj0ENhwbR6A
+	B1wTUC9uKrcyTHYnr2p8RYfIrKzgHEWmqfz12f/SP50gazjlgL+oSHB/0HmWYvyS
+	BNa1+kPp5hHvOxoA1BQoBbGpfFW/iBmiPgNh5rUTJqRU42gLE9D3zM8+FtK2xoBA
+	m97fzzVV3pr1pnS43kNzkBLSgLEjdqKNVb3NaIzm8CFWKKbjf8lviSrUn8AIqUVa
+	h5Dx2ZQNsSDS6BskLCATvsxGPLwMED3x5BtFDHgueQXGaA==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn79rt4ht-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:21:42 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-91c0f73807eso24110716d6.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 13:21:42 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 20:24:34 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f5844cb60so367307985a.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 13:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793478102; x=1794082902; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793478274; x=1794083074; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=B3Xi0jd2KnKgrPJ6ep80cd3l+8cBf4DAA514CH+g2eY=;
-        b=TMHyrNKS4JNc2PKDEJDsCNADGsjLHcdBaSCdjuXygtoLgh3+lhNNF0x5v1mEfXdf6L
-         HZo2HJrFk8ZeX6oSfT/7OLgis7CLrKY7+mH1xLxkHX6ObopRhde/+jv7kaZYshokEDnN
-         n6ntARSXgAt8OhtWU9Gkbotnz7zkNgCegdc3ZVvOWMJ58BVn7IZVWTqLZhH3MnwFEWqp
-         pCwt8Yg0OiOJtA6cVryAjPV7P0xbYmxDzYx0a6rV9kmIpcjKLNmYa8mBVsagfYOqJJql
-         opaAWG7QqGI4pqmN7QtpIGO513pkAZuoS+lbYVZOrdB9z0Z4/ahXWGKkRHsj0j1c5Ii3
-         HlWg==
+        bh=LC+7yPvVyik4+Gpd7nEEb6EXAVPzoW8RCDIH4uELTVY=;
+        b=LWo3pBW5BrR6BJQq7DV67ez0ZIF+7epsL9cWFYM+ib1yN1mv2AA6yfeuZHi3N3bKto
+         z4ZQCgfoBwPhHqAJpPUbcE6PcxzRQLYzOSk5e0wzYjo7yJxiCQL0ZSdl4o1VXtP4poHN
+         ap0hb0cx/On6Kv7AxgkfpZiKojwjnRR6nZ8qZItIdbXBlzbwNBvrOvMWWqrc/A0B2V/G
+         wgCcCXTFrOwoYz/2k93BR76geT7llcf6/DlXUEJmmHKVXRTujcmarhEwag1T2g6bbtk7
+         ZqdOukE7JocMsUxxxsJ0wfq9JVXKZTKc9GQMSOK1Xn4MiTp1e215QgoRW61iNr0qLxWv
+         Q6zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793478102; x=1794082902;
+        d=1e100.net; s=20260707; t=1793478274; x=1794083074;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=B3Xi0jd2KnKgrPJ6ep80cd3l+8cBf4DAA514CH+g2eY=;
-        b=YBhS8MFNWA0YJns1AOSvS2Bh3NckC61G4TJlGMV/rx82x8Ya8CCixWcI7oUTBfja/N
-         vpuSn6Z/eJOOJKuUW2RDsRTrGt3rQpeHC61PK+MYrqqsHK2bmSwxu8L7PBOPzIxHBJrG
-         nblB8V1tc06JFIEzklji6JhAfDWh+PPqjij7/F+N+ZSZrGma6zsChggIOaFv6rZZ0Urh
-         K6DOytG3Pk9xtECw02XT3ObQfVOPPGOgL26iXiKDP8DwpQFFy5jd7V6ESF+1B3xBYPhK
-         KPuBM8I08q05pR76UNShHRS5oe7qx5nTeYeDTQxPEW+Pqg9VLDar95MGxEAStvvLHEco
-         X/rQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwKmfQgTNq0SZuvBjRFHDUKbYI4nMwYkNTFlZPHEEsmEnuD/poHQzndEp4xhNmIXzJyFvDDwZ+lfNUivNzN@vger.kernel.org
-X-Gm-Message-State: AFq9FYL4ORtzKTly8W29iOpJHlZPcJqrtA7vhPVjZJsP/3NQE7cqzw/Y
-	MR7uQX4AMdpmMsyQqTj1wrj/v2IjBdwNA5JRw9doup7JsgxkaBRZHQxnQ46sCn/0wtelRkZGQbW
-	6rfkII5DUKWIo2TaLpshaQV1Bnpwtg0uIDfn14zT4YxGuQK8MUSF+gkT7NHo9FehmmTLC
-X-Gm-Gg: AYBFou3gseK3WKvgbt8Cn/ahJh2Oe+lbzfZZx0lrf3eHA9mPkJZhFyRyy9Y7PxT95kx
-	SpLqEyWze5TRqXiGBJbHzUJtZyz+nYcwOnINGKTpAIsD4ZB+W2xF0W9h4mkDZatsdtr94c9UBje
-	sKvuvGn03UdNPCpvEtq7yLTsughDDp3y6EVFAb/RrcTQqxQxVgp3Lff916ocQvKBgAQfk2rkbZi
-	wO6tcX+lW9LzjYae6J0hWKi8NW93k8KXFrAp4oxRFBUlgm2WWpEwijcDl9ebEeWs9+jig2AgMLi
-	W50t6DeaQ+QRSP6df0g8+ZM1NDZgNWo/2+dhyBF4UIpTdsUC/YbvzU0Fs3W9Aw2WUIs9tABQeb4
-	tgSqdJb6BAdgSpDQKXCQaAk6NaADiUy8w4e7J6A2zOqf9EOa77nnNB2JqieTGJfNCuicXSsFE3e
-	lzU99xA740I2hR+rGnxgy/FOXy5UGzAgDD1+t5Z/DFuKRMHlGBl6hjgTmWkTVqNA==
-X-Received: by 2002:a05:6214:4902:b0:91c:60e8:a8aa with SMTP id 6a1803df08f44-91ca4baf013mr85236176d6.49.1793478101596;
-        Sat, 31 Oct 2026 13:21:41 -0700 (PDT)
-X-Received: by 2002:a05:6214:4902:b0:91c:60e8:a8aa with SMTP id 6a1803df08f44-91ca4baf013mr85235896d6.49.1793478101049;
-        Sat, 31 Oct 2026 13:21:41 -0700 (PDT)
+        bh=LC+7yPvVyik4+Gpd7nEEb6EXAVPzoW8RCDIH4uELTVY=;
+        b=Ds1RqVWcpo2ZDEhdJzRvjqdcbrqkzC3YYTFzjNQHRDdVHAfAL4hVyJkbXeFHg13NaC
+         HbKBRohHLQBIoCFUC4vXRn4Alp/mU1SVLjjrDwjXn59zp03Quwpy796PHNIJo+N0+HoL
+         6FGHL+Y/Rn6PMzdUr0FPJGv3Vh0VPyfsEtrXrKKosy3AMBYP7Mxxs+TMioS91DzMG219
+         Uu+nFt3lFWa5hS9yYkgqPVSx2AQnDo4+nn37oPIwWZ+rfh0UivBk89N5p1JyO1yDFWWi
+         BAndgB+LehfTTxX8rhubOMHKvRRp/B3v+MRZQmS/Sj4QNDwGYiOl5F7PZZoFaNssjgkC
+         pHbA==
+X-Forwarded-Encrypted: i=1; AKwUvBw+arqcc1HWiuAtXLaGxAtpyGiqPci00Uifr+9kLtJXvS1sXorR7oWRsmUnN+A4Dj4FA+M3pgt/9JQc0mMx@vger.kernel.org
+X-Gm-Message-State: AFq9FYIp/6HoeeFh0y/te9CjgqYs2KsiJrUm3wj8+q4pHtnYzhr7+Z82
+	43W9wrswwgQ/Qx9de5XxQQgN08AfE9diKpotP/j8bSTnf0ya1K+nOVJ/ZMASDC9ebIC5Qjm0ZNZ
+	nbaP2yOzR7hIkqxBZgZZKjMng5CMB4nSPDsQ/hyEMrefeVEtaXE+Td253MeJGpGh75Es8
+X-Gm-Gg: AYBFou2edTGCBbTPpWBjPTzP1+sR4kWB4zGbnieQJdvNDT7WK0nwE7ygnUfTuZGgNNG
+	w3HKrXdciwD+neVP29mVPNDYTSY82m5wrduLa5SvLYmZheWvBl4Ub+vCZ5RyHK6G3ogghM12siX
+	QsFGkZOa32r/mDj9R5V7Mgm+GOSf/eDxDKHqUMWuxC3vKneP8LkSVaQUZ3QqyRn1Ey3IH0FA53F
+	l2uK5NxIw8p/LOY5pLbHaxKmGaXKrfWH0Ckqr5da71XAsgrvpcQQl+JMuQrpxHA5HJ/akHisWtz
+	cC1AqaXWWJtlBxrB6EFnJYHRLcDCAKbDiPLNDUmbNPzbf7+WNycw/n4/k57jw/WDMAXTefU5W5K
+	TMMfN+cjZCl4iPD7hP69sp2SH+O722h4n4jr7TmzXT0Bz8F8irZmLJqDVUbL2pz9xGBvKDeS8/r
+	26T6CvTuhMLSdARGuuBEy4jzOwbqI6OKtAsJNcALQfJdqe+jh4u19iGyD+uPxgAQ==
+X-Received: by 2002:a05:620a:444d:b0:93f:4498:603a with SMTP id af79cd13be357-944133d4a68mr1436455185a.35.1793478273671;
+        Sat, 31 Oct 2026 13:24:33 -0700 (PDT)
+X-Received: by 2002:a05:620a:444d:b0:93f:4498:603a with SMTP id af79cd13be357-944133d4a68mr1436453685a.35.1793478273159;
+        Sat, 31 Oct 2026 13:24:33 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3acbbebddacsm12698671fa.6.2026.10.31.13.21.38
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3acbbefd30asm13000291fa.23.2026.10.31.13.24.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 13:21:38 -0700 (PDT)
-Date: Sat, 31 Oct 2026 22:21:36 +0200
+        Sat, 31 Oct 2026 13:24:32 -0700 (PDT)
+Date: Sat, 31 Oct 2026 22:24:29 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 Cc: Rob Clark <robdclark@gmail.com>, linux-arm-msm@vger.kernel.org,
         dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/5] drm/msm/dsi: collect bonded command-path data into
- per-SoC config
-Message-ID: <j5ixobskknatvusosmhgvvmnze4q67iyfwk6gsa3y5goovx4z4@mhumd2vsnfkm>
+Subject: Re: [PATCH 1/5] drm/msm/dsi: move bonded command failure flag into
+ dsi manager state
+Message-ID: <l2pcxlml5vdv4ws75wvqjhxbjr43hfosrvd2nyewhup5umxu34@feozzmxb7poz>
 References: <20261031150305.1107572-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261031150305.1107572-2-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -122,87 +123,107 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261031150305.1107572-1-xiaqinghuan@mail.ustc.edu.cn>
-X-Proofpoint-GUID: wz1jVYTl1uhSNyBuXKajHLkIER9p7eLh
-X-Proofpoint-ORIG-GUID: wz1jVYTl1uhSNyBuXKajHLkIER9p7eLh
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA4MSBTYWx0ZWRfXwj0rEJ50SlAb
- xLYuaYbtRf1pxGe8ALOcW6MLUej7Mzv+zBjbt666msNBsbpp3qhzMb33TZK7sKh+jZVLLazUwsu
- eZf4sozHfDeenzO1FiNPDrMgTmvjOT4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA4MSBTYWx0ZWRfXwhIsK1v3oUQA
- jphIvdSBvb9sVzhjQZ0qdT4sVYlxoT9pMjDd/2OjIm1hM3yxqGL6cqUGmwPmZ47IL9D2B3cukY4
- OSicWDHiN1f1t+32XiQTCXLPv09/YAol20aZv/rI1BzPQyq7zTvHB9U4Ayx2OuMXq5JQ8QRUUkR
- 8keBuQNkG3szcQ+jADJSKWFzl8cmrMuzxj/mAwMldFdeVyvplN3rz0kl+e+WDIQMQnQMGJWWF/w
- JFlSoiOTKnpJE4AMAERpBCO3YXHAAB2LF5wj9bXqY7Em3yz3rqPaua4MC6Yj/j3tSaPmt7ATNer
- k7bFoSSfj/Rk9ed7Kof099eCbmSoCMCUdtxs0ueusb1vt8NaMiMqXrGC4WGqtxd7t/4MeeQHLuX
- vwhyGSsOmPCYi5VEwz8+opYoE57CDGKbERj9cPBtKtQ8IrsFVSEYhu5mH+WeyG2+QBZHSibE03S
- L+5hGc5kzUvsdAnCvCA==
-X-Authority-Analysis: v=2.4 cv=JLquIMKb c=1 sm=1 tr=0 ts=6ae64dd6 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20261031150305.1107572-2-xiaqinghuan@mail.ustc.edu.cn>
+X-Proofpoint-ORIG-GUID: Ghqpo2gpwW0clFBnt0J6iB3bW0WTI5Dl
+X-Authority-Analysis: v=2.4 cv=Wtq+otfv c=1 sm=1 tr=0 ts=6ae64e82 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=CeVSD1skKhO3MnvAeOMA:9
- a=CjuIK1q_8ugA:10 a=iYH6xdkBrDN1Jqds4HTS:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=zRbll8i6zLBPDSgtwMIA:9
+ a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA4MSBTYWx0ZWRfX+Q2Fe0rTqkUw
+ lbDYcG2DWr1bm13PpbPvUlD9uJFN1cZ9eizTyzJSmTi2D3MtqvxwjwRmV0n0Z27Em/sqYO1h6X2
+ PEcc7lZCH5DAG6vBv8noVtdW/bN8+3A=
+X-Proofpoint-GUID: Ghqpo2gpwW0clFBnt0J6iB3bW0WTI5Dl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA4MSBTYWx0ZWRfXxH04paLIJrJt
+ ysyV39VOFQLTfnLFTIW0Nm3RxnPt9wOmN5SQfDAYDDYHosYOrXjhb2YB8qsb8s8nM+JNZbySI5y
+ xdZmYdGt00UW1PSfC1WBTebwbgMlbT4CwcwP+nxdhmGHKG8uRcyYglSHpug6CtV9Rr55PlzendX
+ ZHDtSj4HgpgHqTKmPDuqVI5aj4TA/uEiubBCydWcpjtP+v2w0muoemn0CTHa27wUrZghR/vXRR+
+ WBVyOqgE2O3Lzkx6/qq0dOCjQFLzVguNmj2Z15hRxsPRUZsTSOBVhrPvwIY+FVJ14W3ggRXF/5z
+ uRLjVccpyZufYgmWdK6L+RjvtYmxFfZYt/rCpSz+olYDrNoaz5kgXd+w3K+O47HTJ1mDJxqFq8Z
+ W5XG7/jrgIPn3WuqMw8GDQ/ke0cWCaOTTwHKQyJ2gbB/2pO7znUHhp+NwMBDH9ZFVNgZHZFD3bV
+ UNO2NTvIcwmcEpmGzaA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-31_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0
+ malwarescore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 spamscore=0 adultscore=0 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2610310081
 
-On Sat, Oct 31, 2026 at 11:03:00PM +0800, Qianhui Xu wrote:
-> *** AI-assistance disclosure ***: this series was drafted by a coding
-> agent (Pi) working from the author's design and measurements; the author
-> reviewed, tested and approved the final text. The design, measurements
-> and decisions are the author's own.
+On Sat, Oct 31, 2026 at 11:03:01PM +0800, Qianhui Xu wrote:
+> The bonded-DSI command path kept a file-scoped `static bool
+> dsi_bonded_cmd_failed` next to the global manager instance, so bonded
+> state was split across two storage classes. Move the flag into
+> struct msm_dsi_manager (msm_dsim_glb) so the manager owns all of it and
+> nothing mutable stays file-scoped. READ_ONCE/WRITE_ONCE use is unchanged,
+> so behaviour is identical.
 > 
-> The sm8750 (Lenovo Y700 4th gen, TB322FC) uses bonded DSI: two DSI hosts
-> share one bonded link, and the master is decided by the SoC generation.
-> This series is preparatory refactoring of that bonded command path,
-> carried over from the vendor tree:
+> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+> ---
+>  drivers/gpu/drm/msm/dsi/dsi_manager.c | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
 > 
->   - 0001/0003 move the bonded command failure flag into the DSI manager
->     state and route the command path through host ops, so no mutable
->     bonded state stays file-scoped;
->   - 0002 collects the per-SoC bonded command-path data (FIFO error mask,
->     CMD_DMA_CTRL bits, peer poll budget) into a new struct
->     msm_dsi_bonded_cfg hung off the existing per-SoC table;
->   - 0004 takes the bonded master link id from that per-SoC config
->     instead of deriving it from probe order;
->   - 0005 names the FIFO error bits instead of using raw magic numbers.
-> 
-> *** NOTE ***: this series contains NO functional fix for the Q28 panel
-> issue. It only re-homes data and names constants; behaviour is unchanged
-> (patch 5 is explicitly "No functional change").
-> 
-> The bonded command path that this series re-homes is the one the vendor
-> firmware lineage on this device (SM8750) drives; the series introduces no
-> new runtime behaviour (patch 5 is explicitly "No functional change").
+> diff --git a/drivers/gpu/drm/msm/dsi/dsi_manager.c b/drivers/gpu/drm/msm/dsi/dsi_manager.c
+> index 559c07a8b9..93d636220b 100644
+> --- a/drivers/gpu/drm/msm/dsi/dsi_manager.c
+> +++ b/drivers/gpu/drm/msm/dsi/dsi_manager.c
+> @@ -30,6 +30,7 @@ struct msm_dsi_manager {
+>  	bool is_bonded_dsi;
+>  	bool is_sync_needed;
+>  	bool is_sm8750;
+> +	bool bonded_cmd_failed;
+>  	int master_dsi_link_id;
+>  };
+>  
+> @@ -37,8 +38,10 @@ static struct msm_dsi_manager msm_dsim_glb = {
+>  	.master_dsi_link_id = -1,
+>  };
+>  
+> +/* Serialises bonded command transactions; the failure flag it guards lives in
+> + * msm_dsim_glb so no bonded state is file-scoped.
+> + */
 
-I'd say, I'd prefer to see the reason for the changes. The bonded DSI is
-seemingly working today.
+If all fields guarded by this lock are held in another place, then the
+lock should also go. Nit: please check the recommended form for the
+block comment.
 
-> Gates re-run on the final series:
->   - checkpatch --strict: 5/5 patches clean;
->   - make -j26 W=1 drivers/gpu/drm/msm/: 0 errors, 0 warnings;
->   - the series replays cleanly, in order, on top of 0f1fb1c9c1.
-> 
-> Qianhui Xu (5):
->   drm/msm/dsi: move bonded command failure flag into dsi manager state
->   drm/msm/dsi: add per-SoC bonded command-path config
->   drm/msm/dsi: route the bonded command path through host ops
->   drm/msm/dsi: take bonded DSI master cfg from per-SoC config
->   drm/msm/dsi: name the FIFO error bits of the bonded command path
-> 
->  drivers/gpu/drm/msm/dsi/dsi.h         |  21 ++---
->  drivers/gpu/drm/msm/dsi/dsi_cfg.c     |  51 +++++++++++
->  drivers/gpu/drm/msm/dsi/dsi_cfg.h     |  30 +++++++
->  drivers/gpu/drm/msm/dsi/dsi_host.c    | 123 ++++++++++++++++++++++----
->  drivers/gpu/drm/msm/dsi/dsi_manager.c | 123 ++++++++++++--------------
->  5 files changed, 249 insertions(+), 99 deletions(-)
-> 
-> 
-> base-commit: 0f1fb1c9c1c8f09c711e8e9a82acbde2baeed691
+>  static DEFINE_MUTEX(dsi_bonded_cmd_lock);
+
+Hmm what is your base kernel? I don't see these definitions.
+
+> -static bool dsi_bonded_cmd_failed;
+>  
+>  #define IS_BONDED_DSI()		(msm_dsim_glb.is_bonded_dsi)
+>  #define IS_SYNC_NEEDED()	(msm_dsim_glb.is_sync_needed)
+> @@ -51,7 +54,8 @@ static bool dsi_mgr_uses_bonded_cmd(void)
+>  
+>  bool msm_dsi_manager_cmd_failed(void)
+>  {
+> -	return dsi_mgr_uses_bonded_cmd() && READ_ONCE(dsi_bonded_cmd_failed);
+> +	return dsi_mgr_uses_bonded_cmd() &&
+> +	       READ_ONCE(msm_dsim_glb.bonded_cmd_failed);
+>  }
+>  
+>  static inline struct msm_dsi *dsi_mgr_get_dsi(int id)
+> @@ -374,7 +378,7 @@ static void dsi_mgr_bridge_enable(struct drm_bridge *bridge,
+>  	if (!panel->prepared) {
+>  		dev_err(&msm_dsi->pdev->dev,
+>  			"panel is not prepared; refusing video enable\n");
+> -		WRITE_ONCE(dsi_bonded_cmd_failed, true);
+> +		WRITE_ONCE(msm_dsim_glb.bonded_cmd_failed, true);
+>  		return;
+>  	}
+>  
+> @@ -646,7 +650,7 @@ static int dsi_mgr_bonded_cmd_xfer(const struct mipi_dsi_msg *msg)
+>  	ret = master_ret < 0 ? master_ret : slave_ret < 0 ? slave_ret : len;
+>  	if (ret < 0) {
+>  		/* Never reuse a packet buffer while either DMA engine is unresolved. */
+> -		WRITE_ONCE(dsi_bonded_cmd_failed, true);
+> +		WRITE_ONCE(msm_dsim_glb.bonded_cmd_failed, true);
+>  		dev_err(&master_dsi->pdev->dev,
+>  			"bonded command DMA failed: master=%d peer=%d\n",
+>  			master_ret, slave_ret);
 > -- 
 > 2.53.0
 > 
