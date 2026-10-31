@@ -1,71 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793423978;
-	b=dEP72avJ2pPFFdLj6TFdWm5pxm39YJYJKmAL7pBT93URnNJ8x8m6fNlGUkfZnnGglG5D
-	 jLBwri1W5RqOuphf6UgkSz5sGbkf7G6Hub3VTf40IR7lJMS0HMoBuDk8fc3ejnHflTP7B
-	 UbbrL+elqaA1KjVS71WO6iBlFPDNLQEbnh9vc+l+lIZT7lB4UipZIMh0fY2TR3xWlhbWw
-	 yz2muHVq6+Td2qVF5NPHnv/t+RMOc60BtVfxEIRdEs7PgjVoUmQdRT7xO/6ecMSWbic0X
-	 frKHR0Xq8ECv0EOF7bPzJygJDljc8AWT/5DovGoHdDG4dP0kwZG7IWNQqFQcZhcf6Kw==
+	t=1793424464;
+	b=TW6DetZNC46dmYp8Hy032xRbjTGkEORy7uZ6JWj32ozg8fJUYeXOJcKYJjjz8+skK+yM
+	 v+8TGmyu4xKm0aqsnT2f+XTNkC4nQDSQQWBaPhAMLzC2dAI1jwHlkucZuM7jf3/+56IYA
+	 sVoOvDZIkBQuszk6bT0SqmmgkHYyMmfBSWmoohaaGo1Kl2KYxmEAmONNyqt9yjFh2c3JB
+	 KpUKiYsqxvk2tCG2r9gFY1zOvxYqgk5WR1i5iWq5MRW/lttN2+7VRJ6aTUdgfzEzF+lXD
+	 pPq8ldSgMeVQ5wwPpAIambrQEAMZY+28RkPN/od66VpzpHcTtFexM6+auzTdSiYFHkg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793423978;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:Message-ID:
-	 References:X-Pmail-ID:From:To:Cc:Subject:Content-Transfer-Encoding:
-	 Date:MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=aTrjdhAZkYsM2rcSRWE3MAxfT10HTPL5Pfouv/xeRtw=;
-	b=f0S8nEWynGFyXS922aitM0VPwRqEYJyZxxwLmgj/SDK4JWKiS+1k5xjyWUzqRTyBRD2i
-	 SeDmgCQ59rkHihpPRloDQAgc759es7umptQpkti0fD9tNINorc8oIl0IM7VTjg2GQoCVM
-	 0vn/dywhmqpDRxH5Hal5BtN9wFIOUeKaR3MDRKwkoyylElDmkd5EW+E49aawDdXLtfO5n
-	 u9prep8mwPi42OW+VFjpdqkRLBW4ynVg8Yt0rmVMZyioaiL7q7hJxbamsWuOVnfj1fYFp
-	 4Zc7viSpFVYhCOyyn427lPYdLKwg/kon3bZM0XtB7cOTG33jKzIyZ2A33z9R++KwBzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793424464;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
+	 X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=RFyWw8vuZkBEx/wkkxZdiqnMcUj85ATVC8BmKduUB8A=;
+	b=kAhRT5G8+FDf2iVIg81MRg1HNbWdd6Mn+X2m0fjjvRggZA0bU7+sTc7Xsd3vvSVFDs8O
+	 NSjIspykEtxP0L1uyd2NPy5lcCjphurB7DFX7WcktySOinWl3VGCmNCL7jRSNKsyeE6dl
+	 2IMOYsPF1qdKyLYEgQMET+yRwJFKM7LULMr08yI5hstSShI+8vuFdYuk+oloodZH9Z+Xp
+	 /jgkWbJuamLQI2fcy0mWg5qIF05w9eAxnqLZ6RD693BVGYDZdjUdZR0TmGbAlzd0G8IkP
+	 nEzNBH2fRy7SjGTkwAnMJ/QE/ml29zH7WY8J4HOFCxhkVfjBmTYri07gnbhDm5XsovA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=brar.si;
-	spf=pass smtp.mailfrom=rsend.brar.si;
-	dkim=pass header.d=brar.si header.i=@brar.si header.a=rsa-sha256 header.s=resend header.b=CPXENnup;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=ZYZrUUFZ;
-	arc=none smtp.remote-ip=23.251.234.51
-Received: from e234-51.smtp-out.ap-northeast-1.amazonses.com (e234-51.smtp-out.ap-northeast-1.amazonses.com [23.251.234.51])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA79C606A31A;
-	Sat, 31 Oct 2026 05:19:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA79C606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=brar.si
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsend.brar.si
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=pHAApBGe;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B11A606A31C;
+	Sat, 31 Oct 2026 05:27:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5B11A606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=brar.si header.i=@brar.si header.a=rsa-sha256 header.s=resend header.b=CPXENnup;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=ZYZrUUFZ
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=brar.si; t=1793423976;
-	h=In-Reply-To:Message-ID:References:From:To:Cc:Subject:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=j30RlGk9uaAKzG/CjGIFRv7T5BN+RZPMz5USnZpOEec=;
-	b=CPXENnupum6hY+bn7mN2eUwZvZjAVrC2jL9X/1a2bASFFLwgflzsIgTVuNIfqSeo
-	QsQpq8vxqMnjUNi2azN5fPGi9qBxHl2AtctcBv3pFbMYV3oDSKLpukptIMQ3D+2T6pF
-	NnEYXZ5OxWTUloTydpiAugHL9en1zCLZeNUeScxQ=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793423976;
-	h=In-Reply-To:Message-ID:References:From:To:Cc:Subject:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=j30RlGk9uaAKzG/CjGIFRv7T5BN+RZPMz5USnZpOEec=;
-	b=ZYZrUUFZmhQR9dWjvM/194DChU2iHD/Hv22UGbmGybqsQf32WvNCUbsLL6V/AWSP
-	Rld517D0varKE4USh6UwebHy9Msu0nR2V5ICIZlxCD+b4Dln9orTpbIucCf4RicFePC
-	O3cODxPnfPP/3T7zeR0YEm+OXov1mViKmWN88uJI=
-In-Reply-To: <b0d99121-06a2-4674-bbc0-0edeb426e072@kernel.org>
-Message-ID: <010601a190662577-fd93bfc1-739a-45ce-9847-727776271c84-000000@ap-northeast-1.amazonses.com>
-References: <20261027-icc-sm7250-v4-0-f9bdaa3c1c7b@brar.si>
- <010601a17d6212dc-ed028a84-ea72-48e7-a4d8-fea315dc42cc-000000@ap-northeast-1.amazonses.com>
- <20261028-classic-sloppy-harrier-72dfcf@quoll>
- <b0d99121-06a2-4674-bbc0-0edeb426e072@kernel.org>
-X-Pmail-ID: <1793423974923.5b783470d46a@brar.si>
-From: Ishu Brar <patches@brar.si>
-To: krzk@kernel.org
-Cc: djakov@kernel.org, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-pm@vger.kernel.org, konradybcio@kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/2] dt-bindings: interconnect: qcom: Add SM7250
- RPMh NoC
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=pHAApBGe
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:Content-Type:
+	Content-Transfer-Encoding:MIME-Version; bh=RFyWw8vuZkBEx/wkkxZdi
+	qnMcUj85ATVC8BmKduUB8A=; b=pHAApBGergbRPvGIMagonHssWgXT06sEZ8c+R
+	i8I52oj8pw2iSLUUkbD69SeLCHnhnASc2u871g799/jojVmTi2tYpfqu5Qf/1LrM
+	HNGExz4zLGV0+FQo0BAoy5fa3SaFBa7OeWuJGvTNzRInWFfTwFB94r60K85B++cC
+	eIxXmI=
+Received: from [127.0.1.1] (unknown [114.214.177.113])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCHCT46fOVqfzVtAA--.5284S2;
+	Sat, 31 Oct 2026 13:27:22 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Rob Clark <robdclark@gmail.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Jessica Zhang <quic_jesszhan@quicinc.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/3] dt-bindings: display: msm: mdss-common: describe
+ additional block resets
+Date: Sat, 31 Oct 2026 13:27:22 +0800
+Message-ID: <179342444215.451721.1758131515489182461@mail.ustc.edu.cn>
+In-Reply-To: <d265dd66-d8fb-4fd2-b6cb-d50462e4b6e2@oss.qualcomm.com>
+References: <20261029123238.29877-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261029123238.29877-2-xiaqinghuan@mail.ustc.edu.cn>
+ <d265dd66-d8fb-4fd2-b6cb-d50462e4b6e2@oss.qualcomm.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Date: Sat, 31 Oct 2026 05:19:35 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,34 +74,69 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.5YL5VvZ+qZ0e19wo5UdMspzrKjMAjMWs/SlfuwHJq77JVCQWpVGwyETo7FaXf+sztO4bYMxF6WHssrYHSY+K7X2T1EZhOskwm44pQQStdKG0Jdj3d5ybzIXFkMTcPBXllY63oWIrFhJN26LFqLzTuHiXuqj9UCHxIuFhxi7IM0GCfceBHtKocmWdFsR9dK9X:1.ap-northeast-1.TOS0vxEE3Ar6ai29fkp2i/jb+l2iigajCGeLfF7S3sk=:AmazonSES
-X-SES-Outgoing: 2026.10.31-23.251.234.51
+X-CM-TRANSID:3pYKCgCHCT46fOVqfzVtAA--.5284S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Kr1UAFWUtw48KF4kWry3urg_yoW8tw15pF
+	sxta4Ykrs2k39a93W8Aw1jyFWxZ3s5GrW5AF15KryIvay5GF4Iyr47Ka1YvasIgrs7u398
+	tw4ag39xCFZ8taDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9ab7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
+	c7CjxVAaw2AFwI0_GFv_Wrylc2xSY4AK67AK6r4rMxAIw28IcxkI7VAKI48JMxC20s026x
+	CaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_
+	JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r
+	1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_
+	Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8Jr
+	UvcSsGvfC2KfnxnUUI43ZEXa7IUYTUDtUUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREQB2rk8FYCLwAxsz
 
-On Wed, 28 Oct 2026 09:10:21 +0100, Krzysztof Kozlowski wrote:
-> On 28/10/2026 08:59, Krzysztof Kozlowski wrote:
->>> +  clocks:
->>> +    items:
->>> +      - description: aggre UFS PHY AXI clock
->>> +      - description: aggre USB3 PRIM AXI clock
->>> +
->>> +patternProperties:
->>> +  '^interconnect-[0-9]+$':
->> 
->> We actually do not need to enforce -0: '^interconnect(-[0-9]+)?$'
->
-> Actually is this really a pattern? How many children are there?
+Hi Konrad,
 
-No, not a pattern. there is at most one child per provider:
-	aggre2-noc  -> compute-noc
-	gem-noc     -> mc-virt
-	system-noc  -> qup-virt
+One note on how this mail was written, since it matters for how you read
+it: I work on this board alone and my English is not good enough to
+write upstream mail unaided, so I draft with an AI assistant and edit it
+myself. The content, the measurements and every decision in it are mine.
 
-The other providers have no child. v5 would replace the pattern with a
-single fixed "interconnect" child node.
+you are right, and I will drop it.
 
-Should the binding also allow the child only under these three
-providers (and "interconnect: false" for the rest), or is the plain
-child node enough?
+MDSS RSC is not part of the MDSS block: the RSC sits in its own node
+(apps_rsc at 0x16500000 on SM8750), and the only reason I pulled
+DISP_CC_MDSS_RSCC_BCR into the mdss resets list is that the reset bit
+happens to be generated inside dispcc. That is a register-map argument, not
+a block-ownership argument, and the block-ownership one is the one that
+decides which node owns a reset.
 
-Ishu Brar
+What v3 will look like, so nobody has to guess:
+
+ - mdss-common.yaml: resets keeps "minItems: 1" with two array entries,
+   MDSS core and MDSS core INT2. The RSC entry goes away, and the
+   commit message says why.
+ - qcom,sm8750-mdss.yaml and sm8750.dtsi: resets drops to CORE and
+   CORE_INT2.
+ - drm/msm/mdss: unchanged, it still drives the whole array from DT.
+
+One thing I would like to flag rather than paper over: the reason RSCC was
+in the list at all is empirical. This board is handed over with the display
+block running, and on the vendor stack both a warm reset and a cold boot can
+end in the same panel-init failure (command DMA timeout, L1/L2 error
+counters non-zero). Resetting MDSS core + core INT2 + RSC is what makes the
+failure go away on that stack, and I have not yet isolated which of the
+three is load-bearing; I have only ever measured them together. So after
+dropping RSCC from the binding I will re-measure with CORE + INT2 alone. If
+that turns out not to be enough, the RSC reset will be driven from the RSC
+device, where you are saying it belongs, and not from mdss - I am not
+proposing to add it back here.
+
+Note also that the reset ordering caveat from the cover letter stands
+independently of this: mdss consumes dispcc clocks, so dispcc has to have
+programmed the PLLs before msm_mdss_reset() runs. I have no measurement for
+"block reset after the PLLs are up does not disturb them" beyond the vendor
+stack behaviour; that is still the open point, and if you think it should be
+answered before this series goes anywhere, say so and I will hold it.
+
+Thanks,
+Qianhui Xu
+
