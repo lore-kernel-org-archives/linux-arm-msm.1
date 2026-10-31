@@ -1,61 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793429742;
-	b=IKGQkxURHng/bZr2MUPnevz+8626IdMxzWCkw5KWviioKhvNBceL4mJGLC6IoqF78kaB
-	 /NYrT/OE9vXjCeA2thkUmPf8F5350STWjEC9WlShslDIi2/vbDHZXQ+2YzqgkgLQXXI0c
-	 2VXpHEwjFk+9zEafi61D8yRfikx//Ze5ACps5Id1rhnEHidx+cuPESLBgMeoWS4yvagOZ
-	 9/xeC/N2siB/oudWx4zb2Vk8XK5aRG1gwCFEEarYpjvaVudh+bEEDoWWJ/SJ3kNAqVxY2
-	 6kEh7LMuMmGh16RuqMqtYtUZo84zZAnx+8TUir32YAAzGtteUVIi8iUOlL9mdzTzuOQ==
+	t=1793431479;
+	b=Cn7WXqv51c8+hFp5WQ9BBnb+tSPS7PnGmp960qYMpJa/8G9jm0WZ9Rzm2ngRhOAijFAr
+	 U7CYKx/VdqGH42DUvkhhJ9amS5D5HCs5Cdhu+ZC+Jg+qH6TenjFZNE8eu6fRwH8ajTCwF
+	 R4ElxMdVIWH71C9pUPNLKgvNsaa4qcdQe/lHHSjc/sg6wYyEZA5s9hYrZKB1Qq7cmFSUt
+	 aP5j5UNjrSkueUhzlTpyV8lxmrhjCZUzL/kh0MOTZughok5gP2uD567spFjywWN5ZKRiw
+	 UbQ1Fhf2m6j+06GD7v5sfwAg09kYKtcOV9W1hZFeoF5Db9ughQ8Ut9ij04VkfNnqWvA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793429742;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=SEdjEblr5JTv/01ovHqdBX7PXNay+Hg4j6hwQn/V0PA=;
-	b=19S0T6iCeuX4UnChXRRV0/cw3Gc/q4biRVIC6CisY7TIowCDZbEpoJw0DrznvkNpjmKC
-	 4EweOsGYl3YkyXXJAghBFDYPmAGD0EZ6qs7buNHoSwAQl2tNllPsu9u0H7AdSfn1zdFkY
-	 WljfROSacfavXP1T2Eeu96MLQnYgXtP1SgHbw6sZdCSG/JLR/HPAqJL7j3sKR2h+4ZMXP
-	 bnzD+tezSeOupHGy6HHnCv9dFy3r31sBcIjNlL/QJAyA1GWU1fCGS9f5Rxo9Vzy+sFkKi
-	 aQZvI0NsiFwTi3ESCCo0f38mElYQs4XbUg+dq85vsRP08Qu4Hw3sxs/BzNaInlKSkdw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793431479;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=+VcJKDHccdacKhEQX5Ji6SUl5Y+cfn5EtztdU/+jkBQ=;
+	b=4OJPjWmTfH29vExJa4LZQpUSmYo5TVAqFvkwnVZ//h4VmwC2ysPcgj5PFMksT+5+5EWr
+	 guM4iP6eMpMHmEqF9PhaxqBTE54DvpGZC2A9jwmE7lWI3oZj+eNtagVnWjrFwsj/Pu8Dz
+	 8STki81ziCAMiRyUC+FJI0YjESt9Ex2OP3b3mPGzh5r2BOWNpuHftIF6pVlqRfWpHcOI4
+	 m3uMiXFNCJI7XmEiwfhjhPjqdpe6kdV89hn9QMmop2GzV1U4Ugx1xVQR7yF/NSgEF7u5E
+	 U2L6CcQPB1JZTZOpXfDWKGsGGAkKDqGAGLx3iYZqdcjw4xwCSSbdrF9q+vsegJijpDw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KWCCTvpn;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E91CE606A31F;
-	Sat, 31 Oct 2026 06:55:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E91CE606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="n/inNqA+";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=g6FPuDyz;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 523DD606A31D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 07:24:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 523DD606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KWCCTvpn
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=n/inNqA+;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=g6FPuDyz
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69V4lfDW226707
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 07:24:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	+VcJKDHccdacKhEQX5Ji6SUl5Y+cfn5EtztdU/+jkBQ=; b=n/inNqA+Ersd15X0
+	vDi/oojGefVPUmlV/iBGMQ5XFHw99gN0NRJBtk6rR9Su6UQBu0hqmrhNoRNESdMg
+	hAqqEF6+r7sykgggBMQ2BLmB6FVEjmYVKx4kgpxy5sRr9MlVyd1OrpvMVtdLAn3O
+	xFg4xzzs6Xeo+BZqYKqPs7XXS9+9y3ZwBs3Y3bZ820TGmj9d99+KjcjhEvCqmkUQ
+	620MO1DdI+1zbxO1cyI2sJXwPuLep8YVBQTMTZ6EjcQPFDWWZw/CZ1/6qnJ3pcd2
+	xA5PQuSjYtPGHgj3AvgmL9LTclTWlfw8PXyQAKg/8qE/HVsO93KhqH5qn5hjJ/p5
+	xlKvFw==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn9m98cjt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 07:24:23 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-341eff9e381so3354908eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 31 Oct 2026 00:24:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=SEdjEblr5JTv/01ovHqdBX7PXNay+Hg4j6
-	hwQn/V0PA=; b=KWCCTvpnJ2cuej5+Ww8I2GWBGIfJBSBhAR/Ze4RaMZYZAY1aBW
-	o53+eVWLYsB7nuglyAwUEbtR9QqvkHfOP02qILghocaY++5/ouvabJms2dKDMW1H
-	d5G2u0RX79zaQ1ecX/uyp08yePh4mjN64KE4Rgo+Hj5yV3OmpXKlFF3/8=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.177.113])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgCH_THmkOVqQXFtAA--.295S6;
-	Sat, 31 Oct 2026 14:55:37 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v4 4/4] arm64: dts: qcom: sm8750-lenovo-elden: describe the WL2868C regulators
-Date: Sat, 31 Oct 2026 14:55:34 +0800
-Message-ID: <9ef48d26aa4480b2dc1e20ad7af55f51aa22fec7.1793427041.git.xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1793427040.git.xiaqinghuan@mail.ustc.edu.cn>
-References: <cover.1793427040.git.xiaqinghuan@mail.ustc.edu.cn>
+        d=oss.qualcomm.com; s=google; t=1793431463; x=1794036263; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+VcJKDHccdacKhEQX5Ji6SUl5Y+cfn5EtztdU/+jkBQ=;
+        b=g6FPuDyzzo2aYxaGhq8VwYjQlqIkBx0IGbvQChwy2UShe3L9r+YwGC+LJrT242geSr
+         KGgXY45T4Zp8WKURV+9YPEXboHRne3iHWl8xBoZCduD4B0X3t7ZSwarS4GTS3vZ93KaP
+         VFTgIl2Gqr+/6d9Ig2mzChmUoMfH9jc50ixLNw5zW6JUz2+LbGyuvth1Rb1zWtAo1ys/
+         0+IQbFAQK6DqWm0ngfSaVKnsFfrowl5zaPJBe77aLb92nrgzDQ8SGRwXS8gAOYLUkRLT
+         LEMLojbqCxN9c4RL/SU1usn047oAHziGzmaCNpvjvbgIg/PSV/Ym6mhvJmP9bF5IldEF
+         Icpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793431463; x=1794036263;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+VcJKDHccdacKhEQX5Ji6SUl5Y+cfn5EtztdU/+jkBQ=;
+        b=q7AIwoHQPPBLNNnejYCXqDAsWpkw2iHqgLQ2xCdUFYqDnhlM4L3tv0vl6q6UY7sa8Q
+         lGNweW3462AbeHa1+yoeDUgVDw7oBI9aYuM37MyaGHQzL6wiPXEFIsPNEzh+F1W87B4b
+         UgHdcqY0zA24NHkShaM5SXTM44PHR/zl2ACpq/TXH51pNE7aChRFx8IhiY94NOm5EsXa
+         PqR1Skq/KdbiUpcxW1T0Hd042W5v/Yhy8yRDp8I+NXoPhzqBImbeaqyIRBAm/xAHP8lI
+         1qJExXYA9B5F+0McXPznZZ/R3XTub0dMEu8lRpMW7rzs3GrFKvlOxN10FKapaXeh9d4y
+         nxCA==
+X-Forwarded-Encrypted: i=1; AKwUvBzhHbCcFLG9vCYaHrZCODqSsSQ3YIp0TJbLIyTihh/F85qwAZhjJXqzZNeJFuT094m2nPWDMdMVPx9vQpS+@vger.kernel.org
+X-Gm-Message-State: AFq9FYJqEGMHwGzVGfPKvJV6r2JIx172O+CPhd2ZAj9DhvAezKdqeZMQ
+	jYgy9YrmJRPiFzmONys49HYfuvV3a7wHkbvO/W4sEMgwmGHZAGgOxARFQEAsjV8z+ZXiyrzscuj
+	qWz1W5aFiy78n0Z+b3AbPy1FzYO7ngMJ5A8tW/RXME5x9ehSKv/QQwL8eJrOkuhdrR2dn
+X-Gm-Gg: AYBFou0+26Ibmrjn8SCoCi7+yt6MQMGMJ14txDd/Xsn9Unuz7jeTpffidJDNWs2LhIz
+	jziYYUo5drXYh/WHSLOC9mp9cMYzCdOXbP1Vr+zZt6aprGT153f4Y3lZZCXQCNMlGU6QbgAYTq+
+	uTkg0iR4Q/YPjjJVlPDRm0Zr6yAQp+A8LadCczIWm2xL9vlxDODTsb9OBTqjl9zJSEjBNxMPA9X
+	nsNu35tQck9EPiD10QdntKqOT+rIAk5GUtYlQGMsB/pZrufOyCUrxQQccoQsvKJIy19j4S1tLfl
+	VAbaxHaX9LfcwQnc02+OCee0cbSO9IITPAlnnNNaKd9QNqYcQAcM8F2RydxSl4ZrbRhZpQNBBfg
+	yXZNe130+HlpAbl+Xj7N5EoXbOt73aVn2K9mV6VKa5pV+3aqNtltVeo408IeaeUfd8nZFDKj+CK
+	oai2A=
+X-Received: by 2002:a05:7022:ef07:b0:151:2e62:fe8a with SMTP id a92af1059eb24-1ac5e22897cmr7917025c88.40.1793431462677;
+        Sat, 31 Oct 2026 00:24:22 -0700 (PDT)
+X-Received: by 2002:a05:7022:ef07:b0:151:2e62:fe8a with SMTP id a92af1059eb24-1ac5e22897cmr7916990c88.40.1793431462126;
+        Sat, 31 Oct 2026 00:24:22 -0700 (PDT)
+Received: from [192.168.1.9] ([106.222.235.141])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac19f4a04esm13184910c88.15.2026.10.31.00.24.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 31 Oct 2026 00:24:21 -0700 (PDT)
+Message-ID: <f566e9aa-fa77-4ede-a4e2-df00bb4da6c8@oss.qualcomm.com>
+Date: Sat, 31 Oct 2026 12:54:13 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,248 +116,144 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] thermal: qcom: tsens: add hardware-bin trip-point
+ filtering
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+References: <20261002-thermal_bin-v1-0-5a29be7e8ec5@oss.qualcomm.com>
+ <20261002-thermal_bin-v1-4-5a29be7e8ec5@oss.qualcomm.com>
+ <7cd708de-a58e-47fd-acd4-0e37be77de92@oss.qualcomm.com>
+ <e832301a-6129-4697-a5e4-94671072622b@oss.qualcomm.com>
+ <e7788a12-3cad-4bd4-9f79-82cd118e0049@oss.qualcomm.com>
+ <991e6b64-8741-4669-9bbf-e31eed788f42@oss.qualcomm.com>
+ <310594f7-fd4f-480c-a2f9-844e3da73b0a@oss.qualcomm.com>
+Content-Language: en-US
+From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+In-Reply-To: <310594f7-fd4f-480c-a2f9-844e3da73b0a@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgCH_THmkOVqQXFtAA--.295S6
-X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1rXr15Xr45Jw18uFW3ZFb_yoW7KF18pa
-	nrZrs5Cryv9F1rKw4Yqa4I93Z5Wws5CaykCryjkFW5CrWFkFyDKFnFyryrJFyrJr4xAw48
-	JFsxZr9FyFnFyw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUPqb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
-	jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI
-	8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E
-	87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64
-	kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm
-	72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2
-	xSY4AK67AK6r47MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E
-	5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtV
-	W8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY
-	1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
-	0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
-	07j4GQhUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREQB2rk8FYCLwA9s-
+X-Proofpoint-ORIG-GUID: zfZt32oUIYiWv4yaSaBFc9kmmk64a-60
+X-Proofpoint-GUID: zfZt32oUIYiWv4yaSaBFc9kmmk64a-60
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDAyOSBTYWx0ZWRfX2dKdNwJRzs/y
+ Mve61o4FCS52ftoianZklNHzx1zurxXzNHLGwe4BDxloDFBEFiNrcxcMktEpOIdccC/XNYYgnFv
+ WKby55grdr0mUbgz+29zKcT4DSXZVLgo/ya+L48YqY42E4QOFBqGDwG0A49qYU44w9K/dcmEFw2
+ JcNyqK3D4Furxp4MxtzoCD7onH6JHSDzWQkig2O5UDqA/Qyb7OdLYI9Q566ZBpIN6fnOlEnljfE
+ acyDLlhQNF/9+AdmwxovE5R2SSUHXVtrzMI3BCVIiVR/Ta88b8THibXDeDyZCj55iUea0dcqZ1w
+ ypHYPZhlpLnQyVg+dMLa4nIc9uTmkYk6kKUEqGySxUTe5F+nCp4UokNeFzz8x2pBEE7YFux/Ap3
+ D9F67DQNDYXJILsq66O405vQ30ez3cmzQ/DIvtMObcNxdUU+aOhjMsegote2vQ74xaQQ0Jv8hni
+ E6jOIwsq6j3GtYy1otg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDAyOSBTYWx0ZWRfX4rI18ciLgmDh
+ giHTW7LrZdyhxrL73NGMgLOqS9H13C4WTH3DyGNiWnk9nmUdDUrdp49E96JTfVCN0SABTKdidvR
+ MUHFZSsZjUSHh0WlSABZjP9e+Xc5sxY=
+X-Authority-Analysis: v=2.4 cv=cfVHPXDM c=1 sm=1 tr=0 ts=6ae597a7 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=8wa5AUNoahJ04lRaSfAPWg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=mvxzE3OFXQA7EaUyAoMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-31_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2610310029
 
-The Lenovo Legion Tab (TB322FC) is an SM8750 tablet. Its camera
-devices are powered by a WL2868C camera PMIC on i2c10: LDO1 feeds the
-rear sensor DVDD, LDO2 the front sensor DVDD, LDO3 the front sensor
-AVDD, LDO4 the rear sensor AVDD, LDO5 the VCM VDD, LDO7 the DOVDD of
-both sensors and the VCM VDDIO, all at fixed voltages including the
-offsets programmed by the stock firmware. LDO2 and LDO3 are wired to
-the front sensor, whose binding is still pending, so its node follows
-with that series. LDO6 is not wired out on this board.
 
-The rear camera hangs off cci0 with the VCM. The front camera hangs
-off cci1 and arrives together with its binding.
 
-i2c10 is a GENI I2C controller inside the qupv3_2 wrapper, so both
-qupv3_2 and its gpi_dma2 parent are enabled alongside, otherwise
-i2c10 never populates and the regulators would never register.
+On 10/30/2026 6:08 PM, Konrad Dybcio wrote:
+> On 10/27/26 1:59 PM, Gaurav Kohli wrote:
+>>
+>>
+>> On 10/26/2026 5:21 PM, Konrad Dybcio wrote:
+>>> On 10/23/26 12:01 PM, Gaurav Kohli wrote:
+>>>>
+>>>>
+>>>> On 10/22/2026 2:39 PM, Konrad Dybcio wrote:
+>>>>> On 10/2/26 12:46 PM, Gaurav Kohli wrote:
+>>>>>> From: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+>>>>>>
+>>>>>> Some Qualcomm SoCs are binned at manufacturing time and expose the bin
+>>>>>> in qfprom fuses.  The thermal core's supported_hw_bin mechanism filters
+>>>>>> trip points by hardware version; wire tsens up to feed it.
+>>>>>
+>>>>> [...]
+>>>>>
+>>>>>> +    /* Hardware-bin values for thermal-hw-bin matching in DT. */
+>>>>>> +    const u32 hw_bin_std = 0x1;
+>>>>>> +    const u32 hw_bin_elevated = 0x2;
+>>>>>> +
+>>>>>> +    /* Higher thermal profile identification for qcm6490/sc7280 bins. */
+>>>>>> +    const u32 tsens_chip_id0 = 0x197;
+>>>>>> +    const u32 tsens_chip_id1 = 0x198;
+>>>>>> +    const u32 tsens_chip_id2 = 0x20e;
+>>>>>> +    const u32 tsens_chip_id3 = 0x20f;
+>>>>>> +    const u8 tsens_feat_id2 = 0x2;
+>>>>>> +    const u8 tsens_feat_id3 = 0x3;
+>>>>>> +    const u8 tsens_feat_id4 = 0x4;
+>>>>>
+>>>>> Isn't that (also) exposed over SMEM?
+>>>>
+>>>> Thanks Konrad, for review.
+>>>>
+>>>> SMEM has related socinfo data, but there is no exported helper for the
+>>>> exact fields needed here, such as feat-id, which is also used as the bin
+>>>> value.
+>>>
+>>> Is that different to qcom_smem_get_feature_code()?
+>>
+>> Thanks for review.
+>> I am checking internally and will update with the exact difference from
+>> feat-id. My understanding is that qcom_smem_get_feature_code() returns
+>> the SMEM socinfo feature_code, while this code needs the QFPROM feat-id
+>> field from the JTAG ID fuse word.
+> 
+> I traced down some code, only managed to find the sources for newer
+> SoCs. The JTAG ID is present in socinfo->raw_id. I have a Kodiak
+> (QCM6490) phone on my desk - the JTAG_ID part of the fuse reads as
+> 0x197 and the socinfo data reads the same. I attached a patch for you.
+> 
+> The feature ID is not exposed via SMEM to the best of my knowledge so
+> it needs to stay as a fuse.
 
-The board clocks (XO, sleep clock and the two divided CXO derivatives)
-that the SM8750 dtsi consumes are described here, as done on the other
-SM8750 boards; the board compatible was registered in the binding
-patch of this series.
+Thanks for checking and for the help.
+Since feat-id still needs QFPROM, let me use same implementation and 
+source the bin data from nvmem. That also keeps the approach uniform 
+across the targets handled by this series.
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../boot/dts/qcom/sm8750-lenovo-elden.dts     | 175 ++++++++++++++++++
- 2 files changed, 176 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 1c86e7e98f..a18fea7beb 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -406,6 +406,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-hdk-rear-camera-card.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-hdk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-qrd.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-lenovo-elden.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8750-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts b/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
-new file mode 100644
-index 0000000000..de186b4477
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
-@@ -0,0 +1,175 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026, Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include "sm8750.dtsi"
-+
-+/ {
-+	model = "Lenovo Legion Y700 Gen4";
-+	compatible = "lenovo,elden", "qcom,sm8750";
-+	chassis-type = "tablet";
-+
-+	clocks {
-+		xo_board: xo-board {
-+			compatible = "fixed-clock";
-+			clock-frequency = <76800000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		sleep_clk: sleep-clk {
-+			compatible = "fixed-clock";
-+			clock-frequency = <32000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		bi_tcxo_div2: bi-tcxo-div2-clk {
-+			compatible = "fixed-factor-clock";
-+			#clock-cells = <0>;
-+
-+			clocks = <&rpmhcc RPMH_CXO_CLK>;
-+			clock-mult = <1>;
-+			clock-div = <2>;
-+		};
-+
-+		bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
-+			compatible = "fixed-factor-clock";
-+			#clock-cells = <0>;
-+
-+			clocks = <&rpmhcc RPMH_CXO_CLK_A>;
-+			clock-mult = <1>;
-+			clock-div = <2>;
-+		};
-+	};
-+};
-+
-+&cci0 {
-+	status = "okay";
-+};
-+
-+&cci0_i2c0 {
-+	clock-frequency = <400000>;
-+
-+	rear_lens: lens@c {
-+		compatible = "giantec,gt9764";
-+		reg = <0x0c>;
-+		vddio-supply = <&camera_ldo7>;
-+		vdd-supply = <&camera_ldo5>;
-+		giantec,aac-mode = <0x40>;
-+		giantec,aac-timing = <0x7c>;
-+		settling-time-us = <7000>;
-+	};
-+
-+	rear_camera: camera@56 {
-+		compatible = "samsung,s5kjns";
-+		reg = <0x56>;
-+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
-+		assigned-clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
-+		assigned-clock-rates = <19200000>;
-+		reset-gpios = <&tlmm 11 GPIO_ACTIVE_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&rear_camera_default>;
-+		dovdd-supply = <&camera_ldo7>;
-+		dvdd-supply = <&camera_ldo1>;
-+		avdd-supply = <&camera_ldo4>;
-+		lens-focus = <&rear_lens>;
-+		orientation = <1>;
-+		rotation = <90>;
-+
-+		port {
-+			rear_camera_ep: endpoint {
-+				data-lanes = <1 2 3 4>;
-+				link-frequencies = /bits/ 64 <672000000>;
-+			};
-+		};
-+	};
-+};
-+
-+&gpi_dma2 {
-+	status = "okay";
-+};
-+
-+&qupv3_2 {
-+	status = "okay";
-+};
-+
-+&i2c10 {
-+	status = "okay";
-+
-+	pmic@2f {
-+		compatible = "willsemi,wl2868c";
-+		reg = <0x2f>;
-+		reset-gpios = <&tlmm 126 GPIO_ACTIVE_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&camera_pmic_default>;
-+
-+		regulators {
-+			/* Voltages include the offsets programmed by stock firmware. */
-+			camera_ldo1: ldo1 {
-+				regulator-name = "camera_ldo1";
-+				regulator-min-microvolt = <1128000>;
-+				regulator-max-microvolt = <1128000>;
-+			};
-+
-+			camera_ldo2: ldo2 {
-+				regulator-name = "camera_ldo2";
-+				regulator-min-microvolt = <1288000>;
-+				regulator-max-microvolt = <1288000>;
-+			};
-+
-+			camera_ldo3: ldo3 {
-+				regulator-name = "camera_ldo3";
-+				regulator-min-microvolt = <2816000>;
-+				regulator-max-microvolt = <2816000>;
-+			};
-+
-+			camera_ldo4: ldo4 {
-+				regulator-name = "camera_ldo4";
-+				regulator-min-microvolt = <2824000>;
-+				regulator-max-microvolt = <2824000>;
-+			};
-+
-+			camera_ldo5: ldo5 {
-+				regulator-name = "camera_ldo5";
-+				regulator-min-microvolt = <2808000>;
-+				regulator-max-microvolt = <2808000>;
-+			};
-+
-+			/* LDO6 is not wired out on this board. */
-+			camera_ldo7: ldo7 {
-+				regulator-name = "camera_ldo7";
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+			};
-+		};
-+	};
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <39 1>, <74 1>;
-+
-+	camera_pmic_default: camera-pmic-default-state {
-+		pins = "gpio126";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	rear_camera_default: rear-camera-default-state {
-+		mclk-pins {
-+			pins = "gpio92";
-+			function = "cam_mclk";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+
-+		reset-pins {
-+			pins = "gpio11";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+	};
-+};
--- 
-2.53.0
+> 
+> Konrad
+> 
+>> For this series, would prefer to keep the fuse-based path. The same
+>> binding is also used by the generic i-temp fuse bit for Hamoa/future
+>> targets, while the jtag-id/feat-id decoding remains only the
+>> Kodiak/QCM6490-specific callback. Please let me know if you are fine with this approach.
+>>>
+>>>> This jtag-id/feat-id decoding is Kodiak/QCM6490-specific, and the
+>>>> thermal-bin mapping needs both values. Other/future targets are expected
+>>>> to use only the generic i-temp fuse bit, like Hamoa.
+>>>
+>>> So there are variants of kodiak that ""incorrectly"" set the feat_id?
+>>
+>> No, Kodiak is not incorrectly setting it.
 
