@@ -1,69 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.173
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793527086;
-	b=UMoGmdsdIJsj95reHtlzTzAcCqsrklqNU1IeGaUyKe4hVMl89e7OmU3DQCRDUX76ReTg
-	 yHYIMRaqTmHQUvaEyNe+5aaGD/GSkz89Cf6qM+IX69gSE5B7vITfdnds5omyj4JhieqxT
-	 uD7mM+Ggm0+rqHenX2WIGOElKSl9o2ewgflZGa7Vc22/3iruH9cMwuVkh0p2nbP9uxpDI
-	 VyuB349VqV+aFVqPyjmChxuOtcIROcsK+bwUsbBdLXZ621vgoS7E9ugIkBV2K5OVNoVj+
-	 TgMUPnmnKKu3Bxx72MMOFBejwz5rAe2mPwqCtjs70jlkY3D4Wcp9cTvkF/UJppy+tdw==
+	t=1793527445;
+	b=2jR6sEaEztXK9OmkcHHE2fAWRa044ln4gswkIY0mXcZNzbQ/pLWKfRZE7KkFYQjv3sCN
+	 MPrS9JOz44k2w7Bb9OMzcUnLRY4zalMvXLvYuUL2iVTv747aefGYy9zme3JvJgbBno8XG
+	 0rOId/6vl0CYAH+2fkKVin3i8b8cTM4LNDc02exQVod08cp4pwR1SecbIdGR46oMAJp3w
+	 YkfIvseDR3cG1Pjkzk4/WD8NtoExE/evvTT0c80INPvmJlOt/Sp2kl18N0CHJsRArKMYV
+	 a/qiFOTCVApVD4w/mQuSM5s86VOJbU5vz8P62RRrNbt8UxqRKTWslWq33P03TRLAP3w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793527086;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=8xnBzjwCE8sPHtEp9RM3ZWkfBVkxawpnG/dVeRbBTaw=;
-	b=UTJV3hbU/YubkdzInH0PQceAYvVKqpTWJYlN3C7KHqufFXCWgBO2G3L/pNr1P6FOPCLI
-	 5lpr4far0q2S8fShnmVsZbz8d/u+Zri0dpjGfBdRqGHI0/zHc5RzSwqAEM4sbZ664hYpB
-	 /5lbtmiP+zxNF9RiWG1gUJuu2KoU+7uLE/YJIN3cA/Uu/LAtVa3OMRS5sVimVaCphSuqV
-	 x9KL+C3B1nMksYSq5yiAfZZyhJ8X+eANtTTK/P3FGAzej4+deoa1TIwDKn6EWTLCCdfxV
-	 j2XE43DSquDtRWhfTaNC+SGP3WMwne+JrgfP9jq2xhpkGSVP0dF0KSX3UpkE9ZAUwfQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793527445;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
+	b=yExZkmdLbhc7sHOnxwKWac9MlMXSG2fMPmaLSDhK8MsTzkdPe6FonbyTUZ5Dn4uAu4Ju
+	 hX90Y1N1DXdkp/B9pIWpPaPC8cAi7Tab3aqt9V60abDmXx3MGMdwf3rVTb17h70x06NeB
+	 HKaCHOGLaTfpIgt0l1C+0g3Yi70b0oVNbbH/jzJJVbNHacBf/DajH2fjTGvV8ZoLa6n1T
+	 dfNwFjLZGzE2ec+jltYpf1s996VumeiT7TlNFkdr8t+cFCD/3lMH53hpK6o0FldPfWAzl
+	 Q6owniQxqwSHgLjEwjN1DdRq0nHYIxgjQv+hPEhdZVL10C/LIF3de4NIy9pQk8J5nOQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=softbase.tech;
-	spf=pass smtp.mailfrom=softbase.tech;
-	dkim=pass header.d=softbase.tech header.i=@softbase.tech header.a=rsa-sha256 header.s=protonmail3 header.b=pPiSD5Lc;
-	arc=none smtp.remote-ip=185.70.43.171
-Received: from mail-43171.protonmail.ch (mail-43171.protonmail.ch [185.70.43.171])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TLOkA644;
+	arc=none smtp.remote-ip=74.125.82.173
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB98C606A324
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 09:58:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BB98C606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=softbase.tech
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=softbase.tech
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4898E606A325
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 10:04:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4898E606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=softbase.tech header.i=@softbase.tech header.a=rsa-sha256 header.s=protonmail3 header.b=pPiSD5Lc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=softbase.tech;
-	s=protonmail3; t=1793527082; x=1793786282;
-	bh=8xnBzjwCE8sPHtEp9RM3ZWkfBVkxawpnG/dVeRbBTaw=;
-	h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
-	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=pPiSD5Lc2qdIFUqqQ0hJX5aWFrXBB/VPR2bUzYhKQ3zX4/qdry12Pu8bAzmBtEYRr
-	 iPodWnQatHGVbNigMkL0mcx0JZ93rjajjkywKasIXm5+U/kpWYFOEp2dI2KsR82tbg
-	 vFPQ2rjpSBqo1GT8JHQ8G4AMCyRBPqonceDsf/Lz9nEOn9rfE1NVNS103Ofx3odV1r
-	 T0QrnAJ9gAlcnBTGUX9N4uf0IZwYZfWN/KPuGuAJQPox07kBBcbADeIdAqCw8V7GvV
-	 dsqJmz9GV1r49h/Qhv3abFIz49Volr3TMvesIbTkiPKRPjd+egr0vyon8hD+31gvnF
-	 SPFuSl0MsZTKw==
-X-Pm-Submission-Id: 4jHVdM62gvz2Scn7
-From: "Beat M. Liechti" <beat@softbase.tech>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Federico Amedeo Izzo <federico@izzo.pro>,
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TLOkA644
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-369f33df08eso4194935eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 02:04:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793527444; x=1794132244; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
+        b=TLOkA644h9HfpGw/SGS0NewdQGdEbuAjgwC6StfxYuB2bPe3WZ+EYXFOt4aEtJaIrh
+         BBq3fFtIm8e++mbwBzQ+fZSH22eTonM421VOxPrOpBbgCOOHE107pqLSy+czZBRMeUq4
+         TpaS5zs/fUFbM0nBc97gfHaxmVgwOLcU1oz5xqT38TmNJYGyOsXSVJ5cXNjXi3V6YOXx
+         DYuOuWLmVqnDSDy3mmMs+r3Jb6DZf43fcoaGuMWC1kO6OMB9xrJSZzUqjr899avlFJ5u
+         hJD0aVMe6ZKzT5fBN8mQVWpvK0b7/89Bv3F3T9pNqcD5e5KjqHhwt4I4ukZINp2YetK4
+         bbuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793527444; x=1794132244;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
+        b=pmjNIfEvbiz+NCQgg0HnaRKrfxFN4qyYbfSocYitnUz+7W7EW4/AZpel6n0ibnaBAS
+         ev2JAzKouUo5JlVp/eeJWjn0QfBsI5gpt4rbBYfej/MLXW/5XlOvmZc3TSoZAlM8usio
+         jJwWfMNBRma33IDpO6BSL1tBU4p9KGyUJp1t/KgXOdqzH/vCo6fAtnfs0iRP9OejtL3+
+         nYBSajNL1h9qIotGvIsqtF420CzEwiC2bouimFa1WQJ6D+gJ16tW6W91ULVvAM9CHbXY
+         jILORK0Jw2xKOM2IGTOncnnW3f6e3OerYb0o06RiFp95A4mjN9WxEdwNrtwBOfeOE4gD
+         MSQg==
+X-Forwarded-Encrypted: i=1; AKwUvBzvAftIsBhL71CIsQLAy2rh+YIU4zgCZ9Iq0R7PmbeKhe85wqIbhIDFo8iIbWhjhYpCyjjdUZGg6BZfYfRG@vger.kernel.org
+X-Gm-Message-State: AFq9FYIFl/Z76rAB9EqPzkiq0kIxjKjk4tGu6uqIkJRG0wEVlnHpiHRW
+	434XAeh4BpvLyzTVgjBwkZ5eHENCYyxrbCva0GjHh9Ziuv7tLiygNRCI
+X-Gm-Gg: AYBFou23r+Dt4iTv+F/I1F9MOuO1E1GRnbVWYbSAbZS4NcnIJGT5INum5juiA7Ai1+h
+	RRysgXIzq4K6rFHEiI2PygfljQPRQ0wgEQm9RgD5mT0OmdR4FzYGzpaHwg2ccRINl8kJ0s8j31v
+	MN7d4LejAIo+8dhJeD3k2KxEBG0FKrwfWehnRh9IcR19T9jqmxVRZ1S9v1cs20qEI0FSShwb4Cv
+	jSmWU121eZD3gn3ry9DGslg0ebrWmqgYA5o9PZ/nCO4BxkrGtnYWrU8F8TER0DNinGFz4B72HZu
+	SCZ6gk1ime4EQRJe71C9bl1l2fPdhaHTWBoETtgD/SoI04Vgc6B/Of9TwT+JE25hV4dPGD1FFLL
+	qT1Y4m95z99oLdd8AM+6iAXjjRXLwO4dTAkcLXj6KBqZmHpqkGQySl6vxGSM+tfYPIbbC/3l7nq
+	yBlLb5jaMIz2ZVr1fXjdNYLLGz4a+l/YujowuAxdUh+1xpYx0vuiZIekFrw1qQKDnBxI0TM1tQY
+	VKEoSjGG/g46s2K4Rf5X0bYxArIhLwOk7lXDYVxhs9OlwBysRGY1sYcGdoxaRTVIG/ebbPJ6JrB
+	duAqEAxSdYf80dHImvTQduOv73UjSxomTKb0j46CPBGYASvFdPbxZ4Z502UG3mOvO5mO7z1JGKI
+	TE07suQt4+9IGJoQiGXZQo8iSqSCEsgp/lIUeXnr7ePauAuLlzAaZ3VRoOKr7gh7wHYFCmzE5Je
+	IWfYu2
+X-Received: by 2002:a05:701b:4511:10b0:160:6a5b:7edf with SMTP id a92af1059eb24-1ac5fd0852amr9931498c88.44.1793527444190;
+        Sun, 01 Nov 2026 02:04:04 -0800 (PST)
+Received: from suraj-HP-Laptop-15s-fq2xxx.. ([2402:a00:163:3509:1f2e:5705:c23f:b6fa])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac194b5437sm26302562c88.13.2026.11.01.02.04.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 01 Nov 2026 02:04:03 -0800 (PST)
+From: Suraj Sonawane <surajsonawane0215@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
+	linux-gpio@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	"Beat M. Liechti" <beat@softbase.tech>,
-	stable@vger.kernel.org
-Subject: [PATCH] drm/msm/dpu: don't reassign resources on color management changes
-Date: Sun,  1 Nov 2026 10:57:45 +0100
-Message-ID: <20261101095754.33840-1-beat@softbase.tech>
-X-Mailer: git-send-email 2.53.0
+	Suraj Sonawane <surajsonawane0215@gmail.com>
+Subject: [PATCH] pinctrl: qcom: sc7280-lpass-lpi: add ext_mclk1_c function
+Date: Sun,  1 Nov 2026 15:30:30 +0530
+Message-Id: <20261101100030.15744-1-surajsonawane0215@gmail.com>
+X-Mailer: git-send-email 2.34.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,113 +102,64 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since commit 39a750ff5fc9 ("drm/msm/dpu: Add DSPP GC driver to provide
-GAMMA_LUT DRM property"), dpu_crtc_atomic_check() releases and reserves
-the hardware blocks of a CRTC whenever color_mgmt_changed is set, not
-only on a modeset. A commit that merely replaces the GAMMA_LUT or CTM
-blob of an active CRTC can therefore move that CRTC to a different
-CTL/LM pair without disabling and re-enabling the pipeline, and the
-hardware keeps scanning out through blocks the driver no longer
-considers in use.
+LPASS LPI gpio5 can mux EXT_MCLK1_C, but that function slot is left
+unnamed, so a device tree cannot select it. SC8280XP already names the
+same slot ext_mclk1_c.
 
-This is easy to hit with GNOME/mutter on a laptop driving an external
-display: closing the lid disables the eDP CRTC, and in the same atomic
-commit mutter sets new color blobs on the still active HDMI CRTC. With
-drm.debug enabled, dpu_rm_reserve() moves the HDMI CRTC from CTL_1 to
-the just released CTL_0 while its encoder is neither disabled nor
-re-enabled. A few seconds later the display SMMU reports context faults
-at the refresh rate and the external screen fills with garbage. Opening
-the lid again leads to a stream of "vblank timeout" and "frame done
-timeout" errors and the machine has to be power cycled.
+Name the slot on SC7280 and assign it to gpio5. The third slot stays
+empty; on SC8280XP it is qua_mi2s_data.
 
-Color management affects the topology in only one way: DSPP blocks are
-requested when either CTM or GAMMA_LUT is set. Handle that case in
-dpu_crtc_check_mode_changed() by forcing a full modeset when the
-presence of CTM/GAMMA_LUT changes, as msm_atomic_check() already does
-for the CTM, and stop reallocating resources on a bare
-color_mgmt_changed.
+This file also provides the SM8350 LPASS LPI driver, which uses the
+same pin table, so the function becomes available on SM8350 as well.
 
-Fixes: 39a750ff5fc9 ("drm/msm/dpu: Add DSPP GC driver to provide GAMMA_LUT DRM property")
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Signed-off-by: Beat M. Liechti <beat@softbase.tech>
+Tested on the Vicharak Axon Mini (QCS6490): selecting this mux slot
+drives the codec master clock, and ES8388 playback and headset capture
+work. Not tested on SM8350.
+
+Signed-off-by: Suraj Sonawane <surajsonawane0215@gmail.com>
 ---
+ drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Notes:
-    Testing: ThinkPad T14s Gen 6 (X1E78100), GNOME 50 / mutter on Wayland,
-    LG 4K60 monitor on the HDMI port (DP to HDMI bridge), logind set to not
-    suspend on lid close while on external power. Without this patch every
-    lid close reproduces the corruption and hang described above. With it,
-    closing and opening the lid produces no SMMU faults, vblank timeouts or
-    frame done timeouts, and both displays keep working.
-    
-    That testing was done on a v7.0.14 based distribution kernel (Ubuntu
-    7.0.0-42.42). On msm-next the patch has only been compile tested (W=1,
-    no new warnings), not run.
-    
-    Open questions:
-    - Like the existing CTM check in msm_atomic_check() (see the FIXME
-      there), this sets allow_modeset on behalf of userspace when the DSPP
-      requirement changes. Rejecting such commits without
-      DRM_MODE_ATOMIC_ALLOW_MODESET would be stricter, but could break
-      compositors that toggle GAMMA_LUT at runtime (night light). I am happy
-      to change it either way.
-    - The RFC "drm/msm/dpu: Force modeset if new CTLs have been reserved"
-      (https://lists.freedesktop.org/archives/freedreno/2025-March/036824.html)
-      addresses reassignment without a modeset in general. This patch only
-      removes the color management trigger.
-    
-    The root cause analysis of the drm.debug trace, the fix and the
-    changelog were developed with an AI coding assistant (Claude by
-    Anthropic). I reviewed the change and tested it on the hardware above.
+diff --git a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
+index a61df10d4..278d5fac8 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
++++ b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
+@@ -34,6 +34,7 @@ enum lpass_lpi_functions {
+ 	LPI_MUX_swr_tx_data,
+ 	LPI_MUX_wsa_swr_clk,
+ 	LPI_MUX_wsa_swr_data,
++	LPI_MUX_ext_mclk1_c,
+ 	LPI_MUX_gpio,
+ 	LPI_MUX__,
+ };
+@@ -77,6 +78,7 @@ static const char * const i2s1_data_groups[] = { "gpio8", "gpio9" };
+ static const char * const wsa_swr_clk_groups[] = { "gpio10" };
+ static const char * const wsa_swr_data_groups[] = { "gpio11" };
+ static const char * const i2s2_data_groups[] = { "gpio12", "gpio13" };
++static const char * const ext_mclk1_c_groups[] = { "gpio5" };
+ 
+ static const struct lpi_pingroup sc7280_groups[] = {
+ 	LPI_PINGROUP(0, 0, swr_tx_clk, qua_mi2s_sclk, _, _),
+@@ -84,7 +86,7 @@ static const struct lpi_pingroup sc7280_groups[] = {
+ 	LPI_PINGROUP(2, 4, swr_tx_data, qua_mi2s_data, _, _),
+ 	LPI_PINGROUP(3, 8, swr_rx_clk, qua_mi2s_data, _, _),
+ 	LPI_PINGROUP(4, 10, swr_rx_data, qua_mi2s_data, _, _),
+-	LPI_PINGROUP(5, 12, swr_rx_data, _, _, _),
++	LPI_PINGROUP(5, 12, swr_rx_data, ext_mclk1_c, _, _),
+ 	LPI_PINGROUP(6, LPI_NO_SLEW, dmic1_clk, i2s1_clk, _,  _),
+ 	LPI_PINGROUP(7, LPI_NO_SLEW, dmic1_data, i2s1_ws, _, _),
+ 	LPI_PINGROUP(8, LPI_NO_SLEW, dmic2_clk, i2s1_data, _, _),
+@@ -118,6 +120,7 @@ static const struct lpi_function sc7280_functions[] = {
+ 	LPI_FUNCTION(swr_tx_data),
+ 	LPI_FUNCTION(wsa_swr_clk),
+ 	LPI_FUNCTION(wsa_swr_data),
++	LPI_FUNCTION(ext_mclk1_c),
+ };
+ 
+ static const struct lpi_pinctrl_variant_data sc7280_lpi_data = {
 
- drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 26 +++++++++++++++++++++---
- 1 file changed, 23 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-index 42d0a529b..3b304a896 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-@@ -1516,6 +1516,20 @@ int dpu_crtc_check_mode_changed(struct drm_crtc_state *old_crtc_state,
- 	    (!clone_mode_requested && clone_mode_enabled))
- 		new_crtc_state->mode_changed = true;
- 
-+	/*
-+	 * DSPP blocks are reserved only when CTM or GAMMA_LUT is set (see
-+	 * dpu_crtc_get_topology()), so enabling or disabling color management
-+	 * changes the hardware topology. Changing resources on an active CRTC
-+	 * requires a full modeset; otherwise the CTL/LM blocks get swapped
-+	 * underneath a running pipeline.
-+	 */
-+	if (new_crtc_state->enable &&
-+	    (!!(old_crtc_state->ctm || old_crtc_state->gamma_lut) !=
-+	     !!(new_crtc_state->ctm || new_crtc_state->gamma_lut))) {
-+		new_crtc_state->mode_changed = true;
-+		new_crtc_state->state->allow_modeset = true;
-+	}
-+
- 	return 0;
- }
- 
-@@ -1534,9 +1548,15 @@ static int dpu_crtc_atomic_check(struct drm_crtc *crtc,
- 
- 	bool needs_dirtyfb = dpu_crtc_needs_dirtyfb(crtc_state);
- 
--	/* don't reallocate resources if only ACTIVE has beeen changed */
--	if (crtc_state->mode_changed || crtc_state->connectors_changed ||
--	    crtc_state->color_mgmt_changed) {
-+	/*
-+	 * Don't reallocate resources if only ACTIVE or color management
-+	 * values have changed. A change in DSPP requirements is turned into a
-+	 * modeset by dpu_crtc_check_mode_changed(). Reallocating on a plain
-+	 * color_mgmt_changed would move an active CRTC to different CTL/LM
-+	 * blocks without a modeset, leaving the hardware scanning out through
-+	 * stale CTL/LM state (SMMU faults, corrupted output, vblank timeouts).
-+	 */
-+	if (crtc_state->mode_changed || crtc_state->connectors_changed) {
- 		rc = dpu_crtc_assign_resources(crtc, crtc_state);
- 		if (rc < 0)
- 			return rc;
+base-commit: cbbddb6b08cc9900a87cccaa9b22bbe06aa4f50a
 -- 
-2.53.0
+2.34.1
 
