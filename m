@@ -1,48 +1,48 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793571386;
-	b=uegkSSrdj1fc2e4Akf+qtIrENfoSDbhXW18BmOIiw5bEwR7qJ9427uekikHJLClY7iG6
-	 Q1RoOeGi88kTd1RnyE7z0UDcVFaO5MlKWxVJ2iWj9a1bRF277UgbSqu8WGErGeB40rTtR
-	 l8tw5/yXK3ODypXvIqhkgbI7nWFOAJZFBc/hDi1D9sRWSpUFzbnoBLDjgx5XNuTqP4THl
-	 zdEfzAQAslDHGaTzmwMSUSKHVlWurO5FDECw5J+T4tUdEN6NFPVbLleWDGha2aRJCkALs
-	 VaRG+L5EBWNL9SGhB1JvTOCAAX4PLoF/R7Or5V5Q4+UY2Dfigw8FbP1gCUA8X9jH8xg==
+	t=1793571398;
+	b=uAkE1mH8dEC9rA9N1RmuIe2FzxJozA2DpTSBBzgqfNe+icbVINnq8Fe+dTjv4Nxsky/W
+	 lAi4f/9BjbNPjor2IH43gtA9LOZ+qhz8WQl36xBC6NGhAmYJtZkMHfrLBZ0Z96ws5PeXD
+	 hitaT9Macvic/jXiDTyxNwkJAfw/16FliP7hPeedUwrRqIy6pPHdRlPn+czypyFWxAsAw
+	 zdpekaW/8IhlcifUQCprgoBEe7fUvfgML05okQmIhwRzGZGtyuIOZwYMaYMVAtwrjV3/u
+	 XbUvBPimX2GTS8p5d2hKz3tVulppjDdfc4uduivGmVyRfgVCaX9PN47wbDCWuC6Wm3A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793571386;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793571398;
 	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
 	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
 	 In-Reply-To:To:Cc;
-	bh=gxnzr9CHNsaian4NJ4Y2SZ//tSxSvWjL6cChQq4Rrpg=;
-	b=l80YHkV52F2gt51EzwZeFxJy5HNVFgxwiE1KI8kv94t7HVGImOln6/BG4QR4SCZUpjJM
-	 qntsbBmhcSRO19Ff3+KNFn7P9Vcv9+3zPTGjGlU6kI/Mq2f764+9BF+tIq6UbjjkB/NWa
-	 1P6J7Btx/4ZLam318BItks6bMudu1hD3UB45+buSKsDJeOZtk9YR19uMqhVu9rCgBT/wq
-	 7MruZjbWoXb7/raT04zk/DXViSs2qS2AsW+pEFm9uLTg4RETiAWcjDFuyGBRRhfn5FtTy
-	 cPWR6u4RHQD+yD39LwHnevxabXn+EHK/fSKxRbdlnxx70FbOEuhDcapgj2tGX3QS0fQ==
+	bh=jgMNL39llvWo9fpC9p/QMlWjuszkHAxcrG1aLPRLi8g=;
+	b=wfIPuix1zr65J1mj/2W+lfiKY+YLAXSDmHPTXcL/ICAaoP3bLmv3BdXOMbFpyWuGu/Xb
+	 iYsHR0riojgZ+T6wqf3sHj180dGS7npbhR2b4pC8qClwAkpSwjSeYcOHmd7DxE1ef3/tm
+	 J2yuLqEBqq93xsGyt3WjwlHYu0woHe4fkhnW0o8lhZzRgNOYQld3SY36pQkkOhkazLG/i
+	 6mMv4I7lOqfRL8Z9um4TM6XjzKnuPA+SjLH66H+Vb03wsBWkzck4p5KIwvFB60UzHh99Q
+	 HlwvHRBzl3ahL0H73LaCg7CjTUTayLukrpkbkKq20TigNIhgIBacdJtbC53Tdlii+2A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hq7DLy2T;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XYeaF+lL;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4464F606D103;
-	Sun,  1 Nov 2026 22:16:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2584606ECF1;
+	Sun,  1 Nov 2026 22:16:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hq7DLy2T
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C51A31F00A26;
-	Sun,  1 Nov 2026 22:16:25 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XYeaF+lL
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 495611F00919;
+	Sun,  1 Nov 2026 22:16:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793571385;
-	bh=gxnzr9CHNsaian4NJ4Y2SZ//tSxSvWjL6cChQq4Rrpg=;
+	s=k20260515; t=1793571398;
+	bh=jgMNL39llvWo9fpC9p/QMlWjuszkHAxcrG1aLPRLi8g=;
 	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=Hq7DLy2TQoJ0Ctl5IHF974aTyizAE09VgM/lIznCEBIAPBAzCRF6N0R6vMGfDQh88
-	 ZzPnuzDoBeE59eORO+BV0CP3mKm6caXiWgsMajU+RMHLYEpNy7F7IvqZtfGtSzb29K
-	 OvLauvqUW3TWoZ+1XhQsjBL7O2SJwFzOsE3jOwNF2NV2w3SXAkwTTeblh91ABtpkcm
-	 rRZbhpvWSbslYoDRFymzfG2rD+hEI3xAYDyP9byGoARdlKLPfvjqA5rrocNCwSJghT
-	 3KtfqLzX2TYvpSyLxOW10IX8GiNIaZkm7iWKzry57L096cm4ZRvK26YWCxg4MWsMK5
-	 sEA5Ul+BEotnA==
+	b=XYeaF+lLG+zcg+MoYoZlG0y/uk5q8MRTTDbq8BkdvkzUFl9Vun1ihD1SxAc2ECy16
+	 z4DWocwx1WWi47Oj9QiNtJ6jmhL7zmf5bxeoWHoY4yzM2kZQfolcuIAWxK+jS7cm07
+	 fmwAg/Ivw2hGS6A7TJkYkC3exTpBiM5aaokwLR9TjbsfP3pWR5EZZp804p7drBfMd8
+	 frNkLhYzNMl5ef+Cj82eXGRsRKL/A4gC1aPR37M48qabULeNXZFgqSenEBQ9QKLwWw
+	 Vzz4O5/hem3VSNyc/YuAn2p3V4AP0T1bhoNHZjIEalvXnARs3fwKPBkflkTi+V8isn
+	 Z38bORaSKlOQw==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id BA2C638003B8;
-	Sun,  1 Nov 2026 22:16:25 +0000 (UTC)
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 4020238003B8;
+	Sun,  1 Nov 2026 22:16:38 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,40 +54,43 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] irqchip: Use named initializers for acpi_device_id
+Subject: Re: [PATCH v9 0/3] PCI prerequisites for PHY consumer/provider split
 From: patchwork-bot+linux-riscv@kernel.org
 Message-Id: 
- <179357138429.2624073.5733369311209292789.git-patchwork-notify@kernel.org>
-Date: Sun, 01 Nov 2026 22:16:24 +0000
-References: <20261014-acpi-irqchip-v1-1-821917378de3@thegoodpenguin.co.uk>
-In-Reply-To: <20261014-acpi-irqchip-v1-1-821917378de3@thegoodpenguin.co.uk>
-To: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Cc: linux-riscv@lists.infradead.org, maz@kernel.org, lpieralisi@kernel.org,
- tglx@kernel.org, radu@rendec.net, anup@brainfault.org, pjw@kernel.org,
- palmer@dabbelt.com, aou@eecs.berkeley.edu, alex@ghiti.fr,
- rahul@summations.net, samuel.holland@sifive.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
+ <179357139679.2624073.13873851750746305916.git-patchwork-notify@kernel.org>
+Date: Sun, 01 Nov 2026 22:16:36 +0000
+References: <20260810124315.433448-1-vladimir.oltean@nxp.com>
+In-Reply-To: <20260810124315.433448-1-vladimir.oltean@nxp.com>
+To: Vladimir Oltean <vladimir.oltean@nxp.com>
+Cc: linux-riscv@lists.infradead.org, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-omap@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, spacemit@lists.linux.dev,
+ linux-tegra@vger.kernel.org
 
 Hello:
 
-This patch was applied to riscv/linux.git (fixes)
-by Thomas Gleixner <tglx@kernel.org>:
+This series was applied to riscv/linux.git (fixes)
+by Bjorn Helgaas <bhelgaas@google.com>:
 
-On Wed, 14 Oct 2026 12:00:43 +0100 you wrote:
-> Use a designated initializer for the acpi_device_id fields which makes the
-> code more readable and consistent with how lists are initialized in the
-> rest of the kernel code base. Also drop explicitly setting fields to 0
-> where it is redundant.
+On Mon, 10 Aug 2026 15:43:12 +0300 you wrote:
+> "[PATCH v8 phy-next 00/31] Split Generic PHY consumer and provider API"
+> https://lore.kernel.org/linux-phy/20260505100523.1922388-1-vladimir.oltean@nxp.com/
+> became unmanageably large for a single patch series and needs to be
+> split per subsystem.
 > 
-> Unify the list terminator to have a single space between the brackets and
-> no trailing comma.
+> Here are the patches pertaining to PCI extracted out of the larger
+> series.
 > 
 > [...]
 
 Here is the summary with links:
-  - irqchip: Use named initializers for acpi_device_id
-    https://git.kernel.org/riscv/c/5919f587ea37
+  - [v9,1/3] PCI: cadence: Preserve all error codes in cdns_plat_pcie_probe()
+    https://git.kernel.org/riscv/c/fe108800a865
+  - [v9,2/3] PCI: Add missing headers transitively included by <linux/phy/phy.h>
+    https://git.kernel.org/riscv/c/a685daa02d97
+  - [v9,3/3] PCI: Remove device links to PHY
+    (no matching commit)
 
 You are awesome, thank you!
 -- 
