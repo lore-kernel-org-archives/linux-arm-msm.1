@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.174
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793556054;
-	b=Y6IGGuChrvxAuffiQvNJp/FIGpSmGk5YXPnHdXse3F1Xoi31JtQcy2jFdt3WmVpOn0WD
-	 qbzRiz8M+NcpSEqzAiedx4cNRQVJesk25ZANK3YOiyTJRUkTKbtX8VWkccnDnKF6DBPyC
-	 xQeJZLPNmEp6GV1TXOQEimkTtLl5UoPhD4RL9eZHCjHB1gNxH8v4ZF8xxzVBSuV2Ym+LU
-	 BFlGVpchlUz0+1e3fL76C9KL6Is9tsqxCLc7fSiBissJsDFccXoXnOjq1JfWrMpJd2fcO
-	 uucwWDTYFxd0qivfgxHr70DaEqxqxeKv3faXozSO2ioyYtrK7NYnYpqyZtNyXhHnofA==
+	t=1793556337;
+	b=t2T/LKKhUDG6xrn8NnX6C7nKz0RzVONArRtzt+lapPdGpKkKQkKH11hHTKK+GEg39gBn
+	 FqB3uDsSBYTcHJ/2tn3/H+G1Dv6uiebTYhMJyoMKVxu092oIkj54e9t268oasAjtBCoDM
+	 af+AybVHRz7OAhhLmcrRmsI4qX/GevAs5zy9zKrC8fav03/C6fgSRwI8c3c9hgMjNm9Cm
+	 a8u7kwSNHt2l148B9z48IY1RpcYulvLlTB4Alpji6dIJm6X2q2WyG/D/D2g1RXg+3wWhR
+	 saLCGZj4VD2uHXnEYaYT+IPGvaFv5/rjY1eOSN3zygucJLYkf1d0Bpf7IIa9aPiCRcA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793556054;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793556337;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=I/g7B1/2uK+SOUUXwB/iWNiLNLGu8eYWyxjyco9QARM=;
-	b=bh48xsRaNcPHhHkre6egO+qESc25NBax9fDJvaHzdJPn+MxjlaCXIqq8hCa38EX7uXvF
-	 eDaiGVF7PbTeJ0KmfZe2YR6tZVjp+7UND47qYQvzWyHW/GdMoxmeUbo8ovgFkRVy4yPEW
-	 DC/NQGukDV8ouKMVuSs+KYmkjox7QO6vJR7dQsYJtP3jUksWra42IOnb22HFEHamBz+1n
-	 9BgNYnOhsqYem+N6zYYbwDgxsouYJaS6dxbLlCg3Donub8WxlZFfOIG1aj8ACZr5N6kM4
-	 sjPOtc82T+3xYkYVvbe4g+DQ3Q99rlZXPVcj07oYQIrPoycDgjAd6LpuGIdFL/hsveA==
+	bh=KZfx8zG3lr0SxJdej5NZrOvMKfAGpQe9QBAGg9mMie8=;
+	b=n9wJUsQ5PbCVy1pA3ilUEHKmaBuUkRtawR6gDut0JP0dHwTJdPyfclEU2LJ5xCSuQNk4
+	 Jit3Eqp9y2ZLiMkW2MsLwaRMYaAqHbVjcONPcH4/thgtHIGZwFC4zog/NOMeELrw80RR8
+	 sn91V9UZ7PqytatvGixXIeJJeNQEMb3fmRH2XiFvVk+6sfE8XBNJL9l3toYnyZHwh3lI9
+	 1lSy3fT3Zk9FXTnthcIYpuqR00oLqis4v9xthZBctzDmPbHdUgA0TM94S/GAXt+GBNQlz
+	 vhpz7DNg+RFeoFee8lClMc+7MGBHXiAsGj+RtWpYxilKH7pk9QAI4p6CIjWMBfm/9Dg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=f+X3GMRa;
-	arc=none smtp.remote-ip=209.85.215.174
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xkBZBrhz;
+	arc=none smtp.remote-ip=209.85.210.174
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7FB0606A329
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 18:00:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B7FB0606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C054606A324
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 18:05:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3C054606A324
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=f+X3GMRa
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc147d86bebso1527138a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 10:00:53 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xkBZBrhz
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8a9f9473029so1550843b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 10:05:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793556053; x=1794160853; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793556336; x=1794161136; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=I/g7B1/2uK+SOUUXwB/iWNiLNLGu8eYWyxjyco9QARM=;
-        b=f+X3GMRa8dHuSvPGNmbg698/siJqTGuU0Ry6L0u62GzIWUarciz5VcReeKaa3yv5XN
-         FwK6VsAbEt0/GlEWrMXghRRNqoXKUQR60eCv5AEm6/eSljrqZaxejkmiHvz77NP8Ud7f
-         9lDc15JA6e8wPtlciw0bjBVBdvv6qSohd5u6JpEJqDe0ED/2rCDj0TltQvqZh8mFbSAs
-         H/Uxanlwf9E1imbwZJmjo5Mqtl9OHnEaUBGZRLqLJT6p8kzU+W+ceanE1HSdFt71vd/Y
-         g5lxmCc/pcq9EGbgPa7dut0PCM0M4JfbmXtu9ZiCuC71zcNRLBRCqpiJqqC8OXfQmtdW
-         nNSg==
+        bh=KZfx8zG3lr0SxJdej5NZrOvMKfAGpQe9QBAGg9mMie8=;
+        b=xkBZBrhz35b1PtVI3eDzsXibSRdAnSrMXguCCo3D1eUCyG0jBF5Exo4cXt8kSKSMFt
+         w5+0p+bsWxKcqGCSAOo5YSKu8uWNn+KYw1xmp302oQ/wXTG9PCbSF8vo0xVBIzKxMcOp
+         MkDhNibvjQlpV0a2/skrJP7x6IRyEnyg0Cf99BzB16LdRK8HY+l9Qq88RRIARUmbPRRm
+         jNU/0Dx4D3fXDdsNWYnLzPc+X2kARabg8umHOvCr4GgjqrwAIlznJCFVOSZ9CnP0Q5tZ
+         G7RzXprwQ8Gqgbi8ZDCEgZIBcyZs9alsut6IYf+JxgUD9eNyTWrT1j20lqhCKHwn9keb
+         rS7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793556053; x=1794160853;
+        d=1e100.net; s=20260707; t=1793556336; x=1794161136;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=I/g7B1/2uK+SOUUXwB/iWNiLNLGu8eYWyxjyco9QARM=;
-        b=p3i1Qvh76YbctsKhu3NJ5SyPAgVJCNNhIm8vZcP+dTQrTlm0ySdfYeDkn9G9Bfox3t
-         GjIyc7IjXyezj5QThfme695UBrtzhL7KLBAJ95lwTkj1LmP1LQIOSS0/qoR2OpFEkBus
-         aMFhi+talgT6sdvlU63JRlSKv0E8akH1dgqBQPlMAK8dFZgANXaWi4urPgSH6zN2X1VF
-         3CPIDW1u1zcOVejPnxhVW5Pu9Aj+maxNYmZblbPXSq6/Gh9evsFOHGcCnlOfbzUSfpqG
-         giLlhLFh3kvnqbC/zT7QZb4nFvzjicuwBviJhTXDRu0sqrAO6DXO89o1L5YI6QXwwuRS
-         +kgA==
-X-Forwarded-Encrypted: i=1; AKwUvBz0C1AZzGubgUPeslkmEmyqKb6a3ScRFoMFjcxPHlFJ4Ndc1fOBNaPpLaYhGAKaLyQcgcMPzLjeD3Pg71UX@vger.kernel.org
-X-Gm-Message-State: APuU4Z8KusX/gz0Lege22X0AMgvkC6C8tcazNTMzHbdnQR4BveP2UuPF
-	EvPpktb3lVPhNcNNIcJRHtd8Gzy23/TcJRkVC5gqOEuPX7DERgAd5OuI
-X-Gm-Gg: AYBFou1zW5TyiAek7BdD3v0IgD3vbL+RlMd5glwTQfkfzoHAaa4hpFMBjEwronTo4UN
-	CqSOEib886EUTN6dyhtBZF1+J4iGqDAmG+t3hfFRN3NB2nzFuFA7CId9jup7Cqjj0E69Aen295l
-	Tp4K8B/V9UVDJneLs15gfr53fGam5gM3LyvWH3zpmuPUAefSKxUI3oB3xySRHH1zfKcr4Gny3cL
-	V4cEb90VqP3WVuEYMoeywfjRd+QjXd3h7zbbp/zQ2nd3jSWTijfUNX8P+Zc4KmdbpNJPJQn22+i
-	eHAIPeIcN8REnCCG5+a5tI/jFvHSQeVckq6dVYaIvHq98v1nmoifHQJCmreKoWWzM0jZpdkOVvX
-	rLNMALHCojKjid7INJdNLCWqjxAnL168ThB+cJJfcQ/n6jkHXEejFxrYi6vGErJzLO4uMHObuDl
-	gbb29Hi437OVTZS7pRCXGFdONhnP0q9mIPztlKVIgDuCTxoqOe+IxhAGqg6+tU5tePM/WTLyyuF
-	LMBDtWeEdfVai+njXsEtx4SndwnHQlHr4lxGkHIrZl4Aej2AIeX7r+q1Dhh7xdEb5dZl0tCoIjk
-	txCm6wu0FOO47P6M7h5r/Q==
-X-Received: by 2002:a17:90b:1b0d:b0:3ac:36c7:c144 with SMTP id 98e67ed59e1d1-3ae89776936mr4446077a91.28.1793556052975;
-        Sun, 01 Nov 2026 10:00:52 -0800 (PST)
+        bh=KZfx8zG3lr0SxJdej5NZrOvMKfAGpQe9QBAGg9mMie8=;
+        b=Ktwb1NNa2WG51xx51UPl6Db9Kpi6rqTJiTNuZSOA3XiC5n6XnmtPMZdGeeseOy8fTT
+         NnZxsnIGioo8rPW5Xi97PfN1wufktqIqWNevzyJ+yhZ3n2U61JKRsQI9VkVoU7HC2/cc
+         5zKhaljf2lYpPYUCaC9Ab3T8T8ZaAHfleP5r35enRpLCgeKPwGJdoP1W6Qawl8w/Uxxw
+         Hp9gcdTMYsRE/m6Ff0i3mwriZYakpHTd2fE00AfKBO8TquyctUHLdv+TgtGQ+N19nzDf
+         NgxuuCmPogU43uzYXn65ryMR/27AvcLFFr6CcOX/wwRfPBXYFiYRXxDU+adbPZ5AL9bY
+         wGQQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwxJfTh9mhVrUZ5XYWC01z1sb8sB9Xi2upUnOvBbIdSwvcTOCj6ovOPNkjVWs1KwENYqPoUbaakyryMRS3r@vger.kernel.org
+X-Gm-Message-State: AFq9FYJf+Mgpjkooo3WZ77lgerA5lhydyKagKrZMxPnkvMf4Vo9nhAw0
+	L8nzUQKmWOWgKqBAawLqwhZPRkV7sS/gLXG2FRmLv07sqo03XNUz0W5a
+X-Gm-Gg: AYBFou1uKjqjBIE/nB8tccQUZ8C3HWPQynStZ9Y6YvamrdiZC3kofG+lgeJHdFVxVAK
+	bw9ElI4VVyuSx4BGH/Y/QDyNgwmP8Id5BH/F5leUHZeZ/QGUVXFmpWAP3EVYkR4qV0do62nqAwb
+	ZokJzXU2LVtQ1BZS4ZbC9/qngTtudb54oA0thxZ1q5PRw/RRjoKYDDg7K/TBtInDrfE2+0Rw519
+	ejp0WkURtkss6cbDQSf6MxeWuirYyv7qc2dvy36GhMYCy7cR0uEBDaIkPMZiGcgK+pAjGufOQ4o
+	/nBwa7ciWMHTvD3C5GO36jKlCkyhNpgDH1IHcjY0ZHXD457NhqOx7ha2tka9lCzsLUHebcbAIEh
+	OUfMMqOow05X1z61myIollx20KcAGOxbS3Z3slhx6QgNjimkrjiozqpeB/Xcme9KXSuBO5chzIU
+	vvzQY2rnPtsieY5Y0PmAJbg3PnXmlEmB1AZStiqfNOnapWMebJH6Cpn9hjZDGAfgp/ZGKI+6Uzt
+	OdxZWerlXc+JaeS9EQAoZLzjCHLOI6rRKRUvoMZJToexvx1d6VpjVd+alL3pDtviHyLckHUgfum
+	GjeU/zSZqlp3ujaWx0fM6lA=
+X-Received: by 2002:a05:6a00:6c83:b0:899:915:792b with SMTP id d2e1a72fcca58-8a9bfddf73emr6622142b3a.54.1793556336463;
+        Sun, 01 Nov 2026 10:05:36 -0800 (PST)
 Received: from tabby-boi ([2a09:bac5:4fad:e6::17:370])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e949077sm15194159a91.9.2026.11.01.10.00.47
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8ac269b8805sm446544b3a.44.2026.11.01.10.05.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 10:00:52 -0800 (PST)
+        Sun, 01 Nov 2026 10:05:35 -0800 (PST)
 From: Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>
@@ -94,11 +94,10 @@ Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
 	dri-devel@lists.freedesktop.org,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 2/4] drm/msm: free the crash state asynchronously
-Date: Mon,  2 Nov 2026 01:55:51 +0800
-Message-ID: <20261101175553.53746-3-nicoangelodelacruz@gmail.com>
+	Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
+Subject: [PATCH 3/4] drm/msm/a8xx: add a memory-only GPU crash state
+Date: Mon,  2 Nov 2026 02:05:07 +0800
+Message-ID: <20261101180508.66598-1-nicoangelodelacruz@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261101175553.53746-1-nicoangelodelacruz@gmail.com>
 References: <20261101175553.53746-1-nicoangelodelacruz@gmail.com>
@@ -113,106 +112,153 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-msm_gpu_crashstate_capture() sets gpu->crashstate and calls
-dev_coredumpm() while the caller (recover_worker() or
-msm_gpu_fault_crashstate_capture()) holds gpu->lock. When devcoredump
-is disabled (/sys/class/devcoredump/disabled, a write-once knob) or
-its allocation fails, dev_coredumpm_timeout() calls the free callback
-synchronously.
+a8xx had no gpu_state_get callback, so no devcoredump was ever
+produced when the GPU hung or faulted.
 
-msm_gpu_devcoredump_free() then calls msm_gpu_crashstate_put(), which
-does mutex_lock(&gpu->lock) and so recursively takes a mutex the
-caller already holds. On systems with devcoredump disabled, every GPU
-recovery that captures a crash state deadlocks.
+Add a8xx_gpu_state_get(), a memory-only snapshot: the generic Adreno
+state from adreno_gpu_state_get() (ring buffer contents and fences,
+with rptr read from the hw_apriv shadow rather than a register), the
+GMU log/HFI/debug buffers and the HFI queue history. No register is
+read, because the GMU may be wedged and GX powered off when this runs
+from the recover worker or the SMMU fault path. As a result a8xx
+dumps always report "gpu-initialized: 0", as a6xx/a7xx dumps do when
+GX is off.
 
-Defer the put to a work item on system_dfl_wq instead. This is safe
-because msm_gpu_devcoredump_read() takes and drops its own crash
-state reference, and the work takes gpu->lock normally once the
-holder has released it. gpu->crashstate stays set until the work
-runs, which only means a capture in that window is skipped.
-msm_gpu_cleanup() flushes an already queued free before teardown.
+The shared part moves out of a6xx_gpu_state_get() into
+a6xx_gpu_state_get_gmu(), which also runs adreno_gpu_state_get().
+It is a pure move except for a new gmu_regs parameter that gates
+a6xx_get_gmu_registers(); a6xx/a7xx pass true, so their output is
+unchanged. Reviewed with git diff --color-moved=dimmed-zebra: apart
+from the moved lines, the new code is the helper's signature, the
+"if (gmu_regs)" check, the locals the helper needs, and the call.
 
-Tested on an Adreno 830 with /sys/class/devcoredump/disabled set to 1:
-IGT msm_recovery gpu-fault recovers and the GPU resumes.
+Tested on an Adreno 830: IGT msm_recovery gpu-fault (6 of 6 runs) and
+natural GPU hangs produce dumps with the ringbuffer, gmu-log, gmu-hfi
+and queue-history sections; capture takes 1.1 to 4.0 ms.
 
-Fixes: c0fec7f562ec ("drm/msm/gpu: Capture the GPU state on a GPU hang")
-Cc: stable@vger.kernel.org
+a6xx/a7xx: build and pure-move review only, Tested-by welcome.
+
 Signed-off-by: Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
 ---
- drivers/gpu/drm/msm/msm_gpu.c | 21 ++++++++++++++++++++-
- drivers/gpu/drm/msm/msm_gpu.h |  6 ++++++
- 2 files changed, 26 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c       |  7 +++
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.h       |  1 +
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c | 47 ++++++++++++++++-----
+ 3 files changed, 45 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
-index caa86279f..fded78fdb 100644
---- a/drivers/gpu/drm/msm/msm_gpu.c
-+++ b/drivers/gpu/drm/msm/msm_gpu.c
-@@ -175,6 +175,14 @@ int msm_gpu_hw_init(struct msm_gpu *gpu)
- 	return ret;
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+index 92e8c8abb..0f4b0af0a 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+@@ -2918,9 +2918,16 @@ const struct adreno_gpu_funcs a8xx_gpu_funcs = {
+ 		.active_ring = a6xx_active_ring,
+ 		.irq = a8xx_irq,
+ 		.destroy = a6xx_destroy,
++#if defined(CONFIG_DRM_MSM_GPU_STATE)
++		.show = a6xx_show,
++#endif
+ 		.gpu_busy = a8xx_gpu_busy,
+ 		.gpu_get_freq = a6xx_gmu_get_freq,
+ 		.gpu_set_freq = a6xx_gpu_set_freq,
++#if defined(CONFIG_DRM_MSM_GPU_STATE)
++		.gpu_state_get = a8xx_gpu_state_get,
++		.gpu_state_put = a6xx_gpu_state_put,
++#endif
+ 		.create_vm = a6xx_create_vm,
+ 		.create_private_vm = a6xx_create_private_vm,
+ 		.get_rptr = a6xx_get_rptr,
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+index 79912a33e..03432abf9 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+@@ -338,6 +338,7 @@ void a6xx_show(struct msm_gpu *gpu, struct msm_gpu_state *state,
+ 		struct drm_printer *p);
+ 
+ struct msm_gpu_state *a6xx_gpu_state_get(struct msm_gpu *gpu);
++struct msm_gpu_state *a8xx_gpu_state_get(struct msm_gpu *gpu);
+ int a6xx_gpu_state_put(struct msm_gpu_state *state);
+ 
+ void a6xx_bus_clear_pending_transactions(struct adreno_gpu *adreno_gpu, bool gx_off);
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c
+index 26c17861c..a3751358a 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c
+@@ -1629,25 +1629,19 @@ static void a7xx_get_indexed_registers(struct msm_gpu *gpu,
+ 	return;
  }
  
-+static void msm_gpu_crashstate_free_worker(struct work_struct *work)
-+{
-+	struct msm_gpu *gpu = container_of(work, struct msm_gpu,
-+					   crashstate_free_work);
-+
-+	msm_gpu_crashstate_put(gpu);
+-struct msm_gpu_state *a6xx_gpu_state_get(struct msm_gpu *gpu)
++static void a6xx_gpu_state_get_gmu(struct msm_gpu *gpu,
++				   struct a6xx_gpu_state *a6xx_state, bool gmu_regs)
+ {
+-	struct a6xx_crashdumper _dumper = { 0 }, *dumper = NULL;
+ 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+ 	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+-	struct a6xx_gpu_state *a6xx_state = kzalloc_obj(*a6xx_state);
+-	bool stalled;
+-
+-	if (!a6xx_state)
+-		return ERR_PTR(-ENOMEM);
+-
+-	INIT_LIST_HEAD(&a6xx_state->objs);
+ 
+ 	/* Get the generic state from the adreno core */
+ 	adreno_gpu_state_get(gpu, &a6xx_state->base);
+ 
+ 	if (!adreno_has_gmu_wrapper(adreno_gpu) &&
+ 	    !adreno_has_rgmu(adreno_gpu)) {
+-		a6xx_get_gmu_registers(gpu, a6xx_state);
++		if (gmu_regs)
++			a6xx_get_gmu_registers(gpu, a6xx_state);
+ 
+ 		a6xx_state->gmu_log = a6xx_snapshot_gmu_bo(a6xx_state, &a6xx_gpu->gmu.log);
+ 		a6xx_state->gmu_hfi = a6xx_snapshot_gmu_bo(a6xx_state, &a6xx_gpu->gmu.hfi);
+@@ -1655,6 +1649,21 @@ struct msm_gpu_state *a6xx_gpu_state_get(struct msm_gpu *gpu)
+ 
+ 		a6xx_snapshot_gmu_hfi_history(gpu, a6xx_state);
+ 	}
 +}
 +
- #ifdef CONFIG_DEV_COREDUMP
- static ssize_t msm_gpu_devcoredump_read(char *buffer, loff_t offset,
- 		size_t count, void *data, size_t datalen)
-@@ -215,7 +223,13 @@ static void msm_gpu_devcoredump_free(void *data)
- {
- 	struct msm_gpu *gpu = data;
++struct msm_gpu_state *a6xx_gpu_state_get(struct msm_gpu *gpu)
++{
++	struct a6xx_crashdumper _dumper = { 0 }, *dumper = NULL;
++	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
++	struct a6xx_gpu_state *a6xx_state = kzalloc_obj(*a6xx_state);
++	bool stalled;
++
++	if (!a6xx_state)
++		return ERR_PTR(-ENOMEM);
++
++	INIT_LIST_HEAD(&a6xx_state->objs);
++
++	a6xx_gpu_state_get_gmu(gpu, a6xx_state, true);
  
--	msm_gpu_crashstate_put(gpu);
-+	/*
-+	 * dev_coredumpm() calls this synchronously when it can't keep the
-+	 * dump (devcoredump disabled, or out of memory), while
-+	 * msm_gpu_crashstate_capture() holds gpu->lock, which
-+	 * msm_gpu_crashstate_put() also takes.  Defer the put to a worker.
-+	 */
-+	queue_work(system_dfl_wq, &gpu->crashstate_free_work);
+ 	/* If GX isn't on the rest of the data isn't going to be accessible */
+ 	if (!adreno_gpu->funcs->gx_is_on(adreno_gpu))
+@@ -1714,6 +1723,24 @@ struct msm_gpu_state *a6xx_gpu_state_get(struct msm_gpu *gpu)
+ 	return  &a6xx_state->base;
  }
  
- static void msm_gpu_crashstate_get_bo(struct msm_gpu_state *state,
-@@ -899,6 +913,7 @@ int msm_gpu_init(struct drm_device *drm, struct platform_device *pdev,
- 	gpu->dev = drm;
- 	gpu->funcs = funcs;
- 	gpu->name = name;
-+	INIT_WORK(&gpu->crashstate_free_work, msm_gpu_crashstate_free_worker);
- 
- 	gpu->worker = kthread_run_worker(0, "gpu-worker");
- 	if (IS_ERR(gpu->worker)) {
-@@ -1047,6 +1062,10 @@ void msm_gpu_cleanup(struct msm_gpu *gpu)
- 
- 	DBG("%s", gpu->name);
- 
-+	/* May be unset if probe failed before msm_gpu_init() */
-+	if (gpu->crashstate_free_work.func)
-+		flush_work(&gpu->crashstate_free_work);
++/*
++ * Memory-only snapshot for a8xx: no register is read, as the GMU may be
++ * wedged and GX powered off by the time this runs.
++ */
++struct msm_gpu_state *a8xx_gpu_state_get(struct msm_gpu *gpu)
++{
++	struct a6xx_gpu_state *a6xx_state = kzalloc_obj(*a6xx_state);
 +
- 	for (i = 0; i < ARRAY_SIZE(gpu->rb); i++) {
- 		msm_ringbuffer_destroy(gpu->rb[i]);
- 		gpu->rb[i] = NULL;
-diff --git a/drivers/gpu/drm/msm/msm_gpu.h b/drivers/gpu/drm/msm/msm_gpu.h
-index 5cf220f75..db9e11e7f 100644
---- a/drivers/gpu/drm/msm/msm_gpu.h
-+++ b/drivers/gpu/drm/msm/msm_gpu.h
-@@ -258,6 +258,12 @@ struct msm_gpu {
- 
- 	struct msm_gpu_state *crashstate;
- 
-+	/**
-+	 * @crashstate_free_work: drops the devcoredump's crashstate reference
-+	 * outside of @lock, see msm_gpu_devcoredump_free().
-+	 */
-+	struct work_struct crashstate_free_work;
++	if (!a6xx_state)
++		return ERR_PTR(-ENOMEM);
 +
- 	/**
- 	 * @recovery_in_progress: true while recover_worker() holds @lock, so
- 	 * that fault capture and GMU waits don't wait on a fault devcoredump
++	INIT_LIST_HEAD(&a6xx_state->objs);
++
++	a6xx_gpu_state_get_gmu(gpu, a6xx_state, false);
++
++	return &a6xx_state->base;
++}
++
+ static void a6xx_gpu_state_destroy(struct kref *kref)
+ {
+ 	struct a6xx_state_memobj *obj, *tmp;
 -- 
 2.53.0
 
