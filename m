@@ -1,96 +1,117 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.173
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793527445;
-	b=2jR6sEaEztXK9OmkcHHE2fAWRa044ln4gswkIY0mXcZNzbQ/pLWKfRZE7KkFYQjv3sCN
-	 MPrS9JOz44k2w7Bb9OMzcUnLRY4zalMvXLvYuUL2iVTv747aefGYy9zme3JvJgbBno8XG
-	 0rOId/6vl0CYAH+2fkKVin3i8b8cTM4LNDc02exQVod08cp4pwR1SecbIdGR46oMAJp3w
-	 YkfIvseDR3cG1Pjkzk4/WD8NtoExE/evvTT0c80INPvmJlOt/Sp2kl18N0CHJsRArKMYV
-	 a/qiFOTCVApVD4w/mQuSM5s86VOJbU5vz8P62RRrNbt8UxqRKTWslWq33P03TRLAP3w==
+	t=1793530720;
+	b=0rqvdEHEuvtsxlCMm17nqkWkl4Y5er9MKs8sczvCpE3eTyncciTpJUczqbSKD3W73Lr/
+	 IXgqfxJpen8sHXKKXJeiuQxX7Bi2ZEauGmC3Cj0vCc52eRH3drwBaVVwBBA84H57X2fNG
+	 zTslKu+p2UckkNLOR9updfPu23StWaACCUNT2s8zXnshuLnDQrnhVaeSqzFr7rKyssn+2
+	 FDtuJ15gnyKw/u4DZqTVmlNJSpq8JwRLdkJgXfXKJuJ3c8yB4wlRucw5MF6FZD8e5pfQr
+	 PqFtPS7DbXhw7CCH6K/qfeHPkUx0lg7SOTTUgVQdhm+yv3tRrGkfjMfuEe94lbEvAGQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793527445;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793530720;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
-	b=yExZkmdLbhc7sHOnxwKWac9MlMXSG2fMPmaLSDhK8MsTzkdPe6FonbyTUZ5Dn4uAu4Ju
-	 hX90Y1N1DXdkp/B9pIWpPaPC8cAi7Tab3aqt9V60abDmXx3MGMdwf3rVTb17h70x06NeB
-	 HKaCHOGLaTfpIgt0l1C+0g3Yi70b0oVNbbH/jzJJVbNHacBf/DajH2fjTGvV8ZoLa6n1T
-	 dfNwFjLZGzE2ec+jltYpf1s996VumeiT7TlNFkdr8t+cFCD/3lMH53hpK6o0FldPfWAzl
-	 Q6owniQxqwSHgLjEwjN1DdRq0nHYIxgjQv+hPEhdZVL10C/LIF3de4NIy9pQk8J5nOQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=BCy9FbfGCagGcVT1iVy5/qKWXuDsXeyd+T20CrEKRK8=;
+	b=fOa1Tm9RdoYcO/gADlCgksyu1vsYs4cuHVUy10HsLg9w0Ij6HStvXRfbmdF0FKk9PLgk
+	 tKP3SouDkXaaOp4fTckOXATiFQhFvYDu6qolEzH2UsJm1XH5xPJd/HC9eTHUKwevtbKij
+	 0Vey/lq/+16qfS0JgWRqhykj4v8/SI3SMdO3VB5O6makDSoRJDwjN0sL4Nt2auQ5BBsC0
+	 8qwQXm1xXhn81RNfJrAecwkPtYgQOpCy+n/t8Q2uTkwmAEZxta7sxHi9+ADwGCof23VBK
+	 Ev/b7OA9t5FhmDKwmddwIDHsAnZxp6C7h5Hfs0TB3ouzgcFrOBmDtciwzCl3Epv1O2Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TLOkA644;
-	arc=none smtp.remote-ip=74.125.82.173
-Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YNEdPM2u;
+	arc=none smtp.remote-ip=209.85.208.175
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4898E606A325
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 10:04:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4898E606A325
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BE08606A325
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 10:58:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7BE08606A325
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TLOkA644
-Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-369f33df08eso4194935eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 02:04:05 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YNEdPM2u
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-3ab4891fc73so20645661fa.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 02:58:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793527444; x=1794132244; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
-        b=TLOkA644h9HfpGw/SGS0NewdQGdEbuAjgwC6StfxYuB2bPe3WZ+EYXFOt4aEtJaIrh
-         BBq3fFtIm8e++mbwBzQ+fZSH22eTonM421VOxPrOpBbgCOOHE107pqLSy+czZBRMeUq4
-         TpaS5zs/fUFbM0nBc97gfHaxmVgwOLcU1oz5xqT38TmNJYGyOsXSVJ5cXNjXi3V6YOXx
-         DYuOuWLmVqnDSDy3mmMs+r3Jb6DZf43fcoaGuMWC1kO6OMB9xrJSZzUqjr899avlFJ5u
-         hJD0aVMe6ZKzT5fBN8mQVWpvK0b7/89Bv3F3T9pNqcD5e5KjqHhwt4I4ukZINp2YetK4
-         bbuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793527444; x=1794132244;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1793530719; x=1794135519; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lZQ8rHpkkfpRhUYETvPsbxBlPx9cvrEfEZIYciSVKHU=;
-        b=pmjNIfEvbiz+NCQgg0HnaRKrfxFN4qyYbfSocYitnUz+7W7EW4/AZpel6n0ibnaBAS
-         ev2JAzKouUo5JlVp/eeJWjn0QfBsI5gpt4rbBYfej/MLXW/5XlOvmZc3TSoZAlM8usio
-         jJwWfMNBRma33IDpO6BSL1tBU4p9KGyUJp1t/KgXOdqzH/vCo6fAtnfs0iRP9OejtL3+
-         nYBSajNL1h9qIotGvIsqtF420CzEwiC2bouimFa1WQJ6D+gJ16tW6W91ULVvAM9CHbXY
-         jILORK0Jw2xKOM2IGTOncnnW3f6e3OerYb0o06RiFp95A4mjN9WxEdwNrtwBOfeOE4gD
-         MSQg==
-X-Forwarded-Encrypted: i=1; AKwUvBzvAftIsBhL71CIsQLAy2rh+YIU4zgCZ9Iq0R7PmbeKhe85wqIbhIDFo8iIbWhjhYpCyjjdUZGg6BZfYfRG@vger.kernel.org
-X-Gm-Message-State: AFq9FYIFl/Z76rAB9EqPzkiq0kIxjKjk4tGu6uqIkJRG0wEVlnHpiHRW
-	434XAeh4BpvLyzTVgjBwkZ5eHENCYyxrbCva0GjHh9Ziuv7tLiygNRCI
-X-Gm-Gg: AYBFou23r+Dt4iTv+F/I1F9MOuO1E1GRnbVWYbSAbZS4NcnIJGT5INum5juiA7Ai1+h
-	RRysgXIzq4K6rFHEiI2PygfljQPRQ0wgEQm9RgD5mT0OmdR4FzYGzpaHwg2ccRINl8kJ0s8j31v
-	MN7d4LejAIo+8dhJeD3k2KxEBG0FKrwfWehnRh9IcR19T9jqmxVRZ1S9v1cs20qEI0FSShwb4Cv
-	jSmWU121eZD3gn3ry9DGslg0ebrWmqgYA5o9PZ/nCO4BxkrGtnYWrU8F8TER0DNinGFz4B72HZu
-	SCZ6gk1ime4EQRJe71C9bl1l2fPdhaHTWBoETtgD/SoI04Vgc6B/Of9TwT+JE25hV4dPGD1FFLL
-	qT1Y4m95z99oLdd8AM+6iAXjjRXLwO4dTAkcLXj6KBqZmHpqkGQySl6vxGSM+tfYPIbbC/3l7nq
-	yBlLb5jaMIz2ZVr1fXjdNYLLGz4a+l/YujowuAxdUh+1xpYx0vuiZIekFrw1qQKDnBxI0TM1tQY
-	VKEoSjGG/g46s2K4Rf5X0bYxArIhLwOk7lXDYVxhs9OlwBysRGY1sYcGdoxaRTVIG/ebbPJ6JrB
-	duAqEAxSdYf80dHImvTQduOv73UjSxomTKb0j46CPBGYASvFdPbxZ4Z502UG3mOvO5mO7z1JGKI
-	TE07suQt4+9IGJoQiGXZQo8iSqSCEsgp/lIUeXnr7ePauAuLlzAaZ3VRoOKr7gh7wHYFCmzE5Je
-	IWfYu2
-X-Received: by 2002:a05:701b:4511:10b0:160:6a5b:7edf with SMTP id a92af1059eb24-1ac5fd0852amr9931498c88.44.1793527444190;
-        Sun, 01 Nov 2026 02:04:04 -0800 (PST)
-Received: from suraj-HP-Laptop-15s-fq2xxx.. ([2402:a00:163:3509:1f2e:5705:c23f:b6fa])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac194b5437sm26302562c88.13.2026.11.01.02.04.01
+        bh=BCy9FbfGCagGcVT1iVy5/qKWXuDsXeyd+T20CrEKRK8=;
+        b=YNEdPM2u04IwdWEarcCFuNlfrKyRUs/D6adKObe+2aN3T/8nBD4AVauHGs/N8j012i
+         MsSZL+iI9NYmPDIkHfqr5G7EN+OpTTLsCMZjGtUQkjpJ9Ehjmp+R097kNUEqPB6SHXCM
+         cSZggvawxPPjo++eI9Dgjgtm5uDZ4wmYC+WvWXhpVU61qS1EGuy9eF5vcM8LSm5hgpq1
+         IyT9AsX0ySZO/bPbg8MfuZ8Jarr4ebvAEr/BszZAewg4CUesPizMeRKaAdbp25nTiX7O
+         E31W8Jvq6U5MoBDuGNEXfGOG71gS1GHSk69RPGXFQrPrMKyxg1h3v8mYLRJ49FTmOEUa
+         6Zlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793530719; x=1794135519;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BCy9FbfGCagGcVT1iVy5/qKWXuDsXeyd+T20CrEKRK8=;
+        b=Na3LjNbwyMh97aOkaFlLyvGLO/j90d90BPIHxMXMST++nC0fp8Dnuj1F2Ch0NP5U/G
+         siEgZUYx7GsXbGzSopo9LkTwKpEjEh9KwJ++lSQr/QT/j8EwLx1Q4enZ9LtUDtGBw8SZ
+         AcXXKu396torADi5YeUButXgdXevH4DFJKNwadI0bdmr6hM9yd225M/WGR2Gh0df/1TD
+         7OrMI3NC34oaRdjnacc8ENu3OcbPizhGXJCPbeCQSviYEZJQKDBxZfWsW/XIL4u7Yu0u
+         kA71Y0uCjM2ndQtod7850o9YL+9Ji3pGhvvYVfgwnlt4Rmw/kVVA1o0VbfpogZ8MXtqw
+         ptxA==
+X-Forwarded-Encrypted: i=1; AKwUvBxprArrl1CI9WwwN/c1OqMejRlkg/VG86tq1MN0ZN6pRdat+6tHkw3keauDFjAxU9iEuYPZ8uW7owNB/XU1@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ/D/8tBuGAYWJpPrhByq1jaw7vRjxSHxJzdHOcMQkspYOfqw9n
+	+gjzgyfB8fcfYqr2EUE93VaoNqMHFE6LKAabEqPJpyBB5wZVGjFYP35T
+X-Gm-Gg: AYBFou0PLJeBIlJiCXlJ7FpxISshJoM4C6UWj7B9N7YCPRWfkutMmuyIybZXvu3pT/R
+	8OvrZSpY9ALruypMKrxrRdg3KE2Ne04Qqv5+FYiw+1cTvebuF5m4aicpmVb6+c+btFGf7mml50Q
+	wMVB3nL42TxiV/mZ/Topk0Pvqvh0m7YVcuLLsZEQ2mRYjAXnf1Zhaxz8QsCB1dD3NS62ixFSlfU
+	GETiJWlBdHVC1A5BQ1uJiuTiKgOSfUn4Q96cLgnTXWV1bsenivetGLEiH4+35cxWe7LGYiFTDga
+	R2nXIqE26FYQDBzpEF0aqqza41NwBHedu9CZz2o0F1d2J9WDy90Y9gQCEHVbDz10qNsX/mIBZNw
+	Nsxgp4Yu6hsnZZnBDu5L+svpBad+x9eQnOWiafqhgjO9JdVqPWqcHjZoEJcSAgTNytdsLcYIGOq
+	m+w8JQka6i8UahrfsnSAjz19PITEsWOGHOjusGlJSweEd0jprTiSfOaRXKfo4tYIVsanN1rGHsI
+	zh/2a2hsa3MhhlorHhaAc472yhiheR49uD15pdbNdj7iQv22/J/8tIiU6LYLZ4bIGgCPv9G7JHv
+	EnNIFKVks6alF3OL7g9dzk4YCOVezG7w2zmo9aZCm2ErnboZ+p9oPEQM4XxvXOzlv3129end2q6
+	I7C8XMITC/bqiH3jIaJ2YweLz58IVGfvij1I2FA==
+X-Received: by 2002:a05:651c:1474:b0:3ac:330c:518c with SMTP id 38308e7fff4ca-3acb7a827f8mr15638971fa.19.1793530718404;
+        Sun, 01 Nov 2026 02:58:38 -0800 (PST)
+Received: from yantra.. (nekmmqtbv463r5fvgny-1.v6.elisa-laajakaista.fi. [2001:99a:d7d:c300:5462:a993:5223:791e])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3acbbf1b726sm16613131fa.32.2026.11.01.02.58.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 02:04:03 -0800 (PST)
-From: Suraj Sonawane <surajsonawane0215@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
+        Sun, 01 Nov 2026 02:58:38 -0800 (PST)
+From: Rupesh Majhi <zoone.rupert@gmail.com>
+To: jic23@kernel.org
+Cc: Alex Lanzano <lanzano.alex@gmail.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Benson Leung <bleung@chromium.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Guenter Roeck <groeck@chromium.org>,
+	Jagath Jog J <jagathjog1996@gmail.com>,
+	Javier Carrasco <javier.carrasco.cruz@gmail.com>,
+	Jean-Baptiste Maneyrol <jean-baptiste.maneyrol@tdk.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Jinseob Kim <kimjinseob88@gmail.com>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Lorenzo Bianconi <lorenzo@kernel.org>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Remi Buisson <remi.buisson@tdk.com>,
+	chrome-platform@lists.linux.dev,
+	linux-amlogic@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-gpio@vger.kernel.org,
+	linux-iio@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Suraj Sonawane <surajsonawane0215@gmail.com>
-Subject: [PATCH] pinctrl: qcom: sc7280-lpass-lpi: add ext_mclk1_c function
-Date: Sun,  1 Nov 2026 15:30:30 +0530
-Message-Id: <20261101100030.15744-1-surajsonawane0215@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	Marco Elver <elver@google.com>,
+	Bart Van Assche <bvanassche@acm.org>
+Subject: Re: [PATCH v4 0/9] iio: enable context analysis for all drivers
+Date: Sun,  1 Nov 2026 12:58:32 +0200
+Message-ID: <20261101105832.55605-1-zoone.rupert@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261101033018.05897c08@jic23-hlaptop>
+References: <20261027124954.110697-1-zoone.rupert@gmail.com> <20261101033018.05897c08@jic23-hlaptop>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,64 +123,21 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-LPASS LPI gpio5 can mux EXT_MCLK1_C, but that function slot is left
-unnamed, so a device tree cannot select it. SC8280XP already names the
-same slot ext_mclk1_c.
+On Sun, 01 Nov 2026 03:30:18 +0000
+Jonathan Cameron <jic23@kernel.org> wrote:
 
-Name the slot on SC7280 and assign it to gpio5. The third slot stays
-empty; on SC8280XP it is qua_mi2s_data.
+> Please take a look and check I didn't mess it up.
 
-This file also provides the SM8350 LPASS LPI driver, which uses the
-same pin table, so the function becomes available on SM8350 as well.
+Diff is fine. Built drivers/iio with clang 23 allmodconfig: no
+warnings, and a dropped unlock is still caught.
 
-Tested on the Vicharak Axon Mini (QCS6490): selecting this mux slot
-drives the codec master clock, and ES8388 playback and headset capture
-work. Not tested on SM8350.
+Subject line got lost though. It should be "iio: enable context
+analysis for all drivers".
 
-Signed-off-by: Suraj Sonawane <surajsonawane0215@gmail.com>
----
- drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+CONTEXT_ANALYSIS_dps310.o := y in pressure/Makefile can go now too.
+I can send a follow-up.
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-index a61df10d4..278d5fac8 100644
---- a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-@@ -34,6 +34,7 @@ enum lpass_lpi_functions {
- 	LPI_MUX_swr_tx_data,
- 	LPI_MUX_wsa_swr_clk,
- 	LPI_MUX_wsa_swr_data,
-+	LPI_MUX_ext_mclk1_c,
- 	LPI_MUX_gpio,
- 	LPI_MUX__,
- };
-@@ -77,6 +78,7 @@ static const char * const i2s1_data_groups[] = { "gpio8", "gpio9" };
- static const char * const wsa_swr_clk_groups[] = { "gpio10" };
- static const char * const wsa_swr_data_groups[] = { "gpio11" };
- static const char * const i2s2_data_groups[] = { "gpio12", "gpio13" };
-+static const char * const ext_mclk1_c_groups[] = { "gpio5" };
- 
- static const struct lpi_pingroup sc7280_groups[] = {
- 	LPI_PINGROUP(0, 0, swr_tx_clk, qua_mi2s_sclk, _, _),
-@@ -84,7 +86,7 @@ static const struct lpi_pingroup sc7280_groups[] = {
- 	LPI_PINGROUP(2, 4, swr_tx_data, qua_mi2s_data, _, _),
- 	LPI_PINGROUP(3, 8, swr_rx_clk, qua_mi2s_data, _, _),
- 	LPI_PINGROUP(4, 10, swr_rx_data, qua_mi2s_data, _, _),
--	LPI_PINGROUP(5, 12, swr_rx_data, _, _, _),
-+	LPI_PINGROUP(5, 12, swr_rx_data, ext_mclk1_c, _, _),
- 	LPI_PINGROUP(6, LPI_NO_SLEW, dmic1_clk, i2s1_clk, _,  _),
- 	LPI_PINGROUP(7, LPI_NO_SLEW, dmic1_data, i2s1_ws, _, _),
- 	LPI_PINGROUP(8, LPI_NO_SLEW, dmic2_clk, i2s1_data, _, _),
-@@ -118,6 +120,7 @@ static const struct lpi_function sc7280_functions[] = {
- 	LPI_FUNCTION(swr_tx_data),
- 	LPI_FUNCTION(wsa_swr_clk),
- 	LPI_FUNCTION(wsa_swr_data),
-+	LPI_FUNCTION(ext_mclk1_c),
- };
- 
- static const struct lpi_pinctrl_variant_data sc7280_lpi_data = {
+Jinseob Kim's Tested-by didn't make it in:
+https://lore.kernel.org/linux-iio/CALMSew+nhZp9BoqS5tOgFdiVy13U1r2f4UQa9Sd5zc9pSt_YcA@mail.gmail.com/
 
-base-commit: cbbddb6b08cc9900a87cccaa9b22bbe06aa4f50a
--- 
-2.34.1
-
+Rupesh
