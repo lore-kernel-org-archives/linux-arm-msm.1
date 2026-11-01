@@ -1,54 +1,80 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=31.31.198.150
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.252
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793541819;
-	b=4gP6PEXjEFPAgBItDTzS/5oD2BTMOxDhwyUB62jwNWd1vhXduv2ShH10Lr/5ZgvGk72Y
-	 ofAXdFcl3fsdkw14lC1PZFJvpAhVo/HRE/Xdh8GSRoiyICBA1ZrlmPiemcxfNVHzrYbX2
-	 FXjPcVaeWxfSCi1fm72tAFy3FvwQocQn9w+l2dJMbqpPq8ORb34/yuk9d5uJgR65Nr1uK
-	 ROHDBUAp3MowuZWftImwiY2llaVMZ28ER/+1Ux+2h4z5RGE19R6IMOSzM0N4Sg7uF9Rzk
-	 UIFg3a1YifKi/wCWsArCPw9lUC9YJq9MHv8tye4LW274bPjQ1LwoYEXDgm+dvne5dCg==
+	t=1793548892;
+	b=mnjbEyWTx9Qvf/SOxTJz/VBv+ZPNnzSPKtfVhBRjCwOBQC3FgHqEQJBziQIKyVWeMgvs
+	 J9+uFklkwWNhz+WVF1wY7o6EhIdsz9xxrfrlkG5ViMJ6irRhWKWmHHXBMCTnMUNPeVzx0
+	 Zvkg7ghoEm/drlq1zzrY+InbPT6B9cofzAHQNs+hOKF6Gh4T1ByqEoL02yIssLu3NBNln
+	 w0ojbTxuCaAEdrAudgZEkRbmymOHuduTaP5mOpIeOGLPOw9IQnpB5OtQ5PQepqgrO76r+
+	 68fG1FubWYPmvKlcHEyN9R7JghKVOsBLHdTcCArOSyqDrEsYlu7bjNZFYX44UQl+gkA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793541819;
-	h=DMARC-Filter:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=lMdQIiIkk0TkrTOjfGcf0XDpdmUjXKfpMYJ8odQqD50=;
-	b=PzX+ULkwp9ROv83AdsXSKA5Qcakj2tKD6Z5/mdJXP4GL0iKJg8xYFUvFVpD64drcg9OG
-	 JQkk0YahYLVivCNSIPpGJIiuVJJcxh1KpUznxFvEuxsNKuDQZvJqMkmP9qHptSJ+EJwOb
-	 VL998DizgD/fJwdC4FJm4jb3+mEd/oRmFDibnQudwOxsqOWaDBZoB1Y3fD3IKzIJz5Ik/
-	 8qlJ0Bqh+gIhM0qNSCmp96qUjU56UDIUU2Ibm3W7+UO/t6xP0sW/ytRPHSIJGKUNz7Gno
-	 S7SDEtfuoBLpi29E13rEFY7pK/ZLkIGMU16lqI8a1kgNo3MHQr7Fa1/S36QTP3hZOcg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793548892;
+	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
+	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=dJAjI256HYju+smarK/sFecvcjyXOoXB2UXk9HtpRA8=;
+	b=20ISy001VI5FeuFhaPFxeokNCBs/N/eim7X5V1I/MrWmIKPYWX5iqrEhq0g38hDEWSiA
+	 rpsNaX2Gn+7eIgGG82naUyidwA4Ho5ez3VzwfoV7UHs3IC6D3DRCFq6yH6PsBYrkMCxMT
+	 iagV1SiDuywu9giOnrCZij86tWiwGxHGGJHNEyhvmnS9GIfJmzqHfqEI2825WENp7whxf
+	 kMVjaHvQL0940PGXbYGBD//10FVjvPq+RMPP2S3RpJ3cKy7kZpHB7kJYUkqtKtj+MEDpo
+	 Gmmdur19uxYdc/fydhFMXL7bvlleYVN68fcY+2ZgHWguAfadt1UJdozLnpZQkXbfP4A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=minlexx.ru;
-	spf=none smtp.mailfrom=minlexx.ru;
-	dkim=pass header.d=minlexx.ru header.i=@minlexx.ru header.a=rsa-sha256 header.s=dkim header.b=GZ9afh1O;
-	arc=none smtp.remote-ip=31.31.198.150
-Received: from sm24.hosting.reg.ru (sm24.hosting.reg.ru [31.31.198.150])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=foxmail.com;
+	spf=pass smtp.mailfrom=foxmail.com;
+	dkim=pass header.d=foxmail.com header.i=@foxmail.com header.a=rsa-sha256 header.s=s201512 header.b=ZUCzD63D;
+	arc=none smtp.remote-ip=162.62.57.252
+Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com [162.62.57.252])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92019606A324;
-	Sun,  1 Nov 2026 14:03:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92019606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=minlexx.ru
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=minlexx.ru
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B547E606A324;
+	Sun,  1 Nov 2026 16:01:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B547E606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foxmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foxmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=minlexx.ru header.i=@minlexx.ru header.a=rsa-sha256 header.s=dkim header.b=GZ9afh1O
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=minlexx.ru;
-	s=dkim; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:
-	Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Unsubscribe-Post:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=lMdQIiIkk0TkrTOjfGcf0XDpdmUjXKfpMYJ8odQqD50=; b=GZ9afh1OjLVWhw1FYnm9AB5BRA
-	4dSd9SXZrzpPXbz7WKxuww0fe0FzoOnRbJcn4DtLT1cl/u9viXRy3SUaIDEQ6/9EKmKVkuf2KVAXN
-	6ocaRPTdvjCDHKOTTqEbWNIsJoqs9gmaMxaUzkwoCRsNZomV+SZIpV3+y+0peQOd9nVU=;
-Received: 
-	by sm24.hosting.reg.ru with esmtpsa (TLS1.3) tls TLS_AES_128_GCM_SHA256
-	(envelope-from <alexeymin@minlexx.ru>)
-	id 1xNW9b-0000000BG97-0Quz;
-	Sun, 01 Nov 2026 17:03:23 +0300
-Message-ID: <995af7df-35dd-4169-911d-e9aed81f18d3@minlexx.ru>
-Date: Sun, 1 Nov 2026 17:03:22 +0300
+	dkim=pass (1024-bit key, unprotected) header.d=foxmail.com header.i=@foxmail.com header.a=rsa-sha256 header.s=s201512 header.b=ZUCzD63D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+	s=s201512; t=1793548885;
+	bh=dJAjI256HYju+smarK/sFecvcjyXOoXB2UXk9HtpRA8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=ZUCzD63DSRdrMEGTfiMCYIaqUrCTwmVQ69ub6q2NkDw6gvvu/4avWG/TRk1fhZVPw
+	 KwbBi8q+j5NPWoKJkZWJH6gU4j26kdQRG4GLPNTCTqjclW1NgsltgULGBiLlxcI/PH
+	 6EGKDS9iRK2DTDHXpE+brr6tWfEIQMUJ4+ebU7oA=
+Received: from ubuntu.lan ([223.160.115.26])
+	by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
+	id 4D84AD9; Mon, 02 Nov 2026 00:01:13 +0800
+X-QQ-mid: xmsmtpt1793548881t4gxc0hzc
+Message-ID: <tencent_1E7A74EBC425C78E07DED39F31807B7E1D0A@qq.com>
+X-QQ-XMAILINFO: OOO9dHjlsLs7VXtaDxIJMbnyZWPNEEi5lnAw/PKiMNYLrm4QS3fWT/7VliBWKo
+	 wVkqf37fmaVukQ1DDu25FW5bTPqm90dpeRNKvTZL0AMVMmCJykhYrlaWwrZ/pNCHgnMFfW2wbwVJ
+	 BQCTam0QDaL9lp8Jjius68lHf0Ji3oAZyDdsA1vnsoM/f0pKTB2Gx6RjVC9sRIqPlMkqGsmkBy8p
+	 3pjKldcGNKsJEqWdSR/vphUMW7+CCZZbuQrwyFZC7bL7RH0381Y6xQAUoEtVWeGNxo3LMr11mlh3
+	 3rlpfI/nBVWaOzsd9nrNjUYvQL3ovxK/AhOiXkdsHydODCLm6TrtEsdFZAc+H0s1lP0tHRxyDDkw
+	 7marcOn+56TvjLi987o3xDk4y0DGmU4dHLoWTjP4nsRrq1TRGfNXckPY6emBLAvK3kgzaq3p5ZKh
+	 ldaCCk6cuWq0lvA6fro14m6HN5ajixKHQs79Pf/7vcnt7p9fsBrw0/dMLhlKBP/FgNYrRdXYYZaO
+	 LXOt9SzAUkPwEi7Pk+NI4rd+VRz1x8zKm9SLYYk2MYtPfKcarGKJYouReoNPcKgYWVPMJWRg/L4v
+	 0k4Vf5itpQMmt74HYE6QgMTqIEgOa7O/Pk+pNhEaRO1Oi7Rbj172KJL87ewVLQgKv3C8x8CfJfwr
+	 Yp8NeNYU3QCd2wvMxMI+Sw+iQIEiRaZCN762KMXNppDmdX1ct7Sm//WI1kWq4tVVKC6qXpmJJijd
+	 vRe+cNTaRDSqDVMScY5RYbZ7Q092Uo6Ul1ew0NUrlOnhl0sGdXbj2rZaV5R+Q4Zfte0Z73x9sqFl
+	 gHk7llNlOPIQCgFF29qDil8R7lRt2vp4bEcIfv0ePcCRJzaT0kp2/iYpl3Ip/5coFu26Ox4ZOIvP
+	 3+4VOMl0a9NnvbsfFgCMD1FjhSCu4FuTE7BpfYAVqtbu0EiUUlu70ILuAwjgPwTFTheVbyhBRMbA
+	 augxqhgjwJ6O1yIRBlk/VnPNxovtWcwjpJIUkl3PFka0VHOhiGdRHBtbGwLxR4nxQh0J6Lxuae89
+	 TvxWLUHlJZ7HJsrQAN6az6mHyB2erfcD7N0uttXmVnoWq0uP8hGiqTySwzeQJqKt0+/qUiaw==
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+From: Haozhen Li <dezige131@foxmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>,
+	=?UTF-8?q?Dawid=20Wr=C3=B3bel?= <me@dawidwrobel.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Haozhen Li <dezige131@foxmail.com>
+Subject: [RFC PATCH 1/2] firmware: qcom: scm: Add QSEECOM app loading and shutdown
+Date: Sun,  1 Nov 2026 16:01:08 +0000
+X-OQ-MSGID: <20261101160110.3622-2-dezige131@foxmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261101160110.3622-1-dezige131@foxmail.com>
+References: <20261101160110.3622-1-dezige131@foxmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -58,126 +84,227 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/msm/a5xx: Write CP_RB_WPTR under the ring's
- preempt_lock
-To: fabricioakio@gmail.com, Rob Clark <robin.clark@oss.qualcomm.com>,
- Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jordan Crouse <jordan@cosmicpenguin.net>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-References: <20261031-a5xx-wptr-lock-v1-1-fa7d7b9a7fbe@gmail.com>
-Content-Language: en-US
-From: Alexey Minnekhanov <alexeymin@minlexx.ru>
-In-Reply-To: <20261031-a5xx-wptr-lock-v1-1-fa7d7b9a7fbe@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 01.11.2026 05:30, Fabricio Akio via B4 Relay wrote:
-> From: Fabricio Akio <fabricioakio@gmail.com>
-> 
-> CP_RB_WPTR tells the CP how far the ring has been filled. Two functions
-> write it: a5xx_flush(), after a submit is added to the ring, and
-> update_wptr(), which a5xx_preempt_trigger() calls from the IRQ handler
-> each time a submit completes, whenever there is more than one ring,
-> even when no ring switch follows. Both read the ring's wptr holding
-> ring->preempt_lock, but write the register after releasing it, so the
-> two writes can land in the wrong order:
-> 
->    CPU A, IRQ:   update_wptr() reads wptr N
->    CPU B, flush: a5xx_flush() reads wptr N+1, writes N+1
->    CPU A, IRQ:   update_wptr() writes N
-> 
-> CP_RB_WPTR then points behind the last submit. If the CP has already
-> read past N, it treats the ring as nearly full and executes the
-> commands left over from its previous pass through the ring. This shows
-> up as CP opcode errors, and the old submits write old fences, so the
-> fence in memptrs goes backwards. Recovery then finds no submit to
-> blame and does not reset the GPU, which stays hung until reboot.
-> 
-> Write the register before releasing the lock in both places, so the
-> last value written is always the newest, as a6xx_flush() does.
-> 
-> Fixes: b1fc2839d2f9 ("drm/msm: Implement preemption for A5XX targets")
-> Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
-> ---
-> Tested on A508 (SDM630), with piglit's texelfetch tests run in
-> parallel: CP opcode errors in each of seven one-minute runs, the
-> seventh ending in a hang that never recovers; with this, none in 25.
-> 
-> The downstream driver writes the register holding the ring's
-> preempt_lock in both of its places:
-> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/adreno_ringbuffer.c#L104
-> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/adreno_a5xx_preempt.c#L25
-> ---
->   drivers/gpu/drm/msm/adreno/a5xx_gpu.c     | 10 +++++++---
->   drivers/gpu/drm/msm/adreno/a5xx_preempt.c |  3 +--
->   2 files changed, 8 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/msm/adreno/a5xx_gpu.c b/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-> index 16c7335c4b1f..63b313328979 100644
-> --- a/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-> +++ b/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-> @@ -53,14 +53,18 @@ void a5xx_flush(struct msm_gpu *gpu, struct msm_ringbuffer *ring,
->   	/* Make sure to wrap wptr if we need to */
->   	wptr = get_wptr(ring);
->   
-> -	spin_unlock_irqrestore(&ring->preempt_lock, flags);
-> -
->   	/* Make sure everything is posted before making a decision */
->   	mb();
->   
-> -	/* Update HW if this is the current ring and we are not in preempt */
-> +	/*
-> +	 * Update HW if this is the current ring and we are not in preempt.
-> +	 * Under the lock, so that update_wptr() cannot write an older wptr
-> +	 * after this one.
-> +	 */
->   	if (a5xx_gpu->cur_ring == ring && !a5xx_in_preempt(a5xx_gpu))
->   		gpu_write(gpu, REG_A5XX_CP_RB_WPTR, wptr);
-> +
-> +	spin_unlock_irqrestore(&ring->preempt_lock, flags);
->   }
->   
->   static void a5xx_submit_in_rb(struct msm_gpu *gpu, struct msm_gem_submit *submit)
-> diff --git a/drivers/gpu/drm/msm/adreno/a5xx_preempt.c b/drivers/gpu/drm/msm/adreno/a5xx_preempt.c
-> index e4924b5e1c48..0deac58bc22e 100644
-> --- a/drivers/gpu/drm/msm/adreno/a5xx_preempt.c
-> +++ b/drivers/gpu/drm/msm/adreno/a5xx_preempt.c
-> @@ -47,9 +47,8 @@ static inline void update_wptr(struct msm_gpu *gpu, struct msm_ringbuffer *ring)
->   
->   	spin_lock_irqsave(&ring->preempt_lock, flags);
->   	wptr = get_wptr(ring);
-> -	spin_unlock_irqrestore(&ring->preempt_lock, flags);
-> -
->   	gpu_write(gpu, REG_A5XX_CP_RB_WPTR, wptr);
-> +	spin_unlock_irqrestore(&ring->preempt_lock, flags);
->   }
->   
->   /* Return the highest priority ringbuffer with something in it */
-> 
-> ---
-> base-commit: a39c950806213f6861d00f90729acaaa21f2d95a
-> change-id: 20261031-a5xx-wptr-lock-55b151332fcf
-> 
-> Best regards,
-> --
-> Fabricio Akio <fabricioakio@gmail.com>
+QSEECOM clients in the kernel can currently only talk to trusted
+applications that some earlier boot stage happened to load:
+qcom_scm_qseecom_app_get_id() looks an app up and
+qcom_scm_qseecom_app_send() talks to it, but nothing lets Linux start
+one itself.
 
-I've been using this patch for a few days on various sdm630/636/660
-devices with a508/509/512 and so far haven't seen any GPU hangs.
+Add the two missing app-manager commands:
 
-It's hard to prove definitively that hangs are gone, due to the
-random nature of the hang, but at least it didn't make anything
-worse.
+  - qcom_scm_qseecom_app_load() authenticates, loads and starts an app
+    from an image staged in TZ memory, handing it over with the
+    APP_START call. Both image layouts QTEE accepts are supported: a
+    split image (.mdt metadata followed by the segment files, with the
+    metadata length passed as mdt_len) and a single-file signed ELF
+    (mdt_len == 0), where QTEE parses the metadata from the program
+    headers itself.
 
-Tested-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+  - qcom_scm_qseecom_app_shutdown() stops an app and releases its
+    secure-world memory and name. Without it an app can only be loaded
+    once per boot: QTEE refuses a second load, and only a reboot
+    clears the name.
 
---
-Regards,
-Alexey Minnekhanov
+QTEE reads the image address passed to APP_START as a 32-bit value
+even under the 64-bit SMC calling convention, and truncates anything
+above 4 GiB. Catch that case in qcom_scm_qseecom_app_load() and fail
+with -EINVAL rather than pass an address on for silent truncation: on
+platforms whose firmware hands out memory above 4 GiB the load would
+otherwise fail far from the cause, or worse.
+
+Based on the QSEECOM transport work of Dawid Wrobel and samcday
+(https://github.com/samcday/linux).
+
+Signed-off-by: Haozhen Li <dezige131@foxmail.com>
+---
+ drivers/firmware/qcom/qcom_scm.c       | 123 +++++++++++++++++++++++++
+ include/linux/firmware/qcom/qcom_scm.h |  14 +++
+ 2 files changed, 137 insertions(+)
+
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 43e250fae..c77130693 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ /* Copyright (c) 2010,2015,2019 The Linux Foundation. All rights reserved.
+  * Copyright (C) 2015 Linaro Ltd.
++ * Copyright (C) 2026 Dawid Wróbel <me@dawidwrobel.com>
+  */
+ 
+ #include <linux/arm-smccc.h>
+@@ -115,7 +116,14 @@ enum qcom_scm_qseecom_tz_svc {
+ };
+ 
+ enum qcom_scm_qseecom_tz_cmd_app {
++	/*
++	 * APP_START and APP_SEND share the same command number and are
++	 * told apart by owner and service: APP_START is
++	 * QSEE_OS/APP_MGR, APP_SEND is TZ_APPS/APP_ID_PLACEHOLDER.
++	 */
++	QSEECOM_TZ_CMD_APP_START		= 1,
+ 	QSEECOM_TZ_CMD_APP_SEND			= 1,
++	QSEECOM_TZ_CMD_APP_SHUTDOWN		= 2,
+ 	QSEECOM_TZ_CMD_APP_LOOKUP		= 3,
+ };
+ 
+@@ -2168,6 +2176,121 @@ int qcom_scm_qseecom_app_get_id(const char *app_name, u32 *app_id)
+ }
+ EXPORT_SYMBOL_GPL(qcom_scm_qseecom_app_get_id);
+ 
++/**
++ * qcom_scm_qseecom_app_load() - Load and start a QSEE application.
++ * @img:     Image buffer, must be allocated from TZ memory.
++ * @mdt_len: Length of the .mdt metadata at the start of @img, or zero if
++ *           @img is a single-file image.
++ * @img_len: Total length of the image in bytes.
++ * @app_id:  ID assigned to the loaded application.
++ *
++ * Hands an application image to QTEE for authentication, loading and
++ * starting, and returns the ID under which qcom_scm_qseecom_app_send()
++ * reaches it.
++ *
++ * Two image layouts are accepted. With a non-zero @mdt_len, @img holds the
++ * .mdt metadata followed by each segment file concatenated in
++ * program-header order; in that layout the metadata segments appear twice,
++ * as the .mdt already contains them, and padding between segments is
++ * dropped. With @mdt_len == 0, @img is a single signed ELF passed as one
++ * file, and QTEE parses the metadata from the program headers itself.
++ *
++ * The image buffer must lie entirely below the 4 GiB physical mark: QTEE
++ * reads the image address as a 32-bit value even under the 64-bit SMC
++ * calling convention, so a buffer above it would be truncated into a wrong
++ * address. Such buffers are rejected here rather than passed on.
++ *
++ * Return: Zero on success, nonzero on failure.
++ */
++int qcom_scm_qseecom_app_load(void *img, size_t mdt_len, size_t img_len,
++			      u32 *app_id)
++{
++	phys_addr_t img_phys;
++	struct qcom_scm_qseecom_resp res = {};
++	struct qcom_scm_desc desc = {};
++	int status;
++
++	if (!img || !img_len || mdt_len > img_len)
++		return -EINVAL;
++
++	/*
++	 * Unlike the lookup command, which passes a buffer holding the name,
++	 * the image is handed over as a bare physical address: all three
++	 * arguments are plain values.
++	 */
++	desc.owner = QSEECOM_TZ_OWNER_QSEE_OS;
++	desc.svc = QSEECOM_TZ_SVC_APP_MGR;
++	desc.cmd = QSEECOM_TZ_CMD_APP_START;
++	desc.arginfo = QCOM_SCM_ARGS(3);
++	desc.args[0] = mdt_len;
++	desc.args[1] = img_len;
++
++	img_phys = qcom_tzmem_to_phys(img);
++	if (!img_phys)
++		return -EINVAL;
++
++	/* See the comment on the 4 GiB limit in the function doc above. */
++	if (upper_32_bits(img_phys) || (u64)img_phys + img_len > SZ_4G) {
++		dev_err(__scm->dev, "qseecom: image buffer beyond 4GB: %pap\n", &img_phys);
++		return -EINVAL;
++	}
++
++	desc.args[2] = img_phys;
++
++	status = qcom_scm_qseecom_call(&desc, &res);
++	if (status)
++		return status;
++
++	if (res.result != QSEECOM_RESULT_SUCCESS) {
++		dev_dbg(__scm->dev,
++			"qseecom: app load rejected: result %llu, type %llu, data %llu\n",
++			res.result, res.resp_type, res.data);
++		return -EIO;
++	}
++
++	if (res.resp_type != QSEECOM_SCM_RES_APP_ID)
++		return -EINVAL;
++
++	*app_id = res.data;
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(qcom_scm_qseecom_app_load);
++
++/**
++ * qcom_scm_qseecom_app_shutdown() - Stop and unload a QSEE application.
++ * @app_id: The ID of the application to unload.
++ *
++ * The counterpart to qcom_scm_qseecom_app_load(): stops the application
++ * and releases the secure-world memory it occupies, freeing its name for a
++ * later load. Without this an application can be loaded only once per
++ * boot: QTEE refuses a second load, and only a reboot clears the name.
++ *
++ * Return: Zero on success, nonzero on failure.
++ */
++int qcom_scm_qseecom_app_shutdown(u32 app_id)
++{
++	struct qcom_scm_qseecom_resp res = {};
++	struct qcom_scm_desc desc = {};
++	int status;
++
++	desc.owner = QSEECOM_TZ_OWNER_QSEE_OS;
++	desc.svc = QSEECOM_TZ_SVC_APP_MGR;
++	desc.cmd = QSEECOM_TZ_CMD_APP_SHUTDOWN;
++	desc.arginfo = QCOM_SCM_ARGS(1);
++	desc.args[0] = app_id;
++
++	status = qcom_scm_qseecom_call(&desc, &res);
++	if (status)
++		return status;
++
++	if (res.result != QSEECOM_RESULT_SUCCESS)
++		return -EINVAL;
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(qcom_scm_qseecom_app_shutdown);
++
+ /**
+  * qcom_scm_qseecom_app_send() - Send to and receive data from a given QSEE app.
+  * @app_id:   The ID of the target app.
+diff --git a/include/linux/firmware/qcom/qcom_scm.h b/include/linux/firmware/qcom/qcom_scm.h
+index a0a6bc022..8f98b57e1 100644
+--- a/include/linux/firmware/qcom/qcom_scm.h
++++ b/include/linux/firmware/qcom/qcom_scm.h
+@@ -141,6 +141,9 @@ int qcom_scm_shm_bridge_delete(u64 handle);
+ #ifdef CONFIG_QCOM_QSEECOM
+ 
+ int qcom_scm_qseecom_app_get_id(const char *app_name, u32 *app_id);
++int qcom_scm_qseecom_app_load(void *img, size_t mdt_len, size_t img_len,
++			      u32 *app_id);
++int qcom_scm_qseecom_app_shutdown(u32 app_id);
+ int qcom_scm_qseecom_app_send(u32 app_id, void *req, size_t req_size,
+ 			      void *rsp, size_t rsp_size);
+ 
+@@ -151,6 +154,17 @@ static inline int qcom_scm_qseecom_app_get_id(const char *app_name, u32 *app_id)
+ 	return -EINVAL;
+ }
+ 
++static inline int qcom_scm_qseecom_app_load(void *img, size_t mdt_len,
++					    size_t img_len, u32 *app_id)
++{
++	return -EINVAL;
++}
++
++static inline int qcom_scm_qseecom_app_shutdown(u32 app_id)
++{
++	return -EINVAL;
++}
++
+ static inline int qcom_scm_qseecom_app_send(u32 app_id,
+ 					    void *req, size_t req_size,
+ 					    void *rsp, size_t rsp_size)
+-- 
+2.43.0
+
