@@ -1,102 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793551814;
-	b=2BjRKpQJt1+Tm7H7CC6nRZU5/6/hSTJYJ6NKkR7BMedZCFt/EV+qQG7u7vJu7CgGn5m4
-	 ANkYNl0xlgj0/jqFmg6CdVLGDERg83S3Y3mzvTiK6UljXJJTu1GmDPAxxiEzuH/juUvU0
-	 uW3DyfJeSOLeRaMhD/9TW8JEJF898KGHdTHtszRTuM0MGfojFanNgwmrow4loU9hLEV1Q
-	 X4CBK47iCQqTmLfcF8VQrYfxUt8MmFnFaUxdFausxwbbtkqorrU1CCH7NABLthcGnJ0Aq
-	 7xI8pJpM/rWr94mMW58ewMqmGTcNNC38P6OZswlU3nBycS2JQq3K04RPM31GAETPEjQ==
+	t=1793554384;
+	b=J4SCUrBbvBarVlNIV7YHAoMdAlv3y3tKPfZxOkQVgMKIExZ0K6cK3XUYiIJ3dVMH7CE3
+	 52S+yTR8HIYK6Op0Y9eyr5dlwfl3pHRaBY4oVEmVqxU1VF5FxLVkJmEBLyYq/XHlboTFQ
+	 0o0BY8QJ4F9mAJUrK8eB1ThYrcnZM0MfKKE7YVekuZ3Dr2+2jYDtheTKjWlr+aDuDVX68
+	 Jsf0jZkhF4kFoB2ShD9xHL58b0IvzWdIPHYLaQUJfMceLurvj8pRRxFokHzz9TGxONJA8
+	 qbvGkQImzDyQGYP1D1+J9CE0GlRO5u4KQIKpPH5pKeozFfsiCFuPdS8mcrTt49TNQWA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793551814;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=mZZe4bKEcD5TSYKYkVMyAQ6dVStKsxhjunUD6f+PU+0=;
-	b=4s/bGsOw2fe/ID7UmZMt+UDIUctkxoCwfrbBKKX75whjcxmIcEd/ZP1x88CzLjkZlKdw
-	 ynF7H0oLOXXIfRjGx2g69LGu3RcUZCndiAsE/48lEPozWMMUB3mOsrGkhp5SCJq5LjkNC
-	 8+rVdJclLhxcG0LK1N5cQMBiU3iJU13a3jk4Pzx/0Md8CgUZywlyUCZxikbiwTyCQ7oqQ
-	 SCdizg+0rz7NbN128rPc3Mst6Ib04Sm0Hciv3rG9vWLrn42Ml2EyOLhO30hdyBAYL9WMz
-	 vb0BsdxjaUY0rrNw4+Z7VvNlE3Tr8rNuvvZhh5jxe7AsMVOxCf93F/lBkjDh2gbOzfA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793554384;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=rKDKdqiuP8JwhfiJEYWPe4NEvJLoTWkNtFeXAkjaCNM=;
+	b=g3L9UQqWD29SHAF+0P0QhSIdiYHscuGEUFRrH8GbQM/rlqT4I8JZKqEZ4gVtDYdYMbZk
+	 joMFV0N4JOlJ2d21c9/QgqLuRF1r0XNm0w/bJDcRRSfopT8htsvnF5qQQZvBGQ36fJaEw
+	 Ew5+sNiMWOPAqfwSbZMto6TnR+CKxVYq+d0g5k3rVtEtfPy+kUwzXGkOekohr2zlGjgBs
+	 5EofMfnwaPREh0/KTXOTgVMLokqEg2rCCKOVfL/Yp9D8o9WMqjXd58J59Epy5SB1BS0yG
+	 l8MMziHti+jXmI62/qyg4xMvU9KK/AAk46eD7YczkZQv4wZiv9x67cTf++bt/AfAb1g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0jq2OaOv;
-	arc=none smtp.remote-ip=74.125.82.175
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L7U6xdHO;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A1B0606A326
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 16:50:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2A1B0606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E801E606A324;
+	Sun,  1 Nov 2026 17:33:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0jq2OaOv
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-36a17a332ecso3731439eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 08:50:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793551813; x=1794156613; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mZZe4bKEcD5TSYKYkVMyAQ6dVStKsxhjunUD6f+PU+0=;
-        b=0jq2OaOv/VB8alV10OIyFhzRgwYGwdbak1sNcvg1B4TViZnUcpBAp2z38SSNRYDRFm
-         iWL4NL6qgRA55EC9Nok9ZP8gNMVq53QnCspXz1P64Zkgy+AWhvqcouMzwsduyTkZ5012
-         f4nQrmaIrmukypuridQE1Rqc2bQO2XtKr1wXs4gKemRM6oXqppdY9DKk6ZwU1tpgVLRs
-         Yht0Pcfho/JnMuEIPOp4Ns3v2a6FQiGqn6Zq8Z9d2cYZdwoU6NVPn///Vpb2mGCsXGpG
-         nHarEKEXX6wypiLqRLeopMvysMA2SEdZjNx/LDGITkRP6YXHoQfCv2vaKmKvnjsp/MVq
-         5idw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793551813; x=1794156613;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mZZe4bKEcD5TSYKYkVMyAQ6dVStKsxhjunUD6f+PU+0=;
-        b=PJANaurdKoyjVZPyd4q6YWsYhYMrKxgni0qReyVfePNtF/U68iOAxhlxhoCHHKA73G
-         3Dld4PoQTFCtQyyOJbwzzIQr2BAJLBdzsPwpGQomRZQZqt/9O/E2dGj2jpLa+vYrBjSI
-         8LGmHkMgEtVGeuwV+kGK8vvtJ/aDp9rKxnUV6moCr/D0xoJNiB/GLTCm1qK+T3qXEIJl
-         kVr6nxhy5r6PDF7xDPPXZno45deaNfTkaGVf1ZlUOV2xdZ/6aE+hc3KdC/pxtqt8Fc13
-         3O314027D0NEcL+3M3JoMwlov/yxH9kXe5c50BKQH2ye93BBgmG2gw5ZRu1FwLk3h9j5
-         Y3mg==
-X-Forwarded-Encrypted: i=1; AKwUvBxgzZKrcKagQ9r0u451fVE9aJ6Jfzs3u+F6Y0kBYPlFW9NNQPr+pnZcSbPbS46Efg7AsekEvre229+dyE3F@vger.kernel.org
-X-Gm-Message-State: APuU4Z8u5003WL3k2RN5sLfrTkFku3YDZUB/y+dxotc5OsNRGNqz/XSI
-	VwdoEe8RNUHYEs+1/YDdmvo9yxaS68JG9CRiG+zGflr4PIrXU5Mj5n4X
-X-Gm-Gg: AYBFou2s+8wuDVSd1VPMBQ2S3zDaUq6baZRKi3YAk7EfSZvFyJsZEHH32WNfoYm1cUi
-	dO8Ams84kBHGTlUJiBIrFy1CHzKZhcMVPzY4NZJk00in3U8e4YuX/1enYHu2XtI+4hEQmkinJta
-	rNWt7EXcthJX6rAsYAdZAZNhpSEnWihy+Jg4P9rhQtl9Rbl0C/kW9NhCfPvpZhcF/WxZvj+Z3Xi
-	0OEJueiqJWH73OZH6ysOJmg7zHFl0tmMwhzYqMnaL0YCvhK09AeWMmDQSnGX20FvXlA1kDxkIKm
-	NxRDM05OoSa9gJKx+POKFYVqsEirO6GZj7jAsFZVbYSzgeKc6XUjgi0PDuNQKrc/8pp+cHljuIc
-	Nbp3fkxsZEYINAQwYC0qA7jNdjfsxLxDPyBnvvU9/1PzCDd7Nv5AMLFS4MFxlXnGqwJUFOTmLue
-	dn+jV0tSKFItiMFA+kkt9LdUWEfn+WLXNfwzLvlDuQXyvfUuftU7VWihOnKZPEEIyQKIHbaiPbl
-	gJ2xJQVtKUT31hT4Rh8glpYRuOhTd1WJ4rcYZiRPC8NCLOzeWf8nx4XVP0pIFl8Skk4bThKsBrB
-	UJgPdlZohMN4oGRgCxmc1wNydJVE2Nqg4cZpoHpQ9f1c0gYMsAg9Tdaqima1GGmfn4nP
-X-Received: by 2002:a05:693c:87cd:20b0:36a:32de:a239 with SMTP id 5a478bee46e88-36a420643f1mr11900427eec.0.1793551813029;
-        Sun, 01 Nov 2026 08:50:13 -0800 (PST)
-Received: from localhost.localdomain ([121.101.131.247])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42935b4asm39444940eec.16.2026.11.01.08.50.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 08:50:12 -0800 (PST)
-From: Amir Hanip <killdeath104@gmail.com>
-To: barnabas.czeman@mainlining.org
-Cc: abelvesa@kernel.org,
-	andersson@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	killdeath104@gmail.com,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	robh@kernel.org,
-	a39skl@gmail.com
-Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: Add Xiaomi Poco M3
-Date: Sun,  1 Nov 2026 23:49:30 +0700
-Message-ID: <20261101164930.17976-1-killdeath104@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <239d46726c0aad84feccc3def4eafab2@mainlining.org>
-References: <239d46726c0aad84feccc3def4eafab2@mainlining.org>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L7U6xdHO
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EC2C1F000C1;
+	Sun,  1 Nov 2026 17:33:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793554383;
+	bh=rKDKdqiuP8JwhfiJEYWPe4NEvJLoTWkNtFeXAkjaCNM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=L7U6xdHOUxXY434uAfd4bXemYytCddkoNHy1G4jVJgMeDfK0QGTM0KbdxvHtD/YO1
+	 mcroG/MWCvxM7bBKHQ1AvAAqIVhibibqEO8F2+N7dF0snCvk8RxhG51vmqhjt1rmm5
+	 dJ6tHWqc8+1c1zUJ8mi2QaVayA5i7A9z8r2cF4DuL8K9EQ6plYRlZTJ4C9CTx7aCxl
+	 N8JkuNwUogi27tdn0+p/GuRvZYVpuTZNFnnrPdLXT9etYzGA/tU0VcdssNvAczISIS
+	 9dHuo3InUzkFYbVNBFH0xjs2HSCUrOTnTX48rnB911wHB3UId9cmYKUMP80YSmHTXa
+	 ljZc0jeARr5YA==
+Date: Sun, 1 Nov 2026 17:32:56 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Loic Poulain
+ <loic.poulain@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+ linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Reuse IIO device ID for
+ ADC_TM aux device
+Message-ID: <20261101173256.5ad42925@jic23-hlaptop>
+In-Reply-To: <20261101030902.1387122-1-shengchao.guo@oss.qualcomm.com>
+References: <20261101030902.1387122-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -106,64 +62,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Fri, 30 Oct 2026 13:30:28 +0100, Barnabas Czeman wrote:
-> Poco M3 (citrus) is same HW like Redmi 9T (lime) and Remi 9T NFC
-> (lemon) basically is a lime with NFC.
-> So i think it would be better make a common base from lemon's
-> devicetree instead of making the same devicetree again for the
-> different variants where only the compatible and the model property
-> will be the difference.
-> Check sm6115-xiaomi-gingkgo-common for example, it was the same case
-> for Redmi Note 8 (ginkgo) and 8T (willow).
+On Sun,  1 Nov 2026 11:09:02 +0800
+Shawn Guo <shengchao.guo@oss.qualcomm.com> wrote:
 
-Hi Barnabas, Adam,
+> From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> 
+> adc5_gen3_add_aux_tm_device() never sets the auxiliary device id, so
+> every ADC5 Gen3 instance with at least one qcom,adc-tm channel tries
+> to register the same device name. With ADC_TM channels on more than
+> one PMIC, the second instance to probe fails:
+> 
+>   sysfs: cannot create duplicate filename '/bus/auxiliary/devices/qcom_spmi_adc5_gen3.adc5_tm_gen3.0'
+>   ...
+>   auxiliary qcom_spmi_adc5_gen3.adc5_tm_gen3.0: adding auxiliary device failed!: -17
+>   qcom-spmi-adc5-gen3 c400000.spmi:pmic@8:adc@7200: error -EEXIST: Failed to add auxiliary TM device
+> 
+> The ADC probe then fails as a whole, so that PMIC loses both its IIO
+> channels and its thermal zones. This shows up on Nord, which has
+> thermistor channels on two PMAU0102 PMICs.
+> 
+> Each ADC instance already has a unique IIO device ID. Use it as the
+> auxiliary device id instead of allocating one from a separate driver-wide
+> IDA, which removes the custom ID allocation and release handling. The
+> ADC_TM driver matches on the device name only, so the instance number
+> does not affect binding.
+> 
+> Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 
-Thanks for the review, that makes sense. I am preparing a v3 that
-moves the shared parts of lemon into sm6115-xiaomi-lime-common.dtsi
-and has both lemon and citrus include it. I used the name lime-common
-following your naming. Happy to rename it.
-
-Plan for v3:
-1. dt-bindings (unchanged)
-2. lemon: move the shared nodes into the common dtsi, no functional
-   change intended
-3. citrus on top of the common dtsi
-
-I can only test citrus. I do not own a Redmi 9T, so lemon is untested
-on hardware. Instead, I compared the lemon DTS before and after the
-split, normalized with dtc (dtc -I dts -O dts -s). The only
-difference is the numbering of two auto-generated phandles. I will
-describe the check in the cover letter. Adam,
-would you be able to test lemon once v3 is posted, or look at the
-split beforehand?
-
-The IPA carve-outs (pil_ipa_fw_mem and pil_ipa_gsi_mem) are identical
-on both, so they now live in the common dtsi.
-
-I kept the following per variant because I cannot tell whether they
-are real hardware differences or just differences between the stock
-firmware images:
-
-- ADSP carve-out: 0x53800000/0x2200000 on citrus, 0x53400000/0x2600000
-  on lemon. Both regions end at 0x55a00000, so only the start and
-  size differ. I can only confirm that the citrus value works on my
-  device.
-- GPU carve-out: 0x55a15000 on citrus (right after pil_ipa_gsi_mem,
-  like the SoC dtsi defaults), 0xfa400000 on lemon. The citrus value
-  works: the GPU runs with a full DT that includes the display
-  pipeline, which is not part of this series. I cannot verify
-  lemon's value. Adam, is 0xfa400000 intentional?
-- PM6125 regulators: seven have different voltage ranges (s7, l5,
-  l7, l11, l17, l18, l22). l24 has the same range, but only citrus
-  sets regulator-allow-set-load. lemon also marks l5, l7 and l22 as
-  always-on, citrus does not.
-- citrus deletes cdsp_sec_mem and the orientation-switch property of
-  usb_qmpphy, lemon does not.
-
-Barnabas, Adam: do you know whether these differences are real, or
-whether they only come from the firmware of each model?
+Applied.  Given the slightly odd nature of this series, Loic can you confirm
+you are fine with having the authorship + Sign off.   Given alternative
+would have been Shawn having that and Shawn sent this, the attribution
+seems fine to me - but best to check!
 
 Thanks,
-Amir
+
+Jonathan
+
+> ---
+> This is the squashed version as requsted by Jonathan at:
+> https://lore.kernel.org/all/20261101020047.66034613@jic23-hlaptop/
+> 
+>  drivers/iio/adc/qcom-spmi-adc5-gen3.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> index c68c6c5f6aca..a23eb5c9096d 100644
+> --- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> +++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> @@ -610,7 +610,7 @@ static void adc5_gen3_delete_aux(void *data)
+>  
+>  static void adc5_gen3_aux_device_release(struct device *dev) {}
+>  
+> -static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+> +static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+>  {
+>  	struct tm5_aux_dev_wrapper *aux_device;
+>  	int i, ret, i_tm = 0;
+> @@ -620,6 +620,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+>  		return -ENOMEM;
+>  
+>  	aux_device->aux_dev.name = "adc5_tm_gen3";
+> +	aux_device->aux_dev.id = id;
+>  	aux_device->aux_dev.dev.parent = adc->dev;
+>  	aux_device->aux_dev.dev.release = adc5_gen3_aux_device_release;
+>  
+> @@ -799,7 +800,7 @@ static int adc5_gen3_probe(struct platform_device *pdev)
+>  		return ret;
+>  
+>  	if (adc->n_tm_channels > 0) {
+> -		ret = adc5_gen3_add_aux_tm_device(adc);
+> +		ret = adc5_gen3_add_aux_tm_device(adc, iio_device_id(indio_dev));
+>  		if (ret)
+>  			dev_err_probe(dev, ret,
+>  				      "Failed to add auxiliary TM device\n");
+
