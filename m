@@ -1,113 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793571780;
-	b=HfzUDyCwXjlOeNxZ67DC7GfWJuch05DXG7yESLMUqKDrtTObNcZpVgX5021YPw/uYYHf
-	 MKxFujyVHouaENuOCeqNYqUq6QIioGsSECqorrWCWHiZU2PTPCPlYg7mdJKifAkolIYDG
-	 MCXIOI4ZE+b2kc8mJRaVAbHxu7+i6wuWAIvMSPaoakprgaLaJEJuzfER6c0oPrJ5n/iw2
-	 Fkxb6mxzD/VeaF7Z7Iix2pN6wtN4bUfjHKTOOrnxQlxYh+H4Jdx6Mcn4oBABR4FlVc0sD
-	 Aq5rRhJfvyFQPK2Zp7uI2my3YvprDggE4inN8gVwjBh/uIVTONoVMb7ujelD8EUhHTA==
+	t=1793571789;
+	b=LmCLp3/NyeNq4j0GGsqbRqAy/n+OSywAvMLQ0LAFdBsyXo6pXNd1kECwXPIsHshTEh17
+	 Gz/RG9HYd194qPp/Ep+R0q4UWBMfABhYsMCworyttOgFF6wLJLlAuc0R27NqwvvKFtqi2
+	 WSzMXQ1JBf17qY9TWewzVqZp3wE+nhL6y2mqRGK0sxJE+alTfegG85LA8iIoW3iHUw+BU
+	 Xqxk+kISs3JiHUROp2DmDD1shOy/ZxXtTqMBRW4sZZkJTFhI7sQ8albtBuMzhLC45wKKm
+	 qaOzINBKKFvATM5EBoqT0rMJ0hgiED0wVyCnJ/buwuWH/VYPnOyxFpsy9DslXRAyXkw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793571780;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793571789;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=QzJZ2BcidzT4ISYjzhL7JV9DbvORXIU2G7T+Ba5JI9Y=;
-	b=MA4Fp2ODZGzFC98SUDvbWZdzRVEy5aigLT/Mv8PSqb0an6daWnaY2TneoEDSjQy2Yy2u
-	 GcmAUIwX7nHJArMqK503Q5CIlcSPkKgL4KGSTrzaJzy5A30nL/K4pmgyRbHtrxB/bACiX
-	 ijdxmlYA5j0Kloahctay7TsejwcLpW2Dh+EzVI9Tp5hWsqu9RdYMVqJ7NzJLEheNSQmmY
-	 C2r5RNqrOtl9rh/anI4QO4KFL1g6aQfOVM1L70lQbX1Dx5NAxmap96jt13Aug7feKn4JU
-	 ogELBjGo5+CDd6rGbBf2jQlIftXyPTpNJSTE7mujOhHj5zyeGjumb4RqIHDfoWondbQ==
+	bh=dyqDo48U0wN+/HQ14KBIOYzfxhiZJtrEQSu8dO44Rh0=;
+	b=f4edso+kBjZDZO+7ScVLRnMPrBzszu2L6bBbK5CYFO7mrUz2Y5FWm5QQNPPJBSNkte4W
+	 2t34vWuMr7jkY5/XSpTMW60AGFYiXyCme0FcAG0yskV3lqNStiZVSZn7ZrIIN57FcKg5r
+	 2m2oNSvftxWfq3JzMDoB4UDPY6DbPTyO4efejCkVw4/HtLs1XlpVxQSGazf5weEMjjBr1
+	 2MQ4yLdZhMLe6uaD8928YlR9kpY0xO97CzQqroVX7U2RsMk8Tzr82MoGNLRkLdDIIaVl9
+	 DI+GFE+B6uY4M6Xr3afyfdzE39kl9ojcvD9K1SJcOUIZ+tdTKrUEqCLq32ZFi3Iufjg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ChOArK5W;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=KwHMyXQR;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="Zx/pqMOe";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BUxSwRde;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 498EA60701E7
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 22:22:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 498EA60701E7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D5446070E91
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 22:23:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D5446070E91
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ChOArK5W;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=KwHMyXQR
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1KJpVb2821989
-	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 22:22:58 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Zx/pqMOe;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BUxSwRde
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1KJtbr1770004
+	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 22:23:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	QzJZ2BcidzT4ISYjzhL7JV9DbvORXIU2G7T+Ba5JI9Y=; b=ChOArK5WAaHq7hGi
-	YakHkYVMPJOC02eg1CDoYz/Ff7HQSI0XKqkSdQtxfPHfThcpLpn+gciEWFyrfl+z
-	8S8bMjztTvj4HMNlAXnWrunHOYwnMmgXwebSsc7lNmY+wVDO6DNI9pe+nWW524Oa
-	InhIrzpefGJRyi0wP303EwJFhvsLTuW3HD7r8lGdeOC6Sa0snhr5ZmtJLdLlvP9d
-	IdjhT8NniM1qH2wGjpSRDaqseZ/ltmmuaeJFO9sSwwuhkXRl7XeJgeUJ6JDJqMWK
-	cv2+8FW6NtUtL5z88WHlY4gpUE7Okvm5doyY0YsB+YX/JTPNmBwWHZTk3rpmdM9z
-	xH3RTw==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn79rveyf-1
+	dyqDo48U0wN+/HQ14KBIOYzfxhiZJtrEQSu8dO44Rh0=; b=Zx/pqMOeO+Binx9x
+	Z5KLCZzSocsZbHeOTa+usaFcBz7nZcKDppymS5i9nA/5k2CLSqB0EbFzhcdvifWu
+	mGnDleyt+jVFcP6HMgrL13A/aIIAbFGOL6jNFRciQ4K+o6MKsvDTPE38Lca8iv1i
+	FcO/cLAdNprOdbyGUXbMRbTlMc3FCi9/UK4oQg2sViEWdaZsPk+CzhXbYc7XEKvB
+	SWZaDkQA9ub9KbwNIv+o5jQenUbd6DcbRcapUNf9P6RazyGPZH4dftd1nVo0rKJ0
+	DbEyb4u/M6g2hbUX15Q0rjunDgsOpZi4ucLLJBFj1NxFugb3DWAw5cOjknjNDccB
+	CU96TA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn8j2vbdu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 22:22:58 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-14373747468so2441044c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 14:22:58 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 22:23:08 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-341eff9e381so5881226eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 14:23:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793571778; x=1794176578; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793571788; x=1794176588; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=QzJZ2BcidzT4ISYjzhL7JV9DbvORXIU2G7T+Ba5JI9Y=;
-        b=KwHMyXQRXixYq/z2yHBoGgyvVy5YAb7a6JuyG+e0soHjZjado8IIbPrXdSD1cYh4gY
-         wBKpqg0BdqDz2ZmcsMX0ygZUCsxxyi3olGkwKu+bvEf54Bn43F9wz3jhapZARqaLh91s
-         vKgxdStMTtZ0iurJ962XHSD2zl8ZiIrdHosQjojc3f7EDUZ94oPLm7XBhW+ieK1NGDP1
-         DBwx3B2nUyWzfX0JVXKLuchsFTd8KPDVF6CGSoTGIiYaMfT9igJCS+jpakM8ZHUWCh88
-         IY7X13NGOmBKMD9uKptKw3IJ9KVyBqM9YMGQ4E57TWXDBpjaQtm7t2U9qzgtdVR1DFrL
-         tW9Q==
+        bh=dyqDo48U0wN+/HQ14KBIOYzfxhiZJtrEQSu8dO44Rh0=;
+        b=BUxSwRdeCZ25VBhxoYj02anWQEoCDjIC1NfG6fnyVXB4lSMd/Yy8E+crqf9p9yigIX
+         2loCmCrx9hEePzkplRVAf3+HgPQimEf0CZBUgB1VNT+GWZunbP/uuuKF/TM8zMBx8VwP
+         KlcLU+xoMoG3yTjsG0Wi7J4FAT1a5AuSgfsKNUIQLJuKn8Q5SrU7QYpYqiXiFX5VnzWJ
+         0XwUdcNPKRwRr2H7MsWhiabuYPV6MoDmXINBMCkyMXO5i0Q49f9eWKxOSXI5i3wLsR8A
+         X5mI9pXaCsnCJ10B3mx0BMIbRoPb+PKXtJOKSBI9FYRgkNsw31otMDJMz2ZTg/X6TXB7
+         BfwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793571778; x=1794176578;
+        d=1e100.net; s=20260707; t=1793571788; x=1794176588;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=QzJZ2BcidzT4ISYjzhL7JV9DbvORXIU2G7T+Ba5JI9Y=;
-        b=f7bJPE8/w96G+LvQIeUbgtFrE9NYVEiLoqDmyySqvFxvi8IZxj06b8JRBW5K6tLZ3J
-         bBvUzUmkGfq8JJRmZLcp9l47ah88TENgQbgj16/4KEWTpwoPQxHpiM/aX8x6ErOn6hBs
-         sTMfWkFEXehV9Ts6AiRCsIaCpck5Qjm0fdZHwgU+xGU4ivbd9B51nHvtD9y85UFGa/iD
-         GUF5Aq6G09SrQsCFvN2TgHwUBWlCFSsEk1e4i0raWhusRfE1nUT9eqGd6/j1MUJUxQOu
-         COVED6++iUmz+CfOyTxT7wlmRGn78abS67egmXAlmkNWDazQFI+X4WuAhsOB3vhHw1KP
-         rn7g==
-X-Forwarded-Encrypted: i=1; AKwUvByGB2dkOG3v5LZuLeMZRL+ohCYMXrDc974sRGo4ZRWQQpTiAqWiH0S57SsOVy7OYRh0Ui/9XQOyU6efjX1l@vger.kernel.org
-X-Gm-Message-State: AFq9FYJqR5Zinv622v0e6cNxmK3hQ2S2nDF0zKQ5BlB6pCNXysYrrkDe
-	eh+3aPWpt39g5IxroGuSxccypfhBvYeVgV9rqxh4lo7E+RjLvfYC5QabnapAxlryp00N2zmID2L
-	IqMgZr7yqFXB3XPkAhbXeVFJLFQ3hNSKV19Q8xy72N7yFUMiETholVIVsZem1mZI2InLJ
-X-Gm-Gg: AYBFou1pD14Y+fxQibc7XviEOBXUBBdLDbGogwHAaBMOGjxM8y8dXOnbOwPX6icYKSO
-	2QiiH0j6jzzjo/+tQ3ee+ZItsEnzTpWSOjZb7iD3vwPM+fFmLnVst0L+jZ/cbu5JU8lRDyXcnOp
-	cgWlpVP9OAbzsaFnm1Mnab0JSHFSNswdgALJM6IrBlrcpm6FKK6MV7vA6kKlr3JBho++IIwD3G5
-	g/oReCaLtggPJ8OhyWG2uMzuPFF0QV9tvDLNNGiFBMDSIenuI3i92I9jNvASMRMIyfKb0EyR34O
-	zGNQ4uSemaQsA3mWwYgCB4r8ngu0iOSp+vspbWisxmx0wchY4kXcb10ztdtbSBDxucDpIVEI2JM
-	8cE/VmWn5+RTh2NE45yYJ1zpebuB9hFTdfwAmdn8jhc6vM6yNmE/P4R/hsLmVq5aL/1bhZQ2DKL
-	J+lZh/5A==
-X-Received: by 2002:a05:7022:1509:b0:195:9228:50a0 with SMTP id a92af1059eb24-1ac5d3ba9f2mr14633010c88.42.1793571777218;
-        Sun, 01 Nov 2026 14:22:57 -0800 (PST)
-X-Received: by 2002:a05:7022:1509:b0:195:9228:50a0 with SMTP id a92af1059eb24-1ac5d3ba9f2mr14632885c88.42.1793571776189;
-        Sun, 01 Nov 2026 14:22:56 -0800 (PST)
+        bh=dyqDo48U0wN+/HQ14KBIOYzfxhiZJtrEQSu8dO44Rh0=;
+        b=fM3Y/4vbYahEnX2utQ22htMJpTEwRPWaof54K19Rdh24BPeuG1RWamAPxE2krXx7oo
+         AmsPTss24PZjlYVpKDNUDhnWMxQRboMXtjcfcwK+NOuB8M3VoV4lPZ3FVXWmcj5jnnFp
+         nTyEKmvI4xhig6/n2WVcXE9D9QAdKGE0Cq2ZVwVHJioyw/rcMq+MqRKm+Ruo+VsHO0QI
+         K/EDmbzbrjoS/ZVsel4W+fssz2kdWhhlCgjEO2gCQmko8+UuYhOM4YWtOWHjRuwAy2Y0
+         tv2da64dhrFKOuYxL2I7bydEe+/aa8WcXN2RLzeITM1W70mPS49CpO5qcChILU8ze/qo
+         14lA==
+X-Forwarded-Encrypted: i=1; AKwUvBywdwcYsyodH7hhypx8V/YyobK7WK2Rl8uFaLxXjARby+vi/2AhCo8hrCLDEeQxmUuetnSXWtq9almifGrG@vger.kernel.org
+X-Gm-Message-State: AFq9FYIbzyvKddDzeni7IG17wa5C3uEdtZhtKQlqjHCg0bcsffLbd4/z
+	ksrHJ+PNlj0jGXATotSZ8hvYhwyRtbjzweAHIuC+isDcBTP0Tf5+qZBVvafiNWuIrByYyViUMdP
+	HJLe48ILyTp2Xk0YPKtb7a1KPyV1Vup4+VA0ZbST6OfnAeIaIIboDObbf1CqUeVNaRiiw
+X-Gm-Gg: AYBFou3bb74t8sCCzl/Tyzkqv/XGS0UvBEPUNDUK8XxfSL2tS0xYPARJ/YBTpOqIfpB
+	/N0VswbZOPb44ptCf/W3Dit+hBP1nPMQG08sdAZd6TMHtJ6UaI7RQEe5aFCIErijT9BlpyKzC/i
+	XKDoTLQC2B5Cgkoy9oxOGojGAjyNIn+S+5zWxiLnSzpeWWcVor8RKfDcfvUrfHWFKd4Jd8rJ9LX
+	noo/IhsSfeghrrZThGgkSe9z6Bm2yq/0d3KuSsT8H5HMymiMelIDPKXfLUOr6RRFQAEuyh82E7j
+	Pcz+me2pKmc+aU24DPz0HQtlz34V11l4547X9nzuKOelpe83gWwp13prkGik962ZLFcqYCLu62M
+	ac1UAj2AUgjMLbXX3Bxg89wlWKgB3pETTyc6w6BVnzgEhteTklpzI1CrvyxpFI66nbClMf6mvnb
+	xkMzKxQw==
+X-Received: by 2002:a05:701b:4509:20b0:1a3:9936:d11e with SMTP id a92af1059eb24-1ac5e6007a2mr12040856c88.41.1793571787671;
+        Sun, 01 Nov 2026 14:23:07 -0800 (PST)
+X-Received: by 2002:a05:701b:4509:20b0:1a3:9936:d11e with SMTP id a92af1059eb24-1ac5e6007a2mr12040776c88.41.1793571786890;
+        Sun, 01 Nov 2026 14:23:06 -0800 (PST)
 Received: from hu-ekangupt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac13ef1932sm27742653c88.2.2026.11.01.14.22.45
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac13ef1932sm27742653c88.2.2026.11.01.14.22.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 14:22:55 -0800 (PST)
+        Sun, 01 Nov 2026 14:23:06 -0800 (PST)
 From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Date: Mon, 02 Nov 2026 03:51:21 +0530
-Subject: [PATCH v4 08/25] accel/qda: Add legacy ops base and auxiliary
- device
+Date: Mon, 02 Nov 2026 03:51:22 +0530
+Subject: [PATCH v4 09/25] accel/qda: Add legacy FastRPC shim skeleton
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-v4-v4-8-88f2f24a5f0b@qti.qualcomm.com>
+Message-Id: <20261102-v4-v4-9-88f2f24a5f0b@qti.qualcomm.com>
 References: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
 In-Reply-To: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
 To: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
@@ -147,481 +146,379 @@ Cc: lingtong@qti.qualcomm.com, cacar@qti.qualcomm.com,
         Chenna Kesava Raju <quic_chennak@quicinc.com>,
         Ekansh Gupta <ekangupt@qti.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793571679; l=16111;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793571679; l=10632;
  i=ekangupt@qti.qualcomm.com; s=20260223; h=from:subject:message-id;
- bh=tJ56OicBjzqOAJbg765udfwE3azsMq9/1F/R/iYRhwQ=;
- b=H/cH8IjyD5JbjN1TocakKmA92lGHrxzWQvX6gaOYO0DXn6o6Lh/PT+au5DvBgOPuDx+oVhDse
- yOr0fIfwk+MADtVcENCazqd2VR8J78ZHiVx4vxy2ssI4jAnfPeN+JT1
+ bh=JRvVnRwqFjLn0AI8JRg3A4maBAywdoHfA7bwJFsszxY=;
+ b=/Zdsb0wLzHJ0hKqyoEAtcmWfrL5VJE79940mlHqDZsukvGybBVSLQnAlLaxHXy2Cs+2zu1++r
+ T3LMB5J/4ZeDBOTZWxceu4obcG6IPH4LI4sB9+mShtiaCY0ewybVCC4
 X-Developer-Key: i=ekangupt@qti.qualcomm.com; a=ed25519;
  pk=n0SepARizye+pYjhjg1RA5J+Nq4+IJbyRcBybU+/ERQ=
-X-Proofpoint-ORIG-GUID: VcAvIMpt_ozc6otYj2zEf_9HFfdrHRXU
-X-Authority-Analysis: v=2.4 cv=Wtq+otfv c=1 sm=1 tr=0 ts=6ae7bbc2 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: akNHaa6oq9MAZCwBEdD_E6fJcbhSlO_U
+X-Proofpoint-ORIG-GUID: akNHaa6oq9MAZCwBEdD_E6fJcbhSlO_U
+X-Authority-Analysis: v=2.4 cv=S5RMU4sP c=1 sm=1 tr=0 ts=6ae7bbcc cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=BD9PkF2Qa3Gb5rzLt0MA:9 a=QEXdDO2ut3YA:10
- a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfX5K0nHhXwoq0+
- U/aPrV1+xmQk0HXeOofUPLauGJ+KFLfnzjANpzDwUsOtBkXz7lui+D6DfpPBzTSXzGRniJiyXSF
- MyF8lPNOTlr6jl0pNRf9afHwabZ/GmE=
-X-Proofpoint-GUID: VcAvIMpt_ozc6otYj2zEf_9HFfdrHRXU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfXyhAogbsI8i+y
- Oevjd7yGFju6S536CLT7edF+w9OmxoLeZpAVAHOEjQk8icMAKhvEYBkx9HbZT+9b7Z0fwurUg4d
- wWoaw/4zA3cJuzKHQV+gYU2KCgJUBJRvMOpirYfsMJYM6D90oxC7TP7+82izHYz4u5OYB5Z3HP0
- WiL+vDiaaurFu/zk7TtHjS59JrVP+NWWNiq+yWoYWwZso+95s20V5y0UY1dw952+UDxg/hDBgJa
- hZoo6I1rCPNXfJ+BQQlm57+yXr5sLJoUot+1rCX81ay+nWpwVbpud9MBzuKCIyuDPpwGBIlL3BI
- VqmC850s6NCHj9nwft+2yggbMI52tE/mCR0B4tvQJ4YUHmo0Ru51HGNPo4GSu/pY7VCkV42ZVRu
- U3G6k3LUNsZprXXQ6yiwJJ1iHXP0Ke5UUg5BdhAO3252yS8gujmfcAKg/9+1nO7zDVe7dlM09W/
- qtzorTwSLR1JO/8QOdA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=_LhGIrvswYtaaL6YFqAA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfX1O1ldox80usC
+ 4hSIjlPaWw86PvlhdU3Ew3i8Z7LoFvGSOkhOg6ypWeqfqArhvQM5fVDxazvFd6KNjF8CnY5ARcb
+ D6QmxldLcfLc60rjKw6O3bRoz2l5GSk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfXxcDcMypFLXBA
+ Znpm0RIqEPFlHQ0ZmycV7IzIeJKTOPksPKlBLpySfABzYvhv8IVJN2478gAOnZcTalaH6WdN8Gc
+ d2r2d8uyIhWKPJaa1Z5vpj5dRR0lcw+nQ2Ve+dnIy6Lwy7kfCR5LJHn99y0u26TKbDEREHvL7Nr
+ BA+4H+Byk2UVN0+C7q5gLPqweMVVTf/z8v3HBaCAKNRc3EFUu8X9yoWqSYJrWEqxYSDyuCkmKFm
+ m0RQQ3icYwIy4R5tIKNWpQ5ZdqyNeSac84FsYkQ6xDVZvZhWrxAOOLPWuGC4C8hnXvLYDOiB+JW
+ kfP3GDJrTspKkZv2+cKoaBBl0OPKLlEpWvbaHyMXqNR1ani0G7u65ii0nEJtPcdCYGpoDKoITc1
+ S+OAJsGmuIugEFnT7HF8TLxF/RrtZf68oC9+u+HFX1fPqqGkhKGNBJR7O6+f78zwcp2B4pvL/6X
+ bElchN0a44wg+/ByNLw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-01_07,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 spamscore=0 adultscore=0 phishscore=0 suspectscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ malwarescore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611010089
 
-The /dev/fastrpc-* interface of the driver this one replaces is to be
-served by a separate compatibility module, so existing user space keeps
-working. That module needs two things from here: a device per DSP domain
-to bind to, and a way to use the same session and buffer handling as the
-accel UAPI rather than reimplementing it.
+Existing FastRPC user space talks to /dev/fastrpc-<dsp> through the ioctl
+interface of the driver in drivers/misc/. Add a separate module that
+serves that interface on top of this driver, so such user space keeps
+working while it moves to the accel UAPI. It is separate so that the
+driver itself does not depend on it, and so it can be left out.
 
-Create an auxiliary device per domain for it to bind, rather than
-keeping a private registry and a notifier callback. Domains appear as
-each one's rpmsg channel probes and the module may load at any point in
-that, which is exactly what the driver core already handles: it matches
-devices to the driver whichever order the two arrive in, and autoloads
-the module from the device's modalias. The module is optional, so
-failing to create the device is not fatal to the accel interface.
+The module binds the auxiliary device the driver creates per DSP domain
+and gives that domain its misc node(s). As in the driver it replaces, a
+channel is secure unless its DT node has qcom,non-secure-domain. ADSP,
+MDSP and SDSP get a single node, secure or not according to the channel.
+CDSP and GDSP support unsigned PD offload, so they always get both a
+secure and a non-secure node, letting untrusted applications use the
+latter on a secure channel. Nothing distinguishes the two nodes yet;
+that is applied to the operations that need it as they are added.
 
-The device is destroyed explicitly on rpmsg remove rather than through
-devres, so that the legacy nodes are taken away before the DRM device is
-unplugged and nothing can open one during teardown.
+Each open file gets a session from the driver, which also pins the DRM
+device for as long as the file stays open.
 
-Collect the entry points the module needs into one table exported only
-to it, so this driver does not depend on the module. Start with session
-create/destroy and DMA-BUF allocation/import; further ops arrive with
-the code that uses them.
-
-A session the module creates has no DRM file behind it, so nothing else
-holds the DRM device. Take a reference when it is created, or the device
-could be freed on rpmsg remove while a legacy file is still open. For
-the same reason, buffers are exported and imported as DMA-BUFs without
-a GEM handle, and struct qda_session gains a ->file that is NULL for
-such sessions. Code that resolves handles can only be reached from the
-accel UAPI.
+Only FASTRPC_IOCTL_ALLOC_DMA_BUFF is implemented here: it allocates a
+buffer and returns it as a DMA-BUF fd. FASTRPC_IOCTL_FREE_DMA_BUFF
+returns -ENOTTY, as in the driver this replaces; buffers are released by
+closing the fd. The fd is installed only once nothing else can fail.
 
 Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
 ---
- drivers/accel/qda/Kconfig          |  1 +
- drivers/accel/qda/Makefile         |  1 +
- drivers/accel/qda/qda_drv.c        | 48 +++++++++++++++++++++--
- drivers/accel/qda/qda_drv.h        | 31 +++++++++++++--
- drivers/accel/qda/qda_legacy_ops.c | 80 ++++++++++++++++++++++++++++++++++++++
- drivers/accel/qda/qda_legacy_ops.h | 41 +++++++++++++++++++
- drivers/accel/qda/qda_prime.c      | 33 ++++++++++++++++
- drivers/accel/qda/qda_prime.h      |  4 ++
- drivers/accel/qda/qda_rpmsg.c      |  3 ++
- 9 files changed, 235 insertions(+), 7 deletions(-)
+ drivers/accel/qda/Kconfig            |  16 +++
+ drivers/accel/qda/Makefile           |   2 +
+ drivers/accel/qda/qda_fastrpc_shim.c | 268 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 286 insertions(+)
 
 diff --git a/drivers/accel/qda/Kconfig b/drivers/accel/qda/Kconfig
-index e2f3f01016c6..c174f9edf2d5 100644
+index c174f9edf2d5..c440191a54ff 100644
 --- a/drivers/accel/qda/Kconfig
 +++ b/drivers/accel/qda/Kconfig
-@@ -8,6 +8,7 @@ config DRM_ACCEL_QDA
- 	depends on DRM_ACCEL
- 	depends on ARCH_QCOM || COMPILE_TEST
- 	depends on RPMSG
-+	select AUXILIARY_BUS
- 	help
- 	  Enables the DRM-based accelerator driver for Qualcomm's Hexagon DSPs.
- 	  This driver provides a standardized interface for offloading computational
+@@ -26,3 +26,19 @@ config DRM_ACCEL_QDA
+ 
+ 	  To compile this driver as a module, choose M here: the
+ 	  module will be called qda.
++
++config DRM_ACCEL_QDA_FASTRPC_SHIM
++	tristate "Qualcomm DSP accelerator legacy FastRPC compatibility shim"
++	depends on DRM_ACCEL_QDA
++	default DRM_ACCEL_QDA
++	help
++	  Exposes a /dev/fastrpc-<dsp> character device per DSP domain, serving
++	  the ioctl interface of the FastRPC driver in drivers/misc/ on top of
++	  the QDA driver, so that existing FastRPC user space keeps working.
++
++	  This is a compatibility layer for user space that has not moved to
++	  the native interface in include/uapi/drm/qda_accel.h; new users
++	  should use that instead.
++
++	  To compile this driver as a module, choose M here: the
++	  module will be called qda_fastrpc_shim.
 diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
-index 01c0319da900..a867a888c5f5 100644
+index a867a888c5f5..0996e4ed5798 100644
 --- a/drivers/accel/qda/Makefile
 +++ b/drivers/accel/qda/Makefile
-@@ -10,6 +10,7 @@ qda-y := \
- 	qda_drv.o \
- 	qda_gem.o \
- 	qda_ioctl.o \
-+	qda_legacy_ops.o \
- 	qda_memory_dma.o \
- 	qda_memory_manager.o \
+@@ -16,3 +16,5 @@ qda-y := \
  	qda_prime.o \
-diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-index 5e953d1f98bf..21113deceaad 100644
---- a/drivers/accel/qda/qda_drv.c
-+++ b/drivers/accel/qda/qda_drv.c
-@@ -1,5 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0-only
- // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ 	qda_rpmsg.o \
+ 	qda_soc.o
++
++obj-$(CONFIG_DRM_ACCEL_QDA_FASTRPC_SHIM) += qda_fastrpc_shim.o
+diff --git a/drivers/accel/qda/qda_fastrpc_shim.c b/drivers/accel/qda/qda_fastrpc_shim.c
+new file mode 100644
+index 000000000000..25f5c242efde
+--- /dev/null
++++ b/drivers/accel/qda/qda_fastrpc_shim.c
+@@ -0,0 +1,268 @@
++// SPDX-License-Identifier: GPL-2.0-only
++// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++#include <linux/array_size.h>
 +#include <linux/auxiliary_bus.h>
- #include <linux/module.h>
- #include <linux/slab.h>
- #include <drm/drm_accel.h>
-@@ -14,7 +15,13 @@
- #include "qda_ioctl.h"
- #include "qda_prime.h"
- 
--static struct qda_session *qda_session_alloc(struct qda_dev *qdev)
-+/**
-+ * qda_session_alloc() - Create a session on a device
-+ * @qdev: Device to create the session on
++#include <linux/dma-buf.h>
++#include <linux/err.h>
++#include <linux/fcntl.h>
++#include <linux/file.h>
++#include <linux/fs.h>
++#include <linux/limits.h>
++#include <linux/miscdevice.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/slab.h>
++#include <linux/string.h>
++#include <linux/uaccess.h>
++#include <drm/drm_drv.h>
++#include <uapi/misc/fastrpc.h>
++#include "qda_drv.h"
++#include "qda_legacy_ops.h"
++
++/* State of one open /dev/fastrpc-* file */
++struct qda_shim_file {
++	struct qda_session *session;
++};
++
++/* One misc device node */
++struct qda_shim_node {
++	struct qda_shim_dev *sdev;
++	struct miscdevice miscdev;
++	char *name;
++	bool registered;
++};
++
++/*
++ * One per DSP domain, holding up to two misc nodes. As in
++ * drivers/misc/fastrpc.c, a channel is secure unless its DT node has
++ * qcom,non-secure-domain. ADSP, MDSP and SDSP get a single node, secure or
++ * not according to the channel. CDSP and GDSP, which support unsigned PD
++ * offload, always get both, so that untrusted applications can still reach
++ * the non-secure node on a secure channel.
 + *
-+ * Return: The new session, or ERR_PTR on failure
++ * The two nodes behave identically for now; what separates them is applied
++ * to the operations that need it as those are added.
 + */
-+struct qda_session *qda_session_alloc(struct qda_dev *qdev)
- {
- 	struct qda_session *session;
- 
-@@ -26,6 +33,7 @@ static struct qda_session *qda_session_alloc(struct qda_dev *qdev)
- 
- 	return session;
- }
-+EXPORT_SYMBOL_FOR_MODULES(qda_session_alloc, "qda_fastrpc_shim");
- 
- static int qda_open(struct drm_device *dev, struct drm_file *file)
- {
-@@ -42,13 +50,18 @@ static int qda_open(struct drm_device *dev, struct drm_file *file)
- 	return 0;
- }
- 
--static void qda_session_free(struct qda_session *session)
-+/**
-+ * qda_session_free() - Release a session and whatever it still holds
-+ * @session: Session to release
-+ */
-+void qda_session_free(struct qda_session *session)
- {
- 	if (session->assigned_iommu_dev)
- 		qda_memory_manager_release_device(session->assigned_iommu_dev);
- 
- 	kfree(session);
- }
-+EXPORT_SYMBOL_FOR_MODULES(qda_session_free, "qda_fastrpc_shim");
- 
- static void qda_postclose(struct drm_device *dev, struct drm_file *file)
- {
-@@ -117,10 +130,37 @@ int qda_register_device(struct qda_dev *qdev)
- 	int ret;
- 
- 	ret = drm_dev_register(&qdev->drm_dev, 0);
--	if (ret)
-+	if (ret) {
- 		drm_err(&qdev->drm_dev, "Failed to register DRM device: %d\n", ret);
-+		return ret;
++struct qda_shim_dev {
++	struct qda_dev *qdev;
++	struct qda_shim_node nodes[2];
++};
++
++static const struct file_operations qda_shim_fops;
++
++static int qda_shim_open(struct inode *inode, struct file *file)
++{
++	struct qda_shim_node *snode = container_of(file->private_data, struct qda_shim_node,
++						   miscdev);
++	struct qda_shim_file *sf;
++
++	sf = kzalloc_obj(*sf);
++	if (!sf)
++		return -ENOMEM;
++
++	sf->session = qda_legacy_ops_table.session_create(snode->sdev->qdev);
++	if (IS_ERR(sf->session)) {
++		int err = PTR_ERR(sf->session);
++
++		kfree(sf);
++		return err;
 +	}
 +
-+	/*
-+	 * The legacy FastRPC interface is served by a separate module, which
-+	 * needs a device per DSP domain to bind to. Put one on the auxiliary
-+	 * bus and let the driver core handle discovery, ordering and module
-+	 * loading; the module is optional, so failing to create it is not
-+	 * fatal to the accel interface.
-+	 *
-+	 * The auxiliary bus names devices <modname>.<name>.<id> and requires
-+	 * the name to be unique across the bus, so every DSP domain needs its
-+	 * own id. The accel minor index is unique per registered device.
-+	 */
-+	qdev->legacy_auxdev = auxiliary_device_create(qdev->dev, KBUILD_MODNAME,
-+						      QDA_LEGACY_AUXDEV_NAME, qdev,
-+						      qdev->drm_dev.accel->index);
-+	if (!qdev->legacy_auxdev)
-+		drm_warn(&qdev->drm_dev, "Failed to create legacy FastRPC device\n");
- 
--	return ret;
++	file->private_data = sf;
++
 +	return 0;
 +}
 +
-+void qda_unregister_device(struct qda_dev *qdev)
++static int qda_shim_release(struct inode *inode, struct file *file)
 +{
-+	if (qdev->legacy_auxdev) {
-+		auxiliary_device_destroy(qdev->legacy_auxdev);
-+		qdev->legacy_auxdev = NULL;
-+	}
- }
- 
- MODULE_AUTHOR("Qualcomm AI Infra Team");
-diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
-index 31aad9057e28..c04f19e5a91b 100644
---- a/drivers/accel/qda/qda_drv.h
-+++ b/drivers/accel/qda/qda_drv.h
-@@ -6,6 +6,7 @@
- #ifndef __QDA_DRV_H__
- #define __QDA_DRV_H__
- 
-+#include <linux/auxiliary_bus.h>
- #include <linux/device.h>
- #include <linux/list.h>
- #include <linux/mutex.h>
-@@ -20,15 +21,29 @@
- /* Driver identification */
- #define QDA_DRIVER_NAME "qda"
- 
-+/*
-+ * Name of the auxiliary device the legacy FastRPC module binds to, one per
-+ * DSP domain. Combined with this module's name it forms the match name
-+ * "qda.fastrpc", which that module lists in its id_table.
-+ */
-+#define QDA_LEGACY_AUXDEV_NAME "fastrpc"
++	struct qda_shim_file *sf = file->private_data;
 +
- /**
-- * struct qda_session - Per-open-file private data
-+ * struct qda_session - One user of a DSP
-  *
-- * Allocated in qda_open() and stored in drm_file::driver_priv.
-+ * Created either by the accel UAPI, one per open DRM file, or by the legacy
-+ * FastRPC compatibility shim, one per open /dev/fastrpc-* file with no DRM
-+ * file behind it at all. The core is keyed on this rather than on struct
-+ * drm_file so that it can serve both.
-  */
- struct qda_session {
- 	/** @qda_dev: Back-pointer to device structure */
- 	struct qda_dev *qda_dev;
--	/** @file: The drm_file this session belongs to */
-+	/**
-+	 * @file: The DRM file this session belongs to, or NULL for a session
-+	 * the legacy shim created. Anything that resolves a buffer handle
-+	 * needs this, so those paths are only reachable from the accel UAPI.
-+	 */
- 	struct drm_file *file;
- 	/** @assigned_iommu_dev: Context bank owned by this session, or NULL */
- 	struct qda_iommu_device *assigned_iommu_dev;
-@@ -64,6 +79,11 @@ struct qda_dev {
- 	const struct qda_soc_data *soc_data;
- 	/** @dsp_name: Name of the DSP domain (e.g. "cdsp", "adsp") */
- 	const char *dsp_name;
-+	/**
-+	 * @legacy_auxdev: Auxiliary device the legacy FastRPC module binds
-+	 * to, or NULL if it could not be created
-+	 */
-+	struct auxiliary_device *legacy_auxdev;
- };
- 
- /**
-@@ -84,5 +104,10 @@ struct qda_dev *qda_alloc_device(struct device *dev);
- int qda_init_device(struct qda_dev *qdev, int num_cbs);
- void qda_deinit_device(struct qda_dev *qdev);
- int qda_register_device(struct qda_dev *qdev);
-+void qda_unregister_device(struct qda_dev *qdev);
++	qda_legacy_ops_table.session_destroy(sf->session);
++	kfree(sf);
 +
-+/* Sessions, shared with the legacy shim */
-+struct qda_session *qda_session_alloc(struct qda_dev *qdev);
-+void qda_session_free(struct qda_session *session);
- 
- #endif /* __QDA_DRV_H__ */
-diff --git a/drivers/accel/qda/qda_legacy_ops.c b/drivers/accel/qda/qda_legacy_ops.c
-new file mode 100644
-index 000000000000..3566a10c6488
---- /dev/null
-+++ b/drivers/accel/qda/qda_legacy_ops.c
-@@ -0,0 +1,80 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+#include <linux/dma-buf.h>
-+#include <linux/err.h>
-+#include <linux/export.h>
-+#include <linux/fcntl.h>
-+#include <drm/drm_drv.h>
-+#include <drm/drm_gem.h>
-+#include <drm/drm_prime.h>
-+#include "qda_drv.h"
-+#include "qda_gem.h"
-+#include "qda_legacy_ops.h"
-+#include "qda_prime.h"
-+
-+/*
-+ * A session the shim creates has no DRM file behind it, and so nothing
-+ * holding the DRM device. Take a reference here: the device is allocated
-+ * against the rpmsg device and would otherwise be freed on remove while a
-+ * /dev/fastrpc-* file is still open on it.
-+ */
-+static struct qda_session *legacy_session_create(struct qda_dev *qdev)
-+{
-+	struct qda_session *session;
-+
-+	session = qda_session_alloc(qdev);
-+	if (!IS_ERR(session))
-+		drm_dev_get(&qdev->drm_dev);
-+
-+	return session;
++	return 0;
 +}
 +
-+static void legacy_session_destroy(struct qda_session *session)
++static long qda_shim_alloc_dma_buf(struct qda_shim_file *sf, void __user *argp)
 +{
-+	struct drm_device *drm_dev = &session->qda_dev->drm_dev;
-+
-+	qda_session_free(session);
-+	drm_dev_put(drm_dev);
-+}
-+
-+/*
-+ * As the GEM_CREATE ioctl, but exporting a DMA-BUF rather than installing a
-+ * handle: a session the shim created has no DRM file to hold handles, and the
-+ * legacy interface hands buffers to user space as file descriptors anyway.
-+ */
-+static struct dma_buf *legacy_alloc_dmabuf(struct qda_session *session, u64 size)
-+{
-+	struct qda_dev *qdev = session->qda_dev;
-+	struct drm_gem_object *gem_obj;
++	struct fastrpc_alloc_dma_buf args;
 +	struct dma_buf *dmabuf;
++	int fd;
 +
-+	gem_obj = qda_gem_create_object(&qdev->drm_dev, qdev->iommu_mgr, size, session);
-+	if (IS_ERR(gem_obj))
-+		return ERR_CAST(gem_obj);
++	if (copy_from_user(&args, argp, sizeof(args)))
++		return -EFAULT;
 +
-+	/* O_RDWR so the fd can be mapped writable */
-+	dmabuf = drm_gem_prime_export(gem_obj, O_RDWR);
++	/* The size is 64 bits wide on the wire but a size_t further down */
++	if (args.size > SIZE_MAX)
++		return -EINVAL;
 +
-+	/* The DMA-BUF took its own reference if the export succeeded */
-+	drm_gem_object_put(gem_obj);
++	/* args.flags is not used, as in drivers/misc/fastrpc.c */
++	dmabuf = qda_legacy_ops_table.alloc_dmabuf(sf->session, args.size);
++	if (IS_ERR(dmabuf))
++		return PTR_ERR(dmabuf);
 +
-+	return dmabuf;
++	fd = get_unused_fd_flags(O_CLOEXEC);
++	if (fd < 0) {
++		dma_buf_put(dmabuf);
++		return fd;
++	}
++
++	args.fd = fd;
++	if (copy_to_user(argp, &args, sizeof(args))) {
++		put_unused_fd(fd);
++		dma_buf_put(dmabuf);
++		return -EFAULT;
++	}
++
++	/* Publish the fd only once nothing can fail */
++	fd_install(fd, dmabuf->file);
++
++	return 0;
++}
++
++static long qda_shim_dispatch(struct qda_shim_file *sf, unsigned int cmd, void __user *argp)
++{
++	switch (cmd) {
++	case FASTRPC_IOCTL_ALLOC_DMA_BUFF:
++		return qda_shim_alloc_dma_buf(sf, argp);
++	default:
++		/*
++		 * Includes FASTRPC_IOCTL_FREE_DMA_BUFF, which the driver this
++		 * replaces never implemented either: buffers are released by
++		 * closing their fd.
++		 */
++		return -ENOTTY;
++	}
 +}
 +
 +/*
-+ * As the PRIME import path, without the handle: same reason as above. The
-+ * caller owns the returned reference.
++ * Mirrors drm_ioctl()'s unplug check. Not drm_dev_enter(): holding the SRCU
++ * read side across a wait for the DSP's reply would stall drm_dev_unplug()
++ * in qda_rpmsg_remove() for as long as the DSP takes to answer.
 + */
-+static struct drm_gem_object *legacy_import_dmabuf(struct qda_session *session,
-+						   struct dma_buf *dmabuf)
++static long qda_shim_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 +{
-+	return qda_prime_import_dmabuf(&session->qda_dev->drm_dev, session, dmabuf);
++	struct qda_shim_file *sf = file->private_data;
++
++	if (drm_dev_is_unplugged(&sf->session->qda_dev->drm_dev))
++		return -ENODEV;
++
++	return qda_shim_dispatch(sf, cmd, (void __user *)arg);
 +}
 +
-+const struct qda_legacy_ops qda_legacy_ops_table = {
-+	.session_create = legacy_session_create,
-+	.session_destroy = legacy_session_destroy,
-+	.alloc_dmabuf = legacy_alloc_dmabuf,
-+	.import_dmabuf = legacy_import_dmabuf,
++static const struct file_operations qda_shim_fops = {
++	.owner = THIS_MODULE,
++	.open = qda_shim_open,
++	.release = qda_shim_release,
++	.unlocked_ioctl = qda_shim_ioctl,
++	.compat_ioctl = compat_ptr_ioctl,
 +};
-+EXPORT_SYMBOL_FOR_MODULES(qda_legacy_ops_table, "qda_fastrpc_shim");
-diff --git a/drivers/accel/qda/qda_legacy_ops.h b/drivers/accel/qda/qda_legacy_ops.h
-new file mode 100644
-index 000000000000..76b80dc87a4b
---- /dev/null
-+++ b/drivers/accel/qda/qda_legacy_ops.h
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++
++static int qda_shim_node_register(struct qda_shim_dev *sdev, int i, bool secure)
++{
++	struct qda_shim_node *snode = &sdev->nodes[i];
++	int err;
++
++	snode->name = kasprintf(GFP_KERNEL, "fastrpc-%s%s", sdev->qdev->dsp_name,
++				secure ? "-secure" : "");
++	if (!snode->name)
++		return -ENOMEM;
++
++	snode->sdev = sdev;
++	snode->miscdev.minor = MISC_DYNAMIC_MINOR;
++	snode->miscdev.name = snode->name;
++	snode->miscdev.fops = &qda_shim_fops;
++
++	err = misc_register(&snode->miscdev);
++	if (err) {
++		kfree(snode->name);
++		snode->name = NULL;
++		return err;
++	}
++
++	snode->registered = true;
++
++	return 0;
++}
++
 +/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * misc_deregister() takes misc_mtx, which misc_open() holds across the
++ * lookup and our ->open(). So once it returns no open can still be using
++ * the node. Files that are already open hold neither the node nor @sdev,
++ * only their session.
 + */
-+
-+#ifndef __QDA_LEGACY_OPS_H__
-+#define __QDA_LEGACY_OPS_H__
-+
-+#include <linux/types.h>
-+
-+struct dma_buf;
-+struct drm_gem_object;
-+struct qda_dev;
-+struct qda_session;
-+
-+/**
-+ * struct qda_legacy_ops - What the legacy FastRPC shim may call
-+ *
-+ * The shim serves the /dev/fastrpc-* interface of the driver this one
-+ * replaces, on top of the same session and buffer handling the accel UAPI
-+ * uses. It is a separate module, so the entry points it needs are collected
-+ * here and exported as one table: that way the driver does not depend on the
-+ * shim, and neither module has to reimplement what the other does.
-+ *
-+ * Ops are added as the shim grows to need them.
-+ */
-+struct qda_legacy_ops {
-+	/** @session_create: Open a session on @qdev */
-+	struct qda_session *(*session_create)(struct qda_dev *qdev);
-+	/** @session_destroy: Close a session */
-+	void (*session_destroy)(struct qda_session *session);
-+	/** @alloc_dmabuf: Allocate a buffer and export it as a DMA-BUF */
-+	struct dma_buf *(*alloc_dmabuf)(struct qda_session *session, u64 size);
-+	/** @import_dmabuf: Map a DMA-BUF into a session's context bank */
-+	struct drm_gem_object *(*import_dmabuf)(struct qda_session *session,
-+						struct dma_buf *dmabuf);
-+};
-+
-+extern const struct qda_legacy_ops qda_legacy_ops_table;
-+
-+#endif /* __QDA_LEGACY_OPS_H__ */
-diff --git a/drivers/accel/qda/qda_prime.c b/drivers/accel/qda/qda_prime.c
-index 7a709e3000d8..128d4ab2cf64 100644
---- a/drivers/accel/qda/qda_prime.c
-+++ b/drivers/accel/qda/qda_prime.c
-@@ -181,4 +181,37 @@ int qda_prime_fd_to_handle(struct drm_device *drm_dev, struct drm_file *file_pri
- 	return ret;
- }
- 
-+/**
-+ * qda_prime_import_dmabuf() - Import a DMA-BUF without installing a handle
-+ * @drm_dev: DRM device
-+ * @session: Session to import into
-+ * @dma_buf: Buffer to import
-+ *
-+ * As qda_prime_fd_to_handle(), but stopping at the GEM object: a session the
-+ * legacy shim created has no DRM file to install a handle in. The caller owns
-+ * the returned reference.
-+ *
-+ * Return: The new GEM object on success, ERR_PTR on failure
-+ */
-+struct drm_gem_object *qda_prime_import_dmabuf(struct drm_device *drm_dev,
-+					       struct qda_session *session,
-+					       struct dma_buf *dma_buf)
++static void qda_shim_nodes_unregister(struct qda_shim_dev *sdev)
 +{
-+	struct qda_dev *qdev = qda_dev_from_drm(drm_dev);
-+	struct drm_gem_object *gem_obj;
-+	int ret;
++	int i;
 +
-+	ret = qda_memory_manager_assign_device(qdev->iommu_mgr, session);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	guard(mutex)(&qdev->import_lock);
-+
-+	qdev->importing_session = session;
-+	gem_obj = qda_gem_prime_import(drm_dev, dma_buf);
-+	qdev->importing_session = NULL;
-+
-+	return gem_obj;
++	for (i = 0; i < ARRAY_SIZE(sdev->nodes); i++) {
++		if (sdev->nodes[i].registered)
++			misc_deregister(&sdev->nodes[i].miscdev);
++		kfree(sdev->nodes[i].name);
++	}
 +}
 +
- MODULE_IMPORT_NS("DMA_BUF");
-diff --git a/drivers/accel/qda/qda_prime.h b/drivers/accel/qda/qda_prime.h
-index eb2d8cbc8cd3..c5e2f7ffa882 100644
---- a/drivers/accel/qda/qda_prime.h
-+++ b/drivers/accel/qda/qda_prime.h
-@@ -12,6 +12,7 @@
- 
- struct dma_buf;
- struct dma_buf_attachment;
-+struct qda_session;
- struct sg_table;
- 
- struct drm_gem_object *qda_gem_prime_import_sg_table(struct drm_device *drm_dev,
-@@ -21,5 +22,8 @@ struct drm_gem_object *qda_gem_prime_import(struct drm_device *drm_dev,
- 					    struct dma_buf *dma_buf);
- int qda_prime_fd_to_handle(struct drm_device *drm_dev, struct drm_file *file_priv,
- 			   int prime_fd, u32 *handle);
-+struct drm_gem_object *qda_prime_import_dmabuf(struct drm_device *drm_dev,
-+					       struct qda_session *session,
-+					       struct dma_buf *dma_buf);
- 
- #endif /* __QDA_PRIME_H__ */
-diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
-index 2c9d79937b10..14034e250555 100644
---- a/drivers/accel/qda/qda_rpmsg.c
-+++ b/drivers/accel/qda/qda_rpmsg.c
-@@ -50,6 +50,9 @@ static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
- {
- 	struct qda_dev *qdev = dev_get_drvdata(&rpdev->dev);
- 
-+	/* Take the legacy nodes away first, so nothing new opens during teardown */
-+	qda_unregister_device(qdev);
++static int qda_shim_probe(struct auxiliary_device *auxdev,
++			  const struct auxiliary_device_id *id)
++{
++	struct qda_dev *qdev = dev_get_platdata(&auxdev->dev);
++	bool secure_channel = !of_property_read_bool(qdev->dev->of_node,
++						     "qcom,non-secure-domain");
++	struct qda_shim_dev *sdev;
++	int err;
 +
- 	/*
- 	 * Unplug before clearing @rpdev: once there are ioctls that reach the
- 	 * DSP, this is what stops a new one from starting and waits for the
++	sdev = devm_kzalloc(&auxdev->dev, sizeof(*sdev), GFP_KERNEL);
++	if (!sdev)
++		return -ENOMEM;
++
++	sdev->qdev = qdev;
++
++	if (!strncmp(qdev->dsp_name, "cdsp", 4) || !strncmp(qdev->dsp_name, "gdsp", 4)) {
++		/* Both nodes, so signed and unsigned PDs are both reachable */
++		err = qda_shim_node_register(sdev, 0, true);
++		if (!err)
++			err = qda_shim_node_register(sdev, 1, false);
++	} else if (!strncmp(qdev->dsp_name, "adsp", 4) ||
++		   !strncmp(qdev->dsp_name, "mdsp", 4) ||
++		   !strncmp(qdev->dsp_name, "sdsp", 4)) {
++		err = qda_shim_node_register(sdev, 0, secure_channel);
++	} else {
++		err = -ENODEV;
++	}
++
++	if (err) {
++		dev_err(&auxdev->dev, "Failed to create %s node(s): %d\n",
++			qdev->dsp_name, err);
++		qda_shim_nodes_unregister(sdev);
++		return err;
++	}
++
++	auxiliary_set_drvdata(auxdev, sdev);
++
++	return 0;
++}
++
++static void qda_shim_remove(struct auxiliary_device *auxdev)
++{
++	qda_shim_nodes_unregister(auxiliary_get_drvdata(auxdev));
++}
++
++static const struct auxiliary_device_id qda_shim_id_table[] = {
++	{ .name = QDA_DRIVER_NAME "." QDA_LEGACY_AUXDEV_NAME },
++	{},
++};
++MODULE_DEVICE_TABLE(auxiliary, qda_shim_id_table);
++
++static struct auxiliary_driver qda_shim_driver = {
++	.name = "fastrpc_shim",
++	.id_table = qda_shim_id_table,
++	.probe = qda_shim_probe,
++	.remove = qda_shim_remove,
++};
++
++module_auxiliary_driver(qda_shim_driver);
++
++MODULE_IMPORT_NS("DMA_BUF");
++MODULE_AUTHOR("Qualcomm AI Infra Team");
++MODULE_DESCRIPTION("Qualcomm DSP accelerator legacy FastRPC compatibility shim");
++MODULE_LICENSE("GPL");
 
 -- 
 2.34.1
