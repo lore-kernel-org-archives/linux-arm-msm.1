@@ -1,60 +1,53 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=142.132.183.134
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793572816;
-	b=alY0N/6ZIinZvWfjr09PNaArrRj7pe2i38hSMUmAX2tmQuztdI8t2W1XpmYwhTYxLlwb
-	 e5DMMZtOF3efV5dG7zV2M2/yFt1bDPEzRBIE7C1t0d66vrBcnfLWgSosdaxWrNLz61WuG
-	 SlufNlhVdgFnIXPsKAIMjAUsFVZEjOhsKQTiooWRbwRzmv4g6fq6M6iqa1YQ6eOzTDErT
-	 D4TVupF083hVpeoYfSFnowoz9yaKBgitz2haH/cQg/loOv0XAz6LxNlp/9u0ehaEQML+9
-	 dDIOWYIKy7bDPGlGvHJWur8OXaHP6K7jmOyaz3sm3jlPCkTdDqZv6ilXFHVyXfGBUzQ==
+	t=1793575215;
+	b=vsav80OGGNWUBAn3oaghqEyZkiIgC/V8dVWdbTmMfIokP4wQ6+O4AN0tYHQhYum+3SLu
+	 J8LBx4DCOQhPaebn5zfejjQ6HJt+RUE13YW3Y02B1RfC6xmjEELp4N8sDjzQ9FolXAHqB
+	 FzgxUUSQRVMuD3PLkZRb08QnhITXFTKcqulWAS5Ma9AvZpuiE+Ab7Xzicp34LTwIcXltN
+	 SKwtuC6XFOAPIQkTpHQHGt9SlMUolmIUN8JPD+zVOnLHY+SH++Mm3XmBK1pmlCAJlCf1Q
+	 rVEZt+rzKTWumyUw9YusrwMu2Ela+ACnU/F9AavgJ+dqekzXudtsYghRrbUQMzEzkxw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793572816;
-	h=Received:DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Cookie;
-	bh=3if99zGsFpoaWlPkVMPbJ3l6rF8wASBCV35D8Ivm+Tw=;
-	b=cu8XDUXqKoi6MMj3AtomWD/PvJQPU08ciLP0jI9ADmrkabqRA+fgnOwAjgdfMPJcFu98
-	 mypWMucCsQll6vpIg9AsiZUb1LbnlvPlklJsKOgmy6L6qfLdY3fX55jmvcn0MuHO9cDJd
-	 rPflq8x8VMXuk3+BYDZUEX9TMPD8W4Y1uaW3KHKTrQQP1oeakJp9cXXtwME6pXiZCRPIB
-	 ssuc1nXVKFj9ndXpx/4osJxQyh4rTe74KIcPuEnZstigY/93vllR4NWO4veOVeJmz1wb1
-	 xntyfUIXz5hkVkNJx6d5Nn+0sp/Wzbl1fxrNXRQ7qQbicVGDZwPGxtef9F9whrBZoww==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793575215;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:From:Subject:To:Cc:References:
+	 Content-Language:Autocrypt:In-Reply-To:Content-Type;
+	bh=6dm8J8E0M1ZNWs3l5j1o3es8syrK4YCFjARRn59ISEY=;
+	b=tJR5Knzklkgkj6J2bo/+7GrnLZGUzvp1lxoF2g6diogFcjzhS6u3OofTBTV7pZr3vJ2+
+	 cVhJpdG1RtJ23NNtjkov9+07jT7k0NiZu4Lwkchqld5XDSvXn+W17/Ygx+hgf8CTOoMvp
+	 MzwGndqCjWZWPI7nsch1KkYO7/koOqu7DRXeEaFjnf//CC4UV01kN9azfW7NtczYDoxbx
+	 kLCWAeTj7unwxfc1X6NUt37JItLkOnLfiBa9+heYR/TozrFgW3wduboZpnZRw8STXXgy2
+	 tOsSaAZP1dwWOo+Ym93FIIUAWoFoG4gzKCi08eW1trVMVL6AfXw6o+2x0QkbsT9NjAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=msy09BZh;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=erebion.eu;
+	spf=pass smtp.mailfrom=erebion.eu;
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b="DfD/WTzN";
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b=Le0r227+;
+	arc=none smtp.remote-ip=142.132.183.134
+Received: from erebion.eu (erebion.eu [142.132.183.134])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2035E606A332;
-	Sun,  1 Nov 2026 22:40:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EC48606A324;
+	Sun,  1 Nov 2026 23:20:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5EC48606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=erebion.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=erebion.eu
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=msy09BZh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB9DB1F000C1;
-	Sun,  1 Nov 2026 22:40:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793572816;
-	bh=3if99zGsFpoaWlPkVMPbJ3l6rF8wASBCV35D8Ivm+Tw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=msy09BZhssA6usmKymBv0dLLJ/G+ZdbslQU3LojnIT4huMx6tfrJ2jBNI1H1vecCr
-	 Yf6109z3JHG9OG6DuyMDDqKSXeLR+wIiWedINBXKxV8qwakU+C95PIW9LHYKeN30X6
-	 YXnHuoTuc3M3ON2IdcuU1SVBl/v1+OmxZTuFcEVzFkCgjfY7QxtJXbPRpBaKGmNw21
-	 I/X9vTFbkvAZkENgqLpn/J8t4rr8oXQlcxwpxVeu2CaiT5eZ6rLLDPUgjX9KDo6fq8
-	 LBBoAXJj4aUQHEaO+G50eJgJi0yoE7T+4A/4fMVambXr6Gv+gTO69eFtXUPBh9Nh6G
-	 NNZN6qKFsxkCA==
-Received: by traversing.sirena.org.uk (Postfix, from userid 1000)
-	id 593ED2064B9F; Sun, 01 Nov 2026 22:40:13 +0000 (GMT)
-Date: Sun, 1 Nov 2026 22:40:13 +0000
-From: Mark Brown <broonie@kernel.org>
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: Liam Girdwood <lgirdwood@gmail.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 0/3] regulator: add the WL2868C camera PMIC and its
- users
-Message-ID: <aue_zSZqx_hsM7c2@sirena.org.uk>
-References: <20261028120442.99375-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261031034300.272730-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b=DfD/WTzN;
+	dkim=pass (2048-bit key, unprotected) header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b=Le0r227+
+DKIM-Signature: v=1; a=ed25519-sha256; s=202508e; d=erebion.eu; c=relaxed/relaxed; r=y;
+	h=To:Subject:From:Date:Message-ID; t=1793575205; bh=6dm8J8E0M1ZNWs3l5j1o3es
+	8syrK4YCFjARRn59ISEY=; b=DfD/WTzN9iChMjght3h2uUM7Xn+ZNCcpbAl4DtvkaqUFQKKULL
+	s2eg2US6+yhhqRSOvR7puOJMTUJRlvvIx3CQ==;
+DKIM-Signature: v=1; a=rsa-sha256; s=202508r; d=erebion.eu; c=relaxed/relaxed; r=y;
+	h=To:Subject:From:Date:Message-ID; t=1793575205; bh=6dm8J8E0M1ZNWs3l5j1o3es
+	8syrK4YCFjARRn59ISEY=; b=Le0r227+TFsr16xUNP63aQZ0MUX0uzYbLzyeAi7Qwqi6ZIbe9f
+	qwVLzlM+BGpHPgdV7ETxHmNmhyeD7bCDh64jO2IDrZ3CE+WdhwjdPXwskg9CQoIy1fWcC3tCj73
+	1bYbMtrPHqXsO++z+LMEJdGIumm/1eLGwhI9E+BqA4kfXFTfbTNgnQ6z5t/g9M/pVNTT7rsCHPQ
+	fP6fkR3CCwbKCHewdb8erOZqdpmNcYOvlvMJZNIbxquVlCjmKC01JYIwr2n8tcWqXHe+jbeouIn
+	xav7PwVExAWGdNv/2bj8Hm2RORYVI6rGj77LXRcah/pk/W9ESlfjzk8LvpiF0wAIg8A==;
+Message-ID: <2f96ca42-4ab2-4e3e-b15f-f1210362db7b@erebion.eu>
+Date: Mon, 2 Nov 2026 00:20:04 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,42 +57,129 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="azfLz2Hh5u+PuUby"
-Content-Disposition: inline
-In-Reply-To: <20261031034300.272730-1-xiaqinghuan@mail.ustc.edu.cn>
-X-Cookie: Whoever dies with the most toys wins.
+User-Agent: Mozilla Thunderbird
+From: erebion <erebion@erebion.eu>
+Subject: Re: [PATCH v2 5/8] arm64: dts: qcom: sm6350-lena: Enable Bluetooth
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+References: <20260926-pdx213-upstream-3-v2-0-b4612e3eb536@erebion.eu>
+ <20260926-pdx213-upstream-3-v2-5-b4612e3eb536@erebion.eu>
+ <ddd2d324-4202-48bf-8984-45edae0c3278@oss.qualcomm.com>
+Content-Language: en-GB
+Autocrypt: addr=erebion@erebion.eu; keydata=
+ xjMEY7S2FRYJKwYBBAHaRw8BAQdAUf0YlT6sBQSunZeO44bgAPe+ndqTifGaNjw7vzJ2KPHN
+ HGVyZWJpb24gPGVyZWJpb25AZXJlYmlvbi5ldT7CjwQTFggANxYhBJyMprURw7/YpjH7646v
+ QDJuAq59BQJpWnovBQkHhhzbAhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQjq9AMm4Crn057AEA
+ j3didUIhbtAoppk2eNu6CbtMvkDisHWHVLaWF8YC1VsA/1P0ngBoVghELMachirfTinwBplJ
+ qP7GGlSGRqSfnlAKzjgEY7S2FRIKKwYBBAGXVQEFAQEHQN6NPWcyqKdecGU1vN8FVXBwYEUd
+ OAhF5jpmd7M0Ybx8AwEIB8J+BBgWCAAmFiEEnIymtRHDv9imMfvrjq9AMm4Crn0FAmlaei8F
+ CQeGHNsCGwwACgkQjq9AMm4Crn075QEAoDqfm4OeAEQWMgfQ496u2S3rWJw1EMgTOP51FQbX
+ rY4BAKn6AhEBh605uas3OTVtcwNIAJn1sHTA7HqqWniUe9sP
+In-Reply-To: <ddd2d324-4202-48bf-8984-45edae0c3278@oss.qualcomm.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------m0Dl7hDtU9gzfRDxN9YR05gR"
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------m0Dl7hDtU9gzfRDxN9YR05gR
+Content-Type: multipart/mixed; boundary="------------8MmVZGt7YViH7ZG6jZ7S09Wz";
+ protected-headers="v1"; hp="clear"
+Message-ID: <2f96ca42-4ab2-4e3e-b15f-f1210362db7b@erebion.eu>
+Date: Mon, 2 Nov 2026 00:20:04 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: erebion <erebion@erebion.eu>
+Subject: Re: [PATCH v2 5/8] arm64: dts: qcom: sm6350-lena: Enable Bluetooth
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+References: <20260926-pdx213-upstream-3-v2-0-b4612e3eb536@erebion.eu>
+ <20260926-pdx213-upstream-3-v2-5-b4612e3eb536@erebion.eu>
+ <ddd2d324-4202-48bf-8984-45edae0c3278@oss.qualcomm.com>
+Content-Language: en-GB
+Autocrypt: addr=erebion@erebion.eu; keydata=
+ xjMEY7S2FRYJKwYBBAHaRw8BAQdAUf0YlT6sBQSunZeO44bgAPe+ndqTifGaNjw7vzJ2KPHN
+ HGVyZWJpb24gPGVyZWJpb25AZXJlYmlvbi5ldT7CjwQTFggANxYhBJyMprURw7/YpjH7646v
+ QDJuAq59BQJpWnovBQkHhhzbAhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQjq9AMm4Crn057AEA
+ j3didUIhbtAoppk2eNu6CbtMvkDisHWHVLaWF8YC1VsA/1P0ngBoVghELMachirfTinwBplJ
+ qP7GGlSGRqSfnlAKzjgEY7S2FRIKKwYBBAGXVQEFAQEHQN6NPWcyqKdecGU1vN8FVXBwYEUd
+ OAhF5jpmd7M0Ybx8AwEIB8J+BBgWCAAmFiEEnIymtRHDv9imMfvrjq9AMm4Crn0FAmlaei8F
+ CQeGHNsCGwwACgkQjq9AMm4Crn075QEAoDqfm4OeAEQWMgfQ496u2S3rWJw1EMgTOP51FQbX
+ rY4BAKn6AhEBh605uas3OTVtcwNIAJn1sHTA7HqqWniUe9sP
+In-Reply-To: <ddd2d324-4202-48bf-8984-45edae0c3278@oss.qualcomm.com>
 
---azfLz2Hh5u+PuUby
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--------------8MmVZGt7YViH7ZG6jZ7S09Wz
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-On Sat, Oct 31, 2026 at 11:42:57AM +0800, Qianhui Xu wrote:
-> regulator: add the WL2868C camera PMIC and its users
->=20
-> Hi all,
->=20
-> this series adds a driver for the WL2868C camera PMIC found on the Lenovo
-> Legion Tab (TB322FC / "elden", SM8750).  The chip is an I2C regulator with
-> seven LDOs; on this board eight supplies are wired to the camera stack
-> (S5KJNS sensor, GC08A8 sensor, GT9764 VCM, and the CSIPHY rails).
+SGksDQoNCk9uIDEwLzE1LzI2IDEzOjA2LCBLb25yYWQgRHliY2lvIHdyb3RlOg0KID4gSSBk
+b24ndCBsaWtlIGhvdyB0aGVzZSBjb21tZW50cyBhcmUgc3ByZWFkaW5nIGFjcm9zcyB0aGUg
+dHJlZSBhcw0KID4gZXZlcnlvbmUgY29weS1wYXN0ZXMgdGhlbS4NCg0KSXQgc2VlbXMgb3Ro
+ZXIgRFRzIGFyZSBqdXN0IHVzZWZ1bCBhcyB3b3JraW5nIGV4YW1wbGVzLiA6RA0KDQo+IE9u
+IG5ld2VyIHBsYXRmb3Jtcywgd2Ugc2V0dGxlZCBvbg0KPiBzZXR0aW5nIGJpYXMtZGlzYWJs
+ZSBldmVyeXdoZXJlIGFuZCB0aGVyZSBkb24ndCBzZWVtIHRvIGJlIGFueQ0KPiBpc3N1ZXMu
+IEFyZSB0aGVzZSBlZGl0cyBiZW5lZmljaWFsIGluIGFueSB3YXk/DQoNCnRoZSBmb2xsb3dp
+bmcgZXJyb3JzIGluIHRoZSBsb2cgZGlzYXBwZWFyIHdpdGggaXQgaW5jbHVkZWQ6DQoNCiAg
+Qmx1ZXRvb3RoOiBIQ0kgVUFSVCBkcml2ZXIgdmVyIDIuMw0KICBCbHVldG9vdGg6IEhDSSBV
+QVJUIHByb3RvY29sIEg0IHJlZ2lzdGVyZWQNCiAgQmx1ZXRvb3RoOiBIQ0kgVUFSVCBwcm90
+b2NvbCBRQ0EgcmVnaXN0ZXJlZA0KICBCbHVldG9vdGg6IGhjaTA6IHNldHRpbmcgdXAgd2Nu
+Mzk5eA0KLUJsdWV0b290aDogaGNpMDogRnJhbWUgcmVhc3NlbWJseSBmYWlsZWQgKC04NCkN
+CiAgQmx1ZXRvb3RoOiBoY2kwOiBRQ0EgUHJvZHVjdCBJRCAgIDoweDAwMDAwMDBhDQogIEJs
+dWV0b290aDogaGNpMDogUUNBIFNPQyBWZXJzaW9uICA6MHg0MDAxMDMyMA0KICBCbHVldG9v
+dGg6IGhjaTA6IFFDQSBST00gVmVyc2lvbiAgOjB4MDAwMDAzMDINCiAgQmx1ZXRvb3RoOiBo
+Y2kwOiBRQ0EgRG93bmxvYWRpbmcgcWNhL2NybnYzMnUuYmluDQogIEJsdWV0b290aDogaGNp
+MDogUUNBIHNldHVwIG9uIFVBUlQgaXMgY29tcGxldGVkDQogIEJsdWV0b290aDogTUdNVCB2
+ZXIgMS4yMw0KICBCbHVldG9vdGg6IGhjaTA6IHNldHRpbmcgdXAgd2NuMzk5eA0KLUJsdWV0
+b290aDogaGNpMDogRnJhbWUgcmVhc3NlbWJseSBmYWlsZWQgKC04NCkNCiAgQmx1ZXRvb3Ro
+OiBoY2kwOiBRQ0EgUHJvZHVjdCBJRCAgIDoweDAwMDAwMDBhDQogIEJsdWV0b290aDogaGNp
+MDogUUNBIFNPQyBWZXJzaW9uICA6MHg0MDAxMDMyMA0KICBCbHVldG9vdGg6IGhjaTA6IFFD
+QSBST00gVmVyc2lvbiAgOjB4MDAwMDAzMDINCiAgQmx1ZXRvb3RoOiBoY2kwOiBRQ0EgUGF0
+Y2ggVmVyc2lvbjoweDAwMDAwZGU5DQogIEJsdWV0b290aDogaGNpMDogUUNBIGNvbnRyb2xs
+ZXIgdmVyc2lvbiAweDAzMjAwMzAyDQogIEJsdWV0b290aDogaGNpMDogUUNBIERvd25sb2Fk
+aW5nIHFjYS9jcmJ0ZnczMi50bHYNCiAgQmx1ZXRvb3RoOiBoY2kwOiBRQ0EgRG93bmxvYWRp
+bmcgcWNhL2NybnYzMnUuYmluDQogIEJsdWV0b290aDogaGNpMDogUUNBIHNldHVwIG9uIFVB
+UlQgaXMgY29tcGxldGVkDQoNClRob3NlIGFwcGVhciBpZiBJIHJlbW92ZSAmcXVwX3VhcnQx
+X2N0cyAvICZxdXBfdWFydDFfcnRzIC8gJnF1cF91YXJ0MV9yeCANCi8gJnF1cF91YXJ0MV90
+eCBmcm9tIHRoaXMgcGF0Y2guDQoNCkJ1dCBhcyB0aG9zZSBlcnJvcnMgZG8gbm90IG9jY3Vy
+IHdpdGggdGhpcyBwYXRjaCBhcy1pcywgSSdtIGxlYXZpbmcgdGhlIA0KcGF0Y2ggYXMtaXMg
+Zm9yIG5vdyBpbiBteSBuZXh0IHZlcnNpb24gb2YgdGhlIHBhdGNoIHNlcmllcy4NCg0KPiBG
+V0lXIEkgdGhpbmsgdGhpcyBjbGFpbSBvZiBsb3dlciBwb3dlciBoZXJlIGlzIGp1c3QgcHJl
+dmVudGluZw0KPiBsZWFrYWdlIGN1cnJlbnQgZnJvbSBhIGZsb2F0aW5nIHBpbi4uDQo+IA0K
+PiBLb25yYWQNCg0KLS0gDQplcmViaW9uDQoNClhNUFA6IGVyZWJpb25AZXJlYmlvbi5ldQ0K
+DQpNeSBsYW5ndWFnZXM6IEdlcm1hbiwgRW5nbGlzaCwgU3dlZGlzaCwgTm9yd2VnaWFuLCBE
+YW5pc2gNClllcywgSSdtIGEgbGFuZ3VhZ2UgbmVyZC4gRmVlbCBmcmVlIHRvIHdyaXRlIHRv
+IG1lIGluIGFueSBvZiB0aGUgDQphZm9yZW1lbnRpb25lZCBsYW5ndWFnZXMuDQoNCg0K
 
-Please don't send new patches in reply to old patches or serieses, this
-makes it harder for both people and tools to understand what is going
-on - it can bury things in mailboxes and make it difficult to keep track
-of what current patches are, both for the new patches and the old ones.
+--------------8MmVZGt7YViH7ZG6jZ7S09Wz--
 
---azfLz2Hh5u+PuUby
-Content-Type: application/pgp-signature; name="signature.asc"
+--------------m0Dl7hDtU9gzfRDxN9YR05gR
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQReagvpf3TrrA7BoYYv73Ows9A4iQUCaue/xgAKCRAv73Ows9A4
-ib9SAP45+umsB9CT/sdvyPYwgxPmpvvNnIDEphWcj/z+6QAB9gEA4JsxnIGmlYm5
-5xu1BzZLaGMpjd7eB3h0keQEvCBj5Ao=
-=od5F
+wnsEABYIACMWIQScjKa1EcO/2KYx++uOr0AybgKufQUCaufJJAUDAAAAAAAKCRCOr0AybgKufTfZ
+AQCnD0TurP80LdTaqD/H+gj6C7X5ObJGq7r8ttskAQQktwEA9B3Mj1zYeuSP1MDVEsxPddx3xfGV
+UTOSbv4posv10QU=
+=9fIv
 -----END PGP SIGNATURE-----
 
---azfLz2Hh5u+PuUby--
+--------------m0Dl7hDtU9gzfRDxN9YR05gR--
