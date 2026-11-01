@@ -1,113 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793571919;
-	b=GnxgHvRBpVGstyBw+oWhpfRpipRkwteptLn07K3krySv30zyR/k0Nzzj0sgyRPsfjUf8
-	 1udciaZq6mw6fLsu830hPzJHEdzOJJdjOYnxFDbz+Hj+uW7Rv4/dOgdA1Gmip0Z/Kul9H
-	 or2PLrfrvs9EqTv7WZXiaLF82wiSgd6/o0m5jZhJD653KaBIfA25+vgCEJSdVLsEgE7F7
-	 F6Ie8N7OtgnExfR1w525W1P91YxvsjhU1HliJfY5+7NTBuIQ69+YBooV123Jj71z3N+NH
-	 UfEv0em4jwyz8CEE5369gH5gqZLiEiAx28JzXTzmB8iND+qrT9MTdW8banssFMyp7Tg==
+	t=1793571930;
+	b=bs2vujUMc5Dz6ARv7HcEywk9SsprFELRQwZafd0uq+yt7jwdRG6ZyBrm5R/qusOiDVbs
+	 VbilyI9AeZG3tNUNSqTGjdtLPexsJm3GbLSxzt4e6YLxITJlLPcV8nSxLZtj3nhM0Hfid
+	 mpYDLUBVJHCRhTnxNRzoU891oPiFgOSnfgvitsmu5i9kdXlJTe35sVqAYXXCTstwmYijT
+	 eSASrdh3TKt1Q0VKLqhOv+plorbvX+qLjDvJZ4OJEheHs5iOuWhM59yy5Z4mcfeROU46T
+	 Hyds6YwYWgkoQkPpKwNBN5L/yJpH4ck5zjcwISWu/9YdpI4PHxu8GMXmauPzechX6pQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793571919;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793571930;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=mq4v21tGOqTatBGXDzvOKSgKE9+F60z+3Zn0OTugLJk=;
-	b=ii0hCtau8gV1v6tyLOlU/6ctTOOjU3jKUfLJAKLRxbrVcOAAwU0R40151srAivkG57/6
-	 xG8PjH/UpCBWJAt61wrkCrYHvjIGPqhM1nGG/wczllNX4vTYX/VMlIZf1CtU/U0Locx9+
-	 yBWQBCDwRT3YFiwFqNihSrrJxV+ZPdEXI1KnZDuulUa9DdpuSvH6bY0mAN7KnK41aDzRQ
-	 ibckcMMSAgDPiuo46P5M22R6fDTYWMl5a5qg0HA9WhEHHkSF5VzANMQhQTLCL0w4ii0hX
-	 EsSlQHOk6UHLTumVYof7oE50+7+MiL0s0SqJip+qP9PTmKhOhCaYr55oe2An6VRkm/A==
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=1kzG/Dg/owMDGYoIx22GjptP1hF8V3h3xBi1CQ1R8Ew=;
+	b=mEXuTT5+FN5wK4cBEzai97Vuao/iFyc7mNtFsYMzsViTsrbWHwWoj6gkvNIAsbkWvBgh
+	 cgj3Fb96jJGP0KEl0ZJL1st1AUx6+GyTSws0fHTJK7Tp+YSccVK6wUBV6o4hFJzjLzxev
+	 FfwJqI5BoEIrcf7xGRQxc9pwQoBw+ZP78LVypeoWIdrXFc5auoLMin3vuvdOWQm49nWDU
+	 J5k4iwiqWFAdcVz1Pa5PXbSIyTQZtXBY4W+oOy/7hG9vnFSZjuKFuVrG5iZKcG5ndpqrf
+	 v1h+Ev6Ev7LP7EFFvykkKpCCcf9I6D1oEzAVj7UZVLHIzs/1WHemoy7Ct6XUJHs9/ww==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="A/dbVlrd";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NdwbfjfA;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="jWaSj8/U";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FAVwS2fB;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2D3F606ECD2
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 22:25:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F2D3F606ECD2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B40D606ECE6
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 22:25:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3B40D606ECE6
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A/dbVlrd;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NdwbfjfA
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1KK29i834849
-	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 22:25:17 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jWaSj8/U;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FAVwS2fB
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1KK3VY2377075
+	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 22:25:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mq4v21tGOqTatBGXDzvOKSgKE9+F60z+3Zn0OTugLJk=; b=A/dbVlrdba2bDQDM
-	fPBcuSk56UNJcQcm91riAMq0oxpXIGCmFNMFffRFdnw4TQ5067gwH4+2ai3A+Sgv
-	HGIJs3LgQZzbaEeq0n4U6HhWMyA5LYAz1WHOm/FA9mUf+lrpLjO7gR6QM4FaoWZJ
-	aXUwxF01SgSqOx+V5dRPYQoVAZtiTY0PglN8VmI02x18IEbgw7K+KBQEmzzUPLkg
-	TYVa0V2xDUkmI/ASxhDHU6iYOdbpWKbAyfD5IcoKiw/ksAQgN9ltBvQ579mhKR4Y
-	PjtMoQeABI/jaRzYTcrGnD5zu7DRwnPhohTvrZ5KAJdPrJD1QBXywDyQFMHJEjss
-	3Aa4aw==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn9m9c4wk-1
+	1kzG/Dg/owMDGYoIx22GjptP1hF8V3h3xBi1CQ1R8Ew=; b=jWaSj8/U1SPL7Kew
+	xJJguFpMYtoheN5mgfVxGTnOpNpeCT+WNv5IDsbXzDBQ+ByC1SqUiPEXVoQIhHlM
+	FL/RvqSk3vbFWGNB4BACYJ+oSE+4YlAilR5pACV/98CHMI+US+GxrTVqVwWrn17+
+	JZ/cagPU6xAMD1o9S4ZdbByFQSiIjk26lkokUuyQVIJHlnZQOBJLeCKGX86eRG2+
+	HssEkjSwHMNAlIlyXWXOzJSPIOmH64ck94lCFDc+J7rtdCx3P75kDYSx2Ih1wjLx
+	hhdFjpoz+anJhh20ZUK97TCMPEFLsvKgYwZNdoK5qSfY5pfF52XQPtgSE3HnBvpo
+	nzAeyg==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7b6me9h-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 22:25:17 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1aa0fb7f157so3662635c88.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 14:25:17 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 22:25:28 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-33713e5e6daso2936346eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 14:25:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793571917; x=1794176717; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793571927; x=1794176727; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mq4v21tGOqTatBGXDzvOKSgKE9+F60z+3Zn0OTugLJk=;
-        b=NdwbfjfA8CgRgON+wa0cAuEYySzE16LiBOJ6W1l0jkmw6lxjs1wmtTIiCXKR4Af+W+
-         GPBtk8Die9H86zHsbWv7G6rrg+w5oonvJg2LtfyxfDsYGZ7qo4eE40eod3RN70y1905f
-         NwfsQSW8KmHJIS/JlFZ00YOPcUHjCmBHymv1Avy6HOclIKz5aFJCtboAsOucDtMDibaW
-         RMR3jwMUZRG9H7DmSIv8JRYj+5lwKMco3Sr+CjdF8iBSi1YzigoGBtzHuVHGUXEpl+rs
-         kWiSSy12dtFiH1wWmtQWrT50bu1Sfa+WS3Cd5C6VPiNGlsl/TIbtc7MhgRaHgV8Jt2e7
-         7Lcg==
+        bh=1kzG/Dg/owMDGYoIx22GjptP1hF8V3h3xBi1CQ1R8Ew=;
+        b=FAVwS2fBZhxoJ0Ivzc32h3MHfG98mPbQV36wE6RfteVr8HWR1rypQLwIGX+3n1S9sy
+         qlFZ6RNDv12bGkeF3wOZ8K9tG2w8xDDcBQmfPIVbpbIs1GvQ9zTADl3qcL28KhuiCaLV
+         pX0ZZ+nqTzRShtNNNHPBAjL5wIwz4p8s/txi9t/QEYiHbu2hfUsZplyg7B5pl26jvCap
+         /VPajjExWH6fH5SvVNFhnLIz63K+qRcwAECRQv/qQby+m98X2dJYiOf/hy8BqnmN9Kh0
+         YZgWEu06PMA6DhCm13we4bQVHVvfzVdfCaymuaV8gEKHhXE348oT9AxmXHVOAeRJjzUh
+         mE9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793571917; x=1794176717;
+        d=1e100.net; s=20260707; t=1793571927; x=1794176727;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mq4v21tGOqTatBGXDzvOKSgKE9+F60z+3Zn0OTugLJk=;
-        b=VvZvKfyad245IHQXhSPxK73AuF9Uj9GVTzjaBCOVrj2yxPbxeiwQ/EA9jnQklNuR0X
-         NDR+CGS05JlWvCJdkjE3hHkq53+wOavw2G+ukViYqIQz5jQJenDQi3PXXdIUyewLfSeU
-         2nh7IWeglwSINbguAtXyLv8ozd7YGhN1DdtpjA88PsGn+OyAfPG2Nv2qgMcJJ93bJjyy
-         S6HaNQlWFyfveE9ALzxhfbocL9UiS+qA6WTWR8y8Lekh/iFKbUHTP5MnMyMgPBtMETPA
-         e4z05cf4Avc034MKUomyws+Eb6QN5vLx/sLeaAFYKhD1E3Jm5sNujPisqzxmS8PfrsvT
-         vhLw==
-X-Forwarded-Encrypted: i=1; AKwUvBxV18M7gPSn5LLfQAISFBQdgOdKR9aaVGa6I5fwZ1EIToSNwIuYqKtAWKfinbf2ajuwMK9saa+M2nHkuGbx@vger.kernel.org
-X-Gm-Message-State: AFq9FYIjYCs/QAZzXR4AtQGIVIN+uNCp0BJuACwxsbV5UVmiEtS+rh7n
-	MKfXdF92sOrnS3wfhteg8bX25EynIjB193kLHBI0KEu/G/0jkJIcpkfxWEqYunFD/6X4ztqlxox
-	2MIj07PPi8VDmluWI7064s4wratibEudF7+8cy7PaGRwoUZ0tggk/DwAkhziBnIqTXr09
-X-Gm-Gg: AYBFou3fCu/8DLUCb/iehDdYq5Im7cwTINHeudcN6hU1EW5zZjVB9bYEkmIoR4jXEwe
-	QA2gj44ZHLbB/CrWfkBjZLSIF694Jee1JS/X4YZfB81c/drD1fownbA+35fcpUPE2OlhSXF2pg9
-	38SvLn63r3VuUycRLVRz4jtL93VvKBOssqmFPoQc3q1hiPkh24K8WulhVGM4Y3MTuef4udh/VCU
-	ZHrGAokJVy7TVadJdPxAbi7STgJnXcQ+bDFEE590cUQk9IQlEsRJNBLBXZYWC1g7tjos4fzxRri
-	KJI/gPbXYloyg5tCZgOZ/Yl734CkaapkVQXb5YDLkhg7gU2/ZSrt1cx7QuUYbA+ax3t0473XEpu
-	Od8oixXfPjB4VRNrLD3eXQgLR527a5LzAjO1DCrdbv4g7euhmFadKAjWFJ+YC8ISpEROlGgdnMB
-	/8jIiwVw==
-X-Received: by 2002:a05:7022:4b:b0:1a3:dbb2:478a with SMTP id a92af1059eb24-1ac5c92de5dmr15877884c88.27.1793571916208;
-        Sun, 01 Nov 2026 14:25:16 -0800 (PST)
-X-Received: by 2002:a05:7022:4b:b0:1a3:dbb2:478a with SMTP id a92af1059eb24-1ac5c92de5dmr15877830c88.27.1793571915511;
-        Sun, 01 Nov 2026 14:25:15 -0800 (PST)
+        bh=1kzG/Dg/owMDGYoIx22GjptP1hF8V3h3xBi1CQ1R8Ew=;
+        b=u6uKrinx5joR8lNo5CLQ4Bx4Fpzq6jykkt2biOypllmEb5fErfElrJ34HV0iUUZXHF
+         qlX+/+Nby8pFqqVsj4ktNMEY4zDnJN2GZFIQoivM67+cjt8/eoBtaBIC7BW74WUJw9z2
+         jaKpC4ToqwN3fTOWBl0XHz4Jijp5nbEtlXPrrgALBzDP9JKfqjSzzZ5QzCKpq3kW4cdB
+         uS2GnukgqdtOhtgQGbv8NZxOFmd62Q8TilpwemIFSKkWJRaIbSt3tkmU14gEYNl5SjoO
+         vcGm50kl3GfhNsAJSRi26MbR3eRJXCuCYXLhfCMXeCBa6gcN5rB00RYkM15xjv1SGV9o
+         adOw==
+X-Forwarded-Encrypted: i=1; AKwUvBxnV0n5LPIU/GRcOkETgO3eQ8b0aDTrZ5KPPs806VlRT8XSm0fq1A8hxRnpw2itwE4xgJYIGg8wUMvpozvY@vger.kernel.org
+X-Gm-Message-State: AFq9FYKejGQROFuXI4mw4cR5/Hw1oTX7HdgImc4G5FbWmiiq4RiwELj4
+	86BQvc/Xnf1OAIHuAHnWmN4NtwSvSZ25yuowKylI3j/OLpCjGdlGSe8A5JmXNKdvs6kEO5y5sJT
+	rH4pGKwYxpnb82/QEoK4iIfW+4rrTb2xLYN9u+Rkyg04we7QyTkvfuGnmN91aYLZB7lq5
+X-Gm-Gg: AYBFou0XLK6EM+pHJj12nHThvzmmtxl9fFnuwk8o/oG0CMFNVJkUdImIgeCzbVBTTRk
+	MlcqzqtVi71qbL2MzV2qlay/GUXVbZmHESEDDr2oSQCQ2EkHDroDKHV6NTlyU6GjQS6VfCQ3TdP
+	7p+cWgzdfdPH5IpPPEWlFPfRe7MY34wwKR8d0mx27T6NG52VWWlvtqrXSXf7dQvf07WQ8q4uYOG
+	VoIWwTQYkr3Sjn018xaN++Kc/f66Bsq7Hz4SZFaL5gdIEEX/1HPIahaANA2kwhlxFH8t/McyPkl
+	Fe2j47omRMPurvTmmnL2hdmfdMakezyBCP19BvTxBYeVCREmUApOMyTb8czbs3a+crxdfMEdGS/
+	7iBZ/uASZhf5lJD6wyUd2oVlw/A3jjVU2Y04Bjm/SCQ6nR+OpSOnjHT7a+/RMjurV0lDk2cSWnH
+	CEaXoKCg==
+X-Received: by 2002:a05:7022:2203:b0:18d:c38c:bcc9 with SMTP id a92af1059eb24-1ac56e8a821mr18675821c88.3.1793571926920;
+        Sun, 01 Nov 2026 14:25:26 -0800 (PST)
+X-Received: by 2002:a05:7022:2203:b0:18d:c38c:bcc9 with SMTP id a92af1059eb24-1ac56e8a821mr18675754c88.3.1793571926248;
+        Sun, 01 Nov 2026 14:25:26 -0800 (PST)
 Received: from hu-ekangupt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac13ef1932sm27742653c88.2.2026.11.01.14.25.05
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac13ef1932sm27742653c88.2.2026.11.01.14.25.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 14:25:15 -0800 (PST)
+        Sun, 01 Nov 2026 14:25:25 -0800 (PST)
 From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Date: Mon, 02 Nov 2026 03:51:34 +0530
-Subject: [PATCH v4 21/25] accel/qda: Add Audio protection domain attach and
- its remote heap
+Date: Mon, 02 Nov 2026 03:51:35 +0530
+Subject: [PATCH v4 22/25] accel/qda: Add remote session attach to the
+ legacy shim
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,7 +119,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-v4-v4-21-88f2f24a5f0b@qti.qualcomm.com>
+Message-Id: <20261102-v4-v4-22-88f2f24a5f0b@qti.qualcomm.com>
 References: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
 In-Reply-To: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
 To: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
@@ -147,537 +147,264 @@ Cc: lingtong@qti.qualcomm.com, cacar@qti.qualcomm.com,
         Chenna Kesava Raju <quic_chennak@quicinc.com>,
         Ekansh Gupta <ekangupt@qti.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793571679; l=16701;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793571679; l=9210;
  i=ekangupt@qti.qualcomm.com; s=20260223; h=from:subject:message-id;
- bh=LgcntdqkBShlO8amls1wIzgARYknBeDNMKLW6fhJTQM=;
- b=bMiFsApKvZAseEa0qgwtOILtZWuZ2LEL69qPJWchDYEmxOve4YWXK4oae6srq+j0LLUzs4qXQ
- D3byeISDbCRCnOKD3jhP6D+rlWTGER4QGdY8Ydd4OtE1xRbYYSb0sO4
+ bh=S1LrahsubxpMaNQzoAQki/9y8aw+aoYCRtlc5M1H2kY=;
+ b=GjSwacbsixMm165OAPn7wFwGAIWRJ4X49iL1fNYEkJEXQMujlDQNttaV2fthf2y4/tbCqH+Hi
+ AUaznHTWPzgCNLeqhFxJJY4tEOdv7KFfQPr48M42ML1Js+GsAZnhVzN
 X-Developer-Key: i=ekangupt@qti.qualcomm.com; a=ed25519;
  pk=n0SepARizye+pYjhjg1RA5J+Nq4+IJbyRcBybU+/ERQ=
-X-Proofpoint-ORIG-GUID: siJbDkeDKX_rnxh0qYa854tQ1Vlvvn-l
-X-Proofpoint-GUID: siJbDkeDKX_rnxh0qYa854tQ1Vlvvn-l
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfX8whvdBy6oaQw
- zNtHhpZt0L+HhE5YphWreXgq/q78HzBgTEhMsncis3z8ysFCNr6MTfpcTzwqY8nyItW+ECSV7Ng
- DTX8txjLNCPtrjFAX1oE2MQsw6gtoHCj+IGNoMQiB8MpUKjM11TWy1PIkICy96QGkiL4pKqhN1s
- OsqMDN6kdzUwlZm2x401owEcbSb5kMr8mBeokJeR9V6RLoOlsxR3jTJ1PYXc2bYrnngNdWlt11q
- J6J3dxh91cQa1PlgvwFPqyXjYtGXSMTizXThhTltqXYO/p6tHuhROWZzv2SSngWoPN1Km8XGBXO
- Q6BWQ2/0xwqnwpVNAnkWo/Q9HWTIs4RgI2c/mvxyEHUnusCxGnTzaIgo93MGgMwHXfLpu/CvU+s
- z5Of5g4BGtnzq4zzNPuHKYN1UbgaHXNg1YCryeU9qajUz5L9PW+bP0f0FS/M0Y9dOxNkLyWGpv6
- 5wREcmySlD559o0y8RA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfX+duRg/htXHEV
- +odL5DmJ+zrHWOvVXOFpLcctFsSxBiWD/gS3wrCs1DhHxfokYnY5b1xW1ARtYCR9FygeLhPzUmW
- SzYfIdjT8evEhzrlMZ1Cl6adqGqRdEM=
-X-Authority-Analysis: v=2.4 cv=cfVHPXDM c=1 sm=1 tr=0 ts=6ae7bc4d cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-ORIG-GUID: Es1HPuiz2VDGgjEbZg5kNhAD9-9STfJj
+X-Authority-Analysis: v=2.4 cv=QuvLTlyd c=1 sm=1 tr=0 ts=6ae7bc58 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=wuXFcW2BkFgktBl-NxIA:9 a=QEXdDO2ut3YA:10
- a=vr4QvYf-bLy2KjpDp97w:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=WqNVZKtITsyolQqna8AA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-GUID: Es1HPuiz2VDGgjEbZg5kNhAD9-9STfJj
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfXzCpC7I5ZWKu4
+ l4SzUlbK9XoPg7CU0QgMDOIztp1xP9ESVO7ypGEHiwEJ6QYIUrfiIvujk29DawPVXQXo+sL282V
+ og81qE7dlynT9fAuvnZ9Pu/hOjorROM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA4OSBTYWx0ZWRfXzreUZjgAOarC
+ AhLb1cFWTWWK6y2DsSwQLC9OHgAVhsn9Ux/l4Ds55Li902Jcj7ZSQJIfPE1cXgxjefiCTW9Bdd0
+ s+IOmF6jAo9AXnHdsB4dhgBIoU4h42FDpwi/6BuGRtcTgflpCkQg6m0qs2dtNiksKEs8h9HczoW
+ PDTsnqQzzExeNwoW29e+BXUnmqJzBNuQHM0cXq3UJNF+U4D3QU27Era+CS8GVSM3zEdOmV4Iv1Q
+ 4kkNF9SnejY2OAdPpEjn6wprxL9Jm7a7QfGLPF/iGdLAj0QrY4qgDpbQ0XoxXhnHK9rsABPgM3c
+ zMlrt36Ak6hmhnhVbO1RzmJsH4+AReq1vq7IFpPKSQsSPphILqKLzGVdboxU94Qfa90k4HdqIFo
+ ZRv+qmqDzJ+ARrxsMhxnQB3pKMUlkVBS8cEEzGBR0QycGi4miSTO4FbuhLdUMRxGVIQNwFr+dDC
+ leK0ijKSEk7RXivWX4g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-01_07,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
- priorityscore=1501 spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 priorityscore=1501 malwarescore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611010089
 
 From: Ekansh Gupta <ekangupt@qti.qualcomm.com>
 
-Attaching to the Audio PD differs from Root and Sensors PD attach in two
-ways: it names a static PD by a string rather than a fixed protection
-domain value, and the DSP expects a region of memory reserved for it in
-the device tree to be handed over the first time any session attaches
-to it.
+Wire FASTRPC_IOCTL_INIT_ATTACH, FASTRPC_IOCTL_INIT_ATTACH_SNS and
+FASTRPC_IOCTL_INIT_CREATE_STATIC into the legacy FastRPC compatibility
+shim, so existing user space using the /dev/fastrpc-* ioctl interface can
+attach to the Root, Sensors and Audio protection domains.
 
-Parse the "qcom,vmids" property into a VM permission table and the
-reserved-memory region into a physical range at probe time, and use
-qcom_scm_assign_mem() to grant the DSP's VMs access to that range. Only
-the first successful attach on a device sends the region to the DSP;
-later attaches, including after a daemon restart, reuse it. The region
-is handed back to HLOS when the rpmsg channel goes away.
+Root and Sensors PD attach carry no payload. INIT_CREATE_STATIC forwards
+its name and length; memlen is ignored, since the Audio PD remote heap
+size always comes from the device tree rather than from user space.
 
-The region is optional; without it an Audio PD attach fails.
+Move the attach logic out of the ioctl handler into a session-level
+function that both interfaces call. It checks CAP_SYS_ADMIN itself, so
+the legacy path is subject to the same privilege requirement as the
+native one.
 
 Signed-off-by: Ekansh Gupta <ekangupt@qti.qualcomm.com>
 ---
- drivers/accel/qda/Kconfig       |  1 +
- drivers/accel/qda/qda_drv.h     | 19 +++++++++
- drivers/accel/qda/qda_fastrpc.c | 54 ++++++++++++++++++++++++
- drivers/accel/qda/qda_fastrpc.h | 30 ++++++++++++++
- drivers/accel/qda/qda_ioctl.c   | 72 ++++++++++++++++++++++++++------
- drivers/accel/qda/qda_rpmsg.c   | 92 ++++++++++++++++++++++++++++++++++++++++-
- include/uapi/drm/qda_accel.h    | 15 +++++--
- 7 files changed, 267 insertions(+), 16 deletions(-)
+ drivers/accel/qda/qda_fastrpc_shim.c | 24 ++++++++++++++++
+ drivers/accel/qda/qda_ioctl.c        | 54 +++++++++++++++++++++++++-----------
+ drivers/accel/qda/qda_ioctl.h        |  2 ++
+ drivers/accel/qda/qda_legacy_ops.c   |  1 +
+ drivers/accel/qda/qda_legacy_ops.h   |  3 ++
+ 5 files changed, 68 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/accel/qda/Kconfig b/drivers/accel/qda/Kconfig
-index c440191a54ff..72b5ee6d58ec 100644
---- a/drivers/accel/qda/Kconfig
-+++ b/drivers/accel/qda/Kconfig
-@@ -9,6 +9,7 @@ config DRM_ACCEL_QDA
- 	depends on ARCH_QCOM || COMPILE_TEST
- 	depends on RPMSG
- 	select AUXILIARY_BUS
-+	select QCOM_SCM
- 	help
- 	  Enables the DRM-based accelerator driver for Qualcomm's Hexagon DSPs.
- 	  This driver provides a standardized interface for offloading computational
-diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
-index 2f98fd83fdda..1d083ea9fdd7 100644
---- a/drivers/accel/qda/qda_drv.h
-+++ b/drivers/accel/qda/qda_drv.h
-@@ -9,6 +9,7 @@
- #include <linux/atomic.h>
- #include <linux/auxiliary_bus.h>
- #include <linux/device.h>
-+#include <linux/firmware/qcom/qcom_scm.h>
- #include <linux/kref.h>
- #include <linux/list.h>
- #include <linux/mutex.h>
-@@ -31,6 +32,9 @@
-  */
- #define QDA_LEGACY_AUXDEV_NAME "fastrpc"
- 
-+/* Upper bound on the "qcom,vmids" DT property */
-+#define QDA_MAX_VMIDS	16
-+
- /**
-  * struct qda_session - One user of a DSP
-  *
-@@ -118,6 +122,21 @@ struct qda_dev {
- 	 * to, or NULL if it could not be created
- 	 */
- 	struct auxiliary_device *legacy_auxdev;
-+	/** @vmperms: VMs the remote heap is shared with, from qcom,vmids */
-+	struct qcom_scm_vmperm vmperms[QDA_MAX_VMIDS];
-+	/** @vmcount: Number of valid entries in @vmperms */
-+	int vmcount;
-+	/** @remote_heap_addr: Physical base of the reserved region, or 0 */
-+	phys_addr_t remote_heap_addr;
-+	/** @remote_heap_size: Size of the reserved region, or 0 */
-+	u64 remote_heap_size;
-+	/**
-+	 * @remote_heap_lock: Held across an Audio PD attach, so the heap is
-+	 * handed to the DSP by exactly one of them. Protects @audio_init_mem.
-+	 */
-+	struct mutex remote_heap_lock;
-+	/** @audio_init_mem: True once the DSP has been given the remote heap */
-+	bool audio_init_mem;
- };
- 
- /**
-diff --git a/drivers/accel/qda/qda_fastrpc.c b/drivers/accel/qda/qda_fastrpc.c
-index 5bf55b7953c8..e9688e3ba404 100644
---- a/drivers/accel/qda/qda_fastrpc.c
-+++ b/drivers/accel/qda/qda_fastrpc.c
-@@ -930,6 +930,56 @@ static int qda_fastrpc_prepare_args_init_create(struct qda_fastrpc_invoke_ctx *c
+diff --git a/drivers/accel/qda/qda_fastrpc_shim.c b/drivers/accel/qda/qda_fastrpc_shim.c
+index c46d2de4f581..c1464b1adbc2 100644
+--- a/drivers/accel/qda/qda_fastrpc_shim.c
++++ b/drivers/accel/qda/qda_fastrpc_shim.c
+@@ -18,6 +18,7 @@
+ #include <linux/uaccess.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_gem.h>
++#include <drm/qda_accel.h>
+ #include <uapi/misc/fastrpc.h>
+ #include "qda_drv.h"
+ #include "qda_fastrpc.h"
+@@ -295,6 +296,23 @@ static long qda_shim_init_create(struct qda_shim_file *sf, void __user *argp)
  	return err;
  }
  
-+/*
-+ * INIT_CREATE_STATIC packed layout:
-+ *   [0] inbuf	sizeof(qda_fastrpc_create_static_inbuf)	IN
-+ *   [1] name	namelen, including the NUL		IN
-+ *   [2] heap	sizeof(qda_phy_page)			IN
-+ *
-+ * The heap descriptor is always present; its size is zero, and so pageslen,
-+ * when the DSP already has the remote heap.
-+ */
-+static int qda_fastrpc_prepare_args_create_static(struct qda_fastrpc_invoke_ctx *ctx, void *argp)
++static long qda_shim_attach(struct qda_shim_file *sf, u32 pd_type)
 +{
-+	struct qda_static_pd_args *sargs = argp;
-+	struct qda_fastrpc_create_static_inbuf *inbuf;
-+	struct qda_gem_obj *kernel_gem;
-+	u8 *gv;
-+	int err;
-+
-+	const size_t off_inbuf = 0;
-+	const size_t off_name = off_inbuf + sizeof(*inbuf);
-+	const size_t off_heap = ALIGN(off_name + sargs->namelen, sizeof(u64));
-+	const size_t total_size = off_heap + sizeof(struct qda_phy_page);
-+
-+	ctx->sc = QDA_FASTRPC_SCALARS(QDA_FASTRPC_RMID_INIT_CREATE_STATIC, 3, 0);
-+	ctx->handle = QDA_FASTRPC_INIT_HANDLE;
-+
-+	err = alloc_kernel_args(ctx, 3);
-+	if (err)
-+		return err;
-+
-+	kernel_gem = alloc_kernel_gem(ctx, total_size);
-+	if (IS_ERR(kernel_gem))
-+		return PTR_ERR(kernel_gem);
-+	gv = kernel_gem->virt;
-+
-+	inbuf = (struct qda_fastrpc_create_static_inbuf *)(gv + off_inbuf);
-+	inbuf->remote_session_id = ctx->session->remote_session_id;
-+	inbuf->namelen = sargs->namelen;
-+	inbuf->pageslen = sargs->heap.size ? 1 : 0;
-+
-+	memcpy(gv + off_name, sargs->name, sargs->namelen);
-+	memcpy(gv + off_heap, &sargs->heap, sizeof(sargs->heap));
-+
-+	assign_kernel_gem_arg(ctx, 0, kernel_gem, gv + off_inbuf, sizeof(*inbuf));
-+	assign_kernel_gem_arg(ctx, 1, kernel_gem, gv + off_name, sargs->namelen);
-+	assign_kernel_gem_arg(ctx, 2, kernel_gem, gv + off_heap, sizeof(struct qda_phy_page));
-+	drm_gem_object_put(&kernel_gem->base);
-+
-+	return 0;
++	return qda_legacy_ops_table.attach(sf->session, pd_type, NULL, 0);
 +}
 +
- /*
-  * Find the buffer a mapping request names and describe it to the DSP. The
-  * buffer is held by the context until the request is done, so that closing its
-@@ -1223,6 +1273,10 @@ int qda_fastrpc_prepare_args(struct qda_fastrpc_invoke_ctx *ctx,
- 		ctx->pd = QDA_USER_PD;
- 		err = qda_fastrpc_prepare_args_init_create(ctx, argp);
- 		break;
-+	case QDA_FASTRPC_RMID_INIT_CREATE_STATIC:
-+		ctx->pd = QDA_USER_PD;
-+		err = qda_fastrpc_prepare_args_create_static(ctx, argp);
-+		break;
- 	case QDA_FASTRPC_RMID_INIT_MMAP:
- 		err = qda_fastrpc_prepare_args_map(ctx, argp);
- 		break;
-diff --git a/drivers/accel/qda/qda_fastrpc.h b/drivers/accel/qda/qda_fastrpc.h
-index 29e1c3946d60..de04cadcaeb0 100644
---- a/drivers/accel/qda/qda_fastrpc.h
-+++ b/drivers/accel/qda/qda_fastrpc.h
-@@ -50,6 +50,7 @@ struct qda_session;
- #define QDA_FASTRPC_RMID_INIT_MUNMAP		5
- #define QDA_FASTRPC_RMID_INIT_CREATE		6
- #define QDA_FASTRPC_RMID_INIT_CREATE_ATTR	7
-+#define QDA_FASTRPC_RMID_INIT_CREATE_STATIC	8
- #define QDA_FASTRPC_RMID_INIT_MEM_MAP		10
- #define QDA_FASTRPC_RMID_INIT_MEM_UNMAP		11
- #define QDA_FASTRPC_RMID_INVOKE_DYNAMIC		0xFFFFFFFFU
-@@ -65,6 +66,9 @@ struct qda_session;
- /* Largest ELF image a process may be created from */
- #define QDA_FASTRPC_INIT_FILELEN_MAX	(4 * 1024 * 1024)
- 
-+/* Longest static PD name, including the NUL */
-+#define QDA_FASTRPC_INIT_NAMELEN_MAX	128
++/* memlen is ignored: the Audio PD heap size comes from the device tree */
++static long qda_shim_init_create_static(struct qda_shim_file *sf, void __user *argp)
++{
++	struct fastrpc_init_create_static args;
 +
- /* Idle invoke header buffers a session keeps for reuse */
- #define QDA_MSG_BUF_POOL_MAX		8
- 
-@@ -155,6 +159,20 @@ struct qda_fastrpc_create_process_inbuf {
- 	u32 siglen;
- };
- 
-+/**
-+ * struct qda_fastrpc_create_static_inbuf - Input buffer for attaching to a static PD
-+ *
-+ * Layout the DSP expects; do not reorder.
-+ */
-+struct qda_fastrpc_create_static_inbuf {
-+	/** @remote_session_id: Session the attach belongs to */
-+	int remote_session_id;
-+	/** @namelen: Length of the static PD name including the NUL */
-+	u32 namelen;
-+	/** @pageslen: Number of remote heap descriptors that follow the name (0 or 1) */
-+	u32 pageslen;
-+};
++	if (copy_from_user(&args, argp, sizeof(args)))
++		return -EFAULT;
 +
- /**
-  * struct qda_fastrpc_map_req_msg - Request to map a whole buffer
-  *
-@@ -379,6 +397,18 @@ struct qda_mem_map_args {
- 	struct drm_gem_object *obj;
- };
- 
-+/**
-+ * struct qda_static_pd_args - Kernel-side arguments for attaching to a static PD
-+ */
-+struct qda_static_pd_args {
-+	/** @name: Kernel copy of the NUL-terminated PD name */
-+	const char *name;
-+	/** @namelen: Length of @name including the NUL */
-+	u32 namelen;
-+	/** @heap: Remote heap to hand the DSP, or zero size if it already has it */
-+	struct qda_phy_page heap;
-+};
++	return qda_legacy_ops_table.attach(sf->session, QDA_ATTACH_AUDIO_PD,
++					   u64_to_user_ptr(args.name), args.namelen);
++}
 +
- struct qda_fastrpc_invoke_ctx *qda_fastrpc_context_alloc(struct qda_dev *qdev);
- void qda_fastrpc_context_free(struct kref *ref);
- void qda_fastrpc_cleanup_handlelist(struct qda_fastrpc_invoke_ctx *ctx);
+ static long qda_shim_mmap(struct qda_shim_file *sf, void __user *argp)
+ {
+ 	struct qda_shim_mapping *m;
+@@ -516,6 +534,12 @@ static long qda_shim_dispatch(struct qda_shim_file *sf, unsigned int cmd, void _
+ 		return qda_shim_alloc_dma_buf(sf, argp);
+ 	case FASTRPC_IOCTL_INIT_CREATE:
+ 		return qda_shim_init_create(sf, argp);
++	case FASTRPC_IOCTL_INIT_ATTACH:
++		return qda_shim_attach(sf, QDA_ATTACH_ROOT_PD);
++	case FASTRPC_IOCTL_INIT_ATTACH_SNS:
++		return qda_shim_attach(sf, QDA_ATTACH_SENSORS_PD);
++	case FASTRPC_IOCTL_INIT_CREATE_STATIC:
++		return qda_shim_init_create_static(sf, argp);
+ 	case FASTRPC_IOCTL_MMAP:
+ 		return qda_shim_mmap(sf, argp);
+ 	case FASTRPC_IOCTL_MUNMAP:
 diff --git a/drivers/accel/qda/qda_ioctl.c b/drivers/accel/qda/qda_ioctl.c
-index 9b8cccfea1e3..41234fc576a9 100644
+index 41234fc576a9..aaf3e5e6b5b1 100644
 --- a/drivers/accel/qda/qda_ioctl.c
 +++ b/drivers/accel/qda/qda_ioctl.c
-@@ -121,7 +121,8 @@ static int qda_fastrpc_invoke(u32 type, void *data, struct qda_session *session)
- 	if (type == QDA_FASTRPC_RMID_INIT_CREATE) {
- 		qda_session_set_init_mem(session, ctx->init_mem_gem_obj);
- 		WRITE_ONCE(session->pd, QDA_USER_PD);
--	} else if (type == QDA_FASTRPC_RMID_INIT_ATTACH) {
-+	} else if (type == QDA_FASTRPC_RMID_INIT_ATTACH ||
-+		   type == QDA_FASTRPC_RMID_INIT_CREATE_STATIC) {
- 		WRITE_ONCE(session->pd, ctx->pd);
+@@ -183,7 +183,7 @@ int qda_release_dsp_process(struct qda_dev *qdev, struct qda_session *session)
+  * so that a concurrent one cannot skip the heap while the first is still in
+  * flight, and the flag is set only once the DSP has accepted it.
+  */
+-static int qda_attach_audio_pd(struct qda_session *session, struct drm_qda_remote_attach *args)
++static int qda_attach_audio_pd(struct qda_session *session, const char __user *uname, u32 namelen)
+ {
+ 	struct qda_dev *qdev = session->qda_dev;
+ 	struct qda_static_pd_args sargs = {};
+@@ -193,20 +193,20 @@ static int qda_attach_audio_pd(struct qda_session *session, struct drm_qda_remot
+ 	if (strcmp(qdev->dsp_name, "adsp") || !qdev->remote_heap_size)
+ 		return -ENODEV;
+ 
+-	if (!args->namelen || args->namelen > QDA_FASTRPC_INIT_NAMELEN_MAX)
++	if (!namelen || namelen > QDA_FASTRPC_INIT_NAMELEN_MAX)
+ 		return -EINVAL;
+ 
+-	name = memdup_user(u64_to_user_ptr(args->name), args->namelen);
++	name = memdup_user(uname, namelen);
+ 	if (IS_ERR(name))
+ 		return PTR_ERR(name);
+ 
+-	if (name[args->namelen - 1]) {
++	if (name[namelen - 1]) {
+ 		err = -EINVAL;
+ 		goto out_free;
  	}
  
-@@ -176,6 +177,54 @@ int qda_release_dsp_process(struct qda_dev *qdev, struct qda_session *session)
- 	return qda_fastrpc_invoke(QDA_FASTRPC_RMID_INIT_RELEASE, NULL, session);
+ 	sargs.name = name;
+-	sargs.namelen = args->namelen;
++	sargs.namelen = namelen;
+ 
+ 	scoped_guard(mutex, &qdev->remote_heap_lock) {
+ 		if (!qdev->audio_init_mem) {
+@@ -226,38 +226,60 @@ static int qda_attach_audio_pd(struct qda_session *session, struct drm_qda_remot
  }
  
-+/*
-+ * The Audio PD keeps the remote heap across daemon restarts, so only the first
-+ * attach on a device hands it to the DSP. The lock is held across the attach
-+ * so that a concurrent one cannot skip the heap while the first is still in
-+ * flight, and the flag is set only once the DSP has accepted it.
-+ */
-+static int qda_attach_audio_pd(struct qda_session *session, struct drm_qda_remote_attach *args)
-+{
-+	struct qda_dev *qdev = session->qda_dev;
-+	struct qda_static_pd_args sargs = {};
-+	char *name;
-+	int err;
-+
-+	if (strcmp(qdev->dsp_name, "adsp") || !qdev->remote_heap_size)
-+		return -ENODEV;
-+
-+	if (!args->namelen || args->namelen > QDA_FASTRPC_INIT_NAMELEN_MAX)
-+		return -EINVAL;
-+
-+	name = memdup_user(u64_to_user_ptr(args->name), args->namelen);
-+	if (IS_ERR(name))
-+		return PTR_ERR(name);
-+
-+	if (name[args->namelen - 1]) {
-+		err = -EINVAL;
-+		goto out_free;
-+	}
-+
-+	sargs.name = name;
-+	sargs.namelen = args->namelen;
-+
-+	scoped_guard(mutex, &qdev->remote_heap_lock) {
-+		if (!qdev->audio_init_mem) {
-+			sargs.heap.addr = qdev->remote_heap_addr;
-+			sargs.heap.size = qdev->remote_heap_size;
-+		}
-+
-+		err = qda_fastrpc_invoke(QDA_FASTRPC_RMID_INIT_CREATE_STATIC, &sargs, session);
-+		if (!err && sargs.heap.size)
-+			qdev->audio_init_mem = true;
-+	}
-+
-+out_free:
-+	kfree(name);
-+
-+	return err;
-+}
-+
  /**
-  * qda_ioctl_attach() - Attach to a DSP-resident protection domain
-  * @dev: DRM device structure
-@@ -190,24 +239,23 @@ int qda_ioctl_attach(struct drm_device *dev, void *data, struct drm_file *file_p
- 	struct qda_session *session = file_priv->driver_priv;
+- * qda_ioctl_attach() - Attach to a DSP-resident protection domain
+- * @dev: DRM device structure
+- * @data: User-space data (struct drm_qda_remote_attach)
+- * @file_priv: DRM file private data
++ * qda_session_attach() - Attach a session to a DSP-resident protection domain
++ * @session: Session to attach
++ * @pd_type: QDA_ATTACH_ROOT_PD, QDA_ATTACH_SENSORS_PD or QDA_ATTACH_AUDIO_PD
++ * @name: User pointer to the static PD name (QDA_ATTACH_AUDIO_PD only)
++ * @namelen: Length of @name including the NUL (QDA_ATTACH_AUDIO_PD only)
++ *
++ * Shared by the accel UAPI and the legacy shim, so the privilege check lives
++ * here rather than on the ioctl.
+  *
+  * Return: 0 on success, negative error code on failure
+  */
+-int qda_ioctl_attach(struct drm_device *dev, void *data, struct drm_file *file_priv)
++int qda_session_attach(struct qda_session *session, u32 pd_type, const char __user *name,
++		       u32 namelen)
+ {
+-	struct drm_qda_remote_attach *args = data;
+-	struct qda_session *session = file_priv->driver_priv;
  	int pd;
  
--	if (args->pad)
--		return -EINVAL;
-+	if (READ_ONCE(session->init_mem_gem_obj))
-+		return -EBUSY;
++	if (!capable(CAP_SYS_ADMIN))
++		return -EPERM;
++
+ 	if (READ_ONCE(session->init_mem_gem_obj))
+ 		return -EBUSY;
  
- 	switch (args->pd_type) {
+-	switch (args->pd_type) {
++	switch (pd_type) {
  	case QDA_ATTACH_ROOT_PD:
--		pd = QDA_ROOT_PD;
--		break;
  	case QDA_ATTACH_SENSORS_PD:
--		pd = QDA_SENSORS_PD;
--		break;
-+		if (args->name || args->namelen)
-+			return -EINVAL;
-+
-+		pd = args->pd_type == QDA_ATTACH_ROOT_PD ? QDA_ROOT_PD : QDA_SENSORS_PD;
-+
-+		return qda_fastrpc_invoke(QDA_FASTRPC_RMID_INIT_ATTACH, &pd, session);
-+	case QDA_ATTACH_AUDIO_PD:
-+		return qda_attach_audio_pd(session, args);
+-		if (args->name || args->namelen)
++		if (name || namelen)
+ 			return -EINVAL;
+ 
+-		pd = args->pd_type == QDA_ATTACH_ROOT_PD ? QDA_ROOT_PD : QDA_SENSORS_PD;
++		pd = pd_type == QDA_ATTACH_ROOT_PD ? QDA_ROOT_PD : QDA_SENSORS_PD;
+ 
+ 		return qda_fastrpc_invoke(QDA_FASTRPC_RMID_INIT_ATTACH, &pd, session);
+ 	case QDA_ATTACH_AUDIO_PD:
+-		return qda_attach_audio_pd(session, args);
++		return qda_attach_audio_pd(session, name, namelen);
  	default:
  		return -EINVAL;
  	}
--
--	if (READ_ONCE(session->init_mem_gem_obj))
--		return -EBUSY;
--
--	return qda_fastrpc_invoke(QDA_FASTRPC_RMID_INIT_ATTACH, &pd, session);
  }
  
- /**
-diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
-index 7e58df3eb2e1..b93e906b5793 100644
---- a/drivers/accel/qda/qda_rpmsg.c
-+++ b/drivers/accel/qda/qda_rpmsg.c
-@@ -4,7 +4,9 @@
- #include <linux/completion.h>
- #include <linux/module.h>
- #include <linux/of.h>
-+#include <linux/of_reserved_mem.h>
- #include <linux/rpmsg.h>
-+#include <linux/string.h>
- #include <linux/wait.h>
- #include <drm/drm_print.h>
- 
-@@ -145,6 +147,81 @@ static int qda_rpmsg_cb(struct rpmsg_device *rpdev, void *data, int len,
- 	return ret;
- }
- 
-+static int qda_init_vmperms(struct qda_dev *qdev)
-+{
-+	u32 vmids[QDA_MAX_VMIDS];
-+	int vmcount, i;
-+
-+	vmcount = of_property_read_variable_u32_array(qdev->dev->of_node, "qcom,vmids",
-+						      vmids, 0, QDA_MAX_VMIDS);
-+	if (vmcount == -EINVAL || vmcount == -ENODATA)
-+		return 0;
-+	if (vmcount < 0)
-+		return vmcount;
-+
-+	if (!qcom_scm_is_available())
-+		return -EPROBE_DEFER;
-+
-+	for (i = 0; i < vmcount; i++) {
-+		qdev->vmperms[i].vmid = vmids[i];
-+		qdev->vmperms[i].perm = QCOM_SCM_PERM_RWX;
-+	}
-+	qdev->vmcount = vmcount;
-+
-+	return 0;
-+}
-+
-+/*
-+ * The region is optional: without it an Audio PD attach is refused. It is
-+ * recorded only once it has been assigned, so teardown hands back exactly
-+ * what was handed over.
-+ */
-+static int qda_init_remote_heap(struct qda_dev *qdev)
-+{
-+	u64 src_perms = BIT(QCOM_SCM_VMID_HLOS);
-+	struct resource res;
-+	int ret;
-+
-+	if (strcmp(qdev->dsp_name, "adsp") && strcmp(qdev->dsp_name, "sdsp"))
-+		return 0;
-+
-+	if (of_reserved_mem_region_to_resource(qdev->dev->of_node, 0, &res))
-+		return 0;
-+
-+	if (qdev->vmcount) {
-+		ret = qcom_scm_assign_mem(res.start, resource_size(&res), &src_perms,
-+					  qdev->vmperms, qdev->vmcount);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	qdev->remote_heap_addr = res.start;
-+	qdev->remote_heap_size = resource_size(&res);
-+
-+	return 0;
-+}
-+
-+static void qda_deinit_remote_heap(struct qda_dev *qdev)
-+{
-+	struct qcom_scm_vmperm dst_perms = {
-+		.vmid = QCOM_SCM_VMID_HLOS,
-+		.perm = QCOM_SCM_PERM_RWX,
-+	};
-+	u64 src_perms = 0;
-+	int ret, i;
-+
-+	if (!qdev->remote_heap_size || !qdev->vmcount)
-+		return;
-+
-+	for (i = 0; i < qdev->vmcount; i++)
-+		src_perms |= BIT(qdev->vmperms[i].vmid);
-+
-+	ret = qcom_scm_assign_mem(qdev->remote_heap_addr, qdev->remote_heap_size,
-+				  &src_perms, &dst_perms, 1);
-+	if (ret)
-+		dev_err(qdev->dev, "Failed to assign remote heap back to HLOS: %d\n", ret);
-+}
-+
- static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
- {
- 	struct qda_dev *qdev = dev_get_drvdata(&rpdev->dev);
-@@ -163,6 +240,7 @@ static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
- 	qda_fastrpc_flush_pending(qdev);
- 	qda_cb_unpopulate(qdev);
- 	qda_deinit_device(qdev);
-+	qda_deinit_remote_heap(qdev);
- }
- 
- static int qda_count_cb_nodes(struct device_node *parent_node)
-@@ -195,10 +273,20 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
- 		return ret;
- 	}
- 
--	ret = qda_init_device(qdev, qda_count_cb_nodes(rpdev->dev.of_node));
-+	mutex_init(&qdev->remote_heap_lock);
-+
-+	ret = qda_init_vmperms(qdev);
-+	if (ret)
-+		return ret;
-+
-+	ret = qda_init_remote_heap(qdev);
- 	if (ret)
- 		return ret;
- 
-+	ret = qda_init_device(qdev, qda_count_cb_nodes(rpdev->dev.of_node));
-+	if (ret)
-+		goto err_deinit_remote_heap;
-+
- 	ret = qda_cb_populate(qdev, rpdev->dev.of_node);
- 	if (ret)
- 		goto err_deinit;
-@@ -213,6 +301,8 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
- 	qda_cb_unpopulate(qdev);
- err_deinit:
- 	qda_deinit_device(qdev);
-+err_deinit_remote_heap:
-+	qda_deinit_remote_heap(qdev);
- 	return ret;
- }
- 
-diff --git a/include/uapi/drm/qda_accel.h b/include/uapi/drm/qda_accel.h
-index 59ad5b8cc997..7c439058876e 100644
---- a/include/uapi/drm/qda_accel.h
-+++ b/include/uapi/drm/qda_accel.h
-@@ -210,22 +210,31 @@ struct drm_qda_mem_unmap {
- /* Protection domains for drm_qda_remote_attach.pd_type */
- #define QDA_ATTACH_ROOT_PD	1
- #define QDA_ATTACH_SENSORS_PD	2
-+#define QDA_ATTACH_AUDIO_PD	3
- 
- /**
-  * struct drm_qda_remote_attach - Parameters for attaching to a DSP protection domain
-- * @pd_type: QDA_ATTACH_ROOT_PD or QDA_ATTACH_SENSORS_PD
-- * @pad: Must be zero
-+ * @pd_type: QDA_ATTACH_ROOT_PD, QDA_ATTACH_SENSORS_PD or QDA_ATTACH_AUDIO_PD
-+ * @namelen: Length of the name in bytes including the NUL terminator
-+ *           (QDA_ATTACH_AUDIO_PD only, otherwise must be zero)
-+ * @name: User pointer to the NUL-terminated name of the static PD to attach
-+ *        to (QDA_ATTACH_AUDIO_PD only, otherwise must be zero)
-  *
-  * Binds this file to a protection domain that already exists on the DSP,
-  * instead of creating one with DRM_IOCTL_QDA_REMOTE_SESSION_CREATE. Every
-  * later request on the file is directed at it. Fails with EBUSY if a process
-  * has already been created on the file.
-  *
-+ * For QDA_ATTACH_AUDIO_PD, the first successful attach on a device also
-+ * hands the DSP the remote heap reserved for it in the device tree; later
-+ * attaches reuse that heap.
++/**
++ * qda_ioctl_attach() - Attach to a DSP-resident protection domain
++ * @dev: DRM device structure
++ * @data: User-space data (struct drm_qda_remote_attach)
++ * @file_priv: DRM file private data
 + *
-  * Requires CAP_SYS_ADMIN.
-  */
- struct drm_qda_remote_attach {
- 	__u32 pd_type;
--	__u32 pad;
-+	__u32 namelen;
-+	__u64 name;
- };
++ * Return: 0 on success, negative error code on failure
++ */
++int qda_ioctl_attach(struct drm_device *dev, void *data, struct drm_file *file_priv)
++{
++	struct drm_qda_remote_attach *args = data;
++
++	return qda_session_attach(file_priv->driver_priv, args->pd_type,
++				  u64_to_user_ptr(args->name), args->namelen);
++}
++
+ /**
+  * qda_ioctl_mmap() - Map a buffer into the DSP's address space
+  * @dev: DRM device structure
+diff --git a/drivers/accel/qda/qda_ioctl.h b/drivers/accel/qda/qda_ioctl.h
+index f6f5d64e36ce..94adba549989 100644
+--- a/drivers/accel/qda/qda_ioctl.h
++++ b/drivers/accel/qda/qda_ioctl.h
+@@ -21,6 +21,8 @@ int qda_ioctl_mmap(struct drm_device *dev, void *data, struct drm_file *file_pri
+ int qda_ioctl_munmap(struct drm_device *dev, void *data, struct drm_file *file_priv);
+ int qda_ioctl_attach(struct drm_device *dev, void *data, struct drm_file *file_priv);
+ int qda_session_init_create(struct qda_session *session, struct qda_init_create_args *create);
++int qda_session_attach(struct qda_session *session, u32 pd_type, const char __user *name,
++		       u32 namelen);
+ int qda_session_mem_map(struct qda_session *session, struct qda_mem_map_args *args);
+ int qda_session_mem_unmap(struct qda_session *session, struct drm_qda_mem_unmap *unmap);
  
- #if defined(__cplusplus)
+diff --git a/drivers/accel/qda/qda_legacy_ops.c b/drivers/accel/qda/qda_legacy_ops.c
+index ea815ab0c52a..fc5e94c0c9bc 100644
+--- a/drivers/accel/qda/qda_legacy_ops.c
++++ b/drivers/accel/qda/qda_legacy_ops.c
+@@ -192,6 +192,7 @@ const struct qda_legacy_ops qda_legacy_ops_table = {
+ 	.session_create = legacy_session_create,
+ 	.session_destroy = legacy_session_destroy,
+ 	.init_create = legacy_init_create,
++	.attach = qda_session_attach,
+ 	.release = legacy_release,
+ 	.mmap = legacy_mmap,
+ 	.mem_map = legacy_mem_map,
+diff --git a/drivers/accel/qda/qda_legacy_ops.h b/drivers/accel/qda/qda_legacy_ops.h
+index e3126ac10507..95a169edc594 100644
+--- a/drivers/accel/qda/qda_legacy_ops.h
++++ b/drivers/accel/qda/qda_legacy_ops.h
+@@ -33,6 +33,9 @@ struct qda_legacy_ops {
+ 	/** @init_create: Create a DSP process from an imported ELF image */
+ 	int (*init_create)(struct qda_session *session, struct drm_gem_object *elf_obj,
+ 			   u32 filelen, u32 attrs, u32 siglen);
++	/** @attach: Attach the session to a DSP-resident protection domain */
++	int (*attach)(struct qda_session *session, u32 pd_type, const char __user *name,
++		      u32 namelen);
+ 	/** @release: Release the session's DSP process, if it has one */
+ 	int (*release)(struct qda_session *session);
+ 	/** @mmap: Map a buffer into the DSP's address space */
 
 -- 
 2.34.1
