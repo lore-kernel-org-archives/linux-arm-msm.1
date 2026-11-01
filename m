@@ -1,96 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793490877;
-	b=sWND3ttHibqpKy4AMju8lnOE/ev1yuVD5++atR+cUms3InR7Zyz8xK2UlOoN/BNDG9+w
-	 mE1VLXD7VoczL04fQJNd1hiVdWZyFLXBduVlmF3Bvtsw5zlLIMjZkaM2dLnDBnkkhmgWL
-	 4tgBqVLSjM46nLoYjzR1cGOS4aiFEwS5KuOTJ2BY+8qeQLNQUwaGfFTeYoHBJ0FuWA/9X
-	 E65Omlzzvy6756xY/yAYIOYW2bxR9XsLOSkoMIUHzg2FO/RZMn3BF1bqcIv7vU1d0E0+u
-	 8KXKMaiHqMqZBymZzZsFoqg53g1mMZYkyyfqTlHproFVZuYlFORWz6PtqToie1Xgeag==
+	t=1793498456;
+	b=GJA2vLjdw1c1f5pjIFy4zL4FiN3J6u+xshkOLBcw8Bow++M1G6RO11h2aNVNi1qoJSO2
+	 oM5D1BGSLvgf7EwUPyqicUZht7s1HMFNxbOwPZKcPwYZ7sxWt/oS6q9tugL4sJ8p7xz7s
+	 lzETzno7iFApGaFuiH8MtHRJgJXgt/pUWiZ+TjIeSCjMez3lAq9TFlwKqASyWMQznoUVg
+	 pF61k9pX4QYf1scH8oDnGzvnaAPDvyqLMvC/srEg5TSymigZcd4usOso9Cm+3ktDY6+Vs
+	 SZk1/bAZchEYGS725dWsFzEI2O26RzWTLLEO8a4VVImpg5iEAtldoxUTTikKMlirIxw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793490877;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=/O1QuS7+tRKjJCe36mLJ5Gs9QsE8OnsKMAzsZ8ju5JA=;
-	b=jGBvnFmwEkVI04bQRcvCiILzC+P52mRWxN1ql//cNkFJ5DSwIk1eEmv/3/Jlx1v8i4jF
-	 iBobuqk2Njke0qm3tesTLEIXP51T7xnFqIVkKi12OHiLOUqzJw6ZIpe0cwUBtdx+gK2Np
-	 XDdTWdsEyQ/6cX6c/Ixl+mNxeocQwY/PIz1QQMJK0xOdYG5mew4Zx3vCs7tJi+H8jLnuB
-	 dsrDzE8K6nHVtJ0No+m2IYQJIjA1YRgDpt/NlN5bMUlyryDGayAkX95j9yn2H4SqzYAFz
-	 OJ0LkT9mPK19YBpapV0/l+VP39c+09CMgnEAx0xB/giBbL7tBuei9nGzuWw8HI4DDRw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793498456;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=55EAfDGPUHZz7T0vufY3UxzR1Z8zYzzLlpJPntYQtP4=;
+	b=yktke9189GqvABfosYMcEZQbqP9qIpCRyd7fWP/wOTmId7eZFh9uYO9tgs4Vrz65Eqwf
+	 xdccvlIfDCxQ1OE/WbdDlNeGJ8w8kMtL890WNzZ58jHHRi5x2P0n4CtN6jO9nKscN6KxO
+	 Ql7FeggvVYKWCo32zw/lZiAyKJlDz6dg5OVsOKUbV2BApX1tkAbpqvuRPE3LxJe7jB+eJ
+	 CosFZgJlg5cwAH8kpwhvUwiLfBqZE4ALGtNZGevQiY7fqEZiBKcOHXnnNOnfEdF3nvTHP
+	 ILndpGHTR5x5IpUHQ3JAkpqToHSQpsGVEX3zBEo5axpNtmE53exX7yq5IM+rn4R4MuQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=eTom9iFn;
-	arc=none smtp.remote-ip=192.198.163.15
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JGJioGUB;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EED0606A31A;
-	Sat, 31 Oct 2026 23:54:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8EED0606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5F3A606A324;
+	Sun,  1 Nov 2026 02:00:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=eTom9iFn
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793490875; x=1825026875;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=onCPx45jawKu9ge3zeP6P/yMp8qkq874YfzuNRUh1dE=;
-  b=eTom9iFnz2ns+8WlvHLW97FS3h32Kz49d3YGXAlmGS10WvlgOm3fphZi
-   y2R6umxjS3aL0j4Yfcr+4FVTzr5lXJ8EFpo/FyJzDvWuq5UMib48KZ2TR
-   M0vC2PkdBdmAaZMWaZOQ/xana45ieNsk55rWElMDsY1pcOpnFbP0OPPXv
-   h3uTug49/4CnqucSph33IWWaX6zH6B+cTH88suQxzJEH6tXlJeW9+tXFc
-   OPCDlD42Fn/I+hpBdr3+COVFeBHvrCzwsCUMcSRT+T0OdywaT6d/+ZZmj
-   Srd1Ek1tJ/AfTWYbqNgrlYd/GfmFW6jX3yyDY1Uj5Z3aFhT6jr66832P0
-   g==;
-X-CSE-ConnectionGUID: /FCaWxYKSMmeduEKc8Tdxw==
-X-CSE-MsgGUID: fUhshoPWQSyixsMlsg+w5Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11952"; a="2220647"
-X-IronPort-AV: E=Sophos;i="6.27,188,1787036400"; 
-   d="scan'208";a="2220647"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2026 16:54:34 -0700
-X-CSE-ConnectionGUID: V2rALCjrSseDfEOys8L50Q==
-X-CSE-MsgGUID: OZonhpcURWKtmmbCBaLWUQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,188,1787036400"; 
-   d="scan'208";a="6079165"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa001.fm.intel.com with ESMTP; 31 Oct 2026 16:54:29 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xNIu2-00000000dH6-35cm;
-	Sat, 31 Oct 2026 23:54:26 +0000
-Date: Sun, 1 Nov 2026 07:53:27 +0800
-From: kernel test robot <lkp@intel.com>
-To: Taniya Das <taniya.das@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: oe-kbuild-all@lists.linux.dev,
-	Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-gpio@vger.kernel.org, netdev@vger.kernel.org,
-	Taniya Das <taniya.das@oss.qualcomm.com>
-Subject: Re: [PATCH v2 03/12] clk: qcom: Add a driver for PDM GP_MN
- fractional clock divider
-Message-ID: <202611010752.aU8NDTD1-lkp@intel.com>
-References: <20261026-b4-pdm_clk_gp_mnd_v2-v2-3-ff8e4bc8d567@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JGJioGUB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5E551F000C1;
+	Sun,  1 Nov 2026 02:00:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793498455;
+	bh=55EAfDGPUHZz7T0vufY3UxzR1Z8zYzzLlpJPntYQtP4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=JGJioGUBgGf7C6p4yUcDFwJpgekjIxoAt297KuWOZyQ7tL3c6V63cMaZ/AoA8XInS
+	 fw4bPvGl5YEiVuM1l0SL2pMXpz5VfCuY7MOGzdemsK3SC21i1g87jQg180fralhX9y
+	 Yt2+/mCyTPqU/R0NTQbxtGfp2WH2I0hyz9U/Uj2xR2AXamvGQLTM58J3ndv0fBppz1
+	 CaZSKzobrtRkseOA0gr+bMp4BzBNi/qIgLBrI476OQn065U0UWZvMvjHbP1c80FYhV
+	 HZQ29ehPe90C7qewihm6oJBBZBC55nme3UHSYrw5eLSlDyqXKV3TXFqQlUsM/g+tlV
+	 PhWGFHXLbuPKQ==
+Date: Sun, 1 Nov 2026 02:00:47 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Reuse IIO device ID for
+ ADC_TM auxiliary device
+Message-ID: <20261101020047.66034613@jic23-hlaptop>
+In-Reply-To: <20261028-fix-adc5-tm-v1-1-0018aabc06c5@oss.qualcomm.com>
+References: <20261028-fix-adc5-tm-v1-1-0018aabc06c5@oss.qualcomm.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,33 +62,121 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261026-b4-pdm_clk_gp_mnd_v2-v2-3-ff8e4bc8d567@oss.qualcomm.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hi Taniya,
+On Wed, 28 Oct 2026 15:09:47 +0100
+Loic Poulain <loic.poulain@oss.qualcomm.com> wrote:
 
-kernel test robot noticed the following build errors:
+Hi Loic,
 
-[auto build test ERROR on 4eb2586bd40db27d77cc5b724ca9386ed0c71d53]
+> A recent fix in ADC5 Gen3 driver allocates a dedicated auxiliary-device
+> ID through an IDA to ensure that ADC_TM auxiliary devices receive unique
+> names on the auxiliary bus.
+When talking about another patch I'd refer to it by name and ideally
+also add a Link tag to the lore.kernel.org for it to the tags block.
+I think you mean:
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Taniya-Das/dt-bindings-clock-qcom-Add-bindings-for-PDM-GP_MN-clock-divider/20261026-165927
-base:   4eb2586bd40db27d77cc5b724ca9386ed0c71d53
-patch link:    https://lore.kernel.org/r/20261026-b4-pdm_clk_gp_mnd_v2-v2-3-ff8e4bc8d567%40oss.qualcomm.com
-patch subject: [PATCH v2 03/12] clk: qcom: Add a driver for PDM GP_MN fractional clock divider
-config: i386-allmodconfig (https://download.01.org/0day-ci/archive/20261101/202611010752.aU8NDTD1-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261101/202611010752.aU8NDTD1-lkp@intel.com/reproduce)
+iio: adc: qcom-spmi-adc5-gen3: Allocate unique ADC_TM aux device IDs
+Link: https://lore.kernel.org/all/20261008031154.3440632-1-shengchao.guo@oss.qualcomm.com/
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202611010752.aU8NDTD1-lkp@intel.com/
+> 
+> However, each ADC instance is already assigned a unique IIO device ID.
+> Reuse that existing identifier when registering the ADC_TM auxiliary
+> device instead of maintaining a separate IDA solely for auxiliary device
+> naming.
+> 
+> This removes the custom ID allocation and release handling while
+> preserving unique auxiliary device names across multiple ADC instances.
 
-All errors (new ones prefixed by >>, old ones prefixed by <<):
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
->> ERROR: modpost: drivers/clk/qcom/clk-gp-mnd.ko: symbol '__udivdi3' undefined!
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+The fix hasn't gone upstream yet (assuming it is the patch I think
+it is!).  Would it be better to just squash this onto that patch
+and avoid having to care about a version of the intermediate code?
+
++CC Shawn. 
+
+Thanks,
+
+Jonathan
+
+> ---
+>  drivers/iio/adc/qcom-spmi-adc5-gen3.c | 24 +++++-------------------
+>  1 file changed, 5 insertions(+), 19 deletions(-)
+> 
+> diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> index f0b2544c16322374644ac3a2eda63322f318e25f..a23eb5c9096d765af7d76ad66b50ed895782b256 100644
+> --- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> +++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> @@ -15,7 +15,6 @@
+>  #include <linux/dev_printk.h>
+>  #include <linux/err.h>
+>  #include <linux/export.h>
+> -#include <linux/idr.h>
+>  #include <linux/iio/adc/qcom-adc5-gen3-common.h>
+>  #include <linux/iio/iio.h>
+>  #include <linux/interrupt.h>
+> @@ -609,16 +608,9 @@ static void adc5_gen3_delete_aux(void *data)
+>  	auxiliary_device_delete(data);
+>  }
+>  
+> -static DEFINE_IDA(adc5_gen3_aux_ida);
+> +static void adc5_gen3_aux_device_release(struct device *dev) {}
+>  
+> -static void adc5_gen3_aux_device_release(struct device *dev)
+> -{
+> -	struct auxiliary_device *adev = to_auxiliary_dev(dev);
+> -
+> -	ida_free(&adc5_gen3_aux_ida, adev->id);n
+> -}
+> -
+> -static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+> +static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+>  {
+>  	struct tm5_aux_dev_wrapper *aux_device;
+>  	int i, ret, i_tm = 0;
+> @@ -628,6 +620,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+>  		return -ENOMEM;
+>  
+>  	aux_device->aux_dev.name = "adc5_tm_gen3";
+> +	aux_device->aux_dev.id = id;
+>  	aux_device->aux_dev.dev.parent = adc->dev;
+>  	aux_device->aux_dev.dev.release = adc5_gen3_aux_device_release;
+>  
+> @@ -650,16 +643,9 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+>  
+>  	aux_device->n_tm_channels = adc->n_tm_channels;
+>  
+> -	ret = ida_alloc(&adc5_gen3_aux_ida, GFP_KERNEL);
+> -	if (ret < 0)
+> -		return ret;
+> -	aux_device->aux_dev.id = ret;
+> -
+>  	ret = auxiliary_device_init(&aux_device->aux_dev);
+> -	if (ret) {
+> -		ida_free(&adc5_gen3_aux_ida, aux_device->aux_dev.id);
+> +	if (ret)
+>  		return ret;
+> -	}
+>  
+>  	ret = devm_add_action_or_reset(adc->dev, adc5_gen3_uninit_aux,
+>  				       &aux_device->aux_dev);
+> @@ -814,7 +800,7 @@ static int adc5_gen3_probe(struct platform_device *pdev)
+>  		return ret;
+>  
+>  	if (adc->n_tm_channels > 0) {
+> -		ret = adc5_gen3_add_aux_tm_device(adc);
+> +		ret = adc5_gen3_add_aux_tm_device(adc, iio_device_id(indio_dev));
+>  		if (ret)
+>  			dev_err_probe(dev, ret,
+>  				      "Failed to add auxiliary TM device\n");
+> 
+> ---
+> base-commit: f1ac44c32cba88ad65dcecd4a279661d14e93651
+> change-id: 20261028-fix-adc5-tm-c96b13a4f442
+> 
+> Best regards,
+
