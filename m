@@ -1,45 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.113
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793531179;
-	b=FSciFDPtHGAhw9aSz1pe5tvJoooy+znb60pzR13hEjM1WuU7123fQiUivUyZD5cafk4K
-	 7zstBV4oH1XwLJswG6ZY1TEjCDVvHV22qMF3yWkSpKWJavrqNbgtc5EqM7HEreypZaQ+S
-	 JquvKu22k8vYM+dw0AKZ1Z2iui2F4wh/hAmwEnvejcq4bgagloMPabxFUi4SjQ1iyeSfX
-	 GeoRkLIm35WKU8ttZEh1P1kqsm5f2e5kt17et9J7WoIWN/mzc5O8SckS0w+QWaQCVUv/A
-	 cPsyhQlC+wl7STpx5Etd/UTl0tawSj1Vgo+dsEYPni4TuqxHJQmcrb5ObtRDXpD7IGA==
+	t=1793536201;
+	b=FLOb6kv7seF9AzVRuDksD3bZbZbzos/7COdNzhir2y+df+BhzL1L0yZRA2sVT2+s2OI1
+	 tIN9872yyKtV329uDflacW2e7Au9x5NWy/OQThFqzXKXHh+v4Mme2a77Bq2o59PyqHLuP
+	 QwwTldsuUg3mrkPi1hkmj8R+am/e+XF2yIe4jbFIfWezzlWRLtCm2v8E+FpwVHaJNxWhB
+	 XlJBJQUCcKFl5fcsmuB2Mb59y0dhgP3WnKO3Qy3rL+qyVZ8HUPE5S0kcfPuffadAcVNJ/
+	 ZZyIpgoUBqXF2nsUXw/F8SuY+7O+vwz1XtIcRxWvOHC82yuTl2y6X3XVhuuzdL3qCSw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793531179;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=ICIkAf3UPu4vp4g9wq9pl5fJ3rhAB5F7TqD0Cz1UXjg=;
-	b=JGPDLTEu/6slPTNQzmXyG58JOn4mVZ9kbDpmNDqNAmKCLR11nd8zP5Og6g1Q3alXZMir
-	 NvojRvCCaBKEI5U4AWc+ougwtcqWa5SybTgswiqAj6FSvzAvIFyiRKGLxgoVeUT8NJ4vF
-	 lQiwMZ0kaLEnWynSR1QAsm+PxNLy6vn1GMsZoToNmr754SGhxudXxwQ7S4DVJiYOSBjmE
-	 tgWo02pnp7EX2kDSgG4VvALFWQTRsMlNLnCRBD1PDL1qPj9VBm1UDIoVGkdk9vd0cvLQz
-	 U4J+oda/v0LNshVLk7ZJK/CSaxHcTSdW7T60/yS3Lw8yRma5Ke1fMdtZQvI47Oag3xA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793536201;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=MXG9XxsNUYUBQFUk2jiqmUkACxCXCveVoiDIppG6/JI=;
+	b=uHTE2K5MTAtNhFFHRmj5tQYFVm4XV6PaUHxdiW5uZheL5gSQqGABRPbZ+kA+m2posyp4
+	 1s1GtWM0rOHuH+DaTN4uW4YGhawurMxTO4s1+1goXBfuYIU3gN3F3MM3XlU6t4HbO1aIM
+	 ashKvi42TWAfav3ror5Ynx8J0YcqRi0zVNms7e4/TA2RC/Su1oZn4NFQ+1wGYjVnacZhz
+	 vD+dhBGfRhwFjnJFg9XYdvhX5dRYf9LN3hPNpMPAB5XficWcFB8pZ7uE5mMAIqTeJwgpd
+	 2UpNfYaGUwzkCbqk+mPWOo91QAbFlijbW//oThACv/Z3YJoruPxJeGwdrFfIdRdTgEw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DNTtMyDY;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=softbase.tech;
+	spf=pass smtp.mailfrom=softbase.tech;
+	dkim=pass header.d=softbase.tech header.i=@softbase.tech header.a=rsa-sha256 header.s=protonmail3 header.b=EXzKOxkl;
+	arc=none smtp.remote-ip=79.135.106.113
+Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch [79.135.106.113])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 748EA606A324;
-	Sun,  1 Nov 2026 11:06:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4543606A329;
+	Sun,  1 Nov 2026 12:29:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4543606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=softbase.tech
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=softbase.tech
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DNTtMyDY
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41DBD1F000C1;
-	Sun,  1 Nov 2026 11:06:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793531179;
-	bh=ICIkAf3UPu4vp4g9wq9pl5fJ3rhAB5F7TqD0Cz1UXjg=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=DNTtMyDY6sgakprgJdluxjvivbsnTtKQfLxmqRjCbVA4kgZOmhZOwV67noWIzTw9k
-	 XRTQbPddEJWqhsLM5zko1Agcsj12H5ke6W0KbT9Fv3sDhnCkF4k/qN09OmnrQHwlRW
-	 TzvnEDNp85FaCk4ZJ52ytdc32NOIYM5B44joQWlCSWL65KQq/+ne6briCWGmsi2gkx
-	 tR1zAvGLWy1QwJGBrOXbiT0RxrVKRpv3aRO91Kwxo7xFdxMbzwo+2T2nTTlN66K/2g
-	 t/M4QWYsoIYwayDtpDQTmj+5rpqiHtMcdo+iP4FtTsCg/hnV+osY+zLkLkLc71JbPx
-	 tCOIUQ+oUIJfg==
+	dkim=pass (2048-bit key, unprotected) header.d=softbase.tech header.i=@softbase.tech header.a=rsa-sha256 header.s=protonmail3 header.b=EXzKOxkl
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=softbase.tech;
+	s=protonmail3; t=1793536198; x=1793795398;
+	bh=MXG9XxsNUYUBQFUk2jiqmUkACxCXCveVoiDIppG6/JI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=EXzKOxkl70OCmui4jy79De7H6k0YKei3U0Ft+swv/5PlZ2gHA6piffFlnWhap8wAl
+	 fP6x7bS1Wsmot3KsrCjic1noBx2lnJvLmIqPqECq3ccCnLizh12NZYrbX4rWZxaffm
+	 9R/LTfqnoIAwPQ/XqcfEpNW07uh/0ZNKzWB0bMOcwuKZKtWXlmrTX4WjrQKiozLM1c
+	 5yhSg1buHg2m5kYJ7lYFPtWI0NCX3xbGv/2T3hXsAX3uvg6q+ix8EhTQaZ3fZF5x95
+	 50LPN3wRq5+OZzlKytWMJImMjLGCftSSMJ3uiyz6/9JqORD+7c9gSgkZ3TCBhfVVcX
+	 v+ARvmqWti2Kg==
+X-Pm-Submission-Id: 4jHZ0g3FNKz2Sd2v
+From: "Beat M. Liechti" <beat@softbase.tech>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Federico Amedeo Izzo <federico@izzo.pro>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	"Beat M. Liechti" <beat@softbase.tech>,
+	stable@vger.kernel.org
+Subject: [PATCH v2 1/2] drm/msm/dpu: don't reassign resources on color management changes
+Date: Sun,  1 Nov 2026 13:26:57 +0100
+Message-ID: <20261101122943.8155-2-beat@softbase.tech>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261101122943.8155-1-beat@softbase.tech>
+References: <20261101095754.33840-1-beat@softbase.tech>
+ <20261101122943.8155-1-beat@softbase.tech>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -49,67 +77,121 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2] phy: qcom: qmp-combo: Leave the USB PCS alone in
- DP-only mode
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Joonhoe Kim <26rote@gmail.com>
-Cc: vkoul@kernel.org, neil.armstrong@linaro.org, mani@kernel.org, 
- konrad.dybcio@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com, 
- val@packett.cool, wesley.cheng@oss.qualcomm.com, 
- linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261023123512.1912-1-26rote@gmail.com>
-References: <20261023123512.1912-1-26rote@gmail.com>
-Date: Sun, 01 Nov 2026 16:36:13 +0530
-Message-Id: <179353117353.2955.16116793673558325261.b4-reply@b4>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1723; i=mani@kernel.org;
- h=from:subject:message-id; bh=Qm6xI6pBQHw/JhBtXoNijp9M1lQctxsjcpVxgL/i6NE=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq5x0nDJe3fEmoyf6sZec61aECAaAg0o1cX25Ki
- FMLJUqTzDaJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCaucdJwAKCRBVnxHm/pHO
- 9VZUB/9HhdfzEhaz1Jw9bmrIhDzgSuZ1RwQsR89b8mh4mJ9zXwYloZnv6WkSprFSIE6EPp9RqZt
- XKHYgXFs8bZYfS4UxpKutjkQS+HisdIx+1mkxHgfzfm264wxnLJuTOfhKq8x7UmcYv/rVc/8oKw
- cpZICoXHJfuHgQZOsPlyFEw0tj3OT9QEhrToa5W8qG0EWOtd4n/NR9jeuxcOn/G3sYJ/S2zaclA
- y9CJ8X6zfLb9ApJkpWyUre08yNOnIsyb+IBqYlRx6Mier6ZMlHo34ZmaKli/oC9fbAiGZl84q1d
- cpmOD6JtjKVavlf9u+8cXRUZpwr4SrFllq6wcvriV7ZQsWsc
-X-Developer-Key: i=mani@kernel.org; a=openpgp;
- fpr=C668AEC3C3188E4C611465E7488550E901166008
+Content-Transfer-Encoding: 8bit
 
-On 2026-10-23 21:35 +0900, Joonhoe Kim wrote:
-> In DP-only mode (DisplayPort pin assignments C and E) all four lanes
-> belong to the DisplayPort PHY and the USB PCS stays powered down.
-> Three paths still touch the USB PCS in this state:
-> 
-> - The USB controller can exit and re-init its PHY in DP-only mode, e.g.
->   across a system suspend that loses power. qmp_combo_usb_init() then
->   programs the USB serdes, lane and PCS tables over the DisplayPort
->   configuration and times out waiting for PHYSTATUS, and
->   qmp_combo_usb_exit() resets and powers down a PCS that is not in use.
-> - qmp_combo_typec_switch_set() powers the USB PCS off and on when the
->   orientation changes in DP-only mode, e.g. when a DP-only sink is
->   plugged in the other way round while the mux is still in DP-only
->   mode.
-> - qmp_combo_reconfigure_phy() powers the USB PCS off again when the
->   port leaves DP-only mode.
-> 
-> Skip the USB PCS in these paths in DP-only mode. Keep the
-> qmp_combo_com_init()/qmp_combo_com_exit() reference and usb_init_count,
-> so that qmp_combo_reconfigure_phy() powers the USB PCS up when the port
-> leaves DP-only mode.
-> 
-> On a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a USB-C monitor
-> in pin assignment C, resume from s2idle fails with "phy initialization
-> timed-out", the dwc3 resume returns -110 and the following xHCI resume
-> hangs the system.
-> 
-> Fixes: 896277138c13 ("phy: qcom: qmp-combo: register a typec mux to change the QMPPHY_MODE")
-> Fixes: 89563a152973 ("phy: qualcomm: qmp-combo: Add preliminary USB4 support")
-> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+Since commit 39a750ff5fc9 ("drm/msm/dpu: Add DSPP GC driver to provide
+GAMMA_LUT DRM property"), dpu_crtc_atomic_check() releases and reserves
+the hardware blocks of a CRTC whenever color_mgmt_changed is set, not
+only on a modeset. A commit that merely replaces the GAMMA_LUT or CTM
+blob of an active CRTC can therefore move that CRTC to a different
+CTL/LM pair without disabling and re-enabling the pipeline, and the
+hardware keeps scanning out through blocks the driver no longer
+considers in use.
 
-Acked-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+This is easy to hit with GNOME/mutter on a laptop driving an external
+display: closing the lid disables the eDP CRTC, and in the same atomic
+commit mutter sets new color blobs on the still active HDMI CRTC. With
+drm.debug enabled, dpu_rm_reserve() moves the HDMI CRTC from CTL_1 to
+the just released CTL_0 while its encoder is neither disabled nor
+re-enabled. A few seconds later the display SMMU reports context faults
+at the refresh rate and the external screen fills with garbage. Opening
+the lid again leads to a stream of "vblank timeout" and "frame done
+timeout" errors and the machine has to be power cycled.
 
-- Mani
+Color management affects the topology in only one way: DSPP blocks are
+requested when either CTM or GAMMA_LUT is set. Handle that case in
+dpu_crtc_check_mode_changed() by requiring a full modeset when the
+presence of CTM/GAMMA_LUT changes, and stop reallocating resources on a
+bare color_mgmt_changed. Don't set allow_modeset here: if userspace
+did not allow a modeset, the atomic core rejects the commit instead of
+the CRTC being silently moved to other blocks.
 
+Fixes: 39a750ff5fc9 ("drm/msm/dpu: Add DSPP GC driver to provide GAMMA_LUT DRM property")
+Cc: stable@vger.kernel.org
+Assisted-by: LLM
+Signed-off-by: Beat M. Liechti <beat@softbase.tech>
+---
+
+Notes:
+    Changes in v2:
+    - Don't set allow_modeset on behalf of userspace; only set mode_changed
+      and let drm_atomic_check_only() reject commits that did not allow a
+      modeset (Dmitry)
+    - New patch 2/2 removes the CTM-only allow_modeset hack from
+      msm_atomic_check(), which is redundant with this check (Sashiko review)
+    - Link to v1: https://lore.kernel.org/r/20261101095754.33840-1-beat@softbase.tech
+    
+    Testing: ThinkPad T14s Gen 6 (X1E78100), GNOME 50 / mutter on Wayland,
+    LG 4K60 monitor on the HDMI port (DP to HDMI bridge), logind set to not
+    suspend on lid close while on external power. Without this patch every
+    lid close reproduces the corruption and hang described above. With it,
+    closing and opening the lid produces no SMMU faults, vblank timeouts or
+    frame done timeouts, and both displays keep working.
+    
+    v2 was retested on the same kernel with both patches applied: lid
+    close/open, Night Light toggled repeatedly with the lid open and closed,
+    and a color profile change. No SMMU faults or timeouts, no visual
+    problems, and with drm.debug=0x16 no commit was rejected for requiring
+    a modeset, so mutter is not affected by the stricter check.
+    
+    On msm-next the patch has only been compile tested (W=1, no new
+    warnings), not run.
+    
+    The RFC "drm/msm/dpu: Force modeset if new CTLs have been reserved"
+    (https://lists.freedesktop.org/archives/freedreno/2025-March/036824.html)
+    addresses reassignment without a modeset in general. This patch only
+    removes the color management trigger.
+    
+    The root cause analysis of the drm.debug trace, the fix and the
+    changelog were developed with an AI coding assistant (Claude by
+    Anthropic). I reviewed the change and tested it on the hardware above.
+
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 25 +++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+index 42d0a529b..cfcc3556a 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+@@ -1516,6 +1516,19 @@ int dpu_crtc_check_mode_changed(struct drm_crtc_state *old_crtc_state,
+ 	    (!clone_mode_requested && clone_mode_enabled))
+ 		new_crtc_state->mode_changed = true;
+ 
++	/*
++	 * DSPP blocks are reserved only when CTM or GAMMA_LUT is set (see
++	 * dpu_crtc_get_topology()), so enabling or disabling color management
++	 * changes the hardware topology. Changing resources on an active CRTC
++	 * requires a full modeset; otherwise the CTL/LM blocks get swapped
++	 * underneath a running pipeline. If userspace did not allow a modeset,
++	 * drm_atomic_check_only() rejects the commit.
++	 */
++	if (new_crtc_state->enable &&
++	    (!!(old_crtc_state->ctm || old_crtc_state->gamma_lut) !=
++	     !!(new_crtc_state->ctm || new_crtc_state->gamma_lut)))
++		new_crtc_state->mode_changed = true;
++
+ 	return 0;
+ }
+ 
+@@ -1534,9 +1547,15 @@ static int dpu_crtc_atomic_check(struct drm_crtc *crtc,
+ 
+ 	bool needs_dirtyfb = dpu_crtc_needs_dirtyfb(crtc_state);
+ 
+-	/* don't reallocate resources if only ACTIVE has beeen changed */
+-	if (crtc_state->mode_changed || crtc_state->connectors_changed ||
+-	    crtc_state->color_mgmt_changed) {
++	/*
++	 * Don't reallocate resources if only ACTIVE or color management
++	 * values have changed. A change in DSPP requirements is turned into a
++	 * modeset by dpu_crtc_check_mode_changed(). Reallocating on a plain
++	 * color_mgmt_changed would move an active CRTC to different CTL/LM
++	 * blocks without a modeset, leaving the hardware scanning out through
++	 * stale CTL/LM state (SMMU faults, corrupted output, vblank timeouts).
++	 */
++	if (crtc_state->mode_changed || crtc_state->connectors_changed) {
+ 		rc = dpu_crtc_assign_resources(crtc, crtc_state);
+ 		if (rc < 0)
+ 			return rc;
+-- 
+2.53.0
 
