@@ -1,107 +1,125 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.169
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793556343;
-	b=yMoQm5v9PJYIC+1ztOQrchLTrwN1BjdVW72NllSAPXNlAlYvAq4cVHOebexf4Z/lQgFK
-	 dPvHvvCsh2dbS1lzdwmajceXkgtkMIAJPCcbuVUROaIqkEjiIyQd1164JpMka6oKRWKGg
-	 Q0/aSeLecOYAHZG9j3k7mwf5+OaPxqhRC5sHuAXT1n5VsFW1NxUPynSjNuH5ua+884TaK
-	 tIqaKHo04XeeJmfxzi8UFCWay4VbIAtfs3z0cQCboMNqfdApLELtH72DmnSbTx5o+txK0
-	 3q/gq9aEHNtwuOJBr1aRGhCUo9/zziqhpxDSvzaexXcORMoppt7t1drQGIMwt07m66w==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793556343;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=xkS6xbmE+ewGMYaLKZHzgOXG3y/RT/Y6ukuGmQk4oP0=;
-	b=Jc2kHFm+I0mQ9aTh2XrwcFblApuBKaPMLNYKh6IKBx5yNQzwokM3qQHztMjm2FIXi5s0
-	 UpwcW2RSinqGspC0Meg7JkH0pPIVbyFaChGaWETFNW9J5GQVvysqCPTFcINVq+SSTlVqv
-	 ovlcJgExil3taLhNCE+yhV4zRWCggQU0cKbXFA7wCHXXhwTZdp4eGYb2RFAdnFgdTSkk+
-	 dh4Q/RXoyE5NKGVPT9Hv17ETNZ8dURLAVijg8HAiiuKATgvbdPYjjuZHv5E1/MyXwbppw
-	 T7Rc03oPZYtU1ivKzuOWff8Ei7WQZ4ecVo9gMIM41fXSTYw6EPn0LjllMBpKnB9UHzw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bidSSP03;
-	arc=none smtp.remote-ip=209.85.210.169
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793559577;
+	b=u3yMuhhzpzvxwqYCYnjdnbxd3em/j0JxGxOB59byvXh6pMJPPsisqcPPI3QRMsK66c3E
+	 a+3Miy+6X8G3Hr3+qiXOVQuvWwdS+7AEZRRj40ymzy88V40IW7rPzq3a53SwFYMO078Gt
+	 LE3bcNzqAkJrdBI0kImM43HXOPZ3ofRvxDD+qm/uystVSZLpZNbGgXtDVKh+yeOFiMSsr
+	 r2niISzNXkQ2uAv1nUJtF5OMGeVE2GKHcp4beqjDJQrcnEQ4QQlq3CX996+0kQ8EIMED5
+	 SU3alUTSxFuJjfhdmyYfq5LXKIut7Fdn0jnXjAKM9DZWIXlGLES5tpIMjd3MGK2umXg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793559577;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=8kTeAGzekm/MJUppeDHNBzSirJscu8UDoZqPjNsLkRE=;
+	b=km+1B4PTp5yXXcHfSdi/35l7h7Lp1+U6DKyhwTUWVfSWzyu89q1nI3zMjudH/4UVQ2C/
+	 mkqnz03JMQQJfhFgDG4LoLz7baEgFAJL6RV/EKO/aYqcdqp6TiUHDTdKVtrNZ2HcJ/xz1
+	 3PPiha6ENCYQqAr1BChwbJ9wUI++YKltfd9qnsG2cevWfDdCWwipfajuEX2SYIcn84VPA
+	 QQU3jpXgPMzsTpy7choik8vZoQ8oo0n7HFcPg6S7JsynOvPOkkJwNFQiKpNt8H+Ab3GN0
+	 /t3Ue4Hk/vuAaYXPAombivuo9vcyT6dLzrbdF8oGAqAfXA0m9HVLd3vv+LP3jCe1PCA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SAmfCABj;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SeKfTpZm;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CBEE606A325
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 18:05:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6CBEE606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C284A606A325
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 18:59:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C284A606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bidSSP03
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-8a06cc097c7so1548118b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 10:05:43 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SAmfCABj;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SeKfTpZm
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1HQQ5k1413781
+	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 18:59:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	8kTeAGzekm/MJUppeDHNBzSirJscu8UDoZqPjNsLkRE=; b=SAmfCABjNQFoKphV
+	DZwIecNBfi8PYDTr3vAhvoLFxDFDTtK47A4iihTcrhvOU6RUlIb75niU40uP4kKL
+	SewEiMx8hh738FzyxDQwMVK9APwWL+sF9oIzi7Ahnq5qZy7Da4roq7XvouEn/Ai2
+	EWxVEfOoeWZP8uWUIrNvMGtcjSVS6P4tuwO4wMSLY5bnS8rhg7E6Ylgx98IK1nvm
+	zK639rkoUhB3I2K1F4r+PDX18499zzInxgGH+/RQxNzvIrF6TvwaKF+Mw958ltcp
+	SXYwROjk2AFhTvuj3kQcM/Z55LwVA8e/80B6HFJMdSWa2M76OgnQuTU+8QUdIUXO
+	Dnt4lQ==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn8j2v173-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 18:59:35 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-91b8c60c550so66344676d6.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 10:59:35 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793559575; cv=none;
+        d=google.com; s=arc-20260327;
+        b=W7BWoehiVAqzBljItT0yjOi7/ID7+EiPO/QtJ/ARCnf1YPnDhvhjOPhdZOGt3tvyQm
+         6TaLcB9DxvnsyqDrVJlYPEPMedpOZuNcJvFdEH4XO3HJuAOV/FGRUItg9nONZLeLgvEs
+         hGfT2I6gV35rPkRUwBybYjLKvix5TTUQ8Gy0Z6edd1VSmSRQBcu0/vV2N796KMnN95al
+         Nl58RYjD+Z2KcaHmPpdkKDj2RfiE0WDjAOZFH/x+D9C/A1KLZ/G5Rsv8fdcTQikNyQv5
+         NohMJhVWhpaxaV1a1XGuYa0x44WqEC6OIkegtitgtkNn8ks8I2ZGvvw6Z6AX/BPahK60
+         LhOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=8kTeAGzekm/MJUppeDHNBzSirJscu8UDoZqPjNsLkRE=;
+        fh=aN+cMBpaiyGcjKu+8P8WwHeK95sIMrq4MLOXJl4X95I=;
+        b=IAHpcecHAmVQSZjbYoCJMZLOkb/G+JatgT1kL6kDjYdaOSp/erUXDidnMCFV05DAdn
+         TzCNZUsmTWweCP1OrH1PGMMJ/2bBQORx8qqzvQ7vRizrQgydJLxspEDMKcMd/rSgtIpq
+         AF9WwEibaNGDbyZMKeyKs61lFG+nM8PoUvLFTfU8YCSyeEezPZXD1N6kj5rMzqe0UbFQ
+         XLqecEv6ABKoiTNA0SLLdQPJ/hWkI4sTOjhbtjCOPvJ0y9+DzwBGiRjhQwh7k7sK84KB
+         C9zt9W+Prvte3jZPsUnjQc2VfRLt8fHL+h4IbzD99MTT59uPMcp1xtgQ4cBk99Up11Hq
+         3Mpw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793556343; x=1794161143; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xkS6xbmE+ewGMYaLKZHzgOXG3y/RT/Y6ukuGmQk4oP0=;
-        b=bidSSP03obNuDoC07GZcasZYOz1qc2TFNIOGi8OCFFs6elFzrTRBTNpDPm3/wlcwq+
-         ZjhG83xHea7YSiCuBjODLd0bFgDHwRsmYj1fkQgM9Rkzfn9oKrJFQchAECzLAVZmO3dn
-         KCUo1b8GanmcWIQoccM8tD1WYT0iXhJ+MpKeCLlXkgQ6JBs32SahI4R7EHDMvyWTFWZx
-         jFWaLW/OMpUFRZxlwl/EnS7p6Xzydd7ps2lXQsdC9X5vIMYXSF1AjyKlmsknBykm/2Cn
-         3ieR0TfANAnWHIiHG/2vjKF/r/oKwa0XR4W69fPhi8t9nC0/1NhLc4ZjFlKXh6ZDC0gR
-         V7LA==
+        d=oss.qualcomm.com; s=google; t=1793559575; x=1794164375; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=8kTeAGzekm/MJUppeDHNBzSirJscu8UDoZqPjNsLkRE=;
+        b=SeKfTpZmnD1EUY9d45HnJXozHdeS3MHwgJVNqo0+mfMtphR9H3dS5xC7G2yToLfrkk
+         q6S49GXAvxmifL8AwYe5OM0yrnqErhZ5azVeVK3oMiUk2Vcoy5/HqpysLxbgGa4+Zb/r
+         T4Fh52To1zPG0koVdcoIn9CUmSdut5wg9f6DTGio2g1SnUWvsYZSi/nC4F5or1IIXp8b
+         GTh4Wqd4ZlakqqvuuagHqBqp7nHQux0g9i84Wc88cpwFYRqX4mW4ET0jzbotN/EYDJ5w
+         YYsOOoqhVhU55myn30IRmnAZBZx6SoiRIw/eb80lNNk+1Cup3D6YPYOtKhFQGYZbndcH
+         e+2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793556343; x=1794161143;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xkS6xbmE+ewGMYaLKZHzgOXG3y/RT/Y6ukuGmQk4oP0=;
-        b=CetpsEeOMLVDeFyNs3QEPbLaZAclebYr/4omGwi0nObVaLK9QuNHEilk+PGSKtkY9m
-         w42k28sjxqOlQZjXIOHHdR9DW28hVgB/A0I8kWmvCrFQE8fgBGNTDqjCCctneJQStQc7
-         tHdmGoblVzuobgqfmzs69sNA2VlCHyvsSSiKSidfsK54Sx1hCaT7wr4oi+MMi6FCj3OZ
-         c/HSYKau0rnLE0BM1uJzFP75WRMEhu6xKzxgzxX6deaTEK5nLBq4xRxhbt+AJ7JMM34u
-         pTEIZRkPjy3IvTn6F9W80uuWpoPR+7TWeUfHX/kQtOlc7gfdVVjiKzDx1mlKVo65Zp6g
-         5EZg==
-X-Forwarded-Encrypted: i=1; AKwUvBzVVlJ12J5Puwz805ThtHiRye4BK4KBEe4VsJ+dNHHhVlTxdTWbtLpdMDtQtyZ5/100toVFZGWHFbMIAfOb@vger.kernel.org
-X-Gm-Message-State: AFq9FYJgnunIkoheygs0dziF6lVmC/Z7XXTAntHHkVbMF/iG9pG+Kc/T
-	vH8QdkjPDLVuLDUMPAHVt3Vqzw39fvEoDxc/N0EVY5UInoNC7H0Xry+A
-X-Gm-Gg: AYBFou3QQi2x6R7trQzQ426PWJ8V4PJqb2gJonco9NlFBkwYyfpHRE56+YooCwHqRqV
-	GjUmXfNpYuB42y6pGb786p8jjmf0WL1RyYuv44w/Wu99CDAwMkW5TnlI7JXwSGwB0Bm76VPEm2a
-	uEgHD1BG50icTWQVHnQdcbEltsOtm69TOWGi4Jx6at8NCUpHj1VyPjLMLY8Yg+QTrGpNZo24Dk2
-	nADVWIujmp47D9k31NLx9uSVgH0/o+oZUSQ2klX+5vZHzGF3lf5h5WOR+m5g2/yKvwoAh6RxRDL
-	gHc7u4kItCecA28p95n7niBKSYEXVu9W96dInd7sMXeHrSo6vFWeq4s4n40BcHOo4XUUQzjCcQM
-	PYL2Wf9sWFfEhjup176P+w0oHUuy7j700U5GFmPDzmX2bKTu5zUUzRoDB0SNPyifU8SvXF8nqiK
-	Xv5KOHylCTtuBKWoknDRv360JHW2K1rnshY8eNImeezlCS+MdYWpjLxVfoAxf0MhAZLE6y0COHD
-	RAyoK2/vrU6zx+YOuqAtueOaTybzBI2oa/EY8h+GVPhHC1tqNoDGFiIXkOiEYMVIx+Tzl2RQIQS
-	z6dAc70Ha5q4R4QZe2gRAm0=
-X-Received: by 2002:a05:6a00:181b:b0:89d:eb23:4e83 with SMTP id d2e1a72fcca58-8a9beb67de4mr6450461b3a.30.1793556342787;
-        Sun, 01 Nov 2026 10:05:42 -0800 (PST)
-Received: from tabby-boi ([2a09:bac5:4fad:e6::17:370])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8ac269b8805sm446544b3a.44.2026.11.01.10.05.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 10:05:42 -0800 (PST)
-From: Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Sean Paul <sean@poorly.run>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Connor Abbott <cwabbott0@gmail.com>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 4/4] drm/msm: serialize devcoredump reads of the crash state
-Date: Mon,  2 Nov 2026 02:05:08 +0800
-Message-ID: <20261101180508.66598-2-nicoangelodelacruz@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261101175553.53746-1-nicoangelodelacruz@gmail.com>
-References: <20261101175553.53746-1-nicoangelodelacruz@gmail.com>
+        d=1e100.net; s=20260707; t=1793559575; x=1794164375;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8kTeAGzekm/MJUppeDHNBzSirJscu8UDoZqPjNsLkRE=;
+        b=lVBSGUQ2je3Bw3jmFlTq/Qc5J92z9PmqZwDpu+Y0wHZAUwpWNySDzE63Pw8hPLH6OX
+         ZupgGbLUKtS/3VShHcE7MOBkr5ACoLbi4ixTKUkMelKwHuFAjEo06LtKyaE3awDTgUeh
+         5dAwSSNt4Mw7CAG+HB6buXY9IGIpCOBqiFO4GV4wowkVamWcvGSxEvY7wktUteGb4GsN
+         tsXYp0DCEKkw0cweGYcvpJXDLxUKAY0NX8YgZD1w/FHUY+NdQyo/rtC+A8a6pzz9cdZO
+         zOvS5ErkQ1tSvDaeGiEH3pCnvIVQAjaDjZTjLXVO9tTpP496Y0ktB9Xxr3Ax5IOqjdsY
+         P65Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwNV4ru3vzkCBr3JkwbPl5LRa0GHUx1z2WSBKlXEw4+IOYxv+VsgwZkOYVVnK59sAga71pRFpjmB4ofgMEb@vger.kernel.org
+X-Gm-Message-State: AFq9FYJBius0F27N08JdQT8NAPl/LyTVO+k9B0gRpevB8K6MLAH7QdJO
+	FtruCYPaLiRFIApgPPE+qt4E/S/3YlvnAp2P/r8SYi7wnLIEb9oPB5mQBiRnbNRfwiAgqyAUnc6
+	NuEij6IXnxwrS3HXrsF2MWNmTAwTOCHUptaiWMc/9oWJjMiN2PReEUe/LPi5YGErXO+Pd1TggEk
+	Z2lJ/EisBiEvr4I5pkNbesYhU64CXljvY31TKxWeBQanI=
+X-Gm-Gg: AYBFou2/gcZfYk8pIpSIDrvt2X/XxlsMyBjj7zM/bH17PB74iQEUo1GlAjR1N5+Z0jv
+	wYjGF4hTIUqMMklhLIG5wciMDiyIlgTDNGV/1cICH8en8VKLZRwR3EvxZJR4MtXrQ4eMuEKdv79
+	ZTkAQaGqCR8nV0DEltodDFWhmsPKA8mY6erfwmd8/1j/hFzYCWxeocIo6pWYXv8dF42cjl206yl
+	Dc/abZHrBMlN5Ifd//AUZgJxIDK8RCmVT0QzsCRDbcc30JbJwuzR45iggU46xUBjO3mxLrwRJC0
+	WqPc2SQ5rx1EyWA3zK16Dilxx80k
+X-Received: by 2002:a05:620a:808d:b0:93e:e531:b78d with SMTP id af79cd13be357-944214cb80amr1355911085a.7.1793559574833;
+        Sun, 01 Nov 2026 10:59:34 -0800 (PST)
+X-Received: by 2002:a05:620a:808d:b0:93e:e531:b78d with SMTP id
+ af79cd13be357-944214cb80amr1355909085a.7.1793559574364; Sun, 01 Nov 2026
+ 10:59:34 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,109 +129,143 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261101030902.1387122-1-shengchao.guo@oss.qualcomm.com> <20261101173256.5ad42925@jic23-hlaptop>
+In-Reply-To: <20261101173256.5ad42925@jic23-hlaptop>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Sun, 1 Nov 2026 19:59:23 +0100
+X-Gm-Features: AclHuK_y-XxcZzWJ7IkifUD6NDu71IxST9CH5U17suAkwJv0PiDsP7l0eUD4YmM
+Message-ID: <CAFEp6-27XLrb56XpnnSLxkRXzQzugvXPzsDt_OshR5EmhC8Kzw@mail.gmail.com>
+Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Reuse IIO device ID for
+ ADC_TM aux device
+To: Jonathan Cameron <jic23@kernel.org>,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>,
+        =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>,
+        Andy Shevchenko <andy@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: J3dyOKNLeDnes1gN0oP23sFS11kUeBUo
+X-Proofpoint-ORIG-GUID: J3dyOKNLeDnes1gN0oP23sFS11kUeBUo
+X-Authority-Analysis: v=2.4 cv=S5RMU4sP c=1 sm=1 tr=0 ts=6ae78c17 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=hw_--xrD18hxE5MXGX4A:9 a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA3NSBTYWx0ZWRfX9yYnKAJtqs1s
+ GkM1xV6LNuDbVz5Dc8KwyXFZwioAzfHIn4/7c3vh9P0FVnvWj7oqkWxRA3TxErxZWDx9IulOvt1
+ pBp6H6NRv7xmUDmt18qAXvRpdEmpWAw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA3NSBTYWx0ZWRfXxTxOf2suDmhJ
+ BZJdYT33AyvNsCnj/8e26qXqhwDm3oZwpVaV8EndFOrrUcKQJ6B0Q7UB4X2K4zTdkeQQCvCf2Ru
+ 8peBuWE2vqsyjtlPA5IRk/S6jjoSUrVobi3PSstWhTFt2N1R7wx3tFfJud2xz46lJ6GLi+kdFiI
+ LAlntdtCBBCbetJ80QxOmrCmaczfVobscdl/LU6G/OJog9rl9wLXHbBjnO6CqymiL+pkzazao8o
+ jAbWBl5n9wbpyFEQWD0jDAUIMFNVtZNDkmHiifHCRDUB77M9noZjQG7/cDH00FqPouBHXzu02ax
+ h7Qpy2NZOqAl+AhZu73Up/bpYgqRZSxauYkZHdRQwpFElyPRatfq2KA4NWhRpok+KhcXzFbd4SE
+ +/vkAm8Of2SDi85ZFRXQ7oHzJ5SHE2Ui9jY2rW2FWBxQaJHpzmwuq/ABd5RjlSUm8Jxyws9r/1B
+ p19BjeHgZCDehpfDMdA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-01_06,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ malwarescore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611010075
 
-adreno_show_object() converts each captured buffer to ascii85 the
-first time the crash state is shown, in place: it checks *encoded,
-replaces *ptr with the encoded copy and kvfree()s the raw buffer.
-msm_gpu_devcoredump_read() only takes gpu->lock around the reference
-get, and every read() of the devcoredump renders the whole state
-again, so two processes reading the same devcoredump at once can both
-see *encoded == false and both free the same buffer, or print a
-buffer the other one just freed:
+Hi Jonathan,
 
-  WARNING: mm/slub.c:6733 at free_large_kmalloc+0xb0/0xf8
-   kvfree+0x44/0x60
-   adreno_show_object+0x190/0x240
-   adreno_show+0x1d0/0x438
-   a6xx_show+0x68/0xbd0
-   msm_gpu_devcoredump_read+0x144/0x1f8
-   devcd_data_read+0x34/0x48
-  page dumped because: Not a kmalloc allocation
+On Sun, Nov 1, 2026 at 6:33=E2=80=AFPM Jonathan Cameron <jic23@kernel.org> =
+wrote:
+>
+> On Sun,  1 Nov 2026 11:09:02 +0800
+> Shawn Guo <shengchao.guo@oss.qualcomm.com> wrote:
+>
+> > From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> >
+> > adc5_gen3_add_aux_tm_device() never sets the auxiliary device id, so
+> > every ADC5 Gen3 instance with at least one qcom,adc-tm channel tries
+> > to register the same device name. With ADC_TM channels on more than
+> > one PMIC, the second instance to probe fails:
+> >
+> >   sysfs: cannot create duplicate filename '/bus/auxiliary/devices/qcom_=
+spmi_adc5_gen3.adc5_tm_gen3.0'
+> >   ...
+> >   auxiliary qcom_spmi_adc5_gen3.adc5_tm_gen3.0: adding auxiliary device=
+ failed!: -17
+> >   qcom-spmi-adc5-gen3 c400000.spmi:pmic@8:adc@7200: error -EEXIST: Fail=
+ed to add auxiliary TM device
+> >
+> > The ADC probe then fails as a whole, so that PMIC loses both its IIO
+> > channels and its thermal zones. This shows up on Nord, which has
+> > thermistor channels on two PMAU0102 PMICs.
+> >
+> > Each ADC instance already has a unique IIO device ID. Use it as the
+> > auxiliary device id instead of allocating one from a separate driver-wi=
+de
+> > IDA, which removes the custom ID allocation and release handling. The
+> > ADC_TM driver matches on the device name only, so the instance number
+> > does not affect binding.
+> >
+> > Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
+> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+>
+> Applied.  Given the slightly odd nature of this series, Loic can you conf=
+irm
+> you are fine with having the authorship + Sign off.   Given alternative
+> would have been Shawn having that and Shawn sent this, the attribution
+> seems fine to me - but best to check!
 
-The dump also changes length between reads, so a reader can get a
-short copy that ends at a page boundary.
+Yes I'm fine with this, thanks for the squash Shawn!
 
-Seen on an Adreno 830 with IGT's msm_recovery reading the devcoredump
-while a udev helper copied it out: 16 such warnings in one boot, none
-with this patch.
+Regards,
+Loic
 
-Add a mutex to struct msm_gpu and hold it while the state is
-rendered. Only one crash state exists at a time, so a per-GPU lock is
-enough. gpu->lock isn't used because a devcoredump reader would then
-hold up recovery and fault capture for as long as it takes to render
-the dump. The new lock is taken after msm_gpu_crashstate_get() and
-dropped before msm_gpu_crashstate_put(), so it never nests with
-gpu->lock, and it is taken interruptibly so a reader waiting behind
-a slow render can be killed.
-
-Fixes: 1df4289d5b23 ("drm/msm: Optimize adreno_show_object()")
-Cc: stable@vger.kernel.org
-Signed-off-by: Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
----
- drivers/gpu/drm/msm/msm_gpu.c | 10 ++++++++++
- drivers/gpu/drm/msm/msm_gpu.h |  8 ++++++++
- 2 files changed, 18 insertions(+)
-
-diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
-index fded78fdb..428dc9666 100644
---- a/drivers/gpu/drm/msm/msm_gpu.c
-+++ b/drivers/gpu/drm/msm/msm_gpu.c
-@@ -191,11 +191,18 @@ static ssize_t msm_gpu_devcoredump_read(char *buffer, loff_t offset,
- 	struct drm_print_iterator iter;
- 	struct drm_printer p;
- 	struct msm_gpu_state *state;
-+	int ret;
- 
- 	state = msm_gpu_crashstate_get(gpu);
- 	if (!state)
- 		return 0;
- 
-+	ret = mutex_lock_interruptible(&gpu->crashstate_show_lock);
-+	if (ret) {
-+		msm_gpu_crashstate_put(gpu);
-+		return ret;
-+	}
-+
- 	iter.data = buffer;
- 	iter.offset = 0;
- 	iter.start = offset;
-@@ -214,6 +221,8 @@ static ssize_t msm_gpu_devcoredump_read(char *buffer, loff_t offset,
- 
- 	gpu->funcs->show(gpu, state, &p);
- 
-+	mutex_unlock(&gpu->crashstate_show_lock);
-+
- 	msm_gpu_crashstate_put(gpu);
- 
- 	return count - iter.remain;
-@@ -914,6 +923,7 @@ int msm_gpu_init(struct drm_device *drm, struct platform_device *pdev,
- 	gpu->funcs = funcs;
- 	gpu->name = name;
- 	INIT_WORK(&gpu->crashstate_free_work, msm_gpu_crashstate_free_worker);
-+	mutex_init(&gpu->crashstate_show_lock);
- 
- 	gpu->worker = kthread_run_worker(0, "gpu-worker");
- 	if (IS_ERR(gpu->worker)) {
-diff --git a/drivers/gpu/drm/msm/msm_gpu.h b/drivers/gpu/drm/msm/msm_gpu.h
-index db9e11e7f..9b683973b 100644
---- a/drivers/gpu/drm/msm/msm_gpu.h
-+++ b/drivers/gpu/drm/msm/msm_gpu.h
-@@ -264,6 +264,14 @@ struct msm_gpu {
- 	 */
- 	struct work_struct crashstate_free_work;
- 
-+	/**
-+	 * @crashstate_show_lock: serializes rendering of @crashstate for the
-+	 * devcoredump.  The show functions convert captured buffers to ascii85
-+	 * in place on first use (see adreno_show_object()), so concurrent
-+	 * readers of the same dump must not render it at the same time.
-+	 */
-+	struct mutex crashstate_show_lock;
-+
- 	/**
- 	 * @recovery_in_progress: true while recover_worker() holds @lock, so
- 	 * that fault capture and GMU waits don't wait on a fault devcoredump
--- 
-2.53.0
-
+>
+> Thanks,
+>
+> Jonathan
+>
+> > ---
+> > This is the squashed version as requsted by Jonathan at:
+> > https://lore.kernel.org/all/20261101020047.66034613@jic23-hlaptop/
+> >
+> >  drivers/iio/adc/qcom-spmi-adc5-gen3.c | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qc=
+om-spmi-adc5-gen3.c
+> > index c68c6c5f6aca..a23eb5c9096d 100644
+> > --- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> > +++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+> > @@ -610,7 +610,7 @@ static void adc5_gen3_delete_aux(void *data)
+> >
+> >  static void adc5_gen3_aux_device_release(struct device *dev) {}
+> >
+> > -static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+> > +static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+> >  {
+> >       struct tm5_aux_dev_wrapper *aux_device;
+> >       int i, ret, i_tm =3D 0;
+> > @@ -620,6 +620,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_=
+chip *adc)
+> >               return -ENOMEM;
+> >
+> >       aux_device->aux_dev.name =3D "adc5_tm_gen3";
+> > +     aux_device->aux_dev.id =3D id;
+> >       aux_device->aux_dev.dev.parent =3D adc->dev;
+> >       aux_device->aux_dev.dev.release =3D adc5_gen3_aux_device_release;
+> >
+> > @@ -799,7 +800,7 @@ static int adc5_gen3_probe(struct platform_device *=
+pdev)
+> >               return ret;
+> >
+> >       if (adc->n_tm_channels > 0) {
+> > -             ret =3D adc5_gen3_add_aux_tm_device(adc);
+> > +             ret =3D adc5_gen3_add_aux_tm_device(adc, iio_device_id(in=
+dio_dev));
+> >               if (ret)
+> >                       dev_err_probe(dev, ret,
+> >                                     "Failed to add auxiliary TM device\=
+n");
+>
