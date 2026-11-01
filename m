@@ -1,118 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793555662;
-	b=bjDWYTJrtVtMtLVIq8uX+OGyT20GZksLY1+e0HH7ucKgk/iP/vEUjt5vqbfnlvx2bHPy
-	 T6RomyyvXFfb78YXPt9jQpnunLkeQpti5zjB/aTk4lLJMH9NrzuMERzgeOd9rMUhZeiEa
-	 ZBS4gLovuDur+87ifF+IIhGa9SRTPKhBil2JqMktiBM8yTxDCZE41Lto7LjkltKS9J/Dc
-	 RKv2vEWR5PRlhSq+lOqNW9tPH/7V/46F9oKjzqj+M1Dvokx0MIwlwLjaut8gVeNVGqXhy
-	 tYI/X4PxTGqF2Z9U7H9rsy+wHfBRwPGqyG05F0FJDgo5azKAUWVURy0w696DAbtz7CQ==
+	t=1793556020;
+	b=dfcf/BxKQqIfJWMJ3OSr18LqIauuXwiVIQ2rYnlS0CAJsvyzeWawvGrIjNlb50Bq95wr
+	 cX0ERnnoQwudSAj40D98A/wjsiv6tuclIO2KuB3qwlNFRd09Vc2tkkz3emXZtMciE8gbM
+	 3kaBilV0N3LqY5UjDOR8KmazvcOdRvBiJSbN2ML/E4OlNJg7jn1SbjxAChtoaE8PApPpj
+	 iUQE2n85b5s7imnC9JJX/W/PUK+YH37WsEp6JLI2XBpOXnEULOrizuzf868bZm/QvUDWM
+	 /D4MTVitxXWdloWt9ehrCedd9fxvfVipjW50WHKO5SDj/BHadhv8ZaO50BcP22TFZlA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793555662;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:X-Developer-Signature:
-	 X-Developer-Key:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=kdtmiZdTU1nXwsamLd7Szc08WcYoKl4Y081kH3kHkjY=;
-	b=OCqaAg/OvOIcCGV0f04Nj/DWi9wDFkF5Y+RamaHydtDUsNh7VENts0Dvq+U3eBnkGqwn
-	 eoszDXm9lDkeUMgNHFZ9G4Xe985KRXGEqqIaUjFyUNZbuXi7XkkrYNC46lj6YND3DtSOz
-	 RWabYisCXJySLexJRK06ggltzyk6tf3xF9kl9RncDtzqhNkfaHhE4wi5h0Z1wKl5dR/qn
-	 gSuuAanojbqcdg02bVHsltbZzw5KUcN9VrDWWbA+6fWuwI8BSdg7W2WAlpvzOm51SeFO2
-	 YZ3cLmbhyY948y3WIJGxB9QxF17w/XDBdAfJP8F2oqXKBGnZMuxJaeDngNQTI8R9Azg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793556020;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=GKME2n5l9JpnC5UjER0UuCGrO/DweG8b5PbwFPOpgjA=;
+	b=00UYWmpD3HQp0LMJFJBnvTLhk+BlR87IaBFa1RbYWLjawejgFbzoR9+QgFJKUaDh85Qn
+	 LnT/uWB4I2IUucLNl3iB25pwu84TG3IdygWJQtI4X7KyBsstmSWRSz6kERuiMkVJ0LnOX
+	 hzTlqfP7cSlvJu25cfIzZKJ/8nvxl0wmbQJ78Qk38p2tF7fyv8rWOZVwuPaze93AeWqa0
+	 kCENku7Vhpo5SQP7TKPL+qWaugEJCfMDV8UvgZGDFuupmbXBF3Lx37zSxRPwJCG8/F9jk
+	 mgIBYv8CxKfdtNOr2V6mQhTJb1PL3lU4tiVZAY/dEkNve414Nsj5GkmwSS1u7C+A+5w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jOMHyELc;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Oi5g6u0w;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yJaZYiC0;
+	arc=none smtp.remote-ip=209.85.214.171
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE4AC606A32C
-	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 17:54:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BE4AC606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C9B606A329
+	for <linux-arm-msm@vger.kernel.org>; Sun,  1 Nov 2026 18:00:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98C9B606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jOMHyELc;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Oi5g6u0w
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A1HQKSj2044163
-	for <linux-arm-msm@vger.kernel.org>; Sun, 1 Nov 2026 17:54:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=kdtmiZdTU1nXwsamLd7Szc08WcYoKl4Y081
-	kH3kHkjY=; b=jOMHyELc7YKJrU2lbiIdQ8ccYv1sGKinrcX6pRVIoGtPQxOKdTb
-	ajo2yPCyEsZ6A39YuRUua/PyVE1HSgsTC+msvcgMy6cilaXVrQMAVFoB9Bk+eF1k
-	eq92zAc7d4/T/AJwx+pbwM40qKvHg0DzS/fjR5obDCft5fs9t7Q320FLeRKME+CB
-	pxBlv6MlKSPQklbPtBmxwan+oZDWymKUN7AByfw/mCz5YfZ4CjlUHmjjsaXSsaHx
-	mQcmFHGUbGPYlwAca078PwlIxnNtq4zcw5T9ITL55M32VRMAOqp3WlpmeTkG9m0a
-	Ou7DmlNQPHyEM/8lpx0wf1wUpL9nMZfj5FQ==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7wxkw4r-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 17:54:20 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb6391e89so463667185a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 09:54:20 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yJaZYiC0
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2ea138a3497so13312585ad.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 10:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793555659; x=1794160459; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793556020; x=1794160820; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kdtmiZdTU1nXwsamLd7Szc08WcYoKl4Y081kH3kHkjY=;
-        b=Oi5g6u0wMuPbL5mLRDY7c74PZ8cLNzU2KBdkGN57JzUWNpr5q7ikxRd7tpPCIV7q24
-         VB1P6kBGuIQP1SE3diaQUEZvaIeicGP0vUjVguutSKgQ651+f7rGp9nLAf1lK6AcZOJS
-         dkA06vCtZbfAxhxGcs3Bq20XrUdc3q4DLNDMuS5C+tL6ZNxUyX8BthbTxTG/tbVy5+WC
-         DUzCorprBAY2IiTvizikDHHmI/5BRhAVgmEgkuXayJtW5KBynXa4DpA6K7fdO+u2IhJz
-         zqU15DEKkp/i97YyZsPW02HVRqfvzRRQkLrAEt2PGL8hE1iQTUcpNHSEnSkrXcV9go0K
-         JGnA==
+        bh=GKME2n5l9JpnC5UjER0UuCGrO/DweG8b5PbwFPOpgjA=;
+        b=yJaZYiC0Vsfx2ERFj9pV6vZyJ7bGdGf55j/WEpTd9+QBUIoS5pSWRXvbtgeQeAV9M9
+         rMT7MbyXQ50xXulNXBeowo+f8myApFglo+uQ2EX3oEqXiBHtE/MXjUegIireTMD5583K
+         80VCgtk0GeXue4eJD2+cIuEUUH3KSXUFNcvQ3zBNe8tKmT0BdgebD4b2WUDNGcC59HPP
+         3z2vefF+t842JVps2tpXh5jPvQLPibZ/gkAXZWEMEiREv4zxwj4WBcOGtF3auudPW0Ta
+         ICXEieDOc0qJ9VvvYaLgZY+n50nr1yqHfjjBRZAJbr9SysML78YlG8TGJZ+J6XHgvSP7
+         eHTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793555659; x=1794160459;
+        d=1e100.net; s=20260707; t=1793556020; x=1794160820;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kdtmiZdTU1nXwsamLd7Szc08WcYoKl4Y081kH3kHkjY=;
-        b=tUiRHhYS52K9sybvuqkCWxsThVklqHUkHSkTnJ94OvOxr9H2KP87XoWdCd6hocxPcZ
-         +aPdnHfwMzSiaJ58XFOLob9gkSSaO1rpBFPDf4/VKwWyJPxpOdrL31mQ/f0TYSzJhjF3
-         DQzwAJSs/Ly+qT6C6u+IxHaXYq9dSlh2cF+Lsc7v5l6haDKZ9zTSfGSYTVHwiF9TmFl/
-         Y+ExxfQcg7e8qvTwcvjOArPSF2UYZ3B4IcmE71J5m95wpuuUHwt3YOlGNlmBYFcGvbt+
-         ZrS9ov6C5HEcHdhf4dmCeut14NhUSQEb03zxWRDc4CKA/rZiATFg9AiLQfBNTRkW/95s
-         oiIw==
-X-Forwarded-Encrypted: i=1; AKwUvBxqQ6QE8M0c95vBzPpfU8rcw9uTRTowI3XD0/U5fCnM2kLstG9FfOyOhHZOphZjcqyzeNzjj86cI+4KEKO0@vger.kernel.org
-X-Gm-Message-State: AFq9FYIrFWXsgXk2Z9ollq9JOWt7fTNm2JOSgfq0EwuYA5T0T7cG6PsN
-	iyxX6WTBAI0cZC8N1qT3cmawpfyvVlzFM55LjrOozLBR5ykaPYGYBzjHMBr1HoPQ78QVjfEf3Bi
-	ZX4gRot11RTmsuC9fa7wBZljzBCw3DHnm/t6S41DDyngYv88elBAmxos4dpAChkbdumqf
-X-Gm-Gg: AYBFou2vwULZHuD2agohaQARwp7qS+Iu1kVDcAXqsuyXav1TvTopduTpJO27FqiQjl1
-	R0rmG5Tgp8VOmw6mcmJn19sAM4U1MtFqaXlUidMjO9ImFzZidAX6cqB7wJkHwdk9OdBVpGi6Sir
-	+tF2AZFF7bHWbtpWgOGwH1JQZJcpujDf4ImIKE/Bm6wA/FofSSPLzRCWrNyUUSXYBJqKi9Fzztm
-	QztgVEKx2pa1Xgv/B6301eFSZYdxyiq5qUOtV3UmhR8PcVfNw7SB9IosFtbT/1+okjnK5rKT0GS
-	pU9fhfshq08S0hxxb+6vu777p9MAZnJoXOlkfhlYRDhiprYB0e2sSUWtHo7mAtVuq9fFvXZuapf
-	oVbamLV8JStee5fuoyfwPB0bctMZTXYDgbZZT1l5mODTl+u3s5+JBm2EDpoAsAw==
-X-Received: by 2002:a05:620a:6848:b0:939:ff85:8067 with SMTP id af79cd13be357-94421663f42mr1273098585a.30.1793555659057;
-        Sun, 01 Nov 2026 09:54:19 -0800 (PST)
-X-Received: by 2002:a05:620a:6848:b0:939:ff85:8067 with SMTP id af79cd13be357-94421663f42mr1273094685a.30.1793555658425;
-        Sun, 01 Nov 2026 09:54:18 -0800 (PST)
-Received: from quoll ([178.197.218.7])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4aa80f04723sm325714735e9.5.2026.11.01.09.54.16
+        bh=GKME2n5l9JpnC5UjER0UuCGrO/DweG8b5PbwFPOpgjA=;
+        b=TOQBauXYqhFzGwzQkrGR+mJn44Gmvb4k+1vv935pbKHTRmEVkzmV+kVBHJTr42ShvG
+         abDKoOioQRP8KsY06AVjm3eisXF2P43MbGpTPEAdTxtryuLx8mozctKlb2JqWH8DOR5V
+         M1kO0k4psagocgeb7JiiRERoUqL30BINflM/l28IrYlMHlrJh5ZYc1ox9NuTwLteGvDy
+         1AMTirXAZCHYRh1W2rre3YMVJ87XPBN2pVvlDXUPBwoyZCdXOU3oLj3bujfPS6vqzzV1
+         WvHPc8TYBaJCJa4ibXaTv+bjRJ89gszR726bu50wrVQl7ICSdBgzdSPWuT9j9bTVlEkg
+         cLoQ==
+X-Forwarded-Encrypted: i=1; AKwUvBytrY7OoblCVrAfpJIt7Q8vJK7Iy7JIte8e+mtwUZvv1rs34db2vmbHwZzr0Z6NwSGapFZcbGDwbE6k/+/N@vger.kernel.org
+X-Gm-Message-State: APuU4Z++FWtiuvLF82rQAfBsaGDHBprS3BZ5C28Of9C8oyStU84IifzR
+	Q1cvMaGCi10Y3j+Lkwpvo3I7SUFEr07EEXBJJT7WPK6lUivjdi7q7ap/
+X-Gm-Gg: AYBFou0bkJySCjmKJXgyJFgbAZr5ppV+UTRDdbqWA4kXdxy3D8cunUH5qmV64Sy8j+X
+	Q1wh1i3MrUgHOvJscyCtu25VrIUwMsguDft9pN+zQG4ANMvqc6xiN/2oWRmmal97jimddgFiaMz
+	ad+iQ+4FDb8gwsn2DefVRelVaXRPycpmYHQ7LYHzZ96YMeOjtEa78KODDrZAffXkAQ0mQv70iWy
+	b6DC6c43WrlYe/CnagXejUarJ6XywqGIaF2xwOp2rb4pbL6ZNxwsVH+TNkcCDIdt4zmS0n3dx8V
+	RwZ4SFrseM7MUQJ4ai7jYI+sV5AUhoEUQS8n+PxgZkpmporRfZevU5NsLNfJwMb91q+7fgeQyzk
+	o4Y7u0nLEExJBPayLDZysGBYs3nTsnzLP4NC68zGZJ387tuKCgSuyHo+tcHmNtvJD+sjxBARyMr
+	N/pIVbQwHVHrXyucYGOdTRZNGNidU9moBsgw9b2c1iIaXzyA/RM7zpWn4wseH+zXkJhjqYEdC4X
+	i49d3anLowTOOVmKCnYpq55zjWns95HgT1nN63QbY8Bh/UwUjGBR3jBQ7ZHkDJLOG+kQjQAmBsF
+	kZBYti/mNJVIDsHweONUJw==
+X-Received: by 2002:a17:90b:52c6:b0:3ab:be66:ddc7 with SMTP id 98e67ed59e1d1-3ae897ccab8mr7985472a91.10.1793556019773;
+        Sun, 01 Nov 2026 10:00:19 -0800 (PST)
+Received: from tabby-boi ([2a09:bac5:4fad:e6::17:370])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae6e949077sm15194159a91.9.2026.11.01.10.00.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 09:54:17 -0800 (PST)
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Mark Brown <broonie@kernel.org>,
-        Andy Gross <andy.gross@linaro.org>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
-Subject: [PATCH] soc: qcom: apr: Reject packets with header size larger than packet size
-Date: Sun,  1 Nov 2026 18:54:08 +0100
-Message-ID: <20261101175407.110780-2-krzysztof.kozlowski@oss.qualcomm.com>
+        Sun, 01 Nov 2026 10:00:18 -0800 (PST)
+From: Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>
+Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Sean Paul <sean@poorly.run>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Connor Abbott <cwabbott0@gmail.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>
+Subject: [PATCH 0/4] drm/msm: fix GPU recovery deadlocks, add a8xx crash dumps
+Date: Mon,  2 Nov 2026 01:55:49 +0800
+Message-ID: <20261101175553.53746-1-nicoangelodelacruz@gmail.com>
 X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -123,94 +107,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1945; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=4MmiwbTe67Vae9D7Lm+Zj++XqRihN9uwcpy1QVEzwR8=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBq53y/r7BuYv9eK3+a8QHoZBIisHOoqo5rhSCYT
- x83EJSNlliJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCaud8vwAKCRDBN2bmhouD
- 1y9cEACPaj9qjm4Xgq2YAlnapjZ58AL8Ampb8QNuC8Q2em4csesDfI7RlNvwHxZkbCKKftlHP8q
- R1l8jH6moeUbMfPMFoqbtgedazQfS1q+MVgIIzgI4yRkwf/gRPK3dOEGs74dGL2/VRIqriImqm6
- ZRft9ZDOmNscRv8oSlf0cSusfzJhaY76AsT5XfhvdVxv9HHTCCwHmlQ1jqd+CJxdcXjpjdbuJ3/
- f9da1/Wqa/x77gsXo70d/5DMqX/MFjIa/zcNOS9cz06dUAXqd5P+/Xj+ccr0R9o4vzaaIeXZuo1
- +h1xXwIWbePSbuobLX9bs4kFqAXeMiXV//+c39eMpZaKEcwP/i/xo5/zX66AyvKrEoK+t9WzqV6
- lQ2NSAs6ckCdKUAO06lNAcmmk0wo5p5smBNYyoxqTA4a3HdYp0KMucFEseiIpjj4SKRbXSlO6r6
- M2CVnkiKM3i1IAS5NJ8hwuJiJ1mPhHMJXWZ8qyLyUbu6FsvjcdPtyBnazeo4FnZMBO20aGvjTOA
- 8g+IkgWoTb8gHMAux6fT5SReiBGW1txvpPx1afafp6sbvTrp2Bl+VXzGl2YoiR68CnRo03I0sww
- wckAJZ/8dfTPRSGKulNus45bOrJElgXwaAZew84f6a4qsfFQTdzSCDETRQaUX3+pG1IT+Tqa7xM u1hWjU49i/JprBA==
-X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 6jiTYClz7DsFTqjT19qkGsBN-HQuWL1W
-X-Proofpoint-ORIG-GUID: 6jiTYClz7DsFTqjT19qkGsBN-HQuWL1W
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDA3MSBTYWx0ZWRfXwTfcbWVqL1tK
- 1PicFSfHTpx9JQ4gkTCIA9yKWpb8q9uraj3TJAMdC/qYhU6s0c8lIzaB5NSPdN8AljsM+EHzKID
- kuKgthru5BH6+VLxYaQbZHlKV9/WT+s=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDA3MSBTYWx0ZWRfXzoC0g4njem9C
- +h0/2T2npGFoAMUQyK3Uuc4IwdRlyd/R4yHQkP62p5rcTkOIIO8/SAKdoPgGGC1wE3/9eFkbbZS
- 0bilG2k1Jih5WD2bfVyw094lqM8rPhus9ptOJ6yYzuBDt7g93tbD9ZZlppn9SZDUbju4hLc0dSI
- iC7m+hAgEnzXi2MSYU8oK3apJFkyin3l3xPzQITeLAt+yG0l2Ds6peg40Li+VblEBfki1tjZCe6
- FMCs5kSTya9Ero0ZxF7X0MiXHyFVmVgWNXYY4wK5WRYhimQ1E0lpiJBumsLrlrRL3UKZs5UHDoW
- emRZUNeG7DxDT2Q4efH9WC5pMUhdpp/aw/6KqyJ+7nha3Q7350asA769QtO3DlrhcODSVZwts+p
- 5OWNaovDZFN+C5feM/Eei9uPZs+ndNhiEuc0uhDbsk59T/iCJRg4f+qNweVyY5YzOgShrPpYh4j
- LH5Ar550a/cPupjmasQ==
-X-Authority-Analysis: v=2.4 cv=JLquIMKb c=1 sm=1 tr=0 ts=6ae77ccc cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=uyPgTw0bjBTS2cVxpiNm5w==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=c92rfblmAAAA:8
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=DVh7n887_SxPlczGqH4A:9
- a=PEH46H7Ffwr30OY-TuGO:22 a=GvGzcOZaWPEFPQC_NcjD:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-01_06,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611010071
 
-apr_do_rx_callback() and gpr_do_rx_callback() validate the header size
-and the packet size separately, but never check that the header fits
-within the packet.  Both sizes are u16, so with a malformed packet where
-the header size exceeds the packet size, the subtraction computing
-resp.payload_size gets promoted to int and becomes negative.
+On an Adreno 830 (SM8750, OnePlus Pad 3), GMU wedges sometimes left the
+screen frozen until a reboot. The wedge itself is a separate, still open
+issue; this series fixes the recovery side, which should clear a wedge
+but could deadlock instead, and adds the crash dumps a8xx was missing.
 
-Further check "resp.payload_size > 0" would fail, leading to
-resp.payload left uninitialized (stack value).  Reject such packets as
-having a wrong packet size, although unlikely that firmware would
-produce such packets.
+Patch 1: if a CP page fault arrives while recover_worker() holds
+gpu->lock, the fault handler reinitializes fault_coredump_done and then
+waits for gpu->lock, while recovery's GMU waits (HFI and OOB) wait on
+that completion forever. Recovery now skips the wait, and the fault
+handler skips the capture, while recovery is running. On the A830,
+3 of 3 recoveries that took such a fault hung before this; with it,
+3 natural ones all completed.
 
-Fixes: 6adba21eb434 ("soc: qcom: Add APR bus driver")
-Fixes: ec1471a898cc ("soc: qcom: apr: Add GPR support")
-Cc: stable@vger.kernel.org
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://sashiko.dev/#/bug/linux-82d40745-1593-4c20-8432-d86099836525
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
----
- drivers/soc/qcom/apr.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Patch 2: when devcoredump is disabled or can't allocate,
+dev_coredumpm() frees the dump synchronously, and msm's free callback
+takes gpu->lock, which the capture path already holds. The put now runs
+from a work item.
 
-diff --git a/drivers/soc/qcom/apr.c b/drivers/soc/qcom/apr.c
-index 2d5645ff9919..6f29b57aaecc 100644
---- a/drivers/soc/qcom/apr.c
-+++ b/drivers/soc/qcom/apr.c
-@@ -210,7 +210,8 @@ static int apr_do_rx_callback(struct packet_router *apr, struct apr_rx_buf *abuf
- 		return -EINVAL;
- 	}
- 
--	if (hdr->pkt_size < APR_HDR_SIZE || hdr->pkt_size != len) {
-+	if (hdr->pkt_size < APR_HDR_SIZE || hdr->pkt_size != len ||
-+	    hdr->pkt_size < hdr_size) {
- 		dev_err(apr->dev, "APR: Wrong packet size\n");
- 		return -EINVAL;
- 	}
-@@ -280,7 +281,8 @@ static int gpr_do_rx_callback(struct packet_router *gpr, struct apr_rx_buf *abuf
- 		return -EINVAL;
- 	}
- 
--	if (hdr->pkt_size < GPR_PKT_HEADER_BYTE_SIZE || hdr->pkt_size != len) {
-+	if (hdr->pkt_size < GPR_PKT_HEADER_BYTE_SIZE || hdr->pkt_size != len ||
-+	    hdr->pkt_size < hdr_size * 4) {
- 		dev_err(gpr->dev, "GPR: Wrong packet size\n");
- 		return -EINVAL;
- 	}
+Patch 3: a8xx had no gpu_state_get, so it never produced a
+devcoredump. It now takes a memory-only one (rings, GMU log/HFI/debug,
+HFI history), without reading any register, since the GMU may be wedged
+and GX off. The GMU part is a pure move shared with a6xx/a7xx.
+
+Patch 4: adreno_show_object() ascii85-encodes buffers in place on first
+show, without a lock, so two readers of one devcoredump can double-free
+a buffer (free_large_kmalloc "Not a kmalloc allocation" warnings).
+Rendering is now serialized.
+
+Patches 1, 2 and 4 carry Fixes: tags and Cc: stable.
+
+Testing, all on the A830 with the series on a 7.3-rc5 based tree. It
+is based on msm-next, where drivers/gpu/drm/msm builds W=1-clean:
+ - IGT msm_recovery gpu-fault: 6/6 recover, each with a complete
+   devcoredump; with /sys/class/devcoredump/disabled set, it recovers
+   instead of hanging.
+ - Natural GMU wedges during Bluetooth audio playback: 8 in about
+   47 minutes, 3 with a CP page fault during recovery, all recovered in
+   about 0.15 s, no hung tasks, dumps saved.
+ - Two concurrent devcoredump readers: 16 kvfree warnings in one boot
+   before patch 4, none after.
+
+a6xx/a7xx: build and pure-move review only for patch 3, I have no such
+hardware. Tested-by welcome.
+
+Not addressed here: msm never calls dev_coredump_put() on unbind, so a
+devcoredump still registered then can call the free callback after the
+GPU is gone. That predates this series.
+
+The fault_coredump_done wait was introduced in the review at:
+Link: https://lore.kernel.org/all/CACu1E7EApr6Ne3XxFv4cUa2JuwNW2kfo1c5wSsAUN78iWyQ2sg@mail.gmail.com/
+
+Nico Angelo Dela Cruz (4):
+  drm/msm: don't wait for a fault devcoredump during GPU recovery
+  drm/msm: free the crash state asynchronously
+  drm/msm/a8xx: add a memory-only GPU crash state
+  drm/msm: serialize devcoredump reads of the crash state
+
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c       |  7 ++-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c       |  7 +++
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.h       |  1 +
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c | 47 ++++++++++++++++-----
+ drivers/gpu/drm/msm/adreno/a6xx_hfi.c       |  7 ++-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c     |  3 +-
+ drivers/gpu/drm/msm/msm_gpu.c               | 33 ++++++++++++++-
+ drivers/gpu/drm/msm/msm_gpu.h               | 23 ++++++++++
+ 8 files changed, 112 insertions(+), 16 deletions(-)
+
+
+base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
 -- 
 2.53.0
 
