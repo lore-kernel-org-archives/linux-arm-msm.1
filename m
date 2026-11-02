@@ -1,79 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793612894;
-	b=FULZDp6A3kdM3AWirJ1njFGLz450llJG5yg8fm8GZ8+d2vEBIOS5ycAttnZvoowNcubM
-	 vap5TLT5MpvYMPYzFFLz7mCwELykDzOujbISJ9K6h/P9piL5t+TDM4HPlq2eOXszMjacF
-	 K5LMPTjDg/ghMoSK9LdY9TBbnxlU2YNsm7ElES92CGl/jeYgcn7T9lSDwgbB5GUyIevu6
-	 E7ilj06qGyFp/lxX08DQlPRPwNgv7O4izE0n0sUjYqQ7DiLIlVDjk9RBewC+gWmjRO678
-	 If7w3CAPzuwlimEAmR5p4UK+tlBiXmNw1f1juRjZRb/jihsPRN/AEgvqRDGtL0ytmZA==
+	t=1793613000;
+	b=BJ2fAFC+49f8P1+mwC3jv9sBszqMVt119lM7VPhMGrb0T7o0M7Wzn9aFRO+VqrzfjScA
+	 ePwUWlaTLLerg00AhC0bOxcsOPJxUO0TvLE3g6vYZRb92y9dFkReO5xxe2sB80q/O83sF
+	 rdpMYSCXukJZsmGxJCYvExKZYef4jXhaWCoGjzirojE75ZTWverwq+ohmm/puLoCQGsEs
+	 IgvSTTB+nM8CsKca1sa9NJkmovudi3Fc5MwnR8tDNxsSh5oB4uDm4aNKtKq1rW6uRa+WO
+	 DoTczpmvmSXFv/VahF0uJwOjURguQG3fwgFDfSoJqnhtYaV7bcaUKbKsZD2DZen4JDg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793612894;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
-	 X-QCInternal:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=y99IFQU1Z/zGZnStXTf6TTTZ1kfP+dHEP9lO3wSWaEw=;
-	b=VnmcJTYHINdbTMeNO6idw8jLgPSgvucs45fMFiuD5hfuAM8g+E8VY7db0d0M9Wyv4F+N
-	 v1ZPSlWigRKLDi7cK6TYvtVEoOKi6/Vvj4AkZ2VGMoRr8Av/vbkVV6UeAb9PHjwBONxxg
-	 sXSMHAXSuSDR2jUOqCJyoahhMUH0+TQgOkjGWb4x5xnNo6m+QcA9rySJwsbEmkpiLvrUu
-	 KmgXdZeHbsjUNd3UAVPiIGtrbJoYWUOovY9GG8MA4jFC51aKqzHCXeXz41t2WmBzo/nQZ
-	 akKwIvQQuD1oyN4AUYNfgLQi0Bc75Rjbds2I+jjOlslLOb90bcCGX/1YVgwnCxrnIrQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793613000;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=VdIeZiZJFHbR5PLckz439tLtWXlINLYdh7DGhSmS02s=;
+	b=t7rF1xT+Xf2ctgWne6MdJWz9zFOIjvd0mHyGLQ4GQNMjXZ+2m2FGVpIqt3XmbMtFiySy
+	 OyNMa4HUaAw8y+PscQjfSkMnD1p9M2gbnR2NI7gWeMPyxQNCyDNDfzVhzKWEc20j8gScl
+	 D5EQoXAevDaX5MqKNBxtvavfGt4FkdmC1qpcwP2uucGsdb4RJYl8yPObQNxppOF+u1L7q
+	 mAePe9Sglzfd5W9WkxFpH+14q8nEBDCFEurx7kzUEB/kcjgK/EgfAPS7lLp7qZtcxP7/3
+	 qp/e2cQ/G42Fzy6oGLtt6xiC7SgL5hSJsODe8McZMbwvtniwjPUG6lkZi61ZitXSHYw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CXIH8Kzk;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=F4o+MnVb;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCCE2606A327;
-	Mon,  2 Nov 2026 09:48:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CCCE2606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF39D606A331;
+	Mon,  2 Nov 2026 09:49:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EF39D606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CXIH8Kzk
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A29AQmo3086616;
-	Mon, 2 Nov 2026 09:48:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=y99IFQU1Z/zGZnStXTf6TTTZ1kfP+dHEP9l
-	O3wSWaEw=; b=CXIH8KzkTO1VRrOHwyBIFcHrrPAixqmzWMcOUITuTuNeyyewWzn
-	VtAed7E5UyxIejohHkZ7T/qYY/BeR4r5hPa/evH/9jUXG0I1e7jdFHVcn7XfaoE3
-	jIU9zCeJyxUtx985ybJVZg+bINo/YwU2g+ztALIuuR6E5DM+RYv22zPIciCIJOp7
-	OOWTRhUHTe1YCSuv0nbSWCYfXkIn/45g9k8ZZgNziRtqA0Xd3GEdDZJUK5Il4Gvy
-	/oHTI74PYfMBPZMOwVRMk7MY9PpcNphF0fgnDoGoGVfAjk6593KxjXYGWLN9vwLc
-	8+1zb0v6t6Ra1rgko2mXbPLdejPzcHqATCw==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpka616eg-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 02 Nov 2026 09:48:11 +0000 (GMT)
-Received: from pps.filterd (aptaippmta01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6A29m8gx3436119;
-	Mon, 2 Nov 2026 09:48:08 GMT
-Received: from shuaz-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 6A29m8I43436112
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 02 Nov 2026 09:48:08 +0000 (GMT)
-Received: by shuaz-gv.ap.qualcomm.com (Postfix, from userid 4467449)
-	id 8A282671; Mon,  2 Nov 2026 17:48:07 +0800 (CST)
-From: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-bluetooth@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        chejiang@qti.qualcomm.com, quic_chezhou@quicinc.com,
-        wei.deng@oss.qualcomm.com, jinwang.li@oss.qualcomm.com,
-        mengshi.wu@oss.qualcomm.com, stable@vger.kernel.org,
-        Shuai Zhang <shuai.zhang@oss.qualcomm.com>,
-        Cheng Jiang <cheng.jiang@oss.qualcomm.com>
-Subject: [PATCH v1] power: sequencing: qcom-wcn: increase WCN7850 power-up delay
-Date: Mon,  2 Nov 2026 17:48:00 +0800
-Message-Id: <20261102094800.3225454-1-shuai.zhang@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=F4o+MnVb
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 0954653401D6;
+	Mon, 02 Nov 2026 10:41:00 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1793612465;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=VdIeZiZJFHbR5PLckz439tLtWXlINLYdh7DGhSmS02s=;
+	b=F4o+MnVbPvsgTC7ym3QxAUH2+/8UzbC77rvSNZ2Q2mZiZwDv1J60J5FCohTvIu29A8b8nk
+	RZ1+tLz+nctvzCwzlaMINya0G5udYsWRnRtPzxkRqgQ1kEZ4IsCcRvVjDw2M6ubMq/nwdX
+	Mz+fNtmoppP0AG5wMiBY+JHXtLjDva4=
+Message-ID: <1eca9b3f-3b61-4663-b52f-4e2dba38ca21@ixit.cz>
+Date: Mon, 2 Nov 2026 10:40:49 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,79 +60,119 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-ORIG-GUID: 6iWzyB_znUzkD8RYYlCAUl3ORHK0DJU1
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAzOCBTYWx0ZWRfX+D0J6sTAJ9hP
- km9cQ69FH6eGLxsWDKDT90Cg5YSwkXBFmSdTRRNVP5/erdydrQeHFAPSJDfzxoXhTXRJ8aRb2RC
- 5x0vFEgnewKIBdNBVvkaIreuEE4tx4Q=
-X-Authority-Analysis: v=2.4 cv=ZbyIpcVA c=1 sm=1 tr=0 ts=6ae85c5b cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=v_2pxYgQTzMkBfL8lxYA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAzOCBTYWx0ZWRfX4o43CnkcceWv
- QqMvCtLaW+kqqk7ZGdJ/UNPnZxsmH/h2nDSuMfd3351YGW9rK9uugOrYxQMcwfmfuJnuF88LUsd
- 8YNYXC2GE779n4yiDBxMFCVvY1UfJ3uxTK5sjElglQUtN4OlwS6Ds9QhXKMWXJXdYLfRkl8voED
- 5GhsqNwE/OsNrEsm0MqQUhvf/k6HQ2gAXToW0pLYC6HxGwzyrEloIIzHXvAjqxFlPHntpCgd2X4
- zhpXMyeEt1exnoM0LkBEXhjCZNESws1+DN8i5lKPzHSMkGCmDuU7lI0jnVSx2lcESyLz4yWaKJd
- 5sVYYG9Bw8TMTi+NQ7m4nNRE+68y0ppc4kyy2COZPmbpKo/LQuritxWZXREofiSkXz1cyqC7Bvw
- Uo3gRUNV0sEhEOijA0NbawlxXlR0O5mkM67x3eh+Jk14/312fLhVvdicJPe0tw6gKd5WbxTI1Ln
- JMQStDfzFjkbRWzzeOQ==
-X-Proofpoint-GUID: 6iWzyB_znUzkD8RYYlCAUl3ORHK0DJU1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-02_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 suspectscore=0 malwarescore=0
- phishscore=0 adultscore=0 clxscore=1011 bulkscore=0 impostorscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611020038
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 0/5] Input: support for STM FTS5
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Petr Hodina <petr.hodina@protonmail.com>, linux-input@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org,
+ stable@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Miro Mraz <mraz.miro@seznam.cz>
+References: <20260925-stmfts5-v8-0-0fcf49e2c85f@ixit.cz>
+ <4590302cb7f26ea6173018f5d7083977@gmail.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <4590302cb7f26ea6173018f5d7083977@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-When the WCN7850 is powered up from the Bluetooth side first, i.e.
-BT_EN is asserted while WLAN_EN is still low, the chip starts from a
-cold state and is not ready to accept the first HCI command 50 ms after
-BT_EN goes high. The first command (0xfc00, read QCA version) is lost,
-hci_qca does not resend it and fails after the 2 s command timeout:
+On 02/11/2026 04:18, Dmitry Torokhov wrote:
+> Hi David,
+> 
+> On Fri, Sep 25, 2026 at 11:22:18PM +0200, David Heidelberg wrote:
+>> Used on various phones. Minimal viable driver.
+>>
+>> Includes device-tree enabling touchscreen on Pixel 3.
+>> Also, tested on Xiaomi Mi 8 (device-tree is not yet inside the mainline).
+> 
+> I applied patches 1 through 4 (leaving patch 5/5 for the Qualcomm SoC
+> tree) with a few small adjustments folded in:
+> 
+>   - In patch 1/5, added a missing trailing newline to the reset timeout
+>     error message and fixed a typo in the comment in stmfts_power_on().
+>   - In patch 3/5, wrapped "const: st,stmfts5" under "contains:" in the
+>     allOf condition so the check keeps working if a fallback compatible
+>     is added later.
+>   - In patch 4/5:
+>     - moved ABS_MT_TOOL_TYPE setup from stmfts_setup_input() to
+>       stmfts5_setup_input() since FTS4 does not report tool types;
+>     - dropped the undocumented "stylus-enabled" property check so stylus
+>       contacts unconditionally report MT_TOOL_PEN;
+>     - checked X and Y resolutions independently before applying the
+>       10 units/mm fallback;
+>     - added a check for !sdata->ops in stmfts_probe();
+>     - fixed the GPIO name in the "mode-switch" error message and a couple
+>       of minor comment/log formatting nits.
+> 
+> I will also send out a few separate follow-up patches shortly: one
+> teaching touchscreen_parse_properties() to parse touchscreen-x-mm and
+> touchscreen-y-mm directly so drivers do not have to open-code resolution
+> handling, plus a few fixes in stmfts (not aborting FIFO parsing early on
+> non-touch events, validating the 4-bit slot ID against
+> STMFTS_MAX_FINGERS, and switching coordinate reporting to
+> touchscreen_report_pos() so axis inversion and swapping properties are
+> honored).
 
-  Bluetooth: hci0: Reading QCA version information failed (-110)
+Hello Dmitry.
 
-When WLAN is powered first, 50 ms is sufficient, so the failure only
-shows up in the BT-first ordering. Measured on the affected board by
-which enable pin rose first:
+Thank you so much for improvements and merging stmfts5, I'll pick up the patches 
+back to my sdm845 tree so we can apply followup improvements easily :)
 
-  pwup_delay_ms   BT-first boots   with -110
-  50              9                9
-  75              23               0
-  100             21               0
-  300             20               0
+David
 
-Raise the power-up delay of WCN7850 to 100 ms. The delay is shared by
-the Bluetooth and WLAN targets, so WLAN power-up also waits 50 ms
-longer.
-
-Fixes: 2f1630f437df ("power: pwrseq: add a driver for the PMU module on the QCom WCN chipsets")
-Signed-off-by: Cheng Jiang <cheng.jiang@oss.qualcomm.com>
-Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
----
- drivers/power/sequencing/pwrseq-qcom-wcn.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/power/sequencing/pwrseq-qcom-wcn.c b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-index 636dd7e63..05ee1785e 100644
---- a/drivers/power/sequencing/pwrseq-qcom-wcn.c
-+++ b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-@@ -427,7 +427,7 @@ static const char *const pwrseq_wcn7850_vregs[] = {
- static const struct pwrseq_qcom_wcn_pdata pwrseq_wcn7850_of_data = {
- 	.vregs = pwrseq_wcn7850_vregs,
- 	.num_vregs = ARRAY_SIZE(pwrseq_wcn7850_vregs),
--	.pwup_delay_ms = 50,
-+	.pwup_delay_ms = 100,
- 	.targets = pwrseq_qcom_wcn_targets,
- };
- 
--- 
-2.34.1
+> 
+> Thanks.
+> 
 
