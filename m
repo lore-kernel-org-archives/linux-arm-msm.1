@@ -1,113 +1,107 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.174
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793657115;
-	b=C5GIYQmhyVS916XxsovoDcMHh+r/E11fdRYDedA7f/QFrP5aGgk3+MqT1wQpOTFJ/RwV
-	 oT0OuYV+pqFLwWxF/nt0WlCTJgGQHjnr3muJxIrYLZyIFm9BPgfTlf9UbY4ryS8qWzTJG
-	 OaTHDcsE8oi1oNFjbjrXqfOKzAGAwxLdJFloWvRgIGaYkXhdjoDqrnuFI8B/Bl93U1mS3
-	 jcrFqfsuwxPUK4LHa5+3ATQsqCsJ7VMqBwRRQxhcobDbVGC+peGis1cyxY/YKb6fQ8fK9
-	 ztijqBgirDXnqdymSY0CYfRVfD90MKnDlN04nbzx37QuPz98RG2pjPrwc4yjz+QFRcg==
+	t=1793657122;
+	b=k8D3NRgKSRnaa0txDR8xQxd/h4zGSD9ezQQlpuQGErnuRPWkncM6q7wrt0mCgbrfmLq3
+	 N/8GYJFJb28IR/oNjBbGHtD6HjwEHh+psdwMgs36am/gQhfVimrr8WhBX+mLO6lLtBhmU
+	 EbtF0GRVXoYTPAEhX08Xo6zF9Qe/RXo8iBu3ykAYTYX5OHxWuyVcB+dDDWT910Phop6cz
+	 vUEH30RPZaRtuYYQhXV9FV4JFu30EhPGc2ocCZqNGtF5QozEBbUt5aJ8yNamUwVIEzNl0
+	 HGHW6Q3XdMjpeS8UlhQROmyBnEVfisRVgVAtaeJznMfdpbJS4wSlX+zevy3B1O0WnaA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793657115;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793657122;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=po9LaFR4COBNDjXRaH0sos9yo8To8XsMCK5cpaZoeE0=;
-	b=vY9fylFij5E/Ew5UNdGVezx98/BpEEm3vh2Wyd4uJw1Kpz6MlWKd/Sz837ZIQPi3laEX
-	 8f7wc8XRmnLNVMiF2NIKJvE70iX24SqxxapO8cDIdevLrESBVw81GPScBXbzNCVFUZPm+
-	 rKyw1Jw5yehCRwsnr+CncpBBinD/oACPNJIysLvqeTWUeIp8EenqmnhxdmL+faKAaHEBz
-	 q6nG/ZL+DhF+kVGJJ9H/h0FGNLW4xLB7aA2gPaZHcUTRPiUe55a8wCfTkIrDvKihbRaN8
-	 jBvH/HgY170gKMAfABIDaf2ugOIkB2/6YmjiefyY69XjJI9kl2M3hepeqhsyZbLdbXg==
+	bh=1X5bXRL8qqmcC6O9ai7+IAT4c81ATWUWkhjo+536Us8=;
+	b=LyAsDWGvHoTgRWU7W2WmH4Y1Z0h4NsOwDR+DAaIkkXDeyXyK1M9gsX64jpXB9DPWDpd4
+	 bAQ5CP7PzU78IGbhEEXbdfSGrdaGa1RI39dIGsMLbXlxxDXS8cqagCm22+6ksjCOlBTc9
+	 swqlVSRgwm8Niei37LineYAbMEOykU/etSH/K2o99bXmZHITmE/vssgff8POQtcZWEOMY
+	 V/ReP3NUqGHecALPMSfJqZBCevRRhzd0B3QRHHrRUPnn4MnrNki+OX5GGquEbK76MKhTJ
+	 5Jtgeig2VMGI4HVp6iB7wfx8UZXVwdw39AuD7C5LSnRp6m9TwrIR+BVFcExQE9SQKAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JgsAov36;
-	arc=none smtp.remote-ip=74.125.82.174
-Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PUs3mu89;
+	arc=none smtp.remote-ip=74.125.82.42
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4600B606EEAA
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 22:05:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4600B606EEAA
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09786606D83C
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 22:05:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 09786606D83C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JgsAov36
-Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-36a315ed211so122162eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:05:15 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PUs3mu89
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-14394530ec6so4538243c88.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:05:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793657114; x=1794261914; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793657121; x=1794261921; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=po9LaFR4COBNDjXRaH0sos9yo8To8XsMCK5cpaZoeE0=;
-        b=JgsAov36eHCi4xcxestGz2HdshrJ6ho9n42lUOpL6lQKXpCOfBnFjnryy5u/3Azz2R
-         QBtXmKBE3qHG+ej0F5TintEHwkU0I+8of94h0KvhAr7BAoyXbzqsaz3k0dHYzSvxt0mh
-         o9A8yJabfYDnFshUU1blgx1XfoBhbZJKvCM2n/P+aj3JfgvU5o8LMzckGXLJRLE8RmOb
-         1+prHhFrgG8VBkIw5oi/uib42Kh+n3PbXGiU3YCJX/Oqyel0V0ZDbMGMO+s/L4PS9HIg
-         lWFDXvfliB3FFhQThiqrrtnABhPt+I2JzcIfkxI0MRNb4e8X8kTqIoLfG9HDNyaGjXPM
-         X3iA==
+        bh=1X5bXRL8qqmcC6O9ai7+IAT4c81ATWUWkhjo+536Us8=;
+        b=PUs3mu89+syzBRQDWzZ5ixeKkYfm7Ii2ag28THP8+Pd9LkZZQOro6Z/HEuWYy7rQEf
+         6s25DD6Mt3qyvJ8QfIjMR75zutVoFrxfYCDKAftAiS4v5jL4bj0qUJfNqKmlOqq4zUlR
+         RPafHTP0eJY2vVTf9ppyCe+YK8I7tlameB6HcKJqSgVyGEbnjZHG1HK5MEawyr7VMhOX
+         8ZTHNrPpSQA5BFgYTbWPLSF/R87ic5NTl3MnIuhRRvJNwFmMfHdviPxnyVboRlWk39Mt
+         wghhoMBEaOFeFVHMYbZ2U+snwUafVNI0uu0hGUcxqhrZjFRY9hAWw13syb8TM+TuaWRF
+         N4Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793657114; x=1794261914;
+        d=1e100.net; s=20260707; t=1793657121; x=1794261921;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=po9LaFR4COBNDjXRaH0sos9yo8To8XsMCK5cpaZoeE0=;
-        b=MZQh57Muznad+aHsetQN1CuJoqpqtMy4uNI6iCABqf+JefN8jbOirx1eSetKpI4kD4
-         LFEirUwTqQOFECTRTJBXik4Df6KA0JTR1pZ84IHh+H/VI5Pj82thGia2UTCiM7zHrr1j
-         h4yeb/9cHwf2rZcDNYsCzB287Xe0tnivksD8eQT8lV4xtDAle2a9x4uhrsKikj+OaEjF
-         GkzrhJE84a3Dh9gFEEloep7Vq0Bi9/8Dq1YQ7qeQQEAUItE5GStHtwtnjxdCBqaVPQo4
-         rLV2xy8oiEwjhPsCTjSmuczdakiY/9vniWYpxdme4F7bG8W3KU49GwtoG4FoWbMpnr6R
-         s1XA==
-X-Forwarded-Encrypted: i=1; AKwUvBwa/t0S48GpGYuo0vqAQOddu0ItjhLldIsqk6BPIZADJhA058rxUCGOLmy0TWFA8UjY+D3w3K1pg/hLr8eP@vger.kernel.org
-X-Gm-Message-State: APuU4Z94YSYDe8svPEuCsiQ8qkyEYG3IpTxpTRmnxWEX+vGmm3ShJhQA
-	RwKqFfRxMVYZF68iYTdVa2q0l+itoCSCcSDexBu/gXXUx1O6p/9gTcbC
-X-Gm-Gg: AYBFou1uei3uJ/+4lJlLlTMx0NZH2+6J11rmYXdDabOpu9zld62lfujZ3AU6ml0iDV3
-	m2ninaNBy1VfQdqJj4YwEbwYaleSnBDbsb8yaLpbMCAxWOYmu89hDJygytApD9kzXJxxRijRHxm
-	5m9SXYetYFqnxRhcHghQ/6d4QY1t78KAenUwU96/wlmZ1JvHcQreHI7jRUM7kLDcTItQ6/7/lBl
-	HY5nsBu/Hl3HGLY9V4Gy4DlKwnlawnhh6g3biTI622qCNH/f37B51du9qYeSxAK7zYQxp/EU5Pf
-	D2d5++CuusVk95p0oDpFrjp410bRyRdaAj2rpA5hciFIrKez5DrKfVGQasUZNATmngDzoKT3oGr
-	760Tr/hxrX4dbroz3teyOmZzjrwdwZpd9qlxT46sqoe/MjJUlxBxB5rc+XXpEqfm10tsVE9DHAk
-	hBy4QvvCEB6YfE5zYy7Ki43nYigsJAvpFDWRDL7dx/OXcm2k69TKCq4cQybt8xgS9o949x1X4NV
-	k109QTrs+aWh+NOzJsw28lrai77a0YJjIJ0BsPs1zNhHkILwe0X4KiQXajj9a3s6CXKoguLrNPi
-	qzfuXNLEKa2nK6xs9zkTTyp6fW6m1q72C8sgNHu8SwLP1tzQAiHIqRWlxjISjd2XCA==
-X-Received: by 2002:a05:7301:4d12:b0:369:dc59:7a6f with SMTP id 5a478bee46e88-36a422042d2mr15983030eec.1.1793657114197;
-        Mon, 02 Nov 2026 14:05:14 -0800 (PST)
+        bh=1X5bXRL8qqmcC6O9ai7+IAT4c81ATWUWkhjo+536Us8=;
+        b=P+D4Ud8Gl6kkPUTGmIlptb4IEHM3Os0MhK9ElOLrSYCxpQn4muItTB96cjXdrm+wqS
+         XDmnUm+8/FNFS2+lEJPnnYEPZjbzSnWomqPFVieELwGSKvmU9IHmAnn1hW0dBZW7INMD
+         JE9be3TMkJ9IMaqGH3YNLgb2MBwTfpkeRF8Hq/XvaxDmrkPT2fVrTEmD3h29gV+Dbwj4
+         QahwKi8PXS0kPi6mwNBERUjIvSQNWJENR6AvwVtKlW7h13folul4CjqyAjKFKOnOinKG
+         gh2sn2/iLxnC4203AZRfd0CbhJVE5pNtsz+pzyYh7V9NRccrWELDEHPNExxBsufUOk41
+         QZAQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwMOsKWAnkyO/YqskHwsQC/BO8uEVy6HW2iozp02drr/T/Ph6k2rhb2cRHR2wJbM0rnuwr6n2QiRNOGcxb7@vger.kernel.org
+X-Gm-Message-State: APuU4Z9giirpQrJATXcnv5tkgT3olTbkqIGZpVxRvm+JcjjcJDZINR/A
+	XxAIZxQ+NsZdABMzT+fa1LTnfC18MVMggPopA3RXs6yPwPV4nW/UgX+R
+X-Gm-Gg: AYBFou0tSVeyrAhqIyFpWFVScFpF87J0Oq6YE0RDrURgCRNS1Q4TeOjvuNVwcv1rz8k
+	+MjBVxJ0/NB/63yGWAiqvGYKeHVxoDdEggKlfA51bU73NJv93AWxIMoex7op65v0ykIqOtqIvGE
+	jYvZfdeWbW7ETdvPvV3CkDe445eVrTIzvbuzBzMw1mRMhXLn3BhME/GKwVlet29w+dzI+6VRMCe
+	oubEtO2c1q+cYU9ztpk2IycsfBENgAi0rUECtLF7JXedk+OJvyKNJh3hsBy7ft3AUB391SCKgEu
+	bIc+kFTWECZ3yZ4OJlrXAF8FDBBW1/KE5LWKlAR1cgTg7z2WxK/U3aSsx2wAj/MYINOwCjj/E+D
+	IyOV0uB2rb10yaV/nYRMa/TBeColC4IX25R1bwHqjizMDjAdmrJIj+jGtSMIpgPJlvTX1lbay1U
+	tbMMIVcuCEkUF23ff8S1pAEzaZo26kWzSmRQhrYDY2xs7El51qvOXHt57UKRUjE7ofqTJy8ib5Q
+	pCkH6CTvXS90aTC9wprxN/96KlM41k9wz2HhLEChOsdyZqXGnqhKlkuwtSJGdhAwMj45vqkoy7U
+	lptYHgX0ih++HWWg4suvcfhxn9q9jKRaZX5XsKTEmyH63zd6LUgSjfVmoh9q6VFekg==
+X-Received: by 2002:a05:7300:3b0c:b0:36a:238:1485 with SMTP id 5a478bee46e88-36a4244276cmr24803721eec.37.1793657120646;
+        Mon, 02 Nov 2026 14:05:20 -0800 (PST)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a4291e38fsm46670346eec.15.2026.11.02.14.05.07
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a428af1dfsm42657742eec.7.2026.11.02.14.05.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Nov 2026 14:05:11 -0800 (PST)
+        Mon, 02 Nov 2026 14:05:20 -0800 (PST)
 From: Joonhoe Kim <26rote@gmail.com>
-To: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-Cc: andersson@kernel.org,
-	konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	heikki.krogerus@linux.intel.com,
-	gregkh@linuxfoundation.org,
-	sre@kernel.org,
-	krzk@kernel.org,
-	lumag@kernel.org,
-	casey.connolly@linaro.org,
-	johan@kernel.org,
-	jishnu.prakash@oss.qualcomm.com,
-	kamal.wadhwa@oss.qualcomm.com,
-	daniel@quora.org,
-	neil.armstrong@linaro.org,
-	kees@kernel.org,
-	gustavoars@kernel.org,
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Hans Verkuil <hverkuil+cisco@kernel.org>,
+	Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH 0/4] soc: qcom: pmic_glink: Hold back notifications over system sleep
-Date: Tue,  3 Nov 2026 07:05:09 +0900
-Message-ID: <20261102220510.1721-1-26rote@gmail.com>
+	linux-kernel@vger.kernel.org,
+	sashiko-reviews@lists.linux.dev,
+	media-ci@linuxtv.org,
+	devicetree@vger.kernel.org,
+	Conor Dooley <conor+dt@kernel.org>,
+	Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH v4 3/6] media: iris: add iris4 specific H265 line buffer calculation
+Date: Tue,  3 Nov 2026 07:05:19 +0900
+Message-ID: <20261102220519.1738-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <20261022164151.592-1-tvlad744@gmail.com>
-References: <20261022164151.592-1-tvlad744@gmail.com>
+In-Reply-To: <20261001153221.4FAC61F000FF@smtp.kernel.org>
+References: <20261001-kaanapali-iris-v4-0-642f9ac5e699@oss.qualcomm.com> <20261001-kaanapali-iris-v4-3-642f9ac5e699@oss.qualcomm.com> <20261001153221.4FAC61F000FF@smtp.kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -120,48 +114,38 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-I tried the series with suspend-to-idle on a Lenovo Y700 Gen 5
-(TB323FU, Kaanapali/SM8850, FSA4480 on the SBU lines). This is v7.3
-with out-of-tree board support. v7.3 does not have c7c56b6ec077, and
-I left the UCSI connector work on system_wq as well. So only the
-series kept the workers off the suspended devices. Without it, this
-setup crashed on a DP sink unplugged during suspend, as in [3] of your
-cover letter.
+On Thu, 01 Oct 2026 15:32:20 +0000, sashiko-bot@kernel.org wrote:
+> > +		dpb_obp = size_dpb_opb(frame_height, lcu_size) * num_vpp_pipes;
+[...]
+> > +	return ((ALIGN(dpb_obp, DMA_ALIGNMENT) + ALIGN(se_left_lb, DMA_ALIGNMENT) +
+> > +		ALIGN(vsp_left_lb, DMA_ALIGNMENT)) * num_vpp_pipes) +
+[...]
+> Does this code multiply dpb_obp by num_vpp_pipes twice?
+[...]
+> Is this double multiplication intentional, or should one of the
+> multipliers be removed to prevent over-allocating the line buffer?
 
-- Monitor (pin assignment C) unplugged during suspend, default wakeup
-  settings: the UCSI notification woke the system within a second.
-  The held-back notifications were passed on right after the tasks
-  were thawed. The altmode worker, fsa4480_set() and the UCSI
-  connector work ran only then. No I2C errors, no reset.
+Some data on this from a Lenovo Y700 Gen 5 (TB323FU, Kaanapali), with
+this patch on v7.3 and out-of-tree Kaanapali support. Hardware decodes
+were compared bit for bit with software decoding:
 
-- The same with ucsi_glink wakeup disabled: no wakeup. The
-  notifications waited until the power key and were passed on after
-  resume.
+                             HEVC Main10      HEVC Main
+                             1080p   2160p    1080p
+  v4 3/6 as is               pass    pass     pass
+  dpb_obp multiplied once    fail    fail     pass
+  once, OPB lines doubled
+  for 10-bit output          pass    pass     pass
 
-- Charger plugged in during suspend, qcom_battmgr wakeup enabled and
-  ucsi_glink wakeup disabled: woke up 0.3 s after the plug-in.
+The failures are "session error received 0x4000005: insufficient
+resources" with no frames decoded.
 
-Two things I saw on this board, both the same without the series:
+With num_vpp_pipes = 2, the second multiplication doubles dpb_obp.
+That is what 10-bit output needs. With one multiplication, Main10
+passes once the size_dpb_opb() part is doubled for a 10-bit capture
+format. 8-bit streams pass without that.
 
-- Plug-in of a DP sink during suspend (two runs with the series and
-  one without, each after an unplug during suspend in the same boot):
-  the firmware sends an altmode notification right away and a DP one
-  13 s later. The UCSI connector change only comes 13 s after that,
-  so the system wakes up 26 s after the plug-in.
-
-- After an unplug during suspend, the DP controller is resumed before
-  the held-back altmode notification is passed on. It tries to train
-  the link to the monitor that is gone (about 10 s of timeouts), which
-  delays passing on the notifications by as much. It also leaves the
-  DP PHY initialised. So on the next resume the USB PHY init times out
-  and the dwc3 resume fails with -110. The plug-in runs above ended
-  that way, without USB.
-
-A plug-in during suspend after a fresh boot, without the series, does
-not hit the PHY problem. It still ends without a display, for another
-reason in UCSI; I'll report that separately.
-
-Tested-by: Joonhoe Kim <26rote@gmail.com> # SM8850
+Is the second multiplication meant to cover 10-bit output? If not, I
+can send the 10-bit sizing as a patch on top of this series.
 
 Thanks,
 Joonhoe Kim
