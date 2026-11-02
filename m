@@ -1,94 +1,122 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793579664;
-	b=AYCsP1MZ04Fng2hb/BtqiXA9/tf0KfPsb5okwNqLGFWRmwN2K+OEQfgoZEkdU2D+76bK
-	 9ZW0hiYfptRYDaMjTJQHqqTyOB0BZdg44P9dhdtMQn66b8QctWcczW5UNZzpYRkbeQGGR
-	 XCzt1rajyWYv7E5tTQFwZGzhMj+QC0g1LkUJ28P0UG83ThujFffWqv7e0mV9HSFUJSwJH
-	 qEkrnN2Ej4SVoVWrI3Dr78BaFeXGN7F3pa7iUxYrfSBQR51QxGf0RnoiDev2h1ncmpspj
-	 nkZOQJWMHmF+NssZw4Az3NJpsyvP9VI7sWD6Af1qoNJRJBS5/EgYzlXytTDM+874pKw==
+	t=1793586104;
+	b=ayGSbKdPqVLeZ8VG4vIRLMwkU8nFp4Zx2EERFNmI2Na/j/jJHGQUkKIDD7PI0UbcaeJ+
+	 /Pwu5YQAzDksMh3zFuEXxwfoytbukPoW9kuOdsST0ZHhuyqI5NqM8I3Dl5AbchTXa84QM
+	 MVSDcnq7MZQDIuTYyRTbUpX3u2YmEAPO+20f/yY+SRZ4mYDCdpJ1N2q9w7LD66Gu5ePSY
+	 h0UHHzdO4Pa1ZD7i9vtWDtneAXi3lJfE3lqiI2+alRKzNaFJiXlZl6hbnhlPc905kvdcT
+	 j1tCxp8pl7hmYJ1vFzV5jRZfLovn2Zkh4mdiyqioof1kqiVMbRmfAKGYhKkHjHcn3rQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793579664;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
-	b=xSZ8e9Os1vlGYBkbPixQhn8ZatnXxSXzrcA24P5x1ilS1HxJ0hpcFi6kao9/uUH5KDxM
-	 YwVzISpgtTzBnsNWT/HONXsrQEbxVB9Q/pOQUGGqiDtaugcwlNNM14xcX/AojyjJQhlqP
-	 1c0fNBidGpAhufnPhwa90nqxZ13icXU/UsbQXTjiB+3Fky1CeUVCU3LVFepCqqdcPbuL4
-	 I/412VsOGbPQpfLpPUc7xq7EkDBC1iZQlrpAOVq2D83Hqdc0WUE7b/y+w+mMO9y/5Jmah
-	 2TB3y8zgBkHVoPozHqMss17skLnCKOXh+SmgaEPpEsspx4XOeaX4aSjSMq8kAwlH6yQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793586104;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=y+rsuhJqtWNNFanhIkLAf7k45qEZkJKqZ1V0TJOALXQ=;
+	b=CxnJFMQfMZh4zt5Qi//bEs1EeGDrQJL3gDMlaG9vQ2uKOCzsW6OkGX8k6zBRepml4QI8
+	 CUgGYyNw5yTx6KCSEaZg5SSJabgqEaksJMVfrWou2cm25ZQtQQ/gS1sIrAFVE94a5pEzK
+	 HCMcqINNAeqb9rsV+xEKerhZy03Sd5XM+1JSLSbKJpv17lubQszsoa5pYPXagQx0b1yHE
+	 3R8+xlBrAXOMwsZlp5lLAqjs3UpQ/rnxeqMgOKPOh0MetmEetkNkQhyR9XJ1HEqzA9TdD
+	 ceEir7Xq1tnzGqehZ8CU535zWtNFrVH+c5mctLcSV9GX5YgojgRu/QN/yRdZ3gG3SMQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nV1PMwl4;
-	arc=none smtp.remote-ip=209.85.128.50
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FMPrW8RW;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TFpiBG1T;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31E2C606A326
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 00:34:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31E2C606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27A53606A327
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 02:21:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 27A53606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nV1PMwl4
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so18416245e9.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 16:34:23 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FMPrW8RW;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TFpiBG1T
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A20KEH73264242
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 02:21:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=y+rsuhJqtWNNFanhIkLAf7k4
+	5qEZkJKqZ1V0TJOALXQ=; b=FMPrW8RWELU0HFKXBk2353xfIqmZ/ZI9edbKVvRO
+	MrteUR5KPMlKBgAnVWj1gGyXgFubJDfsoNkaXFV69AxHRAnCpsWeJzEmBun9s0gw
+	mULiMBBCZ1D4j0zdtHzHP6I7iubBWGBsZheJm7h73zIqShXQykbOH1w0D2rBs0Yp
+	wPbCWP6k+b06/6pOahUllCVSXhdNoL+D6eph+J31xp9E04tiZMt7am0SbiCJDmJG
+	DQv3z5wb0a6gWecv7q6CkRVajLgzRUUUWqsSDSVE9/08nqerzF9WcEDytItGXW+O
+	PfSbfA9J74TZADvM7zAjbrw53Ezuw+F7BeiNr9Yl+sflnw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn61fw3dj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 02:21:42 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso6064055eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 18:21:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793579662; x=1794184462; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
-        b=nV1PMwl4VHAHqIOl+VOqC5R1iPcDuyTrt0MB4SB3sTi+Ly/Yt9pfuUyCCbx+Jlan7M
-         NnlKwdJIYpcAS9cyPKnFhPWGIDoxcXwyeKOOYKn2k+DGnyTNslTSxub2Dro1ZTn0h4xO
-         SVNX8ISsy/VlInSqRUVhEN2vEdT3RYAjzDc/6am1hOa+fiWe+brneZJum50JT4q/Ttip
-         x+NRpWiv95FZ0azw0Hxt+58YJE1lf5V8xjc3a6ksMuiXpAoQZXfYTjQ7bZlbCL0Y4hjz
-         7zwCb4bEUNSzN0cM0W0lLXLxev9SkjMQ/hzcCSP+jOX5onvsFuvUwvfzYcIF7zifFd+5
-         YMPQ==
+        d=oss.qualcomm.com; s=google; t=1793586101; x=1794190901; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=y+rsuhJqtWNNFanhIkLAf7k45qEZkJKqZ1V0TJOALXQ=;
+        b=TFpiBG1TgZeY+o70O+Lj+ljKzc/oroK3UnDMOy7x7Z1DJzjObTvwxa3Ri4U2vuW2vE
+         z0qZ8Eg6gnu+Iy+YK5ccgiRGrdi8akfTzra/lGWhBW1DZTdLojZOEa5bVA7em2wvq/vs
+         SZXh8RITuTz8x3P8BnzSq7uBrq0Jn1P635gkQ3doRcs7sJgZwX9r5G4IUsCQSSJkjD8b
+         QDT8Uq+6FGBC1pv008jAN5wPS7/n+ttQqaK99Qn9IOGzU/7fRXq6GBtF8PzScJxZV39k
+         Bcp1fCPbLMFA+lVcVwbw6D8PmAQEJFV//qOw+9//sNcN2xjHdY/Hfnp9Io5Fp6Q1/8XF
+         h59g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793579662; x=1794184462;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
-        b=GbZMNrdW1Or3sQjwE4SVTb2Z4XzLEIZPf21izytvQ6cxfZi2p4NxT7NRD2ySa1OcXQ
-         Q+gj9hheSki47NOaRPK4SUsUPdThhVeeAapCBrnt/qgxXDRVc4qLecTJoxlshA+0hM/T
-         s2i+JwYLHzzz6/M325+P4133Sp2XFUUmYgMHNB80P7AphC5PMawO4HdOTd5VjHgnbKTa
-         4fzRsShsgf11CpAbszM/Md37CwrMzeDZ5WWlSlvOV70kbdAyLQUGtUlOxQTZjP8fTOni
-         VPmi7Oum9CUf/zIvt1usGq+pfzqMTblPV2NM6am58m5gI/sAOQLP9teA1D+4CmxCJxFY
-         oMiw==
-X-Forwarded-Encrypted: i=1; AKwUvBxhRw6SOo5qDlkml4WAt7zIpIWQd/fx4ON7+STH3C9cnaXg9qjJkMPNspyHuV0k7dVDbJOwAYBU6AGHT2Uo@vger.kernel.org
-X-Gm-Message-State: AFq9FYKu3Z/oP15fbM/rHK6NhbNdIUUlYx/CvMfOwXsifbxG7uu1sDG1
-	og8IpgiuLhgp54pgs6J5zVHkXQhNNcP2hQcOjAb5PTYjlaSHnJQYNw4=
-X-Gm-Gg: AYBFou34w0fKtOkNfJ/auJ5/Ma05F/gy72bGYxSSdPbGBYyWGPee/5E8h49qt81SbOm
-	Tg/Ys5dXVi/ZvnU4U05Y4YODd+NCGmfbFj2K6RJ8PpkpVfFjUipDfpe9ndhFHEyfv95A+TGKwUu
-	ox65oTf1shi5sfneJ1naQXZOLd4cPovfGgujU28Tctvz4kOnXu2/kbER00ZxA9ipTSl8s3uXPjf
-	FV64J8ChZU6e8Xe5fJcCdPSGNFrVtJ6qtp15jNufCyM+o7IH+9or+VPo1o0rWqH42NfCnLvj1NG
-	1TfHcuEbXNxr+I2taGRTIwuo7k4t/ZRH9Tm3JCF5WwOAULWOJ/FkMWWdeA2aB3BxZ/IoMrUFwv7
-	/cUy3foSEdTkhQEBuvmdozW7o9OwfW314DLbtWQTJ+u5KkWKnHSDPdg+zRmB/D/BuFTg4dPuY8A
-	/q03XFPEZ0Ctr9y4OaacsipgmzlOuATgWBhput6ROsItOm+Ubq3zi+vAnBRB51g0aIJzZVV34Dh
-	BqrePHDT4wRhJ3ktsKlhIKiaOXnNhpsnSggplqdS7jSlmldKhvCv71nDW6x7ajtU6knh2PYRb7g
-	zt6F78sECx7jniWJWI0IlVDBkJ5nG0d0OP3K
-X-Received: by 2002:a05:600c:8b54:b0:4a1:fa21:fd90 with SMTP id 5b1f17b1804b1-4ac16bc547dmr205930655e9.9.1793579662262;
-        Sun, 01 Nov 2026 16:34:22 -0800 (PST)
-Received: from sasha-User.lan ([185.159.163.49])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b728f9sm16739755f8f.10.2026.11.01.16.34.17
+        d=1e100.net; s=20260707; t=1793586101; x=1794190901;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=y+rsuhJqtWNNFanhIkLAf7k45qEZkJKqZ1V0TJOALXQ=;
+        b=XhtMSA7eUspe0HVznJlw9c2HHYULmNMIw4dWU44Y7WEnjYK2pYe2Ftgf4c7U7/podD
+         SKCRZ0e0Q6taZR05LW5ajlYKp1QGP8mH0554Anm78aobAoCXdMYV8oV2wXm6k/R5pMkL
+         TWi4NQiFi9NAaNJ10B8+DwCQIu2tUFQMc9N1tEHqziCA7GVYKqYn2DO4p+yD4r8W1NaP
+         PeitkOvrrVy03BcZdz1dGLjzV0GIRpS3hJzrPEg3dejJrpsh24707RXVOmXEPGQGoZ53
+         0PllKmQ3aOhlJvs6RBLP9NDhVTB43ldzr1+bIMdc1VMM2ZtrXZoargYHjGVur37YHIK3
+         5YIQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwR02NWGWTFxZ1oIiVPIMGHjk/969O4KilqdCdoPUCxfZPb7+D8l8zgG+S3pp4azf+Ibx0efBQ2jOsYNuG5@vger.kernel.org
+X-Gm-Message-State: AFq9FYJtWHKgyd1dWZsXJt4ou7YdsrtnCl8pHn99WKKn2+yYFMaNd7pB
+	fxBSAwOgrvaCxJewspqxHTUYfHix5JmnrqeV6H7sopIW2KuyIq91Y5r6sRr5TQXAr1s3kPTOz/4
+	CQ7URerW2aH61+wJik6R1Oosddt3YGkaMOtK5vs053q805GYM7g+aBOWMed6hA9zzvCS/
+X-Gm-Gg: AYBFou0Z6t7iIiIQ/ZO9YGdkRvPCD6KZabqc/I9uNDYGrZCZplz+5Drmqv8UjmaZXoQ
+	TVzgB5UUouT7IANkfPdJ1ixQUpvVlFCmS1B9g8O/9AyUsX5rGcXslP6qK8sZJI9r5IMEAYMGKwa
+	dqE7FjabPoKOMSQOOD+Q82HEmmEpqt8APoBZXLnPbqRCq2IhNNtoC8TA1614LrhJ4jUFKfIYpmN
+	/cNtrhAXNhgnOiiC+Re9joi81xKVK16DHjhnhdyBy7vfSJzbdXim5o61h1SknM8JkmmNFUBZMz1
+	BmvXsmzDnuanbjKvBOjjsPPfMiT/FagI3Hk/342rMU/Q6iyp8IZoIohOQlhWXO8rfJtcSsAye3V
+	zh4RvVzX7+Ly4n/ZHB0DCFHAID+VT9XvVmiXE0igDhV7OWXbdschCNLEDSmLMnQ4qCBUpI924Hk
+	+pfhmFYVRTK/SRvfq26KVL
+X-Received: by 2002:a05:693c:87cd:20b0:36a:32de:a239 with SMTP id 5a478bee46e88-36a420643f1mr13530070eec.0.1793586101463;
+        Sun, 01 Nov 2026 18:21:41 -0800 (PST)
+X-Received: by 2002:a05:693c:87cd:20b0:36a:32de:a239 with SMTP id 5a478bee46e88-36a420643f1mr13530038eec.0.1793586100838;
+        Sun, 01 Nov 2026 18:21:40 -0800 (PST)
+Received: from hu-petche-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42aa8999sm35620903eec.29.2026.11.01.18.21.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 16:34:20 -0800 (PST)
-From: Asdlerto Korry <korryasdlerto@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Asdlerto Korry <korryasdlerto@gmail.com>
-Subject: [PATCH] soc: qcom: pmic_glink_altmode: Fix printing of a fwnode with %pOFn
-Date: Mon,  2 Nov 2026 02:33:24 +0200
-Message-Id: <20261102003324.340577-1-korryasdlerto@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Sun, 01 Nov 2026 18:21:40 -0800 (PST)
+Date: Sun, 1 Nov 2026 18:21:38 -0800
+From: Peter Chen <peter.chen@oss.qualcomm.com>
+To: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
+Cc: linux-usb@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/7] usb: dwc3: qcom: Keep wakeup IRQ enable/disable
+ balanced on failed resume
+Message-ID: <aufzsuS-hX5HTgLQ@hu-petche-lv.qualcomm.com>
+References: <cover.1793212717.git.faisal.hassan@oss.qualcomm.com>
+ <a7e3c1e094be9cb4a282925a6c09e11bf746234f.1793212717.git.faisal.hassan@oss.qualcomm.com>
+ <auRiR2synrBgWFhI@hu-petche-lv.qualcomm.com>
+ <c261c442-6623-4087-bc3d-c90afabad9d2@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -98,48 +126,103 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c261c442-6623-4087-bc3d-c90afabad9d2@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAwOSBTYWx0ZWRfXxcJIgX6qFHGI
+ Ldj0yATevvs+flwrKagw5PLSwrM15ZLVbQiy2kUmdJWbBaeZ+22PlGLjJ2XqCrik6GTq1SLgZSe
+ R7zUsqPPijO1MujA/4xe05AevbGXmLI=
+X-Authority-Analysis: v=2.4 cv=V/LoQuni c=1 sm=1 tr=0 ts=6ae7f3b6 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=6HtGa1ZIcL902LZL58sA:9 a=CjuIK1q_8ugA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-GUID: HK-32UHFTd6r7Ali4du-ITpPaTpdF0CF
+X-Proofpoint-ORIG-GUID: HK-32UHFTd6r7Ali4du-ITpPaTpdF0CF
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAwOSBTYWx0ZWRfX9mWHyDiQ82ld
+ EYVb4Tw5dLgsz4gXxbQaZ8azLPbdlur2M4x8BhuVmvfH38pxv7ahdoGozLr1A2ps7zPCWyk3ZOz
+ t7AHKRGPoY1dvIWFx/IIOD53qQDO+cd/gyTYQ8KwZhKUm2AKUWwF2MaFHEu94gMcdqraaItQY+k
+ T+kdRGcVOJGqDs8zhaUF8iaxNrjQe6G/5rYHFTvuQ6YvMWRBBFARUKFlrs3NlrHJBBuBsbNY7CJ
+ P/Q/hVc3up5DIixDj6HM2gnkwIb48iCJwUf+gX7MluwLNH++dK3B/6cWqkuYNTnQ5P/nc7/8+3E
+ snx3fwjcpVoGzxcu1+JNv31wDZZHclG7lij1XVQ4hP1BW0PlLWJobxgveQYdS+Aicje4sJxWXni
+ XyOTxQgGA7ABbz5zgiA8ncjO9uJYz4AYcme+uWKMzQSIkQ9agafeerXFwSLeXewQfRIYQt91p9p
+ mYS1k5a2nxOmESGlg0Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_01,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ phishscore=0 spamscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020009
 
-pmic_glink_altmode_probe() walks the child nodes with
-device_for_each_child_node(), which yields a struct fwnode_handle, but
-prints it with %pOFn, which expects a struct device_node. vsprintf then
-treats the fwnode_handle as a device_node and passes &dn->fwnode to
-fwnode_get_name(), i.e. a pointer into the middle of the handle, and
-calls through a garbage fwnode->ops. The error path ("missing reg
-property") therefore oopses instead of printing the message:
+On 26-10-30 16:54:55, Faisal Hassan wrote:
+> On 30-10-2026 02:54 pm, Peter Chen wrote:
+> > On 26-10-29 00:29:31, Faisal Hassan wrote:
+> > > dwc3_qcom_resume() disables the wakeup interrupts before enabling the
+> > > clocks. If clk_bulk_prepare_enable() fails, it returns with them
+> > > disabled.
+> > 
+> > What's the relationship between clk_bulk_prepare_enable() fails and this patch?
+> > 
+> Hi Peter,
+> 
+> The wakeup interrupts were disarmed before the clock enable. If that
+> failed, is_suspended stayed set, the next suspend returned early, and
+> the next resume disarmed them again. disable_irq_nosync() and
+> disable_irq_wake() nest, so each failed resume left the disable depth
+> one level deeper. This is the rarer case, so I will reword the commit
+> message to lead with the runtime suspend case below.
+> 
 
-  lr : fwnode_get_name+0x34/0x50
-  ...
-  device_node_string
-  pointer
-  vsnprintf
-  ...
-  pmic_glink_altmode_probe
+Okay, so here you may need another patch for error handling improvement.
 
-It was hit on a Samsung Galaxy M52 5G (SM7325) whose vendor device tree
-has an extra "qcom,pmic-glink" compatible node without a reg property.
+> > >   }
+> > >   static int dwc3_qcom_suspend(struct dwc3_qcom *qcom, bool wakeup)
+> > > @@ -377,8 +388,13 @@ static int dwc3_qcom_resume(struct dwc3_qcom *qcom, bool wakeup)
+> > >   	if (!qcom->is_suspended)
+> > >   		return 0;
+> > > -	if (dwc3_qcom_is_host(qcom) && wakeup)
+> > > -		dwc3_qcom_disable_interrupts(qcom);
+> > > +	/*
+> > > +	 * Wakeup interrupts may have been armed by an earlier runtime suspend
+> > > +	 * even if wakeup is now disabled,
+> > 
+> > How wakeup interrupt is triggered even the wake interrupt is disabled? Is the
+> > hardware default value makes it enabled? If it is, we need to disable all
+> > wakeup interrupt at probe, otherwise, there are un-expected wakeup interrupts.
+> > 
+> > Peter
+> > 
+> 
+> They are not. They are requested with IRQF_NO_AUTOEN, so they stay
+> disabled until the first suspend and nothing needs disabling at probe.
+> The issue is that runtime suspend always calls
+> dwc3_qcom_suspend(qcom, true), which arms them in host mode regardless
+> of device_may_wakeup(). The old resume only disarmed them when wakeup
+> was enabled, so a system resume with device wakeup disabled left them
+> armed.
 
-Use %pfwP, the specifier for the name of a fwnode.
+Get it.
 
-Fixes: 080b4e24852b ("soc: qcom: pmic_glink: Introduce altmode support")
-Signed-off-by: Asdlerto Korry <korryasdlerto@gmail.com>
----
- drivers/soc/qcom/pmic_glink_altmode.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+At your second patch, it already knows the context between runtime
+and system suspend, you could disable wakeup enable if the device_may_wakeup
+return false, that could avoid introducing more judgements, and have this
+patch after your 2nd patch.
 
-diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
-index 465e5d2316a0..6f3737b096cf 100644
---- a/drivers/soc/qcom/pmic_glink_altmode.c
-+++ b/drivers/soc/qcom/pmic_glink_altmode.c
-@@ -596,7 +596,7 @@ static int pmic_glink_altmode_probe(struct auxiliary_device *adev,
- 	device_for_each_child_node(dev, fwnode) {
- 		ret = fwnode_property_read_u32(fwnode, "reg", &port);
- 		if (ret < 0) {
--			dev_err(dev, "missing reg property of %pOFn\n", fwnode);
-+			dev_err(dev, "missing reg property of %pfwP\n", fwnode);
- 			fwnode_handle_put(fwnode);
- 			return ret;
- 		}
+> The comment read as if the interrupts trigger while disabled,
+> so I will reword it as:
+> 
+>     /*
+>      * Runtime suspend arms the wakeup interrupts regardless of the
+>      * device wakeup setting, so always disarm them here. On failure
+>      * they stay disarmed, as a level-triggered wakeup line could
+>      * otherwise keep firing while the controller can't be resumed.
+>      */
+> 
+> I will update the subject and commit message for v5 to cover this case.
+
 -- 
-2.25.1
 
+Thanks,
+Peter Chen
