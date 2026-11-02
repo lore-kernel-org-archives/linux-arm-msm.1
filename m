@@ -1,78 +1,75 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.137
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793602729;
-	b=vcLE5jLVAf6C+/dEQ90JWDmWtB/3fN6SLrXUpsaMiwEfwrpiEHv7CKsrN3N7dzBeyCbp
-	 Ydb1C/J9s56faWlQhvLEk+QEdPDN5T5rW2hP5jx2krO+ETxPNvtgLZLT+nHSVvY7FWhwB
-	 7LkYW137useJsfz/a2cZsXDg62ZgS8Qx02bpG0Lbsim+jLyX5lHr/9Du8AcbugwAb4Rm4
-	 URxOV9Ckxz10zh209W7cnrX8KypEy5Pmkur0pjUo7QnPEtTPlsd5ztgFfV9De7Lsmq/q+
-	 /Q76dRFpG0XiQ0XZ6LSTZ+JM1RHpFykX3bNuMFRNOLouwjTKzhJGI6WfEiJHRUPNqNg==
+	t=1793602844;
+	b=P6R4UbHJXjrEGXJmePdrj5RxgfMVev6u7wU34SLvr6Lfjcq/v6GwebJEWxQ4wL37JbG6
+	 lDmY/Gb8OKB6Y1K2MAiUCM5xL1FZaQgc6dxnqDpV9qhOmlyqs+vwPghBF+CxI+MbieEms
+	 iGmjDhDZCqAq0H+ZNT3AAvvAeyVA4uOG0mRyrrIt9ZJGCDA1kYgGk7fwrxgFnWI2W8WEI
+	 LAtt4r+aUcnBNhjvfGEOVfUrgV9vc+Iit0feGdZyLJsqIPg6Use7FSQXvTwcXRgSp6IBf
+	 sbcj09oC9MwNW5qro5TmJYkOH/H70Bjf3LEYNTiEQmtMyQk6BsSih41VJguixbqSAbg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793602729;
-	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
-	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=IZZF6U/ZVUgtpcnr8Hx2KYL3BSBMhJDzbOvkfSE3p7c=;
-	b=hffJm06x37y5x1nRfONWy4CRTIpPCf3xT9SS6iUCxxI5einjrsvkvvuGiaNKQgIyO6g0
-	 ga30QMsi/+kUPvEI92RFkJoNF073njD/rn+6xVX2Tcg4fFdbRj2JQjGQXGYeWRdRMUJML
-	 cQK1/9jBn3BcBkt78JJwr6gOes4P8wWGJGAnDPDyiu4XlP5JA+pjkNiMakKlQIUKBwN0D
-	 LqzAbg9ir+loHSQ78VZvpBV/yTp/CsHJCqsJsf/MCevXs9Hyg3/e1Twe+awWDGjwMrHKQ
-	 QFwzg6cColOTwT06IFUQVgLLYqmUBE5mN7csodOxQHJhAkTkeSxoBZ2kWZ/5qvZxDcQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793602844;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=RxAqcCWBr6a26XKwCwfp2bVB+gFQ0/IZpYUaWXrUWNw=;
+	b=QcNjY91kyDJCy/OE5tylb5ETStY45QVaSf4gMda/vhJxQKegrJf6tphbdQ9ozZwkLaFS
+	 NwIvWl7iQ1YuPgoQUtwALs7j1Tefamp9TJax5zTGkCvdF1kbn3/N1MTeBwSYWfxhHf8WG
+	 ilqLe6dgujzSbUQETUNfNZBtX/vtdA+x8Pp1Uj4evRe5VzT8GtohOWkumGbiP5Ic0ePXu
+	 XO8KSEa1w4UTi5nXYMFZGrny43zja+WZ03Maxnbaoydbe2p8a+gshuE1rPcfapdtsTiRY
+	 5BXrQQGtTsNFR8Ey8a4VJoj8L3jL4n3ySbN/LicskCW144WLvY9aG77+Rw6k3OUjocQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=qq.com;
-	spf=pass smtp.mailfrom=qq.com;
-	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=mvoyWL+g;
-	arc=none smtp.remote-ip=162.62.57.137
-Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com [162.62.57.137])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="R/fiw4FW";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DB8E606A324;
-	Mon,  2 Nov 2026 06:58:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0DB8E606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD9B7606A326;
+	Mon,  2 Nov 2026 07:00:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=mvoyWL+g
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1793602717; bh=IZZF6U/ZVUgtpcnr8Hx2KYL3BSBMhJDzbOvkfSE3p7c=;
-	h=From:To:Cc:Subject:Date;
-	b=mvoyWL+gv5+kVu33cp/83nqjLzooStWywIniOFePFr9CWv3FG1LYKl+6ILxBKI88q
-	 rvWbezJ9LkzhMHdj8HVARcS4UF5Dl164dZoToYk7MJEKSas5sDSp5cuk+967o0M5fI
-	 mty3Oi5foyq9HZJJsSouuacj+niCy6esX+HqCvIc=
-Received: from shuai-VMware-Virtual-Platform.. ([117.158.156.199])
-	by newxmesmtplogicsvrsza63-0.qq.com (NewEsmtp) with SMTP
-	id EA224239; Mon, 02 Nov 2026 14:58:34 +0800
-X-QQ-mid: xmsmtpt1793602714tgkqnxd53
-Message-ID: <tencent_0D164F79882608DC3FB1B70913F736690207@qq.com>
-X-QQ-XMAILINFO: OVFdYp27KdlJ97ztUa9THujk47MNnPJWV6PqGHmIDV3SAFloVm+xp5ENdvmIKT
-	 ZoqgG6wytzf5iLtLTMSjH5MrBl8fP50YVkIMKvymAkOgZVTiWFCPCrbdIFictQntlF/aXlAuWfKk
-	 pGugtUHwKoBvzisu7mAif3eVg4T6IwsAfBLoJN1z8FeU9FQ094Ef503AfKti5fqKyDR+fuiW4Zg5
-	 wMqi4ziFVz7S0WpnavL1NhcN5j+0a2yXm0r+5euv6HtTYevDpDkuhB9fL4+8ib2o485VCVzn+1Sv
-	 Mcg0ecpL3QuVyfCpD+AsVLxZnyQWh1B7VfFnuHF/KdS16w19txdLPRrVpR2SuEIAw7DyfU+s/gOP
-	 7PNt5k9HWFys9eKr+igkaVy+x3xtt2mCPxgrxa15DFWrRKayEOpops8rgSWYlh4HsIpkO8m5z9YJ
-	 KqDURBoO3JBLqXUCcfkYFAnpebdtNR3YZZLCUGGxeTRmuhZwpXAvGbQyzZpjrARs576GWLcngdAH
-	 YqaxXw4u926ypkuILHTMNRJIeIBeAAxMdYh2SKBmeXOaF4qyXE7641TeVuvwIoMn9zO/aR7F02zf
-	 a5esyEileDNC3Q1FhfJJTkZOo7lW4tZ3+9rzf8ABgVQPg+8JH3VvByzxdK1QFBwb79PfmaX8/uxj
-	 RO+oKhhGlpRg+gC9Z3faCbi/JSBaTDcp5aeiKgi8dOt2aXgQuI9MvQvAUE3EK2Y5Zmo6MpqbhEN8
-	 L0qOEUhHPDS/64EYKrJeIZlCwKn8jfS/3uFuOZVnCoHoEw9QUjIAmGu8aEnqLJ6ODYzIdw5aYPNG
-	 jkbC/mrOt6qF+Onvu7VC+TW5yA4csyVOWbje4vpbI4KfParWxnODTMENKkyGouALa9uPCF7fMtzh
-	 ZQjCXVUsK/y9vVLH6F3QO/XJUAsFAgeBBOlqc7UrcPmWDMnfAxp4UzhFN1ZwFH6XYUb76GdM6dHv
-	 g2omucuc2j3NYUBdcLM7wI8nTCEnIjBvc+CWcHw0G9G8RrJLyuDS/Crb2q+4wnNr9VkCxaX8CdK3
-	 45iEyoP1FbbXkn4gKiZ32EUzpbrL8s7AWWaHzTXW3b4Rf8pmB/mTonmIzo/rZzIl3TmOzdGA==
-X-QQ-XMRINFO: Nq+8W0+stu50tPAe92KXseR0ZZmBTk3gLg==
-From: Shuai Liu <847807867@qq.com>
-To: bryan.odonoghue@linaro.org
-Cc: vladimir.zapolskiy@linaro.org,
-	loic.poulain@oss.qualcomm.com,
-	mchehab@kernel.org,
-	manivannan.sadhasivam@oss.qualcomm.com,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	847807867@qq.com
-Subject: [PATCH] media: qcom: camss: select GENERIC_PHY_MIPI_DPHY
-Date: Mon,  2 Nov 2026 14:58:34 +0800
-X-OQ-MSGID: <20261102065834.191859-1-847807867@qq.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R/fiw4FW
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E7361F000C1;
+	Mon,  2 Nov 2026 07:00:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793602843;
+	bh=RxAqcCWBr6a26XKwCwfp2bVB+gFQ0/IZpYUaWXrUWNw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=R/fiw4FWXIGbbBWngslouj4gCw2HEoxnkWZwHV2qXjiMzX/GVPMjCi007oDGcuNZV
+	 a74u9gBFKQyAucwTTYn6nCo0+T0bqBQfRhTz03OxpuAgFeWMoZGqLRKtrOFSrFy+Ve
+	 uGd5dU8JtHltOUGe317QU048Gna6gwfNjdQ6aik67AfGKwPGlsZe5F0S+58m2Mlnmx
+	 eq25h2Wy/fCKvcVwGYuEVxvPJABOMuSMXqlXXTYWksmd2kCW2oFTmRMJf+n8JKPCbp
+	 M6Q1j3vy+s4WIJkLRB0PuIHdFqJvnSaEsuShG2zEYgXOASqV7a9ysYAMfVa+Rbwvrh
+	 W1+kECMuoJaxw==
+Date: Mon, 2 Nov 2026 12:30:39 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Lee Jones <lee@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Daniel Baluta <daniel.baluta@nxp.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Hardik T Shah <hardik.t.shah@intel.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Liam Girdwood <lgirdwood@gmail.com>, linux-arm-msm@vger.kernel.org,
+	linux-sound@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+	Mastan Katragadda <Mastan.Katragadda@amd.com>,
+	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Rander Wang <rander.wang@intel.com>,
+	Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
+	Sanyog Kale <sanyog.r.kale@intel.com>,
+	Simon Trimmer <simont@opensource.cirrus.com>,
+	sound-open-firmware@alsa-project.org,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Takashi Iwai <tiwai@suse.com>,
+	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
+	Vijendar Mukunda <Vijendar.Mukunda@amd.com>
+Subject: Re: [PATCH 00/21] soundwire: Fix Critical and High issues reported
+ by Sashiko
+Message-ID: <aug1F0pampktAuzZ@parshuram>
+References: <20261030104840.3361217-1-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,38 +79,21 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261030104840.3361217-1-lee@kernel.org>
 
-Commit 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API
-devices") added a call to phy_mipi_dphy_get_default_config_for_hsclk()
-in camss-csiphy.c but did not select GENERIC_PHY_MIPI_DPHY, the
-invisible bool gating phy-core-mipi-dphy.c where that helper lives.
 
-With CONFIG_VIDEO_QCOM_CAMSS=y and no other driver pulling in
-GENERIC_PHY_MIPI_DPHY, the build fails at link time:
+Hi Lee,
 
-  camss-csiphy.c:(.text+0x51d): undefined reference to
-  `phy_mipi_dphy_get_default_config_for_hsclk'
+On 30-10-26, 10:46, Lee Jones wrote:
+> These issues were reported by Sashiko.
 
-Select GENERIC_PHY_MIPI_DPHY, matching the other MIPI D-PHY consumers
-such as rkisp1, mali-c55, cadence-csi2rx and sun6i-mipi-csi2.
+Thanks for looking up issues and fixing them. Some of them do sound good
+to me. I would not want to cc stable and tag them to fixes though. These
+are bugs, but I have no evidence they are impacting real world
+scenarios. Mostly a good but theoretical exercise, so I would like to
+avoid churn and move them for next cycle...
 
-Fixes: 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API devices")
-Signed-off-by: Shuai Liu <847807867@qq.com>
----
- drivers/media/platform/qcom/camss/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/media/platform/qcom/camss/Kconfig b/drivers/media/platform/qcom/camss/Kconfig
-index b51745c942c9..b18ae4405502 100644
---- a/drivers/media/platform/qcom/camss/Kconfig
-+++ b/drivers/media/platform/qcom/camss/Kconfig
-@@ -8,4 +8,5 @@ config VIDEO_QCOM_CAMSS
- 	select VIDEOBUF2_DMA_SG
- 	select V4L2_FWNODE
- 	select GENERIC_PHY
-+	select GENERIC_PHY_MIPI_DPHY
- 	imply PHY_QCOM_MIPI_CSI2
 -- 
-2.43.0
-
+~Vinod
