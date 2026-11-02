@@ -1,125 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793595509;
-	b=NBfYl0I4WEyfpwGdNZ6NafQzEq2xkraU3fhwgQeCqP9UAk0COplNIWZAfv4MGadrnzob
-	 q+H9ficHHiblZA0rpFXGXwzV5b547wMXJsIv1RId2W8HHJ+wkhlPMqUoRg5JuB6S9+CN0
-	 pokGD88acg/B5frnRwRDNNAj2WeRqeuxYdRgDPTS/ZtHlLR4p/2qe1zVqkYnmt3kDSZFq
-	 YAitPJ4KRFvGIFkicHCITDQKst2GwWCS2LRezywYc0OcCjbr1chpbLdOec+JV+rb6EhAe
-	 x5kKhxwO/WilokAsGSpbVKyHzMnrreHNoZMy5Tbdt2u8CNP+maB3s77DOB3Q93Obfwg==
+	t=1793598079;
+	b=4gG7dWbrhuAz6YCF4ihiYi1u1x0PqMH6SJ52lCNJYs8Tt0c2TAsg/hEukuCFgB4E4vjA
+	 aIdP8YHfSNEX3JlR8unfEXuxHq1MqPnbaPeg9Hh3CooCObsn4M8MXWgXli2U69mTWl8C0
+	 6QEf2m1vXVJgu5Qr/ESg6lWvtaEfxJi58lfB1QPcpD7TiXf/POWo0YCxdQOEWklCt/x9x
+	 8XGBYGPzpy540ak7qiI8Rbr7XsbQuTgn6l9KMGp1u98rNPxaTmx4vSX5/PVt4M/HZOjwt
+	 FoWr5PZ1Smy8D0sqhaaUURubVnZ+7+p/OzrDIP4XBqFq2WXtZy4hjo+/0xWHQhe03dQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793595509;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=s/p0jvuTaezOW7e3Dk7zhXOySIz2zUW5mJL/UjH77G0=;
-	b=TIepBaEfaODbKmkUB5AJnSYByyHYZDclq+JjM8nolA2zAITaGNwroavcGX4clvMZfPV2
-	 4GzR2LRTuyJtGQ4L/DLGIJaXbS+q8DOrwfu7/iqitCcsKEFjRXskGfbx19WHKJlIiONyz
-	 KkPRDWerkXMKTZ7uJOdey7S61frtKqKx9iOX5Oee7woMPvla1f4FWx0eULwGkHw5sEyKU
-	 vEPgOy4tXjt+bkU2hdqlzvZfM+Dp1HZ0fwrqGQowGvl82oJfWluNleMR/UN/3mjxReGsR
-	 KV5d5ZgCfKnYjuGWyJi1zh+zR2L1p+e1gVAunWOyOzibrLQ3wvUgTL/G8ax8LtyItuQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793598079;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=bPiM5fOHv/cN9XqEKHSnEn2FGdxgPwtP/JfOgehsQYU=;
+	b=hMhxG4pZE4il8JBm7MjdzvSDARJVssHHeQ7tnz8Aci3m6lSEgi0NTFWjyRxh9oL4F4wM
+	 I8kc45y7nY50aW9mMFMI0iAmnh5URN7WPi9puCuqRkCXPA3GqOIuVR42LKlMZwN0DktY7
+	 AkHhAq/JVSEaD4HEaWZp71b94R4E2JV1wFSenrN1yEtAzbxzm+KSisnSfW87erWXu4oJs
+	 wEWwfvSVOU8UAESUqFt+JEM6fSAhWjM/XcxwR+vN4M+qLbCWkN0kfUblFR3iucf3EEe+C
+	 dIhpKGuRAY9o1eAAQcE5y0JVeJNisrOOEeuiCljHYdDLzaz7prb39AhgvBIBetQ5rJA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BOo4WRQW;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hOGwTjya;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9216F606A32C
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 04:58:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9216F606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=uJtgeaJE;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1977C606A331;
+	Mon,  2 Nov 2026 05:41:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1977C606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BOo4WRQW;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hOGwTjya
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A23v9443722552
-	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 04:58:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=s/p0jvuTaez
-	OW7e3Dk7zhXOySIz2zUW5mJL/UjH77G0=; b=BOo4WRQWfSrs8FYBpl9355bC5LI
-	kVFU6oylz32S1Sd4o42A9GNohtWD3tb+1riksiUKA8C03sh+ZTrpxZi3wbvKWm7W
-	stNTE2VrKLUT0QUvn1y9KVHJX2u2WThLM5yKQo9/OaGITe6uIA29m7zMgygCh+ZG
-	iQYbRztbSPutL7bTQHoRPZKmCcG57Te892+7UjXBCQvgXaiRlQ9hRIkHa4qt4zvR
-	8GMvrFfljTszded44b+jn5EWAJ1n3+XZbg59ZmzLLetMnq+ECqc1BiWDV/S834Ux
-	Mq6T9r3Up7gXt0xeXajcb8E/kKnKZwlLj095dxeBtU7WgGmRz0ZCM+z970Q==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn61fwg9t-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 04:58:27 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8a070228969so147097b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 20:58:27 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=uJtgeaJE
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793595507; x=1794200307; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=s/p0jvuTaezOW7e3Dk7zhXOySIz2zUW5mJL/UjH77G0=;
-        b=hOGwTjya4zhLzgAUOEJpfLl6txQwVmj/P6lyJF6kNVjhV6PZQXADxZ16xvgdFw2msJ
-         Uzjszy5JVgwo0vxBxkMn0nONKMLTaccc4z45WTVq+61IkFSHnNgqLVuWSVeTgZrmo8qY
-         CTOz+ZFMBYebamFNMaCiBJkdYnb0hxIGa96QeQBPWk9KDByANchyCAANb6VxXmA0DEnP
-         1dQl5CHmPsKBtPG16m7T1SZX6bbr7Z4bxnZ60u8zLkIGNiATXjOgu+Prk9mH/ghWHL1C
-         R0gGyJehwlscbMzgp731fSTo95x1u2Ib3ootZcyr9REYZ27u0Djlj+FeMSfEwUbFEQvk
-         iiUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793595507; x=1794200307;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=s/p0jvuTaezOW7e3Dk7zhXOySIz2zUW5mJL/UjH77G0=;
-        b=H85aPKUfc3pOlJiJ9Fs6oxSUUw9/CPUDd+uhjaPXy/OJSxq2/f4EyzhopVGHLxWz4z
-         mjk/AAsbazJ7pB7dhQyFGr94ObnLQBYf+W9WsO9iHaeuXUjpua9XcagqBnE99H8qsiHt
-         /RKTvJV9N9Kh0RTFdq6Z2Yf0Y1rVu37Ef+fZncBEdNcSkCVRukFWQq51DNcuGHb4pnL9
-         bo/aEXHHmJzqZl4wlOHFnJhD1SMBnp/XKEwzjq6FFjJyIq7Rkkcc1p3hPVpZrj4XMRsB
-         9dCwaZIDowwSk0yvoLeyRdwrpzXmXituEaL2drAn3nLRAJMfENwBD2HdcOELNfl/suzB
-         mKXA==
-X-Forwarded-Encrypted: i=1; AKwUvBxdPXP6A0+dzgI/zFIdhfDWMssN721Fy9aYFbWLxvx2z4gpQeLg49Y51kNh0T12lI9ZVdY56bGVCvsbfDcG@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Mlonbbtm8yoeWaM3gAUiZaxjn7d4Z/IHgfMzW71Pm6bn2YG5M
-	JrxWcUj/WVLW1dMBlO7KyU+RzczakKLPe21X6FGFLRWehXpMRQuFrSwuahGu6TbF0/X0ZKwr3Jb
-	2BpbkBcMMyAl+5xIAsDKD3+xGyskFKAYm+qMB3Y3O0LeApMVXmJrVqu336BvsTPAHgVQn
-X-Gm-Gg: AYBFou1Q5rlTXLgPY1XdBD/FP/Pqe6lT5PQtaW6JqXQT+pu5HlGkuPAcjwrnoTcDQVn
-	ewtS8xp2WwRPbjHsJuWHfcXZG4WW5XtDjncH656OpqmVKW/QTBWYt6EcTAuEiuUMUFDN8oLCi5N
-	JNWOt2Wfdv1mAvE5Ms7jU5MsyXr//UNJR12zbzsUilnksYmmdH1eTxztUnpBJkm4qhYUBm4JWie
-	CuT9n52U4yjymPKbWzkQ20PvGNQu3AUyGvcIcXyvUT2xKwp6tC3wLs6oeOR8ZeO7N1JMpKc4INX
-	tgGfNHEypZf7vqQgmdpJ1Yzin5LQ25QYeOnQL4t08W0k0MtwBCx87tjzmW3caNDpzEUsbuMds55
-	zpTm4ufaGzhzZYmQdgdc/ODa20LadnOTfN8PLrbgKrBTDKyy2UKGKLPBgEmkZBkko7slgoLByZa
-	8OeA==
-X-Received: by 2002:a05:6a00:6d43:b0:8a0:89f2:3357 with SMTP id d2e1a72fcca58-8a9bcd04e01mr10373302b3a.2.1793595506771;
-        Sun, 01 Nov 2026 20:58:26 -0800 (PST)
-X-Received: by 2002:a05:6a00:6d43:b0:8a0:89f2:3357 with SMTP id d2e1a72fcca58-8a9bcd04e01mr10373290b3a.2.1793595506214;
-        Sun, 01 Nov 2026 20:58:26 -0800 (PST)
-Received: from sdciot-sh07-lnx.qualcomm.com ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aad9d04805sm1485452b3a.32.2026.11.01.20.58.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 20:58:25 -0800 (PST)
-From: Linghui Wu <linghui.wu@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, kernel@oss.qualcomm.com
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>,
-        Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>,
-        Cheng Jiang <cheng.jiang@oss.qualcomm.com>,
-        Wei Deng <wei.deng@oss.qualcomm.com>,
-        Linghui Wu <linghui.wu@oss.qualcomm.com>
-Subject: [PATCH v4] arm64: dts: qcom: shikra-iqs: add M.2 Wi-Fi and Bluetooth overlay
-Date: Mon,  2 Nov 2026 12:58:15 +0800
-Message-ID: <20261102045815.2938940-1-linghui.wu@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
-References: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version;
+	bh=bPiM5fOHv/cN9XqEKHSnEn2FGdxgPwtP/JfOgehsQYU=; b=uJtgeaJEHcUGd
+	GYBysmyGkkSpiykALsbTzEFMsLwHgSy8XCRkIfxMKPiQyxUpkAYfDiXjuQM06Irh
+	jS0oTtdh3/fH2GSzytlu68levBfujO4qrzzLJq+jasAX+LmvX+pydWru8JEgALm2
+	pEORWH2/+8UGmGY67NRDSYw83fZyFY=
+Received: from [127.0.1.1] (unknown [114.214.182.90])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgAHgDR1IuhqJ9x1AA--.3849S2;
+	Mon, 02 Nov 2026 13:41:09 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: devicetree@vger.kernel.org
+Cc: Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v5 1/2] dt-bindings: usb: snps,dwc3: tighten the two-connector
+ shared HS bus
+Date: Mon, 02 Nov 2026 13:41:09 +0800
+Message-ID: <179359806935.413510.7108025505776923330@mail.ustc.edu.cn>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -129,218 +61,223 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAxOSBTYWx0ZWRfX0sgGPw9NBM6c
- G6bWipT2qtkVNbw7Bn0yxDzNvyYA5rhUXDnrz8C/Va+abmlqiJsbZ6n46NMbnusKO9SV8BBsxxh
- wNNHv+1tLVYGv6lBpjAEXb3iERxuor0=
-X-Authority-Analysis: v=2.4 cv=V/LoQuni c=1 sm=1 tr=0 ts=6ae81873 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=K6LXAmJzQkywega_7-cA:9 a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-GUID: STFNc4Gx9GjtwC0LHYh-b3va6YOJ8AFh
-X-Proofpoint-ORIG-GUID: STFNc4Gx9GjtwC0LHYh-b3va6YOJ8AFh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAxOSBTYWx0ZWRfXxqa0lTYILDzI
- 7ZjWframgBxGyMaBOeUEUimfskLmUrLKovFGVRnaXu13EfMJQ+eFG9JiEScgD0mU/2I+T3BWBBB
- dYp3fDNH9sEUXOmH9cYqzxsY2ndEB5KDuVFTVLkT/BO0ZNX/VhFGdWeTKrCrM0dd2Nd8ZbOOe3E
- BpmuYLxFUeVM0g36nUBJtXA5BP30Tz32p7dg8MuNRZ6KcXnSvpz/khz0bnoA7asAomK1gEJe+ma
- bTSsROapU75eOBU+iiucXxtN+m8roYq1Yc6r8/tdhABx8pfHnhZdfkMBiKWo3eZdkIcYUun/Iun
- xf3AwfAo0BaCKQkdGA8jJ7TaaaJJaTbjgUkFMlst6jfuNAC6vHhWQ0DN2f8Tsqj4z2E0fGQV81J
- TjmWPn+6MoAq7sL+013vpoXG1bkXBWTPwBsGNstievqpJjcSePs69uSkklkA4AA3F7f8MzqnAME
- vhuRr7XBKfy3LNudtyw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-02_02,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- phishscore=0 spamscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020019
+X-CM-TRANSID:3pYKCgAHgDR1IuhqJ9x1AA--.3849S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxuFyxCF47Cry5CF18CF4fuFg_yoW7tw18pF
+	sIyF4rJFWkK34fZ347AF18Cw1kGrWDZrnrJF18Cw1Uuan8WF4rXa13KwnaqFWUCF92vasI
+	krykWFn8X3WxWw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUv0b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8Jw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2xS
+	Y4AK67AK6r4rMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
+	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8
+	ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
+	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
+	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU5
+	6T5tUUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARESB2rnk1cDXgBGsX
 
-Add an overlay for M.2 Key-E Wi-Fi and Bluetooth modules on the Qualcomm
-Shikra IQS EVK.
+Resending only 1/2 of this series.
 
-The Shikra product design supports either the onboard Apache WCN3988 path
-or the M.2 HSP Cologne path at a time; the two connectivity paths are not
-intended to operate simultaneously. The overlay describes the board after
-hardware rework selects the M.2 path. Disable the inherited onboard Wi-Fi
-and Bluetooth nodes when this overlay is selected.
+The earlier post of this patch (Message-ID
+<20261031150154.1106455-2-xiaqinghuan@mail.ustc.edu.cn>, 0/2 cover
+<20261031150154.1106455-1-xiaqinghuan@mail.ustc.edu.cn>, 2026-10-31) used the
+wrong device-tree list address: it was sent to
+linux-devicetree@vger.kernel.org, which vger rejects with
 
-Describe the PCIe and UART connections through the M.2 connector, the
-3.3 V supply, the W_DISABLE signals and the PCIe reset signal.
+  550 5.1.1 <linux-devicetree@vger.kernel.org>: Recipient address rejected:
+  User unknown in virtual alias table
 
-The Wi-Fi PCIe path was tested with a QCC2072 module. The overlay was
-applied, the link trained at Gen2 x1, the endpoint enumerated, and ath12k
-started MHI. The Bluetooth UART and HCI path was also tested and the
-QCC2072 controller initialized successfully.
+so it never reached devicetree@vger.kernel.org.  The patch text below is
+unchanged, byte for byte, and is the same text as in the 0/2 cover.  The
+sibling 2/2 went to linux-usb and linux-arm-msm and is archived there; this
+resend is only about putting 1/2 into the devicetree archive.  The subject is
+kept as "[PATCH v5 1/2]" so it still lines up with that cover.
 
-Link: https://lore.kernel.org/r/20261020020925.3915548-1.linghui.wu@oss.qualcomm.com
-Co-developed-by: Wei Deng <wei.deng@oss.qualcomm.com>
-Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
-Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
+AI-assistance disclosure: this patch is drafted with an AI assistant and
+edited by me; the author reviewed, built and tested it, and the content and
+the measurements are the author's own.
+
+Two connectors behind one controller only take the mux path when the
+controller node itself carries "usb-role-switch": dwc3_get_dr_mode()
+otherwise forces dr_mode back to peripheral, dwc3_get_extcon() skips the
+role-switch branch and dwc3_drd_init() never calls dwc3_role_mux_init().
+The binding accepted such a DT, so a DT that passed the schema check did
+not describe a DT the driver could act on.  Require the property whenever
+port-select-gpios is present.
+
+Two more holes in the endpoint schema are fixed at the same time:
+
+  - the hs-port patternProperties only covered endpoint@0 and endpoint@1,
+    so an unnumbered endpoint or endpoint@2+ escaped the
+    unevaluatedProperties: false rule of the graph endpoint.  Use the same
+    endpoint name pattern as graph.yaml so every endpoint is validated.
+
+  - the mux-state complementarity was expressed with two independent "if
+    const: 0" blocks, which only rejected two zeroes; two endpoints both
+    claiming mux-state = <1> passed validation.  Express the pair as oneOf
+    so exactly one of the two assignments is accepted.
+
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 ---
-Changes in v2:
-- Drop regulator-boot-on and startup-delay-us from the 3.3 V regulator.
+ .../bindings/usb/snps,dwc3-common.yaml        | 105 +++++++++---------
+ 1 file changed, 55 insertions(+), 50 deletions(-)
 
-Changes in v3:
-- Drop the unused reg override from the disabled TC9563 node.
-
-Changes in v4:
-- Build a composite DTB to validate that the overlay applies to the base DTB.
-- Add a label to the WCN3988 PMU and reference it from the overlay.
-- Explain that the product design does not operate the onboard and M.2
-  connectivity paths simultaneously.
-- Update the validation status after testing Bluetooth UART and HCI.
-- Restore the TC9563 reg override after runtime testing showed that the stale
-  OF node otherwise matches the directly connected QCC2072 endpoint.
-
- arch/arm64/boot/dts/qcom/Makefile                 |   3 +
- .../boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso  | 106 ++++++++++++++++++++
- arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts       |   2 +-
- 3 files changed, 110 insertions(+), 1 deletion(-)
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 71f9822ad942f3854f4ccaba9cad484298c994aa..c61bf4577d0e67a12e17f7537a0b4dc91c8e5150 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -427,11 +427,14 @@ shikra-cqm-evk-hdmi-dtbs	:= shikra-cqm-evk.dtb shikra-cqm-cqs-evk-hdmi.dtbo
- shikra-cqs-evk-hdmi-dtbs	:= shikra-cqs-evk.dtb shikra-cqm-cqs-evk-hdmi.dtbo
- shikra-iqs-evk-dlc-panel-dtbs	:= shikra-iqs-evk.dtb shikra-iqs-evk-dlc-panel.dtbo
- shikra-iqs-evk-lvds-auo,g133han01-dtbs  := shikra-iqs-evk.dtb shikra-iqs-evk-lvds-auo,g133han01.dtbo
-+shikra-iqs-evk-m2-wifi-bt-dtbs	:= shikra-iqs-evk.dtb shikra-iqs-evk-m2-wifi-bt.dtbo
+diff --git a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
+index 6b06b0027b..b23d5d8d74 100644
+--- a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
++++ b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
+@@ -31,7 +31,9 @@ $defs:
+         enum: [0, 1]
+         description:
+           Logical level of the port-select GPIO which connects this
+-          connector to the shared High Speed data bus.
++          connector to the shared High Speed data bus.  The two connectors of
++          one controller must use different levels; the driver rejects a
++          device tree where two connectors claim the same one.
  
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk-hdmi.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk-hdmi.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-dlc-panel.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-lvds-auo,g133han01.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-m2-wifi-bt.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-m2-wifi-bt.dtbo
+     dependentRequired:
+       usb-role-switch: [mux-state]
+@@ -42,7 +44,7 @@ $defs:
+     unevaluatedProperties: false
  
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
-new file mode 100644
-index 0000000000000000000000000000000000000000..7d65e67bfcc2b05259e01e658d007274cc4f13c4
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
-@@ -0,0 +1,106 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&{/} {
-+	m2_keye_3p3: regulator-m2-keye-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "VREG_3P3_KEYE";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&qps_gpio_expander 6 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	wifi-bt-connector {
-+		compatible = "pcie-m2-e-connector";
-+
-+		vpcie3v3-supply = <&m2_keye_3p3>;
-+		w-disable1-gpios = <&tlmm 61 GPIO_ACTIVE_LOW>;
-+		w-disable2-gpios = <&tlmm 60 GPIO_ACTIVE_LOW>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_pcie_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&pcie_port0_ep>;
-+				};
-+			};
-+
-+			port@3 {
-+				reg = <3>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_uart_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&uart8_ep>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&wcn3988_pmu {
-+	status = "disabled";
-+};
-+
-+&i2c3 {
-+	qps_gpio_expander: gpio@3c {
-+		compatible = "nxp,pca9534";
-+		reg = <0x3c>;
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+	};
-+};
-+
-+&pcie {
-+	iommu-map = <0x0 &apps_smmu 0x0800 0x0 0x1>,
-+		    <0x100 &apps_smmu 0x0801 0x0 0x1>;
-+	vddpe-3v3-supply = <&m2_keye_3p3>;
-+};
-+
-+&pcie_port0 {
-+	compatible = "pciclass,0604";
-+	reset-gpios = <&tlmm 118 GPIO_ACTIVE_LOW>;
-+
-+	port {
-+		pcie_port0_ep: endpoint {
-+			remote-endpoint = <&m2_e_pcie_ep>;
-+		};
-+	};
-+};
-+
-+&tc9563 {
-+	reg = <0x1ff00 0x0 0x0 0x0 0x0>;
-+	status = "disabled";
-+};
-+
-+&uart8 {
-+	bluetooth {
-+		status = "disabled";
-+	};
-+
-+	port {
-+		uart8_ep: endpoint {
-+			remote-endpoint = <&m2_e_uart_ep>;
-+		};
-+	};
-+};
-+
-+&wifi {
-+	status = "disabled";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-index e4058a58d05f3d7bf2f69ab945ce5eb6d6635320..779247b7f80af61a394d0dbdec23411ce5d5cb04 100644
---- a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-@@ -164,7 +164,7 @@ vreg_wcn_3p3: regulator-wcn-3p3 {
- 		regulator-always-on;
- 	};
+     patternProperties:
+-      '^endpoint@[01]$':
++      '^endpoint(@[0-9a-f]+)?$':
+         $ref: '#/$defs/hs-endpoint'
  
--	wcn3988-pmu {
-+	wcn3988_pmu: wcn3988-pmu {
- 		compatible = "qcom,wcn3988-pmu";
+ allOf:
+@@ -61,70 +63,74 @@ allOf:
+   - if:
+       required: [port-select-gpios]
+     then:
+-      required: [dr_mode, ports]
++      # The mux path is only taken when the controller itself carries
++      # "usb-role-switch": dwc3_get_dr_mode() forces dr_mode back to
++      # peripheral, dwc3_get_extcon() skips the role-switch branch and
++      # dwc3_drd_init() never calls dwc3_role_mux_init() without it.
++      required: [dr_mode, ports, usb-role-switch]
+       properties:
+         dr_mode:
+           const: otg
+         ports:
+-          required: [port@0]
++          # Each connector is one port with a single endpoint: the mux-state
++          # property on that endpoint says which level of the port-select GPIO
++          # reaches it, so two connectors are two ports, not two endpoints of
++          # one port.  port@1 is the SuperSpeed lane of the PHY and is already
++          # described by snps,dwc3.yaml, so the second High Speed connector
++          # lands on port@2.
++          required: [port@0, port@2]
+           properties:
+             port@0:
+-              required: ['#address-cells', '#size-cells', endpoint@0, endpoint@1]
++              $ref: '#/$defs/hs-port'
++            port@2:
++              $ref: '#/$defs/hs-port'
++
++          # The two connectors must claim opposite levels of the port-select
++          # GPIO; requiring both ports in every branch is what makes the two
++          # cases mutually exclusive for oneOf.
++          oneOf:
++            - required: [port@0, port@2]
+               properties:
+-                endpoint@0:
+-                  required: [usb-role-switch, mux-state]
+-                endpoint@1:
+-                  required: [usb-role-switch, mux-state]
+-    else:
+-      properties:
+-        ports:
+-          properties:
+-            port@0:
+-              patternProperties:
+-                '^endpoint@[01]$':
++                port@0:
++                  $ref: '#/$defs/hs-port'
+                   properties:
+-                    usb-role-switch: false
+-                    mux-state: false
+-  - if:
+-      properties:
+-        ports:
+-          properties:
+-            port@0:
+-              properties:
+-                endpoint@0:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 0
++                port@2:
++                  $ref: '#/$defs/hs-port'
+                   properties:
+-                    mux-state:
+-                      const: 0
+-    then:
+-      properties:
+-        ports:
+-          properties:
+-            port@0:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 1
++            - required: [port@0, port@2]
+               properties:
+-                endpoint@1:
++                port@0:
++                  $ref: '#/$defs/hs-port'
+                   properties:
+-                    mux-state:
+-                      const: 1
+-  - if:
+-      properties:
+-        ports:
+-          properties:
+-            port@0:
+-              properties:
+-                endpoint@1:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 1
++                port@2:
++                  $ref: '#/$defs/hs-port'
+                   properties:
+-                    mux-state:
+-                      const: 0
+-    then:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 0
++    else:
+       properties:
+         ports:
+           properties:
+             port@0:
+-              properties:
+-                endpoint@0:
++              patternProperties:
++                '^endpoint(@[0-9a-f]+)?$':
+                   properties:
+-                    mux-state:
+-                      const: 1
++                    usb-role-switch: false
++                    mux-state: false
  
- 		pinctrl-0 = <&sw_ctrl_default>;
+ properties:
+   port-select-gpios:
+@@ -536,4 +542,3 @@ required:
+ 
+ additionalProperties: true
+ ...
+-
+base-commit: fd69bd54e328c407b1853378b25d15803d3453fa
 -- 
-2.43.0
+2.53.0
+
