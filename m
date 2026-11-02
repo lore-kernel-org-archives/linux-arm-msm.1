@@ -1,105 +1,105 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793657066;
-	b=cUrhTOl9FO9ZxQujhLawFcdgNs2DusnKTNKYbVYBfowAhngkkclR+tTCrZAwHrgR87fj
-	 DgyecQEBO8q8se8lBzPNnEwAVHhd0QZL0rWCr0eFLmCiVKqtNGVRzdvklnxUIsld0zC0s
-	 p3tIkypE4A0gn4Q1JQsAbLFTmEvo1VvrC38xvl8EorvxJalAXTQzlRfzbXR8m4NJXgWNc
-	 VPQxe5vHnBC0Y+EdSAauRbH28PcV/ePfDNLdmsA/mt1nJjjwIjQh0uHhEVGZp9huExi/P
-	 zLGqN8fBlvSfp8b0Yc2J82Ty84rK7RrR31udfgKoVEHGiDHsgoCFucO2gM7aAosVI1Q==
+	t=1793657068;
+	b=uPFJ/MGpOlPlsXHOGDNPXNCuBCIJCbm+qhk5ezNPZH2AjthOoK8s6Kvw4XQhAg4deWcA
+	 gn50lD0+KG2x4ua0H6yeUiPVCxXlFlUwnF/Wo+tT+0a3C9PLPeM5yR7X4GbKVTcKYC0Cr
+	 ItdgJ/z29+aqK8BvyF6wxe752sxoFSyMneedlBzmk/DY39qfMqZxnMwxKw9WWUjkAL+dN
+	 x8wg52sPhAds0sU9AjTzcF8KyhDp/WLVFf+DPW5f7JEB4FqW/dn/N1Xuc+73RjGvFQhdI
+	 WhWkMIEKiAcSlzG+89jwHIEDAyM55dY4cBD0G0O8+2dCSJg158ASkwOwPs0vCDMslIA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793657066;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793657068;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
 	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=LhftlRe/CSUkquCFXDIS3K2FDp/8Q4a7FKAFxyGfNM8=;
-	b=zqt+ZMCOEb30LORid6Enjme2VvBrhiJF4HHHpY1Ze927B/XUqH36+Sb10Ya3a9btx07M
-	 UYxrYG/nEDAE3b7jsh6UVg2ydXaUH3IzYBQ3BfGkL/Z/tiIsWWsQ4a1OF7PVFW/RbXRcr
-	 oZTGsk6l5/FPkQEjqeuJoH5LxwARpUO3jLb+XWsES08EjPU3SmxZQF0Umwsa8ciGAvXQH
-	 9dlJhrZbRe7c9b21LOq3bHr7AKl8OKawZ4EgC0RAnerTbgZb9+FtecozL4DA8ZyIpSLTa
-	 tBc3pso8G5OnkdvnLhYrSM5sOXCINyh8snfIn6+aXFfC3vLBfTcga+O3tFA7nen/nFQ==
+	bh=UVX7b6ntdrV+6wjxMqUvH3ly/pZHpls0n+hd4y9AHHY=;
+	b=wK8SoFZw9gAybZJxFBoflEIERk+03Mq3nVdB7MjyBlCKTQuaZj3WsZPKVOVfm9wuI2AQ
+	 wLzB4XyiVGUmoPfU61I74w2qS48/J2ktim5u7SeAllwrb6uyAM1MzqoVCbK0ruEFCeGap
+	 F0EAyXd+W5mFP9ln9S5+W8LHozJrnU4Ur06cFqAQLQH+D0fEVwkcI0xedv22hMhAvkQx1
+	 IbtD9fNs1z1O5Qnu60QwlVoCFfyDc9U/JACPR1VP3PqIecgt0u/UeYs5Uwj/L6kqxEV78
+	 Ukv7mq4bbmQXVCMrbjsohphPc8U6LePZlQT7w3ow4JosxdA6rQDzahFTxYVdP4agdiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Tgc6s1DL;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dKlucL34;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QkmAvFQB;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JCdYQQ2O;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6205606A33D
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 22:04:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E6205606A33D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E2E8606D80A
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 22:04:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3E2E8606D80A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Tgc6s1DL;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dKlucL34
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2K5vpC3292390
-	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 22:04:25 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QkmAvFQB;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JCdYQQ2O
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2K6JFv166313
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 22:04:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=LhftlRe/CSU
-	kquCFXDIS3K2FDp/8Q4a7FKAFxyGfNM8=; b=Tgc6s1DLZF1+E7qBWHc6/9jfRNr
-	jljhhd4stOaEuwbamP0X9tI4+c5iszgkoRx5uYHx0+lHnb5mDZZvpMfpxaxDinVv
-	yGbfCpHpY0a+VtcLXSVfamuZkw1dRnQXd2OPxeEneQ45DQnRil6BrRFiXRNavlVD
-	YEgJjIu+NZsGENap8T+4DI2QV/QJjHFfH5JO9bvKQVRqCOpAkUs3BuosltzeB+o6
-	BJnSK0JIlxgha0KXThLzPVNamHGvuExgx8tejw+/w6fIebJ3cdHKwn8VHU0mmhv1
-	+Pg5ZfT73AgG5ceO3UDlM2kO/MF2vmWig8yserdTADb86iinLbAll0QDesw==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hq07egp52-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=UVX7b6ntdrV
+	+6wjxMqUvH3ly/pZHpls0n+hd4y9AHHY=; b=QkmAvFQBgUfjfXijqq/A5REgF6Y
+	jC9bbnv1NTlDXxqSq2C0Wq15r6gzGRQStGF0ZWFegV08bMzKigcGapXV9BUrGr9I
+	2DMkVScXZ8XWFYCOqlcpHCn+WLj4OWjxGkiVTHfBN+jidTDf16MuvgU1uXVWP4bT
+	0w5Jk4wp/ruk8vCeOa6gtl0mgnt9P6Qvktxy+BgUh187OIRZCdMktGTsV090pKdu
+	EyRdet7RYIFIyZKZP9vLg54fyBhX9M1uoQOsTbvagQ4eXr18zSiodfALG8XiCTCL
+	fao6uLW9+vk3vg48FMLrIZlkZ70p0ZQrNN+JsBR/HGOyM2I1E1Lajt3D0Iw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpqfrk4gn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 22:04:24 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-88c768885b4so3801922b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:04:24 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 22:04:27 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3ade5b3ae97so57581a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:04:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793657064; x=1794261864; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793657066; x=1794261866; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LhftlRe/CSUkquCFXDIS3K2FDp/8Q4a7FKAFxyGfNM8=;
-        b=dKlucL34B6tC1rDI61fllwLVtgMT4A+HmbUyRdwzoKma9q+6CwJTXUtOYHzo+gTC4a
-         HW+kGiHRiBjMGoHS+ZLJLCIcghgzHpDMdqaVFl94N4QhqrIz6Mg6lHyjOSJLOdp2K/3a
-         8udRwafuzt24xMV7x8qOvt3WT5iSNeeuRIeo45daop/PvMWSlByUvWCt7iTIH6e6r2dk
-         nlwv4NkZIa5naADUgd5a3HLh5yKwALoZTbSjrwniNvVQS092x2BVmUH8V8eDbm+dgCMt
-         6GZnV5ivQksRoyqqSk6Oh1HjtKkffyyEkJdrpRczGHcdbG0sWm95GDxk6cSvTnkecAL8
-         SJ7w==
+        bh=UVX7b6ntdrV+6wjxMqUvH3ly/pZHpls0n+hd4y9AHHY=;
+        b=JCdYQQ2OBf7Z31HsJ0eHMm35Pv175iChZsctKnDiDsjTX4p986bkQZT38/aFPdae0K
+         HYOoxkir9k0GyLhZmai/7k5qo2Dy1zyQ1t1wHFkGLo9Pt/0GzeDVcX7ugLCT9F7DjJZw
+         X2o/Pi7hu1ZiJWANqpgrRCLj9d4+QX++KydyHjnrNKEC7z/gEC/iC5+eC8dN87tQzlRu
+         HuCoQEMngtXvFOK7iSr0k/qv657kOAx5pID9m1R44Dpq2bG9NMDvXV/y79ZaVyH38z56
+         Mww8ABkgtQ97IiAKY/VrT9qMBGVIkiycbxbJNoylWD/MW2jdLaR3EpUst0aW7GecKQPk
+         mRVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793657064; x=1794261864;
+        d=1e100.net; s=20260707; t=1793657066; x=1794261866;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LhftlRe/CSUkquCFXDIS3K2FDp/8Q4a7FKAFxyGfNM8=;
-        b=m6CWATisnZ+zc0zcDHimr5Tc7FJjplWKu6JlslgcPa7Hu51cLqZux8cYdyE2ZIFDqZ
-         /nWxo7sXMedDs68EBgVCIkKdMbJ+VjR/dkXZk83ib3TXRKurBqE2ZClbiblMbK/cizeL
-         bjCcVap7jiLKYoBaAuMXnzuFpR5af3e+H9EOjjZPrPWoD4LiTaszmjqxiQSYNWkeCckh
-         Tk4ATUOv9Uyhuk6sM6t7MKDn4qQ/jyWNr/WVti1gtmMFlEj4sY0RjAOez10IuJ4swMJH
-         uCftTSRz/WeXUWxD1wEyqqFovSGoy+0PIeGC28vtpqLgr17yT/Cnu6WauxtqbBbuY8I7
-         yrlQ==
-X-Gm-Message-State: APuU4Z84eU2cthI3IGc2oVQw1CkKL9z5HJRwj/o8L9x1zBUGlY342rR+
-	lhNPEGqro5RZ/F6wYyF8iU5+roWgveytoPcMep8qTBGqISZc0yAzo0h2+KUzPymK8J4F03qpTpM
-	ku8OMqthoafB5cVDz4KT5FGTzzCJi9UbYbohlSMFMGB5LTZ5g3gqFcctVTOBoG7xoj2bU
-X-Gm-Gg: AYBFou1dmAjbfcetSACvgj4FGxTkGTr7X7jYRKtCna1Tlj2Y05E3k6AP5kjSSYt+dFt
-	o5bZgkIpvSv9rPVM00eLNf76e2k0xLE+GWTU66j3S/7GXLYIHl8/5jBeX3bN+yXkcSDUWIUh8uA
-	bZOolia7e/CvRLlENkeIX1RrLZma2IyNvfSlWwQPQ2KRtxl+vLr8+09nQsZqGDRMxhYVYqNgfYl
-	Swu+0yKI17hZkuX+Yy/5CWhBO9JAecWR9koFcrVEOjT98ia5WlqDzltMwD7oP7K0UkI6c8ybgeU
-	WVOJ9ITvwjvBOhfivA47Bt2VlJsLTi3lIespiQ2h7MKcmVlLeBos6OgMZyhPC6ck7jy2h8TzLOy
-	4E2Y+eK2GYC5hkJAtWbpOl4g+5SwkplvsxacTtUTFX3c4KlsIhS1nC8jb+iOgRMZar4oTxg45+u
-	KWI93jBM1C81YY2C1gEQVxHQ==
-X-Received: by 2002:a05:6a00:1bc6:b0:882:8aea:fbc with SMTP id d2e1a72fcca58-8a9be1a0cf8mr10090908b3a.16.1793657064272;
-        Mon, 02 Nov 2026 14:04:24 -0800 (PST)
-X-Received: by 2002:a05:6a00:1bc6:b0:882:8aea:fbc with SMTP id d2e1a72fcca58-8a9be1a0cf8mr10090880b3a.16.1793657063749;
-        Mon, 02 Nov 2026 14:04:23 -0800 (PST)
+        bh=UVX7b6ntdrV+6wjxMqUvH3ly/pZHpls0n+hd4y9AHHY=;
+        b=dXH9W5lM9xwot5VQRkgYX876PCJoGG4SPbXXfU++qzz/7V0wfQDsHEZ0NA+Tcr7EzW
+         o6RK88y68LNbUaYuOLYXHsX9hSg54nyVy4kXPA1tmhsFSevgLYyXj+XMJKl5GNV5kNRF
+         LPz94Y3E8ADNTTb+Fb7bTf6kxtopxsqfVCT5XsXjGRDJSi1QO7RBkjSMaIz8LRhp6ooY
+         CP2qzDgp0eKIGE7bhbrjRiOrmESHY+OnTqUUwlIwYi1YgopfYDjb52yCNHVYF7xpZDuQ
+         VT+yWnASEQsaTvSQzMYQQZOqSdhmDniyxklKCAd/Js9s9GuLmcp9GpmsLVCtJYv5FW0+
+         gE4g==
+X-Gm-Message-State: APuU4Z9o7fK/oX7MD792/7G6Lp1LkmMD4AhYFodOx1GyQNfPTasi6mk6
+	WOQVh4khcLm/9OugA8CG4qVP2ckKIEfezEdgu9ygv9XB6SlkIKRkNrwvQVWT+fGW7LX9S3rZDVq
+	mMQUnr+CBTE0pgmNIUNPtAzM90Lc2aATYfnHBo/Zv9HVK5NozI22Vty2I7Y/ha3CCNPuR
+X-Gm-Gg: AYBFou2NH5RoBItCutdPRcIWLMZy97IPhAwlZYEIzI6X0HNpBCLC+EcasX7HOZErFc9
+	Z4KLG4xh2TBwR6Q5LYxcGgK16Tx0Yf+2q756zfK0t8MfGN7TuDCeGaQ+HUXqc6iUE6IwqVPzhhv
+	PdKv0GedoOSlvtjrdi9+x5Zydh1CfE1lc8MDCom2Zf0m8gEWHI+pFvbEVrLqeDcA6ve/9bjauR5
+	m3wJDcy8M/8dGZ6P892T9v6gmgpI8hHHTZu1ZgSpdSI9tKNyIDuiST9LME9jVIFukpB1YDzZs2H
+	h/UZ4l3evEROWrAn/hFimuY7LcOKYObIoBRUFqi7mexVqvpyKy8HlHw8SvrxFxigeSDeN9HJaew
+	dGrOjopCwd9BqAsuJchKlhGe9+/jtDQje6YMLwA7xH38GgTEajBnupUvKP5DcdhXlajPLYvZe1k
+	xC2hQYABN2YPnUxYsywE31Lg==
+X-Received: by 2002:a17:90b:4ad0:b0:3ae:3e9b:5265 with SMTP id 98e67ed59e1d1-3ae897585bamr6338410a91.26.1793657066448;
+        Mon, 02 Nov 2026 14:04:26 -0800 (PST)
+X-Received: by 2002:a17:90b:4ad0:b0:3ae:3e9b:5265 with SMTP id 98e67ed59e1d1-3ae897585bamr6338379a91.26.1793657065968;
+        Mon, 02 Nov 2026 14:04:25 -0800 (PST)
 Received: from localhost (c-67-168-198-145.hsd1.or.comcast.net. [67.168.198.145])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8abab0c6c6esm2037507b3a.48.2026.11.02.14.04.21
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b07c8329afsm953756a91.8.2026.11.02.14.04.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Nov 2026 14:04:21 -0800 (PST)
+        Mon, 02 Nov 2026 14:04:25 -0800 (PST)
 From: Rob Clark <robin.clark@oss.qualcomm.com>
 To: dri-devel@lists.freedesktop.org
 Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
@@ -116,9 +116,9 @@ Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
         Marijn Suijten <marijn.suijten@somainline.org>,
         David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
         linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v5 02/15] drm/msm/a8xx: Export aperture helpers
-Date: Mon,  2 Nov 2026 14:02:46 -0800
-Message-ID: <20261102220405.30730-3-robin.clark@oss.qualcomm.com>
+Subject: [PATCH v5 03/15] drm/msm/a8xx: Add a8xx_aperture_acquire_raw()
+Date: Mon,  2 Nov 2026 14:02:47 -0800
+Message-ID: <20261102220405.30730-4-robin.clark@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261102220405.30730-1-robin.clark@oss.qualcomm.com>
 References: <20261102220405.30730-1-robin.clark@oss.qualcomm.com>
@@ -132,86 +132,111 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA4NyBTYWx0ZWRfX7e0pPUO4CdGV
- Z6fFbUxZrGxASCuvR5YIYk5lVIgcpcF2Q6v1vrIVfBeczUW7XQ6z6IULEr7iB9dA8POA8AJ41Ct
- EePkQgA/pMwvn0aUHZo+boIvfXh+UCJzhWwfKNWh3u2mbgFi36lg5gsg6/pnwJtruxvNtE6SQpX
- Jw4mn5z0ptn4PLRtszvJXTHnzQs0rBd271wGOGDC+2rzQmk17/YybseSnCt9ZOqGjS8qbFf+2jw
- iusylAkd7vAj96ySiK2PWduvCezR83BzkDnMXlHvjWYLduSQG2dwkXM3gbXWwb3UeVGX8J+a1Ob
- QYn/AaytR1qwEWU+jRxgfwXwrbX+VfK/erxopagZlQtal04UNMuuDIbcVjAoAUFwkr4btghmTGe
- utBqnFtVMaXfUIFaFqUA8RGOt6+8aIDrlqVzJFQl7JkoNbLyh2nmooZuSsIpocMSF0HAXA5+wyd
- K3xD/kVWAhADsIWEQ4w==
-X-Proofpoint-ORIG-GUID: ZI9u0F0TI1UReR-xlAy25Sacci8IZGUw
-X-Proofpoint-GUID: ZI9u0F0TI1UReR-xlAy25Sacci8IZGUw
-X-Authority-Analysis: v=2.4 cv=B/wsQ+tM c=1 sm=1 tr=0 ts=6ae908e8 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
+X-Authority-Analysis: v=2.4 cv=HMJWhYtv c=1 sm=1 tr=0 ts=6ae908eb cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=58qa3DtRz-ucCGMA3goA:9 a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA4NyBTYWx0ZWRfX2mvIr4Sk5zpy
- sI7ODXUce5TWNod/B6okDW9kMrDwegeFk2aIrwTSNG8yUDftukSUed4Kp928l6xPxAIiUyhaPXS
- fsGJECLGJJwIf/CNZrHZS2hIf2v7M9w=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=qGl0e74_xy6xiHm5yPkA:9 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: CmxJrE0H1s3RRppQJx-LVDxFieoOta1Y
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA4NyBTYWx0ZWRfX7+g+qCksIxf6
+ 4uPtjoyMZcm7amXJV+TfklZaaUgWdiUsp3zhZti6yRbd6L9dXFZFbgsFsgqdPt1Qpsf8UK7Li+Z
+ FE2E3GVWYTQP8kFpyaFPqVYayymVKnY=
+X-Proofpoint-ORIG-GUID: CmxJrE0H1s3RRppQJx-LVDxFieoOta1Y
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA4NyBTYWx0ZWRfXymCNSocumbFn
+ EcGXhFeGUSevu6rb4EuUy3M/Ec2mUfrTwjGdhTDRf2dC43hleQLzKX2pSEdgKMNBAdnsoalGK5p
+ LqSMBXJ4KYOSfSlzgUrnBh3+wvja7pR05li58HkiXd4RuKyuQZ7oilWoAH7tT5sU9Kgbhxs9mod
+ A0ppTmK89iX8mFm2BNwV7yJZ6e6t8iXD3/cVGR+pOR1a1a24MGMhd2aVlaJA/HM4JdyuXTFgV8c
+ /HvTcA4n7//azcq+GKgV7LoGTlTPw0gyOpOfbdaqp5GNIl80MCkYJrGBExVsnXMCz0D88KDdmAV
+ CihtZyNctrOEjZ6+v2GMQxcTdFptsniqFU4C43iSKDcrkMj7JbiIf5otu4CG7CeGvfk01+CGR6p
+ UDBy/FUdCio3emACU/hfgfgQ9C4xMAC5qxhQ5pGMrzaG0YGP5wz7D4nNEn+t99zTknXH3FDRE8C
+ g4CmtZoxT1yCWHXbImg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-02_06,2026-11-02_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0 clxscore=1015
- impostorscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020087
+ priorityscore=1501 lowpriorityscore=0 impostorscore=0 malwarescore=0
+ phishscore=0 spamscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611020087
 
-We'll need these from gen8 gpu state snapshot code as well.
+The snapshot code will need more control, setting additional bitfields.
+Rather than add a list of additional args, add a helper to acquire the
+aperture which directly takes a reg value.
 
 Tested-by: Alexander Koskovich <akoskovich@pm.me> # Milos (Nothing Phone 3a)
 Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/adreno/a6xx_gpu.h | 3 +++
- drivers/gpu/drm/msm/adreno/a8xx_gpu.c | 6 +++---
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.h |  1 +
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c | 21 +++++++++++++--------
+ 2 files changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
-index cb0ac27dacba..46e2b921f4ff 100644
+index 46e2b921f4ff..83c0fe39a44e 100644
 --- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
 +++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
-@@ -349,6 +349,9 @@ void a6xx_flush(struct msm_gpu *gpu, struct msm_ringbuffer *ring);
+@@ -349,6 +349,7 @@ void a6xx_flush(struct msm_gpu *gpu, struct msm_ringbuffer *ring);
  void a6xx_flush_yield(struct msm_gpu *gpu, struct msm_ringbuffer *ring);
  int a6xx_zap_shader_init(struct msm_gpu *gpu);
  
-+void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, unsigned long *flags);
-+void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags);
-+void a8xx_aperture_clear(struct msm_gpu *gpu);
- void a8xx_bus_clear_pending_transactions(struct adreno_gpu *adreno_gpu, bool gx_off);
- int a8xx_fault_handler(void *arg, unsigned long iova, int flags, void *data);
- void a8xx_flush(struct msm_gpu *gpu, struct msm_ringbuffer *ring);
++void a8xx_aperture_acquire_raw(struct msm_gpu *gpu, u32 val, unsigned long *flags);
+ void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, unsigned long *flags);
+ void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags);
+ void a8xx_aperture_clear(struct msm_gpu *gpu);
 diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-index ecf15a8f68de..afb115c3d7eb 100644
+index afb115c3d7eb..f2b635497811 100644
 --- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
 +++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-@@ -32,7 +32,7 @@ static void a8xx_aperture_slice_set(struct msm_gpu *gpu, enum adreno_pipe pipe,
+@@ -16,13 +16,10 @@
+ 
+ #define GPU_PAS_ID 13
+ 
+-static void a8xx_aperture_slice_set(struct msm_gpu *gpu, enum adreno_pipe pipe, u32 slice)
++static void a8xx_aperture_slice_set(struct msm_gpu *gpu, u32 val)
+ {
+ 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+ 	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+-	u32 val;
+-
+-	val = A8XX_CP_APERTURE_CNTL_HOST_PIPEID(pipe) | A8XX_CP_APERTURE_CNTL_HOST_SLICEID(slice);
+ 
+ 	if (a6xx_gpu->cached_aperture == val)
+ 		return;
+@@ -32,14 +29,20 @@ static void a8xx_aperture_slice_set(struct msm_gpu *gpu, enum adreno_pipe pipe,
  	a6xx_gpu->cached_aperture = val;
  }
  
--static void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, unsigned long *flags)
+-void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, unsigned long *flags)
++void a8xx_aperture_acquire_raw(struct msm_gpu *gpu, u32 val, unsigned long *flags)
+ {
+ 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+ 	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+ 
+ 	spin_lock_irqsave(&a6xx_gpu->aperture_lock, *flags);
+ 
+-	a8xx_aperture_slice_set(gpu, pipe, 0);
++	a8xx_aperture_slice_set(gpu, val);
++
++}
++
 +void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, unsigned long *flags)
- {
- 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
- 	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
-@@ -42,7 +42,7 @@ static void a8xx_aperture_acquire(struct msm_gpu *gpu, enum adreno_pipe pipe, un
- 	a8xx_aperture_slice_set(gpu, pipe, 0);
++{
++	a8xx_aperture_acquire_raw(gpu, A8XX_CP_APERTURE_CNTL_HOST_PIPEID(pipe), flags);
  }
  
--static void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags)
-+void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags)
- {
- 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
- 	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
-@@ -50,7 +50,7 @@ static void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags)
- 	spin_unlock_irqrestore(&a6xx_gpu->aperture_lock, flags);
- }
- 
--static void a8xx_aperture_clear(struct msm_gpu *gpu)
-+void a8xx_aperture_clear(struct msm_gpu *gpu)
- {
+ void a8xx_aperture_release(struct msm_gpu *gpu, unsigned long flags)
+@@ -74,8 +77,10 @@ static u32 a8xx_read_pipe_slice(struct msm_gpu *gpu, enum adreno_pipe pipe, u32
  	unsigned long flags;
+ 	u32 val;
+ 
+-	spin_lock_irqsave(&a6xx_gpu->aperture_lock, flags);
+-	a8xx_aperture_slice_set(gpu, pipe, slice);
++	a8xx_aperture_acquire_raw(gpu,
++		A8XX_CP_APERTURE_CNTL_HOST_PIPEID(pipe) |
++		A8XX_CP_APERTURE_CNTL_HOST_SLICEID(slice),
++		&flags);
+ 	val = gpu_read(gpu, offset);
+ 	spin_unlock_irqrestore(&a6xx_gpu->aperture_lock, flags);
  
 -- 
 2.56.0
