@@ -1,56 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793627366;
-	b=E4lvdXcNqp8l3L+1fdwho7IFbj+SNWybHFco1N4310nzxwpseVYgCZjJwES3zaEeuWXm
-	 vjmAPbnQ2twv9KbNxcPmuW6rW6WAoQIcC2ii4XagdZ/7GejIXMc/1vj2lgEw+nhG6+4ZZ
-	 Iy4Wp6Umrwu8z4kFuNPSF18Xxw9+Yl2j50/N5QqHier/oFpoSSkyzPz+wyPKV2Rwqxr+4
-	 Ood7B8hgpz/qYTnJGn7I3v8LALCpEXZh8FtATNUmiV87s+MVckjSwQrKcq7+4rmqCVEoL
-	 8s7Gb5vcOTJgJLW/z5X9wWUhhpvx4wk2UzOX38HuJGVohHguGsyS1rk739lxQrIv/Ag==
+	t=1793627484;
+	b=Qmw+dqAbzVYEE8lIGWePn61vJbg2KNA+ZqGVOodKdJoHDakOTx7eMXg6eVdAEjdZvjqF
+	 x1318g6lnKaYjtz04Ykpz3SHL2IXQ2n9on6RdRORWBRnc62AG3kSYMHNkawRdQD0HnM4t
+	 ocMZKT5cYIRfZlKsGZXD4a7VvnP0gwOQW0lmOob0jWIQbSPqU5nqDeHqy9CeKZ8GPa7oL
+	 RSLMnNGpMrqaZsjnrQ4FXRvTzPG1HBg8dIjL45ppsXlWNi1KdJ1p5wEkab3DIzRF2AzH6
+	 8yddE75dCMn1PG6A/b8AtIWk2PXtZlJrztrws+Qf4zj28RT7/KBt47PTdsvXnbh03HQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793627366;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=ZoNcFizH5dKOp0YIVYbtqblKUqnZk6xJRXp5BztCyQ0=;
-	b=u3UkqlrBP8NUCznt0oOlKQrMWAMzLrHcjPAh92GC59LGobX1MgOSmHhy1Wmc0U+KdYe/
-	 RoO5aKXMgbs3XNX4lZ0c1gBynfz1h/RL+zN22NxdlXYMmxu+4Zh9iVYN0s1aNumt+hv/h
-	 wYESF1TsTOzhFlf0SF+hEMVr0SixG0WA2/BzMZ4YMq/pELpcXPh18xAdn2I42b2PLAWk0
-	 V+AR+1o52rpMPW9yuCymOLQim+wdy+UGU0/680ZK66zsIOzXXEY1a7ELuPhSpaMQ62lvt
-	 Vbg7+f7SC+aBPyOFKayy+di4AWGHCCP5nGP3FECiC7dS7qaQzIvDms4kSvFx/k2MnsA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793627484;
+	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
+	 Subject:Message-Id:Date:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=gwiZBxBwh3YvFiuU3Wf/oJCU0MRFpiDJmH/bzEWCvwM=;
+	b=dWDNLEGvwsSFm2dyMfSFv1uZP5bEJcfi6aSKvra6gNQv9EGv0lepxZBmc64fxbkC2lps
+	 rQQZbbK0qILUT742dtU2L0prOy3HH+QgEZbAtK5G6x/z116XBcMMkyFIBce7PtGj0jdH0
+	 mNNavWwF8PDt8kd/x060VV4luhm+L797q5n9Xjl9iHOE0zsaKZCIFUwEBZSXTm0pmw2oe
+	 CsEGMYcpSfjLL84YQ5EwlkEV9SRielWII8LWHZBVgmHL4Ha0wUQc19O3sNM2yaSxxO/RQ
+	 yGDC3qFkFFbsL6R/DgV/WCHiqGovKROBJw6f/LXlbIprsPeWBx+c44RnA/7+IPEUgpA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9PDVmLq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iWFIDGp9;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 4DCA4606A327;
-	Mon,  2 Nov 2026 13:49:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3270560A2620;
+	Mon,  2 Nov 2026 13:51:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9PDVmLq
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 365901F00A16;
-	Mon,  2 Nov 2026 13:49:24 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iWFIDGp9
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E80CF1F00A22;
+	Mon,  2 Nov 2026 13:51:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793627366;
-	bh=ZoNcFizH5dKOp0YIVYbtqblKUqnZk6xJRXp5BztCyQ0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=G9PDVmLqB9i0K8RsTI7IF0b2yGRnhqx1N56d71vGUv58n/Gsth2uG711Y3+yAIBTm
-	 Fn9yho5o/NpNT3Ns1zg6Axl/NVnih2WvH3wGhlxvAJo31A1cSecBI2LwXIqBEUh48d
-	 BH/soBWS/TAlD6fprTjb9j8TWKHHeYxXzjU7yXWFGqkts9FYLC1u7L+1i1d/a5XaI5
-	 S4ZejZ4PDzX19AaFCRt8rYeUsMW/sG5XDB8D7wvS6YwYm7F9Y37RdyfS0YXK6GHAvD
-	 VN7/yFL5n/anjrzjNfVczdUXaetzP8w0JIm1QMwXFm6LAvc36xTfY42gH5RDThwPo1
-	 2wmRqrONPJCBg==
-Date: Mon, 2 Nov 2026 14:49:22 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>, Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>, 
-	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>, linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3] ASoC: qcom: sc8280xp: Derive TDM channels from DT mask
-Message-ID: <q67ybbvm5emd5dhiwqso35ql3ekkt2kepfisy5mdo3haw37bxw@h5unxgcpcjfz>
-References: <20261031082318.1146398-1-shengchao.guo@oss.qualcomm.com>
+	s=k20260515; t=1793627484;
+	bh=gwiZBxBwh3YvFiuU3Wf/oJCU0MRFpiDJmH/bzEWCvwM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=iWFIDGp9hjniYVb/JQRGpUqMritbyBXoWCCd/1eQreIaJucwXuWKjURmikJ5+SYmT
+	 4p8SUJkovwyjbbgy09m6fz10fd7KnRjpIfHeSPbkM5L7salg2vvBoGVbnfDgCCFM6x
+	 lR/fD5O6kT1h5MPcYsOHwppBNm1GLlud0GpElggnDghNn4d6jgQbfE+LsYW/kFyJp7
+	 FdInW28Goh5uixnj4rK8FyX5j0wTkDg7RSRzuoy64fCM3/IaHyXdIqBsilkXtEhSfN
+	 HFQAinAyk3yGMfhanqUrZOVYzS3M1E061moQqiNAJj1LUcv0qyVodCb5iSs0WSBYOG
+	 q/Ne6swBvx1yg==
+Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
+	by traversing.sirena.org.uk (Postfix) with ESMTP id 3B6912344CD0;
+	Mon, 02 Nov 2026 13:51:22 +0000 (GMT)
+From: Mark Brown <broonie@kernel.org>
+To: srini@kernel.org, lgirdwood@gmail.com, perex@perex.cz, tiwai@suse.com, 
+ Tang Bin <tangbin@cmss.chinamobile.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261025081610.2675-1-tangbin@cmss.chinamobile.com>
+References: <20261025081610.2675-1-tangbin@cmss.chinamobile.com>
+Subject: Re: [PATCH] ASoC: qcom: storm: Fix of_node_put leak on error path
+Message-Id: <179357908661.1716893.12932787546089480317.b4-ty@b4>
+Date: Mon, 02 Nov 2026 00:24:46 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,20 +63,46 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261031082318.1146398-1-shengchao.guo@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1120; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=HTZNBV0AGiJdeyefYbDJG3WhtdKiUwyg28WPMoJ7wX0=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLJeTI0y1pogqcggLLVdc8Gk4saV+RFcamal23eU+z0/r
+ 1l516Ovo5SFQYyLQVZMkSUui/tlfcnrNXwHF7bBzGFlAhnCwMUpABOZLs7w32FydbSoTtIDniWX
+ XzEsmKvlY+DMostT+Zv1Un5yvXjBGUaGfmGFA47WBz5I1WdcnuW9eUb83KqfevOX/BEr/Dn95ub
+ LXAA=
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Sat, Oct 31, 2026 at 04:23:18PM +0800, Shawn Guo wrote:
-> Derive the backend channel count of TDM DAIs from the cpu DAI TDM
-> slot mask in the DT, using the same DAI ID ranges and tx/rx mask
-> selection as q6tdm_set_tdm_slot(), so the channel count always matches
-> the number of slots programmed into the DSP. Each board then gets the
-> channel count its dai-link describes, e.g. 4/4 on Nord RRD, 6/4 on
-> RIDE. Keep the default of two when the link has no TDM slot
-> description, and fail the fixup on an invalid one.
-> 
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
- 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+On Sun, 25 Oct 2026 16:16:09 +0800, Tang Bin wrote:
+> ASoC: qcom: storm: Fix of_node_put leak on error path
+
+Applied to
+
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
+
+Thanks!
+
+[1/1] ASoC: qcom: storm: Fix of_node_put leak on error path
+      https://git.kernel.org/broonie/sound/c/3e8dba0e26a5
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
