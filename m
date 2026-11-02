@@ -1,95 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793591579;
-	b=lfFxDbCIT5RCM29LcPwch3V31QXUBIPJna8OtPYWdniN7uXHWPrrY106UjUYFRYJ1hRf
-	 uIrIUNDvREFuWvUQU5KqH3pO2aQkpPunTr3j/5YJ9LYnc8Y+mfParLquTMqJLWuxFztVn
-	 Apclye7FU3rlyWHp5wzUA8ev1pC+0eY/J4PuyVRpoEMGrf9WiIoyu7M9WyxIiUHG/HbYU
-	 Y7r8g5JUCpvBWfAeTE0+2qC5F/Yw9OGty8N8RypyYurL/SK4jSveAjWeRmC9122M6W899
-	 V4G0HIToWxuq0Vvfz2VjdA+KHo1yYJYTUP44JCpJ6Qqzy9xBL6d1c3CWKgnacxuA09g==
+	t=1793593976;
+	b=IWGw5pWm95yrTcLimuaki533r4bKKYesrf2CZh+6SN/Xwz1L2HcTtJLxrU45xuAj0YDG
+	 VH5tfqvuB1S/nzMB6ys3Wmtjik//4JL24eA9GsDS7z7CjM6tWaCEwAu9szTeGo9XiIjBr
+	 Lidmmv5YIkJohQjlbtsVPnBnfgFDmMJfssUhPbiS4fqVhKKgt3H4/og514RiyLRcP6Fbv
+	 oFrStLMrsrhK21BP/c07mE9L3i88BLdtANl6aNLGXSm7N7T8esWEZ6saEs7hmzy9/4/J8
+	 ceg7aZZSS/c77idFCjjVoAD7OgCrBnyf17GgyKNQOZq1dYFAKqlnLbYshgEuw51QTuQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793591579;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=GEgLVAromPaUrH1jitVPbv7vIRjTpekHb9MijwFJEpQ=;
-	b=j0ECokwr3bo974R2mAbMoq3RY9X1z+4X7znGiUrw07W3vY0FJrJ4xN0uvFyU4c3+03DC
-	 Xl4AnH1gIKLmmJUurc1XOZWsdot9yCB7dd311U461jKZz9meDnddLAa38AB8/Zc98L7bD
-	 MiVNFkNe9xwd2N4agr+xczO0QFHZlM3dUkxE7k7q2UQkyFhodWxNv3RCj5weKXj1swl8r
-	 67O1E76Y5XOw4vtc1CKMTdeTtFE19x1it9MzCUtrihC4iFw+lC2k3xoKwzhEZi/W1pyoF
-	 hOkEVwpaR5t78eIQZR4Cwre45cfNinK6mn7Qgi8x4JTEA5tQvY/xKHUWUbKHq7eVkFA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793593976;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=bZsx4kHQdXlvl+m91/cU/HmYwWh4oFFZJcdDaksSHOE=;
+	b=LyiB+z1MPo0aRzMxx4qO5d3Fcu1/05WtOCqiH6k8/JIMaC0D0BgEmqYDZQsy0xkEgzGD
+	 edowLZAyDLKtvkVQeTktO8IV070SWciblglJHGhHrHnNlWRUC4cDiBJ94bxkV4d5I1sOm
+	 QguQ0xJFFr6k4d/GgkPXU5FSD6gz3ehp7NedWN/Df77bIrpzInGA0hAp+3DXRqr/1R2OC
+	 andVMSxbU9YwUySmtN5ahBderbQLV6NLZ4AZIkOdP0GKRIDoQMUe7xxKc11+LKOFUIw81
+	 +rdUtNobiXDzMh3yFBFH/94vDadXIZhj49ezPLI7cCSoSCw26CQNqooaQXCCqOuZXZg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0MWK818G;
-	arc=none smtp.remote-ip=209.85.215.171
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VticY2ci;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Slv6BOtQ;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86C0A606A324
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 03:52:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86C0A606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 987DB606A336
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 04:32:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 987DB606A336
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0MWK818G
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cd6028ff33fso946187a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 19:52:58 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VticY2ci;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Slv6BOtQ
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A23vG4p3348795
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 04:32:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	bZsx4kHQdXlvl+m91/cU/HmYwWh4oFFZJcdDaksSHOE=; b=VticY2cihfFLCDyw
+	a7fpmLIQtwYsoHmu5fMOcfnHUfhcAjAT7hxuTq1gVTv6fpDcBsJ0k08aVakzNCmU
+	PmuLzcvg7gvyLllTC72QWlQiQhVnCZ+Uk6SYc/RFuTS4Kd68M4jCEo//sanIgMYR
+	ED/0m0a7AiQP0XX5pSoa226Rew5xRKQ7IEoE5f6LUUtVMILdkFRVP5unr96eq5ZK
+	MKH8agA1iyz7y3s2gsz2lSQc0rcVB8y2U13vLOMP5b7b+bkaWSLuIlOEO+rdUKpN
+	/+sE+YosHELDRLK7z+O75jQSv+SnDXvZ3GBaU7ddgZuwVvT+LyrjIpd+xmUcaDSv
+	j5ssBA==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7wxn5gx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 04:32:54 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e9f0319e06so6333605ad.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 20:32:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793591578; x=1794196378; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GEgLVAromPaUrH1jitVPbv7vIRjTpekHb9MijwFJEpQ=;
-        b=0MWK818Gv28nmlTZO12RnNRMhWyi8fhmOjVscQpXx2kRVjMDCPCCYP3SdiYSpuC5nS
-         TdyNkGi10iE0/mH9ZaUN7V9IC+2sGF92ZZn2ClOlgB3IwitEfOVVu6Wq+Brh8QW35R15
-         iEObQv7eQbKWb/IhUaQ7/TPyavQJodNOn1emrXPgD1XL1P7vJcD8ZQSyhlgH7mOJtwrq
-         7ukFqIHqtIzvhT1GN+a3/5yefuvLScma8vNQV9B9X7FrWItWXfdYc+Y1nvDTSVvUKQgz
-         JPNZrPZAGwZqavUPdIbenu0Oc33XFW9s4PVxNkmDxWrT2vhnI24F8iRPWdg+DOhMYZVs
-         EcMQ==
+        d=oss.qualcomm.com; s=google; t=1793593973; x=1794198773; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bZsx4kHQdXlvl+m91/cU/HmYwWh4oFFZJcdDaksSHOE=;
+        b=Slv6BOtQ+i57KuGxeayYkbZ30av4raCBjqKkFBBzOnQuaSIlk2yGroHnyMWH38e2O4
+         WL+3lbJHPCli/FgTp1UG9rj54v7N2mEl7AjBirlw6nwoRgypLRJSdOUEp7Q1zlWf7YMY
+         jqOhBlmiKUgxol2MMb0Z47Ljj40PwuIBc7ITCmNqeRIFab8OOPBgmzJDiNM/OB+lshIk
+         fI28+WPY9/qE12ODmVPv+KD5FSaagccVWHvv9V4bjJDu5VQuuNyQrWDP6mKOc/1cK3H7
+         TVQTlPpRDISsmZ5BM7hycDqI4i17pNgjb3Wdqs4tGB6emcV2aWPTfYVzI83oqLzfCKPQ
+         +DcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793591578; x=1794196378;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793593973; x=1794198773;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GEgLVAromPaUrH1jitVPbv7vIRjTpekHb9MijwFJEpQ=;
-        b=Yw+9EGAG3+YwFrZE8eyFwn76y+Pc+xDrkzdNtcaZfc2tn2ZVENMXcbYuKs1IizXhpM
-         GgkH1vuIeDfocUWV4vkX+eUfj0v5Ljo20cfOyNpqupFilMnEp+9auXTYiECir+zbFSZS
-         cmHFGnSVrHITN/IVu7eo8610L4hdr3wf6gUy8tNdoP4/qh+AevWwwLf4Xt96WB3xfQIG
-         XxYDt1b9eWLO0P7s6IMndlQrePP3r9DmL4cZu8tUCmZRpkc0XhQKXYj1csZcRsaXw6z0
-         njHqzVG4eSx9SnNXXLuhCVteW/YjYS4h5oOvrPuO3gHjy+ohY2C8767+I6wB7cyoAdKp
-         EDgQ==
-X-Forwarded-Encrypted: i=1; AKwUvByCiHP5u0MA0kwBDmEL7hLRN0qB3OU9TqKXTpSJ7rBGbopR+V1Cjk1u6iD9NwH8rSbZHQ5ErD5UqBu2IJ5m@vger.kernel.org
-X-Gm-Message-State: APuU4Z8tDoKmkmiRQaF304lO6cBCKjG2bhw89h/Fky3fgHVaSEuvFQRm
-	AR+kxLe66Eks38oSZR/GCCUTXjFxOs5dPkYKq81uPsj1Esk/wL+3/dZg
-X-Gm-Gg: AYBFou2zL6QrP2yI7MNneCO1JRc/y0tYeWvWRBTQyNmbCKTDO16E2+4VUAfBRzpUC7k
-	zOy6Um8Iw6YHdaekPsFqlZ0EITTC755fNYuJCf+W/+IY4MtITp9MK5dpg69U1m2wpyesP0bgaxM
-	bMQzrN52IKA2wuHHn73NNM2lCZ5ZP7TFRfvYGGNpxOBvwyjiEKMyadqf5W0CsrNVhwhwvfkiE7P
-	yew6aKWTc5Pah3EaBw2TviYNiE09F025PjgQdueWj26aJ2OZ/o30jCWDirKKz6cHji5JWl3BR3F
-	jSrGgYNKH9XlsgJbCfCY7zFFJ+ul0/UMxim48SJTAS0U+V0RApoidyUEUJL1mxVbdTXWyclz8Hg
-	0QecaTqz2AeyKLysyT9m4eH0nK7znKQOEeopD7Okvu2h6K3wedv3VyOjOj1Q0KlubBVJikIWQiG
-	3HbgdAOqlptWN+l8IWGZ/LmXQ0AKBgLY4RkRereKN6YkPRr0dQYnW8tebEPXWn+ATOdTKDUwGVU
-	61kmntdKkflzF2XYqDQW0FilO3iV+3ljDG0tIzY14vCrGTYmoxXnfzV9TFLGCMrNjeP8jJ+jmTp
-	M9eIyiy3ch/mADrCPEkx/+HQ7S2MRA+Nr5DeKAaHQl499b1e1q/BKf2Z3LDksvvQxmw=
-X-Received: by 2002:a17:90b:580d:b0:3ad:25f6:1dd0 with SMTP id 98e67ed59e1d1-3ae8970e5e9mr6935025a91.11.1793591577770;
-        Sun, 01 Nov 2026 19:52:57 -0800 (PST)
-Received: from localhost.localdomain ([2400:d802:dd7:8000:50b9:9b10:1e19:1f0a])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ae880b1f71sm6998814a91.4.2026.11.01.19.52.54
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Sun, 01 Nov 2026 19:52:57 -0800 (PST)
-From: Yuqiang Sun <izaiahsun@gmail.com>
-To: perex@perex.cz,
-	tiwai@suse.com
-Cc: wesley.cheng@oss.qualcomm.com,
-	raoxu@uniontech.com,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH] ALSA: usb-audio: qcom: Check the return value of qmi_handle_init()
-Date: Mon,  2 Nov 2026 11:52:37 +0800
-Message-ID: <20261102035237.56253-1-izaiahsun@gmail.com>
-X-Mailer: git-send-email 2.54.0
+        bh=bZsx4kHQdXlvl+m91/cU/HmYwWh4oFFZJcdDaksSHOE=;
+        b=Q7r0fhcEXlwD5ixmoVI4bz68lSYlTpL96CwSeYElN4jNfoK0VIHWQbYipbACufH/yL
+         nz9DwfDqrYbTIreyvecmF5I2wmEA05N2nCdgSALbnQUdxmuOh5xAG+zRz0lHPzhkF4GY
+         jF4BPUxNsCxXgTfE8IdqwmvjtRf2woTJ+VwH5PH7FCYVeFjH2XS9IAyFWZubVXtzQ3qO
+         62d01nqImCmZpZtJJG4Snb7bvYr/Q67joV7eakSxbMNSXI2ijd32b5yBsRKCscdvhtya
+         bNbny35jHfW72dEsn93jH23/ukb5x37ZkYpUbUrkzh15eMZhOjAfLjsRsivVWKxQWnls
+         6EjQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwotzFHGhmjUgNFhvXh3on0+iwSGD/CpfKyIS20nMv3AbaGacP2pbsAnZwRQbfo7GumY8qaz3Fis/Va8I0o@vger.kernel.org
+X-Gm-Message-State: AFq9FYK5BCqnVkKAHnVh19FtfxDG7zZI5+YKfoRuFc4KNIsyIUcEOQ8F
+	/5zNhe+w1QXPfKZGDWqPuHSqkDbPl0Q9zLbuYhyXACOXaZLlrpQKUPjw8cveWyKYg9PGwuxAzgf
+	FuapS3thvZShLPX61JHOzZLsAEaqGXP/eJp1kuVzWfVaup7UNYqG0q7riZl2P83vRhisL
+X-Gm-Gg: AYBFou0qBnRv0FdZtVAR3gZJvFT4Noo2ZpJFrYSSw8DRWLKaYn641OM3yrY8GpDjBJG
+	igjt1nYVh5Z5uL1yb7e615hnSpffZE9cNOuGj5Sn6WYIHC4Hmv8tfMgS4g+Im8GW/QxrEgvemSP
+	JLQS7LB+4QZOlUYQUbnTMzLuAjXq+kk2yi9ZZvqBHqI6ioh35DTP/WsJvA8uiX9MB0P4egwf7S6
+	LUMinClilypI0IMnECCGFDlPPtWgX8j6dxcIMZeKRclWWwtQhMMDcrcnN+9RbRbjIwU4M9B0y1D
+	vvujylkizVuujzJHeIhcoiMOo1/TV0BHQ7O9HWIiAbUuvoJPL9rVzE/HcQo2vAfcFrxq2CAeiGf
+	/KZ+1ZIVMwUw3Kt9Rsm2e6pkSLXshcMkAUH/Fs+wte2nKvnFTyrOqO4P4L+nCypx2g5Mh1mslOA
+	==
+X-Received: by 2002:a05:6a20:6f89:b0:3e2:7c10:d48b with SMTP id adf61e73a8af0-3e9288ece44mr13630153637.2.1793593971959;
+        Sun, 01 Nov 2026 20:32:51 -0800 (PST)
+X-Received: by 2002:a05:6a20:6f89:b0:3e2:7c10:d48b with SMTP id adf61e73a8af0-3e9288ece44mr13630135637.2.1793593971514;
+        Sun, 01 Nov 2026 20:32:51 -0800 (PST)
+Received: from [10.253.75.206] ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aadad94a8esm1391140b3a.55.2026.11.01.20.32.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 01 Nov 2026 20:32:51 -0800 (PST)
+Message-ID: <2798317e-69e0-4dfe-9d2d-30e3ba8e1aed@oss.qualcomm.com>
+Date: Mon, 2 Nov 2026 12:32:46 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -99,93 +116,125 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] arm64: dts: qcom: shikra-iqs: add M.2 Wi-Fi and
+ Bluetooth overlay
+To: Rob Herring <robh@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, kernel@oss.qualcomm.com,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>,
+        Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>,
+        Cheng Jiang <cheng.jiang@oss.qualcomm.com>,
+        Wei Deng <wei.deng@oss.qualcomm.com>
+References: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
+ <20261020020925.3915548-1-linghui.wu@oss.qualcomm.com>
+ <CAL_JsqLyhWzPRq6MmPJedbzVi6xLFS3zDMsnCt088jU1y0aZ6A@mail.gmail.com>
+Content-Language: en-US
+From: Linghui Wu <linghui.wu@oss.qualcomm.com>
+In-Reply-To: <CAL_JsqLyhWzPRq6MmPJedbzVi6xLFS3zDMsnCt088jU1y0aZ6A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: DSaVo2XV02HgGnhlzx93K5gIYOLzyFrc
+X-Proofpoint-ORIG-GUID: DSaVo2XV02HgGnhlzx93K5gIYOLzyFrc
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAxNyBTYWx0ZWRfXyL3G1K9wWcH7
+ lYOcy8IN9wpFkxaEh84LX/25rQnYmfqas1UC871X02jNoLlqTo6pYFLOCm1Gp0t+v/7erBIt3EC
+ 4CTXXEAl+U1haQ7gZubMaTQ3uDpUlas=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAxNyBTYWx0ZWRfX6YiXxRaCoU+W
+ L5GqqTCFP3Q5KuCvtNXiXHLOwCuEirmVLgwTpMmDTQ446afrWxgQGnhIaEIuMiniu0njicjcILB
+ ARD3/U9HyfN+JcewRIGuFYIYSvCdg9k2IV6y588JDm21ZeS+vPqsxrHGDWoHSqS/G5U2VUAwhg0
+ vqdX8UpCX0a8ggKHwZ+1xsRtL7EBoBW6tbdsEzxXjjUEAg7t4rdhF3XVInMLSjQhwlwExnTVnQF
+ o2Jezoxvaaax7R1uED1AeuevBM6jn5r+oT1WIXdCI18BmUa1ah/3WNVdBT+sFMlfymXgC1GdXvD
+ zmrdFKI3o5UVwhwWWr26SjyJwj3SyATuhUZLNF4mSaXsg0FBQJixrTW/SEOKFO83NnrD62lUBwm
+ 6MvEhYV5RsWK7pOXHa3dRj5+M1IWWtQQi76tTgnyUd+BkdHkh+wv4xbh3AS2gUwi87lS7+LpEQu
+ /QNu2ZjN66JDL8VHZNw==
+X-Authority-Analysis: v=2.4 cv=JLquIMKb c=1 sm=1 tr=0 ts=6ae81276 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=x9Xzq8uMDaG3QzGCHd0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020017
 
-qc_usb_audio_probe() overwrites the return value of qmi_handle_init()
-with that of qmi_add_server() without checking it. When
-qmi_handle_init() fails, it has already freed the receive buffer and
-destroyed the workqueue, and qmi->sock may hold an error pointer. If
-QRTR is not available, qmi_handle_init() returns -EPROBE_DEFER and
-qmi->sock is ERR_PTR(-EAFNOSUPPORT), so qmi_add_server() passes it to
-kernel_sendmsg():
+Hi Rob,
 
-  BUG: unable to handle page fault for address: ffffffffffffffb7
-  RIP: 0010:selinux_socket_sendmsg+0xa0/0x590
-  Call Trace:
-   security_socket_sendmsg+0x29/0x50
-   __sock_sendmsg+0x43/0x150
-   kernel_sendmsg+0xd6/0x180
-   qmi_send_new_server+0x1b8/0x2b0
-   qmi_add_server+0x165/0x200
-   qc_usb_audio_probe+0xf4/0x2e0
-   really_probe+0x2b4/0x850
+Thank you, and sorry for not replying to the earlier Sashiko reports.
 
-Had the probe gone on, the error and remove paths would call
-qmi_handle_release() on the half-initialized handle, which destroys the
-workqueue and frees the receive buffer a second time.
+I have updated v4 to use the existing composite DTB build pattern:
 
-Return the error from qmi_handle_init(), so that -EPROBE_DEFER defers
-the probe, and check qmi_add_server() as well.
+shikra-iqs-evk-m2-wifi-bt-dtbs := \
+         shikra-iqs-evk.dtb \
+         shikra-iqs-evk-m2-wifi-bt.dtbo
 
-The bug was found with kbound, a static analysis prototype for
-ownership mismatches at kernel interfaces, on v7.2.12; it is present in
-mainline.
+dtb-$(CONFIG_ARCH_QCOM) += shikra-iqs-evk-m2-wifi-bt.dtb
+dtb-$(CONFIG_ARCH_QCOM) += shikra-iqs-evk-m2-wifi-bt.dtbo
 
-Build-tested with x86_64 and arm64 allmodconfig (W=1, sparse): no new
-warnings. Run-tested on QEMU (x86_64, KVM) with KASAN and kmemleak, with
-the driver built in and a test module that registers the
-q6usb.qc-usb-audio-offload auxiliary device. Without QRTR, the probe
-crashes as above without this patch; with it the device is deferred and
-removing it again reports nothing. With QRTR the probe succeeds, and
-removal reports nothing either.
+The composite DTB target makes Kbuild apply the overlay to
+shikra-iqs-evk.dtb and validates the symbols and fixups during the build.
+The standalone DTBO is retained because the existing FIT flow loads the
+base DTB and overlay separately.
 
-Fixes: 326bbc348298 ("ALSA: usb-audio: qcom: Introduce QC USB SND offloading support")
-Cc: stable@vger.kernel.org
-Signed-off-by: Yuqiang Sun <izaiahsun@gmail.com>
----
+I am rerunning the kernel build with this change before sending v4. I will
+also reply to the individual Sashiko findings rather than leaving the
+automated reports unanswered
 
-Notes:
-    The bug was found with kbound, a research static analysis prototype.
-    The patch, the changelog and the test setup were written with the help
-    of an AI coding assistant (Claude); I have reviewed and tested them as
-    described above.
-    
-    The runs were on mainline d135ab453a74; the code this patch touches is
-    the same there and in sound for-linus, which it is based on.
 
- sound/usb/qcom/qc_audio_offload.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/sound/usb/qcom/qc_audio_offload.c b/sound/usb/qcom/qc_audio_offload.c
-index e4bfd43a2488..5ee568e0454c 100644
---- a/sound/usb/qcom/qc_audio_offload.c
-+++ b/sound/usb/qcom/qc_audio_offload.c
-@@ -1969,8 +1969,13 @@ static int qc_usb_audio_probe(struct auxiliary_device *auxdev,
- 			      QMI_UAUDIO_STREAM_REQ_MSG_V01_MAX_MSG_LEN,
- 			      &uaudio_svc_ops_options,
- 			      &uaudio_stream_req_handlers);
-+	if (ret)
-+		goto free_qmi_hdl;
-+
- 	ret = qmi_add_server(svc->uaudio_svc_hdl, UAUDIO_STREAM_SERVICE_ID_V01,
- 			     UAUDIO_STREAM_SERVICE_VERS_V01, 0);
-+	if (ret)
-+		goto release_qmi_hdl;
- 
- 	uaudio_svc = svc;
- 
-@@ -1987,7 +1992,9 @@ static int qc_usb_audio_probe(struct auxiliary_device *auxdev,
- 
- release_qmi:
- 	qc_usb_audio_cleanup_qmi_dev();
-+release_qmi_hdl:
- 	qmi_handle_release(svc->uaudio_svc_hdl);
-+free_qmi_hdl:
- 	kfree(svc->uaudio_svc_hdl);
- free_svc:
- 	kfree(svc);
-
-base-commit: 56abaa599bbbee5500e166ddb0b5241a00c1f763
--- 
-2.53.0
-
+On 10/22/2026 1:18 AM, Rob Herring wrote:
+> On Mon, Oct 19, 2026 at 9:09 PM Linghui Wu <linghui.wu@oss.qualcomm.com> wrote:
+>> Add an overlay for M.2 Key-E Wi-Fi and Bluetooth modules on the Qualcomm
+>> Shikra IQS EVK.
+>>
+>> The M.2 variant uses the external module connected through the Key-E
+>> connector instead of the onboard WCN3988 devices. Disable the onboard
+>> Wi-Fi and Bluetooth nodes when the overlay is selected so the device tree
+>> matches the hardware variant and does not probe the unavailable onboard
+>> connectivity path.
+>>
+>> Describe the PCIe and UART connections through the M.2 connector, the
+>> 3.3 V supply, the W_DISABLE signals and the PCIe reset signal.
+>>
+>> The Wi-Fi PCIe path was tested on a Shikra IQS EVK with a QCC2072
+>> module. The overlay was applied, the link trained at Gen2 x1 and the
+>> endpoint enumerated. Bluetooth UART and HCI runtime validation is
+>> pending.
+>>
+>> Co-developed-by: Wei Deng <wei.deng@oss.qualcomm.com>
+>> Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
+>> Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
+>> ---
+>> Changes in v2:
+>> - Drop regulator-boot-on and startup-delay-us from the 3.3 V regulator.
+>>
+>> Changes in v3:
+>> - Drop the unused reg override from the disabled TC9563 node.
+>>
+>>   arch/arm64/boot/dts/qcom/Makefile             |   1 +
+>>   .../dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso   | 105 +++++++++++++++++
+>>   2 files changed, 106 insertions(+)
+>>   create mode 100644 arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
+>>
+>> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+>> index 1c86e7e98f55..799faa32e2d9 100644
+>> --- a/arch/arm64/boot/dts/qcom/Makefile
+>> +++ b/arch/arm64/boot/dts/qcom/Makefile
+>> @@ -339,6 +339,7 @@ dtb-$(CONFIG_ARCH_QCOM)     += sdx75-idp.dtb
+>>   dtb-$(CONFIG_ARCH_QCOM)        += shikra-cqm-evk.dtb
+>>   dtb-$(CONFIG_ARCH_QCOM)        += shikra-cqs-evk.dtb
+>>   dtb-$(CONFIG_ARCH_QCOM)        += shikra-iqs-evk.dtb
+>> +dtb-$(CONFIG_ARCH_QCOM)        += shikra-iqs-evk-m2-wifi-bt.dtbo
+> Overlays must be applied to a base DT to test that they apply. Sashiko
+> has pointed out that this doesn't apply on every version you've sent
+> and you've not replied to the report. Please reply on the other
+> issues.
+>
+> Rob
