@@ -1,47 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=195.135.223.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793609439;
-	b=vcqj9Uuum23kuseAtVjIfVCzuRl6rgvHUlqZquNJHEXMWneNGTQeqadMZqr+PETdbIke
-	 JPG/pXUF1cEhwrok4r2up9GzjLrTcw9yAill/3x+zCa6OmYBt7YPmbLBtyJPis3b9Fynf
-	 mg9Qfth3uQuSGfdQKhp3KO7hzSm7oWK/OHzh6XJVG/qy9fuzBbBuQKiPfLGHzMYzYuvKU
-	 mdswtKJEiHj+AoCsdghgVgEi1SackwdriLQbsiPhds/YSvMcbVf6chEaW3chhJEMQdC5+
-	 FKL2l5U2NeWWbkd5BL+gSJn+GkJc7M+R0pMIgS004jzOj7J7iRzttmE4CpqK0GqwMzA==
+	t=1793609455;
+	b=kDPTPE7KD0XTimTXY4DneR9a+lbUfi4Xo/iggJayNfXscY94OVxkgqB1CKR/PloVEKIu
+	 NiRbULnLlT6JMvtwTvweRbi+A/z015KUKpfvHIzU6+yrBNuetia2hNTtuXvyQt2ktrMYg
+	 RhvU+ngV2WgOfKyJIHUtRnHh0YFtc96D0nPdfTDYcPbayZZr5CXhSTpkQ7lNvclabF/kL
+	 W3ARCPl1o6pjT6oLFQlxOnajRRkcPEiCrNACaUWRTaIwLHv89q+s0ZqbY5SE9odiU5n39
+	 btUhEpcSPgG7VPabKUCt4oI/+wI0uK9rQnQb085J3pv2/Yj8Z0GGsEhbCfXbzHbOXLA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793609439;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=QaWYWUrLhUfwC4NyrykAqy2T/OO+U82Y2EmtMkUqbZk=;
-	b=Ov9y7qFN4+Psy7dXjanlVxCY78eP8BVBWvZ1k0PU3ZpFfGmLEHcoUQvzLpbBvVgc2KkQ
-	 cvT+SVnT4DFgzxBdIzFDgvaBbL7puJZSjlF+jVhPmfgMZKRdpCxGnrEVYg0jWxyl7G8c2
-	 B2Wb7WCK6f5qlKUVLUJAbDoLQP+IgvvYgFqZGK2Qcxj+mYT3RE5kMIc6PLQ0Bc8gbd6V8
-	 wZ2OKiFxFkaKPnBSY67Iv2xrB6vSuZvcgceAuy4SoLHFtXkRxXzuXw3ldsO5V7SeC+7zI
-	 Bb0L06MxjcIEUfiHfg3dB1ABWTnufm5p2N/q7QxlU87aOyzT22q5KX4sgK8Rojy17Sw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793609455;
+	h=DMARC-Filter:Received:DKIM-Signature:DKIM-Signature:DKIM-Signature:
+	 DKIM-Signature:Received:Received:Date:Message-ID:From:To:Cc:Subject:
+	 In-Reply-To:References:User-Agent:MIME-Version:Content-Type:
+	 X-Spam-Flag:X-Spam-Level:X-Spamd-Result:X-Spam-Score;
+	bh=FybLTP04cq4U6sgKHlnCBy/A2QdmmVaR5IkgA24/DMI=;
+	b=qKmSweLZj4cwKTfhyj6t4fQ3WmezewsJgFsI7bywz5pxhLwhxKxl+mYtbkK3q4sTF67a
+	 axNPf3dbJI98Gbg/zd7cf70KzKclRMUHQZuCxe35SQgZnEj+eOtY7H86Suz5ux1TT+Tjo
+	 +vzucodL7QOC7b9ILIdOWwaDYOfpGBwV/CT/zXYypoGL0CmtMrFJZMpoQqmy12kIznLvt
+	 F58F0ju9lCYzvUW9ujMZJCYjOcCaOzBNBm3uE/1ocN5ZJSBx42189xz08BdX0N8POR+Va
+	 Gsb8BYDfBWyQVWpznYyV0oNP8lfbPACuG5H4+t8La1glaHtamZ8A4/KKRxdadeefadA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eD3vegNV;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=suse.de;
+	spf=pass smtp.mailfrom=suse.de;
+	dkim=pass header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=nqB8Rzrl;
+	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=hNP06WHq;
+	dkim=pass header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=nqB8Rzrl;
+	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=hNP06WHq;
+	arc=none smtp.remote-ip=195.135.223.131
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B797E606A324;
-	Mon,  2 Nov 2026 08:50:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA258606A327;
+	Mon,  2 Nov 2026 08:50:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA258606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eD3vegNV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D2D681F000C1;
-	Mon,  2 Nov 2026 08:50:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793609438;
-	bh=QaWYWUrLhUfwC4NyrykAqy2T/OO+U82Y2EmtMkUqbZk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=eD3vegNVhbx15mhQYNYj1Lbl/xaM6BD1eAxTN9bCnpcWXK9J7fCQGKhkq7ad7ZFs2
-	 El6xYwwcjTqrKVhMoICNoQJbGw5b8hbgvFYhZ29g1kujzgTbvK7acgWruYQ/ZITE3g
-	 h5Q5ie2PSEhOzTwirMDCC8SITikqEj90dr5BveB7OLKB41nEyerqOZot9GQZOxNN2U
-	 EdUuyip8aow+qEv+zTiMZK50CZIN4sabSA8i1mnwrHsP5OYaDSC+36Gq68v3r4RhSu
-	 xJA/PH0M4G+Ht2Z1ZcKs+ZZRkayCjgjdwXBNTZSZ7J8DeEP+plHAwkeBSvUmp1UHuy
-	 u7REK5fRtjEVQ==
-Message-ID: <a231be58-d42a-4d16-9e94-625457031d43@kernel.org>
-Date: Mon, 2 Nov 2026 09:50:24 +0100
+	dkim=pass (1024-bit key, unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=nqB8Rzrl;
+	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=hNP06WHq;
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=nqB8Rzrl;
+	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=hNP06WHq
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 287481F83D;
+	Mon,  2 Nov 2026 08:50:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1793609453; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FybLTP04cq4U6sgKHlnCBy/A2QdmmVaR5IkgA24/DMI=;
+	b=nqB8RzrlI+Vl/lNRLw0fz5B+58DCQukMreggpg7UQ6pZ4PcBWwrgZ676VcCUaRwfpHPRpH
+	TunEkIdulqWE1dimHBhA4+PuQmw317lfCYVm9bsZansNZqPB+owy78snm9cRNg+A1E9x13
+	6d4v15AqotWCpfAGDMxHij5SroBdbR4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1793609453;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FybLTP04cq4U6sgKHlnCBy/A2QdmmVaR5IkgA24/DMI=;
+	b=hNP06WHqmof17lIyKvpH3jD7cgelHi+ZKe3AZA25U/VlSrOYqbDOpmEtCJ/H2GK94Ezt+C
+	72g2jVZg76ppMxAg==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1793609453; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FybLTP04cq4U6sgKHlnCBy/A2QdmmVaR5IkgA24/DMI=;
+	b=nqB8RzrlI+Vl/lNRLw0fz5B+58DCQukMreggpg7UQ6pZ4PcBWwrgZ676VcCUaRwfpHPRpH
+	TunEkIdulqWE1dimHBhA4+PuQmw317lfCYVm9bsZansNZqPB+owy78snm9cRNg+A1E9x13
+	6d4v15AqotWCpfAGDMxHij5SroBdbR4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1793609453;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FybLTP04cq4U6sgKHlnCBy/A2QdmmVaR5IkgA24/DMI=;
+	b=hNP06WHqmof17lIyKvpH3jD7cgelHi+ZKe3AZA25U/VlSrOYqbDOpmEtCJ/H2GK94Ezt+C
+	72g2jVZg76ppMxAg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C2CA9134B8;
+	Mon,  2 Nov 2026 08:50:52 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id A43gJOxO6GouSQAAD6G6ig
+	(envelope-from <tiwai@suse.de>); Mon, 02 Nov 2026 08:50:52 +0000
+Date: Mon, 02 Nov 2026 09:50:52 +0100
+Message-ID: <87ld7b4nwz.wl-tiwai@suse.de>
+From: Takashi Iwai <tiwai@suse.de>
+To: Yuqiang Sun <izaiahsun@gmail.com>
+Cc: perex@perex.cz,
+	tiwai@suse.com,
+	wesley.cheng@oss.qualcomm.com,
+	raoxu@uniontech.com,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] ALSA: usb-audio: qcom: Check the return value of qmi_handle_init()
+In-Reply-To: <20261102035237.56253-1-izaiahsun@gmail.com>
+References: <20261102035237.56253-1-izaiahsun@gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/30.2 Mule/6.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -50,109 +114,79 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 21/25] accel/qda: Add Audio protection domain attach
- and its remote heap
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
- <rdunlap@infradead.org>, Srinivas Kandagatla <srini@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Philipp Stanner <phasta@kernel.org>, dmitry.baryshkov@oss.qualcomm.com,
- andersson@kernel.org, rob.clark@oss.qualcomm.com, jgg@ziepe.ca
-Cc: lingtong@qti.qualcomm.com, cacar@qti.qualcomm.com,
- sandheep@qti.qualcomm.com, Bharath Kumar <bkumar@qti.qualcomm.com>,
- Chenna Kesava Raju <chennak@qti.qualcomm.com>,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- Bharath Kumar <quic_bkumar@quicinc.com>,
- Chenna Kesava Raju <quic_chennak@quicinc.com>,
- Ekansh Gupta <ekangupt@qti.qualcomm.com>
-References: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
- <20261102-v4-v4-21-88f2f24a5f0b@qti.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261102-v4-v4-21-88f2f24a5f0b@qti.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-Spam-Flag: NO
+X-Spam-Level: 
+X-Spamd-Result: default: False [-12.30 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
+X-Spam-Score: -12.30
 
-On 01/11/2026 23:21, Ekansh Gupta wrote:
->  
-> +/*
-> + * The Audio PD keeps the remote heap across daemon restarts, so only the first
-> + * attach on a device hands it to the DSP. The lock is held across the attach
-> + * so that a concurrent one cannot skip the heap while the first is still in
-> + * flight, and the flag is set only once the DSP has accepted it.
-> + */
-> +static int qda_attach_audio_pd(struct qda_session *session, struct drm_qda_remote_attach *args)
-> +{
-> +	struct qda_dev *qdev = session->qda_dev;
-> +	struct qda_static_pd_args sargs = {};
-> +	char *name;
-> +	int err;
-> +
-> +	if (strcmp(qdev->dsp_name, "adsp") || !qdev->remote_heap_size)
+On Mon, 02 Nov 2026 04:52:37 +0100,
+Yuqiang Sun wrote:
+> 
+> qc_usb_audio_probe() overwrites the return value of qmi_handle_init()
+> with that of qmi_add_server() without checking it. When
+> qmi_handle_init() fails, it has already freed the receive buffer and
+> destroyed the workqueue, and qmi->sock may hold an error pointer. If
+> QRTR is not available, qmi_handle_init() returns -EPROBE_DEFER and
+> qmi->sock is ERR_PTR(-EAFNOSUPPORT), so qmi_add_server() passes it to
+> kernel_sendmsg():
+> 
+>   BUG: unable to handle page fault for address: ffffffffffffffb7
+>   RIP: 0010:selinux_socket_sendmsg+0xa0/0x590
+>   Call Trace:
+>    security_socket_sendmsg+0x29/0x50
+>    __sock_sendmsg+0x43/0x150
+>    kernel_sendmsg+0xd6/0x180
+>    qmi_send_new_server+0x1b8/0x2b0
+>    qmi_add_server+0x165/0x200
+>    qc_usb_audio_probe+0xf4/0x2e0
+>    really_probe+0x2b4/0x850
+> 
+> Had the probe gone on, the error and remove paths would call
+> qmi_handle_release() on the half-initialized handle, which destroys the
+> workqueue and frees the receive buffer a second time.
+> 
+> Return the error from qmi_handle_init(), so that -EPROBE_DEFER defers
+> the probe, and check qmi_add_server() as well.
+> 
+> The bug was found with kbound, a static analysis prototype for
+> ownership mismatches at kernel interfaces, on v7.2.12; it is present in
+> mainline.
+> 
+> Build-tested with x86_64 and arm64 allmodconfig (W=1, sparse): no new
+> warnings. Run-tested on QEMU (x86_64, KVM) with KASAN and kmemleak, with
+> the driver built in and a test module that registers the
+> q6usb.qc-usb-audio-offload auxiliary device. Without QRTR, the probe
+> crashes as above without this patch; with it the device is deferred and
+> removing it again reports nothing. With QRTR the probe succeeds, and
+> removal reports nothing either.
+> 
+> Fixes: 326bbc348298 ("ALSA: usb-audio: qcom: Introduce QC USB SND offloading support")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Yuqiang Sun <izaiahsun@gmail.com>
 
-That's value from DTB, so where did you document the ABI?
-
-I see such undocumented ABI in multiple places. Usually requirement
-would be to document it, but not label. Why label 'ADSP' is not correct?
-Why "Audio DSP" would not be correct?
-
-Drop all this label dependency, completely (and do not introduce other
-names, like node name).
+Applied now.  Thanks.
 
 
-Best regards,
-Krzysztof
+Takashi
