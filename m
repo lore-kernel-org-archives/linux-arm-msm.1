@@ -1,56 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793613000;
-	b=BJ2fAFC+49f8P1+mwC3jv9sBszqMVt119lM7VPhMGrb0T7o0M7Wzn9aFRO+VqrzfjScA
-	 ePwUWlaTLLerg00AhC0bOxcsOPJxUO0TvLE3g6vYZRb92y9dFkReO5xxe2sB80q/O83sF
-	 rdpMYSCXukJZsmGxJCYvExKZYef4jXhaWCoGjzirojE75ZTWverwq+ohmm/puLoCQGsEs
-	 IgvSTTB+nM8CsKca1sa9NJkmovudi3Fc5MwnR8tDNxsSh5oB4uDm4aNKtKq1rW6uRa+WO
-	 DoTczpmvmSXFv/VahF0uJwOjURguQG3fwgFDfSoJqnhtYaV7bcaUKbKsZD2DZen4JDg==
+	t=1793613180;
+	b=Ym3om1gJssRL9tsHSjDo3ciBRUGCsYqTbCCb5DKFniArNZKalO3pLlz+CZSvXIU6OJpR
+	 RvsRA3JbSaWfh9U2YOdyhTLMtdd2dbCGSbJqjyIwks41RnhmDRKwU1vVFhYgY+BmwF7DM
+	 +c+24H7GUMuw6jvaN4Zt/qp/r2phar0EXRZ4rk8QR/A6eCbTZEiF4x67A+u4mEBw6C4Ye
+	 A+BOcD/JcPpMRNpDdggf4ZD7Qekze6HnkR2bmPPfwktkANLFzenm4m1tWcH26cL5JnG4D
+	 Sf5mfvBEdgeixRIhMVdacCfVAQ0b7EL0rX2rvF1tStegM/mjR88BDweeQT98leAAnbQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793613000;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=VdIeZiZJFHbR5PLckz439tLtWXlINLYdh7DGhSmS02s=;
-	b=t7rF1xT+Xf2ctgWne6MdJWz9zFOIjvd0mHyGLQ4GQNMjXZ+2m2FGVpIqt3XmbMtFiySy
-	 OyNMa4HUaAw8y+PscQjfSkMnD1p9M2gbnR2NI7gWeMPyxQNCyDNDfzVhzKWEc20j8gScl
-	 D5EQoXAevDaX5MqKNBxtvavfGt4FkdmC1qpcwP2uucGsdb4RJYl8yPObQNxppOF+u1L7q
-	 mAePe9Sglzfd5W9WkxFpH+14q8nEBDCFEurx7kzUEB/kcjgK/EgfAPS7lLp7qZtcxP7/3
-	 qp/e2cQ/G42Fzy6oGLtt6xiC7SgL5hSJsODe8McZMbwvtniwjPUG6lkZi61ZitXSHYw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793613180;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=qqXNNfzdWTFLDTehhgM1nsK5dgUJIXqhK2tNP6C3EqU=;
+	b=UoOGU36iZGkQgQ8lRyBtc3A61UWUeWAbWNTPoj9EZ+yLHixzofRyaFDLWy8G7a9b3rc8
+	 lkT1MwSng3wgXtVv8kLb+xTicQKRBm8YfsRvRzrTu/P3M5riivVLKPUdFW4XuCoM1jyY3
+	 9GdJjXJqDtVmdATRLimYfusWp0OBS8pNf+e4dWTm8IorcOANWUmujM6rOixKI7MD9zJVL
+	 3NoKjtcpijtYX0UGAR+kKL3jJMUJUpHVEFkMpngeOV0mVBrOrwBp4PGx5Te+Pcs3eOBh7
+	 otsZabV0uc0qNzf7bf77hRJihbtWU4GFrcWPrsR4dIGBB78p3A7YkhCemzauM43OshQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=F4o+MnVb;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A0jxRsf6;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aHdrYW5D;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF39D606A331;
-	Mon,  2 Nov 2026 09:49:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EF39D606A331
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5B92606A337
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 09:52:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C5B92606A337
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=F4o+MnVb
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 0954653401D6;
-	Mon, 02 Nov 2026 10:41:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1793612465;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=VdIeZiZJFHbR5PLckz439tLtWXlINLYdh7DGhSmS02s=;
-	b=F4o+MnVbPvsgTC7ym3QxAUH2+/8UzbC77rvSNZ2Q2mZiZwDv1J60J5FCohTvIu29A8b8nk
-	RZ1+tLz+nctvzCwzlaMINya0G5udYsWRnRtPzxkRqgQ1kEZ4IsCcRvVjDw2M6ubMq/nwdX
-	Mz+fNtmoppP0AG5wMiBY+JHXtLjDva4=
-Message-ID: <1eca9b3f-3b61-4663-b52f-4e2dba38ca21@ixit.cz>
-Date: Mon, 2 Nov 2026 10:40:49 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A0jxRsf6;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aHdrYW5D
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A29AQ7e2361163
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 09:52:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	qqXNNfzdWTFLDTehhgM1nsK5dgUJIXqhK2tNP6C3EqU=; b=A0jxRsf6GUjEBSyj
+	NvAXNYXryBlm8tFkVuBHt0ZA/6r9VkWTV0G5oSYAf/GxFxVWMgZ9wkX2L4GU/09R
+	FgcDx2rijX+Q1e4woKw/gN1AuBGu59l2RHrGzUdAmii27pmHlDg5yIImySEo1eKo
+	yIeKqdwlbRKi/7JERV2o7QsJj2OAc58hR80VpuqV4kVxZDIZsqHLbpXxBLAP7E4u
+	jAMWET0satj3a5D4U4+jaSGia/RtNpU/0QuTFYQEtxY8aHZN4XxUanzRL4rQPk8j
+	K3/Oa2IpiYFHqfp/KZXf4nPXBK8nJQm5BmC0a5XJn/rk9IU67Jurew09TnPA8P2p
+	fee9mg==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn8q7x8jh-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 09:52:58 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-91c7fe5576bso20010686d6.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 01:52:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793613178; x=1794217978; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qqXNNfzdWTFLDTehhgM1nsK5dgUJIXqhK2tNP6C3EqU=;
+        b=aHdrYW5D1PORcOd5lteVvXAsuMA5wKMpCIGPbgtBdTF+GB6MSdunrzvH5kI9czKiVm
+         2R2Vdv1l4JnqDIP/xsceF8XfRoN/3daJc54/dxYGRVlfYkMjuYZhVfTzlewUueyJ2jcm
+         LJEDMn15hlI0aLIr7XtXkM5musL9vco3StxdlyE1lttkL8dYdLrMr3zihXqmeWi2q+Zt
+         jIuNql78skhcXhSyC8h2GMVvBmNivaY7mRvy/AvgSLmNXrBO18A1Jxz5EwSHdBzFj5iU
+         lpJLxZ4+ByupT1569/8KGllq2MHp3a7rPIUjfQ6zlMQ4InCZSoyhkUS7ZpbRikt8ezMu
+         TuDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793613178; x=1794217978;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qqXNNfzdWTFLDTehhgM1nsK5dgUJIXqhK2tNP6C3EqU=;
+        b=fpiOpOPDQWXSAgnWL5gr5kh1uha9WKJ63x4C2AaIjf3wUhcqlmjUVirgDKRnZANHfV
+         Mh3RqKIanUxyc31w9tU/IWqRc5N4lRo0+grPjxh7qy3OfnH6U+Nry1WlqeN1zr9qkjul
+         11gitQAGFW5UWN/cwfnN4MeQvAvbLzJ2jaBQF2ZDklkSHSB/l8le3Lofe3EHZsMy/Z63
+         6qB2AFvceWVErIRUSQ6Qzm+iSp1ZCJ9wg8JGnLGKxBdcI2lKCniF1QlE0Ib3exOX30m9
+         hQfSEyI7Po2yodk8DcawFJnBEVo59R8AGJWOgH38nMjXMstKihjUGHtAi0/GSC0kbPC3
+         S89g==
+X-Forwarded-Encrypted: i=1; AKwUvBx56EPllSHxUv+ykVJj4XzoCFut6xcUUebtt95DxYYIJM2B7x97hmwF4Xq7tg9ea3e9RLcqLT5yTL6wIv25@vger.kernel.org
+X-Gm-Message-State: AFq9FYJU8H/5iiOOX5jtJEK8JjgH6FwYxbZamZZwcvXgTTeuQ6pcXoxF
+	KU5fFGEYrbdeDsiDqddJ8PusjmwMf0aQNHdnAHF4DTvZr1a+zBImIhLv99qaz/ksEDrs+7adByU
+	kTJghUvtGcx0HrVP8bMk9GaImpqNLZgEtJcSRrId0LxCos3HG3L3/NrrOlcCRbnD6Fhlz
+X-Gm-Gg: AYBFou1NrpkGl6uJ/85MbCWhr6aJb8o2tlkVhZZrkJ0wPXOXwYAa0OpMuhAgGmTPsDP
+	XZSRt7ZyAhRLleGk+jMmN3kieahRpb/Ym9CdgB04ZFJAEwyTb48C0zwNS6C3hy4GygOn8KA+Zdv
+	eeZCdmerVPflCEbGzlVPO17jZxu699T0rpppVM6euKfw6CVtxkP9e0//aLggy8uHbAt3c9Ut+jP
+	d0+DB6ggkjNALrxyMCkVrtm/qMqsVcvgvanKpe9OFv4ZF6aaLjY077A/mUNI0YjR16LrajX7uoW
+	RAci/uuE73Ah5e5wFiujG4QCXWTo6p9fO8mMsAKiM8W1v7tOud0bFcS4EyMjfEVRWvyy0h07NdH
+	NxgBHfN9OBrAbVjnF1GmuNg78AAdZsUQmrmEa+X4EG0l/JxWnGI2IeuheU3XW3gVcBoCfaQ4=
+X-Received: by 2002:a05:620a:3c87:b0:93c:c96c:a5b4 with SMTP id af79cd13be357-94421697192mr1483716885a.4.1793613178224;
+        Mon, 02 Nov 2026 01:52:58 -0800 (PST)
+X-Received: by 2002:a05:620a:3c87:b0:93c:c96c:a5b4 with SMTP id af79cd13be357-94421697192mr1483714285a.4.1793613177588;
+        Mon, 02 Nov 2026 01:52:57 -0800 (PST)
+Received: from [192.168.226.248] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4cabc18ec5sm364558866b.12.2026.11.02.01.52.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 02 Nov 2026 01:52:56 -0800 (PST)
+Message-ID: <c8810f27-8a44-4ac0-9c93-274894eced61@oss.qualcomm.com>
+Date: Mon, 2 Nov 2026 10:52:54 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,118 +116,61 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/5] Input: support for STM FTS5
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Petr Hodina <petr.hodina@protonmail.com>, linux-input@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org,
- stable@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>, Miro Mraz <mraz.miro@seznam.cz>
-References: <20260925-stmfts5-v8-0-0fcf49e2c85f@ixit.cz>
- <4590302cb7f26ea6173018f5d7083977@gmail.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <4590302cb7f26ea6173018f5d7083977@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH 1/3] iommu/qcom: Invalidate the TLB in flush_iotlb_all
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+References: <20261031-msm-smmu-identity-v1-0-a2a70580eebd@oss.qualcomm.com>
+ <20261031-msm-smmu-identity-v1-1-a2a70580eebd@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261031-msm-smmu-identity-v1-1-a2a70580eebd@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: 8_dsNvhn0LjE2uPJ3Tts4_R2e2nShL1g
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAzOSBTYWx0ZWRfX4IWBp/XL35UQ
+ NZ14Etx4lEVsE91PH3dXr5ht8Ys2pURPeLRWrPb1mh74VRd2aJm5T5NTNmiCiFLM9PnwzDs8RuB
+ QaPI5WPQcbJ3K7xduqm2AGLv3gGLook=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAzOSBTYWx0ZWRfXwNkXRtsrR4/I
+ riWHp0Fk13R0iNlu8Y2Z356vcA1kt1fILtvilFriFzzMUzBo6IHZo2l/rJ5MGEQyKiqhm8b79su
+ tCjf2ZhbKl4dSnVlzJ5TlI32j++/ePYZ3zzCoLirpG9hPILAQX0BflbFNvmhIZnacoHzgvquVSt
+ 380cQR8md5kt4/e+eIP1Tpunp2JlN/vdC9y1zXAgq9KP6liFP5myGSykddAcSM3qe2ZENuXvlL1
+ gG3uk8MvHhBVXSR81skdyljqK5WY0IL0aasIx/AU6Pn4Ud/q98sl1riKn+3EV/SJLBHN+WtzSZn
+ BJTul21v2kQXWr6NopVt5DpYqdralAFHt/JwWxn74qYh+waOM2CRP6aHUfLe6sHkbR8ilp9JkGG
+ 96ZCTdFv2jPbY9PS+PI/JZBz599T5RjZW05lGy+zNZ5pVPhcvAIugYdgLVVhOmg0IwP6xxETXjf
+ 8cVBJDWdEhj5MRnANSA==
+X-Proofpoint-GUID: 8_dsNvhn0LjE2uPJ3Tts4_R2e2nShL1g
+X-Authority-Analysis: v=2.4 cv=PucG/AM3 c=1 sm=1 tr=0 ts=6ae85d7a cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=1ACtxsPTqu74CH8WC9UA:9 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0 bulkscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020039
 
-On 02/11/2026 04:18, Dmitry Torokhov wrote:
-> Hi David,
+On 10/30/26 11:04 PM, Dmitry Baryshkov wrote:
+> qcom_iommu_flush_iotlb_all() only waits for a TLB sync and never
+> invalidates anything. iommu_unmap() users do not notice, since
+> io-pgtable invalidates each page through the gather, but drm/msm unmaps
+> with a NULL gather and relies on flush_iotlb_all. On db410c the GPU then
+> hangs on stale TLB entries as soon as another process reuses the IOVAs.
 > 
-> On Fri, Sep 25, 2026 at 11:22:18PM +0200, David Heidelberg wrote:
->> Used on various phones. Minimal viable driver.
->>
->> Includes device-tree enabling touchscreen on Pixel 3.
->> Also, tested on Xiaomi Mi 8 (device-tree is not yet inside the mainline).
+> Invalidate the whole context, as arm-smmu does, and keep iotlb_sync a
+> plain sync.
 > 
-> I applied patches 1 through 4 (leaving patch 5/5 for the Qualcomm SoC
-> tree) with a few small adjustments folded in:
-> 
->   - In patch 1/5, added a missing trailing newline to the reset timeout
->     error message and fixed a typo in the comment in stmfts_power_on().
->   - In patch 3/5, wrapped "const: st,stmfts5" under "contains:" in the
->     allOf condition so the check keeps working if a fallback compatible
->     is added later.
->   - In patch 4/5:
->     - moved ABS_MT_TOOL_TYPE setup from stmfts_setup_input() to
->       stmfts5_setup_input() since FTS4 does not report tool types;
->     - dropped the undocumented "stylus-enabled" property check so stylus
->       contacts unconditionally report MT_TOOL_PEN;
->     - checked X and Y resolutions independently before applying the
->       10 units/mm fallback;
->     - added a check for !sdata->ops in stmfts_probe();
->     - fixed the GPIO name in the "mode-switch" error message and a couple
->       of minor comment/log formatting nits.
-> 
-> I will also send out a few separate follow-up patches shortly: one
-> teaching touchscreen_parse_properties() to parse touchscreen-x-mm and
-> touchscreen-y-mm directly so drivers do not have to open-code resolution
-> handling, plus a few fixes in stmfts (not aborting FIFO parsing early on
-> non-touch events, validating the 4-bit slot ID against
-> STMFTS_MAX_FINGERS, and switching coordinate reporting to
-> touchscreen_report_pos() so axis inversion and swapping properties are
-> honored).
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
 
-Hello Dmitry.
+Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Thank you so much for improvements and merging stmfts5, I'll pick up the patches 
-back to my sdm845 tree so we can apply followup improvements easily :)
-
-David
-
-> 
-> Thanks.
-> 
-
+Konrad
