@@ -1,118 +1,107 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.177
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793655582;
-	b=SJ/doe/rkoFI+eZbnutAbAhrmIVV9/xV5cFKC9+jEBTWo0js3acWz7BYesWMIDafriRO
-	 wxlDV5WMQOfxN2V9yskwx+FY7/qkUSxn+Psm/jJzYyYy//LuhQCkFDpcEpbUHgkXfiZ3Y
-	 xCFuBoYRI57ccegQh0otnkoR2wrgYr+BkSgCLFEZmLYcTKtb0rh0qWKvZvXiyghl5WLCz
-	 GOpfqYf0r3Cp6oep5C5OcEH8H3946GIx4qEBhissBd2SdE19oZVKvDEt1MRo+qJotvz1J
-	 h5/L45i0gok6jtiPJtkshez3ufwcS6Xee37E8DP2eEiVLKwoxHpFAKYbKw+aS1GLEWg==
+	t=1793656283;
+	b=TjLH3HccahyNT9TJXezPpBgNhAMgjUlojZKrRQxz0uKGKh0luzZg4xVYY1k1i797TqVD
+	 sD+4nG8nJf/ztbkrJLRaqmtWIx/wFZ74HMVDC//oNEcRNV2P6AwP52WiuvhnL5/QVjixT
+	 prAp6/SqIFZd2OhqGJlDkhR6KMzPJzMgYtnPitkP0USvsFoj47vkaxtt28Hu/46n4gmCK
+	 rAl3mwcBMfUEJs9NZuKrbE/Et8+ri7Qdnxmiq/ierSyfKv9JDWjpKjreGaFl/c7VVd8Ke
+	 hxHRPL/8eOv2MCJ1YrOEWttGEQWfn/lLAoSOobRuuCw6HB0NcjgBybF7TxQlqdhQkbA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793655582;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=PHBqgIS2a1m9GORwkqpCGvAXjRtw2HSeDsQnUYOO8L0=;
-	b=474G3flENgdCp9xVV7HmbzQnxFgVNTxGSyGn8ed00pUYVGEEbxkloEMaJkXMA+xFmzX9
-	 hNbTF3hlVV9SWTRddlKEF9xVDiCL9M/uooe+3fiVcZrCWfxGZv5/6cJWGXGNXjFOs5fdc
-	 ijX/b2LZFb+P4hC/8iczzdWhf/f0u9jr3EjePUufnXvTU3ttReOgli53P+VKKmi6o/J2G
-	 5sIzElud9xbqnwCbuL1AiyYPifsalv97XsjiPmjjwRQHovqcsi3wsaULQGC3wHHVHsB7f
-	 aWzaI8XR0SYcZSoSR8A5HBD25OtNVpNnMN1F33DzxbAl0v1e0/c7jlRCnTNYLs1qQvw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793656283;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=R0nY1ks3pmMRcLszXh/y7KBDidGoFViijWHtZfB9PJk=;
+	b=lfd9xGMLM2j/Q8xxTRIc1C4mjM/ct8qluzcE5CQ/riAKHwn2Os5d+lRpIGMLPE7eKQDG
+	 PxppJ4Z7Z8a+Zd5PpGTsP9jwxyvfH8hlsbHtp9g0EsHeyeF82EFczVaZR54XblJ2iFBIz
+	 NSv0fPcA/48TkWBxvY5hT6R7xJ7bgIem8ZzhNrm+3GqAQK0DZwLPcJSTJSoBnLA+ZZUAy
+	 YmxKvFemEcTbY9UFyKCic9ASKQwx1nAa/Q2BlDRaDgTINoG7A9MFaKlgiIp8L4+Z4ZW8C
+	 F28bFjWknE4zLuFpCU/Aku81MF49HnYeOmD/Om31uwVfKIFjiCDnEsLeqP65VccOT0A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oJ++aXop;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dNPCmhYf;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yIPSgz9S;
+	arc=none smtp.remote-ip=74.125.82.177
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EACA606A33C
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 21:39:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3EACA606A33C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59498606A329
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 21:51:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59498606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oJ++aXop;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dNPCmhYf
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2K6EoU3842344
-	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 21:39:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=PHBqgIS2a1m9GORwkqpCGvAXjRtw2HSeDsQ
-	nUYOO8L0=; b=oJ++aXoppqWbvzDgovVL7Xy9qHXZaRCpJSpIxiQh750QP1mHBZI
-	9BvkWad7l/BLVcBJu5uTMAuf+evP+qIkQJf+eMUeuRkW2VDwqSrTob2pD3bNkC00
-	D1lwh/uC9Sj15vqpo9yxr3OOPmd+s3p8TocMsXWbuYq85YTrlO+lGAEmGnzoeGk0
-	ZYmF0hRoAistcZzOjCaNHPXZEkJ4qrDiCFvD7G3i0YbgA0cacmj7kyNK8vPVusCQ
-	NgevXYfOYgzu62ngtm0jWzGd+FPG+mGKA16mqqf9nRycIGHTCsH+//UfipZMTawe
-	eYKBF4WkjdxDbiIKZ/0V+0wqvCYbdtGB2+Q==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpsavjju6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 21:39:40 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-154e9d2d94fso6731459c88.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 13:39:39 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yIPSgz9S
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-353804b591eso6194059eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 13:51:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793655579; x=1794260379; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793656282; x=1794261082; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PHBqgIS2a1m9GORwkqpCGvAXjRtw2HSeDsQnUYOO8L0=;
-        b=dNPCmhYfkOeq1yQ8FA5R/AZKMcmMY4uq4du7cEk7yMZHnlZz9myjLbYCYybTouth9O
-         ivWBXyw0HX7aCbN5P6hZ+sFLino2srWk6Nqz7Go2EPFOwRUKeei0OoP841rQuiCV1Wab
-         K1Wy8WC2ndDLe+nxn/RQ2zRfBBJ4aKb2r4+z42t/syySmi6eKchMaBIeOvff1AHo7M84
-         P3DAK8QD9SfL5pSU6LQbz7VAsGVbMhcVvce5bzBmDV31DQImPB2QXbkQnz5ZMme1Utn5
-         6GsAdbaXJa/wVe8nEzdTbmruKaPsM+v2VbKAp7IGF7vrCYLgmsM57mSFp39a65akkFTj
-         0GCQ==
+        bh=R0nY1ks3pmMRcLszXh/y7KBDidGoFViijWHtZfB9PJk=;
+        b=yIPSgz9SFEJv+rp6JQbEYIKq+1PnYQTT4rlAaYvSXk6jJdxshzZ1sZrTrYPV+R/RQA
+         n+bwivnn7eEmfNZnfcn5ztN1xZWK1sG5xmBEPIl91L52ClHTvFmfUWO1ebGKl8Zj6hzr
+         cOE2zX4+78r9Zd0GPPg+gRk4eeUJfytVjb+PuxIo47pb7r77ckvWfj2S7G9ByfTlKPlL
+         mjGzmMr29v/2OZPtVBV3L4hYXb/IYPfKs+dz8omiIFYp0tZoHWXRxSU9UI6hj6dLYpdH
+         fAiCnsezSH5mF8kujYuK0CbQDiIjK+12anPhBuGoIT6t9huA0iKcF0klvr0bcQ/ZLSw9
+         YlNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793655579; x=1794260379;
+        d=1e100.net; s=20260707; t=1793656282; x=1794261082;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PHBqgIS2a1m9GORwkqpCGvAXjRtw2HSeDsQnUYOO8L0=;
-        b=oYjtCxL8Vh2XXI3NGEZqnZ+QoB1yF/39GlKiWEBu415wutVNGAKmb5mxACNiX4sL4z
-         tQQisse26lVkqMRuWs3NCZADiL70lw+L+B1aUIFAm3jvytI9asWQ7wpSNQtE098PUtGB
-         VzXbUMOn8GaD2dyQ3xDeDqo2m79/2Jk+bC9yCwqWWaOwfGX1MFzyIWfiUbmdIFTGqbz4
-         PW9AMgiNfNhHkW5V3RuVWJ3Tej0Dbt9rcTY127guO/r+DlvRJETTskq1E+JcrLBXa3Ym
-         p/GywyqkgJbVUkGV8YtxzqkwRqIVrndZvom4wvjNFcNy5s66lRafpjUd97BMcqY+Esg7
-         YO2w==
-X-Forwarded-Encrypted: i=1; AKwUvBwHCoNCyL/L4IjJjvCES5k8EgWBdXGJx8RCix3kj5fxENytHs/ohUNo97xoq7EUW5bXmwIT6G2x2CmEolbW@vger.kernel.org
-X-Gm-Message-State: AFq9FYKzRYpFxWSKJUMfnXUxUvsvwDIqaI6N19m8p0bTi7HJT4mRkKIm
-	fQ0jTcMtW7zEIt1Na7aQ9gUhicj7/LxFSCJoqG8t73GUv77kvQ3V7+Lgo2oOvJzhjV0QXYjrKQc
-	kdPEAPDzXrn5Cf19N8k9aLvMGazM758JKnPlrKdbCUu+LpnvQgdnW+hK7ECetm9BLeI2P
-X-Gm-Gg: AYBFou0ZfrnpRu65U+VJRWzs1qyG+AfkpUKCZQPu/phDSX3saP4weFKqFUnN/kc0fh/
-	2774++HrnxIMJ/M22EZausQiNGpqPSbKSDmbry6D41IXW9VsRvkny+vfCl1xmjWGpNHX21mONBq
-	wUciZstQDByn/jpV14xAIKXJEnd34woBvM0jgmBtTfu0MeyqW4rOd029wX8hg+aA8D6TN3Z9STv
-	T4nfFYjchlF3tdUxs/dQCywybO5hd2lqcS81WBwerqNbe6pJkz0XrNLTI6UpXiAgnQSbJtCdMC9
-	wweTcEestYK7iFbQmx1B/jToiTZFj+cShFcMiS6cIcNIDXJx0w90eVhe0urjuk/EeATuUTuNmQh
-	q20rotZkC3W6NTcQ2tamDFFJ0zH13zNOBRl3SZCw+aNWaqV5ysylMpFQ/56Q04tSpN/R2dv884i
-	in7jZvCBPpqZ0TEQviTa3dIc9HAbk=
-X-Received: by 2002:a05:7022:f50a:b0:149:50cb:2175 with SMTP id a92af1059eb24-1ac5cb1881bmr15551194c88.33.1793655578711;
-        Mon, 02 Nov 2026 13:39:38 -0800 (PST)
-X-Received: by 2002:a05:7022:f50a:b0:149:50cb:2175 with SMTP id a92af1059eb24-1ac5cb1881bmr15551155c88.33.1793655578052;
-        Mon, 02 Nov 2026 13:39:38 -0800 (PST)
-Received: from hu-aarunnan-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42a61a0csm47056885eec.22.2026.11.02.13.39.37
+        bh=R0nY1ks3pmMRcLszXh/y7KBDidGoFViijWHtZfB9PJk=;
+        b=eUt3wRDfUsTYwwhGmwYf5OlIsCNnDJ8/kDAMd4VEsMHCka3XpKSpUgCNefaumtkLno
+         Um3qff0C3Jg2D+Tw1FyhoH2jlPSnnl0tv1Wdd0zUWMiGs8Djauhl5kU7AhlzW4TU+NCg
+         fwPMa2isccxJnb7Quj256D6F6kIEYku0xpsS0tqR3S2PVM5T5xlCs1yn1r6sx19HOeG/
+         DJqjekg4W1zalkXFoVs/7XLd3Djo9rnIlqNWrvIi96XjlBh1cpE7Goypzc8dNsGiUNBQ
+         lP4fN6sqlhmSqRaaI7qtWzm7yfHmEejnjh+9rPWUzyFFaVw6KOrQMx9xwedW3gF5isqg
+         6fGA==
+X-Forwarded-Encrypted: i=1; AKwUvBz43g2dUp3KHIHb3UaJMFGqRMkuQj1GuiE+hTvlRSKwElEvApM7EeCBUMo8lp3xDcRkGnl4m5mHho9NNtcQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z/2g3SGIPgSWf8Btli8KgbdUmia26Q0aLaQR1DvvQQrhM/fN3oh
+	B7i4DlwOPBENl2rFYpeD+uuh6rL0+mEdJJ1ORG/hFCis+cbDDZw3tS4d
+X-Gm-Gg: AYBFou0zgfcAvv64hi2XG8l4+ITNmGIoKQJHziwUHe5CradoxTE8vR/lxSVwvx4wdw4
+	PVzW7LRsArTSn5xSlnBf+1Oj0QwdkbtDerCVMcTGVT4new49F6IHDJ/JUBrVTpChIQf0g87wLeP
+	XPaZuvND8QbDfELq2XMCew3eyjBmai0I5SsjQROCerHUTu0xJ/C3+vvbnTZ72kCU5ZyKqrw2BYg
+	/3kNFU4scB7y05AnBeDTY0/uWp+X9SMqy8NFe8rFI70nUjFwHJCsPrHiS+YnsThzw/IjRAywiRX
+	6DbxXl7ktr1y3rMjH6IKOyYHOqgggeiuh/6nBzWMe7Z8uGA8PjqYHAik2qyy2oDOKpRSdg0f5h2
+	N2xiosuBxVXHHzc+Vh9skQswrCgUjpJdO0XtfjCOSq+msLI7QgO0/HmRQZG7qQZhYFXgIJlAvKE
+	uzg7CcGEvvtuwr3VM0rgcYtEdM8Fz8t39uK2Ho+QKX5AlP9psstIRrACR2Y+sqxFBDCzVNHbSaL
+	KnzEAltEXMGE+f06wTuEGkGzzYCr3p3L0Ij6p8IUIRsGH6+eQDIIkARLiHP5neSLyMnSztavHbK
+	RHINq/040ctZHVEDKdavOpG04kSfZlbTO42q9kFw29qSxQ==
+X-Received: by 2002:a05:7301:e105:b0:36a:15cb:30bf with SMTP id 5a478bee46e88-36a42345851mr16471850eec.13.1793656282280;
+        Mon, 02 Nov 2026 13:51:22 -0800 (PST)
+Received: from DESKTOP-NM9EKIA ([125.134.240.130])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a42935b4asm54710712eec.16.2026.11.02.13.51.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Nov 2026 13:39:37 -0800 (PST)
-From: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        gjorgji.rosikopulos@oss.qualcomm.com,
-        hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com,
-        jigarkumar.zala@oss.qualcomm.com, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v3] phy: qcom-mipi-csi2: Add support for single power-domain SoCs
-Date: Mon,  2 Nov 2026 13:39:36 -0800
-Message-Id: <20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+        Mon, 02 Nov 2026 13:51:21 -0800 (PST)
+From: Joonhoe Kim <26rote@gmail.com>
+To: gregkh@linuxfoundation.org,
+	Thinh.Nguyen@synopsys.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: abelvesa@kernel.org,
+	wesley.cheng@oss.qualcomm.com,
+	krishna.kurapati@oss.qualcomm.com,
+	konrad.dybcio@oss.qualcomm.com,
+	dmitry.baryshkov@oss.qualcomm.com,
+	neil.armstrong@linaro.org,
+	val@packett.cool,
+	balaji.kalkonda@oss.qualcomm.com,
+	tvlad744@gmail.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-usb@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] usb: dwc3: qcom: Keep USB 2.0 working in DisplayPort-only modes
+Date: Tue,  3 Nov 2026 06:51:17 +0900
+Message-ID: <20261102215121.738-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -123,145 +112,66 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA4NiBTYWx0ZWRfXxwKg/yMzDB5H
- GahVJiIA21vLZcfwQLbb4OJL2hblCg/HhtCx6yqnMhYtfsYx0V+DCVHcuPIhNb3amRUEdORsTAR
- u28+6BuhJIWMtpN+3UEruyMLD3aG/DFmIDuqjiGSlEZIDT6kzqwhfWjPw5QEUa3j6+Ws68Gb3Y5
- 9wnHpDSblcalUYUtCtFXmfa7eYixa3T6OO3Uhc4faYKijTMawSU86yMugdtvABIsAKUhkoDmanZ
- QTeliHXf5FqwoBbXedeMJga3B9fe6LidvFn1Wal9KsFTLDfqHrJw2IG67k+pHqTW1bFJ86r5wSU
- /e+mN2qz0hQlgqrDI40ySVmRgLC9+srz2OnDHKlvqk9eGtebKWH12XS2FOIGscKk63+akAjbLVp
- HvoaQhSyNI/Ht7qKNGhn8OiKzmSdWbNnNXjACH8ucxOEe8RfqlXwynm+6M0lDAvS85yYe9BlhYS
- z5NxZ60lh3ekPk+bxjA==
-X-Proofpoint-GUID: oJ8zMk-r9Xi_QyUa0ae_mR_YM0p3hQ7w
-X-Authority-Analysis: v=2.4 cv=FZmiV5+6 c=1 sm=1 tr=0 ts=6ae9031c cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=szogs_k01QmFkf2JtiMA:9 a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA4NiBTYWx0ZWRfX82gBaq8ZK0zC
- MI5b2wx42ig2XK4pgVHgckWQW3fFmFkwrWSGKUtZKZG4ZhXUvdNBiCA9mRtQpH8A5Gl482YjKG6
- +Hw7PKhqZry+ynl8CHiSZoeydM4HRs8=
-X-Proofpoint-ORIG-GUID: oJ8zMk-r9Xi_QyUa0ae_mR_YM0p3hQ7w
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-02_06,2026-11-02_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 impostorscore=0 adultscore=0 phishscore=0
- malwarescore=0 spamscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020086
 
-sa8775p, qcs8300 and sc7280 each list exactly one power-domain ("top")
-on the CSI2 PHY node. For a device with a single power-domain phandle,
-the generic platform-bus code (platform_probe() ->
-dev_pm_domain_attach()) auto-attaches it via genpd_dev_pm_attach()
-before the driver's own probe() runs. phy_qcom_mipi_csi2_probe() then
-unconditionally calls devm_pm_domain_attach_list(), which fails with
--EEXIST because dev->pm_domain is already set, and the driver treats
-that as fatal:
+With a USB-C monitor in DisplayPort pin assignment C or E, the QMP
+USB3-DP combo PHY gives all four lanes to DisplayPort and keeps its USB
+PCS powered down. The USB 2.0 pair still works, and such monitors often
+have a USB 2.0 hub behind them, but the dwc3 controller keeps depending on
+the USB3 PIPE clock: on Kaanapali the next xHCI reset in this state
+times out ("Host halt failed, -110") and USB is gone until the cable is
+replugged. Commit f546912bcac6 ("phy: qcom: qmp-combo: Move pipe_clk
+on/off to common") keeps the pipe clock branch enabled, which is not
+enough here.
 
-  1. qcom-mipi-csi2-phy ace6000.phy: error -EEXIST: Failed to attach
-  power-domain list
-  2. qcom-mipi-csi2-phy ace6000.phy: probe with driver qcom-mipi-csi2-phy
-  failed with error -17
+This series lets the controller be a Type-C mode switch next to the PHY
+and moves it to the UTMI clock, the way "qcom,select-utmi-as-pipe-clk"
+does statically, before the PHY switches to DP-only mode.
 
-x1e80100 is unaffected: it lists three power-domains, so the generic
-code does not auto-attach any of them (auto-attach only applies to
-single-power-domain devices); the driver's explicit attach is the
-only one that runs.
+On Kaanapali the PHY becomes a mode switch with Balaji Kalkonda's
+DisplayPort series [1]; patch 3 is the controller side for the same
+SoC. Other SoCs whose PHY is already a mode switch (e.g. SM8650,
+SM8750) may need the same property on their controller node (not
+tested).
 
-For the single power-domain case, call dev_pm_domain_attach() instead
-of devm_pm_domain_attach_list(): it returns early when dev->pm_domain
-is already set, so csi2phy->pd_list is left NULL rather than built up
-by hand. The three call sites that walk pd_list for genpd
-performance-state scaling now guard against a NULL pd_list, which is
-harmless since scaling is unused (scaled = false) on every SoC that has
-a single "top" domain.
+Related fixes sent separately: "phy: qcom: qmp-combo: Leave the USB PCS
+alone in DP-only mode" (suspend in DP-only mode) [2] and "usb: typec:
+mux: fsa4480: Keep the USB 2.0 switch on in DP-only modes" (boards with
+an FSA4480 on the USB 2.0 pair) [3].
 
-devm_pm_domain_attach_list() returns the number of attached
-power-domains on success, so a bare "ret < 0" check in probe() is not
-enough to catch the case where it succeeds without actually attaching
-any domains. phy_qcom_mipi_csi2_attach_pm_domains() now also checks for
-that case directly and reports -ENODEV, keeping probe()'s own check
-unchanged.
+Patch 2 conflicts with Vladyslav Tymoshchuk's "usb: dwc3: qcom: Defer
+VBUS override update during system suspend" [4] in struct dwc3_qcom and
+dwc3_qcom_set_role_notifier(). On top of [4], the
+dwc3_qcom_update_pipe_clk() call goes after its pm_suspended check, as
+it also writes QSCRATCH.
 
-Reviewed-by: Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>
-Signed-off-by: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
----
- .../phy/qualcomm/phy-qcom-mipi-csi2-core.c    | 25 +++++++++++--------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+Patches 1-2 are for the USB tree. Patch 3 must not be applied before
+patch 2: with "mode-switch" on the controller and no mux registered by
+dwc3-qcom, pmic_glink_altmode defers its probe indefinitely.
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-index c0a4fa20eaf0..269232499fca 100644
---- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-+++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-@@ -43,7 +43,7 @@ phy_qcom_mipi_csi2_set_clock_rates(struct mipi_csi2phy_device *csi2phy,
- 	}
- 
- 	pstate = 0;
--	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-+	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
- 		unsigned int perf;
- 
- 		if (!csi2phy->soc_cfg->genpds[i].scaled)
-@@ -174,7 +174,7 @@ static int phy_qcom_mipi_csi2_power_on(struct phy *phy)
- unset_rate:
- 	dev_pm_opp_set_rate(csi2phy->dev, 0);
- 
--	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-+	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
- 		if (!csi2phy->soc_cfg->genpds[i].scaled)
- 			continue;
- 
-@@ -204,7 +204,7 @@ static int phy_qcom_mipi_csi2_power_off(struct phy *phy)
- 
- 	dev_pm_opp_set_rate(csi2phy->dev, 0);
- 
--	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-+	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
- 		if (!csi2phy->soc_cfg->genpds[i].scaled)
- 			continue;
- 
-@@ -231,7 +231,11 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
- {
- 	struct dev_pm_domain_attach_data pd_data = { 0 };
- 	const char **pd_names;
--	int i;
-+	int i, ret;
-+
-+	/* Single power-domain devices are already attached by the bus core. */
-+	if (csi2phy->soc_cfg->num_genpds == 1)
-+		return dev_pm_domain_attach(csi2phy->dev, 0);
- 
- 	pd_names = devm_kzalloc(csi2phy->dev,
- 				sizeof(char *) * csi2phy->soc_cfg->num_genpds,
-@@ -245,8 +249,12 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
- 	pd_data.pd_names = pd_names;
- 	pd_data.num_pd_names = csi2phy->soc_cfg->num_genpds;
- 
--	return devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
--					  &csi2phy->pd_list);
-+	ret = devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
-+					 &csi2phy->pd_list);
-+	if (ret < 0)
-+		return ret;
-+
-+	return 0;
- }
- 
- static int phy_qcom_mipi_csi2_parse_routing(struct mipi_csi2phy_device *csi2phy)
-@@ -369,11 +377,8 @@ static int phy_qcom_mipi_csi2_probe(struct platform_device *pdev)
- 		return ret;
- 
- 	ret = phy_qcom_mipi_csi2_attach_pm_domains(csi2phy);
--	if (ret < 0 || csi2phy->pd_list == NULL) {
--		if (ret == 0)
--			ret = -ENODEV;
-+	if (ret < 0)
- 		return dev_err_probe(dev, ret, "Failed to attach power-domain list\n");
--	}
- 
- 	ret = devm_pm_runtime_enable(dev);
- 	if (ret < 0)
+Tested on a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a USB-C
+monitor over 4-lane HBR3: the monitor's USB 2.0 hub works at boot,
+after replugs and across s2idle (tested on v7.3 with these patches,
+[2] and [3]).
+
+[1] https://lore.kernel.org/all/20261022-kaanapali_dp-v3-0-b5ae8e6083c3@oss.qualcomm.com/
+[2] https://lore.kernel.org/all/20261023123512.1912-1-26rote@gmail.com/
+[3] https://lore.kernel.org/all/20261022165143.1327-1-26rote@gmail.com/
+[4] https://lore.kernel.org/all/20261018143126.3978-1-tvlad744@gmail.com/
+
+Joonhoe Kim (3):
+  dt-bindings: usb: qcom,snps-dwc3: Add mode-switch
+  usb: dwc3: qcom: Use the UTMI clock as PIPE clock in DisplayPort-only
+    modes
+  arm64: dts: qcom: kaanapali: Mark the USB controller as a Type-C mode
+    switch
+
+ .../bindings/usb/qcom,snps-dwc3.yaml          |  7 ++
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi       |  1 +
+ drivers/usb/dwc3/dwc3-qcom.c                  | 94 +++++++++++++++++--
+ 3 files changed, 94 insertions(+), 8 deletions(-)
+
+
+base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
 -- 
-2.34.1
+2.43.0
 
