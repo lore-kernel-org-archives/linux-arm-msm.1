@@ -1,112 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793628259;
-	b=s9meX0HH54J/q5tNqNHCwIdGdFFNCMcpVhqu++Y4HH/EU0AbM7Oma7jy+PftF1WpteT/
-	 oEPRh9nCytJUzzjojcN8k6d+3xiK7aPmRAwtsGjSFR3nlzja7bx0ue0tErixDkovS+f+h
-	 B1XchJelQKkkZWRtsEeo+tp+7rFK1T+n6vTW13i0R1HdFFsx55AtPS/yb4UwIuU3tICYQ
-	 RluW1g1i4FKapsYmH9pmRZeqMYD63r5893ovw6KPb6E+k4IfyHFiuHrMLex0ris2TCi1t
-	 Ver2r3tJ78IH9y/85gruE4OskvMy5lLUEDJGwvyrBFL0CPFJGSmzlt4BJzy1OMpcr+g==
+	t=1793628260;
+	b=PTpBLa6xpPzp04/EN49HAW4CUWvdTMmryxsI1xnlHIAk5nS03M+3FsdgCovc/ASblIm7
+	 RGHRjFPwy27j9YXcOEilWPRoG5pD0n03zWCoDj4SZCLSDwBCNDlHTDPF+sX3/bSq9rY69
+	 yzBNM5mGtRld2nX8DYWSlQRtgZuO0JsAOzeoxhoqUVxOMUYmsRuYg7nsOdmK8Wc80Y8Oi
+	 fVb/wM25YgVjzKz7nNbbHDlV1U1kdpViWQMiM5m6PG3yHrsGSs0Ka3OBLi7ZIjYH/5BuH
+	 1ISNXBe5l8PCaPpuqX1IoIWF5GJlbithLVziVme10zyXVHgOnBPALvtet39JrYh792A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793628259;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793628260;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=MM6WPQvZHCORWNa5gBSC182WytjG7gpmpHokMfwajXg=;
-	b=4x9TLfxrqJGL+T3pmDYf+5zjZPsrVlsB8fgnE9DntHdKmJ2VIyGiGAGXp/Yd78VgeLWH
-	 XwK7fKY6hULzVuIG/GwQRGyBwqG+PjbMfwy/dsUx+1e8edT4wYfRP3ZZ6m6jPij7oJU+1
-	 q/ScQwynKsWsTnPmqBWx+9NQIKEl03vcBssgRyuHYALd+emGEGyCGswF6/J1f9SYGS/ob
-	 XPLJhuimqxMAf26GVadetmkGn2Ox7jZBJNT3WoZkMFKu+G57vb6Buw2e2/rAKWWPtCut2
-	 ogt7WT8c17rRhROBe3a+P2D7kiOU4J2H1DEwhRBU91pSgJ6mro46fZJnJPInXSkLNOg==
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=Dag14m3h5gt5hwrihR8wyiBARY23IaTWQ9lhSc65Xxg=;
+	b=T8AAtS2SaYQ1qgdzSnlRwGVInLQ1Vl3A4DgjkE2kv6ACZ/3I5Q/wFH0U6vWd7pA8CuB7
+	 8sPSjNLqUV7FYwy/AN7ugDzZ/Z/dRBV/hGfB75TT+0ak3OWpKfluphtrCQ7oU/urXV3hV
+	 fgHEy2epjJbAbZa+G1ObnuMoQsXwjE2p3YGZhXYp/9Kf1kXzCP5hNMx5aaLE6x5RbhVj6
+	 8UeM15UNkNL8IEfNbWYsmx/Nnq05qjqICSgrD9gHasJcuwBc9ElsyYyYR0Nl6BkoZ8OuD
+	 TbRr04bMxGJBldIRdl7RYezRtvULGMEM8FxtpK4XZ7Qq2GjX+fTLtmUVBxPl+HTEY2Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PMHsexhf;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bqtWHwid;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=AmGnfcRi;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h5Fhq+O0;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 710FD60A2601
-	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 14:04:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 710FD60A2601
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE43E606A33F
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 14:04:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AE43E606A33F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PMHsexhf;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bqtWHwid
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2DpFnV3102565
-	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 14:04:18 GMT
+	dkim=temperror header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=AmGnfcRi;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h5Fhq+O0
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2DpLqo2991846
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 14:04:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	MM6WPQvZHCORWNa5gBSC182WytjG7gpmpHokMfwajXg=; b=PMHsexhfRoZiw1Jp
-	hOovDHYjxEUFNn9NPgdNHGpNAiORq/2dwJiC+9wV70VCWP3fAc0MRmV8jSetIhUB
-	hI/epuixlKhl+2gw23566HJ6rsomcZJVkgfY9eNeJzmxuN3DgQXqTJOkhjBwH2Fn
-	mF1XuoaoesAmrSiYKSQ+e1DI7jOJZ4ym6osZCKcQYuROXtemf01nav2SP3XUlt3s
-	3E7SKsdgHJZaJP23jAXdznL4Xx34lxrIuDroTg2lzngDCeQtl2XGblpR/8uMegRy
-	Bt8fXx7qLg4edSYaRw66CAEu8Cv4DfznRhZU988SQmfHtXmHtfzqDTSXNkwH5iYm
-	FQJz0A==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpk9rj4g2-1
+	Dag14m3h5gt5hwrihR8wyiBARY23IaTWQ9lhSc65Xxg=; b=AmGnfcRidw1WtTb2
+	/QPiyYNMjZPVGchsRWQhON4B9Pv3fhbtVlN7nwekiFs5KCThHj8jidECAxqnQjnT
+	rV/ttEOryTo4DSdlAnDPHqyk726P9FAYQShHoqpKV8w+zn1geS/zUCi0w8APOG0G
+	EyapIi8V9k+WrPCSl3vvZjQe0qVL3oo1EQUsd6084zPRsiG/QJtBPj0Z8Tr6E1Tv
+	nfyAcJpwV289YSFhWrxB6a9rYLLGIfW9YEC8TVmj7iacdc6IsZF8TlnfTggPEZXA
+	trcPOQb9qn9gRRc7ma6ImIYjUHyeRpICYf6F6eA8BcZnod7jPwdkHwjnN2x3gwHS
+	aJ2aLw==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpsavgmrr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:04:17 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-8a065d0e9deso2894902b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 06:04:17 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:04:13 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cd61bdc8683so1544288a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 06:04:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793628257; x=1794233057; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793628253; x=1794233053; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MM6WPQvZHCORWNa5gBSC182WytjG7gpmpHokMfwajXg=;
-        b=bqtWHwideMN7zz0WtMHedmiJWRLPLUHF6pmZX5qEHu3P8F9YvJWnpzMwvt0JEdTV/U
-         zuxZqXrNuIoP6DvO5azSE6re+bhzz5Sp4H4hk1CJOk7RzgLQfZP/cDwiPbSZFTuDObCQ
-         m+ghtkfJZC7XtYCVXu5ialhrIcqJG6rqfrmGdLS3ggRk/WnW0zs4xjTNPi8gGk9n21CS
-         zqxm1teD44V7eQ++bzqiUU0uRvrXsVlUAJsCe0VbDOQMgt8di7ytEX7qlL80FLYZG6rY
-         rOf3r9aGRoeJr033TbACvzqcvGUIN9ZxX4Fwxc9AzMPjqgdRXTGKjsYIOKae0+rXMru5
-         Q0dg==
+        bh=Dag14m3h5gt5hwrihR8wyiBARY23IaTWQ9lhSc65Xxg=;
+        b=h5Fhq+O0nmVqsh8r49wrS+6DVjKb+A1/jVQjWgGoZ/kLEF6B2X/VcikKCxDGEfSiXS
+         YmN8AbPqYpqI1FfQF0mwE0dz7g68kVtCMg2dsxok3mMsQpjOyYij8+LpQ2Q1w/yygR+S
+         eCsti2l3fNXMG6DF9uK7Y//3Lx0AevpT/9vvcTuLvivTnhDCkj+V1rIKFAjQFn94ZODJ
+         dGZntVGti9f8GdkaMXL17YNPW25rNC0JbPbXqFbqTdul54owUspqTU7ylekdoOydxanj
+         107YrtNLAJKudksjxx5rTxBNtNI3VhUX2XfgcITwZoJ4VB0FwMIrm1CJp9zDtDdFYXSX
+         aetA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793628257; x=1794233057;
+        d=1e100.net; s=20260707; t=1793628253; x=1794233053;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MM6WPQvZHCORWNa5gBSC182WytjG7gpmpHokMfwajXg=;
-        b=nE21PdiK2NCM7VxhQhHqW9RML52fi0baMRkHsyc3s3iIWh1AF5r8Tm9Lq+G/rBdHzd
-         flUcR5AhMBt3KDUeZ+/i8dpphvZ4XeSjWocUZiAENrKtL5MPQ5fBrIdp9RwXXC8UOfcH
-         ZwT1NSqQd1bfdBxXS0moAzIv9pO6cOd8lgx5/mjXPyJVmznDlxJZrvJgtfT4+muACu4N
-         1lYP7iKNvVebYCl7aG1nVi1TybXk+gYfq6X9Fxtwg22SXWNxeszKLjB6UM1YHPAwiv7u
-         0XymxgZdqlI5wIwi8n2twgyAMtK0qiN0v+XaLG5xHJUlC8dtMetSqWqZvvmiDhziW5AX
-         R2uQ==
-X-Gm-Message-State: APuU4Z8bdCMgATr94S6p3vVoELNC9pt8fMA4SjP1pMzm9fkFMxNmKT3j
-	UXwxYIBwn2/WVsp5W6L2d3HuDX3DQFgOsapE+jxX3t747OVp7UkqbHgW+HL9qjr8HjsujWwE5VX
-	kls5Nd9NZWh3AVngcMEB8c6eqxU2c+bmN99d4jRjk6q9rzgkgGuV0Ie1sew7StCR9ZbMsystE0O
-	YT
-X-Gm-Gg: AYBFou3DGURoGz9Uh77/1ccRkD44FxVP14N85a2oRCyknY8j7ieNfZ9e9dxyD7PdumN
-	acc/vmTMaw+hy0jHZHKFGp78yiudkAwtlD++xoT8ogAxwIT5MQ1n858+ajy6+9Hec8tmngjnTRc
-	9mf8FeswAYIzLEuUHgUM4W7I/KCj3DQhlrl5uOsR/UYSJcAMDLeYpcnf+uYWfN3sKpY2T6KxCg0
-	FZ390BdATZiA59wte8uybKfuBLXnnsXLGe7lMeiuaBME2WZNhS9TXBpvaTmS2D4KusLYr/rC1ND
-	ZeanGyRDT2JAG/FKWPCV288loiRwv+abcX207fG7KW5xfagaMgTe47LJ7zaneDMhwIVj53NfYC8
-	hXW3QQKKabhDwOQRlcFeGDJ5vimKFPBf16AULPc/avY/c8CcmKVUK8LJ/EFpLflIEoCZV1iS6gF
-	s=
-X-Received: by 2002:a05:6a00:bd02:b0:8a0:3617:b53a with SMTP id d2e1a72fcca58-8a9bea6af02mr5307520b3a.18.1793628256928;
-        Mon, 02 Nov 2026 06:04:16 -0800 (PST)
-X-Received: by 2002:a05:6a00:bd02:b0:8a0:3617:b53a with SMTP id d2e1a72fcca58-8a9bea6af02mr5307477b3a.18.1793628256260;
-        Mon, 02 Nov 2026 06:04:16 -0800 (PST)
+        bh=Dag14m3h5gt5hwrihR8wyiBARY23IaTWQ9lhSc65Xxg=;
+        b=14+KlUJwX0jb1eA792VxCoVB/NWFvl/RHV7JPtTqjAPs4ydb8rOKCuiPAG+KPyJsAz
+         0pRlaR83twlt4d4tS4ZDkvaXFma1dJ+3XnigMQiO/nZamOcgfI2Msy0l/tqGTtMc6FnJ
+         DRctfGGhUL6J4TQ/s6HcpdA025bKa1lxPFyteg7rB49gLMv8qf2pNY4qGcGtyNbJc+28
+         CO8Lmz56lLnHagG+/QxzuoZiyFsvbYD+rqLALQLDaTAbTSdVy0NhzuBTT+9xNNEwhsOs
+         fjwurYSAYDHEEiOalD8uzEWgSuM4TC5F9Wa6L4F2ZEllNwL1BrAgoghMjstQbPTfdc6B
+         mGvw==
+X-Gm-Message-State: AFq9FYLL2/ZiUTgztQWu8dTLXJfIyqhc/CGg2pBfjjjteP3Ogg7jt23l
+	LSEy7YvMeyCHOxt1FNFD7Qyy9GSbl5MS4wFlc9oNsA4crF8TtOcQs+0oo50zH9UfllnQRuGersx
+	mB/8kD/atxVVtPf1kkO0oaNchITvNp/WwCD8woe1yy9iIm/rsLWnt91VYLw8V4qtk7K59ctkTZe
+	np
+X-Gm-Gg: AYBFou18/sm8H9WtgA8S/I/yb5lzZ+WhPdYKBor773kJXE8hGrDA6xTjoryZsqldKUu
+	lYFU/gtwjmmj4LFDp8Tm1qADLpaeW52rbPT3qBQFb71QTvPa8ButdcH049S4RkTD4WQ2jFylCSG
+	ZNGtm1NwdsJhUGck4+dWnKOhE91PoHrmTmqdUmhwxTtntdiQGqyjSiKMihfvwPexutaGUPMRWH8
+	9bY95h/9LIhfCVeV1qfajzh5InFEmZGisrrQQOcYAOgJUhfLGoBi9SfdRk5UrgoE5PCYzh+88yP
+	ge0RzUBpS4JkImDGNuiWol1hPk3JW++LAl9OakPuFSQB7XNfMYEDNNHAUHd1/yiZ3Bk8f9xljWK
+	rYXlQ41IcpZyJJb62Y4q/Rre13syYC/EQrkOg5wFoRFrFPjIMnQ/3BKBI2AuqqXqu3c/i9skfK0
+	U=
+X-Received: by 2002:a05:6a21:496:b0:3e1:7249:e265 with SMTP id adf61e73a8af0-3e928d46829mr7631104637.27.1793628252660;
+        Mon, 02 Nov 2026 06:04:12 -0800 (PST)
+X-Received: by 2002:a05:6a21:496:b0:3e1:7249:e265 with SMTP id adf61e73a8af0-3e928d46829mr7631011637.27.1793628251158;
+        Mon, 02 Nov 2026 06:04:11 -0800 (PST)
 Received: from hu-ahari-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aad77fd956sm2286942b3a.3.2026.11.02.06.04.11
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aad77fd956sm2286942b3a.3.2026.11.02.06.04.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Nov 2026 06:04:15 -0800 (PST)
+        Mon, 02 Nov 2026 06:04:10 -0800 (PST)
 From: Anjana Hari <anjana.hari@oss.qualcomm.com>
-Date: Mon, 02 Nov 2026 19:33:42 +0530
-Subject: [PATCH 2/2] mmc: sdhci-msm: Add support for firmware-managed
- resource platforms
+Date: Mon, 02 Nov 2026 19:33:41 +0530
+Subject: [PATCH 1/2] dt-bindings: mmc: sdhci-msm: Document bindings for
+ Nord SDCC
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-sdcc_scmi-v1-2-244dbd893051@oss.qualcomm.com>
+Message-Id: <20261102-sdcc_scmi-v1-1-244dbd893051@oss.qualcomm.com>
 References: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
 In-Reply-To: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
 To: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -133,456 +133,161 @@ Cc: linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
         Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
         Ram Gupta <ram.gupta@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Proofpoint-ORIG-GUID: W4tJS-zf8OuCQj1Y9txA0topga5Ic6oO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfX+Tu2aq0EpuwN
- N8uxsFZ96mtIfTzbHkaJ1FoVQPXLzVxdQYSV0PN5Y8atd+y2iOH5+nPxWtCI/ofmmM5Rc5sxZn8
- WYHVpABX3jeJZGBHha6bR3Mm8YcwArZ/oupp5mq5p3CUQtOby2sXOAG/E7ljfzCwAtMwVZ+IWHl
- CELthuQDJ5fQ0TUHYgx9EAHiUEPEUn1whE70JZr9O9iLOByOxpjHbPpNtHilehduEnSQIKNs0uP
- /WSl9V/4TZ6AZhv3jegLCNuvc9qqzSVNkovkudn7lkjV/1w8rW2Qp086beiKiveiJ5HqVJL6cPo
- IHB1sFwlAAlSjd4et8pAoV14hTPWDhlkTxR++4IrSl6W0+6J1wwKLpYe36aKQC2z7Tk+9leZCiO
- aRJ4OC0sfOJRoZEuGdCUQ+AKvBZ87wmBpz/P/9lY0wLcJJKjfIDQW7NGTtOB6vB3qMHUBiSHYj6
- byM5xFTGFAxmsTy4TYA==
-X-Proofpoint-GUID: W4tJS-zf8OuCQj1Y9txA0topga5Ic6oO
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfXwcne/1jM00ZE
- 0V5Y7BZnjiZYRt72wdB706onNAm6BN5fEnM4JD4v55N4x4UO+keX3Z4LFDLraVL/BxKjosj+4Ef
- WuPYk1Q87Q63Jisn0ff9PlyLZ84byF8=
-X-Authority-Analysis: v=2.4 cv=LvwHWXdc c=1 sm=1 tr=0 ts=6ae89861 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfX2Y+dXIRqEDd0
+ qtIpKmbIMFJAKAc5ctrp8mCDLGmVYZJPRAH2BjxG8WYC/hOH+Mxyhv7eLi1U0JDW+xe2G5UXexU
+ aGD42fZA+riGSWmaKI4GF91ZpF/ZhEH2/TNrRmN0/chrKAU+KjHyym1W1aYE8lEp/UgvbG2LUbI
+ fB6Swt5EB2sRXKCjiItnecV5TxNIyc1Psbc3xoz7Aqb6VZJ7BxRcoupHPP9EVukRx7sDYIMI4uJ
+ xEYsr3/+lEeVpaUj/zLcFq52l8mf74XmuqQUR2itRPoH528yHXrtwNszk21YwjO2VxNl0BKQmOe
+ NCU6FQknT0EZFbUD2zQ5FDx3A7z+AM0WDalXpnvsvm6OIOh8rebMjAk7WHe+NKsNKMUYhEHyFrB
+ ASYrdvw/3CJKf1+W1AQ4OTvmgRUKzm0p1vXK32aqLgpYVV27WCW/rEfqGzod76lsD16cKpkJA8U
+ U2IHQxJYqn1IyM/ifxg==
+X-Proofpoint-GUID: fnfZkhA_-TB-g8pstvNhsAkVFzmCuWKA
+X-Authority-Analysis: v=2.4 cv=FZmiV5+6 c=1 sm=1 tr=0 ts=6ae8985d cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=tGE8Z9jcIeqfSwNaEeYA:9 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=o3jdfBYt8dMtDUvNEAUA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfX1lHN0BLPrHEP
+ TRvNEKlrRWzQ0uMGJbsoBQ6eto720hi5JjQ9nVQrpXQH3+DK2ZG0adU04EiQTdisqerpJStWmL7
+ SU6utb1jZ+QjnVgAaV5UZ7FsAL50v/c=
+X-Proofpoint-ORIG-GUID: fnfZkhA_-TB-g8pstvNhsAkVFzmCuWKA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-02_04,2026-11-02_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- phishscore=0 priorityscore=1501 adultscore=0 suspectscore=0 clxscore=1015
+ lowpriorityscore=0 clxscore=1011 impostorscore=0 adultscore=0 phishscore=0
+ malwarescore=0 spamscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020055
 
-On certain Qualcomm automotive SoCs such as Nord, platform resources
-including clocks, interconnect bandwidth, resets, and regulators are
-owned and managed by firmware rather than directly by Linux. The
-firmware abstracts these resources behind logical power domains and
-exposes control through the SCMI power protocol.
+Add Device Tree binding for the Nord SDHCI variant of the Qualcomm
+sdhci-msm controller, where platform resources are managed by firmware
+through the SCMI power protocol rather than being directly accessible
+to Linux.
 
-Introduce a firmware-managed variant of the sdhci-msm driver that
-operates through this abstraction instead of directly programming GCC
-clocks and PMIC regulators.
+Unlike existing sdhci-msm variants, this binding does not require
+clock, interconnect, reset, or regulator properties. Instead, platform
+resource control is abstracted behind two logical power domains:
 
-The firmware-managed model uses two logical power domains, attached at
-probe time via dev_pm_domain_attach_list():
+  - "power": controls the SDCC rail power state. The kernel requests
+    power-on and power-off transitions via the runtime PM framework;
+    these are forwarded to firmware as SCMI power-state messages.
 
-  - "power" domain: governs SDCC rail power state. It is activated at
-    probe and released at remove via pm_runtime_resume_and_get() and
-    pm_runtime_put_sync() on the domain device. These calls are
-    translated by the SCMI power protocol into firmware power-state
-    requests.
+  - "perf": exposes the supported clock frequencies as OPPs populated
+    dynamically by the SCMI perf domain driver at probe time via the
+    SCMI performance protocol. The driver selects operating points via
+    dev_pm_opp_find_freq_floor() and dev_pm_opp_set_opp().
 
-  - "perf" domain: the SCMI perf domain driver populates OPPs at probe
-    time by querying the firmware-reported performance levels via
-    perf_ops->device_opps_add(). Clock rate selection uses
-    dev_pm_opp_find_freq_floor() to locate the nearest OPP at or below
-    the requested frequency, then dev_pm_opp_set_opp() to apply it,
-    rather than directly programming the GCC clock tree.
+Both domains must be listed under power-domains with their names
+declared in power-domain-names.
 
-A new variant sdhci_msm_fw_v5_var is introduced with the compatible
-string "qcom,nord-sdhci". Detection is automatic at probe: a non-NULL
-pd_data.pd_names in the variant descriptor marks the platform as
-firmware-managed, causing probe to select firmware-specific platform
-data (sdhci_msm_fw_pdata) and ops (sdhci_msm_fw_ops).
+The compatible string "qcom,nord-sdhci" selects this variant at probe
+time and causes the driver to attach the two power domains via
+dev_pm_domain_attach_list() with PD_FLAG_DEV_LINK_ON, ensuring correct
+suspend/resume ordering between the SDCC controller and the firmware
+power domain devices.
 
-The firmware-managed ops provide:
-  - sdhci_msm_fw_get_max_clock: queries the perf domain OPP table
-    using dev_pm_opp_find_freq_floor() at ULONG_MAX to discover the
-    maximum supported frequency, replacing the direct GCC readout.
-  - sdhci_msm_fw_set_clock: routes clock rate programming through the
-    perf domain OPP path, reusing the existing bus-mode multiplier
-    logic to derive the target rate.
-
-Suspend and resume sequences bypass local clock and regulator management
-for firmware-managed platforms, as firmware handles those transitions
-autonomously in response to SCMI power-state transitions from the
-runtime PM framework.
-
-Co-developed by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
-Signed-off-by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
 Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
 ---
- drivers/mmc/host/sdhci-msm.c | 213 ++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 208 insertions(+), 5 deletions(-)
+ .../devicetree/bindings/mmc/qcom,nord-sdhci.yaml   | 89 ++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
 
-diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
-index aecd425bf095..da52a45203a5 100644
---- a/drivers/mmc/host/sdhci-msm.c
-+++ b/drivers/mmc/host/sdhci-msm.c
-@@ -8,8 +8,9 @@
- #include <linux/module.h>
- #include <linux/delay.h>
- #include <linux/mmc/mmc.h>
--#include <linux/pm_runtime.h>
-+#include <linux/pm_domain.h>
- #include <linux/pm_opp.h>
-+#include <linux/pm_runtime.h>
- #include <linux/slab.h>
- #include <linux/iopoll.h>
- #include <linux/regulator/consumer.h>
-@@ -168,6 +169,9 @@
- #define ICE_HCI_PARAM_CCI	GENMASK(7, 0)
- #define ICE_HCI_PARAM_CE	GENMASK(8, 8)
- 
-+#define DOMAIN_IDX_POWER	0
-+#define DOMAIN_IDX_PERF		1
+diff --git a/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
+new file mode 100644
+index 000000000000..c512628617b0
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
+@@ -0,0 +1,89 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mmc/qcom,nord-sdhci.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
- struct sdhci_msm_offset {
- 	u32 core_hc_mode;
- 	u32 core_mci_data_cnt;
-@@ -275,6 +279,11 @@ struct sdhci_msm_variant_info {
- 	bool restore_dll_config;
- 	const struct sdhci_msm_variant_ops *var_ops;
- 	const struct sdhci_msm_offset *offset;
-+	/*
-+	 * pd_names != NULL marks this variant as firmware managed;
-+	 * see fw_managed detection in sdhci_msm_probe().
-+	 */
-+	const struct dev_pm_domain_attach_data pd_data;
- };
- 
- struct sdhci_msm_host {
-@@ -285,6 +294,7 @@ struct sdhci_msm_host {
- 	struct clk *xo_clk;	/* TCXO clk needed for FLL feature of cm_dll*/
- 	/* core, iface, cal and sleep clocks */
- 	struct clk_bulk_data bulk_clks[4];
-+	struct dev_pm_domain_list *pd_list;
- #ifdef CONFIG_MMC_CRYPTO
- 	struct qcom_ice *ice;
- #endif
-@@ -302,6 +312,7 @@ struct sdhci_msm_host {
- 	u32 caps_0;
- 	bool mci_removed;
- 	bool restore_dll_config;
-+	bool fw_managed;
- 	const struct sdhci_msm_variant_ops *var_ops;
- 	const struct sdhci_msm_offset *offset;
- 	bool use_cdr;
-@@ -414,6 +425,45 @@ static void msm_set_clock_rate_for_bus_mode(struct sdhci_host *host,
- 		 mmc_hostname(host->mmc), achieved_rate, timing);
- }
- 
-+static int msm_fw_set_clock_rate_for_bus_mode(struct sdhci_host *host,
-+					      unsigned int clock)
-+{
-+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-+	struct device *dev = mmc_dev(host->mmc);
-+	struct dev_pm_opp *opp;
-+	struct device *perf_dev;
-+	struct mmc_ios ios = host->mmc->ios;
-+	unsigned long clock_long = (unsigned long)clock;
-+	unsigned long desired_rate;
-+	unsigned int mult;
-+	int ret;
++title: Qualcomm Nord SDHCI Controller
 +
-+	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
++maintainers:
++  - Anjana Hari <anjana.hari@oss.qualcomm.com>
 +
-+	mult = msm_get_clock_mult_for_bus_mode(host, clock, ios.timing);
-+	desired_rate = clock_long * mult;
++description:
++  SDHCI (SD Host Controller Interface) present on Qualcomm Nord SoC.
++  Clock and power resources are managed by firmware through an SCMI
++  server, so no clock entries are required in the device tree node.
 +
-+	/* Find the nearest OPP at or below the requested frequency. */
-+	opp = dev_pm_opp_find_freq_floor(perf_dev, &desired_rate);
-+	if (IS_ERR(opp)) {
-+		dev_err(dev, "Failed to find OPP for freq %lu: %pe\n", clock_long, opp);
-+		return PTR_ERR(opp);
-+	}
++properties:
++  compatible:
++    const: qcom,nord-sdhci
 +
-+	ret = dev_pm_opp_set_opp(perf_dev, opp);
-+	dev_pm_opp_put(opp);
-+	if (ret) {
-+		dev_err(dev, "Failed to set OPP for freq %lu: %d\n", clock_long, ret);
-+		return ret;
-+	}
++  reg:
++    maxItems: 1
 +
-+	/* desired_rate was rounded down by find_freq_floor to the actual OPP rate. */
-+	host->mmc->actual_clock = mult ? desired_rate / mult : desired_rate;
-+	msm_host->clk_rate = desired_rate;
-+	return 0;
-+}
++  reg-names:
++    items:
++      - const: hc
 +
- /* Platform specific tuning */
- static inline int msm_dll_poll_ck_out_en(struct sdhci_host *host, u8 poll)
- {
-@@ -1253,7 +1303,10 @@ static int sdhci_msm_execute_tuning(struct mmc_host *mmc, u32 opcode)
- 	 */
- 	if (host->flags & SDHCI_HS400_TUNING) {
- 		sdhci_msm_hc_select_mode(host);
--		msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
-+		if (msm_host->fw_managed)
-+			msm_fw_set_clock_rate_for_bus_mode(host, ios.clock);
-+		else
-+			msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
- 		host->flags &= ~SDHCI_HS400_TUNING;
- 	}
- 
-@@ -1847,6 +1900,28 @@ static unsigned int sdhci_msm_get_min_clock(struct sdhci_host *host)
- 	return SDHCI_MSM_MIN_CLOCK;
- }
- 
-+static unsigned int sdhci_msm_fw_get_max_clock(struct sdhci_host *host)
-+{
-+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-+	unsigned long max_freq = ULONG_MAX;
-+	struct dev_pm_opp *opp;
-+	struct device *perf_dev;
-+	struct device *dev = mmc_dev(host->mmc);
++  interrupts:
++    maxItems: 2
 +
-+	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
++  interrupt-names:
++    items:
++      - const: hc_irq
++      - const: pwr_irq
 +
-+	opp = dev_pm_opp_find_freq_floor(perf_dev, &max_freq);
-+	if (IS_ERR(opp)) {
-+		dev_err(dev, "Failed to find opp for freq %lu\n", max_freq);
-+		return SDHCI_MSM_MIN_CLOCK;
-+	}
++  iommus:
++    maxItems: 1
++    description: phandle to the apps SMMU node with SID mask.
 +
-+	dev_pm_opp_put(opp);
++  dma-coherent: true
 +
-+	return max_freq;
-+}
++  power-domains:
++    maxItems: 2
 +
- /*
-  * __sdhci_msm_set_clock - sdhci_msm clock control.
-  *
-@@ -1892,6 +1967,40 @@ static void sdhci_msm_set_clock(struct sdhci_host *host, unsigned int clock)
- 	__sdhci_msm_set_clock(host, clock);
- }
- 
-+static void sdhci_msm_fw_set_clock(struct sdhci_host *host, unsigned int clock)
-+{
-+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
++  power-domain-names:
++    items:
++      - const: power
++      - const: perf
 +
-+	if (!clock) {
-+		host->mmc->actual_clock = 0;
-+		msm_host->clk_rate = 0;
-+		goto out;
-+	}
++required:
++  - compatible
++  - reg
++  - reg-names
++  - interrupts
++  - interrupt-names
++  - iommus
++  - dma-coherent
++  - power-domains
++  - power-domain-names
 +
-+	sdhci_msm_hc_select_mode(host);
++allOf:
++  - $ref: sdhci-common.yaml#
 +
-+	if (msm_fw_set_clock_rate_for_bus_mode(host, clock))
-+		return;
-+out:
-+	__sdhci_msm_set_clock(host, clock);
-+}
++unevaluatedProperties: false
 +
-+static int sdhci_msm_fw_power_state(struct device *dev, bool power_on)
-+{
-+	struct sdhci_host *host = dev_get_drvdata(dev);
-+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-+	struct device *pwr_dev;
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
 +
-+	pwr_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_POWER];
++    mmc@b84000 {
++        compatible = "qcom,nord-sdhci";
++        reg = <0x000b84000 0x1000>;
++        reg-names = "hc";
 +
-+	if (power_on)
-+		return pm_runtime_resume_and_get(pwr_dev);
-+	else
-+		return pm_runtime_put_sync(pwr_dev);
-+}
++        interrupts = <GIC_SPI 261 IRQ_TYPE_LEVEL_HIGH>,
++                     <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
++        interrupt-names = "hc_irq", "pwr_irq";
 +
- /*****************************************************************************\
-  *                                                                           *
-  * Inline Crypto Engine (ICE) support                                        *
-@@ -2550,6 +2659,17 @@ static const struct sdhci_msm_variant_info sdhci_msm_v5_var = {
- 	.offset = &sdhci_msm_v5_offset,
- };
- 
-+static const struct sdhci_msm_variant_info sdhci_msm_fw_v5_var = {
-+	.mci_removed = true,
-+	.var_ops = &v5_var_ops,
-+	.offset = &sdhci_msm_v5_offset,
-+	.pd_data = {
-+		.pd_flags = PD_FLAG_DEV_LINK_ON,
-+		.pd_names = (const char * []) { "power", "perf" },
-+		.num_pd_names = 2,
-+	},
-+};
++        bus-width = <4>;
++        no-sd;
++        no-mmc;
++        non-removable;
 +
- static const struct sdhci_msm_variant_info sdm845_sdhci_var = {
- 	.mci_removed = true,
- 	.restore_dll_config = true,
-@@ -2566,6 +2686,7 @@ static const struct of_device_id sdhci_msm_dt_match[] = {
- 	{.compatible = "qcom,sdhci-msm-v5", .data = &sdhci_msm_v5_var},
- 	{.compatible = "qcom,sdm670-sdhci", .data = &sdm845_sdhci_var},
- 	{.compatible = "qcom,sdm845-sdhci", .data = &sdm845_sdhci_var},
-+	{.compatible = "qcom,nord-sdhci", .data = &sdhci_msm_fw_v5_var},
- 	{.compatible = "qcom,sc7180-sdhci", .data = &sdm845_sdhci_var},
- 	{},
- };
-@@ -2587,6 +2708,21 @@ static const struct sdhci_ops sdhci_msm_ops = {
- 	.set_timeout = sdhci_msm_set_timeout,
- };
- 
-+static const struct sdhci_ops sdhci_msm_fw_ops = {
-+	.reset = sdhci_and_cqhci_reset,
-+	.set_clock = sdhci_msm_fw_set_clock,
-+	.get_min_clock = sdhci_msm_get_min_clock,
-+	.get_max_clock = sdhci_msm_fw_get_max_clock,
-+	.set_bus_width = sdhci_set_bus_width,
-+	.set_uhs_signaling = sdhci_msm_set_uhs_signaling,
-+	.write_w = sdhci_msm_writew,
-+	.write_b = sdhci_msm_writeb,
-+	.irq	= sdhci_msm_cqe_irq,
-+	.dump_vendor_regs = sdhci_msm_dump_vendor_regs,
-+	.set_power = sdhci_set_power_noreg,
-+	.set_timeout = sdhci_msm_set_timeout,
-+};
++        iommus = <&apps_smmu 0x1580 0x0>;
++        dma-coherent;
 +
- static const struct sdhci_pltfm_data sdhci_msm_pdata = {
- 	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
- 		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
-@@ -2597,6 +2733,16 @@ static const struct sdhci_pltfm_data sdhci_msm_pdata = {
- 	.ops = &sdhci_msm_ops,
- };
- 
-+static const struct sdhci_pltfm_data sdhci_msm_fw_pdata = {
-+	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
-+		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
-+		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN |
-+		  SDHCI_QUIRK_MULTIBLOCK_READ_ACMD12,
-+
-+	.quirks2 = SDHCI_QUIRK2_PRESET_VALUE_BROKEN,
-+	.ops = &sdhci_msm_fw_ops,
-+};
-+
- static inline void sdhci_msm_get_of_property(struct platform_device *pdev,
- 		struct sdhci_host *host)
- {
-@@ -2665,8 +2811,21 @@ static int sdhci_msm_probe(struct platform_device *pdev)
- 	const struct sdhci_msm_offset *msm_offset;
- 	const struct sdhci_msm_variant_info *var_info;
- 	struct device_node *node = pdev->dev.of_node;
-+	bool fw_managed;
- 
--	host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
-+	var_info = of_device_get_match_data(&pdev->dev);
-+	if (!var_info)
-+		return -ENODEV;
-+	fw_managed = !!var_info->pd_data.pd_names;
-+
-+	/*
-+	 * Based on variant info, differentiate platform initialization
-+	 * for local and remote managed resource platforms.
-+	 */
-+	if (fw_managed)
-+		host = sdhci_pltfm_init(pdev, &sdhci_msm_fw_pdata, sizeof(*msm_host));
-+	else
-+		host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
- 	if (IS_ERR(host))
- 		return PTR_ERR(host);
- 
-@@ -2684,12 +2843,11 @@ static int sdhci_msm_probe(struct platform_device *pdev)
- 	 * Based on the compatible string, load the required msm host info from
- 	 * the data associated with the version info.
- 	 */
--	var_info = of_device_get_match_data(&pdev->dev);
--
- 	msm_host->mci_removed = var_info->mci_removed;
- 	msm_host->restore_dll_config = var_info->restore_dll_config;
- 	msm_host->var_ops = var_info->var_ops;
- 	msm_host->offset = var_info->offset;
-+	msm_host->fw_managed = fw_managed;
- 
- 	msm_offset = msm_host->offset;
- 
-@@ -2698,6 +2856,32 @@ static int sdhci_msm_probe(struct platform_device *pdev)
- 
- 	msm_host->saved_tuning_phase = INVALID_TUNING_PHASE;
- 
-+	if (msm_host->fw_managed) {
-+		ret = dev_pm_domain_attach_list(&pdev->dev, &var_info->pd_data,
-+						&msm_host->pd_list);
-+		if (ret < 0)
-+			return dev_err_probe(&pdev->dev, ret,
-+					     "Failed to attach power domains\n");
-+
-+		if (ret != var_info->pd_data.num_pd_names)
-+			return dev_err_probe(&pdev->dev, -ENODEV,
-+					     "Expected %d power domains, got %d\n",
-+					     var_info->pd_data.num_pd_names, ret);
-+
-+		ret = sdhci_msm_fw_power_state(&pdev->dev, true);
-+		if (ret) {
-+			dev_pm_domain_detach_list(msm_host->pd_list);
-+			return dev_err_probe(&pdev->dev, ret,
-+					     "Failed to power on domain\n");
-+		}
-+
-+		/*
-+		 * Skip initializing clocks, regulators and reset in kernel
-+		 * for firmware managed platforms.
-+		 */
-+		goto skip_resource_init;
-+	}
-+
- 	ret = sdhci_msm_gcc_reset(&pdev->dev, host);
- 	if (ret)
- 		return ret;
-@@ -2786,6 +2970,7 @@ static int sdhci_msm_probe(struct platform_device *pdev)
- 		}
- 	}
- 
-+skip_resource_init:
- 	/* Reset the vendor spec register to power on reset state */
- 	writel_relaxed(CORE_VENDOR_SPEC_POR_VAL,
- 			host->ioaddr + msm_offset->core_vendor_spec);
-@@ -2917,6 +3102,12 @@ static int sdhci_msm_probe(struct platform_device *pdev)
- bus_clk_disable:
- 	if (!IS_ERR(msm_host->bus_clk))
- 		clk_disable_unprepare(msm_host->bus_clk);
-+fw_detach:
-+	if (msm_host->fw_managed) {
-+		sdhci_msm_fw_power_state(&pdev->dev, false);
-+		dev_pm_domain_detach_list(msm_host->pd_list);
-+		msm_host->pd_list = NULL;
-+	}
- 	return ret;
- }
- 
-@@ -2930,6 +3121,12 @@ static void sdhci_msm_remove(struct platform_device *pdev)
- 
- 	sdhci_remove_host(host, dead);
- 
-+	if (msm_host->fw_managed) {
-+		sdhci_msm_fw_power_state(&pdev->dev, false);
-+		dev_pm_domain_detach_list(msm_host->pd_list);
-+		msm_host->pd_list = NULL;
-+	}
-+
- 	pm_runtime_get_sync(&pdev->dev);
- 	pm_runtime_disable(&pdev->dev);
- 	pm_runtime_put_noidle(&pdev->dev);
-@@ -2947,6 +3144,9 @@ static int sdhci_msm_runtime_suspend(struct device *dev)
- 	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
- 	unsigned long flags;
- 
-+	if (msm_host->fw_managed)
-+		return sdhci_msm_fw_power_state(dev, false);
-+
- 	spin_lock_irqsave(&host->lock, flags);
- 	host->runtime_suspended = true;
- 	spin_unlock_irqrestore(&host->lock, flags);
-@@ -2967,6 +3167,9 @@ static int sdhci_msm_runtime_resume(struct device *dev)
- 	unsigned long flags;
- 	int ret;
- 
-+	if (msm_host->fw_managed)
-+		return sdhci_msm_fw_power_state(dev, true);
-+
- 	ret = clk_bulk_prepare_enable(ARRAY_SIZE(msm_host->bulk_clks),
- 				       msm_host->bulk_clks);
- 	if (ret)
++        power-domains = <&scmi34_pd 0>, <&scmi34_dvfs 0>;
++        power-domain-names = "power", "perf";
++    };
 
 -- 
 2.34.1
