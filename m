@@ -1,49 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793627980;
-	b=1Uf3dDmyIOKljbwtEUXYhymnmyQ0HLZqghKA5aDuR5Y704zbWPydqj1dY2041icRX45k
-	 yqVgpWOVfnsNiSKxGYM/OvrURSkK13v1DnSF6pBVExFEiXHqRwwGYF7iW9/196v0alKSk
-	 GgvCtDAP6Z/jYOM2ckaU0ssGYMRwejfXWZPj+G4Xaf5mor9xLzwbkVauVAwJ55CTZ9yYA
-	 eqdROgkjH9A++10PtsNc7TfMCRyNvKYjwlbZUCYZoGNrpdtWVcGxoDhGon2MF3r592qbE
-	 TKX5xMsUV12ddnNtN9kuYkUTO8c/lRx9TBj56B5+syRwejiFY9eQbSypwbI7ozbgzeA==
+	t=1793628249;
+	b=Ln9xJN9xPWsSQha9plDczU5X2ENNWIgQQcOyaeDGfXZ7DFIsPQIbFb6SuDc45QFCgaKi
+	 GLGfg9XFkEjoc8Psb2KGdMyNdwzAafSVCKACm8cenMCzFowmRMTBv5l7XLGtLuN9q/NLq
+	 nd6D4KN6BTD8wdJMcFgaMtM/xHgfApER89p96DNkn8AVOlhhCaKNxQaEjavQgn3TIoNzZ
+	 NwPSebo3gDm8XSZE4gpqwUCRen3ozczyMR9+ecvWuW/SwDV0toGhJQQd2DYpO7T4GZh10
+	 lgEk0Gzy7Fro6YMBuZBSl+775iGifzj0WdQrnw22JAl1NxaGT7/dbux4/1rTMZme4Pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793627980;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=tljb7rtsPlQzIzEu/bBj+fXHIpowDv+rky87XRZ9VDw=;
-	b=inR9dpRUHnsex51vomY+63dkA+cbKvMuO+ECGB93FZiRsavem69NXlmjkpxIxYpGKmh+
-	 PvCzjZArVlrGvNXXFzDTHPlFqLBlYjCi93s7KaboO2EWYjkZ+zd97+YC/8bQWJCy3vEOa
-	 eHfJKO2gYqeJCSgNimYjcnKIapaOXKLXXNX6YQuYtDJn20Xv2Zkq5J9fxLyrk1cqtGslg
-	 1eX3N6wG7SzUjA52p5NtfXibF4RMNDblrxBePC2QsD+mBPHGKqyp4I31Kaqi6OTGvxSQx
-	 r+s+AQzihCLOlOSEk+9BTr+wfX1VfgURZhc6i+8p5jOGMa9LY2VUMQjO1N34RokdaFw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793628249;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=kj8Fda6uHscKvI7NgiMuoDqrKd7/WCO1xgYEpbK+uUM=;
+	b=YF3nzTr8OR8yxXLOvfMRHrb/78Ih3mFatpy9OSMymXBIzfWk4jq1SSgVv+lqBvXrP/ba
+	 sVlBtOOC9/k/kAz8A1BI2pSnW3ApJ2K436phzoFNABRwD1jQW3yX5kimUv+c5GpGZLp+U
+	 7zLRy5VxWb3kqcgY5HoYmPvpoTSqz3SsCdANSVgTrwZY6pSKfpReKJ+jGbLUrgYdQodHu
+	 r+O0uclCxOFKguctWQ7A1XKgPG6sRIh7oYIzNxXAS6SVI0ID6hxDxOv/cBmp9YAPjO5p+
+	 AVcN2QnhITT69TaXLAEwzzpcLF40ymHvwFHWBxHid2aQEL4cPiYTiKYB09hbG6lApMg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lkxNKFQ1;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZrXfdHH8;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ML33df1E;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AB0760A2606;
-	Mon,  2 Nov 2026 13:59:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2459760A261A
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 14:04:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2459760A261A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lkxNKFQ1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D4AE1F00A1D;
-	Mon,  2 Nov 2026 13:59:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793627979;
-	bh=tljb7rtsPlQzIzEu/bBj+fXHIpowDv+rky87XRZ9VDw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=lkxNKFQ1odMKOTvdBvqxcuVuYTL69XNHDMMAahN6rPpg4qNwXrFENKPaWKHscQw0Z
-	 Hq1rVTSFgWM6pTDVEx+R0Uy9WoZOoesyGi2rhboSzIpcQUXW1amB4WOqBL8t643VjT
-	 1Q2a/wILsjbd2E564vFxVeqJGAoDZ/JzKrFlYriUqhwYJOakK8mMA07UCrFP5688xD
-	 RgEwTFtSlJI/V7QT8F8O3vJbWy/3Wp8E4WDjQDiirMJlFVHR7eLvLngfBXiohkD+Qr
-	 rrZJJk/P1xpLqS4FYxaZS6DeDG8JGuidvBoRdvHCLkAWM2r/iSAPaBIAzb3Afn4T1R
-	 4m0RDVe/T9Qjw==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 02 Nov 2026 14:59:33 +0100
-Subject: [PATCH 2/3] phy: qcom: qmp-combo: Make v4/v5 targets use the right
- clamp
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZrXfdHH8;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ML33df1E
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A2Dp9ei4033830
+	for <linux-arm-msm@vger.kernel.org>; Mon, 2 Nov 2026 14:04:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=kj8Fda6uHscKvI7NgiMuoD
+	qrKd7/WCO1xgYEpbK+uUM=; b=ZrXfdHH8+h939oqNvWMMRuf2TVYcTjeQJ6dsxy
+	Q+phgL939WRtYs3GUxzjgdRoK5qwcKgCGj7zjFd75L+8EIy1t9ZtVcNTOwA8OPuS
+	eV6htRKbdPeZQ+bLsUdsgbxAYCh4rR45nTWNxutmtvAHR9Zmhw8FdxUK/5/QKdiy
+	AzW6vWbE2JeERHRsOEP5Fd92d3K0VydUkz2K/xrciWUK+PzAmZkGw4x52UDAbH2i
+	xhljz4O1f0bMLD9rLmwlsNmlIDrcondlUWIB/e3ZVkKzdVNB5lmAzlHYbg99xvCV
+	zuYW6ckTzYgFjJR4Vt2cNT/eFPF1KttOSFFGoE2mH41RaWvQ==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hppfe9e7h-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 14:04:07 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-89ff475a0deso2748132b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 02 Nov 2026 06:04:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793628247; x=1794233047; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=kj8Fda6uHscKvI7NgiMuoDqrKd7/WCO1xgYEpbK+uUM=;
+        b=ML33df1EAtM/4gakNWiF9tXCLNdHsKpHs/bnsVI8KA/3ZlCi40jjNv5dg0hKUgVRes
+         trDX/9JjfPAaQxEuPHyUR/U7+8xDjRK/GGh7rKvfguFEOg5vOw78AlO1/4n7G1UZqYvv
+         HTQDGecjrS98WIBRb/3gdX+C8+X4ilfVa7EBN1v/8LMvpTl6x/mRRBlk1VJe3xusb4FS
+         n+G/9c6M5FaorFl5tbaXLRfF+RcYXk3FXYs2/JjmJ+j0ABtFZPFxMwCTEnKkbi0RKyFm
+         MddqDONEdxE8hoCIx9QxC1SeOG/6PVlNl8S3GzeQ+KgbqRBnO3DsN0dnhHJilClryeeR
+         q6KQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793628247; x=1794233047;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=kj8Fda6uHscKvI7NgiMuoDqrKd7/WCO1xgYEpbK+uUM=;
+        b=xrXcCa4Fyo/N/24fhI49hsCovorqlI3JR4GF83mcEtQlMX5oYgLwPMhJ2p413nEGk4
+         3pDW0beKClMICf1T4wAl0Kxt1FQId1rBPcDvnULb+WDjrlVErOs4tuJnW2u4+AdH5xAy
+         3sxUxfIHC6rsV/6OovU0yn1t9thfOnQjQexhWz8My3gdVl78tZaxZnIr5FXRvqBFCb6j
+         T6Ad0pNoyKiWKhd4U4FEpx711d99Rg7jaaz3S59sqldmipOuJebBoiaMA0Gvj7uKS+E4
+         k8F2DvLxw45LL/WaeqqfoMly6jSbPqRmKm89u6uIxPYPfRNpv8WRhQ2QWNKWQOW/oaby
+         vUTw==
+X-Gm-Message-State: APuU4Z9mt5g8wClKwKVg/LyGjP7URBXsAE2FW6/iTQrnHa+2u/339c4q
+	LC8IEUILvHTa334hgosNGhkpnx0xv/FzYUmaIJZ/AKqeElc1R7pfABd55nis4UeXzW0HqmGGteO
+	K0+3920VM5eWIns2yhx1sktmkmwRuI5ENUw8HEsvqHYRwo3zypYlVnSyGctKkbx7+0q9AmNzo3l
+	D6
+X-Gm-Gg: AYBFou0z87zIqslG86LcifGnac7TCuyzXqwaBqzPelVSsg/DzBqBElGYGJV3VDT8vfu
+	EsXHrsnuE12kOyVixEYB6E+zSeYffWxGT4ES67DxGzwMGAhtSg83TLr5CuDssw5bDVmeRh06EzC
+	DrQWp2LgiEC/nI+cS7DLO5gDfG2UavdNeYU0nKOK99sv+LiMIaVBfVeRg0jp9XcJCic4gOJ4d+z
+	Rn/3ZP7ZsSLXTEpNi4MbTpDrv0oMb9ryH3H0lpc55R42AeKLaz5ltFo5AhOeEhQyX8pNk1qj3Qh
+	vQ4IYl0SZlk4i9nJwEPHSAlZqNwPPWHiiwpylbAOHO/ZFVou+lxpbLe+5bOqdGgSNmA3W8ZX6iz
+	1L7jt2/p6BCzFMOb3rmj9VoagOYXVe93ZX03kPQTDpbPtkd6zr/Qi/jtMq9clbN+eyf8wVO6J9p
+	w=
+X-Received: by 2002:a05:6a00:12ce:b0:880:5fe5:a818 with SMTP id d2e1a72fcca58-8a9bef522b2mr8213962b3a.59.1793628246668;
+        Mon, 02 Nov 2026 06:04:06 -0800 (PST)
+X-Received: by 2002:a05:6a00:12ce:b0:880:5fe5:a818 with SMTP id d2e1a72fcca58-8a9bef522b2mr8213908b3a.59.1793628246113;
+        Mon, 02 Nov 2026 06:04:06 -0800 (PST)
+Received: from hu-ahari-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aad77fd956sm2286942b3a.3.2026.11.02.06.04.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Nov 2026 06:04:05 -0800 (PST)
+From: Anjana Hari <anjana.hari@oss.qualcomm.com>
+Subject: [PATCH 0/2] mmc: sdhci-msm: Add firmware-managed resource support
+ for Nord SDCC
+Date: Mon, 02 Nov 2026 19:33:40 +0530
+Message-Id: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,88 +117,95 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-topic-qmp_aon_clamp-v1-2-141c2cb6cdf6@oss.qualcomm.com>
-References: <20261102-topic-qmp_aon_clamp-v1-0-141c2cb6cdf6@oss.qualcomm.com>
-In-Reply-To: <20261102-topic-qmp_aon_clamp-v1-0-141c2cb6cdf6@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793627973; l=3162;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=Jg/cbnzut80B0V7M8OEuBOh1vCJVvAzHbp5LGbo5Akk=;
- b=7etytahGwQHJJkXpWYpzhowAkBH5VofuSlugtYIwvyKJoxmC7f4Fu285zPjvzN0nnmfAOQ3fc
- 36EUJo9p9UeADxWAC35/OmzBJoKVbxBjHfUwuPZxVYvPsiDvCLAdGpY
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+X-B4-Tracking: v=1; b=H4sIADyY6GoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQwMj3eKU5OT44uTcTF3jZBPzpMREi5SkREsloPqCotS0zAqwWdGxEH5
+ xaVJWanIJyACl2loAPCZ+um0AAAA=
+X-Change-ID: 20261102-sdcc_scmi-3c47baa8dba9
+To: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Adrian Hunter <adrian.hunter@intel.com>,
+        Anjana Hari <anjana.hari@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
+        Ram Gupta <ram.gupta@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Authority-Analysis: v=2.4 cv=SeZi5fRu c=1 sm=1 tr=0 ts=6ae89857 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=cGx-myOgvVfTzkcdCuMA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfX23sIuinXMM1M
+ 2D9DDA61R+08+RdZU4n7dl60Y0rt3QG88gFOx7t2gsgAocCA787W6EdpfwKbBzwgwtauN+ANVjT
+ 0ogqtKDTounLK2KsRthNLJYNrWhkD/h4u24xca0h8hJpQ4/XIJu4O83oi7jLP/w9uCDVJ/Cvc33
+ XHPlVfn2sszQHpMwK0y4vSj1iEMLAlC5oQEr+cgZPDDE1Vybp41JCGKpEppTroTKdNdGG3IJdmM
+ /ECxSObnu17EFKNYE7j4AZwx3Zc6I8hUP8Ke8AeVVOBp65MuGmLNAx4zefl6Jh5EXXJu7qW9Kx7
+ ImT3s32AogLtWDpZzTjuGTUVA3vKXwS9GyONk1P13oajO0YvCuMDRqZF4/G3qC8R08Ejji4/Py/
+ cosIwG8JeI2dHxu0Uf2j8ynpasYelBuMLd/9QCRsLKqFqRUOAlAg2LNZCrUcYFDYMhngX2vxDY6
+ S7US/R9mZoTsiBCNWaA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA1NSBTYWx0ZWRfX67xiCHgxQeu7
+ gSbCDDw75Ug+GlQWs6aTJ51QNob3g/JezgfVXTow4BjRUMCXZlXvhIPyLq2ni/eeWu57eWFUq1v
+ 1S7TIZrYSyaT1852MQN0/FXLlhG/YpI=
+X-Proofpoint-ORIG-GUID: lbS06n_WhvqBmVUtrxE-jm_Hhhdsifc9
+X-Proofpoint-GUID: lbS06n_WhvqBmVUtrxE-jm_Hhhdsifc9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_04,2026-11-02_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 spamscore=0 bulkscore=0
+ suspectscore=0 priorityscore=1501 clxscore=1011 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020055
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+On certain Qualcomm automotive SoCs such as Nord, platform resources
+including clocks, interconnect bandwidth, resets, and regulators are
+owned and managed by firmware rather than directly by Linux. The
+firmware abstracts these resources behind logical power domains and
+exposes control through the SCMI power protocol.
 
-The clamp in PCS_MISC may or may not exist on some of these targets,
-but in any case it's not the right one to assert. Switch over to the
-one the hardware programming guide calls for.
+This series extends the sdhci-msm driver to support this
+firmware-managed model. Instead of directly programming GCC clocks and
+PMIC regulators, the driver operates through two logical power domains:
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+  - "power": controls the SDCC rail. The driver requests power state
+    transitions via pm_runtime_resume_and_get() / pm_runtime_put_sync()
+    on the domain device, which are forwarded to firmware as SCMI
+    power-state messages.
+
+  - "perf": the SCMI perf domain driver dynamically registers the
+    supported clock frequencies as OPPs by querying firmware at probe
+    time. Clock rate selection uses dev_pm_opp_find_freq_floor() and
+    dev_pm_opp_set_opp() on this domain.
+
+Patch 1 adds the Device Tree binding for the new "qcom,nord-sdhci"
+compatible string, documenting the two power-domain properties and the
+absence of clock, interconnect, reset, and regulator entries.
+
+Patch 2 introduces the firmware-managed variant in the driver. A new
+sdhci_msm_fw_v5_var descriptor is added with its pd_data populated;
+probe detects this and selects firmware-specific platform data and ops.
+The new ops implement clock rate selection through the perf domain OPP
+path and route suspend/resume through SCMI power-state transitions
+rather than local clock and regulator management.
+
+Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c  | 7 ++++++-
- drivers/phy/qualcomm/phy-qcom-qmp-pcs-v5.h | 1 +
- 2 files changed, 7 insertions(+), 1 deletion(-)
+Anjana Hari (2):
+      dt-bindings: mmc: sdhci-msm: Document bindings for Nord SDCC
+      mmc: sdhci-msm: Add support for firmware-managed resource platforms
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index 1c7b653975f1..84b9d6f3969c 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -159,7 +159,7 @@ static const unsigned int qmp_v45_usb3phy_regs_layout[QPHY_LAYOUT_SIZE] = {
- 	[QPHY_PCS_AUTONOMOUS_MODE_CTRL]	= QPHY_V4_PCS_USB3_AUTONOMOUS_MODE_CTRL,
- 	[QPHY_PCS_LFPS_RXTERM_IRQ_CLEAR] = QPHY_V4_PCS_USB3_LFPS_RXTERM_IRQ_CLEAR,
- 
--	[QPHY_PCS_MISC_CLAMP_ENABLE]	= QPHY_V4_PCS_MISC_CLAMP_ENABLE,
-+	[QPHY_PCS_CLAMP_ENABLE]		= QPHY_V4_PCS_CLAMP_ENABLE,
- 
- 	[QPHY_COM_RESETSM_CNTRL]	= QSERDES_V4_COM_RESETSM_CNTRL,
- 	[QPHY_COM_C_READY_STATUS]	= QSERDES_V4_COM_C_READY_STATUS,
-@@ -186,6 +186,7 @@ static const unsigned int qmp_v5_5nm_usb3phy_regs_layout[QPHY_LAYOUT_SIZE] = {
- 	[QPHY_PCS_AUTONOMOUS_MODE_CTRL]	= QPHY_V5_PCS_USB3_AUTONOMOUS_MODE_CTRL,
- 	[QPHY_PCS_LFPS_RXTERM_IRQ_CLEAR] = QPHY_V5_PCS_USB3_LFPS_RXTERM_IRQ_CLEAR,
- 
-+	[QPHY_PCS_CLAMP_ENABLE]		= QPHY_V5_PCS_CLAMP_ENABLE,
- 	[QPHY_PCS_MISC_CLAMP_ENABLE]	= QPHY_V5_PCS_MISC_CLAMP_ENABLE,
- 
- 	[QPHY_COM_RESETSM_CNTRL]	= QSERDES_V5_COM_RESETSM_CNTRL,
-@@ -4699,6 +4700,8 @@ static void qmp_combo_enable_autonomous_mode(struct qmp_combo *qmp)
- 			qphy_clrbits(pcs_aon, cfg->regs[QPHY_PCS_USB4_CLAMP_ENABLE], CLAMP_EN);
- 		else
- 			qphy_clrbits(pcs_aon, cfg->regs[QPHY_PCS_CLAMP_ENABLE], CLAMP_EN);
-+	} else if (cfg->regs[QPHY_PCS_CLAMP_ENABLE]) {
-+		qphy_clrbits(qmp->pcs, cfg->regs[QPHY_PCS_CLAMP_ENABLE], CLAMP_EN);
- 	} else if (pcs_misc) {
- 		qphy_clrbits(pcs_misc, cfg->regs[QPHY_PCS_MISC_CLAMP_ENABLE], CLAMP_EN);
- 	}
-@@ -4717,6 +4720,8 @@ static void qmp_combo_disable_autonomous_mode(struct qmp_combo *qmp)
- 			qphy_setbits(pcs_aon, cfg->regs[QPHY_PCS_USB4_CLAMP_ENABLE], CLAMP_EN);
- 		else
- 			qphy_setbits(pcs_aon, cfg->regs[QPHY_PCS_CLAMP_ENABLE], CLAMP_EN);
-+	} else if (cfg->regs[QPHY_PCS_CLAMP_ENABLE]) {
-+		qphy_setbits(qmp->pcs, cfg->regs[QPHY_PCS_CLAMP_ENABLE], CLAMP_EN);
- 	} else if (pcs_misc) {
- 		qphy_setbits(pcs_misc, cfg->regs[QPHY_PCS_MISC_CLAMP_ENABLE], CLAMP_EN);
- 	}
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcs-v5.h b/drivers/phy/qualcomm/phy-qcom-qmp-pcs-v5.h
-index 36cc80bb9059..1d1688b3d7ba 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-pcs-v5.h
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcs-v5.h
-@@ -11,6 +11,7 @@
- #define QPHY_V5_PCS_PCS_STATUS1				0x014
- #define QPHY_V5_PCS_POWER_DOWN_CONTROL			0x040
- #define QPHY_V5_PCS_START_CONTROL			0x044
-+#define QPHY_V5_PCS_CLAMP_ENABLE			0x08c
- #define QPHY_V5_PCS_LOCK_DETECT_CONFIG1			0x0c4
- #define QPHY_V5_PCS_LOCK_DETECT_CONFIG2			0x0c8
- #define QPHY_V5_PCS_LOCK_DETECT_CONFIG3			0x0cc
+ .../devicetree/bindings/mmc/qcom,nord-sdhci.yaml   |  89 +++++++++
+ drivers/mmc/host/sdhci-msm.c                       | 213 ++++++++++++++++++++-
+ 2 files changed, 297 insertions(+), 5 deletions(-)
+---
+base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
+change-id: 20261102-sdcc_scmi-3c47baa8dba9
 
--- 
-2.56.0
+Best regards,
+--  
+Anjana Hari <anjana.hari@oss.qualcomm.com>
 
