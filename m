@@ -1,48 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793576368;
-	b=G0zpc70CkouTnaR1gwXgIFSgHlxuLOYyjAITRvU7ANLgHM19ygR546U1ChT6w6I0n1Y4
-	 LK5zbFLBqXc29ocZyoijez30MNpAAJVUePiG/FUc06GoPnkqDi4RZnON98CH1RPbE8xLb
-	 /ww2UEaMYVSfRwZqnx4n3LG/l4qm2+SKnJSKvpy0E5QyF9VfjEZtegrcQc2dR0wY/XUb2
-	 j1wFg5zp2EdtaDBo6CX/kIjaW1S5BA1bOsM5AUBx1NjcFrpZn4fzv/L5TV4D/RK3tHiiz
-	 rL4nz10XJNLEgM3oVWGQ7yZMkEdUGZfNzbUbE/M5hSwHCScgpCDd/yvLuBfrObU9E1w==
+	t=1793579664;
+	b=AYCsP1MZ04Fng2hb/BtqiXA9/tf0KfPsb5okwNqLGFWRmwN2K+OEQfgoZEkdU2D+76bK
+	 9ZW0hiYfptRYDaMjTJQHqqTyOB0BZdg44P9dhdtMQn66b8QctWcczW5UNZzpYRkbeQGGR
+	 XCzt1rajyWYv7E5tTQFwZGzhMj+QC0g1LkUJ28P0UG83ThujFffWqv7e0mV9HSFUJSwJH
+	 qEkrnN2Ej4SVoVWrI3Dr78BaFeXGN7F3pa7iUxYrfSBQR51QxGf0RnoiDev2h1ncmpspj
+	 nkZOQJWMHmF+NssZw4Az3NJpsyvP9VI7sWD6Af1qoNJRJBS5/EgYzlXytTDM+874pKw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793576368;
-	h=Received:DKIM-Signature:Received:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=Q5JNKCwvfIl1wXozL7u+neqgmd50Qxk2iwM31esSMlc=;
-	b=V/5IHmRdJK5cQMvkqHD8bYALE9l4am4Ueu4xZqhDb8oct4fZK1tcPbjuPt9WHI8LjxyM
-	 55kKOc8RLTCca38e1++nQyWwJomXb39QfZnDTL65wO7t48SS0Rzp49HmC2Pxm30OJO3RG
-	 H3ARWnaayBGKKc9pOPbtWMvB2iIREVdilp5mvr406oSJp+N5y30U2s3uJYpxFJ5j22Bf+
-	 LenleXvZMuR7CCUKLeki8mNticDhxkhM2FhpVO5IYiXQP98ASGbOxecnQyuX9aPbCWf82
-	 ydKlUg0+yN+DQw8W+Tv7dlszsvhqUpEmzNaQ8/sBZxEg6xZClv7ZBN53O1506iPgV+g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793579664;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
+	b=xSZ8e9Os1vlGYBkbPixQhn8ZatnXxSXzrcA24P5x1ilS1HxJ0hpcFi6kao9/uUH5KDxM
+	 YwVzISpgtTzBnsNWT/HONXsrQEbxVB9Q/pOQUGGqiDtaugcwlNNM14xcX/AojyjJQhlqP
+	 1c0fNBidGpAhufnPhwa90nqxZ13icXU/UsbQXTjiB+3Fky1CeUVCU3LVFepCqqdcPbuL4
+	 I/412VsOGbPQpfLpPUc7xq7EkDBC1iZQlrpAOVq2D83Hqdc0WUE7b/y+w+mMO9y/5Jmah
+	 2TB3y8zgBkHVoPozHqMss17skLnCKOXh+SmgaEPpEsspx4XOeaX4aSjSMq8kAwlH6yQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cX9PI0CZ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nV1PMwl4;
+	arc=none smtp.remote-ip=209.85.128.50
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45EDC606A327;
-	Sun,  1 Nov 2026 23:39:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31E2C606A326
+	for <linux-arm-msm@vger.kernel.org>; Mon,  2 Nov 2026 00:34:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31E2C606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cX9PI0CZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDFFB1F000C1;
-	Sun,  1 Nov 2026 23:39:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793576368;
-	bh=Q5JNKCwvfIl1wXozL7u+neqgmd50Qxk2iwM31esSMlc=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=cX9PI0CZcjICKKnMCUa5jh4oLTuQjEXgzcXNTWdoFglI792LafFDR+D4Rhxc3jGHk
-	 +AyFYwh4RezpZSNdeH75+g66LfhnjiHwyl5lk3yLH4VtiaRLSjO2z+gHOzbnLbKPRn
-	 QccPB/PHyP1yp/pV0TWKWBJ4MCdrnxyOzxAL54L4FiF38MIdfyNYiGmUo2LdT2cVC0
-	 cqznffCjvVbG7N0HKKQ029dJwxcoQ1bFHOT8Z4MzOEPdfSRD79xw56vsl8J2cVf08b
-	 dyjI/Egk69CAePSa6nLOuVAL+lj2fTapp9Xy2raEe8nPzWk0qx1uyGMtLs7jXuBX8O
-	 8XMkzmo8LMXkw==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id 577B820F63A0;
-	Sun, 01 Nov 2026 23:39:25 +0000 (GMT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nV1PMwl4
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so18416245e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 01 Nov 2026 16:34:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793579662; x=1794184462; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
+        b=nV1PMwl4VHAHqIOl+VOqC5R1iPcDuyTrt0MB4SB3sTi+Ly/Yt9pfuUyCCbx+Jlan7M
+         NnlKwdJIYpcAS9cyPKnFhPWGIDoxcXwyeKOOYKn2k+DGnyTNslTSxub2Dro1ZTn0h4xO
+         SVNX8ISsy/VlInSqRUVhEN2vEdT3RYAjzDc/6am1hOa+fiWe+brneZJum50JT4q/Ttip
+         x+NRpWiv95FZ0azw0Hxt+58YJE1lf5V8xjc3a6ksMuiXpAoQZXfYTjQ7bZlbCL0Y4hjz
+         7zwCb4bEUNSzN0cM0W0lLXLxev9SkjMQ/hzcCSP+jOX5onvsFuvUwvfzYcIF7zifFd+5
+         YMPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793579662; x=1794184462;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=t6BgGV0l/xNQelfhYb/Yd8iY7WjY6xtp0Q45DsnSYHE=;
+        b=GbZMNrdW1Or3sQjwE4SVTb2Z4XzLEIZPf21izytvQ6cxfZi2p4NxT7NRD2ySa1OcXQ
+         Q+gj9hheSki47NOaRPK4SUsUPdThhVeeAapCBrnt/qgxXDRVc4qLecTJoxlshA+0hM/T
+         s2i+JwYLHzzz6/M325+P4133Sp2XFUUmYgMHNB80P7AphC5PMawO4HdOTd5VjHgnbKTa
+         4fzRsShsgf11CpAbszM/Md37CwrMzeDZ5WWlSlvOV70kbdAyLQUGtUlOxQTZjP8fTOni
+         VPmi7Oum9CUf/zIvt1usGq+pfzqMTblPV2NM6am58m5gI/sAOQLP9teA1D+4CmxCJxFY
+         oMiw==
+X-Forwarded-Encrypted: i=1; AKwUvBxhRw6SOo5qDlkml4WAt7zIpIWQd/fx4ON7+STH3C9cnaXg9qjJkMPNspyHuV0k7dVDbJOwAYBU6AGHT2Uo@vger.kernel.org
+X-Gm-Message-State: AFq9FYKu3Z/oP15fbM/rHK6NhbNdIUUlYx/CvMfOwXsifbxG7uu1sDG1
+	og8IpgiuLhgp54pgs6J5zVHkXQhNNcP2hQcOjAb5PTYjlaSHnJQYNw4=
+X-Gm-Gg: AYBFou34w0fKtOkNfJ/auJ5/Ma05F/gy72bGYxSSdPbGBYyWGPee/5E8h49qt81SbOm
+	Tg/Ys5dXVi/ZvnU4U05Y4YODd+NCGmfbFj2K6RJ8PpkpVfFjUipDfpe9ndhFHEyfv95A+TGKwUu
+	ox65oTf1shi5sfneJ1naQXZOLd4cPovfGgujU28Tctvz4kOnXu2/kbER00ZxA9ipTSl8s3uXPjf
+	FV64J8ChZU6e8Xe5fJcCdPSGNFrVtJ6qtp15jNufCyM+o7IH+9or+VPo1o0rWqH42NfCnLvj1NG
+	1TfHcuEbXNxr+I2taGRTIwuo7k4t/ZRH9Tm3JCF5WwOAULWOJ/FkMWWdeA2aB3BxZ/IoMrUFwv7
+	/cUy3foSEdTkhQEBuvmdozW7o9OwfW314DLbtWQTJ+u5KkWKnHSDPdg+zRmB/D/BuFTg4dPuY8A
+	/q03XFPEZ0Ctr9y4OaacsipgmzlOuATgWBhput6ROsItOm+Ubq3zi+vAnBRB51g0aIJzZVV34Dh
+	BqrePHDT4wRhJ3ktsKlhIKiaOXnNhpsnSggplqdS7jSlmldKhvCv71nDW6x7ajtU6knh2PYRb7g
+	zt6F78sECx7jniWJWI0IlVDBkJ5nG0d0OP3K
+X-Received: by 2002:a05:600c:8b54:b0:4a1:fa21:fd90 with SMTP id 5b1f17b1804b1-4ac16bc547dmr205930655e9.9.1793579662262;
+        Sun, 01 Nov 2026 16:34:22 -0800 (PST)
+Received: from sasha-User.lan ([185.159.163.49])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b728f9sm16739755f8f.10.2026.11.01.16.34.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 01 Nov 2026 16:34:20 -0800 (PST)
+From: Asdlerto Korry <korryasdlerto@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Asdlerto Korry <korryasdlerto@gmail.com>
+Subject: [PATCH] soc: qcom: pmic_glink_altmode: Fix printing of a fwnode with %pOFn
+Date: Mon,  2 Nov 2026 02:33:24 +0200
+Message-Id: <20261102003324.340577-1-korryasdlerto@gmail.com>
+X-Mailer: git-send-email 2.25.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,37 +98,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] ASoC: qcom: qdsp6: fix device_node leak when parsing
- "iommus" phandle
-From: Mark Brown <broonie@kernel.org>
-To: Selby Mashiki <mashikiselby@gmail.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261025190340.449613-1-mashikiselby@gmail.com>
-References: <20261025190340.449613-1-mashikiselby@gmail.com>
-Date: Sun, 01 Nov 2026 23:39:22 +0000
-Message-Id: <179357636299.1716893.5266083194003598259.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=356; i=broonie@kernel.org;
- h=from:subject:message-id; bh=xJXHAEaMrD7QUxGGvMCAcch2qte5IjifZkbGrlkI5eE=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLKen1177IpgpOi8+yL3v1z4t+xWx9KASfMuz18tmGEbM
- Udxjs1Xpo5SFgYxLgZZMUWWuCzul/Ulr9fwHVzYBjOHlQlkCAMXpwBM5NJ5hv+ui11f+njMKAxn
- +6h/9ausgSu35to/+z3me37kjWtlWdvK8D+o7Eb8xc9FirskmfTdj/+2mz0//myk3u0DH2Qc9f7
- 8PsIHAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Transfer-Encoding: 8bit
 
-> q6asm_dai_probe(), q6apm_dai_probe(), and q6usb_component_probe() call
-> of_parse_phandle_with_fixed_args() to parse the "iommus" property and
-> extract the stream ID from args.args[0], but never release the reference
-> acquired on args.np.
+pmic_glink_altmode_probe() walks the child nodes with
+device_for_each_child_node(), which yields a struct fwnode_handle, but
+prints it with %pOFn, which expects a struct device_node. vsprintf then
+treats the fwnode_handle as a device_node and passes &dn->fwnode to
+fwnode_get_name(), i.e. a pointer into the middle of the handle, and
+calls through a garbage fwnode->ops. The error path ("missing reg
+property") therefore oopses instead of printing the message:
 
-This doesn't apply against current code, please check and resend.
+  lr : fwnode_get_name+0x34/0x50
+  ...
+  device_node_string
+  pointer
+  vsnprintf
+  ...
+  pmic_glink_altmode_probe
 
+It was hit on a Samsung Galaxy M52 5G (SM7325) whose vendor device tree
+has an extra "qcom,pmic-glink" compatible node without a reg property.
+
+Use %pfwP, the specifier for the name of a fwnode.
+
+Fixes: 080b4e24852b ("soc: qcom: pmic_glink: Introduce altmode support")
+Signed-off-by: Asdlerto Korry <korryasdlerto@gmail.com>
+---
+ drivers/soc/qcom/pmic_glink_altmode.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
+index 465e5d2316a0..6f3737b096cf 100644
+--- a/drivers/soc/qcom/pmic_glink_altmode.c
++++ b/drivers/soc/qcom/pmic_glink_altmode.c
+@@ -596,7 +596,7 @@ static int pmic_glink_altmode_probe(struct auxiliary_device *adev,
+ 	device_for_each_child_node(dev, fwnode) {
+ 		ret = fwnode_property_read_u32(fwnode, "reg", &port);
+ 		if (ret < 0) {
+-			dev_err(dev, "missing reg property of %pOFn\n", fwnode);
++			dev_err(dev, "missing reg property of %pfwP\n", fwnode);
+ 			fwnode_handle_put(fwnode);
+ 			return ret;
+ 		}
 -- 
-Mark Brown <broonie@kernel.org>
+2.25.1
+
