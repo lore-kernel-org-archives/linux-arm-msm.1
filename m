@@ -1,101 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793738495;
-	b=ZgDn3GWHjYw0YGLNpQrCpmq4D+P0DrdGLW4E6x3fba1nwXZXlEuaENyTdRFgfrAIKL1w
-	 AWKit0zrFyzVgJGm171jB8AJSZprG0sAawD7T184zNZKsTnSWiaxod71Hnm34FyhNJtwy
-	 uLJdrGX/os7DWZ73R1rwtYdiT1v1KXVg8dSr2A8pQzx0PbklMexDnYKWPuHQc/Izz7NJO
-	 rmkbB+8jzMvdFYGJMnjwg+HsFlT81dGJtSROyLcy3PEbCDnr5u2SIcKtvTzOOwo0F9dQC
-	 K8bEGDK9H7u17XqAlzV9iVFpkeeYj71Dx2vGkZpBQa1OCwSVJ5BzGCUuNjLgJN8fpuQ==
+	t=1793738830;
+	b=4QlsJYKYzjTy6osAFaxifcZq7dPUD0yvJ4i75Ymuyz81NCIpOyl4OYi+Vt8gJLLK2/Tz
+	 k9YADgoEeIss8EWvyO3w4akDwYh56FYbpTKG1iXVd9zC4FDtanV5g0axg9foHZpo7w6Wc
+	 5Z70GkdsIys2a1khmUWpx0HAdXeOxEAVufmU7/fqZPTHyI/Rnu9YUn8IuJf/c7+IeqSX6
+	 chhfYweuYatwTT1UqPCHvoOyPLs4jVG9SC8RNB4bpep/DM1S9bG7tPPQPEEKAXZ3UXK0x
+	 4Yd02DMNSzFkZJk4Y14WjLayhW+dsgOfL3XK+ABH/GAabFxKzn3AoZssRMuG+luisJg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793738495;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=YETm+Up3HiqhI4HFEq9kpUZu0+ZMnC5rPWZMwVWWgSM=;
-	b=hz82WJ58SBcQUHbIq56GSqIz1OPlnksUO9geeVUH6uWwh/ZRSgq8kE+HlrWwdixWJ7WM
-	 tMpiDCtCkc2a3YsHNTKwOnnlSRbZXg/bLuNZcRjXgS9jfcsi1MnZeZlUsBveyjpLwD5L4
-	 SYog8JNnCWQ+0rJC0sqOnetLyyPiO2AyFuU7TCSVYOlAwFRinIWvOJ1xNTovDuZ7Aefr4
-	 HmJHMdafl6N3y0hp2CiInK9C5hTowV5ikaB7MOn6Qx66+qLH8qCb4rzmxZjTXY95mALvm
-	 Q4JIPAu6kXVQJVEtw8UxXNGNVlF55+Xd8mEbjM9nvElxVZfXZjJT1BZgVGTk7ey5h3w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793738830;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=8oFXxmvyuBamBkrwLsfIs9gvWbZLGQ+mfgKXsfiNsLI=;
+	b=Hl7AeixaJ2bG/G5B1t61I+Idx8WLCKaIdD5Yfa7C/o9/hOTYyV5EPR+OXUsuzfUGfoTZ
+	 oCO6dTUAhtMClq5NgAoV8+hwykrIz9BzIWLiT9VRF0/rRpIBDKAq+7BsepMpWOVbWoq1l
+	 Vt2if1OLgAu+G2pUeR7G7StkBjPJ8IWAyGfBIcnWj5fct5pQpE9dPpwvMNfuLp4QY1rxL
+	 H3oVk/t3xodm7vgs4lnFWRDpEuwNf61Vu8JDidATWo3lEY9n613jMrQy72urFGpVbrlYR
+	 NRaXWMfbxJrsslzhQ182oDjYMzIQMuwmrmc4o3nL6WP5bpcj/3w5maVaq623laK5pHg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HSTSqJMR;
-	arc=none smtp.remote-ip=209.85.128.47
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zk7Y6CSh;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 163E6606A324
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 20:41:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 163E6606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03CEA606A331;
+	Tue,  3 Nov 2026 20:47:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HSTSqJMR
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4a214c5c4c0so42099265e9.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 12:41:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793738493; x=1794343293; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YETm+Up3HiqhI4HFEq9kpUZu0+ZMnC5rPWZMwVWWgSM=;
-        b=HSTSqJMR+jvEo7ahjNsMaM9qSyGCUVmfTGwVA2e8aiMWGnRNXOoFjjT33oaJBoYquX
-         RzwiNuqcFYR6QHmjbTuWi+SEjZL8eJkpRxntpXgz9zb5jTEL7o2tpXZMc+aHbXUrfrDK
-         sdXBdeLSeKFdOjKMq5rUA3Yeelka88N8ziOo9B5uD4PXEl6CIOKPBTH/MXVh4BVMvpiX
-         9XIpEdm69UYiebiVZSJ8g5+orD9Xhx1CBwqRXOMljrDP/uHgP5/DK0/xVJq8uyj0eNn7
-         p/eOYxSVzywNomXd/v66nUicck1CmOOGUj9nCrsdPwtAZRmcs4JMcOMUlnmBDkLTA7xo
-         d6zQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793738493; x=1794343293;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=YETm+Up3HiqhI4HFEq9kpUZu0+ZMnC5rPWZMwVWWgSM=;
-        b=DiUuivqUCwOtsdOhcknEaXdTTChK3uy855VUrVjlAhkjrsJAw3hBckz1edmth0Xo/g
-         aVQQ1NE/paqDfSNWgzmiNumJnBYJmJz3IrQesRYtd0Hu/26qWRjlaEqdsbMLpx4InaAZ
-         jZhKIomroxgxcWKYhyFIO75jD6LD/0BrDvbFc0HJQa6duRRiW6wkTxv6bKWHhb+mIQ0F
-         D9gTbUpETdEWiHjtGALHNiYlW1/SZaPpMcET8lFa7UO+/BK8G+GX/bjOjU6C2W8BTFQ3
-         xQv+7h4H0j+DtubFyTEJm3j+idwv7qISTp+UMvTmaJJIpJFBaTKF8FMsNFOKRSZ32cEa
-         ggDA==
-X-Forwarded-Encrypted: i=1; AKwUvBxnglG1CLoyg7mN372t5VrnM+k6TW+nAAzyCGF2+O+L5PViajAz5VgggOf82W0kbnycfMiQPEykbchvyAfB@vger.kernel.org
-X-Gm-Message-State: APuU4Z+ZZqGbHVXbAYIaT8qosShGHDOVlVkLFKETHSmHubgsoH2wPP+D
-	qCJl8NCCaJ/SgZ3Lq+bb7CscooHWHf65eOkhssElpXK+i5UEjCFY8hMR
-X-Gm-Gg: AYBFou0qKrR0H5/MH5KM57/YbmCkrnFfxpcqW6sfcS6Aq7u6N4rLT4pcNEgekWJ2hQh
-	v7z6iPUwgYKNKmLtl8xcEHTrEn7OiFC96kbQ1n3PGaFNf6U2EGqDNNBRCG90Cbdw6Wlh/kId2+b
-	/E4BZG/5erdrViESD+2oovtaEmakL2bXkN6irRxvb+Q2bEoHzJUdKWmyvpDCg3AHJogNZRNoCSD
-	/+2PHESNGhuFRrZdJmezTxhFt8tl3mgq+XSwMhRsH21CR8at4gHfi9YK1hBKh/qgzh37ext2e/L
-	qbZul/Wn9Dz+ToqEXKoosnAx9o1BtDE5eIxxJfRsAP0oTMbBXQaUuuWAUON+pjVqwWi8bbCkC+1
-	naCIZpTYBJqgXrEauyTDg9mcIFaE4ScGFUqW6/uo4xbe7EvywYI1LQFn9gmqXg5smaKCXXRDSWA
-	bF2SQLPKt89dFyD1bLHcs79pdd+jdxY5yppuPOo4p6hN0s1EXW64l2LVjCvYmY0EIxN5f4OD8Mq
-	bBZ7plF5UQGrlTC/xf+hCjIMNebu6mz+S/F5/WHT1bOJTsr86uPlQOGxZ3o1F6w3LGMjvT1tB4y
-	ttU2yEyDc1dZzpnxGX8YbXd50AlVUUsC1S0XrheUhJYmoG/39/patG1R/AgoutAV76PN/qyu42T
-	1FUOztXslc78xhw==
-X-Received: by 2002:a05:600c:8b04:b0:4a1:db17:c7e6 with SMTP id 5b1f17b1804b1-4ac150b2044mr321941285e9.2.1793738493245;
-        Tue, 03 Nov 2026 12:41:33 -0800 (PST)
-Received: from notebook ([93.189.202.99])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4134ff2a3sm6859995e9.2.2026.11.03.12.41.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 12:41:32 -0800 (PST)
-From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
-To: linux-pm@vger.kernel.org
-Cc: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>,
-	Sebastian Reichel <sre@kernel.org>,
-	=?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
-	"Andrew F . Davis" <afd@ti.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	David Heidelberg <david@ixit.cz>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v8] bq27xxx: support interchangeable OnePlus 6/6T fuel gauges
-Date: Tue,  3 Nov 2026 23:41:29 +0300
-Message-ID: <20261103204129.278715-1-rinat.muhamedgaliev@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261019-master-v8-0-2517e41c8992@gmail.com>
-References: 
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zk7Y6CSh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2717F1F000C1;
+	Tue,  3 Nov 2026 20:47:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793738829;
+	bh=8oFXxmvyuBamBkrwLsfIs9gvWbZLGQ+mfgKXsfiNsLI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Zk7Y6CShu0ANVuTk17nOv+HlIsmGunrZJbAJ++Ws8nnLzJiHat7KfzL6Ci0Bcud4q
+	 P5X6Tm+V0ZV3Bp+/tkw3JbSF6cna21hk6UWWCgSrYZJAoQyXjh4q6MyRAMd+xuuK8Y
+	 zNjO89hxK6IpsIcfH5J86ZHwwOXDIh87U8v3fV+EXl9an+qVM/TDUPawJBI3LnBfZA
+	 DBrVNMI8TNO40+UBpBUxiHhCxPMxxeALEjy9i/cV7DM/H2MhU5MYB+Kt2cWDMmwFR1
+	 +9OL1UEiWl1ETkBogCd90rgK+XESpVTeiX7vYvOCwtWrl9ey31Q7JKkdBrgMynzaor
+	 FHZBMkr/t3jpg==
+Message-ID: <b6fccb70-596b-4b60-9086-04223a77e395@kernel.org>
+Date: Tue, 3 Nov 2026 21:47:03 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -105,15 +51,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8] bq27xxx: support interchangeable OnePlus 6/6T fuel
+ gauges
+To: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>,
+ linux-pm@vger.kernel.org
+Cc: Sebastian Reichel <sre@kernel.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?=
+ <pali@kernel.org>, "Andrew F . Davis" <afd@ti.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ David Heidelberg <david@ixit.cz>, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261103204129.278715-1-rinat.muhamedgaliev@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261103204129.278715-1-rinat.muhamedgaliev@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 03/11/2026 21:41, Rinat Muhamedgaliev wrote:
+> Hi,
+> 
+> Gentle ping on this series. v8 moves the DeviceType check to the
+> bus-neutral core and uses the existing register access helpers, as
+> suggested in the review.
+> 
+> Please let me know if any further changes or testing are needed.
+>
 
-Gentle ping on this series. v8 moves the DeviceType check to the
-bus-neutral core and uses the existing register access helpers, as
-suggested in the review.
+You sent it right on start of merge window and you ping 2 days after
+merge window finished. How do you exactly imagine this being handled
+(yes, I know some maintainers take patches during merge window, but that
+is exception)? Please relax, be sure you addressed entire feedback,
+before needless pinging around standard quiet periods.
 
-Please let me know if any further changes or testing are needed.
-
-Thanks,
-Rinat
+Best regards,
+Krzysztof
