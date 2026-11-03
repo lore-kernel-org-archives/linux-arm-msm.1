@@ -1,89 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793715898;
-	b=N8WKOr2Lpe4V7O8fD/AAHEc/54KBhWKp4LKMqrFS/xAYOsZZOcRtvuyfkLhwKyxWiho1
-	 xu18fT3EIAsrFRm96vqS7kxX7pdh9jj6GB/dubv9L5RKZd9fJGM6RQENMtntaYrtSPj2e
-	 wjgTdhi2WzBpsL/4rw3TYNjsg16BtTS+O58LqVpuWjo03143SS/W+1uYWL8HBZkH7GHUm
-	 GlZR0arcuZOeM7El29ldw8evNh0X9IxtQ8zNi78pANyu9/PwQQGu+JXjfqbFszb3sht9w
-	 ZFgC1Ome+VwWngpaiwlkQR+DAG8Gsz0FvuU/oamwvBFmls0w6d7gTcEH9BUlhus8mtg==
+	t=1793716267;
+	b=c4R7RJCEfANOFlwA4oDJFoumTmqpKaTrWa6mlFPi1FC5aFlZg811v8Zjj0IUHiMu6Djd
+	 96jXAwNkMAY9aDDY+7PQFSHq/1WjOKTBZHOM0I4MrEUqqbPr0+nQKyzO086SDzCyHNXQp
+	 Kz5FMJtjAZpGSSoWYS8hntgguwIaypNIgIyW5nNHeYeWgPujWV24N/XtybRNDd/eMOVE3
+	 CXt0FhlTzSFVeadaFY43LQv63ow+DeULyqqDY52j3Fyvsa8wEQL1dpHG/tyEHVdt18xZc
+	 80nwm7iI+u6sfS7K93W0TjTOLGkcoZPxDBDj3xtlPmPLopzBQuTgXivQWf65TccKM/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793715898;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793716267;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=4TONlcxqo54iN78pAMzbzkX6q3qNAFO1iKV1Ffm2IVw=;
-	b=NS17jfKXa1jibhx+h+60MXTqtkpMXfxIU9cYN08u8Rmi19PPdnlvK0kjnvvqvdtpbEGU
-	 t3oA+B3jO2340OZwahcRx/GSegh8a7qWNc72852iPKHqCTKJjDvtWOC02/4Cu6XypwLQ4
-	 a/k+XWyE3C3pc4UbqALV4ZThijlfki/vsQ9I/x1blVDVr6BqHi0CTb0Dk8tuIYsLeR1LM
-	 1Y9Ji/ghd9zvGngNyiQG7CQ0AheBB76G8a32ff45/3QlQ9Q6OXK1rtftGiHZoB7LMHbak
-	 3UPNHFOlTe0RMF0/6P5nE5qU4uRGdXVYZgIpjeKM3bRNKoCGU8ayrCtPFY4rYp+/QiA==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:In-Reply-To:
+	 References:Subject:Message-Id:Date:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-Mailer;
+	bh=+GXjmDSpdPKSM3dvXbu3WCZAHTmv+G6w0ssCMfJAnCM=;
+	b=1LKYoKOmkSByQTTGqKHPudkOtxAzL9WIiZyU4x3CrBhAnkOQK5aSGPA5JP7M88m7kH1L
+	 lqy/W8oh/1xEDdZN//IEYFYEPHunh9sINRmE/pa0QQupE01LU9Xb7Xqd/pGeETTGJeShN
+	 tL3UNVam5AFXbyDksxFna6EhGuj3JT7Vsb9tg/fSgHDQe6Dtk6KTb7/ePl54rYyx+0w2o
+	 RixWVYoogsFAisa8x19df1kn/0ZqjuhNAW9/01hJS1av7pCL6SRcVGTXgYf5eJ9MUYv+9
+	 dPHwzslgL1tYtthSB9KZONgXPYtf23/ZYJiGuth7/OH71X0eF18l+VUjS9HFMHfuzQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WASXR6+Q;
-	arc=none smtp.remote-ip=209.85.218.45
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	dmarc=none header.from=kernel.dk;
+	spf=pass smtp.mailfrom=kernel.dk;
+	dkim=pass header.d=kernel-dk.20260707.gappssmtp.com header.i=@kernel-dk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=JAL5xEbx;
+	arc=none smtp.remote-ip=74.125.82.46
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA883606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 14:24:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EA883606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C01CC606D80F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 14:31:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C01CC606D80F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kernel.dk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kernel.dk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WASXR6+Q
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c4395d31228so651527966b.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 06:24:57 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel-dk.20260707.gappssmtp.com header.i=@kernel-dk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=JAL5xEbx
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1a2af4c8d00so6270351c88.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 06:31:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793715896; x=1794320696; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=4TONlcxqo54iN78pAMzbzkX6q3qNAFO1iKV1Ffm2IVw=;
-        b=WASXR6+QktALwIYfvUJyNOjQf/PDBB3cfp4FNeNRntcgkgHY2WV8cpY/gy9Tky+24W
-         h/Fu1zs47zL3h/6r0HU8EDrdl3bHqsLtoVKX7ZB0GiUVaTLcJzCJiZbxfbYdMHzJxUQD
-         eW7ys3sawcM2gzqiimc/NvByfzXzuh/A+DU9yJSYLkrLSiDjBQE+NSkCyM+7qQOXykjq
-         vuGjc8gVsM0b2SzrnRo4AaZJJ4s0p74K3DvVwe7bZNtmy7LzojLqan7rjcP9xWVsR0y1
-         O83geE5VrUxa05PIonQsJudInSBSxQaXdo5gkuHjEpsx7mNmUe6+/qfv4d0HhqPS3/Yb
-         a1ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793715896; x=1794320696;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=kernel-dk.20260707.gappssmtp.com; s=20260707; t=1793716266; x=1794321066; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:date:message-id
+         :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4TONlcxqo54iN78pAMzbzkX6q3qNAFO1iKV1Ffm2IVw=;
-        b=lWNbCPHGLF0i533ZXIFlDrbmgHv+UELJxBInYVelagxNuhV+Lw8IoXrQ9/NujS1kTO
-         o37kqGiycVc2yyPHGmQTi4Fz0zkIfCkwPRRYd8AYlKDrLnwvK+SWeh93+BaKK6qucRT9
-         U+Sd2Nk2ER//a5eN6aZrrB3e1SSCoj4SCqwPbR2hTZ3qqlkdIGvjsp+HhtavC6hwvEtN
-         +4s0rwTUYt/uPWTEEiknYnzK3L+31VeiJuRyaVn+/gjLKenss4ZwKRUpSN4+77DEktrb
-         6I5c3wp4wtxxUsHCObskIlNZ2GoxCZOe5dDz07BZLRGHDxxuQ2s4qbvqMec+aezb6d+T
-         7keA==
-X-Forwarded-Encrypted: i=1; AKwUvBw0VcYng8701k3DJCkGMbxvOCyyv4pr3cGWBKYTHI/Dt0VuX3yJOsrxF0GxzRga3RgXiQyaYoZBzmLq2b3g@vger.kernel.org
-X-Gm-Message-State: APuU4Z8fIlMQBN94Opeurco6uHHpuRsIIYyZk150DYbJjjoJ+m9XDHkx
-	1Z/p9uYamWd2zBgk99YB2dk3gvaHY82mwNkK8ro/VHMn3U52Jlb21+g=
-X-Gm-Gg: AYBFou2qYBFoD5sQs/8dE1H69ACMDpvsD4ghC643vMgTlYCYxZEjCuwprdptyJhy9yy
-	Mh2COP8nPRxqGLaBKAhcP8SL9h0qEhkkrJ3x+ngAIdBFIFzuz2sR+J2pcIaGQhof7GzLBcEaFrj
-	NZQFr3KXAUY2nuLDR+aPXp8c1oIc18VtAyaQTBlM5nqSRK3yVIErXqDKVY4mZkpZAUjRVk950TE
-	DKiAnrep9YanpfXGl6b2aH1dv9F6JcFMu7X8R9qn8f2FPu+WdvXjPlvvtT4LkdXyPf6xcNCuVRa
-	oVVaxIn0pss5YbfVtfSefKk5QIKv00+BvgQZvzmjWYyLTD9Oi9+JSR2nlAKyqvGW/AKl4Fxwm5v
-	RT5Dul2q9cIKYBZ3C+VmW4rlCqzUnsEa0jsKdL4LIwQhv6vhgYPO0rANruVjcf71qFfmAs/IoVf
-	mlpuLY38OvcgkBnoK04XFZ0MdKmyAgrlzDxzReezNVfCTF+5np0Gj3vRLuaHa1VXspEsR/HZmOq
-	OImzhBYAPh0/n2al0YRDf5z2xmesH104PtGfe7BLnNC3dXxPxhnaAiR/g1ncQCfjDnkA9vr/kTA
-	7R0JttHuKWaeJyyHhexaFOmqVyTTuv4MCA2rz3kw2esKJKjaTfaN/vsIz5i505cjGOxokReCzJm
-	mpzNm0nj/
-X-Received: by 2002:a17:906:7309:b0:c46:645f:cedd with SMTP id a640c23a62f3a-c4ca7a18e93mr1175687766b.8.1793715896002;
-        Tue, 03 Nov 2026 06:24:56 -0800 (PST)
-Received: from ?IPV6:2001:b07:2ec:601d:4b26:1672:75c7:805a? ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4cebf3cadbsm90903766b.50.2026.11.03.06.24.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Nov 2026 06:24:55 -0800 (PST)
-Message-ID: <d4b18854-0e02-4fce-b168-d4e80035aaa8@gmail.com>
-Date: Tue, 3 Nov 2026 15:24:53 +0100
+        bh=+GXjmDSpdPKSM3dvXbu3WCZAHTmv+G6w0ssCMfJAnCM=;
+        b=JAL5xEbxeRyI5iZfq2c75QvgWSvM8A+hwAkPoB5Ef0uYyHxKF51D+EkIcYAiVT42GW
+         O8+rFQnzDXYUm2OXJlerdC3iicYR4aSaSaHH3Ep/VgS3dutNQteQPI38N9cTs923fA4D
+         BIryhyqdfWTScigh6MyLKL1CJS2d6DQawQgkmWOyqgp69tkPhN8FiEZNW53On/G87OWp
+         kqGTqlIrju9gHXn+A4kicd+uohnWUkqFnZgHPqVrRm/AudeUaSqo5Vxq/cHqmboyto3O
+         deySONUwD/jokWH+7+DxV4OSMbR/tJKnNpueSZ3h16f9pmnrEaRKiRgNtstEGOao5RnI
+         wqBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793716266; x=1794321066;
+        h=content-transfer-encoding:content-type:mime-version:date:message-id
+         :subject:references:in-reply-to:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+GXjmDSpdPKSM3dvXbu3WCZAHTmv+G6w0ssCMfJAnCM=;
+        b=i507Jh00pj7WUimsDXp9bWWdpDZz6UN2MkyFnSBuYEmqGN7JNdXHuEZKQYV7fBiYN3
+         VADXgt18M9nscwYSD6y2Tjwg3ySUJKrhb+k7mYVqvXhhn+TPnwsR3vYKJQpKNYiD31WL
+         7TU+gkvu43BMuXMI3Sgx9i+vNCtsLsYyh9ApAVpSeHByQDutTAoTUDwFJIFJyYOyqj/3
+         Wr3gUbPFGGcZ+NYB0pxYWchwb51b8/omqzXO/8mY8wkmrbpRpnrvIpM1OAYoQ4xNREcb
+         mdgeY5PP3fKTrrdp0VchG9mmx2ZUKMU8pqcV+lpR8Jsha9rmxdKHwvS/rL8WwJzcWqw8
+         4qfQ==
+X-Gm-Message-State: APuU4Z/5NT52KnR3e3hoLI4+2CR/oNo7G1OaTInjrBCHtP0E7X9pb5kK
+	w2/FTkZys1lELCwkD1B/tANOkkrlfEe4lRWdCl+kcFBu4aRoQCzQCJEyUjMXmvi3rSU=
+X-Gm-Gg: AYBFou2L7x59iqf4bHEhBlEWKokU3bHlTfK1M9e28FNqyrINay8CpfR56QT/BAUar8U
+	26V1Dw0q2SkHZUI+ykkCoEUvGht9MPoHSQZf871YF83l3C8kBWvh3hEz6S5hR7tk1dX36Iwa5QJ
+	Lo+xMj9ELTfPY5zJ7hiO7R+Gzy6sYAEeuIq3udlZMv8HPcyxjpU2yBbazWSare12wbCdToGmfTu
+	XVouugSPcRC5vCbQnUontyKGhwWCW65kFzjL+gMbS6dsf6aoGeTj9fBC3SKiyLairHvok5MDhKZ
+	Kh6aghs4oBYmnioYptA0OkntRky2DZPZxovnI4I+LH3J4hkoWNbPmZZN+BfMkX3om0cWRv63jPn
+	Xyt3qqzlMnIZbqfYAcXB/HIDaxkx6VI9ZbMQAHkcrmVHgAojR4yMS3+QP3kYexeTW43RpstvQFF
+	EFUKPyhXk8rKCF0xQKeEgc0ss7+CuaUXxodLQBg35Se4Q/3taWX102UARmYoR8dhvo9KJbfXDsK
+	F7rS4oNnLXLMtugFX09LHn2odEVQktXPGFsOth2TZ5j3NGIMx9zBnfxX0NTLYIhuhlyt5FbGLiB
+	J2zAoECOogdp6brSDauTaDvOsg/Xw/JuDBw1IGw4PyMPTL8oYmeVJeZc4kEkk/bdjvkHU/XW3i3
+	Zc9ibgXRDZfbG
+X-Received: by 2002:a05:7022:c88:b0:194:3a84:e67a with SMTP id a92af1059eb24-1ac5d0da7e6mr18645854c88.41.1793716265860;
+        Tue, 03 Nov 2026 06:31:05 -0800 (PST)
+Received: from [192.168.1.106] ([198.8.77.135])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b23b847348sm9534779c88.4.2026.11.03.06.31.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Nov 2026 06:31:05 -0800 (PST)
+From: Jens Axboe <axboe@kernel.dk>
+To: "Michael S. Tsirkin" <mst@redhat.com>, 
+ Jason Wang <jasowangio@gmail.com>, Eugenio Perez <eperezma@redhat.com>, 
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, Ming Lei <ming.lei@redhat.com>, 
+ Cong Zhang <cong.zhang@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, virtualization@lists.linux.dev, 
+ linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20261103-virtblk_sync_quiesce-v3-1-f40233f9bdd9@oss.qualcomm.com>
+References: <20261103-virtblk_sync_quiesce-v3-1-f40233f9bdd9@oss.qualcomm.com>
+Subject: Re: [PATCH RESEND v3] virtio_blk: use synchronous quiesce in
+ virtblk_freeze_priv()
+Message-Id: <179371626469.3691261.7199603294029974156.b4-ty@b4>
+Date: Tue, 03 Nov 2026 07:31:04 -0700
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,106 +103,36 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] drm/msm/debugfs: Use cleanup.h for gpu state dump
-To: rob.clark@oss.qualcomm.com, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- open list <linux-kernel@vger.kernel.org>
-References: <20261102190010.720443-1-robin.clark@oss.qualcomm.com>
- <20261102190010.720443-4-robin.clark@oss.qualcomm.com>
- <a4151c32-bac2-40ec-86f3-59d4dbfaae62@oss.qualcomm.com>
- <CACSVV02mTpCPZ-JtyYrsTEsRXKyS3zuxTehx=c91NbxgQSdpUQ@mail.gmail.com>
-Content-Language: en-US
-From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-In-Reply-To: <CACSVV02mTpCPZ-JtyYrsTEsRXKyS3zuxTehx=c91NbxgQSdpUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.2
 
-On 11/3/26 2:58 PM, Rob Clark wrote:
-> On Tue, Nov 3, 2026 at 3:28 AM Konrad Dybcio
-> <konrad.dybcio@oss.qualcomm.com> wrote:
->> On 11/2/26 8:00 PM, Rob Clark wrote:
->>> We need to move the gpu lock around a bit for the next patch.  Use
->>> scoped_guard/etc so we don't have to make the error path handling more
->>> complicated.
->>>
->>> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
->>> ---
->>>   drivers/gpu/drm/msm/msm_debugfs.c | 31 ++++++++++++-------------------
->>>   1 file changed, 12 insertions(+), 19 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/msm/msm_debugfs.c b/drivers/gpu/drm/msm/msm_debugfs.c
->>> index f12701e286ec..aa59b28a3392 100644
->>> --- a/drivers/gpu/drm/msm/msm_debugfs.c
->>> +++ b/drivers/gpu/drm/msm/msm_debugfs.c
->>> @@ -70,43 +70,36 @@ static int msm_gpu_open(struct inode *inode, struct file *file)
->>>        struct drm_device *dev = inode->i_private;
->>>        struct msm_drm_private *priv = dev->dev_private;
->>>        struct msm_gpu *gpu = priv->gpu;
->>> -     struct msm_gpu_show_priv *show_priv;
->>>        int ret;
->>>
->>>        if (!gpu || !gpu->funcs->gpu_state_get)
->>>                return -ENODEV;
->>>
->>> -     show_priv = kmalloc_obj(*show_priv);
->>> +     struct msm_gpu_show_priv *show_priv __free(kfree)
->>> +             = kmalloc_obj(*show_priv);
->>>        if (!show_priv)
->>>                return -ENOMEM;
->>>
->>> -     ret = mutex_lock_interruptible(&gpu->lock);
->>> -     if (ret)
->>> -             goto free_priv;
->>> -
->>> -     pm_runtime_get_sync(&gpu->pdev->dev);
->>> -     msm_gpu_hw_init(gpu);
->>> -     show_priv->state = gpu->funcs->gpu_state_get(gpu);
->>> -     pm_runtime_put_sync(&gpu->pdev->dev);
->>> -
->>> -     mutex_unlock(&gpu->lock);
->>> +     scoped_guard (pm_runtime_active, &gpu->pdev->dev) {
->>> +             scoped_cond_guard (mutex_intr, return -EINTR, &gpu->lock) {
->>> +                     msm_gpu_hw_init(gpu);
->>> +                     show_priv->state = gpu->funcs->gpu_state_get(gpu);
->>> +             }
->> My clanker tells me we can't grab the PM reference before a mutex,
->> as the recovery mechanism depends on the rpm count being appropriate
->> to let it drop it (and kill gx this way)
-> Yeah, but we also can't do it in the other order, or more specifically
-> disabling ifpc needs to come before gpu lock or it can deadlock with
-> recovery.. but ifpc disable needs to be after runpm get.
->
-> Re-working that ordering was the whole of introducing cleanup.h, to
-> avoid the error path with mutex_lock_interruptible() after taking
-> runpm
->
-> I guess if you are hammering on debugfs while crashing the gpu, maybe
-> the first recovery fails, and then a subsequent one eventually
-> succeeds.
-I guess it leads to a sort of deadlock scenario because the recovery 
-path waits
-for power to collapse, though it timeouts after one second.
 
-After that hangcheck will have to trigger again so I guess the delay 
-introduced
-would be significant.
+On Tue, 03 Nov 2026 18:32:21 +0800, Cong Zhang wrote:
+> blk_mq_run_work_fn() can call blk_mq_sched_dispatch_requests() through
+> blk_mq_run_dispatch_ops(). The dispatcher checks QUEUE_FLAG_QUIESCED
+> while the flag is clear. It can then be preempted before it gets a
+> request. At that time, it has no queue usage reference, so
+> blk_mq_freeze_queue() does not wait for it.
+> 
+> virtblk_freeze_priv() then calls blk_mq_quiesce_queue_nowait() and
+> blk_mq_unfreeze_queue(). A new request can enter the queue. The old
+> dispatcher can run again, use its old flag check, get the new request,
+> and call virtio_queue_rq(). At the same time, virtblk_freeze_priv() can
+> reset the device, delete the virtqueues, and free vblk->vqs. The old
+> dispatcher can then use a deleted virtqueue or a NULL vblk->vqs, and the
+> kernel can crash.
+> 
+> [...]
 
-I really wish there was some better way of doing recovery that didn't 
-rely on
-the counbter having a known value.
+Applied, thanks!
 
->
-> BR,
-> -R
-
+[1/1] virtio_blk: use synchronous quiesce in virtblk_freeze_priv()
+      commit: 6c6dec7883f8eb10b326bc9d109a4990c885d949
 
 Best regards,
 -- 
-Anna Maniscalco <anna.maniscalco2000@gmail.com>
+Jens Axboe
+
+
 
