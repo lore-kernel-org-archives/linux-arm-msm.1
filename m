@@ -1,92 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793747985;
-	b=wCvoJOUms3quDqWkqirwjH2Wfi961ho5nLyn14dejpi793PnYEACSSsKhqzUo8l7yfci
-	 OrhIGATg7iIyx3sv8xEFdEu57bZ3S6CFQm6fmiyPk6gEyrOJ1fZzT2Yse3tn1WeobStJq
-	 3dasL3WFW0oG0kQk4IW1OIzkBAYQuRAH+vzKMv9o+HXwdL+qeefp8XsbkDP9xIbeI/m1M
-	 a8vl4eT6YclN4zcjvw/sc6R/J1GahNDPNAZoxv7R3YeSfWR3bUwIJfF8NQ2c575fwF+EH
-	 CSl3BHcwG0/noNg9+RJ0Kxv7BVjtbXtBqdKRsFNio+kRmhhIq2USWM1L4apu1DS9zvA==
+	t=1793749847;
+	b=SJhQLf97HhapvImO0gEFvRObKsQrH5wHywmPY5pd1hdmdlDhDpCkRv6EeaXWCw6K9Uct
+	 h0N9Q9aCHN7IIyMZbXIgqVsJezq7flhZIVRmwp1jkgr5TevXkBJosSHAPq4LJ/PV6cqM0
+	 0ElRQ3BJDNTrbgD29PgwwqWW5bMeU81x+bvBIrtEDIq5x30l1s516hlyzHY2wLnY9yhyE
+	 wXJTCmnNoMUBw3ihDEzquYQxG9qg2p9cCemz3H7cH+a0P1oMacy++SXbIC/B+Xgt5xrt3
+	 GuXHkxC2D6CeZnTTz25p0qkaVwZlKLDS7oGWwHkEzrUvtwaSrF/t71khOkDUry0a7ig==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793747985;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=ge8nPcGUxBsvSUK/jINOGmSzjSvUlXilvyC+0rJ7oiE=;
-	b=nBFwZwQqiM3GzUgnxOLGEAIkxGXp9GC/KDjA2d1h0cQiOPu5DjTuSfqDKiz/F5b9t0SN
-	 /Sdf47eLPwOaUkZWadzHiZ7VzEcLjStKpW+rXpR0K6TW8bmTtKDTUfreUjAPwKzQmtCaN
-	 lfJZi6bhGohTeLP4Zai3NRIyRfoKB3hbcCxzMni6qkwnNEAI5molfNpaX+zEy90qvNoDd
-	 zVqsX9zVbyR9QV/yknIfibM9u3WiwJW7eSjJhI3Rbvx51RzZzEemlKougnwSHj99J4kDF
-	 dqmq0NNxSvo6mrBTXFeYgxdqaUfm+a8fUIv2hMIr2AdsdAuR0C6fg2NIlAHeBMVMVsg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793749847;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=0OloGj8iqKak18KyQuj2NIrdPY6e7xUKRD+nnxZZVqY=;
+	b=leIIO2zkba/RdyP7fOshpJHXuHz9zCTcG2gXxX/OBrU3UWpE8V+5sdLD0OgEvsVrhunM
+	 rPZnZQFBodcsTDSjCsDIO/owSOAfQM2jnWp07uYR3i0FUFaVj8aSobSaniHMnUXNc9jbI
+	 BKDP3GTU18sUIQgMwLf7978J4ad0mBJ68ctq+yYX6IXUYwnpe3uBPdMBZjRnHtCfZ+L7O
+	 fgPyhm6/AaV2KgBOry/eZT7/2vRR/Ywy3mk/PhPk0IPgOa5UtphTpnYOEJh3iF/OrZJTM
+	 TEepabgpo7bZi7Zae/hutFwG8p0j1kgilM4oC6fe3tcP38+F3eUxtFGdMMGxuaWXY9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=IucYV2rN;
-	arc=none smtp.remote-ip=192.198.163.13
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hkNOS+n3;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C831B606A31B;
-	Tue,  3 Nov 2026 23:19:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C831B606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 236A1606A31B;
+	Tue,  3 Nov 2026 23:50:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=IucYV2rN
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793747984; x=1825283984;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=yGcM0U/fiCfGKTJxpm31vDx9xIx3ErmFbd839Kd62eI=;
-  b=IucYV2rN8HHiqiatsLYF+Zknmb13T4lT7Xf2b8kuOpHEAg8H7yRLvpE7
-   qwqfmFjhNYdF7eHsjXuN5cVNpmNBsjJAvG6WUjcQSxTblQwcGNfhYBUqG
-   +VgHJoENUad3CV4XJGOsV04Ht4ookexT0O/88j2TnW/ClpcZoPUeYVcAr
-   aq6WMznB48KIyDhZqDn2IeY8R+Kz48PDJrDiunAdNS9T8nwdyWoCN9y4T
-   nAU8swsDjYQSKd6JPJhMi+7BQkgTr2uwBheP1g6qhSQ5mjFOktaYf3F4e
-   kj/BJ8GBIW/hLkNPgiKs5LrAWQOdeZSoxpVaojkRLIQExE4TRQSEHFcrY
-   w==;
-X-CSE-ConnectionGUID: QvdxIxrvRYK7jRb/757/3g==
-X-CSE-MsgGUID: /MDfchvjTpee38+6edhbEg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11955"; a="2489836"
-X-IronPort-AV: E=Sophos;i="6.27,194,1787036400"; 
-   d="scan'208";a="2489836"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Nov 2026 15:19:43 -0800
-X-CSE-ConnectionGUID: ztogfQyQSRyK1fZcohZdLg==
-X-CSE-MsgGUID: 0eJy8HeXQcywk+AUu8ktRQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,194,1787036400"; 
-   d="scan'208";a="6570453"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa004.fm.intel.com with ESMTP; 03 Nov 2026 15:19:39 -0800
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xONmx-00000000jRz-3F88;
-	Tue, 03 Nov 2026 23:19:35 +0000
-Date: Wed, 4 Nov 2026 07:19:00 +0800
-From: kernel test robot <lkp@intel.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	dri-devel@lists.freedesktop.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-	Alexander Koskovich <akoskovich@pm.me>,
-	Jie Zhang <jie.zhang@oss.qualcomm.com>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>,
-	Nico Angelo Dela Cruz <nicoangelodelacruz@gmail.com>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 11/15] drm/msm/a8xx: devcoredump state capture support
-Message-ID: <202611040652.1Wy2glVj-lkp@intel.com>
-References: <20261102220405.30730-12-robin.clark@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hkNOS+n3
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E34F1F000C1;
+	Tue,  3 Nov 2026 23:50:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793749846;
+	bh=0OloGj8iqKak18KyQuj2NIrdPY6e7xUKRD+nnxZZVqY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=hkNOS+n3+2hTgtkaxcCoOXsqKeBibGisfXFzrpRmY7LplYQFpzrmZHBGX9uZamzEK
+	 YIjrgp0RlH3L8+ZTpIXFWcKBVnKnqnQLdTPPdLzDV2f2TL5snlf5WELDPs0PLY5OG7
+	 TJ0L5VSvgIIB3U7F4ngv+ca8WBjyPoT6ljkRm6uN1a2CYlSsDFabcGGmiXq5HGFsBz
+	 OpXtK8CVAXjDBAlE5bL/EVWbXtP2bGQ6onIxxcOpUJC2QjJZrwvP6b4+MvSwrGPSvD
+	 5RPka96oZUfza5XWX0mEM4pW6Pt4lJ0RaeSfVs/rEUjhY2vlB0o3KWGlXxzcntQ/XA
+	 MdrsFZKUgSmgA==
+Date: Tue, 3 Nov 2026 23:50:33 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Krzysztof Kozlowski
+ <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Vadim Fedorenko
+ <vadim.fedorenko@linux.dev>, Arkadiusz Kubalewski
+ <arkadiusz.kubalewski@intel.com>, Jiri Pirko <jiri@resnulli.us>, Ivan
+ Vecera <ivecera@redhat.com>, Benson Leung <bleung@chromium.org>, Guenter
+ Roeck <groeck@chromium.org>, Linus Walleij <linusw@kernel.org>, Bartosz
+ Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>, Sascha Hauer
+ <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, David Lechner <dlechner@baylibre.com>,
+ Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko
+ <andy@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre
+ Torgue <alexandre.torgue@foss.st.com>, Olivier Moysan
+ <olivier.moysan@foss.st.com>, Arnaud Pouliquen
+ <arnaud.pouliquen@foss.st.com>, Dmitry Torokhov
+ <dmitry.torokhov@gmail.com>, Thierry Reding <thierry.reding@kernel.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, Srinivas
+ Kandagatla <srini@kernel.org>, Ekansh Gupta
+ <ekansh.gupta@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>, Hans Ulli
+ Kroll <ulli.kroll@googlemail.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+ <pabeni@redhat.com>, Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, Ray
+ Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, Broadcom
+ internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
+ <broonie@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, Daniel
+ Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Orson Zhai <orsonzhai@gmail.com>, Baolin
+ Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>,
+ Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Shawn Guo
+ <shawnguo@kernel.org>, Chanh Nguyen <chanh@os.amperecomputing.com>,
+ Alistair Francis <alistair@alistair23.me>, Julius Werner
+ <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>, Dmitry
+ Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>,
+ Thierry Reding <thierry.reding@gmail.com>, Ray Jui <ray.jui@broadcom.com>,
+ Scott Branden <scott.branden@broadcom.com>, Krzysztof Kozlowski
+ <krzk@kernel.org>, dri-devel@lists.freedesktop.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, chrome-platform@lists.linux.dev,
+ linux-gpio@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
+ linux-iio@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-tegra@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
+Message-ID: <20261103235033.3e508f69@jic23-hlaptop>
+In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+References: <20261102135330.2493332-1-robh@kernel.org>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -96,66 +108,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261102220405.30730-12-robin.clark@oss.qualcomm.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hi Rob,
+On Mon,  2 Nov 2026 07:53:22 -0600
+"Rob Herring (Arm)" <robh@kernel.org> wrote:
 
-kernel test robot noticed the following build errors:
+> Unit-addresses by default (and most commonly) are hexadecimal. There's a
+> number of cases using decimal patterns. Fix all of them, limiting the
+> pattern to match the 'reg' limits if there are any.
+> 
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+> ---
+>  .../bindings/display/xylon,logicvc-display.yaml      |  2 +-
+>  .../devicetree/bindings/dpll/dpll-device.yaml        |  2 +-
+>  .../bindings/embedded-controller/google,cros-ec.yaml |  4 ++--
+>  .../intel,ixp4xx-network-processing-engine.yaml      |  2 +-
+>  Documentation/devicetree/bindings/gpio/gpio-mxs.yaml |  4 ++--
+>  .../devicetree/bindings/hwmon/maxim,max31790.yaml    |  2 +-
+>  .../devicetree/bindings/iio/adc/st,stm32-adc.yaml    |  2 +-
+>  .../bindings/iio/adc/st,stm32-dfsdm-adc.yaml         |  6 +++---
 
-[auto build test ERROR on drm/drm-next]
-[also build test ERROR on drm-tip/drm-tip linus/master next-20261030]
-[cannot apply to drm-misc/drm-misc-next daeinki-drm-exynos/exynos-drm-next drm-i915/for-linux-next drm-i915/for-linux-next-fixes v7.3]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Acked-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Rob-Clark/drm-msm-Import-adreno_snapshot-h/20261102-140245
-base:   https://gitlab.freedesktop.org/drm/kernel.git drm-next
-patch link:    https://lore.kernel.org/r/20261102220405.30730-12-robin.clark%40oss.qualcomm.com
-patch subject: [PATCH v5 11/15] drm/msm/a8xx: devcoredump state capture support
-config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20261104/202611040652.1Wy2glVj-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261104/202611040652.1Wy2glVj-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202611040652.1Wy2glVj-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:9:
->> drivers/gpu/drm/msm/adreno/adreno_snapshot.h:506:15: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     506 |         *(p->in++) = FIELD_PREP(GENMASK_U64(63, 44), reg) | BIT(21) | BIT(0);
-         |                      ^
-   drivers/gpu/drm/msm/adreno/adreno_snapshot.h:513:15: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     513 |         *(p->in++) = FIELD_PREP(GENMASK_U64(63, 44), reg) | dwords;
-         |                      ^
->> drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:920:14: error: call to undeclared function 'FIELD_GET'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     920 |         side_data = FIELD_GET(GENMASK(27, 24), reg);
-         |                     ^
-   drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:1135:14: error: call to undeclared function 'FIELD_GET'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-    1135 |         side_data = FIELD_GET(GENMASK(27, 24), reg);
-         |                     ^
->> drivers/gpu/drm/msm/adreno/a8xx_gpu_state.c:1271:4: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-    1271 |                         FIELD_PREP(GENMASK(7, 4), a6xx_gpu->slice_mask));
-         |                         ^
-   5 errors generated.
-
-
-vim +/FIELD_PREP +506 drivers/gpu/drm/msm/adreno/adreno_snapshot.h
-
-   502	
-   503	static inline void CD_WRITE(struct cd_script *p, u32 reg, u32 val)
-   504	{
-   505		*(p->in++) = val;
- > 506		*(p->in++) = FIELD_PREP(GENMASK_U64(63, 44), reg) | BIT(21) | BIT(0);
-   507		__cd_check_overflow(p);
-   508	}
-   509	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+>  .../bindings/input/touchscreen/cypress,tt21000.yaml  |  2 +
