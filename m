@@ -1,113 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793696223;
-	b=kXHsLE3XiX54uPnU/8BVA+jAKklkml2YPHdVorhXH+MHhE+EsCWugbSWFvdfatpQRsTE
-	 fcDp3WNMBgGIhrD2KstTRSD1X4GYmXN14SYpBMJJgekuy97jiOJDQt3JEkSOBuTIS8ZUQ
-	 WsYDl0Sth5iBehweBvfsIopq0IyAoWmIgZkZJPkG9L2RpANd7iVeF/1I1WQ8y6zoQ9dkm
-	 9eS5CNlfQEGgubQdeV5Xydyzlv08iDR4Hdbh2IU2414otoxsLCUeEyeLUcEnAmIBaJc91
-	 HhttvHaKSbK7NFB6J465dLoPS2hIRj+br2vf2DOVanQwXOc6AznsC/neWIdlHToRhPQ==
+	t=1793696285;
+	b=ucP3i44v1wZtJItgTca4OcYSIqqSWYvNfLgFFKEdzP0icpJ+W8A3oN6RLu9rFHmv3eJ7
+	 dWmSfT6FICKf0CDuMaGFIKpwxgbC5U6fv67lmPsWVJKJpYcodGDMbffLUOarrbAwS2U4T
+	 onwb4iCasPjD9y3h+B+cn3G2p7IHDQuA7JFQforzsop7rCOCSxa+hf0x23RYGmK0G0Tz5
+	 uRtGvwF3Z2PNqLcJTZAgXVR5tmhCcxeq7Cm0rT/7SAscf3aPkemdzilkoptJ0f7sDY9gd
+	 X2hm3i8bGpEWpAlIpPzS0jBSYSKa+oaQEFBNNu8fcbpMPxjCH6a+oPKgMY4Le3cULow==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793696223;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=hKcDKGT4XgxiM4YNoHtu46Rb42jfodjdkpL7uHJPAVk=;
-	b=cbxCClZoNX7rtJmSuUyqTgSbj32GwvxK3chzW1CFCtZQHhw21rXSwiYPAtl8aPhuMvV3
-	 v92Rao20xU2Xxu0qyMny9TZRSB9CsisrOdiWBi1XR9RLDnflObqL8gzuMOF9RI2Dk5sbq
-	 XKMKO4ssjLuO9v85j3/sQDUewzgDXOUtW29zv4kPg5tZFYyy6AcNV5HBaBo81QGxBO0Tc
-	 4usty1XXz5X0zufIFkE+VpsQlCepHG2p9pZdWQga/v71YIIF0u1RlOUyTiH46ZCITEQNO
-	 s/jmXpSz2K2UvUmtD3vOgmg5c6jKQQpIJ3IWRzhoGBXQ6v4Wq6S0RuSEWd3uKqfKFUw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793696285;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=AUgj7ybzOrbdmhNXXkJnAoh6ZouzAZL90keqraEO3nw=;
+	b=sDhOAvgzaJgEAypLALyqdiXA4JXDLsRQp2l/fa0CqdwwddM7IEyZREqFV+okzJy/KNiJ
+	 WlgjODBU0xSq58QlUkH7bflZpZPq42fxGQBwGNq8vaxbVhr7UeU/7v027HImzUkzT1Fmd
+	 tyMKTZCFQ34uPaLoUfhOfrtXtKTEqLMJUHe6Vf/1dwJaxW4Qj40nitHEIaXLH67uUubPu
+	 dBdEQB8mYFDvQPxJM0dtx9NhFPVQS3uA3urI+TstDsOlD6OyCZgRSnIZk/6HZJ53HctDx
+	 iOz1fCgsrEDhuPwrjb2fYveDBIyCzfbXLG9R6sVVq33eLc4LkGjPpcnWAtgjdNb6cmg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jevWMVrK;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gUrggv8K;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JKH6l+Xc;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1113A606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 08:57:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1113A606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0D30606A33D
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 08:58:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jevWMVrK;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gUrggv8K
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A38A4OV4002807
-	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 08:57:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hKcDKGT4XgxiM4YNoHtu46Rb42jfodjdkpL7uHJPAVk=; b=jevWMVrK3YG/smJv
-	PRUAAcZBTxEFbSHMEqlzpQfyqWh7W9MOGUyL34h8YvleqMDw4m27wU8oFGcN49O1
-	aopGCyST9KWJ2ZI069FXC5nz3dPmsu4SFzI7nUQ2+Vw8tpn/T3Qa2Ub+i4t+gtAZ
-	0U6cIVDKCUiUm/7fRS1MDE21bZsH4FiTD2fMx5TJPPmefEZW0sz0crq6XjdnddLq
-	2VboE+dXJw+cqR7FJcfYWkG53FKziaeWC0r8qkKfCjbuJvtxS2yyKKkJeGGnXs04
-	fE6+3L7Z3BbNY51C/AgNiWDjm1m5Ly0mdGsY7EnISYDD5nSB4hbNUbZ/vslX9Ns0
-	+xXTUA==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hq07ejv5f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 08:57:02 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8a59717b0c0so3012331b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 00:57:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793696222; x=1794301022; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hKcDKGT4XgxiM4YNoHtu46Rb42jfodjdkpL7uHJPAVk=;
-        b=gUrggv8KH80pB7uIvNgERSJ5cnt8UvmBbTlDxvxCPLfGD1WB9xG4+exfGq1Qn6KTGD
-         uBtRPg2GahDOQ/YcuBD16ow0RNvCG+autpN0veI1UbqNR3GauiclgvdfmwxREQxRuo9/
-         EdVoUSHFg8mvTj8cF+IGOu8itfJiGZ/ckBoBK4445wEUsHQTs3beHN7Xi7EXG5z+PFNG
-         AGlQTEXMuCPsaNaXs7bCLL5MORa5CaEMNC9KGCPOj+2X56V26hXgyarJGBX9GEvpbeHj
-         jrh2DgP7+5zzoaNZ8ynKPOpdzgXFNS6I1Z/K0cQ43DviiPjDtSL9HgJxM7LikTdptR+Y
-         cwvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793696222; x=1794301022;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hKcDKGT4XgxiM4YNoHtu46Rb42jfodjdkpL7uHJPAVk=;
-        b=xI+QGXF9Z8sIhbTrNmAL2YWrReIEVr92K+93ZiXK0OCtkHiGwBw0vQkaV9VvVbMZAY
-         18cqjeZ+jgh4bq2C3/6k4KfcKQese+nUoE70GZ4lOrQUFkdf8vt088KP65KnKIdqWZA+
-         uHc8XKRBmPMCv+tS5KHx+9Od9428W7tm9qhXb4wc+GyN0AJezBgFDBOVDZSunOXT3J3C
-         AdFFy2bz41ZxLSZG9KiiP+WNgzDFd6eIgmRyVrE459eP7sLQj0LfiztQl2egdmX/xCSq
-         v0B3A9Qmu8zcs5rOQZmkQAcqmIn/zt2ilIETYAgjkRmDdXirT/WK9w0CYEPctdGnmIPr
-         wS8Q==
-X-Forwarded-Encrypted: i=1; AKwUvByvuRO0OTOFrtor8X4VfqWTV3uP7F7ENmeEjrTe2tIZA1cxoHXIKzcR3PCSkmy2JX48JwvUfPNjkWaDD/3G@vger.kernel.org
-X-Gm-Message-State: APuU4Z/OtFVKVvj4KBw6hn6OgLczU8WR16nzq2EqqRo3P+g1tUP1gSmp
-	BKnyvRng5O3fSosirx1S0GGgvlQ5hPMbPLddlTcNMeAZyXfGX7F8SkwC6tqityO573F8w389feE
-	hY5Msz5SsUlKWdQZAiUAtGAq0qkc1f3x5bU96uroLzJiFXug+9EA1ZQDdpDLefMAIrTMI
-X-Gm-Gg: AYBFou1+m88QfIol+ftTkGXLIW5HsDvf2tECkaepW6wnllHC1GsLD217NPi6W5EigHc
-	rLvCLapZt43eV/Dg6zBCXaDqXKbPqEx5S9ZmkhLujRmApW86c/Yu9xWN/SM2fdGihRsBUjPGXuI
-	zgRfPh7XaXeoqo7f/2jFdhoxssj73zdcTUPDzWbme54SEF3q3+zfVKzL6dXfy7pE/0h9OiplGo4
-	Iyoy+5z2hVs6o8e3XDp2jwwSKWRBoYJl7FZ1KppDA32VZeuxG6bLizJtV0JZVFFGSoIUmKME6I3
-	SyUXTCXoEmeJEfJHgBl+nNG+1uT5YlQH9euKeAKBCIiUbODbimT3Ozbu1PJZ8IrQnO96yrlWT52
-	LOdWmuwT/1r63fEjo9LD/XmU7sUamcXspeoQmud1zMAjoleb/RMZAHLZgfsZFY9loENZAi3aHCH
-	+hqH9hews=
-X-Received: by 2002:a05:6a00:3a1b:b0:882:94ab:20ec with SMTP id d2e1a72fcca58-8a9be587fd4mr10038553b3a.25.1793696221659;
-        Tue, 03 Nov 2026 00:57:01 -0800 (PST)
-X-Received: by 2002:a05:6a00:3a1b:b0:882:94ab:20ec with SMTP id d2e1a72fcca58-8a9be587fd4mr10038532b3a.25.1793696221115;
-        Tue, 03 Nov 2026 00:57:01 -0800 (PST)
-Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8aad963cfe7sm3017471b3a.19.2026.11.03.00.56.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 00:57:00 -0800 (PST)
-From: Aniket Randive <aniket.randive@oss.qualcomm.com>
-Date: Tue, 03 Nov 2026 14:26:42 +0530
-Subject: [PATCH v4 3/3] i2c: qcom-geni: Add bus recovery support for GPI
- DMA mode
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JKH6l+Xc
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49DE51F00A16
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 08:58:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793696284;
+	bh=AUgj7ybzOrbdmhNXXkJnAoh6ZouzAZL90keqraEO3nw=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=JKH6l+Xc19miNOkvdh6fwXKmZ/peo1JLSx8CpwB7AijrPFwQ5nMrSkiCTWGvwxYnV
+	 hmZms6pQ7UWI+F4lN0IqndsfmhgVlMBSc8TdwaDl8EmL3ndRDomC00sTJnD5ZPU3Fx
+	 CpI7jvnpjWuPFi1lqaZ3xY/95vrPjNcicxGk5InxLjv0XvTn3x1DPFYlEN/tpT9bVy
+	 HHXOI1+z4niVB+11bzLb/GPbjtm5Z8gExi689a+FQqGsFDyszprbcR9DXFG4T0eEPa
+	 aFQEmKpZSbWRCkVwkQgHv6wy6f2XGzk3YWJBctaYRCMrImJ+A9CCR+rH8d1FwSvjVp
+	 8qwcOpfV6jG/Q==
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-3aca0bf7fd0so32102851fa.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 00:58:04 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvByW6pb7RMIzEywa+9AVxCvwJSPxigDZst+/tv/LgwOEZtC2JyVVmsvZ8G3srCa/e8gTG7hykThtnuTsF1bV@vger.kernel.org
+X-Gm-Message-State: APuU4Z8ofVdkyM2FI9NERHGd66Ri5Fr0L4b1VfGA8D+q7ME4sZ6w5cuQ
+	bs3clAy3ALLQQdHLx9PAty1zdahF8IKJtEDOGvVOytzvuWOcAiNrOE5cg0rrI0Tl9ZqlW0/iIwt
+	glmncY4ZF7EU4PuS705NS8WJoI1da78A=
+X-Received: by 2002:a05:6512:b84:b0:5bf:dc30:93a5 with SMTP id
+ 2adb3069b0e04-5bfdc3094a3mr4560521e87.4.1793696282130; Tue, 03 Nov 2026
+ 00:58:02 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,218 +59,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261103-20260826_aniket_randive_oss_qualcomm_com-v4-3-59b3ce96dc4b@oss.qualcomm.com>
-References: <20261103-20260826_aniket_randive_oss_qualcomm_com-v4-0-59b3ce96dc4b@oss.qualcomm.com>
-In-Reply-To: <20261103-20260826_aniket_randive_oss_qualcomm_com-v4-0-59b3ce96dc4b@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: naresh.maramaina@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-i2c@vger.kernel.org,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793696204; l=6139;
- i=aniket.randive@oss.qualcomm.com; s=20260325; h=from:subject:message-id;
- bh=OkAop6VQcxoEVUH+raJn/MdzrvaCmRT+U2bHKkK7yRU=;
- b=snezTj5q1ec0WOXdPcNQ4WHT818EUplJVlK3AsJrJ6LbsMxpdy6XLX9J2urMP34M/uXXZ9Oxm
- Rsttk3yeeA4B9UyRyx3T04yvTIXzGGEPIfD8ycvIcxVJV+SxbAlgyDb
-X-Developer-Key: i=aniket.randive@oss.qualcomm.com; a=ed25519;
- pk=4o37X1ZqGbCO/T2SR8kq/HnWvq0yb1RUlFuNukovbQk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDAzNSBTYWx0ZWRfXx0yqEIGGc69l
- MuEM6FKkzVKSro0ZwM85f50lLKCRnwmp87+NLSVsIyyNob6Dz8YVhO0wDZaAw4HqVM6lObKW6bb
- vTfIw/30W+szZu4gOtw9MvgNs2RdzrVQNYbCGOSHODX6v8EEekkHbl0SMs8MLI/i2GYSzcwsr9v
- W9rkgCHrA/Ag08W/XvA9buYMkIuCzzThm9XXPRg+w0oI4ZGkcWOuSJGxNRu+t6CPN9iBY00DuKo
- QIf1IKTnwwcHJN8w8R6NqWzLHOVaPz3eqYrpHAJ9w0pYWFpZa3G8j3uDj64WWr0gPjYzETZkQKf
- VD2iS98oxoMgosh/zzmqLiSohy1kVtUl4FOhRaUmeYyDaDGotvAES/fo/SG9BHgYyCJh0RqEMaU
- sQ3ZlWNV/8YsmbSr7mJFYDtixoo5XLMt276QcWWaU+Agh8kC/TjZSkUJ47ok1z8421a3PcIrJrM
- HnBfl8NZKx1YQbaS9FA==
-X-Proofpoint-ORIG-GUID: h9Vse0OphnsqL_lBHMB9XK642XxUiUcM
-X-Proofpoint-GUID: h9Vse0OphnsqL_lBHMB9XK642XxUiUcM
-X-Authority-Analysis: v=2.4 cv=B/wsQ+tM c=1 sm=1 tr=0 ts=6ae9a1de cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=dp2dQu5AD0A0ugWeZkcA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDAzNSBTYWx0ZWRfX38c1gqTR3m8r
- jVShTBM/THqBJCkHUgDDhhBrk7S20gYmZ6+ZvsFPGytJKztW5No+Go2pMWZ/7JQP2kgEC5PPtq8
- ZIqkvZaX0C2mQnZ/ejc3Jh3oLqkKzcc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-03_01,2026-11-02_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0 clxscore=1015
- impostorscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611030035
+References: <20261102135330.2493332-1-robh@kernel.org>
+In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 3 Nov 2026 09:57:48 +0100
+X-Gmail-Original-Message-ID: <CAD++jL=DvHOGWpYYudhG-EhxTk3iUhtfz7OBS0mFgurvnCmb3g@mail.gmail.com>
+X-Gm-Features: AclHuK-LEcFutZHI-ID3nCMC-9st3AveCqqRSTzeXkI5ke3GTM3j4j9Kq1OFBKw
+Message-ID: <CAD++jL=DvHOGWpYYudhG-EhxTk3iUhtfz7OBS0mFgurvnCmb3g@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
+	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, Jiri Pirko <jiri@resnulli.us>, 
+	Ivan Vecera <ivecera@redhat.com>, Benson Leung <bleung@chromium.org>, 
+	Guenter Roeck <groeck@chromium.org>, Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Jonathan Cameron <jic23@kernel.org>, 
+	David Lechner <dlechner@baylibre.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Olivier Moysan <olivier.moysan@foss.st.com>, 
+	Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, 
+	Srinivas Kandagatla <srini@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Hans Ulli Kroll <ulli.kroll@googlemail.com>, 
+	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, Masami Hiramatsu <mhiramat@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Paul Kocialkowski <paul.kocialkowski@bootlin.com>, 
+	Shawn Guo <shawnguo@kernel.org>, Chanh Nguyen <chanh@os.amperecomputing.com>, 
+	Alistair Francis <alistair@alistair23.me>, Julius Werner <jwerner@chromium.org>, 
+	Paul Cercueil <paul@crapouillou.net>, Dmitry Osipenko <digetx@gmail.com>, 
+	Florian Fainelli <f.fainelli@gmail.com>, Thierry Reding <thierry.reding@gmail.com>, 
+	Ray Jui <ray.jui@broadcom.com>, Scott Branden <scott.branden@broadcom.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, dri-devel@lists.freedesktop.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	netdev@vger.kernel.org, chrome-platform@lists.linux.dev, 
+	linux-gpio@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org, 
+	linux-iio@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
+	linux-tegra@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org, 
+	linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I2C transfers in GPI DMA mode can fail with -EIO when a target holds
-SDA low, leaving the bus stuck and preventing subsequent transactions.
-The GPI completion callback reports a NACK and a genuine bus error
-alike as -EIO, and the existing recovery path switches the SE to FIFO
-mode which is not valid in GPI DMA mode.
+On Mon, Nov 2, 2026 at 2:53=E2=80=AFPM Rob Herring (Arm) <robh@kernel.org> =
+wrote:
 
-Add bus recovery support using the I2C_BUS_CLEAR and I2C_STOP_ON_BUS
-opcodes issued via the GPI TX DMA channel. Guard the -EIO recovery
-trigger with a SE_GENI_IOS I2C_BUS_FREE check to skip recovery when both
-SDA and SCL are already released. Extend the recovery callback to dispatch
-through the GPI DMA path when gi2c->gpi_mode is set.
+> Unit-addresses by default (and most commonly) are hexadecimal. There's a
+> number of cases using decimal patterns. Fix all of them, limiting the
+> pattern to match the 'reg' limits if there are any.
+>
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-Use the adapter timeout for GPI recovery commands, and preserve the DMA
-configuration error code when GPI setup fails.
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-Stop recovery on a GPI command timeout and report DMA termination
-failures. Do not issue another command or override the timeout with a
-bus-idle result, since DMA cleanup may not have completed successfully.
-
-Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 107 ++++++++++++++++++++++++++++++++-----
- 1 file changed, 94 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index b08353616adc..d5d5d90544e8 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -1065,13 +1065,82 @@ static bool geni_i2c_needs_bus_recovery(struct geni_i2c_dev *gi2c, int ret)
- 	 * -EPROTO and -ETIMEDOUT indicate bus errors where the target may be
- 	 * holding a bus line low. ARB_LOST (-EAGAIN) on a single-controller
- 	 * bus indicates a stuck target, not a real arbitration loss.
--	 * GPI DMA mode extends this trigger separately.
-+	 * In GPI DMA mode the completion callback reports NACK, BUS_PROTO and
-+	 * ARB_LOST alike as -EIO, so the SE_GENI_IOS I2C_BUS_FREE check
-+	 * distinguishes a genuinely stuck bus from a benign NACK. Recovery is
-+	 * skipped when both SDA and SCL are released (high) after the STOP.
- 	 */
--	return !gi2c->gpi_mode &&
--	       (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN) &&
-+	return (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN ||
-+		(gi2c->gpi_mode && ret == -EIO)) &&
- 	       !geni_i2c_bus_is_free(gi2c);
- }
- 
-+static int geni_i2c_gpi_bus_cmd(struct geni_i2c_dev *gi2c, enum i2c_op cmd)
-+{
-+	const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
-+	struct dma_async_tx_descriptor *desc;
-+	struct gpi_i2c_config peripheral = {};
-+	struct dma_slave_config config = {};
-+	unsigned long time_left;
-+	unsigned long flags;
-+	dma_cookie_t cookie;
-+	int ret;
-+
-+	config.peripheral_config = &peripheral;
-+	config.peripheral_size = sizeof(peripheral);
-+
-+	peripheral.set_config  = 1;
-+	peripheral.pack_enable = I2C_PACK_TX | I2C_PACK_RX;
-+	peripheral.cycle_count = itr->t_cycle_cnt;
-+	peripheral.high_count  = itr->t_high_cnt;
-+	peripheral.low_count   = itr->t_low_cnt;
-+	peripheral.clk_div     = itr->clk_div;
-+	peripheral.op          = cmd;
-+
-+	ret = dmaengine_slave_config(gi2c->tx_c, &config);
-+	if (ret) {
-+		dev_err(gi2c->se.dev, "dma config error %d for bus cmd %u\n", ret, cmd);
-+		return ret;
-+	}
-+
-+	desc = dmaengine_prep_slave_single(gi2c->tx_c, 0, 0, DMA_MEM_TO_DEV,
-+					   DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
-+	if (!desc)
-+		return -EIO;
-+
-+	desc->callback_result = i2c_gpi_cb_result;
-+	desc->callback_param = gi2c;
-+
-+	reinit_completion(&gi2c->done);
-+	cookie = dmaengine_submit(desc);
-+	ret = dma_submit_error(cookie);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * cur and err are shared with geni_i2c_irq() and the GPI callback
-+	 * i2c_gpi_cb_result(); both write err (the IRQ handler under
-+	 * gi2c->lock). Reset them under the lock before issuing the transfer.
-+	 */
-+	spin_lock_irqsave(&gi2c->lock, flags);
-+	gi2c->cur = NULL;
-+	gi2c->err = 0;
-+	spin_unlock_irqrestore(&gi2c->lock, flags);
-+	dma_async_issue_pending(gi2c->tx_c);
-+
-+	time_left = wait_for_completion_timeout(&gi2c->done, gi2c->adap.timeout);
-+	if (!time_left) {
-+		dev_err(gi2c->se.dev, "timeout waiting for GPI bus cmd %u\n", cmd);
-+		ret = dmaengine_terminate_sync(gi2c->tx_c);
-+		if (ret)
-+			dev_err(gi2c->se.dev, "DMA termination failed for bus cmd %u: %d\n",
-+				cmd, ret);
-+		return -ETIMEDOUT;
-+	}
-+
-+	return gi2c->err;
-+}
-+
- static int geni_i2c_recover_bus(struct i2c_adapter *adap)
- {
- 	struct geni_i2c_dev *gi2c = i2c_get_adapdata(adap);
-@@ -1104,14 +1173,28 @@ static int geni_i2c_recover_bus(struct i2c_adapter *adap)
- 		goto out_pm;
- 	}
- 
--	ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_BUS_CLEAR);
--	if (!ret)
--		ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-+	if (gi2c->gpi_mode) {
-+		ret = geni_i2c_gpi_bus_cmd(gi2c, I2C_BUS_CLEAR);
-+		/* Do not issue more commands after a timeout: DMA cleanup may have failed. */
-+		if (ret == -ETIMEDOUT)
-+			goto out_pm;
-+		if (ret)
-+			dev_dbg(gi2c->se.dev, "GPI bus clear returned %d, issuing stop anyway\n",
-+				ret);
-+
-+		ret = geni_i2c_gpi_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-+		if (ret == -ETIMEDOUT)
-+			goto out_pm;
-+	} else {
-+		ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_BUS_CLEAR);
-+		if (!ret)
-+			ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-+	}
- 
- 	/*
--	 * Recovery succeeds only once both bus lines are released. The bus
--	 * state is the authority, while a clean opcode status with either
--	 * line low is a failed recovery.
-+	 * Recovery succeeds when both bus lines are released. Trust the bus
-+	 * state over the opcode return path, which cannot flag a benign
-+	 * recovery event in GPI mode.
- 	 */
- 	ret = geni_i2c_bus_is_free(gi2c) ? 0 : (ret ?: -EBUSY);
- 
-@@ -1356,10 +1439,8 @@ static int geni_i2c_probe(struct platform_device *pdev)
- 	if (ret < 0)
- 		return ret;
- 
--	if (!gi2c->gpi_mode) {
--		gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
--		gi2c->adap.bus_recovery_info = &gi2c->rinfo;
--	}
-+	gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
-+	gi2c->adap.bus_recovery_info = &gi2c->rinfo;
- 
- 	ret = i2c_add_adapter(&gi2c->adap);
- 	if (ret) {
-
--- 
-2.34.1
-
+Yours,
+Linus Walleij
