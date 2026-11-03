@@ -1,94 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.62
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793719138;
-	b=2Xc3pptKivqt7kxBXPy4kXdbIbs8wg+c0KEmk6GsN/t7fegMrphkjTQUoqDW2q1BZNjl
-	 ewtz6H000XXgGzRknneuP0mM2Hw8m15khXja9OhhYEdQzExeVaCe+yNav40JJvygR4ez/
-	 z9+lM5R5+NUttBgdDQih+IG6nHGBHhCUFBIatnLXQUGxHiwFAIna9psQS1j/ZIhUcL8EM
-	 5F9wzEbHwmFlEBT4k3mFA42WZ5S8+KO5PbMy6mmrtHjrZM9UT9/kmOFjg5H8Ww2dUnp75
-	 I9/1vkcKjB/4TnOJvfHkxp7hLAbN8/hMBbS+564BF8slfmGcFXBX4vAyL3ZO1CthMag==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793719138;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:Content-Type:Content-Disposition:
-	 In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=xD1MitQ/D4Vo4PVLmkGOjTmPz8zSeneDpQm7lh8UnF0=;
-	b=ewnuJnVZuMMt2UBpniQzWIeTDGTw+DWo03Ds7BRA2SvMf/T4XwDQZWeVioiLhG/elRea
-	 ya464qMIdsb/zmjTtuQSNh5PUiXfzocQMJedvLzYbgzpdelHQ30ce0KIoxVh/HUyMe5/f
-	 eYn6XasoCdQf8pZ8065C+Pi5erTwZTYUpTFbQcn28V0rgaozVUUqGTYcJjRhrg8XCseYx
-	 OifXrY1jYr0naMsVoFvdoB06HrfGJVwiGGiJpa28CJPM9oYQuj3gMh6ef8Ry3qz0a9T5w
-	 Gd1j32heRz+xvFjwcgfEuoeeCgF0kNWn15SNu6s41hbj+bU3FEnstSKMG3TYqtrshZw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.nxp.com;
-	spf=pass smtp.mailfrom=oss.nxp.com;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=o6MuNIEc;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.62
-Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010062.outbound.protection.outlook.com [52.101.69.62])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793720473;
+	b=p1nBixcM/X/hnI8SqmxRKIB1P/JA51348xjL/sxKyrpYl8d4Nd3h9qkW45kDOYmoR/fQ
+	 Jl5xX1qpQkRvKew6DeV1c/VOwU7dqROMtz0wKWy2RIDFMTn35ImP56n4w8CSoj79k0CaL
+	 TFd6jftUhHduKcR0s//kUONf9t1RlUW/8N0YIG5WPD/U5aOw/NkDoAi1+VebprKehSc2C
+	 +T6L692s/JnereJpk93QZsswxofz5f2xhlTeWT5sEtA0ygSfuwaUxIvdd326iTkma+vg5
+	 4tZrDvEUzgcY1B+aRaJA6Wct59SpSKGWsjvms7iX3sSzB22TRUTa9mJ+kFVG7t0vpjA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793720473;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=EG9dwL8Ly2m2dvAdlIUrStHBH/C6i5YMZ6NWfvKb4Mg=;
+	b=XrTsJSTdmVNbMTayuyX8/NFgBc15usR9lg7rP4vOp+EZhXRBMuD5MDvnMBqLceJJ0yK/
+	 m2JwoCylnCy/ExYfxcgHiZfOnMVJ8M4Svr7aVKSCLmJKxT111BdmR/GOeVQIanvCoc42/
+	 S3t0GC6YoczBLnnapDc8uFsXeIbSCa4XFgrGelfczQEH4g1dDsvmwkowAqQlSRYRzpqpc
+	 B6luCAIGbbtxaobDagCB8gDpxUTvq3BoDy7Cga+VEF3Q93KcF0ybrmqn8QIMuuMQUdbAo
+	 Pw2+VeS9vPXQj2KZ+Hxd+LsKdjgcXgbrlp9SpWhKYJtOBbl9lUp0BMfecrtqMvUmCWA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eXB8Fhrh;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Y6JxqLX4;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7B0C6071A18;
-	Tue,  3 Nov 2026 15:18:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A7B0C6071A18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48DEB606A329
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 15:41:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 48DEB606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=o6MuNIEc
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=efgms1/Iwr/UFjVk521X+wKUJR+KtJPsglTut6jnkgNDVllzaahOW5zTMZi+LiBvZvszPg3PFSC1RtK8KSKfxlwj2AQ/1+Bmg/Wqj6A4an5KwFoq74xi6iWkylveVrjO97GXwmhTxmXbi30dmX+7F2Jj/x5GtcN4UhbCg2PocLY334GRxclAGX8OGkMGD7z+rDxG1BmY+G6slrpDO2N0YYpQa3phIMePRAgpkdR5YAo4P1qZpo9y1Ipe09axwj4oc2/wKyoc98+pVGnJBUO7XQwmecwhO7hsfe+A5YfUStXM/qc8X3nokoNG8kd9vnWq5mHX9X2/dyhSOUHsLLH1gg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xD1MitQ/D4Vo4PVLmkGOjTmPz8zSeneDpQm7lh8UnF0=;
- b=l2j8EKSbAKVg+wtMXt8nQLIrsVBiyhqomgVLpxCpVw07j6SaRFFawXMEN0YUCzevLG2NO+a1ZI8N4RGTu8mCmClZUdiwUJD9Z5tGZkH2b7Tvo8k2NvNE5lYIvVHK3chzBplz2xWopoA2udEhJ045u2pfRYDB2K6XXZjdEwPH3V60is/dg1yNw5EvmyO5F6NXIThGYcAutNgcQk+2r4W1vFgIvBnJIIXbsYX5vBpuYDR6K2rygA9UDhx9V7bLDU/YnI3ri4UgCeVJAuWxaTEK8v2ahxPLTdkGpyYwmN40mONHa93iMUScsiCp4xqKjGtPxTsmOGA0RPW8wurdSGzcXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xD1MitQ/D4Vo4PVLmkGOjTmPz8zSeneDpQm7lh8UnF0=;
- b=o6MuNIEcYt/5FHMDOXxFniKEyCk05g/+H7gExn2cXtqLdEmJ7d0QJCAf11ipW3Av4hFv3G8thc8XhVBmdRWTOs/edhRf7epbv6EiYpvnflgNkvg/InkFzsk7ijM8B6yrmXxqXQZpjJxInyl4vwC4hzPtBE/zXHJN/X/xUYa5Qlv9pGtCZpxJxbB6DlTD+dtMGRjwe7RVOj92GHDfw55PZ+q7+4rrvxHFP7rfi10eN0RNYplUHgwSHbBFt4gD93GOd4AsV/YVzPGt3j8uiotyBRsiUwFr6uGvPjYlmBMhs6r5F5EkMwv1X2CQNS2b9uWc/5VTknwGQX/0eNW0+CNvGw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com (2603:10a6:290:76::14)
- by PA6PR04MB11808.eurprd04.prod.outlook.com (2603:10a6:102:523::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Tue, 3 Nov
- 2026 15:18:53 +0000
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b]) by MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b%6]) with mapi id 15.21.0592.007; Tue, 3 Nov 2026
- 15:18:51 +0000
-Date: Tue, 3 Nov 2026 09:18:43 -0600
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Li Ximo <lixicaicai@gmail.com>
-Cc: Sinan Kaya <okaya@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-	Frank Li <Frank.Li@kernel.org>, dmaengine@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org, Wang Haoran <haoranwangsec@gmail.com>
-Subject: Re: [PATCH v2] dmaengine: qcom: hidma: fix memory corruption when
- active list is empty
-Message-ID: <aun7UyTzIOyJjUbL@SMW015318>
-References: <20261103083214.1682930-1-lixicaicai@gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261103083214.1682930-1-lixicaicai@gmail.com>
-X-ClientProxiedBy: DS1PR03CA0021.namprd03.prod.outlook.com
- (2603:10b6:8:233::8) To MI3PR04MB12438.eurprd04.prod.outlook.com
- (2603:10a6:290:76::14)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eXB8Fhrh;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Y6JxqLX4
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A3EA1032727834
+	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 15:41:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=EG9dwL8Ly2m2dvAdlIUrSt
+	HBH/C6i5YMZ6NWfvKb4Mg=; b=eXB8FhrhQLB4AHbk++n7DOG4C4jWkBty4K6LnH
+	5T5SLmlBkYs+Bclm/nE6ztQbTsZly3yzFFWXII7GCpjFnBOC+vHncBZ58QwbcFAI
+	6w3VQ6mMYtg3sE3pl0tQna5WhZfboTrxUVLbzK4UaJUbE8S4O+vlMWAHY+6zt9eL
+	zh00nfLUSw3pLuaP1sIpU2ES9+3L8qM7uC/EtQoyxbBK/X841Zv4tiaXrh49T/th
+	d7Lk5l+iQ7/D0ML1xqa3umwaajT/Yb2d6CbJR8d8wOTLPQMbiPnEb98ja9UltZ3O
+	Ei8VWkency87TFRTc/udO+HP4CzSIspXYf5G/yHJTCHWrzDw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqh2bgd9p-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 15:41:11 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-35c5aef2a74so17721978eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 07:41:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793720471; x=1794325271; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=EG9dwL8Ly2m2dvAdlIUrStHBH/C6i5YMZ6NWfvKb4Mg=;
+        b=Y6JxqLX4wBZnj2FPC6oOzLYCMATT/2TeLU0H9yYC+3Qvd/isAtvSklwqtuLnt1xQ2e
+         2Lybho/DqtdVndwWWOyCaqWSbamaQ6DgexdE9oNc9nMnCp4ThOMS+9l2syo9Nv8Z4bn0
+         nssNOPuGP0Ii0mR3p+xuFyujYwjlrcxoGhO28JWt78polu4sIyAD4xG0be0D1P+zRGWt
+         p8ZeB2Yoh0arSmLKy2KdPjdG2RUL7IQWnmENI8QE5oldRR0WTeUlavUBwtgHAwfA9PY7
+         Ma03xMNtbdAmdwHMfYrQmEYW8XvLTdEIjhYefxA4KG80jAFEsCjKFgx4EtjSFNUH6c3Y
+         aOCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793720471; x=1794325271;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=EG9dwL8Ly2m2dvAdlIUrStHBH/C6i5YMZ6NWfvKb4Mg=;
+        b=vkgm1nudV5pDhdWWcLnWEfip/rcjUUYwzWlYBewYO1O0Z4VMrrjIxFYRg0T+mbwIlp
+         oYkR+cUOmH2I3iOat0i7hiZhgO11V4uVeb7TRz+CTtqv/KGJT5pV7jHrK5XrF7V968Q+
+         GzKuZRryB2ApMHT9zc+jwQ9rrDyHqiKlPY8tOFYMl80a7SlEiOMDFCvU65SDNYWn4gU/
+         CMrDUVhvSWperAT/0pW3qJqry87Tg105oZ6c8GN3GvgKeeg65Q+8bfT1Vb0SAUgecxym
+         zFpUab0RxJp3Z6Gzeh5tud48IhDRgzllksCkAuzRctCT6PQDq8Ea2JH2MefEn5WuA5as
+         0Pfg==
+X-Forwarded-Encrypted: i=1; AKwUvBwWNW6aqKhGA5VdU4LGbMfra+Qen8comka5DFQZFeEXcWJEPEkggLfy/bOkK5jc+5wLgdfPgId65G//O5Kl@vger.kernel.org
+X-Gm-Message-State: APuU4Z9PsMyldOGnlaowoTkiSrb9MqrnO+jKtTyGixVfFEZz4lY1t/iM
+	nT63v5+hzTzHZ4N+bfo0/dbufbCrxfPO5fpfBXjghTIagsssr8cLxLy9/YFMLUPHL47kB07UYab
+	OJ2PPmCyMO4FuxMGTUcXLbj6tmRIh93nFfs465DFQUpaWrmbPbWWEt7Ss4KDQ8Gg1apW8
+X-Gm-Gg: AYBFou3uu9LEO3L0DPyeTtu9kKzOl1oCNaEsikQdf2IdxPjdkB62wp0BWmdifKnIJpR
+	g1GxaytvNgO7dPOegzy4LZSmmfenpUdhYpgbPASsO6u4/VbvY11KEPgdYwZEu2EdLnyCiacXe1Y
+	3r32GhfftORTgop694XZOcFUxZTi8ChUQ6P9dCSkJAhM6Cn/Ax3SuYsA/aaa+JRFi3SxQUDdzXA
+	xlFw9nN5gScV7chfOMUK6vPmms+nd/ilU8jRqcx+x3dTCQmAjJm3sA7O5JqrdXORgK3Xf/7NIot
+	CPQZWDjFe9PXJWjWLCLKl67OtN2BvcZZBxVoMlfRmVuu3izaMuj3bxevnCfe2UbRzqIVulp+uwp
+	fXSNJJdCUkobtP/GAZdlo+Q4BSlpYFrBIAd3lSiSsl4Ei/QE+hJ5yXRjqC5oNI9HyVzh//EX3o1
+	JVOw7xkvbZ
+X-Received: by 2002:a05:7022:170c:b0:1ae:abd0:e2b6 with SMTP id a92af1059eb24-1aeabd0fbb9mr13313556c88.38.1793720470642;
+        Tue, 03 Nov 2026 07:41:10 -0800 (PST)
+X-Received: by 2002:a05:7022:170c:b0:1ae:abd0:e2b6 with SMTP id a92af1059eb24-1aeabd0fbb9mr13313496c88.38.1793720469910;
+        Tue, 03 Nov 2026 07:41:09 -0800 (PST)
+Received: from hu-vgarodia-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac19f4b08bsm50072823c88.16.2026.11.03.07.41.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Nov 2026 07:41:09 -0800 (PST)
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Subject: [PATCH v6 00/12] media: iris: Migrate iommus to iris sub nodes
+Date: Tue, 03 Nov 2026 21:10:31 +0530
+Message-Id: <20261103-vpu_iommu_iova_handling-v6-0-e4b6ad864f8f@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -98,114 +115,222 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MI3PR04MB12438:EE_|PA6PR04MB11808:EE_
-X-MS-Office365-Filtering-Correlation-Id: a6c7ff3c-b5e6-45f8-e5f4-08df39bdc3e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|19092799006|366016|1800799024|376014|261021121427099003|261021123027099003|261022105027099003|261009223027099003|261028144727099003|261026121527099003|261026140227099003|11063799006|10067099003|56012099006|22082099003|261102123227099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	nHbkl3DxfSuLvgv6Pgypbad3tImUt4k6Vy4tXwl73dB8wYONIn0JQTKdVQSmid4tyExhfN2i/R4wOXJxPhLfJkOKmDKxh9mdQR3GtW5ocPZDktY3pRlYikw5hXgNXS1XYBJZYxkgjXGh42sX0zByupzphVgeLLS9icvqzChsxESXdFPtsOn/Gw4VZ3jRWCm2MqAWG/r1sN5tNvSNWOEOI8js4m22p05cJu7JppuGly76/XA61KhIG94zZrHMEdRk7px4HnIWBhyZEHaL2xpTJpp9HNfQOof9qSIZ1tOdKm+rndOIdoyFLt+NIK9BVCKfBcolcuc3aDgJfILbTW3ttNci6dMs39YhcBzBllh5gBgWcKtQNwo9lOpcKEiNceSZXJq5k6o4HLN5Wo7Bzyuuf0mdh2b5BwMubBRRcQ9ULjbb8OLu3Asx9AZPjjscuDXF+Nt+55dFx1GGZxkPN/vAIJa74sOVtsp/74iaJmGKceiPiHzSAu1i6C9foJnl57Lc689S8r7nw4C3EgsWxNKl+Id2VrQeezsrU0bLoI9yeio80POHuVGQQCYmTMuBzP4IfYlKddnn1X3OdwkDzHfOhY8pvwX/BplXvmm8ven4kFzjdJ2CxcQvKRcTgj0XCfow
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MI3PR04MB12438.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(19092799006)(366016)(1800799024)(376014)(261021121427099003)(261021123027099003)(261022105027099003)(261009223027099003)(261028144727099003)(261026121527099003)(261026140227099003)(11063799006)(10067099003)(56012099006)(22082099003)(261102123227099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?o0xaREhcI8ZelhTsCqA5Fgln7lXY6ghPyotxT+HdVv3T4QFByKzEcgjPcl5c?=
- =?us-ascii?Q?HWhE16/cd+md2m6eXx3ueNS3+nUcpGSU92S3y6aeM3IeNCzzUvFYB+3437+W?=
- =?us-ascii?Q?WZD/aGKymoJog44eROP9UQ1LizRt8XdI472Xu/soXLaTEENQCgocX2aEbg0r?=
- =?us-ascii?Q?jwWVo73Odj3wSIlNoAS6r7p2JJkoiQL48psczeXjRkesme+54m9FnU02AP4y?=
- =?us-ascii?Q?1uh1EQjcXZdvc0P9PDCGdMGzOg5B2odga23BFCFNblfin2awigwNGUHKqc3H?=
- =?us-ascii?Q?yzERc9FdMTvgmtGFwBR6WeNF+u8G6STqsh8AHn9P73MauOAO6UcYCyJeCQ8P?=
- =?us-ascii?Q?mJJsTzV/hB5Z+AICi8abrT9Hj/Q6uNhGB5wWoyhPD88mohWv1J3MzsoYrpBe?=
- =?us-ascii?Q?v0KWinuAwpgpPUuWwm/L568lEn4uVYiPw6ACgJMPMUb0JxoGYBM7TjTSYCk+?=
- =?us-ascii?Q?F6c7vUGZSiT6Vv6ssFMLLWfCZRxFpgEvkQCIvD/sp98Hf5B910dvGB6Mu88I?=
- =?us-ascii?Q?xVkOugUnn58bVOS1HG6AZakb0l4uZw11L4HTaeZAFMxLD6I1i7sssK+rb78x?=
- =?us-ascii?Q?6UvoKDlZMG0rAnR5SnJ3tpqtTdnkeyMpm6WqrIWGDGYTiMVtfrLgJ++KLnhq?=
- =?us-ascii?Q?0J4kbqj5glWPfiFkLlbNAix+9vEbyPnR9bDnAQb+TlTON5p2P3aG2zOkNxol?=
- =?us-ascii?Q?IzeCaq1Qkh7o7oO1yNdYLMf+8+GcY6VhSkPqtm3tQJkYEJkUCvH1DN4ULIRv?=
- =?us-ascii?Q?qGUGt9IjOE5yfSQdjfFlB4xHOhPGBOPGP8SZar2AtTZy2cv7RUmGMqy9Y7/U?=
- =?us-ascii?Q?dpo2wg+n808Kxifflv/VwBwbIzCAThkbx4fOwwJQZc9V2GLMawzgN9jRLisV?=
- =?us-ascii?Q?jcKlOYLsitG1BLlx+F4rXazk28IQqPjlK4nmfIxYWajfwFkAHgsMnMh5aUeL?=
- =?us-ascii?Q?Ye9hC6bbB7W1s3PHUbp/U/KxE54Dzxg+y6BbBx0cbwdN3t/en8z5kg2xRXpb?=
- =?us-ascii?Q?PT3MNW/SxOw+aw8KxHw6Vwt76rMfN0huvDrlORQHQtoYiiGgvtCvIYTRRr7U?=
- =?us-ascii?Q?kW1+WbccZCVTrJc2771i0JcZd1lrvQsyPy1wtcpywAv8HnW3uUTyp/xiOX5a?=
- =?us-ascii?Q?br3YaeROTI9TUgMz3DrmWaplKqV9uak5IXjRgDLYDMyHS6IXd9BesTE75w3Z?=
- =?us-ascii?Q?IrpP12HOYl5uMjsytFYswQShLFAMWv5dz3HzJEG9PmhL4yr5/GklmFPeeSoc?=
- =?us-ascii?Q?TBEbGrkEG0+UCuwKz3Qwv4HlliveM5a8SufugVrpgO3cwIssBx19oS6Y6ytt?=
- =?us-ascii?Q?2N+OrIAx7BG9mFD1mccAzJvahctg8KC554UoLq5uCQA1vwJ8IeulVdiKq47k?=
- =?us-ascii?Q?uCpjUofhl2VEb5UNHvd4Ikkngt9/1JlSyCczTZf3G3qefduS+bUC6jbThSeK?=
- =?us-ascii?Q?oSm0r/7L+FOAvaU/Q/1DhEVWjchO4xniHJcQEsODERvTrWDUFV6x1XnErHnP?=
- =?us-ascii?Q?RX49MTb0UWsZTh6NYmvSz+iLOGyUAY3OjUxTbmc2TNr8g3JC/1PXEioPk+V/?=
- =?us-ascii?Q?Xu+llai5pn8ZEoYKKbYvLlGf2N6jQ00Tmw4nlkDSzsx+UkLmwPvuKlE9cfYS?=
- =?us-ascii?Q?8vefMAVKJTJaVggK1C3nXLbn1dtzcet4KY9GJYUAjdf7XHnKj0z5JgCnljIO?=
- =?us-ascii?Q?XkEUjE8+Vvxwkiatn4c2k/1yPA3C+ubEf2XYXDSPmC6mEE80k2RaDkSQw59q?=
- =?us-ascii?Q?IXs2U6ySNJDa8+neJ69sgZtgDwCnZhSbFb3FKWRF6rSCMeZK9n+s?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6c7ff3c-b5e6-45f8-e5f4-08df39bdc3e0
-X-MS-Exchange-CrossTenant-AuthSource: MI3PR04MB12438.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 15:18:50.9648
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RDJegh+TjyIDay6LKWHvn188G8wB+fYgFBwI+KaO8yjpUPxftnoLa3FVoLZH9JpVqzKMJGkhkmOaKZQ6dbeAVBjE9nsRferNSR0+Ed2G7w2aZN1BRyfaF99SgQ7DXggj
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR04MB11808
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAG8A6moC/22OUYuDMBCE/4rk+bbsuhqNlOP+RyklmrUXqNomV
+ Qql//2ivbe7l4EZZr/Zp4oSvETVZE8VZPHRT2My+iNT3bcdzwLeJa9yzDVWSLBc55OfhmHVxZ5
+ Sx138eIay1GK0sdRTp9L1NUjvHxv5cHz7ILc5DdzfoRokRrsNNNl+5RMhg3Xulx/W+QiLBgTW1
+ LPJyRLz1xTj7jbbS5dquySf695fGlIFPvgI248C89j60cFCiVfVaKiopTXY/89rbRRYE39vslx
+ z1TrpsOTS5lgUnasZpbXGVoY165KcwYLV8fX6ASqA48pTAQAA
+X-Change-ID: 20260701-vpu_iommu_iova_handling-556e969a1f1c
+To: Bryan O'Donoghue <bod@kernel.org>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793720462; l=8136;
+ i=vikash.garodia@oss.qualcomm.com; s=20241104; h=from:subject:message-id;
+ bh=zb6mcxK2f56tadHINIiExyxisEAW+UBVwzaiOKzDrY8=;
+ b=jRmoxl9QWAysKatLSpC077jmG0P0ouxUQYCa94qJ1evFKKgoeIXS4F3MXyJwUIq3nFAWzu6lu
+ KgULXKoOvYLB6Z7zcc8Q9s1AHANY2bgMMU3k+crodQdrTDoXi/je+U9
+X-Developer-Key: i=vikash.garodia@oss.qualcomm.com; a=ed25519;
+ pk=LY9Eqp4KiHWxzGNKGHbwRFEJOfRCSzG/rxQNmvZvaKE=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA2MiBTYWx0ZWRfX6EB8kofcs7Im
+ cWTRIyRxYUJeA2JAaowUKMCMktz4TAflZufbnwoVGotKbDQwGVwUyM6FQrTH/TaWp9vbZtPZiY9
+ 1dPeT+6Xn9w5GLL0oWy5TSUmjRd6yDo=
+X-Authority-Analysis: v=2.4 cv=Xs1vqlF9 c=1 sm=1 tr=0 ts=6aea0097 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=e5mUnYsNAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8
+ a=clIEwUPuL9h61AhfT48A:9 a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-ORIG-GUID: mFoQTJM2lCzFbljhzRkY5Ndz5tDsexd8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA2MiBTYWx0ZWRfXzs3ZfTmVK+md
+ rXoCIaJaRDwb6gE45nT25xyXtHj7xxD73aoVb9RAyqZyHawKa1vNIBmASiNXmQHaTipMln2j9R9
+ ThdoHZKgjq13kbrCae40ETewdxb7/I+fdDbQexCTHCJQlz+4BR4IQdAvXatBMhJBNuS7WvinKrX
+ WRq73ogPwteoKpL07d52xWReWrtZxQCZYFqE5mv/acz6WtxaGZErzlctUdYWqbdkQYJZUIy3Fbn
+ 0JMuKZIVnME1KEa7g1chFzAhkVPTY9leXRwlgyC/5rXRmPmavpWobAy0+Q8fkxCgNKk/OK+0dyb
+ VEjLUEugmjIn9ATMn+oyHrDdp/9suT35TEZskExLxTq4rsH3bc8e2x+Q2ehfLx2lU/RW58q9EfV
+ 5dQ7IKtl/TbkPMSQf/XCqrpMqWtkyY3WglEpu8vMk7jsgaWpxXTDlp9X+eBMo2dU8MTYk1oM7eH
+ tEyTDT/exovfmZ2jFKg==
+X-Proofpoint-GUID: mFoQTJM2lCzFbljhzRkY5Ndz5tDsexd8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-03_03,2026-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
+ bulkscore=0 adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611030062
 
-On Tue, Nov 03, 2026 at 04:32:14PM +0800, Li Ximo wrote:
-> From: Wang Haoran <haoranwangsec@gmail.com>
->
-> list_first_entry() does not check if the list is empty. When mchan->active
-> is empty it returns a bogus pointer, which causes memory corruption.
->
-> Use list_first_entry_or_null() instead.
->
-> This issue was found by static analysis.
->
-> Reported-by: Wang Haoran <haoranwangsec@gmail.com>
-> Reported-by: Li Ximo <lixicaicai@gmail.com>
-> Signed-off-by: Wang Haoran <haoranwangsec@gmail.com>
-> ---
+The VPU issues DMA through several SMMU streams, and the hardware does 
+not restricts specific streams with specific addressable range. The 
+non-pixel stream is restricted to use 0-600MB of IOVA space, while the 
+pixel stream can address the full range:
+    +-----------------------------------------------------------+
+    | non-pixel stream addressable range (600 MB - 3.5 GB)      |
+    | 0x25800000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
+    | pixel stream addressable range (0 - 3.5 GB)               |
+    | 0x00000000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
 
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
+A single "iommus" property on the video-codec node puts every stream in
+one IOMMU domain sharing one IOVA allocator, so nothing keeps a
+non-pixel buffer inside the low 600 MB. Once an allocation lands below
+that boundary the hardware faults, which shows up as unhandled SMMU page
+faults and spontaneous reboots:
+https://gitlab.freedesktop.org/drm/msm/-/work_items/100
 
-> v1: https://lore.kernel.org/r/20261023073154.744365-1-lixicaicai@gmail.com
-> v2: rewrite the commit message in simpler words as suggested by Frank
-> Li; no code change.
->
->  drivers/dma/qcom/hidma.c | 12 +++++++-----
->  1 file changed, 7 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/dma/qcom/hidma.c b/drivers/dma/qcom/hidma.c
-> index c939635be..925c912e0 100644
-> --- a/drivers/dma/qcom/hidma.c
-> +++ b/drivers/dma/qcom/hidma.c
-> @@ -176,8 +176,9 @@ static void hidma_callback(void *data)
->  		queued = true;
->
->  		/* calculate the next running descriptor */
-> -		mchan->running = list_first_entry(&mchan->active,
-> -						  struct hidma_desc, node);
-> +		mchan->running = list_first_entry_or_null(&mchan->active,
-> +							  struct hidma_desc,
-> +							  node);
->  	}
->  	spin_unlock_irqrestore(&mchan->lock, irqflags);
->
-> @@ -238,9 +239,10 @@ static void hidma_issue_pending(struct dma_chan *dmach)
->  	}
->
->  	if (!mchan->running) {
-> -		struct hidma_desc *desc = list_first_entry(&mchan->active,
-> -							   struct hidma_desc,
-> -							   node);
-> +		struct hidma_desc *desc;
-> +
-> +		desc = list_first_entry_or_null(&mchan->active,
-> +						struct hidma_desc, node);
->  		mchan->running = desc;
->  	}
->  	spin_unlock_irqrestore(&mchan->lock, flags);
-> --
-> 2.30.2
+Fix was made in iris/venus driver to reserve the 0-600MB range and 
+thereby prevent iova allocation from that range. 
+https://lore.kernel.org/all/20260818-reserve_iova_in_driver-v2-0-5005a1154408@oss.qualcomm.com
+
+Given that the address range restriction is for specific VPU stream, it 
+should be ideally moved to that stream. To achieve the same, a subset 
+of streams is now represented as subnodes, so that each can be 
+associated with its respective addressable range.
+
+In the past, this limitation was addressed with an iommu-map approach,
+with the iris driver dynamically creating the devices. That approach
+was later concluded to be a hack to avoid having subnodes, and was NAKed
+by the iommu maintainers. It was discussed in detail here:
+https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org/
+
+The maintainers agreed to proceed with the subnode approach to address
+the VPU hardware limitation.
+
+Reserving the iova address using "iommu-addresses" requires it to be 
+placed in the reserved-memory node. But when "iommu-addresses" is the 
+*only* property being described and there is no backing "reg" (i.e. no
+actual reserved system memory), it does not really belong to 
+reserved-memory node. A device IOVA range is very much specific to the 
+way device own address space is mapped, and not a description of memory
+shared across the system. Given this, "iommu-addresses" backed by a 
+"reg", should be placed inside reserved-memory, otherwise, it should be 
+defined within the device node. More info on this discussion can be 
+found at
+https://lore.kernel.org/all/662f7093-fb0a-4564-9ca0-98e03e68ba9a@kernel.org
+
+"iommu-addresses" property expects a phandle, which does not make sense 
+when the same is defined within individual device node itself. 
+Introduced a new property, "iommu-ranges", for the IOVA ranges required 
+for DMA memory mapping to that device node and when there is no physical 
+memory reservation.
+
+"iommu-ranges" is defined with the schema PR
+https://github.com/devicetree-org/dt-schema/pull/207
+
+Patch #4 in v5 is now posted separately and not carried as part of this 
+series.
+https://lore.kernel.org/all/20261103-add_iommu_ranges-v6-0-361f3921a133@oss.qualcomm.com/
+
+This series migrate vpu3x platforms to subnodes. All new SOC having 
+iris3x or onwards(4x 5x..) should follow the subnode approach.
+For VPU2x and AR50Lite SOCs, which are being migrated to iris, the 
+subnode support would be added once the SOC is migrated away from venus 
+to iris. There is no plan to upgrade venus enabled SOC to subnodes.
+
+Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+---
+Changes in v6:
+- Addressed sashiko comments.
+- Rebased to linux next.
+- Iommu patch #4 from this series is posted separately. This is done to 
+get review feedback from iommu maintainers.
+- Link to v5: https://lore.kernel.org/r/20260926-vpu_iommu_iova_handling-v5-0-0322ca5dc10c@oss.qualcomm.com
+
+Changes in v5:
+- Addressed review comments in #4 which seems valid (Sashiko)
+- Added RB tags.
+- Link to v4: https://lore.kernel.org/r/20260914-vpu_iommu_iova_handling-v4-0-9b9074a73c41@oss.qualcomm.com
+
+Changes in v4:
+- Dropped Daniel tested by tag (Krzysztof)
+- Removed depends-on info from the commit description ((Krzysztof)
+- Dropped the soc {} in example (Dmitry)
+- Addressed review comments which seems valid (Sashiko)
+- Binding patches depends-on: https://github.com/devicetree-org/dt-schema/pull/207
+- Link to v3: https://lore.kernel.org/r/20260909-vpu_iommu_iova_handling-v3-0-2fe43ae45495@oss.qualcomm.com
+
+Changes in v3:
+- Drop iommu-addresses from reserved memory (Rob)
+- Defined a new property iommu-ranges (Krzysztof, Dmitry)
+- Moved the vpu specific context bank handling to common(Dmitry)
+- Dropped fixes tag.
+- Link to v2: https://lore.kernel.org/r/20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com
+
+Changes in v2:
+- Fixed sashiko issues.
+- Moved subnodes into common schema (Dmitry)
+- Kept the firmware name as the one defained earlier (Dmitry)
+- Added dma-ranges to specify parent-child address translation
+- Moved context bank hooks to VPU ops (Dmitry)
+- Updated commit description.
+- Link to v1: https://lore.kernel.org/r/20260709-vpu_iommu_iova_handling-v1-0-72bb62cb2dfd@oss.qualcomm.com
+
+---
+Vikash Garodia (12):
+      dt-bindings: media: qcom,venus: Add context bank subnodes to common schema
+      dt-bindings: media: qcom,sm8550-iris: Add context bank subnodes
+      dt-bindings: media: qcom,sm8750-iris: Add context bank subnodes
+      media: iris: Add non-pixel and pixel context bank devices
+      media: iris: Route buffers to the matching context bank device
+      media: iris: Skip DMA mask setup when the core device has no IOMMU
+      arm64: dts: qcom: hamoa: Add Iris context bank subnodes
+      arm64: dts: qcom: sm8550: Add Iris context bank subnodes
+      arm64: dts: qcom: lemans: Add Iris context bank subnodes
+      arm64: dts: qcom: monaco: Add Iris context bank subnodes
+      arm64: dts: qcom: sm8650: Add Iris context bank subnodes
+      arm64: dts: qcom: sm8750: Add Iris context bank subnodes
+
+ .../bindings/media/qcom,sc7180-venus.yaml          | 15 ----
+ .../bindings/media/qcom,sm8550-iris.yaml           | 17 +++-
+ .../bindings/media/qcom,sm8750-iris.yaml           | 16 +++-
+ .../bindings/media/qcom,venus-common.yaml          | 97 ++++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/hamoa.dtsi                | 15 +++-
+ arch/arm64/boot/dts/qcom/lemans.dtsi               | 15 +++-
+ arch/arm64/boot/dts/qcom/monaco.dtsi               | 15 +++-
+ arch/arm64/boot/dts/qcom/sm8550.dtsi               | 15 +++-
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               | 16 +++-
+ arch/arm64/boot/dts/qcom/sm8750.dtsi               | 15 +++-
+ drivers/media/platform/qcom/iris/iris_buffer.c     |  8 +-
+ drivers/media/platform/qcom/iris/iris_core.h       |  4 +
+ drivers/media/platform/qcom/iris/iris_hfi_queue.c  | 16 ++--
+ drivers/media/platform/qcom/iris/iris_probe.c      | 80 +++++++++++++++++-
+ drivers/media/platform/qcom/iris/iris_resources.c  | 41 +++++++++
+ drivers/media/platform/qcom/iris/iris_resources.h  |  1 +
+ drivers/media/platform/qcom/iris/iris_vidc.c       |  4 +-
+ 17 files changed, 340 insertions(+), 50 deletions(-)
+---
+base-commit: 2637bdec0535a2044cd830eba9a79363651d9043
+change-id: 20260701-vpu_iommu_iova_handling-556e969a1f1c
+prerequisite-message-id: <20261103-add_iommu_ranges-v6-0-361f3921a133@oss.qualcomm.com>
+prerequisite-patch-id: 5ca05ad34889c804b7ef5cab228c1b4706346d17
+prerequisite-patch-id: 726db1aaa947b63f64dcf61151e34b912b7b827c
+prerequisite-message-id: <20261017-iris-handle-unbind-v1-0-7809148eb90f@oss.qualcomm.com>
+prerequisite-patch-id: ea985fc3b351931adea7940855e5219be3a2bed0
+prerequisite-patch-id: 5b6c27159dcaa5c06b59ed92ad39824e002a9f93
+prerequisite-patch-id: 470410ce6b6816931ec3c7751079504781859ab5
+
+Best regards,
+-- 
+Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+
