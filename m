@@ -1,111 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793711593;
-	b=kQEPkPhc4mrw4ksr9oEYUKDIpRCtHDmf8eJTuzUcAUalCqJmOzplJm5ZrISeqXdA3syp
-	 Myap9Rbc7tkc5nexLW/sf/7t8jXdtYTLqrfVfRo/NhHV9yirntQfRU89c4qIgAsJEZaTg
-	 r37YpNILgbasqGlP/yhNTX/YSl0eu7mBIlDfWxRySBBocpQnqj7C+0e+kp3+eeNxHrCpa
-	 7jfn7pfUL3tL4mKsDEGqFTMgp0CLttqivDZRWHXv64rSCKNiKa38GcQrtpyqXEA8TcBIk
-	 p8ccL1DoiefZBuPwfwBGSgCuQjWjEXOt7CwpMLUZDg61Mx0Py2j1TLT8xG9CA4aHSvQ==
+	t=1793712412;
+	b=0pDcHiq6WYjW+SuY/J+PChwFCLf94vt/mj3ghg0ELyzXVqXU01brliugoPJXL5F1kjbh
+	 nd0d4j+q7sxHmSBYuq56LPigo1wU25YEVk/H53sbW1rsdWoYp5+ziupjdmH17QBGpB/bb
+	 RfdivlY/YJSLnNmh73zXs92bakPVTHoURRpyroImDGaVy1Qwe6ErB8/ByMVTWyBpRFSAn
+	 FGopwi3JflBHpFwb1Zydg7fu1t4eYKEw2S8p1gSBXBzKSF+qwjUDqwbEsjXnR43u+HF0d
+	 RVKOsW4ISKJrrhIYZZxV0oiw3aNiJMyreAWeWq+GTZsGLZMA89iafqMSvmOtYE0CDEQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793711593;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
-	b=nPFt80OFlaUUDLEjept2rJm4YDLUNTj6j790u4WkR1EWpiOeemcrKCXCEuKfe/FWP+hI
-	 a/0AaC6b/X8nNCwuh/OCmZh8cjVbh3qzMsVjuPemNAy75eHphTKOzgTzo16VZfLFlskcj
-	 GURJ8YNtLwh29wjd/w2JZQdntTT7JAr9Ar/JXYywN4D7477F3O6zC6yPcV8UD5tNTTOjB
-	 b72+L2yEA17KVtDyqvxwwsdOYoZdFxlOXOfzebry2mzF2zNXNxsTU3P7puA7x/WmI4WmE
-	 vE4YiPpe16VNQYkjW6JENyQisSmnCLfJC0Ck57J1ICLrsKLpns2ckGnftFNXKt9ih7g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793712412;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=L77FF2aWzZ913b54dk9ZT61wHg8HgCGCsNMqmepmddI=;
+	b=5AuRf+17JcZHsmdrgeLEqZ76lYMOY8pKwFWo0BUoUX1k0ePXjZUBUoYQIgQ5RleslhAX
+	 zNg8F2y0kdOTW3wcsH4Y3aXVLlmzNd7xOSyhncJSHYRdkk1KDm3c8wEPS+RdDVvFtb9ZS
+	 yHbnIT+FvDDRN7eWmHVtED7iP2zi/qRz+1EaA6Ua9z4OjYkva90glv6PaldaTCuGBai5X
+	 +CmGQp29Aq545KrJYp1h+Z+9JOvJ2p5bFA5kVGV8V+OX3H75e8sL2z1HX5rFHn8wrv+5C
+	 RNj+h+W+Q3NKcLYx+Ww7HAyVNVpWvlX4cCjTYFCBC3KIv18mBu3DrcmvVxG6uc6qTRA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YnCsvjoK;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VdKJeQdX;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=OFk5a2jO;
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58D30606A32D
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 13:13:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 58D30606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1B226083601
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 13:26:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F1B226083601
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YnCsvjoK;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VdKJeQdX
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A3ClI3Q2897152
-	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 13:13:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=; b=YnCsvjoKOg41w2fy
-	NCc1D3VtRcD7lTaZmWWlydx7PxtmO5zPxPFaQaBnfKZZHDCyjmUlApeSfrwTT37f
-	mqLXYYjTQvHaw5IDogbFKmc/xp6eVvJNmZqwkVreAxbv5VLeRO9Sh41s2DMyBfJE
-	gJVxiXtx/ec5uxAiFH8D0mQMF4KVWvvWVitATB/8N/rjlo3SNWyQX/pHZRWua3A2
-	4wUsyvY8KYgJls1pjaEFl32RB2XbACdETG/aEyQOO7Y4l+4QkXutE8VZ6iu1ac9K
-	GHskR6yICmAMB+yP5yRQXz0RDH4rQCq7bTGSlxmNSI2ibwggUozxeawzVvO8zBQ1
-	uHFLpQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hq0873ucr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 13:13:12 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2373e9b4so420789585a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 05:13:12 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=OFk5a2jO
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a9a8d6cea8so9192885e9.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 05:26:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793711591; x=1794316391; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
-        b=VdKJeQdXNObU3F2AsbVCISDpmh5jLl0qx6VaKiX3XnGU1NLqvaOenSWtY3/uueNd5N
-         TZ60HIuZZ2AGPANlg5LrAizWenap1Jpgc4Mimqr9z1JuUcBLJlSsqFSSTRp6ojP4l9W0
-         ZSEtd58jbPDbeA8aaNIfHWQ8xiTzk1pW7mMWG1BIPprYIANGgCvheQxJH1LW8V1rmewu
-         3a2vvcPH62XvjH056HExXEImEVGm8/iE+OZOL5BjgxW/RRac343hRVbgk3IzbaOuwpf8
-         qxPeXZNApCbXNGtEvGTb7Oo7kVSTatsGZZRRGyZPR2T+oLERd1cxVEHmfo+TetDjLf3E
-         wVIA==
+        d=gmail.com; s=20260707; t=1793712410; x=1794317210; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=L77FF2aWzZ913b54dk9ZT61wHg8HgCGCsNMqmepmddI=;
+        b=OFk5a2jO6Tb/GcuhfBDvw57lSgIzl3jVRnNzStUTk9vkR7yBYtARVBT1hUIpAPBpf3
+         Iq3sRkIXTdV/5qkmHVelr4LX+6I+gE1ZQxVNwh352AU/GNLyF85bIwr5EsJlG8PDPM7y
+         SRr+kCgtQOldiboTfy+vzmsJ4aUSSlTo6qbQvSLTm50V5nVLqiZXnkepXx58mQYKIkt9
+         9U2V+Fri7ayow7Gd324IxNQO2/tzJnSkp7b0BQlXzKjWb+8CDdgFFVr3B1UKr2bVpn2O
+         WnD5pq2CElvEVW+dU+qmO6vdz8NxExncsG6MH5hnRzd+iWqB0QIf97pvzLL3DPASeQX9
+         yT3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793711591; x=1794316391;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793712410; x=1794317210;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
-        b=B2a9wX3mbriezMrRCPO8Ei5eQJjXEr7y0DQwr02kIeUU+9JXhwyaN7Xcz3UgR5A3rc
-         j/vOwa1kuJ+I9zIyjKA+cveB2bX97Tf3+peFmmgNsxD+H3V30IYSh25hFuMAksXdNNvy
-         DBZXQYGHezRr/nhPxy/j34JS2TbiKMu7swRZ3ECIL2sGNp/cnjfJmx/JmMlAZUkXI3nR
-         LOsl+D8UbhjxhvQrgQpEg5j6K7WEQKfzK0ihUHYj8w41b7fw/fe3dIxFU6me+BVenIAA
-         /xhTq8XXzqFljvMfiYT1gGOn7107kgwPgV+M4ltLjaAuSGMtvPq/a7nNbI/V8yyULPmn
-         cR2Q==
-X-Forwarded-Encrypted: i=1; AKwUvBznbEup0oO1RCYvQQJuaUXR3Ws451IEkaz/1Pl2+NSa6Vz8BMu308IwzbKpWn2ospkg3+dRq/akR/D1fg4O@vger.kernel.org
-X-Gm-Message-State: APuU4Z+kQpJwyyvFXngxEEWpybihjBHg/DIag87lBxwFtEpxrNaqYcAp
-	q/8hs7lfeyRP2fnEc+3ArQ6k6alSHdEh1Q7nMHGEbwEMZqr296R0qZoPFPFqKEITYHUd/tTnfBq
-	JoYZLc8JXHT7F1y8KwdBMvhoV2MNEDPzesBVNMLMt8JBurV4z5ktzXDLX9e1jnLxjRMLY
-X-Gm-Gg: AYBFou2S3VWNEVNjCNwxrRdIYdIpBClUZqWxhmYYyJKQTGs3OcFx0+mjWW62pAFQCvI
-	APbBzZ0Ba0o1lW5Uai+d91liTXvqTeaToQx4jLxPZZnvgczjQNWGLtyD/TFdNtsZzXYigkF09S8
-	4FWsm5c2wDNSWvBsXkbxkLMWPTqvmLdQ78NRfF8CYTjg93lu7IxoOvLc2Y7monOAUzyo1YUnFA0
-	o7cvrN4PXF5R6kG6/NC8iV42Q1HO8vUUUdKIT6i0tsV9u/xP0JJzKUsuF/fRJt/OT68i8GzCIze
-	BjKB5+dYRauHaAY7vYqcQoHJzSho6IYN8QqM5OUKheyN1+WoXm9mHdgrx9QW0Gj7tIjKA2ZUmhP
-	m7a7e+hOBBq30ni4wW9EdMCejlJf4glrqyoqmeObsnozc0j/RAFFtHrYbIsYAbKZOCo8CKifssw
-	Rtf+t+9vCVVS4c
-X-Received: by 2002:a05:620a:6293:b0:93e:d5c1:da58 with SMTP id af79cd13be357-944217ce7d5mr2047384985a.79.1793711591406;
-        Tue, 03 Nov 2026 05:13:11 -0800 (PST)
-X-Received: by 2002:a05:620a:6293:b0:93e:d5c1:da58 with SMTP id af79cd13be357-944217ce7d5mr2047380085a.79.1793711590852;
-        Tue, 03 Nov 2026 05:13:10 -0800 (PST)
-Received: from [192.168.25.64] ([94.155.124.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a922c298sm50322075e9.9.2026.11.03.05.13.09
+        bh=L77FF2aWzZ913b54dk9ZT61wHg8HgCGCsNMqmepmddI=;
+        b=vSC8LckkdtIxuGZDtgEF+jbNTrFmYlpgQOQl71went1HE2oscsVuC/fy7hyfnx2+2Z
+         Yh6pKsemdApSvHYgbZsxbbki8NXfbNcGAK6YNSPgUwl5KXoe5BRXoUvEi01uI3/rHEWA
+         eBmMLfIgxePVDPqT0Zal9/mITtquUgSKkBqPfKj6TMIGs3dhm4vLMaZVdMya0k5uv66y
+         KwYcdmq/OV3VhRBUqPlDOj5M9rhOgQUIX+C1trUVhftDMJAzXe8RMx8uDRKcrGFeKHJ0
+         TxXUay7ifTVewsg4/ije+oBAFbL8OmoVEVHMVc/dYJUeBAupOuGeVK3KBO1AgDQoHiln
+         7PMg==
+X-Gm-Message-State: APuU4Z8rvMWc5kRrJv9y4tVTNfOsE4jW5f7mamRtZdRZLMYy196cMaZ0
+	mgF2BUvFlwPaNCOxFute9XKarO5lpyQ8Y3/rmciMgBcxNsTvGb6h0uc=
+X-Gm-Gg: AYBFou1XTJ09ivPcAkfZ903RXboEVV+A4OYHHYJUH0U8MSda87OWKxT6SPTzvdRVGm3
+	HNP+O25VngfRS/0g18YV402jjuri39HR1AGyUNzjZO4bjcgf0DMWbc6tW3gsoTU+pjXzLU/V2xQ
+	DFJXZ1N7UOrSULYDcU99NIwqKvhf15JBZlZopJ4TOPou4/D8CYEAwNCX3yGPrcM6yiyJv2pWyg5
+	75xhzFMiovBG3WO4I4tKElnGkmOTuLhwujVQs7YtIxKxaHnMvPHLYVJY/AyOC739EKfGEJfWvWR
+	4WK3+13eCZePb4SPdYpoPyWYQMI5u1WPYpQiABAkbV/F/OKYGHBBUFHC9xV+YydWM+9uM6P7Oof
+	bd3W92W9U9pboQrjDSyOVvaE356zkbaLDEC3SPep+n/t75MqvnSURpdFcm6o+mgq139hGs8Q2Jq
+	lIzWPmJXrL8IiLM03ODEPsyOruZ7plOnlpZiR0hDTkg/USs2Fz/2K9WtPTstQWio/JBdea6IcDg
+	648S+558N048sXS7kPqWB0vv7/Rw5VHCeredZqnYWRYeOfCZOpUH0YVnyqIRCc4Jq81QN3y0XWW
+	/B82zYDoBQxcg7zXQPV0bw7mjCxKPjWvhUJkqmfV6z5LZ8Y686J6K0TzxjFYfILmybPV5cUOJLo
+	X/7mtxjJE
+X-Received: by 2002:a05:600c:37c8:b0:4a2:18c4:61a5 with SMTP id 5b1f17b1804b1-4ac16acd93cmr305983945e9.6.1793712410096;
+        Tue, 03 Nov 2026 05:26:50 -0800 (PST)
+Received: from ?IPV6:2001:b07:2ec:601d:4b26:1672:75c7:805a? ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a879f401sm54532585e9.5.2026.11.03.05.26.48
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Nov 2026 05:13:09 -0800 (PST)
-Message-ID: <d3a7c0c2-f5dc-47da-8466-d0b77aae9b9b@oss.qualcomm.com>
-Date: Tue, 3 Nov 2026 15:13:08 +0200
+        Tue, 03 Nov 2026 05:26:49 -0800 (PST)
+Message-ID: <364b570f-e433-4e9f-8d69-d87f057a7b9d@gmail.com>
+Date: Tue, 3 Nov 2026 14:26:47 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,146 +92,301 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/9] media: qcom: camss: Introduce SOF sequence
- tracking
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>, bryan.odonoghue@linaro.org,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261102-v4l2-frame-sync-v2-0-25cbed7a772f@kernel.org>
- <20261102-v4l2-frame-sync-v2-2-25cbed7a772f@kernel.org>
- <MPrRsE5vvB26tbMAT443IrH7Zr_tyIPaFwvQfnZj5TJUaM5uN8MyHB6kU6Y7rW92Sy35A5GfNcv95YOt-4YUNw==@protonmail.internalid>
- <8196a664-f73b-4da1-aea0-0ea49676a4eb@oss.qualcomm.com>
- <7f3e822e-3749-41c5-8390-e6d74b203927@kernel.org>
- <36008be9-2b25-4f04-995e-f90e2547f7f2@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/4] drm/msm: Rework IFPC disable
+To: Rob Clark <robin.clark@oss.qualcomm.com>, dri-devel@lists.freedesktop.org
+Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20261102190010.720443-1-robin.clark@oss.qualcomm.com>
+ <20261102190010.720443-2-robin.clark@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <36008be9-2b25-4f04-995e-f90e2547f7f2@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+In-Reply-To: <20261102190010.720443-2-robin.clark@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA1MiBTYWx0ZWRfX3f9Hfw2Yg884
- HeNc1eq2tfm0i1BmBz+6ReUaggo+M+k6OgVwVaMvI0nFX1eoqQ6NSp3l18MqtTHMC6lxZ51o8QJ
- Z0IHqpwR7SEyhJYs6HPd/kc9Jc8vKdg=
-X-Authority-Analysis: v=2.4 cv=K9m3jCWI c=1 sm=1 tr=0 ts=6ae9dde8 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=Fj6EcmcQT-bn4kmwQ3wA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA1MiBTYWx0ZWRfXxfge69Am6tt7
- TByCFRWDqNMCHiTf3mEwljJXzEZ+iMGZN5XFUIUhQ9kZhL8i7yCF92MAH6o6g5wT3WoY/Py2k4t
- AnKSCHTJYC//Q0YdTB69zQsCi1fsRPI4KJAJBsVG7921cMy76tUIU7IkzpGYE3l8uhIlQzmlRNx
- CRYZwKw9/Y9iRA2Uk+r/b7LRzHHb56jCGefdRUVqrTWF/82MiHSchHsWq6HC2zJI2D08cgGqcSH
- 6vAGSPa/7kOVVar195AELf3vn1APbI22kLcljHJTL/B4DGHW2Ak4tLYXaxyJV9glcphptlFtniS
- qgpxKd/rNrUwKftw0N/ms1e3tM/jcLqbClb/yMoFR5+ClZz6ZMSqKt6lAdHofkZ86ThaqlQ0f+c
- T/pkUhECUDE0xc+WXM0Zf1PEtWwgVcZniYSBWCXMMQDbQY2vYFrHGBLY2oJmeuRgleyZQC/BbTW
- 9ZuNicyJAVIgzNM9SJA==
-X-Proofpoint-ORIG-GUID: KiLxPGYQ9vymFhFFAmZqTH7rvMzaawKq
-X-Proofpoint-GUID: KiLxPGYQ9vymFhFFAmZqTH7rvMzaawKq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-03_02,2026-11-03_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 malwarescore=0
- bulkscore=0 adultscore=0 spamscore=0 suspectscore=0 phishscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611030052
 
+On 11/2/26 8:00 PM, Rob Clark wrote:
+> Previously this was coupled to SYSPROF level, which made sense at the
+> time.  But there are other places that we need to inhibit IFPC.  So
+> decouple it from the sysprof refcount.
+>
+> Now it has it's own refcount, so multiple threads can vote to inhibit
+> IFPC safely.  The renamed gpu->ifpc_update() simply applies the new
+> state by setting or clearing an OOB request.
+>
+> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+> ---
+>   drivers/gpu/drm/msm/adreno/a6xx_gmu.c | 32 +++++++++++++++------------
+>   drivers/gpu/drm/msm/adreno/a6xx_gpu.c | 12 ++++------
+>   drivers/gpu/drm/msm/adreno/a6xx_gpu.h |  3 ++-
+>   drivers/gpu/drm/msm/adreno/a8xx_gpu.c |  6 +----
+>   drivers/gpu/drm/msm/msm_gpu.c         |  1 +
+>   drivers/gpu/drm/msm/msm_gpu.h         | 26 ++++++++++++++++++----
+>   drivers/gpu/drm/msm/msm_perfcntr.c    |  6 ++---
+>   drivers/gpu/drm/msm/msm_submitqueue.c | 10 +++++----
+>   8 files changed, 56 insertions(+), 40 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+> index 662f09bec9d5..bba5468db42e 100644
+> --- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+> +++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+> @@ -2128,29 +2128,33 @@ static int a6xx_gmu_get_irq(struct a6xx_gmu *gmu, struct platform_device *pdev,
+>   	return irq;
+>   }
+>   
+> -void a6xx_gmu_sysprof_setup(struct msm_gpu *gpu, bool force_on)
+> +void a6xx_gmu_ifpc_update_locked(struct msm_gpu *gpu)
+>   {
+> -	bool sysprof = msm_gpu_sysprof_no_ifpc(gpu) || force_on;
+>   	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+>   	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+>   	struct a6xx_gmu *gmu = &a6xx_gpu->gmu;
+> +	bool force_on = refcount_read(&gpu->ifpc_disable) > 1;
+>   
+> -	/* Nothing to do if GPU is suspended. We will handle this during GMU resume */
+> -	if (!pm_runtime_get_if_active(&gpu->pdev->dev))
+> -		return;
+> -
+> -	mutex_lock(&gmu->lock);
+> +	WARN_ON_ONCE(!mutex_is_locked(&gmu->lock));
+>   
+> -	/*
+> -	 * 'Perfcounter select' register values are lost during IFPC collapse. To avoid that,
+> -	 * use the currently unused perfcounter oob vote to block IFPC when sysprof is active
+> -	 */
+> -	if (sysprof && !test_and_set_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status))
+> +	if (force_on && !test_and_set_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status))
+>   		a6xx_gmu_set_oob(gmu, GMU_OOB_PERFCOUNTER_SET);
+> -	else if (!sysprof && test_and_clear_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status))
+> +	else if (!force_on && test_and_clear_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status))
+>   		a6xx_gmu_clear_oob(gmu, GMU_OOB_PERFCOUNTER_SET);
+> +}
+>   
+> -	mutex_unlock(&gmu->lock);
+> +void a6xx_gmu_ifpc_update(struct msm_gpu *gpu)
+> +{
+> +	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+> +	struct a6xx_gpu *a6xx_gpu = to_a6xx_gpu(adreno_gpu);
+> +	struct a6xx_gmu *gmu = &a6xx_gpu->gmu;
+> +
+> +	/* Nothing to do if GPU is suspended. We will handle this during GMU resume */
+> +	if (pm_runtime_get_if_active(&gpu->pdev->dev) <= 0)
+> +		return;
+> +
+> +	scoped_guard (mutex, &gmu->lock)
+> +		a6xx_gmu_ifpc_update_locked(gpu);
+>   
+>   	pm_runtime_put(&gpu->pdev->dev);
+>   }
+> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+> index 09d76cdf059f..bf71129e33a9 100644
+> --- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+> +++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+> @@ -1565,11 +1565,7 @@ static int hw_init(struct msm_gpu *gpu)
+>   		a6xx_gmu_clear_oob(&a6xx_gpu->gmu, GMU_OOB_BOOT_SLUMBER);
+>   	}
+>   
+> -	if (!ret && msm_gpu_sysprof_no_ifpc(gpu)) {
+> -		ret = a6xx_gmu_set_oob(gmu, GMU_OOB_PERFCOUNTER_SET);
+> -		if (!ret)
+> -			set_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status);
+> -	}
+> +	a6xx_gmu_ifpc_update_locked(gpu);
+>   
+>   	return ret;
+>   }
+> @@ -2851,7 +2847,7 @@ const struct adreno_gpu_funcs a6xx_gpu_funcs = {
+>   		.create_private_vm = a6xx_create_private_vm,
+>   		.get_rptr = a6xx_get_rptr,
+>   		.progress = a6xx_progress,
+> -		.sysprof_setup = a6xx_gmu_sysprof_setup,
+> +		.ifpc_update = a6xx_gmu_ifpc_update,
+>   		.perfcntr_configure = a6xx_perfcntr_configure,
+>   	},
+>   	.init = a6xx_gpu_init,
+> @@ -2922,7 +2918,7 @@ const struct adreno_gpu_funcs a7xx_gpu_funcs = {
+>   		.create_private_vm = a6xx_create_private_vm,
+>   		.get_rptr = a6xx_get_rptr,
+>   		.progress = a6xx_progress,
+> -		.sysprof_setup = a6xx_gmu_sysprof_setup,
+> +		.ifpc_update = a6xx_gmu_ifpc_update,
+>   		.perfcntr_configure = a6xx_perfcntr_configure,
+>   	},
+>   	.init = a6xx_gpu_init,
+> @@ -2953,7 +2949,7 @@ const struct adreno_gpu_funcs a8xx_gpu_funcs = {
+>   		.create_private_vm = a6xx_create_private_vm,
+>   		.get_rptr = a6xx_get_rptr,
+>   		.progress = a8xx_progress,
+> -		.sysprof_setup = a6xx_gmu_sysprof_setup,
+> +		.ifpc_update = a6xx_gmu_ifpc_update,
+>   		.perfcntr_configure = a6xx_perfcntr_configure,
+>   		.perfcntr_flush = a8xx_perfcntr_flush,
+>   	},
+> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+> index 81d21acccea1..cb0ac27dacba 100644
+> --- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+> +++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+> @@ -298,7 +298,8 @@ void a6xx_gmu_clear_oob(struct a6xx_gmu *gmu, enum a6xx_gmu_oob_state state);
+>   int a6xx_gmu_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node);
+>   int a6xx_gmu_wrapper_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node);
+>   void a6xx_gmu_remove(struct a6xx_gpu *a6xx_gpu);
+> -void a6xx_gmu_sysprof_setup(struct msm_gpu *gpu, bool force_on);
+> +void a6xx_gmu_ifpc_update_locked(struct msm_gpu *gpu);
+> +void a6xx_gmu_ifpc_update(struct msm_gpu *gpu);
+>   
+>   void a6xx_preempt_init(struct msm_gpu *gpu);
+>   void a6xx_preempt_hw_init(struct msm_gpu *gpu);
+> diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
+> index e7d04c865968..ecf15a8f68de 100644
+> --- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
+> +++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
+> @@ -846,11 +846,7 @@ static int hw_init(struct msm_gpu *gpu)
+>   	 */
+>   	a6xx_gmu_clear_oob(&a6xx_gpu->gmu, GMU_OOB_GPU_SET);
+>   
+> -	if (!ret && msm_gpu_sysprof_no_perfcntr_zap(gpu)) {
+> -		ret = a6xx_gmu_set_oob(gmu, GMU_OOB_PERFCOUNTER_SET);
+> -		if (!ret)
+> -			set_bit(GMU_STATUS_OOB_PERF_SET, &gmu->status);
+> -	}
+> +	a6xx_gmu_ifpc_update_locked(gpu);
+>   
+>   	return ret;
+>   }
+> diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
+> index fb07803f5aba..37f9e93daa43 100644
+> --- a/drivers/gpu/drm/msm/msm_gpu.c
+> +++ b/drivers/gpu/drm/msm/msm_gpu.c
+> @@ -1012,6 +1012,7 @@ int msm_gpu_init(struct drm_device *drm, struct platform_device *pdev,
+>   	gpu->nr_rings = nr_rings;
+>   
+>   	refcount_set(&gpu->sysprof_active, 1);
+> +	refcount_set(&gpu->ifpc_disable, 1);
+>   
+>   	mutex_init(&gpu->perfcntr_lock);
+>   
+> diff --git a/drivers/gpu/drm/msm/msm_gpu.h b/drivers/gpu/drm/msm/msm_gpu.h
+> index d27d54bdb7a7..0334a0f604ac 100644
+> --- a/drivers/gpu/drm/msm/msm_gpu.h
+> +++ b/drivers/gpu/drm/msm/msm_gpu.h
+> @@ -93,7 +93,7 @@ struct msm_gpu_funcs {
+>   	 * for cmdstream that is buffered in this FIFO upstream of the CP fw.
+>   	 */
+>   	bool (*progress)(struct msm_gpu *gpu, struct msm_ringbuffer *ring);
+> -	void (*sysprof_setup)(struct msm_gpu *gpu, bool force_on);
+> +	void (*ifpc_update)(struct msm_gpu *gpu);
+>   
+>   	/* Configure perfcntr SELect regs: */
+>   	void (*perfcntr_configure)(struct msm_gpu *gpu, struct msm_ringbuffer *ring,
+> @@ -186,6 +186,14 @@ struct msm_gpu {
+>   	 */
+>   	refcount_t sysprof_active;
+>   
+> +	/**
+> +	 * ifpc_disable:
+> +	 *
+> +	 * Count of votes to disable IFPC (1-based, values above 1 mean IFPC
+> +	 * is disabled).
+> +	 */
+> +	refcount_t ifpc_disable;
+> +
+>   	/**
+>   	 * lock:
+>   	 *
+> @@ -375,10 +383,20 @@ msm_gpu_sysprof_no_perfcntr_zap(struct msm_gpu *gpu)
+>   		(gpu->perfcntrs && READ_ONCE(gpu->perfcntrs->stream));
+>   }
+>   
+> -static inline bool
+> -msm_gpu_sysprof_no_ifpc(struct msm_gpu *gpu)
+> +static inline void
+> +msm_gpu_disable_ifpc_get(struct msm_gpu *gpu)
+> +{
+> +	refcount_inc(&gpu->ifpc_disable);
+> +	if (gpu->funcs->ifpc_update)
+> +		gpu->funcs->ifpc_update(gpu);
+> +}
+> +
+> +static inline void
+> +msm_gpu_disable_ifpc_put(struct msm_gpu *gpu)
+>   {
+> -	return refcount_read(&gpu->sysprof_active) > 1;
+> +	refcount_dec(&gpu->ifpc_disable);
+> +	if (gpu->funcs->ifpc_update)
+> +		gpu->funcs->ifpc_update(gpu);
+>   }
+>   
+>   /*
+> diff --git a/drivers/gpu/drm/msm/msm_perfcntr.c b/drivers/gpu/drm/msm/msm_perfcntr.c
+> index ce65b1160955..867dd476ed88 100644
+> --- a/drivers/gpu/drm/msm/msm_perfcntr.c
+> +++ b/drivers/gpu/drm/msm/msm_perfcntr.c
+> @@ -259,8 +259,7 @@ sample_worker(struct kthread_work *work)
+>   	}
+>   
+>   	/* Inhibit IFPC while accessing registers: */
+> -	if (gpu->funcs->sysprof_setup)
+> -		gpu->funcs->sysprof_setup(gpu, true);
+> +	msm_gpu_disable_ifpc_get(gpu);
+>   
+>   	if (gpu->funcs->perfcntr_flush)
+>   		gpu->funcs->perfcntr_flush(gpu);
+> @@ -297,8 +296,7 @@ sample_worker(struct kthread_work *work)
+>   	}
+>   
+>   	/* Re-enable IFPC: */
+> -	if (gpu->funcs->sysprof_setup)
+> -		gpu->funcs->sysprof_setup(gpu, false);
+> +	msm_gpu_disable_ifpc_put(gpu);
+>   
+>   	smp_store_release(&stream->fifo.head, head);
+>   	wake_up_all(&stream->poll_wq);
+> diff --git a/drivers/gpu/drm/msm/msm_submitqueue.c b/drivers/gpu/drm/msm/msm_submitqueue.c
+> index d307cdd17d90..8434a09319bc 100644
+> --- a/drivers/gpu/drm/msm/msm_submitqueue.c
+> +++ b/drivers/gpu/drm/msm/msm_submitqueue.c
+> @@ -24,7 +24,10 @@ int msm_context_set_sysprof(struct msm_context *ctx, struct msm_gpu *gpu, int sy
+>   		pm_runtime_get_sync(&gpu->pdev->dev);
+>   		fallthrough;
+>   	case 1:
+> +		/* Disable zapping perfcntrs on context switch: */
+>   		refcount_inc(&gpu->sysprof_active);
+> +		/* Disable IFPC: */
+> +		msm_gpu_disable_ifpc_get(gpu);
+>   		fallthrough;
+>   	case 0:
+>   		break;
+> @@ -36,16 +39,15 @@ int msm_context_set_sysprof(struct msm_context *ctx, struct msm_gpu *gpu, int sy
+>   		pm_runtime_put_autosuspend(&gpu->pdev->dev);
+>   		fallthrough;
+>   	case 1:
+> +		/* Drop our vote for inhibiting IFPC: */
+> +		msm_gpu_disable_ifpc_put(gpu);
+> +		/* Drop our vote for disabling perfcntr zapping: */
+>   		refcount_dec(&gpu->sysprof_active);
+>   		fallthrough;
+>   	case 0:
+>   		break;
+>   	}
+>   
+> -	/* Some gpu families require additional setup for sysprof */
+> -	if (gpu->funcs->sysprof_setup)
+> -		gpu->funcs->sysprof_setup(gpu, false);
+> -
+>   	ctx->sysprof = sysprof;
+>   
+>   	return 0;
 
+Thanks this will help with my hangcheck series.
 
-On 11/3/2026 2:30 PM, Gjorgji Rosikopulos (Consultant) wrote:
-> Hi Bryan,
-> 
-> On 11/3/2026 2:19 PM, Bryan O'Donoghue wrote:
->> On 03/11/2026 07:11, Gjorgji Rosikopulos (Consultant) wrote:
->>>> +
->>>> +void csid_sof_event(struct csid_device *csid, unsigned int id)
->>>> +{
->>>> +	struct v4l2_event event = {
->>>> +		.type = V4L2_EVENT_FRAME_SYNC,
->>>> +		.id = id,
->>>> +		.u.frame_sync.frame_sequence =
->>>> +			atomic_inc_return(&csid->sof_seq[id]),
->>>> +	};
->>> On first look this was looking strange because the id is used for the
->>> control id events not for frame sync. But on second thought it may make
->>> sense, but the question is how the userspace should interpret those ids?
->>> As of today userspace does not have any info for the VC and csid internal
->>> pipelines (so called lines). So with the current state of the code
->>> the id is VC which makes sense becouse the SOF/EOF packets are recieved
->>> based on VC. So i am thinking of two options:
->>
->> The id is not the VC its the CSID:id/port/line-number. VCs don't change 
->> what this means; its the SOF event as seen by the CSI decoder - inside 
->> of which there may be multiple VC:DT combos.
->>
->> This is also the case for PIX which is just another CSID 
->> port/id/line-number.
->>
->>>
->>> 1. Move SOF event in vfe (rdi/pix sub-devs) we have per line sub-device
->>>     and will be well known to userspace for which line is reported.
->>>
->>> 2. Add and propose extension of videodev2 documentation that
->>>     id of frame_sync event types represents SOF per virtual channel.
->>>
->>> Personally i votoe for (1) because it will well fit with stream-api
->>> support and usespace will have clear understanding of the SOF to which
->>> stream belongs.
->>
->> You know from the media graph which CSID drives which VFE:output so it 
->> is 100% possible to know which CSID:SOF relates to which VFE always. 
->> CSID::SOF is a hardware description of what the CSID decoder sees. I 
->> don't support mis-reporting it as a VFE event TBH.
-> 
-> Yes i know that, but does the userpsace developer knows based on the API and
-> documentation provided? Or he needs to ask the linux media?
-> 
-> We have some kind of id which is mapped to line and that is known just
-> by the driver, if you can point other drivers using id for frame sync
-> events will be helpfull. 
-> 
-> 
->>
->> More than that though, there is in-fact a VFE specific SOF/EOF and EPOCH 
->> event but these require the CSID feeding a frame into the VFE pipeline 
->> and the VFE moving through its own state-machine to process that frame.
->>
->> So they are separate signals and separate logical events representing 
->> different things with different timings in hardware, meaning different 
->> things to userspace.
-> 
-> Well that make sense i agree that it make sense to be part of the csid
-> but it should be documented somewhere, maybe proper thing to do is update
-> the comment in videodev2.h and update the documentation for camss driver.
+Reviewed-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 
-Just an proposal if it is decided the id to be used, it make sense to contain
-stream_id. Then userspace based on the stream routing can map SOF
-for the stream of interest. But the API for retrieving stream_id is still
-experimental and i am not sure if will be well accepted.
-
-> 
->>
->> CSID:SOF is the thing you want to trigger off of if you are for example 
->> trying to align an IMU timestamp, not VFE SOF.
->>
->> Feel free to propose VFE:SOF/EOF if it makes sense for VCs - I don't 
->> think I have a clear picture of what you want to do there - interested 
->> though.
-> 
-> I am not proposing that, but from the current state of the code each line is mapped
-> to different VC (before multistream patches). So this means as of today, id can
-> be mapped to VC. Anyway my point is to either document or open discussion for
-> "id" field in v4l2_event structure when event type is V4L2_EVENT_FRAME_SYNC. If
-> not document for me it looks like some kind of a workaround just for our own driver.
-> 
-> ~Gjorgji
-> 
->>
->> ---
->> bod
-> 
+Best regards,
+-- 
+Anna Maniscalco <anna.maniscalco2000@gmail.com>
 
