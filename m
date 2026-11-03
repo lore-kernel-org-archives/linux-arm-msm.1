@@ -1,49 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.13.80.246
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793705982;
-	b=uBSuj93+W60nF7aSAFUAPu74P9E+HX9/mrivxcCGtKVbu7RNnsP7UzROUFOQLSqsK0aN
-	 w9GaeF23hpIH98MLYeBwfqHnTrC9fYaJZ0ruVUwuJJjR4Ux5+oMBRNT6+T675w/xOgGIX
-	 qntzTDFTJwInoqcXFK8bvZZof4+vAKpX8YXRFf3M21xIuyzr3xapfWhloRDLTL8b4pXUa
-	 XUbb2KxyEm8QJFZjhuXEaDWB2ZRGj+Q+I7MHxtlRh8krn7oOrDSrO4iYY/VyQboFLQisF
-	 dlWTcSdURtTdvN9q6tgUSS17coQ0Hh8lDpAk0zqXyEZIMHoG+4a7p4q+OpV0n+1ifRg==
+	t=1793706020;
+	b=ya9xY33d9NIPbx3OtDOAewChG9BC5ahBJED0f+/VPbtAoZgpOQJyubEnihurtGWt6MsS
+	 Vgrbn5LcuNq3UfXLErmwL1nXN7NKTxiIxU6/rH0InIuxUD3FXHirs9Or86p/hIIvXf4mp
+	 v43dgzPeJJzksTLcA5R12nL0BypU2f/8v8WT29dJilvLTWKl2zrT5pnua7bxaCX05GyhY
+	 kPP+tiBGHbe4Su3zfCAKB5CNK8upwf2q4cgLxVVah8bsy3H394JIB6tkFUpif/eVBcMl/
+	 5XJpIGqLQduk+uXWIAOAYIiSXL4Y9cs1LsKKved/NxNqYK08WpZVdnfDViYq8FhqV2Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793705982;
-	h=DMARC-Filter:Received:DKIM-Signature:MIME-Version:Date:From:To:Cc:
-	 Subject:In-Reply-To:References:Message-ID:X-Sender:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=PIHEnWIzZ7nCqKK2g4F2Wla4/XfshctWrwjq2tgtt+w=;
-	b=tg86JwsQSNIXZhikGLC0V7ei92xUfftwbtgDe4UPfc8muGXz9NY+MhI8XuVaN0D0Bu7V
-	 cFOmxTt5gl2IA3J4CHWSt8/fGViqWjfix53CI0gE0LK3o3NyGfXPzUEE1e25+Nb23OpcA
-	 OczXgbEUZoXZg4s9p9InWt+sn2P0HKhn4iidlTuNgsSZcJeuXbFEO7Ywf55bK3qT6Lp+M
-	 /jtUEhcE6idtmEys6+UHnkZsX0Blr37/qshdXujhjcGd8M27EHVnp/UBxdb2Hys65FOKL
-	 GYIrSlwhySmwWQIPl7PBu+evygtZvyMdRlF7srpnT/QNL8YYzogCkxI9D4AIsFVip3Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793706020;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=tesqzDpZOT8hQ4pu7vbpIQkvzWqWZw964o2URMNByzY=;
+	b=ebZU1yQWRz1JCbpXmeldJWnIJNQ6Y41GxtSy/AlbPwT78ywqNEip//MFw/WlA+jmeyNc
+	 Xfu6dpN1Dv7EorvboSmLAfg1KPSH10/gzO5hSNX+VUosImRZIBxJldv9TbgLv00moLLQJ
+	 Bl3oFEVdjb6UPZxtH9cjErzgZoz5CCNsRrrSaN1iEA8UB61Kr0EO8LGmP+BTqybD4CyvE
+	 Tbixz2kjDNNUO+7zM5ddkUy1kfgUspy9XK6VJPopCQbVwFb3ykoRSz//H+KaIJIbJKKOO
+	 Ssvb2PEjJrVE5C6BG8mC1d1ZTwuOhWQZ2/fapT7sXczc8KpXXlYr7nwnp5shHQ8jQfA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=tipi-net.de;
-	spf=pass smtp.mailfrom=tipi-net.de;
-	dkim=pass header.d=tipi-net.de header.i=@tipi-net.de header.a=rsa-sha256 header.s=dkim header.b=pNhxTM8x;
-	arc=none smtp.remote-ip=194.13.80.246
-Received: from mail.tipi-net.de (mail.tipi-net.de [194.13.80.246])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F35TgBCw;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0D09606EEAC;
-	Tue,  3 Nov 2026 11:39:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F0D09606EEAC
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tipi-net.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC5DF606D82C;
+	Tue,  3 Nov 2026 11:40:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=tipi-net.de header.i=@tipi-net.de header.a=rsa-sha256 header.s=dkim header.b=pNhxTM8x
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A1783A160B;
-	Tue, 03 Nov 2026 12:39:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tipi-net.de; s=dkim;
-	t=1793705976; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=PIHEnWIzZ7nCqKK2g4F2Wla4/XfshctWrwjq2tgtt+w=;
-	b=pNhxTM8x0QuNH/4HAX9JxS6/S0GEDfxDqNAVrXFF3mr1gZ7j3wazrQGaHLgdRzyU5JdhKk
-	Kq9hOT7zEasIDJ2fd72bKOumBx7451W82dk74OXvetBPN2wdHj8R5bzeGX5Aw1Gmlm+6o6
-	OAJcIanD3jHUY2fbqCJQMhMLAC6YpPHEJWrDcEcftcypYoyxn0M1/1SXTyw7sqF1Boz65S
-	9tEOSkXb2tb3peYTBgRUbra3OqD8iYIC1149XVHUQ9PgGlxxxucZRh35RY6xAEvKQgi7eg
-	RNcDH+vKk+Iops+rgHbvIIHH9tkKkIEmCgZr/sKwzDVO3VDEhHHPjDI3Aectvw==
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F35TgBCw
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC2C11F000C1;
+	Tue,  3 Nov 2026 11:40:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793706019;
+	bh=tesqzDpZOT8hQ4pu7vbpIQkvzWqWZw964o2URMNByzY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=F35TgBCwcIZ2ocjoz+iQMrMq4ChhfMxzKE/57f99vO3TDyY13rUkCnYz6YrS0SFEu
+	 dKYScWHVneYwi2AqlIDiiG8OtvvQOsE6tsCTycYC78MGlCd5ZK+fLaGH27MeYnvfXj
+	 ssow3g8xepxK/eqliobgc32K1SEMLXSr987e7LKZsZhXAvck6Dxy3YsVZTTMxWrN/8
+	 rTfUAtOPa+YPFwVPnIN7atZpu3UGC5ZUY9Hcbqn7mHd44CLonEu/mYoGTXgQUntczn
+	 svLPTJBg9RyBmeaLH6ktp4LKvid+5sBwAumrQYcGI3mmx4OinDpVRodmouiG8IQ7gn
+	 Dlx++AuvoIgbA==
+Message-ID: <46e9506d-1eae-48d4-803d-d731d85fd376@kernel.org>
+Date: Tue, 3 Nov 2026 11:40:14 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,119 +51,246 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Date: Tue, 03 Nov 2026 12:39:15 +0100
-From: Nicolai Buchwitz <nb@tipi-net.de>
-To: Frank.Li@oss.nxp.com
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby
- <jirislaby@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Russell King <linux@armlinux.org.uk>, Richard Genoud
- <richard.genoud@bootlin.com>, Nicolas Ferre <nicolas.ferre@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea
- <claudiu.beznea@tuxon.dev>, Frank Li <Frank.Li@nxp.com>, Sascha Hauer
- <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Krzysztof Kozlowski <krzk@kernel.org>,
- Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar
- <alim.akhtar@samsung.com>, Laxman Dewangan <ldewangan@nvidia.com>, Thierry
- Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
- Orson Zhai <orsonzhai@gmail.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue
- <alexandre.torgue@foss.st.com>, Cunhao Lu <1579567540@qq.com>, Raul E Rangel
- <rrangel@chromium.org>, Yenchia Chen <yenchia.chen@mediatek.com>, Zhiyong
- Tao <zhiyong.tao@mediatek.com>, Carlo Caione <ccaione@baylibre.com>, Moteen
- Shah <m-shah@ti.com>, Kendall Willis <k-willis@ti.com>, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Kartik Rajput <kkartik@nvidia.com>, Fan
- Wu <fanwu01@zju.edu.cn>, Karl Mehltretter <kmehltretter@gmail.com>,
- =?UTF-8?Q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>, Shitalkumar
- Gandhi <shital.gandhi45@gmail.com>, Peng Fan <peng.fan@nxp.com>, Sherry Sun
- <sherry.sun@nxp.com>, John Ogness <john.ogness@linutronix.de>, Pan Chuang
- <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>, Robin Gong
- <yibin.gong@nxp.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>, Zhaoyang Yu
- <2426767509@qq.com>, "Nikola Z. Ivanov" <zlatistiv@gmail.com>, Haoxiang Li
- <haoxiang_li2024@163.com>, "Mike Rapoport (Microsoft)" <rppt@kernel.org>,
- Biju Das <biju.das.jz@bp.renesas.com>, Geert Uytterhoeven
- <geert+renesas@glider.be>, Myeonghun Pak <mhun512@gmail.com>, Wenhua Lin
- <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>,
- linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
- imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
- linux-samsung-soc@vger.kernel.org, linux-tegra@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com, vkoul@kernel.org
-Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
-In-Reply-To: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
-References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
-Message-ID: <5d8894bdaacb407ef5a6cac2c9eacbad@tipi-net.de>
-X-Sender: nb@tipi-net.de
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] media: iris: Fix use-after-free on unbind with open
+ sessions
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Stefan Schmidt <stefan.schmidt@linaro.org>,
+ Hans Verkuil <hverkuil@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Hungyu Lin <dennylin0707@gmail.com>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ stable@vger.kernel.org
+References: <20261017-iris-handle-unbind-v1-0-7809148eb90f@oss.qualcomm.com>
+ <2rWHCgRwgvQ8e4bhpYnYDjIzh1pjQNSNjdBFELmGe_h6iZzVLuoQDpUPAD64feN0mYHgyoDf3AYwIu-5ilkZdA==@protonmail.internalid>
+ <20261017-iris-handle-unbind-v1-3-7809148eb90f@oss.qualcomm.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261017-iris-handle-unbind-v1-3-7809148eb90f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 
-Hi Frank
+On 17/10/2026 04:16, Vishnu Reddy wrote:
+> The driver unbind can be triggered through sysfs while a client has a
+> video session running. The devm resources will be freed when the unbind
+> completes. That leads to use after free for the running sessions.
+> 
+> Keep the memory of the core and its device allocated until the last
+> file descriptor is closed. Stop new sessions as soon as the removal
+> starts. Make sure the interrupt thread cannot run on the core after it
+> is freed.
 
-On 2.11.2026 18:54, Frank.Li@oss.nxp.com wrote:
-> From: Frank Li <Frank.Li@nxp.com>
+There's too much going on in this patch in one place. The commit log is 
+indicative of that too. At a minimum the IRQ stuff should be separated 
+because IMO its not really a use-after-free its a race condition that 
+already exists, its just more obvious when you free in this fashion.
+
 > 
-> Replace open-coded assignments to callback and callback_param fields
-> of struct dma_async_tx_descriptor with calls to the
-> dmaengine_desc_set_callback() helper across serial drivers.
-> 
-> No functional change intended. Prepare to make struct
-> dma_async_tx_descriptor private to the DMA engine.
-> 
-> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> Fixes: 38506cb7e8d2 ("media: iris: add platform driver for iris video device")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 > ---
->  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
->  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
->  drivers/tty/serial/8250/8250_omap.c | 6 ++----
->  drivers/tty/serial/amba-pl011.c     | 6 ++----
->  drivers/tty/serial/atmel_serial.c   | 6 ++----
->  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
->  drivers/tty/serial/imx.c            | 6 ++----
->  drivers/tty/serial/msm_serial.c     | 6 ++----
->  drivers/tty/serial/mxs-auart.c      | 6 ++----
->  drivers/tty/serial/pch_uart.c       | 6 ++----
->  drivers/tty/serial/samsung_tty.c    | 6 ++----
->  drivers/tty/serial/serial-tegra.c   | 6 ++----
->  drivers/tty/serial/sh-sci.c         | 9 +++------
->  drivers/tty/serial/sprd_serial.c    | 3 +--
->  drivers/tty/serial/stm32-usart.c    | 6 ++----
->  15 files changed, 29 insertions(+), 58 deletions(-)
-
-> [...]
-
-> diff --git a/drivers/tty/serial/amba-pl011.c 
-> b/drivers/tty/serial/amba-pl011.c
-> index e6f652905ca6f..e7373cd11b621 100644
-> --- a/drivers/tty/serial/amba-pl011.c
-> +++ b/drivers/tty/serial/amba-pl011.c
-> @@ -715,8 +715,7 @@ static int pl011_dma_tx_refill(struct 
-> uart_amba_port *uap)
->  	}
+>   drivers/media/platform/qcom/iris/iris_probe.c | 56 +++++++++++++++++++--------
+>   1 file changed, 40 insertions(+), 16 deletions(-)
 > 
->  	/* Some data to go along to the callback */
-> -	desc->callback = pl011_dma_tx_callback;
-> -	desc->callback_param = uap;
-> +	dmaengine_desc_set_callback(desc, pl011_dma_tx_callback, NULL, uap);
+> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+> index 4cb678bd56f0..25876957381b 100644
+> --- a/drivers/media/platform/qcom/iris/iris_probe.c
+> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
+> @@ -243,6 +243,15 @@ static int iris_register_video_device(struct iris_core *core, enum domain_type t
+>   	return ret;
+>   }
 > 
->  	/* All errors should happen at prepare time */
->  	dmaengine_submit(desc);
-> @@ -906,8 +905,7 @@ static int pl011_dma_rx_trigger_dma(struct 
-> uart_amba_port *uap)
->  	}
+> +static void iris_core_release(struct v4l2_device *v4l2_dev)
+> +{
+> +	struct iris_core *core = container_of(v4l2_dev, struct iris_core, v4l2_dev);
+> +
+> +	mutex_destroy(&core->lock);
+> +	put_device(core->dev);
+> +	kfree(core);
+> +}
+> +
+
+What you would have here is an admixture of devm allocated stuff and 
+hand-allocated, refcounted with custom v4l2_release() which might all 
+work but, it's not obvious to me does work i.e. core is hand allocated 
+while reg_base, response_packet etc are devm() managed.
+
+A much simpler solution to your problem is :
+
+static struct platform_driver iris_driver = {
+	.driver = {
+		.suppress_bind_attrs = true,
+		...
+	},
+};
+
+>   static void iris_remove(struct platform_device *pdev)
+>   {
+>   	struct iris_core *core;
+> @@ -251,18 +260,20 @@ static void iris_remove(struct platform_device *pdev)
+>   	if (!core)
+>   		return;
 > 
->  	/* Some data to go along to the callback */
-> -	desc->callback = pl011_dma_rx_callback;
-> -	desc->callback_param = uap;
-> +	dmaengine_desc_set_callback(desc, pl011_dma_rx_callback, NULL, uap);
->  	dmarx->cookie = dmaengine_submit(desc);
->  	dma_async_issue_pending(rxchan);
+> +	video_unregister_device(core->vdev_dec);
+> +	video_unregister_device(core->vdev_enc);
+> +
+>   	disable_delayed_work_sync(&core->sys_error_handler);
+> 
+>   	iris_core_deinit(core);
+> 
+> -	video_unregister_device(core->vdev_dec);
+> -	video_unregister_device(core->vdev_enc);
+> +	devm_free_irq(core->dev, core->irq, core);
 
-> [...]
 
-Reviewed-by: Nicolai Buchwitz <nb@tipi-net.de> # amba-pl011
 
-Thanks,
-Nicolai
+> 
+>   	v4l2_device_unregister(&core->v4l2_dev);
+> 
+>   	iris_unreserve_iova_region(core->dev, core->iova_state);
+> 
+> -	mutex_destroy(&core->lock);
+> +	v4l2_device_put(&core->v4l2_dev);
+>   }
+> 
+>   static void iris_sys_error_handler(struct work_struct *work)
+> @@ -281,53 +292,64 @@ static int iris_probe(struct platform_device *pdev)
+>   	u64 dma_mask;
+>   	int ret;
+> 
+> -	core = devm_kzalloc(&pdev->dev, sizeof(*core), GFP_KERNEL);
+> +	core = kzalloc_obj(*core);
+>   	if (!core)
+>   		return -ENOMEM;
+> -	core->dev = dev;
+> +	core->dev = get_device(dev);
+> +
+> +	core->v4l2_dev.release = iris_core_release;
+> +	kref_init(&core->v4l2_dev.ref);
+> 
+>   	core->state = IRIS_CORE_DEINIT;
+>   	mutex_init(&core->lock);
+>   	init_completion(&core->core_init_done);
+> 
+>   	core->response_packet = devm_kzalloc(core->dev, IFACEQ_CORE_PKT_SIZE, GFP_KERNEL);
+> -	if (!core->response_packet)
+> -		return -ENOMEM;
+> +	if (!core->response_packet) {
+> +		ret = -ENOMEM;
+> +		goto err_put_core;
+> +	}
+> 
+>   	INIT_LIST_HEAD(&core->instances);
+>   	INIT_DELAYED_WORK(&core->sys_error_handler, iris_sys_error_handler);
+> 
+>   	core->reg_base = devm_platform_ioremap_resource(pdev, 0);
+> -	if (IS_ERR(core->reg_base))
+> -		return PTR_ERR(core->reg_base);
+> +	if (IS_ERR(core->reg_base)) {
+> +		ret = PTR_ERR(core->reg_base);
+> +		goto err_put_core;
+> +	}
+> 
+>   	core->irq = platform_get_irq(pdev, 0);
+> -	if (core->irq < 0)
+> -		return core->irq;
+> +	if (core->irq < 0) {
+> +		ret = core->irq;
+> +		goto err_put_core;
+> +	}
+> 
+>   	core->iris_platform_data = of_device_get_match_data(core->dev);
+> 
+>   	core->ubwc_cfg = qcom_ubwc_config_get_data();
+> -	if (IS_ERR(core->ubwc_cfg))
+> -		return PTR_ERR(core->ubwc_cfg);
+> +	if (IS_ERR(core->ubwc_cfg)) {
+> +		ret = PTR_ERR(core->ubwc_cfg);
+> +		goto err_put_core;
+> +	}
+> 
+>   	ret = devm_request_threaded_irq(core->dev, core->irq, iris_hfi_isr,
+>   					iris_hfi_isr_handler,
+>   					IRQF_TRIGGER_HIGH | IRQF_NO_AUTOEN,
+>   					"iris", core);
+>   	if (ret)
+> -		return ret;
+> +		goto err_put_core;
+> 
+>   	iris_init_ops(core);
+> 
+>   	ret = iris_init_resources(core);
+>   	if (ret)
+> -		return ret;
+> +		goto err_put_core;
+> 
+>   	ret = iris_reserve_iova_region(dev, &core->iova_state, IRIS_NP_RESERVE_IOVA_START,
+>   				       IRIS_NP_RESERVE_IOVA_SIZE);
+>   	if (ret)
+> -		return ret;
+> +		goto err_put_core;
+> 
+>   	ret = v4l2_device_register(dev, &core->v4l2_dev);
+>   	if (ret)
+> @@ -368,6 +390,8 @@ static int iris_probe(struct platform_device *pdev)
+>   	v4l2_device_unregister(&core->v4l2_dev);
+>   err_unresv_iova_region:
+>   	iris_unreserve_iova_region(dev, core->iova_state);
+> +err_put_core:
+> +	v4l2_device_put(&core->v4l2_dev);
+> 
+>   	return ret;
+>   }
+> 
+> --
+> 2.34.1
+
