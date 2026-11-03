@@ -1,110 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.71
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793711423;
-	b=qrg3MEfmOLrL3AjdJOuiYTqcLqntvwUqiO4UZRqOCY+tnr+tJ9sK6wFbPA3v8/TLqNS0
-	 SqDzN8hjBimEZV7i5cVN9gPwV41GdpHgyjDldjumV2qAKoowT+gNMlsPhHd9L6AwRReQC
-	 uZQj05B0imwNX3RDsTurlq4L1sFCOfsIcSV1HtyRt6tY2ZC0n3qHKxzTiGwfgd6nPleSc
-	 PrB6GweHsrhgA8U5zAsxwU8f5Dolk2+B7m1lHgZieDZkWXKsnBwT96uZwYYIfhIK3UkIm
-	 7mWG0Kc+jJtbT0aSwuaE9vuVnXRTprNGDTwmn6AQpUgTU04et3enyySjxt+xQRCOBcA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793711423;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Message-ID:Date:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed:X-LD-Processed:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=veXguC1CfKrLaZLXQgQAbq0NSZuoxitHZi/raJLFeN8=;
-	b=zPRVGpWVEQlnifB5XcY5V3SSOtoWI4+iO2Hk5txaMGAbjtNn9nLunonMthRhWrtlgZWc
-	 NZEF/60anKUZjWfAj8T58QaCNa8McBIkvPEcfp3AycSNkxR9Po9InvM53c43x+arRYsyv
-	 A4m6qdWKDhPqSnhFsRjNEqUiUB5qfNt4HEI3C6IuLUvPt2214VKWftqB/GzkufrWwQFkx
-	 AxUmld4N052acQO7LYce8ZkzMt6PIdiO1Er/t2gEw6u8rTxdkcKjxsVO88LtuRV/cDRhR
-	 GIui1aLSzD1B0ZAWN/Lx8wVDMCVTZV3XWGb5x/Rc1Rm6JFqaSTZT5OWXMJ+Kgu8Jraw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.nxp.com;
-	spf=pass smtp.mailfrom=oss.nxp.com;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=R629nqe9;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.71
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013071.outbound.protection.outlook.com [40.107.162.71])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793711593;
+	b=kQEPkPhc4mrw4ksr9oEYUKDIpRCtHDmf8eJTuzUcAUalCqJmOzplJm5ZrISeqXdA3syp
+	 Myap9Rbc7tkc5nexLW/sf/7t8jXdtYTLqrfVfRo/NhHV9yirntQfRU89c4qIgAsJEZaTg
+	 r37YpNILgbasqGlP/yhNTX/YSl0eu7mBIlDfWxRySBBocpQnqj7C+0e+kp3+eeNxHrCpa
+	 7jfn7pfUL3tL4mKsDEGqFTMgp0CLttqivDZRWHXv64rSCKNiKa38GcQrtpyqXEA8TcBIk
+	 p8ccL1DoiefZBuPwfwBGSgCuQjWjEXOt7CwpMLUZDg61Mx0Py2j1TLT8xG9CA4aHSvQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793711593;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
+	b=nPFt80OFlaUUDLEjept2rJm4YDLUNTj6j790u4WkR1EWpiOeemcrKCXCEuKfe/FWP+hI
+	 a/0AaC6b/X8nNCwuh/OCmZh8cjVbh3qzMsVjuPemNAy75eHphTKOzgTzo16VZfLFlskcj
+	 GURJ8YNtLwh29wjd/w2JZQdntTT7JAr9Ar/JXYywN4D7477F3O6zC6yPcV8UD5tNTTOjB
+	 b72+L2yEA17KVtDyqvxwwsdOYoZdFxlOXOfzebry2mzF2zNXNxsTU3P7puA7x/WmI4WmE
+	 vE4YiPpe16VNQYkjW6JENyQisSmnCLfJC0Ck57J1ICLrsKLpns2ckGnftFNXKt9ih7g==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YnCsvjoK;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VdKJeQdX;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E2B36082BE7;
-	Tue,  3 Nov 2026 13:10:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6E2B36082BE7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58D30606A32D
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 13:13:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 58D30606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=R629nqe9
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lKxQkjSSU343bpjdLduwyWOH1/OKKYzOiW+vZHnlDliX+Igw7BfKELWDCwJ8yGSCzQtHVjBbicK09tXePtDCLgn1qLfhKJQ5nO80VSzrpyUP7vwDnMx+fAHsE3MPPwrMPz7mDiAv6tCm9T1EuUs//PaDjBskWY1dLjwR0IDLnX+psXB5g+IyDKxY+GGevKNy9sfo0UirhENDYmOuvPNTCHqVnoEpFLLPFw85uZyr12nWQ50V1id9cLm5WRB/8vndW71bC9bXWeJ/ZAaSu2luux0+rbSEiAIY0dOXr5msaBtYnRQYdh4a1vCCZJTgvECGzh3GVO7LlZNA7y6VrkrPZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=veXguC1CfKrLaZLXQgQAbq0NSZuoxitHZi/raJLFeN8=;
- b=D5HwSzfo5NzIy37FAG3nNw83lLI0nvTzvXTRdRxQWs9i4TsB5EQFfIX4xXJ8Ig+4k/pg7CgYrAB+C3HxtCj9F3Dqg4AuFMosmaptWZ4Yq2BhoJn1S3W6ji24Jwe9/vXaGzfnfJ5BFmQ0HMyjjeTm2X80Z1KAGnMcntIVQNo0VjZK0koj5uQ7ZBgHte3Z3RUXqNxsVwa6a1MS8iQxJ6zP9H8otcTQB+L4JMzcITQxjyKA5JP4CA2pTEtecCO8XHRR+qdCB8FpgzYG94Ng9QTnmPT24pMJxMnSxzpVC1FQyLaEGSYK7tP9ZOPgXWEvPKgz3FEVOXvv/DG/FrLYJ6R68A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=veXguC1CfKrLaZLXQgQAbq0NSZuoxitHZi/raJLFeN8=;
- b=R629nqe9VeS3u5PM9FbSsqedfPNUlNu5Vj2BzJSm0w56naAnrFBDRNPymAKWiVFT70JMxkcXlNP6/41Gfz5UMUe+2m/0s4IX+T2kc5wEx/i0dGxlsMazvtrt/omqgS/8Ww74EthjyrhIBm7SKn5OmmE24HdqiqRyB40ZMBoezun8LNzZ/Ki+NFaydq03bh8jzBboVORcYSklKCuqdXesI5dRkbQkaAlfTl0ohU4qIBBfse/G2GzlAGrmepUMI1sVUl5gyAuJ8yw59Svp4VPr+UkVIb1vqyoWS0kSrdo3vp8wM7JHWCJKaSTxoBMaiPHRYW1On2tZ9v1vrYCXaRXvtA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10) by DU0PR04MB9561.eurprd04.prod.outlook.com
- (2603:10a6:10:312::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Tue, 3 Nov
- 2026 13:10:16 +0000
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0592.007; Tue, 3 Nov 2026
- 13:10:16 +0000
-Message-ID: <275e4894-a7d9-44f2-a7bb-c73f80d05f6b@oss.nxp.com>
-Date: Tue, 3 Nov 2026 15:10:11 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/10] Add S32N79RDB UFS support
-To: Bart Van Assche <bvanassche@acm.org>, NXP S32 Linux Team <s32@nxp.com>,
- Alim Akhtar <alim.akhtar@samsung.com>, Avri Altman
- <avri.altman@sandisk.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- "Martin K. Petersen" <mkp@kernel.org>,
- Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
- Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>,
- Pedro Sousa <pedrom.sousa@synopsys.com>, Joao Pinto
- <Joao.Pinto@synopsys.com>, Hannes Reinicke <hare@suse.de>
-Cc: Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, linux-scsi@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, clizzi@redhat.com, aruizrui@redhat.com,
- eballetb@redhat.com, echanude@redhat.com
-References: <20261024122533.3609180-1-larisa.grigore@oss.nxp.com>
- <991fd1f4-b054-42ba-a157-cc9d89dc594b@acm.org>
-Content-Language: en-US
-From: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
-In-Reply-To: <991fd1f4-b054-42ba-a157-cc9d89dc594b@acm.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4PR10CA0028.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:5d8::13) To GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YnCsvjoK;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VdKJeQdX
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A3ClI3Q2897152
+	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 13:13:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=; b=YnCsvjoKOg41w2fy
+	NCc1D3VtRcD7lTaZmWWlydx7PxtmO5zPxPFaQaBnfKZZHDCyjmUlApeSfrwTT37f
+	mqLXYYjTQvHaw5IDogbFKmc/xp6eVvJNmZqwkVreAxbv5VLeRO9Sh41s2DMyBfJE
+	gJVxiXtx/ec5uxAiFH8D0mQMF4KVWvvWVitATB/8N/rjlo3SNWyQX/pHZRWua3A2
+	4wUsyvY8KYgJls1pjaEFl32RB2XbACdETG/aEyQOO7Y4l+4QkXutE8VZ6iu1ac9K
+	GHskR6yICmAMB+yP5yRQXz0RDH4rQCq7bTGSlxmNSI2ibwggUozxeawzVvO8zBQ1
+	uHFLpQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hq0873ucr-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 13:13:12 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2373e9b4so420789585a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 05:13:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793711591; x=1794316391; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
+        b=VdKJeQdXNObU3F2AsbVCISDpmh5jLl0qx6VaKiX3XnGU1NLqvaOenSWtY3/uueNd5N
+         TZ60HIuZZ2AGPANlg5LrAizWenap1Jpgc4Mimqr9z1JuUcBLJlSsqFSSTRp6ojP4l9W0
+         ZSEtd58jbPDbeA8aaNIfHWQ8xiTzk1pW7mMWG1BIPprYIANGgCvheQxJH1LW8V1rmewu
+         3a2vvcPH62XvjH056HExXEImEVGm8/iE+OZOL5BjgxW/RRac343hRVbgk3IzbaOuwpf8
+         qxPeXZNApCbXNGtEvGTb7Oo7kVSTatsGZZRRGyZPR2T+oLERd1cxVEHmfo+TetDjLf3E
+         wVIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793711591; x=1794316391;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hyiAUjHvt1+X14T3/fDOxmZz5s9mlmOYVmjPV+rb6qk=;
+        b=B2a9wX3mbriezMrRCPO8Ei5eQJjXEr7y0DQwr02kIeUU+9JXhwyaN7Xcz3UgR5A3rc
+         j/vOwa1kuJ+I9zIyjKA+cveB2bX97Tf3+peFmmgNsxD+H3V30IYSh25hFuMAksXdNNvy
+         DBZXQYGHezRr/nhPxy/j34JS2TbiKMu7swRZ3ECIL2sGNp/cnjfJmx/JmMlAZUkXI3nR
+         LOsl+D8UbhjxhvQrgQpEg5j6K7WEQKfzK0ihUHYj8w41b7fw/fe3dIxFU6me+BVenIAA
+         /xhTq8XXzqFljvMfiYT1gGOn7107kgwPgV+M4ltLjaAuSGMtvPq/a7nNbI/V8yyULPmn
+         cR2Q==
+X-Forwarded-Encrypted: i=1; AKwUvBznbEup0oO1RCYvQQJuaUXR3Ws451IEkaz/1Pl2+NSa6Vz8BMu308IwzbKpWn2ospkg3+dRq/akR/D1fg4O@vger.kernel.org
+X-Gm-Message-State: APuU4Z+kQpJwyyvFXngxEEWpybihjBHg/DIag87lBxwFtEpxrNaqYcAp
+	q/8hs7lfeyRP2fnEc+3ArQ6k6alSHdEh1Q7nMHGEbwEMZqr296R0qZoPFPFqKEITYHUd/tTnfBq
+	JoYZLc8JXHT7F1y8KwdBMvhoV2MNEDPzesBVNMLMt8JBurV4z5ktzXDLX9e1jnLxjRMLY
+X-Gm-Gg: AYBFou2S3VWNEVNjCNwxrRdIYdIpBClUZqWxhmYYyJKQTGs3OcFx0+mjWW62pAFQCvI
+	APbBzZ0Ba0o1lW5Uai+d91liTXvqTeaToQx4jLxPZZnvgczjQNWGLtyD/TFdNtsZzXYigkF09S8
+	4FWsm5c2wDNSWvBsXkbxkLMWPTqvmLdQ78NRfF8CYTjg93lu7IxoOvLc2Y7monOAUzyo1YUnFA0
+	o7cvrN4PXF5R6kG6/NC8iV42Q1HO8vUUUdKIT6i0tsV9u/xP0JJzKUsuF/fRJt/OT68i8GzCIze
+	BjKB5+dYRauHaAY7vYqcQoHJzSho6IYN8QqM5OUKheyN1+WoXm9mHdgrx9QW0Gj7tIjKA2ZUmhP
+	m7a7e+hOBBq30ni4wW9EdMCejlJf4glrqyoqmeObsnozc0j/RAFFtHrYbIsYAbKZOCo8CKifssw
+	Rtf+t+9vCVVS4c
+X-Received: by 2002:a05:620a:6293:b0:93e:d5c1:da58 with SMTP id af79cd13be357-944217ce7d5mr2047384985a.79.1793711591406;
+        Tue, 03 Nov 2026 05:13:11 -0800 (PST)
+X-Received: by 2002:a05:620a:6293:b0:93e:d5c1:da58 with SMTP id af79cd13be357-944217ce7d5mr2047380085a.79.1793711590852;
+        Tue, 03 Nov 2026 05:13:10 -0800 (PST)
+Received: from [192.168.25.64] ([94.155.124.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b2a922c298sm50322075e9.9.2026.11.03.05.13.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 03 Nov 2026 05:13:09 -0800 (PST)
+Message-ID: <d3a7c0c2-f5dc-47da-8466-d0b77aae9b9b@oss.qualcomm.com>
+Date: Tue, 3 Nov 2026 15:13:08 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,191 +115,147 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|DU0PR04MB9561:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4881d7a5-0c33-4006-2d81-08df39abcd96
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|366016|19092799006|7416014|23010399003|1800799024|376014|6133799003|10067099003|18002099003|22082099003|261102123227099003|3023799007|56012099006|261028144727099003|5023799004|4143699003|11063799006|261026140227099003|921020|261022105027099003|261009223027099003|261022075727099003|261026121527099003|261021121427099003;
-X-Microsoft-Antispam-Message-Info:
- HDjdg1fYKvW5veW2nBBMjAm2DSWLkb70J59u9zaWkw1pc2DgaEOXYijH2LauqAAnMom5BoZSOImQ728KJs9/IWqVmHEcegQ6MgfOZH0MkHDW2sl3NziLuaMGOSSPbiC4zl/VBGXNEAJhfQvv7qA9ULRcK0y/+t0jrDjxmFe++CsYMBZz46/KSdTe3PqFSNqLASz6DMPHZJkfEphKS3odBKlmP1bOXKQEDpouSKuGDjJF6BpO7UmQI54YGNhZGKVNMdwlUHRqu/DF7TuDSaXy/dcrwfEEAaGk2F72p8GXWHyPDSz9epvJNL79ORbeyNnWspi83Sdnvp3IZzPDmTFkVAIigbw8+g7Og/ivHmAih+hztpTlIJaVzu/BbnRzdXFnnmESYXWF6IOjJiZBckrETzqF5Zow1kz4q4uikc94rLb6Psi1veYG/OrLYOP0AuNFyLgt9ZK6I1T0UcJLKvd4gL6Q0KxNym3lb/Nsjopm1J//noaC0ujq9vRiVWI/oFSjf18j1p6wsf8kDQl582rJeaHhA9oRy1osqXd285sWP6AGI6bUDkZlyYR5MHE4sSOuLEm76c57I8EH4P0kPMz26hDqpHIgy5+oZsVE34pz55UhzOvtz6pqFoppWvXiVeUYarXOH/U3LM4QDl6Ls2Qlp4lwkYkIJTPVgywVD2JDk1+ZgPZA8AZbckTA/0aglchlPbzek/KB6jL8Pq2oUcbOGQ==
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(19092799006)(7416014)(23010399003)(1800799024)(376014)(6133799003)(10067099003)(18002099003)(22082099003)(261102123227099003)(3023799007)(56012099006)(261028144727099003)(5023799004)(4143699003)(11063799006)(261026140227099003)(921020)(261022105027099003)(261009223027099003)(261022075727099003)(261026121527099003)(261021121427099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?utf-8?B?QldCN0FQZENVRzRYUWx6TVN0UDNSSWZBRHVBZks3bklITWthUlAxNjBJUWlJ?=
- =?utf-8?B?Q0kyakVSK3cwUXpRSzNsdUgyMi8vdHZPUmk4M0dCbmZBbjVwcFNWSm5pdWIz?=
- =?utf-8?B?dk5GT3Zyd1BDRkVnWGhMV2ZWd3FmelBDdGJiWkFCRlNjY3dkdUgzK0xmTVlZ?=
- =?utf-8?B?SzVaSWpILzh0d2FEWXJGYjQ1SkJTd2IwTDdpQjZYU01aZVdKbWk2MVI4Z294?=
- =?utf-8?B?enpNbTBLamloT1lnOTcvNGlxZ0QyWFRuTGw1dzJseEdIYTZuQmdqUEU1bXA4?=
- =?utf-8?B?a1U0OU9PcEczaHI2dUlpaEJ2RkVNS1FLdnZDeExhMHZrOVB0N21YdWMrKzJR?=
- =?utf-8?B?VUhRd0dnanVKN0VQNHovMTJmc3RySVgzdnF5MDhldUNxMEFLU0RvL2FtREht?=
- =?utf-8?B?aDZhSlBBQ0J4a0l0LzBCTXBsZmFpa3VuVGxhUTdSVjFhcFlaL3g5L1NOVy9L?=
- =?utf-8?B?SzNEbEtWTW1kUnU0akdZcVlBRzFsNVNkU21OWEZ6OHpnVGh5RlZ3VUpkY2ps?=
- =?utf-8?B?ckFXemgrUk1wL2FSbWR1c3htSlEvM1p4RDMvNTQrdXlXYUhIOW9WZldHdHhn?=
- =?utf-8?B?OXFUMG9hVWV6Y25FVzVIeWN2V2ZocUJZNVhhR1pTa2lwRDhSWkdUMXJOcTQ5?=
- =?utf-8?B?UU9TbmQ3MlJLRXFLRFYrZWt4UHNZQjlSazhqN1F3MXFFTG1SdzhOTml1RTl4?=
- =?utf-8?B?NTR0NWRuQ2RCdWVSVzlvZTh4RzdwQ1VobHIxS1ZBdE4zbGRiUUlMRUdQVDAw?=
- =?utf-8?B?V1NpdVBVSkN2M1BwdmZ5T1pQa1ptZFNWTkF6amF3U3VKbW5CYVpyd0Q2VG0r?=
- =?utf-8?B?RCt0YWNlcURHQ1BIQXgzM2dva0poS1dNYzE2MWdBb3RQZEpJY21PamJjMnhN?=
- =?utf-8?B?aEFzbVlzYVVVQzJXM0pXb2JTWHJQcys1M2hHWTZReWJOazJQSnJnT0lRdUc4?=
- =?utf-8?B?MmhEOHU5dVhIdkp2SDlNWEJvWGdOeUNaZjJtRTlxL2Eya0M5MW15SUNnNCt3?=
- =?utf-8?B?N3VUM2Qxa3UwdDNOMjQ3V0dFSXdLU3hkd0lUcWVrUkI4SGJseis0QzRkY2JT?=
- =?utf-8?B?WElZYmE2eVlJUUZnUVB4MGdPVGxtaWZqWDNqWWYreVZBajVrc1RtVGxmTTRF?=
- =?utf-8?B?czJUdEtSMW0zNVpXQ1loUzd5aTE0OTNQRmtQNllCeXlJOXNPU1RqRkM4MW41?=
- =?utf-8?B?ZFhXV0daci9vSGtFbzd2TVliTkdXcUdqS2R0clJHYmlQdnZIZGtRK2lMaWRE?=
- =?utf-8?B?dU9FOFhScTVGL1dwaVVCbFI5WEpWM0htdFJXdUF4dkp6T0xWRm45QmxtcCtD?=
- =?utf-8?B?bk11NW9tQVNFMy9xdGVjN0dyd1JLelljelNwUDNvNk55elZWRUdqZmdTY0hp?=
- =?utf-8?B?ejIyUWhNbW5GM2RlQ253OGZVTTJPenlkaDd2QldoNWpjSzJDYWFYRy9TcEFL?=
- =?utf-8?B?dU10Z3UzckduSzBVSVlHS09IZDhRUllnTGFacmpFRkNhcVUyVnRpRkpLY2Iz?=
- =?utf-8?B?R1kzb1QxV3gvaTN5N0VWeUx6RE9sbHBnYmEra1I0elYrUGhtTXpRM1BwNDZx?=
- =?utf-8?B?UUpsRlRFamo4QXhrVDBXeGpjbVdxMWRiOGp1dDBmNWluaFJWYWtZUU5yVDQ4?=
- =?utf-8?B?RFBFcjFuMXJtYWNiYUlyNEZqTkRFVzJRVk51b2J3ODYzdFY2cGVFSVpRbSt0?=
- =?utf-8?B?Lzd5OEt0UlNyNWFCaHBXTlpSNkJ6UjVNdmducUhJSFZLQ0RuVHZ0V25pZjV0?=
- =?utf-8?B?TFVPa2Mzc0xpdHg1VHZVSFpkU2NDYm5BczltVThJV2xwTVVISGxRS0pvaGtU?=
- =?utf-8?B?VWJZTXowNm1MQUtZaWRnKy9NRmhyRVIzMFVXbmEzN2g3dGJ5eUl5dlhNTnVz?=
- =?utf-8?B?anFZYmdVVXkyOFY5NmhzSm1nL0oxQWxrQ2JPNnJZVDY1cFQ5K2lsM0x5a0Zn?=
- =?utf-8?B?Y2RnRU1QUlZhNlRLajUwdXZ6TDk5Nzl4Q0Z5M2QvTVU0TTF4OEM1VWlKUlhi?=
- =?utf-8?B?N1FCQStxYUVmQm4vR3R5S3ZsNG15R0h6eWpTMzZqRWU3ZEljTisxUzNucTF0?=
- =?utf-8?B?TUw4VXFua0x1TE56ZEdIcE1WSGx0cWpkbjZtQ2tZZkU0U3YzeGczRjlHOEsz?=
- =?utf-8?B?YTh3MTFZcWZNeEtiKytxWG1xUnp3bURJdm01MFdrN0hsUE1NV2tPVzZGM25H?=
- =?utf-8?B?TjRyRnFiNk1RNXY2QUVkS2lUVFZoZXgzdHFoQ3c3NjdFZHpnVU1JK29ya3d2?=
- =?utf-8?B?VzNqbzc3R09sUy90dkJGd3o1NW5iWHNtZWY4ZFgrVmNHUmprT3Z4ZkIrYlZt?=
- =?utf-8?B?RVJTVHV2QzFLVVNSYzJrVHBaTDFmYnh0TlJ1L2ZjR2txNWd1akZNclI0YXh3?=
- =?utf-8?Q?M/rD+7xnnL0QlyzI=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4881d7a5-0c33-4006-2d81-08df39abcd96
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 13:10:16.2451
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LH+++WLxkLWQlIJiO7XeuECYUTX6jLvTmRFd3dGoGnGceoToBp0qoI1dgGtUrSzuzQzqve0BqDBv2OdvqxT1NA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9561
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/9] media: qcom: camss: Introduce SOF sequence
+ tracking
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+To: Bryan O'Donoghue <bod@kernel.org>, bryan.odonoghue@linaro.org,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261102-v4l2-frame-sync-v2-0-25cbed7a772f@kernel.org>
+ <20261102-v4l2-frame-sync-v2-2-25cbed7a772f@kernel.org>
+ <MPrRsE5vvB26tbMAT443IrH7Zr_tyIPaFwvQfnZj5TJUaM5uN8MyHB6kU6Y7rW92Sy35A5GfNcv95YOt-4YUNw==@protonmail.internalid>
+ <8196a664-f73b-4da1-aea0-0ea49676a4eb@oss.qualcomm.com>
+ <7f3e822e-3749-41c5-8390-e6d74b203927@kernel.org>
+ <36008be9-2b25-4f04-995e-f90e2547f7f2@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <36008be9-2b25-4f04-995e-f90e2547f7f2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA1MiBTYWx0ZWRfX3f9Hfw2Yg884
+ HeNc1eq2tfm0i1BmBz+6ReUaggo+M+k6OgVwVaMvI0nFX1eoqQ6NSp3l18MqtTHMC6lxZ51o8QJ
+ Z0IHqpwR7SEyhJYs6HPd/kc9Jc8vKdg=
+X-Authority-Analysis: v=2.4 cv=K9m3jCWI c=1 sm=1 tr=0 ts=6ae9dde8 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=Fj6EcmcQT-bn4kmwQ3wA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA1MiBTYWx0ZWRfXxfge69Am6tt7
+ TByCFRWDqNMCHiTf3mEwljJXzEZ+iMGZN5XFUIUhQ9kZhL8i7yCF92MAH6o6g5wT3WoY/Py2k4t
+ AnKSCHTJYC//Q0YdTB69zQsCi1fsRPI4KJAJBsVG7921cMy76tUIU7IkzpGYE3l8uhIlQzmlRNx
+ CRYZwKw9/Y9iRA2Uk+r/b7LRzHHb56jCGefdRUVqrTWF/82MiHSchHsWq6HC2zJI2D08cgGqcSH
+ 6vAGSPa/7kOVVar195AELf3vn1APbI22kLcljHJTL/B4DGHW2Ak4tLYXaxyJV9glcphptlFtniS
+ qgpxKd/rNrUwKftw0N/ms1e3tM/jcLqbClb/yMoFR5+ClZz6ZMSqKt6lAdHofkZ86ThaqlQ0f+c
+ T/pkUhECUDE0xc+WXM0Zf1PEtWwgVcZniYSBWCXMMQDbQY2vYFrHGBLY2oJmeuRgleyZQC/BbTW
+ 9ZuNicyJAVIgzNM9SJA==
+X-Proofpoint-ORIG-GUID: KiLxPGYQ9vymFhFFAmZqTH7rvMzaawKq
+X-Proofpoint-GUID: KiLxPGYQ9vymFhFFAmZqTH7rvMzaawKq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-03_02,2026-11-03_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 clxscore=1015 malwarescore=0
+ bulkscore=0 adultscore=0 spamscore=0 suspectscore=0 phishscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611030052
 
-On 10/24/2026 5:20 PM, Bart Van Assche wrote:
-> On 10/24/26 5:25 AM, Larisa Grigore wrote:
->> This series adds support for the UFS host controller found on the NXP 
->> S32N79
->> platform. The controller is based on the Synopsys DesignWare (DWC) UFS 
->> host
->> architecture and requires S32N79-specific M-PHY initialization/ 
->> calibration
->> sequence. It is compliant with JESD-223D "Universal Flash Storage Host
->> Controller Interface" v3.0, and supports up to HS-Gear 4 speed grade. 
->> It is
->> compatible with UFS 2.1, 3.0 and 3.1 devices. The MIPI UniPro is 
->> compliant with
->> "MIPI Alliance Specification for Unified Protocol", v1.8. The MIPI M- 
->> PHY is
->> compliant to version 4.1.
-> 
-> Please take a look at the report below. It comes from an LLM and hence
-> may include errors:
-> ----------------------------------------------------------------------
-> 
-> ## Main finding
-> 
-> **Patch 9/10: PRE_CHANGE errors are ignored.** In 
-> `ufshcd_link_startup()` the core calls the PRE_CHANGE hook without 
-> checking what it returns:
-> ```c
-> do {
->      ufshcd_vops_link_startup_notify(hba, PRE_CHANGE);
->      ret = ufshcd_dme_link_startup(hba);
-> ```
-> So if `ufs_s32n7_link_startup_pre_change()` fails, DME_LINKSTARTUP is 
-> still sent. That covers an invalid `one_us_tick`, an SRAM_INIT_DONE 
-> timeout after up to 3 s, a calibration failure, or lanes not reaching 
-> Hibern8. The error codes and the `dev_err()` calls in that path have no 
-> effect. Either the series checks the PRE_CHANGE return value in the core 
-> (with an audit of the existing hooks), or the commit message should say 
-> that these failures only get logged.
-> 
 
-ufshcd_vops_link_startup_notify(hba, PRE_CHANGE) is not checked in 
-ufshcd_link_startup(), and this applies to every host driver, not only 
-S32N79. Because this is core behaviour and not specific to this driver, 
-I would prefer not to change it in this series. A fix in the core that 
-checks the PRE_CHANGE return value can follow as a separate patch, so 
-that it gets reviewed on its own and does not hold up this driver.
 
-> ## Per-patch comments
+On 11/3/2026 2:30 PM, Gjorgji Rosikopulos (Consultant) wrote:
+> Hi Bryan,
 > 
-> **Cover letter / all patches**
-> - The subject says `[PATCH 00/10]` without `v9`, but the body says 
-> "Changes in v9". It should be `[PATCH v9 nn/10]`.
-> - Patches 1, 5, 6, 8 and 9 start with `scsi: ufs:`. Drop the `scsi:` so 
-> they read, for example, `ufs: dwc: …` and `ufs: s32n7: …`. That matches 
-> patches 2 and 3 (`ufs: unipro:`).
+> On 11/3/2026 2:19 PM, Bryan O'Donoghue wrote:
+>> On 03/11/2026 07:11, Gjorgji Rosikopulos (Consultant) wrote:
+>>>> +
+>>>> +void csid_sof_event(struct csid_device *csid, unsigned int id)
+>>>> +{
+>>>> +	struct v4l2_event event = {
+>>>> +		.type = V4L2_EVENT_FRAME_SYNC,
+>>>> +		.id = id,
+>>>> +		.u.frame_sync.frame_sequence =
+>>>> +			atomic_inc_return(&csid->sof_seq[id]),
+>>>> +	};
+>>> On first look this was looking strange because the id is used for the
+>>> control id events not for frame sync. But on second thought it may make
+>>> sense, but the question is how the userspace should interpret those ids?
+>>> As of today userspace does not have any info for the VC and csid internal
+>>> pipelines (so called lines). So with the current state of the code
+>>> the id is VC which makes sense becouse the SOF/EOF packets are recieved
+>>> based on VC. So i am thinking of two options:
+>>
+>> The id is not the VC its the CSID:id/port/line-number. VCs don't change 
+>> what this means; its the SOF event as seen by the CSI decoder - inside 
+>> of which there may be multiple VC:DT combos.
+>>
+>> This is also the case for PIX which is just another CSID 
+>> port/id/line-number.
+>>
+>>>
+>>> 1. Move SOF event in vfe (rdi/pix sub-devs) we have per line sub-device
+>>>     and will be well known to userspace for which line is reported.
+>>>
+>>> 2. Add and propose extension of videodev2 documentation that
+>>>     id of frame_sync event types represents SOF per virtual channel.
+>>>
+>>> Personally i votoe for (1) because it will well fit with stream-api
+>>> support and usespace will have clear understanding of the SOF to which
+>>> stream belongs.
+>>
+>> You know from the media graph which CSID drives which VFE:output so it 
+>> is 100% possible to know which CSID:SOF relates to which VFE always. 
+>> CSID::SOF is a hardware description of what the CSID decoder sees. I 
+>> don't support mis-reporting it as a VFE event TBH.
 > 
-> **Patch 4/10 (Hibern8 TX FSM polling helper)**
-> - The prefix is `ufs: host:`, but the helper is added to `drivers/ufs/ 
-> core/ufshcd.c`. It should be `ufs: core:`.
-> - The commit message names `ufshcd_check_hibern8()`, but the function is 
-> called `ufshcd_dme_check_tx_hibern8()`.
-> - "Unlike the initial implementation, the timeout error is now reported 
-> only once…" describes earlier versions. It belongs below the `---` line.
-> - Please don't use `extern` in new prototypes in `include/ufs/ufshcd.h`.
-> - The HiSilicon and Qualcomm messages used to print the TX_FSM_STATE 
-> value(s) when a lane failed to reach Hibern8. The new helper only logs a 
-> timeout, so that diagnostic information is lost. Consider logging the 
-> lane and its last state.
+> Yes i know that, but does the userpsace developer knows based on the API and
+> documentation provided? Or he needs to ask the linux media?
 > 
-> **Patch 5/10 (move CREG helpers)**
-> - "Dropped `static` from …" is not in the imperative mood.
-> - The commit message should say why removing `static` matters. In 
-> Versal2, `phy_write_attrs[]`/`phy_read_attrs[]` were static arrays that 
-> got modified on every call. Two callers at once, for example two host 
-> instances, could corrupt each other's values. The move fixes that race, 
-> which is worth stating.
+> We have some kind of id which is mapped to line and that is known just
+> by the driver, if you can point other drivers using id for frame sync
+> events will be helpfull. 
 > 
-> **Patch 9/10 (S32N79 driver)**
-> - **Hard-coded lane count:** `s32n79_reset_config[]`, 
-> `pwr_change_phy_regs[]` and the calibration tables only cover lanes 0 
-> and 1. But `ufshcd_dme_check_tx_hibern8()` is passed `hba- 
->  >lanes_per_direction`. Use a fixed 2 consistently, or check 
-> `lanes_per_direction` in `init`.
-> - **Connection setup:** `ufs_s32n7_link_startup_post_change()` repeats a 
-> subset of `ufshcd_dwc_connection_setup()`: local attributes only, no 
-> peer attributes and no `N_DEVICEID_VALID`. Please explain why the shared 
-> DWC helper, or `ufshcd_dwc_link_startup_notify()` with a 
-> `phy_initialization` hook, can't be used.
-> - **Unexplained settings:** `UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ONCE` and 
-> `hba->spm_lvl = UFS_PM_LVL_5` need a reason in the commit message, for 
-> example whether power is cut during system suspend.
-> - **Includes:** `FIELD_PREP()` and `GENMASK()` are used without `<linux/ 
-> bitfield.h>` or `<linux/bits.h>`. It compiles only because `ufshcd.h` 
-> happens to pull them in.
-> - **Nits:**
->    - Use `u32 data` instead of `unsigned int data` for `ufshcd_dme_get()`.
->    - `SCM_ONE_US_TICK 0x2CU` has a `U` suffix but `SCM_STATUS 0x30` 
-> doesn't.
->    - The comment says "SCM_MPHY_RAM_CONFIG_STATUS" but the macro is 
-> `SCM_STATUS`.
->    - The `dev_err()` in `ufs_s32n7_link_startup_notify()` repeats 
-> messages that the inner functions already print.
->    - `device_get_match_data()` is called in both probe and `init`.
->    - `ufs_s32n7_remove()` is a wrapper that adds nothing.
+> 
+>>
+>> More than that though, there is in-fact a VFE specific SOF/EOF and EPOCH 
+>> event but these require the CSID feeding a frame into the VFE pipeline 
+>> and the VFE moving through its own state-machine to process that frame.
+>>
+>> So they are separate signals and separate logical events representing 
+>> different things with different timings in hardware, meaning different 
+>> things to userspace.
+> 
+> Well that make sense i agree that it make sense to be part of the csid
+> but it should be documented somewhere, maybe proper thing to do is update
+> the comment in videodev2.h and update the documentation for camss driver.
+
+Just an proposal if it is decided the id to be used, it make sense to contain
+stream_id. Then userspace based on the stream routing can map SOF
+for the stream of interest. But the API for retrieving stream_id is still
+experimental and i am not sure if will be well accepted.
+
+> 
+>>
+>> CSID:SOF is the thing you want to trigger off of if you are for example 
+>> trying to align an IMU timestamp, not VFE SOF.
+>>
+>> Feel free to propose VFE:SOF/EOF if it makes sense for VCs - I don't 
+>> think I have a clear picture of what you want to do there - interested 
+>> though.
+> 
+> I am not proposing that, but from the current state of the code each line is mapped
+> to different VC (before multistream patches). So this means as of today, id can
+> be mapped to VC. Anyway my point is to either document or open discussion for
+> "id" field in v4l2_event structure when event type is V4L2_EVENT_FRAME_SYNC. If
+> not document for me it looks like some kind of a workaround just for our own driver.
+> 
+> ~Gjorgji
+> 
+>>
+>> ---
+>> bod
 > 
 
-Will fix in v10.
-
-> **Patch 1/10:** the change is fine. The `Fixes:` tag is debatable: the 
-> old positive return of 1 was already treated as a failure by `if (ret)` 
-> callers, so this isn't really a bug fix for stable.
-> 
-> To check these points I read the code in your local tree (`locking` 
-> branch). I did not apply or build the series.
-Will drop the "Fixes" tag and will add a new commit which resolves the 
-actual problem. __ufshcd_wl_resume will no longer return a positive 
-value in case of an error.
-
-Best regards,
-Larisa
