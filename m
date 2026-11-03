@@ -1,122 +1,119 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793747944;
-	b=J024npAbEq8JGmXvu0IcHWiLhCWG88jZND9zuxPAGFF55o78SKnFEcKrX+iskt8FXVgs
-	 KqZUbvBoq5Q39Ij5F+Kp7oASXIJ6aBpl/JRyuHtGLGZ4NH6/fSjDP/CURP8X+HySh5IUA
-	 9RVZxTDR3j4/sJ1DF0nkVOMeUrQj8s2aPG/tLzQ7NCtOh6pgXTcpsQhX3VXIiEEi9xSe1
-	 HLNMi1DrM1Pflxp2/nkSNyVd1j1fjSPLQY+fsE20WpO9CQlOKwff1IxRGUzFQKRoRbLaT
-	 5zpmgBq4YO49AG9cBi+F34k91FMl+G+u5zRL2nNLbPYeWZnezArPDQKQ6xHWOrEKbCA==
+	t=1793747946;
+	b=fBHa0f8Whnizj1/PVHutg6xzdG82uOf1geNxDJ7qMXsITB4qdR8zyZ9LlDDlaSXWheT+
+	 RvvjLkzqeg/ltGRY6H1E132hQDNAjyNMIFM+fduKM/PO1vIqUwHoN+qruvYh/o571ZHq/
+	 BIxx0FG2J89NHqR3vmugCTf78FaTvu92MGMXTh64L0iMiMHKk0VzRiaAMGEIJVyzO7DM7
+	 ozy/nEnzLronNTY/iw/zkCCecffyR0ji45ig8AX8ZEK8DNtO+1sR87SpkvptDvPybyHv1
+	 sCpGRGR8HkV9N6Yl/sLcTs9mSZ/8PbwITd27aWpzO195JHoXhUPDQAbt2v1cH+2VTgA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793747944;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793747946;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
 	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=yKmSGK1vSwOyKiBV/4vQNcT9fTTMd69aRbOdB8aI+io=;
-	b=W2Ewt/qVfbv7jkKa34hJYF+KzsjVF6mgx7FK9W+lsoUmRD6mDB1B5ttV1YLYoohZFqLv
-	 98VaYwNaud4kRcxezs6gUgHEktVZ0gstFfXDGJoGKI4ci1zmXBQzvGKNs47+et9Wpg2f3
-	 YJoBr4vi9QmDdpKWbRj+YR7EHUs80cf3nYB2vuPf1cq9M2uQ7goUYh9ap5jIU4cRXQBYO
-	 2rEXxZH2ZRwRz/ubUsovp64IW1Q43XQ3FVQL5CiqmAaCFJJ52g0AoW5s37TW2C4Qxg5pO
-	 JspHcoSkb5b7wXas7sSFHryYVMJx125txXMw5ly+kQiH+2mGzuiCB7+abH+1QmKILxA==
+	bh=9R7AOWcFK2O6YBonVJ+x/oCpM5TEf6hYWJwCy2Nvgdg=;
+	b=pb8/YQZ9D5PnPEPutj+PM2p/b7/7TeCheSFB5+ZNo8MUZIcWgbPtZF2wrdNylc8TcN59
+	 i1MsHxxV8thLl9oillNSxQQZtjN5vDHxZUNl0R14uVjKeRmoVFhVmPPALAKVqa+YzbAyJ
+	 Eeys/WWoMloXBotwa0ZYKwrBlyVuCSmz3HpG1DiQ3v3CQcg4yXOdBfYsQ6NLvi6/xVPuU
+	 fGMTZkAnSjALNXdVW8JCrJMANscdkIBbHH/FehG8wUPBLLP9UaQU5Lj9iloPShMOphYUl
+	 gGHksb8ltOV9Op2CS7FMZ4XSEVC3jv5I94oV6XskzqszKKwPu1dVKYkyala56ioJflg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DCItncuV;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Tu3zccI4;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=T9TAGBP6;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="kbu/IQqd";
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F4F8606A339
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 23:19:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F4F8606A339
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B23B606D823
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 23:19:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3B23B606D823
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DCItncuV;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Tu3zccI4
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A3LKlOe799799
-	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 23:19:03 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=T9TAGBP6;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kbu/IQqd
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A3LKptj3065603
+	for <linux-arm-msm@vger.kernel.org>; Tue, 3 Nov 2026 23:19:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=yKmSGK1vSwO
-	yKiBV/4vQNcT9fTTMd69aRbOdB8aI+io=; b=DCItncuV69iznZs6alW4tmTSTXu
-	jeKuFkKmhupsaH8qeC5j0stNhCC+tQIHiSGClsutOuOdfdrtz67gDZpoY98MhHaG
-	Q0K5+lPR75o5+6u+3fzgq2+Q7T/7Rz4g7y4vFs6WiKbDpvaHRVIfeH9KXhXBDH0n
-	51oT8RQX1eX9uGNRAJ0WgndjcLjB97LIWzAzKDauXUPLbY0DR+gfGMbN0I8TGasC
-	9NR3033q3wFQm0PeH9t25mj/fHrN3xdiKsBET6bEV1hQ6pDO+CZ+D7NHn0x6JQZQ
-	k5LSX3ROjngUls+XmZerBTVbDU8eVoEVUJHuKHzNgIY8z4jaSLmfxf69aew==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqm2ph7gv-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=9R7AOWcFK2O
+	6YBonVJ+x/oCpM5TEf6hYWJwCy2Nvgdg=; b=T9TAGBP6FqUzBkYa2zuGXHBxadu
+	1kuEq+X98ZVvrnGIbtfcoszOzUZPFMbmeOJaGBf8wWP3v0JC1qP9UqBglfqN2OVF
+	diqLSGAIYxECWQ73tjgcevAnbsSdy/8/aiViGCbjq1B7redz+lOWK8b+EZmh2i7C
+	ATHFeImO5Ty+SaX+NjltOPRzETNZqAU2lqCP3RGZiuh1dRmm+jKkD6rAtYeUVjD2
+	TqDbMVKEtXeiPMY9P0DwBzrqM9eTthfikjHtPCfboUm617akvDeBpqwXWomAWGlZ
+	v9x2C+Uehzzk9F/q17wWL0TkSaEgl16k03xCd3ZLjfPjeh3psvTMDMPkEhg==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqh2bt7g9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 23:19:03 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3adad90c894so215832a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 15:19:03 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 23:19:05 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8a06bc723b1so202226b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 15:19:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793747943; x=1794352743; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793747945; x=1794352745; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yKmSGK1vSwOyKiBV/4vQNcT9fTTMd69aRbOdB8aI+io=;
-        b=Tu3zccI4EOe0T6z7Ar0FjmNFPPRcyf2gwKn7D4kmlNZEoTkOEtrhODGFZeg9kCtiBQ
-         f7dI1K24uxezkzlRt76eYkDXFLpQmUIKKlkeHSr8tbnobwUumz4uMLb0Aj8c/79pMZpd
-         y3kNZeItx0yKaDTg1hxIYL1W+12x4OZCfb1O08lh9pb1RoMfzR0HRtiiT6kQVtxZ5ecu
-         8DlaWxV0Zk0tpd0Txl1SR7dqlIVp3u7kJ+q5LNSUr+Hbi8XzbtLKPV8BXn01eBSTxk0k
-         MzC0DdYGKNcjuyl2xl8y5NfKt2B+s7VybxTq+lRJBIKCychQnMUWnT+YQkNYtmtGr0xT
-         wKMw==
+        bh=9R7AOWcFK2O6YBonVJ+x/oCpM5TEf6hYWJwCy2Nvgdg=;
+        b=kbu/IQqd8OSiWvBm42fEZa/eqGqg/HC28rrPRgYQMs549IRhRZQWxB5SH4gNJEhocM
+         SubdBUPpDXrDd5bVYmw3j38CXMDBQ2xBOnSaHzigfyHQwtq/8h0ik4/3p7Ah8NwqRB61
+         SF0VsbhYlifQ+IXM2+J5zoN5/L5iobhGBrR6hrpoyIZkqv2uTdya2LgyoxX8Wg6kCV8i
+         nPfQEyP95/XBF0gBcqAqCsd6XDkSVAkTSv/LQOHQh84THR4FovzbPnW7X34AUvPdXoki
+         sqfKz8FLKzY8zE037Zc00YEFnumNoZF9+VwvFJZ0DAOecAyo5vIwkA9a8iY5U7caDv5k
+         BNjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793747943; x=1794352743;
+        d=1e100.net; s=20260707; t=1793747945; x=1794352745;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=yKmSGK1vSwOyKiBV/4vQNcT9fTTMd69aRbOdB8aI+io=;
-        b=teiaHG4okIhKjDVHgbKy/GYzUOFd5NwxOOJKpVbPWgpoQxZ9dDCwHJTvqolR4b0gZf
-         0eyp5OrYUc/+34qAPSkYeTYltTXoUr/XNz06vOpWGiKFB6fEt7aTBraaU1Hf4I7OD0mq
-         6m+oxUk6PoMuvs1+BXvH1ZL/fkYX3SQq5D5Ppn8RInzc2rLBp6wVbI8O4jAwoKlJ5Usc
-         kcxtHiODfwxyzsnIQ36TDzguQJjSQX+UVSgq9wL3usSClVHpHs+bhUI4d4+rXfllcnXF
-         H829xxd7/y9DmVf6ffSDiyLrVpcCxckpBPYx09Y0HqJmf4YgBJ5hHwtQU83LU1VJL7Wn
-         pFuQ==
-X-Gm-Message-State: APuU4Z+ESF05KJqZBKJgKcTJP9JF+TE1QDnzd37i8tnjalWO57OVfV0Z
-	OSAfk07Hx+Y+AL9UtZH4qtJKi4oiJdZlmkxRbsj7o9VqMrr40Dj+EKdDo5kBeG+3MayvCANFrSZ
-	QtK+SWTWazc1UPsZHiiX0KKugS+FXSlQVR93FbWyBwnuJKBRFLfTKASBvJgmx704VyGa4
-X-Gm-Gg: AYBFou006vcpmNLP9Il+0R2Jsluo2GMbFYLZlzUCILQtXqLnmaie0EExEoC7Wnygd+Y
-	w8CXEeKgJclXq7r/0zXjjrqYkEM3hq7hZCzRfhCS8Nuhgbehn9jnm7mfVoqxZ5tA65Togl0BJwM
-	VRNRBOS7ZclTu7GUO4rWGXLRzmLjPrRqDMUSI/V44FAosJYjs/6FatTmksyqiUwNUKJLFYkMhY2
-	H2cTj7EHXcF5tQaNT1pzYQ1oiAP6NMYhDe3ZU8D0QHs1E12PoTLQY7B/gLz/4Agbu27TbW4xJR4
-	ViJ9BqvsXZnFSSNX3IhTp5Al3MiBcKy8V+tqfkv48M8zZFlW7Kad5YAlbd8tE3NHGzIx2220GPN
-	MkiR/17oGAWFljn9QEmRvottPy1ri8g8eHWfDCd8mdx2HWIJ+gjlS6oSKmVMG03BcMUruBL98uo
-	oXxtZn45iB2oxYgb7wIpU4IsI69pHnt0eGbBkBaSy3ADp0V60Jso3ClzHaWw==
-X-Received: by 2002:a17:90b:5286:b0:3ad:a8bc:20cb with SMTP id 98e67ed59e1d1-3ae8987d2d2mr12910038a91.66.1793747942835;
-        Tue, 03 Nov 2026 15:19:02 -0800 (PST)
-X-Received: by 2002:a17:90b:5286:b0:3ad:a8bc:20cb with SMTP id 98e67ed59e1d1-3ae8987d2d2mr12910024a91.66.1793747942398;
-        Tue, 03 Nov 2026 15:19:02 -0800 (PST)
+        bh=9R7AOWcFK2O6YBonVJ+x/oCpM5TEf6hYWJwCy2Nvgdg=;
+        b=SQyqh9hxLWChB1xqQBVJDqsZLlLqyi2GjlfGW8e7OJ6ECroCK1AwMpnCOA0fIWQhID
+         rQeKML9ZYOVnWaXemMC93wS+Uog1PNPn/Oa4blCz9uXpHBWAcaGvWyI1zt1bjHJpiD42
+         E4g3X6bSfDfqPe6WpKUuw61Ua6eA0pYlL7J6C2Z/Rk34WAeS57KtjeOgDnU1Z8EUVZyg
+         Mf1WgaTJwV+HrCrlY5m5ZURvl6hbYZ9gvPjMyWwv0tao2vPTF/tGSAizrqGXN7sbOfGU
+         lsAf72MemvpTwFbGwCBLiKVn/kBmtnBWWX8FJYnBlCaZt/uMlbnNQ+37S+/Bqp1e48NZ
+         3bmA==
+X-Gm-Message-State: APuU4Z+I17TjqN00diyZlO+TCxX8FnoJCt7qzxEkw77/aiAaBThUEN9w
+	7HQ+jqJ8S6dfRBBnPRoSpCBDSmKrtB/mh70HUSw3XdgzolF7ahsc1zhAHW5vEXS9DfctFhLkusp
+	O3BypkC31n+dkbQOwwAhb+X+ilw1alKrInmzNjg76X3MiEM05qqfifyqjESk7SmYyW7rA
+X-Gm-Gg: AYBFou398s9+5UvR492DfKdaZVHGs/YafQbm3uWtMUeNQULO3n9BuhxmMf1dQ2N5xud
+	mmSBL3bWUe74T8j6MJNbmSjj/n7+Qbj+swvaArzLvNvzUXBKvAILaRx6hEyGpilvvyYiTzfjP6S
+	wY8c8tGkEZelUsB7AaQvp8dGYnwAKas6IW3Ce+CS31ITt3fnDBKh+T3Jb2nTTBd/6FSPydCCDGC
+	4l82pIdxBnjvXOIA/CwaD814ZykV9M6O2ifhTsftNbBWH6VVZs4U29bVmsV+qPJwPrYcZlAEDC9
+	avIGwM92Jf2LnmQSpu1kYZkD1t7IkSrEcL04L6kPfyLOCptPejJAuwq7xdU7twtjr4f5Mx/8G8j
+	aV6L2+EGDqVRgIt+/rENMhnJxE/zlWfGJ9+6A2gf3fkKQ9YZVs2oWPp7QK7fBol9TltN5wuO1tq
+	IZWXYFR8Arjhx2peJbQhc4Dv6PBj8LmLjC2w5K5wYTmj+oMyvkMkAPLXSbYw==
+X-Received: by 2002:a05:6a00:2d96:b0:89a:19ae:10ed with SMTP id d2e1a72fcca58-8a9bc8321d9mr11305832b3a.31.1793747944900;
+        Tue, 03 Nov 2026 15:19:04 -0800 (PST)
+X-Received: by 2002:a05:6a00:2d96:b0:89a:19ae:10ed with SMTP id d2e1a72fcca58-8a9bc8321d9mr11305804b3a.31.1793747944436;
+        Tue, 03 Nov 2026 15:19:04 -0800 (PST)
 Received: from localhost (c-67-168-198-145.hsd1.or.comcast.net. [67.168.198.145])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b09452d89bsm501759a91.0.2026.11.03.15.19.01
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8b09bd3ad6fsm146353b3a.55.2026.11.03.15.19.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 15:19:01 -0800 (PST)
+        Tue, 03 Nov 2026 15:19:03 -0800 (PST)
 From: Rob Clark <robin.clark@oss.qualcomm.com>
 To: dri-devel@lists.freedesktop.org
 Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
         Anna Maniscalco <anna.maniscalco2000@gmail.com>,
         Rob Clark <robin.clark@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
         Dmitry Baryshkov <lumag@kernel.org>,
         Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
         Marijn Suijten <marijn.suijten@somainline.org>,
         David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
         linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v4 4/6] drm/msm: Add cleanup help for disabling IFPC
-Date: Tue,  3 Nov 2026 15:18:43 -0800
-Message-ID: <20261103231850.17493-5-robin.clark@oss.qualcomm.com>
+Subject: [PATCH v4 5/6] drm/msm/debugfs: Use cleanup.h for gpu state dump
+Date: Tue,  3 Nov 2026 15:18:44 -0800
+Message-ID: <20261103231850.17493-6-robin.clark@oss.qualcomm.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103231850.17493-1-robin.clark@oss.qualcomm.com>
 References: <20261103231850.17493-1-robin.clark@oss.qualcomm.com>
@@ -130,85 +127,103 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA5MiBTYWx0ZWRfX9+4fd+o7oO+J
- YSdDLNZaiyIsOVtOs7BoTYkznEx8AOkZ+00x5jbOsIJhzeao2pXlRUlpfs28I7enlsHEpE6Rcbk
- e3/h61hNF3o0+EX8W9pfYBzRf6lkIp+CbeRyew+gF8kDoeidmN8nbpgBFad/7gDZ0OGNgDHum+H
- DRgglM7BPVbiOVIbjmRenpU1PoCOmDgs+nXPrun3/rWeNcAWAfOJDzJS0UfsvbfaB5Zf1sUyDpz
- JP5NFmAyNsV9pA6JUdAnO7TiSm2VK8wOeZRMV1R6RhHMIhIckVZIwUjQQe43N2EqYBLacR3wBE3
- 4CPkNXdOB3f1ekDMOLn2RX4q6GF24xvDNtPcQriSHAJLUndODHHCG1KLiDkHuhSfnDFWURUVgSu
- iEhUY2b/2W/gjV5jRWEboGK9cERKPaHc+8HpdJNUH8h87VDAVuEvEYBqcGqoQA5h3QkgbsXQgBg
- /4hB4liGyBGad7XVesA==
-X-Proofpoint-GUID: k_V1JlIDLOIkbXfrTjeDySbw7_HrmLwi
-X-Proofpoint-ORIG-GUID: k_V1JlIDLOIkbXfrTjeDySbw7_HrmLwi
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA5MiBTYWx0ZWRfXzOqhfk3AciVn
- PfFU5aT+Mn5K4IPGXGs+RLtC0nhP/KVZpoby+eBaoMAvkuEXEkN/2TPBe3AfPK6wI1KPbveTs3l
- QGL2Msa4WnFMTKpwU71QSzrMFIB7oVk=
-X-Authority-Analysis: v=2.4 cv=c64+0h9l c=1 sm=1 tr=0 ts=6aea6be7 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA5MiBTYWx0ZWRfX5t6LBXIbKYIa
+ 0HXQ+bRsqqWSNk9fByhe235c3/v8BHsVpSNjUAA6Oycl5Pa/HeHLZBXO+aI1UKgB92bXoI98beO
+ DQVzxt+6PUjVDjKYs4Ua8mR7teqNZ88=
+X-Authority-Analysis: v=2.4 cv=AKV9GsJK c=1 sm=1 tr=0 ts=6aea6be9 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=pGLkceISAAAA:8 a=vTD2gfctXtM-Q-VHBdUA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=isCY8TonHXl0-fnU9HAA:9 a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-ORIG-GUID: bgPNFUwr29Q0TR65LvWrJ8dr0HVQ3aFv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA5MiBTYWx0ZWRfX73PGL9Hl1GeQ
+ DjsJQFRLbe3ejQYarBftuMNpMY2pp6B2lXAxIpKRQ6Hvuk5V8cKi1+rfJL5rXLmPTwRdTdJ/9wQ
+ 35R/ejCul92RvJhc9yWzFg22XO8ilX1a63A0ZblOPPnImAnAOCL6pR/JgBQB2ZB88tRJfELn700
+ 8Dt36Atq28haWxrB09iESMBkt2DewNLnXf6N+ORzbGLOfJ7z/GWv1BzNqIrQnmYkuuq/Bvuu6+r
+ AGJ7Gac4VABHfP0sszJ3nZd0q9U6SGoAfX/gxLOdD94OjIPPlIJePXyaqWPVtGFDUVtyR7beAER
+ b+lfxiaIWwGPzIHlWXMzoJ9lldkwiF+0R17Nc+a6qA8Zs8GK/lrmaLnSoy1aRIf6KIDtLdV9rms
+ raEiP4OF+NvHk+MvAtWi1wlvjzGgcOdvdsk3nDDBNIFg0LAiT1SQG/m/kCwRQ0GSJtP8xb7eut9
+ J8djUS6+2qVY9dPon1g==
+X-Proofpoint-GUID: bgPNFUwr29Q0TR65LvWrJ8dr0HVQ3aFv
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-03_05,2026-11-03_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 phishscore=0 suspectscore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611030092
+ clxscore=1015 malwarescore=0 bulkscore=0 suspectscore=0 impostorscore=0
+ phishscore=0 spamscore=0 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611030092
 
-Simplify error path cleanup for IFPC-disable critical sections.
+We need to move the gpu lock around a bit for the next patch.  Use
+scoped_guard/etc so we don't have to make the error path handling more
+complicated.
 
-Note that this moves where we re-enable IFPC until after the
-wake_up_all(), but that is harmless.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Reviewed-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/msm_gpu.h      | 4 ++++
- drivers/gpu/drm/msm/msm_perfcntr.c | 5 +----
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/msm/msm_debugfs.c | 31 ++++++++++++-------------------
+ 1 file changed, 12 insertions(+), 19 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/msm_gpu.h b/drivers/gpu/drm/msm/msm_gpu.h
-index 0334a0f604ac..e7912d2180a5 100644
---- a/drivers/gpu/drm/msm/msm_gpu.h
-+++ b/drivers/gpu/drm/msm/msm_gpu.h
-@@ -399,6 +399,10 @@ msm_gpu_disable_ifpc_put(struct msm_gpu *gpu)
- 		gpu->funcs->ifpc_update(gpu);
- }
+diff --git a/drivers/gpu/drm/msm/msm_debugfs.c b/drivers/gpu/drm/msm/msm_debugfs.c
+index f12701e286ec..aa59b28a3392 100644
+--- a/drivers/gpu/drm/msm/msm_debugfs.c
++++ b/drivers/gpu/drm/msm/msm_debugfs.c
+@@ -70,43 +70,36 @@ static int msm_gpu_open(struct inode *inode, struct file *file)
+ 	struct drm_device *dev = inode->i_private;
+ 	struct msm_drm_private *priv = dev->dev_private;
+ 	struct msm_gpu *gpu = priv->gpu;
+-	struct msm_gpu_show_priv *show_priv;
+ 	int ret;
  
-+DEFINE_GUARD(ifpc_disable, struct msm_gpu *,
-+	     msm_gpu_disable_ifpc_get(_T),
-+	     msm_gpu_disable_ifpc_put(_T))
-+
- /*
-  * The number of priority levels provided by drm gpu scheduler.  The
-  * DRM_SCHED_PRIORITY_KERNEL priority level is treated specially in some
-diff --git a/drivers/gpu/drm/msm/msm_perfcntr.c b/drivers/gpu/drm/msm/msm_perfcntr.c
-index 867dd476ed88..995857273aca 100644
---- a/drivers/gpu/drm/msm/msm_perfcntr.c
-+++ b/drivers/gpu/drm/msm/msm_perfcntr.c
-@@ -259,7 +259,7 @@ sample_worker(struct kthread_work *work)
- 	}
+ 	if (!gpu || !gpu->funcs->gpu_state_get)
+ 		return -ENODEV;
  
- 	/* Inhibit IFPC while accessing registers: */
--	msm_gpu_disable_ifpc_get(gpu);
-+	guard(ifpc_disable)(gpu);
+-	show_priv = kmalloc_obj(*show_priv);
++	struct msm_gpu_show_priv *show_priv __free(kfree)
++		= kmalloc_obj(*show_priv);
+ 	if (!show_priv)
+ 		return -ENOMEM;
  
- 	if (gpu->funcs->perfcntr_flush)
- 		gpu->funcs->perfcntr_flush(gpu);
-@@ -295,9 +295,6 @@ sample_worker(struct kthread_work *work)
- 		}
- 	}
- 
--	/* Re-enable IFPC: */
--	msm_gpu_disable_ifpc_put(gpu);
+-	ret = mutex_lock_interruptible(&gpu->lock);
+-	if (ret)
+-		goto free_priv;
 -
- 	smp_store_release(&stream->fifo.head, head);
- 	wake_up_all(&stream->poll_wq);
+-	pm_runtime_get_sync(&gpu->pdev->dev);
+-	msm_gpu_hw_init(gpu);
+-	show_priv->state = gpu->funcs->gpu_state_get(gpu);
+-	pm_runtime_put_sync(&gpu->pdev->dev);
+-
+-	mutex_unlock(&gpu->lock);
++	scoped_guard (pm_runtime_active, &gpu->pdev->dev) {
++		scoped_cond_guard (mutex_intr, return -EINTR, &gpu->lock) {
++			msm_gpu_hw_init(gpu);
++			show_priv->state = gpu->funcs->gpu_state_get(gpu);
++		}
++	}
+ 
+ 	if (IS_ERR(show_priv->state)) {
+-		ret = PTR_ERR(show_priv->state);
+-		goto free_priv;
++		return PTR_ERR(show_priv->state);
+ 	}
+ 
+ 	show_priv->dev = dev;
+ 
+ 	ret = single_open(file, msm_gpu_show, show_priv);
+ 	if (ret)
+-		goto free_priv;
++		return ret;
+ 
+-	return 0;
++	retain_and_null_ptr(show_priv);
+ 
+-free_priv:
+-	kfree(show_priv);
+-	return ret;
++	return 0;
  }
+ 
+ static const struct file_operations msm_gpu_fops = {
 -- 
 2.56.0
 
