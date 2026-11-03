@@ -1,104 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793744739;
-	b=S0mLpIq+gwav7gL5LO1lvjrVKRjq3/JnYzp84wBvGljcFGzOWCGpfyakMFPUvIpA7QPG
-	 zNfKuXX8FW6/sOSIRqsz8YoVD/dOL27WSZE9q88GNXXpf1UCn8xj2ddTimvi4WydE+kFa
-	 xdQa8gVqjVx2MoimGNJcgEMhb0M4jmG90JDGIho2q8wLzj57J2LlKevOlqoR2JCfnAfVT
-	 8+y0R1yImluMYBXvNJ6ZESsT/ItruaBjG7cypyzanpeFn6vRTh9tYUgqfH+obt2RTTAsa
-	 wHtnGkPgHc+psEmdd/jP+37PRkx71PRyFnBAMGW1+Hrnv0K1hQc4Erhqa82au2k7Eew==
+	t=1793744980;
+	b=xWUQ4+b2HO8R1eXe42qOt9jlq32yjjG4lG7471nY352ZmfXorQQLR293PwSUZANwgt/p
+	 WFUjNJlefgVPrgOWG37je5wO+rqWRTPLHkjP3czqLSI67cw/X2r6kzCPkOXKO0eby00nj
+	 HJbEw22mjZB771/0oLZnbHZE4huecP582Mvkf7pHpfQ76uCj6tr+QSKrhtsfTo/HNq/fq
+	 y3/AQX8gu/ufrxpk8SGsCmLGxOhMgalDtevqTT+3JFyO3fFc5aid4DBxavxGBKEOMfqK6
+	 EjSJzL8J3XT/yj2ae7K/GRqtVC5gfc94lv8PxqfmppU4nW3E+uArgaxlIn9eolsEwZg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793744739;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793744980;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:Autocrypt:
 	 Content-Type:User-Agent:MIME-Version;
-	bh=+X64KwJw/bpP3//ir0uig2ntRpVFdFSz8TkUlALC1z0=;
-	b=ZI8cq05RlK/zLW7Hlwhtc6B0WB76lupHPs87UnGHwA41rLXyfoAprY2Z11uWQVMfGaQl
-	 CBlzztPaFeCywy+4B+OBnqkksV7TiSBRfsgO4O/3JUKPoCT6pqdf8rAyCCRl1Wko3LTJ1
-	 yJ/jLcvaHK6O7whi6CgeRnrLK0hL84O4r2zKE0E4FPzQ6hEcH/pREkjd46hlls+gmyqRP
-	 9O/jN0HJ00XTi1wtFiLrJ4OdBGFkPfuhQF5yyGWXJs9NC2yLHyxkU/BhleFXAG9kQVKlL
-	 y7A/CqRCLbhSs3j/UGztVakaiNci9abrK4ymqt+5akjDHKObuqkPor5oXpuMKtbw65A==
+	bh=IHoHcKx6mBDnMZc4i5vRaDiGlQVTMQ8r4RGlyDdnzgw=;
+	b=3r5XijtMbetQyBXpp7dz9BrE3zz380+ExBheF1HEbAAWTZKAPwdPzltmByL7GcFaY5p/
+	 NmqdJlpxAeORe8ro2dwPIC/SSb0r7Csauq8Z1dskQQFisGyu3oz8e3kVFSL+e5RZJ6EkR
+	 5LfsoywSuDunB+yLBzQ1JoshRfBSgb4O51fO0OM15Z79IvgBnhx8tngte+AFGQ/NNVB3J
+	 yl3rsrVcvBFoQ8T9Jk9zPRWXbz4w7xcv8niNPhq97DuFthPXlwloe269MTeslmAb7obaL
+	 dr0CtgtgglHy1hsMFsGRwo6nfrgWXS0Iqd6xJE5k8uwuLN5nkhQ/Ee19KyUxIZF5SdA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=ndufresne.ca;
 	spf=pass smtp.mailfrom=ndufresne.ca;
-	dkim=pass header.d=ndufresne-ca.20260707.gappssmtp.com header.i=@ndufresne-ca.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=ocmWFliD;
-	arc=none smtp.remote-ip=209.85.222.177
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+	dkim=pass header.d=ndufresne-ca.20260707.gappssmtp.com header.i=@ndufresne-ca.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b="gqC026/b";
+	arc=none smtp.remote-ip=209.85.222.170
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B28A0606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 22:25:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B28A0606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6F49606A31B
+	for <linux-arm-msm@vger.kernel.org>; Tue,  3 Nov 2026 22:29:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E6F49606A31B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ndufresne.ca
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ndufresne.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ndufresne-ca.20260707.gappssmtp.com header.i=@ndufresne-ca.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=ocmWFliD
-Received: by mail-qk1-f177.google.com with SMTP id af79cd13be357-93f20b304c0so11942785a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 14:25:38 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=ndufresne-ca.20260707.gappssmtp.com header.i=@ndufresne-ca.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=gqC026/b
+Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-945ae2daa68so147818785a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 14:29:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ndufresne-ca.20260707.gappssmtp.com; s=20260707; t=1793744738; x=1794349538; darn=vger.kernel.org;
+        d=ndufresne-ca.20260707.gappssmtp.com; s=20260707; t=1793744979; x=1794349779; darn=vger.kernel.org;
         h=mime-version:user-agent:content-type:autocrypt:references
          :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=+X64KwJw/bpP3//ir0uig2ntRpVFdFSz8TkUlALC1z0=;
-        b=ocmWFliDthhaus2XMWWLT5QVxPiVdloQxHrQd/6EOrEzkz18T1yKB4UKTcDgBYbuDk
-         iduxKYUqDEwa5uRTP8Nd0DedS0w4f+BfQ4k4CI+vkaxyRp8jRN6qdDM4FQNuM+HQiVw4
-         xSRDY1a3tT4+rUZAEeESyBJhW/7gXzKs9mAU+vQWA1lKDL82QW7sADAjAlNQi01PHOCT
-         /tFVz7MBI6UhL7BHKGo/O46ed0q1pS9yR8LzpZAcVK36TE5EcqOYkivclQ5o+SgCUNGT
-         s7qqSz0fAVBpTH1icIAV0zRO9yNvuGhudCyaThSeNA/nZcQuAqOytUEo9ccXbUAVUB/P
-         yaxQ==
+        bh=IHoHcKx6mBDnMZc4i5vRaDiGlQVTMQ8r4RGlyDdnzgw=;
+        b=gqC026/bzunkmPLRDkDSIuzQXWG56nIq9g5QM2iqFdNRiX/ld73Uhr+uAgnFA/Ou3b
+         bsXdkCchx4azDe2dyU/edJgKXNeE1W81atwgWXeEZKN20Hi9QwRSTw70RVKn3TfIpmpc
+         WrJYW07ixGKFg3ncE2vvfX9Xo9hCSfRaCmfHkyg7CXBw+PNsvad0Yw+ubUCiOCg7wVnM
+         6qYAUpkwC1LW2S/EYv4i4vv5WCItSRzOfbQWrKvvgUIBy0bII20vMtqswvAgrE9GcM71
+         eOFSHiRHVrlXn/eA7UjMwBbHF3oc8op5kNo88UfjQCz0uJhnqaAQcTZvSnE9wvYFcVYW
+         CHtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793744738; x=1794349538;
+        d=1e100.net; s=20260707; t=1793744979; x=1794349779;
         h=mime-version:user-agent:content-type:autocrypt:references
          :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=+X64KwJw/bpP3//ir0uig2ntRpVFdFSz8TkUlALC1z0=;
-        b=qVoNhn1csdkzS8wGkzvHQgWkegB1WBAAOTpl4TNSq1Xz40dp1MQDOXps+bhPvcuVr6
-         T1jor9KPmCFTR7wKCqrq1Xs7P4X2EVLBP8nE02kqPzYsleG05UMMo2Lf0DehVq8zhZd0
-         vMLTkeTO/3Wc4Swe+ac/7DvQ7zGcvDyKzzNzmmRxN+h+uF6u4JurhYNJO676+4ddqhNU
-         wkZtOGOPGBfpKNeD4jhfQ6pti8GbRn0JYFWHoTDM3NkaeEVoA8QQAR9ogsSNR2nSGaEr
-         8enu9xIe/P7Ol6bfmX3lyC7+ynRdRwHlQ30kSuwOGM6wT3tGW+X3FKIWDZNHonzaDRyy
-         5naA==
-X-Forwarded-Encrypted: i=1; AKwUvBzSdLsviCK0E/jrfxVzDkP+aLuvm1FmGXrEVfKqgr5mIQeeYJ1RBAUMdIZngzujfv9DcH6NY/vzVQN3/uI0@vger.kernel.org
-X-Gm-Message-State: APuU4Z+JGw5XdYi46x1k76IOsqVY3K8frfZIDlgp/Ih1NA0IB3OwWx6K
-	5YAgeQwlJ2++XAarjWAcFjtrqVduEHEvH493hepDUxJuEZL6YOUXw2XebIpL3MpJumw=
-X-Gm-Gg: AYBFou3Z1BiDuRD8ipgFI6bmPHl+D8uh4qe7QHEg4hiqRYX9BraF1oWWcdPJyPGxdk1
-	cvIhzcWQcU7yTetaHbE8smAjteXUCKFZbXTRH2c7WccqLWpLQY6ADsaxq89kGw+UJGPDyR6UivI
-	2LcUIHTJEaxWubs/ggrVju8Lze4TtUR7esSMQauDULs9mRtwNc+M9kFVJ78OULoDDwVw5KK8e3V
-	lkr1RdchOXyZOHUfcfxyR8wLpSU9ystRrUxzz7iL0oke/piPgksugfkrv9/Kk8IzolqAkxKR5C/
-	zQnUCEwEuYVvnRSUf4dnJDs9BxywXKiiNCXQRnyEhrYLuGLazeIb+UcKIC3jV4gzxDtUiUBokyn
-	6hK+mmCrie2vLx6HrVJDaf4hyZu5QhDshAcoGHfYfqobsQu6qAvCm09ht0JIpohcgLRIu00HbSW
-	j3iHZA4kA01wwZOo67o4wZgxNUS8RlHRWLLpN2SWfVY7EPNZZTIh+eZx6cfi25J/VUhUpw0Kafc
-	CJEIkV21YdOIujBvVxOEyM/ps40na7aBDYsf6ms3ACTg46H6sShTJ/P/g55mkmZ8wxYrRJLQrYP
-	Qc3zNkntGFdtjXtnG07EENDYqjCwromscvhqPIhNKbsAOu8fAZ3M0Q+7Lec2izrEUNtuTTHvXkK
-	x
-X-Received: by 2002:a05:620a:4001:b0:93f:4f87:4f5e with SMTP id af79cd13be357-9442175bcecmr2589895785a.72.1793744737675;
-        Tue, 03 Nov 2026 14:25:37 -0800 (PST)
+        bh=IHoHcKx6mBDnMZc4i5vRaDiGlQVTMQ8r4RGlyDdnzgw=;
+        b=R0n2md0LVFdxOiq2EW1YhHjsdPtTY8OdVwj4bMcbTO1oWf+wAdaKX5KOyke1A15cox
+         oSIK/jc+djpxW5xY3/hcXlZEBoGUy+q4aN59o43erhPFP0UcxmQVt50V5BVV86sdG0f4
+         KopWPIB2/N8Ot32XKBOaJPvEQQ2ZVmms6gZpPk4yUMridDb1Npjk5dfVoLkYQptsOGv1
+         s9isL6eJTuWSQf5bAPqcVk9806rdYyvnA6/5C5GOYP7ES+DvycNgnhhu4XkWidvTu9E1
+         UjDQnlVZsj0zHAy6rBT3T6IOGO4RCWRD7bzZgZ/gNugYPS2pK/V2r0vAZdGlEZDX33cI
+         G+bQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxjlwWX3+tcuRy7YuAeh/inNWgVbBqgRjlxT22YR49h6dWWWHg7Gu+IC/kRKSZHmpWxpttlps6BVa1HkzvY@vger.kernel.org
+X-Gm-Message-State: APuU4Z/hDukulApCZOJMARBvdLx4VGPVBSpFyDD8oXcQL32muEk3co97
+	7Bzw26R1HKgAByCdBgt9mOqdvLI4bb5TdurY+P3ebVc0aqS0BWU10ZdqFce1+abYvvc=
+X-Gm-Gg: AYBFou1JrD7tYSS+wdAnEJiauelRkxNJRSM7yagP+kIQo33haqg69csQo4ptCXgOMfz
+	CqfgBQwCHTc0TyMXlaXdrSuUf8ekVpVl0q/lB8OVmShh0f3eCOg2n1ktr3NdcEntidJDTa7qRVC
+	W0k10dL1ntvREsyyfDM14+Yg6NEItiYH8juvEzI33v45PBTWnfTXiSNLvN/tYuyKyoP9Q2mjTTb
+	DQbhqTvebWjCb/Hd0LItqNBGsHs6fVtsQYNA2ots1B2hIalu+kmTJbx6FwMpA1PttxGF6QqFaCZ
+	l21m72s4gogI3SbxhX0/iEhdnZo2/GTJ49EV8oC6x59l8QXLEHgILHVjiK+PXrxDBMwkwtymzVb
+	8JJuMScBON5QLccPMZKW7ZLK5NBrO5MCrNWQUYbweK7En/ig6cpqpC5pSl3k2xn4/m46kEctqm2
+	swglPcgdeyl+AK+GYtMy43q4C2v34HiqR5qCzPD1M33ush+SoxEsTF87FAuXmO3dZB0y7a+QWgT
+	gcBY16Q1QWPAIahc7Bg/1YZhqQEp/WD0lhWzG14O5zOd+7mtVUKXiXyla2nAV59GTIp+I9uIhr7
+	zbdUE4Y6a4FiXWhdAx4QVbR17vOmVGHflZf3GJNSQ3Fu2o06mBtjFuo=
+X-Received: by 2002:a05:620a:2986:b0:93f:eed:ea4f with SMTP id af79cd13be357-9442175c2a3mr2150152485a.41.1793744978875;
+        Tue, 03 Nov 2026 14:29:38 -0800 (PST)
 Received: from ?IPv6:2606:6d00:11:bf53::5ac? ([2606:6d00:11:bf53::5ac])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-945d48648e3sm41659685a.35.2026.11.03.14.25.36
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-945d4852ba3sm41272785a.31.2026.11.03.14.29.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 14:25:37 -0800 (PST)
-Message-ID: <c73bb34ecd6f8b096023bfe6f5b19fd9787ec003.camel@ndufresne.ca>
-Subject: Re: [PATCH 5/5] media: iris: Recycle decoder buffers for
- non-display pictures
+        Tue, 03 Nov 2026 14:29:38 -0800 (PST)
+Message-ID: <6d16d639267c69344623f80ea91817308ef4f7d0.camel@ndufresne.ca>
+Subject: Re: [PATCH 0/5] media: iris: HFI gen2 features and fixes for VA-API
 From: Nicolas Dufresne <nicolas@ndufresne.ca>
-To: Xilin Wu <sophon@radxa.com>, Vikash Garodia	
- <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal	
- <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar
- <abhinav.kumar@linux.dev>,  Bryan O'Donoghue	 <bod@kernel.org>, Mauro
- Carvalho Chehab <mchehab@kernel.org>, Hans Verkuil	 <hverkuil@kernel.org>
+To: Bryan O'Donoghue <bod@kernel.org>, Xilin Wu <sophon@radxa.com>, Vikash
+ Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal
+ <dikshita.agarwal@oss.qualcomm.com>,  Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Mauro Carvalho Chehab <mchehab@kernel.org>, Hans
+ Verkuil	 <hverkuil@kernel.org>
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
 	linux-kernel@vger.kernel.org, Bryan O'Donoghue
  <bryan.odonoghue@linaro.org>, 	dragon@radxa.com, Chris Obbard
  <chris.obbard@oss.qualcomm.com>, Deepak Sikri	 <sikrid@qti.qualcomm.com>,
  Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,  Loic Minier
  <loic.minier@oss.qualcomm.com>, Jason Pettit <jason.pettit@oss.qualcomm.com>
-Date: Tue, 03 Nov 2026 17:25:35 -0500
-In-Reply-To: <20261029-iris-va-fixes-v1-5-44a2783f782b@radxa.com>
-References: <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
-	 <20261029-iris-va-fixes-v1-5-44a2783f782b@radxa.com>
+Date: Tue, 03 Nov 2026 17:29:36 -0500
+In-Reply-To: <e0911e13-65d5-45df-9e31-7f99e5600a50@kernel.org>
+References: 
+	<2a2gB7bYZ9q2UTG-mF855lyJvWdn3Ba6jqrFTEVO1EAjAIXMh7_-65v4XlrZmljww-5ozkNYL2-lWKTIH4oqOw==@protonmail.internalid>
+	 <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
+	 <e0911e13-65d5-45df-9e31-7f99e5600a50@kernel.org>
 Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
  keydata=mDMEaCN2ixYJKwYBBAHaRw8BAQdAM0EHepTful3JOIzcPv6ekHOenE1u0vDG1gdHFrChD
  /e0J05pY29sYXMgRHVmcmVzbmUgPG5pY29sYXNAbmR1ZnJlc25lLmNhPoicBBMWCgBEAhsDBQsJCA
@@ -113,7 +113,7 @@ Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
  ECHgcCF4AACgkQ2UGUUSlgcvRObgD/YnQjfi4+L8f4fI7p1pPMTwRTcaRdy6aqkKEmKsCArzQBAK8
  bRLv9QjuqsE6oQZra/RB4widZPvphs78H0P6NmpIJ
 Content-Type: multipart/signed; micalg="pgp-sha512";
-	protocol="application/pgp-signature"; boundary="=-kw5zuPNBaTwG5mlMULsg"
+	protocol="application/pgp-signature"; boundary="=-Fe0eDLBPpEZmvHAInadr"
 User-Agent: Evolution 3.60.2 (3.60.2-2.fc44) 
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -126,182 +126,54 @@ Precedence: list
 MIME-Version: 1.0
 
 
---=-kw5zuPNBaTwG5mlMULsg
+--=-Fe0eDLBPpEZmvHAInadr
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Le jeudi 29 octobre 2026 =C3=A0 11:58 +0800, Xilin Wu a =C3=A9crit=C2=A0:
-> HFI gen2 reports non-display pictures with HFI_GEN2_PICTURE_NOSHOW, but
-> Iris returns them as errors. For AV1, hidden and displayed pictures can
-> share a timestamp, so GStreamer's v4l2av1dec drops the pending frame and
-> loses the displayed picture.
+Le mardi 03 novembre 2026 =C3=A0 23:00 +0100, Bryan O'Donoghue a =C3=A9crit=
+=C2=A0:
+> On 29/10/2026 04:58, Xilin Wu wrote:
+> > This series adds features and fixes to Iris HFI gen2 to support
+> > qcom-va-driver [1], a userspace VA-API backend for the V4L2 stateful co=
+dec
+> > interface.
+> >=20
+> > It enables decode-order output and larger CAPTURE buffer pools for VA-A=
+PI
+> > clients, and exposes encoder deblocking controls. It also fixes
+> > error-buffer timestamps and handling of non-display AV1 and VP9 picture=
+s,
+> > which affect both VA-API and direct V4L2 clients.
+> >=20
+> > [1]https://github.com/radxa-pkg/qcom-va-driver
 >=20
-> Recycle successful non-display buffers within the driver instead of
-> returning them to userspace as errors. This also fixes VP9 streams using
-> hidden alt-ref frames.
+> Is this code based on https://github.com/intel/libva and is there a=20
+> route to getting it into the upstream of that repository ?
 
-This change is expected to improve conformance, even though you still can't
-display multiple time the same reference in V4L2 stateful. Can you run flus=
-ter
-and share any conformance test that failed before and succeed today?
+libva is the runtime, qcom-va-driver is a driver, so that won't happen. Als=
+o,
+qcom-va-drivers does all sort of guessing heuristic, bitstream crafting and=
+ the
+readme show that it cost as much as 15% in throuput performance. Let's be
+honest, this is a bit of hack, not really a solution. A proper stateless
+firmware and driver would do a way better job and reduce complexity instead=
+ of
+increasing it. The provided patches though seems to all have merit, matchin=
+g
+feature with venus, fixing bugs. A bit of spec work would not hurt though.
 
 Nicolas
 
->=20
-> Fixes: ac72ad9deafa ("media: iris: Add handling for no show frames")
-> Signed-off-by: Xilin Wu <sophon@radxa.com>
-> ---
->  drivers/media/platform/qcom/iris/iris_hfi_gen2.h   |  2 +
->  .../platform/qcom/iris/iris_hfi_gen2_command.c     | 11 ++++-
->  .../platform/qcom/iris/iris_hfi_gen2_response.c    | 47 ++++++++++++++++=
-++++--
->  3 files changed, 55 insertions(+), 5 deletions(-)
->=20
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.h b/drivers/m=
-edia/platform/qcom/iris/iris_hfi_gen2.h
-> index 21ab58e0aa84..79aac2d4e500 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.h
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.h
-> @@ -20,6 +20,7 @@ struct iris_core;
->   * @packet: HFI packet
->   * @ipsc_properties_set: boolean to set ipsc properties to fw
->   * @opsc_properties_set: boolean to set opsc properties to fw
-> + * @output_stopping: capture STOP command is awaiting its response
->   * @hfi_frame_info: structure of frame info
->   * @src_subcr_params: subscription params to fw on input port
->   * @dst_subcr_params: subscription params to fw on output port
-> @@ -29,6 +30,7 @@ struct iris_inst_hfi_gen2 {
->  	struct iris_hfi_header		*packet;
->  	bool				ipsc_properties_set;
->  	bool				opsc_properties_set;
-> +	bool				output_stopping;
->  	struct iris_hfi_frame_info	hfi_frame_info;
->  	struct hfi_subscription_params	src_subcr_params;
->  	struct hfi_subscription_params	dst_subcr_params;
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c b/d=
-rivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
-> index a285e6fc8728..77ea153bf2d7 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
-> @@ -1172,7 +1172,16 @@ static int iris_hfi_gen2_session_stop(struct iris_=
-inst *inst, u32 plane)
->  	if (ret)
->  		return ret;
-> =20
-> -	return iris_wait_for_session_response(inst, false);
-> +	/* The response wait drops inst->lock, allowing buffers to be returned.=
- */
-> +	if (plane =3D=3D V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
-> +		inst_hfi_gen2->output_stopping =3D true;
-> +
-> +	ret =3D iris_wait_for_session_response(inst, false);
-> +
-> +	if (plane =3D=3D V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
-> +		inst_hfi_gen2->output_stopping =3D false;
-> +
-> +	return ret;
->  }
-> =20
->  static int iris_hfi_gen2_session_pause(struct iris_inst *inst, u32 plane=
-)
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/=
-drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> index f0782c4b1e6e..a545410d1e8d 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> @@ -101,9 +101,7 @@ static int iris_hfi_gen2_get_driver_buffer_flags(stru=
-ct iris_inst *inst, u32 hfi
->  		HFI_GEN2_PICTURE_CRA | HFI_GEN2_PICTURE_BLA;
->  	u32 driver_flags =3D 0;
-> =20
-> -	if (inst_hfi_gen2->hfi_frame_info.picture_type & HFI_GEN2_PICTURE_NOSHO=
-W)
-> -		driver_flags |=3D V4L2_BUF_FLAG_ERROR;
-> -	else if (inst_hfi_gen2->hfi_frame_info.picture_type & keyframe)
-> +	if (inst_hfi_gen2->hfi_frame_info.picture_type & keyframe)
->  		driver_flags |=3D V4L2_BUF_FLAG_KEYFRAME;
->  	else if (inst_hfi_gen2->hfi_frame_info.picture_type & HFI_GEN2_PICTURE_=
-P)
->  		driver_flags |=3D V4L2_BUF_FLAG_PFRAME;
-> @@ -345,9 +343,40 @@ static int iris_hfi_gen2_handle_input_buffer(struct =
-iris_inst *inst,
->  	return 0;
->  }
-> =20
-> +static int iris_hfi_gen2_requeue_output_buffer(struct iris_inst *inst,
-> +					       struct iris_buffer *buf)
-> +{
-> +	struct iris_inst_hfi_gen2 *inst_hfi_gen2 =3D to_iris_inst_hfi_gen2(inst=
-);
-> +	u64 timestamp =3D buf->timestamp;
-> +	int ret;
-> +
-> +	buf->data_size =3D 0;
-> +	buf->timestamp =3D 0;
-> +	buf->flags =3D 0;
-> +	buf->attr &=3D ~BUF_ATTR_DEQUEUED;
-> +	buf->attr |=3D BUF_ATTR_DEFERRED;
-> +
-> +	/* Leave stopped buffers for streamoff cleanup or the next streamon. */
-> +	if (inst_hfi_gen2->output_stopping ||
-> +	    (inst->state !=3D IRIS_INST_STREAMING &&
-> +	     inst->state !=3D IRIS_INST_OUTPUT_STREAMING))
-> +		return 0;
-> +
-> +	ret =3D iris_queue_buffer(inst, buf);
-> +	if (ret) {
-> +		buf->attr &=3D ~BUF_ATTR_DEFERRED;
-> +		buf->attr |=3D BUF_ATTR_DEQUEUED;
-> +		buf->flags =3D V4L2_BUF_FLAG_ERROR;
-> +		buf->timestamp =3D timestamp;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->  static int iris_hfi_gen2_handle_output_buffer(struct iris_inst *inst,
->  					      struct iris_hfi_buffer *hfi_buffer)
->  {
-> +	struct iris_inst_hfi_gen2 *inst_hfi_gen2 =3D to_iris_inst_hfi_gen2(inst=
-);
->  	struct v4l2_m2m_ctx *m2m_ctx =3D inst->m2m_ctx;
->  	struct v4l2_m2m_buffer *m2m_buffer, *n;
->  	struct iris_buffer *buf;
-> @@ -390,8 +419,18 @@ static int iris_hfi_gen2_handle_output_buffer(struct=
- iris_inst *inst,
-> =20
->  	buf->flags =3D iris_hfi_gen2_get_driver_buffer_flags(inst, hfi_buffer->=
-flags);
-> =20
-> +	if (inst->domain =3D=3D DECODER &&
-> +	    inst_hfi_gen2->hfi_frame_info.picture_type & HFI_GEN2_PICTURE_NOSHO=
-W) {
-> +		/* A hidden reference picture is neither a display frame nor an error.=
- */
-> +		buf->data_size =3D 0;
-> +		if (inst->state =3D=3D IRIS_INST_ERROR)
-> +			buf->flags |=3D V4L2_BUF_FLAG_ERROR;
-> +		if (!(buf->flags & (V4L2_BUF_FLAG_ERROR | V4L2_BUF_FLAG_LAST)))
-> +			return iris_hfi_gen2_requeue_output_buffer(inst, buf);
-> +	}
-> +
->  	if (!buf->data_size && inst->state =3D=3D IRIS_INST_STREAMING &&
-> -	    !(hfi_buffer->flags & HFI_BUF_FW_FLAG_LAST)) {
-> +	    !(buf->flags & V4L2_BUF_FLAG_LAST)) {
->  		buf->flags |=3D V4L2_BUF_FLAG_ERROR;
->  	}
-> =20
-
---=-kw5zuPNBaTwG5mlMULsg
+--=-Fe0eDLBPpEZmvHAInadr
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaupfXwAKCRDZQZRRKWBy
-9G1WAP4upESswG3B+8qzt7hJnFaIfvEhMFsyEB4fyJ77ElscJgD8Cck4jlfH0r75
-AKOv2ZnjwczyDLOAUcF4xYhtDOYeBAk=
-=BbQV
+iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaupgUAAKCRDZQZRRKWBy
+9CMJAP4wwoUZlZek+TVR6fbqjnUa86Qg/f+W04lCKj93YBzQdAD5AZFOH9r1I1ZU
+9po/9hzhqZIt5G5ASP6uuTikA9wL0A8=
+=GQ+b
 -----END PGP SIGNATURE-----
 
---=-kw5zuPNBaTwG5mlMULsg--
+--=-Fe0eDLBPpEZmvHAInadr--
