@@ -1,124 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793800675;
-	b=oiYK2w5tad0PKIA/vS9uTj214yCBlbKWlrkiThVLvFXWRrjJzWEzOuBVxZGmMRt/bPwd
-	 4Sd3r2tB0tjgCAzRkhGo2RY/IG653GQV448NnEv1R7hnUmr8cyNl+t06L8R/gqbSTyuRf
-	 sElK3F7e0kEhAp0Y+eIU1XzpuNQuIAVDzKWIHYbI2CcGgC4ZyrGwZkVpL3KnTBwj/RJ6X
-	 YTzFepbPJEnY1pur6KoKjzSa2/L0VVwCRbXUiBzgpe+k5R8Gc8lMstsR8Wa4jlREpBXQt
-	 jHu9H0NyIq8SHtcvxwxHBcPE71CdB/FED4E39UcgvV60OjehO2LnuWM2lLDxpBDAlwQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793800675;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=bsmq8I157M+eH5CTouHOFEo3ct+wpK0ZTD/DNHgwyr8=;
-	b=VK/uaQRGdv9okMDLBeaLJfByECs0/daEWRW4xmz71zYcYxTsBsxnKp0ywE8/n3/m7CLn
-	 oCBz9bGMD9hoAzuT/ggR3QECvScZ9M9rrXQ177nt+rBBNK5jTsCou6xChUPlUBYhgrwCm
-	 zCyrgEfZCCBO+GDYZb2OtYJQViuaoQIXFTqPEig+M0Yqo4iV9YuZ2TJEwxzY9PS+5nfVR
-	 9k6xyDowt1fkkE0v0yp44JzUOawlypXSF08iyQyWYi89lXW1ZyVbUA2pqRu88kI6lKQE+
-	 ncCg5erq7fEIqG3D5FjcC+NkCYp+RIdHO+x7lZTDtyI/F8JYLVtLYyqg4gbdfe+eB7g==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ouSU9uHv;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Kl5XKwUe;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793800693;
+	b=IdhWxPfLqWSzznZPQ86w3ehCdYXtM14RTX9FHxADvcsDNKysu9/NfYPs8X7ThQNf6LeY
+	 yeA4mDA/p+oaW2Z4h1/u6M3s69MZ+Uh1J6Ag9ESnUR65D2kual+n21ZfDdtc6BdWEUx6x
+	 4Y2upgxzZd9RC1bd8Tp2gsXHuZVhtnVRLI7U91HMTJXzl13pn0JAzLxx8IYvXS/he9t/1
+	 mdIsAl85x2C2VSxfwXRpkAU2maNRWhk8Qu7lk+gfnijpBChUzBno9/Zbm/0D7RBkL85r2
+	 FiSBFkrYiI0suMENmVtmn9I5kYB0ZxOEPE89ykDX4NWk8YGMhDMkk2vCnDtWgEFOL9Q==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793800693;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=MVb4xfaJpwASIoo3kcJhurqFBOJZHmuInHRi0LnZvsM=;
+	b=OFd2kcCcXEtkF8vjrr05ftGSLnxGvqtndQtNyuUIH+qV0lne4gp+vf9WUniMv873/Sq9
+	 2kehoCDdcDea20s0D1UviX8KjQfRP22SKUjphhrtHNppXbBYiRWMzTUn4hY0qDBbwG+da
+	 jB2paD71qEq2j03fXMudWaVL9acEB9Zy77wAzizm3NQCuaUSBIkYx9iWvcaerRqFdxjSw
+	 SqniuH2NmAGZRgI2xNMP0ftYNu5Xv25YDQ34J1KS5qnndYvWZZ+z+OtrBJdErV8tFG4DZ
+	 jrRKvhUsKU1APil5a2d040vniDWqwn/CbF1/hHWjXlu61xtTs+aRJiyy4LNc/XlvwcA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="iOcpw/0d";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD34A606A329
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 13:57:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AD34A606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1208B606A31B;
+	Wed,  4 Nov 2026 13:58:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ouSU9uHv;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Kl5XKwUe
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A4BaGIg2310652
-	for <linux-arm-msm@vger.kernel.org>; Wed, 4 Nov 2026 13:57:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bsmq8I157M+eH5CTouHOFEo3ct+wpK0ZTD/DNHgwyr8=; b=ouSU9uHvNZjQS1Jr
-	sQUCLJFq6u+PlZrMTmWeVKcsBBmt5x2KuhKwsToZG6Wt4Cq/tzQNdKH9pSb/2t3k
-	//eo32LQ7PnKeMo5ujtTz+NmICBt/b3mCmC4h8KYd62dY7xQHhozPjvG3/zPsd3c
-	hxG7jW0kCWhNLLRRQ8ifJxMmnBn+K9KgmNffr48IHrciMRQCNWmOCoB+rqsbXI2y
-	ZKriq66QRAwIcEUIHiDOJf8pZtn/qPJ5Innx5hQOn7Tz1DPJEobd6Z/zr6IawIhl
-	M+GOzVeNdpPhYCA7v2oYGhu/VwoFx+YEqwCnEDAQ7UjUGSkgf4Ir2EWInwWtJcE5
-	8KOSOQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqn8mv51v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 13:57:53 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb7f9bb86so195769985a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 05:57:53 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793800673; cv=none;
-        d=google.com; s=arc-20260327;
-        b=CBjXVwUUAgpF4NxqikwApuDDgTFmB9L9zryQlEtyH4nR9fyHHvbPmSy5FfrTzJr4//
-         1sD7zJ5G+gSNOYF5BKf1/VTcjFCRZJ9A37HGHgOfoudyLvbjKQ+9Uz2VZsQ2SfIh2W+U
-         IAoAusXNVX6z/NdCKUqfHhyH9DEPEAliYCV25KXY0U02va//U5RGf2cJAHqm3ZZn6eMG
-         VnTJ+3V7qvFYElbSqRCFfdTV+uWL08EipGNiW5tkbBPDz14GLIHSHy48caMfXhrJXtxK
-         ZN8trrl/gz1D1DGFDXwAWz8iAU88zZoJPFPPnKEKmx7woi1T3tVnDcvM5f4je2RNFsdR
-         esOQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=bsmq8I157M+eH5CTouHOFEo3ct+wpK0ZTD/DNHgwyr8=;
-        fh=dCZRj2KF7lhNPXKqGH6jTQaMaAi5ksYNwTP/lJbhWbs=;
-        b=AvAWKXzzVKwV+2i3wttxWS3sdDSgAFyrXI1ihIEXN24GUsqnpPuj2OK9cakJ7O/MbI
-         kuSG2h1ee0LFMlIw8XBPbd4dpOQiGddRi4ZZun8iAmEH4DiL4t+0RI/+PLmtR+8eFXZD
-         hiXx6IrpG7CWx2uQ4JyxULXLwb0XJYe024IPRAPPL6vepea4omFktTRpf1uiuP1B/4hK
-         RdrKLBkRXv2H0dw8iu6d/3Mqla2zu5t1c4cTUoWHlUHBNpjOVZkm6xUzEgm/p+uBEJnF
-         ovWQv4FVY8RrAOTeIt6zioWI+BBUo9gmkmq//lFFRgQZ+J1RqXMGOf+30Ako0xXd2uvm
-         SbHg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793800673; x=1794405473; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bsmq8I157M+eH5CTouHOFEo3ct+wpK0ZTD/DNHgwyr8=;
-        b=Kl5XKwUeAgK4qYtKwpTiCjS3fGGMAyYG0PTFruvZka7Kt0rw0anIgdV7tVeUk1a+Eb
-         fEhMMypBubv+nbeMFBarsNJnnmhpYauv0clVN8KreitxBMrdXPFg/1QODE5QqgiTJrmi
-         ImzDrogK9RyWDgSmMvIxQWC00kyfnsR3SHz4XyQACEPcJAT08C9XESFBxfn2403vAqH2
-         DK4kRDeGN2h4N00EupZ3Ed8RM+7UmdjYuVAfmMSJa6J+6kyc/Kz8CbFltEnJZXLhsO4i
-         K/nXhrgkuLP4EyaCv2OQMzWW2BODhPyS5SINvVcVxkgWMpuIZF+eguE28VophWqSae2j
-         cNbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793800673; x=1794405473;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bsmq8I157M+eH5CTouHOFEo3ct+wpK0ZTD/DNHgwyr8=;
-        b=cp7rmOGI8ISsDR/5i50ldbc3lMMVQEFTfFMf5YjFCvGOonBivXWA5kzUuo69+4iads
-         oWx07cjDHpJAvx6HxhoRLw79EOwlOTZxcn2La0fdob8+JWB1w20n3f1wg7HRuR4JLZZo
-         /KvqmQuejhpZWKzrZ7qGvgmlACbITFiZSZmOEuec1jGIOM4a5L9T8AOxoysRSag1El5Y
-         BchDwJgW9uc7G7kKaYgM5qwcRkPK+kObNUGzj+saPR66pvQsa380BFbEQmjAvDhwceZG
-         FNHJXWHD+x3VLV2hYrdMrzO7E4tE+WrHxRYnDh0/DObo4mCr4I9pCER3TWO5VDUKfjCb
-         LHUQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz8hSmPkXfye3L5fDf1R4iYdxvNDZRMCwYzXM3w215V7fk4qm0rdUnJt7t7yBdKL4OMeW40b+9Nviw2rLNW@vger.kernel.org
-X-Gm-Message-State: APuU4Z+h0XoyRiqjX7RkEvV+wnQ83psjz7PoB8rLlfkWKSQ3L5gRLUvc
-	jFiQMdEJ60ug1CYRlACxZrfxcCjYysWIKHpw01r2OcHN/mdARATf8YKWms2//JCTG+LOIR8llAt
-	v3fsPNpa0xu4dvW30PzjLFjCWpThhqMIsKTk+qqyvMi77vYMK0kOItl9aFdwKUCy2CKk35pVtrA
-	uHzQRZM1OESfZvoaYxdCm8Dr+uOf2hP2TybyGlvdktTD4=
-X-Gm-Gg: AYBFou13/1JAY7rKfu7RyQGr/geqcvfYLMScF0WgatItFvFFyP+6vsLce1vppGvWAgT
-	cIj3A0BnQ3d6SVeaARGUa2mGl9Lp+teEix31oWEbbxR9mTCn/FaVpiM9swcEogK+nXlW0ENhb2D
-	tyVC9u3qyF0RiISumrComp6Ur7vDdeNGofsga3OMwHz/hVpFh9lqJLr7sWhwu+FezXrH4ldyi5n
-	zxPUZZzo7gWXT1QK2rXv3piUkxczVR3lejcmrIYy/4okV72ioMybAU7hbQtU9h/ucVB/WeVj30=
-X-Received: by 2002:a05:620a:2a01:b0:93e:c12c:f136 with SMTP id af79cd13be357-94421824e76mr2728033985a.81.1793800672807;
-        Wed, 04 Nov 2026 05:57:52 -0800 (PST)
-X-Received: by 2002:a05:620a:2a01:b0:93e:c12c:f136 with SMTP id
- af79cd13be357-94421824e76mr2728029385a.81.1793800672357; Wed, 04 Nov 2026
- 05:57:52 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iOcpw/0d
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BBB01F00919;
+	Wed,  4 Nov 2026 13:58:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793800692;
+	bh=MVb4xfaJpwASIoo3kcJhurqFBOJZHmuInHRi0LnZvsM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=iOcpw/0dpOwggrkLnLfdRLMAIveL90b8yXI1iYF1Whzpuo2o4uwo0wrTqjcVcxEvF
+	 4OI5azIqfEUSJM2/aTvXK6Puy9cLMTMgk5xvje19dYP8yCVmlgWiQgt/ChVv/95Hfl
+	 8UQckql552xiwQjz496vJ4k3kwlVZZdChOL44VNXB1rNzgXRY1HmLQyEnEUhmNNJkd
+	 gW6jM1i2q+z6X97WkTpnMwO2p8GPc6zNcWV1JG7UCdspIcLwfrwuxdGcVM/Qv6GSLC
+	 V+gadUysf8v+45NbsTY2kZIRvZqCsOHHYEdNhwAtH+QvrCHh38w5S8pJii8v2KKC88
+	 3vmfWWoW9rJyg==
+Date: Wed, 4 Nov 2026 14:58:08 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Anjana Hari <anjana.hari@oss.qualcomm.com>
+Cc: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Adrian Hunter <adrian.hunter@intel.com>, linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Shazad Hussain <shazad.hussain@oss.qualcomm.com>, Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+	Nitin Rawat <nitin.rawat@oss.qualcomm.com>, Ram Gupta <ram.gupta@oss.qualcomm.com>
+Subject: Re: [PATCH 1/2] dt-bindings: mmc: sdhci-msm: Document bindings for
+ Nord SDCC
+Message-ID: <20261104-sticky-perch-from-sirius-d3ebb3@quoll>
+References: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
+ <20261102-sdcc_scmi-v1-1-244dbd893051@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,75 +62,114 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261104130014.681769-1-vladimir.zapolskiy@linaro.org> <4e7f2f2d-7c2c-4dc0-8488-6ba71f4b886b@linaro.org>
-In-Reply-To: <4e7f2f2d-7c2c-4dc0-8488-6ba71f4b886b@linaro.org>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 4 Nov 2026 14:57:40 +0100
-X-Gm-Features: AclHuK-mOnSyKW92DZCotO3CUp-jOUZ6ay6K91i6pN1VBE85x3DMOn0QvWx972Y
-Message-ID: <CAFEp6-0-PzDSgXykYaZzUocLkRyw8e0e4=jMu-aoodsJJ7UC9g@mail.gmail.com>
-Subject: Re: [PATCH] media: qcom: camss: Change CSIPHY device name from "csiX"
- to "csiphyX"
-To: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Frank Li <Frank.Li@oss.nxp.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: gB0FB1RI9l6wltNyXSkK9LGASKRDKdJq
-X-Proofpoint-ORIG-GUID: gB0FB1RI9l6wltNyXSkK9LGASKRDKdJq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA1NSBTYWx0ZWRfX5LxgaQBEPAg3
- gjoGIJ5I0tlp8EzBbHSwFxGmekL2wUwLPb/50C4NjOqh3jR0QN5pog2lohp1KCTNj44nIB1srRp
- PpwqeS/x0Agk9XgjzWzQgnEpLhJiClVty07RIAsY7tAdQiHvZ5YS+/m90/Cl9dhhi38eJ96KHeP
- mpGzDzJLuwPdJdJyk5ruTsaWJQe5FUqPeh97nPg2ks15In4rwVCMbHBEosRqpnFPaQSl4p7Z6h+
- LsmikO6t1qfU1Nh4Wd+GyocG6F6zD30+hJHHS/mX/g2KqPxb8QxK61qPPxWyKgaQ3cfV9LMbhmf
- 8KykWGOiHrBNNezHGcLGYCHHF7w6JfzWB7voOda7U4yVujyyIhC5pdD5tU89fbbFShwUDpTHAVX
- vs9MwIwr6ALWbebbQORjPzBpjOreHA6/ImK16w58zgzdUO6ko+WV13fNwJKlMWGQ66ACSZKaSxA
- Nre2uUWfAOePxmxhq+g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA1NSBTYWx0ZWRfXzKRucBx0hdUu
- PNeTEc2OiT12Y79mkw7X2T0Dno5EYGr67rMRLRNCMlPRPwPZwK2/ej/z+Dwc0YNW0nPGxzlayB4
- jYDQk45q3IXgKkpZFH6URa31I4PsW+M=
-X-Authority-Analysis: v=2.4 cv=HbWB3SE8 c=1 sm=1 tr=0 ts=6aeb39e1 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=KKAkSRfTAAAA:8 a=d51twBc9FUXZIZCEJ00A:9
- a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-04_04,2026-11-03_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040055
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261102-sdcc_scmi-v1-1-244dbd893051@oss.qualcomm.com>
 
-On Wed, Nov 4, 2026 at 2:46=E2=80=AFPM Bryan O'Donoghue
-<bryan.odonoghue@linaro.org> wrote:
->
-> On 04/11/2026 13:00, Vladimir Zapolskiy wrote:
-> > diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers=
-/media/platform/qcom/camss/camss-csiphy.c
-> > index f99eea2ef228..dcc005674d8a 100644
-> > --- a/drivers/media/platform/qcom/camss/camss-csiphy.c
-> > +++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
-> > @@ -839,7 +839,7 @@ int msm_csiphy_subdev_init(struct camss *camss, u8 =
-port)
-> >       csiphy->id =3D res->csiphy.id;
-> >       csiphy->res =3D &res->csiphy;
-> >
-> > -     snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csi%d", csiphy-=
->id);
-> > +     snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csiphy%d", csip=
-hy->id);
-> >
-> >       return 0;
-> >
-> > -- 2.53.0
->
-> I'm 99% sure this is a change that was made @ Frank Li's behest i.e.
-> that csi0 is how most other systems do it (true afair) instead of csiphy0=
-.
+On Mon, Nov 02, 2026 at 07:33:41PM +0530, Anjana Hari wrote:
+> Add Device Tree binding for the Nord SDHCI variant of the Qualcomm
+> sdhci-msm controller, where platform resources are managed by firmware
+> through the SCMI power protocol rather than being directly accessible
+> to Linux.
 
-But we're still using msm_csiphyX as the subdev name, AFAIK. Is
-csiphy->name used anywhere in our case besides internal debug/log
-messages?
+A nit, subject: drop second/last, redundant "bindings". The
+"dt-bindings" prefix is already stating that these are bindings.
+See also:
+https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
+
+> 
+> Unlike existing sdhci-msm variants, this binding does not require
+> clock, interconnect, reset, or regulator properties. Instead, platform
+> resource control is abstracted behind two logical power domains:
+> 
+>   - "power": controls the SDCC rail power state. The kernel requests
+>     power-on and power-off transitions via the runtime PM framework;
+>     these are forwarded to firmware as SCMI power-state messages.
+> 
+>   - "perf": exposes the supported clock frequencies as OPPs populated
+>     dynamically by the SCMI perf domain driver at probe time via the
+>     SCMI performance protocol. The driver selects operating points via
+>     dev_pm_opp_find_freq_floor() and dev_pm_opp_set_opp().
+> 
+> Both domains must be listed under power-domains with their names
+> declared in power-domain-names.
+> 
+> The compatible string "qcom,nord-sdhci" selects this variant at probe
+> time and causes the driver to attach the two power domains via
+> dev_pm_domain_attach_list() with PD_FLAG_DEV_LINK_ON, ensuring correct
+> suspend/resume ordering between the SDCC controller and the firmware
+> power domain devices.
+
+Do not describe driver. How is it exactly relevant here for the hardware
+description?
+
+> 
+> Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/mmc/qcom,nord-sdhci.yaml   | 89 ++++++++++++++++++++++
+>  1 file changed, 89 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
+> new file mode 100644
+> index 000000000000..c512628617b0
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
+> @@ -0,0 +1,89 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mmc/qcom,nord-sdhci.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm Nord SDHCI Controller
+> +
+> +maintainers:
+> +  - Anjana Hari <anjana.hari@oss.qualcomm.com>
+> +
+> +description:
+> +  SDHCI (SD Host Controller Interface) present on Qualcomm Nord SoC.
+> +  Clock and power resources are managed by firmware through an SCMI
+> +  server, so no clock entries are required in the device tree node.
+> +
+> +properties:
+> +  compatible:
+> +    const: qcom,nord-sdhci
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  reg-names:
+> +    items:
+> +      - const: hc
+
+Where is CQHCI?
+
+> +
+> +  interrupts:
+> +    maxItems: 2
+> +
+> +  interrupt-names:
+> +    items:
+> +      - const: hc_irq
+> +      - const: pwr_irq
+> +
+> +  iommus:
+> +    maxItems: 1
+> +    description: phandle to the apps SMMU node with SID mask.
+
+Drop description
+
+> +
+> +  dma-coherent: true
+> +
+> +  power-domains:
+> +    maxItems: 2
+> +
+> +  power-domain-names:
+> +    items:
+> +      - const: power
+> +      - const: perf
+
+Best regards,
+Krzysztof
+
