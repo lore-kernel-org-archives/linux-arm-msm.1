@@ -1,99 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.42
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793828813;
-	b=17T+r2oTVhlkcJhXkI2qpIbzcJNeJHdJZULYNPndJopJA7UDA7Exvywya9wTiqx0a0WE
-	 DehwJh+U3KMG36dcayk0UXbc+z+GdyAkzuU9u110GUp0e7YlcwX1aRV41PwX6XbG5g8JZ
-	 7AhU99uYIGMiHAjy9g2UBpc85BlwuWlsj+wdMhTHRt22BfHZlnqugiJI+dhP5TmYW5Nkv
-	 g/UnLnfUvYc3WR8Fq9ecWSztzC6WcqKV8dSupZfryeVSLM2ib9uPVLBIqPk24DvQxhIRa
-	 HPHvYgDgOeBRDpwOOuH430nD5UwL9djagEtWyFIuPhaGqj1PPm6BiuZjK2+bHmYyzRQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793828813;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=nNqX6Xay+ojlP9Sd21jk1TVd8hQxs/1bBCWc6P1bX84=;
-	b=F4FL4DUM+nT+zjCS0eUzkMYKEP0GdxBGZqx0I/tgWnXQmW0NrqkeuxeoiPL38fYYkfGg
-	 aeGzIt/UB6GX2XFIvou1AaKmibanCMlhHA2gRcH59A9b3ctyesYP62mPrt38MDk92IRXg
-	 3QX1EiPXLqKoL2i5q0+6559CIsn4/jUnXrx28uOQP5UzTcEsui21x4kqxy9BdNZ5RXPor
-	 SB9i6jpp6Um8pSxSXCl/lbBvtkYscJhborwK0hOrPnjqFIQPezvf2Juj/JKLZZ2RKqlOH
-	 w5m8W4dhFqTMtXAf6uGgWNlw41ZDc7RtSSkIYBKQJUdhN7CiR4wbJdiL2+dWJlOiUpg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=google.com;
-	spf=pass smtp.mailfrom=google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=Ewe1JQDx;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.42
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=80.241.56.161
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793829345;
+	b=rLRsRyvOfm3iFqy8hL9s1TCFPbNZQl3Ae/CiyeFU3j8TpNS79lAgn0GJIwDFFXigoZK4
+	 WnN+sok2z9K9aZOdHXuJzndQ0GNojsBcTgp+bstUL7mLKPrNt973KBHSE+dWjKv0+4Z4j
+	 JiBDymzkrVuKCpd+ATRttmRmsJmPuObuc/nUoNyO75n21gCgKYWTo2vEIooZ3VuNNPsJy
+	 Qtl1jalxJQt/WydMhyRYnDf3A8oHPdAoGadvo306FcfGkRFzj5Aar6Sm3kR1MeZ+jN8sw
+	 yHGepP/ttWUrPucShtZ+GBsQNGxdIylpV5rQPVkabpFZWb9/gbaugblNutUX7TD4xKQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793829345;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To:X-MBO-RS-ID:X-MBO-RS-META;
+	bh=1KM15pS674xkwzoKzXbfoGMlVw+mkKvC51O5xmcBcQ4=;
+	b=t0hlo8Su6lomWJQzGd5Nqf93NnCFkZGN/E4qEFYkYo58I5M1xYL/Q0GmuGDY7G/kXQta
+	 CMneGgDo2QQn5xGf+UEVPpZ4248MSEhr4/8wn6iOyGyV8MNPgckEOn5mT67SeecdpXZQq
+	 BLnondLiFeJKxjVaxRxOA6JIJ4+xuHYTyee7Ar69cAoZna+/7aPudC/yw85sA8NHWI1QV
+	 V2cTDK7LazoKN70nLEvnry9peKwrKCS789KT6NjushurHNEcEll0TtDw92/7GV4eq2+5H
+	 Pt2RP4LaQ7ffmtHIEf2uithoCC/I/4zR1aH+x05FJ2m2udkKB3rnl5RJ/GTSEUj9mdA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=mailbox.org;
+	spf=pass smtp.mailfrom=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=h6Zhmgkl;
+	arc=none smtp.remote-ip=80.241.56.161
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A992606F2B1
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 21:46:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4A992606F2B1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC3E560A5BD2;
+	Wed,  4 Nov 2026 21:55:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC3E560A5BD2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=Ewe1JQDx
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6b56c90b38eso3784a12.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 13:46:53 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793828812; cv=none;
-        d=google.com; s=arc-20260327;
-        b=KXRb8bH4skWY+l6KLDGBH3DBH1BaUcIjAEx0rSOGoEAMlOCXllpbkewy6JKPYF8j2Y
-         s/dMIkHVBTYAZmhv4i/hyvwB+wF6yIVxaDUB2bEXfYn/qa3iQtwM66Q/NyF4glvussGQ
-         gX+HdIaK40OCyZHlxSfzfrvW40Vav2FGXrS4gShmjLL5Kv4IKzTCXfGxNFDmwUWkIalt
-         +BbqVnKoWo0yXCWngMjVvNaQlYGpUfIcYNC1LuFzp0v20vGml6sWz6J8QPTvVCH8lU7O
-         7IdA20GQgw/jWXXAP+EYVhvwm9XPcWDSbUOC68gd/BKT82RNVr56FboiszOORJ5bIUrC
-         +3Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nNqX6Xay+ojlP9Sd21jk1TVd8hQxs/1bBCWc6P1bX84=;
-        fh=6O/avXvVsCvNCVjKBDFZxMNNNV27BS2+fNZiRpLIyZ8=;
-        b=dlsgxEmTypCwr2x3CPmYDnZwig91/9OrmS9asL2Lb5UghTFJOyOb5aBv7pAT4QyJdl
-         DJgx73Y8xB9ihBEOqzaBOEmog5K6zzxsinPa0i+lwQACqHrC8X9EUZPYjnt4wQFnh2px
-         NC+OEuxrqJ2c1Os/7c3M7c6sF0GfJGRL9xa5Bsfa1zGFwb2wBlT9e3AxtoHH2hWsgf9C
-         +/n4L+o3XCAiUpEmna1z+euf+YpGvnP9UVCyH68cs3DGJiPYb4JUkTbh4Xhnm9WN9mJG
-         QtkpVXw6b24L/AUd2NiUVzkDq+epRuiB5QkBq9kQ4riKD22688qdnvJBLuSJT0tOVaAr
-         2FAw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1793828812; x=1794433612; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nNqX6Xay+ojlP9Sd21jk1TVd8hQxs/1bBCWc6P1bX84=;
-        b=Ewe1JQDxh/OpRUCdClFd7Kz1BJmW0JX5ObbSRd6Ekyr6w1rdIhE7jMbdYwplY3NCKk
-         g2aFJz08a6ruEkG/lNyZxd26EKiGj86XAMxt7uOLgX25eme/UvJCfgY83ENm95r5k1h2
-         qiYJWnp7FGT0h/ykL/xzAKDzuumb6PYNgVmBtJDl0E5vVOEJZQlJ5OKiOOGlzhKY7pgK
-         V50o3jeKznfmSCKKczWrp32DcUEdqOkaOEbva0veDWOkR9ZHgsPs6Uq3t7MUWVnJtiJa
-         abilpf21PQjXpK0rSl0BW25FeskGFNYkmAYeYPtlNoFAo3KDu6Tq85Tc+PymlrpOJMrG
-         33OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793828812; x=1794433612;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nNqX6Xay+ojlP9Sd21jk1TVd8hQxs/1bBCWc6P1bX84=;
-        b=POvV2pMDdBoH16daQXs4IIuRfjc9o+nqDCH2EERQE1F/B8IC6f8gfJQr0oVPvKxetN
-         ShGE3AYBGut3BzXHFefQMgB7v3ZwfQqeAeBpoMJbclt2WOr+/7lNEp15GRUoyDksyVEP
-         GokglmYV16iVaA3bJ98bH83nNA6Fj+mExB5j7Pq0hT9zVNFvf0/vl19PKPL2WYDdcfQk
-         CV7uGvO9TRXAb0gnr4AL1koBtJu19YrQlhEE2iR1DpuoIRxaIenk6kqO5BiWvjbbB2lj
-         63kGZDg2/g80w21Rd70m7d5TCbjpTf8ORw4llL4OvhBXfWKRmDFWJ6mqHdnTyKjKXHoz
-         8kfQ==
-X-Gm-Message-State: APuU4Z/1pH0Kxf2J7CrHB3LfpD6TPfA1ydUpJxkkvW27tzdJVebJMzdN
-	5+AIQ16NQJ5d75NAzyylaBAJptrA0YaswJXYUksCeqfJ2FyEw+utWekAb8yQZzMdhoyqxLYR9+5
-	6G/9hHrOJ2ZN3HLjmCxDaRkoQm0pxWYrgkNvfyGGV
-X-Gm-Gg: AYBFou2ixboxk1WdZcvKjcNeMCDMoB8FsvRafUmCCKnP0MPFeHtu6J9K9OcNfP3ICNG
-	q9GUeCx//qxvnPrzLncNCQ1DITNeBf0PCyepeuVsltrlLuymP3C1Uj+wOTMwYrR5ihhjFHKkBlr
-	dMHCsNZ/EfG/9luhmVNjqSHhLKT01vj6qshBLtcNLZgOo2Yb4qJyUtyLcpId922hfJy/CU96Zti
-	QSf6++zy6ygEnBNsm6gNyXYbtXykApSIfoT+VnO+dVYBV3Jpp4mxFz737x8mfHXKGiLDNsYIzzn
-	pQ3kcZwJXKcQwuTiqQmFe6UbK1CMJ8OU+HPNsvHE11W0gR57gN+CwLNmRin0kkBbWCTQ7diClRP
-	RAqlotQ0PbL0VKyQ/4sj2z0BRhDDJHpOw1Ws8rsLzh69DGg5rFoodIy2uKAvmH7/rbcnKQA==
-X-Received: by 2002:a05:6402:7cf:b0:6b5:65ef:440e with SMTP id
- 4fb4d7f45d1cf-6b57cdd26d9mr4477a12.12.1793828811278; Wed, 04 Nov 2026
- 13:46:51 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=h6Zhmgkl
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jKfQ45tJbzKmTr;
+	Wed, 04 Nov 2026 22:55:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1793829340;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1KM15pS674xkwzoKzXbfoGMlVw+mkKvC51O5xmcBcQ4=;
+	b=h6ZhmgklkVRwYt1n9X/n8y/F+89/7eFCzwSd2uXk55wsQ90Ro6crnRQRb1W+/3wBdTgGDs
+	rCgkbMrz+lPdFeq24VLUNk86fQWkG/Qmp6KRJki29gFw+aDzt0BI8/eGO4DfWF53mgQ00F
+	Vvtx/YuT8JfVPVJ335jZeVFTJMhxMS42kLvwZcgTlLMKk0LyIdGepefjq/dY3M4DDG5hHI
+	ls+7WPGd5m0yNMYTHmVUO2Wherq54OuGJFTmtAuOPtrmGN2wy+kpaCmxF3cjZ8PU9+jfvm
+	S2Z82043mZWjhHxFE2StoOuBkYEgjH39Nnh2b8Y0RWgBlymNfCmoHckwWGJ6/g==
+Date: Wed, 4 Nov 2026 22:55:35 +0100
+From: Anthony Ruhier <aruhier@mailbox.org>
+To: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
+Cc: Sudeep Holla <sudeep.holla@kernel.org>, 
+	Cristian Marussi <cristian.marussi@arm.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>, MyungJoo Ham <myungjoo.ham@samsung.com>, 
+	Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, 
+	Dmitry Osipenko <digetx@gmail.com>, Thierry Reding <thierry.reding@kernel.org>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>, 
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-tegra@vger.kernel.org, 
+	Amir Vajid <amir.vajid@oss.qualcomm.com>, 
+	Ramakrishna Gottimukkula <ramakrishna.gottimukkula@oss.qualcomm.com>
+Subject: Re: [PATCH RFC 07/10] PM / devfreq: Introduce the QCOM SCMI Memlat
+ devfreq driver
+Message-ID: <auukrIsbbd3q-qh-@tour-anthony.aruhier.fr>
+References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
+ <20260724-rfc_v8_scmi_memlat-v1-7-cb732bcff1f4@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,52 +80,56 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261020180804.140766-1-smostafa@google.com>
-In-Reply-To: <20261020180804.140766-1-smostafa@google.com>
-From: Mostafa Saleh <smostafa@google.com>
-Date: Wed, 4 Nov 2026 21:46:38 +0000
-X-Gm-Features: AclHuK-hVkemMHCNU3tA_P7qPrbGUQncvgIj5WYJYosiCeTanBP84HUm7Z_PAwc
-Message-ID: <CAFgf54pn3=gsB=3zCsr=6xKU7hWtmi_sxdA772vhzdAur=fZ0w@mail.gmail.com>
-Subject: Re: [PATCH 0/2] dmaengine: qcom: bam_dma: Fixes for unbind
-To: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, vkoul@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, Frank.Li@kernel.org, 
-	bartosz.golaszewski@oss.qualcomm.com, pramod.gurav@linaro.org, 
-	andy.gross@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260724-rfc_v8_scmi_memlat-v1-7-cb732bcff1f4@oss.qualcomm.com>
+X-MBO-RS-ID: bdc02223a3e50c9f112
+X-MBO-RS-META: 5mbzo6rkf8d9aucpqd6mxur6iz7r7xd3
 
-On Tue, Oct 20, 2026 at 7:19=E2=80=AFPM Mostafa Saleh <smostafa@google.com>=
- wrote:
->
-> On Lenovo Mini-x Gen 10 (X1P42100 based) I am using VFIO-platform
-> to assing the QCE/BAM to VMs.
->
-> During unbind:
-> echo 1dc4000.dma-controller > /sys/bus/platform/drivers/bam-dma-engine/un=
-bind
-> echo 1dfa000.crypto > /sys/bus/platform/drivers/qcrypto/unbind
->
-> I see a system reset quite often, looking more into this,
-> that seems to be related to runtime PM, with those fixes I don't
-> see that anymore.
->
-> This patches apply on linux-next.
->
-> Mostafa Saleh (2):
->   dmaengine: qcom: bam_dma: Take a PM ref at remove()
->   dmaengine: qcom: bam_dma: Do not touch remote BAM in remove()
->
+Hi,
 
-A gentle ping; both patches are reviewed and I have been using this to
-test VFIO platform with kvmtool
-https://lore.kernel.org/all/20261024161902.2093581-1-smostafa@google.com/
+On Fri, Jul 24, 2026 at 12:48:12PM +0530, Pragnesh Papaniya wrote:
+> From: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+> +	for (i = 0; i < info->memory_cnt; i++) {
+> +		struct scmi_qcom_memory_info *memory = info->memory[i];
+> +		const struct scmi_qcom_memory_range *range = &memory->cfg->memory_range;
+> +		struct devfreq_dev_profile *profile = &memory->profile;
+> +
+> +		/*
+> +		 * CPUCP re-evaluates and re-votes at most once per cpucp_sample_ms,
+> +		 * so a new operating point can appear only that often. Polling at half
+> +		 * that period guarantees each distinct vote is observed in trans_stat
+> +		 * before it can change again.
+> +		 */
+> +		profile->polling_ms = max(1U, info->cfg_data->cpucp_sample_ms / 2);
+> +		profile->get_cur_freq = scmi_qcom_devfreq_get_cur_freq;
+> +		profile->initial_freq = range->max_freq_khz > 1 ?
+> +					(unsigned long)((u64)range->min_freq_khz * HZ_PER_KHZ) :
+> +					range->min_freq_khz;
+> +
+> +		faux_device_set_drvdata(memory->fdev, memory);
+> +
+> +		memory->devfreq = devfreq_add_device(&memory->fdev->dev, profile,
+> +						     DEVFREQ_GOV_REMOTE, NULL);
+> +		if (IS_ERR(memory->devfreq)) {
+> +			ret = PTR_ERR(memory->devfreq);
+> +			memory->devfreq = NULL;
+> +			ops->stop_activity(ph, NULL, 0, MEMLAT_ALGO_STR, MEMLAT_STOP_TIMER);
+> +			return dev_err_probe(&sdev->dev, ret, "failed to add devfreq device\n");
+> +		}
+> +	}
+
+I tried it on Hamoa (Yoga Slim 7x, x1e80100), loaded scmi_qcom_memlat_devfreq,
+and I see the apss_cpucp_mbox IRQ firing 3100 times per second. It raised the
+power consumption while idle, screen off, from 0.9W to 1.4W.
+
+The polling seems to be the issue, as I didn't see hectic changes of frequency.
+Raising the polling from 2ms (default) to 20ms makes the power usage goes back
+to around 0.95W, with ~150 interrupts/s from apss_cpucp_mbox. It's still higher
+than with memlat off, but it seems to be a better trade-off for now.
+
+Can you check on similar platforms (hamoa, glymor) if you see the same issue?
 
 Thanks,
-Mostaa
-
->  drivers/dma/qcom/bam_dma.c | 18 +++++++++++++-----
->  1 file changed, 13 insertions(+), 5 deletions(-)
->
-> --
-> 2.56.0.212.g129ede20d9-goog
->
+--
+Anthony Ruhier
