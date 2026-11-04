@@ -1,80 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793779281;
-	b=lvwUZCaR75Vu6ltDx941mz4wB6bFE+ZIHlp2TlqX5RH7OwtRG0rFtP6nrNThsDSyRjeB
-	 tABsP1PK2wjld2qJIJQXnMDYQb/TzQDEw7tTCHSVtgD91jrtvf4LWlZqiHKnWzeyDFoUh
-	 jM5E2leR5VICAmWJ7+i2Kcwe1LuavT+9GAZK3eXfsd88pm/QfRCgsMueg3ep87JkaA1k/
-	 9l++/YB7EU2GlMfXrTMLtV+X66wYnb6BvTUse6eHHrTCsJ8iUXaodF2V3E8WdYiF2dkLQ
-	 Ci9l8P2eyVBuk0j886WLayxklAp2owqvKpdep9k6Xxy/nxjIZscpk0LHWpYwZlFEG3A==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793779281;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=CFW4UEZq8C8dcoEJ8gp9Mlet5nVWqNMu2HwlLBIoyp4=;
-	b=bwNhj5F6agJNMS+5MLzgOeJDEwqypBRaZY39wXaLbP31PVGiNr2xOmkwy7PnJV/FzR3h
-	 pJFX5VnUFTh6ThDGjfhoa2TTe8kRpgRZvcikpRJdFY9dmNMIs1m7eYBa3wy4PhxputOSY
-	 Xtwsydk6oNI9i3iTckJfSLqtrZEkWhCScQFEwbacYz8LW1kJOG7acXtjGiiYGNtDlvnFw
-	 TgALRoI7rt7mpCwzmNmIPddY4h/tFjRFVSwe6pJ9zyJNs2HC1h3iwukzyYOGYKr7R73Yr
-	 ICy1BNsAOQpMasearkcdpspOb2+DeOxpuVYa1C71KSnM+a+s/Zx5ZGII2i2sYsu6ARg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EhEhcDnN;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E18ED606A326;
-	Wed,  4 Nov 2026 08:01:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EhEhcDnN
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793779280;
-	b=fuSzYbSvkZGQYRUauovwyvPidlxA/6oPf647Reabthak+xyajrXTTJSCq/JdeBEzsgGm
-	 1spQO3TfsfqAVwNK+hM2XU4lk28cb1ETFlpzLFjR5HSsRndFnztIJ6vxq2p+Cvcji77WQ
-	 YugPW/ycNrZlYKuaRdYiR5XonjErxBPowFLRs5Le4odSPkHjHwKqTgqW+KkIvY9f/E+Zc
-	 YofOFuShlLEiYcVlBmYjRGvtfkRUZL7xF/QPkaqxAMPgCQoqb3a4EteeLPH33YBcFQyOG
-	 XGev2po4IRG0EsLvCu4MzHpqSfQ4JvcSNnU+m6KFNXfRfYhwY1uW88+ZyS+dnHHEHtg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793779280;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=CFW4UEZq8C8dcoEJ8gp9Mlet5nVWqNMu2HwlLBIoyp4=;
-	b=Vs4f8bQzrpl0EC0+XiC3yCzZSLNFkgDV9Ngd4xfIY5jk690b9FkoRO2gvplMjGDb22mi
-	 up9ZEEmYpT3QaSwQ/9MwT7rJPVClH+XWB/4zKtzB1caVeTttLsx4ykCL7l6CT5JpZ5qSp
-	 B3OxYFF0dZsD8xdbZJ9cul30hXniH20j8Pa9zQqacfMWe53ez1Ht6mCz8zhCi60yhFUlo
-	 afwo+/SFikz/mVqwKxZO1DHx68qwcn2lMnN0IWXdcyHgVFHJPEAVsYWwKNQ4wDLgNMnLQ
-	 lpTAN9NR0EP5Ir2gBPG855UKuH7FNpnzxPype5K//xubUwBy72uuXHXoo0A+aawAdlQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.53
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793779336;
+	b=dtifBRf3VmKCaPVqo48pZvAYuj/P5Ql09oncVC6yIwXKNlk84G/nyeo1Oiu3nuVPc7aw
+	 ZlQ3AcLqmrhppYYCUfFAjd5egT8OelGWy9HM7lcioIFjlBAjOp1thvfyfbX3902JF3e+X
+	 01YlBODMw/jspHNq9dgnbjNwPLhrvrtpP4cD0ZuIhzWKu05WK4EKWEq4TtU4ccPRhzfde
+	 EoHou0w61nGz66M0BwTD3v7cI4DZeYd9JyenXBe44To2hJYC9Xy8xh2Jj4sr3sAPeX+y8
+	 1Ad6hU+rirAAo05BorLviisLGyoaJ0xruR5if+MlTYY32FwlrbXIoO+JxEvGMlLrIMQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793779336;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=lLRxe+WRL5Tt1qmEfe063UHbl97ZvSjHDmgU7Zlb114=;
+	b=EpSlnPtyJ9q13rDuIDzXIXMLWP+QgcdEq6+nBRrTYRUJYSufLPXhUqHMI8Eb7RrRojZ9
+	 LS+9oQiHqQ6ci35dGnZL0GBSGY6e5afZWcSVbum5XdD9Ygwko+dRd+085Bmeus5wZMwv0
+	 Q49vvG7Y4bVP1U2QGL9GvFv/tvol9jfFNr+QtnYgOlwZQFtoTk4vui1tiMcmjDKSklSMk
+	 QKiFEgSRAD9EHi/mzgZDYe+HWcl9tKUIK5hfWBjoBRQ6Ny3XXEZoQCu0dlfExF98vLtuR
+	 /XYZN7tKbWX/xr9gNdd8MgJsth4hWgrUuqeD3S58ZGjn+rkvD+sslIIzdlNi3tmXX6Q==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	arc=none smtp.remote-ip=95.215.58.53
+Received: from mta1.migadu.com (out-53.mta1.migadu.com [95.215.58.53])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id BF57A1F0093A;
-	Wed,  4 Nov 2026 08:01:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793779280;
-	bh=CFW4UEZq8C8dcoEJ8gp9Mlet5nVWqNMu2HwlLBIoyp4=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=EhEhcDnN4zY9yHfi6PKLHdp8REmFYKAY0S3lRcFETDOIVvk9w5eWEngOpkmM0YVib
-	 DgCS2slqdzK2ZTqnK7qX3SDvA0xVFXilNZDdHT3Usk4S9yLoplbzqILDQf/MCW3vVo
-	 b/Hot6Vi7dB8XbvYAjf/mJzVADlr3OZnLef3xlYCKseKAoS94X/iGtLy/EMUjmyGWR
-	 wa3BbBw8E2qj3lWGgKvwNyGMKlpIJbBTNesjvwZ8Kp207qahSo4p0HjRUIWjUpNqRo
-	 3ZwPxMdA0F+AiHVxx9ntiZgvyNQ3itGF6SVsbT+7gQgrAvWSua6VvRZfEpm6SCscmS
-	 Y3OXCL55oWNXw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 1C5A946D45;
-	Wed,  4 Nov 2026 08:01:19 +0000 (UTC)
-From: Andrew Gigena via B4 Relay <devnull+mail.andrewgigena.dev@kernel.org>
-Subject: [PATCH 0/2] arm64: dts: qcom: sm8150: Add standalone ICE node for
- UFS
-Date: Wed, 04 Nov 2026 08:00:35 +0000
-Message-Id: <20261104-sm8150-ice-rfc-v1-0-5737b6c2ecc0@andrewgigena.dev>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE5DA606A329
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 08:02:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BE5DA606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=yrO/dcuuSf7cIbw7Ajuoa3PoxR9KFe3FZf8RGEdAbUk=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1793779333; v=1; x=1794384133;
+ b=q4tf6nTDwvOMi1q8W5irOS7aG7pQt+D3kqMFhHq++M/a6PbT3SIPIFvjZ8G7XVzO8LbJ8vZI
+ E+BtEhFcHoWYgQW62cC9jyQk6GdS0+jpp3OCEhAQFV8SldxSixueETdOch1P5oH1ODxKvH5Shn2
+ yllLRFo9NdBks7MLEt1M283uAS+Fuvzhz7oSMZYCNJULn8dybnPwatbC/Qmyhi7g6XJBBftkTt6
+ 4CTMH2Okt+ejsvdWphRO0vHp1oLKb9qdUBbuIp/RDDJ2swcHzIlH8mfnbz5baB49Stcn5X4gIac
+ IRZpTbz2Jr4D893RKbsrrO+720PmZAE0mnl8VZjC6/lnA==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 9f16b7435e8cfdb5;
+	Wed, 04 Nov 2026 08:02:12 +0000
+X-Mizu-Trace-ID: 9f16b7435e8cfdb5
+X-Migadu-Flow: FLOW_OUT
+From: Val Packett <val@packett.cool>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: Val Packett <val@packett.cool>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org
+Subject: [PATCH v2 1/2] arm64: dts: qcom: sc8180x: Add SLPI remoteproc node
+Date: Wed,  4 Nov 2026 05:01:40 -0300
+Message-ID: <20261104080200.135431-1-val@packett.cool>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,87 +71,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDQAxA4atI1gYyoxbxKuKik0ZNwR8mWgTx7
- h3b5bd47wSTqGLQZCdE+ajpMie4PAMen/MgqK9k8OQfzlGJNtWuIlQWjD0jhTJ4pqKSmiBFa5R
- ej9+w7f62PbyFt/sC1/UFAWPPRHIAAAA=
-X-Change-ID: 20261104-sm8150-ice-rfc-0b4b2c035e80
-To: Abel Vesa <abelvesa@kernel.org>, 
- Herbert Xu <herbert@gondor.apana.org.au>, 
- "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Andrew Gigena <mail@andrewgigena.dev>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793779278; l=2116;
- i=mail@andrewgigena.dev; s=20261104; h=from:subject:message-id;
- bh=CG4hBCZDt6NMDb6T/GIIXkxNx2nWNouLk8UK8MwH370=;
- b=8JRR2i0YPt0NbVNbojLUBVDdePC4/V5tgYtK9H/b/gTU6h9PLJFsf69/uXGhsHfkxBT5GGrhc
- fsiviVuRAKnD8B43S4aqE6KQ7f5KX1z7Xh8IoETU8zxmeJ87Eb2Ub+c
-X-Developer-Key: i=mail@andrewgigena.dev; a=ed25519;
- pk=OMhlYIBaOEC8g4mJ4JCKy7kbg+lrwRxuujieZF8Ne6U=
-X-Endpoint-Received: by B4 Relay for mail@andrewgigena.dev/20261104 with
- auth_id=1402
-X-Original-From: Andrew Gigena <mail@andrewgigena.dev>
-Reply-To: mail@andrewgigena.dev
+Content-Transfer-Encoding: 8bit
 
-Hi everyone,
+The Sensors Low-Power Island remoteproc hosts the Sensor Hub firmware
+that Linux userspace (hexagonrpcd) can talk to.
 
-This small series brings the Qualcomm Inline Crypto Engine (ICE) to the
-SM8150 (Snapdragon 855) platform, following the same standalone-node style
-already used on SM8250 and newer SoCs.
+Describe the SLPI node for the SC8180X SoC.
 
-The first patch documents the new compatible in the binding, and the second
-converts the UFS node to reference a dedicated ICE node instead of embedding
-the registers directly.
-
-I've tested this on a Google Pixel 4 (google-flame) and everything works:
-/sys/block/sda/queue/crypto now advertises AES-256-XTS and ext4 reports
-encryption as "supported". The ICE self-test completes cleanly during boot.
-
-Happy to adjust anything or add more details if needed. Thanks for reviewing!
-
-Andrew Gigena (2):
-
-dt-bindings: crypto: ice: Document sm8150 inline crypto engine
-arm64: dts: qcom: sm8150: Use standalone ICE node for UFS
+Signed-off-by: Val Packett <val@packett.cool>
 ---
- .../devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml |  1 +
- arch/arm64/boot/dts/qcom/sm8150.dtsi                         | 21 ++++++++++++---------
- 2 files changed, 13 insertions(+), 9 deletions(-)
+v2: use single compatible and add it to the driver to match bindings
+v1: https://lore.kernel.org/all/20261104074200.123842-1-val@packett.cool/
 
-To: Abel Vesa <abelvesa@kernel.org>
-To: Herbert Xu <herbert@gondor.apana.org.au>
-To: "David S. Miller" <davem@davemloft.net>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-crypto@vger.kernel.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
+Forgor about committing and sending this while submitting the Surface
+Pro X series v1..
 
+Since this is independent and simple while that series is waiting for
+comments about the multi-PCIe situation, let's get this in first?
+
+Thanks,
+~val
 ---
-Andrew Gigena (2):
-      dt-bindings: crypto: ice: Document sm8150 inline crypto engine
-      arm64: dts: qcom: sm8150: Use standalone ICE node for UFS
+ arch/arm64/boot/dts/qcom/sc8180x.dtsi | 61 +++++++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
 
- .../bindings/crypto/qcom,inline-crypto-engine.yaml |  1 +
- arch/arm64/boot/dts/qcom/sm8150.dtsi               | 25 ++++++++++++++--------
- 2 files changed, 17 insertions(+), 9 deletions(-)
----
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
-change-id: 20261104-sm8150-ice-rfc-0b4b2c035e80
-
-Best regards,
---  
-Andrew Gigena <mail@andrewgigena.dev>
-
+diff --git a/arch/arm64/boot/dts/qcom/sc8180x.dtsi b/arch/arm64/boot/dts/qcom/sc8180x.dtsi
+index a85e3211958d..ee1a83a58997 100644
+--- a/arch/arm64/boot/dts/qcom/sc8180x.dtsi
++++ b/arch/arm64/boot/dts/qcom/sc8180x.dtsi
+@@ -2259,6 +2259,67 @@ tcsr_mutex: hwlock@1f40000 {
+ 			#hwlock-cells = <1>;
+ 		};
+ 
++		remoteproc_slpi: remoteproc@2400000 {
++			compatible = "qcom,sc8180x-slpi-pas";
++			reg = <0x0 0x02400000 0x0 0x4040>;
++
++			interrupts-extended = <&intc GIC_SPI 494 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "wdog", "fatal", "ready",
++					  "handover", "stop-ack";
++
++			clocks = <&rpmhcc RPMH_CXO_CLK>;
++			clock-names = "xo";
++
++			power-domains = <&rpmhpd SC8180X_LCX>,
++					<&rpmhpd SC8180X_LMX>;
++			power-domain-names = "lcx", "lmx";
++
++			qcom,qmp = <&aoss_qmp>;
++
++			qcom,smem-states = <&slpi_smp2p_out 0>;
++			qcom,smem-state-names = "stop";
++
++			status = "disabled";
++
++			glink-edge {
++				interrupts = <GIC_SPI 170 IRQ_TYPE_EDGE_RISING>;
++				label = "dsps";
++				qcom,remote-pid = <3>;
++				mboxes = <&apss_shared 24>;
++
++				fastrpc {
++					compatible = "qcom,fastrpc";
++					qcom,glink-channels = "fastrpcglink-apps-dsp";
++					label = "sdsp";
++					qcom,non-secure-domain;
++					#address-cells = <1>;
++					#size-cells = <0>;
++
++					compute-cb@1 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <1>;
++						iommus = <&apps_smmu 0x05a1 0x0>;
++					};
++
++					compute-cb@2 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <2>;
++						iommus = <&apps_smmu 0x05a2 0x0>;
++					};
++
++					compute-cb@3 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <3>;
++						iommus = <&apps_smmu 0x05a3 0x0>;
++					};
++				};
++			};
++		};
++
+ 		gpu: gpu@2c00000 {
+ 			compatible = "qcom,adreno-680.1", "qcom,adreno";
+ 
+-- 
+2.56.0
 
