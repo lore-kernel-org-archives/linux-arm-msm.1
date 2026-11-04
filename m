@@ -1,110 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793767910;
-	b=h/Pg9JzZ1KaVSuH9CHxU2TSA4340O7H+m45VLVnfpDHOA+k9miXoT8pV0p5Hvez6RPeG
-	 T8dKOzKLbG9wTSavgqDuenowZoT2nR/pWm7KWP1hpSh4nl0CJxAvBi/30+wVP+1yFdzqV
-	 Jpfp3zlWIRzDFVn2+Hq/GeGfSliV0XIGh8BNDS5hnIzdSnyEQdEQRChC25nXhSM807E64
-	 MdS45ayqP+dMm+IKsA/4KcyTg3/cshswDOkhfW7cB+QtvscgmfxpkIADhed4+6ygIKvSZ
-	 NalnUX0jIWYjUdFfkhwrlWiJ2Dn+nkFwWPSfdv2m5Y01TDQcko3WYOuXntKqlGr/I5A==
+	t=1793768019;
+	b=5fmyMARyP9s2V/qmhSOpkdXYbHo+IRYnLeZ9rmieuyUDdlWf4z9T5DMdREEKzEiGJVje
+	 15IfZLdLkcecuufvL71x33dsfjY4z3tub4co6GqCo3RZyz+giJj+GqLGR/WINE2HGoAOE
+	 P0RHHPcE4OlJE6Vkmd3qR92+e+unNReagdWOCRFX2S6RZnomcerbuZYeG8CRRPxkLrD7b
+	 Z9tv2vi6sDgCN/rp+7gMtSwno8KRITkDevTM0eax1erPr0iTXcvuBiSJST6gKSMEbWYle
+	 qC7MMORsNhek2+seLmQkQGGU0MI5LPa5OWbXu54Sk/eCTbhyKZR+PBani7tRvVqt5vA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793767910;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793768019;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=3RJgO2pJ2GzMSDClBGmlaLUYgL+K5aXBXF8kpIJzyog=;
-	b=Gn4XE0E1rCFo5UcseYC0kINCFOkaAknUyzOrhyMppSf7SfwhUWx2966L7ha+fHbyrhDv
-	 y6MfUuONJoprS1gxoH/p9KgK2iDPEYQJaJEdHwJ7k3DFOTkWQjswik4HK3G74+Y7uoqOG
-	 dg/Nqs6y9ewLuVyAlBiTEnP6BOMiVkOFEaKQCuH01hTV3RGxZgqRWCSdPhmIufdCgjgr5
-	 f4sJxZ70zrPAP4Pcr/AxsBw7loPQrx4wSovEQdJWIfYKUgq//Kqv8vbT8i0z+YuBEy98+
-	 26gVhV08yP4Azwb9GgSv+EITdedWikUoTsa76nCp4r0700Ctv6DjcXhPRAiie7ZRCnA==
+	bh=wxBgIl4fVGGsYbUGSadGuKeGA8YFeGPvnpmrQUI2WZc=;
+	b=aQWbFo2oNwkOLf6C+9uyLYIs15gnjaB+Qk7G9/MWgLDgc1UPQKRJL+f7hVsXvcMusC4N
+	 XOJGeyLrv6QC2644fU9GRBw0/BKW0BH75+T7zhmRBMfrgj/TZYMQVXmgFvXudpT5yZHmJ
+	 oVQnd/L7LPN+uvaOgAB/zYEJN32qyV0Czi3xxN6A15eYuO8AazrRccq1S7w5AHmBEBIvX
+	 vfH/L9XlgbafyZGgwA94MV8Ain3qGw3ScwWYNwXzeq/jQ4yecJbZ/teStmEHMc/SrfHTE
+	 NEvWpihsYQMZjdsPDQ1DObuJR3oZyRId9p7D4qmP86VIoELtyf4xhCnTFkifu9QFeXg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="KKGm5o/T";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=a5SqVtdR;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="LtUf/+/j";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=F2NtVdeV;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69A83606A32E
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 04:51:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69A83606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6462606A326
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 04:53:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E6462606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KKGm5o/T;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=a5SqVtdR
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A43OvCe267332
-	for <linux-arm-msm@vger.kernel.org>; Wed, 4 Nov 2026 04:51:48 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LtUf/+/j;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=F2NtVdeV
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A442KYm3300602
+	for <linux-arm-msm@vger.kernel.org>; Wed, 4 Nov 2026 04:53:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=3RJgO2pJ2GzMSDClBGmlaL
-	UYgL+K5aXBXF8kpIJzyog=; b=KKGm5o/TIUlagb+fI79KuLU/G+AiD3d3ZYQ1tC
-	TnIKi4b+Zasq1WxNCGyxSi68sU7AIBPEzINnpEIIT6IBZ1xugmFQ2EkVHuzYA6Vb
-	bZAtxhPNINhI2sG0u3qqKMidVwSeqX2x6hO1dlwh5dPE/e0qcOevITV6fglFvWBg
-	dVj6+6zOGif+Biw3PoHtrifLghMXybMZNDsNLemvjdQ5OrLQI7PomgQ7duUoUcq3
-	3kx4hshBEoSKhMmmUbtBlluBZyudJH6eCdpgQ+44rX7fpg0OLkoenRYpMcD6MlH7
-	1YOFW4uWuUTp99xXYDbCbTuYm8zigfRBnpzhggl/bylxM3ng==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqvsg88ht-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	wxBgIl4fVGGsYbUGSadGuKeGA8YFeGPvnpmrQUI2WZc=; b=LtUf/+/jSxrUVpBM
+	0QGauNHY8lMqgT4d3p1S1iK++TF1Dq28+WWlfD9aRf2IbyneUo81z4SlUu1Cdux/
+	b/3SGzITBKoyFM0MwnB16i7Z3Uu8gvzvVlgT+G/hV4699SkptKNiq1lTHMpOaubd
+	b33DE0fLlSToCvbB76etJJCcicgpC/nloN5IpI3XUs6xfhc2e63pD3RuVsKWVgRS
+	N60H6HZGf7MhvWC8XZ/3450yDFnoGjGPxf9UGiA0LuN9ARK15J7lf/H2Dp0W4q3y
+	R4WGM6Y/25CfT3dtii2aT8jlz+Ipbmbf6RW0YWiYoBpOHptH/e8y/1bseYqMk0AS
+	vxwljw==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqwb086ft-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 04:51:48 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-341eff9e381so579354eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 20:51:48 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 04:53:38 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-154e9d2d94fso932483c88.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 03 Nov 2026 20:53:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793767907; x=1794372707; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=3RJgO2pJ2GzMSDClBGmlaLUYgL+K5aXBXF8kpIJzyog=;
-        b=a5SqVtdRX2mRniSwdF8sMF7hgNjV6XFv0bv7IMlNvn+Hb0sJEsFTUedfN6L7q6giHu
-         IUcoFle0JLoxhgYqE5ec24ePCc3DTBjaExABq22xE7jNhi0fbRWKKV/uwQPGeAqzrxbH
-         x+yhlvV0olv271qseLLtuMbBwejFEAL0JoJdTqhaS93RfuiZI2m7pmQ9JTmW/H/mKcYu
-         HNdRK0FncmpvUD2PuYPekMhx7F/FAr84NXJuqYJpOteFtVl04mOqavIeRYZcoX4Cfd/x
-         CQEeg2iBVlSgKB4MZStCtkk9oULRy9TJ19OuaNPKc79Sxa3rCxqy2cbcJCUOBisCMY6O
-         /b/A==
+        d=oss.qualcomm.com; s=google; t=1793768017; x=1794372817; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wxBgIl4fVGGsYbUGSadGuKeGA8YFeGPvnpmrQUI2WZc=;
+        b=F2NtVdeViO0idDqDnf6IwdnTkGSmFo51GUEZbBlkEYYFstLG31oENqinGNOqG8h2lg
+         LtrDtY5InjV0x1iEIbsQVB8GbeJnCwt/++/rIA1UBmfJd0QaMOyc1L9PEs4VcC/ete5V
+         qCjTO9TODomPLMVuHzpSYP41AU23D9i/ElSngzee3JBSlPa1DKmdNtyDn36h9HRltLHw
+         lxFhdQBSHo5/qk54I1TcQH5/swErc1rCVj5zQQDd6nsiQJe/juEE6HugXCZHLgbFJZmj
+         dNFbqBXgGmzii17mdawihVwqr+p6mSItxG03O1j/sLEN5j1P/fctwwRytXmOGxPPjwd3
+         e4hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793767907; x=1794372707;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=3RJgO2pJ2GzMSDClBGmlaLUYgL+K5aXBXF8kpIJzyog=;
-        b=nFP6y1UrNXnYD+P6u14WgArbl7uQ8ZHSaWS72AJDalKfQwfe9FiyPYwVEQX6sxcIOT
-         +MP/E3oSuuHltR10hNRibKDlzbW3HVjOdhXSXgOZVBRqQNIzgHR0Cms2WayJAtwcXXl2
-         E2kIZ3pNfLdMjp+G1D0WvQOvp31xHKnrI+6EsKUI2MQLsAqHCMeM+sMfSULMckRxU5Mn
-         unTXfh5vovaMsZXE806feZnixc8zPHNabKGS6d/YSbHQfTNEgh8FRWr/ryBiPvD1WQRr
-         LdfoqVnANMYQgUMaQJU0XE8N432YbqPB0OGTZKPL0DCZ/w4CzR7NWIxMEd+ehXOHZ5Rk
-         GLvw==
-X-Gm-Message-State: APuU4Z8xQXWtnnp/XDRLPKpJvQ3GNPaR8fB0Z3RJdavZkbADMdpydcfj
-	4G9k3eKSceYMy2DAnWz3BWy1CCuuSRKKZ/m4NnmmOusxsqojU6OHfHqYbtDHpgUG9MgsdYKZOxh
-	ArtQic11va4LLME8jMUXX0dUxBv2xW8Wr5+b4SK7zO9UM9LXzeOneTSSEDLf7yn8xqSRg
-X-Gm-Gg: AYBFou0eLzG+WxW9aOlekY+iuco/Pt32mtOyZBDMsc/v1Mvzwsmpvhg+spByaxIeZX6
-	BSZzxBwuXKqqQ1sJ/uko5q9+4V6o5JmB+F90/hg7h1S4A9EyBYaQp/biUG/KqVFu1eQ8rT7vEKE
-	N0yXG90pgoIKOIiumnu+fIMN3cKgAer8JV42+Ki6IAf9vO8zkctCOd/dSknjaFOEgZ5spxBBVFr
-	NJs+0cC+ucK5by+0thTwX/uXsAIjbhM5FYa85s5hsKWBHPuP9NmHxIbzddHR49veng0Nfmu8P9F
-	1jD2M/VrF1evDdTLIQAhLP8pckm2JGfArSFuG0I5XZ8IkJJQAWuQvDe8awigqt0rNmzjCN6wJm3
-	x7Q/zWLgTwZKduOt/7/dj49SF/iI4FyY8Ble81OJ+W1MU4fNSQnjmWZ/rEuDC8lHhBmsHBZLZ67
-	vA8yfub+XhyTmMcXkWk3OGmRHv
-X-Received: by 2002:a05:693c:69d2:b0:368:9553:f2da with SMTP id 5a478bee46e88-36a423f5c39mr24894560eec.31.1793767906848;
-        Tue, 03 Nov 2026 20:51:46 -0800 (PST)
-X-Received: by 2002:a05:693c:69d2:b0:368:9553:f2da with SMTP id 5a478bee46e88-36a423f5c39mr24894510eec.31.1793767906169;
-        Tue, 03 Nov 2026 20:51:46 -0800 (PST)
-Received: from hu-fenglinw-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36ca394c2a3sm3427958eec.20.2026.11.03.20.51.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 20:51:45 -0800 (PST)
-From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-Subject: [PATCH RESEND v7 0/2] input: misc: Add an initial driver for
- haptics inside Qcom PMIH010x PMIC
-Date: Tue, 03 Nov 2026 20:51:16 -0800
-Message-Id: <20261103-qcom-spmi-haptics-v7-0-418de67ef84a@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1793768017; x=1794372817;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=wxBgIl4fVGGsYbUGSadGuKeGA8YFeGPvnpmrQUI2WZc=;
+        b=fRhMEZ3i99fPdKr+0f5VfJvzu4VVx0CUPOL5as0Ks3F9xFdaQBXxKUbHa6UqoC2QrP
+         Bt/DSaueoQOhS7WsL8A69NG2YGXdFIvfQbwMYfsPjNVObfHtwSbpliBfySh5tnUp2AkB
+         ASe0GHEf+d+UcSLQfqeJj2+BbclqoJXFfnjEGUTU3QTgreFAZXl5N/C28O7ID7V6qaCf
+         Ap6egRWj/F6X8NLbta7kGotDv3v7uVDfh+coLCmQkItaUsQPZgBaJCq+symbSynkFtc0
+         GJGDECWoHZ6J58+7WhiI3EVyNOnOA/1bJ8cuo26RKQ2gzPKntz1w2bJ/FjGuknzgfEkQ
+         s/+Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwfKrtEfdsPUzbVZD4ovwFmU3zzeFwuN/OhGrOcXdLtKEt2ml8GOC+DXtsSMtpTmQbB+hMaGGA4QfuIhTzE@vger.kernel.org
+X-Gm-Message-State: APuU4Z/nVCxhR0UCM7EkdnyZoE+b0VEdwYhaGr8PDc9g21DdbNUPhiHw
+	+xnZGhw+ygOU50ZR1BgoygbxuPVfIPvES/+1owhN/4v5MFrsNZO2UZ33hVZTK4w8L36U0f/vcD3
+	2NjgGksCwOarNkXXwJufAsEtO4Y3h6G8OU67n7DerZrJaynShNzlRpg8hn3XbBHsrx9Qd
+X-Gm-Gg: AYBFou2gsxjvJRtR6396WJJRlyx1KxnWpqcgArXiyDv8w3vL1gfyCoHLu+Ta7Fg9guS
+	Z+UAbzXwzLI49+iILgqx4plY3JCZYGeEVV/0P1WbtFE0hkl8qg448SQPhc+/NRwn8H0pudPLd5L
+	J7WIibaHnuxwxo/zMcebNAtH/l06rCvXEhbIYxHU7LDib4P8HWgiHXOfZ7QKaf9HYxNaNxDeSgg
+	OSF2/jzN2l+IeVWC3et5fiJexmR7/LE4qFTo7ggys2eZaU7RiTfX55zBeV1Afp9H+hMEZA+8+l9
+	E5CvE7l11pVDPADB+/HCTE27I7MUOn+HoeQd+MvpKve51RIUjX5fC1nSd6eQp9pYV2E6Puvv1HX
+	TILE+FafSnVknM3AaXa/7BKVHZUHaru/FJf8g2rR1dbK3Pcoh7tYMCwm6WJYXLGyrOEnkC2R9Qf
+	I=
+X-Received: by 2002:a05:7022:1117:b0:195:49ee:94c7 with SMTP id a92af1059eb24-1ac5a0b579emr20178567c88.8.1793768017215;
+        Tue, 03 Nov 2026 20:53:37 -0800 (PST)
+X-Received: by 2002:a05:7022:1117:b0:195:49ee:94c7 with SMTP id a92af1059eb24-1ac5a0b579emr20178539c88.8.1793768016741;
+        Tue, 03 Nov 2026 20:53:36 -0800 (PST)
+Received: from [10.206.111.19] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c65194sm3737394c88.19.2026.11.03.20.53.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 03 Nov 2026 20:53:36 -0800 (PST)
+Message-ID: <72223121-cb42-422f-8ce5-4cf9f41c5aec@oss.qualcomm.com>
+Date: Wed, 4 Nov 2026 10:23:30 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,212 +116,144 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] arm64: dts: qcom: lemans: add CSI2 D-PHY
+ common-phy providers
+To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>,
+        Bryan O'Donoghue <bod@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        gjorgji.rosikopulos@oss.qualcomm.com,
+        hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com,
+        jigarkumar.zala@oss.qualcomm.com, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Vikram Sharma
+ <vikram.sharma@oss.qualcomm.com>,
+        Suresh Vankadara <svankada@qti.qualcomm.com>
+References: <20261103221026.3662383-1-anusha.nandi@oss.qualcomm.com>
+ <20261103221026.3662383-2-anusha.nandi@oss.qualcomm.com>
+Content-Language: en-US
+From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+In-Reply-To: <20261103221026.3662383-2-anusha.nandi@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-To: linux-arm-msm@vger.kernel.org, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: David Collins <david.collins@oss.qualcomm.com>,
-        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        linux-input@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, David Heidelberg <david@ixit.cz>,
-        Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.16-dev-17187
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793767905; l=7936;
- i=fenglin.wu@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
- bh=5GlVoVF1VkHnE9upYHMiRJV0XPtsefTpbxl0+MIG+qc=;
- b=DofQuZ62EJDQCKzhgQMtHhkY4GbMR/djZiFS8hUMNntp0u95aQV7bGphHY8v5CEHAFFr71TQz
- cysDPB+12iIARmFSpdoXeBlvBNlMnGRa2r7rcXOR4j9P4fl0pLuji3I
-X-Developer-Key: i=fenglin.wu@oss.qualcomm.com; a=ed25519;
- pk=hJdt3E7o54lql+miD2GaxwF74cDyhgNwMbmFOZ46bRU=
-X-Authority-Analysis: v=2.4 cv=GtnXaU1C c=1 sm=1 tr=0 ts=6aeab9e4 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAxOSBTYWx0ZWRfX5Aln7eHgc+cd
+ P0RFiOj87ejAxYr6wdkf4wt6fzuUpvJhAM5dqvUf37rynWYB916UL6GYxJ9Ezm+A2PvrJ34RTMY
+ tOHOaw6mABd2dCprPzabJ/ksI3MuoWg=
+X-Authority-Analysis: v=2.4 cv=OfINnRTY c=1 sm=1 tr=0 ts=6aeaba52 cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=wl7bymLZXRVIGl6rzDwA:9
- a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-ORIG-GUID: Lc1FCcT-qqK2ryjmHcpVM9YqZ-4nKk5t
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAxOSBTYWx0ZWRfX+Df7YNbGMXLR
- h7khUq5KV97dbEDsmqw606xvu3QlaWMowPIwzJrOvaeMCM1BM8j46NQuiJwEDmgnMXlvgixWXRb
- 53+s9O9Wh9f/+KzkpM1YinPISReeowJf5z3FsQhwchWpHGsyx3YMM2WLhrL193h4wP7QzcJx0Za
- V6sQNc6S7wEK00YNCJTiOnrutkkvui8v3SRxiCnJsxP7eJZXLCbLBQ71t7ntphqZ7iIB5cyljGk
- lCrDnK5Y4+h1J529CwbRN6+Y4eCcie9QvqrI45OBK/uxX5vLQiXskyaS0IJpRf8woPMkYRVExS3
- YRo5NMbCLKJBb923XLRK2WdmRYlC51Ctn1UUnD2ObNUbBkqFUFr8jVrUBdlPddbcPNjFEvDIX1q
- HFTgOIEe2rK6U7ZsBkt3ze0XgaRruWHuSDiQrQvpvY0NICP4zyHISAF5HzGsLcsstN0FrDNBxaK
- RpLN2Mc8XPYkts07T0w==
-X-Proofpoint-GUID: Lc1FCcT-qqK2ryjmHcpVM9YqZ-4nKk5t
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAxOSBTYWx0ZWRfXzUFVZrjjEIrO
- 7g752vbcJjNE0kcgIv6eaWqI2PoDnxlYHCODms+1a8lstNybZtk+nDJGU3MmqLhcQ2cnzvmPlK3
- PJ9uT1qUR6VyuU33pM56QYDoet4Bu74=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=LJKXChJILo_4taeNnY4A:9 a=QEXdDO2ut3YA:10
+ a=Kq8ClHjjuc5pcCNDwlU0:22
+X-Proofpoint-GUID: kKjVHSrKbVw6l42XuqNg2tjB03F0CCmw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAxOSBTYWx0ZWRfX8byFci6xcizn
+ oDXtJ65vdeO8yT/hwCLevTIaeLl7UnkQMLuRYRr62whYJvw+K6AFAWSrosJAExU/RbIeup4X6dk
+ HkY7CrpqX/oEbCq1kfU4cG/5w07KDylf6g1fDpLPwp2T8SiEFoHO2yava3DsQi+31ELGRpm0n1c
+ 7SbzSAyTBLTKg3S01Cn98DbUfiycfyadPplmQ0B1ttFiz7MzcL/Egwjn2AW4beFFxTLygdtAvYt
+ Byd5ApQet1dan7Kdlb5L/RrsqDyWohw+zSiSQlUeDClgUT1YrsqHzjJloGN3mRyLVhYrtsKZlEe
+ vJJdxp4ndZGf63k/vEJBnSA7X78F0fCG4aFfQXyYNZbZ6Lnn9YfBLCRyaFdObeStBPp8ZwiN2dD
+ KCVp/N8XPGY1Z0vbJwVO5xyIbrcj9KfWwmyLaS2F4+x3yPoqEdJkI/0dWCI3Hl9MDJTL8o7XrDu
+ nI9ZqfR3p340OWvJGcA==
+X-Proofpoint-ORIG-GUID: kKjVHSrKbVw6l42XuqNg2tjB03F0CCmw
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-04_01,2026-11-03_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
- spamscore=0 bulkscore=0 clxscore=1015 phishscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611040019
+ malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ phishscore=0 impostorscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040019
 
-Qualcomm PMIH0108 PMIC has a haptics module inside and it could drive
-a LRA actuator with several play modes, including: DIRECT_PLAY, FIFO,
-PAT_MEM, SWR, etc. Add an initial driver to support two of the play
-modes using the input force-feedback framework:
 
--- FF_CONSTANT effect for DIRECT_PLAY mode which drives sinusoidual
-  waveforms with fixed period and amplitude, which would generate
-  a constant vibration effect on the LRA actuator.
 
--- FF_PERIODIC effect with FF_CUSTOM for FIFO streaming mode, which
-  can play an arbitrary waveform composed of a sequence of 8-bit
-  samples at a configurable play rate.
+On 04-11-2026 03:40, Anusha Arun Nandi wrote:
+> Expose the four SA8775p CSIPHYs as standalone qcom,sa8775p-csi2-phy
+> generic-PHY provider nodes (csiphy0..3) at their existing register
+> addresses, each with its own OF graph (port@0 sensor-facing, port@1
+> CAMSS-facing) so camss_detect_legacy_phy() picks the non-legacy path
+> once a board wires a sensor through one of them. The camss node's own
+> reg-names/clocks/interrupts for the CSIPHYs are unchanged, so boards
+> that don't use a provider still get the legacy binding.
+> 
+> The provider nodes are disabled by default; a board or camera overlay
+> enables the one(s) it uses.
+> 
+> Reviewed-by: Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>
+> Signed-off-by: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
+> ---
+>  arch/arm64/boot/dts/qcom/lemans.dtsi | 140 +++++++++++++++++++++++++++
+>  1 file changed, 140 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/lemans.dtsi b/arch/arm64/boot/dts/qcom/lemans.dtsi
+> index 1fdb72fa5518..2a30bf1c82af 100644
+> --- a/arch/arm64/boot/dts/qcom/lemans.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/lemans.dtsi
+> @@ -5164,6 +5164,146 @@ cci3_i2c1: i2c-bus@1 {
+>  			};
+>  		};
+>  
+> +		csiphy0: phy@ac9c000 {
+> +			compatible = "qcom,sa8775p-csi2-phy";
+> +			reg = <0x0 0x0ac9c000 0x0 0x2000>;
+...
 
-Also, add the device node in the existing pmih0108 dtsi files, and enble
-the haptics device for several boards by updating the vmax and
-lra-period sttings according to the LRA components that mounted on each
-of them.
+> +		csiphy3: phy@aca2000 {
+> +			compatible = "qcom,sa8775p-csi2-phy";
 
-Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
----
-Changes in v7:
-- In the binding change, add specific pmih0108 compatible in the parent node of
-  the example for completeness. It doesn't change the schema itself so
-  previous Reviewed-by is still retained.
-- Remove checking "h->stop_timeline" agaist 0 value in haptics_stop_work()
-  to ensure the stop when it's wrapped around to 0.
-- Link to v6: https://patch.msgid.link/20260806-qcom-spmi-haptics-v6-0-19fcecd5204f@oss.qualcomm.com
+phy@ac9c000 through phy@aca2000 nodes precede the existing
+isp@ac78000 node.
+Sort CSIPHY nodes by unit-address numerically.
 
-Changes in v6:
- Drop patch [2/3] as it has been applied in
-  https://lore.kernel.org/linux-input/178602255123.2917765.7426706813083510078.b4-ty@b4/
+> +			reg = <0x0 0x0aca2000 0x0 0x2000>;
+> +
+> +			clocks = <&camcc CAM_CC_CSIPHY3_CLK>,
+> +				 <&camcc CAM_CC_CSI3PHYTIMER_CLK>;
+> +			clock-names = "core",
+> +				      "timer";
+> +
+> +			interrupts = <GIC_SPI 448 IRQ_TYPE_EDGE_RISING>;
+> +
+> +			operating-points-v2 = <&csiphy_opp_table>;
+> +
+> +			power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+> +			power-domain-names = "top";
+> +
+> +			status = "disabled";
+> +
+> +			ports {
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +
+> +				port@0 {
+> +					reg = <0>;
+> +				};
+> +
+> +				port@1 {
+> +					reg = <1>;
+> +				};
+> +			};
+> +		};
+> +
+> +		csiphy_opp_table: opp-table-csiphy {
+> +			compatible = "operating-points-v2";
+> +
+> +			opp-300000000 {
+> +				opp-hz = /bits/ 64 <300000000>;
+> +			};
+> +
+> +			opp-400000000 {
+> +				opp-hz = /bits/ 64 <400000000>;
+> +			};
+> +		};
+> +
+>  		camss: isp@ac78000 {
+>  			compatible = "qcom,sa8775p-camss";
+>  
 
- Fixed Sashiko review comments:
- - Add FF_SINE waveform support since FF_RUMBLE would be converted to FF_PERIODIC
-   effect with FF_SINE waveform, and it is required to be supported. Also, clamp the
-   FIFO play length with replay.length, also document the limitation of supporting
-   replay.delay, u.periodic.magnitude and the envelope
- - Add a separate worker to handle timeout stop, which gives a clear
-   way to distinguish timeout stop requests from actual play stop requests.
- - Replace disable_delayed_work_sync() in close() to cancel_delayed_work_sync()
-   as it caused an issue that the work would be disabled permanently.
- - Move haptics_enable_module(h, false) into the reset action(). Calling it
-   in close() would desynchronize the runtime PM state and could cause issues
-   if a play is triggered after close() and before the auto suspend timer
-   expires.
- - Link to v5: https://patch.msgid.link/20260804-qcom-spmi-haptics-v5-0-77128ebbdd2d@oss.qualcomm.com
-
-Changes in v5:
- Fixed review comments from Dmitry:
- - Change to use "err" for the "ret" which hold error code
- - Remove "haptics_queue_pending(...)" functtion and inline it into the
-   caller.
- - In haptics_fifo_empty_irq() when writing FIFO chunk failed, instead of
-   stop the plan immediately, just clear the FIFO threshold to mask the
-   interrupt.
- - Add "lockdep_assert_held(&h->play_lock)" for the helper functions
-   which require to be called when the lock is held.
- - Add "gain_work" to handle set_gain() immediately.
- - Set input device bus_type to "BUS_HOST".
- - Move the remove teardown to input device close()
- - Link to v4: https://patch.msgid.link/20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com
-
-Changes in v4:
- Fixed Sashiko AI review comments in the driver:
- - In haptics_start_fifo(), remove the goto and do the clear in the error
-   paths directly, also add a comment to explain that disabling the IRQ
-   synchronously won't cause a deadlock.
- - When data refilling failed in IRQ handler, stop the play and disable
-   the IRQ to avoid the potential IRQ storming issue
- - in play_work(), check if the effect_id in the request is the one which
-   under playing before stopping the play.
- - Link to v3: https://patch.msgid.link/20260713-qcom-spmi-haptics-v3-0-c931bb7cb94f@oss.qualcomm.com
-
- Also, add trailers in the binding changes.
-
-Changes in v3:
-
- In the binding:
- - Removed the ref for qcom,vmax-microvolt as the property with standard
-   unit already has a ref in dtschema
- - Added 'qcom,pmih0108-haptics' as a device-specific compatible
-
- In the driver, fixed Sashiko AI review comments with below changes:
- - Added a list to queue and serialize all of the request, which helps to
-   avoid the races between playback(), which is protected by evdev's event_lock,
-   and play_work(), which is protected by play_lock.
- - Changed to use guard(mutex) or scoped_guard(mutex, ) for cleaner mutex logic
-   usages, and update protection section to prevent race conditions.
- - Added runtime pm control in haptics_stop() function, use it as an unified interface
-   under the guard of 'play_lock' in play_work()/erase()/remove()/suspend(),
-   to ensure the runtime pm control correctness in race conditions.
- - Removed unnecessary stop play sequence in fifo_empty_irq() as the HW would
-   automatically stop after the FIFO samples are played out.
- - Added a common interface haptics_clear_effect() to clear the FIFO data with gaurd
-   of 'fifo_lock', and use it before upload() and in erase() to prevent race
-   condition.
- - used __free() for safe memory cleanup
- - Checked play_rate against negative value when loading FF_PERIOD effect
- - Limited the custom_data length to 48K prevent potential OOM
-
- - Link to v2: https://patch.msgid.link/20260624-qcom-spmi-haptics-v2-0-b9118e60f3e3@oss.qualcomm.com
-
-Changes in v2:
-
- Dropped dtsi change and I will resend them after the driver and binding changes get accepted.
-
- Updated haptics binding and addressed review comments from Krzysztof and Konrad:
- - Extended the description to clarify the 'PAT_MEM' mode (not yet supported in the driver)
-   by comparing it with the 'FIFO' mode.
- - Updated the compatible string to 'qcom,spmi-haptics' to match the file name and removed
-   the PMIC wildcard.
- - Simplified register names to 'cfg' and 'ptn'.
- - Corrected the unit naming for the 'qcom,vmax-microvolt' property.
- - Added an additional clarification for the 'qcom,lra-period-us' property.
-
- Updated the driver to address review comments from Konrad and Julian:
- - In haptics_write_fifo_chunk(), separated variable declaration and assignment, and added
-   comments explaining the 4-byte and 1-byte FIFO writes.
- - Replaced manual 'x * n / d' calculations with mult_frac().
- - Switched to disable_irq() to prevent late IRQs after device removal.
- - Replaced property reads with device_property_read_u32().
- - Remove the 'INPUT' dependency in Kconfig
-
- Updated the driver to address feedback from Sashiko AI:
- - Guarded pm_runtime_resume()/suspend() with 'pm_ref_held' to prevent runtime PM reference leaks.
- - Replaced spinlock with a mutex to protect FIFO data during playback and avoid calling
-   sleepable regmap APIs under spinlock.
- - Adjusted suspend/remove() sequence to stop playback before canceling work, and freed
-   FIFO buffers to prevent potential memory leaks.
- - In FF_PERIODIC handling, allocated 'fifo_data' before assigning data to ensure its
-   consistency with 'data_len'.
- - Registered the input device after enabling runtime PM.
- - Unify to use 'h->dev' pointer in probe()
-
- - Link to v1: https://patch.msgid.link/20260616-qcom-spmi-haptics-v1-0-d24e422de6b4@oss.qualcomm.com
-
----
-Fenglin Wu (2):
-      dt-bindings: input: Add Qualcomm SPMI PMIC haptics
-      input: misc: Add Qualcomm SPMI PMIC haptics driver
-
- .../bindings/input/qcom,spmi-haptics.yaml          |  139 +++
- drivers/input/misc/Kconfig                         |   11 +
- drivers/input/misc/Makefile                        |    1 +
- drivers/input/misc/qcom-spmi-haptics.c             | 1251 ++++++++++++++++++++
- 4 files changed, 1402 insertions(+)
----
-base-commit: 66725039f7090afe14c31bd259e2059a68f04023
-change-id: 20260616-qcom-spmi-haptics-3cc97e7b232e
-
-Best regards,
---
-Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 -- 
-Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Regards,
+Nihal Kumar Gupta
 
