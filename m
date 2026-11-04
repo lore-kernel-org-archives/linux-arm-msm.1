@@ -1,58 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793800693;
-	b=IdhWxPfLqWSzznZPQ86w3ehCdYXtM14RTX9FHxADvcsDNKysu9/NfYPs8X7ThQNf6LeY
-	 yeA4mDA/p+oaW2Z4h1/u6M3s69MZ+Uh1J6Ag9ESnUR65D2kual+n21ZfDdtc6BdWEUx6x
-	 4Y2upgxzZd9RC1bd8Tp2gsXHuZVhtnVRLI7U91HMTJXzl13pn0JAzLxx8IYvXS/he9t/1
-	 mdIsAl85x2C2VSxfwXRpkAU2maNRWhk8Qu7lk+gfnijpBChUzBno9/Zbm/0D7RBkL85r2
-	 FiSBFkrYiI0suMENmVtmn9I5kYB0ZxOEPE89ykDX4NWk8YGMhDMkk2vCnDtWgEFOL9Q==
+	t=1793800837;
+	b=q8POK24fTEwv3RCedwraiu8tCwH3sgPQyh6smHKmhxfifwL4ehAruDNduUkR257zVttB
+	 Fd7zxEoLToO7CjsQ6UR97UOLvWgM/DuDtEI/ilpUVOggeyM8d75yK0QEgVOI8ZodvDoJT
+	 D2WLDct6do9H4FMQbXN/KWvTUxuaV9lyF+RR8EXAPLmDX4dEVWodQ7ftx4TEIwoBquoxZ
+	 prQJDPlYjb5BYDnWw31AXToQ9vP/1olpZT0RKFz3qYt6M5gg0Q1iSjRPH9UbLu0poCnW3
+	 PH9RZfekS3FA+4GdDd8obk+WW4dipGdk6Kj/6svxOZosVQkvBV7cKE++R+NQC/f7QGQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793800693;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=MVb4xfaJpwASIoo3kcJhurqFBOJZHmuInHRi0LnZvsM=;
-	b=OFd2kcCcXEtkF8vjrr05ftGSLnxGvqtndQtNyuUIH+qV0lne4gp+vf9WUniMv873/Sq9
-	 2kehoCDdcDea20s0D1UviX8KjQfRP22SKUjphhrtHNppXbBYiRWMzTUn4hY0qDBbwG+da
-	 jB2paD71qEq2j03fXMudWaVL9acEB9Zy77wAzizm3NQCuaUSBIkYx9iWvcaerRqFdxjSw
-	 SqniuH2NmAGZRgI2xNMP0ftYNu5Xv25YDQ34J1KS5qnndYvWZZ+z+OtrBJdErV8tFG4DZ
-	 jrRKvhUsKU1APil5a2d040vniDWqwn/CbF1/hHWjXlu61xtTs+aRJiyy4LNc/XlvwcA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793800837;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=yLSW/CJ9qOILUYlmIBoazTCqPoZKnrkzdeQbNG8MlDc=;
+	b=W/LnCywLOv+a6Hu8FOhFpMElUcugNIov8FZzLJWBobDj0yrXaFoZuQaYGRUbV6+8BSEl
+	 8lyqfx2LhTSniVSOPK88/8diOKVi8tpdw0aRMZLXdeClxrAEuSfmospCUw5nfWboihYTq
+	 XfFOSon19iYqU1pk9Hp9XQ+eSAwZUjuc9nIAAoqBi18SjF2Chc3dg09lWXmRtsWRlckl/
+	 I+DD3FNnuBNewWWo505CpxsETMsGFl94LIbiWKoiIWFEz6XpzSrvNyUmYRjcU8n9sq7Yf
+	 x0qOKKK6Y+Ek5bF6F3K420+8wX+9E2gTQAG6swJcliVaQb4HKdg4x1AD6gHZqX8Kqlw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="iOcpw/0d";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=nhmHfB9B;
+	arc=none smtp.remote-ip=209.85.208.171
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1208B606A31B;
-	Wed,  4 Nov 2026 13:58:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3279B606A32C
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 14:00:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3279B606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iOcpw/0d
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BBB01F00919;
-	Wed,  4 Nov 2026 13:58:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793800692;
-	bh=MVb4xfaJpwASIoo3kcJhurqFBOJZHmuInHRi0LnZvsM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=iOcpw/0dpOwggrkLnLfdRLMAIveL90b8yXI1iYF1Whzpuo2o4uwo0wrTqjcVcxEvF
-	 4OI5azIqfEUSJM2/aTvXK6Puy9cLMTMgk5xvje19dYP8yCVmlgWiQgt/ChVv/95Hfl
-	 8UQckql552xiwQjz496vJ4k3kwlVZZdChOL44VNXB1rNzgXRY1HmLQyEnEUhmNNJkd
-	 gW6jM1i2q+z6X97WkTpnMwO2p8GPc6zNcWV1JG7UCdspIcLwfrwuxdGcVM/Qv6GSLC
-	 V+gadUysf8v+45NbsTY2kZIRvZqCsOHHYEdNhwAtH+QvrCHh38w5S8pJii8v2KKC88
-	 3vmfWWoW9rJyg==
-Date: Wed, 4 Nov 2026 14:58:08 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Anjana Hari <anjana.hari@oss.qualcomm.com>
-Cc: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Adrian Hunter <adrian.hunter@intel.com>, linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Shazad Hussain <shazad.hussain@oss.qualcomm.com>, Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
-	Nitin Rawat <nitin.rawat@oss.qualcomm.com>, Ram Gupta <ram.gupta@oss.qualcomm.com>
-Subject: Re: [PATCH 1/2] dt-bindings: mmc: sdhci-msm: Document bindings for
- Nord SDCC
-Message-ID: <20261104-sticky-perch-from-sirius-d3ebb3@quoll>
-References: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
- <20261102-sdcc_scmi-v1-1-244dbd893051@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=nhmHfB9B
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3ab3cb83f54so1357841fa.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 06:00:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793800834; x=1794405634; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=yLSW/CJ9qOILUYlmIBoazTCqPoZKnrkzdeQbNG8MlDc=;
+        b=nhmHfB9BA7eipvNVWaA2Gte+/EuT7A9kKbfv57jnv9GerCXmy2xu/MiC3444R8X/zL
+         CWlcE5Y/QVXtSZlg5l/Qkov43ieQyjwX7fZLfJOppIyIcH7rMTg9fTXrNFUYQ2jZCgd0
+         CaOs4V31RbJAEB45XReNIgWcEuqqO3nOF14L/+wmihvANf1K5c4b2HyUU19Vq40riAtw
+         r8QW0tK/PhteMxYNJiZ8B34VzNedlLYAoqCSJ/ES9FIzNBs/a78POzFCXD2rRDYZwRy9
+         JLRaIl8bY9XxzhRieqfVYt1PN7AkG80gBzTracYK7Seu3BT147aL1kky2JHChH7CwXf+
+         RKFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793800834; x=1794405634;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yLSW/CJ9qOILUYlmIBoazTCqPoZKnrkzdeQbNG8MlDc=;
+        b=eYMKjPQqs2bkMUn1pANn61HhqfcXV0omrnuzv3GZOIe2oFqsj+c6VPqjIGECbP/V5w
+         D4crLVz23F1Lk14OAZWrZMzO6pUI9REjgdzMjXzBzkuM1YabQpXyVoPzA7CEGVQlHeIX
+         SYCXs36WqveNJMn9PEzHcQTkqsnGv12DEjGg2WUCGdiRBcWcTAqeuEbxqbuhYptKBQdw
+         NmwKpmkeX6hCXf6DYqJWtc4/JsGd8gQxYNn42oe/N256x9HDfgHNg7iEIfkzgiSuQxtT
+         H4RBj5+qbDYyhf9bCey+GTT0VHmiKiJxLjAbUdRJeaIxfA9+/u0vx2rZrDQnaM0ww3Yt
+         EtIA==
+X-Forwarded-Encrypted: i=1; AKwUvBwfqT2YG803jzkCbCTV1EpojJwPuzcS5wFJ6G8eACW639vL2TsGWmJcCmnMRwiPgZTfdpewxAIwxvRsq6pQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z8NoUOMYabw7/+pCpYcmmrieoVn/WTpzLJDtIu81Haye3AhhltH
+	Bmarjy6dlJcCqVemh/YMt75l2MEFnynjCQq/IHQMsdpy3EnC3Xa6O5QGyc7auQ2acvY=
+X-Gm-Gg: AYBFou1owgstCqxA9eAecwQK2VRdTUsYtYOOr80WnNgZhqgrYUUqAtOztao1KZ+rkJi
+	xr3RnmDKfZku6W77pHTwsaekNpDPjWzESnJUhjnrzxerlk8MvAOoddN6QYkqzqd9xpjnfVdmksb
+	1EhrsQWAHEg/Q2+Th2uVZ3t1POMYJgvCmBI6aI8w/RzXcpHlKNSttIXYefsDg28dXb9fRHNZ5VL
+	qUD2e7tdnrl5Dkd1vfnqVS6DB3BzyRU5zBdLwuVrma4g2OBxqwsTIa5FzhhYR3n7pCXODrNpd9s
+	R9m4zI01GyKJ3lzJwebPPMBrKSCDlWBI8F/Zv8pSpN6PfrRNNK2gXuMg6HiDQZ0vxoUFXnkwR5T
+	pheurpRmsx437LsVjjft4dAfapVOa9ZRQvk9Dm+zukVMIGPtYjPHach1zMbBaoFCHqNJKF+3kP0
+	ENalnUHyp1+H95vtSen201urOkyPdK05t0dsYYG0dVfCeS1RvXAzXXb0yvrTr/2xJBK69htg/9T
+	oIHp7GMBMm2U7so966qNTns0moPD1hPfWenfXtNJeafChYIr958zFYm3A1EmpXtw05NpXg55J1P
+	kpqHC5kPm0xZIJnqWpXwihlJNCJ+uTZJ3ul+lcJCxJAiuDRHt5M36QPAznnBdlLIWnqawabWp2q
+	8/EfxsA==
+X-Received: by 2002:a2e:9592:0:b0:3a7:7ce9:7530 with SMTP id 38308e7fff4ca-3acb7a59280mr29824581fa.2.1793800834086;
+        Wed, 04 Nov 2026 06:00:34 -0800 (PST)
+Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3acdc6bec70sm4550261fa.13.2026.11.04.06.00.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Nov 2026 06:00:33 -0800 (PST)
+Message-ID: <48f56fbe-9db3-46b7-96ed-a6e3b535c0a9@linaro.org>
+Date: Wed, 4 Nov 2026 16:00:32 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,114 +91,54 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261102-sdcc_scmi-v1-1-244dbd893051@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] media: qcom: camss: Change CSIPHY device name from "csiX"
+ to "csiphyX"
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Frank Li <Frank.Li@oss.nxp.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20261104130014.681769-1-vladimir.zapolskiy@linaro.org>
+ <4e7f2f2d-7c2c-4dc0-8488-6ba71f4b886b@linaro.org>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <4e7f2f2d-7c2c-4dc0-8488-6ba71f4b886b@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 02, 2026 at 07:33:41PM +0530, Anjana Hari wrote:
-> Add Device Tree binding for the Nord SDHCI variant of the Qualcomm
-> sdhci-msm controller, where platform resources are managed by firmware
-> through the SCMI power protocol rather than being directly accessible
-> to Linux.
-
-A nit, subject: drop second/last, redundant "bindings". The
-"dt-bindings" prefix is already stating that these are bindings.
-See also:
-https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
-
+On 11/4/26 15:46, Bryan O'Donoghue wrote:
+> On 04/11/2026 13:00, Vladimir Zapolskiy wrote:
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> index f99eea2ef228..dcc005674d8a 100644
+>> --- a/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> +++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
+>> @@ -839,7 +839,7 @@ int msm_csiphy_subdev_init(struct camss *camss, u8 port)
+>>    	csiphy->id = res->csiphy.id;
+>>    	csiphy->res = &res->csiphy;
+>>    
+>> -	snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csi%d", csiphy->id);
+>> +	snprintf(csiphy->name, ARRAY_SIZE(csiphy->name), "csiphy%d", csiphy->id);
+>>    
+>>    	return 0;
+>>    
+>> -- 2.53.0
 > 
-> Unlike existing sdhci-msm variants, this binding does not require
-> clock, interconnect, reset, or regulator properties. Instead, platform
-> resource control is abstracted behind two logical power domains:
+> I'm 99% sure this is a change that was made @ Frank Li's behest i.e.
+> that csi0 is how most other systems do it (true afair) instead of csiphy0.
 > 
->   - "power": controls the SDCC rail power state. The kernel requests
->     power-on and power-off transitions via the runtime PM framework;
->     these are forwarded to firmware as SCMI power-state messages.
-> 
->   - "perf": exposes the supported clock frequencies as OPPs populated
->     dynamically by the SCMI perf domain driver at probe time via the
->     SCMI performance protocol. The driver selects operating points via
->     dev_pm_opp_find_freq_floor() and dev_pm_opp_set_opp().
-> 
-> Both domains must be listed under power-domains with their names
-> declared in power-domain-names.
-> 
-> The compatible string "qcom,nord-sdhci" selects this variant at probe
-> time and causes the driver to attach the two power domains via
-> dev_pm_domain_attach_list() with PD_FLAG_DEV_LINK_ON, ensuring correct
-> suspend/resume ordering between the SDCC controller and the firmware
-> power domain devices.
 
-Do not describe driver. How is it exactly relevant here for the hardware
-description?
+Let's review the discussion, please provide the link to it for further analysis.
 
-> 
-> Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
-> ---
->  .../devicetree/bindings/mmc/qcom,nord-sdhci.yaml   | 89 ++++++++++++++++++++++
->  1 file changed, 89 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
-> new file mode 100644
-> index 000000000000..c512628617b0
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mmc/qcom,nord-sdhci.yaml
-> @@ -0,0 +1,89 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mmc/qcom,nord-sdhci.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Qualcomm Nord SDHCI Controller
-> +
-> +maintainers:
-> +  - Anjana Hari <anjana.hari@oss.qualcomm.com>
-> +
-> +description:
-> +  SDHCI (SD Host Controller Interface) present on Qualcomm Nord SoC.
-> +  Clock and power resources are managed by firmware through an SCMI
-> +  server, so no clock entries are required in the device tree node.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,nord-sdhci
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  reg-names:
-> +    items:
-> +      - const: hc
+v12 has "csiphy%d":
+* https://lore.kernel.org/all/20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org/
 
-Where is CQHCI?
+Can't find a request to change the name from Frank's comment to the change:
+* https://lore.kernel.org/all/ak_HfEIpXj6Aky9c@lizhi-Precision-Tower-5810/
 
-> +
-> +  interrupts:
-> +    maxItems: 2
-> +
-> +  interrupt-names:
-> +    items:
-> +      - const: hc_irq
-> +      - const: pwr_irq
-> +
-> +  iommus:
-> +    maxItems: 1
-> +    description: phandle to the apps SMMU node with SID mask.
+v13 changed the name to "csi%d":
+* https://lore.kernel.org/linux-arm-msm/20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org/
 
-Drop description
+The reason for the change or even the change itself is not in the v13 changelog.
 
-> +
-> +  dma-coherent: true
-> +
-> +  power-domains:
-> +    maxItems: 2
-> +
-> +  power-domain-names:
-> +    items:
-> +      - const: power
-> +      - const: perf
-
-Best regards,
-Krzysztof
-
+-- 
+Best wishes,
+Vladimir
