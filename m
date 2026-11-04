@@ -1,88 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.48
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793810846;
-	b=sQwFGo7mtXLLknOntcxCITCu/LFn+ja88zuIkI445CRLs7jNSeGJ67zzUSw7Kk0tLgnl
-	 w+Nxo+1hyZFzqpN7gPANAxBaEKeNvmNd/uVLf9vXv7d7Pkk05yNCbmDE2auPvy9YmnXvo
-	 bJ0tTvTjAvIFdQAcH2loTkS2oZ9StGMfAdnCL6M9sF35C2j5jDN0Fq6HpyoyeREP4/U+s
-	 hyXWNeBSx7F5NyRTfnhgr5keyxwj1AwMjsbsqNP8/wOzjB6sfh7WNs92hok1/wopPNt7O
-	 lpW8PojVSk8V2c0S79+CuQiTBQAxsmCW9rmNUSUy5p/VxjQp43AXFqrLl4yk7cRyURg==
+	t=1793810856;
+	b=4fX21rzER9CpOiR7dgrU3AR+MJ7zPl0TjRYxFYtvZuXDlJHZs4ZiQqp3/CbJ+XNkwIjY
+	 EGRo769muOZ42+D/gS+vl5j+gYgeHFeyzyj4/V8jhoUAFD5V4SzLoBZkNzhjjezlAjhO7
+	 1tNaVBO3JZidG2B1a9KHT7kC0L5+ul2MkhhJcaSlEy1YyfGTCyv/6uDURdBHyjZkhMntJ
+	 OZUKL8pw4scikWA/QpyWCktkyU1PNruQmnC8ov7YynmQoDhLHxjE2fjP1Tx5479o1ZmfF
+	 ym8Rxv4QSz9XV2s/zd5wPBw8NKH2tILBfOilzLbzvxSNkne4oWhzYuGj8RVlwhqt2tg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793810846;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793810856;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=zMbG6vrMcWe5nACzqEmNc6Lg/tRkWbgNePdHtBr1o4c=;
-	b=XiqOUG+v4i3Wkp3u1uUXh21GApnTv1qrZm4B0IVPgvlh6P2cboOiXQkiXwdN2qC5Gffz
-	 J3yj59EdDfBgEp8hIlk9m2ctQMVIKj/q2W+cPLWaJwgtCXjfHb6nX3PC3RC+IoOaPF/mq
-	 NZa+wzdWYSrEMIO+3no6jMGvC+DJ60WNdMtozadmGUzWQLgx9Wm9mklE99KyqtENM4Uov
-	 Sojfe6FAcN4tt03PvrH78sDeoBZBGNtu9g46K6F4LTViUkfIeRkxF9zOxBALCCsykgQRs
-	 yZf1qtK9giRsh+fe7/BcAHGK9KtBjNWtH/POqN2vIBtsWtMuBHI1Owtr3LcYTj+alHA==
+	bh=8vSo5PyKnquWojnlUKNTbITLgcvow3SdQj1P0U2fTNA=;
+	b=c5gYKN04xrPnx9WpkyPnPmBm3M4+NAfl+g9/FqvGD+CXIyd5/FNbAonU67DDnAK5tWlp
+	 oMx2H2ke0SdTW74t5OvrksTXV4lrIZx/Eb+Taxgwzem4x9HkSBIZqL2T4BI3fQ+JJDhje
+	 KJuYWWY38FmvwEomwDSim97k7nDDIXRagkMVv7uks1d/BGQUoMGnCiM0lOqiuZSzUHWKY
+	 9F7U3L0myZ/aW8yy/rhPhLQhL6B6vOace3JtAfhSwmYA1CJZKhGt4H0+LdzMFHhcJk9N6
+	 y+vZwszbTDLtu5Qu/LxusNyC25RO/uzmiIwgX5chL76Adwxa+q0g0jSQKPgWVt6FB1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bq1wPuid;
-	arc=none smtp.remote-ip=74.125.82.175
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="jJUdT/Bm";
+	arc=none smtp.remote-ip=74.125.82.48
+Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643826083629
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 16:47:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 643826083629
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E3F9606D806
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 16:47:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E3F9606D806
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bq1wPuid
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3645f0f3fcdso1510319eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 08:47:26 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=jJUdT/Bm
+Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-15ea896ddc8so1598765c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 08:47:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793810845; x=1794415645; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1793810855; x=1794415655; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zMbG6vrMcWe5nACzqEmNc6Lg/tRkWbgNePdHtBr1o4c=;
-        b=bq1wPuidKb+BpFTqMAhm7/EWX8A0CldFXYzvw7TglvuSehTtA+Wv6rhY2jEAUupSPz
-         8Y+6bq9xZ4N22LC/k/nHIU2VRG4ER3x4QhYoQCxWfRAiy/vR3PtZmIv2kgsjUAd8cusj
-         swjHaOz2WNvfkpFbGw4/4xxxjoXXGnGZKtQp2GV2xxKRCEg8C550O7PCCGoUHdi+MqYB
-         c0M9ArvTTm8LLIkCdho+PEOq6aqF2A6sUoxxZAZUY1J3Vy0xYJ3rBZ93IVmMGnceJbb7
-         U7A+9TZZIJmWG75sp5+9VXfLb/Ll2bWz5tr7EoZ4xU7nWPjOf3caHWdaZTOVz/74+p5I
-         GrPA==
+        bh=8vSo5PyKnquWojnlUKNTbITLgcvow3SdQj1P0U2fTNA=;
+        b=jJUdT/Bm5BSfggP/3oMzI7shF08QAY1a7CC1Y/0EE0NWAzgoC0hvdiGxFJFZDoaMpd
+         WfKBaXOd/bllAL/Qo3P1GuN25EXCu11jNFNhwzMQtGVhfr2ukq1k9Ak8rsUe06FEdJPu
+         Yd/5JTSJF0Es3UPj06F9a4a6FJHEMAw8S4bUb0E+M4nHv9TI61jpgfOoPs6dXeQgNRvX
+         WF1F9RxGR8Wh6j0ASkmYPu140n16p3s7qlIVgF7Jb/CPxeO6oE0Wwm2dIodAbpO23nQT
+         jkrexWypvudowL1U5BI6d252hDYryR1qHXUtBWbe7oLyu9Y5OpqVevFXBDFIKSGkO2cH
+         GE6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793810845; x=1794415645;
+        d=1e100.net; s=20260707; t=1793810855; x=1794415655;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zMbG6vrMcWe5nACzqEmNc6Lg/tRkWbgNePdHtBr1o4c=;
-        b=qfeEMNA3jzUqTDuOdvVIisVonIxU9TvCAJNjPvU535wCHfvs4s7ZRVjld5ZeIYIAwP
-         N7bl16ubC7MjjRDTWSHqAb9CCfgHQP1U7m3Z0srTwX00X/THvlyHMBoY8dJXMnfoTy2M
-         o1QfRSF3O6YD71ko/CwRL586Cvr4B29hJzN6TwVC38e15FdoaqdVSOM7ZFriUwXPXlii
-         iTAYXyGcLaGLWcxua5iZC7hQbyILNsviXOBbuse8WWl1mJyVAqklODkK5F3TTJwicIxc
-         GNogMw0PwbqsEY+uvEl1WzMwJgVCQLPx1YDGZQOLfIBp7SEU0PftSsHes75Ukdh7CxlQ
-         wpOg==
-X-Gm-Message-State: APuU4Z9S3+CxB2rp1TgaHAk4blB8hH8/CpWwFbL+GZzk6O6k07jLhIu4
-	hP50RNf1y/WrkjaOv8HC5fDxRG32rGH18yp2tUFeNmF6e5bhDt37ngF7
-X-Gm-Gg: AYBFou31Gglxkj5PIrV7+CNjKjoprzvts2JzlQsYvi8Ch71dG2aPEiohmOh0EbXxZoM
-	KaG+ITvmCYaDA6YgL0vIxln9yaqiCFDut70nAPAd3BZj78e26aE1QkUGTkj0xzNqWXWCZbrwrff
-	8xSBmd4fJhEw1mRnnO6Zt2jM1a/jEnvlYz9i9D4MxA76QL2BcX4UYqemwR/Pn51ZckH3mQyXFeL
-	ePzVe7YEUmHyZyFFsOUR7sPPxPByCkz6YImNVbmpHZzC5iauVLH+/+QUFVtC3IILzUpzBW6z8Zc
-	DiO1HGa6oiER4+d80WgfRA1iHjl0HQPb1ZUt6WSjPYlfxd6YxXROWIU8ad5A5577yg9gLwtP34U
-	Ve3QAo22NccP/7hK9bcZjJ5gH/N/EOQQwzk5eXlSx4Kjd8vhxkiY/yWwDHm9vFz8Bjy3Z5wAWZe
-	Wf38Tztj3GSzUMAASLHkuDVx2qKInKy5I3KB6rzlry5kqgxJvslYZ/uL2iVvcn5OqMRAzdnsCtS
-	HYbk0+3AZiV2loApVkVEO7tU1RwCdcJZnfCT3NhjI3+p3L9QxwudrCWMl6FvEihaO0q6lFQBtar
-	ZhRbo25UDKgrki83UNV4U0rfYxB4iiyx4Vw3m5OQeGvRQu3rvn/CsSqifsCT0nv1moJcI9yspSq
-	IleUEfHQ=
-X-Received: by 2002:a05:7023:90b:b0:14c:8461:b3ef with SMTP id a92af1059eb24-1ac5e6f5132mr31506193c88.24.1793810845290;
-        Wed, 04 Nov 2026 08:47:25 -0800 (PST)
+        bh=8vSo5PyKnquWojnlUKNTbITLgcvow3SdQj1P0U2fTNA=;
+        b=nlH83dRl8gDh1cdbr35GKKQ2k+B/lhXMHWkIoU4yPBxq8C96VcHzTgQ4Jum4nJ0wbl
+         k5h1qy4ZiywfG8w6FaiEFgmrfh7gs9IkC762l+Dw77loZkMU/CYdj/H/4q2cldLXlSb4
+         nIvGtezRhK1IDzXFBMhUTozrK2aTvj8C+Kojt/6EOFl4hBi444KWxLprs3HyOOykRAZU
+         xoLL7HHAanlzAFHMnxOQYGiiYdLT89inYVL1h6B8YgWsKWiF3goENbtNyN2JquDgtugf
+         De+su/x2WlSK1SY1wMxrCn+6gXOtb5OfM2vPPWe+R7HgI7gdGyP7AUiFly7ru+PPohmI
+         v6YA==
+X-Gm-Message-State: APuU4Z/sHo6x3bDBa46fh9NFMagJVRNiNxmbwDuhFlQJ9ZFYgjCIkUjm
+	iz2dGU3ontnUN/lUzSTJpCryGnUvOlEPiBh+jUSIHcGUAnIr4aiMhNH+
+X-Gm-Gg: AYBFou3zAZpR38U7cAG/+sM2SI8ieBguRCYCTfchY+gNu0NRq72oiOeAPNAgcDUhky+
+	DInuda88L7MXTq/cUsbMJL+r2GiOnfthAuiz+GepA3kxJsnwV+vDpBJNXxuQkUsGk3Ye419HRap
+	6amaYjVuS+wm0sQSGO+la7MpACFiwHzbcHG6ogQ9z4ZpEzrQRfyWxuQ+tpNHXirjLRMv79i1zJg
+	+k/+l/M8jjV1WtRarhDzHYde9BjbIta484KGXaDkHOb6ADv1cHfref/CoAdH8beXJyq+DAWfI7K
+	0+Ybvf9mzGwehKw57d4jKYoJwXqWDz0YaOjIe4boeYSBDE0fNEE37nVAfnU8xfCBXyQ2zHItOtF
+	NWyz29OWlmYLq8XO6zATlVdTtQL7OwGCECqTv8nRPxA29Mj5hDOZBBjaTO9txOps/n3gmJ8Revd
+	W1/bnyZA2MJcsUnfr9GeV4ToMSR387vvRNShotp3swarYWxtl7TUHgHZKrTxhuQP3DjZBT/4Jsc
+	SlJ0iPm9szGySMrVOlnFk+iHDiAl5ESnPHGs2GeOJs8ir4RPyhsxNoKA26AZ2Y4StRoBTkk3HtX
+	VynRw6RflpebNkI5ts7w+JUZud+/0GNminvrLbsgBMXYf7zuhP0fkhpmt3RpP44HNRxG6Yqf0oH
+	jto2v96c=
+X-Received: by 2002:a05:701b:4513:10b0:1b2:490b:6fdd with SMTP id a92af1059eb24-1b2490b7174mr2802961c88.24.1793810854626;
+        Wed, 04 Nov 2026 08:47:34 -0800 (PST)
 Received: from Sobhana.localdomain ([157.51.207.207])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c57430sm10839666c88.18.2026.11.04.08.47.16
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c57430sm10839666c88.18.2026.11.04.08.47.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 08:47:24 -0800 (PST)
+        Wed, 04 Nov 2026 08:47:34 -0800 (PST)
 From: Sreeshankar K <sreeshankar0910@gmail.com>
-Date: Wed, 04 Nov 2026 16:46:36 +0000
-Subject: [PATCH v13 4/8] dt-bindings: thermal: lmh: Document SM7250 LMh
+Date: Wed, 04 Nov 2026 16:46:37 +0000
+Subject: [PATCH v13 5/8] thermal/qcom/lmh: Add support for Qualcomm SM7250
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -94,7 +94,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-master-v13-4-355b65c6f764@gmail.com>
+Message-Id: <20261104-master-v13-5-355b65c6f764@gmail.com>
 References: <20261104-master-v13-0-355b65c6f764@gmail.com>
 In-Reply-To: <20261104-master-v13-0-355b65c6f764@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
@@ -114,33 +114,63 @@ Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  linux-pm@vger.kernel.org, Sreeshankar K <sreeshankar0910@gmail.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793810796; l=744;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793810796; l=1940;
  i=sreeshankar0910@gmail.com; s=20261029; h=from:subject:message-id;
- bh=J3JLI+Blhkxqdoc8xLtRIhgDC8KARWHgIPjkApYQ3sY=;
- b=kBVXuJVpl65Jqkx4GULbJr59C4L4KJhdnwRlb2jZNK7mV/HoJ5fAdvNJsr2e5rCRPli2NX6K3
- QcEZXucPf4MDzauU/SeHXl/IE+5KsUbsPsBPFVOGpVI3IJdTX0hYBET
+ bh=CFhfNpAR/hsUoYP+FpbYSd22wi56uWW4Vnq2ksqBL70=;
+ b=AHV5arLvLuQqAMLn4qDczJBTrUzBqyZHmum7vYKn9NSDkm/FNjxIHZSp/eoAIkIM4IVrypzxN
+ KTUVsrytn6yAlacDB88TgXiRGdRNT7Cl5IXO6NA6AoS0kuPs8fkybxB
 X-Developer-Key: i=sreeshankar0910@gmail.com; a=ed25519;
  pk=CGSHduvtn2hwLCNRXRc9s/fh6X8PH/zNdp08zC8hOuQ=
 
-Document the LMh compatible for Qualcomm SM7250 SoC.
+Qualcomm SM7250 features an asymmetric 6+2 core topology where the
+Silver cluster consists of CPU 0 to CPU 5 and the Gold/Prime cluster
+starts at logical CPU 6.
+
+Add the SoC match data defining the CPU-to-node mapping (CPU 0 to
+LMH_CLUSTER0_NODE_ID, and CPU 6 to LMH_CLUSTER1_NODE_ID), and register
+the "qcom,sm7250-lmh" compatible string so both LMh cluster instances
+can probe and register their respective DCVSh interrupt domains.
 
 Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
 ---
- Documentation/devicetree/bindings/thermal/qcom-lmh.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/thermal/qcom/lmh.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/thermal/qcom-lmh.yaml b/Documentation/devicetree/bindings/thermal/qcom-lmh.yaml
-index ce72347e2..e1d5cb871 100644
---- a/Documentation/devicetree/bindings/thermal/qcom-lmh.yaml
-+++ b/Documentation/devicetree/bindings/thermal/qcom-lmh.yaml
-@@ -21,6 +21,7 @@ properties:
-       - enum:
-           - qcom,sc8180x-lmh
-           - qcom,sdm845-lmh
-+          - qcom,sm7250-lmh
-           - qcom,sm8150-lmh
-       - items:
-           - const: qcom,sdm670-lmh
+diff --git a/drivers/thermal/qcom/lmh.c b/drivers/thermal/qcom/lmh.c
+index ef49ed1c6..ad6d34b8e 100644
+--- a/drivers/thermal/qcom/lmh.c
++++ b/drivers/thermal/qcom/lmh.c
+@@ -110,12 +110,22 @@ static const struct qcom_lmh_node_map sdm845_lmh_map[] = {
+ 	{ .cpu_id = 4, .node_id = LMH_CLUSTER1_NODE_ID },
+ };
+ 
++static const struct qcom_lmh_node_map sm7250_lmh_map[] = {
++	{ .cpu_id = 0, .node_id = LMH_CLUSTER0_NODE_ID },
++	{ .cpu_id = 6, .node_id = LMH_CLUSTER1_NODE_ID },
++};
++
+ static const struct qcom_lmh_soc_data sdm845_lmh_data = {
+ 	.map = sdm845_lmh_map,
+ 	.num_nodes = ARRAY_SIZE(sdm845_lmh_map),
+ 	.flags = LMH_ENABLE_ALGOS,
+ };
+ 
++static const struct qcom_lmh_soc_data sm7250_lmh_data = {
++	.map = sm7250_lmh_map,
++	.num_nodes = ARRAY_SIZE(sm7250_lmh_map),
++};
++
+ static const struct qcom_lmh_soc_data sm8150_lmh_data = {
+ 	.map = sdm845_lmh_map,
+ 	.num_nodes = ARRAY_SIZE(sdm845_lmh_map),
+@@ -124,6 +134,7 @@ static const struct qcom_lmh_soc_data sm8150_lmh_data = {
+ static const struct of_device_id lmh_table[] = {
+ 	{ .compatible = "qcom,sc8180x-lmh", .data = &sm8150_lmh_data },
+ 	{ .compatible = "qcom,sdm845-lmh", .data = &sdm845_lmh_data },
++	{ .compatible = "qcom,sm7250-lmh",  .data = &sm7250_lmh_data },
+ 	{ .compatible = "qcom,sm8150-lmh",  .data = &sm8150_lmh_data },
+ 	{}
+ };
 
 -- 
 2.43.0
