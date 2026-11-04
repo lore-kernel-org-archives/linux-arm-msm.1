@@ -1,50 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=159.226.251.21
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.207.22.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793760046;
-	b=rGIB2+Lxoz3l5G/tTOW312yL66iNqi21K7Nw4mFQfCgZalYq6wWDi1z3Lwk9yvUG9rKO
-	 I/qt/TDef5Qjf169OQT38ugEoDbmrIj6Jd8jaRLHXQUZTICVovGItdjZBpliLLtmmo7BF
-	 bqKZsql1+7k3WV8CQBfPh8MMuzdNeav5bgDM12WDfVnX4lZLAywnYFSaSB2dcUGWAF9F4
-	 JDhUvvOZqaQdBewqD/CjObaPSSA5x6cGQMNMqQiu0mAoldpWkvoNk7JoNrt++2r7nW9pn
-	 8Igg7VSAndMtZogsGB8H9A3xzYXmgHIQxA009GC0Mc3foVhkEjnt11XKbF5XwYC1MLg==
+	t=1793760039;
+	b=DxQ3I3TzC0nJkB05mEKsAfhrgFdxNZRXa8FC2Zqnv0GWj+ZYEBP9FL/kCKZsN19pVT3z
+	 iPT0I2SPaXvn1IKTERZ9SuL1ULznYZT139toYaOiWZB+BhBQi33gZaOI0XHujVGn7Giun
+	 WPJw1Z2XPK2zihyq7kDoiB21xRNl5EWNP51o+AJCrLOAmApEwLVO1BqzXpitakcOGyUnn
+	 W8DqAWi2ja56l0PMgqCsEOWWRducBZ+bg1dok2tzYcKs/yQOoi7glIAkXc3DDf95JMySw
+	 hBWHlAmfAYPpfoGMmHZo6xaKdCMiOdRpFWEMki989TxaAfQmtSHoThUbm0jKF+LjMnw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793760046;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-CM-TRANSID:
-	 X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
-	bh=bZm4oOzoXvGR8xRLoz8oaLjg/05ZsjQjNRrXjaWk2vQ=;
-	b=S170+xGoJmvTyjJsSyF8tnhD//b50cTS0BhL4SxqHaBVxZvPVFJRA6V3KN7tEcJS8UXp
-	 P6zj6RiRNW8neim/EmdAz9PxYLmoGGj6EC3AOz6FjwlFLfAAeMoqHZWd7Rgo5PdewAir3
-	 TQZ6iR2C6TwB/XfM5VmFoUsUEuus7mlpN6jML3uxeRQR+1Zf6TskFJk/e17uMFNZyDS0u
-	 sokLrodygEgKK9tXS6CMdh4/ylCse/q4EZPIDsjSY8euLhfoJO8eHqqYUYIfLU7R7l0us
-	 HoLOTHUMGyojD/to06ErcIaNPRkZ/JVlUnR5Uf6RvrzxbTFGBS0lO9w925Pe6zvadQw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793760039;
+	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
+	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:Message-ID:Date:
+	 MIME-Version:User-Agent:Reply-To:Subject:To:Cc:References:From:
+	 Organization:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM;
+	bh=IDe2qSWFFVTIV++swKUqHNKYud0kxdi38C7CtewJZgQ=;
+	b=0p5ef6bEOCSbmnkL6AROU5SZuGbsr+YlMbW7GxlgIsvxh997GHvhLtPDogsJuThU3NKC
+	 jrFA8WHv3e0Cqi9mLpY2iti564V9wVXZapoBTWiCqLIhVG1fmWuMBDUnbvJL/0rLsDUqQ
+	 s6r7qU4KMmRgwEvKoPsiI37USHEI+z5JzKUY1WyH+OFczhuT9/ovMssT9sWfdBSp44+OP
+	 Q/oB+PhDLtL21eN+Nn8jHVHIC1vAGGjVq/SgXTzp8jWqZGUuKP2mHnP1nFZowgGijAKyc
+	 wopCUKUmWt+LXP3pof64EChAN9Ls8413lyAVFUKyC5kT9ub3tWn4bkas4Vu9XQ2Rd3Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=iscas.ac.cn;
-	spf=pass smtp.mailfrom=iscas.ac.cn;
-	arc=none smtp.remote-ip=159.226.251.21
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=radxa.com;
+	spf=pass smtp.mailfrom=radxa.com;
+	arc=none smtp.remote-ip=54.207.22.56
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B908D606D808;
-	Wed,  4 Nov 2026 02:40:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B908D606D808
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
-	by APP-01 (Coremail) with SMTP id qwCowABHb_knm+pqYbk+AA--.29246S2;
-	Wed, 04 Nov 2026 10:40:39 +0800 (CST)
-From: Wentao Liang <vulab@iscas.ac.cn>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH] ASoC: qcom: q6usb: put the AFE port after sending the USB parameters
-Date: Wed,  4 Nov 2026 02:40:48 +0000
-Message-Id: <20261104024048.1508635-1-vulab@iscas.ac.cn>
-X-Mailer: git-send-email 2.34.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 235CF606A31B;
+	Wed,  4 Nov 2026 02:40:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 235CF606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpgz1t1793760006t5417b2bd
+X-QQ-Originating-IP: 2fnShdHWMrEg8KNG3iddKqy/WIl1P5qYuxCLcx2qxSg=
+Received: from [127.0.0.1] ( [180.159.160.209])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Wed, 04 Nov 2026 10:40:03 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1068051447538924119
+EX-QQ-RecipientCnt: 17
+Message-ID: <3B240D36F79259E9+d729c8d8-9eaa-4941-9516-401fec7970fb@radxa.com>
+Date: Wed, 4 Nov 2026 10:40:03 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -54,54 +51,97 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH 0/5] media: iris: HFI gen2 features and fixes for VA-API
+To: Nicolas Dufresne <nicolas@ndufresne.ca>, Bryan O'Donoghue
+ <bod@kernel.org>, Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ dragon@radxa.com, Chris Obbard <chris.obbard@oss.qualcomm.com>,
+ Deepak Sikri <sikrid@qti.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Loic Minier <loic.minier@oss.qualcomm.com>,
+ Jason Pettit <jason.pettit@oss.qualcomm.com>
+References: <2a2gB7bYZ9q2UTG-mF855lyJvWdn3Ba6jqrFTEVO1EAjAIXMh7_-65v4XlrZmljww-5ozkNYL2-lWKTIH4oqOw==@protonmail.internalid>
+ <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
+ <e0911e13-65d5-45df-9e31-7f99e5600a50@kernel.org>
+ <6d16d639267c69344623f80ea91817308ef4f7d0.camel@ndufresne.ca>
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <6d16d639267c69344623f80ea91817308ef4f7d0.camel@ndufresne.ca>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qwCowABHb_knm+pqYbk+AA--.29246S2
-X-Coremail-Antispam: 1UD129KBjvJXoWrZF45trW7Zr4fKryxtrWkWFg_yoW8JryUpw
-	sYgrZ0kr9xJF1rAa4UGr1xuFWxCwnrAFZ3Wryvy3yxXrn3twnYkFy2gw1q9rWIkry8GrW5
-	Zr42qrs5C3sxC3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvlb7Iv0xC_Kw4lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-	cIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2
-	AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v2
-	6r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14
-	v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xf
-	McIj6xIIjxv20xvE14v26rWY6Fy7McIj6I8E87Iv67AKxVW8Jr0_Cr1UMcvjeVCFs4IE7x
-	kEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7AKxVWUAVWUtwCF04k20xvY0x0E
-	wIxGrwCF04k20xvE74AGY7Cv6cx26r48ZrWUJr1UMxC20s026xCaFVCjc4AY6r1j6r4UMI
-	8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AK
-	xVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26ryj6F1UMIIF0xvE2Ix0cI
-	8IcVCY1x0267AKxVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E
-	87Iv67AKxVWxJVW8Jr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvj
-	DU0xZFpf9x07b7pBhUUUUU=
-X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBgcBA2rqY4LY5AAAse
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: M5aCtjAndv5OlZRv345FV/fMwP2vzC/GMK0jtvIW7aLrY++cZyZUQgRg
+	eBy6tO8CUCmmKm1XYeXBRjbrWNXmFEF9DpR4rnLB8afSDC8XOsqBRwX1LVucivZbcZqCWrp
+	rt50+jrBC1Lj8JpidJfTIwpoxeqI+Lq5wU2ga+/RKvur7fXcR15YE/GpDSo/F0/7vgiWge4
+	oQc/HNN0vFCXze6RiSSlouz0B5DHsTDSsvlC1IXtxAdFev8kylYaUZVXyhH/uGWr/ph4xlK
+	xQ8pw7s608UZ0PiLSW+pbltA+R5rbp08zE7S3F+dhI+OYX6ntM3Df6GJv2+1nxUNrkTfpSw
+	mgNjXtYGJUSnPgJ98nPyXu2Hm4oj6Tt3/6ZobF+mzZhXhgHndJU7bfXR+lssz9W+VsanpTG
+	ZwygRZBuFSDe6D0qL9ynVN3KyCHASjbgLmvfOs8WIeMoX/5iXnfj2zrH8DZhBig0FlA4AnZ
+	Sjsy8Uqr1jmVlwhHjY08W0yPNakHpxLQKzGWuWw0Ce4aRv88GkWV7EsZPSxQVut1V3psgxS
+	J1mPg5aLa6JHvBthMqP4R8nyOG1wU40j0AL3DGsD4JW0fnfFcDOO5IABT0tzY7AN9AT9uv4
+	acjLcZgoQmrjVX+QovcO8afUWKxOoSpnezs4/kUXSX6B2S4nXFhNkN33I3BPZL6P2eVOU+r
+	UckbPuo3O3k/tC7QbGi9JjbfMKpjyKifhpdsqJLvmM+R2S/U3I2KH5oreJy1B7GhXqdPNv5
+	PqeORuqthCT1n9ZCvajKePcwpe2DOE0Q8umv3k+syyUE5J5oyP1DR2AT3HWujxR5WaE2Am9
+	nb1EjHW2LqIT1sbV1bK1W+S3+cUjHrSFUGWY4PQq5D5zCXtA/HGruCMyjUZduMJWO8E2NhW
+	scI1zGwRzott9ExggMf5L8fsX/mBY4ZX9HfCzKrV9BJe0TDDolPIEJI4IwR5mSnIPMcUM7S
+	SNIJ8BCNZ3CIqxcvKH81ErWE6ntkm4E4TVjy1auYTAAsMGw4gCBv6NsikXyMgxb/EtTN+Mm
+	nAC/XQewTqQoyFKqkY9Xt4nUa8L8/qY14sU+7NmIBJLw/8BRAM5Vqvii1zClVZU4skFO/jr
+	w==
+X-QQ-XMRINFO: NyFYKkN4Ny6FuXrnB5Ye7Aabb3ujjtK+gg==
+X-QQ-RECHKSPAM: 0
 
-q6afe_port_get_from_id() returns a port with a reference held, either
-because q6afe_find_port() took a kref on an existing port or because a new
-port was created with an initial kref. q6usb_hw_params() sends the USB
-device parameters and then returns without dropping that reference, so
-each hw_params call leaks a port reference.
+On 11/4/2026 6:29 AM, Nicolas Dufresne wrote:
+> Le mardi 03 novembre 2026 à 23:00 +0100, Bryan O'Donoghue a écrit :
+>> On 29/10/2026 04:58, Xilin Wu wrote:
+>>> This series adds features and fixes to Iris HFI gen2 to support
+>>> qcom-va-driver [1], a userspace VA-API backend for the V4L2 stateful codec
+>>> interface.
+>>>
+>>> It enables decode-order output and larger CAPTURE buffer pools for VA-API
+>>> clients, and exposes encoder deblocking controls. It also fixes
+>>> error-buffer timestamps and handling of non-display AV1 and VP9 pictures,
+>>> which affect both VA-API and direct V4L2 clients.
+>>>
+>>> [1]https://github.com/radxa-pkg/qcom-va-driver
+>>
+>> Is this code based on https://github.com/intel/libva and is there a
+>> route to getting it into the upstream of that repository ?
+> 
+> libva is the runtime, qcom-va-driver is a driver, so that won't happen. Also,
+> qcom-va-drivers does all sort of guessing heuristic, bitstream crafting and the
+> readme show that it cost as much as 15% in throuput performance. Let's be
+> honest, this is a bit of hack, not really a solution. A proper stateless
+> firmware and driver would do a way better job and reduce complexity instead of
+> increasing it. The provided patches though seems to all have merit, matching
+> feature with venus, fixing bugs. A bit of spec work would not hurt though.
+> 
+> Nicolas
 
-Drop the reference once the parameters have been sent.
+Hi Nicolas,
 
-Fixes: 72b0b8b29980 ("ASoC: qcom: qdsp6: Add USB backend ASoC driver for Q6")
-Cc: stable@vger.kernel.org
-Assisted-by: DeepSeek-V4.1-Flash and OpenAI Codex
-Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
----
- sound/soc/qcom/qdsp6/q6usb.c | 1 +
- 1 file changed, 1 insertion(+)
+The userspace software ecosystem around stateful V4L2 has long been a 
+challenge. With qcom-va-driver, we're trying to provide users with an 
+optional, as-out-of-the-box-as-possible solution that works with 
+existing VA-API applications.
 
-diff --git a/sound/soc/qcom/qdsp6/q6usb.c b/sound/soc/qcom/qdsp6/q6usb.c
-index 6381b289c55c..046204bdd006 100644
---- a/sound/soc/qcom/qdsp6/q6usb.c
-+++ b/sound/soc/qcom/qdsp6/q6usb.c
-@@ -82,6 +82,7 @@ static int q6usb_hw_params(struct snd_pcm_substream *substream,
- 	/* Notify audio DSP about the devices being offloaded */
- 	ret = afe_port_send_usb_dev_param(q6usb_afe, sdev->card_idx,
- 					  sdev->ppcm_idx[sdev->num_playback - 1]);
-+	q6afe_port_put(q6usb_afe);
- 
- out:
- 	mutex_unlock(&data->mutex);
+I'm not sure whether the Qualcomm Iris hardware is capable of supporting 
+a stateless interface.
+
+As far as I know, some folks at Qualcomm are also working on getting 
+qcom-va-driver into Debian:
+https://tracker.debian.org/pkg/qcom-va-driver
+
+Thanks for reviewing the patches!
+
 -- 
-2.34.1
+Best regards,
+Xilin Wu <sophon@radxa.com>
 
