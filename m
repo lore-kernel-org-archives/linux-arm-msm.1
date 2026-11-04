@@ -1,67 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793817582;
-	b=mt0iF7YoS9MYEFyLnMcz9PlFNHAAG38zH1wHM+W+iaOipt7zn/XK68gfB9w5JOGj9zIE
-	 hXscYdL+L1YzXYhyKpBziVyVXavcdxIL4x2hjFeU3UxTYvHOuJLPSudGdH1AbTVKqlz+N
-	 BPb/dNTVprbWdoFgW6kJ74PI8qDkn/3dyKz/GfjClse2AT26LXXUDQc4n4KIm39WMvilQ
-	 ygC1FVQlvV1bT0HA/5HZaGBa6oJQT2B+p4IlZgS9omizEIcpqDECK8116skeTTaMD7Rhy
-	 EhctVLfF+bKAfxija8ja8Gmur+V5+FjotVXb5d+SVSH+4ZLuoqyxWHz1BcJeKlRfF+w==
+	t=1793817602;
+	b=ERuXlChThfoR4THZ9jR7IoQcQbMsbiwrTPYWUt1UhKc8kjVHX+a9Fd/htYSkpVwI7iHg
+	 HYnlcfWZbB0bfmPHKd6FeIsPB8geqURIl2OXIiyIiSw3g/7RWjhOcsSkMVpSNhl/S586d
+	 eNiNosw29u0ToTasBCmVi0k1imIYEN07qU8lNcY/+Y3lQanLn48BXQL4kL8oAgiFrDdCS
+	 8c6JCKnueK/Shr/yrhsbGMk0IeXHv8r4w71wJTyerl9uMdRSfG6uaUAhK1/V9gdL2CVft
+	 vwvh9o3kOsV3MFQjqeugBDUm4+dcD1OCgxTxaBZwiqVnr5wbdxHisIHByYa/kg4n9fA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793817582;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793817602;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=DvMLxBlki3uUbmQZYCI/NfK/V+8RiWix7z0CnkehUbs=;
-	b=BRtPMzglKfH1QI/FgIKmsC6nsJ81Aci6kKYhqgQxGJ8qnYHDHpf3jE0bQz1kyTCpWpjR
-	 DxbnlBuwqYxdTSjNRe53b463Wq4W5QtYaCDcYMjF/lqvCp4FYNOiL3WElK59p/sTcfaFs
-	 JcmMYqmDVhufGg2MxJ8ZvIZOsx/2NAGSI7or2XZ5R8PBxjqlQaxor7kiVexoZvXgZWL0n
-	 Ajj+v4vND6SF44wRETdpWBqSsumxcOdphxekyksk4VUjrsDfCpHBZ5KBzBddT1qpvAZpG
-	 p5MWJCOQyck3KoShs08G7/QAZiQ4UCJBCdCvvkLtXms9jRLcnj8Zs5pEylK+NBnsIGg==
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=OLKZrOm6jdEcHH7I6hb2j6zTe/nROTdmF2ea7AaGN+4=;
+	b=owGS0Nxva7IX+UxptnjY1l5KK9Wr9HFlO/EpWvj5vtr8Ib6Be9fSKNwx9RRSyp62MMXk
+	 vtyPvSlim5Jj1CjIbc8hfHpzT27OwfulHGW7ag06I/p6mb4EHWIcr9eNQgVI1qOc+nAC0
+	 NXZrIeP6ICyhZkIPsdbdyvz/7TqutSpC8V9c6fwUaC1MNG+webe7uo11oavFtpvJo3wdT
+	 IHl9HYPPBHoZRD6+jX55/J6meihw+eJc6Lkc47VUXQrq0a8+EObL34mstBgb1sm0IkPKo
+	 /eHSaRVSNXJXCFRgIEHBbjzCCHBcqYH9kT12N6268Lrf6YedqSd/sLgt1sXXx6ci0wA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FfOz0h8j;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W9DRevod;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F039D606A326;
-	Wed,  4 Nov 2026 18:39:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9274E606EEA0;
+	Wed,  4 Nov 2026 18:40:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FfOz0h8j
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03F0A1F000C1;
-	Wed,  4 Nov 2026 18:39:38 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W9DRevod
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7159C1F00A15;
+	Wed,  4 Nov 2026 18:40:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793817581;
-	bh=DvMLxBlki3uUbmQZYCI/NfK/V+8RiWix7z0CnkehUbs=;
-	h=From:To:Cc:Subject:Date;
-	b=FfOz0h8j7+c5jdDl0qlPLn+rjYEsk9YbPY12IrLApeLRDyhKKzxQUB2rOWoPur159
-	 FLvsw7SkILA1nxPAIFBTONB5wAb9UsX1Oeoqhdi2JRNs6E95GKe8NzfY1pyQoxFcZb
-	 suyRDGRXDfFlGE3SqjfMDygY8vlsGqzCc+w9MlVMAhpqyVAHYB7rTFWUXmcNi3Vnwk
-	 2RNv/hejcuroPRYs1+fRrb9hI1x6K0EjJF12WWBcRxX8FLBAxinh0ThAcxnZ/9Vf9U
-	 pyN4SuSPQvEZpmp3YB1sZA9+ef4TZg9hLfAUvPBebJh/uRA7o/38cM0QJkL8Qx+1e+
-	 ci07bbneOFDuQ==
+	s=k20260515; t=1793817602;
+	bh=OLKZrOm6jdEcHH7I6hb2j6zTe/nROTdmF2ea7AaGN+4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=W9DRevod4gGNgHJmbCYAxb8e7QqfBRMPf0bdS29bvOFlGcNzBgUiv7gKfscF0N+SE
+	 zD4GyL0t43ZB6BX/u4JYjwh0sKQab3+e6fUT46XkR4pZ9ZJgV/3jQExGI8ZrIq8JCL
+	 C0OrYgT0dpbctochsxL0ij1f5KCO5faCrTDRCwAFNubvvqSDkbJcOcNIQeghACyGyV
+	 MDw7H4rIa/sj7RRyNXQPhnRe21/VqUgZsZMYZR7gZy9QB8z4Va7i6FYbDWOyAsJKvj
+	 M88PEZewmdMJFgAS0RioN49imDjYzmM4C7Q1gKKV5ZcJkJo+feXhf2XPCl35L1ZaHh
+	 gVCZEUVLc0qRg==
 From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Daniel Jeong <gshark.jeong@gmail.com>,
+To: lee@kernel.org,
 	Daniel Thompson <danielt@kernel.org>,
-	David Heidelberg <david@ixit.cz>,
-	dri-devel@lists.freedesktop.org,
-	Helge Deller <deller@gmx.de>,
 	Jingoo Han <jingoohan1@gmail.com>,
-	Jin Park <jinyoungp@nvidia.com>,
+	Helge Deller <deller@gmx.de>,
 	Kiran Gunda <quic_kgunda@quicinc.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	LDD MLP <ldd-mlp@list.ti.com>,
 	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
 	linux-fbdev@vger.kernel.org,
-	Samuel Ortiz <sameo@linux.intel.com>,
-	Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>
-Subject: [PATCH 0/6] backlight: Fix Critical and High issues reported by Sashiko
-Date: Wed,  4 Nov 2026 18:39:01 +0000
-Message-ID: <20261104183935.1214630-1-lee@kernel.org>
+	linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org,
+	David Heidelberg <david@ixit.cz>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH 3/6] backlight: qcom-wled: Cancel delayed work on probe failure
+Date: Wed,  4 Nov 2026 18:39:04 +0000
+Message-ID: <20261104183935.1214630-4-lee@kernel.org>
 X-Mailer: git-send-email 2.56.0.398.g882cbad275-goog
+In-Reply-To: <20261104183935.1214630-1-lee@kernel.org>
+References: <20261104183935.1214630-1-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,69 +67,79 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-These issues were reported by Sashiko.
+If a short interrupt fires after wled_configure_short_irq() has
+registered the interrupt handler, wled_short_irq_handler() calls
+wled_module_enable(), which schedules wled->ovp_work.
 
-This series resolves the open Critical and High severity bug reports
-identified by the Sashiko AI analysis tool (https://sashiko.dev) across
-the Backlight subsystem:
+If wled_probe() subsequently fails during
+devm_backlight_device_register(), devres frees the wled structure while
+wled->ovp_work remains pending, leading to a use-after-free when
+wled_ovp_work() executes.
 
-  1. lm3630a_bl: Prevent a NULL pointer dereference in lm3630a_pwm_ctrl()
-     when PWM mode is enabled by requesting the PWM device before
-     registering the backlight device.
-  2. aat2870_bl: Prevent a NULL pointer dereference on platform_get_drvdata()
-     during devm_backlight_device_register() by populating driver data and
-     scaling the initial brightness beforehand.
-  3. qcom-wled: Cancel wled->ovp_work on probe failure via
-     devm_delayed_work_autocancel() so a scheduled OVP work item cannot
-     fire after devm_kzalloc() frees struct wled.
-  4. qcom-wled: Manage wled->lock via devm_mutex_init() and remove
-     wled_remove() so devres unwinds the backlight device, threaded IRQs,
-     delayed work, and mutex in strict reverse registration order without
-     calling disable_irq() on unconfigured negative or zero IRQ numbers.
-  5. qcom-wled: Guard against calling a NULL
-     wled->wled_auto_detection_required() callback on WLED3 hardware when
-     an OVP fault interrupt fires.
-  6. qcom-wled: Avoid an AB-BA deadlock between wled->lock and the
-     threaded OVP IRQ handler by using disable_irq_nosync() in
-     wled_module_enable() and verifying under wled->lock that the module
-     remains enabled before running wled_auto_string_detection().
+Configure the OVP interrupt first, then initialise wled->ovp_work via
+devm_delayed_work_autocancel() before requesting the short interrupt.
+This ensures that on teardown devres frees the short interrupt first,
+cancels any pending wled->ovp_work while wled->ovp_irq is still valid,
+and finally frees the OVP interrupt and wled structure.
 
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Bjorn Andersson <andersson@kernel.org>
-Cc: Daniel Jeong <gshark.jeong@gmail.com>
-Cc: Daniel Thompson <danielt@kernel.org>
+Fixes: 8663c188beea ("backlight: qcom-wled: Add auto string detection logic")
+Closes: https://sashiko.dev/#/bug/linux-ca2e48a2-f511-44b8-a7d4-866f360bf107
+Cc: stable@vger.kernel.org
+Signed-off-by: Lee Jones <lee@kernel.org>
+---
 Cc: David Heidelberg <david@ixit.cz>
-Cc: dri-devel@lists.freedesktop.org
-Cc: Helge Deller <deller@gmx.de>
-Cc: Jingoo Han <jingoohan1@gmail.com>
-Cc: Jin Park <jinyoungp@nvidia.com>
-Cc: Kiran Gunda <quic_kgunda@quicinc.com>
 Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: LDD MLP <ldd-mlp@list.ti.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-fbdev@vger.kernel.org
-Cc: Samuel Ortiz <sameo@linux.intel.com>
-Cc: Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>
 
-Lee Jones (6):
-  backlight: lm3630a: Request PWM device before registering backlight
-  backlight: aat2870: Initialise driver data before registering
-    backlight
-  backlight: qcom-wled: Cancel delayed work on probe failure
-  backlight: qcom-wled: Manage teardown via devres and remove
-    wled_remove()
-  backlight: qcom-wled: Check for auto-detection callback in
-    wled_ovp_irq_handler()
-  backlight: qcom-wled: Avoid AB-BA deadlock in wled_module_enable()
+ drivers/video/backlight/qcom-wled.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
- drivers/video/backlight/aat2870_bl.c | 43 +++++++++++++------------
- drivers/video/backlight/lm3630a_bl.c | 12 +++----
- drivers/video/backlight/qcom-wled.c  | 47 +++++++++++++++-------------
- 3 files changed, 52 insertions(+), 50 deletions(-)
-
+diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
+index ca350f320e17..f8f41e1d6ccf 100644
+--- a/drivers/video/backlight/qcom-wled.c
++++ b/drivers/video/backlight/qcom-wled.c
+@@ -3,6 +3,7 @@
+  */
+ 
+ #include <linux/delay.h>
++#include <linux/devm-helpers.h>
+ #include <linux/interrupt.h>
+ #include <linux/ktime.h>
+ #include <linux/kernel.h>
+@@ -1784,8 +1785,6 @@ static int wled_probe(struct platform_device *pdev)
+ 		break;
+ 	}
+ 
+-	INIT_DELAYED_WORK(&wled->ovp_work, wled_ovp_work);
+-
+ 	val = WLED_DEFAULT_BRIGHTNESS;
+ 	of_property_read_u32(pdev->dev.of_node, "default-brightness", &val);
+ 
+@@ -1800,14 +1799,19 @@ static int wled_probe(struct platform_device *pdev)
+ 
+ 	wled->brightness = rc;
+ 
+-	rc = wled_configure_short_irq(wled, pdev);
+-	if (rc < 0)
+-		return rc;
+-
+ 	rc = wled_configure_ovp_irq(wled, pdev);
+ 	if (rc < 0)
+ 		return rc;
+ 
++	rc = devm_delayed_work_autocancel(&pdev->dev, &wled->ovp_work,
++					  wled_ovp_work);
++	if (rc)
++		return rc;
++
++	rc = wled_configure_short_irq(wled, pdev);
++	if (rc < 0)
++		return rc;
++
+ 	memset(&props, 0, sizeof(struct backlight_properties));
+ 	props.type = BACKLIGHT_RAW;
+ 	props.brightness = wled->brightness ?: val;
 -- 
 2.56.0.385.gac671c819a-goog
 
