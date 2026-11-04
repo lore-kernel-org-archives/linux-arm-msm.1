@@ -1,92 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793798801;
-	b=xRsDMmZ26SYFt1ye5HSKf2LPz/7l57tUv7DoEz09WNVnmxUJCeT73EfUUexo+15avyzJ
-	 2nV1tTu/DiX2jJ34VFp/5N7VDT+WHHglOKk2NaWDzGGnwgqJRzt/GJqEpJlYUiHKNJl5o
-	 9mKyYVCTItEwhSuDomMqGMZw6qdZH5CsMECoM7PWlLPV+xyivfwMDQFHbROENyh/jMTEA
-	 +1VptgjQFJKa2XJ5d+ARJ/VeF5qlr9CexSCC0NmDD4v5wV9eYXmlwyby17TWG9SAXY5FC
-	 D8aBvOH6iVHkvoV8+cnkDBhktJvfsFEGA7KRsQJ1zwo7vNd3ANm5EkcLTmB8irBJmPQ==
+	t=1793799165;
+	b=08dmQjPzsHDWRuf9Njph9c9OsbO2WHAmy50NpgLswUgnRiYkVAPy4I75km9OxAee38El
+	 xNWRgqqxYIex9QQKrbrnRzjiGSfbm8VlyURJCY6IcYJGmgAS6T0KvM2l0J7VTyvNnjUXA
+	 aG4Hh58bWfm0KqYYLdpNJfZyjMw4AT2xNaIgGAzUYbuBk/fTFmyPgsP89lgg+5wQjX4y4
+	 ChAnXR319jRCcjlqn4lt8jusBno8I888OwMY18Mfao7WmEDENU/c5UGVYjmHr8DBua3Ow
+	 p2ru7ubsNhxVufwA0W/17M2mMPF/Gh3Z6DrKTMqYhtmoyM5U2gMQ7VVryEj4W7bbWig==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793798801;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=MPUiLFnTBdf7QRRqKCZEZSjQLoEuxmOxaBmyWSCYZVk=;
-	b=xZHBqtPtr1fuZBYOjohK/EV2gfimgZjWPwEacWR6xQpqDAbhNGZ3ZAXI8JU5MGohXma3
-	 9V0mcAYl8392fx6kM9HDu/rVFm3kgQhgP3Ggds10u+Lm2iRlvi3gj7wDAgGgmN1JURZe5
-	 HmqbCTSVimIPXSltvx/FBzrDnwMtXTbHR420+L2H1BN6hOSiPAhHchZbVSxxC8igKFDNu
-	 gCrOEgBAG3ATOOB+dW0cmrdNBWYCmI66ATgPJTKrxVFciDzw8P8IXpCgrc3fNsH4QfwTw
-	 TiXSWuh4rydalndKMhcWr/8Spv4y5c+yTNls61IUB1WBWd0GJpFzQAk+jL6qrbOb9pg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793799165;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=92lzHe2SuysJxjMObHKi6jyjX87rS8UJuwbgz4FDZbc=;
+	b=qUEEBiYPM5IEOtk+oN7B+lUhzuwsBUJ8DKk0pOb217bngK0mpgt0pLmAZbPCnSrFPq02
+	 t4sI4j4xL6Gs551UwksJFPZ/CtJWsMDXc+Uh29wdDmC3QYLhPOClCn/4JjqUlEIbd7QGF
+	 JIHg8xymENLuo0M38h/F6upA/IP6JBfUO/7kBTFt9KJ+JwMp/BhXheFuPIC20s+7zNHzd
+	 tfXlJQp923VuQ7xlqfA+Nm550J66FWTaGlwH3ZIWWlTuknEj2Gw33m6xIfJ3lih7l8pxc
+	 GgTrCdHBF0YbCcxpMn5yb0oSS2rHE5+/sE4metKzOv/fVkJ+poRusyWM7J5wwLTVwPA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GGP57dCQ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="A5Hr/Grc";
+	arc=none smtp.remote-ip=209.85.128.43
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C99B606D82D;
-	Wed,  4 Nov 2026 13:26:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29543606A33A
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 13:32:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 29543606A33A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GGP57dCQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D24C31F0093A;
-	Wed,  4 Nov 2026 13:26:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793798800;
-	bh=MPUiLFnTBdf7QRRqKCZEZSjQLoEuxmOxaBmyWSCYZVk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GGP57dCQEvsELH0NCmMeNo9OYSLBlBr1CuaxanS9gitq0f13zE16Rj4HEg912BA3a
-	 jHAi0xgnf5mbwOvcFAqnxoTWo/uFCPp17dN+EOptGveLGJja2ISTiRvaAZqFzjXV4f
-	 jy+F3e4iKr6uWbeNGs4mnwgP57FbK+kogGG9a3Wto4Rt5KD5bug71IQBxB2F8xsD2p
-	 VFh4oL1WG13peDWe+KFd7Oh2xSJbJ5/uxq0pdKCYmBN5/K54Ak8t/uIKlzxPQP03lr
-	 kspb/xXqgBTpLDcB5XW6w5IsrQjlO6ZsLq2PjV9K98Wx6vv5U0To5OAyVcKfhN8ki3
-	 vuQeMPtWatfww==
-Date: Wed, 4 Nov 2026 14:26:38 +0100
-From: Thierry Reding <thierry.reding@kernel.org>
-To: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Vadim Fedorenko <vadim.fedorenko@linux.dev>, Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, 
-	Jiri Pirko <jiri@resnulli.us>, Ivan Vecera <ivecera@redhat.com>, 
-	Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Olivier Moysan <olivier.moysan@foss.st.com>, Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Hans Ulli Kroll <ulli.kroll@googlemail.com>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Chanh Nguyen <chanh@os.amperecomputing.com>, Alistair Francis <alistair@alistair23.me>, 
-	Julius Werner <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>, 
-	Dmitry Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, 
-	Thierry Reding <thierry.reding@gmail.com>, Ray Jui <ray.jui@broadcom.com>, 
-	Scott Branden <scott.branden@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	netdev@vger.kernel.org, chrome-platform@lists.linux.dev, linux-gpio@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-Message-ID: <ausydkb2etcFJbYf@orome>
-References: <20261102135330.2493332-1-robh@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=A5Hr/Grc
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so6364965e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 05:32:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793799158; x=1794403958; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=92lzHe2SuysJxjMObHKi6jyjX87rS8UJuwbgz4FDZbc=;
+        b=A5Hr/Grca4g1tu2xiDFXWfMDdZQA55aeOJgwSaJ6U5ZxxQ5n9iJlSwGAZv7GOgnnwu
+         6CaKYBsHH2aGLoT9Hz2eKilnRw1+Jps+DZQu0aqUKgr89Yxs4MviaH1ZyBd77Cr97Ygq
+         JpGOeHwgNEZHdRo+fB+UTQpUeGl78R5somkITXNM+lHduml1m66zB+84vqPHSVEdNWaw
+         RfzPO5RUiOwUckkH6oB6oxXSX+g/6cnkPjUHUb9mmO8lAByOUXv8XsRdgC7KZneB4Hez
+         kUfQipZwPz5JrwtXR3A3iHvGRT+lm9E7LZKVxf4/Fyr1SbfdTgmEZoz7k3HlkVrXMK9g
+         BjsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793799158; x=1794403958;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=92lzHe2SuysJxjMObHKi6jyjX87rS8UJuwbgz4FDZbc=;
+        b=xsdZKMPmSgFz91Un+ZzgiktpNWqMk8bMSUupuY7Qlrc6sQG/mjGb4kRkW3yAtwPQJK
+         9HsCaW6r//NaY0KVF6F27pqSAQ/LDye8ou6DbsM5ysqN7XVnL7lVbeMFm60KNHVhZs6o
+         DdZfeBy5EAUZSYPjxn3FVOxKDhzcJzL/uopwvEVrOGCZmJLgfqE/74SkSe8HwsuzB5tD
+         ijKv0rL0I6DDMQYI0X5As1sp9h++Gbdi1B0U0ImSq4Z5MvyVIztzclPM+cXTOi55Mh65
+         ZRIVVS5otEt8ZOTPZy1hHCJKLMk60yjuuWgZ9cL3WC4hEqempXXcr5XDmh3bxtvOLymH
+         Yj/w==
+X-Forwarded-Encrypted: i=1; AKwUvByzAoHLlNPI6ahEzljUYtRlOMRt6kyudP1wxi/ZHERdoV3cplx0qZs1+cbFEIqYWh1m64NJUjDWt9/jCpzY@vger.kernel.org
+X-Gm-Message-State: APuU4Z/V2za/OQ+AkFC0N8Mxx/u2wV0y9MYeFEOBqpmshEtoYqR8FGsY
+	w6OmfSmOKwJjWCzhkisxW+d8U61Hy5Id7aT11o1WDCgZdbqBcu8QqUkkD/c7tpHsTas=
+X-Gm-Gg: AYBFou2apk/lH0Iq/xc/5nCoBQsuXw6Y+IpdbfNsuFpra/nVgkbG4jS53g6EtT4JeXk
+	qbSvJ9HBwwDft2HEf8CfB146P6j44ioDOgS76BS5Y7vQWPCP+JCuVgawW8mUZoVNt+CBjTXQuh8
+	ITsMF6bXrfwRohQrctbO1ziCdJhOJWROwB0O5R5DCzn/MWFju5RF+oTLGFyi/l2CTM6pBpVp/7c
+	yDbOG5jNzstqX13XeErZFq+3dOtYIdq2ZRxodWLY9c24bFqLkI9Ir3JEX9Dc5IIl/bTrRfmovKA
+	q9QOsgdDZijEjhLY3Cfttc5Kr1hqR9MKRM9EKkKhJftcyYfYCUHs2ugfQTRY3FY5c8SgxmLl1lC
+	ia0lZvRViZ5/r4i9TAF1kLq0PgZg/zuVn6P+A4so8pIyP2bK7JzdmokBEc6aqNYD7ZVdJrDVvAV
+	5Eey0isye0QrW9ObHVhYX1EdTYCgyBxMGuLTtFNUaxgKGjLTGW8maqdAQW/qBEAa88GLWAH5+Iz
+	LfbQhBW9ylYL9UppktIlippBcCN/9KlT/WXpzD4+73RUTf99gBFoBzrI+ctNeXZ/YvbF5OOJ/K1
+	vDxFzSh2aG/kENKd7CxpFuAO/TJv8gq2xuJKFgtbFg==
+X-Received: by 2002:a05:600c:4f0f:b0:4a1:e00b:a10b with SMTP id 5b1f17b1804b1-4ac17b2cde9mr422203535e9.7.1793799158430;
+        Wed, 04 Nov 2026 05:32:38 -0800 (PST)
+Received: from [192.168.0.167] ([109.76.163.117])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda203b6sm3825694f8f.48.2026.11.04.05.32.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Nov 2026 05:32:37 -0800 (PST)
+Message-ID: <4ebc023d-38fa-42e8-b89c-8febbcb0d7f8@linaro.org>
+Date: Wed, 4 Nov 2026 13:32:36 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -96,42 +90,60 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3alpfpswkxhlvmej"
-Content-Disposition: inline
-In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] media: qcom: camss: select GENERIC_PHY_MIPI_DPHY
+To: Shuai Liu <847807867@qq.com>, linux-media@vger.kernel.org
+Cc: vladimir.zapolskiy@linaro.org, mchehab@kernel.org,
+ manivannan.sadhasivam@oss.qualcomm.com, loic.poulain@oss.qualcomm.com,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <aa7b58df-a7df-4d33-b2a5-9cc760dd9ed5@linaro.org>
+ <tencent_C589954C94BAFF49A7B030C93F367DE1620A@qq.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <tencent_C589954C94BAFF49A7B030C93F367DE1620A@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
---3alpfpswkxhlvmej
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-MIME-Version: 1.0
-
-On Mon, Nov 02, 2026 at 07:53:22AM -0600, Rob Herring (Arm) wrote:
-[...]
->  .../memory-controllers/nvidia,tegra20-emc.yaml       |  4 ++--
-
-Acked-by: Thierry Reding <treding@nvidia.com>
-
---3alpfpswkxhlvmej
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrrMo4ACgkQ3SOs138+
-s6EKABAAqndqQDSMCzJ51pelaVEYbun/pEAy9SCFq/gar34Nw6/PUqr+4Ae8fNKG
-58DhWW5IKP0zFCmAz4Lg7vzWcf8pcqjEqor4P/6uGt4Sa/keBlY96dhT7fXB7vUU
-+Y4/cAb5vN2M+cj5QKI3/N2xjmH4vcTgMxzpR2oZINWc5q3SpBCYpH4dHWdZX5ON
-NU3IkE+IwIuBt/lTX256XDA2qocpbqk4PfhDPXDEgwHzw1KUGjW9mngNi7ReGJ7X
-h58XLcmeowbjEg3418OfZogzqIrg1IowSD/1kTwDb/BONZtAFXstReG/03FgHBDC
-TfXFyQRuzQpC9ry8hSrTY3AfmVE+br7dxxhHl/mTpK6xVTnygAdFj7r2eOEtKQuZ
-/71SgGxHyuMPxVhqWntmrNQe5bSouxg7K1qTjVERnNG/43QDs1Ak2ELHBVD2RsBc
-lh9RUpYN+TMPms8D1jVgFsj0uOeeTEniDuXCWH7B32tqyyYPNEue+BzP/MsSMMIB
-xNFF26OqFEjYj3sHYR6s5D7EjwvTEHxF3zkNRgMSbeRpfjQKQOGIJCfPKP/Chrf9
-nywLoaWqGVHoNzEGQdjjkR6VQ0RTmBHnBGjoUU8SgFesfF0+0UT3lvASBsDH8VJ5
-94axmWcy8Sg7LmNOo7vOf7+TW7Fumpqu/30f4HiRtFAecTTqHJQ=
-=MRzn
------END PGP SIGNATURE-----
-
---3alpfpswkxhlvmej--
+On 04/11/2026 01:11, Shuai Liu wrote:
+> Commit 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API
+> devices") added a call to phy_mipi_dphy_get_default_config_for_hsclk()
+> in camss-csiphy.c but did not select GENERIC_PHY_MIPI_DPHY, the
+> invisible bool gating phy-core-mipi-dphy.c where that helper lives.
+> 
+> With CONFIG_VIDEO_QCOM_CAMSS=y and no other driver pulling in
+> GENERIC_PHY_MIPI_DPHY, the build fails at link time:
+> 
+>    camss-csiphy.c:(.text+0x51d): undefined reference to
+>    `phy_mipi_dphy_get_default_config_for_hsclk'
+> 
+> Select GENERIC_PHY_MIPI_DPHY and drop the explicit "select GENERIC_PHY",
+> which is redundant as GENERIC_PHY_MIPI_DPHY selects GENERIC_PHY
+> transitively (drivers/phy/Kconfig). This matches the other MIPI D-PHY
+> consumers such as rkisp1, mali-c55 and sun6i-mipi-csi2.
+> 
+> Fixes: 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API devices")
+> Signed-off-by: Shuai Liu <847807867@qq.com>
+> Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+> ---
+> Changes in v3:
+>   - collect Reviewed-by tag
+> 
+> Changes in v2:
+>   - drop the redundant "select GENERIC_PHY", as suggested by Loic
+>     Poulain; GENERIC_PHY_MIPI_DPHY selects it transitively
+> ---
+>   drivers/media/platform/qcom/camss/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/Kconfig b/drivers/media/platform/qcom/camss/Kconfig
+> index b51745c942c9..e0cef2cdd0a1 100644
+> --- a/drivers/media/platform/qcom/camss/Kconfig
+> +++ b/drivers/media/platform/qcom/camss/Kconfig
+> @@ -7,5 +7,5 @@ config VIDEO_QCOM_CAMSS
+>   	select VIDEO_V4L2_SUBDEV_API
+>   	select VIDEOBUF2_DMA_SG
+>   	select V4L2_FWNODE
+> -	select GENERIC_PHY
+> +	select GENERIC_PHY_MIPI_DPHY
+>   	imply PHY_QCOM_MIPI_CSI2
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
