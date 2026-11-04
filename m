@@ -1,124 +1,107 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793780293;
-	b=oQhoBRCkD4LJsuCRo4Zj/0ZeALnftCyEdxdQmkd1BJFW4tHu1QRUSs/H0rFHdPEuYbd0
-	 t8JYxzNThCG/xe+B3mP9ywCBbzsoO5btmQ6t7PdZ0lwFV8Fcq0tagF395E8KbayFRVJ6/
-	 o/ysRczuQcr/OvHyprtDl2/tXINgVfBYoELE4nRDImPmz8KFQe2ct33Yabhira64nGXU3
-	 Ch7KXWz7fuv8dyN060BeTdXgoUDqzLPTBHpCNca1gKPgiwPEG1ymIxYqM8UjQ66qH0GF6
-	 yL++KYxa63QjWVXf4S3YFibPxiF1SqLn9Mr5Dbq7zXAPldaP4xeu8DWmo5pFUGX9BsA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793780293;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=rcpTRbS+6Rmc8RSu++ryGV/dw8x2YB6xEvPhEGDt16w=;
-	b=Hhp0xo6dpofo7HyU56EaMJrmij3WVeI+oHsldK5gSnBV42HuYOPml81RlMYL+ITmQ8ta
-	 4JawCcn/D7HW4VFliIK9bj/5PeD7K01MPe0yc0btP1b9GLVkS3vFrQxad2cx9yeAdplEx
-	 vZoWFiRSVR6rVLXJivmpnrnCl2spRHhaRcqDN3rAJnGtGC0mXW0+nD+9cSl3JJN/3pCAs
-	 q1kiau2cI+Mj72MJc+bcaSegQKqVQvkav8vSDO05ZtYObjMxQaYXSLYdqmk1t/2pnIIXu
-	 +Btb/rMtfM9TWQIfmxNT8sB6NlkA3fXPhMV2p0608WtuAzWaxC86PjxeMldCKamBwqA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=n5u3hIUd;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BhKbR0mE;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.179
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793780811;
+	b=QUV15Cx2A4jmLqOKhL4AqYKFBjChZ/wWjKPJ4avOEu8Q6ohIw4kHQW+vMV6x9V2hQgCf
+	 xZ4ybFB5Z79X9E0W5/AIfW3nl/Kiic4AzLlGw6Sz+cMovD8zzhVjbIdvq96whv2wq28/r
+	 3tDmXvIPW87bpDTDaIM4fPu+S4DDgm6f0oVg9zwh6yJCHmS6Eyy5tuDrqVEi7oENbyRO1
+	 nALbIoarkCbTroIojQjD+ruVCdE2ZwcG+MQXRUTNBjk01sNnGRrrJV3aLJlXJo+5VEN2D
+	 5NnQAp7hOHgiM5FBSTjKnU95S7s/XUtOXq8uVeV7+8Ny7SKODjemCl8TG8v0NmIFpdQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793780811;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
+	 In-Reply-To;
+	bh=tvLMSn5HFpx5poOdSsb+2hYTyzg/cMkxA4fwRXRdGto=;
+	b=m5TePBh1Byrzq+LUyqdyiO2hSyfZNscFqEtDirAKzEUcikNkIJKJK+rl252ECg5wnguV
+	 wKZqSSnygS96ugsqBO6BMjjteYGRRg8Nfe9Y9P0k100DfI6IomHhP3LakIGhBRaSq07Ng
+	 Y82hifniCIIFtEx6xN16ueKTDrWeYipDRmlCApoUeZVGi8rnkwPhW7/FEDjp1P1YH9bQd
+	 L5egdLRZKsrtzAm1dUujMZO0jSttdctBUmn6qmGP8wBegjhGHaGWvHTVj1Af7X/ah7+Ik
+	 /+UR9v7MS0AZDW9WP5kQqdh3st0Gq8i2nL/6G+KzWwKe50NdmUUCdl2S0qrGMwDSjJA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=absP1XAP;
+	arc=none smtp.remote-ip=209.85.208.179
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC57F606A328
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 08:18:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CC57F606A328
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5C08606A328
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 08:26:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C5C08606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=n5u3hIUd;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BhKbR0mE
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A47JkP0838262
-	for <linux-arm-msm@vger.kernel.org>; Wed, 4 Nov 2026 08:18:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rcpTRbS+6Rmc8RSu++ryGV/dw8x2YB6xEvPhEGDt16w=; b=n5u3hIUdh9tyMmgH
-	EBPfvo35b0YoB8wAK5FR8KfCGDl/1s6Waa+0+99NNkvFaWCNxYp2v+DSfZMjZsF4
-	2wIg61Gcd/vmtuotHs7DLyxJI2dVLetHtsY9rNBVBqfZ3JsHRwnDsgSvdSrGF8Z5
-	slBxw2XaXu0VHco37of47Zg6KRpP+SQuZpNtklRuV8qrJwW+ctwXBpcj1MYJE2js
-	RlLygiZGofsJd7Wt88P7Z6RkZVEACtSQ5NpNWN25/kPMliC5aWdeJdGayFVLjX4K
-	1BgjxVOlMrCEwkCnMnD0FjrSa9yNSZJCcTxrj5qPwkYqFPhDuexmW7UycmfU60DQ
-	OgpSLA==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqn8mttxa-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 08:18:10 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-943e8ff02d0so52135885a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 00:18:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793780290; cv=none;
-        d=google.com; s=arc-20260327;
-        b=qBbll21COF2sBBQRua73bMezH1/RFz/C9AGLtTqO6EPicM8c4SNnLLkptkV6NXjyWi
-         xXuV7Q5Tp3Tly9onrxTnPoDe6l8FgZJ1S7nAPonksfPkbsGcm7uCfJV5x9Y/RU3+lWkk
-         grPC/u/kdbw0SX7CULK8lUwRw1JbGAfubkzQ8AEXyHqziWIdfL8S5OArZydddOsyu7nc
-         AfWkVaIfHLDL10sZ6/A565mQULCX5c8N307RLZBL68bl1DkFP4MMbLG9sPBvWy7t7yhk
-         BNfvujfZ/BdXTHOZvB2NxPQfi7DhgWPcBAMvbJNpyFdj387xWsBUJBSw2D4IefWWSjj/
-         ncow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=rcpTRbS+6Rmc8RSu++ryGV/dw8x2YB6xEvPhEGDt16w=;
-        fh=bIcNId5aP2xj515uxXUezJBNa+WJOXfXwy7wbS6krqk=;
-        b=feYK5HaXtRUbJlo3jvLoU+tdI8u9y8DlmQ8o31hJlhYRQYpQvA60isR1l3GxeAaq3M
-         EgTEyFSKri85pdzdNjDjNBWnGDg1joW/Rs0Rdm4Dec06qRGw+tuGIIRdJrKPMgEhzbsh
-         BPlCEmRGpPO9dfZv2NQFFuXby3AlK1Olm/dE5NJEWaipVDBWfFqOC6qUgXOT1SFI4efu
-         UPmTR0mS2op9YOxbhn6koiwICUgUZVZLDi7IaMTf5pXNo1NaVleat/Ds1KftzfoFArre
-         K+3HT7BeQwRiunN7rvXoUL0ZoZLGXWAmGMAIZChctthU+Ifcoff+Nc4YLi6t57JVaFxJ
-         hWgw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=absP1XAP
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-3a772ec8389so3274331fa.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 00:26:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793780290; x=1794385090; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=rcpTRbS+6Rmc8RSu++ryGV/dw8x2YB6xEvPhEGDt16w=;
-        b=BhKbR0mE4y8j3ie6Rt/Rf8T/h62PcswhCh+4CSzAIgiftoUlC35oc1auCIJXww0nvV
-         OTNMafJB2seIX/eXDNW8/eylYRixBnSREMe8JOaFXSSBg4uZcnc2+HJ9Z/uhb910FsoW
-         nWu6rWbWiAxs4yblVWKirif4d1113Falhw/vHckZgqWs/mTbVdm7DklRhlMgkA4p4NZU
-         q5T/kK/kukt219DAmoJB1ulVBAG2jV3r18pQ7FlxKzMv5rnOvC6i7ZlsrYfqMkv/vbF4
-         C6cl1oursdXPbAMKXBhKLTg3RbAhdDIViaUB/PZ1mAT9IBP9uKwh5Oobby/TvcvbI28y
-         dCRw==
+        d=linaro.org; s=google; t=1793780808; x=1794385608; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tvLMSn5HFpx5poOdSsb+2hYTyzg/cMkxA4fwRXRdGto=;
+        b=absP1XAP5WyJOO4ydTiMHBpJYvH3qYUqCNKFKPJeOXvzrGlpB5o48crUhH22VhMAHr
+         pmHB4al1ucv287GKq4CfijCKii8jUsKxqTOSz4QUOd6VtSDWc1xKFgSpn9XBe4pNjxNL
+         9i13TJeXMRPbll+uxMSvUa5dzZpp/4xucAKPFsG7lyJSoh340Jp7z/DJ4qHMPsyc++au
+         VDLS1acj4vMhmwAeCvFFROED4SJJNI5Qhzeg5+lndFhUOrZzDKQ/eLBV9UbYOyt6Yf9L
+         jRbzqThMzuC1APpLwrz3wbqcOe91cbG8iUxrkil++rXHPYbIt+StjJUhVqLMufSqIZhx
+         zeug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793780290; x=1794385090;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rcpTRbS+6Rmc8RSu++ryGV/dw8x2YB6xEvPhEGDt16w=;
-        b=CYCIn9uEuEyH8BjQZ3n8Qs/Z64R8zLG8bEw7A5U0320Yqa3fD+QHBRyUmDP9tTC3qP
-         9wC9ylN6A4+r7gYrPj6XfAbfFux1qb9ukYrVIYhOww217fi2L0xfYvAp6Tld1FALabsc
-         LS0C8IW0vPQKwF9Vmc4/r56FQhkRRzz08BMHrTxtfJy9BJ7zHh9OsZm/z9EGyIqU70am
-         KToUztOhYu071hdtX6kBzkgMlfdxEHigVyasMDDljpeyixjA24b8sU2/EhLD6fQkpbrR
-         cs3qvs29T6l08UwEjpRStQ2LsnK/Y4R9CTKpelfr3MhcagZ8DbzpK8c+6ET/ovlZAA9v
-         JJ7A==
-X-Forwarded-Encrypted: i=1; AKwUvBzNP5APsg1LZ5MMwzKFFM9MZI2byJcY2ub+p9glSzXblI7zEnqUj5tJpsHZPTAeBFdMagU8zkErvBSEOZ30@vger.kernel.org
-X-Gm-Message-State: APuU4Z/tXkSmoNz1UAo/loDXIqLp4h/TESueYvfHey0cekKy3lnubWE0
-	qhCZtQ9KZ8nw5Lt40d77g3Y50tc1k5IxuIH89qL+Um4+OWZ9OXjdFZgXqlcBj6LKhU0qMUza92X
-	1P5CEPDxHdYdvrXAni1A82qeDzSXrhVi782Q4xVhTDxMWSmYhRm6eXAaKAz+goGzQPGuUAXq4Wa
-	pSR9H54qG+Rr3MD6NtAC5ATUZcoUu7fk/T5x+TO2J3O9Q1Zvbx/uodjlWC
-X-Gm-Gg: AYBFou0JV9m6FUbxOi6jhPTkoCgQas1dqvrvJ6my5uOcsz+r6kkEaGskpKYRJNmEa8+
-	h9c9PplaO6Z04b/jKrurV51Q34VYbwzxNpfespKxDGgiIpO9eFs6u+L1dajWDIO++McSl0wO0hn
-	MuX9zNzSvYHOldVa/cNKxExIYbf5iLn9RA4EUJd73QGFZJWUvoia+RN3GQFK0Kh5VPwyj8/EaY4
-	8GY5kEd50XrTFiIPGsikR+dCv8/67LVwA9Z2cJ6TVLC+ByascAG1abE6xpjFJDFJ7CQoVlZX2E=
-X-Received: by 2002:a05:620a:6406:b0:93e:7944:b874 with SMTP id af79cd13be357-944216ebf09mr2346221385a.33.1793780289952;
-        Wed, 04 Nov 2026 00:18:09 -0800 (PST)
-X-Received: by 2002:a05:620a:6406:b0:93e:7944:b874 with SMTP id
- af79cd13be357-944216ebf09mr2346218085a.33.1793780289422; Wed, 04 Nov 2026
- 00:18:09 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793780808; x=1794385608;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=tvLMSn5HFpx5poOdSsb+2hYTyzg/cMkxA4fwRXRdGto=;
+        b=DufAeJ93o3dpUzYp8aL/WFNlqajzQ5it9EBlaTzQjXjKRfMeWIeHrgWFDKxPRwJkXy
+         c74J+l9Sf7RIaHFpvPhFTkiIhz3fwAQQZpLYpy4LzY8Pq9z79KZFbnuQ1sBcWvIqC3xA
+         dAnOdkx9iDy8c13GgildnKVYjYpQ1hlkpBU8hTts08wd0XG43xcjWVIhWpEDMBbeqzdz
+         J9r7ZYdRdf1V5EKMuHdMZjRsg32ojdU7UQhThw+E/MPYJlYU2sOUvFOcjPV4NyshhMOp
+         TsBeJRCYkLnAmtOfCkq3mjv6UK2aPT87ytQj8UdtHEyv5Zu4iO+JvNsnnW/v8yvX0R5j
+         JwhQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxR9Pga77wXihMCrEZBkUQZOeigOMMEjon3NWvhUOl90jCNR2Tp28qfQ7OHbUUN5LkczYRFqgEo86+C8q4b@vger.kernel.org
+X-Gm-Message-State: APuU4Z/rXceHCivkFZMUb6KabGUC3UGh2Nl3FbwpPPrxdnBDd9Vw0Rb0
+	1FbtxfEUYv/nIaWy3HyqJdhqbKP476+pdC4454A3dUrKrVMsDS2Ck9xpziCuvCrMreA=
+X-Gm-Gg: AYBFou0pg8LAfgyZP7Ti6HLjNojlsY+ZB8694OwfY/11V/4npWV8TAYXgZHAwTlST99
+	oknOJ4cWiS1PqDouORP/0wuJlDsaXo5Mhhga7VggSj219VtJ6km2L0gGi/lBzB4mhvMJxsq1ksZ
+	6MZ9czq85cm74Z2SyFA/GoPG0RWYWq2wwIm1mxbf7uEnTBldaycGetUBdB4gVRPYvMG16rikSLg
+	hLUv+KokghD0Od83hZv4dP04s8is1vvEdt47alSYNpaidiWd2fmFUCXOlyRrP8RIopVSJx1Tf+e
+	/vcvNc76xul0mZnp2kHO5fcgoL6UGO1tcba2M08nBmX8Cao071OXt7/H4QYMBOD5H9FmHeD06AD
+	iWnyKidukjgiya1j5ZUMtVBxjM9qBAfEMZ6obUeUKN+D7TPtfHo+73DEm7Bv2m5LbMxGmSF/X+g
+	vwDnZBfH+B6uAixYesK+bkrqyf7bMwF8k17d5BHnqYwOvTI021kMRn8Ldd1bV4zJmCuNh14N3uv
+	4xoQznV3qM/+Dx2GrpqG50mQPSTxZTvvHvXHPacemiZV3Zfb2xYCoUZ7YE+r0rnp9Sj6uYhFz4O
+	u65Lg3q1N0CYQ0BlavBvhDjOCYf/2fBNSMJS5UfDSsEufxPMA4Px9zM=
+X-Received: by 2002:a05:6512:2243:b0:5bf:a77e:7231 with SMTP id 2adb3069b0e04-5bfd956a2c7mr5805640e87.26.1793780807863;
+        Wed, 04 Nov 2026 00:26:47 -0800 (PST)
+Received: from nuoska (78-27-71-225.bb.dnainternet.fi. [78.27.71.225])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bff38c2690sm269858e87.57.2026.11.04.00.26.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Nov 2026 00:26:47 -0800 (PST)
+Date: Wed, 4 Nov 2026 10:26:45 +0200
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Hans de Goede <hansg@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+	linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-kbuild@vger.kernel.org, linux-yocto@lists.yoctoproject.org,
+	Bruce Ashfield <bruce.ashfield@gmail.com>
+Subject: Kconfig dependency loop LEDS_CLASS -> EC_ASUS_GLYMUR -> THERMAL ->
+ POWER_SUPPLY -> HID_NVIDIA_SHIELD -> LEDS_CLASS (was Re: [PATCH v4 2/4]
+ platform: arm64: Add a driver for the EC found on ASUS Glymur machines )
+Message-ID: <aursRfQRr0AOL1Oi@nuoska>
+References: <20261015-topic-asus_ec-v4-0-af6305ffcb10@oss.qualcomm.com>
+ <20261015-topic-asus_ec-v4-2-af6305ffcb10@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,100 +111,317 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <aa7b58df-a7df-4d33-b2a5-9cc760dd9ed5@linaro.org> <tencent_C589954C94BAFF49A7B030C93F367DE1620A@qq.com>
-In-Reply-To: <tencent_C589954C94BAFF49A7B030C93F367DE1620A@qq.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 4 Nov 2026 09:17:58 +0100
-X-Gm-Features: AclHuK9lnpn5o-AYyo6W8Av-ZNEtQ8ukw8wc-Ki9Jr4kBT3RqAwz6_m1hfJuGpI
-Message-ID: <CAFEp6-3iLYqvYqCrdf0ruQvuV_PKkpe+zdqFS6X78bEXroXF=w@mail.gmail.com>
-Subject: Re: [PATCH v3] media: qcom: camss: select GENERIC_PHY_MIPI_DPHY
-To: Shuai Liu <847807867@qq.com>
-Cc: linux-media@vger.kernel.org, bryan.odonoghue@linaro.org,
-        vladimir.zapolskiy@linaro.org, mchehab@kernel.org,
-        manivannan.sadhasivam@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: hpuF-csrZmZAQLX-PbR_y8J9hoykFRx-
-X-Proofpoint-ORIG-GUID: hpuF-csrZmZAQLX-PbR_y8J9hoykFRx-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAzMiBTYWx0ZWRfX9hRnqmeGaN0w
- XGRXjUGL/nPwwLiDbyL8FFUYAmgh3TLWdcI9rMZLzKdHEeGqgSne5PJFpvW2AkRIWrE9UDlFsP7
- 26hZ8IjIrdkRU80SjGFjT5DJtcAmXPYXIh+i+9OcXugTzgmcttwWtiMQgQ+05JvocaTPvC2df0g
- GgoCkrJRwqJK2a0Fe/bx0eqFHehcMvUvc4tiRhZIKa3LB9fX0f2jXrcwNTj8kD8t2JlYlJxjVOG
- UGPY82KPZs0Y3ZuJVzQUIXtsoPzUJggvVggAqJdX5Sawx4LRBjm8r5ywR+GiKmjRw1LEuqMhv6k
- 7GrA1ge62aLGTVwXBUVLPjZN0EaVLY+hz/1BP/UHbpYcXePsYMVhvEWr5GwFN5N3IX0ToH79cLq
- Z+aEmBj1AlWr6VHUFbOf5nakU1sArPU1K427Z2GjqNK+qXX6mrN8xtzY/r3k9qq3X25kK+OnQRW
- /ouNXo1cJunEy4uY/iQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAzMiBTYWx0ZWRfX4QHoENBOJt/9
- QcPeiN6xdivE5bODEPUNhlYH8djpgZlRbXEMZR9xMNvf7E/R89igxUeTrRQ6lrDdVHlBv8/HEX6
- u6/ObF9T06YwAOocoUdqf4/iXJKOUBQ=
-X-Authority-Analysis: v=2.4 cv=HbWB3SE8 c=1 sm=1 tr=0 ts=6aeaea42 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=dZbOZ2KzAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=JbTdJk7eOsX8aTkAOlIA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-04_01,2026-11-03_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040032
+In-Reply-To: <20261015-topic-asus_ec-v4-2-af6305ffcb10@oss.qualcomm.com>
 
-On Wed, Nov 4, 2026 at 2:11=E2=80=AFAM Shuai Liu <847807867@qq.com> wrote:
->
-> Commit 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API
-> devices") added a call to phy_mipi_dphy_get_default_config_for_hsclk()
-> in camss-csiphy.c but did not select GENERIC_PHY_MIPI_DPHY, the
-> invisible bool gating phy-core-mipi-dphy.c where that helper lives.
->
-> With CONFIG_VIDEO_QCOM_CAMSS=3Dy and no other driver pulling in
-> GENERIC_PHY_MIPI_DPHY, the build fails at link time:
->
->   camss-csiphy.c:(.text+0x51d): undefined reference to
->   `phy_mipi_dphy_get_default_config_for_hsclk'
->
-> Select GENERIC_PHY_MIPI_DPHY and drop the explicit "select GENERIC_PHY",
-> which is redundant as GENERIC_PHY_MIPI_DPHY selects GENERIC_PHY
-> transitively (drivers/phy/Kconfig). This matches the other MIPI D-PHY
-> consumers such as rkisp1, mali-c55 and sun6i-mipi-csi2.
->
-> Fixes: 0ee6c8a921b1 ("media: qcom: camss: Add support for PHY API devices=
-")
-> Signed-off-by: Shuai Liu <847807867@qq.com>
-> Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+(Adding linux-kbuild@vger.kernel.org, linux-yocto@lists.yoctoproject.org and
+yocto kernel maintainer Bruce)
 
-Please do not submit a new revision solely to update tags when there
-are no other changes.
+Hi,
 
-Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-
-
+On Thu, Oct 15, 2026 at 10:55:30AM +0200, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+>=20
+> Some Qualcomm Snapdragon X2 Elite (Extreme)-based ASUS laptops (at
+> least the Zenbook A14 and A16) expose a custom, somewhat
+> Qualcomm reference-derived EC interface. Introduce a driver to
+> communicate with said EC, allowing for fan speed reporting, keyboard
+> backlight setting and receiving of a number of miscellaneous sideband
+> events.
+>=20
+> Assisted-by: LLM
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > ---
-> Changes in v3:
->  - collect Reviewed-by tag
->
-> Changes in v2:
->  - drop the redundant "select GENERIC_PHY", as suggested by Loic
->    Poulain; GENERIC_PHY_MIPI_DPHY selects it transitively
-> ---
->  drivers/media/platform/qcom/camss/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/media/platform/qcom/camss/Kconfig b/drivers/media/pl=
-atform/qcom/camss/Kconfig
-> index b51745c942c9..e0cef2cdd0a1 100644
-> --- a/drivers/media/platform/qcom/camss/Kconfig
-> +++ b/drivers/media/platform/qcom/camss/Kconfig
-> @@ -7,5 +7,5 @@ config VIDEO_QCOM_CAMSS
->         select VIDEO_V4L2_SUBDEV_API
->         select VIDEOBUF2_DMA_SG
->         select V4L2_FWNODE
-> -       select GENERIC_PHY
-> +       select GENERIC_PHY_MIPI_DPHY
->         imply PHY_QCOM_MIPI_CSI2
-> --
-> 2.43.0
->
+>  drivers/platform/arm64/Kconfig          |  16 +
+>  drivers/platform/arm64/Makefile         |   1 +
+>  drivers/platform/arm64/asus-glymur-ec.c | 616 ++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 633 insertions(+)
+>=20
+> diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kcon=
+fig
+> index e32e01b2a9bd..84c475c62990 100644
+> --- a/drivers/platform/arm64/Kconfig
+> +++ b/drivers/platform/arm64/Kconfig
+> @@ -33,6 +33,22 @@ config EC_ACER_ASPIRE1
+>  	  laptop where this information is not properly exposed via the
+>  	  standard ACPI devices.
+> =20
+> +config EC_ASUS_GLYMUR
+> +	tristate "ASUS Zenbook A16 (Qualcomm) Embedded Controller driver"
+> +	depends on ARCH_QCOM || COMPILE_TEST
+> +	depends on I2C
+> +	depends on HWMON
+> +	depends on INPUT
+> +	depends on PM
+> +	depends on THERMAL || THERMAL=3Dn
+> +	select NEW_LEDS
+> +	select LEDS_CLASS
+> +	help
+> +	  Say M or Y here to enable the EC driver for the Qualcomm Snapdragon-
+> +	  based ASUS Zenbook A16 (UX3607OA) and similar machines. It provides
+> +	  temperature sensors readout, fan monitoring, keyboard and EC event
+> +	  reporting.
+> +
+
+With this new EC_ASUS_GLYMUR driver in 7.4-rc1 there now exists a kconfig d=
+ependency loop
+in arm64 builds:
+
+LEDS_CLASS -> EC_ASUS_GLYMUR -> THERMAL -> POWER_SUPPLY -> HID_NVIDIA_SHIEL=
+D -> LEDS_CLASS
+
+In Yocto distro we use additional tools[1] to check that kconfig elements i=
+n fragments actually
+get applied in the final .config etc and one of the checks is for dependenc=
+y loops which now
+fails with 7.4-rc1, full log below[2].
+
+To me it looks like EC_ASUS_GLYMUR correctly depends on LEDS_CLASS and that=
+ enabling this
+driver by default on arm64 with LEDS_CLASS is correct. And also HID_NVIDIA_=
+SHIELD correctly
+depends on LEDS_CLASS. Thus I don't think the drivers are doing anything wr=
+ong and thus
+on the Yocto kernel QA check side the dependency loop check should be relax=
+ed since they
+now can exists in the kernel tree.
+
+Do you agree to this or is there maybe some way to remove the kernel side k=
+config dependency
+loop to and from LEDS_CLASS?
+
+Cheers,
+
+-Mikko
+
+[1] symbol_why.py and kconfig parsing library from https://git.yoctoproject=
+=2Eorg/yocto-kernel-tools/
+    detects this loop
+
+[2]
+2026-11-03 12:00:42 - ERROR    - Command "/builds/Linaro/trustedsubstrate/g=
+pit/build$ /builds/Linaro/trustedsubstrate/gpit/bitbake/bin/bitbake -c buil=
+d core-image-sato-sdk" failed:
+ERROR: linux-yocto-dev-7.4-rc1+git-r0 do_kernel_configcheck: config analysi=
+s failed when running 'symbol_why.py --dotconfig /builds/Linaro/trustedsubs=
+trate/gpit/build/tmp/work/genericarm64-poky-linux/linux-yocto-dev/7.4-rc1+g=
+it/linux-genericarm64-standard-build/.config --mismatches --classify': Trac=
+eback (most recent call last):
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/symbol_w=
+hy.py", line 879, in <module>
+    conf =3D kconfiglib.Kconfig( kconf, show_errors, show_errors )
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 948, in __init__
+    self._init(filename, warn, warn_to_stderr, encoding)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 1122, in _init
+    check_dep_loop_sym(sym, False)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 6691, in _check_dep_loop_sym
+    else _check_dep_loop_sym(dep, False)
+         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 6691, in _check_dep_loop_sym
+    else _check_dep_loop_sym(dep, False)
+         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 6691, in _check_dep_loop_sym
+    else _check_dep_loop_sym(dep, False)
+         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  [Previous line repeated 7 more times]
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 6695, in _check_dep_loop_sym
+    return _found_dep_loop(loop, sym)
+  File "/builds/Linaro/trustedsubstrate/gpit/build/tmp/work/genericarm64-po=
+ky-linux/linux-yocto-dev/7.4-rc1+git/recipe-sysroot-native/usr/bin/kconfigl=
+ib.py", line 6799, in _found_dep_loop
+    raise KconfigError(msg)
+kconfiglib.KconfigError:=20
+Dependency loop
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+LEDS_CLASS (defined at drivers/leds/Kconfig:23), with definition...
+
+config LEDS_CLASS
+	tristate "LED Class Support"
+	depends on NEW_LEDS
+	help
+	  This option enables the LED sysfs class in /sys/class/leds.  You'll
+	  need this to do anything useful with LEDs.  If unsure, say Y.
+
+(select-related dependencies: (ADB_PMU_LED && PPC_PMAC && ADB_PMU && MACINT=
+OSH_DRIVERS) || (INPUT_WISTRON_BTNS && X86_32 && !UML && INPUT_MISC && INPU=
+T) || (SENSORS_APPLESMC && INPUT && X86 && HWMON) || (IR_REDRAT3 && USB && =
+RC_DEVICES && RC_CORE) || (IR_TTUSBIR && USB && RC_DEVICES && RC_CORE) || (=
+IR_WINBOND_CIR && ((X86 && PNP) || COMPILE_TEST) && HAS_IOPORT && RC_DEVICE=
+S && RC_CORE) || (HT16K33 && FB && I2C && INPUT && BACKLIGHT_CLASS_DEVICE &=
+& AUXDISPLAY) || (BACKLIGHT_ADP8860 && I2C && BACKLIGHT_CLASS_DEVICE && HAS=
+_IOMEM) || (BACKLIGHT_ADP8870 && I2C && BACKLIGHT_CLASS_DEVICE && HAS_IOMEM=
+) || (BACKLIGHT_LM3639 && I2C && BACKLIGHT_CLASS_DEVICE && HAS_IOMEM) || (S=
+ND_HDA_GENERIC && SND_HDA_GENERIC_LEDS && SND_HDA && SND && SOUND) || (SND_=
+USB_TONEPORT && SND_USB && USB && SND && SOUND) || (HID_MSI && USB_HID && H=
+ID && HID_SUPPORT) || (HID_WACOM && USB_HID && HID && HID_SUPPORT) || (HUAW=
+EI_WMI && ACPI_BATTERY && ACPI_EC && ACPI_WMI && INPUT && X86_PLATFORM_DEVI=
+CES) || (ACER_WMI && BACKLIGHT_CLASS_DEVICE && SERIO_I8042 && INPUT && (RFK=
+ILL || RFKILL =3D n) && ACPI_EC && ACPI_WMI && (ACPI_VIDEO || ACPI_VIDEO =
+=3D n) && HWMON && X86_PLATFORM_DEVICES) || (ASUS_LAPTOP && ACPI && BACKLIG=
+HT_CLASS_DEVICE && INPUT && (RFKILL || RFKILL =3D n) && (ACPI_VIDEO || ACPI=
+_VIDEO =3D n) && X86_PLATFORM_DEVICES) || (ASUS_WIRELESS && ACPI && INPUT &=
+& X86_PLATFORM_DEVICES) || (ASUS_WMI && ACPI_WMI && ACPI_BATTERY && INPUT &=
+& HWMON && BACKLIGHT_CLASS_DEVICE && (RFKILL || RFKILL =3D n) && HOTPLUG_PC=
+I && (ACPI_VIDEO || ACPI_VIDEO =3D n) && (SERIO_I8042 || SERIO_I8042 =3D n)=
+ && X86_PLATFORM_DEVICES) || (EEEPC_LAPTOP && ACPI_EC && INPUT && (RFKILL |=
+| RFKILL =3D n) && (ACPI_VIDEO || ACPI_VIDEO =3D n) && HOTPLUG_PCI && BACKL=
+IGHT_CLASS_DEVICE && X86_PLATFORM_DEVICES) || (DELL_LAPTOP && DMI && BACKLI=
+GHT_CLASS_DEVICE && ACPI_BATTERY && (ACPI_VIDEO || ACPI_VIDEO =3D n) && (RF=
+KILL || RFKILL =3D n) && (DELL_WMI || DELL_WMI =3D n) && SERIO_I8042 && DEL=
+L_SMBIOS && X86_PLATFORM_DRIVERS_DELL && X86_PLATFORM_DEVICES) || (FUJITSU_=
+LAPTOP && ACPI && INPUT && BACKLIGHT_CLASS_DEVICE && ACPI_BATTERY && (ACPI_=
+VIDEO || ACPI_VIDEO =3D n) && X86_PLATFORM_DEVICES) || (HP_ACCEL && INPUT &=
+& ACPI && SERIO_I8042 && X86_PLATFORM_DRIVERS_HP && X86_PLATFORM_DEVICES) |=
+| (IDEAPAD_LAPTOP && ACPI && ACPI_BATTERY && RFKILL && INPUT && SERIO_I8042=
+ && BACKLIGHT_CLASS_DEVICE && (ACPI_VIDEO || ACPI_VIDEO =3D n) && (ACPI_WMI=
+ || ACPI_WMI =3D n) && X86_PLATFORM_DEVICES) || (LENOVO_WMI_HOTKEY_UTILITIE=
+S && ACPI_WMI && X86_PLATFORM_DEVICES) || (THINKPAD_ACPI && ACPI_EC && ACPI=
+_BATTERY && INPUT && (RFKILL || RFKILL =3D n) && (ACPI_VIDEO || ACPI_VIDEO =
+=3D n) && BACKLIGHT_CLASS_DEVICE && I2C && DRM && X86_PLATFORM_DEVICES) || =
+(YOGABOOK && ACPI_WMI && INPUT && I2C && X86_PLATFORM_DEVICES) || (SAMSUNG_=
+LAPTOP && (RFKILL || RFKILL =3D n) && (ACPI_VIDEO || ACPI_VIDEO =3D n) && A=
+CPI_BATTERY && BACKLIGHT_CLASS_DEVICE && X86_PLATFORM_DEVICES) || (ACPI_TOS=
+HIBA && ACPI_EC && ACPI_BATTERY && ACPI_WMI && BACKLIGHT_CLASS_DEVICE && IN=
+PUT && (SERIO_I8042 || SERIO_I8042 =3D n) && (ACPI_VIDEO || ACPI_VIDEO =3D =
+n) && (HWMON || HWMON =3D n) && (RFKILL || RFKILL =3D n) && IIO && X86_PLAT=
+FORM_DEVICES) || (LG_LAPTOP && ACPI && ACPI_BATTERY && INPUT && X86_PLATFOR=
+M_DEVICES) || (SYSTEM76_ACPI && ACPI_EC && ACPI_BATTERY && HWMON && INPUT &=
+& X86_PLATFORM_DEVICES) || (TOPSTAR_LAPTOP && ACPI && INPUT && X86_PLATFORM=
+_DEVICES) || (X86_ANDROID_TABLETS && I2C && SPI && SERIAL_DEV_BUS && GPIOLI=
+B && PMIC_OPREGION && ACPI && EFI && PCI && X86_PLATFORM_DEVICES) || (SEL33=
+50_PLATFORM && ACPI && GPIOLIB && PINCTRL_BROXTON && X86_PLATFORM_DEVICES) =
+|| (EC_ASUS_GLYMUR && (ARCH_QCOM || COMPILE_TEST) && I2C && HWMON && INPUT =
+&& PM && (THERMAL || THERMAL =3D n) && ARM64_PLATFORM_DEVICES) || (EC_LENOV=
+O_THINKPAD_T14S && (ARCH_QCOM || COMPILE_TEST) && I2C && INPUT && ARM64_PLA=
+TFORM_DEVICES) || (EC_LENOVO_YOGA_SLIM7X_GEN11 && (ARCH_QCOM || COMPILE_TES=
+T) && I2C && INPUT && HWMON && ARM64_PLATFORM_DEVICES))
+
+=2E..depends on EC_ASUS_GLYMUR (defined at drivers/platform/arm64/Kconfig:3=
+6), with definition...
+
+config EC_ASUS_GLYMUR
+	tristate "ASUS Zenbook A16 (Qualcomm) Embedded Controller driver"
+	select NEW_LEDS
+	select LEDS_CLASS
+	depends on (ARCH_QCOM || COMPILE_TEST) && I2C && HWMON && INPUT && PM && (=
+THERMAL || THERMAL =3D n) && ARM64_PLATFORM_DEVICES
+	help
+	  Say M or Y here to enable the EC driver for the Qualcomm Snapdragon-
+	  based ASUS Zenbook A16 (UX3607OA) and similar machines. It provides
+	  temperature sensors readout, fan monitoring, keyboard and EC event
+	  reporting.
+
+=2E..depends on THERMAL (defined at drivers/thermal/Kconfig:6), with defini=
+tion...
+
+menuconfig THERMAL
+	bool "Thermal drivers"
+	help
+	  Thermal drivers offer a generic mechanism for
+	  thermal management. Usually it's made up of one or more thermal
+	  zones and cooling devices.
+	  Each thermal zone contains its own temperature, trip points,
+	  and cooling devices.
+	  All platforms with ACPI or Open Firmware thermal support can use
+	  this driver.
+	  If you want this support, you should say Y here.
+
+(select-related dependencies: (ACPI_VIDEO && BACKLIGHT_CLASS_DEVICE && INPU=
+T && ACPI_WMI && ACPI) || (ACPI_PROCESSOR && (X86 || ARM64 || LOONGARCH || =
+RISCV) && ACPI) || (ACPI_THERMAL && ACPI_PROCESSOR && ACPI) || (AB8500_BM &=
+& AB8500_CORE && AB8500_GPADC && IIO =3D y && OF && POWER_SUPPLY) || (DRM_E=
+TNAVIV && DRM_ETNAVIV_THERMAL && DRM && MMU && DRM && HAS_IOMEM) || (DRM_NO=
+UVEAU && ACPI && X86 && DRM && PCI && DRM && HAS_IOMEM) || (MMC_SDHCI_OMAP =
+&& (ARCH_OMAP2PLUS || ARCH_KEYSTONE || COMPILE_TEST) && MMC_SDHCI_PLTFM && =
+OF && MMC))
+
+(imply-related dependencies: (ACPI_VIDEO && BACKLIGHT_CLASS_DEVICE && INPUT=
+ && ACPI_WMI && ACPI) || (ACPI_PROCESSOR && (X86 || ARM64 || LOONGARCH || R=
+ISCV) && ACPI) || (ACPI_THERMAL && ACPI_PROCESSOR && ACPI) || (AB8500_BM &&=
+ AB8500_CORE && AB8500_GPADC && IIO =3D y && OF && POWER_SUPPLY) || (DRM_ET=
+NAVIV && DRM_ETNAVIV_THERMAL && DRM && MMU && DRM && HAS_IOMEM) || (DRM_NOU=
+VEAU && ACPI && X86 && DRM && PCI && DRM && HAS_IOMEM) || (MMC_SDHCI_OMAP &=
+& (ARCH_OMAP2PLUS || ARCH_KEYSTONE || COMPILE_TEST) && MMC_SDHCI_PLTFM && O=
+F && MMC))
+
+=2E..depends on POWER_SUPPLY (defined at drivers/power/supply/Kconfig:2), w=
+ith definition...
+
+menuconfig POWER_SUPPLY
+	bool "Power supply class support"
+	help
+	  Say Y here to enable power supply class support. This allows
+	  power supply (batteries, AC, USB) monitoring by userspace
+	  via sysfs and uevent (if available) and/or APM kernel interface
+	  (if selected below).
+
+(select-related dependencies: ARM64 || (X86_AMD_PSTATE && ACPI && X86 && CP=
+U_FREQ) || (ACPI_AC && ACPI) || (ACPI_BATTERY && ACPI) || (ACPI_SBS && X86 =
+&& ACPI_EC && ACPI) || (AB8500_CORE && ABX500_CORE && MFD_DB8500_PRCMU && H=
+AS_IOMEM) || (DRM_AMDGPU && DRM && PCI && DRM && HAS_IOMEM) || (DRM_NOUVEAU=
+ && DRM && PCI && DRM && HAS_IOMEM) || (DRM_RADEON && DRM && PCI && (AGP ||=
+ !AGP) && DRM && HAS_IOMEM) || (HID_BATTERY_STRENGTH && HID && HID_SUPPORT)=
+ || (HID_ASUS && USB_HID && LEDS_CLASS && (ASUS_WMI || ASUS_WMI =3D n) && H=
+ID && HID_SUPPORT) || (HID_CORSAIR && USB_HID && LEDS_CLASS && HID && HID_S=
+UPPORT) || (HID_LOGITECH_HIDPP && HID_LOGITECH && HID && HID_SUPPORT) || (H=
+ID_NINTENDO && NEW_LEDS && LEDS_CLASS && USB_HID && HID && HID_SUPPORT) || =
+(HID_NVIDIA_SHIELD && USB_HID && BT_HIDP && LEDS_CLASS && HID && HID_SUPPOR=
+T) || (HID_PLAYSTATION && LEDS_CLASS_MULTICOLOR && HID && HID_SUPPORT) || (=
+HID_SONY && USB_HID && NEW_LEDS && LEDS_CLASS && HID && HID_SUPPORT) || (HI=
+D_STEAM && HID && HID_SUPPORT) || (HID_PULSAR && USB_HID && HID && HID_SUPP=
+ORT) || (HID_WACOM && USB_HID && HID && HID_SUPPORT) || (HID_WIIMOTE && LED=
+S_CLASS && HID && HID_SUPPORT) || (USB_CONN_GPIO && GPIOLIB && USB_SUPPORT)=
+ || (APPLE_MFI_FASTCHARGE && USB && USB_SUPPORT) || (TYPEC_TCPM && USB && T=
+YPEC && USB_SUPPORT) || (TYPEC_TPS6598X && I2C && TYPEC && USB_SUPPORT) || =
+(DELL_LAPTOP && DMI && BACKLIGHT_CLASS_DEVICE && ACPI_BATTERY && (ACPI_VIDE=
+O || ACPI_VIDEO =3D n) && (RFKILL || RFKILL =3D n) && (DELL_WMI || DELL_WMI=
+ =3D n) && SERIO_I8042 && DELL_SMBIOS && X86_PLATFORM_DRIVERS_DELL && X86_P=
+LATFORM_DEVICES) || (HP_WMI && ACPI_EC && ACPI_WMI && INPUT && (RFKILL || R=
+FKILL =3D n) && X86_PLATFORM_DRIVERS_HP && X86_PLATFORM_DEVICES) || (X86_AN=
+DROID_TABLETS && I2C && SPI && SERIAL_DEV_BUS && GPIOLIB && PMIC_OPREGION &=
+& ACPI && EFI && PCI && X86_PLATFORM_DEVICES) || (SEL3350_PLATFORM && ACPI =
+&& GPIOLIB && PINCTRL_BROXTON && X86_PLATFORM_DEVICES))
+
+=2E..depends on HID_NVIDIA_SHIELD (defined at drivers/hid/Kconfig:908), wit=
+h definition...
+
+config HID_NVIDIA_SHIELD
+	tristate "NVIDIA SHIELD devices"
+	select POWER_SUPPLY
+	depends on USB_HID && BT_HIDP && LEDS_CLASS && HID && HID_SUPPORT
+	help
+	  Support for NVIDIA SHIELD accessories.
+	 =20
+	  Supported devices:
+	  - Thunderstrike (NVIDIA SHIELD Controller 2017)
+
+=2E..depends again on LEDS_CLASS (defined at drivers/leds/Kconfig:23)
+
+ERROR: Logfile of failure stored in: /builds/Linaro/trustedsubstrate/gpit/b=
+uild/tmp/work/genericarm64-poky-linux/linux-yocto-dev/7.4-rc1+git/temp/log.=
+do_kernel_configcheck.519198
+ERROR: Task (/builds/Linaro/trustedsubstrate/gpit/build/../core/meta/recipe=
+s-kernel/linux/linux-yocto-dev.bb:do_kernel_configcheck) failed with exit c=
+ode '1'
+2026-11-03 12:00:42 - ERROR    - Command "/builds/Linaro/trustedsubstrate/g=
+pit/bitbake/bin/bitbake -c build core-image-sato-sdk" failed with error 1
+section_end:1793707242:step_script
