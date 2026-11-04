@@ -1,42 +1,54 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.31.26.27
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793797361;
-	b=ennSnDuVmPQLWOcq+lDS1XOXkrnnJKYANc0JklqqoWWzzrIBG0YHI2dc/+uj6PjAolPE
-	 TGryDPOY/VD0b3Iiw4V0qXxyZVNE/CMKcsH9yyJtR2DygUSNK64a03lFZSeuvi8I8bxyl
-	 ND4sUDllGNJS5RpvdlDoSrxNnIdKLwQ8pPDVdMMmUOnNojKDOWQ+EbDZ/EZOHkDE0YBPC
-	 IcQfEx+r/EjTGGIsgEssX84qO0nz+LQJ0rWYWySIPcO32Fi4QXr1TqnfseyqkojQIIxee
-	 UfHpKMMGwQRDHNWQMaqv0bUwM+gEp7e2GXaIZRFvstCSYGhwn19zRjV5DhvNmRypUzQ==
+	t=1793797442;
+	b=U72PVlmXtRUj5AyabKRJPpD01MKf0HgrfkU8T8Ei0aUr/8XaFWQBdE2T2TPDo/iOCTHM
+	 ORgImjmY3b5n/wUOPpkx6kpIwrSiJGoilt2Gn4ZldH24Kel9vv0HcdEMilCkU1EoCGQah
+	 bzJnzZbv588qn6yQSLhCVt7uWEweOQs6zih7TamMTLAkLAmi7zEsP4lqPAnm/YMj/ktg+
+	 E30ensB+Kl0vBv8ZA2xxxe1QP+gwSFoTqgBNbq64RtLX1Y+yYIUnRPWMCWLctivc3WEcs
+	 iw45rJOULoUhHCtzBtHXFaCGYUr55MNBnD7s4UJoZ9TGmHhD7ZBEmbstLnNuCQjzkoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793797361;
-	h=DMARC-Filter:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer;
-	bh=ryK6A3KvYO4YaJ/RAZroWoOyiQyTzv7niD20z4N8Www=;
-	b=REnCjRcHryceNo5Lact2dpqf3OoTE3HYr2l8BHDmI3eBhuWezkUEw40VIEmHDFopXn+i
-	 I4s9wfY3INyymUAo5kCYn8MjEWIvfNo+1F7DdxaHEyQjbGKvu152UCMjsUOgpOv/MHMhq
-	 MROcMI5M6q/L914xLKQZJPdO1ZYEtLxqFhxz1+QSF/SnK+HR+OpTnGgl6FJBWWN+szCBl
-	 j8NLJmQev3KC43s3mEcRwk8bsWlhiIaoTp24rnHhxEMne/gC7YPsNiBNzAA+Mg2sFmBv4
-	 Y4RtHy8/IukjjklLPZyGdnxDS9diJemX7pqDgvWd7/75VZAgUcgOfUUwFrDyQJ+CyOQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793797442;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=5wqcByMokzUv4fCjSIMdnvQbDxt2gfypxhoyh1IAlY8=;
+	b=32pzlr+LfD2kNFzSweOGTBD2P3ojcAwmWy5T0Sq+czSN9QjJFjj6bla7iJoqY4WhfPr6
+	 rqLGsmFE/EvtEdoPz5vUOKTxw7gw8T0Uy162zXr1w+Xr+qRCdFkuJ3n+YEyAuoKAqQKS+
+	 tZm/DA6KOXYeZ5Zfi15aPK2y0FrS3f4vjqAhNh7QRbUhTSJ+jSezfrFmHu5A+1uEmfKDn
+	 uztKbfchRXSkgLoyFrm+6xlU74liTbEJOLR5aQb8HzznmPmmfBY/n2CRI47H8/ULIuqhy
+	 LVU3AZGWi+RTkfYdhVQ/WK8SSan3Kea9mcTVYc+VJF+xEpJpPqLNE7tWDmJ4GOzssWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=rudorff.com;
-	spf=pass smtp.mailfrom=rudorff.com;
-	arc=none smtp.remote-ip=193.31.26.27
-Received: from rudorff.com (rudorff.com [193.31.26.27])
+	dkim=pass header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=zh9klX8i;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34A3D606EEA4;
-	Wed,  4 Nov 2026 13:02:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 34A3D606EEA4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rudorff.com
-Received: from [127.0.1.1] (dynamic-002-211-221-196.2.211.pool.telefonica.de [2.211.221.196])
-	by rudorff.com (Postfix) with ESMTPSA id DCC4C4081B;
-	Wed,  4 Nov 2026 14:02:37 +0100 (CET)
-From: Christoph Rudorff <chris@rudorff.com>
-Subject: [PATCH v4 0/3] MSM8916: improve gp2ap002 proximity sensor
-Date: Wed, 04 Nov 2026 14:02:26 +0100
-Message-Id: <20261104-iio-light-gp2ap002-v4-0-fa1cbaad2ce5@rudorff.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63600606A32C;
+	Wed,  4 Nov 2026 13:04:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key, unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=zh9klX8i
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F7221F000C1;
+	Wed,  4 Nov 2026 13:04:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
+	s=korg; t=1793797442;
+	bh=5wqcByMokzUv4fCjSIMdnvQbDxt2gfypxhoyh1IAlY8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=zh9klX8ioxgQD51sWSO7xAGVGg6YDvzBghmfEbo5vODnGn/xN6Qm/eSlzbIR2gSIX
+	 nVFRNHk1gGgLQGM8rJ3xmxXSAHdViQn4DrpZlKBt0n9V6pq1UkUPZCwyRaZ6Lv0GZ7
+	 sSqzoYvshZ/IB+nJloT3UUAtIfTESK/xCVZAcwLA=
+Date: Wed, 4 Nov 2026 14:04:00 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: =?utf-8?B?5b6Q5pmX57+U?= <xuhx@hust.edu.cn>
+Cc: andersson@kernel.org, konradybcio@kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: soc: qcom: pmic_glink_altmode: fix use-after-free on unbind  (no
+ cancel_work_sync for port work and enable_work)
+Message-ID: <2026110426-upward-straggler-fa66@gregkh>
+References: <4c7f9772.192e1.1a17d5c2ed5.Coremail.xuhx@hust.edu.cn>
+ <2026102727-data-sequel-ce41@gregkh>
+ <5eae64b0.1e583.1a1a6a030a4.Coremail.xuhx@hust.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -46,97 +58,17 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAOIs62oC/33Ny27CMBQE0F9BXmPkV2zMiv+ouvDjJrlVwZEdo
- lZR/h0nbEBFXY40c2YmBTJCIafdTDJMWDBda1D7HQm9u3ZAMdZMBBOaM64pYqLf2PUj7QbhBsY
- E1T42jXQQvPKkDocMLf5s6MfnI5eb/4IwrtLa6LGMKf9urxNfe/8eTJwyaoKVkovWHWNzzreYc
- tseQrqQ9WISz4h5i4iKRH001mjjlNJ/EfmECPYWkRXxBphVOlgw9hVZluUO8dR45lIBAAA=
-X-Change-ID: 20261016-iio-light-gp2ap002-6bd553aecb4b
-To: Linus Walleij <linusw@kernel.org>, Jonathan Cameron <jic23@kernel.org>,
- David Lechner <dlechner@baylibre.com>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- Christoph Rudorff <chris@rudorff.com>
-X-Mailer: b4 0.16.0
+In-Reply-To: <5eae64b0.1e583.1a1a6a030a4.Coremail.xuhx@hust.edu.cn>
 
-Samsung J5 is equipped with GP2AP002 proximity sensor.
-Unfortunally the driver wasn't working, no irq received.
+On Wed, Nov 04, 2026 at 08:54:38PM +0800, 徐晗翔 wrote:
+>   Please keep me in Cc; I am not subscribed to the lists.
 
-According to datasheet page 8 "Recommended external circuit",
-it got tree pins to supply: vio, vdd and vled->leda.
+Please just send a patch for this issue as obviously you have a
+reproducer and can test that it works or not.
 
-It missed to power up the LED.
+thanks,
 
-I found this looking in downstream kernel, where
-several #ifdefs handled the case of 2 or 3 supplies.
-
-Now it works. Tested on samsung-j5 (msm8916):
-
-$ cd /sys/bus/iio/devices/iio\:device1
-$ echo 1 > events/in_proximity_thresh_either_en
-
-$ iio_event_monitor /dev/iio\:device1
-
-Event: time: 1791460068846871297, type: proximity, channel: 0,
-evtype: thresh, direction: rising
-
-Event: time: 1791460068876669724, type: proximity, channel: 0,
-evtype: thresh, direction: falling
-
-Signed-off-by: Christoph Rudorff <chris@rudorff.com>
-Assisted-by: gpio-hammer
----
-Changes in v4:
-- reword commit messages
-- gp2ap002: Applied Andy Shevchenko suggestions, namespace etc...
-- Link to v3: https://patch.msgid.link/20261020-iio-light-gp2ap002-v3-0-b7e0946c9e79@rudorff.com
-
-Changes in v3:
-- rename vled leda
-- j5 dt: moved declarations from j5-common
-- Link to v2: https://patch.msgid.link/20261017-iio-light-gp2ap002-v2-0-d6879767a446@rudorff.com
-
-Changes in v2:
-- reorganized patch serie
-- gp2ap002: use regulator bulk framework
-- Link to v1: https://patch.msgid.link/20261016-iio-light-gp2ap002-v1-0-7c93312fa8d5@rudorff.com
-
-To: Linus Walleij <linusw@kernel.org>
-To: Jonathan Cameron <jic23@kernel.org>
-To: David Lechner <dlechner@baylibre.com>
-To: Nuno Sá <nuno.sa@analog.com>
-To: Andy Shevchenko <andy@kernel.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-iio@vger.kernel.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org
-
----
-Christoph Rudorff (3):
-      dt-bindings: iio: light: gp2ap002: add leda power supply
-      iio: light: gp2ap002: add led power supply
-      arm64: dts: qcom: msm8916-samsung-j5: Add proximity sensor
-
- .../bindings/iio/light/sharp,gp2ap002.yaml         |  3 +
- arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts    | 52 ++++++++++++
- drivers/iio/light/gp2ap002.c                       | 92 ++++++++++------------
- 3 files changed, 98 insertions(+), 49 deletions(-)
----
-base-commit: a2de78ee6ed8bf8cd99d177c74865a6e8c3cb6ea
-change-id: 20261016-iio-light-gp2ap002-6bd553aecb4b
-
-Best regards,
---  
-Christoph Rudorff <chris@rudorff.com>
-
+greg k-h
