@@ -1,139 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.remote-ip=192.198.163.9
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=fail;
-	t=1793793734;
-	b=2TtCW/tw/OPgjL/Aeu78+5at251YHix6bL+s81r7WdUS7kqVEtRd3Oi72S69Kn8rAXX9
-	 rsA5fdHnNtMYopNALhD0fpGfb6Tzi98ff91wQvVwWnpOnIxxNu/naiUuGSQEOcEG6y8Ue
-	 Fe8k3fTtbN3UvA11YGYpyHW7b3fwcDXNwIbGLQU5JrUZHCT9kCGMtb8X0IRpPeQJ+ih8i
-	 BcxV7h3eT6oj3aI7C0bExuEGXX6SZ8PosXs4ls9gBgjvGgWYHtPDK2fnoqLY/VV/3vDrv
-	 c30qKrI5TkLDj4xN94kUi957Drq4SoKF9H3dKymrdAY8TVKQ0J5U+CM/8hnAMxmnHlQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793793734;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Received:
-	 Received:Received:Received:Message-ID:Date:User-Agent:Subject:To:CC:
-	 References:Content-Language:From:Organization:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
-	bh=cdMeccl10V+/EZhrB7nz3PXtnqPFNKQGFZm4hOwi3J0=;
-	b=ZG9ghg5bx/X5yBWryjGbno+J5eQQPkQOWheQIw8wVvzerWZhz4ofuqNDhYaoOGRXTk2c
-	 kyG6Q8PLrUdOmbexyBEuEM3DQR54dmhhg66qVWGVLC7QAXJxLRCd2kdcgJRkAwT/Oo+V3
-	 HEVgcmFAKbfGSQGzDW9Njgs5XVFAtX6v/1NFTbs3PefCfLsIW5Yv4Y2p+nAU/H45H82Tf
-	 MEAIdcnTLDUg8qC9R/8YvSi4qGwmNvKspekWqB+IUmGq2PmyGUEmmjydtHtJBzr0Xuqw9
-	 86PkVSsmNSFVlWz1+l1FXmJUkb5rCMo7SBQpmwtlgaksqyCXvpLanO6sHD8reNIW69g==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CoCZ9cCm;
-	arc=fail smtp.remote-ip=192.198.163.9
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793794950;
+	b=i98QcNJjbF59jNaAsHFCFTprzTKhDM7hXfjsnbZV5UdVsh9eXGgZ4BUFCkRv+40voiSP
+	 YLu9w/vQ9b7cAX64ST+ssLM87v/aA+vzep6fDgQAVZEXh8w7QtE2FYryxiI5ENSYzlO+g
+	 wpYenhBtX+yPwcFAAbg720s+34FAFjQHKXEttuFb57TtECTqDU9iTlH2H5neVzJtrJmG4
+	 udIy/KwDs48BVaXBADt+t4geBoq4gqxTNLWze/Qy7leJgjNLL8n2t+X4gMth1Ql0qb5B6
+	 0H8IG1gKJZF/Jphz30nQAHnDN0I4mNhPXXR47uSmt5XXm/LZpJV356IOqVRcHOfn/8A==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793794950;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
+	 Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
+	 References:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=TCR7T2yOGWw9wDutJHRfCmleiTA6eLowEk0LS0sd9MQ=;
+	b=lc2Lrl9LNUvHLK7X0TT1922JlHM6fkpb6wjYtMdsufW0hgsFxEYU10+7bQlTdLe9BOSv
+	 2c25Qk1GjbsD+s53DAU6/NicWwIMrTia9xo98/JF/UoSv5JJ0MQL6uJmrUxnSu+ov8Uv7
+	 oi3fAVG/NLtfn+skuA8QwkWGoUnd8b2QQHdYxpJDENqXOkt7C+v7Q8MAF+xT7xyoJMmCj
+	 gfcqisc+nE0u/ckG7XuFJPRlpa/SaxEyH2mrBYRMKm7cDRLf9ZqUpzxptpc4MS/LtREZy
+	 ytM94VYDqp+jnpblOZIOPhbweZWnRtyvz6a/LmUlgxNyuB71Y++mYBRlSaIFKYU2vGg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VN0PbDNu;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CB32606A31B;
-	Wed,  4 Nov 2026 12:02:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2CB32606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E8A4606A32D;
+	Wed,  4 Nov 2026 12:22:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2E8A4606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CoCZ9cCm
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793793734; x=1825329734;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=Li5U8oZJrdaDBUerlnmdFL9wtKaCeXHPpaBV0opou4s=;
-  b=CoCZ9cCmnSiaEcrBX7IZbe90Oewp9k0DnbF6NtgyANUxc9HVtXU1QyUD
-   steibAnJZnIU9Iyo22vN2CmUoaz15Ya94O77DVSnghplHtqWwmxFFruDz
-   qt3EEaAwcm3w/ESl7yeLMp//bc8rEMkI8dWAeG8A9i42lv6RvskFDpq0M
-   caiTqXWnuEJS2QFXQ3ZY7a5aj1pS1kWHmbx2g9YxCaQD9feQlCfF7SWoj
-   rCZp2mrcHtTXO1Iqox/jPx7LeKnxJ2fkP9itSx0JYbsEjGdfWVm23wlMb
-   cyJhi9/N0UUDxU6smogTamBc1T/YTJSj8wANlIeLaItl8SCClmgp80U+D
-   w==;
-X-CSE-ConnectionGUID: Y9kgCX2ASte8YtovJPF/UQ==
-X-CSE-MsgGUID: lj151p87S/OEFK9DlvkJXg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11955"; a="2419646"
-X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
-   d="scan'208";a="2419646"
-Received: from fmviesa012.fm.intel.com ([10.60.135.152])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 04:02:12 -0800
-X-CSE-ConnectionGUID: YM4d2tGCTuiSlAzG4xrcdQ==
-X-CSE-MsgGUID: XSs22+W+Q465GJIJuuSSyA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
-   d="scan'208";a="8490949"
-Received: from fmsmsx901.amr.corp.intel.com ([10.18.126.90])
-  by fmviesa012.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 04:02:10 -0800
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.56; Wed, 4 Nov 2026 04:02:10 -0800
-Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.56 via Frontend Transport; Wed, 4 Nov 2026 04:02:10 -0800
-Received: from CO1PR03CU002.outbound.protection.outlook.com (52.101.46.53) by
- edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.56; Wed, 4 Nov 2026 04:02:10 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CtsAMe0SLJVH857skxtv+vhWr+3tqUqn4++U6qx1UdqOva1Y2iTM5Jvo+tHs/YeGYh+M3IVy7ofoU/4P25zKAgLVoL6mJOYvDYMpKBJ0GM8ekkB4OoZsDXdfgF1+JW5BrXPt643V3fO3r3OUYLZrWiditJHC1kiDDyU/hF0I85w/P+GSkHL57xrNRljcST6LvnSoMm2gBBMqAB+Bb2Ht+W4cXCrWkxbBn6b3aCCH6ii/DK1pVgRAos8cBsqtrVtdhrtSM4A34Vpp8bCXcxk+dLk2A44aqbDIOKxoPIuqdCqM5gL/niE7t8j511vDjgsJJmbiE52NKNOR0fSmJ5OdXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cdMeccl10V+/EZhrB7nz3PXtnqPFNKQGFZm4hOwi3J0=;
- b=DHEsZ/w/u8gffCsTAch4pWAs5Zt42zeXFgfK4v7SGHmkwvS30oodQ3ckK7sAmHhSIGj8Pajc8vAcf5APG1/uOiu0JgsuZDVFL+ro1WiqBguzckHwf3hUWEL4WAgwD7X1zFObTJVpoS68tpF/zoRRIyeK/tIOGZTMI1h6jLH6A0O2y5wWkPAy+Dg9WJAqrbcPF0SGLlGkQ+YvmTt04/SAb3xuMYvMBHKdKDYgQcL4Lgye8bPIbeMGCUbbGSu26Ai7uUsEPn4i8JW/L6VO26dezgV37exrLzar9JxISt9O2HWaFjyjMkoIUsScvZpKosvMo4BKSVITakmGpuosSpnk7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from IA1PR11MB7198.namprd11.prod.outlook.com (2603:10b6:208:419::15)
- by DS0PR11MB7311.namprd11.prod.outlook.com (2603:10b6:8:11e::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Wed, 4 Nov 2026
- 12:02:08 +0000
-Received: from IA1PR11MB7198.namprd11.prod.outlook.com
- ([fe80::2c4e:e92a:4fa:a456]) by IA1PR11MB7198.namprd11.prod.outlook.com
- ([fe80::2c4e:e92a:4fa:a456%3]) with mapi id 15.21.0569.011; Wed, 4 Nov 2026
- 12:02:08 +0000
-Message-ID: <afa7f2f6-17f3-468a-a7c8-4b1b7840bde8@intel.com>
-Date: Wed, 4 Nov 2026 14:02:02 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] mmc: sdhci-msm: Add support for firmware-managed
- resource platforms
-To: Anjana Hari <anjana.hari@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>,
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-CC: <linux-arm-msm@vger.kernel.org>, <linux-mmc@vger.kernel.org>,
-	<devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Shazad Hussain
-	<shazad.hussain@oss.qualcomm.com>, Manivannan Sadhasivam
-	<manivannan.sadhasivam@oss.qualcomm.com>, Nitin Rawat
-	<nitin.rawat@oss.qualcomm.com>, Ram Gupta <ram.gupta@oss.qualcomm.com>
-References: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
- <20261102-sdcc_scmi-v1-2-244dbd893051@oss.qualcomm.com>
-Content-Language: en-US
-From: Adrian Hunter <adrian.hunter@intel.com>
-Organization: Intel Finland Oy, Registered Address: c/o Alberga Business Park,
- 6 krs, Bertel Jungin Aukio 5, 02600 Espoo, Business Identity Code: 0357606 -
- 4, Domiciled in Helsinki
-In-Reply-To: <20261102-sdcc_scmi-v1-2-244dbd893051@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: DU7P195CA0019.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:54d::32) To IA1PR11MB7198.namprd11.prod.outlook.com
- (2603:10b6:208:419::15)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VN0PbDNu
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A4BZpg5739139;
+	Wed, 4 Nov 2026 12:22:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=TCR7T2yOGWw
+	9wDutJHRfCmleiTA6eLowEk0LS0sd9MQ=; b=VN0PbDNuTyAkezoFAK7LFERZjSI
+	/1SA7gCDuRMedr1q1nU32Z2Ikeg8LWG41gS7Lp0ZLpufj/vXDiXDe9f8vUD3+bu+
+	yZ+rYWOUQV1Di/HtX3XCN0LB1s8y+y7ItALepVFAEw218qSuNZbesoJPTCxS5ooN
+	juEfb+mPSQOt/0+LGVUPYg+6a1371puh+0IRo4l0tgabLNkJHRZfXKQSKBEzWlFF
+	1ZrIdLoNngtlLJS2VVQFdBjCk5T671x5dqjECH9eD8FuqmTeOxdHKjfT87LZ8R1d
+	95Jz8eEUTsaiCZMhkX0BVAchsffvIX833OWy/vjcdo7s3+SSDJIKcAlDeKw==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hr163gxqr-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 04 Nov 2026 12:22:08 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6A4CM4hw2768554;
+	Wed, 4 Nov 2026 12:22:05 GMT
+Received: from hu-devc-hyd-u24-a.qualcomm.com (hu-msavaliy-hyd.qualcomm.com [10.147.246.140])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 6A4CM5Y82768563
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 04 Nov 2026 12:22:05 +0000 (GMT)
+Received: by hu-devc-hyd-u24-a.qualcomm.com (Postfix, from userid 429934)
+	id 416B921641; Wed,  4 Nov 2026 17:52:04 +0530 (+0530)
+From: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+To: mukesh.savaliya@oss.qualcomm.com, alexandre.belloni@bootlin.com,
+        Frank.Li@nxp.com, robh@kernel.org, krzk+dt@kernel.org,
+        conor+dt@kernel.org, shubhrajyoti.datta@amd.com,
+        shubhamsanjay.patil@amd.com, adrian.hunter@intel.com,
+        manikanta.guntupalli@amd.com, linux-i3c@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, jarkko.nikula@linux.intel.com,
+        wsa+renesas@sang-engineering.com
+Cc: konrad.dybcio@oss.qualcomm.com, andersson@kernel.org,
+        jyothi.seerapu@oss.qualcomm.com, viken.dadhaniya@oss.qualcomm.com,
+        aniket.randive@oss.qualcomm.com, praveen.talari@oss.qualcomm.com
+Subject: [PATCH v7 2/3] i3c: master: Add Qualcomm I3C controller driver
+Date: Wed,  4 Nov 2026 17:51:54 +0530
+Message-ID: <20261104122155.3789346-3-mukesh.savaliya@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261104122155.3789346-1-mukesh.savaliya@oss.qualcomm.com>
+References: <20261104122155.3789346-1-mukesh.savaliya@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -143,502 +89,1227 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA1PR11MB7198:EE_|DS0PR11MB7311:EE_
-X-MS-Office365-Filtering-Correlation-Id: f6f7af5c-0e81-4b0a-bc42-08df3a6b7308
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|23010399003|376014|7416014|1800799024|6133799003|10067099003|22082099003|18002099003|3023799007|11063799006|56012099006|4143699003|261022075727099003|261102123227099003|261026140227099003|261022105027099003|261028144727099003|261026121527099003|261021123027099003|261021121427099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info: C7sL8xHW075L6ZqPoZrVXJeWZtDwXsT3dEjWKUVe2hp1tbWxTUY753+tIBJwKhdyEpQC7XRYnUOBnJcAzOUUoDPildXejB9aZyybPM7c6hzE2OEzItIlMtSxXO9lmQQ5NkvRn4hKAcDIU3rO17Z8ZtT3DrUAEuInhe885Ndfio4hAV1Gcywu2l6+wzRUOuFUDimrZbXF7hb0UANckbLU2qhipMdv6JGI9r6gGopogl4gwRo9WD7RtjntquklVafKM9hwZc7Ge7D03JCGzoIHQV0PJ2QIwJKlMu7Bjjni/pe33CosZpmJ8NJFxnY8m3/hXx9mH9eXNgRl9zqLpzg4TR6/RssTJzWy9++jkjm2AI2ccVn7Pme6ccaL7wVotRaAdQ1ND39GTD9k0QquO7yXFInTYVqWdM+hUGrGIbtN5meMospxjSqemSsz5kbNApX3G6JhrQUGiOc5rPNWu/NWGdiMtaN2/GtlPVmWnbFeLQAiZ1oei6LYkHESMQu3bOoRda0S6WbN6ottUW7J3rOmsY9GnTumFQxGwiya/Bfy+xv2aWUIKYm62RjW7AmC3eV7hlFsdhUFtZ9jGwzaYYBiq+4X+kPHki64wmwFzFKTUmQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB7198.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(7416014)(1800799024)(6133799003)(10067099003)(22082099003)(18002099003)(3023799007)(11063799006)(56012099006)(4143699003)(261022075727099003)(261102123227099003)(261026140227099003)(261022105027099003)(261028144727099003)(261026121527099003)(261021123027099003)(261021121427099003)(261009223027099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bXhFakJlc0ZxMW51TFgzTUN3elVWNVdldWI0bS90V2x3SVdSdERCb2NHZHhS?=
- =?utf-8?B?eitwVUdWeHVjdmxiNCtIMWdwQTNOamg0a040VFpwUzd3Y2hQc1NhUmV5dnlp?=
- =?utf-8?B?NVhnTWhZc29ZTGM0UjhrWUh2SDBRMzc4a2p3aWxFZjE2TmpEby9MMmVOaTRp?=
- =?utf-8?B?V21oU2sreWhLbVpxNDFzQVRYdDdaM3FGZUNYbUxIVWVBendtOHkwb3AwM1d3?=
- =?utf-8?B?enJMVkg0RDVkYlIyd0IySXl0VmJjaCs2ODd2SEh5dk11Z3ZkaXFVVmlwK1c2?=
- =?utf-8?B?MTFzNTdkZm5hNGJpVmJHdjdHMHpSekRtYjRLbmNNS2VIQmtvNkFMUmtWQjFB?=
- =?utf-8?B?RngxbjQwQ0RkVlZSQjFyQW8xOWlIdmhHL3U3bEZON2ZzdHQzUHIrMGZrcS9K?=
- =?utf-8?B?QVZUcDZQV1RXRmRYaXg0dkhyakJQdUhxSlM1Zkkva3A5dlVDSHBweHVsOVlS?=
- =?utf-8?B?SWtiTWkvYTRQYTdPOXhXUkFFNTZ0clFvUXBPcnJqckIwY1Z4K2kvMTJqR1hk?=
- =?utf-8?B?S2lJVGFkdGVZUjRYWHZldG5FaWd6VnVvOFlLTHVwTlpnWjJNTWVmN3VNcmhZ?=
- =?utf-8?B?T1VVSFhteEZ4bHhzend2ZnhMZi9lVmltZ3NYYmhuKzh1aERkQkh1Q2tPZ0lK?=
- =?utf-8?B?Z1orNytsajJSVW1ZYmZsRUF4SnFrd2pweXh5RTlEMnNOM0ZoazF1czZvR241?=
- =?utf-8?B?WkplRllCL1kyWXkxZEQ4aTFEdDJ4V3kwMHBObkZCbHY0cHRpZjFQSnowNjZQ?=
- =?utf-8?B?ZTlTbUR0M0RUTW1CYldKRFFpOGphWUdqdHZlZmptMGxJUUl6dWdQWVdWOUFv?=
- =?utf-8?B?aEpsM1Z3M1BjdTFPNytHa1RiSTFWUjdlTmFUMHlraFFjMWswT2FQOHVScTly?=
- =?utf-8?B?NFNqTVZzN2QrMEF0RC9Lb3FRd1Z2WVRUR01QaHBISlptUXI5dXpNeTI4eGFa?=
- =?utf-8?B?SXczb0NpTjN2ODcrZ0EvNTJsaEpmbXRlNENDN21NdThqQXNSVDZSMVN2anJV?=
- =?utf-8?B?eHo2NVFpWDZsVHpwYkRyMEQ4QjVxWVd5ZnE5bzFzR3V1c21oWnFoeEJoMGNE?=
- =?utf-8?B?UEx6NXNLQTljb2lJUWdaQThpbFpHMzB5NGxSWnNSYkhUNm9pbkhBVEpESm9L?=
- =?utf-8?B?VGthcnNqQVRLUUJmY2RiZ1hxN1dwNWpDRmtMUXRnNnltM3RrK1pFbFoyOWgx?=
- =?utf-8?B?aTdoVDZ5b2FtZUo1aEpqZFNWaVNCV1ExZHl4S2ZRVlc5YnRSdElmM1M5Wmpp?=
- =?utf-8?B?S2pkUVBKbmxjdm9KdW5YbjkxZHBLRFFYbGZvMEdOem9VM1JraEJyZnFHN0pm?=
- =?utf-8?B?cVk0b3FMRlgvaDhoeHRIRUhSWDM4Q0E0cDRzVjFsVmlPWE9GOU0zbGg0MjAr?=
- =?utf-8?B?dCtzT2h3WVlRQW1lTUlWa24rd3p4MVlSQ2JXUWpwem1xWEhNMHp3T0ZCVFIv?=
- =?utf-8?B?SzNBMjhqV3hFcVJsV25RdlMzdWxNMWNxZi9DSXphaGIyMEJ6ZUgwbDZjK1Vr?=
- =?utf-8?B?OGRkbW5XS1hlYkhBdENoSTlSR0NZUHpvT2kweXZWZ2NvNHhXWEt1bHNId3V3?=
- =?utf-8?B?OUlSTlROU0VLdlRNVy9veUJLLzZQU010bHZFVWVDSE9TbnNFakpmRWUwZmJG?=
- =?utf-8?B?Q0RLdk01Y3haekhLQVhZUzhrbFBuM0NGRFRkNFJwR3c2eVJpZGNxNEtIT2lS?=
- =?utf-8?B?aDYxRHVxcjJjeHUyQkxhbDVHbVpaSkJMR2pPa1RLZVgrcXBxZ1dxeGZPQXl2?=
- =?utf-8?B?UEg1RlRLRnRia3pvSzBpazlkK09BemtvbDNzZlJkaEZJN1kyVE1TdVAva3Ny?=
- =?utf-8?B?cVVtSUxHUFlueWR3dDFsWS80aytHRUJtNjhzb0JEbTNIbXRBVnhCdlhSSXBK?=
- =?utf-8?B?WEg0VGJoZ3VwYVgxbG1lRTJoaERCcmU4RnR3bHpLMlNwYzQxS2JFa0p6R1Nq?=
- =?utf-8?B?ODVkczlvbVVXZUMxWFNzMGYwbE16OXlCYTFTUUtoR1RzZVVBMit6K3QrcGZK?=
- =?utf-8?B?ZWFoS2Y1Q0Q4eG1ISk42aXRHWVdKdlJnc1ZzZGVTbUxJU1Y5ZDJHREpRM1JE?=
- =?utf-8?B?V2lkVkdtMWJTOEd0YUtLZENYblZNQnErbFhHeURSUUNQUUt4c2JUdW90MUp3?=
- =?utf-8?B?QU5LcTVGU1VOWEJmR0xOeWFDa1NZOU9uYUNualhUaHViWmFNSTljWklWK3Va?=
- =?utf-8?B?QTNjckduZThUQ3pkZWNoQ25pZGVxNVZrY256SGNqeUZiVTVYRFhTSTUremZP?=
- =?utf-8?B?RVZPVWVRVmwrcDBrWU43cWZOdlZFcXZJdGtuOGFUYkUwQ3krMXl2KysrUlEr?=
- =?utf-8?B?NWNXRGx6aEpkNUM3cjBjcXMvMU9QRXQ2LzREYmZ0WGFZQVdNUWVvZz09?=
-X-Exchange-RoutingPolicyChecked: 1oiyeBME1vtv8bPfOjt81U2W5LcFk3enYPEeiAU441n4GKs6CoVguX9t4fJkL21gSIU6lmzyPAi9BGwiWCdfyGPNciLmj8kVSsixgtkoCd+CTOQyk8xuaLvAkbAUIsCdxkfeMdVMjroMVIdkM0aonkqG1zsnYkeruegJw04OJEU8VaM8l223Yuy43aSQf/u9Bpt0mwcfh1laK5WKKE3DbN1HPr2aonf5W2Jqy9G5YyEWJr8cTLp30hJdwlrfYVGMV0TwPIjST5uC07hYAQB7tvtHRzSmsGENL12oLBbtUdeccflAcG62o6UfQ+XycoPA/sqwld4k6svW1Wx57BoGWg==
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6f7af5c-0e81-4b0a-bc42-08df3a6b7308
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB7198.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 12:02:07.8848
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0w8y1gfSSJFZqVejOfLf7hfWinLswDPSzlrmbgmdlW7jaClI5VAopNPCv+dcrtt9G8jIOsexVdztfZS07xQZKw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7311
-X-OriginatorOrg: intel.com
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-ORIG-GUID: F5NoVcvzOHVrM2hNliap6ALnvvFedbOp
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA0OSBTYWx0ZWRfX6NhfoDpDuGPM
+ WP2UIClyz8dMfwChHHTjpGAV5Jt66/wUL/+ycokeZS/VonJgo+Gh9LxQtdBdm9aj+q3kTYTnJqO
+ 6VlpivK5bPajIn61GhG/HXMW0EicJHk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA0OSBTYWx0ZWRfX65/xdhNd0XKr
+ /+y9chUderrJ8x/JM4bAVJj8AHuvnO/dZAXAigqqTMZY0HbSyDlPGkNPxv7okHjqUK4ckEvR4F+
+ OSME37xodar24n75uytCW1ljHz6eAFiNdB3qvcpi3nL/ogq/jdnOZHexDcvJmcCmYLua5WjM/YA
+ kSVzh2ALG9u1rsTxWJ/XaulTQruwl5U0gG7nZFD9h1vYpUuESWvnwJTplsYtTStEyMmWPi80gs4
+ gBH4BarBDtabdsfvuvieQ82tzgUBQZmUMrMGnd19gZniLilTvYq4HgOjjcASbY9B8A5EPMBlSar
+ /puWXgjXOAu1ccSosTu6qn3sBD16jpaUmR/g92me/MwU5Rk0VdDL84qyDH91Yg/PdYCF+fjQt28
+ Vy9KE/JywO2MMZo7ttJjDJJrZMgD0N1v7YJx9QPi6+qWtLPBRvG/DQMvsd0otqKZEcFre1v2MHV
+ cd7sSDz/o+mqboacQ7A==
+X-Proofpoint-GUID: F5NoVcvzOHVrM2hNliap6ALnvvFedbOp
+X-Authority-Analysis: v=2.4 cv=O5OsLx9W c=1 sm=1 tr=0 ts=6aeb2370 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8 a=DPmnDSXdv8NEt5ZNaxIA:9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-04_04,2026-11-03_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 suspectscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040049
 
-On 02/11/2026 16:03, Anjana Hari wrote:
-> On certain Qualcomm automotive SoCs such as Nord, platform resources
-> including clocks, interconnect bandwidth, resets, and regulators are
-> owned and managed by firmware rather than directly by Linux. The
-> firmware abstracts these resources behind logical power domains and
-> exposes control through the SCMI power protocol.
-> 
-> Introduce a firmware-managed variant of the sdhci-msm driver that
-> operates through this abstraction instead of directly programming GCC
-> clocks and PMIC regulators.
-> 
-> The firmware-managed model uses two logical power domains, attached at
-> probe time via dev_pm_domain_attach_list():
-> 
->   - "power" domain: governs SDCC rail power state. It is activated at
->     probe and released at remove via pm_runtime_resume_and_get() and
->     pm_runtime_put_sync() on the domain device. These calls are
->     translated by the SCMI power protocol into firmware power-state
->     requests.
-> 
->   - "perf" domain: the SCMI perf domain driver populates OPPs at probe
->     time by querying the firmware-reported performance levels via
->     perf_ops->device_opps_add(). Clock rate selection uses
->     dev_pm_opp_find_freq_floor() to locate the nearest OPP at or below
->     the requested frequency, then dev_pm_opp_set_opp() to apply it,
->     rather than directly programming the GCC clock tree.
-> 
-> A new variant sdhci_msm_fw_v5_var is introduced with the compatible
-> string "qcom,nord-sdhci". Detection is automatic at probe: a non-NULL
-> pd_data.pd_names in the variant descriptor marks the platform as
-> firmware-managed, causing probe to select firmware-specific platform
-> data (sdhci_msm_fw_pdata) and ops (sdhci_msm_fw_ops).
-> 
-> The firmware-managed ops provide:
->   - sdhci_msm_fw_get_max_clock: queries the perf domain OPP table
->     using dev_pm_opp_find_freq_floor() at ULONG_MAX to discover the
->     maximum supported frequency, replacing the direct GCC readout.
->   - sdhci_msm_fw_set_clock: routes clock rate programming through the
->     perf domain OPP path, reusing the existing bus-mode multiplier
->     logic to derive the target rate.
-> 
-> Suspend and resume sequences bypass local clock and regulator management
-> for firmware-managed platforms, as firmware handles those transitions
-> autonomously in response to SCMI power-state transitions from the
-> runtime PM framework.
-> 
-> Co-developed by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
-> Signed-off-by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
-> Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
+Add support for the Qualcomm I3C controller driver, which implements
+I3C master functionality as defined in the MIPI Alliance Specification
+for I3C, Version 1.0.
 
-Doesn't compile:
+This driver supports master role in SDR mode.
 
-drivers/mmc/host/sdhci-msm.c: In function ‘sdhci_msm_probe’:
-drivers/mmc/host/sdhci-msm.c:3105:1: error: label ‘fw_detach’ defined but not used [-Werror=unused-label]
- 3105 | fw_detach:
-      | ^~~~~~~~~
-cc1: all warnings being treated as errors
+Unlike some other I3C master controllers, this implementation
+does not support In-Band Interrupts (IBI) and Hot-join requests.
 
-Please check other Sashiko issues also:
+Signed-off-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+---
+ drivers/i3c/master/Kconfig         |   12 +
+ drivers/i3c/master/Makefile        |    1 +
+ drivers/i3c/master/i3c-qcom-geni.c | 1133 ++++++++++++++++++++++++++++
+ 3 files changed, 1146 insertions(+)
+ create mode 100644 drivers/i3c/master/i3c-qcom-geni.c
 
-	https://sashiko.dev/#/patchset/20261102-sdcc_scmi-v1-0-244dbd893051%40oss.qualcomm.com?part=2
-
-> ---
->  drivers/mmc/host/sdhci-msm.c | 213 ++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 208 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
-> index aecd425bf095..da52a45203a5 100644
-> --- a/drivers/mmc/host/sdhci-msm.c
-> +++ b/drivers/mmc/host/sdhci-msm.c
-> @@ -8,8 +8,9 @@
->  #include <linux/module.h>
->  #include <linux/delay.h>
->  #include <linux/mmc/mmc.h>
-> -#include <linux/pm_runtime.h>
-> +#include <linux/pm_domain.h>
->  #include <linux/pm_opp.h>
-> +#include <linux/pm_runtime.h>
->  #include <linux/slab.h>
->  #include <linux/iopoll.h>
->  #include <linux/regulator/consumer.h>
-> @@ -168,6 +169,9 @@
->  #define ICE_HCI_PARAM_CCI	GENMASK(7, 0)
->  #define ICE_HCI_PARAM_CE	GENMASK(8, 8)
->  
-> +#define DOMAIN_IDX_POWER	0
-> +#define DOMAIN_IDX_PERF		1
-> +
->  struct sdhci_msm_offset {
->  	u32 core_hc_mode;
->  	u32 core_mci_data_cnt;
-> @@ -275,6 +279,11 @@ struct sdhci_msm_variant_info {
->  	bool restore_dll_config;
->  	const struct sdhci_msm_variant_ops *var_ops;
->  	const struct sdhci_msm_offset *offset;
-> +	/*
-> +	 * pd_names != NULL marks this variant as firmware managed;
-> +	 * see fw_managed detection in sdhci_msm_probe().
-> +	 */
-> +	const struct dev_pm_domain_attach_data pd_data;
->  };
->  
->  struct sdhci_msm_host {
-> @@ -285,6 +294,7 @@ struct sdhci_msm_host {
->  	struct clk *xo_clk;	/* TCXO clk needed for FLL feature of cm_dll*/
->  	/* core, iface, cal and sleep clocks */
->  	struct clk_bulk_data bulk_clks[4];
-> +	struct dev_pm_domain_list *pd_list;
->  #ifdef CONFIG_MMC_CRYPTO
->  	struct qcom_ice *ice;
->  #endif
-> @@ -302,6 +312,7 @@ struct sdhci_msm_host {
->  	u32 caps_0;
->  	bool mci_removed;
->  	bool restore_dll_config;
-> +	bool fw_managed;
->  	const struct sdhci_msm_variant_ops *var_ops;
->  	const struct sdhci_msm_offset *offset;
->  	bool use_cdr;
-> @@ -414,6 +425,45 @@ static void msm_set_clock_rate_for_bus_mode(struct sdhci_host *host,
->  		 mmc_hostname(host->mmc), achieved_rate, timing);
->  }
->  
-> +static int msm_fw_set_clock_rate_for_bus_mode(struct sdhci_host *host,
-> +					      unsigned int clock)
-> +{
-> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-> +	struct device *dev = mmc_dev(host->mmc);
-> +	struct dev_pm_opp *opp;
-> +	struct device *perf_dev;
-> +	struct mmc_ios ios = host->mmc->ios;
-> +	unsigned long clock_long = (unsigned long)clock;
-> +	unsigned long desired_rate;
-> +	unsigned int mult;
-> +	int ret;
-> +
-> +	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
-> +
-> +	mult = msm_get_clock_mult_for_bus_mode(host, clock, ios.timing);
-> +	desired_rate = clock_long * mult;
-> +
-> +	/* Find the nearest OPP at or below the requested frequency. */
-> +	opp = dev_pm_opp_find_freq_floor(perf_dev, &desired_rate);
-> +	if (IS_ERR(opp)) {
-> +		dev_err(dev, "Failed to find OPP for freq %lu: %pe\n", clock_long, opp);
-> +		return PTR_ERR(opp);
-> +	}
-> +
-> +	ret = dev_pm_opp_set_opp(perf_dev, opp);
-> +	dev_pm_opp_put(opp);
-> +	if (ret) {
-> +		dev_err(dev, "Failed to set OPP for freq %lu: %d\n", clock_long, ret);
-> +		return ret;
-> +	}
-> +
-> +	/* desired_rate was rounded down by find_freq_floor to the actual OPP rate. */
-> +	host->mmc->actual_clock = mult ? desired_rate / mult : desired_rate;
-> +	msm_host->clk_rate = desired_rate;
-> +	return 0;
-> +}
-> +
->  /* Platform specific tuning */
->  static inline int msm_dll_poll_ck_out_en(struct sdhci_host *host, u8 poll)
->  {
-> @@ -1253,7 +1303,10 @@ static int sdhci_msm_execute_tuning(struct mmc_host *mmc, u32 opcode)
->  	 */
->  	if (host->flags & SDHCI_HS400_TUNING) {
->  		sdhci_msm_hc_select_mode(host);
-> -		msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
-> +		if (msm_host->fw_managed)
-> +			msm_fw_set_clock_rate_for_bus_mode(host, ios.clock);
-> +		else
-> +			msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
->  		host->flags &= ~SDHCI_HS400_TUNING;
->  	}
->  
-> @@ -1847,6 +1900,28 @@ static unsigned int sdhci_msm_get_min_clock(struct sdhci_host *host)
->  	return SDHCI_MSM_MIN_CLOCK;
->  }
->  
-> +static unsigned int sdhci_msm_fw_get_max_clock(struct sdhci_host *host)
-> +{
-> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-> +	unsigned long max_freq = ULONG_MAX;
-> +	struct dev_pm_opp *opp;
-> +	struct device *perf_dev;
-> +	struct device *dev = mmc_dev(host->mmc);
-> +
-> +	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
-> +
-> +	opp = dev_pm_opp_find_freq_floor(perf_dev, &max_freq);
-> +	if (IS_ERR(opp)) {
-> +		dev_err(dev, "Failed to find opp for freq %lu\n", max_freq);
-> +		return SDHCI_MSM_MIN_CLOCK;
-> +	}
-> +
-> +	dev_pm_opp_put(opp);
-> +
-> +	return max_freq;
-> +}
-> +
->  /*
->   * __sdhci_msm_set_clock - sdhci_msm clock control.
->   *
-> @@ -1892,6 +1967,40 @@ static void sdhci_msm_set_clock(struct sdhci_host *host, unsigned int clock)
->  	__sdhci_msm_set_clock(host, clock);
->  }
->  
-> +static void sdhci_msm_fw_set_clock(struct sdhci_host *host, unsigned int clock)
-> +{
-> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-> +
-> +	if (!clock) {
-> +		host->mmc->actual_clock = 0;
-> +		msm_host->clk_rate = 0;
-> +		goto out;
-> +	}
-> +
-> +	sdhci_msm_hc_select_mode(host);
-> +
-> +	if (msm_fw_set_clock_rate_for_bus_mode(host, clock))
-> +		return;
-> +out:
-> +	__sdhci_msm_set_clock(host, clock);
-> +}
-> +
-> +static int sdhci_msm_fw_power_state(struct device *dev, bool power_on)
-> +{
-> +	struct sdhci_host *host = dev_get_drvdata(dev);
-> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
-> +	struct device *pwr_dev;
-> +
-> +	pwr_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_POWER];
-> +
-> +	if (power_on)
-> +		return pm_runtime_resume_and_get(pwr_dev);
-> +	else
-> +		return pm_runtime_put_sync(pwr_dev);
-> +}
-> +
->  /*****************************************************************************\
->   *                                                                           *
->   * Inline Crypto Engine (ICE) support                                        *
-> @@ -2550,6 +2659,17 @@ static const struct sdhci_msm_variant_info sdhci_msm_v5_var = {
->  	.offset = &sdhci_msm_v5_offset,
->  };
->  
-> +static const struct sdhci_msm_variant_info sdhci_msm_fw_v5_var = {
-> +	.mci_removed = true,
-> +	.var_ops = &v5_var_ops,
-> +	.offset = &sdhci_msm_v5_offset,
-> +	.pd_data = {
-> +		.pd_flags = PD_FLAG_DEV_LINK_ON,
-> +		.pd_names = (const char * []) { "power", "perf" },
-> +		.num_pd_names = 2,
-> +	},
-> +};
-> +
->  static const struct sdhci_msm_variant_info sdm845_sdhci_var = {
->  	.mci_removed = true,
->  	.restore_dll_config = true,
-> @@ -2566,6 +2686,7 @@ static const struct of_device_id sdhci_msm_dt_match[] = {
->  	{.compatible = "qcom,sdhci-msm-v5", .data = &sdhci_msm_v5_var},
->  	{.compatible = "qcom,sdm670-sdhci", .data = &sdm845_sdhci_var},
->  	{.compatible = "qcom,sdm845-sdhci", .data = &sdm845_sdhci_var},
-> +	{.compatible = "qcom,nord-sdhci", .data = &sdhci_msm_fw_v5_var},
->  	{.compatible = "qcom,sc7180-sdhci", .data = &sdm845_sdhci_var},
->  	{},
->  };
-> @@ -2587,6 +2708,21 @@ static const struct sdhci_ops sdhci_msm_ops = {
->  	.set_timeout = sdhci_msm_set_timeout,
->  };
->  
-> +static const struct sdhci_ops sdhci_msm_fw_ops = {
-> +	.reset = sdhci_and_cqhci_reset,
-> +	.set_clock = sdhci_msm_fw_set_clock,
-> +	.get_min_clock = sdhci_msm_get_min_clock,
-> +	.get_max_clock = sdhci_msm_fw_get_max_clock,
-> +	.set_bus_width = sdhci_set_bus_width,
-> +	.set_uhs_signaling = sdhci_msm_set_uhs_signaling,
-> +	.write_w = sdhci_msm_writew,
-> +	.write_b = sdhci_msm_writeb,
-> +	.irq	= sdhci_msm_cqe_irq,
-> +	.dump_vendor_regs = sdhci_msm_dump_vendor_regs,
-> +	.set_power = sdhci_set_power_noreg,
-> +	.set_timeout = sdhci_msm_set_timeout,
-> +};
-> +
->  static const struct sdhci_pltfm_data sdhci_msm_pdata = {
->  	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
->  		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
-> @@ -2597,6 +2733,16 @@ static const struct sdhci_pltfm_data sdhci_msm_pdata = {
->  	.ops = &sdhci_msm_ops,
->  };
->  
-> +static const struct sdhci_pltfm_data sdhci_msm_fw_pdata = {
-> +	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
-> +		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
-> +		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN |
-> +		  SDHCI_QUIRK_MULTIBLOCK_READ_ACMD12,
-> +
-> +	.quirks2 = SDHCI_QUIRK2_PRESET_VALUE_BROKEN,
-> +	.ops = &sdhci_msm_fw_ops,
-> +};
-> +
->  static inline void sdhci_msm_get_of_property(struct platform_device *pdev,
->  		struct sdhci_host *host)
->  {
-> @@ -2665,8 +2811,21 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->  	const struct sdhci_msm_offset *msm_offset;
->  	const struct sdhci_msm_variant_info *var_info;
->  	struct device_node *node = pdev->dev.of_node;
-> +	bool fw_managed;
->  
-> -	host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
-> +	var_info = of_device_get_match_data(&pdev->dev);
-> +	if (!var_info)
-> +		return -ENODEV;
-> +	fw_managed = !!var_info->pd_data.pd_names;
-> +
-> +	/*
-> +	 * Based on variant info, differentiate platform initialization
-> +	 * for local and remote managed resource platforms.
-> +	 */
-> +	if (fw_managed)
-> +		host = sdhci_pltfm_init(pdev, &sdhci_msm_fw_pdata, sizeof(*msm_host));
-> +	else
-> +		host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
->  	if (IS_ERR(host))
->  		return PTR_ERR(host);
->  
-> @@ -2684,12 +2843,11 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->  	 * Based on the compatible string, load the required msm host info from
->  	 * the data associated with the version info.
->  	 */
-> -	var_info = of_device_get_match_data(&pdev->dev);
-> -
->  	msm_host->mci_removed = var_info->mci_removed;
->  	msm_host->restore_dll_config = var_info->restore_dll_config;
->  	msm_host->var_ops = var_info->var_ops;
->  	msm_host->offset = var_info->offset;
-> +	msm_host->fw_managed = fw_managed;
->  
->  	msm_offset = msm_host->offset;
->  
-> @@ -2698,6 +2856,32 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->  
->  	msm_host->saved_tuning_phase = INVALID_TUNING_PHASE;
->  
-> +	if (msm_host->fw_managed) {
-> +		ret = dev_pm_domain_attach_list(&pdev->dev, &var_info->pd_data,
-> +						&msm_host->pd_list);
-> +		if (ret < 0)
-> +			return dev_err_probe(&pdev->dev, ret,
-> +					     "Failed to attach power domains\n");
-> +
-> +		if (ret != var_info->pd_data.num_pd_names)
-> +			return dev_err_probe(&pdev->dev, -ENODEV,
-> +					     "Expected %d power domains, got %d\n",
-> +					     var_info->pd_data.num_pd_names, ret);
-> +
-> +		ret = sdhci_msm_fw_power_state(&pdev->dev, true);
-> +		if (ret) {
-> +			dev_pm_domain_detach_list(msm_host->pd_list);
-> +			return dev_err_probe(&pdev->dev, ret,
-> +					     "Failed to power on domain\n");
-> +		}
-> +
-> +		/*
-> +		 * Skip initializing clocks, regulators and reset in kernel
-> +		 * for firmware managed platforms.
-> +		 */
-> +		goto skip_resource_init;
-> +	}
-> +
->  	ret = sdhci_msm_gcc_reset(&pdev->dev, host);
->  	if (ret)
->  		return ret;
-> @@ -2786,6 +2970,7 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->  		}
->  	}
->  
-> +skip_resource_init:
->  	/* Reset the vendor spec register to power on reset state */
->  	writel_relaxed(CORE_VENDOR_SPEC_POR_VAL,
->  			host->ioaddr + msm_offset->core_vendor_spec);
-> @@ -2917,6 +3102,12 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->  bus_clk_disable:
->  	if (!IS_ERR(msm_host->bus_clk))
->  		clk_disable_unprepare(msm_host->bus_clk);
-> +fw_detach:
-> +	if (msm_host->fw_managed) {
-> +		sdhci_msm_fw_power_state(&pdev->dev, false);
-> +		dev_pm_domain_detach_list(msm_host->pd_list);
-> +		msm_host->pd_list = NULL;
-> +	}
->  	return ret;
->  }
->  
-> @@ -2930,6 +3121,12 @@ static void sdhci_msm_remove(struct platform_device *pdev)
->  
->  	sdhci_remove_host(host, dead);
->  
-> +	if (msm_host->fw_managed) {
-> +		sdhci_msm_fw_power_state(&pdev->dev, false);
-> +		dev_pm_domain_detach_list(msm_host->pd_list);
-> +		msm_host->pd_list = NULL;
-> +	}
-> +
->  	pm_runtime_get_sync(&pdev->dev);
->  	pm_runtime_disable(&pdev->dev);
->  	pm_runtime_put_noidle(&pdev->dev);
-> @@ -2947,6 +3144,9 @@ static int sdhci_msm_runtime_suspend(struct device *dev)
->  	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->  	unsigned long flags;
->  
-> +	if (msm_host->fw_managed)
-> +		return sdhci_msm_fw_power_state(dev, false);
-> +
->  	spin_lock_irqsave(&host->lock, flags);
->  	host->runtime_suspended = true;
->  	spin_unlock_irqrestore(&host->lock, flags);
-> @@ -2967,6 +3167,9 @@ static int sdhci_msm_runtime_resume(struct device *dev)
->  	unsigned long flags;
->  	int ret;
->  
-> +	if (msm_host->fw_managed)
-> +		return sdhci_msm_fw_power_state(dev, true);
-> +
->  	ret = clk_bulk_prepare_enable(ARRAY_SIZE(msm_host->bulk_clks),
->  				       msm_host->bulk_clks);
->  	if (ret)
-> 
+diff --git a/drivers/i3c/master/Kconfig b/drivers/i3c/master/Kconfig
+index da96d2aaa399..24db1d0f9476 100644
+--- a/drivers/i3c/master/Kconfig
++++ b/drivers/i3c/master/Kconfig
+@@ -52,6 +52,18 @@ config SVC_I3C_MASTER
+ 	help
+ 	  Support for Silvaco I3C Dual-Role Master Controller.
+ 
++config I3C_QCOM_GENI
++	tristate "Qualcomm Technologies Inc's I3C controller driver"
++	depends on QCOM_GENI_SE
++	help
++	  This driver supports QUPV3 GENI based I3C controller in master
++	  mode on the Qualcomm Technologies Inc's SoCs. If you say yes to
++	  this option, support will be included for the built-in I3C interface
++	  on the Qualcomm Technologies Inc's SoCs.
++
++	  This driver can also be built as a module.  If so, the module
++	  will be called i3c-qcom-geni.
++
+ config MIPI_I3C_HCI
+ 	tristate "MIPI I3C Host Controller Interface driver (EXPERIMENTAL)"
+ 	depends on HAS_IOMEM
+diff --git a/drivers/i3c/master/Makefile b/drivers/i3c/master/Makefile
+index 8d82196dcf83..5d02569f5051 100644
+--- a/drivers/i3c/master/Makefile
++++ b/drivers/i3c/master/Makefile
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ obj-$(CONFIG_ADI_I3C_MASTER)		+= adi-i3c-master.o
+ obj-$(CONFIG_CDNS_I3C_MASTER)		+= i3c-master-cdns.o
++obj-$(CONFIG_I3C_QCOM_GENI)		+= i3c-qcom-geni.o
+ obj-$(CONFIG_DW_I3C_MASTER)		+= dw-i3c-master.o
+ obj-$(CONFIG_AST2600_I3C_MASTER)	+= ast2600-i3c-master.o
+ obj-$(CONFIG_SVC_I3C_MASTER)		+= svc-i3c-master.o
+diff --git a/drivers/i3c/master/i3c-qcom-geni.c b/drivers/i3c/master/i3c-qcom-geni.c
+new file mode 100644
+index 000000000000..5cb676006cb6
+--- /dev/null
++++ b/drivers/i3c/master/i3c-qcom-geni.c
+@@ -0,0 +1,1133 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
++ *
++ * Author: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
++ */
++
++#include <linux/bits.h>
++#include <linux/cleanup.h>
++#include <linux/clk.h>
++#include <linux/err.h>
++#include <linux/i3c/master.h>
++#include <linux/interrupt.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/platform_device.h>
++#include <linux/pm_runtime.h>
++#include <linux/slab.h>
++#include <linux/soc/qcom/geni-se.h>
++#include <linux/units.h>
++
++#include "../internals.h"
++
++#define SE_I3C_SCL_HIGH                 0x268
++#define SE_I3C_TX_TRANS_LEN             0x26c
++#define SE_I3C_RX_TRANS_LEN             0x270
++#define SE_I3C_DELAY_COUNTER            0x274
++#define SE_I2C_SCL_COUNTERS             0x278
++#define SE_I3C_SCL_CYCLE                0x27c
++#define SE_GENI_HW_IRQ_EN               0x920
++#define SE_GENI_HW_IRQ_IGNORE_ON_ACTIVE 0x924
++#define SE_GENI_HW_IRQ_CMD_PARAM_0      0x930
++
++/* HW I3C IBI interrupt enable */
++#define M_IBI_IRQ_EN			BIT(0)
++
++/* M_IBI_IRQ_IGNORE */
++#define M_IBI_IRQ_IGNORE		BIT(0)
++
++/* SE_GENI_M_CLK_CFG field shifts */
++#define	CLK_DIV_VALUE_MASK		GENMASK(23, 4)
++#define SER_CLK_EN			BIT(0)
++
++/* SE_GENI_HW_IRQ_CMD_PARAM_0 field bits */
++#define M_IBI_IRQ_PARAM_7E		BIT(0)
++#define M_IBI_IRQ_PARAM_STOP_STALL	BIT(1)
++
++/* SE_I2C_SCL_COUNTERS field shifts */
++#define I2C_SCL_HIGH_COUNTER_MASK	GENMASK(29, 20)
++#define I2C_SCL_LOW_COUNTER_MASK	GENMASK(19, 10)
++#define I2C_SCL_CYCLE_COUNTER_MASK	GENMASK(9, 0)
++
++#define SE_I3C_ERR  (M_CMD_OVERRUN_EN | M_ILLEGAL_CMD_EN | M_CMD_FAILURE_EN |\
++	M_CMD_ABORT_EN | M_GP_IRQ_0_EN | M_GP_IRQ_1_EN | M_GP_IRQ_2_EN | \
++	M_GP_IRQ_3_EN | M_GP_IRQ_4_EN)
++
++/* M_CMD OP codes for I2C/I3C */
++#define I3C_READ_IBI_HW          0
++#define I2C_WRITE                1
++#define I2C_READ                 2
++#define I2C_WRITE_READ           3
++#define I2C_ADDR_ONLY            4
++#define I3C_INBAND_RESET         5
++#define I2C_BUS_CLEAR            6
++#define I2C_STOP_ON_BUS          7
++#define I3C_HDR_DDR_EXIT         8
++#define I3C_PRIVATE_WRITE        9
++#define I3C_PRIVATE_READ         10
++#define I3C_HDR_DDR_WRITE        11
++#define I3C_HDR_DDR_READ         12
++#define I3C_DIRECT_CCC_ADDR_ONLY 13
++#define I3C_BCAST_CCC_ADDR_ONLY  14
++#define I3C_READ_IBI             15
++#define I3C_BCAST_CCC_WRITE      16
++#define I3C_DIRECT_CCC_WRITE     17
++#define I3C_DIRECT_CCC_READ      18
++
++/* M_CMD params for I3C */
++#define PRE_CMD_DELAY		BIT(0)
++#define TIMESTAMP_BEFORE	BIT(1)
++#define STOP_STRETCH		BIT(2)
++#define TIMESTAMP_AFTER		BIT(3)
++#define POST_COMMAND_DELAY	BIT(4)
++#define IGNORE_ADD_NACK		BIT(6)
++#define READ_FINISHED_WITH_ACK	BIT(7)
++#define CONTINUOUS_MODE_DAA	BIT(8)
++
++#define SLAVE_ADDR_MASK		GENMASK(15, 9)
++
++#define CCC_HDR_CMD_MSK		GENMASK(23, 16)
++#define IBI_NACK_TBL_CTRL	BIT(24)
++#define USE_7E			BIT(25)
++#define BYPASS_ADDR_PHASE	BIT(26)
++
++/* GSI callback error fields - DMA_TX_IRQ_STAT */
++#define GP_IRQ0			BIT(5)
++#define GP_IRQ1			BIT(6)
++#define GP_IRQ2			BIT(7)
++#define GP_IRQ3			BIT(8)
++#define GP_IRQ4			BIT(9)
++#define GP_IRQ5			BIT(10)
++#define DM_I3C_CB_ERR		GENMASK(10, 5)
++
++#define I3C_AUTO_SUSPEND_DELAY	250
++#define PACKING_BYTES_PER_WORD	4
++#define XFER_TIMEOUT		250
++
++#define I3C_ADDR_MASK		(I2C_MAX_ADDR >> 1)
++
++enum geni_i3c_err_code {
++	RD_TERM,
++	NACK,
++	CRC_ERR,
++	BUS_PROTO,
++	NACK_7E,
++	NACK_IBI,
++	GENI_OVERRUN,
++	GENI_ILLEGAL_CMD,
++	GENI_ABORT_DONE,
++	GENI_TIMEOUT,
++};
++
++enum i3c_bus_phase {
++	OPEN_DRAIN_MODE,
++	PUSH_PULL_MODE
++};
++
++struct geni_i3c_dev {
++	struct geni_se se;
++	unsigned int tx_wm;
++	unsigned int tx_depth;
++	int irq;
++	int err;
++	struct i3c_master_controller ctrlr;
++	struct completion done;
++	/* Protects per device CCC command or transfer from get_mutex_lock()/unlock() wrapper */
++	struct mutex lock;
++	/* Per device protection between process and IRQ context */
++	spinlock_t irq_lock;
++	u32 clk_src_freq;
++	u8 *cur_buf;
++	u8 last_addr;
++	bool cur_is_write;
++	int cur_len;
++	int cur_idx;
++	DECLARE_BITMAP(newaddrslots, 64);
++
++	const struct geni_i3c_clk_settings *clk_cfg;
++	const struct geni_i3c_clk_settings *clk_od_cfg;
++};
++
++struct geni_i3c_i2c_dev_data {
++	u32 ibi_keeping;  /* Plan to save IBI information, keep as dummy for now */
++};
++
++struct geni_i3c_xfer_params {
++	enum geni_se_xfer_mode mode;
++	u32 m_cmd;
++	u32 m_param;
++};
++
++static struct geni_i3c_dev *to_geni_i3c_master(struct i3c_master_controller
++							*master)
++{
++	return container_of(master, struct geni_i3c_dev, ctrlr);
++}
++
++struct geni_i3c_clk_settings {
++	u32 clk_freq_out;
++	u32 clk_src_freq;
++	u8  clk_div;
++	u8  i2c_t_high_cnt;
++	u8  i2c_t_low_cnt;
++	u8  i3c_t_high_cnt;
++	u8  i3c_t_cycle_cnt;
++	u8  i2c_t_cycle_cnt;
++};
++
++/*
++ * The hardware uses the following formulas to calculate the time periods
++ * of the SCL clock cycle. The firmware adds a few extra cycles that are not
++ * included in the formulas below. It has been verified that the resulting
++ * timings remain within the I2C/I3C specification limits.
++ *
++ * I2C SCL high period:
++ *     i2c_t_high = (i2c_t_high_cnt * clk_div) / source_clock
++ *
++ * I2C SCL low period:
++ *     i2c_t_low = (i2c_t_low_cnt * clk_div) / source_clock
++ *
++ * I2C SCL full cycle:
++ *     i2c_t_cycle = (i2c_t_cycle_cnt * clk_div) / source_clock
++ *
++ * I3C SCL high period:
++ *     i3c_t_high = (i3c_t_high_cnt * clk_div) / source_clock
++ *
++ * I3C SCL full cycle:
++ *     i3c_t_cycle = (i3c_t_cycle_cnt * clk_div) / source_clock
++ *
++ * Output clock frequency:
++ *     clk_freq_out = t / t_cycle
++ */
++static const struct geni_i3c_clk_settings geni_i3c_clk_map[] = {
++	{
++		.clk_freq_out = 100 * HZ_PER_KHZ,
++		.clk_src_freq = 19200 * HZ_PER_KHZ,
++		.clk_div = 1,
++		.i2c_t_high_cnt = 76,
++		.i2c_t_low_cnt = 90,
++		.i3c_t_high_cnt = 7,
++		.i3c_t_cycle_cnt = 8,
++		.i2c_t_cycle_cnt = 192,
++	},
++	{
++		.clk_freq_out = 400 * HZ_PER_KHZ,
++		.clk_src_freq = 19200 * HZ_PER_KHZ,
++		.clk_div = 1,
++		.i2c_t_high_cnt = 12,
++		.i2c_t_low_cnt = 24,
++		.i3c_t_high_cnt = 7,
++		.i3c_t_cycle_cnt = 8,
++		.i2c_t_cycle_cnt = 48
++	},
++	{
++		.clk_freq_out = 1000 * HZ_PER_KHZ,
++		.clk_src_freq = 19200 * HZ_PER_KHZ,
++		.clk_div = 1,
++		.i2c_t_high_cnt = 4,
++		.i2c_t_low_cnt = 9,
++		.i3c_t_high_cnt = 7,
++		.i3c_t_cycle_cnt = 0,
++		.i2c_t_cycle_cnt = 19
++	},
++	{
++		.clk_freq_out = 12500 * HZ_PER_KHZ,
++		.clk_src_freq = 100000 * HZ_PER_KHZ,
++		.clk_div = 1,
++		.i2c_t_high_cnt = 45,
++		.i2c_t_low_cnt = 63,
++		.i3c_t_high_cnt = 6,
++		.i3c_t_cycle_cnt = 7,
++		.i2c_t_cycle_cnt = 110
++	}
++};
++
++static int geni_i3c_clk_map_idx(struct geni_i3c_dev *gi3c)
++{
++	const struct geni_i3c_clk_settings *clk_table_idx = geni_i3c_clk_map;
++	struct i3c_master_controller *m = &gi3c->ctrlr;
++	struct i3c_bus *bus = i3c_master_get_bus(m);
++
++	for (int i = 0; i < ARRAY_SIZE(geni_i3c_clk_map); i++, clk_table_idx++) {
++		if (clk_table_idx->clk_freq_out == bus->scl_rate.i3c &&
++		    clk_table_idx->clk_src_freq == gi3c->clk_src_freq)
++			gi3c->clk_cfg = clk_table_idx;
++
++		if (clk_table_idx->clk_freq_out == bus->scl_rate.i2c)
++			gi3c->clk_od_cfg = clk_table_idx;
++	}
++
++	if (!gi3c->clk_cfg || !gi3c->clk_od_cfg)
++		return -EINVAL;
++
++	return 0;
++}
++
++static void qcom_geni_i3c_conf(struct geni_i3c_dev *gi3c, enum i3c_bus_phase bus_phase)
++{
++	const struct geni_i3c_clk_settings *clk_idx = gi3c->clk_cfg;
++	unsigned long freq;
++	u32 val, dfs_idx;
++	int ret;
++
++	if (bus_phase == OPEN_DRAIN_MODE)
++		clk_idx = gi3c->clk_od_cfg;
++
++	ret = geni_se_clk_freq_match(&gi3c->se, clk_idx->clk_src_freq,
++				     &dfs_idx, &freq, false);
++	if (ret)
++		dfs_idx = 0;
++
++	writel_relaxed(dfs_idx, gi3c->se.base + SE_GENI_CLK_SEL);
++
++	val = FIELD_PREP(CLK_DIV_VALUE_MASK, clk_idx->clk_div);
++	val |= SER_CLK_EN;
++	writel_relaxed(val, gi3c->se.base + GENI_SER_M_CLK_CFG);
++
++	val = FIELD_PREP(I2C_SCL_HIGH_COUNTER_MASK, clk_idx->i2c_t_high_cnt);
++	val |= FIELD_PREP(I2C_SCL_LOW_COUNTER_MASK, clk_idx->i2c_t_low_cnt);
++	val |= FIELD_PREP(I2C_SCL_CYCLE_COUNTER_MASK, clk_idx->i2c_t_cycle_cnt);
++	writel_relaxed(val, gi3c->se.base + SE_I2C_SCL_COUNTERS);
++
++	writel_relaxed(clk_idx->i3c_t_cycle_cnt, gi3c->se.base + SE_I3C_SCL_CYCLE);
++	writel_relaxed(clk_idx->i3c_t_high_cnt, gi3c->se.base + SE_I3C_SCL_HIGH);
++
++	writel_relaxed(M_IBI_IRQ_IGNORE, gi3c->se.base + SE_GENI_HW_IRQ_IGNORE_ON_ACTIVE);
++
++	val = M_IBI_IRQ_PARAM_STOP_STALL | M_IBI_IRQ_PARAM_7E;
++	writel_relaxed(val, gi3c->se.base + SE_GENI_HW_IRQ_CMD_PARAM_0);
++
++	writel_relaxed(M_IBI_IRQ_EN, gi3c->se.base + SE_GENI_HW_IRQ_EN);
++}
++
++static void geni_i3c_handle_err(struct geni_i3c_dev *gi3c, u32 status)
++{
++	dev_dbg(gi3c->se.dev, "len:%d, %s\n",
++		gi3c->cur_len, gi3c->cur_is_write ? "write" : "read");
++
++	if (status & M_GP_IRQ_0_EN) {
++		gi3c->err = -EINVAL;
++		dev_dbg(gi3c->se.dev, "I3C slave early read termination\n");
++	}
++
++	if (status & M_GP_IRQ_1_EN) {
++		gi3c->err = -ENOTCONN;
++		dev_dbg(gi3c->se.dev, "NACK: slave unresponsive, check power/reset\n");
++	}
++
++	if (status & M_GP_IRQ_2_EN) {
++		gi3c->err = -EINVAL;
++		dev_dbg(gi3c->se.dev, "CRC or parity error\n");
++	}
++
++	if (status & M_GP_IRQ_3_EN) {
++		gi3c->err = -EPROTO;
++		dev_dbg(gi3c->se.dev, "Bus proto Error, noisy/unexpected start/stop\n");
++	}
++
++	if (status & M_GP_IRQ_4_EN) {
++		gi3c->err = -EBUSY;
++		dev_dbg(gi3c->se.dev, "NACK on 7E, unexpected protocol error\n");
++	}
++
++	if (status & M_GP_IRQ_5_EN) {
++		gi3c->err = -EINVAL;
++		dev_dbg(gi3c->se.dev, "NACK on IBI\n");
++	}
++
++	if (status & M_CMD_OVERRUN_EN) {
++		gi3c->err = -EIO;
++		dev_dbg(gi3c->se.dev, "Cmd overrun, check GENI cmd-state machine\n");
++	}
++
++	if (status & M_ILLEGAL_CMD_EN) {
++		gi3c->err = -EILSEQ;
++		dev_dbg(gi3c->se.dev, "Illegal cmd, check GENI cmd-state machine\n");
++	}
++
++	if (status & M_CMD_ABORT_EN) {
++		gi3c->err = -ETIMEDOUT;
++		dev_dbg(gi3c->se.dev, "Abort after timeout successful\n");
++	}
++
++	if (status == GENI_TIMEOUT) {
++		gi3c->err = -ETIMEDOUT;
++		dev_dbg(gi3c->se.dev, "I3C transaction timed out\n");
++	}
++}
++
++static irqreturn_t geni_i3c_irq(int irq, void *dev)
++{
++	struct geni_i3c_dev *gi3c = dev;
++	u32 m_stat_mask, dm_tx_st, dm_rx_st;
++	u32 m_stat, rx_st, dma_mode;
++
++	m_stat = readl_relaxed(gi3c->se.base + SE_GENI_M_IRQ_STATUS);
++	m_stat_mask = readl_relaxed(gi3c->se.base + SE_GENI_M_IRQ_EN);
++	rx_st = readl_relaxed(gi3c->se.base + SE_GENI_RX_FIFO_STATUS);
++	dm_tx_st = readl_relaxed(gi3c->se.base + SE_DMA_TX_IRQ_STAT);
++	dm_rx_st = readl_relaxed(gi3c->se.base + SE_DMA_RX_IRQ_STAT);
++	dma_mode = readl_relaxed(gi3c->se.base + SE_GENI_DMA_MODE_EN);
++
++	scoped_guard(spinlock, &gi3c->irq_lock) {
++		if (m_stat & SE_I3C_ERR || dm_rx_st & DM_I3C_CB_ERR) {
++			geni_i3c_handle_err(gi3c, m_stat);
++			/* Disable the TX Watermark interrupt to stop TX */
++			if (!dma_mode)
++				writel_relaxed(0, gi3c->se.base + SE_GENI_TX_WATERMARK_REG);
++		} else if (dma_mode) {
++			dev_dbg(gi3c->se.dev, "i3c dma tx:0x%x, dma rx:0x%x\n", dm_tx_st, dm_rx_st);
++		} else if ((m_stat & (M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN)) &&
++			    !gi3c->cur_is_write && gi3c->cur_buf) {
++			/* FIFO RX handling */
++			u32 rxcnt = rx_st & RX_FIFO_WC_MSK;
++			int avail = rxcnt * 4;
++			int need  = gi3c->cur_len - gi3c->cur_idx;
++			int n     = min(need, avail);
++
++			if (n > 0) {
++				i3c_readl_fifo(gi3c->se.base + SE_GENI_RX_FIFOn,
++					       gi3c->cur_buf + gi3c->cur_idx, n);
++				gi3c->cur_idx += n;
++			}
++		} else if ((m_stat & M_TX_FIFO_WATERMARK_EN) &&
++			   gi3c->cur_is_write && gi3c->cur_buf) {
++			/* FIFO TX handling */
++			int avail = gi3c->tx_wm * 4;
++			int need  = gi3c->cur_len - gi3c->cur_idx;
++			int n     = min(need, avail);
++
++			if (n > 0) {
++				i3c_writel_fifo(gi3c->se.base + SE_GENI_TX_FIFOn,
++						(void *)(gi3c->cur_buf + gi3c->cur_idx), n);
++				gi3c->cur_idx += n;
++			}
++		}
++
++		if (!dma_mode && gi3c->cur_idx == gi3c->cur_len)
++			writel_relaxed(0, gi3c->se.base + SE_GENI_TX_WATERMARK_REG);
++	}
++
++	if (m_stat)
++		writel_relaxed(m_stat, gi3c->se.base + SE_GENI_M_IRQ_CLEAR);
++
++	if (dma_mode) {
++		if (dm_tx_st)
++			writel_relaxed(dm_tx_st, gi3c->se.base + SE_DMA_TX_IRQ_CLR);
++		if (dm_rx_st)
++			writel_relaxed(dm_rx_st, gi3c->se.base + SE_DMA_RX_IRQ_CLR);
++	}
++
++	/* if this is err with done-bit not set, handle that through timeout. */
++	if (m_stat & (M_CMD_DONE_EN | M_CMD_ABORT_EN)) {
++		writel_relaxed(0, gi3c->se.base + SE_GENI_TX_WATERMARK_REG);
++		complete(&gi3c->done);
++	} else if ((dm_tx_st & TX_DMA_DONE) || (dm_rx_st & (RX_DMA_DONE | RX_RESET_DONE))) {
++		complete(&gi3c->done);
++	}
++
++	return IRQ_HANDLED;
++}
++
++static void geni_i3c_abort_xfer(struct geni_i3c_dev *gi3c)
++{
++	unsigned long time_remaining;
++	unsigned long flags;
++
++	reinit_completion(&gi3c->done);
++	spin_lock_irqsave(&gi3c->irq_lock, flags);
++	geni_i3c_handle_err(gi3c, GENI_TIMEOUT);
++	geni_se_abort_m_cmd(&gi3c->se);
++	spin_unlock_irqrestore(&gi3c->irq_lock, flags);
++	time_remaining = wait_for_completion_timeout(&gi3c->done, XFER_TIMEOUT);
++	if (!time_remaining)
++		dev_err(gi3c->se.dev, "Timeout abort_m_cmd\n");
++}
++
++static int _i3c_geni_execute_command(struct geni_i3c_dev *gi3c, struct geni_i3c_xfer_params *xfer)
++{
++	bool is_write = gi3c->cur_is_write;
++	dma_addr_t tx_dma = 0, rx_dma = 0;
++	unsigned long time_remaining;
++	u32 len = gi3c->cur_len;
++	int ret;
++
++	geni_se_select_mode(&gi3c->se, xfer->mode);
++
++	gi3c->err = 0;
++	gi3c->cur_idx = 0;
++
++	if (is_write) {
++		dev_dbg(gi3c->se.dev, "I3C cmd:0x%x param:0x%x WRITE len:%d\n",
++			xfer->m_cmd, xfer->m_param, len);
++
++		writel_relaxed(len, gi3c->se.base + SE_I3C_TX_TRANS_LEN);
++		geni_se_setup_m_cmd(&gi3c->se, xfer->m_cmd, xfer->m_param);
++
++		if (xfer->mode == GENI_SE_DMA) {
++			ret = geni_se_tx_dma_prep(&gi3c->se, gi3c->cur_buf, len, &tx_dma);
++			if (ret) {
++				xfer->mode = GENI_SE_FIFO;
++				geni_se_select_mode(&gi3c->se, xfer->mode);
++			}
++		}
++
++		if (xfer->mode == GENI_SE_FIFO && len > 0) /* Get FIFO IRQ */
++			writel_relaxed(1, gi3c->se.base + SE_GENI_TX_WATERMARK_REG);
++	} else {
++		dev_dbg(gi3c->se.dev, "I3C cmd:0x%x param:0x%x READ len:%d\n",
++			xfer->m_cmd, xfer->m_param, len);
++		writel_relaxed(len, gi3c->se.base + SE_I3C_RX_TRANS_LEN);
++		geni_se_setup_m_cmd(&gi3c->se, xfer->m_cmd, xfer->m_param);
++		if (xfer->mode == GENI_SE_DMA) {
++			ret = geni_se_rx_dma_prep(&gi3c->se, gi3c->cur_buf, len, &rx_dma);
++			if (ret) {
++				xfer->mode = GENI_SE_FIFO;
++				geni_se_select_mode(&gi3c->se, xfer->mode);
++			}
++		}
++	}
++
++	time_remaining = wait_for_completion_timeout(&gi3c->done, XFER_TIMEOUT);
++	if (!time_remaining) {
++		unsigned long flags;
++
++		dev_dbg(gi3c->se.dev, "Timeout completing transfer\n");
++		spin_lock_irqsave(&gi3c->irq_lock, flags);
++		geni_i3c_handle_err(gi3c, GENI_TIMEOUT);
++		gi3c->cur_buf = NULL;
++		spin_unlock_irqrestore(&gi3c->irq_lock, flags);
++		geni_i3c_abort_xfer(gi3c);
++	}
++
++	if (xfer->mode == GENI_SE_DMA) {
++		if (gi3c->err) {
++			if (is_write)
++				writel_relaxed(1, gi3c->se.base + SE_DMA_TX_FSM_RST);
++			else
++				writel_relaxed(1, gi3c->se.base + SE_DMA_RX_FSM_RST);
++
++			time_remaining = wait_for_completion_timeout(&gi3c->done, XFER_TIMEOUT);
++			dev_dbg(gi3c->se.dev, "Timeout completing DMA transfer\n");
++		}
++
++		if (is_write)
++			geni_se_tx_dma_unprep(&gi3c->se, tx_dma, len);
++		else
++			geni_se_rx_dma_unprep(&gi3c->se, rx_dma, len);
++	}
++
++	ret = gi3c->err;
++	if (gi3c->err)
++		dev_err(gi3c->se.dev, "I3C transaction error :%d\n", gi3c->err);
++
++	gi3c->cur_buf = NULL;
++	gi3c->err = 0;
++
++	return ret;
++}
++
++static int i3c_geni_execute_read_command(struct geni_i3c_dev *gi3c,
++					 struct geni_i3c_xfer_params *xfer, u8 *buf, u32 len)
++{
++	gi3c->cur_is_write = false;
++	gi3c->cur_buf = buf;
++	gi3c->cur_len = len;
++
++	return _i3c_geni_execute_command(gi3c, xfer);
++}
++
++static int i3c_geni_execute_write_command(struct geni_i3c_dev *gi3c,
++					  struct geni_i3c_xfer_params *xfer, u8 *buf, u32 len)
++{
++	gi3c->cur_is_write = true;
++	gi3c->cur_buf = buf;
++	gi3c->cur_len = len;
++
++	return _i3c_geni_execute_command(gi3c, xfer);
++}
++
++static int geni_i3c_perform_daa(struct geni_i3c_dev *gi3c)
++{
++	struct geni_i3c_xfer_params xfer = { GENI_SE_FIFO };
++	bool first_device = true;
++	int ret;
++
++	while (1) {
++		u8 rx_buf[8], tx_buf[1];
++		u8 addr;
++		u64 pid;
++
++		/* Read PID[47:0], BCR, DCR during ENTDAA flow */
++		xfer.m_cmd = I2C_READ;
++		xfer.m_param = STOP_STRETCH | CONTINUOUS_MODE_DAA;
++
++		if (first_device) {
++			xfer.m_param |= USE_7E;
++			first_device = false;
++		}
++
++		ret = i3c_geni_execute_read_command(gi3c, &xfer,
++						    rx_buf, sizeof(rx_buf));
++		if (ret) {
++			dev_dbg(gi3c->se.dev,
++				"DAA complete, no more slave devices\n");
++			break;
++		}
++
++		pid = FIELD_PREP(GENMASK_ULL(47, 40), (u64)rx_buf[0]) |
++		      FIELD_PREP(GENMASK_ULL(39, 32), (u64)rx_buf[1]) |
++		      FIELD_PREP(GENMASK_ULL(31, 24), (u64)rx_buf[2]) |
++		      FIELD_PREP(GENMASK_ULL(23, 16), (u64)rx_buf[3]) |
++		      FIELD_PREP(GENMASK_ULL(15, 8),  (u64)rx_buf[4]) |
++		      FIELD_PREP(GENMASK_ULL(7, 0),   (u64)rx_buf[5]);
++
++		dev_dbg(gi3c->se.dev, "DAA device PID: 0x%012llx\n", pid);
++
++		addr = i3c_master_get_free_addr(&gi3c->ctrlr,
++						gi3c->last_addr + 1);
++		if (addr > I3C_ADDR_MASK)
++			return -EINVAL;
++
++		gi3c->last_addr = addr;
++		set_bit(addr, gi3c->newaddrslots);
++
++		/* Dynamic address + odd parity bit */
++		tx_buf[0] = (addr & I3C_ADDR_MASK) << 1;
++		tx_buf[0] |= !parity8(addr & I3C_ADDR_MASK);
++
++		xfer.m_cmd = I2C_WRITE;
++		xfer.m_param = STOP_STRETCH | BYPASS_ADDR_PHASE;
++
++		ret = i3c_geni_execute_write_command(gi3c, &xfer, tx_buf, 1);
++		if (ret)
++			break;
++	}
++
++	return 0;
++}
++
++static int geni_i3c_master_send_ccc_cmd(struct i3c_master_controller *m,
++					struct i3c_ccc_cmd *cmd)
++{
++	struct geni_i3c_dev *gi3c = to_geni_i3c_master(m);
++	int ret;
++
++	if (!(cmd->id & I3C_CCC_DIRECT) && cmd->ndests != 1)
++		return -EINVAL;
++
++	scoped_guard(mutex, &gi3c->lock) {
++		reinit_completion(&gi3c->done);
++		ret = pm_runtime_get_sync(gi3c->se.dev);
++		if (ret < 0) {
++			dev_err(gi3c->se.dev, "error turning on SE resources:%d\n", ret);
++			pm_runtime_put_noidle(gi3c->se.dev);
++			pm_runtime_set_suspended(gi3c->se.dev);
++			return ret;
++		}
++
++		qcom_geni_i3c_conf(gi3c, OPEN_DRAIN_MODE);
++		for (int i = 0; i < cmd->ndests; i++) {
++			int stall = (i < (cmd->ndests - 1)) ||
++				(cmd->id == I3C_CCC_ENTDAA);
++			struct geni_i3c_xfer_params xfer = { GENI_SE_FIFO };
++
++			xfer.m_param  = (stall ? STOP_STRETCH : 0);
++			xfer.m_param |= FIELD_PREP(CCC_HDR_CMD_MSK, cmd->id);
++			xfer.m_param |= IBI_NACK_TBL_CTRL;
++			if (cmd->id & I3C_CCC_DIRECT) {
++				xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, cmd->dests[i].addr);
++				if (cmd->rnw) {
++					if (i == 0)
++						xfer.m_cmd = I3C_DIRECT_CCC_READ;
++					else
++						xfer.m_cmd = I3C_PRIVATE_READ;
++				} else {
++					if (i == 0)
++						xfer.m_cmd =
++						   (cmd->dests[i].payload.len > 0) ?
++							I3C_DIRECT_CCC_WRITE :
++							I3C_DIRECT_CCC_ADDR_ONLY;
++					else
++						xfer.m_cmd = I3C_PRIVATE_WRITE;
++				}
++			} else {
++				if (cmd->dests[i].payload.len > 0)
++					xfer.m_cmd = I3C_BCAST_CCC_WRITE;
++				else
++					xfer.m_cmd = I3C_BCAST_CCC_ADDR_ONLY;
++			}
++
++			if (i == 0)
++				xfer.m_param |= USE_7E;
++
++			if (cmd->rnw) {
++				ret = i3c_geni_execute_read_command(gi3c, &xfer,
++								    cmd->dests[i].payload.data,
++								    cmd->dests[i].payload.len);
++				/*
++				 * Report bytes actually received so the core's
++				 * i3c_ccc_validate_payload_len() doesn't mistake a
++				 * successful short/expected-length read for -EIO.
++				 */
++				if (!ret)
++					cmd->dests[i].payload.actual_len = gi3c->cur_idx;
++			} else {
++				ret = i3c_geni_execute_write_command(gi3c, &xfer,
++								     cmd->dests[i].payload.data,
++								     cmd->dests[i].payload.len);
++			}
++			if (ret)
++				break;
++
++			if (cmd->id == I3C_CCC_ENTDAA)
++				geni_i3c_perform_daa(gi3c);
++		}
++
++		pm_runtime_mark_last_busy(gi3c->se.dev);
++		pm_runtime_put_autosuspend(gi3c->se.dev);
++		if (ret) {
++			/*
++			 * geni_i3c_handle_err() maps NACK conditions (7E NACK or an
++			 * unresponsive/absent target) to -EBUSY/-ENOTCONN. Report
++			 * those as I3C_ERROR_M2, matching how cdns/dw/svc/amd i3c
++			 * masters flag NACK/no-target errors: the core already
++			 * tolerates M2 for broadcast CCCs like ENTDAA/RSTDAA (see
++			 * i3c_master_entdaa_locked()/i3c_master_rstdaa_locked() in
++			 * master.c) instead of failing device/bus init outright.
++			 * Other error codes (timeout, protocol/CRC error, illegal
++			 * cmd, overrun) are left as I3C_ERROR_UNKNOWN so they still
++			 * propagate as real failures.
++			 */
++			if (ret == -ENOTCONN || ret == -EBUSY)
++				cmd->err = I3C_ERROR_M2;
++			return ret;
++		}
++	}
++
++	return 0;
++}
++
++static int geni_i3c_master_priv_xfers(struct i3c_dev_desc *dev, struct i3c_xfer *xfers,
++				      int nxfers, enum i3c_xfer_mode mode)
++{
++	struct i3c_master_controller *m = i3c_dev_get_master(dev);
++	struct geni_i3c_dev *gi3c = to_geni_i3c_master(m);
++	bool use_7e = false;
++	int ret;
++
++	scoped_guard(mutex, &gi3c->lock) {
++		reinit_completion(&gi3c->done);
++		ret = pm_runtime_get_sync(gi3c->se.dev);
++		if (ret < 0) {
++			dev_err(gi3c->se.dev, "error turning on SE resources:%d\n", ret);
++			pm_runtime_put_noidle(gi3c->se.dev);
++			pm_runtime_set_suspended(gi3c->se.dev);
++			return ret;
++		}
++
++		qcom_geni_i3c_conf(gi3c, PUSH_PULL_MODE);
++
++		for (int i = 0; i < nxfers; i++) {
++			bool stall = (i < (nxfers - 1));
++			struct geni_i3c_xfer_params xfer = { GENI_SE_FIFO };
++
++			xfer.m_param  = (stall ? STOP_STRETCH : 0);
++			xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, dev->info.dyn_addr);
++			xfer.m_param |= (use_7e) ? USE_7E : 0;
++
++			/* use_7e = true only for last transfer */
++			use_7e = (i == nxfers - 1);
++
++			if (xfers[i].rnw) {
++				xfer.m_cmd = I3C_PRIVATE_READ;
++				ret = i3c_geni_execute_read_command(gi3c, &xfer,
++								    (u8 *)xfers[i].data.in,
++								    xfers[i].len);
++			} else {
++				xfer.m_cmd = I3C_PRIVATE_WRITE;
++				ret = i3c_geni_execute_write_command(gi3c, &xfer,
++								     (u8 *)xfers[i].data.out,
++								     xfers[i].len);
++			}
++
++			if (ret)
++				break;
++		}
++
++		dev_dbg(gi3c->se.dev, "i3c priv: txn ret:%d\n", ret);
++		pm_runtime_mark_last_busy(gi3c->se.dev);
++		pm_runtime_put_autosuspend(gi3c->se.dev);
++	}
++
++	return ret;
++}
++
++static int geni_i3c_master_i2c_xfers(struct i2c_dev_desc *dev, struct i2c_msg *msgs, int num)
++{
++	struct i3c_master_controller *m = i2c_dev_get_master(dev);
++	struct geni_i3c_dev *gi3c = to_geni_i3c_master(m);
++	int ret;
++
++	guard(mutex)(&gi3c->lock);
++	reinit_completion(&gi3c->done);
++
++	ret = pm_runtime_get_sync(gi3c->se.dev);
++	if (ret < 0) {
++		dev_err(gi3c->se.dev, "Error turning on SE resources:%d\n", ret);
++		pm_runtime_put_noidle(gi3c->se.dev);
++		pm_runtime_set_suspended(gi3c->se.dev);
++		return ret;
++	}
++
++	qcom_geni_i3c_conf(gi3c, OPEN_DRAIN_MODE);
++
++	for (int i = 0; i < num; i++) {
++		struct geni_i3c_xfer_params xfer;
++
++		xfer.m_cmd    = (msgs[i].flags & I2C_M_RD) ? I2C_READ : I2C_WRITE;
++		xfer.m_param  = (i < (num - 1)) ? STOP_STRETCH : 0;
++		xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, msgs[i].addr);
++		xfer.mode     = msgs[i].len > (gi3c->tx_depth / 2) ?
++				GENI_SE_DMA : GENI_SE_FIFO;
++		if (msgs[i].flags & I2C_M_RD)
++			ret = i3c_geni_execute_read_command(gi3c, &xfer, msgs[i].buf,
++							    msgs[i].len);
++		else
++			ret = i3c_geni_execute_write_command(gi3c, &xfer, msgs[i].buf,
++							     msgs[i].len);
++		if (ret)
++			break;
++	}
++
++	dev_dbg(gi3c->se.dev, "i2c: txn ret:%d\n", ret);
++	pm_runtime_mark_last_busy(gi3c->se.dev);
++	pm_runtime_put_autosuspend(gi3c->se.dev);
++
++	return ret;
++}
++
++static int geni_i3c_master_attach_i2c_dev(struct i2c_dev_desc *dev)
++{
++	struct geni_i3c_i2c_dev_data *data;
++
++	data = kzalloc_obj(*data, GFP_KERNEL);
++	if (!data)
++		return -ENOMEM;
++
++	i2c_dev_set_master_data(dev, data);
++
++	return 0;
++}
++
++static void geni_i3c_master_detach_i2c_dev(struct i2c_dev_desc *dev)
++{
++	struct geni_i3c_i2c_dev_data *data = i2c_dev_get_master_data(dev);
++
++	i2c_dev_set_master_data(dev, NULL);
++	kfree(data);
++}
++
++static int geni_i3c_master_attach_i3c_dev(struct i3c_dev_desc *dev)
++{
++	struct geni_i3c_i2c_dev_data *data;
++
++	data = kzalloc_obj(*data, GFP_KERNEL);
++	if (!data)
++		return -ENOMEM;
++
++	i3c_dev_set_master_data(dev, data);
++
++	return 0;
++}
++
++static void geni_i3c_master_detach_i3c_dev(struct i3c_dev_desc *dev)
++{
++	struct geni_i3c_i2c_dev_data *data = i3c_dev_get_master_data(dev);
++
++	i3c_dev_set_master_data(dev, NULL);
++	kfree(data);
++}
++
++static int geni_i3c_master_do_daa(struct i3c_master_controller *m)
++{
++	struct geni_i3c_dev *gi3c = to_geni_i3c_master(m);
++	int ret;
++
++	/*
++	 * i3c_master_entdaa_locked() already swallows I3C_ERROR_M2 (no
++	 * active devices needing an address) and returns 0 for that case,
++	 * so any non-zero ret here is a real error.
++	 */
++	ret = i3c_master_entdaa_locked(m);
++	if (ret)
++		return ret;
++
++	for (u8 addr = 0; addr <= I3C_ADDR_MASK; addr++) {
++		if (__test_and_clear_bit(addr, gi3c->newaddrslots))
++			i3c_master_add_i3c_dev_locked(m, addr);
++	}
++
++	return 0;
++}
++
++static int geni_i3c_master_bus_init(struct i3c_master_controller *m)
++{
++	struct geni_i3c_dev *gi3c = to_geni_i3c_master(m);
++	struct i3c_bus *bus = i3c_master_get_bus(m);
++	struct i3c_device_info info = { };
++	int ret;
++
++	/* Get an address for the master. */
++	ret = i3c_master_get_free_addr(m, 0);
++	if (ret < 0)
++		return dev_err_probe(gi3c->se.dev, ret, "Failed to get master address\n");
++
++	info.dyn_addr = ret;
++	info.dcr = I3C_DCR_GENERIC_DEVICE;
++	info.bcr = I3C_BCR_I3C_MASTER | I3C_BCR_HDR_CAP;
++	info.pid = 0;
++
++	ret = geni_i3c_clk_map_idx(gi3c);
++	if (ret) {
++		dev_err(gi3c->se.dev,
++			"Invalid clk frequency %d Hz src for %ld Hz bus: %d\n",
++			gi3c->clk_src_freq, bus->scl_rate.i3c, ret);
++		return ret;
++	}
++
++	scoped_guard(mutex, &gi3c->lock) {
++		reinit_completion(&gi3c->done);
++		ret = pm_runtime_resume_and_get(gi3c->se.dev);
++		if (ret < 0)
++			return dev_err_probe(gi3c->se.dev, ret, "Failed to resume controller\n");
++
++		qcom_geni_i3c_conf(gi3c, OPEN_DRAIN_MODE);
++
++		ret = i3c_master_set_info(&gi3c->ctrlr, &info);
++		pm_runtime_put_autosuspend(gi3c->se.dev);
++	}
++
++	return ret;
++}
++
++static bool geni_i3c_master_supports_ccc_cmd(struct i3c_master_controller *m,
++					     const struct i3c_ccc_cmd *cmd)
++{
++	switch (cmd->id) {
++	case I3C_CCC_ENEC(true):
++	case I3C_CCC_ENEC(false):
++	case I3C_CCC_DISEC(true):
++	case I3C_CCC_DISEC(false):
++	case I3C_CCC_ENTAS(0, true):
++	case I3C_CCC_ENTAS(0, false):
++	case I3C_CCC_RSTDAA(true):
++	case I3C_CCC_RSTDAA(false):
++	case I3C_CCC_ENTDAA:
++	case I3C_CCC_SETMWL(true):
++	case I3C_CCC_SETMWL(false):
++	case I3C_CCC_SETMRL(true):
++	case I3C_CCC_SETMRL(false):
++	case I3C_CCC_DEFSLVS:
++	case I3C_CCC_SETDASA:
++	case I3C_CCC_SETNEWDA:
++	case I3C_CCC_GETMWL:
++	case I3C_CCC_GETMRL:
++	case I3C_CCC_GETPID:
++	case I3C_CCC_GETBCR:
++	case I3C_CCC_GETDCR:
++	case I3C_CCC_GETSTATUS:
++	case I3C_CCC_GETACCMST:
++	case I3C_CCC_GETMXDS:
++	case I3C_CCC_GETHDRCAP:
++		return true;
++
++	default:
++		return false;
++	}
++}
++
++static const struct i3c_master_controller_ops geni_i3c_master_ops = {
++	.bus_init = geni_i3c_master_bus_init,
++	.do_daa = geni_i3c_master_do_daa,
++	.attach_i3c_dev = geni_i3c_master_attach_i3c_dev,
++	.detach_i3c_dev = geni_i3c_master_detach_i3c_dev,
++	.attach_i2c_dev = geni_i3c_master_attach_i2c_dev,
++	.detach_i2c_dev = geni_i3c_master_detach_i2c_dev,
++	.supports_ccc_cmd = geni_i3c_master_supports_ccc_cmd,
++	.send_ccc_cmd = geni_i3c_master_send_ccc_cmd,
++	.i3c_xfers = geni_i3c_master_priv_xfers,
++	.i2c_xfers = geni_i3c_master_i2c_xfers,
++};
++
++static int i3c_geni_resources_init(struct geni_i3c_dev *gi3c, struct platform_device *pdev)
++{
++	int ret;
++
++	gi3c->se.base = devm_platform_ioremap_resource(pdev, 0);
++	if (IS_ERR(gi3c->se.base))
++		return PTR_ERR(gi3c->se.base);
++
++	gi3c->se.clk = devm_clk_get(&pdev->dev, NULL);
++	if (IS_ERR(gi3c->se.clk))
++		return dev_err_probe(&pdev->dev, PTR_ERR(gi3c->se.clk),
++							"Unable to get serial engine core clock: %pe\n",
++							gi3c->se.clk);
++	ret = geni_icc_get(&gi3c->se);
++	if (ret)
++		return ret;
++
++	/* Set the bus quota to a reasonable value for register access */
++	gi3c->se.icc_paths[GENI_TO_CORE].avg_bw = GENI_DEFAULT_BW;
++	gi3c->se.icc_paths[CPU_TO_GENI].avg_bw = GENI_DEFAULT_BW;
++	ret = geni_icc_set_bw(&gi3c->se);
++	if (ret)
++		return ret;
++
++	/* Default source clock (se-clock-frequency) freq is 100Mhz */
++	gi3c->clk_src_freq = HZ_PER_MHZ * 100;
++
++	return 0;
++}
++
++static int geni_i3c_hw_init(struct geni_i3c_dev *gi3c, struct platform_device *pdev)
++{
++	u32 proto, fifo_disable;
++
++	proto = geni_se_read_proto(&gi3c->se);
++	if (proto != GENI_SE_I3C) {
++		geni_se_resources_off(&gi3c->se);
++		return dev_err_probe(gi3c->se.dev, -ENXIO, "Invalid proto %d\n", proto);
++	}
++
++	fifo_disable = readl_relaxed(gi3c->se.base + GENI_IF_DISABLE_RO);
++	if (fifo_disable) {
++		geni_se_resources_off(&gi3c->se);
++		return dev_err_probe(gi3c->se.dev, -ENXIO, "GPI DMA mode not supported\n");
++	}
++
++	gi3c->tx_depth = geni_se_get_tx_fifo_depth(&gi3c->se);
++	gi3c->tx_wm = gi3c->tx_depth - 1;
++	geni_se_init(&gi3c->se, gi3c->tx_wm, gi3c->tx_depth);
++	geni_se_config_packing(&gi3c->se, BITS_PER_BYTE, PACKING_BYTES_PER_WORD, true, true, true);
++
++	return 0;
++}
++
++static void geni_i3c_unregister(void *data)
++{
++	struct geni_i3c_dev *gi3c = data;
++
++	i3c_master_unregister(&gi3c->ctrlr);
++}
++
++static int geni_i3c_probe(struct platform_device *pdev)
++{
++	struct geni_i3c_dev *gi3c;
++	int ret;
++
++	gi3c = devm_kzalloc(&pdev->dev, sizeof(*gi3c), GFP_KERNEL);
++	if (!gi3c)
++		return -ENOMEM;
++
++	gi3c->se.dev = &pdev->dev;
++	gi3c->se.wrapper = dev_get_drvdata(pdev->dev.parent);
++
++	init_completion(&gi3c->done);
++	ret = devm_mutex_init(&pdev->dev, &gi3c->lock);
++	if (ret)
++		return ret;
++
++	spin_lock_init(&gi3c->irq_lock);
++	platform_set_drvdata(pdev, gi3c);
++
++	ret = i3c_geni_resources_init(gi3c, pdev);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Error Initializing GENI Resources\n");
++
++	gi3c->irq = platform_get_irq(pdev, 0);
++	if (gi3c->irq < 0)
++		return dev_err_probe(&pdev->dev, gi3c->irq, "Error getting IRQ number for I3C\n");
++
++	ret = devm_request_irq(&pdev->dev, gi3c->irq, geni_i3c_irq,
++			       IRQF_NO_AUTOEN, dev_name(&pdev->dev), gi3c);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Error registering core IRQ\n");
++
++	ret = geni_se_resources_on(&gi3c->se);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Error turning resources ON\n");
++
++	ret = geni_i3c_hw_init(gi3c, pdev);
++	geni_se_resources_off(&gi3c->se);
++	if (ret)
++		return ret;
++	dev_dbg(&pdev->dev, "i3c fifo/se-dma mode. fifo depth:%d\n", gi3c->tx_depth);
++
++	pm_runtime_set_suspended(gi3c->se.dev);
++	pm_runtime_set_autosuspend_delay(gi3c->se.dev, I3C_AUTO_SUSPEND_DELAY);
++	pm_runtime_use_autosuspend(gi3c->se.dev);
++	ret = devm_pm_runtime_enable(gi3c->se.dev);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Failed to enable runtime PM\n");
++
++	ret = i3c_master_register(&gi3c->ctrlr, &pdev->dev, &geni_i3c_master_ops, false);
++	if (ret)
++		return ret;
++
++	ret = devm_add_action_or_reset(&pdev->dev, geni_i3c_unregister, gi3c);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int geni_i3c_runtime_suspend(struct device *dev)
++{
++	struct geni_i3c_dev *gi3c = dev_get_drvdata(dev);
++
++	disable_irq(gi3c->irq);
++	geni_se_resources_off(&gi3c->se);
++
++	return 0;
++}
++
++static int geni_i3c_runtime_resume(struct device *dev)
++{
++	int ret;
++	struct geni_i3c_dev *gi3c = dev_get_drvdata(dev);
++
++	ret = geni_se_resources_on(&gi3c->se);
++	if (ret)
++		return ret;
++	enable_irq(gi3c->irq);
++
++	return 0;
++}
++
++static DEFINE_RUNTIME_DEV_PM_OPS(geni_i3c_pm_ops,
++			     geni_i3c_runtime_suspend,
++			     geni_i3c_runtime_resume,
++			     NULL);
++
++static const struct of_device_id geni_i3c_dt_match[] = {
++	{ .compatible = "qcom,geni-i3c" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, geni_i3c_dt_match);
++
++static struct platform_driver geni_i3c_master = {
++	.probe  = geni_i3c_probe,
++	.driver = {
++		.name = "geni_i3c",
++		.pm = pm_ptr(&geni_i3c_pm_ops),
++		.of_match_table = geni_i3c_dt_match,
++	},
++};
++
++module_platform_driver(geni_i3c_master);
++
++MODULE_AUTHOR("Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>");
++MODULE_DESCRIPTION("Qualcomm I3C Controller Driver for GENI based QUP cores");
++MODULE_LICENSE("GPL");
+-- 
+2.43.0
 
