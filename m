@@ -1,65 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793811906;
-	b=N6b6SBsWexpTq/MAUTXzKRIOCmiOfbArkzISs0kAU94lFgPSguzs18s4VanmMwMQKhRQ
-	 /Hqn/wYXkOBbW3TfY4NRF0V6aeUVJsHlq6SwlT847WfCUCpdPrpNqF71lHZaJwWox9Qkk
-	 f2rAUvftHnQGV+KP7YhbyrDV3EFaLe9J8dbbdKFZyOsUWS2Fu5OSJvHXoDuc0zY0Sgtk6
-	 0l2xWsyQe4c+RADTvoplfu8YUP5+ZQBDiAU7PDKySfXzrHafVAPUruvm1w8yAv3jFqtD5
-	 FUlwB0prkPKJj8MDMbwjgg1lECBgf7YdVMvNg+nNuuf9hrL3Imf3qtxz2vgaIKchRHg==
+	t=1793812142;
+	b=2xzQH3m8XJMeFw8gDajDhPp+wsGkrWM8M3HzP9C+LCOzgFHJ5j12Id+1daLI06uDBCGf
+	 W7HBBCfz5nM4shcuq3BdqZ8MqlWw1CyMjms+K3VK1Ig1NnC3zHhVoUv1O7wiM++z5QhK7
+	 pKelgcBmwZejIAio71FzbsDl1Pn2ZWWdMvyzEzo3n3e0t7Ch9lyNxIkdxMadyTlTDey6p
+	 /elqYF3DcKhPr1GB9IdKzoesdKUfvHY9CcgbUpgHOhHZNPksLls8gJX+B9SE25w5bZrAx
+	 1MleI7ejA4P5D5xoPjTqRujZkkRR+iQcWJW2Z0fuyCZn7/dS/mBWbzb3MgpeKXsRiSg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793811906;
-	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=WeXzuffIyNbHEXpcjMbSa6+m0KyUG6GRb77zTWpYma4=;
-	b=RICQ0uK2MiLjyU3NS/cCGarsF7ZUr/3X06Zsn175d31Ypa30XEKR5L86y+ers7Sh7Q+E
-	 rN+LPb4BRmxymtVivU+QWb+W1aycj4iO6MeBGUwrM0kTlfozPIV50jt1cWkdx8o9W9v3G
-	 tPd62E+uuXtZZ2MuE6W0S7g0Efco1oxYy6L/6hvLp+phw66GCmsvvs7fjOIJLJ+YYZ7Mk
-	 Aa5HFlEPPt1BFyJMUs4EjJzzLjkX0KR9m7q1yh/ANaZwqNmOVZvYJipiyKQAIFl+akWHh
-	 bw7ivUuEWku4+vflFz4epgMjnMjVxbm9xG+hJvxpAok3lhwjZlgZKKNdJWKSzWRK+4g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793812142;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:From:To:Cc:References:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=l/KAmDRtOoMoDq2gG1YpbrEXelFzd6hjViwAy8SPt2Y=;
+	b=gjFaj6lZCOFlzIIhkOSvbuRfNPGXYf44vDapNciK5yjDurGAdO0KNMcWVcSTUYDPYJoA
+	 COQgBnHzjxaawxqdy+6+nYjVJeGtMC4V0NVAXnQsy2xvdFcEMHfrJAk51Fc2984TzyiZl
+	 L7CnLtREcL/AQIzcxx3wv1I/ILZdkdkbwnmTLdAQjeS8xqwQq+XtJ5v7S2hFePA4spnXv
+	 WWTd1g0LdwFdiDsCAlytJBPxmUD+nen54XTsf5Z3gkRDUeyYg8eYoyoFfU8u/qqf0HktS
+	 r3Py5/se+IQ2YKJJfmOW/26Hifgsemwk/8hyP4L+Tio+fABtmE+WX9OXyX8SnoXLjyQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ideasonboard.com;
-	spf=pass smtp.mailfrom=ideasonboard.com;
-	dkim=pass header.d=ideasonboard.com header.i=@ideasonboard.com header.a=rsa-sha256 header.s=mail header.b=YwkyU5sq;
-	arc=none smtp.remote-ip=213.167.242.64
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GxcVIJ4K;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24EAB606A328;
-	Wed,  4 Nov 2026 17:05:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 24EAB606A328
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD188606A328;
+	Wed,  4 Nov 2026 17:09:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.a=rsa-sha256 header.s=mail header.b=YwkyU5sq
-Received: from ideasonboard.com (93-46-82-201.ip106.fastwebnet.it [93.46.82.201])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 01927C23;
-	Wed,  4 Nov 2026 18:02:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1793811766;
-	bh=EvYNB8RdJzSe4iS1tyaGT1xOV9p5v37Ms3e5tp+shKw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YwkyU5sqWGpFtZcBlS0/g7qF9RHq5Dwf+LtohZUszzms4R4rw6hnQtTJ2lbLbqEV0
-	 nvAKKr1qAfvmjNuZ6mILmbRnpoxpf25sayzPP9O9ppZLvc/goXdwfwhyH1CyIsC0Gd
-	 5/R4XscIzI6Az4esUG/Q5Fig0yVriz7JLmd26dMo=
-Date: Wed, 4 Nov 2026 18:05:00 +0100
-From: Jacopo Mondi <jacopo.mondi@ideasonboard.com>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-hardening@vger.kernel.org, 
-	Hans de Goede <johannes.goede@oss.qualcomm.com>
-Subject: Re: [PATCH v13 4/9] media: uapi: Add CAMSS ISP configuration
- definition
-Message-ID: <autlc2AfB8AZfb2H@zed>
-References: <20261103-camss-isp-ope-v13-0-c2cbf15a39b1@oss.qualcomm.com>
- <20261103-camss-isp-ope-v13-4-c2cbf15a39b1@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GxcVIJ4K
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 687DF1F000C1;
+	Wed,  4 Nov 2026 17:08:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793812141;
+	bh=l/KAmDRtOoMoDq2gG1YpbrEXelFzd6hjViwAy8SPt2Y=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To;
+	b=GxcVIJ4KkfHdjV4p36lasomP9lVOIWjuYpOAHfC43DN09/q/MMmQ51NvwyQ2y2pXn
+	 R9YgZfVnq43PewitoD5MfbjJmmQHONsNoipRY+lVE+UJHqa5pwn0kQO13BQ+FjP/eQ
+	 FLn8kxqZA1xl0QwUui9HpL+mH1r/IKmo83wjtLmCckLb4pmgmDA8suznN48BX4/4qQ
+	 TMnWmZqidscFIBWmF92PBY3QohWBJe1ncJDzaYtKbIgCx4v48cCDnxO5O5lrwkFj5v
+	 VKQ+XFGw9GmARsT/N8Sx8W/LrpqHxb6A1aWOKpu08YFPFekKQj+gKGz+MNR6wv+RPH
+	 zY15jVrl2HSIw==
+Message-ID: <f1fa853d-1703-411d-b2d2-0fb0b176c2fa@kernel.org>
+Date: Wed, 4 Nov 2026 18:08:39 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,260 +51,159 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261103-camss-isp-ope-v13-4-c2cbf15a39b1@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] spi: use dmaengine_desc_set_callback()
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Frank.Li@oss.nxp.com
+Cc: Mark Brown <broonie@kernel.org>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Radu Pirea <radu_nicolae.pirea@upb.ro>, CL Wang <cl634@andestech.com>,
+ Ryan Wanner <ryan.wanner@microchip.com>,
+ Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
+ <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Vladimir Oltean
+ <olteanv@gmail.com>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>,
+ Haibo Chen <haibo.chen@nxp.com>, Linus Walleij <linusw@kernel.org>,
+ Daniel Mack <daniel@zonque.org>, Haojian Zhuang <haojian.zhuang@gmail.com>,
+ Robert Jarzmik <robert.jarzmik@free.fr>, Heiko Stuebner <heiko@sntech.de>,
+ Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
+ Andi Shyti <andi.shyti@kernel.org>, Tudor Ambarus
+ <tudor.ambarus@linaro.org>, Peter Griffin <peter.griffin@linaro.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>, Yixun Lan <dlan@kernel.org>,
+ Troy Mitchell <troy.mitchell@linux.spacemit.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Alain Volmat <alain.volmat@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Laxman Dewangan
+ <ldewangan@nvidia.com>, Thierry Reding <thierry.reding@kernel.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Sowjanya Komatineni <skomatineni@nvidia.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ "open list:SPI SUBSYSTEM" <linux-spi@vger.kernel.org>,
+ "moderated list:ARM/Microchip (AT91) SoC support"
+ <linux-arm-kernel@lists.infradead.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "moderated list:BROADCOM BCM2711/BCM2835 ARM ARCHITECTURE"
+ <linux-rpi-kernel@lists.infradead.org>,
+ "open list:FREESCALE DSPI DRIVER" <imx@lists.linux.dev>,
+ "open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
+ "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
+ "open list:RENESAS RZ/V2H(P) RSPI DRIVER"
+ <linux-renesas-soc@vger.kernel.org>,
+ "open list:SAMSUNG SPI DRIVERS" <linux-samsung-soc@vger.kernel.org>,
+ "open list:RISC-V SPACEMIT SoC Support" <linux-riscv@lists.infradead.org>,
+ "open list:RISC-V SPACEMIT SoC Support" <spacemit@lists.linux.dev>,
+ "moderated list:ARM/STM32 ARCHITECTURE"
+ <linux-stm32@st-md-mailman.stormreply.com>,
+ "open list:ARM/Allwinner sunXi SoC support" <linux-sunxi@lists.linux.dev>,
+ "open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
+ Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Thierry Reding <treding@nvidia.com>
+References: <20261104152253.3279052-1-Frank.Li@oss.nxp.com>
+ <autj6pr_bPaul3w0@ashevche-desk.local>
+ <7f96599b-681d-4963-bdda-1274371ac84f@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <7f96599b-681d-4963-bdda-1274371ac84f@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Loic
+On 04/11/2026 18:02, Krzysztof Kozlowski wrote:
+> On 04/11/2026 17:57, Andy Shevchenko wrote:
+>> On Wed, Nov 04, 2026 at 10:22:45AM -0500, Frank.Li@oss.nxp.com wrote:
+>>>
+>>> Replace open-coded assignments to callback and callback_param fields
+>>> of struct dma_async_tx_descriptor with calls to the
+>>> dmaengine_desc_set_callback() helper across SPI bus drivers.
+>>>
+>>> No functional change intended. Prepare make to struct
+>>> dma_async_tx_descriptor private to the DMA engine.
+>>
+>> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com> # dw, pxa2xx, topcliff-pch
+>>
+>> (Note, you forgot to add the list of the drivers to the Rb trailers of other reviewers)
+> 
+> These should be acks. RB creates false impression entire commit was
+> reviewed. Our docs also clearly state entire commit:
+> 
+> "Reviewed-by:, instead, indicates that the patch has been reviewed and
+> found acceptable according to the Reviewer's Statemen"
+> 
+> (not patch or part of patch)
+> 
+> "By offering my Reviewed-by: tag, I state that
+> I have carried out a technical review of this patch to
+> "
+> 
+> (not patch or part of patch)
+> 
+> When you accept only part of this code, you basically Ack. I really
+> dislike these half-done reviews, which later appear in logs and tell you
+> nothing. You could have clear security bug here, but 10 review tags. How
+> useful tags...
 
-On Tue, Nov 03, 2026 at 09:05:48PM +0100, Loic Poulain wrote:
-> Add the uapi header qcom-camss-config.h defining the ISP parameter
-> structures used by the CAMSS Offline Processing Engine (OPE) driver.
-> This includes structures for white balance, chroma enhancement and
-> color correction configuration.
->
-> The block type enum is shared across CAMSS ISPs so that userspace only
-> has to deal with a single set of block identifiers.
->
-> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-> Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->  include/uapi/linux/qcom-camss-config.h | 217 +++++++++++++++++++++++++++++++++
->  1 file changed, 217 insertions(+)
->
-> diff --git a/include/uapi/linux/qcom-camss-config.h b/include/uapi/linux/qcom-camss-config.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..543c1682f8aed3b07d7085f54a24eb632ea190a8
-> --- /dev/null
-> +++ b/include/uapi/linux/qcom-camss-config.h
+And let me even bring a better example. Imagine a patch, doing massive
+refactoring of core SPI stuff, 1000 lines of code, complex locking and
+also simultaneously updates drivers to new API changed in this core.
 
-We have (kind of) recently introduced include/uapi/linux/media
+Reviewing that 1000 lines of code in core SPI with complex locking takes
+someone 30 minutes. He gives Rb tag, gets credit.
 
-This file should probably be:
-include/uapi/linux/media/qcom/camss-config.h
+Now you come, look at SINGLE line in a driver and give Rb tag. For 10
+seconds job of looking at one changed call in one driver.
 
-> @@ -0,0 +1,217 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
-> +/*
-> + * Qualcomm CAMSS ISP Driver - Userspace API
-> + *
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef _UAPI_LINUX_QCOM_CAMSS_CONFIG_H
-> +#define _UAPI_LINUX_QCOM_CAMSS_CONFIG_H
-> +
-> +#include <linux/types.h>
-> +#include <linux/media/v4l2-isp.h>
-> +
-> +/**
-> + * enum camss_params_block_type - CAMSS ISP parameter block identifiers
-> + *
-> + * Each value identifies one ISP processing block.  The value is placed in
-> + * the @type field of &struct v4l2_isp_block_header.
-> + *
-> + * @CAMSS_PARAMS_WB_GAIN: white balance gains and offsets (CLC_WB),
-> + *	&struct camss_params_wb_gain
-> + * @CAMSS_PARAMS_CHROMA_ENHAN: RGB to YUV colour transfer matrix
-> + *	(CLC_CHROMA_ENHAN), &struct camss_params_chroma_enhan
-> + * @CAMSS_PARAMS_COLOR_CORRECT: colour correction matrix (CLC_CC),
-> + *	&struct camss_params_color_correct
-> + * @CAMSS_PARAMS_GAMMA: per-channel gamma correction curves (CLC_GLUT),
-> + *	&struct camss_params_gamma
-> + */
-> +enum camss_params_block_type {
-> +	CAMSS_PARAMS_WB_GAIN = 1,
-> +	CAMSS_PARAMS_CHROMA_ENHAN = 2,
-> +	CAMSS_PARAMS_COLOR_CORRECT = 3,
-> +	CAMSS_PARAMS_GAMMA = 4,
-> +};
-> +
-> +/* Number of entries in each gamma channel LUT. */
-> +#define CAMSS_GAMMA_LUT_SIZE	256
-> +
-> +/**
-> + * struct camss_params_wb_gain - White Balance gains
-> + *
-> + * Implements the CLC_WB pipeline module.  The pipeline applies three
-> + * sequential operations per channel::
-> + *
-> + *   1. Subtract sub-offset (black-level subtraction)
-> + *   2. Multiply by gain    (colour balance)
-> + *   3. Add add-offset      (output pedestal)
-> + *
-> + * Gains are 15uQ10 (15-bit unsigned, 10 fractional bits). Offsets
-> + * are 16-bit unsigned, normalised to full input scale (65535 = 1.0)
-> + *
-> + * @header:   block header; @header.type = CAMSS_PARAMS_WB_GAIN
-> + * @g_gain:   green channel gain (15uQ10, 1024 = 1.0)
-> + * @b_gain:   blue  channel gain (15uQ10, 1024 = 1.0)
-> + * @r_gain:   red   channel gain (15uQ10, 1024 = 1.0)
-> + * @g_sub:    green sub-offset, subtracted before gain (16u)
-> + * @b_sub:    blue  sub-offset, subtracted before gain (16u)
-> + * @r_sub:    red   sub-offset, subtracted before gain (16u)
-> + * @g_add:    green add-offset, added after gain (16u)
-> + * @b_add:    blue  add-offset, added after gain (16u)
-> + * @r_add:    red   add-offset, added after gain (16u)
-> + * @_pad:     padding for 64-bit alignment, must be zero
-> + */
-> +struct camss_params_wb_gain {
-> +	struct v4l2_isp_block_header header;
-> +	__u16 g_gain;
-> +	__u16 b_gain;
-> +	__u16 r_gain;
-> +	__u16 g_sub;
-> +	__u16 b_sub;
-> +	__u16 r_sub;
-> +	__u16 g_add;
-> +	__u16 b_add;
-> +	__u16 r_add;
-> +	__u16 _pad[3];
-> +} __attribute__((aligned(8)));
-> +
-> +/**
-> + * struct camss_params_chroma_enhan - RGB to YUV colour transfer matrix
-> + *
-> + * Implements the CLC_CHROMA_ENHAN pipeline module. All coefficients are
-> + * signed 12-bit fixed-point Q3.8 (range roughly -8.0 to +7.996).
-> + *
-> + * RGB2Y - Luma (Y) coefficients::
-> + *
-> + *   Y = v0 * R + v1 * G + v2 * B
-> + *
-> + * RGB2Cb - Chroma (Cb) coefficients::
-> + *
-> + *   Cb = a x ((B - G) + b(R - G)) + KCb
-> + *   with:
-> + *     a = ap, when (B-G) + b(R-G) > 0; a = am, when (B-G) + b(R-G) ≤ 0;
-> + *     b = bp when (R-G) > 0; b = bm when (R-G) ≤ 0
-> + *
-> + * RGB2Cr - Chroma (Cr) coefficients::
-> + *
-> + *   Cr = c x ((R - G) + d(B - G)) + KCr
-> + *   with:
-> + *     c = cp, when (R-G) + d(B-G) > 0; c = cm, when (R-G) + d(B-G) ≤ 0
-> + *     d = dp when (B-G) > 0; d = dm when (B-G) ≤ 0
-> + *
-> + * @header:   generic block header; @header.type = CAMSS_PARAMS_CHROMA_ENHAN
-> + * @luma_v0:  R-to-Y coefficient (12sQ8)
-> + * @luma_v1:  G-to-Y coefficient (12sQ8)
-> + * @luma_v2:  B-to-Y coefficient (12sQ8)
-> + * @luma_k:   Y output offset    (9s,  0 = no offset)
-> + * @coeff_ap: Cb positive coefficient (12sQ8)
-> + * @coeff_am: Cb negative coefficient (12sQ8)
-> + * @coeff_bp: Cb positive coefficient (12sQ8)
-> + * @coeff_bm: Cb negative coefficient (12sQ8)
-> + * @coeff_cp: Cr positive coefficient (12sQ8)
-> + * @coeff_cm: Cr negative coefficient (12sQ8)
-> + * @coeff_dp: Cr positive coefficient (12sQ8)
-> + * @coeff_dm: Cr negative coefficient (12sQ8)
-> + * @kcb:      Cb output offset        (11s)
-> + * @kcr:      Cr output offset        (11s)
-> + * @_pad:     padding for 64-bit alignment, must be zero
-> + */
-> +struct camss_params_chroma_enhan {
-> +	struct v4l2_isp_block_header header;
-> +	__s16 luma_v0;
-> +	__s16 luma_v1;
-> +	__s16 luma_v2;
-> +	__s16 luma_k;
-> +	__s16 coeff_ap;
-> +	__s16 coeff_am;
-> +	__s16 coeff_bp;
-> +	__s16 coeff_bm;
-> +	__s16 coeff_cp;
-> +	__s16 coeff_cm;
-> +	__s16 coeff_dp;
-> +	__s16 coeff_dm;
-> +	__s16 kcb;
-> +	__s16 kcr;
-> +	__u16 _pad[2];
-> +} __attribute__((aligned(8)));
-> +
-> +/**
-> + * struct camss_params_color_correct - colour correction matrix
-> + *
-> + * Implements the CLC_CC pipeline module.  The matrix computes::
-> + *
-> + *   Out_ch0 (G) = a0*G + b0*B + c0*R + k0
-> + *   Out_ch1 (B) = a1*G + b1*B + c1*R + k1
-> + *   Out_ch2 (R) = a2*G + b2*B + c2*R + k2
-> + *
-> + * The @qfactor member selects the fixed-point format of all coefficients::
-> + *
-> + *   0 = 12sQ7  (range ~-16.0 .. +15.992)
-> + *   1 = 12sQ8  (range  ~-8.0 ..  +7.996)
-> + *   2 = 12sQ9  (range  ~-4.0 ..  +3.998)
-> + *   3 = 12sQ10 (range  ~-2.0 ..  +1.999)
-> + *
-> + * @header:  block header; @header.type = CAMSS_PARAMS_COLOR_CORRECT
-> + * @a:       G-input coefficients per output channel (12s;
-> + *           a[0]=Out_G, a[1]=Out_B, a[2]=Out_R)
-> + * @b:       B-input coefficients (12s)
-> + * @c:       R-input coefficients (12s)
-> + * @k:       per-output-channel offsets (typically 9s effective)
-> + * @qfactor: Q-format selector (2u), see above
-> + * @_pad:    padding for 64-bit alignment, must be zero
-> + */
-> +struct camss_params_color_correct {
-> +	struct v4l2_isp_block_header header;
-> +	__s16 a[3];
-> +	__s16 b[3];
-> +	__s16 c[3];
-> +	__s16 k[3];
-> +	__u16 qfactor;
-> +	__u16 _pad[3];
-> +} __attribute__((aligned(8)));
-> +
-> +/**
-> + * struct camss_params_gamma - per-channel gamma correction curves
-> + *
-> + * Implements the CLC_GLUT pipeline module, applied in the RGB domain.  It
-> + * holds one independent lookup table per colour channel. Each table is a
-> + * direct (not segmented) map of input level to output level.
-> + *
-> + * Each table has @CAMSS_GAMMA_LUT_SIZE (256) entries of 16-bit unsigned
-> + * output. The number of significant output bits follows the width of the
-> + * engine's internal bus; the upper bits are ignored by the hardware.
-> + *
-> + * The module maps a 12-bit input to an 8-bit output: the top 8 input bits
-> + * index the table and the low 4 bits are used to linearly interpolate
-> + * between adjacent entries. Entry i therefore represents the output for
-> + * input level i/255 of full scale.
-> + * Output range: 0x00 = black, 0xFF = white.
-> + *
-> + * How to fill a curve (same on all three channels for pure luminance
-> + * gamma; different curves per channel additionally shift colour balance)::
-> + *
-> + *   Identity (pass-through, gamma 1.0):
-> + *     lut[i] = i;                                // i = 0..255
-> + *
-> + *   Encode with gamma g (e.g. sRGB-like, g = 2.2):
-> + *     lut[i] = round(pow(i / 255.0, 1.0 / g) * 255.0);
-> + *
-> + * @header:  block header; @header.type = CAMSS_PARAMS_GAMMA
-> + * @glut:    green channel gamma curve
-> + * @blut:    blue  channel gamma curve
-> + * @rlut:    red   channel gamma curve
-> + */
-> +struct camss_params_gamma {
-> +	struct v4l2_isp_block_header header;
-> +	__u16 glut[CAMSS_GAMMA_LUT_SIZE];
-> +	__u16 blut[CAMSS_GAMMA_LUT_SIZE];
-> +	__u16 rlut[CAMSS_GAMMA_LUT_SIZE];
-> +} __attribute__((aligned(8)));
-> +
-> +#define CAMSS_PARAMS_OPE_MAX_PAYLOAD		\
-> +	(sizeof(struct camss_params_wb_gain)	+\
-> +	 sizeof(struct camss_params_chroma_enhan)	+\
-> +	 sizeof(struct camss_params_color_correct)	+\
-> +	 sizeof(struct camss_params_gamma))
-> +
-> +#endif /* _UAPI_LINUX_QCOM_CAMSS_CONFIG_H */
->
-> --
-> 2.34.1
->
->
+You just Acked, you did not review "the patch" (quoting submitting patches).
+
+Best regards,
+Krzysztof
