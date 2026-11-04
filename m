@@ -1,56 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.114
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793830571;
-	b=20Jq0RnfyCeLcJEnokTTaHIsfS55ln9sNa8szTl0kz4opBStBrlVKn+ykbripgv/0ovf
-	 pX5LNNHkX5Jp7csWRb+GTgaG/NRYOsSlVrcXnUj3VykkJto6b3rA3LvKCvby9I6Ykalko
-	 mtldi2TAIvet/td8STPy+NPPHRgKsfkltIDbdIHaTDrPYvYngn++lz3kNZruAz5KxrUUU
-	 EzgbrcfI8VyGRofpLEvVCGWkg4Kgj9ugb2mj53xHoeDb1QvyJpio9rcobqnfnt8BXGXVv
-	 x+fgm3CCzlc+D11gAL39tX8rpYvbOxtI0Jcqv6RVsz1HRIz+IbcsbkovbjE09GCNesw==
+	t=1793830827;
+	b=RdpsOyzrxIaQz1DvBEmZStSUKZ6HhUHLynpI6S/VkZAXWJgRGANbhIxEy/TDhlcTEfNR
+	 aOIHy4jntTSF+5yOkLJOVFeduLJZeBOKayz3x5ueR0OFPXuZcI9aHMjOcnnE1U1dmdJPv
+	 I64DxZ302l0DSHVJWjmdxfbizyf//Mdvj4mtrzJnUM8PYi9+8xFagKH9D0GADoX4azsLJ
+	 VHlPzbaPRmFFlCbFo6j/FGh3MOqByrywu7U3kC83IDbDxclO92QFEOGZIjUGU9BpuOy61
+	 l9fIoc68EfJ0uBqj+zAuR5W0b9KpPdE2JSnhUom674//6nuXEF76C5JXkkIrYGC8YZA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793830571;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=j9Rufr4Hs1JO0y9U1COsDcSj8+g2/5xz85GRfteT5Sk=;
-	b=W2VmUTsEqp+afADRPYjHExhHp0dGZS0ifrplFUigSm1njoer3V0WgJ9UwsoVDYM145WT
-	 BuI9aE+b+JjvfpiFDzShtszuMOwqKw4Myx5897qmqYQtfFVkDYznBe9dEbkKiVhE0qzxh
-	 2QqckAAVOmtUfExWt6HwMtX1bY9gjcoTsB1+oHnfYf8RDRQFzS6mlLVqaySCJ8xnJeR6i
-	 WVN9M/IriTB4vtefFWBLRkCRs8/csh1PSG5A5Pj1L/4JXmBwWLRTpuauilFXpE8bVPLIi
-	 JooqmmfKuShUAwjS7p+47A2lSA4YveXn1GyubnC0DJykbGJsW5jA2VaFK5OmWBnl0sQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793830827;
+	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
+	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc;
+	bh=k8m1ft/HEsASnyAsoytyRld6KpMVlVnsxyzHUrDxgJw=;
+	b=I3deg45DZ/+DJyzlPeYXKW524h4Iwj4k+b0vBwVMSszZbSk+aGUEmws9DuMn14ggCpV/
+	 7w9NEwyZ55KQagu1qp8TjbfWtKG1vgy/VnFNnu8RhLr5HNcNMk1vqG+w0NBZOtY9kW9kq
+	 T9hztANG1OcHPoyRaFHuuqFU8eNnF4UCWmlSdTAfJpNETJvPTy4vFR+5TcRzmqrbrRkHY
+	 BkvpACoaOakiCmTI10M7l+u4+D42LA/SNDua9LOOxVz5KyV7ZzIOtOsq6qM8gDAHxMks0
+	 +FW7Ob4xP14IXlAQUAXiPmQxggXA8YXuTf7PEUmXQUfpeoOranYEv8bPmLNIvnd38gQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=ug71nNHV;
-	arc=none smtp.remote-ip=95.215.58.114
-Received: from mta1.migadu.com (out-114.mta1.migadu.com [95.215.58.114])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VAe2ARzv;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 857786070ABF
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 22:16:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 857786070ABF
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4227D606B2E0;
+	Wed,  4 Nov 2026 22:20:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=ug71nNHV
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=ImSXfR9ngIu3UEz6sbn6M4yfwE7dlZrkCsVOFv9NUHg=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1793830567; v=1; x=1794435367;
- b=ug71nNHVXzCpxDF+L9Vfqsfl9KY6RjkN5M6kckMhmwq4dgWMMDgyIZdFaS59TIlXpgjgk7e9
- dEOCKEb7C7yZ18C3TfOkg4hYvX48vWFifQLaugD+4irVGd60Xy/H2cfrwtElvxl4IvqAOJe5WXu
- 50MfmQvLpMWnEg9T1fWiCkKCkL4ZLEbZvO6GWzZOJKZjUkZvrzbpgN8mPuoE8nCQvz7lm+b8nbE
- s3qVlqByQtbSFgmq3txK3fMxficniOCGiws0xV4+FMWa/2C8x+051x6qZqEOAp1wp680PN/tk9X
- WvD18Q30JDkd/ch1ztcUfsLybYsUU17EJDg/bpX2NTPbg==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 9d75a789143152f3;
-	Wed, 04 Nov 2026 22:16:05 +0000
-X-Mizu-Trace-ID: 9d75a789143152f3
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <648ae82b-edda-42e1-b5b2-522a791d6bdb@packett.cool>
-Date: Wed, 4 Nov 2026 19:15:56 -0300
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VAe2ARzv
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AFA31F00A1F;
+	Wed,  4 Nov 2026 22:20:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793830827;
+	bh=k8m1ft/HEsASnyAsoytyRld6KpMVlVnsxyzHUrDxgJw=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=VAe2ARzvufSZ6HOGmOxqG7T+J3uWTaHL/FeXzcnAKtSCLrKEe0GTAidU0rw8scOIU
+	 GNa/GgKmS5JRJwZCFREDII3E83Q3tiLs+pP5sa68l30OnfHQ7xAuDhOpaZSgT9uVPi
+	 FVCHdiy23ydpcyj/8RoUrFsA06AOK5aQ1Af9hPppmJUhIpkE3HbD3kUeyiXCUKtP8d
+	 rjNi80OHNPCdtjpNl4NBtbG9xqlqodhv4njdeF4sTm0wI7mYmhOth5hC7cnfHNpv25
+	 7NLzGaRy96H6U4hDlQdgWvHw+0xCS3galGAofXZ6OIVlZddU9WWbXFPCCZeHoFwBR3
+	 WQTZHVXCN66rw==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 031B838003E1;
+	Wed,  4 Nov 2026 22:20:27 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,76 +53,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/4] regulator: qcom-rpmh: readback voltage/bypass/mode
- set during bootup
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260801-b4-read-rpmh-v5-v6-0-9fcb54928523@oss.qualcomm.com>
- <20260801-b4-read-rpmh-v5-v6-3-9fcb54928523@oss.qualcomm.com>
- <0a73bc50-71f4-43f8-9d95-14a763d63c61@oss.qualcomm.com>
- <5b2yo644hjtnyue42da6zltxpai2hlod3verxbkecbmmaw2ktj@6qhufjoik7kw>
- <14bb6196-8274-4c94-922e-4ec8e2d7f2e5@oss.qualcomm.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <14bb6196-8274-4c94-922e-4ec8e2d7f2e5@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] Bluetooth: qca: Disable SoC debug logging for WCN3950
+From: patchwork-bot+bluetooth@kernel.org
+Message-Id: 
+ <179383082559.3253812.14222626454934978611.git-patchwork-notify@kernel.org>
+Date: Wed, 04 Nov 2026 22:20:25 +0000
+References: <20261103103414.803861-1-valorcool@gmail.com>
+In-Reply-To: <20261103103414.803861-1-valorcool@gmail.com>
+To: Stanislavs Nilovs <valorcool@gmail.com>
+Cc: brgl@kernel.org, marcel@holtmann.org, luiz.dentz@gmail.com,
+ linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+ linux-kernel@vger.kernel.org
 
-Hi,
+Hello:
 
-On 9/8/26 4:46 AM, Konrad Dybcio wrote:
-> [..]
->> do you see the problem with the rpmh_read() or in the voltage range check?
-> Applying
->
-> 20260812-rpmh-timeout-debug-v1-v3-0-68c0a40dce23@oss.qualcomm.com
->
-> I get:
->
-> [   12.735771] qcom_rpmh RSC:apps_rsc
-> [   12.739294] qcom_rpmh Request: tcs-in-use:YES state=2 wait_for_compl=1
-> [   12.749622] qcom_rpmh TCS=0 [ctrlr-sts:BUSY amc-mode:0x1010000 irq-sts:WAITING]
-> [   12.763769] qcom_rpmh        CMD=0 [addr=0x43100(VRM/smpc8) data=0x7 resp-required sts=triggered+sent-to-aoss]
-> [   12.781024] qcom_rpmh Request: tcs-in-use:YES state=2 wait_for_compl=1
-> [   12.797493] qcom_rpmh TCS=1 [ctrlr-sts:BUSY amc-mode:0x1010000 irq-sts:WAITING]
-> [   12.811733] qcom_rpmh        CMD=0 [addr=0x40000(VRM/smpa5) data=0x0 resp-required sts=triggered+sent-to-aoss]
-> [   12.829006] qcom_rpmh HW IRQ 37 is NOT PENDING at GIC
-> [   12.843942] qcom_rpmh Completion is not done
-> [   12.853536] qcom_rpmh ERROR: Accelerator(s) at AOSS did not respond
->
-> Neither S8C nor S5A are "special", neither of them feeds an
-> ARC resource (at a glance, anyway)
->
-> so it's the read part,
->
-> RPMH_REGULATOR_REG_VRM_VOLTAGE and RPMH_REGULATOR_REG_VRM_MODE stall
->
-> RPMH_REGULATOR_REG_ENABLE interestingly doesn't
+This patch was applied to bluetooth/bluetooth-next.git (master)
+by Luiz Augusto von Dentz <luiz.von.dentz@intel.com>:
 
-This happens with some LDOs on sc8180x as well…
+On Tue,  3 Nov 2026 12:34:14 +0200 you wrote:
+> Added WCN3950 module to the switch-case to disable SoC debug packets.
+> 
+> Fixes: 590deccf4c06 ("Bluetooth: hci_qca: Disable SoC debug logging for WCN3991")
+> Signed-off-by: Stanislavs Nilovs <valorcool@gmail.com>
+> ---
+>  drivers/bluetooth/btqca.c | 1 +
+>  1 file changed, 1 insertion(+)
 
-I've been getting the "failed to read VOLTAGE ret = -110" error when 
-enabling the L14A LDO (for cameras on the Surface Pro X). (And that 
-breaks the entire boot)
+Here is the summary with links:
+  - Bluetooth: qca: Disable SoC debug logging for WCN3950
+    https://git.kernel.org/bluetooth/bluetooth-next/c/d97b618b6675
 
-With the "Skip read requests on unsupported platforms" patch, instead of 
-that I get an error exactly like this one above, when it's being set to 
-high power mode.
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-Even patching out the *writes* to mode/voltage specifically for ldo14, 
-rpmh_regulator_set_enable_state on ldo14 crashes/stalls aoss (and at 
-least in some dt configurations, boot proceeds but wifi/usb break) :(
-
-But S5A, L7A, L9A, L12A were listed there normally from the start and 
-never had this issue. S5A here did not have an issue even with the read 
-code enabled.
-
-
-~val
 
