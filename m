@@ -1,47 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793813281;
-	b=ODqOQjPoC/zWF19i9RDNirXMaFDe1EY02Pbm0Qjj8dNsY8ccu63dVRoL8fRvnNCNBobN
-	 YXogTedwjN3po93nPD+gmWHEslmCTmBfdbFMttv4y+BNG/kjfHRuK5yF6/hLPEVJDvHwG
-	 5LOFJai1QcXaPOqt9HzwIrFv+nUXZf7MUCrKf1py0Blw3U/dyrXsUphP0BwjrZsnmax3T
-	 s8wDSnhgxleBv69t2u1VnZbUfPfxcZoYNMwyBSVLO9HakMPoE/bo2cZimlFh19Fev3yB0
-	 3Ke1jTgPZfugDouubCfgs5i7YGXkdbzFNYUYFGyEWikdacY8Q53lS/C+Zl0hdAaVfZg==
+	t=1793813476;
+	b=Lr44da7jEqYInw7K3z8KSe2uVfhZRMsW9Hov6gENVmDhz1qk493+lJBMtqr7twalZUHC
+	 2ZRcs5ZSzgWGhN20X2pXErmVKrveM+DQuqhhMa1KSa9bNaZ4ueP2lNvI9Txppje0zuVmu
+	 PHruoLPoPIu7UaOUmgD0DXUNJXhEyd5qjhh/YF+xMKRermSz27HFog+KX3kr0nnGXt83+
+	 DEvN0wytgaZ9Gtjx933xqF79rtFP46fRmYUVcuvj2mW51XgqYl641HdWQ5f5irdK1fd4h
+	 +if+PfqVFHk95beS/dixnYOwbjZGqZa9EqYOEnqg646Xye3zOTSLKeCT15aIdEEzqAw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793813281;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=l/mNIUYbMxLCGw0NLoaMA4f3zkyRJADVSFkdtq4toFM=;
-	b=rUCePuE0UiS/d07nAbXAC2M8Xqn37X1d1XoOeIK39afWc75G0wBdZ6j55GYwfMsX6wa/
-	 nOCsZPxc8BGBKpEkvbBShm6a2e7c46EaX0QcgHTK7za0JAKH66++XtF8IBSO0qxFawB4D
-	 5Zc0ZTlJfNBakD5ij9XJ4Xa1RMFDMXjVydEsJNXlqleZAXdMexdo4GOjHRX2dbm3Wbffr
-	 ne5xpbN8OvStem0x8mDaM3XZe6xtYQlPR3ku2TG4IxYtowX4JTx+p81yU5ifHFR0LOHf6
-	 EBK9b1fhL7cCjXid5WJl4LCsvWLJ7zuq5CCpmSHN88GYR4zIE334J4t7PcsFo3aWMUg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793813476;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=eEMB8r0budUtj3uGulxJe7mBeA6S1msIwjb4rAySSVk=;
+	b=hbS8THPCuK1pJQSG7ALX5kFlsV83YvkvN2zV3MFUvx6MNara0w4RecuWWoQPSnJAyZL8
+	 FJglRCLxRhE0Ovs5y+dQhLpZ+u1J7GImKUVgV2Rw5rAAr47+eJNhO9w8/NnpkdBq/doac
+	 1H7Jv0GcTV143NeSbvfv2b/6GBecRslNXdHvcOg8/+yltKxpwnJm4DhrQR0peJeCA8+zo
+	 pPUJ2YjkQnBoxJG5lkjgCmbtaD/UwYcFdYYY7AnWoM7nWuyD5Dir3G8D8FeYgthqHTfaN
+	 Q29+kakMvXMVPUOJwMLVHTwiPKr71R4UoHaKFoXIHLiX9P4wl9sT4sTMn/DQhhe7XAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LkqsVoPl;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=MgBZ7EdZ;
+	arc=none smtp.remote-ip=198.175.65.11
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22EA8606A31B;
-	Wed,  4 Nov 2026 17:28:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20F6E60700E7;
+	Wed,  4 Nov 2026 17:31:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 20F6E60700E7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LkqsVoPl
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8A521F000C1;
-	Wed,  4 Nov 2026 17:27:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793813280;
-	bh=l/mNIUYbMxLCGw0NLoaMA4f3zkyRJADVSFkdtq4toFM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=LkqsVoPlMxnL8hn5zvggg6Mk5g6BwJ3Yt83USTc/eHUB9qseTp86cnNuAormA9cIA
-	 GXPp0lI/PgoNLT/nN5QL7Pv9RsKf/estDLFbDCpOMawQ8gaL3Ft580F5yejIrzOo7P
-	 SIPiLSFSqdfhyg7upul+KIwH2t0K0EIBBhv+t1G//73EioWqslBR14ukkjlsHruOIm
-	 n3fnEGZZ5tEigyUflMnKa617NRYomjanPVWDmiJ23OQHfhZohjiynMee+IuwZnXEca
-	 1bNASyC2jRHnlc6OLAIoywhCH4Txi/AupoYn2hDywxkjNkonXjXYJ4qw1faKAwMZsF
-	 zslmXuwVosIMg==
-Message-ID: <9e39502a-dd17-4fa2-98a3-9019523cb5e8@kernel.org>
-Date: Wed, 4 Nov 2026 18:27:40 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=MgBZ7EdZ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1793813474; x=1825349474;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=m4SPikyWXZLxiPSXE01IVVLmm0cbn4Cy/WXBcIsyOMs=;
+  b=MgBZ7EdZQVySHNUPLqQ7+dMLmPbfqyBXcWaeE33tm/dAcO8UoL70fiJ9
+   OvznilhRW1f8MIi3poIFOErr94ehUdhBm7u6EvxJmkgEw+JKHigtSBeHQ
+   CgN0b8Y+NO0ObFjzDTGQid/l7tJ9AaPD4kVUak1jyvULxxW2SX3xSpAay
+   PhVG8EI1hS0Bmu75XjtO9iDqy2D8e7YTs7Fgv9NjvhJatunYLcABQwQvg
+   3GYhfu3s/Lmitkp77JWdqE+OSijOY72Rxhs/FmIJX6l1hxqmTnlEkLQX/
+   LsO3tidV4FDnUoivgb7h+lwFDJfmq/ct7nq43IbiXqzV+KrdnvqxJgkva
+   g==;
+X-CSE-ConnectionGUID: YTXjr7k0QS2SWzHb6s/CQQ==
+X-CSE-MsgGUID: ZD88bbL7RDueOOcwVIv4jg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11956"; a="2458172"
+X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
+   d="scan'208";a="2458172"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 09:31:13 -0800
+X-CSE-ConnectionGUID: l5z61l+QSJ2Zl7Xes/bhZw==
+X-CSE-MsgGUID: U8j/Qh3jQ3G6t95yNbxQew==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
+   d="scan'208";a="6676151"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.24])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 09:31:11 -0800
+Date: Wed, 4 Nov 2026 19:31:08 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Christoph Rudorff <chris@rudorff.com>
+Cc: Linus Walleij <linusw@kernel.org>, Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v4 2/3] iio: light: gp2ap002: add led power supply
+Message-ID: <autr3DH6UZLY_ys4@ashevche-desk.local>
+References: <20261104-iio-light-gp2ap002-v4-0-fa1cbaad2ce5@rudorff.com>
+ <20261104-iio-light-gp2ap002-v4-2-fa1cbaad2ce5@rudorff.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,180 +87,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] spi: use dmaengine_desc_set_callback()
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Frank.Li@oss.nxp.com, Mark Brown <broonie@kernel.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Radu Pirea <radu_nicolae.pirea@upb.ro>, CL Wang <cl634@andestech.com>,
- Ryan Wanner <ryan.wanner@microchip.com>,
- Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
- <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Vladimir Oltean
- <olteanv@gmail.com>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>,
- Haibo Chen <haibo.chen@nxp.com>, Linus Walleij <linusw@kernel.org>,
- Daniel Mack <daniel@zonque.org>, Haojian Zhuang <haojian.zhuang@gmail.com>,
- Robert Jarzmik <robert.jarzmik@free.fr>, Heiko Stuebner <heiko@sntech.de>,
- Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
- Andi Shyti <andi.shyti@kernel.org>, Tudor Ambarus
- <tudor.ambarus@linaro.org>, Peter Griffin <peter.griffin@linaro.org>,
- Alim Akhtar <alim.akhtar@samsung.com>, Yixun Lan <dlan@kernel.org>,
- Troy Mitchell <troy.mitchell@linux.spacemit.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Alain Volmat <alain.volmat@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Laxman Dewangan
- <ldewangan@nvidia.com>, Thierry Reding <thierry.reding@kernel.org>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Sowjanya Komatineni <skomatineni@nvidia.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- "open list:SPI SUBSYSTEM" <linux-spi@vger.kernel.org>,
- "moderated list:ARM/Microchip (AT91) SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:BROADCOM BCM2711/BCM2835 ARM ARCHITECTURE"
- <linux-rpi-kernel@lists.infradead.org>,
- "open list:FREESCALE DSPI DRIVER" <imx@lists.linux.dev>,
- "open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- "open list:RENESAS RZ/V2H(P) RSPI DRIVER"
- <linux-renesas-soc@vger.kernel.org>,
- "open list:SAMSUNG SPI DRIVERS" <linux-samsung-soc@vger.kernel.org>,
- "open list:RISC-V SPACEMIT SoC Support" <linux-riscv@lists.infradead.org>,
- "open list:RISC-V SPACEMIT SoC Support" <spacemit@lists.linux.dev>,
- "moderated list:ARM/STM32 ARCHITECTURE"
- <linux-stm32@st-md-mailman.stormreply.com>,
- "open list:ARM/Allwinner sunXi SoC support" <linux-sunxi@lists.linux.dev>,
- "open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
- Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Thierry Reding <treding@nvidia.com>
-References: <20261104152253.3279052-1-Frank.Li@oss.nxp.com>
- <autj6pr_bPaul3w0@ashevche-desk.local>
- <7f96599b-681d-4963-bdda-1274371ac84f@kernel.org>
- <f1fa853d-1703-411d-b2d2-0fb0b176c2fa@kernel.org>
- <autqC143h7Qf1R9H@ashevche-desk.local>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <autqC143h7Qf1R9H@ashevche-desk.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261104-iio-light-gp2ap002-v4-2-fa1cbaad2ce5@rudorff.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On 04/11/2026 18:23, Andy Shevchenko wrote:
-> On Wed, Nov 04, 2026 at 06:08:39PM +0100, Krzysztof Kozlowski wrote:
->> On 04/11/2026 18:02, Krzysztof Kozlowski wrote:
->>> On 04/11/2026 17:57, Andy Shevchenko wrote:
->>>> On Wed, Nov 04, 2026 at 10:22:45AM -0500, Frank.Li@oss.nxp.com wrote:
->>>>>
->>>>> Replace open-coded assignments to callback and callback_param fields
->>>>> of struct dma_async_tx_descriptor with calls to the
->>>>> dmaengine_desc_set_callback() helper across SPI bus drivers.
->>>>>
->>>>> No functional change intended. Prepare make to struct
->>>>> dma_async_tx_descriptor private to the DMA engine.
->>>>
->>>> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com> # dw, pxa2xx, topcliff-pch
->>>>
->>>> (Note, you forgot to add the list of the drivers to the Rb trailers of other reviewers)
->>>
->>> These should be acks. RB creates false impression entire commit was
->>> reviewed. Our docs also clearly state entire commit:
->>>
->>> "Reviewed-by:, instead, indicates that the patch has been reviewed and
->>> found acceptable according to the Reviewer's Statemen"
->>>
->>> (not patch or part of patch)
->>>
->>> "By offering my Reviewed-by: tag, I state that
->>> I have carried out a technical review of this patch to
->>> "
->>>
->>> (not patch or part of patch)
->>>
->>> When you accept only part of this code, you basically Ack. I really
->>> dislike these half-done reviews, which later appear in logs and tell you
->>> nothing. You could have clear security bug here, but 10 review tags. How
->>> useful tags...
->>
->> And let me even bring a better example. Imagine a patch, doing massive
->> refactoring of core SPI stuff, 1000 lines of code, complex locking and
->> also simultaneously updates drivers to new API changed in this core.
->>
->> Reviewing that 1000 lines of code in core SPI with complex locking takes
->> someone 30 minutes. He gives Rb tag, gets credit.
->>
->> Now you come, look at SINGLE line in a driver and give Rb tag. For 10
->> seconds job of looking at one changed call in one driver.
->>
->> You just Acked, you did not review "the patch" (quoting submitting patches).
+On Wed, Nov 04, 2026 at 02:02:28PM +0100, Christoph Rudorff wrote:
+> Problem: no irq received. Not working.
 > 
-> Your example is doubtful because the patch is combined from independent pieces.
-> The Rb fits very well the listed drivers. The problem is that some of the
-> people combine changes into a bundle (and not proper per-driver series).
+> According to datasheet page 8 "Recommended external circuit",
+> it got tree pins to supply: vio, vdd and vled->leda.
+> 
+> We were missing to power the led (pin leda)
+> 
+> * add leda regulator
+> * use regulator_bulk_*()
+> * pretty up set voltages
+> 
+> Tested on samsung-j5 (msm8916)
+> 
+> Signed-off-by: Christoph Rudorff <chris@rudorff.com>
 > 
 
-The example is actually real. There are many patches changing some core
-subsystem API stuff + many drivers, and they are done correct as one patch.
+Missing '---' cutter line which makes this patch invalid and it may not be
+applied (your SoB should be a tag and it should be last in the chain; you may
+conduct an experiment, take the message ID of this email, run on a clean Linux
+kernel Git repository something like `b4 am -s $MSG_ID; git am ...` followed by
+`git log`, you will see the issue).
 
-Looking at two lines out of 50, 100 or 1000 (here is 740!!!) is not
-reviewing "this patch". Is acking it.
+> v2: Use regulator bulk api.
+> v3: pretty up, rename vled to leda
+> v4: add namespace "GP2AP002", use separate value for setting vdd,
+>     moved static supply-data back to global, more readable imho
+> ---
 
-All of the Rbs here are half baked, meaning they did not review "this
-patch" (quoting submitting patches document).
+...
 
-But sure, if we want to play such numbers game, I will be sending
-reviews for single lines.
+>  	int num_chan;
+>  	const char *compat;
+>  	u8 val;
+> -	int ret;
+> +	int ret, vdd_volt;
 
-Best regards,
-Krzysztof
+Don't mix semantically different variables on the same line.
+Try to keep reversed xmas tree order.
+
+...
+
+>  	if (ret) {
+> -		dev_err(dev, "failed to sett VDD voltage\n");
+> +		dev_err(dev, "failed to set VDD voltage\n");
+>  		return ret;
+
+Unrelated change.
+
+>  	}
+> -
+
+Stray change.
+
+...
+
+I stopped here.
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
