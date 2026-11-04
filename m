@@ -1,72 +1,74 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793817895;
-	b=RiVAzVmjKao5XtPQdl/0g2Dcn85cmiTGVCVQorQrVg8IuV7jkJ/6oCe36B1KBy6QwcCp
-	 66GsGlqrBp8jhHdNkMlrAabAG+6A895voi/xglaPg/3Yh1b8h+RlB5kQlGLnz8jdxKPXj
-	 JilYBZG6tzCUYh0zaaxVMZP4n47YEdWKMT+Q01OP1uLj31iTEE7qkCUVXhwLrkqWQ8xjH
-	 vDHiybtUbeurHp5nBa2lV5ssIREwn7nKV2SP5c5hhhCBMZgUoT5jlQ7r44eY7fJ/6hpHr
-	 TT0fDScX3Qs1LVCaTxqLsN+4JlyUL7fktcQGRYD4OwwfAR+rRIiA0gYIlS7R06mvveA==
+	t=1793818404;
+	b=UVeDxFqu63TzLLO1By9lFbRJ7SyHd89pDKL/zpD5VTLj2M9ReX2Y91Dn2I+0vYjTgMBk
+	 3F2APIY+silr8XGevc8lAnTlPuBM+CdT3MMbv/nvbiJ8vEC3mmQSdtcvBalk5wvOse+1t
+	 E3S2rcShGQviKJG3N/ZPkADV0IS1nr+ipSXXNMbDem58Ts5m/98stofrPt/38wTRazwuH
+	 AajLenHv821AiRggMLKQsDfB6oLdutDuZyYtKvP21wlz6FSh00pLIv3k6GW/FHgHXtTrk
+	 CfaW6GsAAqrjX4eAJXD38Z2ypuycpqwcRukOc5pmnYvQjKzQBhQN+NgRTAIy20YKmyg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793817895;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793818404;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Date:From:To:
 	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
 	 Content-Disposition:In-Reply-To:X-Last-TLS-Session-Version;
-	bh=iYiNfVlDefu7QyzgN/zmHCKOcgLtwtgGp2yoyp3offg=;
-	b=vHn8hzPnN8BykErndFx/HnQfnFHTOiI0VEPyoNDBEc92FgNrE8j9uAndb5rVgfeReBHY
-	 A/bHksn9XeCqQfc/Iq3mvQumZ+od4BZI8XOKku5mSotTcWP6DForo6NFazN0DybP2M2GJ
-	 3yZjJJzy9dzEb0hJdJwkx4wlZDO4ykHu28HVQyezlX+BzLYdpCVAs9Z27N2I83Bcu9pHW
-	 ublbl70xyhqaWRGfSy4PYMWtVTG2B5T9rl7ETi61TkX3YTZJVgA/7JEjosHYthhtaJQGN
-	 sELAd6luOQaLHW3ARO/sF/kQ+mfV4rMSar/9WL5JZr2xnRVkLpfxU5XTuEmxnapexOA==
+	bh=kll/G1zD/C2JyZu7pxNelwTrLUBWbNvvxhXCfrLDdII=;
+	b=DcVbQQwFFQyfHpphCRb5kWOOJDJtA1ZTe8G5csjuB1lLBgO/70PhHmsgGrpWB3nz76Cw
+	 HXFPRss/sejsL356RsbVuA8U46MULSeDV+S9Gfau0FzOFuWjJ5f49VZFEq+JvKVqw6f52
+	 FxINpstaBlCy/TUenrWs3NOtmY58xaIK72ikc0u9o1S3HDoi9EBppJ8Y+1UMWyYRjbdo4
+	 eyaAg4VGhceR+ux3ImIwQ61kmSCxjOtERoRcX7YUPgTE73ZZHBIX1ldxBWVv/uawB0Tl0
+	 ohBwVBPYlU97Fe60KRjgD/qXRLvbaw1I+sndDaQAT/ox28vIeZ35CSl6D6d27bW1HGg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=cEKYfC+6;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Tv+VOjuX;
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74A63606A328
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 18:44:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 74A63606A328
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7749A606D835;
+	Wed,  4 Nov 2026 18:53:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7749A606D835
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=cEKYfC+6
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Tv+VOjuX
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 8E8C0C8F474;
-	Wed,  4 Nov 2026 18:45:55 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id B7F164E41403;
+	Wed,  4 Nov 2026 18:53:20 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 6833C60770;
-	Wed,  4 Nov 2026 18:44:50 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id BF69910329205;
-	Wed,  4 Nov 2026 19:44:44 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 6714A60770;
+	Wed,  4 Nov 2026 18:53:20 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C414410329205;
+	Wed,  4 Nov 2026 19:53:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793817889; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 in-reply-to:references; bh=iYiNfVlDefu7QyzgN/zmHCKOcgLtwtgGp2yoyp3offg=;
-	b=cEKYfC+6BMi/JWjyBZkBqZySFl9y1Mi9ihTxUE0AKiqlu7hW0sZp7eo6q0uoF4QUNjcvYN
-	ktfWX2aA9MfYmUpuVWOAUrb9VFliA3iJcqGlORdu3CwA4mpMzi6iHDpsAhAiFvwruuB8My
-	3TkD1rXvTPWyeUvd2nf90mko5aSt5CQY4ovj6j3Oyth1h0NHRL8ky5jAlKGID6vgPQPGdx
-	kJSSXiLu5+81KEFZP8KVigvu1uuE/Km5gjDOD5u9Jvn4STqdaKSYvoa1Lb3CWcJfZc33ap
-	jOTuXtmk+ZNNMAV/iGkoNZyQWk3AlHnmnKkRJMy8kvh15oeL0bW+/oygEXJO5w==
-Date: Wed, 4 Nov 2026 19:44:43 +0100
+	t=1793818395; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 in-reply-to:references; bh=kll/G1zD/C2JyZu7pxNelwTrLUBWbNvvxhXCfrLDdII=;
+	b=Tv+VOjuXj3AH4ln4E3aXj4PZMQKql3KWSZmz2mqRiK+jgYCiAKLyFxJvFwNFzOT2mtfa/p
+	/bx6al1jJJa+bZV3C/HjKYVwdSHnNj8K+VmDEMZY3OlMMIZEFHnds8sgV9MHo+HHCYtDbn
+	x70RoP2HsMme65Nfa8ffeM8rDHEGo3j2+2HSbRpN6yCyuTlkgd0HG3FUPB2K32I/sVrj1A
+	QtaakxhrG4MI4ibpZz6wPkLdC3Y5lwyrVFf/Ha/JM1zFsyvQeTFeUDZjjKHvUFr+l7oMnW
+	YRz4CV1SlYuEY/gOOB+7jtEAUBx2umSS15PswdMcUJmkil+id0WtdNn/3JwwbA==
+Date: Wed, 4 Nov 2026 19:53:08 +0100
 From: Alexandre Belloni <alexandre.belloni@bootlin.com>
-To: Val Packett <val@packett.cool>
-Cc: Maximilian Luz <luzmaximilian@gmail.com>,
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Srinivas Kandagatla <srini@kernel.org>,
 	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-rtc@vger.kernel.org
-Subject: Re: [PATCH 4/5] rtc: Add basic support for RTC via Surface System
- Aggregator Module
-Message-ID: <202611041844436d5e655d@mail.local>
-References: <20261104070441.74127-1-val@packett.cool>
- <20261104070441.74127-5-val@packett.cool>
+	Abel Vesa <abelvesa@kernel.org>,
+	Boris Brezillon <bbrezillon@kernel.org>,
+	Mark Brown <broonie@kernel.org>, Andy Gross <andy.gross@linaro.org>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	stable@vger.kernel.org, Wentao Liang <vulab@iscas.ac.cn>,
+	Sashiko <sashiko-bot@kernel.org>
+Subject: Re: [PATCH v2] memory: atmel-ebi: Disable SMC clock on probe failure
+Message-ID: <20261104185308b845fb6d@mail.local>
+References: <20261101190733.121473-3-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -78,41 +80,110 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261104070441.74127-5-val@packett.cool>
+In-Reply-To: <20261101190733.121473-3-krzysztof.kozlowski@oss.qualcomm.com>
 X-Last-TLS-Session-Version: TLSv1.3
 
-On 04/11/2026 04:04:35-0300, Val Packett wrote:
-> +static void surface_rtc_remove(struct ssam_device *sdev)
-> +{
-> +	/* Device-managed allocations take care of everything... */
-> +}
-> +
+Hi,
 
-I guess the function can simply be dropped then. Else, this looks good
-to me.
+On 01/11/2026 20:07:34+0100, Krzysztof Kozlowski wrote:
+> Unprepare and drop the SMC clock reference, if probe fails to avoid
+> resource leakage e.g. during probe deferral.
+> 
+> There is no remove() callback, presumably on purpose so only error paths
+> are handled.
+> 
+> Cc: <stable@vger.kernel.org>
+> Fixes: 87108dc78eb8 ("memory: atmel-ebi: Enable the SMC clock if specified")
+> Reported-by: Wentao Liang <vulab@iscas.ac.cn>
+> Closes: https://lore.kernel.org/all/20260917101623.2146392-1-vulab@iscas.ac.cn/
+> Reported-by: Sashiko <sashiko-bot@kernel.org>
+> Closes: https://sashiko.dev/#/bug/linux-8e236c81-01b2-4274-a213-11c3f31acfc2
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
+> ---
+> 
+> I independently developed the patch and then checked the queue with
+> pending work of iscas. That one has issues and other complains from me,
+> so only credits for the report.
+> 
+> Changes in v2:
+> 1. Handle of_platform_populate() error.
+> ---
+>  drivers/memory/atmel-ebi.c | 27 ++++++++++++++++++++-------
+>  1 file changed, 20 insertions(+), 7 deletions(-)
+> 
+> diff --git a/drivers/memory/atmel-ebi.c b/drivers/memory/atmel-ebi.c
+> index 1e8e8aba2542..7dc2f7add1b1 100644
+> --- a/drivers/memory/atmel-ebi.c
+> +++ b/drivers/memory/atmel-ebi.c
+> @@ -562,7 +562,7 @@ static int atmel_ebi_probe(struct platform_device *pdev)
+>  	}
+>  	ret = clk_prepare_enable(ebi->smc.clk);
+>  	if (ret)
+> -		return ret;
+> +		goto err_put_clk;
+>  
 
-> +static const struct ssam_device_id surface_rtc_match[] = {
-> +	{ SSAM_SDEV(SAM, SAM, 0x00, 0x00) },
-> +	{ },
-> +};
-> +MODULE_DEVICE_TABLE(ssam, surface_rtc_match);
+Couldn't we simply devm_clk_get_enabled() ?
+
+>  	/*
+>  	 * The sama5d3 does not provide an EBICSA register and thus does need
+> @@ -572,14 +572,16 @@ static int atmel_ebi_probe(struct platform_device *pdev)
+>  		ebi->regmap =
+>  			syscon_regmap_lookup_by_phandle(np,
+>  							ebi->caps->regmap_name);
+> -		if (IS_ERR(ebi->regmap))
+> -			return PTR_ERR(ebi->regmap);
+> +		if (IS_ERR(ebi->regmap)) {
+> +			ret = PTR_ERR(ebi->regmap);
+> +			goto err_disable_clk;
+> +		}
+>  	}
+>  
+>  	ret = of_property_read_u32(np, "#address-cells", &val);
+>  	if (ret) {
+>  		dev_err(dev, "missing #address-cells property\n");
+> -		return ret;
+> +		goto err_disable_clk;
+>  	}
+>  
+>  	reg_cells = val;
+> @@ -587,7 +589,7 @@ static int atmel_ebi_probe(struct platform_device *pdev)
+>  	ret = of_property_read_u32(np, "#size-cells", &val);
+>  	if (ret) {
+>  		dev_err(dev, "missing #address-cells property\n");
+> -		return ret;
+> +		goto err_disable_clk;
+>  	}
+>  
+>  	reg_cells += val;
+> @@ -603,11 +605,22 @@ static int atmel_ebi_probe(struct platform_device *pdev)
+>  
+>  			ret = atmel_ebi_dev_disable(ebi, child);
+>  			if (ret)
+> -				return ret;
+> +				goto err_disable_clk;
+>  		}
+>  	}
+>  
+> -	return of_platform_populate(np, NULL, NULL, dev);
+> +	ret = of_platform_populate(np, NULL, NULL, dev);
+> +	if (ret)
+> +		goto err_disable_clk;
 > +
-> +static struct ssam_device_driver surface_rtc_driver = {
-> +	.probe = surface_rtc_probe,
-> +	.remove = surface_rtc_remove,
-> +	.match_table = surface_rtc_match,
-> +	.driver = {
-> +		.name = "surface_rtc",
-> +		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
-> +	},
-> +};
-> +module_ssam_device_driver(surface_rtc_driver);
+> +	return 0;
 > +
-> +MODULE_AUTHOR("Maximilian Luz <luzmaximilian@gmail.com>");
-> +MODULE_DESCRIPTION("RTC driver for Surface System Aggregator Module");
-> +MODULE_LICENSE("GPL");
+> +err_disable_clk:
+> +	clk_disable_unprepare(ebi->smc.clk);
+> +err_put_clk:
+> +	clk_put(ebi->smc.clk);
+> +
+> +	return ret;
+>  }
+>  
+>  static __maybe_unused int atmel_ebi_resume(struct device *dev)
 > -- 
-> 2.56.0
+> 2.53.0
 > 
 
 -- 
