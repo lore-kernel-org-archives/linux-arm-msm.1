@@ -1,68 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793804264;
-	b=xZ5vXA6G5aISqB8fcrwkOp4HI2UgF+gAV8VcjnIR2YCOqTaR0PZKuywMl1Crhd3DFpMU
-	 zY2eWf1AAaxloTHXmHvDS9TDiFhPwiuRQE5qwUNVpw79Q2xyk7tlnGGE8FnWIbK3qLF+w
-	 Ltf6rITe8F0mHNCoGHGX4a1PZIQmtMmYTXON/jXXALgxB6pY/azTxyqCio4nLaVZqCTlZ
-	 vTFpqVsIzPpfx1WmYtlxOSdvK9Cb8awbUf6LJdwTCIO5x3In13rSafX9Rgr8xgwXFGLRi
-	 wIcF55YFcyS8hgZzbA9PIjCfv8d1VREKAT2DrhE8KmL5Tomj9en2fl2vkJ2ZD9adyWg==
+	t=1793804265;
+	b=mW+Es/b54Hc1JyJy8b9YQAwAL/gLOaUxlpQwLAqQ13ZX2hmZEnAFmS/mtiNKI2t8bPkC
+	 CQjDWGHiSjHYUipGDTKKAuJpM8D3FA2ue1r5QQIgVm2SalZKXfOIqUe8+iCYuXsict1/x
+	 RlVRFS6MFDwiUP8dWiUnJ5rxQrcCrDn0LdvW3kFH21VCVpRQ3XXbyHOuM32/QdI+GqGPe
+	 nit/tOLH7VEL+I7TgVhW22FAJkWL/iFjZCDa/21+/7QqTrJT7Z58PtRUOZwxzRFb/YwSe
+	 jLgH046wo52GvoEp1wOZHl0V1noXv8Z0K1kdavkZ+S+g3cbNtRf2H5Y0zDLESd7P4Ow==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793804264;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793804265;
 	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=KUz2D34UCSVw+yqhvoh+RPWtDjdbKvsiINtzwSInBU8=;
-	b=RFUbhUwbU5w3hvKkcr9LKSbPwygCoyby+1i8GptzoLkfqfptnsW7lrAZ0IAxZGJUPk2L
-	 ZPRa3MvZ+jcWkYvhArp1a7xI6KNKLVXEWhB+Od5Byf8mjoUHy5oYNV5B6uae4xeUMprWZ
-	 lCQi9ebx8j3cpOeh4gXNSl573NhZW0tGkI6g669vpeuUi5NQguXQkkLsrrXFyOwEYE9K8
-	 i1rMR9CYsGsz98lsoRxxPRrVgo9Yu3SUiHfR8zrcvfEYEwbJDdUMAklpM4yKwiauGLg8L
-	 bIXzBKCG911ArrCNXbZIliXvJFtU+uUB90mKhucfu9HcAzehwRpg8ERekFZWBSixTSA==
+	bh=apXXgMBcXmgqhAAmBS3GdCjBKzXMpnkhL16Of9ur6Ww=;
+	b=1Hp8oHlsjUlit4OoxW5mRjAjXgZ1AYuHUOxTY9tNzsVRbaVZeTuouHiLZi6QS2VBKyQS
+	 VXvhx8g3no477jA86MHeX9HTvAnnvkSS45SL7wbJIQjHj3Zz0cu9wqClWXJQq0m4Y3eXe
+	 JWnJOsmb0f/b5Ds9pcUcnstYFEQZ3qGruiDgNdK+EOfxorCNphKmFpHjx+l48uLY/P65Z
+	 VjJv7NSuTbvGfg8f4poWzFo5XjRpweo81h4rYtZj5azSxiwvnmPBQqmQyg624/95Unc2L
+	 S/F+XRFaSOu2YZcyYZMQn8kCSx6E6loDXIpY3l7HRyiuph2SglYmzijg4FzPOyYrtUg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=grische.xyz;
 	spf=pass smtp.mailfrom=grische.xyz;
-	arc=none smtp.remote-ip=209.85.221.49
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	arc=none smtp.remote-ip=209.85.221.46
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78995606A32F
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 14:57:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 78995606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7371E606D804
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 14:57:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7371E606D804
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=grische.xyz
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=grische.xyz
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48afbd2c386so581558f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 06:57:44 -0800 (PST)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-48e1d0e5dafso1147306f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 06:57:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793804263; x=1794409063;
+        d=1e100.net; s=20260707; t=1793804264; x=1794409064;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KUz2D34UCSVw+yqhvoh+RPWtDjdbKvsiINtzwSInBU8=;
-        b=C2WO0jQpJhSBsaHvVAnJ/SEJpVJnduc6bcuA7FhdzUoUSBE/DyOc3sEY01Hf0uaBef
-         eoGx1NSyQtq9FiBhjB8fFeH8mYqErw3Tn60IYZ4CX8pkzPJkC07d0mYNGgiIOG/6ejPC
-         6gAWPvw98AeL1BVjK+mBjorDeQtC3L0fHgZnEr1OWkrBUcbf/qhyc39Ki8vp0LFNIH70
-         j5GWrO6plnuG4rQVzSVVXyGZAj39u6ZjM4ACWNiSrUwS+EPVMu2+2eX165QCRbG05yxw
-         qCEFogcGLbCi8K1hXDL6C/XGxYwhF0PLq/5+cCzlN10zH0cqqw4wM2VKqMWDHxrtzsBD
-         vqUA==
-X-Forwarded-Encrypted: i=1; AKwUvBxP4alkVJhFcxOE7Vwzme/k7kUVFyJe+E6kuDCWBTPix1+gzzxY1PLm23w/mZHzW/113zzT7UijPFH3eQjS@vger.kernel.org
-X-Gm-Message-State: APuU4Z+F93L2mDvBF0aDllD79M0lvYKCRFDiWLSyn6q1x69PF9symJkW
-	SS1wal5gwxzhkThn1ifIBZHTP4rqUveL9NWZnSYmQppR4lrLtXjEtswd2/cdQZ+CmRY=
-X-Gm-Gg: AYBFou1B47vEab/O+9+QrfOZjY2s1OEAD/wjQQpT6Iq6lrgBtIYU+MF8+87+TycDwBK
-	kyo9ZNhRlytkOU/9LNrdLa7hmUXc+DCut1msAXq6lyl3hfaNke7YDpaPAywAajxWfNXtcUtZZbb
-	S3+MvFxuUakMqK1CQCZWK4E3DB9arIvsSRoABrQmfLw52HhmctpmmWoeHi0nxqfRs4gHr/7ZdPK
-	gB4c//jSd4Sx9eqyM3UTQS0YbszIf8kloW9BfyGC3z++r6I8HuNEyQmd1U9ED0gNpFncptQgcls
-	34c/H0vk77ChskcQ+rxuNjkvlkPoW7YWTFZAmJgd4ItGGckeHApUJ7XMnswdMkGNKGWb9bttr1K
-	T+dptEkPz1JO/r7gutvZrkU6/OfYxlkytTf12/ypEnGPRD4NA3CxuYbsKvMGo3oZdVZuzysaT6y
-	L6HBIzeSmTyp+wwRZFJUcHc48Ch8oCI+amRewrBS9AflnTSy4qYJmByyfQwGv20loxX2hlTpOPq
-	LwLOcTbmCCtYtuFryFW1WlmrtNVAFt7KdRfOcwErgRnqBMa95jzCAqwVUoTNwfHVHlTvA0cPiCa
-	/zqpOjSfL/a+R7PfCRBL31vZzWa2fd2q2hTJDANbTlVS08U=
-X-Received: by 2002:a05:6000:310f:b0:488:83f7:6352 with SMTP id ffacd0b85a97d-48e6e2c33admr32579809f8f.4.1793804262816;
-        Wed, 04 Nov 2026 06:57:42 -0800 (PST)
+        bh=apXXgMBcXmgqhAAmBS3GdCjBKzXMpnkhL16Of9ur6Ww=;
+        b=F0HC5Y/IHdWHokkL/4vv1lBHjz65q+xmsESlFOHVWaIA0R4CVwY7GoMIWj4qRPLn+P
+         SyFntE1Bd1SgyDyFAuIAlX4DhBKodbcVS+t+Fr29d2VBAFMmDLJXVz0+n+ADxfhDGVZz
+         Ieg9tdTGm5O+BctUE5d3zHLNOswHtXwqRJo7KQR6/NkkHo3jZqfSmcJBabUWutbsm9jV
+         BOZwvu9QX65eSWajbQNAIpTFHha8X1KSN3+7KZ1HKDF0K/tAPKaCQO+Uev/btdMdhuHw
+         G8laHd3yOo1w6lNik0JNT6w3kenyFtGLp77+1CgsUtJhr9ok/chguXSuuyyocrLpm9zZ
+         r79g==
+X-Forwarded-Encrypted: i=1; AKwUvBx8YS0f9H8wvQN8zy04q+DfHKkuhWSqA4pCHgkm2jYzDXf4oNjtiOU1fO2FWcbcHPX2kNv/W6Gvu1NtGkWU@vger.kernel.org
+X-Gm-Message-State: APuU4Z9rJFTKMPvy2nS2o87X0vB/A+s9j3Tv/zIKoNC7ptROvriX/q7b
+	8CdrdYlahnBjK8UhwaDsmR/mFnPqQvxgnB8CL8lXcxwDgM15s4vHJhrdHNu/KoqJcaQ=
+X-Gm-Gg: AYBFou2Bs5LVCSVzGzfIIQc62G5N0xQ3e7I6FFJb0p2khaOHUMh+EqR8DAyrCBreDjY
+	ltVmQ2AGemN4MyHQG2JiolyrgOMG0UP3ZH7wvmOu1lG0C5c7opgRWNxOvKkgZKj/y69mqnToygN
+	mpynmUv2WbCXI5bu3omw8Vn0OSbbYZqFkeHLffIkPGKXvmf16o7HRF+lGc4ovX/57OhkxkwrTEX
+	Vk8yolT0GemGlqr3Lc8cWKydOXctftejw7qTna2PWpPRCUPYHfju0MQQVqfhTPh1rp5TC6QiJj+
+	a7/U9aOfM01aUBDAmlfUxZQBE7snaeQnbCqV8nBvj28wQYN2BjVX1ixg4FkKl24yH9xH4Fc/aO4
+	NiIunvOqg4wcuFpZ1noqnVByjvldxt3WsXZiKnnwIrdrOPu8Qd5EefS+acPS/2Jf2949Y7v2ndf
+	qBBlysVZQURlryifsjYPB/QwJXs9Ys5SBAtXwZGlxjrdrGSGJxMj0CamyNf+7MyUbDlCkzA9vVs
+	tOSwWsVB91S0xPH8EGK+OEN6o56QWE2Ktp1mM7ypaNamCjPMsVhDw2rGXvSfUUTPuRW1W8r3ABp
+	V9mdhCm65uljW6h93pWzgTykIA==
+X-Received: by 2002:a05:6000:420c:b0:48e:6264:c371 with SMTP id ffacd0b85a97d-48e6e2cb57dmr39441884f8f.9.1793804263873;
+        Wed, 04 Nov 2026 06:57:43 -0800 (PST)
 Received: from lake ([2a02:810d:d09:1b65:4366:70cb:bf82:f8ac])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fecf8ef85sm4830051f8f.27.2026.11.04.06.57.41
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fecf8ef85sm4830051f8f.27.2026.11.04.06.57.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 06:57:42 -0800 (PST)
+        Wed, 04 Nov 2026 06:57:43 -0800 (PST)
 From: Christian Schmidbauer <opensource@grische.xyz>
 To: Amit Kucheria <amitk@kernel.org>,
 	Thara Gopinath <thara.gopinath@gmail.com>,
@@ -77,9 +77,9 @@ Cc: Zhang Rui <rui.zhang@intel.com>,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Christian Schmidbauer <opensource@grische.xyz>
-Subject: [PATCH 1/2] thermal/drivers/qcom/tsens: Drop __init from init_common()
-Date: Wed,  4 Nov 2026 15:57:39 +0100
-Message-ID: <20261104145740.2623473-2-opensource@grische.xyz>
+Subject: [PATCH 2/2] thermal/drivers/qcom/tsens: Drop __init from the per-SoC ->init callbacks
+Date: Wed,  4 Nov 2026 15:57:40 +0100
+Message-ID: <20261104145740.2623473-3-opensource@grische.xyz>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20261104145740.2623473-1-opensource@grische.xyz>
 References: <20261104145740.2623473-1-opensource@grische.xyz>
@@ -94,56 +94,110 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Several tsens_ops instances store init_common() as their ->init
-callback, which tsens_probe() calls through priv->ops->init().
-init_common() is marked __init, but tsens_probe() is a normal platform
-driver probe and can run after free_initmem().
+init_8226(), init_8909(), init_8939(), init_8952(), init_8956(),
+init_9607(), init_tsens_v1_no_rpm() and init_tsens_v2_no_rpm() are
+marked __init, but tsens_probe() calls them through priv->ops->init()
+and can run after free_initmem().  The call then jumps into memory that
+is no longer mapped executable, and the kernel oopses.
 
-This happens on IPQ8064 when CONFIG_IPQ_LCC_806X is disabled.  In
-qcom-ipq8064.dtsi the tsens node is a child of gcc, which uses a clock
-from the LCC.  Because no driver binds the LCC, fw_devlink defers the
-probe of gcc until deferred_probe_timeout_work_func() runs.
-deferred_probe_initcall() schedules that work to run
-CONFIG_DRIVER_DEFERRED_PROBE_TIMEOUT seconds later, when kernel_init()
-has already freed init memory.  On an Aruba AP-325 the probe then
-crashes:
+The probe runs that late when fw_devlink defers it until the deferred
+probe timeout.
 
-  Unable to handle kernel execution of memory at virtual address c0e1ffe0
-  Workqueue: events_unbound deferred_probe_work_func
-  PC is at init_common+0x0/0x540
-  LR is at tsens_probe+0x138/0x4b4
-
-With CONFIG_QCOM_TSENS=m the driver has the same problem, because the
-module loader frees __init code once the module's init function returns
-and a later bind then calls into freed memory.
-
-Removing __init from init_common() covers the ops that store it
-directly, but the per-SoC init functions that wrap it are also marked
-__init and need the same change.
-
-Tested on an Aruba AP-325.
-
-Fixes: 9066073c6c27 ("thermal: qcom: tsens: Add a skeletal TSENS drivers")
-Cc: stable@vger.kernel.org
+Fixes: a7d3006be5ca ("thermal/drivers/tsens: Sort out msm8976 vs msm8956 data")
 Assisted-by: Claude:claude-opus-5
 Signed-off-by: Christian Schmidbauer <opensource@grische.xyz>
 ---
- drivers/thermal/qcom/tsens.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/thermal/qcom/tsens-v0_1.c | 9 +++++----
+ drivers/thermal/qcom/tsens-v1.c   | 7 ++++---
+ drivers/thermal/qcom/tsens-v2.c   | 2 +-
+ 3 files changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/thermal/qcom/tsens.c b/drivers/thermal/qcom/tsens.c
-index 4d7013fc79d6..710c78aff8bc 100644
---- a/drivers/thermal/qcom/tsens.c
-+++ b/drivers/thermal/qcom/tsens.c
-@@ -929,7 +929,7 @@ static const struct regmap_config tsens_srot_config = {
- 	.reg_stride	= 4,
+diff --git a/drivers/thermal/qcom/tsens-v0_1.c b/drivers/thermal/qcom/tsens-v0_1.c
+index 32d2d3e33287..a13897632b91 100644
+--- a/drivers/thermal/qcom/tsens-v0_1.c
++++ b/drivers/thermal/qcom/tsens-v0_1.c
+@@ -207,7 +207,7 @@ static int calibrate_8974(struct tsens_priv *priv)
+ 	return 0;
+ }
+ 
+-static int __init init_8226(struct tsens_priv *priv)
++static int init_8226(struct tsens_priv *priv)
+ {
+ 	priv->sensor[0].slope = 2901;
+ 	priv->sensor[1].slope = 2846;
+@@ -219,7 +219,7 @@ static int __init init_8226(struct tsens_priv *priv)
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8909(struct tsens_priv *priv)
++static int init_8909(struct tsens_priv *priv)
+ {
+ 	int i;
+ 
+@@ -240,7 +240,8 @@ static int __init init_8909(struct tsens_priv *priv)
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8939(struct tsens_priv *priv) {
++static int init_8939(struct tsens_priv *priv)
++{
+ 	priv->sensor[0].slope = 2911;
+ 	priv->sensor[1].slope = 2789;
+ 	priv->sensor[2].slope = 2906;
+@@ -255,7 +256,7 @@ static int __init init_8939(struct tsens_priv *priv) {
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_9607(struct tsens_priv *priv)
++static int init_9607(struct tsens_priv *priv)
+ {
+ 	int i;
+ 
+diff --git a/drivers/thermal/qcom/tsens-v1.c b/drivers/thermal/qcom/tsens-v1.c
+index 7bda8e6087c4..ed0064f4e1ae 100644
+--- a/drivers/thermal/qcom/tsens-v1.c
++++ b/drivers/thermal/qcom/tsens-v1.c
+@@ -145,7 +145,7 @@ static const struct reg_field tsens_v1_regfields[MAX_REGFIELDS] = {
+ 	[TRDY] = REG_FIELD(TM_TRDY_OFF, 0, 0),
  };
  
--int __init init_common(struct tsens_priv *priv)
-+int init_common(struct tsens_priv *priv)
+-static int __init init_8952(struct tsens_priv *priv)
++static int init_8952(struct tsens_priv *priv)
  {
- 	void __iomem *tm_base, *srot_base;
+ 	priv->sensor[0].p1_calib_offset = 2;
+ 	priv->sensor[0].p2_calib_offset = -1;
+@@ -173,7 +173,8 @@ static int __init init_8952(struct tsens_priv *priv)
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8956(struct tsens_priv *priv) {
++static int init_8956(struct tsens_priv *priv)
++{
+ 	priv->sensor[0].slope = 3313;
+ 	priv->sensor[1].slope = 3275;
+ 	priv->sensor[2].slope = 3320;
+@@ -189,7 +190,7 @@ static int __init init_8956(struct tsens_priv *priv) {
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_tsens_v1_no_rpm(struct tsens_priv *priv)
++static int init_tsens_v1_no_rpm(struct tsens_priv *priv)
+ {
+ 	int i, ret;
+ 	u32 mask = 0;
+diff --git a/drivers/thermal/qcom/tsens-v2.c b/drivers/thermal/qcom/tsens-v2.c
+index 843dd29fad2e..22284973bb61 100644
+--- a/drivers/thermal/qcom/tsens-v2.c
++++ b/drivers/thermal/qcom/tsens-v2.c
+@@ -220,7 +220,7 @@ static int tsens_v2_calibration(struct tsens_priv *priv)
+ 	return 0;
+ }
+ 
+-static int __init init_tsens_v2_no_rpm(struct tsens_priv *priv)
++static int init_tsens_v2_no_rpm(struct tsens_priv *priv)
+ {
  	struct device *dev = priv->dev;
+ 	int i, ret;
 -- 
 2.54.0
 
