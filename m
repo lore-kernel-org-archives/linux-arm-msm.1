@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793788294;
-	b=QizCOI2qtWh5StRdbiEWsQsuQonctDyLYNms4p1fpNt89WUGTR55/xf6nFT4xDPNS/Hh
-	 pzwralMtZEArEoA/fwH1OC4Wk8F6ImuvJT7QAsmCmiR5vCtmspLm0cIXkxRyAxXjVSkYv
-	 QZwk+rks8Au/2vlDM75PKwcUev5JGjW+oB7Ji2ShufzVpIjYKXaz4MCIWrP2xTJn2zrso
-	 lUdMYQs0gddnWdGV14qTF6FVTdCGee53vM4306F5uyOPqy8axeJWBDcqMZ93j5GV0yrQq
-	 9O93kmDm9LlXuGVEvOS8i6A/TqOiHwC1hLpvNzTBhP0Mixk2LW3Jk1Qg40RQ8nFRKiw==
+	t=1793788601;
+	b=snoilXcJiGPrMS+tn5nThry4Pyh0YcMZXb2kQAHK/l227k66Qoon/d+Oous54Jmbzt74
+	 0oOBs89fQUBpl07RBVeiPs/aTLGy7O4xG//5bMttLSiOUpzBN/DXs4kyS4We5PzVg0C2G
+	 jdkl9079mcTV9M+oOxLiNc/qAG3V/GvKQMwfv5YJ+T6O8Vlmw5Bu3tmnclC0pkv8Xa3NA
+	 WopJGga7NVh79b1RIpQp+MbKN4Cm0+qLOFvP+EWuGKY8fv2Ev3aviGTXfwGRTK4CQE/vW
+	 3mcjIA86YN5u/8wEoJcPjpykANq3F952wr/nc/yCK70XGkLgj4Two2ylHOpkMuf00Lg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793788294;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793788601;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=RKVbe5wtyaqbdsS8/HbDxH4t9plMOA4+bl7LHbj9uH0=;
-	b=cP8CY6TCp8Uf0Il6asVA0ApenQ1MRRyiyvFn477MbloLo/8u3f3xdrF1+7kcHwOp6XYs
-	 CTL6K1m0zqqiu3GRz8ZSJbHILcYYhZN0yydNxztpE25YFPIRvpmlABu/F1WXw8mIVmud2
-	 lOiZct13J/ENe+7Pn7YUMUAmoddl0ItzscKaRXzS/DSObGrpkW3Xs5u1fnnFw/+l35HE5
-	 ZAxy88GDF3V2xdJujlSyHEurQXTic3E19Hhu2Pgocexc6W5qONY7TIptv8Sd/rXiu2jI8
-	 hCMBX88OklGpLoVWPTfFpVOUNhuZ9C00mB1Tkrybw3Dfg/oLJfp64+D5ialMM/JG26Q==
+	bh=7xs051A0b1SAUv+rE0HjsXwijD7VREHWOEbFF1iPWaE=;
+	b=zEglmUEiWfpWjiIUxT/FlGbNxP+SmO/xf/c9vIvPiF3XJwL3xiuK0RWJNo+dqNJnUp8u
+	 hs4h3J2P7yEb46rrEsA/mpQLKLhZ21DEnQ3bpK6tSOtgFpg6ZfzFS/yxUX/syRnHgilCR
+	 dKrG0uYbZjmTS6dHMpNAUhfb947eJRmgbrktNPu6U5sblTrZ+lJVMfn6BuNsUqYYmLSOY
+	 s/DmqZRriYuvmZ3pFf0MkEp1uE8gTGVxOhClIXNWF0Va+tbGzDtIxVNOusRSMc2lzpyI5
+	 Ej1aQU78O8JH+5MxLqIzhC3qWf7WFzl/gHUnTSQzfWftQGGHOoBXlWpxgFcogKBsEoQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BNiFsKk5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=moiGF31v;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 713CD606A326;
-	Wed,  4 Nov 2026 10:31:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 0F876606A31B;
+	Wed,  4 Nov 2026 10:36:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BNiFsKk5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E05AF1F00A29;
-	Wed,  4 Nov 2026 10:31:32 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=moiGF31v
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id AF44D1F0093A;
+	Wed,  4 Nov 2026 10:36:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793788294;
-	bh=RKVbe5wtyaqbdsS8/HbDxH4t9plMOA4+bl7LHbj9uH0=;
+	s=k20260515; t=1793788600;
+	bh=7xs051A0b1SAUv+rE0HjsXwijD7VREHWOEbFF1iPWaE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=BNiFsKk5EddmshYubBEFa4JaZYePkjiGsNL3b/iWP/6a1xZ/Dba43ghaXEc1ZdLSK
-	 eCTcqEKKQ7IJNnoS94Ntu7XicSYRVqNgn4Odbvy7kmxVZfjTegG9MMighktixbJ2xz
-	 XtySR+p7+ljRUBXDE18+yTSgGCfCZ74uxOxTOZAJBJ92nGZa0I9GXgketKl4PIg/OJ
-	 CB3LiA84oV/ae6cr8zodF8pwzwCzQCPW7vKNH4EYK28EMvNjAlctkEiYq3PyU23fhy
-	 V7zoJTiPwRr7G/SSS6Vzu2YRIuCDO8sXCf9/Bpr69mLQW6sy/q+Lj/4CCkY3gMS5UZ
-	 Fv9fLgrqvKqXw==
-Date: Wed, 4 Nov 2026 11:31:30 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>
-Subject: Re: [PATCH v6 3/5] dt-bindings: arm: qcom: document the Lenovo
- Legion Y700 Gen4
-Message-ID: <20261104-offbeat-cerulean-degu-cfec1b@quoll>
-References: <20261104032648.209747-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261104032648.209747-4-xiaqinghuan@mail.ustc.edu.cn>
+	b=moiGF31vVwpXcWU7P8yz82pqeIdvcyqE5bcOAiFaMdvkIWGEZxJeqs1WdJTltenqi
+	 PvMEKKYEgt1w4P1SfwOJ3vrzVRCqLeF4+CevFyMZg9NtW46b5O7dSp9c9qUtWMnTne
+	 xjxcMDVS6De0tGEnb/8FEBbmt+nhjiwUuU/sCXFsWhUsehHiZHa0Nh1qT2p39vBj6B
+	 q7QrbllExErywEG0oaqsrKslMbJJr4cEKpQVb5By6N4Ya6C3JX+/lBz/8GZHRwmJHn
+	 qhcI/1LeMyWwmbv2aOiM9L5ho3OsXUBYPY95LA//bRE8kBEy7bdO1Z2cKP62XQvFnC
+	 iQNTr9ftb3Waw==
+Date: Wed, 4 Nov 2026 11:36:36 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC v2 0/2] arm64: dts: qcom: nord: Add ADC-TM thermistor
+ channels
+Message-ID: <tfi4pafzpumndendstaiaokq2edfsuiyrctxtzl5oufwqweuek@ckyouxst4kqf>
+References: <20261103135445.2049110-1-shengchao.guo@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,17 +60,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261104032648.209747-4-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <20261103135445.2049110-1-shengchao.guo@oss.qualcomm.com>
 
-On Wed, Nov 04, 2026 at 11:26:46AM +0800, Qianhui Xu wrote:
-> The Lenovo Legion Y700 Gen4 is an SM8750 tablet that ships with the
-> lenovo,elden board compatible. Add it to the SM8750 section of the
+On Tue, Nov 03, 2026 at 09:54:43PM +0800, Shawn Guo wrote:
+> Add the three board thermistors wired to PMAU0102 (Kai_MV) AMUX pins on
+> Nord Ride and RRD: SDRAM3 (Kai E AMUX1), SDRAM1 (Kai I AMUX1)
+> and UFS (Kai I AMUX2).
+> 
 
-Board cannot be shipped with such compatible - it's first time usage
-here. "Add Lenovo Legion Y700 Gen4, an Qualcomm SM8750-based tablet".
-
-Best regards,
-Krzysztof
-
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
