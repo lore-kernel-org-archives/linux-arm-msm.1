@@ -1,53 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.205
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793778113;
-	b=lV++VHVWP+gQ2fPHmXljnmkLafzZIARoOb/zSuP0Iccc8NGI9u67pFmpDG1/YCFi09CN
-	 4PixIdhnSBwRMhiE3dZ8VYmI/aaqfKQevhs+VzquiWXGETd6hBDXZlzqMv/wUvEKzOxvK
-	 bDdwLddH9pU8b3BO2PoitMCAx7gTYNgYZbfBOQbQPXWt0QMKrVZFKJ2yNSQ9XR0+X+Gfj
-	 imnvu0jeKr67STtksruJmUWffjtBhwl7TC1QoTy0+ldwMzL70EObYpm6988tZQxQvZZsp
-	 u7kDhAruXJ79p8NhvSvcHUalQbmO80ZFr/XUMbwyxmWDsj5Egd1dOVIcQJIJ/GtLt7A==
+	t=1793778154;
+	b=rN6J6NJfweK5rSbSe0h+1lGhnDS/o4VdY+/Vu1D41aTng9WwA9mgsMHs4fxvQjAyz9cO
+	 D08K/AGzJFqu3Mu1btJJ8M7q8tkAeRvO/radtimDGNVJossgSXI9nvBeDZ57HlcClmMDg
+	 AUvCGvzygroXoM2Q0DV+VCKsZeoJdSTtOQb8Z0Zr4JOmK1eb92MwQTm0AwW76x+eFrW21
+	 YTRm2EbXJF96XB1NaB9SwXv52xZ4lqSBY6yY9y/cRldpWQo54z1+J4PM7PoCzPJ95RZdp
+	 h10urnf0ih+k0SY7HHi5z2nY4OnZ9fixQIoriQpJ+DQhOpvrBaiWbSelbMf2KR2+bMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793778113;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=pXiQdoWv0KwPIzgtUdWpww3Qg5HvKLBIIS7lNOsz+Gg=;
-	b=lkAH5z2EKD1+Mb5ITl8dBfFmcd+Arr7LJIp0+9lpUSlsWpYQgPb5kEBf0NAyiBWyyoMM
-	 n+K6Cny9KXt0Er+0IYdjqp6saL0OGeHtjwyvE4BLK4OErJhJpmrQoCAQrunCnbR+qNK0a
-	 EwX9dQkQOLPGDACd1eYJW4hhpOmZ4Bxed+YnHZOU7zgbZDLN/f68GCbWZb6X/d3V9sA+D
-	 XptjOZvk7+oXZc+9qgM+a8fGLbzZu+iXK22j4MJhicME55vmdGXY8gy6BlUlLDWyF50q3
-	 eEGVobVsg2DpTOWt1TKn3KgXquFGMvvSMH3RCQS6V66Fu2suxnikMFKm9GFQP1oPYQw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793778154;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=Cs+ssJWn7EsZgWGobaXQVwsypj2tkI0shuN4UyKtIW4=;
+	b=toFv/EM2nrDKD+6DC6BQ04wlnjJHJg5fhCSxpOZdo8j5YpkYI9Qr5Efi/Cc1ph9IhjY8
+	 byPTbCCCMiPwKFchbPah/zJF7NFi2WNbdomRh4TlFoD3UDYEyqPj4vxkEw2kBWXPDfDLr
+	 Qz49oG5HEejik2vi2Lb58UHjG50cOWfa9DmVsXr/ZNNFAp2dgKSP7tCM7s/Ro7cVkP+JP
+	 p0Vo61ByRrfx2dIWtq7t7njx3UL5+YGciRD1q1BNrluLaXm+N4QmmsjFm2q19UErlTYwT
+	 36/UYjajhW/cQyog2rohwe7pSK/VokUlZs0xSf+1uIE7q0L+6saP4f5plmgMb7vvYsQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SdUrEupW;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=QMBqdReS;
+	arc=none smtp.remote-ip=95.215.58.205
+Received: from mta1.migadu.com (out-205.mta1.migadu.com [95.215.58.205])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29055606A326;
-	Wed,  4 Nov 2026 07:41:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14FEC606A32E
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 07:42:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 14FEC606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SdUrEupW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E73971F000C1;
-	Wed,  4 Nov 2026 07:41:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793778112;
-	bh=pXiQdoWv0KwPIzgtUdWpww3Qg5HvKLBIIS7lNOsz+Gg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SdUrEupWdcHWSEAxHy2bduJSuavOlyrkyKImVgYF1E3nqy5IR+SRdOJeA9xtITz0E
-	 /1XyZZkqQElJfLLSLoQqkVrX8zlVZjsbZ4b82ZBxsYXTAhoKm+yDw+JH30a7PAegK9
-	 8ttTsZheyIdFXVIsaOhMN+Pb7kleFlEmmcoi7vV2fdTkvjC8lcWR5Mg+A0nQp/mOQz
-	 j+cyAQbhLzoYBhGodqk1M34bAR3tRXmREuKwj4uGS2RtOhyQhUZcwT4Gro8Fc2AuP7
-	 3LARsfLzv8TIjygH+eWdcD8ciu1U00AIGhq6YvwsTkCj6oK3tgXM7FyR23lDwfR13U
-	 vhL1uhCYrQswQ==
-Date: Wed, 4 Nov 2026 08:41:49 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Wentao Liang <vulab@iscas.ac.cn>
-Cc: Srinivas Kandagatla <srini@kernel.org>, linux-sound@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH] slimbus: qcom-ngd-ctrl: drop the PM runtime reference
- after a sync transfer
-Message-ID: <20261104-gifted-easygoing-earthworm-818d8d@quoll>
-References: <20261104021424.1468172-1-vulab@iscas.ac.cn>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=QMBqdReS
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=YN/rDXtXiQZYf2nwHzC0UlHhvQkqsD2TMXlrp+fG7rE=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1793778150; v=1; x=1794382950;
+ b=QMBqdReS7KbivRNjvKo7JJUakAtXCwJBHzYYqp4Dn8Vpe5mggMu9Z1r9m+WXkFPMzYocKwws
+ jirH3BJ2LyFIGooB8H1Kd+OCNjqOm6fW0FPBh443JZxRMurBmma8wOa9HvqouJcfONDYLNZoxQr
+ 0yFhPLfOxqe9ETqw0ZagIQ4vTt8i8/3bqDZRArq0xZ2NfeBfLFfY6YoP+2KzMXS96dD10/S2ghX
+ JsBkoOfX6W/SXjTj1V72UacTKffepqShaXO65UtCIoVVFQYorl23A2j5ZCjEfDJ7BVrA+L9Gi2v
+ dOceej6mVu2goqUAqFwGUggGso6jxZbWEFgSyKeY3ClSw==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 01f4aea7d4fba35e;
+	Wed, 04 Nov 2026 07:42:30 +0000
+X-Mizu-Trace-ID: 01f4aea7d4fba35e
+X-Migadu-Flow: FLOW_OUT
+From: Val Packett <val@packett.cool>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: Val Packett <val@packett.cool>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] arm64: dts: qcom: sc8180x: Add SLPI remoteproc node
+Date: Wed,  4 Nov 2026 04:40:31 -0300
+Message-ID: <20261104074200.123842-1-val@packett.cool>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -57,66 +72,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261104021424.1468172-1-vulab@iscas.ac.cn>
+Content-Transfer-Encoding: 8bit
 
+The Sensors Low-Power Island remoteproc hosts the Sensor Hub firmware
+that Linux userspace (hexagonrpcd) can talk to.
 
-On Wed, 04 Nov 2026 02:14:24 +0000, Wentao Liang wrote:
-> qcom_slim_ngd_xfer_msg_sync() takes a runtime PM reference with
-> pm_runtime_get_sync() and only releases it on the error paths.  On a
-> successful transfer the function returns 0 with the usage counter still
-> elevated, so the controller can never runtime-suspend again.
-> 
-> Drop the reference on the success path as well.
-> 
-> Fixes: 917809e2280b ("slimbus: ngd: Add qcom SLIMBus NGD driver")
-> Cc: stable@vger.kernel.org
-> Assisted-by: DeepSeek-V4.1-Flash and OpenAI Codex
-> Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
-> ---
->  drivers/slimbus/qcom-ngd-ctrl.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
+Describe the SLPI node for the SC8180X SoC.
 
-Multiple things here:
-1. Your team ignored completely previous feedback. Multiple times.
+Signed-off-by: Val Packett <val@packett.cool>
+---
 
-2. You use multiple identities with this email address, thus I doubt that we
-   speak with an actual person.
+Forgor about committing and sending this while submitting the Surface
+Pro X series v1..
 
-3. Your bot does not even bother running checkpatch, right?
+Since this is independent and simple while that series is waiting for
+comments about the multi-PCIe situation, let's get this in first?
 
-4. Nothing of this was reproduced nor tested.
+Thanks,
+~val
 
-5. Finally, the same feedback:
-You sent multiple independent patches, to multiple independent
-subsystems. The amount of these patches clearly suggest this was
-AI generated and most likely not tested.
+---
 
-More importantly, you sent all this work without properly organizing
-relevant patches into patchsets. This makes reviewing difficult
-and might cause multiple reviewers to address the same issue.
-Replying to the entire set is impossible and requires handling each
-patch independently, instead of applying or discarding the set.
-Maintainers also won't see the bigger picture of your work. Quite
-worrying.
+ arch/arm64/boot/dts/qcom/sc8180x.dtsi | 61 +++++++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
 
-This is on the verge of hostile patch: bomb us with so many
-contributions, we won't be able to handle them in efficient manner,
-like responding ONCE to ask you to slow down.  Considering all this
-is untested and LLM generated, I have even more doubts whether this
-should be considered for review.
-
-Please read kernel documentation BEFORE posting more work. It will
-explain you how to identify subsystems, how to organize your work per
-subsystem (so a patchset grouping multiple patches with a short cover
-letter), how to document the issue discovery method and what was
-or was not tested.
-
-Best regards,
-Krzysztof
-
-
-
+diff --git a/arch/arm64/boot/dts/qcom/sc8180x.dtsi b/arch/arm64/boot/dts/qcom/sc8180x.dtsi
+index a85e3211958d..18f03aa62d85 100644
+--- a/arch/arm64/boot/dts/qcom/sc8180x.dtsi
++++ b/arch/arm64/boot/dts/qcom/sc8180x.dtsi
+@@ -2259,6 +2259,67 @@ tcsr_mutex: hwlock@1f40000 {
+ 			#hwlock-cells = <1>;
+ 		};
+ 
++		remoteproc_slpi: remoteproc@2400000 {
++			compatible = "qcom,sc8180x-slpi-pas", "qcom,sm8150-slpi-pas";
++			reg = <0x0 0x02400000 0x0 0x4040>;
++
++			interrupts-extended = <&intc GIC_SPI 494 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
++					      <&slpi_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "wdog", "fatal", "ready",
++					  "handover", "stop-ack";
++
++			clocks = <&rpmhcc RPMH_CXO_CLK>;
++			clock-names = "xo";
++
++			power-domains = <&rpmhpd SC8180X_LCX>,
++					<&rpmhpd SC8180X_LMX>;
++			power-domain-names = "lcx", "lmx";
++
++			qcom,qmp = <&aoss_qmp>;
++
++			qcom,smem-states = <&slpi_smp2p_out 0>;
++			qcom,smem-state-names = "stop";
++
++			status = "disabled";
++
++			glink-edge {
++				interrupts = <GIC_SPI 170 IRQ_TYPE_EDGE_RISING>;
++				label = "dsps";
++				qcom,remote-pid = <3>;
++				mboxes = <&apss_shared 24>;
++
++				fastrpc {
++					compatible = "qcom,fastrpc";
++					qcom,glink-channels = "fastrpcglink-apps-dsp";
++					label = "sdsp";
++					qcom,non-secure-domain;
++					#address-cells = <1>;
++					#size-cells = <0>;
++
++					compute-cb@1 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <1>;
++						iommus = <&apps_smmu 0x05a1 0x0>;
++					};
++
++					compute-cb@2 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <2>;
++						iommus = <&apps_smmu 0x05a2 0x0>;
++					};
++
++					compute-cb@3 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <3>;
++						iommus = <&apps_smmu 0x05a3 0x0>;
++					};
++				};
++			};
++		};
++
+ 		gpu: gpu@2c00000 {
+ 			compatible = "qcom,adreno-680.1", "qcom,adreno";
+ 
+-- 
+2.56.0
 
