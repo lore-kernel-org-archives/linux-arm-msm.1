@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793823810;
-	b=gNfxCVZqV5tusEyPtAvd/5kgRt4FCAqH9S06MqMwZjgQpPJI7PdbWN2LkaFJwJIkggKx
-	 LvXY2HNXCnnax8PW1KvqSICjvMpeGjlWTq5vAni08dvRlsreWDc1D3+1j5iSqE+XnWZw5
-	 1yjH3HFXr3FPGhRy/tWbwha1LYrEXTeZadexjxlXRXUSN0699SaUxA7PXNYkVA4wUSwv/
-	 XnbUYa/B5oVhVlhxORamkUa1wn0gyn5IoRgg9k85WbaUhGeMb/QPcssOAoMgcpqWbUWZk
-	 7ss1LIJGeXSkQQr9rPyjuT/ZXAvXkjPKT1DlbVkv/WjTyz25bEOmUVnYxZrf9rXZyNA==
+	t=1793823812;
+	b=xyuvocmMd/ZBbfYKKWUUbv9oczZnn0GpR/ftILW5RsdgLE64FACqbFhqx/ivggVogiIn
+	 0MHICknyGesPD5osqcmCsZIC3e6ZfXB+8YC/iKzgOksF5t6iz8mJ23evDNP0SePxNLS+S
+	 23mEseWas/JeBQWrQ41++GtGQDQtMPT1JPkQAbhycsROVR3nyDFjW0vMNFgwfX+PGew8f
+	 azN6FsLMBvnU+L3Caa+9+tBFZBJ2YpsLYcJa+T7gpcVCItQvbsARa42SX9i89HJiTMPwK
+	 YIZPHMsbh/xu8unOvjhnNJhbitrt0XzgyYrfQFXIBs7BrGLgQ29BDBRiUjwyzXOZFpw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793823810;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793823812;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=E7LZocK/+GQCTR5yix2Tw7sEbUYmazzv1KQynZMkd84=;
-	b=UcwO1UQD5GHUrY0kzIkke5FswvmoJFiyF+xQZfvvJW60bM+K7QQiQFC9BkMzTe85uT3x
-	 jOR8Fb7jKf7Sbry2iD00U8F05JtpSzBrfj1J+nj4SF1cLOhjIIX5fje2TdJANycBbVnY7
-	 CbZ07DWbCFy8G8ik/V30kbOsjRemfPOMdYX9zVawcuTrIWtAkhV62vCOkqvxogc1zLYtj
-	 fSUK2S7B6TxV4mEco5srarXwzzAZ744K3En6cd+ZyvdGLPmWHZe9Nk098IotC6WlmcIsH
-	 Ig9fRemUL6l98bYywlEAcDG59M317lO0W8N356lq74CcWNYXcbx/7H0vq2HN8HrgziQ==
+	bh=SxUNGC6LHFE1YR9ZyIoWZKeW0R1pf1aABtzjxttvXsY=;
+	b=m5uDoKytFz/+k9DHOXB1JAS/qWCVDSV+9vZafyx4ZoBBKofJstc6h83SSOJC7d23O7Rg
+	 OO9bRblLHXUn0GdGRofmXTUIpBmwsDAggonHmDitQhNwHTmwao77+VCqiWkivYQQkNzZa
+	 iQGzjCQQvF8JxN8ehctUvZ5PfFvghzgSXk122Sn2+ERGnNjPlIBzcBPy2O1ya4GuodOX1
+	 rbUeIVe18Zd09Ys0QoE4JNIX9x1MwnJzkoRwwjjSEpSfd1SXIv9ZZ5mCNR30r3zlqjMKd
+	 vU46poaxOTesjmpYONY4nm6HZqB2CQOqb2qBD6lEnTj85TKZEepCyO3zqomLCTfRquQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=fatecpompeia.edu.br;
 	spf=none smtp.mailfrom=fatecpompeia.edu.br;
-	dkim=pass header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=YHarwSmG;
-	arc=none smtp.remote-ip=209.85.128.180
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+	dkim=pass header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=VEpxIxb0;
+	arc=none smtp.remote-ip=74.125.224.47
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B2DD6072F98
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 20:23:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5B2DD6072F98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E9296073509
+	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 20:23:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2E9296073509
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fatecpompeia.edu.br
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=fatecpompeia.edu.br
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=YHarwSmG
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-8b305e10ac7so12192937b3.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 12:23:29 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=VEpxIxb0
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-677bc4704cbso1457556d50.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 12:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fatecpompeia-edu-br.20260707.gappssmtp.com; s=20260707; t=1793823808; x=1794428608; darn=vger.kernel.org;
+        d=fatecpompeia-edu-br.20260707.gappssmtp.com; s=20260707; t=1793823811; x=1794428611; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=E7LZocK/+GQCTR5yix2Tw7sEbUYmazzv1KQynZMkd84=;
-        b=YHarwSmGlmrLNnexUV8TCu9qAmUPUm7BS2v7N2S8h/bK6nAmrGBOAd4CtsmQkbRDTc
-         aIvemPAxoul3uySgUhX++Ey7szslUFPOwEyBOyvvzYN9zZnXd8PJmU/Mrng4JWKWTQkf
-         hEL3rMp9ZmG4tz1LOLG2F1ObftrE6xY3YNN0Xni7MagFAgkKxJp8G+uoLhiFAdpSvyU9
-         x8AsSUKQhTKi1v5b5GrPqK7OGbRZhuxmehhk6B9aJG46N6Ag9IJ+4kjbry8xLV9y42fJ
-         APsk/qq0rNZrcNO2kxX53Y3c/c2rT7digdE5OzKCWqHNXlvw71IOoNtcZpuAjd6mGUUZ
-         VTyQ==
+        bh=SxUNGC6LHFE1YR9ZyIoWZKeW0R1pf1aABtzjxttvXsY=;
+        b=VEpxIxb0a8wfXYvhkeSKmMTvunJIxcraVVKLZX+mTN3NdQQ/vfiZmqDdf8VgZ0/5dP
+         /sxmC9qMzBLR9O+p0fnIKEwySN6MXmp4fXaHIWnvwAVAmSR+QgNXzYQCwxutgObDrsOA
+         wOWyFEM2xmRTkxqM9af2+03nc9dwDEziudLWUCTU6l4Km59522R/+GZgl182BbmPhYry
+         UcLTpiqNhxMOQH0wmgPaQQTq5ZA7y8NlOzdnaW6ZNgN0wayNDdF8ozseUBUaRkHkhvhR
+         3am3i+xX8J8obrfm2Oyr8K99WvBf70H6l0DvTSzcw3jWngrK9O2ODq3E6VBOjlZmcTCd
+         6Ung==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793823808; x=1794428608;
+        d=1e100.net; s=20260707; t=1793823811; x=1794428611;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=E7LZocK/+GQCTR5yix2Tw7sEbUYmazzv1KQynZMkd84=;
-        b=ciWx/gbrHijfLOKIu16RydBlCNy2lJ3fZpwecYg2XVBjHHN0HNkRJA9iF3G0z68t/u
-         37Uyv5zMXIFeeQlj5lwTZi51/JKBFsOGHMBVRBlW5ajK/CiWpS7QqolCM5YE2bu2SouG
-         UI3WUun/E6dMpTroSKJ1B2QtBIvkgEpCF4jK/JXM3iRSLIEAzLN6ubXfvh8CA4PAAMs9
-         PZLHlO7up42RYwolj1o4p9C4ADTWECj7DXJnF8+QLPx51outyQwKLJfAiUXhW2h5KMC8
-         wxE0opAbyvy19ZXZXB3NOeUS+S3LkiKvG/GddFBqU1AtHTyYfv0ZUgD8SBP9ui2i5Fwi
-         wUCQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz312oodZWQ96MSCzpo2Pjciij+SNvFsuK0bKcJ/TuNg1W/SMoG6aLU1caQEDr6V/AltTFV93hj0bG6OULX@vger.kernel.org
-X-Gm-Message-State: APuU4Z8U5F3/N9OwwpTnLOr9P4KFO55CSyoGVce1XKWgFgtLPD6QjU0W
-	PgKjQxISw/6RJFxsVFTGz42pPDSk/hdZrIs/bDwEIPzi2mmE5tcNBZmvMPyT7SgciRiAvc9AMN/
-	UQTKJtRQ=
-X-Gm-Gg: AYBFou16xzxVRdlX5Qto2hRFf5I38WXskGA+aby/+4g2O3zSbhD0C43OJNhCQ00OlhB
-	TL+Y3ImF2F6JSag7kjtnu+4nvPk6Q6SOLcRTj+eQ+sowzm3E7EGZCYpHDaSSO3MEmXfM9l5N3Ph
-	5elcefMjeEUsm6/Nao43yMAL+wOW+OskkbYJIi9I9Npf4+OVzUk27H1aEHr5pOUkunbg/O4ggwG
-	s38Z9cOmqy43F2vH3dkldl7sUxTA5UjJBoKeeRQvR4b7DfiKnxIDdG5c/FLOpzFwl528txq88i8
-	jWnRVEcbi6rqBW5tc9nmbXFuNVb40vSgAP0fCLNMG+JCWKmXQl92G7/Dq41j8qrtnEokgHwxc/C
-	KBY7ja2MOjA+EXqfnc3fy2MB/sQkyOx33hgGMUTlFwV5lukV/+AYJhCGmbDXUrKltfhNA1iZZcu
-	e2CACKNimSjCqrUzEBSCfqXhEExiPuxN5SkDc9l1htL8Ql7vCMe14imKlL69jNbaBjnHZqX/C0l
-	5HvDM4zB/297GkLZrh5GLNOyStvkvTJ9Gq58ScH7DY0Yhj1vHemr8/csuWKmhQW64PN4Q1KW9N4
-	7jbyFP75PTgCaMjvDdhpcZ1fXbc4RE9DotP1867s6+WrmoFwhJ1oK2pbtS4RkzpQ6EET5wOmco6
-	UK/M=
-X-Received: by 2002:a05:690c:3489:b0:89c:41f9:b886 with SMTP id 00721157ae682-8b2b67f3125mr116898717b3.55.1793823808412;
-        Wed, 04 Nov 2026 12:23:28 -0800 (PST)
+        bh=SxUNGC6LHFE1YR9ZyIoWZKeW0R1pf1aABtzjxttvXsY=;
+        b=fBVGO9PKYGSVxd2+QDZ3zro8WxqXrAC2w8HQ1sq1SOOnJyIZ2Js0L+Piu6QLROaRfu
+         mSRWc8elcpu3iML3ovvW0LLgjWUeU3cjwaY644+jw9Rq/bYhZ4K/8bvrk9hlmUKh8a/j
+         9mnAPIMXQuHnSgYw8+baMLk11V2xYqhNkc711Ui2bkcuLyITnZkhrrVzz/Se7f+Dd+yG
+         09xpDQ9acUlmpniRGundI6oR6pmXLHoVwfbnLmfVRK2D8q4hVgSqUZWDdVDNKO938wru
+         sskEpUNYe4VfTS/QNdlGowOVOD6rvbOp1eMhjQe9QKnQIQOSWSGVY/D9T8lRQPPZxpxb
+         u5Eg==
+X-Forwarded-Encrypted: i=1; AKwUvBy6bsp0xE3m5KiIWR3Sq5xWkXkCb9xOtuCV01Y1ErX3PipcKxEOEhGNf37PkdqnpT23Cb3Rpj5eaVIx0nly@vger.kernel.org
+X-Gm-Message-State: APuU4Z+3IeXssMGpMB+QIXtAcRQ40kQqNdtKg7KXOO7PX8Q4/STtACIu
+	KPf+2dFEoaY2AU0c3WJuBhF5fZyLbwqDsbxy59izwXnUq94HsZ5jS39iehZBlJaESz5sy3prEqm
+	NcyxR7E8=
+X-Gm-Gg: AYBFou3S9/jRfStCLbwuD0z7gvWsWPhNK+pi5SuQtrhqX6mJaogNqiZ6FTDrFj9urww
+	GdRbF76wn9OJAGKzDxPkokjfOj5xj0/mKGNkrdGu4DnZ9fA8xaZ6fGJSmFEDl8AgEeX1yvejiQw
+	Hy7XbP77+akGmPaXZoaOlFrFHXDI0ft0k3TCaiomBBL0Rqtm0jJVgn5nQJZXcGKpTsy+roGn249
+	7jx/2C8GQtWR85fnvLi9T3hec3GrvNF8/qnOCVo0avt5mEwj3JmzGvEd1dn+VNMcgoM9CS7uP4o
+	BJ4BEnXY3GOWw6qReUo5dFfQ860P24mypZ0cnLtakoRmY09ySvyb6D8QsD6fhVG3s1ma/8JKPNj
+	o69soehtQr/keVeTyhKOQv2Vr2pXwVzN39077oR+wDKgSrB/Lq6eHdkkcbyzz1Wwyno3ab5Bzy9
+	Mvjpxr8CKxZjAlsHOGU8BoWIgxtktBdtZ4x2Z+BJdq+rNbYSTSc4aRI96TgA05tc3IYioPVolAV
+	yjeVOMsK68rfRMGj2fYM6IaS/MPfTCR3D1NyOPt05F0x32xEUwY9gUkQGwfl0asQkuj/dsZZR1b
+	GbMTQv3HyN7bGSbdsXMxFziYlTK4KPFytcrLXTbR/TxYplsh8bn+RhvlUkuNGDOPbwTpcxRDhhv
+	pADnMjElJ7Nks+p6knLq3+WYe
+X-Received: by 2002:a05:690e:12cb:b0:67b:bf6b:d9e3 with SMTP id 956f58d0204a3-67bbf6bdd12mr6448256d50.48.1793823811217;
+        Wed, 04 Nov 2026 12:23:31 -0800 (PST)
 Received: from localhost.localdomain ([104.28.244.23])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67bf91b6e7dsm1298292d50.13.2026.11.04.12.23.25
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67bf91b6e7dsm1298292d50.13.2026.11.04.12.23.28
         (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Wed, 04 Nov 2026 12:23:27 -0800 (PST)
+        Wed, 04 Nov 2026 12:23:30 -0800 (PST)
 From: Allan Siriani <allan@fatecpompeia.edu.br>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -88,9 +88,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
 	linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 3/4] media: qcom: camss: always stop the pipeline in stop_streaming
-Date: Wed,  4 Nov 2026 17:23:12 -0300
-Message-Id: <20261104202313.72494-4-allan@fatecpompeia.edu.br>
+Subject: [PATCH 4/4] media: qcom: camss: do not fail CSID power up without a matching VFE
+Date: Wed,  4 Nov 2026 17:23:13 -0300
+Message-Id: <20261104202313.72494-5-allan@fatecpompeia.edu.br>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 In-Reply-To: <20261104202313.72494-1-allan@fatecpompeia.edu.br>
 References: <20261104202313.72494-1-allan@fatecpompeia.edu.br>
@@ -105,55 +105,57 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-video_stop_streaming() walks the pipeline upstream and calls
-.s_stream(0) on every subdev. It gives up on the first non-zero return,
-without stopping the media pipeline and without returning the queued
-buffers to vb2.
+csid_set_power() powers up the VFE with the same index as the CSID
+before the CSID itself, through parent_dev_ops->get(). The VFE
+implementation, vfe_parent_dev_ops_get(), returns -EINVAL when there is
+no VFE with that index.
 
-A subdev without .s_stream() returns -ENOIOCTLCMD. video_start_streaming()
-already ignores that, but video_stop_streaming() does not, so with such a
-subdev in the pipeline, e.g. the pixel array entity of the MT9M114 sensor
-driver, every stream off:
+On the ISPIF based SoCs there are more CSIDs than VFEs: MSM8916 (and
+MSM8226) have two CSIDs and a single VFE, and the ISPIF routes either
+CSID to it. Streaming from CSID1 then fails right away with
 
-- triggers the vb2 WARN about buffers still owned by the driver,
-- leaves the pipeline started, so the next VIDIOC_STREAMON and
-  "media-ctl -r" fail with -EBUSY.
+  qcom-camss ...: Failed to power up pipeline: -22
 
-Treat -ENOIOCTLCMD as success, as at stream on, and only log real
-errors, then always stop the pipeline and flush the buffers: a
-.stop_streaming() callback cannot fail and must give back all buffers.
+although the pipeline CSID1 -> ISPIF -> VFE0 is valid.
+
+Return 0 when there is no VFE of the same index: there is nothing to
+power up for that CSID, the VFE in the pipeline is powered by its own
+subdev. vfe_parent_dev_ops_put() already ignores such indexes.
 
 Signed-off-by: Allan Siriani <allan@fatecpompeia.edu.br>
 ---
- drivers/media/platform/qcom/camss/camss-video.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ drivers/media/platform/qcom/camss/camss.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
-index 2c15546c8..9091eaa18 100644
---- a/drivers/media/platform/qcom/camss/camss-video.c
-+++ b/drivers/media/platform/qcom/camss/camss-video.c
-@@ -361,12 +361,16 @@ static void video_stop_streaming(struct vb2_queue *q)
- 		entity = pad->entity;
- 		subdev = media_entity_to_v4l2_subdev(entity);
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index c54185c93..532f6d36d 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -4631,15 +4631,16 @@ static int camss_read_version(struct camss *camss)
  
-+		/*
-+		 * Subdevs without .s_stream(), such as a sensor pixel array
-+		 * entity, return -ENOIOCTLCMD, as at stream on. On a real error
-+		 * keep going: the pipeline must be stopped and the buffers
-+		 * returned to vb2 in any case.
-+		 */
- 		ret = v4l2_subdev_call(subdev, video, s_stream, 0);
+ static int vfe_parent_dev_ops_get(struct camss *camss, int id)
+ {
+-	int ret = -EINVAL;
 -
--		if (ret) {
--			dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
--			return;
--		}
-+		if (ret && ret != -ENOIOCTLCMD)
-+			dev_err(video->camss->dev,
-+				"Failed to stop %s: %d\n", entity->name, ret);
- 	}
+-	if (id < camss->res->vfe_num) {
+-		struct vfe_device *vfe = &camss->vfe[id];
+-
+-		ret = vfe_get(vfe);
+-	}
++	/*
++	 * On the ISPIF based SoCs any CSID can feed any VFE, and there may be
++	 * more CSIDs than VFEs (MSM8916: two CSIDs, one VFE). A CSID without a
++	 * VFE of the same index has no parent to power up: the VFE that ends
++	 * up in the pipeline is powered by its own subdev.
++	 */
++	if (id >= camss->res->vfe_num)
++		return 0;
  
- 	video_device_pipeline_stop(vdev);
+-	return ret;
++	return vfe_get(&camss->vfe[id]);
+ }
+ 
+ static int vfe_parent_dev_ops_put(struct camss *camss, int id)
 -- 
 2.43.0
 
