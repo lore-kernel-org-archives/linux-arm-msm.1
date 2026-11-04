@@ -1,91 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793813567;
-	b=OG4FThYxbcgKrcTUs/6t6I66RSL4wlgKQvdy1FX43Kc833hDGEyRKyQd2jRTW3DVxT8D
-	 Hvbnns89kZD7z0kKcUg2DARTZgH8lomNuqld5wROpLQ2YqnLbBvx+BuX/WwoOdirgVwZg
-	 A8ZTzoOMT6H/7A6+fUKBRyaxTrlhnqVroQnNSuhdpwLdO3492e1DeCM0PB7gpXuHfLHnx
-	 +1yJzsCyettmnRaOE4JzLYk2GAHRQaMUS+tjHEGR24FWU0lXicnM/WbSmGEO2vwcOGizp
-	 4QMDVQGyo5c8R5bPVxvqtJp+VC9a6fafeGdXrpe4T1QnmxdOOcBpuxkdDVCcHrfzoHQ==
+	t=1793814090;
+	b=s3KJ/HLX/ZhJwaI/B5Ifalpd+M/JuKhzhWJbO7gJoCJPGx4LhiczACqzFdWkkpeeZL5J
+	 oKdpxSi9eqXOjF8HET/4pMX60n82sVsKEr/ZhLVP4RCoWkux6RofCeO3EqFnd8UsrDlUi
+	 T5ehZIlltmbfTASqVZ52Ckp9PGY+CvaXArLdCzA+Z7UkSV27b8Z/CnPrbaXanQ5Hgtlf4
+	 Df6ZF12nr7DRSeYd20vmU8xg/X6IlqKffxS2FBmiNCUML7XN7vOsAaQfL0LtPhsPESmYO
+	 W4utj0CrKJl5WdhoM5ufNNIbw9lCxMLR8WaNg0NQ91eqC4ltdAxd3o4SUMfW6bmcdOg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793813567;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=4KWh+pCjEY3BH9ZXJBW3B3/Mt0CuTTrjLcItJI+O2b0=;
-	b=LGKzGTAo4SGnH3OPaA6NQ/5xryuvPIiKTcAJrx3bP+3N30nqjZt6NPIqXKmLV9+mK6tj
-	 tYM70qVb2sXiGN8fmEnRNCYBy30yIva6Sw1OQrgHTMSGau+YKiBqhH55Qd9NhGzKO+vL9
-	 XLfPs09dY/eD9r5nTEOSubC67yDIGWIiHDL8rtfIsAPf/TDAorHSemmk52wqK5XzpuVoG
-	 f0JC4dpV/SRj7XjrqsEFqOed90Y1EQpbj+tcRYyfko1q5zskmnYU0GwTMwXpvQ18/EdHO
-	 Y7hIrnbEC6GK5m7y7oVus3eg6v0P5OQnSLmNAqcpmaLWoZVp7mXQDqwT+eWdKmE7bnw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793814090;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=vAcmQL9E5wHFBIFgN/rx51LVAyFInnPlCaXD1KnpG7M=;
+	b=sHvZJZ1EpTGm5JkxVw+YKwYAjWI4LkGLaaroLMG7b5cv5204c21KqdNCumbaaVficxS3
+	 /lCrbWZ/DLg7dWl9he0kYJQV5CDeqUFU1ukb6Dq6zoydqd3n4KYMjVQ825Fj14aqlNYM0
+	 hCF7P4LhZ/bZiTBykDFztwysyuwLdnXsbRNX9AYygkz//PuV6xLlYERIRA+/rZWjW2g2Z
+	 z5RxZC6ny3uj5+jhRjC1/T11dpRxvD2wUA/0BTUIOJ38ZMYolHR/QzZMi16WzEr4A2qn+
+	 4sX97JnKb2Y8fJ0CPkCMpo3UTiCDrAmrbUuIgkZqMFO71gsZlmsenJ0HljcB786lkAA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EmoIkpga;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ajz4ZozR;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 649A0606B903;
-	Wed,  4 Nov 2026 17:32:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91993606A32E;
+	Wed,  4 Nov 2026 17:41:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EmoIkpga
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBDFF1F000C1;
-	Wed,  4 Nov 2026 17:32:45 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ajz4ZozR
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E14CE1F000C1;
+	Wed,  4 Nov 2026 17:41:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793813567;
-	bh=4KWh+pCjEY3BH9ZXJBW3B3/Mt0CuTTrjLcItJI+O2b0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EmoIkpga02mtSmXYZVQn9du3LHYfYYz+585s/PS+UgjsXg/FCvOmrZxU5rFUHZ4Kc
-	 RW4rhqpS4n3dFfRKO8x+a/rqSXZeMNtqoJk/PAMvtTPHidldiR0RNWuPhkUl5Udryh
-	 K0OZRedSeEqK4PfWHQTrv308SVTAoSNO8pALhkzOLoGRqIxAXKmzlYLtjaaWK21Afk
-	 g9ZdhfQJD7HMHHghQ3kYgQdyrMOv9/7V31ENvoFGNFW4fLM8UomjBlAwSX6CbB6Whr
-	 eQxEIfy92LUpsJv+hK5fIokNxiCsnOkTzS6xufVPBmdQ1YFlhlqo+6SIaWZWwTuraz
-	 PbT3jpG2TrNIg==
-Date: Wed, 4 Nov 2026 18:32:43 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
-	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, Jiri Pirko <jiri@resnulli.us>, Ivan Vecera <ivecera@redhat.com>, 
-	Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Olivier Moysan <olivier.moysan@foss.st.com>, Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Thierry Reding <thierry.reding@kernel.org>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
-	Lee Jones <lee@kernel.org>, Srinivas Kandagatla <srini@kernel.org>, 
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>, 
-	Hans Ulli Kroll <ulli.kroll@googlemail.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Chanh Nguyen <chanh@os.amperecomputing.com>, Alistair Francis <alistair@alistair23.me>, 
-	Julius Werner <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>, 
-	Dmitry Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, 
-	Thierry Reding <thierry.reding@gmail.com>, Ray Jui <ray.jui@broadcom.com>, 
-	Scott Branden <scott.branden@broadcom.com>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org, chrome-platform@lists.linux.dev, 
-	linux-gpio@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-Message-ID: <20261104-vigorous-flat-dingo-3e5bd2@quoll>
-References: <20261102135330.2493332-1-robh@kernel.org>
+	s=k20260515; t=1793814090;
+	bh=vAcmQL9E5wHFBIFgN/rx51LVAyFInnPlCaXD1KnpG7M=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Ajz4ZozRnrFd2AX4APN0O8qxmiVZEXiSBBBCjR9fGe9GI8Y4kblS2iVKdDhsWyYXH
+	 1dVMopXagUrbyxQK2RtyhpUlod2bfepH3YC9/4P1/E9Ai9iLZgqBbN7YSYTIFnzl4O
+	 Y4hqXzWvMlQ/HtjH2T8Q4a2WZaGkOKGE/Bpg8UrpLOULGYYvXciKTnnlmMPbFVsZNw
+	 Q80Ele6GM6AJl4I9SsLlIfT/Ndlynth4ZHN8wn+caMxWS8lB0YeedN08w/YodZFUFC
+	 IHuGLtnJf2T7MrjhPmIABtU7Gx9m2UNJ6y9Ogsoc11d/hsR7HvY588sinHOhCJd9FJ
+	 diAj7uXzbZalA==
+Message-ID: <a2d5ea00-bfa1-4883-923d-0a6a7eaa556d@kernel.org>
+Date: Wed, 4 Nov 2026 18:41:08 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,59 +51,179 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
+To: Frank.Li@oss.nxp.com, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>, Matthias Brugger
+ <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Russell King <linux@armlinux.org.uk>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Peter Griffin
+ <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Laxman Dewangan <ldewangan@nvidia.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>, Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Chunyan Zhang <zhang.lyra@gmail.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Cunhao Lu <1579567540@qq.com>, Raul E Rangel <rrangel@chromium.org>,
+ Yenchia Chen <yenchia.chen@mediatek.com>,
+ Zhiyong Tao <zhiyong.tao@mediatek.com>, Carlo Caione <ccaione@baylibre.com>,
+ Moteen Shah <m-shah@ti.com>, Kendall Willis <k-willis@ti.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>,
+ Nicolai Buchwitz <nb@tipi-net.de>, Karl Mehltretter
+ <kmehltretter@gmail.com>, =?UTF-8?Q?Stefan_D=C3=B6singer?=
+ <stefandoesinger@gmail.com>, Shitalkumar Gandhi <shital.gandhi45@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>,
+ John Ogness <john.ogness@linutronix.de>, Pan Chuang <panchuang@vivo.com>,
+ Petr Mladek <pmladek@suse.com>, Robin Gong <yibin.gong@nxp.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>, Zhaoyang Yu
+ <2426767509@qq.com>, "Nikola Z. Ivanov" <zlatistiv@gmail.com>,
+ Haoxiang Li <haoxiang_li2024@163.com>,
+ "Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+ Biju Das <biju.das.jz@bp.renesas.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Myeonghun Pak <mhun512@gmail.com>, Wenhua Lin <Wenhua.Lin@unisoc.com>,
+ Cixi Geng <cixi.geng@linux.dev>,
+ "open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>,
+ "open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
+ "moderated list:ARM/Mediatek SoC support"
+ <linux-arm-kernel@lists.infradead.org>,
+ "moderated list:ARM/Mediatek SoC support"
+ <linux-mediatek@lists.infradead.org>,
+ "open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..."
+ <imx@lists.linux.dev>,
+ "open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
+ "open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES"
+ <linux-samsung-soc@vger.kernel.org>,
+ "open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
+ "moderated list:ARM/STM32 ARCHITECTURE"
+ <linux-stm32@st-md-mailman.stormreply.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: vkoul@kernel.org
+References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 02, 2026 at 07:53:22AM -0600, Rob Herring (Arm) wrote:
-> Unit-addresses by default (and most commonly) are hexadecimal. There's a
-> number of cases using decimal patterns. Fix all of them, limiting the
-> pattern to match the 'reg' limits if there are any.
+On 02/11/2026 18:54, Frank.Li@oss.nxp.com wrote:
+> From: Frank Li <Frank.Li@nxp.com>
 > 
-> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+> Replace open-coded assignments to callback and callback_param fields
+> of struct dma_async_tx_descriptor with calls to the
+> dmaengine_desc_set_callback() helper across serial drivers.
+> 
+> No functional change intended. Prepare to make struct
+> dma_async_tx_descriptor private to the DMA engine.
+> 
+> Signed-off-by: Frank Li <Frank.Li@nxp.com>
 > ---
->  .../bindings/display/xylon,logicvc-display.yaml      |  2 +-
->  .../devicetree/bindings/dpll/dpll-device.yaml        |  2 +-
->  .../bindings/embedded-controller/google,cros-ec.yaml |  4 ++--
->  .../intel,ixp4xx-network-processing-engine.yaml      |  2 +-
->  Documentation/devicetree/bindings/gpio/gpio-mxs.yaml |  4 ++--
->  .../devicetree/bindings/hwmon/maxim,max31790.yaml    |  2 +-
->  .../devicetree/bindings/iio/adc/st,stm32-adc.yaml    |  2 +-
->  .../bindings/iio/adc/st,stm32-dfsdm-adc.yaml         |  6 +++---
->  .../bindings/input/touchscreen/cypress,tt21000.yaml  |  2 +-
->  .../memory-controllers/ddr/jedec,sdram-channel.yaml  | 12 ++++++------
->  .../bindings/memory-controllers/ingenic,nemc.yaml    |  2 +-
->  .../memory-controllers/nvidia,tegra20-emc.yaml       |  4 ++--
->  .../devicetree/bindings/mfd/st,stm32-lptimer.yaml    |  2 +-
->  .../devicetree/bindings/mfd/st,stm32-timers.yaml     |  2 +-
->  .../devicetree/bindings/misc/qcom,fastrpc.yaml       |  2 +-
->  .../bindings/mmc/mmc-controller-common.yaml          |  2 +-
->  .../bindings/net/cortina,gemini-ethernet.yaml        |  2 +-
->  .../bindings/phy/brcm,cygnus-pcie-phy.yaml           |  2 +-
->  .../devicetree/bindings/phy/brcm,sata-phy.yaml       |  2 +-
->  .../bindings/phy/socionext,uniphier-usb2-phy.yaml    |  2 +-
->  .../devicetree/bindings/sound/qcom,q6asm-dais.yaml   |  2 +-
->  .../bindings/sound/qcom,q6dsp-lpass-ports.yaml       |  2 +-
->  .../devicetree/bindings/thermal/sprd-thermal.yaml    |  2 +-
->  23 files changed, 33 insertions(+), 33 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/xylon,logicvc-display.yaml b/Documentation/devicetree/bindings/display/xylon,logicvc-display.yaml
-> index 76b804b7c880..3dd54636d23d 100644
-> --- a/Documentation/devicetree/bindings/display/xylon,logicvc-display.yaml
-> +++ b/Documentation/devicetree/bindings/display/xylon,logicvc-display.yaml
-> @@ -123,7 +123,7 @@ properties:
->          const: 0
+>  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
+>  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
+>  drivers/tty/serial/8250/8250_omap.c | 6 ++----
+>  drivers/tty/serial/amba-pl011.c     | 6 ++----
+>  drivers/tty/serial/atmel_serial.c   | 6 ++----
+>  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
+>  drivers/tty/serial/imx.c            | 6 ++----
+>  drivers/tty/serial/msm_serial.c     | 6 ++----
+>  drivers/tty/serial/mxs-auart.c      | 6 ++----
+>  drivers/tty/serial/pch_uart.c       | 6 ++----
+>  drivers/tty/serial/samsung_tty.c    | 6 ++----
+>  drivers/tty/serial/serial-tegra.c   | 6 ++----
+>  drivers/tty/serial/sh-sci.c         | 9 +++------
+>  drivers/tty/serial/sprd_serial.c    | 3 +--
+>  drivers/tty/serial/stm32-usart.c    | 6 ++----
+>  15 files changed, 29 insertions(+), 58 deletions(-)
+
+...
+I did not look at this code at all...
+
+> index 640f85e2d636b..3f82a83998e1c 100644
+> --- a/drivers/tty/serial/samsung_tty.c
+> +++ b/drivers/tty/serial/samsung_tty.c
+> @@ -447,8 +447,7 @@ static int s3c24xx_serial_start_tx_dma(struct s3c24xx_uart_port *ourport,
+>  		return -EIO;
+>  	}
 >  
->      patternProperties:
-> -      "^layer@[0-9]+$":
-> +      "^layer@[0-9a-f]+$":
+> -	dma->tx_desc->callback = s3c24xx_serial_tx_dma_complete;
+> -	dma->tx_desc->callback_param = ourport;
+> +	dmaengine_desc_set_callback(dma->tx_desc, s3c24xx_serial_tx_dma_complete, NULL, ourport);
+>  	dma->tx_bytes_requested = dma->tx_size;
+>  
+>  	ourport->tx_in_progress = S3C24XX_TX_DMA;
+> @@ -642,8 +641,7 @@ static void s3c64xx_start_rx_dma(struct s3c24xx_uart_port *ourport)
+>  		return;
+>  	}
+>  
+> -	dma->rx_desc->callback = s3c24xx_serial_rx_dma_complete;
+> -	dma->rx_desc->callback_param = ourport;
+> +	dmaengine_desc_set_callback(dma->rx_desc, s3c24xx_serial_rx_dma_complete, NULL, ourport);
+>  	dma->rx_bytes_requested = dma->rx_size;
+>  
 
-These two lines are looking good.
 
-Andy, it's okay if I give Rb tag?
+... but apparently reviewing only a few lines out of 400 is still reviewing:
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+https://lore.kernel.org/all/9e39502a-dd17-4fa2-98a3-9019523cb5e8@kernel.org/
+
+Therefore:
+
+Reviewed-by: Krzysztof Kozlowski <krzk@kernel.org>
+
 
 Best regards,
 Krzysztof
-
