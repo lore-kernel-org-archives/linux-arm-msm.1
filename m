@@ -1,123 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793798506;
-	b=bEM+F/Hi0g8cj4cyZa8LKZ7vKMFSPTMPJtVxAb5mOSLGMmRM3jWyp0PP3kEKicVPoGLs
-	 CFST2kYJIaySApIpR5vMXPMbz45QorJcTgKJEEGMLPRIrovvvJyEGt1nq/wXT4W9dekEz
-	 azXs39Yeg680vaPLLO8FTMDI+Oylum2W5xF1CyeN4oebEER+xuBotT+qryWku2Jl5zA/y
-	 I/G7PVpIhuaSXZInRkYx+STi0TnhnoGKda83YaH2i9P1tOHCaZ/Q7VJbvZfW7dQ5R2E/f
-	 jEm5S1uNBgJkQQ058vtUXgdqzDBpXgBvoxja58LbPNCB799FJcWBWHARrcRokNTuSVg==
+	t=1793798629;
+	b=glL5eThuBA+d7zYgK6lxSiQGPPBsICM1NLkRklR2eFXBaX62+XvQfR6Z3wiXw8Q+31AT
+	 NXa5HYqNUI1/kZ0iI7Z+vaWT6BtrXMlKCGB61V+aEpOEJZz9oTMEXjvw4SmUKBn5bPdaI
+	 nLhBNSbeVoGm/Lb6DVKa7NVHh/zeHsKezjYakITZTuRvGUCc+1MvaJ1pzg3ob74mFw5sz
+	 tM0KwbI/wLwuCyeAOlC4yxmylb7RyIq4KyGCSKqojFuLqCO2kVQjf445qwSZPTJXLlB0x
+	 G0kbglWCqe5H7ULruw+l3GPGrXUh0ZpehaaF0aOcQ8prxergX9arqDyC0cWKT99P6UQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793798506;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=bdDbdezahsnwvvodBAeZroZhoHCyGDtmjwh7kWkAIGA=;
-	b=OfY6PNN4psn2VgGa8KRlOXdqp+wdlDoun3/zoowy4HTYCkE4MfIzhBwhuc5G3puP6IS9
-	 gVqhgAha0XkUVMeqvWYFKX45DiOG0aoswShcAhd+cPf3CLJIy/j3mpWTiD9Slg/XJpIKu
-	 D2RL+TCp2y6uDyk9fwKtzoaZXRIrv1yDsUbpLpj0ifTG5ldQFVT3WX6VOXvGURpCftSjK
-	 4K3ikKpwAdOmXu889hf/YidxhIZMvoMaEjlxZStsiqv6BZuEv1NNdwpIjYcSEsrNoW4t2
-	 mRRBo5fcyaOQeJurVS2QmHxW/dUumtokqfqYRTxJp2Q+HC23tXjxHbjo1n7MP59nH3g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793798629;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=oFQnvnnH43Wjq3NYgvbhyicdVMArULRPqgjr7vsX1pw=;
+	b=zgeaB1xuQ/sfDYQgX2HxodOtYYDHRYKuGOoNhevG41E1R44YNaCyvs3+hsIkyPluM7uh
+	 V7TzqJ2zQOeCmkLpMrWdw8MstiIv4cOJr2jjXa5SFcnENCDCZ1arIoLYIJSbFKy4bBLIl
+	 BBbOFDgrvt2DIPiuTxRQCcE/rbtzFQfkCFNFZqWUb87+Sx/pfOLbqORdKO6PzxX2nu5lS
+	 0o2eNMZGEGqv85Zv3kVep954etuNm3qHGz1dDqit9DqD8blWL4ZTVaSnQKY+2giq0s3rC
+	 qJ5wS/u3AEmAz+4BscX+0ppwSWBgVB1IE5A1Y2sLLkzfpZpaN1zkp7vHl+QKgwvk8TQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hMkwn1Cn;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Sjyo6MDD;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QcpuR7ET;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD1C0606A328
-	for <linux-arm-msm@vger.kernel.org>; Wed,  4 Nov 2026 13:21:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AD1C0606A328
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FC8D606A31B;
+	Wed,  4 Nov 2026 13:23:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hMkwn1Cn;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Sjyo6MDD
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A4BZxGB608496
-	for <linux-arm-msm@vger.kernel.org>; Wed, 4 Nov 2026 13:21:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=bdDbdezahsnwvvodBAeZroZh
-	oHCyGDtmjwh7kWkAIGA=; b=hMkwn1CndJq7dLbOzHFcp/c7/7+LQmnU4IIeYXhl
-	eD9flXMfO5OaxwvR6zf96TNocN2EPwyBHfrQvx5gGEzZmRspTRMI/3FRyLn5T0nO
-	qO41sHImGEHld9GwuCDhB6F99fvCiDuFm1TlIQYNaaFdRjFO/x+usFvPgSkxXyA4
-	ID2fD9HRzGcPw54pAVPqmi+DrqNoJ8e4HpPBIeci+lzWMD7y/2DAhp4K7eupSWlq
-	EqE0hb/9UOAHrXtqnuGvWtK69xBgP1n+U+SX3wIbITKHiuTT3c5NfNUqCY1eXeGF
-	eJuVaTRqZ+2CTMIVbZ0oA4nhv2JbtD0c0Fu/ehoTXiLj4A==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hr3r80ew9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 13:21:44 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7c0bad5ec1cso175882137.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 05:21:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793798504; x=1794403304; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bdDbdezahsnwvvodBAeZroZhoHCyGDtmjwh7kWkAIGA=;
-        b=Sjyo6MDDWJLQeMVjSqSGKWmDG7H4krUMB6ZdNQ5m9dHjyBt99Q8CwA1wQmlVRMbUGH
-         rqI24qbrTRoJYiBfJapCIziabzEdgSXvOo1qIr3Wzhc+dCZ2D/9ILiY7/WyKx+/Bh/hQ
-         cC6ySuikCJVLMiVtU6wpQwTY9+blH9La1pQzJei/mFiaWyT49WTABmY+n/nZjX3QyYBz
-         FIh8XQnMyHW6NhnIjVTUEJI+mcj/Q21U6nZf7RK0QfVvOqGGHGIVAhpwPJ4UdysQ30jF
-         7sr8+/TUObuNDX2AIMW8KUcMqf56HmUxk5m8Y5ev1wWhdP4C2xYAxl1PsfFaEGO2pqhw
-         KZGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793798504; x=1794403304;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bdDbdezahsnwvvodBAeZroZhoHCyGDtmjwh7kWkAIGA=;
-        b=qs0NW7fNnjFU2IhN79syGz5N7UawW8AeIWdL/kB7W6Vx/DkvPirK47FF/kUgbq5CLQ
-         I65ycwmRsVc0ld0Ax+jL/dne3mtDolCaHjytmd3tDfj+gr0gmQi1/1QoMsAS3mB1h4kc
-         FOc5zYyXQT2XmDsSJW9+L7B3q0WkZBJS3461xLzcev37JwsEKsmjuAAPwQx1ha44g+5P
-         km9zoZVwl7fgXPwqsv/ogh6Ga24ndTy5D/jImXyIzdtT0m4GiWdvS6VzHaoxnJVnm54F
-         PsjFo7063BRF+US0/eoaeBkgmxbyrR5s9MYgXoCyNss2SvV6jV4R7ijIayT2T9FjFnJW
-         c4dg==
-X-Forwarded-Encrypted: i=1; AKwUvBzOuHo5itSeYncElnzRZna1NpPkM6Gj5dqDMRyLT4FMKQ9hT6qk4+BAFvHi+1R0MkfJPeDUWWfZHmCuzl8w@vger.kernel.org
-X-Gm-Message-State: APuU4Z88GhO0Yc+YWpU3YQ9t/Vfs8f4DPzNLD83EgM0aBvNaGlX+HlgL
-	qsYkSNdeijCsFghMtTETJFXfDLtxwumCNcEywjah/atGa/KFqr6TcfI4dwavP2tqZPaOGtToAAE
-	OpL2ZhsTsZxhHoTkNe56Le2KYtUcN7C7y5InPYBuHuEK7lByOtlQE/rN4/pKRSsIkGMnA
-X-Gm-Gg: AYBFou2iOYAJJibcTSFOuDeD//HVc4gRJw++YMDHGogAuctwTT/lAH1jW9UhXgMABKl
-	/0Vrl8vpBFyrs47WAE6mqhLs8R596EgpOKBdyOuvttqTKSnY6EPJbOBhgy2BNTCFod9xh9G7Jt1
-	nRHeMmDczy0IhSBcfIihXmUYVco0b8yLn6bSBWh8dAeL+kdTHmdeel/cbmHj4J83/oVVDJp6g7Z
-	HRABJTHsIgGWRUWiZ8jCKSJqUkC4JHbyLZ+NJaLufSnDJ6GTY3HRO0Kvb8MMNyvgT2uJliK+T7F
-	HOLeFGmyQQW1wtFKqA7hb2wXPgFp52waExaA05g65TTxEMDClQfcmkR7Z00SLu/vux/V8LwmpT4
-	l1SEu4rkEC1OYDdKny/8hE/GGPAkxuSmAb4Q+pvAx1TAu+G8vTpFFVAhLsSHTH94=
-X-Received: by 2002:a05:6102:5712:b0:7c3:881f:b620 with SMTP id ada2fe7eead31-7d072c56c97mr5830335137.21.1793798503818;
-        Wed, 04 Nov 2026 05:21:43 -0800 (PST)
-X-Received: by 2002:a05:6102:5712:b0:7c3:881f:b620 with SMTP id ada2fe7eead31-7d072c56c97mr5830327137.21.1793798503118;
-        Wed, 04 Nov 2026 05:21:43 -0800 (PST)
-Received: from oss.qualcomm.com ([188.27.161.77])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b412e48fd8sm51175065e9.1.2026.11.04.05.21.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 05:21:41 -0800 (PST)
-Date: Wed, 4 Nov 2026 15:21:40 +0200
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Andy Gross <andy.gross@linaro.org>,
-        Mark Brown <broonie@kernel.org>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>,
-        stable@vger.kernel.org
-Subject: Re: [PATCH v3 2/3] soc: qcom: apr: Fix theoretical use-after-free of
- GPR port on concurrent RX callback
-Message-ID: <xqvbybeyrp5fgortzu7pkq2ge4hshhsma2nu4ag5isjsekmitr@66erhrmbpega>
-References: <20261103145635.309032-4-krzysztof.kozlowski@oss.qualcomm.com>
- <20261103145635.309032-5-krzysztof.kozlowski@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QcpuR7ET
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E39071F000C1;
+	Wed,  4 Nov 2026 13:23:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793798628;
+	bh=oFQnvnnH43Wjq3NYgvbhyicdVMArULRPqgjr7vsX1pw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=QcpuR7ET2kcVQW1ILYUtFcGQUEsKGY8ZeaQ18BLfMdpM6Zy6dkppvEbCV6rUBWF+Z
+	 Avh461nN5C3d1WxLXpdJfJmRlSx94IWc0WORuZHjgQFVG8AHCMBDHIBB21RFeWNL7c
+	 CYfv29sCqv9yv9eKKZCmsvqy/46JQVY9jYhn4wBixP0qFjGg8bGSfVE5wP+9W86Y5x
+	 86TU3B/xrwNjStTaH8iRHT9M3mYY+xdVYghtd2X3Xd+x2Sbcg6RdDy1a0wNkaZh/lu
+	 rv/Ff6yJHH6uJzZihNSR3BrMSXAfQ0wbr/gGY+M+iePQDMSrsMBvSsPT1SYiR62UgJ
+	 Znax0soeaSpHQ==
+Date: Wed, 4 Nov 2026 14:23:46 +0100
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Frank.Li@oss.nxp.com
+Cc: Mark Brown <broonie@kernel.org>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>, Radu Pirea <radu_nicolae.pirea@upb.ro>, 
+	CL Wang <cl634@andestech.com>, Ryan Wanner <ryan.wanner@microchip.com>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Vladimir Oltean <olteanv@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>, Haibo Chen <haibo.chen@nxp.com>, 
+	Linus Walleij <linusw@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	Daniel Mack <daniel@zonque.org>, Haojian Zhuang <haojian.zhuang@gmail.com>, 
+	Robert Jarzmik <robert.jarzmik@free.fr>, Heiko Stuebner <heiko@sntech.de>, 
+	Fabrizio Castro <fabrizio.castro.jz@renesas.com>, Andi Shyti <andi.shyti@kernel.org>, 
+	Tudor Ambarus <tudor.ambarus@linaro.org>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Yixun Lan <dlan@kernel.org>, Troy Mitchell <troy.mitchell@linux.spacemit.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Alain Volmat <alain.volmat@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Laxman Dewangan <ldewangan@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Sowjanya Komatineni <skomatineni@nvidia.com>, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, "open list:SPI SUBSYSTEM" <linux-spi@vger.kernel.org>, 
+	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>, open list <linux-kernel@vger.kernel.org>, 
+	"moderated list:BROADCOM BCM2711/BCM2835 ARM ARCHITECTURE" <linux-rpi-kernel@lists.infradead.org>, "open list:FREESCALE DSPI DRIVER" <imx@lists.linux.dev>, 
+	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>, 
+	"open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>, 
+	"open list:RENESAS RZ/V2H(P) RSPI DRIVER" <linux-renesas-soc@vger.kernel.org>, 
+	"open list:SAMSUNG SPI DRIVERS" <linux-samsung-soc@vger.kernel.org>, 
+	"open list:RISC-V SPACEMIT SoC Support" <linux-riscv@lists.infradead.org>, 
+	"open list:RISC-V SPACEMIT SoC Support" <spacemit@lists.linux.dev>, 
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>, 
+	"open list:ARM/Allwinner sunXi SoC support" <linux-sunxi@lists.linux.dev>, 
+	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>, vkoul@kernel.org
+Subject: Re: [PATCH 1/1] spi: use dmaengine_desc_set_callback()
+Message-ID: <aust2fUAFSsAXK9g@orome>
+References: <20261102174005.3933649-1-Frank.Li@oss.nxp.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,63 +87,153 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="unoy3twvi5fxh2md"
 Content-Disposition: inline
-In-Reply-To: <20261103145635.309032-5-krzysztof.kozlowski@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: qKdTeI8K9cDO-6mTLPsD_GIZUQUi8iTA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA1MyBTYWx0ZWRfXzKS80V66Gl4/
- C5sU6DnFh2nCeK2h/wEz1fP9IEjCDUvGa6b7Ic0Z8Vd/bSVZgpj1WPiiGpt8TQfydjF/oWCuj1P
- Y1/lOLepsW2V4sVfJuNG6hlJ7Wts5I0tFF9chVcLAFqX17gBHJ5PtMb+Nuq4HfJbIOYM0y6DfrE
- SGRFJQJLSsns6r2Vyy8qlSaSyo+NTlvh9q1rNK8zH/SXca1KCe7hbo8qvpUkhhpKglE1ADtp257
- I0XuSVhwk5bfujLK9Ie9DRn4toYlYYQ1SL21esqRqroVDY7EbYOkxRf9YTv/0e38Ib0W4lJCNgW
- W0Y1FXuNDhnevbFB6gZ78l7ldltQGtSiqWCWI1whRw+BD1qjpsCiouWiGraJQT4xZprug2jdx3x
- jt9Pb/ajgY4oTRBRvzOCh8FJpAMKVCeHNaBL/lm/F+OwCQDLQRnRT+dW6/F6wG+r7k+iC5qQ/UX
- b7JevQH0rMKzLl6Cvbg==
-X-Proofpoint-GUID: qKdTeI8K9cDO-6mTLPsD_GIZUQUi8iTA
-X-Authority-Analysis: v=2.4 cv=UuP2pOwB c=1 sm=1 tr=0 ts=6aeb3168 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=c92rfblmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Fpy8J9LNTvDAPkKIS1gA:9
- a=CjuIK1q_8ugA:10 a=ODZdjJIeia2B_SHc_B0f:22 a=GvGzcOZaWPEFPQC_NcjD:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA1MyBTYWx0ZWRfX8eXnbejO88Sh
- B4KiQsFniEd3Zew99R07xzGcquYYezK9vmPV0xSUWamgDnZ1WStN1Pc9jV4hZ0ATGUjwzBlDSVR
- fbiWOl3SGYZ0jvHgrAYUC3cZgQHNNxk=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-04_04,2026-11-03_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0
- spamscore=0 impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040053
+In-Reply-To: <20261102174005.3933649-1-Frank.Li@oss.nxp.com>
 
-On 26-11-03 15:56:37, Krzysztof Kozlowski wrote:
-> gpr_do_rx_callback(), executed from the RX workqueue, looks up the
-> destination port in the IDR under svcs_lock, but then drops the lock to
-> call port's callback.
-> 
-> Concurrently closing a graph calls gpr_free_port(), which frees the port
-> after removing it from IDR, thus a theoretical scenario (not reproduced)
-> is possible:
-> 
->   CPU0 (RX worker)                  CPU1 (teardown)
->   ----------------                  ---------------
->   gpr_do_rx_callback()
->     lock(svcs_lock)
->     svc = idr_find()
->     unlock(svcs_lock)
->                                     q6apm_graph_close()
->                                       gpr_free_port()
->                                         idr_remove()
->                                         kfree(port)
->                                       kfree(graph)
->     svc->callback(..., svc->priv)   <- use-after-free
-> 
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Closes: https://sashiko.dev/#/bug/linux-1ebe255f-a874-46dc-b7cc-455e7bce402f
-> Fixes: ec1471a898cc ("soc: qcom: apr: Add GPR support")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+--unoy3twvi5fxh2md
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 1/1] spi: use dmaengine_desc_set_callback()
+MIME-Version: 1.0
+
+On Mon, Nov 02, 2026 at 12:39:58PM -0500, Frank.Li@oss.nxp.com wrote:
+[...]
+> diff --git a/drivers/spi/spi-davinci.c b/drivers/spi/spi-davinci.c
+> index 087735ed9c80c..b115daf2c76f3 100644
+> --- a/drivers/spi/spi-davinci.c
+> +++ b/drivers/spi/spi-davinci.c
+> @@ -703,10 +703,8 @@ static int davinci_spi_bufs(struct spi_device *spi, =
+struct spi_transfer *t)
+>  		if (!txdesc)
+>  			goto err_desc;
+> =20
+> -		rxdesc->callback =3D davinci_spi_dma_rx_callback;
+> -		rxdesc->callback_param =3D (void *)dspi;
+> -		txdesc->callback =3D davinci_spi_dma_tx_callback;
+> -		txdesc->callback_param =3D (void *)dspi;
+> +		dmaengine_desc_set_callback(rxdesc, davinci_spi_dma_rx_callback, NULL,=
+ (void *)dspi);
+> +		dmaengine_desc_set_callback(txdesc, davinci_spi_dma_tx_callback, NULL,=
+ (void *)dspi);
+
+You could probably drop the cast while at it.
+
+> diff --git a/drivers/spi/spi-fsl-lpspi.c b/drivers/spi/spi-fsl-lpspi.c
+> index b25f94b2ef738..7798197d5b350 100644
+> --- a/drivers/spi/spi-fsl-lpspi.c
+> +++ b/drivers/spi/spi-fsl-lpspi.c
+> @@ -634,8 +634,7 @@ static int fsl_lpspi_dma_transfer(struct spi_controll=
+er *controller,
+>  	if (!desc_rx)
+>  		return -EINVAL;
+> =20
+> -	desc_rx->callback =3D fsl_lpspi_dma_rx_callback;
+> -	desc_rx->callback_param =3D (void *)fsl_lpspi;
+> +	dmaengine_desc_set_callback(desc_rx, fsl_lpspi_dma_rx_callback, NULL, (=
+void *)fsl_lpspi);
+
+Same here.
+
+>  	dmaengine_submit(desc_rx);
+>  	reinit_completion(&fsl_lpspi->dma_rx_completion);
+>  	dma_async_issue_pending(controller->dma_rx);
+> @@ -648,8 +647,7 @@ static int fsl_lpspi_dma_transfer(struct spi_controll=
+er *controller,
+>  		return -EINVAL;
+>  	}
+> =20
+> -	desc_tx->callback =3D fsl_lpspi_dma_tx_callback;
+> -	desc_tx->callback_param =3D (void *)fsl_lpspi;
+> +	dmaengine_desc_set_callback(desc_tx, fsl_lpspi_dma_tx_callback, NULL, (=
+void *)fsl_lpspi);
+
+And here.
+
+> diff --git a/drivers/spi/spi-imx.c b/drivers/spi/spi-imx.c
+> index cadf0b93f4403..f8a3ac11f49d0 100644
+> --- a/drivers/spi/spi-imx.c
+> +++ b/drivers/spi/spi-imx.c
+> @@ -1738,8 +1738,7 @@ static int spi_imx_dma_submit(struct spi_imx_data *=
+spi_imx,
+>  		return -EINVAL;
+>  	}
+> =20
+> -	desc_rx->callback =3D spi_imx_dma_rx_callback;
+> -	desc_rx->callback_param =3D (void *)spi_imx;
+> +	dmaengine_desc_set_callback(desc_rx, spi_imx_dma_rx_callback, NULL, (vo=
+id *)spi_imx);
+
+Here, too.
+
+>  	cookie =3D dmaengine_submit(desc_rx);
+>  	if (dma_submit_error(cookie)) {
+>  		dev_err(spi_imx->dev, "submitting DMA RX failed\n");
+> @@ -1756,8 +1755,7 @@ static int spi_imx_dma_submit(struct spi_imx_data *=
+spi_imx,
+>  	if (!desc_tx)
+>  		goto dmaengine_terminate_rx;
+> =20
+> -	desc_tx->callback =3D spi_imx_dma_tx_callback;
+> -	desc_tx->callback_param =3D (void *)spi_imx;
+> +	dmaengine_desc_set_callback(desc_tx, spi_imx_dma_tx_callback, NULL, (vo=
+id *)spi_imx);
+
+And here.
+
+> index eb3485149e75a..fdda26eb311fb 100644
+> --- a/drivers/spi/spi-topcliff-pch.c
+> +++ b/drivers/spi/spi-topcliff-pch.c
+> @@ -1021,8 +1021,7 @@ static void pch_spi_handle_dma(struct pch_spi_data =
+*data, int *bpw)
+>  		return;
+>  	}
+>  	dma_sync_sg_for_device(&data->host->dev, sg, num, DMA_FROM_DEVICE);
+> -	desc_rx->callback =3D pch_dma_rx_complete;
+> -	desc_rx->callback_param =3D data;
+> +	dmaengine_desc_set_callback(desc_rx, pch_dma_rx_complete, NULL, data);
+>  	dma->nent =3D num;
+>  	dma->desc_rx =3D desc_rx;
+> =20
+> @@ -1083,8 +1082,7 @@ static void pch_spi_handle_dma(struct pch_spi_data =
+*data, int *bpw)
+>  		return;
+>  	}
+>  	dma_sync_sg_for_device(&data->host->dev, sg, num, DMA_TO_DEVICE);
+> -	desc_tx->callback =3D NULL;
+> -	desc_tx->callback_param =3D data;
+> +	dmaengine_desc_set_callback(desc_tx, NULL, NULL, data);
+
+This is a preexisting issue, so nothing to do with your patch, but I'm
+not sure I understand the purpose of setting callback_param to !=3D NULL
+when callback =3D=3D NULL. If neither callback nor callback_result are non-
+NULL, then callback_params seems to be completely unused.
+
+Anyway, none of the above are blockers, so:
+
+Reviewed-by: Thierry Reding <treding@nvidia.com>
+
+--unoy3twvi5fxh2md
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrrMd8ACgkQ3SOs138+
+s6EYaw//UO6AHvJ+t7TrjGZA+UYLQHdy+GHHN92wIwin6E29tqokUx9FRtT1mxc+
+QfpP+rIE6hr579pxyCp6mS/ocEtwyvXQ0NiQxu2KDDs4YHYh9OK6JhUHGwGtYn6r
+P3Dhqwabt4yfcKDEwG00Xps8UwXK/mLJYsm5TPXnS0FiFetZeNGK0KORgB977tWk
+4CEOjQOIvgKJIDgW0ornKkP5p3u5Nf+8qI6OuOkCkPmuK4Ed9DTwjHxzdx3M1Enf
+6X9C8OMo5MWcn5Q4WWN4YwG/S+yYPkhz8wZOotBTvMcl1xLiz8Uc9Vn5AiDcH6hG
+W8z1TXNaLhzBAE+Ov9viiL/wkD5sunZNnYLjkBsyxY1Lt1LNkOgvJGnKrf7u7Nn1
+9NMMQEdb07ppFaphiVGbHRFmKFfVimrXPKBIbjoDfyFF7DscLjhXzl4ICwv4RaMR
+k9vh0aZ4Efy2fOA4v61ePYYIY6sNjy+jyQp5YwXrToTkJ6UfnPyF9xeIBHJNM91Y
+WqO7StU+DRjiP3FKmfYMt6rLJFe/SgGJ35vOl2fgMHD2NNRGafYIWsC0jHpteo8s
+mA1Rd9Sj+E1fQqzIi+8a9grsUfq4aodwBgy3MNZhqs+6JG6BadJmTD+r/POrX7BJ
+9MPiWfYSOGkvf4dm2lHIJ2nQVZZcUtLrj/Hm6DakNESIle457lU=
+=AUYN
+-----END PGP SIGNATURE-----
+
+--unoy3twvi5fxh2md--
