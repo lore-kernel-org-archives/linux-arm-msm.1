@@ -1,63 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793787983;
-	b=hmxX4D44yQLHoL5kANKnG+KohOvKDcvJh0UxH8rE2ON4jPUUU8wvN08ufXLKO4hKdtAs
-	 EJYk+ZzhniuocGA130P3ST2m2HRy6bu4SrgtgEtFVc43fbnlM8noiCMmYsLtahTI5Ibtr
-	 K7JknQU8OJVq7qeti0YWToYGYqYHTwKl+bvUTOtGDU6KdUCyLjTWNaZcoswBiwIZfwulu
-	 E/2q0aBXjQlejLbPKp10YnEFW3VkAKBzZE/eqJU36Jzsje5jZubMI1UP4Cn0VtYJggYy1
-	 n5yH052rmaZ2VkzC5jmlCJFYp3cEZVHfW4EkaTi6cqBWmHD5/KlvYpH3Gz4ZcHi2F6A==
+	t=1793788227;
+	b=dL0YrwXI17T6gQOpJOl8eSCboYzrhRUF+IgYbp+dpAAjRJmq7tBBb3MUugZN1rbHEdhN
+	 AXgAt9kb8EG9djz9CEfGnSFiaqmSyKrxuXEwXH2XPv/V2pKmHW2mr1/RurqUu67a/c+y3
+	 EzJ8M0ce6tTzbnPeueUnb7LlXnBuSpqOJIKo1/BkFgXKqdLSCGIsSw0RHrh3QTL5j/reZ
+	 usF/WfWdOJj0prDbCTpeEdTkKCPhz91Abol3nj/i0WD8w5FGECQQ6BbYTrfOB3Y5npQds
+	 K+nbMYQ6tqUUrpnklzqXpHMwFee/pWpXj6hisDkXoIheJ/HjoWNRw7+wGkaJIyhDekA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793787983;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:
-	 User-Agent:In-Reply-To:References:Message-ID:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=xpSwd7lBoXLBxqdtt9iF2X+1DgDbMbdN1MoJiHh2RAs=;
-	b=JjZL42tkPiHC6/VzRvYU4/ps/FdisOiMfy5PXgzgqO2Dm3zrwgdZQyXrLtmDArZswqfL
-	 4OwyctdDCi9FPx2YfCqJuS/u0LsKVYHa7CDo1MEby4vOenoLM1Zdz5E9slkQBTnFnsy8s
-	 /XhupkX6u30F970S0HvZRy1utoDeeSAP5HB9NIwqC4Yvte6SoJQs/YS8iDr8nVWZ/k0+e
-	 ki47mqxkC7dvYQMoBLphS5IfvPwBKAlAKc8x9u3SekIbvJw+72mJnz6iECEIED0rHpILy
-	 KrB3pZ1HFD2OOaX7YBU3ROKqp9ah7jvnfyI3AAjzbfaGCSIBt/BWURPgnJLkDDGjlfA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793788227;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=6XQw3zibaKqqpkbbYpdr8M7vZmcUn7VXCPtT1zKpVLI=;
+	b=j1H1sEatiqb2Cin4A2JFKw9nUG7gaDgccKZICPHrTL5wgQVasi2ow62l7+yP4pb3bRaP
+	 IEzHZOCuyk0FZQqnbGd63RCgaMThssDP9duJooP0cnv+uXe49oalMBi3TgjUWfbHU3IkH
+	 /gazDRarQUHtawgA8ioZK32A4AHjQ0bpiiOhI2MyDIvj3cSidC5+gNlcfZv6uofp6/PhA
+	 2lcfHbty6e/ZsVIaZYxWMyvFAiez9FhqtZfdp5nDV2883NuM/GFp5Pf1CAIcCuRBt5uMD
+	 8jYNFL05gu3hgkwNhmiWkHWIjdK97uss3aBuEmzhtlFiSIZKecq9O4j9/urIylFZT4Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mainlining.org;
-	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=PMEsm1KM;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=11lVuZbF;
-	arc=none smtp.remote-ip=5.75.144.95
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XhU8l6DV;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4512606A326;
-	Wed,  4 Nov 2026 10:26:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4512606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F4D8606A326;
+	Wed,  4 Nov 2026 10:30:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=PMEsm1KM;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=11lVuZbF
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1793787955; bh=xpSwd7lBoXLBxqdtt9iF2X+
-	1DgDbMbdN1MoJiHh2RAs=; b=PMEsm1KMcVDfsfg/nhESCPakorceRufKrxwclns3df8qMml355
-	OoHzlr4tdT7r1vE8SC7TygMJlZ5pDX1dD4gOz5PAVFeYlE8RlRZH/xkP2xKBER8Uk/4Lt6LlZQU
-	qlzxo/d5Kyw7I6dtFwqObs32wTGJoEAmpC8pc/psTcE391N9cmKmP76xWDOU0uQO3W/J9Z2Jy/k
-	Wu9I1kMWvgBrCyOzl14YaVFkv0d05prpZHzuCzoKHZmFz8EDGXzUjRJ3ybIb7S1k/NhqPIqIDk/
-	koeaqzVO0C0gm7LYadovsdwgf3cWVGnbnnAug2EbsrJJhCJS/FmhCjDpJrQeSUcgZKg==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1793787955; bh=xpSwd7lBoXLBxqdtt9iF2X+
-	1DgDbMbdN1MoJiHh2RAs=; b=11lVuZbF9EgeBigKu12rDqm9KYFLqILffQGzst5tJguAK8Hjtp
-	VSIvndhmD+fh+6o0fa7j3cgJ7D4n6S6l3oCQ==;
-Date: Wed, 04 Nov 2026 11:25:54 +0100
-From: =?ISO-8859-1?Q?Barnab=E1s_Cz=E9m=E1n?= <barnabas.czeman@mainlining.org>
-To: Amir Hanip <killdeath104@gmail.com>
-CC: a39skl@gmail.com, abelvesa@kernel.org, andersson@kernel.org,
- conor+dt@kernel.org, devicetree@vger.kernel.org, killdeath104@gmail.com,
- konrad.dybcio@oss.qualcomm.com, konradybcio@kernel.org, krzk+dt@kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, robh@kernel.org
-Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: Add Xiaomi Poco M3
-User-Agent: Thunderbird for Android
-In-Reply-To: <20261104095806.18945-1-killdeath104@gmail.com>
-References: <3ec43b1b00bca7506c1ca678c118f8c2@mainlining.org> <20261104095806.18945-1-killdeath104@gmail.com>
-Message-ID: <CAFAE0AD-E566-4725-99A0-D0BFFAAD4F56@mainlining.org>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XhU8l6DV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E55991F000C1;
+	Wed,  4 Nov 2026 10:30:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793788226;
+	bh=6XQw3zibaKqqpkbbYpdr8M7vZmcUn7VXCPtT1zKpVLI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XhU8l6DVgoXFDCGpA9dD5djco7w48DvID9LijKPUQT7Qg1HYZAYBe/gbxb5ziquVK
+	 615Ekjw6fa69msxvRHwG9DgI11fUDd1unnN+l7iPCyLS3+1hFMKLDNhOWn+j14owsA
+	 8J1iLGIa/6FwKXUHFpeG/2MMkDOTRS1H5b/m2ycTWUlZndgeg6HJrJMH4Go5jkahpY
+	 uaDJYn8DXHNnuQU7cJzpldjK5y5E3l1vQW0U2gtwV658lBtR6GnqsaidSPH/yIZW1P
+	 WVzetxP2BO/8zmq2a6T6ryH+iRogvDqu0mJzWXCyCUaVJODSuzGxJnG8UMUiSE2N61
+	 JzYYF4aaA5jjQ==
+Date: Wed, 4 Nov 2026 11:30:22 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>
+Subject: Re: [PATCH v6 5/5] arm64: dts: qcom: sm8750-lenovo-elden: describe
+ the WL2868C regulators
+Message-ID: <20261104-elfish-booby-of-awe-27d2b6@quoll>
+References: <20261104032648.209747-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261104032648.209747-6-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,29 +61,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261104032648.209747-6-xiaqinghuan@mail.ustc.edu.cn>
 
+On Wed, Nov 04, 2026 at 11:26:48AM +0800, Qianhui Xu wrote:
+> The camera devices of the Lenovo Legion Y700 Gen4 are powered by a
+> WL2868C camera PMIC on i2c10: LDO1 feeds the rear sensor DVDD, LDO2 the
+> front sensor DVDD, LDO3 the front sensor AVDD, LDO4 the rear sensor
+> AVDD, LDO5 the VCM VDD, LDO7 the DOVDD of both sensors and the VCM
+> VDDIO, all at fixed voltages including the offsets programmed by the
+> stock firmware. LDO6 is not wired out on this board.
+> 
+> i2c10 is a GENI I2C controller inside the qupv3_2 wrapper, so both
+> qupv3_2 and its gpi_dma2 parent are enabled alongside, otherwise i2c10
+> never populates and the regulators would never register.
+> 
+> The VSYS input of the PMIC is the always-on system rail of the tablet
+> and is described as a fixed regulator. The VIN12, VIN34, VIN5 and VIN7
+> inputs are fed by SPMI PMIC rails that are not described yet, so they
+> are left out and follow with the board series that adds the PMICs.
+> 
+> The consumers of these regulators (the rear sensor and its VCM on
+> cci0) are not described here: the CCI controllers are being added by
+> Hangxiang Ma's SM8750 series, and the sensor nodes follow with the
+> camera series that depends on it.
+> 
+> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+> ---
+>  .../boot/dts/qcom/sm8750-lenovo-elden.dts     | 79 +++++++++++++++++++
+>  1 file changed, 79 insertions(+)
 
+I do not understand why this is a separate patch. You add new hardware,
+so the commit is "add new hardware". One logical action, one commit.
 
-On 4 November 2026 10:58:06 CET, Amir Hanip <killdeath104@gmail=2Ecom> wro=
-te:
->On Mon, 02 Nov 2026 21:11:33 +0100, Barnabas Czeman wrote:
->> I have checked it seems lemon have same adsp region like citrus=2E
->> `pil_adsp_region@53800000`
->
->Thanks for checking, Barnabas=2E Where did you see it for lemon, in a
->downstream DT or in the stock firmware?
-I get it from MIUI sysfs=2E
+Best regards,
+Krzysztof
 
- If lemon's stock layout also
->starts at 0x53800000, the 0x53400000/0x2600000 in the lemon DTS may
->be worth rechecking=2E
->
->I will keep the ADSP carve-out per variant in v3, since I cannot test
->lemon=2E Adam, if you can try lemon with 0x53800000/0x2200000, the node
->could move to the common dtsi in a follow-up=2E
->
->Thanks,
->Amir
