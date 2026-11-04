@@ -1,74 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793818404;
-	b=UVeDxFqu63TzLLO1By9lFbRJ7SyHd89pDKL/zpD5VTLj2M9ReX2Y91Dn2I+0vYjTgMBk
-	 3F2APIY+silr8XGevc8lAnTlPuBM+CdT3MMbv/nvbiJ8vEC3mmQSdtcvBalk5wvOse+1t
-	 E3S2rcShGQviKJG3N/ZPkADV0IS1nr+ipSXXNMbDem58Ts5m/98stofrPt/38wTRazwuH
-	 AajLenHv821AiRggMLKQsDfB6oLdutDuZyYtKvP21wlz6FSh00pLIv3k6GW/FHgHXtTrk
-	 CfaW6GsAAqrjX4eAJXD38Z2ypuycpqwcRukOc5pmnYvQjKzQBhQN+NgRTAIy20YKmyg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793818404;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Last-TLS-Session-Version;
-	bh=kll/G1zD/C2JyZu7pxNelwTrLUBWbNvvxhXCfrLDdII=;
-	b=DcVbQQwFFQyfHpphCRb5kWOOJDJtA1ZTe8G5csjuB1lLBgO/70PhHmsgGrpWB3nz76Cw
-	 HXFPRss/sejsL356RsbVuA8U46MULSeDV+S9Gfau0FzOFuWjJ5f49VZFEq+JvKVqw6f52
-	 FxINpstaBlCy/TUenrWs3NOtmY58xaIK72ikc0u9o1S3HDoi9EBppJ8Y+1UMWyYRjbdo4
-	 eyaAg4VGhceR+ux3ImIwQ61kmSCxjOtERoRcX7YUPgTE73ZZHBIX1ldxBWVv/uawB0Tl0
-	 ohBwVBPYlU97Fe60KRjgD/qXRLvbaw1I+sndDaQAT/ox28vIeZ35CSl6D6d27bW1HGg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Tv+VOjuX;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793818757;
+	b=eEiR+9wc8pqBDh8I83km4jws76sFsfVQEX/3oxR25IZo4RYEM/tR06pHnWsIyJ52guJQ
+	 aMb/ix/anINwcgHhesaeVU5z7eb3nEMlP1TZ0x51CV4x+rTX9zRHv4OJWVYxOLErrMH7m
+	 +1NcL7uBLntCJF3ccXS+PgjzCtLoRMFnDrPDIWh1vkVPRbvOgKjauGGe0tZlVCoD9RMo1
+	 CHqTicnhzx3uVgmbMKRLfxrq1rOG+x0snr8dgA8YCHUFmqbJZKZHJRKSVovdbGdjtCzrR
+	 O0Kst8IpVjBctYMPTyR2MU58F47vyukDkxfeEs6RavaEQ6OVRtj0iqQQlZS3IFjmPhg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793818757;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=0xmcEkNO7u7/9PKNphOLiy7umGDn2shs9wyqvnz7GwY=;
+	b=gL+IYIjMT2NMbRkBNs7tlN3W7XzuONyn4xolyu3ONY+omV3QFYP+XCn3L0Vx3Ww8QsNA
+	 1Wo/0MPQTh/ArxFHE/+fypFTJHCdZLvUZ3sec6p95ZTRBBvpTgq4zJ4HRoCVGQn2qNpuv
+	 kYZ/ppwYrngnUlVKuzqGQE10XSMMHjv+HRDB6O8yPYhP3ehz2t2W4/pkmNAXeJY6EwmhB
+	 GYOUjm6wCnCa1MnkcrIr8R1SqSkSPhFn3fup5MR77nfKgm6FM3udmM27Wck6aPE9sSJMy
+	 VxwW1PP8d59R4UVizYnX8rvQHYTBKnvlXSjOXvIiBKdkQ1tFPiXwOT0Ojek+tYK5zWQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GHWfRpn5;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5547606A32D;
+	Wed,  4 Nov 2026 18:59:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GHWfRpn5
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1793818756;
+	b=wK75o/8sOUuhQEnYcHTwdBFVOoKKwnvKldpT25Y4pqC4f0BQUt3GXVxki+Vvr86R0srC
+	 KqHNdEhV2L79WX7yNEn8L+kmyhJS4sCTsf+0hWx7RAGv5aAtQ4TrZuh8jbnkSpgBbo8FP
+	 DPbxJ20xIuxIusEhqvqz36MFAnvL764OZ2TfJNwKPCLVYkLt1mCqgiAq1PMFAfa3uSduc
+	 VNEGl7Dyvccj0TfzREECKCeSvKFyvUG4npPVHwdS06nO+lbPHhQTolgztgRm769T8Pd0J
+	 BH9Ff3OLCRZcP71aEXLjehV9+Qv2aJ0b5BgUAhwyxONFIar3PcpnXNhkgGL8YEi6u9g==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793818756;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=0xmcEkNO7u7/9PKNphOLiy7umGDn2shs9wyqvnz7GwY=;
+	b=wbf8TK/WAFjPKEIMxU0zoT433mHnw1ERanDKMo3Xn8pz2dV1u4zsjKvYJuTz9gPimFWn
+	 LLfcduNU7EfmM0XV8a8yAYbeGfJ57+1chIFtBbenBdlB3Aa/eZ1UrfJww+no5dzsu5Fvf
+	 QbDftd1n8ld0k8dnbkz+H8RIIRpOvdABagVbHJTaDfVkL0D2OwYL6u7Sh9RxQEJy8nhM+
+	 A59yxJCIjHA6p/eljajiKEHDl9Erpj7Cq/MBVcfZU45spxpQ5Yfs8OInLpwlteE+w/p5O
+	 m4fGxPCuJ0k5+Fn79X/d59FaLxInurt7eBw11OLczyXHeZqaNZLkgsXsqKisu+kY1jA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7749A606D835;
-	Wed,  4 Nov 2026 18:53:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7749A606D835
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Tv+VOjuX
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id B7F164E41403;
-	Wed,  4 Nov 2026 18:53:20 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 6714A60770;
-	Wed,  4 Nov 2026 18:53:20 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C414410329205;
-	Wed,  4 Nov 2026 19:53:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793818395; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 in-reply-to:references; bh=kll/G1zD/C2JyZu7pxNelwTrLUBWbNvvxhXCfrLDdII=;
-	b=Tv+VOjuXj3AH4ln4E3aXj4PZMQKql3KWSZmz2mqRiK+jgYCiAKLyFxJvFwNFzOT2mtfa/p
-	/bx6al1jJJa+bZV3C/HjKYVwdSHnNj8K+VmDEMZY3OlMMIZEFHnds8sgV9MHo+HHCYtDbn
-	x70RoP2HsMme65Nfa8ffeM8rDHEGo3j2+2HSbRpN6yCyuTlkgd0HG3FUPB2K32I/sVrj1A
-	QtaakxhrG4MI4ibpZz6wPkLdC3Y5lwyrVFf/Ha/JM1zFsyvQeTFeUDZjjKHvUFr+l7oMnW
-	YRz4CV1SlYuEY/gOOB+7jtEAUBx2umSS15PswdMcUJmkil+id0WtdNn/3JwwbA==
-Date: Wed, 4 Nov 2026 19:53:08 +0100
-From: Alexandre Belloni <alexandre.belloni@bootlin.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Boris Brezillon <bbrezillon@kernel.org>,
-	Mark Brown <broonie@kernel.org>, Andy Gross <andy.gross@linaro.org>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org, Wentao Liang <vulab@iscas.ac.cn>,
-	Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v2] memory: atmel-ebi: Disable SMC clock on probe failure
-Message-ID: <20261104185308b845fb6d@mail.local>
-References: <20261101190733.121473-3-krzysztof.kozlowski@oss.qualcomm.com>
+	by smtp.kernel.org (Postfix) with ESMTPS id 22E411F0093A;
+	Wed,  4 Nov 2026 18:59:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793818756;
+	bh=0xmcEkNO7u7/9PKNphOLiy7umGDn2shs9wyqvnz7GwY=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=GHWfRpn546nNtO5oRsCIFDNvHCGSw70X2aAHKgCJHC/YHWTwXKNGpw2hcl2E+nYPf
+	 jgy65jIiyIqJIiPVTFNJoaWTsEg430NaMK4Q7A5ZhFBAHMZI8WxxzoTQ1BAYr5Z6au
+	 rFz/LoBacdZXWIvrNotXZmtXmxUkGJ1tEQzh3Dhik1w4YUc46K6hftjHOTy2yUfnJh
+	 +S+R0i5Gbt3bMWsM3/QyvlTaTWInU9Q8Pm28zIWkxNvR97Ukg0sI0CLGzdkzyF0PyS
+	 NvTTEb2a/tgkv0sr8x1lmFLfvKLfkIyjvk1yZtNRym5apBgWeZpijTvTZibkO4iuzw
+	 PJO7eAf5Ogf6Q==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 845A446F40;
+	Wed,  4 Nov 2026 18:59:15 +0000 (UTC)
+From: Asdlerto Korry via B4 Relay <devnull+korryasdlerto.gmail.com@kernel.org>
+Date: Wed, 04 Nov 2026 20:59:15 +0200
+Subject: [PATCH 1/2] dt-bindings: arm: qcom: Add Samsung Galaxy M52 5G
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -78,115 +82,56 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261101190733.121473-3-krzysztof.kozlowski@oss.qualcomm.com>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261104-m52xq-dts-v1-1-b198f02912ff@gmail.com>
+References: <20261104-m52xq-dts-v1-0-b198f02912ff@gmail.com>
+In-Reply-To: <20261104-m52xq-dts-v1-0-b198f02912ff@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
+ Tony Luck <tony.luck@intel.com>, 
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Asdlerto Korry <korryasdlerto@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793818754; l=791;
+ i=korryasdlerto@gmail.com; s=20261104; h=from:subject:message-id;
+ bh=H56IcYVSNo0wgt3tuO8OiTWa9f7y69coL2KlUgR93oo=;
+ b=7ne9EcWarSEtCO5jWlreL4Dpdj69yuj7pbG5P7iQ3DiaS27+sbIOb0sC+cEaKQd2TTJP4HMxQ
+ eiLFnCUteAqDdCon8a6mtBDZQshWdqv1O0fcrCWrWBua9PYzlCISgii
+X-Developer-Key: i=korryasdlerto@gmail.com; a=ed25519;
+ pk=RqttIGkm2XZ8NhLQBzPgpXXawOdVa1uODGsk+sagbxs=
+X-Endpoint-Received: by B4 Relay for korryasdlerto@gmail.com/20261104 with
+ auth_id=1411
+X-Original-From: Asdlerto Korry <korryasdlerto@gmail.com>
+Reply-To: korryasdlerto@gmail.com
+Content-Transfer-Encoding: 7bit
 
-Hi,
+From: Asdlerto Korry <korryasdlerto@gmail.com>
 
-On 01/11/2026 20:07:34+0100, Krzysztof Kozlowski wrote:
-> Unprepare and drop the SMC clock reference, if probe fails to avoid
-> resource leakage e.g. during probe deferral.
-> 
-> There is no remove() callback, presumably on purpose so only error paths
-> are handled.
-> 
-> Cc: <stable@vger.kernel.org>
-> Fixes: 87108dc78eb8 ("memory: atmel-ebi: Enable the SMC clock if specified")
-> Reported-by: Wentao Liang <vulab@iscas.ac.cn>
-> Closes: https://lore.kernel.org/all/20260917101623.2146392-1-vulab@iscas.ac.cn/
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Closes: https://sashiko.dev/#/bug/linux-8e236c81-01b2-4274-a213-11c3f31acfc2
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> 
-> ---
-> 
-> I independently developed the patch and then checked the queue with
-> pending work of iscas. That one has issues and other complains from me,
-> so only credits for the report.
-> 
-> Changes in v2:
-> 1. Handle of_platform_populate() error.
-> ---
->  drivers/memory/atmel-ebi.c | 27 ++++++++++++++++++++-------
->  1 file changed, 20 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/memory/atmel-ebi.c b/drivers/memory/atmel-ebi.c
-> index 1e8e8aba2542..7dc2f7add1b1 100644
-> --- a/drivers/memory/atmel-ebi.c
-> +++ b/drivers/memory/atmel-ebi.c
-> @@ -562,7 +562,7 @@ static int atmel_ebi_probe(struct platform_device *pdev)
->  	}
->  	ret = clk_prepare_enable(ebi->smc.clk);
->  	if (ret)
-> -		return ret;
-> +		goto err_put_clk;
->  
+Document the Samsung Galaxy M52 5G (samsung,m52xq) smartphone, which is
+based on the Qualcomm SM7325 SoC.
 
-Couldn't we simply devm_clk_get_enabled() ?
+Signed-off-by: Asdlerto Korry <korryasdlerto@gmail.com>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
->  	/*
->  	 * The sama5d3 does not provide an EBICSA register and thus does need
-> @@ -572,14 +572,16 @@ static int atmel_ebi_probe(struct platform_device *pdev)
->  		ebi->regmap =
->  			syscon_regmap_lookup_by_phandle(np,
->  							ebi->caps->regmap_name);
-> -		if (IS_ERR(ebi->regmap))
-> -			return PTR_ERR(ebi->regmap);
-> +		if (IS_ERR(ebi->regmap)) {
-> +			ret = PTR_ERR(ebi->regmap);
-> +			goto err_disable_clk;
-> +		}
->  	}
->  
->  	ret = of_property_read_u32(np, "#address-cells", &val);
->  	if (ret) {
->  		dev_err(dev, "missing #address-cells property\n");
-> -		return ret;
-> +		goto err_disable_clk;
->  	}
->  
->  	reg_cells = val;
-> @@ -587,7 +589,7 @@ static int atmel_ebi_probe(struct platform_device *pdev)
->  	ret = of_property_read_u32(np, "#size-cells", &val);
->  	if (ret) {
->  		dev_err(dev, "missing #address-cells property\n");
-> -		return ret;
-> +		goto err_disable_clk;
->  	}
->  
->  	reg_cells += val;
-> @@ -603,11 +605,22 @@ static int atmel_ebi_probe(struct platform_device *pdev)
->  
->  			ret = atmel_ebi_dev_disable(ebi, child);
->  			if (ret)
-> -				return ret;
-> +				goto err_disable_clk;
->  		}
->  	}
->  
-> -	return of_platform_populate(np, NULL, NULL, dev);
-> +	ret = of_platform_populate(np, NULL, NULL, dev);
-> +	if (ret)
-> +		goto err_disable_clk;
-> +
-> +	return 0;
-> +
-> +err_disable_clk:
-> +	clk_disable_unprepare(ebi->smc.clk);
-> +err_put_clk:
-> +	clk_put(ebi->smc.clk);
-> +
-> +	return ret;
->  }
->  
->  static __maybe_unused int atmel_ebi_resume(struct device *dev)
-> -- 
-> 2.53.0
-> 
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 121ca557ce1e..fff2be0ecb47 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1124,6 +1124,7 @@ properties:
+           - enum:
+               - motorola,dubai
+               - nothing,spacewar
++              - samsung,m52xq
+               - xiaomi,lisa
+               - xiaomi,taoyao
+           - const: qcom,sm7325
 
 -- 
-Alexandre Belloni, co-owner and COO, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+2.25.1
+
+
