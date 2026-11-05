@@ -1,86 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.48
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793893001;
-	b=aOGAputtNR81+Qijl2BErvI9LHJvY9D4NoPrKvi8Ib631F0bqgaYs+QOFGofkxTf6XhP
-	 uFToFtjKowoK1pH/HtMn50/TB841jS3r8OHsvaG97JR/lthdzHoFU5lLfrjxs/bPtnrlH
-	 vkEXlzWdMlZWtuTBTunWKSyy5YpuqJPvcgSNogjmTaTKiJ5VvyLf/NxNmUz+MLaj/FzEC
-	 3dfrR8wCG50kbE5vReD9DzsIvIoexVu5EIwz5seyntWTSx9RRy9U6H9d2v8zANivPTJyf
-	 5VxK8MQAOAF1OUdO1K9rGk7Vp4rey2QCxQjINNV7NGuK6fZfvsIIRNH9eP7UkEriszQ==
+	t=1793893152;
+	b=cEV4l8lrj+7TcYe3lcDrOMGHyAVzrBed85rtVBrc0xFUfIX0sDsidED7AwDY76Wzc/gq
+	 VH/xXZbld2/jNYNid+nuNEgcTZD9g06VIvqxEoZipbKFgEkN3WrVXDcNLiJyyKbY6M6p0
+	 G1uBl5Ff8+N7atbFAMtLHPXF08Vm5R+NP/+KL5GXxxpDdIqPHWZbOaDWNteMxlIhE67po
+	 V4lJmnhBZMzjz/8AgM3IIpbU4kD2ZwbjE27nC22cCN9bSoHPRG/H9ScS8dYp7sKHLBobQ
+	 xKYeJ7hzdMYEEcLy70SkJlP0pl0pKcyW3AmBPraEAclKWzhlBocNzmlhOj7vHNoTU8w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793893001;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=WMIfUSC08BqgK169oF+WQophOR+gP8olx7dB7m3lVdI=;
-	b=l1ges1sDQs99vnu83rn2Z/dk5BzwP7ioFkXPl7PIgNqKSDTNr/hHGqOYrB5JY5KGsUMy
-	 LQVEtED3SDIEDuuRoUh1YxfQ/kW7rR0WNaFyNvFDUrZEg3YJAryDZdu/I5EOLnhApeCSr
-	 Mg+7uPXv1VpWvCsb3sdZv9sCRsFsRZS/qnMuVm0G95b6pASFjuVT3BHFAzUftoacBBtwv
-	 XePrA7b1eowFYPJqQzkQ3gZv2hIuuM4XUdrmLXZ+YkRf5dICRQf7GTNJ6DHjJr4AStGkr
-	 5rBh+vvjSZcD9fHdGCK3XMTB+OhE9Fhrfkwm3RlD+aCDm4TBgRGNYjJ/5PCuMZVG54g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793893152;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Z5K5hANiP4hKvDWgB+1UuOsMTO32b8ekKek1eVxjOKw=;
+	b=qnmzE/P0rAoHjdJNn8LxkOzW/WioZXCIu+bM/K9Rw+EPaqV0AfS5W78ClHaOaVTk4qWy
+	 cr/ip9OxCYuvyfmO1ua948nC0AiycaErrm/sE6Gga4Eypu1GJ1TY3kecNzVWozLo7Eba2
+	 Jl46dlgjCJRECyTZiEZnuhcbICHbcNo6oB93BiSOQAFzhP3nU79VjO7Tqzj3WX0lsE8zP
+	 AkyOET0JqoAwHqkHtRiWDMl0OJI7OpAxSi+nHsmLisjnlVQLiWCPIL/g4i8gGPwCL4oeG
+	 aKtuFAHuW/7jKqZk2C0Hp8S8PV8h/D037ok3aMdUyyYq5sNEL8JoJmdOfxP+46omMBQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GQ2UVcx0;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="NAJ6/dW1";
+	arc=none smtp.remote-ip=209.85.167.48
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F776606A31B;
-	Thu,  5 Nov 2026 15:36:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59A3E606EE96
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 15:39:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59A3E606EE96
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GQ2UVcx0
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3617D1F000C1;
-	Thu,  5 Nov 2026 15:36:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793893000;
-	bh=WMIfUSC08BqgK169oF+WQophOR+gP8olx7dB7m3lVdI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GQ2UVcx0gaNOwo0yy9wftnb8YdlMK/DhNEwIT+Ja4l0mEunsi7pyo+Yoj+Ijw7oqf
-	 mUr8+4Y9IKNGF12cfn5mWrWn87XYuqmTMQJphnw2OCQ1WjYneGTAZvps6xLlNfO5oQ
-	 oSJHx8/355u1AZtd58DBfy/xtRnTeZ+VZojz2v6C5itcJZdiGLR/hsGTAG0ZSV9VY9
-	 n8FER9NZsV8jYHgeaY4da3lu7SKNrw57S8PTG90MNhkl296SICCgdGoTg13reFYICw
-	 zfTvJI58o4+DE8ClCZFFcs1HAxxT/4YOpd2sEFGXy+nwq3X6z+W1BgMZrSWmNG4Y7s
-	 B7xxjbNedfKbQ==
-Date: Thu, 5 Nov 2026 16:36:38 +0100
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Frank.Li@oss.nxp.com, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Russell King <linux@armlinux.org.uk>, 
-	Richard Genoud <richard.genoud@bootlin.com>, Nicolas Ferre <nicolas.ferre@microchip.com>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Alim Akhtar <alim.akhtar@samsung.com>, Laxman Dewangan <ldewangan@nvidia.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Cunhao Lu <1579567540@qq.com>, Raul E Rangel <rrangel@chromium.org>, 
-	Yenchia Chen <yenchia.chen@mediatek.com>, Zhiyong Tao <zhiyong.tao@mediatek.com>, 
-	Carlo Caione <ccaione@baylibre.com>, Moteen Shah <m-shah@ti.com>, Kendall Willis <k-willis@ti.com>, 
-	Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>, Nicolai Buchwitz <nb@tipi-net.de>, 
-	Karl Mehltretter <kmehltretter@gmail.com>, Stefan =?utf-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>, 
-	Shitalkumar Gandhi <shital.gandhi45@gmail.com>, Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>, 
-	John Ogness <john.ogness@linutronix.de>, Pan Chuang <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>, 
-	Robin Gong <yibin.gong@nxp.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Stephan Gerhold <stephan.gerhold@linaro.org>, Zhaoyang Yu <2426767509@qq.com>, 
-	"Nikola Z. Ivanov" <zlatistiv@gmail.com>, Haoxiang Li <haoxiang_li2024@163.com>, 
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>, Biju Das <biju.das.jz@bp.renesas.com>, 
-	Geert Uytterhoeven <geert+renesas@glider.be>, Myeonghun Pak <mhun512@gmail.com>, 
-	Wenhua Lin <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>, 
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>, 
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>, 
-	"moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>, 
-	"moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>, 
-	"open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..." <imx@lists.linux.dev>, 
-	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>, 
-	"open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES" <linux-samsung-soc@vger.kernel.org>, 
-	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>, 
-	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>, vkoul@kernel.org
-Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
-Message-ID: <auyiAE3lhnFahBK2@orome>
-References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
- <aux2VKHnVLwq_wzi@orome>
- <auyQEVmA2KeGu9DL@ashevche-desk.local>
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=NAJ6/dW1
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5be4bed05b5so171229e87.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 07:39:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793893150; x=1794497950; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Z5K5hANiP4hKvDWgB+1UuOsMTO32b8ekKek1eVxjOKw=;
+        b=NAJ6/dW1nNAVv5R+uX3W5IJtd67R+F0lgLEmD9I0ASfgwmXwO68uagcQFee1bXpMzX
+         /6K6Wiz1xN7GQobFBDvwjYth98PaWzz2StfLEijXVxgd0ai01lNQduJdItoH0rY7mNOM
+         Z4mrBiVTJmVQ1bhYdDEbWXIJ66Owovkmmi0H8qeuN8Y0ZrXJymDGgS7Wt3tFcfVO7Mn/
+         ky/qEi9xlbfRbqU2rEMwa0pGjc68SLAfpjgpemuUG99osK0OuczkdeMv5ejwGqCOPivU
+         my88SK+ooURsBq+1kLvPZxDAvSnQw302cdQcqHytJ8DqambTc5TMyfuunxoXIS97/8Xs
+         RekQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793893150; x=1794497950;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Z5K5hANiP4hKvDWgB+1UuOsMTO32b8ekKek1eVxjOKw=;
+        b=SYzVAUwL5mlMmvLMvkdUKj4ZfmPVL67UxO0qwFoGWpqKvyyEQ9TH6N795BYYkczhj6
+         ugBDRHAhj8W7DoY+sXQ7R+rFqRO/SfbkKhV94XMmenXlvHEtr5oPeKvL86oV2nEf/Zxd
+         DdY/o11jSLcQKPQrFdMTyEa0paVmY58Db65YN99SUu01bRIW+aAHnRyzB8RSHoMuhK2W
+         w60H9G1L8h9OiiH2zZq8tvPVnQjD4HMK7+EPtsuag69Jj900Q8pVEkMDlKLomTG2VA+W
+         2YSeWytifnNqzZ8N7hyVmA6SzsDm7CqqGYApAJZFn0qmPl9pwIlmx9mj+uHJrYdRxYHL
+         B90Q==
+X-Forwarded-Encrypted: i=1; AKwUvBx0mSeZaZCdACxfLAmIasrgk9/NZGsUT337so8ApNti3fLv1WSfeOskpyca7eugLcS+2T0nO/CWeivemCpP@vger.kernel.org
+X-Gm-Message-State: APuU4Z9I/CQpTZvStvdrQfvX5ld5HQ5j/rzpZ6IN/5DNgdIKgg6cyGD4
+	/Id7uhowoLSB3F2tH8ISWzK3eUh9W4rpJgWrMlcusmt2Nf5dKtCmY3D5HpR/uQWcPEo=
+X-Gm-Gg: AYBFou3eDCZM/fgSv/XM4GUXAu6qwYlvEWgo/KVOmGkAneLMwPrIxHyYeaAGy1yNFhq
+	AJptqB59HfFjUhuvPL7pjZHAyKV+3dSAAZ1l0Ejd6bFbdQ1tAVgcbaR2U27CbYw/HCnX/rM0K5u
+	ixtrRs+pySnPvH3Wd7XRtOQ5piNWoC5N6PCtnIBe9kw/Mbfw3NCQ8x+WbJQ+z2wOmxDBU9WdBg7
+	2cRKASARkwqkWXM0+4EApwJiUe/Kx04D4rT4CSjmRsWyn+i7JLANrGsMplf0XmiDLEDy2m9XziI
+	CTIebHF9PkxSzrnVfaharu1LzP06CaQs6/E3HvEefdJMsstgO9YMvo0bcMezTzO2tC6cgHX2s7Z
+	0XutaO4HUts74bZlDg9stve8HqwykoNWDoq6cqVR3Hrw1VP4+sqM1XhP3p3Qx+Vjydl9yrTdh2T
+	W6KpsW85TlpQMwyiPaD/pFoX/z4HkjAEX5csruqkBcX8CuZiGZGro5zI/adNc9qvf43sqa5fBpP
+	dnIHG4nuOF/a/3BdFXC2140fb0j5ip0fLnFRaNotYhy5RBlwmmrQpm4wN8lYz630Zx4tE3El4my
+	vuUUFqMJndUj3pUap/aXAGsUnd6wv5PjJT2b0eflFJY/u5rRgLqngZ21nybiMxIuBBZrcRRFXiI
+	UaCGnLna2bQpZvqyUuJw1R5Tvv00=
+X-Received: by 2002:a05:6512:4041:b0:5bf:a48b:7807 with SMTP id 2adb3069b0e04-5bfd952024bmr6876236e87.1.1793893150208;
+        Thu, 05 Nov 2026 07:39:10 -0800 (PST)
+Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bff9a660b0sm485831e87.11.2026.11.05.07.39.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 07:39:09 -0800 (PST)
+Message-ID: <4d656385-fd3b-426d-b326-b1d20ba1e2d7@linaro.org>
+Date: Thu, 5 Nov 2026 17:39:09 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,88 +91,101 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="2ahiyus6jckmdxu2"
-Content-Disposition: inline
-In-Reply-To: <auyQEVmA2KeGu9DL@ashevche-desk.local>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] dt-bindings: media: qcom,glymur-camss: Use CSIPHY
+ indices for ports
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Suresh Vankadara <svankada@qti.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>
+References: <20261102-glymur_camss-v1-0-fcb619fc7319@oss.qualcomm.com>
+ <20261102-glymur_camss-v1-1-fcb619fc7319@oss.qualcomm.com>
+ <20261104-real-nebulous-ostrich-017e92@quoll>
+ <72064a9a-1b2e-4c24-99e2-2cc15a8dd7f1@oss.qualcomm.com>
+ <a2d3190f-bfd1-4548-aba9-a186cfea878b@kernel.org>
+ <c5af7192-c923-4fbc-bbfc-7f03e310fddb@oss.qualcomm.com>
+ <fc9acaf2-f214-434e-bbe1-88e8e1af7683@kernel.org>
+ <539842db-c672-4549-b861-4a6f3be47556@oss.qualcomm.com>
+ <d586b7b3-675d-48a8-b0d4-564e571ef69f@kernel.org>
+ <CAFEp6-25QrLAF=-KgGJ-rC9pDpGa2YgoQAMKxU-FoByu2CJpMw@mail.gmail.com>
+ <1db9bf48-01d8-44fe-8dd2-7a3c84ecc556@kernel.org>
+ <CAFEp6-1fSPP41cVFmu8=0z2xibDpHuH5Lxrw7W_rvnt+Fw9EpA@mail.gmail.com>
+ <62fba00d-831c-44cc-8d3e-083a95abfbe8@kernel.org>
+ <CAFEp6-2_opRq3pj6S=2nDFxXBv0waeyGBKSxp3t8OOe6vvKcoQ@mail.gmail.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <CAFEp6-2_opRq3pj6S=2nDFxXBv0waeyGBKSxp3t8OOe6vvKcoQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+On 11/5/26 16:01, Loic Poulain wrote:
+> On Thu, Nov 5, 2026 at 2:21 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>>
+>> On 05/11/2026 13:04, Loic Poulain wrote:
+>>> On Thu, Nov 5, 2026 at 11:45 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>>>>
+>>>> On 05/11/2026 10:53, Loic Poulain wrote:
+>>>>> So some chipsets share the same IP blocks, with some block/phy
+>>>>> instances disabled. As a result, we need to decide whether we're
+>>>>> numbering based on active instances or on the actual hardware instance
+>>>>> index/offset. If we use active-instance numbering, then yes, it should
+>>>>> be @2 (CSIPHY4 being the third active instance). Alternatively, if the
+>>>>> port numbering is intended to reflect the hardware instance offset,
+>>>>> matching the register prop, then @4 would be more appropriate. It also
+>>>>> has the advantage of directly identifying the underlying hardware
+>>>>> instance, without requiring any additional driver-side mapping. In any
+>>>>> case, @3 is incorrect.
+>>>>>
+>>>>> That said, since the bindings have already been merged in its current
+>>>>> form, we'll need to preserve backward compatibility when addressing
+>>>>> this.
+>>>>
+>>>> This is the input port to camss, so how is it called in camss, not the
+>>>> csi phy?
+>>>
+>>> The CSIPHYs are connected to the CAMSS input ports, which can then be
+>>> multiplexed and routed to different CSIDs. The mux identifies its PHY
+>>> inputs using the hardware PHY IDs, so the CSIPHY4 is identified as the
+>>> CAMSS PHY4 input. In this configuration, PHY2 and PHY3 inputs are not
+>>> connected.
+>>
+>> I could not find that information in Glymur HPG, but maybe I looked
+>> wrong. CSID Wrapper lists CSID 0-2, not 0, 1 and 4, but again maybe I am
+>> looking at wrong device description/interface...
+> 
+> Yes, there are three CSIDs (CSID0-2) and two CSID_LITEs
+> (CSID_LITE0-1). These blocks select the PHY source to be routed by
+> programming their PHY ID (PHY ID = PHY index + 1), as defined by the
+> PHY_NUM_SEL field in CSI2_RX_CFG0.
+> 
+> If the CAMSS port ID matches the PHY index, the port ID can be used
+> directly as a routing reference, which keeps the implementation
+> straightforward.
+> 
+> Alternatively, exposing logical port IDs such as { 0, 1, 2 } also
+> makes sense. In that case, the driver would simply maintain an
+> internal mapping table, for example mapping DT/logical ports { 0, 1, 2
+> } to PHY indices { 0, 1, 4 }. As long as we establish and document the
+> convention, either approach should work fine.
+> 
+> Today, the Glymur bindings define DT ports { 0, 1, 3 } to map to PHY
+> indices { 0, 1, 4 }. One could argue that this is already an
+> established convention, as it is documented in the bindings. However,
+> it is somewhat confusing.
+> 
 
---2ahiyus6jckmdxu2
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
-MIME-Version: 1.0
+I believe it should be fine to have incontiguous port indices, because
+there is no need to link unused phys to CAMSS on any particular board,
+therefore there will be unavoidable "holes", and this can be set right
+in the documentation of CSIPHY to CAMSS connection.
 
-On Thu, Nov 05, 2026 at 04:17:53PM +0200, Andy Shevchenko wrote:
-> On Thu, Nov 05, 2026 at 01:28:46PM +0100, Thierry Reding wrote:
-> > On Mon, Nov 02, 2026 at 12:54:48PM -0500, Frank.Li@oss.nxp.com wrote:
-> > >=20
-> > > Replace open-coded assignments to callback and callback_param fields
-> > > of struct dma_async_tx_descriptor with calls to the
-> > > dmaengine_desc_set_callback() helper across serial drivers.
-> > >=20
-> > > No functional change intended. Prepare to make struct
-> > > dma_async_tx_descriptor private to the DMA engine.
-> > >=20
-> > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> > > ---
-> > >  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
-> > >  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
-> > >  drivers/tty/serial/8250/8250_omap.c | 6 ++----
-> > >  drivers/tty/serial/amba-pl011.c     | 6 ++----
-> > >  drivers/tty/serial/atmel_serial.c   | 6 ++----
-> > >  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
-> > >  drivers/tty/serial/imx.c            | 6 ++----
-> > >  drivers/tty/serial/msm_serial.c     | 6 ++----
-> > >  drivers/tty/serial/mxs-auart.c      | 6 ++----
-> > >  drivers/tty/serial/pch_uart.c       | 6 ++----
-> > >  drivers/tty/serial/samsung_tty.c    | 6 ++----
-> > >  drivers/tty/serial/serial-tegra.c   | 6 ++----
-> > >  drivers/tty/serial/sh-sci.c         | 9 +++------
-> > >  drivers/tty/serial/sprd_serial.c    | 3 +--
-> > >  drivers/tty/serial/stm32-usart.c    | 6 ++----
-> > >  15 files changed, 29 insertions(+), 58 deletions(-)
-> >=20
-> > Reviewed-by: Thierry Reding <treding@nvidia.com>
->=20
-> Krzysztof, now look at this case. I would argue that this is even less fi=
-t than
-> # subpart(s) case, because it might imply anything. Again the problem is =
-the
-> bundle, and for such a case (when tons of independent changes are bundled=
- in
-> the same stuff, *every* Rb tag has to be explained on what has been revie=
-wed!
-
-It may be a bit subtle, but the placement of the tag indicates that it
-applies to the entirety of the changes. I didn't crop the list of
-changed files, nor did I omit the summary.
-
-That bit of meta-data obviously isn't picked up into the tag line, but
-I think the default meaning of Reviewed-by is that it applies to the
-entire thing.
-
-Thierry
-
---2ahiyus6jckmdxu2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrsooYACgkQ3SOs138+
-s6HsEBAAvgrbYKAHxYaotfiffEkaiu5bekj96h6z+cilejnIbjAQULN3YB/vJgMw
-989E+Tc9xOUp2VZUOGlEURoAZlx2VASTX17Z9qMdAMBvAU9JaaRRR3lgg3DBe9P8
-nesEI+jXi55+OB8tZg5FthLgQGbxy/lM0Nqch6aZbmT6leB70s5h6lYrHeoafCtw
-3qy76KmxowG5jx/CIQHQhUhC5jMsTFlqoX/6YoC2ps0L2dinYqON9TEhN+ljs0hp
-kYmyPE4g1QaXGk2sUrrCM18iLOxjNtJwNspmndfkUP8T1v6qexGmSJXeQMAF6Hsx
-Mb47ov4M1dpeFP4TcXghlmJdCbDQyO6Z+SDMzMOO33UdOkC+MrSb8P8yuN4QD909
-Dw/3qIapRxlrxhIkmd+dihmne+1irCgEMuTqpJful+lMYOWQ2yESoE+G9u9fJHDI
-wL7sTTrtCEMAl2oaO6xtAmaV6/FHFgCG8vCMM1QVg6zuSGk3mTW3qQbRO5ginzwk
-tAxKdIbWeU0RQoXINwh24JoAQs+rswnGgFUBvl+XZpNgnp7NOs2DrvC1uueuxtvB
-1s57F8cZLIwxAMhmnBNKuTiu8YGNEwNGVQpoCBDvvdTohhssdav1DaP462lhmVfh
-aLHhfjTv/1wqXk95lqVM51sm3ytRti+1p0zjyqZN0Hm+p3vnZX8=
-=tFls
------END PGP SIGNATURE-----
-
---2ahiyus6jckmdxu2--
+-- 
+Best wishes,
+Vladimir
