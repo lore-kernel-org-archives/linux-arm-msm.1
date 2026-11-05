@@ -1,64 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.207.19.206
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=115.124.28.196
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793846396;
-	b=lKh+BSXX1ixadR/HlypUASdds+PaY2Wbbi6eefBb97tAPcyxYldZ1qotQaPmauy9mZpK
-	 e5WBUnx+2iFsfXwKGsNzdDc7SxUNhkkGCxSNY7I8quJ8auhkczvoj0l0bZ/zSgIrj2yOn
-	 kQGyL35/FHeYDYEVEC3Kd0GWm0UhW5cgXWaXVyd5RLqEvPUKSQVJpvZZEIg5070zffxZL
-	 9b9A4PR24oXpnWg7ptDcug4PLUBoj54jKBOOtpyMhkE9Q4/xB4jNn7NH21bK2efEtLXqs
-	 uyG5udtD8vozBzm03rIs7uEDABiRjyk9Cq8BGLq3mkkmldpxNtYZ1B4aY+vQ9Y6PHZA==
+	t=1793851312;
+	b=tdUZ3c3cylaN8vFRu/JGwH6Zn1I8Pc1ocsVdp9eZlGcHyE7cSGGR+qK6QEEbi2zu6AOJ
+	 2C5fOoS57+Qx2dDDk2RE0GMmVoxknpPeBS3R3CJYYIs20dAPf8b0Z0twPiXtd6KYE5Ldv
+	 sXwK3hcjLwolETRJNIUoX2xo/r/BfHz4GUZmnmk80lvwnADtb/qY1NUoYYqiBYqoyVyqQ
+	 m7JCL6ERdvolWWME7wXV6D/gskuoaDLpgRE6g3NvYCc17V/JEH/I1RBuoS8lFH/CyGl4S
+	 821smvyEqcgwR9AKnKf01PkMM1VRcTg+bp5aVnOAS8FpECE/OLvBB88+mma8dTVcV6Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793846396;
-	h=DMARC-Filter:DKIM-Signature:X-QQ-mid:X-QQ-Originating-IP:Received:
-	 X-QQ-SSF:X-QQ-GoodBg:X-BIZMAIL-ID:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:
-	 X-QQ-XMRINFO:X-QQ-RECHKSPAM;
-	bh=8nHg2KK9YdUFsDyCN5OyhUk3RMp8EQBW/fDZ8x8OirA=;
-	b=rouLDyJW6sARch/X+qQtQwnOVTYhzvLYt8PGT4G1OtQkaKwwrME90xifot7DqXO0Qv/z
-	 kDtdeXzFkgsgsVbSzfSzD3LkY9mdC1fyN2jdmOgmJDKWyyCNgVn47ejfXoOWWYBx22YFp
-	 iPKfSXSuSfFKJNXf4NUcUp2GPsgZxIIwDFVVk8ShI5fKbQmJQverZXBnIx/n9xD8WyNPz
-	 rN2XwOuyt4Qova/Q66Xp7W/HDmk8MNgxTG/uVgu699xJWJpSKcqLcSVaFGXZyT/0SoeFV
-	 QMJP4YF9kUyRTWlHyYTiNpfzIZlpC6S1vrafQJY0eBHO/2CAKl0EyTiXKO5wjNzQX+Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793851312;
+	h=DMARC-Filter:DKIM-Signature:X-Alimail-AntiSpam:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=G+1XhpDMLS3N8b4rxkcQ6ba1FdRhZrMu8bFDnS6EmY0=;
+	b=zmkGsTRrvMx6xUTDhMDLmk1/bqIZ9AnR7tlK6rouLzlX4nv2g4799Q2QEl6/D9u42VRl
+	 MOXgsRk2yv5vHJciMo0RqM2e4fgvnDGa3eL1CnzuqIbhD7tjSTZuJA9o2JXNn6CvxlHON
+	 mhjnyktDq1ju/xjhU4VLf1SS1zvEfWpkG82mVDgi4Y0y/4tyx7u4n7XRcy+i3h4mUAjEY
+	 hwNJAJjazTBLcv3KmKXfxqrvI2JbrZuoVMLgjYVrSzl6ll+jmP4LxMATD7oB8UgncmgXg
+	 opyj5i6NCWhmeeA7e8gOdSZ+blaiMDiGX0oiqYfKjEYIaO80YGQl86WDcAr/zrogo4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=linux.spacemit.com;
-	spf=none smtp.mailfrom=linux.spacemit.com;
-	dkim=pass header.d=linux.spacemit.com header.i=@linux.spacemit.com header.a=rsa-sha256 header.s=mxsw2412 header.b=Nqz4+xih;
-	arc=none smtp.remote-ip=54.207.19.206
-Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=none header.from=xiaopeng.com;
+	spf=pass smtp.mailfrom=xiaopeng.com;
+	dkim=pass header.d=xiaopeng.com header.i=@xiaopeng.com header.a=rsa-sha256 header.s=default header.b=FZcfmIsH;
+	arc=none smtp.remote-ip=115.124.28.196
+Received: from out28-196.mail.aliyun.com (out28-196.mail.aliyun.com [115.124.28.196])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDA82606A31B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 02:39:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CDA82606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux.spacemit.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.spacemit.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83383606A326;
+	Thu,  5 Nov 2026 04:01:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 83383606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xiaopeng.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.spacemit.com header.i=@linux.spacemit.com header.a=rsa-sha256 header.s=mxsw2412 header.b=Nqz4+xih
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.spacemit.com;
-	s=mxsw2412; t=1793846386;
-	bh=8nHg2KK9YdUFsDyCN5OyhUk3RMp8EQBW/fDZ8x8OirA=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To;
-	b=Nqz4+xihSRA/SOazc9ytMPaaon6hM2Zpa/k876GDLA/rAvSdmROK7bgusiNH5yJRm
-	 MxDa4YviOx4vP5CKZmEuJc3kfvwqLKu/L2OohyPYk21mJnJpm1Y7KU5OpOGkVf3+ti
-	 zev+B3KBBNrXf3bQvlO8tLbPTEvcdSoXebx80EGI=
-X-QQ-mid: zesmtpgz3t1793846385tc3e42d85
-X-QQ-Originating-IP: Y/lf91m3+kHsq0ivbBPh4MQNPsyUfRakOYukFfLZUOY=
-Received: from mail-pg1-f174.google.com ( [209.85.215.174])
-	by bizesmtp.qq.com (ESMTP) with SMTP id 0
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 10:39:43 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 4827102102613573879
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc1bc88a20eso959048a12.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 18:39:44 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvBzb0faRqW0EqE45gBwk2tbq7A1yGknFtSozOUq8MhCAHqnlBxd9s82EscwJ3Tm1FaWEjvuwNLTmMBFDlIF3@vger.kernel.org
-X-Gm-Message-State: APuU4Z8I+2TG+f8ZlRuRP0RBfvI9z1lw5APwRECNEDIdJSOGtFfdsn0K
-	s+bXtcLlhRCQa6DFW3ZtolcArCgCmODQe+nIXpO2B2x+g3syfJerXcfeh8oFR+aOMg/UwcAG6yf
-	jwjufQiD0/UhapYbmZcD10T0vsmirB+Y=
-X-Received: by 2002:a17:90b:562d:b0:3ad:a462:f07f with SMTP id
- 98e67ed59e1d1-3ae8982c1ffmr16206466a91.45.1793846382617; Wed, 04 Nov 2026
- 18:39:42 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=xiaopeng.com header.i=@xiaopeng.com header.a=rsa-sha256 header.s=default header.b=FZcfmIsH
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xiaopeng.com; s=default;
+	t=1793851301; h=From:To:Subject:Date:Message-ID:MIME-Version;
+	bh=G+1XhpDMLS3N8b4rxkcQ6ba1FdRhZrMu8bFDnS6EmY0=;
+	b=FZcfmIsHWVcYiS7W3YOaaq4pBuRc2IsMOeDa/PRdVd4vb0mL24BeyOszH6AcroAkwGMBcj7zkOaSHdcFENlvel8xqQirzQxAisdQIgBlG/j7O5lz0IrR8pkQfnUeQYOH5T3iZ+9PxFLlKCnhE9sja984YfZuwSqBz28aNnMCn+o=
+X-Alimail-AntiSpam:AC=CONTINUE;BC=0.08232305|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.0173496-0.00129538-0.981355;FP=13138174583549466298|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033037028158;MF=zhugl3@xiaopeng.com;NM=1;PH=DS;RN=8;RT=8;SR=0;TI=SMTPD_---.jxHFe1Q_1793851300;
+Received: from DESKTOP-UL5U09E.xiaopeng.local(mailfrom:zhugl3@xiaopeng.com fp:SMTPD_---.jxHFe1Q_1793851300 cluster:ay29)
+          by smtp.aliyun-inc.com;
+          Thu, 05 Nov 2026 12:01:41 +0800
+From: Guanglei Zhu <zhugl3@xiaopeng.com>
+To: Maximilian Luz <luzmaximilian@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	zhugl3@xiaopeng.com,
+	Weibin Liu <liuwb@xiaopeng.com>,
+	stable@vger.kernel.org
+Subject: [PATCH] firmware: qcom: uefisecapp: Fix GetNextVariableName overflow
+Date: Thu,  5 Nov 2026 12:01:40 +0800
+Message-ID: <20261105040140.66496-1-zhugl3@xiaopeng.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,104 +64,70 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261102135330.2493332-1-robh@kernel.org>
-In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
-From: Chunyan Zhang <chunyan.zhang@linux.spacemit.com>
-Date: Thu, 5 Nov 2026 10:39:06 +0800
-X-Gmail-Original-Message-ID: <872B2B4EAE847E62+CAAfSe-uD=s0RpuqQ_h+_fErcEC+G=N_LA6e=p_sXJ=iG7jMc3Q@mail.gmail.com>
-X-Gm-Features: AclHuK-lEE7dv-iC1Lsio6aPGOufL5hgelB1hFojisk2-zoMsjC0hhsp9HraOXA
-Message-ID: <CAAfSe-uD=s0RpuqQ_h+_fErcEC+G=N_LA6e=p_sXJ=iG7jMc3Q@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-To: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
-	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, Jiri Pirko <jiri@resnulli.us>, 
-	Ivan Vecera <ivecera@redhat.com>, Benson Leung <bleung@chromium.org>, 
-	Guenter Roeck <groeck@chromium.org>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, Jonathan Cameron <jic23@kernel.org>, 
-	David Lechner <dlechner@baylibre.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	Andy Shevchenko <andy@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Olivier Moysan <olivier.moysan@foss.st.com>, 
-	Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
-	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Hans Ulli Kroll <ulli.kroll@googlemail.com>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Ray Jui <rjui@broadcom.com>, 
-	Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, Masami Hiramatsu <mhiramat@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
-	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Chanh Nguyen <chanh@os.amperecomputing.com>, Alistair Francis <alistair@alistair23.me>, 
-	Julius Werner <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>, 
-	Dmitry Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, 
-	Thierry Reding <thierry.reding@gmail.com>, Ray Jui <ray.jui@broadcom.com>, 
-	Scott Branden <scott.branden@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
-	chrome-platform@lists.linux.dev, linux-gpio@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-sound@vger.kernel.org, 
-	linux-input@vger.kernel.org, linux-tegra@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org, 
-	linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:linux.spacemit.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: MRiafWprHMtCy62Sgic98fP4NMhIJAe5OEG2qKF9uB0HOXLCELeGeXB+
-	w2JL1vBnsWwiF9P3aGvR0dkHo1sqKpPSP50bKyc5TO7M4aN9QiVFVRaPtBk4Ekn/izTCL6M
-	BjBEzouQDsBOXlTG5jYIksXS+tMAQO0UMEEfD9M1lct5aXf2829Z9TxhOtDUUykcH17PvB9
-	g0J/wjA2W/GPcQComNTFIS+eod28t7Z9wQqvXSqLa4LLi6VSdbI/UXNhbfF9VDnoyWmFqOB
-	qBavfVHXZjbAYmk/LZXO1R0CZT4OBcPElZD+3ryasxsM1Z8TYXOxFK2jcS0LqmNUauXjZlA
-	jTDEoQBy2UVsT0O92KS0+NTLlpjuDzU6hMgdHflMwtUUyNAphgvq8yxdS7i3U57dX6ry3Jm
-	eFWToisNmpxiA2BjP+9+1YrF5DqeLWIfLIOTpFXes9IBV5I8oq46Z4e6HGZKP95xCJAPbyF
-	ubY7AgVzKMAtb2E8Ey/VrpQaIq3ABpNg2UYD0t4oPmZbDpqRUJR61e9FZhp2yYxlCtHD0Z4
-	+RT7r6Ug9mhuJroc/v4LcDuJRNh1xbKYBlyj0gFuQvTzlCDSUSdKog/0l6PEC9AtemkqqZU
-	quZiDrJAdJjBFTz66pIrcDsFaqWpUH+HETmSSYo9OFvBRX1OYdPhZdSCypV7qLyM+86hD0B
-	bgXkSb1vbyqvZJTujVmkYXAH3yX8YtHB3lez58EPyDq2q4eQ8dM4aHALYko8BU0EG5gayUN
-	ji2KgLVai/HRovapiAUUYYAMD6ixIkCLy82h6GVw19fzXL69ugwIKo/OSmRnGUX4rWBAhqs
-	FBJieNae2zW1cJ32yDKsX5buBy8J5/b/2mngs1BD9FoaX073sO0VIimRosNJXde2yliy84Z
-	GPdOdr+h7lvkc+yF6EtKd64L2tl0sJVOhsi59ggt4FPUYrVhUUfUkKH4R3r4pXpMuAw+mIi
-	3TzRhpv1UTIh5z2rBZyPNN/c7p3pM3kcwqxSRz7w7utG/UE4lIiGBF0vvRI4wD8izXewYyY
-	Fwk8soakNShxwSJlvJKarOTb0tnqsdnLe0cO6I5A==
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
-X-QQ-RECHKSPAM: 0
+Content-Transfer-Encoding: 8bit
 
-On Mon, 2 Nov 2026 at 21:53, Rob Herring (Arm) <robh@kernel.org> wrote:
->
-> Unit-addresses by default (and most commonly) are hexadecimal. There's a
-> number of cases using decimal patterns. Fix all of them, limiting the
-> pattern to match the 'reg' limits if there are any.
->
-> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
-> ---
+From: Weibin Liu <liuwb@xiaopeng.com>
 
-[snip]
+qsee_uefi_get_next_variable() checks both variable-sized parameters of
+the response before using them:
 
-> diff --git a/Documentation/devicetree/bindings/thermal/sprd-thermal.yaml b/Documentation/devicetree/bindings/thermal/sprd-thermal.yaml
-> index afa551f6185f..222d70baef1e 100644
-> --- a/Documentation/devicetree/bindings/thermal/sprd-thermal.yaml
-> +++ b/Documentation/devicetree/bindings/thermal/sprd-thermal.yaml
-> @@ -47,7 +47,7 @@ properties:
->      const: 0
->
->  patternProperties:
-> -  "^([a-z]*-)?sensor(-section)?@[0-9]+$":
-> +  "^([a-z]*-)?sensor(-section)?@[0-9a-f]+$":
+	if (rsp_data->name_offset + rsp_data->name_size > rsp_data->length)
+		return EFI_DEVICE_ERROR;
 
-Reviewed-by: Chunyan Zhang <zhang.lyra@gmail.com>
+	if (rsp_data->guid_offset + rsp_data->guid_size > rsp_data->length)
+		return EFI_DEVICE_ERROR;
 
-Thanks,
-Chunyan
+Every operand is a u32 taken from the response buffer, so both sums are
+computed modulo 2^32.  A response with name_offset = 0xFFFFF000 and
+name_size = 0x2000 wraps around to zero and passes the check; the same
+holds for guid_offset and guid_size.  The name then reaches
+ucs2_strscpy() as a source pointer far outside the response buffer,
+which reads until it finds a NUL or exhausts the count, and the GUID is
+copied from such a pointer as well.
+
+Because wrapping around requires the offset itself to be huge, the read
+lands in unmapped memory and faults, taking the kernel down; if the
+address happens to be mapped, kernel memory ends up in the caller's
+name or GUID buffer.
+
+Rewrite both checks without an addition: reject the offset first when
+it is larger than length, then compare the size against the room that
+is left, which cannot overflow.
+
+Fixes: 759e7a2b62eb ("firmware: Add support for Qualcomm UEFI Secure Application")
+Cc: stable@vger.kernel.org
+Signed-off-by: Weibin Liu <liuwb@xiaopeng.com>
+---
+
+Verified the wraparound with a userspace replica of the response
+parsing: name_offset = 0xfffff000 with name_size = 0x1100 passes
+the old check (the sum wraps to 0x100 == length) and faults in
+ucs2_strscpy(); with the offset landing on mapped memory instead,
+the content of a page roughly 3 GiB past the response buffer ends
+up in the caller's name buffer.
+
+ drivers/firmware/qcom/qcom_qseecom_uefisecapp.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/firmware/qcom/qcom_qseecom_uefisecapp.c b/drivers/firmware/qcom/qcom_qseecom_uefisecapp.c
+index 0dda09ad156a..2c8f6dfc23b6 100644
+--- a/drivers/firmware/qcom/qcom_qseecom_uefisecapp.c
++++ b/drivers/firmware/qcom/qcom_qseecom_uefisecapp.c
+@@ -605,10 +605,12 @@ static efi_status_t qsee_uefi_get_next_variable(struct qcuefi_client *qcuefi,
+ 	if (rsp_data->length > rsp_size)
+ 		return EFI_DEVICE_ERROR;
+ 
+-	if (rsp_data->name_offset + rsp_data->name_size > rsp_data->length)
++	if (rsp_data->name_offset > rsp_data->length ||
++	    rsp_data->name_size > rsp_data->length - rsp_data->name_offset)
+ 		return EFI_DEVICE_ERROR;
+ 
+-	if (rsp_data->guid_offset + rsp_data->guid_size > rsp_data->length)
++	if (rsp_data->guid_offset > rsp_data->length ||
++	    rsp_data->guid_size > rsp_data->length - rsp_data->guid_offset)
+ 		return EFI_DEVICE_ERROR;
+ 
+ 	if (rsp_data->name_size > *name_size) {
+-- 
+2.50.1
+
