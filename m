@@ -1,87 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793890099;
-	b=hC4HtSJg+0KduMnG5o4KFt4ApOZKe7JE15PLBihCujGjcfJPKh75k8ALKmYXiOqcQCtT
-	 xXPjZ1b0mtfqTvqA5zrPAo317zc7bhv0ydnrY7pFCsDXR5PvdRnMyHXP3TuoNNPN8oZRe
-	 +rDuDiyYXpZhX7sDP8lHkDNW9/crCNzIn4TQy00Ll6hs/uBdM047zA6FI6b8V1ciYeLY4
-	 WJUoK0ibMT2fA+GdJyvQ8edbjTUwUzXfs7RlAwJpOV0wrtr5V/EB9GGHFMSz26JybcfHJ
-	 JuIthA6JaTQ+KGIcPPkDBRacvhDOIg50V+P4toQNecyMVTkT/9x8OqkwJf1jlhQl7HQ==
+	t=1793890174;
+	b=FQHrDOfDa7rDhvB1uEa5ipi5O7flxPfs1KxtguA2L907bwJ5N1kvIliycuD+24P4d0Ms
+	 WVQkBJTjZ6iwrzLaLyKyYWH5aBOqNnkLSaEyMKiBAnT3p4rjaKhrTskqRslXK3EYp2zz5
+	 fgR2/2rB/xCc2tgKtFacm8rnkNvZ96KJOoUX1OEkyq59NkLeagd2TvQoeQsPelwW5JP0q
+	 VhMzh+7qhHsFeiEN9xZbjBURunQmtu+orpGm4QRIlmxAu9SPJtbrq1XqdwF+34zk2dvJh
+	 L3pg2Sh+0L3uGpYNJ+hMuK/yY3/rbkEC4/Js3KB5oN+mIf9fJTRlCCuEbXBxPuJ12Ew==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793890099;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=MsO2aG0141ZrdGAbf2ydyyxEU1QXOxGGyUGumfu2Qq0=;
-	b=KWcGWq11HuldMtb27R9Z/ppgxWvvhUvN62XCOSZhay0LSSRxc78alwKwi/xd+w9iBYEf
-	 IuwGWY0pOHlhPnRIVahAWqt4QMGo1UohEZGOuPz29UbuOYhphe1qq20ZNyc4Ehov6bPuE
-	 Gkmtp/BkK+N1oE0HxoVlNpH28DNvlbuY9/qupiPaKW7nuEbEMgoVtd2YyiF42IfefcEkm
-	 FEiMtP0eq/FmsV8qH4aLAt4+HsjWUQ+C17wBMU8Wx4wEv7Z0lTT7gI64OzsxckZL0r9zG
-	 SZCUWRFVRkRTVK0s2eSAhkh3LIuPFOm1jYtPdNG44mNbwNe8rLy6oYX5mBo9Y52xPrA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793890174;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Om0tcSZNhZ5lOUlggnaxDt40uTNRQpeANYB2F5Pi83A=;
+	b=Oif1gp1GEnylPiW75Z511rwgsRqYQY4lRZj0Q9+ihHKdPOrT/7AJ0ptvaStoJLNa0qZk
+	 GaYaFZe33bp213IsuIWLcYMSQlKqAHjKDqJVsdCNo7PfwDGZHquAsktSK4k0R78gml7ef
+	 3/oA+ZDULE2gvs8ZjOXXvdY7DQKGwTnYk5CCQM6/vYLosvb1PsKT0PuHLkNdWGQvzIA6a
+	 Apf+kWXc7FqGXVloDN1rYuq0eISApPpKAsXe0E5HVHEmdYIFpL1a4EWt6+auBtYCRh0GE
+	 /saQgr6uf9KAZcDdF7V8q4/sfT6yCdVMG8VcCeWFI6/LbqyXp9nUOQbRKbygmm+U5DA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=nmcrWoB7;
-	arc=none smtp.remote-ip=192.198.163.13
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OxV2lkRh;
+	arc=none smtp.remote-ip=209.85.128.45
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C61B5606A326;
-	Thu,  5 Nov 2026 14:48:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C61B5606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 030E3606A328
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 14:49:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 030E3606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=nmcrWoB7
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793890098; x=1825426098;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=8+JLIQ6kVT4MrWwDMC0FkRxfkecYUWb5o4t4E5UKHQ8=;
-  b=nmcrWoB7K1wsyU9sFLl8yyQjNLnm26wVKdgajK21THlN/8nc6LfBy6ho
-   GnfUkTi5w2vJ0B2LExSPEcKkUvoV+xa1k15qb9Z9MJPX279+6hx5nyOH4
-   G3VpK2XsmYTyG07zo/aGEIEMSAZXKHbYxN/4vCreybT7YTcHgqmC+PW/1
-   bXzH7AKJbCW0Shc7XvccEiG6xxyznfGxIJLSFUxiqLgZWNWXziXv+LUxE
-   3M1DzCEB8hJPddB9l3zASSqpvz3nfBue1cA7m1q47Yo83Yyph5FLa2IwG
-   JJJ+KfU/ntkyJF6sLlcjRyl9FDrPMm88mFo8J34sJW7sYMVfDYBveArUD
-   A==;
-X-CSE-ConnectionGUID: z/XyJZJnQaiHeBpAMbTjGw==
-X-CSE-MsgGUID: 4TE00ZS/RrqJ7Vac5bCIuA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11957"; a="2674354"
-X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="2674354"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 06:48:18 -0800
-X-CSE-ConnectionGUID: Q0J3K6OZROyPZm07udyoFQ==
-X-CSE-MsgGUID: /8V/zFtHTwepTxLjhYLTmA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="7033037"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa002.jf.intel.com with ESMTP; 05 Nov 2026 06:48:12 -0800
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xOyl7-00000000mL9-1tc1;
-	Thu, 05 Nov 2026 14:48:09 +0000
-Date: Thu, 5 Nov 2026 22:47:11 +0800
-From: kernel test robot <lkp@intel.com>
-To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	alexandre.belloni@bootlin.com, Frank.Li@nxp.com, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org, shubhrajyoti.datta@amd.com,
-	shubhamsanjay.patil@amd.com, adrian.hunter@intel.com,
-	manikanta.guntupalli@amd.com, linux-i3c@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, jarkko.nikula@linux.intel.com,
-	wsa+renesas@sang-engineering.com, alok.a.tiwari@oracle.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	konrad.dybcio@oss.qualcomm.com, andersson@kernel.org,
-	jyothi.seerapu@oss.qualcomm.com, viken.dadhaniya@oss.qualcomm.com,
-	aniket.randive@oss.qualcomm.com, praveen.talari@oss.qualcomm.com
-Subject: Re: [PATCH v7 2/3] i3c: master: Add Qualcomm I3C controller driver
-Message-ID: <202611052242.iJ7HMqUH-lkp@intel.com>
-References: <20261104111610.3739095-2-mukesh.savaliya@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OxV2lkRh
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a35ac4475dso13651285e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 06:49:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793890171; x=1794494971; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Om0tcSZNhZ5lOUlggnaxDt40uTNRQpeANYB2F5Pi83A=;
+        b=OxV2lkRhk0C0TAO6rN7Z6hKEHmcuG3z7lblZ6BAeXcdGdhxfPtIsTrrTLyoBf8mX9h
+         bsf9ewoi+eyF8RgAYLuAL9zrbWAiPVXk/61pfnNmZZf4l5k8wW57vsQz2pHYof5P45M7
+         UM+yiwAiohv1D4Afb3JF+cnuAw0OwINRvK6KQ03FdSAcNMK/sQnKoe7Zkpa4jeK2RESF
+         tHeQZZQstnEYt3KtTFgg2WuDGMVlEf8XxhmJKJx3Cn9ng1SReOwQdlA2p+bcmdz6eSyv
+         f8WJcsqYkouW6OqvEMbwMsEsdd7AIE2QXvuIov6rB4iXhwTiEg8FuhJ8FQb75d2su6nQ
+         8a/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793890171; x=1794494971;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Om0tcSZNhZ5lOUlggnaxDt40uTNRQpeANYB2F5Pi83A=;
+        b=w+8TowzjnqcNe5yba/oF1/c2/GrWf+0wH9HTcFc4k0sBkMKeiFn32DO8PF8mch79xh
+         AmSzlb7ZV1vpKX+x/zJoghS0uVr41LiUMtuQ3SZvPg/n2qnYJTrJl7DQT8k7oz1wyVZ/
+         bsa2NtTwTOVqxQbaZpRYFzQZR/EucjxekmD/MAAEsRdOXuNunW90+8psiBXGzaCMhCwQ
+         tkXFn86+3S9gz3So59iFgE9mb548WDcVojSQelfu4kQRYxwbjypwohQQiIinKsxQDv+H
+         bEHmFWXx8WK2lg3pZYPQXaN3F4y/VeASBDYxEXYBp8Bgp1vpE2qJry02o00j9xiPjnXB
+         o6Og==
+X-Forwarded-Encrypted: i=1; AKwUvBy7X2KYJm1HYuvZhuW12pXfkYtOhH2X9EyrsAZtFRaxKmWaMQuyLO3Lw2lsn4a4fRhX2389MopT1KwOTHWU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+72/EPf60WoWz6ZU0AIu7J+oystC2YwiuLHn+jQjS+8q8vfnjk
+	+CZC8xM8hyfLBPMGWEyUranQx1tNYvhPRdagBHU+V4MoNolqcAfvaZg1MvPqCVSiOFE=
+X-Gm-Gg: AYBFou3zxe1cMddd+ntZ5UljJP6t5ce6kWZ5WaeVrLqtbM/ueO/k0Fph1y2m4pkfMtM
+	Fhcysiu5TJ7rQu8f/kCJvtN9CjAWGhZLjXWktJ4fQQUwuYk3dw9Bkti/GE5Z9jCXO2uGKt0S8DU
+	BX4/BhR8l4+W0VqurFXgS+oXzQZp2O3dzVOe4yfWtfKIUvH0emYLLqJ1ih/Y0EQx9r9wrO15GyC
+	xXPijcgvjYdoHw+Lkbc/FnTDwxGsC8T41VtmRCbxlXW+pKs2Ifo2siLOHi8x5P3RtCqZwCL1h+A
+	radBJt67Wp8M/c/9A99BrwnUsLNqgqbf/vTzqkkcc4nrv5btqUOmbC83E8g18yNA2VJcYV3rEDX
+	ViWULvm3vlQQ6j4D4MmKDLbiHg3hsVtFPmI/af/NSzY2D55WdijLa7jcsmT1g8uTUbctLMaBS0+
+	qZkeLH9dzhVL69AJ4I6+X2mqrd0JDCU9Folvv80KZK5mZM4RhDb4hcvb+P1HOnT9d5bwR53iv2U
+	zp6bDwywsKYZkCOBFChS+ZUKPqqQ4W3MQB57zvrSHeZDargemFoM07eSyurScaj205R+PuZELes
+	645DsVzWXcQZ1OVsyQZFjYjcRK9CZ3nCunet3/5A
+X-Received: by 2002:a05:600c:6285:b0:4a1:fa27:df7c with SMTP id 5b1f17b1804b1-4ac182dc8f6mr417083355e9.34.1793890171437;
+        Thu, 05 Nov 2026 06:49:31 -0800 (PST)
+Received: from [192.168.0.167] ([51.37.126.136])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4104d600fsm129873185e9.0.2026.11.05.06.49.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 06:49:30 -0800 (PST)
+Message-ID: <1215dd37-1575-4dab-8ab2-65348ac69d91@linaro.org>
+Date: Thu, 5 Nov 2026 14:49:29 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,293 +90,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261104111610.3739095-2-mukesh.savaliya@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] media: qcom: camss: always stop the pipeline in
+ stop_streaming
+To: Allan Siriani <allan@fatecpompeia.edu.br>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261104202313.72494-1-allan@fatecpompeia.edu.br>
+ <20261104202313.72494-4-allan@fatecpompeia.edu.br>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261104202313.72494-4-allan@fatecpompeia.edu.br>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Mukesh,
+On 04/11/2026 20:23, Allan Siriani wrote:
+> video_stop_streaming() walks the pipeline upstream and calls
+> .s_stream(0) on every subdev. It gives up on the first non-zero return,
+> without stopping the media pipeline and without returning the queued
+> buffers to vb2.
+> 
+> A subdev without .s_stream() returns -ENOIOCTLCMD. video_start_streaming()
+> already ignores that, but video_stop_streaming() does not, so with such a
+> subdev in the pipeline, e.g. the pixel array entity of the MT9M114 sensor
+> driver, every stream off:
+> 
+> - triggers the vb2 WARN about buffers still owned by the driver,
+> - leaves the pipeline started, so the next VIDIOC_STREAMON and
+>    "media-ctl -r" fail with -EBUSY.
+> 
+> Treat -ENOIOCTLCMD as success, as at stream on, and only log real
+> errors, then always stop the pipeline and flush the buffers: a
+> .stop_streaming() callback cannot fail and must give back all buffers.
+> 
+> Signed-off-by: Allan Siriani <allan@fatecpompeia.edu.br>
+Please add a Fixes:
 
-kernel test robot noticed the following build errors:
+then
 
-[auto build test ERROR on i3c/i3c/next]
-[also build test ERROR on linus/master v7.4-rc1 next-20261030]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Mukesh-Kumar-Savaliya/i3c-master-Add-Qualcomm-I3C-controller-driver/20261104-164609
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/i3c/linux.git i3c/next
-patch link:    https://lore.kernel.org/r/20261104111610.3739095-2-mukesh.savaliya%40oss.qualcomm.com
-patch subject: [PATCH v7 2/3] i3c: master: Add Qualcomm I3C controller driver
-config: s390-allmodconfig (https://download.01.org/0day-ci/archive/20261105/202611052242.iJ7HMqUH-lkp@intel.com/config)
-compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 812626a41399a1d464a0d69627ab45c83b8ebfb9)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261105/202611052242.iJ7HMqUH-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202611052242.iJ7HMqUH-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from drivers/i3c/master/i3c-qcom-geni.c:19:
->> include/linux/soc/qcom/geni-se.h:378:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     378 |         val = readl_relaxed(se->base + GENI_FW_REVISION_RO);
-         |               ^
->> include/linux/soc/qcom/geni-se.h:397:2: error: call to undeclared function 'writel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     397 |         writel(m_cmd, se->base + SE_GENI_M_CMD0);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:413:10: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     413 |         s_cmd = readl_relaxed(se->base + SE_GENI_S_CMD0);
-         |                 ^
-   include/linux/soc/qcom/geni-se.h:417:2: error: call to undeclared function 'writel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     417 |         writel(s_cmd, se->base + SE_GENI_S_CMD0);
-         |         ^
->> include/linux/soc/qcom/geni-se.h:430:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     430 |         writel_relaxed(M_GENI_CMD_CANCEL, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:443:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     443 |         writel_relaxed(S_GENI_CMD_CANCEL, se->base + SE_GENI_S_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:455:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     455 |         writel_relaxed(M_GENI_CMD_ABORT, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:468:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     468 |         writel_relaxed(S_GENI_CMD_ABORT, se->base + SE_GENI_S_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:494:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     494 |         val = readl_relaxed(se->base + SE_HW_PARAM_0);
-         |               ^
-   include/linux/soc/qcom/geni-se.h:512:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     512 |         val = readl_relaxed(se->base + SE_HW_PARAM_0);
-         |               ^
-   include/linux/soc/qcom/geni-se.h:540:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     540 |         val = readl_relaxed(se->base + SE_HW_PARAM_1);
-         |               ^
-   In file included from drivers/i3c/master/i3c-qcom-geni.c:22:
-   In file included from drivers/i3c/master/../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:288:20: error: static declaration of 'writel' follows non-static declaration
-     288 | static inline void writel(u32 value, volatile void __iomem *addr)
-         |                    ^
-   include/asm-generic/io.h:287:16: note: expanded from macro 'writel'
-     287 | #define writel writel
-         |                ^
-   include/linux/soc/qcom/geni-se.h:397:2: note: previous implicit declaration is here
-     397 |         writel(m_cmd, se->base + SE_GENI_M_CMD0);
-         |         ^
-   In file included from drivers/i3c/master/i3c-qcom-geni.c:22:
-   In file included from drivers/i3c/master/../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:353:19: error: static declaration of 'readl_relaxed' follows non-static declaration
-     353 | static inline u32 readl_relaxed(const volatile void __iomem *addr)
-         |                   ^
-   include/asm-generic/io.h:352:23: note: expanded from macro 'readl_relaxed'
-     352 | #define readl_relaxed readl_relaxed
-         |                       ^
-   include/linux/soc/qcom/geni-se.h:378:8: note: previous implicit declaration is here
-     378 |         val = readl_relaxed(se->base + GENI_FW_REVISION_RO);
-         |               ^
-   In file included from drivers/i3c/master/i3c-qcom-geni.c:22:
-   In file included from drivers/i3c/master/../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:407:20: error: static declaration of 'writel_relaxed' follows non-static declaration
-     407 | static inline void writel_relaxed(u32 value, volatile void __iomem *addr)
-         |                    ^
-   include/asm-generic/io.h:406:24: note: expanded from macro 'writel_relaxed'
-     406 | #define writel_relaxed writel_relaxed
-         |                        ^
-   include/linux/soc/qcom/geni-se.h:430:2: note: previous implicit declaration is here
-     430 |         writel_relaxed(M_GENI_CMD_CANCEL, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   drivers/i3c/master/i3c-qcom-geni.c:284:8: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     284 |         val = FIELD_PREP(CLK_DIV_VALUE_MASK, clk_idx->clk_div);
-         |               ^
-   drivers/i3c/master/i3c-qcom-geni.c:363:6: warning: variable 'm_stat_mask' set but not used [-Wunused-but-set-variable]
-     363 |         u32 m_stat_mask, dm_tx_st, dm_rx_st;
-         |             ^
-   drivers/i3c/master/i3c-qcom-geni.c:579:9: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     579 |                 pid = FIELD_PREP(GENMASK_ULL(47, 40), (u64)rx_buf[0]) |
-         |                       ^
-   drivers/i3c/master/i3c-qcom-geni.c:637:20: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     637 |                         xfer.m_param |= FIELD_PREP(CCC_HDR_CMD_MSK, cmd->id);
-         |                                         ^
-   drivers/i3c/master/i3c-qcom-geni.c:737:20: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     737 |                         xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, dev->info.dyn_addr);
-         |                                         ^
-   drivers/i3c/master/i3c-qcom-geni.c:791:19: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     791 |                 xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, msgs[i].addr);
-         |                                 ^
-   fatal error: too many errors emitted, stopping now [-ferror-limit=]
-   1 warning and 20 errors generated.
---
-   In file included from i3c-qcom-geni.c:19:
->> include/linux/soc/qcom/geni-se.h:378:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     378 |         val = readl_relaxed(se->base + GENI_FW_REVISION_RO);
-         |               ^
->> include/linux/soc/qcom/geni-se.h:397:2: error: call to undeclared function 'writel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     397 |         writel(m_cmd, se->base + SE_GENI_M_CMD0);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:413:10: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     413 |         s_cmd = readl_relaxed(se->base + SE_GENI_S_CMD0);
-         |                 ^
-   include/linux/soc/qcom/geni-se.h:417:2: error: call to undeclared function 'writel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     417 |         writel(s_cmd, se->base + SE_GENI_S_CMD0);
-         |         ^
->> include/linux/soc/qcom/geni-se.h:430:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     430 |         writel_relaxed(M_GENI_CMD_CANCEL, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:443:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     443 |         writel_relaxed(S_GENI_CMD_CANCEL, se->base + SE_GENI_S_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:455:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     455 |         writel_relaxed(M_GENI_CMD_ABORT, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:468:2: error: call to undeclared function 'writel_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     468 |         writel_relaxed(S_GENI_CMD_ABORT, se->base + SE_GENI_S_CMD_CTRL_REG);
-         |         ^
-   include/linux/soc/qcom/geni-se.h:494:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     494 |         val = readl_relaxed(se->base + SE_HW_PARAM_0);
-         |               ^
-   include/linux/soc/qcom/geni-se.h:512:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     512 |         val = readl_relaxed(se->base + SE_HW_PARAM_0);
-         |               ^
-   include/linux/soc/qcom/geni-se.h:540:8: error: call to undeclared function 'readl_relaxed'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     540 |         val = readl_relaxed(se->base + SE_HW_PARAM_1);
-         |               ^
-   In file included from i3c-qcom-geni.c:22:
-   In file included from ./../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:288:20: error: static declaration of 'writel' follows non-static declaration
-     288 | static inline void writel(u32 value, volatile void __iomem *addr)
-         |                    ^
-   include/asm-generic/io.h:287:16: note: expanded from macro 'writel'
-     287 | #define writel writel
-         |                ^
-   include/linux/soc/qcom/geni-se.h:397:2: note: previous implicit declaration is here
-     397 |         writel(m_cmd, se->base + SE_GENI_M_CMD0);
-         |         ^
-   In file included from i3c-qcom-geni.c:22:
-   In file included from ./../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:353:19: error: static declaration of 'readl_relaxed' follows non-static declaration
-     353 | static inline u32 readl_relaxed(const volatile void __iomem *addr)
-         |                   ^
-   include/asm-generic/io.h:352:23: note: expanded from macro 'readl_relaxed'
-     352 | #define readl_relaxed readl_relaxed
-         |                       ^
-   include/linux/soc/qcom/geni-se.h:378:8: note: previous implicit declaration is here
-     378 |         val = readl_relaxed(se->base + GENI_FW_REVISION_RO);
-         |               ^
-   In file included from i3c-qcom-geni.c:22:
-   In file included from ./../internals.h:12:
-   In file included from include/linux/io.h:12:
-   In file included from arch/s390/include/asm/io.h:93:
-   include/asm-generic/io.h:407:20: error: static declaration of 'writel_relaxed' follows non-static declaration
-     407 | static inline void writel_relaxed(u32 value, volatile void __iomem *addr)
-         |                    ^
-   include/asm-generic/io.h:406:24: note: expanded from macro 'writel_relaxed'
-     406 | #define writel_relaxed writel_relaxed
-         |                        ^
-   include/linux/soc/qcom/geni-se.h:430:2: note: previous implicit declaration is here
-     430 |         writel_relaxed(M_GENI_CMD_CANCEL, se->base + SE_GENI_M_CMD_CTRL_REG);
-         |         ^
-   i3c-qcom-geni.c:284:8: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     284 |         val = FIELD_PREP(CLK_DIV_VALUE_MASK, clk_idx->clk_div);
-         |               ^
-   i3c-qcom-geni.c:363:6: warning: variable 'm_stat_mask' set but not used [-Wunused-but-set-variable]
-     363 |         u32 m_stat_mask, dm_tx_st, dm_rx_st;
-         |             ^
-   i3c-qcom-geni.c:579:9: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     579 |                 pid = FIELD_PREP(GENMASK_ULL(47, 40), (u64)rx_buf[0]) |
-         |                       ^
-   i3c-qcom-geni.c:637:20: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     637 |                         xfer.m_param |= FIELD_PREP(CCC_HDR_CMD_MSK, cmd->id);
-         |                                         ^
-   i3c-qcom-geni.c:737:20: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     737 |                         xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, dev->info.dyn_addr);
-         |                                         ^
-   i3c-qcom-geni.c:791:19: error: call to undeclared function 'FIELD_PREP'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     791 |                 xfer.m_param |= FIELD_PREP(SLAVE_ADDR_MASK, msgs[i].addr);
-         |                                 ^
-   fatal error: too many errors emitted, stopping now [-ferror-limit=]
-   1 warning and 20 errors generated.
-
-
-vim +/readl_relaxed +378 include/linux/soc/qcom/geni-se.h
-
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  367  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  368  /**
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  369   * geni_se_read_proto() - Read the protocol configured for a serial engine
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  370   * @se:		Pointer to the concerned serial engine.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  371   *
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  372   * Return: Protocol value as configured in the serial engine.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  373   */
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  374  static inline u32 geni_se_read_proto(struct geni_se *se)
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  375  {
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  376  	u32 val;
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  377  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30 @378  	val = readl_relaxed(se->base + GENI_FW_REVISION_RO);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  379  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  380  	return (val & FW_REV_PROTOCOL_MSK) >> FW_REV_PROTOCOL_SHFT;
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  381  }
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  382  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  383  /**
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  384   * geni_se_setup_m_cmd() - Setup the primary sequencer
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  385   * @se:		Pointer to the concerned serial engine.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  386   * @cmd:	Command/Operation to setup in the primary sequencer.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  387   * @params:	Parameter for the sequencer command.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  388   *
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  389   * This function is used to configure the primary sequencer with the
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  390   * command and its associated parameters.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  391   */
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  392  static inline void geni_se_setup_m_cmd(struct geni_se *se, u32 cmd, u32 params)
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  393  {
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  394  	u32 m_cmd;
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  395  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  396  	m_cmd = (cmd << M_OPCODE_SHFT) | (params & M_PARAMS_MSK);
-0feea33d79825d include/linux/qcom-geni-se.h Douglas Anderson            2020-07-22 @397  	writel(m_cmd, se->base + SE_GENI_M_CMD0);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  398  }
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  399  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  400  /**
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  401   * geni_se_setup_s_cmd() - Setup the secondary sequencer
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  402   * @se:		Pointer to the concerned serial engine.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  403   * @cmd:	Command/Operation to setup in the secondary sequencer.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  404   * @params:	Parameter for the sequencer command.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  405   *
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  406   * This function is used to configure the secondary sequencer with the
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  407   * command and its associated parameters.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  408   */
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  409  static inline void geni_se_setup_s_cmd(struct geni_se *se, u32 cmd, u32 params)
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  410  {
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  411  	u32 s_cmd;
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  412  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  413  	s_cmd = readl_relaxed(se->base + SE_GENI_S_CMD0);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  414  	s_cmd &= ~(S_OPCODE_MSK | S_PARAMS_MSK);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  415  	s_cmd |= (cmd << S_OPCODE_SHFT);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  416  	s_cmd |= (params & S_PARAMS_MSK);
-0feea33d79825d include/linux/qcom-geni-se.h Douglas Anderson            2020-07-22  417  	writel(s_cmd, se->base + SE_GENI_S_CMD0);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  418  }
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  419  
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  420  /**
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  421   * geni_se_cancel_m_cmd() - Cancel the command configured in the primary
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  422   *                          sequencer
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  423   * @se:	Pointer to the concerned serial engine.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  424   *
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  425   * This function is used to cancel the currently configured command in the
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  426   * primary sequencer.
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  427   */
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  428  static inline void geni_se_cancel_m_cmd(struct geni_se *se)
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  429  {
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30 @430  	writel_relaxed(M_GENI_CMD_CANCEL, se->base + SE_GENI_M_CMD_CTRL_REG);
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  431  }
-eddac5af06546d include/linux/qcom-geni-se.h Karthikeyan Ramasubramanian 2018-03-30  432  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+---
+bod
