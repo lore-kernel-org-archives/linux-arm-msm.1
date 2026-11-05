@@ -1,54 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.11
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793882152;
-	b=scnOO2Jys6ScQLcsWkTT9TuY4Dz9fWe/Guhz7wa/8+JdCJyNDPA26rxZv+t3xB5NjBS3
-	 R7HErE1UH5wIEBhIlItjR/XYmBuYsjO+sNjy5Q7a/AH/CTodna2buxtMhpsOnAL3kP0uw
-	 Zb/nyehsbNnv04G0VA39acvjsYfLHKiNGDJDMENG+2+BgrFcxOtdNjmDOghQtoaxplWcA
-	 OwjW3CiJBkO8fi2+NLQfqy7RRpZJGTZuh8LnepQOpwMioujn9PrFjn0KkxnYaM7NA7G/f
-	 5rEO46DTHOtTE7SH+781xkQaq0tLq7Ns2Nes//4u5dfhUee4MhsOtmAhfQSH3mZu02g==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793882152;
-	h=DMARC-Filter:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=LZXnIiN3GUw0Ikz0T3gPaUwpFENf1XFb2KeDlcXczwg=;
-	b=F9Vb17iU4ChWG0uYIk4WjeQQmLZsEtTYvaMSOR8dr/3VVg+QuHXJe4yJ7xos6kpssmpG
-	 DwDVdx46ZGgiPIJmOsQ5qU3NBwZeY6NmtbLQHsqb+QFMV98l9qwTobWXnqeohQCmHLaG3
-	 uDo8jmJ/fA7geP4TWmkwPflNKdT4Cm1jACeugUshoEGuLTp4RuJaC+VDtLQ/AMfOELxHo
-	 a52dvHBlIUvsfn5GD7h8Lu/cJKpHoD/uYiWK1BnZDviwqYZ5DeIEvv3kM+ta7QwyQidTo
-	 VI0rOA/TiHFQlTfpJKnDpdvCpKqGftwfSmgvtokaKX0WOR4STSSktT0txX1h2Fck1qw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=collabora.com;
-	spf=pass smtp.mailfrom=collabora.com;
-	dkim=pass header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=zohomail header.b=DWG3eOkk;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.11
-Received: from sender6-op-o11.zoho.com (sender6-op-o11.zoho.com [165.173.180.11])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793882291;
+	b=Eq0ndSWA6+6t737pWIrW1z5VgnDnWkxX7G7NXsv2JluPRXtZHHxwZGR/0caPOwkzvuGK
+	 a9t9Lsf8IIL57AnNp+IpIVfVtm95Kq3mRFrwGIIx5j+Vu3Terz7NxfdHQkiPsWFvaWFVv
+	 hQ1A2OXwtCcPnrQddoR7+DPsgn0jKyK+fHTGLAietv2vmVK9K1v9Kk4eZmU/g0t9Lk9ka
+	 92HCKQM1hji0gZd4/TbWbmz8F29ohxlsCwOMAFfFFhVV7kphFgWjGUxLTM8T3fONYJsHw
+	 m5hnyPbt0DK63rT1dYUfsa7AtzyTc7/ZqEbOQKhcQQJRUiTyF9v25UsNDaV8F0SM1Bg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793882291;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=a10/FbOW/y79RbAy/XygKg3tgeEVwhAaxbtQwGYKBWY=;
+	b=QMa5D8E8r34rIOOAfUTbgpOB8NsjBusuVJteXySnf1T02F5QpBvLHABg/tNZ8nPsB5Ws
+	 EPCoE4qyYL0Expxheys0n7ZGA7nCAdXAKAXf2IrqHRJ2HPK3Em4MXVRLcWOKzD+6CMjpB
+	 7Bl7limmCz5iHMe/+4VG1ZqD37TqPiCTSfMQaR3JWOWYconXO5peUOGi1h6vv8cgIOcZG
+	 9dW1uFTjNodWmKRN3ANZJgGp9aKBP2kge9rmXlWwn+LGdfMyA7QYCVAIgd3CBB9dpvWNS
+	 9mX/pkMKu5opVzia73IOc/2FJ8C7NqCZEBJnPL3HpHpqNIBmDHSl2+JxqHCxK00U1uA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pmq2QLNL;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C31606A339;
-	Thu,  5 Nov 2026 12:35:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 93C31606A339
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BC08606A31B;
+	Thu,  5 Nov 2026 12:38:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=zohomail header.b=DWG3eOkk
-ARC-Seal: i=1; a=rsa-sha256; t=1793882120; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=Uz72HdtyQIk/Jx/Kx8+D2p3/h8mj8zQG1p/ZQuEx9Ctu6YFaXmhXgaXvD47v/+AGyMuZ+RkOBb0E0AvGZaA2WygzN9avwB4BL1P5OioIxd7DOJ89ec+DFgnWaDaRj0NXgLWVoNDvqWYI2hycGqNTGDB7WrXm4dJDq6qflVkfFcw=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1793882120; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=LZXnIiN3GUw0Ikz0T3gPaUwpFENf1XFb2KeDlcXczwg=; 
-	b=Al46/yeMX1achccMCKjlLVt9UmEm8U+GMthh3oAN/pCjATJZtUwKPzEFu4wYehVzHWTgea6wUaQYkG2HRT4aIMBffLRrOBZd2unFe7wFruujnLcH2c3e1i5Uhl//DhtBnT61p8OVKTWFTrImdel0o7NbJkuRJ/3311CnOrsMWRU=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=robert.mader@collabora.com;
-	dmarc=pass header.from=<robert.mader@collabora.com>
-DKIM-Signature: a=rsa-sha256; b=DWG3eOkkBDYLa23q1FTMIv8iDNe2lcBQrIYi3DJlWMUK6rZMToWXUvzV6DDZmDFj4XbepNLaJuzRoZRs2fLxMLJpROXUNSPiw0A7a4GmA6TbD0nE+6poAsud1nqIH1mvJW1c/sFBLkKI/Ha6VcNAUzeq58X6WG+xosGKqmA+Yd8=; c=relaxed/relaxed; s=zohomail; d=collabora.com; v=1; bh=LZXnIiN3GUw0Ikz0T3gPaUwpFENf1XFb2KeDlcXczwg=; h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1793882118217571.0019856779174;
-	Thu, 5 Nov 2026 04:35:18 -0800 (PST)
-Message-ID: <7b4d3a85-6aea-4b96-a4d0-c2f16e488ad9@collabora.com>
-Date: Thu, 5 Nov 2026 13:35:10 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pmq2QLNL
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C2E71F000C1;
+	Thu,  5 Nov 2026 12:38:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793882290;
+	bh=a10/FbOW/y79RbAy/XygKg3tgeEVwhAaxbtQwGYKBWY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Pmq2QLNLeuRURVgjQY993DqQkbY+w/FjSomUkiVjZgUxdw1wmOqjZzMUnvb7bLQE6
+	 NMuXI7aw3r/Ju7efwmdDRiS0FUIxqkWxnOhUVIVUs2sz78xqTElWbB20Pv3xqmhcIz
+	 DbX+e2I7zAQTd7/zUy03J0db2AMDrRFFe/B+uuNL2HFeLKWhEN0LkLaecH7kiEQyb0
+	 NrGhCFhukbAI8IlJrCi7wtTh6x5gafZaVCX036BxFwtw50rD5pMZG7c7s/aNOEpP8c
+	 UWBlKyLdsS7ysn8tQIi2dolHfFuufhhgNMola+NwGT+eGv/KuuvvbSEOQg+TUd1yJt
+	 f/h7bc89umAhg==
+Date: Thu, 5 Nov 2026 13:38:08 +0100
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Frank.Li@oss.nxp.com
+Cc: Codrin Ciubotariu <codrin.ciubotariu@microchip.com>, 
+	Andi Shyti <andi.shyti@kernel.org>, Nicolas Ferre <nicolas.ferre@microchip.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Dong Aisheng <aisheng.dong@nxp.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Oleksij Rempel <o.rempel@pengutronix.de>, 
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
+	Wolfram Sang <wsa+renesas@sang-engineering.com>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, Pierre-Yves MORDRET <pierre-yves.mordret@foss.st.com>, 
+	Alain Volmat <alain.volmat@foss.st.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Laxman Dewangan <ldewangan@nvidia.com>, 
+	Dmitry Osipenko <digetx@gmail.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	"open list:MICROCHIP I2C DRIVER" <linux-i2c@vger.kernel.org>, 
+	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>, open list <linux-kernel@vger.kernel.org>, 
+	"open list:FREESCALE IMX LPI2C DRIVER" <imx@lists.linux.dev>, 
+	"open list:QUALCOMM I2C QCOM GENI DRIVER" <linux-arm-msm@vger.kernel.org>, 
+	"open list:RENESAS R-CAR I2C DRIVERS" <linux-renesas-soc@vger.kernel.org>, 
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>, 
+	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>, vkoul@kernel.org
+Subject: Re: [PATCH 1/1] i2c: use dmaengine_desc_set_callback()
+Message-ID: <aux3ZxRCm13jQEsu@orome>
+References: <20261102170004.3852546-1-Frank.Li@oss.nxp.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -58,100 +73,60 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] media: qcom: iris: describe QC10C as TP10
-To: rob.clark@oss.qualcomm.com
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Bryan O'Donoghue <bod@kernel.org>,
- Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Jordan Crouse <jordan@cosmicpenguin.net>, linux-media@vger.kernel.org,
- Nicolas Dufresne <nicolas.dufresne@collabora.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20261104-ubwc-format-docs-v1-0-389044012b4e@oss.qualcomm.com>
- <20261104-ubwc-format-docs-v1-7-389044012b4e@oss.qualcomm.com>
- <86b801ce-a56c-4ff8-8915-9be369fc0ce8@collabora.com>
- <CACSVV02t9=tm2qyG531f8Ne90ADAb1_ZDDGEg7PwDmoEvGxPrQ@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Robert Mader <robert.mader@collabora.com>
-In-Reply-To: <CACSVV02t9=tm2qyG531f8Ne90ADAb1_ZDDGEg7PwDmoEvGxPrQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="4q2hqkiojuk23bqf"
+Content-Disposition: inline
+In-Reply-To: <20261102170004.3852546-1-Frank.Li@oss.nxp.com>
 
-On 04.11.26 23:11, Rob Clark wrote:
-> On Wed, Nov 4, 2026 at 11:00 AM Robert Mader <robert.mader@collabora.com> wrote:
->> Nice, very happy to see the series!
->>
->> On 04.11.26 17:36, Dmitry Baryshkov wrote:
->>> The comment describing the QC10C buffer layout calls it a compressed
->>> P010. It is not:
->> If I'm not mistaken the display engine / the DRM side (including Mesa)
->> describes it as P010+QCOM_COMPRESSED as well, and so does my pending
->> Gstreamer MR [1] . So if we can't pretend that QC10C ==
->> P010+QCOM_COMPRESSED, then we probably need a DRM_FORMAT_TP10, wire that
->> up everywhere etc. OTOH if we want to keep the DRM side as is, then the
->> comment should reflect that, IMO.
-> IMHO we need DRM_FORMAT_TP10.. on the GPU side, we have TP10 and P010
-> as distinct formats, both with and without UBWC.  I'm not sure if the
-> same is true on video side but P010+UBWC was never exposed, or if it
-> truely only supports linear P010 and UBWC TP10.
 
-Oh, do I understand you correctly that the P010+UBWC implementation is 
-not compatible with QC10C, meaning on the GPU side (Mesa and display) we 
-don't yet have any support for QC10C exposed to userspace? If that's so 
-then we don't have a choice but to introduce DRM_FORMAT_TP10 I guess?
+--4q2hqkiojuk23bqf
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 1/1] i2c: use dmaengine_desc_set_callback()
+MIME-Version: 1.0
 
-On the plus side - this would allow us to make the format single plane, 
-matching what we get on the V4L2 side.
+On Mon, Nov 02, 2026 at 12:00:02PM -0500, Frank.Li@oss.nxp.com wrote:
+> From: Frank Li <Frank.Li@nxp.com>
+>=20
+> Replace open-coded assignments to callback and callback_param fields
+> of struct dma_async_tx_descriptor with calls to the
+> dmaengine_desc_set_callback() helper across various I2C bus drivers.
+>=20
+> No functional change intended. Prepare make to struct
 
->
-> BR,
-> -R
->
->> Best regards,
->>
->> Robert
->>
->> 1: https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/8195
->>
->>> P010 stores each sample in 16 bits, QC10C packs three
->>> 10-bit samples in each 32-bit word, which is what the stride computed
->>> below (width * 4 / 3) assumes. Name the format correctly.
->>>
->>> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->>> ---
->>>    drivers/media/platform/qcom/iris/iris_buffer.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
->>> index eb8de60c1177..ec2bf2a2d953 100644
->>> --- a/drivers/media/platform/qcom/iris/iris_buffer.c
->>> +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
->>> @@ -266,7 +266,7 @@ static u32 iris_yuv_buffer_size_qc08c(struct iris_inst *inst)
->>>
->>>    /*
->>>     * QC10C:
->>> - * UBWC-compressed format for P010.
->>> + * UBWC-compressed TP10, YUV 4:2:0 with three 10 bit samples packed in 32 bits.
->>>     * Contains 4 planes in the following order -
->>>     * (A) Y_Meta_Plane
->>>     * (B) Y_UBWC_Plane
->>>
--- 
-Robert Mader
-Consultant Software Developer
+"Prepare to make struct ..." perhaps? Also, I think it'd be good to
+reference the commit that added the new dmaengine_desc_set_callback() so
+people have more context for why you're changing this. It's not
+immediately clear why this is helpful: "more readable" is very
+subjective and the fact that you're not hiding the structure definition
+somewhat weakens the argument of consistency because people can still
+manually set the fields after this patch. Maybe the plan is to
+eventually hide the structure altogether...
 
-Collabora Ltd.
-Platinum Building, St John's Innovation Park, Cambridge CB4 0DS, UK
-Registered in England & Wales, no. 5513718
+Still, seems like a worthwhile change to me and the patch looks correct,
+so:
 
+Reviewed-by: Thierry Reding <treding@nvidia.com>
+
+--4q2hqkiojuk23bqf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrseLAACgkQ3SOs138+
+s6FZphAAmucdhUvBQmv3U/+6XP2+d6xkC9p6HsudKLrBBXNu0Y+JAC+l6uMYJUly
+psSWkmrEMSCs2ko5WioKs5lJYHFArBRxX9iaR/MyMJcUnsoWDyvGlV8raSECo80N
+yuWJLfEgV7mslOQhZql8vUB1EsciH8R6MXmF28yH7zor3JGO7FT53UFRW0MZQVyr
+7JFffELL2xRwLz0urC1jgJqQ8hofGPReXE72BCNQMbs9SSycE0IvCHBDpC5dKO4W
+u3pqNzL8P6g4h1mO5JI55PG2lY81byjW3R4YpNL1LsaLD7I2mEc1RGVWEjTqGRA7
+KpUAo3WDjGov6FD/mdctS4pIQCcKxOtmnpcTuJV5CUBw5DjsG+A9dgx02yWqYeIZ
+3FDurUdKAsBC6+4oEeIoyp7f0eVjeZNk4OyQ0r+7pOq1IWGplMtt0QpOBzxDxeeX
+776FiJaE7Lc5iQhzQwEV45MJ6Ja/DlW9zwqtWxXPEqndGDW+C1oF+1dOMcT4qUim
+EXDPmlwQms5nbeCt0MEl4SlbT7uHZCkmJrjxl8dYcL3TUeb7lfm3ro0wIyqpu+sk
+ltQYASJGNWWwe0rYjM6mOr0nQmPmVUms/BXsBSWeBej4z3IJ+RQCD0xcgpwLCHCL
+SEDM73L/0RDcbzrzWrZU32LDBkG+UeVNlrya7AdQEBpZFnbCbng=
+=9iU9
+-----END PGP SIGNATURE-----
+
+--4q2hqkiojuk23bqf--
