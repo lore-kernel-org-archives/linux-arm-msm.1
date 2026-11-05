@@ -1,55 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793879293;
-	b=LCj2XneiGpvXhvhME1emfvmaLuEh6mtOWDL/wWuV0vMK+/40cgvWGvWAh8ZZjtKCUlGl
-	 lG+NiNhNUKKJNtVc/jc4/Q91hdZXYOin2HlEXFUlrIAcCJKQM+4+sLS8fRBH2oaNS64Wo
-	 2WNUyMT4KxnEUFRwFj8I/TbXNfSB+rNoRoZ7hpqLjWlD8F2p5nVhMRnh6S+xTI2GbqZbM
-	 y7U2mLtiOP4s9ZFJNnMtHc5hVlxrbKRzVkp41VWD22esBmEQMU2GWYH0C24pzr8FPBh6V
-	 GZ62pKABS2Wt89J3cMg2okc1uZCLc2K89BZzq01w009MUTUl2VcmbNvhNoIids23qbg==
+	t=1793879302;
+	b=v1NCtaMolZgW/vWQOWtlWvHtIm+YkCuN1HtISC9FUBo0cNOQO8fAwbAUkAHOLwY77rYU
+	 VkP57/l6mAVQsrXk8pNWTtDsEPqIZ1aFOcbib59uMVr8YGNyue0djHHeITqQpEC5lNAy5
+	 DCea5QU3PnUgVY6CQfA3ZOt4v+Mgflto8rI98jAjLnW8Ue4Q2fICc1remzSbgQHeQ6fO8
+	 7ERPFbCEFN+9c3FDrNoPJuD/OpvkBV/xYIY+k68UYQGP3dGABBeh4MK6E27NbG5CWPr2W
+	 x9u1FnToSDeCxWDF9zkXmGo0rfj3yFWv2BW5TqsuvE1EdXEbOfjNBdazH5apyDNG7zw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793879293;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793879302;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
 	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
-	bh=tMawwfcXVfKsNftH6bqv4dBoqVRkNbGwmeCn0YU/mBE=;
-	b=ggIIPfOv3sGhqvzHJGrGBWDJTw2WT63dNnjTTWnufDWWDMtzRl5L7D8XbXfyEqPjKRgg
-	 MLFuMGjBU7Mq0NSKYqY3WVSe7jhppR6/zc7p8zjxKmyU5Ymm3Qoq7Zd0KDzGpvG7L4WRw
-	 CnKVM3R+cub8op+90F+0ZapoUFkk0igjwbbKt7zN/sbmrGKSqyFjEDJK43xX3w2V7gmSc
-	 i9NcJ59uaZx4ezDU0aF7DLkeoyxELHafBVkwgjj3KQkMJh5AsMC+o2i2KCW/kFWjJtN7W
-	 wMIGwzvTq2/eAZcQBpjlO8YZVkpBauzu/4dmOOQ9oQB7inj41BZXz/jst4qZyOa53Yg==
+	bh=XUzqzsKgcyoL6M8PVuZWS1pIRiVak4HGA1enwxpKFgU=;
+	b=g6smKKCPuOeDigvM/69/E3NGreOM8hq0++q4q3xXz33uhmmAkPH9CVwfgY2RVwTbbcTn
+	 WhlrWCrRxVCvODzWwRtn9LciRRT3iXdbZ+SfeyJigQ2/z2Iy7u1Que1kcSCVkVC7wN9CN
+	 npjeIhKe0lWcAByhcH4jWvA4sGoeX6/Ha7qkN+jxFLgBRVlrmmu/5G51i5kzNVAU8ri9q
+	 xrFHgeXd7337Dt7wN1aB/+Awjgfa+KGA0HRIgD9ZCMerW9SpxpkXkdwXiMrVopi6qlkBJ
+	 Zcb1zZ/p4zLNwjK+bE/Fvy0bV1NKhvu+QM/DvB9SdVZgRNwnE98MBOUrSNnHlRYcChA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=c0T08sAS;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=TfzyPtUu;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 015AB606B57D
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 11:48:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 015AB606B57D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23CDD606BD73;
+	Thu,  5 Nov 2026 11:48:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 23CDD606BD73
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=c0T08sAS
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=TfzyPtUu
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 9340A4E407D8;
-	Thu,  5 Nov 2026 11:48:10 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id D8E23C69157;
+	Thu,  5 Nov 2026 11:48:19 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 65D805FF85;
-	Thu,  5 Nov 2026 11:48:10 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 484CE10328CE3;
-	Thu,  5 Nov 2026 12:47:54 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id BDEEB5FF85;
+	Thu,  5 Nov 2026 11:48:20 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 8EEB61032923C;
+	Thu,  5 Nov 2026 12:48:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793879282; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1793879293; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=tMawwfcXVfKsNftH6bqv4dBoqVRkNbGwmeCn0YU/mBE=;
-	b=c0T08sASg4VFEZudJtpXn/e328R0EmQMBk+ce82r7kWoFFtodwOrcHrRLH+DcG8StuYIAQ
-	GJ8O24dba+nDh/nRe2LNJBdJ03KoMrmnsHqhEjzsVHKyLOz1xzddgyXmU1JLwE2gji3VVC
-	re2QFrwOI0H8HaJLaTNo7t75wZu2xzF4JhcevuPYeI5ahlFS8M/VWG3uOm22fefal4SbHj
-	vSJY/PGMCR4vKy7KooO97HhIOaERX0ZtDmbuygGZ3tLXG4/RKllaK7+CZj2rHfQXe9BsoE
-	aIPzTyIAGw7SNd1jyAUyrgxW4Wvu83aBsObAA3gi6I9olu4IshmToL46xhVZiA==
+	bh=XUzqzsKgcyoL6M8PVuZWS1pIRiVak4HGA1enwxpKFgU=;
+	b=TfzyPtUunkXTXfMbxVM6GSrt3bgzxOaRd+9ROUgEN/9PFfQ/lJQvYeQ0HNnrj0uOEs7h38
+	YAMWsq/K+cBpYFLjPPk6S0iqU6GRURwRoL9hjfGRk4mj8XswxSkTwj/bDkQpBgfKSdAwj/
+	30FE8aFQUxhL3grGC4PaVGnZXEUgCf6BKafXeL0l7oo0cWdPeFfjlYVW9bEqJxeVoQTjhh
+	mG2qG9DEKkobPViVI7zvbc18P0FJ8yHIARYYiz5Z9NP4slBl11/7xFmck16Ntd+1lRrMR1
+	eUotg+NbT9ojrx7E1oxrESA07Er+/iip9o9F+4AnJT03rL1lcyvLqeaWatypYQ==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,7 +61,8 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v8 3/9] drm/bridge: pass down IRQ_HPD to the drivers
+Subject: Re: [PATCH v8 4/9] drm/bridge: pass extra events to the HPD
+ callback
 From: Luca Ceresoli <luca.ceresoli@bootlin.com>
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -93,20 +94,27 @@ Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org, 
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
  linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
-In-Reply-To: <20261024-hpd-irq-events-v8-3-6ee949e7a384@oss.qualcomm.com>
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+In-Reply-To: <20261024-hpd-irq-events-v8-4-6ee949e7a384@oss.qualcomm.com>
 References: <20261024-hpd-irq-events-v8-0-6ee949e7a384@oss.qualcomm.com>
- <20261024-hpd-irq-events-v8-3-6ee949e7a384@oss.qualcomm.com>
+ <20261024-hpd-irq-events-v8-4-6ee949e7a384@oss.qualcomm.com>
 Date: Thu, 05 Nov 2026 12:47:24 +0100
-Message-Id: <179387924493.1025980.5050079385728779717.b4-review@b4>
+Message-Id: <179387924494.1025980.10089938981667489796.b4-review@b4>
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-On Sat, 24 Oct 2026 03:35:19 +0300, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> wrote:
+On Sat, 24 Oct 2026 03:35:20 +0300, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> wrote:
 > The DisplayPort standard defines a special kind of HPD events called
 > IRQ_HPD. These events are used to notify DP Source about the events on
-> the Sink side. Pass down the extra status to the bridge drivers via the
-> hpd_notify() callback, letting DP bridges to act accordingly.
+> the Sink side.
+> 
+> Bridge drivers report these events through the
+> drm_bridge_hpd_notify_extra(). Pass down the extra status to the HPD
+> callback, specified during the drm_bridge_hpd_enable(), letting
+> underlying drivers (e.g. drm_bridge_connector) to receive these events.
+> 
+> [...]
 
 Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
