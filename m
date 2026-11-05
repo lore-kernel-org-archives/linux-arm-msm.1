@@ -1,58 +1,51 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.69.30.187
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=188.245.251.181
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793910001;
-	b=VIPdRuDEA6VY1FEL6Xh9pBHT028LwITUcrtY+L4b+Vjfug//He5NRd6HqrNzz0CsY6tF
-	 5fUMcjfiYWPWsNQqOvDvT4uPnf3HEosVIo/a5Ej7b3Y/tdpelxiIM4RrCH5eYrFMzhibh
-	 2YZc2J1hlcCypHNm9z8g2sZCdq72aW7V/xXIHM65cYdzzygCbeMPa2OOUouIVkPKpHRy8
-	 3WQ1uJa36TcU5Is+zgLwcgALCxOpRgyQrYQAoC/SC1edF5PDeHMlSJQnynVI7KxqosEaz
-	 Npr1k+y54w7lDi3sfMnx+dh83b557N/hdGy0rfu8lypMW60sUQZMHZzRrnsOjX08/Dw==
+	t=1793910159;
+	b=h5pLAn5KwjfvPzoqXBAgT/xQkcBj9Qa+/wCzZ2hxPZbIuNLx8XS67Rtwa8rso8XTef9d
+	 JZ0iLTz30D6XEylqiyoxBrzohpndtZaNXGtbAI8//P9pxj8h3c0MMB2tlgRI7dzfMrUOu
+	 WUs9eISCSjWTFeiArXwKWGNVCYaDEADUcVj7+fQQLdyLdAz2jKXxDJrq1kDKQ4yh7kKDQ
+	 AFNEwGHY4zYOkXDGFc2j+Si/8tf2ToaJ7Rw2DPSu0gFHSF7gXOcd71ThhhQuYNk5V8lDB
+	 2IC5vJgv9KTDR73B8eSUVKpGGjMeOd0x017ptqTaLNgCpa+oVmtwEYgA7/p2VimOxWw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793910001;
-	h=DMARC-Filter:From:DKIM-Signature:To:Cc:Subject:Date:Message-ID:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=bgpF/EZX37bnef9QFnkTNMcMRCOnqfvQ1c3qRPjQWm0=;
-	b=M9YFFjie6Xx7zl+GegZOEX6PmSuDqYZZ/eIY7RPdAQz0ojEdaT/ZxAHvq7IgbIclMMHQ
-	 Ya+zys23Qhn8nT6+XilIzdFNxLAkjtgHWTo/BT5Dv0XVkoNPwwZXHiQp7s/TLveL4yJ22
-	 CDoHz9pSbrHS/OXp9DEmKLtBqNtowMQLlKnXwJL5A9UUJa8zEALKLVetNzNAoF+XRwBos
-	 P/SufSoon3dTorWMy/jNwC0IqpcjFjb69QjHoAzgV5QVE4OogmzfE0MQO5QhFcLzwhIG9
-	 x2C2bu/XXvYLKrSDOFaqwaIhUYj5bvhZ5euBWJweK2DjRK8+tEbonb2JRs3rIo31ViA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793910159;
+	h=DMARC-Filter:From:DKIM-Signature:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:To:Cc:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=8KU9VBlCsvNAm+/QyNZkHl253tw2+cQljJ+6DtR2vJM=;
+	b=zpnRedFkHoEswBTtpfGtaxWMtTCTfm0SEb38Jrcp3jyCulXAOiSgfrdMi8/oZDwE8w6B
+	 R7Q9qRVeHU5VXZohAX4Levl3pG99PvmupiUBRybixbZTevTcKW0cC+dLBi06qnhu5/svB
+	 tl93R/D4XzYwJrlalBCgMsB18r3dTcaZLIbPBigFn4g5f9amA83hCRFARZ/Ue4EafGsTs
+	 GgVQinEoyYR7SgQsaExJlGMF+YmBUC8jPk8yeEUS+9y4Dn5MghRA4c9eCn3wOdfIz3jaO
+	 Ohe8OJC5qzLF/Y4ZqEHKUnWsunsQcB+3wS6G5qi/ifJC5KAfFs62rtCtm944gagv/Yw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=freenixos.com;
-	spf=pass smtp.mailfrom=freenixos.com;
-	dkim=pass header.d=freenixos.com header.i=@freenixos.com header.a=rsa-sha256 header.s=mail header.b=CvhTM3DG;
-	arc=none smtp.remote-ip=54.69.30.187
-Received: from mail.freenixos.com (mail.freenixos.com [54.69.30.187])
+	dmarc=pass header.from=fhannenheim.net;
+	spf=pass smtp.mailfrom=fhannenheim.net;
+	dkim=pass header.d=fhannenheim.net header.i=@fhannenheim.net header.a=rsa-sha256 header.s=mail header.b=Txf8t3Ul;
+	arc=none smtp.remote-ip=188.245.251.181
+Received: from mail.fhannenheim.net (mail.fhannenheim.net [188.245.251.181])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8AE8606A31B;
-	Thu,  5 Nov 2026 20:20:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B8AE8606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=freenixos.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=freenixos.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13B1F606A326;
+	Thu,  5 Nov 2026 20:22:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 13B1F606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fhannenheim.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fhannenheim.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=freenixos.com header.i=@freenixos.com header.a=rsa-sha256 header.s=mail header.b=CvhTM3DG
-From: Hex Lindqvist <hex@freenixos.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freenixos.com;
-	s=mail; t=1793909994;
+	dkim=pass (1024-bit key, unprotected) header.d=fhannenheim.net header.i=@fhannenheim.net header.a=rsa-sha256 header.s=mail header.b=Txf8t3Ul
+From: Frieder Hannenheim <git@fhannenheim.net>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fhannenheim.net;
+	s=mail; t=1793910143;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=bgpF/EZX37bnef9QFnkTNMcMRCOnqfvQ1c3qRPjQWm0=;
-	b=CvhTM3DGoda1vSym7tUJxuEq2+FJO3Gv2JCOtkAXJZ1GtPgv2LRg/hcTSZivzwUFhFi1zx
-	E82OmSeygyK3WNCj5cljICsxN8C9LrxalMZrAUYw06eISBbjl8rJeSQj5RtDGYf7K8caoA
-	zbYFGXncTj4/thMW3tZsNwRq67athmRUK3y+mEeH3/Bmyt9R4KiFlUh0hqK6TkxbJo2JTo
-	f3+2hqlIEtfZUrCsyrM9SvvkUW+20rm42MH0cUW9UAaUX4jru9own2dEQz0gGtRzy9euk8
-	o1QEBITkCKODJWnipzABvrWgU+3rr0YoRHTqAf3EFtg22gicCXvYRHS+1bsGEQ==
-To: Bartosz Golaszewski <brgl@kernel.org>,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Cc: linux-bluetooth@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Bluetooth: qca: Disable SoC debug logging for WCN3990
-Date: Thu,  5 Nov 2026 12:19:52 -0800
-Message-ID: <20261105201952.1556185-1-hex@freenixos.com>
+	bh=8KU9VBlCsvNAm+/QyNZkHl253tw2+cQljJ+6DtR2vJM=;
+	b=Txf8t3UlLgeHlaWECpylZ9qjhKQAZQzmfawDMjFwmfKyZ+Lbic3AjNO/fkECUw+GEK/NEf
+	Wn1vmbDy7P3SpIZifKdku4Ajfx86vpXIg1tbcw4T90dyfIXXIGWA1XImPaWgecVcgA8Yf8
+	9u6bv0UWPbzf5UL7mxA4eTndSVBBvZI=
+Subject: [PATCH RESEND v4 0/3] Add OnePlus 8T
+Date: Thu, 05 Nov 2026 21:20:00 +0100
+Message-Id: <20261105-kebab_dts-v4-0-c6bbe6ded92e@fhannenheim.net>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,63 +55,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Robert Oscilowski <drgitx@gmail.com>, 
+ =?utf-8?q?Jean-Fran=C3=A7ois_Bobier?= <jf.bobier@gmail.com>, 
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Frieder Hannenheim <git@fhannenheim.net>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2187; i=git@fhannenheim.net;
+ h=from:subject:message-id; bh=/E0vGSITPd4LMa8OW7kOh4TcQjh9SDcCd6ZjfaN4N14=;
+ b=owGbwMvMwCWWw1h8YvtkuWDG02pJDFlvnqor1p76HPFoRWK55iZOP7n/P/c+nfLHrdyB9+rD3
+ slXz8uUdpSyMIhxMciKKbI4T5f8YV8prKMf/k8RZg4rE8gQBi5OAZiIvjfD/0AtnsUJshO2StrG
+ 6FwxvhpkIhXEu2LWUo8VZ/88Unblt2NkuNqb8o91qerB1U1zrbea/b1Yydi1ukYlKlqT4eIZzZx
+ 2dgA=
+X-Developer-Key: i=git@fhannenheim.net; a=openpgp;
+ fpr=439719F83F79132C2F57FE216C0173C8B7931E53
 
-Unless the host turns it off, the WCN3990 firmware sends debug logs to
-the host as ACL packets on handle 0x2EDC. hci_qca passes them on as
-diagnostic packets, which the core copies to the monitor socket and then
-frees. On a OnePlus 6T (SoC version 0x40010214, ROM version 0x0201) that
-is a packet of about 490 bytes every seven seconds on average, for as
-long as the controller is up.
+Adds a basic device tree for the OnePlus 8T (kebab). Common
+values for OnePlus devices using the sm8250 SOC are defined in
+sm8250-oneplus-common.
 
-The driver already turns this logging off after the firmware download
-for WCN3950 and WCN3991. Do the same for WCN3990.
+This basic device tree brings up a framebuffer, UFS, battery monitoring,
+volume keys and UART. Further functionality will be brought up in
+subsequent patch sets.
 
-Tested on a OnePlus 6T. With the crbtfw21.tlv rampatch from the OnePlus
-firmware, no diagnostic packets arrive any more. The controller also
-accepts the command with the crbtfw21.tlv from linux-firmware.
-
-An AI assistant helped find and test this change and drafted this
-message.
-
-Signed-off-by: Hex Lindqvist <hex@freenixos.com>
+Signed-off-by: Frieder Hannenheim <git@fhannenheim.net>
 ---
+Changes in v4:
+- Order my signoff last in commits
+- correct sorting of dt-binding
+- Link to v3: https://patch.msgid.link/20261017-kebab_dts-v3-0-5fc3ca52a383@fhannenheim.net
 
-Notes:
-    Test details (OnePlus 6T, crnv21.bin from the OnePlus firmware, counts
-    from btmon):
-    
-    - v7.2.10 with the postmarketOS sdm845 patches, OnePlus crbtfw21.tlv:
-      87 diagnostic packets in a ten-minute capture started a minute after
-      boot without this patch, none with it.
-    - bluetooth-next (31333770a468), same firmware, btmon from boot: 42 in
-      the first seven minutes without this patch, none with it; the command
-      succeeded at every setup. Plain bluetooth-next hangs this phone after
-      about seven minutes with or without this patch, hence the shorter
-      window.
-    - v7.2.10 with linux-firmware's crbtfw21.tlv (its only WCN3990
-      rampatch): the controller returns success for the command (btmon
-      during setup; not a ten-minute run).
-    
-    Not tested on other WCN3990 boards.
+Changes in v3:
+- create a new commit for dt-binding addition
+- reorder /delete-node/s in sm8250-oneplus-common.dtsi
+- remove prototype revision msm id
+- remove zero-value board id
+- reorder pinctrl properies with name at the end
+- alphabetically order volume button nodes
+- rename vol-down-n -> vol-down-l
+- remove zero ecc size in ramoops
+- add comments describing reserved gpio ranges
+- correct pm8008 pinctrl
+- Link to v2: https://patch.msgid.link/20261015-kebab_dts-v2-0-e783463bffd3@fhannenheim.net
 
- drivers/bluetooth/btqca.c | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v2:
+- Add dt-binding for oneplus,kebab
+- rename power button gpios to match sm8250-samsung-common
+- remove unnecessary qup_i2c7_default and qup_i2c7_default nodes
+- remove qcom,kona from top-level compatible
+- enable i2c2 and add pinctrl to pm8008
+- remove unused pinctrl node in pm8008
+- Link to v1: https://patch.msgid.link/20261015-kebab_dts-v1-0-1fee1204a18b@fhannenheim.net
 
-diff --git a/drivers/bluetooth/btqca.c b/drivers/bluetooth/btqca.c
-index 60735b70d89a..1db2cc626def 100644
---- a/drivers/bluetooth/btqca.c
-+++ b/drivers/bluetooth/btqca.c
-@@ -944,6 +944,7 @@ int qca_uart_setup(struct hci_dev *hdev, uint8_t baudrate,
- 	case QCA_QCA2066:
- 	case QCA_QCA6390:
- 	case QCA_WCN3950:
-+	case QCA_WCN3990:
- 	case QCA_WCN3991:
- 	case QCA_WCN6750:
- 	case QCA_WCN6855:
+---
+Frieder Hannenheim (3):
+      dt-bindings: arm: qcom: Document OnePlus 8T
+      arm64: dts: qcom: Add sm8250-oneplus-common.dtsi
+      arm64: dts: qcom: oneplus-kebab: new device
 
-base-commit: a063a00e6cd9e354aa6d67a154a0527951d7f881
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ .../arm64/boot/dts/qcom/sm8250-oneplus-common.dtsi | 607 +++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/sm8250-oneplus-kebab.dts  | 130 +++++
+ 4 files changed, 739 insertions(+)
+---
+base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
+change-id: 20261015-kebab_dts-f13f9665e9fc
+
+Best regards,
+--
+Frieder Hannenheim <git@fhannenheim.net>
 -- 
-2.56.0
+Frieder Hannenheim <git@fhannenheim.net>
 
