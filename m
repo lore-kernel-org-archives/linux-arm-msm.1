@@ -1,86 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793872670;
-	b=0OmDt9Xc2qIiNyenhrd1t7biBN6TCMouyZBogPhu6aHXLQw4AUpkszFox3Z7KbvfVlgx
-	 4rFyMTGlKAbjmnTO++5ucpZzXxLtZjdfir3f1XoAgV7xCatpswZeHh+78pinzzBjoBxHE
-	 gPMMUVedDTVOqxdB/QwL6JgVgeMk8igI7L12vGJUFYLXZdFtskr9x99/EnrsbeuYs7VGC
-	 q2HNAJbiCcTBCgAhiBBlidta1loXZJ+GLHRPHUVLz6oMon2CjrIxISdQELrr1WLT+gX6T
-	 /amfLXrq9CTyTfKpJwHCn8QJlagCqFM90z4ykR6zlqiUQUJ89GAFU+qyMOWjySWAQ8A==
+	t=1793872757;
+	b=kylLZjmBlxrJHkM5hLjMCaeQoGHbxDIdTFQ1OPgUFDLyVCsuYR3lbPHDSDNFu8pQMgV1
+	 BM8sBbU8SJtjWOqeyt1SYC2IUuO8W6iPvjsqDLn8Pd/eAEAByUSpExKj6k1yqZ2RXKNLG
+	 RjGo+2HWfXgDeENVGPi7yt5zOiUZTeoYXZpWuunxgWirtNxtDcncIUQzzMiThn1kGmnnO
+	 2wKOquKrzZGgkIu7QKR0jd1ra3HEpzb/Gv22rWF+2j6WCxBF4DpUqKFXq2BTyzJ27VCx8
+	 V9WWIn3ZQBKtFqMvcocD42AnC5KmBS0hRPBdL9/1SrGO2/CQVp5424rVgWXpnq2H4UA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793872670;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793872757;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:
 	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=hTUCOSNrg5qxLH3FnfcYfQ51wYo8dyBSWxreUtwDliQ=;
-	b=SaTqKha2ZJG9VhqJ6e2Uh4nWISEJ0m2UEDOtVWncOHL6txXETBaO6xHmR1a6iv6dEPjZ
-	 O1lDLIldRWSahSX3FCBF+ziOzDxeWMl7BY2KbL8Arx3zgczXJ+eD3EmfJsu8nNu+bhDwL
-	 g9kd1mPUHT9eA2tN/4iigl6XfXRatQZCOT7E0NZVxJPo7SeAPZjTbFUjD50IG+tWcR3Yr
-	 zYybia/7ONegPKG8U/IMeBP1tP6SPhw3K+FfWncNJ18SyqGuFZQRlLHY5C59Oj9Lwe609
-	 AkLc5apse7ew6KcBb6wTZepX+zhDakKXYOTI7+SdblLU2euSEaAlFFoZ7oWi0Ku6ZTQ==
+	bh=72hF0zaijNyHtswxhUEwhT+OMs8ScZ0feIrG+Lm2KOU=;
+	b=GPRAMWyQ28NmyhnSHX2gmskwEZmcvlmGYl65K/kS47wgCK0BgSl5M+GJhSXf9KWSn1VN
+	 b5PcLvuVnBJEQSQPU+rPMhklrHp8tzcvLbCeDtHc06cm1dPjJIKaXRyCKy0qsfCMf1Jo+
+	 hCw1LHIiC/3+IHIulFhCcjK1GBrWb1aRIzyqdziUVetQxx/8T4q0xA6H7SWQeOm03l4fh
+	 n9h9joz7AWfN5nMV0G8CMbBmkedpMYoZPOGYd/ZhpxBC9V/rI/4RzCCWEOcvJz4FqpfRt
+	 v4IqFGgGg0vODoUjK/qlZdtcsZ0evritGc7Wlb6Qz9cvOGIlG/UhNfeksghQRV7nNbQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oDxVwy4Q;
-	arc=none smtp.remote-ip=209.85.221.48
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bOsLWi3y;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE04B606A330
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:57:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE04B606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D5C0606A329
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:59:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D5C0606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oDxVwy4Q
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-491971ac844so284003f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 01:57:49 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bOsLWi3y
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a2153c8525so10762585e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 01:59:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793872668; x=1794477468; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1793872755; x=1794477555; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
+         :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hTUCOSNrg5qxLH3FnfcYfQ51wYo8dyBSWxreUtwDliQ=;
-        b=oDxVwy4QjautS5UcbeppFUfZvhwy5qT5Jv1UH4ghJVU/8virZccbyxZ4fjXAJNCGLS
-         esvAzFkveT02dJ2kpQOpbE0amiqcPFMSdi8ynCoZOHwVo8gOOvlbUSHRbi2fmWty+hmz
-         SF/qPukCL3iwBiS47562s4lLr5ovhjElVybA4VQuy5zC1jNUg1/4IJHEVTR35ZLvtEkb
-         VOcKToXIEgN+pARuf43SKAEh1ygFy3fmRuZq81JESr80ic+c/6Tz9seths4MLJfP1ec+
-         VjBmDYILLJ6RZ2wc++GgtqHXVqPtrLbf49LkOTiHY7cXw2h9UNYfyiVuAPQIPlGQ7lFE
-         kHyg==
+        bh=72hF0zaijNyHtswxhUEwhT+OMs8ScZ0feIrG+Lm2KOU=;
+        b=bOsLWi3yDV2SwlL808R2GcqEQVSxTvrL2oD7ob3OjAAj6tc3AbRZuHB9WpYAvZbY10
+         D6CIX5o7pS2ybUuf9EOUZIHcOKf13g7OUQP2bG7nXOCQgB4/gJ5St+I4C4dnbGG4ja2w
+         TX2WQIAOxwA25adjgPV111iGrBu3uyctFICYclZcFy+OVEwEWY9Z/SqdvWHuNlVSMPuW
+         XvW7fkWFFCEAfBIcFSjcLlbSlyotblLpMJcUhSVJ7DCcbP4GYxoPIfPVkZheVRG5p3Hv
+         WZAZRidihq0S+ndsMpq6Y1wlZwoHVhs8tXQCEqn9HZmgQyjzKuJuCf8rB0hxpj52nNfA
+         L31w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793872668; x=1794477468;
+        d=1e100.net; s=20260707; t=1793872755; x=1794477555;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
+         :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hTUCOSNrg5qxLH3FnfcYfQ51wYo8dyBSWxreUtwDliQ=;
-        b=G9bGR4q677pryYhmuFPgRFOInqRnbAR8+iL+SKJAE2kRxQjs8W/mYmSATOMleiNkV8
-         8fd8vdQ5lHCSYEaFOIMFYFvcNAptwHgEDVMQ94Sirdt33vNZ/P+33Q86W9E8XA/wpx8b
-         RrrML6pFRezghCBNmrAbKFnp33zJ7iUEHmAOBwcTdEqcm2rdRKUJfoSqug9aDtJSbxhg
-         0Pfy1BmZS0VvPgAea7TK9XyFDU2Ztean16UrkHDC9fgD9z07ln22gw5lyT8KaMVOrECq
-         umPy6JMWCi5bP0d6dhhNSMWZgK3nyVGO+gfFzsQmghdiIcC/c6LZrMFghU7lyqYzGq4l
-         eMYA==
-X-Forwarded-Encrypted: i=1; AKwUvByssDUYOTvTwmstWfHd0xDoys3cxmRF2GatqR592dDi7sHuOFUi9S71SN/e7CWij0AslMPOm4vp6CFzOHoO@vger.kernel.org
-X-Gm-Message-State: APuU4Z/6JlyGUiFdfouT9Vrpbgi4Lre2mh6JsJYFSpxJHViJWGTKbgjj
-	KbDoHAeFJFSHD4qnslOlk3dv+8fFvfn5LJvgzGr+E1+Ai8RzuA8b2JE/mZMilSAQS/c=
-X-Gm-Gg: AYBFou3QWbp0IknYtuiVQhtC+oqyKhvfDAn1TrgeDLPKoBX58OLSBdEAXLCdig/F6ie
-	L6rnJasVYm1V9mwcxY8ZgrzmkLFvOtraloolvBPMARnSdBYzI0ala6NcubXEhOAYG4eXXSh1lw3
-	EqozNVK34QMyh1pjCflARzx1WxeeBka7+eYgEzQbTyPeJ65aVZ/EZuWnK7fcQkkbIzzb/r6zp8I
-	uNJMzm98OfeaJOXYdx89uyWn/nJJVKl6pdz2l0jj3AWzSZESBci7iILqTdhfFQ5ta7aQAMgLf9W
-	2tPH2v65691/AuYfYDf3S9L7RSEOG/YYcvKkOGCdXIzexGNvCoj+IVnjoISsLnDpsnQgo/8EHJT
-	sqUvPl5Tf9QLi8RlgZGx9+lCJVJTxQg1E0btCSh3C8L34mlDP2Y4MJMGfE7pyk892Ypg631VQWv
-	HHZ0O0C/JjgVn27ZVFGvHea/kPtRQHwBcRpPNPXysPj+RMdqqdBk8rq17NAiJ81kInygcQADj6X
-	rpPRc2VReyUDKFQWZ/d09viCC7fApGkYbf7HI3IqNB0pJbt7lVuLXbq9GstI1K7O0Gf/AX1bB6I
-	o9Lxttyca62z9C/cWtiDvQivjfamqlnN/Eg42lN5
-X-Received: by 2002:a05:600c:848c:b0:4a1:f99e:f22d with SMTP id 5b1f17b1804b1-4ac17471091mr428132765e9.6.1793872668197;
-        Thu, 05 Nov 2026 01:57:48 -0800 (PST)
+        bh=72hF0zaijNyHtswxhUEwhT+OMs8ScZ0feIrG+Lm2KOU=;
+        b=L/gEGoHQUn3vuKXBqG3lf2oktxlZxP977YaZzurJ9GIfnekhFzWob3g+y7uJ1RIX6j
+         fpCff5wjEvlrVdHj6rbEwGTPUlgF/UYgNfjnD1AbV0+GHnPTsjkK5fkwyD1FtmCXqtY0
+         HE21E8oRYKF3PBtZ3HzJoRwyby5WaTP7pDQ6N5wNsrwe8+R6A8luTtZMcFstWHPdnRZ9
+         V7P5FtiyKVK2CSt6eYbLa57USwFVFjpDLm3EAcY3FTLJ8GakNEggU5T1zcLFJCGlLu9A
+         J3Uw75Bbqo8tvp/xsdcoxjAbKBZT7/0ofbu16npOG6ug8o2b0odCLfgqBxJEZIrdUtHY
+         c+TA==
+X-Forwarded-Encrypted: i=1; AKwUvBxA/idTV7cLXSk6YPVU2W2hGHAVgeMsIxvcNcqC/+lZYfRvdlxvVWptCE8ikhcAecCmGT4l0GDqnw45qAl3@vger.kernel.org
+X-Gm-Message-State: APuU4Z/yCMgye9k+Eit+3Hi7voqSNv0KGBI8d+Nay1rNWLlzarcoOU0n
+	4xe07uN5S+S8KjmZSuLu1ItmkfA0t03GWRi/dvGI/fKYABQm9ONVrubxYJxC9+r9emnfVyoFdKl
+	25pOc
+X-Gm-Gg: AYBFou1+AQyQ3gd0KntGC2E+2CN8jVqsNpDkt9iT0yDI+gWnM9uxpGZ+5xsZBaYrtLM
+	p2FSC8UENvQgsR0ejSYnVKS3l1epvb0O6Sfa6XqEG2T3lH2QfvbqMhbv2FGc15BCGq8Kc0ybw5+
+	0ERQSmzbnlAMzkt9+zRfdxMo+bbbqtN/QN/rAuZa2YmdP2C4t8iWkYrERCVbtg2RLtpahsGSNTH
+	Z8qLqgCal7vvcv1DtRTWFvVdgpEewYceoyb0RUfatUUftAXbqlStNLwB3VWEcDHt5mPTGDuHPEz
+	szn43qiL1L53/suvzozoBbiVj10wIN14qn2WTJ0UYIVmb2M9F5RK2V72GGwTE7F/0fc6XT1hQCz
+	LHPbLlcXiw7siH2CXO0oyDkg7tl6wPif/gXVLPD3xrZB8pG2wqCf+TNVhuBrCuOvnwyy4Uh30YR
+	QdFiO/xR0RH6IH4VpGdN0py9nk7F1fXKsVZm7lce2awC+Q8O//r8jZVR25a/IC6DhUERHbObWP2
+	sXuNEh7W+rSHVfKtU/bIPRLgdlRA5s3hJCcZR26/6HdCEf3NeHqsTBmZg4eaT+/8a/MAvEIc99J
+	NYQhNQ1bS2XFwjWePCVTgTnmCEYvKZohAnon+ATkp6Akm2fYqEwxkzeuoTE6aA==
+X-Received: by 2002:a05:600c:848c:b0:4a1:efd3:9862 with SMTP id 5b1f17b1804b1-4ac1765d977mr384989555e9.21.1793872755037;
+        Thu, 05 Nov 2026 01:59:15 -0800 (PST)
 Received: from [192.168.0.167] ([51.37.126.136])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b572bba207sm49867725e9.10.2026.11.05.01.57.47
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b432a883ffsm54957825e9.3.2026.11.05.01.59.14
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2026 01:57:47 -0800 (PST)
-Message-ID: <8824d3fd-4b39-4355-a4ab-5f7e711aceb9@linaro.org>
-Date: Thu, 5 Nov 2026 09:57:46 +0000
+        Thu, 05 Nov 2026 01:59:14 -0800 (PST)
+Message-ID: <f46f0d98-5756-4b2d-a8b6-ca68a1a071bb@linaro.org>
+Date: Thu, 5 Nov 2026 09:59:13 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,6 +94,7 @@ MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/4] media: qcom: camss: use contiguous buffers when there
  is no IOMMU
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 To: Allan Siriani <allan@fatecpompeia.edu.br>,
  Mauro Carvalho Chehab <mchehab@kernel.org>
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
@@ -100,48 +102,56 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
  linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20261104202313.72494-1-allan@fatecpompeia.edu.br>
  <20261104202313.72494-2-allan@fatecpompeia.edu.br>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+ <8824d3fd-4b39-4355-a4ab-5f7e711aceb9@linaro.org>
 Content-Language: en-GB
-In-Reply-To: <20261104202313.72494-2-allan@fatecpompeia.edu.br>
+In-Reply-To: <8824d3fd-4b39-4355-a4ab-5f7e711aceb9@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 04/11/2026 20:23, Allan Siriani wrote:
-> +static int video_buf_plane_addr(struct camss_video *video,
-> +				struct vb2_buffer *vb, unsigned int plane,
-> +				dma_addr_t *addr)
-> +{
-> +	struct scatterlist *sg;
-> +	struct sg_table *sgt;
-> +	dma_addr_t next;
-> +	unsigned int i;
-> +
-> +	if (video->vb2_q.mem_ops == &vb2_dma_contig_memops) {
-> +		*addr = vb2_dma_contig_plane_dma_addr(vb, plane);
-> +		return 0;
-> +	}
-> +
-> +	sgt = vb2_dma_sg_plane_desc(vb, plane);
-> +	if (!sgt || !sgt->nents)
-> +		return -EFAULT;
-> +
-> +	next = sg_dma_address(sgt->sgl);
-> +	for_each_sgtable_dma_sg(sgt, sg, i) {
-> +		if (sg_dma_address(sg) != next) {
-> +			dev_err(video->camss->dev,
-> +				"Plane %u is not contiguous in DMA space\n",
-> +				plane);
-> +			return -EINVAL;
-> +		}
-> +		next += sg_dma_len(sg);
-> +	}
-> +
-> +	*addr = sg_dma_address(sgt->sgl);
-> +
-> +	return 0;
-> +}
+On 05/11/2026 09:57, Bryan O'Donoghue wrote:
+> On 04/11/2026 20:23, Allan Siriani wrote:
+>> +static int video_buf_plane_addr(struct camss_video *video,
+>> +                struct vb2_buffer *vb, unsigned int plane,
+>> +                dma_addr_t *addr)
+>> +{
+>> +    struct scatterlist *sg;
+>> +    struct sg_table *sgt;
+>> +    dma_addr_t next;
+>> +    unsigned int i;
+>> +
+>> +    if (video->vb2_q.mem_ops == &vb2_dma_contig_memops) {
+>> +        *addr = vb2_dma_contig_plane_dma_addr(vb, plane);
+>> +        return 0;
+>> +    }
+>> +
+>> +    sgt = vb2_dma_sg_plane_desc(vb, plane);
+>> +    if (!sgt || !sgt->nents)
+>> +        return -EFAULT;
+>> +
+>> +    next = sg_dma_address(sgt->sgl);
+>> +    for_each_sgtable_dma_sg(sgt, sg, i) {
+>> +        if (sg_dma_address(sg) != next) {
+>> +            dev_err(video->camss->dev,
+>> +                "Plane %u is not contiguous in DMA space\n",
+>> +                plane);
+>> +            return -EINVAL;
+>> +        }
+>> +        next += sg_dma_len(sg);
+>> +    }
+>> +
+>> +    *addr = sg_dma_address(sgt->sgl);
+>> +
+>> +    return 0;
+>> +}
+> 
+> STOP SENDING THIS SLOP !
+> 
+> ---
+> bod
 
-STOP SENDING THIS SLOP !
+Oops - pardon me I thought you resent and NAK'd patch.
+
+My mistake :)
 
 ---
 bod
