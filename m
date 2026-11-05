@@ -1,71 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793906336;
-	b=Pi5D9OEX6GHSH+fcneuGANcRRbsIoay34H4M88gt8dAhFyNYLpGjagmhsInJk5GLVlIk
-	 20I7JaFe0l1QELQTVtUK9jHNatU/39j3gDdBplpbYbfUluDYAHe8j+3QJpY6ilwIBYLMz
-	 3rYoRvljg0qbgVivyxrZI2EpKl9MyZR9us1wXRhNNjjR6AQD7FDFzuCsJEOZ5/QoqzZrQ
-	 D8V5dMZN7pIOZ7XkB58dPpy9ZcFRN9gXsuW6N5S7+YqY9lD3RNw17zMs2M7+AHXcOMUbE
-	 hlWZUBeEumXMs3KfXe8aHYMQ8hWCmJnbDHk4D0vbTPGV6YrhyoXU+Ypz2T4sb2nQ1gQ==
+	t=1793906344;
+	b=0a1ck+jkzxaMLQbWqvJ44gPOYCy2RDncwA+awvfMcO9ho+dfrqq+RsJ4mwwHCtxVbxJe
+	 0uIiwtzF4JLjz/G1G7BRgd/zkMXsNb9BuRzjyQrfyqUskDfiIZs9TyWGqwaiam+FDl4zd
+	 l9KdjfSx9+sZJwiEvA7vTf6TqCg2Dacvm1bfPOvAjVkPizHt/I9qWSyDmWTpGxn9Vep5z
+	 2DmiCyMgPQaORJ9DHhyGS7qYkIullRARw0xaNoDXnqYk8eNIHN7FQABW0Yyy67KfW2QOM
+	 4F7ZhD9H6bJZwVVWSzqGCnNYN9t9Daz2hTiZ0zarjGMAYr6Q4XRuYz7nW8EBDFx7HZA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793906336;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793906344;
 	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:References:
 	 X-Mailer:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:
 	 MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=HcpaF0G9ToYbpr+jXpjPp1HVmtfMgE3+2rZcXIbLRvU=;
-	b=DillmhsaC7DbfFVtyzN4ZPbk0NOO7CY1xGuXzBZJSVxbgDdUENyFLeN0WbfPQ/gjnrGs
-	 b9uSOOK+IZwE8XTAJrn4QoWaqADlhgprn70cb+5H02d6Fx5dpfXPYi/8Pft+O/uySGYMQ
-	 07qyOu1PxOtiu8tbvB15f0YV52bPyMewt9ycWgyDyjtLZNeET00cdeFUZM7WQMuXPZxGm
-	 OP90EzqdpWrdKPRGC5+DHzNI3PfIyacQSSoOTVTcMTdpRBRy0I6EiIYibn/mkYrKBW0oR
-	 UXHezuoDT3zP1pdVN169vQtEKcsAPLm6JioUHL3Qg0WvlLFhe90GwW3iOnNVZQE8M9Q==
+	bh=lyHmLqn8ijLHBmt1owCnh5tVnYJUzqZCnxC11EY2PbU=;
+	b=tBDcEagPaKB/lBC4+XTqw5X+Quha55dHMteGruPHEFichgCCazZ0qzkjUiN4BCeMUCwl
+	 X9xqGCtrcco66T4EH0r5Cl7nWrZxilFp+0zvvwiYy//+/BaW9PqTKkswolMmtVaJ5BkXG
+	 AY9LXkUsQxdIMEayygu3tcscK0S8QHS726fjq0JZjHisEfdESxuX/iUbxKMEhx0yVrTdN
+	 l5lfJP4Lcb35xHvs/XH3Lr2uKe41rtn0VX2CGkLD+lWJ+ZDKyxFxtcYeZbge0DKpw+WAv
+	 VuIYXv5/mflZaiDuHKEMKD87nm8T+FEX71IFbsK9jCl1HUn4PGzvHGFA/SAU4ABqOZg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=fqwqf.xyz;
 	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=ayWAlRiQ;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YNEt6fct;
-	arc=none smtp.remote-ip=23.251.234.55
-Received: from e234-55.smtp-out.ap-northeast-1.amazonses.com (e234-55.smtp-out.ap-northeast-1.amazonses.com [23.251.234.55])
+	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0KU0FlZJ;
+	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=c7tt9CFi;
+	arc=none smtp.remote-ip=23.251.234.50
+Received: from e234-50.smtp-out.ap-northeast-1.amazonses.com (e234-50.smtp-out.ap-northeast-1.amazonses.com [23.251.234.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 069CC606A328;
-	Thu,  5 Nov 2026 19:18:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 069CC606A328
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7227606A331;
+	Thu,  5 Nov 2026 19:19:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7227606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=ayWAlRiQ;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YNEt6fct
+	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0KU0FlZJ;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=c7tt9CFi
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1793906334;
+	d=fqwqf.xyz; t=1793906342;
 	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=HcpaF0G9ToYbpr+jXpjPp1HVmtfMgE3+2rZcXIbLRvU=;
-	b=ayWAlRiQTdJWU/4Tp32HxqPWLsYsca8y3IFmemMftk0k0mxK8Z4ALgpo7CnrnQv4
-	xRyOeBPiz0NxWxCGD8LEjyD3Kly5ixXun1jtNbXHa6bCNDrDCUZjnosuimSXuDe5VKJ
-	1z7M0V7EJBP+QvTkjpj6TS5tQwL7FBbXBJqbqSgg=
+	bh=lyHmLqn8ijLHBmt1owCnh5tVnYJUzqZCnxC11EY2PbU=;
+	b=0KU0FlZJdhZleU3v9l0Nh7UxyH76EpHxTPQdiLmC5lft0PH3DVOD+RojCyguA2kc
+	AtmZLkTehPWi0sXCabWQuuYt/77gkZgnGJdxyL1UCT1jhu9VajlQLGK9kb9HwU1bWlD
+	cQHZ0+cmWukLEA5L0C+fP1YnzUpBkjopYA3zMCD8=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793906334;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793906342;
 	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=HcpaF0G9ToYbpr+jXpjPp1HVmtfMgE3+2rZcXIbLRvU=;
-	b=YNEt6fctKf2AOZHB63LXUH+174ObsgTBtMSDp5tBFVkr8wpU4SBlkXMhoYDrqk2h
-	Mz60NO31W1qLvSx/8tk9vcQ6ZhZii6M58Rz/zl/e+gzokKyS/MTNVbgFDQUZgno0fIa
-	sTCiNbK8uO3yemhv9DQh+BYR/UMiwzTY9xw0jcTg=
+	bh=lyHmLqn8ijLHBmt1owCnh5tVnYJUzqZCnxC11EY2PbU=;
+	b=c7tt9CFiZMKUQ62BR8HOC4s0ZYZIer2zhSXkewzar6/N13dEUHr0CP+XqaCzxefW
+	Nos6hI6jfiypQH00P65WHxpcRYuoiJYP64FXzUsBm2W3UtkbIwK/Eo7BakJWeyAU0sE
+	LWqaSXIDAk+y8c1PSoSI+MXe1xDETXkJF+QGrHlI=
 In-Reply-To:
- <010601a0f11c4762-f4775077-f8b1-4000-bdd2-d36d7658c606-000000@ap-northeast-1.amazonses.com>
+ <010601a0f11b66f4-60579998-13bc-4174-93cc-c5338145611e-000000@ap-northeast-1.amazonses.com>
 References:
- <010601a0f11c4762-f4775077-f8b1-4000-bdd2-d36d7658c606-000000@ap-northeast-1.amazonses.com>
+ <010601a0f11b66f4-60579998-13bc-4174-93cc-c5338145611e-000000@ap-northeast-1.amazonses.com>
 X-Mailer: git-send-email 2.53.0
 From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: hverkuil@kernel.org, todor.too@gmail.com, 
-	gjorgji.rosikopulos@oss.qualcomm.com, vladimir.zapolskiy@linaro.org, 
-	loic.poulain@oss.qualcomm.com, mchehab@kernel.org, 
-	linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+To: andersson@kernel.org, konradybcio@kernel.org
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] media: qcom: camss: stop started subdevices when
- stream-on fails
-Message-ID: <010601a1ad265b72-97c3eac1-cb56-49fc-a50d-c5339e11e9d9-000000@ap-northeast-1.amazonses.com>
+Subject: Re: [PATCH v2 1/1] arm64: dts: qcom: microsoft-romulus13: enable
+ touchscreen
+Message-ID: <010601a1ad267a52-953da632-a358-4ded-a9bb-68d3031acb2c-000000@ap-northeast-1.amazonses.com>
 Content-Transfer-Encoding: 7bit
-Date: Thu, 5 Nov 2026 19:18:54 +0000
+Date: Thu, 5 Nov 2026 19:19:02 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -77,18 +75,20 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.11.05-23.251.234.55
+X-SES-Outgoing: 2026.11.05-23.251.234.50
 
-Hi Bryan,
+Hi Bjorn, Konrad,
 
-Could you take a look at this stream-start cleanup patch when you have a
-chance? It stops the subdevices that started successfully before a later
-subdevice failed, preserving the original error and unwinding the pipeline.
+Could you clarify the pickup status of this touchscreen enablement patch?
+Patchwork marks v2 as Handled Elsewhere, but I could not find it in
+Qualcomm for-next at f5672a3dff02 or mainline at 05441d697f7f.
 
-I checked media-committers next at 6628e7d4c6b2; this cleanup is still
-missing. The original posting includes the SL7/OV02C10 failure case and
-the fault-injection harness. Please let me know if you would prefer any
-changes or a rebase.
+The existing v2 applies unchanged to both trees and keeps the addition
+in the Romulus13 board DTS. Touch and multitouch work on my 13.8-inch
+machine with this configuration.
+
+Is the patch already queued in another tree, or does it need further
+review before pickup?
 
 Best regards,
 Jizhou Tong
