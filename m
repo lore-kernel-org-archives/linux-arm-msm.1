@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
 	t=1793885425;
-	b=47Yk7vf2DaX4Mbv722HyyETtOLenfTk+hSX4vGzn8331d4SLRgwJi/B6SBLXBLByeyXK
-	 yJMavB5aikAlcRNiF0k6iumoM706p9c3urzuxV62lF8iGT4c+T7S6DJm8EWbmh3NxTVJR
-	 YdfFz0dIvNFda017OkJMJFuHN4UoPMAqd19QAoJxZN/fDsyw/+9MUAz19B7zHzBsoIgMw
-	 YVHPN9jbbsOLivTN/1d0bYhepZZtmKQUg4S4RCLeRv3NrDdQBGrkPYqCkX5dZ/HzvboXp
-	 UulS1L6+ztvgGneXRXJ/c+EK1sEtoTA7RPGnR3QaWatB9d6pfPtMaz/y0DAYFrwZWWw==
+	b=S85C0JTS851r4SvFh2GufES3OIA9c6g7es5IrFgzZu1h4YU8bkZKmg8CSuiKqT6IhJD5
+	 lwOS/+QN1f7Mifk54g613w8N57A2snBqhnDNVT85m8vOWEECWx7KMthQyZB8IPE5eupRp
+	 qQt4WvNbdYGETuxktRlFo+PGpgzVjPigvIQKN/cg3iLbw7OCKIviyMA12H29RMvqJibSO
+	 fPK4dQr6LCpYFNblydLmPi2uc98rdrcTsCF3xtMszE/4NXMmXTlrhjqm2RmMmpQwzpaZT
+	 p6m54I1sIgeHJbknK8e1XuH3mFC8P9GrmWw4fJCo+QyO0B1nlxB/ussZBGhf8QHyiNQ==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1793885425;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
-	b=HgvKyleu/pQQA61RJuUEjHRXgixq4dzN26k+3LAZFTwMnC6HOIi+oyvFF3lZ4OqbZuSd
-	 YpVMjTRgVIVG7GhGT6DkZPM17396bW4LusNI4m9wtST73c5vaSLNvRjJCqfBeyXbf5WlK
-	 FI3XlTKHjaW7NOjlPmDwtnH0BTREPEzbuHYZtwOqueRXSGvVB+SlW0McGfWWf//iX/+iD
-	 qu3XdPzxGZJOeApEGv2H4N2vzBL7wXtery2NCewDJN2p4lv/mABcyPzSI06qMblmIWU3Q
-	 uSfB82z5uylg0XmZXDiWhnzT28CAsKMPejn8v/iaAFe/FtK29jO370QHmjcGbEajIgw==
+	bh=EcyyuR0oNuS0ypPsQzMr6pBx59QwCcD2o1XRxPsPTNU=;
+	b=nn7E3yggSkG08A5R2RwFks6LebnMk4MZ3iYUNQrdh6zgzxXenqYoamcYwcyzMbg4SOaX
+	 CRf93KubZLKf1owOPAOzMoGKtPlaljTcSjEi1jX0z5V4VACyQH3Ykof4rQz59O8P5cEGd
+	 +1m9t4NvEFPhGMIXQtMczenaVWqjjfh4yhlAH6vkg9HKsgF3v2ZH593QeY8I3+FSs2BPp
+	 BWV/Rs9qbLccJT3B1R5bjH+R6f5pa3OEHXY2IG95lVMIr9cMKgKDL0Abf08hAIAuiQzLS
+	 AYy6iBYmOkRvSPO9pYEELkxq3mmJvo8Okd5yynp7lQppQEIQ7H10Dsg3H41aHjEQ+rA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ns4YtAbB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HNUaiRUP;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0338606A332;
-	Thu,  5 Nov 2026 13:30:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 556B9606D807;
+	Thu,  5 Nov 2026 13:30:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ns4YtAbB
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HNUaiRUP
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793885424;
-	b=VU/qOoITT+8IGp5aqrZGQkERLeu987mdrTNX6bMQb5jKkKeUXaqcqly6dEkfFxtn7Dcr
-	 Q+wVVIgRcOiIHadPaVnywTHAg8JhzJNwoL7Fyi9N1LECJKPPos3qV1d8ZlvDYNJyZ67Uc
-	 zirGGO7F7zwrcXSyajUCxnm540lmQRjY3Z+f0E6jUsNyQWU+GwYgjEGgRXIc/VvaCfGCm
-	 1L232oyhgNoBOVMBBLuYon+jHqFwZYeIGSCTCOqHNi3T678rHy7cOwx4y27E+SY016YvF
-	 lejnPRSOxoc5qpMhn0JH3CLxSpm62kK9UYHpR+n0LkcGXav7JbzhI8oXUocvCSUQPWA==
+	t=1793885425;
+	b=rjKQVybfd3nXGKfM0+MDTyxqbX2+DNj7AN8i1Lt2wDfYY0BIZuUwiLMfgE16AbjTw/Zc
+	 R6cS7pg30MvSQReEDn6nAOinqJkpZN4pqJjlLNpUdxfZRrNaOhwvvszVDrW3g95xycrLx
+	 VLK+YtEQxct+JekySv/taKyemvHXCDbfL2mo1zL+3+iPU8cr4Yd7qZavyTsfkF7ukA/Lx
+	 rT7lfZXOPmTv43MH813rBYAAQxI9lUP5fnTpzc+c1UEGygTHzS1/oz6g5To9bR+Pkfzqn
+	 Eph9EX93sQzYkf3B7JFWMK/0yr0I/n0ikH+G/scdb5RnPuuDemCStgDvnES0xajIM2g==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793885424;
+	c=relaxed/relaxed; t=1793885425;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
-	b=f1SFt0lynDR660U6EynF+Bz2G1IfZof0KFGXJ6OvmvrJpQwEka78RBPjnvU+s03922Rw
-	 hnJZT4JEAO5ffaNHYp49nX80WTVefnSApRe1aSMGTCEsHmrqv4RIzUVumm5n6z5hXjSRW
-	 BFJveMBufdb//+18wouoSNsgHooSzTDWbcH/4hg5L2lrYHgzkKW6N4Em41BDmao7n21xJ
-	 cZw+1DkPNwaCem+CdOP4l1RU8lfGa5gg+J3elwsII8Mvg431ZbipKU4y/MXSEFTjvEaFP
-	 a3acbgS/TkKDEeYl3Bh2qfOBN2Zwi5RQTkEJzA5IDMIfCmpzgoKQpoCg9z0EI+hUAig==
+	bh=EcyyuR0oNuS0ypPsQzMr6pBx59QwCcD2o1XRxPsPTNU=;
+	b=0vikRpm/iKwLnV59DnV7BIwn2MZokAnUpncnzo4KWbL9Dw1ievUZAASI8aWID4kmwQg1
+	 IB2YuYQ2qVxmkebla9CfgVHgxLAjQEAaplEp6a96NS/16ZQAYcZMjwKUgjJFEBLiFUk/H
+	 7iLoKsMaIKTPJQesZvTHskqiiME1RrSbsr9Csp//tVDoMapYuHYYgKNk0fKFfNBUKRwpN
+	 ID2D2W3vYVehdIr/tuyJ8vfzUOpC4TlNQ3f08/aRRrOv+fw1swzZSWXQysICo0SORvB/4
+	 d2/407oeH+BObkCTWTNe7wMSSROqdh/BFLm21kWac7xadz0s8RTkEYAT8gsmDXS1pBQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 52A541F00A1B;
+	by smtp.kernel.org (Postfix) with ESMTPS id 4A0FE1F00A1A;
 	Thu,  5 Nov 2026 13:30:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1793885424;
-	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
+	bh=EcyyuR0oNuS0ypPsQzMr6pBx59QwCcD2o1XRxPsPTNU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=ns4YtAbBO3OEc1Sn/ElT4zTIT66031XRUh0G4e9rVBsWnouwl572+ooF+a/Di9NoW
-	 MgtURyYWFsm30DC9l6Z3C3AHbv4I2itLaZbpeaYRlkJMPMv0iYu1uFfENcJwAfSAm/
-	 TK5nL9g/lUjytAQF+XM5zv0qJRJnhRMynkZdmfWfxVMys3d6HWLn2pcN+2Ft76AVJh
-	 VM5GbM4pp469jG/7VTmdjbRq0x5uIJ4C4lwTOpAaeWnc/v122adNEgtDok4SjVsZWi
-	 L7wl6B2GWDX3ahA0qEGkvZRdlOrwNiTdu7YJofClQETXOJjwG+5UsUz7Xq5cqA9vQM
-	 XcLfrI8VhRS0A==
+	b=HNUaiRUPzsf77DrFvNkTdZFO3tKAZmxTPPM+CLp+oKLeBikH3x3aMiPlTnEmAjnN+
+	 N83nOsf9j0zvpl31WligT5jAYsYR7/JfBEn6Cc4yNH4o0npZdaBDahlrnOSb4E47jT
+	 zoLNSspj+mBqoO04YLo9FAIiFIJEry0J84T8LtcWbtwBcZ/yIY6cHAp3W1+NP24fbA
+	 9cLkSG/At1SSQPAKbETG07w8A9cE/MhURX46pqoTDYouFySSJJRw3sUQb6krgMrKd3
+	 npGMnY/nhJyFtrndw2oHMLjI/pXlrgmSkVKTxwNdMAwjoe09HUz2jyThu1or/NPsh7
+	 wdMO60UX6Q2AA==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id D1C804728F;
+	by lkml.kernel.org (Postfix) with ESMTP id B1C8647285;
 	Thu,  5 Nov 2026 13:30:22 +0000 (UTC)
 From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
-Date: Thu, 05 Nov 2026 13:30:02 +0000
-Subject: [PATCH 3/5] nvmem: qfprom: Add the SM8350 keepout regions
+Date: Thu, 05 Nov 2026 13:30:00 +0000
+Subject: [PATCH 1/5] arm64: dts: qcom: sm8350: Vote the GPU memory
+ bandwidth
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261105-b4-sm8350-gpu-v1-3-a7175cdd6512@fromdisposition.org>
+Message-Id: <20261105-b4-sm8350-gpu-v1-1-a7175cdd6512@fromdisposition.org>
 References: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
 In-Reply-To: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -101,11 +102,11 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  freedreno@lists.freedesktop.org, Demeter Barna <me@fromdisposition.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793885419; l=1841;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793885419; l=2824;
  i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
- bh=CDGO3hvRW7mymx++dDNgiaLDX/wtQ9qU8oYZYFNQPZ4=;
- b=fWovVqQLQJoPFa5Mc+441Nuesv3cWVgzRKAID6ngbH8CEfzc2VFXlf9TNCgPEeqS12fu0exvC
- beHxHlr/rgDBTDCVwwmp4H5SpWalxQsTkMBKlmQb3Ra/PQJiXiNoqs3
+ bh=Qj0SetyPXcoz/xqqaiV7q7+hqlgKFBJNuFzemnv6s4o=;
+ b=5k1FzaWwPTWmD/1NkUbNJdAoQuLjitJ1m3kP377Dc4pqlngCKZdo6rf+qrYK5ez549PL8xZqB
+ j7hWNqGEiH/CGMv0k47fj2wK//sUKL4PsdtlPd0qxAMIu6Uj+Uz7WZw
 X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
  pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
 X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
@@ -116,54 +117,97 @@ Content-Transfer-Encoding: 7bit
 
 From: Demeter Barna <me@fromdisposition.org>
 
-Some SM8350 fuse ranges are protected by the XPU, so the AP cannot read
-them: a read in 0x0-0x11f, 0x128-0x147, 0x640-0x8df or 0x2110-0x216f
-resets the SoC. The nvmem file in sysfs is readable by every user, so
-once the QFPROM is described, anyone who reads the whole file resets the
-device.
+The SM8350 GPU never asks for DDR bandwidth. On A660 the GMU gets a DDR
+table with only an "off" entry, so the driver leaves the vote to the OPP
+core, and the OPP core votes only when the GPU has an interconnect path
+and its OPPs carry a bandwidth. sm8350.dtsi has neither.
 
-Keep those regions out, as for SC7180 and SC7280, which share the
-0x128-0x147 one; they read as zeros.
-
-The regions were measured on a Razer Edge 5G one 32-bit word at a time,
-and each boundary was checked from both sides.
+Add the GPU's path to DDR and give each OPP the peak bandwidth that
+Qualcomm's GPU tables for this SoC vote at that frequency on LPDDR5, as
+kodiak.dtsi does for its A635.
 
 Signed-off-by: Demeter Barna <me@fromdisposition.org>
 ---
- drivers/nvmem/qfprom.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ arch/arm64/boot/dts/qcom/sm8350.dtsi | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/nvmem/qfprom.c b/drivers/nvmem/qfprom.c
-index 1de3435df..24958ed79 100644
---- a/drivers/nvmem/qfprom.c
-+++ b/drivers/nvmem/qfprom.c
-@@ -124,6 +124,18 @@ static const struct qfprom_soc_compatible_data sc7280_qfprom = {
- 	.nkeepout = ARRAY_SIZE(sc7280_qfprom_keepout)
- };
+diff --git a/arch/arm64/boot/dts/qcom/sm8350.dtsi b/arch/arm64/boot/dts/qcom/sm8350.dtsi
+index 55b32050c..903b2968c 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
+@@ -2050,6 +2050,10 @@ gpu: gpu@3d00000 {
  
-+static const struct nvmem_keepout sm8350_qfprom_keepout[] = {
-+	{.start = 0x0, .end = 0x120},
-+	{.start = 0x128, .end = 0x148},
-+	{.start = 0x640, .end = 0x8e0},
-+	{.start = 0x2110, .end = 0x2170}
-+};
+ 			iommus = <&adreno_smmu 0 0x400>, <&adreno_smmu 1 0x400>;
+ 
++			interconnects = <&gem_noc MASTER_GFX3D QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
++			interconnect-names = "gfx-mem";
 +
-+static const struct qfprom_soc_compatible_data sm8350_qfprom = {
-+	.keepout = sm8350_qfprom_keepout,
-+	.nkeepout = ARRAY_SIZE(sm8350_qfprom_keepout)
-+};
-+
- /**
-  * qfprom_disable_fuse_blowing() - Undo enabling of fuse blowing.
-  * @priv: Our driver data.
-@@ -460,6 +472,7 @@ static const struct of_device_id qfprom_of_match[] = {
- 	{ .compatible = "qcom,qfprom",},
- 	{ .compatible = "qcom,sc7180-qfprom", .data = &sc7180_qfprom},
- 	{ .compatible = "qcom,sc7280-qfprom", .data = &sc7280_qfprom},
-+	{ .compatible = "qcom,sm8350-qfprom", .data = &sm8350_qfprom},
- 	{/* sentinel */},
- };
- MODULE_DEVICE_TABLE(of, qfprom_of_match);
+ 			operating-points-v2 = <&gpu_opp_table>;
+ 
+ 			qcom,gmu = <&gmu>;
+@@ -2068,51 +2072,61 @@ gpu_opp_table: opp-table {
+ 				opp-840000000 {
+ 					opp-hz = /bits/ 64 <840000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L1>;
++					opp-peak-kBps = <12484375>;
+ 				};
+ 
+ 				opp-778000000 {
+ 					opp-hz = /bits/ 64 <778000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_TURBO>;
++					opp-peak-kBps = <12484375>;
+ 				};
+ 
+ 				opp-738000000 {
+ 					opp-hz = /bits/ 64 <738000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
++					opp-peak-kBps = <12484375>;
+ 				};
+ 
+ 				opp-676000000 {
+ 					opp-hz = /bits/ 64 <676000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
++					opp-peak-kBps = <10687500>;
+ 				};
+ 
+ 				opp-608000000 {
+ 					opp-hz = /bits/ 64 <608000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS_L2>;
++					opp-peak-kBps = <6074218>;
+ 				};
+ 
+ 				opp-540000000 {
+ 					opp-hz = /bits/ 64 <540000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
++					opp-peak-kBps = <6074218>;
+ 				};
+ 
+ 				opp-491000000 {
+ 					opp-hz = /bits/ 64 <491000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS_L0>;
++					opp-peak-kBps = <6074218>;
+ 				};
+ 
+ 				opp-443000000 {
+ 					opp-hz = /bits/ 64 <443000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
++					opp-peak-kBps = <6074218>;
+ 				};
+ 
+ 				opp-379000000 {
+ 					opp-hz = /bits/ 64 <379000000>;
+ 					opp-level = <80 /* RPMH_REGULATOR_LEVEL_LOW_SVS_L1 */>;
++					opp-peak-kBps = <3972656>;
+ 				};
+ 
+ 				opp-315000000 {
+ 					opp-hz = /bits/ 64 <315000000>;
+ 					opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS>;
++					opp-peak-kBps = <1761718>;
+ 				};
+ 			};
+ 		};
 
 -- 
 2.53.0
