@@ -1,87 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793894802;
-	b=WA10dLPqa1ZLIyB60ebgR58JSPSbpSFA/DgvWXkL40IZKJRs1QZp/cAIww4JFABi8d87
-	 Uj5zsG4eb7hQchVOl3NM0vR0PXYeKiaR7cJu4lpPWJQyfxEULTiZ7nQttEuC3V/yZvpUo
-	 /AC0jLQGxr9OY9gSHmxXmSuDFCFQnaEwS2oEwpGymXQUbKBWDhvTDiDcKhgooiLVKwO4X
-	 TGHBDTPHQ0t4di6qUWFQafcwpVnO9ozCVnaQkwfKmd1AdolZGJO9yblmiN5hCrKdoL5rL
-	 t4paMQpROvanA+eqd+N+s6b5x28BCydUhvkiUSXb0l34Mn89wVZGVMHX/MAfTBgg1Lg==
+	t=1793894988;
+	b=bx6hyn+Kz5FR6vFcsj2oxXL4vjbcbZr9XHr+UVflTTL88pvw34C8DcMkCS+BCWYJy73j
+	 o/8lAg2rs4/pMNYFFQ8bwr2T/9DNtrW+uhOmsFfjU+3u9RyDe8scM5XNXYdqssS/ViKQ7
+	 c+oAeVVFcI2GhPi9+UsOCTQEtdDplHRfAdO/R7NHzaxVaaHV/13qjjU/9nmyv3LtO2kWy
+	 dBINFfjZMq3VUc6t3ZHV7HvsnCVRdvzqIMtiOb8Q5m1w7S1JkqAFgCZQSE6QU5X+5xkh/
+	 le1KK68IjKdBgWig/3zHosiL+Y5IYcAg/4VCtccwJIq7eObexeXC5qNu0w8ro69Brkg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793894802;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
-	b=XygkG2LzI2Mt7gLHozcs9Pn+Yx5zNZGCjRTEZvUj7ufa3Q2zsDzMzt7k5GfRDVH+/syf
-	 at/8Yx49tVlIrdAOLUR1yULd1UUDpGTIWPzrldOMbIk9vN+nXo0lcKvNixWYSzTtnD7ui
-	 EC9p4RNrsR87mFuk12kVLpqAqgKvvtrwBT2aYE5dd2OX9oQnY5hNssQ9xpQxH+/2J8vfb
-	 oaZ4kU9YT2uOLO+K8KyBAop/Ud7w6qL44AajICzAagbIA35YId9sFBRg81p5rX6hAE7mB
-	 XxT4FjIT3qfUJ2Jc66vca7kbjqs7l5O9g+SV0zOZz7jLs63msgwUufPQuz/4JXIYGDA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793894988;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=alDDpQVgxqZH6sAU2C4QynFmWrx1vOIuscSzlyYUj28=;
+	b=w0r90U/PoZXQWS8XILFYg+XdpCzZtQOv59o3OotFPPx/CMQwzEoE78XrCmOunNeQ9deA
+	 MEUk/Wd9uvZGXsdnrIQNhX2QUiJ3XjR49AZ6l1ldxuYdLiKuPKsRhEFvPG4zJkzCLkJHh
+	 gYXVJEWDWhOqG8EoEWAHnufleAwcAJdqaQwTURmjqlinyb6nSj4o5fE8FFoaAvhoZTU8G
+	 R+4OmWx4YnwyHNotg9I3xPVYlHCDWY/z071x2xxvs+sOBVtZEAS3Bv15vS0UcnZQXOox/
+	 6O8jugxCaf/0/DLUGP5HEBTaIsBKai7wu3V5PJHK32+Cf1BKrsWm/bYGvHzdYR48x1Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="bZN/dLgT";
-	arc=none smtp.remote-ip=209.85.128.52
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="Icvg/cUz";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ON59czEi;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56AC2606BEA7
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:06:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56AC2606BEA7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 144E4606BEAC
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:09:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 144E4606BEAC
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bZN/dLgT
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a208d93758so24039875e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:06:42 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Icvg/cUz;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ON59czEi
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQGIC4134298
+	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 16:09:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=alDDpQVgxqZH6sAU2C4Qyn
+	FmWrx1vOIuscSzlyYUj28=; b=Icvg/cUzAMONGdEoCfCXVwlJIDqhcVqL/FHewk
+	zwe4kW/LEI+pMv2ojoRWSziyT2UPNw/iUJtAv+Ntx0J9Let7Sh4LA0DyQ5QOtrci
+	0fuuAO0w8rxnhK3Zmq7U1tyhbAuqx8O+iM5esu8N75RPBI6bdhe7U7GcsZsLCFiv
+	0LKjnW/Fs7RcZQ0/qHZaQ3OPBqlcrDHTArHh4E/P+CcCUj2BmTIP/PEHRP5Tu2mD
+	B3QPMVTUfVqkKKrJ/Tz0NBh6lqFeNb4JLc7vBbWzkukJQudtXyerSTndZpaW8esE
+	Fyd1BEbAGFNOUgUYjwhxr11umlYP4DlOH1JJqVXdSseLIb1Q==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrksqak6b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:09:45 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-91c6c1e082bso15548356d6.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:09:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793894801; x=1794499601; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
-        b=bZN/dLgTnwp3fVVxvRKU30Fx8i1rNQrjZjCQICPIYUDtFBMcNfXrz13yJLAP/Lag7D
-         sM0fRylYUGUx9byUV6VmGokaPZhUs1RL/o8x9cHERoSkp8m9dTLG9eFqZ3F8ua3kIZyA
-         TqnkIpYWzGYjtTVpFhrd+2emTG9VOHrEHirJ0Yho04oZsBkZ/DTQCOn7Lszf9NUQwu6H
-         K/FxM9ySoLX8UhIFXx0oegPlstft3EhkIbYx82ggNtGeybiohK0FmIIhOtDrx4ugzrvw
-         g1854rsGGOmmgAbre2IlSyJOs4ShUKOOsyUcBB5YaTwIv1sShYNju1wnbnu+h6QcV0rf
-         56XA==
+        d=oss.qualcomm.com; s=google; t=1793894985; x=1794499785; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=alDDpQVgxqZH6sAU2C4QynFmWrx1vOIuscSzlyYUj28=;
+        b=ON59czEi+26AjtMRJicE4aswrG53lpeb7P65JYZ0nO0yGJYPx2z60F0ZWGWaMSZAU6
+         u6CsaVGJsmanqXQZICmpFr/vQCbR81qFBkyImHEtaykOEaf63XjqgqpHCBJX/Exda7wU
+         FwjK/BuOv7TZj9/0mrpJiZmzeQnto845dQBDNhm4Qcb4whhIgZwYmWxIj6qszj7SoOrE
+         gw9AmaRJ9fLUKcHT6JS0ESLVehJHqm+Nwko6FBorJu6mcoMRamzScuH0CEOVEkM12p4t
+         6o+oL3iuXSCuCTZMoFjcF8dEeRJW3QoT5p2R7tuny+eH1VnzStxr0VzP3tViqn6CX7V8
+         lfbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793894801; x=1794499601;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
-        b=shqVO5DNTxZ2+NjhVxAYZb4Ec42YgLhB/WJoF+ivFTRK9LxzLFfxhNZFzkOvBmXUe3
-         ODXeq+Qev2QwaTILHjZsMd3G8a21yxiNVbm8BtcybrxbyRk8SyLpmIchSXb+Ma9ic0Lr
-         Ie5d6egWs5LwN7ObSOiUGDWx9OdNybAB9I4o5KUFnY2lfkwiu1yrZdGYwYHhBeTer8Tf
-         e6AitBmx5pbukWXPIqtif79KmvZ8dqbRq5+fscxe0UaWK96cCmn4B0ExQ+DE9e9ozIHs
-         GsrV0/+J60yjCepFN1C1/LDE4fZqbTojEmy5PrsGJneKv8R2ueQJr7kFvgyIfUS5ugOc
-         WTdQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwOJUZk076wuVBQCGmRSMT5HXyOcwAKRavly3JLJvxVItuwVYdFyd0SBurkHrhvvhfM4MG9JTKv8oy4PeEw@vger.kernel.org
-X-Gm-Message-State: APuU4Z+OYYlNa4wvxtUW0lkjPrzt1jA9yDBd/WIfqkWwAwnxS7v73OGw
-	OqPfTgZ639vGfEYQsI56bZpjumYjr4WeP0ekJ92V2Zjphdn3SSIUsjFieNQJYGknBvEUx4GUCET
-	/Oqcl
-X-Gm-Gg: AYBFou1Q2An/jzpTwsgKwe41KkY2Nl74PEtITrdvm7dhL+MobsKyhP566SFFvwcE2hp
-	uNIyn66yos/ghCd1E51VUhgbmJZhhxNSZ3vIyE1iXGybZycCc1phKI6U9c+PYf9CAA2pbRhF11k
-	VU80LjzG6K2To1jbhEI2Z2kGY/SUCoTwobsH5nGZcWRIEEJYH5Cjp4zKnY+03uojFeS7BPKXVLZ
-	R7JAChJcAUzt7tLndjxktNb9y6kLY1aXx7rJRF1lWF+GnC1CIVo1NRekW1nW8uv56W60dXPu2jT
-	6nz/iAk0vTBB/wVbUPd3F7PVxpHGDJ0D6ZhRTB1WCym8gzZQGum0Y+HeFhaux/3FTTmiZtC1O/D
-	GzdM4booEKy/0P8A5nQgSl4NBYD6ep0FNv5bjuX6Pm8bPxBvMLgKxbJphmVF0imm2G5K54S9IEd
-	R/zSwaOKWi6G/ZqHzKZoK7XibCr/gH9a189UJlaOO4U/NgGMTebnuzP1D/ErXXaenuUDU04KO76
-	2TwD+xr/2jmfpqInSxXeAsU3orhsgZG/BgJVWfQocgBX5xPXybOVB2fPE41YID2KM5JAupUwuKP
-	KyxlUhgWi5UaLwbTT82mLyneKLsGZrrDarG9nKhc
-X-Received: by 2002:a05:600c:c088:b0:4ac:da92:2bd4 with SMTP id 5b1f17b1804b1-4acda922e24mr314506055e9.1.1793894800616;
-        Thu, 05 Nov 2026 08:06:40 -0800 (PST)
-Received: from [192.168.0.167] ([51.37.126.136])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b56f0237aesm77536955e9.9.2026.11.05.08.06.38
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2026 08:06:39 -0800 (PST)
-Message-ID: <770ddb46-2f4a-4eab-9ce0-fa537860c310@linaro.org>
-Date: Thu, 5 Nov 2026 16:06:38 +0000
+        d=1e100.net; s=20260707; t=1793894985; x=1794499785;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=alDDpQVgxqZH6sAU2C4QynFmWrx1vOIuscSzlyYUj28=;
+        b=xSWztucVDFoN0XDb+8Z13GR3pMe3D6JQGcyWXS8V3swvRUps9paeb3imLs4lokIjuw
+         8zPrdKkLCreOskZ6rLU4tQ5TrsMEJIYAcoyMoJ0Q4LRjaXEAZiwSQ0waSqQASfgjnDOK
+         I6qANVD2o2ohwCVdlLHdqSC5RnF22qmkU9vCBPxBf7lRMzQFC129TVr5AiNfYURKakRg
+         h9IdrgId3hp43e9f7FdCMyJXiPL2Kv2KjCerBD5NkaJgelSHOfDOljd7cX+5I7a62TCv
+         nHL6TmnS/pCyqha3ojh25caaNZbntVECy+6jWKLaYidoh2IcDaf/5X7+RZgcZxPces0e
+         8Irg==
+X-Gm-Message-State: APuU4Z+cSjCfSoQJtlf9OdN2fafeX4KTz4rjh+EEOw3DadhSD+Elx42m
+	uiWpGb+KwThVjUNvAsKz4UAndtFrSvrdMKv5oQ/so71y/vCSYy3S92ZjjGVLWEig6/PdJRlINsK
+	kajbA8ypBs8+i3dICF69fsYUuAMTIzxc5UUgFFbdKasBzsRQiPkdt6aIIanmZyghEXlmw
+X-Gm-Gg: AYBFou0isSUFjDLHMUC+336PjDv4zXW6s0zLTFkbC67647VfmrAvkQf5uIFDYRZsAHU
+	BhbV+sM0ZOYkcNmCB0hIYtOjBoENTe+fCdjwBPaVGkOIXYllaT0p/fV3eOiEzIHKUuUT/w/1pvp
+	L4ElDikUSj9HJXQDw9d1XbjLhCWnR4+j2Mbe2JMY8FG02fvEmgR5Zqs6FkfuAFeyolgxft6HakJ
+	4L+65N/h0be2xI1teVDMXV1V2VBadY9DYGd+MCjv/663bckKLCojcxr4MLevxbE8erVuMOhBjO6
+	2xOrBvaaZwv1QlJWU1zOSvqgU3RijqouYIbYQJN9kLHWkqckshOX20cCHmqh9uh+oNJuhfSFfCr
+	gL1MYLToI8Pkbh9x5Mfqx+2vPCE2mLeKeq7D8sXCDjFMdTdj0A8/yOYNFWRSqnvQ7saRaQZe9yV
+	pdTQ==
+X-Received: by 2002:a05:620a:1722:b0:93f:3193:ac09 with SMTP id af79cd13be357-945e16aa58fmr492345485a.15.1793894985033;
+        Thu, 05 Nov 2026 08:09:45 -0800 (PST)
+X-Received: by 2002:a05:620a:1722:b0:93f:3193:ac09 with SMTP id af79cd13be357-945e16aa58fmr492339085a.15.1793894984465;
+        Thu, 05 Nov 2026 08:09:44 -0800 (PST)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm194448535e9.3.2026.11.05.08.09.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2026 08:09:43 -0800 (PST)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Date: Thu, 05 Nov 2026 17:09:40 +0100
+Subject: [PATCH] pinctrl: qcom: fix a use-after-free bug in system shutdown
+ path
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,127 +113,127 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: qcom: camss: Use contiguous DMA buffers
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Todor Tomov
- <todor.too@gmail.com>, Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, Allan Siriani <allan@fatecpompeia.edu.br>
-References: <20261105-camss-fix-dma-v1-1-74e9ec56e518@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261105-camss-fix-dma-v1-1-74e9ec56e518@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261105-pinctrl-qcom-uaf-v1-1-c9cbc0a93161@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAEOq7GoC/x3MQQqAIBBA0avErBtwDF10lWghNtVAaWlFEN09a
+ fkW/z+QOQlnaKsHEl+SJYYCqivwswsTowzFoJW2RMrgJsEfacHdxxVPN6JRisgYapzVULIt8Sj
+ 3v+z69/0ABpqrAmIAAAA=
+X-Change-ID: 20261105-pinctrl-qcom-uaf-500115513a62
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Stephen Boyd <sboyd@codeaurora.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2187;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=A2DQoDWn/29YKhLa6YBv0jqvd6fM7wxpGCmvsaeLJwg=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBq7KpG9QAU6OFUWdNpvOc2kZpsAWHV4lAkH50U9
+ P8gwnFMxv6JAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCauyqRgAKCRAFnS7L/zaE
+ w2jID/96DvDk+mEoE6LJQx2NH26Z+k432RMQwT97PDX54Hr5cxLPxJh2nJYLAVqTYtj4rVeOn4s
+ L2RtSGc+zCIyxwE7Ywk53LaH6kwssR1qihIIYaHDF6c4T1W/QM/NUOp3qseMmCekAbrxkkzdr7P
+ kNm24MYsowwbrXlG4q1Sfw+U3BKTjBG5uW+k4cN/wpRvpznOJZ4I61Ip5ziuWc1BYH89I3AnJet
+ yw9vXhFgwQipnCLc/SfP/SgR4DcqPN+WQGIrKu2yfibck/jNjIuhOS/W/EAYfCV4JVZ2HArsjjz
+ XeLxmG7ursPRDj1LZb6L6XZeFoTI/LQxVWpikna6HKYHFPxeR54mdJCSjybKnFXCcptVuv5D5PT
+ ZNYK47+6bfDwo2fvXvFvyk4C5NQV4DLATt+L7haNTTYjLWWTebq2etASWxelRWwTpUphFyZRsHm
+ vBp6WtbY8uMEWl4fKV8EE1BURVwvJgkzsZYriqiNUtBEBXKfswj8n0M7LrnV1BpYCSnsD/UHzJp
+ vJRQtfmL0U9/6ez1YHbDZgg74NYfLKepFObxFVPBqLp1dg6kim6uKwQJ9Pl5nDGHSQGfxY495tq
+ gzmq6OaEIWhYoNaCSYKw6Hgp6fZtTiU/AGAawF435aXNGsC4tiTWIs91qq8WC2U8nV5xz68PsYn
+ 6V+oveQHzYFl3IQ==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2NCBTYWx0ZWRfX3a1790Yd1VeU
+ DkURqyXqhudt/dNZLAjIZzj0oFCqcmzNtIc2dNugmB0folIaD0naHRDet5SzZg0C0F2qxU4090r
+ tnXqraqI3ez0iQlvL7c2TxNVm3YHlzjhAApKhWOJ7ps7B0Oz5hxWSUI9FJhsVRfKyj47oTlGC8Y
+ lJd2x5+z/ndBi8H6Tdyn9Em/hIRvS39vmhFXJ51A9RUw5+jgqu+3yUpv0BL12eJlpzE2hZMhnu8
+ 31baDIFEF6bj4oBnMr8+A+OEah2gGQzCDv6FSdDfimed5zjRrRaocI+g2XT3C/L1n2KSAbrNU3v
+ 2BNCi33X0r1XGQLLkLey/Ga5t1rxh2J4beURN6bpKkjvpA1PLGIte+LaJRHC3lW/CSg8gWP/8oF
+ SjEv7eTwvxEcCjZDBFsw3lqfuvogD3xw9q6R3zz2xLEr/uA4kzNYIsTNEXVvP0xpEDtlN47JvuO
+ biP2L7WXQAkUD34vnYg==
+X-Proofpoint-ORIG-GUID: ygGpxSgwToxbns174lBJkexief8vzWBZ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2NCBTYWx0ZWRfX2EPwnBfxcxGL
+ umS7Uom25Jlvl9tJ+A+FTwkkN/CS36zKEut8kOu9kFpPiJVj/0U49DttpcpLeDji3AXosLvrcL/
+ O0Krj+rlpQMUObaE35D1pFwOrL6XZ0M=
+X-Authority-Analysis: v=2.4 cv=CIe/zhrD c=1 sm=1 tr=0 ts=6aecaa49 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=c92rfblmAAAA:8
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=4h6XKkIfv3rSTLBNyJgA:9 a=QEXdDO2ut3YA:10
+ a=OIgjcC2v60KrkQgK7BGD:22 a=GvGzcOZaWPEFPQC_NcjD:22
+X-Proofpoint-GUID: ygGpxSgwToxbns174lBJkexief8vzWBZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_04,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050064
 
-On 05/11/2026 15:08, Loic Poulain wrote:
-> The VFE write masters are programmed with a single base address per
-> plane and then write the whole plane from there. video_buf_init() took
-> that address from sg_dma_address() of the first scatterlist entry of a
-> vb2_dma_sg buffer, which is only correct when the whole plane is mapped
-> as one contiguous range in the device address space.
-> 
-> Neither the driver nor the hardware can handle a plane split across
-> several DMA segments, so scatter-gather buffers were never really
-> supported here. The issue stayed dormant because vb2_dma_sg gives no
-> IOVA contiguity guarantee but still tries hard to keep the number of
-> segments low, and with an IOMMU dma_map_sgtable() usually maps the
-> whole table into a single IOVA range. The mapping therefore almost
-> always came back contiguous in the device address space, so reading
-> only the first entry happened to work.
-> 
-> Where that does not hold, the write master runs past the first segment
-> and writes the rest of the frame into memory belonging to someone else.
-> 
-> This recently surfaced as patch proposals enforcing contiguity in
-> camss itself, walking the scatterlist to verify that the DMA segments
-> follow each other, which amounts to re-implementing what the dma-contig
-> framework already provides.
-> 
-> Use vb2_dma_contig instead. It guarantees that each plane is mapped as
-> a single contiguous range in the device address space, one IOVA range
-> when an IOMMU is present, physically contiguous memory when there is
-> none.
-> 
-> Fixes: 0ac2586c410f ("media: camss: Add files which handle the video device nodes")
-> Reported-by: Allan Siriani <allan@fatecpompeia.edu.br>
-> Link: https://lore.kernel.org/all/20261104202313.72494-2-allan@fatecpompeia.edu.br/
-> ---
+msm_pinctrl_probe() allocates the pctrl structure via devm_kzalloc() and
+unconditionally populates the global variables poweroff_pctrl and
+pm_power_off.
 
-I'll fix this
+If msm_pinctrl_probe() subsequently fails, devres resources - including
+the memory allocated for pctrl - are automatically freed. However, the
+global pointers are never cleared, resulting in a use-after-free during
+kernel_power_off().
 
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/camss/Kconfig       |  2 +-
->   drivers/media/platform/qcom/camss/camss-video.c | 14 ++++----------
->   2 files changed, 5 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/Kconfig b/drivers/media/platform/qcom/camss/Kconfig
-> index b51745c942c9fd71a95d09993213bde4b7e877e2..e1967bc20cf03ea1b0b159c5175294eeb40fe1c1 100644
-> --- a/drivers/media/platform/qcom/camss/Kconfig
-> +++ b/drivers/media/platform/qcom/camss/Kconfig
-> @@ -5,7 +5,7 @@ config VIDEO_QCOM_CAMSS
->   	depends on (ARCH_QCOM && IOMMU_DMA) || COMPILE_TEST
->   	select MEDIA_CONTROLLER
->   	select VIDEO_V4L2_SUBDEV_API
-> -	select VIDEOBUF2_DMA_SG
-> +	select VIDEOBUF2_DMA_CONTIG
->   	select V4L2_FWNODE
->   	select GENERIC_PHY
->   	imply PHY_QCOM_MIPI_CSI2
-> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
-> index 0852eb6f13154cfae7147ce39d22de64d14a5cba..5de6ff5ecc76a2863e536fca1c40ae6b2de6dc0c 100644
-> --- a/drivers/media/platform/qcom/camss/camss-video.c
-> +++ b/drivers/media/platform/qcom/camss/camss-video.c
-> @@ -13,7 +13,7 @@
->   #include <media/v4l2-device.h>
->   #include <media/v4l2-ioctl.h>
->   #include <media/v4l2-mc.h>
-> -#include <media/videobuf2-dma-sg.h>
-> +#include <media/videobuf2-dma-contig.h>
->   
->   #include "camss-video.h"
->   #include "camss.h"
-> @@ -154,16 +154,10 @@ static int video_buf_init(struct vb2_buffer *vb)
->   						   vb);
->   	const struct v4l2_pix_format_mplane *format =
->   						&video->active_fmt.fmt.pix_mp;
-> -	struct sg_table *sgt;
->   	unsigned int i;
->   
-> -	for (i = 0; i < format->num_planes; i++) {
-> -		sgt = vb2_dma_sg_plane_desc(vb, i);
-> -		if (!sgt)
-> -			return -EFAULT;
-> -
-> -		buffer->addr[i] = sg_dma_address(sgt->sgl);
-> -	}
+Schedule a devres action clearing the global pointers that runs before
+the pctrl memory is freed.
 
-I hadn't even realised this existed, ick.
+Cc: stable@vger.kernel.org
+Closes: https://sashiko.dev/#/bug/linux-0c3a18a4-3de8-489b-abc9-e9e3a8641ed2
+Fixes: ad64498762dd ("pinctrl: qcom: Hook pm_power_down for shutdown support")
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+---
+ drivers/pinctrl/qcom/pinctrl-msm.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-> +	for (i = 0; i < format->num_planes; i++)
-> +		buffer->addr[i] = vb2_dma_contig_plane_dma_addr(vb, i);
->   
->   	if (format->pixelformat == V4L2_PIX_FMT_NV12 ||
->   			format->pixelformat == V4L2_PIX_FMT_NV21 ||
-> @@ -699,7 +693,7 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
->   
->   	q = &video->vb2_q;
->   	q->drv_priv = video;
-> -	q->mem_ops = &vb2_dma_sg_memops;
-> +	q->mem_ops = &vb2_dma_contig_memops;
->   	q->ops = &msm_video_vb2_q_ops;
->   	q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
->   	q->io_modes = VB2_DMABUF | VB2_MMAP | VB2_READ;
-> 
-> ---
-> base-commit: 8b7179210b22f8e48a82c5ceacb9d56a9c4cfec4
-> change-id: 20261105-camss-fix-dma-c32288664dd2
-> 
-> Best regards,
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+index 32aa7b919e24a0e614078ddc70a248c746e4813b..6ddbec7c27664b5b137ae1bdf668dd88a0f5e224 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -1561,9 +1561,15 @@ static void msm_ps_hold_poweroff(void)
+ 	msm_ps_hold_restart(&data);
+ }
+ 
++static void msm_pinctrl_clear_poweroff(void *data)
++{
++	poweroff_pctrl = NULL;
++	pm_power_off = NULL;
++}
++
+ static void msm_pinctrl_setup_pm_reset(struct msm_pinctrl *pctrl)
+ {
+-	int i;
++	int i, ret;
+ 	const struct pinfunction *func = pctrl->soc->functions;
+ 
+ 	for (i = 0; i < pctrl->soc->nfunctions; i++)
+@@ -1577,6 +1583,13 @@ static void msm_pinctrl_setup_pm_reset(struct msm_pinctrl *pctrl)
+ 					"failed to setup restart handler.\n");
+ 			poweroff_pctrl = pctrl;
+ 			pm_power_off = msm_ps_hold_poweroff;
++
++			ret = devm_add_action_or_reset(pctrl->dev,
++					msm_pinctrl_clear_poweroff, NULL);
++			if (ret)
++				dev_err(pctrl->dev,
++					"Failed to register the poweroff cleanup action.\n");
++
+ 			break;
+ 		}
+ }
 
-LGTM
+---
+base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
+change-id: 20261105-pinctrl-qcom-uaf-500115513a62
 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+
