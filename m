@@ -1,119 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793873196;
-	b=ed8tkkl1BCNp4XKY2cIzuwoYDTbgo5HkGDF1aOovhd73HNskOqcMPZWxfl96tmKK+FVf
-	 FY+tq24z05ux+qAoUPZZpPB/pxKEhHKBbP5gpboDqGpIr4UXUF/xK0Jy1M4cI1Zpb+qRa
-	 vZFm+yjyCbVmDrBBgWmAwBQL61ZZsCjqT+/VwUftGmZ5B0IvkARVVc6dm+QZNUtpejYFh
-	 5cF/4zdLu0ZPkU27XobCH44fE8ai6p0D6jJTHusknYKOy8yKOGK4VjE5TcCZqleXl1U3V
-	 DPs+5nqtMg4SWVO0AaXMnvYujigMaIcSrEulwhrAOYGbbNKJPQbsyUoELTDBBtcJUoA==
+	t=1793873723;
+	b=ZzbmcnpaSlVQzZZ9DBaQ7tc9daaIOEFmsh6k/OQQV5+VoTVtQZVdj0MO6nfrBJCrBvj3
+	 wY9nLpQ9P4VPLkyO3fr6mZ2BDtx8V9vufxFUTAQ/ZdYmxiy95zTqWWcp7baxjriFBHIAC
+	 devOWksd8trXbqEOSZdmfYWChy5/AvOUBkEvS0cAwnDrxM+XzsG5R0kYnkaV9lQ2S2FMZ
+	 OTV3lCuQ4Lu+NpXC35ZpmCZ7R2R8suZXA5Xsw8b9F2+aqQmtRhTqcq65CiN16GOXMKzjk
+	 rqOecIreaPDRliN29AgOtlGIgn8yWdXF04Fh5oftY05XOf6p5qxEqkruYLZRK34KBZg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793873196;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=DU/vOX42w3GP81gwU32haFOM+yeJBosY6jLWaZZ+9X8=;
-	b=0k7Cw3szgMf4diCZanQToLWNExOkctpDch5Nv30w3nTfyP4f1s1J/uvGlAU2V/eussGT
-	 YV90pFpfwIMyUb6I6/7ANQvVsFUiN0mdch7bJsgngjfq0BBO+/b9kMWrmHoJBu/Ield19
-	 FqwLnLidtPn4HjqRNoYk5lD/cWajyEfeR+HVXZx1HtFS5mYfCxuWY17zRIk3UourOtIxu
-	 dKPNrnrjj+1CDVAdWvMWbI78wcs7OkL3+eCh6jgqL4frAyZxgJ26mP62lLoOlhOegPnRZ
-	 BUKUVN9309qJkI79lKGHleu7SSrflgTXPWFC1Nr2IWUXD0FX0MMfYTYYupSk7NTYn8A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793873723;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=urNqgcOG/VrzbWXCcGLN+pX0aRbGOhwKNVrteIsGA4Y=;
+	b=UJwHa9oVNGVOdjAEAAQk/kPdbyetHfIJx4bSjoyFI8mFkzbMEsfgY4sS9c7vbpBdm2nu
+	 6iEq4dyh4u/set0cmn0HKZePf3rbZLikXagTamaOSTSgA0V/AxCxyjGxj/Xk1nHMIsEgV
+	 noodkDlV+xMwNZoYwmSOScXDE1i7Y1x+kXQJ09fFAy42fr9Kh8UWBK/z6ZOHuHWTs1Z7s
+	 Nxiaqjujy3TZGKtIwfX0RCZgGt/AK0y1Z8hKz1ERrU8GsyjiI2R82RrtiLofev10wUGLu
+	 HPhh0ptVmHlcpGgbIlpHsxqKWqPb5DGyfPegHwxh9FBL2axm61OxP/O1q0ccgCrzYqA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Iq66cKjq;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gbaXrJ6c;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="kGP5Oc/f";
+	arc=none smtp.remote-ip=209.85.221.46
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC2A9606A333
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 10:06:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AC2A9606A333
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC1C0606A33D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 10:15:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AC1C0606A33D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Iq66cKjq;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gbaXrJ6c
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A59tBK63684325
-	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 10:06:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=DU/vOX42w3GP81gwU32haFOM+yeJBosY6jL
-	WaZZ+9X8=; b=Iq66cKjq3yYEL2naEJff+GMjZSETIrIg23pQAjdYO/3LsBr8bYF
-	NhazVIm6DbcCo5gB/FfecqRkVv9jEh1p5eqdNgqQTFUzMVl7f+qmMlgKLo2EThvp
-	b3Zl52OhFTLdzjJ0O1nQbhoMcxFTKj8sKFWAN6boKLCk+bOs+MJVzDPi5YCroei5
-	ggkts9pF+czDWjNejC5NJ15rZVwJfYFcDlY+dkU4UOi8HX8eNSx5+3mqw+v1tdDs
-	8TUTD3P8s3EPl0u4LevtkT3knVx4jjy2m7BVJrkJM8U+hkkz1NXEXLVIRMzbn6BQ
-	kLa1eRu4SNzsYjX4+DG3xYWPULMclroK9uA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrj43hg01-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 10:06:34 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-36c9e87d262so2302274eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 02:06:34 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=kGP5Oc/f
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-48df54150dfso1149862f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 02:15:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793873194; x=1794477994; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DU/vOX42w3GP81gwU32haFOM+yeJBosY6jLWaZZ+9X8=;
-        b=gbaXrJ6co3KCPSM90yN96D5bQmIHQlBjL9NBo6bEQ7YWAAZUYagLoOX6Zwdzr4+KwN
-         urLEMXFLzrJpuwaCFfYBcVlEBh/S5guGuEM399BoENvWcbFInRFXvEHWo5ABHUB+nykc
-         wblvGTIsEgJxcUnMvyS/Jz/Gjo8J+JK7jFa0LHEqxflzkZGqDo09Psc+NycbgyPIbxFW
-         sSQnY+JeTJgkE6C9qPEhaeIVf2r5zYY/n/qah2DheDzNRGD2DO20rYt6E8uBlLgPapyb
-         KWzioSn5Mt3zieZeY2pHeMEwY1QXsX1tB2H3dL7IsOug87sf9a9grfbse3tIf4blXQxP
-         oy/Q==
+        d=linaro.org; s=google; t=1793873721; x=1794478521; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=urNqgcOG/VrzbWXCcGLN+pX0aRbGOhwKNVrteIsGA4Y=;
+        b=kGP5Oc/f5yju5LJSuRExjVZcM3fGAthALokpKF7wjscDvjMNn0rxBbVTPjItD0ifCM
+         SWs8FiuDDQqKbzMRohVKFH+KyKwjAH84rvghv0SlQNzYY7Bu8GTVcY0tU7M8jSRjRZ6x
+         MWxTgsr+utuo9o6ALgpRsA2CIhaVoW/1x+OBjbAJwG5KIsVBvsPCrlRG1j1gOFcF+5Lv
+         uFCdHQ2zaja1wh9+wir2csDE+C8xLpQCwj78HpI+GXA6aJtAs7Ac6+dizVO//Qo3jOGE
+         8OW15ggEG9EtMsZ0wSj6DA4FDlvw1KelqMblNjFzUGmpKOE2vEEm5ywFRMau8WRym8+V
+         E/SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793873194; x=1794477994;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793873721; x=1794478521;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DU/vOX42w3GP81gwU32haFOM+yeJBosY6jLWaZZ+9X8=;
-        b=qy6PaAJcTGXKOOLnHqsy51kIcTMcCdx8Jv3u3b+Sh0aVmEulKj5xI7m9c2Qi4iHvnd
-         93pgdWzY+Tr07z2Bdb7QHZvqRfcwgxENNQw8LEI5u04gJvi/TvoNIbhQi8HlRdNFkxRw
-         hdGineQKd9ZxE3cPSY1fY8klHdzk3Jm0pr2E27vnwWLVQUUArJNu6uMi4YAlGX6mtlbG
-         hi9kcfl2VaLQgjrs4EJoxqFwdAnklcW3XcSiI/8dRfTvaChwVxzfrWQf1VNcIO6SdhcP
-         ghzKDczE1K20s/JgyhDEpmSVBgZx04mUSufEIoiDktMYJN6JtOo6905AK0AE2sdvekFD
-         Tm/A==
-X-Forwarded-Encrypted: i=1; AKwUvByQvwKc8Zzfv0/4WyjF1LwrqfLoZJqfaJMM7TZhV+6GUgKyEx/8wQr1tEG1YY3PlGNWBdsvxdBRJXQay2+B@vger.kernel.org
-X-Gm-Message-State: APuU4Z+WQDVxSqfSxlkoTzFv3nRAT4fA1jzL9Yw4AEY3kNHETZw0lxpm
-	pUbz0X1wfFDcuXWj3cUVhKJ/+7u6bN6Kph3sB+/mLhYb9jVLopYnD7GYpml/LFtx3/FM33H2aaX
-	PzKaAwn1TdyCA8/zpErNOVnQmT0UiVWjCMVRgpyfIKjYXgShFLBUsoecdw0cvDz042/539myQ/0
-	XK
-X-Gm-Gg: AYBFou3UlM4Uv8mK5NjAk6y+hozA6YbfIkykG/a9WCR7thortdz0HR2CwbsTA65Jjht
-	/GPNnC+MfvltX9tif4Ty6O1rP59Vjvgy9dtIERh3wP5aWwjwa2Fki0t9v9UTtYflUeBqan6D8oa
-	e/U2AINDPt2rJsfb1wOKBWctYLHHaiW7niIuG1kn0DHWPwh0p7rt0hM0sG3WDgCFW8S64WqDvym
-	4PaP5H2trR+FFgxGhdZr/7kxwMqPJod+gE0/5RQWvc8+wvquj96ZtuHiuHeXf+0kve9d+K6TChD
-	iluJYBIaMg/BbSX44hX1u0o4kAgsz6NntYHJIftoadEOadnQ4HQ+SwDQldFLz38wOYpDU4bbmoh
-	Y/+MpXO5VnIQuCi8z8EwuQ0lYdP2CypHMoW62/P5h78F8bwSMwsSPeZHYn0NNVIpOmwA7tcDCE0
-	7x
-X-Received: by 2002:a05:701b:42d1:20b0:156:6676:d0e2 with SMTP id a92af1059eb24-1ac5cb1aed7mr29126440c88.10.1793873193919;
-        Thu, 05 Nov 2026 02:06:33 -0800 (PST)
-X-Received: by 2002:a05:701b:42d1:20b0:156:6676:d0e2 with SMTP id a92af1059eb24-1ac5cb1aed7mr29126382c88.10.1793873193120;
-        Thu, 05 Nov 2026 02:06:33 -0800 (PST)
-Received: from hu-akakum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c4706bsm18719239c88.15.2026.11.05.02.06.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 02:06:32 -0800 (PST)
-From: Akash Kumar <akash.kumar@oss.qualcomm.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-Subject: [PATCH v2] usb: dwc3: Update nominal max votes for qcom usb
-Date: Thu,  5 Nov 2026 15:32:16 +0530
-Message-ID: <20261105100626.2003771-1-akash.kumar@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+        bh=urNqgcOG/VrzbWXCcGLN+pX0aRbGOhwKNVrteIsGA4Y=;
+        b=MopI5o4+UtTcVJTO+0dvK7uftVjD155X4t1K5gL3C0g/9u+XHCGpr7ZLS7X+5kfAUv
+         WcMAIlcmiN09zGFz5rQlPUtgSPi2dZHBJUV91UTmZyvQYMIvjhrevFJl3PjguY1epkuk
+         mSgJvinPn1B6nH9YVSrEkquhDufg/UpjL1gXqQTc6WFAv7oM5z7dEhCRTYM7YPSoovoN
+         AB2nMkKuK8SLha0ZW6nUD4h69iOte6K3KMtItyG8KXdWawGoeNNFh+FF6k/rNIk6QGCa
+         zbs69dM2G7IkgfbjFOxZKx0761Nje+Pg1CYNVfvWltm+TMS2xdhikwrmRkyedBPz5/XJ
+         i6Ew==
+X-Forwarded-Encrypted: i=1; AKwUvBx5H/RWqi5JztcWHc1NTOpN+tdyTI8/sr10lFI1AQ7cIKILDtEQ2E9dq0Vmj15E3zl+qGzpe1qD660EpkpC@vger.kernel.org
+X-Gm-Message-State: APuU4Z8+d3xZNUQa37Vioba5wiwkPjpxYQpnVXGbJ5eBmgRSbSExW1rP
+	x+BpDAK6T5QqTTqH2QYvpXYDBepnhYsYNNtQKeqxvo8luai3eDCPqO0QrcN0yzGieGM=
+X-Gm-Gg: AYBFou0g1vSpI4PX2tHQLA5VbbEEH94zmxl/7BEMEjjP7AkgRJ3cK/rqUnG+4wOqAJb
+	kmEN47zcjIQY+lwj8U89UZ+eutGt/DxbqqxjWMWCZ4lp1PbPHsWVMsscQMU2a2+H/4eROe0KAf7
+	GmRpnz2d9que7Mm9Y0TU1a4oliXshLTOYr488VO4dRza29UAPzL21XjybOHnr1+oYK6ZoWAopI+
+	XUhiQ1QablztChn9UGcsm6XsDUkoCXJnsPldAyCbFFlZd/vejxFZRq4E6hf36ePnMXgVxC9XwCX
+	zDYEv66SaM5F0zkaqTtXlThOqKo1H3YLa7FHxqhMRVelfohKMN445nXfQZM01GwYlKsO6qqxU7E
+	kKQgVg9bSNR2i79WBdhP1lbQNf03iB0QxZEtqU/UXnmZl2/X8gjpEq3xYBpffjF3VI6yhXBHAnI
+	EKKLg/SLEVfhRka53S0yXMtCBo9tT+wrtovpTXCiPOae9hd2+a1tPyn62j8SHSXu9KT4qwr5RLI
+	YCgBitLvna5EAiXOSDYqZ53zxWfJtKF8VCjqViw7y4AglW3UeK9O8c7wGT9QGeDNct8p1YqJ1ua
+	FQstM79meOGf+nN1a8/RtyaCz81C20iRaz5MTu79
+X-Received: by 2002:a05:6000:4282:b0:48f:e6cb:ed5a with SMTP id ffacd0b85a97d-48fe6cbf060mr10321901f8f.9.1793873720998;
+        Thu, 05 Nov 2026 02:15:20 -0800 (PST)
+Received: from [192.168.0.167] ([51.37.126.136])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fea1811c4sm9108120f8f.3.2026.11.05.02.15.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 02:15:19 -0800 (PST)
+Message-ID: <c75fcc12-a4b5-4e18-ad4b-6ba417baf299@linaro.org>
+Date: Thu, 5 Nov 2026 10:15:17 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -123,87 +90,115 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] dt-bindings: media: qcom,glymur-camss: Use CSIPHY
+ indices for ports
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Suresh Vankadara <svankada@qti.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>
+References: <20261102-glymur_camss-v1-0-fcb619fc7319@oss.qualcomm.com>
+ <20261102-glymur_camss-v1-1-fcb619fc7319@oss.qualcomm.com>
+ <20261104-real-nebulous-ostrich-017e92@quoll>
+ <72064a9a-1b2e-4c24-99e2-2cc15a8dd7f1@oss.qualcomm.com>
+ <a2d3190f-bfd1-4548-aba9-a186cfea878b@kernel.org>
+ <c5af7192-c923-4fbc-bbfc-7f03e310fddb@oss.qualcomm.com>
+ <fc9acaf2-f214-434e-bbe1-88e8e1af7683@kernel.org>
+ <539842db-c672-4549-b861-4a6f3be47556@oss.qualcomm.com>
+ <d586b7b3-675d-48a8-b0d4-564e571ef69f@kernel.org>
+ <CAFEp6-25QrLAF=-KgGJ-rC9pDpGa2YgoQAMKxU-FoByu2CJpMw@mail.gmail.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <CAFEp6-25QrLAF=-KgGJ-rC9pDpGa2YgoQAMKxU-FoByu2CJpMw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: wcJyj1GmWZ0uGgoVTZhRuvCihH7DuBPP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA0MCBTYWx0ZWRfX6va7/HCb7ISH
- 2X3SxW8sip7V/LAveAYV5eUbNOOTdYXoiSFO5ICK5asXPnAG/+JagLn08RhLSwe/+bkB6ZLzSeT
- FXD/41amCeenMADMJNmk1Ah6boIwHaYYKAsix9BjK5zIQXHcPwK95SVV04/OIBtOmxD3KBryXRp
- yWZ8E9beqewoheg6b8N+ZOEPydFQP2XMjJefcfCJYNtNuN5GwuEsDYNzsj2fMn6F6N4dfTXaNDy
- ESRfyB9chjTHEpwCv+Qr2dVHMjqY7asNq2HeeM4wlF8Z0XQAWVjel7otqPxpUDpDUz/0ifWYCM7
- qi3TQlLFEI2arinVkjQbUzrbuZvrjQpucz9Imi8u1/g9zbG0d9tK9a8kAkupZCPAO7vSDOVTiJ7
- Wrd1gcP6CWah8DnKc+gF3T9VfnIx2Fz+wqMyTKkMlqYhl0OfxKGEphtZLGH4/69bh7mqOkrLAYe
- n6/wqo8tiuMliYXauEQ==
-X-Proofpoint-GUID: wcJyj1GmWZ0uGgoVTZhRuvCihH7DuBPP
-X-Authority-Analysis: v=2.4 cv=SZdi5fRu c=1 sm=1 tr=0 ts=6aec552a cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=pXwHkFXhuZ6WPUJZpREA:9 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA0MCBTYWx0ZWRfX6o+zdBgazdac
- F1ZDybWdCHYF6W9SO7xLzI3KHCpxf3AIZTy4hIyi65KedApZnKt2f+QhvLg953H71sGSTBUXCSg
- 4QscGVIcFWNImhDdVKCLl7yEjLpkDug=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-05_03,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 spamscore=0 adultscore=0 bulkscore=0
- suspectscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611050040
 
-Increase the nominal max USB memory bandwidth vote to let DDR scale
-higher within its nominal corner, fixing glitches seen during
-simultaneous USB audio use cases.
+On 05/11/2026 09:53, Loic Poulain wrote:
+> On Thu, Nov 5, 2026 at 10:23 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>>
+>> On 05/11/2026 10:18, Nihal Kumar Gupta wrote:
+>>>
+>>>
+>>> On 05-11-2026 13:03, Krzysztof Kozlowski wrote:
+>>>>>> What is the problem exactly you are solving?
+>>>>>>
+>>>>> The problem is that CSIPHY4 is connected to CAMSS interface 4, so the
+>>>>> graph should describe it as port@4, not port@2.
+>>>> Nothing like this is explained in commit msg.
+>>>>
+>>> I will update commit message to explain it better.
+>>>
+>>>>> The previous port@3 description only worked through the X1E80100 resource
+>>>>> table indirection:
+>>>>>
+>>>>>    port@3 -> csiphy_res[3] -> .csiphy.id = 4 -> CSID selects CSIPHY4
+>>>>>
+>>>>> New standalone PHY path:
+>>>>>    port@4 -> no csiphy_res[] lookup -> port number is id 4 -> CSID selects CSIPHY4
+>>>> Then this breaks existing users, no? Anyway, what stops you from having
+>>>> there proper mapping?
+>>>>
+>>> No existing upstream user should break here; this is still part of the Glymur
+>>> CAMSS enablement.
+>>>
+>>> This follows the earlier discussion that CSIPHY4 should use the
+>>> CAMSS-side interface index as its graph port number:
+>>>
+>>> https://lore.kernel.org/all/CAFEp6-23L+4+yzVxX815ZA2x1_tN8SpzL7ciNcb9b+gBT67AdQ@mail.gmail.com/
+>>
+>> Should use? Since when? Do you have DT maintainers ack on that?
+>>
+>>>
+>>>> Did you find any existing practice of numbering ports logical numbering
+>>>> in this device, but some other logic coming from datasheet? Where?
+>>>>
+>>>
+>>> Glymur has only CSIPHY0, CSIPHY1 and CSIPHY4; CSIPHY2 and CSIPHY3 are not
+>>> present on the SoC.
+>>
+>> Then CSIPHY4 is basically the third (so @2 counting from 0) input port,
+>> no? Not fifth.
+>>>
+>>> Using port@2 for CSIPHY4 would require a Glymur-specific port-to-CSIPHY mapping.
+>>> port@4 describes the CAMSS input directly and avoids introducing separate logical
+>>> numbering for Glymur.
+>>
+>> Seems you opened a new can of worms, so this needs proper justification.
+>> Again, do you see any recent preexisting DT review which would help to
+>> convince me? I know I usually ask not to use poor existing code as
+>> reason to do the same, but here I actually want to see proofs of current
+>> accepted practice.
+> 
+> So some chipsets share the same IP blocks, with some block/phy
+> instances disabled. As a result, we need to decide whether we're
+> numbering based on active instances or on the actual hardware instance
+> index/offset. If we use active-instance numbering, then yes, it should
+> be @2 (CSIPHY4 being the third active instance). Alternatively, if the
+> port numbering is intended to reflect the hardware instance offset,
+> matching the register prop, then @4 would be more appropriate. It also
+> has the advantage of directly identifying the underlying hardware
+> instance, without requiring any additional driver-side mapping. In any
+> case, @3 is incorrect.
+> 
+> That said, since the bindings have already been merged in its current
+> form, we'll need to preserve backward compatibility when addressing
+> this.
+> 
+> Regards,
+> Loic
 
-USB_MEMORY_PEAK_SS_BW is raised from 2500 MB/s to 4500 MB/s (+2000
-MB/s, ~1.8x). This ICC vote does not by itself determine DDR
-frequency; the vote-to-frequency mapping is platform-specific and
-comes from each target's interconnect/OPP table. On the tested
-targets, the old vote kept DDR pinned at 1 GHz within the nominal
-corner, even though DDR can run at 1.5 GHz (+50%) within the same
-corner. At 1 GHz, glitches were observed during multiple concurrent
-USB audio use cases.
+Without reading this long thread - Hamoa hardware IDs are {0, 1, 2, 4} 
+so Glymur is either like that or not please check yourselves.
 
-Tested internally on RB3, RB4, RB8, Shikra, and other KLM targets.
-With the updated vote, DDR is allowed to run at the higher nominal
-frequency, and the following were measured (not merely projected):
+I think Nihal says Glymur as 2 and 3 missing so suggest hardware numbers 
+scheme follows established Hamoa scheme.
 
-- USB memory throughput: 125 MB/s -> 145 MB/s (+16%)
-- RTD-USBC audio latency: 17.9 ms -> 16.6 ms (-7.3%)
-
-RTD-USBC is the round-trip audio latency measured over a USB-C audio
-path; lower is better. Note the +50% DDR frequency headroom does not
-map linearly to the +16% throughput gain, since throughput is also
-bounded by other factors along the USB/DDR path; the frequency
-increase is necessary but not sufficient to explain the full gain on
-its own.
-
-Signed-off-by: Akash Kumar <akash.kumar@oss.qualcomm.com>
 ---
-v2: Added Details of targets Tested.
-    Added details for usb vote.
-    Added KPI Details.
-    Dropped USB AVG BW vote change which is not needed.
-
-Link to v1: https://lore.kernel.org/all/20260611081831.2743464-1-akash.kumar@oss.qualcomm.com/
----
- drivers/usb/dwc3/dwc3-qcom.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
-index ac68b4218b56..3a19385969dc 100644
---- a/drivers/usb/dwc3/dwc3-qcom.c
-+++ b/drivers/usb/dwc3/dwc3-qcom.c
-@@ -46,7 +46,7 @@
- #define USB_MEMORY_AVG_HS_BW MBps_to_icc(240)
- #define USB_MEMORY_PEAK_HS_BW MBps_to_icc(700)
- #define USB_MEMORY_AVG_SS_BW  MBps_to_icc(1000)
--#define USB_MEMORY_PEAK_SS_BW MBps_to_icc(2500)
-+#define USB_MEMORY_PEAK_SS_BW MBps_to_icc(4500)
- #define APPS_USB_AVG_BW 0
- #define APPS_USB_PEAK_BW MBps_to_icc(40)
- 
--- 
-2.43.0
-
+bod
