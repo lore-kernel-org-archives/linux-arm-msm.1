@@ -1,112 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793894577;
-	b=M+c+0kZeavw3q1vlOfe+Gb004C4Z3+ZttZrPoavhJRwMDZxUgdzTY8Nk/8gW8LNPK5ar
-	 8Vp6qC30XyJB7DhYRZ71eVK+w0J5fs9O+gjgZTxesV0O+pCz02GIavW1Z14quHSPT/As/
-	 djx+Gsk0qXVW0Nw/TdB4Q1tCN7NNoZvzHgFH7Sds44OZ+7Fkaqw6SOaxLdpUdaKqI7h0e
-	 KOmv4vTyrsPgsTqzYlfBeXzRzRdHpG9OOPv8Tt4NiG9AOJQ2YFt497fBY96eSLLHg6ouy
-	 tEJV2A+w0b73Iy/9mN6n3psyY8XfPMZttmMsdAO5L1r3reioupc+k7v3D0E4QUQRJ2g==
+	t=1793894802;
+	b=WA10dLPqa1ZLIyB60ebgR58JSPSbpSFA/DgvWXkL40IZKJRs1QZp/cAIww4JFABi8d87
+	 Uj5zsG4eb7hQchVOl3NM0vR0PXYeKiaR7cJu4lpPWJQyfxEULTiZ7nQttEuC3V/yZvpUo
+	 /AC0jLQGxr9OY9gSHmxXmSuDFCFQnaEwS2oEwpGymXQUbKBWDhvTDiDcKhgooiLVKwO4X
+	 TGHBDTPHQ0t4di6qUWFQafcwpVnO9ozCVnaQkwfKmd1AdolZGJO9yblmiN5hCrKdoL5rL
+	 t4paMQpROvanA+eqd+N+s6b5x28BCydUhvkiUSXb0l34Mn89wVZGVMHX/MAfTBgg1Lg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793894577;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
-	b=Q+YJ1b9EmMEC+B2qdwcQxHu9g1m8UQioxiq/Chk50Bxh+Ne7TTS8rSxzWWvxG+tWMV9T
-	 71yhBFRCT1bJEqV4Ss0jlVrczDif6RNero1dn+X0H2g7cBhFBf5QfqZSHN0XGUjrWZFLk
-	 haBlTKVgLu31fEPHlqambVITPcXZT0E2Lr4OuWyNEK3vQjVbsbdSZHR0mQH28mn+/YJJU
-	 GIzSp4zFch5gC+McSgvtnyojJsLLlFvWWsAFRhXCE9+gkZSTRIDNPaQ/IbSmTklUJj9rw
-	 Kp3cANRQBm5uOB6Sd17UtENNduWdJF4MRFSFeU4eRhkBZeK7EXzs2sb/nei8EIkm8JQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793894802;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
+	b=XygkG2LzI2Mt7gLHozcs9Pn+Yx5zNZGCjRTEZvUj7ufa3Q2zsDzMzt7k5GfRDVH+/syf
+	 at/8Yx49tVlIrdAOLUR1yULd1UUDpGTIWPzrldOMbIk9vN+nXo0lcKvNixWYSzTtnD7ui
+	 EC9p4RNrsR87mFuk12kVLpqAqgKvvtrwBT2aYE5dd2OX9oQnY5hNssQ9xpQxH+/2J8vfb
+	 oaZ4kU9YT2uOLO+K8KyBAop/Ud7w6qL44AajICzAagbIA35YId9sFBRg81p5rX6hAE7mB
+	 XxT4FjIT3qfUJ2Jc66vca7kbjqs7l5O9g+SV0zOZz7jLs63msgwUufPQuz/4JXIYGDA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lG41JLr3;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MglE5TQX;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="bZN/dLgT";
+	arc=none smtp.remote-ip=209.85.128.52
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CB1D60A2610
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:02:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3CB1D60A2610
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56AC2606BEA7
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:06:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56AC2606BEA7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lG41JLr3;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MglE5TQX
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQGvA2004506
-	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 16:02:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=; b=lG41JLr3fzDI4Kz8
-	76xU/mrLryYp1dYynYiikY9ITSTgEzjHW+x/XAFnUIXmaS/TPppUPauz8aibIYx9
-	yCOHD9p/x634il5EQURWbj7xJUTHTl7Rz53SSsyobTbdelhxSevSNJbV3sJZzh6k
-	ePFkR3WOgYvdeA436eyLaVFQ7vvz5LJctXusx6MrUssOnzukokNaZQbSotDNCP6X
-	gLJf0XuKNIsz0zN1ax1Jv6Pof8xSt4k7DwHf/YV1VFk1hnZLimmRvHxnLZxgWuY6
-	r23oRDuCS5OcSim/HLsna+i/XXklIhRHRd53C6CAuZHa0ScUv2JfTJT6d2s0ufoF
-	dTv0tg==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrqpd1gyt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:02:52 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5eadfb67611so426926e0c.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:02:51 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bZN/dLgT
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a208d93758so24039875e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:06:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793894571; x=1794499371; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
-        b=MglE5TQXBWDOGvWqfP2ncIxodWL4n2yqBOlYxcFa8a/oqtUvqaE8j1+QdI7ROeOEEJ
-         q+UXCdTclhLzdXQ/REJqBLROJdtMjkNnWuUJv6sDhab1/Lu4kRvdFTWqNt+5MaFg39sy
-         rzEV6fs2p4Dt+a0EsyRG16dY0kdfcO17S9n8RURL0y9N/6fzQVfuseCg/2Dmp3xwS62B
-         XQmVe5nkE/q70p8d45LY36kE6sksCREcOqxImPdWw1tDffxIG4Igz1qTRA9p06HixBn8
-         lwelDZU5scH+1wK/VLcbqSDfvXbG2uSPPpNGb1wfIpprsHJnvBtFhcZFWO2dbu0O/VuT
-         IWOA==
+        d=linaro.org; s=google; t=1793894801; x=1794499601; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
+        b=bZN/dLgTnwp3fVVxvRKU30Fx8i1rNQrjZjCQICPIYUDtFBMcNfXrz13yJLAP/Lag7D
+         sM0fRylYUGUx9byUV6VmGokaPZhUs1RL/o8x9cHERoSkp8m9dTLG9eFqZ3F8ua3kIZyA
+         TqnkIpYWzGYjtTVpFhrd+2emTG9VOHrEHirJ0Yho04oZsBkZ/DTQCOn7Lszf9NUQwu6H
+         K/FxM9ySoLX8UhIFXx0oegPlstft3EhkIbYx82ggNtGeybiohK0FmIIhOtDrx4ugzrvw
+         g1854rsGGOmmgAbre2IlSyJOs4ShUKOOsyUcBB5YaTwIv1sShYNju1wnbnu+h6QcV0rf
+         56XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793894571; x=1794499371;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
-        b=ZuM2p7eW4DFGkhKK3W0U7I7I2Ugz4slm9QXWltRch0Fg7mt+d89a5eeZ6rh/osC9HV
-         3nEyLNy+Fait9lmoB/PlouxytgIobnSw/rrNRqfIK2w0JppO/blqTz+2gedzjleeAImD
-         pPgu9egp6Jkzf55YvCwWmzBciPFFf9u8AgnEwWRJ8qn+D+P7ehy3EJeS03RFawKR9XAc
-         nabFO1vTX0Y008wTyeetrRNxzXQoF+C+9/+cD3rnHHE0WBf9ST8tteR3LNtshodbos+2
-         W3gAwaAqbfV+w+7cWhV6RHjBXwelXnFSZOOngTEZLI1qsMeukL8Iinxq5MpGYvR7dA9t
-         FEig==
-X-Forwarded-Encrypted: i=1; AKwUvBwPhuE4Q74dg0t6wZD9Vz5+/HXkNg69bFeyYFSNdE2jWAkESF2pg9YqSICOxF9h4cwYDZTqcim1rotMptbj@vger.kernel.org
-X-Gm-Message-State: APuU4Z8MP5IhUyHSE4qhZ4NkQuXXSX3uyf82DaiWDLL4QbkrPB0n54QQ
-	F2BRfQTXDCZQarNXGB5GNNLx7xrGpCaB8EcX29MeyJRFIswVUWKtnesmtRcmZBlu72Ng0llYXPC
-	dzcfdKVgveuUz1f2lsBkkXpPO6nFPy7c3WU4pcGpdrPqcSbNXIG0AbamInRo1k6b+Lq/p
-X-Gm-Gg: AYBFou01ChgS3fgbDFWxJX/3L75udqxiGw9SE4Tiid0YS7s9eDHCVjk2JzjUpJhI79o
-	RNeK86ostwDuDpr+cTDEdmSKfVgWI1QdiM+pij+Fl42rgJuBuYYZ9h1wP7K9CdPZBYrOKU34DC/
-	YVXpAvUoBMOG7y9Uizwirjx6x4NgVwJWWWPSrT40jXY5tIqHS5T12W30E6N0RFO+Ld9n2IeTt3Y
-	ypcYZjDGU7B8RmyowfuPakWGdQiNG1YorW3D1UD2YI9QFjUWxwpChAbu6K45MSA2IMUfZ7KB76s
-	ZyW6M3xN17YeW2BP/gs2dfFSzRUFX1Gtxi0HKxwj3EsjGE6FaLu24z49IkT/1lvs/CPSPCiyfwM
-	iyUh+b0vGq9lTSrsHojsddwFxC+m9oCLOipX67AwnCTafbi5GuBOUfbuH0w==
-X-Received: by 2002:a05:6122:787:b0:5ea:9218:eac1 with SMTP id 71dfb90a1353d-5ec689733a8mr9188967e0c.20.1793894570679;
-        Thu, 05 Nov 2026 08:02:50 -0800 (PST)
-X-Received: by 2002:a05:6122:787:b0:5ea:9218:eac1 with SMTP id 71dfb90a1353d-5ec689733a8mr9188854e0c.20.1793894569740;
-        Thu, 05 Nov 2026 08:02:49 -0800 (PST)
-Received: from [127.0.1.1] ([188.27.161.77])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda20521sm11065672f8f.53.2026.11.05.08.02.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Thu, 05 Nov 2026 18:02:03 +0200
-Subject: [PATCH v3 3/3] ASoC: qcom: x1e80100: Allow userspace WSA RX chmap
- override
+        d=1e100.net; s=20260707; t=1793894801; x=1794499601;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Oc104d8dubVkVVOeovNlpZRvCxc8r/7mBsga0gOA0Zc=;
+        b=shqVO5DNTxZ2+NjhVxAYZb4Ec42YgLhB/WJoF+ivFTRK9LxzLFfxhNZFzkOvBmXUe3
+         ODXeq+Qev2QwaTILHjZsMd3G8a21yxiNVbm8BtcybrxbyRk8SyLpmIchSXb+Ma9ic0Lr
+         Ie5d6egWs5LwN7ObSOiUGDWx9OdNybAB9I4o5KUFnY2lfkwiu1yrZdGYwYHhBeTer8Tf
+         e6AitBmx5pbukWXPIqtif79KmvZ8dqbRq5+fscxe0UaWK96cCmn4B0ExQ+DE9e9ozIHs
+         GsrV0/+J60yjCepFN1C1/LDE4fZqbTojEmy5PrsGJneKv8R2ueQJr7kFvgyIfUS5ugOc
+         WTdQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwOJUZk076wuVBQCGmRSMT5HXyOcwAKRavly3JLJvxVItuwVYdFyd0SBurkHrhvvhfM4MG9JTKv8oy4PeEw@vger.kernel.org
+X-Gm-Message-State: APuU4Z+OYYlNa4wvxtUW0lkjPrzt1jA9yDBd/WIfqkWwAwnxS7v73OGw
+	OqPfTgZ639vGfEYQsI56bZpjumYjr4WeP0ekJ92V2Zjphdn3SSIUsjFieNQJYGknBvEUx4GUCET
+	/Oqcl
+X-Gm-Gg: AYBFou1Q2An/jzpTwsgKwe41KkY2Nl74PEtITrdvm7dhL+MobsKyhP566SFFvwcE2hp
+	uNIyn66yos/ghCd1E51VUhgbmJZhhxNSZ3vIyE1iXGybZycCc1phKI6U9c+PYf9CAA2pbRhF11k
+	VU80LjzG6K2To1jbhEI2Z2kGY/SUCoTwobsH5nGZcWRIEEJYH5Cjp4zKnY+03uojFeS7BPKXVLZ
+	R7JAChJcAUzt7tLndjxktNb9y6kLY1aXx7rJRF1lWF+GnC1CIVo1NRekW1nW8uv56W60dXPu2jT
+	6nz/iAk0vTBB/wVbUPd3F7PVxpHGDJ0D6ZhRTB1WCym8gzZQGum0Y+HeFhaux/3FTTmiZtC1O/D
+	GzdM4booEKy/0P8A5nQgSl4NBYD6ep0FNv5bjuX6Pm8bPxBvMLgKxbJphmVF0imm2G5K54S9IEd
+	R/zSwaOKWi6G/ZqHzKZoK7XibCr/gH9a189UJlaOO4U/NgGMTebnuzP1D/ErXXaenuUDU04KO76
+	2TwD+xr/2jmfpqInSxXeAsU3orhsgZG/BgJVWfQocgBX5xPXybOVB2fPE41YID2KM5JAupUwuKP
+	KyxlUhgWi5UaLwbTT82mLyneKLsGZrrDarG9nKhc
+X-Received: by 2002:a05:600c:c088:b0:4ac:da92:2bd4 with SMTP id 5b1f17b1804b1-4acda922e24mr314506055e9.1.1793894800616;
+        Thu, 05 Nov 2026 08:06:40 -0800 (PST)
+Received: from [192.168.0.167] ([51.37.126.136])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b56f0237aesm77536955e9.9.2026.11.05.08.06.38
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 08:06:39 -0800 (PST)
+Message-ID: <770ddb46-2f4a-4eab-9ce0-fa537860c310@linaro.org>
+Date: Thu, 5 Nov 2026 16:06:38 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,345 +91,127 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] media: qcom: camss: Use contiguous DMA buffers
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Todor Tomov
+ <todor.too@gmail.com>, Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Allan Siriani <allan@fatecpompeia.edu.br>
+References: <20261105-camss-fix-dma-v1-1-74e9ec56e518@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261105-camss-fix-dma-v1-1-74e9ec56e518@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-3-29e06613115f@oss.qualcomm.com>
-References: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
-In-Reply-To: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8385;
- i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=XoOR3cm4qVTMMv8WRHw1TamUUuoGbfY5O/C44BLC1EA=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq7KihNYU/BoOtJFuWVU6/OBJyEqwz62HP8sMtG
- LN4ftH8q72JAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauyooQAKCRAbX0TJAJUV
- Vo2LD/0T54aWR7czFnb4Hy62PITJ0rlH8TzuSc6iHS0LNLgaGLJ6JtrYCqd3sj73he4ilS+DcmH
- fQYQsGX01c4aLRvx13E3u8DvV3hYq57TZvT9lcsRObS45Pjo3yNibqIcJGXHnt0dxJZcmgIJt7q
- Z53Oihi0BRPLKVu+d47jlqv9WUTHJOucgGkF0tm2ydJidLFUY5DRr7zI+ZSj4aa+VpWbGgzEYK1
- CWs0ZwtInbxbPVV23dBv88B43BMzuJUSGrE5kWoAuhFNLMlXNFon1V3kAPWRZROLlB6gXtWeNA7
- 2htI841cipXvruZAO6F2I1gPQOMpkFldXu/9nybBoT2WMkCDU+lL+QHCzlNgtK0fZdLn157rsGA
- X/8oZ+AeHgHoe1bBGrKK828tzWVXQjUTx/WUU/LYMX8YBsBYCaK4cd97UU34AJ2K8ZTOXVjeIP2
- KAR3gDpDn6y05wNuHMLrU0jNXEX58YXUoXkK0Ucy6EvwwLbiC/4Ws2jtDSDo8YaG0aEkELeW84S
- 2YS1TasAjMRjXrTNknd5XcE/gRq+BezO4iDcEL4imvtPQGa8ose0UVy9aPvELwQtOrV8lWUQO8N
- ChbvxTy4hwphA9MAKdF7PJjhBfWSbdwWUT4xW6x0wZg6XUyQNO0lx7F0DTn+GpP0Y+iQdwv4FqI
- kD7u7xhNt4vSUsw==
-X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX+ny+/Jcq5usw
- SuDKWhwDIyioDfyZGJTzk+OiGOkwpc6FLDRwg6DdzZzhcu4LjlFUpy16b8kaN/1v07Nf4KHZ/Wd
- grhBQw+vmF649TW+9mMReEu9wgoLwFU=
-X-Authority-Analysis: v=2.4 cv=Y5JtIReN c=1 sm=1 tr=0 ts=6aeca8ac cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=xnt_XiUjAw3QdKs5wcYA:9 a=QEXdDO2ut3YA:10
- a=tNoRWFLymzeba-QzToBc:22
-X-Proofpoint-GUID: Wpn27xSH5RXos-1xEzxQeL55QrWG3eD9
-X-Proofpoint-ORIG-GUID: Wpn27xSH5RXos-1xEzxQeL55QrWG3eD9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX8IzbUIfVoV4m
- uzfWGHgC9XMGMT+Bw4A+sMWgwNr81aAyaEb65a4dBV6FV5YXdD9ac0V8ZpB9APja/XqXBt4+KLn
- icrso3xqqeo2cp7tvLJku6Q5OfIK9hUkNiHlLhLO2t2pCep6rlGaHysrWNu4I0XcnTI+1/0n8wx
- UBeDvAXkqScJzoBilCO5xanSpLScR7K5Ppw5gwTMEEVXD4FVmqghnVGldBJtni9tShVK48Yg2qO
- kYCsREwdIfDk/E0wgVNA//PEnHw6p0FL9XkrBsfRT9r0VgoknLeAiTBDFhFfC5yA6QnDLYSFWuo
- e+55CUN3rNAeuWgmR5qG08dDHyUp++eMn4mYYf5bkk40vEkm2kS674bShC/7vs2umu2xf6DxIZQ
- gKUQRKPcCb5AANj0+aOFXFsH7liiVA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-05_04,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
- phishscore=0 spamscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611050063
 
-The WSA RX slot mapping is currently computed entirely from the channel
-count in .prepare() and pushed unconditionally via
-snd_soc_dai_set_channel_map(). Userspace has no way to express a
-different channel map, so any map defined in UCM is ignored.
+On 05/11/2026 15:08, Loic Poulain wrote:
+> The VFE write masters are programmed with a single base address per
+> plane and then write the whole plane from there. video_buf_init() took
+> that address from sg_dma_address() of the first scatterlist entry of a
+> vb2_dma_sg buffer, which is only correct when the whole plane is mapped
+> as one contiguous range in the device address space.
+> 
+> Neither the driver nor the hardware can handle a plane split across
+> several DMA segments, so scatter-gather buffers were never really
+> supported here. The issue stayed dormant because vb2_dma_sg gives no
+> IOVA contiguity guarantee but still tries hard to keep the number of
+> segments low, and with an IOMMU dma_map_sgtable() usually maps the
+> whole table into a single IOVA range. The mapping therefore almost
+> always came back contiguous in the device address space, so reading
+> only the first entry happened to work.
+> 
+> Where that does not hold, the write master runs past the first segment
+> and writes the rest of the frame into memory belonging to someone else.
+> 
+> This recently surfaced as patch proposals enforcing contiguity in
+> camss itself, walking the scatterlist to verify that the DMA segments
+> follow each other, which amounts to re-implementing what the dma-contig
+> framework already provides.
+> 
+> Use vb2_dma_contig instead. It guarantees that each plane is mapped as
+> a single contiguous range in the device address space, one IOVA range
+> when an IOMMU is present, physically contiguous memory when there is
+> none.
+> 
+> Fixes: 0ac2586c410f ("media: camss: Add files which handle the video device nodes")
+> Reported-by: Allan Siriani <allan@fatecpompeia.edu.br>
+> Link: https://lore.kernel.org/all/20261104202313.72494-2-allan@fatecpompeia.edu.br/
+> ---
 
-Add writable "WSA Playback Channel Map" and "WSA2 Playback Channel Map"
-controls on the WSA RX backend PCMs, using the standard ALSA channel map
-TLV. Store the userspace-selected SNDRV_CHMAP_* map per WSA backend,
-translate it to Q6 PCM_CHANNEL_* slots at .prepare() time, and keep the
-previous default mapping when userspace has not provided a complete map.
+I'll fix this
 
-The controls are added from the card late_probe callback. The backend
-PCMs are only created after all DAI links are initialized, and adding
-controls from the stream startup callback would take controls_rwsem
-under dapm_mutex, deadlocking against DAPM mixer writes.
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/camss/Kconfig       |  2 +-
+>   drivers/media/platform/qcom/camss/camss-video.c | 14 ++++----------
+>   2 files changed, 5 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/Kconfig b/drivers/media/platform/qcom/camss/Kconfig
+> index b51745c942c9fd71a95d09993213bde4b7e877e2..e1967bc20cf03ea1b0b159c5175294eeb40fe1c1 100644
+> --- a/drivers/media/platform/qcom/camss/Kconfig
+> +++ b/drivers/media/platform/qcom/camss/Kconfig
+> @@ -5,7 +5,7 @@ config VIDEO_QCOM_CAMSS
+>   	depends on (ARCH_QCOM && IOMMU_DMA) || COMPILE_TEST
+>   	select MEDIA_CONTROLLER
+>   	select VIDEO_V4L2_SUBDEV_API
+> -	select VIDEOBUF2_DMA_SG
+> +	select VIDEOBUF2_DMA_CONTIG
+>   	select V4L2_FWNODE
+>   	select GENERIC_PHY
+>   	imply PHY_QCOM_MIPI_CSI2
+> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+> index 0852eb6f13154cfae7147ce39d22de64d14a5cba..5de6ff5ecc76a2863e536fca1c40ae6b2de6dc0c 100644
+> --- a/drivers/media/platform/qcom/camss/camss-video.c
+> +++ b/drivers/media/platform/qcom/camss/camss-video.c
+> @@ -13,7 +13,7 @@
+>   #include <media/v4l2-device.h>
+>   #include <media/v4l2-ioctl.h>
+>   #include <media/v4l2-mc.h>
+> -#include <media/videobuf2-dma-sg.h>
+> +#include <media/videobuf2-dma-contig.h>
+>   
+>   #include "camss-video.h"
+>   #include "camss.h"
+> @@ -154,16 +154,10 @@ static int video_buf_init(struct vb2_buffer *vb)
+>   						   vb);
+>   	const struct v4l2_pix_format_mplane *format =
+>   						&video->active_fmt.fmt.pix_mp;
+> -	struct sg_table *sgt;
+>   	unsigned int i;
+>   
+> -	for (i = 0; i < format->num_planes; i++) {
+> -		sgt = vb2_dma_sg_plane_desc(vb, i);
+> -		if (!sgt)
+> -			return -EFAULT;
+> -
+> -		buffer->addr[i] = sg_dma_address(sgt->sgl);
+> -	}
 
-Allow up to six WSA channels for Glymur.
+I hadn't even realised this existed, ick.
 
-Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
- sound/soc/qcom/x1e80100.c | 193 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 189 insertions(+), 4 deletions(-)
+> +	for (i = 0; i < format->num_planes; i++)
+> +		buffer->addr[i] = vb2_dma_contig_plane_dma_addr(vb, i);
+>   
+>   	if (format->pixelformat == V4L2_PIX_FMT_NV12 ||
+>   			format->pixelformat == V4L2_PIX_FMT_NV21 ||
+> @@ -699,7 +693,7 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
+>   
+>   	q = &video->vb2_q;
+>   	q->drv_priv = video;
+> -	q->mem_ops = &vb2_dma_sg_memops;
+> +	q->mem_ops = &vb2_dma_contig_memops;
+>   	q->ops = &msm_video_vb2_q_ops;
+>   	q->type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
+>   	q->io_modes = VB2_DMABUF | VB2_MMAP | VB2_READ;
+> 
+> ---
+> base-commit: 8b7179210b22f8e48a82c5ceacb9d56a9c4cfec4
+> change-id: 20261105-camss-fix-dma-c32288664dd2
+> 
+> Best regards,
 
-diff --git a/sound/soc/qcom/x1e80100.c b/sound/soc/qcom/x1e80100.c
-index c81df41ace88..6a91b3581c75 100644
---- a/sound/soc/qcom/x1e80100.c
-+++ b/sound/soc/qcom/x1e80100.c
-@@ -15,14 +15,117 @@
- #include "qdsp6/q6dsp-common.h"
- #include "sdw.h"
- 
-+#define X1E80100_WSA_MAX_CHANNELS	6
-+#define X1E80100_WSA_PORTS		2
-+
- struct x1e80100_snd_data {
- 	bool stream_prepared[AFE_PORT_MAX];
- 	struct snd_soc_card *card;
- 	struct snd_soc_jack jack;
- 	struct snd_soc_jack dp_jack[8];
- 	bool jack_setup;
-+	/* Userspace-selected SNDRV_CHMAP_* positions, 0 means unset */
-+	unsigned int wsa_chmap[X1E80100_WSA_PORTS][X1E80100_WSA_MAX_CHANNELS];
- };
- 
-+static int x1e80100_wsa_port_index(unsigned int dai_id)
-+{
-+	switch (dai_id) {
-+	case WSA_CODEC_DMA_RX_0:
-+		return 0;
-+	case WSA_CODEC_DMA_RX_1:
-+		return 1;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static unsigned int *
-+x1e80100_wsa_chmap_from_kcontrol(struct snd_kcontrol *kcontrol)
-+{
-+	struct snd_pcm_chmap *info = snd_kcontrol_chip(kcontrol);
-+	struct snd_soc_pcm_runtime *rtd = info->pcm->private_data;
-+	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
-+	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
-+	int idx = x1e80100_wsa_port_index(cpu_dai->id);
-+
-+	if (idx < 0)
-+		return NULL;
-+
-+	return data->wsa_chmap[idx];
-+}
-+
-+static int x1e80100_wsa_chmap_ctl_get(struct snd_kcontrol *kcontrol,
-+				      struct snd_ctl_elem_value *ucontrol)
-+{
-+	unsigned int *map = x1e80100_wsa_chmap_from_kcontrol(kcontrol);
-+	int i;
-+
-+	if (!map)
-+		return -EINVAL;
-+
-+	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
-+		ucontrol->value.integer.value[i] = map[i];
-+
-+	return 0;
-+}
-+
-+static int x1e80100_wsa_chmap_ctl_put(struct snd_kcontrol *kcontrol,
-+				      struct snd_ctl_elem_value *ucontrol)
-+{
-+	unsigned int *map = x1e80100_wsa_chmap_from_kcontrol(kcontrol);
-+	bool changed = false;
-+	int i;
-+
-+	if (!map)
-+		return -EINVAL;
-+
-+	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++) {
-+		unsigned int pos = ucontrol->value.integer.value[i];
-+
-+		if (pos && qcom_snd_chmap_to_q6(pos) < 0)
-+			return -EINVAL;
-+
-+		if (map[i] != pos)
-+			changed = true;
-+	}
-+
-+	if (!changed)
-+		return 0;
-+
-+	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
-+		map[i] = ucontrol->value.integer.value[i];
-+
-+	return 1;
-+}
-+
-+static int x1e80100_add_wsa_chmap_ctls(struct snd_soc_pcm_runtime *rtd,
-+				       const char *name)
-+{
-+	struct snd_pcm_chmap *info;
-+	unsigned int i;
-+	int ret;
-+
-+	ret = snd_pcm_add_named_chmap_ctls(rtd->pcm, SNDRV_PCM_STREAM_PLAYBACK,
-+					   name, snd_pcm_std_chmaps,
-+					   X1E80100_WSA_MAX_CHANNELS, 0, &info);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The core registers a query-only control. Make it writable so that
-+	 * userspace (UCM) can select the WSA channel map. The card is not yet
-+	 * registered at this point, so the control is not visible to
-+	 * userspace while being modified.
-+	 */
-+	for (i = 0; i < info->kctl->count; i++)
-+		info->kctl->vd[i].access |= SNDRV_CTL_ELEM_ACCESS_WRITE;
-+	info->kctl->get = x1e80100_wsa_chmap_ctl_get;
-+	info->kctl->put = x1e80100_wsa_chmap_ctl_put;
-+
-+	return 0;
-+}
-+
- static int x1e80100_snd_init(struct snd_soc_pcm_runtime *rtd)
- {
- 	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
-@@ -92,9 +195,11 @@ static int x1e80100_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
- 	return 0;
- }
- 
--static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
-+/* Default WSA RX slot mapping when userspace has not provided a channel map */
-+static int x1e80100_snd_default_wsa_slots(unsigned int *ch_map,
-+					  unsigned int channels)
- {
--	switch (num) {
-+	switch (channels) {
- 	case 1:
- 		ch_map[0] = PCM_CHANNEL_FC;
- 		break;
-@@ -113,6 +218,14 @@ static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
- 		ch_map[2] = PCM_CHANNEL_FR;
- 		ch_map[3] = PCM_CHANNEL_RB;
- 		break;
-+	case 6:
-+		ch_map[0] = PCM_CHANNEL_FL;
-+		ch_map[1] = PCM_CHANNEL_FR;
-+		ch_map[2] = PCM_CHANNEL_LB;
-+		ch_map[3] = PCM_CHANNEL_RB;
-+		ch_map[4] = PCM_CHANNEL_FC;
-+		ch_map[5] = PCM_CHANNEL_LFE;
-+		break;
- 	default:
- 		return -EINVAL;
- 	}
-@@ -120,19 +233,56 @@ static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
- 	return 0;
- }
- 
-+static int x1e80100_snd_build_wsa_slots(struct x1e80100_snd_data *data,
-+					unsigned int dai_id,
-+					unsigned int channels,
-+					unsigned int *rx_slot)
-+{
-+	unsigned int i, set = 0;
-+	unsigned int *user;
-+	int idx;
-+
-+	idx = x1e80100_wsa_port_index(dai_id);
-+	if (idx < 0)
-+		return idx;
-+
-+	if (channels > X1E80100_WSA_MAX_CHANNELS)
-+		return -EINVAL;
-+
-+	user = data->wsa_chmap[idx];
-+	for (i = 0; i < channels; i++)
-+		if (user[i])
-+			set++;
-+
-+	/* Fall back to the default map unless userspace set all channels */
-+	if (set != channels)
-+		return x1e80100_snd_default_wsa_slots(rx_slot, channels);
-+
-+	for (i = 0; i < channels; i++) {
-+		int q6 = qcom_snd_chmap_to_q6(user[i]);
-+
-+		if (q6 < 0)
-+			return q6;
-+		rx_slot[i] = q6;
-+	}
-+
-+	return 0;
-+}
-+
- static int x1e80100_snd_prepare(struct snd_pcm_substream *substream)
- {
- 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
- 	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
- 	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
- 	unsigned int channels = substream->runtime->channels;
--	unsigned int rx_slot[4];
-+	unsigned int rx_slot[X1E80100_WSA_MAX_CHANNELS];
- 	int ret;
- 
- 	switch (cpu_dai->id) {
- 	case WSA_CODEC_DMA_RX_0:
- 	case WSA_CODEC_DMA_RX_1:
--		ret = x1e80100_snd_hw_map_channels(rx_slot, channels);
-+		ret = x1e80100_snd_build_wsa_slots(data, cpu_dai->id,
-+						   channels, rx_slot);
- 		if (ret)
- 			return ret;
- 
-@@ -164,6 +314,40 @@ static const struct snd_soc_ops x1e80100_be_ops = {
- 	.prepare = x1e80100_snd_prepare,
- };
- 
-+/*
-+ * The WSA channel map controls are added here rather than in the DAI link
-+ * init or startup callbacks: the backend PCMs are created only after all
-+ * links are initialized, and adding controls from startup would take
-+ * controls_rwsem under dapm_mutex, deadlocking against DAPM mixer writes.
-+ */
-+static int x1e80100_late_probe(struct snd_soc_card *card)
-+{
-+	struct snd_soc_pcm_runtime *rtd;
-+	int ret;
-+
-+	for_each_card_rtds(card, rtd) {
-+		struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
-+		const char *name;
-+
-+		switch (cpu_dai->id) {
-+		case WSA_CODEC_DMA_RX_0:
-+			name = "WSA Playback Channel Map";
-+			break;
-+		case WSA_CODEC_DMA_RX_1:
-+			name = "WSA2 Playback Channel Map";
-+			break;
-+		default:
-+			continue;
-+		}
-+
-+		ret = x1e80100_add_wsa_chmap_ctls(rtd, name);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- static void x1e80100_add_be_ops(struct snd_soc_card *card)
- {
- 	struct snd_soc_dai_link *link;
-@@ -203,6 +387,7 @@ static int x1e80100_platform_probe(struct platform_device *pdev)
- 		return ret;
- 
- 	card->driver_name = of_device_get_match_data(dev);
-+	card->late_probe = x1e80100_late_probe;
- 	x1e80100_add_be_ops(card);
- 
- 	return devm_snd_soc_register_card(dev, card);
+LGTM
 
--- 
-2.54.0
-
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
