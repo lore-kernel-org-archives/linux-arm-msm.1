@@ -1,64 +1,117 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793906348;
-	b=VyMc7wza9SxkSk24hrF1MJOwKKs2oOa60L2lOLEh4IilHsVIbUOONEbknDhXaZvgUQ1T
-	 9HKmSVC8783M9LKkrVBn3zojl43SS+yvYPQk08jKVHHDrGz0mxEK3M5pMU6mlLoXHIOQi
-	 gW5vsrK1K/tS2fd/wxoNXqhYvu9PgOlo1ubDKEzZ/VNUIIbGlJXLNAql9dv4hek4PqWJL
-	 +Ot+GJHrocRAe//PumS6sS1Q3iJuBWZ5LeVryyCLhnxPHUSp1YidLLFs+q4VcXOh8o4Lb
-	 wAM3/4yA1Me4JfYdYAhiTp1NubW1kLG06+XVbhx+13QkZAJ2AEj9ldjp0odjk12m+dQ==
+	t=1793907977;
+	b=RpbBNohvzolW1LspI4MHJVgq0Hddo+lLVegKfqioOSx1HDpF+Evtn0mIJ7ANqx99ebKu
+	 hPKT4O6pIACRKeoN6YhZr7Ad9iJ7NXuKbdKFUlrZaBBNajCnIUoow7rI80r6Op11uWQdl
+	 SuaZeP0LfLTGet1+irCm8IcY+1umTnRak/+5y+3f+FIIwEVV2RV5Hs1v5CcbRiiZyJXty
+	 DHBeIe+CqFqf8sS5E3UupxfKHKmvwgTDsSs3OaZKRJrS/noE0hb1TSkOXUiEH/byxlTFE
+	 nZ46Q8jnTYNXq3xlhZ4RMwhRG+RTQlYW2w7GMQ6F6Msd1uotBF1F66vFYNiGfV4vj7g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793906348;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:X-Mailer:From:To:Cc:
-	 Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:
-	 Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=4KTLjFOLB3Bw3rwGT8qot1q76+iLWn9KmQr9KnByOio=;
-	b=dNzbKIeSx7891+5XPmNzlfXDICa6oDAckulvgvlzq9j/7VBfNqxVHViXVxe9PwRMCroS
-	 7P3X3BBW6oIseRQdSP4SWWGiHun0alZd7uE9lV65hNbNCw2u7OQGo1284tNMR5HjyaNGX
-	 niEzKbc102dAFu4IcaWwbqXD8OFO8YlcdFhy4PFzLmnVsxyHRsPhBNUzMy3Uf+O6LDsTJ
-	 2/sp8snnkM5R8vBlA4AkeX6qrGGei+fSELfMmTod1gO4LghrJ4uVf2lRDhEtw05WgzNkB
-	 zgK45t6LBE72Q/Pxg1FogNl+hPptJAfJ1fwB2Ds95h3IhVhBJCNmcqF9s4N/FOJy+lQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793907977;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:X-Developer-Signature:
+	 X-Developer-Key:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=3BFnUHcE/+pbpFcfNMGE+vFXRnYLIh629ZomjR+Ujwk=;
+	b=Fs/uQqjQl0fwP1nIWZTOOtvFq7pMjUXnTlY24Dd7sYW8AVWdbdCBUhnlFTvG4tgOLazO
+	 Cu3isOD2dFv+piZGwv1GViHKBmIUAP3KC79cUCwb6oykiMiO8KjirD6jjrrF3rDDLtpvR
+	 R4EOBVK4Tk8E3ZCzJQRVJNIR9fyJLAs8+Na1AxblIkIa/sC5x44n2NY53lFM18UApoaKY
+	 w4vPnrB9dlPkWCXLeu43Ie0TT90/WYcU4Q5vjCezogSdICDdLe8N0HuqY9srIuslII9w7
+	 I7Urs/09t7wmBOL0MMFIbrWhY0I4rRcctgkpjwXn55Xh2i9tl5lxXoLa6O4Ny4qP43Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fqwqf.xyz;
-	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0LMjIwBb;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YDzFYP+z;
-	arc=none smtp.remote-ip=23.251.234.50
-Received: from e234-50.smtp-out.ap-northeast-1.amazonses.com (e234-50.smtp-out.ap-northeast-1.amazonses.com [23.251.234.50])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=AmeU8GTg;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="QrZf/H5t";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37698606D803;
-	Thu,  5 Nov 2026 19:19:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37698606D803
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2688A6071F82
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 19:46:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2688A6071F82
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0LMjIwBb;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YDzFYP+z
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1793906345;
-	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=KjK6/it5+2sDEN6+68hm612BuS7rPhjf+Cw6EfwhY+Y=;
-	b=0LMjIwBbEXV9VRucSky8VB+NQdqv31r1REne19ATooStdbHX+56adyHFlDWtVxEj
-	FkK2gF4I/NiBi+29b8MfLpGmqFlkldRnKu2jZhGI4uY3d9XQmyge4rIwMFFH17bQbGR
-	m/Y45ysn0SydDhUKljfPni284lTo41RsMWM9cmnc=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793906345;
-	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=KjK6/it5+2sDEN6+68hm612BuS7rPhjf+Cw6EfwhY+Y=;
-	b=YDzFYP+zC6Rxrtg6NwWfbj7rC1WKjAyMGY64NSErEQFfQHijuFvqPEUN9xRHxtyj
-	REq2FY6i8QIzuUIiUYtdKTMRGOQnjv9MDPl8ztGSiFCKlSf49gz0Yll+AStUY3lorAA
-	wjSAXMgFmJU1vQhiJp1ANGl9n8rgmc461kWooOZU=
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=AmeU8GTg;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QrZf/H5t
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5HeMWV1440042
+	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 19:46:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=3BFnUHcE/+pbpFcfNMGE+vFXRnYLIh629Zo
+	mjR+Ujwk=; b=AmeU8GTgDBwiWMN4/T6A+Dyxv8IvBJZNTHbYFRpjZ0iUxpLoTry
+	iYDQJARx+xLyFlr1cMwf/1d6h/ecXd8dYo5LHQ2LUchNhlMV+uUx+6NMKK/DEGFt
+	wnqY72zlKu2mJhwP1xT/LY0eJsiHvTjCCPDnaQSRmf+C0TwOLjPFI88d9RINzUA4
+	NWMZRH59hbmmSddTDfX7mXK+gfs2TSbZfOONFAkVgHTGBFNRQ7exj3zsfJgDcIZj
+	wJ5eimlQN3NpajwbHzly9WkySv5V5CsjDseBs2vUHow2JdkBIJta/viT/JHds02y
+	tlSxSTkKZXHjGsPvhB4pVymO/j0CCCrKS8Q==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrm9v3g8y-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 19:46:16 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9441113670dso510004285a.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 11:46:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793907975; x=1794512775; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3BFnUHcE/+pbpFcfNMGE+vFXRnYLIh629ZomjR+Ujwk=;
+        b=QrZf/H5tIzT3hY67++JUZAsJkoAiBRCSnRqvUizLKYRWaE7qvKlGBvYVCDwplreE9d
+         vHmA7cLiTMIbwtWEQwjYrAJojoEKMRI6mR9sag9vN1oB3fLhUV0LHEaP/ghXXA3DCurc
+         PbQPcwF6UX7ChB7eLcGyW5Ir84wZujJfV14b1LibKxNi2RAoXCN7T904K390sc6jLsxc
+         HnAkuY7h2xIzkf8vLkfFEJVXzd0IQ3yeEX3gpA0p/MCnEXApO80yYqISvJj3/T4qniv2
+         Uz4UuMNl1WB22zWxyTUX+pQ22ilCagFtKBzV4/2OEjh5ieSFEDnPHL6hq/YVpa4b6/IW
+         IMVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793907975; x=1794512775;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3BFnUHcE/+pbpFcfNMGE+vFXRnYLIh629ZomjR+Ujwk=;
+        b=pFT6EV8x5VENcL/MouvTVPVaGYmglpf55seSPC5B/8BOZQ03EaKimVvpPN4cuDQB4f
+         5vDF90SZdLU1h9jh4yjOCwdeYxoSBaqiaMI8tb09ey97BBmog6ToO2KeBnCEfgNT120k
+         eUozbWfphFiEmNL/WWYCbAomB7Bw9Y1C7pkX8XG8QXBHd7x+LDnmnrC5Fv83ttT2ytZu
+         KK8/wF23aDsS+EAFBNz1Xogl3uFspC+/mdGbEVKBzg9SXW3ohKpF4K8xdOhbSR68uLDd
+         LrXAxxWndHEC7L/XGy+cJw+nZxPgMPib5sjvy/XnbRdiexN70IKLsI5d664pkJgJQ3UI
+         7zyg==
+X-Forwarded-Encrypted: i=1; AKwUvBw0qmuyj8cUP2JW92YuVZGB9kQ14CG0+8Zn8nzqdzlo4ddRI/YOMmlOsDwGdkGXXp2LsDpKYgLNcnvtzYKa@vger.kernel.org
+X-Gm-Message-State: APuU4Z//6WdJvuVbH1Iv1y6HggI3L5cBQcEINWqaBDiDEeODoiH29Lao
+	WUo9X2GGVITAU/JkWNr+56E1I33FNShl43L7heeED+7jUt+wDIrElIn0owF/Wz8z0oShKk/tkRz
+	KOTLMBknWU79ZS50oDm9V3Jb5haZmSbYuDkh4pb6yiZArwx9ZTok6URzhejTRqnEdhxNC
+X-Gm-Gg: AYBFou17lNz5vcYj+wkOjLOOFEy4/4X9LgwpS5Iup1060Em0eZ/zkiN3VvnltbR8qGI
+	Gxnjgez+X6xUL3PaiHriLiz7LlnZn8xBJxr6kQu6pILVhrOvgMMFsUpDYBsMiuw/fCu3qlq3G5s
+	RbsoIQcJRKL57YuoRCXJILBSmieRPAOpbXEMY2Yy0MLhP1zCro/42h5vN0gvC6KCD5tTjd6XYbR
+	v9wmK1JiL4kZUaolWdY8bPWwqjmupUSwxfWpRHB1NntSu26y4AE8j2VZtVAYxhggAZx/BAxIS+E
+	IHmys+e2lCRUdC7/5OlDuXpF+wlgHujiYUvc5IBKXFC4JWpQ3illZFJ8kwwvUsaDijwOe/bFF0z
+	7Cz0TV3fXr51Xegl/CHvqHyvZVRGj/yqRuOpIiQVchzcN+5L4X2dKoY8jwMWRzQ==
+X-Received: by 2002:a05:620a:2702:b0:944:2e2e:69cc with SMTP id af79cd13be357-945f34ce97fmr20081185a.49.1793907975270;
+        Thu, 05 Nov 2026 11:46:15 -0800 (PST)
+X-Received: by 2002:a05:620a:2702:b0:944:2e2e:69cc with SMTP id af79cd13be357-945f34ce97fmr20076685a.49.1793907974812;
+        Thu, 05 Nov 2026 11:46:14 -0800 (PST)
+Received: from quoll ([178.197.218.7])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b56e58fcb8sm82495855e9.1.2026.11.05.11.46.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2026 11:46:13 -0800 (PST)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+To: Ilia Lin <ilia.lin@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+        Viresh Kumar <viresh.kumar@linaro.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH] dt-bindings: cpufreq: qcom-cpufreq-nvmem: Simplify bindings
+Date: Thu,  5 Nov 2026 20:46:07 +0100
+Message-ID: <20261105194606.772346-2-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
-From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: Vinod Koul <vkoul@kernel.org>
-Cc: Frank.Li@kernel.org, dmaengine@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC PATCH] dmaengine: qcom: gpi: match control interrupts to the
- pending command
-Message-ID: <010601a1ad2686dd-235641c9-2f2e-49d3-9ef9-3070b49614ce-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 5 Nov 2026 19:19:05 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,147 +121,180 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.11.05-23.251.234.50
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3795; i=krzysztof.kozlowski@oss.qualcomm.com;
+ h=from:subject; bh=ei0/JnfNAAX2qJbDNn+6Uyh3n+06uKHSrrdp7G2A7ew=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBq7Nz+q/+5a2h/Vy/JzzACmTB3XbMLDFW+T0Sk/
+ hhFR3jvxXeJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCauzc/gAKCRDBN2bmhouD
+ 1wPgD/9N3au9Ru4qEGpuVNiEQ38tGsbqeiHc5J+W2pHu7VmvW66WRXXhxknNTTQeguVW1hZBea5
+ ksi04j56hZ7dZXSA7q6+LP9ZvikzypImgq+GMVxm+t3nY4FlJEcOg7/95DLLbaAknbxtd6AhYld
+ S7RujdhKRyul5vmnj2pxn7fKuXjl6ePoaKQWmGsyohZwMsKLEKuecfdcOTW79wN8hiFszw3OKtw
+ RFR6ymuACaIK687aWKaBI+CvYLISj02Lyb6c7UZ4u/i0GJQ1YuN3aoM0b2nbpIBAZgHvCd1nYY8
+ TjpZgXL0ioplBAw9xHWqT6DNwbdDvKOnpmpRWJqAF1x2r2kGtsvxtN+sb0saGZ/pyEtYg4F8OpG
+ wJcu8Mhf5XGgc2BCPWPgJ+6iYVlQJPrVxiaTyrVJcD9vADPd6tInshRQYU5sHkq5jD9IalQKYWJ
+ XNd1tjf/TM8cT2RKH9n8tHc87CehvG54Buf5sXF7FUX5N0YMof8MnMdeK0xy+OTiRY2An58ToC0
+ me7gwJc2JQohRBHxirG4Gt6PpeiPsvVXFtX+hKQsa+4ovmNO0Vni7MgwehKbgDa4zdAvCg8khvL
+ tnT4oh8HFFcQZTlYb4K/Qp/9FaBsJf5cjdsk0TTHCckcxhatEXLR9e+tL9Ymb+3JFoxDuW0yUP1 1860SmvyRqfz7Bg==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA3OCBTYWx0ZWRfX4+7R2uEIZcIN
+ mqF4QO2RMwBib8DSGP+TMPMkE5fQy31nwkpO15yb5PcPdvsYyo+JXuLvSNBn1bAqUhlHLWMhspQ
+ Z0229GlYFqMRpIiy4muMWYKnYhZoqCo=
+X-Authority-Analysis: v=2.4 cv=KrHYSmWN c=1 sm=1 tr=0 ts=6aecdd08 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=uyPgTw0bjBTS2cVxpiNm5w==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
+ a=hpx_vC1UKZy5HMHMfZkA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA3OCBTYWx0ZWRfXzNYCWEhmHqtv
+ QAMKmOq+vFpxlqaal6tiIQFoOMp5PnGmUYs5QPhhQaYWB4q46DrABxHfpZFGFuAJoZAaIYAH+jT
+ +NgCkWecs6qZ6lmOsRKV9Dx6ISHjP/jdF5XwMoQbxk6LqMzueq9/AtCzeMHXRDNk4GQLtrUBcsE
+ GTnEYuTtWf0D9bcvLUiTV3cVsXqhtoXazkgClISZGzJpUmWdcPCDG0ZCbKjsf/Z8qpHB6N4Zu+e
+ SJee4pQfrc+FP6eEeos6YFwQHGQ7MW55J8F4Tv/+j76kf3c3cx5xHzxIIcG0UhpoPt2JxHQOuAr
+ 9KI7d4FSiYedx5FozB37Wyij3UQilr7A5Bdi7j9QWk0F4Gcu/ix6WsiAvRepftLDqCZ+OTP0OwI
+ OwPLq3ibpJkd6pdjV92oNBnARsGOT07aUfDvv/pu/kDAo6c6LNN+0IqHspVxvQDIkFUAl113MiA
+ jTr1lce6zq9DM1P5kDw==
+X-Proofpoint-GUID: ilLWTDCj8OA19GwmTETznohDycDtHH7l
+X-Proofpoint-ORIG-GUID: ilLWTDCj8OA19GwmTETznohDycDtHH7l
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_05,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 phishscore=0 impostorscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050078
 
-Each GPI instance shares one command completion between its two transfer
-channels and event ring. Both control interrupt handlers complete that
-object regardless of which target the pending command addresses. A
-control interrupt for the other channel or event ring can therefore end
-the wait early. During channel deallocation, it also applies the synthetic
-not-allocated state to every channel reported in the interrupt status.
+This binding selects a few top-level compatible machines, but since
+commit 389de9c5a677 ("dt-bindings: cpufreq: qcom-cpufreq-nvmem: make cpr
+bindings optional") only qcom,qcs404 is present in  "if:then:" clause
+which enforces specific OPP properties.
 
-Record the pending command and target under pm_lock before writing the
-command register. Only complete a pending command for the matching target,
-and restrict the deallocation state override to that target. Clear the
-pending flag after the wait, including on timeout. Preserve updates of
-hardware state and the STOP_IN_PROC transition handling for all channels.
+For all other machines, this is a no-op, because there is no schema here
+enforcing a specific compatible for OPP nodes or any of OPP table
+properties: one can switch to standard OPP table (operating-points-v2)
+and this binding will not complain.
 
-The existing ctrl_lock serializes command issuers. This change matches
-the interrupt target, not individual command generations: it does not
-attempt to distinguish late completions for successive commands to the
-same target after a timeout.
+OTOH, this binding has complicated "if:then:" blocks so is not easy to
+maintain and causes false positives when regular OPP table is
+encountered in matched machines.
 
-Signed-off-by: Jizhou Tong <fqwqf@fqwqf.xyz>
+Drop all machines except QCS404 and move the subschema to top-level.
+
+Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
-This is independent of the downstream QSPI controller changes used on
-my Surface Laptop 7. A version of the target-matching logic is in that
-working kernel, but I have not reproduced the delayed-control-IRQ race
-on an otherwise upstream kernel.
+ .../bindings/cpufreq/qcom-cpufreq-nvmem.yaml  | 78 ++++++-------------
+ 1 file changed, 24 insertions(+), 54 deletions(-)
 
-The patch applies to dmaengine next at =
-6628e7d4c6b. An ARM64 W=3D1 module
-build passes against my prepared kernel =
-build. An ASan/UBSan harness using
-the actual send and interrupt functions =
-passes 3,206 command/IRQ cases,
-including mismatched channel/event =
-notifications, STOP_IN_PROC, timeout
-and pending-state cleanup. The =
-unmodified driver fails that harness.
-
-base-commit: =
-ee9c669f9bf5fd2c24206746ded9382fe810df89
-
- drivers/dma/qcom/gpi.c | 23 =
-++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index a5055a6273..9479adf55d 100644
---- a/drivers/dma/qcom/gpi.c
-+++ b/drivers/dma/qcom/gpi.c
-@@ -514,6 +514,8 @@ struct gpii {
- 	struct tasklet_struct ev_task; /* event processing tasklet */
- 	struct completion cmd_completion;
- 	enum gpi_cmd gpi_cmd;
-+	u32 cmd_chid;
-+	bool cmd_pending;
- 	u32 cntxt_type_irq_msk;
- 	bool ieob_set;
- };
-@@ -684,16 +686,23 @@ static int gpi_send_cmd(struct gpii *gpii, struct =
-gchan *gchan,
- 	dev_dbg(gpii->gpi_dev->dev,
- 		"sending cmd: %s:%u\n", =
-TO_GPI_CMD_STR(gpi_cmd), chid);
-=20
--	/* send opcode and wait for =
-completion */
-+	/* Publish the command and its target atomically with =
-respect to IRQs. */
-+	write_lock_irq(&gpii->pm_lock);
- 	reinit_completion(&gpii->cmd_completion);
- 	gpii->gpi_cmd =3D gpi_cmd;
-+	gpii->cmd_chid =3D chid;
-+	gpii->cmd_pending =3D true;
-=20
- 	cmd_reg =3D IS_CHAN_CMD(gpi_cmd) ? gchan->ch_cmd_reg : gpii->ev_cmd_reg;
- 	cmd =3D IS_CHAN_CMD(gpi_cmd) ? GPII_n_CH_CMD(gpi_cmd_info[gpi_cmd].opcode=
-, chid) :
- 				     GPII_n_EV_CMD(gpi_cmd_info[gpi_cmd].opcode, 0);
- 	gpi_write_reg(gpii, cmd_reg, cmd);
-+	write_unlock_irq(&gpii->pm_lock);
- 	timeout =3D wait_for_completion_timeout(&gpii->cmd_completion,
- 					      msecs_to_jiffies(CMD_TIMEOUT_MS));
-+	write_lock_irq(&gpii->pm_l=
-ock);
-+	gpii->cmd_pending =3D false;
-+	write_unlock_irq(&gpii->pm_lock);
- 	if (!timeout) {
- 		dev_err(gpii->gpi_dev->dev, "cmd: %s completion =
-timeout:%u\n",
- 			TO_GPI_CMD_STR(gpi_cmd), chid);
-@@ -770,7 +779,8 @@ =
-static void gpi_process_ch_ctrl_irq(struct gpii *gpii)
- 		 * not change hardware status. So overwriting software state
- 		 * to default state.
- 		 */
--		if (gpii->gpi_cmd =3D=3D =
-GPI_CH_CMD_DE_ALLOC)
-+		if (gpii->cmd_pending && gpii->cmd_chid =3D=3D chid=
- &&
-+		    gpii->gpi_cmd =3D=3D GPI_CH_CMD_DE_ALLOC)
- 			state =3D DEFAULT_CH_STATE;
- 		gchan->ch_state =3D state;
-=20
-@@ -779,7 +789,9 @@ static void gpi_process_ch_ctrl_irq(struct gpii *gpii)
- 		 * Stop in process is a transition state and we will wait for
- 		 * stop interrupt before notifying.
- 		 */
--		if (gchan->ch_state !=3D =
-CH_STATE_STOP_IN_PROC)
-+		if (gpii->cmd_pending && IS_CHAN_CMD(gpii->gpi_cm=
-d) &&
-+		    gpii->cmd_chid =3D=3D chid &&
-+		    gchan->ch_state !=3D =
-CH_STATE_STOP_IN_PROC)
- 			complete_all(&gpii->cmd_completion);
- 	}
- }
-@@ -877,13 +889,14 @@ static irqreturn_t gpi_handle_irq(int irq, void =
-*data)
- 			 * cmd does not change hardware status. So overwriting
- 			 * software state to default state.
- 			 */
--			if (gpii->gpi_cmd =
-=3D=3D GPI_EV_CMD_DEALLOC)
-+			if (gpii->cmd_pending && gpii->gpi_cmd =
-=3D=3D GPI_EV_CMD_DEALLOC)
- 				ev_state =3D DEFAULT_EV_CH_STATE;
-=20
- 			gpii->ev_state =3D ev_state;
- 			dev_dbg(gpii->gpi_dev->dev, "setting =
-EV state to %s\n",
- 				TO_GPI_EV_STATE_STR(gpii->ev_state));
--			complete_all(&gpii->cmd_completion);
-+			if (gpii->cmd_pending && !=
-IS_CHAN_CMD(gpii->gpi_cmd))
-+				complete_all(&gpii->cmd_completion);
- 			type &=3D ~(GPII_n_CNTXT_TYPE_IRQ_MSK_EV_CTRL);
- 		}
-=20
---=20
+diff --git a/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml b/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
+index 547265b8b118..dfc7a27a7bdd 100644
+--- a/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
++++ b/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
+@@ -25,22 +25,30 @@ select:
+     compatible:
+       contains:
+         enum:
+-          - qcom,apq8064
+-          - qcom,apq8096
+-          - qcom,ipq5332
+-          - qcom,ipq6018
+-          - qcom,ipq8064
+-          - qcom,ipq8074
+-          - qcom,ipq9574
+-          - qcom,msm8909
+-          - qcom,msm8939
+-          - qcom,msm8960
+-          - qcom,msm8974
+-          - qcom,msm8996
+           - qcom,qcs404
+   required:
+     - compatible
+ 
++properties:
++  cpus:
++    type: object
++
++    patternProperties:
++      '^cpu@[0-9a-f]+$':
++        type: object
++
++        properties:
++          power-domains:
++            maxItems: 1
++
++          power-domain-names:
++            items:
++              - const: cpr
++
++        required:
++          - power-domains
++          - power-domain-names
++
+ patternProperties:
+   '^opp-table(-[a-z0-9]+)?$':
+     allOf:
+@@ -48,10 +56,13 @@ patternProperties:
+           properties:
+             compatible:
+               enum:
+-                - operating-points-v2-krait-cpu
+                 - operating-points-v2-kryo-cpu
+         then:
+           $ref: /schemas/opp/opp-v2-kryo-cpu.yaml#
++          patternProperties:
++            '^opp-?[0-9]+$':
++              required:
++                - required-opps
+ 
+       - if:
+           properties:
+@@ -62,47 +73,6 @@ patternProperties:
+ 
+     unevaluatedProperties: false
+ 
+-allOf:
+-  - if:
+-      properties:
+-        compatible:
+-          contains:
+-            enum:
+-              - qcom,qcs404
+-
+-    then:
+-      properties:
+-        cpus:
+-          type: object
+-
+-          patternProperties:
+-            '^cpu@[0-9a-f]+$':
+-              type: object
+-
+-              properties:
+-                power-domains:
+-                  maxItems: 1
+-
+-                power-domain-names:
+-                  items:
+-                    - const: cpr
+-
+-              required:
+-                - power-domains
+-                - power-domain-names
+-
+-      patternProperties:
+-        '^opp-table(-[a-z0-9]+)?$':
+-          if:
+-            properties:
+-              compatible:
+-                const: operating-points-v2-kryo-cpu
+-          then:
+-            patternProperties:
+-              '^opp-?[0-9]+$':
+-                required:
+-                  - required-opps
+-
+ additionalProperties: true
+ 
+ examples:
+-- 
 2.53.0
 
