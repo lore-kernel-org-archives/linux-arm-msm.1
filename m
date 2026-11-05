@@ -1,104 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.46.27
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793888646;
-	b=ebJ196OJpmg8ffeo50uA0ysICiWjvlfXuudvwjT12cQxgMolND6OZiG21ApE7Lne4liT
-	 lMBvCLUAcVXejWdlhQJcKc/TRb9QkTEsCDQPADQWEuJt4DknsH+qSFllW9iDqKkcTqBEX
-	 W0GHufGQO8fyPw0ZBVDdYheC9+/bxVzLewQFgptUTk5Paom+tQA4Vt0FLOGy9SOTNbM1R
-	 Ltn2Sa+AUQoz6veng0MCsFTlJXeXIfS20P1cfwpI10zWyoWnxHdLpDSjFLkZy6iGpGC7C
-	 bqN+7LpUnMJx+1HHdRYrbt57U2K2dMbzHHwyE/W8cJlvdsoh+hW4P9BKeeeUTjdAL6Q==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793888646;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Message-ID:Date:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=lKRyd6jPZ38O4z5cge9frYoPKfd8yqA+2zb6XL9yHDw=;
-	b=zkXaFpWvQf9skiBmNFOelv3iGDbM+Fp3A/+Y7XlpaKDiDX7HwqNMUgtaNGuy+q4oAmev
-	 gqmYqV3pP+mTc4cCiHonikvrm+wKMnxVytHPOvYlIZnUCaMAhKyEbPmRVfI4S8ER7Xh8o
-	 OwmVih+fIGV0p1OjrRtUXhWEm6xzQtPsuhG1AeCC+T04v58kgkjouh9FBUko+LWxvs3Jd
-	 9fIQcJN31sw521JEDFdZ0/IuhSwfexwK5T6BghqTKljbnbKV29ZNFT3rkQ7F7zpy5/Qt/
-	 Temgem03X75TnhfTWbFLoLIq25ZK6Cqsizijvy2biEcTRK0UW7PT3cAyvp28JUi68Pw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=amd.com;
-	spf=fail smtp.mailfrom=amd.com;
-	dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=EuPhVUPU;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.46.27
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010027.outbound.protection.outlook.com [52.101.46.27])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C62F6606A31B;
-	Thu,  5 Nov 2026 14:24:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C62F6606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793889134;
+	b=fzMq5XpdjOpTKqvSFspZDdlbOIHGv0dd6dGwd1a64x+jxbr4dPTJHF06ICeOD3s9Vvc6
+	 6YN8bBlkWBrh+DEAzXwZ8JM32tCC63PdymAjaC9bBAD3uoXRzTWuX5SmgJrLWQNMIVyEH
+	 9nMf2uB4VKocbWv4yqdRO+fcVb3datIIqTKvB3I6pPkArD0Glwe1IfFKEUoT9h8gAIwyD
+	 KlAp3Gx9GfXf5lYx3AdXoN4RzPGCe2iofggI0TCjSQFpgPd7QRc4vKL5cAGQPmolkzYnF
+	 qkaznv7nd37yLDDq7DmTJQI89alOB+GKti7CVfDXVBnLGQUX7D1opwIVLcQcYzjYf6w==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793889134;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:From:To:Cc:References:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=aMbPFbhM0NGfaTpsyfc09N2QKzH+fJPg2tPLJvKIlQs=;
+	b=02R85S3QXurR+/97sBwovucnabyEC6SmUZJG7Mpry8PzWpSXYQqaLiwoUOxi4MwsQvQD
+	 3/pba8HPS+IQ9miVOH6o75TY1l9v59gXeUDKvnH8Y5c7tGW8uCL+qWRTD6g4Ho57k0d8a
+	 NWaB7g2Lv8g029Kx97ZsLLQkV8HTO8rySfF/EpEk2u5M0hqPShl5zG/j+cu1M9u43OGgJ
+	 StNzpb1qSXRPmHNXhf5P8zP+X3MElTKprZ9tT3Ril7guJtW9NlQ0gNiA5BX+x/dnpkpr1
+	 vyNBU3lOxo1Uj9qvx33ig1gy9oxKGvXw9g1Xs0Cf/UxtYtKSDM/QozxhXCsxyg0OH+A==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=ZPTH2rmt;
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 75490606A329;
+	Thu,  5 Nov 2026 14:32:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 75490606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=EuPhVUPU
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yTQ3lBP7t1HohBIxH0AxKro3SRKet1hE+wQ5PzLPI7+H99K1wz3a4pKvo2hb4WpbCkpGZnCCPrFMLxnu8O9+d0SGE+EcsIZHpPi166NYf+nGCfTncS2doKnrlew+a+s83vS0AiwNg4AmkeN0Q+iB/j06CYZF5b2HhcCaevENnsqZjbABGuvx7VSUXKj0RQDEM0j0crA2odfwRfuWwXrwMvFqIi0Q5Z41iagcBpECUbYq1uSnXbh6DH7eUVEZnC/zjqT2NofxwoLPt6Ae23I2x8zvwtm7uDjNbnnuDSGnfpTn45GhK9igkExvrshvodr/pmcm+Nzd3xHxLQw60kUCYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lKRyd6jPZ38O4z5cge9frYoPKfd8yqA+2zb6XL9yHDw=;
- b=awqBlvJ2NOd0+c0k24unn78+kCMb33PvFRi1dWF8f9b3RlGElLl3ZjpMrfcFgsiyvE8jJs2RgHTih2g0gph0BCckuAMecJ4KbtrImVaA/dsbbv6IFcP9X+Kgc7lBw+p0OQspc+CVHS39I3qc90bPCiLWpkrGhzmwQeTU/vT3By97VPJt0yv1+r0nmZ06bbhWer7MYcrjlt9P/1VLTvb+L/eFLsEGhjljcmoeFSUjnPcV2bQioS7n0SX6U5o//Yvmh7J8NNEkwXCUKlrjbbJoLEuORbsMnvMbvuPBIws8OWh9gW1u6AOE7UV/giudBRA1cia6c0Vv6P7uOJ5s0jAKOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lKRyd6jPZ38O4z5cge9frYoPKfd8yqA+2zb6XL9yHDw=;
- b=EuPhVUPUFDSXCSzpb/O5okXz68TN9xM1GftjG7fjBePou/nsV9J3SoBEU1KIhxaJ4sCZuTgfl/XgImBPmyXR0sSCB+qfODlZS+56Fj/0Gc75+IjDIG9XACcd7wW+QEQh5dU5/VH8ArBzHE58Wo4v6sz5NGgYCtZajLvMQWVOCPs=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by CH3PR12MB7523.namprd12.prod.outlook.com (2603:10b6:610:148::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Thu, 5 Nov
- 2026 14:24:02 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%3]) with mapi id 15.21.0592.009; Thu, 5 Nov 2026
- 14:24:02 +0000
-Message-ID: <e7943b6b-0f3a-4336-8a0b-306aa11c8d31@amd.com>
-Date: Thu, 5 Nov 2026 15:23:56 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] dma-buf: dma-fence: Add flags parameter to
- dma_fence_init()
-To: phasta@kernel.org, Tvrtko Ursulin <tursulin@ursulin.net>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- imagination@lists.freedesktop.org, lima@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-tegra@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-usb@vger.kernel.org
-References: <20261105113529.1989375-2-phasta@kernel.org>
- <20261105113529.1989375-3-phasta@kernel.org>
- <2f377d0f-2760-4465-ac68-b62210b33bd6@ursulin.net>
- <005b77fd-5bd2-4ae5-a0c0-cff3f1f6c680@amd.com>
- <f284e3b9501acca2cf41fd19409004de84a36e15.camel@mailbox.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <f284e3b9501acca2cf41fd19409004de84a36e15.camel@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0085.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1e::9) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=ZPTH2rmt
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AB9AC168F;
+	Thu,  5 Nov 2026 06:32:08 -0800 (PST)
+Received: from [10.2.197.99] (ewhatever.cambridge.arm.com [10.2.197.99])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 95D4C3F673;
+	Thu,  5 Nov 2026 06:32:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1793889131; bh=57jqKN7YeDWabQXBzWNtR7fWKF/1HqcWUWZ6tAgNGJ0=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+	b=ZPTH2rmtS6mwvYND5oNgIMjrGKwroFa6A+v6YjEVh6dYgT3QgjDjgLwb/GuPUp+5b
+	 LOn13CSfGE7jXgGZmsAFeqSSeMlcAY9Ksfla1O9LsdUGnQWlvXXbZ1TFpQ3H0fAZl2
+	 6P2+yN97IwrXsSv2XlBwlFh5pVFcwbgaccK5ARo8=
+Message-ID: <75364e56-62d3-4d3f-bf79-03ddeaee1121@arm.com>
+Date: Thu, 5 Nov 2026 14:32:07 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,119 +53,140 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|CH3PR12MB7523:EE_
-X-MS-Office365-Filtering-Correlation-Id: ec5a5c40-99f4-4e2e-b119-08df3b48704e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|7416014|23010399003|1800799024|376014|22082099003|6133799003|10067099003|18002099003|261026121527099003|56012099006|11063799006|4143699003|261021121427099003|261102123227099003;
-X-Microsoft-Antispam-Message-Info:
-	em4XYO2yBRkv3TPrZO9m5dOjdwSydqv1pRiSz4fLGp90mAQslFzUZPhQKp8HJDUmXH0BskJ7IT5reLK1Zq5C06JbVwjV0Tt0KTWDrEcAeddNJrB+rTW8TESR7wWBIQPLNput/KZ7ItE8V2CYXcxKa8HErwzzPX/8xoVGznoIRWbdDm0wRxH43RYWaxwyp+MDXhDx0Bko+GQr4l9RHtxgTfiYVs58t7QWQO4OVRfetNagjKOxzbf44pIW9TtiTLgOA5FhtiRRga7fmc8EwBYRO8i6EAQqyOnKhTNvfpLsPZS/C2dk5LxCyjF5UfjYbvHvu4PwF+pk63OYYxdA79HpKGdkV7A9raAwQLO6IJqmOIyTSzmnhjOnY3OeAh+e4bItE3pVF3KbkmzAl/6ZqDoYvaG8MFzP8TE+y5PL/gCPq/yXOe4FhEtpyd/Tvl64dCq9KOtsHI7TY0F0Kqy912RFE6O/IXS3/yzvkR+VXkmc5VjIVux91vDsXhsFk6gkze7Xov7m5/8jKNXyFZ5WdICgR3KBg8PGGgJsaRjSWX/yMS4ywRwj0+Ru76vqv2TG0zC0mw8A1cCDgNOmw0NiaMzHAffmb3pYVIfYeC3SjIv0MHNvdxtKMf20Oz03aF2A7NJhQStPYpgU1qT51HYat2MTVlMNTEcT5lMTkWteBOpxDeg=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(23010399003)(1800799024)(376014)(22082099003)(6133799003)(10067099003)(18002099003)(261026121527099003)(56012099006)(11063799006)(4143699003)(261021121427099003)(261102123227099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SXlJUGFwRFRuam5mZDNaZGVYYmJGNlFaaitwOUllQTB6TkM1R3RGL2lXVDdP?=
- =?utf-8?B?dVByVTg3QWRNdDhNRnNBMGd6YURpRzA0V3orczRpdEN3ZFdnRExtSzE2TVRN?=
- =?utf-8?B?K0ZwNEVTcU12TWZVZW1vcmwvbVdTVkFUemdKV1p6dWRTWVIrN2tKdTRyYzZt?=
- =?utf-8?B?cHdQRFgzSmYrRGtreFZ1RzcxQlVYWmY5d2w1aldmSnpRRUZZc3JaYkc4TjYr?=
- =?utf-8?B?WFYySVlzQ2JkQ0UxcXM3elVkblBSNStCMWRhRkc3bWprVk50YUcrLzErSnJa?=
- =?utf-8?B?YkVSSkZQUVlMUFJsYVUzUTVid0kvYkxVNDhIRkNDdG9acEdxYVkyc2hQbWx6?=
- =?utf-8?B?MFZoUGI3T2dkVTloY3RGRjNRamhTSlR5RElNYk5wcGpITjY0N1NMU2VUcE1T?=
- =?utf-8?B?Q3pFRlpUaUtZbmErOGFKVW5jRCtMSHBCRGhKU0ZzbUdpZERLOFYzTEZXbEJZ?=
- =?utf-8?B?cHNOam11Nm92clpQUzhnbVJGTE54UzJPTnpvU0tpaWhES090K25mTmN3c3I1?=
- =?utf-8?B?cTdpZ21SMjl0LzN4R0ZBVXFwa25VZjgyZERmL3FtMGVsOUFSa2FoS0I4T2xX?=
- =?utf-8?B?Q3QzYmxLWGFNcFNLWnJ3OWRRbFdCcXdMZ09NSmliRnN1QmZMeTlCN1dSTjJw?=
- =?utf-8?B?R0p0MEl3Y3FjVEJEbU5FaTNTU3cwbTFmWWJzM05BOXNiQUkxMVp1L29CTzIv?=
- =?utf-8?B?ajJiV1BWUUhzSEZiT2tJSnBZZ0hTUnNZUEN4N1N6SDZ4b3lpSDlkQnRTYVhH?=
- =?utf-8?B?RkhaaGFGR0lnMG02Wm9hNW1OZm5mVkQ0c2RGdkp0S3pSd3ErUmdiUHRsMm5r?=
- =?utf-8?B?cjNHRm9GS3ZyclhpZnFvMGNUSkZEVjIyNWRaVnRJZnFQK1NHdGxpNHBwN3V5?=
- =?utf-8?B?a1d5cjMwdXlMMlFLZVB0K1R3cFBXT01QdE5MZVFpQ25lLzQ4ck16aVIzMElH?=
- =?utf-8?B?TnQrMVpXYk45QVVPNlladEdVclBBSWVjdVNNd2JwWkdLSTVoTGFrMlpTcEF2?=
- =?utf-8?B?NG1rdmkvVGxNcHhYOC9LNkZVWmVZOEhibU50OVRRTStRU0ROanRpQU1iK0FV?=
- =?utf-8?B?bVFoY1IvUkNzdDB5OGg5M01nVjdoei9xVEFnTGxLS3gweDV6cEJtVGJ2dmE3?=
- =?utf-8?B?VGdnQ2g3aEt1R0ZsYjFkTUgzdHJidnRDM2dkKzI3TFJZVWZjUFdZQm05YUVr?=
- =?utf-8?B?aEszbGRBTklVcmIzZ1RyaHZqcmRIeTFFWnc4TCs1TlBoRUF6WCtyQ21MRmRL?=
- =?utf-8?B?ZGo3MHJBbG15UGJnUEtNT3hpVDl4cUZiSFhhNytGVmRPeVpqcEU4aHBwMy9z?=
- =?utf-8?B?cDMxWE9lOU85SlFoeTlJRGdKS05mcTlBL3Q4TnJFZUMwQnJMT3R6SXU2T25J?=
- =?utf-8?B?ckZGdjYxZzVlN0loWXRyUU0zRXZBNGtXTFk3UTlYcWR6a1lQL3Era21NM3FI?=
- =?utf-8?B?YXJib21TYytoQ2krRGVWZ3l5ZEVVSmVmY3ZuTlVoM0s2dEFVdE1zTWM3Ni9l?=
- =?utf-8?B?WkQyZ3EvbEcyd0NNcldnUVdIbDJFNG1JbDQxam4vd3hjKytVd05oSWJxZHVi?=
- =?utf-8?B?MVcxUTRYK1dBY2cxTDF3UjdjeWZmWllrVHZOb0ZQUCtjYzd6T01iR1RkSVI4?=
- =?utf-8?B?eWF6NjdTN0lhTm9tQlRUNC9obnloWTNuUzhISHJGaE5aRHArdGZxMG9TdUVl?=
- =?utf-8?B?S3ExeTRwNWFoNmRkNmdsN2FSM1JDaU15TUVIME9reStNUU9MY2lsTVJDMEg1?=
- =?utf-8?B?elBienlmcitpaE9SVThUR2FGblBtdjl6UklDdlNDeWhLd2huYWRHbUlueWxL?=
- =?utf-8?B?NXZaUVVxOE1MTlI5VUV1eDZOWnhqc2M4cDhTdGlJMU1kS1pvWVVqMVpLamsv?=
- =?utf-8?B?ZTVxUW9rQ3lVWmh0R1A0MCthRDJEVFFTYzVKTkZja0VIYXJQRDNpTkQ3QW5j?=
- =?utf-8?B?Rmkvd0NRcm42TW8rSHliWm5rQm81SWFtTVBIclRVTloxQ3FlR3dQTG9qVDdT?=
- =?utf-8?B?YmJtMWNodDlpZERnaFNiM25ESExSN3lKR1B6ME0xWkFzZW96Z2haMlhxcWZX?=
- =?utf-8?B?RUFYSVZZU3hkaXVPVUVUcllNNmRtSVZjakYvSE9nV3ZzTVEvenM0RUJJaWk0?=
- =?utf-8?B?enUwcFU2MjhyUUdmaUxTUVBWUkVVRnh0ZXRhZDdLdWwwd0h5cEllYUJqOG1M?=
- =?utf-8?B?bGplN052VnJWOHNnMHJFcS9SZ1VSWkxmeXhGbzdUWXhOZFNUdURuN1QvbFBP?=
- =?utf-8?B?MTl1SWJ1TXRHRFNBRTQ1dlE5SkhMZmVpbTVOaW5peklLaXBraGFURW53U3Fy?=
- =?utf-8?Q?t5aCMoyO0mSOb5LNGt?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ec5a5c40-99f4-4e2e-b119-08df3b48704e
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 14:24:01.9043
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8gut7kjbd5NTDxIdvP6ityKol10YUxTqhhdwlguD9tphlt2DkWnJS3/tYyaeX9Zj
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7523
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 3/7] qcom-tgu: Add signal priority support
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+To: Songwei Chai <songwei.chai@oss.qualcomm.com>, andersson@kernel.org,
+ alexander.shishkin@linux.intel.com, mike.leach@linaro.org,
+ konrad.dybcio@oss.qualcomm.com, james.clark@arm.com, krzk+dt@kernel.org,
+ conor+dt@kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
+ devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
+ Jie Gan <jie.gan@oss.qualcomm.com>
+References: <20260730080704.2903540-1-songwei.chai@oss.qualcomm.com>
+ <20260730080704.2903540-4-songwei.chai@oss.qualcomm.com>
+ <9d450f18-2300-4ead-981b-94bd9eea9126@arm.com>
+ <f1e4f462-2aba-470d-84e4-87a12c2a13d3@arm.com>
+Content-Language: en-US
+In-Reply-To: <f1e4f462-2aba-470d-84e4-87a12c2a13d3@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 11/5/26 13:48, Philipp Stanner wrote:
-> -Cc rust-for-linux, since it was typo'ed and now misses the thread anyways..
+
+
+On 05/11/2026 14:14, Suzuki K Poulose wrote:
 > 
-> On Thu, 2026-11-05 at 13:35 +0100, Christian König wrote:
->> On 11/5/26 13:06, Tvrtko Ursulin wrote:
+> On 05/11/2026 13:01, Suzuki K Poulose wrote:
+>> On 30/07/2026 09:07, Songwei Chai wrote:
+>>> Like circuit of a Logic analyzer, in TGU, the requirement could be
+>>> configured in each step and the trigger will be created once the
+>>> requirements are met. Add priority functionality here to sort the
+>>> signals into different priorities. The signal which is wanted could
+>>> be configured in each step's priority node, the larger number means
+>>> the higher priority and the signal with higher priority will be sensed
+>>> more preferentially.
 >>>
->>> [I aggresively rewrote the To: list because my SMTP won't let me
->>> send this as it was.]
+>>> Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
+>>> Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
+>>> ---
+>>>   .../ABI/testing/sysfs-bus-amba-devices-tgu    |   7 +
+>>>   drivers/hwtracing/qcom/tgu.c                  | 189 +++++++++++++++++-
+>>>   drivers/hwtracing/qcom/tgu.h                  | 133 ++++++++++++
+>>>   3 files changed, 328 insertions(+), 1 deletion(-)
 >>>
->>> On 05/11/2026 11:35, Philipp Stanner wrote:
->>>> Currently, there are two init functions for dma_fence,
->>>> dma_fence_init()
->>>> and dma_fence_init64().
->>>>
->>>> Since more future user options for dma_fence initialization would
->>>> require distinct init functions, too, it is better to do this in
->>>> a
->>>> unified way.
->>>
->>> Why not add something like dma_fence_init_flags() and leave the 99%
->>> of the callers out of the (huge) diff? Ie. just port
->>> dma_fence_init64() to dma_fence_init_flags().
+>>> diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu b/ 
+>>> Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>>> index 36ab64f1e301..7dd24314592d 100644
+>>> --- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>>> +++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>>> @@ -7,3 +7,10 @@ Description:
+>>>           Accepts only one of the 2 values -  0 or 1.
+>>>           0 : disable TGU.
+>>>           1 : enable TGU.
+>>> +
+>>> +What:        /sys/bus/amba/devices/<tgu-name>/ 
+>>> step[0:7]_priority[0:3]/reg[0:17]
+>>> +Date:        August 2026
+>>> +KernelVersion:    7.2
+>>> +Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai 
+>>> <songwei.chai@oss.qualcomm.com>
+>>> +Description:
+>>> +        (RW) Set/Get the sensed signal with specific step and 
+>>> priority for TGU.
+>>> diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
+>>> index 9c7dd4a09f02..0e88b437f191 100644
+>>> --- a/drivers/hwtracing/qcom/tgu.c
+>>> +++ b/drivers/hwtracing/qcom/tgu.c
+>>> @@ -15,14 +15,144 @@
+>>>   #include "tgu.h"
+>>> +static int calculate_array_location(struct tgu_drvdata *drvdata,
+>>> +                    int step_index, int operation_index,
+>>> +                    int reg_index)
+>>> +{
+
+>>> +    return operation_index * (drvdata->num_step) * (drvdata->num_reg) +
+>>> +        step_index * (drvdata->num_reg) + reg_index;
+
+I am confused by this, probably amplified by the bad naming of num_step,
+num_reg ?
+
+I perceive num_step => numbe of steps in the hardware
+
+num_reg => number of registers (or controls) in a given priority field ?
+
+If that is the case, shouldn't the index be :
+
+step_index *  (drvdata->num_step) * (drvdata->num_reg) +
+op_index * (drvdata->num_reg) + reg_index ?
+
+...
+
+>>> +
+>>> +struct value_table {
+>>> +    unsigned int *priority;
+>>> +};
+>>>   static inline void TGU_LOCK(void __iomem *addr)
+>>>   {
+>>> @@ -36,6 +163,9 @@ static inline void TGU_UNLOCK(void __iomem *addr)
+>>>    * @lock: Mutex serialising enable/disable and the associated PM 
+>>> runtime
+>>>    *        reference counting against concurrent sysfs access
+>>>    * @enabled: Flag indicating whether the TGU device is enabled
+>>> + * @value_table: Store given value based on relevant parameters
+>>> + * @num_reg: Maximum number of registers
+
+Where ? in a priority ? in a step ? Why is this maximum ? Isn't it the
+number of "registers implemented on this hardware"
+
+>>> + * @num_step: Maximum step size
+
+Number of steps ? not step size ?
+
+Suzuki
+>>>    *
+>>>    * This structure defines the data associated with a TGU device,
+>>>    * including its base address, device pointer, the lock serialising
+>>> @@ -46,6 +176,9 @@ struct tgu_drvdata {
+>>>       struct device *dev;
+>>>       struct mutex lock;
+>>>       bool enabled;
+>>> +    struct value_table *value_table;
 >>
->> Well one advantage of the Linux kernel is to avoid such wrappers. I
->> think having more than one function for the same thing basically just
->> adds more confusion.
-> 
-> Do you think all future users would want SEQNO64 by default, btw?
-
-I was considering to invert the flag meaning, e.g. have SEQNO32 instead of SEQNO64.
-
-But as I recently learned even on brand new x86 Intel CPUs you can do non 64bit aligned 64bit writes (yeah x86 architecture!) and PCIe devices see that as two 32bit writes to system memory which might or might not read coherently.
-
-So assuming all future HW will be 64bit is clearly not possible.
-
+>> Why this ? why not
 >>
->> That's also why I would really like to just have one
->> dma_fence_signal() and not like five (or was it four?) variants.
+>>      struct value_table value_table ?
+>>
+>> Surely, we seem to be dynamically allocating the priorities etc from 
+>> there. But do we need dynamic allocation for value_table field as
+>> such ?
+>>
+>> Suzuki
+>>
+>>> +    int num_reg;
+>>> +    int num_step;
+>>>   };
+>>>   #endif
+>>
 > 
-> It should be dma_fence_signal(fence, error), anihilating
-> dma_fence_set_error(), which is just another massive incentive to add
-> race conditions.
-
-Yeah I'm largely in favor of that as well.
-
-Regards,
-Christian.
-
-> 
-> 
-> P.
 
