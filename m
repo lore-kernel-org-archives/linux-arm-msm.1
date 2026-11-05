@@ -1,66 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793906350;
-	b=l8gFmpjm5UbrYEtPNZD8FaNAPtutcQ6EYGDxYpHwJF5te60BwqQe6LMvbX5zRZIlHr3x
-	 HTTuuFokexTJ/dcRG+D5bpGuaVqBVdw746bEr4TkNBUVkjddBC6ap3hu9LnnJEn+V99Yc
-	 OC+tRCEaDPGQ7qUzpXo/FLGCOZNdo4QS1W60CZDXOlzTlcv83USUzZ05Leyc6xfN3Eu0j
-	 OMggIve1dILxpC9UZuUKVGki72pqZvWqzFBOi5J1wtuPDVPWUYjodhDFZiF4F87dnbTA0
-	 rYzmXdIjILTo04auSH+F2ZJETZvX+DshX+AWEU4b0aSCDOAUZbVuHQ4L8exsrubToGg==
+	t=1793906348;
+	b=VyMc7wza9SxkSk24hrF1MJOwKKs2oOa60L2lOLEh4IilHsVIbUOONEbknDhXaZvgUQ1T
+	 9HKmSVC8783M9LKkrVBn3zojl43SS+yvYPQk08jKVHHDrGz0mxEK3M5pMU6mlLoXHIOQi
+	 gW5vsrK1K/tS2fd/wxoNXqhYvu9PgOlo1ubDKEzZ/VNUIIbGlJXLNAql9dv4hek4PqWJL
+	 +Ot+GJHrocRAe//PumS6sS1Q3iJuBWZ5LeVryyCLhnxPHUSp1YidLLFs+q4VcXOh8o4Lb
+	 wAM3/4yA1Me4JfYdYAhiTp1NubW1kLG06+XVbhx+13QkZAJ2AEj9ldjp0odjk12m+dQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793906350;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:References:
-	 X-Mailer:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:
-	 MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=pl9YdTHjzstFUBIDQ8J3EXU+mFNbe168ZQZfU2wMuBw=;
-	b=NYLJtODMcyLLVlPZ88FlInipOp+UFPoQZPOOjvKHdDMKYmP4YXvoF9DC9zknI90f3rp/
-	 CVjqXarwSga64Bh+0ZT+4Px8C5MxtKNy628jfA/rHnXW2jkH8/pCpd86S8XPlzXpLOVaB
-	 iZbAIv6xFdz/FNxC0s+73x/NNnBJ91T8sNclggOnO0d2AprvxSTHZP6/+xsnMSwoa0PAH
-	 lCStW0NQ+uwH782JvcbJevYwivTK6lpRTPadQpF6aqjt0tYGoXkMdkoxSvW+xN4dF1C3q
-	 qI3PMNE4JCzukLQCr8BHdcMfNtG0niALPyrC4tNR32RDFUXkbbKCLt4qhz2DVhLwwgw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793906348;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:X-Mailer:From:To:Cc:
+	 Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:
+	 Content-Type:Feedback-ID:X-SES-Outgoing;
+	bh=4KTLjFOLB3Bw3rwGT8qot1q76+iLWn9KmQr9KnByOio=;
+	b=dNzbKIeSx7891+5XPmNzlfXDICa6oDAckulvgvlzq9j/7VBfNqxVHViXVxe9PwRMCroS
+	 7P3X3BBW6oIseRQdSP4SWWGiHun0alZd7uE9lV65hNbNCw2u7OQGo1284tNMR5HjyaNGX
+	 niEzKbc102dAFu4IcaWwbqXD8OFO8YlcdFhy4PFzLmnVsxyHRsPhBNUzMy3Uf+O6LDsTJ
+	 2/sp8snnkM5R8vBlA4AkeX6qrGGei+fSELfMmTod1gO4LghrJ4uVf2lRDhEtw05WgzNkB
+	 zgK45t6LBE72Q/Pxg1FogNl+hPptJAfJ1fwB2Ds95h3IhVhBJCNmcqF9s4N/FOJy+lQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=fqwqf.xyz;
 	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=SKcdGcue;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b="Sp4/guqN";
-	arc=none smtp.remote-ip=23.251.234.55
-Received: from e234-55.smtp-out.ap-northeast-1.amazonses.com (e234-55.smtp-out.ap-northeast-1.amazonses.com [23.251.234.55])
+	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0LMjIwBb;
+	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YDzFYP+z;
+	arc=none smtp.remote-ip=23.251.234.50
+Received: from e234-50.smtp-out.ap-northeast-1.amazonses.com (e234-50.smtp-out.ap-northeast-1.amazonses.com [23.251.234.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA78A606D810;
-	Thu,  5 Nov 2026 19:19:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DA78A606D810
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37698606D803;
+	Thu,  5 Nov 2026 19:19:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37698606D803
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=SKcdGcue;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=Sp4/guqN
+	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=0LMjIwBb;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=YDzFYP+z
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1793906349;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=3a2TKKu6c488cLrk+vcl0HofWRPkemnN04CQHxiDno0=;
-	b=SKcdGcuepwvngqsgSoaGpbShB52xUs5KCnngDi3HlsTevSrUzttAkSwwzxAIn7vC
-	knUzOSPTtJ7ctlYUd1HjuOKTLwkbgOWS3iiGoRYUoZO2+LN7B4UXF7sHi037JbgiorU
-	iSyLwgG/bcZ76lfKZln5vDReHqw9mKPuBTzKjjI4=
+	d=fqwqf.xyz; t=1793906345;
+	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
+	bh=KjK6/it5+2sDEN6+68hm612BuS7rPhjf+Cw6EfwhY+Y=;
+	b=0LMjIwBbEXV9VRucSky8VB+NQdqv31r1REne19ATooStdbHX+56adyHFlDWtVxEj
+	FkK2gF4I/NiBi+29b8MfLpGmqFlkldRnKu2jZhGI4uY3d9XQmyge4rIwMFFH17bQbGR
+	m/Y45ysn0SydDhUKljfPni284lTo41RsMWM9cmnc=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793906349;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=3a2TKKu6c488cLrk+vcl0HofWRPkemnN04CQHxiDno0=;
-	b=Sp4/guqNOezlkOeBBq+FekxGvteZOXi3rbxsYxhhUzY+6zSedYeFdRCjV/e5WFma
-	+itVfomaxqBteLNIfh0vWhnkPwpnkvWL4yAmcQU1rifO7xv50udrwBYbM8oM8dBamEN
-	yxQdi9YNhWgJ6SPlnt+fjH6XRe7ski2457TXwKrc=
-In-Reply-To: <791c7eed-f0c2-47c3-9595-77be72f29771@kernel.org>
-References: <791c7eed-f0c2-47c3-9595-77be72f29771@kernel.org>
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793906345;
+	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=KjK6/it5+2sDEN6+68hm612BuS7rPhjf+Cw6EfwhY+Y=;
+	b=YDzFYP+zC6Rxrtg6NwWfbj7rC1WKjAyMGY64NSErEQFfQHijuFvqPEUN9xRHxtyj
+	REq2FY6i8QIzuUIiUYtdKTMRGOQnjv9MDPl8ztGSiFCKlSf49gz0Yll+AStUY3lorAA
+	wjSAXMgFmJU1vQhiJp1ANGl9n8rgmc461kWooOZU=
 X-Mailer: git-send-email 2.53.0
 From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: vkoul@kernel.org, linux-phy@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org
-Subject: [RFC PATCH] phy: qcom-mipi-csi2: clamp the programmed settle count
- to six
-Message-ID: <010601a1ad2694f9-a9be628a-40db-4074-b0bd-1fce00cdb65f-000000@ap-northeast-1.amazonses.com>
+To: Vinod Koul <vkoul@kernel.org>
+Cc: Frank.Li@kernel.org, dmaengine@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [RFC PATCH] dmaengine: qcom: gpi: match control interrupts to the
+ pending command
+Message-ID: <010601a1ad2686dd-235641c9-2f2e-49d3-9ef9-3070b49614ce-000000@ap-northeast-1.amazonses.com>
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 5 Nov 2026 19:19:09 +0000
+Date: Thu, 5 Nov 2026 19:19:05 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,95 +70,145 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.11.05-23.251.234.55
+X-SES-Outgoing: 2026.11.05-23.251.234.50
 
-The settle helper returns zero for intervals no greater than the
-six-tick hardware offset. lanes_enable() then rejects the configuration.
-For slightly larger intervals it can program a count between one and
-five. Bryan requested a minimum programmed count of six instead of
-rejecting the zero-count case.
+Each GPI instance shares one command completion between its two transfer
+channels and event ring. Both control interrupt handlers complete that
+object regardless of which target the pending command addresses. A
+control interrupt for the other channel or event ring can therefore end
+the wait early. During channel deallocation, it also applies the synthetic
+not-allocated state to every channel reported in the interrupt status.
 
-Keep the six-tick offset separate from that=
- minimum: first calculate the
-rounded interval in ticks, then return six =
-when subtracting the offset
-would yield less than six. Check before =
-subtracting to avoid underflow
-for intervals shorter than the offset.
+Record the pending command and target under pm_lock before writing the
+command register. Only complete a pending command for the matching target,
+and restrict the deallocation state override to that target. Clear the
+pending flag after the wait, including on timeout. Preserve updates of
+hardware state and the STOP_IN_PROC transition handling for all channels.
 
-Link: https://lore.kernel.org/all/791c7eed-f0c2-47c3-9595-77be72f29771@kern=
-el.org/
+The existing ctrl_lock serializes command issuers. This change matches
+the interrupt target, not individual command generations: it does not
+attempt to distinguish late completions for successive commands to the
+same target after a timeout.
+
 Signed-off-by: Jizhou Tong <fqwqf@fqwqf.xyz>
 ---
-Hi Bryan,
+This is independent of the downstream QSPI controller changes used on
+my Surface Laptop 7. A version of the target-matching logic is in that
+working kernel, but I have not reproduced the delayed-control-IRQ race
+on an otherwise upstream kernel.
 
-This implements the minimum you described in the October 19 reply,
-separately from the rounding patch. I have interpreted six as the minimum
-programmed register value, after subtracting the existing six-tick offset.
-Please confirm that this is the intended hardware policy.
-
-For example, the rounded interval of six ticks at link_freq=3D600000000 Hz
-and timer_clk_rate=3D66666666 Hz previously returned zero and failed lane
-enable. It now programs six. Intervals of twelve ticks also program six;
-thirteen ticks program seven. The offset itself is unchanged.
-
-This is based on the accepted rounding RFC v3 [1]. The ARM64 W=3D1 object
-build and 20,571 ASan/UBSan actual-helper cases pass. The previous helper
-fails the minimum-count checks. No hardware test of the new floor is
-claimed, and it is not installed in my running kernel.
-
-[1] https://lore.kernel.org/all/010601a154d848df-37257f7a-0553-43ed-93c2-4f=
-cc5b690d14-000000@ap-northeast-1.amazonses.com/
+The patch applies to dmaengine next at =
+6628e7d4c6b. An ARM64 W=3D1 module
+build passes against my prepared kernel =
+build. An ASan/UBSan harness using
+the actual send and interrupt functions =
+passes 3,206 command/IRQ cases,
+including mismatched channel/event =
+notifications, STOP_IN_PROC, timeout
+and pending-state cleanup. The =
+unmodified driver fails that harness.
 
 base-commit: =
-d7e7bca7169873b46e857c025c10f3336c1258d8
-prerequisite-patch-id: =
-1f072b82125ac6272dc2a011688afc6cabb0f99c
+ee9c669f9bf5fd2c24206746ded9382fe810df89
 
- drivers/phy/qualcomm/phy-qcom-mi=
-pi-csi2-3ph-dphy.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 =
-deletions(-)
+ drivers/dma/qcom/gpi.c | 23 =
+++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy=
-.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-index f07699ba1f..dd70f29669 100644
---- a/drivers/phy/qualcomm/phy-qcom-mip=
-i-csi2-3ph-dphy.c
-+++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-@@ -223,19 +223,20 @@ static u8 phy_qcom_mipi_csi2_settle_cnt_calc(s64 =
-link_freq, u32 timer_clk_rate)
- {
- 	u32 timer_period_ps;
- 	u64 t_hs_settle_ps;
--	u8 settle_cnt;
-+	u64 settle_ticks;
+diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+index a5055a6273..9479adf55d 100644
+--- a/drivers/dma/qcom/gpi.c
++++ b/drivers/dma/qcom/gpi.c
+@@ -514,6 +514,8 @@ struct gpii {
+ 	struct tasklet_struct ev_task; /* event processing tasklet */
+ 	struct completion cmd_completion;
+ 	enum gpi_cmd gpi_cmd;
++	u32 cmd_chid;
++	bool cmd_pending;
+ 	u32 cntxt_type_irq_msk;
+ 	bool ieob_set;
+ };
+@@ -684,16 +686,23 @@ static int gpi_send_cmd(struct gpii *gpii, struct =
+gchan *gchan,
+ 	dev_dbg(gpii->gpi_dev->dev,
+ 		"sending cmd: %s:%u\n", =
+TO_GPI_CMD_STR(gpi_cmd), chid);
 =20
- 	/* Round the complete 6 * UI term up, avoiding an intermediate truncation=
-. */
- 	t_hs_settle_ps =3D 85000 + DIV64_U64_ROUND_UP(3 * PSEC_PER_SEC, =
-link_freq);
+-	/* send opcode and wait for =
+completion */
++	/* Publish the command and its target atomically with =
+respect to IRQs. */
++	write_lock_irq(&gpii->pm_lock);
+ 	reinit_completion(&gpii->cmd_completion);
+ 	gpii->gpi_cmd =3D gpi_cmd;
++	gpii->cmd_chid =3D chid;
++	gpii->cmd_pending =3D true;
 =20
- 	timer_period_ps =3D div_u64(PSEC_PER_SEC, =
-timer_clk_rate);
+ 	cmd_reg =3D IS_CHAN_CMD(gpi_cmd) ? gchan->ch_cmd_reg : gpii->ev_cmd_reg;
+ 	cmd =3D IS_CHAN_CMD(gpi_cmd) ? GPII_n_CH_CMD(gpi_cmd_info[gpi_cmd].opcode=
+, chid) :
+ 				     GPII_n_EV_CMD(gpi_cmd_info[gpi_cmd].opcode, 0);
+ 	gpi_write_reg(gpii, cmd_reg, cmd);
++	write_unlock_irq(&gpii->pm_lock);
+ 	timeout =3D wait_for_completion_timeout(&gpii->cmd_completion,
+ 					      msecs_to_jiffies(CMD_TIMEOUT_MS));
++	write_lock_irq(&gpii->pm_l=
+ock);
++	gpii->cmd_pending =3D false;
++	write_unlock_irq(&gpii->pm_lock);
+ 	if (!timeout) {
+ 		dev_err(gpii->gpi_dev->dev, "cmd: %s completion =
+timeout:%u\n",
+ 			TO_GPI_CMD_STR(gpi_cmd), chid);
+@@ -770,7 +779,8 @@ =
+static void gpi_process_ch_ctrl_irq(struct gpii *gpii)
+ 		 * not change hardware status. So overwriting software state
+ 		 * to default state.
+ 		 */
+-		if (gpii->gpi_cmd =3D=3D =
+GPI_CH_CMD_DE_ALLOC)
++		if (gpii->cmd_pending && gpii->cmd_chid =3D=3D chid=
+ &&
++		    gpii->gpi_cmd =3D=3D GPI_CH_CMD_DE_ALLOC)
+ 			state =3D DEFAULT_CH_STATE;
+ 		gchan->ch_state =3D state;
 =20
--	if (div_u64(t_hs_settle_ps, timer_period_ps) < 6)
--		return 0;
-+	settle_ticks =3D DIV_U64_ROUND_UP(t_hs_settle_ps, =
-timer_period_ps);
-=20
--	settle_cnt =3D DIV_U64_ROUND_UP(t_hs_settle_ps, =
-timer_period_ps) - 6;
-+	/* The programmed counter has a minimum of six, in =
-addition to its offset. */
-+	if (settle_ticks < 12)
-+		return 6;
-=20
--	return settle_cnt;
-+	return settle_ticks - 6;
+@@ -779,7 +789,9 @@ static void gpi_process_ch_ctrl_irq(struct gpii *gpii)
+ 		 * Stop in process is a transition state and we will wait for
+ 		 * stop interrupt before notifying.
+ 		 */
+-		if (gchan->ch_state !=3D =
+CH_STATE_STOP_IN_PROC)
++		if (gpii->cmd_pending && IS_CHAN_CMD(gpii->gpi_cm=
+d) &&
++		    gpii->cmd_chid =3D=3D chid &&
++		    gchan->ch_state !=3D =
+CH_STATE_STOP_IN_PROC)
+ 			complete_all(&gpii->cmd_completion);
+ 	}
  }
+@@ -877,13 +889,14 @@ static irqreturn_t gpi_handle_irq(int irq, void =
+*data)
+ 			 * cmd does not change hardware status. So overwriting
+ 			 * software state to default state.
+ 			 */
+-			if (gpii->gpi_cmd =
+=3D=3D GPI_EV_CMD_DEALLOC)
++			if (gpii->cmd_pending && gpii->gpi_cmd =
+=3D=3D GPI_EV_CMD_DEALLOC)
+ 				ev_state =3D DEFAULT_EV_CH_STATE;
 =20
- static void
+ 			gpii->ev_state =3D ev_state;
+ 			dev_dbg(gpii->gpi_dev->dev, "setting =
+EV state to %s\n",
+ 				TO_GPI_EV_STATE_STR(gpii->ev_state));
+-			complete_all(&gpii->cmd_completion);
++			if (gpii->cmd_pending && !=
+IS_CHAN_CMD(gpii->gpi_cmd))
++				complete_all(&gpii->cmd_completion);
+ 			type &=3D ~(GPII_n_CNTXT_TYPE_IRQ_MSK_EV_CTRL);
+ 		}
+=20
 --=20
 2.53.0
 
