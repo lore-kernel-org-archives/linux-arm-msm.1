@@ -1,113 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793894571;
-	b=pwIedCc9MOon+1InKOye/znGTeWfioKr7UWlFZq7ztn7TMXTyrLfCLfRjXen5JEbSUum
-	 4Ub41y+/r+M1y+cjVez98RhMN5afU0dGRXUjUokdQ4gc2kWTV6MqMJpfyj8Hek1eY/ebG
-	 6FDRRyIMu8LBcOH4MmBLG9j91ypInUPUL4h8zTbgdymfNH1FIe/WzV/936ZVYlEfFVswl
-	 15iQRu4ghXrxFpZTXjgQKlWVrazYTzEby+cJuyZCDlmiAdp8n1TzNN4c7meLK1uBTNV5R
-	 CE52Vrx+aJUphAAIUsxFrzVp0wxLJpzDV3brNXU/hq2wU9GzhQCNcTkxHvs9MdCPUzg==
+	t=1793894572;
+	b=QxgQLjfkecufJs0QfJuUIYCfwWbK/onQnfhbXIBqZBFYTNwET7ljMzLath0kgrCaNmtp
+	 SaDtG4oO4bxeDX0tF+Qy189WLJfa0suvgSDlLfYx4NTppAc+C9rG9jEe44MyQXIZgXydm
+	 m0p8SllixTwCuEpxrFyDxsR2KY5K+TX61lk6OyJFNf5ln0c03RoSrlZmSyD6XCSSS8eCY
+	 v4JeedjrVahIAbd1ID0kxhBejDQEXg2CKnNsG3D+BR9CoNwSKKehn5QYqCqhAY9i8IJtB
+	 A1O7ZnxrgsqA8GAtQbxEBkHCHOnq3o6bUSzCNhElhTsSwkQolqIEViansdAf7EiMiHQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793894571;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793894572;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=59A5myhJfTbtqqUcRR0wxFA83rvxy6ek9LfK2/taTUI=;
-	b=5bm7I+wyyl2mU/ElPJ4VnDbSdRS3Dl1yx5/o5w/ItFYM7/ZuEiakqOBUdqpdfT063AJd
-	 unWo3v4ZOnRfPwTg2PWYpU6lOFLiB3N+owshTvUr6oRJyZpSLJeFFV3Vg+vdWtsxIdsbF
-	 p5ByWoZ9YnDs6iMsYDS8p+BtaNZoheu0Zk04XTXANHWAnrFPNJYbqO0XRXM6BxGP+hwb+
-	 e8jJbN6MAkZkopvlGJwNtzjldUjWc5MJ3GUGw094OlrcNVkqBQSQeYnDkSN/G58ZYMhj/
-	 B3nYrm+t05FqkvxvxclGOrwBZ77/2y8NqjHen9TD+sUdHzkW923vjLuTIxySN0BKIrA==
+	bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
+	b=vppTlha+Bmkvmjva/DcBlcat9J35yg8Wtk12KHL0BzlmoBKA9ay0HZCLDJblw6tl61+X
+	 roc68PNt2GH3t0v+Y5U4zM/8YYhUCkUT3mSCYLGY/x2gCErVfa8ShH9TFv4G0AjNcN4NM
+	 RXqmsIjvYCNjeK96doDUDeru20a9lnsiqEOy81cDXWw8t9WxcewB8qrlYTKirrfC4jwkH
+	 SHGODWu3Y047uL0+z1ZZiomPxCfKLGeJrtGHpAGUbDkimlwSrPD7MBCUZfjet/7yMidQI
+	 x/35k1ZPGXTK4NKlu/Sc7AoMbJYxAbxjZh1qRERaUIldCPLhLgjAAi4GKAbv58KaV9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="Rn6A/FvL";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ZocNlSZq;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZyJBQkxp;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=c2rEgnbs;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CA926083614
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B0246083618
 	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:02:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3CA926083614
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7B0246083618
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Rn6A/FvL;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ZocNlSZq
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQEP6494378
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZyJBQkxp;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=c2rEgnbs
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQ34Y1049564
 	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 16:02:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	59A5myhJfTbtqqUcRR0wxFA83rvxy6ek9LfK2/taTUI=; b=Rn6A/FvLYA976pVX
-	Hm5+ZYCMYx+73yQg9crAG+SWsd+ISPbY2tB39YhOKFyd6feT4QOINWoeecSyoflN
-	RCErtNKolS4U1UJzhETvAJ08IWq1bNB/j11AGpxS6Ix7lhIBhu7U6QdN+vMUH0TA
-	G58tFVhg7+1E0KmV+LawiskbGUPuVGOsPz1eWO5EsZbavjNcPEOQke5naoeGkhxQ
-	nZRLX1EKEkLDEKw2zdJN2rb23chHbvfkagWZUCbrctYAGvdiMf0QXXTAhPVJw+zm
-	xn+L6Uk0Fm1/3YN0bs/ICZbYKd5SKOuQjxkQ48NguUFza6hIDB4zf5Gze5cICG4+
-	nnKaLQ==
-Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrqhksjbv-1
+	34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=; b=ZyJBQkxpsyP7gHjC
+	PFpey2bsuaOeurJClX9QcG/h7iR1XaIKYkeyA9e760ktwGPzGLlDENrMRd/3h6Ua
+	Oupo19XzwJ8OvAQugvaGDrTcWRukQJfkmywsws2Dtj0BxU+y7QCZmDmizTcD2pOW
+	CGSe308g7ZhpfAG5R6RSpEJnPSzqFxfMPxk703NA7cb727y4E/BzEc68ZPzD4anS
+	hC5SrTBpjN8LURnxEPfjZ92bq/0RQfugZRJ/2mqXq6Op0WfozuVTjQ+w/scKfVLP
+	KEyyAZLgXrOyR6vWKSWwmWM7d15CANx/tFZQYAK+ZWFAUCHqUWKxnMl3m0mwrxV9
+	Rs7pWQ==
+Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrpaahwfa-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:02:48 +0000 (GMT)
-Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5eac2cf3905so540552e0c.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:02:48 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:02:49 +0000 (GMT)
+Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5eac42e83e0so506422e0c.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:02:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793894567; x=1794499367; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793894569; x=1794499369; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=59A5myhJfTbtqqUcRR0wxFA83rvxy6ek9LfK2/taTUI=;
-        b=ZocNlSZqBkr3NYz1ghsmFvXfm/T7fwgrw/1pIcmN56nOSW6ke1XWXLaXPS+grERExO
-         4AycjWSHPZwEnOg4FowV2Ces/N1UK7O9tfLKi9OZU4cUBhMSeGzfcQ9qWXR6sSpluQ7w
-         TFfr7tT+dcz/2HybTLZDVNS/GTiO6TFMbroI5TLSRD1DrInJP0WMJtPOCtWNPbGwQM3U
-         PkA7WpEVEOHASILmWz+vn17Sap9fF+tsbiUBZmxtwCkncjXhCNlDdGii3Jv+0x4atzDY
-         HPr63MDmPSVq3kuG7UkTiF+9ykTisttLrbyeQVFEf8y2yeGWKykSH6uu/ol/Qkh8V0fa
-         +4kw==
+        bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
+        b=c2rEgnbsltCVcdoOauiTp69I5Xf1+JIZq1nNcaWVLyI4agU7u06s7Z8AcL12JuQKLC
+         3VOBQtBPCOFc9cr3lRGow30CYVLvynTlpEhA+il4eGWdV11DbXteDxz3w9v5rLtPWnsV
+         j7FAm0UCftwAViA4O8KonbWycZpK8KQGOiUVWUPa/K7nt1LC7c08uCiY8Fvv/u4NGzu/
+         lh1aCKTp7/h4FpabxypigznrUvM5hxH9HP2XmAuo+E+GYJKMekHpSuwEFBLBr2oHeEC8
+         AmUZXjmlXBwL1JYJNuZ25Q4HgnE6Puo0nvePrhEnCmMmusZhfuXx8T54m3DVZOQGMFNz
+         n9Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793894567; x=1794499367;
+        d=1e100.net; s=20260707; t=1793894569; x=1794499369;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=59A5myhJfTbtqqUcRR0wxFA83rvxy6ek9LfK2/taTUI=;
-        b=de7wK5/QzMXRYrjz2nse3N6uJlC+KB3fbcEy16J6y9I+PD5PBt4LABoeBZt2d9Vb2+
-         KcgidJwJtXZl34VZxOHNIA0GyTwdXATY9y/nqnMIYcD0ShLJJTsihyL6AgYitryc5VGm
-         w28aMdJmLsZmkg3Sz2MtlxxpI1lVA4/NI3cltKKGbuCZhm0zzyVsfIm+HPh+2GUGrSNj
-         RyiMJo2CbEy9YgOd1c7KBUghOGxhNl0jdYn42qjhmcJU7+1NUu9TsKdjrj++HOCteY13
-         3T29xKTEcM3DW1bOPhFux6VUVbLx3zOLQ6v49Dtd0f77SUisFo3R+HW8v9cy7+2P7BGo
-         TpNg==
-X-Forwarded-Encrypted: i=1; AKwUvBx881Mn0i2bGKLWedLR+b2PIgm39AWqHDxx0UsZT3t5y06PAGIbRivuMDwbaxvZsd4xbQP0N5S9qpbvttjk@vger.kernel.org
-X-Gm-Message-State: APuU4Z8w6K7YxdyEojwFw7BsEoLUnIPd4Ya2PYvRBnstDnNNWXdgNyT0
-	DqDfxGACX+LnRYSzlg1EbqacAfo2hEyaBWJ6YRJ3/fMzKRtD/vflIsExU4MdOtF2XTIVaslUy5Z
-	pKj2Q5AxixQD3Nmv2zt8zYb3acrp1TWLRqbnKr/omPgDpduL02V3QAayZgXEALcc9Rn1iQAg08g
-	Ew
-X-Gm-Gg: AYBFou2gVI11FH+G5oCVLC5MeNZpaVapVhXSKfmCTLzQHmMspA/Lnf+rGdL20IBzEuo
-	LAx/seDtwkMpdWxp7TAwUrcpFxLzkFrlTFNL1WH6iumi7Os/m4S9Wbx/OIIclJfVGtmWuj7FIP5
-	63KrbYYr+bv1dlzeX4zk1rbEZl5ypDk6p7cn24/0RJwgWDbOHpP0xTnSfsnEAsxVafcxZtM/xVK
-	ZHQmrMFoYPiqzCGfTATrBpZ+RJpE3IUYzLdAFi/0/ObRI++Se9RZM9InyBhks5/SisH9PUhLciX
-	osgDMGNIHFkwSsVIqGYbFLnCnzCQF5tdg3pCI1gxDRJqFGcMejFmExgMupcVr+g6jcf0xiPpqme
-	+7uhWU44ewu6IvO68gvrgeBXf0cywXC8ooIHFLGASnkeF9n4QFI6T1W6dzQ==
-X-Received: by 2002:a05:6122:4b86:b0:5ea:f220:fd6e with SMTP id 71dfb90a1353d-5ec6881fc37mr11241113e0c.11.1793894567321;
-        Thu, 05 Nov 2026 08:02:47 -0800 (PST)
-X-Received: by 2002:a05:6122:4b86:b0:5ea:f220:fd6e with SMTP id 71dfb90a1353d-5ec6881fc37mr11241010e0c.11.1793894566492;
-        Thu, 05 Nov 2026 08:02:46 -0800 (PST)
+        bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
+        b=tBGjMQaMX43Gq1RXN5oN7BmsDVqU+Q2ysFEiWs3zNw17FInkfKdll3PQNqFre6NHre
+         Pa6npdQp74YUfhRakgjAgi/3MDT2lqcXO9eWxqd5Oe//7MPJf4EAwhPD8jM/FZVrXnd8
+         9aITSmNvAfi59UagPcgPlNtkLCJQCycFf7jUyyFdlxYVH1sWVV/OtVCDr9iKU8Ol8Hte
+         QvvTy1FXH9gcHM8YPZ91OIEFrcMCgBQnCE912s6Zo4GJPMJE2bL2CkfX+k82mR1hWlJc
+         s36F2+DvMzabVp2BDSWwT2eSKYstUMedF16ZU5xm+4B6ZoYnKZSCSUVIJwgW/W1//x4E
+         L5RA==
+X-Forwarded-Encrypted: i=1; AKwUvBwrJTgsk2dmOg/VU1g6Su6coZapeVRn2+dNtXZL3KH51HfxKRR5jFhXCfzRY3D2KkmmuooPliQp80oHwQ/V@vger.kernel.org
+X-Gm-Message-State: APuU4Z8ZNP2379jl+xE/ZFSoa1vAgHrh4juGYPfMd+Fv+OEkae3Hh0P9
+	FQJnkXoshACGaXXEWjtha7PZWCPH9kdfCsb98qEcrgPuKczZmfp3bOKejz8fecZY5y1nj+RRAtM
+	sO0++DMlMbG1QAfX/J9Nvr+6vg0RxHJtO9vgQklvqZ8J+r4r8ALZwr8wt1yF2COd4eO7p
+X-Gm-Gg: AYBFou0LwhdDIO5sNJVqIsmYO4HaVRGvcGKDBFXvPwEfOyg01EN9sPASjpWvRPrXgfZ
+	pXoB5gJTYI4dgwMlFWjrvZDBIM7LhrwuR95NiKOkeg75cwiPvUcU0eY6jnnEo/MtBU/JeMaHWip
+	fIGdqlMq9AIrW4sO7g1pUc9JAzchwUc6ZncKFTxy6IoHD3gOAidmmPHRSpsSCzZ++i+A1AaUmoi
+	UrLK2Hdu7+r3GygHn8sLWAPPjXEd9FvenS1RP4fdRWSFpognfK3Kig9qPlZpZSoe370Xskl3apQ
+	ufbzQvYCdnqUHPWDdPVsgRXzAc2iyIMTx3s/rOAIJ0aZw4LtRMvNyTMCP/ptvfW2K5ybYSPqv1D
+	FcyeE8Xqp1DGOxUv5Csr0xEC4nckp/GPSjvfqvUcx73ka9BbgXQxT8QLKhw==
+X-Received: by 2002:a05:6122:3115:b0:5d4:1193:73d3 with SMTP id 71dfb90a1353d-5ec6894bf5emr9727473e0c.14.1793894568676;
+        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
+X-Received: by 2002:a05:6122:3115:b0:5d4:1193:73d3 with SMTP id 71dfb90a1353d-5ec6894bf5emr9727404e0c.14.1793894568060;
+        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
 Received: from [127.0.1.1] ([188.27.161.77])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda20521sm11065672f8f.53.2026.11.05.08.02.44
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda20521sm11065672f8f.53.2026.11.05.08.02.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 08:02:45 -0800 (PST)
+        Thu, 05 Nov 2026 08:02:47 -0800 (PST)
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Thu, 05 Nov 2026 18:02:01 +0200
-Subject: [PATCH v3 1/3] ALSA: pcm: Add snd_pcm_add_named_chmap_ctls() for
- custom control names
+Date: Thu, 05 Nov 2026 18:02:02 +0200
+Subject: [PATCH v3 2/3] ASoC: qcom: common: Add SNDRV channel map to Q6
+ slot helper
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-1-29e06613115f@oss.qualcomm.com>
+Message-Id: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-2-29e06613115f@oss.qualcomm.com>
 References: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
 In-Reply-To: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
@@ -129,165 +128,123 @@ Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
         linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4766;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2144;
  i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=UmDyy0KAjftUcohtDwuaxWeD/togauQXoNkoRvIpz+E=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq7KifIxy2fN8biif25RowK10MCi/o5gkFYVFGu
- BX4EJXwBRKJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauyonwAKCRAbX0TJAJUV
- VnboD/9szSXt7IGTCuQHaULNYKcqJPeGMrDle6z7DPhHp+Yb6V2CTOLitdg0s583gdUuEXQ5Qkv
- wdqSW1P32pXwGCu/XWLsIIs4gutFrbIHwlicVGmLbdhxe99wrZJjtKKURQEhaNOeyKLV2WNkdCT
- wHmabLXESSF2BJhXhEmHHtx42AQiSZCHtf3O2p8QOxF1zyt1KmbDcQaFoZkOvUD2eNLBgTRXlFp
- FbsrZ97tuQSyKRXjVh1ARXCzmQAND1vgz68whbAjg33gypOzOTQopt6VbLkemc1OFWfD7df7ODc
- 3dSdfIhcX16mM4HUIZJtaPYmf9o0nTHTaQxPsiRHTJSMgsw9QkW6wNPIlybMaiCrqcyU1seTh32
- o3JzhyM8chBH+0lqXdLIeVDGOcOzK0KYgv9+NePgBG1tEoZ2Nrg3H777CnfdZtMbz6mIzEkPiHI
- vrQmBshMOyux85PlWVOPzjKXgrUAZOnpNrk++v+Lt+ubVJE9hJfvIVSWMWFsF1i/YBW3dEOdBJw
- shCe3SDbs/tAQCjZ1qkelsJwYHKe32fozzffaH4gg+UEHflG8OiBxlnSgzjXzYFxXZgR77y6jRE
- cDS1XdPh+jiyChwkufqI50kQXq2sLNcZDFFnpi6tSnVzoYiVbr8UczP3ynE7unn0PgSJE7zAi2+
- LDDSeJ8XpT8Psdw==
+ bh=PB2xbFqRgMUG4atgisB8EwU4caRe51qu9rLYrESsFBw=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq7KigaTg5w6SITfHlnkVrD4JBkEpgmgeUVldrv
+ nmoTg+PxhqJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauyooAAKCRAbX0TJAJUV
+ VrBFD/40dYtqvjA7O4JctJu2A3E49/7nEjDc/syzyOkQrSTTDNFBY+mADWy/JsdHhaPO7VbRE7c
+ oj4zJ6ashWlSVttfnWlMGUwwxTjOhoMhnXG3LgRLmdowYIhWLgMuaalv0IJMdW9jWHlSiYhSnuw
+ YpLUQaJkVFYP1xMqgm4lLAUrRN6mLenoTNyAc4zLi7iHxYKhreVuwMa75awHszrSrsy9ri97peh
+ JG7UexUHwtO+uBlyxoX7ZuES8XrDsM6I1Oy0Y//Hpg6VkO30a2I3kIdvsbWvjfJl2358+9Q33rk
+ V/UJRsXi04LR+HjQ4q5wUOM7AMcDvs5b7vBDB5CxIdsWVc+f5RL5bXaJINGjES4uC9XKY6gTfIF
+ RVC+zqS6e88F2fhqVo4MWloZ1K5tLK5A/FInoSkw2Im8m8FzLhOdhk0e5Xt+zMMr7dSFA6xGQ0U
+ P56SZJMQx3YY4dyo650goEuhf+SrOLUIqmmVfCxfXat+Nm7Lsgx5aN6bLZyvxkV5qhFnv0CDU2+
+ IRN8e7HdW6dNBHHIlFcKCXW5HqCMrJcw9KbarARv+KFhrmt+la6tCi2GhcLCSkitxSKS14ealHb
+ gZTj/YTeyN72wOb0uvcrIdw/Kd2lT19P5yRKwbScKA/Uyo7fu8SusqRUpd2iWxN4uJHWcvGA5N2
+ pdFcy6s5KE/ziKQ==
 X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
  fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfXyWhvi6JJmGlA
- MUr2NklG3Cwze+MowiGr5RvmzSS/E7NJOHvHLbzH6ensoN0rYEvYtpfhFjbgrm5MZVxnuuRHCIz
- rtfQYFAlG9UN5305Xtm0bE2gBLsYguqh3vFI1mZu/bSuo46ZrtSTj0+aKDVn2uckm162dPSzqcX
- aa1bsmCM0gYgbUFc/nGuX6shnD1LBJR5wfwKLDsc3xrC1TzpG6sd22k7IxFihtUbxefFg9GDKAv
- BmLsjJ8IF8pZz7pl1GpYjSAunlBBBxLHkgpCjIZA7w60RdWxvqFikYXg/cu4P8eRq/jUrHqHRFI
- e15DlQnjcw0AO87Aqh2u2GiLfg0GOnyhWl5aXkI6OgMIKpE6hkitriLl2c28W7BUeb55Puf4t6n
- v9bIhLAYSwGhw7m+dyUljX5fL0yoBg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX4HM2NuzxpP+h
- ARzdDYEPfn5r1vib0G6BKj6mcFXWShCI5teoz1qCtHd9UDjYQqf8wZ+48gdEgoUkHAI/1XZFXqa
- 450nS9ENsyGXz1+jzb5aKKSaxNks8Rw=
-X-Proofpoint-ORIG-GUID: nNBgQ3IBYSfjaQtx6ly5mWuWm7LDWMh0
-X-Authority-Analysis: v=2.4 cv=a4+lZkSF c=1 sm=1 tr=0 ts=6aeca8a8 cx=c_pps
- a=wuOIiItHwq1biOnFUQQHKA==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX7bk37vJCw9+B
+ 9fFN+pj2i3Qa0657UDT9aqqAFWxJ9i1wZOTMwxD+Kh1ZHRuaiG6Sw2GaXLh8i87RQWqhHBAuC71
+ nOlh5Z9vgP0XnKz/2XBBWCuNL8RVWMjmLQFChTp7v7HI/qiPHgtX60GTKKAY4b7WagriNAHVO4m
+ hP7WKDp2EM7JfLbnFra90vYny/w4Ms42PfxRLUX02Uc16s/lWSoQf5zxtBNiRgOxOui7TvxnOv9
+ zMRrcLP0knCP6bwHuE+qnkNenOpdCrniZ4yYJYYqsljHnZW/xitmi+j9XnRBtD+5nT2bNmfrwYD
+ 3Nyd9lE5DzmMrbLMRUJJ90baVyeF1mgP+UWwlyxCGFkyu2qyp6N3Vess5uy/i/A9eW7SZuPBIpo
+ v9c4diafkRJjvKAu2jsnF6Z33QMjZw==
+X-Proofpoint-GUID: x2AoR3VDHYdkgFDZzWZekX6jttV2sAU3
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfXygWCfOcSBA+O
+ PlxjOYXQ9AW84BojQCE/q4Tw/51NIg7nVxozY4kxiDeMaHHq3Evu+QtaxSDSML9/BL5L2N94LZf
+ 6kwLz3ewenU6kEPnyj4iOUD0hPhT414=
+X-Proofpoint-ORIG-GUID: x2AoR3VDHYdkgFDZzWZekX6jttV2sAU3
+X-Authority-Analysis: v=2.4 cv=WOXqzXsR c=1 sm=1 tr=0 ts=6aeca8a9 cx=c_pps
+ a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=X5dxnz2IbiImVrLPgzYA:9 a=QEXdDO2ut3YA:10
- a=XD7yVLdPMpWraOa8Un9W:22
-X-Proofpoint-GUID: nNBgQ3IBYSfjaQtx6ly5mWuWm7LDWMh0
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=vP20N_l1vn5n2xwiar8A:9 a=QEXdDO2ut3YA:10
+ a=hhpmQAJR8DioWGSBphRh:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_04,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
- adultscore=0 malwarescore=0 classifier=typeunknown authscore=0 authtc=
+ bulkscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
+ malwarescore=0 lowpriorityscore=0 classifier=typeunknown authscore=0 authtc=
  authcc= route=outbound adjust=0 reason=mlx scancount=1
  engine=8.22.0-2610300000 definitions=main-2611050063
 
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Add a small helper that converts ALSA channel map positions to the Q6 PCM
+channel identifiers used by Qualcomm machine drivers.
 
-Add snd_pcm_add_named_chmap_ctls() to allow drivers to register channel
-map controls with names other than the default "Playback Channel Map"
-and "Capture Channel Map".
+The mapping is useful beyond a single machine driver when exposing
+writable channel-map controls.
 
-This is useful for cards exposing several channel map controls, such as
-Qualcomm machine drivers with both HDMI/DP and WSA speaker backends,
-where a distinct name makes it clear to userspace which backend the
-control belongs to.
-
-Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- include/sound/pcm.h  |  6 ++++++
- sound/core/pcm_lib.c | 48 ++++++++++++++++++++++++++++++++++++++----------
- 2 files changed, 44 insertions(+), 10 deletions(-)
+ sound/soc/qcom/common.c | 30 ++++++++++++++++++++++++++++++
+ sound/soc/qcom/common.h |  1 +
+ 2 files changed, 31 insertions(+)
 
-diff --git a/include/sound/pcm.h b/include/sound/pcm.h
-index 1cf511f8d880..58f5533a0315 100644
---- a/include/sound/pcm.h
-+++ b/include/sound/pcm.h
-@@ -1501,6 +1501,12 @@ extern const struct snd_pcm_chmap_elem snd_pcm_alt_chmaps[];
- #define SND_PCM_CHMAP_MASK_246	(SND_PCM_CHMAP_MASK_24 | (1U << 6))
- #define SND_PCM_CHMAP_MASK_2468	(SND_PCM_CHMAP_MASK_246 | (1U << 8))
+diff --git a/sound/soc/qcom/common.c b/sound/soc/qcom/common.c
+index 83b745f617a8..29b2df21b765 100644
+--- a/sound/soc/qcom/common.c
++++ b/sound/soc/qcom/common.c
+@@ -6,7 +6,9 @@
+ #include <linux/module.h>
+ #include <sound/jack.h>
+ #include <linux/input-event-codes.h>
++#include <sound/pcm.h>
+ #include "common.h"
++#include "qdsp6/q6dsp-common.h"
  
-+int snd_pcm_add_named_chmap_ctls(struct snd_pcm *pcm, int stream,
-+				 const char *name,
-+				 const struct snd_pcm_chmap_elem *chmap,
-+				 int max_channels,
-+				 unsigned long private_value,
-+				 struct snd_pcm_chmap **info_ret);
- int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
- 			   const struct snd_pcm_chmap_elem *chmap,
- 			   int max_channels,
-diff --git a/sound/core/pcm_lib.c b/sound/core/pcm_lib.c
-index bb16738bb591..d7d63f5109f4 100644
---- a/sound/core/pcm_lib.c
-+++ b/sound/core/pcm_lib.c
-@@ -2586,9 +2586,11 @@ static void pcm_chmap_ctl_private_free(struct snd_kcontrol *kcontrol)
- }
+ #define NAME_SIZE	32
  
- /**
-- * snd_pcm_add_chmap_ctls - create channel-mapping control elements
-+ * snd_pcm_add_named_chmap_ctls - create channel-mapping control elements
-+ *                                 with a custom name
-  * @pcm: the assigned PCM instance
-  * @stream: stream direction
-+ * @name: the control element name
-  * @chmap: channel map elements (for query)
-  * @max_channels: the max number of channels for the stream
-  * @private_value: the value passed to each kcontrol's private_value field
-@@ -2597,11 +2599,12 @@ static void pcm_chmap_ctl_private_free(struct snd_kcontrol *kcontrol)
-  * Create channel-mapping control elements assigned to the given PCM stream(s).
-  * Return: Zero if successful, or a negative error value.
-  */
--int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
--			   const struct snd_pcm_chmap_elem *chmap,
--			   int max_channels,
--			   unsigned long private_value,
--			   struct snd_pcm_chmap **info_ret)
-+int snd_pcm_add_named_chmap_ctls(struct snd_pcm *pcm, int stream,
-+				 const char *name,
-+				 const struct snd_pcm_chmap_elem *chmap,
-+				 int max_channels,
-+				 unsigned long private_value,
-+				 struct snd_pcm_chmap **info_ret)
- {
- 	struct snd_pcm_chmap *info;
- 	struct snd_kcontrol_new knew = {
-@@ -2625,10 +2628,7 @@ int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
- 	info->stream = stream;
- 	info->chmap = chmap;
- 	info->max_channels = max_channels;
--	if (stream == SNDRV_PCM_STREAM_PLAYBACK)
--		knew.name = "Playback Channel Map";
--	else
--		knew.name = "Capture Channel Map";
-+	knew.name = name;
- 	knew.device = pcm->device;
- 	knew.count = pcm->streams[stream].substream_count;
- 	knew.private_value = private_value;
-@@ -2646,4 +2646,32 @@ int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
- 		*info_ret = info;
- 	return 0;
+@@ -327,6 +329,34 @@ int qcom_snd_parse_of(struct snd_soc_card *card)
  }
-+EXPORT_SYMBOL_GPL(snd_pcm_add_named_chmap_ctls);
-+
-+/**
-+ * snd_pcm_add_chmap_ctls - create channel-mapping control elements
-+ * @pcm: the assigned PCM instance
-+ * @stream: stream direction
-+ * @chmap: channel map elements (for query)
-+ * @max_channels: the max number of channels for the stream
-+ * @private_value: the value passed to each kcontrol's private_value field
-+ * @info_ret: store struct snd_pcm_chmap instance if non-NULL
-+ *
-+ * Create channel-mapping control elements assigned to the given PCM stream(s),
-+ * using the default "Playback Channel Map" / "Capture Channel Map" names.
-+ * Return: Zero if successful, or a negative error value.
-+ */
-+int snd_pcm_add_chmap_ctls(struct snd_pcm *pcm, int stream,
-+			   const struct snd_pcm_chmap_elem *chmap,
-+			   int max_channels,
-+			   unsigned long private_value,
-+			   struct snd_pcm_chmap **info_ret)
+ EXPORT_SYMBOL_GPL(qcom_snd_parse_of);
+ 
++int qcom_snd_chmap_to_q6(unsigned int pos)
 +{
-+	const char *name = stream == SNDRV_PCM_STREAM_PLAYBACK ?
-+			   "Playback Channel Map" : "Capture Channel Map";
-+
-+	return snd_pcm_add_named_chmap_ctls(pcm, stream, name, chmap,
-+					    max_channels, private_value,
-+					    info_ret);
++	switch (pos) {
++	case SNDRV_CHMAP_FL:
++		return PCM_CHANNEL_FL;
++	case SNDRV_CHMAP_FR:
++		return PCM_CHANNEL_FR;
++	case SNDRV_CHMAP_MONO:
++	case SNDRV_CHMAP_FC:
++		return PCM_CHANNEL_FC;
++	case SNDRV_CHMAP_LFE:
++		return PCM_CHANNEL_LFE;
++	case SNDRV_CHMAP_RL:
++		return PCM_CHANNEL_LB;
++	case SNDRV_CHMAP_RR:
++		return PCM_CHANNEL_RB;
++	case SNDRV_CHMAP_SL:
++		return PCM_CHANNEL_LS;
++	case SNDRV_CHMAP_SR:
++		return PCM_CHANNEL_RS;
++	case SNDRV_CHMAP_RC:
++		return PCM_CHANNEL_CS;
++	default:
++		return -EINVAL;
++	}
 +}
- EXPORT_SYMBOL_GPL(snd_pcm_add_chmap_ctls);
++EXPORT_SYMBOL_GPL(qcom_snd_chmap_to_q6);
++
+ static struct snd_soc_jack_pin qcom_headset_jack_pins[] = {
+ 	/* Headset */
+ 	{
+diff --git a/sound/soc/qcom/common.h b/sound/soc/qcom/common.h
+index 37b185a4968f..2b1d30230d77 100644
+--- a/sound/soc/qcom/common.h
++++ b/sound/soc/qcom/common.h
+@@ -31,6 +31,7 @@ int qcom_snd_wcd_jack_setup(struct snd_soc_pcm_runtime *rtd,
+ 			    struct snd_soc_jack *jack, bool *jack_setup);
+ int qcom_snd_dp_jack_setup(struct snd_soc_pcm_runtime *rtd,
+ 			   struct snd_soc_jack *dp_jack, int id);
++int qcom_snd_chmap_to_q6(unsigned int pos);
+ 
+ 
+ #endif
 
 -- 
 2.54.0
