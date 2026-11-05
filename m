@@ -1,85 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.117.254.33
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793871876;
-	b=M/HM7SNA+C5/nvkXaNB4Svw9qaT0213utZuRyBVq8iGdkR+jmQLNw2XaFLv1Pu5sLqvU
-	 WM/acqhk3saNXbdeINCoAh8sW8E33JKsEKXPr62aI6OGLKVJJpgl2Yx7MLVaWS9lYDXVU
-	 jHtANgZ2kcxWnKn7Vmme3gVVxz+njwI9iChAIdHFbiEe0UF2E1e+eFFf9+3QrSJ8lRHeX
-	 2B/SMCQoc9djcb9v7ZEEVvCy4ta5kJSAQYIQPjZUo7sz+GQkabUi7I1YOCZ3kIaaEt4MZ
-	 Cbt2YiQtIK6/Tb7Kg0qLW8mljptfp8NC/6xSukNF5v5Gwyqonroyd3z/Drv+2VN7Zmg==
+	t=1793871964;
+	b=HEfNKw6GtnikZviVT3iSc8NQNa3w9z8cNYamoVOoEabpboF3OhJ1LAcMCVP2HIKq4hy+
+	 hdoo+kHsn/YhcRAWXa/ae2ucn8X38G+i7rgMY4G1hunZ8OVjy9QrbIS3gcdHAGTi9qZgi
+	 pnoF/K5aT29TCFBMPD1Yrc0GsiqImEmgWJNzDsPMMWmidMcSix6jUN/lWbsnDOB6FoByd
+	 mye9+GtkCOaJKYxEie2K5y6pViLBppucy0yfYzBSw+sYIYq/sWze5c1t6rWQdSMXSQxYu
+	 kHIdNiP5GEqoN/2MOCTWmmjTzecsqh4EYoVw29Z7KFkwKsGpYBVDlJRzE81roz4A/Iw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793871876;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=7QhU4psUp36lRhdSvaABTdCrK79wA+X/bI1t7JAA+P4=;
-	b=qcrVbEhL3Fu0l4n3h6wWCoBYmdN7010447y6gpER9G9YnJXY0Rtd0PdmssgRrKvMN5Bd
-	 Q9Pf4wpft9CxzVrxje25oAlhnPh02iVOhDTs8+ZyWFJlifXIaBocq92Cuy/Mp6k8d5AJG
-	 3sTAEXElUovPMxEEmIImo5roNIh1UGDGKSZg9GFrh80NG72+2Mud5Y6y1ycUgqlD0QXav
-	 QzM6AQgqhufwHM5RASLadbSvzIua3SofoTHktNVWUoY2Dmfk2SJ0w26gU7Q5TwmS+ZgR4
-	 2HqSt9Ez7LjyhC/PeOeru6DoNI1vElbKcdEAgiueyxtet7i3c+MLphXn/OfwXUR83mQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793871964;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:X-UD-Smtp-Session:Date:
+	 From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=UGJviNUom/9cmp2FuiSup9JFaRpjsLnal6a9UIzq0Iw=;
+	b=tkNJP++TUPiEbKNIhHBpKjR/B94ueSXYWDuSG2G6WKAgweKf0MHaKLJpyKuN9us7KxrY
+	 cRAIBaRODF1m1eeNc3qA2uVZfa+r5O2j3oFOJguLPW2WQh8qQ+vfpUhSAmNh9kpKTo8p9
+	 ZzKrspQea95F0gmnx0j4Ox70zh1AG9lstCxRozf1thlYrtPRGaBP87tCpXsiTMJ0H6VG6
+	 TmJ7fRyu954lg/fR95dxs2XsDVeStt/oSBi054its14MeqAk0/RMXz8USF2xsb+Q+x35e
+	 aNMH072hBEcdTi/3TTAjV/jXed5hOCo7EXruYw5Z7skQxyW8SzNmiljUM0L/4IYa/Vw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=tRkOqEU4;
-	arc=none smtp.remote-ip=209.85.221.45
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=none header.from=sang-engineering.com;
+	spf=pass smtp.mailfrom=sang-engineering.com;
+	dkim=pass header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=dVQn1+33;
+	arc=none smtp.remote-ip=194.117.254.33
+Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF316606A31B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:44:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BF316606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A61BE606A32D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:46:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A61BE606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=tRkOqEU4
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48dee593f18so1288381f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 01:44:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793871874; x=1794476674; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7QhU4psUp36lRhdSvaABTdCrK79wA+X/bI1t7JAA+P4=;
-        b=tRkOqEU4xOzE7XVrSahnzZw+u+Bg+xLCpTkl91fr/FbW0pcnhNr9FAx3T+l1yNJqNY
-         wtu4o+HNeSsr3GQ9Y4PIY2gJ0iNQSyc3FVJoDgC1M37qnJzbxCySN/8cUiR9s2Va+DBk
-         KosHb7H0Cxd5RsHmRdULYyyBcbwoEqsLCzSl0vH+p4RN3/7gmRXOBbwpaAHG0uHWyxcL
-         +MqGCI7/uKRT1akFropCNXnuEd072gwImdusnSv2T2vu1tM8gCeH10HLraP/JALreFzu
-         y1Dy1i3xxfUDA/QuIkMRBtbFdAOM4gqDbju3s3PkxsA4RoiBUjUP+k+eHki80E+TxhiH
-         8KZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793871874; x=1794476674;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7QhU4psUp36lRhdSvaABTdCrK79wA+X/bI1t7JAA+P4=;
-        b=XfLlX8aSngc+PbgnIM7S+i/3W1DeMRyU+In6rk9Nn0RZtN5RHRMP9FftltlXtmE3jy
-         oGXGwZcwwz4eKnsFvM0QLzDPhJtsTtb20LaiEQ25HW/PUh9fS4Dfo0Sowsb5FWPWuXKD
-         XggZQUN5bY3wNmvUaRHF5/gHntesKgU+zWQ6njgp1kHskyXZ5ef1lEg68Fv48fahk2Mn
-         c0aEfc3ZoZXgA7MzZQJgk590D7SoCYzvfYDBzTw5dAZ6O3XlYwC4B0AF23Y7vS4mLefD
-         Bn1lkyeHFkP5nSyid3NBf7U+Q66tA5YDqG/Jt+SkLurxy5kzu7s5eswgAqX84m2bha8i
-         +W9A==
-X-Gm-Message-State: APuU4Z+XYXGuG6GbyALry7DalG/NLyAScYGBModeFL7dWAZMmgQvBY01
-	vTYJyjW9oL2h2FuL1EjuNTO/2ANE0p0DWmKy6IG/iN3ZBrFZbf0w3m7yAcskX92Zb5Y=
-X-Gm-Gg: AYBFou1t8iTLt5u/VXbxyDHtqXM/Zq4H/qVyGla5qnrxIJG1Cs5fK8gV3fJIufyQ0fS
-	h9S2uEloT6+Nd8uaUEtdGyNGFf8Hm1zoQb3uNv+mwFDfTBePJlaHhh92PjiMPSas1/KHhE4E3T5
-	/+l3gSyi+VAxxsjiv6oMH3YhsntWRr75W7FyzMMcbLrAv+Ugptvx13oSyFTmxmCVwkXsyzZA13w
-	gE1UKK6A0nIN8So5aWk8xiXANeHQWvqWZ1gYUhpEy7u6iQbGFHYZ87pctJ+6ZXcIpQwA+XLH2e5
-	5Qin4RA2d0W3n5jybHaPzCqZ5OwLR5mD31t85dNHBS5vdVaDAvuZNt9Islr1lzlmROW5AVO285l
-	8tqiOknsdk7XNfRWf2+lQYe6lzqbnpzoTno3unp0s/2bQSIIcWBObLR9l/LoxTyg8W/MmaLlURW
-	F4jLMgM5NGIpUMTa4idp/+b5vIL1I+JSjVVqtNuGj7t2MQTxOlEo/dlorFzHPts2CQGJtBu3XIY
-	cBliK7u+UlOud2/8sGhDNdUSEUOx3foFGukeOIk2ocSz9zRvx5lQ7C308aKp+NsRR/yW9xNpTEy
-	FslqNK3/qsDf4Vzf1HTKC44Q9tESVbOz9H3X2z0j
-X-Received: by 2002:a05:6000:2997:10b0:48e:5e63:bd23 with SMTP id ffacd0b85a97d-48e6e2ef96fmr29363335f8f.30.1793871874143;
-        Thu, 05 Nov 2026 01:44:34 -0800 (PST)
-Received: from [192.168.0.167] ([51.37.126.136])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fecac17c1sm8628740f8f.10.2026.11.05.01.44.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2026 01:44:33 -0800 (PST)
-Message-ID: <a83a948e-3430-4133-ade6-b30045b8b186@linaro.org>
-Date: Thu, 5 Nov 2026 09:44:32 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=dVQn1+33
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	sang-engineering.com; h=date:from:to:cc:subject:message-id
+	:references:mime-version:content-type:in-reply-to; s=k1; bh=UGJv
+	iNUom/9cmp2FuiSup9JFaRpjsLnal6a9UIzq0Iw=; b=dVQn1+33DAVyF+Mmc8wl
+	nZX74cBnZtcOaNxqwX+f2EN35vIuvwcCBbs5Y4Uif6xNJ6UewE1QVIpTltPVup50
+	MlRiuhMLiINXNw9vKnwwB0a1f/U65VvmL+iaby9q20fLvGJPiOfZ+xoYgRcT9/W9
+	d/g3k34Y1x5VkozWd1TK+b3NMoy//cW6D20URGPVMrKYNItPGgXDmf9IECVFTWMq
+	umAJwe4RBh71+/BSasOo1K7nwQ2OIVJXYAxg+XM2NraSzagEOqBo8lznHsahbQ4c
+	gdRePSo1a6sFJIyTdvhIEQ1S403xaUtPpDJZPJOWG87m0rLe4ikq13/1eQDnBRom
+	Ig==
+Received: (qmail 1094124 invoked from network); 5 Nov 2026 10:45:56 +0100
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 5 Nov 2026 10:45:56 +0100
+X-UD-Smtp-Session: l3s3148p1@k0qyXIRfQJzAwtcC
+Date: Thu, 5 Nov 2026 11:45:55 +0200
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Frank.Li@oss.nxp.com,
+	Mark Brown <broonie@kernel.org>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Radu Pirea <radu_nicolae.pirea@upb.ro>,
+	CL Wang <cl634@andestech.com>,
+	Ryan Wanner <ryan.wanner@microchip.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>,
+	Haibo Chen <haibo.chen@nxp.com>, Linus Walleij <linusw@kernel.org>,
+	Daniel Mack <daniel@zonque.org>,
+	Haojian Zhuang <haojian.zhuang@gmail.com>,
+	Robert Jarzmik <robert.jarzmik@free.fr>,
+	Heiko Stuebner <heiko@sntech.de>,
+	Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Tudor Ambarus <tudor.ambarus@linaro.org>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>, Yixun Lan <dlan@kernel.org>,
+	Troy Mitchell <troy.mitchell@linux.spacemit.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Alain Volmat <alain.volmat@foss.st.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Laxman Dewangan <ldewangan@nvidia.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Sowjanya Komatineni <skomatineni@nvidia.com>,
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	"open list:SPI SUBSYSTEM" <linux-spi@vger.kernel.org>,
+	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	"moderated list:BROADCOM BCM2711/BCM2835 ARM ARCHITECTURE" <linux-rpi-kernel@lists.infradead.org>,
+	"open list:FREESCALE DSPI DRIVER" <imx@lists.linux.dev>,
+	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
+	"open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
+	"open list:RENESAS RZ/V2H(P) RSPI DRIVER" <linux-renesas-soc@vger.kernel.org>,
+	"open list:SAMSUNG SPI DRIVERS" <linux-samsung-soc@vger.kernel.org>,
+	"open list:RISC-V SPACEMIT SoC Support" <linux-riscv@lists.infradead.org>,
+	"open list:RISC-V SPACEMIT SoC Support" <spacemit@lists.linux.dev>,
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
+	"open list:ARM/Allwinner sunXi SoC support" <linux-sunxi@lists.linux.dev>,
+	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Thierry Reding <treding@nvidia.com>
+Subject: Re: [PATCH v2 1/1] spi: use dmaengine_desc_set_callback()
+Message-ID: <auxQU_PU4bwLJUch@shikoro>
+References: <7f96599b-681d-4963-bdda-1274371ac84f@kernel.org>
+ <f1fa853d-1703-411d-b2d2-0fb0b176c2fa@kernel.org>
+ <autqC143h7Qf1R9H@ashevche-desk.local>
+ <9e39502a-dd17-4fa2-98a3-9019523cb5e8@kernel.org>
+ <auuYcS7-YqJKcUbE@ashevche-desk.local>
+ <63c24437-4261-4a51-be7e-31ac0759a095@kernel.org>
+ <auxGom0XR-Hax9b3@ashevche-desk.local>
+ <00390a20-7630-4066-9779-06c8f915a176@kernel.org>
+ <auxH_WzaOLsQ4-go@shikoro>
+ <auxOFGTRAKb5bLXD@ashevche-desk.local>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,73 +124,13 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] media: qcom: camss: Add support for SM8150
-To: mail@andrewgigena.dev, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20261104-sm8150-v7-4-rc1-camss-v1-0-7a9534a9a22f@andrewgigena.dev>
- <20261104-sm8150-v7-4-rc1-camss-v1-3-7a9534a9a22f@andrewgigena.dev>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261104-sm8150-v7-4-rc1-camss-v1-3-7a9534a9a22f@andrewgigena.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <auxOFGTRAKb5bLXD@ashevche-desk.local>
 
-On 04/11/2026 20:54, Andrew Gigena via B4 Relay wrote:
-> The hardware reuses the existing 3-phase 1.0 CSIPHY, Gen2 CSID and
-> VFE 17x implementations; the CSIPHY uses the SC8280XP lane register
-> layout. Add CAMSS_8150 to the version enum and to the shared code
-> paths, then add the per-block clock, regulator, power domain,
-> interrupt and interconnect resources.
 
-That's odd. sm8150 and sm8250 are proximate both seven nanometers 
-sc8280xp is five nanometers.
+> Then I MUST started REQUIRING to split the patches in such cases to actually
+> review them?
 
-PHYs are about converting the analog to the digital domain and so 
-process geometery - ends up making a difference.
+Okay, this is a solution, too. Or requiring "# subparts"
 
-You can get the PHY init sequences here:
-
-drivers/media/platform/msm/camera/cam_sensor_module/cam_csiphy/
-├── cam_csiphy_core.c
-├── cam_csiphy_soc.c
-├── cam_csiphy_dev.h
-└── include/
-     ├── cam_csiphy_1_0_hwreg.h    sdm845
-     ├── cam_csiphy_1_1_hwreg.h    sm8150
-     ├── cam_csiphy_1_2_hwreg.h    sm7150
-     └── cam_csiphy_1_2_1_hwreg.h  kona/sm8250
-
-https://git.codelinaro.org/clo/la/platform/vendor/opensource/camera-kernel/-/blob/LA.AU.1.3.7-02900-gen3_gvmgh.0/drivers/cam_sensor_module/cam_csiphy/include/cam_csiphy_1_1_hwreg.h?ref_type=tags
-
-So yeah going by the name that's CSIPHY 1_1 same for sc8280xp and sm8150.
-
-Hmm so much for my understanding of how dependant on process node these 
-sequences really are.. perhaps the PHYs area fully synthesizable in RTL, 
-probably.
-
-Anyway.
-
-The one thing to do here is to please _verify_ what's upstream now 
-against the tag provided there.
-
-If there is a divergence then we need to upstream a 8150 compliant version.
-
-...
-
-Actually its fine, did the verification for you, the 1.1 init sequence 
-as is upstream is fine.
-
-Just please tidy up the ordering of the 8150 switches.
-
----
-bod
