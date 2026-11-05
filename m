@@ -1,55 +1,53 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793870441;
-	b=NQM4022YBme/7SOKE9VDYjVHRrp0vWl8mHbe6TINizer5YZVFRNizvU7+yM/n0YE6elD
-	 mXIFzIC2wZqOOwiNI+MUP1sV3dtprumgZrlcnJTmsTFASJuB7+PgB1DBbasrF99Xv9lZg
-	 hSJzqSYu+EgmCLTga33yIhah1BYWhu0WRnNo2CxEvCvf95eALyNNxM+5dPzZG6m0Dfxth
-	 s/H8SV04aNs1tDclBX8mzXxEj96ZiqE+x1NTFMnWNz8s+sm3veyZ4DOhVN+XD27Fl/L1P
-	 1WI74ufVsG0sqtMNjcvWFjcbAtcxTjzx9KqerRTG8U7frXWr5SfmYTCuumALgj014BQ==
+	t=1793870583;
+	b=Er3CqRH1J59PrWbjcbtMsdvKmoREqrAKInNiculuOZDyAS/tH9wEkUK68J6nCUpX4tkr
+	 hjdnYZEdkFaDIizhSXRex9GFGCOxN0l/hEkga5IYdQRZMRL4gqYpO/+466L4Cc7m7Yj2v
+	 b/viQdIUmXBy1NMuIgwfIzp8/anwXYpLqGFMD6ItKAhBEVBPdkVpqd10cuV5cpseaEO+8
+	 XVWq+LJrCEwat7J6pSJO61KdlGj7SCFs+EtNVQVefGS5rYEd2GYlSEUvBBjspZukEkG+A
+	 forqmEsMF40ZFq8/TVJIHVKDD0hHFzRQAxlqB/kxhaDvMJPX9BT9xvM7QZ3eqpe4iQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793870441;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793870583;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=K/YqJ70WtM68OplnnT60Ts+qwHgnTXxv+WitwpV0fGs=;
-	b=y9zZVfX7b0F+0j6p4Z01LXjFg6dQrVNjNrfqHb+HVK3oqVTs60cDTgWb9woHRqyJ75so
-	 5Nq9WMlln5U9bN7yAdTrIs/ZmDx6cB5qAeC5UATsg6aJbPE5lrKd+YaTqwA6pKrudRvxD
-	 jBd+NEjD9yKF4723hx51HJ9JYx0X+jM4h87Tc61HuYRVHhFszQio1KVuFY3SuK1ic2Z2F
-	 dXZB4o1wfyy5xhjOwwAI1n+8B5TYqrMG1HzRT/xWO3ZZDWvUquj1sFwKddc4N6k70ThE/
-	 1xvWQdC0sEu29AVrxw71lQxplzt7iKK3ISyAoTacfGWc4fKzTDIuuzexdHY1l9pV9Mg==
+	bh=e6iQLmGUPP/5Q9jpHSc+xQTgG6RXLcsQ0m5VazqI7JQ=;
+	b=q8E2eumZN4SPTs6/ib+eVbSXXUu2PF9xIMUvj6230qat2vmW0rcB+kj8p+0Ijrka1trV
+	 jYFe2gOBSoX34q0taSsjbAdNcG2M7YPluuFE0G73ZEDfufllJgzDvaaWft2m0b/4/+5Ue
+	 dXn23dI/0jLcR2RZ4oX/uz4mxd8Nzh1gerCeA2lNYH9rVQYPOqptunmXA28oTB8U+uX3T
+	 XwX+7sf/vKxbcoMwlRA4Et/b7QW2hoWb0b24QXPRmcILprxHyatGbOfuITqy7hJWW6v8B
+	 8lHui5zwHjM1nxdJSud6dwNHjP3BgY6PiHtJUZSOd5QC7kd6Au8VndqRGalmFYn0eyg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=miWmgsAl;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BJ1s94Hu;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 0B08A606A326;
-	Thu,  5 Nov 2026 09:20:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 1E714606A32F;
+	Thu,  5 Nov 2026 09:23:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=miWmgsAl
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id C86191F000C1;
-	Thu,  5 Nov 2026 09:20:39 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BJ1s94Hu
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id B6E361F00A02;
+	Thu,  5 Nov 2026 09:23:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793870440;
-	bh=K/YqJ70WtM68OplnnT60Ts+qwHgnTXxv+WitwpV0fGs=;
+	s=k20260515; t=1793870582;
+	bh=e6iQLmGUPP/5Q9jpHSc+xQTgG6RXLcsQ0m5VazqI7JQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=miWmgsAlQsW2g/6GqXZXs7HDKqrz0hX8ECFyo9/dER3KQRv4Nrlt8IZaMtd+QQiq+
-	 ikyawevf62LrNTsa6TsnLg7b8lFHcfgcxyZXtgk360/mcFtz76KKgX7xN1S+cTdOA+
-	 wQUCazPFfBiNtJtbfBharCHOHkRw2jYPaK8gfYp+iyXnjvGBH3QQJCCCp4tehG8MAP
-	 MVjJ4L05apJOAyb4nID2pFbAoTURDYvXFp5HXgQwXehCQCfNz5FkCG7jbFLyo4ZTyX
-	 SXRy5RTsrZJ7mO9SFmu6lHk70Y4BgZytoLvpZpvpXctQuFP4ElBjsLgSricoX0lzX4
-	 BODq1+QNTBM3w==
-Date: Thu, 5 Nov 2026 10:20:37 +0100
+	b=BJ1s94HuPxIxZZ4x0whnQvPrM9sRjHGeRF5it6PhMUOz6ed+mimneaLKyt+FTIE2m
+	 PMouGjDVeJa63LmzNPk3iSxmA401KRpPVohxgKnddgv7URtp5XafI/gtiaNLISV05C
+	 EtkverieSR0Ly1uGSMHADKUQXxBR2Z0tv7guAmmgpovXQBMpdkexJClLFoLHj1Xg4S
+	 rzRDkvQGF64iivJNcuVRL9MDnVJtJ/Zooj3/Pq10+n6slCxWzcu/p6syiHVtM6dnLW
+	 mkAiTHjuB1yI1ycXkYib13pDqoU2xizEZRUugkIzlzWWTh83QnHF83r3p9WaXgPfMC
+	 VsLoloY+TI0BQ==
+Date: Thu, 5 Nov 2026 10:22:58 +0100
 From: Bartosz Golaszewski <brgl@kernel.org>
-To: YuanZhe Liu <25031212351@stu.xidian.edu.cn>
-Cc: Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
-	Ben Young Tae Kim <ytkim@qca.qualcomm.com>
-Subject: Re: [PATCH] Bluetooth: hci_qca: fix use-after-free in ibs debugfs
- files
-Message-ID: <yzzwzqczviza6m2c6xohghlqlo53fwottlxqclzy3udes2zosq@qnquko4f3buw>
-References: <20261105055645.12917-1-25031212351@stu.xidian.edu.cn>
+To: Mostafa Saleh <smostafa@google.com>
+Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, vkoul@kernel.org, Frank.Li@kernel.org, 
+	bartosz.golaszewski@oss.qualcomm.com, pramod.gurav@linaro.org, andy.gross@linaro.org
+Subject: Re: [PATCH 0/2] dmaengine: qcom: bam_dma: Fixes for unbind
+Message-ID: <zg3bcwwn6nfr6423tfpgshevfxnf2p62lirmdb3v4cozwopul2@leudxnhl56ki>
+References: <20261020180804.140766-1-smostafa@google.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,27 +59,31 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261105055645.12917-1-25031212351@stu.xidian.edu.cn>
+In-Reply-To: <20261020180804.140766-1-smostafa@google.com>
 
-On Thu, Nov 05, 2026 at 01:56:45PM +0800, YuanZhe Liu wrote:
-> qca_debugfs_init() creates an "ibs" directory under hdev->debugfs and
-> stores pointers to fields of struct qca_data in the debugfs files.
-> qca_close() frees qca_data without removing that directory, while
-> hdev->debugfs is only removed when the HCI device is released. The HCI
-> device can outlive the driver data, for example when an HCI socket still
-> references it, so reading or writing one of the ibs files then
-> dereferences freed memory.
+On Tue, Oct 20, 2026 at 06:08:01PM +0000, Mostafa Saleh wrote:
+> On Lenovo Mini-x Gen 10 (X1P42100 based) I am using VFIO-platform
+> to assing the QCE/BAM to VMs.
 > 
-> Store the directory dentry in struct qca_data and remove the directory
-> with debugfs_remove_recursive() before qca_data is freed.
-> debugfs_remove() waits for callers that are already inside the file
-> operations, and any later access fails with -EIO instead of reaching the
-> debugfs helpers. This covers the two writable files as well.
+> During unbind:
+> echo 1dc4000.dma-controller > /sys/bus/platform/drivers/bam-dma-engine/unbind
+> echo 1dfa000.crypto > /sys/bus/platform/drivers/qcrypto/unbind
 > 
-> Link: https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261102113654.8724-1-25031212351%40stu.xidian.edu.cn
-> Fixes: 0ff252c1976d ("Bluetooth: hciuart: Add support QCA chipset for UART")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: YuanZhe Liu <25031212351@stu.xidian.edu.cn>
-> ---
+> I see a system reset quite often, looking more into this,
+> that seems to be related to runtime PM, with those fixes I don't
+> see that anymore.
+> 
+> This patches apply on linux-next.
+> 
+> Mostafa Saleh (2):
+>   dmaengine: qcom: bam_dma: Take a PM ref at remove()
+>   dmaengine: qcom: bam_dma: Do not touch remote BAM in remove()
+> 
+>  drivers/dma/qcom/bam_dma.c | 18 +++++++++++++-----
+>  1 file changed, 13 insertions(+), 5 deletions(-)
+> 
+> -- 
+> 2.56.0.212.g129ede20d9-goog
+>
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com> 
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
