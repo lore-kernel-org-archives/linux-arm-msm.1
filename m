@@ -1,151 +1,105 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793885709;
-	b=IDNgvg8H2tFr2cFr+nl6Fyy0S3mVohEce8937gZkEU4pEJNeqr6/koFaGCw9PkczZPt4
-	 RJ/c6/iiZ8xzWkQxDPQwJMAa8FVl3n/K7rfMrA6IPAB71BqP8u8HXbbLnBUJCYRdfpiU3
-	 wlPxAkSwJIbmNYRQbrxKsrqLQhOxyB2YD5Y77+6LC0DV3rqo+T8Ns/YG9K1NKv2i9XMFi
-	 zJq6p9w5kd2ZdGp8p8pKlVq/57Ex8CG3QtRn5BDKyG20JFkmW/C2X0LApay0LgjgXtbyk
-	 n8a1JFiZ9C9NQSav7Z3S2d2KIDNATIlwn2E+IwKXit6h/LBMmduYnZsPennQqyeaCpg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793885709;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=C6les2P6C3VYvsc8kD6y8hS87HftniHxNnR9mHrsnsE=;
-	b=URWjB0+HptwdPnC4wyt6Q7yI89U64ngo8HHIYZEMjYpZT5OQ0PzBeEMyHYiQPu1NNBSl
-	 OqO+mggTeIxjTTBlKJ9VjZ3saex7ShySmP1BcW1ar76B8f0YStzMpwQEENvd8w+/+rkZg
-	 sjDKx7bUVKmv3qVH+anLwJmBNML0F4cBvX9wFmTkmBg7qNABWkb7Twzt8YOSxIx7zQttN
-	 uK1uVEbgrP1LPRrdfQNt7UrepdEP8IaUMl/6RqKJH1hZWXPf7sna95HjrGmKTF7pwBRui
-	 KeEFt9nBpSwrQGKx1bQuYoe+pSMdmJBfbWXmmaGbymUTHZOkFML1GXFkKUpxsUHXoYQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fzfhnCGS;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Sff8DYwC;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.42
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793885723;
+	b=lZWluItJAqhKABM25zP32ovdTPKx5Jf5GSnsmIK5LhyLLNFOvBwwo409taHzG42ihifc
+	 U9UJRZcHYP2btmTTE2dnYFRAdLrA3EwG/FWI3gyMLhb+PPGaiCztyc/ZjPdpHMF7zwpbB
+	 FpI59t8vShDBlJVw/ha+oU1OVre1UrLIBUfJ7797f78SbJBOjLsqEye/gqTgvCUm8ePYU
+	 uA/xkapDNLlfKgl5II/JsqOrYRKU9lvRt0HFbfcz4eZf357CxO6VZhua6L1c2e1yahmwS
+	 O7s6weUy3Gxa8MRRtdRs/gEij0PHL5nLlg9rl5m5U18Qhz1M8qUEWj5saT3NTp3IN6g==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793885723;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:From:
+	 In-Reply-To:References:MIME-Version:Date:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type;
+	bh=un/mirF/YwQDhny9ifbt8IaNHDK4E34ldwmWHRru9ic=;
+	b=NuLjhD1X5AFzPyS1pMfK4ArgZ5PbdoCrYD/sF5PT0PORaGUo81wqrObyfOfirHu0w73A
+	 3dHsoWhEWEdkVPYRDGIqpyMb17SgZ6MBvs06zkc9SM7hSyNxU65IafmkUyPsQIMKbhUVe
+	 ud7f3gOaRKaVwDBLJKZIm+NHOtgEWrWjvkvIbxo+nQ1BEUJg+xbjMu5lkFDaSmYpf6ilm
+	 /An5M+GOXvlFoEOrxdoJE0WQwWKNfGbl3aEufuZc1nsU2SF6LIfLo7exY8SYJrkk99SH4
+	 HM14yXiCkLm6JV02lxvCO4QIvk81J+BQoGm05Fpg1tsiRTNdaH9nAspaNdoFkl2aanA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="Lw8/kRVp";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.42
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82D3F606A326
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 13:35:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 82D3F606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 341BF606A326
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 13:35:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 341BF606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fzfhnCGS;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Sff8DYwC
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A59tB2n3684328
-	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 13:35:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=C6les2P6C3VYvsc8kD6y8hS8
-	7HftniHxNnR9mHrsnsE=; b=fzfhnCGS61R5KeLTKzhUcDeAl/a29wFH1O5NR8ZL
-	Iw6z2btcm6+JaEDnK9eSRH8JWClTBhbiW1AFYg/luuhSwwunNo2lkKeM8EYe8rvZ
-	TV7x7CaQX3OrmcH16RuJqyNZaCGDINouoX1PTlszEStB77ayp7XVqjs4moIZ4Xso
-	E6/GKvXrqnzlh6tuy2aaE4RkQ/asZV+KBiDYP4qK9qy4XiIAloPmt7N3Uj5FTN0f
-	HCbfzWU/oCCQ7Jmpz8VKhvc9YoBR8esCIXqkfvzL9IGE8Mvw/QTBa0j286UPKh9Y
-	aM/5s7PwOIzIj6WL90/6ma44jvKpdaijgodIthb/ysITBA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrj43jat6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 13:35:08 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cbf2fd504so370351385a.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 05:35:08 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Lw8/kRVp
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5be47aa555cso1622515e87.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 05:35:22 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793885721; cv=none;
+        d=google.com; s=arc-20260327;
+        b=hd0dg9M+wnopJ5x2dolb/WoaNEiwa2OIerKsFCeHBMq9vNpbJ9rtE/kE1QyLMTkjOX
+         EUD+QskRaKhGiJO/L8TndirKcTdhw3JnNUD0wGYfD30ab5AKaWdRpiLt6miiheY//KQ0
+         VXifwOi1QoExH9LW590S0zmHpZpaaeMx9Mw2fYEIzHJlBBf1KBioHCirSnA3BBeERi/D
+         nlsAT76rHTh8KMwrxf7/k4oynEKxARuSWRDfXOYNScFP8kQ64DjLAv0uAeFRkLj3sGp2
+         CpDT1q+lfSUu9d324by3m/OQXPfN2kEi2bI/mmcmduY4ryB0tPLfTi74iK03uSpU1kCN
+         pe2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=un/mirF/YwQDhny9ifbt8IaNHDK4E34ldwmWHRru9ic=;
+        fh=gZkWN7N24A9mcSE8SQ2m0iViyUKtDxNwad/X3lMQIrU=;
+        b=JiMQutzc4L/sLhWat7E7YmqM0AseZRJwPVxv7+c2ozZFj6kdiQ6ZDqxot+iOX9vW5K
+         w0YsMegGrmMxcdBRgTxsMdYyGBgMBiLpdKiyXF3OgJYD4NiZZW0ACDKZNjBiSxApJuvB
+         MVnt/nPDY2SpdTj009HjfMiSkKl/4hcejPXPTPqBmyT9kIgJVYkI34bZT1ink2FMIv78
+         BMrjSJH31irhtST3w5jn++jHeZxHiL6/0azK1PRp9ivb2UXRcKOtsggN5oXQ1WNwR76t
+         rECfm5GBtJKXUtp78EJStXrFrLF/9TOepy3SnqzF6E+UIzOUYsHCeIe7N16fUHDFyVG0
+         c+dQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793885708; x=1794490508; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=C6les2P6C3VYvsc8kD6y8hS87HftniHxNnR9mHrsnsE=;
-        b=Sff8DYwCXaZESHDiWF/DLcsetFFHsRTXHO++rGe2bQH3aAzGd/mMmU6E1g3KwYiqTm
-         GXWfnoB+DaoQW+v5QYiI7hCgKkpCzOZBaT3mq+7rLFZj5ljiRgGpuFM3bj87xOckKt+S
-         o1wpar/lkJRRpcOfTHwi3R3CWrUE06ylpytjBBcn4cEhLRF6QuMLQ56vDWA5PeL7oS4o
-         /GUfYoNGB0yxN8qUtSh/TMH9rDHWDRTMIOqni2VQ06leZN5mn2CTryO9TyZ/XdrzCrqL
-         AOK6qcKNKgURH4ARn269kP/RZwBS7FACAW9PmNmwAzI4ObqR3miNdEKupjM+zxBKKlYI
-         BnaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793885708; x=1794490508;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20260707; t=1793885721; x=1794490521; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:mime-version:references
+         :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=C6les2P6C3VYvsc8kD6y8hS87HftniHxNnR9mHrsnsE=;
-        b=EMJmlsoR3vU828077whZcPvucMYv4Mv3CgOS7LaurEaFpJVTtKHt+3r276m7lhw5KK
-         PSMD/BbXPI4lDeFojWcItalCsSqKppZkUFgUuAHealPG7CkmzvFsrZYA3AMiZ6Wu0GgC
-         e57OPTR+v6T/bqICXOpgofYA/1Rape+4L115/1n0Nt4WW4Jxr3Tg8a1z+1Y2SnY8qbrm
-         nKRXdx8R2QzY6Fflbb3hoKcBFXKp5MsGvC5dbJh1t1K435IhT/+TWNMlNDDHbi5hxfSv
-         T4dO6GRTHyxxzaEG8MOkWK4MY1EDbLq3CPi9yJ3qLRNnjsAuPHzmGkXfwSnwiZ4t/xT+
-         vodw==
-X-Forwarded-Encrypted: i=1; AKwUvBxmJPSjxRTjgUSsnvuBp6LrGjSsT2YgWOF0v4LwtdJPUAD3/nPIe3fmMq8YHAtIIfIRLMeZ09NpI18q1hDD@vger.kernel.org
-X-Gm-Message-State: APuU4Z/CCcL2gJsNaT74wOACuZt99d4A+0/4j5sC28HdIJVnzVPO8Nwo
-	9lJ99i9G0c2qoPvkyXue+9BSAfZNW+aEW10uGeXAfhQskNk0lT3Kdl3jGtld7X6dgnLngD5Ag2v
-	QoiIHoAcuMncs3wdS41GRiPeRmRLeJF1FiZmy+ggHK1DYA+a8Id8r/i0qQpbXavhrceOL
-X-Gm-Gg: AYBFou34jZuFNwtoK0Xi0Q7DoClvoE0nORYIAw9OnFMSyXK1AKnua9V+3bKEckNYLzn
-	uzYZRib1CGQQAK+TFWLGUta2ch9LjcrR8RjOySjLlB1wiFGITqZAuUDBSZDR452diQndjqgDWqe
-	kHvdpywL0pCpnF1qr2TWsqvUq9+1mTETS6NzSlZIucW4od4jQ25uh8Dpt6+dfP8dlm6uTG5JkN0
-	aeah4MbMhzBAzMohPvjmfxdqGgbCzSe8ecUiQcmccJHgEQe8c7Z3SIj5cH4LE7jt3fGIM7mR8rU
-	ffHYVN5DgeTTSnlUlUqMbkvFzzl3jyTQXJ/WJeAlaRO7XZMgPvgciH1PTatVgNc/8430rvh5UDZ
-	30hlctOiOlKJ9F0/zryl3MjVUkWuy1tuzxrA7ivHJYF7MIeboLmo8H6rTjZzTu2V2fYO6/VCPSt
-	eC7gz/Ccm61siAL3XlEk1iNya8GPN93etpBDtLfrgc4ntebgJl0YeqZtK/8exu
-X-Received: by 2002:a05:620a:a905:b0:945:b9c8:de5a with SMTP id af79cd13be357-945b9c8dedbmr1578451285a.20.1793885707695;
-        Thu, 05 Nov 2026 05:35:07 -0800 (PST)
-X-Received: by 2002:a05:620a:a905:b0:945:b9c8:de5a with SMTP id af79cd13be357-945b9c8dedbmr1578445985a.20.1793885707078;
-        Thu, 05 Nov 2026 05:35:07 -0800 (PST)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3acdc6e07fdsm10695471fa.28.2026.11.05.05.35.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 05:35:05 -0800 (PST)
-Date: Thu, 5 Nov 2026 15:35:03 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Andrzej Hajda <andrzej.hajda@intel.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Robert Foss <rfoss@kernel.org>,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Tvrtko Ursulin <tursulin@ursulin.net>,
-        Francesco Dolcini <francesco@dolcini.it>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Pengyu Luo <mitltlatltl@gmail.com>,
-        Chaoyi Chen <chaoyi.chen@rock-chips.com>,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-usb@vger.kernel.org, intel-gfx@lists.freedesktop.org,
-        intel-xe@lists.freedesktop.org, linux-amlogic@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        freedreno@lists.freedesktop.org
-Subject: Re: [PATCH v8 5/9] drm/bridge: aux-hpd: let drivers pass IRQ_HPD
- events
-Message-ID: <6x7dtyvhbk22ri6nnpuo5jpk2ijphaebgbbchoramc4fhnvgjl@slhivetxacte>
-References: <20261024-hpd-irq-events-v8-0-6ee949e7a384@oss.qualcomm.com>
- <20261024-hpd-irq-events-v8-5-6ee949e7a384@oss.qualcomm.com>
- <179387924494.1025980.3024349339803589757.b4-review@b4>
+        bh=un/mirF/YwQDhny9ifbt8IaNHDK4E34ldwmWHRru9ic=;
+        b=Lw8/kRVpv6LXuYIoaEpebahFoBr5aZQ9ihCcac9DQvQxhHJG5f1yXVdZ8NBn4iE63/
+         My3JqwAGB4UIFXOtrNZsKgOeA8JZ/rdoi76sgNCs2PLA54x9NlEkUmAVpD6f1vyTclJc
+         S7D//LCPa3lVO2Uwhj5G/hcL84G/9pYKF4FKGgBrdeaXQ9UnLHRSRlP66dOGALU3sqzm
+         mqPb5VryuESGKF4Euwln6+MbFDyMMyW52Nhx1nT3YFbNboOekkWInjSmUKb18OZ7mHMj
+         4WULOQsGIykLB+7IJQVJmMStu5vP61LTGVsjm2S533e0uxSeTSrepdB5szUtmb+Kianw
+         LlSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793885721; x=1794490521;
+        h=content-type:cc:to:subject:message-id:date:mime-version:references
+         :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=un/mirF/YwQDhny9ifbt8IaNHDK4E34ldwmWHRru9ic=;
+        b=wldkG6Bfm39w5+2OFX3Gwb7D4NPSHL9A8xY0zWgrqa6gEcyrYzhINjVHvoDv1rev2u
+         ZjtPA8y+tHVTQDDwN4BSqX2RGg05AQEoqjqRnUec3/1J5z0+cf+6JgTc3TSFmtSeYHL+
+         oArU6bUdwkzxpEk9WbxqHF5vZwaYanS3b0FanW7co0R36tCtU5XQna2zb6WsFF90+tmu
+         cOlWipWZP74Aqsgz3oTrN43qENMGaCsHhafTKAy2NgIQILLrq/eIAdZ/b7GHtG9iCR1t
+         sB8xKWAdkUXWyh0dvMxWOwwR0SoRKB9IiMwCVUwScJc/+Q1pH8nRSb8fbvhBaLl4JBaD
+         9SSw==
+X-Gm-Message-State: APuU4Z/4zuUcU3pLFlisO3pvEoOOcfOc6F+/dXAju9Psym8msEAbiG2O
+	3A9Zksd0KcMlAIhwKAE7R9c9lqPciblnDJLg99wbwNqU4vgo2UvC+edLNfdplbQNNPE6xxpmVE6
+	T1zMIz8btzvfseGpZZxKVDw1kyhToxrTFDA==
+X-Gm-Gg: AYBFou0B5+V2yzs1UAAknjZ59yh02gpc0GcQYKS0Q41J5jMkMyo435ETuHdXYBrJjt4
+	rTFH8jOPMYjfLylRbXYc47Ptwn/5eAQmRtthnnxzzmIZv8/WMnmXFI2YJtHv18nsS4ptMflUkr7
+	nwF+ocTH8KLfbT0pwr2uZJcxsRVcBdXUJNmeV1j62kfA5jnSbG+9B4g9IIUxq5WPsHfjSbkRKhA
+	40RbfRIFkRt81mk8C/8TwU1+Z2UB1iaASC3keMAD49l8U4PGGokULsKVRMoVv4K60AdWvSDohp5
+	IY9BEvto74ARV6d6GalO4rFXb7LIrOfEAyCRe2AjnGe73+8Us5kg5U01OPGh7E+tVirwY1HjuIu
+	SfzX4WbR0Qyy10YsFfAca+92G2lBfRMxU+8PY
+X-Received: by 2002:a05:6512:39c1:b0:5bf:d2ec:904d with SMTP id
+ 2adb3069b0e04-5bfd9563095mr6994195e87.14.1793885721088; Thu, 05 Nov 2026
+ 05:35:21 -0800 (PST)
+Received: from 16659893159 named unknown by gmailapi.google.com with HTTPREST;
+ Thu, 5 Nov 2026 05:35:20 -0800
+Received: from 16659893159 named unknown by gmailapi.google.com with HTTPREST;
+ Thu, 5 Nov 2026 05:35:20 -0800
+From: Steve Meek <stevemeek82@gmail.com>
+In-Reply-To: <20261013-rm500q-db-burst-v1-1-bb850d54e2c4@gmail.com>
+References: <20261013-rm500q-db-burst-v1-1-bb850d54e2c4@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -155,62 +109,20 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <179387924494.1025980.3024349339803589757.b4-review@b4>
-X-Proofpoint-ORIG-GUID: kNmZjSjNzsbqdVV0OGPIszLjgIg5nVOQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA1NCBTYWx0ZWRfX1qQ9GaNDxy3V
- n0Pjk9sc3BhWmBtTJoiyPLOiQVOIv4abgbqFwm4pgxtX2K25K4sSY/7c2NG+iahVrxjh/OxPzu9
- aOLyQu17qLFKDzl5IgoKvaefzW3pDCZGCKtY6FW4urCqnIyr2tm6/8QFzMLJb4O4jA9iywPLtHl
- ogflOFP+aF67IE9kxlbuuLqmZGyfy65jw8zzwXTdk9r8nVKiAfJZng6C1W0IL84jLm6sj2smdfI
- b+wXwqf7P4JCgX11wURUAINFmiw3Sm0o02AnmHhtDNp+nCLiu/INuQRzygQlFB7nxPwJTa+UqRQ
- EwOMqjE7x/ZRodN0chatORzIoihAxKjiRIZkSyjqn9HaDilUt/HzJRYWZikFwBtwQJidET6fqTv
- ZPsYQAhtmCqFmvBtYjSxBdtub+59tpfwrwI3UpCtP54fz2L9cApV3uD3xv7zpt805WOYP8LBK/F
- jbrgId/ZeBjvaJpcR9A==
-X-Proofpoint-GUID: kNmZjSjNzsbqdVV0OGPIszLjgIg5nVOQ
-X-Authority-Analysis: v=2.4 cv=SZdi5fRu c=1 sm=1 tr=0 ts=6aec860c cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=P-IC7800AAAA:8
- a=oSBH3dYeosbuySqTTykA:9 a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
- a=d3PnA9EDa4IxuAV0gXij:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA1NCBTYWx0ZWRfXzLddCbdZR1h8
- SAPlhZYHwfrTYF/rbE3RJnT0iLVlg0vL7I9syei8N9iaFjH0oeiuNqTEBpfkXXi38688FnXSDYs
- Gbn1JJxUdU0o5/TEniL2EIZJhlB1YXU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-05_03,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 spamscore=0 adultscore=0 bulkscore=0
- suspectscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611050054
+Date: Thu, 5 Nov 2026 05:35:20 -0800
+X-Gm-Features: AclHuK_uyRr2JFV4uyjiNutcKI3LwrFFfmjL5VbrHIy6nDY9T6nQp1olD23DFVo
+Message-ID: <CAPzME4ZmwuXDRAoYDqi7et2q=f1QU69g8ZUrocS3rZn9ajy6+Q@mail.gmail.com>
+Subject: Re: [PATCH] bus: mhi: host: pci_generic: Disable doorbell burst mode
+ for Quectel RM500Q-AE
+To: mhi@lists.linux.dev
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Nov 05, 2026 at 12:47:24PM +0100, Luca Ceresoli wrote:
-> > The DisplayPort standard defines a special kind of HPD events called
-> > IRQ_HPD. These events are used to notify DP Source about the events on
-> > the Sink side.
-> >
-> > Let users of aux-hpd, the UCSI and PMIC GLINK drivers pass the IRQ_HPD
-> > events to the DisplayPort drivers.
-> >
-> > The drm_aux_hpd_bridge_notify() is kept to ease merging of the series,
-> > preventing extra cross-tree merges. It will be removed once all
-> > drivers are converted. The drm_bridge_hpd_notify() function is kept for
-> > the drivers which only care about the connector status and will always
-> > pass DRM_CONNECTOR_NO_EXTRA_STATUS as the extra status.
-> 
-> Do you have a plan to later convert all drm_bridge_hpd_notify() to the new
-> _extra() variant, then remove drm_bridge_hpd_notify() and eventually rename
-> drm_bridge_hpd_notify_extra() to drm_bridge_hpd_notify()?
+Hi Mani,
 
-I'd say, only if they require the extra status. Otherwise, it's just a
-noise which is perfectly handled by the wrapper.
+Gentle ping on this one. Happy to resend or rework it if you'd prefer a
+different approach, or to send the traces from the stall if a core fix
+would be better.
 
-> 
-> Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
-
--- 
-With best wishes
-Dmitry
+Thanks,
+Steve
