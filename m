@@ -1,133 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.9
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793901871;
-	b=mMVdFFzgcWQ6DXmasfeqFOXGoel28gPZr8tmQfDNiheJ4gOmzLR3dHs2kQ4umkKDkcRL
-	 ApCpqc5kDADdAuDwlqdW3X9+6NKajIwJ7zdzTeApS+3WPNVtG0CrOrG1BkLkarA3jYOdD
-	 ct7wXtJ2IFJ8azxM1PLoG+tfxC//Jwa6gHRR/MqZsyAwSpTQTnzoZr3Rv7J5n4/uVrJcY
-	 g0FkjJv5WlUCLQwW0+RwpKMBkgCaOAalWXlXCvTwmgaMZ7fZcnx36YDqr3OQzcyw/DVXL
-	 f0uBjQykxelI1yca9kq581cmcBy5192OY5mrLQL7XWJ4dj3snyAmSv2pwVDJSG9o/Og==
+	t=1793902544;
+	b=rlJrbchfhHVylRdV2P16DYEw/k8hM3Kjz6rnFtjejtgr5imChTL2XMLJr5xRQJcav3k0
+	 2+072EwcTVr0haa84iGsHakSP28/eIFNUj66N0wGGXHpKY3iX1eTt6ZVH36N92z9K32SO
+	 /WdYHYtXN+GEsJMZTeiXCHs/BXgJID8VvCx6WY9J4S4hamqG6DACl5gsDJK9EEHx/9ayq
+	 K6tDWBtbWR7LDvNXyiR6zEg7x1M8jNNvHYRFRYlkC6HC+JNqkqE1Cg4Qjw4+j4HfvuDN+
+	 0p3uLDqTNaDUOirMZQPyteZ63FZxTJlXKmHjEtsfqmA9hZEMjDcxqk2PxWHAnZgFMcA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793901871;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793902544;
 	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
 	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=UY8nz4Aqcfrs8TMTR+vcYN7VMZs4wGxQCWcDHSOttJc=;
-	b=NiK2ZvWcxM/ezu2n+PJNt+qI/VUwbiUFu/QxW7Vc3giWhWUEpTl5xG1qh3SUtrhm7gak
-	 vaSOCnOylL1UKYS74S83MU9Vv3syjHaZ41ujDQnb45mBbPGQYnj1SRxOGeOSGEhFt3a0S
-	 zkAkYZ6L+gQGw42WQP+ICkzZGR6EjaPO2XITUd3+44apbW3E41iHBG1t+1Hp3KaWs8Xtv
-	 BGR1P3JS/Sz5sZQU+OEKdqiMaJaejo4QqsZeMhPrp9B4Stzs55cCzdStmRMUPCM4zQHDA
-	 tAYYv4AVi0THfFcSlw4VxeaTr20GB+fscDlCtRFZKNtd8Y6ZqZnqkCqXnJ98dblMXhw==
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
+	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=5xkqUJpXd/77EmurUpWsFnYKGC4PkT/oseXIVCHooLM=;
+	b=iYqPsIeeD86QPEtTtfdVv0DV/oph/RqZeEWgIfirmTnIpz+IInB0f+w24nW1EQ1ScxXR
+	 2KQ9wOB9r+7YioeYRokbVGhYL6TmRf8DPgj888YE7QGxBAyUHinKl3bRHYC8hG/k8V1jP
+	 R5Th7whzVc1HXWr/Ud2flxYqC3kAsxTew8WM0UGXsWnN5Vs5Je/vvHe/B178amWk1x3lk
+	 Hf6v7r+e7sjak1eNV1R3aMe3u41KjRS78Nl7EBuTXiLtrbZ09aVkVvxOB0K4NCN4wXXXc
+	 tLq04P9iWypedkSH6WspyFBmeiaVzU8v64KuXiZQwHxu+s2aHEjbVAkrmtjKxtFJpgQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ce7ueDI5;
-	arc=none smtp.remote-ip=192.198.163.16
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UupB+5kN;
+	arc=none smtp.remote-ip=198.175.65.9
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC3A6606A31B;
-	Thu,  5 Nov 2026 18:04:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CC3A6606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33AA9606A326;
+	Thu,  5 Nov 2026 18:15:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 33AA9606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ce7ueDI5
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UupB+5kN
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793901871; x=1825437871;
+  t=1793902543; x=1825438543;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=mB+/MQQhJQVeGV4JbRgy/ORiYRC7GgvinmAy4COuNBM=;
-  b=ce7ueDI5PwFJh+Fe/qewFUYMbFUieLKlnW3EaxdUhCU/xlOsMqXcEtRR
-   s77HhuqAt4XW5po5eWqUj4r7/M7EFDthG1oUVy71H84eTfrxZA3cXjk/C
-   FLTAsDdZEiaPpYH7wTJs0m7J+GNV+W3DvHnXDSJWjYHC/+k+8xuy+Erhr
-   9XuMeMpzc4cWI97k/FKb2Lo9l+9ciSz1PfTcMBVV01CMi2pGZoGqD5efj
-   UNEA9/VWtiSdNFQp01h8R2LX9VlIspvd3Pje0WBwU97q6gaNhgAFMn8qQ
-   WvOoLD9gqj0mZNPx9bx9YwB59zDOA5x0RqFM0DCC9lwbw/mSp8pfLv0ul
-   w==;
-X-CSE-ConnectionGUID: stOyJFEbS861NFPvf1j/nw==
-X-CSE-MsgGUID: Pbcu+lJIRX+bH7MLS61H/g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11957"; a="2724890"
+  bh=O1wKu0Wovol8j2e+n6XsWCpw4qH50zSj4siy9b/s3qI=;
+  b=UupB+5kN+vPajXA9GXZ+6LO2v6zEKHQnLZljJU5iWtAB5M29eVlSk+DY
+   /ECH4M6mkBrSmhP6DjpiCe30ac6CuJ+wLUYCtyRKDz6W+8tHKwBFb501R
+   d2JKNKkXtg05YYPoEBfpwahccfnWF57YTHo8nOejgMy0efUh8uI8nm1iz
+   BqED5PQGjZKAqUkwkrzlUCb8S8pEUsddTxQ9sy3CFuR0rsuahCees+Kit
+   FaA/aTNt7bgH7nt7AgHbm0dZONrDbj25q1r5DqM4nHa6rD6LAq+unAgjI
+   6KVHzGK9T/BrEYCIT8ax3XgT7z5QyjkZo+Y1iMYSdfDSjFc+wSm7CXheJ
+   g==;
+X-CSE-ConnectionGUID: 3HqHgul3Sy+W0p85QkRSrQ==
+X-CSE-MsgGUID: 8BPEgiSfTq+/Lieex25lEw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11957"; a="2603252"
 X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="2724890"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 10:02:51 -0800
-X-CSE-ConnectionGUID: jhDE0fjjTqa54XFJuRu5ww==
-X-CSE-MsgGUID: m0EeljFZT++7vJEePZQ3VA==
+   d="scan'208";a="2603252"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 10:15:42 -0800
+X-CSE-ConnectionGUID: ijpR7fjcTuqXWividS6vTQ==
+X-CSE-MsgGUID: 7J+s165sQ6KFNd+rdDoIcA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="7090663"
-Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.144])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 10:02:37 -0800
-Date: Thu, 5 Nov 2026 20:02:34 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Thierry Reding <thierry.reding@kernel.org>, Frank.Li@oss.nxp.com,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Richard Genoud <richard.genoud@bootlin.com>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Laxman Dewangan <ldewangan@nvidia.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Cunhao Lu <1579567540@qq.com>, Raul E Rangel <rrangel@chromium.org>,
-	Yenchia Chen <yenchia.chen@mediatek.com>,
-	Zhiyong Tao <zhiyong.tao@mediatek.com>,
-	Carlo Caione <ccaione@baylibre.com>, Moteen Shah <m-shah@ti.com>,
-	Kendall Willis <k-willis@ti.com>,
-	Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>,
-	Nicolai Buchwitz <nb@tipi-net.de>,
-	Karl Mehltretter <kmehltretter@gmail.com>,
-	Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>,
-	Shitalkumar Gandhi <shital.gandhi45@gmail.com>,
-	Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>,
-	John Ogness <john.ogness@linutronix.de>,
-	Pan Chuang <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>,
-	Robin Gong <yibin.gong@nxp.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Stephan Gerhold <stephan.gerhold@linaro.org>,
-	Zhaoyang Yu <2426767509@qq.com>,
-	"Nikola Z. Ivanov" <zlatistiv@gmail.com>,
-	Haoxiang Li <haoxiang_li2024@163.com>,
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
-	Biju Das <biju.das.jz@bp.renesas.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Myeonghun Pak <mhun512@gmail.com>,
-	Wenhua Lin <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>,
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>,
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
-	"moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>,
-	"moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
-	"open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..." <imx@lists.linux.dev>,
-	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
-	"open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES" <linux-samsung-soc@vger.kernel.org>,
-	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
-	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
-	vkoul@kernel.org
-Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
-Message-ID: <auzEupFd_Ek2HpLG@ashevche-desk.local>
-References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
- <aux2VKHnVLwq_wzi@orome>
- <auyQEVmA2KeGu9DL@ashevche-desk.local>
- <auyiAE3lhnFahBK2@orome>
- <auysTnqWgz2kE7e9@ashevche-desk.local>
- <2209947d-0b9b-417f-9ffb-1c81790af9db@kernel.org>
+   d="scan'208";a="6907461"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by orviesa008.jf.intel.com with ESMTP; 05 Nov 2026 10:15:38 -0800
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xP1zr-00000000meJ-36Mb;
+	Thu, 05 Nov 2026 18:15:35 +0000
+Date: Fri, 6 Nov 2026 02:14:55 +0800
+From: kernel test robot <lkp@intel.com>
+To: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	=?iso-8859-1?Q?Andr=E9?= Apitzsch <git@apitzsch.eu>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	Daniel Scally <dan.scally@ideasonboard.com>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Hans Verkuil <hverkuil@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org,
+	Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+Subject: Re: [PATCH v3 2/3] media: i2c: dw9719: Update DW9800K driver
+Message-ID: <202611060251.DGnOao2F-lkp@intel.com>
+References: <20261105-b4-dw9800k_cleanup-v3-2-6850ee6a5a5a@fairphone.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -139,79 +97,190 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2209947d-0b9b-417f-9ffb-1c81790af9db@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20261105-b4-dw9800k_cleanup-v3-2-6850ee6a5a5a@fairphone.com>
 
-On Thu, Nov 05, 2026 at 05:21:06PM +0100, Krzysztof Kozlowski wrote:
-> On 05/11/2026 17:18, Andy Shevchenko wrote:
-> > On Thu, Nov 05, 2026 at 04:36:38PM +0100, Thierry Reding wrote:
-> >> On Thu, Nov 05, 2026 at 04:17:53PM +0200, Andy Shevchenko wrote:
-> >>> On Thu, Nov 05, 2026 at 01:28:46PM +0100, Thierry Reding wrote:
-> >>>> On Mon, Nov 02, 2026 at 12:54:48PM -0500, Frank.Li@oss.nxp.com wrote:
-> >>>>>
-> >>>>> Replace open-coded assignments to callback and callback_param fields
-> >>>>> of struct dma_async_tx_descriptor with calls to the
-> >>>>> dmaengine_desc_set_callback() helper across serial drivers.
-> >>>>>
-> >>>>> No functional change intended. Prepare to make struct
-> >>>>> dma_async_tx_descriptor private to the DMA engine.
-> >>>>>
-> >>>>> Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> >>>>> ---
-> >>>>>  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
-> >>>>>  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
-> >>>>>  drivers/tty/serial/8250/8250_omap.c | 6 ++----
-> >>>>>  drivers/tty/serial/amba-pl011.c     | 6 ++----
-> >>>>>  drivers/tty/serial/atmel_serial.c   | 6 ++----
-> >>>>>  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
-> >>>>>  drivers/tty/serial/imx.c            | 6 ++----
-> >>>>>  drivers/tty/serial/msm_serial.c     | 6 ++----
-> >>>>>  drivers/tty/serial/mxs-auart.c      | 6 ++----
-> >>>>>  drivers/tty/serial/pch_uart.c       | 6 ++----
-> >>>>>  drivers/tty/serial/samsung_tty.c    | 6 ++----
-> >>>>>  drivers/tty/serial/serial-tegra.c   | 6 ++----
-> >>>>>  drivers/tty/serial/sh-sci.c         | 9 +++------
-> >>>>>  drivers/tty/serial/sprd_serial.c    | 3 +--
-> >>>>>  drivers/tty/serial/stm32-usart.c    | 6 ++----
-> >>>>>  15 files changed, 29 insertions(+), 58 deletions(-)
-> >>>>
-> >>>> Reviewed-by: Thierry Reding <treding@nvidia.com>
-> >>>
-> >>> Krzysztof, now look at this case. I would argue that this is even less fit than
-> >>> # subpart(s) case, because it might imply anything. Again the problem is the
-> >>> bundle, and for such a case (when tons of independent changes are bundled in
-> >>> the same stuff, *every* Rb tag has to be explained on what has been reviewed!
-> >>
-> >> It may be a bit subtle, but the placement of the tag indicates that it
-> >> applies to the entirety of the changes. I didn't crop the list of
-> >> changed files, nor did I omit the summary.
-> > 
-> > This doesn't clarify the question. Wordless Rb tag on a bundles is an oddity.
-> 
-> No, it's perfectly normal and typical. I would not expect anything else,
-> because writing "LGTM" is pointless. We are experienced reviewers and we
-> do understand what Reviewer's statement of oversight means, thus giving
-> the tag is obvious, explicit and not odd.
-> 
-> > 
-> >> That bit of meta-data obviously isn't picked up into the tag line, but
-> >> I think the default meaning of Reviewed-by is that it applies to the
-> >> entire thing.
-> > 
-> > And I interpret it otherwise, because this is a set of independent changes
-> > bundled into a single patch!
-> 
-> It's not set of independent changes, but even if it was then it would
-> not matter. We review the code regardless how we actually judge the
-> atomicity of a patch.
+Hi Griffin,
 
-And I confront exactly that! When the patch may be split it has to. This is
-seems the outcome of this discussion to me. From now on I think I will NAK
-any bundle patch until piece that I in charge to is split from the bundle.
+kernel test robot noticed the following build errors:
 
--- 
-With Best Regards,
-Andy Shevchenko
+[auto build test ERROR on bc71431221f5ba8bb33918399552636e059c2c45]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Griffin-Kroah-Hartman/dt-bindings-media-i2c-dw9800-Redocument-DW9800K/20261105-112900
+base:   bc71431221f5ba8bb33918399552636e059c2c45
+patch link:    https://lore.kernel.org/r/20261105-b4-dw9800k_cleanup-v3-2-6850ee6a5a5a%40fairphone.com
+patch subject: [PATCH v3 2/3] media: i2c: dw9719: Update DW9800K driver
+config: nios2-randconfig-1001-20261105 (https://download.01.org/0day-ci/archive/20261106/202611060251.DGnOao2F-lkp@intel.com/config)
+compiler: nios2-linux-gcc (GCC) 10.5.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261106/202611060251.DGnOao2F-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202611060251.DGnOao2F-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   drivers/media/i2c/dw9719.c: In function 'dw9719_power_up':
+>> drivers/media/i2c/dw9719.c:207:3: error: a label can only be part of a statement and a declaration is not a statement
+     207 |   int ring, sac;
+         |   ^~~
 
 
+vim +207 drivers/media/i2c/dw9719.c
+
+   122	
+   123	static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
+   124	{
+   125		u32 reg_pwr = dw9719->model == DW9718S ? DW9718S_PD : DW9719_CONTROL;
+   126		u64 val;
+   127		int ret;
+   128		int err;
+   129	
+   130		ret = regulator_enable(dw9719->regulator);
+   131		if (ret)
+   132			return ret;
+   133	
+   134		/*
+   135		 * Need 100us to transition from SHUTDOWN to STANDBY.
+   136		 * Jiggle the SCL pin to wake up the device (even when the regulator is
+   137		 * shared) and wait double the time to be sure, as 100us is not enough
+   138		 * at least on the DW9718S as found on the motorola-nora smartphone,
+   139		 * then retry the write.
+   140		 */
+   141		cci_write(dw9719->regmap, reg_pwr, DW9719_STANDBY, NULL);
+   142		/* the jiggle is expected to fail, don't even log that as error */
+   143		fsleep(200);
+   144		cci_write(dw9719->regmap, reg_pwr, DW9719_STANDBY, &ret);
+   145	
+   146		if (detect) {
+   147			/* These models do not have an INFO register */
+   148			switch (dw9719->model) {
+   149			case DW9718S:
+   150				dw9719->sac_mode = DW9718S_DEFAULT_SAC;
+   151				dw9719->vcm_freq = DW9718S_DEFAULT_VCM_FREQ;
+   152				goto props;
+   153			default:
+   154				break;
+   155			}
+   156	
+   157			ret = cci_read(dw9719->regmap, DW9719_INFO, &val, NULL);
+   158			if (ret < 0)
+   159				return ret;
+   160	
+   161			switch (val) {
+   162			case DW9719_ID:
+   163				dw9719->model = DW9719;
+   164				dw9719->mode_low_bits = 0x00;
+   165				dw9719->sac_mode = DW9719_DEFAULT_SAC;
+   166				dw9719->vcm_freq = DW9719_DEFAULT_VCM_FREQ;
+   167				break;
+   168			case DW9761_ID:
+   169				dw9719->model = DW9761;
+   170				dw9719->mode_low_bits = 0x01;
+   171				dw9719->sac_mode = DW9761_DEFAULT_SAC;
+   172				dw9719->vcm_freq = DW9761_DEFAULT_VCM_FREQ;
+   173				break;
+   174			case DW9800K_ID:
+   175				dw9719->sac_mode = DW9800K_DEFAULT_SAC;
+   176				dw9719->vcm_freq = DW9800K_DEFAULT_DIV;
+   177				dw9719->sac_time = DW9800K_DEFAULT_SACT;
+   178				break;
+   179			default:
+   180				dev_err(dw9719->dev,
+   181					"Error unknown device id 0x%02llx\n", val);
+   182				return -ENXIO;
+   183			}
+   184	
+   185	props:
+   186			/* Optional indication of SAC mode select */
+   187			device_property_read_u32(dw9719->dev, "dongwoon,sac-mode",
+   188						 &dw9719->sac_mode);
+   189	
+   190			/* Optional indication of VCM frequency */
+   191			err = device_property_read_u32(dw9719->dev, "dongwoon,vcm-freq",
+   192						       &dw9719->vcm_freq);
+   193			if (err == 0)
+   194				dev_warn(dw9719->dev, "dongwoon,vcm-freq property is deprecated, please use dongwoon,vcm-prescale\n");
+   195	
+   196			/* Optional indication of VCM prescale */
+   197			device_property_read_u32(dw9719->dev, "dongwoon,vcm-prescale",
+   198						 &dw9719->vcm_freq);
+   199	
+   200			/* Optional indication of SAC timing */
+   201			device_property_read_u32(dw9719->dev, "dongwoon,timing-control",
+   202						 &dw9719->sac_time);
+   203		}
+   204	
+   205		switch (dw9719->model) {
+   206		case DW9800K:
+ > 207			int ring, sac;
+   208	
+   209			/*
+   210			 * Enable ringing for SAC3-SAC5
+   211			 *
+   212			 * sac_mode	reg	Mode
+   213			 * ===========================
+   214			 *	0	0X	Direct
+   215			 *	1	1X	LSC
+   216			 *	2	00	SAC2
+   217			 *	3	01	SAC3
+   218			 *	4	10	SAC4
+   219			 *	5	11	SAC5
+   220			 */
+   221			switch (dw9719->sac_mode) {
+   222			case 0:
+   223				ring = 0;
+   224				sac = 0;
+   225				break;
+   226			case 1:
+   227				ring = 0;
+   228				sac = 2;
+   229				break;
+   230			default:
+   231				ring = DW9719_ENABLE_RINGING;
+   232				sac = dw9719->sac_mode - 2;
+   233				break;
+   234			}
+   235			cci_write(dw9719->regmap, DW9719_CONTROL, ring, &ret);
+   236			/* DIV is 3 bits split over the bottom bit in reg 6 and the top 2 bits in reg 7 */
+   237			cci_write(dw9719->regmap, DW9719_MODE,
+   238				  (sac << DW9800K_MODE_SAC_SHIFT) |
+   239				  (dw9719->vcm_freq >> DW9800K_DIV_LOW_SHIFT), &ret);
+   240			cci_write(dw9719->regmap, DW9800K_RESONANCE,
+   241				  (dw9719->vcm_freq << DW9800K_DIV_SHIFT) |
+   242				  dw9719->sac_time, &ret);
+   243			break;
+   244		case DW9718S:
+   245			/* Datasheet says [OCP/UVLO] should be disabled below 2.5V */
+   246			dw9719->sac_mode &= DW9718S_CONTROL_SAC_MASK;
+   247			cci_write(dw9719->regmap, DW9718S_CONTROL,
+   248				  DW9718S_CONTROL_SW_LINEAR |
+   249				  (dw9719->sac_mode << DW9718S_CONTROL_SAC_SHIFT) |
+   250				  DW9718S_CONTROL_OCP_DISABLE |
+   251				  DW9718S_CONTROL_UVLO_DISABLE, &ret);
+   252			cci_write(dw9719->regmap, DW9718S_SACT,
+   253				  DW9718S_SACT_PERIOD_8_8MS, &ret);
+   254			cci_write(dw9719->regmap, DW9718S_SW,
+   255				  dw9719->vcm_freq & DW9718S_SW_VCM_FREQ_MASK, &ret);
+   256			break;
+   257		case DW9761:
+   258			cci_write(dw9719->regmap, DW9761_VCM_PRELOAD,
+   259				  DW9761_DEFAULT_VCM_PRELOAD, &ret);
+   260			fallthrough;
+   261		case DW9719:
+   262			cci_write(dw9719->regmap, DW9719_CONTROL, DW9719_ENABLE_RINGING, &ret);
+   263			cci_write(dw9719->regmap, DW9719_MODE, dw9719->mode_low_bits |
+   264					  (dw9719->sac_mode << DW9719_MODE_SAC_SHIFT), &ret);
+   265			cci_write(dw9719->regmap, DW9719_VCM_FREQ, dw9719->vcm_freq, &ret);
+   266		}
+   267	
+   268		if (ret)
+   269			dw9719_power_down(dw9719);
+   270	
+   271		return ret;
+   272	}
+   273	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
