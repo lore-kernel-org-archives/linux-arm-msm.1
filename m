@@ -1,78 +1,78 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793885426;
-	b=fAti5TwXqpkfvKqxuxUWIwU/lAB32LUX3r2+hZcxtuopjYns95RqaDcWlWKUIZFrKy62
-	 hPchWpRmJavhG5ozBDqK30GgM9kXJai3ROJkNWYzwqhxjhzIgniLPXPadG5+9TV6BD7Za
-	 zp2+zuFwSalCiwmhH0tRf3JRiYj0SfFN5ailokTnw6qC9iMDAdqq/0cpP0iyJWPjBBro9
-	 So/CNuCbjEVzQ8RAp0/Fr8ng2aG9viFcPXs00gHfd7fVzRJpRSSUUT1Syxp+WDCVMBqD9
-	 MmiDe1jxaw1dldrHzxXiwWBdsLYxDGI13ncaJ2QJfpPUvppRDv6+0yEgObKLJxrUZpg==
+	t=1793885425;
+	b=47Yk7vf2DaX4Mbv722HyyETtOLenfTk+hSX4vGzn8331d4SLRgwJi/B6SBLXBLByeyXK
+	 yJMavB5aikAlcRNiF0k6iumoM706p9c3urzuxV62lF8iGT4c+T7S6DJm8EWbmh3NxTVJR
+	 YdfFz0dIvNFda017OkJMJFuHN4UoPMAqd19QAoJxZN/fDsyw/+9MUAz19B7zHzBsoIgMw
+	 YVHPN9jbbsOLivTN/1d0bYhepZZtmKQUg4S4RCLeRv3NrDdQBGrkPYqCkX5dZ/HzvboXp
+	 UulS1L6+ztvgGneXRXJ/c+EK1sEtoTA7RPGnR3QaWatB9d6pfPtMaz/y0DAYFrwZWWw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793885426;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793885425;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=A59kBhYhVh2cwcGIS0Bice4IBYZ7xgZ31BmecGfB75k=;
-	b=gIPego9SccWqGoZoxV95O0TtOETb68kVP4/2MKwytaWGWezDCvoWvnZz7y1DXoAgsVu2
-	 FC3MTZVnTWlxOmHoDu3lH8N9eooUS/hs2YHqOcz41pS+O3n71Iv/M1K//+UkRRYFSSDkk
-	 PIWlwFdL7vAFUzNGxHldYHure6MMX0PMsHfivMpsXZP1Joas5gBIkB9WR0Nbf467XEdTX
-	 5Hp0Yy4b3qJ9KDYXKl0ItMuy9v2JHA4wu1FwGMdcDWrmjDaG2gsgd03F2LZTh8uABGfeu
-	 5zo08RdakYx1SSRHqlPwfZjDTutL1SH2aGFgQkD1Ay7gkQKtA37ju/sfMAX061wP4mg==
+	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
+	b=HgvKyleu/pQQA61RJuUEjHRXgixq4dzN26k+3LAZFTwMnC6HOIi+oyvFF3lZ4OqbZuSd
+	 YpVMjTRgVIVG7GhGT6DkZPM17396bW4LusNI4m9wtST73c5vaSLNvRjJCqfBeyXbf5WlK
+	 FI3XlTKHjaW7NOjlPmDwtnH0BTREPEzbuHYZtwOqueRXSGvVB+SlW0McGfWWf//iX/+iD
+	 qu3XdPzxGZJOeApEGv2H4N2vzBL7wXtery2NCewDJN2p4lv/mABcyPzSI06qMblmIWU3Q
+	 uSfB82z5uylg0XmZXDiWhnzT28CAsKMPejn8v/iaAFe/FtK29jO370QHmjcGbEajIgw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ShLVjeZ8;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ns4YtAbB;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5529C606D806;
-	Thu,  5 Nov 2026 13:30:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0338606A332;
+	Thu,  5 Nov 2026 13:30:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ShLVjeZ8
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ns4YtAbB
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793885425;
-	b=UrLBskcGwNVCgQwxBvLuZF0N3ICqazELH4La0tV+ZvQjsJNQ7/yj8H+N3UujNNLG/Ara
-	 yRGSWEbi0WyDZ5TrGVkcS/BaZERNiklijZ8WC6pCdmKJULvOqZQ9JJR6dAl4+Rq8l48Dd
-	 RTFsMdYIMKURl0jkoVNtH0JW/Cx/lBdr1rLDkEciIitBTKELQ+4KCZgkY0RkQujQJttt3
-	 Y9RV6bJrTrjzW2BLJct8jgzKJwXoYVmRsYHylk5xYhPh3mp4r9SDKWIPeyGvJtkang+0J
-	 twgyXEvNhYcaSBEMdFwI+iCITE+x1wEhKp1mtXYXn5VXgr8S3YCoWaFXlRbs/aqZpfg==
+	t=1793885424;
+	b=VU/qOoITT+8IGp5aqrZGQkERLeu987mdrTNX6bMQb5jKkKeUXaqcqly6dEkfFxtn7Dcr
+	 Q+wVVIgRcOiIHadPaVnywTHAg8JhzJNwoL7Fyi9N1LECJKPPos3qV1d8ZlvDYNJyZ67Uc
+	 zirGGO7F7zwrcXSyajUCxnm540lmQRjY3Z+f0E6jUsNyQWU+GwYgjEGgRXIc/VvaCfGCm
+	 1L232oyhgNoBOVMBBLuYon+jHqFwZYeIGSCTCOqHNi3T678rHy7cOwx4y27E+SY016YvF
+	 lejnPRSOxoc5qpMhn0JH3CLxSpm62kK9UYHpR+n0LkcGXav7JbzhI8oXUocvCSUQPWA==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793885425;
+	c=relaxed/relaxed; t=1793885424;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=A59kBhYhVh2cwcGIS0Bice4IBYZ7xgZ31BmecGfB75k=;
-	b=J4kvCsq2jV7wtXGaM9e5qFrVALKfWnAxqjBRlxZ7tndsOK5lGLhIiHMmP0jEWMEXNSM2
-	 rOCnJnGKUHgjJ1Os9S644hi1fiz/NU5MkogfMyqjUlb9PzE+1Y9c5YqKEzOW8QKXThmO1
-	 Mf//Bl1qVIU6p9I9vxOv0qex+X6eAzu0DvZtTL8N1zWw/2HCeHAD5Fycfwn+b53Y+lkFu
-	 bdBZKyYRoEUx0MmF7ZReuwCZpEV5sRcPofidpIc+MSI8jji4/dj9Q5BCbOJn9jr0kDNCe
-	 DJ7FN9reuTddgatoUNUfTaudVUn9uJpThibxDeBOBBnME9IowQ2YPCImdA9gmQAP20g==
+	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
+	b=f1SFt0lynDR660U6EynF+Bz2G1IfZof0KFGXJ6OvmvrJpQwEka78RBPjnvU+s03922Rw
+	 hnJZT4JEAO5ffaNHYp49nX80WTVefnSApRe1aSMGTCEsHmrqv4RIzUVumm5n6z5hXjSRW
+	 BFJveMBufdb//+18wouoSNsgHooSzTDWbcH/4hg5L2lrYHgzkKW6N4Em41BDmao7n21xJ
+	 cZw+1DkPNwaCem+CdOP4l1RU8lfGa5gg+J3elwsII8Mvg431ZbipKU4y/MXSEFTjvEaFP
+	 a3acbgS/TkKDEeYl3Bh2qfOBN2Zwi5RQTkEJzA5IDMIfCmpzgoKQpoCg9z0EI+hUAig==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 63B921F00A1C;
+	by smtp.kernel.org (Postfix) with ESMTPS id 52A541F00A1B;
 	Thu,  5 Nov 2026 13:30:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793885425;
-	bh=A59kBhYhVh2cwcGIS0Bice4IBYZ7xgZ31BmecGfB75k=;
+	s=k20260515; t=1793885424;
+	bh=9QftwU9ORp2x/ArLygafHmJy8jNXwbbSvrMnqe7Q60w=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=ShLVjeZ856HvQdF/PZZQP+Du+urtAQZ1fVs9zXThBLj+MfI+lNyuqs+2tjfhlakyq
-	 yWa8yErWMim4u3QJcfKgnUugYtKQ7N+YWmNHwIulY6k+3s2tbt1Flfkef7x7tWEqtv
-	 Gf0NLXzzdAxO8Oi7KyiOkEdGdQQMlfCnc5BwDIWDdzY3TppG0Ta/MMiKVfavQYiioM
-	 a2kiA3Asq227aDTlQwH30H2firUQTS5KuxwdWSSWbnzOxjxDnZ1/XzgjQtWLZ5NihW
-	 X8A99A7Ty0vi6XaCGz4ZuQXjuhnA8iMaXkVesY+lgTIZukCeWYiqO5rxpobsk15/wP
-	 PBgUZ8MvnCSOg==
+	b=ns4YtAbBO3OEc1Sn/ElT4zTIT66031XRUh0G4e9rVBsWnouwl572+ooF+a/Di9NoW
+	 MgtURyYWFsm30DC9l6Z3C3AHbv4I2itLaZbpeaYRlkJMPMv0iYu1uFfENcJwAfSAm/
+	 TK5nL9g/lUjytAQF+XM5zv0qJRJnhRMynkZdmfWfxVMys3d6HWLn2pcN+2Ft76AVJh
+	 VM5GbM4pp469jG/7VTmdjbRq0x5uIJ4C4lwTOpAaeWnc/v122adNEgtDok4SjVsZWi
+	 L7wl6B2GWDX3ahA0qEGkvZRdlOrwNiTdu7YJofClQETXOJjwG+5UsUz7Xq5cqA9vQM
+	 XcLfrI8VhRS0A==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id E2A2547293;
+	by lkml.kernel.org (Postfix) with ESMTP id D1C804728F;
 	Thu,  5 Nov 2026 13:30:22 +0000 (UTC)
 From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
-Date: Thu, 05 Nov 2026 13:30:03 +0000
-Subject: [PATCH 4/5] drm/msm/adreno: Add speedbins for A660 GPU
+Date: Thu, 05 Nov 2026 13:30:02 +0000
+Subject: [PATCH 3/5] nvmem: qfprom: Add the SM8350 keepout regions
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,7 +83,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261105-b4-sm8350-gpu-v1-4-a7175cdd6512@fromdisposition.org>
+Message-Id: <20261105-b4-sm8350-gpu-v1-3-a7175cdd6512@fromdisposition.org>
 References: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
 In-Reply-To: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -101,11 +101,11 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  freedreno@lists.freedesktop.org, Demeter Barna <me@fromdisposition.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793885419; l=1126;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793885419; l=1841;
  i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
- bh=oTxpg/D+jgMPGwDowW4xu7/gXp7fpT5IY/GcQ0zhKx8=;
- b=GtKovN95UpCfH5qWyBuGsZ9za1/hCqHtLIDArXBKbwZbdw5gl9dUiN/Oe/pd1G3Hp2tGiyp7a
- 4AUL0ZNm6tVDmNcNu2ff4xE54HicFA9S81wb4KHBOoCJwJB8mrSFmQy
+ bh=CDGO3hvRW7mymx++dDNgiaLDX/wtQ9qU8oYZYFNQPZ4=;
+ b=fWovVqQLQJoPFa5Mc+441Nuesv3cWVgzRKAID6ngbH8CEfzc2VFXlf9TNCgPEeqS12fu0exvC
+ beHxHlr/rgDBTDCVwwmp4H5SpWalxQsTkMBKlmQb3Ra/PQJiXiNoqs3
 X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
  pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
 X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
@@ -116,40 +116,54 @@ Content-Transfer-Encoding: 7bit
 
 From: Demeter Barna <me@fromdisposition.org>
 
-The SM8350 GPU comes in speed bins, read from QFPROM 0x17b bits 7:5.
-Qualcomm's GPU tables for this SoC give:
+Some SM8350 fuse ranges are protected by the XPU, so the AP cannot read
+them: a read in 0x0-0x11f, 0x128-0x147, 0x640-0x8df or 0x2110-0x216f
+resets the SoC. The nvmem file in sysfs is readable by every user, so
+once the QFPROM is described, anyone who reads the whole file resets the
+device.
 
-  fuse 1, 3:     up to 900 MHz
-  fuse 0, 5, 7:  up to 840 MHz
-  fuse 4:        up to 738 MHz
+Keep those regions out, as for SC7180 and SC7280, which share the
+0x128-0x147 one; they read as zeros.
 
-The levels below are the same in every bin. Map these fuse values to
-speed bins 1, 0 and 2. An unknown fuse value falls back to speed bin 0.
+The regions were measured on a Razer Edge 5G one 32-bit word at a time,
+and each boundary was checked from both sides.
 
 Signed-off-by: Demeter Barna <me@fromdisposition.org>
 ---
- drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/nvmem/qfprom.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-index 4ef2bd6e7..f1ae9932d 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-@@ -1096,6 +1096,14 @@ static const struct adreno_info a6xx_gpus[] = {
- 			.gmu_cgc_mode = 0x00020000,
- 			.prim_fifo_threshold = 0x00300200,
- 		},
-+		.speedbins = ADRENO_SPEEDBINS(
-+			{ 0, 0 },
-+			{ 1, 1 },
-+			{ 3, 1 },
-+			{ 4, 2 },
-+			{ 5, 0 },
-+			{ 7, 0 },
-+		),
- 	}, {
- 		.chip_ids = ADRENO_CHIP_IDS(0x06060300),
- 		.family = ADRENO_6XX_GEN4,
+diff --git a/drivers/nvmem/qfprom.c b/drivers/nvmem/qfprom.c
+index 1de3435df..24958ed79 100644
+--- a/drivers/nvmem/qfprom.c
++++ b/drivers/nvmem/qfprom.c
+@@ -124,6 +124,18 @@ static const struct qfprom_soc_compatible_data sc7280_qfprom = {
+ 	.nkeepout = ARRAY_SIZE(sc7280_qfprom_keepout)
+ };
+ 
++static const struct nvmem_keepout sm8350_qfprom_keepout[] = {
++	{.start = 0x0, .end = 0x120},
++	{.start = 0x128, .end = 0x148},
++	{.start = 0x640, .end = 0x8e0},
++	{.start = 0x2110, .end = 0x2170}
++};
++
++static const struct qfprom_soc_compatible_data sm8350_qfprom = {
++	.keepout = sm8350_qfprom_keepout,
++	.nkeepout = ARRAY_SIZE(sm8350_qfprom_keepout)
++};
++
+ /**
+  * qfprom_disable_fuse_blowing() - Undo enabling of fuse blowing.
+  * @priv: Our driver data.
+@@ -460,6 +472,7 @@ static const struct of_device_id qfprom_of_match[] = {
+ 	{ .compatible = "qcom,qfprom",},
+ 	{ .compatible = "qcom,sc7180-qfprom", .data = &sc7180_qfprom},
+ 	{ .compatible = "qcom,sc7280-qfprom", .data = &sc7280_qfprom},
++	{ .compatible = "qcom,sm8350-qfprom", .data = &sm8350_qfprom},
+ 	{/* sentinel */},
+ };
+ MODULE_DEVICE_TABLE(of, qfprom_of_match);
 
 -- 
 2.53.0
