@@ -1,120 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793871964;
-	b=HEfNKw6GtnikZviVT3iSc8NQNa3w9z8cNYamoVOoEabpboF3OhJ1LAcMCVP2HIKq4hy+
-	 hdoo+kHsn/YhcRAWXa/ae2ucn8X38G+i7rgMY4G1hunZ8OVjy9QrbIS3gcdHAGTi9qZgi
-	 pnoF/K5aT29TCFBMPD1Yrc0GsiqImEmgWJNzDsPMMWmidMcSix6jUN/lWbsnDOB6FoByd
-	 mye9+GtkCOaJKYxEie2K5y6pViLBppucy0yfYzBSw+sYIYq/sWze5c1t6rWQdSMXSQxYu
-	 kHIdNiP5GEqoN/2MOCTWmmjTzecsqh4EYoVw29Z7KFkwKsGpYBVDlJRzE81roz4A/Iw==
+	t=1793872043;
+	b=gTGL5T6lkBmN1zdzBUfFZ/kpgyCobcke2Nsr3gg0tihZG1TivEVOgjvdywtDkgnT/tp0
+	 lDkSidEfAgWCpKM8UQCeqpzlwNZAk4P04SBIZ3szzpAlUvbYnxveeo2Y8RBwvf8wIbrFC
+	 wEMQ+DFQzAbivr1cvbLEayd+9hVvqP+zg9GML2YBddWdxxNF2KQwkGArNtiI0gAccMwsw
+	 0rhalzjq5Zrih9ZXJsCW867uw31lkuhzhjiBbVtpr+UjWbxLg2mYEyoUZfrJKaKA3ReNj
+	 FScMwGFP+TXJtDGcZMfVpogdEn/zj75NBtimBBS3B3OVYNSRYcZ9ki5nE7icMUlZx0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793871964;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:X-UD-Smtp-Session:Date:
-	 From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=UGJviNUom/9cmp2FuiSup9JFaRpjsLnal6a9UIzq0Iw=;
-	b=tkNJP++TUPiEbKNIhHBpKjR/B94ueSXYWDuSG2G6WKAgweKf0MHaKLJpyKuN9us7KxrY
-	 cRAIBaRODF1m1eeNc3qA2uVZfa+r5O2j3oFOJguLPW2WQh8qQ+vfpUhSAmNh9kpKTo8p9
-	 ZzKrspQea95F0gmnx0j4Ox70zh1AG9lstCxRozf1thlYrtPRGaBP87tCpXsiTMJ0H6VG6
-	 TmJ7fRyu954lg/fR95dxs2XsDVeStt/oSBi054its14MeqAk0/RMXz8USF2xsb+Q+x35e
-	 aNMH072hBEcdTi/3TTAjV/jXed5hOCo7EXruYw5Z7skQxyW8SzNmiljUM0L/4IYa/Vw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793872043;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=jyLL8ZmxrAARfweF0V8YGIXZS1Pegf4tg2ZATRaSJHc=;
+	b=oP+7gTjb0g8qvIIuTVH6ngRPmvYUG8FHQSlSGsqX98ABwZ2qraH9tufYKMQ6wAAb8xwf
+	 onb7Ou+4YAk10lQDx+6SHpND5vCHDVW0gJDVutaPx/ESA6XGtWFWZOS1hxQTJRU0jBkK+
+	 vMqzwPF8s/VzjYWkU/S3rlymvwv0lPfoqYIhvxjhc55O265+j+FeN/XMVOY3IO5i0JIcb
+	 Nli9SkXoo703emSf6+kAY5l0ckJoj6KBfLwx5qwXsay8PWVRjCK+lBmXgSOXg7xurtKQd
+	 /Dcph1QMZO1uk3EmirrqXbNJSNcUbm2bcvs+kO9jglOcsf+az1cWS1TMXZDCVG7uafQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=sang-engineering.com;
-	spf=pass smtp.mailfrom=sang-engineering.com;
-	dkim=pass header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=dVQn1+33;
-	arc=none smtp.remote-ip=194.117.254.33
-Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=RASG78SQ;
+	arc=none smtp.remote-ip=209.85.128.44
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A61BE606A32D
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:46:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A61BE606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FD48606A32F
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:47:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0FD48606A32F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=dVQn1+33
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	sang-engineering.com; h=date:from:to:cc:subject:message-id
-	:references:mime-version:content-type:in-reply-to; s=k1; bh=UGJv
-	iNUom/9cmp2FuiSup9JFaRpjsLnal6a9UIzq0Iw=; b=dVQn1+33DAVyF+Mmc8wl
-	nZX74cBnZtcOaNxqwX+f2EN35vIuvwcCBbs5Y4Uif6xNJ6UewE1QVIpTltPVup50
-	MlRiuhMLiINXNw9vKnwwB0a1f/U65VvmL+iaby9q20fLvGJPiOfZ+xoYgRcT9/W9
-	d/g3k34Y1x5VkozWd1TK+b3NMoy//cW6D20URGPVMrKYNItPGgXDmf9IECVFTWMq
-	umAJwe4RBh71+/BSasOo1K7nwQ2OIVJXYAxg+XM2NraSzagEOqBo8lznHsahbQ4c
-	gdRePSo1a6sFJIyTdvhIEQ1S403xaUtPpDJZPJOWG87m0rLe4ikq13/1eQDnBRom
-	Ig==
-Received: (qmail 1094124 invoked from network); 5 Nov 2026 10:45:56 +0100
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 5 Nov 2026 10:45:56 +0100
-X-UD-Smtp-Session: l3s3148p1@k0qyXIRfQJzAwtcC
-Date: Thu, 5 Nov 2026 11:45:55 +0200
-From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Frank.Li@oss.nxp.com,
-	Mark Brown <broonie@kernel.org>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Radu Pirea <radu_nicolae.pirea@upb.ro>,
-	CL Wang <cl634@andestech.com>,
-	Ryan Wanner <ryan.wanner@microchip.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>,
-	Haibo Chen <haibo.chen@nxp.com>, Linus Walleij <linusw@kernel.org>,
-	Daniel Mack <daniel@zonque.org>,
-	Haojian Zhuang <haojian.zhuang@gmail.com>,
-	Robert Jarzmik <robert.jarzmik@free.fr>,
-	Heiko Stuebner <heiko@sntech.de>,
-	Fabrizio Castro <fabrizio.castro.jz@renesas.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Tudor Ambarus <tudor.ambarus@linaro.org>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>, Yixun Lan <dlan@kernel.org>,
-	Troy Mitchell <troy.mitchell@linux.spacemit.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Alain Volmat <alain.volmat@foss.st.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Laxman Dewangan <ldewangan@nvidia.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Sowjanya Komatineni <skomatineni@nvidia.com>,
-	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	"open list:SPI SUBSYSTEM" <linux-spi@vger.kernel.org>,
-	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>,
-	open list <linux-kernel@vger.kernel.org>,
-	"moderated list:BROADCOM BCM2711/BCM2835 ARM ARCHITECTURE" <linux-rpi-kernel@lists.infradead.org>,
-	"open list:FREESCALE DSPI DRIVER" <imx@lists.linux.dev>,
-	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
-	"open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
-	"open list:RENESAS RZ/V2H(P) RSPI DRIVER" <linux-renesas-soc@vger.kernel.org>,
-	"open list:SAMSUNG SPI DRIVERS" <linux-samsung-soc@vger.kernel.org>,
-	"open list:RISC-V SPACEMIT SoC Support" <linux-riscv@lists.infradead.org>,
-	"open list:RISC-V SPACEMIT SoC Support" <spacemit@lists.linux.dev>,
-	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
-	"open list:ARM/Allwinner sunXi SoC support" <linux-sunxi@lists.linux.dev>,
-	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Thierry Reding <treding@nvidia.com>
-Subject: Re: [PATCH v2 1/1] spi: use dmaengine_desc_set_callback()
-Message-ID: <auxQU_PU4bwLJUch@shikoro>
-References: <7f96599b-681d-4963-bdda-1274371ac84f@kernel.org>
- <f1fa853d-1703-411d-b2d2-0fb0b176c2fa@kernel.org>
- <autqC143h7Qf1R9H@ashevche-desk.local>
- <9e39502a-dd17-4fa2-98a3-9019523cb5e8@kernel.org>
- <auuYcS7-YqJKcUbE@ashevche-desk.local>
- <63c24437-4261-4a51-be7e-31ac0759a095@kernel.org>
- <auxGom0XR-Hax9b3@ashevche-desk.local>
- <00390a20-7630-4066-9779-06c8f915a176@kernel.org>
- <auxH_WzaOLsQ4-go@shikoro>
- <auxOFGTRAKb5bLXD@ashevche-desk.local>
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=RASG78SQ
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so14731655e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 01:47:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793872041; x=1794476841; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jyLL8ZmxrAARfweF0V8YGIXZS1Pegf4tg2ZATRaSJHc=;
+        b=RASG78SQJZb7zly3rDtTUgyOxzbegHId3oxXTHrgcPPTO7wKUsm28sWnWodJU6lGHj
+         Xl4lgSwi6T8p8iO48+EYJyut2DlkqBgDidTj54wXHNwFYg81frFZE8Q7apcHbehGyfUA
+         oEBrf2dIpQtOCwWHURtTzf2Dzmg0FgcsA/tVffLX9VOTMSbrVTczidrPCVBSUmPfF8xr
+         VdCf7x+UzAcuXIV8ZgZ7/IHSey42eTXQt/qVDbQZL/NKaCBoqsLCKXtWNZ4qjue5YjS9
+         3KNNVGfvWsr5ovwtxywRvbMkqZpXcjcM2JDvQJQyfSpzT0jiqJ0bYD4srOLe6uto7P4W
+         fyiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793872041; x=1794476841;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jyLL8ZmxrAARfweF0V8YGIXZS1Pegf4tg2ZATRaSJHc=;
+        b=V/8tf9vnVhD42O94McVQkxfc3+P6uduXbHBkNZ4YEg86PEW+TkvF9F5R5oFz8t5e0+
+         qcyAdPpBHnTcDg/ynFw5lNudgzygp7AkO5BiU0Sp8Puc8Us9Q28K7TPX3AwkDq8m115e
+         430vWoifq4NW5Y9nhahrApvgXSBEuZhf8nGNIGYiGHL7SwxELz8bmwR8mXwZ/ZU9KDqQ
+         bddtRzaf3tNRQFFqSqDw8WfWqG7kGS01WA1KQwsSV7nKIPDjKHAs50hqQhKxYhVCdF4O
+         hmmkSKCWUi6eJjRKJbjFGh5yocEbOAgim5i/njkRJA36sK4AvQlN0IgKgZVsmSotLWev
+         47SA==
+X-Gm-Message-State: APuU4Z8G4Xt+8MsPg1xZ3VRnaMxRUVFZWYsHyTkN8fChuV5xHEQoXJHk
+	Q52jiZD0+sXdWj1tD70po31G+Xhqn0WXfmn1r1ulUN81LvleXVkzXvH04Idrm+3MXzo=
+X-Gm-Gg: AYBFou2JPGeXX29oexxA9M6/lXxEI3LTsA9VEUmNxGlrxtNyswzNeWDJM59ckhHhuIO
+	sNX3w8JMsAhqxzJ8KNt5A0exaFqxXn65HOxdwckz5XqgOpSI+IPTkRtPkNNYf8i2iI2liVdN+pc
+	LUHEpaxv0fF0UjEaWJBQ3DCnevrP8k0xCLEP1k7/l0ui6Bb3WOpjp2cNpGrDjDlcij3rOAw8FPS
+	kOzqspnIAt+8eaFsbiFM64F1rJ4RcBdWSiagl0Yr42cCnAYWDf+guDk1FK8LHHQHppsjt/YtNKl
+	HizMOqlAXFXXD6yQGlLnWpNX3ixepFNV5TR9dKmZoqs3FW9GTJGgk0WYsUiob13h0EFKgOu8FJ/
+	dK3vj4UOxVP/0phbVMCTxrkcKW32fBeMQhBodIJgB2mduSwhWGR8DGGkB7WasA1SU//5z/V6jT6
+	xm0Zi/h6UTOgPsB0+jwNZTak74efUcl8pJYakcm3oHenU+x5Jc/oNSRtnx3z+NUA1iByuZC//Jn
+	fM2yagmBSeqVB2Lwnf+wMgdE84BVimQbeod5TbTaoRrVcduR7sBOLGMZpfIGsQD/n/31z9356du
+	Gktkzd5FWwMfJmd41PHhX3qhPVblMvctuexx24gX
+X-Received: by 2002:a05:600c:4f86:b0:4a7:669c:c988 with SMTP id 5b1f17b1804b1-4ac18b7df2cmr429163325e9.23.1793872041405;
+        Thu, 05 Nov 2026 01:47:21 -0800 (PST)
+Received: from [192.168.0.167] ([51.37.126.136])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48fed45d71dsm8886594f8f.36.2026.11.05.01.47.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 01:47:20 -0800 (PST)
+Message-ID: <5ba03b8e-1d51-4e66-a802-37e63814f5d5@linaro.org>
+Date: Thu, 5 Nov 2026 09:47:19 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -124,13 +89,79 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <auxOFGTRAKb5bLXD@ashevche-desk.local>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] dt-bindings: media: qcom,sm8150-camss: Add SM8150
+ CAMSS
+To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ mail@andrewgigena.dev, Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org
+References: <20261104-sm8150-v7-4-rc1-camss-v1-0-7a9534a9a22f@andrewgigena.dev>
+ <20261104-sm8150-v7-4-rc1-camss-v1-2-7a9534a9a22f@andrewgigena.dev>
+ <904675e8-701d-4fd6-b418-6c0dcc9288b9@linaro.org>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <904675e8-701d-4fd6-b418-6c0dcc9288b9@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+On 04/11/2026 23:16, Vladimir Zapolskiy wrote:
+>> +maintainers:
+>> +  - Andrew Gigena <mail@andrewgigena.dev>
+>> +
+>> +description: |
+>> +  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
+>> +
+>> +properties:
+>> +  compatible:
+>> +    const: qcom,sm8150-camss
+>> +
+>> +  clocks:
+>> +    minItems: 42
+>> +    maxItems: 42
+>> +
+>> +  clock-names:
+>> +    items:
+>> +      - const: camnoc_axi
+>> +      - const: camnoc_axi_src
+>> +      - const: cpas_ahb
+>> +      - const: cphy_rx_src
+>> +      - const: csiphy0
+>> +      - const: csiphy0_timer
+>> +      - const: csiphy0_timer_src
+>> +      - const: csiphy1
+>> +      - const: csiphy1_timer
+>> +      - const: csiphy1_timer_src
+>> +      - const: csiphy2
+>> +      - const: csiphy2_timer
+>> +      - const: csiphy2_timer_src
+>> +      - const: csiphy3
+>> +      - const: csiphy3_timer
+>> +      - const: csiphy3_timer_src
+> 
+> Please switch to the new model of describing and exploiting
+> the stand-alone CSI2 PHY devices.
+> 
+> Any CAMSS drivers based on the legacy description of CSIPHYs
+> should not be accepted into the upstream.
 
-> Then I MUST started REQUIRING to split the patches in such cases to actually
-> review them?
+I mean we are just adding a new define for a SoC here - not a new init 
+sequence.
 
-Okay, this is a solution, too. Or requiring "# subparts"
+We could move all of sc8280xp, sm8150 and sm8250 to a new driver 
+topology but, I don't think that's a reasonable ask for a small change 
+like this from a new contributor.
 
+Certainly would welcome the transition given above as a defined and neat 
+series but, I don't think there's a need for that to include this SoC in 
+100% existing infrastructure.
+
+---
+bod
