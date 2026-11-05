@@ -1,131 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793871002;
-	b=IXSRMaLKvn2xs8N4X0jnGWxTR1EQeC3Vrpnx7mjiE8KKhENFZGo7TVG7Gsfl7uJGF444
-	 8jA+Mg81KC6FSbndKBcrjiQe7jdWzoWFj+MZsxTMAFeOXgYQsA30BtdFFAV8OXP3bClpF
-	 lu8VyYb03xhfKCx7LMhRQXLYIiH7Hm5P41ZqOgVJS3Dt88LoSPPHX93tWlI+kyDE/xxKi
-	 jEiCN94xs+CIINlNDHZnHmIWBE1M59CnuX1kw+oiucnnZdS8f+EQbSyjGBTyJ7RgmdZmB
-	 KCc2qIkQ06SmRbSgHIbHzdeZQ/DudsXQX9/uOe+WgnWCCkQv2CLr6zyKbKjk5gsWp4Q==
+	t=1793871246;
+	b=CR1/eT2kme/Na+FTiP7bQe38E7gCaDzYx+SsXdm9ErMUbCs+8xbXN8aTBVR9dT+6tgJN
+	 EZI0k0QYIBsod46djGYtfxzSsFiRPb/9m07Zo9rJm+I3v8LlVw6mPCrEyRItGYvw3Uz9u
+	 eQVhRlfKocWE6mY7FVa0dSTXR04AD533oyNueuaF5caTVhPlfjOeQeEfnEsRvbYd2OL4A
+	 pL1RgCqTQ30eEdh670RRJzRJTuHjz++umlCJr2pAuEuw/9a7kTWRYox12i4YGUA9o2/W7
+	 Bcz/Rq4oemfK4Wd6WvBB0gUhHMZk2YuEaDjNJU0/aljCaMlECU5ko4EbaCLUNdDAXVw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793871002;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=MzcP0ZVuar/2J0GdckfWIQkp5OrAXfjPJwzDsLW7Oeg=;
-	b=KoQgdG1jxWs9yG5J45+JgrnRHvQHnLvz8md0v2dXyKUYkRjuJ39shdsSlNIJKJpBapwu
-	 AUHGqdK9JtTZ5CYOqxfNSoY7DBXfcld5XwafO8lznwHZAR5OwCy6Y0NJ2WLDkWJb0qoKD
-	 EOMfVvFk1FO8ER9+NUAJgyrUxNTzx2WG7fmwtZ6/VZ9Jv+oIpECcXsRM4X9HQwFZPhgTa
-	 Alyu0tNcWqxJ0pk6AwpZo6mq0LzmVsZFgJisRSqLDjXJZzYY45KGyhCsokr1X8MTlgudW
-	 ksLutQVDOOjuzCPnDYQ/ugkOzcbCbtV+A7P72xheIOnWjklvp/p0Yfrg2Cx5gzt7oLQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793871246;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=iBOfy5O+0eohQ89wWM3JHoeRMFw720CvWts9Mtt94kg=;
+	b=SR+T5e6Isthhk/p/cown3hHvtyYzd4hYy2XZ69iQC7FMSCxFt8AnMuC+9VwQJp2I/kNG
+	 ATxTForJ1er8+OCmdpmZsQG7dX4zsWklNjKGjKsLGvAqYISSU2rzftda4CmIjLlj9Nr1G
+	 Y0hjTQbEC45glpnZlahD95EEpJgcDbs6mJH3Iog62FvddL/qxC+aJ0UIUQyWt731wifi9
+	 ccYo259zaJxYhw1la8sTlsgIcSsdRSVxWLgyMhl31WkAfVqIqKPPMn0KSKw6vthiJbqlq
+	 K8780wJWvmH+xEH6amFvqywHTEpLed9kxPhqP7qrosjJ/HRmtHTRDMweUEfoUYIP7/g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=eEFjrbpv;
-	arc=none smtp.remote-ip=198.175.65.19
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="kH2/2Thm";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 197E1606A326;
-	Thu,  5 Nov 2026 09:30:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 197E1606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05236606A32D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:34:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=eEFjrbpv
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793871002; x=1825407002;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=aVv8RvjToXdNBQ+AxPn75WGDPj4D3O1pHLFNRPhnfCQ=;
-  b=eEFjrbpvUsXeoeEy6uDeHX63okzZdJPDcpHnD0lJHQxucQ2UfxtVkbRf
-   DuAej4v1JiCKIF5Rl30OXvUPqyGu6L60ttgbEzPSLFHBcBmWwYoRzr7Cv
-   oXTGeA2eM/GL1z+V0fuPw5Lf9Jop/CvcAs8QmL2418DPr/X5kipxwuDca
-   Px5RTB0cTIPwIbq3vztkeKhBeSMB/5rDV7HnRo2C0gFdlO6/GUfC3/ghr
-   dVI1nubUGXTtQmshyUgnQf5iRvJIR2MYQKcXmtTHhX+UslKnP03a8xARZ
-   WjpZGvlLdN53973WMxny2XR9ToK6l9TQz/ahySSsAq8vONeN7wGWaabME
-   g==;
-X-CSE-ConnectionGUID: 7ITx+mjuQtWdcJ7r4lyUjw==
-X-CSE-MsgGUID: Wo2TClO/SaKV30K8uo/4jA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11956"; a="2683858"
-X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="2683858"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 01:30:01 -0800
-X-CSE-ConnectionGUID: VUQbl1y6Q3yfJ7t5HK8oRw==
-X-CSE-MsgGUID: SqY+yNktRvCMlE1VenPXPQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
-   d="scan'208";a="7269063"
-Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.144])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Nov 2026 01:29:47 -0800
-Date: Thu, 5 Nov 2026 11:29:45 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Frank.Li@oss.nxp.com,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Richard Genoud <richard.genoud@bootlin.com>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Laxman Dewangan <ldewangan@nvidia.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Cunhao Lu <1579567540@qq.com>, Raul E Rangel <rrangel@chromium.org>,
-	Yenchia Chen <yenchia.chen@mediatek.com>,
-	Zhiyong Tao <zhiyong.tao@mediatek.com>,
-	Carlo Caione <ccaione@baylibre.com>, Moteen Shah <m-shah@ti.com>,
-	Kendall Willis <k-willis@ti.com>,
-	Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>,
-	Nicolai Buchwitz <nb@tipi-net.de>,
-	Karl Mehltretter <kmehltretter@gmail.com>,
-	Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>,
-	Shitalkumar Gandhi <shital.gandhi45@gmail.com>,
-	Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>,
-	John Ogness <john.ogness@linutronix.de>,
-	Pan Chuang <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>,
-	Robin Gong <yibin.gong@nxp.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Stephan Gerhold <stephan.gerhold@linaro.org>,
-	Zhaoyang Yu <2426767509@qq.com>,
-	"Nikola Z. Ivanov" <zlatistiv@gmail.com>,
-	Haoxiang Li <haoxiang_li2024@163.com>,
-	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
-	Biju Das <biju.das.jz@bp.renesas.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Myeonghun Pak <mhun512@gmail.com>,
-	Wenhua Lin <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>,
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>,
-	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
-	"moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>,
-	"moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
-	"open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..." <imx@lists.linux.dev>,
-	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
-	"open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES" <linux-samsung-soc@vger.kernel.org>,
-	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
-	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
-	vkoul@kernel.org
-Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
-Message-ID: <auxMiQ-DvmBc2vu2@ashevche-desk.local>
-References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
- <a2d5ea00-bfa1-4883-923d-0a6a7eaa556d@kernel.org>
- <CAMuHMdUHf14DpLfk16qZ6YWtJKm8VDWEFA0Wqk22ysqnUFHoHQ@mail.gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kH2/2Thm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96A301F00A15
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 09:34:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793871245;
+	bh=iBOfy5O+0eohQ89wWM3JHoeRMFw720CvWts9Mtt94kg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=kH2/2ThmSmTuYrAqoZWP06MhveGLpQ7yH69j1W0W9ppNRp+veQPUYmrYbLA36ZTcg
+	 WMl3HawM8b5g2sErObcuoxuM8NQh815V9gVHjcRldAhHfoIbEe7KFWivmcSNEyeMM/
+	 LKEFyiNriYRJkjHYFRraLKVcylAXHuGcEfOM6rX1q1kG2IV3MLva53Y9EFyufrRxSK
+	 0jpgU/jBiVxYQ51Tq5ggzdG1uOS9V4Sjv2PJ8yseTBprRQOWFqwTyLG1m74YoaoEuM
+	 qw4dBMz2DrF6UJzKbgzI/HYamSx7XtcwlATncpgEjIBq65UrIngq8Zhl9v3QRkHYVy
+	 5UHyZyi6r9zjw==
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5bfbc67991cso1037992e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 01:34:05 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvBywkUB0VBjZiugDgdJTrsT0d5gXJezoYJNjRujbt+xnLpzdfOExJKHHLqt/06ouMlrQP5GZRIpS2gJ1c4qJ@vger.kernel.org
+X-Gm-Message-State: APuU4Z/b42r7+eQ6FCXmqW5BTV3qVw/VbHSg6iuMn0sQRRFBBovE+VhR
+	otfRjQPFrMOFh/DIMAvTwlSyY/6yiwXPxehmRvqXKT8piWTO/+J2oWc99aUT354k5dJ5nIEZbB2
+	MQsQTIAXfOFVRAPFhJiHsQ9+6TtCRLB8=
+X-Received: by 2002:a05:6512:3c8e:b0:5bf:a5c1:d11 with SMTP id
+ 2adb3069b0e04-5bfd957cd9amr6465740e87.64.1793871244374; Thu, 05 Nov 2026
+ 01:34:04 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -135,32 +59,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMuHMdUHf14DpLfk16qZ6YWtJKm8VDWEFA0Wqk22ysqnUFHoHQ@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+References: <20261103213002.1673560-1-lee@kernel.org> <20261103213002.1673560-11-lee@kernel.org>
+In-Reply-To: <20261103213002.1673560-11-lee@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 5 Nov 2026 10:33:52 +0100
+X-Gmail-Original-Message-ID: <CAD++jLmREn-duxqZyLmY97DR_TKiDLRgxiJiy=cno6rdosa8YQ@mail.gmail.com>
+X-Gm-Features: AclHuK_c9EDZKaN1V7Dk_kEOYVVIT2evfGZYSvNiUvKlEjAfXzbR3MVATtMhYcI
+Message-ID: <CAD++jLmREn-duxqZyLmY97DR_TKiDLRgxiJiy=cno6rdosa8YQ@mail.gmail.com>
+Subject: Re: [PATCH 10/10] pinctrl: qcom: Check qcom_scm_io_readl() return
+ value in msm_gpio_irq_set_type()
+To: Lee Jones <lee@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Ajay Kishore <akisho@codeaurora.org>, Christian Marangi <ansuelsmth@gmail.com>, 
+	linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 05, 2026 at 10:06:06AM +0100, Geert Uytterhoeven wrote:
-> On Wed, 4 Nov 2026 at 18:41, Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> > On 02/11/2026 18:54, Frank.Li@oss.nxp.com wrote:
+On Tue, Nov 3, 2026 at 10:31=E2=80=AFPM Lee Jones <lee@kernel.org> wrote:
 
-> > I did not look at this code at all...
+> In msm_gpio_irq_set_type(), when pctrl->intr_target_use_scm is set, the
+> return value of qcom_scm_io_readl(addr, &val) is ignored.  If the SCM rea=
+d
+> fails, val remains uninitialised and its stack contents are modified and
+> written back to the hardware register via qcom_scm_io_writel().
+>
+> Check the return value of qcom_scm_io_readl() before modifying and writin=
+g
+> back val.
+>
+> Fixes: 13bec8d49bdf ("pinctrl: qcom: use scm_call to route GPIO irq to Ap=
+ps")
+> Closes: https://sashiko.dev/#/bug/linux-a5545ffd-48cc-4856-94cc-4b2dd7968=
+f50
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-[...]
+This patch 10/10 applied for fixes.
 
-> > Therefore:
-> >
-> > Reviewed-by: Krzysztof Kozlowski <krzk@kernel.org>
-> 
-> Then please add "# samsung", to make it clear and obvious.
-
-+1
-
-See also 20261105082729.19622-2-krzysztof.kozlowski@oss.qualcomm.com
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+Yours,
+Linus Walleij
