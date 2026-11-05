@@ -1,112 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793894572;
-	b=QxgQLjfkecufJs0QfJuUIYCfwWbK/onQnfhbXIBqZBFYTNwET7ljMzLath0kgrCaNmtp
-	 SaDtG4oO4bxeDX0tF+Qy189WLJfa0suvgSDlLfYx4NTppAc+C9rG9jEe44MyQXIZgXydm
-	 m0p8SllixTwCuEpxrFyDxsR2KY5K+TX61lk6OyJFNf5ln0c03RoSrlZmSyD6XCSSS8eCY
-	 v4JeedjrVahIAbd1ID0kxhBejDQEXg2CKnNsG3D+BR9CoNwSKKehn5QYqCqhAY9i8IJtB
-	 A1O7ZnxrgsqA8GAtQbxEBkHCHOnq3o6bUSzCNhElhTsSwkQolqIEViansdAf7EiMiHQ==
+	t=1793894577;
+	b=M+c+0kZeavw3q1vlOfe+Gb004C4Z3+ZttZrPoavhJRwMDZxUgdzTY8Nk/8gW8LNPK5ar
+	 8Vp6qC30XyJB7DhYRZ71eVK+w0J5fs9O+gjgZTxesV0O+pCz02GIavW1Z14quHSPT/As/
+	 djx+Gsk0qXVW0Nw/TdB4Q1tCN7NNoZvzHgFH7Sds44OZ+7Fkaqw6SOaxLdpUdaKqI7h0e
+	 KOmv4vTyrsPgsTqzYlfBeXzRzRdHpG9OOPv8Tt4NiG9AOJQ2YFt497fBY96eSLLHg6ouy
+	 tEJV2A+w0b73Iy/9mN6n3psyY8XfPMZttmMsdAO5L1r3reioupc+k7v3D0E4QUQRJ2g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793894572;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793894577;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
-	b=vppTlha+Bmkvmjva/DcBlcat9J35yg8Wtk12KHL0BzlmoBKA9ay0HZCLDJblw6tl61+X
-	 roc68PNt2GH3t0v+Y5U4zM/8YYhUCkUT3mSCYLGY/x2gCErVfa8ShH9TFv4G0AjNcN4NM
-	 RXqmsIjvYCNjeK96doDUDeru20a9lnsiqEOy81cDXWw8t9WxcewB8qrlYTKirrfC4jwkH
-	 SHGODWu3Y047uL0+z1ZZiomPxCfKLGeJrtGHpAGUbDkimlwSrPD7MBCUZfjet/7yMidQI
-	 x/35k1ZPGXTK4NKlu/Sc7AoMbJYxAbxjZh1qRERaUIldCPLhLgjAAi4GKAbv58KaV9w==
+	bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
+	b=Q+YJ1b9EmMEC+B2qdwcQxHu9g1m8UQioxiq/Chk50Bxh+Ne7TTS8rSxzWWvxG+tWMV9T
+	 71yhBFRCT1bJEqV4Ss0jlVrczDif6RNero1dn+X0H2g7cBhFBf5QfqZSHN0XGUjrWZFLk
+	 haBlTKVgLu31fEPHlqambVITPcXZT0E2Lr4OuWyNEK3vQjVbsbdSZHR0mQH28mn+/YJJU
+	 GIzSp4zFch5gC+McSgvtnyojJsLLlFvWWsAFRhXCE9+gkZSTRIDNPaQ/IbSmTklUJj9rw
+	 Kp3cANRQBm5uOB6Sd17UtENNduWdJF4MRFSFeU4eRhkBZeK7EXzs2sb/nei8EIkm8JQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZyJBQkxp;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=c2rEgnbs;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lG41JLr3;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MglE5TQX;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B0246083618
-	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:02:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7B0246083618
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CB1D60A2610
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 16:02:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3CB1D60A2610
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZyJBQkxp;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=c2rEgnbs
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQ34Y1049564
-	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 16:02:50 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lG41JLr3;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MglE5TQX
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5EQGvA2004506
+	for <linux-arm-msm@vger.kernel.org>; Thu, 5 Nov 2026 16:02:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=; b=ZyJBQkxpsyP7gHjC
-	PFpey2bsuaOeurJClX9QcG/h7iR1XaIKYkeyA9e760ktwGPzGLlDENrMRd/3h6Ua
-	Oupo19XzwJ8OvAQugvaGDrTcWRukQJfkmywsws2Dtj0BxU+y7QCZmDmizTcD2pOW
-	CGSe308g7ZhpfAG5R6RSpEJnPSzqFxfMPxk703NA7cb727y4E/BzEc68ZPzD4anS
-	hC5SrTBpjN8LURnxEPfjZ92bq/0RQfugZRJ/2mqXq6Op0WfozuVTjQ+w/scKfVLP
-	KEyyAZLgXrOyR6vWKSWwmWM7d15CANx/tFZQYAK+ZWFAUCHqUWKxnMl3m0mwrxV9
-	Rs7pWQ==
-Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrpaahwfa-1
+	v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=; b=lG41JLr3fzDI4Kz8
+	76xU/mrLryYp1dYynYiikY9ITSTgEzjHW+x/XAFnUIXmaS/TPppUPauz8aibIYx9
+	yCOHD9p/x634il5EQURWbj7xJUTHTl7Rz53SSsyobTbdelhxSevSNJbV3sJZzh6k
+	ePFkR3WOgYvdeA436eyLaVFQ7vvz5LJctXusx6MrUssOnzukokNaZQbSotDNCP6X
+	gLJf0XuKNIsz0zN1ax1Jv6Pof8xSt4k7DwHf/YV1VFk1hnZLimmRvHxnLZxgWuY6
+	r23oRDuCS5OcSim/HLsna+i/XXklIhRHRd53C6CAuZHa0ScUv2JfTJT6d2s0ufoF
+	dTv0tg==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrqpd1gyt-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:02:49 +0000 (GMT)
-Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5eac42e83e0so506422e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:02:49 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 16:02:52 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5eadfb67611so426926e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 08:02:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793894569; x=1794499369; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793894571; x=1794499371; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
-        b=c2rEgnbsltCVcdoOauiTp69I5Xf1+JIZq1nNcaWVLyI4agU7u06s7Z8AcL12JuQKLC
-         3VOBQtBPCOFc9cr3lRGow30CYVLvynTlpEhA+il4eGWdV11DbXteDxz3w9v5rLtPWnsV
-         j7FAm0UCftwAViA4O8KonbWycZpK8KQGOiUVWUPa/K7nt1LC7c08uCiY8Fvv/u4NGzu/
-         lh1aCKTp7/h4FpabxypigznrUvM5hxH9HP2XmAuo+E+GYJKMekHpSuwEFBLBr2oHeEC8
-         AmUZXjmlXBwL1JYJNuZ25Q4HgnE6Puo0nvePrhEnCmMmusZhfuXx8T54m3DVZOQGMFNz
-         n9Dw==
+        bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
+        b=MglE5TQXBWDOGvWqfP2ncIxodWL4n2yqBOlYxcFa8a/oqtUvqaE8j1+QdI7ROeOEEJ
+         q+UXCdTclhLzdXQ/REJqBLROJdtMjkNnWuUJv6sDhab1/Lu4kRvdFTWqNt+5MaFg39sy
+         rzEV6fs2p4Dt+a0EsyRG16dY0kdfcO17S9n8RURL0y9N/6fzQVfuseCg/2Dmp3xwS62B
+         XQmVe5nkE/q70p8d45LY36kE6sksCREcOqxImPdWw1tDffxIG4Igz1qTRA9p06HixBn8
+         lwelDZU5scH+1wK/VLcbqSDfvXbG2uSPPpNGb1wfIpprsHJnvBtFhcZFWO2dbu0O/VuT
+         IWOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793894569; x=1794499369;
+        d=1e100.net; s=20260707; t=1793894571; x=1794499371;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=34g+gM68eFDTDCVBvHfun3apqlRNOTVBacuR7uGRASI=;
-        b=tBGjMQaMX43Gq1RXN5oN7BmsDVqU+Q2ysFEiWs3zNw17FInkfKdll3PQNqFre6NHre
-         Pa6npdQp74YUfhRakgjAgi/3MDT2lqcXO9eWxqd5Oe//7MPJf4EAwhPD8jM/FZVrXnd8
-         9aITSmNvAfi59UagPcgPlNtkLCJQCycFf7jUyyFdlxYVH1sWVV/OtVCDr9iKU8Ol8Hte
-         QvvTy1FXH9gcHM8YPZ91OIEFrcMCgBQnCE912s6Zo4GJPMJE2bL2CkfX+k82mR1hWlJc
-         s36F2+DvMzabVp2BDSWwT2eSKYstUMedF16ZU5xm+4B6ZoYnKZSCSUVIJwgW/W1//x4E
-         L5RA==
-X-Forwarded-Encrypted: i=1; AKwUvBwrJTgsk2dmOg/VU1g6Su6coZapeVRn2+dNtXZL3KH51HfxKRR5jFhXCfzRY3D2KkmmuooPliQp80oHwQ/V@vger.kernel.org
-X-Gm-Message-State: APuU4Z8ZNP2379jl+xE/ZFSoa1vAgHrh4juGYPfMd+Fv+OEkae3Hh0P9
-	FQJnkXoshACGaXXEWjtha7PZWCPH9kdfCsb98qEcrgPuKczZmfp3bOKejz8fecZY5y1nj+RRAtM
-	sO0++DMlMbG1QAfX/J9Nvr+6vg0RxHJtO9vgQklvqZ8J+r4r8ALZwr8wt1yF2COd4eO7p
-X-Gm-Gg: AYBFou0LwhdDIO5sNJVqIsmYO4HaVRGvcGKDBFXvPwEfOyg01EN9sPASjpWvRPrXgfZ
-	pXoB5gJTYI4dgwMlFWjrvZDBIM7LhrwuR95NiKOkeg75cwiPvUcU0eY6jnnEo/MtBU/JeMaHWip
-	fIGdqlMq9AIrW4sO7g1pUc9JAzchwUc6ZncKFTxy6IoHD3gOAidmmPHRSpsSCzZ++i+A1AaUmoi
-	UrLK2Hdu7+r3GygHn8sLWAPPjXEd9FvenS1RP4fdRWSFpognfK3Kig9qPlZpZSoe370Xskl3apQ
-	ufbzQvYCdnqUHPWDdPVsgRXzAc2iyIMTx3s/rOAIJ0aZw4LtRMvNyTMCP/ptvfW2K5ybYSPqv1D
-	FcyeE8Xqp1DGOxUv5Csr0xEC4nckp/GPSjvfqvUcx73ka9BbgXQxT8QLKhw==
-X-Received: by 2002:a05:6122:3115:b0:5d4:1193:73d3 with SMTP id 71dfb90a1353d-5ec6894bf5emr9727473e0c.14.1793894568676;
-        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
-X-Received: by 2002:a05:6122:3115:b0:5d4:1193:73d3 with SMTP id 71dfb90a1353d-5ec6894bf5emr9727404e0c.14.1793894568060;
-        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
+        bh=v2FodO5hJkj1pctB6tAr/939l9h/HJN6bFy/Ma2rgWA=;
+        b=ZuM2p7eW4DFGkhKK3W0U7I7I2Ugz4slm9QXWltRch0Fg7mt+d89a5eeZ6rh/osC9HV
+         3nEyLNy+Fait9lmoB/PlouxytgIobnSw/rrNRqfIK2w0JppO/blqTz+2gedzjleeAImD
+         pPgu9egp6Jkzf55YvCwWmzBciPFFf9u8AgnEwWRJ8qn+D+P7ehy3EJeS03RFawKR9XAc
+         nabFO1vTX0Y008wTyeetrRNxzXQoF+C+9/+cD3rnHHE0WBf9ST8tteR3LNtshodbos+2
+         W3gAwaAqbfV+w+7cWhV6RHjBXwelXnFSZOOngTEZLI1qsMeukL8Iinxq5MpGYvR7dA9t
+         FEig==
+X-Forwarded-Encrypted: i=1; AKwUvBwPhuE4Q74dg0t6wZD9Vz5+/HXkNg69bFeyYFSNdE2jWAkESF2pg9YqSICOxF9h4cwYDZTqcim1rotMptbj@vger.kernel.org
+X-Gm-Message-State: APuU4Z8MP5IhUyHSE4qhZ4NkQuXXSX3uyf82DaiWDLL4QbkrPB0n54QQ
+	F2BRfQTXDCZQarNXGB5GNNLx7xrGpCaB8EcX29MeyJRFIswVUWKtnesmtRcmZBlu72Ng0llYXPC
+	dzcfdKVgveuUz1f2lsBkkXpPO6nFPy7c3WU4pcGpdrPqcSbNXIG0AbamInRo1k6b+Lq/p
+X-Gm-Gg: AYBFou01ChgS3fgbDFWxJX/3L75udqxiGw9SE4Tiid0YS7s9eDHCVjk2JzjUpJhI79o
+	RNeK86ostwDuDpr+cTDEdmSKfVgWI1QdiM+pij+Fl42rgJuBuYYZ9h1wP7K9CdPZBYrOKU34DC/
+	YVXpAvUoBMOG7y9Uizwirjx6x4NgVwJWWWPSrT40jXY5tIqHS5T12W30E6N0RFO+Ld9n2IeTt3Y
+	ypcYZjDGU7B8RmyowfuPakWGdQiNG1YorW3D1UD2YI9QFjUWxwpChAbu6K45MSA2IMUfZ7KB76s
+	ZyW6M3xN17YeW2BP/gs2dfFSzRUFX1Gtxi0HKxwj3EsjGE6FaLu24z49IkT/1lvs/CPSPCiyfwM
+	iyUh+b0vGq9lTSrsHojsddwFxC+m9oCLOipX67AwnCTafbi5GuBOUfbuH0w==
+X-Received: by 2002:a05:6122:787:b0:5ea:9218:eac1 with SMTP id 71dfb90a1353d-5ec689733a8mr9188967e0c.20.1793894570679;
+        Thu, 05 Nov 2026 08:02:50 -0800 (PST)
+X-Received: by 2002:a05:6122:787:b0:5ea:9218:eac1 with SMTP id 71dfb90a1353d-5ec689733a8mr9188854e0c.20.1793894569740;
+        Thu, 05 Nov 2026 08:02:49 -0800 (PST)
 Received: from [127.0.1.1] ([188.27.161.77])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda20521sm11065672f8f.53.2026.11.05.08.02.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48feda20521sm11065672f8f.53.2026.11.05.08.02.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 08:02:47 -0800 (PST)
+        Thu, 05 Nov 2026 08:02:48 -0800 (PST)
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Thu, 05 Nov 2026 18:02:02 +0200
-Subject: [PATCH v3 2/3] ASoC: qcom: common: Add SNDRV channel map to Q6
- slot helper
+Date: Thu, 05 Nov 2026 18:02:03 +0200
+Subject: [PATCH v3 3/3] ASoC: qcom: x1e80100: Allow userspace WSA RX chmap
+ override
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-2-29e06613115f@oss.qualcomm.com>
+Message-Id: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-3-29e06613115f@oss.qualcomm.com>
 References: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
 In-Reply-To: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
@@ -128,123 +128,332 @@ Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
         linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2144;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8385;
  i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=PB2xbFqRgMUG4atgisB8EwU4caRe51qu9rLYrESsFBw=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq7KigaTg5w6SITfHlnkVrD4JBkEpgmgeUVldrv
- nmoTg+PxhqJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauyooAAKCRAbX0TJAJUV
- VrBFD/40dYtqvjA7O4JctJu2A3E49/7nEjDc/syzyOkQrSTTDNFBY+mADWy/JsdHhaPO7VbRE7c
- oj4zJ6ashWlSVttfnWlMGUwwxTjOhoMhnXG3LgRLmdowYIhWLgMuaalv0IJMdW9jWHlSiYhSnuw
- YpLUQaJkVFYP1xMqgm4lLAUrRN6mLenoTNyAc4zLi7iHxYKhreVuwMa75awHszrSrsy9ri97peh
- JG7UexUHwtO+uBlyxoX7ZuES8XrDsM6I1Oy0Y//Hpg6VkO30a2I3kIdvsbWvjfJl2358+9Q33rk
- V/UJRsXi04LR+HjQ4q5wUOM7AMcDvs5b7vBDB5CxIdsWVc+f5RL5bXaJINGjES4uC9XKY6gTfIF
- RVC+zqS6e88F2fhqVo4MWloZ1K5tLK5A/FInoSkw2Im8m8FzLhOdhk0e5Xt+zMMr7dSFA6xGQ0U
- P56SZJMQx3YY4dyo650goEuhf+SrOLUIqmmVfCxfXat+Nm7Lsgx5aN6bLZyvxkV5qhFnv0CDU2+
- IRN8e7HdW6dNBHHIlFcKCXW5HqCMrJcw9KbarARv+KFhrmt+la6tCi2GhcLCSkitxSKS14ealHb
- gZTj/YTeyN72wOb0uvcrIdw/Kd2lT19P5yRKwbScKA/Uyo7fu8SusqRUpd2iWxN4uJHWcvGA5N2
- pdFcy6s5KE/ziKQ==
+ bh=XoOR3cm4qVTMMv8WRHw1TamUUuoGbfY5O/C44BLC1EA=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBq7KihNYU/BoOtJFuWVU6/OBJyEqwz62HP8sMtG
+ LN4ftH8q72JAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCauyooQAKCRAbX0TJAJUV
+ Vo2LD/0T54aWR7czFnb4Hy62PITJ0rlH8TzuSc6iHS0LNLgaGLJ6JtrYCqd3sj73he4ilS+DcmH
+ fQYQsGX01c4aLRvx13E3u8DvV3hYq57TZvT9lcsRObS45Pjo3yNibqIcJGXHnt0dxJZcmgIJt7q
+ Z53Oihi0BRPLKVu+d47jlqv9WUTHJOucgGkF0tm2ydJidLFUY5DRr7zI+ZSj4aa+VpWbGgzEYK1
+ CWs0ZwtInbxbPVV23dBv88B43BMzuJUSGrE5kWoAuhFNLMlXNFon1V3kAPWRZROLlB6gXtWeNA7
+ 2htI841cipXvruZAO6F2I1gPQOMpkFldXu/9nybBoT2WMkCDU+lL+QHCzlNgtK0fZdLn157rsGA
+ X/8oZ+AeHgHoe1bBGrKK828tzWVXQjUTx/WUU/LYMX8YBsBYCaK4cd97UU34AJ2K8ZTOXVjeIP2
+ KAR3gDpDn6y05wNuHMLrU0jNXEX58YXUoXkK0Ucy6EvwwLbiC/4Ws2jtDSDo8YaG0aEkELeW84S
+ 2YS1TasAjMRjXrTNknd5XcE/gRq+BezO4iDcEL4imvtPQGa8ose0UVy9aPvELwQtOrV8lWUQO8N
+ ChbvxTy4hwphA9MAKdF7PJjhBfWSbdwWUT4xW6x0wZg6XUyQNO0lx7F0DTn+GpP0Y+iQdwv4FqI
+ kD7u7xhNt4vSUsw==
 X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
  fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX7bk37vJCw9+B
- 9fFN+pj2i3Qa0657UDT9aqqAFWxJ9i1wZOTMwxD+Kh1ZHRuaiG6Sw2GaXLh8i87RQWqhHBAuC71
- nOlh5Z9vgP0XnKz/2XBBWCuNL8RVWMjmLQFChTp7v7HI/qiPHgtX60GTKKAY4b7WagriNAHVO4m
- hP7WKDp2EM7JfLbnFra90vYny/w4Ms42PfxRLUX02Uc16s/lWSoQf5zxtBNiRgOxOui7TvxnOv9
- zMRrcLP0knCP6bwHuE+qnkNenOpdCrniZ4yYJYYqsljHnZW/xitmi+j9XnRBtD+5nT2bNmfrwYD
- 3Nyd9lE5DzmMrbLMRUJJ90baVyeF1mgP+UWwlyxCGFkyu2qyp6N3Vess5uy/i/A9eW7SZuPBIpo
- v9c4diafkRJjvKAu2jsnF6Z33QMjZw==
-X-Proofpoint-GUID: x2AoR3VDHYdkgFDZzWZekX6jttV2sAU3
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfXygWCfOcSBA+O
- PlxjOYXQ9AW84BojQCE/q4Tw/51NIg7nVxozY4kxiDeMaHHq3Evu+QtaxSDSML9/BL5L2N94LZf
- 6kwLz3ewenU6kEPnyj4iOUD0hPhT414=
-X-Proofpoint-ORIG-GUID: x2AoR3VDHYdkgFDZzWZekX6jttV2sAU3
-X-Authority-Analysis: v=2.4 cv=WOXqzXsR c=1 sm=1 tr=0 ts=6aeca8a9 cx=c_pps
- a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX+ny+/Jcq5usw
+ SuDKWhwDIyioDfyZGJTzk+OiGOkwpc6FLDRwg6DdzZzhcu4LjlFUpy16b8kaN/1v07Nf4KHZ/Wd
+ grhBQw+vmF649TW+9mMReEu9wgoLwFU=
+X-Authority-Analysis: v=2.4 cv=Y5JtIReN c=1 sm=1 tr=0 ts=6aeca8ac cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=vP20N_l1vn5n2xwiar8A:9 a=QEXdDO2ut3YA:10
- a=hhpmQAJR8DioWGSBphRh:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=xnt_XiUjAw3QdKs5wcYA:9 a=QEXdDO2ut3YA:10
+ a=tNoRWFLymzeba-QzToBc:22
+X-Proofpoint-GUID: Wpn27xSH5RXos-1xEzxQeL55QrWG3eD9
+X-Proofpoint-ORIG-GUID: Wpn27xSH5RXos-1xEzxQeL55QrWG3eD9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA2MyBTYWx0ZWRfX8IzbUIfVoV4m
+ uzfWGHgC9XMGMT+Bw4A+sMWgwNr81aAyaEb65a4dBV6FV5YXdD9ac0V8ZpB9APja/XqXBt4+KLn
+ icrso3xqqeo2cp7tvLJku6Q5OfIK9hUkNiHlLhLO2t2pCep6rlGaHysrWNu4I0XcnTI+1/0n8wx
+ UBeDvAXkqScJzoBilCO5xanSpLScR7K5Ppw5gwTMEEVXD4FVmqghnVGldBJtni9tShVK48Yg2qO
+ kYCsREwdIfDk/E0wgVNA//PEnHw6p0FL9XkrBsfRT9r0VgoknLeAiTBDFhFfC5yA6QnDLYSFWuo
+ e+55CUN3rNAeuWgmR5qG08dDHyUp++eMn4mYYf5bkk40vEkm2kS674bShC/7vs2umu2xf6DxIZQ
+ gKUQRKPcCb5AANj0+aOFXFsH7liiVA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_04,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
- malwarescore=0 lowpriorityscore=0 classifier=typeunknown authscore=0 authtc=
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.22.0-2610300000 definitions=main-2611050063
+ bulkscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
+ phishscore=0 spamscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611050063
 
-Add a small helper that converts ALSA channel map positions to the Q6 PCM
-channel identifiers used by Qualcomm machine drivers.
+The WSA RX slot mapping is currently computed entirely from the channel
+count in .prepare() and pushed unconditionally via
+snd_soc_dai_set_channel_map(). Userspace has no way to express a
+different channel map, so any map defined in UCM is ignored.
 
-The mapping is useful beyond a single machine driver when exposing
-writable channel-map controls.
+Add writable "WSA Playback Channel Map" and "WSA2 Playback Channel Map"
+controls on the WSA RX backend PCMs, using the standard ALSA channel map
+TLV. Store the userspace-selected SNDRV_CHMAP_* map per WSA backend,
+translate it to Q6 PCM_CHANNEL_* slots at .prepare() time, and keep the
+previous default mapping when userspace has not provided a complete map.
+
+The controls are added from the card late_probe callback. The backend
+PCMs are only created after all DAI links are initialized, and adding
+controls from the stream startup callback would take controls_rwsem
+under dapm_mutex, deadlocking against DAPM mixer writes.
+
+Allow up to six WSA channels for Glymur.
 
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- sound/soc/qcom/common.c | 30 ++++++++++++++++++++++++++++++
- sound/soc/qcom/common.h |  1 +
- 2 files changed, 31 insertions(+)
+ sound/soc/qcom/x1e80100.c | 193 +++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 189 insertions(+), 4 deletions(-)
 
-diff --git a/sound/soc/qcom/common.c b/sound/soc/qcom/common.c
-index 83b745f617a8..29b2df21b765 100644
---- a/sound/soc/qcom/common.c
-+++ b/sound/soc/qcom/common.c
-@@ -6,7 +6,9 @@
- #include <linux/module.h>
- #include <sound/jack.h>
- #include <linux/input-event-codes.h>
-+#include <sound/pcm.h>
- #include "common.h"
-+#include "qdsp6/q6dsp-common.h"
+diff --git a/sound/soc/qcom/x1e80100.c b/sound/soc/qcom/x1e80100.c
+index c81df41ace88..6a91b3581c75 100644
+--- a/sound/soc/qcom/x1e80100.c
++++ b/sound/soc/qcom/x1e80100.c
+@@ -15,14 +15,117 @@
+ #include "qdsp6/q6dsp-common.h"
+ #include "sdw.h"
  
- #define NAME_SIZE	32
++#define X1E80100_WSA_MAX_CHANNELS	6
++#define X1E80100_WSA_PORTS		2
++
+ struct x1e80100_snd_data {
+ 	bool stream_prepared[AFE_PORT_MAX];
+ 	struct snd_soc_card *card;
+ 	struct snd_soc_jack jack;
+ 	struct snd_soc_jack dp_jack[8];
+ 	bool jack_setup;
++	/* Userspace-selected SNDRV_CHMAP_* positions, 0 means unset */
++	unsigned int wsa_chmap[X1E80100_WSA_PORTS][X1E80100_WSA_MAX_CHANNELS];
+ };
  
-@@ -327,6 +329,34 @@ int qcom_snd_parse_of(struct snd_soc_card *card)
- }
- EXPORT_SYMBOL_GPL(qcom_snd_parse_of);
- 
-+int qcom_snd_chmap_to_q6(unsigned int pos)
++static int x1e80100_wsa_port_index(unsigned int dai_id)
 +{
-+	switch (pos) {
-+	case SNDRV_CHMAP_FL:
-+		return PCM_CHANNEL_FL;
-+	case SNDRV_CHMAP_FR:
-+		return PCM_CHANNEL_FR;
-+	case SNDRV_CHMAP_MONO:
-+	case SNDRV_CHMAP_FC:
-+		return PCM_CHANNEL_FC;
-+	case SNDRV_CHMAP_LFE:
-+		return PCM_CHANNEL_LFE;
-+	case SNDRV_CHMAP_RL:
-+		return PCM_CHANNEL_LB;
-+	case SNDRV_CHMAP_RR:
-+		return PCM_CHANNEL_RB;
-+	case SNDRV_CHMAP_SL:
-+		return PCM_CHANNEL_LS;
-+	case SNDRV_CHMAP_SR:
-+		return PCM_CHANNEL_RS;
-+	case SNDRV_CHMAP_RC:
-+		return PCM_CHANNEL_CS;
++	switch (dai_id) {
++	case WSA_CODEC_DMA_RX_0:
++		return 0;
++	case WSA_CODEC_DMA_RX_1:
++		return 1;
 +	default:
 +		return -EINVAL;
 +	}
 +}
-+EXPORT_SYMBOL_GPL(qcom_snd_chmap_to_q6);
 +
- static struct snd_soc_jack_pin qcom_headset_jack_pins[] = {
- 	/* Headset */
- 	{
-diff --git a/sound/soc/qcom/common.h b/sound/soc/qcom/common.h
-index 37b185a4968f..2b1d30230d77 100644
---- a/sound/soc/qcom/common.h
-+++ b/sound/soc/qcom/common.h
-@@ -31,6 +31,7 @@ int qcom_snd_wcd_jack_setup(struct snd_soc_pcm_runtime *rtd,
- 			    struct snd_soc_jack *jack, bool *jack_setup);
- int qcom_snd_dp_jack_setup(struct snd_soc_pcm_runtime *rtd,
- 			   struct snd_soc_jack *dp_jack, int id);
-+int qcom_snd_chmap_to_q6(unsigned int pos);
++static unsigned int *
++x1e80100_wsa_chmap_from_kcontrol(struct snd_kcontrol *kcontrol)
++{
++	struct snd_pcm_chmap *info = snd_kcontrol_chip(kcontrol);
++	struct snd_soc_pcm_runtime *rtd = info->pcm->private_data;
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
++	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
++	int idx = x1e80100_wsa_port_index(cpu_dai->id);
++
++	if (idx < 0)
++		return NULL;
++
++	return data->wsa_chmap[idx];
++}
++
++static int x1e80100_wsa_chmap_ctl_get(struct snd_kcontrol *kcontrol,
++				      struct snd_ctl_elem_value *ucontrol)
++{
++	unsigned int *map = x1e80100_wsa_chmap_from_kcontrol(kcontrol);
++	int i;
++
++	if (!map)
++		return -EINVAL;
++
++	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
++		ucontrol->value.integer.value[i] = map[i];
++
++	return 0;
++}
++
++static int x1e80100_wsa_chmap_ctl_put(struct snd_kcontrol *kcontrol,
++				      struct snd_ctl_elem_value *ucontrol)
++{
++	unsigned int *map = x1e80100_wsa_chmap_from_kcontrol(kcontrol);
++	bool changed = false;
++	int i;
++
++	if (!map)
++		return -EINVAL;
++
++	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++) {
++		unsigned int pos = ucontrol->value.integer.value[i];
++
++		if (pos && qcom_snd_chmap_to_q6(pos) < 0)
++			return -EINVAL;
++
++		if (map[i] != pos)
++			changed = true;
++	}
++
++	if (!changed)
++		return 0;
++
++	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
++		map[i] = ucontrol->value.integer.value[i];
++
++	return 1;
++}
++
++static int x1e80100_add_wsa_chmap_ctls(struct snd_soc_pcm_runtime *rtd,
++				       const char *name)
++{
++	struct snd_pcm_chmap *info;
++	unsigned int i;
++	int ret;
++
++	ret = snd_pcm_add_named_chmap_ctls(rtd->pcm, SNDRV_PCM_STREAM_PLAYBACK,
++					   name, snd_pcm_std_chmaps,
++					   X1E80100_WSA_MAX_CHANNELS, 0, &info);
++	if (ret)
++		return ret;
++
++	/*
++	 * The core registers a query-only control. Make it writable so that
++	 * userspace (UCM) can select the WSA channel map. The card is not yet
++	 * registered at this point, so the control is not visible to
++	 * userspace while being modified.
++	 */
++	for (i = 0; i < info->kctl->count; i++)
++		info->kctl->vd[i].access |= SNDRV_CTL_ELEM_ACCESS_WRITE;
++	info->kctl->get = x1e80100_wsa_chmap_ctl_get;
++	info->kctl->put = x1e80100_wsa_chmap_ctl_put;
++
++	return 0;
++}
++
+ static int x1e80100_snd_init(struct snd_soc_pcm_runtime *rtd)
+ {
+ 	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
+@@ -92,9 +195,11 @@ static int x1e80100_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
+ 	return 0;
+ }
  
+-static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
++/* Default WSA RX slot mapping when userspace has not provided a channel map */
++static int x1e80100_snd_default_wsa_slots(unsigned int *ch_map,
++					  unsigned int channels)
+ {
+-	switch (num) {
++	switch (channels) {
+ 	case 1:
+ 		ch_map[0] = PCM_CHANNEL_FC;
+ 		break;
+@@ -113,6 +218,14 @@ static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
+ 		ch_map[2] = PCM_CHANNEL_FR;
+ 		ch_map[3] = PCM_CHANNEL_RB;
+ 		break;
++	case 6:
++		ch_map[0] = PCM_CHANNEL_FL;
++		ch_map[1] = PCM_CHANNEL_FR;
++		ch_map[2] = PCM_CHANNEL_LB;
++		ch_map[3] = PCM_CHANNEL_RB;
++		ch_map[4] = PCM_CHANNEL_FC;
++		ch_map[5] = PCM_CHANNEL_LFE;
++		break;
+ 	default:
+ 		return -EINVAL;
+ 	}
+@@ -120,19 +233,56 @@ static int x1e80100_snd_hw_map_channels(unsigned int *ch_map, int num)
+ 	return 0;
+ }
  
- #endif
++static int x1e80100_snd_build_wsa_slots(struct x1e80100_snd_data *data,
++					unsigned int dai_id,
++					unsigned int channels,
++					unsigned int *rx_slot)
++{
++	unsigned int i, set = 0;
++	unsigned int *user;
++	int idx;
++
++	idx = x1e80100_wsa_port_index(dai_id);
++	if (idx < 0)
++		return idx;
++
++	if (channels > X1E80100_WSA_MAX_CHANNELS)
++		return -EINVAL;
++
++	user = data->wsa_chmap[idx];
++	for (i = 0; i < channels; i++)
++		if (user[i])
++			set++;
++
++	/* Fall back to the default map unless userspace set all channels */
++	if (set != channels)
++		return x1e80100_snd_default_wsa_slots(rx_slot, channels);
++
++	for (i = 0; i < channels; i++) {
++		int q6 = qcom_snd_chmap_to_q6(user[i]);
++
++		if (q6 < 0)
++			return q6;
++		rx_slot[i] = q6;
++	}
++
++	return 0;
++}
++
+ static int x1e80100_snd_prepare(struct snd_pcm_substream *substream)
+ {
+ 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
+ 	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
+ 	struct x1e80100_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
+ 	unsigned int channels = substream->runtime->channels;
+-	unsigned int rx_slot[4];
++	unsigned int rx_slot[X1E80100_WSA_MAX_CHANNELS];
+ 	int ret;
+ 
+ 	switch (cpu_dai->id) {
+ 	case WSA_CODEC_DMA_RX_0:
+ 	case WSA_CODEC_DMA_RX_1:
+-		ret = x1e80100_snd_hw_map_channels(rx_slot, channels);
++		ret = x1e80100_snd_build_wsa_slots(data, cpu_dai->id,
++						   channels, rx_slot);
+ 		if (ret)
+ 			return ret;
+ 
+@@ -164,6 +314,40 @@ static const struct snd_soc_ops x1e80100_be_ops = {
+ 	.prepare = x1e80100_snd_prepare,
+ };
+ 
++/*
++ * The WSA channel map controls are added here rather than in the DAI link
++ * init or startup callbacks: the backend PCMs are created only after all
++ * links are initialized, and adding controls from startup would take
++ * controls_rwsem under dapm_mutex, deadlocking against DAPM mixer writes.
++ */
++static int x1e80100_late_probe(struct snd_soc_card *card)
++{
++	struct snd_soc_pcm_runtime *rtd;
++	int ret;
++
++	for_each_card_rtds(card, rtd) {
++		struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
++		const char *name;
++
++		switch (cpu_dai->id) {
++		case WSA_CODEC_DMA_RX_0:
++			name = "WSA Playback Channel Map";
++			break;
++		case WSA_CODEC_DMA_RX_1:
++			name = "WSA2 Playback Channel Map";
++			break;
++		default:
++			continue;
++		}
++
++		ret = x1e80100_add_wsa_chmap_ctls(rtd, name);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
+ static void x1e80100_add_be_ops(struct snd_soc_card *card)
+ {
+ 	struct snd_soc_dai_link *link;
+@@ -203,6 +387,7 @@ static int x1e80100_platform_probe(struct platform_device *pdev)
+ 		return ret;
+ 
+ 	card->driver_name = of_device_get_match_data(dev);
++	card->late_probe = x1e80100_late_probe;
+ 	x1e80100_add_be_ops(card);
+ 
+ 	return devm_snd_soc_register_card(dev, card);
 
 -- 
 2.54.0
