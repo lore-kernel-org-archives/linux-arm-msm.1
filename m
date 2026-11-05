@@ -1,78 +1,40 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793876105;
-	b=DStRcDWY8CNhb32jiQkprrl1xKADWSmiubZF1fhsEqtzzjSmUYlmEszxBzU6+XjAx1Tk
-	 f7mFHrAGbSAtF/2a8sSGdJK1YsW2oHQ+N8Q2X9rHMDa9TUpTRRSkIU8lTFCUcAz3JGUSR
-	 4dMMMn/s96Hub8IbRLYRKb570f0v2/GG4jZS5kSs9kjTk9GstJDVA86056rzkTbSg3vx+
-	 Oo6xAZF6SvxggJ794+iR+S1AlmDMsN9cUnIs85ArE3IjzYwn2lJmtCXU0KjAVIAPzncj6
-	 5E3/DsQkqbsqUuXPdB7bF416plCH+6H2q6516vpJeuqL4jTyA0Fgv0szihMUXCzjNZw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793876105;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=H3WRmxg92eNyeZbuIxB9Tvu0SSWoaGEzh+UrG7Xwc+Y=;
-	b=B3XVoE65rhD1y3V/0NQaKaBKqRPpx0EgEoHMJmh206exClgbGzyiCN8WSjSXccT6Q/sH
-	 wzvyNdN2VYqK4eOtP8Y7SAoYx6o5mYBORcsDg5phSvbajrFtb0O2ybCv36+CocyQzoJwe
-	 RpAdlATSzzNqMWML+tBx0/OkQO6n7k7qdawwSABlEr7GaKXjbPXh7hdNrOusODYK0vj9/
-	 njhyXF7rqTPB6M6gdiQNxAgAqZ1QjksAf14/XYhMD9UlAEmDyM/b53a7h3It3syd6GWCq
-	 m4iB/RglhMRaoxuv71YNH2LV/q3CD5HzD4twcLfoaJ6dbXhkRtj4PEH64bt/wl9gwxA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Lc8whcbE;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DACA7606A328;
-	Thu,  5 Nov 2026 10:55:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Lc8whcbE
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793876104;
-	b=E4W1E0r3t+vqGGjS8xl6qIUsxOi66OYH1TVwxFsVOY3aFamnQUzLZUlZ7bNX2mcG1pRT
-	 N7aBYF3uG1HrhFDRe5Sb3joyXZ/4ypBrEyZYF2LXs+0s6H67zIg4vdYNVI2pkXJNznR6b
-	 eFHHzrINxyvjfy8azFrOsf7nCSRgJMrf+Vzc3+/rn2C3qVA33Ufd0LWlmXH18Mgk4kR/I
-	 Hn6xFZGX0GGjzERAWVqlUa1PiR/Kr8EBtzZVXoHgR46/eR2/HYcDkVJ6S5AszeUFQWHi/
-	 i309D0BMLjKnM5z0ROaofJQJLrZb47ipR8HwQb0mE8Cr5jyh+Rxa2jlQ5lH3jFXu8eg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793876104;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=H3WRmxg92eNyeZbuIxB9Tvu0SSWoaGEzh+UrG7Xwc+Y=;
-	b=msNUVs0ADCVamsYpa6CuoOYI1HipU3ougyfPuaCmuyl+IqnX4VzeHWlj6dd5Iu1suqXB
-	 M/ziCvFJ9rJURlv8Wx5x/nzI7503z272DpxHsP/7NEcbbzAdDLkuPWvWwnxyL/f/jiEDL
-	 jhBGZUhH3Osy4otwmFrwJm0pqGcgwEcjqEI2AmocBh5yXzBYzxu7uXvIfnavWgCa7+gvZ
-	 ljDesUJHwujinbinYnx+nHYDZV07nDgKxWG7PtSPm1jIfdWrDxDEqcxlkU7M46VedcGxf
-	 IPCvzU8tGZ0RVxjbhH/Ukm+NU5TA40CwioIIFlti4nAlNLIJOxyZbmGrDyLWSPyLePg==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.31.26.27
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793876168;
+	b=kNoJYAxi8F2VnmM2bF5B7HQuYIAqYuNvQBkXzUyppvtbwXdZtXuFnXtXhWUa9r64Hq01
+	 /Y32MtRfcChkEgYUTY4m4r2fQF8dEN2ABiAs8rmDOwwwmu3M6r91vnHMGhZ8kJ+VkZzE7
+	 a8jFl9y89eTWKWrsCOZ0YhXbeinC4GHH2ocTfd70nFDiFiXMjDHb7RVGSKQ847O1oXhzb
+	 RzduXNoeczKNFNJyQ9OkBcNux5RH0roHYRiI8sCj8ZWPoNzTgsUZLe6PSSyh4yZPXksIk
+	 vpDksy1Q/s3eEo6zoIkqoimAmNhQxz7N+vm/xMZJa4hAwMjT1n5/8FO+qO8ousEpwGg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793876168;
+	h=DMARC-Filter:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=r1Z6oKjUEthpj1h9QnDMmoAieaLmf3njhdsaYkuo8fU=;
+	b=W9na9Zfj+ZCFNL3PaVJIvqTIc1byQ+pcRpG+MRDQTD2nvnAfvN+VrukQsJ+XRzFNzIIe
+	 Yb4wMu2wuhGiCNzeMUWvBRRPyfA3qEPFKltb4c09FkIbHtIBVtNn9+erlGm9jCKKWxRH8
+	 tlZS9j865qWBzoMFZ9dMsYuEFRtO4E/IUxjtt/A8KXZs6mXv6y4wlCVN3bjt3pKiialzm
+	 h1PmDMIaM30y/o2zXYR6jqOtLyOvg6e7T0h/d8L/PlquqipR8460AGrYbm7aU65pASUoB
+	 w/zMv0OkawwjQP4bRCYttRFPxjt9sWBAHX7fD1xvg37WedjzSGAQdvyMABQl02UTb7g==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=rudorff.com;
+	spf=pass smtp.mailfrom=rudorff.com;
+	arc=none smtp.remote-ip=193.31.26.27
+Received: from rudorff.com (rudorff.com [193.31.26.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 811681F00A16;
-	Thu,  5 Nov 2026 10:55:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793876104;
-	bh=H3WRmxg92eNyeZbuIxB9Tvu0SSWoaGEzh+UrG7Xwc+Y=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=Lc8whcbEaVvHlPX5uV+s7TDCgVT3ce9/buWo1jd2jlZaTZlG2cPz3Qf4De1Jd3sd5
-	 /z54OYWVfyYVSIm5trFarxI+0DYQoPNpYoTaB/OEo1rQC56n0YjzAvbDcY9kJCGBGZ
-	 5V8YjQXij6v9Brmegi5Awvh0UXAlKqWzWnXbEtr1gxDDeH4yH5JJyHeqAd2oS4qGm+
-	 gj9U7K8cfBwsHJC1/V9sb+X6GBkOeNBjaxb/nDI9zalXV2fvaLM1+00SmNi4YHsqcR
-	 vgNeChGMYE7H+qe2LgLhO6eo+sOSRLvaF0YILj/FMRER9s1cMXLKk2CZd21gpQlkQx
-	 pSLPTgLCZmMIQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 00EF2471B9;
-	Thu,  5 Nov 2026 10:55:03 +0000 (UTC)
-From: Muzaffer Kadir via B4 Relay <devnull+muzafferkadir.mainlining.org@kernel.org>
-Date: Thu, 05 Nov 2026 13:54:05 +0300
-Subject: [PATCH v8 01/11] dt-bindings: nvmem: Add compatible for MSM8952
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B2FC606D824;
+	Thu,  5 Nov 2026 10:56:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6B2FC606D824
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rudorff.com
+Received: from [192.168.35.184] (dynamic-002-211-221-196.2.211.pool.telefonica.de [2.211.221.196])
+	by rudorff.com (Postfix) with ESMTPSA id 2F293406C6;
+	Thu,  5 Nov 2026 11:56:03 +0100 (CET)
+Message-ID: <ed75d869-c51a-457e-9cb3-6250029d4ec7@rudorff.com>
+Date: Thu, 5 Nov 2026 11:56:02 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,82 +44,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261105-msm8952-initial-support-v8-1-311ae8e8f14b@mainlining.org>
-References: <20261105-msm8952-initial-support-v8-0-311ae8e8f14b@mainlining.org>
-In-Reply-To: <20261105-msm8952-initial-support-v8-0-311ae8e8f14b@mainlining.org>
-To: Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>, 
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Wim Van Sebroeck <wim@linux-watchdog.org>, 
- Guenter Roeck <linux@roeck-us.net>, 
- Rajendra Nayak <quic_rjendra@quicinc.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Jassi Brar <jassisinghbrar@gmail.com>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Krishna Manikandan <quic_mkrishn@quicinc.com>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>, 
- Tony Luck <tony.luck@intel.com>, 
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
- Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
- linux-watchdog@vger.kernel.org, linux-clk@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
- linux-remoteproc@vger.kernel.org, linux-input@vger.kernel.org, 
- Muzaffer Kadir <muzafferkadir@mainlining.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793876100; l=867;
- i=muzafferkadir@mainlining.org; s=20260816; h=from:subject:message-id;
- bh=qM3CNGW9XVhnq0JnblgwuEQx6NNHy6/EPHp/pHMUtRM=;
- b=R4aPPjpYbjg49f2JEZjk0oKVlZv5pGjHlQVwVn9/Qe9EzSgPwMKNrkwvTcBIzkzCUmXS3FJnK
- gUM7dZxY9W9CJudpJ4HMxxcngr3t48gq0hEMizQaycOTEcaWDw5nw5T
-X-Developer-Key: i=muzafferkadir@mainlining.org; a=ed25519;
- pk=4zkv4suQ3cYcO4Z7CrV8JSSjEGLBGepUtvQCFjgnYIU=
-X-Endpoint-Received: by B4 Relay for muzafferkadir@mainlining.org/20260816
- with auth_id=954
-X-Original-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
-Reply-To: muzafferkadir@mainlining.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] iio: light: gp2ap002: add led power supply
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Linus Walleij <linusw@kernel.org>, Jonathan Cameron <jic23@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20261104-iio-light-gp2ap002-v4-0-fa1cbaad2ce5@rudorff.com>
+ <20261104-iio-light-gp2ap002-v4-2-fa1cbaad2ce5@rudorff.com>
+ <autr3DH6UZLY_ys4@ashevche-desk.local>
+Content-Language: en-US, de-DE
+From: "chr[]" <chris@rudorff.com>
+In-Reply-To: <autr3DH6UZLY_ys4@ashevche-desk.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Hi Andy,
 
-Document the QFPROM block found on MSM8952.
+Am 04.11.26 um 18:31 schrieb Andy Shevchenko:
+> Missing '---' cutter line which makes this patch invalid and it may not be
+> applied (your SoB should be a tag and it should be last in the chain; you may
+> conduct an experiment, take the message ID of this email, run on a clean Linux
+> kernel Git repository something like `b4 am -s $MSG_ID; git am ...` followed by
+> `git log`, you will see the issue).
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
----
- Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml | 1 +
- 1 file changed, 1 insertion(+)
+Sorry. I ran checkpatch.pl and b4 check and they missed my mess ...
 
-diff --git a/Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml b/Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml
-index 566304ed4c78..646f2e8dcf4d 100644
---- a/Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml
-+++ b/Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml
-@@ -37,6 +37,7 @@ properties:
-           - qcom,msm8916-qfprom
-           - qcom,msm8917-qfprom
-           - qcom,msm8937-qfprom
-+          - qcom,msm8952-qfprom
-           - qcom,msm8960-qfprom
-           - qcom,msm8974-qfprom
-           - qcom,msm8976-qfprom
+>>   	int num_chan;
+>>   	const char *compat;
+>>   	u8 val;
+>> -	int ret;
+>> +	int ret, vdd_volt;
+> 
+> Don't mix semantically different variables on the same line.
+> Try to keep reversed xmas tree order.
 
--- 
-2.56.0
+So like this:
+	...
+	const char *compat;
+	int vdd_volt;
+	u8 val;
+	int ret;
 
+
+>>   	if (ret) {
+>> -		dev_err(dev, "failed to sett VDD voltage\n");
+>> +		dev_err(dev, "failed to set VDD voltage\n");
+>>   		return ret;
+> 
+> Unrelated change.
+
+Yes, but I'd still like to fix it. Ok, if I mention it in the changelog?
+Or shall I drop this?
+
+regards,
+
+chris
 
