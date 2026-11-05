@@ -1,47 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793864038;
-	b=yaGj1I8aLr0h96JZ/8TRGSmwMjSbZnt959T9hv5APffKNyG9LGjYBvSmNdoe/BAx5i2s
-	 A0uQGnn1JQ7W7/0n7STzI08z1utjjRs1eHKnOTxu3zjk64V0TeDU/n2uyO5qslGBW1OR9
-	 JiaIh7w7Veliq3aFF5MjAL9QMgOLSf3khQE27iuk7fvV39d+hey6sdvQBGA2lOvj6i+vy
-	 W6aCNPBeYySuMTLJlDBa+pkEmL+hNkt9rY0OjeqiCfS+KPMPT8L2LnJcuR2KENi5x3aZd
-	 J4y08Fro7BDhtDwl7KyGF8+9bttcJgJ1lAEigZ2hl0TRRx5Anjhe3r82s94y7szB9oA==
+	t=1793864578;
+	b=kv/7BCHCh5VjVGAkMS5qIQfu1yZ3OY2pVbPrgOjf0GSEd+rNzGSAIwDecvnNpgI78Y8a
+	 OM/fiCEuU6B4Y/ghyDSTlmRfMa1DKattPLuvfcHvZdkKkZtxPIrbCH8Gr4vZXfAvmNU5L
+	 FVdgCyTw92necYWkBPONcgIs0qIoTNY/EUdiRX1tffR+wjdUpsJRDOM73bueMv8fjvqO8
+	 a7LpSOq1uQGxJQERdgEAtECn+lUcIXztWHU5HM7Ugf+YBjOLYi0Er0RSea/Tk6kE/kHWs
+	 luL+GTOIzdLJnJkqrN+yuS0b2wyl8FLyjm688zZUPXmKxaZgS1+Cy7VndCkb+WDtgCw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793864038;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=B19nIV9K0xEPo2iAEcn8v899eLpDp0L1RtVwQuDIX0w=;
-	b=1Z3xgZMFH+Ut9Bzd498+tZkeYJ94+nA9pSQ6RqwGFdiF8/SgwwZj+FaAhwFOC3Ke/iBh
-	 zawDyjEN+IAy/2RHFpHSzqSiby1Hxofjme6Wl2JNjge+AQ+MzLZhAiJe636K3ZeDDzrHd
-	 i1chA1gNB5mYc1rqh4bKGoN2RH8+BGMV6v898TT34YuIEiamW9ITUFSR6JB1ngFZXOTd4
-	 bq0jraCWyiSsomEblzMCsFy9qm19HGXrm/YxY/cxSy60QLNt8HmYQr4EmBjsecTPryhcO
-	 b00kJ+jTbqDRQN+1vwVBs/Ys5jYRYU/aVpiCAA2N3eHFxp3SjMyyUDCLSfFAV65yT3Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793864578;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=e4YnTjIG+CDujm7r7VgOZzRW8vqo6YF7xuCzjl3AIV0=;
+	b=uaLgRLj9CC8YVTXKCi4pz1rRuLCmVKDAQI/pwkvMt3VCn0ZWkH0fSmH4O9uaLu1jHT0Z
+	 LD6r0F/Ofa2DAAE9Aj67HQSrRmmat3jYZ7ofUpJGrm5zC4rKfIQsYNV0xW6aLLfQ1jHv8
+	 DL6wpeC5L7/wsYX8Cqwyh7SlP/7QGbZOxrPuCGOqdOapD6z6cloyh/RFQDEpW/FT5uLyC
+	 tUekyccR8B7hWlJmIfBKzZd9cW3Q8Bq7e9VaKodoh3ZGYhDgMIioShhC+71UB1x0TNzMU
+	 F+pVfVdNe0q4nY2mIIMkYk6twFReuulZTi19uxmgusnI3srh5sPAh+0eZAVb7nsJbhw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j+QIpQec;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lf5ovjXP;
+	arc=none smtp.remote-ip=209.85.214.170
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B29A9606A31B;
-	Thu,  5 Nov 2026 07:33:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65BD2606A329
+	for <linux-arm-msm@vger.kernel.org>; Thu,  5 Nov 2026 07:42:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 65BD2606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j+QIpQec
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E8421F000C1;
-	Thu,  5 Nov 2026 07:33:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793864037;
-	bh=B19nIV9K0xEPo2iAEcn8v899eLpDp0L1RtVwQuDIX0w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=j+QIpQecQ5scdMWhDQu5H5cjFkYW1MIwRBJeMnGKJTsS+H/k2I2HWpq2y9BTXjb6n
-	 9Zxw1cx/GxsXgWdBLDt3IeN3m64YlI3WtR3zOUYue3FtH0pkzQj9u4KQ4R0B028fVS
-	 EAgh6sd5IymsR8cNOzKS0JuF5IIcde2Jb2Kj/R/aP1UTiT5sl6UKoZwW/IQOoMwuJH
-	 jodr3XIinMzVMgn2KuKvGnrDXqJCpABQBGA6Sl0uDJiAyq+SPb/7JEUzoLv/kCvyaR
-	 lYG4zgmphBViQ2tqbwAYyaofMaD3LsShDY1BMxl2lMHIYCQJ0inKFQdwyT05yVzrhJ
-	 TF+RRa2S4menQ==
-Message-ID: <fc9acaf2-f214-434e-bbe1-88e8e1af7683@kernel.org>
-Date: Thu, 5 Nov 2026 08:33:49 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lf5ovjXP
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2ed0b03ce3eso5430235ad.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 04 Nov 2026 23:42:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793864578; x=1794469378; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=e4YnTjIG+CDujm7r7VgOZzRW8vqo6YF7xuCzjl3AIV0=;
+        b=lf5ovjXPfiAwfRtwPVaQ/Y2DiVU/A608Fb2fb9QbOIArj2CV3NIcqyYnedI8inTMfE
+         Z8oBVQk/nt/o8B6ieR01uqnGyhVYvwBNMZBAL2atEyhil5qiMrAXGPCVrhMelX8cABaK
+         ywPFOqm6HeEuFOsOvtnblmyfbzzSmTfR0t/pPvIkMCe0YCaRgJ5+Aif5ZGg7pwCSXb2I
+         pqKLj5GVv9oOsqUi7k51ITOlgA+ZsrnXf5d+5xaKOhFbDGi9oj3x1yvPWa87Qz5BYhws
+         ifpUhREziSygdoeAeTpL1KBBkedn7Pz5gbgH2rCMYYasVX/puA72ianyJVKc59KwRQWA
+         9oSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793864578; x=1794469378;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=e4YnTjIG+CDujm7r7VgOZzRW8vqo6YF7xuCzjl3AIV0=;
+        b=dXwE3ZCy89HHyrEqCYT192GjsWjaqxs85UiQpEX6wtIXeAwr6N/2M1oukD/x19UZ7i
+         uH5j1m+KHQXAqqiUI6QkYesWJdfLNTBmykpLkU34KQmeMfEldesiFhY19DAqoQ5Hu9nE
+         qPR7ANx536hXXMS26Jdl2ZE9/ik+M9gYIx/XT1RqU8k0hRJ67SWf2XF/0e3VCK2WFYfL
+         bLZWsuxKeVF2z0oXvbFIKaFxzdCgTEK2Vn6o/dNr00tgmaYfPuJVK2R1fj+lzc7dM62Z
+         g2BN489d+PBdk8dDSffQqE4uccfgQBAzr8qvRLepoYboA7M8TH9A2uEowvf5wWmQbR6t
+         9H6A==
+X-Forwarded-Encrypted: i=1; AKwUvBx/Ob+AhTbPYcGfdoljeB1yA/hzQIpOc04Y9i7zYmlbeAtWqX+pbjtjo/cyJ02LrvBpovp3vCi/b92dlAuL@vger.kernel.org
+X-Gm-Message-State: APuU4Z9QzVhP6LLcVpQInrXFGKJpTofACVCC+8RVz32WvhElBwFKGuP/
+	GRntLYkk2I1lxDSMNMuA+3l1fsmQosikQkYqdDJHums/Xz5uOycrXLg=
+X-Gm-Gg: AYBFou22GtmY3RtB57Csm1Eq0QdvxH95M4C8YHD2805TjqaEcP4xGMSaMmKz95o+L/3
+	yQusVPuEq8O3JTkAGUWUHhr2/sK7qzJePUpNOHGpyKTUVckrLdX4fuJ32nvE2GnphWCA5AKhV4v
+	TbWDhsoDmU5KSmWryfq8VUcHYbrluWtKbLDTw0UnZS0Krq5zHNxREBLP5LOMFtuKlklhuenX73P
+	konJ3VTVif6ELDak0c4KZVh8rnJ/Ftm/akLsLyKaU0kj359cRbUQL+FhaSFBtrsnfqrRCcm7jbf
+	KO8LwKX2yCyp2QjPIWzX8QQtTtheUSkeNHGlRguzS/aMOB4DWJ2NTARgb5Lcwrrc2RPa5YdhOVL
+	Gd9AGwqTReE45Xh4vmLpRnRDKjHcP4OTPZt5ldaxKAP3lNuJWP8VyIWYpUONFS4OFIPHqxx+muh
+	5lvej5HXNUH9mBh4DK45q2OU036Wh/ONqCpECO6JJSfqbXWNWLDjDEOvv3jHp9l7c0bjz2fCzWT
+	h4KaxG3P5RTe6MhR+dtRCgtFEIxuYbYt679yvopCHxOfNjnMVLP437UsA9xh4BhBs/hmCcPGyWB
+	sEeFapYYUe4igaDW9cLZM6eg1yoZw3YhHyMsSXTxs/OKvKgG1ASqNcvDHA==
+X-Received: by 2002:a17:903:3205:b0:2e9:5714:608b with SMTP id d9443c01a7336-2eb364b11ffmr182159575ad.34.1793864577662;
+        Wed, 04 Nov 2026 23:42:57 -0800 (PST)
+Received: from localhost.localdomain ([202.51.247.22])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed091c83d5sm14942345ad.66.2026.11.04.23.42.55
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Wed, 04 Nov 2026 23:42:57 -0800 (PST)
+From: Yige Jiang <yigejiang86@gmail.com>
+To: linux-i2c@vger.kernel.org
+Cc: Yige Jiang <yigejiang86@gmail.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Stephan Gerhold <stephan@gerhold.net>
+Subject: [PATCH] i2c: qup: Release DMA channels if interconnect lookup fails
+Date: Thu,  5 Nov 2026 15:42:44 +0800
+Message-ID: <rc-review-20261105-vc-48-dbf6a486c74f@gmail.com>
+X-Mailer: git-send-email 2.50.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,100 +97,51 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] dt-bindings: media: qcom,glymur-camss: Use CSIPHY
- indices for ports
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Suresh Vankadara <svankada@qti.qualcomm.com>,
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-References: <20261102-glymur_camss-v1-0-fcb619fc7319@oss.qualcomm.com>
- <20261102-glymur_camss-v1-1-fcb619fc7319@oss.qualcomm.com>
- <20261104-real-nebulous-ostrich-017e92@quoll>
- <72064a9a-1b2e-4c24-99e2-2cc15a8dd7f1@oss.qualcomm.com>
- <a2d3190f-bfd1-4548-aba9-a186cfea878b@kernel.org>
- <c5af7192-c923-4fbc-bbfc-7f03e310fddb@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <c5af7192-c923-4fbc-bbfc-7f03e310fddb@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 05/11/2026 06:32, Nihal Kumar Gupta wrote:
->>
->> What is the problem exactly you are solving?
->>
-> 
-> The problem is that CSIPHY4 is connected to CAMSS interface 4, so the
-> graph should describe it as port@4, not port@2.
+qup_i2c_probe() acquires both BAM DMA channels before getting its
+interconnect path. If devm_of_icc_get() fails, the direct return
+skips fail_dma and leaks both channels, including when probe is
+deferred. A later probe can no longer acquire those channels.
 
-Nothing like this is explained in commit msg.
+Keep the reported error code and jump to fail_dma to release the
+channels. This avoids the clock and MMIO cleanup, which have not
+been initialized at this point.
 
-> 
-> The previous port@3 description only worked through the X1E80100 resource
-> table indirection:
-> 
->   port@3 -> csiphy_res[3] -> .csiphy.id = 4 -> CSID selects CSIPHY4
-> 
-> New standalone PHY path:
->   port@4 -> no csiphy_res[] lookup -> port number is id 4 -> CSID selects CSIPHY4
+Fixes: d4f35233a634 ("i2c: qup: Vote for interconnect bandwidth to DRAM")
+Signed-off-by: Yige Jiang <yigejiang86@gmail.com>
+---
+Based on linux-next next-20261102 (2637bdec0535).
+Compile-tested: arm64, GCC 14.2.0, W=1, CONFIG_OF_DYNAMIC=y.
+COMPILE_TEST=y.
+Baseline and patched target objects built from this exact base.
+No full kernel/module-link, hardware or runtime test was performed.
+AI assistance was used for analysis and patch preparation.
 
-Then this breaks existing users, no? Anyway, what stops you from having
-there proper mapping?
+The error needs an interconnect provider failure/defer after DMA setup.
+No in-tree QUP I2C DT with the needed interconnects property was identified.
 
-Did you find any existing practice of numbering ports logical numbering
-in this device, but some other logic coming from datasheet? Where?
+ drivers/i2c/busses/i2c-qup.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/i2c/busses/i2c-qup.c b/drivers/i2c/busses/i2c-qup.c
+index ce30634e1f40..671bc41a5abf 100644
+--- a/drivers/i2c/busses/i2c-qup.c
++++ b/drivers/i2c/busses/i2c-qup.c
+@@ -1786,9 +1786,11 @@ static int qup_i2c_probe(struct platform_device *pdev)
+ 		qup->is_dma = true;
+ 
+ 		qup->icc_path = devm_of_icc_get(&pdev->dev, NULL);
+-		if (IS_ERR(qup->icc_path))
+-			return dev_err_probe(&pdev->dev, PTR_ERR(qup->icc_path),
+-					     "failed to get interconnect path\n");
++		if (IS_ERR(qup->icc_path)) {
++			ret = dev_err_probe(&pdev->dev, PTR_ERR(qup->icc_path),
++					    "failed to get interconnect path\n");
++			goto fail_dma;
++		}
+ 	}
+ 
+ nodma:
 
-Best regards,
-Krzysztof
+base-commit: 2637bdec0535a2044cd830eba9a79363651d9043
