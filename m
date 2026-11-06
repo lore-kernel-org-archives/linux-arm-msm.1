@@ -1,99 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.179
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793990633;
-	b=htleR7GEZqil3szbVPtB9ciJgEjXewMVDlX/24QazZoT56Z1Rb+WywvZp3x/uN6uQBVj
-	 GnHJkIHGX/TSs8TfPtVHZhdNuS3JpcnwqHKSAPFWeBl/TlEl9zwDJ9Ta9x1qVozF6MnJn
-	 7KyTG1geHBBNVyfnEZbLs/eBfWsUwGK2OcMoo2PtVi8d/cfN6aOlYnJtRCZbAhi0aeyc2
-	 xWk06WFs2JTxl9DfN+exb56oeTWTDAyE44tI5jQl/PcwKic+JZiInbVufkdlsVMLyb+W6
-	 pUJtKwrisw9o8e9MVlYjf1/OikxmDFENVTju5ZBq0LI5m4Qvtx1rjmy9HCnkYS4Tt2Q==
+	t=1793991077;
+	b=0VxLDOqT0nfodzVf2poudw/WQCfoVbI/JZdzDKnN7e/IMecmaYSE1o8xqey0GQHzmD/n
+	 iU+ODN1JdEjMPT3Y1awr20X3weHaZ4jhIR5apBDdVLh2kXYFwq0JG6qsTz/u8C9kat1mO
+	 LyTulKlQpiT7YLV9aKWnb2uB9eiOf71/eYQDrBamLekW0/NbkiGhxwmUM7uvdlOo89ZDi
+	 avWN5XZcZT5v1fAkk59c2LZ0QnaXcL91DDxUPU6igTNVoWP33OL8RopL3FmIv21wK+yuN
+	 MbLVPKS9C3l31goDuWUh5s8ie8a1waJOWI86ZRcppOWYh4uXcR4mY+3Uw69XwJ8xAmA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793990633;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=V+8S8+cfVySobIuEWLwG5yyplz+yBADfrmzT80ly82k=;
-	b=DINuMMRzE0kJrc4QfUCBLOazAqjc732NiEgirWB2Hxp5r14u8P63nrYqq1N9UW4fwpEn
-	 g7PN7GhTM/QKKRzjaHW3jE1FSkdWiILGHBLlzw3cx+9cGCE67rELAJYJ1BTODFvy+v0PA
-	 7Qyvuf1zLFCK/Ebcm31ToQzbw2DfPVsKQ5Ap5w7ekiZhILp+xWrVydiefm/JGD8VRAdiQ
-	 GvmAoyle4n3oXvHCMrnTqEE8I2OY8aujojy3RBZsT/OengsiOiE46EENixwPM1W6IrRM1
-	 FY7LTURFlUIvSg59AOl4gTEYUfy2ooH0cn6RQWnBgdKVjvbhknY2nyL/TGfYd5UdCxQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793991077;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=x7k6+irpFO+kuKSMRhYM/fUvtg+NGs0wJW0nzxfmETk=;
+	b=hKAJpZXC9WnTOzVjpCok4Lu5HaS2BnpeYhNBd1scMIqjC2rdREdLdRUYMK0pWrGEg2Zr
+	 9q79CNAEcU9azgNIf3HzK9A1pwfkN/N74nVhJstkH5kMfuO5+BGiLND359sdhJqbvghJh
+	 BfGOCc+jaXl3qiXiFvsnxtluYf5DuIhCPNaNSIAhKsf8G6/xaPYrulLxuGuZ8/eCnKdxT
+	 yMd6gDb7jAJOwk8A3hgsN/xTyLSFFCb0JugWzZtN/pAFqumzGMC9EupdDYEq9jdxNfSKa
+	 5tyZdjTB3hcPIkAl2Sx26ikjw3aJJvy88xQrQxCQaUFUYOZEuMbr8zobnF18KCOgUrA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hLUt8Oox;
-	arc=none smtp.remote-ip=74.125.82.179
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e42SqN0R;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6F62606D838
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 18:43:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B6F62606D838
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 481DD606A326;
+	Fri,  6 Nov 2026 18:51:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hLUt8Oox
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-3645f0f3fcdso1588017eec.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 10:43:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793990632; x=1794595432; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=V+8S8+cfVySobIuEWLwG5yyplz+yBADfrmzT80ly82k=;
-        b=hLUt8Oox1wh+RjoZr4soKfhuHh/efc9x9XCcVBYW0QcvUiwa2YY1pL35ARccV2i0o4
-         FwF8RyC6rYr0xQx5cEi756PL0wOLo9s+GrN2Lrc4SnZzQfZ2XzrhfY4UWj5erNGeVZjh
-         mW671qX5TKHR5fN1JPk1n9a9b4wSnGvjoFPf2rMdO41BSMjTObGWsd2oTxO1jyr2Foy3
-         tBkdUavBMTWrVs/SWnNgADkv2nZPYotHLXnszKEJ5WuaaRQ10FSGBcL8+FdmWSUukYEB
-         p4uU8/D1M/frnSvLA057OEh+5whQd94RHg5Yzsi/WJvHh35jl35xkNZm/+w9cg7/OXZt
-         xqOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793990632; x=1794595432;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=V+8S8+cfVySobIuEWLwG5yyplz+yBADfrmzT80ly82k=;
-        b=X9Dq1uXmd4iO2652qD8AzsT70YkLKpQEpQ7K/GKWd9fLm4tHwEnOOdz064ErDAKhtf
-         huJNYw5oq1w0CVF1tDKysaO0+yYQ2KASfT09nsyugVbn4ItcmYPhDqAFjhjJZ4UfsYzZ
-         VxEbFi8oBYt8QOktzDn+9MpBuK3b9/mgyMJ2/7C8qn0IqVIMoP7ECwZ0mH1Adpcm6/lb
-         QXL/wyMQI+0Xnwn4RCoKPap1R6H4NOeM4uTyRi9X8yJydExgj4BkjiYqnlB5xLrunBcg
-         3bnPA0GVAsDNq98LqWVmQJCcXosnKdoAM7PbKzIXrNId4evc4aP4RoQhGVjCPyMGUJvP
-         p3Sg==
-X-Forwarded-Encrypted: i=1; AL+hErFNTmkB+50k2W5UJtLpdwiOsC5yQ9Iq05y9eSRgL3cm0sd9IDGIwhmvHlJkBOB3uFaGn+acFmkb9fYh5AYC@vger.kernel.org
-X-Gm-Message-State: APuU4Z+5wbPnBcJM/SxwunvWPZCtOSzADFOSOBUzCGiUV+BlBdSzaCKs
-	tsgc4r0h0/MifGRRc5pPvhDq9xZq16niaMy/ZJLVbtlZ0erflg0VU6f8
-X-Gm-Gg: AYBFou0XWqo8z3JXchU+5sklng5nmFx2nvuJGTeaXtbetc+lVAlb4kZUEzoo/B8SdUv
-	i9UnHySBse8yiTd65AmuqXtmWKqNFlUJwtEu0JTyUc3A+aKNYfBFd9HWftLHOCBfdz56bhiqVF3
-	pQFwZNKT20pQVNsEIa99V/eH+pUduhIbHLUrCQytexUyW3rA9gQbI0XVBoxbGLORg1TjT4Az/Io
-	OUguHo0gadK+8Z62HaT6RK8CqPizkeymPEV/aoBGW8rE17ARpKzsBo1VxXZYkF35YEM2k/lj49X
-	vxbrDpzipkWP4c18E6Z01gXw4MAoULVk3JqQvHbx8T4T4LxM/ZjyXieio7CesNaG7fv7oXr525G
-	tIl2y4jHrdor+U/FU3oYPfdAJOea7x2epQ+uU8wmF6kyQZKQAVQUdscfEb2hxowtDXkvb/W2bno
-	jwpeHBT6synouU6Dvo6CP5W721d/FI1XuE/7eKZJetKGOkeWlk8qd5g0GBnSQdkcGlX/QRJ1rU9
-	8BVkZeX1o9PhIF8GWxeA9j4cKYerFq8wsbZ214g3eoH3PKa3kGJHHxR8dCTzNX8ca0xMwaF1o9v
-	wXTpJSZRp+gf44jHkY5v9nYg1Vrp
-X-Received: by 2002:a05:693c:839b:10b0:36c:a42d:9bc9 with SMTP id 5a478bee46e88-36f76023a00mr5131720eec.25.1793990631801;
-        Fri, 06 Nov 2026 10:43:51 -0800 (PST)
-Received: from JMD ([2405:201:d028:10ff:eceb:5028:6b10:da7c])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36fa9aea414sm8278073eec.16.2026.11.06.10.43.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 10:43:51 -0800 (PST)
-From: Atul Akella <atul.akella@gmail.com>
-To: andersson@kernel.org,
-	mathieu.poirier@linaro.org,
-	sibi.sankar@oss.qualcomm.com,
-	quic_srichara@quicinc.com
-Cc: linux-remoteproc@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Atul Akella <atul.akella@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 4/4] remoteproc: qcom: Fix bounds check in wcnss_da_to_va()
-Date: Sat,  7 Nov 2026 00:13:11 +0530
-Message-ID: <20261106184312.100-5-atul.akella@gmail.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <20261106184312.100-1-atul.akella@gmail.com>
-References: <20261106184312.100-1-atul.akella@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e42SqN0R
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0CB71F0089F;
+	Fri,  6 Nov 2026 18:51:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793991076;
+	bh=x7k6+irpFO+kuKSMRhYM/fUvtg+NGs0wJW0nzxfmETk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=e42SqN0Rnw8QzZ9vOKRbLsR3sY5kOxAccXrVxgmgl0kBZhx5zOkdFL6HM4xDozJ9r
+	 K87JrYBqmhJv5CDolQNq5aunZwkV4QVixTJaaGLrRebeKDorM9TuPVjMEK4kwaTV/A
+	 +F0QUc0WZ36CUJkdD463VI02bw3ao6dnq2WQpyx+sogv9jmqGw25T0ZMRnhjauVYZm
+	 YZUtazo7cJ2DFVek+TwOLlrbWeP95e/o1nPZWQ3pbVeV6CNrQ4j6476XxgGiWQ8xyH
+	 q2G220UrPL5y40HBa6sqDHerln57smZrMpZ+lpEJad7bxEHnzd/05W40OQt4BTo4LU
+	 kxq3DMX5gn2Eg==
+Date: Fri, 6 Nov 2026 12:51:11 -0600
+From: Bjorn Andersson <andersson@kernel.org>
+To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bryan O'Donoghue <bod@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	gjorgji.rosikopulos@oss.qualcomm.com, hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com, 
+	jigarkumar.zala@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 0/3] arm64: dts: qcom: Add CSI2 PHY common-phy
+ providers for SA8775P, QCS8300 and SC7280
+Message-ID: <au4hdnq9rjM6RKG3@zenbook>
+References: <20261106030212.2811027-1-anusha.nandi@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,53 +61,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261106030212.2811027-1-anusha.nandi@oss.qualcomm.com>
 
-offset is calculated as da - wcnss->mem_reloc and stored in a
-32 bit signed int, while da and wcnss->mem_reloc are both u64.
-For a sufficiently small da, the 64bit difference is truncated
-into the 32 bit int, bypassing the offset < 0 underflow check
-with a small positive value. Additionally, offset + len >
-wcnss->mem_size can itself overflow when offset and len are both
-large, providing a second bypass.
+On Thu, Nov 05, 2026 at 07:02:09PM -0800, Anusha Arun Nandi wrote:
+> This series adds devicetree nodes for the generic Qualcomm MIPI CSI2
+> PHY driver on the three platforms whose compatibles/soc_cfg were added
+> by the companion "phy: qcom-mipi-csi2: Add D-PHY support for SA8775P,
+> QCS8300 and SC7280".
+> 
+> Each CSIPHY is exposed as a standalone generic-PHY provider node at
+> its existing register address, with its own OF graph (port@0
+> sensor-facing, port@1 CAMSS-facing), so that camss_detect_legacy_phy()
+> picks the non-legacy path once a board wires a sensor through one of
+> them. The camss node's own reg-names/clocks/interrupts for the
+> CSIPHYs are left unchanged, so boards that don't use a provider still
+> fall back to the legacy in-driver CSIPHY handling. All provider nodes
+> are added disabled by default; a board or camera overlay enables the
+> one(s) it actually uses.
+> 
+> The three patches are otherwise independent and split one-per-SoC
+> since each touches a different dtsi file:
+> 
+>  - Patch 1 adds the four SA8775P CSIPHYs (csiphy0-3) as
+>    qcom,sa8775p-csi2-phy nodes.
+> 
+>  - Patch 2 adds the three QCS8300 CSIPHYs (csiphy0-2) as
+>    qcom,qcs8300-csi2-phy nodes.
+> 
+>  - Patch 3 adds the five SC7280 CSIPHYs (csiphy0-4) as
+>    qcom,sc7280-csi2-phy nodes.
+> 
+> This series depends on the compatible strings and soc_cfg entries
+> introduced by the driver series referenced below and should be applied
+> on top of it.
+> 
+> Depends-on: https://lore.kernel.org/all/20261105235137.2635442-1-anusha.nandi@oss.qualcomm.com/
 
-da and len come from firmware's ELF program headers via
-rproc_da_to_va(), and the result is used by the ELF loader
-to write firmware segments, so a malformed firmware image can
-cause writes outside the carveout.
+Since patch 1 was dropped, I'm dropping this series from my queue.
 
-Rewrite the bounds check entirely in u64 arithmetic. Reject
-underflow before computing offset (da < wcnss->mem_reloc).
-Replace the addition based overflow check with a
-subtraction based one (len > wcnss->mem_size - offset) so no
-intermediate sum can wrap.
+Thanks,
+Bjorn
 
-Fixes: aed361adca9f ("remoteproc: qcom: Introduce WCNSS peripheral image loader")
-Cc: stable@vger.kernel.org
-Signed-off-by: Atul Akella <atul.akella@gmail.com>
----
- drivers/remoteproc/qcom_wcnss.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/remoteproc/qcom_wcnss.c b/drivers/remoteproc/qcom_wcnss.c
-index c856a92af43c..d95530e8be71 100644
---- a/drivers/remoteproc/qcom_wcnss.c
-+++ b/drivers/remoteproc/qcom_wcnss.c
-@@ -321,10 +321,12 @@ static int wcnss_stop(struct rproc *rproc)
- static void *wcnss_da_to_va(struct rproc *rproc, u64 da, size_t len, bool *is_iomem)
- {
- 	struct qcom_wcnss *wcnss = rproc->priv;
--	int offset;
-+	u64 offset;
- 
-+	if (da < wcnss->mem_reloc)
-+		return NULL;
- 	offset = da - wcnss->mem_reloc;
--	if (offset < 0 || offset + len > wcnss->mem_size)
-+	if (offset > wcnss->mem_size || len > wcnss->mem_size - offset)
- 		return NULL;
- 
- 	return (__force void *)wcnss->mem_region + offset;
--- 
-2.43.0
-
+> Depends-on: https://lore.kernel.org/all/20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com/
+> 
+> Changes in v3:
+> - Patch 1 (lemans): moved csiphy_opp_table out of the soc@0 simple-bus
+>   to the root node (a simple-bus's direct children need reg/ranges,
+>   which an OPP table has neither of), dropped the opp-300000000 entry
+>   (SA8775P's camcc only defines a 400 MHz rate for this clock, so it
+>   was unreachable), and reordered csiphy0..3 after camss so soc@0's
+>   children stay sorted by ascending unit address.
+> - Patch 2 (monaco): same csiphy_opp_table root-node move, and dropped
+>   both the opp-300000000 entry and the extra "csiphy_rx" clock from
+>   csiphy0..2 (QCS8300 binds through the sa8775p soc_cfg, which only
+>   declares two clocks, "core"/"timer", for this PHY).
+> - Patch 3 (kodiak): same csiphy_opp_table root-node move; its
+>   opp-300000000 and opp-400000000 entries are both kept, since
+>   SC7280's camcc genuinely supports both rates for this clock.
+> 
+> Link: https://lore.kernel.org/all/20261103221026.3662383-1-anusha.nandi@oss.qualcomm.com/
+> 
+> Changes in v2:
+> - Patch 1 (lemans): dropped the extra "csiphy_rx" clock from
+>   csiphy0..3 (3 clocks -> 2: "core", "timer"), matching the driver's
+>   sa8775p soc_cfg, which only declares two clocks for this SoC family.
+> - The "undocumented compatible" and "camss_detect_legacy_phy() does
+>   not exist" comments on all three patches were resolved by the
+>   companion phy-driver/binding series and CAMSS work landing, not by
+>   a change to these dtsi patches themselves.
+> - Patches 2 (monaco) and 3 (kodiak) are otherwise unchanged from v1.
+> 
+> Link: https://lore.kernel.org/all/20261017001116.2318647-1-anusha.nandi@oss.qualcomm.com/
+> 
+> Anusha Arun Nandi (3):
+>   arm64: dts: qcom: lemans: add CSI2 D-PHY common-phy providers
+>   arm64: dts: qcom: monaco: add CSI2 PHY common-phy providers
+>   arm64: dts: qcom: kodiak: add CSI2 D-PHY common-phy providers
+> 
+>  arch/arm64/boot/dts/qcom/kodiak.dtsi | 172 +++++++++++++++++++++++++++
+>  arch/arm64/boot/dts/qcom/lemans.dtsi | 136 +++++++++++++++++++++
+>  arch/arm64/boot/dts/qcom/monaco.dtsi | 104 ++++++++++++++++
+>  3 files changed, 412 insertions(+)
+> 
+> Best regards,
+> -- 
+> Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
+> -- 
+> 2.34.1
+> 
