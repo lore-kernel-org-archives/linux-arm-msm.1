@@ -1,112 +1,119 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793939802;
-	b=BJ0jN8dxT3HlFAUatXsyOezW8SyKeQW4jfJcAFz2renEVXA7i/Y8Q2iLTcyx4uYRvnK3
-	 7Ss5JXcrqZUYNNzWz0D2nW31iGh/SP5/zEdFPVtKXEATRv5yZju8PK5p41MR0/EKOWpo4
-	 chxxa0rCSpKRFikXzE/71OPoUq5Th1lF3o5JRKJ7Z2vFXtMiJIeqnZRi0qASwTfHCAgNO
-	 t6zEVNh9YlnT6tnwNXtHph7izjkVQatjen4JEZgaSLQmK5rQqHmWTx3QkSchRVYFBF6MX
-	 0AD0K4Dz7IsHArxYVLg0jXXSSCKIQZu/TK2GIVD96nQ5c7jgOlj2eSUISUMVVdQ2sbw==
+	t=1793943818;
+	b=lhtd08lsYiga7huE/sdOAr6yNYC9ZyvCdfPYmhiYfFS+mpzbkJ0kYuYhVUjJO199mREN
+	 zhVfKxVSDJ6Q6zkJ1Jiec/tIbm161LjRNj75sP2uRXEYELEs9AU8E+F/StdMuZhnyI8Ew
+	 i1IaYnIjeqp6Y8wNgBw5C/xabI8oWVdPk+cfnxXuBf64W7F/IZ53h9NpREBvEj6oa3Y4s
+	 Lp4dJ3jwb3slAt0VSUQAg/79V3YDCePph3bOAosfVq4BDg0GkhS/aMZnvNPQSqOEsAWWD
+	 9L2fZVFcFRc17Mlq92lH6OBZ5BD3vs5uT5JrUbHGyhcYxAyd3JJge4JNOUpEawxSjyA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793939802;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793943818;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
-	b=kzr9a+SW6CBO8W38EiDkwbePKORLPTk0tf/6NMx6qkygfCg8t19rKbcuYW9eosBDAom6
-	 O1+3iK3SnyGm48CknN1anyDRzo2MKBlM4EsrcK2rmnPS2kLdQNP+adzix4qtfK39axecs
-	 mvJ37FbmPfqJgPyVimbTDzf15+pkjZYythAtwWjrIhPnFGeivK7fDIVkzRwv/M48n5sJv
-	 o3UJDinPN7dya9EzZRetv13d2TjEpNFAiISI+iqBedceUMijr/lFphnuf1Opea8fpCu3E
-	 n4JmEyYVg0rGCFQ3Th0hbHNNR1jgy4dbq+BuJX/DGbOrtaJiaI4w28gje/izvvH5U6g==
+	bh=BLZ2qq0SMM/jpN1DQFJySBn7gK2jN8dBcZ5p8HUJucI=;
+	b=U1GOxOGXgVV7f53n91BKRtcpZd5qn/A8z/WEZcCkozhpZ4W8vIv+kgeI6jodR90SzEXD
+	 wey1qd/T7W+GfJtVgdUgR1XsK2RCC+c1h35nyVi3i2qOzoCCWU2wodXwiftSPuE1uOgsP
+	 2I/rr8RGKke5tU/wiV85+P6TpjMZXZx3saux2QXASXycbYObBbs53fulaSScbse17ZONJ
+	 qTdvXy7mArfsz10Dx96wxOKIe4QAD9ipNHnkUr8wTPYiXj3bFPwfJC/pADSjZxGTU/9/+
+	 FAJNIJamTywuHu8nm3qhDwbwQjJbGEfxqYexfuFdQFZ3Gg18JsaWue5YqI5cAG84t9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Aau6bUqQ;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PRh6Mjzx;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LpF4AnT9;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xlx8mvRQ;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD3B2606A328
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 04:36:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BD3B2606A328
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A7C2606A32E
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 05:43:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1A7C2606A32E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Aau6bUqQ;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PRh6Mjzx
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A63xwTC2779087
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 04:36:41 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LpF4AnT9;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xlx8mvRQ
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A63xtpb1866654
+	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 05:43:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=; b=Aau6bUqQO6KZlczx
-	iiiCouk/R1QQo3vRKygvOLQXrnyXEG8NneCvUy7QrQN10usDDVSGgLZoNbYkv2Zl
-	MpCf93hx+Vm0eCtm/t0b0s2p4b9kU4k2XXizk9E1iv9pYCHm8SkV36Sm3qm/8AKG
-	P2L9zidBwczr0yec+ntcp+QRI874naqHrt52fkPly4H8y75NjTwMb+H8Q19wNK5S
-	yLWVhSvbOhLz8yHEr4MTIKVtUCxVb3jVRv7XmJ3wJDS7cUc8I7VEDaRYuPtD26gV
-	TkTe9OokIVTYb2MudM0Sb6g0zSTisKyiaeME55VVTcPhuhWUfdOpc4rO9psgw741
-	ZVcGKA==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pa0vgw-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=BLZ2qq0SMM/jpN1DQFJySBn7gK2jN8dBcZ5
+	p8HUJucI=; b=LpF4AnT9qfz4uoICQQnJbcr+VttSjVrZKi03KtqPSrsPeQLU07q
+	BZvVdUdbMpQPaLKJYa5lfVRAcOxpo+uka74U9fSNLxM5Q5xRvAo6hNGnIwg49zoX
+	m1r1udMMaM323hPKhiuQ7ObhFIVr72rZY/JeNe1MJAU5HaV+UBhp6hSGxY7tWdFu
+	JlV89MTS51CMf+NZjrlhzwrhbRnyp6n0Y2EfHb9g2cnldvc/zlqwmBnIDeVV7Ytx
+	E0tj6N0JPetvkHrOMM4640DZKAJaS1uQu4IY7DI3Ezt6RSVJoYfQuXzh3OBq1lor
+	1np9rwBN9I9kFJqxEWLKZvTyoqUPzwj0JWQ==
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com [209.85.128.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3p994dg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 04:36:40 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso503781eec.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 20:36:40 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 05:43:37 +0000 (GMT)
+Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-8b3030bd581so2890127b3.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 21:43:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793939800; x=1794544600; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
-        b=PRh6MjzxXpSWMI/DFStiJ3ins5vCqFQqN1NKDX3K4XfXwcX/qtG+YX56waMUZNApww
-         XlJm31A24CBIHF5px5iFOLAX7ApdXiOQFP1ECSYeZVG+asS7oF62cpOzl39kKjCZGl1F
-         vSFAIY0mgGqHHLDT9G33Qo3rx1wJi0gXPQLhKtB1IbmXA4PJWsOudjoJXgiDszPRxObC
-         wKjjevRkKnp7Ao1rw8m58/ZrH5bJdykTmNvD6qbd8BmqGEz6+8teYfFmkPV4PTDxOPPo
-         XbSG9U9euviWTwFfOlzmkjtJzwj5sfSKuRy1467gyiiqSxL1mHo+Iolri6CNz2/rJakv
-         nXWg==
+        d=oss.qualcomm.com; s=google; t=1793943816; x=1794548616; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BLZ2qq0SMM/jpN1DQFJySBn7gK2jN8dBcZ5p8HUJucI=;
+        b=Xlx8mvRQaD6ABKZa16oTBupzF5Akjkkh1XR2v2JcpXC7ODruaO8hi+C9yOf4bkbXsu
+         8pq12jh9fJ82ocW+Hy39Goo9sGnd35jbE9QgABNtBV3Kd5HrO1ntmlYdIWr3Z6rvOlOT
+         bR0cZ97ENEr7SrcTjuKOXFsU/lLsb3M/RzliWz7vlj5h/H2EZghMPur6ofqjLkSWWgyg
+         QbgeIkn+7zBio72hCi8Jgxrqi5uQEU23oturoE8TQGhAS5M9ZqqgVkXpufQ2unsGbX2x
+         ODF6BurWBJEw0CAEZ8nis0d9stTJIIkt9wVx2OuAenzZ+/tHRAMmSwq7Nr5JFLq/+XkJ
+         Iv6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793939800; x=1794544600;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793943816; x=1794548616;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
-        b=B15wjgQs3+dxWCaEhfhTiRmZd+shuEtJilvzI0NEK6yUFQp5XcZLPwD49a4nko6Npz
-         xekbjT5bC3PSlSMRM5G7Zr0ooafTLOFc5GG1QIobvCxpoH6L9UCKfQz46FeGK8OZrFVn
-         ulFGP60Y0eJKxu2ihz0o7FbFPdrv8ewxzQvwcwcy/5ybUVg0WHfEnGXbZwtqfhhW2Uku
-         A5I0B2ofAMcaNW0CXZZ2lC+dAbb8HafQTXYPS1NvV1GTQgfcUVfcJcduC8/ESiCMhm70
-         U3HopIUy6ras8//emr4Zxx+NRsfmH6rZEQFZimFVO9SrwZsJVp7NfYXdZStmiJTMGg72
-         KccA==
-X-Forwarded-Encrypted: i=1; AL+hErETqY5IonecFL0dmDgUTcO7MxDxOO0zbq9t1378y6gcfKy1ZqzXVDNZ8aNFgehweavpNw8MCJdHc4U2weP3@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Jkg7s+3ZKPnr2Mol4QIBHADtlgoIrJjockezve3ptwfoawOBy
-	C50RE5VOfnxHRIjfqHd/Ef4nbIcrmMbz0GVupIJIl3o4wGimJWGI0MWXLWGJ8V3rjhYpnLCp0xS
-	vsSvZI2V6FVRj8IYwHCj0WntUlQBqizoBPsVRLV58YmA/EaanNb1QY6Jjjx2KXFe9JNWD
-X-Gm-Gg: AYBFou2hPhzrrb+r3hj8T5ZTcF9Ij0WX3Y8KmcP9dY1o58ZTRPpL8mKMPt6oeZQgkIv
-	vqFT0vRnZxHcpMZp1DKKkphl+oYxIcFemzeMgy8y8E3gMogiXZ+Zid3lylpqGvRBegBcUkEuKia
-	XAG2A/zBqHGfRGFKAODrV1xZYX7EKzdiOCZnezz/ciat8U9GLDnqwcVZZiQKZU/A55+Gg2etY6U
-	llh8r0HtvaQqT2AUGsABhHa6S7gkAxSeeM7cohWegfKnuKuhGHyMM31vb03Z9OnIUTntqYLALMX
-	q8B7be2OMtIpHDb9cWsUtIXZ6ci3lyCHm/cCjtAQqCIInmCBGbJpekTNqeAclgEJo0xnR0rQ0XB
-	1eH7aQ9NF6aSvFHD/oRAhEWt/s90BqdiEch5qqkr2qmBl4VQnia6XgCfE3UgS1v5HnwmXn2AimV
-	88eqIXf/IP
-X-Received: by 2002:a05:7300:dd49:b0:36f:551:2bd5 with SMTP id 5a478bee46e88-36f7691ac12mr1777933eec.32.1793939800008;
-        Thu, 05 Nov 2026 20:36:40 -0800 (PST)
-X-Received: by 2002:a05:7300:dd49:b0:36f:551:2bd5 with SMTP id 5a478bee46e88-36f7691ac12mr1777901eec.32.1793939799236;
-        Thu, 05 Nov 2026 20:36:39 -0800 (PST)
-Received: from [192.168.0.116] ([124.123.146.251])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36fa9fc92fasm2869344eec.19.2026.11.05.20.36.33
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2026 20:36:38 -0800 (PST)
-Message-ID: <187f3c63-5550-4a42-892e-ea660247edc9@oss.qualcomm.com>
-Date: Fri, 6 Nov 2026 10:06:32 +0530
+        bh=BLZ2qq0SMM/jpN1DQFJySBn7gK2jN8dBcZ5p8HUJucI=;
+        b=C3C8GxSneLIfnIqU0rZBJBzHz7Se0ZY4Fz5YWvsJet0JGMQH4zq+eiAmtTMB+qxeO1
+         x7iS9uqMP17/aeFJHqchBSG9VybI/uUEjRVaGu6zzm4u6LI2Fd1jrEW9irE7cDYacwp/
+         bwazOp666UtCj3//Oz3fpTjfEzafyJIsAXRdI5VqIW/URqUbKh0Ycqgntq30D+lsrPA5
+         vWpWcLS6f8kc1VnkUw5Vwdabn8R9PRxYS0dq+4ggDLJjkXxaRZVb9I2JyFXGy313Q2Eh
+         bIUw6l1cwN7yeHQB+4zs9NhQT8MmUVLs5ArTD9pQ13ljNEs0Cae8Q1H2B95goQNBQhEq
+         Qm7Q==
+X-Forwarded-Encrypted: i=1; AL+hErFmjuALzWb/ntKEWCem5KTMRk8NjdG9Ucx5nFKH8dAHsZUTrVV2/wMTGLRu1f67U7T96Bw8w/eSbl2NBXim@vger.kernel.org
+X-Gm-Message-State: APuU4Z+BeTlOjFe9GCN2mf1/jHbBvveNlUWDF+a/NcU1U5EhJZmhWYGz
+	D+Dk1wc6IGrh02JdAMYeYSdKiwAUnty4S/e4Mk5dn6643Bq/WW/4AZIQODnpKes/7BR+9yPiktP
+	6FKZuoh95ywAMiPwwLfLSro4G5sRkyg6syA4N9xN1u+LZIjuP+Phxvfc4I4hZjwEVbOYe7yPWU3
+	6m
+X-Gm-Gg: AYBFou2oQ90nC6idH4Sr+tyXUZJRAIbLuH2zGZSEe0jngcheeD/mJnNIE3GZlhw03/I
+	n77ROueDUPFTub1lphu87oJKBchJuZhadwcwHq2z2kai3tI54mb48W9zxOYKhUTBO1jzlGmc2sY
+	jKQcrE2tkAGGMs8wPUVsJbDnayEBujSyYL/wQWMjcUSrYRPJiQjjJU4TcZJf8aY/XO8GKMnOSjm
+	k77XXHFyPEHydNYTXYP6YbmtHH+z5JDygvnXcVIqHaHY4L7ywtcaw0fJ+nzGhuC7rM8WqjnfJ5L
+	3YJkecD83HPJGybmUYZcc1YNz0B8b01R0rR8mHoygODvnRFQ5Ph4HcJnPtYi4ptQlGsg64jgNaO
+	W0KskhnPViS4MswklO7JWuJpF2ercgVMfxC4fIZMJ1Den84CBvln9eVqNNtPmWlO6GRMvW2IXKL
+	QMhfszG9FqdsP+h6CtEvId1bSVIQgtL4dNUQ==
+X-Received: by 2002:a05:690c:f86:b0:8b2:aea2:64c5 with SMTP id 00721157ae682-8b341b11f7amr7066187b3.96.1793943816208;
+        Thu, 05 Nov 2026 21:43:36 -0800 (PST)
+X-Received: by 2002:a05:690c:f86:b0:8b2:aea2:64c5 with SMTP id 00721157ae682-8b341b11f7amr7066117b3.96.1793943815822;
+        Thu, 05 Nov 2026 21:43:35 -0800 (PST)
+Received: from x2e.lan (108-208-224-205.lightspeed.gnbonc.sbcglobal.net. [108.208.224.205])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b33f884790sm12162267b3.41.2026.11.05.21.43.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2026 21:43:35 -0800 (PST)
+From: Tyler Baker <tyler.baker@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        =?UTF-8?q?Martin=20Povi=C5=A1er?= <povik+lin@cutebit.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 0/2] ASoC: fix the x1e80100 card after an ADSP restart
+Date: Fri,  6 Nov 2026 00:43:31 -0500
+Message-ID: <20261106054333.2748248-1-tyler.baker@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,302 +123,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v5 2/2] net: wwan: qcom_bam_dmux: Assign
- restricted DMA pool to remote processor
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Stephan Gerhold <stephan@gerhold.net>,
-        Andrew Lunn
- <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Sergey Ryazanov
- <ryazanov.s.a@gmail.com>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Eric Dumazet <edumazet@kernel.org>, linux-arm-msm@vger.kernel.org,
-        netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-References: <20261105-qcom-bam-dmux-vmid-ext-v5-0-5c7903385b4b@oss.qualcomm.com>
- <20261105-qcom-bam-dmux-vmid-ext-v5-2-5c7903385b4b@oss.qualcomm.com>
- <CAFEp6-3rt8yvTd-mMA6y5SqmzmF0zvrvO_Dc_w7G3QSv7oZWng@mail.gmail.com>
-Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <CAFEp6-3rt8yvTd-mMA6y5SqmzmF0zvrvO_Dc_w7G3QSv7oZWng@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=PLeaavqC c=1 sm=1 tr=0 ts=6aed5958 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=K/78aEDNEn2Q/Yuv7mVN5Q==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=fKMpTyM1RLJrecArqiYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAxOCBTYWx0ZWRfX7Arpw9EhgRSq
- jc3zo0F83n5A8DluNrjCSSp2Ek8qtqsg9gaV+j+URQ1zUnIqCfNKPuGrxre2KTTVw2pwfG2jvDI
- cyaBJk/RFGilnkZ2pv2hlcFlo626sSw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAxOCBTYWx0ZWRfX76FzZT2drJNc
- 84H+JhCCPCXF0ePsPERBvBLoRwda2Z2RVyWbwrMyCJlNxDbkIBEBP9ee0K/XFX1YvzcAvKEsBMN
- mmB5sP35Jbjwre+spAkTmFtw2T9/Mp0LqNFUYAaHuRTLs9cbX6vPrgwmiwlrbz3ak+JmxZmreHH
- pljYmKce3LA173PWBa03dGdRMli/QzmXwFwtsYRuPa8RkvRuaAllkA2598FNKKQDV9J1r3T0R0k
- krzywUdbHijwX/7HqleWbIsAk6xCeNX6FibDqg1STAFjLA5Utxy5QN4h6mpAUYczhZ1OhAXSXbt
- caZ5pirsyt30c3kPV4ZoVRsaJsZfBpNm0Z9sgk1lm4xAHqaH4q4qLFnYtCYIShbJ3GryHh83PkZ
- d8d8nOaD/wguUcQgBjR7t19zDZFkFG5+LU3XHH/i9O5tKKjKtpDsTx2ejL3Yv+p4XwYxCMWgF8N
- 6FwTZd5HQVuQLHmUeyQ==
-X-Proofpoint-GUID: 4Ag8acToV60SQ7AVRTXuxrad9MNKP0HO
-X-Proofpoint-ORIG-GUID: 4Ag8acToV60SQ7AVRTXuxrad9MNKP0HO
+X-Proofpoint-ORIG-GUID: tNNCHNcfrZatiLuvdYt1XlpW9pS-_AGp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAyMiBTYWx0ZWRfX+0XOnUczDPsD
+ 3jsZM/33PIQ3SBp2v01hYRYwyQdH3tkBnaZe8iZB5qZjFKKnLn3wqo385NK1DtNg4I8IjJfdP7t
+ hzZ55/3UeVbDAKlGosdVaxROeZMW+V73mVwt+ldVYrIr3rUaEEsR8ab80gCEjqlszs8a2r4Pm6u
+ HPXTw+/P4ZZImir60bBjpYbL3gjcuxaWRYx5gAa2h5b1GmVwY/PQidoNlXBV6oJb+rV+6cvEqqO
+ 3GfaIG0UPn4gOASeUIjz2zJwjaEbcHFCD0vRIQN8MnWUHVjaEEQphl+K4yDzCppOVWgMaHphGK2
+ uZPNucHe7Jqy4+/OO2NMkKnbu+00KptEemautB6oN/jZdWH70vJChkQpOVzfUfylXkIBWNv2ZfQ
+ 3C3P4guAzQ48zWKWpAkZohU71IdIMLvCv2Vc8U0ADoMqZniawPS1xSFoTRXY6OIllHIAw4F94yR
+ Ge660Ssjquslrtx2Vrw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAyMiBTYWx0ZWRfX5TQ2EY4yzGcs
+ r5IUfepLzIEXcDHCoh4jjmEt2VHd8HWSGoNbFMaoMNv4FVWrw3xyUUiZab+XTUnZ1CpEJ1xTYaG
+ K3shv3aU7/X2sVEzBpqZPGstslI4qp0=
+X-Authority-Analysis: v=2.4 cv=WMzqzXsR c=1 sm=1 tr=0 ts=6aed6909 cx=c_pps
+ a=0mLRTIufkjop4KoA/9S1MA==:117 a=PFxtTy0squD/fJwW5Be2sw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=ahqmK09zdcNxaaV6BQIA:9 a=WgItmB6HBUc_1uVUp3mg:22
+X-Proofpoint-GUID: tNNCHNcfrZatiLuvdYt1XlpW9pS-_AGp
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-06_01,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 spamscore=0 phishscore=0 adultscore=0 suspectscore=0
+ adultscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 suspectscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060018
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060022
 
+On Qualcomm boards an ADSP restart unbinds and rebinds the LPASS pin
+controller, the SoundWire controllers and the codecs, and the card binds
+again once they are back. On the Hamoa IoT EVK two things break on that
+path: the DAI link names point at the SoundWire controllers' freed
+strings, and the headset jack is never recreated.
 
-On 05-11-2026 07:51 pm, Loic Poulain wrote:
-> On Thu, Nov 5, 2026 at 11:42 AM Vishnu Santhosh
-> <vishnu.santhosh@oss.qualcomm.com> wrote:
->> Some Qualcomm SoCs, such as Shikra, run the modem in a separate security
->> domain with restricted access to system memory. BAM-DMUX DMA mappings
->> and BAM descriptor FIFOs must therefore be constrained to a designated
->> memory region that can be shared with the modem. Accesses outside that
->> region can trigger an XPU violation.
->>
->> When qcom,vmid is present, require a restricted DMA pool and assign the
->> entire pool to both the local and remote execution environments before
->> requesting the DMA channels.
->>
->> This ensures that BAM-DMUX mappings are within the assigned region. When
->> the BAM DMA controller references the same pool, its descriptor FIFOs
->> are covered by the assignment as well.
->>
->> Track the assigned execution environments explicitly and reclaim the
->> pool for the local environment after DMA channels and mappings are
->> released during remove or probe error cleanup. Skip the reclaim and
->> leave the pool assigned if the remote side still holds its power vote,
->> since it may still access the pool.
->>
->> Fail probing when restricted DMA pool support is unavailable, when the
->> VMID property is malformed, when memory-region is missing, or when the
->> restricted DMA pool is not attached to the device.
->>
->> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
->> ---
->>   drivers/net/wwan/Kconfig         |   1 +
->>   drivers/net/wwan/qcom_bam_dmux.c | 108 ++++++++++++++++++++++++++++++++++++++-
->>   2 files changed, 107 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/net/wwan/Kconfig b/drivers/net/wwan/Kconfig
->> index 958dbc7347fa84ee869439bf8b503037faab8bef..1b133c56231615269698140187ca3141dfe48dbf 100644
->> --- a/drivers/net/wwan/Kconfig
->> +++ b/drivers/net/wwan/Kconfig
->> @@ -65,6 +65,7 @@ config MHI_WWAN_MBIM
->>   config QCOM_BAM_DMUX
->>          tristate "Qualcomm BAM-DMUX WWAN network driver"
->>          depends on (DMA_ENGINE && PM && QCOM_SMEM_STATE) || COMPILE_TEST
->> +       select QCOM_SCM
->>          help
->>            The BAM Data Multiplexer provides access to the network data channels
->>            of modems integrated into many older Qualcomm SoCs, e.g. Qualcomm
->> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
->> index cc6ace8d64371eb8d00c638a39b234ee540b83c9..0e7ad62f8b4e059264e89837f296ee13c0c31c9b 100644
->> --- a/drivers/net/wwan/qcom_bam_dmux.c
->> +++ b/drivers/net/wwan/qcom_bam_dmux.c
->> @@ -9,14 +9,17 @@
->>   #include <linux/completion.h>
->>   #include <linux/dma-mapping.h>
->>   #include <linux/dmaengine.h>
->> +#include <linux/firmware/qcom/qcom_scm.h>
->>   #include <linux/if_arp.h>
->>   #include <linux/interrupt.h>
->>   #include <linux/module.h>
->>   #include <linux/netdevice.h>
->> +#include <linux/of_reserved_mem.h>
->>   #include <linux/platform_device.h>
->>   #include <linux/pm_runtime.h>
->>   #include <linux/soc/qcom/smem_state.h>
->>   #include <linux/spinlock.h>
->> +#include <linux/swiotlb.h>
->>   #include <linux/wait.h>
->>   #include <linux/workqueue.h>
->>   #include <net/pkt_sched.h>
->> @@ -75,6 +78,9 @@ struct bam_dmux {
->>          struct completion pc_ack_completion;
->>
->>          struct dma_chan *rx, *tx;
->> +       phys_addr_t dma_pool_base;
->> +       size_t dma_pool_size;
->> +       u64 dma_pool_perms;
->>          struct bam_dmux_skb_dma rx_skbs[BAM_DMUX_NUM_SKB];
->>          struct bam_dmux_skb_dma tx_skbs[BAM_DMUX_NUM_SKB];
->>          spinlock_t tx_lock; /* Protect tx_skbs, tx_next_skb */
->> @@ -762,6 +768,90 @@ static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
->>          return 0;
->>   }
->>
->> +static int bam_dmux_assign_dma_pool(struct bam_dmux *dmux)
->> +{
->> +       struct device *dev = dmux->dev;
->> +       struct device_node *rmem_np;
->> +       struct reserved_mem *rmem;
->> +       struct qcom_scm_vmperm dst[2];
->> +       u64 src = BIT_ULL(QCOM_SCM_VMID_HLOS);
->> +       u32 vmid;
->> +       int ret;
->> +
->> +       if (!of_property_present(dev->of_node, "qcom,vmid"))
->> +               return 0;
->> +
->> +       ret = of_property_read_u32(dev->of_node, "qcom,vmid", &vmid);
->> +       if (ret)
->> +               return dev_err_probe(dev, ret, "Failed to read qcom,vmid\n");
->> +       if (vmid == QCOM_SCM_VMID_HLOS || vmid >= BITS_PER_TYPE(u64))
->> +               return dev_err_probe(dev, -EINVAL, "Invalid qcom,vmid %u\n", vmid);
->> +
->> +       if (!IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL))
->> +               return dev_err_probe(dev, -EOPNOTSUPP,
->> +                                    "qcom,vmid requires DMA_RESTRICTED_POOL\n");
->> +
->> +       rmem_np = of_parse_phandle(dev->of_node, "memory-region", 0);
->> +       if (!rmem_np)
->> +               return dev_err_probe(dev, -EINVAL,
->> +                                            "qcom,vmid requires memory-region\n");
->> +
->> +       rmem = of_reserved_mem_lookup(rmem_np);
->> +       of_node_put(rmem_np);
->> +       if (!rmem)
->> +               return dev_err_probe(dev, -EINVAL,
->> +                                            "Failed to look up restricted DMA pool\n");
->> +
->> +       if (!is_swiotlb_for_alloc(dev))
->> +               return dev_err_probe(dev, -EINVAL,
->> +                                    "Restricted DMA pool not attached\n");
->> +
->> +       if (!qcom_scm_is_available())
->> +               return -EPROBE_DEFER;
->> +
->> +       dst[0].vmid = QCOM_SCM_VMID_HLOS;
->> +       dst[0].perm = QCOM_SCM_PERM_RW;
->> +       dst[1].vmid = vmid;
->> +       dst[1].perm = QCOM_SCM_PERM_RW;
->> +
->> +       ret = qcom_scm_assign_mem(rmem->base, rmem->size, &src, dst,
->> +                                 ARRAY_SIZE(dst));
->> +       if (ret)
->> +               return dev_err_probe(dev, ret,
->> +                                    "SCM assign restricted DMA pool failed\n");
->> +
->> +       dmux->dma_pool_base = rmem->base;
->> +       dmux->dma_pool_size = rmem->size;
->> +       /* Track the destination VMIDs explicitly for the reclaim operation. */
->> +       dmux->dma_pool_perms = BIT_ULL(QCOM_SCM_VMID_HLOS) | BIT_ULL(vmid);
->> +
->> +       return 0;
->> +}
->> +
->> +static void bam_dmux_reclaim_dma_pool(struct bam_dmux *dmux)
->> +{
->> +       struct qcom_scm_vmperm hlos = {
->> +               .vmid = QCOM_SCM_VMID_HLOS,
->> +               .perm = QCOM_SCM_PERM_RW,
->> +       };
->> +       u64 src = dmux->dma_pool_perms;
->> +       int ret;
->> +
->> +       if (!dmux->dma_pool_perms)
->> +               return;
->> +
->> +       ret = qcom_scm_assign_mem(dmux->dma_pool_base, dmux->dma_pool_size, &src,
->> +                                 &hlos, 1);
->> +       if (ret) {
->> +               dev_err(dmux->dev, "SCM reclaim restricted DMA pool failed: %d\n", ret);
->> +               return;
->> +       }
->> +
->> +       dmux->dma_pool_perms = 0;
->> +}
->> +
->> +static void bam_dmux_remove(struct platform_device *pdev);
->> +
->>   static int bam_dmux_probe(struct platform_device *pdev)
->>   {
->>          struct device *dev = &pdev->dev;
->> @@ -796,6 +886,10 @@ static int bam_dmux_probe(struct platform_device *pdev)
->>                                       "Failed to get pc-ack state\n");
->>          dmux->pc_ack_mask = BIT(bit);
->>
->> +       ret = bam_dmux_assign_dma_pool(dmux);
->> +       if (ret)
->> +               return ret;
->> +
->>          init_waitqueue_head(&dmux->pc_wait);
->>          init_completion(&dmux->pc_ack_completion);
->>          complete_all(&dmux->pc_ack_completion);
->> @@ -829,8 +923,11 @@ static int bam_dmux_probe(struct platform_device *pdev)
->>
->>          ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
->>                                      &dmux->pc_state);
->> -       if (ret)
->> -               goto err_disable_pm;
->> +       if (ret) {
->> +               /* The PC IRQ may already have powered up the RX path */
->> +               bam_dmux_remove(pdev);
-> it's still unclear in the comment and commit message why we can't go
-> with err_disable_pm?
+The speakers also need Abel's reset-gpio parent fix [1] and the
+gpiolib-shared follow-up [2].
 
-Agreed. I plan to update the comment in the next revision to:
+Tested on the Hamoa IoT EVK on next-20261103: ADSP crash idle and
+during playback, the card comes back with its controls, the headset
+jack and working playback.
 
-/*
-  * The PC IRQ is already enabled and may have powered up the RX
-  * path. Use the full remove() teardown so that RX DMA is stopped
-  * before the pool is reclaimed.
-  */
+[1] https://lore.kernel.org/r/20261026-b4-reset-gpio-parent-to-gpio-controller-v1-1-11549e6ea930@oss.qualcomm.com
+[2] https://lore.kernel.org/r/20261106052851.2741296-1-tyler.baker@oss.qualcomm.com
 
-and add to the commit message:
+Tyler Baker (2):
+  ASoC: soc-core: copy the DAI link names into the card
+  ASoC: qcom: x1e80100: recreate the headset jack on card rebind
 
-If probe fails after the PC IRQ has been requested, clean up through
-bam_dmux_remove(), since the IRQ may already have powered up the RX
-path, which must be torn down before the pool is reclaimed.
+ sound/soc/qcom/x1e80100.c | 18 ++++++++++++++++++
+ sound/soc/soc-core.c      | 16 ++++++++++++++++
+ 2 files changed, 34 insertions(+)
 
-Does this look fine to you?
+-- 
+2.47.3
 
-
-Vishnu
-
->
->> +               return ret;
->> +       }
->>
->>          /* Check if remote finished initialization before us */
->>          if (dmux->pc_state) {
->> @@ -845,6 +942,7 @@ static int bam_dmux_probe(struct platform_device *pdev)
->>   err_disable_pm:
->>          pm_runtime_disable(dev);
->>          pm_runtime_dont_use_autosuspend(dev);
->> +       bam_dmux_reclaim_dma_pool(dmux);
->>          return ret;
->>   }
->>
->> @@ -879,6 +977,12 @@ static void bam_dmux_remove(struct platform_device *pdev)
->>          disable_irq(dmux->pc_irq);
->>          bam_dmux_power_off(dmux);
->>          bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
->> +
->> +       /* The remote side may still access the pool if it holds its power vote */
->> +       if (!dmux->pc_state)
->> +               bam_dmux_reclaim_dma_pool(dmux);
->> +       else if (dmux->dma_pool_perms)
->> +               dev_warn(dev, "Leaving restricted DMA pool assigned to remote\n");
->>   }
->>
->>   static const struct dev_pm_ops bam_dmux_pm_ops = {
->>
->> --
->> 2.34.1
->>
