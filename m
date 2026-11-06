@@ -1,117 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=148.251.105.195
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793991804;
-	b=w4D4j/pFZxy7MWDNmmi4tKj29jDmvYVGY8a1qNww3C1WUyaF4/sZf0iZfnL2UKa98ue0
-	 CkT6H7/OK9iE64Mfv+kd+DGOgaOvIANQv6liUiwjOjH1nnlbCRVF6tasO0iur2o5COG64
-	 BYj5oumTUr3C6+lrwQ/sAdUFxqiCTZhrRCQdrLv6ygRJ613uVJ4apjD97dyLUzt0YNUXU
-	 QclBRM2MU9O4z1pdBVAP4OdQKOyOCMrV2Z8QnyNtMqw6rRnw8LvimFzJmvd3rhr5ySq+L
-	 B16XS3rT+8fva58zC/3reFk3Hj/y0Ec5CBB5Orf8RVcU87sEPqcLrp+Shic2lIm3clA==
+	t=1793991959;
+	b=jLWmqzyTLTZ2Ncb8+qqTL3MMKGPEVKB3y4+rVrvRI5/1fj2U/NJyoAS/pGQUhREDQLQw
+	 z4S/8Sb/CZ0HOV+rZvPrXhx8rgRG2+WGvp+7tBJFSCvUJYoh/MrEjAQxfPClLnRl2iTfS
+	 6VvgsvnwU/AqG72dRoThjvLo9jV93SGLq6nIT+K3LpDeCoxkpljo+g8kWKipXSsfPJTbo
+	 1NrkBKu+DUDs49c3A0BBE3zMothAcJOEysYaApP3CxgvB1FcVcCdyr9rpXXqr4T2xO6bY
+	 kD4AlKYfgcZ+ezpLR1N1ZeOHQo9XqxW2xAzHFt5SIz1UojgjBcZA779dJ4vdxxzo7eA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793991804;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=/0HAahlW4CgTua9qfMa4tCpqsXnFAGAWQeeP/ULRLM0=;
-	b=mQdXp4s/CvZRlz6fVf3twLsIXLfiYwfLa6yhPB5fMpjgmh8iSjt2Y0obo8HYfKIp2gXx
-	 pt/UsQrHFFgxSJ1fhtblHvZ0vWAfBG3hWV+ZK7X5j/0MA8rw0OOPRSoxMm242pCHHFEoS
-	 4YMuM6F4SFQmApBsArCeX4MJrrdMZEIt3kpKN2QbQ9zjbuxwgK8KvKEYb3VQVHK8rk+8t
-	 2ywptONua4P4tc447Zir33UPpX0UgUm4tP2ZduMph4SLhpAr2t7e+2uC4rYNgaXOEyuok
-	 sfHk3N5hmtkUpqvCSmTfA+k60VmEiGHRXej1KYnf1RfKuHDzlegg46c55Y13Hk6n1Dg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793991959;
+	h=DMARC-Filter:DKIM-Signature:Received:Message-ID:Subject:From:To:Cc:
+	 Date:In-Reply-To:References:Autocrypt:Organization:Content-Type:
+	 User-Agent:MIME-Version;
+	bh=6LdXT14KOb6OCBtyF62RqXz9icJXVGvFn0shQuZytOU=;
+	b=NAvLHghpuX34Qk1OYb3gqxxV87GbhNiYh++MHRoUQVKUo/BTzCGsv0z8GrI0oL9jQJBR
+	 OFpJIqhc3lSsdbmfNfa9ITWQZAs4zWs163OejcZ1r4uAVx0HAe3ZQVUE2qYRC2AK89aQr
+	 ZLdWrc3/G5nr9bPYerVp+FeeQn4f5LPHm+CGJFuCf8kcJMEO66VOrZtukbCnJjpIa7rOG
+	 5CDHCZ0OO6UwS2x4AK6VN9kcQdx/V7yppU5TJg/cpPTmTZvM8k9vBuI1UArNI4d5thS49
+	 S4RxZJi2VsUUTJGgJ/byAotBHijqc0a926mqd9E9y7oRv2m3x7HQjoE+bIUT6dHdiig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GMj8ZTSX;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GnqntKBg;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dmarc=pass header.from=collabora.com;
+	spf=pass smtp.mailfrom=collabora.com;
+	dkim=pass header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b="m/rwaVYR";
+	arc=none smtp.remote-ip=148.251.105.195
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BAE4606A326
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 19:03:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9BAE4606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F111606A326;
+	Fri,  6 Nov 2026 19:05:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7F111606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GMj8ZTSX;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GnqntKBg
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6Ht8sR3066045
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 19:03:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=/0HAahlW4CgTua9qfMa4tCpqsXnFAGAWQee
-	P/ULRLM0=; b=GMj8ZTSXIY6fuMnx29NuoxU02azIjSOoP0BKvCZhweZpZ/ABay2
-	oalpjLrF6Dv3viZPCZxFeVLmR3YyWYX+l2VP1A3SEHNFXi8OSHJwZ7MK2jh9fkSR
-	Dvrg0+SXIdRpVObK+YFSC7z+7YnopStl0hY30K3El6Sj1oh3+zhXaCC3EeGZyOph
-	CQFFnYqiP6RYIISjjP+QEGlkjSOH+iMbyJ67MH/T8kN4MmQp5LMUCNcOUjLXxcu8
-	ttBzQ24e1Tz2+2L4fVgOJodj5XlsDdakoI95CO5Lo9/urx43aX88aWUFZr+ciwJm
-	lrmgkD8MWgt1x7K9neGm6YUHqxDqcdIkLcQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pcc9rq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 19:03:22 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2eaf8ea208bso8992355ad.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 11:03:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793991802; x=1794596602; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/0HAahlW4CgTua9qfMa4tCpqsXnFAGAWQeeP/ULRLM0=;
-        b=GnqntKBgkOQTYqBcYHULN0jkDgKbPEgU09B6aQoJP/uNfScNiOSMZ/QwSUaWLybPp+
-         9AhBym+O84s+KoZNuW/oU5D88sidI8jHjrJal4KdoRVu1IqKg2ylvvlPm1W57AZG8tsJ
-         ayl7vSi6UenAWC9Qc+U4inVJWphJhfPLpzQi2V6ImcFVmNeRANwbMYe43zDxb8xw1hY9
-         NmMpHKxaIgDy+WpUmjIt2YeF0G9ecESHF/lVUEYgwjJ5jhUvH7bqIqaqyBarmbyoRqyz
-         OyVuSdkX1AO+VeB/vXMPCi87/ZYrDIGvb2Pdm1UZUSzshgwMnYB+gD8SPEuvW9vfeHnN
-         9pVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793991802; x=1794596602;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/0HAahlW4CgTua9qfMa4tCpqsXnFAGAWQeeP/ULRLM0=;
-        b=MjHF7phDnuLWRMK6OSxtGzwg2mpAIW1FIBztVn1C7CPcxPW88RupDSqDs2jgoEDIba
-         LJXSL+cgfbqVvuY5edhcVM6mSrD2a7zozNHwFFMivdS47kihyBX7ov8z/sdip+LlEGGD
-         W/ZB+CLLWIGAHNtXTyFMtUt2O42FoxMuSrzLkhje72dvNyCmXFHjrbt6ICJ6I7Gk6MEM
-         UnkBoE3UJrVmK0XoudWZ0PAXb6yw4H4YH3yEhPprCXe0sampHR1eekpPpwtOoIueAgah
-         aM5JfcYNH2TEU3MS37s9FCpudQcP22240qqL6uaFWGE2qjP2WP6/Il0yDgUgY21xL45M
-         1Etg==
-X-Gm-Message-State: APuU4Z/BQdOwTEtigAd2TMDUoUk2kpy4Jf7qgxUxj3OBHOdd4+GtKUkB
-	Nb7lqKmYdxcYjv/cKEW6oPULCdnEAF8qCDTSUECmlI6nVBvwDmfc2P3FCF55GdItJG9djoccWrD
-	Re44ZH58kAWVOaHPTNIncDXdvrjXMXW8fRe+EIoMqiqYTF10V+/VZLCDraLxEBKlWz129
-X-Gm-Gg: AYBFou13wv9Wcww5dL94KOMm7q05QTf2bbbrnSa8sD/7Jr8rdOCxlL85ok1w95jikzw
-	qo+g2J1WzTvIBJ+PqdtCv6J7PU02doZpvKHRuuLhQT1uU/maFBb52k3sQiPccMKZeYm4oFrK9EX
-	M0pFBj+iIKGBswFw4ghCEbQ2apDG3EM4IElaWjlfAg5y0eExVXK6JmKdd+f7ZbCpRUbI6/CR9gB
-	9mQzs9ufrgrfsuFOeOSlryhrGE1o+fu4zMZ5eukzEK1xuq16gr0V7Auv8iP+1QMLfIua7HGbJfh
-	FkLzWDG9QAgYzqfGMfcu/9z4pvlXrsP6iYiu5MtOorQYQBHqtQRMC3cGlnwC8LkGhQ7VNH4chHi
-	X/g1jGN16hp7mSrT7p3QlXPi+v6iL45Hk/2yD7URDiBvtFuhhoNpVWBnCFgl9Gnt1J48Lfgr7SU
-	N+001rgE1zEZVae9UcyGc6yfVzKUbd0xdpXZpRl/wPMTipLglxN3NLu4MK+b167Q==
-X-Received: by 2002:a17:902:d48d:b0:2e8:1c7b:3b6e with SMTP id d9443c01a7336-2ed40aca726mr41087445ad.26.1793991802206;
-        Fri, 06 Nov 2026 11:03:22 -0800 (PST)
-X-Received: by 2002:a17:902:d48d:b0:2e8:1c7b:3b6e with SMTP id d9443c01a7336-2ed40aca726mr41087225ad.26.1793991801750;
-        Fri, 06 Nov 2026 11:03:21 -0800 (PST)
-Received: from localhost (c-67-168-198-145.hsd1.or.comcast.net. [67.168.198.145])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed47d8949fsm8637105ad.62.2026.11.06.11.03.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 11:03:21 -0800 (PST)
-From: Rob Clark <robin.clark@oss.qualcomm.com>
-To: dri-devel@lists.freedesktop.org
-Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH] drm/msm/gem: Deal with partial mmap's in fault path
-Date: Fri,  6 Nov 2026 11:03:17 -0800
-Message-ID: <20261106190317.17904-1-robin.clark@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+	dkim=pass (2048-bit key, unprotected) header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b=m/rwaVYR
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1793991956;
+	bh=6LdXT14KOb6OCBtyF62RqXz9icJXVGvFn0shQuZytOU=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+	b=m/rwaVYRyrhwiNzeDi/swPJtjeqJ6hzjz0zmjSpsv68KvWhW1dawlq7AtTJYMd2jO
+	 etDDXsOvYgoLbBFBtIuPEb+bHOXR8pFXqcyt5fHe4h9942XugEr6BUfACFw1ESD4Yv
+	 k87VluyvP3L0x9Fgpx0yzDJ/fVpqjzUT6ct7PU9CznK3Udf8lfhsWTeKoWtWfva9nz
+	 CaprmoSJvrXOPOk0SVzCGZTjbs27J5XpWj61DAYWuJzqtd+dtlvMFePjxuLiLC1o41
+	 ompPNeaZPvJLVwyfROMxEea2+WvzxpbUpEJmmpyJQpAm/cQNARuB4ZOdnDh0xBO49X
+	 9QqxIOIGV6KbQ==
+Received: from [100.64.0.214] (unknown [100.64.0.214])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: nicolas)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id A66E617E0411;
+	Fri, 06 Nov 2026 20:05:53 +0100 (CET)
+Message-ID: <2e69b386374ae46177a2fd975814a31e4016c3d9.camel@collabora.com>
+Subject: Re: [PATCH 7/7] media: qcom: iris: describe QC10C as TP10
+From: Nicolas Dufresne <nicolas.dufresne@collabora.com>
+To: rob.clark@oss.qualcomm.com
+Cc: Robert Mader <robert.mader@collabora.com>, Dmitry Baryshkov	
+ <dmitry.baryshkov@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang
+ <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,  Marijn Suijten
+ <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, Simona
+ Vetter <simona@ffwll.ch>,  Mauro Carvalho Chehab	 <mchehab@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,  Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Bryan
+ O'Donoghue <bod@kernel.org>,  Stanimir Varbanov
+ <stanimir.varbanov@linaro.org>, linux-arm-msm@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, 	freedreno@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Jordan Crouse	 <jordan@cosmicpenguin.net>,
+ linux-media@vger.kernel.org, Vikash Garodia	
+ <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal	
+ <dikshita.agarwal@oss.qualcomm.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>
+Date: Fri, 06 Nov 2026 14:05:51 -0500
+In-Reply-To: <CACSVV013piWuVo87SuAGK+j9i+rj4cHGiOTX9kznE4ROJup0Hw@mail.gmail.com>
+References: <20261104-ubwc-format-docs-v1-0-389044012b4e@oss.qualcomm.com>
+	 <20261104-ubwc-format-docs-v1-7-389044012b4e@oss.qualcomm.com>
+	 <86b801ce-a56c-4ff8-8915-9be369fc0ce8@collabora.com>
+	 <CACSVV02t9=tm2qyG531f8Ne90ADAb1_ZDDGEg7PwDmoEvGxPrQ@mail.gmail.com>
+	 <062fe7dca00f77dac05197552d22897b28dc2143.camel@collabora.com>
+	 <CACSVV013piWuVo87SuAGK+j9i+rj4cHGiOTX9kznE4ROJup0Hw@mail.gmail.com>
+Autocrypt: addr=nicolas.dufresne@collabora.com; prefer-encrypt=mutual;
+ keydata=mDMEaCN2ixYJKwYBBAHaRw8BAQdAM0EHepTful3JOIzcPv6ekHOenE1u0vDG1gdHFrChD
+ /e0J05pY29sYXMgRHVmcmVzbmUgPG5pY29sYXNAbmR1ZnJlc25lLmNhPoicBBMWCgBEAhsDBQsJCA
+ cCAiICBhUKCQgLAgQWAgMBAh4HAheABQkJZfd1FiEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrjo
+ CGQEACgkQ2UGUUSlgcvQlQwD/RjpU1SZYcKG6pnfnQ8ivgtTkGDRUJ8gP3fK7+XUjRNIA/iXfhXMN
+ abIWxO2oCXKf3TdD7aQ4070KO6zSxIcxgNQFtDFOaWNvbGFzIER1ZnJlc25lIDxuaWNvbGFzLmR1Z
+ nJlc25lQGNvbGxhYm9yYS5jb20+iJkEExYKAEECGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4
+ AWIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaCyyxgUJCWX3dQAKCRDZQZRRKWBy9ARJAP96pFmLffZ
+ smBUpkyVBfFAf+zq6BJt769R0al3kHvUKdgD9G7KAHuioxD2v6SX7idpIazjzx8b8rfzwTWyOQWHC
+ AAS0LU5pY29sYXMgRHVmcmVzbmUgPG5pY29sYXMuZHVmcmVzbmVAZ21haWwuY29tPoiZBBMWCgBBF
+ iEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrGYCGwMFCQll93UFCwkIBwICIgIGFQoJCAsCBBYCAw
+ ECHgcCF4AACgkQ2UGUUSlgcvRObgD/YnQjfi4+L8f4fI7p1pPMTwRTcaRdy6aqkKEmKsCArzQBAK8
+ bRLv9QjuqsE6oQZra/RB4widZPvphs78H0P6NmpIJ
+Organization: Collabora Canada
+Content-Type: multipart/signed; micalg="pgp-sha512";
+	protocol="application/pgp-signature"; boundary="=-XurZlOBuCgoi/+wYTJZt"
+User-Agent: Evolution 3.62.1 (3.62.1-1.fc45) 
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -121,65 +104,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: xMGum7itxcRUGz-pHZxlHumgPc-vqvr2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA3NSBTYWx0ZWRfX42Yydc3CpYad
- 9eitTtMFr9gij3YMZCBa/3ym27G1FwPbUSYk4pqNDhIbuNGjZkWb2uD8Wwrzxk/J0OauGMQ8Hhh
- RhU+/OY/VA4B0sX6SuvYPFsglyx427mCcGgf1MinIhUA2HDJqH44QL9q2RfIHV98BKN4jmizT9i
- LqQK9Sz/JYjcOt2V/PusVPFO6hY+EIrTBWR38uBcn6QHZb57xJMaApTKjTj/XS4VpTq0Y7L+42Y
- yVS4u3T3hv6fZanVPMA0m3+En4eob9fFrHMqr6p7TvqGrMHIV8XJrn3Mq0BusmSXwUG3SM9E8MP
- /dNhQ+fvG8z47SJ3HK4cqhcAkd95d8MVJpKZwe0PqsKnAORrM6IXFXDu23CsZMLjNSZ/NH0QfoN
- zOttmxbHRCNqqtl/gJbmkGn5C4FlT+V6oNyrbNGReh9aYt16vQbCDdrcFQBKAIp95Mzu2/BgZL2
- jJMcMYUEyxe73IoIG/Q==
-X-Proofpoint-GUID: xMGum7itxcRUGz-pHZxlHumgPc-vqvr2
-X-Authority-Analysis: v=2.4 cv=TI3Q2Fla c=1 sm=1 tr=0 ts=6aee247a cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=6Rn/7xRx7Ub4NEhlm8k1cw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=jYIoWETkLWJVVNRKBkMA:9 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA3NSBTYWx0ZWRfX0KOdT7yyKAf3
- qmHBdhG5l9Lif3hKaKtqntFAaI/JJll/S8egAXqgA6eF4dsz01VsbExk9LyQHDOWimM1TdEAFB7
- HaH0itw9b2GP4O3UGrPCh/aK8tUqMHY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-06_06,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
- spamscore=0 phishscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060075
 
-Historically we ignored pgoff, as it was a "fake" offset that simply
-served to map back to the gem handle.  Mmaping a partial obj was dis-
-allowed.
+--=-XurZlOBuCgoi/+wYTJZt
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-But we can instead just subtract off the fake offset.
+Hi Rob,
 
-drm_gem_mmap() still expects an exact match on pgoff, so unless we use
-our own path for that, like some other drivers, we don't fully support
-partial mmap.  But this at least makes things more robust if userspace
-does funny things like partal unmap.
+Le jeudi 05 novembre 2026 =C3=A0 13:07 -0800, Rob Clark a =C3=A9crit=C2=A0:
+> On the v4l2 side, I'm not sure.=C2=A0 But it is also not clear to me if t=
+he
+> viddec hw (iris) supports all four combinations of P010/TP10 vs
+> linear/UBWC.=C2=A0 I guess there is already some fourcc translation neede=
+d
+> between v4l2 and drm, so maybe it is ok to stick with QC10C on the
+> v4l2 side?
 
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
----
- drivers/gpu/drm/msm/msm_gem.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Commenting on this aspect specially, and Dmitry is really going in the righ=
+t
+direction, V4L2_PIX_FMT_QC08C and 4L2_PIX_FMT_QC10C was under specified, an=
+d so
+the implementation didn't have anything to be verified against. Just descri=
+bing
+what the format is and what kind of alignment is needed is a great start. T=
+he
+stride is not being used in practice by the importers (gpu and display), an=
+d I
+think we can turn that to our advantage.
 
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index 000dfcec7809..5826fd69abe4 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -374,8 +374,8 @@ static vm_fault_t msm_gem_fault(struct vm_fault *vmf)
- 		return vmf_error(PTR_ERR(pages));
- 	}
- 
--	/* We don't use vmf->pgoff since that has the fake offset: */
--	pgoff = linear_page_delta(vma, vmf->address);
-+	pgoff = linear_page_index(vma, vmf->address) -
-+		drm_vma_node_start(&obj->vma_node);
- 
- 	pfn = page_to_pfn(pages[pgoff]);
- 
--- 
-2.56.0
+What I lately ask, is to just directly document for V4L2 users which
+fourcc+modifier should this v4l2 format map to. How many planes are expecte=
+d to
+be exposed, etc. When I naively asked, I thought the answer would have been
+unique and well known, but we uncovered issues. This comes from a simple ta=
+sk,
+that we must do for every V4L2 format in GStreamer, which is to map the
+format/modifier pair to its DRM format, as GStreamer negotiate DMABuf with =
+DRM
+formats these days. Whatever we tried, either failed to import in the GPU, =
+or
+failed in the display controller, due to interoperability issue, miss-
+interpretation.
 
+On your proposal, I'd like to highlight that NV12/TP10 usage is quite broke=
+n
+(though its fine if we have to live with that for backward compat, we'll co=
+de
+the exception).
+
+We commonly deduce the number of planes (or I should say the number of stri=
+des
+and offsets needed) from the base format. These two have 2 planes, but the =
+new
+doc states QC compressed has one plane. Same discussion happened with Arm a=
+nd
+Amlogic Frame Buffer Compression. They both are single plane, and for that
+reason DRM_FORMAT_YUV420_8BIT and DRM_FORMAT_YUV420_10BIT got introduced. T=
+hese
+don't have a linear representation, they reflect the depth, the subsampling=
+ and
+are specified as single plane (single stride). The stride in AFBC is still
+allowed, to avoid forcing the width to be a padded width. The importers sho=
+uld
+walk backward the stride to find the padded width. QC compressed importer
+currently ignores the stride completely, so you have to have the padded wid=
+th.
+
+hope this helps,
+Nicolas
+
+--=-XurZlOBuCgoi/+wYTJZt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCau4lDwAKCRDZQZRRKWBy
+9B09AQCiNR+l/1e2VeNu+RNjbJP0jSKScgnUcsZqLFd8m2lwlQEAgTgIn5070Dvr
+MBTt0SmP8C/5crzqIXMK409biSzy3gQ=
+=mcCx
+-----END PGP SIGNATURE-----
+
+--=-XurZlOBuCgoi/+wYTJZt--
