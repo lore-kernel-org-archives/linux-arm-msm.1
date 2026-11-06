@@ -1,48 +1,42 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.31.26.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793957393;
-	b=Ir+vqWt5YHVroY0CAFxnam5hF2kxVzCBGPtoyRm8+j9G03GtIvVs2zk/lWybWr+AAsV0
-	 d0JBRjmmfcvflM+wZ4ocSW1b9yiN4HlfPtfrE5jP3SA1QBikNvhqUE53c6ZsFey+wvYlJ
-	 5WzukHNhhaMyLn2vY6QsQTQaI/fDQ8dB+uA07viA8yN0KSfDJ/dXUCQmJKIvbq7kPyQab
-	 /6KZ/eI93WIVL78ZwOWn5tX9OpKzH9ZA+jXaRAv1jNKpKNI9yZXiKSG+fcUh0d3WcxRRW
-	 BbafNOJf7HjwbcwkFt0wRUaJfVjXeWXlwSS7WcpRop/Dv7EyScMzkxFbpnyXIfVpQEw==
+	t=1793957636;
+	b=aEcDurcKfkFhZCxjDCB/zGpHoybO8Atqnw5rlv3Vi93xizHB2mwAGWbV/I04cJyNfW+2
+	 1wOyvoTQwRiVeZrkcIxQsfImrmQbDlxSvmuGaa40tInBa0EfEYwbGybZm8bF2ZVaIMyVk
+	 mAQrY4QUeshD9xmQs7hphdz+PJ1dWk7eHEnodVzHXqtXo4e9exiEbqCfiz0WRBzw6ZAW9
+	 axzLkuKrODbNRKgV/YCgV9pnEfkJQp0utS6FcFZWx4DkUhn0/LuZsfTtF/k7wBHvEMyu8
+	 vLZ+iDu7iAxlRGooHOEspSmMBtVXXyRdI4F+tPiv1s9bLC3pLxfNsdOcD3M89Fw2/hQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793957393;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	a=rsa-sha256; c=relaxed/relaxed; t=1793957636;
+	h=DMARC-Filter:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=MQ9OkB6wfqdTgcVkBd82n0DdBKm1PB/QvTWs0MZGpyw=;
-	b=xbLYefXowe7disDmo+ekVhODtps7xzsO3k9r047apzSTsUmub1QGUc53yGMIKZgSVj69
-	 h+W/zcXxnHUtWy3EfkeH/84b1Hkhkjmt/z8RKYznjtlHHZB8qsu0HczevqV8kCIuqGoQR
-	 sjqG8ojtP+BOP2Cq+DwzsigpDpYFxRCOOt+xUrS4L43HJPFIbBO2E6c4vqq5DBQMv3AsU
-	 Lr1IiTa94lhzfQrLgUx1TbmnA4+NGyKIVpHlBwgzxgFU6BJo0iq/iWH1+pT3/SAoGOloU
-	 /qOmb7zmPnnqS7kqtaEeYxMBc5osXI48Nlc91EaOtV+E+WKW9PnOHIjGtUNFXCNAIpw==
+	 X-Mailer;
+	bh=YM0Cas1lmuPvC0RCOoiARMUG2lWu7wZYO/f5PxM2lpk=;
+	b=tmW3cc+aOm7xahb73nNEuoLdYtA+WmeO28YlKxDm8Tzus64GhPegNm9yN6k3iu0oRbLn
+	 IJBOWGewa3NGaMqxjQlD55A6Nd2ikjsZr3xmc7eYu/PHhy06IkIR6VM+SdTFXujv21AgK
+	 rerWkMC4SUI+ryFkUwXMRG45N2Vcz4HBcfDoIzjdIwrvmPzD4Z8CplDxVuNIWjJ/QHqEi
+	 CD+wC7xFZ/Hf4PSsZpOSz5qmICwt7zHH8NLVkTySPAcUTWr23kpkQ4TMOYw6Nbpl4xtqv
+	 Pih5AM3CT+mbalKNDEZqtrM9Zq47UxWe2F35jq/gELTj3cB+qlVgkgX4yQK/aPzfvqQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f+ynfFm1;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=rudorff.com;
+	spf=pass smtp.mailfrom=rudorff.com;
+	arc=none smtp.remote-ip=193.31.26.27
+Received: from rudorff.com (rudorff.com [193.31.26.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C756E606A335;
-	Fri,  6 Nov 2026 09:29:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f+ynfFm1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD9401F0089F;
-	Fri,  6 Nov 2026 09:29:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793957392;
-	bh=MQ9OkB6wfqdTgcVkBd82n0DdBKm1PB/QvTWs0MZGpyw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=f+ynfFm1lMlvrWztprxCIOa3Xn+dvSau3++K8ZnlhqFYcBqHrMgvEooJsrxZFY6Br
-	 M4+t4QjhkKR7SOhV5J+V3IVh2OS9Ki0IvnzAMICx6vlPt1zkJfQc41xxCkleH4l8ce
-	 BwxEAJWpqHv4wLqD1Eo4DddcUrcDJMtYuHCLXHgiBW65CqsqEsshYbtNMma2IidzY6
-	 APCr0xl/aoZ+cev/aeWFculsP65dc1DruHSYR2L3c1GX534bcJvzg0hVBsuiZK81s+
-	 /OEX3I7t8MYipba7CcgJUPFtPq5+FfPgJGBgWWrW5WhwOpyehDkhSjnarC5uf82jDV
-	 upUR0D9AoUN9A==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Fri, 06 Nov 2026 10:29:09 +0100
-Subject: [PATCH v3 8/8] arm64: dts: qcom: Add Glymur SiP CRD
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43E34606EE84;
+	Fri,  6 Nov 2026 09:33:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 43E34606EE84
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rudorff.com
+Received: from [127.0.1.1] (dynamic-002-211-221-196.2.211.pool.telefonica.de [2.211.221.196])
+	by rudorff.com (Postfix) with ESMTPSA id 581F640BE0;
+	Fri,  6 Nov 2026 10:33:47 +0100 (CET)
+From: Christoph Rudorff <chris@rudorff.com>
+Date: Fri, 06 Nov 2026 10:33:28 +0100
+Subject: [PATCH v5 3/3] arm64: dts: qcom: msm8916-samsung-j5: Add proximity
+ sensor
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -54,84 +48,106 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-topic-sip_cob-v3-8-52cd3826ab49@oss.qualcomm.com>
-References: <20261106-topic-sip_cob-v3-0-52cd3826ab49@oss.qualcomm.com>
-In-Reply-To: <20261106-topic-sip_cob-v3-0-52cd3826ab49@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>, 
- Pankaj Patil <pankaj.patil@oss.qualcomm.com>, 
- Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>, 
- Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Message-Id: <20261106-iio-light-gp2ap002-v5-3-070631a7252c@rudorff.com>
+References: <20261106-iio-light-gp2ap002-v5-0-070631a7252c@rudorff.com>
+In-Reply-To: <20261106-iio-light-gp2ap002-v5-0-070631a7252c@rudorff.com>
+To: Linus Walleij <linusw@kernel.org>, Jonathan Cameron <jic23@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ Christoph Rudorff <chris@rudorff.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793957348; l=1849;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=vI7NkJXkioSvW8rX6O7CD/xKKKlgwoa1oPgcQyYMCK4=;
- b=CJNa9AxG2ApR6KUIwz91Rf/xTdXnufAZcpZ9JOb5TiudvD3Vs2sqpMJMC6pY67zsPslhk3S0A
- 5vWodauWn7PDHgH7qMe72I9YQ0nQLEFsIrN1/aswgFbxcYcO/sGNj9+
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+J5 got a gp2ap002 sensor, add it and it's supplies to the device tree
 
-The Glymur family of chips comes in two flavors: CoB (Chip-on-Board),
-where the SoC is soldered down to the PCB and SiP (System-in-Package),
-where an entire module is soldered down instead.
-
-The SiP flavor is used for the couple highest-power SKUs and brings
-with itself a different power grid. Add support for that.
-
-Build it on top of glymur-sip.dtsi for the power grid and reuse
-glymur-crd.dtsi for the rest of the board description.
-
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Christoph Rudorff <chris@rudorff.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile           |  1 +
- arch/arm64/boot/dts/qcom/glymur-sip-crd.dts | 14 ++++++++++++++
- 2 files changed, 15 insertions(+)
+v4: moved declarations from j5-common to j5
+---
+ arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts | 52 +++++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 830c43000897..2684cac9f9c8 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -22,6 +22,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= glymur-crd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= glymur-hp-elitebook-x-g2q.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= glymur-lenovo-yoga-slim7x.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= glymur-qcb.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= glymur-sip-crd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-advantech-som-db5830.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-iot-evk.dtb
+diff --git a/arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts b/arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts
+index ba8650971d6a..efac29485df8 100644
+--- a/arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts
++++ b/arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts
+@@ -8,6 +8,17 @@ / {
+ 	model = "Samsung Galaxy J5 (2015)";
+ 	compatible = "samsung,j5", "qcom,msm8916";
+ 	chassis-type = "handset";
++
++	reg_leda_proximity: regulator-leda-proximity {
++		compatible = "regulator-fixed";
++		regulator-name = "proximity_leda";
++
++		gpio = <&tlmm 73 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&proximity_ldo_en_default>;
++		pinctrl-names = "default";
++	};
+ };
  
-diff --git a/arch/arm64/boot/dts/qcom/glymur-sip-crd.dts b/arch/arm64/boot/dts/qcom/glymur-sip-crd.dts
-new file mode 100644
-index 000000000000..5b4c6f80cfab
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/glymur-sip-crd.dts
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
+ &accelerometer {
+@@ -19,6 +30,24 @@ &blsp_i2c5 {
+ 	status = "disabled";
+ };
+ 
++&i2c_sensors {
++	proximity-sensor@44 {
++		compatible = "sharp,gp2ap002s00f";
++		reg = <0x44>;
++		interrupt-parent = <&tlmm>;
++		interrupts = <113 IRQ_TYPE_EDGE_FALLING>;
++		vdd-supply = <&pm8916_l17>;
++		vio-supply = <&pm8916_l5>;
++		leda-supply = <&reg_leda_proximity>;
 +
-+/dts-v1/;
++		sharp,proximity-far-hysteresis = /bits/ 8 <0x2f>;
++		sharp,proximity-close-hysteresis = /bits/ 8 <0x0f>;
 +
-+#include "glymur-sip.dtsi"
-+#include "glymur-crd.dtsi"
++		pinctrl-0 = <&proximity_int_default>;
++		pinctrl-names = "default";
++	};
++};
 +
-+/ {
-+	model = "Qualcomm Technologies, Inc. Glymur CRD (SiP)";
-+	compatible = "qcom,glymur-sip-crd", "qcom,glymur";
+ &pm8916_codec {
+ 	qcom,micbias1-ext-cap;
+ };
+@@ -30,3 +59,26 @@ &touchscreen {
+ &usb_hs_phy {
+ 	qcom,init-seq = /bits/ 8 <0x1 0x19 0x2 0x0b>;
+ };
++
++&pm8916_rpm_regulators {
++	pm8916_l17: l17 {
++		regulator-min-microvolt = <2850000>;
++		regulator-max-microvolt = <3100000>;
++	};
++};
++
++&tlmm {
++	proximity_ldo_en_default: proximity-ldo-en-default-state {
++		pins = "gpio73";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	proximity_int_default: proximity-int-default-state {
++		pins = "gpio113";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
 +};
 
 -- 
-2.56.0
+2.39.5
 
