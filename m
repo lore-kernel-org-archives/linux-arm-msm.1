@@ -1,47 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793967365;
-	b=nADUlKATo4l0HutEE2Jj6ReBXPzyRvMR00deCvmmHffDZ+eWgEnQUJ4BYHx/Ywxc3sO7
-	 NAnDH4QQEsYk+duNEez5Yczi5sKHDTuo9SAiCC25Qzg24axo9JCGRPhuvAi46Ojs46+hU
-	 Q+9U7vGR6fZHSai+HsFufEO5N9j05nlCvlUZRcaT1AW82TSH7KPbVJZRYey/sBsghWX5T
-	 DqzDSFInt9YkLSLOZkSJ4DK9pUTlV2skAxsCfzVCp2z7FzKUUSRVy+rXTElTbjCEy3sL8
-	 yzEezfXC4In/rY7GqgzXFf+PyNMFzhZUsgn0aQIu/Ly9ns5xNH2BX4dYL7MPIiYMzWw==
+	t=1793968155;
+	b=e0KgGApoLVjORszqMfCG142HC8D2ROQaqx7nV0n9bphc5nERLAF3kG5uSJzSDtwcaCMq
+	 HgisFf66CYQ4+b3BLfLxLW04dpBkQleTnKzclfBzLm22Nn5EoHgGO7FHI7Tx1Orj7kNdf
+	 939RI6MOuHpS3jHEnMPwNFCKPXvIFeIa8sDrclVSs1tvmTGh+LMavOd9y8KgSXD/PrCkY
+	 ebyqx1uECm0HC0l5Vv1S0Pyswf5OgLBcvulAnSprxWmG2noGAqf1J0DKu0NvKYSmOUOa9
+	 Sx8kAyCQwMIl0pgJi1CRpSJyFSmdpt/z2bmzCWpHN1XaeE06h7bwmZ7PYDHZEw7ISsw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793967365;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=GeKamPVoZL1FTnpLfPJEoUo6MPgLXcn6L2ctH3dFkr0=;
-	b=Gmrln6kYRJJYWoY2Rmdhi31zeB9tw8jaIF3g0I7vsGODpX5eQH8De1qXgai3X0rMelE/
-	 YRbsq2HSOAW05kt6NaSMPcRCVPbfqAZprj5bo5RQIwas1Y3ZM6dBUrHgBKmfGhF6MoPOb
-	 5PFehuqXKFLJnjjPafPA09w9kLd0dARE+DbMVbCKRqU0TavbgQ+rtMGT9OJIJ2Y08ZXi1
-	 rCjy7JzlbdNN65K+nrIoZbqMu0CAZnU2P+ALBaVE1pkJo5pcwlJio5CAEFcEUr7IujN2w
-	 2toisDwl84g3WANMz3uxPnz52AtqLqgF4sw4dD4/0fB3exMOTcc3e/UUXnWCGHiIBKA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793968155;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=cTQ/P55IE3fl7mkbvBy9Aon27LSao1cHBb5tYdZpUE4=;
+	b=ZZ1cEIr5XdQ5X4ewu5gQuASFyPC7eQ6seVIAP+Rqzz/g+SVfMLF66bC5xKUV630Nq6Hw
+	 Wme6kGIAHwTnmr2LK/ybx1/D3a3TDqa9I8Js/hkMw6f99Q8x4qQnkwyr+lSxneW09I4q6
+	 aQF5wKSxWOW87o6jFpA3XoHoIhYcGGalOiX43vP2q1eMqttFwk3I87i6/2LMZXGiueWDb
+	 /xMHLEA3LjK7F6xxhqS9MEwt1geWIaDmt2RS+btk3rlQI4FcH929xfJOgKhc6vKCEqA1u
+	 86RlT3HWNxkfl1tYzKQ9k56COwpi1Nge8/yeqWrXh0eJVCEweyARWjzMosexGar8pHw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iyylqCIR;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=H9R4ngRU;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z+OFH6MU;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52646606A326;
-	Fri,  6 Nov 2026 12:16:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40555606A326
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 12:29:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 40555606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iyylqCIR
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9785E1F0089F;
-	Fri,  6 Nov 2026 12:15:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793967364;
-	bh=GeKamPVoZL1FTnpLfPJEoUo6MPgLXcn6L2ctH3dFkr0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=iyylqCIRzomWH2XFeQa6wTnmJI1ts49z3C5b+O/3nRHaqtfnGT97H35hFnhKoESO0
-	 I3fgriaOvtxO/mwXkh+oI4qzkVUBVlcuZOylBTxX5zGvjjAgk6NeTX0zFPZ3LJXs3d
-	 RgTfg7eor3INyJgKdZl4u8LOHb27d4lfSHlhz0XgJ/AH1tKJulSSctmQj3c5Tg2C95
-	 BJjJelPnzyf3cF4HVZNWMF3cNYm7oOR/JXeB+n/5znYa5t0ruakJF1/c+sQF3gisnx
-	 rZFigGUtXmJ1zy7cHyUMlRgBfuOodkq2W/uCxHhHPSASoG3Nkry+GPyQxexCY80xwB
-	 NQOnxbkiz8kFw==
-Message-ID: <b6295fd3-0cb2-40aa-8da7-237d456d5abf@kernel.org>
-Date: Fri, 6 Nov 2026 13:15:56 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=H9R4ngRU;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z+OFH6MU
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6APNcs114833
+	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 12:29:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	cTQ/P55IE3fl7mkbvBy9Aon27LSao1cHBb5tYdZpUE4=; b=H9R4ngRUG/g+2djk
+	gHAA5lg8qaVWW9tyBja1g1wFNgobzGjZCWVMAjcUhV4/x3e/qMWqHlhzk392Wx4R
+	vVMNwLNbtJ+OvaSEAn/0ScW2psBHKujdJ976kCrVBtu14Bvgd/Xqow6hVBqVR7cg
+	j7VsiOpSxkvJd2VuG2tzjm2yUII/C8r14LfzPeUwN2ijEJjcOlViJ4gGFL2erE4B
+	+LpvDmTZx+UxPk+Orz6bKwYGAz+cxA4xI8jBnBCFA4Sn357bkYuQFZ8cIoVDHtZ5
+	g4wFLd60ixA8Zza1fx75T4tXsaEeMYG7ATj5/VViT9bWg43JJH4zjKoMVJn6819d
+	aY2Cgw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3patr6y-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 12:29:13 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f1440e081so14353485a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 04:29:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793968152; x=1794572952; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cTQ/P55IE3fl7mkbvBy9Aon27LSao1cHBb5tYdZpUE4=;
+        b=Z+OFH6MU2mP2J0OGm2Bti45V+InAg2JWcq1zp9FBGcKlvm4Mh4KMRWqyFRobAq9EGn
+         CkN949zvakCoBTx0LKdPQIsNFOhG5kjgK6xcUDrbm+aQaYMb20Dhe7KU5KloTu9IJ9PZ
+         /ojUfZEorNu1uPW6hi3KWoLUJKj8bERvCUjNV0iVslhU5qlT21/KhitE896G1lHukB5S
+         hIDX+7Ef45mbSiTIVXCtdWRJLgCQFVIc35bG3LHMQHZ6S9OYJFuPxxhbiJGvyTG/L42U
+         Qb5/AwIgjwhjc4ZwwOHeUPA5sFqSIv2kVfkK2tDxvyDSnBno9K+fQW1IcALbVHOH8VXf
+         J3gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793968152; x=1794572952;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cTQ/P55IE3fl7mkbvBy9Aon27LSao1cHBb5tYdZpUE4=;
+        b=xKLqGKXYd7RHQDXlCcMNMqk9sWHtW0NftIdcNtAhddeg1Mxv1SQoSlAp31PwbuN9MV
+         XmVnvhlXi7ggG/qJnS1eDgLoG+YTlxvpfdIK0Dlq78uMfJjucIp7E9+qHSGRBiacrIW/
+         PgmMz1qK2jt0b/EpJ8H2m79ygr2EfBCBukh8MmpQf6NZhuYOTDx3EcDlO8mihgFcRVCt
+         yP/3Btc7TOeLy0lHlWixNrZFf7hvCMxolNxEznv/gX3oJu8fhQKLUpNWIkUzjyASvzqb
+         f2xdRNbJsFj33MqJJHiQ5VPU0MlWGANCN6hJgyZOzKKi7eWbY4paQUhl9iNnMSzs6uzy
+         byAw==
+X-Gm-Message-State: APuU4Z/B72n1P1LSMo/2UDLIhL9VlDPnAcNWKSue79cvmOBGaRsO2MGK
+	jgQn/QaGOkjGskT1swXStSmIeCMd2FMYsLAmiFVmDFY5RxQbis1lU0lB0VfE2Dfc8Bb5LE9/X9x
+	xRiGzkQ1w8F62VpV0Z7ufVp75u1TkQCBwDnHfCAh9gBbiw/nxVgWd+U3O+pJ0eEJHuif+
+X-Gm-Gg: AYBFou1ysbZNXnjCYIsJE7bls7Fsw5BEsN6jT9BkLxP95JOBmSU2oNRE5vYvD9+Y6Qt
+	vUVe62Cuh5Jrpz53JZNEcW5D/jOF88/MSjzT6AC3+7CdY8psCnzKo/IdRhHqnINDktqw1JEZ6wW
+	xiH37tWrmhmS2+peJ63MxDwM9uiVZVD+uRagjsctYyHn54+Yy0FvMYHa8Oc2WV/eCuBP1JbaQQU
+	6sfFLtzg2b61MgXOxDz8cxny4PvgAEAgz7lJ3tQQdX/1qI4FjtMl8z197Oi8X6FuwAPV26Hy4D4
+	W10VnPiCIwxrpqvxraGc9CMbKBgvFI7vOM3ZJVJ3O5+sRERPFThxNtSlBUFrOjmWCFiqAeLu5XT
+	4eJR0eQPtqFw9JV1Fw9sSeNTHOXG8WeWKM1GbAE5HCY4E4rHLxuhbPJHrvWhD7varrzM54Q==
+X-Received: by 2002:a05:620a:a994:20b0:939:8148:1e3d with SMTP id af79cd13be357-945f33c0c23mr325506985a.2.1793968152557;
+        Fri, 06 Nov 2026 04:29:12 -0800 (PST)
+X-Received: by 2002:a05:620a:a994:20b0:939:8148:1e3d with SMTP id af79cd13be357-945f33c0c23mr325502185a.2.1793968152022;
+        Fri, 06 Nov 2026 04:29:12 -0800 (PST)
+Received: from [192.168.226.72] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4d354ac249sm78001466b.5.2026.11.06.04.29.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 06 Nov 2026 04:29:11 -0800 (PST)
+Message-ID: <be2c9147-1c19-4dba-a56a-aae47b838cf4@oss.qualcomm.com>
+Date: Fri, 6 Nov 2026 13:29:08 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,374 +114,67 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] dt-bindings: media: qcom,sm8150-camss: Add SM8150
- CAMSS
-To: mail@andrewgigena.dev, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20261106-sm8150-v7.4-rc1-camss-v2-0-39ee37787b00@andrewgigena.dev>
- <20261106-sm8150-v7.4-rc1-camss-v2-2-39ee37787b00@andrewgigena.dev>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH] arm64: dts: qcom: sm8150-microsoft-surface-duo: fix
+ da7280 pinctrl state name
+To: ivanverbovoy@gmail.com, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261103-a1-duo-da7280-pinctrl-v1-1-be1a6dd10f20@gmail.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v2-2-39ee37787b00@andrewgigena.dev>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261103-a1-duo-da7280-pinctrl-v1-1-be1a6dd10f20@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA0OSBTYWx0ZWRfXyaipS4fX4hHY
+ iLbMb5Ytr17OWdylIc7HTdBmBtUUXFC1hJG2dCF39meelmfmNMZBawnK+ah2lS3I+XX6kAdS2eZ
+ 90opLGT6/Rr72oYtet6syp8n89Pa/RFn8860Lu1ZOWV0oj3mV0yHIAUfJ4V7wpdiUNYRNO21abX
+ ArGSPnR4QFOQVMg08pDLBoRUqxXSF6wnMHfKU37I6LxjVVqwyBv1R7R3J2P+7BqhiI220q/2jcb
+ 12tJRy8ACIEMzIpSNLTLwhfECgsC164Q90GDLh3GIRyn9vg6isd3x4ydWox28y5EL73ob4QHJqA
+ +wuZZnEGT/5vU7fRL6LFXxbYdCOBbLiKBpDK89qOfFKitQmtFWj9nR20ZzMln9B3M34l6TE48ac
+ qMhQNcJiaKWsM1iOkqh4kSSm7s6esRVlK1XFFA9CULQRgx2Hl/7svD4QtN8w3jwTN8/2cdIFc6L
+ fnkundqwKjSbz1LPFGg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA0OSBTYWx0ZWRfX2PIaYErmRV/b
+ 6VAd4qw+8gzDXsvNm9ATRLXptMCdC77RNOTpkjzHz/mv+BAmHLyeAnAnJsI2hOK6tG1rnSldiFC
+ Mtd1+D6Zm4p9tfin3tZOW8DGojyR+/Q=
+X-Proofpoint-GUID: Kcxti6-_7WufGVZm4RzHmAaUb7vfkSJI
+X-Authority-Analysis: v=2.4 cv=P4ivFSAu c=1 sm=1 tr=0 ts=6aedc819 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=2dXNOmNVTs6F5e4hHE8A:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: Kcxti6-_7WufGVZm4RzHmAaUb7vfkSJI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-06_03,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 clxscore=1015 spamscore=0 phishscore=0 suspectscore=0
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611060049
 
-On 06/11/2026 04:24, Andrew Gigena via B4 Relay wrote:
-> +---
-> +$id: http://devicetree.org/schemas/media/qcom,sm8150-camss.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Qualcomm SM8150 Camera Subsystem (CAMSS)
-> +
-> +maintainers:
-> +  - Andrew Gigena <mail@andrewgigena.dev>
-> +
-> +description: |
+On 11/3/26 8:27 PM, Ivan Verbovoy via B4 Relay wrote:
+> From: Ivan Verbovoy <ivanverbovoy@gmail.com>
+> 
+> The pinctrl core applies a device's "default" state by itself and the
+> da7280 driver requests no state of its own, so the state named
+> "da7280_default" is never selected: gpio42 stays as the firmware left it
+> and its pull-up is not applied. The interrupt line is open-drain and
+> level-low; after a suspend/resume cycle it stays low and the threaded
+> handler runs continuously (about 2900 times a second) with no event in
+> the chip, which slows the whole system down.
+> 
+> Name the state "default" so it is applied at probe.
+> 
+> Fixes: d1f781db47a8 ("arm64: dts: qcom: add initial device-tree for Microsoft Surface Duo")
+> Signed-off-by: Ivan Verbovoy <ivanverbovoy@gmail.com>
+> ---
 
-Do not need '|' unless you need to preserve formatting.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-> +  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,sm8150-camss
-> +
-
-Missing reg and reg-names.
-
-
-> +  clocks:
-> +    minItems: 27
-> +    maxItems: 27
-> +
-> +  clock-names:
-> +    items:
-> +      - const: camnoc_axi
-> +      - const: cpas_ahb
-> +      - const: csiphy0
-> +      - const: csiphy0_timer
-> +      - const: csiphy1
-> +      - const: csiphy1_timer
-> +      - const: csiphy2
-> +      - const: csiphy2_timer
-> +      - const: csiphy3
-> +      - const: csiphy3_timer
-> +      - const: vfe0_axi
-> +      - const: vfe0
-> +      - const: vfe0_cphy_rx
-> +      - const: vfe0_csid
-> +      - const: vfe1_axi
-> +      - const: vfe1
-> +      - const: vfe1_cphy_rx
-> +      - const: vfe1_csid
-> +      - const: vfe_lite0
-> +      - const: vfe_lite0_cphy_rx
-> +      - const: vfe_lite0_csid
-> +      - const: vfe_lite1
-> +      - const: vfe_lite1_cphy_rx
-> +      - const: vfe_lite1_csid
-> +      - const: gcc_ahb
-> +      - const: gcc_axi_hf
-> +      - const: gcc_axi_sf
-> +
-> +  interrupts:
-> +    minItems: 12
-> +    maxItems: 12
-> +
-> +  interrupt-names:
-> +    items:
-> +      - const: csiphy0
-> +      - const: csiphy1
-> +      - const: csiphy2
-> +      - const: csiphy3
-> +      - const: vfe0
-> +      - const: csid0
-> +      - const: vfe1
-> +      - const: csid1
-> +      - const: vfe_lite0
-> +      - const: csid_lite0
-> +      - const: vfe_lite1
-> +      - const: csid_lite1
-
-Which schema did you take as starting point / example? Which one has
-similar order? Looks quite different than sm8250 and sm8650.
-
-> +
-> +  iommus:
-> +    maxItems: 8
-> +
-> +  interconnects:
-> +    maxItems: 4
-> +
-> +  interconnect-names:
-> +    items:
-> +      - const: cam_ahb
-> +      - const: cam_hf_0_mnoc
-> +      - const: cam_hf_1_mnoc
-
-hf_1 should probably go to the end, to match similar devices schemas.
-
-> +      - const: cam_sf_0_mnoc
-> +
-> +  power-domains:
-> +    items:
-> +      - description: IFE0 GDSC - Image Front End, Global Distributed Switch Controller.
-> +      - description: IFE1 GDSC - Image Front End, Global Distributed Switch Controller.
-> +      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
-> +
-> +  power-domain-names:
-> +    items:
-> +      - const: ife0
-> +      - const: ife1
-> +      - const: top
-> +
-> +  ports:
-> +    $ref: /schemas/graph.yaml#/properties/ports
-> +
-> +    description:
-> +      CSI input ports.
-> +
-> +    properties:
-> +      port@0:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY0.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@1:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY1.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@2:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY2.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@3:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY3.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +  reg:
-> +    minItems: 12
-> +    maxItems: 12
-> +
-
-Oh, oddly placed reg. Please move it to the top as expected by DTS
-coding style.
-
-
-> +  reg-names:
-> +    items:
-> +      - const: csiphy0
-> +      - const: csiphy1
-> +      - const: csiphy2
-> +      - const: csiphy3
-> +      - const: vfe0
-> +      - const: csid0
-> +      - const: vfe1
-> +      - const: csid1
-> +      - const: vfe_lite0
-> +      - const: csid_lite0
-> +      - const: vfe_lite1
-> +      - const: csid_lite1
-> +
-> +  vdda-phy-supply:
-> +    description:
-> +      0.88V supply to CSIPHY IP blocks.
-> +
-> +  vdda-pll-supply:
-> +    description:
-> +      1.2V supply to CSIPHY IP blocks.
-> +
-> +required:
-> +  - clock-names
-> +  - clocks
-> +  - compatible
-> +  - interconnects
-> +  - interconnect-names
-> +  - interrupts
-> +  - interrupt-names
-> +  - iommus
-> +  - power-domains
-> +  - power-domain-names
-> +  - reg
-> +  - reg-names
-> +  - vdda-phy-supply
-> +  - vdda-pll-supply
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/clock/qcom,gcc-sm8150.h>
-> +    #include <dt-bindings/clock/qcom,sm8150-camcc.h>
-> +    #include <dt-bindings/interconnect/qcom,sm8150.h>
-> +    #include <dt-bindings/power/qcom-rpmpd.h>
-> +
-> +    soc {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +
-> +        camss: camss@ac65000 {
-
-isp@
-
-And drop unused label
-
-
-> +            compatible = "qcom,sm8150-camss";
-> +
-> +            reg = <0 0xac65000 0 0x1000>,
-> +              <0 0xac66000 0 0x1000>,
-> +              <0 0xac67000 0 0x1000>,
-> +              <0 0xac68000 0 0x1000>,
-> +              <0 0xacaf000 0 0x4000>,
-> +              <0 0xacb3000 0 0x1000>,
-> +              <0 0xacb6000 0 0x4000>,
-> +              <0 0xacba000 0 0x1000>,
-> +              <0 0xacc4000 0 0x4000>,
-> +              <0 0xacc8000 0 0x1000>,
-> +              <0 0xaccb000 0 0x4000>,
-> +              <0 0xaccf000 0 0x1000>;
-> +
-> +            reg-names = "csiphy0",
-> +              "csiphy1",
-> +              "csiphy2",
-> +              "csiphy3",
-
-All this looks unaligned.
-
-
-Best regards,
-Krzysztof
+Konrad
