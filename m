@@ -1,72 +1,62 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1793964516;
-	b=U0tNDMP4kxEu4FPdXwVPWqERzdjbL95dpE4yaSb6sCgya4UG/WMg3PH1EFZ+O22tc5xH
-	 GUqrJqzmYGpa9cD6LX50UxQ1R2J3bXs4XtKBO7yEho5EyaCC8VVekMKOBe/dyTURvsRnF
-	 oYKuSz0hB9SR8M688KG0UdXtClChzt9VLmKHPUlstML49vLexffw5ggdfxrwUtB3PQBSw
-	 BHli3IgtZwmKZR3V+QN9naNvCZ3dsvUFtmPatFmeD69vwEzvUhsysUS+sTObP1cBeJHww
-	 I3l6y3W3kf7KH2RSC/7R+RwqaLKXuhEfgD9y6Bo3hfYD7CYKZ20YMgyfUsbWzYHHPfw==
+	b=JS6YuodLxtBGuQKPoz7XpRJ7qK8BJI1wgKbTgLTRoKEQxeeinkYrGm5PoJjsC37UJJPj
+	 ErnoOQHVRbCbLaN/hGeI5lR4B9pYAEaakNumbOa4AeZIy5OjSAzo4bpcidAW59QVHOhrp
+	 Xc5frfkkoIZCY+U9GyyaQLAqpMmjF1k602ZsWymtg0pKvEFllwMuUqSQDazhA6gVxofuv
+	 1wjx8cm9oNPVKt8JY/rVAw+gehxSPbTANGsYfJu10lf7NsFFUeboTIvtMmCkf39MdWnfk
+	 N4HQhmcJaEUZbJRCkKGaHoklm1flIIW7Zi96mYtliUB1faFgD6igX4DC3BU57aBaQ9A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1793964516;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=CIy0lVCVJTm092QOP8ykWpxdfJotD/wijuOAR10N4ZM=;
-	b=14uyE7RPHvweVHAh3PKLVEVvu98qhiGTRIq6IveYntRtyKTcCBZWeb4gxe6eSrcP1Rnm
-	 VOielU66tHd3Ryx7ZDSPsJbiEirelSEiJ3WeQMjlVSarcJs5uqQnsgRI8HTIFNoLX5Tla
-	 Bx7GrmaXWmhRgJCRwnLUNS5wfRyixZcqwsZr9Sh9Wkue21Ol+IZGHPIEYDoV5Dhp7a2L/
-	 S+TIB7oeuU91F0lpVr/4Cj1bjuPFKYcRwI4SqKFzfnuGKQjQt0BWRrV8oRmExhhcXiIvF
-	 Y4gb+7tBpmiRQoWnaqA5RCMtabPHSbKtEX5ykZ/f64ismuReOrTAbzgDbobicE7zFSg==
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=ERoJU+YSkcdzSJp45/76zizxO7Q36Iy9/z1bkXjHy9E=;
+	b=jRIoRd0vwLPD3DZF96LRT5nFH8ofX0tgTgPzr/eZ2oYXUewGpPHRbeDW8q87PwVENWxR
+	 gB7EvmER2MRwnkUKJ3iaOko/QjCm20yPznVjeY3xYzoW9HOhTlGUzVZ44Musvf84sfeGs
+	 RFfA/7l5xhRd/FThLVC1Wc7+CBRXQWwkutwaB85ZI++20UCUxg63eHmtoAWR+nRJUTvof
+	 IE+DKmygbTvrwrYFfVSm9HyMUxU38TFWeYKUmmL0cxAN7jzfSizy+8KLo7u3w6W0NxsGX
+	 +4J4qt/VeE3VkxRJopNxiP3ebVB5Q6CtaF0p4b5S6j6kTSS/r1Sv2+U5pvpHR2vldSQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gondor.apana.org.au;
-	spf=pass smtp.mailfrom=gondor.apana.org.au;
-	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cTvo9FKB;
-	arc=none smtp.remote-ip=180.181.231.80
-Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5B9F606A32E;
-	Fri,  6 Nov 2026 11:28:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D5B9F606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=f5K0F+RR;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79657606A32C;
+	Fri,  6 Nov 2026 11:28:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 79657606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cTvo9FKB
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
-	from:content-type:reply-to; bh=CIy0lVCVJTm092QOP8ykWpxdfJotD/wijuOAR10N4ZM=; 
-	b=cTvo9FKB5Qy/jdvM3frit45Y30XB0MYV81CeJ7OMzmtpFdgLgEj0NLJTC3QCbRG+RaEwX/IfVt0
-	7/AGu/xbaV6JHkUR01JKE058jtOfC86o7U7M2ztn1KE2Izvjn2xXEbUcWnty/S9sag5ydWogwCwwq
-	aoqjfazTa8VuACnXx2N/ZzawMACaxn7N+RAVg6lgWaE4uhrBCTmmaGHOzLnVkQ5V52UMxOL9Onuhn
-	tDsKNi8SjzErRH7OoLgHoCYBtwfnzijRu7ftDyPpBMFcghAniW6JFJJB+QF3McokcXhE/iX3OQw/e
-	Sa6tnV+e1BoxAOfFhmDC40g0+PXSYVtSAC1A==;
-Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
-	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
-	id 1xPI7Q-0000000Br5b-1IrV;
-	Fri, 06 Nov 2026 19:28:29 +0800
-Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 06 Nov 2026 19:28:28 +0800
-Date: Fri, 6 Nov 2026 19:28:28 +0800
-From: Herbert Xu <herbert@gondor.apana.org.au>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eneas U de Queiroz <cotequeiroz@gmail.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Eric Biggers <ebiggers@kernel.org>,
-	Demi Marie Obenour <demiobenour@gmail.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Subject: Re: [PATCH] crypto: qce - Fix HMAC self-test failures for empty
- messages
-Message-ID: <au253K71iaZeVNth@gondor.apana.org.au>
-References: <20261016-qce-fixes-sha-v1-1-3ee5a30d84f3@oss.qualcomm.com>
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=f5K0F+RR
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:
+	Content-Transfer-Encoding; bh=ERoJU+YSkcdzSJp45/76zizxO7Q36Iy9/z
+	1bkXjHy9E=; b=f5K0F+RRqLy9orWKgIp0OTDLaF+TIPPoeOeW9M69Nll1Eg8uw5
+	M58ISbet5bimhGMGYizAkJUb29RU4CRsrBtvu5t4vPviZuH3rhhjv5qcmekI45Jh
+	vYBxb2mtp9NYzyPZrR1yKsEqFlMOieY9QD2A2dfIouS1tQpO1aCe2SRrs=
+Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.184.75])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgC3P0TLue1q1i6PAA--.473S3;
+	Fri, 06 Nov 2026 19:28:16 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: gregkh@linuxfoundation.org,
+	Thinh.Nguyen@synopsys.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: linux-usb@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 1/3] dt-bindings: usb: snps,dwc3: describe two connectors sharing one HS bus
+Date: Fri,  6 Nov 2026 19:28:09 +0800
+Message-ID: <20261106112811.963923-2-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261106112811.963923-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261106112811.963923-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,120 +66,205 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261016-qce-fixes-sha-v1-1-3ee5a30d84f3@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgC3P0TLue1q1i6PAA--.473S3
+X-Coremail-Antispam: 1UD129KBjvJXoW3ArW8Jr4xCryfXr45KF1rWFg_yoW7Zw4kpF
+	Zxtan3JFWkKryfZ397A3W8uwn5Kws8JrnrJr18Ar1UAan8Gr1rXw43KwnIqayUCr97Za4Y
+	9rykW3WkXa17CaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUBab7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
+	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcV
+	CY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
+	c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
+	8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
+	s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7AKxVWUtVW8ZwCF04k20x
+	vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
+	3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
+	AIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAI
+	cVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2js
+	IEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07bO9aPUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2rs2VhhrAAesA
 
-On Fri, Oct 16, 2026 at 04:23:43PM +0200, Bartosz Golaszewski wrote:
-> BAM DMA cannot process zero-length transfers, so the driver always holds
-> back at least one byte to submit to the engine and only ever finalizes
-> with an empty buffer when nothing is left to submit. For plain hashes
-> this was handled by returning the precomputed hash of the empty message
-> (tmpl->hash_zero), but HMAC's result depends on the key and cannot be
-> constant, so hmac(sha256) produced an incorrect digest for an empty
-> message and the crypto self-tests failed.
-> 
-> A zero pending buffer at finalization time does not necessarily mean the
-> message itself is empty, though: the caller can also reach it by
-> importing a state that already reflects some hashed data with nothing
-> currently buffered (crypto_ahash_import() followed directly by
-> finalization). Special-casing only a genuinely empty message would
-> silently compute the wrong result for an imported state in that
-> scenario.
-> 
-> Handle every zero-length finalization consistently through the software
-> fallback ahash instead. When nothing has been processed yet, let the
-> fallback compute the result from scratch using the key already propagated
-> to it via setkey(). Otherwise, reconstruct the fallback's running hash
-> state from the state kept by the driver and finalize from there,
-> accounting for the HMAC ipad block that the engine absorbs internally and
-> that never goes through update().
-> 
-> Cc: stable@vger.kernel.org
-> Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine driver")
-> Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> Tested-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> ---
-> As requested by Herbert: I've split the large series fixing self tests
-> into smaller chunks for easier review.
-> ---
-> Changes in v12:
-> - Split out the SHA patch into its own submission
-> - Link to v11: https://patch.msgid.link/20261016-qce-fixes-skcipher-v11-0-d13ddfe609a4@oss.qualcomm.com
-> 
-> Changes in v11:
-> - Split out the skcipher patches into a smaller series for easier review
-> - Drop patch "crypto: qce - Fix CTR-AES for partial block requests" as a
->   subsequent commit makes this adjustment effectively dead code
-> - Fix a mid-series build failure due to an earlier bad rebase
-> - Link to v10: https://patch.msgid.link/20261013-qce-fix-self-tests-v10-0-57162a38a554@oss.qualcomm.com
-> 
-> Changes in v10:
-> - don't pass a NULL buffer to sg_init_one()
-> - fix byte order of the imported hash state on empty finalization
-> - don't recompute the CTR counter in software for every request
-> - reject skcipher requests with a too short scatterlist
-> - check fragmentation for empty CCM decryption requests too
-> - don't use a static loop iterator (duh...)
-> - initialize the return value in qce_handle_queue()
-> - Link to v9: https://patch.msgid.link/20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com
-> 
-> Changes in v9:
-> - Rebase on top of cryptodev/master
-> - Rephrase Kconfig help text changes
-> - Link to v8: https://patch.msgid.link/20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com
-> 
-> Changes in v8:
-> - Add a patch making the crypto driver *not* register algos by default
->   but only if the user explicitly requests it with the provided module
->   parameter
-> - Use the "offloader" name for the crypto IP instead of "accelerator"
-> - Fix device module table issues
-> - Make the core driver use a list (despite it only having a single
->   member now) of child auxiliary devices to register to make it clear we
->   have the intention of extending this once we start the work on secure
->   media playback
-> - Link to v7: https://patch.msgid.link/20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com
-> 
-> Changes in v7:
-> - Add follow-up changes converting the QCE crypto driver to auxiliary
->   bus, adding the core QCE driver under drivers/soc/ registering the
->   auxiliary device and removing the BROKEN Kconfig label
-> - Link to v6: https://patch.msgid.link/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com
-> 
-> Changes in v6:
-> - Handle all zero-length HMAC finalizations (like imported state with
->   data already hashed), not only the genuinely empty message case
-> - Add an additional patch addressing the fragmented skcipher payload
->   issue
-> - Link to v5: https://patch.msgid.link/20260706-qce-fix-self-tests-v5-0-86f461ff1829@oss.qualcomm.com
-> 
-> Changes in v5:
-> - Dropped patch 1/8 that's already queued
-> - Use the pre-allocated fallback ahash for HMAC transforms (Herbert)
-> - Link to v4: https://patch.msgid.link/20260622-qce-fix-self-tests-v4-0-4f82ffa716c6@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Remove remaining ECB and DES3 bits
-> - Pick up tags
-> - Link to v3: https://patch.msgid.link/20260617-qce-fix-self-tests-v3-0-ecc2b4dedcfd@oss.qualcomm.com
-> 
-> Changes in v3:
-> - Remove even more algorithms and dead code in patch 1/8
-> - Link to v2: https://patch.msgid.link/20260615-qce-fix-self-tests-v2-0-dc911f1aad42@oss.qualcomm.com
-> 
-> Changes in v2:
-> - Add fixes for the full suite of crypto self-tests
-> - Add Fixes and Cc tags
-> - Link to v1: https://patch.msgid.link/20260610-qce_selftest_fix-v1-0-1b0504783a46@oss.qualcomm.com/
-> ---
->  drivers/crypto/qce/common.h |  1 -
->  drivers/crypto/qce/sha.c    | 62 ++++++++++++++++++++++++++++++++++-----------
->  2 files changed, 47 insertions(+), 16 deletions(-)
+Two connectors can share the High Speed D+/D- pair of one DWC3 controller,
+with a GPIO selecting which of them is connected, while their Super Speed
+lanes stay separate.
 
-Patch applied.  Thanks.
--- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
+Describe that in snps,dwc3-common.yaml:
+
+  - "port-select-gpios" selects which connector drives the shared bus;
+  - each connector is a port of the controller's "ports" node, "port@0"
+    and "port@2", with one endpoint per port, so that "ports" keeps
+    describing the controller's own buses as the graph bindings expect
+    (port@1 is the Super Speed lane of the PHY, described by
+    snps,dwc3.yaml);
+  - the endpoint of a connector carries "mux-state", the level of the
+    port-select GPIO that reaches it, and "usb-role-switch", declaring
+    that this connector has its own role-switch input.
+
+The controller node must carry "usb-role-switch" as well, and dr_mode is
+required to be "otg": dwc3_get_dr_mode() otherwise forces dr_mode back to
+peripheral, dwc3_get_extcon() skips the role-switch branch and
+dwc3_drd_init() never sets the mux up, so a device tree that passed the
+schema would not describe a device tree the driver can act on.
+
+The two connectors must claim opposite levels of the GPIO, which is
+expressed as one choice between the two assignments, and endpoint names
+use the pattern of graph.yaml so that an unnumbered or third endpoint is
+rejected instead of escaping "unevaluatedProperties: false".  When
+port-select-gpios is absent the endpoint properties are rejected, so
+existing single-connector descriptions are unaffected.
+
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+ .../bindings/usb/snps,dwc3-common.yaml        | 116 +++++++++++++++++-
+ 1 file changed, 114 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
+index 6c0b8b6538..0be2a6e83e 100644
+--- a/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
++++ b/Documentation/devicetree/bindings/usb/snps,dwc3-common.yaml
+@@ -13,6 +13,40 @@ description:
+   Defines the properties of the DWC3 core as being embedded in either an
+   vendor-specific implementation or as a standalone component.
+ 
++$defs:
++  hs-endpoint:
++    $ref: /schemas/graph.yaml#/$defs/endpoint-base
++    unevaluatedProperties: false
++
++    properties:
++      usb-role-switch:
++        type: boolean
++        description:
++          This connector endpoint has its own USB role switch. The switch is
++          registered against this endpoint and looked up with
++          usb_role_switch_at_endpoint().
++
++      mux-state:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        enum: [0, 1]
++        description:
++          Logical level of the port-select GPIO which connects this
++          connector to the shared High Speed data bus.  The two connectors of
++          one controller must use different levels; the driver rejects a
++          device tree where two connectors claim the same one.
++
++    dependentRequired:
++      usb-role-switch: [mux-state]
++      mux-state: [usb-role-switch]
++
++  hs-port:
++    $ref: /schemas/graph.yaml#/$defs/port-base
++    unevaluatedProperties: false
++
++    patternProperties:
++      '^endpoint(@[0-9a-f]+)?$':
++        $ref: '#/$defs/hs-endpoint'
++
+ allOf:
+   - $ref: usb-drd.yaml#
+   - if:
+@@ -26,8 +60,87 @@ allOf:
+       $ref: usb.yaml#
+     else:
+       $ref: usb-xhci.yaml#
++  - if:
++      required: [port-select-gpios]
++    then:
++      # The mux path is only taken when the controller itself carries
++      # "usb-role-switch": dwc3_get_dr_mode() forces dr_mode back to
++      # peripheral, dwc3_get_extcon() skips the role-switch branch and
++      # dwc3_drd_init() never calls dwc3_role_mux_init() without it.
++      required: [dr_mode, ports, usb-role-switch]
++      properties:
++        dr_mode:
++          const: otg
++        ports:
++          # Each connector is one port with a single endpoint: the mux-state
++          # property on that endpoint says which level of the port-select GPIO
++          # reaches it, so two connectors are two ports, not two endpoints of
++          # one port.  port@1 is the SuperSpeed lane of the PHY and is already
++          # described by snps,dwc3.yaml, so the second High Speed connector
++          # lands on port@2.
++          required: [port@0, port@2]
++          properties:
++            port@0:
++              $ref: '#/$defs/hs-port'
++            port@2:
++              $ref: '#/$defs/hs-port'
++
++          # The two connectors must claim opposite levels of the port-select
++          # GPIO; requiring both ports in every branch is what makes the two
++          # cases mutually exclusive for oneOf.
++          oneOf:
++            - required: [port@0, port@2]
++              properties:
++                port@0:
++                  $ref: '#/$defs/hs-port'
++                  properties:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 0
++                port@2:
++                  $ref: '#/$defs/hs-port'
++                  properties:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 1
++            - required: [port@0, port@2]
++              properties:
++                port@0:
++                  $ref: '#/$defs/hs-port'
++                  properties:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 1
++                port@2:
++                  $ref: '#/$defs/hs-port'
++                  properties:
++                    endpoint:
++                      properties:
++                        mux-state:
++                          const: 0
++    else:
++      properties:
++        ports:
++          properties:
++            port@0:
++              patternProperties:
++                '^endpoint(@[0-9a-f]+)?$':
++                  properties:
++                    usb-role-switch: false
++                    mux-state: false
+ 
+ properties:
++  port-select-gpios:
++    maxItems: 1
++    description:
++      Selects which of the two connectors drives the controller's shared High
++      Speed data bus.  Each connector is described by "port@0" or "port@2",
++      and the endpoint of that port carries the connector's own role-switch
++      input and the "mux-state" level selecting it.
++
+   extcon:
+     maxItems: 1
+     deprecated: true
+@@ -411,7 +524,7 @@ properties:
+ 
+     properties:
+       port@0:
+-        $ref: /schemas/graph.yaml#/properties/port
++        $ref: '#/$defs/hs-port'
+         description: High Speed (HS) data bus.
+ 
+       port@1:
+@@ -429,4 +542,3 @@ required:
+ 
+ additionalProperties: true
+ ...
+-
+
