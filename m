@@ -1,85 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793964455;
-	b=xRZekoIXY3QfR9ktHVPbzRyok1yvFwQnsTB0k1NnCUIBb0S44nj/+WXfCtvcMDvmN/s+
-	 9408s2Djr6b9JaMy3vRFcEggf1lyPVWmi8j6AiGZ8vGICUztchqqEBGAdJECE0B3am39X
-	 gowAA8oH7/sr9egQf3hBeBaJpukMdJXKW4xTiz1bRHzk2wdABuvnDtGGhz+Dwb6lMKmtz
-	 e0Q6JJAaL7pUqtV9Abn4S8OU76jxqr0GJEseO2w0Oe7wi0lkyXkFR0oZGFqSiXWzcLu3m
-	 ZEDlzk4akRKCLGsRREt4xHWAx82ajdV6e348s7ap/picLsdsch/WDifuZ6Kj2nBDEnQ==
+	t=1793964516;
+	b=U0tNDMP4kxEu4FPdXwVPWqERzdjbL95dpE4yaSb6sCgya4UG/WMg3PH1EFZ+O22tc5xH
+	 GUqrJqzmYGpa9cD6LX50UxQ1R2J3bXs4XtKBO7yEho5EyaCC8VVekMKOBe/dyTURvsRnF
+	 oYKuSz0hB9SR8M688KG0UdXtClChzt9VLmKHPUlstML49vLexffw5ggdfxrwUtB3PQBSw
+	 BHli3IgtZwmKZR3V+QN9naNvCZ3dsvUFtmPatFmeD69vwEzvUhsysUS+sTObP1cBeJHww
+	 I3l6y3W3kf7KH2RSC/7R+RwqaLKXuhEfgD9y6Bo3hfYD7CYKZ20YMgyfUsbWzYHHPfw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793964455;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=GqsfXmArDx1BFEFrYigXSG4u66Q+cf083qtsOl4mkRI=;
-	b=YwwOQB3JxTRXzM/WTcK/xE49qfxIWLiqmXvtXemKcucZxCa4nrnLZvfDeHaCmcI+sK+Y
-	 WxeU5jiSGD+glXwlAmSFkpCz7WIYR6LjlgxHae9qiV/+7ZbBlHasUXtUQocZXNw0lG9by
-	 wLDUg4GG/FT1yFlCN3XUhoi2CF3CYbZkreQjkrDPnMBAWZtYIoHsk1+07cw5xurWasbtX
-	 5zsqFkmn5/04BtCJcEoxx7XNgtPhPUr67TbeB/xsuBlpaO7SBGvnimlygU2Kxn2Ua5yqJ
-	 73B3tcFxqUF1kdnbUJSXFQ5kezBKudkqeq2nQhsvY5ezLzA0Ptwxpm8pRQPVmMI17zA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793964516;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=CIy0lVCVJTm092QOP8ykWpxdfJotD/wijuOAR10N4ZM=;
+	b=14uyE7RPHvweVHAh3PKLVEVvu98qhiGTRIq6IveYntRtyKTcCBZWeb4gxe6eSrcP1Rnm
+	 VOielU66tHd3Ryx7ZDSPsJbiEirelSEiJ3WeQMjlVSarcJs5uqQnsgRI8HTIFNoLX5Tla
+	 Bx7GrmaXWmhRgJCRwnLUNS5wfRyixZcqwsZr9Sh9Wkue21Ol+IZGHPIEYDoV5Dhp7a2L/
+	 S+TIB7oeuU91F0lpVr/4Cj1bjuPFKYcRwI4SqKFzfnuGKQjQt0BWRrV8oRmExhhcXiIvF
+	 Y4gb+7tBpmiRQoWnaqA5RCMtabPHSbKtEX5ykZ/f64ismuReOrTAbzgDbobicE7zFSg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="zXO+/C32";
-	arc=none smtp.remote-ip=209.85.221.49
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gondor.apana.org.au;
+	spf=pass smtp.mailfrom=gondor.apana.org.au;
+	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cTvo9FKB;
+	arc=none smtp.remote-ip=180.181.231.80
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84664606A32E
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 11:27:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 84664606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5B9F606A32E;
+	Fri,  6 Nov 2026 11:28:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D5B9F606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=zXO+/C32
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-4910b863b84so1134724f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 03:27:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793964453; x=1794569253; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GqsfXmArDx1BFEFrYigXSG4u66Q+cf083qtsOl4mkRI=;
-        b=zXO+/C32AlStvgI0+EYAWE2/Lakk51WyJPlKb6utiwbTK9+74CTcnXu12Wf+J/7NuB
-         BdOoD4ctlP0nDHnnTAP14y2UXjeKB14fwhpho2iJ6q3ClTWXfFk6Cj7nJ3WNYSFpcTMg
-         jbCSpb8ga0BL23ipmALQoFILzAVZewCiMgRMMW2zkFbS9UT+Qybk7Io3KpC7M1GZdodh
-         a4QITzKhwTU1iA4HYSCnhVhpR2eMx2R+icRk2lyGDB+DtlyGJoVlMLPk2lzYyA7Btcjt
-         I/jJS3hmHNXqxs01UtHPwjiHIwg+VofbkfZQOarqN7o6L2TO6HQavWc368QZ0IZdGvhP
-         iBHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793964453; x=1794569253;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GqsfXmArDx1BFEFrYigXSG4u66Q+cf083qtsOl4mkRI=;
-        b=0QeK8QitHlKegMW3nv/TsY2mNCL0+FGdLs2hMtxATfYisA+sXX0y0wdzfEk1l4LuCr
-         JzVU0h1Y1s38gL61LoX2hew4CHHZXumsq2GsmqMQtO/OWrGMM26PyDdAaevPf8jKsUl0
-         v9icHs4BhuiGiQbMYnuiEnEO6esyFMPI50lM5Milq25LOjXJG6X9rhTq9Lu93EboJrov
-         4ell+dM8ipVVGxu02K7wC0RzK3AwmRm2R7rOR9JgnOIqLob736zq1+gOsiquzSyXnBcg
-         2XwXeaHnMDdwCMdMXz7/gl27JeTwuQ07grjnRxm7wrGP3hi/6K8sOkeEveTq2BcJ5qT7
-         PEpg==
-X-Gm-Message-State: APuU4Z8V93RYl4/Kf8dbG3mFzu2wlBycx59XPYcNgy45dOiVAxnyY4WF
-	L7+l+Mvd8h9pGCUCD073h9+/DDlGJ26PPhaphN6YIXGIpTT+sLIWsH0QDuP3xKOpj34=
-X-Gm-Gg: AYBFou2qylOljMTFH2RWEQpu9dbKeo36J9kLycwh8hFW+G17TMqFxqM+eAkFv17dAqh
-	Eisa5PVLcK1MsUTqaXAb7zy1eHvwkEi/i+aZpWpH7OUZc2QEsO2kd8A0rrUfqg82BwxXZO/0Ysl
-	py5d21+LTxFk4JqH8PSfchvKFhgCIfyk6zON8BQ3f3TsBO3GZ6v4R95qqT3jZUlnms2vU/baROZ
-	xh2o6JkGABWT7sslTTLHtv9rVrazU8rr93lYXWOCOsg7J38ireg99LdyeupzjjjNhcUaXorgl0G
-	xpXX49TSvZ0Yr5+3PyYyqcjRwAVNqCG1wQWN3Hz40d4MwGDPzau76GlPeoySEI2tFhqUEBgTDBI
-	Tt0yawkZZ5Isc3iKkSiAOtrnt9FkHJ7PV55Q4LnlhV/Io82CDYrS1XjKPxrjViIpYkuQe88s64a
-	MisQZ3IRbCRPt4x3w2rDDJnarV7tpR33pwz809LQPfL+AeRlBag2o6wKcdZM7JFvE0PQ4Fh/LAW
-	+4A3XgzRoCPorOPTy+xrZ+T+2C7LNPleBXU5tscH9IMGiDXLFfbj6emXKpnsdd036oJwfFEasjx
-	mcS1Xpr/0yAuiUgDN6nRKdIYYjm4XBip6lNEkK50CEep0Azr+4AURoFlSkCZa/s=
-X-Received: by 2002:a05:6000:3c7:b0:48e:7475:fe7b with SMTP id ffacd0b85a97d-4911906d185mr9499122f8f.6.1793964453377;
-        Fri, 06 Nov 2026 03:27:33 -0800 (PST)
-Received: from [192.168.0.167] ([109.77.115.215])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-492d73286cdsm2941196f8f.28.2026.11.06.03.27.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 06 Nov 2026 03:27:32 -0800 (PST)
-Message-ID: <e210c5f1-6a93-4387-ad1f-66d4ed35e00b@linaro.org>
-Date: Fri, 6 Nov 2026 11:27:31 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cTvo9FKB
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=CIy0lVCVJTm092QOP8ykWpxdfJotD/wijuOAR10N4ZM=; 
+	b=cTvo9FKB5Qy/jdvM3frit45Y30XB0MYV81CeJ7OMzmtpFdgLgEj0NLJTC3QCbRG+RaEwX/IfVt0
+	7/AGu/xbaV6JHkUR01JKE058jtOfC86o7U7M2ztn1KE2Izvjn2xXEbUcWnty/S9sag5ydWogwCwwq
+	aoqjfazTa8VuACnXx2N/ZzawMACaxn7N+RAVg6lgWaE4uhrBCTmmaGHOzLnVkQ5V52UMxOL9Onuhn
+	tDsKNi8SjzErRH7OoLgHoCYBtwfnzijRu7ftDyPpBMFcghAniW6JFJJB+QF3McokcXhE/iX3OQw/e
+	Sa6tnV+e1BoxAOfFhmDC40g0+PXSYVtSAC1A==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1xPI7Q-0000000Br5b-1IrV;
+	Fri, 06 Nov 2026 19:28:29 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 06 Nov 2026 19:28:28 +0800
+Date: Fri, 6 Nov 2026 19:28:28 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eneas U de Queiroz <cotequeiroz@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	Eric Biggers <ebiggers@kernel.org>,
+	Demi Marie Obenour <demiobenour@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Subject: Re: [PATCH] crypto: qce - Fix HMAC self-test failures for empty
+ messages
+Message-ID: <au253K71iaZeVNth@gondor.apana.org.au>
+References: <20261016-qce-fixes-sha-v1-1-3ee5a30d84f3@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,40 +76,120 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] media: qcom: camss: Add support for SM8150
-To: mail@andrewgigena.dev, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20261106-sm8150-v7.4-rc1-camss-v2-0-39ee37787b00@andrewgigena.dev>
- <20261106-sm8150-v7.4-rc1-camss-v2-4-39ee37787b00@andrewgigena.dev>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v2-4-39ee37787b00@andrewgigena.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261016-qce-fixes-sha-v1-1-3ee5a30d84f3@oss.qualcomm.com>
 
-On 06/11/2026 03:24, Andrew Gigena via B4 Relay wrote:
-> From: Andrew Gigena <mail@andrewgigena.dev>
+On Fri, Oct 16, 2026 at 04:23:43PM +0200, Bartosz Golaszewski wrote:
+> BAM DMA cannot process zero-length transfers, so the driver always holds
+> back at least one byte to submit to the engine and only ever finalizes
+> with an empty buffer when nothing is left to submit. For plain hashes
+> this was handled by returning the precomputed hash of the empty message
+> (tmpl->hash_zero), but HMAC's result depends on the key and cannot be
+> constant, so hmac(sha256) produced an incorrect digest for an empty
+> message and the crypto self-tests failed.
 > 
-> Add CAMSS platform data for the Qualcomm SM8150 SoC. The camera
-> subsystem contains four CSIPHY, four CSID (two full and two lite), two
-> VFE and two VFE-Lite instances.
+> A zero pending buffer at finalization time does not necessarily mean the
+> message itself is empty, though: the caller can also reach it by
+> importing a state that already reflects some hashed data with nothing
+> currently buffered (crypto_ahash_import() followed directly by
+> finalization). Special-casing only a genuinely empty message would
+> silently compute the wrong result for an imported state in that
+> scenario.
 > 
-> The hardware reuses the existing 3-phase 1.0 CSIPHY, Gen2 CSID and
-> VFE 17x implementations; the CSIPHY uses the SC8280XP lane register
-> layout. Add CAMSS_8150 to the version enum and to the shared code
-> paths, then add the per-block clock, regulator, power domain,
-> interrupt and interconnect resources.
+> Handle every zero-length finalization consistently through the software
+> fallback ahash instead. When nothing has been processed yet, let the
+> fallback compute the result from scratch using the key already propagated
+> to it via setkey(). Otherwise, reconstruct the fallback's running hash
+> state from the state kept by the driver and finalize from there,
+> accounting for the HMAC ipad block that the engine absorbs internally and
+> that never goes through update().
 > 
-> Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
+> Cc: stable@vger.kernel.org
+> Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine driver")
+> Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Tested-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
+> As requested by Herbert: I've split the large series fixing self tests
+> into smaller chunks for easier review.
+> ---
+> Changes in v12:
+> - Split out the SHA patch into its own submission
+> - Link to v11: https://patch.msgid.link/20261016-qce-fixes-skcipher-v11-0-d13ddfe609a4@oss.qualcomm.com
+> 
+> Changes in v11:
+> - Split out the skcipher patches into a smaller series for easier review
+> - Drop patch "crypto: qce - Fix CTR-AES for partial block requests" as a
+>   subsequent commit makes this adjustment effectively dead code
+> - Fix a mid-series build failure due to an earlier bad rebase
+> - Link to v10: https://patch.msgid.link/20261013-qce-fix-self-tests-v10-0-57162a38a554@oss.qualcomm.com
+> 
+> Changes in v10:
+> - don't pass a NULL buffer to sg_init_one()
+> - fix byte order of the imported hash state on empty finalization
+> - don't recompute the CTR counter in software for every request
+> - reject skcipher requests with a too short scatterlist
+> - check fragmentation for empty CCM decryption requests too
+> - don't use a static loop iterator (duh...)
+> - initialize the return value in qce_handle_queue()
+> - Link to v9: https://patch.msgid.link/20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com
+> 
+> Changes in v9:
+> - Rebase on top of cryptodev/master
+> - Rephrase Kconfig help text changes
+> - Link to v8: https://patch.msgid.link/20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com
+> 
+> Changes in v8:
+> - Add a patch making the crypto driver *not* register algos by default
+>   but only if the user explicitly requests it with the provided module
+>   parameter
+> - Use the "offloader" name for the crypto IP instead of "accelerator"
+> - Fix device module table issues
+> - Make the core driver use a list (despite it only having a single
+>   member now) of child auxiliary devices to register to make it clear we
+>   have the intention of extending this once we start the work on secure
+>   media playback
+> - Link to v7: https://patch.msgid.link/20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com
+> 
+> Changes in v7:
+> - Add follow-up changes converting the QCE crypto driver to auxiliary
+>   bus, adding the core QCE driver under drivers/soc/ registering the
+>   auxiliary device and removing the BROKEN Kconfig label
+> - Link to v6: https://patch.msgid.link/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com
+> 
+> Changes in v6:
+> - Handle all zero-length HMAC finalizations (like imported state with
+>   data already hashed), not only the genuinely empty message case
+> - Add an additional patch addressing the fragmented skcipher payload
+>   issue
+> - Link to v5: https://patch.msgid.link/20260706-qce-fix-self-tests-v5-0-86f461ff1829@oss.qualcomm.com
+> 
+> Changes in v5:
+> - Dropped patch 1/8 that's already queued
+> - Use the pre-allocated fallback ahash for HMAC transforms (Herbert)
+> - Link to v4: https://patch.msgid.link/20260622-qce-fix-self-tests-v4-0-4f82ffa716c6@oss.qualcomm.com
+> 
+> Changes in v4:
+> - Remove remaining ECB and DES3 bits
+> - Pick up tags
+> - Link to v3: https://patch.msgid.link/20260617-qce-fix-self-tests-v3-0-ecc2b4dedcfd@oss.qualcomm.com
+> 
+> Changes in v3:
+> - Remove even more algorithms and dead code in patch 1/8
+> - Link to v2: https://patch.msgid.link/20260615-qce-fix-self-tests-v2-0-dc911f1aad42@oss.qualcomm.com
+> 
+> Changes in v2:
+> - Add fixes for the full suite of crypto self-tests
+> - Add Fixes and Cc tags
+> - Link to v1: https://patch.msgid.link/20260610-qce_selftest_fix-v1-0-1b0504783a46@oss.qualcomm.com/
+> ---
+>  drivers/crypto/qce/common.h |  1 -
+>  drivers/crypto/qce/sha.c    | 62 ++++++++++++++++++++++++++++++++++-----------
+>  2 files changed, 47 insertions(+), 16 deletions(-)
 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Patch applied.  Thanks.
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
