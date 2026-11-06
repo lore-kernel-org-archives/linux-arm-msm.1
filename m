@@ -1,110 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=141.14.17.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793961493;
-	b=cR0JuXIYBH6oQt8Ojmd6QrkY/Sclsptc2BLB9YhZBnGTTVA6h5WFSN8KTD4/lmn8Po01
-	 yXhedCbGCcobUa8XXt5zy0mKe1X1jgIjTVJOcJ6KKK05/mFq0d0F3UKFdOf3S6rBxLLLU
-	 G9AwMpz+KZExKbk7Hke3bpW+5G71ON53UUD/8ds5lCA30Epz72hvMM4ZoRWmsMurxA+n4
-	 spKXgVg3o/RVnG1uqEcLnwCsDfsgRnnLrkv/ViPkjlNTOG4JyBbiQ17zcdZsKehSDHRVf
-	 zLTP4+afxxUA803m7Hll46foUcuzYtOvaum8sUb+DGclLTYsEYremPZ6CRoHRIw7/VA==
+	t=1793962696;
+	b=m7/BedtoU/NXC8qIw1fJLE/cp0BfMS1Qq95wGwrVAuOAOerHZMoJBQ32R0oGkz5+YINb
+	 Zqo0yekgyiGhhccS2OtD5blvzL8R7MnsK/vaEzqHIlj2qo24qPc5TGQcvxdf+kQRn/Pl8
+	 /gDJ8iK2f+SpbCP+CnponjjUl37LLvoG3/SWDBqTdo2LYV/dSotZY+hmuMseky770mUzz
+	 rataPUSMQyOCESeRlRo0gqfwer/+JiDPcEbf7aMy4Y66qsBZlbUGpp2LhFbYjVM42wtKX
+	 2U5OeldO2fvo8fwzINNAhDHkbrvgXlvuv8bOO9lH4EuofEvZ7U1FZ7E7Hut83zdruWA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793961493;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=DyCrYP+arTiB7/cTGUoXo/XRtH3sRHAhV8u4R/DUbFc=;
-	b=cinP/dK/W+sK67Jd4zKK3rFZG8Uv21qFUBVs9Qae2NW4PFwcvRQl21vLmmhjkElhLCXk
-	 wTOkyDr+LvncoLO4UopirsMwVmuelKO4xszTTjlwqRk2cBJNnzIS6GtiiJGicS31FpECH
-	 vJUGtfXWqY23br7Z8Rl6JERPGiL3wcSOQ46pBYOkFItGQJbBenkYHpV+r+QJSMEWSNNhZ
-	 w/5bXdVrU856WUpjrepbnH9IJqly+lUVrodCuhLllEJr5mnR7ZIoMGCbbgvfx26qL3xJi
-	 NZA6O2n9M3QVedi/IwIKoZRRx83QXUMT1Hd2/dMbah+kmVRS2zYSeciyZmnOqWLRx0Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793962696;
+	h=DMARC-Filter:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:DKIM-Signature;
+	bh=SigG/up2gMWRUySXAnA/Afal/pPumps4/i8yYtBo2BY=;
+	b=t6v7jYZc2LYgOqE0Rt6qlrwFVHntM+IOuYCkznsfXYN4BaIaM6FrZzd1KnYkUeHb1CNo
+	 dyemWrwE8Zi/Rg2hZKgtsA0EFGfbM42G5WIm8+qq9n/CNcmQflfs+a3lawkm83lpmzKOK
+	 9hndtWmFsyJi5MOPApKPF1qLIj/+fAn+DoNKsJhW90W1oD/UeYxN2VUQOocfWUeoxmNDd
+	 ZQNe4l0+f7eTrerKAvkYA8e3oK4T/ms3A/+Y5406BDHGYuPicdvYlyv5KiAoE1BYeFwR6
+	 8byRTr6k/pSO9e7mGb+VDUEUCjAEPdUaP/npVpC7NECGC1vZfhfeil1KRTZ9hpjBx4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=omGGguMY;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IKUbLALy;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dmarc=pass header.from=molgen.mpg.de;
+	spf=pass smtp.mailfrom=molgen.mpg.de;
+	dkim=pass header.d=molgen.mpg.de header.i=@molgen.mpg.de header.a=rsa-sha256 header.s=20260906 header.b=gqugLq4D;
+	arc=none smtp.remote-ip=141.14.17.11
+Received: from mx3.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87C4E606A329
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 10:38:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 87C4E606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CC56606A326;
+	Fri,  6 Nov 2026 10:58:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5CC56606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=molgen.mpg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=molgen.mpg.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=omGGguMY;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IKUbLALy
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6APKlq527301
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 10:38:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	DyCrYP+arTiB7/cTGUoXo/XRtH3sRHAhV8u4R/DUbFc=; b=omGGguMYBzrdrvVJ
-	5zcf4qQbl9gCkqfimWau9b9I1VlUde5wnumfSOFHdFEcCUWE0aiGB80nRN9eEX7q
-	r7I7N4Xfo9VQzxez1VLnh4+6U5Hw039O3YxO/zNEMvcVGEiSvlfFL25t2ZJbsLPZ
-	QNDUcL3vbhzkAA8bEXk2LkiD8Cry1Gdu+1nNcpens8NiEZ+gvIjEvNHNIR4Rb0EJ
-	ZUfdiHnOi6kJ0tnPf3eqIrjcrRNH5pYANDkr8gd/DktvBKqTBjYlb6w4C/G0EuZQ
-	fhStuxFU7HIYnpuortIGrh7h6mbZhPX6buB3oMTLnhWT3+7UZD9ZpaHlSDL7uEnp
-	hIcKMA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3p9tcw7-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 10:38:11 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3ac8f449d1bso588754a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 02:38:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793961491; x=1794566291; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DyCrYP+arTiB7/cTGUoXo/XRtH3sRHAhV8u4R/DUbFc=;
-        b=IKUbLALyIGrl3JckBA0FiFYs4fH6Ad+IJ08GJAYNZVxH8UVO+lo0ZYZt+pf0AMVQoz
-         eSJaYPZGhdMexy/PUF1bUpXHn32xYtfu7q2ghr5Ok3G1Jr2diM4LSdWn6oFByrjVE22O
-         8GJrP49kBq5+e48cz2dXtp66WBJIDXWtF5SSWCGWG9yjrrD4UVl9TewfvRV0Kb57MV+K
-         t8pJuz5HKud9DQfcQ/E757XRU/sLymIhOAVkFOfMVDh2bKEO3HUDLf03qlIjegyACKce
-         9CtqBTubNddFFSbJC7Mnrd8o5UG7gdRFyO2w4ryBne0PXXa22Y/jz7HnZLoL35Rs1gZH
-         s1kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793961491; x=1794566291;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DyCrYP+arTiB7/cTGUoXo/XRtH3sRHAhV8u4R/DUbFc=;
-        b=JQQMmNFELsKg21sNUCqgwWBg+jiFAfMBX8k24peIsj/WQxtMilDyv+7LVRMp2F98Mm
-         via9WE8geU5tmgXv5cdDymVzie4l9TTQvuAe/UthBtNNEQgQmyaciHmnHP6/6Z26PuzE
-         G+bO0qVbi5rhxf5+mVJ3Plfrpb0VsJH5TWVNc+a6jyZYbq8jc9CS4F/6WwmiWC+7wFbr
-         JUFV/m15NM7efAFfXBsjb91tj7B8YOL5KSz1HJC6mYZWOa36Ory+mPm44b7kUS3yB/Tq
-         xv7P1myrFBBC3yloz2XjRbWmxOfPkc6mV7ls6a5ZZ2JM2jgrkWwFCv/l6CkREGefv0XV
-         661w==
-X-Gm-Message-State: APuU4Z/SUtGkUhzViuBk5/onMmfLlscIDpVIeHL/+VmaAJZ3p/9FzMJp
-	xVFuQvKi0Y9Qm8PnumJo2+Q5Br5J9gnEtoBDQqYYXb9cUtBzd0tmtNssMN0Yts6QnVgpzdnDfOJ
-	qaiQye2MlGfvi9Y0yC0k1LFuIOWRjPqWDOnbHqzBWHgWdVNgnYpEVAiWN8xLnBkNbRq67
-X-Gm-Gg: AYBFou0nYo+5lK0bTR3PDJwUmzpFriJcRuda/0kmNN8+bUmq+Nz9max471CyendPgKE
-	ojaUlS9K7Yj+0VoByw8uIS6381h/70Ak7+j9ZIwcpvA5dztq2rS7CfVXwaOCWCs9NMRbntdJsig
-	dRLIIct5e6tvRx53lDcaUCZwwNJOafUMW540Yf9QseO5Fj0upu8euHMNG5Jxl+cEdJeptKihXWK
-	SO3saKAze3fu1RmRalvfZ7tsEkPnPgNsmqiH0q26KypKX76BB61u/K9wLdYJRaYo1GZBeWdkFHP
-	LI6vlkl0TB7OUbLk64A8M/2oE1H5XDPAzCjusYghNGpCeEgSSKFDVj8fLtCCHwhoEah194sulMC
-	Ovdqyz7U/hZYL/dqC6pdsyCb89lLHBxLWLDS9gjdo9MYHDGC4kB2QmwEO+p+9BkAWs4OlKqippg
-	==
-X-Received: by 2002:a17:90b:2d0d:b0:3a8:1943:cb7a with SMTP id 98e67ed59e1d1-3b0db6d45camr2003520a91.18.1793961490733;
-        Fri, 06 Nov 2026 02:38:10 -0800 (PST)
-X-Received: by 2002:a17:90b:2d0d:b0:3a8:1943:cb7a with SMTP id 98e67ed59e1d1-3b0db6d45camr2003491a91.18.1793961490106;
-        Fri, 06 Nov 2026 02:38:10 -0800 (PST)
-Received: from [10.217.219.8] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b0b3280378sm7235684a91.12.2026.11.06.02.38.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 06 Nov 2026 02:38:09 -0800 (PST)
-Message-ID: <67f05266-77ea-4018-bb0a-e877e288f9da@oss.qualcomm.com>
-Date: Fri, 6 Nov 2026 16:08:04 +0530
+	dkim=pass (2048-bit key, unprotected) header.d=molgen.mpg.de header.i=@molgen.mpg.de header.a=rsa-sha256 header.s=20260906 header.b=gqugLq4D
+Received: from [192.168.0.5] (ip-095-090-245-054.vkd79.pools.vodafone-ip.de [95.90.245.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: pmenzel)
+	by mx.molgen.mpg.de (Postfix) with ESMTPSA id D8FC64C2F3FFE7;
+	Fri, 06 Nov 2026 11:57:42 +0100 (CET)
+Message-ID: <56866622-a854-4aae-9e97-40eecc4adbe1@molgen.mpg.de>
+Date: Fri, 6 Nov 2026 11:57:41 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,493 +52,99 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] mmc: sdhci-msm: Add support for firmware-managed
- resource platforms
-To: Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
-        Ram Gupta <ram.gupta@oss.qualcomm.com>
-References: <20261102-sdcc_scmi-v1-0-244dbd893051@oss.qualcomm.com>
- <20261102-sdcc_scmi-v1-2-244dbd893051@oss.qualcomm.com>
- <afa7f2f6-17f3-468a-a7c8-4b1b7840bde8@intel.com>
+Subject: Re: [PATCH] Bluetooth: qca: Disable SoC debug logging for WCN3990
+To: Hex Lindqvist <hex@freenixos.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+ Marcel Holtmann <marcel@holtmann.org>,
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+ linux-bluetooth@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261105201952.1556185-1-hex@freenixos.com>
 Content-Language: en-US
-From: Anjana Hari <anjana.hari@oss.qualcomm.com>
-In-Reply-To: <afa7f2f6-17f3-468a-a7c8-4b1b7840bde8@intel.com>
+From: Paul Menzel <pmenzel@molgen.mpg.de>
+In-Reply-To: <20261105201952.1556185-1-hex@freenixos.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA0MiBTYWx0ZWRfX13yoppzJypLX
- g5yNHOcXrH0Uq+W0Mu8wHoAhm/SCzkfLyM4FPeZ/tvKmrSIYW/EY96vPPcI4B8QSOMr3U2oG8p0
- yYe+Brqz29xGLxwcPk6+LhPaFZNTWuA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA0MiBTYWx0ZWRfX1Ud4xLfG43e8
- Y9cw2da7wIQvJFjDAXmib5VCIP8vpM6j6DbJYBCAhZhG+Twxc2IuhU1oI+TlhKy9OCltig+OTEb
- bhMSMJHFoT2I3zDc1x4pGdpXGhqWb1396TECp8byFoaleerHcYvOPMMQNpNzpZ6N0qcC8zuUB+j
- 3eqs9hMrXRs+2WOYx82tBS0kvWxfhPVlB3efDZUo1+TPgB24xlpERXDcOYUNlZfA0V8GX6NtZpN
- jfRmjVUavgNtmVD/UGGXRDcxz2RbbCh+iXdUBGIAZiOIj+ObCMOa0MGh0Xp9IqvJhHGRxo832Aj
- G1lM2hSAVSqEGEM+wmuvDxQMrKdk+/YJHLTH/eissD1May51KlbbMEz4NoaceNtWyp8WJqn0X4y
- Ndw/6kNmaZ79w5ynC4rfgyj5td2SzOCU/1ZGIZJDTeO7yD8PDWqBqmzPqL/YgsYpGSNQWlkpyIL
- rBQFg1WeeY32c7QA9hA==
-X-Proofpoint-ORIG-GUID: C38FWPSSKnv2xz93ihzMvHI4FMoJ_rX6
-X-Authority-Analysis: v=2.4 cv=f6Pdl+yM c=1 sm=1 tr=0 ts=6aedae13 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=c92rfblmAAAA:8 a=EUspDBNiAAAA:8 a=6dTfJ8FaPMCXR5VNEZwA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22 a=GvGzcOZaWPEFPQC_NcjD:22
-X-Proofpoint-GUID: C38FWPSSKnv2xz93ihzMvHI4FMoJ_rX6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-06_03,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 malwarescore=0 bulkscore=0 phishscore=0
- adultscore=0 spamscore=0 clxscore=1015 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060042
+Content-Transfer-Encoding: 7bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=molgen.mpg.de; s=20260906; 
+	t=1793962663; 
+	h=from:from:subject:date:message-id:mime-version:content-type:content-transfer-encoding; 
+	bh=SigG/up2gMWRUySXAnA/Afal/pPumps4/i8yYtBo2BY=; 
+	b=gqugLq4D1JCEXa6fBfbmfyeBVO3p0y0uVSIa8cPMj3DKqWuZrgkFrWkLPtFWeTcXzOGHtSShm3w4
+	FrksYy49XTzE1VVP5Ws0U5Re5MUu6Zc7MrThLQcWIw1soIFk899Ztt8+ogNw+VEK9kB6ozFRO0egx/
+	z0OGdzhDRL/skemdipB81xasrakPlBvay4cDEip0vchA6W4dFfQDC1fBDYLNYqX0WVxUPlJ4PLNnu8
+	wezlFPs2BtGdwRODLZ4QBzM0j49Ju770sC6GQyJG3iswu5cqB6ZWYmNB8yLg3HDgNqmb/OOI6aN7/h
+	H5t/9pd+OHiM0hUMnDbvzfe24RBQb57Q==
+
+Dear Hex,
 
 
+Thank you for your patch.
 
-On 11/4/2026 5:32 PM, Adrian Hunter wrote:
-> On 02/11/2026 16:03, Anjana Hari wrote:
->> On certain Qualcomm automotive SoCs such as Nord, platform resources
->> including clocks, interconnect bandwidth, resets, and regulators are
->> owned and managed by firmware rather than directly by Linux. The
->> firmware abstracts these resources behind logical power domains and
->> exposes control through the SCMI power protocol.
->>
->> Introduce a firmware-managed variant of the sdhci-msm driver that
->> operates through this abstraction instead of directly programming GCC
->> clocks and PMIC regulators.
->>
->> The firmware-managed model uses two logical power domains, attached at
->> probe time via dev_pm_domain_attach_list():
->>
->>    - "power" domain: governs SDCC rail power state. It is activated at
->>      probe and released at remove via pm_runtime_resume_and_get() and
->>      pm_runtime_put_sync() on the domain device. These calls are
->>      translated by the SCMI power protocol into firmware power-state
->>      requests.
->>
->>    - "perf" domain: the SCMI perf domain driver populates OPPs at probe
->>      time by querying the firmware-reported performance levels via
->>      perf_ops->device_opps_add(). Clock rate selection uses
->>      dev_pm_opp_find_freq_floor() to locate the nearest OPP at or below
->>      the requested frequency, then dev_pm_opp_set_opp() to apply it,
->>      rather than directly programming the GCC clock tree.
->>
->> A new variant sdhci_msm_fw_v5_var is introduced with the compatible
->> string "qcom,nord-sdhci". Detection is automatic at probe: a non-NULL
->> pd_data.pd_names in the variant descriptor marks the platform as
->> firmware-managed, causing probe to select firmware-specific platform
->> data (sdhci_msm_fw_pdata) and ops (sdhci_msm_fw_ops).
->>
->> The firmware-managed ops provide:
->>    - sdhci_msm_fw_get_max_clock: queries the perf domain OPP table
->>      using dev_pm_opp_find_freq_floor() at ULONG_MAX to discover the
->>      maximum supported frequency, replacing the direct GCC readout.
->>    - sdhci_msm_fw_set_clock: routes clock rate programming through the
->>      perf domain OPP path, reusing the existing bus-mode multiplier
->>      logic to derive the target rate.
->>
->> Suspend and resume sequences bypass local clock and regulator management
->> for firmware-managed platforms, as firmware handles those transitions
->> autonomously in response to SCMI power-state transitions from the
->> runtime PM framework.
->>
->> Co-developed by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
->> Signed-off-by: Shazad Hussain <shazad.hussain@oss.qualcomm.com>
->> Signed-off-by: Anjana Hari <anjana.hari@oss.qualcomm.com>
-> 
-> Doesn't compile:
-> 
-> drivers/mmc/host/sdhci-msm.c: In function ‘sdhci_msm_probe’:
-> drivers/mmc/host/sdhci-msm.c:3105:1: error: label ‘fw_detach’ defined but not used [-Werror=unused-label]
->   3105 | fw_detach:
->        | ^~~~~~~~~
-> cc1: all warnings being treated as errors
-> 
-> Please check other Sashiko issues also:
-> 
-> 	https://sashiko.dev/#/patchset/20261102-sdcc_scmi-v1-0-244dbd893051%40oss.qualcomm.com?part=2
-> 
-Acked, will address in the upcoming v2 commit.>> ---
->>   drivers/mmc/host/sdhci-msm.c | 213 ++++++++++++++++++++++++++++++++++++++++++-
->>   1 file changed, 208 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
->> index aecd425bf095..da52a45203a5 100644
->> --- a/drivers/mmc/host/sdhci-msm.c
->> +++ b/drivers/mmc/host/sdhci-msm.c
->> @@ -8,8 +8,9 @@
->>   #include <linux/module.h>
->>   #include <linux/delay.h>
->>   #include <linux/mmc/mmc.h>
->> -#include <linux/pm_runtime.h>
->> +#include <linux/pm_domain.h>
->>   #include <linux/pm_opp.h>
->> +#include <linux/pm_runtime.h>
->>   #include <linux/slab.h>
->>   #include <linux/iopoll.h>
->>   #include <linux/regulator/consumer.h>
->> @@ -168,6 +169,9 @@
->>   #define ICE_HCI_PARAM_CCI	GENMASK(7, 0)
->>   #define ICE_HCI_PARAM_CE	GENMASK(8, 8)
->>   
->> +#define DOMAIN_IDX_POWER	0
->> +#define DOMAIN_IDX_PERF		1
->> +
->>   struct sdhci_msm_offset {
->>   	u32 core_hc_mode;
->>   	u32 core_mci_data_cnt;
->> @@ -275,6 +279,11 @@ struct sdhci_msm_variant_info {
->>   	bool restore_dll_config;
->>   	const struct sdhci_msm_variant_ops *var_ops;
->>   	const struct sdhci_msm_offset *offset;
->> +	/*
->> +	 * pd_names != NULL marks this variant as firmware managed;
->> +	 * see fw_managed detection in sdhci_msm_probe().
->> +	 */
->> +	const struct dev_pm_domain_attach_data pd_data;
->>   };
->>   
->>   struct sdhci_msm_host {
->> @@ -285,6 +294,7 @@ struct sdhci_msm_host {
->>   	struct clk *xo_clk;	/* TCXO clk needed for FLL feature of cm_dll*/
->>   	/* core, iface, cal and sleep clocks */
->>   	struct clk_bulk_data bulk_clks[4];
->> +	struct dev_pm_domain_list *pd_list;
->>   #ifdef CONFIG_MMC_CRYPTO
->>   	struct qcom_ice *ice;
->>   #endif
->> @@ -302,6 +312,7 @@ struct sdhci_msm_host {
->>   	u32 caps_0;
->>   	bool mci_removed;
->>   	bool restore_dll_config;
->> +	bool fw_managed;
->>   	const struct sdhci_msm_variant_ops *var_ops;
->>   	const struct sdhci_msm_offset *offset;
->>   	bool use_cdr;
->> @@ -414,6 +425,45 @@ static void msm_set_clock_rate_for_bus_mode(struct sdhci_host *host,
->>   		 mmc_hostname(host->mmc), achieved_rate, timing);
->>   }
->>   
->> +static int msm_fw_set_clock_rate_for_bus_mode(struct sdhci_host *host,
->> +					      unsigned int clock)
->> +{
->> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
->> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->> +	struct device *dev = mmc_dev(host->mmc);
->> +	struct dev_pm_opp *opp;
->> +	struct device *perf_dev;
->> +	struct mmc_ios ios = host->mmc->ios;
->> +	unsigned long clock_long = (unsigned long)clock;
->> +	unsigned long desired_rate;
->> +	unsigned int mult;
->> +	int ret;
->> +
->> +	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
->> +
->> +	mult = msm_get_clock_mult_for_bus_mode(host, clock, ios.timing);
->> +	desired_rate = clock_long * mult;
->> +
->> +	/* Find the nearest OPP at or below the requested frequency. */
->> +	opp = dev_pm_opp_find_freq_floor(perf_dev, &desired_rate);
->> +	if (IS_ERR(opp)) {
->> +		dev_err(dev, "Failed to find OPP for freq %lu: %pe\n", clock_long, opp);
->> +		return PTR_ERR(opp);
->> +	}
->> +
->> +	ret = dev_pm_opp_set_opp(perf_dev, opp);
->> +	dev_pm_opp_put(opp);
->> +	if (ret) {
->> +		dev_err(dev, "Failed to set OPP for freq %lu: %d\n", clock_long, ret);
->> +		return ret;
->> +	}
->> +
->> +	/* desired_rate was rounded down by find_freq_floor to the actual OPP rate. */
->> +	host->mmc->actual_clock = mult ? desired_rate / mult : desired_rate;
->> +	msm_host->clk_rate = desired_rate;
->> +	return 0;
->> +}
->> +
->>   /* Platform specific tuning */
->>   static inline int msm_dll_poll_ck_out_en(struct sdhci_host *host, u8 poll)
->>   {
->> @@ -1253,7 +1303,10 @@ static int sdhci_msm_execute_tuning(struct mmc_host *mmc, u32 opcode)
->>   	 */
->>   	if (host->flags & SDHCI_HS400_TUNING) {
->>   		sdhci_msm_hc_select_mode(host);
->> -		msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
->> +		if (msm_host->fw_managed)
->> +			msm_fw_set_clock_rate_for_bus_mode(host, ios.clock);
->> +		else
->> +			msm_set_clock_rate_for_bus_mode(host, ios.clock, ios.timing);
->>   		host->flags &= ~SDHCI_HS400_TUNING;
->>   	}
->>   
->> @@ -1847,6 +1900,28 @@ static unsigned int sdhci_msm_get_min_clock(struct sdhci_host *host)
->>   	return SDHCI_MSM_MIN_CLOCK;
->>   }
->>   
->> +static unsigned int sdhci_msm_fw_get_max_clock(struct sdhci_host *host)
->> +{
->> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
->> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->> +	unsigned long max_freq = ULONG_MAX;
->> +	struct dev_pm_opp *opp;
->> +	struct device *perf_dev;
->> +	struct device *dev = mmc_dev(host->mmc);
->> +
->> +	perf_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_PERF];
->> +
->> +	opp = dev_pm_opp_find_freq_floor(perf_dev, &max_freq);
->> +	if (IS_ERR(opp)) {
->> +		dev_err(dev, "Failed to find opp for freq %lu\n", max_freq);
->> +		return SDHCI_MSM_MIN_CLOCK;
->> +	}
->> +
->> +	dev_pm_opp_put(opp);
->> +
->> +	return max_freq;
->> +}
->> +
->>   /*
->>    * __sdhci_msm_set_clock - sdhci_msm clock control.
->>    *
->> @@ -1892,6 +1967,40 @@ static void sdhci_msm_set_clock(struct sdhci_host *host, unsigned int clock)
->>   	__sdhci_msm_set_clock(host, clock);
->>   }
->>   
->> +static void sdhci_msm_fw_set_clock(struct sdhci_host *host, unsigned int clock)
->> +{
->> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
->> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->> +
->> +	if (!clock) {
->> +		host->mmc->actual_clock = 0;
->> +		msm_host->clk_rate = 0;
->> +		goto out;
->> +	}
->> +
->> +	sdhci_msm_hc_select_mode(host);
->> +
->> +	if (msm_fw_set_clock_rate_for_bus_mode(host, clock))
->> +		return;
->> +out:
->> +	__sdhci_msm_set_clock(host, clock);
->> +}
->> +
->> +static int sdhci_msm_fw_power_state(struct device *dev, bool power_on)
->> +{
->> +	struct sdhci_host *host = dev_get_drvdata(dev);
->> +	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
->> +	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->> +	struct device *pwr_dev;
->> +
->> +	pwr_dev = msm_host->pd_list->pd_devs[DOMAIN_IDX_POWER];
->> +
->> +	if (power_on)
->> +		return pm_runtime_resume_and_get(pwr_dev);
->> +	else
->> +		return pm_runtime_put_sync(pwr_dev);
->> +}
->> +
->>   /*****************************************************************************\
->>    *                                                                           *
->>    * Inline Crypto Engine (ICE) support                                        *
->> @@ -2550,6 +2659,17 @@ static const struct sdhci_msm_variant_info sdhci_msm_v5_var = {
->>   	.offset = &sdhci_msm_v5_offset,
->>   };
->>   
->> +static const struct sdhci_msm_variant_info sdhci_msm_fw_v5_var = {
->> +	.mci_removed = true,
->> +	.var_ops = &v5_var_ops,
->> +	.offset = &sdhci_msm_v5_offset,
->> +	.pd_data = {
->> +		.pd_flags = PD_FLAG_DEV_LINK_ON,
->> +		.pd_names = (const char * []) { "power", "perf" },
->> +		.num_pd_names = 2,
->> +	},
->> +};
->> +
->>   static const struct sdhci_msm_variant_info sdm845_sdhci_var = {
->>   	.mci_removed = true,
->>   	.restore_dll_config = true,
->> @@ -2566,6 +2686,7 @@ static const struct of_device_id sdhci_msm_dt_match[] = {
->>   	{.compatible = "qcom,sdhci-msm-v5", .data = &sdhci_msm_v5_var},
->>   	{.compatible = "qcom,sdm670-sdhci", .data = &sdm845_sdhci_var},
->>   	{.compatible = "qcom,sdm845-sdhci", .data = &sdm845_sdhci_var},
->> +	{.compatible = "qcom,nord-sdhci", .data = &sdhci_msm_fw_v5_var},
->>   	{.compatible = "qcom,sc7180-sdhci", .data = &sdm845_sdhci_var},
->>   	{},
->>   };
->> @@ -2587,6 +2708,21 @@ static const struct sdhci_ops sdhci_msm_ops = {
->>   	.set_timeout = sdhci_msm_set_timeout,
->>   };
->>   
->> +static const struct sdhci_ops sdhci_msm_fw_ops = {
->> +	.reset = sdhci_and_cqhci_reset,
->> +	.set_clock = sdhci_msm_fw_set_clock,
->> +	.get_min_clock = sdhci_msm_get_min_clock,
->> +	.get_max_clock = sdhci_msm_fw_get_max_clock,
->> +	.set_bus_width = sdhci_set_bus_width,
->> +	.set_uhs_signaling = sdhci_msm_set_uhs_signaling,
->> +	.write_w = sdhci_msm_writew,
->> +	.write_b = sdhci_msm_writeb,
->> +	.irq	= sdhci_msm_cqe_irq,
->> +	.dump_vendor_regs = sdhci_msm_dump_vendor_regs,
->> +	.set_power = sdhci_set_power_noreg,
->> +	.set_timeout = sdhci_msm_set_timeout,
->> +};
->> +
->>   static const struct sdhci_pltfm_data sdhci_msm_pdata = {
->>   	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
->>   		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
->> @@ -2597,6 +2733,16 @@ static const struct sdhci_pltfm_data sdhci_msm_pdata = {
->>   	.ops = &sdhci_msm_ops,
->>   };
->>   
->> +static const struct sdhci_pltfm_data sdhci_msm_fw_pdata = {
->> +	.quirks = SDHCI_QUIRK_BROKEN_CARD_DETECTION |
->> +		  SDHCI_QUIRK_SINGLE_POWER_WRITE |
->> +		  SDHCI_QUIRK_CAP_CLOCK_BASE_BROKEN |
->> +		  SDHCI_QUIRK_MULTIBLOCK_READ_ACMD12,
->> +
->> +	.quirks2 = SDHCI_QUIRK2_PRESET_VALUE_BROKEN,
->> +	.ops = &sdhci_msm_fw_ops,
->> +};
->> +
->>   static inline void sdhci_msm_get_of_property(struct platform_device *pdev,
->>   		struct sdhci_host *host)
->>   {
->> @@ -2665,8 +2811,21 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->>   	const struct sdhci_msm_offset *msm_offset;
->>   	const struct sdhci_msm_variant_info *var_info;
->>   	struct device_node *node = pdev->dev.of_node;
->> +	bool fw_managed;
->>   
->> -	host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
->> +	var_info = of_device_get_match_data(&pdev->dev);
->> +	if (!var_info)
->> +		return -ENODEV;
->> +	fw_managed = !!var_info->pd_data.pd_names;
->> +
->> +	/*
->> +	 * Based on variant info, differentiate platform initialization
->> +	 * for local and remote managed resource platforms.
->> +	 */
->> +	if (fw_managed)
->> +		host = sdhci_pltfm_init(pdev, &sdhci_msm_fw_pdata, sizeof(*msm_host));
->> +	else
->> +		host = sdhci_pltfm_init(pdev, &sdhci_msm_pdata, sizeof(*msm_host));
->>   	if (IS_ERR(host))
->>   		return PTR_ERR(host);
->>   
->> @@ -2684,12 +2843,11 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->>   	 * Based on the compatible string, load the required msm host info from
->>   	 * the data associated with the version info.
->>   	 */
->> -	var_info = of_device_get_match_data(&pdev->dev);
->> -
->>   	msm_host->mci_removed = var_info->mci_removed;
->>   	msm_host->restore_dll_config = var_info->restore_dll_config;
->>   	msm_host->var_ops = var_info->var_ops;
->>   	msm_host->offset = var_info->offset;
->> +	msm_host->fw_managed = fw_managed;
->>   
->>   	msm_offset = msm_host->offset;
->>   
->> @@ -2698,6 +2856,32 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->>   
->>   	msm_host->saved_tuning_phase = INVALID_TUNING_PHASE;
->>   
->> +	if (msm_host->fw_managed) {
->> +		ret = dev_pm_domain_attach_list(&pdev->dev, &var_info->pd_data,
->> +						&msm_host->pd_list);
->> +		if (ret < 0)
->> +			return dev_err_probe(&pdev->dev, ret,
->> +					     "Failed to attach power domains\n");
->> +
->> +		if (ret != var_info->pd_data.num_pd_names)
->> +			return dev_err_probe(&pdev->dev, -ENODEV,
->> +					     "Expected %d power domains, got %d\n",
->> +					     var_info->pd_data.num_pd_names, ret);
->> +
->> +		ret = sdhci_msm_fw_power_state(&pdev->dev, true);
->> +		if (ret) {
->> +			dev_pm_domain_detach_list(msm_host->pd_list);
->> +			return dev_err_probe(&pdev->dev, ret,
->> +					     "Failed to power on domain\n");
->> +		}
->> +
->> +		/*
->> +		 * Skip initializing clocks, regulators and reset in kernel
->> +		 * for firmware managed platforms.
->> +		 */
->> +		goto skip_resource_init;
->> +	}
->> +
->>   	ret = sdhci_msm_gcc_reset(&pdev->dev, host);
->>   	if (ret)
->>   		return ret;
->> @@ -2786,6 +2970,7 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->>   		}
->>   	}
->>   
->> +skip_resource_init:
->>   	/* Reset the vendor spec register to power on reset state */
->>   	writel_relaxed(CORE_VENDOR_SPEC_POR_VAL,
->>   			host->ioaddr + msm_offset->core_vendor_spec);
->> @@ -2917,6 +3102,12 @@ static int sdhci_msm_probe(struct platform_device *pdev)
->>   bus_clk_disable:
->>   	if (!IS_ERR(msm_host->bus_clk))
->>   		clk_disable_unprepare(msm_host->bus_clk);
->> +fw_detach:
->> +	if (msm_host->fw_managed) {
->> +		sdhci_msm_fw_power_state(&pdev->dev, false);
->> +		dev_pm_domain_detach_list(msm_host->pd_list);
->> +		msm_host->pd_list = NULL;
->> +	}
->>   	return ret;
->>   }
->>   
->> @@ -2930,6 +3121,12 @@ static void sdhci_msm_remove(struct platform_device *pdev)
->>   
->>   	sdhci_remove_host(host, dead);
->>   
->> +	if (msm_host->fw_managed) {
->> +		sdhci_msm_fw_power_state(&pdev->dev, false);
->> +		dev_pm_domain_detach_list(msm_host->pd_list);
->> +		msm_host->pd_list = NULL;
->> +	}
->> +
->>   	pm_runtime_get_sync(&pdev->dev);
->>   	pm_runtime_disable(&pdev->dev);
->>   	pm_runtime_put_noidle(&pdev->dev);
->> @@ -2947,6 +3144,9 @@ static int sdhci_msm_runtime_suspend(struct device *dev)
->>   	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
->>   	unsigned long flags;
->>   
->> +	if (msm_host->fw_managed)
->> +		return sdhci_msm_fw_power_state(dev, false);
->> +
->>   	spin_lock_irqsave(&host->lock, flags);
->>   	host->runtime_suspended = true;
->>   	spin_unlock_irqrestore(&host->lock, flags);
->> @@ -2967,6 +3167,9 @@ static int sdhci_msm_runtime_resume(struct device *dev)
->>   	unsigned long flags;
->>   	int ret;
->>   
->> +	if (msm_host->fw_managed)
->> +		return sdhci_msm_fw_power_state(dev, true);
->> +
->>   	ret = clk_bulk_prepare_enable(ARRAY_SIZE(msm_host->bulk_clks),
->>   				       msm_host->bulk_clks);
->>   	if (ret)
->>
-> 
+Am 05.11.26 um 21:19 schrieb Hex Lindqvist:
+> Unless the host turns it off, the WCN3990 firmware sends debug logs to
+> the host as ACL packets on handle 0x2EDC. hci_qca passes them on as
+> diagnostic packets, which the core copies to the monitor socket and then
+> frees. On a OnePlus 6T (SoC version 0x40010214, ROM version 0x0201) that
+> is a packet of about 490 bytes every seven seconds on average, for as
+> long as the controller is up.
 
+Does Linux log anything about this? Maybe, also paste an excerpt from 
+btmon capture?
+
+> The driver already turns this logging off after the firmware download
+> for WCN3950 and WCN3991. Do the same for WCN3990.
+> 
+> Tested on a OnePlus 6T. With the crbtfw21.tlv rampatch from the OnePlus
+> firmware, no diagnostic packets arrive any more. The controller also
+> accepts the command with the crbtfw21.tlv from linux-firmware.
+
+Both firmware file names are the same. What is the difference?
+
+> An AI assistant helped find and test this change and drafted this
+> message.
+> 
+> Signed-off-by: Hex Lindqvist <hex@freenixos.com>
+> ---
+> 
+> Notes:
+>      Test details (OnePlus 6T, crnv21.bin from the OnePlus firmware, counts
+>      from btmon):
+>      
+>      - v7.2.10 with the postmarketOS sdm845 patches, OnePlus crbtfw21.tlv:
+>        87 diagnostic packets in a ten-minute capture started a minute after
+>        boot without this patch, none with it.
+>      - bluetooth-next (31333770a468), same firmware, btmon from boot: 42 in
+>        the first seven minutes without this patch, none with it; the command
+>        succeeded at every setup. Plain bluetooth-next hangs this phone after
+>        about seven minutes with or without this patch, hence the shorter
+>        window.
+>      - v7.2.10 with linux-firmware's crbtfw21.tlv (its only WCN3990
+>        rampatch): the controller returns success for the command (btmon
+>        during setup; not a ten-minute run).
+>      
+>      Not tested on other WCN3990 boards.
+> 
+>   drivers/bluetooth/btqca.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/bluetooth/btqca.c b/drivers/bluetooth/btqca.c
+> index 60735b70d89a..1db2cc626def 100644
+> --- a/drivers/bluetooth/btqca.c
+> +++ b/drivers/bluetooth/btqca.c
+> @@ -944,6 +944,7 @@ int qca_uart_setup(struct hci_dev *hdev, uint8_t baudrate,
+>   	case QCA_QCA2066:
+>   	case QCA_QCA6390:
+>   	case QCA_WCN3950:
+> +	case QCA_WCN3990:
+>   	case QCA_WCN3991:
+>   	case QCA_WCN6750:
+>   	case QCA_WCN6855:
+
+The diff looks good.
+
+Reviewed-by: Paul Menzel <pmenzel@molgen.mpg.de>
+
+
+Kind regards,
+
+Paul
