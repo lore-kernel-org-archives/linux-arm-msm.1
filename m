@@ -1,96 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.66.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793984755;
-	b=bd/FETMqlbdym6OwCPEhIj4jOt6fBYIeAI63+WW+7wDstNTFWQtQkWSBkXNFSPz9djmZ
-	 XeGUdU1ydOfQA/M7nwaFfCs5K9O9ltD/eMJUJpKvxrQY1J164K/ZAsTvU/+ei82Rm9wVB
-	 3ezcMV5BvD6KV3l1ela1AIVad7RHN58InAc5myrFYseArZMkGeJ10NPSOV9vllgOVfInx
-	 WMSB8XmMrDvZCeFOIxIlc7AlbY8bTD8QCosVigVYuIBqX3y5xkQkpGwvcrBp97gUfVRZD
-	 s664aLE+pdks6O1G8HSku7FeSy+EfbbcoFmEXRJ2wf2wnH0UQx6y/QytKNdkTcYTG9w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793984755;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:Content-Type:Content-Disposition:
-	 In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=U3BzNvAjUkUy/A4qgoSPLPmdZVpZ27XAx6m1i7Z9SY8=;
-	b=SUObsx4+PLkfWMUiJ/A6nyEkMFB42LN6yV+C5u6Bbquoedwg4RZ+HxzS5amwF91kJx/x
-	 mKDD4lSGkk42P0fVTr2Lyi1nZIMju570F1J2EDmpS2pl14FfuafNJUpKxNpEe3igwtPyt
-	 XaCyEe9UvaRaF3sadXsfP2ZWrFwjkERYBgy1ZAxq+FvmfZo/+4L1TjxjcE/6UW0W21tqI
-	 SJvZ+3bp8xI9RUbZxqMNHn9Kb4ZxRz0qhF0+FSxnldkzfxwZW/2VxFsz3fYLxy2z9Cf8+
-	 83/tc1hnJwxd2xuwTSOQazzex2C69MG+UOR0Dt1utI9o/iV9ywTF0J9teDfBcLiSFDg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.nxp.com;
-	spf=pass smtp.mailfrom=oss.nxp.com;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=gBfk0KAP;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.66.18
-Received: from DUZPR83CU001.outbound.protection.outlook.com (mail-northeuropeazon11012018.outbound.protection.outlook.com [52.101.66.18])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793985133;
+	b=Z6H0q5RjZjleWsrFtLraUKNu5bOES50neFNbOoyHEiGSLnsYinYp3cOcIzIGBWxlAgWH
+	 NjVx9ZohfeTCoT9IrO0Z5tXptkWLqQ6UziOFgkmNcPbQ9b7aUBrfj/0wXMSCTdgQuc3Mr
+	 4Nkqnk25Xh0oCSQMmz3krp0VWbTBgoo7ytmObkupA/jlsaN81EtPZNn5lovz/6wDM4ZWn
+	 Giwq/a3VAAUNr2dRQo+4WIKBmNO6LBYHBRODIgvcjIfZu5kwog4Paapy9olm7nV74fpzP
+	 A8bbpYvDfZKakmUVjBudwQMVRrK8+qqaagJr4+bQ0hBt8MH8THTbypXbEjpVvhIF7ow==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793985133;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=yw+fiJnGacYZip0Sy8vz5R4fiYZZxfSHrVr/u3AJtsg=;
+	b=1Hy9wrb3pcmQGxjAmvcPE5ulJr56rg33Am2M76miNP56M/b6HqKzWHVDFlaNb7Lj71cd
+	 8CBF1KbT2s7pdOyS8it9Kh0XiqBxwdi5goEw4Zo1viJj1/YrmjZrfxl1lu6dI/MNiy57Q
+	 cniywFIpOHgEfNgOzu6/4TCFH2BrRB+8DVIBSYJczvsUyQkD1tqnh7+vTMj28lO8bwle2
+	 u0UM3MC0b40N4MKud5a9eY6N6TgRmymSg0eMQibslbfM7N8QW6bxOeMKZiTh1iamOviol
+	 RYt3xJJLqzE8LkNvHwRyR1JRunm6d77SnqY2KiOodfAp5Re+A7HS02+qWZBpWnT0lVA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXZYGJ+9;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D914606A329;
-	Fri,  6 Nov 2026 17:05:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8D914606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F495606A326;
+	Fri,  6 Nov 2026 17:12:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=gBfk0KAP
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WvrmVAW4mbNbgieg1dRiVL0s9Mb+keuxD2Wxiv9GhF9pmpOmTe/p6FaH1BsKRU3uJ86BM9DByIAMAAszz86LqoUpv4AahCflEBtwBqmoQd26zhPZ7+CvswSahxI8zlnnvW+Y3YT4rq+O/DP4SiSzkaoqcPd8y8yVJS7G1pVoABvRyznafKm4kt7KnYNNt7Kb01I7xqGIghgsCgHQE+iIUrhuB91A4V3CxiEhq6lWaWeL7JsGER2xOByd9RW3S/a7pEhGOBWDimooYjeVJ+ZqsRY+DucVtse/KLilTJEVW/zF64J8dXaxX3YcpgLg5wE1jxO9DERKoyzCOXBVNtGZvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U3BzNvAjUkUy/A4qgoSPLPmdZVpZ27XAx6m1i7Z9SY8=;
- b=fw2PJwsKly89KqQblfzeO4S5yueEhmI3joFbJAHFmpKu1lEB3A5Av7HbzAUtCq51qGbpGtFP13kg0kzUqAjB3FSiMFrWsR5vLuOCUWGUNJirVAiotvXPAFxGGjgdhZawwLHCdMYOGd6NAonPRmCeAWD+nAc2tb7hfgNqCnXTsB+hZDf3DjHuS9zjKgj1TMM3fKSD4Me5Aq17+7d5cHKrD0pNN++7gdyUmnXaZuQUA1vQEehTd5Qy8+n8oXw0FtX7w+1nAFREF8Rsh50jyLvQF+einzmLnlfB101erd1w8b+Sr8qKdJe70sQ11rgHSSnjXu6nLEYSEhgML/HwwJN5uw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U3BzNvAjUkUy/A4qgoSPLPmdZVpZ27XAx6m1i7Z9SY8=;
- b=gBfk0KAPvadjHEKO8F6Ymk1WYsT++DZ59UZDQelH5fQiacZ3PLbfqviK0AvJw30aW16J5OfgruTsyF3y2cFLlwtAIA1KevviQ+Cayu2l3g+mncMsdku6zO/KZepJRnhc/fTHfqp1ZVIsS14SQyZEDPFFSnlNBq/eLwweERXuxJKkuQ3ZTAwp0gS34zWQvox9Gt7Or4RFeCVLue/L6zCPdPhTc5FJImE6/kFx0xoAmmrFbCSMBzc4oqcLs2D+Y8D+j7WNdvxdtJB3XZw2RtV6P8Qhv6j2mfV80lOEHrEimlsUHmU51TXMgdDmEcdMESIfQ6/wowa7iKBMo2oPXttjoQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com (2603:10a6:290:76::14)
- by BR2PR04MB122097.eurprd04.prod.outlook.com (2603:10a6:2c8:7::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
- 2026 17:05:52 +0000
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b]) by MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b%6]) with mapi id 15.21.0592.009; Fri, 6 Nov 2026
- 17:05:52 +0000
-Date: Fri, 6 Nov 2026 11:05:42 -0600
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Wentao Liang <vulab@iscas.ac.cn>
-Cc: Sinan Kaya <okaya@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-	Frank Li <Frank.Li@kernel.org>,
-	Andy Shevchenko <andy.shevchenko@gmail.com>,
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH v2] dmaengine: qcom_hidma: Fix runtime PM leak in
- hidma_issue_task()
-Message-ID: <au4I5haNWglFazT3@SMW015318>
-References: <179395457228.2120679.13809646473624751961@iscas.ac.cn>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <179395457228.2120679.13809646473624751961@iscas.ac.cn>
-X-ClientProxiedBy: DM6PR03CA0099.namprd03.prod.outlook.com
- (2603:10b6:5:333::32) To MI3PR04MB12438.eurprd04.prod.outlook.com
- (2603:10a6:290:76::14)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXZYGJ+9
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00EDD1F0089F;
+	Fri,  6 Nov 2026 17:12:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793985132;
+	bh=yw+fiJnGacYZip0Sy8vz5R4fiYZZxfSHrVr/u3AJtsg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=MXZYGJ+9hZDzjTHk5gS409UcyjiXbtdAcctcAVsuxMbKKud7ZX74SVCglsnmLnC3+
+	 d9FWwycn9H4X1JX5q03xBf/WL4xEy9Bp+3E3VHRrPD4aNj6e2Jni7BD89MOBNO+AWZ
+	 ACiGWawy/gW1dTl3y5KQ5fQRjeNKhMVmvZODcBoiO5WB1gk1np4zqQJkmlk/HMWmm0
+	 3iyT6P5mcoOuK7Hpz+EJ7E2BZ+V5+brqLJVHV0JTgbIEbe6QflMFdMLwg7UJWZWs3j
+	 FfU8i6UShk63PKhDydd8dGKpMT8hGLGG3n06/pPFyJ91X8vgPB6cwrwVrOckKw4L+e
+	 8U4tSZLUFduQA==
+Date: Fri, 6 Nov 2026 17:12:08 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: lgirdwood@gmail.com, broonie@kernel.org, robh@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v8 1/2] regulator: dt-bindings: willsemi,wl2868c: add the
+ WL2868C camera PMIC
+Message-ID: <20261106-lucrative-sadden-741ffe6c43e9@spud>
+References: <20261106114252.988023-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261106114252.988023-2-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,87 +60,194 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MI3PR04MB12438:EE_|BR2PR04MB122097:EE_
-X-MS-Office365-Filtering-Correlation-Id: 448bfc90-e8c8-4009-9a81-08df3c283651
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|7416014|376014|366016|19092799006|261009223027099003|11063799006|5023799004|56012099006|261102123227099003|261022105027099003|261021121427099003|261026121527099003|261026140227099003|261028144727099003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	wOMFiLNHi9/y7QUuHb+TejcydAj4URf28BpzEk1D4q0Lt8dOlJZi+ZYWaHKCO3Bah269aYIIN1M6AboBFTapB9Bv5IDcqKG/WS5layaEHUc2t6Bn0WEud0vS250NOd9xQnD4ITcwrXU1TgXit3EeFgGpi3hcmXGddZ73qBOxdrkiHFmX+UfilFD/Zh58TcWRUXjeL4EDzWK6GySkYPq1kDh51S9AuLeUkuCP56WHe2pexv6oJ+1CWp1zljyWgnaGGcRQv7iAkjp7+xB52nUaJ/ZWrVOJZ3/ytQFStAepXHUOGvzyxMp3kILSBdIeYpyNaRmZTdrWRWcUV5qbb9sypZNkt5W7j//XzTm53FIoftn97y5vbyAgwx15C+lLzuRUOrYzqnYl9YEhAxxOamvegUU6IlPpw2vnNFTUDP6hMfUwAdnrQ/OfGrgvpxH88KU1xoOQZ4I28bcHW/wpwUQGV3qzZcrhv/bONl4BUjbYZW0SA1bVPScloWRwjiIT8WxvSzOtFRjpnXEfzL1dcpuu0Qa3tzeEa1WzSk4ziW2LbM5Qifau3TSvYeOdQhE9xidsd94KvT3myo87xJwHGDFWSee3+yKDhfQfyhw1S4ES1gHfBP1cYZTVLI4rIQ927msF
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MI3PR04MB12438.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(7416014)(376014)(366016)(19092799006)(261009223027099003)(11063799006)(5023799004)(56012099006)(261102123227099003)(261022105027099003)(261021121427099003)(261026121527099003)(261026140227099003)(261028144727099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?76dKIqdEl4MWW3kK9khXWJr4oIWXpmbfLA286mvredVfL+t7iqpIgol7Kc0T?=
- =?us-ascii?Q?SzeM5nEEsJG3xXd9Z7bdPnNoG57vM2AFASLhd4bMdF9BJKmEuq7M64YzH3AJ?=
- =?us-ascii?Q?YCjRuVwHC13NuMgqeky364BcUDSdHL+l//NDKFEZWjGSN3pRRSc+i30S4VYx?=
- =?us-ascii?Q?YXreocg/mMncwPsgjUaExF+MQez60NxUfri8zzrT7TH7bMBzTWsLlBJ1R06A?=
- =?us-ascii?Q?r7ovfmuac+jd+D2jnU7LZJlyauRmOehqEgsSJc7Wd+cOxBIWoBdyukp3hgUc?=
- =?us-ascii?Q?VFnWYnyjqhPYDtm33OYY9g5DUXEc8E4R0fH1EA93oxnKevgeVhNGcXVPt+Pi?=
- =?us-ascii?Q?osgsxyqF7gT1UACPuPeisK+VNOi+xjGCX1FqB5emmjTN1KzwrTGg0tQZ6kfK?=
- =?us-ascii?Q?fFGQ59K5Q+AFIxn43QnnePdXb07riPVbgnLN9Yqdz8m+uiLc16VumlGpNitV?=
- =?us-ascii?Q?liOcz85MXDJVWVRP7et/ooHOzCO3cTPnojZ9sEIxlWG1JDbJ4FzlykwV93UR?=
- =?us-ascii?Q?LL5Oo/P1/2xUnoRcSwa06rF2J64hJQJ6knUhN7NaG2xbxPFOr8oQixIF61Ug?=
- =?us-ascii?Q?jr7sAF1imQ4VEFQqNjtAhiEaJc1941k/Xl48qHMoY0LwbYsL72UGcgKRJAZ6?=
- =?us-ascii?Q?heVQsuONzGVELqvEbsVIKyOriBXkDEuUXgxQe4ov2Zo8KLPgTFgNqa0WyDwb?=
- =?us-ascii?Q?RE4LO8YLB512W5Gsxm2X7ZLSZl6wWX9QmQPFyoiOncqpmNzo/O1CTyxyHZjS?=
- =?us-ascii?Q?jLAOk9er2j1olUYjSblss2/s94WbgtEZWp8vd8SEEx2Qgp1WYmHRVMc+IbvT?=
- =?us-ascii?Q?t/ESo/kHxSOBEgnlElaqFQmP520caZY5BeELcEDsK9EIvtCkD0p//0HqUZg4?=
- =?us-ascii?Q?21zrWCXVFqJKQlRlbttBAHM3cr8IgRgxfvFZ0KT4Q0OCyLUh7FcTNxWYe8AB?=
- =?us-ascii?Q?XHcLxFM8vi5JEdAVEf9T2I3Hp82RILsByvKf08s3bnEgotXkPkR0esJaceVH?=
- =?us-ascii?Q?78zkBsv5njDOsIXnJmbTy1rqw7p6u5dtHNuGYAWexmHY7CQtjl8qwJwHp5ws?=
- =?us-ascii?Q?tkTmN9qccO7KDFG0ypOVFRTS6lb7ALCG+xPD8JX5EEdCOq+6YIrNcKnAyfE5?=
- =?us-ascii?Q?qRERPvJItlonVcjC4oCaRYM9a57nxnCP1XcXn+XcZqcNUk9qs8igP4LW46FV?=
- =?us-ascii?Q?3ORJCbeMp2xlho3gbYaRXy05kjNktI/3177W6XYUNkE2i/eGWxmgUB1FfMwc?=
- =?us-ascii?Q?eUxL2rLlTJQ7arQWFS4N0idcq+nIFNLrW0Guz4Ef4IF/B9ygo2kUwCTILTfj?=
- =?us-ascii?Q?dAu+6nMCUWGtziqaLQfNS3v+y9Sx6J0Mtd8UfkPOC+ng9rQu7siZ3C+CAnDF?=
- =?us-ascii?Q?ye0x/CitgFjig09RXHZd6mI4/AuOFp3LS0wL3liQEmvoi9NUJPDR+UPDVrC+?=
- =?us-ascii?Q?B8CCyYcoIKukCPdPQwLVXUNaOU02DBiHZMiAYy/lBTOYWDzW6IkauJEbLOd6?=
- =?us-ascii?Q?FOTlbbYkLUvfVCFBqW0bLsW6Nhl9EZCXJjcWJqPZ15wA2uIuVZM2DqCKtaMO?=
- =?us-ascii?Q?w//AKcWZyWi1TM47HVXsl4wFGewaLR5re6kEmhDvV9k/2DAbw9Jk8qJQAB+c?=
- =?us-ascii?Q?JPOn8xFPlMiyTwCFjxewiXCaXsFpCJ2aFqsI1B3Gne24QR6AIeJaqU6xDIYU?=
- =?us-ascii?Q?jJDILemo48U/ejRA2xlbWlSsxncGALH4kXvyKaM97b2+m6/98PzVCtzDk5SF?=
- =?us-ascii?Q?VLNTNQ6D4SXfyj8Q3WxFLz29bltBFW1ddikEX7RooX77NkLWld+c?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 448bfc90-e8c8-4009-9a81-08df3c283651
-X-MS-Exchange-CrossTenant-AuthSource: MI3PR04MB12438.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 17:05:51.9500
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BZoImhvZM1zRyGvYm8G81We+HHb3lb8SEewQVHbqM5TVq6suJpYyJ1Yp/Rry2+eU5dHIzJ2QleoTMIudacNLDtq/UygRNa5CLug4+RmEF7jRPa4kSIYkNQSXGiCwOPNU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BR2PR04MB122097
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="K6bwFbsNcc6jfS5d"
+Content-Disposition: inline
+In-Reply-To: <20261106114252.988023-2-xiaqinghuan@mail.ustc.edu.cn>
 
-On Fri, Nov 06, 2026 at 08:42:52AM -0000, Wentao Liang wrote:
-> hidma_issue_task() bumps the device usage counter with
-> pm_runtime_get_sync() without checking the return value. The counter is
-> incremented even when the resume fails, e.g. when runtime PM has been
-> disabled or the device is suspending, and nothing drops it in that case,
-> so each failure leaves the device with an elevated usage count and it can
-> no longer runtime suspend.
->
-> Use pm_runtime_resume_and_get(), which drops the reference it took when
-> the resume fails, and do not start the transfer in that case. The counter
-> taken by a successful resume is still dropped by hidma_callback() as
-> before.
->
-> Fixes: 67a2003e0607 ("dmaengine: add Qualcomm Technologies HIDMA channel driver")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
+--K6bwFbsNcc6jfS5d
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Nov 06, 2026 at 07:42:51PM +0800, Qianhui Xu wrote:
+> The WL2868C is an I2C-controlled camera power management IC from Will
+> Semiconductor. It provides seven programmable LDOs: LDO1 and LDO2 are fed
+> from a shared VIN12 input and cover 0.496 V to 1.512 V, LDO3 and LDO4 sha=
+re
+> VIN34, and LDO5 to LDO7 each have their own input, covering 1.504 V to
+> 3.544 V. All outputs are programmable in 8 mV steps and are gated by
+> per-output enable bits with a chip-wide SYS_EN master. The chip also
+> exposes an optional active-low RST_N input.
+>=20
+> VIN7 and VSYS are both inputs of the internal control logic, which is
+> powered from the higher of the two voltages, so a device tree has to
+> describe at least one of them. The remaining inputs only feed LDOs, so
+> they stay optional: an input can be left unconnected when the outputs it
+> feeds are unused on a given board.
+>=20
+> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+
+Rob#s feedback on v6 was ignored:
+https://lore.kernel.org/all/20261106141036.GA2921668-robh@kernel.org/
+
+pw-bot: changes-requested
+
+Thanks,
+Conor.
+
 > ---
+>  .../bindings/regulator/willsemi,wl2868c.yaml  | 104 ++++++++++++++++++
+>  MAINTAINERS                                   |   7 ++
+>  2 files changed, 111 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/regulator/willsemi,=
+wl2868c.yaml
+>=20
+> diff --git a/Documentation/devicetree/bindings/regulator/willsemi,wl2868c=
+=2Eyaml b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+> new file mode 100644
+> index 0000000000..df7990d0d8
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+> @@ -0,0 +1,104 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/regulator/willsemi,wl2868c.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Will Semiconductor WL2868C camera power management IC
+> +
+> +maintainers:
+> +  - Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+> +
+> +description:
+> +  The WL2868C is a camera power management IC with seven programmable LD=
+Os.
+> +  LDO1 and LDO2 share the VIN12 input and cover 0.496 V to 1.512 V; LDO3=
+ and
+> +  LDO4 share VIN34, and LDO5 to LDO7 have one input each, covering 1.504=
+ V to
+> +  3.544 V. All outputs are programmable in 8 mV steps.
+> +
+> +  VIN7 and VSYS feed the internal control logic, which is powered from t=
+he
+> +  higher of the two, so at least one of them has to be connected. The ot=
+her
+> +  inputs only feed LDOs, so an input may be left unconnected on a board
+> +  that does not use the outputs it feeds, which is why they are not
+> +  mandatory.
+> +
+> +properties:
+> +  compatible:
+> +    const: willsemi,wl2868c
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  reset-gpios:
+> +    maxItems: 1
+> +    description: Active-low RST_N input.
+> +
+> +  vin12-supply:
+> +    description: Input supply for LDO1 and LDO2.
+> +
+> +  vin34-supply:
+> +    description: Input supply for LDO3 and LDO4.
+> +
+> +  vin5-supply:
+> +    description: Input supply for LDO5.
+> +
+> +  vin6-supply:
+> +    description: Input supply for LDO6.
+> +
+> +  vin7-supply:
+> +    description:
+> +      Input supply for LDO7 and one of the two supplies of the internal
+> +      control logic.
+> +
+> +  vsys-supply:
+> +    description:
+> +      System supply, the other supply of the internal control logic. The
+> +      control logic is powered from the higher of VIN7 and VSYS.
+> +
+> +  regulators:
+> +    type: object
+> +    additionalProperties: false
+> +
+> +    patternProperties:
+> +      "^ldo[1-7]$":
+> +        type: object
+> +        $ref: regulator.yaml#
+> +        unevaluatedProperties: false
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - regulators
+> +
+> +anyOf:
+> +  - required:
+> +      - vin7-supply
+> +  - required:
+> +      - vsys-supply
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    i2c {
+> +        #address-cells =3D <1>;
+> +        #size-cells =3D <0>;
+> +
+> +        pmic@2f {
+> +            compatible =3D "willsemi,wl2868c";
+> +            reg =3D <0x2f>;
+> +            vsys-supply =3D <&vsys_reg>;
+> +
+> +            regulators {
+> +                ldo1 {
+> +                    regulator-max-microvolt =3D <1128000>;
+> +                    regulator-min-microvolt =3D <1128000>;
+> +                };
+> +            };
+> +        };
+> +    };
+> +
+> +    vsys_reg: regulator-vsys {
+> +        compatible =3D "regulator-fixed";
+> +        regulator-name =3D "vsys";
+> +    };
+> +...
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index fe23913b1e..08cfa3db0e 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -30180,6 +30180,13 @@ L:	linux-input@vger.kernel.org
+>  S:	Maintained
+>  F:	drivers/hid/hid-wiimote*
+> =20
+> +WILLSEMI WL2868C CAMERA PMIC
+> +M:	Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+> +L:	linux-kernel@vger.kernel.org
+> +S:	Maintained
+> +F:	Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+> +F:	drivers/regulator/wl2868c-regulator.c
+> +
+>  WILOCITY WIL6210 WIRELESS DRIVER
+>  L:	linux-wireless@vger.kernel.org
+>  S:	Orphan
+>=20
 
-Krzysztof already report at many threads
+--K6bwFbsNcc6jfS5d
+Content-Type: application/pgp-signature; name=signature.asc
 
-https://lore.kernel.org/all/e34e5630-2f3e-4f7f-9f47-4fec11c1a61e@kernel.org/
-https://lore.kernel.org/imx/20261104-small-pompous-basilisk-ac9df8@quoll/
+-----BEGIN PGP SIGNATURE-----
 
-vulab@iscas.ac.cn is bot, which is not real person.
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCau4KaAAKCRB4tDGHoIJi
+0kbNAP47h6RwmupUnRM9xwGx1Lucs3meQvJTVY0/eCU7Vg0W9gEAwy3QyeC+rxAB
+Zy/7INF+1GiqpqZAlT+DoTNEmRpyBQg=
+=g8S0
+-----END PGP SIGNATURE-----
 
-If you can't reply and clear this situation, I will mark all patches from
-vulab@iscas.ac.cn as not appliable at patchworks for dmaengine.
-
-Frank
+--K6bwFbsNcc6jfS5d--
