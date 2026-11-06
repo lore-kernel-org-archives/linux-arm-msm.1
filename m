@@ -1,70 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.7
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793982777;
-	b=1QrquPczkAVKsF0fHyh5aD5kmJlEoNuXSukRU/tXY68RbWqMfthcdytCS4mV/kSoDHis
-	 sZXyVNy2Fs8G2NezulUz5Pceg8M32lVkQMGpynivYHuFmPXHpdVB7r0Uv9tc6hpda4c+u
-	 +RpKUH7jyMd4pYviNJvQehrK+x3PKR80xNOmXlY8hKbLT/wWdGUfd69JP6HzGJEENp6eq
-	 4SRRWOfSXxiL0fEgigOzPYQY0PJanRZ1XWYsnElU9uW7BvILmmpuRYJto49+7z3q09nNJ
-	 eNFtHvQiEZ2mBhvuG2zK28TXFriB+n+zwxgUyXijIOI/pY4xOCAFHUlEQ0ciBRipn5A==
+	t=1793983314;
+	b=TzRMXtHcAjupS/L3wifofeoO5OSJfCRXHQdAC7vYbEt27jkfY4OvhKJH4qkAOiHcwSEg
+	 F0mAVbX2gM5cgBaHCMwSo3GZ9Q7ervJWU3+/zcOc//DCfWKra47XIgIWB3+TMbdQWffwr
+	 m/oryG3dfWxUB6vr5rYy+sJZLTqrMi9o2z+9wMTmm2bnaZckr1eaM4zUfSiuOjSfLm/A0
+	 x8YTeRP9IGo6HHTC0aoIIn7lYIeClEf4k4QMFPWPUXcuMVmLi+pt1HvaU18A5/lVjzxBd
+	 ZRPtF8jzg/SjCtYJxlDDioRMPwkuI/Z91cb2q/BF3c16vTfStR4cwfmNUo8WxLQ99qA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793982777;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:References:
-	 X-Mailer:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:
-	 MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=lLUBX5NMh3rR49KCC8Gxk3yDlocbPIa0NzFM5Ifv0t8=;
-	b=uwDvgkholvZW+5VuL1XVT0PxpqeqB88uCDjX01nW+WcLmqWD3dtoANDYlyGv59WCewpN
-	 qyrLH1lqOSVyw7uzbTn/xkofm1m6g2ky6oCCMeddm7cyY+QZdKFlATsgIpzA4in7mRb6/
-	 tDvUQQJ/sZbTFtDaK15c1/nEDpvLEAoNiQUYY3uhmP7sUA+1K6BqSeqtQlVdnpNUI7vsP
-	 kDmDDN3Zh4hBjWup2EVL7t30/hdcYuCCAXT/FjsLJeCEXYgYKAKMB9Br7zRA1qxOGMfBC
-	 RV9VsSNyqJOWOFZRaPhjBJvMJoQr+Ulht3GoTtjAEn0Th5Dlz7Sf2d66NV0muZxVlhg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793983314;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
+	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=oPspVz2u3sUVQrpVa7QtYannDPmyJMtXsmAP0J0uodo=;
+	b=QByB8dmsqOQaBR5eAUTb9pJ4D9YACHVBzZOrmyReMHzvXgg6BGZAiI3KTRm07SFfFnsO
+	 Z93rHhkgNnLzHTJ6yJl13XhrIl1e86XePHSSRll+hPMK0M07eOcSlMb8d8N2scLQgHt0P
+	 TwppixpU34o+3d6I5y6sxXSsLsCPCyvRtDF3DJXfMnLgfO/4nlh9GQMTOJEWmqX6NqZfW
+	 k7FB9BfruWZXVX7hhXlAq0/TZRs8xM02zeB1hGy1EupaeuBj85bfmRxQNtUUyvVpfgKiK
+	 0OuAqZlUybJhdDnTmq2nEPNkqmRYkCypJdxVoh3GjnkMKAbB990OQFhCEzMCaN2GRCw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fqwqf.xyz;
-	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=apOKf2r1;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=kRT9NGdM;
-	arc=none smtp.remote-ip=23.251.234.53
-Received: from e234-53.smtp-out.ap-northeast-1.amazonses.com (e234-53.smtp-out.ap-northeast-1.amazonses.com [23.251.234.53])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ZRI6UUZs;
+	arc=none smtp.remote-ip=192.198.163.7
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 080E7606D810;
-	Fri,  6 Nov 2026 16:32:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 080E7606D810
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FDF7606A33E;
+	Fri,  6 Nov 2026 16:41:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2FDF7606A33E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=apOKf2r1;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=kRT9NGdM
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1793982775;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=c0tUZAaaLfmv6reKw3GkgRVoEuHn/RALQcxVbTokSu8=;
-	b=apOKf2r1V8C0VlJ0HaaWLxU9CPqcBvN2SIm7E8zxh8Xt9/CAhUXFRj7D6l9dgWQp
-	5u41Dl5DU6P6+CbI6h88cXQE6Beyor1ZCjA+sDmFdpx/sBvdpUCdoyKtllGgb92bpw/
-	78nITWN5i8y6Gcyh4HtEo1gbfgSwLSJSu07C9Ark=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1793982775;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=c0tUZAaaLfmv6reKw3GkgRVoEuHn/RALQcxVbTokSu8=;
-	b=kRT9NGdMjGOB7hiPXURNUb8dsHNY0UWA1cV8nTaOYnztzPlmXjU8xvalVngBCXT1
-	+cMT/M9cXnL+0oeyM841D7L2PicQAxsxnCVf2mU2KdUHsGw8pYbM2OKivUmPiASiZ8B
-	7hyYoYjucsixsbde+fJWklDS897fNebck29eq5us=
-In-Reply-To:
- <CAFEp6-2vZT+c9fz2Ob1LvPQBjChOpCdAYa0qAWCyiDg3s4d0LQ@mail.gmail.com>
-References:
- <CAFEp6-2vZT+c9fz2Ob1LvPQBjChOpCdAYa0qAWCyiDg3s4d0LQ@mail.gmail.com>
-X-Mailer: git-send-email 2.53.0
-From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: loic.poulain@oss.qualcomm.com, xiaqinghuan@mail.ustc.edu.cn
-Cc: bod@kernel.org, hverkuil@kernel.org, todor.too@gmail.com, 
-	gjorgji.rosikopulos@oss.qualcomm.com, vladimir.zapolskiy@linaro.org, 
-	mchehab@kernel.org, linux-media@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] media: qcom: camss: stop started subdevices when
- stream-on fails
-Message-ID: <010601a1b1b4c10a-5e87fd76-771d-44aa-9a2e-0755e5e1ff0f-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 6 Nov 2026 16:32:55 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ZRI6UUZs
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1793983315; x=1825519315;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=U41/yhPtOEbm2rdavaCV20VU455lrs9kR6LVwMJnUdQ=;
+  b=ZRI6UUZsrpdTJoMofP7J+0iCMTFMKtdzS6ighslr8kSq4IzjVc28mztZ
+   N7DGdWVPitaip7flIaPtDtZmITCDmqGoenDkFEzrQhL120ede3qprOy/b
+   VbB/134A4Kd0EZGl0kAjGBnwi+1LJpfstXgd1jy7xKW+WR6DN9zfDHdyv
+   cHJZkveglHmjM+6tkXTwc12CFdsL2UW0oJr8Kd9y4TGC9YmPVMSp1kDev
+   auMVp/3AvG9rnxfqBtYVjvpyEsjJXhOS9LmfCYgb8gm/JrqgycLg9gplM
+   +3ESdjTRrJJbQpe/vp+29Osa+gjsbAEM7zyf+XQfrAcuiFnsHbnAVgVvW
+   w==;
+X-CSE-ConnectionGUID: DVx4N3ZATNiii2beJqzfUg==
+X-CSE-MsgGUID: x6mJ02xUQpCNQCFw5fEamw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11958"; a="2669066"
+X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
+   d="scan'208";a="2669066"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2026 08:41:54 -0800
+X-CSE-ConnectionGUID: AhncTAcSREy/LIg9F9dhYw==
+X-CSE-MsgGUID: 3Uc2TKvlSuGnHOjN8ZQ39g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,197,1787036400"; 
+   d="scan'208";a="7660259"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa009.fm.intel.com with ESMTP; 06 Nov 2026 08:41:52 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1008)
+	id A09B699; Fri, 06 Nov 2026 17:41:50 +0100 (CET)
+Date: Fri, 6 Nov 2026 17:41:50 +0100
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: gregkh@linuxfoundation.org, neil.armstrong@linaro.org,
+	dmitry.baryshkov@oss.qualcomm.com, tvlad744@gmail.com,
+	linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH] usb: typec: ucsi: Leave the mux to the altmode driver
+ for alt mode partners
+Message-ID: <au4DThRaGmNzZ0HU@black.igk.intel.com>
+References: <20261103135046.1654-1-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -74,101 +83,57 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.11.06-23.251.234.53
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261103135046.1654-1-26rote@gmail.com>
 
-Hi Loic, Qianhui,
+On Tue, Nov 03, 2026 at 10:50:46PM +0900, Joonhoe Kim wrote:
+> Commit 25a2bc21c863 ("usb: typec: ucsi: call typec_set_mode on
+> non-altmode partner change") set TYPEC_STATE_USB only when the partner
+> flags were exactly USB, so that the altmode drivers set up the
+> switches, muxes and retimers for alt mode partners. Commit 226ff2e681d0
+> ("usb: typec: ucsi: Convert connector specific commands to bitmaps")
+> turned that into a test of the USB bit alone, so a partner that
+> reports both USB and alt mode now gets TYPEC_STATE_USB as well.
+> 
+> On pmic_glink platforms the altmode driver programs the same mux chain,
+> and the two notifications are not ordered. When the UCSI connector
+> change comes last, an FSA4480 switches the SBU lines off, the
+> DisplayPort AUX channel stops working and the sink is never detected.
+> On the Lenovo Y700 Gen 5 (TB323FU, Kaanapali) this happens when a
+> DisplayPort sink is plugged in during system suspend.
+> 
+> Set TYPEC_STATE_USB only when the partner does not report alt mode.
+> USB4 partners keep TYPEC_STATE_USB, as they do now.
+> 
+> Fixes: 226ff2e681d0 ("usb: typec: ucsi: Convert connector specific commands to bitmaps")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 
-Thanks for the pointer. I have read v2 2/2 [1]; it =
-covers the ordinary
-start-failure cleanup addressed by my patch, and =
-sharing the traversal
-with stream-off makes sense.
+Reviewed-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
 
-There is one remaining difference: camss_video_subdevs_set_stream()
-returns immediately on a disable error. If A and B start successfully,
-C fails to start, and stopping A then fails, B is never stopped. Normal
-stream-off also stops walking at that first error.
+> ---
+>  drivers/usb/typec/ucsi/ucsi.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/typec/ucsi/ucsi.c b/drivers/usb/typec/ucsi/ucsi.c
+> index 2f9adf4f8bde..395554ba0312 100644
+> --- a/drivers/usb/typec/ucsi/ucsi.c
+> +++ b/drivers/usb/typec/ucsi/ucsi.c
+> @@ -1356,7 +1356,8 @@ static void ucsi_partner_change(struct ucsi_connector *con)
+>  			typec_set_mode(con->port, TYPEC_MODE_AUDIO);
+>  			break;
+>  		default:
+> -			if (UCSI_CONSTAT(con, PARTNER_FLAG_USB))
+> +			if (UCSI_CONSTAT(con, PARTNER_FLAG_USB) &&
+> +			    !UCSI_CONSTAT(con, PARTNER_FLAG_ALT_MODE))
+>  				typec_set_mode(con->port, TYPEC_STATE_USB);
+>  		}
+>  
+> 
+> base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
+> -- 
+> 2.43.0
 
-I reproduced this with the actual helper and injected subdevice errors.
-The increment below keeps the first stop error and continues cleanup;
-start still returns immediately, and video_start_streaming() retains the
-original start error if cleanup also fails. It applies on top of your
-v2 2/2. With this covered, my earlier standalone patch can be superseded.
-
-The helper and the actual video start/stop functions pass 416 ASan/UBSan
-cases covering partial starts, multiple stop failures, ignored states
-and pipeline/format errors. With the unmodified helper, the stop-error
-case leaves B enabled. The ARM64 W=3D1 camss-video.o build passes. These =
-are
-software tests; I have not replaced the running camera driver to test
-the combined change on hardware.
-
-Would you fold this into your next =
-revision? I have left the multiple
-source-link question to the existing =
-discussion with Bryan.
-
-[1]
-https://lore.kernel.org/all/20261031041154.=
-308030-3-xiaqinghuan@mail.ustc.edu.cn/
-
-Signed-off-by: Jizhou Tong =
-<fqwqf@fqwqf.xyz>
----
-diff --git a/drivers/media/platform/qcom/camss/camss-=
-video.c b/drivers/media/platform/qcom/camss/camss-video.c
-index 9a633ca066..31d608d9a0 100644
---- a/drivers/media/platform/qcom/camss=
-/camss-video.c
-+++ b/drivers/media/platform/qcom/camss/camss-video.c
-@@ -268,12 +268,16 @@ static int video_prepare_streaming(struct vb2_queue =
-*q)
-  * subdevice without a streaming operation reports -ENOIOCTLCMD, which=
- is
-  * ignored here to match the previous .s_stream() call sites.
-  *
-+ * Start stops at the first error. Stop continues through the pipeline =
-even if
-+ * a subdevice fails, so one failure does not prevent cleanup of =
-the others.
-+ *
-  * Return: 0 on success, or the error code of the first =
-subdevice that failed.
-  */
- static int camss_video_subdevs_set_stream(stru=
-ct camss_video *video,
- 					  bool enable)
- {
- 	struct media_entity =
-*entity =3D &video->vdev.entity;
-+	int first_error =3D 0;
-=20
- 	while (1) {
- 		struct media_pad *pad;
-@@ -296,13 +300,17 @@ static int =
-camss_video_subdevs_set_stream(struct camss_video *video,
- 			ret =3D v4l2_subdev_disable_streams(subdev, pad->index,
- 							  BIT_ULL(0));
-=20
--		if (ret && ret !=3D -EALREADY && ret !=3D =
--ENOIOCTLCMD)
--			return ret;
-+		if (ret && ret !=3D -EALREADY && ret !=3D =
--ENOIOCTLCMD) {
-+			if (enable)
-+				return ret;
-+			if (!first_error)
-+				first_error =3D ret;
-+		}
-=20
- 		entity =3D pad->entity;
- 	}
-=20
--	return 0;
-+	return first_error;
- }
-=20
- static int =
-video_start_streaming(struct vb2_queue *q, unsigned int count)
+-- 
+heikki
