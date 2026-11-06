@@ -1,60 +1,127 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793955025;
-	b=sU9qcsbWu99cV+hBv8vRm5ZJgGa9oMeyCABVyGJw9wV167VaUk66uQKqmZ4VaqLQqsOg
-	 QV6lhAc8/3/3VDCb0GWpWXZkv9rI0zc7fokueKt1UefDotIeVb5HDgTUqULm1CvOGIaH3
-	 jxjQwIq8TYHlMKP3YJBJuxrfwNq+5kD86DwgbcvLsGFCZSswqenoc/Y9VayPYIHdZhPIy
-	 Vwt60ENkr93MqScFXed9vaM6nhHsnQobwDCUDLTP859e+gm7jauNJBFX/9D3ocdV6iwc3
-	 3eEfcyJB0oAKI/pM4GPJlKjlqPQA3rdwbNFXSQJ7fx3enE91rCCmNYw7YyE7qax2v+w==
+	t=1793956376;
+	b=aOIr6lwRE+S1Aq4Std+6+GbBB1bHgZ1HBHbCkpuVbiT5OF0goXios72/NHahxAWX0GsI
+	 Z7PsHcVU/luHDcp5lcOaes+eGGefZqbU5WfJRHLtzzOoSax5Tu12aAa27gyHiOYsvOemS
+	 zVpmfTbVFpLsifgPGyE7kV4iBIwon87PgNCHp+0u/kO23T51UQzKj7Yt6Z+uGwUlisBXq
+	 Lli+Vnkl+DwJ9UcApNOs5GrpOwxgDPaAco4luFmJqOwWrkZn6PmCO7kKetRzWOxvD4EhO
+	 7t5RTVaELvi+9YvCbFWiHM3EWjBuMjwMB+Jj5rx2VOrfFhX5atULGGNQHjUz4l9CgSg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793955025;
-	h=Received:DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=4KseLiEBWMKMKEx4omaKpJSqCgu67BaInGBjJdgTfdM=;
-	b=4QERjJ/QsDInX5tGNPEOAQcs7hMWH0gqIv9pQPYeY0oTqsd5TErQbYRxc2KKLa8/VUtf
-	 Zc2SOPJU90xnetEHrJJ+3y5Akg2lnjDtpNxdoEWevc6Yl6vOvLV5gWlvrqpS/6O7FoP8G
-	 iVfC72AjGYAAh9BOto7kAsSKjnaZjqMpHFtjL/QXfx/FT9zPgcwGEmJh+zUU+kFcwpnKH
-	 /9UtzhsObP4ezyNsFZ5iaTRX5a6UGPEdwMnwZDFOPAJkMFe8ojUCL70/s04ggHkHetHhv
-	 YKNevXuSb8mBpgmKJFk0ul0mFbJZa71nhuThnnWFfKNv1Jg/l8OsoCVOPQXPcAPdBBg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793956376;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=Fmoyspqstw2/9PiOOpzl/yM+dFrdSjNpOnDbiAxrbfI=;
+	b=rC/oFj0QE6/Wz6BWNzjvqnhPjT+qrneOeiUp6nFt2tDaAjXVnQjm1Ss50dpM5VrJkgIV
+	 rdsZTUh7TjQ8XM4kkCqtr+8VlTTQ3V0uBbaa0pxTo9vKZMGqDE0jRJ1vXk9t4X5JCwfhG
+	 kFSl/CQL2/IqObp6jiWD8E0hubemr/M/UTi2e6QtyWLxJ4W7StOAEJAzpaZImvUDRG9W1
+	 RjSoGOGPnylT63dRjgtLKaC4UyJNpFk6HwRTVC81c1xatFfO2peCxFqK4latzivFjGq8h
+	 QAzatxYkGylzIld/Io7F8OFUhk7/M0kUqi2+ps71KRhEoA18kKUw9xEy6QKaNt5mpgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="d9ZLa/JG";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=none header.from=tomeuvizoso.net;
+	spf=pass smtp.mailfrom=tomeuvizoso.net;
+	dkim=pass header.d=tomeuvizoso-net.20260707.gappssmtp.com header.i=@tomeuvizoso-net.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=F7DCHBDW;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EEA2606A331;
-	Fri,  6 Nov 2026 08:50:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D909606A33C
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 09:12:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3D909606A33C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tomeuvizoso.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tomeuvizoso.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d9ZLa/JG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 771331F0089F;
-	Fri,  6 Nov 2026 08:50:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793955025;
-	bh=4KseLiEBWMKMKEx4omaKpJSqCgu67BaInGBjJdgTfdM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=d9ZLa/JGZT6or8tOKU8/O3nPYCiPkCACpZUlioB89wkfa7M18Ke/75hB8gUisOFoL
-	 LtBjQijVcSaJfZtivfsR+SYheoXqCPqJiHSz3x4TecmILaqEgrxIl3bZxpnW77Ga0r
-	 vNLpam8s3DvDVuyw6sxS3M+ZiNjMdybsglCyNf+9Ilo57X2hzNKJFBUS7Elr4rWPh4
-	 JccxbKca5uA1e6WRMPnNNUTr4Y4JJ0VO1N5rFzGgAG/dSuHWWO+clk7Lj9vwxonKZK
-	 QSX10IvIDyJn8G14IBD/TQAhdaqQiQ8TG1YfKDFhC48bkuck+KcPBHtfjphQHFIRpS
-	 bAX/VBk6FQ/og==
-Received: from johan by xi.lan with local (Exim 4.100.1)
-	(envelope-from <johan@kernel.org>)
-	id 1xPFeQ-00000008NuF-38Yh;
-	Fri, 06 Nov 2026 09:50:22 +0100
-Date: Fri, 6 Nov 2026 09:50:22 +0100
-From: Johan Hovold <johan@kernel.org>
-To: Songwei Chai <songwei.chai@oss.qualcomm.com>
-Cc: gregkh@linuxfoundation.org, rafael@kernel.org, dakr@kernel.org,
-	driver-core@lists.linux.dev, linux-kernel@vger.kernel.org,
-	songchai@qti.qualcomm.com, linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
-	devicetree@vger.kernel.org, Saravana Kannan <saravanak@kernel.org>
-Subject: Re: [PATCH v1] driver core: Demote "Fixed dependency cycle(s)"
- message to debug level
-Message-ID: <au2UzljzfMaiL7F6@hovoldconsulting.com>
-References: <20261106084034.1579494-1-songwei.chai@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=tomeuvizoso-net.20260707.gappssmtp.com header.i=@tomeuvizoso-net.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=F7DCHBDW
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a20a37703bso2415785e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 01:12:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tomeuvizoso-net.20260707.gappssmtp.com; s=20260707; t=1793956372; x=1794561172; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Fmoyspqstw2/9PiOOpzl/yM+dFrdSjNpOnDbiAxrbfI=;
+        b=F7DCHBDWJZ+4W4fYCOJAzTGIPUZxKEM3GQC0UOoOPoAWs2sXUCP0NuFdJ6wVu2Os50
+         3wVL8GvuFQE9sHoxI8MVjxE6iTpOBUpa5gDiv+DeuFw4+Jk1J47d+J9iL2ailF9aRunt
+         evoZoHyEB8egMEAfX7568Yz8zZUnzf91RfioeY/omDmPu3ZKADe6339IZJqYWVHPc26J
+         z5VNCpWEHO2L7dXDObSFERCeTlRP/WQ8092QYY/fghw9MpgBbnJG83NLZf4fc2Y3H0ed
+         Y06oe2zadbaLO6k1LP9aUY+7pkHtxwkzuUfNJKb94ZaW874HUt18oTsDZzdhU8U4MzRj
+         c9mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793956372; x=1794561172;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Fmoyspqstw2/9PiOOpzl/yM+dFrdSjNpOnDbiAxrbfI=;
+        b=oSnXerlCboePBzYflLU1bETBBgEdZPkXvOXhMk2WU79/eNU3H7CeKme+gqb94prDOE
+         8BIM9mC/bs0MxW3O1uoqqEDD4MiFr2o4sC4gQFWGWZJGZLis2mh9GaZ25pIwkbYQNBwd
+         DUTzyPFbvlSQ2E0tNB02N5zhoDCz0SJETQPWklxZKJmcKtYpIm734bVD+zA/+latk4J3
+         qFejnTVipob9kRK1+nAGd13TP5uQSFr2c9LbzYie91tEbkRnddD2MPBelkONv1nszfS/
+         3e7J/UsNVVZlFbbSBBPFNSd47owjbzRX9ibEMmcS6KlqEQ6aPUuLLbJ/ZciThss5qAW/
+         YCpg==
+X-Forwarded-Encrypted: i=1; AKwUvBwrlA0JarUkfGsEyTYJQNKh6SsvOkqwynu9bkGrw+exxihWYwjl3luG5kUd4WjxjGvHYTNvV3tLAGT8GUrI@vger.kernel.org
+X-Gm-Message-State: APuU4Z8GHtddFBCmiWMG15XUhBXg6oZJitJkAJld1CIsnOfUyl3G+C5Q
+	njKhdoUHGjdJO7H62SGxytJujhOWIv6RqKui4xs2Io67UTgdnPOiOWlnrC8EnLrCyjc=
+X-Gm-Gg: AYBFou1E9oAXLVP5hKO6M4KJcVm7lT9Ytl2bYJTE9i7oYoUFFrONncWAPxBwxangv2z
+	VoKl/lqJbO7yGqrZN8DkggiFKyo5CNUZcKejdTsCRZL8W2BZPei7iMYgC4GzgmTy8biFFmfPOIl
+	6rLc44UUSEnY3NpZGw/zZKb9U+P0T08g8lVoSqRw5LsjPyGqt7ensWGOOKSBaWYphmWU/WQtrE8
+	c9Wp5zufWRbwSzHy9Jrds7fsDhL0NlrdRWzvUmT/IJ2xj04xajOjx8lRhDfRf58syU4zUx9kEvg
+	qBZu1VW1lOYLBJWYtBhYrelfdfxLGfybFx5FOKH1CmOASOheojwbgV/5COvwN93q6a37XhVN+E9
+	drQfVfOCsqF/xn8dPg9mnAUqHo8g1SpsIIlzwKDV1eYENYI47L19i/gCyC+iYExnB7YMB2v5Hya
+	45oyJKzRKRovsf0TexBE1ET7MbvC7T7MMxD/9sGy3qXMLzpFR5CiU2EbCYutsg0t9FThG0OWaQe
+	TvFHvW/XAflg0VYfbqCixeyAKhPUkxF+j184vMQj/7RpVl+vw5W99qeYakQQGvitynKQreKcR/5
+	JW0E/pk1tzCoeRPtV4lzPnaapIaqrfAUHiH/38oenB3JCH4FviGLSJ3ptN2DeFb9EnRxe6bC9ae
+	EsEsNRq8L4QOCIiTFV7v1G28exIvk72NysH5kD80hplRyVM/Rjg==
+X-Received: by 2002:a05:600c:a4b:b0:4a1:efba:511 with SMTP id 5b1f17b1804b1-4b6dff8449emr26012245e9.35.1793956372121;
+        Fri, 06 Nov 2026 01:12:52 -0800 (PST)
+Received: from alcachofa.home (cst-prg-36-190.cust.vodafone.cz. [46.135.36.190])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b56e58fcc6sm226920045e9.2.2026.11.06.01.12.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 06 Nov 2026 01:12:51 -0800 (PST)
+From: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Tomeu Vizoso <tomeu@tomeuvizoso.net>,
+	Oded Gabbay <ogabbay@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Philipp Stanner <phasta@kernel.org>,
+	dmitry.baryshkov@oss.qualcomm.com,
+	andersson@kernel.org,
+	krzk@kernel.org,
+	rob.clark@oss.qualcomm.com,
+	jgg@ziepe.ca,
+	lingtong@qti.qualcomm.com,
+	cacar@qti.qualcomm.com,
+	sandheep@qti.qualcomm.com,
+	Bharath Kumar <bkumar@qti.qualcomm.com>,
+	Chenna Kesava Raju <chennak@qti.qualcomm.com>,
+	dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org,
+	Bharath Kumar <quic_bkumar@quicinc.com>,
+	Chenna Kesava Raju <quic_chennak@quicinc.com>,
+	Ekansh Gupta <ekangupt@qti.qualcomm.com>
+Subject: Re: [PATCH v4 00/25] accel/qda: Qualcomm DSP Accelerator driver
+Date: Fri,  6 Nov 2026 10:11:19 +0100
+Message-ID: <20261106091121.3958523-1-tomeu@tomeuvizoso.net>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
+References: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,35 +131,24 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261106084034.1579494-1-songwei.chai@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-[ +CC: Saravana ]
+On Mon, Nov 02, 2026 at 03:51 AM, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com> wrote:
+> User space
+> ==========
+>
+> - FastRPC library: https://github.com/qualcomm/fastrpc
+>   (accel support: https://github.com/qualcomm/fastrpc/tree/accel/staging)
+> - QAIC compiler:   https://github.com/qualcomm/QAIC
 
-On Fri, Nov 06, 2026 at 04:40:34PM +0800, Songwei Chai wrote:
-> fw_devlink detects and relaxes dependency cycles automatically, so this
-> is not an error condition requiring user action. On complex DT
-> topologies (e.g. CoreSight), this message can fire for many node
-> pairs and adds noise to the boot log, even though it's primarily
-> useful for debugging. Switch pr_info() to pr_debug() so it stays
-> available via dynamic debug when actually needed, without cluttering
-> default boot logs.
-> 
-> For example, on sm8750 this produces 125 such lines in the boot log in
-> total, 80 of which are CoreSight-related, e.g.:
-> 
-> [    0.057190] /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/stm@10002000
-> [    0.057211] /soc@0/stm@10002000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
-> [    0.057229] /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
-> [    0.057249] /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
-> [    0.057254] /soc@0/tpdm@1000f000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
-> [    0.057260] /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/tpdm@1000f000
+Hi Ekansh,
 
-I reported this elsewhere a while back:
+I'm still confused on how userspace gets to execute its compute kernels
+with this uAPI. Let's say I have a compiler and have compiled a function
+that reads some values from a buffer and writes to another buffer. Could
+you explain to me how should I use the uAPI so this kernel executes and
+I get the expected results in the buffers?
 
-	https://lore.kernel.org/all/Z6t45aOGDkotqM4Z@hovoldconsulting.com/
+Regards,
 
-Are you sure it's not the coresight bindings that should be fixed?
-
-Johan
+Tomeu
