@@ -1,55 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793971053;
-	b=BzuO0HTi4CFJZ72fDfFjH76CDNBnDvJGNjnyCm90tXVD0kVsRCup/3sb6py2lxTKA+9h
-	 B7wxkeXiQ6X2xoq5LiA3e78C1oucjGHU23XFym/zs6hg/CS7eo/KJXilmaPIa4+ihloo/
-	 LVCfm33kaIutTMX+KwHvaoW/HeE77AbG5TEr4zn4HUeI6dPFuVdKY5mAbp6UT82PVTgaC
-	 BZqdjq0+fLmRTjWKzAJAglal0H3Di9pU+Y8hcZZqtYVN1EjRtDAId5YOxsqpyb5G/gulG
-	 qEktcXXMd2FuWr5kXQI+eYw2AfJ5F2lpzNp3ePvJXuBKg9kPItEcMgrLW7mAu2Ren/g==
+	t=1793971907;
+	b=Vxl5d4BTIRd+EgBmuAiQMZLtB1YeLXbH7uuvmKSrEUn5pyZkGf2C4v9zTw/jAHafJybx
+	 Q/IlMFM62RwXKjKAmL6gCQ9l29lCxgbReTLrLHNZ7KTbiUQ6llKGPC0zai7xvuL97oJwK
+	 sMz/q1tPS12E61o/7rNQVVBXTYVbIF7RcNooDg0LMvPqMTJye56Ie4cXvFDnxDnpofocD
+	 5zKC8gkbpxjX3K/0ijmb6A3ERxdDqTtLk2lGrB7JQeoy6O2EqbO0RtvgMZTZJcBEQ3f6O
+	 kZB8C78kh/RQPtrWbrL9bhsTTIQFZlaX5FTZk8jQbjIFgvvgmOFQCJwbu3qMeZhEOIA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793971053;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=u+wf99cMGcQ0pMiHmoB58UApKCibH+wm8RpTNlP6OIw=;
-	b=V9A+J3jVi5xqTYDqN5yQtXXztkt2lpBPDqYPe48OFO6JildKfQ/LRHKKcRE4PmNIcU+n
-	 L4wb1CzPFngCwhul1rPVKceLcld1aQgRrh28lJcP4CpSVR9cQ6q0EDXZ1kMxNp2SBT12h
-	 K212DzucXa449Wku3w2wj+U4vo0EDVX50YGdljYmgJpMYH8iQqHcgohKw6cQzeOYIFsL/
-	 jRMiUTBnfbY4hivsT4jon9IWiKXDNcDFVAI5BztrVI7cw9EJUvyTvSho2sBowO/5bpEpu
-	 8bOjjTiJg6tCQNH6xvvByBs5EPXgAf3QmwRHoqaD7gSIz30j8KhSgRd9nj6arscVEBw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793971907;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=R8rMwsrJHNL/+3u/N0G/CyMp16Ktaf0LF98kTeJKMTs=;
+	b=NWpdRr/BWVJlaeXS89d7FmLpwpl0nqZxwNSqsns71WF4Goby302t+au4QgIDkt3Ws+h/
+	 eb+4NUs7e9R38yaeWf+MCSINDTNsCz1Q7vaEzpjsFc4Eiay0/P+30qlgXnxzcEpBayzGx
+	 fpkGzp38j0tBRW3rJIOnIWqTEWHWycYTrLX8/jX2sj9mJ0gRZtdyVB/3pIqhykS4nzL0q
+	 FfWftvEu2uQMB6RzGz12DNEQFyiDXAr9K/mCQw8P6koO+7eQNDFSbShumZ2WSIIOokpgl
+	 XOA4bJv6YWFuWGwyzQfQE6bg7cgfcReRhCAdxKaZcqo2NbhP9zzpwOThb3tvPZ3O2gg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GfynEgaF;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LKfWDmcH;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3505606A32E
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 13:17:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C225606A326;
+	Fri,  6 Nov 2026 13:31:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GfynEgaF
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46BCE1F008A5
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 13:17:32 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LKfWDmcH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44AE31F008A5;
+	Fri,  6 Nov 2026 13:31:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793971052;
-	bh=u+wf99cMGcQ0pMiHmoB58UApKCibH+wm8RpTNlP6OIw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=GfynEgaFImZ746mES31pK1q7yEqfdXB+ZB4yDlEw3Z+sSnzAzz6//XKUgnTJkS5Jn
-	 4AeE3OLN5vWpvgn6+hlRCbOM8V962ys2bNlnO8yb7Fg4MHR40KPWrj+XXJOH2kbsdc
-	 C9TWWQAa22FJ/icts183MXcedtUP0q+So1USkbpUTyJLiAdv/kSLhlWAYB14mhQ18a
-	 e8W8RVQ0ur2g0VI8OW4io0HO9cpCBP7gcsZdViZbuT/ebf9GGBg+vIzLSY6jXImDi3
-	 zooBz1gt7JKIsTEvMQPGB7w+QVXRHdi4/7RFmH6S5IhtkEcAOJ0grIr5VXP4Ac+i8s
-	 5rnTXe2nEGZIA==
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3ab27b4924aso4005041fa.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 05:17:32 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvBy0XmQWpY5rezcTPgRSMYxkBm/wMaAvQ2ABGXL2Mc2SrUFHryQXsV4Y0CsLci0ymaASK337yMvYnh9W0XI4@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Tlpazn1MeKyhFeaDw2duIXE7GbF9LinR77nb7Z80Ehtifqsx/
-	/afDn/t2DoHpUl4yonzdvGBtfJKodAbYy2wEpDdLjUbfZe3MP0up9HsB/pN/dfXzl928u04xmRk
-	aNGk8axqfEmc/cQKCu2fjBkRnN0oN3No=
-X-Received: by 2002:a05:6512:ba5:b0:5bf:fd1e:1677 with SMTP id
- 2adb3069b0e04-5c003c088d2mr846658e87.63.1793971051040; Fri, 06 Nov 2026
- 05:17:31 -0800 (PST)
+	s=k20260515; t=1793971907;
+	bh=R8rMwsrJHNL/+3u/N0G/CyMp16Ktaf0LF98kTeJKMTs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=LKfWDmcH/FkmPnZBAs7buzyQvLzjg0/OES9gHQJ4rOg4E/LdoSNY5QEl//FEJpwoh
+	 nZqqkwofPgcPz5E4kDPhothwP8DuYSuKIlYoPshRngScTSF/t+3QnqRgTVq62tHsRf
+	 1YdUup0QjQ6oJTmD0hHlR73faHcLUfxPqUFVTdcAIMi+FSJvmxoDv4G0L8JPnQ8GjT
+	 bpaq5RQGC9+BpuOWmbjABePfn7V1/TRUKT3XYls/xB4Fd2DYucM2SKcT/GgSwo3XXC
+	 OwlxhTDw66NbkJvhRBJpL4UCmTsVBza0vkuEKHzv2fMoHFF5fGfCFe+JWLmqvoj1Rf
+	 FK2KcFXVk/Smw==
+Date: Fri, 6 Nov 2026 07:31:43 -0600
+From: Rob Herring <robh@kernel.org>
+To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
+	konradybcio@kernel.org, loic.poulain@linaro.org,
+	dmitry.baryshkov@oss.qualcomm.com,
+	gjorgji.rosikopulos@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/8] dt-bindings: media: qcom: Add JPEG encoder binding
+Message-ID: <20261106133143.GA2705755-robh@kernel.org>
+References: <20261106082522.1448390-1-atanas.filipov@oss.qualcomm.com>
+ <20261106082522.1448390-2-atanas.filipov@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,50 +61,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261105-pinctrl-qcom-uaf-v1-1-c9cbc0a93161@oss.qualcomm.com>
-In-Reply-To: <20261105-pinctrl-qcom-uaf-v1-1-c9cbc0a93161@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 6 Nov 2026 14:17:18 +0100
-X-Gmail-Original-Message-ID: <CAD++jLn5fT=DuVZkXQdW4rM7Td46sKAfBxUkeYCrYhGj0KyHUQ@mail.gmail.com>
-X-Gm-Features: AclHuK97tULkimWCed7he8xYURQ5GlgGYoHRoVb9Wa0-fs_u313mHIyxiwKFPhg
-Message-ID: <CAD++jLn5fT=DuVZkXQdW4rM7Td46sKAfBxUkeYCrYhGj0KyHUQ@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: qcom: fix a use-after-free bug in system
- shutdown path
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Stephen Boyd <sboyd@codeaurora.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261106082522.1448390-2-atanas.filipov@oss.qualcomm.com>
 
-On Thu, Nov 5, 2026 at 5:09=E2=80=AFPM Bartosz Golaszewski
-<bartosz.golaszewski@oss.qualcomm.com> wrote:
+On Fri, Nov 06, 2026 at 10:25:15AM +0200, Atanas Filipov wrote:
+> Add device-tree binding for the Qualcomm JPEG encoder hardware block
+> present in SM8250 (Kona) and SC7280 (Kodiak) SoCs.
+> 
+> The JPEG encoder is a standalone hardware IP within the camera subsystem
+> that performs JPEG compression in memory-to-memory fashion.  It is
+> separate from the CAMSS ISP pipeline and has its own register space,
+> interrupt, clocks, power domains, IOMMU stream, and interconnect path.
+> 
+> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+> ---
+>  .../bindings/media/qcom,sm8250-jpeg-enc.yaml  | 193 ++++++++++++++++++
+>  1 file changed, 193 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> new file mode 100644
+> index 0000000000000..86b17575600c5
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> @@ -0,0 +1,193 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/media/qcom,sm8250-jpeg-enc.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm JPEG Encoder
+> +
+> +maintainers:
+> +  - Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+> +
+> +description:
+> +  Qualcomm JPEG Encoder is the JPEG encode hardware present in Qualcomm SoCs.
+> +  The encoder is a standalone hardware IP within the camera subsystem that
+> +  performs JPEG compression in memory-to-memory fashion.
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,sc7280-jpeg-enc
+> +      - qcom,sm8250-jpeg-enc
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    maxItems: 6
+> +
+> +  clock-names:
+> +    items:
+> +      - const: bus
+> +      - const: config
+> +      - const: cpas
+> +      - const: camnoc_axi
+> +      - const: camnoc_axi_src
 
-> msm_pinctrl_probe() allocates the pctrl structure via devm_kzalloc() and
-> unconditionally populates the global variables poweroff_pctrl and
-> pm_power_off.
->
-> If msm_pinctrl_probe() subsequently fails, devres resources - including
-> the memory allocated for pctrl - are automatically freed. However, the
-> global pointers are never cleared, resulting in a use-after-free during
-> kernel_power_off().
->
-> Schedule a devres action clearing the global pointers that runs before
-> the pctrl memory is freed.
->
-> Cc: stable@vger.kernel.org
-> Closes: https://sashiko.dev/#/bug/linux-0c3a18a4-3de8-489b-abc9-e9e3a8641=
-ed2
-> Fixes: ad64498762dd ("pinctrl: qcom: Hook pm_power_down for shutdown supp=
-ort")
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+These 2 don't sound like clocks that are part of this block. And 'src' 
+sounds like the parent clock? Use assigned-clocks for parent clocks (or 
+just retrieve the parent from the clk api).
 
-LGTM
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+> +      - const: core
 
-I guess you will decide if it's an urgent or nonurgent fix and
-send to me as pull request.
+I would expect the main clock for the block to come first in the list, 
+not last.
 
-Yours,
-Linus Walleij
+Rob
