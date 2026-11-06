@@ -1,78 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793935535;
-	b=i7nlFAeh70ZduI3Y615OtTslkHRpZa35FR6cbW/l5MnNXig0eGGIxZVPiGnb4c+rkrJU
-	 ghqQNtjUT1HWvzleE2+Rs2qPhpAJBuWEH9JvwBValKUR+Brz9hqfo0lvE0+j2DnN35utm
-	 I3W+QOUuKHYoa41EjRZz61r+EoNPl1105M5QX2yQxefUt9N5GXqmIEqrScl6lDwRNrhhN
-	 PRkQmb7bneA1AvKLuPCodLNXNxRrwqkK9fJEo8Zyo9EaO43f/hTe9347G2AfNZq/5gHsm
-	 i/85mjEjVtdiuyNZC7Phk5DUqOgIJAWic3G+ROMmpAvmRsEpOfJry2s/BD4IIBKOwoA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793935535;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=s7F3+Kzt5H1vq4+ofNm/bB0UujRVCunU8hdX9kVGpBk=;
-	b=AX508KMckJCN23A/KOkX4XlK+RNA7JXoAj7Jtdymfj6Pf/dZLHEMgV5i5GZB4HT2OuMY
-	 z1Hhjf35y5acYO73rwfyQZSN9dWLWDOS4ukFuYWzsYh6pCs6ZSDH8AC2ayvU12+CM56H+
-	 p1jNrkPKerk4Xt5pLfDhGZ8ZC1EgDZ84BI/vIOSTfE74WINtLIa/+ozXTAmYXGJgxQPzH
-	 fSFRNAA99EfL5IItAL2JOqGM7sP7dWu2cbXpvXYRHFlzyICuz5xNr6J82BymkJmAzD9Cp
-	 iIkxhnSJiwC2LarPWUwZ+GTEb+Z/Wqbnqme91nEoaUJM3EQjWygRuF9kpYZKAxUn0kw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CauA6XZJ;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95FE7606A33E;
-	Fri,  6 Nov 2026 03:25:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CauA6XZJ
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1793935535;
-	b=DefVg5By/jESupSIAXbE2Bt0MuaF/s06Y3kH6w91PUPH70kAoQ/U0xWpaN0PVrAa+VvV
-	 1Iwowdqz3nPvGKwQIi+4/dmZ3GSq+2VrMqUE7n17gNmMv4vzcCGdAuijsAHgQAkgsP+Kl
-	 XSITdex/GbB72YWHcNLMZc39SE7zNii/H6WG0pAAqmRk35yk+wGa5OlkdSv9MGKBomBGr
-	 kChYJqV/PYHAliOCVufymxvfyyrqqaFNbERxJ9m0t5eLcEvKedlCzS3tluy+LqdxorRKc
-	 zO5FBVTrFA0C0ZbVdqnRk8zN70GoD9hEP6A9FsQ92eACjw4Vw0nHGwF9U2JJAxq5R1w==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793935535;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=s7F3+Kzt5H1vq4+ofNm/bB0UujRVCunU8hdX9kVGpBk=;
-	b=m+/HylJjkuV4huAb5ABmE+4VFN2vgp8bw2R0DIEg7Z3f+Ud3upmjdJaT9sBIv7FZs67u
-	 Q8GOZk4G6dhXVLoE53nKKSfxxHOjpC3Reb97sUFKzsDTVjfdIl98drUCeq03wxC2DBN+C
-	 2hYVMsrpiS4tXfRM7l4AX0K6nq75uWE5HGfsL2Wafl2LKIz0SZ3FkASuJoCYm/PJd2I9C
-	 0dFvc1sOtNCnF0TU1SM4HjfL9ghNGXqSRTDbG8tY6S5evgNK09XSC9/XdMjlcm0Ag0mzI
-	 9FOuSr0NpoOauLrMa8qBI0n5A52HJVoIkMjYuuy8Zti++lIM42gq+UX3RrYsotGWwsQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793939802;
+	b=BJ0jN8dxT3HlFAUatXsyOezW8SyKeQW4jfJcAFz2renEVXA7i/Y8Q2iLTcyx4uYRvnK3
+	 7Ss5JXcrqZUYNNzWz0D2nW31iGh/SP5/zEdFPVtKXEATRv5yZju8PK5p41MR0/EKOWpo4
+	 chxxa0rCSpKRFikXzE/71OPoUq5Th1lF3o5JRKJ7Z2vFXtMiJIeqnZRi0qASwTfHCAgNO
+	 t6zEVNh9YlnT6tnwNXtHph7izjkVQatjen4JEZgaSLQmK5rQqHmWTx3QkSchRVYFBF6MX
+	 0AD0K4Dz7IsHArxYVLg0jXXSSCKIQZu/TK2GIVD96nQ5c7jgOlj2eSUISUMVVdQ2sbw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793939802;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
+	b=kzr9a+SW6CBO8W38EiDkwbePKORLPTk0tf/6NMx6qkygfCg8t19rKbcuYW9eosBDAom6
+	 O1+3iK3SnyGm48CknN1anyDRzo2MKBlM4EsrcK2rmnPS2kLdQNP+adzix4qtfK39axecs
+	 mvJ37FbmPfqJgPyVimbTDzf15+pkjZYythAtwWjrIhPnFGeivK7fDIVkzRwv/M48n5sJv
+	 o3UJDinPN7dya9EzZRetv13d2TjEpNFAiISI+iqBedceUMijr/lFphnuf1Opea8fpCu3E
+	 n4JmEyYVg0rGCFQ3Th0hbHNNR1jgy4dbq+BuJX/DGbOrtaJiaI4w28gje/izvvH5U6g==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Aau6bUqQ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PRh6Mjzx;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 634531F008A5;
-	Fri,  6 Nov 2026 03:25:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793935535;
-	bh=s7F3+Kzt5H1vq4+ofNm/bB0UujRVCunU8hdX9kVGpBk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=CauA6XZJLp2oH4n2LAWWCBOkrXrz71oQV9rPongydNhmIHQ2itd7P+Gv+Wu/riZ5u
-	 umfT0RiigYdRfGpsycI0uDDRfJBrSg1D5B6W6Ir4CU/ePQ6nn4JNbgR6vRQU/gKPNx
-	 r/Fn3GQqo0KGuuHQ6IvrNynb6uUXuW22/hUcpvOgDeSb0XmEA2Rr2yRDNVTPX1toHp
-	 +/QoToK2B57LQpYVwOfg0IbrntIk3FBNvODezeD5MrwBGgAk+XA6oc8QehJNsae3PO
-	 PTZbQ5mc0ES8IQDELtutpbXDWkGAYl6JIsfh7jd0Voi5dT4+UT30faFGjB0O24gqvx
-	 GJ10Ph0+PZ3yw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id CD4D445B9A;
-	Fri,  6 Nov 2026 03:25:32 +0000 (UTC)
-From: Andrew Gigena via B4 Relay <devnull+mail.andrewgigena.dev@kernel.org>
-Date: Fri, 06 Nov 2026 03:24:56 +0000
-Subject: [PATCH v2 5/5] arm64: dts: qcom: sm8150: Add CAMSS and CCI nodes
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD3B2606A328
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 04:36:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BD3B2606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Aau6bUqQ;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PRh6Mjzx
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A63xwTC2779087
+	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 04:36:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=; b=Aau6bUqQO6KZlczx
+	iiiCouk/R1QQo3vRKygvOLQXrnyXEG8NneCvUy7QrQN10usDDVSGgLZoNbYkv2Zl
+	MpCf93hx+Vm0eCtm/t0b0s2p4b9kU4k2XXizk9E1iv9pYCHm8SkV36Sm3qm/8AKG
+	P2L9zidBwczr0yec+ntcp+QRI874naqHrt52fkPly4H8y75NjTwMb+H8Q19wNK5S
+	yLWVhSvbOhLz8yHEr4MTIKVtUCxVb3jVRv7XmJ3wJDS7cUc8I7VEDaRYuPtD26gV
+	TkTe9OokIVTYb2MudM0Sb6g0zSTisKyiaeME55VVTcPhuhWUfdOpc4rO9psgw741
+	ZVcGKA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pa0vgw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 04:36:40 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso503781eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 05 Nov 2026 20:36:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1793939800; x=1794544600; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
+        b=PRh6MjzxXpSWMI/DFStiJ3ins5vCqFQqN1NKDX3K4XfXwcX/qtG+YX56waMUZNApww
+         XlJm31A24CBIHF5px5iFOLAX7ApdXiOQFP1ECSYeZVG+asS7oF62cpOzl39kKjCZGl1F
+         vSFAIY0mgGqHHLDT9G33Qo3rx1wJi0gXPQLhKtB1IbmXA4PJWsOudjoJXgiDszPRxObC
+         wKjjevRkKnp7Ao1rw8m58/ZrH5bJdykTmNvD6qbd8BmqGEz6+8teYfFmkPV4PTDxOPPo
+         XbSG9U9euviWTwFfOlzmkjtJzwj5sfSKuRy1467gyiiqSxL1mHo+Iolri6CNz2/rJakv
+         nXWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793939800; x=1794544600;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Cyl3IszRXftb9Zsaj929sRYbACZ+gYXwE/XyklBs430=;
+        b=B15wjgQs3+dxWCaEhfhTiRmZd+shuEtJilvzI0NEK6yUFQp5XcZLPwD49a4nko6Npz
+         xekbjT5bC3PSlSMRM5G7Zr0ooafTLOFc5GG1QIobvCxpoH6L9UCKfQz46FeGK8OZrFVn
+         ulFGP60Y0eJKxu2ihz0o7FbFPdrv8ewxzQvwcwcy/5ybUVg0WHfEnGXbZwtqfhhW2Uku
+         A5I0B2ofAMcaNW0CXZZ2lC+dAbb8HafQTXYPS1NvV1GTQgfcUVfcJcduC8/ESiCMhm70
+         U3HopIUy6ras8//emr4Zxx+NRsfmH6rZEQFZimFVO9SrwZsJVp7NfYXdZStmiJTMGg72
+         KccA==
+X-Forwarded-Encrypted: i=1; AL+hErETqY5IonecFL0dmDgUTcO7MxDxOO0zbq9t1378y6gcfKy1ZqzXVDNZ8aNFgehweavpNw8MCJdHc4U2weP3@vger.kernel.org
+X-Gm-Message-State: APuU4Z+Jkg7s+3ZKPnr2Mol4QIBHADtlgoIrJjockezve3ptwfoawOBy
+	C50RE5VOfnxHRIjfqHd/Ef4nbIcrmMbz0GVupIJIl3o4wGimJWGI0MWXLWGJ8V3rjhYpnLCp0xS
+	vsSvZI2V6FVRj8IYwHCj0WntUlQBqizoBPsVRLV58YmA/EaanNb1QY6Jjjx2KXFe9JNWD
+X-Gm-Gg: AYBFou2hPhzrrb+r3hj8T5ZTcF9Ij0WX3Y8KmcP9dY1o58ZTRPpL8mKMPt6oeZQgkIv
+	vqFT0vRnZxHcpMZp1DKKkphl+oYxIcFemzeMgy8y8E3gMogiXZ+Zid3lylpqGvRBegBcUkEuKia
+	XAG2A/zBqHGfRGFKAODrV1xZYX7EKzdiOCZnezz/ciat8U9GLDnqwcVZZiQKZU/A55+Gg2etY6U
+	llh8r0HtvaQqT2AUGsABhHa6S7gkAxSeeM7cohWegfKnuKuhGHyMM31vb03Z9OnIUTntqYLALMX
+	q8B7be2OMtIpHDb9cWsUtIXZ6ci3lyCHm/cCjtAQqCIInmCBGbJpekTNqeAclgEJo0xnR0rQ0XB
+	1eH7aQ9NF6aSvFHD/oRAhEWt/s90BqdiEch5qqkr2qmBl4VQnia6XgCfE3UgS1v5HnwmXn2AimV
+	88eqIXf/IP
+X-Received: by 2002:a05:7300:dd49:b0:36f:551:2bd5 with SMTP id 5a478bee46e88-36f7691ac12mr1777933eec.32.1793939800008;
+        Thu, 05 Nov 2026 20:36:40 -0800 (PST)
+X-Received: by 2002:a05:7300:dd49:b0:36f:551:2bd5 with SMTP id 5a478bee46e88-36f7691ac12mr1777901eec.32.1793939799236;
+        Thu, 05 Nov 2026 20:36:39 -0800 (PST)
+Received: from [192.168.0.116] ([124.123.146.251])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36fa9fc92fasm2869344eec.19.2026.11.05.20.36.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Nov 2026 20:36:38 -0800 (PST)
+Message-ID: <187f3c63-5550-4a42-892e-ea660247edc9@oss.qualcomm.com>
+Date: Fri, 6 Nov 2026 10:06:32 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,397 +116,302 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261106-sm8150-v7.4-rc1-camss-v2-5-39ee37787b00@andrewgigena.dev>
-References: <20261106-sm8150-v7.4-rc1-camss-v2-0-39ee37787b00@andrewgigena.dev>
-In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v2-0-39ee37787b00@andrewgigena.dev>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-media@vger.kernel.org, Andrew Gigena <mail@andrewgigena.dev>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793935531; l=9806;
- i=mail@andrewgigena.dev; s=20261104; h=from:subject:message-id;
- bh=D1rMjPsx19QuATAxMNj055xYi4wuuTc067JVdGrqPds=;
- b=sOtVD2zCvJnyY6MspbZWspsbpw4s7ocT2VoF8FXGD2nlF7d8dlNOuybHN5AqN1o8gpr7wgirH
- Y6nr2lUXg47AcNc5323Trr2YYenyUJr+csIxI+UV0X7Sf/SdPUgIezY
-X-Developer-Key: i=mail@andrewgigena.dev; a=ed25519;
- pk=OMhlYIBaOEC8g4mJ4JCKy7kbg+lrwRxuujieZF8Ne6U=
-X-Endpoint-Received: by B4 Relay for mail@andrewgigena.dev/20261104 with
- auth_id=1402
-X-Original-From: Andrew Gigena <mail@andrewgigena.dev>
-Reply-To: mail@andrewgigena.dev
-Content-Transfer-Encoding: 7bit
-
-From: Andrew Gigena <mail@andrewgigena.dev>
-
-Describe the SM8150 CAMSS block and its CSIPHY, CSID, VFE and
-VFE-Lite instances, together with the two CCI controllers and their
-I2C buses.
-
-The CAMSS node exposes four CSI input ports and references the CAMCC
-clocks and GDSCs, the interconnects and the IOMMU streams. The CCI
-nodes describe the CCI0/CCI1 I2C buses, and the TLMM pinctrl states
-for their clock and data lines are added to the existing pin
-controller node.
-
-All new nodes are left disabled. The CAMSS supplies and the sensor
-wiring are board-specific, so they belong in the board DTS that
-enables the controller.
-
-Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
----
- arch/arm64/boot/dts/qcom/sm8150.dtsi | 320 +++++++++++++++++++++++++++++++++++
- 1 file changed, 320 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/sm8150.dtsi b/arch/arm64/boot/dts/qcom/sm8150.dtsi
-index 293fcbacff34..a1fd3a4ed2e5 100644
---- a/arch/arm64/boot/dts/qcom/sm8150.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8150.dtsi
-@@ -2736,6 +2736,86 @@ wake-pins {
- 					bias-pull-up;
- 				};
- 			};
-+
-+			cci0_default: cci0-default-state {
-+				cci0_i2c0_default: cci0-i2c0-default-pins {
-+					/* CLK, DATA */
-+					pins = "gpio17", "gpio18";
-+					function = "cci_i2c";
-+
-+					bias-pull-up;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+
-+				cci0_i2c1_default: cci0-i2c1-default-pins {
-+					/* CLK, DATA */
-+					pins = "gpio19", "gpio20";
-+					function = "cci_i2c";
-+
-+					bias-pull-up;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+			};
-+
-+			cci0_sleep: cci0-sleep-state {
-+				cci0_i2c0_sleep: cci0-i2c0-sleep-pins {
-+					/* CLK, DATA */
-+					pins = "gpio17", "gpio18";
-+					function = "cci_i2c";
-+
-+					drive-strength = <2>; /* 2 mA */
-+					bias-pull-down;
-+				};
-+
-+				cci0_i2c1_sleep: cci0-i2c1-sleep-pins {
-+					/* CLK, DATA */
-+					pins = "gpio19", "gpio20";
-+					function = "cci_i2c";
-+
-+					drive-strength = <2>; /* 2 mA */
-+					bias-pull-down;
-+				};
-+			};
-+
-+			cci1_default: cci1-default-state {
-+				cci1_i2c0_default: cci1-i2c0-default-pins {
-+					/* CLK, DATA */
-+					pins = "gpio31", "gpio32";
-+					function = "cci_i2c";
-+
-+					bias-pull-up;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+
-+				cci1_i2c1_default: cci1-i2c1-default-pins {
-+					/* CLK, DATA */
-+					pins = "gpio33", "gpio34";
-+					function = "cci_i2c";
-+
-+					bias-pull-up;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+			};
-+
-+			cci1_sleep: cci1-sleep-state {
-+				cci1_i2c0_sleep: cci1-i2c0-sleep-pins {
-+					/* CLK, DATA */
-+					pins = "gpio31", "gpio32";
-+					function = "cci_i2c";
-+
-+					bias-pull-down;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+
-+				cci1_i2c1_sleep: cci1-i2c1-sleep-pins {
-+					/* CLK, DATA */
-+					pins = "gpio33", "gpio34";
-+					function = "cci_i2c";
-+
-+					bias-pull-down;
-+					drive-strength = <2>; /* 2 mA */
-+				};
-+			};
- 		};
- 
- 		remoteproc_mpss: remoteproc@4080000 {
-@@ -3782,6 +3862,246 @@ camnoc_virt: interconnect@ac00000 {
- 			qcom,bcm-voters = <&apps_bcm_voter>;
- 		};
- 
-+		cci0: cci@ac4a000 {
-+			compatible = "qcom,sm8150-cci", "qcom,msm8996-cci";
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			reg = <0 0xac4a000 0 0x1000>;
-+			interrupts = <GIC_SPI 460 IRQ_TYPE_EDGE_RISING>;
-+			power-domains = <&camcc TITAN_TOP_GDSC>;
-+
-+			clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
-+				 <&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
-+				 <&camcc CAM_CC_CPAS_AHB_CLK>,
-+				 <&camcc CAM_CC_CCI_0_CLK>,
-+				 <&camcc CAM_CC_CCI_0_CLK_SRC>;
-+			clock-names = "camnoc_axi",
-+				      "slow_ahb_src",
-+				      "cpas_ahb",
-+				      "cci",
-+				      "cci_src";
-+
-+			pinctrl-0 = <&cci0_default>;
-+			pinctrl-1 = <&cci0_sleep>;
-+			pinctrl-names = "default", "sleep";
-+
-+			status = "disabled";
-+
-+			cci0_i2c0: i2c-bus@0 {
-+				reg = <0>;
-+				clock-frequency = <1000000>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+
-+			cci0_i2c1: i2c-bus@1 {
-+				reg = <1>;
-+				clock-frequency = <1000000>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+		};
-+
-+		cci1: cci@ac4b000 {
-+			compatible = "qcom,sm8150-cci", "qcom,msm8996-cci";
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			reg = <0 0xac4b000 0 0x1000>;
-+			interrupts = <GIC_SPI 271 IRQ_TYPE_EDGE_RISING>;
-+			power-domains = <&camcc TITAN_TOP_GDSC>;
-+
-+			clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
-+				 <&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
-+				 <&camcc CAM_CC_CPAS_AHB_CLK>,
-+				 <&camcc CAM_CC_CCI_1_CLK>,
-+				 <&camcc CAM_CC_CCI_1_CLK_SRC>;
-+			clock-names = "camnoc_axi",
-+				      "slow_ahb_src",
-+				      "cpas_ahb",
-+				      "cci",
-+				      "cci_src";
-+
-+			pinctrl-0 = <&cci1_default>;
-+			pinctrl-1 = <&cci1_sleep>;
-+			pinctrl-names = "default", "sleep";
-+
-+			status = "disabled";
-+
-+			cci1_i2c0: i2c-bus@0 {
-+				reg = <0>;
-+				clock-frequency = <1000000>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+
-+			cci1_i2c1: i2c-bus@1 {
-+				reg = <1>;
-+				clock-frequency = <1000000>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+		};
-+
-+		camss: camss@ac65000 {
-+			compatible = "qcom,sm8150-camss";
-+			status = "disabled";
-+
-+			reg = <0 0xac65000 0 0x1000>,
-+			      <0 0xac66000 0 0x1000>,
-+			      <0 0xac67000 0 0x1000>,
-+			      <0 0xac68000 0 0x1000>,
-+			      <0 0xacaf000 0 0x4000>,
-+			      <0 0xacb3000 0 0x1000>,
-+			      <0 0xacb6000 0 0x4000>,
-+			      <0 0xacba000 0 0x1000>,
-+			      <0 0xacc4000 0 0x4000>,
-+			      <0 0xacc8000 0 0x1000>,
-+			      <0 0xaccb000 0 0x4000>,
-+			      <0 0xaccf000 0 0x1000>;
-+
-+			reg-names = "csiphy0",
-+				    "csiphy1",
-+				    "csiphy2",
-+				    "csiphy3",
-+				    "vfe0",
-+				    "csid0",
-+				    "vfe1",
-+				    "csid1",
-+				    "vfe_lite0",
-+				    "csid_lite0",
-+				    "vfe_lite1",
-+				    "csid_lite1";
-+
-+			interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 448 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>;
-+
-+			interrupt-names = "csiphy0",
-+					  "csiphy1",
-+					  "csiphy2",
-+					  "csiphy3",
-+					  "vfe0",
-+					  "csid0",
-+					  "vfe1",
-+					  "csid1",
-+					  "vfe_lite0",
-+					  "csid_lite0",
-+					  "vfe_lite1",
-+					  "csid_lite1";
-+
-+			power-domains = <&camcc IFE_0_GDSC>,
-+					<&camcc IFE_1_GDSC>,
-+					<&camcc TITAN_TOP_GDSC>;
-+			power-domain-names = "ife0",
-+					     "ife1",
-+					     "top";
-+
-+			clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
-+				 <&camcc CAM_CC_CPAS_AHB_CLK>,
-+				 <&camcc CAM_CC_CSIPHY0_CLK>,
-+				 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY1_CLK>,
-+				 <&camcc CAM_CC_CSI1PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY2_CLK>,
-+				 <&camcc CAM_CC_CSI2PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_CSIPHY3_CLK>,
-+				 <&camcc CAM_CC_CSI3PHYTIMER_CLK>,
-+				 <&camcc CAM_CC_IFE_0_AXI_CLK>,
-+				 <&camcc CAM_CC_IFE_0_CLK>,
-+				 <&camcc CAM_CC_IFE_0_CPHY_RX_CLK>,
-+				 <&camcc CAM_CC_IFE_0_CSID_CLK>,
-+				 <&camcc CAM_CC_IFE_1_AXI_CLK>,
-+				 <&camcc CAM_CC_IFE_1_CLK>,
-+				 <&camcc CAM_CC_IFE_1_CPHY_RX_CLK>,
-+				 <&camcc CAM_CC_IFE_1_CSID_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_0_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_0_CPHY_RX_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_0_CSID_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_1_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_1_CPHY_RX_CLK>,
-+				 <&camcc CAM_CC_IFE_LITE_1_CSID_CLK>,
-+				 <&gcc GCC_CAMERA_AHB_CLK>,
-+				 <&gcc GCC_CAMERA_HF_AXI_CLK>,
-+				 <&gcc GCC_CAMERA_SF_AXI_CLK>;
-+			clock-names = "camnoc_axi",
-+				      "cpas_ahb",
-+				      "csiphy0",
-+				      "csiphy0_timer",
-+				      "csiphy1",
-+				      "csiphy1_timer",
-+				      "csiphy2",
-+				      "csiphy2_timer",
-+				      "csiphy3",
-+				      "csiphy3_timer",
-+				      "vfe0_axi",
-+				      "vfe0",
-+				      "vfe0_cphy_rx",
-+				      "vfe0_csid",
-+				      "vfe1_axi",
-+				      "vfe1",
-+				      "vfe1_cphy_rx",
-+				      "vfe1_csid",
-+				      "vfe_lite0",
-+				      "vfe_lite0_cphy_rx",
-+				      "vfe_lite0_csid",
-+				      "vfe_lite1",
-+				      "vfe_lite1_cphy_rx",
-+				      "vfe_lite1_csid",
-+				      "gcc_ahb",
-+				      "gcc_axi_hf",
-+				      "gcc_axi_sf";
-+
-+			iommus = <&apps_smmu 0x840 0x620>,
-+				 <&apps_smmu 0x860 0x620>,
-+				 <&apps_smmu 0xA40 0x620>,
-+				 <&apps_smmu 0xA60 0x620>,
-+				 <&apps_smmu 0xC40 0x620>,
-+				 <&apps_smmu 0xC60 0x620>,
-+				 <&apps_smmu 0xE40 0x620>,
-+				 <&apps_smmu 0xE60 0x620>;
-+
-+			interconnects = <&gem_noc MASTER_AMPSS_M0 0 &config_noc SLAVE_CAMERA_CFG 0>,
-+					<&mmss_noc MASTER_CAMNOC_HF0 0 &mc_virt SLAVE_EBI_CH0 0>,
-+					<&mmss_noc MASTER_CAMNOC_HF1 0 &mc_virt SLAVE_EBI_CH0 0>,
-+					<&mmss_noc MASTER_CAMNOC_SF 0 &mc_virt SLAVE_EBI_CH0 0>;
-+			interconnect-names = "cam_ahb",
-+					     "cam_hf_0_mnoc",
-+					     "cam_hf_1_mnoc",
-+					     "cam_sf_0_mnoc";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+				};
-+
-+				port@2 {
-+					reg = <2>;
-+				};
-+
-+				port@3 {
-+					reg = <3>;
-+				};
-+			};
-+		};
-+
- 		camcc: clock-controller@ad00000 {
- 			compatible = "qcom,sm8150-camcc";
- 			reg = <0 0x0ad00000 0 0x10000>;
-
--- 
-2.56.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v5 2/2] net: wwan: qcom_bam_dmux: Assign
+ restricted DMA pool to remote processor
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+        Andrew Lunn
+ <andrew+netdev@lunn.ch>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Sergey Ryazanov
+ <ryazanov.s.a@gmail.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Eric Dumazet <edumazet@kernel.org>, linux-arm-msm@vger.kernel.org,
+        netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+References: <20261105-qcom-bam-dmux-vmid-ext-v5-0-5c7903385b4b@oss.qualcomm.com>
+ <20261105-qcom-bam-dmux-vmid-ext-v5-2-5c7903385b4b@oss.qualcomm.com>
+ <CAFEp6-3rt8yvTd-mMA6y5SqmzmF0zvrvO_Dc_w7G3QSv7oZWng@mail.gmail.com>
+Content-Language: en-US
+From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+In-Reply-To: <CAFEp6-3rt8yvTd-mMA6y5SqmzmF0zvrvO_Dc_w7G3QSv7oZWng@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=PLeaavqC c=1 sm=1 tr=0 ts=6aed5958 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=K/78aEDNEn2Q/Yuv7mVN5Q==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=fKMpTyM1RLJrecArqiYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAxOCBTYWx0ZWRfX7Arpw9EhgRSq
+ jc3zo0F83n5A8DluNrjCSSp2Ek8qtqsg9gaV+j+URQ1zUnIqCfNKPuGrxre2KTTVw2pwfG2jvDI
+ cyaBJk/RFGilnkZ2pv2hlcFlo626sSw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAxOCBTYWx0ZWRfX76FzZT2drJNc
+ 84H+JhCCPCXF0ePsPERBvBLoRwda2Z2RVyWbwrMyCJlNxDbkIBEBP9ee0K/XFX1YvzcAvKEsBMN
+ mmB5sP35Jbjwre+spAkTmFtw2T9/Mp0LqNFUYAaHuRTLs9cbX6vPrgwmiwlrbz3ak+JmxZmreHH
+ pljYmKce3LA173PWBa03dGdRMli/QzmXwFwtsYRuPa8RkvRuaAllkA2598FNKKQDV9J1r3T0R0k
+ krzywUdbHijwX/7HqleWbIsAk6xCeNX6FibDqg1STAFjLA5Utxy5QN4h6mpAUYczhZ1OhAXSXbt
+ caZ5pirsyt30c3kPV4ZoVRsaJsZfBpNm0Z9sgk1lm4xAHqaH4q4qLFnYtCYIShbJ3GryHh83PkZ
+ d8d8nOaD/wguUcQgBjR7t19zDZFkFG5+LU3XHH/i9O5tKKjKtpDsTx2ejL3Yv+p4XwYxCMWgF8N
+ 6FwTZd5HQVuQLHmUeyQ==
+X-Proofpoint-GUID: 4Ag8acToV60SQ7AVRTXuxrad9MNKP0HO
+X-Proofpoint-ORIG-GUID: 4Ag8acToV60SQ7AVRTXuxrad9MNKP0HO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-06_01,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060018
 
 
+On 05-11-2026 07:51 pm, Loic Poulain wrote:
+> On Thu, Nov 5, 2026 at 11:42 AM Vishnu Santhosh
+> <vishnu.santhosh@oss.qualcomm.com> wrote:
+>> Some Qualcomm SoCs, such as Shikra, run the modem in a separate security
+>> domain with restricted access to system memory. BAM-DMUX DMA mappings
+>> and BAM descriptor FIFOs must therefore be constrained to a designated
+>> memory region that can be shared with the modem. Accesses outside that
+>> region can trigger an XPU violation.
+>>
+>> When qcom,vmid is present, require a restricted DMA pool and assign the
+>> entire pool to both the local and remote execution environments before
+>> requesting the DMA channels.
+>>
+>> This ensures that BAM-DMUX mappings are within the assigned region. When
+>> the BAM DMA controller references the same pool, its descriptor FIFOs
+>> are covered by the assignment as well.
+>>
+>> Track the assigned execution environments explicitly and reclaim the
+>> pool for the local environment after DMA channels and mappings are
+>> released during remove or probe error cleanup. Skip the reclaim and
+>> leave the pool assigned if the remote side still holds its power vote,
+>> since it may still access the pool.
+>>
+>> Fail probing when restricted DMA pool support is unavailable, when the
+>> VMID property is malformed, when memory-region is missing, or when the
+>> restricted DMA pool is not attached to the device.
+>>
+>> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+>> ---
+>>   drivers/net/wwan/Kconfig         |   1 +
+>>   drivers/net/wwan/qcom_bam_dmux.c | 108 ++++++++++++++++++++++++++++++++++++++-
+>>   2 files changed, 107 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/net/wwan/Kconfig b/drivers/net/wwan/Kconfig
+>> index 958dbc7347fa84ee869439bf8b503037faab8bef..1b133c56231615269698140187ca3141dfe48dbf 100644
+>> --- a/drivers/net/wwan/Kconfig
+>> +++ b/drivers/net/wwan/Kconfig
+>> @@ -65,6 +65,7 @@ config MHI_WWAN_MBIM
+>>   config QCOM_BAM_DMUX
+>>          tristate "Qualcomm BAM-DMUX WWAN network driver"
+>>          depends on (DMA_ENGINE && PM && QCOM_SMEM_STATE) || COMPILE_TEST
+>> +       select QCOM_SCM
+>>          help
+>>            The BAM Data Multiplexer provides access to the network data channels
+>>            of modems integrated into many older Qualcomm SoCs, e.g. Qualcomm
+>> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
+>> index cc6ace8d64371eb8d00c638a39b234ee540b83c9..0e7ad62f8b4e059264e89837f296ee13c0c31c9b 100644
+>> --- a/drivers/net/wwan/qcom_bam_dmux.c
+>> +++ b/drivers/net/wwan/qcom_bam_dmux.c
+>> @@ -9,14 +9,17 @@
+>>   #include <linux/completion.h>
+>>   #include <linux/dma-mapping.h>
+>>   #include <linux/dmaengine.h>
+>> +#include <linux/firmware/qcom/qcom_scm.h>
+>>   #include <linux/if_arp.h>
+>>   #include <linux/interrupt.h>
+>>   #include <linux/module.h>
+>>   #include <linux/netdevice.h>
+>> +#include <linux/of_reserved_mem.h>
+>>   #include <linux/platform_device.h>
+>>   #include <linux/pm_runtime.h>
+>>   #include <linux/soc/qcom/smem_state.h>
+>>   #include <linux/spinlock.h>
+>> +#include <linux/swiotlb.h>
+>>   #include <linux/wait.h>
+>>   #include <linux/workqueue.h>
+>>   #include <net/pkt_sched.h>
+>> @@ -75,6 +78,9 @@ struct bam_dmux {
+>>          struct completion pc_ack_completion;
+>>
+>>          struct dma_chan *rx, *tx;
+>> +       phys_addr_t dma_pool_base;
+>> +       size_t dma_pool_size;
+>> +       u64 dma_pool_perms;
+>>          struct bam_dmux_skb_dma rx_skbs[BAM_DMUX_NUM_SKB];
+>>          struct bam_dmux_skb_dma tx_skbs[BAM_DMUX_NUM_SKB];
+>>          spinlock_t tx_lock; /* Protect tx_skbs, tx_next_skb */
+>> @@ -762,6 +768,90 @@ static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
+>>          return 0;
+>>   }
+>>
+>> +static int bam_dmux_assign_dma_pool(struct bam_dmux *dmux)
+>> +{
+>> +       struct device *dev = dmux->dev;
+>> +       struct device_node *rmem_np;
+>> +       struct reserved_mem *rmem;
+>> +       struct qcom_scm_vmperm dst[2];
+>> +       u64 src = BIT_ULL(QCOM_SCM_VMID_HLOS);
+>> +       u32 vmid;
+>> +       int ret;
+>> +
+>> +       if (!of_property_present(dev->of_node, "qcom,vmid"))
+>> +               return 0;
+>> +
+>> +       ret = of_property_read_u32(dev->of_node, "qcom,vmid", &vmid);
+>> +       if (ret)
+>> +               return dev_err_probe(dev, ret, "Failed to read qcom,vmid\n");
+>> +       if (vmid == QCOM_SCM_VMID_HLOS || vmid >= BITS_PER_TYPE(u64))
+>> +               return dev_err_probe(dev, -EINVAL, "Invalid qcom,vmid %u\n", vmid);
+>> +
+>> +       if (!IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL))
+>> +               return dev_err_probe(dev, -EOPNOTSUPP,
+>> +                                    "qcom,vmid requires DMA_RESTRICTED_POOL\n");
+>> +
+>> +       rmem_np = of_parse_phandle(dev->of_node, "memory-region", 0);
+>> +       if (!rmem_np)
+>> +               return dev_err_probe(dev, -EINVAL,
+>> +                                            "qcom,vmid requires memory-region\n");
+>> +
+>> +       rmem = of_reserved_mem_lookup(rmem_np);
+>> +       of_node_put(rmem_np);
+>> +       if (!rmem)
+>> +               return dev_err_probe(dev, -EINVAL,
+>> +                                            "Failed to look up restricted DMA pool\n");
+>> +
+>> +       if (!is_swiotlb_for_alloc(dev))
+>> +               return dev_err_probe(dev, -EINVAL,
+>> +                                    "Restricted DMA pool not attached\n");
+>> +
+>> +       if (!qcom_scm_is_available())
+>> +               return -EPROBE_DEFER;
+>> +
+>> +       dst[0].vmid = QCOM_SCM_VMID_HLOS;
+>> +       dst[0].perm = QCOM_SCM_PERM_RW;
+>> +       dst[1].vmid = vmid;
+>> +       dst[1].perm = QCOM_SCM_PERM_RW;
+>> +
+>> +       ret = qcom_scm_assign_mem(rmem->base, rmem->size, &src, dst,
+>> +                                 ARRAY_SIZE(dst));
+>> +       if (ret)
+>> +               return dev_err_probe(dev, ret,
+>> +                                    "SCM assign restricted DMA pool failed\n");
+>> +
+>> +       dmux->dma_pool_base = rmem->base;
+>> +       dmux->dma_pool_size = rmem->size;
+>> +       /* Track the destination VMIDs explicitly for the reclaim operation. */
+>> +       dmux->dma_pool_perms = BIT_ULL(QCOM_SCM_VMID_HLOS) | BIT_ULL(vmid);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static void bam_dmux_reclaim_dma_pool(struct bam_dmux *dmux)
+>> +{
+>> +       struct qcom_scm_vmperm hlos = {
+>> +               .vmid = QCOM_SCM_VMID_HLOS,
+>> +               .perm = QCOM_SCM_PERM_RW,
+>> +       };
+>> +       u64 src = dmux->dma_pool_perms;
+>> +       int ret;
+>> +
+>> +       if (!dmux->dma_pool_perms)
+>> +               return;
+>> +
+>> +       ret = qcom_scm_assign_mem(dmux->dma_pool_base, dmux->dma_pool_size, &src,
+>> +                                 &hlos, 1);
+>> +       if (ret) {
+>> +               dev_err(dmux->dev, "SCM reclaim restricted DMA pool failed: %d\n", ret);
+>> +               return;
+>> +       }
+>> +
+>> +       dmux->dma_pool_perms = 0;
+>> +}
+>> +
+>> +static void bam_dmux_remove(struct platform_device *pdev);
+>> +
+>>   static int bam_dmux_probe(struct platform_device *pdev)
+>>   {
+>>          struct device *dev = &pdev->dev;
+>> @@ -796,6 +886,10 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>                                       "Failed to get pc-ack state\n");
+>>          dmux->pc_ack_mask = BIT(bit);
+>>
+>> +       ret = bam_dmux_assign_dma_pool(dmux);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>>          init_waitqueue_head(&dmux->pc_wait);
+>>          init_completion(&dmux->pc_ack_completion);
+>>          complete_all(&dmux->pc_ack_completion);
+>> @@ -829,8 +923,11 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>
+>>          ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
+>>                                      &dmux->pc_state);
+>> -       if (ret)
+>> -               goto err_disable_pm;
+>> +       if (ret) {
+>> +               /* The PC IRQ may already have powered up the RX path */
+>> +               bam_dmux_remove(pdev);
+> it's still unclear in the comment and commit message why we can't go
+> with err_disable_pm?
+
+Agreed. I plan to update the comment in the next revision to:
+
+/*
+  * The PC IRQ is already enabled and may have powered up the RX
+  * path. Use the full remove() teardown so that RX DMA is stopped
+  * before the pool is reclaimed.
+  */
+
+and add to the commit message:
+
+If probe fails after the PC IRQ has been requested, clean up through
+bam_dmux_remove(), since the IRQ may already have powered up the RX
+path, which must be torn down before the pool is reclaimed.
+
+Does this look fine to you?
+
+
+Vishnu
+
+>
+>> +               return ret;
+>> +       }
+>>
+>>          /* Check if remote finished initialization before us */
+>>          if (dmux->pc_state) {
+>> @@ -845,6 +942,7 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>   err_disable_pm:
+>>          pm_runtime_disable(dev);
+>>          pm_runtime_dont_use_autosuspend(dev);
+>> +       bam_dmux_reclaim_dma_pool(dmux);
+>>          return ret;
+>>   }
+>>
+>> @@ -879,6 +977,12 @@ static void bam_dmux_remove(struct platform_device *pdev)
+>>          disable_irq(dmux->pc_irq);
+>>          bam_dmux_power_off(dmux);
+>>          bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
+>> +
+>> +       /* The remote side may still access the pool if it holds its power vote */
+>> +       if (!dmux->pc_state)
+>> +               bam_dmux_reclaim_dma_pool(dmux);
+>> +       else if (dmux->dma_pool_perms)
+>> +               dev_warn(dev, "Leaving restricted DMA pool assigned to remote\n");
+>>   }
+>>
+>>   static const struct dev_pm_ops bam_dmux_pm_ops = {
+>>
+>> --
+>> 2.34.1
+>>
