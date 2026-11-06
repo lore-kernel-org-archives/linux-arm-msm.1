@@ -1,113 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793968452;
-	b=fbdI2byOeOLZiVk7UY7LnejYUFSEy6nX2sKbirak6IVAWkKukdBema7VVPoc6lFMBjkl
-	 1fEHAoUxn4wDckKfJVL9l9VhYpSYHYcFMSEKiLp5XvTALw7XSOn/b9WqhN0BxGfTuFYqh
-	 Xa6gyMV5dieKHZZTAyJiBWPZvH4+WNFHOPOpLn5OPSSmG9EyCfQm2gR/rAvWfg5WAeTez
-	 NH6tapn/73Xy7YQ6FOBHScMHihMLV1LpGoPI2Jr7eXMsUeUcBS74mW3qqsZvKcXFV3o6l
-	 gQ6VsKQ8FYFbk7i6fO2eYsV3p4e9m7MmtQq9c7htPjoTohPNBAElOvJ39RS0S+qUTOg==
+	t=1793968818;
+	b=hIGG+3nxwXJBc9wJU34AWH+DVNU4jck7g8lKBP2ttSWaM9tqTQBsEl6yui0lxzrPkzra
+	 yRrXekml2zZ2E8Etstp1xz+dE3oU7N93JwHkesaUy6wHRnVA0bmM8nFprkwvk7fN2gSG4
+	 PZuXYfU1uvc3RsBmmCK5vzlxLZp1xcP1Q8jj6baPh4xmux7loL0foHyzPFxM+21GCcEeK
+	 AMYo8qkMd3PU2LGFtCri9Lw5JkML4BzFUKhmcLOX9ryWNnMV2B2JAReYCbdmjiFD1NqLR
+	 CmL5NSqLCcmBUIrLpUimG6FY2l3IAr5GTB117zi+6Mpkl9Z0wtqZDRUX0zAyQEJStIg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793968452;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=e9uuC49uibIqzNvqYNHttoC/TaslJ2ksoflEWBqy/38=;
-	b=VS+1ZjriTN/5OPi6t4Zgx4px3mPCkk2rHyis+eDGqr7PTIQ9ouLzetuaRH9iugn0vJq4
-	 sx6XzHKQPPzeMBcnU7DGGj3fUi9tDc+XgVlsLAHp/vW2xDrKNNnockEF2R0rLFcd0D/e2
-	 o+c1ryZP7KcJ9bHiDE1oCCIBBSPuClPN/pJn71cBkr5iEMsDLVhLRTte1ET8Sh3pJUemY
-	 zUqaRfBjOzPNIOZkswte31YBfYYHoCWcuiZ67sEz/Xohu210aHNzYmADdoe8YQvhnPIDg
-	 hdUFrT84slj4EXtNCMEcqf941V09B/PsoP0qQXVccC42rWI5JDBDdUrk2Nfjm857djA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793968818;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=I7rpnBx9YoXkP8aLjecj2KvEgsGyzrkFXLzcIf+WpQs=;
+	b=tjwfW5ZjMhz/fZkH23sHOIErQBrB/TgBAoZbdfaKAlw4vblVwvw+MpKbHMnGf1jVVCsp
+	 FbJYF14oftGdvaza21jB1Yw/dYsI77zT1BBPf4rxPCje2/ELTZBrrxI+JAGXCzQUjSvkP
+	 uZtl+2Kf25J1B/YAj9/uCXZDRK2P8/Ua0he52PQCGbekJCIDfKa+PvFaDbW6W+PjIbGdg
+	 Q0xSwwaMI022i2k/VLZsQj+XrbJQIEf5yFqHbvVtoWthssq4bzt4LmaeH2NkRbPEFcEg7
+	 XALqGQ6mnu1tma7yqLEPJ0s+MtRePD28AXPiH8VJi3DKlJK6Oh36LlcUYIWm3V+B3Hg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YrDQ0Pa3;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FqyTzCoB;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="cv0gq7//";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5B2606EE82
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 12:34:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8E5B2606EE82
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D630606A326;
+	Fri,  6 Nov 2026 12:40:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YrDQ0Pa3;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FqyTzCoB
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6AP8rZ3703883
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 12:34:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	e9uuC49uibIqzNvqYNHttoC/TaslJ2ksoflEWBqy/38=; b=YrDQ0Pa3w1BZy+l4
-	751Jvbn9b3Ya5kMsporgP92mZAH55F6NalX98/CDS4yFSC5yI7udykDOQI9OAulN
-	VpN/DnDc8TLFtNZCVAVBmNntOKcyqTpYZQHb6RC86QKVVadT0O37f57B4FwW4F80
-	PHNb65Z8rdHVDRRp78T9KbQdRXfzNxbq/o+Bt6YdYC4Llfpv4QsWIRW+jg2JVnvH
-	gYhrQ/1wfuaBLhm3p+r+DCxJHKNva9L2fN0yb2jMxpYOlncqhTod0nss151FwBAE
-	7FpM245KJCvPMXcV8zfZDmiCaEUCjG3qPBsSS1ooRX+qRzQaqK+pEqLhHVuiPDsE
-	PYrOiQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pa2ttj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 12:34:10 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3700be873ebso406387eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 04:34:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793968450; x=1794573250; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=e9uuC49uibIqzNvqYNHttoC/TaslJ2ksoflEWBqy/38=;
-        b=FqyTzCoBevqQaGethSc4ILZJLd2M2Tf17y/ais3zdsetqFm9UjvSKOQze90bN36Pvy
-         hjbliStOuw0TYd5PXUmU43B9lNhkTnrKyJWQRBvO86hgqrsurNa7KxwnSgcEY9HqIdgi
-         wWA5YM6oWUIiPr/zLrqRllIi5lW84GEsqE0V9+SaKnLF5oin8Hdum6jjCV6N/vVWX8J6
-         MDeDlz7TEtrlUCNNa8LbBEQlw19G2hCugIWjpZnUefBPUFwX2NF3I0ADYqHU6AK9Likm
-         zhYyAfdk3TASF2iXrSYz+GGgm9iGR05nwB+cFyK96uv3ZYDPY1sdquLLB3tWIQPpgAnE
-         OPcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793968450; x=1794573250;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=e9uuC49uibIqzNvqYNHttoC/TaslJ2ksoflEWBqy/38=;
-        b=sG7gL51mAnf7xoCXZ7mky1fZi0cOnvSd75ucDQJZoVk7i9RakKNALXGuxIfcU9bb/Y
-         acB6sYeDo0Rnoe6JcYoaIrCKD00/+zZvscqzCu3knATBLydgwl02Z9QCicsIUnsWvlI9
-         oyt8jMbCBq5RdTdvV5+AYijiguNpasm9RK0rqxAWsBs34nkfE7MkSJiEVswx36pvTkP9
-         UJA56oHU22uWEmRxlaBVc3HEnrkOCCy9Jg66OmLiBhwexc59LN4uN1VBgt99LKH4eIsJ
-         l4FO3EaZK1ZAt8LRIp2ix4rmPg8nKZZakOUTMmr0nLQstsV6E8loljNm0AqPXBBzpO4Q
-         oW9A==
-X-Forwarded-Encrypted: i=1; AL+hErG3UuBiY8mL3de4HruUIvo/9ALKw0ZfIFj4yBwusWRKNlSJrD4jzzhmkuy7DZVukXEekkUp4GJwy8PDfsLk@vger.kernel.org
-X-Gm-Message-State: APuU4Z+IxxpI0CIQvnVNNj+45WyDw0DH985sSOsEjr0OSLqqvTGvQSME
-	Z/1HkX/QavRyiuNH1yL2qZe9YpHBYJSHPqJ9RURzFA3SXa+TBCCLmDG83qUm01H4jTFX41ee6Ym
-	H93VyZNhvSPRDnhS8x6KaepOiDzzx5KL/3p/gSMbSOo7gBRk4W+IPft4aNZKkLwyRdsOM
-X-Gm-Gg: AYBFou1UF8OwH2T8OWf1OUhsQvCErx139eSusJRPNYlVWY7v7PfLNC09GVqtmqcWicI
-	9zVzRWAk/AWrIcF7y+r6HSJWf888bVBaNokTc5gXxGrCZC2mhAH+NNLKxn0mD4Ixq5/zBXLzOQk
-	IVYhdxL1EAqGrwvowYY63XayowXe8FyuFyCX1nqoVRNHZWUxSMw0tVCnPqaccReH/CNmg7kthzx
-	ipvcQzK5ZHxcYU+WclZ8egoB9BXLfXeyN/025Z+k7l0GiWPi2PgZTwyxR2gl3JsWCnrIMesgaDK
-	sfEyFwIZW7MDbcQfXzrAKyibVF+c0ykN99BrTNbAAJEasSL6GegkDmJzYLyaMuRq7Co2q0ilQtc
-	fKVZ7YyaOj75AKf9qCFdRGPI1sVy/GlyxIXabm6QAAxTKBMgPoJ3wE0xTaoxKhZC4vaAakZhDcm
-	TGXs0Njkn/
-X-Received: by 2002:a05:7300:cf91:b0:369:f1ca:5b24 with SMTP id 5a478bee46e88-36f773f0683mr3318454eec.6.1793968449431;
-        Fri, 06 Nov 2026 04:34:09 -0800 (PST)
-X-Received: by 2002:a05:7300:cf91:b0:369:f1ca:5b24 with SMTP id 5a478bee46e88-36f773f0683mr3318402eec.6.1793968448778;
-        Fri, 06 Nov 2026 04:34:08 -0800 (PST)
-Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36faa4b8aacsm6514804eec.23.2026.11.06.04.34.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 04:34:08 -0800 (PST)
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Date: Fri, 06 Nov 2026 18:03:08 +0530
-Subject: [PATCH v6 v6 9/9] ASoC: qcom: lpass: Add support for LPASS codec
- v4.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cv0gq7//
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 744301F0089F;
+	Fri,  6 Nov 2026 12:40:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793968818;
+	bh=I7rpnBx9YoXkP8aLjecj2KvEgsGyzrkFXLzcIf+WpQs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cv0gq7//oTp0dAwoAY2P60tkzG7qOXixypboCv6somxbv4RJe5y516ibiIt9yil0y
+	 6Xus26S5S7CjxFEgzJ6hZni98dpD8Y/omMUtCqA4qji8MxkiTaYplwOOW48zZztgn9
+	 biJBA8ky84yjfhdUFX9fRCe+oS8D893fUM9AYufhLCP12MMbLUTZ8mXNG/OPBCvc1G
+	 DIevwtEp6pl4GRQg1cF62xWNKe0C2Oa7ePx8fTta9k3W+1zeQkAVQDl44kBiPO2/LG
+	 dx8EhOOPaR6wOfy/YLyX01VcjVuebpZVFEllgtNJqAQKSVIn+yFsCLndqNWCvS3rdQ
+	 Fk78GnOIw8FXg==
+Date: Fri, 6 Nov 2026 13:40:15 +0100
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Frank.Li@oss.nxp.com, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Russell King <linux@armlinux.org.uk>, 
+	Richard Genoud <richard.genoud@bootlin.com>, Nicolas Ferre <nicolas.ferre@microchip.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Laxman Dewangan <ldewangan@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Cunhao Lu <1579567540@qq.com>, 
+	Raul E Rangel <rrangel@chromium.org>, Yenchia Chen <yenchia.chen@mediatek.com>, 
+	Zhiyong Tao <zhiyong.tao@mediatek.com>, Carlo Caione <ccaione@baylibre.com>, Moteen Shah <m-shah@ti.com>, 
+	Kendall Willis <k-willis@ti.com>, Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>, 
+	Nicolai Buchwitz <nb@tipi-net.de>, Karl Mehltretter <kmehltretter@gmail.com>, 
+	Stefan =?utf-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>, Shitalkumar Gandhi <shital.gandhi45@gmail.com>, 
+	Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>, 
+	John Ogness <john.ogness@linutronix.de>, Pan Chuang <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>, 
+	Robin Gong <yibin.gong@nxp.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Stephan Gerhold <stephan.gerhold@linaro.org>, Zhaoyang Yu <2426767509@qq.com>, 
+	"Nikola Z. Ivanov" <zlatistiv@gmail.com>, Haoxiang Li <haoxiang_li2024@163.com>, 
+	"Mike Rapoport (Microsoft)" <rppt@kernel.org>, Biju Das <biju.das.jz@bp.renesas.com>, 
+	Geert Uytterhoeven <geert+renesas@glider.be>, Myeonghun Pak <mhun512@gmail.com>, 
+	Wenhua Lin <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>, 
+	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>, 
+	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>, 
+	"moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>, 
+	"moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>, 
+	"open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..." <imx@lists.linux.dev>, 
+	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>, 
+	"open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES" <linux-samsung-soc@vger.kernel.org>, 
+	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>, 
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>, vkoul@kernel.org
+Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
+Message-ID: <au3GYOP5P7B90-bX@orome>
+References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
+ <aux2VKHnVLwq_wzi@orome>
+ <auyQEVmA2KeGu9DL@ashevche-desk.local>
+ <auyiAE3lhnFahBK2@orome>
+ <auysTnqWgz2kE7e9@ashevche-desk.local>
+ <2209947d-0b9b-417f-9ffb-1c81790af9db@kernel.org>
+ <auzEupFd_Ek2HpLG@ashevche-desk.local>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,164 +95,155 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-add_shikra_support-v6-9-2cda302237cc@oss.qualcomm.com>
-References: <20261106-add_shikra_support-v6-0-2cda302237cc@oss.qualcomm.com>
-In-Reply-To: <20261106-add_shikra_support-v6-0-2cda302237cc@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>
-Cc: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793968395; l=4318;
- i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
- h=from:subject:message-id; bh=0O/KQCzGRUPAuDFWuuYOS9c0YMN/OB+r75xvXVHjAJ4=;
- b=qzlx+BgMzvpuHVRmfrcoSf3x0U48qbH+mrQxTSuIUBcw8QKY7UAeQDEc7gSm+8B2Erm1OZOWN
- E6VUOR+v2G6CUet3zGQOQYWGzLW4CNkyuZ3CaRYb/elc8K420mlwsyx
-X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
- pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA0OSBTYWx0ZWRfX3HqplqVhN1pc
- /JWWAjkQT4QkXqPdLHP8VXkKzDHhbSm7eVawmI6S9l8C8fkOmDkMtSBZFZC9mCV9+hCNoPXJpxC
- tYYJOBrYRXZ/JYlaEH1ERD9uLheY52HZ09OuRTUTL3gBnqZvElrgyoPhCNmCFHwzPI9ueLThU18
- TkK1TBRqs53BnqGM7TdGmGgOoPxtCkLhHAH9grDoYegDH47NCgLvXwzQaE81EOAT3XiQO7m2/bh
- KypkHJqLr42wAMXZFEUNfbRzVM1xAywQASz8GzHsicEtnBg16Ez4CozBkhkDsClUrijZMIGcHy4
- ArLm0DkMiJMHL9Ldc3saP5QJ0Eqlr+N+L6y4bU1yZjk2a+gF9oXJXOZOB889FtYtK6F+uIuRxmB
- NIOraxR/wwTzt6OHzDcNbHU2B2JfNLH3f7oEuXM+eULGwNBlS7o9goMK+7EqPT77IVGIed2rPsV
- oqJEJZM40wK6qekN7KQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA0OSBTYWx0ZWRfX5RjN6Qn/YvWL
- /c8TSnArWw86MBZ9utEh07zoRW7bK/mCIfY54iLL3YE27ApcKjHnIy7CDyBw7U4Vtj+6mspqPKg
- AHDovqRXVNsGZ8JOHy1aB0FDN8brzCE=
-X-Proofpoint-ORIG-GUID: cqTAPDqbe3fhJQw585noTbuZfeuT4CTi
-X-Authority-Analysis: v=2.4 cv=GpzXaU1C c=1 sm=1 tr=0 ts=6aedc942 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=Pm4gKVr55SiOJ_VcJFcA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-GUID: cqTAPDqbe3fhJQw585noTbuZfeuT4CTi
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-06_03,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
- priorityscore=1501 phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060049
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="bfkiplbygfje4qbi"
+Content-Disposition: inline
+In-Reply-To: <auzEupFd_Ek2HpLG@ashevche-desk.local>
 
-From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
 
-Hawi and Maili use the LPASS codec v4.0, which the macro drivers do not
-yet recognise.
+--bfkiplbygfje4qbi
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
+MIME-Version: 1.0
 
-Add LPASS_CODEC_VERSION_4_0 and its "v4.0" version string, and detect it
-in the VA macro when the hardware reports major version 4, minor 0.
+On Thu, Nov 05, 2026 at 08:02:34PM +0200, Andy Shevchenko wrote:
+> On Thu, Nov 05, 2026 at 05:21:06PM +0100, Krzysztof Kozlowski wrote:
+> > On 05/11/2026 17:18, Andy Shevchenko wrote:
+> > > On Thu, Nov 05, 2026 at 04:36:38PM +0100, Thierry Reding wrote:
+> > >> On Thu, Nov 05, 2026 at 04:17:53PM +0200, Andy Shevchenko wrote:
+> > >>> On Thu, Nov 05, 2026 at 01:28:46PM +0100, Thierry Reding wrote:
+> > >>>> On Mon, Nov 02, 2026 at 12:54:48PM -0500, Frank.Li@oss.nxp.com wro=
+te:
+> > >>>>>
+> > >>>>> Replace open-coded assignments to callback and callback_param fie=
+lds
+> > >>>>> of struct dma_async_tx_descriptor with calls to the
+> > >>>>> dmaengine_desc_set_callback() helper across serial drivers.
+> > >>>>>
+> > >>>>> No functional change intended. Prepare to make struct
+> > >>>>> dma_async_tx_descriptor private to the DMA engine.
+> > >>>>>
+> > >>>>> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > >>>>> ---
+> > >>>>>  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
+> > >>>>>  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
+> > >>>>>  drivers/tty/serial/8250/8250_omap.c | 6 ++----
+> > >>>>>  drivers/tty/serial/amba-pl011.c     | 6 ++----
+> > >>>>>  drivers/tty/serial/atmel_serial.c   | 6 ++----
+> > >>>>>  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
+> > >>>>>  drivers/tty/serial/imx.c            | 6 ++----
+> > >>>>>  drivers/tty/serial/msm_serial.c     | 6 ++----
+> > >>>>>  drivers/tty/serial/mxs-auart.c      | 6 ++----
+> > >>>>>  drivers/tty/serial/pch_uart.c       | 6 ++----
+> > >>>>>  drivers/tty/serial/samsung_tty.c    | 6 ++----
+> > >>>>>  drivers/tty/serial/serial-tegra.c   | 6 ++----
+> > >>>>>  drivers/tty/serial/sh-sci.c         | 9 +++------
+> > >>>>>  drivers/tty/serial/sprd_serial.c    | 3 +--
+> > >>>>>  drivers/tty/serial/stm32-usart.c    | 6 ++----
+> > >>>>>  15 files changed, 29 insertions(+), 58 deletions(-)
+> > >>>>
+> > >>>> Reviewed-by: Thierry Reding <treding@nvidia.com>
+> > >>>
+> > >>> Krzysztof, now look at this case. I would argue that this is even l=
+ess fit than
+> > >>> # subpart(s) case, because it might imply anything. Again the probl=
+em is the
+> > >>> bundle, and for such a case (when tons of independent changes are b=
+undled in
+> > >>> the same stuff, *every* Rb tag has to be explained on what has been=
+ reviewed!
+> > >>
+> > >> It may be a bit subtle, but the placement of the tag indicates that =
+it
+> > >> applies to the entirety of the changes. I didn't crop the list of
+> > >> changed files, nor did I omit the summary.
+> > >=20
+> > > This doesn't clarify the question. Wordless Rb tag on a bundles is an=
+ oddity.
+> >=20
+> > No, it's perfectly normal and typical. I would not expect anything else,
+> > because writing "LGTM" is pointless. We are experienced reviewers and we
+> > do understand what Reviewer's statement of oversight means, thus giving
+> > the tag is obvious, explicit and not odd.
+> >=20
+> > >=20
+> > >> That bit of meta-data obviously isn't picked up into the tag line, b=
+ut
+> > >> I think the default meaning of Reviewed-by is that it applies to the
+> > >> entire thing.
+> > >=20
+> > > And I interpret it otherwise, because this is a set of independent ch=
+anges
+> > > bundled into a single patch!
+> >=20
+> > It's not set of independent changes, but even if it was then it would
+> > not matter. We review the code regardless how we actually judge the
+> > atomicity of a patch.
+>=20
+> And I confront exactly that! When the patch may be split it has to. This =
+is
+> seems the outcome of this discussion to me. From now on I think I will NAK
+> any bundle patch until piece that I in charge to is split from the bundle.
 
-The RX macro register layout of LPASS codec v4.0 matches the v2.5+
-layout, so reuse the existing v2.5 register access helpers, controls,
-widgets and register defaults for it. Unlike v4.1, v4.0 does not need
-the FS counter bypass or the adaptive filter blocks, so those stay keyed
-off v4.1 only.
+I'd like to caution against this. There's effectively one change in this
+patch and it converts all the drivers in the same way. This was probably
+generated using a script or semantic patch. Requiring this to be split
+up is going to make the author spend a lot of time creating 15 patches
+instead of just one. They will have to write the same commit message
+with tiny variations, which they'll most likely just use a script for
+because it's tedious. Or they don't use a script and likely get at least
+one commit message wrong. And then we're not reviewing a patch for
+technical correctness anymore but waste a lot of time on nit-picking on
+a subject or commit message. Each of these commit messages is not going
+to add any new information either, so the only thing you really achieve
+is to increase the signal-to-noise ratio.
 
-Add the "qcom,hawi-lpass-rx-macro" and "qcom,hawi-lpass-va-macro"
-compatibles, both pointing at the sm8550 match data, so the version is
-read back from the hardware at probe.
+That's completely absurd.
 
-Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
----
- sound/soc/codecs/lpass-macro-common.h | 3 +++
- sound/soc/codecs/lpass-rx-macro.c     | 5 +++++
- sound/soc/codecs/lpass-va-macro.c     | 4 ++++
- 3 files changed, 12 insertions(+)
+Also, reviewing 15 miniature patches is going to take much more time
+that reviewing this monolithic one, so I suspect potential reviewers are
+more likely to just stay away from it to begin with.
 
-diff --git a/sound/soc/codecs/lpass-macro-common.h b/sound/soc/codecs/lpass-macro-common.h
-index 707b22a6bda6..a51a6012a7ec 100644
---- a/sound/soc/codecs/lpass-macro-common.h
-+++ b/sound/soc/codecs/lpass-macro-common.h
-@@ -31,6 +31,7 @@ enum lpass_codec_version {
- 	LPASS_CODEC_VERSION_2_7,
- 	LPASS_CODEC_VERSION_2_8,
- 	LPASS_CODEC_VERSION_2_9,
-+	LPASS_CODEC_VERSION_4_0,
- 	LPASS_CODEC_VERSION_4_1,
- };
- 
-@@ -72,6 +73,8 @@ static inline const char *lpass_macro_get_codec_version_string(int version)
- 		return "v2.8";
- 	case LPASS_CODEC_VERSION_2_9:
- 		return "v2.9";
-+	case LPASS_CODEC_VERSION_4_0:
-+		return "v4.0";
- 	case LPASS_CODEC_VERSION_4_1:
- 		return "v4.1";
- 	default:
-diff --git a/sound/soc/codecs/lpass-rx-macro.c b/sound/soc/codecs/lpass-rx-macro.c
-index 5fe06ce6b960..ab1b0d7c5dd4 100644
---- a/sound/soc/codecs/lpass-rx-macro.c
-+++ b/sound/soc/codecs/lpass-rx-macro.c
-@@ -1615,6 +1615,7 @@ static bool rx_is_rw_register(struct device *dev, unsigned int reg)
- 	case LPASS_CODEC_VERSION_2_6:
- 	case LPASS_CODEC_VERSION_2_7:
- 	case LPASS_CODEC_VERSION_2_8:
-+	case LPASS_CODEC_VERSION_4_0:
- 	case LPASS_CODEC_VERSION_4_1:
- 		return rx_2_5_is_rw_register(dev, reg);
- 	default:
-@@ -3660,6 +3661,7 @@ static int rx_macro_component_probe(struct snd_soc_component *component)
- 	case LPASS_CODEC_VERSION_2_6:
- 	case LPASS_CODEC_VERSION_2_7:
- 	case LPASS_CODEC_VERSION_2_8:
-+	case LPASS_CODEC_VERSION_4_0:
- 	case LPASS_CODEC_VERSION_4_1:
- 		controls = rx_macro_2_5_snd_controls;
- 		num_controls = ARRAY_SIZE(rx_macro_2_5_snd_controls);
-@@ -3846,6 +3848,7 @@ static int rx_macro_probe(struct platform_device *pdev)
- 	case LPASS_CODEC_VERSION_2_6:
- 	case LPASS_CODEC_VERSION_2_7:
- 	case LPASS_CODEC_VERSION_2_8:
-+	case LPASS_CODEC_VERSION_4_0:
- 	case LPASS_CODEC_VERSION_4_1:
- 		rx->rxn_reg_stride = 0xc0;
- 		rx->rxn_reg_stride2 = 0x0;
-@@ -3959,6 +3962,8 @@ static const struct of_device_id rx_macro_dt_match[] = {
- 		.data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
- 	}, {
- 		.compatible = "qcom,sm8550-lpass-rx-macro",
-+	}, {
-+		.compatible = "qcom,hawi-lpass-rx-macro",
- 	}, {
- 		.compatible = "qcom,sc8280xp-lpass-rx-macro",
- 		.data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
-diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
-index a11347404058..0f94f445f082 100644
---- a/sound/soc/codecs/lpass-va-macro.c
-+++ b/sound/soc/codecs/lpass-va-macro.c
-@@ -1901,6 +1901,9 @@ static int va_macro_set_lpass_codec_version(struct va_macro *va)
- 		}
- 	} else if (maj == 4) {
- 		switch (min) {
-+		case 0:
-+			version = LPASS_CODEC_VERSION_4_0;
-+			break;
- 		case 1:
- 			version = LPASS_CODEC_VERSION_4_1;
- 			break;
-@@ -2175,6 +2178,7 @@ static const struct of_device_id va_macro_dt_match[] = {
- 	{ .compatible = "qcom,sm8250-lpass-va-macro", .data = &sm8250_va_data },
- 	{ .compatible = "qcom,sm8450-lpass-va-macro", .data = &sm8450_va_data },
- 	{ .compatible = "qcom,sm8550-lpass-va-macro", .data = &sm8550_va_data },
-+	{ .compatible = "qcom,hawi-lpass-va-macro", .data = &sm8550_va_data },
- 	{ .compatible = "qcom,sc8280xp-lpass-va-macro", .data = &sm8450_va_data },
- 	{ .compatible = "qcom,shikra-lpass-va-macro", .data = &shikra_va_data },
- 	{}
+In the end you make life miserable for everyone. Well, except for
+individual driver maintainers that want a quick and easy way to slap
+their approval onto only the one driver change that they really care
+about.
 
--- 
-2.34.1
+But there's already a way that they can do that. Acked-by can just mean
+"I maintain this driver and I agree with the direction, but I haven't
+bothered to do a full technical review". That's what most of these
+"partial" Reviewed-bys are, so why not just use that existing tool?
 
+And I'm saying all of this without judgement, because sometimes you do
+not have the time to do a full review but you still want to lend your
+support to ongoing work. I do that quite often myself.
+
+But at other times I do want to look at something in more detail, or
+just ended up looking thoroughly enough for it to count as a full review
+and when I do I'll let people know with a Reviewed-by.
+
+Thierry
+
+--bfkiplbygfje4qbi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrtyq0ACgkQ3SOs138+
+s6Fr4A/9FKItEmEcI7D1clbCnePcAJeqtYQ0rYq/qZQPbKo0mPQbeN5qKa1XDgHO
+o3ylZ3Piqsnzv+NNOe6cmtCjzv4Bb82/Z9g8metI4jz4gOraKos+oVhk2EIMFv7f
+yrPVGwcvgtlSnx6MO/kFoS+1JYbWlZ9JA7jJCTcXBUF28R780a2elyHAnxamdAQZ
+TrzhhmaRmsdt2TLYxJRPlrKWjfzhl/2HKGfFTTROXgaiaj8oQeCNcBGC1TKKtGls
+g4MQJ6AZ1Ke58gd3O1sYh3QUlOUewNawK+LOsDoGjooF6zg2loLypU6twHl7cBdH
+GoFRsLUImQvYXNUYhDxGCxNZ3OvMyIM+8X3G2xIJuHY8MEbJY5ukp/rPKi/4CQyK
+VxwvkHMoAX705PtVMKdY2ddQt9ceif+v7ohWDmce8B3NOopq0itUXxcU8Z2MWw99
+qEl1IoIYVXBYiJeaIcLzjSPmJeFPAJ49cJhNeqpH190C5hIqxPK75Jyh7+Pokx+y
+yWFEIla8n0+o14XOP9M2wnrvJ34EQI4aW8Ia/nFn3b1oONvBu+q8h8wMH5hH2fvJ
+O3QCmMyze7y03zKMQL2w8jE7qniSfi+wUNb318xOlXRqBKHTSGv7IEu5try/XdKo
+L8B242zIrUhLZ8MWwNSUfjq9qIT7PSG50W3uNxTv0hduJXFO13c=
+=a1fc
+-----END PGP SIGNATURE-----
+
+--bfkiplbygfje4qbi--
