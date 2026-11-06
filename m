@@ -1,85 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793964852;
-	b=iDgYcqGjftojTp41aepp/Ym41+3CuI+CPuZ6zeiTU/gZ+YdIAs4JLchCJ2rHa2eHzVyA
-	 Fae1bYAapjF7lcmJYOV0FO8ds2kAdFvyT+FOaZzJSyOzsDIvoBqiygwCgsrbGtG6/m3vE
-	 SVf3B1Rnk4gvQIGvJL0DNxaOwXrtEVrg/J19UPOw6YzAppQ5JFlSlwcqGqxb22Q0cvNiR
-	 B184iQvc64FcaHTuCt8BhZa0MU4uE6GOtV0nmjrBWqWilN/1u5mV1mj8jqvPNsn4VTf1c
-	 7ucf3TTbBXrh27B6k2Zfuu7vqvlwdhV4NcBQQAqujJS54PQ/zNhkyJ+tFoXyddkHg5Q==
+	t=1793965340;
+	b=D31yiRLHrTjIacVCADPpAyo1kDxMAXuJR5sX/oSM0aiFLJpXIrppGbnXoTtHL6DZD0Dj
+	 RMAaPbXLHFlikHeFZCZnelKRm89f/hinerE6qKA0bsVXds5uMidptiaw01YNNxM/fecfe
+	 oA4AkuoyXgSz8ahb+9UrdUPbxtkpz85jndrd2/apeYlO1gIBWUmXJfv/uyHE7wtKLnGxi
+	 2mhImdHWxXlsu43unNXRwYm5Lrw/3rOoSqrMXMPCvK5/eLYTZ+Gvnyc4c8BOTVadYohjO
+	 RSXuW/aIEyqtsBLGOtHE15hLTvrJ/bfgwc59kd//0K1JnnyrohCCmV/lz8gFHnXqV+Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793964852;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=2a3wOuLQO+GxIKSFBPIpicW1skrfE9drWufAeDaOhgM=;
-	b=n8AUxHhTHHFMq7kgBL7GuEVZcFr8N2bWZN1d0EUDQ5efJfF2g8t52oSyomU9qof5YaeX
-	 XMWxY2WqexFds9M2FI4X2kxOqp6u7krLU3swyJridr1CyfH3xLOL/s2fbPqk50XlBkrP0
-	 gZGjxRZzH3O+7KS1UR8ke8TMxvhz0KN+pYjg3OMAvGhY8nQV9b7SdcP0dp9ctmnRlGPmU
-	 KGQ/LCq9Y4iTIPSNEEhEJAbrdjHNvondmWZ0e4j7ZvMs4O0LQFrC6eKeGBjbSTfHyd0ZT
-	 TaKYEAhBIIyzjET5J+7x6dlKNPPzlTJN+BAzl16qY9ij5g7kXBxTqe7py9du5dzXT9g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793965340;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=geX5EcZsax4Y7eahgxWuRtQPJPWzPvv3DYoB7fSAJ94=;
+	b=LMYj0PIVx6kV7EEeEqkMD+8aIryA2a/qa+63inh+5NKZdsnxPBHi1NpeVnq+MLwSA/VU
+	 XDUmg7osY+rE3CUbkm3P8ImwXxfoxMeo42nAFEGRjiTXJtcwahYbGJEVbbDNd0LycdkZF
+	 5Vu5XisrOCI8pwsoHI1127ICIDSsPVkVLmk+oeD4ObL31ywRUzZ4BNpBJ56IqrFHrkPcY
+	 /V27JOXtev1EjIQw+pwyEnk7ce5svQw9ysT2hh9MuFn2uvwBfxps9qV9jK0UZx5A+dvcj
+	 5LrE5Rbr4QhKVoczJaJZYnfKPXhcqY0YRWmKWmMh+yHCsAsreHVG19QhGgKLBBfamPQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=y9xTKDb4;
-	arc=none smtp.remote-ip=209.85.128.48
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B87C606DA6E
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 11:34:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8B87C606DA6E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=QkdiPVy4;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCF99606A32C;
+	Fri,  6 Nov 2026 11:42:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CCF99606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=y9xTKDb4
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a1fbd52ab6so3408665e9.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 03:34:11 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=QkdiPVy4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1793964850; x=1794569650; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2a3wOuLQO+GxIKSFBPIpicW1skrfE9drWufAeDaOhgM=;
-        b=y9xTKDb4v03LHa49EEDzzG2ANSYHyzH5MlJbzDskyjgnuvmxEF50Jl6QBNgVY2IITj
-         pOrS8DmiN73iMOIvCmfb1R0wrLHGVGS6mkljtZA1ytFu2FotG4eylRxVjBjlIesJQkqE
-         +6H2NUTDQOY84mpDt488JQHxYtBFsIETJJsHnWkJflRWIBpkztgDQLpaekyk0yRGsCHd
-         8kA5Mm9Cja6vSp76uReEIrpBM7buNI2do2ZVrKDp3XC21dl7nkphBOB2D0L0Br2Wiix/
-         H7HMEstWfNDQDKtxsoLF2emrDBAljNR41aigYyHbqACnFS4t/PUPbHAGB6ukkX3MzmG8
-         z8jA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793964850; x=1794569650;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2a3wOuLQO+GxIKSFBPIpicW1skrfE9drWufAeDaOhgM=;
-        b=adu3JBi28fk1JkYiraOvnV5GwNCzGDkL/8KistjiPJo5gVX1ynce8pRC3rMJOTaHZQ
-         ZH2PFe+GHPDRHjjtAhyXXg+RqsyiWAtwRaOAtgwvVxqRt4quOvXfy3KrEHigFkkL78aE
-         gsq1NRbmBgrpVB0O//8SY8CDNMbckdqH6yDr5ZZ2o7VvCya/Zfk/y9ymHpJr3JqR7ls6
-         v8yhnOH8BipRDvjg4Gz/vCGspN1+8DL+8rlP0qMT5n/X+W9QjTz8JEQ/iy8tzK5Kj4Tn
-         +ZeC0A6kEEIK3psJrObnYuskIPqc+nfRHKUsSYGaRdq05AB7Dj0hnnjMCJM0Q84ajpFr
-         Xc3A==
-X-Gm-Message-State: APuU4Z8f9mK3xxj3ETJIa/XQMkpsl6N9KTxFcvm7x+D9yole0cg9Js2E
-	BK5MJJp6YFZgaJtEJ8oi6MuOYhGQYI2x8NO+MyBeiySSj+c5q4WcntZ+ZLzwJOPNixQ=
-X-Gm-Gg: AYBFou1iz3zx8bpXryB7qFZRP2RFMxToHTEtUrPz3rqb/O76FMVqrSBlKifrOdrlfWQ
-	tR6kFQO7ZU9er0ZPvsSABIZ0pSSLArT+14CY51lOaTDq1XFMl6UXptlRU0q5gEvkiTa5+54bW1E
-	ujI1KU10FAlBjAJ8VDKCpa7Wwie8MmSj/6KcrZrC9ka8KzqawM8Ypdv6M7jszQ3m9t4boOjv00l
-	2t9YwmDH16VLO+Y3TCHdYJJL+SlkFNGi3PSG9Rih2AIzfTEU3A4GKUWd1n0ztJ/DP6l0+GZhmEX
-	DBbkagnQ5nQ45Qilzhpp9P5z5gscIP/KOMGpLiRutG0rhkdp53UvSvJfIB6IwXcwDfMUCNbev+x
-	viycjsEilr/jBrmHgcBpd2qnfRafQdcCdegU1yKfPJrSawx+yYDLbHn2HnHdXBAoQOQEBZziSZW
-	SzaN+4liHBHN5D4op9imrKBr9KbSPStF3j8JD9EMZxjrjUwbPh1HPK2PDMiTNU9Gdh5CYP1X1JS
-	vUA/oB3z9yBm537YVwJ6v6XP9h4AZvSXfW4FKMe49+BiM5lY7NDFqyf3ynB5jd7lOZZW77ts0Or
-	p5b7PvInzLAusIQeVOZa5KBDvMUaIal+5zNJB1Ed0xM=
-X-Received: by 2002:a05:600c:3b96:b0:4a1:7c7d:8881 with SMTP id 5b1f17b1804b1-4b6ddcf58b3mr43761145e9.13.1793964849892;
-        Fri, 06 Nov 2026 03:34:09 -0800 (PST)
-Received: from [192.168.0.167] ([109.77.115.215])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b56e58fcb8sm129016145e9.1.2026.11.06.03.34.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 06 Nov 2026 03:34:09 -0800 (PST)
-Message-ID: <9c389b7f-a87d-4ce6-b4db-38609d0ffe65@linaro.org>
-Date: Fri, 6 Nov 2026 11:34:07 +0000
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=geX5EcZsax
+	4Y7eahgxWuRtQPJPWzPvv3DYoB7fSAJ94=; b=QkdiPVy4JWfBXLv4T8tETdvCwO
+	8nHJ7njR58z0dPidzrOPSA7aCOnd4jHdEifY9O86VqiGEzhfK1topzCeHRx5xbpE
+	CzwItFOu4cu04uL6TXbaA2lsq35tM90+z3EZaHfBGY29UoFZoKz+9+83cLgGMuPG
+	6dznJxA2MASq8GjEc=
+Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.184.75])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgBn2S0Qve1q3DyPAA--.869S2;
+	Fri, 06 Nov 2026 19:42:08 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: gregkh@linuxfoundation.org,
+	Thinh.Nguyen@synopsys.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: linux-usb@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v8 0/3] usb: dwc3: two Type-C connectors sharing one HS data bus
+Date: Fri,  6 Nov 2026 19:42:05 +0800
+Message-ID: <20261106114208.987284-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,468 +63,325 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] dt-bindings: media: qcom,sm8150-camss: Add SM8150
- CAMSS
-To: mail@andrewgigena.dev, Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20261106-sm8150-v7.4-rc1-camss-v2-0-39ee37787b00@andrewgigena.dev>
- <20261106-sm8150-v7.4-rc1-camss-v2-2-39ee37787b00@andrewgigena.dev>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v2-2-39ee37787b00@andrewgigena.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgBn2S0Qve1q3DyPAA--.869S2
+X-Coremail-Antispam: 1UD129KBjvAXoW3CrWkCF1UAFyfKF4xZFyDAwb_yoW8XrW8to
+	WSqw4F9w18tr1Y9F1vkFnrGrZxWFWv9r47Zr1UCws8JF4kXrW8Ga4fGw4DXFWfJF4F9F45
+	Zay8X39YkrW7tF95n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UjIYCTnIWjp_UUUYY7k0a2IF6w4kM7kC6x804xWl14x267AKxVW8JVW5JwAFc2x0
+	x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj4
+	1l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0
+	I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4
+	vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r
+	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7AKxVWUtVW8
+	ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r
+	1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij
+	64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Cr
+	0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+	42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUqX_TUUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2rs2VhhrAA1sr
 
-On 06/11/2026 03:24, Andrew Gigena via B4 Relay wrote:
-> From: Andrew Gigena <mail@andrewgigena.dev>
-> 
-> Document the Qualcomm SM8150 Camera Subsystem. The IP integrates four
-> CSIPHY, four CSID (two full and two lite), two VFE and two VFE-Lite
-> instances, with 27 clocks, 12 interrupts, eight IOMMU streams, four
-> interconnect paths and three power domains.
-> 
-> SM8150 has a different register layout, clock tree and power domain
-> topology from SM8250, so describe it in a dedicated schema instead of
-> using qcom,sm8250-camss as a fallback.
+*** AI-assistance disclosure ***
+This cover letter and the patches below were prepared with the help of an
+LLM coding assistant.  The author reviewed every line, ran every gate
+quoted in this letter himself, and takes full responsibility for the
+content.
 
-Power-domains are the same BTW but, this type of differentiation in the 
-git commit log I don't think makes sense - when someone reads the sm8150 
-commit log in 200 years this log itself should describe without 
-necessitating or caring about another SoC elsewhere.
+This is a re-post of the series sent a few minutes ago (Message-ID
+<20261106112811.963923-1-xiaqinghuan@mail.ustc.edu.cn>): that posting lost
+the version tag in the per-patch subjects -- they went out as "[PATCH 1/3]"
+while the cover said v7 -- which is a tooling slip on my side.  The patch
+content is unchanged, only the subject lines differ, so the review of that
+posting still applies.  Apologies for the noise.
 
-> 
-> Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
-> ---
->   .../bindings/media/qcom,sm8150-camss.yaml          | 412 +++++++++++++++++++++
->   1 file changed, 412 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
-> new file mode 100644
-> index 000000000000..26f8939001df
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
-> @@ -0,0 +1,412 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/media/qcom,sm8150-camss.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Qualcomm SM8150 Camera Subsystem (CAMSS)
-> +
-> +maintainers:
-> +  - Andrew Gigena <mail@andrewgigena.dev>
-> +
-> +description: |
-> +  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,sm8150-camss
-> +
-> +  clocks:
-> +    minItems: 27
-> +    maxItems: 27
-> +
-> +  clock-names:
-> +    items:
-> +      - const: camnoc_axi
-> +      - const: cpas_ahb
-> +      - const: csiphy0
-> +      - const: csiphy0_timer
-> +      - const: csiphy1
-> +      - const: csiphy1_timer
-> +      - const: csiphy2
-> +      - const: csiphy2_timer
-> +      - const: csiphy3
-> +      - const: csiphy3_timer
-> +      - const: vfe0_axi
-> +      - const: vfe0
-> +      - const: vfe0_cphy_rx
-> +      - const: vfe0_csid
-> +      - const: vfe1_axi
-> +      - const: vfe1
-> +      - const: vfe1_cphy_rx
-> +      - const: vfe1_csid
-> +      - const: vfe_lite0
-> +      - const: vfe_lite0_cphy_rx
-> +      - const: vfe_lite0_csid
-> +      - const: vfe_lite1
-> +      - const: vfe_lite1_cphy_rx
-> +      - const: vfe_lite1_csid
-> +      - const: gcc_ahb
-> +      - const: gcc_axi_hf
-> +      - const: gcc_axi_sf
-> +
-> +  interrupts:
-> +    minItems: 12
-> +    maxItems: 12
-> +
-> +  interrupt-names:
-> +    items:
-> +      - const: csiphy0
-> +      - const: csiphy1
-> +      - const: csiphy2
-> +      - const: csiphy3
-> +      - const: vfe0
-> +      - const: csid0
-> +      - const: vfe1
-> +      - const: csid1
-> +      - const: vfe_lite0
-> +      - const: csid_lite0
-> +      - const: vfe_lite1
-> +      - const: csid_lite1
-> +
-> +  iommus:
-> +    maxItems: 8
-> +
-> +  interconnects:
-> +    maxItems: 4
-> +
-> +  interconnect-names:
-> +    items:
-> +      - const: cam_ahb
-> +      - const: cam_hf_0_mnoc
-> +      - const: cam_hf_1_mnoc
-> +      - const: cam_sf_0_mnoc
-> +
-> +  power-domains:
-> +    items:
-> +      - description: IFE0 GDSC - Image Front End, Global Distributed Switch Controller.
-> +      - description: IFE1 GDSC - Image Front End, Global Distributed Switch Controller.
-> +      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
-> +
-> +  power-domain-names:
-> +    items:
-> +      - const: ife0
-> +      - const: ife1
-> +      - const: top
-> +
-> +  ports:
-> +    $ref: /schemas/graph.yaml#/properties/ports
-> +
-> +    description:
-> +      CSI input ports.
-> +
-> +    properties:
-> +      port@0:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY0.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@1:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY1.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@2:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY2.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +      port@3:
-> +        $ref: /schemas/graph.yaml#/$defs/port-base
-> +        unevaluatedProperties: false
-> +        description:
-> +          Input port for receiving CSI data from CSIPHY3.
-> +
-> +        properties:
-> +          endpoint:
-> +            $ref: video-interfaces.yaml#
-> +            unevaluatedProperties: false
-> +
-> +            properties:
-> +              data-lanes:
-> +                minItems: 1
-> +                maxItems: 4
-> +
-> +              bus-type:
-> +                enum:
-> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +
-> +            required:
-> +              - data-lanes
-> +
-> +  reg:
-> +    minItems: 12
-> +    maxItems: 12
-> +
-> +  reg-names:
-> +    items:
-> +      - const: csiphy0
-> +      - const: csiphy1
-> +      - const: csiphy2
-> +      - const: csiphy3
-> +      - const: vfe0
-> +      - const: csid0
-> +      - const: vfe1
-> +      - const: csid1
-> +      - const: vfe_lite0
-> +      - const: csid_lite0
-> +      - const: vfe_lite1
-> +      - const: csid_lite1
-> +
-> +  vdda-phy-supply:
-> +    description:
-> +      0.88V supply to CSIPHY IP blocks.
-> +
-> +  vdda-pll-supply:
-> +    description:
-> +      1.2V supply to CSIPHY IP blocks.
-> +
-> +required:
-> +  - clock-names
-> +  - clocks
-> +  - compatible
-> +  - interconnects
-> +  - interconnect-names
-> +  - interrupts
-> +  - interrupt-names
-> +  - iommus
-> +  - power-domains
-> +  - power-domain-names
-> +  - reg
-> +  - reg-names
-> +  - vdda-phy-supply
-> +  - vdda-pll-supply
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/clock/qcom,gcc-sm8150.h>
-> +    #include <dt-bindings/clock/qcom,sm8150-camcc.h>
-> +    #include <dt-bindings/interconnect/qcom,sm8150.h>
-> +    #include <dt-bindings/power/qcom-rpmpd.h>
-> +
-> +    soc {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +
-> +        camss: camss@ac65000 {
-> +            compatible = "qcom,sm8150-camss";
-> +
-> +            reg = <0 0xac65000 0 0x1000>,
-> +              <0 0xac66000 0 0x1000>,
-> +              <0 0xac67000 0 0x1000>,
-> +              <0 0xac68000 0 0x1000>,
-> +              <0 0xacaf000 0 0x4000>,
-> +              <0 0xacb3000 0 0x1000>,
-> +              <0 0xacb6000 0 0x4000>,
-> +              <0 0xacba000 0 0x1000>,
-> +              <0 0xacc4000 0 0x4000>,
-> +              <0 0xacc8000 0 0x1000>,
-> +              <0 0xaccb000 0 0x4000>,
-> +              <0 0xaccf000 0 0x1000>;
-> +
-> +            reg-names = "csiphy0",
-> +              "csiphy1",
-> +              "csiphy2",
-> +              "csiphy3",
-> +              "vfe0",
-> +              "csid0",
-> +              "vfe1",
-> +              "csid1",
-> +              "vfe_lite0",
-> +              "csid_lite0",
-> +              "vfe_lite1",
-> +              "csid_lite1";
-> +
-> +            interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 448 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>,
-> +              <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>;
-> +
-> +            interrupt-names = "csiphy0",
-> +              "csiphy1",
-> +              "csiphy2",
-> +              "csiphy3",
-> +              "vfe0",
-> +              "csid0",
-> +              "vfe1",
-> +              "csid1",
-> +              "vfe_lite0",
-> +              "csid_lite0",
-> +              "vfe_lite1",
-> +              "csid_lite1";
-> +
-> +            power-domains = <&camcc IFE_0_GDSC>,
-> +              <&camcc IFE_1_GDSC>,
-> +              <&camcc TITAN_TOP_GDSC>;
-> +
-> +            power-domain-names = "ife0",
-> +              "ife1",
-> +              "top";
-> +
-> +            clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
-> +              <&camcc CAM_CC_CPAS_AHB_CLK>,
-> +              <&camcc CAM_CC_CSIPHY0_CLK>,
-> +              <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
-> +              <&camcc CAM_CC_CSIPHY1_CLK>,
-> +              <&camcc CAM_CC_CSI1PHYTIMER_CLK>,
-> +              <&camcc CAM_CC_CSIPHY2_CLK>,
-> +              <&camcc CAM_CC_CSI2PHYTIMER_CLK>,
-> +              <&camcc CAM_CC_CSIPHY3_CLK>,
-> +              <&camcc CAM_CC_CSI3PHYTIMER_CLK>,
-> +              <&camcc CAM_CC_IFE_0_AXI_CLK>,
-> +              <&camcc CAM_CC_IFE_0_CLK>,
-> +              <&camcc CAM_CC_IFE_0_CPHY_RX_CLK>,
-> +              <&camcc CAM_CC_IFE_0_CSID_CLK>,
-> +              <&camcc CAM_CC_IFE_1_AXI_CLK>,
-> +              <&camcc CAM_CC_IFE_1_CLK>,
-> +              <&camcc CAM_CC_IFE_1_CPHY_RX_CLK>,
-> +              <&camcc CAM_CC_IFE_1_CSID_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_0_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_0_CPHY_RX_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_0_CSID_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_1_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_1_CPHY_RX_CLK>,
-> +              <&camcc CAM_CC_IFE_LITE_1_CSID_CLK>,
-> +              <&gcc GCC_CAMERA_AHB_CLK>,
-> +              <&gcc GCC_CAMERA_HF_AXI_CLK>,
-> +              <&gcc GCC_CAMERA_SF_AXI_CLK>;
-> +
-> +            clock-names = "camnoc_axi",
-> +              "cpas_ahb",
-> +              "csiphy0",
-> +              "csiphy0_timer",
-> +              "csiphy1",
-> +              "csiphy1_timer",
-> +              "csiphy2",
-> +              "csiphy2_timer",
-> +              "csiphy3",
-> +              "csiphy3_timer",
-> +              "vfe0_axi",
-> +              "vfe0",
-> +              "vfe0_cphy_rx",
-> +              "vfe0_csid",
-> +              "vfe1_axi",
-> +              "vfe1",
-> +              "vfe1_cphy_rx",
-> +              "vfe1_csid",
-> +              "vfe_lite0",
-> +              "vfe_lite0_cphy_rx",
-> +              "vfe_lite0_csid",
-> +              "vfe_lite1",
-> +              "vfe_lite1_cphy_rx",
-> +              "vfe_lite1_csid",
-> +              "gcc_ahb",
-> +              "gcc_axi_hf",
-> +              "gcc_axi_sf";
-> +
-> +            iommus = <&apps_smmu 0x840 0x620>,
-> +              <&apps_smmu 0x860 0x620>,
-> +              <&apps_smmu 0xA40 0x620>,
-> +              <&apps_smmu 0xA60 0x620>,
-> +              <&apps_smmu 0xC40 0x620>,
-> +              <&apps_smmu 0xC60 0x620>,
-> +              <&apps_smmu 0xE40 0x620>,
-> +              <&apps_smmu 0xE60 0x620>;
-> +
-> +            interconnects = <&gem_noc MASTER_AMPSS_M0 0 &config_noc SLAVE_CAMERA_CFG 0>,
-> +                <&mmss_noc MASTER_CAMNOC_HF0 0 &mc_virt SLAVE_EBI_CH0 0>,
-> +                <&mmss_noc MASTER_CAMNOC_HF1 0 &mc_virt SLAVE_EBI_CH0 0>,
-> +                <&mmss_noc MASTER_CAMNOC_SF 0 &mc_virt SLAVE_EBI_CH0 0>;
-> +
-> +            interconnect-names = "cam_ahb",
-> +              "cam_hf_0_mnoc",
-> +              "cam_hf_1_mnoc",
-> +              "cam_sf_0_mnoc";
-> +
-> +            vdda-phy-supply = <&vreg_l5a_0p88>;
-> +            vdda-pll-supply = <&vreg_l3c_1p2>;
-> +
-> +            ports {
-> +                #address-cells = <1>;
-> +                #size-cells = <0>;
-> +
-> +                port@0 {
-> +                    reg = <0>;
-> +
-> +                    csiphy_ep0: endpoint {
-> +                        data-lanes = <0 1 2 3>;
-> +                        remote-endpoint = <&sensor_ep>;
-> +                    };
-> +                };
-> +            };
-> +        };
-> +    };
-> 
+This is one complete, self-contained series of three patches: the binding,
+the role-switch lookup it needs, and the DWC3 arbitration between the two
+connectors.  Nothing is to be applied on top of it, and no patch of it is
+posted separately.  It supersedes the v4 series
+(<20261026123211.243224-1-xiaqinghuan@mail.ustc.edu.cn>), the v5 fixups
+(<20261031150154.1106455-1-xiaqinghuan@mail.ustc.edu.cn>) and the 11-04
+posting (<20261104032706.210042-1-xiaqinghuan@mail.ustc.edu.cn>) in full:
+their content is folded into the three patches below.  3/3 additionally
+answers the two High findings of the review of the 11-04 posting.
+
+Two connectors on one DWC3 controller
+=====================================
+
+The board (Lenovo Legion Y700 4th gen, SM8750) wires the Super Speed pairs
+of two USB-C receptacles to separate PHYs, while the High Speed D+/D- pair
+is shared through a 2:1 mux controlled by a single GPIO.  Both connectors
+are data-role dual and hand their role to the SoC through pmic-glink, so
+the controller has to arbitrate between two independent role requests and
+move the shared data path before it is reinitialised.
+
+	usb@a600000 {
+		port-select-gpios = <&tlmm 29 GPIO_ACTIVE_HIGH>;
+
+		ports {
+			port@0 {			/* HS path, connector 0 */
+				endpoint {
+					remote-endpoint = <&usb_0_dwc3_hs>;
+					usb-role-switch;
+					mux-state = <0>;
+				};
+			};
+
+			port@1 {			/* Super Speed, QMP PHY */
+			};
+
+			port@2 {			/* HS path, connector 1 */
+				endpoint {
+					remote-endpoint = <&usb_1_dwc3_hs>;
+					usb-role-switch;
+					mux-state = <1>;
+				};
+			};
+		};
+	};
+
+Series layout
+=============
+
+1/3 documents that wiring: "port-select-gpios", one High Speed port per
+    connector (port@0 and port@2, port@1 being the Super Speed lane), and,
+    on the endpoint of each of those ports, "mux-state" (the GPIO level
+    that reaches that connector) and "usb-role-switch" (this connector has
+    its own role-switch input).
+
+2/3 adds usb_role_switch_at_endpoint(), so a role switch registered
+    against an OF graph endpoint can be found by the consumer that owns
+    the other end of that link.  Without it the endpoint registration in
+    1/3 would have no lookup path.
+
+3/3 implements the arbitration in DWC3: one role switch per connector, the
+    oldest pending request wins, the GPIO is flipped inside
+    __dwc3_set_mode() after the previous host or gadget instance is torn
+    down, and a connector reads back the role it requested.
+
+Reply to the two procedural comments
+====================================
+
+Krishna Kurapati wrote, on the v5 posting: "If v5 is being sent, it must
+not to be applied on top of v4.  It must include (v4 + any additional
+changes/improvements)."  Agreed, and that is what this series is.  v4
+1/3..3/3 and the v5 fixups were squashed per patch instead of stacked:
+1/3 = v4 1/3 + v5 1/2, 2/3 = v4 2/3 + the usb_role_switch_at_endpoint()
+hunk of v5 2/2, 3/3 = v4 3/3 + the remaining hunks of v5 2/2.  Applying
+this series to a v7.3-rc7 tree gives the same three source files as
+"v4 + v5", and there is no "1/2 on top of 3/3" left anywhere.
+
+Krzysztof Kozlowski wrote: "Anyway, this is misthreaded - missing rest of
+patchset.  Please read submitting patches document and switch to b4", and
+separately dropped v4 1/3 ("Unanswered Sashiko comments plus some
+confusion with duplicated posting of v5 without the rest, dropping").
+
+Both points are taken.  Posting v5 as a two-patch fixup and then re-sending
+only its 1/2 on 11-02 was wrong: a series has to be complete and threaded.
+This posting is the complete series as one thread -- cover plus 1/3..3/3,
+"base-commit" at the bottom, and In-Reply-To pointing at this cover only,
+so it applies with `b4 shazam` (or `git am`) as-is.  Nothing is re-sent
+piecemeal; the 11-02 1/2 has no successor and should be ignored.  On the
+"git log" remark: the per-revision account now lives only here, the commit
+messages describe the code as it finally is.
+
+Dropping v4 1/3 is fine: this 1/3 replaces it, together with the schema
+holes that were reported against it.  No action is needed to "un-drop" it.
+
+Response to the review comments folded into these patches
+=========================================================
+
+Sashiko on the binding (three Medium findings):
+
+ - "hs-port patternProperties does not match what the driver expects /
+   escapes unevaluatedProperties": fixed, the endpoint name pattern is the
+   one graph.yaml uses, so an unnumbered endpoint or endpoint@2+ is
+   validated too (1/3).
+
+ - "usb-role-switch should not be required only indirectly": fixed, the
+   controller node must carry "usb-role-switch" whenever port-select-gpios
+   is present, and dr_mode is required to be "otg".  This is a driver
+   fact, not schema cosmetics: without it dwc3_get_dr_mode() forces dr_mode
+   back to peripheral, dwc3_get_extcon() skips the role-switch branch and
+   dwc3_drd_init() never sets the mux up, so a DT that passed the old
+   schema did not describe a DT the driver could act on (1/3).
+
+ - "mux-state complementarity is not expressed": fixed, the pair is one
+   oneOf over the two assignments, so two connectors both claiming
+   mux-state = <1> are rejected (1/3).
+
+ - standing question, "model the board mux with the standard
+   mux-controls/mux-states properties": kept the graph-endpoint shape.  The
+   arbitration is "earliest request wins" between two connectors that must
+   each be a usb role switch consumer, and the endpoint is the fwnode the
+   connector is attached to; a mux_control consumer has no per-connector
+   identity to hang that on, and drivers/usb/ has no mux_control consumer
+   to follow as precedent.  Happy to reshape if the DT maintainers prefer
+   the standard property.
+
+Sashiko on usb: roles (one High finding):
+
+ - "-EPROBE_DEFER is swallowed by !IS_ERR_OR_NULL(sw)": fixed, the error is
+   passed up, as suggested (2/3).  This was also the root cause we hit on
+   real hardware: the UCSI glue kept a NULL switch and the connectors never
+   bound.
+
+Sashiko on usb: dwc3 (five High and three Medium findings):
+
+ - "dwc3_set_mode() under dwc->lock self-deadlocks": fixed, the request
+   decision and its issue are paired by mux->lock, and dwc->lock is only
+   held while individual fields are updated (3/3).
+
+ - "glue layer is never notified": fixed, dwc3_pre_set_role() is called
+   with the effective role, outside spinlocks, before dwc3_set_mode(),
+   mirroring the single-connector path (3/3).
+
+ - "same-role request that moves the data path to the other connector":
+   fixed, dwc3_set_prtcap() only clears SUSPHY when PRTCAP changes, so that
+   case now clears it explicitly (3/3).
+
+ - "registration earlier than the initial mode request races with a
+   connector driver": fixed, register and request the initial mode under
+   mux->lock, tear down in reverse order on failure (3/3).
+
+ - "fwnode references leak on error paths": fixed, dwc->role_mux is
+   published before the error paths that used to leak them, so
+   dwc3_role_mux_exit() can unwind (3/3).
+
+ - "sticky mux->error is reported to the next caller after it already
+   committed its own request": fixed, the sticky value is gone; a failed
+   data-path switch is logged and counted per connector (3/3).
+
+ - found while testing on the board, same area: dwc3_mux_role_get()
+   returned USB_ROLE_NONE for a connector that did not own the data path,
+   which hid its pending request; the connector driver then never sent the
+   set_role(USB_ROLE_NONE) that clears it, and the stale request kept
+   winning arbitration after unplug.  get() now reports the requested role
+   (3/3).
+
+ - "add dwc3_pre_set_role()" (raised against v2): this is exactly what the
+   folded code does now, both in the single-connector and the mux path.
+
+Response to the review of the 11-04 posting
+==========================================
+
+Sashiko reported two High findings against 3/3 of the 11-04 posting.  Both
+were real, both are fixed here, and the fixes are the only code change
+relative to that posting.
+
+ - "torn port and role state in dwc3_mux_role_set()": mux->desired_port was
+   written under dwc->lock, the lock was dropped across
+   dwc3_pre_set_role() (which may sleep), and dwc3_set_mode() re-took it to
+   write dwc->desired_dr_role.  A mode worker already pending from an
+   earlier request could therefore snapshot the new connector together with
+   the old role, move the port-select GPIO and bring the controller up in
+   the role of the previous request.  Fixed by publishing the connector and
+   the mode request in one critical section: dwc3_set_mode_port() sets
+   dwc->desired_dr_role and mux->desired_port under a single hold of
+   dwc->lock, after dwc3_pre_set_role(), and __dwc3_set_mode() snapshots
+   both under the same lock.  No window is left in which the pair can be
+   observed half-updated, and the worker cannot start before the glue layer
+   has been notified.  In the same area: a request that arrives while the
+   worker is already running did not re-queue it, because queue_work()
+   returns false for a running work item; the worker now compares its
+   snapshot against the current request at the end of the run and re-queues
+   itself, so the newest request is not lost.  A failed data-path switch is
+   not retried, because the comparison is against the snapshot.
+
+ - "race and reversed teardown order in dwc3_role_mux_init()": once port 0's
+   switch was registered, a connector could call set() while the mux was
+   still being set up.  On a failure while registering port 1, the error
+   path unlocked mux->lock, ran cancel_work_sync() and only then
+   unregistered that switch, so the call could queue the mode work after the
+   drain and have it run on a half-torn-down mux; and dwc3_role_mux_exit()
+   does not synchronise with mux->lock, so the same call could read
+   dwc->role_mux after the error path had cleared it.  Fixed by refusing
+   requests until the mux is fully set up, and by ordering the teardown:
+   mux->ready is cleared under mux->lock (set() takes that lock for its whole
+   duration, so no request is in flight once it is held), then the switches
+   are unregistered, then the work is drained.  dwc->role_mux is no longer
+   cleared at all: it is devm-managed, so clearing it could only turn a late
+   request into a NULL dereference.  With mux->ready gating, a request that
+   arrives during setup is refused with -ENODEV instead of racing with the
+   initial mode request, so a failed setup has no host or gadget instance
+   left to tear down either.
+
+Changes relative to the previous postings
+=========================================
+
+ - 11-04 posting -> this series: 3 files changed, 92 insertions(+),
+   11 deletions(-) in drivers/usb/dwc3/{core.c,core.h,drd.c}; 1/3 and 2/3
+   are unchanged.  That is exactly the two High fixes above.
+ - v4 1/3..3/3 -> this series: 5 files changed, 143 insertions(+),
+   80 deletions(-) (binding 1/3 and core.c/core.h/drd.c/class.c), which
+   is the folded v5 fixup plus one documentation fix: after the reshape to
+   port@0 + port@2 the "port-select-gpios" description still said
+   "a numbered endpoint of port@0"; it now names port@0/port@2 and their
+   endpoint.  Description only, no schema change.
+ - v5 1/2..2/2 -> this series: 3 lines of that description, nothing else;
+   v5's code changes are bit-identical inside 1/3, 2/3 and 3/3.
+
+Testing
+=======
+
+Mechanical, all re-run on this exact series:
+
+ - checkpatch.pl --strict --patch - (mbox on stdin): 0 errors, 0 warnings,
+   0 checks for each of the three patches (138 / 63 / 553 lines).
+ - dt-doc-validate on snps,dwc3-common.yaml: clean, exit 0.
+ - make W=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- for
+   drivers/usb/dwc3/ and drivers/usb/roles/ with all 19 dwc3 glue drivers
+   built as modules: 0 warnings, 0 errors.
+ - git am of 1/3..3/3 on f66469d9905b (torvalds master, 2026-11-06): applies
+   cleanly patch by patch, and the
+   resulting tree is identical to the series tip.
+ - scripts/check-series-selfcontained.sh on the series directory against
+   the pristine base: PASS, 3/3 patches replayed in order.
+ - git send-email --dry-run of the produced mbox set: 1 cover + 3 patches,
+   threaded with In-Reply-To on the cover only.
+
+Board behaviour: the same driver source runs on this board's daily kernel
+and registers both per-connector switches
+(a600000.usb-port0-role-switch, a600000.usb-port1-role-switch).  With
+function_graph tracing, 12 consecutive plug/unplug cycles each went
+usb_role_switch_set_role -> dwc3_mux_role_set -> glue notifier ->
+dwc3_set_mode with zero WARNING/BUG/lockdep splats; USB data and charging
+were stable throughout, and /sys/class/typec shows port0, port1 and a
+bound partner.
+
+Two honest limitations: (a) the arbitration detail -- which connector wins
+a simultaneous request -- is verified by code reading and by the stale
+request test above, not by a complete per-port role-value trace; (b) the
+behaviour evidence comes from that daily kernel, not from a v7.3-rc7
+kernel with this series applied, because pristine-lineage kernels do not
+bring this board up yet for reasons unrelated to USB (no display/platform
+support).  I can re-run the plug sequence on request.
+
+Links
+=====
+
+11-04 posting: https://lore.kernel.org/linux-usb/20261104032706.210042-1-xiaqinghuan@mail.ustc.edu.cn/
+review of 11-04 (two High findings): <sashiko-outbox-196628@kernel.org>
+v4: https://lore.kernel.org/linux-usb/20261026123211.243224-1-xiaqinghuan@mail.ustc.edu.cn/
+v5: https://lore.kernel.org/linux-usb/20261031150154.1106455-1-xiaqinghuan@mail.ustc.edu.cn/
+Krishna's reply: <ba544091-1da4-4616-b1d5-fe23f32679d9@oss.qualcomm.com>
+Krzysztof's reply: <20261102-armored-arcane-serval-43faf4@quoll>
+v4 1/3 dropped: <20261102-screeching-utopian-avocet-492500@quoll>
+
+Qianhui Xu (3):
+  dt-bindings: usb: snps,dwc3: describe two connectors sharing one HS
+    bus
+  usb: roles: look up role switches attached to a graph endpoint
+  usb: dwc3: support two connectors sharing one HS data bus
+
+ .../bindings/usb/snps,dwc3-common.yaml        | 116 ++++++-
+ drivers/usb/dwc3/core.c                       |  93 +++++-
+ drivers/usb/dwc3/core.h                       |  43 +++
+ drivers/usb/dwc3/debugfs.c                    |   4 +
+ drivers/usb/dwc3/drd.c                        | 287 +++++++++++++++++-
+ drivers/usb/roles/class.c                     |  45 +++
+ 6 files changed, 583 insertions(+), 5 deletions(-)
+
+
+base-commit: f66469d9905b39d2c260a15d7d6db450f4db67c1
 
