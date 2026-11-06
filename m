@@ -1,47 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=141.14.17.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793962696;
-	b=m7/BedtoU/NXC8qIw1fJLE/cp0BfMS1Qq95wGwrVAuOAOerHZMoJBQ32R0oGkz5+YINb
-	 Zqo0yekgyiGhhccS2OtD5blvzL8R7MnsK/vaEzqHIlj2qo24qPc5TGQcvxdf+kQRn/Pl8
-	 /gDJ8iK2f+SpbCP+CnponjjUl37LLvoG3/SWDBqTdo2LYV/dSotZY+hmuMseky770mUzz
-	 rataPUSMQyOCESeRlRo0gqfwer/+JiDPcEbf7aMy4Y66qsBZlbUGpp2LhFbYjVM42wtKX
-	 2U5OeldO2fvo8fwzINNAhDHkbrvgXlvuv8bOO9lH4EuofEvZ7U1FZ7E7Hut83zdruWA==
+	t=1793963097;
+	b=uXcM2l6M45uT752SuOvm+NHDJgqwFLLbSXQRSxxpF1m3sZNfNnXW/XlVlJaSEGyU9KVj
+	 lSyOKrK4ngh+3PWoBHT5Eg/SALINGcAQ/m3SJT4G6V9rdhnF06VpP2D7CwQpmSN0mxl4E
+	 flzH5mX+BtNahIlYyJ3m92qcTwxeI4iq9IxdJXz7oKlXGXIGKADQOvTguaHrvjcdaVofZ
+	 FqWiyzp41T1MbcCNXCOsJ82gd4zX8PYMiRcU+w9QHgiD9sxQNdEs1RDEomrrTys7gA7wP
+	 EAUThfjRgqw5bDHs3vQZ721j4sXQVj2xLeCWua+mLnMBhl7XSaoqMmQZA53BP/ncD2g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793962696;
-	h=DMARC-Filter:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:DKIM-Signature;
-	bh=SigG/up2gMWRUySXAnA/Afal/pPumps4/i8yYtBo2BY=;
-	b=t6v7jYZc2LYgOqE0Rt6qlrwFVHntM+IOuYCkznsfXYN4BaIaM6FrZzd1KnYkUeHb1CNo
-	 dyemWrwE8Zi/Rg2hZKgtsA0EFGfbM42G5WIm8+qq9n/CNcmQflfs+a3lawkm83lpmzKOK
-	 9hndtWmFsyJi5MOPApKPF1qLIj/+fAn+DoNKsJhW90W1oD/UeYxN2VUQOocfWUeoxmNDd
-	 ZQNe4l0+f7eTrerKAvkYA8e3oK4T/ms3A/+Y5406BDHGYuPicdvYlyv5KiAoE1BYeFwR6
-	 8byRTr6k/pSO9e7mGb+VDUEUCjAEPdUaP/npVpC7NECGC1vZfhfeil1KRTZ9hpjBx4w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793963097;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=840l1+NRCJffqP8jGWZU81yXph/OTtF9PmFfJpjGlIQ=;
+	b=ZKrOIhQMODz3Sy8WOkPEImYNWlKk/vgz625iiDD9dokXz8olX1T0P4geIYsp5teqEN3l
+	 QCGoQKlrQpsMdYxGNC4PMMPrQB4NMGa5r3QNQ72WSZgIYIyRsPXuLPQ8IdVuWdqhOT7PB
+	 Sjj9vsTydEJ7DJdGlXRuPrWiYjVf3563t3Zfa0ODl1BZmjgklrlErg6MOtNSF3RuMjA+2
+	 HHo9zmpcuxN+E1ag5ez24N6wp2wMTsM7+IByVgrkeyVFsGZchjV8pSv1VZFOJ54XSwIXP
+	 +X01q9Y8OkQZ8m6rzNZiOwVC21rx4ymX2Gymz3qqpbOpDonoMMCG1/1tZCzpcFgdQEg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=molgen.mpg.de;
-	spf=pass smtp.mailfrom=molgen.mpg.de;
-	dkim=pass header.d=molgen.mpg.de header.i=@molgen.mpg.de header.a=rsa-sha256 header.s=20260906 header.b=gqugLq4D;
-	arc=none smtp.remote-ip=141.14.17.11
-Received: from mx3.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
+	dmarc=pass header.from=gondor.apana.org.au;
+	spf=pass smtp.mailfrom=gondor.apana.org.au;
+	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=nY37wDZi;
+	arc=none smtp.remote-ip=180.181.231.80
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CC56606A326;
-	Fri,  6 Nov 2026 10:58:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5CC56606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=molgen.mpg.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=molgen.mpg.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59531606A326;
+	Fri,  6 Nov 2026 11:04:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59531606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=molgen.mpg.de header.i=@molgen.mpg.de header.a=rsa-sha256 header.s=20260906 header.b=gqugLq4D
-Received: from [192.168.0.5] (ip-095-090-245-054.vkd79.pools.vodafone-ip.de [95.90.245.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: pmenzel)
-	by mx.molgen.mpg.de (Postfix) with ESMTPSA id D8FC64C2F3FFE7;
-	Fri, 06 Nov 2026 11:57:42 +0100 (CET)
-Message-ID: <56866622-a854-4aae-9e97-40eecc4adbe1@molgen.mpg.de>
-Date: Fri, 6 Nov 2026 11:57:41 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=nY37wDZi
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=840l1+NRCJffqP8jGWZU81yXph/OTtF9PmFfJpjGlIQ=; 
+	b=nY37wDZi0jBnlX/oA7zBeeEBGxGYFwFX8l8my1sOEs8KnCoSCytMq3UOEVoCFeJm3HVY5cox0UK
+	uGl26azA0WwKCBCeaOmffBfKdoAVfNaaqAR5ZpB4cIxbhfRbJSYtcQlplYv6qkglrNhNPPnESsfL/
+	SSYTpkxArvZX1DKpqYj91k7l02cK/Zgj5PtfV9To3IuP/4jpt2i16r+UfYGchmRUc0Ukz8GZoVXyf
+	9NKQty7SaeEY5+vpCpe6fbvhF8F8Z3XhB9P4RFTwEkPBKnQolwG8gKp/DGAUzKMdm/6uIZwQyqOmv
+	VX1kNAxk2IUtwuOsgAh5vU0rQVhP7vwPayeA==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1xPHkP-0000000BqNb-1p4G;
+	Fri, 06 Nov 2026 19:04:42 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 06 Nov 2026 19:04:41 +0800
+Date: Fri, 6 Nov 2026 19:04:41 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: ZhaoJinming <zhaojinming@uniontech.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Thara Gopinath <thara.gopinath@linaro.org>,
+	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 0/3] crypto: qce - fix CCM AAD buffer leak and the AEAD
+ error paths
+Message-ID: <au20Sf0r0Ck6Mc53@gondor.apana.org.au>
+References: <20261016-fix-qce-ccm-adata-leak-v1-0-f54a82af2de0@uniontech.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,100 +68,20 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Bluetooth: qca: Disable SoC debug logging for WCN3990
-To: Hex Lindqvist <hex@freenixos.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
- Marcel Holtmann <marcel@holtmann.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- linux-bluetooth@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261105201952.1556185-1-hex@freenixos.com>
-Content-Language: en-US
-From: Paul Menzel <pmenzel@molgen.mpg.de>
-In-Reply-To: <20261105201952.1556185-1-hex@freenixos.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=molgen.mpg.de; s=20260906; 
-	t=1793962663; 
-	h=from:from:subject:date:message-id:mime-version:content-type:content-transfer-encoding; 
-	bh=SigG/up2gMWRUySXAnA/Afal/pPumps4/i8yYtBo2BY=; 
-	b=gqugLq4D1JCEXa6fBfbmfyeBVO3p0y0uVSIa8cPMj3DKqWuZrgkFrWkLPtFWeTcXzOGHtSShm3w4
-	FrksYy49XTzE1VVP5Ws0U5Re5MUu6Zc7MrThLQcWIw1soIFk899Ztt8+ogNw+VEK9kB6ozFRO0egx/
-	z0OGdzhDRL/skemdipB81xasrakPlBvay4cDEip0vchA6W4dFfQDC1fBDYLNYqX0WVxUPlJ4PLNnu8
-	wezlFPs2BtGdwRODLZ4QBzM0j49Ju770sC6GQyJG3iswu5cqB6ZWYmNB8yLg3HDgNqmb/OOI6aN7/h
-	H5t/9pd+OHiM0hUMnDbvzfe24RBQb57Q==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261016-fix-qce-ccm-adata-leak-v1-0-f54a82af2de0@uniontech.com>
 
-Dear Hex,
+On Fri, Oct 16, 2026 at 10:09:42AM +0800, ZhaoJinming wrote:
+> This series fixes a memory leak in the QCE AEAD driver together with two
+> bugs in the error handling around it.
 
+Please check the Sashiko review:
 
-Thank you for your patch.
+https://sashiko.dev/#/patchset/20261016-fix-qce-ccm-adata-leak-v1-0-f54a82af2de0%40uniontech.com
 
-Am 05.11.26 um 21:19 schrieb Hex Lindqvist:
-> Unless the host turns it off, the WCN3990 firmware sends debug logs to
-> the host as ACL packets on handle 0x2EDC. hci_qca passes them on as
-> diagnostic packets, which the core copies to the monitor socket and then
-> frees. On a OnePlus 6T (SoC version 0x40010214, ROM version 0x0201) that
-> is a packet of about 490 bytes every seven seconds on average, for as
-> long as the controller is up.
-
-Does Linux log anything about this? Maybe, also paste an excerpt from 
-btmon capture?
-
-> The driver already turns this logging off after the firmware download
-> for WCN3950 and WCN3991. Do the same for WCN3990.
-> 
-> Tested on a OnePlus 6T. With the crbtfw21.tlv rampatch from the OnePlus
-> firmware, no diagnostic packets arrive any more. The controller also
-> accepts the command with the crbtfw21.tlv from linux-firmware.
-
-Both firmware file names are the same. What is the difference?
-
-> An AI assistant helped find and test this change and drafted this
-> message.
-> 
-> Signed-off-by: Hex Lindqvist <hex@freenixos.com>
-> ---
-> 
-> Notes:
->      Test details (OnePlus 6T, crnv21.bin from the OnePlus firmware, counts
->      from btmon):
->      
->      - v7.2.10 with the postmarketOS sdm845 patches, OnePlus crbtfw21.tlv:
->        87 diagnostic packets in a ten-minute capture started a minute after
->        boot without this patch, none with it.
->      - bluetooth-next (31333770a468), same firmware, btmon from boot: 42 in
->        the first seven minutes without this patch, none with it; the command
->        succeeded at every setup. Plain bluetooth-next hangs this phone after
->        about seven minutes with or without this patch, hence the shorter
->        window.
->      - v7.2.10 with linux-firmware's crbtfw21.tlv (its only WCN3990
->        rampatch): the controller returns success for the command (btmon
->        during setup; not a ten-minute run).
->      
->      Not tested on other WCN3990 boards.
-> 
->   drivers/bluetooth/btqca.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/bluetooth/btqca.c b/drivers/bluetooth/btqca.c
-> index 60735b70d89a..1db2cc626def 100644
-> --- a/drivers/bluetooth/btqca.c
-> +++ b/drivers/bluetooth/btqca.c
-> @@ -944,6 +944,7 @@ int qca_uart_setup(struct hci_dev *hdev, uint8_t baudrate,
->   	case QCA_QCA2066:
->   	case QCA_QCA6390:
->   	case QCA_WCN3950:
-> +	case QCA_WCN3990:
->   	case QCA_WCN3991:
->   	case QCA_WCN6750:
->   	case QCA_WCN6855:
-
-The diff looks good.
-
-Reviewed-by: Paul Menzel <pmenzel@molgen.mpg.de>
-
-
-Kind regards,
-
-Paul
+Thanks,
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
