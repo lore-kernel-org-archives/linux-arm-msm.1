@@ -1,110 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793952006;
-	b=r9L7O2B1v7vkt0H+mZR+EYom30gIodl0mxuUBoTA53L5KkmQwYmKF5GORPXRpg7ZHZue
-	 qTMr3Z8LqvM8EJzD08fHsOwHcVlJTvxqt6EIVV+jPM4ltr3kXXt787ffzJp4M5WRgZuhI
-	 YlDWXAFedQlGjb6FOqRJG8CNNCxWhpWtgYpSTapYF5DmfBtrvHV9w7B2pyVNWRBvfHEQ2
-	 hNquce3TcoHTH4TxByrnFbSI1vhtV0vh4TJ6IT33g5Rczadize+REGr0azE/RqERzUw1p
-	 pHmRd8G0MfnUjv0QhhSQiP0p2kpy1mamLaLa2qNFfxov4WkTCYaDXyWZGvvGv1icXrw==
+	t=1793952017;
+	b=wxd0FznkSnowdzIMaTa5n6BWl/g8OWJzUHIHePA6O7vQgR3ZEl5nB+8k3RUWta1rZrr8
+	 VnC4TVbtKjmFbZF12MeVRIuR/Q0BVMxYn6gZvBWG1jd+ak+zwahrfW3UIc6GjWFJcuqSD
+	 BLFHLyOJCpJs/r5dI4PbwUe/XlxtM7I2k2h6eCOyjVy1TQHc3LAlVGn/Io5Y6XtEfNWbg
+	 WGU0SF8aHmMxkN2eCujFrfrvlciRM2DhDikOmwXYcgM2kd6ADOIod2dWPMAoJ6UTnTblk
+	 nCW5RBtENigupAhnTtpeVWAkUMLJc2aYW+enTfvZxAwUF//fGv+GQkM4pl5yRTiFyAg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793952006;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793952017;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=w+gMWz1mqLi3ntza9kU1FJ9p4AdvGdZcMlMdwkcECG4=;
-	b=qtjNzYh8KMSRWa5sBVptQv4cm/7PrVntRCjXW577Ei+c1HEeu2IhphcYEKgTRSTlqjAX
-	 G7LqZA8C8tAig6A4wVqotSaZuQVK17/h4EWuC8tv50ubzC148cUOGkEov0ICnHze7vqGh
-	 1nJ0zmIK+PD56BBx5jtpOEzPtU9hKprU3FYTgVHTbYsK04rlqpeqlpSN1Bc3S5dNXZuGW
-	 1lsUOu7Lvvny0+LCCBeMPGBeJrMehtuahRyfTB2vclUaa+FiDqCLHcaZPI+ut0B1fAlQy
-	 y7HFtDF4gcfy1LW9X6c6tBtpumUlslrivsbp+geaU57rCe2JeWRDw1WsW8XMRZ+qVmQ==
+	bh=wz18nwrA8O8X0KkP8lXwj4+kriyIA00I4MM2Y2HUmjI=;
+	b=KBzMMLDyfWiPFXm7DLL4m0DhglTzRwzcGtdgGsUpEz6/iAcvPPTbbSE/gNCPu528VQvW
+	 xWCP0IFr5Z5eZNXKv0yoYUWsxVc30LYZ6evBMEmHFfDSo1V/3M6l3l+Hx/58lYXgwPIZW
+	 JNLgZ7klWJC7WvUVAppCvYJGz3w931ro/CJY7ml27Vo1G04M93lazJAx+On3nDHDCsGrj
+	 E3gcAcMpxGZ77qqWW6ghTniBVFzBb/H0MCnP9tZgDUv6XUNOqW44WS7xGKANcePTWQ4BP
+	 4X4MlpKPjCaM7H/f3iAM3ats/wSDW+1StfJ7zF7rgbo3KSEVq/JJ4VQtCExbda4DCBQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pV5ztr5G;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="erqLw/D0";
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NiBcUJvz;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IiFMkgcs;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A3BB60A2610
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 08:00:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A3BB60A2610
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3ABF60A5BD1
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 08:00:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B3ABF60A5BD1
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pV5ztr5G;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=erqLw/D0
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A67RJ2D1679504
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 08:00:06 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NiBcUJvz;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IiFMkgcs
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A67RQ1a3301541
+	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 08:00:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=w+gMWz1mqLi3ntza9kU1FJ
-	9p4AdvGdZcMlMdwkcECG4=; b=pV5ztr5Goq1HaGItyuHqxkh6B6aeKvaseHrcAP
-	/Ns4ioFNVqszYBmtEh+CttVFr6kKtkVed7xvZhykpZm/wDwLq6xhXzKInQrt1Den
-	oeoUtH1cNku4sjwhns1TwaihK3o9Lm/UqFg7qNuHl/nu7b4a9m2EPMfB7DJGTfmB
-	aaESMBNqQQWDNlC5IjhIwVm521xSkQ36B1UecKUSSRAuPZUMBzH5Px7lkDtPwjKI
-	NwiNkKulTfry2aRFnvATmFyrO5NDsP10HJqXpvyeyEI1IyFTe0WRqR8bWadWjzTj
-	lHtS+COHUBWYdqAxlFqOiEzenAPSPLmhTwnPrW/2hOFjloPA==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pc9qhk-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	wz18nwrA8O8X0KkP8lXwj4+kriyIA00I4MM2Y2HUmjI=; b=NiBcUJvz3w7Incup
+	zsFQhO6umthTu08r6g5kpkl39FFNxnYrPwujrGZx98OyfUnoaF0+kUgS9yS+A9Sa
+	Mbt87Gh6667VauGg0OWC8+2HBs5cbyIs0CcxTOWGNFvEniTdz9qnxptFxw8UgqFG
+	M6nyZchDM+JEsGeQ4XB9sZz8teI/Ke3fMzPs4gHbzXbyMKBZIYAfiiyj/jOP45i/
+	E+xtHoqMUvZMiOlBddFAcGqw/QGWa45ksdUIjNFYila9QdUdZeqrI5+Jd+bkk6ra
+	hDaOVjN1KhLY5riMHwmbiLgBF2WxJan3hmKrG5X6QRuamEC+laG7giw3FhAk4k5k
+	hRuJhA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pa1scs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 08:00:05 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8a05c820ecbso539649b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 00:00:05 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 08:00:15 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-89f9fdbabe1so553312b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 00:00:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793952005; x=1794556805; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=w+gMWz1mqLi3ntza9kU1FJ9p4AdvGdZcMlMdwkcECG4=;
-        b=erqLw/D0O8+c0JPmQosci11yZOxHJYnMDqg1Dw23uzT7Ii3gtDV/2C4VWsToBrGtue
-         bna38fAYtxVWpmbqPUm8Y09r4xztp66Ozk8+hfAkWKQ+HRx4abt2QN456m1R5jmzt9DK
-         Tns76Cr7hcLWdQi86s3yMu8gfu6ehpBfBreqH+j/RwskD/LYtgtu3LmxeL4aUdEijGtG
-         YhvXF2N2Ik/ArQwCQyqVxtAXzZTUx7e9dZ+Av8eEo6BvdBXbnehizUJ7y9aWiIk1Pg6y
-         YBZPrKfF+9L/W6bVparyH/RoMcAY/yF/Ti+A9e7g4ou8G6/tEuiQx0ij/mynCytb5xok
-         c/9Q==
+        d=oss.qualcomm.com; s=google; t=1793952015; x=1794556815; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=wz18nwrA8O8X0KkP8lXwj4+kriyIA00I4MM2Y2HUmjI=;
+        b=IiFMkgcs7v+3TkzS2HkCKikBofyNEphJ8RwzP9GHuvCAlmUsCTYlMDr0TjRHfvgcZJ
+         fc32W/tjYllyUqcdiTj0TvRLUckhPTlXZ10f9ot6xqM7kMWCbGnJlgfTX3lGqeKp+zS8
+         6fiJSVJuiUhCvASsbKAER5IYl8x8W9mQcZ1XoH7rjr7k9TkGJ/893FPlZTzNb6uNLIOg
+         nBb/jkAzmkoAtjY+ECsYqjxUCJAKxJO3G1Gx54y1trZ7TJdJdTg5mIVQKgDIAilP3yHp
+         XZ90Qk+S0E55QDe9O2fHU4EDdJKOTz7dM16SRP6lY+kU9DQENOW7sxSpfPp4PxCGRkxG
+         1T/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793952005; x=1794556805;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=w+gMWz1mqLi3ntza9kU1FJ9p4AdvGdZcMlMdwkcECG4=;
-        b=I4OOxBlDrepAG8EefQXb26Si5g1hnXiFW5y/77wT27bdweu8JUOB5FwWoMYWl08Xqo
-         aRNMW4R09WwAeBSJiPSIrl0Mvwyx9pY8yIsmgmK/AINquXtw5sem+TXCEKfEB6FVD5Xi
-         6g0GHKCgtnVn7GPKLR8BedljKzBECMKGOIb8g/sfzjnlMjSObgo4j0BBLkxeP92XBIoZ
-         qcMhcvjxPnIKs5JB9Dyi2j2Wt5jWt/yB3GXtbYv3Op6DKt6hn/aM/4IcIoEvk6iAownH
-         SASkLAe0SmLUknzDgw6yrAci2cTIiQaWy2sn8EKYjqfapmuHS9DneeLhYQ9xVN1KxIr+
-         p0gQ==
-X-Gm-Message-State: APuU4Z/CEeBUjlOOkDs0gAITYsG7eAzIogLWO/TQgVYJddc8He1W9xGI
-	xXH2H0q0Qy7r+AVJtLXNlcKUxjmUORhBKSR/n28MNSw4AlECqNVMvUqUvS0m7NScvY5R/U444ay
-	hcYqc9CYkPenprWRsooWz0X3MTlgY//QW6hNT3Fz2TYDzmDF7eVyw1Y+hoc9wo4piIh1u
-X-Gm-Gg: AYBFou2+tbAYc9Wv3DItx5iCuWeft0HbJUaygXoVWOxx35PIQHDI9IrtwxJZSjHECis
-	GMiMWcHT0x5sD9ZZ8sv1zeJjiEdmvtOKRPXFgj5yT4WfWBRb/20kzGy/QsKX1DRnx4zDIPfF1kr
-	U0xErPELhI1LnxDHXZ2SwS1ObJCGFxVmj0vNrOphDM9AdKvReWCfu/zGsCbwi4gl/qnXGMGTXQ4
-	i6XuokGd4ZFq9yCQ/P7H/x+klXRvEX5RbE8X2AMvOnNXynCtgkdRJNhQO5iVCEsw0Moiia5gtCz
-	T+1mIKikt01NLfSfamYNr7Kt00b37MeOz4HfRWzDBjgcMEuYg9Y4wqhCmy9D8cwjPQRbagizYIF
-	P+Oo8zbWRPj4Hlso9806SpRSB0NAwW3vydCdgnmWGRY8NzxjLFRgYr/YxYq2ydD/vsb3FDpMy2b
-	4sciL+YyAfiqlGGioWrG/I1iD2mrYTeODDjkCvMkFbJHuI60LFnirIZrfcZrrSO+QMX8Dz
-X-Received: by 2002:a05:6a00:928f:b0:899:5117:2ac with SMTP id d2e1a72fcca58-8b37c241174mr1517783b3a.46.1793952005104;
-        Fri, 06 Nov 2026 00:00:05 -0800 (PST)
-X-Received: by 2002:a05:6a00:928f:b0:899:5117:2ac with SMTP id d2e1a72fcca58-8b37c241174mr1517756b3a.46.1793952004593;
-        Fri, 06 Nov 2026 00:00:04 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793952015; x=1794556815;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wz18nwrA8O8X0KkP8lXwj4+kriyIA00I4MM2Y2HUmjI=;
+        b=06h3lX8TBOdZJplK6e/ZK+ZSZUdyPdMzEsr2adEkJFPdMBqvRvrMjeFXohg6fGMxns
+         gejG6CP65y6hLSe/Pxb6fWPDKm93CUxxiDikezjs2XmaHmwaLuHFC0Sq6Z4Vy31vyprJ
+         O7yudIWDZGZIVviqXYbTWVJ7V3eC3BalFHIC6EOJ58LHu69KzRuVhimTtAXJUrfkrhFO
+         Xm3VDyqVSCpAEJPr3VhfcX5xyuECtSARr30uwq64LZofj76FyM9XvX8uu9kUV1xvrKrr
+         xvrRJG0SXM860dAfefJyWdFHo65yDCcy/kV5M81kpebZG6SJwUnIaA4PyyTd0R2JdIDa
+         a0dQ==
+X-Gm-Message-State: APuU4Z8lo1ChNTDRSK539ag9gFmpa/XNwOuMp7nnb7nIh3VGazwpjALi
+	79UP0VUppEX/nZpne8d+YJ52d1LpfFNJxqjzHzdYtC4g56Ad2edt/7rOr4JY3lTnZaHrweb1BlS
+	sWQ/LsSa6FM5ieDp/C/1c/Jx2vFvBuzJnw5g8TCtAPAJyJH0ADf9YkmnpMba0WEj56Za7
+X-Gm-Gg: AYBFou3EhSX7gAQx4B9Rcd2WSqNNg19oR9IeDAFW1HqQVcbny+uJwADVlLPAtSJI3/0
+	ceygHYNridF3FxtoAJsMY3xVM19mrbYiKJX7T4pYx4lztaMnOUk2k1LHlRd5M3L5SqniAm/UKRp
+	iUU89VHdynq7NcLVZrdObjjiOCpVkzH9LIqSJXQwDXpO+tT9AOBPD9fSf+80wpmdbd2eKMUTjA0
+	Qv2fo3CLPMWaHMBU8pwTrw5B6PTfJ/chIZdxULJ4I4nzeRkQXds3CpwiwH6docci90PBlVj0r/+
+	ANO4fUM4uxUP8eWWmUD90eudZHHV1dW7qI6yXtUEvAmUm1v9GYcM4TndGUXDXfM3obl9AfzQ9KG
+	t1Wqpmx1K0SgGxMMx7kOtKDySglcJJGRQ5TOFrPUUc1fht7SSGZus35AFZBL6S1btcgXosDhmmg
+	dowKaUBl6j20MWN4Suotkj2dTm/TzsKmi55dezwWWEA3aYy+OxFuS0quZUi9IxJGWSIUtI
+X-Received: by 2002:a05:6a00:889:b0:89f:6989:cb9b with SMTP id d2e1a72fcca58-8b37b5713b4mr1677979b3a.27.1793952014499;
+        Fri, 06 Nov 2026 00:00:14 -0800 (PST)
+X-Received: by 2002:a05:6a00:889:b0:89f:6989:cb9b with SMTP id d2e1a72fcca58-8b37b5713b4mr1677927b3a.27.1793952013977;
+        Fri, 06 Nov 2026 00:00:13 -0800 (PST)
 Received: from hu-pankpati-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8b359dd36d3sm354529b3a.37.2026.11.06.00.00.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8b359dd36d3sm354529b3a.37.2026.11.06.00.00.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 00:00:04 -0800 (PST)
+        Fri, 06 Nov 2026 00:00:13 -0800 (PST)
 From: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Subject: [PATCH 0/2] pinctrl: qcom: Allow eGPIO ownership independent of
- the mux function
-Date: Fri, 06 Nov 2026 13:29:40 +0530
-Message-Id: <20261106-egpio_fix-v1-0-569d220a4748@oss.qualcomm.com>
+Date: Fri, 06 Nov 2026 13:29:42 +0530
+Subject: [PATCH 2/2] pinctrl: qcom: Add qcom,remote-owned pin configuration
+ support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,10 +117,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOyI7WoC/x2MQQqAIBAAvyJ7TtBFOvSViAhdbS8qChGIf2/pO
- MMwAzo1pg6bGtDo4c4lC9hFgb+vnEhzEAY0uFprUFOqXM7Irw4hOo+Xi+gIpK+NRP+v/ZjzA1Z
- QZS1bAAAA
-X-Change-ID: 20261102-egpio_fix-ddf4c2a4f24e
+Message-Id: <20261106-egpio_fix-v1-2-569d220a4748@oss.qualcomm.com>
+References: <20261106-egpio_fix-v1-0-569d220a4748@oss.qualcomm.com>
+In-Reply-To: <20261106-egpio_fix-v1-0-569d220a4748@oss.qualcomm.com>
 To: Bartosz Golaszewski <brgl@kernel.org>,
         Bjorn Andersson <andersson@kernel.org>,
         Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -131,96 +131,225 @@ Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         Pankaj Patil <pankaj.patil@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793952000; l=2153;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793952000; l=6925;
  i=pankaj.patil@oss.qualcomm.com; s=20251121; h=from:subject:message-id;
- bh=nNSMcejrg1GBEQ1LH+7ONoNsTI1szoHFruhxFh0t14w=;
- b=U5HJKn/ZdQYeXIpwh7w1+GWbTx/e0eIiUph7iWBPt5/Qq2SCzh8OOVtNThluZ3ulKd6jmYKtP
- dsX/rnkurjyA8mBWVC1s5fbH6glWDj9U0Zkf25PbL0EyIMH0oPxGHd1
+ bh=4drWwfN+U3k3ZppscLnAKNQYBioRifWtx61RTk0WVUU=;
+ b=R6ncTicqxGeWhlhsLkOL1JiRjaKrqFknbU8YKDkSKUh2sGXmZ5gfyHMOwGipbGPqzWqgIZ4sm
+ XBTzJo/gXu8A0pC6NR5hUKnBVJWwJntcvOT7ts75cM2R5hjPMHaWYUg
 X-Developer-Key: i=pankaj.patil@oss.qualcomm.com; a=ed25519;
  pk=pWpEq/tlX6TaKH1UQolvxjRD+Vdib/sEkb8bH8AL6gc=
-X-Proofpoint-ORIG-GUID: Gdp22L59UEhoAEPDCbYLlvgjAb0iEN2y
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAzMSBTYWx0ZWRfXwsZIJ/SzqrIF
- +sQ43zIZRytlJbABpXGIGfjUoqP1be40nm+M2Ajb4oK2F9zP3Xqs7jODLXjbI6OhIJnN1Kk0QWx
- qQmeDOxBt2tWTa1qnhGAHGU508VfSXV1qOE/2zBUa4f9pvVZv6U23cMFD0FscRwE9HxjsgNTA/W
- 4kFhyJemB+hJy31EwdgD9FSFbKZEjhBN3b9qhRM3raOYH0jpuxpVDNLBIZE7CiVphTwcMYSRaN6
- cvBKZZBuF6H0uuoaOxUW1SgCWilcJL3igDacXGh3WLWJnj+jFO6CuxA5K8kuu/WxdDu9M5FE/Do
- sgrCXtEc/Sp0AOCv+YcrcfTm5KktUvLohAJz0kb8/Xlp0jdk9PB/+4ZWflYGdxVUc92gfubml6O
- V8v2EOibBtdMO23FehTMoLEmXG8gPEja9mH5rlL6N5MUgBet6jAtpjUqCTi7o2Dj5rQqiC9HeZR
- wjj8KGFGPQziPc5tirA==
-X-Proofpoint-GUID: Gdp22L59UEhoAEPDCbYLlvgjAb0iEN2y
-X-Authority-Analysis: v=2.4 cv=TI3Q2Fla c=1 sm=1 tr=0 ts=6aed8905 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAzMSBTYWx0ZWRfXxBev0ivm996F
+ vYBsF99vmKIr2gz6ovxe4GiMRvdPrzVfdw6OtrNkcMyqijxcpDDB9wQ+3CjhdWDLRWm+RZw3osp
+ 8Z9v8m1sWez8V/4dWXZ+/13uAISQbHHdx1P1/0thfMZE3hgmjztvjhR25SwueLBFbrXSnMYs48k
+ YFwtfhNXm43QXEI7jVj7wAqGh8MouURFXgwpR4i9iX4SIQQPt7w+lJw+buWRufmsQwZ00HPnJNr
+ UyqwBt8gkSEH3mpenO6eBfBvjlSgPrETxs+1hGDLiNJLapr3MCMQqMA5MNRcUYt2r6s8Ju8lix4
+ nz5d5DWDsm/d0lYtRVHqXcVyvId4wFtdEZ0ZrQYsn4x6V2R6N9rz8ZfTfkJOE3Luj5+nCJxHx4Y
+ gEjkBkMsIhwqI9Vk/2YrtIXRkkwVzIXea+9B4qEb8GiFWW8CeuJUOEOynmSjLwQefhLRmxwltRO
+ f44qPblPbuv4zvbq7lQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAzMSBTYWx0ZWRfX/SRyTxxZ11C7
+ GtsfeFkitBS6L2N9PBc9RZx5vB8wPaATNuwDWlWWW5J5VEhqvzSwcDFAsyUyZHC495R1chIFx7l
+ psm1rF370frKsmUGpnbAL/90MPVVELQ=
+X-Proofpoint-ORIG-GUID: ryXq3A1nyRppVpAQNIn0145c46H2eUrI
+X-Authority-Analysis: v=2.4 cv=GpzXaU1C c=1 sm=1 tr=0 ts=6aed890f cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=HuJJzTBhwpvvTeHBZjcA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAzMSBTYWx0ZWRfX8MeBVexZu4Oo
- aZUjKYbMQKjFs+bTtEiauTfM9JAUFNBmSxGtk10jMKQYcSL4mKFdfb+jcdLY7kVf8AKQsjb5Vv9
- LTjkiuG7zqXwEyv2kGG2BoPzEhVKg/Y=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=J6oVEZvgg9VNJ-PjDz4A:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-GUID: ryXq3A1nyRppVpAQNIn0145c46H2eUrI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-06_02,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
- spamscore=0 phishscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
+ priorityscore=1501 phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060031
 
-eGPIO capable TLMM pins can be handed over to a remote subsystem,
-which then drives the pin instead of the application processor. The
-eGPIO present bit describes whether a pin is capable of being owned
-remotely and the enable bit selects the owner; neither is tied to the
-pin's mux function.
+The eGPIO support added was incomplete since pin ownership is independent
+of the selected mux function: the eGPIO present bit only describes
+whether a pin is capable of being owned remotely, and the enable bit
+selects the owner - 1 sets the owner as APPS and 0 sets the owner as
+remote io. At present it's a mux level decision by setting the function
+as "egpio", APPS releases the ownership to remote io and in process
+cannot use it for any other function.
 
-The only way to express this today is to select the virtual "egpio"
-function which transfers the ownership to remote io whereas the 
-single-valued "function" property e.g - gpio, qup0_se0 claim the
-ownership for APPS. There is no way to describe both the pin's normal mux
-function and enable remote ownership where as the hardware programming
-guide(HPG) mentions no such exclusion. Boards that need a pin muxed to
-it's real function while the remote subsystem drives it is permitted
-behavior according to the HPG.
+Add a driver specific pinconf parameter enabling the "qcom,remote-owned"
+dt property support. pinconf-generic falls back to the default value of
+1 whenever the property carries no value, and an absent property is
+skipped entirely. Since pinconf-generic emits the mux mapping ahead of
+the config mapping, this is applied after msm_pinmux_set_mux() has
+set the pin ownership, giving the intended result for a state that
+specifies both a function and remote-owned.
 
-This series adds a "qcom,remote-owned" boolean flag to the TLMM pin
-configuration, describing ownership on its own. Its presence
-hands the listed pins to their remote owner, and its absence leaves the
-ownership to APPS.
+The hardware programming guide(hpg) explicitly mentions that the egpio
+enable bit can be set independently of whatever the function select bits
+are set to on targets which require shared ownership while the APPS
+continues to use it as normal mux function.
 
-cam_sensor_suspend_rst4: cam-sensor-suspend-rst4 {
-		/* RESET REAR */
-		config {
-			pins = "gpio239";
-			bias-pull-down; /* PULL DOWN */
-			drive-strength = <12>; /* 12 MA */
-			output-low;
-			qcom,remote-owned;
-		};
+msm_gpio_dbg_show_one() printed "egpio" and returned early whenever the
+enable bit was clear, which was sufficient while that state could only be
+reached by muxing to the egpio function. Ownership is no longer tied to
+the mux, so report it as a suffix on the regular line and keep the
+direction, value, mux, drive strength and bias visible. Pins muxed to the
+egpio function reach the same register state and so print the full line
+too; their mux field reflects the previously selected function.
 
-		mux {
-			pins = "gpio239";
-			function = "gpio";
-		};
-	};
-
-Pinconf-generic emits the mux mapping ahead of the config
-mapping, the flag is applied after msm_pinmux_set_mux() has
-claimed the pin, so the combination above ends up muxed to gpio and owned
-remotely.
-
+Fixes: bebc49c1e5f6 ("pinctrl: qcom: Add egpio feature support")
 Signed-off-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
 ---
-Pankaj Patil (2):
-      dt-bindings: pinctrl: qcom: Add qcom,remote-owned for ownership update
-      pinctrl: qcom: Add qcom,remote-owned pin configuration support
+ drivers/pinctrl/qcom/pinctrl-msm.c | 81 ++++++++++++++++++++++++++++++++++----
+ 1 file changed, 73 insertions(+), 8 deletions(-)
 
- .../bindings/pinctrl/qcom,tlmm-common.yaml         |  7 ++
- drivers/pinctrl/qcom/pinctrl-msm.c                 | 81 +++++++++++++++++++---
- 2 files changed, 80 insertions(+), 8 deletions(-)
----
-base-commit: d6bcfc94eb4da6e089c5473970cd96727292fd97
-change-id: 20261102-egpio_fix-ddf4c2a4f24e
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+index 32aa7b919e24..4d96260f9909 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -48,6 +48,31 @@ struct msm_pin_state {
+ 	bool saved;
+ };
+ 
++/*
++ * Driver specific pinconf parameter to hand a pin over to its eGPIO owner
++ * without muxing the TLMM away to the virtual eGPIO function. The eGPIO
++ * present bit only describes whether a pin is capable of being owned
++ * remotely; ownership itself is independent of the selected mux function,
++ * so a pin can keep its normal function selected while being owned by the
++ * remote subsystem.
++ *
++ * The "remote-owned" property is a boolean flag: its mere presence releases
++ * the pin to the remote owner. The default value below is what makes a
++ * valueless property come out as "release", as pinconf-generic falls back to
++ * it whenever the property carries no value.
++ */
++#define PIN_CONFIG_REMOTE_OWNED	(PIN_CONFIG_END + 1)
++
++static const struct pinconf_generic_params msm_gpio_bindings[] = {
++	{ "qcom,remote-owned", PIN_CONFIG_REMOTE_OWNED, 1 },
++};
++
++#ifdef CONFIG_DEBUG_FS
++static const struct pin_config_item msm_conf_items[] = {
++	PCONFDUMP(PIN_CONFIG_REMOTE_OWNED, "qcom,remote-owned", NULL, false),
++};
++#endif
++
+ /**
+  * struct msm_pinctrl - state for a pinctrl-msm device
+  * @dev:            device handle.
+@@ -328,6 +353,10 @@ static int msm_config_reg(struct msm_pinctrl *pctrl,
+ 		*bit = g->oe_bit;
+ 		*mask = 1;
+ 		break;
++	case PIN_CONFIG_REMOTE_OWNED:
++		*bit = g->egpio_enable;
++		*mask = 1;
++		break;
+ 	default:
+ 		return -ENOTSUPP;
+ 	}
+@@ -424,6 +453,17 @@ static int msm_config_group_get(struct pinctrl_dev *pctldev,
+ 		if (!arg)
+ 			return -EINVAL;
+ 		break;
++	case PIN_CONFIG_REMOTE_OWNED:
++		/* Pin is not eGPIO capable */
++		if (!pctrl->soc->egpio_func || !(val & BIT(g->egpio_present)))
++			return -ENOTSUPP;
++
++		/* The enable bit is cleared when the remote owns the pin */
++		if (arg)
++			return -EINVAL;
++
++		arg = 1;
++		break;
+ 	default:
+ 		return -ENOTSUPP;
+ 	}
+@@ -536,6 +576,29 @@ static int msm_config_group_set(struct pinctrl_dev *pctldev,
+ 		case PIN_CONFIG_OUTPUT_ENABLE:
+ 			arg = !!arg;
+ 			break;
++		case PIN_CONFIG_REMOTE_OWNED:
++			if (!pctrl->soc->egpio_func)
++				return -ENOTSUPP;
++
++			/*
++			 * Ownership may only be handed over on eGPIO capable
++			 * pins and is released by clearing the enable bit, so
++			 * this is applied here rather than through the generic
++			 * read-modify-write below.
++			 */
++			raw_spin_lock_irqsave(&pctrl->lock, flags);
++			val = msm_readl_ctl(pctrl, g);
++			if (!(val & BIT(g->egpio_present))) {
++				raw_spin_unlock_irqrestore(&pctrl->lock, flags);
++				dev_err(pctrl->dev, "%s is not eGPIO capable\n",
++					g->grp.name);
++				return -ENOTSUPP;
++			}
++
++			val &= ~BIT(g->egpio_enable);
++			msm_writel_ctl(val, pctrl, g);
++			raw_spin_unlock_irqrestore(&pctrl->lock, flags);
++			continue;
+ 		default:
+ 			dev_err(pctrl->dev, "Unsupported config parameter: %x\n",
+ 				param);
+@@ -676,7 +739,7 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
+ 	int drive;
+ 	int pull;
+ 	int val;
+-	int egpio_enable;
++	bool remote_owned;
+ 	u32 ctl_reg, io_reg;
+ 
+ 	static const char * const pulls_keeper[] = {
+@@ -703,20 +766,15 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
+ 	func = (ctl_reg >> g->mux_bit) & 7;
+ 	drive = (ctl_reg >> g->drv_bit) & 7;
+ 	pull = (ctl_reg >> g->pull_bit) & 3;
+-	egpio_enable = 0;
++	remote_owned = false;
+ 	if (pctrl->soc->egpio_func && ctl_reg & BIT(g->egpio_present))
+-		egpio_enable = !(ctl_reg & BIT(g->egpio_enable));
++		remote_owned = !(ctl_reg & BIT(g->egpio_enable));
+ 
+ 	if (is_out)
+ 		val = !!(io_reg & BIT(g->out_bit));
+ 	else
+ 		val = !!(io_reg & BIT(g->in_bit));
+ 
+-	if (egpio_enable) {
+-		seq_printf(s, " %-8s: egpio\n", g->grp.name);
+-		return;
+-	}
+-
+ 	seq_printf(s, " %-8s: %-3s", g->grp.name, is_out ? "out" : "in");
+ 	seq_printf(s, " %-4s func%d", str_high_low(val), func);
+ 	seq_printf(s, " %dmA", msm_regval_to_drive(drive));
+@@ -724,6 +782,8 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
+ 		seq_printf(s, " %s", pulls_no_keeper[pull]);
+ 	else
+ 		seq_printf(s, " %s", pulls_keeper[pull]);
++	if (remote_owned)
++		seq_puts(s, " remote-owned");
+ 	seq_puts(s, "\n");
+ }
+ 
+@@ -1778,6 +1838,11 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+ 	pctrl->desc.name = dev_name(&pdev->dev);
+ 	pctrl->desc.pins = pctrl->soc->pins;
+ 	pctrl->desc.npins = pctrl->soc->npins;
++	pctrl->desc.num_custom_params = ARRAY_SIZE(msm_gpio_bindings);
++	pctrl->desc.custom_params = msm_gpio_bindings;
++#ifdef CONFIG_DEBUG_FS
++	pctrl->desc.custom_conf_items = msm_conf_items;
++#endif
+ 
+ 	ret = devm_pinctrl_register_and_init(&pdev->dev, &pctrl->desc,
+ 					     pctrl, &pctrl->pctrl);
 
-Best regards,
 -- 
-Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+2.34.1
 
