@@ -1,112 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793972686;
-	b=pfolTqMCgtCqDgc5AfL62ApvP2otHKnBFd5pxtZCiisGNoIvsexLHFVViP1kLStQqhol
-	 1ZgJOScue6XyrdTeyOjb1E2bgyxAHKkgVK3CI4Qlm74TnBfGU+e9dc0Okm3vl3TSb2WbZ
-	 3MUqQIQFavoxcn8n3SfSOsAE2u+mx/JdesIM/AjHI0APM8NIzkimBv/Rkh2rUt4aY/4Gm
-	 iPKWBcn8uN4vPih0/RVXfjChMJR31BpHYNjFc7IYHxtNNOl2et9JlsoJSUe0KgL8zRe8B
-	 yT5JbaesPQv4yMcAQvMS5A7gwQukV4/CDwzonTdIaVnYu1kQNzHFq5CUBU5ljoABceQ==
+	t=1793972688;
+	b=gO/uXi/+tX+HrPOnMw+YEQiiBbb2XYOQpqNAz8SXUQS6cLDmEmcW27sgLsX8HhEhEdiz
+	 yC6HS0v9m+o4Hteh1mpagISQPILqP6eIgRQUwJt5e5Km9ekDq1KcXH9RtSWNCjcEbxU4i
+	 u1fiR9WhDDc+ArlnsGWOvj+sUpTUiZxy0aXyFjM+QNFLMSWVTtiUZ1XLFXjU6rLXRf4oR
+	 s2rHl4bLpJngDHQubAmYaybkneCfrKA4xExkb4St/EEc/wZ7K2gCwaHyZh5qW056nj9mo
+	 /LP/THNBeqAccb8z1maBpMQIjtMeKTXTLX59iXDKr7HNI9xQiC8pPWL7n5Ynygl8n/A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793972686;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793972688;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=xvpV7huPZOlel7iSSvUNNhoLboYoj8TboGt9Ixyle+o=;
-	b=2NxBKCakQ+0u1EnzdZDw+68vZ8d7u7EJiykORVQkAbnJQ2XhTkDMIX/t64zCgTBJsLuE
-	 6ZTqKUp5GqvdMFfnTj61bxRl9kV7/sbFazpG+Hlo37ZLGUM7t/tBuAhofj6pbBoQeY7DA
-	 LnFE09A2etsxlLM0F2Ky5EHFbCRWt44HTQlKIDrXvkLw+g9qpKy/AAFh9YDCdtkjnxBD9
-	 em9aYi3yrenuG2UXymiW7HZtPnvfFKttMciSxxb7LHmWu/+Yojjn/f6aSZOl5HNhHNIsH
-	 Q9yXGVwRFeDtmSVzjl3nywwTNCsMlnK1NaBkPpjVuEiAbVhg0L7q4N6vPTcmlj/MRzw==
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=T1R6BuIc6DXQGz75sImpTyNUbfCE2LnmujKp5A9+yb4=;
+	b=lmkmiQ+r0/9wYiMEXdySfwxG7nrjrlM1wNnRHTSZ3L0dknU/Wt6WIWdzcot2AJh6I7Ui
+	 JZA6GeNKrHP4fobv3/Vc4/5fW/qxkyZuYwklrXVf5I7nEkpcUw/fEu9QsBwprgG/Gfjvy
+	 EWOLPLooe6Hh1MpYUsUO3jUsZ84oBFLlXKhat2NWLi4pcdnASeke074ECv9fwYwI7YNbh
+	 Lv3w9Vqi4nc6NrB0JZbOEzWHV4GiQU+XaFh0LCGsp7W9leTv2qdcztK098TlnsVI7y/Lc
+	 BwCHiZso2p5RJcJYRuO2nv2m92JgIl+xhUCeheAFdl7alSt13xsWgI6OZffT7CouYEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GBZFvIQT;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hDXug8j2;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="EeQM/4kW";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QNedRq4H;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02AF9606D816
-	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 13:44:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 02AF9606D816
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40BCF606EEB2
+	for <linux-arm-msm@vger.kernel.org>; Fri,  6 Nov 2026 13:44:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 40BCF606EEB2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GBZFvIQT;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hDXug8j2
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6APBrB444198
-	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 13:44:45 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EeQM/4kW;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QNedRq4H
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A6AP8FH091086
+	for <linux-arm-msm@vger.kernel.org>; Fri, 6 Nov 2026 13:44:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	xvpV7huPZOlel7iSSvUNNhoLboYoj8TboGt9Ixyle+o=; b=GBZFvIQTGt0yxwew
-	VfjJMKC3DWQx1y5HV8xDitYh8SRUZi9Pn1fpydibyFVtI2IqNBQfXH1dXIBmjcku
-	hMOREk61sIunKEnxGLoLN8TQjHMXhefPF/9owEwxlCPR/KS7Re7XSj2fHNKlMzsU
-	3Ysd+MWT1jXNdpEC1Q58tZCbmcBhH7YfJLe2+uWb30ynIf8VaWMd1UYqLuHo2bJO
-	YbJoha7rvUYiQseoBx/kBFyffCpO9tL3NIPq2fWv8RfiUUAwrPCPYNl3MSjrSonT
-	ZR4fKfsy1AOCONSQFs12AlKwzlj5LiLD49zAfuK9mkWMQBw/84ovrFC9l7fcP+HK
-	eewsfw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3p9u1g8-1
+	T1R6BuIc6DXQGz75sImpTyNUbfCE2LnmujKp5A9+yb4=; b=EeQM/4kWhFmOJuwe
+	PcaNygUpWGunYh1Mf9T4qVZvMW/qajo+zbGNycZemiUV+mb2LW/W92nVqxyNzi4S
+	+q8Q++hDwx3V7UcsJ5+yRX+iWA1MXrB4Ey4m3GNoDB1p/a0gJRnAhLpaN3q02Bkn
+	iZed9h2i4K/C7bLJvI3upAb40DuZL9Gq9JTWEYbn0H9PiXtWg5h8k+GpIdCUmNiZ
+	118LSYTGGWXuTfYHB9JMHvHUOwk0IBAD2iygGw4PNIYKe7RgpeMbApj+hEoSF4BV
+	m/OYzV7nV06BbQtRwzlZkJsD9P9P6uFRflxNYDydoZQYNa2HuCbngaeIaFhTyyRf
+	Oa6ipg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pb2ym4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 13:44:45 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb7f9bb86so155197985a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 05:44:45 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 13:44:46 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb71b1443so143616885a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 05:44:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793972684; x=1794577484; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1793972686; x=1794577486; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xvpV7huPZOlel7iSSvUNNhoLboYoj8TboGt9Ixyle+o=;
-        b=hDXug8j2X/I4oITO5Xh+cdongdUf8XlXy9n7FuLucoxh8j8ryaqFjJMd1FfWFYCOij
-         UQ87gqCVmSqq7YAd+SZHX2nkBIIVjxKr6WzhEXAyZdPXDhvE8KDZJthxPkqHJQ9UNiSf
-         f5IXkHTwSvB8Hey2NAhnJuM77Q+MFXEkTuuS3a3mh4QtyC5Y8MOoj+4HtADTQLAbDocd
-         ZTNVgM5FP+8P0bb9YOQmkdFLsKn7ewdPWsQauBqrGtZtsB0wgBnCZmxf7FGi72aaUf33
-         N332qf/mQ6dgE/AFae+J3VnP9kp2YExa9ccayFUzPbFWwsx9GI89b9GMK554QCEvbz9G
-         MT+A==
+        bh=T1R6BuIc6DXQGz75sImpTyNUbfCE2LnmujKp5A9+yb4=;
+        b=QNedRq4Hl+tpTIfazygtO+yUxphQGC/R/YrzEB6EkqaPH6cVMylVoG/FwuDycLoHgR
+         J6NxUlwZ8Ezexy9lEn8E6tIdiKo7MkjeWn8So4/5SBK9LWalvjZ84zo7Mg50YMPe6g1X
+         FRBtAXuZ2bqAf7ulHf42IhC1o7727s7TPpmIL2L1hDwwlc+Dt3phTgQz9a2Hqv8SEz+i
+         CBLI8cbf9lTM1jXS1nUiI+2p9rS40H1Jv1Nx50FscRUrn8qfr38/6UJmKH1BQoDFPJXw
+         LZw/YVsKcGN2V56bGmtAX9fu6ACodjkePB4RPFL3qOP3np3oj9mGbcdTUi4gKnqEBu5P
+         6onQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793972684; x=1794577484;
+        d=1e100.net; s=20260707; t=1793972686; x=1794577486;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xvpV7huPZOlel7iSSvUNNhoLboYoj8TboGt9Ixyle+o=;
-        b=vYVYbFWQeBJzcAGFg4MM15zsemm2o/ZVLgOd3iefb29jIbDlXpBADd5kXy5gQ9YDeI
-         z5QsUpcPnkwbBUdiUTdzoMI9S/tWkGcEN4/T869oaXhmnJ91t1uR1jq/u+pl++1OelCv
-         br2XqEGL6Im1xWRmjHy91tDDEXRK+I286g0UmcDo7G0DE4na0e6xBGNZe9AqzJWr2G7S
-         B8gXYfXkS+x5AIBgkXCYx25vc3udO92NjSds6yXVVOYW57CvxlfW8Lk0o+Z0+poukX8z
-         IKU5ozji4Awzd4i7wREjemGoxBsQFdpU10CsuaWeRuvi+bshCGCMzh1tfS5Fbl6c9eqW
-         suAw==
-X-Gm-Message-State: APuU4Z/7Zox5zXfzrlEvqCzKPIVuipT0KqihXj3T3UnqjcvRntupIW3G
-	B/a/ZlwngTjRPNMQ0QRAvF5SBpQY/WH9GPqxEWv4ujNRAWrjcAcEn5HbJqaW06huXq5um4m8BON
-	sfHQlnXKUkA6V91sFCRCt4rCgk2jMDXIFmv91HANGfNGH/IPRB4LdT753GC1ZlKDse4Z+
-X-Gm-Gg: AYBFou2FO7GLxnrX/YtavZk8t2OFKNNhkPnuOUXWiO4q4q6UeEBubPbWxEioDyMsQTO
-	rRUfYQ5ZziBfhcOGmc7eG7OSixfZtaUTA2Jy9NwBbXxSbPs/RDpCt+HoUi/8ZO9/aEjG35XdSyu
-	AkDYNriCWGgy5BxY0h63rjFqydLOPuUol8Ol5hxK2reY3nab/nTpVjYzGq2NH7eg/ppKWWSqhht
-	1jGHvDhcDTBA3/NzVBLHODJWysBkBbgVdouV5hMoj6eAhCPCczrCjenLCFZUNJpBIYO80SJEad9
-	+gunx2YT9/5mJqf83BpCoocYCiFnYr25WGv64ldyihVYIJ61WJzNItF6EaBOEfirW2lwKoDnONA
-	LM2Pf7HYqdk2pkLfDl1or2bPT8eTxK0msbWmuAOYEoJsqAWNmqpBJGit91AMxarOOCA0u+zZ64z
-	vVN8TEdM0J0y59PmAgbun84+MagnjZaFZKop9zgH0CfB1oePuJ0YJUYrePoGYhBQ==
-X-Received: by 2002:a05:620a:318c:b0:945:ca23:e00 with SMTP id af79cd13be357-945f35dbf68mr352009185a.58.1793972684192;
-        Fri, 06 Nov 2026 05:44:44 -0800 (PST)
-X-Received: by 2002:a05:620a:318c:b0:945:ca23:e00 with SMTP id af79cd13be357-945f35dbf68mr352004485a.58.1793972683453;
-        Fri, 06 Nov 2026 05:44:43 -0800 (PST)
+        bh=T1R6BuIc6DXQGz75sImpTyNUbfCE2LnmujKp5A9+yb4=;
+        b=bMoQFvgGJoeGU+0K3FbF0RNr1owebWeE7kfWQ7C+qcqpVYwjCXrCQox/kbgJk5PFRt
+         qS4NLDdjBDF39ZIyuKii3DH8NELT9Mw2vZQeoIAdUKky+WjKxzCcJnhrbtd1EMyx3/s5
+         Df2nqa6sT5mQzcdPjafTdv9a+SCQbd1uIx2N0YC6GBOUc/+3/bk5ntqx4QSoINcXKHCW
+         e/B/NaghMUzpt3KDtSKRZcj91QlvX/aFW5DmhbU3JDat3czDGOEk1LSULACDQHxBkgen
+         0e998bRgsOQFferj/jyG/b1fCk22dAoMHTXqSGazoB/FHvHsbnYG2ip9FbDsQw+mfY6n
+         IOPA==
+X-Gm-Message-State: APuU4Z+5Yk381jIhVSQaXWjTngGq22edGtKTqw5bwTgXZKPOAu0DZZFd
+	lxYnLac0epUweU74cgOX9VD5r5hFznpo1Vmx81t46DciM2ZPwr8el/qEMBaM2jiiAS00pScm8hK
+	1m9tQ6WZUoqs5rUo0XdiAa43HI25m24UUcUOlHOsOryNfTHFqSfwX6u6GSzOCVJFmsiaF
+X-Gm-Gg: AYBFou15TRgymVNln+M5dmZQ6qE0XSihj5GAHKxExsnf0ALmKvaafHjj/tZdlKQaaPL
+	HkjLmvgFjiD16BqwpDJyymAYIUgbwRKonh9JQPedPRDkpiU5NqryfhHMTdCxaSUYxt69lzjbFog
+	ZBHR7VgCmiDL2etNMfKcY05B5ZkBZLcw91ABHdKibsO0TkC/1B3V90cyMYuYmCHsFFofiyIT68Q
+	6Cd57AqUWWbGeo+9aFwl3WbulHH2OFW2Lgj3IujgU3KTa2drd48un/w4R2035wjdETmFm14yO3H
+	yxzaOI/pwkbpLZcIZjOe93uuaXYEVL21c01j8fohN+5g8i6wbLK+pKe1SXkXgIHYX7zorSS5d2U
+	oMdY7E/unQ4bfRQDPgy8BolNEmig6TjWktx6aao6ABSn3NegCOt+3Et3mfo946+9t+eVoRC1+gN
+	e8cfxhWaZ/ZucVxRLPWEQAuN8f82OgTpGWLf7Va55ZaFee+xKMHw6nbmcz3BGH5g==
+X-Received: by 2002:a05:620a:4397:b0:93f:2941:6b8d with SMTP id af79cd13be357-945f33aa172mr297781785a.6.1793972686161;
+        Fri, 06 Nov 2026 05:44:46 -0800 (PST)
+X-Received: by 2002:a05:620a:4397:b0:93f:2941:6b8d with SMTP id af79cd13be357-945f33aa172mr297777385a.6.1793972685536;
+        Fri, 06 Nov 2026 05:44:45 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c003055a5csm382747e87.13.2026.11.06.05.44.40
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c003055a5csm382747e87.13.2026.11.06.05.44.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 05:44:40 -0800 (PST)
+        Fri, 06 Nov 2026 05:44:44 -0800 (PST)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Fri, 06 Nov 2026 15:44:10 +0200
-Subject: [PATCH v2 4/8] drm/msm: check UBWC framebuffers against their
- layout
+Date: Fri, 06 Nov 2026 15:44:11 +0200
+Subject: [PATCH v2 5/8] drm/fourcc: describe the Qualcomm UBWC layout
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +116,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-ubwc-format-docs-v2-4-82949f88f030@oss.qualcomm.com>
+Message-Id: <20261106-ubwc-format-docs-v2-5-82949f88f030@oss.qualcomm.com>
 References: <20261106-ubwc-format-docs-v2-0-82949f88f030@oss.qualcomm.com>
 In-Reply-To: <20261106-ubwc-format-docs-v2-0-82949f88f030@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -141,133 +139,148 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         Robert Mader <robert.mader@collabora.com>,
         Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3415;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5526;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=6xPvBKvXF4Oj5ER3IOirKs4PSww1szDN0iEI4yJmcYk=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq7dm1xmEojRhtbHd26chPgyY5e9DYUB3anpavp
- sGYE9QRf6uJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCau3ZtQAKCRCLPIo+Aiko
- 1aybCACWYFM2oDjJ4iQ8s/DVtvJt4yeL6Z+vXT5ZTRIExu9PNK25Kr5AIqBHZMkgiJkyTgutTPj
- 8birGSMAO+r6KJCGQcbAzr2ElX46/NVd9PubPCl1CbCHcAIZy9dP6Jn7n0y+8RvJhh/1Rj2Os3p
- ztKl58J7/xel36mG1SW3pVq3cBk0IsjpjsVRFDSPSHiz3gPrz/LEBMtItmvBl5Ha8NisCdBUdWM
- kljD7wThly8rGkRBS0iPRhbm3WoI81lYl3BgKyQXolQ2LnfmT4IybHXZVc17b3kDlTskbmZJjBN
- kEkpUolW95vQmhIt2vNiHa/kwm+uvPcjzIQsZ5OPVFKcJnVn
+ bh=PBEbayVdH87klbKtk5JOaPGn9vN61SzfT+b4Hydj4Zc=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq7dm4K3gdV0YxTzrffH3VlVj75NZoqa3yzqEaQ
+ a9GxW2OtPqJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCau3ZuAAKCRCLPIo+Aiko
+ 1TvCCACZKz5loZofq82owJSku5llc757ammPyLgmm0rXElo0OADaT0aD3SruDuNtNJpWCQroA8y
+ oHrCGBz2fJjxdCrxIhQEA1qMZ/yoeRfRMShwqLN/d+8MdRtNuhpWhlhToB2KmVvBRmi7uDNSDqp
+ WT6I4JhhR6edEeW+sOuTxWgMoYResv+ZDakPhqmr/YzkvcmTNLQOujrlIySARsCbT35Pu65si8L
+ uZqcNf4Fj+eES6fIKRtEsRbpMlYRGU9L63hcX7w6DUEeVUR/ZZlsRfVNQcv9N9qznrMooNv1Sf6
+ BUozs0duG3j+G3ppFiKX2a8fjlsE/ZDAxmy5ypJLz/eDs+yW
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA1NCBTYWx0ZWRfX5sk8iN29xx8r
- lykEEpkOewEem8n9+B/yGMWmEHlXx1iMD6sZ4fqvTUosEsMxO5syCw79T9uVkkZE49t07QTwS7G
- XDFhVsTvMc9uea3kyNfVR5uFdinOauI=
-X-Proofpoint-GUID: Ce7ihvGf6rrKNuVox8cdiGRC-JV7V3cC
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA1NCBTYWx0ZWRfX2oMFgg5sPE9X
- ieUm8r5iCH7Yy2tJ87pLimUX3uHCyel4OOlDRDE1tFqcwfMFl5wSs8IL3U0Wlhv+TPO8NyJghl7
- oXSAfsvVC00Nn9n2qBQ7UYYiaDFt8Oxa5CluGR1fXbNWrhMFUMhn9y3FjsCPtn2NOnca2miBcQu
- PDkh3begFt6dptwsGtebIH81RCII8HTU2ZoJB1ay3S+k5uGfjiVu/6TKdWBGXzQfrJEqfjXQ7GZ
- bq0iy80NaVUUMzQi5OZNLL/4LWGduMsiDK33xjPL2o4IIM3h7qSiIxVtWRDPmb2BoctlmQR9QgQ
- sBJ3YsieUSHqwERX9VepPu1ic/RQYQhVVtNrY7c1xsigvgQDtrAwfXkQWnl+8zBrFVxrFW0Auuw
- RzFzNPt1Yup2sLGAPn+2ectH0c72tzxUYQAza6zQ3RX/hk9SIRK6bZP04XpcEHp931p6roz8JeC
- xKa+VXwODUSnTybtKgg==
-X-Proofpoint-ORIG-GUID: Ce7ihvGf6rrKNuVox8cdiGRC-JV7V3cC
-X-Authority-Analysis: v=2.4 cv=ZIZCCn7b c=1 sm=1 tr=0 ts=6aedd9cd cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-GUID: fzYVaSbEC3PbgbFdFA91vhFlDHuJ03nU
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA1NCBTYWx0ZWRfX/rXyMQ8C5vfU
+ 7EFjV53gB+4cN7Qw8iuJ/NWzkKJp8X/mHy6vxnK685p/1JowpKsk1wxZYG/It3oriNLy1AUw3Uz
+ uDlujPFNEGwpOIgFf/azxRKghwijr9c=
+X-Authority-Analysis: v=2.4 cv=LIrz05W9 c=1 sm=1 tr=0 ts=6aedd9ce cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=gedFiD_-BdM4RCKrvjUA:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
+ a=U_HTlJNxgaGUaFeKA3EA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: fzYVaSbEC3PbgbFdFA91vhFlDHuJ03nU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA1NCBTYWx0ZWRfX1RDTeaD2JLEY
+ hq8UnmyIP59mcg4bZcg7N0xj3DN1hfERHIQeZOUrjmsA2Orly5Dt9d7ZO6/0zckbd15PJii64td
+ Vjnb0x3jvWcDn8qfKZwjMIPgCW6kO112SkdOMFvqZfZld71xjljwnqBHG2PlfizvKNJ7U2MtaQv
+ BfJ/p8Xm5mX/x6OtYolDaqLP42bOblESl+yiAD0jI6tIfacY0hBqO6MzmVGW16PXgvJtdx5oQjQ
+ dDAorPgSudKRMmdzX4Tp/5zAsO3miGiPAosEPq/baoWjVX5xu2i+Z6NrqX+FhWzFYJuQ2TVc447
+ 5sqJBWYeFtI35irj00E3DGnnMdwuzhp7F59zyXpQ13mH4++XqbsA0eBdVgxh2PioPrEhIhIGvdE
+ kWrNwoFa5y5QaV+f9CPVpMAp9tkd5GX5S5tr01JBzU//72qwBSIjKTwB6YmwvGBZXXv/IM3ZWIw
+ tyiTbpTA3Hnf+qKg9VA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-06_03,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 suspectscore=0 bulkscore=0 impostorscore=0
- adultscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060054
+ spamscore=0 suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 adultscore=0 phishscore=0 priorityscore=1501
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611060054
 
-msm_framebuffer_init() checks every framebuffer plane as a linear one:
-(height - 1) * pitch + width * cpp + offset must fit into the buffer.
-For UBWC this has nothing to do with the memory the DPU fetches.  The
-metadata and the scanline padding are not accounted for, so a 1080p NV12
-framebuffer whose buffer is 15872 bytes short of the UBWC layout is
-accepted and the DPU reads past its end.  The CbCr planes are checked
-where the DPU does not look: it always fetches them after the Y data in
-the first buffer, ignoring handles[1], offsets[1] and pitches[1], and
-userspace relies on that (turnip reports offset 0 for both planes).  The
-pitches are not checked at all, as the DPU replaces them with its own.
+The DRM_FORMAT_MOD_QCOM_COMPRESSED description talks about macrotiles
+but does not say where the metadata is, what the pitch refers to or how
+large the planes are. The msm driver derives all of that from the width
+and the height, and the GPU drivers and video decoders allocate buffers
+to match, so the layout is uAPI whether it is written down or not.
 
-Compute the UBWC layout instead: require the first pitch to match it,
-the CbCr plane to be in the first buffer, and check that the metadata
-and data of all planes fit into it.
+Document it for the formats the display controller supports: the
+metadata before the data in each plane, the tile sizes and alignments,
+and the CbCr plane following the Y plane in the first buffer. The
+display controller has always fetched it from there, ignoring
+offsets[1] and pitches[1], and existing userspace depends on it: turnip
+reports offset 0 for both planes. V4L2_PIX_FMT_QC08C and
+V4L2_PIX_FMT_QC10C are the same layouts for NV12 and P030.
 
-Fixes: 25fdd5933e4c ("drm/msm: Add SDM845 DPU support")
+The layout is stricter than the display controller or the camera need,
+as they can address the metadata and the data of each plane separately,
+but other users depend on it. The video firmware takes a single address
+per frame and places all four sections itself, and the Adreno texture
+descriptor for multi-planar YUV has only one address per plane, finding
+the data after the metadata. Buffers shared with these devices have
+to follow it.
+
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/msm_fb.c | 39 ++++++++++++++++++++++++++++++++++-----
- 1 file changed, 34 insertions(+), 5 deletions(-)
+ include/uapi/drm/drm_fourcc.h | 64 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 57 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/msm_fb.c b/drivers/gpu/drm/msm/msm_fb.c
-index 1e236416e15f..dd24aa7a5ee8 100644
---- a/drivers/gpu/drm/msm/msm_fb.c
-+++ b/drivers/gpu/drm/msm/msm_fb.c
-@@ -13,6 +13,7 @@
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_probe_helper.h>
+diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
+index 0bb049f91524..2c9f56df64c0 100644
+--- a/include/uapi/drm/drm_fourcc.h
++++ b/include/uapi/drm/drm_fourcc.h
+@@ -820,13 +820,63 @@ extern "C" {
+ /*
+  * Qualcomm Compressed Format
+  *
+- * Refers to a compressed variant of the base format that is compressed.
+- * Implementation may be platform and base-format specific.
+- *
+- * Each macrotile consists of m x n (mostly 4 x 4) tiles.
+- * Pixel data pitch/stride is aligned with macrotile width.
+- * Pixel data height is aligned with macrotile height.
+- * Entire pixel data buffer is aligned with 4k(bytes).
++ * Universal Bandwidth Compression (UBWC), a lossless compression used by the
++ * GPU, display controller, video accelerators and camera. The compressed
++ * contents depend on the UBWC version and memory configuration of the
++ * platform and are only meant to be accessed by the hardware. The layout of
++ * the buffer depends only on the format and the size.
++ *
++ * Each plane consists of a metadata section followed by a data section, and
++ * the planes follow each other, all in the buffer referenced by handles[0],
++ * starting at offsets[0]. Each section starts on a 4096-byte boundary and its
++ * size is rounded up to a multiple of 4096 bytes. The metadata holds one byte
++ * for each tile of the data. pitches[0] is the stride of the first plane's
++ * data and must match the value below; all other strides and offsets are
++ * computed from the width and height of the framebuffer.
++ *
++ * For a width x height framebuffer, with subsampled planes being
++ * DIV_ROUND_UP(width, 2) x DIV_ROUND_UP(height, 2) samples:
++ *
++ * RGB formats with 2 or 4 bytes per pixel (cpp), one plane:
++ *   data: pitch ALIGN(width * cpp, 256), ALIGN(height, 16) lines
++ *   metadata: 16x4 pixel tiles, stride ALIGN(DIV_ROUND_UP(width, 16), 64),
++ *   ALIGN(DIV_ROUND_UP(height, 4), 16) lines
++ *
++ * DRM_FORMAT_NV12, two planes, Y then CbCr (V4L2_PIX_FMT_QC08C):
++ *   Y data: pitch ALIGN(width, 128), ALIGN(height, 32) lines
++ *   Y metadata: 32x8 pixel tiles, stride ALIGN(DIV_ROUND_UP(width, 32), 64),
++ *   ALIGN(DIV_ROUND_UP(height, 8), 16) lines
++ *   CbCr data: pitch ALIGN(width, 128),
++ *   ALIGN(DIV_ROUND_UP(height, 2), 32) lines
++ *   CbCr metadata: 16x8 sample tiles,
++ *   stride ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(width, 2), 16), 64),
++ *   ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(height, 2), 8), 16) lines
++ *
++ * DRM_FORMAT_P010, two planes, Y then CbCr, 16 bits per sample:
++ *   Y data: pitch ALIGN(width * 2, 256), ALIGN(height, 16) lines
++ *   Y metadata: 32x4 pixel tiles, stride ALIGN(DIV_ROUND_UP(width, 32), 64),
++ *   ALIGN(DIV_ROUND_UP(height, 4), 16) lines
++ *   CbCr data: pitch ALIGN(width * 2, 256),
++ *   ALIGN(DIV_ROUND_UP(height, 2), 16) lines
++ *   CbCr metadata: 16x4 sample tiles,
++ *   stride ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(width, 2), 16), 64),
++ *   ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(height, 2), 4), 16) lines
++ *
++ * DRM_FORMAT_P030, two planes, Y then CbCr (V4L2_PIX_FMT_QC10C):
++ *   Y data: pitch DIV_ROUND_UP(width, 192) * 256, ALIGN(height, 16) lines
++ *   Y metadata: 48x4 pixel tiles, stride ALIGN(DIV_ROUND_UP(width, 48), 64),
++ *   ALIGN(DIV_ROUND_UP(height, 4), 16) lines
++ *   CbCr data: pitch DIV_ROUND_UP(width, 192) * 256,
++ *   ALIGN(DIV_ROUND_UP(height, 2), 16) lines
++ *   CbCr metadata: 24x4 sample tiles,
++ *   stride ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(width, 2), 24), 64),
++ *   ALIGN(DIV_ROUND_UP(DIV_ROUND_UP(height, 2), 4), 16) lines
++ *
++ * Two-plane images are allocated as a single buffer holding both planes,
++ * with the CbCr metadata following the Y data, so the CbCr plane starts at
++ * offsets[0] + Y metadata size + Y data size. handles[1] must refer to the
++ * same buffer as handles[0]; offsets[1] and pitches[1] are ignored, userspace
++ * should set them to the CbCr plane offset and the CbCr data stride.
+  */
+ #define DRM_FORMAT_MOD_QCOM_COMPRESSED	fourcc_mod_code(QCOM, 1)
  
-+#include "disp/mdp_format.h"
- #include "msm_drv.h"
- #include "msm_kms.h"
- #include "msm_gem.h"
-@@ -146,6 +147,7 @@ msm_framebuffer_init(struct drm_device *dev, const struct drm_format_info *info,
- 	struct msm_framebuffer *msm_fb = NULL;
- 	struct drm_framebuffer *fb;
- 	const struct msm_format *format;
-+	u32 ubwc_pitch[4], ubwc_size[4];
- 	int ret, i, n;
- 
- 	drm_dbg_state(dev, "create framebuffer: mode_cmd=%p (%dx%d@%p4cc)\n",
-@@ -177,14 +179,41 @@ msm_framebuffer_init(struct drm_device *dev, const struct drm_format_info *info,
- 		goto fail;
- 	}
- 
-+	if (format->fetch_mode == MDP_FETCH_UBWC)
-+		mdp_format_ubwc_plane_sizes(format, mode_cmd->width,
-+					    mode_cmd->height, ubwc_pitch,
-+					    ubwc_size);
-+
- 	for (i = 0; i < n; i++) {
- 		unsigned int width = mode_cmd->width / (i ? info->hsub : 1);
- 		unsigned int height = mode_cmd->height / (i ? info->vsub : 1);
--		unsigned int min_size;
--
--		min_size = (height - 1) * mode_cmd->pitches[i]
--			 + width * info->cpp[i]
--			 + mode_cmd->offsets[i];
-+		u64 min_size;
-+
-+		if (format->fetch_mode == MDP_FETCH_UBWC) {
-+			/*
-+			 * The CbCr planes follow the Y data in the first buffer,
-+			 * offsets[1] and pitches[1] are not used.
-+			 */
-+			if (i > 0) {
-+				if (bos[i] != bos[0]) {
-+					ret = UERR(EINVAL, dev,
-+						   "plane %d not in the first buffer", i);
-+					goto fail;
-+				}
-+				min_size = 0;
-+			} else if (mode_cmd->pitches[0] != ubwc_pitch[0]) {
-+				ret = UERR(EINVAL, dev, "pitch %u, expected %u",
-+					   mode_cmd->pitches[0], ubwc_pitch[0]);
-+				goto fail;
-+			} else {
-+				min_size = (u64)mode_cmd->offsets[0] + ubwc_size[0] +
-+					   ubwc_size[1] + ubwc_size[2] + ubwc_size[3];
-+			}
-+		} else {
-+			min_size = (height - 1) * mode_cmd->pitches[i]
-+				 + width * info->cpp[i]
-+				 + mode_cmd->offsets[i];
-+		}
- 
- 		if (bos[i]->size < min_size) {
- 			ret = UERR(EINVAL, dev, "plane %d too small", i);
 
 -- 
 2.47.3
