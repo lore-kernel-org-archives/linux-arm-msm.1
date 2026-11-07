@@ -1,61 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794018322;
-	b=Oz0PQkFiCGGlLp0mKcH7xhNwowE8XJ5dHuQ962U4F6kcEjMt63lv32hL6liula69p4/O
-	 szG/RfEwtUmmL/qOpEvZvab6ONLcwxw5g96N2U7KUeWn0V4wMndP8q2qcpeYCcgeJlN63
-	 Mix+JDMndiHyuhNBuaizkSObJgD/oS1Ih7YZCwoRtJ5/m0cuyU8r20aX108+6jq8OKxuP
-	 TtYzqR0kNqg00evLTWo0vBvpMQiUwabqrqn3WZpblaU+R4WgZpQAJOGUacalcsHbDzipt
-	 AGAIA4kQ5GAjqLZ1oizsU5wbRBiQ9GH2naWRGaK65GVGXpMIWuX51kk6pDkbMSetKjw==
+	t=1794018331;
+	b=hr+b/i6QtQJbjfVI2UX86yXEMHKGdSmoV4Db9I52nm+HsMRglOtz4n/66EmCQdYnIKCi
+	 SWg/SoY0SSZV33305587vM3wCu7ShZBnUT4QsGxWnq4RaFuVrXpt6ELOQvwfIIkl6PoZH
+	 8jWTAW42CVYVqK5jL0T/ut/5HtkPOOJPCm6PGyD/mxK/dgxWXLcSzO9UJ1UdN86XRWTBM
+	 UXeHQIDiUpy/GMv7NzRiokJhha3MMYENPUD2cMdeX9INRn2N0TU7Vq/c3nYm9Mda5dYfv
+	 KYRvZy5it19hXi7Vzt6f/Bly+LCT3XhmpqGhqvQC9QfyBMWq+eaIoFO7uG5plFuBg+w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794018322;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=8dwzbbG0d+Dc0ujJeoG+sfPZys6ay5RFi/wRU64dNww=;
-	b=oK1JRfbn+pfvuyFWEU9ic8By7oxzv0VeyfPcB+bx+xcgL+sqTSk0zycq+eR5+Lbqhb8T
-	 MQocnUd9+eLZ5eBvCzOJpIxTM+oj5d77wiQJLZ5dSI9bkO9KOBasxmqbW/MscqyXVhYu6
-	 Qk/ynqFSFbqHxQNMvKKxTUF6RXbJINDzr/E+THxYCVVyIflYpBP1TGuulFnUsBkctZGT/
-	 Jjl0t3NUYl2ZXfX4lcLqbQEn6Hk/GsYiy5FEnma+Adeg8UfkW5/QvMO8f7pApZy2anSR6
-	 TxUICXoiESpG1UqmKERnCxzJ3DYmgAXPgagmxSzW0qZ/PORTNTpZ1umqr8LJ6LNjXzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794018331;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=PRtH9+Dr1O28KhdhtyeoAvx+v54Z/fQlp9sOxD2ElWE=;
+	b=A2I1STg1V+/cczaVtOyQNZklno1FiUxBb11Pt3iOQLqNspLg0ABpWrFrH6yVqkp0h6F2
+	 UzGA6rWLUqlkNEV1slQBnaaDhqTdF3rKrZaSxlwDjJNQcc2MUgQPGhpa1AreUQkXn6QFX
+	 PRMc65edrHwMzOoze1RzSw+TosX75GCvNFLT7bKlb60V1Rwevw73eP5K2HFigXQiN+AKa
+	 gAl9d/PIVATacxavG/8d7ewkldb6BnViGS1TH2X9l6eMpc4XqswpVvGNSE6twxva3i3oG
+	 Wpk3uQJ7o3qcT5kxoxH7jzut6UgONPSsf2Gn+BzOnMq5SX2KE+s+a/7eGWDoqE97rMw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kX85Bmqt;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Oc4WZjrX;
+	arc=none smtp.remote-ip=209.85.222.41
+Received: from mail-ua1-f41.google.com (mail-ua1-f41.google.com [209.85.222.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4E23606A326;
-	Sat,  7 Nov 2026 02:25:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E83C606A32D
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 02:25:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7E83C606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kX85Bmqt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A10F1F0089F;
-	Sat,  7 Nov 2026 02:25:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794018321;
-	bh=8dwzbbG0d+Dc0ujJeoG+sfPZys6ay5RFi/wRU64dNww=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=kX85BmqtvNJOuadn4MDncRuCYGKMhKsDBCGD0KmZZWNEIULZPLALTrCZRqx5jhM2d
-	 WLVFnh9sPFGxfYB/VqZ8y7zG+8zz1BNPJwwWrUZe9icrcGTCfj6ZgHNfgc3hJDW+pq
-	 bYoJ8wMcTO/1TxGTdIMtIRzbDczUnZEuqN/Rjur3zY71/XnA3a935UCUCBZNFpANwS
-	 oQMWRlMoWhh4+KTT5QXuF1SzFRxz7rSUHF0FSDmjSUlkiZuqPe7/vNlFC6Syh8AYTn
-	 D3tIW6O2QfkL2kKYHCeeWzzzRXZDqOEX0J0yTU96FiO44JpJKzcVQghqEZqWVkNThh
-	 SFr4Und0NCobA==
-Date: Sat, 7 Nov 2026 02:25:13 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Christoph Rudorff <chris@rudorff.com>
-Cc: Linus Walleij <linusw@kernel.org>, David Lechner
- <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy
- Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn
- Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, Krzysztof
- Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v5 0/3] MSM8916: improve gp2ap002 proximity sensor
-Message-ID: <20261107022513.3c729034@jic23-hlaptop>
-In-Reply-To: <20261106-iio-light-gp2ap002-v5-0-070631a7252c@rudorff.com>
-References: <20261106-iio-light-gp2ap002-v5-0-070631a7252c@rudorff.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Oc4WZjrX
+Received: by mail-ua1-f41.google.com with SMTP id a1e0cc1a2514c-998749fe872so707008241.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 18:25:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794018330; x=1794623130; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PRtH9+Dr1O28KhdhtyeoAvx+v54Z/fQlp9sOxD2ElWE=;
+        b=Oc4WZjrXevsZ4OTMfIbbyREOaA5y75WYe0/yqmZCTkQey/yR7vtBVeaPl8GxR1UyIi
+         iJpHqhmI5aEStHLhYKg1qdE+XYRcR9gCBlx8ZK12Q21r/xhqMwNPUkHVas8ykMJXgA4p
+         T88e7YXb1lKhV35J7diCLhvOic5PzFVmXBeB2jwie02oSr429h7R6Uq6nZTG6kcYUTRY
+         zjSl/cq41vFYP+VNnZrzgdaF4neWIOFOJAV2PlEtp4wIfvhw7snMOAk55z6PIcwa2siO
+         QI9aRrgg4svcH/B5udGBftoTLj6s9lAJeh5CHpXdmxWQqtnk91M9VMpWN6I6PoSd82Rr
+         R4WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794018330; x=1794623130;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PRtH9+Dr1O28KhdhtyeoAvx+v54Z/fQlp9sOxD2ElWE=;
+        b=SrfejaaImMorzdtp4U7sAqWggqTPvZb91yTDU1J2/yLKn5ZaiuBu8S/OYtsOxRnT3a
+         p4dpcV1v8VwR+izRZYRcU2Jj9QF51MFjC2+hdfX57BGokk9gNJuaYpbuY30XxTTfcu2z
+         s/ri7akIY77dT+F3MWf7ritCJG7B/XIqyP1w962XiFh2SB+G0HdGqaCX0uHQiTlXOgMC
+         wzdeuQy0j++tRmDgRxI5W8MhDUspVAGDH9vY6bZaagzFeJlEfl2pLBU1adjyK2xjcsOW
+         31GFK/UBV2MdLd2rWBHDV/IgEvHH3TnnHk40KJ9uI3cvDzBRpgtwMQJi8M0nDfPctGQL
+         PImw==
+X-Forwarded-Encrypted: i=1; AL+hErFZv1G5E6m3Yp4CuUuQ8z48+155ObXYeFFrLR7DQa1AHxZoPaXmO4soAekXxB/qmIC8TgSlNmXOkgWOy8Pc@vger.kernel.org
+X-Gm-Message-State: APuU4Z/6K8MpIRXQc9v+mXSE8zJgNUG5ySjWcoj5L6gZvjsW7fozCEwh
+	kBVMtw+zNLx9h3H+7aWPj7V7DCMo8R37Dm67q53uy1oD2e4LgVLxainQ
+X-Gm-Gg: AYBFou2mHbMhETaAQl8MIlCJbr0HAKc4t77xKJbgOHcI4PjX15lJDYZ8wyljZCEhewx
+	xmxl/ASA9jJZPBZn6vAy9tuLnh+XKNgtiDH7/Makxi8Z7pOyHa7DZ8s7cwoh3KNMs+shXwGYEsg
+	QUo1byFWRPrYTkwKDfCnOExhN4qftZ1kNISJ8gFAdWug3ipvuvdMmFCZ0a4ZiYF4Yq05VAngKdo
+	ayzKlFFq5toq9acggQqY1RnBWhhEc92cZzfLMNn7WDc9k16PRJMDmkYjNPIelbRGP0PkVM6XavR
+	WACsD+zorc3ERjFgMNSn33ANXjRXLuq6kJyslY2CmLn9CqB9bbg9KCGLc/R7i/vFuISU10EipYX
+	QGMR0aeTjZ93U34x6XGdJGtILp0laD7/xmKuIUUe0zaERgRgMDr8iRGaZlQwzY6oMGJvnd67iJ+
+	LS8/KqPSI4mLDIPhyedcmG+w2jlyEWysFT+26rVN056u9uwLwbORjW0Xkt0Vw5NceLp/U/98fVy
+	0u1fc9RuAp7NroUsB2HBUEun2VwCcGD4M48DtYpXazg1XyxO9zhDdhl2WmvA0+QbYvIVoDBmMaR
+	Q4FPxVe0gxYjg0+iQgqU8LGUYOIQ
+X-Received: by 2002:a05:6102:e0a:b0:7cb:bc5e:7d9f with SMTP id ada2fe7eead31-7d2a153ee73mr2430046137.11.1794018330516;
+        Fri, 06 Nov 2026 18:25:30 -0800 (PST)
+Received: from localhost ([174.93.36.89])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d2a89412besm2642472137.3.2026.11.06.18.25.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 06 Nov 2026 18:25:29 -0800 (PST)
+From: Richard Acayan <mailingradian@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Andy Gross <agross@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	devicetree@vger.kernel.org
+Cc: Richard Acayan <mailingradian@gmail.com>
+Subject: [PATCH v3 2/9] dt-bindings: soc: qcom: aoss: Add compatible for SDM670
+Date: Fri,  6 Nov 2026 21:24:46 -0500
+Message-ID: <20261107022453.159341-3-mailingradian@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261107022453.159341-1-mailingradian@gmail.com>
+References: <20261107022453.159341-1-mailingradian@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,21 +107,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Fri, 06 Nov 2026 10:33:25 +0100
-Christoph Rudorff <chris@rudorff.com> wrote:
+Document the compatible for SDM670.
 
-> Samsung J5 is equipped with GP2AP002 proximity sensor.
-> Unfortunally the driver wasn't working, no irq received.
+Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Looks to me like you've addressed all the feedback and generally
-looks good. So applied to the testing branch of iio.git.
+diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
+index e94c4fd34177..6a817a1cd395 100644
+--- a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
++++ b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
+@@ -43,6 +43,7 @@ properties:
+           - qcom,sc8180x-aoss-qmp
+           - qcom,sc8280xp-aoss-qmp
+           - qcom,sdx75-aoss-qmp
++          - qcom,sdm670-aoss-qmp
+           - qcom,sdm845-aoss-qmp
+           - qcom,sm6350-aoss-qmp
+           - qcom,sm7150-aoss-qmp
+-- 
+2.56.0
 
-I'll push that out for linux-next to pick up sometime next
-week.
-
-thanks,
-
-Jonathan
