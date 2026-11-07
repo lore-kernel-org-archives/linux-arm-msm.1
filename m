@@ -1,107 +1,106 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.129.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794010868;
-	b=a4qRYROWIcTo4aSmvcX2+uvsuyf5c6yUFbPWkxhSq8aB+rYJN8EmiM43zdeTPuycdIH2
-	 vzxRRmfO8wYbF7RCcG0kZB3As5SQVnlOyFHGo5QWd/Sjjd1GopOFcJ3kKDi2Hw1dnzpgP
-	 cQtLjRt+nLfvDmz1bprOUc64GBLvZIL5JZAqu0yF71AFzckJD7iny9zH2WFGjr+LluBJF
-	 zlpMTZksJ3e3EEIY0jYyWsZx6JqvdyrZaHU/NYI0cV2AEfWou5bm7fbzD9i23mPzPXLLf
-	 TKtHPxB/W6yG9aeh9ydlUrLD414PVH8dy2zhb1vI8XtwPoX+7U5qmthTY5ilgjW79Bg==
+	t=1794011343;
+	b=MK+kSiEkqJ+b3E0ZP4sWrUzJwhShyHwN88xqOvRAk4Ib2NnJyvYVfSoI+cyCd08HA8ZK
+	 CKQPImBdIGs+UN0hRIiYfBDBNCXhKVVsp77lezoGugNelx3cavtQ8Ox7kE9jfaeZ6f0Bh
+	 4gQVOysmC3QaZuBv4fep3wzABLqXTatizlt5jfhe5IQh2rVZSX3iNeSBCsILHR62knh/J
+	 EOTTUnTrj6Q91aaoH7F7AKSewzjtFlWNQZt1XhcdJZzIKkJlFSUnaFk3cBCNrIA5kxvQc
+	 SczaQ2o1v0ZdnmDaWs8DADm9qYVf9jyRoTogXPuWaQ86kLuxia/9RhIzQqrdC3fq1TQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794010868;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794011343;
 	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
 	 X-Mimecast-MFC-AGG-ID:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
-	b=0joF43u5+XHAP64jDEDGB+Kigo1RIgMbtFxRo/xDqK4uSB5K4S9uXqPisYE92XHaQ9TW
-	 O5/FeZ/EeIKm0i8+DWhY5RQz/TzpQ/N2baWmKETAKWp3h47gXIX0uIjcfEP5ARmWUlhaP
-	 JJDQfuS2Uc8WK0LGupPTwKuR+BJTQR8ZcnMWVzTKYfKYSdU8yk8muoqI5PqYCwa3XYkBZ
-	 r41HrFyBLOX8MygdYnfubYrqVxZmALS/LrzEdkAbw6Rt3SGLBmTdFucT6T7HeM/2cgC1A
-	 oYhFwRhswq6aqFqL+rdoD7oAGveIt/xCmUGF5G9zCR0ct/5pXwh6/s1GupEceom7FvA==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=gaBG4tF2dtj1yCCjozoR+3yiqRMFZ6QaunJVXhUcrbM=;
+	b=k4dy4xvUzD7tRRVpRVnq0PaVJl4VklpP110udqFzB9k9TQXJNcaFcwDcU/DhoxF1SpCY
+	 n+KvTnUWY8zgmsuZAnSLtsOuD8HImaU5IY9iEpKR/r3P24ehbF9HlJcBDaUmoLHOH/T16
+	 CEQy2HCOJv9fbeTsK5YDc029vEi3Smz9g4rr5+spBgvyxWDOs1pI1E+YwNg6llIivZ92W
+	 cHaKveaU6McOPdjopMSyi0L9elTZflsBGif8Ji3LwTzfdpMYrL99KvDPv9SQWhlDZTNY+
+	 E8N9JSPXPLKl0dVd4wgDTb5SUMFEo4oia3H9SJhG7Cn/QjzNdl8nkgJP3oZ/eh/CPWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=redhat.com;
 	spf=pass smtp.mailfrom=redhat.com;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Jf9GISnB;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=NlnKKXpQ;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b="bJ0Ydj/5";
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=HrTTOLEB;
 	arc=none smtp.remote-ip=170.10.129.124
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CFF6606A32F
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 00:21:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CFF6606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D61D606A330
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 00:29:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7D61D606A330
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Jf9GISnB;
-	dkim=pass (2048-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=NlnKKXpQ
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bJ0Ydj/5;
+	dkim=pass (2048-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=HrTTOLEB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1794010867;
+	s=mimecast20190719; t=1794011341;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
-	b=Jf9GISnBZ0wONKY2iaOs9SlIUDHitNSluS1ZaHWFlZL6MhuIR1isPyj1WkPkMoNRgW4vik
-	rPWWiZ5COuCOQY8G7jejZGByOsfI6D6S00cpk+h/JGp0nGowQpaOSMWZA0DpMTXC88bwKm
-	MSWuRJHegoeoF7da4bEJCXv257TrgVQ=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=gaBG4tF2dtj1yCCjozoR+3yiqRMFZ6QaunJVXhUcrbM=;
+	b=bJ0Ydj/5zdPqonzs0Qp8SdKWhcvyezWzY6uoeHrFxgWJ2ni8C97z6+rkCjWl9wyPnck+KK
+	jd9rL4RrV/1BJL97m7C9wQhx5a+Q7kArmXTfoBBOgXitEpsa2tr3lnpwKsZvuVqNGSqLVx
+	gSKwyM8NaJqMHLWJCOVizs40gV2ov5U=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-75-BKc_XyNpOym-fi5Kvz2uOQ-1; Fri, 06 Nov 2026 19:21:04 -0500
-X-MC-Unique: BKc_XyNpOym-fi5Kvz2uOQ-1
-X-Mimecast-MFC-AGG-ID: BKc_XyNpOym-fi5Kvz2uOQ_1794010864
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-532f343a55bso21176341cf.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 16:21:04 -0800 (PST)
+ us-mta-287-1vUu0dVeNAKQGo9noAUkzQ-1; Fri, 06 Nov 2026 19:29:00 -0500
+X-MC-Unique: 1vUu0dVeNAKQGo9noAUkzQ-1
+X-Mimecast-MFC-AGG-ID: 1vUu0dVeNAKQGo9noAUkzQ_1794011339
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-5358515b4easo23366361cf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 16:29:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1794010863; x=1794615663; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+        d=redhat.com; s=google; t=1794011339; x=1794616139; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
-        b=NlnKKXpQWdB3nq2vpcPOQQ2XwSeHfcOq7MSiRvB6EnvBX5HJGoZSmIR8xyfXzcyOaF
-         p3Hiu9HwInGKaixEiNp/I7sPXL04iwFksNuxGTejyFbIcD1ajnsnfTHk2GLnCaYDWQdy
-         gIBSBcnHDvNefPE4/2m4+1W+rt///jw57XFEz2OM2pvwGnbdn02MY3/7pHlgwa14O/dK
-         UQHwricNPtk3/Mnx4LUHDCptyBovtQEB3cG2MwKZsyTvlND7eWhkRsU4SejUv6xfzW2j
-         K25IfDhCTpC2BiNl1AjhafgUL4hjMs0QKY+KP4Ga/EYjBx2dRWa414w2NfAx16r9aUiF
-         z1rg==
+        bh=gaBG4tF2dtj1yCCjozoR+3yiqRMFZ6QaunJVXhUcrbM=;
+        b=HrTTOLEBQxI3/p/SwDs5wGowCzDv3qap7BaDopPDW4QgVtV71FgQ5dxjSDq/r/KP/l
+         X8vMbe8KofIG/6ej0/YNwUEaznXMDewYEVaiXwm8kdRE6Odwg66CZYGVYC4/SBgkVUjG
+         /2aEucS6IyUBmp3L1tZyV2ZWrKqWTM6qiSC0KkhGHJ/ZLNYruUAzSh+as/XZlGmyHlc2
+         TeVrIVOazRp9hoL92k6ygi3P28VuaMQcJtT0IRBofI/wIGTrzHj4ba3KvUiGIIOJNt8h
+         ui2ZF7XgOLFbcfrepIt0jdT2J1dgICVzZKHGeOpfFgp1Qdye9ZIbPEPypjbEJmOZf5BY
+         bpHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794010863; x=1794615663;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
-        b=js7rEQ39jLsSvopXZ1Vr4edTf37C1MZ1XJJ4t1tmPgAAHG2Q2ih59Zf0xECoI00ybG
-         SHai0vkrBuGnU0zMSJl8nEH74K3APlkZArCe4WixdTHe8XRY8DTSs8/K6bsaFwoMG8/t
-         X8O+esxUoXFsbsGAogKylEu+0Zt6avzKqA0+7ShGjh2g3FYjLhbrHRF3t26gdqaIQi7p
-         wNiywZONc872fp+BHx7BnH4NKYmetbMQAWUE4cIWdRdbfgeqNRPOR2BomKAvoJQi4JE7
-         CgmUFrmFM7X8xtYXshr30qKQIY2QcFIo4xbZLwgYats8oSNcC/OmeRU3iYkFoN/mOZfP
-         6AbQ==
-X-Gm-Message-State: APuU4Z+xmpdVSIM991o4ajBEEWpz8Ea1N/oFR+T8aCzYaJq7k4xsvX7o
-	oeMFr+UyvdTr83QVqSLhg7Rrje6+xSo6ZFZHrF6Oal+jtCRX2X1GPhdF8pQZ6IUK4LaRQz9VBq+
-	dpKJz8Qo0lqt6RL2qdBUdncqKAzHx+JtVZ5OKHRiSu7JFLOXwcjvQYSrouYCDXN2mLyPoiKJZby
-	vIXFzRUroRTXAzorRBNCwKJs3OH3uy5uyP2YJ2LXnMoIbEVYdDJg==
-X-Gm-Gg: AYBFou1NRSyfLAULzhfdAMVDxAalFpwrOuNwPKZzPNYZrNCqYyQORwPIFOrKmR6s40d
-	pgBv6TDvKydDUofDHsZgrsgwYiy4i/dt5CVLj4EgWl5rl/DpMpKCeLqIgdAehiF6NsxuU+LrIPG
-	+cVu1F3O+osoneDftU3nE8OcKviAeD0R6Ms3E61f9RYdO5BWr5gPWic/0ZeGJBwIbWuJcmZu8ph
-	OQcNB+7L8D7M2OyTu63jgUT3I0BpKJX72mHkeH4Uek4uxAKgVlvClWAVJq0oRZh11frtRRN3am6
-	yQtDRExVXvSCroXNhLj+tkOgGzH3IITnuPSTxYnc8y8cTMA+sL+p9yRBBskaJ4oKIU7hv2P+suc
-	2dvbJnxIJ8ENbePZUyerBP3PgufNeTVkkTgMqto5oUaAEiD6xPFUpuO4Irkay0uqx/3y7GXzdx3
-	i4jmVk6gIW7ZKy2eiH
-X-Received: by 2002:a05:622a:608b:b0:535:1761:107b with SMTP id d75a77b69052e-54e13d76489mr67615011cf.31.1794010863548;
-        Fri, 06 Nov 2026 16:21:03 -0800 (PST)
-X-Received: by 2002:a05:622a:608b:b0:535:1761:107b with SMTP id d75a77b69052e-54e13d76489mr67614571cf.31.1794010863025;
-        Fri, 06 Nov 2026 16:21:03 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794011339; x=1794616139;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=gaBG4tF2dtj1yCCjozoR+3yiqRMFZ6QaunJVXhUcrbM=;
+        b=N6X+N+PuSKSDzinkypBYfcsnmNiPhqt0QWK8fO0rofZj39D72vEL40YCJGQmus62S5
+         V+tO7CX9satn+yrRZ57Q5K4yVOXyFMIhWmw42UfNORHCnJkTXoM4gLqtiNtAzA8rmaCB
+         CozUsmHnv43iHXslRYNjej3Tf6TBsfT+aaB4vPGKc/Hn119agtqMdBJlRgyxlLbEZato
+         3C/U/WLrd+z9nuGXQafDsGT6JIHArV9XB6aRpFDEfPRCUqGSl6WOgUYjAYZCX5vYS3qn
+         SrzPmZJRNzPISuGVhhzuk/671zAclNF3eTFkU4TxnDLVDwhA/RscPr3MCzuCe1H3nAQf
+         BIww==
+X-Forwarded-Encrypted: i=1; AKwUvByegZweO1mUXGyu1tBWbtvTWN7IZGjIw2DEIxVdtvltvBRXVktrzUyclofV/jcbUCGN7UcJ1nsusdN2dLRh@vger.kernel.org
+X-Gm-Message-State: APuU4Z+W18h9j/K8mjiBtuJpo8vyqvR9pBchYB+b7biDqYbMhJ5rwJkH
+	+f9SFHdfqNlLuYFKfjQjnD3Dt6BQJHl8KeYVi3hDeLNJXPUPm0XfQYImLNU2scLQjZ+ki1J0YT9
+	URiiya64TGtgh7YeHERmMk/0hfpo4Ob68O7MQIzxmqfccOsoIoWlFJBkgdia4583LcW0=
+X-Gm-Gg: AYBFou31r9IkjjYkVG1dq6zlh50GWj02Wl2mCBDLxYT1x9KaLyGUuXGGcnYqt840Z2U
+	SLUvZt9nJWC22jOChJ4lVZ/MvvvKR3p0UJ0MkKqpqvtg/c28GE7Vn5nlX6zDhF+PAP31E9T05p2
+	QJK5N15mCSl8lK+mIdAACnHtR7RFpfpCP0TC79+ywvmnNnfAdoEkNQnIxGy1ysYi/9/sQMCKOFb
+	xaGlgyzCdmPpLtJMkvS9+f9Jrx0JJ0OKqCeIveD32MNsoZy8U5bJ5/u7y8QK3zUs/+m88/KCU5m
+	0w5PTb4tg7QC+fGMs1tkT/WawkxfuoCjxJTM4BFNmVeUiXb+s7KtmApgLExVDgaPQlC8gcSzqzd
+	ImE/QdT5VX3dgqu775pOEq03JzG5ZBeLhPPN5G+wx6r5s63RWMoNEExnCaFXv3bSfqV6uV5q/h4
+	EekMY/iVuNnKkATXBo
+X-Received: by 2002:ac8:59d4:0:b0:536:458d:525e with SMTP id d75a77b69052e-54e14372689mr65272051cf.37.1794011339324;
+        Fri, 06 Nov 2026 16:28:59 -0800 (PST)
+X-Received: by 2002:ac8:59d4:0:b0:536:458d:525e with SMTP id d75a77b69052e-54e14372689mr65271841cf.37.1794011338715;
+        Fri, 06 Nov 2026 16:28:58 -0800 (PST)
 Received: from bmasney-x1.rmtuswv.csb ([69.43.42.202])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-54e2683624esm32445291cf.18.2026.11.06.16.21.00
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-54e2625abafsm32950211cf.16.2026.11.06.16.28.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 16:21:01 -0800 (PST)
+        Fri, 06 Nov 2026 16:28:57 -0800 (PST)
 From: Brian Masney <bmasney@redhat.com>
-Subject: [PATCH 0/2] mfd: convert to subsys_platform_driver()
-Date: Fri, 06 Nov 2026 19:20:49 -0500
-Message-Id: <20261106-mfd-subsys-v1-0-1c3e755d37a6@redhat.com>
+Date: Fri, 06 Nov 2026 19:28:46 -0500
+Subject: [PATCH] regulator: convert to subsys_platform_driver()
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,21 +112,28 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqAIBCF4VeJWSekkUSvEi1Sx5qgC05FEb17V
- ssPzvkvYAyEDFVyQcCdmOYpQqYJ2L6dOhTkokFlSkuZaTF6J3gzfLLQubOFMaXyZQ7xsAT0dHy
- xuvkdlwPa9S3AfT9JAH4AbgAAAA==
-X-Change-ID: 20261106-mfd-subsys-63dc5bb82f83
-To: Lee Jones <lee@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, Brian Masney <bmasney@redhat.com>
+Message-Id: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqEMAyF4auUrKfQuMjCq4iLamONiEqiwwzi3
+ aeOyw/e+08wVmGD2p2g/BaTdSnAl4N+jEtmL6kYqlARYiCvnI857qt6Ozr7mqcBiVLAFCJDuW3
+ Kg3z+yaZ9XJYT9/vdgev6Ae7ZxCF0AAAA
+X-Change-ID: 20261106-regulator-subsys-6f166d01d0ae
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Support Opensource <support.opensource@diasemi.com>, 
+ Chanwoo Choi <cw00.choi@samsung.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+ Aaro Koskinen <aaro.koskinen@iki.fi>, 
+ Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
+ Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>
+Cc: linux-kernel@vger.kernel.org, linux-omap@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, patches@opensource.cirrus.com, 
+ Brian Masney <bmasney@redhat.com>
 X-Mailer: b4 0.17-dev-d96cb
-X-Developer-Signature: v=1; a=openpgp-sha256; l=724; i=bmasney@redhat.com;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=28541; i=bmasney@redhat.com;
  s=20250903; h=from:subject:message-id;
- bh=AYswpvPVCUryj51+P1LGK9/UjRYirXKlC5LdoCoqFdc=;
- b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLLe5T17sENr9/zCym3LGN5WLlp6y9u3MOdpuJuDUla+R
- uwfkzsMHaUsDGJcDLJiiixLco0KIlJX2d67o8kCM4eVCWQIAxenAEwkLZvhr1SeuZtycTJX6sKm
- lG6bnLoAB87Ld5vNeONt7c5fSK3qYGR4o1l8I25S3JrGvlru9bYuL94f3HnyzxUZh4K7DK9nsfo
- wAgA=
+ bh=3BSZKVbX3zqJ0laX782klMVHOEsD6TNxuFJpqSfyqZQ=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLLeFRydfTqg8erBbat+GOytdls66YZb3bazwZNXJTbZH
+ Z4p8ZTTuKOUhUGMi0FWTJFlSa5RQUTqKtt7dzRZYOawMoEMYeDiFICJeDMxMiwOWqBbsW/LI3X5
+ cumt7/3sJk7s5dGOv5uz9b3r/+JmzjxGhmsXG85t9VTI6pRZ8FiwcHpBgPwJrfuPl2hmLDZ6uMi
+ ohwkA
 X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
  fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
 
@@ -136,17 +142,807 @@ the macro subsys_platform_driver().
 
 Signed-off-by: Brian Masney <bmasney@redhat.com>
 ---
-Brian Masney (2):
-      mfd: qcom-pm8xxx: convert to subsys_platform_driver()
-      mfd: tps65911-comparator: convert to subsys_platform_driver()
+ drivers/regulator/88pm8607.c           | 12 +-----------
+ drivers/regulator/aat2870-regulator.c  | 12 +-----------
+ drivers/regulator/as3711-regulator.c   | 12 +-----------
+ drivers/regulator/da903x-regulator.c   | 12 +-----------
+ drivers/regulator/da9052-regulator.c   | 12 +-----------
+ drivers/regulator/da9055-regulator.c   | 12 +-----------
+ drivers/regulator/da9062-regulator.c   | 12 +-----------
+ drivers/regulator/da9063-regulator.c   | 12 +-----------
+ drivers/regulator/fixed.c              | 12 +-----------
+ drivers/regulator/gpio-regulator.c     | 12 +-----------
+ drivers/regulator/lp8788-buck.c        | 12 +-----------
+ drivers/regulator/max77693-regulator.c | 12 +-----------
+ drivers/regulator/max8907-regulator.c  | 14 +-------------
+ drivers/regulator/max8925-regulator.c  | 12 +-----------
+ drivers/regulator/max8997-regulator.c  | 12 +-----------
+ drivers/regulator/max8998.c            | 12 +-----------
+ drivers/regulator/mc13783-regulator.c  | 12 +-----------
+ drivers/regulator/mc13892-regulator.c  | 12 +-----------
+ drivers/regulator/palmas-regulator.c   | 12 +-----------
+ drivers/regulator/qcom_rpm-regulator.c | 12 +-----------
+ drivers/regulator/qcom_smd-regulator.c | 12 +-----------
+ drivers/regulator/rc5t583-regulator.c  | 12 +-----------
+ drivers/regulator/tps6105x-regulator.c | 12 +-----------
+ drivers/regulator/tps6507x-regulator.c | 12 +-----------
+ drivers/regulator/tps65090-regulator.c | 12 +-----------
+ drivers/regulator/tps65217-regulator.c | 12 +-----------
+ drivers/regulator/tps6586x-regulator.c | 12 +-----------
+ drivers/regulator/tps65910-regulator.c | 12 +-----------
+ drivers/regulator/tps68470-regulator.c | 12 +-----------
+ drivers/regulator/twl-regulator.c      | 12 +-----------
+ drivers/regulator/twl6030-regulator.c  | 12 +-----------
+ drivers/regulator/wm8350-regulator.c   | 12 +-----------
+ drivers/regulator/wm8400-regulator.c   | 12 +-----------
+ 33 files changed, 33 insertions(+), 365 deletions(-)
 
- drivers/mfd/qcom-pm8xxx.c         | 12 +-----------
- drivers/mfd/tps65911-comparator.c | 12 +-----------
- 2 files changed, 2 insertions(+), 22 deletions(-)
+diff --git a/drivers/regulator/88pm8607.c b/drivers/regulator/88pm8607.c
+index 969554725a67..a02c21d7f9af 100644
+--- a/drivers/regulator/88pm8607.c
++++ b/drivers/regulator/88pm8607.c
+@@ -387,17 +387,7 @@ static struct platform_driver pm8607_regulator_driver = {
+ 	.id_table	= pm8607_regulator_driver_ids,
+ };
+ 
+-static int __init pm8607_regulator_init(void)
+-{
+-	return platform_driver_register(&pm8607_regulator_driver);
+-}
+-subsys_initcall(pm8607_regulator_init);
+-
+-static void __exit pm8607_regulator_exit(void)
+-{
+-	platform_driver_unregister(&pm8607_regulator_driver);
+-}
+-module_exit(pm8607_regulator_exit);
++subsys_platform_driver(pm8607_regulator_driver);
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Haojian Zhuang <haojian.zhuang@marvell.com>");
+diff --git a/drivers/regulator/aat2870-regulator.c b/drivers/regulator/aat2870-regulator.c
+index 970d86f2bbb8..5f5ac84c6668 100644
+--- a/drivers/regulator/aat2870-regulator.c
++++ b/drivers/regulator/aat2870-regulator.c
+@@ -183,17 +183,7 @@ static struct platform_driver aat2870_regulator_driver = {
+ 	.probe	= aat2870_regulator_probe,
+ };
+ 
+-static int __init aat2870_regulator_init(void)
+-{
+-	return platform_driver_register(&aat2870_regulator_driver);
+-}
+-subsys_initcall(aat2870_regulator_init);
+-
+-static void __exit aat2870_regulator_exit(void)
+-{
+-	platform_driver_unregister(&aat2870_regulator_driver);
+-}
+-module_exit(aat2870_regulator_exit);
++subsys_platform_driver(aat2870_regulator_driver);
+ 
+ MODULE_DESCRIPTION("AnalogicTech AAT2870 Regulator");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/regulator/as3711-regulator.c b/drivers/regulator/as3711-regulator.c
+index 0431a732cd78..510c4d5c0935 100644
+--- a/drivers/regulator/as3711-regulator.c
++++ b/drivers/regulator/as3711-regulator.c
+@@ -248,17 +248,7 @@ static struct platform_driver as3711_regulator_driver = {
+ 	.probe		= as3711_regulator_probe,
+ };
+ 
+-static int __init as3711_regulator_init(void)
+-{
+-	return platform_driver_register(&as3711_regulator_driver);
+-}
+-subsys_initcall(as3711_regulator_init);
+-
+-static void __exit as3711_regulator_exit(void)
+-{
+-	platform_driver_unregister(&as3711_regulator_driver);
+-}
+-module_exit(as3711_regulator_exit);
++subsys_platform_driver(as3711_regulator_driver);
+ 
+ MODULE_AUTHOR("Guennadi Liakhovetski <g.liakhovetski@gmx.de>");
+ MODULE_DESCRIPTION("AS3711 regulator driver");
+diff --git a/drivers/regulator/da903x-regulator.c b/drivers/regulator/da903x-regulator.c
+index 2f85897183b3..084868adbff8 100644
+--- a/drivers/regulator/da903x-regulator.c
++++ b/drivers/regulator/da903x-regulator.c
+@@ -476,17 +476,7 @@ static struct platform_driver da903x_regulator_driver = {
+ 	.probe		= da903x_regulator_probe,
+ };
+ 
+-static int __init da903x_regulator_init(void)
+-{
+-	return platform_driver_register(&da903x_regulator_driver);
+-}
+-subsys_initcall(da903x_regulator_init);
+-
+-static void __exit da903x_regulator_exit(void)
+-{
+-	platform_driver_unregister(&da903x_regulator_driver);
+-}
+-module_exit(da903x_regulator_exit);
++subsys_platform_driver(da903x_regulator_driver);
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Eric Miao <eric.miao@marvell.com>"
+diff --git a/drivers/regulator/da9052-regulator.c b/drivers/regulator/da9052-regulator.c
+index fbebe538a648..289711143d76 100644
+--- a/drivers/regulator/da9052-regulator.c
++++ b/drivers/regulator/da9052-regulator.c
+@@ -442,17 +442,7 @@ static struct platform_driver da9052_regulator_driver = {
+ 	},
+ };
+ 
+-static int __init da9052_regulator_init(void)
+-{
+-	return platform_driver_register(&da9052_regulator_driver);
+-}
+-subsys_initcall(da9052_regulator_init);
+-
+-static void __exit da9052_regulator_exit(void)
+-{
+-	platform_driver_unregister(&da9052_regulator_driver);
+-}
+-module_exit(da9052_regulator_exit);
++subsys_platform_driver(da9052_regulator_driver);
+ 
+ MODULE_AUTHOR("David Dajun Chen <dchen@diasemi.com>");
+ MODULE_DESCRIPTION("Power Regulator driver for Dialog DA9052 PMIC");
+diff --git a/drivers/regulator/da9055-regulator.c b/drivers/regulator/da9055-regulator.c
+index a0d3414aa79e..aadc4d762d3f 100644
+--- a/drivers/regulator/da9055-regulator.c
++++ b/drivers/regulator/da9055-regulator.c
+@@ -580,17 +580,7 @@ static struct platform_driver da9055_regulator_driver = {
+ 	},
+ };
+ 
+-static int __init da9055_regulator_init(void)
+-{
+-	return platform_driver_register(&da9055_regulator_driver);
+-}
+-subsys_initcall(da9055_regulator_init);
+-
+-static void __exit da9055_regulator_exit(void)
+-{
+-	platform_driver_unregister(&da9055_regulator_driver);
+-}
+-module_exit(da9055_regulator_exit);
++subsys_platform_driver(da9055_regulator_driver);
+ 
+ MODULE_AUTHOR("David Dajun Chen <dchen@diasemi.com>");
+ MODULE_DESCRIPTION("Power Regulator driver for Dialog DA9055 PMIC");
+diff --git a/drivers/regulator/da9062-regulator.c b/drivers/regulator/da9062-regulator.c
+index e0c96f10e570..fd7f57991175 100644
+--- a/drivers/regulator/da9062-regulator.c
++++ b/drivers/regulator/da9062-regulator.c
+@@ -1037,17 +1037,7 @@ static struct platform_driver da9062_regulator_driver = {
+ 	.probe = da9062_regulator_probe,
+ };
+ 
+-static int __init da9062_regulator_init(void)
+-{
+-	return platform_driver_register(&da9062_regulator_driver);
+-}
+-subsys_initcall(da9062_regulator_init);
+-
+-static void __exit da9062_regulator_cleanup(void)
+-{
+-	platform_driver_unregister(&da9062_regulator_driver);
+-}
+-module_exit(da9062_regulator_cleanup);
++subsys_platform_driver(da9062_regulator_driver);
+ 
+ /* Module information */
+ MODULE_AUTHOR("S Twiss <stwiss.opensource@diasemi.com>");
+diff --git a/drivers/regulator/da9063-regulator.c b/drivers/regulator/da9063-regulator.c
+index bf34ea440d77..6df44d60c927 100644
+--- a/drivers/regulator/da9063-regulator.c
++++ b/drivers/regulator/da9063-regulator.c
+@@ -1065,17 +1065,7 @@ static struct platform_driver da9063_regulator_driver = {
+ 	.probe = da9063_regulator_probe,
+ };
+ 
+-static int __init da9063_regulator_init(void)
+-{
+-	return platform_driver_register(&da9063_regulator_driver);
+-}
+-subsys_initcall(da9063_regulator_init);
+-
+-static void __exit da9063_regulator_cleanup(void)
+-{
+-	platform_driver_unregister(&da9063_regulator_driver);
+-}
+-module_exit(da9063_regulator_cleanup);
++subsys_platform_driver(da9063_regulator_driver);
+ 
+ 
+ /* Module information */
+diff --git a/drivers/regulator/fixed.c b/drivers/regulator/fixed.c
+index f797cb504b9a..9d0c0513acfd 100644
+--- a/drivers/regulator/fixed.c
++++ b/drivers/regulator/fixed.c
+@@ -389,17 +389,7 @@ static struct platform_driver regulator_fixed_voltage_driver = {
+ 	},
+ };
+ 
+-static int __init regulator_fixed_voltage_init(void)
+-{
+-	return platform_driver_register(&regulator_fixed_voltage_driver);
+-}
+-subsys_initcall(regulator_fixed_voltage_init);
+-
+-static void __exit regulator_fixed_voltage_exit(void)
+-{
+-	platform_driver_unregister(&regulator_fixed_voltage_driver);
+-}
+-module_exit(regulator_fixed_voltage_exit);
++subsys_platform_driver(regulator_fixed_voltage_driver);
+ 
+ MODULE_AUTHOR("Mark Brown <broonie@opensource.wolfsonmicro.com>");
+ MODULE_DESCRIPTION("Fixed voltage regulator");
+diff --git a/drivers/regulator/gpio-regulator.c b/drivers/regulator/gpio-regulator.c
+index 6351ceefdb3e..53e65ae576df 100644
+--- a/drivers/regulator/gpio-regulator.c
++++ b/drivers/regulator/gpio-regulator.c
+@@ -371,17 +371,7 @@ static struct platform_driver gpio_regulator_driver = {
+ 	},
+ };
+ 
+-static int __init gpio_regulator_init(void)
+-{
+-	return platform_driver_register(&gpio_regulator_driver);
+-}
+-subsys_initcall(gpio_regulator_init);
+-
+-static void __exit gpio_regulator_exit(void)
+-{
+-	platform_driver_unregister(&gpio_regulator_driver);
+-}
+-module_exit(gpio_regulator_exit);
++subsys_platform_driver(gpio_regulator_driver);
+ 
+ MODULE_AUTHOR("Heiko Stuebner <heiko@sntech.de>");
+ MODULE_DESCRIPTION("gpio voltage regulator");
+diff --git a/drivers/regulator/lp8788-buck.c b/drivers/regulator/lp8788-buck.c
+index 2ade249ab6df..d11b8dfb2656 100644
+--- a/drivers/regulator/lp8788-buck.c
++++ b/drivers/regulator/lp8788-buck.c
+@@ -523,17 +523,7 @@ static struct platform_driver lp8788_buck_driver = {
+ 	},
+ };
+ 
+-static int __init lp8788_buck_init(void)
+-{
+-	return platform_driver_register(&lp8788_buck_driver);
+-}
+-subsys_initcall(lp8788_buck_init);
+-
+-static void __exit lp8788_buck_exit(void)
+-{
+-	platform_driver_unregister(&lp8788_buck_driver);
+-}
+-module_exit(lp8788_buck_exit);
++subsys_platform_driver(lp8788_buck_driver);
+ 
+ MODULE_DESCRIPTION("TI LP8788 BUCK Driver");
+ MODULE_AUTHOR("Milo Kim");
+diff --git a/drivers/regulator/max77693-regulator.c b/drivers/regulator/max77693-regulator.c
+index a8b3a2058d34..71c03c5db8c3 100644
+--- a/drivers/regulator/max77693-regulator.c
++++ b/drivers/regulator/max77693-regulator.c
+@@ -287,17 +287,7 @@ static struct platform_driver max77693_pmic_driver = {
+ 	.id_table = max77693_pmic_id,
+ };
+ 
+-static int __init max77693_pmic_init(void)
+-{
+-	return platform_driver_register(&max77693_pmic_driver);
+-}
+-subsys_initcall(max77693_pmic_init);
+-
+-static void __exit max77693_pmic_cleanup(void)
+-{
+-	platform_driver_unregister(&max77693_pmic_driver);
+-}
+-module_exit(max77693_pmic_cleanup);
++subsys_platform_driver(max77693_pmic_driver);
+ 
+ MODULE_DESCRIPTION("MAXIM 77693/77843 regulator driver");
+ MODULE_AUTHOR("Jonghwa Lee <jonghwa3.lee@samsung.com>");
+diff --git a/drivers/regulator/max8907-regulator.c b/drivers/regulator/max8907-regulator.c
+index e59aa7a3ee54..f8f0a50161c6 100644
+--- a/drivers/regulator/max8907-regulator.c
++++ b/drivers/regulator/max8907-regulator.c
+@@ -377,19 +377,7 @@ static struct platform_driver max8907_regulator_driver = {
+ 	.probe = max8907_regulator_probe,
+ };
+ 
+-static int __init max8907_regulator_init(void)
+-{
+-	return platform_driver_register(&max8907_regulator_driver);
+-}
+-
+-subsys_initcall(max8907_regulator_init);
+-
+-static void __exit max8907_reg_exit(void)
+-{
+-	platform_driver_unregister(&max8907_regulator_driver);
+-}
+-
+-module_exit(max8907_reg_exit);
++subsys_platform_driver(max8907_regulator_driver);
+ 
+ MODULE_DESCRIPTION("MAX8907 regulator driver");
+ MODULE_AUTHOR("Gyungoh Yoo <jack.yoo@maxim-ic.com>");
+diff --git a/drivers/regulator/max8925-regulator.c b/drivers/regulator/max8925-regulator.c
+index c1532db0a4ee..348ab150603b 100644
+--- a/drivers/regulator/max8925-regulator.c
++++ b/drivers/regulator/max8925-regulator.c
+@@ -268,17 +268,7 @@ static struct platform_driver max8925_regulator_driver = {
+ 	.probe		= max8925_regulator_probe,
+ };
+ 
+-static int __init max8925_regulator_init(void)
+-{
+-	return platform_driver_register(&max8925_regulator_driver);
+-}
+-subsys_initcall(max8925_regulator_init);
+-
+-static void __exit max8925_regulator_exit(void)
+-{
+-	platform_driver_unregister(&max8925_regulator_driver);
+-}
+-module_exit(max8925_regulator_exit);
++subsys_platform_driver(max8925_regulator_driver);
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Haojian Zhuang <haojian.zhuang@marvell.com>");
+diff --git a/drivers/regulator/max8997-regulator.c b/drivers/regulator/max8997-regulator.c
+index e48ba694a906..a16c54162153 100644
+--- a/drivers/regulator/max8997-regulator.c
++++ b/drivers/regulator/max8997-regulator.c
+@@ -1166,17 +1166,7 @@ static struct platform_driver max8997_pmic_driver = {
+ 	.id_table = max8997_pmic_id,
+ };
+ 
+-static int __init max8997_pmic_init(void)
+-{
+-	return platform_driver_register(&max8997_pmic_driver);
+-}
+-subsys_initcall(max8997_pmic_init);
+-
+-static void __exit max8997_pmic_cleanup(void)
+-{
+-	platform_driver_unregister(&max8997_pmic_driver);
+-}
+-module_exit(max8997_pmic_cleanup);
++subsys_platform_driver(max8997_pmic_driver);
+ 
+ MODULE_DESCRIPTION("MAXIM 8997/8966 Regulator Driver");
+ MODULE_AUTHOR("MyungJoo Ham <myungjoo.ham@samsung.com>");
+diff --git a/drivers/regulator/max8998.c b/drivers/regulator/max8998.c
+index 90651f4d1828..a29b19fbaf64 100644
+--- a/drivers/regulator/max8998.c
++++ b/drivers/regulator/max8998.c
+@@ -766,17 +766,7 @@ static struct platform_driver max8998_pmic_driver = {
+ 	.id_table = max8998_pmic_id,
+ };
+ 
+-static int __init max8998_pmic_init(void)
+-{
+-	return platform_driver_register(&max8998_pmic_driver);
+-}
+-subsys_initcall(max8998_pmic_init);
+-
+-static void __exit max8998_pmic_cleanup(void)
+-{
+-	platform_driver_unregister(&max8998_pmic_driver);
+-}
+-module_exit(max8998_pmic_cleanup);
++subsys_platform_driver(max8998_pmic_driver);
+ 
+ MODULE_DESCRIPTION("MAXIM 8998 voltage regulator driver");
+ MODULE_AUTHOR("Kyungmin Park <kyungmin.park@samsung.com>");
+diff --git a/drivers/regulator/mc13783-regulator.c b/drivers/regulator/mc13783-regulator.c
+index fb3aa1cec1f2..1b634c334c30 100644
+--- a/drivers/regulator/mc13783-regulator.c
++++ b/drivers/regulator/mc13783-regulator.c
+@@ -460,17 +460,7 @@ static struct platform_driver mc13783_regulator_driver = {
+ 	.probe		= mc13783_regulator_probe,
+ };
+ 
+-static int __init mc13783_regulator_init(void)
+-{
+-	return platform_driver_register(&mc13783_regulator_driver);
+-}
+-subsys_initcall(mc13783_regulator_init);
+-
+-static void __exit mc13783_regulator_exit(void)
+-{
+-	platform_driver_unregister(&mc13783_regulator_driver);
+-}
+-module_exit(mc13783_regulator_exit);
++subsys_platform_driver(mc13783_regulator_driver);
+ 
+ MODULE_LICENSE("GPL v2");
+ MODULE_AUTHOR("Sascha Hauer <s.hauer@pengutronix.de>");
+diff --git a/drivers/regulator/mc13892-regulator.c b/drivers/regulator/mc13892-regulator.c
+index b29cf6ba6f12..803db41b7363 100644
+--- a/drivers/regulator/mc13892-regulator.c
++++ b/drivers/regulator/mc13892-regulator.c
+@@ -634,17 +634,7 @@ static struct platform_driver mc13892_regulator_driver = {
+ 	.probe	= mc13892_regulator_probe,
+ };
+ 
+-static int __init mc13892_regulator_init(void)
+-{
+-	return platform_driver_register(&mc13892_regulator_driver);
+-}
+-subsys_initcall(mc13892_regulator_init);
+-
+-static void __exit mc13892_regulator_exit(void)
+-{
+-	platform_driver_unregister(&mc13892_regulator_driver);
+-}
+-module_exit(mc13892_regulator_exit);
++subsys_platform_driver(mc13892_regulator_driver);
+ 
+ MODULE_LICENSE("GPL v2");
+ MODULE_AUTHOR("Yong Shen <yong.shen@linaro.org>");
+diff --git a/drivers/regulator/palmas-regulator.c b/drivers/regulator/palmas-regulator.c
+index f82618a70106..3d8ee8587f66 100644
+--- a/drivers/regulator/palmas-regulator.c
++++ b/drivers/regulator/palmas-regulator.c
+@@ -1669,17 +1669,7 @@ static struct platform_driver palmas_driver = {
+ 	.probe = palmas_regulators_probe,
+ };
+ 
+-static int __init palmas_init(void)
+-{
+-	return platform_driver_register(&palmas_driver);
+-}
+-subsys_initcall(palmas_init);
+-
+-static void __exit palmas_exit(void)
+-{
+-	platform_driver_unregister(&palmas_driver);
+-}
+-module_exit(palmas_exit);
++subsys_platform_driver(palmas_driver);
+ 
+ MODULE_AUTHOR("Graeme Gregory <gg@slimlogic.co.uk>");
+ MODULE_DESCRIPTION("Palmas voltage regulator driver");
+diff --git a/drivers/regulator/qcom_rpm-regulator.c b/drivers/regulator/qcom_rpm-regulator.c
+index 2d5fec1457d1..6a15dcc4fe4f 100644
+--- a/drivers/regulator/qcom_rpm-regulator.c
++++ b/drivers/regulator/qcom_rpm-regulator.c
+@@ -994,17 +994,7 @@ static struct platform_driver rpm_reg_driver = {
+ 	},
+ };
+ 
+-static int __init rpm_reg_init(void)
+-{
+-	return platform_driver_register(&rpm_reg_driver);
+-}
+-subsys_initcall(rpm_reg_init);
+-
+-static void __exit rpm_reg_exit(void)
+-{
+-	platform_driver_unregister(&rpm_reg_driver);
+-}
+-module_exit(rpm_reg_exit)
++subsys_platform_driver(rpm_reg_driver);
+ 
+ MODULE_DESCRIPTION("Qualcomm RPM regulator driver");
+ MODULE_LICENSE("GPL v2");
+diff --git a/drivers/regulator/qcom_smd-regulator.c b/drivers/regulator/qcom_smd-regulator.c
+index 23ed594b574e..6242f7237836 100644
+--- a/drivers/regulator/qcom_smd-regulator.c
++++ b/drivers/regulator/qcom_smd-regulator.c
+@@ -1532,17 +1532,7 @@ static struct platform_driver rpm_reg_driver = {
+ 	},
+ };
+ 
+-static int __init rpm_reg_init(void)
+-{
+-	return platform_driver_register(&rpm_reg_driver);
+-}
+-subsys_initcall(rpm_reg_init);
+-
+-static void __exit rpm_reg_exit(void)
+-{
+-	platform_driver_unregister(&rpm_reg_driver);
+-}
+-module_exit(rpm_reg_exit)
++subsys_platform_driver(rpm_reg_driver);
+ 
+ MODULE_DESCRIPTION("Qualcomm RPM regulator driver");
+ MODULE_LICENSE("GPL v2");
+diff --git a/drivers/regulator/rc5t583-regulator.c b/drivers/regulator/rc5t583-regulator.c
+index a25a141e86c4..4633f996e6dc 100644
+--- a/drivers/regulator/rc5t583-regulator.c
++++ b/drivers/regulator/rc5t583-regulator.c
+@@ -153,17 +153,7 @@ static struct platform_driver rc5t583_regulator_driver = {
+ 	.probe		= rc5t583_regulator_probe,
+ };
+ 
+-static int __init rc5t583_regulator_init(void)
+-{
+-	return platform_driver_register(&rc5t583_regulator_driver);
+-}
+-subsys_initcall(rc5t583_regulator_init);
+-
+-static void __exit rc5t583_regulator_exit(void)
+-{
+-	platform_driver_unregister(&rc5t583_regulator_driver);
+-}
+-module_exit(rc5t583_regulator_exit);
++subsys_platform_driver(rc5t583_regulator_driver);
+ 
+ MODULE_AUTHOR("Laxman Dewangan <ldewangan@nvidia.com>");
+ MODULE_DESCRIPTION("RC5T583 regulator driver");
+diff --git a/drivers/regulator/tps6105x-regulator.c b/drivers/regulator/tps6105x-regulator.c
+index 7f99f3e90bec..e5a053e0ad06 100644
+--- a/drivers/regulator/tps6105x-regulator.c
++++ b/drivers/regulator/tps6105x-regulator.c
+@@ -98,17 +98,7 @@ static struct platform_driver tps6105x_regulator_driver = {
+ 	.probe = tps6105x_regulator_probe,
+ };
+ 
+-static __init int tps6105x_regulator_init(void)
+-{
+-	return platform_driver_register(&tps6105x_regulator_driver);
+-}
+-subsys_initcall(tps6105x_regulator_init);
+-
+-static __exit void tps6105x_regulator_exit(void)
+-{
+-	platform_driver_unregister(&tps6105x_regulator_driver);
+-}
+-module_exit(tps6105x_regulator_exit);
++subsys_platform_driver(tps6105x_regulator_driver);
+ 
+ MODULE_AUTHOR("Linus Walleij <linus.walleij@linaro.org>");
+ MODULE_DESCRIPTION("TPS6105x regulator driver");
+diff --git a/drivers/regulator/tps6507x-regulator.c b/drivers/regulator/tps6507x-regulator.c
+index 6655d9c31187..aba2b41da549 100644
+--- a/drivers/regulator/tps6507x-regulator.c
++++ b/drivers/regulator/tps6507x-regulator.c
+@@ -443,17 +443,7 @@ static struct platform_driver tps6507x_pmic_driver = {
+ 	.probe = tps6507x_pmic_probe,
+ };
+ 
+-static int __init tps6507x_pmic_init(void)
+-{
+-	return platform_driver_register(&tps6507x_pmic_driver);
+-}
+-subsys_initcall(tps6507x_pmic_init);
+-
+-static void __exit tps6507x_pmic_cleanup(void)
+-{
+-	platform_driver_unregister(&tps6507x_pmic_driver);
+-}
+-module_exit(tps6507x_pmic_cleanup);
++subsys_platform_driver(tps6507x_pmic_driver);
+ 
+ MODULE_AUTHOR("Texas Instruments");
+ MODULE_DESCRIPTION("TPS6507x voltage regulator driver");
+diff --git a/drivers/regulator/tps65090-regulator.c b/drivers/regulator/tps65090-regulator.c
+index 8f916ee366e5..329af2f878b7 100644
+--- a/drivers/regulator/tps65090-regulator.c
++++ b/drivers/regulator/tps65090-regulator.c
+@@ -516,17 +516,7 @@ static struct platform_driver tps65090_regulator_driver = {
+ 	.probe		= tps65090_regulator_probe,
+ };
+ 
+-static int __init tps65090_regulator_init(void)
+-{
+-	return platform_driver_register(&tps65090_regulator_driver);
+-}
+-subsys_initcall(tps65090_regulator_init);
+-
+-static void __exit tps65090_regulator_exit(void)
+-{
+-	platform_driver_unregister(&tps65090_regulator_driver);
+-}
+-module_exit(tps65090_regulator_exit);
++subsys_platform_driver(tps65090_regulator_driver);
+ 
+ MODULE_DESCRIPTION("tps65090 regulator driver");
+ MODULE_AUTHOR("Venu Byravarasu <vbyravarasu@nvidia.com>");
+diff --git a/drivers/regulator/tps65217-regulator.c b/drivers/regulator/tps65217-regulator.c
+index b167ba22fe16..c30b0a330bba 100644
+--- a/drivers/regulator/tps65217-regulator.c
++++ b/drivers/regulator/tps65217-regulator.c
+@@ -263,17 +263,7 @@ static struct platform_driver tps65217_regulator_driver = {
+ 	.probe = tps65217_regulator_probe,
+ };
+ 
+-static int __init tps65217_regulator_init(void)
+-{
+-	return platform_driver_register(&tps65217_regulator_driver);
+-}
+-subsys_initcall(tps65217_regulator_init);
+-
+-static void __exit tps65217_regulator_exit(void)
+-{
+-	platform_driver_unregister(&tps65217_regulator_driver);
+-}
+-module_exit(tps65217_regulator_exit);
++subsys_platform_driver(tps65217_regulator_driver);
+ 
+ MODULE_AUTHOR("AnilKumar Ch <anilkumar@ti.com>");
+ MODULE_DESCRIPTION("TPS65217 voltage regulator driver");
+diff --git a/drivers/regulator/tps6586x-regulator.c b/drivers/regulator/tps6586x-regulator.c
+index 1ab5767590f3..93fde5f81cc9 100644
+--- a/drivers/regulator/tps6586x-regulator.c
++++ b/drivers/regulator/tps6586x-regulator.c
+@@ -525,17 +525,7 @@ static struct platform_driver tps6586x_regulator_driver = {
+ 	.probe		= tps6586x_regulator_probe,
+ };
+ 
+-static int __init tps6586x_regulator_init(void)
+-{
+-	return platform_driver_register(&tps6586x_regulator_driver);
+-}
+-subsys_initcall(tps6586x_regulator_init);
+-
+-static void __exit tps6586x_regulator_exit(void)
+-{
+-	platform_driver_unregister(&tps6586x_regulator_driver);
+-}
+-module_exit(tps6586x_regulator_exit);
++subsys_platform_driver(tps6586x_regulator_driver);
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Mike Rapoport <mike@compulab.co.il>");
+diff --git a/drivers/regulator/tps65910-regulator.c b/drivers/regulator/tps65910-regulator.c
+index 3a3027e0b94e..84fba40263d2 100644
+--- a/drivers/regulator/tps65910-regulator.c
++++ b/drivers/regulator/tps65910-regulator.c
+@@ -1260,17 +1260,7 @@ static struct platform_driver tps65910_driver = {
+ 	.shutdown = tps65910_shutdown,
+ };
+ 
+-static int __init tps65910_init(void)
+-{
+-	return platform_driver_register(&tps65910_driver);
+-}
+-subsys_initcall(tps65910_init);
+-
+-static void __exit tps65910_cleanup(void)
+-{
+-	platform_driver_unregister(&tps65910_driver);
+-}
+-module_exit(tps65910_cleanup);
++subsys_platform_driver(tps65910_driver);
+ 
+ MODULE_AUTHOR("Graeme Gregory <gg@slimlogic.co.uk>");
+ MODULE_DESCRIPTION("TPS65910/TPS65911 voltage regulator driver");
+diff --git a/drivers/regulator/tps68470-regulator.c b/drivers/regulator/tps68470-regulator.c
+index de7db7690f6b..7aef0c12fbcc 100644
+--- a/drivers/regulator/tps68470-regulator.c
++++ b/drivers/regulator/tps68470-regulator.c
+@@ -185,17 +185,7 @@ static struct platform_driver tps68470_regulator_driver = {
+  * registering before the drivers for the camera-sensors which use them bind.
+  * subsys_initcall() ensures this when the drivers are builtin.
+  */
+-static int __init tps68470_regulator_init(void)
+-{
+-	return platform_driver_register(&tps68470_regulator_driver);
+-}
+-subsys_initcall(tps68470_regulator_init);
+-
+-static void __exit tps68470_regulator_exit(void)
+-{
+-	platform_driver_unregister(&tps68470_regulator_driver);
+-}
+-module_exit(tps68470_regulator_exit);
++subsys_platform_driver(tps68470_regulator_driver);
+ 
+ MODULE_ALIAS("platform:tps68470-regulator");
+ MODULE_DESCRIPTION("TPS68470 voltage regulator driver");
+diff --git a/drivers/regulator/twl-regulator.c b/drivers/regulator/twl-regulator.c
+index 5bacfcebf59a..05579f2ee0e2 100644
+--- a/drivers/regulator/twl-regulator.c
++++ b/drivers/regulator/twl-regulator.c
+@@ -660,17 +660,7 @@ static struct platform_driver twlreg_driver = {
+ 	},
+ };
+ 
+-static int __init twlreg_init(void)
+-{
+-	return platform_driver_register(&twlreg_driver);
+-}
+-subsys_initcall(twlreg_init);
+-
+-static void __exit twlreg_exit(void)
+-{
+-	platform_driver_unregister(&twlreg_driver);
+-}
+-module_exit(twlreg_exit)
++subsys_platform_driver(twlreg_driver);
+ 
+ MODULE_DESCRIPTION("TWL4030 regulator driver");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/regulator/twl6030-regulator.c b/drivers/regulator/twl6030-regulator.c
+index 6eed0f6e0adb..5a7c6e2a5e0b 100644
+--- a/drivers/regulator/twl6030-regulator.c
++++ b/drivers/regulator/twl6030-regulator.c
+@@ -769,17 +769,7 @@ static struct platform_driver twlreg_driver = {
+ 	},
+ };
+ 
+-static int __init twlreg_init(void)
+-{
+-	return platform_driver_register(&twlreg_driver);
+-}
+-subsys_initcall(twlreg_init);
+-
+-static void __exit twlreg_exit(void)
+-{
+-	platform_driver_unregister(&twlreg_driver);
+-}
+-module_exit(twlreg_exit)
++subsys_platform_driver(twlreg_driver);
+ 
+ MODULE_DESCRIPTION("TWL6030 regulator driver");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/regulator/wm8350-regulator.c b/drivers/regulator/wm8350-regulator.c
+index d09864bae5ef..90942d0f439c 100644
+--- a/drivers/regulator/wm8350-regulator.c
++++ b/drivers/regulator/wm8350-regulator.c
+@@ -1311,17 +1311,7 @@ static struct platform_driver wm8350_regulator_driver = {
+ 	},
+ };
+ 
+-static int __init wm8350_regulator_init(void)
+-{
+-	return platform_driver_register(&wm8350_regulator_driver);
+-}
+-subsys_initcall(wm8350_regulator_init);
+-
+-static void __exit wm8350_regulator_exit(void)
+-{
+-	platform_driver_unregister(&wm8350_regulator_driver);
+-}
+-module_exit(wm8350_regulator_exit);
++subsys_platform_driver(wm8350_regulator_driver);
+ 
+ /* Module information */
+ MODULE_AUTHOR("Liam Girdwood");
+diff --git a/drivers/regulator/wm8400-regulator.c b/drivers/regulator/wm8400-regulator.c
+index fb3ca7956d00..61627892224e 100644
+--- a/drivers/regulator/wm8400-regulator.c
++++ b/drivers/regulator/wm8400-regulator.c
+@@ -258,17 +258,7 @@ int wm8400_register_regulator(struct device *dev, int reg,
+ }
+ EXPORT_SYMBOL_GPL(wm8400_register_regulator);
+ 
+-static int __init wm8400_regulator_init(void)
+-{
+-	return platform_driver_register(&wm8400_regulator_driver);
+-}
+-subsys_initcall(wm8400_regulator_init);
+-
+-static void __exit wm8400_regulator_exit(void)
+-{
+-	platform_driver_unregister(&wm8400_regulator_driver);
+-}
+-module_exit(wm8400_regulator_exit);
++subsys_platform_driver(wm8400_regulator_driver);
+ 
+ MODULE_AUTHOR("Mark Brown <broonie@opensource.wolfsonmicro.com>");
+ MODULE_DESCRIPTION("WM8400 regulator driver");
+
 ---
 base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
 base-tree: git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-change-id: 20261106-mfd-subsys-63dc5bb82f83
+change-id: 20261106-regulator-subsys-6f166d01d0ae
 
 Best regards,
 --  
