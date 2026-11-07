@@ -1,45 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794060093;
-	b=Nc3pxvtbNdheru1Dsk+zKgOH16ttUnpkWZbZUjooJtt8O8OAW9Bu5XLV7LvGOQYmNn9T
-	 0TFcWTXDGBl29p0TcomChaZaZjSzRIhsVgr5V8oGddNc3i4/+ofo1LWATuM1dZYkCyFyZ
-	 0v585yzouSp3jgPeu0oon4t0LTJyR/AQcLUz3sjz75C7VDHw/iFpYp06/JWTKv82jJbZ+
-	 SbO/74EfwgrbKINQz4yDzcppvLpCfr3dcUItR04KBBaqGLrAmSzRwsdlu12A0aeJdHxJb
-	 Se5zNlBV+VYozFteyzLp2s6jmcCPDpMzgT9zoBagihnbSoxE7gKkRaT5iV/Fe6CwnwA==
+	t=1794060222;
+	b=xMg963z7svYnzbxXkbMn1oS5f16bpjuSaH+iX/Rq5O+id1WquRWeb/5CF1FfHuGAAnPR
+	 9JC4LCOa4waIVo7BF6CcJT2b3YSDyPKehijKg8q5l/DLfdKPhukA3f78bO8gMKyYDUsz2
+	 zLZdklN0IyFCKfB+lCquf6TZ92eI9ym4nKukzhwtf2Bnjy8gctxJNdhKZvIUb+8isk1ne
+	 IHLWUDqvZIJxAGXTj+ejiodujaRS3OXMfNXePZ/VARrRnj4LQRVx/R21ZRbDcAXWkZY5s
+	 4YBNy+zKkvRfgUeHCYroxvQATvAXauxmMKtsaaeknnJyDOy/cJnuE9B+xBxPIAThwNw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794060093;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=Tjy5R3kSXgm6HnNAptypQU+3DBcvi4rbrJtEK8ytvbE=;
-	b=fd/1SLZ3RpLuuQgj+9FVJGOyo+ciLKnF/nBcWUU8iVLbJBS4dYFRh/sF3d3uH5aCun/L
-	 83DX3ExrrMxoNSSgCKNR6wVZLfzaSaT00xk6wtYHJi+UMbrq0GHbMF1ha7sMEyvAvPWZi
-	 b+ZnBQL06UlfdcTvyeDkN16Hp91B/LC4ZsgJ3Gwy2uP/tR0wLZF/eMr+wS2npu00Qq1Ze
-	 rYC0PrTnEt397ZoBtLAURegDJ7xlbgMn0Kpu6jH187p9BXezWfogeArYUatT7n5k7DA39
-	 M5Lw0wPw8McwC4Xc3rbW11ErrcaX2EC+G+8qb288dHZKR8RUu1xhOB3xU72Kz6TBXog==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794060222;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=n4RQKom85jkQdizG8jERqXd4viPHC+189UpuJ/BwOhc=;
+	b=DJ5HSsDNhDlL1rhZRwfKj85Xyl9abbHKdSf3WGVMmzxK4gSo59hNB1uryVPXt28qNFr/
+	 B/2aynArsBm7wkE8LU5p/IeKnpipsTQMFWleRxNx3H1XKm7ze8vJyRc8A02zpmy9pf77M
+	 svMOJ6JuGdVxdD+nhpAmTdQyjCSjk/vQZI/10aWUw8te4FmAdRRsl+9CAANIU3uUD1b8p
+	 vKWaq8e9eoKeyIDrXT6BZC76odqRep7MmbUPZMAsDqRYTfORC49F5qkAAhogDrSlgq138
+	 eOb2fZCDJgt4RT4F5pliWVHZqACHtIxumqrp3Tfs84XAxQF/hvQqYlbOuf0Mlu9rlsA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Rhj+/pfK";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=aP3Lr9ih;
+	arc=none smtp.remote-ip=209.85.128.46
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57431606A326;
-	Sat,  7 Nov 2026 14:01:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4691606A32C
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 14:03:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4691606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Rhj+/pfK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E2431F0089F;
-	Sat,  7 Nov 2026 14:01:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794060092;
-	bh=Tjy5R3kSXgm6HnNAptypQU+3DBcvi4rbrJtEK8ytvbE=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=Rhj+/pfKh3TrFdYQTCB5rpTV4ItTz0OAfcEOwQ7weHKoG75w4QAxuaERMgxIj9A56
-	 h5dUPYrAbYReQVUljm+x+pw/GAzBMwjQew87axKjP6Z4ZkgfkZDIKHvbawKuFjQWqH
-	 HjcEtWZUVs47P4j/qLFif+Xd/SQlP8ay//4m+9NKr5KGFgG+coRic0rJISYfCXMIMD
-	 rGF+P/O9heEvRxnThSCjG6C9+dkJOxao7mNNdk/2PV+G3LdRfmeVOCM8FFZ6zFJmuh
-	 ZqVu6uuWQ17SxbelTIWXx5kifwdgFTG02swQjAlnyqwwltqrYCCFE6nufdjjQKb1Ry
-	 ZHh5ym+mVbvYw==
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=aP3Lr9ih
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a5087a5348so11132535e9.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 07 Nov 2026 06:03:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1794060220; x=1794665020; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=n4RQKom85jkQdizG8jERqXd4viPHC+189UpuJ/BwOhc=;
+        b=aP3Lr9ihnVE3AAdM9kPgIOvbXrlJiwClq0X74LQv3Wyb/Z9cppqMs2SyBmMxald4yu
+         C7kE8oF6MlLS8Rjc84Pwv5t5NU5WSCXq0krYgU0fcGlOjUC+5jVUjdNcpsbspEjjl9wW
+         KaVnSY8HVH3kwuZmvaalyNY9bp6d4g01KFtA6dYmG0sJMS0yVIMMoHhHZvdMld0yGyAm
+         3XeXSmAfDvym7JVJkOKRByr8hhBdEnA1vTCsa2TEf/dXLc817ZRkiyMQfWgLXfK1+BG0
+         qYVUL/yCfx8SnnmCchwCAoJsqVz9UC9Hsf9I7YOUzO5RHkQuJOZlXW7ydqVg7bdAoSjG
+         5gyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794060220; x=1794665020;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=n4RQKom85jkQdizG8jERqXd4viPHC+189UpuJ/BwOhc=;
+        b=UsYpbc/o4aBi8XtvP2jbQOZbrp0Utm7zdCKyHtjkxaYP/4zdVbCv4LFLvp4cfesfjY
+         JGW5eTEz4KB5EkhMEdw85Mz3CNDQlqoT19g7eBm3P5clBWo6NJzbjM0xzhazBhjRf0HD
+         dmEmK2ZqohK3cRw0DY0T98MMiZgPT0Bsj+AjfwNNza9HrBvimxvEU0RSjpID9tn60r2w
+         ijmYihIFffVWI7zIdJ+yVcXUulsgKAhbk9vtQfast3J83m4KBj6r/795D5dgBIvhdYic
+         rRqQ4LzfRPIkocO2tiMIA80Jik0gP18l3fbSaHNp9kngc43MTCbamIcAQoaxSdpIYURm
+         NH7g==
+X-Gm-Message-State: APuU4Z9nXwlyAJkahYIj+JjltI3mIT+7e3FWA8rs5CG+KfOsut7wvUGq
+	5W21L308n4DTnjXYRzKnnpXRRSbvL0x744/T/OhUOJLRtaNLSbxM7nt9O8mOn3x8wi4=
+X-Gm-Gg: AYBFou3hgbhgJiMfERbg7rY2Xbn7LdXwqqP+V7GCuGPldRvKlu2h1cFAhJ73FAHIAos
+	jSBBGj/uFetK2f3BrDdA+TrmmVXSirw4s7mIyxrtZnizlzL++7Hn/oD6sdlJUThxYPA5aNIovxe
+	YEeVi+4IMDvg1NBblEidxOf6Tmn16P3KmRf6wKmDJkNdEao3FnHX1WMhsq0rxH2MThIxGsiL31w
+	kkgOBbDcLOHfqB5kTBqo8ZQ17XvChaJSXLB6F/FFB+tLswJ/HFez59mCPmU0zyVQeC9Df4lEOTM
+	stDL35riu/wMf1Pdi7BzGDZZGpb5yxVKla5XAYnnsKVVTf2+PD9KUByE0RmVKbVhUCVbI8gkzU2
+	iy3FupY+HkEpsRmejlhvi6m+Khq4grJu77cCg8diZfUbXuNejvu94g+nqKjb6LPmj+v7bA+H/6L
+	M59CCUQcZg2KPIXcBcZdV7WiF1XaoesENAuFJOzWkTjg4ctbDUSSUFiRTYJH4Xf/8L6lR7VSX9f
+	9Ha/0WfgXZVFyg+47MO4DKxUkt6hAH6RvhvuUNmVEEGwokiLQxSnlAJeQZ8/PJdWXc2si9E1Qdm
+	FozT6aYl4nlA4VEkKwGOco4LfN77fW7+gmeCpihx+J3MrFacP05+FI7uHxybcg==
+X-Received: by 2002:a05:600c:4e0e:b0:4a2:1364:252b with SMTP id 5b1f17b1804b1-4b6e054920fmr98235845e9.35.1794060220092;
+        Sat, 07 Nov 2026 06:03:40 -0800 (PST)
+Received: from [192.168.0.167] ([109.77.86.207])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b7a0e1f298sm49309125e9.4.2026.11.07.06.03.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 07 Nov 2026 06:03:38 -0800 (PST)
+Message-ID: <83c6281f-1887-4481-8c63-957b4bc856b9@linaro.org>
+Date: Sat, 7 Nov 2026 14:03:36 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -49,157 +89,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3] phy: qcom-mipi-csi2: Add support for single
- power-domain SoCs
-From: bod@kernel.org
-To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- gjorgji.rosikopulos@oss.qualcomm.com, 
- hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com, 
- jigarkumar.zala@oss.qualcomm.com, linux-phy@lists.infradead.org, 
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com>
-References: <20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com>
-Date: Sat, 07 Nov 2026 14:01:26 +0000
-Message-Id: <179406008633.650304.8875272498498712274.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4863; i=bod@kernel.org;
- h=from:subject:message-id; bh=j2oZfaTQTF1f+5fNUFF8F0vY/y/dM4CiJV9kbMyThm4=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq7y84INY4wTlo8D5pcMhdxku5/5vJDAeUbGGQr
- ARIcjjH7AeJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCau8vOAAKCRAicTuzoY3I
- Ot7VD/9Uk+dq3VDSVufm77poglKmBXaU8BJl+HKSICEulqWPBV+DkkTZKA92cWzqNPjvgRHDY5e
- o8iLhTMs3kovqD3A5IrbhqfHw+YNWe7gBgOTv6ZowRl8hPshfZNymO/25lrVCCeO9jCUFE5uQUs
- Q0e1hq8UAqsx+FgetsvV3L7MPGFW6/h1NT0mzp+LYRal/1Arkq8+MNsLu1I1mEbiF0Y5qlVzETW
- 7tFc1/Vk8MRv4kOtgaewRD3u6jcR2pYjQm/VOyenTvvABvQGiWova5eYvM0GAyW57t5lzUw0BgV
- g4Uv+Kvx0J3QQiDaXsRruRoE5lLNE3BbUMKWa+EaprL6NtVXJsrP55VhIKilprqu9zBqtT7qVR2
- 4+iLbWWL95SX6A+DnKHdfoVHGMwRLONbA+QEo/bEZXAyri5PhVYR6dSLPpkkRMtKNc8KepnNxZM
- 7K4wDhYE9f6HcqcuAoNQMK2rXqadLB7T5WVH3Q4pPR49iIWo1Do5KebmKOqHayV9HhYHk7OFxKX
- k4194dyC34k9u7+/G8M4ya/SXVMRTEtXCx6yO9oAInvlMGBixEFMerXFFXOfGmCu98C1or+1/2R
- IOWzdOxoLcK2NRNNWHuwuyRH525+eLNDDK5tlkJtsr+zKxN208bSNom1GClTHsi42vmUpZ4wGTp
- aydpZjFh07X5Bhg==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 6/7] phy: qcom-mipi-csi2: Add SM8150 CSI2 DPHY support
+To: Bryan O'Donoghue <bod@kernel.org>, mail@andrewgigena.dev,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Andi Shyti <andi.shyti@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org
+References: <20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev>
+ <C4VI5PNThYmwD0VGOO9DvvHRRydBUz2k5DOLjkianYgYaz4G3-El6cDpnQh2siR4mMwjeiL4_Yp2xEAYeJDJ2Q==@protonmail.internalid>
+ <20261106-sm8150-v7.4-rc1-camss-v3-6-0103e8a0bbcd@andrewgigena.dev>
+ <88407f72-0c6e-4e46-b97b-7031c237dac7@kernel.org>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <88407f72-0c6e-4e46-b97b-7031c237dac7@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 2026-11-02 13:39 -0800, Anusha Arun Nandi wrote:
-> sa8775p, qcs8300 and sc7280 each list exactly one power-domain ("top")
-> on the CSI2 PHY node. For a device with a single power-domain phandle,
-> the generic platform-bus code (platform_probe() ->
-> dev_pm_domain_attach()) auto-attaches it via genpd_dev_pm_attach()
-> before the driver's own probe() runs. phy_qcom_mipi_csi2_probe() then
-> unconditionally calls devm_pm_domain_attach_list(), which fails with
-> -EEXIST because dev->pm_domain is already set, and the driver treats
-> that as fatal:
+On 06/11/2026 22:29, Bryan O'Donoghue wrote:
+>>
+>> +    /*
+>> +     * platform_probe() auto-attaches a single power domain during 
+>> probe.
+>> +     * Detach it first so devm_pm_domain_attach_list() can attach all
+>> +     * domains by name (otherwise it returns -EEXIST for single-domain
+>> +     * SoCs such as SM8150).
+>> +     */
+>> +    if (csi2phy->dev->pm_domain)
+>> +        dev_pm_domain_detach(csi2phy->dev, false);
+>> +
 > 
->   1. qcom-mipi-csi2-phy ace6000.phy: error -EEXIST: Failed to attach
->   power-domain list
->   2. qcom-mipi-csi2-phy ace6000.phy: probe with driver qcom-mipi-csi2-phy
->   failed with error -17
-> 
-> x1e80100 is unaffected: it lists three power-domains, so the generic
-> code does not auto-attach any of them (auto-attach only applies to
-> single-power-domain devices); the driver's explicit attach is the
-> only one that runs.
-> 
-> For the single power-domain case, call dev_pm_domain_attach() instead
-> of devm_pm_domain_attach_list(): it returns early when dev->pm_domain
-> is already set, so csi2phy->pd_list is left NULL rather than built up
-> by hand. The three call sites that walk pd_list for genpd
-> performance-state scaling now guard against a NULL pd_list, which is
-> harmless since scaling is unused (scaled = false) on every SoC that has
-> a single "top" domain.
-> 
-> devm_pm_domain_attach_list() returns the number of attached
-> power-domains on success, so a bare "ret < 0" check in probe() is not
-> enough to catch the case where it succeeds without actually attaching
-> any domains. phy_qcom_mipi_csi2_attach_pm_domains() now also checks for
-> that case directly and reports -ENODEV, keeping probe()'s own check
-> unchanged.
-> 
-> Reviewed-by: Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>
-> Signed-off-by: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
-> ---
->  .../phy/qualcomm/phy-qcom-mipi-csi2-core.c    | 25 +++++++++++--------
->  1 file changed, 15 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-> index c0a4fa20eaf0..269232499fca 100644
-> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
-> @@ -43,7 +43,7 @@ phy_qcom_mipi_csi2_set_clock_rates(struct mipi_csi2phy_device *csi2phy,
->  	}
->  
->  	pstate = 0;
-> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->  		unsigned int perf;
->  
->  		if (!csi2phy->soc_cfg->genpds[i].scaled)
-> @@ -174,7 +174,7 @@ static int phy_qcom_mipi_csi2_power_on(struct phy *phy)
->  unset_rate:
->  	dev_pm_opp_set_rate(csi2phy->dev, 0);
->  
-> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->  		if (!csi2phy->soc_cfg->genpds[i].scaled)
->  			continue;
->  
-> @@ -204,7 +204,7 @@ static int phy_qcom_mipi_csi2_power_off(struct phy *phy)
->  
->  	dev_pm_opp_set_rate(csi2phy->dev, 0);
->  
-> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
-> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->  		if (!csi2phy->soc_cfg->genpds[i].scaled)
->  			continue;
->  
-> @@ -231,7 +231,11 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
->  {
->  	struct dev_pm_domain_attach_data pd_data = { 0 };
->  	const char **pd_names;
-> -	int i;
-> +	int i, ret;
-> +
-> +	/* Single power-domain devices are already attached by the bus core. */
-> +	if (csi2phy->soc_cfg->num_genpds == 1)
-> +		return dev_pm_domain_attach(csi2phy->dev, 0);
->  
->  	pd_names = devm_kzalloc(csi2phy->dev,
->  				sizeof(char *) * csi2phy->soc_cfg->num_genpds,
-> @@ -245,8 +249,12 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
->  	pd_data.pd_names = pd_names;
->  	pd_data.num_pd_names = csi2phy->soc_cfg->num_genpds;
->  
-> -	return devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
-> -					  &csi2phy->pd_list);
-> +	ret = devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
-> +					 &csi2phy->pd_list);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	return 0;
->  }
->  
->  static int phy_qcom_mipi_csi2_parse_routing(struct mipi_csi2phy_device *csi2phy)
-> @@ -369,11 +377,8 @@ static int phy_qcom_mipi_csi2_probe(struct platform_device *pdev)
->  		return ret;
->  
->  	ret = phy_qcom_mipi_csi2_attach_pm_domains(csi2phy);
-> -	if (ret < 0 || csi2phy->pd_list == NULL) {
-> -		if (ret == 0)
-> -			ret = -ENODEV;
-> +	if (ret < 0)
+> No, there's something in the CPHY series for this already. You'll either 
+> have to absorb that patch or apply those changes to your tree and base 
+> your stuff off of that, and orchestrate landing this series on top of 
+> that series.
 
-I thought you said you were going to fix this ?
+What you could do to unblock your series and not have a dependency on 
+another series is cherry-pick the necessary patch.
 
-Once done you may add
+https://patchwork.linuxtv.org/project/linux-media/patch/20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com/
 
+If you do that you can drop the above change and resend your series with 
+indicated changes.
 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-
-But not until ;)
-
+---
+bod
