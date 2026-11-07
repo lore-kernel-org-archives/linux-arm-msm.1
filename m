@@ -1,90 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794046598;
-	b=Ss4YPEW1xRtOiTTglk8sWTss8et1ekgCzmm52ZyBQIr4zMjjDIhBfwITYasJwgsQP6Pi
-	 oEvzGV91em19+6rpKs+dwrlPmue9n0ECHHYEVkLYGpUIq9JrSyQr7ETDT+jfz8A6ADVGN
-	 UTawYAx8yypFT5SzSXCHYQgz4SJCR15Gwz//ltBz9cNN9IHv4LdOFW/HdzfMx4EYlaD8Y
-	 fxb9WwI0WeKW1iNTixoQAzAhezy3qWIrrjrB2DOAIjYhJT0CSNS5DJD1dkR79mqj6nFe2
-	 L+p8cLFoaladepXbPdgPUFcInGksNBf1+YpVwWXvggn9w1lypfxcE96TvXLOY5L0gpA==
+	t=1794046601;
+	b=Y3HvJmyXFmQ2+4p0OcbSnonmgFH3ikH42Qyh41F3HKswcepztfpra/d/l4wsIvI61x/D
+	 VoXvkyexriwanSQfgCOdfL4B0fNFBAJVG//FI5ocSANGc1RrYg1GNkDnnD3T8/dL2UmBA
+	 4+1NfoqSBGMfJTRxKSyvQcpjZ9p4PSX5z9xdTlqsz1rNqe9SQuLrsjoqBU3cpjBe3NrbI
+	 8Fn2LgC3CAMjwUiixXR+7a8TmQHPsQEYQAsm9MTA1hahzOMBdk4olXwotwwSbfYXhETKW
+	 0OtisjMugdObba65g2dqv27iqZdHnyXhV6aswQOF2zJ1PFDgA22tO1saAmK6tPVIbvg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794046598;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794046601;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
-	bh=0zdj0JMmNNgvImUjXW+dc1czDRoUybgPmc34A31iLmc=;
-	b=e+wB0K06/BZzB69r9+27jNZAUejcn8TN5gOotazzVaxJ+HfPncEU+fLXxQPKp7w14FOu
-	 BfSnT+9IauijQrFF4bLHklZNpYoSw6yBMVAJ0gQpa9KeosiV9AMW17sawpj2Rhk8udHfP
-	 KRTFFnE9zqoJDOYfTWhre++LeL1K6Nc6eDsKyRtYGRkWFqAZ0aUWE+yizlId9VhNr1rMc
-	 xlYcW6a/ulj2zeX1ATjfy4KoWolirf6GhdluRKdnK06ZbZDlWxWSKY8DY/sLda/T1FQ0k
-	 sDRD6ugssfjsJxvv9xcXXolpW6hEIGdmy7/IJKtKYiqZRLzj170TUzG8ZikY8uEHPvQ==
+	bh=fU1HVMt6F+8GX+5+y1BQ6f55b/pZazHVnomyKtjqHX4=;
+	b=bJskOK0w/e44fxUSXPvLNVD1NbrAg61tAaTtDuKHmNA51RVLy2QQAh/aqN211DrfnP/Y
+	 wSoZuRr3hfuGMY7MCVxJUDSM5xxEl1YEWgK2W5yLNwqyaJslGOIV80fwW8bZcxmejN9dc
+	 HOGsXyYSnju/XEyvxbV0fGKDfri1Yh/y8MTHyVgKaoEWNpEQ1p4tEsHytECHBhxeUTf3u
+	 4Rqo3tqAQwvQXpGtW+LmVAGynMkpvjt2DyO6SVwfEYPH3mmRvqYLHvOorTQPnBsIHlK0u
+	 X18rCnZ6tWImsOOaxaJ//Uoxti6j2Bkg0VJ4k3ROxEB956/F7LIucII4eTobBLM3cQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aNkb04W1;
-	arc=none smtp.remote-ip=209.85.210.46
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NOP1l9B3;
+	arc=none smtp.remote-ip=209.85.210.50
+Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31DFD606EE97
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 10:16:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31DFD606EE97
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA1D5606D81C
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 10:16:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CA1D5606D81C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aNkb04W1
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-84d5e56f876so1044562a34.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 07 Nov 2026 02:16:38 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NOP1l9B3
+Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-8470d7d430fso687410a34.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 07 Nov 2026 02:16:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794046597; x=1794651397; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794046600; x=1794651400; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0zdj0JMmNNgvImUjXW+dc1czDRoUybgPmc34A31iLmc=;
-        b=aNkb04W1py1ku5H1xgnLz0dOS/ffVHHWmxnZk4B7K3C/uVx54QSdRIyoFJfZDFr5A7
-         vxaYhbuK6uTCVyWuDO8oQ7Nq8XPbRHDpuSB0bE31yHnRptWKZZgeXlNGfz5zYsEBSVhn
-         9gxd6cdieqFLeditUU2MDgb4lpcm1sLHYRmsYimYTfj69ViD1IZLyo6WSuTT+ftlcbiH
-         2B6S2INmpYCA2zz2EHsPzupzYKUap2PrGwXmPMYzJCHlyPgVQFw8IzesXaJ3QaT55akW
-         6ch7xOYYxQDmZa/WhtppzU6uUOOSOU2rBMkFiPC/jLpfEQHFegwmfRLhzQiGiw0ihEw9
-         xtgg==
+        bh=fU1HVMt6F+8GX+5+y1BQ6f55b/pZazHVnomyKtjqHX4=;
+        b=NOP1l9B3Yp1AUK9YszZLLgb+pgK/+bJSAw0XRnG0PmlFF0da4BH7jJr3astgRNUl7A
+         /q19aTV+ejJxXWYu+C6cMaigF+112nYdTh6poACxTuEmpPfpd+fDEiq9VtM7OERk9XTq
+         CFiPCw8bx2TC/zm4EArbmr1twJ4HVtaK5bs1MSKTBQtJ9zNLMPzoxMkvLCW/x2NdO4w4
+         QN1nZC7kL1dr8Ol63TSsGhOjjW+1jWaxMIvXM9GsfYFnjDaKfjTQ6PD1ihGyFdv3k4Xe
+         6oeRx9njW3ckFxgpWKkciXPREEwfIfU5AKn1cFxvIZX12+shyxwCQUIwMVX2NNGcQkc8
+         9rUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794046597; x=1794651397;
+        d=1e100.net; s=20260707; t=1794046600; x=1794651400;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=0zdj0JMmNNgvImUjXW+dc1czDRoUybgPmc34A31iLmc=;
-        b=phXl/XG2195Xany4xyVYyNI4QWfnjepzIbmsZL55i8bJQmExuKs3CAuyirZZY8a4v1
-         PH/+PXFmpBjRA5EdvxD8e/fBYbbTI16V7bzID5CAwxlIHD1YAUQlSCQKYmPQorQmZOI5
-         XyciLt3sVKgBRFbpRpN0fQqd5LM53ZelZMpnB4YdvT3Q9C92y+OtQWQpU/N2eRlx8qUH
-         Tbyq36Las8xv2OIQH5X3v//V2x9v4aFzcdGLxTgEjjuEBu8x7KbRlHiq9sSQJR0vhKhH
-         ZKh2vYls5BSDdfwx+ezrBFO5dPZeyBV07+zKJpRkquYlzeTVBYjGXIGytRPLMQXw/yMY
-         nICg==
-X-Forwarded-Encrypted: i=1; AKwUvBwgSf4rH/tn1YU+memgSB0FrSPcmcc21yWOLvy5BzJzQCRrguzU7VU46MKjkmglkfxUHmJ9TEtiVz5gYJJZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z8tklxIsQtl+98YmEfJxmg4Ir+GKG1w7LbvFyaQlOzbu46sUpLx
-	S6n63urrBxjYQoCzU/khw0dtAr73FPpQ2otzN1c99ZUCauOSxHwTlACb
-X-Gm-Gg: AYBFou0r2VIX4ZWq2X7L1xeAokTx9+LrdOQwY2JNMNYufDGdt7Qn3ND0KPFqfKaPcYI
-	cZDvDLWhxc8qbEtgqtEi/r2W2lengyPusxRx4zc7YcT5Agx4MpbbzdpeIqcvaGL2atUQUQcvCwf
-	5yMHrbKLTdGEAwBoFpJk3pNOSZpwyjUJaY+wuNScoWliT/nVWgNunSXLTp+gNLSZ9pX4AyJKXR6
-	wekfgXek9uOpByJvrjpCcDOzZOzMw2osODN4CJUOnviDNW33Ha+U2AF1VSjZP4La9+J0C+csTxf
-	VcZlmGmfCb7XtvmxXIImcGxAR0QscZqxbDpzTwf/fEhlUjsqLJ0JtJJggqy+bsRwB/2uoKX6tT0
-	x+QO/ZBQv1LB8DhRb/Jd1y/eqy+UnHSjeTJpIE3P/lq/5vQ62kokPlGvwcf43yGyAvEJ2ghWhQz
-	zAYSIHfGWEoAuPXKE0Arwah6ELpTEa7HVY3BcugkOHmE+0uGEYDpGUrfndm4nvZjXeLwAL6Ajm+
-	BgmcCm7apSRSIDk1+EbEzgiN3iu5TysRi/0JKQmr/2qUJG7X9TbCBvLFfMpKcRqQVNvWoAhv9iR
-	/yQCQJ3V2Igwi7WyfSOVXYZgoWzxwfgHZZZ6/9pZnxaa5l76XQRnQA7gPz+eF2USboxlJkW6G2+
-	ULkyJASO3cQTktxCoLUx2asfbW/VtF6pFlNFZCqzHbg52qUPXvPJmjHEVDhX0HAaREspzWL1Lik
-	BvMliqBTtgfoz9YsQQSFWQ/FalSFOY2wPmDx+9aLgNq2GIGxWDj+iD
-X-Received: by 2002:a05:6830:6809:b0:85e:ef69:238a with SMTP id 46e09a7af769-85f1cfce0famr5153719a34.11.1794046596984;
-        Sat, 07 Nov 2026 02:16:36 -0800 (PST)
+        bh=fU1HVMt6F+8GX+5+y1BQ6f55b/pZazHVnomyKtjqHX4=;
+        b=To3aRZYM19WorQ8xyhEwfNdJxEkyN/PVbSQl/Bhj6hHvBQdTcMqahxUrxegU+ap1r8
+         TxRtD7S989wsuqSPuw6TONygjtqH9+Y/t1QL89EgRirzBGORkcskNN5ZFWF0HfJUqizh
+         rrXJyU2LTEIpA+D4i87dyz+jeKTll2jniwS7sxJNj/zIZ6n7yJueORiOi45V8JMqqZrw
+         kFkCalQ4RjGgAKiLypPtNxIJFp5kYF+SuVMU+Zdw+H0mqgN5RoK5HrcRBPIvX6P38DY2
+         QDlGJLCowP6gc8t8Gnz/lI5RG8F1BCxR4JzPfSkxYvZ9eeQb8OjC9ZTpfVXceVCXzK61
+         uOkg==
+X-Forwarded-Encrypted: i=1; AKwUvByrIBxb7v1hHwXJPMo86R0wd0NrUfc2+k4pPQs2AnM2VgVD4I1h5D+tjUE1N4pm8QyGwFEwlXq7/unO+I3W@vger.kernel.org
+X-Gm-Message-State: APuU4Z8LX7u778CsEW0rMZMoNFFSINDp4X9rEQO0GuhCQBIfA7eGRIgz
+	RwWaRzPc/4m0ufQkdNUysoS+HRJp19MXqlM5acSTfH3mqm+eH6h9vT+h
+X-Gm-Gg: AYBFou0NmGK0YUF0Sn68HRasz8uYXIOzoEnLJUsRj+WMBW2bUOJWJyjH+TFATj4QCBP
+	FnTdUOF2dUtFIgO9PilaAiXAYcbw3Cox5iNM2rWnyXNCh0v/tPFNLceDB8sMoLfvLnAYxwv+8op
+	u/ltiOFCr3wH9cyZ/Pu2M38pa2JVyVWIb6Ifcydfm3KkZJmeLH5TogIE3JI6JiBr0UprazpRZow
+	QI9YpENP63JnBaejWlygZhlUkwpBV4rIL5u7wcjT6MVC87tfisHEMayeFnWrbE7aG+uBEOH5wLB
+	2vqAuOFUt2nG1ozbjUkclGIcnS3tYK1Zm4wiUVWBJx66DD8oRRtUmafmlsq22suD9bKCTi5gAYn
+	KdU+WVE+ETERtSn3fVQo422zRwTUlQxNfo9LEok9ERtMHnexrC8W2bbXiZ2BT5qgf1jLxhU/mQm
+	zWuqW2ZPuVlEgZcpEbG6w53BbwXu7IyR5o9FCFgwhZ8bbwIg2153JC4d2WawQEHyGtfeA8m+3+v
+	c3cCmZASV647ppBGJRysiG8pTimHOglcFx/M2OlltNTlJ73LYD43R4X69jz6o4tGqzgUbqReuoX
+	4O46V7TQKinQN+x6vztmX0cKGV8SlTJnzAPD/uaBxkjkzlKB3IsAhISLvEWCJ/bkEsu9dIa5C7v
+	rx9hFlBc6m18CoxQOsyPLTj/FQNOJmHPHXpxKG88lx/PmmOnfP1EZn6Z0gUex+EuG1/yK3YEjQg
+	CVC+P3a9keoqxLaODGkhLF61/hucrXYUwlHdT+I6fDtUtXh73ewVuD
+X-Received: by 2002:a05:6830:438f:b0:821:94d2:83cd with SMTP id 46e09a7af769-85f1cee4f2cmr4595254a34.9.1794046599688;
+        Sat, 07 Nov 2026 02:16:39 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-85f1dbef224sm3990269a34.12.2026.11.07.02.16.33
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-85f1dbef224sm3990269a34.12.2026.11.07.02.16.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 02:16:36 -0800 (PST)
+        Sat, 07 Nov 2026 02:16:39 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 07 Nov 2026 03:16:01 -0700
-Subject: [PATCH 04/58] mtd: rawnand: separate hardware disconnection from
- cleanup
+Date: Sat, 07 Nov 2026 03:16:02 -0700
+Subject: [PATCH 05/58] mtd: rawnand: share retained chip and controller
+ ownership
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -96,7 +96,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-4-0181ef0cc4c8@gmail.com>
+Message-Id: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-5-0181ef0cc4c8@gmail.com>
 References: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
 In-Reply-To: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
 To: Miquel Raynal <miquel.raynal@bootlin.com>, 
@@ -155,248 +155,223 @@ Cc: Tze Yee Ng <tze.yee.ng@altera.com>, linux-mtd@lists.infradead.org,
  linux-arm-msm@vger.kernel.org, James Hilliard <james.hilliard1@gmail.com>
 X-Mailer: b4 0.15.2
 
-A retained MTD handle can still enter NAND operations after its
-controller is unbound. Closing a writable character device also calls
-nand_sync(), which takes the chip and controller locks. Freeing their
-storage during remove is therefore unsafe even without another explicit
-read or write.
+Controller drivers need to keep chip metadata and serialization locks
+alive after unregistering MTD, without retaining their hardware
+resources. Share the name, firmware-node and parent-device references,
+the final NAND cleanup, and the disconnected-device open check.
 
-Add nand_disconnect() to serialize disconnection with regular operations
-under the chip and controller locks. Make nand_get_device() reject a
-disconnected chip and propagate that error through its callers. A sync
-after disconnection becomes a no-op. Suspend and resume also honor the
-disconnected state.
-
-Unregister MTD devices first so removal notifiers can finish their I/O,
-then disconnect before releasing controller resources. Wake any
-remaining suspended waiters when disconnecting. Panic writes also check
-the disconnected flag; their notifier clients must be drained by MTD
-unregistration before controller resources are released.
-
-Keep nand_cleanup() separate. Controllers adopting this interface must
-retain the chip, controller lock storage and NAND metadata until their
-last MTD and device references are gone.
+Provide reference-counted controller storage with an initial
+device-managed reference. Register that reference before managed
+hardware resources so their teardown finishes before the controller can
+be freed. Each retained chip pins the controller independently, allowing
+multi-chip controllers and embedded chip structures to use the same
+lifetime rules.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/mtd/nand/raw/nand_base.c | 76 +++++++++++++++++++++++++++++++++-------
- include/linux/mtd/rawnand.h      |  9 +++--
- 2 files changed, 69 insertions(+), 16 deletions(-)
+ drivers/mtd/nand/raw/Makefile        |   1 +
+ drivers/mtd/nand/raw/nand_lifetime.c | 118 +++++++++++++++++++++++++++++++++++
+ include/linux/mtd/rawnand.h          |  12 ++++
+ 3 files changed, 131 insertions(+)
 
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index a5b278ab9384..8f7d2571e8d9 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -336,21 +336,47 @@ static int nand_isbad_bbm(struct nand_chip *chip, loff_t ofs)
-  *
-  * Lock the device and its controller for exclusive access
-  */
--static void nand_get_device(struct nand_chip *chip)
-+static int nand_get_device(struct nand_chip *chip)
- {
- 	/* Wait until the device is resumed. */
- 	while (1) {
- 		mutex_lock(&chip->lock);
-+		if (chip->disconnected) {
-+			mutex_unlock(&chip->lock);
-+			return -ENODEV;
-+		}
- 		if (!chip->suspended) {
- 			mutex_lock(&chip->controller->lock);
--			return;
-+			return 0;
- 		}
- 		mutex_unlock(&chip->lock);
+diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
+index 619760138d32..7ea275a40fcd 100644
+--- a/drivers/mtd/nand/raw/Makefile
++++ b/drivers/mtd/nand/raw/Makefile
+@@ -61,6 +61,7 @@ obj-$(CONFIG_MTD_NAND_NUVOTON_MA35)	+= nuvoton-ma35d1-nand-controller.o
+ obj-$(CONFIG_MTD_NAND_LOONGSON)		+= loongson-nand-controller.o
  
--		wait_event(chip->resume_wq, !chip->suspended);
-+		wait_event(chip->resume_wq, !READ_ONCE(chip->suspended) ||
-+			   READ_ONCE(chip->disconnected));
- 	}
- }
- 
-+/**
-+ * nand_disconnect - drain hardware access and reject further operations
-+ * @chip: NAND chip object
-+ *
-+ * Unregister the MTD device first so removal notifiers can finish their I/O.
-+ * Call before releasing controller resources. Operations waiting for resume
-+ * are woken and fail with -ENODEV.
-+ * The chip, controller lock and NAND metadata must remain alive
-+ * until existing MTD handles are released; nand_cleanup() is a separate step.
-+ */
-+void nand_disconnect(struct nand_chip *chip)
+ nand-objs := nand_base.o nand_legacy.o nand_bbt.o nand_timings.o nand_ids.o
++nand-objs += nand_lifetime.o
+ nand-objs += nand_onfi.o
+ nand-objs += nand_jedec.o
+ nand-objs += nand_amd.o
+diff --git a/drivers/mtd/nand/raw/nand_lifetime.c b/drivers/mtd/nand/raw/nand_lifetime.c
+new file mode 100644
+index 000000000000..9518c9a4bc63
+--- /dev/null
++++ b/drivers/mtd/nand/raw/nand_lifetime.c
+@@ -0,0 +1,118 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/* Storage lifetime for disconnected NAND controllers and chips. */
++
++#include <linux/device.h>
++#include <linux/kref.h>
++#include <linux/module.h>
++#include <linux/mtd/rawnand.h>
++#include <linux/slab.h>
++
++static void nand_controller_release(struct kref *ref)
 +{
-+	mutex_lock(&chip->lock);
-+	mutex_lock(&chip->controller->lock);
-+	WRITE_ONCE(chip->disconnected, true);
-+	mutex_unlock(&chip->controller->lock);
-+	mutex_unlock(&chip->lock);
-+	wake_up_all(&chip->resume_wq);
++	struct nand_controller *controller;
++
++	controller = container_of(ref, struct nand_controller, refcnt);
++	controller->release(controller);
 +}
-+EXPORT_SYMBOL_GPL(nand_disconnect);
 +
- /**
-  * nand_check_wp - [GENERIC] check if the chip is write protected
-  * @chip: NAND chip object
-@@ -581,7 +607,9 @@ static int nand_block_markbad_lowlevel(struct nand_chip *chip, loff_t ofs)
- 		nand_erase_nand(chip, &einfo, 0);
- 
- 		/* Write bad block marker to OOB */
--		nand_get_device(chip);
-+		ret = nand_get_device(chip);
-+		if (ret)
-+			return ret;
- 
- 		ret = nand_markbad_bbm(chip, ofs);
- 		nand_release_device(chip);
-@@ -3879,7 +3907,9 @@ static int nand_read_oob(struct mtd_info *mtd, loff_t from,
- 	    ops->mode != MTD_OPS_RAW)
- 		return -ENOTSUPP;
- 
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 
- 	old_stats = mtd->ecc_stats;
- 
-@@ -4449,6 +4479,9 @@ static int panic_nand_write(struct mtd_info *mtd, loff_t to, size_t len,
- 	struct mtd_oob_ops ops;
- 	int ret;
- 
-+	if (READ_ONCE(chip->disconnected))
-+		return -ENODEV;
++static void nand_controller_put(void *data)
++{
++	struct nand_controller *controller = data;
 +
- 	nand_select_target(chip, chipnr);
- 
- 	/* Wait for the device to get ready */
-@@ -4479,7 +4512,9 @@ static int nand_write_oob(struct mtd_info *mtd, loff_t to,
- 
- 	ops->retlen = 0;
- 
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 
- 	switch (ops->mode) {
- 	case MTD_OPS_PLACE_OOB:
-@@ -4539,7 +4574,9 @@ int nand_erase_nand(struct nand_chip *chip, struct erase_info *instr,
- 		return -EIO;
- 
- 	/* Grab the lock and see if the device is available */
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 
- 	/* Shift to get first page */
- 	page = (int)(instr->addr >> chip->page_shift);
-@@ -4627,7 +4664,8 @@ static void nand_sync(struct mtd_info *mtd)
- 	pr_debug("%s: called\n", __func__);
- 
- 	/* Grab the lock and see if the device is available */
--	nand_get_device(chip);
-+	if (nand_get_device(chip))
-+		return;
- 	/* Release it and go back */
- 	nand_release_device(chip);
- }
-@@ -4644,7 +4682,9 @@ static int nand_block_isbad(struct mtd_info *mtd, loff_t offs)
- 	int ret;
- 
- 	/* Select the NAND device */
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 
- 	nand_select_target(chip, chipnr);
- 
-@@ -4688,10 +4728,14 @@ static int nand_suspend(struct mtd_info *mtd)
- 	int ret = 0;
- 
- 	mutex_lock(&chip->lock);
-+	if (chip->disconnected) {
-+		mutex_unlock(&chip->lock);
-+		return -ENODEV;
-+	}
- 	if (chip->ops.suspend)
- 		ret = chip->ops.suspend(chip);
- 	if (!ret)
--		chip->suspended = 1;
-+		WRITE_ONCE(chip->suspended, true);
- 	mutex_unlock(&chip->lock);
- 
- 	return ret;
-@@ -4706,10 +4750,12 @@ static void nand_resume(struct mtd_info *mtd)
- 	struct nand_chip *chip = mtd_to_nand(mtd);
- 
- 	scoped_guard(mutex, &chip->lock) {
-+		if (chip->disconnected)
-+			return;
- 		if (chip->suspended) {
- 			if (chip->ops.resume)
- 				chip->ops.resume(chip);
--			chip->suspended = 0;
-+			WRITE_ONCE(chip->suspended, false);
- 		} else {
- 			pr_err("%s called for a chip which is not in suspended state\n",
- 				__func__);
-@@ -4743,7 +4789,9 @@ static int nand_lock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
- 	if (!chip->ops.lock_area)
- 		return -ENOTSUPP;
- 
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 	ret = chip->ops.lock_area(chip, ofs, len);
- 	nand_release_device(chip);
- 
-@@ -4764,7 +4812,9 @@ static int nand_unlock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
- 	if (!chip->ops.unlock_area)
- 		return -ENOTSUPP;
- 
--	nand_get_device(chip);
-+	ret = nand_get_device(chip);
-+	if (ret)
-+		return ret;
- 	ret = chip->ops.unlock_area(chip, ofs, len);
- 	nand_release_device(chip);
- 
++	kref_put(&controller->refcnt, nand_controller_release);
++}
++
++/**
++ * devm_nand_controller_init - initialize reference-counted controller storage
++ * @dev: controller device
++ * @controller: controller embedded in driver-owned, non-devm storage
++ * @release: callback freeing that storage, without accessing hardware
++ *
++ * Call before acquiring managed hardware resources. Device teardown drops its
++ * storage reference after releasing those resources. Chips prepared with
++ * nand_set_release() hold additional references until their final MTD put.
++ *
++ * Takes ownership of the storage even on failure.
++ * Return: zero on success or a negative error code.
++ */
++int devm_nand_controller_init(struct device *dev, struct nand_controller *controller,
++			      void (*release)(struct nand_controller *controller))
++{
++	nand_controller_init(controller);
++	kref_init(&controller->refcnt);
++	controller->release = release;
++
++	return devm_add_action_or_reset(dev, nand_controller_put, controller);
++}
++EXPORT_SYMBOL_GPL(devm_nand_controller_init);
++
++static int nand_mtd_get_device(struct mtd_info *mtd)
++{
++	struct nand_chip *chip = mtd_to_nand(mtd_get_master(mtd));
++
++	guard(mutex)(&chip->lock);
++	return chip->disconnected ? -ENODEV : 0;
++}
++
++static void nand_mtd_release(struct mtd_info *mtd)
++{
++	struct nand_chip *chip = mtd_to_nand(mtd);
++	struct nand_controller *controller = chip->controller;
++	struct device *parent = mtd->dev.parent;
++	struct device_node *np = nand_get_flash_node(chip);
++	const char *name = mtd->name;
++
++	if (!controller->release)
++		controller = NULL;
++	nand_cleanup(chip);
++	of_node_put(np);
++	kfree(name);
++	if (chip->release)
++		chip->release(chip);
++	if (controller)
++		nand_controller_put(controller);
++	put_device(parent);
++}
++
++/**
++ * nand_set_release - retain a scanned chip until its final MTD reference
++ * @chip: successfully scanned, unpublished NAND chip
++ * @release: callback freeing chip storage, or NULL for a controller-embedded chip
++ *
++ * Copies the MTD name and pins the parent device, flash node and, when managed
++ * with devm_nand_controller_init(), controller storage. The original name stays
++ * owned by its original allocator. The caller must set the name or parent before
++ * calling this function, and preserve any other metadata used by MTD callbacks.
++ *
++ * After success, unregister MTD, call nand_disconnect(), and drop the driver's
++ * initial reference with mtd_put_master(). Do the same disconnect/put on MTD
++ * registration failure. nand_cleanup() runs at final release, so controller
++ * detach callbacks must not depend on resources released during removal.
++ *
++ * Return: zero on success or -ENOMEM, leaving ownership unchanged on failure.
++ */
++int nand_set_release(struct nand_chip *chip,
++		     void (*release)(struct nand_chip *chip))
++{
++	struct mtd_info *mtd = nand_to_mtd(chip);
++	const char *name = mtd->name;
++	char *copy;
++
++	if (!name)
++		name = dev_name(mtd->dev.parent);
++	copy = kstrdup(name, GFP_KERNEL);
++	if (!copy)
++		return -ENOMEM;
++
++	mtd->name = copy;
++	mtd->_get_device = nand_mtd_get_device;
++	get_device(mtd->dev.parent);
++	of_node_get(nand_get_flash_node(chip));
++	if (chip->controller->release)
++		kref_get(&chip->controller->refcnt);
++	chip->release = release;
++	mtd_set_release(mtd, nand_mtd_release);
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(nand_set_release);
 diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-index 5c70e7bd3ed5..90b2169cc745 100644
+index 90b2169cc745..313e0d88e19a 100644
 --- a/include/linux/mtd/rawnand.h
 +++ b/include/linux/mtd/rawnand.h
-@@ -1264,9 +1264,10 @@ struct nand_secure_region {
-  * @pagecache.page: Page number currently in the cache. -1 means no page is
-  *                  currently cached
-  * @buf_align: Minimum buffer alignment required by a platform
-- * @lock: Lock protecting the suspended field. Also used to serialize accesses
-- *        to the NAND device
-+ * @lock: Lock protecting the suspended and disconnected fields. Also serializes
-+ *        accesses to the NAND device
-  * @suspended: Set to 1 when the device is suspended, 0 when it's not
-+ * @disconnected: Controller resources are unavailable; reject hardware access
-  * @resume_wq: wait queue to sleep if rawnand is in suspended state.
-  * @cur_cs: Currently selected target. -1 means no target selected, otherwise we
-  *          should always have cur_cs >= 0 && cur_cs < nanddev_ntargets().
-@@ -1326,7 +1327,8 @@ struct nand_chip {
+@@ -22,6 +22,7 @@
+ #include <linux/mutex.h>
+ #include <linux/of.h>
+ #include <linux/types.h>
++#include <linux/kref.h>
  
- 	/* Internals */
+ struct nand_chip;
+ struct gpio_desc;
+@@ -1116,6 +1117,8 @@ struct nand_controller_ops {
+  *			changing the column.
+  * @supported_op.cont_read: The controller supports sequential cache reads.
+  * @controller_wp:	the controller is in charge of handling the WP pin.
++ * @refcnt:		controller storage references for managed lifetimes
++ * @release:		free controller storage after the last chip is released
+  */
+ struct nand_controller {
  	struct mutex lock;
--	unsigned int suspended : 1;
-+	bool suspended;
-+	bool disconnected;
- 	wait_queue_head_t resume_wq;
- 	int cur_cs;
- 	int read_retries;
-@@ -1595,6 +1597,7 @@ void nand_wait_ready(struct nand_chip *chip);
-  * sucessful nand_scan().
+@@ -1125,6 +1128,8 @@ struct nand_controller {
+ 		unsigned int cont_read: 1;
+ 	} supported_op;
+ 	bool controller_wp;
++	struct kref refcnt;
++	void (*release)(struct nand_controller *controller);
+ };
+ 
+ static inline void nand_controller_init(struct nand_controller *nfc)
+@@ -1132,6 +1137,9 @@ static inline void nand_controller_init(struct nand_controller *nfc)
+ 	mutex_init(&nfc->lock);
+ }
+ 
++int devm_nand_controller_init(struct device *dev, struct nand_controller *controller,
++			      void (*release)(struct nand_controller *controller));
++
+ /**
+  * struct nand_legacy - NAND chip legacy fields/hooks
+  * @IO_ADDR_R: address to read the 8 I/O lines of the flash device
+@@ -1285,6 +1293,7 @@ struct nand_secure_region {
+  *              independent devices
+  * @ecc: The ECC controller structure
+  * @priv: Chip private data
++ * @release: Free chip storage after the last MTD reference is dropped
+  */
+ struct nand_chip {
+ 	struct nand_device base;
+@@ -1345,6 +1354,7 @@ struct nand_chip {
+ 	struct nand_controller *controller;
+ 	struct nand_ecc_ctrl ecc;
+ 	void *priv;
++	void (*release)(struct nand_chip *chip);
+ };
+ 
+ static inline struct nand_chip *mtd_to_nand(struct mtd_info *mtd)
+@@ -1598,6 +1608,8 @@ void nand_wait_ready(struct nand_chip *chip);
   */
  void nand_cleanup(struct nand_chip *chip);
-+void nand_disconnect(struct nand_chip *chip);
+ void nand_disconnect(struct nand_chip *chip);
++int nand_set_release(struct nand_chip *chip,
++		     void (*release)(struct nand_chip *chip));
  
  /*
   * External helper for controller drivers that have to implement the WAITRDY
