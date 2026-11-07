@@ -1,73 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.52
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794082464;
-	b=wwasICoAEbLOho2/amqWE3KestVhKmpm7TYHcvZ08VS06s9uc9o61Jl/wSJuMmCiNRIp
-	 yyQjVgou27OwH+KswD8CRpQZ3eUJspOAuOoFJHgR+HjJQ67tkDILjTC+t/UZmV6uhrLdV
-	 4oPDdcHOLM2EGSUYnq18MzyfP5JDiuoioIIxyyoCn4b/lnbYXbn+Mpwz/oERUFcrqCj7B
-	 7jFFzI+kG8OYGszylLsKcZX3gAFvBFx6cb0CzfkqGRTGmEnAE29usqKD6u+nzLPqu2mrr
-	 wgdKtgYrudYnIgPVIoZFQ3zO3W2vpONRLkSHnGzvgjsLZ7dsxhda+4d67Kt5WY3m8cQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794082464;
-	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer;
-	bh=KxRoCKaLFTMBGcFqcbl1lD4jLUh8waiooh35vSxr5ng=;
-	b=zVIlR+bxhUVjY91fYACVXMpphS6rSZrGHvhdQvSOcsosKkAJI1DxnQcuUXnzZVmeoXeO
-	 M1Rvu0cyrAGVxM50zWb03zsFd75zYkktqdzoDGlfd8Rs8OIRAkcR8M7FSKSV6zvcShoZr
-	 dhwrePeAYzkWpfXtVFtT2MMRRtCb4R8Keq2l0vMwUePwQappdLvcqFoH5Jj7DAnhnKCl0
-	 PXEXcDMN9iVaOyshsd3y3wcK7Huodzjh6DJFHRyb8bZ2E2m0u/3rZC5e58OBzVYurpejx
-	 EXeR/1+WbbJ5ZamPw2ETaj+ZPLUoY/vfSQage/9CxH4yfPuYBHRwUoM++1WtkhVLCrQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=fail header.from=gmail.com;
-	spf=pass smtp.mailfrom=upstreamdata.ca;
-	arc=none smtp.remote-ip=209.85.161.52
-Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794083172;
+	b=un8fjkxhKp8SG8gGQVCmO4jV6Pd0c6fg2yoExifxUv281IxKZHAwqRGERTluxkx6SJpy
+	 OHuQhaHpgJbtPBaUWsNa/4/UFLQyjnX8JDYzso0iFNmiMw4ggETJ6VsiUv3k6GgmZsKFk
+	 MZdTUW/XHMyB2/AQjPh/6jYN7wxlqPQTPxXYpByawdijNW0F2fzLnh9xI9yOlCX0Wv7bo
+	 4vnG5AirJWKLRyaG8pCDNlNgQ9pLED1bVRL28o/CVrgbpatVuaN7Bou+ercCml4FQeWQZ
+	 ZlbJHMxW/Od2tyFJEb334SmeQX+SvUL844IWRiVF5uzoyNrvz9hDnfBQiZO/RC1x0QQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794083172;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=mInX5ql1Y8hdSL2dSS1wss4rucEdjqMvUx60BAydYlk=;
+	b=GqsLuyxwhVOIb/qsPQJEPLewfibGLE5R8rS0fQWr0oNWs7Ii5tTUVl9IszoO+1DOpm1H
+	 ltZRaEYl6WYmCvo+DN8862/hyjmYtWO9CK0JNcWJsfKwvAGmRbJcdPPniSGWkW5AMlZbM
+	 ixIKS3WfTlApvlgtE9e/rUikuTf9mjnJvqjYY/9ZORyKRqtlRGl6aBleaigCYL+x492YY
+	 zX1QX3dEfDBBk0t/DebdsMZ8RxbcWHI6vBqjGxzp9tacwPCrJgdysHA06JCB4OaBx7I8F
+	 kP7agugXKUn+lbAyj6nbYqBKQPHKBTq4lrnkfDEz4Rc8vMTNaJpXIO9EmzRlhBXRFmA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YF7p+rEC;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 766C4606A326;
+	Sat,  7 Nov 2026 20:26:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YF7p+rEC
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794083172;
+	b=qSFMev/Kn3CHGOGCZLKbAHXQb59wmdDcxcpxu9xXr0Gnybi3NtGqOsNxmJyj6ZA8x1Et
+	 Z0TqAe1aXI8uk0hBgBlpsSApV20AxdIZj7QvR3IMCfFI9z3CzstYyvww5Dj/fisJnEJX4
+	 In9ZVTH2SEmlxFWLib2pYE2oH2uQphjOFJvkhmziInG3Omf43xMCL9LIxqAJ+zx627WpN
+	 NMbwODFxr+eIMennTw2yEVIJEfzpCo6svnFbi0+Gqn1DCZyOIf9hvluK4+32Ut6myJdFj
+	 X4qbXknIOtDGMJpUWuanFtRz1kcBTPxpyArQz74K1AGXfAiouirbk0Najya5T9YKRpg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794083172;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=mInX5ql1Y8hdSL2dSS1wss4rucEdjqMvUx60BAydYlk=;
+	b=c2+D/Ml+0ML9Yggw93zKSWxQ4XbEuwPatfzJAlC6Zq87Rif5hcUDO9Wh5UQqyCwjCVy4
+	 9oeFM9LV2KxNPCz9uoWhkkFvsp+hh5xVGfvlsu3j+3zQHpxER13M5wfPeyGXYdY5aDvds
+	 iUNxEDYYyQPwekV/7rVyVvcw83MDscO11xJbbDaegJYWyxrXgd723cjFDAW+FPANpIvrA
+	 4/a4iQ4Mot8LaK4z+3KuFANgib+sYCx2ux/OGzlcMzO3+GqqfiHJaqlZ9oOiOIUlpaV1e
+	 WyKO6sEMKebxW9oM1ygZBlkPjmMirgDUz6Cpg14GorGCC6KYh2Um+9WRbu6gzhVjShg==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CD1860A3803
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 20:14:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3CD1860A3803
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=upstreamdata.ca
-Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-6df0b02fe91so449959eaf.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 07 Nov 2026 12:14:24 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794082463; x=1794687263;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KxRoCKaLFTMBGcFqcbl1lD4jLUh8waiooh35vSxr5ng=;
-        b=FcHrS31kTozWRJo9POlZpR4YcIjQmx5thv3qN9njLb3HoHSy1ghVBU0dOXchgS92n2
-         3nO63+Y5YKw4Bm1KwtREE7Xa0Jey1J9OFW3McymPoIuKUjQ8IOzhU2i3ezT5VfOAlvGM
-         8aioIsp1EOmikHQwNOdPCqZ343NGkxJ1Esymmh6GutB4cOBBLUEl098BXpqqi5GDmNqC
-         ZD9UGS3mcjDvf1XSd7kNp8GwblkeZKVE4omm+vRTotfyeypmgYL1ZSqugdHvGLIzEjKq
-         M8SLpWgIjK7QF9/Ej2YDtj4gSKvfwEbb3LBniYxtgfP0a6ssrLJSwAf/t9Hj9FDP95jH
-         5WLQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwRQEnf7Og/cwbYtWOUOAPeSE25gYyimMzwgJNqSPhO8kFZYxfmIhg0Rq7A0lN3X8unTgbXyaEV6WXS+PTm@vger.kernel.org
-X-Gm-Message-State: APuU4Z/OkxrClTkjBANxE8e5QG0Xb83sU2NI7QRDw9YeyZBXsMZOmUiD
-	Q+KDtROE/VZytQMhPrVllgD1enDNyQyzbEO6i1PcqJdncnTpPop6RNWtMpvRxw2wa9A=
-X-Gm-Gg: AYBFou2QsgHwmz+gK1DFbuzqnNzvmSyTIm1oyN5GC965XMwRCdAMQySSri6S1pwyAb5
-	xDI8JYukTFWEmWacd2BO4pzIRTtFcufRBJgmgFU5JUp52CZK1Zz8KJhXooUjKsl42i/+boopCMj
-	jqMzfbOhYcYVpBw5MamZTn0lofRBx3ssyWIfNeUModbecsUiB2F4Hig4SYzNyvoGsMs7dqcOdDu
-	5xTKgMplJ7Rwyop42J+8WYhiHUN+hkY5UkPIMe0QE9HKTqIt1OB+O/3Y0UTxFBdAopcoyFZQniI
-	fXT/hMWtKorAMiDSi1cNFaCOlWV712TpGwFtiHGjGsG0dVpWG2seKQy8o4VtPZDqKfJ45ALvrLN
-	NLRDwhlMzR7+vd2M4Rw7BX5yjQzY4pq2/42oz2ZvMRffiNZPKSUUcHQZu2bauAMVmUwivtpbm6h
-	GKlp4GEy0p8QzUQ6PZf41LRzdX6aU3VAyy6UGyoN/0hoB6UuLipfOR4QX8PXOl0AZeIpTdanEAp
-	Kk+8AnGmUccLOkz4uOQrtKP0ObfOjocYKmSiP6ImKMlGPKiFICJHaDx3xKYn+7CseK0rzn+VnKV
-	QUsGXcDN5wBY3p/zpzjvd09pNA03L6/z+Vo0nMTZB1cu1QNMtZNvbKf132c0
-X-Received: by 2002:a05:6820:4cca:b0:6df:ac2e:85ae with SMTP id 006d021491bc7-71700c8606emr1101384eaf.14.1794082463049;
-        Sat, 07 Nov 2026 12:14:23 -0800 (PST)
-Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4ade68aa561sm226096fac.5.2026.11.07.12.14.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 12:14:22 -0800 (PST)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 07 Nov 2026 03:16:55 -0700
-Subject: [PATCH 58/58] mtd: rawnand: diskonchip: retain chip state across
- removal
+	by smtp.kernel.org (Postfix) with ESMTPS id 0D5581F008A1;
+	Sat,  7 Nov 2026 20:26:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794083172;
+	bh=mInX5ql1Y8hdSL2dSS1wss4rucEdjqMvUx60BAydYlk=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=YF7p+rECqsUm6EyfcXq5TlJoyN+ExZIsblKODD92vFrF1mT3+xKTVZ1XTrZHRPmYt
+	 jcOsEDYPBdtYLA9EqdRuYfvzone3uMrK6BU/X9i3b0LL8XHb5ad+q9Tlv9E0y35zCp
+	 AX+4StjfipfNDRahEEqWLsbw62aiS98Y5Gj1AaBjPPjzkZj2JO+u7Fwp554JNfGyRP
+	 MJtwqVbv0IOyhmqLOTnMtxPotF5r4hGzyc3lE4K9Ua7jsgW0oMdqMjTmH41XSzdhyZ
+	 qpRWUMyMQSvBaZAuzupxsLD/VVhQnRuvHvO+AQ+plGCCBDjlIjtbHMTLKM5NICdVxx
+	 qq/77qKgSfymQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 6040447CF7;
+	Sat,  7 Nov 2026 20:26:10 +0000 (UTC)
+From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
+Subject: [PATCH v3 0/4] drm/msm/a5xx: Fix GPU stalls on A508, A509 and A512
+Date: Sat, 07 Nov 2026 17:26:06 -0300
+Message-Id: <20261107-a5xx-gpu-pm-v3-0-e2480408abea@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -79,130 +85,102 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-58-0181ef0cc4c8@gmail.com>
-References: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
-In-Reply-To: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>,
-  Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
-  Brian Norris <computersforpeace@gmail.com>,
-  Boris Brezillon <bbrezillon@kernel.org>,
-  Arseniy Krasnov <AVKrasnov@sberdevices.ru>, Chen-Yu Tsai <wens@kernel.org>,
-  Jernej Skrabec <jernej.skrabec@gmail.com>,
-  Samuel Holland <samuel@sholland.org>, Thomas Gleixner <tglx@kernel.org>,
-  Vitaly Wool <vitalywool@gmail.com>, David Woodhouse <dwmw2@infradead.org>,
-  Russell King <rmk+kernel@arm.linux.org.uk>,
-  David Woodhouse <David.Woodhouse@intel.com>,
-  Mike Rapoport <rppt@kernel.org>,
-  Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-  Alexandre Torgue <alexandre.torgue@foss.st.com>,
-  Christophe Kerello <christophe.kerello@st.com>,
-  Jason Roberts <jason.e.roberts@intel.com>,
-  Michal Simek <michal.simek@amd.com>,
-  Boris Brezillon <boris.brezillon@collabora.com>,
-  Mason Yang <masonccyang@mxic.com.tw>,
-  Ramuthevar Vadivel Murugan <vadivel.muruganx.ramuthevar@linux.intel.com>,
-  Stefan Agner <stefan@agner.ch>, Lucas Stach <dev@lynxeye.de>,
-  Thierry Reding <thierry.reding@kernel.org>,
-  Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>,
-  Matthias Brugger <matthias.bgg@gmail.com>,
-  AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-  Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-  Heiko Stuebner <heiko@sntech.de>, Yifeng Zhao <yifeng.zhao@rock-chips.com>,
-  Nicolas Ferre <nicolas.ferre@microchip.com>,
-  Alexandre Belloni <alexandre.belloni@bootlin.com>,
-  Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-  Keguang Zhang <keguang.zhang@gmail.com>, Jacky Huang <ychuang3@nuvoton.com>,
-  Shan-Chun Hung <schung@nuvoton.com>, Frank Li <Frank.Li@nxp.com>,
-  Sascha Hauer <s.hauer@pengutronix.de>,
-  Pengutronix Kernel Team <kernel@pengutronix.de>,
-  Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>,
-  Liang Yang <liang.yang@amlogic.com>,
-  Neil Armstrong <neil.armstrong@linaro.org>,
-  Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>,
-  Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-  Manivannan Sadhasivam <mani@kernel.org>,
-  Kamal Dasu <kamal.dasu@broadcom.com>,  Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,  Vladimir Zapolskiy <vz@mleia.com>,
-  Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
-  Paul Cercueil <paul@crapouillou.net>,
-  Harvey Hunt <harveyhuntnexus@gmail.com>,
-  Maxim Levitsky <maximlevitsky@gmail.com>, Michael Walle <michael@walle.cc>,
-  Srinivas Kandagatla <srini@kernel.org>
-Cc: Tze Yee Ng <tze.yee.ng@altera.com>, linux-mtd@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org, 
- linux-mediatek@lists.infradead.org, linux-rockchip@lists.infradead.org, 
- linux-mips@vger.kernel.org, imx@lists.linux.dev, 
- linux-renesas-soc@vger.kernel.org, linux-amlogic@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, James Hilliard <james.hilliard1@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NQQ6CMBQFr0K6tqa/BUFX3sO4aMsHaoSSFhoM4
+ e62uHFhXE7yZt5KPDqDnlyylTgMxhs7RBCHjOhODi1SU0cmnPETMDhTWSwLbceZjj1tikrpHJG
+ LqiTRGB02Ztlrt/uH/aweqKeUSIvO+Mm6134XIO1+lwNQRqFmWoCQkAO/tr00z6O2PUnlwP+4P
+ Lp5UUrZKMWrWn6727a9AZjV/KP0AAAA
+X-Change-ID: 20261019-a5xx-gpu-pm-f58bc4ee2387
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ Paul Sajna <sajattack@postmarketos.org>, 
+ Fabricio Akio <fabricioakio@gmail.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794083169; l=3229;
+ i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
+ bh=zOocD9OAKC3L83jqC67Z507icBwIJgZhFceeOcw6S5A=;
+ b=cY1LOcQELddWUz203MSFnaz4UExS8C9q9xOC4CNgUatrCxYlHrIi9TxA5q7soOudPMxPi/5wA
+ w0XJfQrp2t2BAECVe5wwqXko/m2PhlGMV6X0WiYUM2E8TowNGmuHEhd
+X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
+ pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
+X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
+ auth_id=1076
+X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
+Reply-To: fabricioakio@gmail.com
 
-MTD device references may outlive unregistration during module removal.
-Disconnect before unmapping the device and freeing the hardware ECC
-codec, while retaining chip metadata until the final MTD reference is
-released. Install lifetime ownership before the late initializer
-publishes partitions.
+Changes to how the A508, A509 and A512 power up and down, found running
+a phone shell on an SDM630 phone.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+The second resets the GPU on every resume: on SDM630, SDM660 and
+MSM8998 the device tree attaches the GPU's GX power domain to its SMMU,
+so a GPU resumed soon after suspending keeps its state, and its CP runs
+stale ringbuffer contents and hangs. The reset clears the busy counter
+devfreq samples, so the first lets each GPU resume devfreq from its own
+resume callback, and the second resumes it after the reset.
+
+The third holds a CPU latency request while the GPU is powered, as the
+downstream driver does: on SDM630 the GPU stops executing while the SoC
+is in system-level power collapse, so a submission overlapping such a
+state would stall and trip the hang detector. Mainline does not
+describe that state yet, so the request blocks nothing until it does.
+The fourth powers these GPUs down after downstream's 80 ms idle instead
+of the A530's 250 ms, so the request is released when downstream
+releases it.
+
+Each patch builds on the one before it.
+
+Tested on a Motorola Moto X4 (SDM630, A508), whose board file is not
+in mainline yet, on sdm660-mainline's 7.2 kernel. The stall the third
+patch prevents was measured with SDM630's system-level idle state from
+a series not yet sent.
+
 ---
- drivers/mtd/nand/raw/diskonchip.c | 21 +++++++++++++++++----
- 1 file changed, 17 insertions(+), 4 deletions(-)
+Changes in v3:
+- New patch 1: resume devfreq from each GPU's resume callback (Akhil)
+- Patch 2: say that the device tree attaches GX to the SMMU, whose own
+  domain is CX (Konrad, Akhil); resume devfreq after the reset instead
+  of taking its baseline again (Akhil); dropped Dmitry's Tested-by
+- Patch 3: take 2336 us, which leaves every CPU and cluster idle state
+  available, instead of downstream's 424 and 518 us, which also kept
+  every CPU out of power collapse (Dmitry); drop the request on destroy
+  after adreno_gpu_cleanup(), which stops runtime PM and the GPU
+  worker, so nothing can take it again before it is freed (Sashiko)
+- Link to v2: https://patch.msgid.link/20261019-a5xx-gpu-pm-v2-0-457aafbb28da@gmail.com
 
-diff --git a/drivers/mtd/nand/raw/diskonchip.c b/drivers/mtd/nand/raw/diskonchip.c
-index 540b6baf8bb1..a4338b51b49d 100644
---- a/drivers/mtd/nand/raw/diskonchip.c
-+++ b/drivers/mtd/nand/raw/diskonchip.c
-@@ -1296,6 +1296,11 @@ static const struct nand_controller_ops doc2001plus_ops = {
- 	.attach_chip = doc200x_attach_chip,
- };
- 
-+static void doc_chip_release(struct nand_chip *chip)
-+{
-+	kfree(chip);
-+}
-+
- static int __init doc_probe(unsigned long physadr)
- {
- 	struct nand_chip *nand = NULL;
-@@ -1494,13 +1499,21 @@ static int __init doc_probe(unsigned long physadr)
- 	ret = nand_scan(nand, numchips);
- 	if (ret)
- 		goto fail;
--
--	ret = doc->late_init(mtd);
-+	ret = nand_set_release(nand, doc_chip_release);
- 	if (ret) {
- 		nand_cleanup(nand);
- 		goto fail;
- 	}
- 
-+	ret = doc->late_init(mtd);
-+	if (ret) {
-+		nand_disconnect(nand);
-+		free_rs(doc->rs_decoder);
-+		iounmap(virtadr);
-+		mtd_put_master(mtd);
-+		goto error_ioremap;
-+	}
-+
- 	/* Success! */
- 	doclist = mtd;
- 	return 0;
-@@ -1535,11 +1548,11 @@ static void release_nanddoc(void)
- 		nextmtd = doc->nextdoc;
- 		ret = mtd_device_unregister(mtd);
- 		WARN_ON(ret);
--		nand_cleanup(nand);
-+		nand_disconnect(nand);
- 		iounmap(doc->virtadr);
- 		release_mem_region(doc->physadr, DOC_IOREMAP_LEN);
- 		free_rs(doc->rs_decoder);
--		kfree(nand);
-+		mtd_put_master(mtd);
- 	}
- }
- 
+Changes in v2:
+- Patch 1: take devfreq's busy-cycle baseline again after the reset,
+  which clears the busy counter (Sashiko)
+- Link to v1: https://patch.msgid.link/20261019-a5xx-gpu-pm-v1-0-1d0c313a1412@gmail.com
 
--- 
-2.53.0
+---
+Fabricio Akio (4):
+      drm/msm: Resume devfreq from each GPU's resume callback
+      drm/msm/a5xx: Reset the GPU when resuming it
+      drm/msm/a5xx: Hold a CPU latency request while the GPU is powered
+      drm/msm/a5xx: Use the downstream GPU idle timeout on A508, A509 and A512
+
+ drivers/gpu/drm/msm/adreno/a3xx_gpu.c     | 15 ++++++++++++++-
+ drivers/gpu/drm/msm/adreno/a4xx_gpu.c     |  2 ++
+ drivers/gpu/drm/msm/adreno/a5xx_catalog.c | 21 ++++++---------------
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c     | 29 +++++++++++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.h     |  4 ++++
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h   |  5 +++++
+ drivers/gpu/drm/msm/msm_gpu.c             |  2 --
+ 7 files changed, 60 insertions(+), 18 deletions(-)
+---
+base-commit: a39c950806213f6861d00f90729acaaa21f2d95a
+change-id: 20261019-a5xx-gpu-pm-f58bc4ee2387
+
+Best regards,
+--  
+Fabricio Akio <fabricioakio@gmail.com>
+
 
