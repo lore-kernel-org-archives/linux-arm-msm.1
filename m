@@ -1,91 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794046655;
-	b=L2FCRhQwIBbhSGt1HKSMyhjWx+F3QJSxwevgIxwryV5SntahZTu190K90e23kh+uhRgM
-	 KR+DMPcMMeEBEWbUqFg81nQKjaqWBdq2uuDzbhRdOpFXGVJHpskkOh38IbXL1Qiq5ZRFv
-	 6L+Nsi9Bgt0FJ5aeHb1E49oi0bOUfdYTZ3bJoA1k/FnnWMSvMMUZqc+VKP6gdqHibCQJN
-	 90juyGXj3GJDQwPR1oWxs1cr5x4Vet+g1rP9pnFl/0fAp/OXyeFejxw86OCXaHZYbPzYB
-	 1wz+aKZ3AVAMHhUdHXdBiiuVfTSl0quJQUJ5WCBWyq59BoXuNbqUzrDqcljDrPjJOSQ==
+	t=1794048458;
+	b=ON7qm5WuzoklyNarq4UQBqHssN+/DBp5lOuchDXSj30fAUsh79ZZhwu4HYOq4yYIwwbC
+	 txQaHKPP06+FlQbz38USCLP64gG16pmL+wYxJdLrzidl5/5LlzrCnmCaY+O85cImDQvm/
+	 yMlzDcq7nSil3bO9uow+FIOJIsllyaa2FiRfhwKPbeu64Su9pYiMgTqka01QD75xp/+7v
+	 C/jPb42H52K2BoRyX678gJQiinavqvhROQ01TLZNPZd/yWuNpH6UqMb27IG8jC1bLF/oZ
+	 HsA0JYpdbbVEYKH0sjTzmOSpo2p72EH9+AY/tp2GbETpJI2aznavELaStoALj9D/B2g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794046655;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
-	bh=PzgbI8X4Voq5iI6HG1dOPbCOfJ17p492ut7p3i4sm7o=;
-	b=yv/4KwGyNbsXLsbGqRWZmXbi4zZDJbHExRYGaC5UPsyq/a6TYDzvOHR1uFmtsy63wPow
-	 3tLBjD2s6PY7+miomi4l4eIYGwrB+TCqFFz6LF9i+6naZsmlmLb2r+6eTfBfLQcTcN9ux
-	 2cHq7or2pVpW29uZ/7UvLncXHPPgdVPrT3bGLtecflHwDbhKZ2wxRm/l/2Upgh+Vq7gnF
-	 dDh2D4e7oi56Oo2Wt3IcakEM0jAfikXyl83JsXV0IeimfKAEPn5QEWJuERGxEuzzyILtX
-	 /qH29WUYk1xiT8p1MW5dtSGYoL6pYo0pZp3/tMVHTC2XA3GzknkUaSLQ/6Hp2ymXG1Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794048458;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=MSrHjfY/WZkk/pETr/Q3Wr6iNXKs2+5J8fccaM2oDgE=;
+	b=Y8tddqslgWjevPzqkKr/BBBWVtNux2eh4xamdI+BLymwSEDv337+7rbgTCdfhcTp3oKI
+	 PKhA6uj2uF8U6hhlY4u0nTVrDZ5yeMvt8eR8mViQVNOTZFFX9uWJffMRChsy2QikjsWb8
+	 SrwQDx0TQRZjuuGntH2UyrLCVnWUPTn9R948luvlh2YOkdshPyTDQ8G3dHjDFk7erQACp
+	 MyMcRaakVt0XfVDYe9YxeTAggtPzoD6if1kC1R/Hqm5it4k2DU/nWH6gUIrOyR2KxqYu5
+	 yU90f2uSY4CrBG22vsvG380Z6xgwWMVEzlLiXycOuCbrRUJ+IAIFMdZBm8UcHr+hBMQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N+2Pngc6;
-	arc=none smtp.remote-ip=209.85.210.48
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U9pHJyTm;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86B60606A8E4
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 10:17:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86B60606A8E4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C0B4606A330;
+	Sat,  7 Nov 2026 10:47:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N+2Pngc6
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7f48c750afcso836172a34.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 07 Nov 2026 02:17:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794046653; x=1794651453; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PzgbI8X4Voq5iI6HG1dOPbCOfJ17p492ut7p3i4sm7o=;
-        b=N+2Pngc64OPWMAkTL0wtY+HdVSNWRS5ssOjU6wjCQWiMlvQ/y58voNZv1HDc2ucjeu
-         nC5VhBH+gOC4ECeYBmyNZrNgyoomfvMfPRZZZNLK6M5XPtAzOc4/XK6yATGwkgYoLetO
-         KqB1HSk1eZ+gvMyXhwLqMGaiCR2eVl4qPl1AYLxFYYuFrSCzDBaatVqFK+bCyIgai8Lq
-         72I4EUedZiWAfyzN9WgeHZNNIXcSV17EkU37ODCwHs/DXHO4YqdebPTON9srLa6MW7ZT
-         zmzWs+VxVSzc2estggAdIJWlnPQoYKQJZxgINd1VmT9HCeZ2d/154RofmBbRjIU1a9VT
-         FCow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794046653; x=1794651453;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PzgbI8X4Voq5iI6HG1dOPbCOfJ17p492ut7p3i4sm7o=;
-        b=WOm75IduchRMmPwlAz7OLoEBeuG9Nvmz7/BNbT1guNCFbJGU01/sZjReHTTv2HZ4l9
-         uMGyCG39KZ5lyQZ86/Ubc07pMbdKMcgEcJTb8OYgmwwBvql/xz+txPa0odBMRlX6VHfC
-         pm09mH2NtgY8D/0xP6z+ukpa7FEyJ6Ok6Dwbevj4RtvoyphUaN1CVEesx/tLsJtejqm2
-         rQRdekawHiRb2c9qg3acJhOsezsepAfYm9pH6V1A9wweHyQKGR5Iri6XcmPgHTg++nkS
-         dXN4dXzQCHHUPw3gpEnZSot0sIfdKDa2hT/hM/RbhJbCkvk4yoERMx+Hocg7uONoFMj2
-         RC8w==
-X-Forwarded-Encrypted: i=1; AKwUvBzRZznpfRlffd0v76XzRM+XtwZb1p+9vJWN5OxfEy3Ezs/jF0nhoQ/mDowzW5TeN+zhAILZj9syfgyeZRLo@vger.kernel.org
-X-Gm-Message-State: APuU4Z94imlnlwTxFgxakGueq4Sk40Jeis6hOpEqDSabCXBdmR/98u3/
-	Jr6e3cmeZ7QXdOjVY3z3EeQ2+75C2fYlhRb5bnWpcxjFvdFycCrJh+Sy
-X-Gm-Gg: AYBFou3OJqdnwXAufdISlsecXomJ2eD/OAroqgVaeeCaA5ttIHabwOakIcwUFeZ+8CQ
-	1StJcNNPIqah+v4LQapCO4YPlBWaf+fMBRs8ndfkdsTd8QYmog+yAJE49PmA5TtyD8oRiMxrMCR
-	7uoCj/vKy3guISDac+nSxs5SZN6evYARobr+TGkgEeAJ6dpZjvZocd7NI0rSfdRRBi8cmSvt1p1
-	xFSQZ+PHb8u3FvoFEQa1172PTU2uPLxX2DknJAamGE6Hm3vBuuywCakCQu/oXrgZzLL+wDfrki3
-	v+y/va3QmAARi7GdtAwEUiefUq17r7l7Q3ZMrPZBszdpgg64sU0LoSN7vaet2YRMxyFKVbPpKkI
-	kEEAM9NXgHAHOskm4mZz/PXDD8v+BL1vEy4z2/oCvGk/8Oh2QUdIjaHTcdZsVY3N/EjrTrgbe5q
-	VZO1T1hsRtMeu9Qm7Nx1tdWKFQVYqEdhjyhGXkjMlxjigqp9SwTtkpe1qxYcCozAt0TTq2ZI2lW
-	p+aNaJv4FJnCdu4n2G/vD4a7P7Tjqd0muYq5UtGiORPndrRP325mLsLA9uAuEuGriw7vlMIJJBk
-	NVA0CwOdgfX/SPNoVfg3JKN5zlrKvALgirJLn/LjYyUa0rJIYMCOWdl3k4MGFqDPBXTG5DBgCjv
-	WTVeQqHLHuPfLOpI3gM/liRkNwwIUtDlZqjBoWdNwNjLQaPR/qPEbx//d6O6xsD+adNTCmVVKYG
-	DDNSsY7M8wy3e7iB5BU5WJs07vieIH3EUof1V6DkdC4BguogYAiYLIkFSZrdOP+sPkfUOGrxE6+
-	g==
-X-Received: by 2002:a05:6830:2306:b0:81c:5aac:798a with SMTP id 46e09a7af769-85f1d000dcamr4738701a34.13.1794046653358;
-        Sat, 07 Nov 2026 02:17:33 -0800 (PST)
-Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-85f1dbef224sm3990269a34.12.2026.11.07.02.17.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Nov 2026 02:17:32 -0800 (PST)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 07 Nov 2026 03:16:21 -0700
-Subject: [PATCH 24/58] mtd: rawnand: xway: retain open-handle state on
- removal
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U9pHJyTm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CF4D1F0089F;
+	Sat,  7 Nov 2026 10:47:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794048458;
+	bh=MSrHjfY/WZkk/pETr/Q3Wr6iNXKs2+5J8fccaM2oDgE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=U9pHJyTmHor+lViwKsJPk33P7P14jbD1SrJ+rSupXs08aJ/dbq7zxrV6NUfayDjbS
+	 OzzQG6rUbr+ZSwLP1yPKdHmuR1cGU591MLZxuvu+AlEFCAM49cUNhO9nefJUE2846S
+	 Fh2hhBJzb8VH5QyTCzVf1g5lzrUrnqGD3NHHdzkQbYcOsOBfSiILwipnvg49KKAm4S
+	 BhJEw6OZydQRFIuOJXWhroFOgBVo+GBpOxtvvwc5abgG9l5BvBRoEJzrPRE2CTGIuW
+	 O0VtcUOMN0Y+SpgAPJlmHM+RK1J/+mGL+CY0qWFS9NF+lpvt3GWkMWtbV27DJmYSU5
+	 IDA36vkplXHrg==
+Message-ID: <09e64838-2b95-4c82-912c-34f95a0f3993@kernel.org>
+Date: Sat, 7 Nov 2026 11:47:31 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,155 +51,74 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] regulator: convert to subsys_platform_driver()
+To: Brian Masney <bmasney@redhat.com>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>,
+ Support Opensource <support.opensource@diasemi.com>,
+ Chanwoo Choi <cw00.choi@samsung.com>, Aaro Koskinen <aaro.koskinen@iki.fi>,
+ Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>,
+ Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>
+Cc: linux-kernel@vger.kernel.org, linux-omap@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, patches@opensource.cirrus.com
+References: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-24-0181ef0cc4c8@gmail.com>
-References: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
-In-Reply-To: <20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Brian Norris <computersforpeace@gmail.com>, 
- Boris Brezillon <bbrezillon@kernel.org>, 
- Arseniy Krasnov <AVKrasnov@sberdevices.ru>, Chen-Yu Tsai <wens@kernel.org>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Samuel Holland <samuel@sholland.org>, Thomas Gleixner <tglx@kernel.org>, 
- Vitaly Wool <vitalywool@gmail.com>, David Woodhouse <dwmw2@infradead.org>, 
- Russell King <rmk+kernel@arm.linux.org.uk>, 
- David Woodhouse <David.Woodhouse@intel.com>, 
- Mike Rapoport <rppt@kernel.org>, 
- Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
- Alexandre Torgue <alexandre.torgue@foss.st.com>, 
- Christophe Kerello <christophe.kerello@st.com>, 
- Jason Roberts <jason.e.roberts@intel.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Mason Yang <masonccyang@mxic.com.tw>, 
- Ramuthevar Vadivel Murugan <vadivel.muruganx.ramuthevar@linux.intel.com>, 
- Stefan Agner <stefan@agner.ch>, Lucas Stach <dev@lynxeye.de>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
- Heiko Stuebner <heiko@sntech.de>, Yifeng Zhao <yifeng.zhao@rock-chips.com>, 
- Nicolas Ferre <nicolas.ferre@microchip.com>, 
- Alexandre Belloni <alexandre.belloni@bootlin.com>, 
- Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
- Keguang Zhang <keguang.zhang@gmail.com>, Jacky Huang <ychuang3@nuvoton.com>, 
- Shan-Chun Hung <schung@nuvoton.com>, Frank Li <Frank.Li@nxp.com>, 
- Sascha Hauer <s.hauer@pengutronix.de>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, Han Xu <han.xu@nxp.com>, 
- Liang Yang <liang.yang@amlogic.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Vladimir Zapolskiy <vz@mleia.com>, 
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, 
- Paul Cercueil <paul@crapouillou.net>, 
- Harvey Hunt <harveyhuntnexus@gmail.com>, 
- Maxim Levitsky <maximlevitsky@gmail.com>, Michael Walle <michael@walle.cc>, 
- Srinivas Kandagatla <srini@kernel.org>
-Cc: Tze Yee Ng <tze.yee.ng@altera.com>, linux-mtd@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org, 
- linux-mediatek@lists.infradead.org, linux-rockchip@lists.infradead.org, 
- linux-mips@vger.kernel.org, imx@lists.linux.dev, 
- linux-renesas-soc@vger.kernel.org, linux-amlogic@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, James Hilliard <james.hilliard1@gmail.com>
-X-Mailer: b4 0.15.2
 
-Keep chip metadata and controller storage alive until the final MTD
-reference is released. Unregister and disconnect each published chip
-before releasing the resources used by its hardware operations.
+On 07/11/2026 01:28, Brian Masney wrote:
+> Reduce boilerplate code in these drivers and convert them over to use
+> the macro subsys_platform_driver().
+> 
+> Signed-off-by: Brian Masney <bmasney@redhat.com>
 
-Retain the embedded controller and chip across platform-device removal.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- drivers/mtd/nand/raw/xway_nand.c | 27 +++++++++++++++++++++------
- 1 file changed, 21 insertions(+), 6 deletions(-)
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-diff --git a/drivers/mtd/nand/raw/xway_nand.c b/drivers/mtd/nand/raw/xway_nand.c
-index af84395dc66e..4686f28797bc 100644
---- a/drivers/mtd/nand/raw/xway_nand.c
-+++ b/drivers/mtd/nand/raw/xway_nand.c
-@@ -8,6 +8,7 @@
- #include <linux/mtd/rawnand.h>
- #include <linux/of.h>
- #include <linux/platform_device.h>
-+#include <linux/slab.h>
- 
- #include <lantiq_soc.h>
- 
-@@ -162,6 +163,11 @@ static const struct nand_controller_ops xway_nand_ops = {
- /*
-  * Probe for the NAND device.
-  */
-+static void xway_nand_release(struct nand_controller *controller)
-+{
-+	kfree(container_of(controller, struct xway_nand_data, controller));
-+}
-+
- static int xway_nand_probe(struct platform_device *pdev)
- {
- 	struct xway_nand_data *data;
-@@ -171,10 +177,12 @@ static int xway_nand_probe(struct platform_device *pdev)
- 	u32 cs_flag = 0;
- 
- 	/* Allocate memory for the device structure (and zero it) */
--	data = devm_kzalloc(&pdev->dev, sizeof(struct xway_nand_data),
--			    GFP_KERNEL);
-+	data = kzalloc_obj(*data);
- 	if (!data)
- 		return -ENOMEM;
-+	err = devm_nand_controller_init(&pdev->dev, &data->controller, xway_nand_release);
-+	if (err)
-+		return err;
- 
- 	data->nandaddr = devm_platform_ioremap_resource(pdev, 0);
- 	if (IS_ERR(data->nandaddr))
-@@ -192,7 +200,6 @@ static int xway_nand_probe(struct platform_device *pdev)
- 	data->chip.legacy.read_byte = xway_read_byte;
- 	data->chip.legacy.chip_delay = 30;
- 
--	nand_controller_init(&data->controller);
- 	data->controller.ops = &xway_nand_ops;
- 	data->chip.controller = &data->controller;
- 
-@@ -228,9 +235,16 @@ static int xway_nand_probe(struct platform_device *pdev)
- 	if (err)
- 		return err;
- 
--	err = mtd_device_register(mtd, NULL, 0);
--	if (err)
-+	err = nand_set_release(&data->chip, NULL);
-+	if (err) {
- 		nand_cleanup(&data->chip);
-+		return err;
-+	}
-+	err = mtd_device_register(mtd, NULL, 0);
-+	if (err) {
-+		nand_disconnect(&data->chip);
-+		mtd_put_master(mtd);
-+	}
- 
- 	return err;
- }
-@@ -246,7 +260,8 @@ static void xway_nand_remove(struct platform_device *pdev)
- 
- 	ret = mtd_device_unregister(nand_to_mtd(chip));
- 	WARN_ON(ret);
--	nand_cleanup(chip);
-+	nand_disconnect(chip);
-+	mtd_put_master(nand_to_mtd(chip));
- }
- 
- static const struct of_device_id xway_nand_match[] = {
-
--- 
-2.53.0
-
+Best regards,
+Krzysztof
