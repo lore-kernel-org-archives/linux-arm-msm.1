@@ -1,62 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794064652;
-	b=ziAm+Q3vysk8sXzdlDr4wc9vmq5CAm9TNA63oNYYHnn3TjcNgp0aDNadANMr43oddiUC
-	 KPg8Pexco8X8E2n3pbrz3/oF5g4Hmn/Vv0EHxaTcGBtQrEoNkJqN4U1VLCv7xb0KCuL1S
-	 5yTFgH9jJdCGgxppAs37QywwjcjibZq2//Zt4DEU7g1ZM5UT4qwqgmAcqy1QFOkPfPbjt
-	 t+KxfYWlvVBXGF2XexItVHl1YXFC+CsNEc2aj4IVqxJ7QitOqowSNjROx4Yi4f0Rz4PBb
-	 4/LpKDoeEvCdWRopiT7lBkgNYOBv8IE5EO4R4xhXSlmNworYVyS0Plg7Pwxafk20zbA==
+	t=1794065412;
+	b=cPvtJTFLEmxBHH4BcgZuuAumCL5sWra90gm6x90h2Wbqli3cGnTSgdBAYM79EGL97e8v
+	 DmU4EnLBOZLkdal62xIgBByX+f4iV9BFTXE1wZu0EJDZ9yMo08kKMZigiKAaPA/3pUsvH
+	 O7PlxKyYknGKmLDLnIBSQIfzG8CTLIUqPJphZTg4eiMsfSCTZLr7AyfPRIOxuOWBKzUnZ
+	 2shNR0bi1bP165EogZ0DcAiGB0MDtgKoj5ssIS0zYHspOa9V3lIPklWd0yOGzPerhL0sP
+	 Ke+u5v0BAGffGQAXBM4cxjVKKpE96mQ3m6FbuVpSOu53oP73HbT3MCaAL+ONc25pHIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794064652;
-	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
-	 Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=IHcP2zA/1WKtjATy35bTJOAx/MK9QFjmushPyiooQKM=;
-	b=VxdzuX2WePS7qgutPfCzHM95CYmgzYNGIDRRnyMEw9Qi9G4CILcjz3FwuVEjUdWnWBxp
-	 T4hT0K8k9MxFJZNQPVYrNby1YIV9djVNTgyO2snUMKQlRSKb0/lVOePKKaf+xz9ePjwIe
-	 ippBNwNOmS/Cye6RTYh/ue4ZSmXqdH2HWSvTYTZd+xwlTtxiqFcgcTMNz7KZBOYDy8LVO
-	 NZ7Tkq/xAC7Urv3nawQqCNLtO1rqV+ejpCC625N24httdoTgSFvPHvHZyXRd3iGlV/1d2
-	 bd9BUL+0dpq55Ud7K9l+mfKsDTjyxbE2g/aKEc5X/h50NUhS7YT9MnWIEHg51Exq4VA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794065412;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=vaEs7wb0G7SPDcuD/cuH33DllgSpImjlQDOyO4ctNjc=;
+	b=TplagyQvho51Z7JzrgHDxH2BfWWbzO5fC9v5EFkL3xQLgI58aSty77XK1kvHpYMLhpn3
+	 kql5OCQVn5hGZ573PJmnqpZHgy6w3RTqRkLRHn5P2+LxZISw7o8sKu6UTuSMAer0dC6oz
+	 Ma3mhG3JdwiAKNnSwOTGxkmg1ALeLf/eeSq4kGC5T3t5K21CChdHrvt0B49oKG5PWrYfq
+	 l4N0fVvSKzBd5seMHcAYygv87OU8WEaE8/11WYYnMQsdBDuYUcmYKTJUpF81w9hIokHJe
+	 JkJJ/Ua8QRLHzJNU+Tu44syLTdmsJ39ocGsTgS8exEM/GSBnYSJE0zZlJF3sDMesE9g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mIiTFQEM;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VKUrCAxH;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C41E9606C027;
-	Sat,  7 Nov 2026 15:17:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2C85606D80C;
+	Sat,  7 Nov 2026 15:30:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mIiTFQEM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F7F21F0089F;
-	Sat,  7 Nov 2026 15:17:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VKUrCAxH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30BD41F008A3;
+	Sat,  7 Nov 2026 15:30:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794064651;
-	bh=IHcP2zA/1WKtjATy35bTJOAx/MK9QFjmushPyiooQKM=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=mIiTFQEM0v2NRdhCRHkdy2hg+w14DBRtu9RGSoZdJFgvoiFnypImuv0u6kCy2IDuT
-	 nWuQopx6voUlVtiPDy6YE4v3sDwE9SzZHJkyQjq825KWaNmZHGm2vQsVPCi4iMPzdn
-	 4dH6my6lChCyKIcGthyThV9RfYltZ/3NkB/HPK+Y77lNA8kaAAlvGzovSypxZR+fhC
-	 3JxhLVIgGTkaBcZ7Xn5gV3xMtHWqd1DS9G7gzCaGyKg5fjN69XJH9m1GX01lqMWUNc
-	 Pa4yvCyC2LuKiMNuyQyZx0oAqpS6m9HqpPrE9WxfVG/p4RRI/URwKpYKQgxmTRH9Z5
-	 17gvaWxb2SVeQ==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id C3D4D2AB3133;
-	Sat, 07 Nov 2026 15:17:29 +0000 (GMT)
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Birk Skyum <birk.skyum@pm.me>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261018220857.16819-1-birk.skyum@pm.me>
-References: <20261018220857.16819-1-birk.skyum@pm.me>
-Subject: Re: [PATCH] ASoC: qcom: q6apm-lpass-dais: Reset the codec DMA
- channel map in hw_params
-Message-Id: <179405428196.3424803.12425958325069301579.b4-ty@b4>
-Date: Sat, 07 Nov 2026 12:24:41 +0000
+	s=k20260515; t=1794065411;
+	bh=vaEs7wb0G7SPDcuD/cuH33DllgSpImjlQDOyO4ctNjc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=VKUrCAxH8lbyUb6TJunrAzttSZjk+VI2dNHjkyIyGNU4B726AAilH+Fa3JFi5C90h
+	 PuZrt4ZSri7SSjDCBHAyQbIWJziG+5cSV5MsH/Blyn7mcoQUZxUiDS8JA4bnbsZtgo
+	 i5rpAaN4U+1aW7cgx1zWA4y4o4zBByHEm8Oii4eQFvTyxrp4TOe2rWl5VIKvuyaHdy
+	 RMXCkSmK/Gcb0MTtt1gnRp5qRzkRRshO6UzjyNGVzp3EVZq1bCQrIcEfMck60yytK9
+	 kbV77vLzpttWfvANiiKBmRHgXeGjEbr6MxcbsjCxQGc1sqMd/3Lg0CeN6sBnfo2r6q
+	 iz51vMojvDfDw==
+Message-ID: <ad7b886c-d3fc-419e-b155-3fd39fec900b@kernel.org>
+Date: Sat, 7 Nov 2026 17:29:37 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,46 +51,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] clk: qcom: Add SM8350 camera clock controller driver
+To: sashiko-reviews@lists.linux.dev
+Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, robh@kernel.org,
+ conor+dt@kernel.org, MSM <linux-arm-msm@vger.kernel.org>
+References: <20261104001704.2744766-1-vz@kernel.org>
+ <20261104001704.2744766-3-vz@kernel.org> <sashiko-outbox-199410@kernel.org>
+From: Vladimir Zapolskiy <vz@kernel.org>
+In-Reply-To: <sashiko-outbox-199410@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1164; i=broonie@kernel.org;
- h=from:subject:message-id; bh=W3qZq+vVv5QaoEW0JZmNEswhu/a3a46gXDbVs0bV6ZM=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLLeO3IG5+5fKxXxMF+9Pb+4ccu9a1Fbz/0XvOwW1/VuU
- Zt3eOfzjlIWBjEuBlkxRZa4LO6X9SWv1/AdXNgGM4eVCWQIAxenAEwk9REjw5bsrysevFuZEjbj
- e7pNCvOsK/zC7x6FPtwkc61I3Io/ooiR4fxV+W28+3zeFTyPC+l4/2XrBREHsa65z6y2LmXUD1o
- 6iQMA
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Sun, 18 Oct 2026 22:10:41 +0000, Birk Skyum wrote:
-> ASoC: qcom: q6apm-lpass-dais: Reset the codec DMA channel map in hw_params
+On 11/5/26 18:06, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [Medium] clk: qcom: Lucid 5LPE PLLs in camcc-sm8350 use clk_trion_pll_configure()
 
-Applied to
+That's a valid issue, and it requires to make a formal introduction of Lucid 5LPE PLLs.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
+> - [Medium] clk: qcom: camcc-sm8350: duplicate cam_cc_pll2 parent in cam_cc_parent_data_1
 
-Thanks!
+This is also a valid review comment, fortunately this one is easy to fix.
 
-[1/1] ASoC: qcom: q6apm-lpass-dais: Reset the codec DMA channel map in hw_params
-      https://git.kernel.org/broonie/sound/c/347e02073b08
+Will prepare v2.
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+-- 
+Best wishes,
+Vladimir
