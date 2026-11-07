@@ -1,108 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.217.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794017534;
-	b=QysVVJZZYt4RYRl/aHpvY/yKCwRAlqEs6+iHaD2vLcUoXiWTfy8Kf9UZYsY2XEGZtPtf
-	 svy3pwZ6ARJipPBRcX7O8y0IaiwYGqwkzAX4YScNJ3EneOZb1+MjRbapQBwho3gtAfmgY
-	 ijyOerQgsknafwWg9XUlJ2DeCPK3zJf4S5wtB9YCq0UUOkdbvunMKX2pGTUX7Lzc6DjTn
-	 /YPx+C07Lt0Y0zG3NELZ3ZUDO0WdkeSH0wwNEHQ1qQfXAruf9G5kaSzktpcE44mD1KiGz
-	 shqj8cYAc7QBPSRPxQI9OLRlZsu6QcN6MxWUVVMH4lCO6zePrfrMM9+kTA/VGwzjz5g==
+	t=1794018308;
+	b=IHCxamMBsfaX4/U2qiLF51c4a7nxhdcecRGySMTdpFeVLMGuo3accNstJNAudKDaL/X6
+	 8KvW/NF4JA2qvFJR7izxooQBlZKaght7kjbu6Pn7vrg7rr3NcmHwmk2MbQTyZuP4FjHgE
+	 9vRq7tj413T6+bybvrhlkj3GSYczKnxiJoJ9z+2aCXBWDMaCd5vGcGrDJRaW7fWnk4YI5
+	 j2ejqgXxRjqIMpfdUb06ZXPJoHazuEtEBvY7KPpxh0ViYdqK/vASbfLp4xs2alE++aHuz
+	 8uYh2JUKVv+ocpmJdDSyXimY5dEnUTQSYH/gW1fQsCvHCdZg9hw8DMtgrrppYUhrmsw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794017534;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794018308;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=agfHd5pdc/EdSGq69ep6mXfkA+pM523Mmt9NosKXhZI=;
-	b=H5LRgUeiKEdyWalGhJlfnbDfIebPWYRY4J6IfGeWTs+MFB5mDJ3TIj1hA/Nme952MTeO
-	 GTpQjvkp3YZ8LausZNh/m3GUP5FNDNyq0DhO2W5DD0FE8hL42kpOvzbyyx+GG3/03CISn
-	 nRpS3ugtm/g3WueCAOlnD24Nlfl/PDw7zcTJZcRsU807efSrnNI6YLd4UpmQVNNKTuEGn
-	 TQd6RCK5Z6kdlEqxAnfII2YnhlfEWvOYaPsGC4zYn8Blz1zOaFsTNgbvY3R++lnmefQHO
-	 qJnt7p5T7XSBpV97qi65Z64rjh6Uoqxh0txv/4abQuzD+yxrhHnCATdqmhu+So3r3jQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=di1VRLm1UqWBNtntlKfBC2I8DVMPkZ+84nIHrlZ9/j4=;
+	b=X2bkQVQmnPsdCB0MBcJAyR+GU6jMKJspeV0nquJoem1qLs8NuxJIK9aAcdslkkgGF00m
+	 0xVFlDGAHJM26LBol06u6tYmKB/T+moOsI/LRhT1yOeMcMA+Z5ZzPzCtEN/ctEoSgv/xD
+	 3m8EXxZ0rEE1V2FY1LwHkE5STPqAN5LK6ozWQWLevLL0a+6jZT9U2+mS89m+/TfHwAoIr
+	 85HavcHtPKTFWqlpEs45wCtubSFQ6KOw5vKSEsHU6205zrEj/EdMOpkwyNdx1tGvCe4/r
+	 wrNAMPR/tg5aPyJS0Ea1ZQf3Ug0TCgwUpn3+II5HoG6n9fOHq00uhMHkxc9QuatL5oA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vk1G2P3V;
-	arc=none smtp.remote-ip=74.125.82.172
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GBM5NYlb;
+	arc=none smtp.remote-ip=209.85.217.51
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com [209.85.217.51])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96CBC606A336
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 02:12:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 96CBC606A336
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EEC6606A32E
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 02:25:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3EEC6606A32E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vk1G2P3V
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-35829219da8so271529eec.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 18:12:14 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GBM5NYlb
+Received: by mail-vs1-f51.google.com with SMTP id ada2fe7eead31-7d2b25fadaaso463976137.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 18:25:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794017534; x=1794622334; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=agfHd5pdc/EdSGq69ep6mXfkA+pM523Mmt9NosKXhZI=;
-        b=vk1G2P3VZonFehrlwAOTR2M8l4khy55Bf3En/v5J6SKdNEhWGermAOXjyGXZhxHt/m
-         li2H6VU7eCT2IG0iYJeXtA4GIfIGZU8K/wqkI8YriPjsSDI9sJxnEszcifYwE+0m/Jd0
-         C5UIQIjjDNBWcRxcv/Qs0KWpeehmwAceLrRZD4PilxzOiapEsEXJDREYFT2ZkvUh1X4Y
-         AEyT7gy3oxWOinZJYQ12n1y9uGeO0LsKbLxAC407865IMGoHus3APRczL/RMoY2X6kTn
-         bb347asks24Qjd9DuIsUEEjUpjEPd3/ItU3YKS/w8Pp61uKZceRCtgKZRg7GiX5IgnSM
-         tCfQ==
+        d=gmail.com; s=20260707; t=1794018306; x=1794623106; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=di1VRLm1UqWBNtntlKfBC2I8DVMPkZ+84nIHrlZ9/j4=;
+        b=GBM5NYlb/2KYIN4+6oMVOLhLKYe1LYH8PoQfIrk8eZ6FQAl7UVf+/C81j/j7XppFWG
+         z/T8GEY3WGp8Vwq0ODHSkuO69L+H4C7HtJSSmeI/KAuWS7TTiWEyAww+ReZbMh8CFCig
+         moUIluGJDFdTlUnZA5r5NwsxOJ0n5zVtuL/1AaRv3KtSxvKKEndg/SWSVhBkrWmljX5R
+         eY30JI4smany7tVNErBkmoacVJ1goZyGnHKqBH8k+bP7GHHsI7Av5XSBG73zILOL2Ytu
+         r7+tAt2NrDpSJXsMr+w6ZBiJtwAFkrbTQ5If9mCUy0VKqh2DreVuukW2Cy//e9bb3INR
+         Az5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794017534; x=1794622334;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=agfHd5pdc/EdSGq69ep6mXfkA+pM523Mmt9NosKXhZI=;
-        b=2X4nJAb+H89fs0zgq0Y2F/p67CDmk5uSHOmepz9RA3fJYgsE1YrYgY60ZGxSUi6+uo
-         z1AeCcqxCDYkfzr6gGqipaqgPDdPyH/N09IqGmlY6Cjl0iNy6iC5P5Gm6NeKe20OsmiZ
-         c1V/0WYNaEsJFRxHuw2fGAsHlaSSOptUbP7yfJkOQmv/YoVtTt2J8/JVPlStMc9EhUur
-         xjJm5Axox55QoQ/WuT/HpniHluLyqgmyG+7J8HtEy8G9GuHQ96LRY2g5c/UlFrsjvJlN
-         crLFpSV1y0DRh3IOGBfLeXgAruTaDHa8w/qsEkdZxBH4EcgBazWVKuqvS1OHXpHPiUYq
-         GDsw==
-X-Forwarded-Encrypted: i=1; AL+hErH3/K21FUyBlMDFI68n9g3rOKue1XjKpxUoqm7ExNM0/1Q+GoVx+k3hA/8KmICEsuaLA986Z1An/Srwjk91@vger.kernel.org
-X-Gm-Message-State: APuU4Z87QunPbcUQG2ja9rB4suo3SdMYyK31mtMIbepCYYHUO8gu578C
-	lftNxqD3H9PnmJjhTwNvC1ZjsxGkwmVSvA9BOOLi3PKaPXbcKwORqr+8
-X-Gm-Gg: AYBFou2bS4GyMDO3xn6m/OLvwZiFgAw8tnJ2poyh8slMJgMr0AijeY+1j/BPAZw8Ayj
-	IxatGkDXBCyLZN75zBIr1rFMVakxIpBnBgRXbI4AEQTle2OJhTS/XXeTd891Sy9ruzFn9pNE4ci
-	Dt7bzvHfAg00fB3snVJs1r7f0/cbkszJ82uXWhh0L2pR8Q8eXp7RGIwyUZlJtYuhL8Kr7KPJS/1
-	CFlVXuid14UJfm+NCuq0UUqlOB7IOTZ0WPuR5vO5Hwquzj8Offzixdv/xjTFqwD6NLIqKY1QDYl
-	JmvmETAwathj9aqhYjUXiYlCmVzLgvsLGmKFhmi8nLQvU+mJYEXUDTZTju+M4W+otkO9eMV5veC
-	nPb9mRrEzmr+alcP6WIzyXv345kQW+/meT5iX6HdApLQIVUg9Ouw/mQBU9EyDXh4FR9H/A8aFeD
-	CrBcXapf5jOcxPXB4euTKix1ctW8OVgS8zHURIh943aqML7xGbufXQCJ5A0g017Dq27otUqx5YP
-	Fz4q0/GlgQTrmNx6Zl12sqkCKRwYF0T2qkInOUQ400wdo2i7XptuByXGfzQAjO7dwC54ae8KCyO
-	NJDbIFqIpRUTrHh4wUSZ8+ZeUvSZ7oUZYlvcZMV8MNVxFWk1ayMO+bjkGTUiMlkaxQ==
-X-Received: by 2002:a05:693c:88d0:10b0:361:2a55:b94e with SMTP id 5a478bee46e88-370f71bacabmr1019359eec.15.1794017533493;
-        Fri, 06 Nov 2026 18:12:13 -0800 (PST)
-Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36faa4b8aacsm10374563eec.23.2026.11.06.18.12.10
+        d=1e100.net; s=20260707; t=1794018306; x=1794623106;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=di1VRLm1UqWBNtntlKfBC2I8DVMPkZ+84nIHrlZ9/j4=;
+        b=gYqeH6zHhfWNZLrafEZ8micKYPe0HDQ/KjWS3pPppf01MT8NjQC2wtsAPMdEXB2Lpd
+         wiERAEBYV2nNAZOQglnAF8ScGaEBBkYz19NMQ4Q+vid3s83K9N0HwMX7jL39f/GouszW
+         sm6Og3luGzjzMWI/UvBrVFVG8Y/7IjSmO4gWa4BOvrzbU6uYzEMIscU4dCTCf9dNMO4w
+         /F2YvMYWTICBHX9EsdwPPrYnto+J8YPcaCBZw48Ql389SeYG99xuvaqY/hzglcZ6EtqL
+         3GE5bzx9r8rHw+WU9eujuFi8qXkeNKzilXXpUu8GyEfduYy0xCWPM1hXKk5NDFFO9CbG
+         9mGQ==
+X-Forwarded-Encrypted: i=1; AL+hErEjIohznTkLaKkwS9LqCfEoWTOQ772e+nA5JuTIj33yaGcU1GxC2Sf7cAfJOotIT8d0eS8edHueJYUrXaDo@vger.kernel.org
+X-Gm-Message-State: APuU4Z8drJwCD52xitRTYBxdQsT0kKoAmqpp0lVJiYDvM8NEXNmFQE7Z
+	/Ls2YPwGnEqY5cS23p1PMLhzIPVBu4m+GrXgJEh753lsXsPE3Hxbofn0
+X-Gm-Gg: AYBFou3RDylz4qd8ItytR0HUUl0Sb7op7EseXoqZFi+BbL3LSHNP0v6YzJmXqGYgz0I
+	yJlfK5DV//FFgRPutXNk2GY3rGgzahG0vuySaMN4sF3GaprRsGlwAd4Cm6QwHsIRHB/n2zNuJdh
+	fEBwnTfVd+8zFss3xxs8EhlU+Fm+mrf+zd4NY4RZsF9lgpMt3e/Uo4F1qMvFzopyrw0OG/8oMDB
+	kblFzqhII503ehfryUXMP9lgvqrqZzV1S/FbZclKCkm+jBto8Whi8hDrpTHoE4YCKhp+gAlJpub
+	MEKC+72RhTUrkcwsNNcJhCg6FKFHx/GyHlHYjGhQC57cRr64xHycXeRQVCHe9IedlZIYBYBQUKt
+	K9gkNMWArQI2dd+INmKxWMok9sUsD7c9D+8ampYdMh+IwWx78vfsvhHEvRj9HvcVW155kmTH0Bd
+	s0SJab2S0Cgx6rNbYtYsVeqzCi4zkXDfTmC5f12sUUhq7YLNDwJ0eg/CxWWWqbQvDpy2aWdHrp8
+	4/bMDSobH4lTeP05L+7cBaZM+uwIlepAiMQjvrnEbwTHb1C4gH1zzjfBS0x5tD/t0KD/zd+iZly
+	4qE3BCSz092EctWZ1jJhJLhkZs5c
+X-Received: by 2002:a05:6102:32d4:b0:7cc:3eb0:6ece with SMTP id ada2fe7eead31-7d2a166319amr2396569137.33.1794018306156;
+        Fri, 06 Nov 2026 18:25:06 -0800 (PST)
+Received: from localhost ([174.93.36.89])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d2a89412besm2641941137.3.2026.11.06.18.25.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 18:12:13 -0800 (PST)
-From: Joonhoe Kim <26rote@gmail.com>
-To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-Cc: Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Andrzej Hajda <andrzej.hajda@intel.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Robert Foss <rfoss@kernel.org>,
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jonas Karlman <jonas@kwiboo.se>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	dri-devel@lists.freedesktop.org,
+        Fri, 06 Nov 2026 18:25:05 -0800 (PST)
+From: Richard Acayan <mailingradian@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Andy Gross <agross@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/bridge: aux-hpd-bridge: replay last HPD status on hpd_enable
-Date: Sat,  7 Nov 2026 11:12:16 +0900
-Message-ID: <20261107021216.952-1-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <20260803-drm-usbdp-preboot-v1-1-2539b362be00@oss.qualcomm.com>
-References: <20260803-drm-usbdp-preboot-v1-1-2539b362be00@oss.qualcomm.com>
+	linux-remoteproc@vger.kernel.org,
+	devicetree@vger.kernel.org
+Cc: Richard Acayan <mailingradian@gmail.com>
+Subject: [PATCH v3 0/9] ADSP for SDM670 and sound on Google Pixel 3a
+Date: Fri,  6 Nov 2026 21:24:44 -0500
+Message-ID: <20261107022453.159341-1-mailingradian@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -112,65 +104,50 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On Mon, 03 Aug 2026 16:43:08 +0800, Yongxing Mou wrote:
-> If a downstream consumer (e.g. drm_bridge_connector attached by the
-> msm/dp driver) registers its HPD callback after an upstream driver
-> has already reported a HPD event through drm_aux_hpd_bridge_notify(),
-> the notification is dropped because bridge->hpd_cb is still NULL.
+This series adds a user for the SDM660 sound support code [1]. It also
+adds the ADSP remoteproc for SDM670.
 
-The same happens on the Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a
-monitor attached at boot, when pmic_glink_altmode probes late because a
-mode switch it waits for is a module. A kprobe trace shows the HPD event
-from pmic_glink_altmode arriving with no hpd_cb set, and the DP driver
-enabling HPD about 2.6 s later.
+[1] https://lore.kernel.org/r/20260730174353.108023-1-mailingradian@gmail.com
 
-On the two Sashiko points: I tested a variant that replays the status
-from .hpd_enable directly instead of from a work item.
-drm_bridge_hpd_enable() has already released hpd_mutex when it calls
-.hpd_enable (only hpd_state_mutex is held), so drm_bridge_hpd_notify()
-can be called there, and there is no work item to cancel on unbind.
-That leaves the stale status. A mutex in drm_aux_hpd_bridge_data, held
-around storing and notifying in drm_aux_hpd_bridge_notify() and around
-reading and notifying in .hpd_enable, closes it. Roughly (plus
-devm_mutex_init() and the initial unknown status in probe):
+Changes since v2 (https://lore.kernel.org/r/20261003175659.23536-1-mailingradian@gmail.com):
+- stop using fallback compatible and add lcx power domain (3-5/9)
+- move lpass codec bclk from sdm670-google-common.dtsi to sdm670.dtsi
+  (5/9, 9/9)
+- reformat q6dsp dts (5/9)
+- set flags for codec interrupts (7/9)
+- move "qcom,..." properties to board dtsi (7/9, 9/9)
+- add review tags (6/9)
 
- struct drm_aux_hpd_bridge_data {
- 	struct drm_bridge bridge;
- 	struct device *dev;
-+	struct mutex lock;
-+	enum drm_connector_status status;
- };
-@@ drm_aux_hpd_bridge_notify()
- 	if (!data)
- 		return;
- 
-+	guard(mutex)(&data->lock);
-+	data->status = status;
- 	drm_bridge_hpd_notify(&data->bridge, status);
- }
-@@
-+static void drm_aux_hpd_bridge_hpd_enable(struct drm_bridge *bridge)
-+{
-+	struct drm_aux_hpd_bridge_data *data =
-+		container_of(bridge, struct drm_aux_hpd_bridge_data, bridge);
-+
-+	guard(mutex)(&data->lock);
-+	if (data->status != connector_status_unknown)
-+		drm_bridge_hpd_notify(bridge, data->status);
-+}
+Changes since v1 (https://lore.kernel.org/r/20260922015801.32373-1-mailingradian@gmail.com):
+- squashed sound card and device-specific codec config (11/11)
+- converted to fallback compatible (4/11)
+- added compatible for WCD digital codec (5/11, 10/11)
+- removed sleepstate comment (7/11)
+- sorted subnodes of dai link (11/11)
+- add review tags (1-3/11)
 
-With the mutex, the monitor was detected in 2 of 2 boots, and 2
-replugs and 2 s2idle cycles still worked. An earlier version without
-the mutex was detected in 4 of 4 boots.
+Richard Acayan (9):
+  dt-bindings: soc: qcom,smp2p: add sleepstate support
+  dt-bindings: soc: qcom: aoss: Add compatible for SDM670
+  dt-bindings: remoteproc: qcom: adsp: Add SDM670 ADSP compatible
+  remoteproc: qcom: pas: Add SDM670 ADSP support
+  arm64: dts: qcom: sdm670: add adsp
+  arm64: dts: qcom: sdm670-google: enable adsp
+  arm64: dts: qcom: pm660l: add analog audio codec
+  arm64: dts: qcom: sdm670: add digital audio codec
+  arm64: dts: qcom: sdm670-google: add sound card
 
-Dmitry's "drm/bridge: aux-hpd: let drivers pass IRQ_HPD events"
-changes drm_aux_hpd_bridge_notify(), so v2 may need to go on top of it:
-https://lore.kernel.org/all/20261024-hpd-irq-events-v8-5-6ee949e7a384@oss.qualcomm.com/
+ .../bindings/remoteproc/qcom,adsp.yaml        |  15 ++
+ .../bindings/soc/qcom/qcom,aoss-qmp.yaml      |   1 +
+ .../bindings/soc/qcom/qcom,smp2p.yaml         |   2 +-
+ arch/arm64/boot/dts/qcom/pm660l.dtsi          |  37 ++++
+ .../boot/dts/qcom/sdm670-google-common.dtsi   | 142 +++++++++++++
+ arch/arm64/boot/dts/qcom/sdm670.dtsi          | 199 ++++++++++++++++++
+ drivers/remoteproc/qcom_q6v5_pas.c            |  16 ++
+ 7 files changed, 411 insertions(+), 1 deletion(-)
 
-I can test v2.
+-- 
+2.56.0
 
-Thanks,
-Joonhoe Kim
