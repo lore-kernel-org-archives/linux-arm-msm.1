@@ -1,77 +1,124 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.117.254.33
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794061080;
-	b=VU5M5Mg3QaluEspFzYPkcveHch8DH/1GBGfAETL2NnSsSDMTuTIO9daDBwjF7zLCM2mj
-	 VolsxXX+RTj7z89vjbUZ9bbXfXusGTNpQ4TJ5kuJ4hoKEIWRa00PR9V3hNkiEA0gRkzNx
-	 jyRR4LmZ7RGpJXnBmKPgv33wtJ3C6i/CPFa1T1+Tqeaxg1LJtq9K7xgGmZgogMnPpPMxE
-	 eckvaQUwhguNE5QspcL3Lfp+gJFkS0tEq4iiKBaM7/xc4EZTAMbHYzuw/B2SfmnOeoctY
-	 ZmZClqpyXTMs1rj8s58G6lh6vLLppxV9rxea//j9RYhSEzXsTXP6WDAWXDbGfvREwtA==
+	t=1794061366;
+	b=293HLuZ+amPdF0HOqkWB4bDVzO07zLf0sm2E2o3OTDj30QutjF88ymodfnpYiVdJaJKG
+	 cYIP4MT3pWp7BttLzIw7MiC5Jl81jCRCsR81GBA3QQY7FyxuT4hfu6j29H9G9SPdjdG5Z
+	 h46HcD4NLKYabRuXH4PkbxGNuLrM0XVBHONrB44VKzuhsgA47QAB5XH4wDtfKe5F6kX/1
+	 Js5gAKd5gbZySTGsVOJ8sYECdpPqXmOXC4NnGM0k+I6uuG1wTmxMn5fKlnv9BOHfBd6Vw
+	 CXxZLzKcRpPycel4e1qQ81Ebnk1DZp6u3XT3DRL7m4f+chK1h0V4fi4ZZd3FgEgpDTg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794061080;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794061366;
 	h=DMARC-Filter:DKIM-Signature:Received:Received:X-UD-Smtp-Session:Date:
 	 From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
 	 Content-Disposition:In-Reply-To;
-	bh=dckQmDGK51xUYXkNanlmrWOkBlG7G8NjEFbm3i1p930=;
-	b=BC8h8XzmE+v3Gur+XbA/m6e/RJo86gtTBkilgYnQHQOiANK5PtHXZauXFjOttfjvDUl9
-	 b36Y1fVcT/kxYejE//qnsKZDwn3b4TC9MZ4z8j1IsDX5uSa62ZidKqhokLQhCNdSYdtae
-	 GaRDSizA9V3+aRGnitL4Kee9yu1XioI3caB2tVaKEpOZ1qE3Dmaks1gwQT7XsDcp95Dno
-	 ZyVbdcnf/xSeBP+CVBDNO0cnhS0KUN80dTTD8PZ13MItIvrFXraYdj8ZHcNPbNSMi51Mb
-	 cq7UiYTJQBvU678DN5Y7HNwhb6938thEmUpjE5hntvzSYhXV22QW4uDkUGLDAgfZUHg==
+	bh=Zc76TO6qUVRGeeHVXQdMS6eOYrg3MPsFB1Ka1Yvj58U=;
+	b=rDV0NmRe6fvxILWQfO33FHaWv/Q7/NEBLECS6tEn8gbsOgvHx3kOa75BgpK/FiIGx9zk
+	 yv8WMHSuDffxghxV4f40K7s4PaP/B2FRG9Uq0S37D0rWypgWWW/shR9dLftohW2J55wUw
+	 haBEdlqGVUsfC3b/elkodLHNAuyiOPGp6MjMKE2ANtq/Leht+h9oSdr35ZJZmx9zvIL5f
+	 YD6JCPYFlK1XGgKIdF4tTmyw/o6Fa7Aap99gpVEetQOQe4WXegnSYIcmYsS1XiIw1kfVU
+	 i83IWL4JXBBrBxdk/+QKZulPF1AFwJA6vLlFciCBpj+7Y+9Mn80sYQqCSh5mfTFeMYw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=sang-engineering.com;
 	spf=pass smtp.mailfrom=sang-engineering.com;
-	dkim=pass header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=B+p524o8;
+	dkim=pass header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=deMBkNlk;
 	arc=none smtp.remote-ip=194.117.254.33
 Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85B7B606D832
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 14:17:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 85B7B606D832
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 527C0606A336
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 14:22:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 527C0606A336
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=B+p524o8
+	dkim=pass (2048-bit key, unprotected) header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=deMBkNlk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	sang-engineering.com; h=date:from:to:cc:subject:message-id
-	:references:mime-version:content-type:in-reply-to; s=k1; bh=dckQ
-	mDGK51xUYXkNanlmrWOkBlG7G8NjEFbm3i1p930=; b=B+p524o8hVD3mkP/wnxZ
-	pI+Lzdcoftxh6e5lsWJxeI1PiOgJOh41R22uH8zFRCGxXbwnoBrZbRkXyRoqF6kd
-	aQLuTHvOWZet7z6o0iqXZN/VWaAKc1MdAV/MlfveYZ0nf6GsyZjJMHUFJZgeX8xJ
-	xafeKQI2DIuRLy4Sg4LXTKdSYsbiGgd3SsQJdvv0C5JvtPS5LAHdrf1VMKKdwTeV
-	dc1KAXlzZufLrMOpYArulQlzqf7EsoPiCd/UFK9JSBE+3L3a4Vz1ImML/ZUWFf0K
-	I5bOUACAqLrb4vtD/tcMs1jl7y7APAUL1NbK/2L5hBD/Y9TO4jfwifK4nuaqEtzD
-	tg==
-Received: (qmail 2529595 invoked from network); 7 Nov 2026 15:17:56 +0100
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 7 Nov 2026 15:17:56 +0100
-X-UD-Smtp-Session: l3s3148p1@U4cnZbBfNrkFFu4l
-Date: Sat, 7 Nov 2026 16:17:56 +0200
+	:references:mime-version:content-type:in-reply-to; s=k1; bh=Zc76
+	TO6qUVRGeeHVXQdMS6eOYrg3MPsFB1Ka1Yvj58U=; b=deMBkNlkuoAHsHcvg+VW
+	/JOGUyDVHLSNz2M2P318rSNR8ihhOn/icNfH112ofFlA9vj9/Cq1/GB2kPS93Y40
+	YF/E/JzExb1+S9I1cstiBzedJlDUnUSkE30QPeWQc507bnuBni0Z3NyRW4Kbgikv
+	A33vNAj4UQjDG+RAKO5HfUR7weMBMBqiqmK0raV2oPWm0SZWyc4pewIm8g0fDZne
+	LkWZdfpDHRtTXcDecdPHMvKhMX5AroogrzfiJHaQZyQZEmMUS5nMy4dWe/94uyCo
+	CxZZl4Q8KqM0Whbjetz1A4x1NAoLWi2ICCJyuUW9bykg7e8j4gzLaz/eOC4I3nFt
+	YQ==
+Received: (qmail 2530674 invoked from network); 7 Nov 2026 15:22:35 +0100
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 7 Nov 2026 15:22:35 +0100
+X-UD-Smtp-Session: l3s3148p1@G1+7dbBfHLcFFu4j
+Date: Sat, 7 Nov 2026 16:22:34 +0200
 From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+To: Danila Tikhonov <danila@jiaxyga.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Rajendra Nayak <quic_rjendra@quicinc.com>,
+	Jassi Brar <jassisinghbrar@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Amit Kucheria <amitk@kernel.org>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Wesley Cheng <quic_wcheng@quicinc.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Kishon Vijay Abraham I <kishon@kernel.org>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	Souradeep Chowdhury <quic_schowdhu@quicinc.com>,
+	Lee Jones <lee@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Alex Elder <elder@kernel.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Avri Altman <avri.altman@wdc.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	Andy Gross <agross@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+	Georgi Djakov <djakov@kernel.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Taniya Das <quic_tdas@quicinc.com>,
+	Sibi Sankar <quic_sibis@quicinc.com>, Will Deacon <will@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+	Imran Shaik <quic_imrashai@quicinc.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
 	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Suresh Vankadara <svankada@qti.qualcomm.com>,
-	Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-	linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v4 1/6] dt-bindings: i2c: qcom,i2c-cci: Add Hawi
+	Jessica Zhang <quic_jesszhan@quicinc.com>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
+	"Guilherme G . Piccoli" <gpiccoli@igalia.com>,
+	David Wronek <david@mainlining.org>,
+	Jens Reidel <adrian@mainlining.org>, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-watchdog@vger.kernel.org,
+	linux-usb@vger.kernel.org, linux-phy@lists.infradead.org,
+	linux-mmc@vger.kernel.org, netdev@vger.kernel.org,
+	linux-scsi@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-crypto@vger.kernel.org, linux-i2c@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev, linux-remoteproc@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linux-hardening@vger.kernel.org,
+	linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht
+Subject: Re: [PATCH 20/33] dt-bindings: i2c: qcom-cci: Add the SM7150
  compatible
-Message-ID: <au8zFKCFkO_KCdHj@shikoro>
-References: <20261106-hawi-maili-camss-v4-0-d528c7a797b4@oss.qualcomm.com>
- <20261106-hawi-maili-camss-v4-1-d528c7a797b4@oss.qualcomm.com>
+Message-ID: <au80Kv5YDDtUW2L5@shikoro>
+References: <20250422213137.80366-1-danila@jiaxyga.com>
+ <20250422213137.80366-4-danila@jiaxyga.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,21 +130,16 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261106-hawi-maili-camss-v4-1-d528c7a797b4@oss.qualcomm.com>
+In-Reply-To: <20250422213137.80366-4-danila@jiaxyga.com>
 
-On Fri, Nov 06, 2026 at 12:20:42PM +0530, Nihal Kumar Gupta wrote:
-> From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+On Wed, Apr 23, 2025 at 12:31:24AM +0300, Danila Tikhonov wrote:
+> Add the SM7150 CCI device string compatible.
 > 
-> Document the Camera Control Interface (CCI) compatible for the Qualcomm
-> Hawi platform. Like other recent platforms it requires two clocks, so
-> add it to the corresponding clocks constraint as well.
-> 
-> Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+> Signed-off-by: Danila Tikhonov <danila@jiaxyga.com>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> Acked-by: Andi Shyti <andi.shyti@kernel.org>
 
-Andi? qcom tree?
+Andi already acked this, so I guess qcom tree is fine.
 
-Reviewed-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Acked-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
 
