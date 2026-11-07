@@ -1,59 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794091516;
-	b=a3nwMfthz2P3h4MzZPmpokwTOD2zd3ruwrSE+5ZdIqKVTO1ve8UUDDdpzCAx8Pd1ngTa
-	 luJUDAepG2NsuMmEIAvMnIxQKVNaTIluC2VaPf/xdw+whwfzmxOt8Px9hk76nrveOhs5H
-	 Ruswk8YGFouKJoN2iRuQFh1psnsNyvatJoo1Qi5Sop9FhBzCNEHxTpNWmJETkOzpPap3q
-	 jUFdVwWtsJg0iMQcnLMtHc9KVMcNITGQ83luqvAL+T0V1qsz3G65OSPxcUhStntQx91YS
-	 BO/GLBszy53stfjhftnF02lsQ/2aXyqU7jZXx/qlBkEWG7RWYm9Gx+afnhafC/f3mIA==
+	t=1794092115;
+	b=EZKACD3jtsg8R8oec2yPDgOj3xXkmBkVHpm+bfqsNJlGCKNLj0zwNqcotSTLclaI/1c3
+	 x28vC8W42MTJitAPnIQQXzdbqsnJkRA4Mzj3QDdw2321ngjnw54Jxf4N7bj063VhvGcQu
+	 KHG8GgsX2KP5uQRZdoUe272EnA4Oi8vsdQzhgmUjN5OuAz07WNMLcFvO60xjIxH8Wfunp
+	 KbGmNtwBzSMIA4Y+7L5Q/GNjQ9NdbY0PIFYkqWrHE1Lw6Ys9soNSA/JUGEwzS8LGB9zPC
+	 WHyeMhee5U9vMAW4Hascejd1exBs+8G/jfr7AacI08xi1YTBPdZ9LXSWbGtmR4MptsQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794091516;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=5Sg/QYc64KGsYlE8LxgBfqmE1GMl4mLlfKRfIL2XKbk=;
-	b=TzMR85idSYNhM+wSMS7heG0h7qka7SxG38xRH6d6/UjOSzbSww1Nv4T7Bi9ypEfFgdQ1
-	 lzTF/JKlQam4Pg26dYvgceXva1QtvSbdDi9iyirpcg7giRoPZW6QSuhZ9YGhPKB9etHEU
-	 l7J84djR+n/C+92d4BJtfWNeOU9x+nu6ILYFLaLtkMpViKc5sQYz081iNQ3M4XWol42NB
-	 auvF/oAXPSHi0dHtkcywKC3F/3cX74UGZg/2YxmHqYx+VBE74btsWLZOMjqRYi1go9wk5
-	 pdYbbuqL8ILPTfIok+oxuRJMc7aZjUqujwhMR4FtMJ76O8k6BGX5OtrtzHHCBnCXyjg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794092115;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=FVM6vTB/7eDdSwBHkkyGuCuKCEXrOdJ0onmA66YPA80=;
+	b=gRZaF5wixdhFu/xHOJ/G24IwB7mIr7ntb9oQX3XiZQrreZ2prR9aQYZxYyU3X7yz128f
+	 MrAaECrzmmi3mAY8XJ1MhfdAR5nOmRqSI7lpbOP4JezjV5mK6APn4BJ0XXJ1l6chDGktL
+	 OQ2L8mXmgijHLD7mY20gNSpaLEXoRF1o2siL5iNWmUPNycbyHg3kkJ0+06Ghrgc4b6/TJ
+	 fS96+ILwKYMTMHtlp+89dFebfEXaK7qlr+7wka5xIaambhGFRTgXusV1OmRcKYT1wcSYl
+	 RYOsEjjoNSkfMWddn+kpckN1xCIjvArAlZWcJJPNKC4pmosb9G0RWZxAdmR8qH6yVBA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WnnaW6MP;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZUbTT+3Y;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83E58606A32C;
-	Sat,  7 Nov 2026 22:45:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB825606A334;
+	Sat,  7 Nov 2026 22:55:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WnnaW6MP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA4951F0089F;
-	Sat,  7 Nov 2026 22:45:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZUbTT+3Y
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52C6E1F0089F;
+	Sat,  7 Nov 2026 22:55:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794091516;
-	bh=5Sg/QYc64KGsYlE8LxgBfqmE1GMl4mLlfKRfIL2XKbk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=WnnaW6MPIQMe5PP2NqlUxaetG2uBm1miygWQ2RwaFHPcW743Qpf4SaYmS2T1W61ye
-	 WtdLYYA4E71F2MSu+qlnK1gs3ILHqyGdT0fIPskWakrOfWSf75OrgTnIPXrPPbnDod
-	 RcpTsR04TFbydLjDDwd7MPCIYTKMNw0PRvfh2SaPORn7p1LhhCmIWA1+NUUJlmZax0
-	 E8mF6dwI4qrxmJn4dvjOc2AJqdOH8WXq9NMbU1SD6QAYbX5EaDHjYAttWMTX9DFOwC
-	 dipLk31/oxxl8oL8kBrRhFzBxfDn15PRVa46dzLqpqkiTQAsjbCkyMrtEWMXA1h5cP
-	 2SIHlV9PuGYRA==
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: bhelgaas@google.com, lpieralisi@kernel.org, kwilczynski@kernel.org, 
- jingoohan1@gmail.com, Hans Zhang <18255117159@163.com>
-Cc: imx@lists.linux.dev, linuxppc-dev@lists.ozlabs.org, 
- linux-amlogic@lists.infradead.org, linux-rockchip@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, sophgo@lists.linux.dev, 
- linux-riscv@lists.infradead.org, spacemit@lists.linux.dev, 
- linux-tegra@vger.kernel.org, linux-pci@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261028030652.2917756-1-18255117159@163.com>
-References: <20261028030652.2917756-1-18255117159@163.com>
-Subject: Re: [PATCH v5 00/16] PCI: dwc: Cache PCIe capability offset
-Message-Id: <179409150473.143243.11323239293809371653.b4-ty@b4>
-Date: Sun, 08 Nov 2026 04:15:04 +0530
+	s=k20260515; t=1794092114;
+	bh=FVM6vTB/7eDdSwBHkkyGuCuKCEXrOdJ0onmA66YPA80=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ZUbTT+3Ywk0rFTlfiIED0M9qdScuZG/gleAeiG9j5JfiMNtJXXTR6nr+C7F3pOlWO
+	 BZr+71O2Jeg0hGeFIn6xRv1u+3zuqr7n/6bjH9viNKpcqVYvhiwObltNvz7mrIpv/8
+	 scLIdeamIWpD5NXv5bZIyfgSuXoKJGTuuM2cmylwXP6n/wrbPgZuAXJShOAetV19ZQ
+	 PwVU0dYt8zE0Kp+5CBIOUGW5DmPh9e6583jHTiETNf0etfHBUGP73eHwlWjqvMAr5m
+	 cAB25H4lLUpBrwEwx1886DLyfApkGvPxzGchFc9/TQUepg7weYa/i2QjwQykvHKIxJ
+	 AxC2ulv+zWbLQ==
+Date: Sat, 7 Nov 2026 16:55:09 -0600
+From: Bjorn Andersson <andersson@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>, Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC v2 1/5] soc: qcom: pd-mapper: Add support for Nord
+Message-ID: <au-r4tTc2DPirKL3@zenbook>
+References: <20261021073633.2163128-1-shengchao.guo@oss.qualcomm.com>
+ <20261021073633.2163128-2-shengchao.guo@oss.qualcomm.com>
+ <d4349c3b-f6c7-41c1-963c-ca0e21e2f436@oss.qualcomm.com>
+ <auMOSm_roh5S-DTY@QCOM-aGQu4IUr3Y>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,61 +63,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <auMOSm_roh5S-DTY@QCOM-aGQu4IUr3Y>
 
-
-On Wed, 28 Oct 2026 11:06:36 +0800, Hans Zhang wrote:
-> The DWC PCIe core and its platform drivers repeatedly call
-> dw_pcie_find_capability(pci, PCI_CAP_ID_EXP) to obtain the offset of the
-> PCI Express Capability structure, including in paths that run more than
-> once such as link polling, suspend/resume and interrupt handlers.
+On Thu, Oct 29, 2026 at 05:13:46PM +0800, Shawn Guo wrote:
+> On Wed, Oct 21, 2026 at 11:56:55AM +0200, Konrad Dybcio wrote:
+> > On 10/21/26 9:36 AM, Shawn Guo wrote:
+> > > From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+> > > 
+> > > Add support for the Qualcomm Nord SoC to the protection domain mapper.
+> > > 
+> > > Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+> > > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> > > ---
+> > 
+> > [...]
+> > 
+> > > +static const struct qcom_pdm_domain_data *nord_domains[] = {
+> > > +	&adsp_audio_pd,
+> > > +	&adsp_root_pd,
+> > > +	&adsp1_root_pd,
+> > > +	&cdsp_root_pd,
+> > 
+> > I see 3 more CDSPs:
+> > 
+> > https://lore.kernel.org/linux-arm-msm/20260929155152.1898666-3-shengchao.guo@oss.qualcomm.com/
 > 
-> Add a cached pcie_cap field to struct dw_pcie and a
-> dw_pcie_get_pcie_cap() helper that performs the lookup on first use and
-> caches the result, then convert the core and the 14 platform drivers
-> that use PCI_CAP_ID_EXP.
+> Yes, we have 4 CDSPs on Nord, and they share the same instance ID and root
+> domain. I will add the info to commit message.
+
+Please make that the default way of writing commit messages.
+
+Regards,
+Bjorn
+
 > 
-> [...]
-
-Applied, thanks!
-
-[01/16] PCI: dwc: Add pcie_cap field and caching helper
-        commit: d018ff4be8961981828e75afd36eef90cc524cd8
-[02/16] PCI: dwc: Use cached PCIe capability offset in core
-        commit: f83a7b55517012496bd9539fbbdeeecf0d1e9ff9
-[03/16] PCI: dwc: imx6: Use cached PCIe capability offset
-        commit: 8472374576d300d36de20ad592fd1f39181b85a8
-[04/16] PCI: dwc: layerscape-ep: Use cached PCIe capability offset
-        commit: 87427cc9d7115088e92e8c92c282e28481c9b26b
-[05/16] PCI: dwc: meson: Use cached PCIe capability offset
-        commit: 53f9ed3d6807c6aa79944ed42b3362aa89192956
-[06/16] PCI: dwc: rockchip: Use cached PCIe capability offset
-        commit: bf5c3f4975010750c535b127cb3ab81951c7ffd0
-[07/16] PCI: dwc: eswin: Use cached PCIe capability offset
-        commit: 386b9fa49e26afbd76d934f136f68bc355791ce8
-[08/16] PCI: dwc: fu740: Use cached PCIe capability offset
-        commit: 6fba557b82f4996786d12676f554ad12e67e46d9
-[09/16] PCI: dwc: intel-gw: Use cached PCIe capability offset
-        commit: 02305ad3ad2f918ac009e8ae4c2df8c2b11dc0bc
-[10/16] PCI: dwc: qcom-ep: Use cached PCIe capability offset
-        commit: c489e1008df8a7456686ab637593582be63f14c9
-[11/16] PCI: dwc: qcom: Use cached PCIe capability offset
-        commit: 38af9eda49198b0b2e3d90324af6c5b00123d4ec
-[12/16] PCI: dwc: sophgo: Use cached PCIe capability offset
-        commit: 328c6d507696eb3b075efa6236cdc1c12a2a800c
-[13/16] PCI: dwc: spacemit-k1: Use cached PCIe capability offset
-        commit: ef2bc56f097aafdeee7fceb68d2ca9e4c6956dbf
-[14/16] PCI: dwc: spear13xx: Use cached PCIe capability offset
-        commit: ebd968f20c61b3d86165d9e1bc387044dcf73707
-[15/16] PCI: dwc: tegra194: Use cached PCIe capability offset
-        commit: 8078927bf27866ecc5251919ec6b41478ae620ac
-[16/16] PCI: dwc: ultrarisc: Use cached PCIe capability offset
-        commit: 64e2e54238dc1a63d4c8bd827d140bdffef05403
-
-Best regards,
--- 
-மணிவண்ணன் சதாசிவம்
-
-
+> Shawn
