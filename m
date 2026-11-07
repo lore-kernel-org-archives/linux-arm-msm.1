@@ -1,47 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794065412;
-	b=cPvtJTFLEmxBHH4BcgZuuAumCL5sWra90gm6x90h2Wbqli3cGnTSgdBAYM79EGL97e8v
-	 DmU4EnLBOZLkdal62xIgBByX+f4iV9BFTXE1wZu0EJDZ9yMo08kKMZigiKAaPA/3pUsvH
-	 O7PlxKyYknGKmLDLnIBSQIfzG8CTLIUqPJphZTg4eiMsfSCTZLr7AyfPRIOxuOWBKzUnZ
-	 2shNR0bi1bP165EogZ0DcAiGB0MDtgKoj5ssIS0zYHspOa9V3lIPklWd0yOGzPerhL0sP
-	 Ke+u5v0BAGffGQAXBM4cxjVKKpE96mQ3m6FbuVpSOu53oP73HbT3MCaAL+ONc25pHIQ==
+	t=1794066241;
+	b=aAlHRPbnMEwBuro0Yk1+kcR0hoLgakXk4hF5nx+lzwkx9VyOv2KQLgskqM/jfCn1yj4l
+	 QpGxQTtqoMcOdS+VsQ0QuWi+IG6CxOrm7xqW7PdbTrG/k2NlWkmirhT9Gk3P82tu5fkE3
+	 Yn4mv/r+Cbqw+WW3J4Q4zsHzpqCexyMNPUhlDvLzSiII1EWg2nPurVtmqJYmntYrOSQ4d
+	 vba0U1xNCO/b/6D9ZC7ClY78vQWY+kLo/I9qSQ/CE3kqrXlUIi3L5DSon/bptdAdRr2ur
+	 4ilsE2xHSjzrbkGVWg9scrt0iYItEDIVM/pRq1LibV1jCtdGxDgjr6RxH5gF/NcBUoQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794065412;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=vaEs7wb0G7SPDcuD/cuH33DllgSpImjlQDOyO4ctNjc=;
-	b=TplagyQvho51Z7JzrgHDxH2BfWWbzO5fC9v5EFkL3xQLgI58aSty77XK1kvHpYMLhpn3
-	 kql5OCQVn5hGZ573PJmnqpZHgy6w3RTqRkLRHn5P2+LxZISw7o8sKu6UTuSMAer0dC6oz
-	 Ma3mhG3JdwiAKNnSwOTGxkmg1ALeLf/eeSq4kGC5T3t5K21CChdHrvt0B49oKG5PWrYfq
-	 l4N0fVvSKzBd5seMHcAYygv87OU8WEaE8/11WYYnMQsdBDuYUcmYKTJUpF81w9hIokHJe
-	 JkJJ/Ua8QRLHzJNU+Tu44syLTdmsJ39ocGsTgS8exEM/GSBnYSJE0zZlJF3sDMesE9g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794066241;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=eYxgXranWoSQlhCoeNmLdUDwCImCfxZkTrCYXT55ZLU=;
+	b=cpMFXskbrTvwZoInPxvIYTjrx9cnVxOttefrCoXWl9IMSzlL0rXiGO4WecXKFdvPZE+4
+	 Gf37AZ1wTJ0RsxGm59D64UK9ylu1dklyB7Bkze3Kyi3UjJGhb7dFWnRjS4fTOWbQRWmLw
+	 nr3WNRy5DAimlXxmCGFKJ4gsuY0lGFSo9qppfTuNhPlOZB8ivs59z0krOA1NpnWAR//CA
+	 qQjmkLSIZBsQCGOGK3TDRZngXIbeKrLAN6fmpDbDXUCOJNIRDJGnHFML3zilk3YLDy8vN
+	 z+6A4BXdveskKMZytIMRxqsecNXMrItig4zTQNnXtYY3JbzpnagdRDTltI+EvImcWVg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VKUrCAxH;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kusi7ac0;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2C85606D80C;
-	Sat,  7 Nov 2026 15:30:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65A6C606A32C;
+	Sat,  7 Nov 2026 15:44:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VKUrCAxH
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30BD41F008A3;
-	Sat,  7 Nov 2026 15:30:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kusi7ac0
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 764801F0089F;
+	Sat,  7 Nov 2026 15:43:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794065411;
-	bh=vaEs7wb0G7SPDcuD/cuH33DllgSpImjlQDOyO4ctNjc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=VKUrCAxH8lbyUb6TJunrAzttSZjk+VI2dNHjkyIyGNU4B726AAilH+Fa3JFi5C90h
-	 PuZrt4ZSri7SSjDCBHAyQbIWJziG+5cSV5MsH/Blyn7mcoQUZxUiDS8JA4bnbsZtgo
-	 i5rpAaN4U+1aW7cgx1zWA4y4o4zBByHEm8Oii4eQFvTyxrp4TOe2rWl5VIKvuyaHdy
-	 RMXCkSmK/Gcb0MTtt1gnRp5qRzkRRshO6UzjyNGVzp3EVZq1bCQrIcEfMck60yytK9
-	 kbV77vLzpttWfvANiiKBmRHgXeGjEbr6MxcbsjCxQGc1sqMd/3Lg0CeN6sBnfo2r6q
-	 iz51vMojvDfDw==
-Message-ID: <ad7b886c-d3fc-419e-b155-3fd39fec900b@kernel.org>
-Date: Sat, 7 Nov 2026 17:29:37 +0200
+	s=k20260515; t=1794066240;
+	bh=eYxgXranWoSQlhCoeNmLdUDwCImCfxZkTrCYXT55ZLU=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=kusi7ac0w4ZreYG2a6XTbtQyXG4p6FRKlPIzlZOMRnZBmkH2TqqAQIk+E6Bms1rJx
+	 zbz6d/RSXwozO+IKr2M2kUCWl85K6wWtsZLRRsGv8itFwX3yasXpug6aTLE/Lt0fcj
+	 gVHyVcq1Nui1HY5r5BFMD+hiw703YT6bjMCRGBm+rZn6kILhDLb3x4sTS67GL93SBF
+	 xWaJzGqFMZybHGLimMfA/qrRZD/Yuafd8PXqVny7ADnRujsuh0b/vBYAWUkYuH7a8N
+	 uEokovwOalO3BOoJKroPLZTUnkxfSa01HfcrcJ1T2F3Vturm/4UNSMAeKS8KdWUSVd
+	 /Gtd+w7cJLnQg==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,30 +49,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] clk: qcom: Add SM8350 camera clock controller driver
-To: sashiko-reviews@lists.linux.dev
-Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, robh@kernel.org,
- conor+dt@kernel.org, MSM <linux-arm-msm@vger.kernel.org>
-References: <20261104001704.2744766-1-vz@kernel.org>
- <20261104001704.2744766-3-vz@kernel.org> <sashiko-outbox-199410@kernel.org>
-From: Vladimir Zapolskiy <vz@kernel.org>
-In-Reply-To: <sashiko-outbox-199410@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] media: venus: vdec: Clear streamon flags on streaming
+ errors
+From: bod@kernel.org
+To: fengchenguang@kylinos.cn
+Cc: vikash.garodia@oss.qualcomm.com, dikshita.agarwal@oss.qualcomm.com, 
+ bod@kernel.org, mchehab@kernel.org, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20260930042417.191675-1-fengchenguang@kylinos.cn>
+References: <20260930042417.191675-1-fengchenguang@kylinos.cn>
+Date: Sat, 07 Nov 2026 15:43:55 +0000
+Message-Id: <179406623573.650304.7316804357231787933.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1204; i=bod@kernel.org;
+ h=from:subject:message-id; bh=zLU9b3PfIsD8Jz99iK2c9VmRUcnT4iDkqCQDMoxJujw=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq70c9+UqbkesHh0vb4BCptwx8RIhgnJLC3hHBq
+ ePya98qtJaJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCau9HPQAKCRAicTuzoY3I
+ Oid2EACGmzztFGQH3bO9/HTyq15xv9zcOvMYAEpSZIg7IigHYTsQwcnnUt8cjbwYl9RUTfgLeiK
+ rEzTZMiXspyCRVlq3LUF9+bIrNwAqNGj9daaQ8w5GLNZYteUfc1C11BrgRMvkk0C7cYPMW9YE1J
+ 19JXqOlpqXvjB1ZEHtfb5pMmR8fV3IKjapjCFcfe2khepdzYghj6kH8S7dRJDukS21/+P9hAQ9W
+ dnIiP83apCQ0TL84XUieT2CbkLuMBlMd0IlY02ikrLvV00iRRy3wW2TYezM/u/iSISlzZpSD946
+ J6ArJOT4jJN2eRlVWTRJ1sqKfRrKCXIiSietAGRUSLalEDsCFaEpjLB7VAep87KsqS+48EunyLq
+ LPSSrnPQCSFW7pzXbKKowQY0nvBgreIqFkCm6LPfpW9WFP50t+dfCUND5dIFeKt4orT2Z9L5r/+
+ HGonRXQqSDuiUDS+138URvfcSYmdaSANFOGpQB9HDa4HR3C+Az5T/rUEEUAeIhpV/ZZakwP6bYp
+ d2zbcVRTGhJYDALmGKbDBE4NDO05eK+tgPT1SrxAM8HQ9mw74EEFqiAVyg3TogZE7YZ83yd7YEv
+ KfXNTJLJjllXigbX42472DEQX3q9/6PzgvuF6CJ0RZ+qITZLLarR6nQxnEuzr0E928BdqeR+rHi
+ dQ9wDBxmqjg/SlA==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-On 11/5/26 18:06, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [Medium] clk: qcom: Lucid 5LPE PLLs in camcc-sm8350 use clk_trion_pll_configure()
+On 2026-09-30 12:24 +0800, fengchenguang@kylinos.cn wrote:
+> From: Chenguang Feng <fengchenguang@kylinos.cn>
+> 
+> The decoder only clears inst->streamon_out and inst->streamon_cap on
+> the success path.  When vdec_start_output() runs with the decoder in
+> the INIT or CAPTURE_SETUP state, it still sets streamon_out at its
+> done: label even if venus_helper_process_initial_out_bufs() failed,
+> and the error path of vdec_start_streaming() does not reset the
+> flags.  vdec_stop_streaming() skips the clearing as well whenever
+> the hfi flush fails.
+> 
+> In both cases the driver and vb2 disagree about the streaming state:
+> vdec_decoder_cmd() and delayed_process_buf_func() keep going as if
+> the queue were still streaming, and a later capture streamon assumes
+> the output queue is streaming too.
+> 
+> The encoder clears both flags unconditionally in the same
+> situations, so make the decoder do the same and print an error when
+> the flush fails.
+> 
+> Fixes: beac82904a87 ("media: venus: make decoder compliant with stateful codec API")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Chenguang Feng <fengchenguang@kylinos.cn>
 
-That's a valid issue, and it requires to make a formal introduction of Lucid 5LPE PLLs.
+Reviewed-by: Bryan O'Donoghue <bod@kernel.org>
 
-> - [Medium] clk: qcom: camcc-sm8350: duplicate cam_cc_pll2 parent in cam_cc_parent_data_1
 
-This is also a valid review comment, fortunately this one is easy to fix.
-
-Will prepare v2.
-
--- 
-Best wishes,
-Vladimir
