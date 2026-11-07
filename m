@@ -1,67 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794061627;
-	b=MPW9vP5ocjgsW7mRK5TmzTZ1Gouh8llmkVuL5s4fVzUb+uvlqP4Zpz72fM1E1+kaINfw
-	 D9DA4iKSGtgFU3Ps2ENrDi6zKWH3zfjlQKbI5eyM65RwQgB07GAJaDve74Q51Id4RP0bj
-	 A5pqd1ew6B4m8I5JmfiBxk3IzxqZ2idafUnKtl+2JdNJNtxNxxsV7toMVaWFlG+ohiLcx
-	 Jsqs24Vr1tWAAOkn372H3n+NiJZobjjlDjHRgcKOsNgwVKWGKUHzExz8NcKH0R6mfaLBt
-	 iAeOVI3hJRjYDG01jQGP+AyiHA/1zK1VDbWh7aoNZ1qx2XCgJqTixg1OaRjdjsp35Bg==
+	t=1794063646;
+	b=yPu5RYvfYM7cSm5+R6GOkO2ZC5MQ/7jWXnWUTbzGVhsx1VCW8MNXZmeVcViIc17rCWr8
+	 ESSfF+Jeool3DaQ9Pd9pNaYRNXoYuNrsKZZhn6XdUDzcFs451ev0MzkFJ4f4p+p11OPr6
+	 Dwln1NCtOemF+V//RHSpJ0yJaWQqrzB6RIMDGBlDzYEhCpsEk2LUntsALhZQRdt5kgT7/
+	 tW2Wo0qPHNH+PUlAeqe0G/UnrGu+XQb1zUW8tM11YZ/t3N4/4XQapQhAvXx6OEIvjYazq
+	 N4WM7I7huR14eNBRoUzjJMC2aKYgLO+F6aQ6VnIOW0KsrwqpgTWQcbdStctkeGQB4Sg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794061627;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:X-UD-Smtp-Session:Date:
-	 From:To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=g966SAJBPKMN469l/0SQTa9Ear5vOZxRTo3iz58T7Fw=;
-	b=xHDnozHwIcVpM0j+SKc2bmdQrsYFyoMhBJJnoLYFYl/2+oYqZ0SozHL8uMHhiBFBup+Z
-	 US946TQG56mkcbjITmCJGqM/xGolZusUsrqgI/ohQTAg1+YP/T1ybaSVXSHNvj2vSkqU+
-	 s6g4N59vvHolM+2Hp6f6qLzNiBcLfMaOevePOi9wE6ERA3+yX0q45eaMuIyOKHK/d7YbV
-	 PFGdrD5RQeKl2KJyxgd7ec7VdHbF3xwnUrJLoOH1HrXnI6FoU7kwQYHqrBQAvUJQBG4u2
-	 dg50EBM9/pwDrJmYzg2YfPE/IN3iwd8Q+EHxvryInrLpA+fCa06XDOssJBeazBWLisQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794063646;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=q9Bi0tahlAuUAjwyCbyX0uGfbCI4CIe5HRgmjbxUD50=;
+	b=VwrvPyPn/txIUfOrY71h6WuXyVqv7bUXPthB3xALOeDL7uaK6U0Z3vJBTEfQRPvSrfke
+	 vBIbHBmiAMI7laNQRAwscG+FAwEidY+pOmExj5cH7n/gqPTHYpgluKb8GXd6qPn9ymUgA
+	 raoQTyWD8VFAgT1fAUen5yJJOJ4eGd7cjHasC4NzWcOESCfNzHkDPut1S3UC2ZqzSGHqg
+	 lExwgwxwIgUHSYuFhAMhZMshxAelafqKuJ6FXoLa+R5RU8xTJT/wpLePY+UzXbHu8UM5O
+	 Umc9DKMo5lPIpEDJv19v2dWkaDtqpz7337zc5PgZ94nCvj37e8WcYP7FuX83HzSq/PQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=sang-engineering.com;
-	spf=pass smtp.mailfrom=sang-engineering.com;
-	dkim=pass header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=axNhXy4q;
-	arc=none smtp.remote-ip=194.117.254.33
-Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WsD2wS6y;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 646A5606A331
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 14:27:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 646A5606A331
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F631606D827;
+	Sat,  7 Nov 2026 15:00:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sang-engineering.com header.i=@sang-engineering.com header.a=rsa-sha256 header.s=k1 header.b=axNhXy4q
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	sang-engineering.com; h=date:from:to:cc:subject:message-id
-	:references:mime-version:content-type:in-reply-to; s=k1; bh=g966
-	SAJBPKMN469l/0SQTa9Ear5vOZxRTo3iz58T7Fw=; b=axNhXy4qgVj4GKKTL6co
-	hxWv2oY7Q0EKHhOlArEYibtS03p8c8SXRTitM4/qgBXN5ogLgtKFMYMha3IC2lgO
-	ccfwA+ioQm1XCzuEBpzP9kaYHx2rQLy+qOtzYUbUwQrdCuwKHpjIe1J3Od20fDwN
-	6nOoS89IeSdM+zOL0bZ5OhtYzEDbr7gtyYoDW0EVTXFUGBqInDW0Zf1jPHln5mCi
-	Q3U7ojVL6H6gbYSPs0x6s57GzZb5wGPQDO92csj3Z8BrMBHR/B2MtHAGQqhT5Kzp
-	yHVgJTUsDb5q15Gfk+ys6Smq92ZMj8jndAz6eFX2QxuQYjqteY8qv0ICSA3Aepty
-	/g==
-Received: (qmail 2532307 invoked from network); 7 Nov 2026 15:27:04 +0100
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 7 Nov 2026 15:27:04 +0100
-X-UD-Smtp-Session: l3s3148p1@9c3ChbBfSvIFFu4l
-Date: Sat, 7 Nov 2026 16:27:03 +0200
-From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: Vladimir Zapolskiy <vz@kernel.org>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Robert Foss <rfoss@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-i2c@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH 1/3] dt-bindings: i2c: qcom-cci: Document SM8350
- compatible
-Message-ID: <au81MnlqSXPnrttt@shikoro>
-References: <20261104230529.3040285-1-vz@kernel.org>
- <20261104230529.3040285-2-vz@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WsD2wS6y
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DE181F008A1;
+	Sat,  7 Nov 2026 15:00:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794063646;
+	bh=q9Bi0tahlAuUAjwyCbyX0uGfbCI4CIe5HRgmjbxUD50=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=WsD2wS6ysh9jVow34VjdTGooGY00OP83R/XQCMu2NQm2eX9SkwPrDBH9tEQP/2Fxy
+	 tA/4p/pURk2t+e8jz74nN1PzwXem3+ELUQhklCvHr74DkeLuLEV55IFLlKb95YEOBA
+	 DvuPRKXBjlDW2A6vwnOqZrmKwvc44Xr7U+qy7CDw9XKwyWOYbORnkKmtok286rLGr/
+	 ubKtFoR2Wl23wbTdgZF50emAMcjEO2PIbhI3ISr0rLbkwa1PmcMrcv8e6bSBcM30yH
+	 N74TtDSd7AksIeEPRmPARZAHFnSR7u+neJDC/ZMmow6xGOnFMndM/0uOyKiN0bv3x4
+	 fOo9Ru34QWLAA==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,46 +49,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="Fj6HSmBKQx57QWtJ"
-Content-Disposition: inline
-In-Reply-To: <20261104230529.3040285-2-vz@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v24 08/15] media: qcom: camss: Allow CSI2 PHY devices
+ without CSIPHY resources
+From: bod@kernel.org
+To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, jeyaprakash.soundrapandian@oss.qualcomm.com, 
+ Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>, 
+ Vladimir Zapolskiy <vz@kernel.org>, Frank Li <Frank.Li@nxp.com>
+In-Reply-To: <20261102-kaanapali-camss-v24-8-d6b8f3f6f66f@oss.qualcomm.com>
+References: <20261102-kaanapali-camss-v24-0-d6b8f3f6f66f@oss.qualcomm.com>
+ <20261102-kaanapali-camss-v24-8-d6b8f3f6f66f@oss.qualcomm.com>
+Date: Sat, 07 Nov 2026 15:00:38 +0000
+Message-Id: <179406363848.650304.998225523239519511.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=676; i=bod@kernel.org;
+ h=from:subject:message-id; bh=6ClyclcQAm9+Ak4E3bcpIWErS8e0PORFMEQJE1pwKjM=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq7z0XWv6K3gNFjeKFzT8jxmV7/oCMfZT2S0yYP
+ RVlXOoywDGJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCau89FwAKCRAicTuzoY3I
+ OkhZD/4jKi4nBcmggrLh5V3wbJURfqY7+F2qsds1AjMnhzWgEnbOLpxYBOMZvnBY+vW2y1OfsyU
+ QvJpDc/OM2/qYwRp6QV1tYPe0+TC9w+19ius3C3jAC/1yYQxDXl8TgoiFpikfT/uY+bNv5nyKEw
+ MNrhdZWRuywfHzORCnK7q4zbX9e1OeBKfpUNJbd03GYxyHlyLrvNI6VSRtdnkGphSjUQEJKk4wz
+ 3oE2+ahrBm+EMo9xs8WZKfXC/JmUEFpTx8TvqCpYcuooRu8GP7ZBRnwu6HFyCDDR0Z5ZfBRfQ5z
+ 2FUNDUOXfYXjzicVF6KJdoEz3rcQI40V0SmAdJYTb6p2uPlUJ/xTTmEPU0hldeY3H/eudAX3nl6
+ rAdno+evM2Xj8A7hT930Xox6q5+O5dbbviua2qCteI2ReWllDKz6d2tUXcrcyJm40XJygTTBtVd
+ 7Sy2504N90w2gW/SSDBq6rTfSNCYtohqLPaKA9odxWSTQThWryIdSG+Qvqq9tmckBmXjPXntsVd
+ JVmXIcqkj0kx72vtkgCSUUxvDcZQjUHvE75YhO3Z7Ke0bBZUCjjq6hZa8enRzkFfayLzo6UfBWc
+ gorN3Yc5G3b0udGLsxGQofeUx32WLfx0z4HAT9UsGse3KYrXHACfru140ek8VwjhD5K2rhTG9nx
+ YAvJgfqXPwGNXdQ==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
---Fj6HSmBKQx57QWtJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Nov 05, 2026 at 01:05:27AM +0200, Vladimir Zapolskiy wrote:
-> Add Qualcomm SM8350 SoC compatible to the CCI device tree bindings,
-> SM8350 CCI is compatible with CCI v2 found on MSM8996.
->=20
-> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+On 2026-11-02 02:42 -0800, Hangxiang Ma wrote:
+> From: Vladimir Zapolskiy <vz@kernel.org>
+> 
+> If CAMSS CSIPHYs are supported by the stand-alone CSI2 PHY driver only,
+> there is no need to provide description of legacy CSIPHY resources in
+> the CAMSS driver, therefore if CSIPHY resources are not given for some
+> supported platform, use CAMSS CSIPHY port numbers as CSIPHY identifiers.
+> 
 > Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> Reviewed-by: Frank Li <Frank.Li@nxp.com>
+> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> ---
 
-Probably qcom tree here as well...
-
-Acked-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Reviewed-by: Bryan O'Donoghue <bod@kernel.org>
 
 
---Fj6HSmBKQx57QWtJ
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmrvNTIACgkQFA3kzBSg
-KbaUAg//YgAO/T128Lm3n6VmRqJT3XChIwGo8G/v8nsBFxTxRcSrll5XQS2+yRz1
-x6KjdLRoc6bQ6WErbQf0Rp7/io7zA2jN0mkXH1q9rOQNQSYVXtePfyDwh8MBFfQT
-ypCcQSvC4YESPKqR6xkhsmMrjUgc1YWNzeJ1nnG0FDwqMXFzP549g2UL2edTUlJc
-wo7m/9M1/Y20xdnh/a6ud3zRTBTXBITfcyjZIHeIV04jNzfJGxGQRgP3n+35a1w9
-nGkwN+0GC7qGHaBaVhWIrROzlrK48Yp5xVLJMzvnKLTHN2VPBhpyM4KeEezAmo95
-173Kaif0YArgwxw26W92EKJI83LbZ9XwzTQLzSwMUQl2nrm0ofZgb3lgaQ4LmFKQ
-vquclSgXkB6kHiXyA1cP/7emTC0J/uT5Hyw0x75h8deBx25uUNQlxEBomC7ZGAyo
-GSzs+np9+gMeUpK97aIh66biHskiMxyH7voFNHtz2idDwlPkVMLVyz69pmiAmTKa
-s/r9c4jxLzrieBi8IkU/1mK8cZmc+UtnLRJvARjIgm5F/b5phWBO1TXtNmYuZgMy
-HTlUMs4RgP3DIvRXYWjECEfXb7e1qYZ46XrGSl53eJiPtk2Qr/+7pv+r/thzHaCU
-CYC5bScxWolnIHXGjRV5ZqJepxFnoidzXf/fTIngo9q1VGlkwZk=
-=d9VW
------END PGP SIGNATURE-----
-
---Fj6HSmBKQx57QWtJ--
