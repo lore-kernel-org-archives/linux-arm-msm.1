@@ -1,45 +1,32 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794066241;
-	b=aAlHRPbnMEwBuro0Yk1+kcR0hoLgakXk4hF5nx+lzwkx9VyOv2KQLgskqM/jfCn1yj4l
-	 QpGxQTtqoMcOdS+VsQ0QuWi+IG6CxOrm7xqW7PdbTrG/k2NlWkmirhT9Gk3P82tu5fkE3
-	 Yn4mv/r+Cbqw+WW3J4Q4zsHzpqCexyMNPUhlDvLzSiII1EWg2nPurVtmqJYmntYrOSQ4d
-	 vba0U1xNCO/b/6D9ZC7ClY78vQWY+kLo/I9qSQ/CE3kqrXlUIi3L5DSon/bptdAdRr2ur
-	 4ilsE2xHSjzrbkGVWg9scrt0iYItEDIVM/pRq1LibV1jCtdGxDgjr6RxH5gF/NcBUoQ==
+	t=1794069645;
+	b=UVl616pYKl0ajqRtF43TgtuI81tMgZSw5gRbYQE+5Uk/xk1ORaYMxaMN7i9rS+tRsmgC
+	 S/5OsRv8TOizxp5/NsVUr7h1bLC9BjtYEwP8EpzzfL0VrYKPNJPQBwepk849sjCnEVjYP
+	 upgEFLpn4JGEbDDY8Ggz04imNJ4bOoJIHqsCepbFnvRWKSXnHjeagDvS3XS16EE3GhHhl
+	 7bNS99u2d7vcReB/qcZj7K9DVUGTYXMImOmicByQL647KYWw7UGtsZauys8QYPRyor+Vi
+	 Su7XdAcA7dUtOAcSEVAysy7671rOI2ob+jCM+scqV6SOLBLkMbFgjMxxEn+oKjozbxA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794066241;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=eYxgXranWoSQlhCoeNmLdUDwCImCfxZkTrCYXT55ZLU=;
-	b=cpMFXskbrTvwZoInPxvIYTjrx9cnVxOttefrCoXWl9IMSzlL0rXiGO4WecXKFdvPZE+4
-	 Gf37AZ1wTJ0RsxGm59D64UK9ylu1dklyB7Bkze3Kyi3UjJGhb7dFWnRjS4fTOWbQRWmLw
-	 nr3WNRy5DAimlXxmCGFKJ4gsuY0lGFSo9qppfTuNhPlOZB8ivs59z0krOA1NpnWAR//CA
-	 qQjmkLSIZBsQCGOGK3TDRZngXIbeKrLAN6fmpDbDXUCOJNIRDJGnHFML3zilk3YLDy8vN
-	 z+6A4BXdveskKMZytIMRxqsecNXMrItig4zTQNnXtYY3JbzpnagdRDTltI+EvImcWVg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794069645;
+	h=Received:MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:
+	 From:To:Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=oyZGN7VE4rzGGu6dwgYopEdGRTAy6qdzVMyyhZtR/qE=;
+	b=i0hxaMqlCvX1i5LiAaMfgKB/pbx/Yc8XHjlMplrJFDPKx8uZyLUV1v5DupxeFyqellbQ
+	 OsEAqUqnO1usj/U/Kg01aj2rG6qVeJCf87zPnK5vEQkxxIsfi+63KYLNl8wF11tUxJXRH
+	 06jZBlIOKNbr6eShDoq2CRt6AGWQpGWB4tMFAbXE/TADCCy80bxUnHUyOIRTvDK+KP0jA
+	 pvEJn2qc+6jP71W24Le4caB60RWhJEeLYa8D1Lml4yI32t6aAwuV7yhK9pDCPoR9ecor/
+	 +3R2An3LrZwjBRcZzDSmsnXnAtqGeKER+a1EFEoLvVHPdhYHPmqRXaG/D8ZlVKi+VGw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kusi7ac0;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65A6C606A32C;
-	Sat,  7 Nov 2026 15:44:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kusi7ac0
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 764801F0089F;
-	Sat,  7 Nov 2026 15:43:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794066240;
-	bh=eYxgXranWoSQlhCoeNmLdUDwCImCfxZkTrCYXT55ZLU=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=kusi7ac0w4ZreYG2a6XTbtQyXG4p6FRKlPIzlZOMRnZBmkH2TqqAQIk+E6Bms1rJx
-	 zbz6d/RSXwozO+IKr2M2kUCWl85K6wWtsZLRRsGv8itFwX3yasXpug6aTLE/Lt0fcj
-	 gVHyVcq1Nui1HY5r5BFMD+hiw703YT6bjMCRGBm+rZn6kILhDLb3x4sTS67GL93SBF
-	 xWaJzGqFMZybHGLimMfA/qrRZD/Yuafd8PXqVny7ADnRujsuh0b/vBYAWUkYuH7a8N
-	 uEokovwOalO3BOoJKroPLZTUnkxfSa01HfcrcJ1T2F3Vturm/4UNSMAeKS8KdWUSVd
-	 /Gtd+w7cJLnQg==
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC246606A32C;
+	Sat,  7 Nov 2026 16:40:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DC8A1F0089F;
+	Sat,  7 Nov 2026 16:40:43 +0000 (UTC)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -50,61 +37,78 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] media: venus: vdec: Clear streamon flags on streaming
- errors
-From: bod@kernel.org
-To: fengchenguang@kylinos.cn
-Cc: vikash.garodia@oss.qualcomm.com, dikshita.agarwal@oss.qualcomm.com, 
- bod@kernel.org, mchehab@kernel.org, linux-media@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- stable@vger.kernel.org
-In-Reply-To: <20260930042417.191675-1-fengchenguang@kylinos.cn>
-References: <20260930042417.191675-1-fengchenguang@kylinos.cn>
-Date: Sat, 07 Nov 2026 15:43:55 +0000
-Message-Id: <179406623573.650304.7316804357231787933.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1204; i=bod@kernel.org;
- h=from:subject:message-id; bh=zLU9b3PfIsD8Jz99iK2c9VmRUcnT4iDkqCQDMoxJujw=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq70c9+UqbkesHh0vb4BCptwx8RIhgnJLC3hHBq
- ePya98qtJaJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCau9HPQAKCRAicTuzoY3I
- Oid2EACGmzztFGQH3bO9/HTyq15xv9zcOvMYAEpSZIg7IigHYTsQwcnnUt8cjbwYl9RUTfgLeiK
- rEzTZMiXspyCRVlq3LUF9+bIrNwAqNGj9daaQ8w5GLNZYteUfc1C11BrgRMvkk0C7cYPMW9YE1J
- 19JXqOlpqXvjB1ZEHtfb5pMmR8fV3IKjapjCFcfe2khepdzYghj6kH8S7dRJDukS21/+P9hAQ9W
- dnIiP83apCQ0TL84XUieT2CbkLuMBlMd0IlY02ikrLvV00iRRy3wW2TYezM/u/iSISlzZpSD946
- J6ArJOT4jJN2eRlVWTRJ1sqKfRrKCXIiSietAGRUSLalEDsCFaEpjLB7VAep87KsqS+48EunyLq
- LPSSrnPQCSFW7pzXbKKowQY0nvBgreIqFkCm6LPfpW9WFP50t+dfCUND5dIFeKt4orT2Z9L5r/+
- HGonRXQqSDuiUDS+138URvfcSYmdaSANFOGpQB9HDa4HR3C+Az5T/rUEEUAeIhpV/ZZakwP6bYp
- d2zbcVRTGhJYDALmGKbDBE4NDO05eK+tgPT1SrxAM8HQ9mw74EEFqiAVyg3TogZE7YZ83yd7YEv
- KfXNTJLJjllXigbX42472DEQX3q9/6PzgvuF6CJ0RZ+qITZLLarR6nQxnEuzr0E928BdqeR+rHi
- dQ9wDBxmqjg/SlA==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] PCI: qcom: Power on pwrctrl devices for
+ firmware-managed hosts
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>, linux-pci@vger.kernel.org, 
+ lpieralisi@kernel.org, kwilczynski@kernel.org, robh@kernel.org, 
+ bhelgaas@google.com, krishna.chundru@oss.qualcomm.com, 
+ bartosz.golaszewski@oss.qualcomm.com, deepti.jaggi@oss.qualcomm.com, 
+ yadu.mg@oss.qualcomm.com, shengchao.guo@oss.qualcomm.com, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <CAFkd8hu2aLp_MGbT3Lt0wv96sUQ705fBsaa_sn3P1_XUuruKYw@mail.gmail.com>
+References: <20261105101521.434361-1-zhangfei.gao@oss.qualcomm.com>
+ <auyUXp1Fgk2yC7fZ@debian>
+ <CAFkd8hu2aLp_MGbT3Lt0wv96sUQ705fBsaa_sn3P1_XUuruKYw@mail.gmail.com>
+Date: Sat, 07 Nov 2026 22:10:42 +0530
+Message-Id: <179406964231.65886.10596417299119607614.b4-reply@b4>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1969;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=jaCY8HUzhyhSMMPiHqi4Fxf0VtDkX8gvIrfoWBqCNzU=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq71SLApPfRmhrU5GP/ZAEfiQYaGa3Fzl55nRVL
+ /lyomfA7S+JATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCau9UiwAKCRBVnxHm/pHO
+ 9Y/3CACKuMlSiJqG9S2SlOe7uSTm946oOt3cgsfeSZ3336Noajm0mDXI/InAHb342H+/7bEAKoz
+ cDudP+i6xayXz8KY8aQTT4p9DAT0Ov8L2WN4TV2C1cOzQnLbhisevPFy83LPwm+aITQEpfl4fbw
+ GvfytiQEsObXcvY/LUcAYb/UpU2rWZDgTu0m4TYb4wAE9Pjb5cUsS5/Slx7CtB3LSLww6TU4fWa
+ 9wMiiskUJxLqso10g7/8Pjg9zZHdRQpbJr5vHsNPtm2avhuAQtoyCEbV/kOQDws8AJf+FaycK2R
+ tTvDAKsyUVenFPh8WuYAZaJXsodvsgdGsLHu99FKBrR3sa4O
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
 
-On 2026-09-30 12:24 +0800, fengchenguang@kylinos.cn wrote:
-> From: Chenguang Feng <fengchenguang@kylinos.cn>
+On 2026-11-06 10:24 +0800, Zhangfei Gao wrote:
+> On Thu, Nov 5, 2026 at 10:37 PM Manivannan Sadhasivam <mani@kernel.org> wrote:
+> >
+> > On Thu, Nov 05, 2026 at 06:15:21PM +0800, Zhangfei Gao wrote:
+> > > commit b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power
+> > > on/off, destroy APIs") switched PCI pwrctrl users to explicit create and
+> > > power control APIs, but only added the calls to the regular DesignWare
+> > > host initialization path.
+> > >
+> > > Firmware-managed hosts bypass that path and probe the ECAM host bridge
+> > > directly. Endpoints already powered by firmware, such as NVMe devices,
+> > > remain discoverable. Endpoints that rely on Linux pwrctrl and pwrseq,
+> > > such as WCN7850, remain powered off and cannot be discovered.
+> > >
+> >
+> > NACK. For FW initialized platforms, FW should power on the Endpoints before
+> > booting Linux.
 > 
-> The decoder only clears inst->streamon_out and inst->streamon_cap on
-> the success path.  When vdec_start_output() runs with the decoder in
-> the INIT or CAPTURE_SETUP state, it still sets streamon_out at its
-> done: label even if venus_helper_process_initial_out_bufs() failed,
-> and the error path of vdec_start_streaming() does not reset the
-> flags.  vdec_stop_streaming() skips the clearing as well whenever
-> the hfi flush fails.
+> Thanks Mani for the clarification.
 > 
-> In both cases the driver and vb2 disagree about the streaming state:
-> vdec_decoder_cmd() and delayed_process_buf_func() keep going as if
-> the queue were still streaming, and a later capture streamon assumes
-> the output queue is streaming too.
+>   To confirm, for a firmware-initialized PCIe host, is the platform
+>   firmware expected to perform the complete board-level Endpoint power
+>   sequence as well, rather than only initializing the PCIe controller?
 > 
-> The encoder clears both flags unconditionally in the same
-> situations, so make the decoder do the same and print an error when
-> the flush fails.
-> 
-> Fixes: beac82904a87 ("media: venus: make decoder compliant with stateful codec API")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Chenguang Feng <fengchenguang@kylinos.cn>
 
-Reviewed-by: Bryan O'Donoghue <bod@kernel.org>
+Yes. By the time the Root Complex power domain gets turned on (which happens
+before the controller driver probe), both the controller and Endpoint should be
+ready.
 
+>   On this platform, WCN7850 requires PMAU0102-E GPIOs 6/7/8 to enable its
+>   power rails and GPIO10 for WLAN_EN. Should firmware assert these GPIOs
+>   before Linux probes the ECAM host bridge and keep the Endpoint powered,
+>   including across suspend/resume as appropriate?
+> 
+>   If so, we will drop this driver change and coordinate the required
+>   platform firmware update.
+> 
+
+Yes. All the initialization required to power on the Endpoint should be done
+by the firmware when the SCMI power domain for RC gets enabled. And when the
+controller driver probes and scans the bus, the device should be visibile.
+
+- Mani
 
