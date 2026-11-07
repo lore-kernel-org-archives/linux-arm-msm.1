@@ -1,32 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794069645;
-	b=UVl616pYKl0ajqRtF43TgtuI81tMgZSw5gRbYQE+5Uk/xk1ORaYMxaMN7i9rS+tRsmgC
-	 S/5OsRv8TOizxp5/NsVUr7h1bLC9BjtYEwP8EpzzfL0VrYKPNJPQBwepk849sjCnEVjYP
-	 upgEFLpn4JGEbDDY8Ggz04imNJ4bOoJIHqsCepbFnvRWKSXnHjeagDvS3XS16EE3GhHhl
-	 7bNS99u2d7vcReB/qcZj7K9DVUGTYXMImOmicByQL647KYWw7UGtsZauys8QYPRyor+Vi
-	 Su7XdAcA7dUtOAcSEVAysy7671rOI2ob+jCM+scqV6SOLBLkMbFgjMxxEn+oKjozbxA==
+	t=1794073014;
+	b=zzKfGv6Fb9Qkt/Zlc1gihekZZuX1i2ryHJUQnW7dXR9qrzlJlLcPnV76PEUZmb73WL+M
+	 g6LD8kkMaYSpI27MvEcjuswKRWkk2wKRwgjp4HnR+ICGG3hM9VxW1Yr1XFwVOKSRbtLFo
+	 pGae+8ShiIXT97EmHzy0D7T8mVVc9qrp3KR5TX/pOMuqUwKdyc/4llC9+gv3J2J6EXGqg
+	 nUwhLCoLGfYRMdrM1tQ3t4ufDHz7NSHYf358TNsyLjf9P7zqhVPhH5Id33VEPudQrLocI
+	 GxGm8OoI3a6CSKUiGu6eL9O4Yss82z1G0Dcj05qQS0YcRwRp3xki7zx7ahToIPjoUOQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794069645;
-	h=Received:MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:
-	 From:To:Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=oyZGN7VE4rzGGu6dwgYopEdGRTAy6qdzVMyyhZtR/qE=;
-	b=i0hxaMqlCvX1i5LiAaMfgKB/pbx/Yc8XHjlMplrJFDPKx8uZyLUV1v5DupxeFyqellbQ
-	 OsEAqUqnO1usj/U/Kg01aj2rG6qVeJCf87zPnK5vEQkxxIsfi+63KYLNl8wF11tUxJXRH
-	 06jZBlIOKNbr6eShDoq2CRt6AGWQpGWB4tMFAbXE/TADCCy80bxUnHUyOIRTvDK+KP0jA
-	 pvEJn2qc+6jP71W24Le4caB60RWhJEeLYa8D1Lml4yI32t6aAwuV7yhK9pDCPoR9ecor/
-	 +3R2An3LrZwjBRcZzDSmsnXnAtqGeKER+a1EFEoLvVHPdhYHPmqRXaG/D8ZlVKi+VGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794073014;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=EL9HwljUGvkt/3N0n8S11b1A5gydTWqrl3vCGm2SOrA=;
+	b=IduG4Jz8cvWjpNUx+EA5lbtAjpiaZNdZwOjPO6zVzgVJppsnchiMcXoHiA5UlxFin29l
+	 BL+pejPm+F2N3+xcnUC7VNDPAFaid1Dc9ClWHZCostRbz1AkwjiNGmjKHtyk3pptaAW9a
+	 VDwjdxsqsffHa9NKWpgs49AkvKdF2XnObNUHnck3otOrlEZy39BTKdf6pRjVH88WwJzur
+	 7EdpNvn3qOvJiP07zTLQ+4nvzDg+ha6Cvd/fTkqrD8wmQp4U+ZMx2VEoLCDC9T4JH9hK8
+	 xDvIxmdXNrkJYxgDd8eWw37O2v/fQ2bYND99cJ3sQdVMut84lrbV6RUj550jV0wXs1Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ib8e0nFB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC246606A32C;
-	Sat,  7 Nov 2026 16:40:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DC8A1F0089F;
-	Sat,  7 Nov 2026 16:40:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A74AD606A326;
+	Sat,  7 Nov 2026 17:36:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ib8e0nFB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EB471F0089F;
+	Sat,  7 Nov 2026 17:36:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794073013;
+	bh=EL9HwljUGvkt/3N0n8S11b1A5gydTWqrl3vCGm2SOrA=;
+	h=From:To:Cc:Subject:Date;
+	b=ib8e0nFBDRD5x/vWsZV00Bk8adCjjSLNFnrkJWs6QkYzS3lFonTLbTdKBsHmwl/7q
+	 7FEwjd4t6gPXHTUtEDj9YvH1otB1S/3VVnOAAN+/JwOk8ZXnW/oCwnvF1s53kq3Rn7
+	 +VA0WO99FLXpTHwimLjqASGrMgxv0Cwslo81Q3e+VrhVGL5uNUfmgCwF1Ga10+Xdw9
+	 ivMHccVC9QbTrgS7eSRXTnV6IHImgrpIIwawotDV47a33HGNElPpoEbPdOtZqrUZG2
+	 mNklYKhms2lR398VzpLGuyEM4wiOJThKJutC4hd21miHK/HPS4Vu4AFKK2xNuYURgI
+	 j3AwGlcVdLeFQ==
+From: Vladimir Zapolskiy <vz@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Conor Dooley <conor+dt@kernel.org>,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org
+Subject: [PATCH v2 0/4] clk: qcom: Add SM8350 camera clock controller
+Date: Sat,  7 Nov 2026 19:36:17 +0200
+Message-ID: <20261107173621.3538964-1-vz@kernel.org>
+X-Mailer: git-send-email 2.51.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -36,79 +66,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] PCI: qcom: Power on pwrctrl devices for
- firmware-managed hosts
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, linux-pci@vger.kernel.org, 
- lpieralisi@kernel.org, kwilczynski@kernel.org, robh@kernel.org, 
- bhelgaas@google.com, krishna.chundru@oss.qualcomm.com, 
- bartosz.golaszewski@oss.qualcomm.com, deepti.jaggi@oss.qualcomm.com, 
- yadu.mg@oss.qualcomm.com, shengchao.guo@oss.qualcomm.com, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <CAFkd8hu2aLp_MGbT3Lt0wv96sUQ705fBsaa_sn3P1_XUuruKYw@mail.gmail.com>
-References: <20261105101521.434361-1-zhangfei.gao@oss.qualcomm.com>
- <auyUXp1Fgk2yC7fZ@debian>
- <CAFkd8hu2aLp_MGbT3Lt0wv96sUQ705fBsaa_sn3P1_XUuruKYw@mail.gmail.com>
-Date: Sat, 07 Nov 2026 22:10:42 +0530
-Message-Id: <179406964231.65886.10596417299119607614.b4-reply@b4>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1969;
- i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=jaCY8HUzhyhSMMPiHqi4Fxf0VtDkX8gvIrfoWBqCNzU=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq71SLApPfRmhrU5GP/ZAEfiQYaGa3Fzl55nRVL
- /lyomfA7S+JATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCau9UiwAKCRBVnxHm/pHO
- 9Y/3CACKuMlSiJqG9S2SlOe7uSTm946oOt3cgsfeSZ3336Noajm0mDXI/InAHb342H+/7bEAKoz
- cDudP+i6xayXz8KY8aQTT4p9DAT0Ov8L2WN4TV2C1cOzQnLbhisevPFy83LPwm+aITQEpfl4fbw
- GvfytiQEsObXcvY/LUcAYb/UpU2rWZDgTu0m4TYb4wAE9Pjb5cUsS5/Slx7CtB3LSLww6TU4fWa
- 9wMiiskUJxLqso10g7/8Pjg9zZHdRQpbJr5vHsNPtm2avhuAQtoyCEbV/kOQDws8AJf+FaycK2R
- tTvDAKsyUVenFPh8WuYAZaJXsodvsgdGsLHu99FKBrR3sa4O
-X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
- fpr=C668AEC3C3188E4C611465E7488550E901166008
 
-On 2026-11-06 10:24 +0800, Zhangfei Gao wrote:
-> On Thu, Nov 5, 2026 at 10:37 PM Manivannan Sadhasivam <mani@kernel.org> wrote:
-> >
-> > On Thu, Nov 05, 2026 at 06:15:21PM +0800, Zhangfei Gao wrote:
-> > > commit b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power
-> > > on/off, destroy APIs") switched PCI pwrctrl users to explicit create and
-> > > power control APIs, but only added the calls to the regular DesignWare
-> > > host initialization path.
-> > >
-> > > Firmware-managed hosts bypass that path and probe the ECAM host bridge
-> > > directly. Endpoints already powered by firmware, such as NVMe devices,
-> > > remain discoverable. Endpoints that rely on Linux pwrctrl and pwrseq,
-> > > such as WCN7850, remain powered off and cannot be discovered.
-> > >
-> >
-> > NACK. For FW initialized platforms, FW should power on the Endpoints before
-> > booting Linux.
-> 
-> Thanks Mani for the clarification.
-> 
->   To confirm, for a firmware-initialized PCIe host, is the platform
->   firmware expected to perform the complete board-level Endpoint power
->   sequence as well, rather than only initializing the PCIe controller?
-> 
+Add the camera clock controller (CAMCC) for Qualcomm SM8350 SoC, the
+clock configuration was taken from camcc-lahaina.c from msm-5.10.
 
-Yes. By the time the Root Complex power domain gets turned on (which happens
-before the controller driver probe), both the controller and Endpoint should be
-ready.
+CAM_CC_PLL0 runs at 1200MHz, which requires the SVS_L1 level of the MX
+rail, so it is set as the MX performance state in the device tree node.
 
->   On this platform, WCN7850 requires PMAU0102-E GPIOs 6/7/8 to enable its
->   power rails and GPIO10 for WLAN_EN. Should firmware assert these GPIOs
->   before Linux probes the ECAM host bridge and keep the Endpoint powered,
->   including across suspend/resume as appropriate?
-> 
->   If so, we will drop this driver change and coordinate the required
->   platform firmware update.
-> 
+Changes from v1 to v2:
+* removed linux/mod_devicetable.h explicit include per ask (Uwe),
+* PLL2 AUX2 input cannot be used in a meaningful way, removed it (Sashiko bot),
+* Lucid 5LPE PLLs should not fallback to Trion configuration (Sashiko bot).
 
-Yes. All the initialization required to power on the Endpoint should be done
-by the firmware when the SCMI power domain for RC gets enabled. And when the
-controller driver probes and scans the bus, the device should be visibile.
+Link to v1:
+* https://lore.kernel.org/all/20261104001704.2744766-1-vz@kernel.org/
 
-- Mani
+Vladimir Zapolskiy (4):
+  dt-bindings: clock: qcom: Add SM8350 camera clock controller
+  clk: qcom: clk-alpha-pll: Add Lucid 5LPE PLL type
+  clk: qcom: Add SM8350 camera clock controller driver
+  arm64: dts: qcom: sm8350: Add camera clock controller
+
+ .../bindings/clock/qcom,sm8350-camcc.yaml     |   69 +
+ arch/arm64/boot/dts/qcom/sm8350.dtsi          |   15 +
+ drivers/clk/qcom/Kconfig                      |    9 +
+ drivers/clk/qcom/Makefile                     |    1 +
+ drivers/clk/qcom/camcc-sm8350.c               | 2646 +++++++++++++++++
+ drivers/clk/qcom/clk-alpha-pll.c              |   19 +
+ drivers/clk/qcom/clk-alpha-pll.h              |    1 +
+ include/dt-bindings/clock/qcom,sm8350-camcc.h |  149 +
+ 8 files changed, 2909 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/clock/qcom,sm8350-camcc.yaml
+ create mode 100644 drivers/clk/qcom/camcc-sm8350.c
+ create mode 100644 include/dt-bindings/clock/qcom,sm8350-camcc.h
+
+-- 
+2.51.0
 
