@@ -1,47 +1,51 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794075147;
-	b=bJHLYqBeHzUbT1y+2qyq1duRbsalnwZeP1QIpv6LVCkWMyZDhjq5cXNCAA8VJfDtDlEE
-	 E0oqT8UWFsSvJtQoQr6+wafYqoYKvD7weeq2l+dczQZGRLcmskFCq1TIQ0slPGUxWNJ9H
-	 HcaXhzdLLDAPfmZ34RfG+ylE1X9vuIxZjR7hIqzrd2j5RsBVhNO9Ekw123SNoTOgUYlrO
-	 rHIkBZ09dDaKbEo748h1v+ORVmaPQLsRh9DnWf1zGodU1G0Xvce/uIQvARURJ49ousVJ1
-	 yVnIWKQKjonuj8eIi8IqcZOuZOR4dz7r3sCZIxAK+F8EW8ICwnltaImdoF0BvrQasTw==
+	t=1794076015;
+	b=MTO+oh0BAAJAcIYc4gtNaTJML0V8X1YePjz0JCZujKLIe8uLPyWPfJHeUQw2dwMPMiJN
+	 DKQDGwR1BLUFkFcFF7CJHXQOrHits4Wi/Qivr3F4PGxx3K9hF0IecvnwXWlp98Gqr4Wva
+	 Bo5iuUJTmkh4W0yeBJqnXN8aysjR5A4mJYWy30vtdfupuT49/JF3FXabRIIBphZZaQk6/
+	 mBvPJ1QC1W+004RLFJ4KFtjjGHAS+PypiyVhE1UBexPMljtHCsYIZjfnPDh/y0P8Zjz7I
+	 Md70SY57c+MTxJOK8NUdFUkVGCETsi2NKLh3jT2RoI3bxiF44T+VEspX4ERiK38z7LQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794075147;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794076015;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:MIME-Version:Date:From:To:
+	 Cc:Subject:In-Reply-To:References:Message-ID:X-Sender:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=4R2s70KmYw92u+iVJhGjnlNSdaRf1beLlhZJ6ki9VqY=;
-	b=LJWl1s/BQAOk9aNDP0T14J8l8x4t9UvZ6Kjca7Fn6XrHdm4M/6p2MjiZ2GJzLOKWVUPx
-	 gBGAi9OQxlve2iOkoqygbPq4RKicrT+OxGZUIKc+zmZJU4ioWjl4pWWjjB1dXRfLU3FYp
-	 0E+E47kpD4lYMVDCDgFx5a9L2KqVooaja7826m+vmvDFz/km1iIeolmz9QQES3QVE86IB
-	 kjsWqmZDJkKq28O7+okYwB4vDvUTZlQSwasJTDk1MM73JUVJA2jP7M4Mtj+ZysSl3rTvG
-	 SiSPMEnFpsQL9rRpEVltYVKxRzRNK8Z+sTj4tPSsZHaD56a5bnIFoTSyBZ2V2i+Gwqg==
+	bh=2OlRM02ztzV8yXMDP77XNgprV2JIB+WYt2A0aFSyZMc=;
+	b=vztioxiy5Ilaslk1ShOL69jVYsDHyxMy5B9gi1BQAfFYxP9j51MxMClWcdrHZBVcT4yH
+	 bNmrtBRNo+Am2VRtRdsyfgL7ZyRemMmbMXza9nVPAcbhdLn7WzsBzkobmzBeKRltB+rhK
+	 xQcbk3AklD/4Gj8NE/CA5m/XZLKh49M6SENe9syhcoSQoC5VsRIznm+KvazqpIyXFxKTW
+	 NwyX7K30QgNZP8PPNcyeSZvNzE6waTm5L6fUjdzijrfpYh4vO7xrp7IZFxRrU+EnvoF8r
+	 gCWaz5C51S75iAqkxPXPco2Qbu+dWKOqpSe4DqcIeItL0yMQ1RNUboiYc+iZ+WG9Orw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m148RFx6;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=mainlining.org;
+	spf=pass smtp.mailfrom=mainlining.org;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=hSEEV9P5;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b="/Vwv3R33";
+	arc=none smtp.remote-ip=5.75.144.95
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B29E606A326;
-	Sat,  7 Nov 2026 18:12:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41B45606A326;
+	Sat,  7 Nov 2026 18:26:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 41B45606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m148RFx6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66B0C1F0089F;
-	Sat,  7 Nov 2026 18:12:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794075147;
-	bh=4R2s70KmYw92u+iVJhGjnlNSdaRf1beLlhZJ6ki9VqY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=m148RFx6G+Es5ZDhvyOZ7tVHK7SITgNjNLNFccWfPi+wNTMXPyUmzc2XwbRtdy7BD
-	 7OSMMjZOyjMrCTwePXhXTZmwEEXz5U9rjI+I0XLO4QSpCkbpRkVyHHKuFv7JcCD01v
-	 7KXWbzJb4bhFZgYWzzVqn0sAvUOkvcP/pPhcmUZTySs3G1iM0oWugvuO+DAr5KAr+H
-	 RrGcoZ+WY7QAYIxTcid78LYB+63WljhJd7JHrBM/N6nmgz+GcR33QVBPZB11scF9gQ
-	 7ttF0LYXZRHTXczHwiccxUvaaQnQiXC22gRgiPQvEGQJnnC+N9KFZTYx98c6SGrzRs
-	 xHWVCp8+jirrw==
-Message-ID: <a3be2e35-13ee-4e8a-b231-5aa0326f6933@kernel.org>
-Date: Sat, 7 Nov 2026 20:12:19 +0200
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=hSEEV9P5;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=/Vwv3R33
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
+	h=Message-ID:Subject:To:From:Date; t=1794076007; bh=2OlRM02ztzV8yXMDP77XNgp
+	rV2JIB+WYt2A0aFSyZMc=; b=hSEEV9P5sqF3ukXJhiL2b1F9dvHrOwgXybl1NfFAH3Lgyc2rO+
+	Bg2YEhdQSfBRo76c5FdKiUwKjlvoU+gIyXeaTMumqOWua1D6a442gs92NIYRR2hCOzzNqQADnuH
+	EVzcCz79u36abnM3YgAN53zFrivzs2nqg+uyYWxB/rNDajO47kCoy74XaS4mCyD+DLiSaHC6jtW
+	zl07HGVK7qeQdEHdYOCWUEa5BmH2rip8+DyrRRprtqhksdTU2cevsFLXtQoWqw0tLN4cMu5ewhr
+	g4mhZdxcaOGFRD484URtRO43K5kdTn20je8KBV5hRLibXFfPjfxllgdg9DMhThtqQSg==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
+	h=Message-ID:Subject:To:From:Date; t=1794076007; bh=2OlRM02ztzV8yXMDP77XNgp
+	rV2JIB+WYt2A0aFSyZMc=; b=/Vwv3R33hPs6BXwzRj4FjBlZG5PUj2kx+biifQHVdDRrXXPcHN
+	cVtMPxzLf7iJZnaMBMpwmpHfHIICfQ97KsDw==;
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,172 +55,823 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] arm64: dts: qcom: sm8350: Add CCI device tree nodes
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Robert Foss <rfoss@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Andi Shyti <andi.shyti@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org
-References: <20261104230529.3040285-1-vz@kernel.org>
- <20261104230529.3040285-3-vz@kernel.org>
- <CAFEp6-3x9P7Q3+RESpMo7mKNYqn6ed0XswSJhhr1nFyHg-w22g@mail.gmail.com>
-From: Vladimir Zapolskiy <vz@kernel.org>
-In-Reply-To: <CAFEp6-3x9P7Q3+RESpMo7mKNYqn6ed0XswSJhhr1nFyHg-w22g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Sat, 07 Nov 2026 19:26:47 +0100
+From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
+ <barnabas.czeman@mainlining.org>
+To: Amir Hanip <killdeath104@gmail.com>
+Cc: andersson@kernel.org, konradybcio@kernel.org,
+ linux-arm-msm@vger.kernel.org, abelvesa@kernel.org, conor+dt@kernel.org,
+ devicetree@vger.kernel.org, krzk+dt@kernel.org,
+ linux-kernel@vger.kernel.org, robh@kernel.org, a39skl@gmail.com,
+ konrad.dybcio@oss.qualcomm.com
+Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: sm6115-xiaomi-lemon: Split out a
+ common dtsi
+In-Reply-To: <20261107141432.39099-3-killdeath104@gmail.com>
+References: <20261107141432.39099-1-killdeath104@gmail.com>
+ <20261107141432.39099-3-killdeath104@gmail.com>
+Message-ID: <daea291c5b5d3b1ff87bbeaac4b08083@mainlining.org>
+X-Sender: barnabas.czeman@mainlining.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Loic.
-
-On 11/5/26 10:37, Loic Poulain wrote:
-> On Thu, Nov 5, 2026 at 12:05 AM Vladimir Zapolskiy <vz@kernel.org> wrote:
->>
->> Add Camera Control Interface (CCI) controller device tree nodes and pin
->> configurations of the I2C busses to SM8350 SoC dtsi.
->>
->> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
->> ---
->>   arch/arm64/boot/dts/qcom/sm8350.dtsi | 147 +++++++++++++++++++++++++++
->>   1 file changed, 147 insertions(+)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/sm8350.dtsi b/arch/arm64/boot/dts/qcom/sm8350.dtsi
->> index a51942c99f8a..41dff3736061 100644
->> --- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
->> @@ -10,6 +10,7 @@
->>   #include <dt-bindings/clock/qcom,gcc-sm8350.h>
->>   #include <dt-bindings/clock/qcom,gpucc-sm8350.h>
->>   #include <dt-bindings/clock/qcom,rpmh.h>
->> +#include <dt-bindings/clock/qcom,sm8350-camcc.h>
->>   #include <dt-bindings/clock/qcom,sm8350-videocc.h>
->>   #include <dt-bindings/dma/qcom-gpi.h>
->>   #include <dt-bindings/firmware/qcom,scm.h>
->> @@ -2830,6 +2831,88 @@ videocc: clock-controller@abf0000 {
->>                          #power-domain-cells = <1>;
->>                  };
->>
->> +               cci0: cci@ac4f000 {
->> +                       compatible = "qcom,sm8350-cci", "qcom,msm8996-cci";
->> +                       reg = <0 0x0ac4f000 0 0x1000>;
->> +                       interrupts = <GIC_SPI 460 IRQ_TYPE_EDGE_RISING>;
->> +                       power-domains = <&camcc TITAN_TOP_GDSC>;
->> +
->> +                       clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
->> +                                <&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
->> +                                <&camcc CAM_CC_CPAS_AHB_CLK>,
->> +                                <&camcc CAM_CC_CCI_0_CLK>,
->> +                                <&camcc CAM_CC_CCI_0_CLK_SRC>;
->> +                       clock-names = "camnoc_axi",
->> +                                     "slow_ahb_src",
->> +                                     "cpas_ahb",
->> +                                     "cci",
->> +                                     "cci_src";
->> +
->> +                       pinctrl-0 = <&cci0_0_default &cci0_1_default>;
->> +                       pinctrl-1 = <&cci0_0_sleep &cci0_1_sleep>;
->> +                       pinctrl-names = "default", "sleep";
->> +
->> +                       #address-cells = <1>;
->> +                       #size-cells = <0>;
->> +
->> +                       status = "disabled";
->> +
->> +                       cci0_i2c0: i2c-bus@0 {
->> +                               reg = <0>;
->> +                               clock-frequency = <1000000>;
->> +                               #address-cells = <1>;
->> +                               #size-cells = <0>;
->> +                       };
->> +
->> +                       cci0_i2c1: i2c-bus@1 {
->> +                               reg = <1>;
->> +                               clock-frequency = <1000000>;
->> +                               #address-cells = <1>;
->> +                               #size-cells = <0>;
->> +                       };
->> +               };
->> +
->> +               cci1: cci@ac50000 {
->> +                       compatible = "qcom,sm8350-cci", "qcom,msm8996-cci";
->> +                       reg = <0 0x0ac50000 0 0x1000>;
->> +                       interrupts = <GIC_SPI 271 IRQ_TYPE_EDGE_RISING>;
->> +                       power-domains = <&camcc TITAN_TOP_GDSC>;
->> +
->> +                       clocks = <&camcc CAM_CC_CAMNOC_AXI_CLK>,
->> +                                <&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
->> +                                <&camcc CAM_CC_CPAS_AHB_CLK>,
->> +                                <&camcc CAM_CC_CCI_1_CLK>,
->> +                                <&camcc CAM_CC_CCI_1_CLK_SRC>;
->> +                       clock-names = "camnoc_axi",
->> +                                     "slow_ahb_src",
->> +                                     "cpas_ahb",
->> +                                     "cci",
->> +                                     "cci_src";
->> +
->> +                       pinctrl-0 = <&cci1_0_default &cci1_1_default>;
->> +                       pinctrl-1 = <&cci1_0_sleep &cci1_1_sleep>;
->> +                       pinctrl-names = "default", "sleep";
->> +
->> +                       #address-cells = <1>;
->> +                       #size-cells = <0>;
->> +
->> +                       status = "disabled";
->> +
->> +                       cci1_i2c0: i2c-bus@0 {
->> +                               reg = <0>;
->> +                               clock-frequency = <1000000>;
->> +                               #address-cells = <1>;
->> +                               #size-cells = <0>;
->> +                       };
->> +
->> +                       cci1_i2c1: i2c-bus@1 {
->> +                               reg = <1>;
->> +                               clock-frequency = <1000000>;
->> +                               #address-cells = <1>;
->> +                               #size-cells = <0>;
->> +                       };
->> +               };
->> +
->>                  camcc: clock-controller@ad00000 {
->>                          compatible = "qcom,sm8350-camcc";
->>                          reg = <0 0x0ad00000 0 0x10000>;
->> @@ -3348,6 +3431,70 @@ tlmm: pinctrl@f100000 {
->>                          gpio-ranges = <&tlmm 0 0 204>;
->>                          wakeup-parent = <&pdc>;
->>
->> +                       cci0_0_default: cci0-0-default-state {
->> +                               /* SDA, SCL */
->> +                               pins = "gpio107", "gpio108";
->> +                               function = "cci_i2c";
->> +                               drive-strength = <2>;
->> +                               bias-pull-up;
+On 2026-11-07 15:14, Amir Hanip wrote:
+> Move the nodes shared with the other Xiaomi SM6115 variants (Redmi 9T
+> and Poco M3) into sm6115-xiaomi-lime-common.dtsi, so that the other
+> variants can reuse them. No functional change intended: the
+> decompiled lemon DTS is identical before and after, except for the
+> numbering of auto-generated phandles.
 > 
-> I had similar comments on a different platform, but why pull-up here
-> (for SCL/SDA)?
+> Signed-off-by: Amir Hanip <killdeath104@gmail.com>
+> ---
+>  .../boot/dts/qcom/sm6115-xiaomi-lemon.dts     | 317 +----------------
+>  .../dts/qcom/sm6115-xiaomi-lime-common.dtsi   | 335 ++++++++++++++++++
+>  2 files changed, 336 insertions(+), 316 deletions(-)
+>  create mode 100644 
+> arch/arm64/boot/dts/qcom/sm6115-xiaomi-lime-common.dtsi
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts 
+> b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts
+> index 881e05b701..2caaca3033 100644
+> --- a/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts
+> +++ b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts
+> @@ -5,41 +5,17 @@
+> 
+>  /dts-v1/;
+> 
+> -#include "sm6115.dtsi"
+> -#include "pm6125.dtsi"
+> -#include "pmi632.dtsi"
+>  #include <dt-bindings/leds/common.h>
+> -
+> -/delete-node/ &pil_adsp_mem;
+> -/delete-node/ &pil_gpu_mem;
+> -/delete-node/ &pil_ipa_fw_mem;
+> -/delete-node/ &pil_ipa_gsi_mem;
+> +#include "sm6115-xiaomi-lime-common.dtsi"
+> 
+>  / {
+>  	model = "Xiaomi Redmi 9T";
+>  	compatible = "xiaomi,lemon", "qcom,sm6115";
+> -	chassis-type = "handset";
+> 
+>  	aliases {
+>  		mmc0 = &sdhc_2;
+>  	};
+> 
+> -	chosen {
+> -		#address-cells = <2>;
+> -		#size-cells = <2>;
+> -		ranges;
+> -
+> -		framebuffer0: framebuffer@5c000000 {
+> -			compatible = "simple-framebuffer";
+> -			reg = <0 0x5c000000 0 (2340 * 1080 * 4)>;
+> -			width = <1080>;
+> -			height = <2340>;
+> -			stride = <(1080 * 4)>;
+> -			format = "a8r8g8b8";
+> -			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
+> -		};
+> -	};
+> -
+>  	backlight_dsi: backlight-dsi {
+>  		compatible = "led-backlight";
+>  		leds = <&led_backlight>;
+> @@ -49,38 +25,12 @@ backlight_dsi: backlight-dsi {
+>  		status = "disabled";
+>  	};
+> 
+> -	gpio-keys {
+> -		compatible = "gpio-keys";
+> -
+> -		pinctrl-0 = <&vol_up_n>;
+> -		pinctrl-names = "default";
+> -
+> -		key-volume-up {
+> -			label = "Volume Up";
+> -			linux,code = <KEY_VOLUMEUP>;
+> -			gpios = <&pm6125_gpios 5 GPIO_ACTIVE_LOW>;
+> -			debounce-interval = <15>;
+> -			linux,can-disable;
+> -			wakeup-source;
+> -		};
+> -	};
+> -
+>  	reserved-memory {
+>  		pil_adsp_mem: memory@53400000 {
+>  			reg = <0x0 0x53400000 0x0 0x2600000>;
+>  			no-map;
+>  		};
+> 
+> -		pil_ipa_fw_mem: memory@55a00000 {
+> -			reg = <0x0 0x55a00000 0x0 0x10000>;
+> -			no-map;
+> -		};
+> -
+> -		pil_ipa_gsi_mem: memory@55a10000 {
+> -			reg = <0x0 0x55a10000 0x0 0x5000>;
+> -			no-map;
+> -		};
+> -
+>  		pil_gpu_mem: memory@fa400000 {
+>  			reg = <0x0 0xfa400000 0x0 0x2000>;
+>  			no-map;
+> @@ -108,19 +58,6 @@ vph_pwr: vph-pwr-regulator {
+>  	};
+>  };
+> 
+> -&dispcc {
+> -	/* Prevent simplefb from dying until we wire panel driver */
+> -	status = "disabled";
+> -};
+> -
+> -&gpi_dma0 {
+> -	status = "okay";
+> -};
+> -
+> -&gpu {
+> -	status = "okay";
+> -};
+> -
+>  &i2c1 {
+>  	status = "okay";
+> 
+> @@ -158,118 +95,13 @@ &mdss_dsi0_out {
+>  	data-lanes = <0 1 2 3>;
+>  };
+> 
+> -&pil_cdsp_mem {
+> -	reg = <0x0 0x51a00000 0x0 0xa00000>;
+> -};
+> -
+> -&pm6125_gpios {
+> -	vol_up_n: vol-up-n-state {
+> -		pins = "gpio5";
+> -		function = "normal";
+> -		power-source = <0>;
+> -		bias-pull-up;
+> -		input-enable;
+> -	};
+> -};
+> -
+> -&pmi632_typec {
+> -	status = "okay";
+> -
+> -	connector {
+> -		compatible = "usb-c-connector";
+> -
+> -		power-role = "dual";
+> -		data-role = "dual";
+> -		self-powered;
+> -
+> -		typec-power-opmode = "default";
+> -		pd-disable;
+> -
+> -		vbus-supply = <&pmi632_vbus>;
+> -
+> -		ports {
+> -			#address-cells = <1>;
+> -			#size-cells = <0>;
+> -
+> -			port@0 {
+> -				reg = <0>;
+> -				pmi632_hs_in: endpoint {
+> -					remote-endpoint = <&usb_dwc3_hs>;
+> -				};
+> -			};
+> -
+> -			port@1 {
+> -				reg = <1>;
+> -				pmi632_ss_in: endpoint {
+> -					remote-endpoint = <&usb_qmpphy_out>;
+> -				};
+> -			};
+> -		};
+> -	};
+> -};
+> -
+> -&pmi632_vbus {
+> -	regulator-min-microamp = <500000>;
+> -	regulator-max-microamp = <1000000>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&pon_pwrkey {
+> -	status = "okay";
+> -};
+> -
+> -&pon_resin {
+> -	linux,code = <KEY_VOLUMEDOWN>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&qupv3_id_0 {
+> -	status = "okay";
+> -};
+> -
+> -&remoteproc_adsp {
+> -	status = "okay";
+> -};
+> -
+> -&remoteproc_cdsp {
+> -	status = "okay";
+> -};
+> -
+> -&remoteproc_mpss {
+> -	status = "okay";
+> -};
+> -
 
-Here the setting was literally copied from the downstream pad configuration
-of CCI SDA/SCL lines, likely the same has been done for other platforms too.
-
-> Do we expect boards to lack the external pull-ups
-> required by I2C?
-
-The I2C spec requires pull-ups, but I believe it does not require external
-pull-ups explicitly, so there should be no contradiction with the spec.
-
-> If not, enabling the internal pull-ups seems
-> unnecessary. Also, what is their effective resistance on these
-> platforms? Aren't they typically too weak to meet the rise-time
-> requirements of most I2C modes anyway?
-
-Likely you are right that the internal pull-ups alone are too weak to get
-the I2C bus functional on higher bus speeds.
-
-What's your preference on this subject, do you wish to see 'bias-disabled'
-instead? I won't have objections against it.
-
--- 
-Best wishes,
-Vladimir
+You should not override rpm_request node here, you can use the labels
+from the common to change the ranges like:
+&pm6125_s7 {
+    regulator-min-microvolt = <1280000>;
+    regulator-max-microvolt = <2080000>;
+};
+>  &rpm_requests {
+>  	regulators-0 {
+> -		compatible = "qcom,rpm-pm6125-regulators";
+> -
+> -		pm6125_s6: s6 {
+> -			regulator-min-microvolt = <304000>;
+> -			regulator-max-microvolt = <1456000>;
+> -		};
+> -
+>  		pm6125_s7: s7 {
+>  			regulator-min-microvolt = <1280000>;
+>  			regulator-max-microvolt = <2080000>;
+>  		};
+> 
+> -		pm6125_s8: s8 {
+> -			regulator-min-microvolt = <1064000>;
+> -			regulator-max-microvolt = <1304000>;
+> -		};
+> -
+> -		pm6125_l1: l1 {
+> -			regulator-min-microvolt = <952000>;
+> -			regulator-max-microvolt = <1152000>;
+> -		};
+> -
+> -		pm6125_l4: l4 {
+> -			regulator-min-microvolt = <488000>;
+> -			regulator-max-microvolt = <1000000>;
+> -		};
+> -
+>  		pm6125_l5: l5 {
+>  			regulator-min-microvolt = <1648000>;
+>  			regulator-max-microvolt = <2960000>;
+> @@ -278,11 +110,6 @@ pm6125_l5: l5 {
+>  			regulator-always-on;
+>  		};
+> 
+> -		pm6125_l6: l6 {
+> -			regulator-min-microvolt = <576000>;
+> -			regulator-max-microvolt = <656000>;
+> -		};
+> -
+>  		pm6125_l7: l7 {
+>  			/* sdhci2 vdd-io-bias supply */
+>  			regulator-min-microvolt = <1256000>;
+> @@ -291,51 +118,11 @@ pm6125_l7: l7 {
+>  			regulator-always-on;
+>  		};
+> 
+> -		pm6125_l8: l8 {
+> -			regulator-min-microvolt = <400000>;
+> -			regulator-max-microvolt = <728000>;
+> -		};
+> -
+> -		pm6125_l9: l9 {
+> -			regulator-min-microvolt = <1800000>;
+> -			regulator-max-microvolt = <2000000>;
+> -		};
+> -
+> -		pm6125_l10: l10 {
+> -			regulator-min-microvolt = <1704000>;
+> -			regulator-max-microvolt = <1904000>;
+> -		};
+> -
+>  		pm6125_l11: l11 {
+>  			regulator-min-microvolt = <1768000>;
+>  			regulator-max-microvolt = <1952000>;
+>  		};
+> 
+> -		pm6125_l12: l12 {
+> -			regulator-min-microvolt = <1624000>;
+> -			regulator-max-microvolt = <1984000>;
+> -		};
+> -
+> -		pm6125_l13: l13 {
+> -			regulator-min-microvolt = <1504000>;
+> -			regulator-max-microvolt = <1952000>;
+> -		};
+> -
+> -		pm6125_l14: l14 {
+> -			regulator-min-microvolt = <1704000>;
+> -			regulator-max-microvolt = <1904000>;
+> -		};
+> -
+> -		pm6125_l15: l15 {
+> -			regulator-min-microvolt = <2920000>;
+> -			regulator-max-microvolt = <3232000>;
+> -		};
+> -
+> -		pm6125_l16: l16 {
+> -			regulator-min-microvolt = <1704000>;
+> -			regulator-max-microvolt = <1904000>;
+> -		};
+> -
+>  		pm6125_l17: l17 {
+>  			regulator-min-microvolt = <1152000>;
+>  			regulator-max-microvolt = <1384000>;
+> @@ -346,21 +133,6 @@ pm6125_l18: l18 {
+>  			regulator-max-microvolt = <1232000>;
+>  		};
+> 
+> -		pm6125_l19: l19 {
+> -			regulator-min-microvolt = <1624000>;
+> -			regulator-max-microvolt = <3304000>;
+> -		};
+> -
+> -		pm6125_l20: l20 {
+> -			regulator-min-microvolt = <1624000>;
+> -			regulator-max-microvolt = <3304000>;
+> -		};
+> -
+> -		pm6125_l21: l21 {
+> -			regulator-min-microvolt = <2400000>;
+> -			regulator-max-microvolt = <3600000>;
+> -		};
+> -
+>  		pm6125_l22: l22 {
+>  			regulator-min-microvolt = <2952000>;
+>  			regulator-max-microvolt = <2960000>;
+> @@ -369,11 +141,6 @@ pm6125_l22: l22 {
+>  			regulator-always-on;
+>  		};
+> 
+> -		pm6125_l23: l23 {
+> -			regulator-min-microvolt = <3200000>;
+> -			regulator-max-microvolt = <3400000>;
+> -		};
+> -
+>  		pm6125_l24: l24 {
+>  			regulator-min-microvolt = <2704000>;
+>  			regulator-max-microvolt = <3600000>;
+> @@ -382,23 +149,9 @@ pm6125_l24: l24 {
+>  };
+> 
+>  &sdhc_2 {
+> -	cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
+> -
+> -	pinctrl-0 = <&sdc2_state_on>, <&sdc2_cd_on>;
+> -	pinctrl-1 = <&sdc2_state_off>, <&sdc2_cd_off>;
+> -	pinctrl-names = "default", "sleep";
+> -
+> -	vmmc-supply = <&pm6125_l22>;
+> -	vqmmc-supply = <&pm6125_l5>;
+>  	/* No binding for vdd-io-bias on L7*/
+>  	no-sdio;
+>  	no-mmc;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&sleep_clk {
+> -	clock-frequency = <32764>;
+>  };
+> 
+>  &spi2 {
+> @@ -406,8 +159,6 @@ &spi2 {
+>  };
+> 
+>  &tlmm {
+> -	gpio-reserved-ranges = <14 4>; /* Fingerprint SPI */
+> -
+>  	lm3692x_bl_active: lm3692x-active-state {
+>  		pins = "gpio99";
+>  		function = "gpio";
+> @@ -422,20 +173,6 @@ mdss_dsi_active: mdss-dsi-active-state {
+>  		bias-disable;
+>  	};
+> 
+> -	sdc2_cd_on: sdc2-cd-on-state {
+> -		pins = "gpio88";
+> -		function = "gpio";
+> -		drive-strength = <2>;
+> -		bias-pull-up;
+> -	};
+> -
+> -	sdc2_cd_off: sdc2-cd-off-state {
+> -		pins = "gpio88";
+> -		function = "gpio";
+> -		drive-strength = <2>;
+> -		bias-disable;
+> -	};
+> -
+>  	te_active: te-active-state {
+>  		pins = "gpio81";
+>  		function = "mdp_vsync";
+> @@ -443,55 +180,3 @@ te_active: te-active-state {
+>  		bias-pull-down;
+>  	};
+>  };
+> -
+> -&ufs_mem_hc {
+> -	vcc-max-microamp = <600000>;
+> -	vcc-supply = <&pm6125_l24>;
+> -	vccq2-max-microamp = <600000>;
+> -	vccq2-supply = <&pm6125_l11>;
+> -	vdd-hba-supply = <&pm6125_l18>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&ufs_mem_phy {
+> -	vdda-phy-supply = <&pm6125_l4>;
+> -	vdda-pll-supply = <&pm6125_l12>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&usb {
+> -	status = "okay";
+> -};
+> -
+> -&usb_dwc3 {
+> -	maximum-speed = "high-speed";
+> -};
+> -
+> -&usb_dwc3_hs {
+> -	remote-endpoint = <&pmi632_hs_in>;
+> -};
+> -
+> -&usb_hsphy {
+> -	vdd-supply = <&pm6125_l4>;
+> -	vdda-pll-supply = <&pm6125_l12>;
+> -	vdda-phy-dpdm-supply = <&pm6125_l15>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&usb_qmpphy {
+> -	vdda-phy-supply = <&pm6125_l4>;
+> -	vdda-pll-supply = <&pm6125_l12>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&usb_qmpphy_out {
+> -	remote-endpoint = <&pmi632_ss_in>;
+> -};
+> -
+> -&xo_board {
+> -	clock-frequency = <19200000>;
+> -};
+> diff --git a/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lime-common.dtsi 
+> b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lime-common.dtsi
+> new file mode 100644
+> index 0000000000..16883e35b5
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lime-common.dtsi
+> @@ -0,0 +1,335 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+> +/*
+> + * Copyright (c) 2026 Adam Skladowski <a39skl@gmail.com>
+> + */
+> +
+> +#include "sm6115.dtsi"
+> +#include "pm6125.dtsi"
+> +#include "pmi632.dtsi"
+> +
+> +/delete-node/ &pil_adsp_mem;
+> +/delete-node/ &pil_gpu_mem;
+> +/delete-node/ &pil_ipa_fw_mem;
+> +/delete-node/ &pil_ipa_gsi_mem;
+> +
+> +/ {
+> +	chassis-type = "handset";
+> +
+> +	chosen {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		framebuffer0: framebuffer@5c000000 {
+> +			compatible = "simple-framebuffer";
+> +			reg = <0 0x5c000000 0 (2340 * 1080 * 4)>;
+> +			width = <1080>;
+> +			height = <2340>;
+> +			stride = <(1080 * 4)>;
+> +			format = "a8r8g8b8";
+> +			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
+> +		};
+> +	};
+> +
+> +	gpio-keys {
+> +		compatible = "gpio-keys";
+> +
+> +		pinctrl-0 = <&vol_up_n>;
+> +		pinctrl-names = "default";
+> +
+> +		key-volume-up {
+> +			label = "Volume Up";
+> +			linux,code = <KEY_VOLUMEUP>;
+> +			gpios = <&pm6125_gpios 5 GPIO_ACTIVE_LOW>;
+> +			debounce-interval = <15>;
+> +			linux,can-disable;
+> +			wakeup-source;
+> +		};
+> +	};
+> +
+> +	reserved-memory {
+> +		pil_ipa_fw_mem: memory@55a00000 {
+> +			reg = <0x0 0x55a00000 0x0 0x10000>;
+> +			no-map;
+> +		};
+> +
+> +		pil_ipa_gsi_mem: memory@55a10000 {
+> +			reg = <0x0 0x55a10000 0x0 0x5000>;
+> +			no-map;
+> +		};
+> +	};
+> +};
+> +
+> +&dispcc {
+> +	/* Prevent simplefb from dying until we wire panel driver */
+> +	status = "disabled";
+> +};
+> +
+> +&gpi_dma0 {
+> +	status = "okay";
+> +};
+> +
+> +&gpu {
+> +	status = "okay";
+> +};
+> +
+> +&pil_cdsp_mem {
+> +	reg = <0x0 0x51a00000 0x0 0xa00000>;
+> +};
+> +
+> +&pm6125_gpios {
+> +	vol_up_n: vol-up-n-state {
+> +		pins = "gpio5";
+> +		function = "normal";
+> +		power-source = <0>;
+> +		bias-pull-up;
+> +		input-enable;
+> +	};
+> +};
+> +
+> +&pmi632_typec {
+> +	status = "okay";
+> +
+> +	connector {
+> +		compatible = "usb-c-connector";
+> +
+> +		power-role = "dual";
+> +		data-role = "dual";
+> +		self-powered;
+> +
+> +		typec-power-opmode = "default";
+> +		pd-disable;
+> +
+> +		vbus-supply = <&pmi632_vbus>;
+> +
+> +		ports {
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+> +
+> +			port@0 {
+> +				reg = <0>;
+> +				pmi632_hs_in: endpoint {
+> +					remote-endpoint = <&usb_dwc3_hs>;
+> +				};
+> +			};
+> +
+> +			port@1 {
+> +				reg = <1>;
+> +				pmi632_ss_in: endpoint {
+> +					remote-endpoint = <&usb_qmpphy_out>;
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&pmi632_vbus {
+> +	regulator-min-microamp = <500000>;
+> +	regulator-max-microamp = <1000000>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&pon_pwrkey {
+> +	status = "okay";
+> +};
+> +
+> +&pon_resin {
+> +	linux,code = <KEY_VOLUMEDOWN>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&qupv3_id_0 {
+> +	status = "okay";
+> +};
+> +
+> +&remoteproc_adsp {
+> +	status = "okay";
+> +};
+> +
+> +&remoteproc_cdsp {
+> +	status = "okay";
+> +};
+> +
+> +&remoteproc_mpss {
+> +	status = "okay";
+> +};
+> +
+Please add the missing regulators.
+> +&rpm_requests {
+> +	regulators-0 {
+> +		compatible = "qcom,rpm-pm6125-regulators";
+> +
+> +		pm6125_s6: s6 {
+> +			regulator-min-microvolt = <304000>;
+> +			regulator-max-microvolt = <1456000>;
+> +		};
+> +
+> +		pm6125_s8: s8 {
+> +			regulator-min-microvolt = <1064000>;
+> +			regulator-max-microvolt = <1304000>;
+> +		};
+> +
+> +		pm6125_l1: l1 {
+> +			regulator-min-microvolt = <952000>;
+> +			regulator-max-microvolt = <1152000>;
+> +		};
+> +
+> +		pm6125_l4: l4 {
+> +			regulator-min-microvolt = <488000>;
+> +			regulator-max-microvolt = <1000000>;
+> +		};
+> +
+> +		pm6125_l6: l6 {
+> +			regulator-min-microvolt = <576000>;
+> +			regulator-max-microvolt = <656000>;
+> +		};
+> +
+> +		pm6125_l8: l8 {
+> +			regulator-min-microvolt = <400000>;
+> +			regulator-max-microvolt = <728000>;
+> +		};
+> +
+> +		pm6125_l9: l9 {
+> +			regulator-min-microvolt = <1800000>;
+> +			regulator-max-microvolt = <2000000>;
+> +		};
+> +
+> +		pm6125_l10: l10 {
+> +			regulator-min-microvolt = <1704000>;
+> +			regulator-max-microvolt = <1904000>;
+> +		};
+> +
+> +		pm6125_l12: l12 {
+> +			regulator-min-microvolt = <1624000>;
+> +			regulator-max-microvolt = <1984000>;
+> +		};
+> +
+> +		pm6125_l13: l13 {
+> +			regulator-min-microvolt = <1504000>;
+> +			regulator-max-microvolt = <1952000>;
+> +		};
+> +
+> +		pm6125_l14: l14 {
+> +			regulator-min-microvolt = <1704000>;
+> +			regulator-max-microvolt = <1904000>;
+> +		};
+> +
+> +		pm6125_l15: l15 {
+> +			regulator-min-microvolt = <2920000>;
+> +			regulator-max-microvolt = <3232000>;
+> +		};
+> +
+> +		pm6125_l16: l16 {
+> +			regulator-min-microvolt = <1704000>;
+> +			regulator-max-microvolt = <1904000>;
+> +		};
+> +
+> +		pm6125_l19: l19 {
+> +			regulator-min-microvolt = <1624000>;
+> +			regulator-max-microvolt = <3304000>;
+> +		};
+> +
+> +		pm6125_l20: l20 {
+> +			regulator-min-microvolt = <1624000>;
+> +			regulator-max-microvolt = <3304000>;
+> +		};
+> +
+> +		pm6125_l21: l21 {
+> +			regulator-min-microvolt = <2400000>;
+> +			regulator-max-microvolt = <3600000>;
+> +		};
+> +
+> +		pm6125_l23: l23 {
+> +			regulator-min-microvolt = <3200000>;
+> +			regulator-max-microvolt = <3400000>;
+> +		};
+> +	};
+> +};
+> +
+> +&sdhc_2 {
+> +	cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
+> +
+> +	pinctrl-0 = <&sdc2_state_on>, <&sdc2_cd_on>;
+> +	pinctrl-1 = <&sdc2_state_off>, <&sdc2_cd_off>;
+> +	pinctrl-names = "default", "sleep";
+> +
+> +	vmmc-supply = <&pm6125_l22>;
+> +	vqmmc-supply = <&pm6125_l5>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&sleep_clk {
+> +	clock-frequency = <32764>;
+> +};
+> +
+> +&tlmm {
+> +	gpio-reserved-ranges = <14 4>; /* SE5 SPI (fingerprint), not usable 
+> from Linux */
+> +
+> +	sdc2_cd_on: sdc2-cd-on-state {
+> +		pins = "gpio88";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-pull-up;
+> +	};
+> +
+> +	sdc2_cd_off: sdc2-cd-off-state {
+> +		pins = "gpio88";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +};
+> +
+> +&ufs_mem_hc {
+> +	vcc-max-microamp = <600000>;
+> +	vcc-supply = <&pm6125_l24>;
+> +	vccq2-max-microamp = <600000>;
+> +	vccq2-supply = <&pm6125_l11>;
+> +	vdd-hba-supply = <&pm6125_l18>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&ufs_mem_phy {
+> +	vdda-phy-supply = <&pm6125_l4>;
+> +	vdda-pll-supply = <&pm6125_l12>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&usb {
+> +	status = "okay";
+> +};
+> +
+> +&usb_dwc3 {
+> +	maximum-speed = "high-speed";
+> +};
+> +
+> +&usb_dwc3_hs {
+> +	remote-endpoint = <&pmi632_hs_in>;
+> +};
+> +
+> +&usb_hsphy {
+> +	vdd-supply = <&pm6125_l4>;
+> +	vdda-pll-supply = <&pm6125_l12>;
+> +	vdda-phy-dpdm-supply = <&pm6125_l15>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&usb_qmpphy {
+> +	vdda-phy-supply = <&pm6125_l4>;
+> +	vdda-pll-supply = <&pm6125_l12>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&usb_qmpphy_out {
+> +	remote-endpoint = <&pmi632_ss_in>;
+> +};
+> +
+> +&xo_board {
+> +	clock-frequency = <19200000>;
+> +};
