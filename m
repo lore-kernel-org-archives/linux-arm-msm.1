@@ -1,105 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794013233;
-	b=ZXygSiGs5KDWtwbOmsQSrtnKSKNz1gdI3owUTo1FisuXTtSrXDr8y21KsVRs/3ftc8lc
-	 vMaan13O/s2mdg90bWjZcLCjMngFCwOz9P8DmdLBYcXL6CCUyNK40IK5qwXbZHnd+Um1b
-	 TA5c9m/Ly4tsnT6w59y0hwpL8laeVXZiCA/CtzzTL+KmGUJElSGwbXDBVl9CL8cNbMJPu
-	 V/d6EXFZufjYfAfOyeCqE0Hm1Rxht9R+7TGfjwaVbKPtj6uvHXn6rbRkO2GiOXcyH9w5g
-	 C7UWzdfMvHBN5K8BGzQmyy52z4j2gaggJXtkBFwsAJvwD+WFPvPX0haMqFV06DvBT/w==
+	t=1794013316;
+	b=WD6OK7VTS0ggnw0yJqW0KGux7wtgM+fRj7wp5SSIlBFaR3DrVCxf2xNNJuvj/VlUUTtB
+	 VHkh4r9Y6AFbzIvTOz+bWSqGnX9FTh6UbEmwVzn6pWbM3zKj0uVn7K24uX0GG5SMxgLl1
+	 eMSC+SLxlEK/qwo6+mZKWqLBgnEAweEtCZWVvm4itj4cxjwcVHW59MHr3BDcP2k8h5wHw
+	 fSIMPTrptkhd2s37jOfHvUvL7gP3QkYx941FVrb9WJjr4oalY9hH8UbYQbQYh+CcK9lgP
+	 Zp5Vnl03b+5c69ZVNGgjd0ULs8TVPmosike0Jym4UnsOEDnq4ikhMNMG9cWLW/ffgVw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794013233;
-	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
-	 X-Mimecast-MFC-AGG-ID:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=16HUaCp2sq85hg8bU8Q79JWawMIdomwhEGR1N+tBFQs=;
-	b=izWpfluqiZOUpue7xrkv386z5XJBuEdyv8cLQGBLWnFd4NscvwiSn2oKy/R33mLQfxks
-	 t46lufFJyxI/0E9Qfday2w4B8XDC/9Uh+gjq/R340ruJMDigwXpY9+EGbV4gYoneKaB5N
-	 RVTED+dsSg373XqVEyH5qSqEnboanJk+Kd98rJq02ME0CcGDjoTzvIAphLfgJChpQhf/b
-	 HkjppDDHAlQSaZG7Y5VrBDAj31GIu6LcYPkSAlCZ6e1BjrTnl7vpx9Bfv0GEanj7s9LRB
-	 dVQgRrASEqexkqklYQ1nJYJjTUwngTVrubdaipu+feJucclwhh/lr3cOpUJnHdvNXxQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794013316;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:X-Google-Original-From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=5x1hCgkbydzPy3+Bb7/xMpBTwiuhiZeF+iFtW3CiqaQ=;
+	b=YPhrjjdoJjmJZ5XPa+1aPCHUmEbVrj2vuah+qbnDYQHfX21tjsj+D52moDyNk0/KA7ij
+	 9q9dH8IXLhSspH31h6FkedCFpb3vuCVoLFBSM7pvG+2/e2/4oIsr6P/218hkLdE7SbMX8
+	 Wp+SBpZCAfHxRAkhMulLBPg+l3VUKhhbYNeTSCXl1O7fAveT9VeZUv2/JEFteUOen7x1I
+	 zVBfsaIHJw/KrRQJEunbNHr6OJaAKu6gzO3kk3on+l+Lgl+vjMtsDZzFl0LHQpfFmNIUy
+	 VqdeHQRsf7ZrKowYjyRKv2MPQscijPIPUaOVddZEAh8MJzerh1Qrfnd831wBaBbMBoA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=redhat.com;
-	spf=pass smtp.mailfrom=redhat.com;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WRs+idO1;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b="H1o1rsr/";
-	arc=none smtp.remote-ip=170.10.129.124
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=SRGpRQFX;
+	arc=none smtp.remote-ip=209.85.128.53
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 534E2606A339
-	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 01:00:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 534E2606A339
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A67FA606A32E
+	for <linux-arm-msm@vger.kernel.org>; Sat,  7 Nov 2026 01:01:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A67FA606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WRs+idO1;
-	dkim=pass (2048-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=H1o1rsr/
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1794013232;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=16HUaCp2sq85hg8bU8Q79JWawMIdomwhEGR1N+tBFQs=;
-	b=WRs+idO1Vg1+9/cIcz58RKTS16tfOmXdzq7aFKTSgJMFwocUP/scsJOujHiy4kXf4xuOou
-	txaGLEftgfjl3D7Sdlz6LRB5bhnVcKijZbUyAlCRD0CGhqKblQrI02ojgJztGcYAwZxc9N
-	+UxQSIzxCNn/po6WJd9avSyMwWGMGSk=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-135-yRgLROSKOkO8YvTMcbiSEw-1; Fri, 06 Nov 2026 20:00:28 -0500
-X-MC-Unique: yRgLROSKOkO8YvTMcbiSEw-1
-X-Mimecast-MFC-AGG-ID: yRgLROSKOkO8YvTMcbiSEw_1794013228
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93f37c94ceeso41818185a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 17:00:28 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=SRGpRQFX
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4a35a60499eso10213815e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 06 Nov 2026 17:01:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1794013228; x=1794618028; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=linaro.org; s=google; t=1794013314; x=1794618114; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=16HUaCp2sq85hg8bU8Q79JWawMIdomwhEGR1N+tBFQs=;
-        b=H1o1rsr/2mqMrxPsgD491WDG1WDzWaeymjA/zevZ0pM+5Z3soifg5kXw4qHmmF+FoU
-         QKoDgO7IC2fMauxGX3VRulFpYCtvMsGND2wTDVUVIcHlrdhSyqWtYOhhItRJchITPpSx
-         Lq5RvILUV7waSY/lFJ42/ANlhUYUOUPau7bNbg85LZLZINpKwjHwrKsB90NT2FUrTknb
-         79pqRgsnUt0Yuwf6utDQSla4RgyfWvettSDu9DrwzPq8r8wjTSeJsFeQpZuJXmayQeU+
-         7ec1mg5bnyXnX/zVrAdHhm/kaD1vFvs20D8V+1D/oDNG4Nk1cI7I3Z5sHXY1XE9UQZn8
-         j+JA==
+        bh=5x1hCgkbydzPy3+Bb7/xMpBTwiuhiZeF+iFtW3CiqaQ=;
+        b=SRGpRQFXm9zSVjDFtdHcHKivvR/NJIMFHSj8T9ngAoMZQrUXmzTFswGbASyvcwHI23
+         Pa0s/Rb3bCgVFKsn5zEurdsKn4h3ylQWA9heXFy5Mhs/OXHGPr3XUgMQ4JPldHz1fdlR
+         AJ72wr23VPYe9Zpt8cNBlaifAs+/uWRclfYk0ItVXiIy67AqDv8elL4m1cPs3L8nZbbP
+         VWaf23IYTZMqC6G6qYhOX5YXj8ocBMHn+ITPbYXjvtMbkrLU6GU7ykQW+SgG1NTKzOOV
+         XwavTErgQel59OZ2gDYR2HQPeEWWZ7DRP5aaHUprc3U2aewBiVWRVMQmm+nm9g7Kz4PA
+         Sm+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794013228; x=1794618028;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=16HUaCp2sq85hg8bU8Q79JWawMIdomwhEGR1N+tBFQs=;
-        b=NX87Tc3eJnFZjuRMpSjYxt/5keHK363PG1mgNJsNk3jqjhZoTlADlg655ZnNpMlnL1
-         1W169z9o88L/aX649qbf5hIuQAocUuy+LS3SvYn+YTR+OfkPGNG2WzfAvsF97qDQ4+jV
-         F9pfYrhjudzXXIB7Qz/VFrZ6Bq8JHYVBdPzVT1jjXzMsxBuNirAzEWmNMfU9qn2WBJnv
-         2czVO6f0DfBlWFWPZxDY+fUwJ9GEZVoF8oQcT5BQADHdhDLzLMu6LbhZr7keNtSUBTEw
-         IDoW2+Y9RnHA+YGNK9JjAwSA7dt//mZm9MI57fEc7lpeV46KlvVDz+EOy3HPnJ0LwcPO
-         tAnw==
-X-Gm-Message-State: APuU4Z8YSvM3ftRr/9+wO+7NkowQGqlyROTX89x7OA0gej2BzRu0Pb7Z
-	xHvIMMZbJHFuF1ksRX2bPjGRfPEUT7btf9rHDkjGp9tdAyQnPIlU+m/jwiI0YlFh+V/I24aWL8b
-	EP9dR9YGGs/g0SJtYyrERMUchlh4UKKuaCZA7oKrOa+/x52dp2B9vm0aKxXOiKruc0pc=
-X-Gm-Gg: AYBFou2nSDY1frWvOy6caKUchTDr87btnXYHm2QEiGppOvsxUt9C5y8WM8O26fBhwmO
-	S8v2que+FXcXl9BrrtibC7Ich8pTKxyC9rH8mozDWucGO954JFAcGmj5RlHnEmLPsiNHSfzl936
-	t7lG7nzaVi77YyAhqc44yXv87c021Mtr0RJU9CIUlONL9JnAlLDZsNpr7orZsbS/mGXmrCy5bpJ
-	6qbmSkde2MpaIisqFZZgYnRbCtwX0VuS45x+KY2Q5wbX4dOFruT5ahOwXh47NiCixIopY09IMG8
-	R4BpCJvBypp+303g7Qzr1SoRFbIwjL0BxaQ+UZvmRaGPTEuFxXVKq71G1tI6JLxGZdmRyvYqb6K
-	y9S30YdvcndcrG9ExubwOXhlPwbaeRKNAtF8lJzxaq1TfN6f8Z7zk30DzQeTSxzHuh3pkMAPfxg
-	LKB4UbD/9AtiRSutPq
-X-Received: by 2002:a05:620a:258b:b0:944:4e6:85d8 with SMTP id af79cd13be357-94604b8bb36mr113028285a.5.1794013228298;
-        Fri, 06 Nov 2026 17:00:28 -0800 (PST)
-X-Received: by 2002:a05:620a:258b:b0:944:4e6:85d8 with SMTP id af79cd13be357-94604b8bb36mr113021485a.5.1794013227544;
-        Fri, 06 Nov 2026 17:00:27 -0800 (PST)
-Received: from bmasney-x1.rmtuswv.csb ([69.43.42.202])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-945f5a97aa1sm258908585a.8.2026.11.06.17.00.26
+        d=1e100.net; s=20260707; t=1794013314; x=1794618114;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5x1hCgkbydzPy3+Bb7/xMpBTwiuhiZeF+iFtW3CiqaQ=;
+        b=CIg+kKm6OSo0qW5eF0/CKujKS9wraPOGLVUdaFf0HP3KYDJYl51sQ7AuaGe3aP3Bgg
+         FPkZbD6KHBLvkZWnpIX+N29DDNh3SR9Mnk322sMGj0OEUCS+rSvHl2My34QfUIUPkxo0
+         jfoRxJGXJg0u5ukKmBW4K28BxZOe1COsBM7fWy5w3V1+DiIjwKEZGC2Ye8IMW/LpyKBm
+         cm35kYXTV8O3HmhnQG5sWNnxuChPPg/xlGX2WQT5kqBiU1Pd+g/s3qhX2Y3Zjl0ax/0x
+         rn7dviu23v29dV1DXnufJDZGZuT7vtMjOSAH5hU4t/WPthFTeA0mpTU7PHjB4irXtBw5
+         71SA==
+X-Forwarded-Encrypted: i=1; AKwUvByjT7QbwHaXpHj+L3DMwV7Q9GhLoXCCvqwfh3EJyHz/n+9WmbJqEGsWC1ceRg6YFVcsjGq3a99pW3JfSIuW@vger.kernel.org
+X-Gm-Message-State: APuU4Z/HuKma8t85p6OOkWgRZTXKXxbjmzbnvEczVmfWFTxYdo98KD3U
+	lKet9jNoI0Y2zMRqpwUQcv0jkWsUGBNnjEOLxTOmhL2Qw/Z0cn573InDnbOXqq1EMm4=
+X-Gm-Gg: AYBFou39U1MybHrnJDDadZEercyj9VjUFy5dK+PgUQR3bECv4mNEeYNjQXU2HMlg7Kg
+	qOKdYrgbxIF8dYRnUkg0Cawhu4WUDcv9idWKQ0n4H+7k5t58rsqW0de8QOrEXyP5AC4vQGYaoRj
+	6YiA26uSsr1FFN1STaMSpK50hvfAf7BrIFfJLBFaF3Jm9Nlh403MJN1g2DUk1RlpLU3vKSmFmGg
+	SyGYjhva5dYK6bQz7EuWxv50lz5wCo52MdR+RgR2OxGnrqJPz5x3c1oaZ3QhbjfEkDL+MJ6Tyv4
+	CyPv5tLHBfLEgJyCQX899KD/KP5yVXRhrTo4R5woHZF4NAwYzKs7ZHFbppfVzkMVqzkD7qNN7SS
+	gdm9/Aq/c6xI7E9wjBUGbVkp+He8rvlN9e4Pktw/X63wdOPC78DVUYsuZsbD5n26csMANFg9Bvn
+	jGmubfbBhBvxat2fv7ugH+aHUzaJTnaJdbMe/3FmdMhRC7m0UYMpza9uuFfDeRF1spBjFZjVYE0
+	r8hqaqf9fpxxDij+Wsd+PN5CYO58r7Lhp3YCE9J4j84NpWlvarV+/TUOldyy/UOtEaZ38KBkHZ5
+	LNbpXjBKLaIRimYct53MEQ==
+X-Received: by 2002:a05:600c:154a:b0:4a3:18ca:806 with SMTP id 5b1f17b1804b1-4b6dfbac630mr72715075e9.20.1794013313976;
+        Fri, 06 Nov 2026 17:01:53 -0800 (PST)
+Received: from [127.0.0.1] ([109.77.115.215])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b7e3291531sm24526375e9.15.2026.11.06.17.01.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Nov 2026 17:00:27 -0800 (PST)
-From: Brian Masney <bmasney@redhat.com>
-Date: Fri, 06 Nov 2026 20:00:18 -0500
-Subject: [PATCH] dmaengine: qcom: gpi: convert to subsys_platform_driver()
+        Fri, 06 Nov 2026 17:01:53 -0800 (PST)
+From: bryan.odonoghue@linaro.org
+X-Google-Original-From: bod@kernel.org
+Subject: [PATCH v3 00/11] Add SOF sequence logic
+Date: Sat, 07 Nov 2026 01:01:43 +0000
+Message-Id: <20261107-v4l2-frame-sync-v3-0-e5bf7073a35d@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,62 +95,156 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-dma-gpi-subsys-v1-1-b37dcb4ba3c4@redhat.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQwMz3ZTcRN30gkzd4tKk4spiXVNLk8TkZCPDZCPTJCWgpoKi1LTMCrC
- B0bEQPlBlVmpyCcgUpdpaAIShc+dyAAAA
-X-Change-ID: 20261106-dma-gpi-subsys-594acc21c25b
-To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Brian Masney <bmasney@redhat.com>
-X-Mailer: b4 0.17-dev-d96cb
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1232; i=bmasney@redhat.com;
- s=20250903; h=from:subject:message-id;
- bh=jmAzhr4h6GEVM+4TElleiQn0m9dCBbcSbMe6/5AUMZU=;
- b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLLeVajvYHvCrcZnfVhup7ZbVD/jQymBBFPzLpMpT6rOT
- NCwenq6o5SFQYyLQVZMkWVJrlFBROoq23t3NFlg5rAygQxh4OIUgIksS2Fk2CdjtdZB7cIq7daS
- rSkXf0ju6Lrx+d2f5guVLB8/qCeXrGRk2G00j3+l2+FX5xUaTlVI/VNSZuI5/v9s5qyHDMpldzt
- 2MgEA
-X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
- fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XNTQ6CMBCG4auQrq0pA6XWlfcwLqAdoP4U02IjI
+ dzdFhfGGJdv8s0zM/HoDHqyz2biMBhvBhuj2GRE9bXtkBodmwCDKmcgaSivQFtX35D6ySrKdNU
+ 2sqybCisSr+4OW/NcxePp3f7RnFGNiUmL3vhxcNP6MuRp918POWVUF0JK4Fwqvjtc0Fm8bgfXk
+ cQH+ABR+AUgAsBVg1rUQkD7BSzL8gJKO8LgAgEAAA==
+X-Change-ID: 20261029-v4l2-frame-sync-0d6fb94ab6e6
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5459; i=bod@kernel.org;
+ h=from:subject:message-id; bh=HW+7M+gYjZKVNt79/g6HJ64pp0M5Oy6AG3eJDGTc9WA=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq7nh7mUqa5G2eGqvRmaVUmVTqE6en0LdSQrJQs
+ aihRGZoZ/GJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCau54ewAKCRAicTuzoY3I
+ Oh86D/wJkk5uCftkyfmVBjvjzPLSwRBKiuc0+BhJMAoucD1vaPzY2kOdvDhWad6hlFCMkKLS5XK
+ YebcDZJf+HbTVR6jUmpv9XuWmjhvqqYlWsUvPKrdQRH+IBuyD6o9t0Y7hCjYI+3L0u32S5gIqtJ
+ r8EZKIjvjQUZLy6s8nIhC6GI5GGXKsWABTPfHN1Asvp61//oevifsG8TsVmps7osuyegj87AUPy
+ CwHKf3iDkjsvICTQpsWceLVFluxEb4VZiTG5/pQSsTyVytB4vs7zkrFXv57MEnTkqtnI3lbXfUM
+ 0+0/zlIjf2fSxmP0juho1x4JLNwf5dokdGKxEoqWHK1Vf/cUtVa/Mvr3r5nVXgkYSJe2ARjAoNg
+ TnrJVzeO8wg4IBuR1wGBbhRyFq6tOs8WFy4mK0cATrKJhGxDVrrhvMMFOX6d3mm8F12JcCkNwI0
+ z7HkbiJPV11zeC7NpRqnSaWiu605deXTan0Aez3WvuoLDb+dr/6dPc6/3jdvMbVz03aoxp65icq
+ eikpDGWrl4326fe48oFATrj3GG5d2DABIpwy0L8o6UOH55hQcUeE/koNbGukKgnZfE5btrK2nKy
+ idYqjhBEb8VY006Z5wFUqSc10ZDjTVyt1FIsm7b1tPDHL1cdiUVgOp3G1noxv/HYP35KoTLujJ5
+ 6x2DWj6R8XOmzFQ==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-Reduce boilerplate code in this driver and convert it over to use
-the macro subsys_platform_driver().
+v3:
+- Added CSID-340 patches from Loic wit permission - Loic
+- Explains the initial -1. - Loic
+- Drops the .id field enumeration - Gjorgji
+- Accumulates RB as indicated.
+- Link to v2: https://patch.msgid.link/20261102-v4l2-frame-sync-v2-0-25cbed7a772f@kernel.org
 
-Note that this driver is configured in the Kconfig to be a tristate,
-the driver doesn't have suppress_bind_attrs set, and there is no __exit
-function defined. This change will add an __exit function that
-unregisters the platform driver.
+v2:
+- Amends series title to drop EOF
+- Drops EOF inclusion until we actually use it for stats production seq_no - Gjorgji, bod
+- Moves QoS into pm_runtime() callbacks - Loic
+- Switches on vb.sequence change for every SoC the silicon enabling code
+  supports - bod, Loic
+- Link to v1: https://patch.msgid.link/20261029-v4l2-frame-sync-v1-0-d37992559c58@kernel.org
 
-Signed-off-by: Brian Masney <bmasney@redhat.com>
+v1:
+
+This series enables SOF AND EOF event tracking making use of both events.
+Whilst the code is actually very simple the functionality we want to build
+off of that simple code is not.
+
+- SOF
+  Serves two functions. Firstly. Informing user-space of CSID SOF events.
+  Standard Linux V4L2_EVENT_FRAME_SYNC is trigger from this event.
+  User-space wants to capture this trigger because it allows user-space to
+  better align the time a frame begins to events elsewhere such as IMU
+  event timestamps.
+
+  That functionality is directly applicable in this series.
+
+  However we will also build on the SOF event in later patches to allow us
+  to begin programming of shadow-registers for the next camera frame.
+
+  When the EOF event happens, we switch from one shadow bank to the next.
+  This is only possible if you have the SOF event.
+
+  So SOF serves the immediate purpose of timestamp alignment in user-space
+  as well as the 'evil plan' to trigger off of it programming camera
+  parameters for the next frame.
+
+- EOF
+  EOF even on its own is useful because it allows us to increment
+  vb.sequence for each frame as per the spec not just when we have
+  buffer-data.
+
+There is another purpose to having an SOF and EOF event with sequence
+numbers and that is.
+
+User-space submits a parameters buffer. Kernel accepts that parameters
+buffer but can make no guarantee about _when_ the entire buffer will be
+applied.
+
+So when kernel finishes application of the entire params sequence the
+returned buffer contains the sequence number - from the EOF tracking which
+informs user-space _which_ frame vb.sequence its given params buffer was
+applied.
+
+Similarly when kernel produces a statistics buffer that buffer will have a
+sequence number - and that sequence number will align to the frame sequence
+number that the statistics describe.
+
+Thus SOF/EOF tracking is fundamental to passing parameters, returning
+statistics to user-space and for the IPA algorithm in user-space to
+understand which stats, params and frames are related.
+
+The first patch in the series addresses a corner-case when a quiescent
+system can take quite a while to wake from idle, too long in fact such that
+the SOF event is effectively missed.
+
+On 'normal' systems doing lots of things, this is not a problem we would
+see however on my test X1-CRD system running from ramdisk - there's
+basically nothing else happening and the wake-time becomes apparent.
+
+This is not strictly speaking a bugfix since right now nothing in CAMSS
+cares about SOF or EOF so if we take an additional 2.5 ms to process a
+data-buffer on a fully quiescent system, that's not the end of the world.
+
+OTOH as soon as you start to care about SOF/EOF then missing those events
+is no bueno.
+
+The CPU latency value chosen is 100% stolen from IPU7 which seems like a
+good starting point - the stealing obviously - and happens to also work.
+
+This series is really an enabling series for more work to come but even on
+its own is an improvement on the current situation.
+
+Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
 ---
- drivers/dma/qcom/gpi.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+Bryan O'Donoghue (9):
+      media: qcom: camss: Introduce CPU latency QoS during streaming
+      media: qcom: camss: Introduce SOF sequence tracking
+      media: qcom: camss: Use SOF sequence tracking for vb.sequence
+      media: qcom: camss: csid-gen3: Enable RDI SOF driving
+      media: qcom: camss: csid-680: Enable RDI SOF tracking
+      media: qcom: camss: csid-gen2: Enable RDI SOF tracking
+      media: qcom: camss: Switch on frame_sync_en logic for csid-gen3.
+      media: qcom: camss: Switch on frame_sync_en for x1e/x2e
+      media: qcom: camss: Switch on frame_sync_en for csid-gen2
 
-diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index c41bfac65ddf..d6c76ce1846e 100644
---- a/drivers/dma/qcom/gpi.c
-+++ b/drivers/dma/qcom/gpi.c
-@@ -2325,11 +2325,7 @@ static struct platform_driver gpi_driver = {
- 	},
- };
- 
--static int __init gpi_init(void)
--{
--	return platform_driver_register(&gpi_driver);
--}
--subsys_initcall(gpi_init)
-+subsys_platform_driver(gpi_driver);
- 
- MODULE_DESCRIPTION("QCOM GPI DMA engine driver");
- MODULE_LICENSE("GPL v2");
+Loic Poulain (2):
+      media: qcom: camss: csid-340: Enable RDI SOF tracking
+      media: qcom: camss: Switch on frame_sync_en for csid-340
 
+ drivers/media/platform/qcom/camss/camss-csid-340.c | 39 ++++++++++++-
+ drivers/media/platform/qcom/camss/camss-csid-680.c | 18 ++++++
+ .../media/platform/qcom/camss/camss-csid-gen2.c    | 15 +++++
+ .../media/platform/qcom/camss/camss-csid-gen3.c    | 27 +++++++++
+ drivers/media/platform/qcom/camss/camss-csid.c     | 68 +++++++++++++++++++++-
+ drivers/media/platform/qcom/camss/camss-csid.h     | 21 +++++++
+ drivers/media/platform/qcom/camss/camss-vfe-17x.c  |  5 +-
+ drivers/media/platform/qcom/camss/camss-vfe.c      |  9 ++-
+ drivers/media/platform/qcom/camss/camss-vfe.h      |  1 +
+ drivers/media/platform/qcom/camss/camss.c          | 65 ++++++++++++++++++++-
+ drivers/media/platform/qcom/camss/camss.h          |  2 +
+ 11 files changed, 265 insertions(+), 5 deletions(-)
 ---
-base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
-base-tree: git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-change-id: 20261106-dma-gpi-subsys-594acc21c25b
+base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+change-id: 20261029-v4l2-frame-sync-0d6fb94ab6e6
 
 Best regards,
 --  
-Brian Masney <bmasney@redhat.com>
+---
+bod
 
