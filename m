@@ -1,57 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169328;
-	b=fGJ17K51dT+qg4p0o5DftsOr9kMuJhEm2jeW30npxMxekirnfRsBt4i3ytuGQk+86Fdf
-	 6GVlJdWkZV5hYBM00v14rx8nmdqgT+iPktB/NXJ1zFD6Y4viYhmz4QjEnGSmFFLP2hKl1
-	 DYNJyHpRo+Ibr5Qhe2xG3WFgDRp5ID/LICNCdQKNrhnXnoMivAzU/86YLaExPcZF9oYg0
-	 V+XHExZrVqNu2KxFUGbHmjNioGjn276iwA8/5a/kNUdj3Id+V93AU/NP684PrXKw/GMyc
-	 ZgGVC1YBX6iaZwqH8uriK/t0eQBZfASUMhEwquwXjkUM9ONOfKDlFHy+qnCozx+hQxA==
+	t=1794169334;
+	b=xrFqHyd1dT9s1JzncFbBQTesUvQ26Syb83Tl3qn8df1AYg0sgJAyrx2+ZebJ5mKyXQIM
+	 FI7IEMKt8U9QciEnydMCz398iPZDgvKWw2BkgNsF8bQIXpG9/ykNK/OS2IW2O77kF6IRW
+	 d6MgeewAxFDKlEEu7z2RxOnPyQdX22+7dmNiq3pOCl3sROEVMe4Yzz451asYl4oUHWNl6
+	 1jfy3PqHAktYp31PHoK7nxk6QMkb4UxCxZRjoDcnV+8wRa8Q/BRAUcQYzSpgwLoyafFvZ
+	 BrhI5+IU/NKL9+Xesgjho3qodFavjjHpqdAG/2m3dcvb4miFHKyno2BDe7J/V1KUmZg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169328;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169334;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=vtsGbCDjTxvwF9SlKyOf7Se6ZKoifvH9uincnKlACbE=;
-	b=b8lPpW4Kl5CyPldgqLbEcFmEnrCKb8/EzqbX9CYjfgzTkJy3nJsQzquUEBNqpbDOVYyg
-	 c3yW3o2OKlIHgVIo4Rb2uodF79Z1QCnifZ8ZC67tWfhpU/ZPbF1n01nf+Z+L3X7gO6tI2
-	 sjk2PtD9Kqht5+J7P5JcE+pwwQduQBiQvrmvMVVEhqfR06bdQh8X4ae8MHn66H0zu6njt
-	 ugEhnxA4zqmrZrzG1F6SlBx/5JTjRggyjBXRETwvHHp8f8Z3EQIIRn5rNFHy6xXkEfWOo
-	 QZg668IJMO+XtS110TCA8u2CpnAMj2h2By8x/WC6ny1YXm8g/88WD+rGXCG10t/bApw==
+	bh=nZVlCUcftHhSJqjJ1AMG/tLB09JAdFuweNRnDedK9bc=;
+	b=roH8pFWuSVbnH0MGF9HwDy8ptrtOh9AJqODLV7ZoeGxGz/oQSYOegR71uOcROLLMXybw
+	 /erL5VFpm7Vrvs7ajnAaWV9nmLtqyWjGUIxU2fG5twj4iQS1oFQHKEwoeh76vKy1qwgx0
+	 1+Cg8e0A1I7Zbmis48E9q+cc+ZjKqqbj1ycwAJKq0IbdKt/jfi70SK4KLrih6pR+bqsi1
+	 nTLHxhDp/+RHFIddwOGEZGTypp0N40h3iA7acvMdppQBZ/NH7mTnCfEf8dSI85KRXLs/k
+	 jbNjyaFXmHoKSeeHbqP71rWW99cypT6B5QGvBM9GLbUm08KBasyo1ICrXNppKkCqR5g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BS4Om4b6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SlYTJ2qw;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71B9F606D81F;
-	Sun,  8 Nov 2026 20:22:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 770AF606D81F;
+	Sun,  8 Nov 2026 20:22:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BS4Om4b6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B89FA1F00900;
-	Sun,  8 Nov 2026 20:22:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SlYTJ2qw
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85D491F00929;
+	Sun,  8 Nov 2026 20:22:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169328;
-	bh=vtsGbCDjTxvwF9SlKyOf7Se6ZKoifvH9uincnKlACbE=;
+	s=k20260515; t=1794169334;
+	bh=nZVlCUcftHhSJqjJ1AMG/tLB09JAdFuweNRnDedK9bc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BS4Om4b62TtOHLd+3QvjMDBYmjiapBwlEYH8q1UFgeHRA8JorMPCv1Mtjp0dCXt4T
-	 UTzXOoJ0s5vFcaADlbhiIagsnqGtD+61QGGK+O1zYoOFaxmZDKVL40s13BZhfurZsx
-	 fFXsqHkzz2Ddc32zbWWQRu26aqx1Rt6rPx7ZkCkMZjVyxKyG8zwpT9ds6oL9cz/QvR
-	 VfUwpZOkUjUxubCtIHoXJbsxloXaqJ8TtSXnNwcuy1ouUc32MtC+k1uhMLMrmrQw3a
-	 3Tc6RnJPJiPV+8ckZ3pXXO7qC/XG7GaO1/gTG98ALwwLVvAHPTRx+HlXYbvAUERatq
-	 B70xYzRPNdDpw==
+	b=SlYTJ2qwcAvS0xTWb+lNgy0oqQkN/DAxrlw0syzQ/pRh/4tu0QMN8XRTwhA90Gev2
+	 S5tiN7aGw72UlqA3meL1noj2lbRbrOyGHh3Kv3yIRlg/GqEeXYBqSm89cdCRCmb1Yb
+	 EK7t3sYrG/hx9lopAyrF66ezB6hjnfzshxXdz/LSYcAqKHFYvVyx3O3JpCRgsS863C
+	 ubDKB+gPp84+JZQf58EM9LmyK4NnMaXPfxZX/QSAsnmHfgWv3CgG34ncMB7kQtK94J
+	 URZP48zA2aEPJKioZvgjwJ0Ewl9nr1iRVI+rnngrkxWaU6vXrhal7KunPgPNPZowwm
+	 AjVWgY722y3EQ==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dale Whinham <daleyo@gmail.com>
 Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] soc: qcom: pd-mapper: Add support for the Qualcomm Shikra SoC
-Date: Sun,  8 Nov 2026 14:19:23 -0600
-Message-ID: <179416929526.628393.7024752953655760934.b4-ty@b4>
+Subject: Re: [PATCH] arm64: dts: qcom: x1-denali: Enable IRIS video codec
+Date: Sun,  8 Nov 2026 14:19:28 -0600
+Message-ID: <179416929268.628393.5887155310474483062.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261030-shikra_pd-v2-1-09bd0394629b@oss.qualcomm.com>
-References: <20261030-shikra_pd-v2-1-09bd0394629b@oss.qualcomm.com>
+In-Reply-To: <20260925-sp11-iris-v1-1-967f1a3a6b6e@gmail.com>
+References: <20260925-sp11-iris-v1-1-967f1a3a6b6e@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,16 +68,26 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 30 Oct 2026 18:03:56 +0530, Anurag Pateriya wrote:
-> Add support for the Qualcomm Shikra SoC to the protection domain mapper.
+On Fri, 25 Sep 2026 21:51:03 +0100, Dale Whinham wrote:
+> Enable the video codec and point it at the Denali firmware.
 > 
-> All Shikra SoC variants (CQM, CQS, IQS) share the same protection
-> domain requirements: cdsp_root_pd, mpss_root_pd, mpss_wlan_pd.
+> With the firmware in place video0 and video1 appear:
+> 
+> $ v4l2-ctl -d /dev/video0 --info --list-formats-out
+>       Driver name      : iris_driver
+>       Card type        : Iris Decoder
+>       Bus info         : plat:aa00000.video-codec:dec
+>       [0]: 'H264' (H.264, compressed, dyn-resolution)
+>       [1]: 'HEVC' (HEVC, compressed, dyn-resolution)
+>       [2]: 'VP90' (VP9, compressed, dyn-resolution)
+>       [3]: 'AV01' (AV1 OBU Stream, compressed, dyn-resolution)
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] soc: qcom: pd-mapper: Add support for the Qualcomm Shikra SoC
-      commit: beddcf213a08577b4ed79944055edbc2c3cde851
+[1/1] arm64: dts: qcom: x1-denali: Enable IRIS video codec
+      commit: 968d33742cb9b8ea676e17eaf48dffdf01dfcbf6
 
 Best regards,
 -- 
