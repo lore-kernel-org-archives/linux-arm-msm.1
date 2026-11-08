@@ -1,61 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169455;
-	b=g90Lw2FZ+CljQrR5ieHZ0M/gjqOf05KveGu3cWm6z1wgXdxDY2gcxc2C456KndMGrWDU
-	 mMWUbhku6IMxzhirxhKyXv4K2egAWRGu99d+aAIVjV4oyHIooJjNYQsJylHY7KsGvJKS5
-	 Z/oy3TY++3ynitlvlXeZIHtDsh4P6cPBPV5bVMfIw2G1rnhfs8m2cyiZ8PJqYef3cAkw6
-	 r5zI8MnHPEEwRCCbodXjW2HEXlQCsl4lWXEqK7ZP0IaFq/sta/7n7d2d2BhAhjX0NevdY
-	 sK220qNpvBC2/Ny/rqzxG3Iz3aoPPnZmXlwoHNJHAz7WhrTMT0FfT5zWbAdwiVvouxg==
+	t=1794169465;
+	b=fnv4qN97Dx+HCyZFfC/WuXs+ftDLGVOBHOVtwvyHNZSIJIv4LnCzsOcW6Jto469oAVb6
+	 V835sQvbcbK17IETi4dcH8SPpNK9n0TbdMYsVhNJN7LJc36dXimLObwJv7nCf0shGELQJ
+	 DAQlpA3szg56iire5RyB7UkwPYuk9j59N40nrFLEky1/nIa5bdjJzHyJCj35p+/fYhJqv
+	 puA1cMWz0NDEx1trtKFGMU4ydMfpp7oaY2x6PecDpn5reXg9x7OFELw7X65+IDgjuv2v5
+	 oSNmOE6QAr3u5VkVfmGFUtkbGT0poXZNq6Z1mpqXFAed1FzS+Cb0ixIfvxtLseQpx1Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169455;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169465;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=nGMLpiWvH9sKNGbpE6506yen0eFWFmvv9vK9HigzotQ=;
-	b=H0Gy+uJtnfaUn4x0Ew/33rKqu8G1x/PgJ0HUNB8/wu2/41zJi3kByK3t8eIvSJnzD/F/
-	 AeZOxr4gny/LghIq+OeZyZTChZTmXn7p5mqsYQuhcpFsn892Y6bgkh1XX0bbJSlRVcoQL
-	 qVlYkJoF2sq3eRLWSM1Qjx57tH5LjIzcwJD/gfik7GQ4achmBhQKsULN7cHw+KQS55X0w
-	 FOLVspfBFQNjp61ga7zJj8a+kA7tjdvToNLZV7+NLZ3WQoigaDQZhAcUPzBJSQ9yMscGx
-	 6OUAMWNe0iwDVgz5+7Sj7j7Bc4WFTGfgahW3V8Y0eYFeiU94DIXtU4uMElpYw86/ubw==
+	bh=n6N/bEIXZaIV4f0J7zo3jGCxDzx9d7Kua/mIE+rUuQM=;
+	b=jqTH1VdlkA4boVh5PpjvtGLWpyMD8wrcDcjtpsN5YXVlbK2moazcp7NAiqf6N61Alrhg
+	 Q1k+zOJPqkTEZYr/lGnhSNUObULcFVeYcDWpMSPgkkJzLZ34j0CchomRGUlkij+N3dXcZ
+	 6LKt/jSElbTMXb0kho1tB4JR3WB1/fCJFYfFKAs65lhSXaZV3kl8jFnlf0uaG2W7AKq8m
+	 3RbXj8p+qv+y6YDoBbXGGvslp9QP5NQnJxpeeULltwNd3ISdR5qkogEjs0qNRUfeMV6x4
+	 xDDK6APKcd03/SZNsi7PH8zItx2wPnwKWUIfgYpUsfffr1sd2JFsO969GULTkviKCZA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cmg+OBd4;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RINOYv1z;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DEC96078A85;
-	Sun,  8 Nov 2026 20:24:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A40A607A740;
+	Sun,  8 Nov 2026 20:24:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cmg+OBd4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E7761F0089F;
-	Sun,  8 Nov 2026 20:24:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RINOYv1z
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AE221F0089F;
+	Sun,  8 Nov 2026 20:24:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169455;
-	bh=nGMLpiWvH9sKNGbpE6506yen0eFWFmvv9vK9HigzotQ=;
+	s=k20260515; t=1794169465;
+	bh=n6N/bEIXZaIV4f0J7zo3jGCxDzx9d7Kua/mIE+rUuQM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Cmg+OBd4qnK7CsNmvyUIIqmU6aX15hA4RR3x5YDwr6YU7WcSkmDGQGWK7Ob1fkxp+
-	 wM+80iErSERT1C/NYpK2+k2k1sGdd9nfUY4o0GJvk3dMXcmaReyPGtpvjQN2oUve8U
-	 v+NcViM3JrigeERZZ7ANLw1NDS/WvbZ8cySkMCufdFoOIAJonNpwJ0Eg9hIjym6vte
-	 XswG1sE/7Iai5D/T3iimY83if24wenET1a0lmk3m6ur4CFJzJ4Y8KTQPyeEuazAMwp
-	 2Qa/CL1fUWnhBfpjLdNXyRLdoZESMIhVxufOzCRTpF6t2QPTO+qulF7F3xRplqzloP
-	 Sly8Ol8QMG42g==
+	b=RINOYv1zllflqLC3+st0ZOZO/1q/ZIIccySWqxG2ya19WZnrHSQPLUQZJO5/UeX4l
+	 0X00gyIGkwiLE7XjC/sq/VcvXxZ7iSDKcP5re542tW+K5e0m0aUwmcXBuvTNic53+a
+	 CqcfJET1fUr1ii1S3HdkJu7QYy+nVR+7yhrPRN8dMQFh+FKD5Qqhjs44TL0AiZfvc2
+	 nSC6FYFiQvE+0OpRJqgKiE4i1fGqDxE+ykjldZmxJWtTTAnNagA28YHeUrNIUsLdcI
+	 GD0yIKiV7xfCltsEo1fg0GO55lsyitKpzGmGw+AudGkN53MhEG8rx+p2PsstHCLZAG
+	 uSWYthLus4W+A==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+	Abel Vesa <abelvesa@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>
 Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v5] arm64: dts: qcom: sm8650: Add minidump SRAM config to SCM node
-Date: Sun,  8 Nov 2026 14:20:51 -0600
-Message-ID: <179416929219.628393.8049194985355344602.b4-ty@b4>
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v6 0/3] arm64: dts: qcom: allow SM[456]50 HDK board to play audio via I2S
+Date: Sun,  8 Nov 2026 14:20:59 -0600
+Message-ID: <179416929474.628393.2029895802703743256.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260805134436.2817251-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260805134436.2817251-1-mukesh.ojha@oss.qualcomm.com>
+In-Reply-To: <20261026-topic-sm8x50-next-hdk-i2s-v6-0-0bd654b8388d@linaro.org>
+References: <20261026-topic-sm8x50-next-hdk-i2s-v6-0-0bd654b8388d@linaro.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,15 +71,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 05 Aug 2026 19:14:36 +0530, Mukesh Ojha wrote:
-> Point the SCM node at the minidump config slot in the always-on SRAM.
-> Boot firmware reads this word before DDR is initialised on a warm reset
-> to decide where to deliver the minidump.
+On Mon, 26 Oct 2026 10:50:35 +0100, Neil Armstrong wrote:
+> Following [1], this adds the necessary settings to setup
+> the I2S link to the HDMI bridge to allow audio playback.
+> 
+> All dependencies are merged v7.3-rc1
+> 
+> [1] https://lore.kernel.org/all/20260724182446.1484894-1-mohammad.rafi.shaik@oss.qualcomm.com/
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sm8650: Add minidump SRAM config to SCM node
-      commit: 95c893fe67a963a4f1085145c57da561d1f39f25
+[1/3] arm64: dts: qcom: sm8450-hdk: Enable I2S for HDMI
+      commit: c6675cb43fccfdcef1bc64c771c576195ed269d6
+[2/3] arm64: dts: qcom: sm8550-hdk: Enable I2S for HDMI
+      commit: 84feb53ed8a80aa274b030f37e602db03611c304
+[3/3] arm64: dts: qcom: sm8650-hdk: Enable I2S for HDMI
+      commit: 51b94c0b3d65b3f8b6d1ca9489bcf26e21a59f07
 
 Best regards,
 -- 
