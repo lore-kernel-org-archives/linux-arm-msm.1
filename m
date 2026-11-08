@@ -1,62 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169404;
-	b=vWzQNKdy9+LpHaNuFtL6P5OO6dv35rCBrnk23GzROJccHwLimDwDpqB/58tFFegYbMuu
-	 7V5IdLUvUvC+t+7kAnlhauB9PWTWWiilnKfq23IcS8314XquziLwFiDPYxl66Xfdj5GXf
-	 yGOdKRwktF8nk81y5g+TTxU+AeqLKNytnYdOusrgLB9WXwwJwk2G+SjxbP0yC62h7URrg
-	 CC7zTPQfekLZChIw64SJ0w1dxDTR4te52G0Fh/PFrFtjhqk5RDDqzCgioZJXqJJmCTV+x
-	 Nh4ypKm0Lk65bYtIamSXO/1jiiXY0rnad9pwxLH0v2Wa/g43pYo6sS4vLEmTpSbF7zw==
+	t=1794169405;
+	b=tSXLlGSVQ4jAZ4DiP1OEjS7RDaw3vep45SyTdK77VvEshaRbDPDglo2tnpArJ9QgtWan
+	 TpJUclwVjY2G9mGqb9uW7L7Ka8dm6COiGRq3o2M5OERXa0t4AGR36DZOG8bonEmPmBJh+
+	 F+K/HBvy7hAOMNS/36I4rrQW3D2wQOf9fQT8tK41cv70b4NbPyHFUO+cmqvXywLWWTOV/
+	 C7riqTxFnW4+YNdzrqDqkgmdXLp26JBtGWHSrqrUYlq1rERqX8EMHQgVQpCS08qH48Uz0
+	 MwfXY0GN8D3n7e9Agy/Ia/zElCZKJXFQVh7Cj46BlsSOLb0gHadGRycFFdoOfACrm0A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169404;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169405;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=m64o+5a8ILubKLKDQ744vOABCDfgCf3HGpC4zfLipfs=;
-	b=GTnpzmRBic3iRPvgYWMkqFG6aoemXOsCMmSfumJjSb9ZNn8qUWHJDYA1HYq8jic+GEAT
-	 HDrcWrMVoBX2q6Zgas2JQBeWTDNUFjXrjj2ozHDktavxIvUyLuFXsAKeGlpky6AwbXF8G
-	 LJ34DcpMzUlY3nnNIaQSOx43xZDyZGhwamtO3uT89leMJuUIL2Z1Uf1ubHhdiDLMY29/r
-	 lcXVUl9PhvIgNRa7FrD6wwWSgIyFDqBYooetRTKebwhM6Ogcw+zFGeottQh/ugGcEf0ns
-	 GW41DvByeB7xklT0jcxKQxPQMY5lkP/ABQyaD3WQPYO/yoedVxOMHQ/X2NmleJlsRCg==
+	bh=kU06O4DKa9Y8SwOkpvFM1DLhsryWtBjVd1EgIkUN+GY=;
+	b=aAGsCUcDB537zsA2JZn3kG/repRMuDrwLGohOZnYEtTt4zi4pQ0GU+5EmgSKwN9x+Wf3
+	 Ga3XXuB+I+htVvqE0TUi9qn+Qwv1v1r/ff0W+CI5uAad8fo9B8Not5eVZcjjUQaELx2BH
+	 hPFoH44nkPgYGCs3+Xb4DRj2Uj5dqhcVWgH+er+t6Q7Xuwfg4haanOi0cn1+rHeHDW5po
+	 cOC6V+eNwS0LyCOQSjkjHTnUqlaNFpL0MYXqg+/f2SFxxJULHNMgUyj0Qq1f+opTT9zBA
+	 1VC85JNLyJ4GZoRK1HEZH5EHFc7j6/nzGgEh6OiDkGZi0fLW9/uPqnr8D8JicCeWvSg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a3VPMvkh;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FHceo0TB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD3786070CD3;
-	Sun,  8 Nov 2026 20:23:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B78066070CDB;
+	Sun,  8 Nov 2026 20:23:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a3VPMvkh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F0381F008BC;
-	Sun,  8 Nov 2026 20:23:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FHceo0TB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6E9B1F0089F;
+	Sun,  8 Nov 2026 20:23:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169403;
-	bh=m64o+5a8ILubKLKDQ744vOABCDfgCf3HGpC4zfLipfs=;
+	s=k20260515; t=1794169404;
+	bh=kU06O4DKa9Y8SwOkpvFM1DLhsryWtBjVd1EgIkUN+GY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=a3VPMvkhYxbO/C/awmlAOaLDhgXsWHKV8ml6DN9uBG+bRYT2IkD0s5NUx7qCWJK7H
-	 91kzhgJy2S7lYe3KjG1pvY13JlcroOfcuoSub2xzu2SUAGdoxv8FGqLNr3fhz02n3+
-	 sE0r9uMxuKhxmPDfxZOsIMzpSctQV0t8zdjE9i0DrErCSOIy/2SbdUcAcWeRCplyEZ
-	 RzSo4aSeSh81EZ6Z1775f/AABXUCiQbsHPZnv5neocC5tKyVHWRMcvjSuNA/3Pvyae
-	 FKwn6DAo9bCG5GVUCqSJoa3vllI09qa7AweJDRUHWzoJMSycXFAKIwaWzcMDl9BVBe
-	 vKPj3iq24Qbew==
+	b=FHceo0TBWk2NueP+54BXVbc31M0sKpdDxeMZEF4Pa4pz7bWK16m2rchm5Z3jzbRHb
+	 MeTdYKYWEVRcWfm0myNZUu5yJNnafo+FgTY59KaWYXWSJtU/OGVGM67acCqVqBjeqN
+	 2L8D1Ft3h+povNOZ86TUrR7qOWTvHREQxP4evMlfbHn3oLbchGefCOESxpStRJwUYf
+	 kyfMMYIWk0KrTA+tB3bNAjlPkJ9fwddaFsypDJ4DQbplpIrsTtLHN6bOi2PeNAPx2i
+	 7ZYdvblVE8v7ILHEqTUGhZ+nTzD+ySI6y/dZtM4R1HffI3lyijpT8cds6b3RHcCuwc
+	 gsI9vEemmDeGw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Juerg Haefliger <juerg.haefliger@canonical.com>
+To: devicetree@vger.kernel.org,
+	Kaipeng Zeng <kaipeng94@gmail.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: HP OmniBook X14 / EliteBook Ultra G1q cleanups
-Date: Sun,  8 Nov 2026 14:20:09 -0600
-Message-ID: <179416929368.628393.14033068705210306199.b4-ty@b4>
+	conor+dt@kernel.org,
+	krzk+dt@kernel.org,
+	robh@kernel.org,
+	abelvesa@kernel.org,
+	konradybcio@kernel.org
+Subject: Re: (subset) [PATCH v6 0/3] Add device tree for Acer Swift Go Pro AI (SFA14-11)
+Date: Sun,  8 Nov 2026 14:20:10 -0600
+Message-ID: <179416929522.628393.2913043282200216817.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261012-dts-qcom-hp-omnibook-x14-cleanup-v2-0-c859ac395b81@canonical.com>
-References: <20261012-dts-qcom-hp-omnibook-x14-cleanup-v2-0-c859ac395b81@canonical.com>
+In-Reply-To: <20261030064149.14736-1-kaipeng94@gmail.com>
+References: <20261030064149.14736-1-kaipeng94@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,25 +68,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 12 Oct 2026 17:50:57 +0200, Juerg Haefliger wrote:
-> This is a small two patch series that cleans up the device trees for the
-> HP OmniBook X14 family and untangles the HP EliteBook Ultra G1q from them.
+On Fri, 30 Oct 2026 14:41:46 +0800, Kaipeng Zeng wrote:
+> The work started with x1-crd.dtsi as initial template.
+> HDMI refers to ThinkPad T14s.
+> Bluetooth refers to x1-crd.dtsi from the ubuntu-concept kernel [1].
+> PWM brightness control refers to Ratizux's GitHub repository [2].
 > 
-> Patch 1 consolidates the duplicated hamoa-pmics.dtsi include and
-> chassis-type property into the included x1-hp-omnibook-x14.dtsi.
-> 
-> Patch 2 makes the HP EliteBook Ultra G1q a sibling of the OmniBook X14
-> boards instead of a child, so all three (2 x omnibook, 1 x elitebook) are
-> at the same level.
+> Tested on linux-next (next-20261027: 151a134a) / Ubuntu 26.04 LTS.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: x1-hp-omnibook-x14: Consolidate pmics and chassis
-      commit: 2e23434108d955b02e003e732c7643a3b44cda9c
-[2/2] arm64: dts: qcom: hp-elitebook-ultra-g1q: Drop omnibook-x14.dts include
-      commit: ad8560386d0b05e89247ebe7d95b3611367ef309
+[3/3] firmware: qcom: scm: Allow QSEECOM on Acer Swift Go Pro AI
+      commit: dd851d601d63bd157562e7fc054eafdcc2ffd936
 
 Best regards,
 -- 
