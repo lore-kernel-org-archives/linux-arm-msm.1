@@ -1,65 +1,69 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169372;
-	b=xWMjqdGK3IKLz8TEmUabh15hjBiFMBtgJAT8C1Zwy9itFOfdEQza9T191HKXwHklr/Eo
-	 cVBVtc/UaEWLC4hfz7FYu+RjrDfBEA+Eon1F5hVe3cVGf1o0O/dxdSe+vTxcdDsxiJjwZ
-	 0D2REm3ZTKq6ILDKMULX3qt5qWJO+a90xUiw64ms8Ik1m5pnoP+lNdQE2smr/GcTMlzjB
-	 OOE1WbcqGsr3pS895GhPiWNBFoVhoaa/sPfWMG4VQ/k+bmJ6BdDlTX20AkEVTxOv/ozJV
-	 mecHVwYenfLUUaLVktPUlhW87PLHsA3SwZ0ODTapIeCGANf0gMOT3TkO+Ez+2kEajZw==
+	t=1794169369;
+	b=kLZUrcf/dmYk79rtLzeiE2LDA9hz5fxMDjZSI7LrzChDSvhgcioKODboglqyxlXK9S3B
+	 /hTu6jvmFRUI9ALlBCjhohP/YPR7+zH56GaL2lghO1ixGQpZypIkF0hOGTxRmBzz27cFn
+	 NCIvOteht0kSkgsPK7IOJW6GG9yj4gtFTirPOiEubcPkpiedzlr1Ofub+tbeAYjQ/JT3y
+	 lT3exFc4CVUyLDZHXlT83IPLQSYt+s4bjwhV1c9P8x0gD7BjwI85A461+Dw1LWxW5cur2
+	 DLOioR4pfwn/weJgv54WH5KO6XPNm5ZDIRbWSXUux/wC4JmD5IaznJwWciMbP5m8G+g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169372;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169369;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=EbzYZKw4Z4Se0P5JJESGy35Jk+CQhKCQTQ2rrP07VGM=;
-	b=0paHMS+hufaj5jo8WGR2cjEcAHubW6d5gcv71OluX1GoYIcQJFI5sGClPqkwwIkAMpQU
-	 lQpEQ/6ufqXuUCl0Kufkog1Py91mRxDxDQcvy2eOcCXOV+rszb0+ndlc5S4+0/mGmSE2k
-	 nusc5pJAnx8lVk3UL/ysyDE3ZwrX7wQhlq7LS/1M6UTgFmmnvjDmkGT2aj9UtHxg6DGGI
-	 zF+ngEw0lXyGnnOOJfrLaiW5O4nT0AsiowjDL2GnSMoJGN1O7HEho3BEtkOhXxapRZ1jR
-	 F0mphFLPNvySQoaTmgG3VccPEYh7FMmzHMNo+VVpSX8OVsqbWSQeVWMl5XawmZYJ5tQ==
+	bh=100YKRuRKsiW1NaEv+XOz4kg/+neIFnM/cCJIWfyymA=;
+	b=Tdji0IhmxxvMCFPkH++cwO4F/yQCcB7yKuoyFghGNsRnUKSg/O+4VhLzpvtjXFm+/0FE
+	 EFsPBGmGm6Mu6UcJYMBWsTn1PDA160urYjjgpnNh0EuVTsPLwIgud3je0q89qKS4LzSFq
+	 rjfgVw3ENerW+cFNyyUFPzUVGUoN5jFTUg3iGfVqDk4x3p3DWmAGYv4DnkpF1mVXRukVt
+	 KajbWl3DP+s2ohORejGMxgxjHN3iN578LgTZ9yUAICJXpSb5Zj7f1wZDq8MBsH3YGkHJ+
+	 7UgEJHcsuTrPUhnXc0a89yDiTaCh+PY+sG2zUKmAh/+Ysg0DlkMtcpCg/TLN5Zf9VKA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Of2ZblCq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Bbsi5Dcf;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F087E606BA56;
-	Sun,  8 Nov 2026 20:22:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Of2ZblCq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A08F51F0089F;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 376E06082BD9;
 	Sun,  8 Nov 2026 20:22:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Bbsi5Dcf
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 776021F008A2;
+	Sun,  8 Nov 2026 20:22:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169371;
-	bh=EbzYZKw4Z4Se0P5JJESGy35Jk+CQhKCQTQ2rrP07VGM=;
+	s=k20260515; t=1794169369;
+	bh=100YKRuRKsiW1NaEv+XOz4kg/+neIFnM/cCJIWfyymA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Of2ZblCqksLyI3601ikVvMQVdDnmrdQgSjCNRnJlLx4ajHed5Pfy0p3YMUxrvSc4y
-	 x0d19HLapmrTJwUusGHJEPuTSe1XGddpG9Wms6iF+MS4XhUgKc6Nw38r8OEr1Vl5+X
-	 +kGEUd6kKkGvLDd9pxCiq1kZCLdzf1H3mJ2Nmd6hOfRdghmYBWaT6ojxDKmW79Ciff
-	 ApVqGo3fNy2oPqQSSVGHfh9bDb8nghYcQZIvMLNpvFGkoN0bAnAP5/AqVcb21zoDGv
-	 lzh3SmMaAgHe32GREVHCieNFiGtqQO6sn90B6WLH5I034sDeAiFk61E1UYhu3J3CkK
-	 w5Ve1QzveaI7Q==
+	b=Bbsi5DcfbLPN4rWOem9xOAc+Ao0N/PzM99OdQgszZl/X6PdGjx4jkux1bpDjsZKsK
+	 Ela7ifTNISM79PUUewsZx0Y8h6KhsF+lSqeqLSlF/5esHwU2WVnN9ZnV+8C6HZKicd
+	 D95lkNhurZqqz3jXm6r0rZ9F8FbrkGCL3SzAijrtmlRPiNYJKniRq3xBrzAV5nRceo
+	 IW8Fn4HcByfJa1MPwsfcIy6ECF+MAxv6j20351VByfZB/SprwBwF4fjQUllOkK636c
+	 INRAvfJJ0Ww6NkOsl7OHBz4FduLQg0tO1s4olHJZpnYT8rA2eElPOr6B1JJTVIMbyA
+	 e1L3qLeZZXrDA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-	Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
+	Wesley Cheng <quic_wcheng@quicinc.com>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	George Moussalem <george.moussalem@outlook.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-usb@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v2 0/3] arm64: dts: qcom: Add Microsoft Surface Laptop 8th Edition
-Date: Sun,  8 Nov 2026 14:19:48 -0600
-Message-ID: <179416929485.628393.4784056878909364367.b4-ty@b4>
+	Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v4 0/8] Flatten USB Controller Nodes on IPQ SoCs
+Date: Sun,  8 Nov 2026 14:19:47 -0600
+Message-ID: <179416929299.628393.16311614850618605688.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261027-mahua-surface-laptop-v2-0-7dd903a12d22@oss.qualcomm.com>
-References: <20261027-mahua-surface-laptop-v2-0-7dd903a12d22@oss.qualcomm.com>
+In-Reply-To: <20261001-ipq-flatten-usb-v4-0-486a4d5ede30@outlook.com>
+References: <20261001-ipq-flatten-usb-v4-0-486a4d5ede30@outlook.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,21 +77,37 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 27 Oct 2026 00:33:32 -0700, Gopikrishna Garmidi wrote:
-> This series adds initial support for the Microsoft Surface Laptop 13.8"
-> 8th Edition. It's built on Mahua, the 12-core variant of Glymur with
-> cluster2 fused off.
+On Thu, 01 Oct 2026 11:53:43 +0400, George Moussalem wrote:
+> Flatten usb controller node and update to using latest bindings and
+> flattened driver approach.
 > 
-> As on the Surface Laptop 7, the keyboard, fan and platform profile are
-> handled by the Surface Aggregator Module over UART. The rest of the
-> board is close to the Qualcomm reference design.
+> In addition, set the right UTMI clock rate and override any clock
+> rate inherited from the bootloader.
+> 
+> I've split these patches from a larger patch set to add USB3 support on
+> IPQ5018 and IPQ5332 SoCs where these patches are required to ensure new
+> functionality is added to the new flattened driver and binding model.
 > 
 > [...]
 
 Applied, thanks!
 
-[2/3] firmware: qcom: scm: Allow QSEECOM on Surface Laptop 8th Edition
-      commit: d3daf22e99cdec6e684d6d062adde7b081402902
+[1/8] arm64: dts: qcom: ipq5018: Flatten usb controller node
+      commit: 3df51eeb0f7269979f41ec29bfa5d7bf732ac549
+[2/8] arm64: dts: qcom: ipq5332: Flatten usb controller node
+      commit: 6f4b3755dc13c710ddc9379443b8367178c5fd1b
+[3/8] arm64: dts: qcom: ipq5424: Flatten usb controller nodes
+      (no commit info)
+[4/8] arm64: dts: qcom: ipq6018: move DR mode to board DTS
+      commit: a94fc01b1c39772198b238bca35d5024fd928bf3
+[5/8] arm64: dts: qcom: ipq6018: Flatten usb controller nodes
+      commit: 6579a36743c1e7af96bce61f9c8b23d375214dfa
+[6/8] arm64: dts: qcom: ipq8074: move DR mode to board DTS
+      commit: 5a0787dd1acd2783cb81a846208aedbcade2d9c0
+[7/8] arm64: dts: qcom: ipq8074: Flatten usb controller nodes
+      commit: 512f352f2c70434d918654a42103d672936211cc
+[8/8] arm64: dts: qcom: ipq9574: Flatten usb controller node
+      commit: 6ce86653cb091106545e6eb52087466193173afa
 
 Best regards,
 -- 
