@@ -1,60 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169423;
-	b=sBZmBqeegukGNvCFrPbUGJiuDA3QZ8XB5TnUSBWcCYx8ENgyvNq9afc9VWIMWEpG8+de
-	 RcnMOsPN8A+dvukf7FELE9r7n6adHmuq3uUsLTK254/U8sBycQEjlL17Yqa8v59CvI4Ha
-	 h/k3ITSkGgW+k0lDLFZ0RP0/dAQT7frl0MEWGuwO/jBw5A7cBbbvO/bqtaZnDQRCD4jMo
-	 KHIVxVGcKMlhHrxdydUin0/TPyC6EP1mCvDRyAG57urYTcKbB8u2co9btbyM+HIQKCBaq
-	 50bGZcd9nsMvKRvYXolSz2AdqluU39ZnKbLOoZ4Hj3EztOJkbHiussvOc4sKtBVXkGw==
+	t=1794169413;
+	b=zqt3iFv1+ljLjMBVBUCZBR6z4x/3uIw4QwigTPfOI3YDLt2o9KrJRMzHqeDOh63DJ0Hs
+	 9KxO+HC26Edau/SYvzIFQd0f6A+m2CUayCELQFzh4cwj2epRbQ2arvbQ5+7S8MsaTmFDF
+	 91hvRXFaXYAyAaAtVqzdbl/Vrt1GVbZZAdBSCKALqyIueH43TYBuoqvmYtmN91uiHVhwA
+	 q1MJtYJ9iAohUngH+S6ESdtM0wNCURst20ukhogmjaaPShN11q6+4EiDKWEzDOYEhCqXl
+	 74F4BhBdGIZd0YiWS0EMPc+L1BrcqPAoROVj8c7iZ0T9cyMci7PvJwXBbzxOxvyK+IA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169423;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169413;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=TYyy7nmPCHM39Lr/N2xStjZOHbUaxX+2SRFBUq1o/BY=;
-	b=oCbfYNwbq0DMiVngruHxiv0Sy9ky/TmnlvSd6jLnCifCywmZql5xv6LO84hZJt7HKDJe
-	 niXTuUVECyeIBGAfDgZUE2lU/MLgAGIb8ALOc4ZLgAY2SPVPWgoypssVGXgWrmdYedIcY
-	 xFXBv3e4Y+66VqbV4S1ud8wfGIdPOG89SHGuXvTEvT1Go54Ej8GDSyBKNbGPAYjre0lqA
-	 utWSdKKb32V1vP56/m757+AR11ewPFBjykRss0lgztcfj+9IU20b2YQPD1J2yizD0C3IN
-	 e9NqsIYurC7eRWY5luJscjlz8f0yB1ebamz3GV7cexGMocY+aiB39A0+mNPhuTNtzrg==
+	bh=/yCs7JJ/xhhxy/+ux0i9RPaqjj96hZtxDf76I41bozo=;
+	b=Vgpid17YcG+NsvcpxxDjQBV52SDGgj7k8faKaIkVHSA/rGd9mrb1frxroUVsYCdKKu4q
+	 SOXR/uH+ucCZ90DgpzYTo67L3Gp5/4XsnlScY9p+rx+vC7Dq6lFRb3slqEZQmmWjekgUI
+	 7HgXnJRPXZVzTrrosz+JqI+a5q/q37RY2ZF1+XxSwLCZL4jjNkCJgvg16nkHjzAh2m3tl
+	 46tJXwdARf89D/qETbi3D1hgbf5E/dP4N90LBgx9hUs/Wmv/+ZxUbIHP3nLVsxc2Oq8es
+	 PFXyrE+/+zBVznKjtc9BsBSthFXmQ2xZQ2y04ycdYDTCFF7S8cwdswKzZtFsedwzXTA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BO64tI9S;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U2nQaKFJ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC1186073CC3;
-	Sun,  8 Nov 2026 20:23:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 410846071FD7;
+	Sun,  8 Nov 2026 20:23:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BO64tI9S
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C49101F008A1;
-	Sun,  8 Nov 2026 20:23:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U2nQaKFJ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 252221F008A3;
+	Sun,  8 Nov 2026 20:23:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169422;
-	bh=TYyy7nmPCHM39Lr/N2xStjZOHbUaxX+2SRFBUq1o/BY=;
+	s=k20260515; t=1794169413;
+	bh=/yCs7JJ/xhhxy/+ux0i9RPaqjj96hZtxDf76I41bozo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BO64tI9SSg8GSyHDab+n3+2jwAQmYpUcGOHqpK7jgcWWdTnNDOqkIq08ZoNrpJ7GB
-	 JQRwd8R8yc82iTYrQJu1xgTYN1LWjPBAahN11x6Tpra/mN2IhLua2detLL3gKe7pLe
-	 4FiOdEYLTtifgHID/m4FaV/DNmbT2OKJoPOu91NjLDP4rw7XTA6ZqMtAdYbYaLKZpk
-	 dgwthjdevV8piTV8nMPRyNWc/B9BFP3WXYcE8OfzPQts1w/5p+J1mATAk/izNfFQeh
-	 N50elk71RMsFCLBGXIS0iM6u4+nJ8GTgCDA5GpaaBW7DBgVEH6IAyPbn+7B0yW0udn
-	 CaIPscLfx1gXQ==
+	b=U2nQaKFJOOTCt2CWXXJaPZBcunUFmEK+BScK+7EsstGp9CM4YgWIwixC8vEVOJf+B
+	 lm9IplWljuf3E/H3JAeFutEZVDKnWY773Ramp/1PnU/RExdipL6ssvWUSsdPp/IVUS
+	 8E5ykKrdRjlLz0jhjLsjvRIDajowOat5BMQrIE7EqKQOIz7+DR7RhWg7pXe8Gin5Dz
+	 M7r9940dU8XFbgUlTeVrcpYnwPanvbjEEk36ehp8sJVm3HI+LrFW8togT9GNhseYI7
+	 sMGU7/UVmbGMar0EZKbHLJ37YHZ4BqDy14TG+3pwshHep5An6oWWxrDuxSqI5u7KNX
+	 +0i8q71rQJw4Q==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
-	Haotian Zhang <vulab@iscas.ac.cn>,
-	linux-arm-msm@vger.kernel.org,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Sashiko <sashiko-bot@kernel.org>,
-	stable@vger.kernel.org
-Subject: Re: [PATCH] soc: qcom: cmd-db: Fix probe race with possible ERR_PTR dereference
-Date: Sun,  8 Nov 2026 14:20:25 -0600
-Message-ID: <179416929567.628393.17956187622252412553.b4-ty@b4>
+	Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Subject: Re: [PATCH v3] arm64: dts: qcom: shikra-evk: Add GPIO expanders
+Date: Sun,  8 Nov 2026 14:20:17 -0600
+Message-ID: <179416929309.628393.13355049870019917874.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261104151550.215604-2-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20261104151550.215604-2-krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20261001-shikra-gpio-expander-v3-1-d30c1e8067db@oss.qualcomm.com>
+References: <20261001-shikra-gpio-expander-v3-1-d30c1e8067db@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,20 +70,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 04 Nov 2026 16:15:51 +0100, Krzysztof Kozlowski wrote:
-> cmd_db_dev_probe() stores the result of devm_memremap() directly in the
-> global "cmd_db_header" variable and only afterwards validates it, which
-> opens a very short window where a concurrent thread could access and
-> dereference stored ERR_PTR.
-> 
-> Theoretical (not reproduced) race condition could look like:
-> 
-> [...]
+On Thu, 01 Oct 2026 19:19:19 +0530, Komal Bajaj wrote:
+> Add the EVK GPIO expander definitions on the I2C3 bus. Describe the
+> TCA9538 and TCA9539 expanders used by EVK boards.
 
 Applied, thanks!
 
-[1/1] soc: qcom: cmd-db: Fix probe race with possible ERR_PTR dereference
-      commit: 12e45556d58ffddfa34e3bdbf65646b5fab06113
+[1/1] arm64: dts: qcom: shikra-evk: Add GPIO expanders
+      commit: ea7238ab3775e6be3b8ea5b2d44c74eab6b48ee0
 
 Best regards,
 -- 
