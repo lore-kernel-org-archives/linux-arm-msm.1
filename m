@@ -1,63 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169483;
-	b=3AyeHYOKr+n3jlJmxlGsm0p+JLb0VVgCDv2bTEEe7Lhu71CUYugcxIGEhEuI+nWRrzUX
-	 fyYs+aeZn15ZPneDa4CMLu/QiVpows0/rVFDxSs1sYoHV8bnqcDvYQq+dLxzPeKhPX9A4
-	 7r4gvdA8d9u7HlnJ86UGdBuRUOOP8pOAHliPgqCCs7NzYnNz1pDYcUDK77ktZnKAFOCtu
-	 sby4wnjg4XcorOIm1/Nnz5fNp/PurWEqpsO40WRo5hzcn4mFcfQ82+nq+loEcMVs6Z7/W
-	 /vxJ+npgL0LUepybKUn42C/NwPO78VZCmMyUBTLJhdsVSG5nniDXYYRCfoK8UPNliew==
+	t=1794169489;
+	b=dJW6PPwtF2Ntwdy0vRYaRLPfC7SgVrnb4GqQPlm/nLAqFFiVHygt3kjUkU8hD0KUh9kC
+	 L5STrPmNJsWx6RGiqDNITnpxbNiIT7FMymNW4/s3DcyXRXEyB5alNerxlTEOqCus8ZR9m
+	 qF9RnvLMDBBcWj+lWBJ34sMO+ZkK2CXZGEDdwBmr3sktqgZaz2b/Mtb8lKBhbVRxtaE8F
+	 eFUxhIyhnGYWW/u3KO8OiUsB6i/z6SpIzyI5d6UmDgPihcALDYAdYVNbEX6YKhY9dRbIU
+	 87+PtH9QeWVRZgYol7gTdVo99mWhob3LRApKwbbPafB60fKJMhwCg97ZyjujuvG1lAQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169483;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169489;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=+DxLqfIwOo7VRlUwx6jolu+5Jmc67RJLG7kDcqyLb04=;
-	b=aSpQ6dAl+FnFm1OtRaEzAQTdKLLCTD+8eXEig+p9ELP/qh2M0f9bmURJk9qWH4khxoe6
-	 /y1XWoAHeC1Jgrm/HJxe23wpU9jdmRVYuVejIojLzWOiyRSw9TQlXiadxsrRHqRpK66CT
-	 1WSz1S7Qgs+q1ac961ZF1/18IY8B3shz90lEbSAUh8tOO+MUcf/ELoVoPom5bLir2kRaj
-	 REHzjC4MVBX03E09Xtlrthyv4JCwXtYbmpPUOYARGIluCxtqWO/pNKqtBH0+IMn2c7jcr
-	 K3whkBbT95paEZgYGTA9ushahaEJxIGq6IVfFsbRmaLRZVKbHkzyVM/mue1ZFnOKx5A==
+	bh=w8uhzyRaGWUhsMu8IuTgrC6/zzS19CC2AK16twSCOAg=;
+	b=Pm+Zmbpad1TRZUWJhub1JOqSvmqgrP6US5gLh2iHwfjBRnsfJDXpL3vttHHLruOkOfub
+	 NlHk5M+DXvJqLXhnqgRn1TPnMAkZi4kvcrpI8/LF0q9uDpLh1R7CWuutbc4bol5a+psg8
+	 QY0BSxaO2UZnS52QDOyY8rji13y8MiNHV0jLkXnHHmcSkv7Lz+yG5Q//UrQT0XlQT36Nl
+	 pXDSIfTMooqAzvZEPdYakgA0mPt8kgon2bErN632OLzUMbDiyHioOrwx50ANGNK2Bz3ow
+	 1YX7eMGgKNMiGViAAR/GtfO913tnmfFVfn/aC+ZXDNSABEtltRW6H+NpEZ4qJ6wQoTg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eDki3D5+;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lD8Bvp4H;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDF0F607E4B6;
-	Sun,  8 Nov 2026 20:24:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54DA3607F90E;
+	Sun,  8 Nov 2026 20:24:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eDki3D5+
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C08BF1F008A2;
-	Sun,  8 Nov 2026 20:24:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lD8Bvp4H
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44B221F008A3;
+	Sun,  8 Nov 2026 20:24:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169482;
-	bh=+DxLqfIwOo7VRlUwx6jolu+5Jmc67RJLG7kDcqyLb04=;
+	s=k20260515; t=1794169489;
+	bh=w8uhzyRaGWUhsMu8IuTgrC6/zzS19CC2AK16twSCOAg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=eDki3D5+q6G1OZevm7cto9dCalFzPxfeUIZa6LfzTnm/mjweblbBv9lV4kGuPIKsj
-	 vAipsOW+97rXvQJadIkMh9FP1tMj9uvpNlP5jh4GCKTNjQRXHidflnL919XtEg5c57
-	 5ocN3ImyV1UFEtz0tnPGqI7V79amcVy+vLYqhlxLKjTsQ/cg0KkM6O1DhsEFkrlC6L
-	 3ouoz1ZbDli+c4zjLCY467kqdgzIOtESwtVSpCO1YRdHvEJmvNBnqnS3ElZrthYc2Z
-	 /6b/rU3C8tdoAW+FPNOoMS2w5afmEn0Kkg+Y6ghcbKw/rmj/Eh+c1nnrXYx+kQSLj7
-	 psjT6nr5X3G7A==
+	b=lD8Bvp4HeheZMCP413Pe9fuF9EGPm7XGR6yMIO97W0wdUIbtBEvloNBUTpPmqQskE
+	 GSx6IlzJX4eQFxKyzwHBvaWWYrQs1xVIY1au0V/sQjTBnjjeT7kn4Cmctk7s37Lhnj
+	 828flgL2ifSzdrQ0GbhskoYKqYUgAIxq2KIhFnZ6M4zermnF9J69vlgO8lXIKhklMS
+	 nkeqqaWF+XhMyfPN+gMmyLlva0NYbmwnXigoqToFgAenXi+ZuVEU5rbdfG3+hW8Wwe
+	 MeSR2gidg/P4uty7aLxhSGETwMg5IsxmcwEB+8HfrKpsnv/4zOFD7wuVc8Vot9ibaZ
+	 2e7BqntL1gehA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>,
-	Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: (subset) [PATCH v3 0/6] arm64: dts: qcom: nord: Add remoteproc and PMIC support
-Date: Sun,  8 Nov 2026 14:21:12 -0600
-Message-ID: <179416929206.628393.2926818723732467339.b4-ty@b4>
+To: linux-arm-msm@vger.kernel.org,
+	Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+Cc: devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	konradybcio@kernel.org,
+	abelvesa@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Subject: Re: (subset) [PATCH 0/4] arm64: dts: qcom: Add support for Mahua QCB
+Date: Sun,  8 Nov 2026 14:21:17 -0600
+Message-ID: <179416929487.628393.4140437529266261587.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260920084920.2201418-1-shengchao.guo@oss.qualcomm.com>
-References: <20260920084920.2201418-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20261027114955.1266499-1-sivansh.gupta@oss.qualcomm.com>
+References: <20261027114955.1266499-1-sivansh.gupta@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,26 +69,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sun, 20 Sep 2026 16:49:14 +0800, Shawn Guo wrote:
-> This series adds ADSP and CDSP remoteproc support, the SPMI PMIC arbiter
-> and the PMIC descriptions for the Qualcomm Nord platform, and adds the
-> initial device tree for the Nord Ride Embedded board.
+On Tue, 27 Oct 2026 17:19:51 +0530, Sivansh Gupta wrote:
+> Add initial device tree support for the Mahua QCB. The QCB (Qualcomm
+> Compute Board) is a board built on the Qualcomm Mahua SoC. Mahua is a
+> 12 core derivative of the Glymur SoC.
 > 
-> Tested on next-20260916
-> 
-> Dependencies:
-> - NMXC define: commit e484a765f543 ("dt-bindings: power: qcom,rpmhpd: Add NMXC power domain index")
->   from git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/linux-pm.git dt
-> - Base DTS: https://lore.kernel.org/all/20260903140617.441111-1-shengchao.guo@oss.qualcomm.com/
-> - PMAU0102 thermal: https://lore.kernel.org/all/20260830101025.191697-1-shengchao.guo@oss.qualcomm.com/
-> - PMM8654AU RTC: https://lore.kernel.org/all/20260904074541.590485-1-shengchao.guo@oss.qualcomm.com/
+> Unlike the CRD, the QCB is suitable for compute workloads,
+> power measurements and oscilloscope-based hardware validation.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/6] arm64: dts: qcom: nord: Add support for ADSP and CDSPs
-      commit: dca3e74978c47d69688df0d6b852719db09d05ce
+[2/4] firmware: qcom: scm: Allow QSEECOM on the Mahua QCB
+      commit: 82868a465851cc47ccf483efca2f54f0257e6328
 
 Best regards,
 -- 
