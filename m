@@ -1,63 +1,70 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169320;
-	b=pXldAYE+j84H2wqO3rFAvHIY0jGdGpe0Kb57k/bMDTsUA/tqvNwloeznoRigauMYAzQX
-	 0NuT9APSvvBgrCBBegsdXePUeh1AD6XHzw+FzP661nvz4kEaCds4Ont5d8sC83GLNPtG6
-	 W5SUOaJLvsdHKxbLSsu7N6iU7B36f4WBj5MaKzJuCsogt4g+7Q2FcA/QyRK7iLl0wJa8w
-	 33FPz/areY1955Ol+clnm5c8ENT1XzZiex4WbF0V3Wwjm4YHn5MO3f7nxUxlmaOqADjvX
-	 /065zPO8fd6aXy41umW3D/coTMlvWs1kl6CIHVDqF2Vhm7o8CmKvLA+z48dYXAQnowg==
+	t=1794169326;
+	b=ss1Bq2h1QTHVsW/n3nGV9SbCxor7z52OvprDJLegrr2aftOEokpLuJAuvgz+mZ4Yw+Lr
+	 cwZXndBkKYL5EDDtvl75YhwfIBzWOlXQJhE5Jk6r4Ah5CNrZCXS2H+KKar8iwCbFclbwh
+	 eejQaSztfiROLtiHgR3vmmLb+zGneLVTEt3vwZGLcZMS95jEh6ByYCyjg21wlA+aO1mNC
+	 exjtE+Vzz1I+p7FNmC0poHLbxkTu4PJhndfUuIb5q6sfQnyxnFuK3vQWNcP/M082q8/wG
+	 /sfVcDGERJm9tQjyKWVQ4hdHNm5R0RA7t8r2ECODj9YzBAlaiVxvMpQHtWEYXAiINQQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169320;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169326;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=l7neh/9HoHMNz8EuywMxQzyUFGOTrut+abX2bqgYmu4=;
-	b=OUozGhktobRsOWsIJlZXolvkYFBcyX2a4H5WQzj3YZ0QErIUYvl+d3LwCJ+rCJy2H4VE
-	 u5tiM/Yc9bGbs/eDf1JdyzTlDzd12eWLxEMK+uOivIRihyGe0oTGMtk7HuBWYOfeSn2+I
-	 GKs/PyqZAdosAN2u1eHwMC7kvIoj3hd+9eslr+dvs2NPZX81KemGVJBoe9aqCCbkv0jvb
-	 ZC8IqFri19o1JRZcAbVTQhN37mDoLCMNRi09Xz2KmZo1i3dMNniFTnOZfsfodj0heHNgX
-	 HjZ8ij3R5TFefPl82RkVngFqFaX19s0+REY38QSCiMZ4qDWaJMWHQOWma8PRU/XNIwg==
+	bh=mwPcELJuPrKicFBZ34kVMln8Od0cvI/WknXDh37Can0=;
+	b=QLhyFq3MbtHnTegk1UKQXGEDaqm8bvltLSYxn++cPfJv3Uxj8eFLVKM5hWU79V0phEZ6
+	 6nQiQDr5xZc8NvDOX9M1HuSduzB1gJBtUj9a9kedWe0l0LFFzr6R7qLIMlMQUzMo/cha+
+	 ALXJSTaYqOa0sEMk54Bu8rUj4JLXORTFbyOzOlfMhjEHrEYs97qikcsEm6WWRlQ59/9Qo
+	 H5YXOru1+2SAU2GwiPyS4d6Jw8defq2i3ljFfJAgIjgisDZlvwLtD+BL/6IJs/U8/KBkB
+	 bso9q7z6MfWVMHuetaAiMyr3rVolEJqvp9BF3yJt6DLTZ0Z/04EaF0o7hdtfA3p8fpw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z0d9BiVh;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=C1wqCBMm;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCBDB606D801;
-	Sun,  8 Nov 2026 20:21:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7F56606EE80;
+	Sun,  8 Nov 2026 20:22:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z0d9BiVh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 949351F0092A;
-	Sun,  8 Nov 2026 20:21:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=C1wqCBMm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C65961F008BE;
+	Sun,  8 Nov 2026 20:22:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169319;
-	bh=l7neh/9HoHMNz8EuywMxQzyUFGOTrut+abX2bqgYmu4=;
+	s=k20260515; t=1794169325;
+	bh=mwPcELJuPrKicFBZ34kVMln8Od0cvI/WknXDh37Can0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Z0d9BiVhPaZAG6HNsNfZPcqX5TOcm2xasfSht7LWcT7g8QrybzH4Zr+fxq1fnaA6B
-	 9FDbXMapXzkNBR3k9fid2Bk1/J3Uu4zfOI1oP8SO1QzywW0/yEVkqiSO4VcDYD7oRS
-	 /4n7mAuN2yKQfBLEHLzbde43xDjs7SUAUELrfNGEl8GOJoceqXYpWW8ohU6HsB532G
-	 zFZqIW4iQYK6Fhrx4ENzWtewn6h0H6mqE9JVAuwqcO9Ea5HXMkt04ENAv3TGgW4hzp
-	 o9j0KTW0V6lRF3rBsM3N0VonIgL/Kb9ZdkfP6S3sSww1eEcMuH7ZMzlY1wkaP65jnX
-	 E2luvafwaEuBA==
+	b=C1wqCBMmz0blxaEqQtJUT71VK046K0H+hpmXTasiWHpizHVbS7BXInXJOk8dwnP4q
+	 O1CiSUFiwSkv54CYC2UsJJeZ7juWRoSUf+uRBCOcOlZ+EbQwRTT//HgfnBwjIhsb41
+	 wpubpKJ0+L7t7DFHg/eQfQpuEVzFEkx5zK3ZmQx5rN2STDeO1vMNUDYid36CcJP+S6
+	 oFeOPNGUCT5Gi/X4urd77hqoP+N9JhsZs0h5kToZtBg3pn3JbdcO7O5gzZfVaa2MK+
+	 7cmhSFvqNX4WBiujaLfJRyQjNQqwqv8FVuASeX16MPkK29ED4AlE9NlB8dg41Kx9Q0
+	 oVb1Gamfv0aOw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Rob Herring <robh@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Akash Kumar <akash.kumar@oss.qualcomm.com>
-Cc: linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Alexander Koskovich <akoskovich@pm.me>
+Cc: linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc-sa8775p: Use retention for USB power domains
-Date: Sun,  8 Nov 2026 14:19:17 -0600
-Message-ID: <179416929209.628393.10279991163222834451.b4-ty@b4>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Abel Vesa <abelvesa@kernel.org>
+Subject: Re: [PATCH v5] arm64: dts: qcom: milos: Add Iris VPU v2.0
+Date: Sun,  8 Nov 2026 14:19:20 -0600
+Message-ID: <179416929431.628393.15882123652566440237.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261106093722.3261172-1-akash.kumar@oss.qualcomm.com>
-References: <20261106093722.3261172-1-akash.kumar@oss.qualcomm.com>
+In-Reply-To: <20261019-milos-iris-v5-1-2b3181876b2f@pm.me>
+References: <20261019-milos-iris-v5-1-2b3181876b2f@pm.me>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,22 +78,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 06 Nov 2026 15:07:06 +0530, Akash Kumar wrote:
-> The USB subsystem does not expect to lose its state on suspend:
-> 
->   xhci-hcd xhci-hcd.1.auto: xHC error in resume, USBSTS 0x401, Reinit
->   usb usb1: root hub lost power or was reset
-> 
-> To maintain state during suspend, the relevant GDSCs need to stay in
-> retention mode, like they do on other similar SoCs. Change the mode to
-> PWRSTS_RET_ON to fix.
-> 
-> [...]
+On Mon, 19 Oct 2026 14:18:04 +0000, Alexander Koskovich wrote:
+> Add devicetree nodes for the Iris codec (VPU 2.0) found on the Milos
+> platform.
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc-sa8775p: Use retention for USB power domains
-      commit: 3c985f4d691286f083c08f90e2b6834eef007607
+[1/1] arm64: dts: qcom: milos: Add Iris VPU v2.0
+      commit: 404c82d89e42b28d2e61156c0f3d363d634e4499
 
 Best regards,
 -- 
