@@ -1,59 +1,64 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169439;
-	b=D9zUvQj+hYFMfeyERTxhXVtDiwobXxwbrUjuj6ZPMaskIRvguE4JQixXqZFxxtcllVS7
-	 pat6CO6CNnKv9en7I3Lh6grV6rRBO3vhzEiAP8Kxc4BHGs+mUQw7M6OKuNuiQkTg5TyOE
-	 QNf0g8JHbNIgFV2BI5zfz8rQubqfkD75F5n4g7f9QwXSc7hMW4EpXqBmxgxmxJsXPR25d
-	 Pc2hrKcBr99l0AmFi9ivOdPDHQ3mJFL0BjLwMS1d0PxYqxe4jnX34flxl7BQZL0Lygjl4
-	 hnAuOPcNaWFiycP8BrBNLy5oh+Ddf7GpYaV90F833ygLx9N6yiM4p7l2kbkkSfs4udg==
+	t=1794169445;
+	b=Ofo8v+Pnlw56kE2cjFoVKSH+KaTkSQ2dTIgaieazbm8g2dcOym81IFowJS/NQ8VDYJj5
+	 g+r3kDdzQp6+Dd4RFNfupjR+8tYk32fYibBSN4ePjzo4n1rJEsvyLNHQ4fzhofnYO+1nS
+	 sbg0N/arhocbJC42jARx/1ULEeuBUSFHjhl3pQKbQtrCpYqmEGN/gGnvZJGkDBGHqHNbC
+	 zZUmWW3IPqWUczdL93fE2h7oERoxOY+YZOQLyeZkomxi1bBGDtVG/lVGeoOPqN4n9E+Y6
+	 LRm9QQclqSIYy5v3SzcKBRvqYPFDOb8BjS2qd3xY0E06raG71iop0EavX1dxyimD6eg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169439;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169445;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=BGcvcC81mrUpXWsEyb4n090+1/2hC7J0l5mwwAMJeXg=;
-	b=Kvc7RB3ro+soOGklFONl5pe7q6b+a5qkAefklv5iAJzcmw6UtQtSdXTe8OEmtzpwOF1M
-	 dIUiS4tF2s05ce60Or829odxQWDXX/uQPRbADkL1W9uGu3xN6D8qrFERSxBTzZ1cVCvLJ
-	 mCiJpPkRO+t7nXO+udPp7o01ffebNeOjgya10N360oguIEbbBp4GXvRSAeOGUDj9tgLPF
-	 ZHh2E++liTX08GM7fMGbZrcYGLhcwlBu1iNTS/+/C+rKq67jQbS5tTkf51RFGHTEtP5DZ
-	 DH1B3RfnRChYJGbTRUSqV2LQ+sdnW8K2SjzboOEVRCT1T+dQGEWUoZVT9RD1e32NoQQ==
+	bh=tQhTaoi1Pw+yz7QcIE3pTnpXDpIw0jbz0C0RMLuE4ZE=;
+	b=XZt1mgxq3OYzG9xv2RYTc9l5BEh99UQstptl30swNDfwgcEOpG+YZf5zPFvOKOicDm74
+	 9BifYSKJlvwE7vnyF0j1GMZ+BedmdJAIR6QI0dlK8nxe2seYh8Kezt447dZZkuaSwv+aM
+	 6x3wTs4YdIGT+lx0EOrrbYKb4MAF9jfnQZq1s6tedks0jpGcco7i0mVgHqU0QF+mOMeEO
+	 PvbJeQg+Ul8LkNpqtkuHKh5LvkepKK2Qdbll3sTFC9ea9gF/NZMAKFj2FlfVyXqfLeIn0
+	 lPEXE9/TT3e8LYTMwGHf0si1SII+uU4XuaM9Qia1lvyeRpm/2dReKZYm9qBqbAKFvXA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=btqagmAa;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hnQOF2RB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A04CF60762C1;
-	Sun,  8 Nov 2026 20:23:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECDB16076C16;
+	Sun,  8 Nov 2026 20:24:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=btqagmAa
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C222F1F008A5;
-	Sun,  8 Nov 2026 20:23:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hnQOF2RB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 661F51F008A5;
+	Sun,  8 Nov 2026 20:24:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169439;
-	bh=BGcvcC81mrUpXWsEyb4n090+1/2hC7J0l5mwwAMJeXg=;
+	s=k20260515; t=1794169444;
+	bh=tQhTaoi1Pw+yz7QcIE3pTnpXDpIw0jbz0C0RMLuE4ZE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=btqagmAa37j+JRG51H/Gd7Si2YqJ9h1QFMPSVwoPgE3JjwNJRPR7v0BV9aGqa3d9x
-	 UYeOCBpN8NQKUcPGLSyUV2QORaupy8BlZFXpfFeXT2L0sQeCqmDiAcHn1ONVWYS4Be
-	 f2dIT6/Dn6ffeoUcIybVCwZZxRQWaxjn9JhiyjP6Aa6pbGRhAIyJ19LrP48sjx1qLy
-	 SFYWVib6+hv7+EDGtJvKjpKLzeQ8K8pnOJmlFTDMPzpXdTIN4rptIZ8dmJr4E17hiZ
-	 uy97izoE5wA/+8ALeHb0vglFmUG5kgt1cQwEgdS/NZlA34KuJvsI7l2XJu5UZfln2K
-	 xXCpHCEB983JA==
+	b=hnQOF2RBKan1We6YZqt4Ufb8TVJBZeMVu+qm/QxiWaLGb+2pvdIVmP7Tudm9PXSSS
+	 c+MGWsvHZo42GOejZu1w/rKUYXzA8hI8gYrWIjc6ifwodnLW0E3vR5JXdIAepaY4wN
+	 uHHdKiiZKSQcYkMZBygw2QzfblPie1k63d30td32NRa9y+X13QcHvPMuRMRaRx4KSZ
+	 tUcDmOuxYjY6V8YmepBQbvWOphbCJbPdvXu8WlALQ2n7ZeEhNpOMVvH2v8K/bzTAw3
+	 5pCKWrrq9XwPTslmL8w6zPC2dR2zxe+qkMzBRe5tNUbxOahFaKW+cNW71GX2ZSHdlP
+	 YP5amMgAqNJbA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Krishna chaitanya chundru <quic_krichai@quicinc.com>
-Subject: Re: [PATCH] clk: qcom: gcc-sc7280: Use retention for PCIe0 power domain
-Date: Sun,  8 Nov 2026 14:20:38 -0600
-Message-ID: <179416929508.628393.16454532877848877294.b4-ty@b4>
+To: Krzysztof Kozlowski <krzk@kernel.org>,
+	Georgi Djakov <djakov@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Demeter Barna <me@fromdisposition.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] arm64: dts: qcom: sm8350: Add CPU and LLCC BWMON
+Date: Sun,  8 Nov 2026 14:20:42 -0600
+Message-ID: <179416929390.628393.12707447273561133362.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261028223444.2683120-1-m.szyprowski@samsung.com>
-References: <20261028223444.2683120-1-m.szyprowski@samsung.com>
+In-Reply-To: <20261016-sm8350-bwmon-v1-0-562fe403bf6b@fromdisposition.org>
+References: <20261016-sm8350-bwmon-v1-0-562fe403bf6b@fromdisposition.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,20 +72,23 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 28 Oct 2026 23:34:43 +0100, Marek Szyprowski wrote:
-> As the PCIe host controller driver does not yet support dealing with the
-> loss of state during suspend, it keeps the link up and the resources on
-> when an endpoint is active. However, only gcc_pcie_1_gdsc was switched to
-> retention by commit 1a58ee1330b2 ("clk: qcom: gcc-sc7280: Update the
-> .pwrsts for PCIe GDSC"), so gcc_pcie_0_gdsc is still powered off during
-> system suspend and the controller loses its state.
+On Fri, 16 Oct 2026 06:13:50 +0000, Demeter Barna wrote:
+> Add the CPU (CPU to LLCC) and LLCC (LLCC to DDR) bandwidth monitors of
+> SM8350, as SM8250 and SM8550 have them.
+> 
+> Tested on a Razer Edge 5G, whose board support is not upstream yet:
+> both monitors probe and their votes follow the memory traffic, also
+> after a system suspend. On top of the CPU OPP votes of [1], they add
+> 14-15 % copy bandwidth on the A55 and A78 cores.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc-sc7280: Use retention for PCIe0 power domain
-      commit: 32e7501b4ffe59905e8159eaf2b78fcfc1efaf0b
+[1/2] dt-bindings: interconnect: qcom,msm8998-bwmon: Add SM8350 CPU and LLCC BWMON
+      commit: c2c210762d2f4cfb3e5c1d5309db6f3e521271f7
+[2/2] arm64: dts: qcom: sm8350: Add CPU and LLCC BWMON
+      commit: 105470c1dab20822f5f433cd62ed0fa8fa3ffdf2
 
 Best regards,
 -- 
