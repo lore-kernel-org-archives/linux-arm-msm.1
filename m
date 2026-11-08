@@ -1,63 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169384;
-	b=uNuY1i678Iw9VoNdHB6RWYkAkZaZW7iB0A/5yf8FhKWiFTtw4bmcrsgM6EHefj6PAoPG
-	 gTrA1HKdCSAmKA3+7V1nK8fejpHz8RcgZd3g22ha8A8GWnrvmw1fZNc1LbXXMKaYTUx8e
-	 RG5PqdCtaFOCrYL0HtRSiIoCfsONf98IIg4cSd00ymiuyT1bkIm7QPH6Mk9Z+P8fsNtJj
-	 2e+nomcZl2sAQ5QnFUv5G8FM/NgrcLU9l7EQz7N2j1Dcnaqm/lNaj+LG3bW+lbWJjI5sX
-	 3AiF1OPErBQ4slyTnYdn22xsbKMJFx01+Bk62gB7hGYlcNx/BaiAawRXwDnzabkAzOg==
+	t=1794169381;
+	b=LRCbzP5O7M6IB9nvRvjp56Hzb6UCmt11Mhl8FIR3lq2y8PL6nBdaV5upltLf50VfN5KK
+	 OA1uyPxrXphKmOE6UUFZRMS9x6xzx2LlEL10mRtny1x5rApJ1bpHZk3rpQ+/URsFEry13
+	 N2vb44EXIxrMjlwDecYDCfdcSP09/Iwumj9lFLpen7TBpRrZXKUMnXB7RXLiT3l72Zgbb
+	 qeJsAU+fBNhFTyel1Dq01k9yYkHBIm3Pl5TBOV26kP/EubA7jyymzkysRFGt84XnsVqh1
+	 4oIbRPoArqtycv4IVyZwq93+/8mAiP7XtG3NQh6uS2/AqZjG4meDx5jhygutlg77FbQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169384;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169381;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=uOdj+LCGkUSdpj58vrEitqjzSgwqN0eEuoUdTrdn7sY=;
-	b=ysQlf3Cx5oazqSprkux49cTzMz/am3AbwZo6fFCdRQ2bIgIbi8fEx8P0Od6/X9A9ADrg
-	 vHM90/RjG6je5kA6sSTM5KAWgisBwd/KeYoSzJHcbTZq6woqJgUhjo7BdaUH9LwF4TxxY
-	 /z4GP2rK1WGUkNXGovh/fTmqef6Pce30JP0serfTVop/WWNN3aOLSZ2wEuWhD+Oemg6cm
-	 eRSkB8UaZ9Xh5NlQWZQEnTRdelIwB/eZgyVKhlNlVoOF59wcrl0TEJha34SnGFLoFNcD0
-	 4+WuxTswPgcNEVGw/BYYYaeQ8CSF9EsK2yjJ3Y880JJ18Eq/Jgi8MCohkZDzZUPrKig==
+	bh=MA767eBMFY+AgdzEUS3U7TTeVRTve0+I5z7cZs/TKF8=;
+	b=A5mpmvfz4LeohRfJf0DpvxBCNpxwGSsEltpLuo/mBqX8va0PSKAYjjBlzYdmJjJRsoET
+	 0CTDqFIXS7MkMEbJ9Rgh6s+2xe9L/SveE0ZzU6qHZgWFiUbXXnETYMeoLIf5uNS3/dbQA
+	 tor5c1ADWqsWsw2FpAKqnx7d1FuJZRWEreXbP5d0FC0mPDLE45vbJ+dYuIyKJTjMvOopo
+	 Q4rHHo8eJ9qxAFzpPcEzRrCqZvydYmzlla6/Z1+FOHK/HeIEwA4dlnp4oumhfBZC1k0sX
+	 A7MtwC7Go/A1REzWWjHRTYIs2Jt78xX29I/OEiW4KZ54QF8ONs+WXC+tIeqbloarOIA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kBG5zsCj;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="cbz/01tD";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E673C606D101;
-	Sun,  8 Nov 2026 20:23:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A3EF606C760;
+	Sun,  8 Nov 2026 20:23:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kBG5zsCj
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAE7D1F008BD;
-	Sun,  8 Nov 2026 20:23:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cbz/01tD
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAEB11F008BD;
+	Sun,  8 Nov 2026 20:22:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169383;
-	bh=uOdj+LCGkUSdpj58vrEitqjzSgwqN0eEuoUdTrdn7sY=;
+	s=k20260515; t=1794169381;
+	bh=MA767eBMFY+AgdzEUS3U7TTeVRTve0+I5z7cZs/TKF8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=kBG5zsCjpqGCont84sHcyVQRg63m1NOcflsEulc6NhqHcHXyrBC8iluQKQXElUk0u
-	 dfOAmtk6Eo38YNSQoJ6XmbcK/6qWLwvBXr0Pgk5U2CmHTQyYLg24WNbEKDaePmV7dz
-	 Y81f6ze673y//ooq4pARvzrhcvIwOrLabbBLN+jiPdObZYRtHnNSrOJ4iYD9bwfYWa
-	 Nc3V/JoTmKJ/xWvzMCrxlJVRZRaA/6mNbhQkMItLHKm1bzVgiR9LasXyd2mqoJS1H8
-	 H67IUsEMddz/9/U/qdWft5fkY+0QivP2qvyX1liVQW/3Yr40UpM8uUJx6C96P2IT++
-	 ehbgrJ24sabJw==
+	b=cbz/01tDBuBdOlJ5Bgh18a618ajKhJfIRDBxZ1lgUMczbIrdaL23aS1JKwauR3FdF
+	 zjRd6x+5ei1gdn7DToaWJjzmifgpnvKPbzxYkC0ZR/C0ya0J5W80yGnF1EGlKKaNC8
+	 Is4jOLivvuDNhm9m1SvsHu3zvzSoCBwmw13BiQveIzjaFk5hF5sjvIuKkqFngWr4P2
+	 qreHEDiGLvVdyLzHDUvkj2TpjExa0/XPXwhYGswRcPHhv6ybhzrqaWEfyv22siK3iG
+	 L9YLV7qqxT0eZk/WmfMIT7qFDxXiyOR4ZyVM+5FNRj2eIPlgurdhK8IoFZawuczItP
+	 vfbXKFhFb+9TA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc-qcs615: Add additional frequencies for GP clocks
-Date: Sun,  8 Nov 2026 14:19:55 -0600
-Message-ID: <179416929401.628393.3615974621730593014.b4-ty@b4>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Igor Belwon <igor.belwon@mentallysanemainliners.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v5 0/2] arm64: dts: qcom: Add support for the Xiaomi 17 Ultra series of devices
+Date: Sun,  8 Nov 2026 14:19:53 -0600
+Message-ID: <179416929444.628393.14790231637289198553.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
-References: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
+In-Reply-To: <20261020-nezha-v5-0-04898d6b5f80@mentallysanemainliners.org>
+References: <20261020-nezha-v5-0-04898d6b5f80@mentallysanemainliners.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,14 +71,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 16 Oct 2026 14:42:20 +0530, Imran Shaik wrote:
-> Add support for 10kHz and 100kHz GCC GP clock frequencies required for
-> display backlight PWM functionality on Qualcomm QCS615 (Talos) SoC.
+On Tue, 20 Oct 2026 16:19:13 +0200, Igor Belwon wrote:
+> This series adds support for the Xiaomi 17 Ultra series of devices,
+> consisting of the Chinese domestic region version of the device as well
+> as the EEA version. The only real difference in the devices is the
+> battery capacity.
+> 
+> Currently only basic devicetree support is added, with driver support
+> for the display panel as well as other hardware blocks to be added in
+> future patch series.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc-qcs615: Add additional frequencies for GP clocks
-      commit: 23ce9f87cfc56b6ddbd683725720448dd4fb200f
+[1/2] dt-bindings: arm: qcom: Document Xiaomi 17 Ultra devices
+      commit: 7678f72bbfa3d0551c414bf2e34c9b520b4210ab
 
 Best regards,
 -- 
