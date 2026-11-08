@@ -1,58 +1,68 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169507;
-	b=K9Z7KQIPt5uQ1rFy/7kRbUKNF1V8KjmBi6rW11B2fPC0SMZiYGnYXSA+wvhTg2/yxiXk
-	 CdH68FdOyZ1YyeA+d7FbdaQ3BaBNc2f+kGULckc1y6a/w0U43O2GAhwWSVMNvqyu7ecvA
-	 g3xT0XIMZBCEUR4tSIOdkfTfdpfk4Nx0Aq6M+Z3YNjjuzPN2XQbUKkheh0XrAO7t3iqEy
-	 8dOD7tkttGEkpRiKjW9fKYtNH0EK7Z2fjHQNByCF7WeBiXxFXgd91qwnN4ho9q8jWtmqZ
-	 RtZcjLeT3kNal1jdIUTOEt3z9bkAWjDrWvqXNvWHk1tr8e0t7N2i5dyUoWlSLxQA/8w==
+	t=1794169524;
+	b=ZoikITUxYYfhMDaMO3Tk055kgPD9xtq4UNJwfa78EYGITKzWQQbH/1QEE3JoXMzWE2Bi
+	 59qn3Vfxk8BrvTm52r8Yg4lFRorn6dfcLO1CGtkXN1Cb4T8fLu9q1cB+OybZ6/MdIqPDq
+	 veS+kuWHB5jCWeETp1LJTqnhfDCW4tmnGojefX8oh4RXK+TBB3GZ9nCwvzwmwUJK4tugg
+	 QqJcx0Zw03+1PPx4moSTQlKf93A0+9wucl8H/OK7TA4/XWhTHGQjfEtH3C94B8fEHCc50
+	 ZoW8Mj5pVCm9EXZ8U5rs2jmV9viFpBIZV1qJOSyxocl/ZCm7shXX9k79elXXhtXJOng==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169507;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169524;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=b76MrP8vb1NveZduxU4EPxdtvgqIJ0uwY1EaJx729tg=;
-	b=HZTXWoUoSq3m7q+2qi27PI8wulyf8cx9OcEw1o3lG4jATKtFczRoUlZ39ut5AQ5fCFp5
-	 XMEnYBmGzfmyjIMMMSVzTtc5JHKrsC5rzFWCoeZ8HfI8hN1F+TKtDzg2oAnTlevmJy5d/
-	 CYpnW68Rqe9uvBci9/bP987mT/J3Ym5ofVl7IQ3m+mjJLx6Gs56wNTf/MVFyNeU9jvxXk
-	 WdMOLdaVeDfEMtUXYM8OEbbeSCcI5jvJJw2INuMPnsGNy0A3mKW4Ne69x15g2MpjKL3Of
-	 AfY/gJsreP6pofXU+lviFlK4uvZN1YUrpxBuP9qcfOj03Frvz1W+FLJuMV3QMz7WS9A==
+	bh=h+YBdfasWpLm6Da4YFjegeB5DsXOdDZJeYTsCIItuZk=;
+	b=INbnx7ql87ScLfas3W7n65fXIzRyQUbc5KAmJYBSVaSdJQKecNgppptn0s3CUaqY1uve
+	 szh7kF0ftdRP1O+6IVZjbiLUQ3EBXQjgObO0FNFvQuhTtMA2wJmwNxpwFRkLnlMafZ2ve
+	 3Ylv0IImzChw4sdNWPXQXEMTGVZBAQSBqqQ88IOeRkj7uHX9cmWmcv7XnvunMrMGV2CvP
+	 6zRwns373HN7XsiEe9NrG/VvWcLxobHnay87ayDbrDpzpaRIp05zaMGd/vD4sJmt+TDSS
+	 q0XA2ImoBmnR6ppf7QYQaB9Tn+vnyBoV4wzvCD5A48M6LxmfSKo7ZqFGkfGNoDznPBg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Weojoug9;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jgg9ZHRt;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97EB4606EEA4;
-	Sun,  8 Nov 2026 20:25:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DE6E606B11E;
+	Sun,  8 Nov 2026 20:25:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Weojoug9
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A7241F008A2;
-	Sun,  8 Nov 2026 20:25:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jgg9ZHRt
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931D21F0089F;
+	Sun,  8 Nov 2026 20:25:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169507;
-	bh=b76MrP8vb1NveZduxU4EPxdtvgqIJ0uwY1EaJx729tg=;
+	s=k20260515; t=1794169524;
+	bh=h+YBdfasWpLm6Da4YFjegeB5DsXOdDZJeYTsCIItuZk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Weojoug9ywk0tz+ioo2wwc0Q3pNV/Kdp+BEt1GcdVM9NO52Ecwm9EPsIgEsoX+xyB
-	 DGG3WawGFWoVhluMbIkxJByVi2ci6aLh6XQiC+9RmC+0RFMINuG6PxFDfQP8RHNa6n
-	 WGoUKl6CS0pRzb3qcv8VFYB0/0NVZbwMtgonhq4B7j+wulAAenmxRPAlXSDi8sx+XY
-	 drPf8GVumdPYdcnPQ0ZFJ6AlB4CmrIU1AVMIb7KV8vY7ZqcPurdpgEmcwyfo0PFCcC
-	 w3YxFCJeNCyiJEOTJ4pjpGSFaN4nz7EVtjPsEMWgiyuhacz/LGxfOGSBAgWzQQF+eg
-	 kAgyP4Hn4Sb7Q==
+	b=Jgg9ZHRtp2aFb1ctTf+1WzewU4bqbjl6oJzdo5K92bObWbIna6Gk+KnT/QhnrUXxn
+	 wHgdcERK1g12NFpxAU2P0XcitIojeBmVSER1cVH3HEbLlPmQhI5AKQ00zKxzydkFtw
+	 KoEvodnpAO5y1SBaCTflFDyQG0wvwcblYKREkjc12BSxOZJBts/l9bzsAw2YOTACrx
+	 v605wfx5Ee3AM/TYoQVcEujpYWjmCmXFhadXPAEKyy5xx9c2KI3UDdF9jBjc2e2C+N
+	 BLxOQDE4Jeu1GSNuHG8cJiu0hQDuIrT0J3N81mBrHACz9JQfIma7SfYAvzUC19X5cT
+	 tRR5OadNErIfQ==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
-Cc: mukesh.savaliya@oss.qualcomm.com,
+	Zhiyuan Sheng <zhiyuan.sheng@oss.qualcomm.com>
+Cc: Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] soc: qcom: geni-se: Avoid redundant transfer mode selection
-Date: Sun,  8 Nov 2026 14:21:29 -0600
-Message-ID: <179416929366.628393.10644528274382007761.b4-ty@b4>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	cheng.jiang@oss.qualcomm.com,
+	wei.deng@oss.qualcomm.com,
+	shuai.zhang@oss.qualcomm.com,
+	xiuzhuo.shang@oss.qualcomm.com,
+	jinwang.li@oss.qualcomm.com,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v2] arm64: dts: qcom: eliza-evk: Fix M.2 W_DISABLE2# GPIO polarity
+Date: Sun,  8 Nov 2026 14:21:41 -0600
+Message-ID: <179416929520.628393.9104719158063560519.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261012-cache-se-mode-v1-0-22945ed0da29@oss.qualcomm.com>
-References: <20261012-cache-se-mode-v1-0-22945ed0da29@oss.qualcomm.com>
+In-Reply-To: <20261030030906.3856759-1-zhiyuan.sheng@oss.qualcomm.com>
+References: <20261030030906.3856759-1-zhiyuan.sheng@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,25 +76,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 12 Oct 2026 17:50:20 +0530, Viken Dadhaniya wrote:
-> The GENI transfer mode is commonly unchanged across consecutive transfers,
-> but geni_se_select_mode() currently reprograms mode-related registers on
-> every call.
-> 
-> Avoid redundant mode programming by caching the previously selected mode.
-> Pending GENI and DMA interrupt status is still cleared for cached selections
-> so stale completion status cannot complete a subsequent transfer after a
-> timeout, abort, or reset. GSI event routing remains enabled for cached GPI
-> mode selections.
-> 
-> [...]
+On Fri, 30 Oct 2026 11:09:06 +0800, Zhiyuan Sheng wrote:
+> The W_DISABLE2# signal of the M.2 E key connector is active-low as
+> defined in the PCI Express M.2 Specification. Fix the w-disable2-gpios
+> polarity by using GPIO_ACTIVE_LOW instead of GPIO_ACTIVE_HIGH.
 
 Applied, thanks!
 
-[1/2] soc: qcom: geni-se: Split IRQ status clearing from mode selection
-      commit: 3083e5dccccc504cf6c0b384d32334dfc576a92e
-[2/2] soc: qcom: geni-se: Avoid redundant transfer mode selection
-      commit: 3096ee721a7f444f67d1dbac8361bc8612c72baa
+[1/1] arm64: dts: qcom: eliza-evk: Fix M.2 W_DISABLE2# GPIO polarity
+      commit: cfd8ac5860d6f528239121aa5bb87d6ed8c20d7f
 
 Best regards,
 -- 
