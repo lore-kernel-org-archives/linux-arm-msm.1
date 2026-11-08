@@ -1,62 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169316;
-	b=EI6p5j1QrOYv2y14l1Roby2P4ydKYBf7sNwNt0cOzC1JpidKa1Z+gJKS6NabVasVkwEk
-	 3BuCGorwP7XTlfwWBAHV5lWgdeVNCkbM+PkeNXFvSoDhxkUk9ybCOiw8z8WLzBqvu5CuP
-	 wbWJroXeFeo/+Ida3l2HgUjAqU8mcXD6cAiThmbt0u9IA4GjUMIigeApcdq0dHAQIL4C4
-	 nPGqnjGIwNivTscbU8PYO0b++b+kL9dTvela77jCClS5qlKdqnd8YQWsySRJe5FSs/0L6
-	 oYG1DThF2894LEsrJnshS4Itj4LLmWM21nuEF6ey2SEqW9M2pnD8Vp8Hw5dV38uCYaQ==
+	t=1794169310;
+	b=mCJfBEkGLpQIwooA2daqcHTkrWHftGeagoIsVPTy73wbSgpYwga0c/1xTqZOSL8v9Wdm
+	 CvHW+SN1olmrfngPHcIh38B4daMbpB8C/0nF5wkEnxOt1oeFkZl66kAG7AsvXEDxOyBCi
+	 moXiyDpvl1F92KbicqoOwTDhMl/snIRaTK+AGMZAnRuJFUSSx0WY1azp6xO87cu1gAD72
+	 iFCVdqoGFses+U4p6YzRKvVhwOwvId38M74SXqLVvc5nH+K8JMyLUROQcQ6qG9jonw/n+
+	 oYMcQ16IuUFUWJCrFTq7pCRb4abvKUy4ZomJ0/QHD5y7e87cS3vfBkqJx3DvL5+57Nw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169316;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169310;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=jXKu8YLNoUh7b6qEbxLCOALRv7kBph05CrvzjeplkL8=;
-	b=yQaW3U2XRQwQ9DGBnr51OeG8nIEzqKimAte2UVmQhkW1NK9Ss+bf3RDDSo3fa7SaS22U
-	 wKT0P2m3Wnvt6IwmCffcIwBlPhSgeMPP6ZH3+3G27W39oewkhzxwQnMZQ6V8hZjM29hKC
-	 Y6r9R7cz3Dtmt8CB2VLUkUGnaUY/UNgZwwqVxzbMTHvFvNf4QdMBygnU6ysL10QdOEggW
-	 P03W2v+gQjbVoINm6hNU57ZTkGM4/8MMT4yHfLP2W5cpHyMSfpy/+j+Z4iWU0+EuXo3rq
-	 zD29T2Qx1+umwrk9N+x81Uv4WjtdpARJ6ys93gTMID+MaRt5fjoByTh3UggPj/15UvQ==
+	bh=iqvym+57jpgX8gbfSEMbuRp3x0B5iZpgj522H80AASo=;
+	b=DXxpXlO5wsK9mMhzSJ6S6fsvWNrZwHiUg1I0GZKSXxyqzLmDIVnn4ubfEpum0dwSp97j
+	 6W1SpxxQLc/lCmBT4+bryAh1rEX7sU2+DTcE70SHVGY0fAxG8EoI8gDRCcmC78S/93vu0
+	 Omc4R4J/pow2fGJ5hwTKEE0dQlF6dXJfqU3/6BDOAWdXSk4avbU4rH7SsZpt2KXg7qt3x
+	 h1d3ha3o80N34PWIvRX424AtCVLzXyA8yb9BiCBwdycZccan2rak+Ta+O1oaiVrKHeEMc
+	 cmD92PAw294Vwo/DYx5RmxRSzmu4HoEIsgD/4JeL5aIZTQLcShYQa3kdltwPz+s7CJw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K9RYl3gW;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lJIMZ2Lo;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEDD5606D821;
-	Sun,  8 Nov 2026 20:21:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01EC0606A326;
+	Sun,  8 Nov 2026 20:21:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K9RYl3gW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C35761F008A4;
-	Sun,  8 Nov 2026 20:21:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lJIMZ2Lo
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B52D61F008A1;
+	Sun,  8 Nov 2026 20:21:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169315;
-	bh=jXKu8YLNoUh7b6qEbxLCOALRv7kBph05CrvzjeplkL8=;
+	s=k20260515; t=1794169309;
+	bh=iqvym+57jpgX8gbfSEMbuRp3x0B5iZpgj522H80AASo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=K9RYl3gWMbEurk5+clEdPJL2eIP0c+lEDIEUrVmegTpUJa6vRXOJ9S1mDdWBi9VG7
-	 YTb0TIiyemrBsklzjr5mOdM6vCJVK0kCpWWNjuPzplRcoizNYEFVqIh+e8Zwvs3c2B
-	 j3I8HxFMs3Q3j25uar7ZJeUfsgZUZKg6ALZgt98eVm2delTB+WFaYS9eXAS/bx1fBf
-	 yQ4QzW9/jshCwYALpYhNt38RwZcPAcjm6DmSfqFWxZc5sgOxGCMuQ/pPQUT9eQaRSa
-	 4Y08ZFyJxHh6yM/k7phzQ5Ux1dkBrKuUDV3jRj5k6vsLeuKqU/dWRTgCYQ7DR7d8cd
-	 8gxmRuxHAZ0Gw==
+	b=lJIMZ2LokefPEoYK94EltTwGXOarSs5K0DQUuPTI/apkYCzy/zwMe4YlBdg0zIfq+
+	 gqiZjJYCjVsC3YrcPHTVM2X0oezi8Zr1Ic0aDtcXXeu5V5xUa8LMxQGiK9Usihk0uL
+	 88QDTHWAGBijjv/ug5jqOh+pZD+qP/SdfImsGVRL5SNaNa2NpRxD0GNKZfVrDTQiT4
+	 hXsnoslQeTKLB2VJ1FbOWN3FbH4ebOh3ZAO2OOPz5l2T9m58C2OOZYxINuBRasES3I
+	 Cv5lxY9rJModE3WVBw9sGIJtUUT0YNBouj2VR/hyiONrJkSMmPhLUXqRWy5ow+1a6J
+	 s5sy+QpHfR2eA==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Roman Linev <admin@mswin.me>
-Cc: Rob Herring <robh@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	barnabas.czeman@mainlining.org,
-	linux-arm-msm@vger.kernel.org,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3] arm64: dts: qcom: sm6125: enlarge reserved_mem1
-Date: Sun,  8 Nov 2026 14:19:14 -0600
-Message-ID: <179416929229.628393.16390580991068177022.b4-ty@b4>
+Subject: Re: [PATCH] arm64: dts: qcom: glymur-asus-zenbook: Drop the CMA region
+Date: Sun,  8 Nov 2026 14:19:09 -0600
+Message-ID: <179416929382.628393.14612035309086757082.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261026174436.305327-1-admin@mswin.me>
-References: <20261026174436.305327-1-admin@mswin.me>
+In-Reply-To: <20261014-dts-qcom-glymur-asus-drop-cma-v1-1-46f745d5b2d9@oss.qualcomm.com>
+References: <20261014-dts-qcom-glymur-asus-drop-cma-v1-1-46f745d5b2d9@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,20 +69,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 26 Oct 2026 20:44:36 +0300, Roman Linev wrote:
-> reserved_mem1@46200000 is sized 0x2d00000 (45 MiB) in the SoC dtsi, so it
-> ends at 0x48f00000, while camera_mem begins at 0x4ab00000. The reference
-> firmware memory map for sm6125 reserves 0x4900000 (73 MiB) at this base,
-> ending exactly where camera_mem starts, so the 28 MiB in between belongs to
-> firmware and not to the kernel. The dtsi nevertheless leaves that span as
-> normal System RAM and hands it to the page allocator.
+On Wed, 14 Oct 2026 16:55:44 +0300, Abel Vesa wrote:
+> The linux,cma reserved-memory region was carried over from the X1E80100
+> boards, where it is needed because the PCIe SMMU is reserved (owned by
+> the hypervisor) and PCIe devices such as the WCN7850 WLAN end up doing
+> DMA to physically contiguous memory.
+> 
+> On Glymur the PCIe SMMU is owned by Linux and the devices behind it are
+> attached to translated IOMMU domains, so there is no need for a large
+> contiguous DMA pool. Describing a CMA size in the DT is also more of a
+> use-case policy than a hardware description. None of the other Glymur
+> boards reserve one, so drop it from the two ASUS Zenbooks as well.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sm6125: enlarge reserved_mem1
-      commit: 0733c22353a775b2b48e13a396ae8434cb17dc7a
+[1/1] arm64: dts: qcom: glymur-asus-zenbook: Drop the CMA region
+      commit: b7306b1cea3861163dab35fe16b1dca73f745a78
 
 Best regards,
 -- 
