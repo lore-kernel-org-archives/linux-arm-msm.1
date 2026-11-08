@@ -1,64 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169415;
-	b=h/4e5TgkxQB7LxZPp0ZpkK1uqjxxZZJb7BsLGixz7EA1ubY+/5i2UTYeX7A6wctHNx/2
-	 eAxKrT+NcG55EzUfdiZz3uXLKBIChKHCsV/owZLVbtEHRxUgQXHCI3fXMqbMnZAewgewi
-	 qN/5rjf3/biKU04ajjm/VW5Chg8/aSZ6ws5r273HRCTBwznwq7/EYGXmhbXq/4J96zBuP
-	 GbzteuiJNC6W1AjnMFHt9h2IOLaTjASRkzSQBNWjqviY+x1Xdg77WS1c+BwMErXTvmly8
-	 yu27vLkm8B+Dj/8guEEvI4cnAsCfJYzbzbx5+c9z9su7/4hl8dqKiRAw/urcTrF+qkA==
+	t=1794169410;
+	b=UYXYC4nysmprU2mVrX5wpnZCUZW447Uc0WjSiI2Iq7oXyEDvnu/W0e4EgoyzhkiUenme
+	 8jobrlMm5jQ6jqfcgBTm2qW6+RIFHUDiFE9fmvRrT9TEDGnzgROyy9tQ0F/FeOdc84jGd
+	 EP9VmxGK2kzGbyzxx/FJtPQ6kRHj++PkKZ7uTP+E6cGBH2tz/kqWDIh5MCWsvJr+TPUHz
+	 UBk8LubzyixD6F3yxnr9Tix1hmz9GvMzfmHoaVkYamuYMqZ21Li1ERqyNe2xuUZ30Bt+i
+	 39k9O/zDbOmXIu7bRrdySgvMQQXof9tCujUFJbothGtPCvBJot+Ry3oOa+IwVb5p0Pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169415;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169410;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=D8VpFc1ORRRii9rRbkxAX3teGO1GmEaItFgaX6o+6Fw=;
-	b=FhMPTXI9BAleA6mZAsDVhBbPmaGFz7e6jvW7V36y20ijE37TFCafOMseB53Y3yweJwbC
-	 IaCgnlZGmD+8BCvyJthro7VisTlg2uBWkNhnWSWW/0EgvhFqzkPEDJUP6o5urd9l2eGuI
-	 hUZuOlM32DZxCYXaTDjRv9kbqjEhBJm4/gulNQIKVyIgY8rMObgkIWTJvdznti5QfsXo9
-	 jmYJO8ZUTMa/f2SryihmaVq2v2LbrlyBlWQQQaP5SLHM/d2zmJndx3wkhgDI5isNZSFMy
-	 04Z19ioq76rrrkvYuRRf2JIhZlwIbWcUANowa4JBbWpl9DyiLGpiEV+dov/ah5eA/+A==
+	bh=OHtbbnXNjLGZhap5GPvMIB0XRYjf7N7iCg+Gn3VnS10=;
+	b=2hMIHFPMkpycFgrMdapMn9+Kjv+JgKNKgkuZp2e25+qb7k/RTEJoSQidfcp3ZkNfkXTh
+	 fy/oir8Qpa6Zdiw6dl+eDFyfEOeKsIv2HvRhIiRPiXnLphGmlnmPxekiIWa5gM4xX0+kb
+	 eums77f0LhhVX1ccwhV3QdVKtZqbwo9ldBhie0Kb66Sx2YXqbgkc5yF5pRo1ndJI/3WXP
+	 E0mT2IGW467EuzihO5Mbx2CGlxe1q2ZbzrTMvOxyym0eBQlKb6CgnhO2D7jOzmn3J+AD7
+	 3n3/uXl5Kokte1XdbmZcxWXsTxmZtQH/Ma1jYOoj6UR0ncwCq6AQqnGAjG7a4j1+0Gg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gsEqHeII;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKIBu585;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FC1B60A2612;
-	Sun,  8 Nov 2026 20:23:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94212607163E;
+	Sun,  8 Nov 2026 20:23:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gsEqHeII
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B2C61F008A3;
-	Sun,  8 Nov 2026 20:23:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKIBu585
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C00071F008A2;
+	Sun,  8 Nov 2026 20:23:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169415;
-	bh=D8VpFc1ORRRii9rRbkxAX3teGO1GmEaItFgaX6o+6Fw=;
+	s=k20260515; t=1794169410;
+	bh=OHtbbnXNjLGZhap5GPvMIB0XRYjf7N7iCg+Gn3VnS10=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=gsEqHeII4HUIw6PtrUNKP5o8QwWj4dpYIvPafLEbUyl0y+lYdoTx+9jpN1ixQA9sF
-	 EojUAcDWQ9nQZ6qaR+j2PD2qDlwxHurqnCV1GyTMTysE/iQX2i34Pb6F07xDlCrmXI
-	 nvGkORS0Nco2H9JoiZjA4wMsxvkpnY7LFb80pnY2mtlwLazRMjx6L85KN5sCQ83K1P
-	 qAxWUqBiKkF51Chzav/4i6tHmwNaLf00nIol0vThM6Dns1V0KIkYRWY8NZuZGmsN04
-	 2TbALMxh4P90JSPPZnyMLiCyqwiaMiBORR2uNOPNgzTecI98wdOkMF3Qtf+gdTKGgB
-	 eGuuu+rLWmBIg==
+	b=HKIBu585J2wCM1Hv6aQg2GLgrbZOtRFrhItdSLv7027uhXgL9yD6vHDX1SRPg4gJI
+	 jemCRG61mExfqS8Zpr9aF3Z6gbVHQ4nOJhNr1VLPeD9/8bzXURqEzUkKmQwauMAxLc
+	 dMF/oOEOzNBPYZmrpts0R7Lgv5WwCoMJ/ecVJlj9tvQXmYfKvEsbyNMGFJBzcBHWek
+	 1O22PjP0I34+j11yZc0i+X9QruWMmuP790oN0SRmyV5ZafJ6S7rKSqwPbki2nHLKko
+	 w4GdazsE7/wroqY8zrf+QxjZAXKtVnQo3f2E8WEJcIOY003AnjkWbSSOgbqngiTx5z
+	 iBl5ao1vO39ww==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	cros-qcom-dts-watchers@chromium.org,
-	Thara Gopinath <thara.gopinath@linaro.org>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
+To: konradybcio@kernel.org,
+	Kenneth Kabogo <kennethkabogo2@gmail.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH 0/7] Straighten out CPU votes
-Date: Sun,  8 Nov 2026 14:20:19 -0600
-Message-ID: <179416929442.628393.2557463177209584784.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] soc: qcom: mdt_loader: fix off-by-one heap overflow in segment name
+Date: Sun,  8 Nov 2026 14:20:15 -0600
+Message-ID: <179416929243.628393.13902347516696518018.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261020-topic-icc_defines_ao-v1-0-cae8d22649ac@oss.qualcomm.com>
-References: <20261020-topic-icc_defines_ao-v1-0-cae8d22649ac@oss.qualcomm.com>
+In-Reply-To: <20260912065651.59968-1-kennethkabogo2@gmail.com>
+References: <20260912065651.59968-1-kennethkabogo2@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,26 +64,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 20 Oct 2026 14:42:04 +0200, Konrad Dybcio wrote:
-> Make the votes only count when the CPUs are online and use the existing
-> dt-bindings #defines where they weren't being used.
+On Sat, 12 Sep 2026 09:56:51 +0300, Kenneth Kabogo wrote:
+> mdt_load_split_segment() builds a segment firmware filename by
+> overwriting the last three characters of a kstrdup'd copy of fw_name
+> with "b%02d" formatted from segment. %02d is a minimum field width,
+> not a cap: for segment in [0, 99] this produces exactly "bNN" + NUL,
+> which fits the buffer, but for segment >= 100 it writes "b100" or
+> wider, one or more bytes past the end of the kstrdup allocation.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/7] arm64: dts: qcom: kodiak: Use ICC tag defines
-      commit: 2c12b8eceb58c398437b1a8ef2569fe96daa630c
-[2/7] arm64: dts: qcom: sc7180: Use ICC tag defines
-      commit: 15a08dbfc9d819626a87d611fb3e43a3b1439b04
-[3/7] arm64: dts: qcom: sc8180x: Use ICC tag defines
-      commit: 257e705c03f52f91d0618a895a4c16d6b263321d
-[4/7] arm64: dts: qcom: sdm670: Use ICC tag defines
-      commit: 956e71f2f9d4209b0d5ff631e2399243c6c9c38e
-[5/7] arm64: dts: qcom: sdm845: Use ICC tag defines
-      commit: d099a43070c8fc2686ade2be485795bd290a3375
-[6/7] arm64: dts: qcom: sm8150: Set active-only tags for CPU interconnects
-      commit: bee518321b2988bb0b7904cc1ccf9052cdae3c92
-[7/7] arm64: dts: qcom: sm8250: Set active-only tags for CPU interconnects
-      commit: dd68b2a63e893c3b2a0e882487a6a3bb38a6f9a2
+[1/1] soc: qcom: mdt_loader: fix off-by-one heap overflow in segment name
+      commit: 3e0d5015fc90859ca8c3a2edacdbaad546969f54
 
 Best regards,
 -- 
