@@ -1,62 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169340;
-	b=W2TfUKrImHHfh2MwZWbdqpNRXzORR3D7hEB4DaHfQCdMWs5ChMlDIxRGblR0oKd8LfIv
-	 uLHULGWdfv0YiLRg9/zYe2FL+zeRt3tprqmwialTGaHMZEqCEdb1i5iWzt9XFFU8pWd7L
-	 bdJDOva1gxqDm3IMw6zViUgrH+KrEWuS6aD1jS9X9ksBcbyn7fH1CWhjaAQX46D6kpym9
-	 PaD4ct61v7+noDUBkJBFZVH3bmkyWNR8FSI/6PXI4xDmyFOCEhUuIjCKKj75UiZLB4A8N
-	 dLov0M69ch54HP5cbZqaF8dDstBA8SnK3DQVHPrhMEH1mmitIGmU5A7/mtUipeGXADg==
+	t=1794169336;
+	b=kbnxEqzVwkgYjuPHibNl5CHiT2u5nW0Rf1ic4I9lMXmwjixwRZhxg94PztgAraefF+dZ
+	 YQa/XLmvWF2fG3YSalzDkAAFDnmom9k2/SS1+m2aKs2+AcUZbZX7rDalIobaIk4pS+zh2
+	 Fl7gYsfPJJ5tNZlRigS2TUS1mrxG4uSkJ4ZR9sSnW5sLx5Ve7Y/1iDTok3PjLE9A1q6QB
+	 Lo7NWkkJl01umQLqeabb+T5aiwovtSw9Reku8eRCmpWWKrQl80td4aaYrdmsGrdmpzjhv
+	 9wcLGMVF28OtRup7dggTOWuxOdwSsA1iKPom6yoHmnihgGRGkCm4PFGU0pYdiBwmqBg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169340;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169336;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=L0ADe7WXOQa7Uf1HfwplJh1EZvR72jfcEhBUCkhKO+8=;
-	b=vK25rZ0LQxQ/oFyCpChARCNd0m/y3A4RmRIZtivRmE84cd95xgLJu0P6u0IZOSzVFjtE
-	 D6Z+Pth2JOWcx9OOl7f81qOKjUpslK2D/bjDQFEk6H8p7d/bLNpBzycvT/SB+NHT76N7A
-	 laxxJYvvqbRv2BSGNjq4Q7Jlma6XuxhdQo2nbFG0Vxat2IsEaLO9tTx+kc0DA3X9rb8se
-	 TUA3vtTSWqqRpFaCvDSwTxkS1M5Wz/UWwwUKCMFoE/sDwSYsm97Y9eqd2JdRZuhYYI8Z6
-	 DSimYJLnY2CCLp2jj7xe6Xsoa4e8n0SQvl9T61VrVZW3kVStV7C7DlwMmXGrIx6f1qw==
+	bh=EKBrfLOvz3MXTyqngwRKL2A0PiYWXU35H99I8H+ItMM=;
+	b=efpqRIiHc1v7m+z8OYFWNgIUTjPyUbmUqZm+/VMenVScd/dwUfpLAuqoM6eQySOegPkv
+	 0Ix6jtmg28fvUfxHFyk2M8gPDVOmRPbgqvuFOHs7Fl/w6M8qPilKVky1CqXPvDJefrLSq
+	 +fbbN6aeG8KWued3i1evPhGyckCiJmmq+GgMFUqvk5sChl1ATg25bizOhTf5JyhOHjLp+
+	 Zf9D3JkrrrsbQyQPaUwbHGfV7hKI4/JUtLqfO3uhHKCjQmgvOU+c5TkRwA9i4FG8vFo76
+	 gxK4v4FdbptrJtWiWJqaH3lZqw74LQPXoMjaTh/sZ03BjUyvs2Z4vCMJYyNJViq8NHw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IiYhXfmZ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CG8iRepc;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94AB4606D805;
-	Sun,  8 Nov 2026 20:22:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF439606D806;
+	Sun,  8 Nov 2026 20:22:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IiYhXfmZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30CE21F00906;
-	Sun,  8 Nov 2026 20:22:19 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CG8iRepc
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 997B41F008A3;
+	Sun,  8 Nov 2026 20:22:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169340;
-	bh=L0ADe7WXOQa7Uf1HfwplJh1EZvR72jfcEhBUCkhKO+8=;
+	s=k20260515; t=1794169335;
+	bh=EKBrfLOvz3MXTyqngwRKL2A0PiYWXU35H99I8H+ItMM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=IiYhXfmZ8lQbWXGkVn3BlePovfcHHHz2FsB5EWb/3YhoIQ8pi8TNZih6R7m+nn2Ea
-	 N9z9XO0mMt/CELizDLzncotBtiz6uDEKXff9tkjWAmr3myEhh5oJqupao+Vb9StLlh
-	 +8X7S6iXuCGz4qDe0doFvwSSiTh87ux/EegKsJcdkUhlBt0t5dHNMBoKxP5kTLB5TC
-	 iLR5UM2jznxFbRne+gO5WOxMl63F4SLf7zj+oY6t/ILDcFJSpQFudbtDTPEYiKsIYu
-	 KbqdEhJh2eSwRejBoRqna5EZd30JC/dXkRjAQlw9RdzczoDe1XF/BODiEBoCZ9bctC
-	 2E9qsGdZEeYPQ==
+	b=CG8iRepcchBpKeQy04ZVb9O8jY1kgi/zQe4B58G6k9/Hz0Zi5yYcb6ShW90gnC5Ge
+	 DYH6wdKeZc95B05uW9iZZwYI6hWWIsWfJBlCdJPIk8jAot+dOPeD+Hn5l7h7I1VGVa
+	 PjPnRjw1fcTMEwr36TWHy4XG1xoy++P/vrhMxoc2HnZ/ZyFDLqysbP/mOhCHGsg61S
+	 s9brLqFEVnzO06s0q7/WddBKohLKsb0fG5ev8FeZ6x4YzNioNSsLFDZRiRbZt20Hi2
+	 WZgdW8yRSd5xsccx7ahl4H74sZb5F8M/l4EIMmZFrgabEhfmjuX74UC4wmYqmNHvhQ
+	 v48c7npJPKdEQ==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	David Heidelberg <david@ixit.cz>
-Cc: linux-arm-msm@vger.kernel.org,
+To: konradybcio@kernel.org,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+Cc: robh@kernel.org,
+	krzk+dt@kernel.org,
+	johannes.goede@oss.qualcomm.com,
+	stephan.gerhold@linaro.org,
+	conor+dt@kernel.org,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	phone-devel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: sdm845-xiaomi-beryllium: Enable gpi_dma0
-Date: Sun,  8 Nov 2026 14:19:32 -0600
-Message-ID: <179416929411.628393.10081579455491465449.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal zones for PMICs
+Date: Sun,  8 Nov 2026 14:19:29 -0600
+Message-ID: <179416929467.628393.8362598893010731460.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261016-beryllium-gpi-dma-v1-1-76ade615c571@ixit.cz>
-References: <20261016-beryllium-gpi-dma-v1-1-76ade615c571@ixit.cz>
+In-Reply-To: <20261023123914.8641-1-daniel.lezcano@oss.qualcomm.com>
+References: <20261023123914.8641-1-daniel.lezcano@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,13 +70,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 16 Oct 2026 20:38:16 +0200, David Heidelberg wrote:
-> Used by not yet introduced tas2559 codec connected to the i2c5.
+On Fri, 23 Oct 2026 14:39:14 +0200, Daniel Lezcano wrote:
+> The ThinkPad T14s needs thermal mitigation under sustained workloads to
+> limit temperature rise before thermal shutdown. EC interrupt-driven thermal
+> monitoring is not yet supported, so use the board temperature sensors
+> exposed through the PMK8550 VADC to provide mitigation now.
+> 
+> Describe the sensors near DRAM, the fan/heatpipe, the GPU and CPU PMICs,
+> the charger, the WWAN area and the USB-C ports. The DRAM-area sensor faces
+> the keyboard, while the fan/heatpipe-area sensor faces the back cover.
+> These are internal board measurements rather than direct measurements of
+> the user-contact surfaces.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sdm845-xiaomi-beryllium: Enable gpi_dma0
-      commit: ecd550f1a9feceb4f2881d6da9bb55a6b388bef3
+[1/1] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal zones for PMICs
+      commit: 54c0271b5780c62097428067ff44834f8f2a59c1
 
 Best regards,
 -- 
