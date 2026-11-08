@@ -1,68 +1,67 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169351;
-	b=y++ixHUpXk0EAG6Gbo2H9UdCPvmIDuipfE+z4FdFpG2FU0uI/8VHUfPnX1zNowWLE+nG
-	 rWsCgGws5f12KvCxtOw2zKTdmczXi07JBOsazediruWBpa89MLqlIdZw6T6XSEqbGW/5b
-	 5gYET2xIrQieG1ZhPCvCMCkIIoH6uYrJjVkv8kqOwh45lKImA8xlsyHGY1psSpYTJIVG7
-	 oyfX4Y3glebNS425013G4NDenzy7MVQ7pkQYf/w2czi7649hhYVqaoJtAo+CbpDQa0DMq
-	 h29BrpubnkeOAMGUjwR1CnPWOR1MboyvvRPU5wccs1jIBI2O5hUaI4DC/p21X3SzCgA==
+	t=1794169337;
+	b=s+e6BLevnSdMqQdAt04SU2uC3H3wp8Ai1/lXE8WOXSiqL2kjZc43R9VZjNx5RUEdo38i
+	 8m9SFsR1/NyuHnIKFm3mKO9vjU3GgrmJJkPQPDk3/1MF5XIQ4i8065odf2djFvjHpNPPV
+	 YoK9wYthVbvbmakKCm0H0y/XTuJi+Qt3MavRLuVZUG+UUW1XOionTNahmn8gZw632lTjK
+	 JvSXPFWMHhAVsCK5FJeWOxr8vOaDWX8dXZjIkdejdpcLDrMYqdbN9/XUdCPl7lR/Wax/d
+	 30p1dmkvkod4mrePaVKx34yxaLU0Z4vTyo8POtVjtvPc2D+Tp4f7kOPcuJxDuWTj4Bg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169351;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169337;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=SsvAPFW7IU/8Can7RL0UQqVDVWEur/qiJ/Sna8vvZcQ=;
-	b=F0hI2G97xTHXV4sTNtl3YRBNYurQwDvHqFifMCjNJBG40OjCSve4j7pcyUXoe9yDfkyi
-	 lriKG/Jrw+32TLhqRcD39znjBwWbS1wRJe24Qc/JfXcsh/vd0InbZ4i5ODlEhi9ZdEbri
-	 3sD8adVu3TLzGmrcT9vyIi5A+MuxLw9RxITK7jiNmgHyG9BHTfvHpfHT/jDMqPlqzNxro
-	 kuvwHHupasmMyt5eJVKIOu/2rVrq23xbt1hFFL4QB7qfiuF46kwwh+K9mBCc4A9xmI5MJ
-	 DiVut5fDxyMv6dYJ3rfPoNLAZ9P/lhaLKfa9EYW10msqqvGc8bSSo162M2BdaooOXZw==
+	bh=uf3rYk2Sw+UtTo3L+NDO57CFXfBTdTmFk/dP4JckO3Y=;
+	b=yKwItDbr68nCLNM8+QHzQ9N7Krp1ctqCBstC6G1D7M0g5ugoG4obyjXcZmpPCF41DnvF
+	 pS3YK9lZpjYAT9Bv4EX41Wz3HgbgU0aaqkzJOvb7xGJcvpXPwVPMtBead3Vom+XB0fjea
+	 paekHGEOw+HhNXaM+mKnIUDRjqOIXeMG+ULEiBbGP2wrLf5GT0evhHqIBh4cklvDl8a5O
+	 UkMmInkPR6Z9mJ6m0JsM5xKS8ZHwnKIYTDVtMdKA9JvsXewUVWMBehrkw1shyG16vGYPv
+	 4Mwcq2EP/9QE8Yuotk6yMMZNbxLqYWL3n6KN8FXm2N4CvjssTSP2EnhTQc+BlWXmXow==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y1NHbKl5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NGTMfBrD;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88C7560A3832;
-	Sun,  8 Nov 2026 20:22:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99C95608361E;
+	Sun,  8 Nov 2026 20:22:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y1NHbKl5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 999491F008A1;
-	Sun,  8 Nov 2026 20:22:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NGTMfBrD
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8AC21F00906;
+	Sun,  8 Nov 2026 20:22:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169351;
-	bh=SsvAPFW7IU/8Can7RL0UQqVDVWEur/qiJ/Sna8vvZcQ=;
+	s=k20260515; t=1794169337;
+	bh=uf3rYk2Sw+UtTo3L+NDO57CFXfBTdTmFk/dP4JckO3Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Y1NHbKl5s9AAZzshbEd9qhjR6QkHqt2B+t4TCg2sob4/1b+06pl3WJ+o1KA/hU9Pu
-	 d/seU2fxFrDFzZOyRYH3VUJyELxrwddSxoiX9sPAqYL9N4MfLkm1cS5FKNPvj0AwY5
-	 oteG6xyYgIyO11+UoSV+W6gEADZQ+VU8oCE+CQwj45tim1MohXWgyHrgC7Q7pyN/Xu
-	 I8NEdVz0bElTJSlI930m/7+hHrqg38J+v1HI4u2ePznjM2SQWFOSIm7K6Z7NN5v4q4
-	 aN4q/d1JT6VQfxArspABVN/jAL9AqjhJFYrEll5Q+DRk5S9FgQ4wiB8wplGqAlOiUV
-	 L7RcPNj/kSytQ==
+	b=NGTMfBrDMdzgu580P8ziU9ro5+FWbd023XZ6lSD7wxSiSNqAmccK518x4v/+tVKt8
+	 qtxxvDGrlSGuJ2bCDrx7gPhbudNZ+4WcxAlkrqRJ2Y3sQk0SRYqk7p0lAIRGtNABN8
+	 m8e3aS2q4nlxLRoqc7I5a+MA2TyOBiVbiwIl7/VYBsoi6Tpg7rXXKBtDm2+xsWIc2F
+	 pcfXDrnhdg7RWR76blO4gO1FPq7maINdREzh5Pb1PPrP3rWg5aOxabYx/sLAYKRGpx
+	 fexanmCkygNfZl0/DtKQItKf/9aw8s9Y4J5kDzUCZwSwIDj8pjycWr2WcHDBZN3n9S
+	 mDELGo4BCwzGw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Cc: Bharath Kumar <quic_bkumar@quicinc.com>,
-	Chenna Kesava Raju <quic_chennak@quicinc.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Joel Selvaraj <foss@joelselvaraj.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Amit Pundir <amit.pundir@linaro.org>,
+	David Heidelberg <david@ixit.cz>
+Cc: Sumit Semwal <sumit.semwal@linaro.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Mahima Bhattaram <mbhattar@qti.qualcomm.com>,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v2] arm64: dts: qcom: glymur: Fix fastrpc compute-cb reg values for cdsp
-Date: Sun,  8 Nov 2026 14:19:38 -0600
-Message-ID: <179416929203.628393.12432179393225108336.b4-ty@b4>
+	phone-devel@vger.kernel.org,
+	Marco Mattiolo <marco.mattiolo@hotmail.it>
+Subject: Re: [PATCH] arm64: dts: qcom: sdm845-google: Configure qup_i2c2 pins
+Date: Sun,  8 Nov 2026 14:19:30 -0600
+Message-ID: <179416929413.628393.5069651762479433992.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260923-glymur-dtfix-v2-1-a4b1928e0c72@oss.qualcomm.com>
-References: <20260923-glymur-dtfix-v2-1-a4b1928e0c72@oss.qualcomm.com>
+In-Reply-To: <20261016-pixel3-i2c2-fix-v1-1-6a527d52c865@ixit.cz>
+References: <20261016-pixel3-i2c2-fix-v1-1-6a527d52c865@ixit.cz>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,20 +75,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 23 Sep 2026 09:29:39 +0530, Ekansh Gupta wrote:
-> The reg value of a compute-cb node must match the SID (the lower
-> nibble of its IOMMU stream ID) it is associated with. In the cdsp
-> fastrpc node, compute-cb@10, compute-cb@11 and compute-cb@12 were
-> mistakenly given reg values of 10, 11 and 12 instead of 12, 13 and
-> 14, which don't match their SIDs and leads to SMMU translation errors.
-> Fix the reg values, and rename the nodes accordingly.
-> 
-> [...]
+On Fri, 16 Oct 2026 21:37:39 +0200, David Heidelberg wrote:
+> Set drive strength and disable the pull on the touchscreen i2c pins by
+> amending the qup_i2c2_default state from sdm845.dtsi, as the other QUP
+> users on this board do, and drop the unused touchscreen_i2c_pins state
+> that duplicated the pins with the gpio function.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: glymur: Fix fastrpc compute-cb reg values for cdsp
-      commit: 59cfafdd42611fe446c400e692814f8acaed8021
+[1/1] arm64: dts: qcom: sdm845-google: Configure qup_i2c2 pins
+      commit: 2935a52ea562799483f263876c368d81ef870e94
 
 Best regards,
 -- 
