@@ -1,63 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169350;
-	b=HJvFyWD58kJwWntSwb+sIqpX085yz4LsW92vNtI+N2PeZBCk8/1ioXJZ85jGpVTp2Js8
-	 rYSVq71h8CVgbAzSig9gmFSrGBQ+NYPx1j+ONLwS5bU9DBpq02ULc6bpO5ZeUEdWAZLCN
-	 kCFJUKtQcsIeemzyFbUxT1eYSqht0ptaASdZfYk5GYuGl+x21FpPfhW0lpXTsksdHYzS7
-	 5f3zGVolwpmaRc02FDc/mYN3OGV8VWB2nTmqspLBMb8ombGlin0iuOiey090yiU8rHAs2
-	 RNz9ZOEMxh17qx1mBYSvaOMDFKCB3iB1xXHPPnLchrmO7z25NqNfIXISJ067LoysvqA==
+	t=1794169346;
+	b=2Uy74ukmTc5OB65UgDaCEZkPOBySLLsNOEa6KxdI58NJmEn3i1F90Y7Xs/Hqpq7nlbI5
+	 HT0LgIjM4J3LMaaTzb0J3XGoBJhbyywaRSo6iJHGWqxhuSZMOej0VkkiAzsw77jahneNG
+	 0SE/5JhSAcWm5F2JHhTu3/gu5/NyD6TxnwU5dUvK3QPbcHIKiKNWa+wCuWW7k8xCRmaSL
+	 EOBYrg8BZ/GPeeDltZBoObjm04bkR1J0SseqbMtX7IPUSHdXiY3nDvJaDGncRrjWWidqd
+	 APsLQjh5DM5xsXmKpbGBuI6stHKR8H5OMmG+wL0ckUCTrierb+mv7czGzE85QMgBjZQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169350;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169346;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=dHdYsBVn5EwkVJiTWyMdC7gQBzoWk+m6qQYWiebvhEA=;
-	b=zKbvdk2/MfXtfRoaZT7cZhFq6g4Hmju7R69M2Qn/XvMHr15WWQZHn3fjMdUV41NBthJM
-	 A7pQwJb8w4YtGB5T64vIFjjmY19IpIq6SbgEXk6PCM8tMZRKhLXWhwWsBPGVS8496x4QC
-	 BrS0nz/UAEmlGEsLRNq1pcZVOtzffU6AmKuMypDH4UNE0VbfbnARrtUf5TNtu7ac2lZ8a
-	 j4oZI1B3gaJTHXOUMss3xCPvNM4cZ+BbXnkiqMu41MRaEnpqAisPpPGbQfznMRGckKECf
-	 HqbY+k5P+g4jAViaeKu2GYPmcQbNWCXueTUQFxfrA5Dn5cONqqwhOo5QpD0Lme3dWCQ==
+	bh=oKswcvR5YtIvBDM/sKvspeXY/a7O44L2kGWjWOUqnjc=;
+	b=CP7q338DXNuwNW08E3/T+gGuhZk73SwhUIBRWvxxC0ufeYWM3bkKQfGk1w/Tbj2lYB6M
+	 /5c2ufuj8l3KWpOiCkoRRq2afz2hC/yvCPu0wesnQgg3ekEMUxJvTTsCCZfR+cTDfoZiH
+	 KJT58uqH5l0fmmDcwy9pEUJuCgOX9lkRevHUa8b+sDsk9zulB4RhFKmo2D1wXWhV45R/2
+	 i2lwgmR8rJYnYK48zWlDkOaf4txW0CivXfqG4VcVuEBD7c2LuXJTKZk33JSJzovJ0MEaR
+	 3ZBPeSj2uSi1Fb4MwM1AZfwe012omtDECbHZQCq11aTk1eGdY9EoTutqZ6k7yyGs0vA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kJ21zVlf;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f+MltNep;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAA11606D82E;
-	Sun,  8 Nov 2026 20:22:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42DEB60A380A;
+	Sun,  8 Nov 2026 20:22:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kJ21zVlf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35DAB1F00902;
-	Sun,  8 Nov 2026 20:22:28 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f+MltNep
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA7D41F008A1;
+	Sun,  8 Nov 2026 20:22:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169349;
-	bh=dHdYsBVn5EwkVJiTWyMdC7gQBzoWk+m6qQYWiebvhEA=;
+	s=k20260515; t=1794169345;
+	bh=oKswcvR5YtIvBDM/sKvspeXY/a7O44L2kGWjWOUqnjc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=kJ21zVlfsZWS0WWICPhzWR/inXw5n+56R2zhCGieWuLz43B4zdamCwtO/3L4i7fsd
-	 cVhEC7o88YTW+3+Pkgx8xwMNx7Vx7MDe2g+YB/SHJPIm95oTQN+JUqeiFy6RFgkE5O
-	 pQtcizX8PdpoZc9f5o3SfKoQBZZkQH459rhKJzfJB9xupVFJkWj3SzH9hMChHcwP0Z
-	 JbLguFcvvfF6N6iX816vQilhUzoRXvtU1Hk2sY36dUTRupIIJhuRPstRSP6Wm906Uy
-	 ogEilB4+kTRO3FrCiDyZX9Gobz+zvwDjB4Id2hM0o79UhICYnt7LPrirRUB9YefXM8
-	 XKxLNIEi5EU0w==
+	b=f+MltNepKhHDEbdA9YbTlNqZLoL0cmwVz7ayY04EiTR47opV364FsZ2Y4su3vg9xG
+	 u3oHt4UvsmafAy4rugWYexHPpr6vGpTS2Oc30VLpMR/9BJc1pgs2i4EhbO6QbTbnfQ
+	 B/sMFdVUWsmqDVS0cB+YNMSKnuPYpxu2bp28R+SMrIL+GJG3IUjo1voPZoj8kzKTbk
+	 wxMbB4ZYHaEz+V0xMW8aWMQpDfxtt1dBARYgqabIFa3uM4u52phyJOrLGVTFxL02g6
+	 7T6npEa5lYKnfCQttbJarDCYRCGLRU219UVlDdNQ7V3vYARz+OeJEzmu7BtCD7dWUJ
+	 iaKi3YGkzkIbQ==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Cc: Bharath Kumar <quic_bkumar@quicinc.com>,
-	Chenna Kesava Raju <quic_chennak@quicinc.com>,
-	linux-arm-msm@vger.kernel.org,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: hawi: Add memory-region for audio PD
-Date: Sun,  8 Nov 2026 14:19:37 -0600
-Message-ID: <179416929457.628393.10726172922960756911.b4-ty@b4>
+Subject: Re: [PATCH v3 0/2] arm64: dts: qcom: sda660-inforce-ifc6560: fix the ADV7535 interrupt
+Date: Sun,  8 Nov 2026 14:19:35 -0600
+Message-ID: <179416929440.628393.2150156225768231577.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261021-hawi-rh-v1-1-401143c22401@oss.qualcomm.com>
-References: <20261021-hawi-rh-v1-1-401143c22401@oss.qualcomm.com>
+In-Reply-To: <20261020-ifc6560-adv-v3-0-5da1a33fdcbd@oss.qualcomm.com>
+References: <20261020-ifc6560-adv-v3-0-5da1a33fdcbd@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,15 +71,19 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 21 Oct 2026 17:15:02 +0530, Ekansh Gupta wrote:
-> Reserve memory region for audio PD dynamic loading and remote heap
-> requirements. Add the required VMID list for memory ownership
-> transfers.
+On Tue, 20 Oct 2026 11:44:51 +0300, Dmitry Baryshkov wrote:
+> The ADV7535 HDMI bridge on the IFC6560 fails to probe because its
+> interrupt points at the wrong PMIC: the ADV7535 is wired to PM660
+> GPIO11, while the DT uses PM660L GPIO11, a power control output driven
+> by the bootloader. Point the interrupt at the PM660 and configure the
+> pad as an input instead of relying on its bootloader state.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: hawi: Add memory-region for audio PD
-      commit: e60f4ae23a488c745301311f29dd41da69c3920e
+[1/2] arm64: dts: qcom: sda660-inforce-ifc6560: fix ADV7535 interrupt parent
+      commit: ce13924a93f22d2dc5ccee4fad910da57755d16b
+[2/2] arm64: dts: qcom: sda660-inforce-ifc6560: fix ADV7535 interrupt pin
+      commit: 05329d94fcd490f68e3d9b7670d385080d3e9a1a
 
 Best regards,
 -- 
