@@ -1,65 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169331;
-	b=cbwJ0eM3GwJTfAvd9it4jUc0/F6dGHje0/N3RdHqFKkNrU56sfVqeSaRRYd1t4w42ham
-	 hcN28QGoAXeMFrSGKQpnnBp3pvhRjZCmzt9R8CqU3eP0d0KU5DwcdSUbcm5wR1skEOUxV
-	 nx3jwktynC+mN5ZUd2AYPu1TLlDl9gPg75sfOedVuoWkYxFLbXrQEULhVz7jpm9gxAw/h
-	 SP8X1AKl8XwArV5VhcbvAF7Psxo9uTVvx6vlfpFkBJ3JBgPoYIa0C08XZAv3FWuK00Yrs
-	 +dLVwn6xPT6YN+FFtbr1iNANW+3cdXm10XBz+qCJ18YbqCRUqLNU1wq9ZZzIU5qJbNw==
+	t=1794169344;
+	b=3XR/YT4FR8Gs1LBLQLkqUcArcCzDIAMpoTAln3kYkwIDRrYRFWQuFI3RFP5jyQEBnc6L
+	 B3lwdo8tJzEl/+J0q2h81Ok1mEVAQV12PKYIIzbqTNSc5D6ySvO9C1Rfjy5i0Ex+JzxFb
+	 7RokzcmbNCX8ek9sIPmYwM0pdLRM1nC0s4lhQuSXmkM16AVGxJczK2mcktB5LFgmjRhGY
+	 iA522UyC7xkIifWjSjjUPM2r9vhsHJSrW8rrDtrmyGTrvLt2wCKGtRS1fTGTZeLboCYKN
+	 Q5vNDNeAU95p/NajLKR+XY/kLq6KrGT3kY0Wwdwm6uYOHwvxtmgnFSWg+emm4vfVLbA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169331;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169344;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=wDiC9ZXsWsyooRxcwFqZRT/gZitI9XGp1Et9o5s7hI0=;
-	b=evKBwUdbGhTujjcfXMq7XeVM3ogDy602RhnRthayrOn8a8IpP2r1G915poQfibBLLk/R
-	 YSh0gvh2Nu9RF0h6d+ndWXhEOTFTydc7bezfBnL7U8rP/CWpZIXs3/is3V24AXIuh4BxO
-	 sOotZIgi/sJT9Pti9S0Vn5JOTTWZT3ximxv4xwRboP2eS4/tDe4++DOw1hy4n6hr1ugpS
-	 1E4Vh2TwRWk3Zi+GGUDUbRMMD9mq8w77nwt9bMsqewCC9zdmLc4isisAymlZjNr4dOu6F
-	 kpU1JyMcHMKpxQagkj84gHPNbJTPwjmVyJTLw18KZN5cp46L7YoQXFgS+/jFqQJygrQ==
+	bh=ClT4OkKbeUzu4ym5icWWj8grU8fCfsMlggCJDN6YVpk=;
+	b=GAT+3rAiGmSZ5Qs9vW/br4uo/WznYFWC5S3HFOVgWVofwS2FQYjzsvcLD+RpFCRZHcjY
+	 LLdNFdOoMF7W9ewTmqavwwaMh9UvoxGYiBVIgnA7oPv1iYWMBgdz3LRXZ8ZIJhYNJQWX7
+	 PWBFSDqfVLoHrvpUC0N48jGyTCNEYUPhBwoRuUXupR3ImLGRExDm2GqkxEsa2bgDjAQ6a
+	 neUYd1zIjcbDB35RO7/UjGfvRCbbTKsMPF3cutUbzIrziJxIg4QDyb8S5gTRf9yYcawCb
+	 Bq7zewSjsp2/JG9nJ96U8xwA9xh6V7HBcOco9WALzDkNBoBn6k8ZMHxkmA0DemlictQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CFxuPUXK;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=afJdlujg;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4AB4606D81B;
-	Sun,  8 Nov 2026 20:22:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F8F060A2637;
+	Sun,  8 Nov 2026 20:22:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CFxuPUXK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C58B1F008A2;
-	Sun,  8 Nov 2026 20:22:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=afJdlujg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34A591F008BF;
+	Sun,  8 Nov 2026 20:22:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169330;
-	bh=wDiC9ZXsWsyooRxcwFqZRT/gZitI9XGp1Et9o5s7hI0=;
+	s=k20260515; t=1794169344;
+	bh=ClT4OkKbeUzu4ym5icWWj8grU8fCfsMlggCJDN6YVpk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=CFxuPUXKUSrbFiv2Cz+4brn9HOlt/FrsJDZMKePzIdIfLQX79Wtj6/3pSYyU9D42D
-	 Ph6OJP0grnGLdRegCQrGtP7Ng6y+ZLjBpxRN7qCRixIqOJ7rzvCjET0abHd6FxjUc8
-	 b7LQpNHODlO/rLUNQahKjuJiUmkd81htT9BtFvXR/GNDYB3t71uTL1nMtzk4rmqiSd
-	 8wysfwUa3e7XxKSTUxWQiMU0Tq9tpJ2owtjF+b+uovmUG0DrYDDPz/LaSSy8+fjQ7G
-	 1JNVMA54tINjto9Wx5H2/qyGCeVMUEMOICNxV+hT5kjT6TV1DdosPSnhfGNRKShlVG
-	 rRYZO4xAch/mA==
+	b=afJdlujgQOI93tQLR9qTAPYX1ULvLFUMk/6HymDt6JF/0Fgy+JX51O9Imwlbn6pTK
+	 PegT2nos6QaoHaDi5/VUAaTH1XAlEintVNwZ6RTmd3v4Do63HQS3sJxIGgqAD6rryo
+	 fa6M7Nt4Lyf6bMM+D2FlRkIcmkk2jOmOC1rDJsNziAZ98AoWkA4jK2TvkF4tF4hFFr
+	 Lf/xZswapNDmco/KEBP36J5eAKTHz7A2qWhj1RVd5pB+WDKoxxkKuTSeCbD3pE8tZk
+	 qqUbh6JARZpkHNhcBNzD7cGJVYc6Y9zQvSdmCGzIxkjsMbwadlrk1DBOaZxOF9sZYn
+	 QfCuyVSM5WQcA==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Benjamin Kelenyi <benjamin@wendy.sh>
-Cc: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Christopher Obbard <chris.obbard@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: agatti: Make the ADSP remote heap no-map
-Date: Sun,  8 Nov 2026 14:19:25 -0600
-Message-ID: <179416929302.628393.11418005802278751117.b4-ty@b4>
+	Abel Vesa <abelvesa@kernel.org>,
+	Stephan Gerhold <stephan@gerhold.net>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Clark Williams <clrkwllms@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ilia Lin <ilialin@codeaurora.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-rt-devel@lists.linux.dev
+Subject: Re: (subset) [PATCH 0/3] soc: qcom: several fixes for SAW handling
+Date: Sun,  8 Nov 2026 14:19:34 -0600
+Message-ID: <179416929434.628393.10612241359461414562.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261001085247.1897991-1-benjamin@wendy.sh>
-References: <20261001085247.1897991-1-benjamin@wendy.sh>
+In-Reply-To: <20261019-fix-qcom-saw-v1-0-9c7ba3fc2493@oss.qualcomm.com>
+References: <20261019-fix-qcom-saw-v1-0-9c7ba3fc2493@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,24 +74,17 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 01 Oct 2026 11:52:47 +0300, Benjamin Kelenyi wrote:
-> The ADSP remote heap is declared as a reusable CMA pool. The ADSP has no
-> IOMMU, so fastrpc hands the whole region to the DSP with
-> qcom_scm_assign_mem() when it probes, while CMA keeps lending the pool's
-> pages to movable allocations. Once memory runs low the kernel touches a
-> page the DSP now owns, and the board resets without an oops.
-> 
-> On an Arduino UNO Q (QRB2210, 4 GB), writing and reading back 3.5 GB
-> through the page cache resets the board within seconds. With fastrpc
-> blacklisted, or with the heap declared no-map, the same test passes
-> repeatedly.
-> 
-> [...]
+On Mon, 19 Oct 2026 17:39:18 +0300, Dmitry Baryshkov wrote:
+> The Qualcomm MSM8996 / MSM8998 / SDM660 platforms use SPM / SAW core to
+> handle lower-power modes and to program core voltage regulators. Apply
+> several small fixes to drivers for that core.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: agatti: Make the ADSP remote heap no-map
-      commit: 689dfffc33af9f74cd42a69f948fb5ca7b5a44a5
+[1/3] soc: qcom: spm: fix the SDM660 silver L2 AVS control value
+      commit: 2fe8c4fa0ae7787e81d3737854ae4ae2c892bd95
+[2/3] soc: qcom: spm: don't clobber the SAW control registers
+      commit: 25e50bd0fcfb3a53fd505460d87bf67c21da176e
 
 Best regards,
 -- 
