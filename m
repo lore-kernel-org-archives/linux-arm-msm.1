@@ -1,64 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169458;
-	b=Apl35qP1GH825CUYD3+/37k8pwZRBVv45bFldQao/s78JhK65hF5lBzknBA/jz1w0ZPl
-	 FUUkVhEGl+6Xq9wU+5Fxx/0LQMPzm+TbhrpDT5xBKuindJWmCbppmnwCBByxPM+v9b7RU
-	 0CD6FLIfjo9J32LwNo5QFXc4s4A28Ryxxzg0kmL9qt/0fy41H5TpRXaC5ZEOE8D6x0BoA
-	 LIYNmkQJ0EzTGtqzMeVd22AcJ5ZtAPnIBcGyAnaakk92EO0mW+Fdc0DJCixUFQEguWnPX
-	 LNBkLZtDSnm+FEF8oAKOHBPsJ/D0gDG8aJTLIy4AlpH9dOJW+EZedQM8NCtebUYsHiA==
+	t=1794169460;
+	b=XpBk7R43rtRSLIapmWARVPoyVmLpcnRKdqN7kOKVUnWfac7jDUuoZio0bIjh4prjGrHf
+	 ZQ32Gxr20etRB/IcJVS/D5P7aMngofMIhn11EWUXQMm0Ug0ViTcS9HhyoBX45JMVFvRzT
+	 duMdepAp1e63Slyq5ZwE7T2L03wTwwoOrL6yOmArU2ILFL2Qqn9Eo7+VT6cYJJf23IaB2
+	 p63UIOkjflQWu7unZbkcWUBLjAgD/e/ovSQwukH/r9gFSQMv/lIukGPhCUJZQjmnnY+Ks
+	 AQCKnK8/baDfCI/UBliyjEWxIC0a3frNdEHebmHmO1OeFFwmxl8L6typvwurWFAOF6w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169458;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169460;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=knsOuQxv7z99zN/nJ0HIhzuTCBqbTWFDFKW1SjAZuZs=;
-	b=kaeAmqSeD/EiWpHJD27f+vfulYoCdUJDbzNie8+nXEokWbZ8UD0o6t8iA6XvgNfXMS/W
-	 53hj2p8Y8MW2XHTE/MNI7K6joZ2sN98HQGYFTmbSY9iD157BxbCo04S7QHNuL1Z63KIYy
-	 D2Bv5fHX4aeHXw+TEHbEfm4zrQNEykZHUfDjxL9SpADgIJB2P7A6o4gWZOIUjvZuaNpxo
-	 0kFWCSwMIFuswner7177GTO4MDao6A8bOIK7cOczpaqcJ+jgz/5ovqiRGi9tmTwYRKpKU
-	 i/XmpUICIf9U932F/HfcBDtGaZj4c1GV/ViacRKwsXDzUsfBxKr6yESt5Nn2dCwBLKg==
+	bh=vzxQIzXIkRhzxrK3AVz7Qm6YhaMaHbBHLPgJcPIwyts=;
+	b=ky443xoiEqmlAiFdEUJ4CC34RFxr6sxyGwo5pTCEYAZA1wydnU6zb8TxQD4bDLXc15Wt
+	 fhGX3+mBI8lROMXMcUGCwYZuqGIsoWzGjefxzM4RgXmw9LJ7hNDcAv32lb7KDKDG3u6ZU
+	 GY9tVrCLjGATZYkbHTjBGoC3chkwDbvkE2ywUg47xF7A2L4+7TAxyWrtLU40ej/BXnk8Z
+	 JEh9C1oFyvdBoYgonjrve87/10rdhScDlEYp0PczEJVe1sA4DD4dyffYMdKqSZuxTQ+33
+	 bNysbYvRwB991aKyN0j/EcKwOe4Xt0hspL0JoKAY9sps4Qxxr53kYX+yPj2tlEecsaA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cy862oaQ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Mt0G6NMP;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED4FD6078AAC;
-	Sun,  8 Nov 2026 20:24:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693786079415;
+	Sun,  8 Nov 2026 20:24:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cy862oaQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77DB91F008A7;
-	Sun,  8 Nov 2026 20:24:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Mt0G6NMP
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4123E1F008A6;
+	Sun,  8 Nov 2026 20:24:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169457;
-	bh=knsOuQxv7z99zN/nJ0HIhzuTCBqbTWFDFKW1SjAZuZs=;
+	s=k20260515; t=1794169460;
+	bh=vzxQIzXIkRhzxrK3AVz7Qm6YhaMaHbBHLPgJcPIwyts=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=cy862oaQh2lmv155w7/OG65SVVO5XDSgAgwLsZxx7z7dAVSED2hpZcdiaYvMNDvmu
-	 YvM91WN43UmRzjZWe9WkeBW+ojd/uG3jyn/iDMhNrHU1LThjcE2HW7pib5/7rVxx++
-	 TitZ7dKS4Y3eBpRWxX8Ms7p0UET+vMfSn//tXAjouPsxZLgKzuVm8rYL6OfFbY0ueO
-	 RaaZygHKOuZHu7QJZnRLnpXuhzFQyPnFnvkytm0mbnyj3aKhQCk5BuBDwfUB5DCbFf
-	 leFjH+0NXOF2vQ2BGwF1rOBbsqR8nlijtyBvRCBgcSHJCeelptGH7JC5Clo5DSeZ3o
-	 w/3swHXE1Fj9w==
+	b=Mt0G6NMPpRoW52KwvBjGyVtSoVVtBc7FStaVYouHxeU9d/yrrPbZv4jDgL0kdqWGX
+	 ZmK7OxF5oy0SAFIVZGGHOuITzlg4PaQ/Q6LL3DT6/ngt8sTQL0YiqbHRD/FICKNiaa
+	 WY4QnDjXjxaOsHXniOWIaagGCfVNcMBpVLzwIIlz4RMl+UEXuhzu6Du6Q9rpvFS1Nf
+	 wLWWZTJt7gIVU1l+8i4JGqxkDzKAjK9q++WFxH7LbHRgtVjXJYOiC/UqAPvj15tCy2
+	 gm88bx9fm1E3/alw3ag1tHw977KO2Yepa6qE9TDIUmM8zrFeY16UqZxIR4rlQpmpMD
+	 aOoMrEf/lmLrg==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Nabige Aala <nabige.aala@oss.qualcomm.com>
-Cc: Arpit Saini <arpit.saini@oss.qualcomm.com>,
+	Nizat Mikayilli <nacht@dxdmail.cc>
+Cc: Abel Vesa <abelvesa@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v5 0/4] arm64: qcom: dts: Add display support for Qualcomm Shikra
-Date: Sun,  8 Nov 2026 14:20:53 -0600
-Message-ID: <179416929287.628393.5571647288691112633.b4-ty@b4>
+Subject: Re: (subset) [PATCH v4 0/2] Add Samsung Galaxy Tab S9 Wi-Fi (SM-X710) support
+Date: Sun,  8 Nov 2026 14:20:55 -0600
+Message-ID: <179416929465.628393.6808030568990049146.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260930-shikra-dt-changes-v5-0-8eaf658a0e38@oss.qualcomm.com>
-References: <20260930-shikra-dt-changes-v5-0-8eaf658a0e38@oss.qualcomm.com>
+In-Reply-To: <20261022-gts9wifi-dts-v4-0-a361428fe59c@dxdmail.cc>
+References: <20261022-gts9wifi-dts-v4-0-a361428fe59c@dxdmail.cc>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,22 +71,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 30 Sep 2026 16:45:10 +0530, Nabige Aala wrote:
-> This series adds display support for the Qualcomm Shikra platform.
+On Thu, 22 Oct 2026 23:58:18 +0200, Nizat Mikayilli wrote:
+> Add devicetree support for the Samsung Galaxy Tab S9 Wi-Fi (SM-X710),
+> an SM8550 tablet. Two patches: the qcom.yaml board entry and the board
+> DTS describing UFS, microSD, USB 2.0 peripheral via eUSB2 with an NXP
+> PTN3222 repeater, keys, GPU, video decoder, ADSP, the CS35L45/VA-macro
+> audio path and WCN6855 Wi-Fi/Bluetooth.
 > 
-> It introduces the Qualcomm Shikra MDSS display subsystem support
-> at the SoC level, and enables display on the Qualcomm Shikra CQS
-> EVK and CQM EVK boards with the required DSI panel nodes.
-> 
-> Dependencies:
-> https://lore.kernel.org/all/20260929-wled-supply-series-v1-0-75d0a83b4b00@oss.qualcomm.com/
+> Tested on hardware on top of linux-next next-20261002 (boots to a shell
+> through U-Boot): storage, microSD, USB gadget, framebuffer console, keys
+> including the book-cover switch, CPU frequency scaling, GPU firmware and
+> render node, video decoder node, speaker playback, DMIC capture, Wi-Fi
+> scanning and Bluetooth firmware loading.
 > 
 > [...]
 
 Applied, thanks!
 
-[4/4] arm64: defconfig: Enable ILI7807S DSI panel driver
-      commit: 2aac58ae1dcb80a0eac632c268f1b3462f150fe7
+[1/2] dt-bindings: arm: qcom: Add Samsung Galaxy Tab S9 Wi-Fi
+      commit: 3d392cd1dfff35d748d8390f1bf5bcff56e82eee
 
 Best regards,
 -- 
