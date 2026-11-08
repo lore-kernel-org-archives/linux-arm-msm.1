@@ -1,60 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169405;
-	b=tSXLlGSVQ4jAZ4DiP1OEjS7RDaw3vep45SyTdK77VvEshaRbDPDglo2tnpArJ9QgtWan
-	 TpJUclwVjY2G9mGqb9uW7L7Ka8dm6COiGRq3o2M5OERXa0t4AGR36DZOG8bonEmPmBJh+
-	 F+K/HBvy7hAOMNS/36I4rrQW3D2wQOf9fQT8tK41cv70b4NbPyHFUO+cmqvXywLWWTOV/
-	 C7riqTxFnW4+YNdzrqDqkgmdXLp26JBtGWHSrqrUYlq1rERqX8EMHQgVQpCS08qH48Uz0
-	 MwfXY0GN8D3n7e9Agy/Ia/zElCZKJXFQVh7Cj46BlsSOLb0gHadGRycFFdoOfACrm0A==
+	t=1794169410;
+	b=ZAjC//pXKcZ6i9VL8ADFAFPAlfvDPqrmple62CZe7i1pI/qNGbpYM6CnpjzYG4/2hKY5
+	 yWl4AC1piel9KZmhZYZB0SGehGsntN3Y8BY6XnYJ/nRLcUQpa+F1rfhBh2Mvx2z9ld3FU
+	 zvBAkHXNKbEbxPC4f7T3Ccjb9aV9hON39kFl0Lji537nP/krh5Q48gp9aTROKyWT8S71c
+	 oJ9h85T5hedLapvZpez0aHpouaPyydykRd1BUA4tRzYd8eLgOfcpsB0hCnu5BR/PyPNtA
+	 8CD2dqA71xDMcr7sOWVtobVGHP9KFpR7zqdMcqEUy0RL8lUxu56W4CfJWnqPDNiEduQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169405;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169410;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=kU06O4DKa9Y8SwOkpvFM1DLhsryWtBjVd1EgIkUN+GY=;
-	b=aAGsCUcDB537zsA2JZn3kG/repRMuDrwLGohOZnYEtTt4zi4pQ0GU+5EmgSKwN9x+Wf3
-	 Ga3XXuB+I+htVvqE0TUi9qn+Qwv1v1r/ff0W+CI5uAad8fo9B8Not5eVZcjjUQaELx2BH
-	 hPFoH44nkPgYGCs3+Xb4DRj2Uj5dqhcVWgH+er+t6Q7Xuwfg4haanOi0cn1+rHeHDW5po
-	 cOC6V+eNwS0LyCOQSjkjHTnUqlaNFpL0MYXqg+/f2SFxxJULHNMgUyj0Qq1f+opTT9zBA
-	 1VC85JNLyJ4GZoRK1HEZH5EHFc7j6/nzGgEh6OiDkGZi0fLW9/uPqnr8D8JicCeWvSg==
+	bh=1dtWyhD7jwZKZFG5AGRcSW6g5SyHSgdWtbJuXnuJu0A=;
+	b=tdo9P2NPj0FpW+3LqfiYCbJP3WgYH2SC5wE/QJeJjDJoGnAbfiChZWq4Jpthbe621cdF
+	 KHQYYWBb4fGb6i+OkIwjyBcotRKfCSchaSN0AZg4eiW3JmrBSU+4jH7P4tm2IxTOd8ltV
+	 FRiiNoQX15GRORcxg8ru6i+wML2Apqk71thPvAssE0lcwf6tpS5IGP8D5fbBr7Yi8Z9gq
+	 /xc9krm4YYHgcnoLiqTSwNRIBq+wHOHokJvUlwxfdYAShqsAif8NkteTIIwsrPiJxPiZY
+	 P6nAA4DOBhiLTyujvqAVKARLnpguZ4qB3czqlKDTod0EtRtC+U808efrl/bg7uKQAuw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FHceo0TB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hup9f5vz;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B78066070CDB;
-	Sun,  8 Nov 2026 20:23:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4ABE6071630;
+	Sun,  8 Nov 2026 20:23:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FHceo0TB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6E9B1F0089F;
-	Sun,  8 Nov 2026 20:23:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hup9f5vz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B21C1F008BE;
+	Sun,  8 Nov 2026 20:23:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169404;
-	bh=kU06O4DKa9Y8SwOkpvFM1DLhsryWtBjVd1EgIkUN+GY=;
+	s=k20260515; t=1794169409;
+	bh=1dtWyhD7jwZKZFG5AGRcSW6g5SyHSgdWtbJuXnuJu0A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=FHceo0TBWk2NueP+54BXVbc31M0sKpdDxeMZEF4Pa4pz7bWK16m2rchm5Z3jzbRHb
-	 MeTdYKYWEVRcWfm0myNZUu5yJNnafo+FgTY59KaWYXWSJtU/OGVGM67acCqVqBjeqN
-	 2L8D1Ft3h+povNOZ86TUrR7qOWTvHREQxP4evMlfbHn3oLbchGefCOESxpStRJwUYf
-	 kyfMMYIWk0KrTA+tB3bNAjlPkJ9fwddaFsypDJ4DQbplpIrsTtLHN6bOi2PeNAPx2i
-	 7ZYdvblVE8v7ILHEqTUGhZ+nTzD+ySI6y/dZtM4R1HffI3lyijpT8cds6b3RHcCuwc
-	 gsI9vEemmDeGw==
+	b=hup9f5vzJANYZxWKk2z1XOYjN/I6tNFz4AtFtfySO4N7Ino1xcI4DIiHYzGCZVXgF
+	 QETxiJHpuvvvpCASBLQiepdQY5GxY8+WLHXkNxsbvDbEOcbLY9DxRiP2el0Z6FuhoI
+	 sVE0ISYFveLTXAKN5iVmO9ETql44rtBER8OJJEz1PtW+yUwa5NKp+W92y44OId5jmW
+	 ArZr0ggFG1KhFJOHZy6fl3z/AI8LJUvu3Yq2I3V9KdrR57zE1RfXHqeZ00hCafxj+g
+	 3In948WocHpQ4C8RtDURWNbqCFfWAGecHEtH1HyDQxy6fWMmBhrrA/4OuxM8FgBNdE
+	 M9XflQaM+lxeQ==
 From: Bjorn Andersson <andersson@kernel.org>
-To: devicetree@vger.kernel.org,
-	Kaipeng Zeng <kaipeng94@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	conor+dt@kernel.org,
-	krzk+dt@kernel.org,
-	robh@kernel.org,
-	abelvesa@kernel.org,
-	konradybcio@kernel.org
-Subject: Re: (subset) [PATCH v6 0/3] Add device tree for Acer Swift Go Pro AI (SFA14-11)
-Date: Sun,  8 Nov 2026 14:20:10 -0600
-Message-ID: <179416929522.628393.2913043282200216817.b4-ty@b4>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Cc: devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v3 0/3] Add support for reporting boot status on Qualcomm IPQ9574 and IPQ5332
+Date: Sun,  8 Nov 2026 14:20:14 -0600
+Message-ID: <179416929436.628393.11004902662518300994.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261030064149.14736-1-kaipeng94@gmail.com>
-References: <20261030064149.14736-1-kaipeng94@gmail.com>
+In-Reply-To: <20261019-imem_restart_reason-v3-0-e6b1ff5de841@oss.qualcomm.com>
+References: <20261019-imem_restart_reason-v3-0-e6b1ff5de841@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,20 +70,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 30 Oct 2026 14:41:46 +0800, Kaipeng Zeng wrote:
-> The work started with x1-crd.dtsi as initial template.
-> HDMI refers to ThinkPad T14s.
-> Bluetooth refers to x1-crd.dtsi from the ubuntu-concept kernel [1].
-> PWM brightness control refers to Ratizux's GitHub repository [2].
-> 
-> Tested on linux-next (next-20261027: 151a134a) / Ubuntu 26.04 LTS.
-> 
-> [...]
+On Mon, 19 Oct 2026 22:16:15 +0530, Kathiravan Thirumoorthy wrote:
+> Similar to IPQ5424, add the IMEM node and the restart-reason child node
+> on IPQ9574 and IPQ5332 to enable reporting of watchdog boot status.
 
 Applied, thanks!
 
-[3/3] firmware: qcom: scm: Allow QSEECOM on Acer Swift Go Pro AI
-      commit: dd851d601d63bd157562e7fc054eafdcc2ffd936
+[1/3] dt-bindings: sram: Document IMEM found in Qualcomm's IPQ9574 and IPQ5332
+      commit: dbec23d260c9db8bad6537ecf6aea40c475f5352
 
 Best regards,
 -- 
