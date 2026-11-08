@@ -1,72 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169391;
-	b=c3ql4L9PuekgYMzwyerihgyW/4L1bWjQIVrlAGEGhWF3VN7LnDOVy6VN5MqHkYkpg3sA
-	 s19/f3t0RSdACT5RVfc27nleqE65GNpzFBtPYhgvxFlY1bPwFGC6R2zVlEXE5LUuJ0jno
-	 cCAJRU+OEWJoo12+hLuPqnlYUN5WGyW4xkXjKOPK/twx80HahwnlKGaFk5Yqf0NMMCaW+
-	 x2nvd38s2LBrTS+pc0RWH+WUOd6cDVn4s3eHlpThQrCM/fN4rMfSS6sIBn/59YrWsCBif
-	 GQD78C2Fuo/bSVlLwVfT1Lu/wZIFscquNn3+YTM+E7TFB8x10jtoWBxR5SuagBwNofg==
+	t=1794169397;
+	b=4eQq49bm3NB8Bb+6vIovHmr5ysao6Eo2ZRvWqCFqX+g5oTkUAVWEwXu3seug4jL620i2
+	 ZRkbEXnYrG5kiG01o1XYdrTG4acL/2eDvaJQz6i6JSAniTG2jg/6LvgxA9WhegAyBkbhC
+	 y2Md3pZ2jmYliOB5E1DcqCitwrxAO1fp4Uorb8NLtI+U58FQGfcoP3KSIosF/Mp/WFrxx
+	 8ByfX2uDWK0wxYl3XMDko7vD6X7MVpLGQnrv6iAiZAyd97P8jxWWVDSmeGwR7GPXhmEJh
+	 Uk3aFOsCdH2Vqy8Qv0725LDhb1A0CHPVsacrWOWlGq2NkaEc9h1VepKCEMCdhikDzwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169391;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169397;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=1niYB4/2ehrsrZgjTei4qsNtyyz2W1DlXFO7D7AcvtA=;
-	b=suRxqew91t8+cnHBCZlUsddOSDvTFB2EpiqI8aA9qyGZlqP5OZrjgg+fVk4aCnIe464I
-	 6S8bVl5kmoH4y2JnozFyimgn+BlV68iPgKEsFi52jX0OuQAffKhSpOyo7kVsFMJ5vbEje
-	 m4uRHirBRnAz19dBxNs905PxqpFqZ5qN9jActmJSwRFHRu+92hlvS/Kd0m1wIy2JXfl89
-	 wc85L6+VtrrzOiAPCdIWTM6S0fvsl6uJ1ntB5v3cIB/bd7KE9EpCoDnQa91vnhZgohZ3G
-	 Fkq+bjh6X4KCrQRaaB58FhDGtZfkvmKoe4jfk2q9j9lMdBV7Nv7XfNCCvPuFSF14S1g==
+	bh=1j8KpJ5sZwlHkcwkDDb9e/P2rtf7utaUidDMtXarwys=;
+	b=4Q5caC76mY7b9frNSXqsRJq1iN+d+AoyNBfVCGCb0Qgv3nr/XvFvvx+/wQbe1RhHL/Dl
+	 AUNuclnP7Qr4TgTHu0J/Abq7ssTCfp8wW5JaQZqozayz/lNUsa2NMYPzz6KhzFwn8leQW
+	 pTH1hl8r4G8JZJUtLL+UNZ4oZEAXYz3F1LhLW6Nxk6qSR8XcUrfGARsh1VkZ3v2yQ/wBr
+	 SWucRkVDBFNWEA0GVlNYvrPHU+MNOcAeJxMFUemkGKfNN4G+fboOHcQV0lak1kuPmrt3F
+	 gae0oMtgLgrkaUGCY5Q2VqLnyOceOQEZPt9M3XQF0QafGAux8leDL5+9LULZjzhfeyA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SUxn+aZn;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TQwQ+Ckl;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9346606E51D;
-	Sun,  8 Nov 2026 20:23:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 530B56082BE9;
+	Sun,  8 Nov 2026 20:23:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SUxn+aZn
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 942CF1F00922;
-	Sun,  8 Nov 2026 20:23:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TQwQ+Ckl
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 387E11F008A4;
+	Sun,  8 Nov 2026 20:23:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169390;
-	bh=1niYB4/2ehrsrZgjTei4qsNtyyz2W1DlXFO7D7AcvtA=;
+	s=k20260515; t=1794169397;
+	bh=1j8KpJ5sZwlHkcwkDDb9e/P2rtf7utaUidDMtXarwys=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=SUxn+aZnwHL3kSmrBw3rH1SK/QJlUBYSraUs0i7rPd2qM3ysb/8lAj2o48MxBIh+6
-	 ahmC8itFtHjSWyi/ztK7/yzkjfmbwrQ4xF3JZCuAZso0iE725BvsENBIFvZ1XwAyG2
-	 mYQMIlQK15qWzdq5wrPy4a2E2gC/RYPbcdvQHOAZPvRor6HtZNQF9dTR1ZT9Og7gjc
-	 Z+Pax+6dBHyz+fQgibXoDTtxK3+ExG5A8K0ywKuyfL3ziDWe5ah59Rffg75lEb7WZ7
-	 B2nULiZ02gzNY90C072ikEbm4uA7hCrl3fl1jUnfki55xeGEx7XLe+kFzYxmDxu4e1
-	 JRi1+hoHEopXA==
+	b=TQwQ+Ckl7/rNjDx4OA9tW5b/D+rq9uEAj31vmxzJqx/PzpN9ozEa880YfHR3w6aUk
+	 WpDZekWmR9GPwuJjknDdi9xkGkZCv9A5ZD0NM8cYPBKqPIMUnuV+pbmwDPXA622pPr
+	 fzVxbREPSgYsluogwQJOKpdmAeO5iL+WOowezPZVUjZB2YNHm8WmX0A99dT7kz34Tn
+	 yPPV+eYUtke00Xhhev+/aZO9KvRzns5iQT72GQ8/LsMC0I7waKPeA9mr+AmDy2FDuj
+	 46dlQBHNe2g+2ICfu5x/c0gWHvA3gVp0DwCMAnFdnxo6Mwz/ksx58c/oyLQdmQYgZt
+	 NEgCc0nNU/oog==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Rob Herring <robh@kernel.org>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Jianping Li <jianping.li@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Jagadeesh Kona <quic_jkona@quicinc.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v2 2/4] dt-bindings: clock: qcom: Add AV1E clock controller on Glymur SoC
-Date: Sun,  8 Nov 2026 14:19:59 -0600
-Message-ID: <179416929559.628393.15113236846453035838.b4-ty@b4>
+	linux-kernel@vger.kernel.org,
+	ekansh.gupta@oss.qualcomm.com,
+	quic_chennak@quicinc.com
+Subject: Re: [PATCH v1] arm64: dts: qcom: talos: Make the ADSP remote heap no-map
+Date: Sun,  8 Nov 2026 14:20:04 -0600
+Message-ID: <179416929378.628393.12814297492759225393.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261104-glymur-av1ecc-v2-2-7c25a73fe811@oss.qualcomm.com>
-References: <20261104-glymur-av1ecc-v2-2-7c25a73fe811@oss.qualcomm.com>
+In-Reply-To: <20261014083820.468-1-jianping.li@oss.qualcomm.com>
+References: <20261014083820.468-1-jianping.li@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,14 +70,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 04 Nov 2026 10:37:34 +0530, Jagadeesh Kona wrote:
-> Add compatible string for video AV1 encoder clock controller (AV1ECC)
-> and the corresponding bindings for Qualcomm Glymur SoC.
+On Wed, 14 Oct 2026 16:38:20 +0800, Jianping Li wrote:
+> The ADSP remote heap is declared as a reusable CMA pool. FastRPC
+> assigns the entire region to the DSP through qcom_scm_assign_mem()
+> during probe without allocating the pages from CMA. Consequently,
+> the pages remain available for movable HLOS allocations even after
+> HLOS access to the region has been revoked.
+> 
+> On Talos, GPU stress testing triggers a synchronous external abort
+> when zram accesses pages within the ADSP remote heap.
+> 
+> [...]
 
 Applied, thanks!
 
-[2/4] dt-bindings: clock: qcom: Add AV1E clock controller on Glymur SoC
-      commit: b7da3a5bced40996bfe2bee44ecdde4424ccd037
+[1/1] arm64: dts: qcom: talos: Make the ADSP remote heap no-map
+      commit: 99c8bf54fb62f458b4bd69fc7b42c6d344d16758
 
 Best regards,
 -- 
