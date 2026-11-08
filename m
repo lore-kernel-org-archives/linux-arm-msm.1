@@ -1,61 +1,64 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169441;
-	b=l6s5Is3NS86w7Cq61hfS9KlvvYfv5YA1n+7/kd98uVSheEiGDxPahT44VmuaN83D39yd
-	 Q51sTB57gBqwYBoRmOutf6Dumm6ylRt0mUXZxpEqkc8pFDnu7oTqa6HPsC+KzCzCL0Kq1
-	 I2KQVjTAq+BIEqgGxgSZEaemjauz0S+hTBVM+dcHN6Ofjk8X/wx1MUSMyvNfgXujBs4/U
-	 2zIwMl2pWjaL+vHE3peYXtw4bLnTaQYJx47bfRRN/L17/1gZght5IXEx0P2Tz+V5tWjmV
-	 fUs/fuXcdyjzFIUvdnwkG3oy48lTmL8zr20o6fwmuOSRK3C3Tay7fOGhXWX4FO9moDA==
+	t=1794169436;
+	b=U779h1BURc2aZY8mFZdWVMyZuBCMO84sNVuAH5TWVfTAGf9pcq5N33GU/u4ZBiWrX51Z
+	 jBRug5+VQz3ECFuzZ9xe4Xm0l/TJjM2kknfy/AKXrOZcA6iUIbzV+IfC2IlpbcW6keWje
+	 QMyDpnbrXTqyZBeYteVmX9F5mCilT37K00X1Kq7jAASW7TYj+5peDrnno9s/TfHP00lVX
+	 wy5jjWgxzjghnAGWw5OzQmw+9kho/BKablD7VMt0akNPVqrfOXDiIgqc56lIM3Om7Vz8H
+	 bHLHjNYWN+NsJOWJIk/KFDUL2dZpWrHfKd9e9sd6QoxZcTf9BodCNPd8UdNdQWMGajA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169441;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169436;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=KstahBYKDuEZUSXEABsCmaVJSY5dVl9UpUgKjQbpmA8=;
-	b=l28gqqtrzYlfPIix5v7mbf7PfzryigRVIWPcDCOAOsSqA2HmpiNLTmchpZ0tngkSo6DT
-	 gODfeKpSNVTlhYaYfQ+SKXFF7n8dr2KDy5ICpLIe6EfF2qx1IlSDBm5MjKiP9X1j19GlL
-	 wT85juKdJJLicTVJPR/G/z4xQIAVu8ivnnBMQvTv2h6q0eiHu1aqI8CFAkPiWIbUiXnJ7
-	 OGcleELmpD+pVpPYvJVjv5mY5BwQGEVZ1UbIP9GIVlI9+fRrcsR8uVJsLzF5FgTFsWJpR
-	 NVI2zv1nCLrfGwZzi7D5TlmfGajfacuTo4U/uDF3PlHnT7rPuQ615K0ugOaNv3nDtKg==
+	bh=yM062hjqe/L/kjeMXCI3lCF7NxsgX6Rg9G4er0qrnSc=;
+	b=Qvf+IhbXGwj9AeX17G4JsUoqP8oo1Mpj+aYh83rVUZOaPvr5eyZovep/RTbXxrf72v6l
+	 4s8BdEZpka8HjVaPypuAXF/N34YBR1286BDtluhFGFM4I7tkduMi2PsahxJMBSRB8kT6N
+	 fQ/WUbiy10TqgWUHDxNWBIFIlhjEDFHZMyUl4SeUn61Hbi4s0I+A233SjQBL7IXiVqP30
+	 Ld73LbBb12JaguZTf4n2nBqkQUYuoW2S95cekPDjbyPba2+nJB4WtRV8ipxTk0iiLnqea
+	 RoWLZ1XRd/wPclRdrRXf7XKYrbdf3dw8wTfZGIFxqPQxyzlB+m/0ZKKMvYwjaG6M/bQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nnBOTdZ1;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=chqM24d8;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC3A260762D5;
-	Sun,  8 Nov 2026 20:24:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24ABE6075993;
+	Sun,  8 Nov 2026 20:23:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nnBOTdZ1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCCFC1F008A7;
-	Sun,  8 Nov 2026 20:23:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=chqM24d8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDF431F00900;
+	Sun,  8 Nov 2026 20:23:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169440;
-	bh=KstahBYKDuEZUSXEABsCmaVJSY5dVl9UpUgKjQbpmA8=;
+	s=k20260515; t=1794169436;
+	bh=yM062hjqe/L/kjeMXCI3lCF7NxsgX6Rg9G4er0qrnSc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=nnBOTdZ1ZNChdRqvruRoQh10ZBTxue6WhQ/PBEpskKolUL5nAwc12Q0i8iAL+1/0d
-	 AqMqnaAoJki4rW7tX/zkdX1NEkWe4dcMwdbpvwEueLiFAnRwAWyMNFofg1xCVwSqp1
-	 eynGKpVnsv/GunRrjfLiUJI6cnwI8JBk7MDo7sm8ldS0lnhpryZztNH7/rvfSZP06h
-	 aFwKTUVxGA5eKUyQN9Nsu1aA6vtfeU7CEbcZ0eG0fJnBjaMV9hxHJkxtEl1g9nBNp1
-	 +OzwZuyEEeXzkHnNRFgz7X0b/+Mp9U19YfmPyR6524lljlBTyYaF9jgLsX2wexOIKA
-	 TBjWRenpXG1XA==
+	b=chqM24d8IvCNEM0ribOi1Avyo5REYzY2sUgfR9W5a5rLN8w6RzL3+fwrxmDJq38Xi
+	 lSl6rzk2CGeDn27ietQujTPwAQYbhKF2SVBkOY1sjr/ZDSXp+EPikPg48/lxdPlXex
+	 cGG3xUbAiVeLvi3eRafTIiiTBrWuBjTsRStRmi8Y+9BDB2Q/6bN2Ft1PK/rl56cT+b
+	 NzMYwKG3mb8bIj8Iga8klFLx2QX8vDpyjeP5phD+Y1t61xRMLR4t4ZPBCzQ5hr6uBM
+	 9C4j/8VDPBiW2Ya0sRzlM+lg10lQX8eFdObjMH/IJj41I+EOG4idfMzLoAL+5hua19
+	 6aG4vv396AAHw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: konradybcio@kernel.org,
+	=?UTF-8?q?Lukas=20M=C3=A4rdian?= <lukas.maerdian@oss.qualcomm.com>
+Cc: abelvesa@kernel.org,
 	robh@kernel.org,
 	krzk+dt@kernel.org,
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
+	conor+dt@kernel.org,
+	srinivas.kandagatla@oss.qualcomm.com,
+	akhilpo@oss.qualcomm.com,
+	jie.zhang@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	abel.vesa@oss.qualcomm.com,
-	mani@kernel.org
-Subject: Re: (subset) [PATCH 1/2] arm64: dts: qcom: glymur: Move the PCIe graph nodes to the board DTs
-Date: Sun,  8 Nov 2026 14:20:39 -0600
-Message-ID: <179416929489.628393.15063239710569397276.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: mahua-t14s: Enable GPU and GMU
+Date: Sun,  8 Nov 2026 14:20:35 -0600
+Message-ID: <179416929545.628393.4745607631367828558.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261027122410.62219-1-manivannan.sadhasivam@oss.qualcomm.com>
-References: <20261027122410.62219-1-manivannan.sadhasivam@oss.qualcomm.com>
+In-Reply-To: <20261102142812.1353199-1-lukas.maerdian@oss.qualcomm.com>
+References: <20261102142812.1353199-1-lukas.maerdian@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,24 +72,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 27 Oct 2026 13:24:09 +0100, Manivannan Sadhasivam wrote:
-> glymur.dtsi describes an empty port/endpoint pair under each of the four
-> PCIe Root Ports. Only the Zenbook A16 connects one of them, to the M.2
-> Key E wifi connector on pcie4. The remaining three are dead nodes that
-> no board ever wires up.
+On Mon, 02 Nov 2026 15:28:12 +0100, Lukas Märdian wrote:
+> The GPU and GMU were disabled when the ThinkPad T14s Gen 7 device tree
+> was introduced, as the Adreno X2-85 found in the Mahua SoC was not
+> supported yet. Until then, mahua.dtsi inherited the GPU and GMU nodes
+> from glymur.dtsi unchanged, describing them as Glymur's larger Adreno
+> X2-90, which is not what the Mahua hardware is.
 > 
-> These dead nodes add more churn compared to the duplicate nodes added in
-> the board DTs (when other glymur boards gain connector support), especially
-> when they get added to other transport nodes such as UART, I2C etc...
+> Mahua's own GPU is now described: mahua.dtsi overrides the compatibles
+> with "qcom,adreno-44060000" and "qcom,adreno-gmu-x285.0", and the msm
+> driver carries a matching Adreno X2-85 entry. With that, the nodes
+> work as-is on this laptop, so drop the board-level overrides and let
+> them inherit the default enabled status.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: glymur: Move the PCIe graph nodes to the board DTs
-      commit: 2bd1d30b8df560a9aa69ee961b2ff1dafa67788d
-[2/2] arm64: dts: qcom: glymur-crd: Move the PCIe slot supplies to the Port nodes
-      commit: 4c250a69d5a2a06de88b89eb1c3c365f60233c73
+[1/1] arm64: dts: qcom: mahua-t14s: Enable GPU and GMU
+      commit: 6927620c6c9d10b4e9a5ffa3f1d08be34051807e
 
 Best regards,
 -- 
