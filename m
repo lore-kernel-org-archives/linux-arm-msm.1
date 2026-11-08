@@ -1,61 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169473;
-	b=wCAJkHq7jnf7bFsBtvuy9K6AAsbOunKugKL3PtlJQF4Cvo/2Xfp+o3MUdAmwlJ6FjUu0
-	 vIyCZBGr53QYJdfQu5rdnId8z5+i/VJTG+8P2Cqczayq6+q1emEJEU01Q/chicGewwL3U
-	 fLYIaJPzw9SBqMxa7ii15K2xrAxAs93KLtEvKE+y15W3U/p0vPNtfwC9uTBxst/XC9Not
-	 zbt9r5XtK0vRjWfzbwysaYudJFhrgXkugJGoTqAZAyl2uv3TJ4pk5PIAuZUI8Vt0XyaCn
-	 KitDiX8P6coCOIk8V0o9gNkhU56SyBuBIf/v8NX2JBKq5OGr/DMnplECvEb3dr5trtA==
+	t=1794169485;
+	b=kPaAYVV8PBh0Myu6jP60WU/aGMkVM+/cU92fRJL4WxRmNg1io7/u+abYs3o4LAXIbGQA
+	 uTNrD21W14WvW4uh87fv5m/x26KG3tYWSHDnXBbY/q4ggJpdtKqXhYEC8iG7QVXnRu4wp
+	 D7tEoFZ3FcadF1b5D7/8Ho96uwaFwjnpAYk6zmBZ9miuTkXhBJ4NYe+/gHrtkZ2WoH0Ds
+	 UJqtPpImAR1j/8gRCTN/AF5ulajgj5x6N6ly10TsWFmMeFTVqGVhqyprgFLhc9mTGQhb9
+	 4dshMBpORo+YmsPymBT9bMB357pTyw8w09YP3QtZ072EXbuGmTQaQf2ADxX7qDovhMA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169473;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169485;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=uygfYEpKnkwmVZhADVlp9pkKSqQqdNPc+V8s7eo3P88=;
-	b=jN7bZPe0HypwYA4tIZ+USUyRAKBSYZWzfi6oN+0AiEsfEY1kDggYPtST1CUFswkyE503
-	 jGrSFY+C9ceiYnVfzigwvoKbsb2eYc+nuy1/3jb7ojh2NIhEeVUDSxdz6LBx0gCJWueDS
-	 IylbkNivR0CaxP0d0tD4fZYUy0ZT8Umwo+F2bNqbFjWxqQ0P8FjT7KG8ZXgtGEVSPQ1f/
-	 VfgkKJ4YFPv7W1YEWqShypGrbx0FQBKgOE45pEm1Mlf3MVHPNI5SUIhQzVImhyTg89U1X
-	 3F8poC0rutzLRxpMVzZaCZGM5qYd5GBUTtbyhhbSe+FrcVwt+avjn2u9eEAZDfSfmhw==
+	bh=fe0HUxH8whcIIIhEpcHMkLPN0zHNZ9HhlgjK+xZ8x8U=;
+	b=2tUZ8T0DJtEiEDN1PZ0WSYhVoDlHWQU5ccggnr8/pdKgbPwQQSp7MQjb0O0TYH69BIru
+	 pcyq6HCItue5/51lRpwHfRQt2Owp2GADOKQJxoYPURaQLwLnPTzH3xuoy+OLyWI7ww378
+	 y04q2udLJf3loaZDk0S0QBUvlhQSbIkS0V2hSeUxU6AUF/KwvrJXaby6kRZiZsLR23ZE0
+	 8jS+/mlEB3wYSgtyRCjRsIk94FcORUb79/kt8Kh5HZWyIw+ibr0zxDtfWYrucbIe8mVrD
+	 alcCJRGAYe+PnJDlZdiRJ9lzpRsYU2/6A6pwhcv+bZzQCECt9615sx9s2uYZ7ePmx5w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ew4hhQfz;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JtUoteun;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693A7607C5DF;
-	Sun,  8 Nov 2026 20:24:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD720607ED5F;
+	Sun,  8 Nov 2026 20:24:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ew4hhQfz
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58B051F00900;
-	Sun,  8 Nov 2026 20:24:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JtUoteun
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B4211F008A3;
+	Sun,  8 Nov 2026 20:24:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169473;
-	bh=uygfYEpKnkwmVZhADVlp9pkKSqQqdNPc+V8s7eo3P88=;
+	s=k20260515; t=1794169484;
+	bh=fe0HUxH8whcIIIhEpcHMkLPN0zHNZ9HhlgjK+xZ8x8U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ew4hhQfzq8Xg40yF1lsmE2H05SLQwTEuKiRwBj2Zz6M9pkcYuJSNubROOtxFZx9v1
-	 0ZJ0fDCnxz5EDfb4xbo3uqJfNhhGWDFrA3/qP8nFnNwW7jD5SazCf7ygSXUkiMnHQV
-	 weWqKRWt+KJXQipGqmEEooYQeYSP4KGSyjWNz1aJ7ZWZD4XAepIR/dtS9DPsQlE7eI
-	 G8IUxqJ1flub/MmdetNam2Jd9c/rPbQ9JXEbzlAvlw0RUomJazZcoDFSHdQ2f4qLGr
-	 S1j9WfY0mijM0beZGZBaM4u3V9WBrRZtwNKNC50W2STTixr7gUuPpT9GabYdSJfh41
-	 gtgPPn1+V8ItA==
+	b=JtUoteunW2dv5hKKht+swyT6/KXsx9SFJiccgQbczAgfop0/cFxl7rN2hU1yzigpW
+	 hEA8y+1ik1rUs2kEu5+i1pZ3cIUaCF1EfoE2tsKv8QL3+APceJFpMxi3f4lnOIrpgz
+	 5DcGtCWhL1ZeMhkcsZ9ceO8oYZ8y6Vh9le5S8FzQGHubEjJta2X39M7gIMYW9+jezc
+	 GiSSp0oVTGkmfayd0FWpoGSx2pAGC4AAEVCLQRZsO/gx5ETf1L6O2ucOkUmaRoM86S
+	 mzPOUSKQtsgHBqmLlr98hnReyJP1NC7wl6CNeFLoZBp6ENeAlUSQMg567d+5JbI3ip
+	 Q0D4SaicxM0QA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Cc: linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: (subset) [PATCH v1 0/3] ASoC: qcom: split out self-contained Hawi/Maili audio changes
-Date: Sun,  8 Nov 2026 14:21:05 -0600
-Message-ID: <179416929329.628393.8263808018546375822.b4-ty@b4>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v3] arm64: dts: qcom: nord: Add adreno SMMU nodes
+Date: Sun,  8 Nov 2026 14:21:13 -0600
+Message-ID: <179416929356.628393.12258823662750870745.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261006053717.3455143-1-prasad.kumpatla@oss.qualcomm.com>
-References: <20261006053717.3455143-1-prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <20261010072823.3952417-1-shengchao.guo@oss.qualcomm.com>
+References: <20261010072823.3952417-1-shengchao.guo@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,24 +74,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 06 Oct 2026 11:07:14 +0530, Prasad Kumpatla wrote:
-> This series extracts a small set of self-contained patches from the earlier
-> Hawi/Maili LPASS audio submission to simplify review and reduce dependencies.
+On Sat, 10 Oct 2026 15:28:22 +0800, Shawn Guo wrote:
+> Add the Adreno GPU SMMMUs (MMU-500) for both GPU instances.
 > 
-> Link:
-> https://lore.kernel.org/all/20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com/
-> 
-> The original submission included changes that depend on LPASS macro codec and
-> platform updates still progressing through their respective trees. This series
-> contains only patches that are independent of those changes and apply cleanly
-> on current linux-next.
-> 
-> [...]
+> Wire up the gpucc clock and power domain on both adreno SMMU nodes in
+> nord-embedded.dtsi for embedded Nord variants where gpucc is available.
 
 Applied, thanks!
 
-[3/3] arm64: defconfig: Enable Hawi LPASS LPI pinctrl driver
-      commit: cf446442a4929416742719913a55eda92a8801e8
+[1/1] arm64: dts: qcom: nord: Add adreno SMMU nodes
+      commit: 037c673c0cfc1873574a5cd7cc7f8bcd2ac15046
 
 Best regards,
 -- 
