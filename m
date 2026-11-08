@@ -1,62 +1,73 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169513;
-	b=4c/lqSkrLu0/nRJ2kqk8o5nJG6aZes0PO1iwTP2HJNjY69pB8EZW2JkIwBxhI8bqUpU8
-	 bs7DRZQBKTmaoFB8vUqGTpQJDwrOdLDTHYmNI/Nk68FtPA+pMoheTr/W1BgpxY5p7Rlz3
-	 gy7s+6BVhYLUSiXOoFI2w/atpfT/q7Wq9hLw98LCKYPImnDgk3bYI4Q0C5xZdxXzHiB/A
-	 c8D5j8kDK2kT6KgWiVKJMCm1G2yzosHGE4hxkrGbveKtlK2PUJrZSgRRpJw3OQcbmvyru
-	 tr+th1mdxYTNiPE3XTyJOj0wGytKykauJrlsUROL6W8qoSLkDYvvzqfBgO5qWb0WYjg==
+	t=1794169518;
+	b=U0C5RRj9xKRFuIFG8Csn/F3w+en38C1Pgx5lDcUZfz5/JiLNvTmaR1kGmksdfPcbbQAq
+	 lBb+HH+v1aMC6zj1E1eqjH9Tg7OXKyj2S54IDBLHXUlchcOzM88f7LBOQ9OqivCgPZ69T
+	 SFMIOXWPC5R8O/WHx70TW6lzpl9f4HEQaly5+GrTVnOARIu762Hpc2JGQm0frYXrpsdnM
+	 dV8w/R7BneaskuAMT7L1zBylw04f4M02VWdZ8zriUzJW3vxROI+fuOUZA4SOID3U/UFeI
+	 kWNjXGXT6GybKKeUUNCQ0b+53S+sZctrBDLmO4aNLWaToFLx6mEiUMLyJ36ktuBOMgA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169513;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169518;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=FelJQnYKaqsep/uETiRc3VxfJwVekzolCHDYtCVv/JU=;
-	b=rRBKfuUL2CDx3N707jM8e0VNAS/uB8MI8NGzYlgH3f5J/ZZkmxam107BNr9rJuXP2rYb
-	 eVbU1T0pEgJeFVNicWVWkAHNMoQCzQFTxO3+TWESxPBZXPhlLg3PaS2P8h8Uc7adOb8/0
-	 QQ3Xi0Kxxp6/mMrYvbPMLF2wUDzsq9Rr7g6l42C0Ll1I4uDFwjiuzDVO9PrsuVvJLqf1B
-	 FHj0nU3nXAYeEZ8XMjoaRpNnTsfD8TVu+vdoPzHeU1xHy8jfIt5kc/dTRsH2hR12p6b/8
-	 AmfdkVOIYYRx9PciVGrufJl6S8R6fAmCTYQw42kM43DTyPFdaIjYM6U/y7PGmXHU/CQ==
+	bh=KUkExc4669Xo5M0pq5MFv2MBmaFModmA2vimX3IaYCk=;
+	b=UySrLiFCBRlZ1tgMqAv8TwjtGRs3+CTtddcYQ3n5cur/qBViAuoE6wLchsuC+6Puquzn
+	 eukMITZGPrZD0RWycrAjSW8S1gbh709dh1SJO3MFxfBYvqlZ2zJwZKnITkJTx8fK9gSaU
+	 e2DEqqWaP8RFrH1whym8SWNLVXX6Ej97HKCPsAsViMUnzux1gKkFDl7pZZgjduZF7xfG0
+	 h1xNcTTtTLGHlJzecYu+SSCmigIJrV/+0Mt7CF5u2j7Wbif8STitYCdh5Gc1PLJEvmtuA
+	 R3JlDTCzJDP6s3iHyzXDcS/hzlaKMrF4lYfQNKz8vK9hfWMw8beTvQ6Ev8TJ7UIawfg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YI0m+i67;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ectRRz70;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBFB60826D8;
-	Sun,  8 Nov 2026 20:25:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C56F6084459;
+	Sun,  8 Nov 2026 20:25:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YI0m+i67
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82FF61F008A3;
-	Sun,  8 Nov 2026 20:25:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ectRRz70
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7D051F008A2;
+	Sun,  8 Nov 2026 20:25:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169513;
-	bh=FelJQnYKaqsep/uETiRc3VxfJwVekzolCHDYtCVv/JU=;
+	s=k20260515; t=1794169518;
+	bh=KUkExc4669Xo5M0pq5MFv2MBmaFModmA2vimX3IaYCk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=YI0m+i673f8Tb68VNKLQYGt18MXkq2px5OD1kX9blYA08HnEWRolFoM0soCMZAcM8
-	 D+28aX/B2/8b6VuWrKvGJxir8qVJjwtMx9F6XyGZh91kaCVMAbKp/JID8tkujyLKJe
-	 qHCCdVR5iluhXr87oh9kg+IcOkAaRv3yAtRSsjC16ziVwB+8FxyVf7d02HRQ/jwmUw
-	 gcA2N9wqyQK0owWaCSddMwgRmdnnS8ZoFc7z7RSVMM5Cg4eemdi5ZEmAoiBvWHw5JC
-	 siPefcsFtqRCjb5OfZt1GA8mOdl4KyNjPVRLPTEi5YCSQN+JfUnMGHuTQ9yiioLsev
-	 ZsOzapvJqGTKA==
+	b=ectRRz70jeilpdeFOOPtObn7aRRQbSFNzr86oHfbEcMIQ/ykPy8+O8dj4BHzzdT6o
+	 kr+6gtz1yrjabPCYkKImC2/NmVMYDHF/4jckWr33HlvkLwKUpDr6sVP9DJNVJEsx9k
+	 wkeFx6W+NDrLnl6u1NlebeVvb8JVw82jwLf136q1ccnKBVUpXuE4o7/coI7fn0jtpZ
+	 B7w3f6Oe37QNKI+4fQEjS2w2ukGrQjynbg78hZm6EXhYzPPMo9WJWl3fABUCRCk7he
+	 qZPEk4e5UnGfs1o2KJRR8+TFjVtqZS3ux/SHARsff5FPXuyLZsC4mnlnvZXfbOgOrx
+	 UiDMY+nxNJ2fQ==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Vladlen Grachev <webholt@gmail.com>
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Kees Cook <kees@kernel.org>,
+	Tony Luck <tony.luck@intel.com>,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	Erikas Bitovtas <xerikasxx@gmail.com>
 Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: msm8996-oneplus-common: Drop LVS2 voltage constraints
-Date: Sun,  8 Nov 2026 14:21:34 -0600
-Message-ID: <179416929516.628393.15139951526312242199.b4-ty@b4>
+	Stefan Hansson <newbyte@postmarketos.org>,
+	~postmarketos/upstreaming@lists.sr.ht,
+	phone-devel@vger.kernel.org,
+	David Heidelberg <david@ixit.cz>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Vitalii Skorkin <nikroksm@mail.ru>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH RESEND v3 0/3] arm64: dts: qcom: sm7125-samsung: add initial device tree for SM7125 Samsung platform
+Date: Sun,  8 Nov 2026 14:21:37 -0600
+Message-ID: <179416929241.628393.5215102040104571354.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261029-op3t-lvs2-fix-v1-1-42ca9d992c20@gmail.com>
-References: <20261029-op3t-lvs2-fix-v1-1-42ca9d992c20@gmail.com>
+In-Reply-To: <20260910-sm7125-samsung-v3-0-c467bea0fb9c@gmail.com>
+References: <20260910-sm7125-samsung-v3-0-c467bea0fb9c@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,24 +81,31 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 29 Oct 2026 18:12:17 +0000, Vladlen Grachev wrote:
-> Since commit 27880745470a ("arm64: dts: qcom: msm8996-oneplus: Add SLPI
-> VDD_PX"), OnePlus 3T no longer boots: the PM8994 RPM regulator device
-> fails to probe, so UFS, USB and the display never come up and the phone
-> hangs on the bootloader splash screen:
-> 
->   lvs2: failed to get the current voltage: -EINVAL
->   qcom_rpm_smd_regulator remoteproc:glink-edge:rpm-requests:regulators:
->     lvs2: devm_regulator_register() failed, ret=-22
->   qcom_rpm_smd_regulator remoteproc:glink-edge:rpm-requests:regulators:
->     probe with driver qcom_rpm_smd_regulator failed with error -22
+On Thu, 10 Sep 2026 15:27:20 +0300, Erikas Bitovtas wrote:
+> Samsung Galaxy A52/A72 are smartphones released in 2021 on SM7125
+> (atoll) platform. This patch series introduces support for SM7125
+> Samsung devices with the following components enabled:
+> - Framebuffer
+> - GPIO keys
+> - Hall sensor
+> - Vibrator
+> - Regulators
+> - Reset input
+> - Real-time clock
+> - SD card
+> - UFS
+> - USB
+> Along with that, SM7125 was affected by a hang when launching SHM
+> bridge. A similar issue was reported on a similar chipset:
+> https://lore.kernel.org/all/20250721-sc7180-shm-hang-v1-1-99ad9ffeb5b4@trvn.ru/
+> Add SM7125 to the qcom_tzmem_blacklist to avoid hangs when booting.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: msm8996-oneplus-common: Drop LVS2 voltage constraints
-      commit: 22acabeb506e7007b416719f336c8bf276017178
+[3/3] arm64: dts: qcom: sm7125-samsung: add initial device tree
+      commit: e3738a846e67c27bb0ca0e0c5f0bff73e0a65d49
 
 Best regards,
 -- 
