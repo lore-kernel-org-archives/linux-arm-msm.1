@@ -1,65 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169377;
-	b=gtG55469hd+roQlQNgmXhOZmeA6A2TI4/eDa4osyWCsqGtFOU6r3arVte0JSADmdjDNM
-	 l0JchZv3zKLs38tkku4KUdiBtiyriPdWY5gB/g90/riBtqGZxM0Wdr7/PRMbc3cP4t6VE
-	 r2AyCJNQaW6JqWKsqHJ32Mp8CwRMlphcZy6wml2V0yMVMI/W2Rauhxks4gQyg8GUX30B6
-	 R1ZO17tpFrqG0zyhjoHaYB/+ut0Z1hxWT3TzFnJjXYtagn8PtUdZERNAgwrRHaB4axRuH
-	 X/wbLV2cCV0wuDWcydpLBAJOkTAXMGJNXNTT34ErZRJMD2w7VrlobUEszyFn7YGMW4g==
+	t=1794169382;
+	b=qesDKyTW8TJMbiVVu/nw3GVf+ykY0JAOXBhtz8YVmG8iz2DY2e2g3gm7KmJZ/6ByEldH
+	 UJkt2HgZvaYQvgIlM/eggI0lUUwWgMS6FDo8HYwury5Xynq9EsZNoV6c+93kzF+hW5p3M
+	 cwIMenV7WyzUlX8Q4S0jdoy0h/lD09GMmLlMIwmScdMtVNUDgH0++SdRbH7zoiLoJXYZb
+	 WiOLJfPdHPFVPmUbLjhX0OxRD1qfNbJkFXbE3vPuvWdg5u8KwAbx0z4+nXMqBAcst6035
+	 raz99H1crK3WqAf18EMCUU4x8XWm821TiDI6/tpH7181HQclXf0816vpkMNqWWrm6TA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169377;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169382;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=+TGNtBkbY9q8F7TsjFNpGCb5Omd+5aPs8mlI1uZL4OA=;
-	b=19N2DMqiljrhatFA5jeiMKIeKd1zbsrv1p3uS6sssBoXpndZ3hypu5ZHyXCAsLZxxS8e
-	 3lIf120LzvGjZYq9bvHXdpffI/udfYsCE4R0bMc98D5wXRFz1xSfehDAe/Hw91fy+K3oU
-	 aZAyD3XPZwqblmV2IAixGqahyYCEFgFQV4ndbsz3dpBSSfbA/gDCRH+pFaC1mUG2wdHhR
-	 CMpTGbqwKuL5KjvhqHmaiunVgLOOufXyRk8OYU9FD85yX6ZVGXbURvuvr37Kiiu2QSfZL
-	 HzzEWXi94FVvPLJdKzGJXia6AGlKHGSoqxGt0E1WorAkB3IGvMWNTTZYCAW9r+O+n0A==
+	bh=un5KME5VaqGRyFymJ1U5KruFxksDbs/z7sIbDgLE1d4=;
+	b=Sq/3Qz9EOzCob4gUcQGJ9MhWRLQICV4GJm7PHGQNDJ0AaOyKa5RrrSuR4EwlITThRLaB
+	 5D3S4EA3ly9hSovq901Xr8yvRrHvEsG63mclSZYFCuIPslfcm5DbbphdSgRkkNTWDdvnj
+	 WqKZE86/5au87vXCAk8r9TBRUVXCIjXJ8/lgWkra7t9KV2pvvcleEBxAPlSVL9CWWREZy
+	 aFMoOi5DrLXf3koS5nzdG753Ll0dSyCdnPhEQ55/uUhsWDZCfzmGgBZlisNbz2+D859fq
+	 wj3Bx/j1V7QnW4i6LJ8ibPPWGYnM9w3pgpnm9HQ9vCMxSz7D3it2TswBmuWzRLROung==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KnAjCatM;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="L/ec+uta";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74067606BA7C;
-	Sun,  8 Nov 2026 20:22:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1454606C772;
+	Sun,  8 Nov 2026 20:23:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KnAjCatM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 841471F008A4;
-	Sun,  8 Nov 2026 20:22:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L/ec+uta
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65F111F008A2;
+	Sun,  8 Nov 2026 20:23:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169377;
-	bh=+TGNtBkbY9q8F7TsjFNpGCb5Omd+5aPs8mlI1uZL4OA=;
+	s=k20260515; t=1794169382;
+	bh=un5KME5VaqGRyFymJ1U5KruFxksDbs/z7sIbDgLE1d4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=KnAjCatM6jtU5Iv559+8anP65FzZlX7oYCx74Fw01CPC5a3xdNRotIhg1ODU06D0Z
-	 3O1AJitHI8qNpJZ2TdesIlen+KA2pweXMoaeeHhllEvRpgnrKYuf0ca+5X+X+T9PFM
-	 e/mBp6YgR/gVUPKPhiNoIDdM14QFYZOpRJ09ag0pzjshIOv8+Y81RqT/WW64I0qwoX
-	 DtDmRmZCQeEWg//12huru/SDg4iR2BmknRNu5YUL8sWqyRS8GFsfjJplxY7V1MeZFX
-	 qw5EMIto1jlAmgezvxoMpI6F4YHfNBQi/76v2ANljD9tyY7j7gIxQfpF2huzvsHkkP
-	 4Ur940OSHY4ig==
+	b=L/ec+utavsY8iBqw++e/nOeROwDx9p1l+BGDvUSPB/x6PGhhnQLadBDy8q8MgJBoX
+	 J+BvFryg3jLMl1cVgQANHzzhrvBTt4vaQpoLKk2wai03wWxo1JPpELRN1YQyBThx6v
+	 fZXdsp8MKvMI4w/np7N9/bXMVhkOAvE+rz33SfvcvjdBMlklEOGf/qAjZ+jeTEuKkP
+	 i5oPh7feOb/HuAuPoOd4igUcxIBkJGeudxBA+TuJmWhEGxv0LSjH4JRk3v05vDoiXL
+	 lr/cgQ5fLNot9LKb0H9IwSg4UtsPns7dQWz2Bnz/t555mHjEsU1oSg3sp7SX9QNjyo
+	 zcRHX4xxBhkkg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
+To: Sebastian Reichel <sre@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	devicetree@vger.kernel.org,
+	Reza Kurniawan <imkyufie@gmail.com>
+Cc: linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v7 0/2] Add initial support for Qualcomm Kuno SoC
-Date: Sun,  8 Nov 2026 14:19:51 -0600
-Message-ID: <179416929284.628393.3018595425203478493.b4-ty@b4>
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org
+Subject: Re: (subset) [PATCH v2 0/2] Enable USB support (peripheral mode) for Xiaomi Redmi 5A (riva)
+Date: Sun,  8 Nov 2026 14:19:54 -0600
+Message-ID: <179416929246.628393.13881108135908117642.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
-References: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
+In-Reply-To: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
+References: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,23 +71,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 29 Sep 2026 15:18:05 +0530, Hardeep Sharma wrote:
-> This series adds initial support for the Qualcomm Kuno SoC and the Kuno
-> IDP reference board.
+On Sat, 12 Sep 2026 22:18:10 +0700, Reza Kurniawan wrote:
+> The purpose of this series is to enable the device to act as a USB peripheral.
+> It enables USB-related DT nodes (controller and PHY) and modifies the
+> charger driver (BQ256XX) to expose its VBUS state through extcon.
 > 
-> Kuno is a 32-bit ARM (Cortex-A7) Qualcomm platform. The rest of the
-> series (bindings, GCC, RPMh clocks and power domains, interconnect,
-> pinctrl, geni-se) has been applied and is in linux-next, so v7 carries
-> only the SoC and IDP board devicetree, plus a small geni-se binding
-> update that lets the QUP wrapper use one address/size cell on 32-bit
-> SoCs.
+> Driver change is required since the device has its VBUS connected to the
+> charger IC, which means cable connection/disconnection events must be fed
+> from the charger IC, to the controller driver to dynamically enable/disable
+> the USB gadget functionality.
 > 
 > [...]
 
 Applied, thanks!
 
-[2/2] ARM: dts: qcom: Add initial device tree for Kuno SoC
-      commit: 7f6a63bc5fc9bed3fac66ac57000882926d25f84
+[2/2] arm64: dts: qcom: msm8917-xiaomi-riva: Enable USB support (peripheral mode)
+      commit: f6a4df4921fb88f1e729a19a48e7aede852ed6a6
 
 Best regards,
 -- 
