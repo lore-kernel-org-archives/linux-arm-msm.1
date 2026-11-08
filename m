@@ -1,64 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169333;
-	b=LCCHAkJOWND8lecEyBtZtc0+026bEMsY8IeDBIp0ql0birrUcv6I6GoyLPmCNANASiJq
-	 xvS0GACklqd+cLXi02NL5/iz7S7eFAw1Iv9lrHQ/otlWA8eUDZgbTx0vCFkl7EyYsc9f6
-	 73TCGdsKscgIPBtlkLUhadE9NUjwfxJ44sDsY892viDfXTh8grm6fp8LNlectMOWv+RBR
-	 UlC7imFB+OiiAC2COkShSsQHJDGSwA6oso+/yExaf7De5kTpZTJqpNpMwa3p7Z9I8+4tp
-	 HazypT06kSpp4PnyyQJNOCXzlTF7qC3GyFXQkMagMwnnN6u0m1pLGlUI9yni0TehYUQ==
+	t=1794169350;
+	b=HJvFyWD58kJwWntSwb+sIqpX085yz4LsW92vNtI+N2PeZBCk8/1ioXJZ85jGpVTp2Js8
+	 rYSVq71h8CVgbAzSig9gmFSrGBQ+NYPx1j+ONLwS5bU9DBpq02ULc6bpO5ZeUEdWAZLCN
+	 kCFJUKtQcsIeemzyFbUxT1eYSqht0ptaASdZfYk5GYuGl+x21FpPfhW0lpXTsksdHYzS7
+	 5f3zGVolwpmaRc02FDc/mYN3OGV8VWB2nTmqspLBMb8ombGlin0iuOiey090yiU8rHAs2
+	 RNz9ZOEMxh17qx1mBYSvaOMDFKCB3iB1xXHPPnLchrmO7z25NqNfIXISJ067LoysvqA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169333;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169350;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=ThUnCMLTdWbOUbhvSRp73yiZV8kdFhxkHbsG27oSbso=;
-	b=iKOKz9+AGQ1EZpEl60wQF7Ay+itkaYhk2z+i3FUQKpIfvqHDMxAKL2Z/MhMDq9Zm9CGt
-	 D+ScW/sIEqNHym5Mdi2Uhhgj55qoH/okT8cSPCeyS2XXSxFbttqZRhwTWt3XyMEvwv33+
-	 S44vi9vwmqjVIDE4fgpHg/K1rGJaDUIpXpi7OeuxnQTl7ujop+NPmXviN7i1QH7pO5EtN
-	 4RxZTGsYCaMirpHG+cvFRxUYw1phihc+UumICMJgK7uSA50YiK/sA7vvFnqL35+0QQpxh
-	 Ts9PuhdI56DuHiAQbFlMxmLO/jPgZW8O0t9hIW6Vl06om3K/XEonQkoQNr/K0LR9E9w==
+	bh=dHdYsBVn5EwkVJiTWyMdC7gQBzoWk+m6qQYWiebvhEA=;
+	b=zKbvdk2/MfXtfRoaZT7cZhFq6g4Hmju7R69M2Qn/XvMHr15WWQZHn3fjMdUV41NBthJM
+	 A7pQwJb8w4YtGB5T64vIFjjmY19IpIq6SbgEXk6PCM8tMZRKhLXWhwWsBPGVS8496x4QC
+	 BrS0nz/UAEmlGEsLRNq1pcZVOtzffU6AmKuMypDH4UNE0VbfbnARrtUf5TNtu7ac2lZ8a
+	 j4oZI1B3gaJTHXOUMss3xCPvNM4cZ+BbXnkiqMu41MRaEnpqAisPpPGbQfznMRGckKECf
+	 HqbY+k5P+g4jAViaeKu2GYPmcQbNWCXueTUQFxfrA5Dn5cONqqwhOo5QpD0Lme3dWCQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=htnzI+do;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kJ21zVlf;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A887A606D801;
-	Sun,  8 Nov 2026 20:22:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAA11606D82E;
+	Sun,  8 Nov 2026 20:22:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=htnzI+do
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2483A1F008BE;
-	Sun,  8 Nov 2026 20:22:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kJ21zVlf
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35DAB1F00902;
+	Sun,  8 Nov 2026 20:22:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169333;
-	bh=ThUnCMLTdWbOUbhvSRp73yiZV8kdFhxkHbsG27oSbso=;
+	s=k20260515; t=1794169349;
+	bh=dHdYsBVn5EwkVJiTWyMdC7gQBzoWk+m6qQYWiebvhEA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=htnzI+doboP8bZ+n2MxXeFeuhJfzmAxjTf3VgoXVl2y+zIz7qUzsDvMYEXMTkyfS+
-	 QndEpFClutCLaVyqiwriR4KlnPHOMl3xAljLN9hUWfrtnL+F4LWPjwpcSpe3w+YrWz
-	 zszfeDxzQD5Wfe2nPNCq1IafpoGLq/de5aqklCW+1T+S2M/0nVZh4mc4UPVtFYtuFz
-	 RNE/T/rBCz+Ge52LPX1UpD7Y6ANFqOxDGd2887BdBwarzMGo2/JrDohg9JHkq4j/ut
-	 U+79MHJdSw0GE+NN7H8GKBHQaj9Y4ScNdbwe32KUd5VvQJo3l3wzYMnkqHbfws5Ue7
-	 MJIlLMRBJPARg==
+	b=kJ21zVlfsZWS0WWICPhzWR/inXw5n+56R2zhCGieWuLz43B4zdamCwtO/3L4i7fsd
+	 cVhEC7o88YTW+3+Pkgx8xwMNx7Vx7MDe2g+YB/SHJPIm95oTQN+JUqeiFy6RFgkE5O
+	 pQtcizX8PdpoZc9f5o3SfKoQBZZkQH459rhKJzfJB9xupVFJkWj3SzH9hMChHcwP0Z
+	 JbLguFcvvfF6N6iX816vQilhUzoRXvtU1Hk2sY36dUTRupIIJhuRPstRSP6Wm906Uy
+	 ogEilB4+kTRO3FrCiDyZX9Gobz+zvwDjB4Id2hM0o79UhICYnt7LPrirRUB9YefXM8
+	 XKxLNIEi5EU0w==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	=?UTF-8?q?J=C3=A9r=C3=B4me=20de=20Bretagne?= <jerome.debretagne@gmail.com>,
-	Dale Whinham <daleyo@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org,
+	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Bharath Kumar <quic_bkumar@quicinc.com>,
+	Chenna Kesava Raju <quic_chennak@quicinc.com>,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Haipeng Lin <jimmie.lin@gmail.com>
-Subject: Re: [PATCH 0/2] Backlight fixes for X1-based Surface Pro 11
-Date: Sun,  8 Nov 2026 14:19:27 -0600
-Message-ID: <179416929416.628393.6374210428119516635.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: hawi: Add memory-region for audio PD
+Date: Sun,  8 Nov 2026 14:19:37 -0600
+Message-ID: <179416929457.628393.10726172922960756911.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261017-sp11-lcd-fixes-v1-0-0eb916c01a3d@gmail.com>
-References: <20261017-sp11-lcd-fixes-v1-0-0eb916c01a3d@gmail.com>
+In-Reply-To: <20261021-hawi-rh-v1-1-401143c22401@oss.qualcomm.com>
+References: <20261021-hawi-rh-v1-1-401143c22401@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,23 +71,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sat, 17 Oct 2026 18:52:24 +0100, Dale Whinham wrote:
-> The LCD variant of the Surface Pro 11 has had no working backlight
-> control since the device was added. Its DT took the panel description
-> from the OLED model, where pmc8380_3 gpio4 is the panel enable line.
-> On the LCD model, gpio4 enables the backlight instead, and brightness
-> is a PWM output from the PMK8550 LPG on gpio5. The supply is enabled
-> by pmc8380_3 gpio10. This is the same arrangement as the ThinkPad T14s
-> LCD and the Surface Laptop 7.
-> 
-> [...]
+On Wed, 21 Oct 2026 17:15:02 +0530, Ekansh Gupta wrote:
+> Reserve memory region for audio PD dynamic loading and remote heap
+> requirements. Add the required VMID list for memory ownership
+> transfers.
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: x1-denali: Add missing pinctrl for eDP HPD
-      commit: 2a9f7dd326116f10f6c4be60cadfc7293c2eab74
-[2/2] arm64: dts: qcom: x1-denali: Add PWM backlight for LCD
-      commit: 28184d5a3698d125bee804aafa638ce38a033c88
+[1/1] arm64: dts: qcom: hawi: Add memory-region for audio PD
+      commit: e60f4ae23a488c745301311f29dd41da69c3920e
 
 Best regards,
 -- 
