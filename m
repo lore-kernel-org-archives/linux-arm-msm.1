@@ -1,60 +1,114 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794136573;
-	b=mPKh7UVxxXLXFB6JYnxMSgrRtE+fNfoDVuAEkrAkxu49MHMQV0V1CEVMmhsNv0FDhfxR
-	 GhYrD9nqejgBSo+U17EORxWFhuJZgi79OJru7/mkTni24xUOkuuKjtkve/cJQTSWlKVc2
-	 AbmP7pvIikkFp1MwdmsrJvvjUHvUqBOhRqTA4BnHp7bi8heoCnZpCPkf50N2qA3sih4GM
-	 clRSu0LX2eV+KhdTRB9XlBaWnEyggpBHBedDhXAs4RHDIjXe+dzev03i9OjRNtxb3uGzU
-	 QRxi/yZ5O6NfnwKgiZTZHHBVUBoOlbW6edbkTw3i4pjvkxyQmtV4ZrRivdvNZ55Lhjw==
+	t=1794138461;
+	b=3V5cDL/dxGBMjPkgZ5fZElRMnnPi0X0oHt3i9Hfs6LAl6vsmhXgd1gT2yd+/dVHxTqWI
+	 7+9A5Bub+I0VcqAP7ELkaPmHA0F1j6sjwiwjIcHfG9DT2HVX8u7QS3XFr8JGgZ1UYbHkR
+	 TlmfWj6s+xBoFL+KPliQNCG+0IGJXWKHf1y77vqh1gI3FL/NL7kqnOu2yLEaAMmqqROvX
+	 b7A5e370OR6oqer/wKu60qnes//9bxF3vZPLMQu5kkr1qBl3iDJ708WMT6msKKbUa2Ttd
+	 eVW+jt11JAT/dhN+o+hOEiT3oI+HWne5F81/dVSNUUacu1jU0NZRs38OiumHNKtXVZA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794136573;
-	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
-	 Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=FLkhu3h6fGtG/QE3RWiGSRjGhTmeI8ZHhelZkxFjLT4=;
-	b=nSGn68ACmwAt+VOPIFGb4Q/tXhIsZ1W4BDjoFm6wSIvo/wBHXnKrcuD7StlTsQXBIlp3
-	 HCdAK18DFLKVhJxr7WptLq5tGSxL8rqvF8EOtkTV0QN8lKmaryH1daSCCy23BvTUL08AG
-	 eAWSM3+a3tQS4zQpSw4xxA0eD5SzPGAO6F29t3Am4huprl0r0FLS4PossdldcivU3u/sF
-	 O8H9nLd3psJk7B4HDBZDSxF+2rlzO6QBPMbIyiOSO3R5MNeFEARPyqOiqfrv3hinpg23l
-	 9+TZJm9AOdyi8iHUOd//o3ResxnKFal5suoNeNRgrYns2xeqK7E71U/KYGG6D/63WrA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794138461;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=N8zDFvi1hwLlYUjQ4trPMNS9MFLc9+fuiBPttzeF26M=;
+	b=zzf2vQjGfFtJuPMmctCHQatUvy7QKVm9ZbkYoZtp7l2vVMgXQDL94O93aImkExFCZb9O
+	 jmpk3tWw6hwVvGngXMlFzF/clktkyVOiAjDV76sjXAUL49c3OLUlf7pFl3PdDxOd7RlSV
+	 6dcZHDzRGkTYNnEO3IN2jBkmXvRRXS66KIPSTIlTifpB/wxhjGh5bF0xgN96N/w6iCppy
+	 mi0SomtfpKc98z4JiJZMWwACpLn1Ae/ydnEKFRhKKzUqzIgibc8Tihc1h8Jz4YHcAM+7g
+	 4uF99cVvKKfwiGR1E4PANNC44jlDln6+j4LUfd6ahkditlZh8Vtv8Qjqs8lgG13GxsA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SwYMZLZZ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=bairaktaris.de;
+	spf=pass smtp.mailfrom=bairaktaris.de;
+	dkim=pass header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=kYDIvc8H;
+	arc=none smtp.remote-ip=209.85.218.42
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D476A606A330;
-	Sun,  8 Nov 2026 11:16:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54776606A33E
+	for <linux-arm-msm@vger.kernel.org>; Sun,  8 Nov 2026 11:47:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 54776606A33E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bairaktaris.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bairaktaris.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SwYMZLZZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 903B51F008A1;
-	Sun,  8 Nov 2026 11:16:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794136572;
-	bh=FLkhu3h6fGtG/QE3RWiGSRjGhTmeI8ZHhelZkxFjLT4=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=SwYMZLZZy3d6T49A90gJZg5fCx6I8G0UI5zPo3YZvkF3mRKC/xUY3Zhf5if162ALY
-	 YoROMggYdZ95OVunMDQGLKsihjip4fgmTx3exy3ba7mh7OlKHtcKPxuRFkU8Kj/PkY
-	 TZUpmmDZ31jVbXlOd8edGjxQQEZkB9nUjE4JlyKAh45nPTIjm5y4iOuHJxXKUNdzab
-	 oaqKOJ7zUfhdWMv/ys35U8Mk2N1HgQvWaIXkkohHjGqK/M9KrzCpOcs/8xO2QWiBay
-	 b1JAkaJBAewO6tFihpNmny6dR9xID180pTlW/JuFcOhUxxYG27FlQghVFE4+lQoonN
-	 S9jLAXcMPjABQ==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id DDEFE2BF9000;
-	Sun, 08 Nov 2026 11:16:10 +0000 (GMT)
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, Wentao Liang <vulab@iscas.ac.cn>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org
-In-Reply-To: <20261104024047.1508584-1-vulab@iscas.ac.cn>
-References: <20261104024047.1508584-1-vulab@iscas.ac.cn>
-Subject: Re: [PATCH] ASoC: qcom: q6apm-dai: close the graph when compress
- open fails
-Message-Id: <179406092306.3424803.15219850363779867972.b4-ty@b4>
-Date: Sat, 07 Nov 2026 14:15:23 +0000
+	dkim=pass (2048-bit key) header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=kYDIvc8H
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c4cb6834eaaso7902966b.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 03:47:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bairaktaris.de; s=google; t=1794138460; x=1794743260; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=N8zDFvi1hwLlYUjQ4trPMNS9MFLc9+fuiBPttzeF26M=;
+        b=kYDIvc8HNmoGxfswBqPc/bn3mblGxFo6X+NJ3L6oqsxEZkkr+m4t0mn2WCfFkisaZO
+         +KFV1GKZrUODGH1jwVzp2dNnj5AQFg8tobqawkkepyMCV76jlsH26F4xcbj5rx8O3AwI
+         9y9XDB7H4Mj24QgP7ASo8k+gnbTy8bB844IB0ftN+jI98Z6wP7IalktLXytAnly4TLSb
+         tnegld6MS9agPwfzU16YT5rqdpiykyv6RmW0AXz+25fiT4fvHfhrKl7YCilvolQ7pby7
+         KCM2rNosTVSg6+YYd+rjunPAhjVoIVGBUQnx6yoLGsIubCuL3LXN2LPTQd2tbfdK180W
+         7Oew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794138460; x=1794743260;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=N8zDFvi1hwLlYUjQ4trPMNS9MFLc9+fuiBPttzeF26M=;
+        b=EE2t4Jt66MAIXIfzkS/OZAWz6HK/KhsWZLOMXumO74Lk1FnvD9yy/jx7Bgh/ECo4du
+         URFrfABBy3iucG2ADhB0aYI4HjosMPI13cFM0JRkPIyW5ObzH/jCjSX7N5Lvb0WM2tVG
+         xuGMrhmA1SyUIv9nsMKTxrP4BH81Sp1RmP7Rsr8ArYpQUJvi1tS5xUz6cHXjNMV7m11i
+         nwXaaxkf9ESBCgVe60t5vHMpP3b/a2UYTeYsaiwMuZTIX8d0dPzF9/9O7Z8JGqsnl4pd
+         5INcU6iU2HS3uTeT92sBC9zMLurQhEvqbtPyaJRU5k196tn+ZNafuJYClC0ErjYAdJ45
+         hbdQ==
+X-Forwarded-Encrypted: i=1; AL+hErHnHIoQeKVpFUNv2XR5CdEH4sVpJ8v7LzHMWyvYMxnh1ApFEjyxiHlhQhSUcQ4Wyy5Kuxus5z/5JfG1c2sH@vger.kernel.org
+X-Gm-Message-State: APuU4Z/uJnW9N1wqRE0giwUaGqnDDKn6UYpwZXqlBuWEHDK+yUNLfGGk
+	Sdg4tOoeOuS4hcCiuX5S/dn4mrBzm5FH1Elg3vnPIun/BO5asOTa5T3swGeciRsPtg==
+X-Gm-Gg: AYBFou2RfJjGsod91fNEY8B+ONpYBo5PLlYAt0TcKkfg5YCn3UbctIM2uKmoHq3h2at
+	YeZFuZMvQX22tg0cBvVK6c6J9jl9o4y7WMVRdOUoqr2vKvLd+KnrTaxUi86s7dpmzezlqS0WzDI
+	xClyYeKh42oq2wU0eV/dtjCkQgxebOWDX5BNUpTnNvZZ1YSe1B1IbvhOduNkU7PiJa9F7g7cvEp
+	rG98RSOKsstaIDWZQRESwkx1Fqzdpi+j1qb1D18zZv96ElG2wQg5vXnJSow4PsACevJqaqeT8Y9
+	xMmA3u5K944dXwVWP8ceUpxVEDc1KtJ8HReyodpFgiJh8uBdWZcXdoZR44HkuCTRzyihvH2kKNG
+	l5PkiWyeZJ7pH3/pS8jWmQJxsVlu22yZFdKvmrb2LinsCbkAGbmA8+hMGfC88i7RQgAfmBJilaw
+	HhdNpdpJHOZs3+gEnPZTy3A2LTJg2O5sOEI63YeewI3X3No21bsRtQfehNA4AkB0J8DJwNRrYvT
+	QWQFrSLaN1tvGiF6UvF8+VIO+BY9Tw7MV+BOeLQGdiPiWcs996QrlEabUYK//Ht4z/jpQFQ54GP
+	6+GKrOzqZHaSXN7RmtmrVPC2AlKApJod1LMKCTjlnXY10LZhYpQR/Buaeg/Vt02Jrq3gkdXHBQZ
+	dyFxLPtTJTI4D+4yQx/x59acYc0AQ1OnjlNY+hkfOiXYz04zF+IlUeEQGIne272ILDtd/8GoZai
+	2Rc2vp8DGZAsqhiFS0ouIRlz98PnzhO/eNcpscQbb+8RV6I+XUwUqOb1u04IwFVG+XSYFJZECgw
+	BVONMOQstkmJjEHgSregC4ZsiN3TfcctdYO1eOtAtxA7rTJ701pyGpKFbWTTnXtMEfaJX652wBR
+	iGh1x5cdziY3nnr5Du9dnMLOunS+s0n8ODTzqSU=
+X-Received: by 2002:a17:906:c104:b0:c4d:28c7:eb21 with SMTP id a640c23a62f3a-c4d6d4f9deemr95174066b.29.1794138459778;
+        Sun, 08 Nov 2026 03:47:39 -0800 (PST)
+Received: from Desktop (p54afff19.dip0.t-ipconnect.de. [84.175.255.25])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4d69f948c8sm56005766b.17.2026.11.08.03.47.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 08 Nov 2026 03:47:39 -0800 (PST)
+From: Julius Bairaktaris <julius@bairaktaris.de>
+To: robimarko@gmail.com
+Cc: andersson@kernel.org,
+	abelvesa@kernel.org,
+	sboyd@kernel.org,
+	bmasney+clk@redhat.com,
+	jbrunet+clk@baylibre.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	konradybcio@kernel.org,
+	taniya.das@oss.qualcomm.com,
+	ansuelsmth@gmail.com,
+	john@phrozen.org,
+	konrad.dybcio@oss.qualcomm.com,
+	abel.vesa@oss.qualcomm.com,
+	krzk@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/4] clk: qcom: ipq-cmn-pll: Correct IPQ8074 NSS NoC rate
+Date: Sun,  8 Nov 2026 12:47:39 +0100
+Message-ID: <20261108114739.124995-1-julius@bairaktaris.de>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261026120920.1667982-1-robimarko@gmail.com>
+References: <20261026120920.1667982-1-robimarko@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,46 +118,20 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1144; i=broonie@kernel.org;
- h=from:subject:message-id; bh=0FNhgGV/KxQqmNW+5m3L98GdTtgGryyFButged53mCw=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI+RP76csW/kGO+ZXJ5ewzDCuajIS4vZfOkKuN53i5wv
- jP79dz+jlIWBjEuBlkxRZa4LO6X9SWv1/AdXNgGM4eVCWQIAxenAEzk2GaGf3rM00q/LapgWFr2
- xjrcSiLKeXls9TOdnqWmZZ2T9IWZmBkZ2kLOTVX37Pi2ZcG7D3VqouXW1XYOzskq9w3UOVQCGIy
- YAQ==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Transfer-Encoding: 8bit
 
-On Wed, 04 Nov 2026 02:40:47 +0000, Wentao Liang wrote:
-> ASoC: qcom: q6apm-dai: close the graph when compress open fails
+(Resent with the lists on Cc; the first copy went to the To:
+address only.)
 
-Applied to
+On Mon, Oct 26, 2026 at 13:08:12 +0100, Robert Marko wrote:
+> Report the 461.5 MHz output rate so consumers see the correct rate.
+>
+> Fixes: 4e36f8ab45c4 ("clk: qcom: ipq-cmn-pll: Add IPQ8074 SoC support")
+> Signed-off-by: Robert Marko <robimarko@gmail.com>
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
+Tested-by: Julius Bairaktaris <julius@bairaktaris.de> # Xiaomi AX3600 (IPQ8074)
 
-Thanks!
-
-[1/1] ASoC: qcom: q6apm-dai: close the graph when compress open fails
-      https://git.kernel.org/broonie/sound/c/63364dc9f101
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+On OpenWrt with Linux 6.18: the NSS NoC clocks run at 461.5 MHz from
+bias_pll_nss_noc_clk and the PPE and EDMA clocks at 300 MHz from
+bias_pll_cc_clk, with no orphan clocks or probe deferrals, and the
+EDMA has been forwarding WAN and LAN traffic for 20 hours.
