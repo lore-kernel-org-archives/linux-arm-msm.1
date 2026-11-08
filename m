@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169487;
-	b=PcY8fkbXa3tiAPww/w1UyZyHvdA2+4tDBKj9k6I4jqgJmBgopQMa8ikS6LECMU6shKJE
-	 ykNefz8dQzIYEgwJtouBpapRG/HwiJSsvOeLrnQJbc+23DfPqQKSCh/AOnUmEKKxR4zkJ
-	 3XLk80l3Ntb/z0Hj4K5wFXwlX3i14HUYZdBN/ColCmKaqAA+M6PxG7CrqmViktZuT9hjo
-	 3fUXdUOr0Tcw6KLak1uzW3EoDSxRwrEv9HEpGtNzxQNrzzZ8Wvnfg8UVJ0DTDFLfN5Nx0
-	 Y012VPKheXO5Nnn9wWAtZzYYr4PsRBufP+eU7KESxXFicCe9dRorDvZ/Q7+3zhtonsQ==
+	t=1794169488;
+	b=wqRxkcgFCeH6j9918UrXM93Nke4l2DDuhYG+Onmwb1BXE1OmKrM2bdexaCND/Vp+awED
+	 Qd5U8ypUMImV2XElO3/kSzKQpWD0XkLVixn32C5xfdTMDyqxINj8703pkBuaAJ7GhbyN1
+	 gWF+JuqdYJGsVQCS5kN6ym96KSVGkJBgYaqOahMcqvsHGRSG5166CJ7Iub28QXwao1749
+	 i7MwujuvaqkxgMGm4fhnAeMoOQPcIs0E6EaFbC+397th+xn4D2fpvGTlqZa0bLaL7NQY9
+	 H0mKVmPz1SplyUOqRID4IVePwv6E4vuHvBbLvmMmFw8nvThxaHHts+MP8p/QNHp/qnA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169487;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169488;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=VtNdIhmL272RDcJm5riI8cPLLEdSVlWAJRPHhTfsZWg=;
-	b=n1nqVDZCM4zDQaqnpu8k5YDCYWfl8UH1uO1XB7y+CpVNXDoe8ATNrutJM9wjwm0J/GPs
-	 sSI02L+FTgz78ZST7jjbMCBkyLvz+Az6EGTrHRjvjAVFVUGcvrM7KalMC59GEZZ173oUP
-	 OyYOf7CmL8rwL+LE8iEFqyowTPgM3KK5CST/sUlzYBo8ThTwQLrpS9lkifgjw9Iv/W2ax
-	 VjFsBPiLv7/8gglL9OhST55nrDmuqsJCLuokxV6icDQJobHija6ycuML5DsGYdxhmuNj6
-	 j0tRB8QEbW3UfU6IZ7TRTdcVpNTZu+Ar2PM94KymZtvOY3o4xUsc3i2ANUKxxOwncQA==
+	bh=pO1W7c1SbD1BkmlKzh/q+I6rey0+/Fg38A1vWIqg6hc=;
+	b=suK1Mfovr/ReDkY1Nz6OqFwaHyIYb7TTXJ8A4YqfYkKFpS+7gksZWmk30nfUc3/JDJi2
+	 QidcuVVNH09Ojij5CY17okLFYIHzhHSgBFFhuYLcgOPYRRcYAeyJkQTzA9tt+jFOQF2rU
+	 Jndx6dSFGmyrDc1XGZ7WTEl1CoE25TGh6+fCEpLvDOcg/qZ9aVUbZg3zUZu++pXdLORqj
+	 dYDU4xcBeCPMLwZKChLx6DUPCWijgGpPy4eqLjop6Y9e2mxGN+ghKiccguCvU/+zqMOxS
+	 6O97AfP7Me/uf83tnLZ84B6wKErG63EcnQepZU0uPodNRzwhGSNqD83UOXPDQbVxTPQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SylSCJRa;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VuwqGCir;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5568360A6F74;
-	Sun,  8 Nov 2026 20:24:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22679607F901;
+	Sun,  8 Nov 2026 20:24:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SylSCJRa
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18B561F008A3;
-	Sun,  8 Nov 2026 20:24:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VuwqGCir
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 284721F008A4;
+	Sun,  8 Nov 2026 20:24:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169486;
-	bh=VtNdIhmL272RDcJm5riI8cPLLEdSVlWAJRPHhTfsZWg=;
+	s=k20260515; t=1794169488;
+	bh=pO1W7c1SbD1BkmlKzh/q+I6rey0+/Fg38A1vWIqg6hc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=SylSCJRakI3orl0IHUeHJQnyLHdLEl+r5NeOJY49Jyg0EaM5FH3WinQfinHrf5Yk2
-	 /4iGvX5kU0ZBF3PVB6qMWXoVhhaH2eTnKLYNsLUgs0BK7PU8Mq+OaOqfcbsQT2ZHpx
-	 HzJLituPYQb8nwm3+9UNVEXQd50Zz0A6ykC5dp0ANzZLutv2PreR21bgGZgQUr9E/o
-	 It/kLXhoCF/lvXrQTI/z48lgngTdh/8rSRsm0E5QhaSIe2MQ4zVcnA4GoF3fjsDkyu
-	 qeRIDAFzJz7a42aGUfC6SoiW758sJmawbEztCxGy4rt8X8R14x+tDbdb7nQbmBva8Q
-	 I99jN89iO1BYw==
+	b=VuwqGCirVu4fKJ3fg6cf5J847o9vs/JOh2JFo0eTthlE56ZX/kCYAiFQGJr10WwlE
+	 DxDTOPQEVdrUS18uMP96d8s+HANK476IJ7USJe5ZpjZvvIkEwRaDkH5WUU/EzbKQFi
+	 EME85sQuusSAVxx4zCK9A/nlzPT9Lm0JbyNK1NGGSHRj8pnw7N4fa5Wfidr30TbY/8
+	 rm7UoDArlQ8Zuhk4nPRQvyOA7Mh7XomWPdE9LAeWUW1eFFTrngRmSpdGgannICWMWq
+	 NftpVA5nXsl9XP1189NtZHbHnc3CbphsQhdndsG/Raoy+imOuy8eZdGosvgTCUmRXm
+	 La9dCNJ/2saqw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Shujath Mohd <shujath@outlook.in>
@@ -49,12 +49,12 @@ Cc: Rob Herring <robh@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] arm64: dts: qcom: sdm845-sony-tama: enable modem, SLPI and IPA
-Date: Sun,  8 Nov 2026 14:21:15 -0600
-Message-ID: <179416929237.628393.6934614690624200929.b4-ty@b4>
+Subject: Re: [PATCH v3] arm64: dts: qcom: sdm845-sony-tama: Add battery properties
+Date: Sun,  8 Nov 2026 14:21:16 -0600
+Message-ID: <179416929235.628393.6398163987269781142.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <PUZPR01MB51413DEFDD09B4661D9AED22C3BF2@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
-References: <PUZPR01MB51413DEFDD09B4661D9AED22C3BF2@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
+In-Reply-To: <PUZPR01MB51414E1C0843688784B069C4C3BF2@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
+References: <PUZPR01MB51414E1C0843688784B069C4C3BF2@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,20 +68,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 10 Sep 2026 09:35:08 +0530, Shujath Mohd wrote:
-> Enable the modem, SLPI and IPA subsystems on Sony Xperia TAMA
-> devices and provide the corresponding firmware paths.
+On Thu, 10 Sep 2026 10:06:48 +0530, Shujath Mohd wrote:
+> Add simple-battery nodes describing the design capacity and voltage
+> limits of the Xperia TAMA batteries.
 > 
-> The modem requires ta-service for initialization:
-> https://github.com/andersson/ta-service
-> 
+> Use the TMM fuel-gauge profile values from the downstream kernel
+> (`somc,initial-capacity-uah` and `qcom,max-voltage-uv` on the 4250 mV
+> bins). Akari also shipped a BYD cell (3056000 uAh); a single
+> simple-battery node cannot express both, so prefer TMM as on the other
+> TAMA devices.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sdm845-sony-tama: enable modem, SLPI and IPA
-      commit: 21158e4e168c02eee659de9fae4c490892060869
+[1/1] arm64: dts: qcom: sdm845-sony-tama: Add battery properties
+      commit: 30c200691b175037067e599ed0d1f31418f4edb3
 
 Best regards,
 -- 
