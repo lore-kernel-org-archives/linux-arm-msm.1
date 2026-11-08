@@ -1,64 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169522;
-	b=e8vfr6uNa2aMqACHLmh0iojWY1ADfAEQROY4PQFCv6POjBBrXV8TgK2VEc1zRaScuowd
-	 YT4DR1FCTE8IhEeb40/sJ1VX5VCzfZF9KGfxaM4PDUIV+erDq/lDzg0x4N8STjMXyrIMg
-	 235/Rspou8X6EelH5PkVV3zfwl9WaIEEb18n6mPcB0YmxQhh4VI153fX94IEkxCpG0xeL
-	 /vgv/2D4JwYbidCMCqWM2yQ9YaaQQwlvl5EG7TO0zQWMX76+pu0/abDD2I5xkUn2yqDoO
-	 iYsFfr9CgDuT1iTXpMD6c02V2Qk5Vig9qhU2FIxJKpRgQ3XrZTXrqzhzrOHeE92nyOg==
+	t=1794169507;
+	b=K9Z7KQIPt5uQ1rFy/7kRbUKNF1V8KjmBi6rW11B2fPC0SMZiYGnYXSA+wvhTg2/yxiXk
+	 CdH68FdOyZ1YyeA+d7FbdaQ3BaBNc2f+kGULckc1y6a/w0U43O2GAhwWSVMNvqyu7ecvA
+	 g3xT0XIMZBCEUR4tSIOdkfTfdpfk4Nx0Aq6M+Z3YNjjuzPN2XQbUKkheh0XrAO7t3iqEy
+	 8dOD7tkttGEkpRiKjW9fKYtNH0EK7Z2fjHQNByCF7WeBiXxFXgd91qwnN4ho9q8jWtmqZ
+	 RtZcjLeT3kNal1jdIUTOEt3z9bkAWjDrWvqXNvWHk1tr8e0t7N2i5dyUoWlSLxQA/8w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169522;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169507;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=vEpfVgvWDM4KmL55CE5daC+CQd28CbR4NeJ6R77tUa8=;
-	b=wzOLCXXGPEz+p2BTz+r8sYhvLqtXlaezIR8+WCQ7hfki8ceXmrVRQFn/DBgOYzW4ZzL9
-	 p6EE7SROjsyTLx6Xbksen7GoNa4IylEOZ0oD6PYa/4FhT1mEwExnPGf9futh1ulEE+JCN
-	 YYrF8ITHnCESQamcyEHJdxWkxLoQNAE6JNPlo2K4Q3jL3jl6hV6LFxnPoKluznVsdJU9d
-	 0MLW1uEhX/yhyat/+oWMDwOBy12etzYkI1vekoZxOgapi7h6v+HDUgKs+v4gV+lESXa3a
-	 9qRy8s7ESVJCMhGttN935GwrZlER5+er89Wrfb8pOAln3vLWmt1bzPApLW6/Ea4Wbwg==
+	bh=b76MrP8vb1NveZduxU4EPxdtvgqIJ0uwY1EaJx729tg=;
+	b=HZTXWoUoSq3m7q+2qi27PI8wulyf8cx9OcEw1o3lG4jATKtFczRoUlZ39ut5AQ5fCFp5
+	 XMEnYBmGzfmyjIMMMSVzTtc5JHKrsC5rzFWCoeZ8HfI8hN1F+TKtDzg2oAnTlevmJy5d/
+	 CYpnW68Rqe9uvBci9/bP987mT/J3Ym5ofVl7IQ3m+mjJLx6Gs56wNTf/MVFyNeU9jvxXk
+	 WdMOLdaVeDfEMtUXYM8OEbbeSCcI5jvJJw2INuMPnsGNy0A3mKW4Ne69x15g2MpjKL3Of
+	 AfY/gJsreP6pofXU+lviFlK4uvZN1YUrpxBuP9qcfOj03Frvz1W+FLJuMV3QMz7WS9A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wccb2cTa;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Weojoug9;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77BA76084EDB;
-	Sun,  8 Nov 2026 20:25:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97EB4606EEA4;
+	Sun,  8 Nov 2026 20:25:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wccb2cTa
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CF8A1F008A7;
-	Sun,  8 Nov 2026 20:25:21 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Weojoug9
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A7241F008A2;
+	Sun,  8 Nov 2026 20:25:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169522;
-	bh=vEpfVgvWDM4KmL55CE5daC+CQd28CbR4NeJ6R77tUa8=;
+	s=k20260515; t=1794169507;
+	bh=b76MrP8vb1NveZduxU4EPxdtvgqIJ0uwY1EaJx729tg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Wccb2cTanQU5RcxsSs67G/KCxeoLHJ0+fvEDoloNNHWCPEqJVK9ONMQxf5LOd7XkJ
-	 1zvsZrzrFkc9TBVtHI2ylaKfgRe+/hrR5ufIIf/Jhfig44jqjkJdOLYdy6lyvXfv+c
-	 VeXCxRa7rjAgPhj/ZNkJ0sMnAJmB5PH6ueaVu8RCrvFxkC4K5ILc1gKf19PW69Hjtw
-	 qZci3QAoVNQinY6JuJm5y2o+1H7eZ5vrs717AchvU5fdXEPihYb9G/QFM55lCd6eV9
-	 CbDZJBcfX5q2lXwC9FEtpDyaJEU9IRJX6ChSgvIwFKGiXAWrh/QRg/StxEbrj7C9d9
-	 v3pFgtcOqTevw==
+	b=Weojoug9ywk0tz+ioo2wwc0Q3pNV/Kdp+BEt1GcdVM9NO52Ecwm9EPsIgEsoX+xyB
+	 DGG3WawGFWoVhluMbIkxJByVi2ci6aLh6XQiC+9RmC+0RFMINuG6PxFDfQP8RHNa6n
+	 WGoUKl6CS0pRzb3qcv8VFYB0/0NVZbwMtgonhq4B7j+wulAAenmxRPAlXSDi8sx+XY
+	 drPf8GVumdPYdcnPQ0ZFJ6AlB4CmrIU1AVMIb7KV8vY7ZqcPurdpgEmcwyfo0PFCcC
+	 w3YxFCJeNCyiJEOTJ4pjpGSFaN4nz7EVtjPsEMWgiyuhacz/LGxfOGSBAgWzQQF+eg
+	 kAgyP4Hn4Sb7Q==
 From: Bjorn Andersson <andersson@kernel.org>
-To: konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	tingwei.zhang@oss.qualcomm.com,
-	Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
-	Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v5 0/2] Initial support for Advantech SOM-DB5830 board
-Date: Sun,  8 Nov 2026 14:21:40 -0600
-Message-ID: <179416929274.628393.12037192351352245383.b4-ty@b4>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Cc: mukesh.savaliya@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] soc: qcom: geni-se: Avoid redundant transfer mode selection
+Date: Sun,  8 Nov 2026 14:21:29 -0600
+Message-ID: <179416929366.628393.10644528274382007761.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260928-b4-hamoa-come-v5-v5-0-05940cdca85b@oss.qualcomm.com>
-References: <20260928-b4-hamoa-come-v5-v5-0-05940cdca85b@oss.qualcomm.com>
+In-Reply-To: <20261012-cache-se-mode-v1-0-22945ed0da29@oss.qualcomm.com>
+References: <20261012-cache-se-mode-v1-0-22945ed0da29@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,34 +66,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 28 Sep 2026 11:18:47 +0800, Yuanjie Yang wrote:
-> Board layout:
-> +--------------------------------------------------+
-> |               SoM (Advantech SOM-6820)           |
-> |                                                  |
-> |   +------------------------------------------+   |
-> |   |     SiP (IQ X7181 EVK SiP)               |   |
-> |   |                                          |   |
-> |   |   +----------------------------------+   |   |
-> |   |   |   SoC (X1E80100)                 |   |   |
-> |   |   +----------------------------------+   |   |
-> |   |                                          |   |
-> |   +------------------------------------------+   |
-> |                                                  |
-> +------------------------+-------------------------+
->                          |
->                          |  Plugs into
->                          v
-> +--------------------------------------------------+
-> |         Carrier Board (Advantech SOM-DB5830)     |
-> +--------------------------------------------------+
+On Mon, 12 Oct 2026 17:50:20 +0530, Viken Dadhaniya wrote:
+> The GENI transfer mode is commonly unchanged across consecutive transfers,
+> but geni_se_select_mode() currently reprograms mode-related registers on
+> every call.
+> 
+> Avoid redundant mode programming by caching the previously selected mode.
+> Pending GENI and DMA interrupt status is still cleared for cached selections
+> so stale completion status cannot complete a subsequent transfer after a
+> timeout, abort, or reset. GSI event routing remains enabled for cached GPI
+> mode selections.
 > 
 > [...]
 
 Applied, thanks!
 
-[2/2] arm64: dts: qcom: Add Advantech SOM-DB5830
-      commit: 5fb1997399eb2e27086f1cdd160a120314358f1d
+[1/2] soc: qcom: geni-se: Split IRQ status clearing from mode selection
+      commit: 3083e5dccccc504cf6c0b384d32334dfc576a92e
+[2/2] soc: qcom: geni-se: Avoid redundant transfer mode selection
+      commit: 3096ee721a7f444f67d1dbac8361bc8612c72baa
 
 Best regards,
 -- 
