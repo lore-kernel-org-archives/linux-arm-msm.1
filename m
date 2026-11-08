@@ -1,63 +1,65 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169386;
-	b=q/NamCOty1qzXY7bRjUZjgvoHCZAaJ6LWDPHZMXbzgBjTjmYw3mID3E8o5XBsb4YPKfh
-	 shx7vVXpFMu7bbWHWSu5XVsPQ4lD+ZIj17w0cyRGm6I+13E4M4F405bvtxnqm3P8JARLr
-	 87kRmNYY7svRQD88oyLIy94pgzDnAcFHZDDjBsTNGhct2krYQjI4ORNRrqULkMaOoAyI1
-	 Ubu/i7bmrgZcUuRxPJEPqZzhYpkrYDNIlvXxhsKka5YLEO96qgkCIjt895kXaDb1qC8HO
-	 7LjOunVco8xGcVj/Gr3HgJYloP5CKNNiByUM6fmELmKem6Di45i5tCAwHGDvZUlDICw==
+	t=1794169377;
+	b=gtG55469hd+roQlQNgmXhOZmeA6A2TI4/eDa4osyWCsqGtFOU6r3arVte0JSADmdjDNM
+	 l0JchZv3zKLs38tkku4KUdiBtiyriPdWY5gB/g90/riBtqGZxM0Wdr7/PRMbc3cP4t6VE
+	 r2AyCJNQaW6JqWKsqHJ32Mp8CwRMlphcZy6wml2V0yMVMI/W2Rauhxks4gQyg8GUX30B6
+	 R1ZO17tpFrqG0zyhjoHaYB/+ut0Z1hxWT3TzFnJjXYtagn8PtUdZERNAgwrRHaB4axRuH
+	 X/wbLV2cCV0wuDWcydpLBAJOkTAXMGJNXNTT34ErZRJMD2w7VrlobUEszyFn7YGMW4g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169386;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169377;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=IMaQtWfkI2+nDAxSWxsRjzUPOhBE/O3gBqUNL4FUSOs=;
-	b=lBy7iNOfEjA7YJHZaNmUgQj6CjBXTm61NIGs3hslnamGEay1ZBz9BXcXbIHWtm0NhIs1
-	 dDXo+1FDDzEs5eO8DcCwEIBG0oj5vsEIIj1owwbWuOGVNCIN+TRf4KLoRDCzgu16gjSiy
-	 z0XBYr2EaxKx08usZ/wNhOKlYupkFeJlOD6gR8iUZV9w78KnJf7oPlVXO+uXo9oI8VYT0
-	 IPM+XEu05yh5IiWwtaU5HKuF+tc5Y7AQSauo0ZzhefbWx6WoruYUUhM/ywF/ADCaMOckD
-	 vFwFLhgeM8CiTwNI8t8r5jM+9eAGoHPgGfehV87GUMDwkbbDMtT39zAPzNNvS4ZCiTw==
+	bh=+TGNtBkbY9q8F7TsjFNpGCb5Omd+5aPs8mlI1uZL4OA=;
+	b=19N2DMqiljrhatFA5jeiMKIeKd1zbsrv1p3uS6sssBoXpndZ3hypu5ZHyXCAsLZxxS8e
+	 3lIf120LzvGjZYq9bvHXdpffI/udfYsCE4R0bMc98D5wXRFz1xSfehDAe/Hw91fy+K3oU
+	 aZAyD3XPZwqblmV2IAixGqahyYCEFgFQV4ndbsz3dpBSSfbA/gDCRH+pFaC1mUG2wdHhR
+	 CMpTGbqwKuL5KjvhqHmaiunVgLOOufXyRk8OYU9FD85yX6ZVGXbURvuvr37Kiiu2QSfZL
+	 HzzEWXi94FVvPLJdKzGJXia6AGlKHGSoqxGt0E1WorAkB3IGvMWNTTZYCAW9r+O+n0A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DX5feHJO;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KnAjCatM;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E551606D12E;
-	Sun,  8 Nov 2026 20:23:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74067606BA7C;
+	Sun,  8 Nov 2026 20:22:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DX5feHJO
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34E9A1F00902;
-	Sun,  8 Nov 2026 20:23:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KnAjCatM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 841471F008A4;
+	Sun,  8 Nov 2026 20:22:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169386;
-	bh=IMaQtWfkI2+nDAxSWxsRjzUPOhBE/O3gBqUNL4FUSOs=;
+	s=k20260515; t=1794169377;
+	bh=+TGNtBkbY9q8F7TsjFNpGCb5Omd+5aPs8mlI1uZL4OA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=DX5feHJOnRjzf9N0BsJP5nGg+9WIgOxrWw1PkxR3q9fht1Mgq1Yuzt4shUC/fG4gZ
-	 tuo0tO9Me5OgehKRlAkzH2P8c4EZ3hnZkpxHPXq/AZzCKPNTsPXlamdyylIJw+urNv
-	 MSuEMIzCC7sI+xphijghlbwWbWFyFqs0EWKjAc2LzsU+hnpY6IY+O3IgzLi6tlR7du
-	 nZiCuKPtSEIgkZ0yjtW6R2dWTCxBDanhYyAwYYUgwNsRYtP1+h5RfxCYv68c+P8ixd
-	 +t3WVhZ3lB8V4hZ6tbPdSUYEdVgMs0thgXomxhNj4tGhCTaRoCXmME0mvtbIm9DbPk
-	 Gk10fIFolbyWw==
+	b=KnAjCatM6jtU5Iv559+8anP65FzZlX7oYCx74Fw01CPC5a3xdNRotIhg1ODU06D0Z
+	 3O1AJitHI8qNpJZ2TdesIlen+KA2pweXMoaeeHhllEvRpgnrKYuf0ca+5X+X+T9PFM
+	 e/mBp6YgR/gVUPKPhiNoIDdM14QFYZOpRJ09ag0pzjshIOv8+Y81RqT/WW64I0qwoX
+	 DtDmRmZCQeEWg//12huru/SDg4iR2BmknRNu5YUL8sWqyRS8GFsfjJplxY7V1MeZFX
+	 qw5EMIto1jlAmgezvxoMpI6F4YHfNBQi/76v2ANljD9tyY7j7gIxQfpF2huzvsHkkP
+	 4Ur940OSHY4ig==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+Cc: Abel Vesa <abelvesa@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc-glymur: Use PWRSTS_RET_ON flag for USB GDSCs
-Date: Sun,  8 Nov 2026 14:19:57 -0600
-Message-ID: <179416929391.628393.13767365264983463444.b4-ty@b4>
+	linux-arm-kernel@lists.infradead.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v7 0/2] Add initial support for Qualcomm Kuno SoC
+Date: Sun,  8 Nov 2026 14:19:51 -0600
+Message-ID: <179416929284.628393.3018595425203478493.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261016-glymur-usb-ret-on-v1-1-1790a523fd9c@oss.qualcomm.com>
-References: <20261016-glymur-usb-ret-on-v1-1-1790a523fd9c@oss.qualcomm.com>
+In-Reply-To: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
+References: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,23 +73,23 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 16 Oct 2026 11:58:44 +0530, Jagadeesh Kona wrote:
-> The USB GDSCs on Glymur are currently configured with PWRSTS_OFF_ON,
-> which allows the GDSC framework to fully collapse these power domains
-> during gdsc_disable(). When these GDSCs collapse, the corresponding USB
-> configurations are not retained in USB host mode use-cases and this breaks
-> the resume of USB controller from suspend.
+On Tue, 29 Sep 2026 15:18:05 +0530, Hardeep Sharma wrote:
+> This series adds initial support for the Qualcomm Kuno SoC and the Kuno
+> IDP reference board.
 > 
-> To avoid this, configure the USB GDSC power states to PWRSTS_RET_ON. This
-> prevents the GDSC from powering off during gdsc_disable(), and allows
-> hardware to retain the USB configurations across USB host mode use-cases.
+> Kuno is a 32-bit ARM (Cortex-A7) Qualcomm platform. The rest of the
+> series (bindings, GCC, RPMh clocks and power domains, interconnect,
+> pinctrl, geni-se) has been applied and is in linux-next, so v7 carries
+> only the SoC and IDP board devicetree, plus a small geni-se binding
+> update that lets the QUP wrapper use one address/size cell on 32-bit
+> SoCs.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc-glymur: Use PWRSTS_RET_ON flag for USB GDSCs
-      commit: 39477c344da4ecc63229d9d7518857ff37f7fa96
+[2/2] ARM: dts: qcom: Add initial device tree for Kuno SoC
+      commit: 7f6a63bc5fc9bed3fac66ac57000882926d25f84
 
 Best regards,
 -- 
