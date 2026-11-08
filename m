@@ -1,62 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169413;
-	b=zqt3iFv1+ljLjMBVBUCZBR6z4x/3uIw4QwigTPfOI3YDLt2o9KrJRMzHqeDOh63DJ0Hs
-	 9KxO+HC26Edau/SYvzIFQd0f6A+m2CUayCELQFzh4cwj2epRbQ2arvbQ5+7S8MsaTmFDF
-	 91hvRXFaXYAyAaAtVqzdbl/Vrt1GVbZZAdBSCKALqyIueH43TYBuoqvmYtmN91uiHVhwA
-	 q1MJtYJ9iAohUngH+S6ESdtM0wNCURst20ukhogmjaaPShN11q6+4EiDKWEzDOYEhCqXl
-	 74F4BhBdGIZd0YiWS0EMPc+L1BrcqPAoROVj8c7iZ0T9cyMci7PvJwXBbzxOxvyK+IA==
+	t=1794169414;
+	b=vGEBERy78GXVzTbewoKdxfDEUznsFHx4WCop4xXYdXxQYfe5Is0YeYTLbmucvAm1+e3G
+	 9Uuu6c2wOrSZATGeotidvr+6MgYY4Hib7RJYIrvgmrXxXYVJKb0d7m8bv/eLsAFq58f10
+	 NTd0+KBYFONxMibXvIwiGgNa9uz/v81Lntl/lQIAut5BYIxS0NEz+3zei3A0WDf/gCEjv
+	 /n/QFyH+QmVsf8WgNYGonFJPKPTwnsUUtarGxkRVtB9ws7QhYxE7LFrQQYbuKxg5o5tXN
+	 srW6E8N0uxMN/dv+72qZY141fGabv460oHvybdFBcb/H6eMvOrdk+1o7eqUXPxEQulQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169413;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169414;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=/yCs7JJ/xhhxy/+ux0i9RPaqjj96hZtxDf76I41bozo=;
-	b=Vgpid17YcG+NsvcpxxDjQBV52SDGgj7k8faKaIkVHSA/rGd9mrb1frxroUVsYCdKKu4q
-	 SOXR/uH+ucCZ90DgpzYTo67L3Gp5/4XsnlScY9p+rx+vC7Dq6lFRb3slqEZQmmWjekgUI
-	 7HgXnJRPXZVzTrrosz+JqI+a5q/q37RY2ZF1+XxSwLCZL4jjNkCJgvg16nkHjzAh2m3tl
-	 46tJXwdARf89D/qETbi3D1hgbf5E/dP4N90LBgx9hUs/Wmv/+ZxUbIHP3nLVsxc2Oq8es
-	 PFXyrE+/+zBVznKjtc9BsBSthFXmQ2xZQ2y04ycdYDTCFF7S8cwdswKzZtFsedwzXTA==
+	bh=cKVCJp860o0T5Qa255it9obpPutgvMPgczrhnqgjomg=;
+	b=LsJ6ShdntAfJWNAYTOP3wgtIp2GoB5KHWOF/40x2Qb1gBbZzOWzMxMWiiUfpSwoCvAZ8
+	 LjfQAkmDa8T9nn+iJ/7AxsjXHodmprhHtTxTW0VG24kdqqpAlQT3e35N4M7NKui0hvInm
+	 qWI9L90ZMt1QcYbZ97dVjK4Yop0kRHJAt6KQ8G3dTvGPqqMe19crPxm79P46NmRu8jOeJ
+	 0acmqXXZ28bBLNWY7swIgwKzfPf8VtPvLcElpW2uaCw+FVZ3+KKieAcLOU3LNkceHy3JE
+	 BGM1Sj2lJYqhASqG6Tyl+NlCf4+rAyyu2qOT8tXvKcPSl2MgT/Or/idXEbHzxtQnnIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U2nQaKFJ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQ2HSaDH;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 410846071FD7;
-	Sun,  8 Nov 2026 20:23:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68C8F6071FF1;
+	Sun,  8 Nov 2026 20:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U2nQaKFJ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 252221F008A3;
-	Sun,  8 Nov 2026 20:23:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQ2HSaDH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BA7D1F008A4;
+	Sun,  8 Nov 2026 20:23:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169413;
-	bh=/yCs7JJ/xhhxy/+ux0i9RPaqjj96hZtxDf76I41bozo=;
+	s=k20260515; t=1794169414;
+	bh=cKVCJp860o0T5Qa255it9obpPutgvMPgczrhnqgjomg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=U2nQaKFJOOTCt2CWXXJaPZBcunUFmEK+BScK+7EsstGp9CM4YgWIwixC8vEVOJf+B
-	 lm9IplWljuf3E/H3JAeFutEZVDKnWY773Ramp/1PnU/RExdipL6ssvWUSsdPp/IVUS
-	 8E5ykKrdRjlLz0jhjLsjvRIDajowOat5BMQrIE7EqKQOIz7+DR7RhWg7pXe8Gin5Dz
-	 M7r9940dU8XFbgUlTeVrcpYnwPanvbjEEk36ehp8sJVm3HI+LrFW8togT9GNhseYI7
-	 sMGU7/UVmbGMar0EZKbHLJ37YHZ4BqDy14TG+3pwshHep5An6oWWxrDuxSqI5u7KNX
-	 +0i8q71rQJw4Q==
+	b=hQ2HSaDHoT1ogyWdycol7fZnK+QXSI/zSb9fmE1D1UBsKr8OkJmDykaDyjK/SZrKI
+	 GMGTknWjuYDCoauiFQvT3B5wKtPCsMsodoGJ0Izv9qAaWlKC0dMYkGJ93nEQqSSUfb
+	 OD3Uujv6Dooqg7wOZ/a1HF1bzfOhb4CGrY/tjepM+DM3BU3cQxiD9Hsni3kJFMZNy9
+	 icMoutPgQnhIDDaItW9t8U+yAP6OtPGqcmtrrozYVT6t6SMNjbfdIeljXCiaIoODbx
+	 NUC/slOO1usbHIuw/pD5VcNb/jmF+EXdc0UE+oxx9TOTFDiFLYzUzc0c/8MLB39Lsz
+	 RmwavuURyMRBg==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-Subject: Re: [PATCH v3] arm64: dts: qcom: shikra-evk: Add GPIO expanders
-Date: Sun,  8 Nov 2026 14:20:17 -0600
-Message-ID: <179416929309.628393.13355049870019917874.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] soc: qcom: pmic_pdcharger_ulog: Match on SoCCP
+Date: Sun,  8 Nov 2026 14:20:18 -0600
+Message-ID: <179416929568.628393.3526348606720397673.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261001-shikra-gpio-expander-v3-1-d30c1e8067db@oss.qualcomm.com>
-References: <20261001-shikra-gpio-expander-v3-1-d30c1e8067db@oss.qualcomm.com>
+In-Reply-To: <20261104-topic-soccp_ulog-v1-1-e6e108ad049e@oss.qualcomm.com>
+References: <20261104-topic-soccp_ulog-v1-1-e6e108ad049e@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,14 +65,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 01 Oct 2026 19:19:19 +0530, Komal Bajaj wrote:
-> Add the EVK GPIO expander definitions on the I2C3 bus. Describe the
-> TCA9538 and TCA9539 expanders used by EVK boards.
+On Wed, 04 Nov 2026 19:43:29 +0100, Konrad Dybcio wrote:
+> The battery management firmware, as well as the logging service, is
+> provided by SoCCP on most SoCs that feature one. Add the match entry to
+> enable logging on such platforms.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: shikra-evk: Add GPIO expanders
-      commit: ea7238ab3775e6be3b8ea5b2d44c74eab6b48ee0
+[1/1] soc: qcom: pmic_pdcharger_ulog: Match on SoCCP
+      commit: 303b54549f40401b9c6e6036226b81a57ec9127c
 
 Best regards,
 -- 
