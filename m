@@ -1,64 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169313;
-	b=FoZAkFqaDJ4h7Aq6jFd+kut1mYcCaHR3YJT4CLpsDpaz2cjKEG8s17g4meHAAYQbGpYF
-	 bKa69Ih6eM/X90dP+CX2Owqy3MTYhyZWd0sqFd7nCvpNNCOB3MXChyt6VERiQ+mH0/4QW
-	 edJulSIDVqJXDkgK9KB7bKa5sGZjD3ckcCL82X+xExKZww1fdGcamYIlRdA8pndvKvtqz
-	 ZXQvFZ3HBbjgUPSk+quxvfaMJNJZ4Z1VkK3BTea+ulpNdYizP9aQ/b7grdf+REXx4/Bkv
-	 OeHk+evozgXsp1O7EvEr0YRLJ5tlQ93vON5VP5K8DlONRgQz0kvpfXoT7mdUykoo3yw==
+	t=1794169323;
+	b=r9+JUiECyHbi6YInZG6WJAS8+cvC9DWGI9jmAWK48ATRQpRUXwnnBGwYJdEkNQzby12x
+	 yxpn8lFOJNySpNUwW8JKPOcjk1AtAwKpx4ZKLwR7dwrnv1ORKEMdBycHKYYvpxo4CuU2k
+	 9CRq8FT7/lylCqBU1xwXW8KptqNf9LJpTFgb+P7vFOQF7REYSasHy2ciRGmoX377+Re+W
+	 WeSKEoRP0CG9DqPcowpiOSYp92YPpbLVBC9uEm/YefJMqtiNOjG/ag61UZbwQF1cb/+uX
+	 vQyCdQ+8D/V80AfHTkvXCM9PQfvsvgmhnljP5RwkNArfOEEIaWvCBXgf37A2CHIbj9Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169313;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169323;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=VVyykXlSyrTgP+EcH4x8XMkElcSDwtfYCMLDjda6kVM=;
-	b=o9i4IOdKAivzgFJYB53ncAHlH7vJ+MniKWahOHyQ5LNj1J/BaQIjBcI4vwk5qbfTEDpA
-	 lPgL74o6M1IvFJ1HwyW6Ew/Qhu1+dTXB4FOGXlLKIZhPICMksAaBe0QmErzAwPm8e8d5S
-	 pGkT/A67Sr3XKoi+VgXtuBGev0uXOHxjMIf1bvd57+Yv2rAEju03FORCdxDWzaxOT2/zf
-	 pcjwU4ly7zw3HQWhVM2HaDwkY+vJFQ48YOQ5kPTTzFKF8DKcfaNvpH8Xz59HXNKJhyYnk
-	 uqMaH671qZtNQaYC3wY6HS6I5cS2o1vj28yoAPsdvDUYx+HiyHqKt8ivqkjUTkkxZkA==
+	bh=1Lg5aR9cJlK0c0fy15wrBWhYR9j7aaIkGY9kHxc4nno=;
+	b=fqvYVh9C88RBKc+N6Sh0whIKyj+SIX5UG4yUZ2vjEeVPEnautZC2VANDosvy71qCp9Um
+	 VObJXa27heKI3YQ0h7WYidq2CosOI8hL+4XU0u36nCKgmXT7gSZipjA89k4HkwXQbjDRB
+	 SBRQHU5RFi7f9nHKwt9t04MBHVtyzIAIQU8V/TlAxn8pAvtVWTUaPuLsZz46hbXKFh37p
+	 yx/kh0SQ0aX3c8HHycdwN9sjPaNlEtamBAxP2mptJRMkUEkkmO/eTEiUi9Nw2YMy/6YEG
+	 WpSv+bz1jbW1ppyH0iJbblfqS4wLSf1ITGPJ3iZmyoeuWicQlY7fyfTbjxCipnVjtCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CD1l+INm;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wi9TWyXu;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9864A606D805;
-	Sun,  8 Nov 2026 20:21:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2375606D817;
+	Sun,  8 Nov 2026 20:22:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CD1l+INm
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1ED361F008A4;
-	Sun,  8 Nov 2026 20:21:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wi9TWyXu
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 869C11F0092F;
+	Sun,  8 Nov 2026 20:22:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169313;
-	bh=VVyykXlSyrTgP+EcH4x8XMkElcSDwtfYCMLDjda6kVM=;
+	s=k20260515; t=1794169323;
+	bh=1Lg5aR9cJlK0c0fy15wrBWhYR9j7aaIkGY9kHxc4nno=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=CD1l+INmMBxcj12WDTy/1+mSS0uVd5+j0qYhdDiXA92ICS8BeK83zRXPa1XB90iO0
-	 rSnAjm311aiVY9UNKzK09P+IHx4BVwTeBI7gdOcO5ovJxv2PMYpQVkgWwBPbU/nFdj
-	 9CMukkhqnf3OshE05rwAveT2jKXiTJE65HX9X85sIOkxXDLD9Lv8ilH8jz/tertVC3
-	 E8KOLCLIlg0P4N3u39K2I0hk9CAMYeg96TLbP2q1vndMkvgqTkE/J9Q71tKcfhF860
-	 GjZg02DRr2EopRhhyqYKT0v1vp5DNv60l/wGVOJVtp50NhHYZXLEchuBbM1KRfYfsd
-	 rIxfCmC7QUHZw==
+	b=Wi9TWyXuFoWP2Pqcq0u8/GU4DWsQkFUlF/loo+s9CBU9ANoQ2bBw1Pb8rIOXgOErD
+	 7Xb/2fLuTNPCnKvUF5RQlW7xgvzqXp6vsbmC1QrwqouVwwQ70GJ7pJQ/kdjl0IioyI
+	 hflhQdtFDHpbjc8OjXiCjezxYR+1z7ZlZE68QYPHRFkMZECKZ/juuliiK26BeYRNVg
+	 8OcZQbeSzhIyDb3rNdmMqlt+QFRtfueCFKHzbgVRa4dz52fDRFyNihtFUluB7JQ7cl
+	 XK+K/8YyH3u5K1Lcr/3SjNGPmIyOM2erqF2k7/XBwYgaUjQnBvl6O6orIG7tF0aGEL
+	 veLQapRD1GV+A==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
+	Conor Dooley <conor+dt@kernel.org>,
+	Alexander Koskovich <akoskovich@pm.me>
+Cc: Luca Weiss <luca.weiss@fairphone.com>,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v4 0/4] arm64: dts: qcom: eliza-cqs-evk: Support eMMC and UFS SoMs
-Date: Sun,  8 Nov 2026 14:19:12 -0600
-Message-ID: <179416929538.628393.16489021292278996381.b4-ty@b4>
+Subject: Re: [PATCH v2 0/6] Enable some more hardware on the Nothing Phone (3a)
+Date: Sun,  8 Nov 2026 14:19:19 -0600
+Message-ID: <179416929530.628393.9745437066564765057.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261102-dts-qcom-eliza-add-ufs-variant-v4-0-c92512c7c759@oss.qualcomm.com>
-References: <20261102-dts-qcom-eliza-add-ufs-variant-v4-0-c92512c7c759@oss.qualcomm.com>
+In-Reply-To: <20261030-asteroids-dts-updates-v2-0-66a56c537749@pm.me>
+References: <20261030-asteroids-dts-updates-v2-0-66a56c537749@pm.me>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,24 +71,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 02 Nov 2026 14:10:46 +0200, Abel Vesa wrote:
-> The Eliza CQS SoM is available with either eMMC or UFS storage. Both
-> variants connect to the same Eliza EVK carrier board, but the existing
-> device tree describes only the eMMC-equipped SoM and uses storage-neutral
-> names for the SoM and the assembled EVK.
-> 
-> Give each SoM variant and its EVK assembly storage-specific compatibles
-> and filenames. Keep the shared SoM hardware in eliza-cqs-som.dtsi and
-> describe only the storage controller and its variant-specific supply
-> voltage in the eMMC and UFS includes. Neither variant is derived from
-> the other; the carrier-board description is shared by both assemblies.
-> 
-> [...]
+On Fri, 30 Oct 2026 22:41:25 +0000, Alexander Koskovich wrote:
+> This series enables UFS, Bluetooth, Wi-Fi, IPA, and the display panel
+> for the Nothing Phone (3a).
 
 Applied, thanks!
 
-[1/4] dt-bindings: arm: qcom: Describe Eliza CQS eMMC and UFS variants
-      commit: 14120bce2899a8736934018f9817c23b95b8a073
+[1/6] arm64: dts: qcom: milos: consolidate IPA properties
+      commit: 2201c0bb932d4cacb14843f997db76470f978f49
+[2/6] arm64: dts: qcom: milos-nothing-asteroids: Enable UFS
+      commit: a44dec637b78d146ea40278844137f9308f927ea
+[3/6] arm64: dts: qcom: milos-nothing-asteroids: Enable Bluetooth
+      commit: 780a9233e791c1a7a7531c43f38d7bdf45eecee8
+[4/6] arm64: dts: qcom: milos-nothing-asteroids: Enable WiFi
+      commit: f7ddb90396fa68571337adfb09975688d03cfa5b
+[5/6] arm64: dts: qcom: milos-nothing-asteroids: Enable IPA
+      commit: 234311ff4e60b7b3737f48f06cbfdc9d28c32d0f
+[6/6] arm64: dts: qcom: milos-nothing-asteroids: Enable panel
+      commit: d72c2b5d2e03405792c529d8ad9db5f2ecd9eaae
 
 Best regards,
 -- 
