@@ -1,57 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169414;
-	b=vGEBERy78GXVzTbewoKdxfDEUznsFHx4WCop4xXYdXxQYfe5Is0YeYTLbmucvAm1+e3G
-	 9Uuu6c2wOrSZATGeotidvr+6MgYY4Hib7RJYIrvgmrXxXYVJKb0d7m8bv/eLsAFq58f10
-	 NTd0+KBYFONxMibXvIwiGgNa9uz/v81Lntl/lQIAut5BYIxS0NEz+3zei3A0WDf/gCEjv
-	 /n/QFyH+QmVsf8WgNYGonFJPKPTwnsUUtarGxkRVtB9ws7QhYxE7LFrQQYbuKxg5o5tXN
-	 srW6E8N0uxMN/dv+72qZY141fGabv460oHvybdFBcb/H6eMvOrdk+1o7eqUXPxEQulQ==
+	t=1794169420;
+	b=i2f/koE2UvC82O4fOW9A8M2uWIzj/8WnJ77rrY2ARiL0P6DIkmHgSotrA0OFKbDoc/2F
+	 6jYjcb748m+hqPbKRvjPD0K7j9SxTSHLvVdI1m0Ds85eaFORCWMljZMHdLF/JidIr2Vu4
+	 7+wH8fphQmpRNnT3ay/GlCr1YMf0QAGKTBTO6NIo9v0qyzLDDJ5DCzJUg3rj+AchRsywP
+	 ktdN0e6rVWxi/FJCciyD4BilOsNk0Kzm5FS4wLYkq4NsE4l90oZJ36KD9styMcarUP0ry
+	 oJWS6vk+9fm0iJtWDvhL8SQpjcEsH/ryucKemPKx5JjJlCpx9+Hevp+faig5nGmpuPg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169414;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169420;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=cKVCJp860o0T5Qa255it9obpPutgvMPgczrhnqgjomg=;
-	b=LsJ6ShdntAfJWNAYTOP3wgtIp2GoB5KHWOF/40x2Qb1gBbZzOWzMxMWiiUfpSwoCvAZ8
-	 LjfQAkmDa8T9nn+iJ/7AxsjXHodmprhHtTxTW0VG24kdqqpAlQT3e35N4M7NKui0hvInm
-	 qWI9L90ZMt1QcYbZ97dVjK4Yop0kRHJAt6KQ8G3dTvGPqqMe19crPxm79P46NmRu8jOeJ
-	 0acmqXXZ28bBLNWY7swIgwKzfPf8VtPvLcElpW2uaCw+FVZ3+KKieAcLOU3LNkceHy3JE
-	 BGM1Sj2lJYqhASqG6Tyl+NlCf4+rAyyu2qOT8tXvKcPSl2MgT/Or/idXEbHzxtQnnIw==
+	bh=TwU2Y+hzki95ysuTi4JjEIpttEYFac5IFIOZYIJ7PSY=;
+	b=MuFKKdXyrmIL341ZlxlGuCTuFERJkZoHG0Md0tg1Pmm00Wv0CKqHApCZZnfcBp91zugk
+	 PJC+QfCTfUNQoNY+vR8FKDjNQlscNIpDVI3hAYI644tkBCEqlblnoPsyuIADWFk7Mcd+7
+	 FkSsIeGkVwd13bqDK/a6+ylarR9B5Mb0afCYmNtLSi53v/XWGpd6EZZj6nKJIjPLg4NZ9
+	 xBc9Oe0YOKig0F/ZevHwsfN8G4EVS7inDawRmG7tkXachbMP4GjYfrLdVQUkY6H64J+Ox
+	 pde6klhgvI3AtwsAERQONi2OBa5J9hhiGzwS4Ivgo7PmxC8caFpI2SOZ9lo3eHss0fQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQ2HSaDH;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TSbBSaA7;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68C8F6071FF1;
-	Sun,  8 Nov 2026 20:23:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 907FA6073428;
+	Sun,  8 Nov 2026 20:23:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQ2HSaDH
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BA7D1F008A4;
-	Sun,  8 Nov 2026 20:23:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TSbBSaA7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50FD51F008A1;
+	Sun,  8 Nov 2026 20:23:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169414;
-	bh=cKVCJp860o0T5Qa255it9obpPutgvMPgczrhnqgjomg=;
+	s=k20260515; t=1794169420;
+	bh=TwU2Y+hzki95ysuTi4JjEIpttEYFac5IFIOZYIJ7PSY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=hQ2HSaDHoT1ogyWdycol7fZnK+QXSI/zSb9fmE1D1UBsKr8OkJmDykaDyjK/SZrKI
-	 GMGTknWjuYDCoauiFQvT3B5wKtPCsMsodoGJ0Izv9qAaWlKC0dMYkGJ93nEQqSSUfb
-	 OD3Uujv6Dooqg7wOZ/a1HF1bzfOhb4CGrY/tjepM+DM3BU3cQxiD9Hsni3kJFMZNy9
-	 icMoutPgQnhIDDaItW9t8U+yAP6OtPGqcmtrrozYVT6t6SMNjbfdIeljXCiaIoODbx
-	 NUC/slOO1usbHIuw/pD5VcNb/jmF+EXdc0UE+oxx9TOTFDiFLYzUzc0c/8MLB39Lsz
-	 RmwavuURyMRBg==
+	b=TSbBSaA7M+42dFwaLKzfWP9F8130BkSFKN1tMfHZXpi/CDrncvPqBo3mppUXXEWvG
+	 TVg4St4L3QOwguIPaFmc8TZYYCFuh2uquRv4jLHGQwyyPaq9zPW19XJCmSDFiG2ku4
+	 LWy1IGsxtjGjFqYpU0SXZY59aE/kosbj1+nNRfFzQhyz7wLxBJ9cCqAr/wDEz4JwXk
+	 7xh9WuDEtGNUv0u0OMV9kN39mRNRc+vBfxOkmFaut5+Rkd8W21mkHz75/wqA6c0Oei
+	 OXNnLQHNQkrtUOk0aRpv7DN5YspAN9/PzfSMcCO//T3eP7l/468SFKmdXhegk22Ghf
+	 3ig6HL7tucffA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
+To: Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] soc: qcom: pmic_pdcharger_ulog: Match on SoCCP
-Date: Sun,  8 Nov 2026 14:20:18 -0600
-Message-ID: <179416929568.628393.3526348606720397673.b4-ty@b4>
+	Harshal Dev <harshal.dev@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Sashiko <sashiko-bot@kernel.org>,
+	stable@vger.kernel.org
+Subject: Re: (subset) [PATCH 1/2] firmware: qcom: pas-tee: Always initialize resource table output size
+Date: Sun,  8 Nov 2026 14:20:23 -0600
+Message-ID: <179416929546.628393.8375115262933948163.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261104-topic-soccp_ulog-v1-1-e6e108ad049e@oss.qualcomm.com>
-References: <20261104-topic-soccp_ulog-v1-1-e6e108ad049e@oss.qualcomm.com>
+In-Reply-To: <20261102150110.227479-3-krzysztof.kozlowski@oss.qualcomm.com>
+References: <20261102150110.227479-3-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,15 +70,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 04 Nov 2026 19:43:29 +0100, Konrad Dybcio wrote:
-> The battery management firmware, as well as the logging service, is
-> provided by SoCCP on most SoCs that feature one. Add the match entry to
-> enable logging on such platforms.
+On Mon, 02 Nov 2026 16:01:11 +0100, Krzysztof Kozlowski wrote:
+> qcom_pas_tee_get_rsc_table() sets the "output_rt_size" only when the first
+> TEE invocation reports a size smaller than the input table, or when the
+> second invocation returns a non-zero size.  If the TEE reports a size
+> bigger or equal to the input size on the first call, but then returns
+> size of 0 on the second call, the function returns NULL (no table) and
+> leaves "output_rt_size" output parameter untouched.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] soc: qcom: pmic_pdcharger_ulog: Match on SoCCP
-      commit: 303b54549f40401b9c6e6036226b81a57ec9127c
+[2/2] firmware: qcom: pas-tee: Fix purely theoretical out-of-bounds read of resource table
+      commit: 203dd5eb5b223cc10f674c1b9e5be507fbd06a59
 
 Best regards,
 -- 
