@@ -1,64 +1,68 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169481;
-	b=2D6XL8UG0fAk8gb71cCjXxb0hYpm6BOsqHHC/o04PJjbKovTiRZqdIbIXG2Lz7X5XMSB
-	 tVxqiIIDvmhZ0cSml4PyWzj9+sBuBCur5N5nc6nCYn2AC4yfeBg0ztOF/YfkoSbZlSVGe
-	 zgWSandHhgWWm5Xe97QBrtw3vcYK0/Yl7y9mXL9SBytFexGqeJE4YTihcBYHhHwFzU3qK
-	 fTtr8e2q59DDsMZ/wwGRBdUTJbKkhDeAxD9V/MwJ/QMG+XhokixWaFuVwXYjAntAfI1DL
-	 doIQEHt00EtpUaDxXINzLqIvbIjUm0xBhIqziXPAKSOxX5+Y77nX8SRwc18VHiYBjdw==
+	t=1794169478;
+	b=UGAQ8LQDd8ZYmJoo9YjEWRAc0mTbP2sWOFhNfiQh0SnBKfF4qISHe810kFz4athPzawM
+	 eeqCD2KiZBRULYDi7AtZgEPau65+ZoxgvSRO+5wr04JWs8UK38BQMUOOJivFkSP6g6HCy
+	 +mtCoyCE/OKdfNUcPrs9wymfqEAUGRSHM/b3CCv5kGlY29r2AXJrek7I6NEJzhobItoG5
+	 NNicqhAzFENkUmlwlVo67aOOn/8znuDSwnqr/1tzgHySKNYMVkUQnRmtVswIO+eDa+oda
+	 qANl8g/deaoh5UwEDKsAqXYuxnH4svbwOT2tp3jx3FJwmHKdfe5QGQUDyz6CKkVfqzg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169481;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169478;
+	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=O7hlAbfoXMWo8ls0Hzjqu9/SqcS/k+aHJqi0nIPwCF4=;
-	b=3nsUaOqLt6SHpQBDxI0RrtwUIyN3AXNmmFFgmpRPxlvLvLvuj7248onMfD1Cxt0g/hR2
-	 LIhOQ07rufG5BzTp873MasNURbfDAIS/tivtjUnSdTqRy5NE1VhkhaSFSzKa3KzRDO8Z1
-	 hSc4Ps9Vx3GcGm5AN0Yc4rJt6rBxDlJ1V6jhPlJS/LogqEZ3RbsQb5+2BJGxWxja1OkP8
-	 vLESLHL6eCE3Vp4qr6cU5bSg7nj7urMN6rc3pPHTuvKu89gY6dLNXWvAsEe1LaSjISHfF
-	 DeA0O5i4R762ZAuEn8RYFh/bZtXI8+lO+zNuGi9iY9cVIXtB0bc5xbKoXIU4nU8uuWw==
+	bh=5c1izOgqQsqYqZoaqjAccBDA/0QPLj0WU1P9GweWkGs=;
+	b=KnSJOBVigS13nyUFlnNvcJAAaJ8xRSSryUmyeBb0o5aXLFpMddnMrH5lhSBYaRHfsjHC
+	 U3SPDI+yMHRYw0iYrvFdN9dbImR0ud+cBo/G4+OKeH6TpGh4g39vFga4HYg52o5Yw0zht
+	 3lrTL2fo8o2s9m+E/a6+pcBX8Eme11ePKVGvyI9bTE71Zf9nGJiz7hoab9m1sQKjsxrZx
+	 A31Mv0BEjD6hegXnQIjY7GD0gmhSWk0RrZjlZghImLD7nhTPhFK+RLu8ggEDKAQUPAt3c
+	 uI7Pw/iq30CPBuIw5BxWgCSAiM6shxq0vFGMOZHhxmqyDleeZKSc3VGSWV7rbi3LP1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=elHQVnEm;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=owMY7KpM;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A53E8607E49C;
-	Sun,  8 Nov 2026 20:24:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF3E2607D943;
+	Sun,  8 Nov 2026 20:24:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=elHQVnEm
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58EE11F008A1;
-	Sun,  8 Nov 2026 20:24:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=owMY7KpM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01F351F0089F;
+	Sun,  8 Nov 2026 20:24:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169481;
-	bh=O7hlAbfoXMWo8ls0Hzjqu9/SqcS/k+aHJqi0nIPwCF4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=elHQVnEmPD/DaaExD+FliiO6OyYW7cBbS0UGyDBxy997EYWb9R+B43QEslsxIKTiP
-	 OLzgB9qXNLE45eU4Q/nAhYj6qpaYbbVImcoxljoJcfY8VuMnmdIzcdkXJYuvDoE5ZM
-	 iSKr/9RO1K71gW4SM65KnePjbt6gqc5WVM1zbtLSok8SIsdk/2AiUrlbGYSA8NeqFs
-	 rRmGtqqktk8AUh0OpB677+6WyxV1VZjjHiTH4OLLqIZMQifcJFMk539YYZCoTPlHVQ
-	 8SMwpOXL2l8UPTe9Q5bce6UtZamChWRdLJuwZuqwGJ/MzRgh138NJxTjmgIXEh3LYH
-	 7P9+Oi+cuPYRA==
+	s=k20260515; t=1794169477;
+	bh=5c1izOgqQsqYqZoaqjAccBDA/0QPLj0WU1P9GweWkGs=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=owMY7KpMZrMQBttY0jyvLvSgzGUDIPrFpYEoLEgNLYIXGI75BXWMJczhDYMv1vZBq
+	 ru3fZvQ0fH2rD4i/MvpEvlwXOr5aHF0bx6sG5vw881ZXz+CCfAOfavpj5qey9QtQge
+	 dJ0uZSyf07kLRuOypsuFT7hvmJ4TLhU62mEPHcM6HRo2IbhLjBRL5KocYRQXWyrX3t
+	 JH/u5O/CwxeN6jVljMvNB9brJk3qtQTWZCZS14XvsZJpbIpon3ET9w1NsYeWj4zASL
+	 sA17xR4qM8/Fq068o+Hx2sS4QL6LMStv8BXkZpK7lVP0H5V+7knUc5VZOwtf9EMJ/Y
+	 pP235QP6lWd7w==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>,
-	Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	devicetree@vger.kernel.org,
+To: abelvesa@kernel.org,
+	sboyd@kernel.org,
+	bmasney+clk@redhat.com,
+	jbrunet+clk@baylibre.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	konradybcio@kernel.org,
+	taniya.das@oss.qualcomm.com,
+	ansuelsmth@gmail.com,
+	john@phrozen.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: (subset) [PATCH v3 0/6] arm64: dts: qcom: Introduce SA8255P as Lemans family SoC
-Date: Sun,  8 Nov 2026 14:21:11 -0600
-Message-ID: <179416929532.628393.8073843162038778455.b4-ty@b4>
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Robert Marko <robimarko@gmail.com>
+Subject: Re: (subset) [PATCH v2 1/4] clk: qcom: ipq-cmn-pll: Correct IPQ8074 NSS NoC rate
+Date: Sun,  8 Nov 2026 14:21:08 -0600
+Message-ID: <179416929481.628393.14693210731870428357.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261031131042.1200862-1-shengchao.guo@oss.qualcomm.com>
-References: <20261031131042.1200862-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20261026120920.1667982-1-robimarko@gmail.com>
+References: <20261026120920.1667982-1-robimarko@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,22 +76,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sat, 31 Oct 2026 21:10:36 +0800, Shawn Guo wrote:
-> While the patchset [1] supports SA8255P as a standalone SoC, this series
-> offers an alternative by introducing SA8255P as a Lemans family SoC.
+On Mon, 26 Oct 2026 13:08:12 +0100, Robert Marko wrote:
+> The IPQ8074 NSS NoC bias output feeds the GCC NSS NoC clock without
+> a divider.
 > 
-> Lemans family has two variants: Embedded variant (IQ9/SA8775P) where
-> platform resources like clocks, regulators, interconnects etc. are
-> managed by HLOS, and GearVM variant (SA8255P) where they are managed by
-> a VM acting as SCMI server.  All Lemans family SoCs actually share the
-> same hardware configurations like memory maps, interrupts, DMAs, etc.
+> GCC and SSDK (Qualcomm vendor switch driver from SDK) both configure that
+> clock for 461.5 MHz, while the CMN PLL driver reports its parent at
+> 416.5 MHz.
 > 
 > [...]
 
 Applied, thanks!
 
-[5/6] dt-bindings: arm: qcom: add SA8255p Ride board
-      commit: 8f1791c25b66388a2ddd2dc0b84aae08fe77dce6
+[2/4] dt-bindings: clocks: qcom,gcc-ipq8074: Allow CMN PLL bias clocks
+      commit: 969f124be6cda13ea890e7330c984c6fdb512753
 
 Best regards,
 -- 
