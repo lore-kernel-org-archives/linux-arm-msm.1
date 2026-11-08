@@ -1,73 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169518;
-	b=U0C5RRj9xKRFuIFG8Csn/F3w+en38C1Pgx5lDcUZfz5/JiLNvTmaR1kGmksdfPcbbQAq
-	 lBb+HH+v1aMC6zj1E1eqjH9Tg7OXKyj2S54IDBLHXUlchcOzM88f7LBOQ9OqivCgPZ69T
-	 SFMIOXWPC5R8O/WHx70TW6lzpl9f4HEQaly5+GrTVnOARIu762Hpc2JGQm0frYXrpsdnM
-	 dV8w/R7BneaskuAMT7L1zBylw04f4M02VWdZ8zriUzJW3vxROI+fuOUZA4SOID3U/UFeI
-	 kWNjXGXT6GybKKeUUNCQ0b+53S+sZctrBDLmO4aNLWaToFLx6mEiUMLyJ36ktuBOMgA==
+	t=1794169521;
+	b=4ETmProz1Sqk0kJFqJM1fAzyqUWivy1K64yU0PTDAWlw4J+mugAh7xSu9BO2wXIGRyvx
+	 pEoj8CuuebibDlrh/qgLrDwo8WVJXsVGPP0LL5P3j+qJgpiOJZyJgVjmPUlqkq9EQAmVm
+	 lKmvxfkzOz00li3bpH8ffmzrSwlHZ1FLaJVNHv1AEPGqAKJ6lKngOLr6pTfE11q7RveoX
+	 VCcvyJeuawffiGjv9edcVbFm6/IwH/cWBkREoj4ZQ9DYLL8tWEENwDB5B6P8mCuPkHKgb
+	 UyynJ9kBdxyr7M3z3qTAwOu+g7fndNuI8ZkGv0zZ9l/ldNCADIw6RQ6vdopvBRRGCbQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169518;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169521;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=KUkExc4669Xo5M0pq5MFv2MBmaFModmA2vimX3IaYCk=;
-	b=UySrLiFCBRlZ1tgMqAv8TwjtGRs3+CTtddcYQ3n5cur/qBViAuoE6wLchsuC+6Puquzn
-	 eukMITZGPrZD0RWycrAjSW8S1gbh709dh1SJO3MFxfBYvqlZ2zJwZKnITkJTx8fK9gSaU
-	 e2DEqqWaP8RFrH1whym8SWNLVXX6Ej97HKCPsAsViMUnzux1gKkFDl7pZZgjduZF7xfG0
-	 h1xNcTTtTLGHlJzecYu+SSCmigIJrV/+0Mt7CF5u2j7Wbif8STitYCdh5Gc1PLJEvmtuA
-	 R3JlDTCzJDP6s3iHyzXDcS/hzlaKMrF4lYfQNKz8vK9hfWMw8beTvQ6Ev8TJ7UIawfg==
+	bh=QQ+a1x5ipR+uAc/CHE+yw8EV8Rf49q1irZDy55fRu1I=;
+	b=MXl25QY8naUEx9neWFw+yLFBIlfkxMOBH3LEW1NBMITt2d8M5QBJko61s/f4SUsCkzm+
+	 C4X4+ULamx6lTmxepfSXmbL4MQWym2K9iMSGByRRQDv/ji78opaM3gpk+HcxtmBtdW+Yx
+	 IIjqj4mRYbUCCvYylNMOjH24Nghl0bZuvCwbj6OxwXBN0KfpdzGyfhpt2mK2weyyAvxYJ
+	 wxkXzkq7tW9jVcFioyWPuEPy/yXrRyisSnULR4NTA6B+ZW0UVv4sUEWRe74Fgx5PWNn1x
+	 ZfkvoC/VkVwJbk2SbzUxzuzuQ6QlNhIArQT7Q+mkGXDDpEoBGF2kXRDSHncq/USR9Ug==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ectRRz70;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MRTLVRXq;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C56F6084459;
-	Sun,  8 Nov 2026 20:25:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2257F6084EC3;
+	Sun,  8 Nov 2026 20:25:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ectRRz70
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7D051F008A2;
-	Sun,  8 Nov 2026 20:25:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MRTLVRXq
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08FF71F008A1;
+	Sun,  8 Nov 2026 20:25:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169518;
-	bh=KUkExc4669Xo5M0pq5MFv2MBmaFModmA2vimX3IaYCk=;
+	s=k20260515; t=1794169521;
+	bh=QQ+a1x5ipR+uAc/CHE+yw8EV8Rf49q1irZDy55fRu1I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ectRRz70jeilpdeFOOPtObn7aRRQbSFNzr86oHfbEcMIQ/ykPy8+O8dj4BHzzdT6o
-	 kr+6gtz1yrjabPCYkKImC2/NmVMYDHF/4jckWr33HlvkLwKUpDr6sVP9DJNVJEsx9k
-	 wkeFx6W+NDrLnl6u1NlebeVvb8JVw82jwLf136q1ccnKBVUpXuE4o7/coI7fn0jtpZ
-	 B7w3f6Oe37QNKI+4fQEjS2w2ukGrQjynbg78hZm6EXhYzPPMo9WJWl3fABUCRCk7he
-	 qZPEk4e5UnGfs1o2KJRR8+TFjVtqZS3ux/SHARsff5FPXuyLZsC4mnlnvZXfbOgOrx
-	 UiDMY+nxNJ2fQ==
+	b=MRTLVRXqnEB4tqbuH3Rsb518y+8jeXhsYVumYW6MsHoaTw6gTdRIUatM8z+FJHMjr
+	 0yY5GeJniQgDIE2wUywKNwuInao8PgfQ58p69iPpuhCL/Ex2epvWgd0l9ZASEo82mQ
+	 sPgSfgwvpiUFkSSBVhASmW7HcHql2ril6hzjGNDoKjHsTi3YnMoTHjfiLAGCshouOJ
+	 8I+rHSWoAbW48l5EA9wpYB//6Cag0kDIb03/u8SDjoPn7uUn5ODMeypSBUC7PtzsLV
+	 MihM8FjdcFO4xofwfei0c39UGo/vRV99rxi2axCv4jvw3DsppV9lvTwsF1R7ciijpX
+	 aQW1R+/oNNSsw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Kees Cook <kees@kernel.org>,
-	Tony Luck <tony.luck@intel.com>,
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-	Erikas Bitovtas <xerikasxx@gmail.com>
+To: konradybcio@kernel.org,
+	abelvesa@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Stefan Hansson <newbyte@postmarketos.org>,
-	~postmarketos/upstreaming@lists.sr.ht,
-	phone-devel@vger.kernel.org,
-	David Heidelberg <david@ixit.cz>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Vitalii Skorkin <nikroksm@mail.ru>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH RESEND v3 0/3] arm64: dts: qcom: sm7125-samsung: add initial device tree for SM7125 Samsung platform
-Date: Sun,  8 Nov 2026 14:21:37 -0600
-Message-ID: <179416929241.628393.5215102040104571354.b4-ty@b4>
+	tingwei.zhang@oss.qualcomm.com
+Subject: Re: [PATCH] arm64: dts: qcom: hamoa: Add EL2 overlay for hamoa-advantech-som-db5830
+Date: Sun,  8 Nov 2026 14:21:39 -0600
+Message-ID: <179416929512.628393.7892490884985269075.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260910-sm7125-samsung-v3-0-c467bea0fb9c@gmail.com>
-References: <20260910-sm7125-samsung-v3-0-c467bea0fb9c@gmail.com>
+In-Reply-To: <20261029-come_kvm-v1-1-576afbde32c4@oss.qualcomm.com>
+References: <20261029-come_kvm-v1-1-576afbde32c4@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -81,31 +70,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 10 Sep 2026 15:27:20 +0300, Erikas Bitovtas wrote:
-> Samsung Galaxy A52/A72 are smartphones released in 2021 on SM7125
-> (atoll) platform. This patch series introduces support for SM7125
-> Samsung devices with the following components enabled:
-> - Framebuffer
-> - GPIO keys
-> - Hall sensor
-> - Vibrator
-> - Regulators
-> - Reset input
-> - Real-time clock
-> - SD card
-> - UFS
-> - USB
-> Along with that, SM7125 was affected by a hang when launching SHM
-> bridge. A similar issue was reported on a similar chipset:
-> https://lore.kernel.org/all/20250721-sc7180-shm-hang-v1-1-99ad9ffeb5b4@trvn.ru/
-> Add SM7125 to the qcom_tzmem_blacklist to avoid hangs when booting.
+On Thu, 29 Oct 2026 15:55:43 +0800, Yuanjie Yang wrote:
+> Add support for building an EL2 combined DTB for the
+> hamoa-advantech-som-db5830 in the Qualcomm DTS Makefile.
+> 
+> The new hamoa-advantech-som-db5830-el2.dtb is generated by combining
+> the base hamoa-advantech-som-db5830.dtb with the x1-el2.dtbo overlay,
+> enabling EL2-specific configurations required by the platform.
 > 
 > [...]
 
 Applied, thanks!
 
-[3/3] arm64: dts: qcom: sm7125-samsung: add initial device tree
-      commit: e3738a846e67c27bb0ca0e0c5f0bff73e0a65d49
+[1/1] arm64: dts: qcom: hamoa: Add EL2 overlay for hamoa-advantech-som-db5830
+      commit: 0040fe9aca53ffdd9e71f39462d8e40517f7bd3b
 
 Best regards,
 -- 
