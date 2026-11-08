@@ -1,63 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169382;
-	b=qesDKyTW8TJMbiVVu/nw3GVf+ykY0JAOXBhtz8YVmG8iz2DY2e2g3gm7KmJZ/6ByEldH
-	 UJkt2HgZvaYQvgIlM/eggI0lUUwWgMS6FDo8HYwury5Xynq9EsZNoV6c+93kzF+hW5p3M
-	 cwIMenV7WyzUlX8Q4S0jdoy0h/lD09GMmLlMIwmScdMtVNUDgH0++SdRbH7zoiLoJXYZb
-	 WiOLJfPdHPFVPmUbLjhX0OxRD1qfNbJkFXbE3vPuvWdg5u8KwAbx0z4+nXMqBAcst6035
-	 raz99H1crK3WqAf18EMCUU4x8XWm821TiDI6/tpH7181HQclXf0816vpkMNqWWrm6TA==
+	t=1794169384;
+	b=uNuY1i678Iw9VoNdHB6RWYkAkZaZW7iB0A/5yf8FhKWiFTtw4bmcrsgM6EHefj6PAoPG
+	 gTrA1HKdCSAmKA3+7V1nK8fejpHz8RcgZd3g22ha8A8GWnrvmw1fZNc1LbXXMKaYTUx8e
+	 RG5PqdCtaFOCrYL0HtRSiIoCfsONf98IIg4cSd00ymiuyT1bkIm7QPH6Mk9Z+P8fsNtJj
+	 2e+nomcZl2sAQ5QnFUv5G8FM/NgrcLU9l7EQz7N2j1Dcnaqm/lNaj+LG3bW+lbWJjI5sX
+	 3AiF1OPErBQ4slyTnYdn22xsbKMJFx01+Bk62gB7hGYlcNx/BaiAawRXwDnzabkAzOg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169382;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169384;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=un5KME5VaqGRyFymJ1U5KruFxksDbs/z7sIbDgLE1d4=;
-	b=Sq/3Qz9EOzCob4gUcQGJ9MhWRLQICV4GJm7PHGQNDJ0AaOyKa5RrrSuR4EwlITThRLaB
-	 5D3S4EA3ly9hSovq901Xr8yvRrHvEsG63mclSZYFCuIPslfcm5DbbphdSgRkkNTWDdvnj
-	 WqKZE86/5au87vXCAk8r9TBRUVXCIjXJ8/lgWkra7t9KV2pvvcleEBxAPlSVL9CWWREZy
-	 aFMoOi5DrLXf3koS5nzdG753Ll0dSyCdnPhEQ55/uUhsWDZCfzmGgBZlisNbz2+D859fq
-	 wj3Bx/j1V7QnW4i6LJ8ibPPWGYnM9w3pgpnm9HQ9vCMxSz7D3it2TswBmuWzRLROung==
+	bh=uOdj+LCGkUSdpj58vrEitqjzSgwqN0eEuoUdTrdn7sY=;
+	b=ysQlf3Cx5oazqSprkux49cTzMz/am3AbwZo6fFCdRQ2bIgIbi8fEx8P0Od6/X9A9ADrg
+	 vHM90/RjG6je5kA6sSTM5KAWgisBwd/KeYoSzJHcbTZq6woqJgUhjo7BdaUH9LwF4TxxY
+	 /z4GP2rK1WGUkNXGovh/fTmqef6Pce30JP0serfTVop/WWNN3aOLSZ2wEuWhD+Oemg6cm
+	 eRSkB8UaZ9Xh5NlQWZQEnTRdelIwB/eZgyVKhlNlVoOF59wcrl0TEJha34SnGFLoFNcD0
+	 4+WuxTswPgcNEVGw/BYYYaeQ8CSF9EsK2yjJ3Y880JJ18Eq/Jgi8MCohkZDzZUPrKig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="L/ec+uta";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kBG5zsCj;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1454606C772;
-	Sun,  8 Nov 2026 20:23:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E673C606D101;
+	Sun,  8 Nov 2026 20:23:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L/ec+uta
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65F111F008A2;
-	Sun,  8 Nov 2026 20:23:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kBG5zsCj
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAE7D1F008BD;
+	Sun,  8 Nov 2026 20:23:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169382;
-	bh=un5KME5VaqGRyFymJ1U5KruFxksDbs/z7sIbDgLE1d4=;
+	s=k20260515; t=1794169383;
+	bh=uOdj+LCGkUSdpj58vrEitqjzSgwqN0eEuoUdTrdn7sY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=L/ec+utavsY8iBqw++e/nOeROwDx9p1l+BGDvUSPB/x6PGhhnQLadBDy8q8MgJBoX
-	 J+BvFryg3jLMl1cVgQANHzzhrvBTt4vaQpoLKk2wai03wWxo1JPpELRN1YQyBThx6v
-	 fZXdsp8MKvMI4w/np7N9/bXMVhkOAvE+rz33SfvcvjdBMlklEOGf/qAjZ+jeTEuKkP
-	 i5oPh7feOb/HuAuPoOd4igUcxIBkJGeudxBA+TuJmWhEGxv0LSjH4JRk3v05vDoiXL
-	 lr/cgQ5fLNot9LKb0H9IwSg4UtsPns7dQWz2Bnz/t555mHjEsU1oSg3sp7SX9QNjyo
-	 zcRHX4xxBhkkg==
+	b=kBG5zsCjpqGCont84sHcyVQRg63m1NOcflsEulc6NhqHcHXyrBC8iluQKQXElUk0u
+	 dfOAmtk6Eo38YNSQoJ6XmbcK/6qWLwvBXr0Pgk5U2CmHTQyYLg24WNbEKDaePmV7dz
+	 Y81f6ze673y//ooq4pARvzrhcvIwOrLabbBLN+jiPdObZYRtHnNSrOJ4iYD9bwfYWa
+	 Nc3V/JoTmKJ/xWvzMCrxlJVRZRaA/6mNbhQkMItLHKm1bzVgiR9LasXyd2mqoJS1H8
+	 H67IUsEMddz/9/U/qdWft5fkY+0QivP2qvyX1liVQW/3Yr40UpM8uUJx6C96P2IT++
+	 ehbgrJ24sabJw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Sebastian Reichel <sre@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Reza Kurniawan <imkyufie@gmail.com>
-Cc: linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
+To: Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Imran Shaik <imran.shaik@oss.qualcomm.com>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: (subset) [PATCH v2 0/2] Enable USB support (peripheral mode) for Xiaomi Redmi 5A (riva)
-Date: Sun,  8 Nov 2026 14:19:54 -0600
-Message-ID: <179416929246.628393.13881108135908117642.b4-ty@b4>
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: gcc-qcs615: Add additional frequencies for GP clocks
+Date: Sun,  8 Nov 2026 14:19:55 -0600
+Message-ID: <179416929401.628393.3615974621730593014.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
-References: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
+In-Reply-To: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
+References: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,22 +71,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sat, 12 Sep 2026 22:18:10 +0700, Reza Kurniawan wrote:
-> The purpose of this series is to enable the device to act as a USB peripheral.
-> It enables USB-related DT nodes (controller and PHY) and modifies the
-> charger driver (BQ256XX) to expose its VBUS state through extcon.
-> 
-> Driver change is required since the device has its VBUS connected to the
-> charger IC, which means cable connection/disconnection events must be fed
-> from the charger IC, to the controller driver to dynamically enable/disable
-> the USB gadget functionality.
-> 
-> [...]
+On Fri, 16 Oct 2026 14:42:20 +0530, Imran Shaik wrote:
+> Add support for 10kHz and 100kHz GCC GP clock frequencies required for
+> display backlight PWM functionality on Qualcomm QCS615 (Talos) SoC.
 
 Applied, thanks!
 
-[2/2] arm64: dts: qcom: msm8917-xiaomi-riva: Enable USB support (peripheral mode)
-      commit: f6a4df4921fb88f1e729a19a48e7aede852ed6a6
+[1/1] clk: qcom: gcc-qcs615: Add additional frequencies for GP clocks
+      commit: 23ce9f87cfc56b6ddbd683725720448dd4fb200f
 
 Best regards,
 -- 
