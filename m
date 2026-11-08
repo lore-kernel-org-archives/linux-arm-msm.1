@@ -1,61 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169468;
-	b=JHYgHzOPbaVbBLxreNYku+rPY4QbjngG8RQ/w80rEGQaYevedZ+AoIvvlAaiGWwO4c4c
-	 C5NlYR0pSAeDrZAgcO9eRDSFkg4JBoeFzM3TmM86RYwLPzSz9mDTuBFM0B4eB2mGY/e2W
-	 E8PwRNrcU4Rm1T4/AxNPTNFJtKT+ai4+G9ZsMdd2NOkFZ7q5lb6LS+V3c/dY2Zo7qqxwD
-	 MneFsg4BA0+tbBC4Uj7cSSgIKV8cj7VHM5KV1uWLCTjYeECa5tzK9my0f+OBHExpoo0v9
-	 j9fY8VHO0ITUXW5ekuNUzinsaQ3m7lKecyJGB+6SA8Sru5O8UYqBdEknbWrOu0dUoLQ==
+	t=1794169476;
+	b=VUQcExvUb569rC4nvdzTAty4DOIhXdC7bNkKpwk1Mjdm0gAUpJY9lV3BGtlXySoXl/me
+	 5koxxuJVRY3TJGYpIAY7w+FwxyG54Z5rBuNH/27GCQJ6zJbuAIzCS57mJJYa9bhHKXEZw
+	 XKMXEeUYIaFqMYRSoD5WEqcOvXtceFccoLT7nESpJDdo0lPOodjcFjVcMZGOoIaP586YY
+	 +T0v4gJU9hseYh4sPdadrwmB/QmJUeNuCVh6Y151JR8tqPRGWxdWwHmwizb2rs9yiaTa4
+	 +LnaLaIObMUj17S6bUhInpLyOYI9Oupxow/amVL6mUm9hR/A5h+08UUNbFWrN02r6Yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169468;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169476;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=M02SiQqr6L1QN3inZJdBPTD7subEIlSZCr76hhFAvS4=;
-	b=hEP5r99pRigda77XnF3S9/VH+FHua7XI7kE1PNhGiMzkD3AIi2ZQX2K1lsSCPQiZYL21
-	 K1UkQ7poGHq0yw4KSIg2p/DMdl6jJOSsJVD1uWgJkfkBWvFtVDz4fWuj+fMNbLvRqBQjs
-	 pA54sNPTbNeb/A8qr6fmJoq8WHb8MOGevgTX45BGmQQ5mTgl5ie5B2NzW8iRDkEWZBzq1
-	 vNoiHhd0wpcAJWYiD0dZLrje1xwSvzUqu1biz3kwmCqcPqMwNaP1uKr7H5ihIU3QKprxM
-	 /h4IEAgt3WQX1VMuDl4RHwQJeyNMWg1fimfFltAH9D440hDq/LjYws7WbSQKoXDerPw==
+	bh=7ggyIcwYOM80LKMycSmwhM+8vTZbUAlXjcnBi2PVQ/c=;
+	b=JMIBZtUnkNR2LTdGx6iFZapq0NywQt9unpPluY2A7x0UffI/MLxroUmDXP1QKVndwmwx
+	 k4/Y4sL2a5iosH9sQ2YjwOrRHk2hx4R5ydYQN2CtEMcAKNi03+Pu2ALiMLMavVl72dcPe
+	 lPo146vknn7qacUh+P2rvW8hEt6EqJqwQ+4DpTNDLp3GijnVvbSV2/Rr88ECk3jyTh2n+
+	 syZnvpu6fpszTzvJjPHbQ377bXeFy+fuAt4l1M1ffPI0DqFMuF70XOlzHMfw+WQ0bgGbU
+	 i554uLXn/epMExeUw3lmBW60v8fF2779BANM+peCeyapJq1SyDmbp2uj1w2Ei/oVw4Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="iw/memjQ";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g6iU+ZOK;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B521606E017;
-	Sun,  8 Nov 2026 20:24:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8ABD607CECC;
+	Sun,  8 Nov 2026 20:24:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iw/memjQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC7F01F0089F;
-	Sun,  8 Nov 2026 20:24:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g6iU+ZOK
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E25451F008BC;
+	Sun,  8 Nov 2026 20:24:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169467;
-	bh=M02SiQqr6L1QN3inZJdBPTD7subEIlSZCr76hhFAvS4=;
+	s=k20260515; t=1794169475;
+	bh=7ggyIcwYOM80LKMycSmwhM+8vTZbUAlXjcnBi2PVQ/c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=iw/memjQMiAT020EfWBxLxheTgPWmniNul6Ftg3ruwtRpdwj2hWJCa1W8KXqK90Ro
-	 +B8hHo/t94hQTioG46vMR4+GQhYbfjcZaYqTOqWe2P/bRgazqKZchOSNbx+Dtj15AS
-	 NjyDXaQ6FjY8rrAeKHpoM2XbZr8Kjq3Ri/xxj04GtX9w0VFNwEz5+h/nUEtAWl9SAn
-	 cb0Ppl2gnfHDagaUHySmZKdOkIXe5TSY6UyjbGrWQr1MGH1eDrp8ENvzKiEJRaRaJd
-	 /R+rClm2yDiCsMecjVv3aD4tZaQx2rNybEvjgnyJ6OSmZZQTpsICu1+mIA93f5HhWa
-	 hPttayDQ6VXzw==
+	b=g6iU+ZOK1wknp7xZDrf6hGTPCHcs2M4SnZr443rrFu+1LzdL2SQt7EbGXe7DwIbnk
+	 o8qomeBS6PNHZLWewHFY/3FCGfVTjFbg5zYHi5kaH2rjokMlwFrHPTrIqCh+kMYSXh
+	 scXqbKM9JwVLlAO3PcPMEsNA2CvBoAz1zTOjPQJBIYrPIJcfDZ8PKwrO7ySJxM9HcP
+	 VMpsEqTJ9of5EIWUAh/n2DbysGeROOZua2/MWL8lvk73Q+hFcntNJzJb9c0hp7u1vH
+	 GLQMIFfpU/HlCHvgl+AI7zunhJhyMTe6Pp0x4c5m14XD6r5XVgcIIeCFT6X2MKcEV0
+	 P62PjPg9n65OQ==
 From: Bjorn Andersson <andersson@kernel.org>
-To: konradybcio@kernel.org,
-	Pablo del Arco <pablodelarco1@gmail.com>
-Cc: abelvesa@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	"Rob Herring (Arm)" <robh@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: monaco: Add EL2 overlay for monaco-arduino-monza
-Date: Sun,  8 Nov 2026 14:21:01 -0600
-Message-ID: <179416929324.628393.3949635695718160748.b4-ty@b4>
+Subject: Re: [PATCH] arm64: dts: qcom: ipq6018: Drop undocumented 'qcom,ipq6018-wcss-pil'
+Date: Sun,  8 Nov 2026 14:21:07 -0600
+Message-ID: <179416929556.628393.15466602761506698116.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261004101849.34191-1-pablodelarco1@gmail.com>
-References: <20261004101849.34191-1-pablodelarco1@gmail.com>
+In-Reply-To: <20261103225845.984564-1-robh@kernel.org>
+References: <20261103225845.984564-1-robh@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,20 +68,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sun, 04 Oct 2026 12:18:49 +0200, Pablo del Arco wrote:
-> Build an EL2 combined DTB for the Arduino VENTUNO Q (monaco-arduino-monza)
-> from the base DTB and monaco-el2.dtbo, as monaco-evk-el2.dtb already does
-> for the Monaco EVK.
-> 
-> The board boots under Gunyah by default. This DTB lets it run Linux at EL2
-> with KVM when the boot firmware is set up for that.
-> 
-> [...]
+On Tue, 03 Nov 2026 16:58:44 -0600, Rob Herring (Arm) wrote:
+> The 'qcom,ipq6018-wcss-pil' is not documented nor used by any driver in
+> the kernel, so remove it.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: monaco: Add EL2 overlay for monaco-arduino-monza
-      commit: 288c04d58f3cb8178540661d10ef95798170f545
+[1/1] arm64: dts: qcom: ipq6018: Drop undocumented 'qcom,ipq6018-wcss-pil'
+      commit: 67b58fac77db8d2653e53266f62964cba96397fb
 
 Best regards,
 -- 
