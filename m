@@ -1,62 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169492;
-	b=jyMf8p8/c9kNV/NjwiJfOb3KFI/in7UAPYU+aBtSlsAE8Qvx9L11R+BEuAB9LdV1jGpg
-	 3of5viRMzXj+pZdD+gvrm1ZnrwwIHg/BywFwrcYyu9LwyROSrkIxEKTBrYhFufEmo9bw/
-	 OEnEuvaVwG4da90dSdVYcYe+bjQltbDCEqSYCXxUpXBGDjUc05Tl+qeyiUoA//xW9JNcy
-	 17GZjFUzCkI/OC5P0Gj38IFNSvSLvsiLPoPLyJupHFo4v6meSe+tXI8IAubaw9M+2iRUf
-	 mzjqq1APPdGV5r8eQ/RuqW10UvwmKi6CtLOUNE0GaiZOBtXucpMsISZ3vktdniaKb0Q==
+	t=1794169493;
+	b=TX1Ag0z3wUm0SH4aKY13MhhQeBBYorBiVC7frd5XqI6TXhU+bJQDu7Etsw2kPYBAcPxl
+	 wCsZhyt0gl4xbeVxO1UAFnTNqvKYCspAF1sgC9o1gmPjW8BR4GDKx6rdoT2YRv+gLRb73
+	 9EJ2ORl6qclDf4tgww5fbMD078HEieWcHNaqQu9nBH2CZplc8aJG3Fn54Wb7/sZMo+kV/
+	 y3VQ2vBufaH8zZ2sfgExfv9ra9PGCJS0z/SwC8T5/1hMw25zkkgGgR7jaFhl4MJiQ8P9q
+	 KBqEKroH61MrYSvKFFsqNybYgkrks8VbrHRRFQ/kh5ZHeg9olOAhER0xj6UW/7ltSng==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169492;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169493;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=QqI2BeVuF5y/RGOq7tOqreiH+gzsy68D7SybMVh4HLc=;
-	b=b035y9H4JRpS3mv/dYFcmTDgtFNM1fm4pp5MrezIWKdF13Y1Tdecvv/dOer9fRM4+DaP
-	 vNuxCjfjbpGlwfCqYE6ve8AR7ptySUmgCudZ21Ftgbr/OdkGn0Mu38HUlkj1gQLka3/bI
-	 nCx+hqOYLeD79bQbsJd9UsMDdbiVusdiqhbkOIxNxHAAQcP30ouU/8t9zhJIhBswN/EZE
-	 tPslJZE+Envzsg/CgOI3srQ0FTBVVcnLLVpf6ici3pQaEppPhJTR4SsXwwB5+0a9vUi8G
-	 jsTq0w5C9X7UOOBXMPlXBQhPJBBwRp1auL38MWz+E1rURVYhjJ1hVvOyBcofFeBqekQ==
+	bh=jHkSu/I6sjJZj+dKlK5gxac5YS6LoMiyJZobd62YxK8=;
+	b=bJeLcLKoe0MFDtz9YP4kzm7CodWLEblqjPTpWCixYipGAQo0i6fDh1t/kFtlUpUtbnae
+	 FAAgZ+NyWOM/y7mN8AlLvkV2JpdHO0BnehSZMsgPmHZsBpQtoodc/Zwyf4N5JP4y9kCyp
+	 IECmagzxAs+fiZcPQlIjvbIxDL05Gd6B5mZFbfrWut8C6Ko7EvTCrkRHr/QEjU8Umo/5Q
+	 Y78bsqpRoJMJp0I2yKw1GcyUVmwZtKkMrIxTZZ9KBVRoSTa0ySDpwFvIxjifjSYshmB1Q
+	 bE9wYt+LTDsxRmVcu3ytxTNXRfLkdaXgGg4TTd+gJuyNkg3ZGHDsmlRi+S2C7X2HD8w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Y4dr/ZFe";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P6CoFTtW;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5C6A606A9CD;
-	Sun,  8 Nov 2026 20:24:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3E786080305;
+	Sun,  8 Nov 2026 20:24:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y4dr/ZFe
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3FB31F008A2;
-	Sun,  8 Nov 2026 20:24:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P6CoFTtW
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF7B01F008A5;
+	Sun,  8 Nov 2026 20:24:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169491;
-	bh=QqI2BeVuF5y/RGOq7tOqreiH+gzsy68D7SybMVh4HLc=;
+	s=k20260515; t=1794169492;
+	bh=jHkSu/I6sjJZj+dKlK5gxac5YS6LoMiyJZobd62YxK8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Y4dr/ZFeRROsf+B4ZeDAN/4RMZtJlYdga2OFk8mVzw7nBI9WKl2GLi2ZvxfU84cBD
-	 ntBokYTcC0QtEteDSxmpojr3Crxo4v49mNfxc0I5pJPIczJilztgnWTwEN8SxHWmmx
-	 17o6E7KAX/ll/0KrICQ++jVelcsgiPcL29eatpm4kaGrUxBwgxAqep5xeOxDYV16tQ
-	 7tVbmpxREu4GcsH+8qCCPUT8zf/v81+A/S0m3U19t/bGHv1ZJUX8pAoI2SdYNVmgX+
-	 OEQdka0lC/kcZ++pTJBu5DrS4RR3U61FTpaNb4rarH3T7yeGXBla9wN6V6d90NYlNv
-	 YfKwpafA5P0Vg==
+	b=P6CoFTtWVHOFhItaFGlw0J2ZZ3yon28AoVfd9unMHwl5BWeK09crAtu/bD6ekFhXB
+	 y64i3yYgPd7H35inBanSXoycGjsQtHeo6k8FthmKhbv1tpJ54adOTfL3VT2PPhgXjU
+	 ifcDFRjS/vX/TjMaBF9iDAuWDijZ8QSl6dK/mOIXXOsVzjHng7AkHnaXstti4Ny/3M
+	 2Re7j0C4iXjy1RRekSrP/WrX+EY9mDQu9Jmo0Wsj8bzqnnFc+ZKKTHwOUwkxH15uXL
+	 cJKiWxI+hGoKIe522Ewo/7DA38x1WwjbdtHXlkCclDh6Io6NcCei8zUwogxq7rYUmd
+	 wbO8XMK2ZSXog==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Xilin Wu <sophon@radxa.com>
-Cc: linux-arm-msm@vger.kernel.org,
+To: konradybcio@kernel.org,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	dragon@radxa.com,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3] arm64: dts: qcom: sc8280xp: add missing QUP pinctrl states
-Date: Sun,  8 Nov 2026 14:21:19 -0600
-Message-ID: <179416929510.628393.15246454384618080287.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: monaco-arduino-monza: Prepare JHAT 40-pin connector for HAT overlays
+Date: Sun,  8 Nov 2026 14:21:20 -0600
+Message-ID: <179416929506.628393.8425349389039809053.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261029-sc8280xp-qup-pinctrl-v3-1-48c4ef292dfc@radxa.com>
-References: <20261029-sc8280xp-qup-pinctrl-v3-1-48c4ef292dfc@radxa.com>
+In-Reply-To: <20261028214551.108424-1-srinivas.kandagatla@oss.qualcomm.com>
+References: <20261028214551.108424-1-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,25 +70,26 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 29 Oct 2026 15:52:32 +0800, Xilin Wu wrote:
-> Add the missing tlmm pinctrl states for the SC8280XP QUP engines so common
-> I2C, SPI and UART pinmux definitions are available from the SoC dtsi.
-> Populate all 24 engines using the SC8280XP lane-to-GPIO mapping, including
-> the non-linear QUP instances, and keep the mux function names aligned with
-> the driver-supported qup0..qup23 names.
+On Wed, 28 Oct 2026 21:45:49 +0000, Srinivas Kandagatla wrote:
+> The Arduino VENTUNO Q board exposes a 40-pin JHAT connector that is
+> pin-compatible with the Raspberry Pi HAT specification. These two
+> patches lay the DT groundwork so that HAT accessories can be wired
+> up via overlays:
 > 
-> Define common four-wire UART electrical defaults in the SoC dtsi: CTS uses
-> bus hold, RX uses a pull-up, and RTS/TX use 2 mA drive with no bias. This
-> matches the Bluetooth UART configuration used by the existing boards, lets
-> them reference the shared QUP state directly, and removes duplicated
-> board-local pinctrl definitions.
+>  - enable I2C0 and SPI3 on the JHAT connector and add the i2c0/spi0
+>    aliases, covering accessories such as the Pimoroni Automation HAT
+>    [1] which uses I2C for its on-board ADS1015 ADC and SN3218 LED
+>    driver;
+>  - add a label to the sound node so audio HAT overlays can extend it.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sc8280xp: add missing QUP pinctrl states
-      commit: 08e237329a6a7aac877e978246609db9a49d2519
+[1/2] arm64: dts: qcom: monaco-arduino-monza: Enable I2C0 and SPI3 for 40-pin JHAT connector
+      commit: 7a6161e50fbd5d16cb53614ac92d0050b57bfefb
+[2/2] arm64: dts: qcom: monaco-arduino-monza: Add label to sound node
+      commit: fa29e3ea0785796fa450d8f91ffe83c637a2e1a1
 
 Best regards,
 -- 
