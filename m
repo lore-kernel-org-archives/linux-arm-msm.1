@@ -1,64 +1,126 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.112
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794161062;
-	b=GyfiYSSE43IEZpEfpFwjwgPbPv56xom/SBKaig6ZQF/wwq8fZmdZkCXrhgsyw9PCRnwC
-	 Xl2KS3b3kU3XGITPFHZvIqF0tpQg6ao5x8Oa0uOexoanVDaAcAuYSNKTEe8wEvdQXEpfB
-	 UKPgVEJwQsVvSQulPIgxe3+heDYm324En49o41GotNH3xbt8qi4m4aEnPQs3a3ZDaM+k7
-	 QXKZ9uP4V++m9MHqnLsNQP6dUB8bzBnF7XNLuQYlYmAFc5+BchGtksmNpLtPlZJsfdQNV
-	 kUKqui9bAKx0M3/EPmucQKUG1NwTRVMsrwPb/SCM3sM/KFs4Ja9AiiYu2gT6+9DFtyw==
+	t=1794165470;
+	b=GZ0qZvg12O49QubogWefxn8260FFDK+GnkBn5dPsG8e0pIQFP4D9zbO1a8LK6hLP6W5G
+	 ftFbpwz+5MxOC57tVMuq25efROd9dIRuJJ90KCU8wwoZ+NcHV69am2/QWYw27hJMPZGJa
+	 PYImqIu8lK+jLTTEiD8/dPizmXrj3TfpuhZ6pDBmIJWu4S6oMEGoyJ01enTvjzreyc8Xs
+	 LqYjTETCjFg2byHhNAZXRV9A1Of45FecKuC2+QmUzyJ5XzyGgRqF7V1MO1Uc+pPDObQRv
+	 t6PMPlLJxTvlMwiogmzpVjl4qQcblf8gl5NS/FVJkUDZeWUS3NqTZikO7yCLZmd4eww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794161062;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
-	 Subject:Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=+BO7ggl62Lj+oozFUYv9tkz0XO5F9DqJdq0SI4BgX/c=;
-	b=TxkKzM2FrDJx0CyUOAAeGZJjEID8f1/83Co9TmStKc03nvJEapH3mEp5jVCmdxnD20E1
-	 dVjzz2Vy/JZn2jCauY+EQ+hwOdNZ5TDG/W50cxZnZ1NOfl+EJCDnR+8OnOFKgK0PfUwIp
-	 xDvxDfpIzg9XjfECszRJCkhwyyWoPPrYpK0F00qc5Dohga0jvsWFwF4RAma9zK0YBrEN+
-	 nYJBqgHUds+acYmsbq0Hcyahh/r1f+OhR3rdF7X0s4PaZl2C+BfVKhdk14LhVL+Nq/A20
-	 wKUF+HG5WwEaUN4UYgHxtuwuyAoR5kLkJRh0MkuuviqNaDT+e5H7XvmnuYBiGyE9jAQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794165470;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=1bB8siXgq9lNTN1p++gxRLJccSlMsOx90u5ACH+aXpw=;
+	b=oKxvxY+PJd8W8Cj18qcxSEq5dphXGS34210PsPCN3zRKWFK6Fpl2wHZ+HyYEsTanBGnf
+	 ko2gte3WcZjPAUaXL3Wb8ljFe5P2mFxphkiD7fJt3BUZM4PcGYpSZqqMjtuXlYKHx5cGR
+	 uFtihTJwxj4mEdh5O3F8II9g4m51g/Hbn7f8OJ4h8qJ53PjZZCyTGufUsMG/rDS2HCwLI
+	 qmBXb3yh2neqr/kio+FaHakd1MQyIj2Uk14GlwMpSAsneMzLmPpPEwZ5sCvYT9+bLV9QA
+	 xGjcRbyUpuuQSn/ofpZqBFOAdKZFXTVC0uHAY1qIWXu8zOeJS6Yg3gemng4++ssawCQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=3Rimm+Oh;
-	arc=none smtp.remote-ip=79.135.106.112
-Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eICtd3Gd;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fP7wOeid;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFF7D606A31C;
-	Sun,  8 Nov 2026 18:04:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CFF7D606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD46E606A31C
+	for <linux-arm-msm@vger.kernel.org>; Sun,  8 Nov 2026 19:17:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BD46E606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=3Rimm+Oh
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eICtd3Gd;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fP7wOeid
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A8HosrK2722187
+	for <linux-arm-msm@vger.kernel.org>; Sun, 8 Nov 2026 19:17:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=1bB8siXgq9lNTN1p++gxRLJc
+	cSlMsOx90u5ACH+aXpw=; b=eICtd3Gd02zQuqH9cb/bdGikiCeIAX/K8IybIhGY
+	IP55UGP3jmLO6ii39WmYR+87OvnszYqWdW5HecyFPstcWdRoRIIztB3TG42dHciy
+	+rEUIlBNI5AHcbRaTo8NmdXOgLYXLz3povWFaN+/0Dd2StQTAJEaDOxRVJwBByfC
+	JpD5pawoRlx1INY8NNMBXkvW+FqFl4/Bcmc3SVhOVRCPdXQismoOng3EjPRh+lEV
+	tc9GC2i95IQmL1pCHDTm4vBOLBngCP9NRoM+y5/ZNZBqrI+JePqkSBKajLEZvN4z
+	JKoiiZABJZk+vv38RW35MfMlQAXSxuzy9Ug4O68DUHN1JA==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4htuqm0cne-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 19:17:48 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-91ea053ef90so5432726d6.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 11:17:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1794161052; x=1794420252;
-	bh=+BO7ggl62Lj+oozFUYv9tkz0XO5F9DqJdq0SI4BgX/c=;
-	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=3Rimm+OhVNZ4nKZbGzi96fchiXSVcX33zdEXWjKyBWgLUyAt6mHATgmLei4/An9h2
-	 YQBoskvYZFCsthArQAf5SnMpaHaSm8IUlRy/FLwjVK9VXCMmSkULMrSRxQDv2rHOgU
-	 79mOLS1fiSlVKmj9BQV7NC89TR4r2gUOIMCnhVgr1Aqfmtw7eKjHS31S+tXmJnhFae
-	 5sOKSiAFK/qvS2Yez3fk5rLJV1tv78mILubgpfbXniqCZbKk0fq02qd9/EjShg1ENF
-	 x9MaGxihw+jnqlZ3t/Sd62+zMw9UHJNoOaSKfSnYy6xvSJOpgeFtzqjVImSl/CM/wO
-	 MAinw+L8lX/lA==
-X-Pm-Submission-Id: 4jN1544Vyjz1DFF0
-From: Michael McAllister <me@michaelmcallister.org>
-To: Demeter Barna <me@fromdisposition.org>,
- Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>
-Cc: lgirdwood@gmail.com, perex@perex.cz, tiwai@suse.com,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, me@michaelmcallister.org
-Date: Sun, 08 Nov 2026 18:03:42 +0000
-Subject: [PATCH v2] ASoC: qcom: q6asm: Correct the 24-bit PCM format
-Message-ID: <179416102230.53258.7301268454500974217.q6asm-pcm-format-v2@michaelmcallister.org>
-In-Reply-To: <f3485a790ffdafe635b84b5d68730dad@fromdisposition.org>
-References: <179355993304.51321.11135059681945648585.q6asm-capture-format-v1@michaelmcallister.org>
- <f3485a790ffdafe635b84b5d68730dad@fromdisposition.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=oss.qualcomm.com; s=google; t=1794165468; x=1794770268; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1bB8siXgq9lNTN1p++gxRLJccSlMsOx90u5ACH+aXpw=;
+        b=fP7wOeidG7WTmt87Rb5qrs2RYhZYZVeVBzHM/sKKUg1uq+EKVgZsplIB+rBgftUNOe
+         UyZ8Q76sRCZo/ajCflLsH/GTSkBelYbqyraV+dszatceY1R4ScfOMsW70To2iffrevao
+         bOeFVKB+Riy88qqxG9033wGoIK0yMIs+yiym8hsyu5Ez0dIeBEv9clKra7IxZDJUe9Qr
+         Z2TwQZgSrhD3X3PMEEUqav2XDrkSW6/L6XwBNt53bAQsPwhS3p67raTWS/75YLbQ17Yx
+         6h5jJcP/W/kbcHNM5n4YzubDv/O1GPbr44lpI7p/1jjp17qztGifH4PQM+4gAWpz2NQX
+         IU8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794165468; x=1794770268;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1bB8siXgq9lNTN1p++gxRLJccSlMsOx90u5ACH+aXpw=;
+        b=lIYOa6/bBCy3RAonXfV/xcek1avaTAnpf9zCao5nvG4uCsO0kMwj4RYwYrUzkCrhyR
+         U0PlukZ74eBi9LZZ18fY+uBwJXRI+CpooK+rIF3Eh6qvIa95NlLCXxupcTJrekzsbwc2
+         d8+HDbe2CroQhAap4PSQizlf6Kk8bqbrm+NXEJF1wdewdx8GQ4T0aw3kQXtjPSTfcUR9
+         VjWjQVuZxrO6x8DfP3PtpMLog9CfjC5NX0mbtKSXMGYDG8bSqeYc/4oQiyonuMEeMhyP
+         la8oMoqkfiXUuPcmDcYYeNM0a36wdYRzpJbzfnnyoWMSCKr2jD1wFKbYFlp+wRMnDwTV
+         VYkA==
+X-Forwarded-Encrypted: i=1; AL+hErHZg6llfcc6lS68Yn+AuBuiZ6ToCAlJ7CLkypzTAnqrUR879UqRutIO9GXiW1tRgpGd0y11teUSNxfwxTPi@vger.kernel.org
+X-Gm-Message-State: APuU4Z+RZoOj4Jjlq4ASlCYfUuCv/fFOi0EvGPfVDPX8CiGo0Cm/RySK
+	yJIpA5P03EC7a0cRPtSyfU302WvYXpQPxGq11s/G0p6fn4qEGCYEJsUB1C/5acjc5ptp9E8gzUb
+	4NIGXa+/FYo3MNzPRdg1QV9EeKaX8TzdS/JScFUtL6ijAVNUEUUuMtmt+nwRt+oPaIhvq
+X-Gm-Gg: AYBFou1D7RW0b9ZRzBxm23nKllTwmusrqhXEVay4xX1O6M05BFi7qSqsHrCeQcE70Cq
+	NIBjiWDgGvW2+asOb05WJIrm6oaaEfRJMbSc2d/WqtMGD0Gv0QG6CTJpHZZ9nWHBeHZN94G7lfl
+	758Wd4u5RTDSlP+p9Jaw7vomsxC+WYBHIRwM5+okLIi56URoR4WHSR5NyxS52CVszWgmTSNZP0m
+	Yzwo1wnBMtKmdZGA2wJ/1LsfsP31vlH2yhTMlvEIsj5SRkzjZ+Pd2dWlfr8I0UvyXMi9PD4cXY3
+	Qdjz2OJrrQWDYYjVPFmzJM/R8rQUlrzaFoDhqIkgEwrPs7u2swON2Econd6vaChsYizyekGewF4
+	EZCgZ4odv15uQQoHPGzTF+nv1NfkNjbbdQ/wAsq/hvumh9IIfLjoyrMUPhqwvkb81ha4Ai1JinG
+	1fcuoJFEfcbDe91jNohPsh84qGmXO5edrCA+iB4Qubf5zHW7Inf9KHyhC/Z0uW
+X-Received: by 2002:a05:6214:2242:b0:91e:7bef:a4b4 with SMTP id 6a1803df08f44-91ed21dc9a0mr29241636d6.2.1794165467956;
+        Sun, 08 Nov 2026 11:17:47 -0800 (PST)
+X-Received: by 2002:a05:6214:2242:b0:91e:7bef:a4b4 with SMTP id 6a1803df08f44-91ed21dc9a0mr29241286d6.2.1794165467348;
+        Sun, 08 Nov 2026 11:17:47 -0800 (PST)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3adf9e11efdsm4742371fa.20.2026.11.08.11.17.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 08 Nov 2026 11:17:46 -0800 (PST)
+Date: Sun, 8 Nov 2026 21:17:44 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Pengyu Luo <mitltlatltl@gmail.com>,
+        Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v8 7/9] drm/msm/dp: handle the IRQ_HPD events reported by
+ USB-C
+Message-ID: <ojxncf2ac6pt4lyo5qgxddpri33jlazkkgkcto4bnlw2ctxr5t@y2btbks37qkd>
+References: <20261024-hpd-irq-events-v8-0-6ee949e7a384@oss.qualcomm.com>
+ <20261024-hpd-irq-events-v8-7-6ee949e7a384@oss.qualcomm.com>
+ <20261108011501.4466-1-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,173 +130,113 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261108011501.4466-1-26rote@gmail.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA4MDA3NiBTYWx0ZWRfX68iqOf7dTpeT
+ RzT+uSFGUmlv6tOU3JxxBE4ITLTYCigqaG7He8WYG6SitzynovpfVgzIZHlSDrLsj32vYRS9MUy
+ 4UZ9uFQUBwPiLZE6LpuKaM1MKtyju5w=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA4MDA3NiBTYWx0ZWRfX8vck7n6tmzbn
+ C19EFOQ51H5/3zFDoyKhcPGjx4AygXX9pAszdEC2W4qO2DQLUXnEgCa/4cgw22SsgQ2vw+af8Y6
+ XgFpERdV5+TvWzmlYclIZ0kHU5LLw8BNZ+HfJPS0Sec0MYNM6yVAwUCXViQ845QP7VZ4Dp36e+x
+ y3Yy0Qf0RJ26OiPzPTFjTCnMU/JQGTXG0IojFzPYwD0sm8Q3Jzj/DyosX0j7Xxwf1EJkTa3Xhh+
+ HLbcxMcqidSMRzZQt8iz+Oydw19i4EU6zKmOUalmloaXggbl2AVWb2Xlh46kJaHFuOmEiRHQ+qC
+ 3rVfUDhzYNVPaYtyL9y7xmKeaeEWvNR74MOFe4BKbpikqIbk0x8xtYPCEadDcY5Uz8oQ/0k8HwR
+ SuaEzxl8lwylKOR/wpmtlVZw3VQNBM74Q/29m3B7/ueDayqDZoSZpJA22tyttmvoQnPGJMZ52ym
+ eFoCok+5u5ASDjZD9ig==
+X-Authority-Analysis: v=2.4 cv=JLquIMKb c=1 sm=1 tr=0 ts=6af0cadc cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=PZBFViYrEbeYNj6pPQoA:9 a=CjuIK1q_8ugA:10
+ a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-GUID: kGAvQxz65GvSnluxGuLMbh74Nuz_fmZG
+X-Proofpoint-ORIG-GUID: kGAvQxz65GvSnluxGuLMbh74Nuz_fmZG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-08_06,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0 impostorscore=0
+ spamscore=0 phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611080076
 
-Recording in S24_LE on the Moto G10 produces badly scaled samples that
-wrap at full scale. Playback has the same layout problem and comes out
-barely audible. The PCM V2 DSP interface uses bits 31:8 of each 32-bit
-word for 24-bit samples, but ALSA S24_LE expects bits 23:0.
+On Sun, Nov 08, 2026 at 10:15:01AM +0900, Joonhoe Kim wrote:
+> On Sat, 24 Oct 2026 03:35:23 +0300, Dmitry Baryshkov wrote:
+> > +		if (hpd_link_status == ISR_IRQ_HPD_PULSE_COUNT ||
+> > +		    event == DRM_CONNECTOR_DP_IRQ_HPD)
+> > +			msm_dp_irq_hpd_handle(dp);
+> 
+> With this, an IRQ_HPD that arrives while the link is down hangs the
+> board. I hit it on the Lenovo Y700 Gen 5 (TB323FU, Kaanapali), DP over
+> USB-C (pmic_glink altmode), when booting with a 5120x2160 SST monitor
+> attached. The tree is Linux v7.3 with this series (6/9 replaced by an
+> equivalent local change), the MST v7 series [1] and a few local fixes
+> outside this path.
+> 
+> The path itself is not new: the native HPD block can reach it through
+> ISR_IRQ_HPD_PULSE_COUNT. This patch makes it reachable from USB-C,
+> where every IRQ_HPD now goes there.
+> 
+> When the boot-time mode is disabled for the first modeset from
+> userspace, the monitor loses the link and sends an IRQ_HPD with
+> LINK_STATUS_UPDATED (DPCD 0x204 = 0x80). From a boot with the
+> active_stream_cnt check described below and drm.debug=0x100
+> (msm_dp_irq_hpd_handle() is inlined into msm_dp_bridge_hpd_notify()):
+> 
+>  [    4.572532] [drm:msm_dp_ctrl_off_link] disable
+>  [    4.573756] [drm:msm_dp_ctrl_link_clk_disable] disabled link clocks
+>  [    4.608443] msm_dpu 9801000.display-controller: [drm:msm_dp_bridge_hpd_notify] type=10 link hpd_link_status=0x0, status=1
+>  ...
+>  [    4.823192] [drm:msm_dp_link_process_link_status_update] channel_eq_done = 0, clock_recovery_done = 0
+>  [    4.823194] [drm:msm_dp_link_process_request] sink request=0x80
+>  [    4.823197] msm_dpu 9801000.display-controller: [drm:msm_dp_bridge_hpd_notify] sink_request=128
+>  [    4.823199] msm_dpu 9801000.display-controller: [drm:msm_dp_bridge_hpd_notify] 128
+>  [    4.823201] msm_dpu 9801000.display-controller: [drm:msm_dp_bridge_hpd_notify] After, type=10, sink_count=1
+> 
+> Without the check, msm_dp_display_handle_irq_hpd() calls
+> msm_dp_ctrl_handle_sink_request(), and msm_dp_ctrl_link_maintenance()
+> starts with msm_dp_ctrl_push_idle(), which writes REG_DP_STATE_CTRL
+> while the link clocks are off. The board hung on 3 of 3 boots with the
+> monitor attached. On the one hung boot with drm.debug, the printk ring
+> ends at the "128" line, the drm_dbg_dp() just before
+> msm_dp_ctrl_handle_sink_request(). In the two RAM dumps I could
+> analyse, CPU0 is still running pmic_glink_altmode_worker, which holds
+> the encoder's bridge_chain_mutex taken in
+> drm_bridge_connector_hpd_notify(), and ctrl->link_clks_on is false.
+> 
+> Locally I skip sink requests while the link is down. On this series
+> alone the check would be on power_on:
+> 
+> --- a/drivers/gpu/drm/msm/dp/dp_display.c
+> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
+> @@ -400,3 +400,6 @@ static int msm_dp_display_handle_irq_hpd(struct msm_dp_display_private *dp)
+>  	drm_dbg_dp(dp->drm_dev, "%d\n", sink_request);
+>  
+> +	if (!dp->msm_dp_display.power_on)
+> +		return 0;
+> +
+>  	msm_dp_ctrl_handle_sink_request(dp->ctrl, dp->panel);
+> 
+> This matches the !power_on check that already guards
+> msm_dp_ctrl_push_idle() in msm_dp_display_atomic_disable().
 
-Replace S24_LE with S32_LE for playback and capture and constrain it
-to 24 significant bits. Keep the DSP configured for 24-bit samples.
-This matches its native layout without converting samples in the kernel.
+This looks ok. Would you please send this change as a proper patch?
 
-Translate S32_LE back to S24_LE in the APQ8096 and SC7180 backend
-fixups so that routing and the physical audio ports keep their 24-bit
-width. The other Q6ASM machine drivers already set the backend format.
+> 
+> In my tree the MST series replaces power_on with active_stream_cnt.
+> With the same check on active_stream_cnt, 2 of 2 boots came up on the
+> monitor; the link is retrained about 1.2 s later, when the stream is
+> enabled.
+> 
+> A check on ctrl->link_clks_on in msm_dp_ctrl_handle_sink_request()
+> should also work.
+> 
+> [1] https://lore.kernel.org/all/20260929-msm-dp-mst-v7-0-4b81473185e7@oss.qualcomm.com/
+> 
+> Thanks,
+> Joonhoe Kim
 
-Raw S24_LE requests are no longer supported. Applications using that
-format need S32_LE or a converting PCM device such as plughw.
-
-Tested on the Moto G10 with direct ALSA and PipeWire playback/capture
-at 48 kHz, including reopening streams and testing after suspend.
-Direct S32_LE playback now matches the S16_LE level, ALSA reports
-24 significant bits, and S24_LE through plug conversion works.
-
-Fixes: 2a9e92d371db ("ASoC: qdsp6: q6asm: Add q6asm dai driver")
-Reported-by: Demeter Barna <me@fromdisposition.org>
-Closes: https://lore.kernel.org/f3485a790ffdafe635b84b5d68730dad@fromdisposition.org/
-
-Signed-off-by: Michael McAllister <me@michaelmcallister.org>
----
-Hi, thanks Demeter! I was able to reproduce this too, and I've included
-a fix for playback in v2.
-
-Changes in v2:
-- Cover playback as well as capture.
-- Remove the unused S24_LE case and update the backend comments.
-- Add Fixes and Reported-by, and document the raw-format change.
-- Rebase onto sound/for-next.
-
-v1: https://lore.kernel.org/179355993304.51321.11135059681945648585.q6asm-capture-format-v1@michaelmcallister.org/
-
- sound/soc/qcom/apq8096.c         |  8 ++++++++
- sound/soc/qcom/qdsp6/q6asm-dai.c | 15 ++++++++++-----
- sound/soc/qcom/sc7180.c          |  8 ++++++++
- 3 files changed, 26 insertions(+), 5 deletions(-)
-
-diff --git a/sound/soc/qcom/apq8096.c b/sound/soc/qcom/apq8096.c
-index cfd6438db..b7030f7ef 100644
---- a/sound/soc/qcom/apq8096.c
-+++ b/sound/soc/qcom/apq8096.c
-@@ -6,6 +6,7 @@
- #include <sound/soc.h>
- #include <sound/soc-dapm.h>
- #include <sound/pcm.h>
-+#include <sound/pcm_params.h>
- #include "common.h"
- 
- #define SLIM_MAX_TX_PORTS 16
-@@ -19,10 +20,17 @@ static int apq8096_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
- 					SNDRV_PCM_HW_PARAM_RATE);
- 	struct snd_interval *channels = hw_param_interval(params,
- 					SNDRV_PCM_HW_PARAM_CHANNELS);
-+	struct snd_mask *fmt = hw_param_mask(params, SNDRV_PCM_HW_PARAM_FORMAT);
- 
- 	rate->min = rate->max = 48000;
- 	channels->min = channels->max = 2;
- 
-+	/* Keep the backend at 24 bits despite the 32-bit PCM container. */
-+	if (params_format(params) == SNDRV_PCM_FORMAT_S32_LE) {
-+		snd_mask_none(fmt);
-+		snd_mask_set_format(fmt, SNDRV_PCM_FORMAT_S24_LE);
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/sound/soc/qcom/qdsp6/q6asm-dai.c b/sound/soc/qcom/qdsp6/q6asm-dai.c
-index 4261c3048..cd97ba2ff 100644
---- a/sound/soc/qcom/qdsp6/q6asm-dai.c
-+++ b/sound/soc/qcom/qdsp6/q6asm-dai.c
-@@ -90,7 +90,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_capture = {
- 				SNDRV_PCM_INFO_INTERLEAVED |
- 				SNDRV_PCM_INFO_PAUSE | SNDRV_PCM_INFO_RESUME),
- 	.formats =              (SNDRV_PCM_FMTBIT_S16_LE |
--				SNDRV_PCM_FMTBIT_S24_LE),
-+				SNDRV_PCM_FMTBIT_S32_LE),
- 	.rates =                SNDRV_PCM_RATE_8000_48000,
- 	.rate_min =             8000,
- 	.rate_max =             48000,
-@@ -113,7 +113,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
- 				SNDRV_PCM_INFO_INTERLEAVED |
- 				SNDRV_PCM_INFO_PAUSE | SNDRV_PCM_INFO_RESUME),
- 	.formats =              (SNDRV_PCM_FMTBIT_S16_LE |
--				SNDRV_PCM_FMTBIT_S24_LE),
-+				SNDRV_PCM_FMTBIT_S32_LE),
- 	.rates =                SNDRV_PCM_RATE_8000_192000,
- 	.rate_min =             8000,
- 	.rate_max =             192000,
-@@ -139,7 +139,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
- 				  SNDRV_PCM_RATE_176400 |		\
- 				  SNDRV_PCM_RATE_192000),		\
- 			.formats = (SNDRV_PCM_FMTBIT_S16_LE |		\
--					SNDRV_PCM_FMTBIT_S24_LE),	\
-+					SNDRV_PCM_FMTBIT_S32_LE),	\
- 			.channels_min = 1,				\
- 			.channels_max = 8,				\
- 			.rate_min =     8000,				\
-@@ -151,7 +151,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
- 				  SNDRV_PCM_RATE_12000 |		\
- 				  SNDRV_PCM_RATE_24000),		\
- 			.formats = (SNDRV_PCM_FMTBIT_S16_LE |		\
--				    SNDRV_PCM_FMTBIT_S24_LE),		\
-+				    SNDRV_PCM_FMTBIT_S32_LE),		\
- 			.channels_min = 1,				\
- 			.channels_max = 4,				\
- 			.rate_min =     8000,				\
-@@ -377,6 +377,11 @@ static int q6asm_dai_open(struct snd_soc_component *component,
- 
- 	stream_id = cpu_dai->driver->id;
- 
-+	/* The DSP uses the high 24 bits of each 32-bit word. */
-+	ret = snd_pcm_hw_constraint_msbits(runtime, 0, 32, 24);
-+	if (ret < 0)
-+		return ret;
-+
- 	pdata = snd_soc_component_get_drvdata(component);
- 	if (!pdata) {
- 		dev_err(dev, "Drv data not found ..\n");
-@@ -505,7 +510,7 @@ static int q6asm_dai_hw_params(struct snd_soc_component *component,
- 	case SNDRV_PCM_FORMAT_S16_LE:
- 		prtd->bits_per_sample = 16;
- 		break;
--	case SNDRV_PCM_FORMAT_S24_LE:
-+	case SNDRV_PCM_FORMAT_S32_LE:
- 		prtd->bits_per_sample = 24;
- 		break;
- 	}
-diff --git a/sound/soc/qcom/sc7180.c b/sound/soc/qcom/sc7180.c
-index bc5a18883..dd0f8eb99 100644
---- a/sound/soc/qcom/sc7180.c
-+++ b/sound/soc/qcom/sc7180.c
-@@ -13,6 +13,7 @@
- #include <sound/core.h>
- #include <sound/jack.h>
- #include <sound/pcm.h>
-+#include <sound/pcm_params.h>
- #include <sound/soc.h>
- #include <uapi/linux/input-event-codes.h>
- 
-@@ -425,10 +426,17 @@ static int sc7180_qdsp_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
- 					SNDRV_PCM_HW_PARAM_RATE);
- 	struct snd_interval *channels = hw_param_interval(params,
- 					SNDRV_PCM_HW_PARAM_CHANNELS);
-+	struct snd_mask *fmt = hw_param_mask(params, SNDRV_PCM_HW_PARAM_FORMAT);
- 
- 	rate->min = rate->max = 48000;
- 	channels->min = channels->max = 2;
- 
-+	/* Keep the backend at 24 bits despite the 32-bit PCM container. */
-+	if (params_format(params) == SNDRV_PCM_FORMAT_S32_LE) {
-+		snd_mask_none(fmt);
-+		snd_mask_set_format(fmt, SNDRV_PCM_FORMAT_S24_LE);
-+	}
-+
- 	return 0;
- }
- 
-
-base-commit: c937f492dd40a8398d955cf0f4f9e11d7268bcb5
 -- 
-2.39.5
-
+With best wishes
+Dmitry
