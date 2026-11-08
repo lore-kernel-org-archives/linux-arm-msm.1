@@ -1,68 +1,67 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169524;
-	b=ZoikITUxYYfhMDaMO3Tk055kgPD9xtq4UNJwfa78EYGITKzWQQbH/1QEE3JoXMzWE2Bi
-	 59qn3Vfxk8BrvTm52r8Yg4lFRorn6dfcLO1CGtkXN1Cb4T8fLu9q1cB+OybZ6/MdIqPDq
-	 veS+kuWHB5jCWeETp1LJTqnhfDCW4tmnGojefX8oh4RXK+TBB3GZ9nCwvzwmwUJK4tugg
-	 QqJcx0Zw03+1PPx4moSTQlKf93A0+9wucl8H/OK7TA4/XWhTHGQjfEtH3C94B8fEHCc50
-	 ZoW8Mj5pVCm9EXZ8U5rs2jmV9viFpBIZV1qJOSyxocl/ZCm7shXX9k79elXXhtXJOng==
+	t=1794169515;
+	b=N98FgRLdEg1LAMBvwrixXqyrbjbK+VcCkCaGV3jzg1zOu90bSdl1xSvEFWxCYTc/e773
+	 0FsrAimRpRYrlNhyScWkoEdvn/Fy4pRM0bOYFXNWlxrDgLNqhOhsPPxq5d60ngivpjujq
+	 AkxKuuDKyqs0pWjAFkJS5VrGKjKiyVN6z2x45DhxT3IvVwUYlU448wJAXx0r/fqhNzk8s
+	 Hx4Z1VgZE175DVw9I8c8ACPAkvI/F7+5t7ucEONHTWqAn4emtcNXkmj3UZlvQdYufwxnq
+	 a+OA3P58KZYccsJvD7shtwXgJGtAH7YIWu7Nf6/xgzuMS5Rt8rw4ZCfeuxjEJKMqJTg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169524;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169515;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=h+YBdfasWpLm6Da4YFjegeB5DsXOdDZJeYTsCIItuZk=;
-	b=INbnx7ql87ScLfas3W7n65fXIzRyQUbc5KAmJYBSVaSdJQKecNgppptn0s3CUaqY1uve
-	 szh7kF0ftdRP1O+6IVZjbiLUQ3EBXQjgObO0FNFvQuhTtMA2wJmwNxpwFRkLnlMafZ2ve
-	 3Ylv0IImzChw4sdNWPXQXEMTGVZBAQSBqqQ88IOeRkj7uHX9cmWmcv7XnvunMrMGV2CvP
-	 6zRwns373HN7XsiEe9NrG/VvWcLxobHnay87ayDbrDpzpaRIp05zaMGd/vD4sJmt+TDSS
-	 q0XA2ImoBmnR6ppf7QYQaB9Tn+vnyBoV4wzvCD5A48M6LxmfSKo7ZqFGkfGNoDznPBg==
+	bh=diX8YfPH/32D4k4+Z7sJBGqqCMJ0rwB3xowujRJs8SU=;
+	b=XXQGiPPV9NN3ASOcNMbJce+wFsxPN1TYoh0eG7uZ7WZjKn6y7k+DJYEqoexSmxRH76eD
+	 O3/tWn/novoAnGf8LmYLEN4GhmU4DBvnKOms1U7R31mWVI4QWKK8G16b+udrn9k8yiEXp
+	 0fIg0gL76HI/lU6qVg/qAfaT8f2KKDJ+W25hApb7IP+nHBihBYRXyUn1EkZwEm6HZF2CS
+	 elhVtJ3i8yem5hkiumn81Ecw1TBUKGjjFmiEGJoeIVakaFlCQLCnXgheFo7LngQaE1ICt
+	 4uDu0TslvsK1JioaCjquhU6eKA2ZfA0v/Pig8XWsl1VCUg9lQQbCZLwQtja8Twzk5NA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jgg9ZHRt;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NdfEebQZ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DE6E606B11E;
-	Sun,  8 Nov 2026 20:25:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88F8660826ED;
+	Sun,  8 Nov 2026 20:25:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jgg9ZHRt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931D21F0089F;
-	Sun,  8 Nov 2026 20:25:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NdfEebQZ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA59C1F00922;
+	Sun,  8 Nov 2026 20:25:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169524;
-	bh=h+YBdfasWpLm6Da4YFjegeB5DsXOdDZJeYTsCIItuZk=;
+	s=k20260515; t=1794169515;
+	bh=diX8YfPH/32D4k4+Z7sJBGqqCMJ0rwB3xowujRJs8SU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Jgg9ZHRtp2aFb1ctTf+1WzewU4bqbjl6oJzdo5K92bObWbIna6Gk+KnT/QhnrUXxn
-	 wHgdcERK1g12NFpxAU2P0XcitIojeBmVSER1cVH3HEbLlPmQhI5AKQ00zKxzydkFtw
-	 KoEvodnpAO5y1SBaCTflFDyQG0wvwcblYKREkjc12BSxOZJBts/l9bzsAw2YOTACrx
-	 v605wfx5Ee3AM/TYoQVcEujpYWjmCmXFhadXPAEKyy5xx9c2KI3UDdF9jBjc2e2C+N
-	 BLxOQDE4Jeu1GSNuHG8cJiu0hQDuIrT0J3N81mBrHACz9JQfIma7SfYAvzUC19X5cT
-	 tRR5OadNErIfQ==
+	b=NdfEebQZWMbavVNdHMdKnSwgIL/+70pPwE1UyjExPey/JmOQfz42d4I4mvM13opIJ
+	 zJ0FzLWB4+PD3884Qa1R3N+OKJ2u3F9BrNiVHhZx7s232yw9S3BFbe4B9Ak79k8e5t
+	 Q9Umqwpcw5iujqMmI8BcKgtvKYSSfrstESrjwM2YVcgmv3XA/pIC/paOuxV7RnQdn6
+	 EzqMvw2ZWH0xtK7sMjg33epHmbW/g3Hpw6WPsQSoXtQ3+gB4kACpZ0ktn+MOgZtNyQ
+	 N8HcWjEKKzZDTqIugeioMmDWOLTTI+HiEjVOKWgosRBmPOpYUKV+Og4137z7zGjm5W
+	 3uU1+HvWJhNmw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Zhiyuan Sheng <zhiyuan.sheng@oss.qualcomm.com>
-Cc: Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
+	Wei Deng <wei.deng@oss.qualcomm.com>
+Cc: Abel Vesa <abelvesa@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
+	quic_chezhou@quicinc.com,
 	cheng.jiang@oss.qualcomm.com,
-	wei.deng@oss.qualcomm.com,
 	shuai.zhang@oss.qualcomm.com,
-	xiuzhuo.shang@oss.qualcomm.com,
 	jinwang.li@oss.qualcomm.com,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v2] arm64: dts: qcom: eliza-evk: Fix M.2 W_DISABLE2# GPIO polarity
-Date: Sun,  8 Nov 2026 14:21:41 -0600
-Message-ID: <179416929520.628393.9104719158063560519.b4-ty@b4>
+	xiuzhuo.shang@oss.qualcomm.com,
+	mengshi.wu@oss.qualcomm.com
+Subject: Re: [PATCH] arm64: dts: qcom: monaco-ac-evk: Describe the PCIe M.2 Key E connector
+Date: Sun,  8 Nov 2026 14:21:35 -0600
+Message-ID: <179416929455.628393.15783461778192403623.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261030030906.3856759-1-zhiyuan.sheng@oss.qualcomm.com>
-References: <20261030030906.3856759-1-zhiyuan.sheng@oss.qualcomm.com>
+In-Reply-To: <20261021104709.1428234-1-wei.deng@oss.qualcomm.com>
+References: <20261021104709.1428234-1-wei.deng@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,15 +75,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 30 Oct 2026 11:09:06 +0800, Zhiyuan Sheng wrote:
-> The W_DISABLE2# signal of the M.2 E key connector is active-low as
-> defined in the PCI Express M.2 Specification. Fix the w-disable2-gpios
-> polarity by using GPIO_ACTIVE_LOW instead of GPIO_ACTIVE_HIGH.
+On Wed, 21 Oct 2026 16:17:09 +0530, Wei Deng wrote:
+> The Monaco AC EVK has a PCIe M.2 Mechanical Key E connector to
+> connect wireless connectivity cards over PCIe and UART interfaces. Hence,
+> describe the connector node and link it with the PCIe 0 Root Port and
+> UART2 nodes through graph port/endpoint.
+> 
+> The port/endpoint nodes are defined inline in the board file rather
+> than as empty anchor nodes in the SoC DTSI, so that
+> of_graph_is_present() only returns true for boards that have an M.2
+> Key E connector present, preventing unintended pwrseq probe on boards
+> with soldered wireless chips (e.g. qcs8300-ride).
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: eliza-evk: Fix M.2 W_DISABLE2# GPIO polarity
-      commit: cfd8ac5860d6f528239121aa5bb87d6ed8c20d7f
+[1/1] arm64: dts: qcom: monaco-ac-evk: Describe the PCIe M.2 Key E connector
+      commit: 49e065a20345c2f98afd1ed57865c0fc40f7437c
 
 Best regards,
 -- 
