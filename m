@@ -1,61 +1,65 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169418;
-	b=J+gAJu3EpRmRQ7H+JqBlew4lhjy1k44G164qT0ABe9j7UsAhVkz7KgYzalPefXx9PJxK
-	 ir8dvJvn3AllTnklbnyiQCiWXNUv4pHBKp4EP5FlRwU1S07gu5h1CkfnLqDv/wbaPid68
-	 G4c4vDpRVXVvh8H9ZS/WDjPaszRXHIFnkRqQfYMCVNlPgSnotSyEpsV7ur9+X6yu7tjd7
-	 1W+HU6x5sxEoqxzRXvA+sYf1o/566RDitmsNQXxHywO5OhJwd0U68Hi9AEq9MBDnWGhXE
-	 /rzzQq4V3bqq5Rp0FBkvF3276PLLKDv7sOUtm+DrUChOVFS+aJiNdIYMZCaafr9K3lw==
+	t=1794169409;
+	b=ua+3YXGEA2Aym8mpq5e40g+F7AgVWSgT3bRXwbV9FSZNvMvztTzQsctqfp8xMdzYrwep
+	 StuGDX+dikKGIepZIz4Ykq+W5uC9JIEefH7bn8l6SiWACFr5ydRDiFTd3jZyW9NDJgUPj
+	 yuCV05DECFTsW+DFeam46jyRP78F3lsmwGjFEFO1awA7Stvyky+2De3iX6rQ3nOC6V8OV
+	 bdXGp0LgZuyWSeT6Qfwcw2yKifTmN9dXSbSsIAEosvjzUg5TftP0q2GGjFRTY7gP4F9HJ
+	 ozC6LGOc6BOYJmVJB05tdPDsF1jhPsZyBn4rH948V10+y81qxGFVVl6Tz6Y23p4Xq3Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169418;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169409;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=k6zrRiFEmmCW4XWbsBshVLhAVV9AKO992XSAN6bAtj4=;
-	b=hvbuFFxbT91oNjAnOhcaYGvza52QvHElctWMUKEFAJYECcM3ujf7wO0KI4L9y4ShNPqM
-	 stvlP54+wGZDqAGswWTjU1ee1HrEAA661acg1n5WOmibgcMhEzlI0jCRSNHECU7HLIHM/
-	 kuybYDNhs+vHRhYtXqYf4btTU02jHhcDJfZLHExTp5+2ZVGY4oBSsppDBWknizjzct3Jt
-	 e/w5cgVEdM2yeTEmUCuj3f77tMBe4kJtLtvd7UsmrS/MVvptIB9eraXcnV6A2xFV2+2lm
-	 qkNiBMI4e28SyTShFjTGNCv0CVoHih243ljgr+8cpX4AO+ghYHQJnAEimoLYR8ellNA==
+	bh=Fry9eJzzy71vg1AQvtkXUIwr/MgHXiYsIxUpOdcXEf4=;
+	b=yiyXKOo8bx1sJ4ZZftAZdOR52stjeZD4rgj4JLxgpZY1ZDGPY0MPHb03lGCOfyK66b4w
+	 W/THDBH2aJ39FIoaPFG+y61/isI7Ayl4ybTH6nMfTDBLJmRcorSGP2UkN0L60oE4Qm6LJ
+	 TGW4LTVuPB2r76m0Mp2Bcj8W2t5DERq+7vVuCZjp81MlSOgogTDiHhe/z5MYtnZNBgnI8
+	 oUqexlZcXV1WuGOofTMvK0rnra9lnYHzEH1BVyvKJG/F+gq3q1BZwhA9OvobE61mWLCtA
+	 OrgYI4VNoVGdpnRWBA2ZqRxKttgrSKh895dTh68svqOUJIIZTI7coaDYVRetw1EMQ0Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RykLJeKu;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PiiMFz6L;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB6E260729A2;
-	Sun,  8 Nov 2026 20:23:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C73CB6071618;
+	Sun,  8 Nov 2026 20:23:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RykLJeKu
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B49781F008A2;
-	Sun,  8 Nov 2026 20:23:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PiiMFz6L
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 142D41F0089F;
+	Sun,  8 Nov 2026 20:23:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169417;
-	bh=k6zrRiFEmmCW4XWbsBshVLhAVV9AKO992XSAN6bAtj4=;
+	s=k20260515; t=1794169408;
+	bh=Fry9eJzzy71vg1AQvtkXUIwr/MgHXiYsIxUpOdcXEf4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=RykLJeKuhm2DjZkSL/zTYPkiftg3HtuHSxVpYnAMjxPYVSVKtI2ARTB0ggID086XV
-	 L1vfoAlkC6iKiHUIBzQs0FZplA4sR/qRhiguAyvPgAwLurj6UhTZ7uIVOIbMbWraxT
-	 5XqcuPsz2fDzfYbjav1rrYJSIFcmps6bIzUnv33UOHK1G4Gj5WnqIpx2aLSmt5S9ON
-	 R6u/u8bsjiG14BW0/AtHS5tuRtY1fuoXeL4TS3+DW0ogqx49QhT36/XkqIRsfxDbfr
-	 lseSV5VVU+4sy7i0mDftXh5hHJdbl86A6Tv0VuK7cuJfaEFX3s9hPKH/FH+ESjTxVI
-	 oT+lV3sK9L4Og==
+	b=PiiMFz6L4D9zQn2vjR/mkKuGiS92thhFNY7+7nJwrVS0gqmSOTMYlbJ0OIC6J4KSG
+	 FsaOIq5AtrzaDp1r9SiyeOho+LIViIL3TizBWc5tl6/M67T3KhEVLZ+3oDaf1zE6Uu
+	 ONqCz/vWqXddDGocGrDPJxlwkqtFXNyqHVUlOt/NbRvcUsmqyFviJyMopffpEjEh8r
+	 /rD3WBQGxIPDXNlDXV6u/pLu1OqPdV9yvQHB/a1dkIgcDR7yrPa7CFLMuGcXPptSH5
+	 B2vBBDwtJynlwLCtp5opOFNmI5sMnFrYrId39R++6Qaou7gyQWCx8pln2252Nk8qsE
+	 WY/iZcoFkc4xg==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
+	Conor Dooley <conor@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: talos: Mark USB controllers as DMA coherent
-Date: Sun,  8 Nov 2026 14:20:21 -0600
-Message-ID: <179416929459.628393.1369233733965142622.b4-ty@b4>
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/2] Add LLCC configuration for Qualcomm's IPQ9650
+Date: Sun,  8 Nov 2026 14:20:13 -0600
+Message-ID: <179416929448.628393.15447486169053928523.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261021-talos-dma-coherent-usb-v1-1-df0400a2c64d@oss.qualcomm.com>
-References: <20261021-talos-dma-coherent-usb-v1-1-df0400a2c64d@oss.qualcomm.com>
+In-Reply-To: <20261020-ipq9650_llcc-v2-0-e4c492acc8b2@oss.qualcomm.com>
+References: <20261020-ipq9650_llcc-v2-0-e4c492acc8b2@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,14 +73,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 21 Oct 2026 22:58:37 +0530, Krishna Kurapati wrote:
-> Both USB controllers on Talos are DMA coherent. Add property indicating
-> the same.
+On Tue, 20 Oct 2026 22:00:25 +0530, Kathiravan Thirumoorthy wrote:
+> Add the system cache table for IPQ9650 and the IP version is v7.1 but
+> similar to IPQ5424, there is no broadcast region.
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: talos: Mark USB controllers as DMA coherent
-      commit: d81defce7d6863c916224a4ae2a6382202f6bdc6
+[1/2] dt-bindings: cache: qcom,llcc: Add IPQ9650 compatible
+      commit: ba7200ff3bd8a6e5c34177446d99e504ff196d6c
+[2/2] soc: qcom: llcc: Add LLCC configuration for IPQ9650
+      commit: 8d1fd8c9d00f120dc8bd5b18dbf5f254bebdd7bc
 
 Best regards,
 -- 
