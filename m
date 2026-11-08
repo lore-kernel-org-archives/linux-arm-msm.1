@@ -1,62 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169437;
-	b=alURRHXFotSpLS4XQO49efJtiUHDbjwTtsgRIeASbiksE8oVyAYnYtDgipTn1ltDVVDJ
-	 aIL8epBfQYNq8eaofzu3W+hq2yDAGkzgrOQb7TmG/7Q8OQNMV0lvnk/ul7NuFFEeqD7eH
-	 CLdawOH8A8Rr9xz+e+/NqF20uKn+WrHd75NWGAI7ZTLqaKuC591lEvHdAiDCnxt6iSytn
-	 wmJ9u0A0KaUIEKx7tXb5k7aenEsIdRpG8t0+PMx/O6/CTz+YB0LgeKKM0vN3BF1hs52Qz
-	 smOLG4EEHeQeK3A3Kggr2HqZTk9ze8Mgz5nFEyxXmQRVMX7qzk9nYWNE3QXqeDkDktA==
+	t=1794169439;
+	b=D9zUvQj+hYFMfeyERTxhXVtDiwobXxwbrUjuj6ZPMaskIRvguE4JQixXqZFxxtcllVS7
+	 pat6CO6CNnKv9en7I3Lh6grV6rRBO3vhzEiAP8Kxc4BHGs+mUQw7M6OKuNuiQkTg5TyOE
+	 QNf0g8JHbNIgFV2BI5zfz8rQubqfkD75F5n4g7f9QwXSc7hMW4EpXqBmxgxmxJsXPR25d
+	 Pc2hrKcBr99l0AmFi9ivOdPDHQ3mJFL0BjLwMS1d0PxYqxe4jnX34flxl7BQZL0Lygjl4
+	 hnAuOPcNaWFiycP8BrBNLy5oh+Ddf7GpYaV90F833ygLx9N6yiM4p7l2kbkkSfs4udg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169437;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169439;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=EOuvkZGjoqdAJ+SsqA9nlZOgNgVUmg8j/+ZfM27XG3I=;
-	b=Foq7kKeHFmSwd4F/Fm3oRBDi8WtSWDYzGSeslz3+TQHsAd1QU3O0TwzwwLIlUcJddHyu
-	 jYXaVPQsJp/Ifst0Bzq+8sGSbwxSLzqoctic/f4JeQvRDlCnFB2BCh7i8K4DcGfK4beOI
-	 dhuS9ZRadnPeqYOZb515qQ4ri/0xFQ2O4HYQQ52SGIL7801Jj8xGsEolqxa/D76i2olpG
-	 aloz0IOoxxejvdZY95THre6RJmlUgazSIw7WCGCLLT0kR2kZD3bHWWUtj5MwaUjVpRxoE
-	 OPAF2IxdNGuOdlsP9YwoTHKJ+uVVj+iNha3npZ3P3PMRXXnGnatEurVS3HJpQhxrB3g==
+	bh=BGcvcC81mrUpXWsEyb4n090+1/2hC7J0l5mwwAMJeXg=;
+	b=Kvc7RB3ro+soOGklFONl5pe7q6b+a5qkAefklv5iAJzcmw6UtQtSdXTe8OEmtzpwOF1M
+	 dIUiS4tF2s05ce60Or829odxQWDXX/uQPRbADkL1W9uGu3xN6D8qrFERSxBTzZ1cVCvLJ
+	 mCiJpPkRO+t7nXO+udPp7o01ffebNeOjgya10N360oguIEbbBp4GXvRSAeOGUDj9tgLPF
+	 ZHh2E++liTX08GM7fMGbZrcYGLhcwlBu1iNTS/+/C+rKq67jQbS5tTkf51RFGHTEtP5DZ
+	 DH1B3RfnRChYJGbTRUSqV2LQ+sdnW8K2SjzboOEVRCT1T+dQGEWUoZVT9RD1e32NoQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kdYGZXky;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=btqagmAa;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51BE660759A1;
-	Sun,  8 Nov 2026 20:23:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A04CF60762C1;
+	Sun,  8 Nov 2026 20:23:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kdYGZXky
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 403C51F008A3;
-	Sun,  8 Nov 2026 20:23:56 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=btqagmAa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C222F1F008A5;
+	Sun,  8 Nov 2026 20:23:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169437;
-	bh=EOuvkZGjoqdAJ+SsqA9nlZOgNgVUmg8j/+ZfM27XG3I=;
+	s=k20260515; t=1794169439;
+	bh=BGcvcC81mrUpXWsEyb4n090+1/2hC7J0l5mwwAMJeXg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=kdYGZXkytXaYNYIpYTNsRR585ps0M6wyXQshAGBRQdNqL6/gZO6zZGoUEnO3SAzzj
-	 +/Intdv6QDH2l8SofaLWkZlfGwkk/5k+cBRpdo+134EZ2cNOCfZtHUcoDXU3DCJm0M
-	 VZ+VsPh1t16tGABQvA/z7uMwoiaVXnkTVkET/JyYQ24i8ED9yJ2vStHq8kCcTOibvB
-	 tn6kL2P6RWSJiX16yn02N323e5RzVI/3Z/8FrhL3eouAbQ1Pf+WEl/Jd94WUfn1Wa8
-	 47ycgCkOdBvlvkdI5F5Zt/uubyV6u0xFTNosc58FxEbLZfo9i6/rs43snKOpc/s0Us
-	 UAKf+6iYckNiQ==
+	b=btqagmAa37j+JRG51H/Gd7Si2YqJ9h1QFMPSVwoPgE3JjwNJRPR7v0BV9aGqa3d9x
+	 UYeOCBpN8NQKUcPGLSyUV2QORaupy8BlZFXpfFeXT2L0sQeCqmDiAcHn1ONVWYS4Be
+	 f2dIT6/Dn6ffeoUcIybVCwZZxRQWaxjn9JhiyjP6Aa6pbGRhAIyJ19LrP48sjx1qLy
+	 SFYWVib6+hv7+EDGtJvKjpKLzeQ8K8pnOJmlFTDMPzpXdTIN4rptIZ8dmJr4E17hiZ
+	 uy97izoE5wA/+8ALeHb0vglFmUG5kgt1cQwEgdS/NZlA34KuJvsI7l2XJu5UZfln2K
+	 xXCpHCEB983JA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: konradybcio@kernel.org,
-	Luke Macken <luke@phorex.org>
-Cc: abelvesa@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	srinivas.kandagatla@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: mahua-lenovo-thinkpad-t14s-gen7: Add Elan touchpad at 0x15
-Date: Sun,  8 Nov 2026 14:20:36 -0600
-Message-ID: <179416929384.628393.4815391569642209330.b4-ty@b4>
+To: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Krishna chaitanya chundru <quic_krichai@quicinc.com>
+Subject: Re: [PATCH] clk: qcom: gcc-sc7280: Use retention for PCIe0 power domain
+Date: Sun,  8 Nov 2026 14:20:38 -0600
+Message-ID: <179416929508.628393.16454532877848877294.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261014234949.1730808-1-luke@phorex.org>
-References: <20261014234949.1730808-1-luke@phorex.org>
+In-Reply-To: <20261028223444.2683120-1-m.szyprowski@samsung.com>
+References: <20261028223444.2683120-1-m.szyprowski@samsung.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,24 +67,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 14 Oct 2026 17:49:49 -0600, Luke Macken wrote:
-> Like the T14s Gen 6, the Gen 7 ships with either a Synaptics touchpad at
-> I2C address 0x2c or an Elan one at 0x15. The dts only describes the
-> Synaptics part, so on Elan units (e.g. 22A7000VUS) the touchpad@2c probe
-> fails silently (nothing answers at that address) and there is no
-> touchpad, while an I2C scan finds the device at 0x15.
-> 
-> Describe both, as x1e78100-lenovo-thinkpad-t14s.dtsi does; the absent one
-> fails probe harmlessly. Both share the interrupt GPIO, so move the
-> tpad_default pinctrl state from the Synaptics node to the i2c0 bus node
-> rather than have two nodes claim the same pin.
+On Wed, 28 Oct 2026 23:34:43 +0100, Marek Szyprowski wrote:
+> As the PCIe host controller driver does not yet support dealing with the
+> loss of state during suspend, it keeps the link up and the resources on
+> when an endpoint is active. However, only gcc_pcie_1_gdsc was switched to
+> retention by commit 1a58ee1330b2 ("clk: qcom: gcc-sc7280: Update the
+> .pwrsts for PCIe GDSC"), so gcc_pcie_0_gdsc is still powered off during
+> system suspend and the controller loses its state.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: mahua-lenovo-thinkpad-t14s-gen7: Add Elan touchpad at 0x15
-      commit: 06b7a31608876dca5a99a9ea528281f2c8dc18e1
+[1/1] clk: qcom: gcc-sc7280: Use retention for PCIe0 power domain
+      commit: 32e7501b4ffe59905e8159eaf2b78fcfc1efaf0b
 
 Best regards,
 -- 
