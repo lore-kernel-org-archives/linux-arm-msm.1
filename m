@@ -1,62 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169493;
-	b=TX1Ag0z3wUm0SH4aKY13MhhQeBBYorBiVC7frd5XqI6TXhU+bJQDu7Etsw2kPYBAcPxl
-	 wCsZhyt0gl4xbeVxO1UAFnTNqvKYCspAF1sgC9o1gmPjW8BR4GDKx6rdoT2YRv+gLRb73
-	 9EJ2ORl6qclDf4tgww5fbMD078HEieWcHNaqQu9nBH2CZplc8aJG3Fn54Wb7/sZMo+kV/
-	 y3VQ2vBufaH8zZ2sfgExfv9ra9PGCJS0z/SwC8T5/1hMw25zkkgGgR7jaFhl4MJiQ8P9q
-	 KBqEKroH61MrYSvKFFsqNybYgkrks8VbrHRRFQ/kh5ZHeg9olOAhER0xj6UW/7ltSng==
+	t=1794169499;
+	b=HkgcudmZVoLx+7AHhQJ0fckkZYgg6MbKHjwpEyIsazSOgNCUchi+tqMysFH6Tfl/1C9/
+	 ixO0Feufmj1+rUy4VYmEHq5RzSN+T22vl8bwcghnM9oXZFKcDXzSrVAPtn2UirGCi7KNq
+	 Llmy4BAnwWxFcOSOYncKADWSJo9qtKEkx1c0j3yOkIwTpILnN5L1xGvpBmaTnoFxKyXaO
+	 unLiM0YZMgFXmDYaMboHGwzhvCWqLq99V1qPSBXzUDVHYKt4LvCQLHeWp0h5HHFjpz+r0
+	 NYXJI4YGABKSwMYHyI2UINGdsxs4LXJEj8tGoqzklun+wUa5CPjzfxneTjRm93Y3FGQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169493;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169499;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=jHkSu/I6sjJZj+dKlK5gxac5YS6LoMiyJZobd62YxK8=;
-	b=bJeLcLKoe0MFDtz9YP4kzm7CodWLEblqjPTpWCixYipGAQo0i6fDh1t/kFtlUpUtbnae
-	 FAAgZ+NyWOM/y7mN8AlLvkV2JpdHO0BnehSZMsgPmHZsBpQtoodc/Zwyf4N5JP4y9kCyp
-	 IECmagzxAs+fiZcPQlIjvbIxDL05Gd6B5mZFbfrWut8C6Ko7EvTCrkRHr/QEjU8Umo/5Q
-	 Y78bsqpRoJMJp0I2yKw1GcyUVmwZtKkMrIxTZZ9KBVRoSTa0ySDpwFvIxjifjSYshmB1Q
-	 bE9wYt+LTDsxRmVcu3ytxTNXRfLkdaXgGg4TTd+gJuyNkg3ZGHDsmlRi+S2C7X2HD8w==
+	bh=lP8mpE85HDMBXvaAb9Nalc0HVWoFE0TAbp5Y6y9tAU4=;
+	b=UA5XhavL+XY8CMKHmN6wv7BmAi7USekvZO3dtGXE5zYjevrM/TKqebjtQCrRnuSzMl98
+	 RLWEMSGiBS/anC6w92+iVp5FA+L5stwS4SzzYwT9PVkXbCk8LgXR/H6QixYdJJM1X3G5A
+	 QfVe7W7uSQ0z6hFLn8uS1xNkE8err68Xj1U/j8b+97PK/5FOUYbGrgWi5SV6soiDLReaI
+	 pLpHm0kMOA1GrTnik/SGdRrcKF8lwlm8S0eVM8qbRHIrr0jtLMD067m+QrXSTZTxnPQE4
+	 3yLXbInaayZT1jh1JFj6eGm88I+LvpuyvZFHObPsPD9zvp0JinIRf5d+MI+AZZg9zgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P6CoFTtW;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RRwttH+W;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3E786080305;
-	Sun,  8 Nov 2026 20:24:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF7CE6080C6A;
+	Sun,  8 Nov 2026 20:24:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P6CoFTtW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF7B01F008A5;
-	Sun,  8 Nov 2026 20:24:51 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RRwttH+W
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 770F11F008BC;
+	Sun,  8 Nov 2026 20:24:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169492;
-	bh=jHkSu/I6sjJZj+dKlK5gxac5YS6LoMiyJZobd62YxK8=;
+	s=k20260515; t=1794169498;
+	bh=lP8mpE85HDMBXvaAb9Nalc0HVWoFE0TAbp5Y6y9tAU4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=P6CoFTtWVHOFhItaFGlw0J2ZZ3yon28AoVfd9unMHwl5BWeK09crAtu/bD6ekFhXB
-	 y64i3yYgPd7H35inBanSXoycGjsQtHeo6k8FthmKhbv1tpJ54adOTfL3VT2PPhgXjU
-	 ifcDFRjS/vX/TjMaBF9iDAuWDijZ8QSl6dK/mOIXXOsVzjHng7AkHnaXstti4Ny/3M
-	 2Re7j0C4iXjy1RRekSrP/WrX+EY9mDQu9Jmo0Wsj8bzqnnFc+ZKKTHwOUwkxH15uXL
-	 cJKiWxI+hGoKIe522Ewo/7DA38x1WwjbdtHXlkCclDh6Io6NcCei8zUwogxq7rYUmd
-	 wbO8XMK2ZSXog==
+	b=RRwttH+Wy2M4oHexM4VJghUlWsJEEoEPLl1Mxz9s9kvRho+QuPHjA3b9RVzyPZp/b
+	 6VRgyUIc4739N2mWDDeTlGLiJJkbLsky8fF36wd4T05aQtpssI4NFDgWAu/SX4mTIP
+	 Hi2OofPG9FOlEQMHuj0hYd3hWAWbGjDh3FIZ4d/L1AaAaIZpT3rLadnmsLiCHXMgb3
+	 +JV8/yp5pXkPonFWAsnRqUTgJUTJSRNeBtsiJWOhNHO5VDwrck19fLAgxTN0fXrY0S
+	 0LV3CxMp2l4ruvcT4eF+gvqxHY9gc5F3ECpoua3y2yLlZZy50i/33UTnbTPI3uSKxm
+	 o0Ra9DKjUGiKg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: konradybcio@kernel.org,
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+To: Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
 	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+	Imran Shaik <imran.shaik@oss.qualcomm.com>,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+	Qiang Yu <qiang.yu@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: monaco-arduino-monza: Prepare JHAT 40-pin connector for HAT overlays
-Date: Sun,  8 Nov 2026 14:21:20 -0600
-Message-ID: <179416929506.628393.8425349389039809053.b4-ty@b4>
+Subject: Re: [PATCH] clk: qcom: gcc-glymur: use collapse-voting for PCIe GDSCs
+Date: Sun,  8 Nov 2026 14:21:24 -0600
+Message-ID: <179416929499.628393.4374705363796025963.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261028214551.108424-1-srinivas.kandagatla@oss.qualcomm.com>
-References: <20261028214551.108424-1-srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <20261028-gcc_glymur_pcie-v1-1-a2163e1d2b9b@oss.qualcomm.com>
+References: <20261028-gcc_glymur_pcie-v1-1-a2163e1d2b9b@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,26 +74,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 28 Oct 2026 21:45:49 +0000, Srinivas Kandagatla wrote:
-> The Arduino VENTUNO Q board exposes a 40-pin JHAT connector that is
-> pin-compatible with the Raspberry Pi HAT specification. These two
-> patches lay the DT groundwork so that HAT accessories can be wired
-> up via overlays:
+On Wed, 28 Oct 2026 15:05:32 +0530, Taniya Das wrote:
+> The PCIe GDSCs can be shared with other masters and should use the APCS
+> collapse-vote register when updating the power state.
 > 
->  - enable I2C0 and SPI3 on the JHAT connector and add the i2c0/spi0
->    aliases, covering accessories such as the Pimoroni Automation HAT
->    [1] which uses I2C for its on-board ADS1015 ADC and SN3218 LED
->    driver;
->  - add a label to the sound node so audio HAT overlays can extend it.
+> This is also needed to disable power domains that boot firmware enabled
+> through the vote register.
+> 
+> Describe the collapse-vote register and mask for every PCIe and PCIe PHY
+> GDSC.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: monaco-arduino-monza: Enable I2C0 and SPI3 for 40-pin JHAT connector
-      commit: 7a6161e50fbd5d16cb53614ac92d0050b57bfefb
-[2/2] arm64: dts: qcom: monaco-arduino-monza: Add label to sound node
-      commit: fa29e3ea0785796fa450d8f91ffe83c637a2e1a1
+[1/1] clk: qcom: gcc-glymur: use collapse-voting for PCIe GDSCs
+      commit: 60521e4ff9e7f1b41758f387842d73667a7f0410
 
 Best regards,
 -- 
