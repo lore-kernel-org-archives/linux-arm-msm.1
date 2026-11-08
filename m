@@ -1,68 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169478;
-	b=UGAQ8LQDd8ZYmJoo9YjEWRAc0mTbP2sWOFhNfiQh0SnBKfF4qISHe810kFz4athPzawM
-	 eeqCD2KiZBRULYDi7AtZgEPau65+ZoxgvSRO+5wr04JWs8UK38BQMUOOJivFkSP6g6HCy
-	 +mtCoyCE/OKdfNUcPrs9wymfqEAUGRSHM/b3CCv5kGlY29r2AXJrek7I6NEJzhobItoG5
-	 NNicqhAzFENkUmlwlVo67aOOn/8znuDSwnqr/1tzgHySKNYMVkUQnRmtVswIO+eDa+oda
-	 qANl8g/deaoh5UwEDKsAqXYuxnH4svbwOT2tp3jx3FJwmHKdfe5QGQUDyz6CKkVfqzg==
+	t=1794169473;
+	b=wCAJkHq7jnf7bFsBtvuy9K6AAsbOunKugKL3PtlJQF4Cvo/2Xfp+o3MUdAmwlJ6FjUu0
+	 vIyCZBGr53QYJdfQu5rdnId8z5+i/VJTG+8P2Cqczayq6+q1emEJEU01Q/chicGewwL3U
+	 fLYIaJPzw9SBqMxa7ii15K2xrAxAs93KLtEvKE+y15W3U/p0vPNtfwC9uTBxst/XC9Not
+	 zbt9r5XtK0vRjWfzbwysaYudJFhrgXkugJGoTqAZAyl2uv3TJ4pk5PIAuZUI8Vt0XyaCn
+	 KitDiX8P6coCOIk8V0o9gNkhU56SyBuBIf/v8NX2JBKq5OGr/DMnplECvEb3dr5trtA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169478;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169473;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=5c1izOgqQsqYqZoaqjAccBDA/0QPLj0WU1P9GweWkGs=;
-	b=KnSJOBVigS13nyUFlnNvcJAAaJ8xRSSryUmyeBb0o5aXLFpMddnMrH5lhSBYaRHfsjHC
-	 U3SPDI+yMHRYw0iYrvFdN9dbImR0ud+cBo/G4+OKeH6TpGh4g39vFga4HYg52o5Yw0zht
-	 3lrTL2fo8o2s9m+E/a6+pcBX8Eme11ePKVGvyI9bTE71Zf9nGJiz7hoab9m1sQKjsxrZx
-	 A31Mv0BEjD6hegXnQIjY7GD0gmhSWk0RrZjlZghImLD7nhTPhFK+RLu8ggEDKAQUPAt3c
-	 uI7Pw/iq30CPBuIw5BxWgCSAiM6shxq0vFGMOZHhxmqyDleeZKSc3VGSWV7rbi3LP1w==
+	bh=uygfYEpKnkwmVZhADVlp9pkKSqQqdNPc+V8s7eo3P88=;
+	b=jN7bZPe0HypwYA4tIZ+USUyRAKBSYZWzfi6oN+0AiEsfEY1kDggYPtST1CUFswkyE503
+	 jGrSFY+C9ceiYnVfzigwvoKbsb2eYc+nuy1/3jb7ojh2NIhEeVUDSxdz6LBx0gCJWueDS
+	 IylbkNivR0CaxP0d0tD4fZYUy0ZT8Umwo+F2bNqbFjWxqQ0P8FjT7KG8ZXgtGEVSPQ1f/
+	 VfgkKJ4YFPv7W1YEWqShypGrbx0FQBKgOE45pEm1Mlf3MVHPNI5SUIhQzVImhyTg89U1X
+	 3F8poC0rutzLRxpMVzZaCZGM5qYd5GBUTtbyhhbSe+FrcVwt+avjn2u9eEAZDfSfmhw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=owMY7KpM;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ew4hhQfz;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF3E2607D943;
-	Sun,  8 Nov 2026 20:24:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693A7607C5DF;
+	Sun,  8 Nov 2026 20:24:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=owMY7KpM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01F351F0089F;
-	Sun,  8 Nov 2026 20:24:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ew4hhQfz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58B051F00900;
+	Sun,  8 Nov 2026 20:24:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169477;
-	bh=5c1izOgqQsqYqZoaqjAccBDA/0QPLj0WU1P9GweWkGs=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=owMY7KpMZrMQBttY0jyvLvSgzGUDIPrFpYEoLEgNLYIXGI75BXWMJczhDYMv1vZBq
-	 ru3fZvQ0fH2rD4i/MvpEvlwXOr5aHF0bx6sG5vw881ZXz+CCfAOfavpj5qey9QtQge
-	 dJ0uZSyf07kLRuOypsuFT7hvmJ4TLhU62mEPHcM6HRo2IbhLjBRL5KocYRQXWyrX3t
-	 JH/u5O/CwxeN6jVljMvNB9brJk3qtQTWZCZS14XvsZJpbIpon3ET9w1NsYeWj4zASL
-	 sA17xR4qM8/Fq068o+Hx2sS4QL6LMStv8BXkZpK7lVP0H5V+7knUc5VZOwtf9EMJ/Y
-	 pP235QP6lWd7w==
+	s=k20260515; t=1794169473;
+	bh=uygfYEpKnkwmVZhADVlp9pkKSqQqdNPc+V8s7eo3P88=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=ew4hhQfzq8Xg40yF1lsmE2H05SLQwTEuKiRwBj2Zz6M9pkcYuJSNubROOtxFZx9v1
+	 0ZJ0fDCnxz5EDfb4xbo3uqJfNhhGWDFrA3/qP8nFnNwW7jD5SazCf7ygSXUkiMnHQV
+	 weWqKRWt+KJXQipGqmEEooYQeYSP4KGSyjWNz1aJ7ZWZD4XAepIR/dtS9DPsQlE7eI
+	 G8IUxqJ1flub/MmdetNam2Jd9c/rPbQ9JXEbzlAvlw0RUomJazZcoDFSHdQ2f4qLGr
+	 S1j9WfY0mijM0beZGZBaM4u3V9WBrRZtwNKNC50W2STTixr7gUuPpT9GabYdSJfh41
+	 gtgPPn1+V8ItA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: abelvesa@kernel.org,
-	sboyd@kernel.org,
-	bmasney+clk@redhat.com,
-	jbrunet+clk@baylibre.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	konradybcio@kernel.org,
-	taniya.das@oss.qualcomm.com,
-	ansuelsmth@gmail.com,
-	john@phrozen.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Robert Marko <robimarko@gmail.com>
-Subject: Re: (subset) [PATCH v2 1/4] clk: qcom: ipq-cmn-pll: Correct IPQ8074 NSS NoC rate
-Date: Sun,  8 Nov 2026 14:21:08 -0600
-Message-ID: <179416929481.628393.14693210731870428357.b4-ty@b4>
+To: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: linux-kernel@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: (subset) [PATCH v1 0/3] ASoC: qcom: split out self-contained Hawi/Maili audio changes
+Date: Sun,  8 Nov 2026 14:21:05 -0600
+Message-ID: <179416929329.628393.8263808018546375822.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261026120920.1667982-1-robimarko@gmail.com>
-References: <20261026120920.1667982-1-robimarko@gmail.com>
+In-Reply-To: <20261006053717.3455143-1-prasad.kumpatla@oss.qualcomm.com>
+References: <20261006053717.3455143-1-prasad.kumpatla@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,20 +69,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 26 Oct 2026 13:08:12 +0100, Robert Marko wrote:
-> The IPQ8074 NSS NoC bias output feeds the GCC NSS NoC clock without
-> a divider.
+On Tue, 06 Oct 2026 11:07:14 +0530, Prasad Kumpatla wrote:
+> This series extracts a small set of self-contained patches from the earlier
+> Hawi/Maili LPASS audio submission to simplify review and reduce dependencies.
 > 
-> GCC and SSDK (Qualcomm vendor switch driver from SDK) both configure that
-> clock for 461.5 MHz, while the CMN PLL driver reports its parent at
-> 416.5 MHz.
+> Link:
+> https://lore.kernel.org/all/20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com/
+> 
+> The original submission included changes that depend on LPASS macro codec and
+> platform updates still progressing through their respective trees. This series
+> contains only patches that are independent of those changes and apply cleanly
+> on current linux-next.
 > 
 > [...]
 
 Applied, thanks!
 
-[2/4] dt-bindings: clocks: qcom,gcc-ipq8074: Allow CMN PLL bias clocks
-      commit: 969f124be6cda13ea890e7330c984c6fdb512753
+[3/3] arm64: defconfig: Enable Hawi LPASS LPI pinctrl driver
+      commit: cf446442a4929416742719913a55eda92a8801e8
 
 Best regards,
 -- 
