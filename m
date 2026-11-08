@@ -1,48 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.112
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794151096;
-	b=O/985EevcqfUDif2wf+cn811S9/N2mQ6ERdlK4BVpEQehfN1dwjrFeklZ0hDJ14WP6DH
-	 VSOFqcvOo2Rf01g8D/mNSKk6accCEXzL6uvd+1M+2GPbX/q6wh3AhASCzTNOJw7BwuPeU
-	 qn/7iAm/qFjyjpC923qY4Z1i88cxbbLK4Ftb8+aDrXmWa7VXkc0GU8vDaz4TjPPAmUheM
-	 1THPCVpBeUPoApJPI5OSgyvqEgUV/3QiQ5fmtJhdHR7aJE8E4PGqduF90ewYApZKI5cUP
-	 90LjJVjTY+x/LvdZnoqhfqZ2a0NOL5Cj18CIwVrf7weY70Qrz24TDPw5tZIsKFZPokQ==
+	t=1794161062;
+	b=GyfiYSSE43IEZpEfpFwjwgPbPv56xom/SBKaig6ZQF/wwq8fZmdZkCXrhgsyw9PCRnwC
+	 Xl2KS3b3kU3XGITPFHZvIqF0tpQg6ao5x8Oa0uOexoanVDaAcAuYSNKTEe8wEvdQXEpfB
+	 UKPgVEJwQsVvSQulPIgxe3+heDYm324En49o41GotNH3xbt8qi4m4aEnPQs3a3ZDaM+k7
+	 QXKZ9uP4V++m9MHqnLsNQP6dUB8bzBnF7XNLuQYlYmAFc5+BchGtksmNpLtPlZJsfdQNV
+	 kUKqui9bAKx0M3/EPmucQKUG1NwTRVMsrwPb/SCM3sM/KFs4Ja9AiiYu2gT6+9DFtyw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794151096;
-	h=Received:DKIM-Signature:Received:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=p8GDyyVt+Sq4mGVsXFtFYfgdYn2hgnSQOtYzD9assbs=;
-	b=ViuuUsIFvA9a/Z+hqWUDzQiXecjPD/oe7KUhtKdg6PueijDDqLe3SJE93mW7bh1Tw/A9
-	 oqPAtoTKSSABIpXNyt39OIxMy+V9IUc14R8qgsioz3p8i106tsUDlqQ6ipLjMRLJaliez
-	 RuqutdS/EDVVYgeWWQzuIhMAL55riRZl9uHdAk+s+YflZt4UnXWNlrpOZ8dopfPhroNpC
-	 WcvkVuBusiJ6zDwEaIzdJX9qDXEDGrXPURjV5MCdP/eQQL1L1erK4ZZaqq/x6g/kBo0CF
-	 TxEOuufwTFTv/LZJmZK3+15wsF/u9q6dDImAWFgwSRDzEa4Gw5gY2YWO/cv/5n+uoIg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794161062;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
+	 Subject:Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=+BO7ggl62Lj+oozFUYv9tkz0XO5F9DqJdq0SI4BgX/c=;
+	b=TxkKzM2FrDJx0CyUOAAeGZJjEID8f1/83Co9TmStKc03nvJEapH3mEp5jVCmdxnD20E1
+	 dVjzz2Vy/JZn2jCauY+EQ+hwOdNZ5TDG/W50cxZnZ1NOfl+EJCDnR+8OnOFKgK0PfUwIp
+	 xDvxDfpIzg9XjfECszRJCkhwyyWoPPrYpK0F00qc5Dohga0jvsWFwF4RAma9zK0YBrEN+
+	 nYJBqgHUds+acYmsbq0Hcyahh/r1f+OhR3rdF7X0s4PaZl2C+BfVKhdk14LhVL+Nq/A20
+	 wKUF+HG5WwEaUN4UYgHxtuwuyAoR5kLkJRh0MkuuviqNaDT+e5H7XvmnuYBiGyE9jAQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MFXVr5vV;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=3Rimm+Oh;
+	arc=none smtp.remote-ip=79.135.106.112
+Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7466606A31C;
-	Sun,  8 Nov 2026 15:18:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFF7D606A31C;
+	Sun,  8 Nov 2026 18:04:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CFF7D606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MFXVr5vV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4296A1F0089F;
-	Sun,  8 Nov 2026 15:18:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794151095;
-	bh=p8GDyyVt+Sq4mGVsXFtFYfgdYn2hgnSQOtYzD9assbs=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=MFXVr5vVHnzbN5472BnBdKg/D/bN9BKzknypQXcMueX3Rhdkv82YvxUt/vIJym8ZL
-	 TTAtaZIplb/uW6f1Uuex78g0TCKYa2mb+bduTJ7BMtA7WEkKl9KqcKH4SQXItaWT4g
-	 R78VB5AE3x8GAIwhYebk6l6FWyRpOF7GcbNRUa8CqE8I9QEu2OcAH8pqAGEJE0XAUy
-	 zgFvuzrW2J4cebqLoj6py87Xdf3YnF8SnCr0hNvZ6e98C898tfKFv25L64CUPj//jb
-	 EChO/UUPL4RJ3rxLHZANxfNNCH9jozO9iWhz5ChqgZCcUXvOarkLXvS0/N3zAc34WY
-	 3w+h/Rv1ZV3qw==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id EECD82CEE620;
-	Sun, 08 Nov 2026 15:18:12 +0000 (GMT)
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=3Rimm+Oh
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=michaelmcallister.org; s=protonmail2; t=1794161052; x=1794420252;
+	bh=+BO7ggl62Lj+oozFUYv9tkz0XO5F9DqJdq0SI4BgX/c=;
+	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=3Rimm+OhVNZ4nKZbGzi96fchiXSVcX33zdEXWjKyBWgLUyAt6mHATgmLei4/An9h2
+	 YQBoskvYZFCsthArQAf5SnMpaHaSm8IUlRy/FLwjVK9VXCMmSkULMrSRxQDv2rHOgU
+	 79mOLS1fiSlVKmj9BQV7NC89TR4r2gUOIMCnhVgr1Aqfmtw7eKjHS31S+tXmJnhFae
+	 5sOKSiAFK/qvS2Yez3fk5rLJV1tv78mILubgpfbXniqCZbKk0fq02qd9/EjShg1ENF
+	 x9MaGxihw+jnqlZ3t/Sd62+zMw9UHJNoOaSKfSnYy6xvSJOpgeFtzqjVImSl/CM/wO
+	 MAinw+L8lX/lA==
+X-Pm-Submission-Id: 4jN1544Vyjz1DFF0
+From: Michael McAllister <me@michaelmcallister.org>
+To: Demeter Barna <me@fromdisposition.org>,
+ Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>
+Cc: lgirdwood@gmail.com, perex@perex.cz, tiwai@suse.com,
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, me@michaelmcallister.org
+Date: Sun, 08 Nov 2026 18:03:42 +0000
+Subject: [PATCH v2] ASoC: qcom: q6asm: Correct the 24-bit PCM format
+Message-ID: <179416102230.53258.7301268454500974217.q6asm-pcm-format-v2@michaelmcallister.org>
+In-Reply-To: <f3485a790ffdafe635b84b5d68730dad@fromdisposition.org>
+References: <179355993304.51321.11135059681945648585.q6asm-capture-format-v1@michaelmcallister.org>
+ <f3485a790ffdafe635b84b5d68730dad@fromdisposition.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,45 +68,173 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 0/6] spi: qcom-geni: Add QSPI support over GPI DMA
-From: Mark Brown <broonie@kernel.org>
-To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
- Frank Li <Frank.Li@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org, 
- dmaengine@vger.kernel.org, devicetree@vger.kernel.org, 
- Krzysztof Kozlowski <krzk@kernel.org>
-In-Reply-To: <20261106-qspi_upstream_series-v1-0-21f43042dd60@oss.qualcomm.com>
-References: <20261106-qspi_upstream_series-v1-0-21f43042dd60@oss.qualcomm.com>
-Date: Sun, 08 Nov 2026 15:18:10 +0000
-Message-Id: <179415109036.3711751.6859082995940422062.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=421; i=broonie@kernel.org;
- h=from:subject:message-id; bh=LaAlc+ErhOxT3MacrK1VduFBzN3l5WzRUYavGhSGNbQ=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI+TNoSWxXFeOn3pVlM6cEhtkutux78Xpf7zpb/rb3vc
- UuneR9nd5SyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAib2cxMvwrnjPBW9J+pbi0
- bX3WjaMV7Q5NEz5N9bD+PU3E29T0NTsjw2UndTOvxesfpeRn3twbn7KhdWUZS2b1vBMxV58pvp0
- exg4A
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-> This series adds QSPI support to the Qualcomm GENI SPI driver using
-> GPI DMA. It supports single, dual and quad SDR transfers in controller
-> mode.
+Recording in S24_LE on the Moto G10 produces badly scaled samples that
+wrap at full scale. Playback has the same layout problem and comes out
+barely audible. The PCM V2 DSP interface uses bits 31:8 of each 32-bit
+word for 24-bit samples, but ALSA S24_LE expects bits 23:0.
 
-This doesn't apply against current code, please check and resend.
+Replace S24_LE with S32_LE for playback and capture and constrain it
+to 24 significant bits. Keep the DSP configured for 24-bit samples.
+This matches its native layout without converting samples in the kernel.
 
-> ---
-> base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
-> change-id: 20261021-qspi_upstream_series-850249e432f5
+Translate S32_LE back to S24_LE in the APQ8096 and SC7180 backend
+fixups so that routing and the physical audio ports keep their 24-bit
+width. The other Q6ASM machine drivers already set the backend format.
 
-That's a random -next commit...
+Raw S24_LE requests are no longer supported. Applications using that
+format need S32_LE or a converting PCM device such as plughw.
 
+Tested on the Moto G10 with direct ALSA and PipeWire playback/capture
+at 48 kHz, including reopening streams and testing after suspend.
+Direct S32_LE playback now matches the S16_LE level, ALSA reports
+24 significant bits, and S24_LE through plug conversion works.
+
+Fixes: 2a9e92d371db ("ASoC: qdsp6: q6asm: Add q6asm dai driver")
+Reported-by: Demeter Barna <me@fromdisposition.org>
+Closes: https://lore.kernel.org/f3485a790ffdafe635b84b5d68730dad@fromdisposition.org/
+
+Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+---
+Hi, thanks Demeter! I was able to reproduce this too, and I've included
+a fix for playback in v2.
+
+Changes in v2:
+- Cover playback as well as capture.
+- Remove the unused S24_LE case and update the backend comments.
+- Add Fixes and Reported-by, and document the raw-format change.
+- Rebase onto sound/for-next.
+
+v1: https://lore.kernel.org/179355993304.51321.11135059681945648585.q6asm-capture-format-v1@michaelmcallister.org/
+
+ sound/soc/qcom/apq8096.c         |  8 ++++++++
+ sound/soc/qcom/qdsp6/q6asm-dai.c | 15 ++++++++++-----
+ sound/soc/qcom/sc7180.c          |  8 ++++++++
+ 3 files changed, 26 insertions(+), 5 deletions(-)
+
+diff --git a/sound/soc/qcom/apq8096.c b/sound/soc/qcom/apq8096.c
+index cfd6438db..b7030f7ef 100644
+--- a/sound/soc/qcom/apq8096.c
++++ b/sound/soc/qcom/apq8096.c
+@@ -6,6 +6,7 @@
+ #include <sound/soc.h>
+ #include <sound/soc-dapm.h>
+ #include <sound/pcm.h>
++#include <sound/pcm_params.h>
+ #include "common.h"
+ 
+ #define SLIM_MAX_TX_PORTS 16
+@@ -19,10 +20,17 @@ static int apq8096_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
+ 					SNDRV_PCM_HW_PARAM_RATE);
+ 	struct snd_interval *channels = hw_param_interval(params,
+ 					SNDRV_PCM_HW_PARAM_CHANNELS);
++	struct snd_mask *fmt = hw_param_mask(params, SNDRV_PCM_HW_PARAM_FORMAT);
+ 
+ 	rate->min = rate->max = 48000;
+ 	channels->min = channels->max = 2;
+ 
++	/* Keep the backend at 24 bits despite the 32-bit PCM container. */
++	if (params_format(params) == SNDRV_PCM_FORMAT_S32_LE) {
++		snd_mask_none(fmt);
++		snd_mask_set_format(fmt, SNDRV_PCM_FORMAT_S24_LE);
++	}
++
+ 	return 0;
+ }
+ 
+diff --git a/sound/soc/qcom/qdsp6/q6asm-dai.c b/sound/soc/qcom/qdsp6/q6asm-dai.c
+index 4261c3048..cd97ba2ff 100644
+--- a/sound/soc/qcom/qdsp6/q6asm-dai.c
++++ b/sound/soc/qcom/qdsp6/q6asm-dai.c
+@@ -90,7 +90,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_capture = {
+ 				SNDRV_PCM_INFO_INTERLEAVED |
+ 				SNDRV_PCM_INFO_PAUSE | SNDRV_PCM_INFO_RESUME),
+ 	.formats =              (SNDRV_PCM_FMTBIT_S16_LE |
+-				SNDRV_PCM_FMTBIT_S24_LE),
++				SNDRV_PCM_FMTBIT_S32_LE),
+ 	.rates =                SNDRV_PCM_RATE_8000_48000,
+ 	.rate_min =             8000,
+ 	.rate_max =             48000,
+@@ -113,7 +113,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
+ 				SNDRV_PCM_INFO_INTERLEAVED |
+ 				SNDRV_PCM_INFO_PAUSE | SNDRV_PCM_INFO_RESUME),
+ 	.formats =              (SNDRV_PCM_FMTBIT_S16_LE |
+-				SNDRV_PCM_FMTBIT_S24_LE),
++				SNDRV_PCM_FMTBIT_S32_LE),
+ 	.rates =                SNDRV_PCM_RATE_8000_192000,
+ 	.rate_min =             8000,
+ 	.rate_max =             192000,
+@@ -139,7 +139,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
+ 				  SNDRV_PCM_RATE_176400 |		\
+ 				  SNDRV_PCM_RATE_192000),		\
+ 			.formats = (SNDRV_PCM_FMTBIT_S16_LE |		\
+-					SNDRV_PCM_FMTBIT_S24_LE),	\
++					SNDRV_PCM_FMTBIT_S32_LE),	\
+ 			.channels_min = 1,				\
+ 			.channels_max = 8,				\
+ 			.rate_min =     8000,				\
+@@ -151,7 +151,7 @@ static const struct snd_pcm_hardware q6asm_dai_hardware_playback = {
+ 				  SNDRV_PCM_RATE_12000 |		\
+ 				  SNDRV_PCM_RATE_24000),		\
+ 			.formats = (SNDRV_PCM_FMTBIT_S16_LE |		\
+-				    SNDRV_PCM_FMTBIT_S24_LE),		\
++				    SNDRV_PCM_FMTBIT_S32_LE),		\
+ 			.channels_min = 1,				\
+ 			.channels_max = 4,				\
+ 			.rate_min =     8000,				\
+@@ -377,6 +377,11 @@ static int q6asm_dai_open(struct snd_soc_component *component,
+ 
+ 	stream_id = cpu_dai->driver->id;
+ 
++	/* The DSP uses the high 24 bits of each 32-bit word. */
++	ret = snd_pcm_hw_constraint_msbits(runtime, 0, 32, 24);
++	if (ret < 0)
++		return ret;
++
+ 	pdata = snd_soc_component_get_drvdata(component);
+ 	if (!pdata) {
+ 		dev_err(dev, "Drv data not found ..\n");
+@@ -505,7 +510,7 @@ static int q6asm_dai_hw_params(struct snd_soc_component *component,
+ 	case SNDRV_PCM_FORMAT_S16_LE:
+ 		prtd->bits_per_sample = 16;
+ 		break;
+-	case SNDRV_PCM_FORMAT_S24_LE:
++	case SNDRV_PCM_FORMAT_S32_LE:
+ 		prtd->bits_per_sample = 24;
+ 		break;
+ 	}
+diff --git a/sound/soc/qcom/sc7180.c b/sound/soc/qcom/sc7180.c
+index bc5a18883..dd0f8eb99 100644
+--- a/sound/soc/qcom/sc7180.c
++++ b/sound/soc/qcom/sc7180.c
+@@ -13,6 +13,7 @@
+ #include <sound/core.h>
+ #include <sound/jack.h>
+ #include <sound/pcm.h>
++#include <sound/pcm_params.h>
+ #include <sound/soc.h>
+ #include <uapi/linux/input-event-codes.h>
+ 
+@@ -425,10 +426,17 @@ static int sc7180_qdsp_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
+ 					SNDRV_PCM_HW_PARAM_RATE);
+ 	struct snd_interval *channels = hw_param_interval(params,
+ 					SNDRV_PCM_HW_PARAM_CHANNELS);
++	struct snd_mask *fmt = hw_param_mask(params, SNDRV_PCM_HW_PARAM_FORMAT);
+ 
+ 	rate->min = rate->max = 48000;
+ 	channels->min = channels->max = 2;
+ 
++	/* Keep the backend at 24 bits despite the 32-bit PCM container. */
++	if (params_format(params) == SNDRV_PCM_FORMAT_S32_LE) {
++		snd_mask_none(fmt);
++		snd_mask_set_format(fmt, SNDRV_PCM_FORMAT_S24_LE);
++	}
++
+ 	return 0;
+ }
+ 
+
+base-commit: c937f492dd40a8398d955cf0f4f9e11d7268bcb5
 -- 
-Mark Brown <broonie@kernel.org>
+2.39.5
+
