@@ -1,61 +1,64 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169317;
-	b=hkiJQMrg4iW/yCSxgmSquF0/9FBGKDE77Of0Kv/rc6xMDJ7RNbbAh/GAak5eUXKoCJu9
-	 5t5vF3tb3UVtaZk2q/m//nEXby5Q9KEO7O/tb3B/QpkCgJTZWTewJ1wIuu0b3jYifRmQe
-	 erQe2nhrhnH8hxFMGDO1x06JogFVSbh/5/PkS6FXQnOQftyYdJaKFSXHpR5g55eozlsYx
-	 En+4OVBnk15cPJ2MPp7swkQJaewUU2bPA/IKvw6k0X+rUBwBbD+LM+EauqcDnuTI3IO1R
-	 f/WJVnPj0oiG/9Ye1leXKN2VWfocJkKaSVEWjk5SLwAzda0Vs6AJO3Wt4ugbNKCqv0Q==
+	t=1794169313;
+	b=FoZAkFqaDJ4h7Aq6jFd+kut1mYcCaHR3YJT4CLpsDpaz2cjKEG8s17g4meHAAYQbGpYF
+	 bKa69Ih6eM/X90dP+CX2Owqy3MTYhyZWd0sqFd7nCvpNNCOB3MXChyt6VERiQ+mH0/4QW
+	 edJulSIDVqJXDkgK9KB7bKa5sGZjD3ckcCL82X+xExKZww1fdGcamYIlRdA8pndvKvtqz
+	 ZXQvFZ3HBbjgUPSk+quxvfaMJNJZ4Z1VkK3BTea+ulpNdYizP9aQ/b7grdf+REXx4/Bkv
+	 OeHk+evozgXsp1O7EvEr0YRLJ5tlQ93vON5VP5K8DlONRgQz0kvpfXoT7mdUykoo3yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169317;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169313;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=H5sXEn3/kbW3+jdPR0Bjw7uipaYsYR05IMcAEou1yyc=;
-	b=O4vGSbsGBTNlMXfwFfV9U+QRiXFHfGkvNpjcDkvLyH2ZDVXQMh9Z325Xw2ivwymk9xrw
-	 16D6JYFFS6seClxqxmmgrKLBOiMaxSmsG1H/shUTb+Xnc4w53iyEAVFH3zumPF5i11Vlk
-	 I1uO7EebgD/qAlrgJy91baxDXxaayFOmK+3vMDmL7ioMA/SUEDtnbLhxtIF4e6M+Tpdxj
-	 /O/gN7C6vFawR2Oe2ebxFfcFzVI8rSsdjefpmRso+bKXQluFPgJjjhKvfvGgK8eVQxn4D
-	 ijuckmZwQozM9ErfiZ1mbshd5PYArpqKTYAM0HSRRRRqPa7+CMzxjZI5dmUNhYpKb8w==
+	bh=VVyykXlSyrTgP+EcH4x8XMkElcSDwtfYCMLDjda6kVM=;
+	b=o9i4IOdKAivzgFJYB53ncAHlH7vJ+MniKWahOHyQ5LNj1J/BaQIjBcI4vwk5qbfTEDpA
+	 lPgL74o6M1IvFJ1HwyW6Ew/Qhu1+dTXB4FOGXlLKIZhPICMksAaBe0QmErzAwPm8e8d5S
+	 pGkT/A67Sr3XKoi+VgXtuBGev0uXOHxjMIf1bvd57+Yv2rAEju03FORCdxDWzaxOT2/zf
+	 pcjwU4ly7zw3HQWhVM2HaDwkY+vJFQ48YOQ5kPTTzFKF8DKcfaNvpH8Xz59HXNKJhyYnk
+	 uqMaH671qZtNQaYC3wY6HS6I5cS2o1vj28yoAPsdvDUYx+HiyHqKt8ivqkjUTkkxZkA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="E22/IWoh";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CD1l+INm;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34F6E606D81C;
-	Sun,  8 Nov 2026 20:21:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9864A606D805;
+	Sun,  8 Nov 2026 20:21:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=E22/IWoh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0796B1F008AB;
-	Sun,  8 Nov 2026 20:21:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CD1l+INm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1ED361F008A4;
+	Sun,  8 Nov 2026 20:21:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169316;
-	bh=H5sXEn3/kbW3+jdPR0Bjw7uipaYsYR05IMcAEou1yyc=;
+	s=k20260515; t=1794169313;
+	bh=VVyykXlSyrTgP+EcH4x8XMkElcSDwtfYCMLDjda6kVM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=E22/IWohioiH3pLenLjk8ExmGVtHOxWSf0yng19+lhPF0WzI3nFreuazXCYB9VtYe
-	 6TpJBI1hPmJXVNd8FYz/+sI1DOXf3PwrbqFnjI+rL6Dl7T2V9MbGeqGYFYgRL7RBb+
-	 BZ82qcweRsxMupv9MfBtj/YPz4cCyptlfoA+2rV6kVTNGY+O6hdcF+qpMM5N0YLGTf
-	 T/OjftPdWTQMu7i+F8jL1/B/CYTjCRTS/fWb4knHABwYQIIYQ/PwVyJrpeixqEENVv
-	 UxnSb4QpxGmg5hWAKbVrY12EBtI0WwYxPibrylzpHd7Ye/IFthqSebLOyhdiIo2QPX
-	 HA1COZDH/yS8A==
+	b=CD1l+INmMBxcj12WDTy/1+mSS0uVd5+j0qYhdDiXA92ICS8BeK83zRXPa1XB90iO0
+	 rSnAjm311aiVY9UNKzK09P+IHx4BVwTeBI7gdOcO5ovJxv2PMYpQVkgWwBPbU/nFdj
+	 9CMukkhqnf3OshE05rwAveT2jKXiTJE65HX9X85sIOkxXDLD9Lv8ilH8jz/tertVC3
+	 E8KOLCLIlg0P4N3u39K2I0hk9CAMYeg96TLbP2q1vndMkvgqTkE/J9Q71tKcfhF860
+	 GjZg02DRr2EopRhhyqYKT0v1vp5DNv60l/wGVOJVtp50NhHYZXLEchuBbM1KRfYfsd
+	 rIxfCmC7QUHZw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Albert Esteve <aesteve@redhat.com>
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Sarannya S <sarannya.s@oss.qualcomm.com>,
-	Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
-	Sudeepgoud Patil <sudeep.patil@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Tony Truong <tony.truong@oss.qualcomm.com>
-Subject: Re: [PATCH v5 0/4] Add automotive SMEM hardening for Qualcomm platforms
-Date: Sun,  8 Nov 2026 14:19:15 -0600
-Message-ID: <179416929497.628393.17299011233332755876.b4-ty@b4>
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v4 0/4] arm64: dts: qcom: eliza-cqs-evk: Support eMMC and UFS SoMs
+Date: Sun,  8 Nov 2026 14:19:12 -0600
+Message-ID: <179416929538.628393.16489021292278996381.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261028-port-smem-v5-0-121257d490b5@redhat.com>
-References: <20261028-port-smem-v5-0-121257d490b5@redhat.com>
+In-Reply-To: <20261102-dts-qcom-eliza-add-ufs-variant-v4-0-c92512c7c759@oss.qualcomm.com>
+References: <20261102-dts-qcom-eliza-add-ufs-variant-v4-0-c92512c7c759@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,26 +72,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 28 Oct 2026 10:33:47 +0100, Albert Esteve wrote:
-> The Qualcomm SMEM driver manages shared memory partitions used for
-> inter-processor communication on Qualcomm SoCs, including the
-> automotive SA8775P platform. Vendor trees carry additional validation
-> and partition-enumeration logic that is not yet present in master.
+On Mon, 02 Nov 2026 14:10:46 +0200, Abel Vesa wrote:
+> The Eliza CQS SoM is available with either eMMC or UFS storage. Both
+> variants connect to the same Eliza EVK carrier board, but the existing
+> device tree describes only the eMMC-equipped SoM and uses storage-neutral
+> names for the SoM and the assembled EVK.
 > 
-> Patch 1 adds IN_PARTITION_RANGE() for pointer+size checks against a region.
+> Give each SoM variant and its EVK assembly storage-specific compatibles
+> and filenames. Keep the shared SoM hardware in eliza-cqs-som.dtsi and
+> describe only the storage controller and its variant-specific supply
+> voltage in the eMMC and UFS includes. Neither variant is derived from
+> the other; the carrier-board description is shared by both assemblies.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/4] soc: qcom: smem: add IN_PARTITION_RANGE helper
-      commit: 784f49db7a33d5feda0ff1d4200c1653cad0114a
-[2/4] soc: qcom: smem: validate private entry list walks
-      commit: eafcc97814aedea2cd6c3e385f8832cc4e6e3ec9
-[3/4] soc: qcom: smem: validate private item payloads
-      commit: 8815169259ad002577a7053212760f9c2490ae4a
-[4/4] soc: qcom: smem: ignore multi remote host partitions
-      commit: 21a10ab8beccb2abd2dbf51f727160bb991c731e
+[1/4] dt-bindings: arm: qcom: Describe Eliza CQS eMMC and UFS variants
+      commit: 14120bce2899a8736934018f9817c23b95b8a073
 
 Best regards,
 -- 
