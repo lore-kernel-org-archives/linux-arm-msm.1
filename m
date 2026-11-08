@@ -1,62 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794169327;
-	b=5mVeMeTLil4X0jQNL1IShV98gI5osOMGnVl8Qp61GVtFnoII84jFM+JyzPIInSfuxiKk
-	 Yir7GmKix2kOQ72mydW/oNnLg6A9sc7z2mtekL1EZfgtCpDnVGSpEpMzgGcdbJ/fG3/hO
-	 IFvtmVt2VEMcnjt3Vl0ueaT/CMSPcZTVG/6cID6hTzmGeJF7xoGGjZwbw7mmfWh3Lq/cI
-	 fFjIdE5KNrceWDkqmmK7r8FUsHuu34ebgD1Ze7Zcod3inQGj/Bc6afEOLdkdY84hzvvHf
-	 A2CAPgd9E7k/2j4wjaFKEFmGur9G2yBDlXd7Pm+GzP1OhID//bQkkyGgqzcmi264tVw==
+	t=1794169328;
+	b=fGJ17K51dT+qg4p0o5DftsOr9kMuJhEm2jeW30npxMxekirnfRsBt4i3ytuGQk+86Fdf
+	 6GVlJdWkZV5hYBM00v14rx8nmdqgT+iPktB/NXJ1zFD6Y4viYhmz4QjEnGSmFFLP2hKl1
+	 DYNJyHpRo+Ibr5Qhe2xG3WFgDRp5ID/LICNCdQKNrhnXnoMivAzU/86YLaExPcZF9oYg0
+	 V+XHExZrVqNu2KxFUGbHmjNioGjn276iwA8/5a/kNUdj3Id+V93AU/NP684PrXKw/GMyc
+	 ZgGVC1YBX6iaZwqH8uriK/t0eQBZfASUMhEwquwXjkUM9ONOfKDlFHy+qnCozx+hQxA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794169327;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794169328;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=GnRNViJ3X3TdTvrN/VbWcimw8mNgZLS78Lkb3Jtsfy0=;
-	b=b/RfBStkmH2pDj1kVfBB2bPUMRSXDJQvMZ/TXkhJxyMzg2cBtLJR5YtgWnXMAOFks7mg
-	 DuQxxfe989HWMuyESG+4AON0QeJu4QP9W0OMbvzuoxTFSMU48W7jVfb3mGsnUfZHMZ14f
-	 3GhPBCV7FFhZ0fI5TI8quZ7x0aHaUCFJW25BxK+3CDbHDRiQh6+Jxf6y855r7RH9dDL6i
-	 bhOIbC45caChL2rYKa15hXeg+T+0aMV4xp8UoaN9yZHHBHtwuiIKCqm8MIBMU47SKlYym
-	 XLE4BUFtoLJzcOGhZ7o2BbcQhxVFuPrfQZ/wzs1/Mds7r2dHr9OSLEFNNby0llANVmw==
+	bh=vtsGbCDjTxvwF9SlKyOf7Se6ZKoifvH9uincnKlACbE=;
+	b=b8lPpW4Kl5CyPldgqLbEcFmEnrCKb8/EzqbX9CYjfgzTkJy3nJsQzquUEBNqpbDOVYyg
+	 c3yW3o2OKlIHgVIo4Rb2uodF79Z1QCnifZ8ZC67tWfhpU/ZPbF1n01nf+Z+L3X7gO6tI2
+	 sjk2PtD9Kqht5+J7P5JcE+pwwQduQBiQvrmvMVVEhqfR06bdQh8X4ae8MHn66H0zu6njt
+	 ugEhnxA4zqmrZrzG1F6SlBx/5JTjRggyjBXRETwvHHp8f8Z3EQIIRn5rNFHy6xXkEfWOo
+	 QZg668IJMO+XtS110TCA8u2CpnAMj2h2By8x/WC6ny1YXm8g/88WD+rGXCG10t/bApw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ffUPTm7G;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BS4Om4b6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C06FA606EE9B;
-	Sun,  8 Nov 2026 20:22:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71B9F606D81F;
+	Sun,  8 Nov 2026 20:22:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ffUPTm7G
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B11471F00927;
-	Sun,  8 Nov 2026 20:22:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BS4Om4b6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B89FA1F00900;
+	Sun,  8 Nov 2026 20:22:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794169326;
-	bh=GnRNViJ3X3TdTvrN/VbWcimw8mNgZLS78Lkb3Jtsfy0=;
+	s=k20260515; t=1794169328;
+	bh=vtsGbCDjTxvwF9SlKyOf7Se6ZKoifvH9uincnKlACbE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ffUPTm7GlcRsB1nyUhgT4k/WTROsXxOqZXDiQkUUxl3ROGmnE1xdtI8OPhEvDYoJ9
-	 5T7oO+3gpK86aKZ7dI/IVizDPlgvEDRGfDJTVID9WLyfFdIhJQuEiybV+bY366ILZc
-	 jbtTsHL4Dj1OpToSwAY6Ykpg+0BOLKWBCMeYeW9wtf0oUE8wkJKvrWrM0unzap8cnr
-	 SXWDlhVBJZThfUlDHp4qcC0PE4Un4fMxb4TvldyVNobqOHqeZBFFarOtN/TlCQRmru
-	 9AUT90jJAXA6iqFUeuNMQxgIETbghQvL1xq66DZxG6QOe89yZWrrbTFhdrCN9XGkUn
-	 KX6B/28HdPang==
+	b=BS4Om4b62TtOHLd+3QvjMDBYmjiapBwlEYH8q1UFgeHRA8JorMPCv1Mtjp0dCXt4T
+	 UTzXOoJ0s5vFcaADlbhiIagsnqGtD+61QGGK+O1zYoOFaxmZDKVL40s13BZhfurZsx
+	 fFXsqHkzz2Ddc32zbWWQRu26aqx1Rt6rPx7ZkCkMZjVyxKyG8zwpT9ds6oL9cz/QvR
+	 VfUwpZOkUjUxubCtIHoXJbsxloXaqJ8TtSXnNwcuy1ouUc32MtC+k1uhMLMrmrQw3a
+	 3Tc6RnJPJiPV+8ckZ3pXXO7qC/XG7GaO1/gTG98ALwwLVvAHPTRx+HlXYbvAUERatq
+	 B70xYzRPNdDpw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Anand Tiwari <anand.tiwari@oss.qualcomm.com>
+	Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	vishnu.saini@oss.qualcomm.com
-Subject: Re: (subset) [PATCH v3 0/2] arm64: dts: qcom: Add eDP display overlays for hamoa and purwa IoT EVKs
-Date: Sun,  8 Nov 2026 14:19:21 -0600
-Message-ID: <179416929253.628393.13384601813775217356.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] soc: qcom: pd-mapper: Add support for the Qualcomm Shikra SoC
+Date: Sun,  8 Nov 2026 14:19:23 -0600
+Message-ID: <179416929526.628393.7024752953655760934.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922-edp_overlay_for-next-v3-0-2758d46ee174@oss.qualcomm.com>
-References: <20260922-edp_overlay_for-next-v3-0-2758d46ee174@oss.qualcomm.com>
+In-Reply-To: <20261030-shikra_pd-v2-1-09bd0394629b@oss.qualcomm.com>
+References: <20261030-shikra_pd-v2-1-09bd0394629b@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,23 +65,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 22 Sep 2026 16:12:50 +0530, Anand Tiwari wrote:
-> Both Hamoa and Purwa IoT EVKs are available in headed and headless
-> variants. The headed variants use an eDP display panel connected via
-> the DP3 controller, while the headless variants do not include a
-> display.
+On Fri, 30 Oct 2026 18:03:56 +0530, Anurag Pateriya wrote:
+> Add support for the Qualcomm Shikra SoC to the protection domain mapper.
 > 
-> The existing DT causes the eDP-panel driver to probe an unavailable
-> panel, resulting in AUX probe timeouts and missing display modes.
-> Userspace then attempts display commits through the eDP connector,
-> causing repeated DPU vblank, frame-done, and IRQ timeout errors.
-> 
-> [...]
+> All Shikra SoC variants (CQM, CQS, IQS) share the same protection
+> domain requirements: cdsp_root_pd, mpss_root_pd, mpss_wlan_pd.
 
 Applied, thanks!
 
-[2/2] arm64: dts: qcom: purwa-iot-evk: Add eDP display overlay
-      commit: 38b69e58985ae65d8260db5918cf1cb60fe41911
+[1/1] soc: qcom: pd-mapper: Add support for the Qualcomm Shikra SoC
+      commit: beddcf213a08577b4ed79944055edbc2c3cde851
 
 Best regards,
 -- 
