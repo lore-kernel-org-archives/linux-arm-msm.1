@@ -1,46 +1,51 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794187381;
-	b=rg/bnwpBqcVJuDKet7EUvbyddn7fkITWPe/3198KXtMCUNI9N7Vv6sJeiBMMabDcrzSW
-	 /SefPnDVGMQqZG0kuj+sAMXbT4z1CnSr3hAleu1yZBdx2TP5Ucl0UDsegLvVUB+TGtKB8
-	 nBODUYOaFDcDgW6zjMfjFH/q+GV+GMZIimxGnDz7HfTDvHCr7UMuZ0BZahFO/wjVO1Odh
-	 2DECiHJ1NoVmCVRvn7BYuRRoIGAYW7X8+BEDAaB0gHqVxVpdVpQ0aIp3AG988/fxznhp+
-	 jk9Tr+wBr+6R2LwU8owirmH4hEZ6cphNktXyX3RGVo6GLv7p0gwRIza6EboqUhVfNDA==
+	t=1794187379;
+	b=LywSMW0NuFsvXdpneM+7Tf8Afn0aWi9mcyRbmkIXD3jo/XsmSdodd+N4JP0Lwnny4ygv
+	 +k13lTLSMuqOrf8ejS4JhTG+z1nJ1y6kk44Q+KDdnEdSB4WCoedqN+EAXqZb1NZ0RBpjZ
+	 76VfI7ldrHEXC39EwPSWEZZo+gC0/DRT/FNzEPp19mV5EzS+68hosgaywdCJK0s8qYQox
+	 azw226ScgGExQzQb0pamnoMZGBSl1ti4Nh9OSU06AWA1WZ3lvlP2br0v+Ic3KKZi5B52N
+	 0ADXwU6u0nGhanCGsBXjiv5kDMfFkPjeUzFSsE6dwf/3QmVRJeD/DLu/j1WbaUB4r1A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794187381;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794187379;
 	h=Received:Received:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=yCrp5mmoOYL3ThpTjPMXombRU770Awvr6lmq6HZfLds=;
-	b=YouhgkY3m2n9Myk8BiEwF5Lqd8ALni2nPgSAuALPn4trtdkNBCRZWdhUECW++nmv9Uxm
-	 AcmZqSh4CjcBTtPWu3NXsphoClI1qSFTK8xVRYkhkg0YmE0USXJtQhI4LXxmI/8+Bxow4
-	 bbqMUeUOmKMhjeYuoNQ4u3qI+pRqNzxTaiw9U9ns0mFF3J82Munrc7ZqOGEaPQN55Mpd+
-	 5BvKrgCn+l/OAFXPd4MAE+MEeuUOvP4Rozy9n0R89lZPgq/zfaaBXsZ2aYYW2sdXW2hvR
-	 qn4hdkx0ho1LQx0SidxED20xRGLsxHMcl1Gob/Nkx7oN9IrSoc/ZBs8UkDKOl98/Ccg==
+	bh=Qb706ZL5O4KWbud0y2CpZF3/LcpSoCg7jFWxoHu4Cgc=;
+	b=dbhVhyo8qtKM3n5oY0YigaahiSmcM6UiyZ6nOk6bwzXfHubVRsdsJLIbWACIaekhmucm
+	 urPcRRci852EOlhFEw6yfdOXOUOUds3q82Lqd5SyNG22iC3spABjomuThGWmVI9UKOQys
+	 xHjOcoDxU5IoQXvV24oGFbwsymMVBxvPkNtIrUXljwKD0W553uANMrlBVEnZVwBMFTh8C
+	 NbkDAyfcq9htJLbWIFqFEnQymWJdDML2Df8M+w8t9oJIUJjz8b2PvQTLKAA/U3QaVx3rG
+	 1zYbww8x+wqfrj0a9EpYg0gcwlPD05cIsld/yViN+QY/AQUoaOTEOC6gypKviHYcCVw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3965F6083608;
-	Mon,  9 Nov 2026 01:23:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4E5D1F008BE;
-	Mon,  9 Nov 2026 01:23:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1019C606D82E;
+	Mon,  9 Nov 2026 01:22:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADF261F00902;
+	Mon,  9 Nov 2026 01:22:58 +0000 (UTC)
 Received: by venus (Postfix, from userid 1000)
-	id 103FD1828F3; Mon, 09 Nov 2026 02:23:00 +0100 (CET)
+	id DAAEC181B0F; Mon, 09 Nov 2026 02:22:59 +0100 (CET)
 From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Sebastian Reichel <sre@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261020-topic-usb_temp-v1-1-3dbe390f9834@oss.qualcomm.com>
-References: <20261020-topic-usb_temp-v1-1-3dbe390f9834@oss.qualcomm.com>
-Subject: Re: [PATCH] power: supply: qcom_battmgr: Expose USB connector
- temperature
-Message-Id: <179418738005.1255445.8077547264961176103.b4-ty@b4>
-Date: Mon, 09 Nov 2026 02:23:00 +0100
+To: Casey Connolly <casey.connolly@linaro.org>, 
+ Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Fabricio Akio <fabricioakio@gmail.com>
+Cc: Robin Snyders <robin@snyders.xyz>, David Heidelberg <david@ixit.cz>, 
+ phone-devel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>, 
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
+References: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
+Subject: Re: (subset) [PATCH 0/4] power: supply: qcom_smbx: report charger
+ state changes
+Message-Id: <179418737988.1255445.8261851488253335768.b4-ty@b4>
+Date: Mon, 09 Nov 2026 02:22:59 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,14 +60,24 @@ Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16.0
 
 
-On Tue, 20 Oct 2026 15:28:08 +0200, Konrad Dybcio wrote:
-> The firmware is capable of reporting the temperature of the connector.
-> Expose it at the USB supply.
+On Sat, 03 Oct 2026 16:45:20 -0300, Fabricio Akio wrote:
+> qcom_smbx does not handle the charger's chg-state-change interrupt, so
+> a charge completing is not notified and consumers can keep a stale
+> status. Allow the interrupt in the binding, handle it in the driver,
+> and describe it for PM660 and PMI8998.
+> 
+> Tested on a Motorola Moto X4 (PM660) with the sdm660-mainline 7.2.3
+> tree: each charging-state change is notified and the battery status
+> follows. The PMI8998 patch is untested on hardware.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] power: supply: qcom_battmgr: Expose USB connector temperature
-      commit: 23404b2678f38e8d086a127f879ba02078011393
+[1/4] dt-bindings: power: supply: qcom,pmi8998-charger: add chg-state-change
+      commit: 4e5927d83004c2ee0b3567f649eb63c5e444bde9
+[2/4] power: supply: qcom_smbx: report charger state changes
+      commit: 275c40e43b0d3671d79fa143e664eb4fc0bed96f
 
 Best regards,
 -- 
