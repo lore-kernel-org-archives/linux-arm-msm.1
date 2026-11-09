@@ -1,104 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.169
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.2
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794221395;
-	b=EWCSKoLopU2nO9XK+FUdnNq+eb2Yi2cUIr2Vq7IOv4tmPgCus5Jvw9A5a5l2WkbPrpfJ
-	 wVAuOFy3H4/faXXOMBEKgPlXxNI91+Nq40X0a4j9VcBNmQFAgjPtrWSPTs3U3GmbTrfws
-	 t0s8G+FpdvhTlXeLjMiThQujX5OfEYZ17IcBd8J4aDZy+lGtWkb8mE5uufDXuCBacE0FS
-	 6znUkPvsfAQuLwTtonYrimEQJhoeniFWJouT5FzX1RjxqvckFI9amLGaAZR8z06KRbTJ4
-	 Mb4hVUf/9temzAaOngR21Qe2cxDJlBJ5pzUM93VsglTUrVHyINSq3JOEyhScic9RGRw==
+	t=1794222285;
+	b=hTCC2GVhiNIUmiEt5IBMPuZUeLbGmxgKAF6zLdF1zOiJWId151cAV+P4WtLDKC4U9vVX
+	 tOF7gj9/MArbw82fkjhzHz8CHkVN8dmAzz8dqUsyHF4AhqWXtlmrUjEJ1RLLoerX3zHgo
+	 ibLEr1rkCUzEPWo+2V8fQZdPVEIp5dmJMXPNmY41Ge+W0nzUOl0Zq3EpeAyA9U2GaKPTx
+	 QZGQrEY6zh4HkAo15un8T/E8UU+QXo0uKFFu7Kht7mOimsAU+S1l101GNLWK9leGJ+BJQ
+	 A2Fvb8kgHnw5mKthiAA6wvgB6N6lW+RKEk015/sETiW7jrck+7owxkc12YQVhBLbWxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794221395;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
-	b=G5u8LTG7rFruL+w4ixPbs05EYksIdOHwsxlGEsed1WSeRjpEVyBVS7MwPSHhSxAEquL9
-	 Xbhclay6t/euQ37h3itPv4XA5db0AIuwctcJ5io0u3/3h3I3zJnZIFUOE95jD93ffpZAe
-	 WaTHaQzlTn6j64Dj9ESVMgnV8QtZsefK4JU8DG1a4Sd79smIN24VKw8JJVhx1WH1EmM6n
-	 SswoddxsFQsdzKU1CBSqNDtol/a74vMRpTAlAr0eD39s1Dd04mro9sDRm3GtHXMUJSB14
-	 Fk17EA1Z8shwmOA6OrKAz9ipV/Mg2JhC+DCUPEEf89X7TpWuq0ysA0TMap3YmP2cunQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794222285;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=E3Q0XoZIb01sk4wSPA3kiH5qJ30j+u8OBjPIKDQDvrI=;
+	b=EfN6/sMIvv6q5w2vCbHIGDM5GC8vaukhfYYs/SuG+4Lw5xrffDUjIf4P4p6uuFqWTVVr
+	 /aXxAyblFlXHRKDNhpH/RaAIw0kV9yGMjkGFtqw6FZ7CltqqNFTiofeGTENLlisleBREO
+	 kti2NagOutHYVjxSvUv43z9yRIp16ccVisST9o6bSV8TG8Q27PQ7ptRKPX+YAFM8HGBwv
+	 bVDoCwCQF6/pp0XriRxVvBF5YX7NztGLcN5iVHivc3P1F0XqRvyBKtOWfyNk5N3u7lX8y
+	 fywZ/Wfp/5bl3FHJdW8bC4/RoycB0kTRKlQVvlrkyk0CRnRVjGM2oOqR9gJR6AwA6Qw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wnXF0tQT;
-	arc=none smtp.remote-ip=209.85.215.169
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=bnvF1RCJ;
+	arc=none smtp.remote-ip=220.197.31.2
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D50F606A332
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 10:49:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D50F606A332
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DDA7606A31C;
+	Mon,  9 Nov 2026 11:04:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0DDA7606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wnXF0tQT
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cc4aa0246b7so194090a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 02:49:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794221395; x=1794826195; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
-        b=wnXF0tQTrt5OiyPRGod5jK2ZGyS+xr0U46+pQW7tSef6aLHlpVzejbvVbf2f2tsVwH
-         AfB3B9szQTSl3Qlaj4icROD2eJR2WQfJbtiD3E0BM+0OHEi8hbR63q5PZZV8qIdvn7dY
-         Nhv3wVd4XbJdeeMTtDTeeb+3KzghbqAnFH6H4wihhHS6y4tAe3ADFzmwl+tpRmqOXm8X
-         MqJEEI8xkiDjcmTikmUgNrJpiY4lnYn+WwdtrjhtK8MMS0EaRsr95Jf2u6atE6Mp+1AC
-         HocaQJ/Tc6bFm78RcKQgRPx4wUtkLTBT8ZGPS4wBBV7RslVEC5xO9V3rGERvfB6oZ8Ng
-         oNHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794221395; x=1794826195;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
-        b=xZI+FxfClgKbbH2goxPJA5zYmYagc1FaQIPjg/+ZFUZWeMbJDxdwttP3jFADD+es8l
-         sdg6wDvGzIALAW5j7SdUNXI5xhZUON8+nGlpq2D+Lw0e5nPKKyxAP5H0c+w5DJfAaPfl
-         rn96TePfnQCkCZrlcuhNlptiRftbTHbrUgFPXNdHI382C48Vj4te+JgjAzZqcD7asJeb
-         KX/+A6ZshL1nyRkr1Mb9+XHo13XiibKzqaVbZ+poU+cSMZPO14XJnkvW1kb69jiDbTus
-         Jj6NZeRtxoI2fggSBU3PxrpFbjce7u56n6EdZh6zDekHwnKGCQZyGMqeoPGbbnSsiRXk
-         VfFg==
-X-Forwarded-Encrypted: i=1; AL+hErGuO/P484Cx573nrXM+xcKw2vFoICeCje5P1iSP5dSQJfKh4W1XC9bsQXrKqloDix2KyXjo+jcyNqGZvwew@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Xlryu4h6G2oXghyjinilcrPUSHPGEii69crkTrsSQZWW3Uo0p
-	tZGs7tFNc0Qolz/LpkxiNiwNaB0D9B9glsBCvzlq6Ki2Pa+cPcPkKGc6
-X-Gm-Gg: AYBFou0sJoglIjccojWdU1ltoS4aXgvINSNpfD49/9wT1S6RonF280jh22wNFxctw2u
-	sC/OJCu8TE3rdUtq3ASLDpY3a/Bw8Yclgzw6QhKkW3b4AvUpAJ7fa4JyEh+gPaWK4GlPfO8NbzB
-	iv9APRwPu7zZxV9NNn2HOOYyqELiZz9xZXpRtWniEkP4Sg8EbH4au2dAidI8VGKD/5ckdj6Qf2p
-	N67NyHFTAghZ3pap1AmRvHXABXT8QhqDxictsKpjMNugMk0NIVKLoh4SDfPIOsSaOdT7nkLroEL
-	jTCYNbT6i4tjpIEKXGbW03h1Sq9Fnk/UkXqfE9rgW3NcBcKuu6uRUrBo1QD+HyKcmIVGiS3MnFr
-	w3kbPCkcx/qEg95eJLVDwN3/QdB3K7L/TKaL6nVVb19zws04rAx45qqU4D5E1QuY7osxp1JJHzz
-	sgLcnR4lAuxqSn7561DyLBJR1X9c+Om1aWQPvPPm3ZDzHxl+U5y+Dii3jAV4MaunwfHo0PeiN7F
-	bJcYEfOO0CEUxzBjfMBUbcpyB6v555XiOuKn9p3zgvNI7RWH9iNdijLZo8JaPNV65z9sAORuPX4
-	aJVPVNQIo2XU3Dt/nljjHCVdgnhNVv4tvmrm11JSZRaDiuZuhyplD6Kl/lul8tcI/5K+HC1COw5
-	UeWpiLEiiuevW3Vrlrcu5LssW4xsE8p/x39q6iPEMARrxYrKq4D7kt1+9zl7psuRxUzf+fxa9Wx
-	+la6cWc73v8h9k
-X-Received: by 2002:a17:902:ef10:b0:2df:e95f:70bb with SMTP id d9443c01a7336-2ed833ec899mr35607505ad.4.1794221394479;
-        Mon, 09 Nov 2026 02:49:54 -0800 (PST)
-Received: from rahuls-x2elite ([152.57.87.39])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed81739d6dsm8602685ad.66.2026.11.09.02.49.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2026 02:49:53 -0800 (PST)
-From: Rahul Pon <theflyingrahul@gmail.com>
-To: Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	platform-driver-x86@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=bnvF1RCJ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=E3
+	Q0XoZIb01sk4wSPA3kiH5qJ30j+u8OBjPIKDQDvrI=; b=bnvF1RCJYUqKimRrtn
+	qZVra1AgmCd+L1W/Cj1GIY8VCjwZzgOlLDlBXflu6mQebTffnSyzoXUcHJ+JhuOt
+	SGNqi7q129Br03QxdL9Xt0eJcZFZQLNWN3O045sulXAcwjOktk5WTkwCCCLaINj/
+	IXmpbTrvwHt26BaNcHwGD09Vg=
+Received: from localhost.localdomain (unknown [])
+	by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id _____wDnLyOpqPFq8SLEGg--.44457S2;
+	Mon, 09 Nov 2026 19:04:13 +0800 (CST)
+From: xing1989093@163.com
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+	mhi@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] platform: arm64: Add HP OmniBook 5 16 embedded controller driver
-Date: Mon,  9 Nov 2026 16:19:14 +0530
-Message-ID: <20261109104914.1534-3-theflyingrahul@gmail.com>
-X-Mailer: git-send-email 2.56.0.windows.4
-In-Reply-To: <20261109104914.1534-1-theflyingrahul@gmail.com>
-References: <20261109104914.1534-1-theflyingrahul@gmail.com>
+	linux-kernel@vger.kernel.org,
+	Hongxing Xu <xing1989093@163.com>
+Subject: [PATCH] bus: mhi: host: pci_generic: Add per-device ACPI reset
+Date: Mon,  9 Nov 2026 19:03:52 +0800
+Message-Id: <20261109110352.1621-1-xing1989093@163.com>
+X-Mailer: git-send-email 2.40.0.windows.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -109,546 +63,174 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wDnLyOpqPFq8SLEGg--.44457S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxuw1UWw1UXF1DCr48JF4xWFg_yoWxXFyDpF
+	s09FsxJrZ5Jry7Cr4DCw10kr15ZrsYv34UtrsrGw1jkwsxKryqqFZrKF15XF4UCrZ3Way5
+	ZF4fKryDWa1qyaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0piRwZ8UUUUU=
+X-CM-SenderInfo: 50lqwiqzyzimqt6rljoofrz/xtbC4A1sKWrxqK15mAAA3X
 
-The embedded controller of the HP OmniBook 5 16 (Snapdragon X2) sits on
-I2C at address 0x76 and takes commands through a mailbox: wait for an
-idle status (0xef), write the command and sub-command (0xed), wait for
-completion, then read the 32-byte reply (0xee). Its interrupt line
-signals events, read from register 0x00 and acknowledged by writing 0
-back, as HP's ACPI does.
+From: Hongxing Xu <xing1989093@163.com>
 
-Expose:
-- the fan speed and the four thermistors HP's thermal zones use, through
-  hwmon;
-- the two EC LEDs HP's mute LED WMI methods drive, as the mute and mic
-  mute LEDs;
-- the keyboard backlight timeout (30 s, 3 min or always on) and the
-  current backlight level as sysfs attributes; the EC runs the backlight
-  itself, and its backlight events notify the level attribute;
-- the F9 (mic mute) and F11 (programmable) hotkeys, which only the EC
-  reports, as input events, using HP's WMI key codes as hp-wmi maps them.
+Writing the MHI SOC_RESET register is a device internal soft reset: it
+only asks the modem to restart itself, so it is useless once the device
+has stopped servicing MHI. A platform level device reset (PLDR) power
+cycles the module at board level through an ACPI method instead and does
+not depend on any device state, which is why vendor drivers keep it as
+the reset of last resort.
 
-The command codes, event codes and reply formats are the ones HP's ACPI
-methods use on this laptop.
+The out-of-tree MediaTek PCI driver does exactly that. Add the same
+capability to mhi_pci_generic so that such boards can be supported
+without a vendor driver. The method name is board specific, MediaTek
+firmware uses the vendor scoped "MRST._RST" while others may expose the
+standard "_RST", so it comes from struct mhi_pci_dev_info rather than
+being fixed in the reset path. A NULL name keeps the generic SoC reset,
+the same way fw and edl express "not supported".
 
-Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
+pci_save_state()/pci_restore_state() are not used around the ACPI call
+because they clobber dev->saved_config_space, which mhi_pci_reset_done()
+needs; pci_reset_function() recurses back through reset_prepare();
+pci_dev_acpi_reset() is not exported to modules. The call is skipped
+when oops_in_progress is set, since acpi_evaluate_object() allocates
+memory and takes ACPICA locks; that leaves the panic path a no-op rather
+than a fallback, as a device needing this method cannot use the register
+write anyway.
+
+CONFIG_MHI_PCI_GENERIC does not depend on CONFIG_ACPI, so the path is
+compiled out on such builds.
+
+Signed-off-by: Hongxing Xu <xing1989093@163.com>
 ---
- .../ABI/testing/sysfs-driver-hp-omnibook-5-ec |  19 +
- MAINTAINERS                                   |   8 +
- drivers/platform/arm64/Kconfig                |  17 +
- drivers/platform/arm64/Makefile               |   1 +
- drivers/platform/arm64/hp-omnibook-5-ec.c     | 417 ++++++++++++++++++
- 5 files changed, 462 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
- create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
+ Documentation/ABI/stable/sysfs-bus-mhi |  4 ++
+ drivers/bus/mhi/host/pci_generic.c     | 66 ++++++++++++++++++++++++++
+ 2 files changed, 70 insertions(+)
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec b/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
-new file mode 100644
-index 0000000000..4c6f5cb20e
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
-@@ -0,0 +1,19 @@
-+What:		/sys/bus/i2c/devices/<bus>-0076/kbd_backlight_timeout
-+Date:		September 2026
-+KernelVersion:	7.4
-+Contact:	Rahul Pon <theflyingrahul@gmail.com>
-+Description:
-+		(RW) How long the keyboard backlight of the HP OmniBook 5 16
-+		stays on after the last key press, as the embedded controller
-+		applies it: "30s", "3min" or "always". The Fn key still turns
-+		the backlight on and off.
-+
-+What:		/sys/bus/i2c/devices/<bus>-0076/kbd_backlight_level
-+Date:		September 2026
-+KernelVersion:	7.4
-+Contact:	Rahul Pon <theflyingrahul@gmail.com>
-+Description:
-+		(RO) The keyboard backlight level of the HP OmniBook 5 16:
-+		0 (off), 1 or 2. Only the backlight key changes it, inside the
-+		embedded controller. The attribute is notified when the EC
-+		reports a change.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index aa647f5d37..d043a2f8f6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -12284,6 +12284,14 @@ L:	platform-driver-x86@vger.kernel.org
- S:	Orphan
- F:	drivers/platform/x86/hp/tc1100-wmi.c
+diff --git a/Documentation/ABI/stable/sysfs-bus-mhi b/Documentation/ABI/stable/sysfs-bus-mhi
+index 8b9698f..064bf6b 100644
+--- a/Documentation/ABI/stable/sysfs-bus-mhi
++++ b/Documentation/ABI/stable/sysfs-bus-mhi
+@@ -29,6 +29,10 @@ Description:	Initiates a SoC reset on the MHI controller.  A SoC reset is
+                 This can be useful as a method of recovery if the device is
+                 non-responsive, or as a means of loading new firmware as a
+                 system administration task.
++                Devices that advertise an ACPI reset method (for example the
++                MediaTek modems using "MRST._RST") are reset at board level
++                through that method instead, which power cycles the module
++                rather than asking it to restart itself.
  
-+HP OMNIBOOK 5 16 EMBEDDED CONTROLLER DRIVER
-+M:	Rahul Pon <theflyingrahul@gmail.com>
-+L:	platform-driver-x86@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
-+F:	Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
-+F:	drivers/platform/arm64/hp-omnibook-5-ec.c
-+
- HP WMI HARDWARE MONITOR DRIVER
- M:	James Seo <james@equiv.tech>
- L:	linux-hwmon@vger.kernel.org
-diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
-index 3f879410b3..2b34f5ab1b 100644
---- a/drivers/platform/arm64/Kconfig
-+++ b/drivers/platform/arm64/Kconfig
-@@ -48,6 +48,23 @@ config EC_ASUS_GLYMUR
- 	  temperature sensors readout, fan monitoring, keyboard and EC event
- 	  reporting.
+ What:           /sys/bus/mhi/devices/.../trigger_edl
+ Date:           April 2024
+diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
+index 7193a38..4e84e10 100644
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -8,12 +8,14 @@
+  * Copyright (C) 2020 Linaro Ltd <loic.poulain@linaro.org>
+  */
  
-+config EC_HP_OMNIBOOK5
-+	tristate "HP OmniBook 5 16 Embedded Controller driver"
-+	depends on ARCH_QCOM || COMPILE_TEST
-+	depends on I2C
-+	depends on HWMON
-+	depends on INPUT
-+	select INPUT_SPARSEKMAP
-+	select LEDS_CLASS
-+	select NEW_LEDS
-+	help
-+	  Driver for the Embedded Controller in the Snapdragon X2-based HP
-+	  OmniBook 5 16, which reports the fan speed, thermistor
-+	  temperatures and hotkeys, and drives the mute LEDs and the
-+	  keyboard backlight timeout.
-+
-+	  Say M or Y here to include this support.
-+
- config EC_HUAWEI_GAOKUN
- 	tristate "Huawei Matebook E Go Embedded Controller driver"
- 	depends on ARCH_QCOM || COMPILE_TEST
-diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
-index 3bc3d4669c..6c72726eae 100644
---- a/drivers/platform/arm64/Makefile
-+++ b/drivers/platform/arm64/Makefile
-@@ -7,6 +7,7 @@
++#include <linux/acpi.h>
+ #include <linux/delay.h>
+ #include <linux/device.h>
+ #include <linux/mhi.h>
+ #include <linux/module.h>
+ #include <linux/pci.h>
+ #include <linux/pm_runtime.h>
++#include <linux/printk.h>
+ #include <linux/timer.h>
+ #include <linux/workqueue.h>
  
- obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
- obj-$(CONFIG_EC_ASUS_GLYMUR) += asus-glymur-ec.o
-+obj-$(CONFIG_EC_HP_OMNIBOOK5)	+= hp-omnibook-5-ec.o
- obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
- obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
- obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
-diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
-new file mode 100644
-index 0000000000..bfe20e12aa
---- /dev/null
-+++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
-@@ -0,0 +1,417 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * HP OmniBook 5 16 (Snapdragon X2) embedded controller
-+ *
-+ * The EC takes commands through a mailbox: wait for an idle status, write
-+ * the command, wait for it to complete, then read the reply. Command codes
-+ * are the ones HP's ACPI tables use on this laptop.
-+ */
-+
-+#include <linux/cleanup.h>
-+#include <linux/delay.h>
-+#include <linux/hwmon.h>
-+#include <linux/i2c.h>
-+#include <linux/input.h>
-+#include <linux/input/sparse-keymap.h>
-+#include <linux/interrupt.h>
-+#include <linux/leds.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/string.h>
-+#include <linux/sysfs.h>
-+#include <linux/unaligned.h>
-+
-+/* The pending event, cleared by writing 0 (HP's IC10.INTR, field CMD5) */
-+#define HPEC_EVENT		0x00
-+#define HPEC_STATUS		0xef
-+#define HPEC_REQUEST		0xed
-+#define HPEC_REPLY		0xee
-+#define HPEC_REPLY_LEN		32
-+
-+#define HPEC_STATUS_IDLE	0x00
-+#define HPEC_STATUS_DONE	0xe0
-+#define HPEC_POLL_TRIES		20
-+#define HPEC_POLL_US		5000
-+
-+#define HPEC_OS_FLAG		0x01
-+#define HPEC_OS_FLAG_LEDS	0x84
-+#define HPEC_KBD		0x05
-+#define HPEC_KBD_TIMEOUT_GET	0xfe
-+#define HPEC_KBD_LEVEL_GET	0xff
-+#define HPEC_LED		0x06
-+#define HPEC_LED_GET		0xff
-+#define HPEC_LED_ON		0x80
-+#define HPEC_THERMISTOR		0x26
-+#define HPEC_THERMISTOR_INVALID	0xff
-+#define HPEC_FAN		0xbc
-+#define HPEC_FAN_RPM		0x03
-+
-+/* The four thermistors HP's thermal zones enable, in their order */
-+static const u8 hpec_thermistors[] = { 0x00, 0x07, 0x04, 0x0a };
-+
-+static const char * const hpec_thermistor_labels[] = {
-+	"EC thermistor 1", "EC thermistor 2", "EC thermistor 3", "EC thermistor 4",
-+};
-+
-+/* EC events, with HP's WMI hotkey codes from hp-wmi where they exist */
-+#define HPEC_EVENT_HOT		0x0b
-+#define HPEC_EVENT_KBD		0x0d
-+#define HPEC_EVENT_KBD_KEY	0x1d
-+
-+static const struct key_entry hpec_keymap[] = {
-+	{ KE_IGNORE, 0x0d, },			/* backlight key, run by the EC */
-+	{ KE_KEY, 0x11, { KEY_MICMUTE } },	/* F9, WMI 0x270 */
-+	{ KE_IGNORE, 0x1d, },			/* backlight key, run by the EC */
-+	{ KE_KEY, 0x1e, { KEY_PROG2 } },	/* F11, WMI 0x21a8 */
-+	{ KE_IGNORE, 0x30, },			/* fan and thermistor notices */
-+	{ KE_IGNORE, 0x31, },
-+	{ KE_IGNORE, 0x32, },
-+	{ KE_IGNORE, 0x33, },
-+	{ KE_IGNORE, 0x34, },
-+	{ KE_IGNORE, 0x35, },
-+	{ KE_IGNORE, 0x36, },
-+	{ KE_IGNORE, 0x37, },
-+	{ KE_IGNORE, 0x38, },
-+	{ KE_IGNORE, 0x88, },			/* Fn lock, WMI 0x21ab */
-+	{ KE_END, 0 }
-+};
-+
-+/* Keyboard backlight timeout, in EC value order */
-+static const char * const hpec_kbd_timeouts[] = { "30s", "3min", "always" };
-+
-+/* EC LEDs 8 and 9, which HP's mute LED WMI methods drive */
-+static const struct {
-+	const char *name;
-+	const char *trigger;
-+	u8 index;
-+} hpec_leds[] = {
-+	{ "platform::mute", "audio-mute", 0x08 },
-+	{ "platform::micmute", "audio-micmute", 0x09 },
-+};
-+
-+struct hpec;
-+
-+struct hpec_led {
-+	struct led_classdev cdev;
-+	struct hpec *ec;
-+	u8 index;
-+};
-+
-+struct hpec {
-+	struct i2c_client *client;
-+	struct mutex lock;	/* serializes mailbox commands */
-+	struct hpec_led leds[ARRAY_SIZE(hpec_leds)];
-+	struct input_dev *input;
-+};
-+
-+static int hpec_wait(struct hpec *ec, u8 status)
+@@ -39,6 +41,9 @@
+  * @fw: firmware path (if any)
+  * @edl: emergency download mode firmware path (if any)
+  * @edl_trigger: capable of triggering EDL mode in the device (if supported)
++ * @acpi_reset_method: name of the ACPI method that resets the
++ *		      device at board level, such as "MRST._RST".
++ *		      NULL when the device cannot be reset through ACPI.
+  * @bar_num: PCI base address register to use for MHI MMIO register space
+  * @dma_data_width: DMA transfer word size (32 or 64 bits)
+  * @vf_dma_data_width: DMA transfer word size for VF's (optional)
+@@ -55,6 +60,7 @@ struct mhi_pci_dev_info {
+ 	const char *fw;
+ 	const char *edl;
+ 	bool edl_trigger;
++	const char *acpi_reset_method;
+ 	unsigned int bar_num;
+ 	unsigned int dma_data_width;
+ 	unsigned int vf_dma_data_width;
+@@ -1111,6 +1117,7 @@ enum mhi_pci_device_status {
+ struct mhi_pci_device {
+ 	struct mhi_controller mhi_cntrl;
+ 	struct pci_saved_state *pci_state;
++	const char *acpi_reset_method;
+ 	struct work_struct recovery_work;
+ 	struct timer_list health_check_timer;
+ 	unsigned long status;
+@@ -1180,6 +1187,49 @@ static bool mhi_pci_is_alive(struct mhi_controller *mhi_cntrl)
+ 	return true;
+ }
+ 
++static inline struct mhi_pci_device *
++to_mhi_pci_device(struct mhi_controller *mhi_cntrl)
 +{
-+	int i, ret;
-+
-+	for (i = 0; i < HPEC_POLL_TRIES; i++) {
-+		ret = i2c_smbus_read_byte_data(ec->client, HPEC_STATUS);
-+		if (ret < 0)
-+			return ret;
-+		if (ret == status)
-+			return 0;
-+		fsleep(HPEC_POLL_US);
-+	}
-+
-+	return -ETIMEDOUT;
++	return container_of(mhi_cntrl, struct mhi_pci_device, mhi_cntrl);
 +}
 +
-+static int hpec_command(struct hpec *ec, u8 cmd, u8 sub, u8 reply[HPEC_REPLY_LEN])
++#ifdef CONFIG_ACPI
++static void mhi_pci_acpi_reset(struct mhi_controller *mhi_cntrl)
 +{
-+	u8 request[] = { cmd, sub };
-+	int ret;
-+
-+	guard(mutex)(&ec->lock);
-+
-+	ret = hpec_wait(ec, HPEC_STATUS_IDLE);
-+	if (ret)
-+		return ret;
-+
-+	ret = i2c_smbus_write_i2c_block_data(ec->client, HPEC_REQUEST,
-+					     sizeof(request), request);
-+	if (ret)
-+		return ret;
-+
-+	ret = hpec_wait(ec, HPEC_STATUS_DONE);
-+	if (ret || !reply)
-+		return ret;
-+
-+	ret = i2c_smbus_read_i2c_block_data(ec->client, HPEC_REPLY,
-+					    HPEC_REPLY_LEN, reply);
-+	if (ret < 0)
-+		return ret;
-+
-+	return ret == HPEC_REPLY_LEN ? 0 : -EIO;
-+}
-+
-+static int hpec_hwmon_read(struct device *dev, enum hwmon_sensor_types type,
-+			   u32 attr, int channel, long *val)
-+{
-+	struct hpec *ec = dev_get_drvdata(dev);
-+	u8 reply[HPEC_REPLY_LEN];
-+	int ret;
-+
-+	switch (type) {
-+	case hwmon_fan:
-+		ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
-+		if (ret)
-+			return ret;
-+		*val = get_unaligned_le16(reply);
-+		return 0;
-+	case hwmon_temp:
-+		ret = hpec_command(ec, HPEC_THERMISTOR, hpec_thermistors[channel], reply);
-+		if (ret)
-+			return ret;
-+		if (reply[0] == HPEC_THERMISTOR_INVALID)
-+			return -ENODATA;
-+		*val = reply[0] * 1000;
-+		return 0;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int hpec_hwmon_read_string(struct device *dev, enum hwmon_sensor_types type,
-+				  u32 attr, int channel, const char **str)
-+{
-+	if (type != hwmon_temp)
-+		return -EOPNOTSUPP;
-+
-+	*str = hpec_thermistor_labels[channel];
-+	return 0;
-+}
-+
-+static umode_t hpec_hwmon_is_visible(const void *data, enum hwmon_sensor_types type,
-+				     u32 attr, int channel)
-+{
-+	return 0444;
-+}
-+
-+static const struct hwmon_ops hpec_hwmon_ops = {
-+	.is_visible = hpec_hwmon_is_visible,
-+	.read = hpec_hwmon_read,
-+	.read_string = hpec_hwmon_read_string,
-+};
-+
-+static const struct hwmon_channel_info * const hpec_hwmon_info[] = {
-+	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
-+	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT),
-+	HWMON_CHANNEL_INFO(temp,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL),
-+	NULL
-+};
-+
-+static const struct hwmon_chip_info hpec_hwmon_chip = {
-+	.ops = &hpec_hwmon_ops,
-+	.info = hpec_hwmon_info,
-+};
-+
-+static enum led_brightness hpec_led_get(struct led_classdev *cdev)
-+{
-+	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
-+	u8 reply[HPEC_REPLY_LEN];
-+
-+	if (hpec_command(led->ec, HPEC_LED, HPEC_LED_GET, reply))
-+		return LED_OFF;
-+
-+	return (reply[1] >> (led->index - hpec_leds[0].index)) & 1;
-+}
-+
-+static int hpec_led_set(struct led_classdev *cdev, enum led_brightness value)
-+{
-+	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
-+	int ret;
-+
-+	/* As HP's method does before every change */
-+	ret = hpec_command(led->ec, HPEC_OS_FLAG, HPEC_OS_FLAG_LEDS, NULL);
-+	if (ret)
-+		return ret;
-+
-+	return hpec_command(led->ec, HPEC_LED,
-+			    led->index | (value ? HPEC_LED_ON : 0), NULL);
-+}
-+
-+static irqreturn_t hpec_irq(int irq, void *data)
-+{
-+	struct hpec *ec = data;
-+	struct device *dev = &ec->client->dev;
-+	int event;
-+
-+	scoped_guard(mutex, &ec->lock) {
-+		event = i2c_smbus_read_byte_data(ec->client, HPEC_EVENT);
-+		if (event < 0) {
-+			dev_err_ratelimited(dev, "cannot read EC event: %d\n", event);
-+			return IRQ_HANDLED;
-+		}
-+		i2c_smbus_write_byte_data(ec->client, HPEC_EVENT, 0);
-+	}
-+
-+	if (!event)
-+		return IRQ_HANDLED;
-+
-+	if (event == HPEC_EVENT_KBD || event == HPEC_EVENT_KBD_KEY)
-+		sysfs_notify(&dev->kobj, NULL, "kbd_backlight_level");
-+
-+	if (event == HPEC_EVENT_HOT) {
-+		dev_crit(dev, "EC reports a critical temperature\n");
-+		return IRQ_HANDLED;
-+	}
-+
-+	if (!sparse_keymap_report_event(ec->input, event, 1, true))
-+		dev_info_ratelimited(dev, "unknown EC event %#x\n", event);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static ssize_t kbd_backlight_timeout_show(struct device *dev,
-+					  struct device_attribute *attr, char *buf)
-+{
-+	struct hpec *ec = dev_get_drvdata(dev);
-+	u8 reply[HPEC_REPLY_LEN];
-+	int ret;
-+
-+	ret = hpec_command(ec, HPEC_KBD, HPEC_KBD_TIMEOUT_GET, reply);
-+	if (ret)
-+		return ret;
-+
-+	if (reply[0] >= ARRAY_SIZE(hpec_kbd_timeouts))
-+		return sysfs_emit(buf, "%#x\n", reply[0]);
-+
-+	return sysfs_emit(buf, "%s\n", hpec_kbd_timeouts[reply[0]]);
-+}
-+
-+static ssize_t kbd_backlight_timeout_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	struct hpec *ec = dev_get_drvdata(dev);
-+	int i, ret;
-+
-+	i = sysfs_match_string(hpec_kbd_timeouts, buf);
-+	if (i < 0)
-+		return i;
-+
-+	ret = hpec_command(ec, HPEC_KBD, i, NULL);
-+
-+	return ret ?: count;
-+}
-+static DEVICE_ATTR_RW(kbd_backlight_timeout);
-+
-+/* The level is set only by the backlight key, inside the EC */
-+static ssize_t kbd_backlight_level_show(struct device *dev,
-+					struct device_attribute *attr, char *buf)
-+{
-+	struct hpec *ec = dev_get_drvdata(dev);
-+	u8 reply[HPEC_REPLY_LEN];
-+	int ret;
-+
-+	ret = hpec_command(ec, HPEC_KBD, HPEC_KBD_LEVEL_GET, reply);
-+	if (ret)
-+		return ret;
-+
-+	return sysfs_emit(buf, "%u\n", reply[0]);
-+}
-+static DEVICE_ATTR_RO(kbd_backlight_level);
-+
-+static struct attribute *hpec_attrs[] = {
-+	&dev_attr_kbd_backlight_level.attr,
-+	&dev_attr_kbd_backlight_timeout.attr,
-+	NULL
-+};
-+ATTRIBUTE_GROUPS(hpec);
-+
-+static int hpec_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct device *hwmon;
-+	u8 reply[HPEC_REPLY_LEN];
-+	struct hpec *ec;
++	struct mhi_pci_device *mhi_pdev = to_mhi_pci_device(mhi_cntrl);
++	struct pci_dev *pdev = to_pci_dev(mhi_cntrl->cntrl_dev);
++	const char *method = mhi_pdev->acpi_reset_method;
++	acpi_handle handle = ACPI_HANDLE(&pdev->dev);
++	u32 saved[16];
++	acpi_status status;
 +	unsigned int i;
-+	int ret;
 +
-+	ec = devm_kzalloc(dev, sizeof(*ec), GFP_KERNEL);
-+	if (!ec)
-+		return -ENOMEM;
++	/*
++	 * acpi_evaluate_object() allocates memory and takes ACPICA locks,
++	 * neither of which is safe once a panic is underway. mhi_soc_reset()
++	 * is reachable from __mhi_download_rddm_in_panic().
++	 */
++	if (oops_in_progress)
++		return;
 +
-+	ec->client = client;
-+	i2c_set_clientdata(client, ec);
-+	ret = devm_mutex_init(dev, &ec->lock);
-+	if (ret)
-+		return ret;
++	for (i = 0; i < ARRAY_SIZE(saved); i++)
++		pci_read_config_dword(pdev, i * 4, &saved[i]);
 +
-+	ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "EC does not answer\n");
++	status = acpi_evaluate_object(handle, (char *)method, NULL, NULL);
++	if (ACPI_FAILURE(status))
++		dev_err(&pdev->dev, "failed to execute %s: %s\n", method,
++			acpi_format_exception(status));
 +
-+	ec->input = devm_input_allocate_device(dev);
-+	if (!ec->input)
-+		return -ENOMEM;
-+
-+	ec->input->name = "HP OmniBook 5 EC hotkeys";
-+	ec->input->phys = "hp-omnibook-5-ec/input0";
-+	ec->input->id.bustype = BUS_I2C;
-+
-+	ret = sparse_keymap_setup(ec->input, hpec_keymap, NULL);
-+	if (ret)
-+		return ret;
-+
-+	ret = input_register_device(ec->input);
-+	if (ret)
-+		return ret;
-+
-+	hwmon = devm_hwmon_device_register_with_info(dev, "hp_omnibook_ec", ec,
-+						     &hpec_hwmon_chip, NULL);
-+	if (IS_ERR(hwmon))
-+		return PTR_ERR(hwmon);
-+
-+	for (i = 0; i < ARRAY_SIZE(hpec_leds); i++) {
-+		struct hpec_led *led = &ec->leds[i];
-+
-+		led->ec = ec;
-+		led->index = hpec_leds[i].index;
-+		led->cdev.name = hpec_leds[i].name;
-+		led->cdev.default_trigger = hpec_leds[i].trigger;
-+		led->cdev.max_brightness = 1;
-+		led->cdev.brightness_get = hpec_led_get;
-+		led->cdev.brightness_set_blocking = hpec_led_set;
-+
-+		ret = devm_led_classdev_register(dev, &led->cdev);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	if (client->irq > 0) {
-+		ret = devm_request_threaded_irq(dev, client->irq, NULL, hpec_irq,
-+						IRQF_ONESHOT, "hp-omnibook-5-ec", ec);
-+		if (ret)
-+			return dev_err_probe(dev, ret, "cannot request the EC interrupt\n");
-+	}
-+
-+	return 0;
++	for (i = 0; i < ARRAY_SIZE(saved); i++)
++		pci_write_config_dword(pdev, i * 4, saved[i]);
 +}
++#endif
 +
-+static const struct of_device_id hpec_of_match[] = {
-+	{ .compatible = "hp,omnibook-5-16-bf1xxx-ec" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, hpec_of_match);
+ static int mhi_pci_claim(struct mhi_controller *mhi_cntrl,
+ 			 unsigned int bar_num, u64 dma_mask)
+ {
+@@ -1435,6 +1485,22 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 	if (info->edl_trigger)
+ 		mhi_cntrl->edl_trigger = mhi_pci_generic_edl_trigger;
+ 
++#ifdef CONFIG_ACPI
++	if (info->acpi_reset_method) {
++		acpi_handle handle = ACPI_HANDLE(&pdev->dev);
 +
-+static struct i2c_driver hpec_driver = {
-+	.driver = {
-+		.name = "hp-omnibook-5-ec",
-+		.of_match_table = hpec_of_match,
-+		.dev_groups = hpec_groups,
-+	},
-+	.probe = hpec_probe,
-+};
-+module_i2c_driver(hpec_driver);
++		if (handle &&
++		    acpi_has_method(handle, (char *)info->acpi_reset_method)) {
++			mhi_pdev->acpi_reset_method = info->acpi_reset_method;
++			mhi_cntrl->reset = mhi_pci_acpi_reset;
++		} else {
++			dev_warn(&pdev->dev,
++				 "ACPI %s not found, keeping SoC reset\n",
++				 info->acpi_reset_method);
++		}
++	}
++#endif
 +
-+MODULE_DESCRIPTION("HP OmniBook 5 16 embedded controller");
-+MODULE_LICENSE("GPL");
--- 
-2.53.0
+ 	if (info->sideband_wake) {
+ 		mhi_cntrl->wake_get = mhi_pci_wake_get_nop;
+ 		mhi_cntrl->wake_put = mhi_pci_wake_put_nop;
 
