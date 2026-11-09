@@ -1,67 +1,64 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794226840;
-	b=BBEhXd3t5NdQDjtQYxI+uWrF4LDXXAnCk3IzUaVeh56sDdCnsVjlGobioys5f1zhq6tf
-	 J5rUQZeGtIQkrbzHF4HeAZduD2hS4o4o0Ama+q6BPdu1lziULKA6A+pXFx7dunS4uX5hA
-	 H3Q/qR1dCTytBsCrT83ZS9lDL8G0dIzZMaUp1V3ZYX743DiZy6EUvkk+wV8pYQLqBKNUP
-	 yHzPG8/BOb1J0lat5jdmbCTWfOA6rZF7T7yxdwb1ofRcYw+oCXVltKL5MkQHP9cHSRHyq
-	 qsVe8BE3Eg3+3WcXxbs03+uAbEXKixyc1XcP5MOCPI3/sDU4wSB7+q3enW58MZXJh6Q==
+	t=1794227150;
+	b=mG9tUXyHv8pbdAxLilKn1MvZR/+BLbjyfCxXiXpOmLvGB/VtNYRd982UzF5/kyPn0mz8
+	 9UncFzQS4aZQJXhK5y+6xg3fx/fmsenuVHQBFhcaU5eeXV87H0+9CdUsHNQjfCaAaAytL
+	 VblZGSfnM8DY8dFlggQNimULAz3QvvrLzv+eHNh4EX5yNQYqNCUqtngEbPUY79vMrH70J
+	 Cn9OsddT+x/W0ZWBJNpHBxPXRbiHicSHdicmm9lCIcHLQXTQywW0K9ahzrQR9XksduHKa
+	 K2Z5xFKjZa3S2s1cAa7JIwiIe+lkwwZfXJAaLjTK/UP56MyAgZvzbl+65fvFrid0Qcw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794226840;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=ze+YCmI59m/yVO+iXLz5VO5YTj0KOc9jwUZZU33amMs=;
-	b=dMdoqLb2UJiE/aKSzpvoMMRPmD8AGjUQ/nH2vaHA4k1jIrhmhNAH6tK2YVefzQZDyVDb
-	 5YOu6umxzaG+QUFPsnSE9W+NzbYUp+fVykN1E7bwwHIXTEDKA8A8alwsrC5F+OAZyIkvQ
-	 05ALo1K9FnobvVdRPH+B71eFqyUTI/N36RcBVFHRpv0LWxy5aPr3KxztdF324DLqKdtba
-	 38TNuPLxraHNCZQlAStXD7DCxtmogaNvbnR9ZGGApFpJi/7BSbjPJvVjBCZyLOFAwFnCS
-	 1kdoGCZPrWFM1pt5hdzwNFbA3rowR3WpMs8fbF8BlnE1Br7TUtNh3VLPH3YiCRkIpBw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794227150;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=kJd4B1A71W2bSqOCg/3CIRE8x+hOqrAAX5uwcrZn7QQ=;
+	b=1zJN3Src7pRsS+5yqfRLTJt+92p7oQeTf6vBvldJRx0BvHwt3CfuJlRxV9WWne2duudG
+	 y4ncZfVyDnN9sm72yBWYzyhoY5+3t8MUIwB7cnDem17Gcqee0E7AlaaKGoGGIRwcWSP9a
+	 6NWvAz4wwX9iPJE8UAmluv61OZzd238gK/QkqZUuKAPtiFawLHZEQ6/UQVEatzoZJ0M7R
+	 g1nV4TJx4VvozVF7nuGoHZApPOZbiY7RGwjwrdd8hArSNAzuOY/Hmj2VCnXc2rTv59Lxw
+	 r7hx9jygz5/occHa8ajZHEMmPQYrS8co+huu3aUf9pHccL2a3KU1Mukb5PJHKRM2vmQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CtYcHYNK;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Uf9DlNmb;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24B20606A325;
-	Mon,  9 Nov 2026 12:20:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD8B2606A31C;
+	Mon,  9 Nov 2026 12:25:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CtYcHYNK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CA4F1F008A3;
-	Mon,  9 Nov 2026 12:20:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Uf9DlNmb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B06D1F0089F;
+	Mon,  9 Nov 2026 12:25:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794226839;
-	bh=ze+YCmI59m/yVO+iXLz5VO5YTj0KOc9jwUZZU33amMs=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=CtYcHYNKlbOAZIWjhtvy1EYM1Zsqq14b2LPf+B0uyB7LyHOKI8xFt5D52a6RiEwZM
-	 2jtkN0lya9J/RpPnmQ7d/9jdwsmOOQeEdFubViJQRzkqbDfftBwkYwdP/Ki+xkXJQL
-	 Q/pNN7Hs8W5PuWjAOzi3g+1xrVeJAWEyLx2w/9ONXawi5IZ41fZFsXMD6e6Josu6NH
-	 vb+QwpDLf414qKb+tP8PbMU3S7gCgI/VvxeIf6p+wkbLXLGWly9/Rwwd5O1zerZnlw
-	 5f9AYB6rq7hTPDrBjaeBUI39cY1FEWG87ZgAbOuP0HVliOPVr+dhu0q3i1U35GfvJl
-	 Vhlwcyi4LAuJA==
-From: Srinivas Kandagatla <srini@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Cc: Bharath Kumar <quic_bkumar@quicinc.com>, 
- Chenna Kesava Raju <quic_chennak@quicinc.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, 
- Mahima Bhattaram <mbhattar@qti.qualcomm.com>, 
- Pankaj Patil <pankaj.patil@oss.qualcomm.com>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>
-In-Reply-To: <20261016-glymur-dtfix-v5-0-f56a8b94b4a9@oss.qualcomm.com>
-References: <20261016-glymur-dtfix-v5-0-f56a8b94b4a9@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v5 0/2] arm64: dts: qcom: glymur: Fix fastrpc
- compute-cb reg values for cdsp
-Message-Id: <179422683634.26830.384008413177707013.b4-ty@kernel.org>
-Date: Mon, 09 Nov 2026 12:20:36 +0000
+	s=k20260515; t=1794227149;
+	bh=kJd4B1A71W2bSqOCg/3CIRE8x+hOqrAAX5uwcrZn7QQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Uf9DlNmbCl8RMTTpddNJvNO7YQMROzGH+LVeheLO68qBfeJHcBYhYIMCKqThRPV3I
+	 rttP5neahB9OHInWTbnHStnMUQns2Mny7pi8RyP/l6JWNP5MlZUUSAEK/80Xgk+Mnh
+	 j3lSjgFyxJf+wf3jz4xScwJtzzRxizVlhERzAM7xZLGTlRmFpwzdEJ5VJL9437BSNR
+	 z6bHq9d8hTdqrS9bqvZEH7AxycHFT+4Wrci9zuVT6Ct4RrQInuLVVZIKwpTavbZTtG
+	 hY6+lvSDF5KvsvZQecajA/OPzqP9TVfgxM5e+MywztijnCAdhtttUo2tyG+F+wodMm
+	 E0kJ3SM/guAZA==
+Date: Mon, 9 Nov 2026 13:25:45 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Krishna Manikandan <quic_mkrishn@quicinc.com>, 
+	Abel Vesa <abelvesa@kernel.org>, Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Joonhoe Kim <26rote@gmail.com>
+Subject: Re: [PATCH v5 1/3] dt-bindings: display: msm: Add INT2 GDSC to
+ Kaanapali DPU
+Message-ID: <20261109-mammoth-of-delightful-potency-b1ede2@quoll>
+References: <20261109-msm_gdsc2-v5-0-4a3159b5e4b8@oss.qualcomm.com>
+ <20261109-msm_gdsc2-v5-1-4a3159b5e4b8@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,30 +68,274 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261109-msm_gdsc2-v5-1-4a3159b5e4b8@oss.qualcomm.com>
 
-
-On Fri, 16 Oct 2026 12:06:45 +0530, Ekansh Gupta wrote:
-> The reg value of a compute-cb node must match the SID (the lower nibble
-> of its IOMMU stream ID) it is associated with. In the cdsp fastrpc node
-> of the Glymur SoC, three compute-cb nodes had incorrect reg values that
-> did not match their SIDs, leading to SMMU translation errors.
+On Mon, Nov 09, 2026 at 04:36:35PM +0800, Yongxing Mou wrote:
+> Kaanapali (SM8850) has two display GDSCs. CORE_GDSC supplies shared
+> MDSS hardware and most of the DPU, while INT2 GDSC supplies the
+> VIG2/VIG3/DMA5 source pipes. Without INT2 GDSC, these source pipes
+> remain inaccessible.
 > 
-> The fix renames the nodes to use correct lowercase hex unit addresses
-> (per DTS convention) and corrects the reg values. Since the fastrpc
-> binding's patternProperties only allowed decimal digits in node names,
-> a binding update is included first to allow hex digits.
+> Describe CORE and INT2 as power domains of the DPU device, matching
+> the hardware partitioning. INT2 only supplies DPU-local source pipes,
+> while CORE also remains attached to the parent MDSS device because it
+> supplies shared MDSS hardware. DPU performance-state votes on CORE are
+> propagated through the genpd hierarchy to its parent MMCX domain.
 > 
-> [...]
+> Keep the widest valid power-domain constraint in dpu-common.yaml and
+> narrow it in each platform-specific binding. Require two domains and
+> their names for Kaanapali, while retaining the existing single-domain
+> constraint for all other DPU platforms.
+> 
+> Repeat power-domains in qcom,sm8650-dpu.yaml because dtschema requires
+> power-domain-names to have a power-domains sibling in the same file.
+> 
+> Tested-by: Joonhoe Kim <26rote@gmail.com>
 
-Applied, thanks!
+Drop
 
-[1/2] dt-bindings: misc: qcom,fastrpc: Allow hex digits in compute-cb node names
-      commit: 05c781dfb322b07d803fedc18b752e7ae2bbdc4b
+Anyway, where did it happen? Nothing in v4, nothing in v3.
+
+
+> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+> ---
+>  .../bindings/display/msm/dpu-common.yaml           |  3 +-
+>  .../bindings/display/msm/qcom,kaanapali-mdss.yaml  |  4 ++-
+>  .../bindings/display/msm/qcom,msm8998-dpu.yaml     |  3 ++
+>  .../bindings/display/msm/qcom,qcm2290-dpu.yaml     |  3 ++
+>  .../bindings/display/msm/qcom,sc7180-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sc7280-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sc8180x-dpu.yaml     |  3 ++
+>  .../bindings/display/msm/qcom,sdm845-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sm6115-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sm6150-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sm7150-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sm8150-dpu.yaml      |  3 ++
+>  .../bindings/display/msm/qcom,sm8650-dpu.yaml      | 34 ++++++++++++++++++++++
+>  13 files changed, 69 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/display/msm/dpu-common.yaml b/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+> index 3f953aa5e6949..c67199011f263 100644
+> --- a/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+> @@ -26,7 +26,8 @@ properties:
+>      maxItems: 1
+>  
+>    power-domains:
+> -    maxItems: 1
+> +    minItems: 1
+> +    maxItems: 2
+>  
+>    operating-points-v2: true
+>    opp-table:
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+> index 9f935defd6b12..6d6391970d6b6 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+> @@ -125,7 +125,9 @@ examples:
+>  
+>              operating-points-v2 = <&mdp_opp_table>;
+>  
+> -            power-domains = <&rpmhpd RPMHPD_MMCX>;
+> +            power-domains = <&mdss_gdsc>,
+> +                            <&mdss_int2_gdsc>;
+> +            power-domain-names = "core", "int2";
+>  
+>              ports {
+>                  #address-cells = <1>;
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+> index d5a64c8a921f1..bded43a34b87d 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+> @@ -15,6 +15,9 @@ properties:
+>    compatible:
+>      const: qcom,msm8998-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+> index 034d3df8d2470..6c1476a0faaf5 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+> @@ -19,6 +19,9 @@ properties:
+>            - const: qcom,shikra-dpu
+>            - const: qcom,qcm2290-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+> index 8137618237ce7..3fa0f02f44892 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+> @@ -19,6 +19,9 @@ properties:
+>        - qcom,sm6350-dpu
+>        - qcom,sm6375-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+> index df9ec15ad6c3c..7703d9b017cfc 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+> @@ -24,6 +24,9 @@ properties:
+>        - qcom,sm8450-dpu
+>        - qcom,sm8550-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+> index a411126708b80..8e10f9e0d1769 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+> @@ -15,6 +15,9 @@ properties:
+>    compatible:
+>      const: qcom,sc8180x-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+> index dc11fd421a27f..9dafe1d827e13 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+> @@ -17,6 +17,9 @@ properties:
+>        - qcom,sdm670-dpu
+>        - qcom,sdm845-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+> index 510eb6c193649..173c2f034241c 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+> @@ -15,6 +15,9 @@ properties:
+>    compatible:
+>      const: qcom,sm6115-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: MDP register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+> index 8cbf99f9fcba5..b8344ff8895ac 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+> @@ -16,6 +16,9 @@ properties:
+>    compatible:
+>      const: qcom,sm6150-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+> index c79b2d4428003..8e50942f3e1f2 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+> @@ -15,6 +15,9 @@ properties:
+>    compatible:
+>      const: qcom,sm7150-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+> index a88d22f30a602..b407bc3994620 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+> @@ -17,6 +17,9 @@ properties:
+>        - qcom,sm8150-dpu
+>        - qcom,sm8250-dpu
+>  
+> +  power-domains:
+> +    maxItems: 1
+> +
+>    reg:
+>      items:
+>        - description: Address offset and size for mdp register set
+> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+> index aa0cf0ec5b93f..c3bf4e7ca1ffe 100644
+> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+> @@ -54,6 +54,15 @@ properties:
+>        - const: core
+>        - const: vsync
+>  
+> +  power-domains:
+> +    minItems: 1
+> +    maxItems: 2
+> +
+> +  power-domain-names:
+> +    items:
+> +      - const: core
+> +      - const: int2
+> +
+>  required:
+>    - compatible
+>    - reg
+> @@ -61,6 +70,31 @@ required:
+>    - clocks
+>    - clock-names
+>  
+> +allOf:
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          contains:
+> +            const: qcom,kaanapali-dpu
+> +      required:
+> +        - compatible
+
+Droo required
+
+> +    then:
+> +      properties:
+> +        power-domains:
+> +          minItems: 2
+> +
+> +        power-domain-names:
+> +          minItems: 2
+
+How did you resolve my previous comment?
+
+> +
+> +      required:
+> +        - power-domain-names
+
+Why adding this?
 
 Best regards,
--- 
-Srinivas Kandagatla <srini@kernel.org>
+Krzysztof
 
