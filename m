@@ -1,63 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.16
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794253429;
-	b=Lzdwr0UHPHroE2uuEAqF7giCPqbSELMeiR/yyeIiX5JObU4NW6/uzvZWfeePhauLowLH
-	 oGwH4SQJb8XqQIyP8EVJAE2hYZj4SLgReolsDe63iqqel5GONRp1F2MAEm9+fNcrRCIEw
-	 /III/Qgm9kgJiCazPZ5EPDenOGQm8ckBpHmHGMsz4MbPoISn83Nc9wua314XqXPT0LLs6
-	 KAtSqXim/mWJ/Ggl/T4Ky/p3azE5kj4JN3FCXjO4kBpnaMML4SeIhBUTQP/Bwo2OASXfz
-	 LwiR2YfWweAXDXA69AxfmAS+//TjdTmxz/4QoV5HJysQb8pwHlVJp3frPhgAg56NXRQ==
+	t=1794256985;
+	b=cMrOxv3rxrDEz2ENUR6AU8LKHyllHXA9xmDpwE6rOfoDh8DTl3hEhOlA7Wiof8jpKnin
+	 9wUH7Hz5okc2FRnBmZxTgRs8h+3qr1uNTzzDtrDxKXYcWS+FXdh7PBcPsEon/nRMJ/Oz6
+	 DlN8beusRYXtcN8nieZwF2NGLeV6dTQeSOUXwWwC/JzrAWpuJL4khxF9ThiIRkpEAZKBs
+	 lHGqXwbzT/uysLtlpf1JOs0P/6NWOq6UKbgNfAyZoAPfyp0wW3NYt1C8pLQ4OliQLEn65
+	 17HkhhfTa854IyF/8OOxvlowe8Xjg5YJ3hc71qxuxpFH4H8elxbaH5bhdhPAvzv4CrA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794253429;
-	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
-	 Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=GiiCdlrkEsadT5b1EEALLJgkBNkzhktjT2LeWox5L6w=;
-	b=NJXBq1x1Q+gGWBjm00Us5yEHzsoPfXV5S+1b1RMu9SakORRBZQn7d/wvXT1q/oQ8+VF1
-	 4OAOXIe4w7zg8chYffQ7BJrkXz4OsQ+Z9plpH8neUEGn+/B2LVTOkTTK5s9V3thEZ2YCY
-	 elpInxbT1m7LyyzhkZ0idec14tkiJSzAThy1goPaCVi5+OF3CBf1J9p0N04wpjj7WOj6Y
-	 IkFd65Fd4cb7TZ9QMgDq5jRe97SaLqe6tP6aCbw8dI8yuEkfMhG1HeQ+xv3BRmlY83eou
-	 +LPo0THCo4U/yjMX9X5Go5ZnT+mDiCodosL2PbUEvSl6l8Kf9rvliajg1IcfJBqWtZQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794256985;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=GM5RY81tK12IzXW4FZLzBT6HLn10WhpijMYtwZrR/Vo=;
+	b=0ASNXcwB4QLkZo8ObhQeW/kAfGdrMepJ7UQLpE8zP75HDdpHx9m9sq8CS3kah+qAYfBc
+	 qNAhmdBwywUNQEbIO/fQntg/1mewQLS53aDf93U4iagANqESBRnMOl57YLemNMBNtYdJU
+	 K7urKYsEV053kwhk8wEvYxZOZDQZ8/JIc+C4AgG0fzk5t0n+tmG9/rB/aojgavgDfMrJp
+	 bYGr8BHyW/XWbQGX+SOyMk4ZzDMAQhjSX3/pKzHf3iaTTNTZo6Bce51X8eDLw7lUrH5yw
+	 XsmMRm4hAUbOtNffmyabdSWzmlDzBfY2y+NABTIbYlAY60pQhHE82e/+AwrAO7XKW/w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HswYtFnl;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=BWBxKK4q;
+	arc=none smtp.remote-ip=185.70.43.16
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBED8606A321;
-	Mon,  9 Nov 2026 19:43:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA82D606A321
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 20:43:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA82D606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HswYtFnl
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 385BD1F008A1;
-	Mon,  9 Nov 2026 19:43:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794253428;
-	bh=GiiCdlrkEsadT5b1EEALLJgkBNkzhktjT2LeWox5L6w=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=HswYtFnlC2cFgEP+oUi2EdGObVoL1SjVfNscGxA1TgECdEGVUcOw9nV/YZTbMqyoI
-	 Yzt8b38ijHkNVCrFB+P0jQOQzM4AaARYcE5j/0krnLdDNiiaTQ6xbYZp0K2hc3o8b0
-	 j3wnDf8OrrP+1vONQfdNT7WUvTDDImqQOpUq8LQQAkYIUssOY8GbvD2EN3QjPcn4c7
-	 eiL8qoFqdX0ra2UrsyF2Sr8KKOANX9EBQfOTsWGPTWj9S5mCsE49vAQizCYLuE208B
-	 sbeLW2AqWWnb61GKC4Wp9+01X0ReACjD8xZzPrz/9imYV1NaxFOCFyN/sZ4iG1ogeZ
-	 c2wqzSOLPDW3w==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id 453602FC6BDA;
-	Mon, 09 Nov 2026 19:43:00 +0000 (GMT)
-From: Mark Brown <broonie@kernel.org>
-To: Liam Girdwood <lgirdwood@gmail.com>, 
- Tyler Baker <tyler.baker@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, 
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>, 
- =?utf-8?q?Martin_Povi=C5=A1er?= <povik+lin@cutebit.org>, 
- Krzysztof Kozlowski <krzk@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20261106054333.2748248-1-tyler.baker@oss.qualcomm.com>
-References: <20261106054333.2748248-1-tyler.baker@oss.qualcomm.com>
-Subject: Re: [PATCH 0/2] ASoC: fix the x1e80100 card after an ADSP restart
-Message-Id: <179422760307.3711751.5465611340806386159.b4-ty@b4>
-Date: Mon, 09 Nov 2026 12:33:23 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=BWBxKK4q
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1794256982; x=1794516182;
+	bh=GM5RY81tK12IzXW4FZLzBT6HLn10WhpijMYtwZrR/Vo=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=BWBxKK4qbVxZ7QRS+kBfPR37Sluakf9Fz6gnMv1QMfYehhdLAvU45A9u+9yMfM5lO
+	 hl8TuWx97Tc49nIQ4JatZmQfA6/wNOnagHXJgv+x7GW3hKIhJgtYmBdOwPVWVgBnUy
+	 uRqrWLkM2BLXdigfNtGp3N4LaE/KwdTfaeHVhD143/W36Q36Qvag1PsxES1ChzBjiJ
+	 3vqhlo0WEwyfGw76aV1Nc8pEtg2b/FKcc3bFYmU3t7rULE2Ku4PqkNX3/ZkUNGg+MJ
+	 E7/omH4E2WocMEJqIyAula1Zuj0F9+nUIF/fDqitJcGRZvAjbH/qHVQ9/nSkksZO4n
+	 vYMOrKnK89AFA==
+Date: Mon, 09 Nov 2026 20:42:57 +0000
+To: Konrad Dybcio <konradybcio@kernel.org>
+From: Alexander Koskovich <akoskovich@pm.me>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH] soc: qcom: socinfo: Add missing PMIC identifiers
+Message-ID: <qcxc7XsXmVOXMH3T-UIFGOexo2Qh1KtJspYZ15UrL2Tu_Jg6Uq6-PfJYTlJoipYPZnMnpNXN6wbs6pnJkkLTiQf4O9uOnp-NLJc-13wxigI=@pm.me>
+In-Reply-To: <20261109-topic-socinfo_pmics-v1-1-ecdb6cc6e40f@oss.qualcomm.com>
+References: <20261109-topic-socinfo_pmics-v1-1-ecdb6cc6e40f@oss.qualcomm.com>
+Feedback-ID: 37836894:user:proton
+X-Pm-Message-ID: 9fb916162189a8de3474dd64c23fe8cc93c2ea41
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,56 +64,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1611; i=broonie@kernel.org;
- h=from:subject:message-id; bh=1VINJaUZ4ngpMAC5A6UaEXNuVO47g2rYK3BqBR5Y9mM=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI+KblcDbap2bDvcf7vbRuFG9/U2dy6eWj3p7shQg2ad
- hMNLk/J7ihlYRDjYpAVU2SJy+J+WV/yeg3fwYVtMHNYmUCGMHBxCsBNVmD4X7NN/sr1Uw1PbJO3
- PPb4/3e1/nlhzZ32ERc2M/3S/BzCmMnI8CnF41v7vc5tIXLaYjmyf10mXT5iWnzYzXLV6aMdu+4
- 95QIA
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 06 Nov 2026 00:43:31 -0500, Tyler Baker wrote:
-> ASoC: fix the x1e80100 card after an ADSP restart
-> 
-> On Qualcomm boards an ADSP restart unbinds and rebinds the LPASS pin
-> controller, the SoundWire controllers and the codecs, and the card binds
-> again once they are back. On the Hamoa IoT EVK two things break on that
-> path: the DAI link names point at the SoundWire controllers' freed
-> strings, and the headset jack is never recreated.
-> 
-> [...]
+On Monday, November 9th, 2026 at 10:39 AM, Konrad Dybcio <konradybcio@kerne=
+l.org> wrote:
 
-Applied to
+> diff --git a/drivers/soc/qcom/socinfo.c b/drivers/soc/qcom/socinfo.c
+> index 38efc5db7fa8..6ed8a4686e2b 100644
+> --- a/drivers/soc/qcom/socinfo.c
+> +++ b/drivers/soc/qcom/socinfo.c
+> @@ -154,15 +154,22 @@ static const char *const pmic_models[] =3D {
+...
+> +=09/* 68 is unknown/reserved */
+> +=09[69] =3D "PM8550VS",
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
+Duplicate?
 
-Thanks!
-
-[1/2] ASoC: soc-core: copy the DAI link names into the card
-      https://git.kernel.org/broonie/sound/c/33a130f6ed8c
-[2/2] ASoC: qcom: x1e80100: recreate the headset jack on card rebind
-      https://git.kernel.org/broonie/sound/c/704251f9dad3
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
+>  =09[69] =3D "PM8550VS",
+>  =09[70] =3D "PM8550VE",
+>  =09[71] =3D "PM8550B",
+>  =09[72] =3D "PMR735D",
+>  =09[73] =3D "PM8550",
+>  =09[74] =3D "PMK8550",
 
 Thanks,
-Mark
+Alex
 
