@@ -1,63 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794221066;
-	b=yvls/31K5KKYg9zvzRR2ov2ZKwraze6XoQtct5UV6nhSh9QZu3uGKvgSsNGnczIsOIvI
-	 j+aDyo6XqwbC6NvdU89HodALEklIjbmqGLro2voj75uE/2aJf6DEiOOQtrSRo7pMrXhOh
-	 XtmNSLua2y9qbNQ3teWqxhz9y79COsDG+FhNbPsYgLgqQmUFUDuT7mjWYHh6ZIKqBXsFX
-	 hgsAr+932RAsP2eHY1u6dwXqnxIQevmsvicTCwLsphKiHEoFFNt7DEYd+cEzi9Vw9CQL6
-	 0AiuiNrojiKg8C5Y20Yh2jyFFsqlPw4CX7Pd5BnHT1UpXM1oWjdsqqMzMoA9817ESPw==
+	t=1794221211;
+	b=3pz+6GAqHJ8E+0k+PdXB3xp36Gfzyk9wMVXdjR1MwVCf8by4Cl011CAC8Ergkn8gHHg2
+	 nDxOOZvSBs9uvgxjjZXcgV/e6TTebiBFTURx/FfOT0X+05HwqenQjOiSFFbyCLo9eEBFm
+	 QnqcIU+CDqaTNkSFQvZoJ1VrBl9C73Gg6ZIJBDob+fxN1ISxK2go4ymT9b+Xl0OC3NUvx
+	 SgK2w1T3SVZViqWun+UO5+XmjnMEXDYx3P0MfkqMW8l2vBwsQgf+5ysJDX/Fa8sfnJcW4
+	 LQ16UmjDILZAzra8vy+fDh/5Og7UzNg+1dePc2i/+8shco+1qt5/WdHlc2hhZnW42Rg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794221066;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=TXr2TKEYrIDqnyQ+02ZfHnpl8vf7msiDB6kAkQN1rZM=;
-	b=YbAVNSbzV1Q0G6YrutAEgs/EmYlf6QrVaqPDBh12Y9NmLhs7t2vYVnhwLOMzPVJn1F6u
-	 e4wTYf/jj/MAfRJvEoLP3d9Y1p0A8cYn98vxrXYUfg/95V6A9JljgG3lnotScOyjOjgkn
-	 4+Bqo9+JbjWnbs9AEtqlGqDYWdBpsSwIWKWkgMuSuv3BDCO/cfmMcWf77TeemzruzDql5
-	 Lgx9Dxq0a5gvH7UfMCULgW+f8SZx2r5KjbMQX32fxbF7OP/mFvP1Cid30uWveYLKgejSG
-	 EcQZOGRIXKTaYp00lKDK95qhGF9pmDHiy7h1KhLrMX4u0FJOdKHns/dMpV84VpiNeDQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794221211;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=wgmYZSso3S5s7ntmVXft5Hjp1pkxoHbFdmgMj87YoCY=;
+	b=cHCsMAN2MFkqqD/N2me+2DyhZSwpPv25IPXNEnpaF8QOhaPkaC4B1IxzmTaitWX1euVY
+	 nOnXIMhaCyqTRc/6EbN7bC3GFjr1Czb0XAMgxcgMZPS5QwaKEwf0uTS/xoaNgmuVGU/6u
+	 C827J8pNQcQoprkB83r6NvlzkJPFCR25uys9F/xppScv4d1RYOS6UqDRr1duUkM0vyFeu
+	 YmgXU7BXIcBYjz8XbyGaODWCqZNeiU0/hUuF7TeWZbeqLpmB3dzplPAmhAqof3KtuLQrt
+	 uFl5e7FktQT9Ao+pD40D5vxGkaIMi11K+/pSc2ciASZ7tfdbHHgNVeradwZqab93/Kw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mfOpr55J;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90F1D606A31C;
-	Mon,  9 Nov 2026 10:44:26 +0000 (UTC)
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=h79isfwl;
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46B81606A334;
+	Mon,  9 Nov 2026 10:46:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 46B81606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mfOpr55J
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34E151F0089F;
-	Mon,  9 Nov 2026 10:44:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794221066;
-	bh=TXr2TKEYrIDqnyQ+02ZfHnpl8vf7msiDB6kAkQN1rZM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mfOpr55JSOEAKsYIRwZlPYVVji4xFQLSCZnYgYFBPvHuYw5tqPT6lpcFI9qJa0aep
-	 VERbNONOWWRfHvh/4pt0kOHo5GTHTckTKsADwINYHKcBPYIEykbTiHYKFVvv6Iayco
-	 P56iKD/4w8gwEuVziu3200TNGNO+AhB2cOwaCB72Mkz71mMNHxSY5o0Mp5g7LawzBY
-	 /hqT65DQ7N9EF/R0bmufgMI1JGQVXsKSu8+Hb/tg6OQ6csPirqc+IoZQPamOaOwii6
-	 nfY5lMRBzsqXWKW0jlB2p3CN9fmRVT3ZMcVZGIxc577QjbgavPnbuP3Z9CnA+a/9r1
-	 tz7C6CPoEbMHA==
-Date: Mon, 9 Nov 2026 11:44:22 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Andrew Gigena <mail@andrewgigena.dev>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-	Andi Shyti <andi.shyti@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-phy@lists.infradead.org
-Subject: Re: [PATCH v3 2/7] dt-bindings: media: qcom,sm8150-camss: Add SM8150
- CAMSS
-Message-ID: <20261109-slick-transparent-ostrich-28ddad@quoll>
-References: <20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev>
- <20261106-sm8150-v7.4-rc1-camss-v3-2-0103e8a0bbcd@andrewgigena.dev>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=h79isfwl
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 760C11576;
+	Mon,  9 Nov 2026 02:46:46 -0800 (PST)
+Received: from [10.2.197.99] (ewhatever.cambridge.arm.com [10.2.197.99])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D9183FA1F;
+	Mon,  9 Nov 2026 02:46:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1794221209; bh=zGW4Vk+oTTcAeYvgmOhuujaSbESC2vD11QIhzUqWk7w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=h79isfwlJj5NA/YUWS8Ik8ho4Z0G1xk/NdkZHTI+7kY++cbuf7734EwR9LCt+Ww0O
+	 EJouX7BeyT+m5P4fhTwO4x8UvN4uCSp1Up19Def4Ui50nAl5N0tzsPl2WATHSB74O7
+	 BPCwwkSdpPWko5ab4dSUwtIoV7q7/DoVqO+iIaHY=
+Message-ID: <dc798bed-85b4-4d47-87c3-f0e0f156ed0a@arm.com>
+Date: Mon, 9 Nov 2026 10:46:44 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,72 +53,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v3-2-0103e8a0bbcd@andrewgigena.dev>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/5] Fix traceNoC probe issue on multiple QCOM
+ platforms
+To: Jie Gan <jie.gan@oss.qualcomm.com>, Bjorn Andersson
+ <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+ Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Mike Leach <mike.leach@arm.com>,
+ James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
+ Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+ Abel Vesa <abelvesa@kernel.org>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, coresight@lists.linaro.org,
+ linux-arm-kernel@lists.infradead.org
+References: <20260710-fix-tracenoc-probe-issue-v6-0-41eb36fef8d9@oss.qualcomm.com>
+ <42b832c0-5cbd-452f-a9f3-50355a008533@oss.qualcomm.com>
+Content-Language: en-US
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+In-Reply-To: <42b832c0-5cbd-452f-a9f3-50355a008533@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 06, 2026 at 06:35:34PM +0000, Andrew Gigena wrote:
-> Document the Qualcomm SM8150 Camera Subsystem. The IP integrates four
-> CSIPHY, four CSID (two full and two lite), two VFE and two VFE-Lite
-> instances, with 19 clocks, 8 interrupts, eight IOMMU streams, four
-> interconnect paths and three power domains.
+On 09/11/2026 01:25, Jie Gan wrote:
 > 
-> The CSIPHY I/O spaces are not part of the CAMSS container device: each
-> CSIPHY is driven by the dedicated qcom,sm8150-csi2-phy driver, so this
-> binding only describes the VFE and CSID resources. Each CSI input port
-> is described with data lanes starting at 1, as required by the CAMSS
-> PHY mode.
 > 
-> Describe SM8150 in a dedicated schema instead of reusing another SoC's
-> schema.
+> On 7/10/2026 10:38 AM, Jie Gan wrote:
+>> The CoreSight TNOC (Trace Network-On-Chip) binding so far only allowed 
+>> the
+>> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
+>> forces the device onto the AMBA bus, where the driver must read the
+>> peripheral ID from the device registers during probe. On several QCOM
+>> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
+>> never probes and its trace path is unavailable.
+>>
+>> This series drops the "arm,primecell" entry and turns "qcom,coresight- 
+>> tnoc"
+>> into a standalone platform compatible. Without "arm,primecell" the device
+>> is created on the platform bus and probes through the platform driver by
+>> compatible string, bypassing the AMBA peripheral-ID read while 
+>> remaining a
+>> fully functional Aggregator TNOC that allocates a system trace ID (ATID).
+>>
+>> The series is organized as: binding first, then the driver support for 
+>> the
+>> platform-bus compatible, followed by the per-platform DT fixes that 
+>> switch
+>> the affected nodes over to it.
+>>
+>> - Patch 1 (dt-bindings) drops "arm,primecell" and makes
+>> "qcom,coresight-tnoc" a single standalone compatible, and updates the
+>> example node accordingly.
+>> - Patch 2 (driver) adds "qcom,coresight-tnoc" to the platform driver's
+>> match table and renames the itnoc-specific names to generic tnoc names,
+>> since the platform driver now serves both the Interconnect and Aggregator
+>> TNOC. It also restricts the ATID-unsupported handling to
+>> "qcom,coresight-itnoc" only, so the Aggregator TNOC on the platform 
+>> bus is
+>> no longer wrongly covered and correctly allocates a trace ID.
+>> - Patches 3-4 (kaanapali, sm8750) drop the "arm,primecell" entry on the
+>> traceNoC nodes and use the standalone "qcom,coresight-tnoc" compatible,
+>> fixing the probe failure on those platforms.
+>> - Patch 5 (glymur) switches the node from "qcom,coresight-itnoc" to
+>> "qcom,coresight-tnoc". This node is actually an Aggregator TNOC (its
+>> tn_ag_* endpoints show aggregation), so it should expose a system trace
+>> ID rather than being treated as an Interconnect TNOC.
+>>
 > 
-> Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
-> ---
->  .../bindings/media/qcom,sm8150-camss.yaml          | 285 +++++++++++++++++++++
->  1 file changed, 285 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
-> new file mode 100644
-> index 000000000000..371ff1ce0bd2
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
-> @@ -0,0 +1,285 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/media/qcom,sm8150-camss.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Qualcomm SM8150 Camera Subsystem (CAMSS)
-> +
-> +maintainers:
-> +  - Andrew Gigena <mail@andrewgigena.dev>
-> +
-> +description:
-> +  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,sm8150-camss
-> +
-> +  reg:
-> +    maxItems: 8
-> +
-> +  reg-names:
-> +    items:
-> +      - const: vfe0
-> +      - const: csid0
-> +      - const: vfe1
-> +      - const: csid1
-> +      - const: vfe_lite0
-> +      - const: csid_lite0
-> +      - const: vfe_lite1
-> +      - const: csid_lite1
+> Gentle ping.
 
-Seems you ignored my last review, so repeating:
+Apologies for missing this. Please could you resend it based on v7.4-rc,
+as this doesn't apply cleanly on coresight/next
 
-From which binding did you copy such order of entries?
-
-Best regards,
-Krzysztof
+Cheers
+Suzuki
 
