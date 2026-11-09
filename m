@@ -1,47 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794239420;
-	b=0dz6dhdvBDmQOYja4tancvwv93jw56R/nuObFkCPd2huveEwKo5gDidjNI0uSXJCqZ5G
-	 APMVmT/EgCH/aaaMX0lF5614rShl5Kb+HnRACYdKZfG0ryDigkovnJ9R/rQXXSGQPSoEM
-	 fltripwwkw7YlBYuAZG3tgaAel4IyTd0DiU0i6R+2vCU5iDEgJN26nQxRMBBhFKvIRW0i
-	 Jn5uPlZo8SdN9+koO4t89XpaLbjMAiOzXLVYW3mvbTNamvClqlwOYCd1+OKS7UWoK/lte
-	 dci1+wrZUSgWBRXUgBPqacxBqMM+8QbQ2Aq6r2jM3TiaA3VVEUZhdT1PHnyL4kGMH+g==
+	t=1794239853;
+	b=ctAL09JmBcG+S8wS7rfXhGPyQw3/25DqIvrt9XiYUMDlCCdy1a+P4T2w7dCwm2awSkx3
+	 OC9EaCb9w6dphhZZxgC/fgTVgjSEfMoZGi4xM411PwxdvSxDtkJyzvys7Kc9I6dKCkTR6
+	 R/mdsbxzXfmlMy5EKbzHUup6XWra0xkD0tpXvLFx1Nr8421gin7wPLJdvzN61r9kNGyWv
+	 soUiVaSWOEY9/YAJv3rcN625hGckVvZS8QmCuxeXU4k4DJ/BElvKeXgD8OT8bkNEdTtFd
+	 6AsUgDrz8KmSDHXi0R4MwM1id30k1SZS/Z2nk0ic8LmHZak5iWt6PI/2+J5eoyA0cfg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794239420;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=2p6CUqRLEssOKWLdU6YDLfy7whJKTepklUCynGnWpPc=;
-	b=VsV0c5kbISaKrklLwpTw9SbvGZEVlYTKtR5cBzRvs9Tjt28FYUutQsB66nT+9uYZkJHS
-	 m+2Yy8vL8n3MVcIGW6EkW1s3xmlPhtw84GvO7fOsqVXhwRTjwYUSMyRrtIPIm3/7KVqb3
-	 UU2hCOnJkQlGezt0uOt87/TstOcNlTfwMFOuCZo7CdKfbyruL2efSxd3RclCeCaO6+deC
-	 GdyR1O7hlgBTXjSpH2flnyb/laQYYNMGgyFDBccW3m8uA8ApBOsxO6tDrBaQtoxgdGour
-	 mzWcSP0fM3/w/KiZ8WdQzFvh7kkiRz676eZokoOKiKOj3V27WVM3K5TEmbjWzb7ajKw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794239853;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=GHS/9W5ZOpYG+KsSa8cSSai+MXVacssLeqix/uJJEC8=;
+	b=0pmfA+dNRot3H7YkCR3eUtJ699Z6Ye0bhwLLwMc20ISygQarSJYQmPVTj8nFBszIst0X
+	 HaTSC/vzlvLjYlV9s2VY3VvQo4Uqj9obEo8uzteouKSGWY9DXeKSwbQ01rQ7XRm8WmRYy
+	 Z7eC0wo0THfwjhDS5rnnSHXsTVuQ3Ye79OWwxq5ZYPr5V62oht8nU8RVVuWETViWYFk8t
+	 LUhCXUGehD6bMoNk8IhZ0MhCg4bVVh/GPMpvqjsPyjS2o5RK/s37PP+BSWr6iXiMjY0zL
+	 d5w9hVVZdNqybY6U2TwdcxHkKYNW14S8cmJCdjR5dB7ZUgCrt1o8uEgYM5od/dP9FoA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="D/OdJKmp";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KkrB5CnR;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GMaZgVqJ;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1667606A331;
-	Mon,  9 Nov 2026 15:50:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 452F5606A31C
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 15:57:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 452F5606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D/OdJKmp
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DCAF1F008BC;
-	Mon,  9 Nov 2026 15:50:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794239419;
-	bh=2p6CUqRLEssOKWLdU6YDLfy7whJKTepklUCynGnWpPc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=D/OdJKmp8l9kgc9gKUFPITsbs95e8Z0jZG2j7ulPpl7tXaQuoQ1c6UzOrmO32zIKC
-	 8lRYCz+che2eDOf57VQFUluuA6p7bYLgQkqFhAJubSqpeQ9czUbxPYWkQ+yiiVoMzt
-	 rrWFIuzp3Bvw+6xHOV3a0NLHHE6Sz0Ep1bC5lbVi2HyCaA/MI5DtY6UvpCQ9S2EV/I
-	 5yl7riPmWrS6kCcOvZBIUiulO6DtNTYyaHmpunxqE8OLt72/eiFnJYTr0dW81zBW4a
-	 025S9X7st9KMD87XLiadCOPECnNaJuRzFoU+F7Aw09pOirJlIZrUmqkmU5ckf12gZy
-	 u/TiPj10arTpw==
-Message-ID: <8f1679ef-caad-4873-acb2-4faa04a1d9cc@kernel.org>
-Date: Mon, 9 Nov 2026 15:50:16 +0000
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KkrB5CnR;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GMaZgVqJ
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A9EPm6h1141750
+	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 15:57:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=GHS/9W5ZOpYG+KsSa8cSSa
+	i+MXVacssLeqix/uJJEC8=; b=KkrB5CnRElgC2haOIQDTtdhDMYI+JC1Qs56Nkt
+	/y9ftvE+eXHdR46pHm6CdCQdUjPW0EnY8jbp8vGz4JnRTJVxEuAwA0zQ+hI0y9xX
+	QYPIEabjXO6klNLnJkK+t28tHpuLrnO048/FBVswJm4VPT+1J4wxNtSAzPKNQ4l0
+	DOld++HL8itPJvDZINZ8+4L61wGE21KabdrP88Qrh0JoaLzhHsoewDo/MS+r8Xhn
+	vBOhGU1bNWPK4jB+7QtWPVNAQYGGUeOqvsqhU5pPYD188ptW53sE7dNTnDAzhyma
+	e392Uy3LR1G7nLdLebBjlMHirrSLJQKOYX6DNYVMCDmYeJkA==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hufx80ava-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 15:57:32 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7d2e2cd9c85so809960137.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 07:57:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794239851; x=1794844651; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=GHS/9W5ZOpYG+KsSa8cSSai+MXVacssLeqix/uJJEC8=;
+        b=GMaZgVqJCWr/wPc57aaAxhZODLx3QNJhbu+aW5+7TXL3KWQvvkZmvJTDySueqUg6ed
+         a4TbiEvPaOyq+J/rxTUSc4BQMZeE77zmKRbRW+sllWDJ2Ot0RugRr1DArJQvabd2sDl1
+         Zv0rnB1rXC+rDZqDXImekaTjMI7naX+gvuq3AaTtGcyE2vBfSEbgcCsJkPP9kxS73I/Y
+         OyW3I/9tGWrPsaYrJJ9VfO/ifnCgp6AMK6gmakt3kOxc2vdqlC0p4im4Q7rXwfVDuR6z
+         ymEIe1Ux7iXt55IzCRbo+QemD22Jw/uLqll6IMKN12Atki2iz+feCOFCOmD4y78bjnb1
+         AXRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794239851; x=1794844651;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=GHS/9W5ZOpYG+KsSa8cSSai+MXVacssLeqix/uJJEC8=;
+        b=QDHlupR19VaJ/dgFGWCCNBcgyYU7nGnPss0oWAYiPd7DBITbttgvT+0zUc5a7Xne+j
+         IPpB2L2GbxMRrTmvU8KeOpF0qSlHfL43NsQQRZu0BUJEndUS85qL9JjzdHkeASw+WGyF
+         pZJHfCL30sPWq4ROEEGRqjd2LWIfDgQ7UHz5xzYHUu/eD1oGAy5vtwHvd72kfAstjKTY
+         XeIecc36HaeNH7PRORCjBBM2vvy17kybpQ4fSSV6CcXWnAcA9E97hhpKy7f8DddAnL73
+         f7+fT/Ne11vSRBToGPtAQDvwkmYAppqA0u3l4X4wGejsH6eyRXwvFRDhzv/KrHtgovBE
+         pF/w==
+X-Forwarded-Encrypted: i=1; AL+hErF0oNTeeC/ljYH6Q8Zd3jR2I8ESE37l6UKrvCkahmGzT3c4P44yAh25ScM2jVXdheQhjTqb7djmkvt/zXl7@vger.kernel.org
+X-Gm-Message-State: APuU4Z95YeHz47nHq4Oa4E1222s5dpYBCMCULEK5SdBLJNoyoqUqcO18
+	OJktA119gq5clQuzOq1JhXtON8maH2LZ7iwvh1IfVqCCy+QHKQznZZwOqMhCwsP0tJlkEsVPfTr
+	9Sq1/xpvbBIJ5p+ahaDGCPOAh1gGE9TNRANVd3WjKvZTqZ42JK6IZnOi1VydZAeW4UafkFueq3h
+	bj
+X-Gm-Gg: AYBFou1ZrYQgDTEX4XvibRfQjW1A03JlSUryuzrokYaRgb75w55tIoJ1TKb/AZ4anBi
+	xtv625i8SKo93FzVzgKr3VaxeQ+VtHG65v1diEgoiVFuUfuxeDAzlvHeNlO1bdCGTeT82B4Mk6/
+	hgKV5Lw1ITK6ZPF+5RFVhafZ6IiJIvgCWy0mrZ+oWC4CUIQfVd4njG0qiVKwd2nnQxkWLb3WbfY
+	c4xQyB+Wq7fhyKsDRP/Nr69qq4DLyozdqw9b1GSjIVJNj9QZILhAduE7pCdmwvbXrTtjyOrPfWS
+	PIoYKmRFBt8zJbA4YthO3ZOzOqERRGODneo/WBfKqYiukOeY2l2Ddt1buZr3UXsHTgsJnPL1faH
+	cP+hPkrdePBrxV1aMVgKfbecXP+TNh4qe13HR+Xl5JAD5o1JPwabZnyNxn+GfTqf41sRGwvZjxF
+	hDbw==
+X-Received: by 2002:a05:6102:4b01:b0:7d2:d9c0:2e96 with SMTP id ada2fe7eead31-7d2db2f9675mr1668015137.31.1794239851376;
+        Mon, 09 Nov 2026 07:57:31 -0800 (PST)
+X-Received: by 2002:a05:6102:4b01:b0:7d2:d9c0:2e96 with SMTP id ada2fe7eead31-7d2db2f9675mr1667982137.31.1794239850766;
+        Mon, 09 Nov 2026 07:57:30 -0800 (PST)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b76cbd082dsm143607065e9.1.2026.11.09.07.57.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Nov 2026 07:57:29 -0800 (PST)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Date: Mon, 09 Nov 2026 16:57:25 +0100
+Subject: [PATCH] dt-bindings: pinctrl: qcom: add missing tlmm labels in
+ examples
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,73 +116,272 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/11] media: qcom: camss: Use SOF sequence tracking
- for vb.sequence
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>, bryan.odonoghue@linaro.org
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261107-v4l2-frame-sync-v3-0-e5bf7073a35d@kernel.org>
- <20261107-v4l2-frame-sync-v3-3-e5bf7073a35d@kernel.org>
- <crjR444yGrRKOohEVzfhYdoqIGCsi1tUpZLgBeeVGuinXQwMsZKZ9ZqkiU4uby7YTCrsbE5SfutnA8JQ49kDSw==@protonmail.internalid>
- <CAFEp6-1tMwheRKaN=sEgF9abzNZOLS79OePq1GOwtm8JGXjSug@mail.gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
- jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
- piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
- YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
- B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
- lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
- 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
- MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
- 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
- JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
- bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
- OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
- BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
- VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
- jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
- mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
- 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
- 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
- 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
- kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
- nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
- g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
- dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
- NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
- VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
- Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
- vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
- 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
- ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
- MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
- VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
- NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
- AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
- JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
- 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
- OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
- xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
- t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
- X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
- LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
- 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
- Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
-In-Reply-To: <CAFEp6-1tMwheRKaN=sEgF9abzNZOLS79OePq1GOwtm8JGXjSug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261109-qcom-tlmm-ex-phandle-v1-1-b77b09e6ec9b@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAGTt8WoC/x2MSwqAMBDFriKzdqBVqOhVxEXVVx2wfloRQby7x
+ WUgyUMRQRCpyR4KuCTKtibQeUbDbNcJLGNiKlRhtFY1H8Pm+Vy8Z9y8J2VcwL2FdTBlVcJQSvc
+ AJ/e/bbv3/QCq1kOSZgAAAA==
+X-Change-ID: 20261109-qcom-tlmm-ex-phandle-baeafe6373e6
+To: Bjorn Andersson <andersson@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Stephan Gerhold <stephan@gerhold.net>,
+        Melody Olvera <quic_molvera@quicinc.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Richard Acayan <mailingradian@gmail.com>,
+        Martin Botka <martin.botka@somainline.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Vinod Koul <vkoul@kernel.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-gpio@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10695;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=UXFFZ3aJ7yneF7ZsDRankm47eMBNEm0TaoVDTHVEZSU=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBq8e1okyN1hFuzZDh/rPPQ7A2r3R8rWomchn5b5
+ 33sbCg4ca+JAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCavHtaAAKCRAFnS7L/zaE
+ w/jNEACW6otbaHKUpyAcOdsyFfG/2T4OlsUNwkiYEULcQiRoCLfwMsxRSBwYk5YXZpq4QP+F8yB
+ f85Ps2idazcZUuGbxGdzH/iXGrgDi3uEBQm4FDjkltunpmAM9rAZNsy2Xf6atVygomJ7KF+6Vfw
+ 2Z4xljryZcqeABeoPLlka1aLHUxFRO0Yxv+bmZzj/JbxqkIGYsEdWyWXLq3IHV35/iAITBAahLF
+ 1C/dVlRRdnJpLj/a1NApHXzWxwNX5m+621ZaJvka4aILV7rSQYRXoUFvvz7gee1MMmp6cWnslRg
+ eBFugld/+BrXdCMLokSJG2r3E+mjsdXZjHwKfa3C2N9srZC8v+gkDBDUlCY7eHU1aiYsygmGxTK
+ Wc5zoWqd2X6SxuuQKfsUVg+lIRfdj07h4CoPSMvl45a0s8QiPnClYVwva0yzuV/ITQ2dmU57Zl5
+ g1PDx2355UilDvC/C9mQiQhgE7nLnwkttnpyOzdgCRlY1YTh6BM6Bl/mpswibSnQNzn7L/hlMge
+ 4SMENblxQdjxfIdaNiCPac2c3/N3WZw66ZAdPaRA3bdO2I/rJNaSFaJ6QxG5m/Zle2SYRSRUDbN
+ OHqRacFsMwHHuzkRVWwWCMxEjCRIMnZzr9Hc2vqqmwtt2C3D15LPTJt2ti4g1yr6siqjam7xUFL
+ i23BxxqNcMD9sSw==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Authority-Analysis: v=2.4 cv=AbYkjHXG c=1 sm=1 tr=0 ts=6af1ed6c cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=0WL0dOjlh28m-vuih1UA:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-GUID: fssHoiNqcQPKp7UIFJHO84gOm2RG8sBO
+X-Proofpoint-ORIG-GUID: fssHoiNqcQPKp7UIFJHO84gOm2RG8sBO
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA2MyBTYWx0ZWRfX337i4t0f5zFg
+ EkwUjALxIRgBryJfdhUutl0A4e02VYvG/DCL8KzxYr2Uvk5w4W2ly3SzPD3lq4V4dk1GGzt8zvL
+ 4s3tMfZNtJxI7iHB1tjZEmCEYj/9s+s=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA2MyBTYWx0ZWRfX8ySurLTunTU4
+ AQxiDx+dVhE3nTRqUR0mS2hK/KxgYTzzNTndzRkgEA9l+b/rQb66CnKZO7OpTvfElwIzM4MiZ+X
+ VK9YZ88+aoMtWJvVx/tCe6I8XvcHt+bc6jIkQ+Y3v59zumpZagUBcg84mPD99CqhXTt3xS/oJKw
+ X1SulrM6HVXaxUhnGXtnWB96D+fwc1UoJDnIF6EN2kn/wQTPn6nQOlyETkifLIiCnwVDzlKo13l
+ ywNK20x44H+1dinSxpnt8B6lGYV710N783voHDRX1Z1sqqDVxsImOhPU/vczkbaLN1wMrOWOi/e
+ ZLJM8vaEfnhddGma7DpHle15RlBfa5gJRXbhjUjhtKeki5dHkgzEfhFWxnmM46g6B92L40r4j1y
+ n3/lhL/m83Xdse1Dzv64rZeRLHQ0V3odvtim/RbkCG7bXHDt/MhLcoMUi2D8qd4/doHZ2yQg9sl
+ l9cO1b+YUYN7/mJ2y/w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-09_05,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
+ impostorscore=0 bulkscore=0 spamscore=0 clxscore=1015 adultscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611090063
 
-On 09/11/2026 09:49, Loic Poulain wrote:
->> +atomic_t *csid_get_sof_seq(struct media_pad *pad)
-> I would go with a `const atomic_t *` to preserve explicit ownership
-> within the CSID.
-> This is also what atomic_read is using, so that should work.
+Several DT binding documents for Qualcomm TLMM pin controllers define
+the gpio-ranges property in the example node that references the tlmm
+node except that the label is missing. It's harmless as we ignore
+non-existent phandles but for correctness and consistency - add missing
+labels.
 
-I'll amend on application.
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/pinctrl/qcom,msm8909-tlmm.yaml   | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,qdu1000-tlmm.yaml   | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sar2130p-tlmm.yaml  | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sc8180x-tlmm.yaml   | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sc8280xp-tlmm.yaml  | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sdm670-tlmm.yaml    | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sdm845-pinctrl.yaml | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm6125-tlmm.yaml    | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm6350-tlmm.yaml    | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm6375-tlmm.yaml    | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm8250-pinctrl.yaml | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm8350-tlmm.yaml    | 2 +-
+ Documentation/devicetree/bindings/pinctrl/qcom,sm8450-tlmm.yaml    | 2 +-
+ 13 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,msm8909-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,msm8909-tlmm.yaml
+index 295dd5fcf4c3d261b3f6139b65caafdc5c093b5e..5eac9e5f44b8b6915e994deb1409ecb0f369f471 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,msm8909-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,msm8909-tlmm.yaml
+@@ -106,7 +106,7 @@ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+ 
+-    pinctrl@1000000 {
++    tlmm: pinctrl@1000000 {
+         compatible = "qcom,msm8909-tlmm";
+         reg = <0x1000000 0x300000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,qdu1000-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,qdu1000-tlmm.yaml
+index 88afeae530c68234506c4e15294c0a3a617e5902..e2463f78a51246392fc7db3d3ef40e9ebedabe9c 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,qdu1000-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,qdu1000-tlmm.yaml
+@@ -101,7 +101,7 @@ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+ 
+-    pinctrl@f000000 {
++    tlmm: pinctrl@f000000 {
+         compatible = "qcom,qdu1000-tlmm";
+         reg = <0xf000000 0x1000000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sar2130p-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sar2130p-tlmm.yaml
+index b388380b1ce02e21283e2200bce241bba6100024..e304a3a0a005158a48f762877a812370c4343bdf 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sar2130p-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sar2130p-tlmm.yaml
+@@ -106,7 +106,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@f100000 {
++    tlmm: pinctrl@f100000 {
+         compatible = "qcom,sar2130p-tlmm";
+         reg = <0x0f100000 0x300000>;
+         gpio-controller;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sc8180x-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sc8180x-tlmm.yaml
+index c122bb849f0f72b31d24cd0c23fdb0963c625247..bc15d9758c64989fe2518deba1b76a6cbb9a7834 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sc8180x-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sc8180x-tlmm.yaml
+@@ -103,7 +103,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@3100000 {
++    tlmm: pinctrl@3100000 {
+         compatible = "qcom,sc8180x-tlmm";
+         reg = <0x03100000 0x300000>,
+               <0x03500000 0x700000>,
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sc8280xp-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sc8280xp-tlmm.yaml
+index ebc3a8b34a4c625f08b48b72c56fe878a485d655..8878b3d712b1d2b3ba3e9a14a470edca679b7e2f 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sc8280xp-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sc8280xp-tlmm.yaml
+@@ -108,7 +108,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@f100000 {
++    tlmm: pinctrl@f100000 {
+         compatible = "qcom,sc8280xp-tlmm";
+         reg = <0x0f100000 0x300000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sdm670-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sdm670-tlmm.yaml
+index b56e717aa28e77449bd19cf5f821129c29f64e31..e1ba3700925d7f196fe69d6affd42f9715e093e0 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sdm670-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sdm670-tlmm.yaml
+@@ -94,7 +94,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@3400000 {
++    tlmm: pinctrl@3400000 {
+         compatible = "qcom,sdm670-tlmm";
+         reg = <0x03400000 0x300000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sdm845-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sdm845-pinctrl.yaml
+index 3b33daedc018a2e5ff3a78304677e576833a55f1..4bebbf9ca60cd6d6d94e9b86f854f931a7794e27 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sdm845-pinctrl.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sdm845-pinctrl.yaml
+@@ -105,7 +105,7 @@ examples:
+     #include <dt-bindings/gpio/gpio.h>
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+ 
+-    pinctrl@3400000 {
++    tlmm: pinctrl@3400000 {
+         compatible = "qcom,sdm845-pinctrl";
+         reg = <0x03400000 0xc00000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm6125-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm6125-tlmm.yaml
+index 5a57a59cc1e579bdecffcd52ef4b2e95d1b5c895..f0c3a8806972331a7f6affcfba45b3228819977a 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm6125-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm6125-tlmm.yaml
+@@ -101,7 +101,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@500000 {
++    tlmm: pinctrl@500000 {
+         compatible = "qcom,sm6125-tlmm";
+         reg = <0x00500000 0x400000>,
+               <0x00900000 0x400000>,
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm6350-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm6350-tlmm.yaml
+index b262af6be97da3207e2711a1367e400b2a25adae..5333930fae01e975b368b9a163951ba31ed8f4e6 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm6350-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm6350-tlmm.yaml
+@@ -107,7 +107,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@f100000 {
++    tlmm: pinctrl@f100000 {
+         compatible = "qcom,sm6350-tlmm";
+         reg = <0x0f100000 0x300000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>,
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm6375-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm6375-tlmm.yaml
+index c11af09c3f5b89e19e82d6f77cd72a69dc3a6afd..ca7fdabe62aa209cba8971eabee19d4469ccf539 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm6375-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm6375-tlmm.yaml
+@@ -110,7 +110,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@500000 {
++    tlmm: pinctrl@500000 {
+         compatible = "qcom,sm6375-tlmm";
+         reg = <0x00500000 0x800000>;
+         interrupts = <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm8250-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm8250-pinctrl.yaml
+index b5d04347c064d598d8600333f415fa412255cd2b..b11edbf8bdc05739a34207be561c49c95c64f221 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm8250-pinctrl.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm8250-pinctrl.yaml
+@@ -104,7 +104,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@1f00000 {
++    tlmm: pinctrl@1f00000 {
+         compatible = "qcom,sm8250-pinctrl";
+         reg = <0x0f100000 0x300000>,
+               <0x0f500000 0x300000>,
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm8350-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm8350-tlmm.yaml
+index ec5e09611d810ca13b8cb446d97f5f4072467c8e..dd84c715bb260687070070f835666ea5624cc83b 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm8350-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm8350-tlmm.yaml
+@@ -103,7 +103,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@f100000 {
++    tlmm: pinctrl@f100000 {
+         compatible = "qcom,sm8350-tlmm";
+         reg = <0x0f100000 0x300000>;
+         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,sm8450-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,sm8450-tlmm.yaml
+index 16fd2c5e233931565c40c905f120dfd6d94f69d6..04f0655f8e72d8538da4e28f2f36128104dbc22c 100644
+--- a/Documentation/devicetree/bindings/pinctrl/qcom,sm8450-tlmm.yaml
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,sm8450-tlmm.yaml
+@@ -102,7 +102,7 @@ unevaluatedProperties: false
+ examples:
+   - |
+     #include <dt-bindings/interrupt-controller/arm-gic.h>
+-    pinctrl@f100000 {
++    tlmm: pinctrl@f100000 {
+         compatible = "qcom,sm8450-tlmm";
+         reg = <0x0f100000 0x300000>;
+         gpio-controller;
 
 ---
-bod
+base-commit: 630059a5a632377b9b7b487baccde92b7ae1dd47
+change-id: 20261109-qcom-tlmm-ex-phandle-baeafe6373e6
+
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+
