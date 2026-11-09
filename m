@@ -1,60 +1,136 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794243722;
-	b=JYCk2w7xg4gByg3tYBEnCZOlbcTVd4npn1LLVfByTX2535FBH2/NH8lvkCgnXQt6wiWh
-	 gThlsobvvmCAvE2I4hY8ZUtnZLgjN2OxfSZcrZQxbdRyzrmTCEro7Kf2tkLlakRn/q00P
-	 eckNSHF2FC+pwozJzzB0sp2PpfmyyLGU4O8XnFfG6hoI6IJPhnD2Msz3wPTS0T1seDwgi
-	 PDuHMUcpvMC86qJt2p70D99FJ87qSCO15r7/eYuS8odnvPOm30VAnifKjlFhqvqduwn5e
-	 zIELkptqYPU/4UC3ESrsIHigBFVPYdW7bjygnQg6RDdf0GAK/BEst3eA4nt4l+l/LLw==
+	t=1794243864;
+	b=sK7kCN5t+r9l2tGcSOAhKdTR7MBnLXqZsPg8rXlAlZQb3EeV3Xw3S/+EIvPP/HUo8o9Z
+	 bLREpaqfN7g/daznhZPVA9vFrzu0bmAXhdN8L6o0W0lzeN7i4D37Y8sH/d9bc5MpJUyhn
+	 +BQRwUhFVujMmfN+ezVY/DUbJRojG9/J6+uWscX5zuQsrGtM3VijrKUtjS7fTQ8VBMTMx
+	 wEsr0ZepXPcPSc9XLiqvQ4nYnn4jUo7HZPPKuhU9GA5CRIfNOKVwyRknUKkMg/AobWFkL
+	 Hthvrl2/VWC7XZ/xAjMH7ucEChMHYaP3Z/FWaqibNZNe2tXWkWubEKZzSfsInfL613A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794243722;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
-	 Date:Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version;
-	bh=oG2TQCsxpY9LqxmAzIoNvh0i+sGuT0ezlKI+pPVi9Lk=;
-	b=P66E9BX86+Sp1ZPZR8XxnQaz5OV2uwgp/PC0s2sIokL6jRfe4dIRKLlhzNaOdwugYXDA
-	 gZDQn/cJaZ8XSL+vAm996a4aoDTX3d7MvDAog5QnMqsYKOGyZgsrWOxNRfbATed3K4r6/
-	 YzVSZlfOofQqsMJaGtiHaJq9bBVkkbaV3JhsxlbqgCgCg0GLkdQKAnE4yDUEjWnukTyuo
-	 wmFRVq0kvvSchZDHrrwws+HMYoJHiVcLP+KZiDFDCKYd92iwTDRhnJE0821IdshOyUltG
-	 F814hhEl5aZlVoJ2H5qiIlgb8S7muCHoHp9Jxn38wp5MbmaXHackk7sUwl2nFAspsbw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794243864;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=VmhgsZdfI41q6bSk6Ws0aoyQukpnInOpVRPvZF0DgoY=;
+	b=hXRyXhGsSQ43I1slHlB180YOt7xx+4oEya+9Y6MeUoTM3NAVLdgjdiY+I68GwYAVxpYW
+	 Or5NCOFlGdBBbQiEJ1T7bnOGjYN62jsFcuQrKaRYuVfyb+jUVSdn2/km4hyHKrOIDKZAX
+	 TOieR07Nkwkn13FqU4VYudU+8GYRU77Advw1ld47jt022TO18OJJA2eCh02BQwPz3aHnH
+	 oGTKjWVqSO9xyH9crTtd97+I+Q0KqpMPEzXDI0DUmXEnG4K2GalgMhIUpILlgwguqGxqZ
+	 1847ojlRM1mXNvM9PCyK8HmZbvjho4tIaC47J1t/eK5yOm2kDUxPlfH7wnZ+moCqpcQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b="Zcz5Pw/K";
-	arc=none smtp.remote-ip=185.70.43.170
-Received: from mail-43170.protonmail.ch (mail-43170.protonmail.ch [185.70.43.170])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=INMhwymN;
+	arc=none smtp.remote-ip=209.85.208.44
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5202B606A326
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 17:02:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5202B606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 509BC606A334
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 17:04:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 509BC606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=Zcz5Pw/K
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=INMhwymN
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6b47c1a3c74so1359051a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 09:04:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1794243718; x=1794502918;
-	bh=oG2TQCsxpY9LqxmAzIoNvh0i+sGuT0ezlKI+pPVi9Lk=;
-	h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
-	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Zcz5Pw/K/Nb3lm/LjVL2d3V4Czp5fRaoBS8WWx4EAednhE+aadDUSA8XzrdTKH4H8
-	 IMUWYxKkcKrq8Pcc7uVhFZfdOK7aAUEfTNYwrIHy9alzBX8rO2N7WFHE1+cVitlIrp
-	 1lMlR5rKPJAbVtNsrCZw8v/qvO6tx4otFbLd4zv/NqpfWB/T5YiocbYaJqex8tnSMT
-	 ra9aRsyOZw7BcfIUhrIpYamHV3jtOq8SsQhjbyw06GBOa6F7ds+GYH00uk6x1Aj1mu
-	 Hwi4Voenn515X0j6MHHxKI0dZblI1BvrzJpty55OuNQtxvem9kdsdx3oxh/IZZ/Qdt
-	 q1BxQ+xZD5sMw==
-X-Pm-Submission-Id: 4jNbfr2WvNz2ScWs
-From: Michael McAllister <me@michaelmcallister.org>
-To: robin.clark@oss.qualcomm.com, lumag@kernel.org
-Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
- marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
- linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] drm/msm: avoid an unmatched fbdev IOVA pin
-Date: Mon, 09 Nov 2026 17:01:51 +0000
-Message-ID: <179424371125.96483.2462884435294600442.msm-fbdev-pin-leak@michaelmcallister.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+        d=gmail.com; s=20260707; t=1794243863; x=1794848663; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VmhgsZdfI41q6bSk6Ws0aoyQukpnInOpVRPvZF0DgoY=;
+        b=INMhwymNUoXRa1HYjajYs2VDNOXoDzVIp/an3nVGMwTgqTKKIXcrYlToz3KguYeb2w
+         0JSHPrAS4tp1u64diFxx98ot8r0Zd994Q5w09w9Wo7hRC/DtQLXBMMh5MnMbGm5sg/9+
+         bfSbd1NNz976A12xlmIC5rBcyt2zgrNxYngASmeZZcCyhLh9b9uOIuPyOYnguxqTaeNR
+         9hUslwRJlODcmrjO84K/MqZr6AW6G7obz3aQhSgpfQbvfDlBiGQqmaSqVNfiSLuoobIb
+         SEhjw+R7G4bUMif5HGg+3AGlsX3R7zQQDPntqdP45khUAZLh8+Utt3l4+Gfo8W0GMqsn
+         XheA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794243863; x=1794848663;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=VmhgsZdfI41q6bSk6Ws0aoyQukpnInOpVRPvZF0DgoY=;
+        b=YflpeXG9x8RjZTnvaCHXJmNAhLkwKz/X4vSIWd3FNQCU3QzhgVtt59kWtE3fegI64q
+         7P7JgGRBRStyKyTZinZFzL9KHo0zVUG71aDUkB6zRpUKWfeOs7W7BWddKFc9swuPBETF
+         yB/igQQwK2CcS8DCz2Hup1JNv/svIBTpEgPYm57oEFsF1mUUiqS36gE00zfmJKJxmcBw
+         6nWeAoaRSQiVFVYAvjvAcBOO5EyQ+BnlfRQtWeYJiuwqbT0W42QcwWnE2kQz1kC31+cG
+         Nmji8ZAdT8ul1jyz+ZjhpE1zgfHn0xeSj1KpORisTcYEebtLmLuTJOhMdiNIt8Ch808D
+         iruw==
+X-Forwarded-Encrypted: i=1; AL+hErGgkShODdmmj8cZIkz7Y3vSB66UnUyFCmAFy8m6RwPIy7Mmvpp52TvuOb8zdGcaQHNhDD2fC13CbnNEeT3B@vger.kernel.org
+X-Gm-Message-State: APuU4Z/C1cZhQyz6fIOuLLR/PPBuN6hB1YcbdbNw6tfGzX3nan9nUctv
+	QaCsCKoevYzj/GwjwfSl1yOWpA79V0FO1xETwFkQPqAlg+Z0tz8Gy2SD
+X-Gm-Gg: AYBFou0z/l+9eTuBgg6ACEXnx9rfbSW6X8x9qoYJqx/6ImjwqhyGBO2XFFqT6HIJtqA
+	nRs4WyYzs8mv9LLG1QIEbm6d988nHSxQZrM3tSuJhu9gHubNpPZlRcekvm2CbMpN9QCAQ+JnOa0
+	EpyBOQHMWFPTU1J310wdHTD4moLSQSmZ+7MqmWH6kvyrwbZdOdUbb5JcLLAnPaC9CIB0GZJ+nTK
+	DF5o6wljoSZYvGaEGQVuwcn6MdcYJ+LDyXFSu9MAf8usmD+UbyW2s1LnMtEPZHur9SRYdQoh0tC
+	qfn+MxsZZ1J9No1ABq5z1js4j8K2DCmuIt+393ig+tcJuHJp6qqU9/qCy0ojsg7Lnh93XmXQ5T9
+	SYgNG3TA1yJ0lKZN4OvkAMBo0hbWRPofXW2XpWMKYbybYykQye48B2pCrbykaN61775dNG6QUAH
+	XYp6jVBlT7GUDRlC6/8JdfGDLf737JnGV1ldcor2lScu/6x5grj6Wm78An76+gWjLrJ1Zd9MyVw
+	jrpJuFiGoScVIEoZU+QtG3m2BVw/ToCGJ5DfLmnCA3FHTMcPHr/Odfe31ubFSUa2bKdT4q2XVm3
+	+aECO2c4FkHHUocTH0BIpT4Wy2I=
+X-Received: by 2002:a05:6402:2356:b0:6b5:7792:d82c with SMTP id 4fb4d7f45d1cf-6b756ad7482mr185305a12.16.1794243862514;
+        Mon, 09 Nov 2026 09:04:22 -0800 (PST)
+Received: from flare5 ([212.58.121.92])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b721ebe31csm1878937a12.16.2026.11.09.09.04.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Nov 2026 09:04:21 -0800 (PST)
+From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Robert Marko <robimarko@gmail.com>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Radu Rendec <radu@rendec.net>,
+	Lee Jones <lee@kernel.org>,
+	Will Deacon <will@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	Bean Huo <beanhuo@micron.com>,
+	Stanley Jhu <stanleyjhu@google.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Amit Kucheria <amitk@kernel.org>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	Georgi Djakov <djakov@kernel.org>,
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev,
+	linux-usb@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	linux-scsi@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-pm@vger.kernel.org
+Subject: Re: [PATCH 17/17] arm64: dts: qcom: Add Samsung Galaxy XR
+Date: Mon,  9 Nov 2026 17:04:07 +0000
+Message-ID: <20261109170407.2073295-1-lightofmysoul@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <3ddaacfd-59c0-4d87-9b8c-2caa85143393@oss.qualcomm.com>
+References: <20261109-halliday-dts-v1-0-289114ab8197@gmail.com> <20261109-halliday-dts-v1-17-289114ab8197@gmail.com> <3ddaacfd-59c0-4d87-9b8c-2caa85143393@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,74 +140,19 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Unbinding the display on the Moto G10 produces a pin-count warning when
-the console framebuffer is freed. The fbdev probe takes an IOVA pin,
-but normal teardown never drops it.
+On 09/11/2026 16:12, Konrad Dybcio wrote:
+> On 11/9/26 1:33 AM, Stanislav Aleksandrov wrote:
+>> +&usb_1 {
+>> +	dr_mode = "peripheral";
+>> +	maximum-speed = "high-speed";
+>> +	qcom,select-utmi-as-pipe-clk;
+>
+> Is there no superspeed / dp altmode in hardware?
 
-Use msm_gem_get_iova() to reserve the address without taking that extra
-pin. Scanout already pins the buffer while it is in use, and the CPU
-mapping holds its own pin. Drop the matching unpin from the error path.
+The headset supports USB SuperSpeed and DisplayPort via its USB Type-C
+port, I just haven't brought them up yet. It seems we need a new driver
+for the Type-C controller.
 
-Fixes: 7ad0e8cf6317 ("drm/msm: Count how many times iova memory is pinned")
-Signed-off-by: Michael McAllister <me@michaelmcallister.org>
----
-Hi,
-
-I found another pin-count warning while testing display teardown on the
-Moto G10. This one is in fbdev: it takes a pin when creating the console
-framebuffer, but doesn't drop it when the framebuffer is freed.
-
-I tested this alongside the other display fixes on 7.2.9, including
-unbind/rebind with the compositor stopped. It is independent of the DSI
-command-buffer fix I sent earlier.
-
-Thanks,
-Michael
-
- drivers/gpu/drm/msm/msm_fbdev.c | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
-index dd6d6c507d..c3bec6719c 100644
---- a/drivers/gpu/drm/msm/msm_fbdev.c
-+++ b/drivers/gpu/drm/msm/msm_fbdev.c
-@@ -137,12 +137,8 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 		goto err_drm_gem_handle_delete;
- 	}
- 
--	/*
--	 * NOTE: if we can be guaranteed to be able to map buffer
--	 * in panic (ie. lock-safe, etc) we could avoid pinning the
--	 * buffer now:
--	 */
--	ret = msm_gem_get_and_pin_iova(bo, priv->kms->vm, &paddr);
-+	/* Scanout pins the buffer; only reserve its address here. */
-+	ret = msm_gem_get_iova(bo, priv->kms->vm, &paddr);
- 	if (ret) {
- 		drm_err(dev, "failed to get buffer obj iova: %d\n", ret);
- 		goto err_drm_client_buffer_delete;
-@@ -162,7 +158,7 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 	fbi->screen_buffer = msm_gem_get_vaddr(bo);
- 	if (IS_ERR(fbi->screen_buffer)) {
- 		ret = PTR_ERR(fbi->screen_buffer);
--		goto err_msm_gem_unpin;
-+		goto err_msm_gem_vma_put;
- 	}
- 	fbi->screen_size = bo->size;
- 	fbi->fix.smem_start = paddr;
-@@ -179,8 +175,7 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 
- 	return 0;
- 
--err_msm_gem_unpin:
--	msm_gem_unpin_iova(bo, priv->kms->vm);
-+err_msm_gem_vma_put:
- 	msm_gem_vma_put(bo);
- err_drm_client_buffer_delete:
- 	drm_client_buffer_delete(buffer);
-
-base-commit: 1e59855738454b14021b64115f0090eafc7526ae
--- 
-2.39.5
-
+Stanislav
