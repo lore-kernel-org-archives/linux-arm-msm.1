@@ -1,84 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.173
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.169
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794221388;
-	b=BET5gNr4bytSjplSu6co33VVpIsvRD4boo5IfEiSYBrzoltyyKVwRig9eCKJHOhOKt52
-	 YvOU2elsqm3zgj+8vfCsSgMBh6Q1rSeR8uL/ySIC4pu8P1mkd2sJ0fgSNamHcZRMvTXPU
-	 Gb0eF8UIb15htC1Td+uFx43f0H/LOmUh23Vwp1kW70ms2mXVcfiql4M+rIdW+zcoM+v1x
-	 eUwbFU4lb0fPXvLQ+7xrKObC3QUf+g6kzbk1LEj9QSCMoJ8W2JCsP2svVsvMSQsGYbEXC
-	 dF5SL0aZTc+271UsaVaZ0QDsK4/KCQrc32BoBWyOk4NCn7HquytIHQZBchZesZ7aBPA==
+	t=1794221395;
+	b=EWCSKoLopU2nO9XK+FUdnNq+eb2Yi2cUIr2Vq7IOv4tmPgCus5Jvw9A5a5l2WkbPrpfJ
+	 wVAuOFy3H4/faXXOMBEKgPlXxNI91+Nq40X0a4j9VcBNmQFAgjPtrWSPTs3U3GmbTrfws
+	 t0s8G+FpdvhTlXeLjMiThQujX5OfEYZ17IcBd8J4aDZy+lGtWkb8mE5uufDXuCBacE0FS
+	 6znUkPvsfAQuLwTtonYrimEQJhoeniFWJouT5FzX1RjxqvckFI9amLGaAZR8z06KRbTJ4
+	 Mb4hVUf/9temzAaOngR21Qe2cxDJlBJ5pzUM93VsglTUrVHyINSq3JOEyhScic9RGRw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794221388;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794221395;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=zNKMNT5jDjx45/qe7hJ3H8U6Y1OTdrZmQFqKaBSTnKk=;
-	b=I3QYThsaYdd5wOJe4otqYLQOhPEJibAowecrLn83EqsJ/punp+JOV/kzFYwFPVTfqiif
-	 eXbSNcc/yYHFjW8O72ncITWbETN4QWfSapKCTygu6ZKr1tyDG5/3Xq+UozBRHIjxSNxkc
-	 ppJIkcQnW18R16AJmLAHw0UDfZ2mrYyAx1sv3ALjpmXRxpslpalSKwK+Y3MnIEX0F4Efv
-	 0hOq0asi8gQK5b8jM2ZGU7w7Rni1XyfeE7Ay3EjapQ7T8MR/1eMQFMV6T3S3k7aGAp9qs
-	 T8cMDrLNQ0VECJ6xwITPO+pQc19mH3ZSzDTpdIw1IjA5YSPEP/dMHr9ZjRiZYyRIGrA==
+	bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
+	b=G5u8LTG7rFruL+w4ixPbs05EYksIdOHwsxlGEsed1WSeRjpEVyBVS7MwPSHhSxAEquL9
+	 Xbhclay6t/euQ37h3itPv4XA5db0AIuwctcJ5io0u3/3h3I3zJnZIFUOE95jD93ffpZAe
+	 WaTHaQzlTn6j64Dj9ESVMgnV8QtZsefK4JU8DG1a4Sd79smIN24VKw8JJVhx1WH1EmM6n
+	 SswoddxsFQsdzKU1CBSqNDtol/a74vMRpTAlAr0eD39s1Dd04mro9sDRm3GtHXMUJSB14
+	 Fk17EA1Z8shwmOA6OrKAz9ipV/Mg2JhC+DCUPEEf89X7TpWuq0ysA0TMap3YmP2cunQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=d3TITIqY;
-	arc=none smtp.remote-ip=209.85.214.173
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wnXF0tQT;
+	arc=none smtp.remote-ip=209.85.215.169
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC610606A322
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 10:49:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BC610606A322
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D50F606A332
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 10:49:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D50F606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=d3TITIqY
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2ed28bac8d7so2461375ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 02:49:47 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wnXF0tQT
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-cc4aa0246b7so194090a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 02:49:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794221387; x=1794826187; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794221395; x=1794826195; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zNKMNT5jDjx45/qe7hJ3H8U6Y1OTdrZmQFqKaBSTnKk=;
-        b=d3TITIqYEQy2nVPw2nwc3LQqZM4/kzPbuGM44hHPAGvIZFeNP1PUYtBhrYtiGZk2aD
-         KAvRce1tF3JXHWqC9dHn7JRr6A4nfBgVAcIEZmrrEtB8JwfNzjNWCETv+AGtA2kJnlS+
-         BV+1CPLQwcBl8vg7XDgD3/3aFJlaX892W9xWCtK8oDnivRGcOhOW8yvROkjqjdMITkgH
-         BKqq5rDsiEuMwhq8/1EzAjSco3LUB2Nbf+dPtpxSTojqXN2BDmSQRyD8KXML4eOo62lM
-         rHGW5+ZO5c3XG37HoOIIHZVD4kpUO8Bfjl9x8UEHpP+lXnTyKnggpXRmmshuqoa/54Cp
-         rGwg==
+        bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
+        b=wnXF0tQTrt5OiyPRGod5jK2ZGyS+xr0U46+pQW7tSef6aLHlpVzejbvVbf2f2tsVwH
+         AfB3B9szQTSl3Qlaj4icROD2eJR2WQfJbtiD3E0BM+0OHEi8hbR63q5PZZV8qIdvn7dY
+         Nhv3wVd4XbJdeeMTtDTeeb+3KzghbqAnFH6H4wihhHS6y4tAe3ADFzmwl+tpRmqOXm8X
+         MqJEEI8xkiDjcmTikmUgNrJpiY4lnYn+WwdtrjhtK8MMS0EaRsr95Jf2u6atE6Mp+1AC
+         HocaQJ/Tc6bFm78RcKQgRPx4wUtkLTBT8ZGPS4wBBV7RslVEC5xO9V3rGERvfB6oZ8Ng
+         oNHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794221387; x=1794826187;
+        d=1e100.net; s=20260707; t=1794221395; x=1794826195;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zNKMNT5jDjx45/qe7hJ3H8U6Y1OTdrZmQFqKaBSTnKk=;
-        b=fhMZaeXSkGXviXQeW+iOwpdy/mv1gebwCkRcUQ3APEzCOb8Tur8FCvka18nQbWzRQB
-         s/+GuvMcg6G5aEPmXum9Zk69Ie1EczOXzbeRKSxSEzOAIS/EsOnDmPQswBoK6DwOe1py
-         ANJuBxUhj+c1n1i3GUjikfRcYEH83dlh0X4paT3zWNDW1T484UTNW6Md1m6ZfnvlW7D2
-         4tsFs0E14lEZVQolbffE/EIHTkHyxcXbFoO5fK/tcS1AXPsL66vL4MVmw8bQpnrnfjlP
-         hYjWNojoDAou27goDu0Ae5cpRmmVhs1afFy3Bfh9txGWx3DNXhpGjhZW0Hbi72aY2ohu
-         8k7Q==
-X-Forwarded-Encrypted: i=1; AL+hErEb4iZh0A411DnDN+DinGFW+9gkqnMShJ5DG2FCiw3UACgRId0A9naP4jdaL0sQrY/15zeox/T9spni4tHv@vger.kernel.org
-X-Gm-Message-State: APuU4Z/Af0dcx9t9P7PAZS7JIhOOe9Sz2xOl0njzbS2mhjlBsY00iAzC
-	b3k8V2Q8bHLLWUVZ562ZcSR64xGIUkU4yqH3fj9LN1npL2mCBtLEAlon
-X-Gm-Gg: AYBFou1UfGZiOqjKWky/ON158/GteaVUOGfyRiALYMjxlJdlk45Gg7e3kE/7eFAF7gl
-	bn2MmviPo4waUhT8tsdwcFCTFOYIecutkmhqSn3sF39hKw1ccC1snKG4N+rAyWzvpJwbj4GBQ56
-	zGErUTWdwH9OvSIQeGH2Fnlk65LwJCPF24jPjxvsJVmRamFK/3V8kWIL1YNgZofABhM08Hx35eq
-	FtZfBt6gNimcJ6EWFXTRmTVWbsCz1znxxitKfb4fu69ML3nQGOiSbbQOoHtONRGyjVQOA56L/m9
-	fa37ICoFf2Mr/bVbWRa9LRUmkufQDrQgMBvIc9K+aThiY+Ad4CT8gpUpI+FdOhDtLr28F1ri5dt
-	NvqZHenP+6cKBsxbreqNRLq34xdkDcqjIgKZ7VFghVbXru/zDlUDUf//T5h2rOa5RGLsozxYoPk
-	ERARVLT+h3NhGVBRsYA0l1gHitw57bp9VjkQF3PCB/IEXgz/45DZg4u1vnm+m5O2WExTVyxTfoo
-	MhswBnDokZszm2clZq8LLb7jvSzdJ1IqQwzcQYwKBy4ZmJxTe3NHT7GhUJba/KQPozdHCuxP0gD
-	NrgZZaVEjY9L3Jg24VCjJIUdQAWIInehvfyMXpBBoSptcvV5WWYd8JdidOB/Q7hskvLxAOzrKvN
-	Cf9tpwndLfXOJG73C5wRFW1fmWZ5I12ux60wHx4obEieXt1hJeziIqrcNgK1vgkW+ho4=
-X-Received: by 2002:a17:903:2304:b0:2e4:cc75:2728 with SMTP id d9443c01a7336-2ed837a7559mr29304325ad.36.1794221386941;
-        Mon, 09 Nov 2026 02:49:46 -0800 (PST)
+        bh=NgKYqbq3f7/8t+kF9Yhdju6I9FMl4pNRxfyiV7ruPTk=;
+        b=xZI+FxfClgKbbH2goxPJA5zYmYagc1FaQIPjg/+ZFUZWeMbJDxdwttP3jFADD+es8l
+         sdg6wDvGzIALAW5j7SdUNXI5xhZUON8+nGlpq2D+Lw0e5nPKKyxAP5H0c+w5DJfAaPfl
+         rn96TePfnQCkCZrlcuhNlptiRftbTHbrUgFPXNdHI382C48Vj4te+JgjAzZqcD7asJeb
+         KX/+A6ZshL1nyRkr1Mb9+XHo13XiibKzqaVbZ+poU+cSMZPO14XJnkvW1kb69jiDbTus
+         Jj6NZeRtxoI2fggSBU3PxrpFbjce7u56n6EdZh6zDekHwnKGCQZyGMqeoPGbbnSsiRXk
+         VfFg==
+X-Forwarded-Encrypted: i=1; AL+hErGuO/P484Cx573nrXM+xcKw2vFoICeCje5P1iSP5dSQJfKh4W1XC9bsQXrKqloDix2KyXjo+jcyNqGZvwew@vger.kernel.org
+X-Gm-Message-State: APuU4Z9Xlryu4h6G2oXghyjinilcrPUSHPGEii69crkTrsSQZWW3Uo0p
+	tZGs7tFNc0Qolz/LpkxiNiwNaB0D9B9glsBCvzlq6Ki2Pa+cPcPkKGc6
+X-Gm-Gg: AYBFou0sJoglIjccojWdU1ltoS4aXgvINSNpfD49/9wT1S6RonF280jh22wNFxctw2u
+	sC/OJCu8TE3rdUtq3ASLDpY3a/Bw8Yclgzw6QhKkW3b4AvUpAJ7fa4JyEh+gPaWK4GlPfO8NbzB
+	iv9APRwPu7zZxV9NNn2HOOYyqELiZz9xZXpRtWniEkP4Sg8EbH4au2dAidI8VGKD/5ckdj6Qf2p
+	N67NyHFTAghZ3pap1AmRvHXABXT8QhqDxictsKpjMNugMk0NIVKLoh4SDfPIOsSaOdT7nkLroEL
+	jTCYNbT6i4tjpIEKXGbW03h1Sq9Fnk/UkXqfE9rgW3NcBcKuu6uRUrBo1QD+HyKcmIVGiS3MnFr
+	w3kbPCkcx/qEg95eJLVDwN3/QdB3K7L/TKaL6nVVb19zws04rAx45qqU4D5E1QuY7osxp1JJHzz
+	sgLcnR4lAuxqSn7561DyLBJR1X9c+Om1aWQPvPPm3ZDzHxl+U5y+Dii3jAV4MaunwfHo0PeiN7F
+	bJcYEfOO0CEUxzBjfMBUbcpyB6v555XiOuKn9p3zgvNI7RWH9iNdijLZo8JaPNV65z9sAORuPX4
+	aJVPVNQIo2XU3Dt/nljjHCVdgnhNVv4tvmrm11JSZRaDiuZuhyplD6Kl/lul8tcI/5K+HC1COw5
+	UeWpiLEiiuevW3Vrlrcu5LssW4xsE8p/x39q6iPEMARrxYrKq4D7kt1+9zl7psuRxUzf+fxa9Wx
+	+la6cWc73v8h9k
+X-Received: by 2002:a17:902:ef10:b0:2df:e95f:70bb with SMTP id d9443c01a7336-2ed833ec899mr35607505ad.4.1794221394479;
+        Mon, 09 Nov 2026 02:49:54 -0800 (PST)
 Received: from rahuls-x2elite ([152.57.87.39])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed81739d6dsm8602685ad.66.2026.11.09.02.49.36
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed81739d6dsm8602685ad.66.2026.11.09.02.49.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2026 02:49:46 -0800 (PST)
+        Mon, 09 Nov 2026 02:49:53 -0800 (PST)
 From: Rahul Pon <theflyingrahul@gmail.com>
 To: Hans de Goede <hansg@kernel.org>,
 	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
@@ -92,9 +93,9 @@ Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 	linux-hwmon@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] dt-bindings: embedded-controller: Add HP OmniBook 5 16 EC
-Date: Mon,  9 Nov 2026 16:19:13 +0530
-Message-ID: <20261109104914.1534-2-theflyingrahul@gmail.com>
+Subject: [PATCH 2/2] platform: arm64: Add HP OmniBook 5 16 embedded controller driver
+Date: Mon,  9 Nov 2026 16:19:14 +0530
+Message-ID: <20261109104914.1534-3-theflyingrahul@gmail.com>
 X-Mailer: git-send-email 2.56.0.windows.4
 In-Reply-To: <20261109104914.1534-1-theflyingrahul@gmail.com>
 References: <20261109104914.1534-1-theflyingrahul@gmail.com>
@@ -109,71 +110,545 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The HP OmniBook 5 16 (Snapdragon X2) has an embedded controller on I2C
-at address 0x76. It runs the fan and the keyboard backlight and reports
-the fan speed and its thermistor temperatures.
+The embedded controller of the HP OmniBook 5 16 (Snapdragon X2) sits on
+I2C at address 0x76 and takes commands through a mailbox: wait for an
+idle status (0xef), write the command and sub-command (0xed), wait for
+completion, then read the 32-byte reply (0xee). Its interrupt line
+signals events, read from register 0x00 and acknowledged by writing 0
+back, as HP's ACPI does.
+
+Expose:
+- the fan speed and the four thermistors HP's thermal zones use, through
+  hwmon;
+- the two EC LEDs HP's mute LED WMI methods drive, as the mute and mic
+  mute LEDs;
+- the keyboard backlight timeout (30 s, 3 min or always on) and the
+  current backlight level as sysfs attributes; the EC runs the backlight
+  itself, and its backlight events notify the level attribute;
+- the F9 (mic mute) and F11 (programmable) hotkeys, which only the EC
+  reports, as input events, using HP's WMI key codes as hp-wmi maps them.
+
+The command codes, event codes and reply formats are the ones HP's ACPI
+methods use on this laptop.
 
 Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
- .../hp,omnibook-5-16-bf1xxx-ec.yaml           | 49 +++++++++++++++++++
- 1 file changed, 49 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
+ .../ABI/testing/sysfs-driver-hp-omnibook-5-ec |  19 +
+ MAINTAINERS                                   |   8 +
+ drivers/platform/arm64/Kconfig                |  17 +
+ drivers/platform/arm64/Makefile               |   1 +
+ drivers/platform/arm64/hp-omnibook-5-ec.c     | 417 ++++++++++++++++++
+ 5 files changed, 462 insertions(+)
+ create mode 100644 Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
+ create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
 
-diff --git a/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml b/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
+diff --git a/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec b/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
 new file mode 100644
-index 0000000000..be4c845067
+index 0000000000..4c6f5cb20e
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
-@@ -0,0 +1,49 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
++++ b/Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
+@@ -0,0 +1,19 @@
++What:		/sys/bus/i2c/devices/<bus>-0076/kbd_backlight_timeout
++Date:		September 2026
++KernelVersion:	7.4
++Contact:	Rahul Pon <theflyingrahul@gmail.com>
++Description:
++		(RW) How long the keyboard backlight of the HP OmniBook 5 16
++		stays on after the last key press, as the embedded controller
++		applies it: "30s", "3min" or "always". The Fn key still turns
++		the backlight on and off.
 +
-+title: HP OmniBook 5 16 Embedded Controller
++What:		/sys/bus/i2c/devices/<bus>-0076/kbd_backlight_level
++Date:		September 2026
++KernelVersion:	7.4
++Contact:	Rahul Pon <theflyingrahul@gmail.com>
++Description:
++		(RO) The keyboard backlight level of the HP OmniBook 5 16:
++		0 (off), 1 or 2. Only the backlight key changes it, inside the
++		embedded controller. The attribute is notified when the EC
++		reports a change.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index aa647f5d37..d043a2f8f6 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -12284,6 +12284,14 @@ L:	platform-driver-x86@vger.kernel.org
+ S:	Orphan
+ F:	drivers/platform/x86/hp/tc1100-wmi.c
+ 
++HP OMNIBOOK 5 16 EMBEDDED CONTROLLER DRIVER
++M:	Rahul Pon <theflyingrahul@gmail.com>
++L:	platform-driver-x86@vger.kernel.org
++S:	Maintained
++F:	Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
++F:	Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
++F:	drivers/platform/arm64/hp-omnibook-5-ec.c
 +
-+maintainers:
-+  - Rahul Pon <theflyingrahul@gmail.com>
+ HP WMI HARDWARE MONITOR DRIVER
+ M:	James Seo <james@equiv.tech>
+ L:	linux-hwmon@vger.kernel.org
+diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
+index 3f879410b3..2b34f5ab1b 100644
+--- a/drivers/platform/arm64/Kconfig
++++ b/drivers/platform/arm64/Kconfig
+@@ -48,6 +48,23 @@ config EC_ASUS_GLYMUR
+ 	  temperature sensors readout, fan monitoring, keyboard and EC event
+ 	  reporting.
+ 
++config EC_HP_OMNIBOOK5
++	tristate "HP OmniBook 5 16 Embedded Controller driver"
++	depends on ARCH_QCOM || COMPILE_TEST
++	depends on I2C
++	depends on HWMON
++	depends on INPUT
++	select INPUT_SPARSEKMAP
++	select LEDS_CLASS
++	select NEW_LEDS
++	help
++	  Driver for the Embedded Controller in the Snapdragon X2-based HP
++	  OmniBook 5 16, which reports the fan speed, thermistor
++	  temperatures and hotkeys, and drives the mute LEDs and the
++	  keyboard backlight timeout.
 +
-+description:
-+  The embedded controller of the HP OmniBook 5 16 (Snapdragon X2), on an
-+  I2C bus. It runs the fan and the keyboard backlight and reports the fan
-+  speed and its thermistor temperatures. Its four thermistors can serve
-+  as thermal sensors, indexed 0 to 3.
++	  Say M or Y here to include this support.
 +
-+properties:
-+  compatible:
-+    const: hp,omnibook-5-16-bf1xxx-ec
+ config EC_HUAWEI_GAOKUN
+ 	tristate "Huawei Matebook E Go Embedded Controller driver"
+ 	depends on ARCH_QCOM || COMPILE_TEST
+diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
+index 3bc3d4669c..6c72726eae 100644
+--- a/drivers/platform/arm64/Makefile
++++ b/drivers/platform/arm64/Makefile
+@@ -7,6 +7,7 @@
+ 
+ obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
+ obj-$(CONFIG_EC_ASUS_GLYMUR) += asus-glymur-ec.o
++obj-$(CONFIG_EC_HP_OMNIBOOK5)	+= hp-omnibook-5-ec.o
+ obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
+ obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
+ obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
+diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
+new file mode 100644
+index 0000000000..bfe20e12aa
+--- /dev/null
++++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
+@@ -0,0 +1,417 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * HP OmniBook 5 16 (Snapdragon X2) embedded controller
++ *
++ * The EC takes commands through a mailbox: wait for an idle status, write
++ * the command, wait for it to complete, then read the reply. Command codes
++ * are the ones HP's ACPI tables use on this laptop.
++ */
 +
-+  reg:
-+    const: 0x76
++#include <linux/cleanup.h>
++#include <linux/delay.h>
++#include <linux/hwmon.h>
++#include <linux/i2c.h>
++#include <linux/input.h>
++#include <linux/input/sparse-keymap.h>
++#include <linux/interrupt.h>
++#include <linux/leds.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/string.h>
++#include <linux/sysfs.h>
++#include <linux/unaligned.h>
 +
-+  interrupts:
-+    maxItems: 1
++/* The pending event, cleared by writing 0 (HP's IC10.INTR, field CMD5) */
++#define HPEC_EVENT		0x00
++#define HPEC_STATUS		0xef
++#define HPEC_REQUEST		0xed
++#define HPEC_REPLY		0xee
++#define HPEC_REPLY_LEN		32
 +
-+  "#thermal-sensor-cells":
-+    const: 1
++#define HPEC_STATUS_IDLE	0x00
++#define HPEC_STATUS_DONE	0xe0
++#define HPEC_POLL_TRIES		20
++#define HPEC_POLL_US		5000
 +
-+required:
-+  - compatible
-+  - reg
++#define HPEC_OS_FLAG		0x01
++#define HPEC_OS_FLAG_LEDS	0x84
++#define HPEC_KBD		0x05
++#define HPEC_KBD_TIMEOUT_GET	0xfe
++#define HPEC_KBD_LEVEL_GET	0xff
++#define HPEC_LED		0x06
++#define HPEC_LED_GET		0xff
++#define HPEC_LED_ON		0x80
++#define HPEC_THERMISTOR		0x26
++#define HPEC_THERMISTOR_INVALID	0xff
++#define HPEC_FAN		0xbc
++#define HPEC_FAN_RPM		0x03
 +
-+additionalProperties: false
++/* The four thermistors HP's thermal zones enable, in their order */
++static const u8 hpec_thermistors[] = { 0x00, 0x07, 0x04, 0x0a };
 +
-+examples:
-+  - |
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
++static const char * const hpec_thermistor_labels[] = {
++	"EC thermistor 1", "EC thermistor 2", "EC thermistor 3", "EC thermistor 4",
++};
 +
-+        embedded-controller@76 {
-+            compatible = "hp,omnibook-5-16-bf1xxx-ec";
-+            reg = <0x76>;
-+            #thermal-sensor-cells = <1>;
-+        };
-+    };
-+...
++/* EC events, with HP's WMI hotkey codes from hp-wmi where they exist */
++#define HPEC_EVENT_HOT		0x0b
++#define HPEC_EVENT_KBD		0x0d
++#define HPEC_EVENT_KBD_KEY	0x1d
++
++static const struct key_entry hpec_keymap[] = {
++	{ KE_IGNORE, 0x0d, },			/* backlight key, run by the EC */
++	{ KE_KEY, 0x11, { KEY_MICMUTE } },	/* F9, WMI 0x270 */
++	{ KE_IGNORE, 0x1d, },			/* backlight key, run by the EC */
++	{ KE_KEY, 0x1e, { KEY_PROG2 } },	/* F11, WMI 0x21a8 */
++	{ KE_IGNORE, 0x30, },			/* fan and thermistor notices */
++	{ KE_IGNORE, 0x31, },
++	{ KE_IGNORE, 0x32, },
++	{ KE_IGNORE, 0x33, },
++	{ KE_IGNORE, 0x34, },
++	{ KE_IGNORE, 0x35, },
++	{ KE_IGNORE, 0x36, },
++	{ KE_IGNORE, 0x37, },
++	{ KE_IGNORE, 0x38, },
++	{ KE_IGNORE, 0x88, },			/* Fn lock, WMI 0x21ab */
++	{ KE_END, 0 }
++};
++
++/* Keyboard backlight timeout, in EC value order */
++static const char * const hpec_kbd_timeouts[] = { "30s", "3min", "always" };
++
++/* EC LEDs 8 and 9, which HP's mute LED WMI methods drive */
++static const struct {
++	const char *name;
++	const char *trigger;
++	u8 index;
++} hpec_leds[] = {
++	{ "platform::mute", "audio-mute", 0x08 },
++	{ "platform::micmute", "audio-micmute", 0x09 },
++};
++
++struct hpec;
++
++struct hpec_led {
++	struct led_classdev cdev;
++	struct hpec *ec;
++	u8 index;
++};
++
++struct hpec {
++	struct i2c_client *client;
++	struct mutex lock;	/* serializes mailbox commands */
++	struct hpec_led leds[ARRAY_SIZE(hpec_leds)];
++	struct input_dev *input;
++};
++
++static int hpec_wait(struct hpec *ec, u8 status)
++{
++	int i, ret;
++
++	for (i = 0; i < HPEC_POLL_TRIES; i++) {
++		ret = i2c_smbus_read_byte_data(ec->client, HPEC_STATUS);
++		if (ret < 0)
++			return ret;
++		if (ret == status)
++			return 0;
++		fsleep(HPEC_POLL_US);
++	}
++
++	return -ETIMEDOUT;
++}
++
++static int hpec_command(struct hpec *ec, u8 cmd, u8 sub, u8 reply[HPEC_REPLY_LEN])
++{
++	u8 request[] = { cmd, sub };
++	int ret;
++
++	guard(mutex)(&ec->lock);
++
++	ret = hpec_wait(ec, HPEC_STATUS_IDLE);
++	if (ret)
++		return ret;
++
++	ret = i2c_smbus_write_i2c_block_data(ec->client, HPEC_REQUEST,
++					     sizeof(request), request);
++	if (ret)
++		return ret;
++
++	ret = hpec_wait(ec, HPEC_STATUS_DONE);
++	if (ret || !reply)
++		return ret;
++
++	ret = i2c_smbus_read_i2c_block_data(ec->client, HPEC_REPLY,
++					    HPEC_REPLY_LEN, reply);
++	if (ret < 0)
++		return ret;
++
++	return ret == HPEC_REPLY_LEN ? 0 : -EIO;
++}
++
++static int hpec_hwmon_read(struct device *dev, enum hwmon_sensor_types type,
++			   u32 attr, int channel, long *val)
++{
++	struct hpec *ec = dev_get_drvdata(dev);
++	u8 reply[HPEC_REPLY_LEN];
++	int ret;
++
++	switch (type) {
++	case hwmon_fan:
++		ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
++		if (ret)
++			return ret;
++		*val = get_unaligned_le16(reply);
++		return 0;
++	case hwmon_temp:
++		ret = hpec_command(ec, HPEC_THERMISTOR, hpec_thermistors[channel], reply);
++		if (ret)
++			return ret;
++		if (reply[0] == HPEC_THERMISTOR_INVALID)
++			return -ENODATA;
++		*val = reply[0] * 1000;
++		return 0;
++	default:
++		return -EOPNOTSUPP;
++	}
++}
++
++static int hpec_hwmon_read_string(struct device *dev, enum hwmon_sensor_types type,
++				  u32 attr, int channel, const char **str)
++{
++	if (type != hwmon_temp)
++		return -EOPNOTSUPP;
++
++	*str = hpec_thermistor_labels[channel];
++	return 0;
++}
++
++static umode_t hpec_hwmon_is_visible(const void *data, enum hwmon_sensor_types type,
++				     u32 attr, int channel)
++{
++	return 0444;
++}
++
++static const struct hwmon_ops hpec_hwmon_ops = {
++	.is_visible = hpec_hwmon_is_visible,
++	.read = hpec_hwmon_read,
++	.read_string = hpec_hwmon_read_string,
++};
++
++static const struct hwmon_channel_info * const hpec_hwmon_info[] = {
++	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
++	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT),
++	HWMON_CHANNEL_INFO(temp,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL),
++	NULL
++};
++
++static const struct hwmon_chip_info hpec_hwmon_chip = {
++	.ops = &hpec_hwmon_ops,
++	.info = hpec_hwmon_info,
++};
++
++static enum led_brightness hpec_led_get(struct led_classdev *cdev)
++{
++	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
++	u8 reply[HPEC_REPLY_LEN];
++
++	if (hpec_command(led->ec, HPEC_LED, HPEC_LED_GET, reply))
++		return LED_OFF;
++
++	return (reply[1] >> (led->index - hpec_leds[0].index)) & 1;
++}
++
++static int hpec_led_set(struct led_classdev *cdev, enum led_brightness value)
++{
++	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
++	int ret;
++
++	/* As HP's method does before every change */
++	ret = hpec_command(led->ec, HPEC_OS_FLAG, HPEC_OS_FLAG_LEDS, NULL);
++	if (ret)
++		return ret;
++
++	return hpec_command(led->ec, HPEC_LED,
++			    led->index | (value ? HPEC_LED_ON : 0), NULL);
++}
++
++static irqreturn_t hpec_irq(int irq, void *data)
++{
++	struct hpec *ec = data;
++	struct device *dev = &ec->client->dev;
++	int event;
++
++	scoped_guard(mutex, &ec->lock) {
++		event = i2c_smbus_read_byte_data(ec->client, HPEC_EVENT);
++		if (event < 0) {
++			dev_err_ratelimited(dev, "cannot read EC event: %d\n", event);
++			return IRQ_HANDLED;
++		}
++		i2c_smbus_write_byte_data(ec->client, HPEC_EVENT, 0);
++	}
++
++	if (!event)
++		return IRQ_HANDLED;
++
++	if (event == HPEC_EVENT_KBD || event == HPEC_EVENT_KBD_KEY)
++		sysfs_notify(&dev->kobj, NULL, "kbd_backlight_level");
++
++	if (event == HPEC_EVENT_HOT) {
++		dev_crit(dev, "EC reports a critical temperature\n");
++		return IRQ_HANDLED;
++	}
++
++	if (!sparse_keymap_report_event(ec->input, event, 1, true))
++		dev_info_ratelimited(dev, "unknown EC event %#x\n", event);
++
++	return IRQ_HANDLED;
++}
++
++static ssize_t kbd_backlight_timeout_show(struct device *dev,
++					  struct device_attribute *attr, char *buf)
++{
++	struct hpec *ec = dev_get_drvdata(dev);
++	u8 reply[HPEC_REPLY_LEN];
++	int ret;
++
++	ret = hpec_command(ec, HPEC_KBD, HPEC_KBD_TIMEOUT_GET, reply);
++	if (ret)
++		return ret;
++
++	if (reply[0] >= ARRAY_SIZE(hpec_kbd_timeouts))
++		return sysfs_emit(buf, "%#x\n", reply[0]);
++
++	return sysfs_emit(buf, "%s\n", hpec_kbd_timeouts[reply[0]]);
++}
++
++static ssize_t kbd_backlight_timeout_store(struct device *dev,
++					   struct device_attribute *attr,
++					   const char *buf, size_t count)
++{
++	struct hpec *ec = dev_get_drvdata(dev);
++	int i, ret;
++
++	i = sysfs_match_string(hpec_kbd_timeouts, buf);
++	if (i < 0)
++		return i;
++
++	ret = hpec_command(ec, HPEC_KBD, i, NULL);
++
++	return ret ?: count;
++}
++static DEVICE_ATTR_RW(kbd_backlight_timeout);
++
++/* The level is set only by the backlight key, inside the EC */
++static ssize_t kbd_backlight_level_show(struct device *dev,
++					struct device_attribute *attr, char *buf)
++{
++	struct hpec *ec = dev_get_drvdata(dev);
++	u8 reply[HPEC_REPLY_LEN];
++	int ret;
++
++	ret = hpec_command(ec, HPEC_KBD, HPEC_KBD_LEVEL_GET, reply);
++	if (ret)
++		return ret;
++
++	return sysfs_emit(buf, "%u\n", reply[0]);
++}
++static DEVICE_ATTR_RO(kbd_backlight_level);
++
++static struct attribute *hpec_attrs[] = {
++	&dev_attr_kbd_backlight_level.attr,
++	&dev_attr_kbd_backlight_timeout.attr,
++	NULL
++};
++ATTRIBUTE_GROUPS(hpec);
++
++static int hpec_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	struct device *hwmon;
++	u8 reply[HPEC_REPLY_LEN];
++	struct hpec *ec;
++	unsigned int i;
++	int ret;
++
++	ec = devm_kzalloc(dev, sizeof(*ec), GFP_KERNEL);
++	if (!ec)
++		return -ENOMEM;
++
++	ec->client = client;
++	i2c_set_clientdata(client, ec);
++	ret = devm_mutex_init(dev, &ec->lock);
++	if (ret)
++		return ret;
++
++	ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
++	if (ret)
++		return dev_err_probe(dev, ret, "EC does not answer\n");
++
++	ec->input = devm_input_allocate_device(dev);
++	if (!ec->input)
++		return -ENOMEM;
++
++	ec->input->name = "HP OmniBook 5 EC hotkeys";
++	ec->input->phys = "hp-omnibook-5-ec/input0";
++	ec->input->id.bustype = BUS_I2C;
++
++	ret = sparse_keymap_setup(ec->input, hpec_keymap, NULL);
++	if (ret)
++		return ret;
++
++	ret = input_register_device(ec->input);
++	if (ret)
++		return ret;
++
++	hwmon = devm_hwmon_device_register_with_info(dev, "hp_omnibook_ec", ec,
++						     &hpec_hwmon_chip, NULL);
++	if (IS_ERR(hwmon))
++		return PTR_ERR(hwmon);
++
++	for (i = 0; i < ARRAY_SIZE(hpec_leds); i++) {
++		struct hpec_led *led = &ec->leds[i];
++
++		led->ec = ec;
++		led->index = hpec_leds[i].index;
++		led->cdev.name = hpec_leds[i].name;
++		led->cdev.default_trigger = hpec_leds[i].trigger;
++		led->cdev.max_brightness = 1;
++		led->cdev.brightness_get = hpec_led_get;
++		led->cdev.brightness_set_blocking = hpec_led_set;
++
++		ret = devm_led_classdev_register(dev, &led->cdev);
++		if (ret)
++			return ret;
++	}
++
++	if (client->irq > 0) {
++		ret = devm_request_threaded_irq(dev, client->irq, NULL, hpec_irq,
++						IRQF_ONESHOT, "hp-omnibook-5-ec", ec);
++		if (ret)
++			return dev_err_probe(dev, ret, "cannot request the EC interrupt\n");
++	}
++
++	return 0;
++}
++
++static const struct of_device_id hpec_of_match[] = {
++	{ .compatible = "hp,omnibook-5-16-bf1xxx-ec" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, hpec_of_match);
++
++static struct i2c_driver hpec_driver = {
++	.driver = {
++		.name = "hp-omnibook-5-ec",
++		.of_match_table = hpec_of_match,
++		.dev_groups = hpec_groups,
++	},
++	.probe = hpec_probe,
++};
++module_i2c_driver(hpec_driver);
++
++MODULE_DESCRIPTION("HP OmniBook 5 16 embedded controller");
++MODULE_LICENSE("GPL");
 -- 
 2.53.0
 
