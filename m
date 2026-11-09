@@ -1,96 +1,135 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.42
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.9
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794247093;
-	b=ZA8YzFGvpKBgzjtNxlS5vddPCsCa3DmVqBvjETTQR2SQqhb2iVGyRg2h9OKdiozHPd1/
-	 qESt8+cfETljsnRnuj3akHqapi077UK6WA4nnV/brl82ioOa3XAJ2seq0fUxtVfMSBRgC
-	 gtGrz2EckNILPZdbHkW4qpx28wav7Zjw7fEd9MxqdVjhmrSMba1584ZmV3p66En1PW6iv
-	 /bQscwdRN5Td+o97HEbot8ZQMvjYD0Mu0cc2JjvSnBLWhNRBggfloH22dhrop0W+wRZ2C
-	 +c0n2L2pwPGSK5zd4dyt4AMntVyP55+YwmJfPfvgslysepkchfpDijHVIma4VPv0WFg==
+	t=1794247364;
+	b=b4OWW67ffupy/FsUxfnHvU4i/x+Gq1SwWjoFQS76S5bCYApb+BVjvPXoVEHe1gS6RKrD
+	 qK29UPnwf7Y6B2eLjRv40rVKiA8mSXq8Vazb7UBTvRQHgFleWzEYcX7//VeKMNLq7jb3l
+	 h+ymWqiKSK3pvaR6XQtTP4UhzjmOL97uuQh1Tgtvp1UfjMe2UqvuhJCgAKGhKEibvin/r
+	 05qhAQFyym/6DIg4/U0qROeCIw3EEJUJLA7zY4Cxgy1LztAhQefvNKYCd+7+AhN72uHwP
+	 qmk/Z7PtJSR94+tjZI1QT4+xHspEm/RTIjEWZO5E7TCV7QDQaLA1DVxCtUFDT4Vgg5A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794247093;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=NQFcBegZVinznGcGamAVLxh2DaKy3WmcCJmY9lmdZkM=;
-	b=IaIAxFN6uU4CjYmS5HQ818GZWOmNBuNEmGON6UXSHBkE0wAYoIod7dpIMHs6WPyzdklE
-	 gZNeKgVapDDzYVkck90eYmNWZ33zDzj5t6QKrnfZvl+evTLaV2Rim1B04PAXZVJW7rrDY
-	 isL3fPdG4ZKIb8zqmfPJd85KfpHF1PEBc6fJHFn3GU5MfweKrR6HBpkcNwbhK4RpvIwff
-	 C/0RSFYQuXLvAm+UaNVjt4EvWQGmSOZzubON9tuyndO7Hv6oqDKdEcdfEv5MvEsluxr+a
-	 RjLwe0pCbup8xy+PTFcuV1YzBZC46AhzzOepssG7JBS+0NpqGSFtlcWX17rlyoQ+hlA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794247364;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=qBL546n84kVw8zSWbG66JT4Kv5FLqZ7Q9evIqEtakAI=;
+	b=Q8G6SWchbnoWwtiyriNMIV56wMtXGba+7ZlUQ5+OlPywGvVmT4jehEqGwMC7oEyp7Wbv
+	 dhVTGdbi1/5clYtnt5lKgzFIluXl/DzwNZxCwiYY6knvJXcYCvLHqGJuwWwLCVHnENNGW
+	 D7tcju+6LL6eg7lcBz/E8dFfLK845C91bzQBjFo2go6k9KiTMhUxL4LCGrNsmK/0Iphi3
+	 RJZiDx5iMu8Ig1zxlE7PHV62YTG2Uu7STq+nxp7fbMmZyCIlqE5w8xFuwIj2yqfPpJ6Cn
+	 ColJGCWi6oCHaA6wO76C4kxg17/XxBYPXYYw5Eobbgi+/4YhhE4JEUuge5cnCVLD7HQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=luxonis.com;
-	spf=pass smtp.mailfrom=luxonis.com;
-	dkim=pass header.d=luxonis.com header.i=@luxonis.com header.a=rsa-sha256 header.s=google header.b=hVX0AILp;
-	arc=none smtp.remote-ip=209.85.221.42
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=hPUAT6pN;
+	arc=none smtp.remote-ip=198.175.65.9
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66007606A321
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 17:58:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66007606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=luxonis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=luxonis.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1703606A31C;
+	Mon,  9 Nov 2026 18:02:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F1703606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=luxonis.com header.i=@luxonis.com header.a=rsa-sha256 header.s=google header.b=hVX0AILp
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-490a0e72588so646532f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 09:58:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=luxonis.com; s=google; t=1794247092; x=1794851892; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NQFcBegZVinznGcGamAVLxh2DaKy3WmcCJmY9lmdZkM=;
-        b=hVX0AILpInoPfFisEkn/YXDFkZzXheGdiSemxWWm0t5cmFv4OFi+6aXEbTUaM3mJox
-         h1bQ5xmMku7mNUGnqOyBK+rA6jXs5x3sUZ/+0OACH3kuy/E+2694CldtctlFo2kkqDJf
-         ivyCrJT7ZVn5StfQfVydFKmVHapg05QbPWTzE5ywJs/VQz9zrW/CgHt2asoB6yH0zyz4
-         2+MYYPO7SJMum3X7wnYJ0iC7cR/2xhKqXfm5J49tinJTqSF5Vn+M40KNXAfs6mcGb42w
-         bVK1e7wZrrEYzb3K4jkpGiWL6Bo/kQHZir/pi6QCuwtr3wLOqxIUIUb+u+fgdeCorrgF
-         2ujA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794247092; x=1794851892;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NQFcBegZVinznGcGamAVLxh2DaKy3WmcCJmY9lmdZkM=;
-        b=x/Ln51Jz+n0xsM580Y9AKRv/V06Rijgcttjqz5Bu4gt46L3V4UKcu82yw2hcn+vFr4
-         snUlz5XtLM5yK41ELJ+Iupzv4k4w84WskfeojHeDRf4C+iJlfv6S1o+MV+8mvZg8a04J
-         84yHg95MQt1l7SiuBpVr/YbuvTLe0/gX3qfm6nJgat+sQBhUz7NGgNjBekKg8PcmSPvE
-         Noxnd6LTuuldPitmx8hSgmlYEWBFf0pHWgDt/9jWvWCoaaYbe5M5za19rd1/tvj8KncO
-         KjgA/V1GCpQnRmFm5QM66IND8HaJnoroN0AGV7s9LnN72DoP5UD0nuUqVDLS5veTvlzC
-         6yNg==
-X-Forwarded-Encrypted: i=1; AL+hErHeocyRBXhxAhiAlWhbG0yTsPnizMvNa83qTvzSEFTYLWtbHgYR0IQe3hRaUTRxBnJo5GkPTvUQnEWdY2D3@vger.kernel.org
-X-Gm-Message-State: APuU4Z91tZRiIOmnHqQqCdJaywcjBZnpBm1gY0yA7uJmXKeepiQRMbdN
-	H5TYph6Wz8KX+WNFbZ6DlMOCzIrvNJIFKLimiKwskM8ZIrFWoqAPi6VpmHVMqqmJdcg=
-X-Gm-Gg: AYBFou0MH7RsvdTZwk1cTnsk9FJ4UZqOrlp5CHz2OliTK1w7bmsKmylsj5CvY1kn9WG
-	ymRXMxRhHpdOvEbWTpI6NNToauXNVFV1pbTL5SZ3F//+/wAIWfMpwZcxCYGWC6oDn3u9DOB0Laq
-	38KOoOoUKAko+VMw6tkhgp9mSkIbGNP8/4X1+kbs3DePOYTMsS3r7jubGeN6vxDUfVv152S0mSk
-	bq20BLm/DXClxB9SBFNi8vf6YL4s82WvHsbfw2Lu0y3ekhZX7f13iuyaWMsI1VvEljWe/MVIBzf
-	88yFlJ86njRc11YSNNzyC6DJj7milVqB2JUsGIaROqroLdPWOf4bOlZGlgxriGIe9hIv1jxnKe7
-	39NugA/INph8LJsQUDdzmSuVs7xeP5C7Y/rPzHzfFpwisWeW3kE8AjjuAfKeWA6xasw20BKVlgf
-	kpcGvaYV+P6vGo+HpYK9KiQWxmbSmqvBnlQU/4BU22vdmNDzYYl9vxPUwbWHtslwxwNXK2KGf52
-	F1s9fezkqegdlbCpCNSSJATy0zgIa6P+sY4CcHQ9r90ryeRJfjXvgZx2hlKbDLLyQyBC98NqEiA
-	+jXBMD7igA+T7QTXNKCdt+lNvJCzEKSxkJ4FoTHAGg0wZHIsHqT0xL2savT3fZqZsg09EQ==
-X-Received: by 2002:a05:6000:29c9:b0:490:a481:7ac8 with SMTP id ffacd0b85a97d-4982eedfb1cmr255737f8f.29.1794247091597;
-        Mon, 09 Nov 2026 09:58:11 -0800 (PST)
-Received: from JureBuildPC (46-150-36-237.static.telemach.net. [46.150.36.237])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49835e20327sm238110f8f.26.2026.11.09.09.58.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2026 09:58:10 -0800 (PST)
-From: Jure Rebernik <jure.rebernik@luxonis.com>
-To: andersson@kernel.org,
-	mathieu.poirier@linaro.org
-Cc: konrad.dybcio@oss.qualcomm.com,
-	mukesh.ojha@oss.qualcomm.com,
-	linux-remoteproc@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Jure Rebernik <jure.rebernik@luxonis.com>,
-	stable@vger.kernel.org
-Subject: [PATCH] remoteproc: qcom: pas: Request stop before tearing down GLINK and SMD
-Date: Mon,  9 Nov 2026 18:57:52 +0100
-Message-ID: <20261109175752.793130-1-jure.rebernik@luxonis.com>
-X-Mailer: git-send-email 2.56.0
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=hPUAT6pN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794247364; x=1825783364;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=lTSpr2GI78io7MkEyt4FUNnh+Ze4ac0+NixA3FDB8nQ=;
+  b=hPUAT6pNnAAXuCbbSaMn7A7ZCgJeYFp4TqWM/FQSenOO+rFJQnnJFzaZ
+   fj+D4UpxG59VfudicEQQx3szJXRsC9uhrCN+iNVgVEBb9AFyMAGloMy4j
+   7nE8OugbUDRLcggkaRjxxjtdaLW6DeUbhivQJbzE5TRSieIcOiDORoqrH
+   0eZzUpzXz41x2EE7b2wjdqlVZzVJ+rMaBH3QVtKoTBeT7IaCiHVTYJe6g
+   /JBBjxSJOQYx37yDyTLBPADZeuHCu+ncEcxNVB2Ekjw9KyOko5WQ31QZ2
+   UdgBwXxayhyuS+HdvtiS9L2sUjaDkilPA1cj0VM6XyqFNOd8GnPnLT7ml
+   Q==;
+X-CSE-ConnectionGUID: DAeR/2IJSKy2IuQuaol87Q==
+X-CSE-MsgGUID: yoEV1Q2SSO23ROYphxvXIA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11961"; a="2877428"
+X-IronPort-AV: E=Sophos;i="6.27,204,1787036400"; 
+   d="scan'208";a="2877428"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 10:02:43 -0800
+X-CSE-ConnectionGUID: kh6S7vkjRge2Au/8/Y2xMw==
+X-CSE-MsgGUID: Z/nSAtfmRl2XXURKPF7N5A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,204,1787036400"; 
+   d="scan'208";a="8243221"
+Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.144])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 10:02:29 -0800
+Date: Mon, 9 Nov 2026 20:02:27 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Thierry Reding <thierry.reding@kernel.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Frank.Li@oss.nxp.com,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Richard Genoud <richard.genoud@bootlin.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Laxman Dewangan <ldewangan@nvidia.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Cunhao Lu <1579567540@qq.com>, Raul E Rangel <rrangel@chromium.org>,
+	Yenchia Chen <yenchia.chen@mediatek.com>,
+	Zhiyong Tao <zhiyong.tao@mediatek.com>,
+	Carlo Caione <ccaione@baylibre.com>, Moteen Shah <m-shah@ti.com>,
+	Kendall Willis <k-willis@ti.com>,
+	Kartik Rajput <kkartik@nvidia.com>, Fan Wu <fanwu01@zju.edu.cn>,
+	Nicolai Buchwitz <nb@tipi-net.de>,
+	Karl Mehltretter <kmehltretter@gmail.com>,
+	Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>,
+	Shitalkumar Gandhi <shital.gandhi45@gmail.com>,
+	Peng Fan <peng.fan@nxp.com>, Sherry Sun <sherry.sun@nxp.com>,
+	John Ogness <john.ogness@linutronix.de>,
+	Pan Chuang <panchuang@vivo.com>, Petr Mladek <pmladek@suse.com>,
+	Robin Gong <yibin.gong@nxp.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Stephan Gerhold <stephan.gerhold@linaro.org>,
+	Zhaoyang Yu <2426767509@qq.com>,
+	"Nikola Z. Ivanov" <zlatistiv@gmail.com>,
+	Haoxiang Li <haoxiang_li2024@163.com>,
+	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+	Biju Das <biju.das.jz@bp.renesas.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Myeonghun Pak <mhun512@gmail.com>,
+	Wenhua Lin <Wenhua.Lin@unisoc.com>, Cixi Geng <cixi.geng@linux.dev>,
+	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-kernel@vger.kernel.org>,
+	"open list:TTY LAYER AND SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
+	"moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>,
+	"moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
+	"open list:ARM/FREESCALE IMX / MXC / LAYERSCAPE ARM ARCHIT..." <imx@lists.linux.dev>,
+	"open list:ARM/QUALCOMM MAILING LIST" <linux-arm-msm@vger.kernel.org>,
+	"open list:ARM/SAMSUNG S3C, S5P AND EXYNOS ARM ARCHITECTURES" <linux-samsung-soc@vger.kernel.org>,
+	"open list:TEGRA ARCHITECTURE SUPPORT" <linux-tegra@vger.kernel.org>,
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
+	vkoul@kernel.org
+Subject: Re: [PATCH 1/1] tty: serial: use dmaengine_desc_set_callback()
+Message-ID: <avIKs_b3cxRLXpGm@ashevche-desk.local>
+References: <20261102175527.3957740-1-Frank.Li@oss.nxp.com>
+ <aux2VKHnVLwq_wzi@orome>
+ <auyQEVmA2KeGu9DL@ashevche-desk.local>
+ <auyiAE3lhnFahBK2@orome>
+ <auysTnqWgz2kE7e9@ashevche-desk.local>
+ <2209947d-0b9b-417f-9ffb-1c81790af9db@kernel.org>
+ <auzEupFd_Ek2HpLG@ashevche-desk.local>
+ <au3GYOP5P7B90-bX@orome>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,149 +139,126 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <au3GYOP5P7B90-bX@orome>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-A crash of the ADSP that the host reports, for example through the
-remoteproc debugfs crash file, can reset the whole SoC on QCS8550
-instead of restarting the ADSP. The reset was most frequent shortly
-after the ADSP had started: on two QCS8550-based boards, crashing it
-about 4.5 seconds after it was started reset the SoC in 19 of 42
-tries. The serial console showed that the system stopped right after
-the recovery started. Nothing more was logged, and the SoC was reset 6
-to 7 seconds later.
+On Fri, Nov 06, 2026 at 01:40:15PM +0100, Thierry Reding wrote:
+> On Thu, Nov 05, 2026 at 08:02:34PM +0200, Andy Shevchenko wrote:
+> > On Thu, Nov 05, 2026 at 05:21:06PM +0100, Krzysztof Kozlowski wrote:
+> > > On 05/11/2026 17:18, Andy Shevchenko wrote:
+> > > > On Thu, Nov 05, 2026 at 04:36:38PM +0100, Thierry Reding wrote:
+> > > >> On Thu, Nov 05, 2026 at 04:17:53PM +0200, Andy Shevchenko wrote:
+> > > >>> On Thu, Nov 05, 2026 at 01:28:46PM +0100, Thierry Reding wrote:
+> > > >>>> On Mon, Nov 02, 2026 at 12:54:48PM -0500, Frank.Li@oss.nxp.com wrote:
+> > > >>>>>
+> > > >>>>> Replace open-coded assignments to callback and callback_param fields
+> > > >>>>> of struct dma_async_tx_descriptor with calls to the
+> > > >>>>> dmaengine_desc_set_callback() helper across serial drivers.
+> > > >>>>>
+> > > >>>>> No functional change intended. Prepare to make struct
+> > > >>>>> dma_async_tx_descriptor private to the DMA engine.
+> > > >>>>>
+> > > >>>>> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > > >>>>> ---
+> > > >>>>>  drivers/tty/serial/8250/8250_dma.c  | 6 ++----
+> > > >>>>>  drivers/tty/serial/8250/8250_mtk.c  | 3 +--
+> > > >>>>>  drivers/tty/serial/8250/8250_omap.c | 6 ++----
+> > > >>>>>  drivers/tty/serial/amba-pl011.c     | 6 ++----
+> > > >>>>>  drivers/tty/serial/atmel_serial.c   | 6 ++----
+> > > >>>>>  drivers/tty/serial/fsl_lpuart.c     | 6 ++----
+> > > >>>>>  drivers/tty/serial/imx.c            | 6 ++----
+> > > >>>>>  drivers/tty/serial/msm_serial.c     | 6 ++----
+> > > >>>>>  drivers/tty/serial/mxs-auart.c      | 6 ++----
+> > > >>>>>  drivers/tty/serial/pch_uart.c       | 6 ++----
+> > > >>>>>  drivers/tty/serial/samsung_tty.c    | 6 ++----
+> > > >>>>>  drivers/tty/serial/serial-tegra.c   | 6 ++----
+> > > >>>>>  drivers/tty/serial/sh-sci.c         | 9 +++------
+> > > >>>>>  drivers/tty/serial/sprd_serial.c    | 3 +--
+> > > >>>>>  drivers/tty/serial/stm32-usart.c    | 6 ++----
+> > > >>>>>  15 files changed, 29 insertions(+), 58 deletions(-)
+> > > >>>>
+> > > >>>> Reviewed-by: Thierry Reding <treding@nvidia.com>
+> > > >>>
+> > > >>> Krzysztof, now look at this case. I would argue that this is even less fit than
+> > > >>> # subpart(s) case, because it might imply anything. Again the problem is the
+> > > >>> bundle, and for such a case (when tons of independent changes are bundled in
+> > > >>> the same stuff, *every* Rb tag has to be explained on what has been reviewed!
+> > > >>
+> > > >> It may be a bit subtle, but the placement of the tag indicates that it
+> > > >> applies to the entirety of the changes. I didn't crop the list of
+> > > >> changed files, nor did I omit the summary.
+> > > > 
+> > > > This doesn't clarify the question. Wordless Rb tag on a bundles is an oddity.
+> > > 
+> > > No, it's perfectly normal and typical. I would not expect anything else,
+> > > because writing "LGTM" is pointless. We are experienced reviewers and we
+> > > do understand what Reviewer's statement of oversight means, thus giving
+> > > the tag is obvious, explicit and not odd.
+> > > 
+> > > > 
+> > > >> That bit of meta-data obviously isn't picked up into the tag line, but
+> > > >> I think the default meaning of Reviewed-by is that it applies to the
+> > > >> entire thing.
+> > > > 
+> > > > And I interpret it otherwise, because this is a set of independent changes
+> > > > bundled into a single patch!
+> > > 
+> > > It's not set of independent changes, but even if it was then it would
+> > > not matter. We review the code regardless how we actually judge the
+> > > atomicity of a patch.
+> > 
+> > And I confront exactly that! When the patch may be split it has to. This is
+> > seems the outcome of this discussion to me. From now on I think I will NAK
+> > any bundle patch until piece that I in charge to is split from the bundle.
+> 
+> I'd like to caution against this. There's effectively one change in this
+> patch and it converts all the drivers in the same way. This was probably
+> generated using a script or semantic patch. Requiring this to be split
+> up is going to make the author spend a lot of time creating 15 patches
+> instead of just one. They will have to write the same commit message
+> with tiny variations, which they'll most likely just use a script for
+> because it's tedious. Or they don't use a script and likely get at least
+> one commit message wrong. And then we're not reviewing a patch for
+> technical correctness anymore but waste a lot of time on nit-picking on
+> a subject or commit message. Each of these commit messages is not going
+> to add any new information either, so the only thing you really achieve
+> is to increase the signal-to-noise ratio.
+> 
+> That's completely absurd.
+> 
+> Also, reviewing 15 miniature patches is going to take much more time
+> that reviewing this monolithic one, so I suspect potential reviewers are
+> more likely to just stay away from it to begin with.
+> 
+> In the end you make life miserable for everyone. Well, except for
+> individual driver maintainers that want a quick and easy way to slap
+> their approval onto only the one driver change that they really care
+> about.
+> 
+> But there's already a way that they can do that. Acked-by can just mean
+> "I maintain this driver and I agree with the direction, but I haven't
+> bothered to do a full technical review". That's what most of these
+> "partial" Reviewed-bys are, so why not just use that existing tool?
+> 
+> And I'm saying all of this without judgement, because sometimes you do
+> not have the time to do a full review but you still want to lend your
+> support to ongoing work. I do that quite often myself.
+> 
+> But at other times I do want to look at something in more detail, or
+> just ended up looking thoroughly enough for it to count as a full review
+> and when I do I'll let people know with a Reviewed-by.
 
-Since commit 0ea50486978f ("remoteproc: qcom: q6v5: Request shutdown if
-crash is triggered host-side"), qcom_q6v5_request_stop() also sets the
-SMP2P stop bit for a crash that the host reports, so that the firmware
-takes part in its shutdown. The stop is requested from qcom_pas_stop(),
-which rproc_stop() calls only after all subdevices have stopped. By
-then the GLINK and SMD edges to the DSP have been unregistered and
-their client devices, such as FastRPC, torn down. On QCS8550 the ADSP
-firmware treats the stop bit as a fatal error and runs its error
-handler after these links have gone away.
+Okay, the only way I see now is to ignore bundles where patches have different
+maintainers. Or NAK, or request to split (depending on the content).
 
-Add a subdevice whose .stop callback requests the stop, and add it
-before sysmon. Subdevices stop in the reverse order of addition, so the
-callback runs after the SSR BEFORE_SHUTDOWN notification and
-sysmon_stop(), and before SMD and GLINK are torn down. The firmware
-then handles the stop request while its GLINK and SMD edges are still
-registered. qcom_q6v5_request_stop() still skips the request when
-sysmon got a shutdown ack, or when the firmware reported the crash
-itself and the fatal or watchdog interrupt has cleared the running
-flag. It also clears the running flag, so the call in qcom_pas_stop()
-now only sends a request when the subdevices were not started.
+Ignoring is an easy way out, of course. Makes me more time for something more
+useful. Thanks folks, for the fruitful discussion.
 
-With this change, none of 104 host-reported crashes on the same boards
-reset the SoC: 40 ADSP crashes at 4.5 seconds, 20 at 4 to 15 seconds,
-20 while the ADSP was streaming IMU sensor data and 24 CDSP crashes.
-The ADSP or CDSP restarted each time.
-
-The problem was found, and this change was written and tested, with
-the help of an AI coding assistant (Claude Code, by Anthropic). I
-reviewed the change and the test results.
-
-Fixes: 0ea50486978f ("remoteproc: qcom: q6v5: Request shutdown if crash is triggered host-side")
-Cc: stable@vger.kernel.org
-Signed-off-by: Jure Rebernik <jure.rebernik@luxonis.com>
----
-
-Notes:
-    Tested on Luxonis OAK4-S boards (QCS8550), ADSP and CDSP, with a kernel
-    based on v7.2.6, which has 0ea50486978f as stable commit 0dc9e289bbb5.
-    The crashes were triggered through the debugfs crash file. To see when
-    the system stopped, a test script wrote a kernel log line to the serial
-    console 20 times a second. A crash that the firmware reports could not
-    be injected.
-    
-    Graceful stops through sysfs also reset these boards occasionally, with
-    and without this patch (2 of 300 stops with it, 2 of about 290 without
-    it). That problem is unrelated to this patch, and I am looking into it
-    separately. This patch does not change that case: the firmware
-    acknowledged the sysmon shutdown request, so no stop request was sent.
-    
-    qcom_q6v5_adsp and qcom_q6v5_mss also call qcom_q6v5_request_stop()
-    from their .stop callbacks, after the subdevices have stopped, and
-    qcom_q6v5_wcss does when requires_force_stop is set. I have no hardware
-    for them and left them unchanged. If the approach is acceptable, they
-    could get the same change.
-    
-    Built for arm64 (defconfig, drivers/remoteproc/, W=1) on rproc-next
-    672126dce63c and on v7.4-rc1, without warnings. Not done: sparse and
-    runtime tests with lockdep and the other debug options.
-    
-    Tool use: I asked Claude Code to make our QCS8550 image stable, to
-    stress it on our test boards and to find why a simulated ADSP crash
-    reset the board. It ran the tests, found the ordering problem and wrote
-    a first fix that skipped the stop request for a crashed DSP. I asked
-    for the stop request to be sent before the teardown instead, which is
-    this patch. It wrote the code and this changelog and ran the tests
-    above with the debugfs crash file, the serial console log and a test
-    script on the boards. I reviewed the code and the results.
-
- drivers/remoteproc/qcom_q6v5_pas.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
-
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 57a111a0d..ddbffe45d 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -138,6 +138,7 @@ struct qcom_pas {
- 	struct qcom_rproc_glink glink_subdev;
- 	struct qcom_rproc_subdev smd_subdev;
- 	struct qcom_rproc_pdm pdm_subdev;
-+	struct rproc_subdev stop_subdev;
- 	struct qcom_rproc_ssr ssr_subdev;
- 	struct qcom_sysmon *sysmon;
- 	struct platform_device *bam_dmux;
-@@ -429,6 +430,14 @@ static void qcom_pas_handover(struct qcom_q6v5 *q6v5)
- 	qcom_pas_pds_disable(pas, pas->proxy_pds, pas->proxy_pd_count);
- }
- 
-+static void qcom_pas_stop_subdev(struct rproc_subdev *subdev, bool crashed)
-+{
-+	struct qcom_pas *pas = container_of(subdev, struct qcom_pas, stop_subdev);
-+
-+	if (qcom_q6v5_request_stop(&pas->q6v5, pas->sysmon) == -ETIMEDOUT)
-+		dev_err(pas->dev, "timed out on wait\n");
-+}
-+
- static int qcom_pas_stop(struct rproc *rproc)
- {
- 	struct qcom_pas *pas = rproc->priv;
-@@ -1012,6 +1021,15 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 	qcom_add_glink_subdev(rproc, &pas->glink_subdev, desc->ssr_name);
- 	qcom_add_smd_subdev(rproc, &pas->smd_subdev);
- 	qcom_add_pdm_subdev(rproc, &pas->pdm_subdev);
-+
-+	/*
-+	 * Subdevices stop in the reverse order of addition. Request the stop
-+	 * after sysmon has asked for a graceful shutdown and before smd and
-+	 * glink are torn down.
-+	 */
-+	pas->stop_subdev.stop = qcom_pas_stop_subdev;
-+	rproc_add_subdev(rproc, &pas->stop_subdev);
-+
- 	pas->sysmon = qcom_add_sysmon_subdev(rproc, desc->sysmon_name, desc->ssctl_id);
- 	if (IS_ERR(pas->sysmon)) {
- 		ret = PTR_ERR(pas->sysmon);
-@@ -1049,6 +1067,7 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 	qcom_remove_ssr_subdev(rproc, &pas->ssr_subdev);
- 	qcom_remove_sysmon_subdev(pas->sysmon);
- deinit_remove_pdm_smd_glink:
-+	rproc_remove_subdev(rproc, &pas->stop_subdev);
- 	qcom_remove_pdm_subdev(rproc, &pas->pdm_subdev);
- 	qcom_remove_smd_subdev(rproc, &pas->smd_subdev);
- 	qcom_remove_glink_subdev(rproc, &pas->glink_subdev);
-@@ -1081,6 +1100,7 @@ static void qcom_pas_remove(struct platform_device *pdev)
- 	qcom_remove_sysmon_subdev(pas->sysmon);
- 	qcom_remove_smd_subdev(pas->rproc, &pas->smd_subdev);
- 	qcom_remove_pdm_subdev(pas->rproc, &pas->pdm_subdev);
-+	rproc_remove_subdev(pas->rproc, &pas->stop_subdev);
- 	qcom_remove_ssr_subdev(pas->rproc, &pas->ssr_subdev);
- 	qcom_pas_pds_detach(pas, pas->proxy_pds, pas->proxy_pd_count);
- 	device_init_wakeup(pas->dev, false);
-
-base-commit: 672126dce63c94e7897867e4c0e681806c49cf02
 -- 
-2.56.0
+With Best Regards,
+Andy Shevchenko
+
 
