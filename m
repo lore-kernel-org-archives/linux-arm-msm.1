@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794228586;
-	b=39MiwY8XJnMeB3MySU4H/FI+XHqhi6jP7G9ZkNcau5aRvl2MYu4YNY2IyOLOogzTys3E
-	 4In/CDb/QjhBj46o0zVg7poSlKSuKQjqYr2llBb6tYoaaSYfg0lt9XnHQovw2qkrqf9Lr
-	 8QeC0hSoK8N24RrHZvl39jOQ9GINPIh1woNko8+hTrcEQz3ehMCeCc/buuhfzPodWzObR
-	 hO1NL/XKKimYraFvyLcagnrBv61d0cFn7Nfa2Ap2bPAAemGPwrqSlJHNu8tJrokzFKluy
-	 Ew8UxQ1hcV2gteiY59DULVsMwmC7IvUBRp4HOsLhJEvQ4t8NDGW64BLTauLcQSWZkWg==
+	t=1794228670;
+	b=pEVlS2uE9iY8cBdmYl2OicKFAByUPgnp+cU5iE2TJI2ajla2WX2JdSBNpBpxHmnVPBUu
+	 uOCFY8bPh3hNSnfSD3h86Axmfc5zDjZ720Aw7OWU4pLj7dd6F9ajUEujNXX1TE62I/1/t
+	 J7w4xukXj4sKgKQ3uQTHKel4KEV/+OUEEs7GU/8dkqW/25zXxcHZePTHXE2HUITxXnGHS
+	 jBVITdx6SJIu0jx5px/4w4PWLODV3fS2ulqGJCV9i0WT2c1NRFjSDfhPyu7SRm8GYyFFq
+	 T9WRtubF/CyPXtFr5G1xDfOHH1Lw1Bx45UJ/gfVLeOzjS8YSONOtrWOD+2fpM1E6FCg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794228586;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794228670;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=8nZAwGS6CTOwltNNT7HN871xA3eXVwrJJClB1UtUFo4=;
-	b=K6hNsKj8cdsddMUsLu3PP6S//uEyDv3UJ3OcLNtI1uiirDA5SRdSzlZBOn6CN6E1TouW
-	 hxqVMWYej7h/5lYZ1Oa67JYF6+amU7L9CquRw1QBn7r0CTjc8pnm0Aim7NsuVa8tp07f/
-	 Z54vZN7+YiRO61NNwzn0+QamswmVpCBwbNak/MNfL05tQ5rIWUTxhxtN2B1G6T9lbexu3
-	 Yr6IVz+c+ZHAtjNWWS+QeCUAJMZtW/NpFk7DAg6/Hs+zyi5mJ/G+ILz1EvBhn4M4g/pNs
-	 xi6zaeZuAouy0aH/34RygqSUyrbgtStyAZ0l615zlOm8Bc23MDsRQR1SYXqolMbj2ag==
+	bh=xMKd25EnS6bUedYZGkcOZxXWCwGfPAcr8fNNIRoGA8c=;
+	b=0hQLuSsHFLE2xbj7etlzY7fXgHHhwxh9Jje+FA/YwBGjN6PazoeZgdDYCCVr5DBJLJl2
+	 NvHMQt6412V1GbZkcCM/V2Kl8Baa2tOR86l5O3aiPCxmf3FT2ld9d5jRtxL/NoGOW65si
+	 KCHwY4FhTR0ytnw72B9UM4dy8foSFrv4siStehjzCeWKr2q3+Uu8L7QU2yACrwlwt/LwY
+	 dsayI3sQRkCvH2kTRobOuXHKJACmVp1tjl4cpkCcInSTpZM2sm34pLY1ImuHeWPY6Kkal
+	 5wYG2jHOyRAG3sxt06m+W9HL8QjhXQiCDdJlE8XklU3fCvbUJ6KxbepqMLXBdQTIdpw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MghTQEz6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b9MF5eiC;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4E6E606A31C;
-	Mon,  9 Nov 2026 12:49:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87618606A322;
+	Mon,  9 Nov 2026 12:51:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MghTQEz6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 642181F0089F;
-	Mon,  9 Nov 2026 12:49:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b9MF5eiC
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AFA51F0089F;
+	Mon,  9 Nov 2026 12:51:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794228585;
-	bh=8nZAwGS6CTOwltNNT7HN871xA3eXVwrJJClB1UtUFo4=;
+	s=k20260515; t=1794228670;
+	bh=xMKd25EnS6bUedYZGkcOZxXWCwGfPAcr8fNNIRoGA8c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MghTQEz6ajvzzXgmguo/lZbT+yNbG6uoT28c7pwFQK74+sPfgG3vGrltHSZRLD+nx
-	 L3bnGKjrRedF/NvATnUY+v+WvzExTi4AjtiHZTFdhy4OXNUKSWIyJeg/jbzWj4Xxxj
-	 e/2h4v7qLNZggAMUz0TW/J/GeD3l9NTeQoRzCpBT/Vd+OMilOKTDB9N9/+Lhy8W2fg
-	 K39Z3P/hpLJhU0s2e1WuV/7jbzanAwWjDnCALeQ8N7wv93iJbnHeTsYnHp6Xu1QW9n
-	 VwNWmkjD1Q81R7puY7Ivhf28SWnq98KaRlN456lMdWUF/5hEas+79hTWApcGuqqk5g
-	 b8F37gANJF24Q==
-Date: Mon, 9 Nov 2026 13:49:41 +0100
+	b=b9MF5eiCe6k2xzg6jPbNosdLgMPXDk+BWYdlFRNiaTliFhdhsXa703kaEdfBflm6D
+	 QXzcd25n3e6XNdSBk9fraqUUrNeQoxsRiH8wL0r588afPeOtoktvVeCKyMJK9JyHc0
+	 5czfnAOeMdWHoCs431kI9hJwga0y7Zw8DQL/oBBikleWrCom7H+hnrTqffs91oqJo8
+	 A6MbwjPFivZhYvBxyGShsankrihVtzl+ZXqGI2VaqExT0upaM28J3K3k4dt1qHiTLs
+	 nLSeWhejneyjh+Qw5nf4qThOvSjbx3K9pmgTKoYyw2HZW7RzcVPdR4C542+1D2KxMN
+	 V7yuOch5uyG+A==
+Date: Mon, 9 Nov 2026 13:51:06 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Imran Shaik <imran.shaik@oss.qualcomm.com>
 Cc: Rob Herring <robh@kernel.org>, 
@@ -52,11 +52,11 @@ Cc: Rob Herring <robh@kernel.org>,
 	Taniya Das <taniya.das@oss.qualcomm.com>, Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
 	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	netdev@vger.kernel.org
-Subject: Re: [PATCH v2 02/10] dt-bindings: ptp: Document TSCSS hardware on
- Qualcomm QDU1000 SoC
-Message-ID: <20261109-sticky-caiman-of-research-65e9a4@quoll>
+Subject: Re: [PATCH v2 03/10] dt-bindings: ptp: Document TSCSS hardware on
+ Qualcomm Nord and Shikra SoCs
+Message-ID: <20261109-statuesque-polecat-from-lemuria-1b8ade@quoll>
 References: <20261108-tscss-v2-0-d5f575010427@oss.qualcomm.com>
- <20261108-tscss-v2-2-d5f575010427@oss.qualcomm.com>
+ <20261108-tscss-v2-3-d5f575010427@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,59 +68,41 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261108-tscss-v2-2-d5f575010427@oss.qualcomm.com>
+In-Reply-To: <20261108-tscss-v2-3-d5f575010427@oss.qualcomm.com>
 
-On Sun, Nov 08, 2026 at 06:48:23PM +0530, Imran Shaik wrote:
-> Add Devicetree bindings for the Timestamp Counter Subsystem (TSCSS) found
-> on Qualcomm QDU1000 SoC.
-> 
-> TSCSS is a time synchronization subsystem composed of two main blocks:
-> Timestamp Counter (TSC) and Event Timestamp Unit (ETU). The TSC block
-> provides a continuously running counter used for timekeeping, while the
-> ETU captures timestamps for external hardware event triggers.
-> 
-> Co-developed-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
-> ---
->  .../bindings/ptp/qcom,qdu1000-tscss.yaml           | 170 +++++++++++++++++++++
->  1 file changed, 170 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
-> new file mode 100644
-> index 000000000000..52a063ec4b78
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
-> @@ -0,0 +1,170 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/ptp/qcom,qdu1000-tscss.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+On Sun, Nov 08, 2026 at 06:48:24PM +0530, Imran Shaik wrote:
+> +  interrupt-names:
+> +    items:
+> +      - const: etu_summary
 > +
-> +title: Timestamp Counter Subsystem (TSCSS) on Qualcomm QDU1000 SoC
-> +
-> +maintainers:
-> +  - Imran Shaik <imran.shaik@oss.qualcomm.com>
-> +  - Taniya Das <taniya.das@oss.qualcomm.com>
-> +
-> +description: |
-> +  Qualcomm TSCSS is a time synchronization subsystem composed of two main
-> +  blocks - the Timestamp Counter (TSC) and the Event Timestamp Unit (ETU).
-> +
-> +  The TSC block is a timestamp generator that maintains a running counter used
-> +  for system timekeeping, and is functional with just the AHB and counter
-> +  clocks.
-> +  The ETU block captures TSC timestamps for external hardware events. Each
-> +  ETU slice binds a slice number to an external event selector, and
-> +  generates its own interrupt when that event is triggered.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,qdu1000-tscss
+> +  pinctrl-names:
+> +    minItems: 1
+> +    maxItems: 32
 
-I failed to spot the difference against your binding at patch #1. How do
-they differ?
+So here there is difference, that justifies different binding file.
+
+> +    items:
+> +      pattern: "^slice[0-9]+$"
+> +
+> +  qcom,etu-slice:
+> +    description:
+> +      ETU slice number for each entry in pinctrl-<n>, pinctrl-names and
+> +      qcom,etu-event-sel.
+> +    minItems: 1
+> +    maxItems: 32
+> +    $ref: /schemas/types.yaml#/definitions/uint32-array
+> +
+> +  qcom,etu-event-sel:
+
+Anyway, you need common schema defining qcom,etu-slice and
+qcom,etu-event-sel properties. Maybe also pinctrl-names and other common
+properties. The individual device schemas should only override/narrow
+constraints
+
+
+> +    description:
+> +      External event selection value for each ETU slice listed in
+> +      qcom,etu-slice.
 
 Best regards,
 Krzysztof
