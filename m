@@ -1,62 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794227655;
-	b=pM/jTaywKy9doQPdHPERYFqSw8PdS1Qt1FdT4ytmoCscbkeZvexPXkqSA8h19fMSzB89
-	 vvMcFJF0RinhwPCo65KBk3PccFIhiIc6+wDlXx7UELoXJHUKmymTMyGXWv67EIOF7kirL
-	 x9bSE3re6nM/qnXeIApgsNC31hChFXEi+XHCHZQDx/aDILK60J0jQr6fLsvAx4vjgBy/Q
-	 Pj5vYesu5lrweZk87Ols6q6Rnl8cqNYMvLbr7pdnN4ckvRxrt2R+9OObDdwtuwuu+KIWH
-	 sxkUSyc4O0Y4IgB1gM8d0f0PRZIdnczn0AD7oFwyaT3hBdy+yjW4KoozkbB/gY+xREg==
+	t=1794228260;
+	b=NnAMFUbPlbA7+VliNU9CBo4SdxffrWPJbXGLm94k1uLgmVVVD+1G2qfzftuoJkrQpaaa
+	 K/bZKyHj0q2+fxnC7+8L6TJMDle318sHIzDL8qzUCJIeMj+4FQvFbTYW+pY2jRs4gOXS7
+	 ZWeD8hV5FiDSUpKknlX1EeZoY9d3cqflhrvuTZNwxuuA8av11vHfWG5rm9t+93d4hNnad
+	 rtbkAOvpzjXAHGE/yXzDUTEv6mjuwBH1feARmCZKnUgeI/+fw6WWAoG2W5U/wr7zPmQP1
+	 M1wU4ylFMecLoqOj1EhjswS3dlHNRynR2yxBhf2MV1sHYSDPxB35fx1/auiaf3P9TjQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794227655;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794228260;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=xmIlBDozjkzvMSaRaAhvn1n0LrMtmUjIl/UdI6mSxd4=;
-	b=2S7Fm+4k3KNV2xJ4nUDaUqsGeL52mp7CQFiiHilvbtqAn0LqZfJPx1vEZLzKeDyL9fWd
-	 +mJDRYo57FXU9ec5xiQTvsa8MJR+JMUP+HaTuuyUbUCrL55NjadqGNfOrn8ALhg4PCibp
-	 QG/Ms1FcGnVPG6tszrRUJreS+fJgHZzm+diW8zoGXIxtgoJYL4plG+ZdvD4sUTEn4daaP
-	 k0db0f+eQSJyChLDculmPFhp6xGavtIRSEiU+hGXsjOXhKcYGvXNyXPHz2fWmhL6r438w
-	 D75AaJATZuMip4GMiU/T/jUxDmsLUKcsiBfhbPdi8k3Pv3svCTO5Tgn3MH3b7pTZLvQ==
+	bh=uUpSNvbnctQ9ovE4UEZk5M1h/k2Nqmh6RWvn+1R5NG8=;
+	b=Q81k3WTXiXxnRy4A3TgLd4IOZ+4euCK7pH6j4O5V07y85Ns4xfHucaJgYKiEq47QL3YJ
+	 Q915uZGtGvmMZGKr1bORHcrm3z9uMSfOHem3Cjz8260h77aeJh9xxUVDv/HhFDSz42Q+l
+	 0UIjcFM/n7Rs8vYJD6rb5tyD/Ut6giFKhFBTCmAqEnJH3K85i7WWalZmtdGn5SGU3r0zb
+	 oGk+j8e07/KHRC4dSS+kcd+xeL5fKQD4xT07Y7+vgpPNn4OzS35eI6g9D17ILHn0o/pDp
+	 lQ3Lqsmfpp/Uc7gbsEdGWyJ+RBcArHD9x1LUU9ln+ok4p2j51XNHiSfpsP1djnXUlEw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MX92hfP+;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9Nrjbhn;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83DBC606D812;
-	Mon,  9 Nov 2026 12:34:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 915A9606A321;
+	Mon,  9 Nov 2026 12:44:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MX92hfP+
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 900C71F0089F;
-	Mon,  9 Nov 2026 12:34:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9Nrjbhn
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F9281F0089F;
+	Mon,  9 Nov 2026 12:44:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794227655;
-	bh=xmIlBDozjkzvMSaRaAhvn1n0LrMtmUjIl/UdI6mSxd4=;
+	s=k20260515; t=1794228260;
+	bh=uUpSNvbnctQ9ovE4UEZk5M1h/k2Nqmh6RWvn+1R5NG8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MX92hfP+u9/kEx1sCzTzk1GwJfIsGDdDn/Z18+KCuTtS4D1f7L59KYixVJsTf8YGe
-	 Xgdbk3ZnRGJVeiRWL+skXE0p88m/KkLgi2h3j92wTLg+U/jeIPZYQUa1RzXGd+Wbkl
-	 iGKByy7xnfQAJDUAT+1KVZmiY3LYfsLRZ5n10ncHDNyCkWEDM5J55Z8fTxmgLKyAip
-	 1fYcFwgStjWNHbSY2B5eb90zM8Z2gYPLsuh0SoPZ+aNvgN6atxVw42FUr6nM7vsZ1B
-	 V55/yxomUz2BYHHUdMFzbRlaBuoaDhmm69tjY5V0zvAe3/R7CkEPrS7MWuIYgafuch
-	 w+/JuHdH+FpaQ==
-Date: Mon, 9 Nov 2026 13:34:12 +0100
+	b=G9NrjbhnP8br50tY5m6MyZMXj9KlwSCftIARGa/eJybRYTBPZXkcQLfQ3aSLGk54O
+	 pY+YMqNPL4BWUgcV3c+cy4ZJlYmmRL8jmkEABZ+fH/QdOGuFMNHE24fNXzaogVAPmZ
+	 GbDR0sBKN/IqJMo5tbwaVtmJOe18Uk8tA17of3XvSmG0krsRfip9lfO+Qi9NCkMJFY
+	 0vVI2nYLdjU8zR4Dns1dkHTUZwhVJ7LuylGDLr0DiXcR6X4ab4g9Go8XFoG5QvXOmz
+	 MrhdhU4lPbN3AFUOiQbTRBzuednDK9M3+hpt5H8gCxgOJTzSaTNpnRgalDRjH8UUgs
+	 Jk18cWES+ecpQ==
+Date: Mon, 9 Nov 2026 13:44:16 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: David Heidelberg <david@ixit.cz>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v3 01/10] dt-bindings: display: panel: s6e3ha8: Adjust to
- reflect the DDIC and panel used
-Message-ID: <20261109-tall-lyrical-stingray-1caaac@quoll>
-References: <20261108-crosshatch-panel-v3-0-87dd4ec4f7cc@ixit.cz>
- <20261108-crosshatch-panel-v3-1-87dd4ec4f7cc@ixit.cz>
+To: Vladimir Zapolskiy <vz@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH v2 1/4] dt-bindings: clock: qcom: Add SM8350 camera clock
+ controller
+Message-ID: <20261109-sceptical-guan-of-charisma-48c6f3@quoll>
+References: <20261107173621.3538964-1-vz@kernel.org>
+ <20261107173621.3538964-2-vz@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,64 +65,21 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261108-crosshatch-panel-v3-1-87dd4ec4f7cc@ixit.cz>
+In-Reply-To: <20261107173621.3538964-2-vz@kernel.org>
 
-On Sun, Nov 08, 2026 at 12:32:22PM +0000, David Heidelberg wrote:
-> S6E3HA8 is the DDIC, while the panel used on the Samsung Galaxy S9 is
-> the Samsung AMB577PX01. Introduce a compatible reflecting that, adjust
-> the example, and deprecate the DDIC-only samsung,s6e3ha8 compatible.
-
-Again: why deprecating?
-
+On Sat, Nov 07, 2026 at 07:36:18PM +0200, Vladimir Zapolskiy wrote:
+> Add device tree bindings for the camera clock controller on Qualcomm
+> SM8350 SoC.
 > 
-> We're going to introduce another panel with different sequence, so keep
-> calling original panel sequence just by the DDIC name is confusing.
-> While we at it, we can cleanly fix reversed GPIO polarity.
-> 
-> Update the polarity to better match newly introduced compatibles with
-> fixed logic.
-> 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
+> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
 > ---
->  .../bindings/display/panel/samsung,s6e3ha8.yaml         | 17 ++++++++++++-----
->  1 file changed, 12 insertions(+), 5 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> index 00ce5a4e1c6be..ca250b1b91712 100644
-> --- a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> +++ b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> @@ -1,28 +1,35 @@
->  # SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
->  %YAML 1.2
->  ---
->  $id: http://devicetree.org/schemas/display/panel/samsung,s6e3ha8.yaml#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->  
->  title: Samsung s6e3ha8 AMOLED DSI panel
->  
-> -description: The s6e3ha8 is a 1440x2960 DPI display panel from Samsung Mobile
-> -  Displays (SMD).
-> +description: |
-> +  The s6e3ha8 is a display driver IC used in 1440x2960 AMOLED panels from
-> +  Samsung Mobile Displays (SMD).
-> +
-> +  Known panels:
-> +    - AMB577PX01, 5.77", Samsung Galaxy S9 (samsung,s6e3ha8-amb577px01)
->  
->  maintainers:
->    - Dzmitry Sankouski <dsankouski@gmail.com>
->  
->  allOf:
->    - $ref: panel-common.yaml#
->  
->  properties:
->    compatible:
-> -    const: samsung,s6e3ha8
-> +    oneOf:
-> +      - const: samsung,s6e3ha8-amb577px01
+>  .../bindings/clock/qcom,sm8350-camcc.yaml     |  69 ++++++++
+>  include/dt-bindings/clock/qcom,sm8350-camcc.h | 149 ++++++++++++++++++
+>  2 files changed, 218 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/clock/qcom,sm8350-camcc.yaml
+>  create mode 100644 include/dt-bindings/clock/qcom,sm8350-camcc.h
 
-So the panel bindings use compatible of format DDIC-panel? Are you sure
-you keep it unified with existing approach?
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
