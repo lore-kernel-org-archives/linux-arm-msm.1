@@ -1,38 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=188.245.251.181
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794220600;
-	b=QfMLRzz7PQUdUd3DYBIqqXXy5FBP3mKSWUNDWa1m4YVH3ol4fffbKCjv2+gHuDPAuzQX
-	 VAm2cMlvQop2LDxpqytC7dW9doAtKpyECXwmdnqepJKfIZnq/Ckv7Hv5PSBw1u982aZr4
-	 RNtNbXwVv7thiM4gQ6c7jRNCI/sXRG6rWElRS6uWJHOQzkmeTIoWN+q/A326L+WhYpzI+
-	 h1FDBxmK2615NVmdPrTAjIoH2YZqq+79NJEdqb9UWjqOU6aR8hpHwg/0ZQy0+TTqAR0tj
-	 MisMgHyAxVuemrngoT3c4quh49bEFwkZHPlcrNA+gSqj+ptt3qnIXoM0Ix8vgLCNxSg==
+	t=1794221066;
+	b=yvls/31K5KKYg9zvzRR2ov2ZKwraze6XoQtct5UV6nhSh9QZu3uGKvgSsNGnczIsOIvI
+	 j+aDyo6XqwbC6NvdU89HodALEklIjbmqGLro2voj75uE/2aJf6DEiOOQtrSRo7pMrXhOh
+	 XtmNSLua2y9qbNQ3teWqxhz9y79COsDG+FhNbPsYgLgqQmUFUDuT7mjWYHh6ZIKqBXsFX
+	 hgsAr+932RAsP2eHY1u6dwXqnxIQevmsvicTCwLsphKiHEoFFNt7DEYd+cEzi9Vw9CQL6
+	 0AiuiNrojiKg8C5Y20Yh2jyFFsqlPw4CX7Pd5BnHT1UpXM1oWjdsqqMzMoA9817ESPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794220600;
-	h=DMARC-Filter:Mime-Version:DKIM-Signature:Content-Transfer-Encoding:
-	 Content-Type:Date:Message-Id:Subject:Cc:From:To:References:
-	 In-Reply-To;
-	bh=ovprduxLgum2CY0XHb/PVUWcwSUV6g1yux7UTHcX5AM=;
-	b=KFmNbkQu/NFe38rmv3rbyJMq/0mtAjkTB6wHbPYAxRrqjK9T1/YACzyYAgFaiq+b8gaq
-	 +DvE1T1PGeh9ukB3J8umGyxrpCwYryVqxrg/ZUH8RmoRXpkvwgZ7LgbzlxbdbPcw6myWA
-	 q7kgjhetoirfsxaEpzvNoHfT12XPTPyjGdIz7SACGZjLAFC6jvlnqum9pv4mCn8A6Jrov
-	 BTOibZ/rNvIYBGm8SJ8IufOy9wB/SqiJtNe0Xp96oVULR1AAtP4ta9CDcpHxbdO9CdmdW
-	 LTCCS1BwF9AU0iuSAiAJWelk98wJdDsl3TMKPeXcsVboR1KmyrzJK2T1rsXuoN640Qg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794221066;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=TXr2TKEYrIDqnyQ+02ZfHnpl8vf7msiDB6kAkQN1rZM=;
+	b=YbAVNSbzV1Q0G6YrutAEgs/EmYlf6QrVaqPDBh12Y9NmLhs7t2vYVnhwLOMzPVJn1F6u
+	 e4wTYf/jj/MAfRJvEoLP3d9Y1p0A8cYn98vxrXYUfg/95V6A9JljgG3lnotScOyjOjgkn
+	 4+Bqo9+JbjWnbs9AEtqlGqDYWdBpsSwIWKWkgMuSuv3BDCO/cfmMcWf77TeemzruzDql5
+	 Lgx9Dxq0a5gvH7UfMCULgW+f8SZx2r5KjbMQX32fxbF7OP/mFvP1Cid30uWveYLKgejSG
+	 EcQZOGRIXKTaYp00lKDK95qhGF9pmDHiy7h1KhLrMX4u0FJOdKHns/dMpV84VpiNeDQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fhannenheim.net;
-	spf=pass smtp.mailfrom=fhannenheim.net;
-	dkim=pass header.d=fhannenheim.net header.i=@fhannenheim.net header.a=rsa-sha256 header.s=mail header.b=0zVLGqBh;
-	arc=none smtp.remote-ip=188.245.251.181
-Received: from mail.fhannenheim.net (mail.fhannenheim.net [188.245.251.181])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mfOpr55J;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75BE0606A31C;
-	Mon,  9 Nov 2026 10:36:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 75BE0606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fhannenheim.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fhannenheim.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90F1D606A31C;
+	Mon,  9 Nov 2026 10:44:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fhannenheim.net header.i=@fhannenheim.net header.a=rsa-sha256 header.s=mail header.b=0zVLGqBh
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mfOpr55J
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34E151F0089F;
+	Mon,  9 Nov 2026 10:44:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794221066;
+	bh=TXr2TKEYrIDqnyQ+02ZfHnpl8vf7msiDB6kAkQN1rZM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=mfOpr55JSOEAKsYIRwZlPYVVji4xFQLSCZnYgYFBPvHuYw5tqPT6lpcFI9qJa0aep
+	 VERbNONOWWRfHvh/4pt0kOHo5GTHTckTKsADwINYHKcBPYIEykbTiHYKFVvv6Iayco
+	 P56iKD/4w8gwEuVziu3200TNGNO+AhB2cOwaCB72Mkz71mMNHxSY5o0Mp5g7LawzBY
+	 /hqT65DQ7N9EF/R0bmufgMI1JGQVXsKSu8+Hb/tg6OQ6csPirqc+IoZQPamOaOwii6
+	 nfY5lMRBzsqXWKW0jlB2p3CN9fmRVT3ZMcVZGIxc577QjbgavPnbuP3Z9CnA+a/9r1
+	 tz7C6CPoEbMHA==
+Date: Mon, 9 Nov 2026 11:44:22 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Andrew Gigena <mail@andrewgigena.dev>
+Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+	Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@linaro.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, 
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Andi Shyti <andi.shyti@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-phy@lists.infradead.org
+Subject: Re: [PATCH v3 2/7] dt-bindings: media: qcom,sm8150-camss: Add SM8150
+ CAMSS
+Message-ID: <20261109-slick-transparent-ostrich-28ddad@quoll>
+References: <20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev>
+ <20261106-sm8150-v7.4-rc1-camss-v3-2-0103e8a0bbcd@andrewgigena.dev>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -41,110 +66,73 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fhannenheim.net;
-	s=mail; t=1794220596;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ovprduxLgum2CY0XHb/PVUWcwSUV6g1yux7UTHcX5AM=;
-	b=0zVLGqBhpJnPasZaYQ6zfHjg9JqU0jEm2CuMDhqHhWPVnr9eDZ6MTrN2FmnmxJOeaTORCf
-	q69MMMPQPO6LOSt0x8akGl0X35JnKTc31p8Paca+xcBYVJw5Fp5KEvY5pNA6+imgb46ZNg
-	EBaUU2E3O0vmY8n3HSdmzDixOQldvZE=
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 09 Nov 2026 11:36:35 +0100
-Message-Id: <DMQM4AN8JPSW.388R1H1XOM5JF@fhannenheim.net>
-Subject: Re: [PATCH RESEND v4 2/3] arm64: dts: qcom: Add
- sm8250-oneplus-common.dtsi
-Cc: "Robert Oscilowski" <drgitx@gmail.com>,
- =?utf-8?q?Jean-Fran=C3=A7ois_Bobier?= <jf.bobier@gmail.com>,
- <phone-devel@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-From: "Frieder Hannenheim" <mail@fhannenheim.net>
-To: "David Heidelberg" <david@ixit.cz>, "Frieder Hannenheim"
- <git@fhannenheim.net>, "Bjorn Andersson" <andersson@kernel.org>, "Konrad
- Dybcio" <konradybcio@kernel.org>, "Rob Herring" <robh@kernel.org>,
- "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>
-References: <20261105-kebab_dts-v4-0-c6bbe6ded92e@fhannenheim.net>
- <20261105-kebab_dts-v4-2-c6bbe6ded92e@fhannenheim.net>
- <48420a1e-3611-4543-9d3a-7add3049b7ac@ixit.cz>
-In-Reply-To: <48420a1e-3611-4543-9d3a-7add3049b7ac@ixit.cz>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261106-sm8150-v7.4-rc1-camss-v3-2-0103e8a0bbcd@andrewgigena.dev>
 
-On Sun Nov 8, 2026 at 10:05 PM CET, David Heidelberg wrote:
-> On 05/11/2026 20:20, Frieder Hannenheim wrote:
->> This file contains common properties shared by all OnePlus devices using
->> the Qualcomm sm8250 chipset.
->>=20
->> Co-developed-by: Robert Oscilowski <drgitx@gmail.com>
->> Signed-off-by: Robert Oscilowski <drgitx@gmail.com>
->> Signed-off-by: Frieder Hannenheim <git@fhannenheim.net>
->> ---
->>   .../arm64/boot/dts/qcom/sm8250-oneplus-common.dtsi | 607 +++++++++++++=
-++++++++
->>   1 file changed, 607 insertions(+)
->>=20
->
-> [...]
->
->> +
->> +	gpio_keys: gpio-keys {
->> +		compatible =3D "gpio-keys";
->> +		label =3D "Volume keys";
->> +
->> +		pinctrl-0 =3D <&vol_down_l &vol_up_n>;
->> +		pinctrl-names =3D "default";
->> +
->> +		key-vol-down {
->> +			label =3D "Volume Down";
->> +			linux,code =3D <KEY_VOLUMEDOWN>;
->
-> Hello Frieder,
->
-> patch looks good, but I noticed - which one? this key-vol-down or later a=
-t bottom,
->
+On Fri, Nov 06, 2026 at 06:35:34PM +0000, Andrew Gigena wrote:
+> Document the Qualcomm SM8150 Camera Subsystem. The IP integrates four
+> CSIPHY, four CSID (two full and two lite), two VFE and two VFE-Lite
+> instances, with 19 clocks, 8 interrupts, eight IOMMU streams, four
+> interconnect paths and three power domains.
+> 
+> The CSIPHY I/O spaces are not part of the CAMSS container device: each
+> CSIPHY is driven by the dedicated qcom,sm8150-csi2-phy driver, so this
+> binding only describes the VFE and CSID resources. Each CSI input port
+> is described with data lanes starting at 1, as required by the CAMSS
+> PHY mode.
+> 
+> Describe SM8150 in a dedicated schema instead of reusing another SoC's
+> schema.
+> 
+> Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
+> ---
+>  .../bindings/media/qcom,sm8150-camss.yaml          | 285 +++++++++++++++++++++
+>  1 file changed, 285 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
+> new file mode 100644
+> index 000000000000..371ff1ce0bd2
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/media/qcom,sm8150-camss.yaml
+> @@ -0,0 +1,285 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/media/qcom,sm8150-camss.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm SM8150 Camera Subsystem (CAMSS)
+> +
+> +maintainers:
+> +  - Andrew Gigena <mail@andrewgigena.dev>
+> +
+> +description:
+> +  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
+> +
+> +properties:
+> +  compatible:
+> +    const: qcom,sm8150-camss
+> +
+> +  reg:
+> +    maxItems: 8
+> +
+> +  reg-names:
+> +    items:
+> +      - const: vfe0
+> +      - const: csid0
+> +      - const: vfe1
+> +      - const: csid1
+> +      - const: vfe_lite0
+> +      - const: csid_lite0
+> +      - const: vfe_lite1
+> +      - const: csid_lite1
 
-Hmm well the pon_resin doesn't seem to emit input events. I don't know if i=
-t's
-used for anything else but the volume down button still works if I drop it.
+Seems you ignored my last review, so repeating:
 
->> +			gpios =3D <&pm8150_gpios 7 GPIO_ACTIVE_LOW>;
->> +			debounce-interval =3D <15>;
->> +			linux,can-disable;
->> +			wakeup-source;
->> +		};
->> +
->> +		key-vol-up {
->> +			label =3D "Volume Up";
->> +			gpios =3D <&pm8150_gpios 6 GPIO_ACTIVE_LOW>;
->> +			linux,code =3D <KEY_VOLUMEUP>;
->> +			debounce-interval =3D <15>;
->> +			linux,can-disable;
->> +			wakeup-source;
->> +		};
->> +	};
->> +
->
-> [...]
->
->> +&pon_pwrkey {
->> +	status =3D "okay";
->> +};
->> +
->> +&pon_resin {
->> +	linux,code =3D <KEY_VOLUMEDOWN>;
->
-> or this one?
->
-> David
->
-> [...]
+From which binding did you copy such order of entries?
 
-Thanks for mentioning this. I had already tried disabling the gpio key and =
-just
-using the resin. I will drop the resin in the next version.
+Best regards,
+Krzysztof
 
-Frieder
