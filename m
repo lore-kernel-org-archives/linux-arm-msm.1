@@ -1,62 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.111
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794227451;
-	b=Flj4dcF805z4uXGWfqzfVAbz4xKPuGdv7SfBEVVCReg0XqAfmiJ0eAZ9MLH0DD87XQdU
-	 /b+yVB29hp29R1eXrPogRM+yEtSrYIbGezihzV+e+4w3FvGcUHlWiuw9oDrUcOufwQHGQ
-	 b2hd1TpxLSzBZ+hpMwsNMqkmMik8eKKmnP7d4IYGpaiAimNAHJoHeRy0Cy0/NaWUO/7Lg
-	 xvxKyrB+BIR/XHCyR3NEOKA53f/5qXYwOUJ5AkyPqE8Zms1SZS9s5tm5RXleCHa6xfhrD
-	 JECWWF3g9VFdaIe4pXIX4jRFY+TsldY7diVpnBUK8JfGvtdvceF/+RCbOh7HtHT0wRw==
+	t=1794227536;
+	b=sJn2SQrhxXy0f9zbESRdV9TIyU6XcLLCKjctFhf9kionK2iPJbPY0Cb2G8an1YHkTWHC
+	 SdynWKsu14WkX5qHN+OiH6ktI8lB1jauOyigMqeVk7nhEx9yRa1/qtTrno11VJhQD90fA
+	 K+Vzj6w9vnqCWa3ldGQhfraS2A/F7HsZrKAD/5VyVYHd5Fi4H6teEq7Qmypc0dHt3XVNF
+	 Qc/Nk2JpORnbhSatcTjM3N4RRficVUaMCP4mXlDAgl8McXZrqJXsOo+H270Y9WdnJ1+x/
+	 a3ZwrEvqtfnQErTtaQgagFcR667gI1ykcim+yrAfzoJ1C6OLFRw1W+O1U4kVcBpACwA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794227451;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=jGi2pMPtfaYXbF/EmhxEb446J6+o0fEqR3t7Qd1x19c=;
-	b=B4MkMDOTa0gp2QIikuix7hSZ4BvFAp3Iykh1NGqqR79NW9MddlCu6Mh2A0HGKich1A/X
-	 dQ97F8JzBMYAkdW848yMS9ep5IqPvF3d28j7PXUNOnF3alxI5CZHV0NDL4FoMkoeuz6V/
-	 nEpv7t72epUVCBPV30Ruyf7Fg8rGKQzMeYS+TEZXsBcoheWFOqy5TqGCX449TnaQBRJJq
-	 qOUrRYLW8c+tQT9zv1mj64KreoUqE4DiPmuzgXadamudkQ2tZbKuteLB0LxFYtjjs80kf
-	 Bhs1exa5CwyFgJxfbuFs7z0jr37pD8DPpItRS2l8oEWb80SWBMG3zzVLbyQIAm/35Cg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794227536;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
+	 Date:Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version;
+	bh=eerlHc+2nw9LU1blteBgbDf72O/+xt2VeIxgqcPfxtY=;
+	b=3zuabJhmi0uwMLtEbNlhCpvCFCX2+b2upDExqhrYxZHfQs13kRTb0V5Qa0fkWRksvArB
+	 TRoaodqmUoUE391I8AihCybm3yE56ILWawA/IQJ2VwBB5hvXCnrAiL32WOEyajuQB/gk0
+	 G/TWusCIRoM2Q63XSi/di58ROCZAkV4BCRdGq/r8StSAO/cxlui9mtfDz8aXAjo/TVj09
+	 56HWJdGRC6UQigI+tFhQvPmEbau129DJqONlfkhzrrXpxelIol/xYiJdN5wCERUfIvq2N
+	 WOolJSxZ0Uwjt4YA5zYemZh8W+/UQnCERANYYTfU2T8iQvCxQcV55eMSBOfFvY0DPZQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oZwWXSeG;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=5MBBv6Y5;
+	arc=none smtp.remote-ip=79.135.106.111
+Received: from mail-106111.protonmail.ch (mail-106111.protonmail.ch [79.135.106.111])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA32C606A31C;
-	Mon,  9 Nov 2026 12:30:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18234606A322
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 12:32:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 18234606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oZwWXSeG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C375C1F0089F;
-	Mon,  9 Nov 2026 12:30:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794227450;
-	bh=jGi2pMPtfaYXbF/EmhxEb446J6+o0fEqR3t7Qd1x19c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oZwWXSeG5G4rZwtosAWNOxR+zwE/P+4TdYtBuU4HsoqYv3Ei4ABx8IzSJrnlCXCVD
-	 pS4N9qGMBrA4KbNWuz8xavxeHdUjN82DJSb7D1/EDPddNXSIwlYyu6ErXs+2cODAdb
-	 Erby2ILCouiEja140JEQQse9xfYpHNHFe0he9sUexSdTMy8S4GpU9ueYMl4Aio0EMD
-	 CCIjCwCF9EqidbMGauMFpdKueskkpN/CL87/kYRgh7byOhY9WV3b6s7lqcMzW7Qipa
-	 OpohM5kbvXkAexlu6LKYHTW0/k1dE6heQYYcV74rz68P1z1D4IVm4z6TmzPpCT860D
-	 jsTD//MUdGsCw==
-Date: Mon, 9 Nov 2026 13:30:47 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: David Heidelberg <david@ixit.cz>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v3 02/10] dt-bindings: display: panel: samsung,s6e3ha8:
- Add AMB630QY01 panel
-Message-ID: <20261109-tacky-busy-kelpie-cbd5be@quoll>
-References: <20261108-crosshatch-panel-v3-0-87dd4ec4f7cc@ixit.cz>
- <20261108-crosshatch-panel-v3-2-87dd4ec4f7cc@ixit.cz>
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=5MBBv6Y5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=michaelmcallister.org; s=protonmail2; t=1794227533; x=1794486733;
+	bh=eerlHc+2nw9LU1blteBgbDf72O/+xt2VeIxgqcPfxtY=;
+	h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
+	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=5MBBv6Y5HpHr3wguQtHSBZaHetMylu67S5tbrJtq9xyxFfFjNu8/uBGd1+RNzDsYl
+	 MjN1jdQRTG8BMp3We6zvMpRGVYYq1FA5lmyE9gEiKOFPf4ILHQm23xhGIl3wz26Ej9
+	 x8QTTpJYMBNWAqOJchCYkaMyyD9R4MP9lsDuhSGIP3hEcj5Qh7Eb3xqmceKyfXOMm7
+	 aKGkXW7/NW072roRpMqRcoAB/BUx1QnMX8NguugA3OaP8qazwGbBR0wxRhnROUm0nf
+	 JDclYc0VCqAAqKNTz5bDFh7+F0Ccf8o6edAX3zjuWP1pByPCSxbxmKf2yhzZ2JQMqe
+	 o55mTh2+LBgMg==
+X-Pm-Submission-Id: 4jNTgV4YVsz2ScQG
+From: Michael McAllister <me@michaelmcallister.org>
+To: robin.clark@oss.qualcomm.com, lumag@kernel.org
+Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
+ marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject:
+ [PATCH] drm/msm/dsi: avoid pinning the command buffer on every transfer
+Date: Mon, 09 Nov 2026 12:32:05 +0000
+Message-ID: <179422752570.88190.13452031230666113805.msm-dsi-pin-leak@michaelmcallister.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,46 +65,50 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261108-crosshatch-panel-v3-2-87dd4ec4f7cc@ixit.cz>
 
-On Sun, Nov 08, 2026 at 12:32:23PM +0000, David Heidelberg wrote:
-> The Google Pixel 3 XL (crosshatch) uses a Samsung AMB630QY01 6.3"
-> 1440x2960 flexible AMOLED panel.
-> 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
->  .../bindings/display/panel/samsung,s6e3ha8.yaml    | 41 ++++++++++++++++++----
->  1 file changed, 34 insertions(+), 7 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> index ca250b1b91712..dcf347fe5ca83 100644
-> --- a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> +++ b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
-> @@ -7,48 +7,75 @@ $schema: http://devicetree.org/meta-schemas/core.yaml#
->  title: Samsung s6e3ha8 AMOLED DSI panel
->  
->  description: |
->    The s6e3ha8 is a display driver IC used in 1440x2960 AMOLED panels from
->    Samsung Mobile Displays (SMD).
->  
->    Known panels:
->      - AMB577PX01, 5.77", Samsung Galaxy S9 (samsung,s6e3ha8-amb577px01)
-> +    - AMB630QY01, 6.3", Google Pixel 3 XL (samsung,s6e3ha8-amb630qy01)
->  
->  maintainers:
->    - Dzmitry Sankouski <dsankouski@gmail.com>
->  
-> +required:
-> +  - compatible
-> +  - reset-gpios
-> +  - vdd3-supply
-> +  - vci-supply
+The command buffer is already pinned by msm_gem_kernel_new() when it is
+allocated. Calling msm_gem_get_and_pin_iova() to fetch its DMA address
+adds another pin for each transfer, while teardown only drops the
+allocation's lifetime pin. This leaves outstanding pins on the buffer.
 
-I see no reason why order of this schema should be re-invented. See
-every other binding or example-schema.
+Use msm_gem_get_iova() to retrieve the address without taking another
+pin. The allocation's existing pin keeps the mapping valid until
+msm_gem_kernel_put() releases the buffer.
 
-Best regards,
-Krzysztof
+Fixes: 7ad0e8cf6317 ("drm/msm: Count how many times iova memory is pinned")
+Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+---
+Hi,
+
+I ran into this while testing display teardown on the Moto G10. The DSI
+command buffer is already pinned for its lifetime, so this avoids taking
+another pin every time we fetch its DMA address.
+
+I tested this as part of the G10 display fixes on 7.2.9, including display
+power cycling, suspend/resume and teardown with the compositor stopped.
+
+Thanks,
+Michael
+
+ drivers/gpu/drm/msm/dsi/dsi_host.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+index d92659d80f..64fc54dff4 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -1428,7 +1428,8 @@ int dsi_dma_base_get_6g(struct msm_dsi_host *msm_host, uint64_t *dma_base)
+ 	if (!dma_base)
+ 		return -EINVAL;
+ 
+-	return msm_gem_get_and_pin_iova(msm_host->tx_gem_obj,
++	/* The command buffer stays pinned from allocation until teardown. */
++	return msm_gem_get_iova(msm_host->tx_gem_obj,
+ 				priv->kms->vm, dma_base);
+ }
+ 
+
+base-commit: 1e59855738454b14021b64115f0090eafc7526ae
+-- 
+2.39.5
 
