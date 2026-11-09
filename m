@@ -1,124 +1,124 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794217791;
-	b=EpDh53+RRUaf7WTm7vRs+OfOBo6AWS63JINawV3FrSM7+kdDp/z28t1a3KRRTOu1qPab
-	 IyObiGpF7nFQyHMU41jNphN/CgaSQ2AOWb/MoTAZh4EJnwKsaD/4YV/8VDh1b6p4JVkw5
-	 B5cTzDqyGEgwoTqL+FdhD1Z/Tm3CAJViZCGJXrf8V8abzd0ZdhZVxr0cbuXs/i9BSor2F
-	 ug4lIrCULlFrLiJBHQIWs9xHVvj301JxV0xi8nLNhS8+rj5QOjw6e7HwMoD/zG7iTtp+D
-	 /iHj37c44ehw4YyHfSJASPbc1k2r87TZi3LA0+U3FRGGKQp7BCI0Yrk8oJ806pZhTAQ==
+	t=1794218230;
+	b=clRRk0SYUTQvXW+yakTTwnYRt/r2K0YYFgW78+Shvwc7Zi3fq/V9gKzQgEj9v5/VVyND
+	 TwlUYPTp1LYw6x/9HWO/2l3IMIg9KcGvY56mR/pQS8v/H5c8VSDZ3kWZIOWOl2bMN+Dce
+	 ILgd4kYZjsBRp2ESxYfccBvm+sjuvxmum2qayu1nAaX8ql7bhxjeHS/mz/P2jKcP5OEOl
+	 88vIzGUbxyTTQnBD4DRrf4dA51EkJXp+5uIBgJBUEJCJKzGsizBYkVoJlPCJUjV5/T/A4
+	 4MsolRaKovIUki3A/axPfxYibAM5yvJ5i1dWHq8YFFQBgpy23jzQ7OgC422Pjrjl00A==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794217791;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794218230;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
 	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=A43LRLlfY1VoB7l3hvfT1w2+7RbYPuRRkaKzPxORuaA=;
-	b=On/m1gvw/ANZE3n0VAr2nydQPN0G4ztnx6MsfW+jYBcJaIlg91pOViNJES43eps6WoxT
-	 4BRoZtBchV1UqEk5k/f4zW1xTINPk7scbjO56xlsBjJsnYxae8A7ZvSmEudgTYoO4yqZ+
-	 w+HjNXRWhdBf5kcBJ5gO1T+cYGjyDPdIku+sT6RoR36VfnK2Tbp3we+FqXoaw/ktJwrxQ
-	 nvUYSZMIZFPFN2I3yQ4NOUMTxqfbrYGjL117LInxcgH6zWoEu8KWqJ4yLKWCFqcN9+KUj
-	 hsSmB9E08NK+0zfHDleBcKjKt2RHqtD8I5uNwNhbqO2bu7plRbuXmiJ2pPfgwHYZKTA==
+	 Cc:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=AAG6wtd1w6cVFaCC+O0b2STezx0qv6f7g12TMj5bqMM=;
+	b=TRD1ECdnFYd/QqjSLaabfu2ZUHPhQVi5X9v3x/RcfOV0DTdMm+Nij0izeW1Yp3TCxqEE
+	 cV2srZBt0ELBhqYzxuGE20C8LOjncMa1ZK/1U4bWfnhxr4lNHgDyHjesvWzmFZCoWhkkC
+	 ksLOu1NTQqjdauTm5oFz+oQnHrfchant1X1MdShrKnbWtZACTFHo1pGbQSqRtbWbQYd/D
+	 99+FTjBzzOlfOqny9DVY5xPcMyjeltEujCm9KhZ7ozNng8B5KTl8xRw0lL6uKgQs45f/K
+	 3sqpceSh+y9p9DUI464MdfjKhUjBan803ZcJFHGb0nw7D+z1J8kO6xZ4rsKNfqz8EYQ==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QbKCSmbc;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="F9QP+O/y";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VPtuRtDG;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="YI1HO/W0";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E848C606A326
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 09:49:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E848C606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57C8C606A332
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 09:57:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 57C8C606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QbKCSmbc;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=F9QP+O/y
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A96A62T056071
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 09:49:50 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VPtuRtDG;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YI1HO/W0
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A99un0m3600515
+	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 09:57:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	A43LRLlfY1VoB7l3hvfT1w2+7RbYPuRRkaKzPxORuaA=; b=QbKCSmbcHpe5rKjR
-	rn3Xi+QvzRzQ2oF/FbmooC6A8nmvPTqEG7BQu7XTYi+KHxes482WuUVJMcyNkcb4
-	eCARzrZYFPpXt04RhyY7s1FsCO8YVJ4h2pAtnWumCUhtjBdZ6kz5pVC13MAM9wTo
-	K9u2Aqm9BXloz1Syerp2dztmAOr/Ts/awudO/PA6st/r0/ebvYAAS8xCkF+BK5Wc
-	0NqWlM0622MT27w9vsypZDFSu/YQRXgR9F2rcHxOpw1BoNP0zGcJO01cUizPwGuQ
-	ZPX/JvdTVW7H9qlkRFOkDENoE89Dxs9MgoiOeAUkopN9jB/rrfRzshT7nFXwBaal
-	1n+yLQ==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4htuqm2jst-1
+	AAG6wtd1w6cVFaCC+O0b2STezx0qv6f7g12TMj5bqMM=; b=VPtuRtDGzb65NmL9
+	VLFYDA8OJXcH+ENvRFYSyLXanv3GGUHa6d2HQwcygrFRERVAO9cViv+KuiQjXEI7
+	Y9JV6pDfIUcEaKQyOfwoXWnS4i/1R7LzOipuMBeoi0sDOnF8FBLKPN5RJFJdy+T7
+	ZTuHdkJ6IQR7NjuVAu+k6tTTs74qHb4VugMtJTk1mU+i0TyZnmlrBi1n3xPST6KR
+	Y7xPWEutPUwjd1Bs8Ubuw1s9V1WxlLo7foE6vAj+Q5n+288tGGYId5ioLDgBmPmW
+	g271xOtcdtEJJKWV0yzBDc+63+m976m0oSTPCkR32u/2QXI1mkFR02l5qXLM2TRG
+	l6cbvQ==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hua588e3a-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 09:49:49 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-53639e47be2so13445701cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 01:49:49 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794217789; cv=none;
+	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 09:57:09 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb7f9bb86so135944085a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 01:57:09 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794218228; cv=none;
         d=google.com; s=arc-20260327;
-        b=QOwg8RFt1BInMqVW+SK89zUdKZa3hwhX2kaNLpT+LVlYhYMj3NyV+rKFZxZA9Cx9X4
-         D1K/4LImQcLKDU/wfWDWw2UQzLT59LO0XEnf0o6LVdaiRKVo8JttPUgYhk3ZWG73Lmay
-         5EWEPxc6JyN6o3sgMfqqFs5sNExERu7G52MBqWTZeuPGORic8M1hVgByaj6AotcDtTWq
-         sNT4Dc8ZYvh0YwUnvZdCj3gF6Lf2qzrOJscTmIZpYunXQMexKg7fGhhWS8LMGXPkuWt8
-         bYVf3UVTpRhkMkQVsp5Hc2gK9vJTU1mgjAVZ99OxK57G0VEup8hp+LiQVqXNc3PHPt35
-         v2ig==
+        b=dJHi5j3vOOSjUTMxa2IzZfgQNCdFRG9zsG9NsjlCpEd4sy8PltQfBVyHPPmtq2hUVr
+         +Z0RdDsT7Rvw/LShS7hJsOu3Hei4icLEvLHT4qIxASC47mF194ZaHs8oe2nJhcmbNGDE
+         +M/HjlwP6fqtMIp8WhHYXXKj6pqtsLmcgEi4Y8egHd3MMC9QeGf5fxmqHy/FvRHxJfqK
+         ggQym2o44QtQ+EHsha4elxPzowoaZQ/JX9vmTUCEWxe/7co5lK8KtIlmllXVQVsji2PK
+         p99MuIJBDGNJq72QfjGbaBNzhXKSzrcakwcQpv2bXfEFETpf8fYzW0WOQ0jlIDSa0l0s
+         gBGw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=A43LRLlfY1VoB7l3hvfT1w2+7RbYPuRRkaKzPxORuaA=;
-        fh=hn5M9TFzStop4L+A227hGc8g2IC1RRl3VGwN00X8WAc=;
-        b=iS8JjFt8/4hVg/EmBc8Pii+iqQq9kn0kmutItBZ6r9CF2pB1J+xE3yMqYAhIxT6uKV
-         9FqxFFPh1c4Ijg+RbbFi4pQPtANif7sTCZChWbKApmxupZOGaq8bGRvCzOEyAtLbgi+5
-         HQ2OQhkx8mlood0lpd0vWungUbfz2BS2ULVf6MW9bMa81AjbqKHj1j9SE8QxdhMSCK2Z
-         epfgz3tdD8b8Y4Xn7nsNNtDoK49DyEoqtiaRTp6rDM3t9pFA0zTOWviW7nS3bmiXf5OK
-         zJ5H+pUIBUlZbYhqx4qVui5Dw8Jy5SXMaEfZ24RavWRvNsJL9XgNnxQEvhaLxr0zQppk
-         84EA==;
+        bh=AAG6wtd1w6cVFaCC+O0b2STezx0qv6f7g12TMj5bqMM=;
+        fh=H68PMhSkgyFuII+BYzwoemPVPdpkSd3oBalAZtwRUsU=;
+        b=GUGng1LKvcQwHkMW4KmgGU8M/Pr5lqSUcm7Yj4iD2GjqA++XPfNDUuKakkt8UlX4L2
+         kfH6/0mmPipeZaIzNDuq5rmbPKVMFPZFXkitqCgd5sJ4Ny6CQTuoaUw67eAYj3h5M6to
+         tGANKcxZRZikMYruo26Npw0EVx377Cfml0hWyAoiCxe232bSu4kcGWRh8S+UXf8TWPsB
+         LZ2LLtTtxExRekQW2lVge7dXYF8wRFSPGQ42wXEttAH70peNwU05eg7VV6djA/ojueaM
+         D/jPAYm6HP8BqQRyvNXLBLHuA1IGN3fx0lMf0bVkMli8jpIO74l60DSLbaZc64Q9rX43
+         F23w==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794217789; x=1794822589; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794218228; x=1794823028; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=A43LRLlfY1VoB7l3hvfT1w2+7RbYPuRRkaKzPxORuaA=;
-        b=F9QP+O/yS9iVqZevv379hLgKHHKukW7Dpl2CZ0z6vCwnZV8C4tB2gZfhuXjvIgVO+6
-         Lki271XuK+VVv/3gWDrIh29puxB/AiJitkgVjDq0qDPQB7xRI0QhlTG0nTQBYVY/VsUB
-         JaheFo8XIgSeapbDZ6u2JfDKvrh6fFEdG25+egX6TJg1kRwTCZa4O1PDGdyl3r6aYLtr
-         ddqA/hN9BS6fmeUnmBihSUhIgjt972iSxV4Dl03AIjW3jZ5OUmuDvGor3lpIK9L1k2Vi
-         WhAvl+yZsDTIOtIC4AOYp2NHPpDjACdQVw1IQdvexI4xvddnzhwG6rcJeK60Yp0pEmhw
-         ylGw==
+        bh=AAG6wtd1w6cVFaCC+O0b2STezx0qv6f7g12TMj5bqMM=;
+        b=YI1HO/W0EQLWyHzVs0t1ZJ5qJNb5kcxeU7uNuwCe5segq//c1E5N5oPqoV9dNtfp8L
+         93zZqfkERMPSE7DzbD/ZdVK7suWGRfpt+ihpAv6AQVXNu+vIdZOghnBK6qwcKDcmVtXg
+         rB2Tf2TOANlYphZejtHgq7gyORN34BqEaSeeSoDkCy9zYy/lRkOfBTT7vjFeyjKl++8d
+         xdK4O8XvvLNtywna6hkjsLv8YBjgSrLT5/qVykPiTAyQbrHSSRrhxeBYePzgzwtmExnS
+         5oj0D3sY3dWR+/Ut1a+eWJQbW7jVad0yZ47QeCXJE8PESRx7ONc+jLMfceOKCi8dfdn0
+         FupQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794217789; x=1794822589;
+        d=1e100.net; s=20260707; t=1794218228; x=1794823028;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=A43LRLlfY1VoB7l3hvfT1w2+7RbYPuRRkaKzPxORuaA=;
-        b=Spu1eAp+J/EPe9I0aLUFDdFYPZVY1mHhUXbnVrhjiGyf1Uz6mLGjf77lZ01bMZ5hR8
-         nUemZ8L+0CBGc+LvSFa82SjaJe9Gbt9fIkqK/1MG2l47fLz4FYgFpYJ5iIVJO57YXKfo
-         WkMD4SaIMx4xb3pU41OdPRbL/QVoqc1zBhEg1rhizBX8dMqT78SPfVoEd3Xr+/h3m2Pt
-         QonFwST4a5YJ/Ly7uQ54wiMY1MpZtDTYM06yBqEzPRbWOukWN8nQ6zXxP3faJa+VXPfq
-         N1eK0fvnUGe+nkTIWsEQ9s1w74/Or2VGgwEM9qdg+55axrn4kB4kgSIm97+33UL2td0K
-         nErQ==
-X-Forwarded-Encrypted: i=1; AL+hErH7NwWtuv5acNCCxLvN2JQ6PB9x+NdiykysVkxjQo0JASHEduvb1/DeQ/LXzAJtUPtFzCS4eCeUD1CWCFtA@vger.kernel.org
-X-Gm-Message-State: APuU4Z+zFXfAeEt++MHJURhIMTeixdDsexdcHB+POSxtrNiUEZQJaqDJ
-	SqoX8X7bxJi7puC29Mes79BPcS7NaVeWn9Syd60P0jxqdqIHOzzU5v8yzcwxQuE4DthIlHMMoBS
-	NdQWtui4tOe222VOqFA9p89SDlQvKscNOXcG87KP/N2TZcrSdoVAs/yVfdNSwixmnUAh+nWoSvA
-	CCRjcz4Nd0N7HM04yItNuOPLri6I+1lOYtLV8+p2qKNZE=
-X-Gm-Gg: AYBFou1gkcq8+ghv3++4U4+WvxdwaSlVozbQICdg/xEQ5wnTvbF52bhXV7OIn4h5ey3
-	y3koGfMrocYvXfYX7LLnnSXDiOQ/mvKjdmpplYyzRj4NzgoFgeK4jlYTft5RQ2MM+hKq7JNt2kS
-	dAqFGORwkJT0f0lk8CURJO2adTeHjH8ITvV/+zCPaMABeyDcjK044AtXPxB2SRMV75KwI4kYNfP
-	ohalkWKgm9U9xYNGj9weAAHVguakPPosYhfhHqGJa+UkxKMgGHr4iX8Iasir4vuGUw4+msqk0g=
-X-Received: by 2002:a05:620a:46a7:b0:93f:2bca:2cd8 with SMTP id af79cd13be357-947842757dcmr470394285a.57.1794217788882;
-        Mon, 09 Nov 2026 01:49:48 -0800 (PST)
-X-Received: by 2002:a05:620a:46a7:b0:93f:2bca:2cd8 with SMTP id
- af79cd13be357-947842757dcmr470392785a.57.1794217788415; Mon, 09 Nov 2026
- 01:49:48 -0800 (PST)
+        bh=AAG6wtd1w6cVFaCC+O0b2STezx0qv6f7g12TMj5bqMM=;
+        b=rYMzLIQgukcXk8w2dMmL5C7+y4MTEpYaGen5YKv9HmRKnoBosaNiggBochLhoAFQHo
+         RHDON/iKgcxIV6geZyvhkYibYOCvol70/rO7nJkfDnN4PQbuQof10xpD1QSDIhkBM8Qq
+         XS/5/QQWj/QJchQDuYqx3fnKyx9bbg6uKhHHFwncSIgB5pIOIzQr3iyWEcX1pY2Az/8c
+         VcYG5Qgg2URMzAHXc+rQeHQPQCKIrx3XjPsHKqi6rgCt4gMsiu9D9WNtqqp8T3nj2zXG
+         DAzGEQg5npTKF3B8HqC0yD09frX5ItVS1er6oA/o+/IaacmYlvgB2fY5MNX8H3unVt+R
+         RScw==
+X-Forwarded-Encrypted: i=1; AL+hErGXqBbKrRxTcV6KtMcYO0Wlce5tqRNexgte/7r6vJYt+R6HVPCGySu25C2enO57ucukQTDbK92gvCp2h7IJ@vger.kernel.org
+X-Gm-Message-State: APuU4Z+vEo//VvQDmUEeOlNVzlysDqxuy1TITbZVH7cwAawi7ckzE/OW
+	mg9D6j4lAgPGLrYqhtb3iJC/B6DyBa67/RcljsD2lwd5i1pSEuFSk/R0BweET/Mbq96QHkY2DkJ
+	lvk4hSCsoEbApy/Hzi/Ptc8CyFY4+/we5Yp8hCHOqCvaXBYbmwTwadcYBxaXbGffUpVyTPeJlnD
+	+bdGN/Kp3T4gu7/2ztNMylndnPlW2tjY16iFdaKv7Ckds=
+X-Gm-Gg: AYBFou3CzCv2tViQ9pq1ZaHB28LEIiVFGnriDrVsZ9Sq2hvcAAqgRGWXo2TIjMoSSKu
+	wqFeCSFYM9mhNHcXaRpxVf50zubuKOxM2qeExtuhPDP4UMMewDLesCyngrsyoN0t0d3u+25GOdQ
+	5Jx2X8HKGYipN6wHoxLDjpNg/kMaWnbEFC5PCMUWjmVQYDJ70ewFbBJ4WcwXkGrYM38vPDPlzz6
+	XpGHt7KAdb+SN8dw4TlL1g4X+pdIk6FPlxiU39Kk2sm7CHU3Zr0i4IrOJhoV98oik99S84ten0=
+X-Received: by 2002:a05:620a:2401:20b0:947:84da:8458 with SMTP id af79cd13be357-94784da9342mr336039585a.83.1794218228428;
+        Mon, 09 Nov 2026 01:57:08 -0800 (PST)
+X-Received: by 2002:a05:620a:2401:20b0:947:84da:8458 with SMTP id
+ af79cd13be357-94784da9342mr336037885a.83.1794218227882; Mon, 09 Nov 2026
+ 01:57:07 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,14 +128,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261107-v4l2-frame-sync-v3-0-e5bf7073a35d@kernel.org> <20261107-v4l2-frame-sync-v3-3-e5bf7073a35d@kernel.org>
-In-Reply-To: <20261107-v4l2-frame-sync-v3-3-e5bf7073a35d@kernel.org>
+References: <20261107-v4l2-frame-sync-v3-0-e5bf7073a35d@kernel.org> <20261107-v4l2-frame-sync-v3-8-e5bf7073a35d@kernel.org>
+In-Reply-To: <20261107-v4l2-frame-sync-v3-8-e5bf7073a35d@kernel.org>
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 10:49:37 +0100
-X-Gm-Features: AclHuK_y07fkzKo1YjXS7RBfNxjVDAed2Q4BKv9GuNKAjF7-rmkOWA5Yh4RIhYU
-Message-ID: <CAFEp6-1tMwheRKaN=sEgF9abzNZOLS79OePq1GOwtm8JGXjSug@mail.gmail.com>
-Subject: Re: [PATCH v3 03/11] media: qcom: camss: Use SOF sequence tracking
- for vb.sequence
+Date: Mon, 9 Nov 2026 10:56:56 +0100
+X-Gm-Features: AclHuK9j9RAwJKTKzev9RbLG7mY1UiDABvkGjeRinbRp40Cik4QzcPP6hAY-YhQ
+Message-ID: <CAFEp6-0t_r7yH3hGRFH6amgfNUK7sTMe68HXQ2WEuUffHMQF2A@mail.gmail.com>
+Subject: Re: [PATCH v3 08/11] media: qcom: camss: Switch on frame_sync_en
+ logic for csid-gen3.
 To: bryan.odonoghue@linaro.org
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>,
@@ -143,179 +143,216 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         linux-kernel@vger.kernel.org, "Bryan O'Donoghue" <bod@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDAzOSBTYWx0ZWRfX6PsVx5H0GR/g
- cOUOQ26mLq7xjQlXatfNC8E/C7hu9Nrz3Sy05oH0EvB/w97yraDhzc3pYzHJ8BRTWLa0pAK8XO4
- LfcGCqp9bIuNzTMZNjSURUAY9rHeIgI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDAzOSBTYWx0ZWRfXyBQpWWthpO7q
- +TxrIqoZ8W8Im1fKa2iHkaNAstfqihxEe8gd4hFg9/DPGWeMeVvu2gKbHIpJVYHPwy7R2N0CvrL
- cxzCU3cCr//dQ2JMO7nuB8XFdtszcG6roEuZWUnlqKKqpV0/FGiSK4hw1AmUDNjcSp9/sBVwrft
- HssJBip6tiNTlShKrYWLohyNTic5pF6nHymvqNr2wl/0rUC5X1YR3pA9406plEcaG7mZU9gvefo
- sKr5FTSSw6Xp2Jy2RoVPM0LBvK3ZpvCh0ZIkUX3FbTQMlfYLGjL0/WBIPtAFpxw7+0ifmkWCZ7j
- 2S9dloNRhjzwT5ozcvRnb/jEWs3u7mKxPWPnUNDbLyXRENT2BKglAFAbr/XnUbucr1ilgP1kCj1
- Xt03pI0GwH4/B/qFJnPIbglJ/+5RNaJe4oUEZW1e/2+4n4TZahay7BGQZte1efijMqDMpYc0iIi
- opiejaXKA+IYy8y+A/Q==
-X-Authority-Analysis: v=2.4 cv=JLquIMKb c=1 sm=1 tr=0 ts=6af1973d cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDAzOSBTYWx0ZWRfX0JSXgf/qY7W1
+ 27/zDMowMqAlmFyvxV3v54JcaFxe4Hu7LifLXh7qd2zzn9xznfGDuxcBJLXTmVU0/RhgHvx5mFo
+ aeoEpXkPn7yBj+4pPO56+TT/LudNGhdWslQBVjLgyZw2T5K/AGRpjPPJ72B3enTHG2t5/6PqHF/
+ k3sdDgHSbVgodcuwnvcXsuBXceQeTwOTA0IlEIy/NrToJzZJBWWwsDjp0Gz6lYlwpIPpLvy/SNf
+ PsGg/4DUhYZ/XSDVuuh6pPFhAI2nNKAZDrKqjOauIWqCPttU3vC8Q4VHRRbAEnOqJX3ZminsoJ1
+ sKsaYdKoB2huGin57WS9ezw2gPp13h42Wi57yvXb9Vm5NzBLG1imhlHp5LS4T9kNEP/y+g7FvwI
+ JXNw71b+aFeyZORr+x2jz3gEWGFQcawWFwzFGKsNu5GePJv0egURpBmJKv3Q5dTLPChCP8wGAvH
+ MmTR9xXh/HzgDtBgaLQ==
+X-Proofpoint-ORIG-GUID: qXW7HkIe_7bmJNlEaxTIOxDe90d9J_3Q
+X-Proofpoint-GUID: qXW7HkIe_7bmJNlEaxTIOxDe90d9J_3Q
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDAzOSBTYWx0ZWRfX/qKj9VxFc5P6
+ V7kM6YywvEQNJhH0GyTTmEmhjBiZuOF5j2qsYapkb+jJH8FvK4AJRdxbiUg1lQz3CruGLQ6HXQy
+ 9xwEeXFnskb+eqetbH/5Reh3EV1eXz4=
+X-Authority-Analysis: v=2.4 cv=C9V8WgP+ c=1 sm=1 tr=0 ts=6af198f5 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
- a=AFkX6LJAiSV6nzPqyhcA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=KKAkSRfTAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=XzkgqCU9wlH7P1zULpYA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
  a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: 8cDFwkiFBpqp-jiL2hKv1iG4TI74ZdCy
-X-Proofpoint-ORIG-GUID: 8cDFwkiFBpqp-jiL2hKv1iG4TI74ZdCy
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-09_03,2026-11-06_01,2025-10-01_01
+ definitions=2026-11-09_04,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0 impostorscore=0
- spamscore=0 phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ spamscore=0 phishscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ bulkscore=0 suspectscore=0 adultscore=0 malwarescore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090039
-
-Hi Bryan,
 
 On Sat, Nov 7, 2026 at 2:02=E2=80=AFAM <bryan.odonoghue@linaro.org> wrote:
 >
 > From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 >
-> We want to correlate statistics buffers with data-buffers. To do that we
-> will need to have a sequence number driven by the SOF signal.
+> Switch frame_sync_en to true to track and consume SOF/EOF data.
 >
-> Rather than incrementing vb.sequence when data arrives, we should increme=
-nt
-> when SOF happens.
->
+> Tested-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org> # sm8650-hdk
 > Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
+
+I would have preferred this to be defined directly in the
+corresponding CSID implementations rather than in the resource
+descriptors, so that the component implementing frame synchronization
+is also the one advertising support for it. In other words, something
+along the lines of a csid_hw_ops.features flag or a dedicated
+csid_hw_ops.has_frame_sync callback/field. That said, this is more of
+a design preference than a blocking concern for me, so:
+
+Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+
 > ---
->  drivers/media/platform/qcom/camss/camss-csid.c    | 14 ++++++++++++++
->  drivers/media/platform/qcom/camss/camss-csid.h    |  9 +++++++++
->  drivers/media/platform/qcom/camss/camss-vfe-17x.c |  5 ++++-
->  drivers/media/platform/qcom/camss/camss-vfe.c     |  9 ++++++++-
->  drivers/media/platform/qcom/camss/camss-vfe.h     |  1 +
->  5 files changed, 36 insertions(+), 2 deletions(-)
+>  drivers/media/platform/qcom/camss/camss.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
 >
-> diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/drivers/med=
-ia/platform/qcom/camss/camss-csid.c
-> index 7f33fb81ca8cc..588122beec854 100644
-> --- a/drivers/media/platform/qcom/camss/camss-csid.c
-> +++ b/drivers/media/platform/qcom/camss/camss-csid.c
-> @@ -1356,6 +1356,20 @@ static int csid_subscribe_event(struct v4l2_subdev=
- *sd, struct v4l2_fh *fh,
->         return v4l2_event_subscribe(fh, sub, 0, &csid_frame_sync_ops);
->  }
->
-> +atomic_t *csid_get_sof_seq(struct media_pad *pad)
-
-I would go with a `const atomic_t *` to preserve explicit ownership
-within the CSID.
-This is also what atomic_read is using, so that should work.
-
-> +{
-> +       struct csid_device *csid;
-> +
-> +       if (!pad || pad->index < MSM_CSID_PAD_FIRST_SRC)
-> +               return NULL;
-> +
-> +       csid =3D v4l2_get_subdevdata(media_entity_to_v4l2_subdev(pad->ent=
-ity));
-> +       if (!csid->res->frame_sync_en)
-> +               return NULL;
-> +
-> +       return &csid->sof_seq[pad->index - MSM_CSID_PAD_FIRST_SRC];
-> +}
-> +
->  void csid_sof_event(struct csid_device *csid, unsigned int id)
->  {
->         struct v4l2_event event =3D {
-> diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/med=
-ia/platform/qcom/camss/camss-csid.h
-> index a9d88909d37fc..8edb258b0ae58 100644
-> --- a/drivers/media/platform/qcom/camss/camss-csid.h
-> +++ b/drivers/media/platform/qcom/camss/camss-csid.h
-> @@ -260,4 +260,13 @@ u32 csid_src_pad_code(struct csid_device *csid, u32 =
-sink_code,
->   */
->  void csid_sof_event(struct csid_device *csid, unsigned int id);
->
-> +/*
-> + * csid_get_sof_seq - Get a pointer to the SOF frame sequence variable.
-> + * @pad: Remote pad of a consumer's sink pad
-> + *
-> + * Return the counter or NULL if @pad isn't a CSID or the CSID doesn't s=
-upport
-> + * SOF tracking.
-> + */
-> +atomic_t *csid_get_sof_seq(struct media_pad *pad);
-> +
->  #endif /* QC_MSM_CAMSS_CSID_H */
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe-17x.c b/drivers/=
-media/platform/qcom/camss/camss-vfe-17x.c
-> index 62c2405359a06..4972d3ab65078 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe-17x.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
-> @@ -491,7 +491,10 @@ static void vfe_isr_wm_done(struct vfe_device *vfe, =
-u8 wm)
->         }
->
->         ready_buf->vb.vb2_buf.timestamp =3D ts;
-> -       ready_buf->vb.sequence =3D output->sequence++;
-> +       if (line->sof_seq)
-> +               ready_buf->vb.sequence =3D atomic_read(line->sof_seq);
-> +       else
-> +               ready_buf->vb.sequence =3D output->sequence++;
->
->         index =3D 0;
->         output->buf[0] =3D output->buf[1];
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/medi=
-a/platform/qcom/camss/camss-vfe.c
-> index 2680a9914765f..da373024c847e 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-> @@ -474,7 +474,10 @@ void vfe_buf_done(struct vfe_device *vfe, int wm)
->         }
->
->         ready_buf->vb.vb2_buf.timestamp =3D ts;
-> -       ready_buf->vb.sequence =3D output->sequence++;
-> +       if (line->sof_seq)
-> +               ready_buf->vb.sequence =3D atomic_read(line->sof_seq);
-> +       else
-> +               ready_buf->vb.sequence =3D output->sequence++;
->
->         index =3D 0;
->         output->buf[0] =3D output->buf[1];
-> @@ -508,6 +511,7 @@ int vfe_enable_output_v2(struct vfe_line *line)
->         struct vfe_output *output =3D &line->output;
->         const struct vfe_hw_ops *ops =3D vfe->res->hw_ops;
->         struct media_pad *sensor_pad;
-> +       struct media_pad *csid_pad;
->         unsigned long flags;
->         unsigned int frame_skip =3D 0;
->         unsigned int i;
-> @@ -523,6 +527,9 @@ int vfe_enable_output_v2(struct vfe_line *line)
->                         frame_skip =3D VFE_FRAME_DROP_VAL - 1;
->         }
->
-> +       csid_pad =3D media_pad_remote_pad_first(&line->pads[MSM_VFE_PAD_S=
-INK]);
-> +       line->sof_seq =3D csid_get_sof_seq(csid_pad);
-> +
->         spin_lock_irqsave(&vfe->output_lock, flags);
->
->         ops->reg_update_clear(vfe, line->id);
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/medi=
-a/platform/qcom/camss/camss-vfe.h
-> index ae9dad353a378..0e2dfa58421ad 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.h
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.h
-> @@ -94,6 +94,7 @@ struct vfe_line {
->         struct vfe_output output;
->         const struct camss_format_info *formats;
->         unsigned int nformats;
-> +       atomic_t *sof_seq;
->  };
->
->  struct vfe_device;
+> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/pl=
+atform/qcom/camss/camss.c
+> index 52bb19f5fbf3b..b7821019241d7 100644
+> --- a/drivers/media/platform/qcom/camss/camss.c
+> +++ b/drivers/media/platform/qcom/camss/camss.c
+> @@ -3120,6 +3120,7 @@ static const struct camss_subdev_resources csid_res=
+_8550[] =3D {
+>                 .reg =3D { "csid0" },
+>                 .interrupt =3D { "csid0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D false,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3135,6 +3136,7 @@ static const struct camss_subdev_resources csid_res=
+_8550[] =3D {
+>                 .reg =3D { "csid1" },
+>                 .interrupt =3D { "csid1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D false,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3150,6 +3152,7 @@ static const struct camss_subdev_resources csid_res=
+_8550[] =3D {
+>                 .reg =3D { "csid2" },
+>                 .interrupt =3D { "csid2" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D false,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3165,6 +3168,7 @@ static const struct camss_subdev_resources csid_res=
+_8550[] =3D {
+>                 .reg =3D { "csid_lite0" },
+>                 .interrupt =3D { "csid_lite0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3180,6 +3184,7 @@ static const struct camss_subdev_resources csid_res=
+_8550[] =3D {
+>                 .reg =3D { "csid_lite1" },
+>                 .interrupt =3D { "csid_lite1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3433,6 +3438,7 @@ static const struct camss_subdev_resources csid_res=
+_sm8650[] =3D {
+>                 .reg =3D { "csid0" },
+>                 .interrupt =3D { "csid0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .formats =3D &csid_formats_gen2,
+> @@ -3447,6 +3453,7 @@ static const struct camss_subdev_resources csid_res=
+_sm8650[] =3D {
+>                 .reg =3D { "csid1" },
+>                 .interrupt =3D { "csid1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .formats =3D &csid_formats_gen2,
+> @@ -3461,6 +3468,7 @@ static const struct camss_subdev_resources csid_res=
+_sm8650[] =3D {
+>                 .reg =3D { "csid2" },
+>                 .interrupt =3D { "csid2" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .formats =3D &csid_formats_gen2,
+> @@ -3476,6 +3484,7 @@ static const struct camss_subdev_resources csid_res=
+_sm8650[] =3D {
+>                 .reg =3D { "csid_lite0" },
+>                 .interrupt =3D { "csid_lite0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3492,6 +3501,7 @@ static const struct camss_subdev_resources csid_res=
+_sm8650[] =3D {
+>                 .reg =3D { "csid_lite1" },
+>                 .interrupt =3D { "csid_lite1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+>                         .hw_ops =3D &csid_ops_gen3,
+> @@ -3790,6 +3800,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid0" },
+>                 .interrupt =3D { "csid0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D false,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3807,6 +3818,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid1" },
+>                 .interrupt =3D { "csid1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D false,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3825,6 +3837,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid_lite0" },
+>                 .interrupt =3D { "csid_lite0" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3842,6 +3855,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid_lite1" },
+>                 .interrupt =3D { "csid_lite1" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3859,6 +3873,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid_lite2" },
+>                 .interrupt =3D { "csid_lite2" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3876,6 +3891,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid_lite3" },
+>                 .interrupt =3D { "csid_lite3" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
+> @@ -3893,6 +3909,7 @@ static const struct camss_subdev_resources csid_res=
+_8775p[] =3D {
+>                 .reg =3D { "csid_lite4" },
+>                 .interrupt =3D { "csid_lite4" },
+>                 .csid =3D {
+> +                       .frame_sync_en =3D true,
+>                         .is_lite =3D true,
+>                         .hw_ops =3D &csid_ops_gen3,
+>                         .parent_dev_ops =3D &vfe_parent_dev_ops,
 >
 > --
 > 2.56.0
