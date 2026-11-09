@@ -1,56 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.63
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794260412;
-	b=JnzIAbWByJq0if1HM02EIMQXxwD/3u02sXfjvHWm9Txtm44JZQ0Tw10DneQ6M04OvixZ
-	 DeOx3DZeG1MbCk7Dh8kbEUNdT+pMCUcKiQFYpJ79CzS7iDLr6D+eSGfae8cuiS9bjkZ0S
-	 kZ+iojrBct9m+0ujLF3pPh7Y2npF5NbJ69Mku096ppnEBmZO0vfd8ezXSs5cjmxakOfLW
-	 gcL5DOVWNF7dYMTzO6tyi9eJnF2YawO1PRbMHjlJCTKM6FHDkF8qmMsTmBE+QcPj8pMrj
-	 duh1dSfvGzDtwEuXxA2eBAttV9768f29VKr1zdzN6hWinPtD5OKRJw0dqiaTTFgrYqg==
+	t=1794260538;
+	b=iBT1/CNog2P3CSKm183aXgWb48mOToorCurllMvpJGdAmXpGuzLbXNxjZliXsZoA/O0R
+	 eQXzmTVBo7BTeSah0VK9cl2G6GSPwvv9GY4uKb0F9Aq4oo2KfmYQlvLy0lD2emNZ0I9Kb
+	 5DpoTSsK8hqA+zNp2J8C84ZWQyKBmmRgr1jomPEVO+H2eQMG5SvFJThZ10Y8ljBuD2MJd
+	 DD3gc55RMsOoydRPYskpsHPSmeV3DH7Fcu0IDVICYEhrIAgdXDOCmoJwJ6fxdBGPK1CCO
+	 xXMm872EH1Wv64Y8Zx5NWHKDxtyfLkCLkyDORYe9qHyrPU0RQKPbatm35epuSz/F6/A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794260412;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794260538;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=eUnUJ6fMsa+SK3hUNyUAZu2gmdqYdOP/pDefbHCAe7Q=;
-	b=TR6gjazg3+LlYcmmzHE8L1pofqZ1ug6I5mtpfTiESVMm/f5AkYnQ/mEOyPYrKFxZyrPF
-	 hdAnk4DahmF2upOBSYbfD7IpsVzztJoNXK0vyTwiOrXyZtou8IOHGgPUaEI39L+sFFDsW
-	 eYrH2iQYuDwoMDiKVDcdIZtFyUCIG9PdIT7yV+Ah3pZude7akdziz14nOIbqgxZYWPkqD
-	 /jM1uqvMVRKdtBq2TTFcAZZ97+hB3EptdkcvINN0kmIb8hmXVR4URRpLb4WdcpMiDl2/t
-	 xGlTFPVHprXuF7hgk+Jzn6CMLCKZwIB2agW71er4NB/pNnBjWRkJrUlMtnEurgOjkBw==
+	bh=Zy4UuoFBueAx92pWEU3ihUrngaeQDz2jIl4FOkbivHA=;
+	b=NjfNrX7/WLl2goSrtyfXY8qoeR5uTcM/IWz1kZ9O07nJSeNI73Ke2JfRsgPIo/N1/7A1
+	 +3TdopdxXnE/gF3xRyjX2DXB4//RNdSA/g/8Lu+SIVlMuBb/8eNd0F+D4Eovf8E9bm2ky
+	 wr+sSoj7SUYyLiMnGdYb0qUGafr6pzaqW0/BJy0IUWcq9BkHbMH9LQqyq4oxzq5AieFng
+	 xpLWs4brmFtOHawXI1pMCynDqpo1CzNbDAuBoALx6MwxQhRueUbdsumqr9soX35WE5SMK
+	 uXsW3vbb3IAjgGUBZ8FBnMMn8P1i7m9TwB/OWzM9TTPj1MTzwNIZ0k7t5O2yZMffTdw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=GWRCBtmQ;
-	arc=none smtp.remote-ip=91.218.175.63
-Received: from mta0.migadu.com (out-63.mta0.migadu.com [91.218.175.63])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cq1I4j7p;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E91F606A31C
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 21:40:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7E91F606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE04B606A31C;
+	Mon,  9 Nov 2026 21:42:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=GWRCBtmQ
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=Y3CmxKJ4TKlJACzMuZuQE+pA/o7Ia4zpMq+sD48qZJQ=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794260407; v=1; x=1794865207;
- b=GWRCBtmQ8mQYqYbx8qdefLwaYDeQkj6VU+gg+PyNgDeOrXtjguyx3KNB7CTPF/zOtqRYNwrs
- 4ciJtPtsELFhHUBvUQUs1KIV2SpouXMAbkbf3sqRUc2+efELrQIdf/UIBPGoDuQWOJS+pUBOVCJ
- HH0u4ZyRwQflY3uWqqBGL2TAllhjLxVetGpOfE7ABqmZCRGyiZg+Rr7Dy5pr67QSBWtF83vcpvZ
- K0np02SDI0EFTWLZo8cTDNz7GQUap4fznYeR+Gz/XKIZHWRxED+4bNNY8UjpGmZodqfCbhZ8UHs
- bEdCicMvjwNqMBeQ15UfC8PIVVLJ71ObR8U2lgonIclaw==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 91629022a1c960c4;
-	Mon, 09 Nov 2026 21:40:06 +0000
-X-Mizu-Trace-ID: 91629022a1c960c4
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <25204208-5fcc-4b00-b359-86fc5f124700@packett.cool>
-Date: Mon, 9 Nov 2026 18:40:00 -0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cq1I4j7p
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95AFA1F0089F;
+	Mon,  9 Nov 2026 21:42:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794260537;
+	bh=Zy4UuoFBueAx92pWEU3ihUrngaeQDz2jIl4FOkbivHA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=cq1I4j7p9kn2a3YkfPnya0qAcRzUYH3PJ6quUDgY5Thpo4HrfbWUNZFercIbJM3dY
+	 +O/I8tXwzBowbOdunSKvOjdq7CwzyUQw+nL0zm2hkZSkSEnssbJhi5BEYzSqXD0/Ag
+	 xUWo2vXqPbl/AP7A9rJZeBsjls9/mfr+mHe7EFmydgvf4AIzjvdZKiToBpURj39c7Q
+	 mhJJWAeqvY2vBq3whLVINqrdv0pnE67vdtHGy08rMoxJEMbtJxH46OtYQNMYmmOsd5
+	 UqgOxhG09bFuq8oKAWLzfB8xq4twIxpBkGsIvD0RYupFYonKgbD5Y2BSqYLmQtW6Lt
+	 NuByUpgcET7qQ==
+Message-ID: <52f8c2d3-de0a-492e-89c0-f33487a97dc8@kernel.org>
+Date: Mon, 9 Nov 2026 22:42:07 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,90 +52,121 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] remoteproc: qcom: pas: Request stop before tearing down
- GLINK and SMD
-To: Jure Rebernik <jure.rebernik@luxonis.com>, andersson@kernel.org,
- mathieu.poirier@linaro.org
-Cc: konrad.dybcio@oss.qualcomm.com, mukesh.ojha@oss.qualcomm.com,
- linux-remoteproc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261109175752.793130-1-jure.rebernik@luxonis.com>
+Subject: Re: [PATCH v10 08/11] dt-bindings: ufs: Add NXP S32N79 UFS host
+ controller
+To: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
+Cc: NXP S32 Linux Team <s32@nxp.com>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Bart Van Assche <bvanassche@acm.org>, Bean Huo <beanhuo@micron.com>,
+ Stanley Jhu <stanleyjhu@google.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ "Martin K. Petersen" <mkp@kernel.org>,
+ Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
+ Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>,
+ Pedro Sousa <pedrom.sousa@synopsys.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, Can Guo <quic_cang@quicinc.com>,
+ Asutosh Das <quic_asutoshd@quicinc.com>, imx@lists.linux.dev,
+ linux-scsi@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com,
+ echanude@redhat.com, Frank Li <Frank.Li@nxp.com>
+References: <20261103133215.1385823-1-larisa.grigore@oss.nxp.com>
+ <20261103133215.1385823-9-larisa.grigore@oss.nxp.com>
+ <20261104-holistic-loon-of-agreement-db7b8f@quoll>
+ <4e82a4bf-e2db-4a3b-bebd-9f9c473817a3@kernel.org>
+ <17b24b80-c3bb-40a1-ad12-06242ca09c22@oss.nxp.com>
+ <0820de78-679a-45c2-baf1-2905490ea926@kernel.org>
+ <02fb96e2-391f-4fc3-8d41-ab8364a9b07b@oss.nxp.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261109175752.793130-1-jure.rebernik@luxonis.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <02fb96e2-391f-4fc3-8d41-ab8364a9b07b@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 09/11/2026 21:47, Larisa Ileana Grigore wrote:
+> On 11/5/2026 8:28 PM, Krzysztof Kozlowski wrote:
+>> On 04/11/2026 10:41, Larisa Ileana Grigore wrote:
+>>> On 11/4/2026 10:40 AM, Krzysztof Kozlowski wrote:
+>>> v8:
+>>> https://lore.kernel.org/all/20261013103003.373156-1-larisa.grigore@oss.nxp.com/
+>>> v9:
+>>> https://lore.kernel.org/all/20261024122533.3609180-1-larisa.grigore@oss.nxp.com/
+>>> v10:
+>>> https://lore.kernel.org/all/20261103133215.1385823-1-larisa.grigore@oss.nxp.com
+>>>
+>>> Regarding your comments on v9:
+>>>
+>>> Frank's Reviewed-by was given publicly on v8 [1]. The series only looked
+>>> like a v1 because of the wrong version number.
+>>> The tag ordering was changed in v10 since the patch was changed.
+>>> The single 0 Hz OPP entry: as discussed on v8 [2][3], the clock rate is
+>>> set outside Linux and is not scaled. The OPP table lets the UFS core
+>>
+>> That is not the purpose of OPP table. OPP defines performance point.
+>> Performance point of 0 makes no sense. You cannot use Linux limitations
+>> as reason to add some DTS, because answer is simple: fix your Linux
+>> limitations.
+>>
+> 
+> Hi Krzysztof,
+> 
+> Thanks for the clarification. I understand that an OPP table is not 
+> appropriate here.
+> 
+> Existing platform DTs, such as Hi3660 and MT8195, define freq-table-hz 
+> containing only <0 0> pairs. This allows the UFS core to manage clock 
+> enable/disable without setting their rates. With freq-table-hz 
+> deprecated, there seems to be a gap for this use case, beyond S32N.
+> 
 
-On 11/9/26 2:57 PM, Jure Rebernik wrote:
-> A crash of the ADSP that the host reports, for example through the
-> remoteproc debugfs crash file, can reset the whole SoC on QCS8550
-> instead of restarting the ADSP. The reset was most frequent shortly
-> after the ADSP had started: on two QCS8550-based boards, crashing it
-> about 4.5 seconds after it was started reset the SoC in 19 of 42
-> tries. The serial console showed that the system stopped right after
-> the recovery started. Nothing more was logged, and the SoC was reset 6
-> to 7 seconds later.
-
-I've been seeing crashes in sensorspd like
-
-qcom_q6v5_pas 3700000.remoteproc: fatal error received: 
-EX:kernel:0x1:SNS_SEE_I_0:0x10000025:PC=0xf00280b8:LR=0xf001f>
-
-on a Kodiak device (sm7325-motorola-dubai) also cause a whole-SoC reset 
-right after logging that, when trying to restart the ADSP.
-
-Those are somewhat random and not too frequent, like once every couple days.
-
-I'll test this patch and see if I no longer end up with my phone 
-randomly showing the u-boot menu when I pull it out of my pocket :D
-
-> Since commit 0ea50486978f ("remoteproc: qcom: q6v5: Request shutdown if
-> crash is triggered host-side"), qcom_q6v5_request_stop() also sets the
-> SMP2P stop bit for a crash that the host reports, so that the firmware
-> takes part in its shutdown. The stop is requested from qcom_pas_stop(),
-> which rproc_stop() calls only after all subdevices have stopped. By
-> then the GLINK and SMD edges to the DSP have been unregistered and
-> their client devices, such as FastRPC, torn down. On QCS8550 the ADSP
-> firmware treats the stop bit as a fatal error and runs its error
-> handler after these links have gone away.
->
-> Add a subdevice whose .stop callback requests the stop, and add it
-> before sysmon. Subdevices stop in the reverse order of addition, so the
-> callback runs after the SSR BEFORE_SHUTDOWN notification and
-> sysmon_stop(), and before SMD and GLINK are torn down. The firmware
-> then handles the stop request while its GLINK and SMD edges are still
-> registered. qcom_q6v5_request_stop() still skips the request when
-> sysmon got a shutdown ack, or when the firmware reported the crash
-> itself and the fatal or watchdog interrupt has cleared the running
-> flag. It also clears the running flag, so the call in qcom_pas_stop()
-> now only sends a request when the subdevices were not started.
->
-> With this change, none of 104 host-reported crashes on the same boards
-> reset the SoC: 40 ADSP crashes at 4.5 seconds, 20 at 4 to 15 seconds,
-> 20 while the ADSP was streaming IMU sensor data and 24 CDSP crashes.
-> The ADSP or CDSP restarted each time.
->
-> The problem was found, and this change was written and tested, with
-> the help of an AI coding assistant (Claude Code, by Anthropic). I
-> reviewed the change and the test results.
-Try not to provide the free advertisement right in the commit msg btw, 
-and to make it sliiightly less verbose.
-> [..]
-> +	 * Subdevices stop in the reverse order of addition. Request the stop
-> +	 * after sysmon has asked for a graceful shutdown and before smd and
-> +	 * glink are torn down.
-> +	 */
-> +	pas->stop_subdev.stop = qcom_pas_stop_subdev;
-> +	rproc_add_subdev(rproc, &pas->stop_subdev);
-> +
-> [..]
-
-It looks a bit funny that "stop is a device" but well, it's not like I 
-can think of a more elegant solution…
+Instead of passing 0, properties should be rather missing and that would
+be hint for Linux. Is there a difference between missing properties and
+some non-valid state (like freq=0)?
 
 
-Thanks,
-~val
-
+Best regards,
+Krzysztof
