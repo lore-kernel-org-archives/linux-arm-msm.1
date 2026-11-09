@@ -1,124 +1,132 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.152.168
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794223448;
-	b=y2jK25t+beRGuNMhjZRs00Re6faWGjSglNKmC5PzoeG7HuC1L2PUi5OFWkaGiwfnpQfs
-	 lAfjpNRQS65YfEZI0vgUXIkIKjNSSBA2Ivim2qvajsVHRMk+0w9s14znHSQKHwkihJU0A
-	 XvV/PSUFcAPZYtkF5u49jb6sy1OwmwjRUg+LbLDNmXVPUkiOFa+z403BrNgN0vjGmqky7
-	 eoYgrnvuJpIc1ZMsrCnyh9+UrMEcilTas6QAYme2htfwlNY3nWAwiZJKtD6Y9SU5YWXXu
-	 /upPrJ0zJDfjPgt4zE4TP2JOhRzOxtwEp6/TW4L5vOikb2HEwAbll4uxbxaFjZXH+CQ==
+	t=1794223486;
+	b=ntEB8+as9SdGfonmxLgJ3cNo+Vk7+RgjyeEhXtWRkmv3rIjOc6nSAff1EO9KbBs9EVx4
+	 OTrMOc6lqRmlIpqv6hGzSxb0+Fw56IgUyCmap4S0xxLaEm+SFFQuCk1Gf9dT8Mh0GKI9e
+	 j+A2RbQSd5wWJFQGHrAPo8+bMvyu/Zf39DUVz0ydKf9zxkrIE2q0AQDtquXdvOv0g/vna
+	 fPz5f8MvGJFKdEVyTc09wLv4YxVkvIq4U9k3DJhNbi+aa1MRBvi9/ttaqIiJIbeWzkl22
+	 Al+0ADWR71eOYJ95BkjDUfq+a9ZriX1UFDiZ7G6aMrTpCElhaG6qvRkRrK+cvF6+zbw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794223448;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=bRlu7W9Vc9K7eUEhyybmW+ubbTQJiOQyPaiHlBL/ieo=;
-	b=HxcR+QEiZLObvO16+m5safBWLlkHf5ap+HaxUBsZhJFceiCw0B4Ic5MxNsUEnuQWzqIq
-	 MNXklZut16Ba+Kl7NxQCdt1rdwKbmslkMO3m4Vtog0FdhFXVw5Ptpe4vqislC132EjsLz
-	 V6U9YE9oIT7p4Z+P684TNcwvf0TkBfvQ9UZJl+wgmszlXooCms1mpXvyrNc3XHyLpuV62
-	 Ei4tdN6Ls/QpL70/e2wX/YuyuW4XDkMxdd/pqMN8vcRce/h5ZSEayWzOXk131CxI1cJ35
-	 /BtbI+tMjj8nOo4HH8jmwVIFMEr4603v80Ri93tcOQq57UPjqFB8822D4Y3J59qNU7Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794223486;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:DKIM-Signature:
+	 Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
+	 Received:Received:Received:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Reason;
+	bh=JWsLf0z4/bJbEGa4fsCVPJMZWegU4TwB+3u7z3glpMk=;
+	b=f2GsADkTM3EueNDrkfiuNRF57SFu8egFw0tp4uGXHjNuKNsnhHfR1zgh95bQsc7owgNf
+	 lgWD1wJbyI7Fh5CEJmq2VkAtdrtcqB8HwSF9OwvVFAxy10/7Feb7KEFQsNK2XUvbXLTuk
+	 MSdj1gK6zLjEc1lB2Om6kNsTOeSlD0fIryvXstu8bGrgQ+1XlQFP/wnZrQlTAY8oYms6m
+	 dJpytykpjNxjaLdXbhtVop2Qx/sLgM/WenWlvdsiXAT0bSqu4kC+0jQEI24ulS/ihAuy8
+	 6SwjlHMf0b6xoRKRCahe95ZHRuuLj5thbPpVG2IX9gfyCtT1/E2ayATJprZij3ZSMEw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NwTWnkiQ;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CElQu+Ci;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=opensource.cirrus.com;
+	spf=pass smtp.mailfrom=opensource.cirrus.com;
+	dkim=pass header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b="LP/rbgDv";
+	dkim=pass header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=pwviLrpr;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.152.168
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D25B8606A321
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 11:24:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D25B8606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C447C606A321;
+	Mon,  9 Nov 2026 11:24:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C447C606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NwTWnkiQ;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CElQu+Ci
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A99v5Mv561980
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 11:24:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bRlu7W9Vc9K7eUEhyybmW+ubbTQJiOQyPaiHlBL/ieo=; b=NwTWnkiQVksAE+LU
-	l7m6spD1oZV4uW7PzTNwXLg+dM1Wq8aANLKsuxPXlkuVe/RUowEv3I4fbV+6CQPx
-	XO/pGMRvXSzZ/ncZNK8mgmDQ9v1ATkBHoWEfyZKKeaJNi+iEztf1320dzWGp/lXf
-	/gw+0zSF3rKsa+xGn5YFNFKEV79BNgyg6NWnEK869iB7stX7qZq7pyB0slRv8z46
-	ZugPxesDo+iyoasdDUAoawji2Z/GDpwfEbD0LB/MDbQRmhVWbfdBpLR/ynjvON5H
-	hPsLI5nF8B20TDjyFx646qvuc1e+go5LfLcFPeCSKTFCGuIVz8IRnN1vMsqV4p5+
-	dsp/Rg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsujxe4rs-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 11:24:06 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93909014c85so159715385a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 03:24:06 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794223446; cv=none;
-        d=google.com; s=arc-20260327;
-        b=cP+/YIGPc/DKUzaR0yXAj5vFQXa//ZBVemSzM8tpRrnz9FeXA3RlyLc7yvLsA1PsFM
-         VCt5mo6iZ08M6aMD8Lzqb5Kv3Hq/JfUEH6KBs7ks/kEbe8qw4SGHZv3+iebtRj1eKoZd
-         QqsDP2AH1CwXwePgOMHXv/Tmr37rqEAYezNG7DPYYxRwR9046FOeRwB/LLWg97LQHl+S
-         momZYNp97aWILky1rGuXeg26yli2i4C+uNxTqjAmgc0JRcl9kYxtN9HDnTsFSeTPLWNc
-         YUhUlV8sUMdS7qQOWABVCbrgo+II51x9T0eXUVNwKzjFk4wP0GBKYcCFMFrdk1NvQqab
-         t7OQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=bRlu7W9Vc9K7eUEhyybmW+ubbTQJiOQyPaiHlBL/ieo=;
-        fh=QakoaVNXMO/2y0x5ywfkaLqgCpUnj5oLNdkfVNbBeow=;
-        b=aAS8rz2/44z3UFR7uVJcBqouyTRwvHYdiFLJrWr2g8Lt8tcOPYd7fokdHUFd5u9D84
-         HlyoJ4XHz8UYOIdL8TVK/0+69GabM76n5ALqOM0Oa4/mhyGyh9s4AJD4Pfr9NN1girpN
-         /Sc7MzcN8b1eEZBf1Jn3EOiV86BfP+t9ReD2cos0K+PachmFTb5qIqIvW4DmUTIEYOZi
-         hehyTu3HYN+Qdo28Z4t44n6jhNs1b7OXxMSIekGciG7GaRQ7+8iQnGE9R3aNU6/SxEcs
-         pGVkorqv84wmCOChF7TuWyJ1Lh3CsyKumvQdGBpyjbd3/elN+WlmG+7yQIrr7HvMQwlQ
-         /Z/w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b=LP/rbgDv;
+	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=pwviLrpr
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A9BCoVE2879798;
+	Mon, 9 Nov 2026 05:24:23 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=PODMain02222019; bh=JWsLf0z4/bJbEGa4fs
+	CVPJMZWegU4TwB+3u7z3glpMk=; b=LP/rbgDvAqLgMmxbfealQAd6Ku4kfBFCNe
+	bdw+W6iSf/2j5jU2L0RXGLE7gWEblmqOAoaDfy3WLp7jsyA9kAQLzGEEc9ySM/Pi
+	mTQAty3Fwnco7bHVK1KOpp9qtgSGMcvI8aA9bgdnTENV40bJjz2QhbsnHGBzDwPI
+	EJqAj2FrX5gl+oyHf+/VPUxF1ykTZuOcGt4jfJSvKZsr+iierHuYhFVFDYeqNS1K
+	8x7GLTdXpWrFr4aKD/xowJbMSa9GWLLVFpzlIX43TrAPHdluQRVrSC5URYM/Ua4P
+	F3W+jum1f1FavEZikk43vYxRRtx2Z7f3nH89H4AKE+7oF2ANPvUA==
+Received: from co1pr03cu002.outbound.protection.outlook.com (mail-westus2azon11020108.outbound.protection.outlook.com [52.101.46.108])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4ht19p9yn1-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 09 Nov 2026 05:24:23 -0600 (CST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rdrRQBdhoTkpusc4eWBfPUd45h4E19883WzN9eFY8S9vw2dRW+GDiR0xBBUvVaMwN0jcM+S2aN8MC0EF9f1W0PUB2liK7OpdeuehliXmpj8UFFO84wvG8mwjxh0tryZuY2iYb75pgMNDxEl2TOnCLZqfeQ+hMFXh6+USFFmUyl4J7bXmKBCkqEI7iq1iBwYMMGJWcH00V19x5afunliDDL3SwLU4n/VWprBVWBPwds1KmjVIptfdkeshstkqph1CRbfy5Xu9qKf03PakO3cJnNF/UoUH/KoIqOIDJ2BIj4zRodkxSBpvxFMVApgxH4EB42S4wJ+0COwo6jLDZz7Q1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JWsLf0z4/bJbEGa4fsCVPJMZWegU4TwB+3u7z3glpMk=;
+ b=BJi3L+ZBkmTBW0pqyInSC2tH+fBsFHNTxLY9/HHrXB03CmuBz/1jjeWw6q8J2tsGhncru+8yKO3ExASkQ2qlVMr12cvzkQ+vFielwY1bL7LPrlR8HzFaDS1ZWSmMjdMb7LajdELbMp9msIV+nQrEwJhXyffrsWqmVLePPMa+MQxxta9bEgoJC9vncn8XbzfLKYuqwL65eat02BlLTiwJ0Fx0Gh/PYoe1iZn4VsyVc8D2I5/XzNPEwM2X/fLLCV7IsJsOx7A4wEyCMF1WyODc2X/mrvTlFyvSqUFe2zAb1oWND6m8P5302BNuNE7n7j01usT1seNhlX7raJe9XOmeIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=atomide.com
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794223446; x=1794828246; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bRlu7W9Vc9K7eUEhyybmW+ubbTQJiOQyPaiHlBL/ieo=;
-        b=CElQu+CiZtP7SxU77ARgHITSwcgrOO/7ZqaVRmnh/INOtLfvX9/KV/uXkok/6Y0+RJ
-         ioh3mOJQJaiCJ81hmRB3IHxxerJ7ReL4R6hQTdVo4E5XMgs5h3oxt/iJ4b2jMWPBpZ7E
-         fBIHjtCz7v/hjmbBdp5LsfrfkxnQccbkTFnvpNJdGdGINMbX7FleskrX2WAaSGls6y+D
-         JpQlDThquNliw1SP07NNWamAo3kyzYvVibUA9HJp5n3Ax5BeYxQp7UbKZJZoVwvQC2ZT
-         xzgueeHzQWSFkCgtwwAL4aVKN8DfQQ4o9KP4dgt7Wv3+g9t4J0Q7gZ+UIKp8NIDVMf8f
-         R1JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794223446; x=1794828246;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bRlu7W9Vc9K7eUEhyybmW+ubbTQJiOQyPaiHlBL/ieo=;
-        b=fqQzoi8TezC/MeMjmtB1/snJof+g7tAUl5nVsoV5iF/5D27vqPx3SL+CJ1e2fLzsln
-         Ec4NTVPZHSZyMQHUfedErjTiXVtevMZ/peZvxzPW9wCTfQAl0Yfhmzfj5WMH05Tnz29T
-         82zAUmEq8qsdnG2xtHcHcAm1+DMEwlvhfYFqaaTXkuRu9mJhB+qFdIHbPQ5zd92MjO9j
-         ki6NV4TG3M7alm+qq2G6gMiGPMh9CuHfJZC8tf7UnXm9+qa2km3kvOijz++ixc58fZfQ
-         Pa3j83AWu2vX6eB8fv70E0z1Qrscmbt5pKRqBDqOEwC0pQ5Ocpr9WMqxofXFhjTO97oR
-         VFzQ==
-X-Forwarded-Encrypted: i=1; AL+hErFO7Ln4o1FDplE1AHED1gupePugJeuPUz2NhgN1WL2AhfU02Cl8lk8PALnY0W3lbeGdtlyjaLvobiouX6++@vger.kernel.org
-X-Gm-Message-State: APuU4Z/3gZfuMlpd9+U9RefoMoGzvQK5/2u/J7UjLjp8jzQiULYq+brx
-	NQzIxBrT9gBIL28Du4v7MSG0KqMV6iXYCWxSERFM+9QIIRT7UZtoYBsR5t/EYNmlrA3ZOiF1sCa
-	Ll/PUiZq8siYidHJpW9IlbGKZM3hHn4lSIF7kHOybkXtWScZXkwQrG7v5Fgmxr4GoSq+DdPQVB6
-	hrpDSKXj595EQtexwwDAq3PhI4tKRNC5Ydkice09eE9/E=
-X-Gm-Gg: AYBFou3WMsxrl/SEFWG9J1MGNIs/p6GuRN96AWz/6vO3H91v47b6BHbUHHkbwmZglKm
-	+U0z43oTQ4kgEegcW5l5fj6s7b+cfWJQp7CrU6S6E0faXuwFV+HKuopuArym02dZtOZzwxaupCd
-	mRRrpMhZ8Z+exhArnDqAVLFwQR4oTy8hJlxc9exR75+ue8lfLErEfwNKQ49+0qVLcnGLEzaB4Ql
-	w1H+DSTNq4dUHZkJDDtr91ehX8FNBlmFzuZPe2Q8yVHdJ5gIxX4pQOlFUNfIok0j8ojpdB1vSs=
-X-Received: by 2002:a05:620a:372c:b0:93e:c12c:f127 with SMTP id af79cd13be357-947842cc3d0mr531329785a.83.1794223445774;
-        Mon, 09 Nov 2026 03:24:05 -0800 (PST)
-X-Received: by 2002:a05:620a:372c:b0:93e:c12c:f127 with SMTP id
- af79cd13be357-947842cc3d0mr531326585a.83.1794223445161; Mon, 09 Nov 2026
- 03:24:05 -0800 (PST)
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JWsLf0z4/bJbEGa4fsCVPJMZWegU4TwB+3u7z3glpMk=;
+ b=pwviLrpr14+gPYKd+qSdy5m5CGpKcBnSume5zkGStsAloxG04zpPEiLgwHtcwx4aIRNcPt5tL242wryfrJE/AY4v1UOIZcm2NhGEeJEGBoUr2DVCcL+vJSDfZRw7UdPswUXHosjRFfHe6SZTx78lXrPKokcjPBtza+Z8NjjZEI8=
+Received: from PH5P222CA0006.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:34b::6)
+ by LV2PR19MB5933.namprd19.prod.outlook.com (2603:10b6:408:172::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Mon, 9 Nov
+ 2026 11:24:19 +0000
+Received: from PH1PEPF00062F2A.namprd02.prod.outlook.com
+ (2603:10b6:510:34b:cafe::6f) by PH5P222CA0006.outlook.office365.com
+ (2603:10b6:510:34b::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.13 via Frontend Transport; Mon, 9
+ Nov 2026 11:24:19 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
+ IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
+ not signed) header.d=none;dmarc=fail action=oreject
+ header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ PH1PEPF00062F2A.mail.protection.outlook.com (10.167.243.59) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Mon, 9 Nov 2026 11:24:18 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 622A140654E;
+	Mon,  9 Nov 2026 11:24:17 +0000 (UTC)
+Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 46B80820273;
+	Mon,  9 Nov 2026 11:24:17 +0000 (UTC)
+Date: Mon, 9 Nov 2026 11:24:16 +0000
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+To: Brian Masney <bmasney@redhat.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Support Opensource <support.opensource@diasemi.com>,
+        Chanwoo Choi <cw00.choi@samsung.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Aaro Koskinen <aaro.koskinen@iki.fi>,
+        Andreas Kemnade <andreas@kemnade.info>,
+        Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>,
+        Tony Lindgren <tony@atomide.com>, linux-kernel@vger.kernel.org,
+        linux-omap@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        patches@opensource.cirrus.com
+Subject: Re: [PATCH] regulator: convert to subsys_platform_driver()
+Message-ID: <avGtYN8dDGEr8FAi@opensource.cirrus.com>
+References: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,244 +136,67 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261109110352.1621-1-xing1989093@163.com>
-In-Reply-To: <20261109110352.1621-1-xing1989093@163.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 12:23:54 +0100
-X-Gm-Features: AclHuK-bsTnV534e2o8b2uaFEnn9XDo3taFcRNRvoIpbZtuKvB31nYQ4Wmbg9tg
-Message-ID: <CAFEp6-1TrCaeP8DtHvUFnPYQw5+B=gRa2=ogjqCC+fKy9AXbKw@mail.gmail.com>
-Subject: Re: [PATCH] bus: mhi: host: pci_generic: Add per-device ACPI reset
-To: xing1989093@163.com
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-        Jeff Hugo <jeff.hugo@oss.qualcomm.com>, mhi@lists.linux.dev,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: HZh1dtWBO10ZG6IFCQFT7WeVd52CJjif
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA0NSBTYWx0ZWRfXxm+FMPED7czP
- 67nHR6aqzrOw5iZJFb9yK1gwBH24D1kN1ma1hpAnSJAouqgRY7uA+sWNedd5+ttZaHTBJ9v5a4y
- xVZYkTMTtlacjExBZdH+DZ3QkxPx5E4kIUjLcUHVR9acPQ6dRDKqGnDW0iYhQ9ry2n29Eo/8bnR
- AkIvBcc00y5+dYvCW5IW0ph8rUrnVuyyaWalrPf3CkWVNc0gON2BOqC/mHCOfMLp5IB62y/A/sk
- MbNdY3argqTvy+KH3SLhjNYxBKkxIYINtsDclAd5Tjd9yFSgljamK/QcGJnDzQnuyggsRlPgCWc
- 5fVs8RVu0cLfEZfFTj2HAch/f7IM+bDCNVTSqy1vV62GwHEmrrQ8bPsf+mVXE4HA++txnwZNA5f
- TdSma5Yb4d7C6RWqgdKU65j5Pgwh3PTcOsgLApDS0t4r/QZgg7b9xjZBFXxYwezaE7/B2lTka3b
- gBKKJsCrWs4kFVayzxQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA0NSBTYWx0ZWRfX4wIJukNREMQW
- 9VVh+TgzY3kd58Yd7aELlUmnDlA1p0rXwqOcW3qGUspZDAromrKvOTIb5kFQnczH2OMZCasxcaQ
- oFncvOeLlspQ1M98Xeaz4goVRMtz+wA=
-X-Authority-Analysis: v=2.4 cv=TeIDJhQh c=1 sm=1 tr=0 ts=6af1ad56 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=Byx-y9mGAAAA:8 a=KKAkSRfTAAAA:8
- a=Ok8h7geywy7ULKIwiTUA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
- a=NFOGd7dJGGMPyQGDc5-O:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: HZh1dtWBO10ZG6IFCQFT7WeVd52CJjif
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-09_04,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090045
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH1PEPF00062F2A:EE_|LV2PR19MB5933:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4b1d398-2bd8-435c-b93e-08df3e53feec
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700016|61400799027|23010399003|7416014|376014|16102099003|18002099003|22082099003|10067099003|11063799006|261022075727099003|56012099006|261009223027099003;
+X-Microsoft-Antispam-Message-Info:
+	OQvptx7r4ISACPbCVKaRPFmmbxNQ11I69wxN5lxQV2tGpM4o4Gy64koR5RR7pmZfGEMlNXi7MkG62s2b4MLkmKHeAVhRyuB+NqfUKq39DqxtE99AXFp6gMBPTNzhALftTQkN/suNWcxfCJ4E5B1mScIYfd1ghsi4oLUqJK016Kn4UHofrawq9RlBBn8+WnKhr2fvKf6Rgbgy67U5xMTAAZ7U/PJN/n18zwSljM0MmoxZ3rX2RoFXExfWcmgmJkYNli6g7Lx8UzhGW61c+P38wRQHDlQFlD2kfAkF7Z9MspiOnN0ZKGDV1OYr9iPJcml8uaskbjIMBJsL7ETN6jVOJXDgDlTFLK0uH7alLxGfPOyyybRbAWaXanzaHA/nFLzlTbH3pEFcFi8sirBensy6TymL6XRM39y3egGpTYC9e46YlHto39uw/wKMUj5AV6mxkYAOcy6/hF3CozVCnJp1EDgvq4T2srSUApp9o69Qu1DScwnhni7hhfvB8QwPLQH/fnANKArYiNNDDJ+j5ZbeJSdelwMnI5chKsNUHkf215d+UoZBxPWZPf0BOszoSh7h0OXNo49fVuE2zzGDRAkfbVhgtcr8j6LCfXYXhzQEYZVXZ74PeIzt95ToV/hUCsRwrm0rvYD9bUN1VbR25sadR0nOwQupTlALgCBQDXn/k6A4lBfZoGxTU3Mr8u2F8s4nOPzbBxCY+lnVJBZH+ZZZAQ==
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(61400799027)(23010399003)(7416014)(376014)(16102099003)(18002099003)(22082099003)(10067099003)(11063799006)(261022075727099003)(56012099006)(261009223027099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	SMQDmgMRnCNb4/RI2KtssZxFheM6A0sNrTDOzm/ieYjqnFW4VV+gUnQPZtSFZSu9WXizRadRYMPyOoZB2g/H2vCv7/ASjKvMXXShzYAKrpy7vat/YQ5Hio397ix4ZcMrDqxo/bQDg97aAB9leVY6RmKoO2JFoEvIfM19abZ50b2Vr25kJE1mdYMQLMNwf8Xr6xK2G5xsLXTi/NBqqtTOXjOBA5ic0N4SeJO5quwR+87O6+LU7Bpv6P6LAgtQ+Su1b1sUdHsLEXhRDxRPFD4JvBGzSnJKD3A09ro5H8APVZ6EA03Sh06pVMJUReF0QVPifTkhDqnxSfIBhspK1Wru7yQnmTFWfUVWtK38okxullhz7FIJiygjr9vswjA7EFAmeaPQvF9kdUWkSzeh6Vcw+yspzAy2Zlko1QsrmbmCbRwGE36CK3GgcZ53s95+S7KV
+X-Exchange-RoutingPolicyChecked:
+	N+dEW2UboQ5/EUSvfnepzdD/jD+MCh3nXI1997HwotTP5TUunTpeTSs7GkmIqI4M2RYmBEt6OwHLjnCazkm8cUqLp/ehBDHFj2nonCeEPgmXGRmABwKkkLOZp0D77U7UQ7xmL6vhQLlRvGVZzXQg/slfo9xZo5URup7EeLGLh+lVSygJ9+25BzpKciuUUS7Hoi6LP0V/Pun/P47rWnBq5pVOLuHS/y9gzDUM3JDXDU/C/So58p6idl9OJYT/+oZeav5/QRA3KCza+Nrawr+oqcYKyfA21z+Cvame4K5NttLFP1aG9X7NLr82iSNkeI8/4SxtR4v5d3ew4eJQnyqI2A==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 11:24:18.6917
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4b1d398-2bd8-435c-b93e-08df3e53feec
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-PH1PEPF00062F2A.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR19MB5933
+X-Proofpoint-GUID: Uii0I1uHRqKThN8bOUotPESxlu9Tyou-
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA0NSBTYWx0ZWRfX7zFj/QS49GKA
+ NvUY9hFB6ZeU/c2+ffeq613i6jYfgqmf0lxkE5IqrxBiNum3xuwzO2034QAsFwniE5B1QccZ9iK
+ oHNsZdXLhyE/AXFQmESPxqqNkl5FU+Q=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA0NSBTYWx0ZWRfXzcoVCPflOfFf
+ 9bM4UbWbDbv4K2+LynmAgq7ABdqlLC3sKLhx+pkRd9up6vhOMo6K0vtWCF++2dy6TXKeIX/9Igi
+ hSJzJHpfPGDHj8GtebARWPcj4ueyPNSNA+AZY1xRua0T3F/vp5dkOrUbp9Mj/Fc2TL0sAILpWp3
+ x99505TQ44juFYTgpspVqdCJAvf4YncrgJ+MC0R1sIy5NhtMmoqJDsUGeAD7FnEJvsaSvk302d3
+ U74gefLs9FCCTlOw2kIIqBoZsGbi2/n7oz+/+515p91aPgleLE/wpu6l+TcmkoJ4BKN4gdHK0Z+
+ DmVaIhiTgvMbgEVMWDn0IzEt4Zg0O3Qz0u5uB2LQz9PdRiBIGZpDZwh/HmWo1fm6AZxE9e1LPyE
+ 7jp2h73esXevPiKvwCOv7rRpt76b8zucjwuorQYGuiyaNPnX/f/Tm/WR0+scuQGJSlGPS574ExE
+ LuAs/WICwqHNEbgwKUA==
+X-Proofpoint-ORIG-GUID: Uii0I1uHRqKThN8bOUotPESxlu9Tyou-
+X-Authority-Analysis: v=2.4 cv=NK5AaE6g c=1 sm=1 tr=0 ts=6af1ad67 cx=c_pps
+ a=wnlGNIUL0AhmB29u2vspYA==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=20KFwNOVAAAA:8 a=w1d2syhTAAAA:8 a=2mfksfQnj69i5T-jYpIA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Reason: safe
 
-On Mon, Nov 9, 2026 at 12:05=E2=80=AFPM <xing1989093@163.com> wrote:
->
-> From: Hongxing Xu <xing1989093@163.com>
->
-> Writing the MHI SOC_RESET register is a device internal soft reset: it
-> only asks the modem to restart itself, so it is useless once the device
-> has stopped servicing MHI. A platform level device reset (PLDR) power
-> cycles the module at board level through an ACPI method instead and does
-> not depend on any device state, which is why vendor drivers keep it as
-> the reset of last resort.
->
-> The out-of-tree MediaTek PCI driver does exactly that. Add the same
-> capability to mhi_pci_generic so that such boards can be supported
-> without a vendor driver. The method name is board specific, MediaTek
-> firmware uses the vendor scoped "MRST._RST" while others may expose the
-> standard "_RST", so it comes from struct mhi_pci_dev_info rather than
-> being fixed in the reset path.
-
-Since mhi_pci_dev_info describes device-specific rather than
-board/host-specific properties, the same MHI/PCIe device could be
-reset through ACPI on one host and not on another, depending on the
-platform it is connected to.
-
-> A NULL name keeps the generic SoC reset,
-> the same way fw and edl express "not supported".
->
-> pci_save_state()/pci_restore_state() are not used around the ACPI call
-> because they clobber dev->saved_config_space, which mhi_pci_reset_done()
-> needs; pci_reset_function() recurses back through reset_prepare();
-> pci_dev_acpi_reset() is not exported to modules. The call is skipped
-> when oops_in_progress is set, since acpi_evaluate_object() allocates
-> memory and takes ACPICA locks; that leaves the panic path a no-op rather
-> than a fallback, as a device needing this method cannot use the register
-> write anyway.
->
-> CONFIG_MHI_PCI_GENERIC does not depend on CONFIG_ACPI, so the path is
-> compiled out on such builds.
->
-> Signed-off-by: Hongxing Xu <xing1989093@163.com>
+On Fri, Nov 06, 2026 at 07:28:46PM -0500, Brian Masney wrote:
+> Reduce boilerplate code in these drivers and convert them over to use
+> the macro subsys_platform_driver().
+> 
+> Signed-off-by: Brian Masney <bmasney@redhat.com>
 > ---
->  Documentation/ABI/stable/sysfs-bus-mhi |  4 ++
->  drivers/bus/mhi/host/pci_generic.c     | 66 ++++++++++++++++++++++++++
->  2 files changed, 70 insertions(+)
->
-> diff --git a/Documentation/ABI/stable/sysfs-bus-mhi b/Documentation/ABI/s=
-table/sysfs-bus-mhi
-> index 8b9698f..064bf6b 100644
-> --- a/Documentation/ABI/stable/sysfs-bus-mhi
-> +++ b/Documentation/ABI/stable/sysfs-bus-mhi
-> @@ -29,6 +29,10 @@ Description: Initiates a SoC reset on the MHI controll=
-er.  A SoC reset is
->                  This can be useful as a method of recovery if the device=
- is
->                  non-responsive, or as a means of loading new firmware as=
- a
->                  system administration task.
-> +                Devices that advertise an ACPI reset method (for example=
- the
-> +                MediaTek modems using "MRST._RST") are reset at board le=
-vel
-> +                through that method instead, which power cycles the modu=
-le
-> +                rather than asking it to restart itself.
->
->  What:           /sys/bus/mhi/devices/.../trigger_edl
->  Date:           April 2024
-> diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pc=
-i_generic.c
-> index 7193a38..4e84e10 100644
-> --- a/drivers/bus/mhi/host/pci_generic.c
-> +++ b/drivers/bus/mhi/host/pci_generic.c
-> @@ -8,12 +8,14 @@
->   * Copyright (C) 2020 Linaro Ltd <loic.poulain@linaro.org>
->   */
->
-> +#include <linux/acpi.h>
->  #include <linux/delay.h>
->  #include <linux/device.h>
->  #include <linux/mhi.h>
->  #include <linux/module.h>
->  #include <linux/pci.h>
->  #include <linux/pm_runtime.h>
-> +#include <linux/printk.h>
->  #include <linux/timer.h>
->  #include <linux/workqueue.h>
->
-> @@ -39,6 +41,9 @@
->   * @fw: firmware path (if any)
->   * @edl: emergency download mode firmware path (if any)
->   * @edl_trigger: capable of triggering EDL mode in the device (if suppor=
-ted)
-> + * @acpi_reset_method: name of the ACPI method that resets the
-> + *                   device at board level, such as "MRST._RST".
-> + *                   NULL when the device cannot be reset through ACPI.
->   * @bar_num: PCI base address register to use for MHI MMIO register spac=
-e
->   * @dma_data_width: DMA transfer word size (32 or 64 bits)
->   * @vf_dma_data_width: DMA transfer word size for VF's (optional)
-> @@ -55,6 +60,7 @@ struct mhi_pci_dev_info {
->         const char *fw;
->         const char *edl;
->         bool edl_trigger;
-> +       const char *acpi_reset_method;
+>  drivers/regulator/wm8350-regulator.c   | 12 +-----------
+>  drivers/regulator/wm8400-regulator.c   | 12 +-----------
 
-And your patch series does not define any device with this property set.
+Acked-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 
->         unsigned int bar_num;
->         unsigned int dma_data_width;
->         unsigned int vf_dma_data_width;
-> @@ -1111,6 +1117,7 @@ enum mhi_pci_device_status {
->  struct mhi_pci_device {
->         struct mhi_controller mhi_cntrl;
->         struct pci_saved_state *pci_state;
-> +       const char *acpi_reset_method;
->         struct work_struct recovery_work;
->         struct timer_list health_check_timer;
->         unsigned long status;
-> @@ -1180,6 +1187,49 @@ static bool mhi_pci_is_alive(struct mhi_controller=
- *mhi_cntrl)
->         return true;
->  }
->
-> +static inline struct mhi_pci_device *
-> +to_mhi_pci_device(struct mhi_controller *mhi_cntrl)
-> +{
-> +       return container_of(mhi_cntrl, struct mhi_pci_device, mhi_cntrl);
-> +}
-> +
-> +#ifdef CONFIG_ACPI
-> +static void mhi_pci_acpi_reset(struct mhi_controller *mhi_cntrl)
-> +{
-> +       struct mhi_pci_device *mhi_pdev =3D to_mhi_pci_device(mhi_cntrl);
-> +       struct pci_dev *pdev =3D to_pci_dev(mhi_cntrl->cntrl_dev);
-> +       const char *method =3D mhi_pdev->acpi_reset_method;
-> +       acpi_handle handle =3D ACPI_HANDLE(&pdev->dev);
-> +       u32 saved[16];
-> +       acpi_status status;
-> +       unsigned int i;
-> +
-> +       /*
-> +        * acpi_evaluate_object() allocates memory and takes ACPICA locks=
-,
-> +        * neither of which is safe once a panic is underway. mhi_soc_res=
-et()
-> +        * is reachable from __mhi_download_rddm_in_panic().
-> +        */
-> +       if (oops_in_progress)
-> +               return;
-> +
-> +       for (i =3D 0; i < ARRAY_SIZE(saved); i++)
-> +               pci_read_config_dword(pdev, i * 4, &saved[i]);
-> +
-> +       status =3D acpi_evaluate_object(handle, (char *)method, NULL, NUL=
-L);
-> +       if (ACPI_FAILURE(status))
-> +               dev_err(&pdev->dev, "failed to execute %s: %s\n", method,
-> +                       acpi_format_exception(status));
-> +
-> +       for (i =3D 0; i < ARRAY_SIZE(saved); i++)
-> +               pci_write_config_dword(pdev, i * 4, saved[i]);
-> +}
-> +#endif
-> +
->  static int mhi_pci_claim(struct mhi_controller *mhi_cntrl,
->                          unsigned int bar_num, u64 dma_mask)
->  {
-> @@ -1435,6 +1485,22 @@ static int mhi_pci_probe(struct pci_dev *pdev, con=
-st struct pci_device_id *id)
->         if (info->edl_trigger)
->                 mhi_cntrl->edl_trigger =3D mhi_pci_generic_edl_trigger;
->
-> +#ifdef CONFIG_ACPI
-> +       if (info->acpi_reset_method) {
-> +               acpi_handle handle =3D ACPI_HANDLE(&pdev->dev);
-> +
-> +               if (handle &&
-> +                   acpi_has_method(handle, (char *)info->acpi_reset_meth=
-od)) {
-> +                       mhi_pdev->acpi_reset_method =3D info->acpi_reset_=
-method;
-
-Wouldn't it be better to maintain a list of supported reset methods
-and iterate through them, selecting the first available one, from the
-most generic approach to the most platform-specific?
-
-> +                       mhi_cntrl->reset =3D mhi_pci_acpi_reset;
-> +               } else {
-> +                       dev_warn(&pdev->dev,
-> +                                "ACPI %s not found, keeping SoC reset\n"=
-,
-> +                                info->acpi_reset_method);
-> +               }
-> +       }
-> +#endif
-> +
->         if (info->sideband_wake) {
->                 mhi_cntrl->wake_get =3D mhi_pci_wake_get_nop;
->                 mhi_cntrl->wake_put =3D mhi_pci_wake_put_nop;
->
->
+Thanks,
+Charles
