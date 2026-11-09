@@ -1,124 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794228985;
-	b=KZk8RpSzEe8ZxJuCqaRYbeulFZnP24TcOYYXDohnaovd3la8J89SgRxUVg0QZU6JtLuc
-	 YqVHBQSG7xw76OXoBXc8ikYL7MxNjBxQuu2d/p0Uh54VlhanlEQxaJl7h130lOIksV6Nz
-	 VwtY/DOGIWONdOC1GWN/LM1s2h8C4TH/b/q8HNkPaFsMP9xXEO+nBhGnEBJ+fZnNOJCn3
-	 BC5GiKwPalOyeOv966WggkqxlzVk1meGanYE1gWHD5EVlzOODtrvPvLb5aI2AOAEakjfo
-	 0PMsnFWxyou0yMPfe1rsBbV6y2z+kb4TN2cwz0877hZB7YYkAIB1hV6NQWPx6t3Vhaw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794228985;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=Rbfxx4j9U/TwmiB1OprsBSpdtAuk64NPf793dOIa+DU=;
-	b=1cm8ahqlJ6JhN0HHu+CzzFURAp/vreDR/7O3q0hXF3eOA6EC4xpVLOi9oJrvZ5lEBCXB
-	 F+3nrlHf/HPhB5RasnWtkhq/S7Pib8SJ9+Ca1MqzR9MfgZMVLyol0k3dUAPfqVtw3kxSI
-	 7IQVhYnXxE/xLeURkzULOib5c0PMSujjOnsreg7crm4UZFus5evitC125UAWVuYgiW7eE
-	 AF4GwNw42EXPxnwc19TU7XmmQdQ9lgYYOJ5M0K9v6o6aQxM94Op/bzUg0e8LEvDMH6yXj
-	 XGm4EugnazUbSbfxNcKCZuRxsnTG9PbQgrQ+bi43ROqLKsrCB2nCi2AknLufTAuap6Q==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GZHRCDNR;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gLJyUKIt;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794229075;
+	b=RuwjGT8pO/WQRJ/7tTZrFr8IXfQGZg7xx3cx2LNnn4vVL4qXuWzREr+FiH4kPGRNnn43
+	 HEVJiT18TXbSU6ydBbBC/jVc1JpXEDZo6fnewi/Ib1Li5xUX8jF0DCSwcmOD7/trvHpKc
+	 7J+UknRPCubxtnu1TVUAfvW1RexxHE8h1h0hPgOJZ5M3pIVXRP9D8dn7QvP8hp8an8ZHm
+	 KrlRjgEynWFI0H2oWZfDG8gPIFWqedmygAyz9Jw4I9Vt6drKCR9QcR4HkdXKXCcrH6t+Q
+	 +m9vjKDV9T06JTVNTf6Lq9XoICYq46sDkEHcVv5C15VwCPY4kfu/TzMwoaPuxEsFnBQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794229075;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=wyy6bj7a11JEqmvDJpj3bQb2yikehoJWRBg5g2tkGFM=;
+	b=fy+Ck7T/ietenJV73se/caTuS9BfvqQI/7E2lL9UR71VKBX+5Ql0grGbEukxQR2kjKWk
+	 NQfXvMY87JvyRBULsYOSgcxkj6cHK2vgGhXh3btZNqJFEfaaBe6Yhcn92sl+ZOCjyFAxl
+	 wfCGjTf/NibLEgX65QMetaP9BDUyy5WWMMI+Rx5tb2MaHh0vjJVSdTfnhVrhL9itljc0O
+	 VrEwjY/C2mQtFCRn+VoYtCiwVMilOIjctouIDVK7Va9eTElNOvExA7Mp1p3NSWmhECyF7
+	 6UlI4yiUqUnyWPtPc3UdX0l4R2XNLIGiF/D7QsH+nsI4T6rv4maXxUvFU9jrRinoV/A==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CLgHMq6l;
+	arc=none smtp.remote-ip=209.85.128.50
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D312E606A322
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 12:56:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D312E606A322
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3A35606A323
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 12:57:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3A35606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GZHRCDNR;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gLJyUKIt
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A99v5m0561914
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 12:56:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Rbfxx4j9U/TwmiB1OprsBSpdtAuk64NPf793dOIa+DU=; b=GZHRCDNRmwLs1HaR
-	aEnt0Bt8GmyRP8tfkk2pxl/tz4eT4kiq0Ew+hnyd5cc5VwdjVIaShGiZy2qdKLK9
-	94AcZUZT5jnIfCmFkVFD93w4YorUstdbreUI5BtjWbcnmJ9N0sMrwHyurjstSGVM
-	zEVOzP+otwFJa/kZ79JHZa3u8Epgd/bHTzXuGFjk8iOZ9sTLGxkXQnLCIzQCOpWV
-	sULZf2JSYAjQKlEej9AI+e5VZnuZn8WfPdPO+Kp/ROl66OHdLPcLoLw7IlYGYPvG
-	jd7EQKWSPNt9zNGgDv+J3W4lXQLIfySev3wzR1o2zQkfNxxqSH34WFhd2tsIC88m
-	hfkV6g==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsujxeet0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 12:56:23 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-9440b27c1feso149286485a.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 04:56:23 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794228983; cv=none;
-        d=google.com; s=arc-20260327;
-        b=THamU5XhFz1TToXNDECC0o1FChwHmEnBadd8UuCoyXugENMHoEgNlNZAfN1VONLR2i
-         4e8tzpVW8vy7pJdHt8jiFY1IvqXIfxdZbdXmtyeSEamjCnFYamzpcpJMGXS8uu6vZifM
-         rysFxuQc38Jg6Ya9XLu8P9FlLiAhfXQBz5LbOSYd1Rpdlyxpu9Yg0ZGBrM/tddPZ8ROI
-         7L/epURwN7pTHB1IF502ZhUxfr2ECVl2cMZKIT5v7z144eo+FnQEJwHT0J6d/syyLHf5
-         ZoD6nz2ZOA/dbf4Lbco5QJECkgcb3PqxdFS/z4GUgpowVlF2mO3L72fZwnweVWW/QP7u
-         IAYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Rbfxx4j9U/TwmiB1OprsBSpdtAuk64NPf793dOIa+DU=;
-        fh=sSpPLTc6u4enrSJtygk5B1EJHjFWzJN5Bv6ak9+Bono=;
-        b=ehP55t9do1d9GNPX0P/uGg6n3m2pHOrXL94R5/LlAvRp+N8pSN8F1m4xzVlFJfGA7k
-         saxn7O0XAHis7H84PMY9gvUbwKDLSsOv61yq57cMT5GZNjJDYpeERDZfJbHIdGJs0aXk
-         gSYV5ZVvpVQFVo4sSWeMIGSY5PDPeFzN+efGjPJ25UShFUaZNoarGImJ7oLywoRt8SIu
-         /LzcjaLE3ualgiEOtKA8lHwl+V4n8bcttMxr77tzRG0KoU+pt1JgDB2ORHNcJlWe06VB
-         OIPv5FXLhSUO2vIRWWBw1ZKJmeM0d4N71Wc+QoOZByTsMb+cSeQ3liP5qrCg2KwxRClT
-         aO8Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CLgHMq6l
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a4d7ae1ae9so7418455e9.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 04:57:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794228983; x=1794833783; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Rbfxx4j9U/TwmiB1OprsBSpdtAuk64NPf793dOIa+DU=;
-        b=gLJyUKItZurL5R19QpsemoNX0HxU7Y+G4TOHmG7l3282u4W5bxkhcRsm1Ww1LrUKFR
-         8/cA97lGZn0PA30XaDfPUv+w5BDAs39ZLQOATo4prG9JN1uwSw3gukCCj9vMhrYqSaan
-         0hi19UIDZitR4tkDnru4zfHZU4KizutmTrGm0AFBeyYCFiEqFLNCsXf8fxQZ+efYeUxU
-         /ZV+5aYkUB465w9sPny2drfrAcR4irCfzdFJA2qaEAT16tuZ2uEU89xNGYW0qZ6qDbVL
-         CQ3PHiDTAYsBhNTtJI8tDJSQLdLlpUPqxrDEfvA2zaAOtxO8GtE+eDvc9Gw5U167eNTH
-         dDzA==
+        d=linaro.org; s=google; t=1794229073; x=1794833873; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=wyy6bj7a11JEqmvDJpj3bQb2yikehoJWRBg5g2tkGFM=;
+        b=CLgHMq6lC/oa24etmU5uFOjanSEBhpMx2wF82F4+zWSCY/XU0I9/ziXs+kkm4nYTW/
+         /WLu4CD9tygvMMVCsBLZPNYtYB5OIkSIjZzh4Qa50BKbzSu2WxGOrCvGVlhXLQHbmLXn
+         x2SiOE4cZ7upzDNteFyZG94MpGO+Vi9zojFzo1RSwL1yVJgexWHA/8HYxG/NhNgqxbRw
+         MpkeJbN7s07O3l/IRtucYkIS3xDEQj5vF1rYC23HuZeFmz80NdQQdxuNnVUSKMiKYROy
+         8olnNnKw/+SlbL1BLc1aUYI5wRWkyHLNMjTRgVW7qKAXmSAt4Ea1qR4PUfmQu0dlz82D
+         QzkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794228983; x=1794833783;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Rbfxx4j9U/TwmiB1OprsBSpdtAuk64NPf793dOIa+DU=;
-        b=sUjGqOysytKfHSoxD8WO7/mYuV2uKTmL5z/Rul48Di/uvsCHvKljI2jP5Ew5DwPxa8
-         5wUXo7YsnlnCVQkifkI0s0iLJwqV+OSJylv1CWD+QrPHsA/Y3epmwtafGz1RGCoYCTMV
-         4oOvGfmQ3R1OIbAbwDEdg1XR6NNy70G2/thujLSaGYeCodzjNzIVlpQjjuoyLu9Vj7M7
-         Dx8sKu26j/o77sEPUpRelAzMAoxeFsGyCDayay+hdi0M0ANV8eH0CPH62GCfvY0ClczT
-         KGl6b0zLHqPpfb6q9jPGUJotUYz2cPLmaNC+6w9pTnzoZ0f0LxVVWw23WECULmv8NXT9
-         H8jQ==
-X-Forwarded-Encrypted: i=1; AL+hErHX7G1hfCKd7cqlBT4J9745u5vNqoF2i1/1fUGspHYbLni3EOS/JnIY4hnJiP1cRWkk6tQyL9HoEOfdxFNV@vger.kernel.org
-X-Gm-Message-State: APuU4Z8GbHQ86J1H/WjVcPpPQwMkSyVx4P3I3BBxPZtKTSfsyc3jWtrn
-	RQ+NJjXtCMFbvmyCFOvGKayrWkDL9LxrrkWn24dw/FeFg+e2BhQ2kvUBtSmRT0bQy5HbXjCquT3
-	wND36a9iCw1mNNfpmkI5mkfAvRrbP+bYjVR22I8zCWpgp6BiR2RM/4QLtx/MlGQ422a5ImDS8jE
-	HoxWqjwElaHoHNfrfqcCwqxUAEAvp2cZ9Ix8hC7Qofrf8=
-X-Gm-Gg: AYBFou2z9uC/atLk3q7qb5O+K9kW9y6L1m4DQ0iPLWWvYTITx4ewJ+RzNIHg6rNEYpL
-	KlUhdlxhsa/9Mz9QdPNzVVfzIfDXpmKmGhypYoav7mefV9VopxrS/xHO+Ncu2/VENm9C5sudk6k
-	9n2MsNPj0Kk1bllk21pdjSjLQXU/GcECb8Hi8d8lbx11wSX7k+K8COw/r1QJ7DcJwIgXnvMWW4T
-	dnZdgjPxFhYuhRVa0Pc3xPDgpMJuQeRiePC36tWnysTULqXt/g7uaCII+FebTUCIeTnWcepw9c=
-X-Received: by 2002:a05:620a:838d:b0:93a:2150:ec06 with SMTP id af79cd13be357-9478422fc8cmr547412985a.31.1794228983148;
-        Mon, 09 Nov 2026 04:56:23 -0800 (PST)
-X-Received: by 2002:a05:620a:838d:b0:93a:2150:ec06 with SMTP id
- af79cd13be357-9478422fc8cmr547406585a.31.1794228982628; Mon, 09 Nov 2026
- 04:56:22 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794229073; x=1794833873;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=wyy6bj7a11JEqmvDJpj3bQb2yikehoJWRBg5g2tkGFM=;
+        b=2fHYRbr9CLdcd0FfeIWUgQ2i/CcpjsiFakiH1QctsuiDygUIBQs9edBDnQ7VGxMDS5
+         rnfgUpbszRQ69yU1U3sAiCZeCqTGff9lh9FIEsa9PpDvQFNnC5w4wN5aOTvX6mFWJvA7
+         N96s2bmBKkv1+7sN0xgvU5vm/sUidVkBaPwB+sPrnAYEQ5f02/SBpy3NO0M9g2YTMThk
+         EZw22I4o6VZv36BLi6XF+pwmKvqtLAIsz/Ond9ZLLWVmnQUuMTJY45qXsvTOYFvim94f
+         9dy88VelJRgLsxBA0GUDPRgO/qsdGc1VI3ajVCoC6FCYI2EEODZiXh2mzT12ew0qzCRC
+         IOXw==
+X-Forwarded-Encrypted: i=1; AL+hErFsP59kacdATzJO0Sj52Nwo7OFhtis5raF8neELu1obKkwj0soezI8KG30DUeaQPHck56QmxS+fQdvUva0e@vger.kernel.org
+X-Gm-Message-State: APuU4Z8mKmSO/UmqXYxq1IwQmiG5JKZD3P+SCJBg9uIMjKQZBfqB43k1
+	fXMqp1VZKY4XpVEaS2qx6zO8MuQKHx5rnCRX6dEuL20xktwXDc5Jes6IsnuS1ip2VrM=
+X-Gm-Gg: AYBFou2sC3iVVYBO5HHK45paaSsGN1hdlaYWNdecgApusyjdwA5ziw+MSQAO9dPhGRj
+	Dmfi0bw+OczkSaCOJTsk97PSGDdIwz8FW6opQkvtrkDXGh/QJ3C7aapPnTqQi6u0cov1mdIyTe+
+	gckIa//sCFodqSnwaZPExzsR2U5CbDtdN0eX0Md6ypQ1rdMc/n9vAcXaLEu2Nab0aRhklX6U/uE
+	5VbUhxNKW7XMwg02UxKfMKRa3zNKc1uDDOQdN07hz4dfW/NTp8yOz/bdXNoDmNfXMEI1WxAoMx5
+	0P7cvDhQOKPRkhN/wj0Gj/nWpIHj+HXMe2SLoE/7uxL6kyhy/wM+I4amCaAP4fhUSZamI3Oxynu
+	H4NysusnOApEEoj0VSEYNFSXI5VvsFHGr0ov5QrBaktle9jn9wJipUsYRN0zhy3hb36QkQP0C7L
+	QtwYDrIrgm7jMBytC7IfmCa/2z+Hx3zZCbnOPZORw2ax+pg7a/vWxGOiNOfo5dpCY07Wgs32iGc
+	PHKV9aOzU5siAy54J4jMlLfcqIutPNmJ5IdapJiC1jFpKbkd8maweZ1xr/uzZ6Ku48i3fgfIm2o
+	mpw4fplww3IddtONtjMSlHnM1SEcY8/MM2bjkQ==
+X-Received: by 2002:a05:600c:1d0a:b0:4a2:191f:7cb8 with SMTP id 5b1f17b1804b1-4b963c6c86amr71185815e9.17.1794229072922;
+        Mon, 09 Nov 2026 04:57:52 -0800 (PST)
+Received: from [192.168.0.167] ([109.76.74.9])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b7e6eca30asm237745875e9.7.2026.11.09.04.57.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 09 Nov 2026 04:57:52 -0800 (PST)
+Message-ID: <7f8e0938-2b35-43df-afe7-18b0ad917698@linaro.org>
+Date: Mon, 9 Nov 2026 12:57:51 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,118 +90,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261109112611.94010-1-allan@fatecpompeia.edu.br> <20261109112611.94010-4-allan@fatecpompeia.edu.br>
-In-Reply-To: <20261109112611.94010-4-allan@fatecpompeia.edu.br>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 13:56:11 +0100
-X-Gm-Features: AclHuK_pX5cjcq1dpBPF5s54jQuJQpNTlm-1RA8DMjxVMXKjxJaJCgy01Kzjzr0
-Message-ID: <CAFEp6-1Ok1S=t+yuBu6XB8_WZkJ7h1TYr=S+RvpuDzLimoByeg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] media: qcom: camss: always stop the pipeline in stop_streaming
-To: Allan Siriani <allan@fatecpompeia.edu.br>
-Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Todor Tomov <todor.too@gmail.com>, Hans Verkuil <hverkuil@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: fp8W2_R5pEVqr6NlsbCVKF5o9rVJJtDH
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA1MSBTYWx0ZWRfX/rvDDDYEaUo/
- ToLB0tG28aiv2Dt9+5EXKk4+kX94zR7fkQwWbLYEVrKwU5o1txn6gjQUtbo5zvRtl6/GZVB3Iif
- Ba0kW1e3QpWIF+Qub4EV//N/QDpFjBDOt7ew4RK7gDRrVl/jgDqKEQoYR4wOPIeBgwY6TkcT9Qh
- ks4UBIX0ijYxorpytKPyoujSUDfjKB5964VbHqY1JS1+IDrKyJ66luuvjuvnlk7PHu/xHZLCLNd
- DHWbybYNIkqFedKUwU4YPhF+mEhGdfyG/DHBiYNwMoxPkxmFEVbS/VfExwoupRSJUjiJIo9oqKR
- 524QJAOe3PGrgtHeMMPmfxEqUd1UhY9TgX1yE54pIXU/mWqr9inTsdaMmY9UwiDKRquWzGaC5Ri
- 0+LpOhc5JrsSoBDQ5oXpVMODwLShtBHkLcC7CcTv8HQ5S6pnbbfmaXlLo6SazklsEH+ej4tGZiG
- i+n5tn5NK8t9ff4hn7g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA1MSBTYWx0ZWRfX/R19Kv23Nnh3
- CmzzlXvpbJVEkfPY2cI0PJLngR+Mjriwf6X7pPQZYW7dB26NSbAq5Do/QG+s0pxP5LhYYzGJfLN
- AFP2yWoorbBXuqusBCFNpBEZw4SgJhI=
-X-Authority-Analysis: v=2.4 cv=TeIDJhQh c=1 sm=1 tr=0 ts=6af1c2f7 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=17UmKnwEPstP-2NXI4oA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: fp8W2_R5pEVqr6NlsbCVKF5o9rVJJtDH
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-09_04,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090051
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/4] media: qcom: camss: vfe-4-1: program the RDI write
+ master buffer size
+To: Allan Siriani <allan@fatecpompeia.edu.br>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Todor Tomov <todor.too@gmail.com>, Hans Verkuil <hverkuil@kernel.org>,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261109112611.94010-1-allan@fatecpompeia.edu.br>
+ <20261109112611.94010-3-allan@fatecpompeia.edu.br>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261109112611.94010-3-allan@fatecpompeia.edu.br>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 9, 2026 at 12:26=E2=80=AFPM Allan Siriani <allan@fatecpompeia.e=
-du.br> wrote:
->
-> video_stop_streaming() walks the pipeline upstream and calls
-> .s_stream(0) on every subdev. It gives up on the first non-zero return,
-> without stopping the media pipeline and without returning the queued
-> buffers to vb2.
->
-> A subdev without .s_stream() returns -ENOIOCTLCMD. video_start_streaming(=
-)
-> already ignores that, but video_stop_streaming() does not, so with such a
-> subdev in the pipeline, e.g. the pixel array entity of the MT9M114 sensor
-> driver, every stream off:
->
-> - triggers the vb2 WARN about buffers still owned by the driver,
-> - leaves the pipeline started, so the next VIDIOC_STREAMON and
->   "media-ctl -r" fail with -EBUSY.
->
-> Treat -ENOIOCTLCMD as success, as at stream on, and only log real
-> errors, then always stop the pipeline and flush the buffers: a
-> .stop_streaming() callback cannot fail and must give back all buffers.
->
-> Fixes: 89013969e232 ("media: camss: sm8250: Pipeline starting and stoppin=
-g for multiple virtual channels")
-> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> Signed-off-by: Allan Siriani <allan@fatecpompeia.edu.br>
+On 09/11/2026 11:26, Allan Siriani wrote:
+>   .../media/platform/qcom/camss/camss-vfe-4-1.c | 34 ++++++++++++++++---
+>   .../media/platform/qcom/camss/camss-vfe-4-7.c |  3 +-
+>   .../media/platform/qcom/camss/camss-vfe-4-8.c |  3 +-
+>   .../platform/qcom/camss/camss-vfe-gen1.c      |  5 +--
+>   .../platform/qcom/camss/camss-vfe-gen1.h      |  3 +-
+>   5 files changed, 39 insertions(+), 9 deletions(-)
+Requires a Fixes: tag
 
-Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> diff --git a/drivers/media/platform/qcom/camss/camss-vfe-4-1.c b/drivers/media/platform/qcom/camss/camss-vfe-4-1.c
+> index 9cf1ccdb2..53ebc12c4 100644
+> --- a/drivers/media/platform/qcom/camss/camss-vfe-4-1.c
+> +++ b/drivers/media/platform/qcom/camss/camss-vfe-4-1.c
+> @@ -107,6 +107,7 @@
+>   #define VFE_0_BUS_IMAGE_MASTER_n_WR_UB_CFG_OFFSET_SHIFT	16
+>   #define VFE_0_BUS_IMAGE_MASTER_n_WR_IMAGE_SIZE(n)	(0x080 + 0x24 * (n))
+>   #define VFE_0_BUS_IMAGE_MASTER_n_WR_BUFFER_CFG(n)	(0x084 + 0x24 * (n))
+> +#define VFE_0_BUS_IMAGE_MASTER_n_WR_BUFFER_CFG_BURST_LEN	0x3
+>   #define VFE_0_BUS_IMAGE_MASTER_n_WR_FRAMEDROP_PATTERN(n)	\
+>   							(0x088 + 0x24 * (n))
+>   #define VFE_0_BUS_IMAGE_MASTER_n_WR_IRQ_SUBSAMPLE_PATTERN(n)	\
+> @@ -269,14 +270,39 @@ static void vfe_wm_enable(struct vfe_device *vfe, u8 wm, u8 enable)
+>   			    1 << VFE_0_BUS_IMAGE_MASTER_n_WR_CFG_WR_PATH_SHIFT);
+>   }
+>   
+> -static void vfe_wm_frame_based(struct vfe_device *vfe, u8 wm, u8 enable)
+> +/*
+> + * In frame based mode (RDI) the write master stores the incoming data as is,
+> + * with no line structure. Program its buffer size in WR_BUFFER_CFG (words per
+> + * line, lines, burst length) as the downstream msm_vfe40_axi_cfg_wm_reg()
+> + * does, and clear WR_IMAGE_SIZE, which may hold a stale line based setup,
+> + * so that the write master is bounded by the size of the V4L2 buffer.
+> + */
+> +static void vfe_wm_frame_based(struct vfe_device *vfe, u8 wm,
+> +			       struct v4l2_pix_format_mplane *pix, u8 enable)
+>   {
+> -	if (enable)
+> +	u32 reg;
+> +
+> +	if (enable) {
+> +		/*
+> +		 * bytesperline is aligned to 8 bytes (one bus word) on the RDI
+> +		 * outputs, and sizeimage >= bytesperline * height.
+> +		 */
 
-> ---
->  drivers/media/platform/qcom/camss/camss-video.c | 14 +++++++++-----
->  1 file changed, 9 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/me=
-dia/platform/qcom/camss/camss-video.c
-> index 5de6ff5ec..8341666f9 100644
-> --- a/drivers/media/platform/qcom/camss/camss-video.c
-> +++ b/drivers/media/platform/qcom/camss/camss-video.c
-> @@ -313,12 +313,16 @@ static void video_stop_streaming(struct vb2_queue *=
-q)
->                 entity =3D pad->entity;
->                 subdev =3D media_entity_to_v4l2_subdev(entity);
->
-> +               /*
-> +                * Subdevs without .s_stream(), such as a sensor pixel ar=
-ray
-> +                * entity, return -ENOIOCTLCMD, as at stream on. On a rea=
-l error
-> +                * keep going: the pipeline must be stopped and the buffe=
-rs
-> +                * returned to vb2 in any case.
-> +                */
->                 ret =3D v4l2_subdev_call(subdev, video, s_stream, 0);
-> -
-> -               if (ret) {
-> -                       dev_err(video->camss->dev, "Video pipeline stop f=
-ailed: %d\n", ret);
-> -                       return;
-> -               }
-> +               if (ret && ret !=3D -ENOIOCTLCMD)
-> +                       dev_err(video->camss->dev,
-> +                               "Failed to stop %s: %d\n", entity->name, =
-ret);
->         }
->
->         video_device_pipeline_stop(vdev);
-> --
-> 2.43.0
->
+and sizeimage >= bytesperline * height ?
+
+Which sizeimage => pix_mp->plane_fmt[i].sizeimage ?
+
+This feels like a slop-comment which is no bueno - please read this 
+stuff before posting and make sure it actually makes sense...
+
+> +		reg = VFE_0_BUS_IMAGE_MASTER_n_WR_BUFFER_CFG_BURST_LEN;
+> +		reg |= (min(pix->height, 4096U) - 1) << 4;
+
+I don't agree with this clamp lets just have a consistent logic albeit 
+flawed with vfe_wm_line_based()
+
+=>
+
+(pix->height - 1) << 4
+
+Silently truncating here is incorrect. If we need additional validation 
+it should happen in try_fmt(). For this patch just stuff into the 
+bit-fields the value given.
+
+---
+bod
+
