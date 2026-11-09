@@ -1,48 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794238544;
-	b=dJHi8/L0WtysUDV8oQ/YiecDLSTFlV5qsFUU2CW8edGFDSCIE9Z7gxKgqdaXqOrHkEuS
-	 c4GEAdXHMlpocaTJK31ESTvk7TleQP6CXNRr2NGLrYg3aydz2cQXHDw/WThKLC0QmRsL4
-	 KtMWAqDHDlAwolwVCX12lmB5MFEIhSutA6gzO8Duv01vfSg2598YiLm6NTLP2KCSiX9D+
-	 69Vo9tEcjkc4dAxNPTqowwGcYx5fPb9sPY3hmKIQ3DffB2JQMfJMCwv+EVIc10WYpug7T
-	 jzWMDXvyi/qRFsT+eQFA8XdivrrSwS0PDNp5NKv0hRZ1j7HyjFQgDNy28PRJt89NXtQ==
+	t=1794238881;
+	b=Pp7/UpWe+AQRVGHmC5em+MX2/ByFRi10NYIKMorFN8mtoukiHt0YK4YlUeqxhuixsDzT
+	 i2j7Gh48zA+XYY9/L/906mDGV2T/VPdai9CVlIWlLG4J8qPjlg4K3v/YIH2mYX6fFjRU8
+	 Qr/6/UnT29YRk+g4OxF+8hNEjlkHzyQqwYL+CGptU9y144Eaf7mNud26n6SoTu5w0gmuC
+	 nMGTyRO92rnrYiWSVct4l+qz39RDr7JThzdGXe3amjquyQpvuDWiQCU5vXjiU7kMWOyIB
+	 kfWraSjRUNxCKFPDQP9yIYhVPnLb2FVPEy634s7I8JUGRyDyVdm5UEnVFCis4t7M0sg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794238544;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=P3xzo7yW0pYDJVlMOqXZkgFcbijFm65y9Cen5oaT9u8=;
-	b=pJZlsyy/zUg7htfZM86WnjUUtyMrIqp+ivHDWWAGerAMirRGsk2IHvQ+jKMbH2HzWpYQ
-	 Ztq3jyc1Kjnu34tsfvBiR875XabPPw6AUxVvA/ub9Wobc1EaSGh1lZO8z5yCiNkjsFu5q
-	 hSEt7grS6o/fj8qa/8uJs8SUitXWIzPCDoOfRDWfpnrkWwgcvI6VZZKjVb5+zfL4zecWE
-	 QqIfwhidUokitF35nIm/YO//Kbn4GTQ1X2ugtZvAJ2rt0F/MYaevYFbgbbynSNyGgsXGi
-	 NbN8CmUVAI1pdswb52yNzxSPi0BdttBGM2+FJi9es1HC54wQmX38vtGb6VWQCxg9uPw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794238881;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
+	b=qyL2JtwdvqbjpyDGty1qlLNzs4OBdWLzqp+CbXQ+XOyDzeycQyIc6KCwT0xj5hPhIPKb
+	 0hq1j4663jZyylL0kn0jgFDzmf81eCA/RqswjLfTCg9PKjH5sPWKHBeKR7R2W0perhzIc
+	 LaRhEoF4ihHQuevZr2vAcpWZqg6vjgJMxwLxJs3HEdCPMedKViOdcJ+IuUq5oiaTZpyJe
+	 210T5N7ypqz/Z+XBqMSaEk+4QvocBfoNvTefuV0pww0hIZ/Pyal2cJ59LWTSjjGESSGWm
+	 Z1aQ7N+pxpOCfbZvc1OZBL2c3c4ud8ry3mCL0DEu0UGJUeWeBX7+VTmVXaLH+wGOxbw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b99PDpB8;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LIW+o5OM;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8ibVMl5;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FF81606A31C;
-	Mon,  9 Nov 2026 15:35:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74FE3606A325
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 15:41:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 74FE3606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b99PDpB8
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 184171F0089F;
-	Mon,  9 Nov 2026 15:35:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794238543;
-	bh=P3xzo7yW0pYDJVlMOqXZkgFcbijFm65y9Cen5oaT9u8=;
-	h=From:Date:Subject:To:Cc;
-	b=b99PDpB8WLn8a3+xE9o2JhLhV5c/U6b/EzaZhieoe6mI3gQHBtClClisCFP2RLFRw
-	 9m/p+7Pw/QCSdts9Au1r+ic9dFB2aTnO5XhVse0YSfq9UMdDi5fcbXEmeyGmZ78Svl
-	 e6yXVsV4+47q+ef44p0aY8Jp8ezEMjRqSn5B9sz06Z61cbcQ2pr/1n5yxkNXlhfW1b
-	 KpeqWCEkWPODkcKjL444S2aA97SrXkMzsJ8ii9vj0yG/ugsuZNHGAUt+wsxSNLSvcK
-	 fWjtxCJzbPlnN0bTj6hACjJkOn/1J8sUMhNGY8ibAxWzho5UqJ/Prdjj/LBMK7qa59
-	 usLgPLNsTKDgg==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 09 Nov 2026 16:35:37 +0100
-Subject: [PATCH] soc: qcom: socinfo: Add missing PMIC identifiers
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LIW+o5OM;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8ibVMl5
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A9DFTZU023155
+	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 15:41:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=; b=LIW+o5OMMmMHLBd0
+	ZqN+Pt9cKAj5QI3KuNcKB/ZAXCK7Zja7T31Ro3zZBnx/olamMqxfRqZ+iDKxnOSg
+	RZSN9SyLbYZJ6GQu4Yoj3IOn3c5Jbfhfa8JYWJZHBAW8OC8sLSnER0lHNGCEeCFc
+	IWL6IqI+1nVCTaamsUVIfp1Nop0TdjBpT4cAyEomo9zGllM4iIF05QOxVrljU9e6
+	EdG+b3+ZeDYeS8W7XsQLujBO3K9+WD+UMXjaOhmauB63ac1Shm5BY3D9mGHzb7xO
+	g4LcooH0RjT5nmnXAZ/xOF7oohShEAjp89t8q6ZT+mXlqpMX6odtNKSDmz4Sy0MD
+	Rdf4Uw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucydgyxf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 15:41:19 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f2bdebfc5so28909485a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 07:41:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794238879; x=1794843679; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
+        b=B8ibVMl5tndTYPU4dQseBgIbignge38JEiekrVZYvYNLfj0ePjCEvcgkH8CRRO42RY
+         qJ+9qMcbcYuAnzLDWr01f8H2gQNNW+OuYlEWZ8Q3GvFBfrLEj9Pdx0K31NbwXy53Ue2s
+         JNUNdQMmRSw3nzB1knUCVvXF3iagZ25Y4BfVsuGu+dnaSU/wRa6ESr4gitoDuUzheSJD
+         WQZUdkA8xzfswUt81T9pEQqmu0FUAC/Em4p4KXnQUV44DBywMCKv9Swr77pF0uxjsSlX
+         xggmIpZYoJz/rZ4rGBbORjQPY16aDhSzShDJtbqEC1m7G5qeZwO20oKkruleqPBqJPHN
+         vgaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794238879; x=1794843679;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
+        b=Vv6QDxuZ4ffj0da4jyBzMaV6Q/G0wlKgknMXJhPNAiVQjKaDplQe8wN/seyKyQoSFT
+         L+bYyy01QMFjR5fmJZSobpYjTycziAytpHHgsYreAC/koawUSOIbmf8TpClCGPzMA4e4
+         hIb+4xUTHoKRMfqvo1zdscZLszSTtv7QcmHMhgnbOuwz92AuP91SXNnZ16WDXmIMPvRa
+         44VM+yYNgP+eiymobIe3ZmhpmV7eJqm4Ri5M6H0eu6gI+F2gHN+08x5i9CHPmm7GlY6H
+         MZb2aicDFQ1Sdb1Jp64JMhXW/He3x2kGi+v6aZxrg1womkj8ZLOR3YsIR+GEnQQW2DMi
+         pP8Q==
+X-Gm-Message-State: APuU4Z/tJQpXUmjoaJ9fiK6SF3BtmhQybQ0kmFRxiMLIFp2xsYmRTNzA
+	Kmk9emU2IVBxlLY6+pKdw245kZsxLl1lt7tM7tTSBD61eiU8aVusNuHouEWrKQQUAbrE3eR4FfF
+	24rkWlknHjNlTH3Pk2icrc3b/bPpKjX81UOMsKfThOx7AZqhd17hwCQND/mZJ9DNg3BcK
+X-Gm-Gg: AYBFou3mnIk9dpmhsHtjZkRh9vS0nhMX60T6yp+cVVnbA57FfR183EBIxJ8kxs87bp2
+	EPOZrgN1wq7RNy3z5KOX9GkFf0BgGcERrHzFpyq9QC7kO9ebakLxl+RsR4ZhlPeiVPXC8H4IgFC
+	jK9COFYEVu/IWS5juUjmFdXmQEixaPRiDYoDoLkvZjclyd8EacnAxHsXMsfv8PLN6QXbyxlkL7b
+	6ZwvNGFZn2Rq/46Fo9BbdhqOPPKV0R3cKFoeLKxHarH1VL2ly5+S8QQVB1IS0DII0ntUPVQ8O5G
+	838IcngXpcMI0BUB7gF0fhOiSa2uh2YRjFt+uU6SesQTuHUCrWlIsBACzqcy76Tnw5rbMaOklDM
+	Xu1iirc6AzJGLM1L7CTr3iDG64XPwALEMOtrbSx/sLmsC6rVE7bDIlR7DeFVcNveGbn5Hxg==
+X-Received: by 2002:a05:620a:a2c8:20b0:945:db0d:9cc7 with SMTP id af79cd13be357-94783fcd83amr660952985a.0.1794238878614;
+        Mon, 09 Nov 2026 07:41:18 -0800 (PST)
+X-Received: by 2002:a05:620a:a2c8:20b0:945:db0d:9cc7 with SMTP id af79cd13be357-94783fcd83amr660948985a.0.1794238877975;
+        Mon, 09 Nov 2026 07:41:17 -0800 (PST)
+Received: from [192.168.226.72] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b755543354sm33732a12.35.2026.11.09.07.41.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 09 Nov 2026 07:41:17 -0800 (PST)
+Message-ID: <427e15a6-cbb1-4c3d-9547-cfaa08fa90b3@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 16:41:14 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,111 +113,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261109-topic-socinfo_pmics-v1-1-ecdb6cc6e40f@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDMBBA4avIrBswAf96lVKKHSc6gknIpFIQ7
- 27U5bd4bwOhyCTwLDaItLKwdxn6UQBOvRtJ8ZANpjS11mWnkg+MSjyys/4TFkZR2GBfta3FbjC
- QyxDJ8v+6vt635fedCdO5gn0/AKXqQb13AAAA
-X-Change-ID: 20261109-topic-socinfo_pmics-c7ca588fc9d2
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794238540; l=2228;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=byoiCnq4fMvj0a5ymi4DksNfLu5e0HjqT2asVyPHs8U=;
- b=G1k0zxWCTj1I0egF/AKdGEAcyXV5YvEPsosuzTo9LHPWDZkQPGP+F+UvHsDqDxE1N2BdHG8WD
- TqGiu2plQoXBWbHWx4Tx/vgZTiyt33qrhybDU/UtHEFWea/ZxRcaJAn
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
-
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] arm64: dts: qcom: mahua-lenovo-thinkpad-t14s-gen7:
+ Describe the HDMI port
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261109-t14s-gen7-hdmi-port-v1-1-1a691e6c180e@oss.qualcomm.com>
+Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261109-t14s-gen7-hdmi-port-v1-1-1a691e6c180e@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA2MiBTYWx0ZWRfX2ZCXkYFY/gZS
+ /hZihKWV6SxuFD87/C/xnIlPWh8fhJTTxUwZXk+O31nTRPAJbNRYBiyu6v51VjYjaChMTXMGgeG
+ Op5ZArt3xgg84tn655K8UOaCuAFX9ts=
+X-Proofpoint-GUID: uuujwv1NlJAxeanwBhQegPxdz4gcfRKW
+X-Proofpoint-ORIG-GUID: uuujwv1NlJAxeanwBhQegPxdz4gcfRKW
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA2MiBTYWx0ZWRfXyXKW35A6mXo1
+ qMOcmsCioKsa+k946b2U09pQqC34eQL/zsLo8j3Ov4tgSFWWpQeFtgB+S6+xkSh3YmHNP/draQx
+ GZg6jVFGmQBOsA9jgRy3iSe8LVyw5MYkBqSw+n9bRRUfavMlIqLs0XKlkC4QP3fmQd++MQoL2eu
+ WGsjpwm1zoGZYSrWXb9Sknt++i9JHaz12lUOXg692EZQGccYBl7b/P83FRBlHEAwG5l97vOMvEq
+ YFJrvV8URfrhNPzLU+l0DLazLXraCjEpP2p4iN7y6EDCb0/LTGLKqh0iI7j3Niqp1CK9tj5Pf87
+ +MEVXZt7UgPsnDg+5RMWjbtms+LdU+AB8E1tiU6zErF3nZesRG8PyrGKWJYBmV6agSWA8yqiGfp
+ CkUi5HAgmN0WqhW1iPldV6HuV2e3dwIEAHnGo+RAxhampr9zuhzvg9KMc//nXhSmGhT5WQ9kA/R
+ QKZNW1JKOGBtiXUArvQ==
+X-Authority-Analysis: v=2.4 cv=XuRvqlF9 c=1 sm=1 tr=0 ts=6af1e99f cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=WC968W-qZJN9GzRUQ40A:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-09_05,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0
+ suspectscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611090062
 
-Many indices within pmic_models[] were skipped. Fill out the ones I was
-able to confirm and leave comments for values which to the best of my
-knowledge are reserved.
+On 11/9/26 10:06 AM, Abel Vesa wrote:
+> The HDMI port is driven by the third DisplayPort controller through the
+> DP lanes of the third USB/DP combo PHY and a Realtek RTD2171A DP to HDMI
+> bridge, with the HPD signal on GPIO 126. The USB3 lanes of this PHY are
+> not connected, the third USB controller only serves the eUSB2 port of
+> the fingerprint reader.
+> 
+> Describe all of this so the HDMI port works.
+> 
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> ---
+> This depends on the LDO voltage fix sent separately, as the combo PHY is
+> powered from one of the rails it fixes:
+> 
+> https://patch.msgid.link/20261108-t14s-gen7-ldo-voltages-v1-1-e0ad0d528767@oss.qualcomm.com
+> 
+> Tested on a ThinkPad T14s Gen 7 (LCD) with a 1920x1080 monitor: the DP
+> link to the bridge trains at HBR2 x4 and the monitor shows the desktop.
+> ---
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
- drivers/soc/qcom/socinfo.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+[...]
 
-diff --git a/drivers/soc/qcom/socinfo.c b/drivers/soc/qcom/socinfo.c
-index 38efc5db7fa8..6ed8a4686e2b 100644
---- a/drivers/soc/qcom/socinfo.c
-+++ b/drivers/soc/qcom/socinfo.c
-@@ -154,15 +154,22 @@ static const char *const pmic_models[] = {
- 	[25] = "PM8917/PM8937",
- 	[26] = "PM660L",
- 	[27] = "PM660",
-+	[28] = "SMB1355",
-+	/* 29 is unknown/reserved */
- 	[30] = "PM8150",
- 	[31] = "PM8150L",
- 	[32] = "PM8150B",
- 	[33] = "PMK8002",
-+	[34] = "PMX24",
-+	[35] = "SMB1390",
- 	[36] = "PM8009",
- 	[37] = "PMI632",
- 	[38] = "PM8150C",
-+	[39] = "PM8150A",
- 	[40] = "PM6150",
- 	[41] = "SMB2351",
-+	[42] = "PMX55",
-+	/* 43 is unknown/reserved */
- 	[44] = "PM8008",
- 	[45] = "PM6125",
- 	[46] = "PM7250B",
-@@ -172,22 +179,40 @@ static const char *const pmic_models[] = {
- 	[50] = "PM8350B",
- 	[51] = "PMR735A",
- 	[52] = "PMR735B",
-+	[53] = "SMB1398",
- 	[54] = "PM6350",
- 	[55] = "PM4125",
-+	[56] = "PMX60",
-+	[57] = "SMB1394",
- 	[58] = "PM8450",
-+	[59] = "PMX65",
-+	[60] = "PM7325B",
-+	/* 61 is unknown/reserved */
-+	[62] = "PM1010H",
-+	[63] = "PM7325",
-+	/* 64 is unknown/reserved */
- 	[65] = "PM8010",
-+	/* 66 is unknown/reserved */
-+	[67] = "PMG1110",
-+	/* 68 is unknown/reserved */
-+	[69] = "PM8550VS",
- 	[69] = "PM8550VS",
- 	[70] = "PM8550VE",
- 	[71] = "PM8550B",
- 	[72] = "PMR735D",
- 	[73] = "PM8550",
- 	[74] = "PMK8550",
-+	/* 75 is unknown/reserved */
- 	[76] = "PM7550BA",
-+	/* 77 is unknown/reserved */
- 	[78] = "PMM8650AU",
- 	[79] = "PMM8650AU_PSAIL",
- 	[80] = "PM7550",
-+	[81] = "PMX75",
- 	[82] = "PMC8380",
- 	[83] = "SMB2360",
-+	/* 84 is unknown/reserved */
-+	[85] = "PMX35",
- 	[86] = "PM8750B",
- 	[87] = "PMD8028",
- 	[88] = "PMC1020H",
 
----
-base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
-change-id: 20261109-topic-socinfo_pmics-c7ca588fc9d2
+>  
+> +	hdmi_hpd_default: hdmi-hpd-default-state {
+> +		pins = "gpio126";
+> +		function = "usb2_dp";
+> +		bias-disable;
+> +	};
 
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+nit: order
 
+otherwise whichever way we end up merging the dependency
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+
+Konrad
