@@ -1,53 +1,53 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.17
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.134
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794262544;
-	b=1FtWhg5uA1WIC1/LjLF/18OoyXzdFp57vgATZrkgHAXzR1EB2eR2nuTSVd9DsN2QBXRt
-	 Jj9HinFICg2IDBH+fEolIknmRbU+Dxa8gdcka2drCE2cyaKOuEM1eUsk7OFH7fjyJJY1T
-	 v7jYUym9h3QnojeLocO8AjkL1oQea6iz4kfnZCq5KMFiVXeZHOCxs19VFFmHS79HQ/105
-	 hTnKoKFMVQj49tK7bGT37+9alnhpSuYUv/vgTcpy89T6gqJUrU1nOLRacn+jN5kRyVGzl
-	 sIBFcnpvf/hB+l/Xwy7UGnZSGAw+hqFGCY1RvRlJzkHy1Oqc2wiFvS7Hr6DxG7t+A3A==
+	t=1794262550;
+	b=y2YeBBqLx1hM+egBId/Rew2ip0bMpHJ/amM0cFQSnLh1tF0RHkZA85+TeM8ofCkT2eUB
+	 peAukDqZqLRVT3TpOCZRFbrIQN0zXZUzSCgtC0lWWUU1LMYByCaI3K7JMyl6KgI2NlmNg
+	 DjP+jF+4xBMTm5M9tgYJZiD08BZoidD0DgBH56FA/eU707wPhUxmUL93fI51FDzJ2CgZN
+	 lg5fUpEU5mK0Lpc9d1eGDNHyuiMH7Ovh2+qSE3G7Qec2QvyXaT01HzMTeMm4Zct/jFIaV
+	 AOO1tZMSQ6utwO/i/QMNTeUEap2pnrnYlGOmLhgfk7gGZn1JiQ4VU+OgCpFg4nSQmMQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794262544;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794262550;
 	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
 	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
 	 X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=cnbWzp8SRYw9JefcoG20foTHGQw84aM7Os7qfOEDv2g=;
-	b=1w/uGchVq7ujUjLkH+lweTCPO+gdaR3hhIdwERa3ELGbKwO3KSzl6Dwcqm3JC5iRME1P
-	 87M7T3hz/6UQwEUH19o0Tz9MACMb+Zu0Pn0lSrg9fb35sHgBBApOZFPBOkMf12qfflu8W
-	 7+SAcAvAWNqD/aUWFEW52lveG8N2qfiJtKqrjA59hiDuAJG0iwdp/JcvYkCk/GQWdNmAf
-	 vPwidZdZHrrbtEB6wZTT75IFvWkCvedfrXMjtjDFgTqC2/seBwPcdwH0d4rD5phx7PZPr
-	 tn2mxvW2dybuAvooT12TUujrYpJSF6+7IOrzH3MAfA8+i+hezSgH3oDZsQmMaQGnD1A==
+	bh=6Gvt5jiBDiNulHHrYg+BrD7+VVcW2lBBx5OIqzR4giU=;
+	b=cwUeHBV1/Txm4MCElEFSAbn2QQprEK3NpcylAN9qxBuPq3ZOzgT3UlE1pw5PAY2r1R0c
+	 JANplwbY6ynqFP3jPFfpeSSJdABIRzfT8gwoqC7SbCNpZLQvXgD7DmtKrbub2pmib1k3V
+	 dDBOl2/tpAhnSOkvNx9/f0o/Nt7D5MKRPzaE/+LIRdYsBqnu5Z/wlpX/UjVlg9PqcXF58
+	 7eKpTodwrInJzRMWumtzT9mQbpSwDyITL6uNTjarKTk0hrC6Rlut0ARhY/LL0ov6EUJ6r
+	 nIoEL+x92Kk+2pwt5wkpfU7oNfSJCmuV4faWjus+w7hFPMu2uN0u6UK3c6E6Q1zHJjA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=packett.cool;
 	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=nm3X2TUk;
-	arc=none smtp.remote-ip=95.215.58.17
-Received: from mta1.migadu.com (out-17.mta1.migadu.com [95.215.58.17])
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b="Ns/a5WEC";
+	arc=none smtp.remote-ip=91.218.175.134
+Received: from mta0.migadu.com (out-134.mta0.migadu.com [91.218.175.134])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD93D606A321
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 22:15:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DD93D606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7331606A32A
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 22:15:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7331606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=nm3X2TUk
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=Ns/a5WEC
 X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=Jz5VysEAlQcAxLlojRgxtAz9V5M3QMUrbakks1zM4k8=;
+DKIM-Signature: a=rsa-sha256; bh=DoO8s5WtZwpzyo9LpQKIECh6IieoqjmPFfrymZi3V9E=;
  c=simple/simple; d=packett.cool;
  h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794262542; v=1; x=1794867342;
- b=nm3X2TUkLCtFAcB756h2Sjpim385SJKevpzzsFjEam/gxjtEqGNPmb13cV3KL0fJvJFick9F
- Cwrtvg/m5WlYvrODPKPpfD3gqG5g2pyJqxGly/VGlEKeDR+5z2c42TtCy886+fNM/uXwJB64mcP
- tpxDwDtNuSNC3V6QUW7gROVMac0yPyJh0zP3iuxUrQiC967sL8+G9MB5EKZbaILjLk/wtrWcXqj
- xjnBqO0eUiZJZACy2j4DmfVybZ8BNzQ272jxNC9b7saBrh28QFZKvwgU5009SawVzJd0b1ezFZo
- njTMnQ/iU9BMESPAjkDZQ5hE5ygAZu6ZL/5jWpil6SEjg==
+ t=1794262548; v=1; x=1794867348;
+ b=Ns/a5WECT4Kr88Y80ZJcq0mFcHzmcOKiouEhxqo5Yh+qA+ShVGdQKmHgdTV9rOq4S0TjyYIW
+ rX3ol7VoC5zVs1vLha+7+MiNk0niHoybjSSXI2/omGeZHxGfj9sl0kRhNr+YwEx4EZrf0BNpG7K
+ y6a24ty6MZpSgkzFmd6X0Cy006AkXBkVHiyIgOBp9GFEiviPOt1B9AxC41Q2iLy2Ku9LC1YzUQl
+ 22TUVGI7/7pw3z4cxLrCjDBm9dFqiWaA0BQeYkJgGh9MEojRkdMDYATFaTne6cl0Bu5zhTYclAX
+ fc9FdkluRofERZoKF7I44qJ5dvSJpOncRDJsWfq6KdpRQ==
 X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 2300422c34a38f09;
-	Mon, 09 Nov 2026 22:15:33 +0000
-X-Mizu-Trace-ID: 2300422c34a38f09
+Received: by smtp.migadu.com with ESMTPS id 392b2637e9b1699c;
+	Mon, 09 Nov 2026 22:15:47 +0000
+X-Mizu-Trace-ID: 392b2637e9b1699c
 X-Migadu-Flow: FLOW_OUT
 From: Val Packett <val@packett.cool>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -67,9 +67,9 @@ Cc: Val Packett <val@packett.cool>,
 	phone-devel@vger.kernel.org,
 	~postmarketos/upstreaming@lists.sr.ht,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 2/6] dt-bindings: arm: qcom: Add Motorola Moto G9 Power
-Date: Mon,  9 Nov 2026 19:14:31 -0300
-Message-ID: <20261109221453.658316-3-val@packett.cool>
+Subject: [PATCH 3/6] arm64: dts: qcom: pmi632: Add LCDB regulator node
+Date: Mon,  9 Nov 2026 19:14:32 -0300
+Message-ID: <20261109221453.658316-4-val@packett.cool>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261109221453.658316-1-val@packett.cool>
 References: <20261109221453.658316-1-val@packett.cool>
@@ -84,32 +84,38 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add compatibles for the Moto G9 Power smartphone, codename "cebu".
-There are several display panel variants, start with the Tianma one
-which will be the first one to get an upstream device tree.
+Describe the LCD bias regulators provided by the PMI632. The ldo/ncp
+nodes are left blank to let the device trees fill in the voltages.
 
 Signed-off-by: Val Packett <val@packett.cool>
 ---
- Documentation/devicetree/bindings/arm/qcom.yaml | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm64/boot/dts/qcom/pmi632.dtsi | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index 37443849d0bb..9c463fce515d 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -1073,6 +1073,12 @@ properties:
-               - xiaomi,lemon
-           - const: qcom,sm6115
- 
-+      - items:
-+          - enum:
-+              - motorola,cebu-tianma
-+          - const: motorola,cebu
-+          - const: qcom,sm6115
+diff --git a/arch/arm64/boot/dts/qcom/pmi632.dtsi b/arch/arm64/boot/dts/qcom/pmi632.dtsi
+index b0ed35094a98..ab850050eb22 100644
+--- a/arch/arm64/boot/dts/qcom/pmi632.dtsi
++++ b/arch/arm64/boot/dts/qcom/pmi632.dtsi
+@@ -204,5 +204,19 @@ pmi632_vib: vibrator@5700 {
+ 			reg = <0x5700>;
+ 			status = "disabled";
+ 		};
 +
-       - items:
-           - enum:
-               - motorola,guamp-holitech
++		pmi632_lcdb: regulator@ec00 {
++			compatible = "qcom,pmi632-lcdb", "qcom,pm8150l-lcdb";
++			reg = <0xec00>;
++			interrupts = <0x3 0xec 0x1 IRQ_TYPE_EDGE_RISING>;
++
++			status = "disabled";
++
++			pmi632_lcdb_ldo: ldo {
++			};
++
++			pmi632_lcdb_ncp: ncp {
++			};
++		};
+ 	};
+ };
 -- 
 2.56.0
 
