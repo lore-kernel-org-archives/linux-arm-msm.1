@@ -1,110 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794210826;
-	b=zEfHsgsazeB9bT2yF6HneLYxPViF/dulv6KmKkufIyE/kvwl7wvgCaRqpg9MvbHEclhz
-	 vPszgHq+10gjlxFg9bIpnCB2neYZ51weVidjh3qizzMLLwlIM+fyd4EreeJg5LC/VKjlo
-	 zNCadRIvabNXTrjp3nOEd1x8veA8TJj5OEeFgG+W/gSS7sdVzRSR8a4ahhc85v5M4NJCU
-	 9YvwIDCXq9bq1VpoqNk8l68+KcdjE+JR8yCEKj9QTgm8JHLKA4FMZOA4gJoXIzy56699u
-	 Pbl4VP66r+FMzBdLZmYfI0gGktUY6wl3CKDBD/FWaMaoW3JP9jgJ0RiGTxyXIN4kzig==
+	t=1794211901;
+	b=l4OkR+4R4BWKkoCQIpGFkkZ8rHxb0L/N/HrsLLBn49EDHwQYOJcN8rLxxoBZKavxw6gp
+	 kFZVAgTKbMhWNI61odFa5rnBO3BggTKjwhYjjkoKcqqLJEZqdOF1shyvHn67kgfuYCBrE
+	 iC8YoN1UuBhCOXGa2Svk0Hsk+5xdG9jE+c7lNaNbx84vySzwsCArNeQN0ITCocassU2d+
+	 ga3dLARJGZ63he3A/G27iDSN4Yc3ZB/CdCOK5Gn99qmr/vZ2/DQ3SpPVF+H3lvFTaiRnY
+	 vk3njsXHdFYH+k1OcXpDqNRMEv6rLqNtElXkNF+ihpX6nEZhqyHYQcd85rE7rz2/k6Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794210826;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794211901;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:Content-Language:To:Cc:
-	 References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=o+haZWFojym2Cv7RGNTo1dLDTnfV5B6AZEJXSj/GaWs=;
-	b=FHwEbYzzvO+KPR77ems96oBut1ZxpXs8d9UqWOm8TtT081QPWazu+ZE5c9K/FMRtZyUe
-	 Luvo3D2ouGPvLnwdWNCsGgJTfEXRzi1uW9KN9/7T7cr2AVsC1uZKwEhWtT3ieHMPsOXG1
-	 HqmPGGit7NpaGcgHX0IqUidAt8qIldhvAPlgQr3sGm1i6rDfWqTJ4lq2cKUBR0V9Od+Pn
-	 DchBwC+S2MiVzYHRFhLRqSwtF9Xg/XG6mBDedjCZlJ2IlnB+yanejlW0wQPnJj6Ck1wzk
-	 VPW3eQPlbg9r6qdcmjllmy6ZfHOLUqaad040i8jMc6grFU7Q3Omxra4l5Qi/waLikvw==
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=3Hyx0HfDdI+qJ8O/EhEf8YHmYreBy/xtMHLhJ3AsflE=;
+	b=NH+YFxlbFpwKYLFaVqIirW/2BJAojxMk4F8aDCpRQzOc6+mwdUWBW/PhpfCYxtq+rVXa
+	 sZhX660TuVm5xs9XHX1Tl3bM0v2Y3rynITijVrUoL8wUuJ7bMv9QABMcFckwfqKlNQHZ6
+	 /AACxHKAoWk4gedx0Gv44ALBT2QxfrPxf4ZiYpJLOv5lJSNPF1HYIotTn8EbnuiNAZsYR
+	 kelU2oiD1VJTf2fqj/jrtmfAS5y9UufzIv8lX7GxcOJHyo/MnFIJO93ac/dT3gYL6kAYG
+	 mE1Z8N+1661MDWnS7y5z+3yqUeUL0skUil/atmYhrAMKWbXpgXRu9OLD7X1LWCr8jTQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mwM0zqzP;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jpPfpnWJ;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dxgKwV42;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DzzhtEh5;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F8A0606A323
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 07:53:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6F8A0606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88F79606A335
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 08:11:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 88F79606A335
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mwM0zqzP;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jpPfpnWJ
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A96A2Jd3611149
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 07:53:45 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dxgKwV42;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DzzhtEh5
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A96A3aY2540087
+	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 08:11:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	o+haZWFojym2Cv7RGNTo1dLDTnfV5B6AZEJXSj/GaWs=; b=mwM0zqzPE6GbLpxf
-	fPNNojxyfYZePnBTqYOCrYvsGhQc2rrkol1ZfbQ0XXT9kajSnpYIV61DfyfK3c7K
-	MK2DX7MjIcC8XkVNr5QrB7PqnqUZfZkErmJ0bfXPAzzl9dnzcxds/J2JRXyWk7IZ
-	kFcbBh/orXJNJ+L4Ht6g5UnVWFOKbNy/ad3GI/yDT3o5yyJRyt120Dg/LSe8SeBq
-	99U8/4iZI08rtlVGptz09iH2SdFdiUVseuDqxbdDHemspBUeYyyhrn/34rVIwHXc
-	4Z2u8GpGTwoGbJgFSBv4wclj6TnnAgcw+0O9FA1baVlD6D8N0WYOnDH45SPMrxtp
-	dDG4rQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hssbnwqmb-1
+	3Hyx0HfDdI+qJ8O/EhEf8YHmYreBy/xtMHLhJ3AsflE=; b=dxgKwV42aWRHUOy3
+	1V+oiGNIp/buFOgQQ0I1HYx04BYakOqtTyDbdkCnoCMjGj9Fd5intuTN9XvNzSu9
+	Naczydkg1LfAeRK4oIUwLAZD1sDUIb++pwkOBDj6h5gPUkodWAccWsmAOIFbotyC
+	x6TCpRi2uds9+/QIPijt3LxtH8UWQtsBl/9YG5tlhULPn8eyQ4W01E8AIm4SCUoj
+	XBwphtvoU9u+KSKK49Y2rg6ZPt7xwZOHOm8V/Stf/+3WGpEfoe55w2BNYayvl5T9
+	yAU2IXw3xOnKcci0lsBE+Kmn3OcVa+7MKZ6T+QsnAP1/xxLTiD1sDwdC2Dl/6kFe
+	cxpckw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsvc6nat5-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 07:53:45 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-30c0d568830so1766464eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 23:53:45 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 08:11:39 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-341eff9e381so1705269eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 00:11:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794210824; x=1794815624; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=o+haZWFojym2Cv7RGNTo1dLDTnfV5B6AZEJXSj/GaWs=;
-        b=jpPfpnWJtghCTeee6Wyao8yI4UTBDlfr3M0mVMaO2nBkerY3KPE34LIXra4jzPrfA7
-         rBz52E+gU3P4xNzYlgUB5Magqh1Gx0JOSJKuOuA63K5qELbVisv6m2N0aYSkAb3w7wig
-         3nK+z0VxEahfqxK75m+8Ys7lg+YT/RzOByDs+zgWRFtAayi40rVlhPKUI2f9YaMALhY/
-         JgBPX7n/mcCZwtoHLeSwd1/cXo0QNl60bW9ogMQG4k6mcStr9px7qdvliz5QrcUlRElE
-         0X7eNPdomFYXJ0qQ8JnDXhil25cIhwEMnUmCwDSobjGoPx/jjseG6Gop5cg5QZRx6iWx
-         O7Qw==
+        d=oss.qualcomm.com; s=google; t=1794211898; x=1794816698; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3Hyx0HfDdI+qJ8O/EhEf8YHmYreBy/xtMHLhJ3AsflE=;
+        b=DzzhtEh5hRPqiPsYcwAZV67IGLnt5mMIPLRkI+kKiLny6jhjq5cY09HOTLWUIixlXC
+         MVPew4eIMRjXbkm/XztbjFJCTmq9A/l+K/FvX2YU6BnS4NyWJP92lczn0TOFFi6gBfYw
+         C7g46EfCNgfBfcFZCrNdX8cX1zpDdr5kSL2T5fR/Ne2eMpdohYgSLTfCeVgLvFF9bp3R
+         n8NfgrcryJhMhB8g8+3AycW9pBKlCqHnyKGJ3V+AuPdB4fje0G5nAf/5DSWE4WOTVuUY
+         HHuwzyIn0kW8cKEfFu3q1oHM388M5I9deOnTGxvvQw2Xor9RhXZ0xtyREym0HVa4pp3Z
+         /dQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794210824; x=1794815624;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794211898; x=1794816698;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=o+haZWFojym2Cv7RGNTo1dLDTnfV5B6AZEJXSj/GaWs=;
-        b=K8ZWNckcg0QE1bIsb+jYD+7bB8vxv7lvlStHqQJDldw/V/wIGzsCENysPSoPmdn6sF
-         YxDZ63urO+38Awh8ZxcCIU2ZVZof9rfNVAfDF+Q9GmT68GEDxuR7WGFUKd5gWqM++Uz2
-         XU+FtFMwInGrT8keXei1i4DCYJZfm6C+zJ/ZZ+lXCtTkfa46UpvacAqbTAV4dINBLnR7
-         OlvUPKME9vTMH1qYTTgal4GxQGxfl0viZQx/osofeI8V/yzm8NQrJNon3VHuc3dMuopY
-         +0axFR7NhBnd+OVRKjsD2QGJPh61qRZqpg2noZ6qfxIEWrlI5n2bM0Mhgd8Sc7QsAaTl
-         IMmg==
-X-Forwarded-Encrypted: i=1; AL+hErFT2ulfYg5lrLdnR7qYolC3xTsA4y+4/kAdKTfpmQy+bhLj9plKMJyV/SzRIsyxPbeOmxKZsg48FOt4nUH5@vger.kernel.org
-X-Gm-Message-State: APuU4Z+hWnsqRGIVxGC74OsvpGFDhwhzZHppvCz7zvn7MV5dCZx6IR6d
-	Ue12JIU/pKzVe+8PYZXHoVmAK8SBFegqDXdF+4huhLER6PL6zq8s9S9K78XAjEIpTcW2TK3GQXo
-	wdcu1EDGmzMfYXeLBTlOdOqEk0smh13TRI0GTKZqgiSDUExMDXprYTmo38ZVsHoL+GKYu
-X-Gm-Gg: AYBFou1DuVC4zALN5/4v7fSZqMm9eR9HeU/Gsg4DGUnGTzGZtNo3q0odGnJg0Ci26at
-	6yjouqQI3PIgDvUBcRHc3tmA0MeILrEb042US6RjWuXk6aBy5HouGWv5AfBxSwtQ7d63SmF1ApW
-	X1XZGMDHwSHRMN9slU0kiep0zpMIav3e5OevXHXLOFYAHDxemEfxHn5p9h/+jtXGLL8RaIHRM7E
-	I3Xp+6PSdp31dHHkwPE1dW/oCQSYvogZdnwSJfeGhvv2UwIiWgAhlQChGNB6NijTh/WLoI3HOPk
-	lYtVSi0QHOefusPZLKeEen5mGHlcELdZEqXT4zLP1QP22hmR1Lu31wn9EOBcgUEMFU679GrJHUN
-	ek8cZmEJUHdxhF+UxhnZyDWdqxuinWaYQwlpkLwVThmPwBRqUgRBh3lfexKDM4Nx2e7rQH1ThcO
-	Jp+yU=
-X-Received: by 2002:a05:693c:4003:b0:36a:1f4f:3e9 with SMTP id 5a478bee46e88-3725d782bc5mr5640848eec.20.1794210824315;
-        Sun, 08 Nov 2026 23:53:44 -0800 (PST)
-X-Received: by 2002:a05:693c:4003:b0:36a:1f4f:3e9 with SMTP id 5a478bee46e88-3725d782bc5mr5640810eec.20.1794210823672;
-        Sun, 08 Nov 2026 23:53:43 -0800 (PST)
-Received: from [10.204.100.41] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-372669d2826sm11874478eec.29.2026.11.08.23.53.39
+        bh=3Hyx0HfDdI+qJ8O/EhEf8YHmYreBy/xtMHLhJ3AsflE=;
+        b=04Y9M7smVGIfZuRD37RFAN+n8zIhmhSdOjI/5AbvYbQHW+leZ81geZngukp3Lmlgvf
+         VRUD0uzzBfWAHjUN6aT2dUdWzCDaitsayeMnhMt1V/YUg6LNbjnsCHsh2LNIqRKeWkDz
+         nB8cPSyiHDEj+EBjwL6KPNfELmtaarBxrnUvB6IZXI2+9rHAlxJ5efJvSq4P/UAr/yNa
+         BHPy1dTtIMNpGUWlQePo6PfuiUk1Wx2QWUM2ZwfDW9+8/c+SZPJGtt3WCj/v7e+YASA/
+         ybqxPs51WjDAYt3kVrKvg9nwmY4fv7WZoXc6mzEiiso5o9pzSs/Y8aZJbjvF7+Z8ZcZq
+         HRXw==
+X-Forwarded-Encrypted: i=1; AL+hErHEK/+kZDdSPJJREvgEwHgWzVtTHNF+ZRDM07hvnySTWcVGqHzNulpgyurX5JZfUg/NP9YUKsk7SmL4X/y3@vger.kernel.org
+X-Gm-Message-State: APuU4Z8MwVG7dbQxt4A95TecK9ELEvfus61GJAA2JSj6s+vY2Y5nb36O
+	ZhCmOavIRYT/FlTyjXyUgzn9yIpe8prJG2LaL0xbKH+JrXss/ydrs5+8SwZw3xn3fBbx/4T4Nz5
+	xpkNydAv935faXcLTWXy/e/Uvl1jqD+JSsJXBJDVQY8ALnBKic6R7To9FbvYst9cpfTHN
+X-Gm-Gg: AYBFou3DvEMKFQRfkmD//4zIQBKFPmc7lnPgwo95WJcRCJKdXf4egqGM5rTeL9B2nGZ
+	+fBueHG3tEz2meZ9MDD3P47EgJY9BrCwkbxpgqsE48AtRvSQYjqfZztWsVZkPcrkIKkkBmAJdPG
+	bRKjQzNO3gm2I1bHcXJ9XLPk+tYFLJV+doVOWfPpfTb2uuBAoegko1xYWiuzfpZMO814pjYYTJf
+	gfvERRiR8KYwsogrI9+axtEVj4QvvTu0J7MHyhIHDApafz2GuzbmHpzJnYUSzNYjr8lPcmGXG+s
+	iDX5U7VeYRpKkqZqkzrelCiHi0O0Q0gBvR+C/kGssH0nVgAdXekBywtN0GC6r1MYBWKWdRgW2bu
+	GAz6NRBbZzMTSH3UW/WcxfBkI4s7ymnzSlw41vYYB0s91xVQ4GiFvv7AqX73V3vFNlGY3jao3MV
+	hg8Wf9
+X-Received: by 2002:a05:7300:b196:b0:36a:75aa:33bc with SMTP id 5a478bee46e88-372570dac20mr6107313eec.24.1794211898111;
+        Mon, 09 Nov 2026 00:11:38 -0800 (PST)
+X-Received: by 2002:a05:7300:b196:b0:36a:75aa:33bc with SMTP id 5a478bee46e88-372570dac20mr6107272eec.24.1794211897272;
+        Mon, 09 Nov 2026 00:11:37 -0800 (PST)
+Received: from [10.218.31.237] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37265c0701csm11464358eec.13.2026.11.09.00.11.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 08 Nov 2026 23:53:43 -0800 (PST)
-Message-ID: <cf7b6956-90a7-ac3b-1b2b-545f95a14117@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 13:23:37 +0530
+        Mon, 09 Nov 2026 00:11:36 -0800 (PST)
+Message-ID: <294563dc-1db3-43d0-8173-7941633bc659@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 13:41:30 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,200 +116,332 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH 3/3] media: qcom: iris: Improve diagnostics for system and
- session failures
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v5 2/2] net: wwan: qcom_bam_dmux: Assign
+ restricted DMA pool to remote processor
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+        Andrew Lunn
+ <andrew+netdev@lunn.ch>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Sergey Ryazanov
+ <ryazanov.s.a@gmail.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Eric Dumazet <edumazet@kernel.org>, linux-arm-msm@vger.kernel.org,
+        netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+References: <20261105-qcom-bam-dmux-vmid-ext-v5-0-5c7903385b4b@oss.qualcomm.com>
+ <20261105-qcom-bam-dmux-vmid-ext-v5-2-5c7903385b4b@oss.qualcomm.com>
+ <CAFEp6-3rt8yvTd-mMA6y5SqmzmF0zvrvO_Dc_w7G3QSv7oZWng@mail.gmail.com>
+ <187f3c63-5550-4a42-892e-ea660247edc9@oss.qualcomm.com>
+ <CAFEp6-2nSM6zgyrgxwP=qrE3K7aXk9cSZmhdY2F9N4Zq8SV4Kw@mail.gmail.com>
 Content-Language: en-US
-To: Dipayaan Roy <dipayaan.roy@oss.qualcomm.com>, linux-media@vger.kernel.org
-Cc: vikash.garodia@oss.qualcomm.com, dikshita.agarwal@oss.qualcomm.com,
-        abhinav.kumar@linux.dev, bod@kernel.org, mchehab@kernel.org,
-        p.zabel@pengutronix.de, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261106153126.120858-1-dipayaan.roy@oss.qualcomm.com>
- <20261106153126.120858-4-dipayaan.roy@oss.qualcomm.com>
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20261106153126.120858-4-dipayaan.roy@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: JwNa5evTUqWTxfxQuWHDTzHsMCuZdew5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDAzMSBTYWx0ZWRfX4xiUPQUuDhsT
- /Za0a7kioGyy23GcEuI2n6u0Pw91XKiTjLIHuTNQYxYx5LTQK23oYA0KD+rMEImB9z6uSPR4O0i
- 8kVq/limcWW4X/MONY2jEENN0+5gq6WSF9F49WijtEDAfTop7gXgl9yfDijttb4s8zLEv8IUHrQ
- 0hK1+djDAZ7yKorqSwc9VwEz1Vyn+Sd8vw1IjD+0tLGAUFwGORUWn+G6c66aaHLB0RzWG5XUGYy
- xOHmsJV+TevectiKYBj1ibl2yTTh9jS9BnJa9viBIE+jWZMPHJQfdv9dhDuyOTFLRLvwZMajmW3
- INLClEqkMikdfZ3yelftG/BSv3QxcK9MFypPYMPSlzbPTdPjNhWFV2FMwergj409/YbnJJFe/ya
- RZU9YWbzKciLwoHyg6mCiBkP/ZqKcLPHppHseH/vn2hr7kIakplDyLAYi9n22CPHOfLjq/PMrWH
- Gouhidn8bmPbxWufeuQ==
-X-Proofpoint-ORIG-GUID: JwNa5evTUqWTxfxQuWHDTzHsMCuZdew5
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDAzMSBTYWx0ZWRfX8Yt0HPA1i7pD
- pDjiIQFwskecEamTerdBtiGQ8R5zTTwvcC8wGvX+lQv4MSM2HrMhsGnj+JTC4aHW0UKgOC2HGtI
- Oo5V/uiZXjOsB/wh/Pjrh+Z5+jjqxPM=
-X-Authority-Analysis: v=2.4 cv=JtBkP84C c=1 sm=1 tr=0 ts=6af17c09 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+In-Reply-To: <CAFEp6-2nSM6zgyrgxwP=qrE3K7aXk9cSZmhdY2F9N4Zq8SV4Kw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDAzMiBTYWx0ZWRfXwCUisUMgNFpS
+ tup+0TLuY9OwrPyfNah1fH1UWo3wKx8ZrR2Tz+MNBNA0qM6MzH0P+UH8Ryuwjm5tku+SMNNyUUZ
+ DgnF4SRqoVk1Mi9E0tNuGyMNPKhyXw0IQZZGSQWZVfjdMf1JKdep9htyNk011eI/iHx7s7yVNvy
+ smO2ilgE2bIzlq4thGhZwUH2vY5IKRB6CKq7QVA5D/zx9Q3xQ42nclcHer70cSxKP4f3ELnUwMS
+ tZ60ZkeDzefmXTLzvTvbT6u/cevVIBnFDZqycCENf/An0uOxnkELBazL8pBBEdUwIxnX6hnqhGM
+ Tm1RzPEL0ieNfRu8e5mgSzmGx+cZY4DrzjAPrKqXP7aO9Q0kmRC60tO/UTVdqUz88zPE5qvyOP/
+ b550ev//gaQpI4r7ZghkssAZl2UtRjdWMi7SZNQiqNxd1gbIHBKy6FIfJka9ogN1sH8NJZCpklS
+ fNY8hCq7QSGOUmFESXA==
+X-Authority-Analysis: v=2.4 cv=WOjqzXsR c=1 sm=1 tr=0 ts=6af1803b cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=Fb52MO1wo91ysUZOzKQA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=DTeBQKu6t0G8_pDimUUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDAzMiBTYWx0ZWRfX4JaKcizLumnA
+ UoDVUHnunuC675z+OmryS1nzOVWBYG6y1KwoJUEwVIY4JkitAUe6P4OdSzjCFfWa28sOzKdvLOd
+ 0eBw/adscOj4NqtAtb+6r+T9jEPGNEw=
+X-Proofpoint-ORIG-GUID: DQEeNXERSS-y9e2OU0aKhq4xf3vME1cr
+X-Proofpoint-GUID: DQEeNXERSS-y9e2OU0aKhq4xf3vME1cr
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-09_03,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0
- impostorscore=0 phishscore=0 adultscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 suspectscore=0 phishscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090031
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090032
 
 
-On 11/6/2026 9:01 PM, Dipayaan Roy wrote:
-> Log system and session response timeouts, firmware-reported failures,
-> and failed recovery attempts so the cause of an error is visible.
->
-> Add debug messages for unknown sessions, invalid state transitions,
-> and successful recovery. Avoid a redundant system init timeout message
-> after firmware reports an error, and rate-limit Gen2 session response
-> errors.
->
-> Signed-off-by: Dipayaan Roy <dipayaan.roy@oss.qualcomm.com>
-> ---
->  drivers/media/platform/qcom/iris/iris_core.c              |  2 ++
->  drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c |  8 +++++++-
->  drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c | 13 ++++++++++++-
->  drivers/media/platform/qcom/iris/iris_probe.c             |  8 +++++++-
->  drivers/media/platform/qcom/iris/iris_state.c             |  5 ++++-
->  drivers/media/platform/qcom/iris/iris_utils.c             |  2 ++
->  6 files changed, 34 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-> index d558475986ff..4224feaf1caf 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.c
-> +++ b/drivers/media/platform/qcom/iris/iris_core.c
-> @@ -43,6 +43,8 @@ static int iris_wait_for_system_response(struct iris_core *core)
->  	ret = wait_for_completion_timeout(&core->core_init_done,
->  					  msecs_to_jiffies(HW_RESPONSE_TIMEOUT_VALUE));
->  	if (!ret) {
-> +		if (core->state != IRIS_CORE_ERROR)
-> +			dev_err(core->dev, "system init response timed out\n");
->  		core->state = IRIS_CORE_ERROR;
->  		return -ETIMEDOUT;
->  	}
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> index 1ce7f97d4087..5c411e69e5fd 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> @@ -284,6 +284,8 @@ static void iris_hfi_gen1_sys_init_done(struct iris_core *core, void *packet)
->  	struct hfi_msg_sys_init_done_pkt *pkt = packet;
->  
->  	if (pkt->error_type != HFI_ERR_NONE) {
-> +		dev_err(core->dev, "system init failed (HFI error %#x)\n",
-> +			pkt->error_type);
->  		core->state = IRIS_CORE_ERROR;
->  		return;
->  	}
-> @@ -740,8 +742,12 @@ static void iris_hfi_gen1_handle_response(struct iris_core *core, void *response
->  			struct hfi_msg_session_hdr_pkt *shdr;
->  
->  			shdr = (struct hfi_msg_session_hdr_pkt *)hdr;
-> -			if (shdr->error_type != HFI_ERR_NONE)
-> +			if (shdr->error_type != HFI_ERR_NONE) {
-> +				dev_err(dev, "session %#x response %#x failed (HFI error %#x)\n",
-> +					inst->session_id, hdr->pkt_type,
-> +					shdr->error_type);
->  				iris_inst_change_state(inst, IRIS_INST_ERROR);
-> +			}
->  
->  			if (pkt_info->pkt == HFI_MSG_SESSION_FLUSH) {
->  				if (!(--inst->flush_responses_pending))
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> index b82f50458fe1..d5b4b27e0549 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> @@ -296,6 +296,8 @@ static int iris_hfi_gen2_handle_system_init(struct iris_core *core,
->  					    struct iris_hfi_packet *pkt)
->  {
->  	if (!(pkt->flags & HFI_FW_FLAGS_SUCCESS)) {
-> +		dev_err(core->dev, "system command %#x failed (flags %#x)\n",
-> +			pkt->type, pkt->flags);
->  		core->state = IRIS_CORE_ERROR;
->  		return 0;
->  	}
-> @@ -929,8 +931,11 @@ static int iris_hfi_gen2_handle_session_response(struct iris_core *core,
->  	};
->  
->  	inst = iris_get_instance(core, hdr->session_id);
-> -	if (!inst)
-> +	if (!inst) {
-> +		dev_dbg(core->dev, "response for unknown session %#x\n",
-> +			hdr->session_id);
->  		return -EINVAL;
-> +	}
->  
->  	mutex_lock(&inst->lock);
->  	inst_hfi_gen2 = to_iris_inst_hfi_gen2(inst);
-> @@ -958,6 +963,12 @@ static int iris_hfi_gen2_handle_session_response(struct iris_core *core,
->  			if (packet->type > range[i].begin && packet->type < range[i].end) {
->  				dequeue |= (packet->type == HFI_CMD_BUFFER);
->  				ret = range[i].handle(inst, packet);
-> +				if (ret && !(packet->flags &
-> +					     HFI_FW_FLAGS_SESSION_ERROR))
-> +					dev_err_ratelimited(core->dev,
-> +							    "session %#x response %#x failed: %d\n",
-> +							    inst->session_id,
-> +							    packet->type, ret);
->  				if (ret)
->  					iris_inst_change_state(inst, IRIS_INST_ERROR);
->  			}
-> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-> index dd48fa750013..9cefe090466b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_probe.c
-> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
-> @@ -306,9 +306,15 @@ static void iris_sys_error_handler(struct work_struct *work)
->  {
->  	struct iris_core *core =
->  			container_of(work, struct iris_core, sys_error_handler.work);
-> +	int ret;
->  
->  	iris_core_deinit(core);
-> -	iris_core_init(core);
-> +	ret = iris_core_init(core);
-> +	if (ret)
-> +		dev_err(core->dev, "failed to recover from system error: %d\n",
-> +			ret);
-> +	else
-> +		dev_dbg(core->dev, "recovered from system error\n");
->  }
->  
->  static int iris_probe(struct platform_device *pdev)
-> diff --git a/drivers/media/platform/qcom/iris/iris_state.c b/drivers/media/platform/qcom/iris/iris_state.c
-> index 5552725c614e..bcb138ccf08c 100644
-> --- a/drivers/media/platform/qcom/iris/iris_state.c
-> +++ b/drivers/media/platform/qcom/iris/iris_state.c
-> @@ -56,8 +56,11 @@ int iris_inst_change_state(struct iris_inst *inst,
->  	if (request_state == IRIS_INST_ERROR)
->  		goto change_state;
->  
-> -	if (!iris_allow_inst_state_change(inst, request_state))
-> +	if (!iris_allow_inst_state_change(inst, request_state)) {
-> +		dev_dbg(inst->core->dev, "session %#x invalid state change %x -> %x\n",
-> +			inst->session_id, inst->state, request_state);
->  		return -EINVAL;
-> +	}
->  
->  change_state:
->  	dev_dbg(inst->core->dev, "state changed from %x to %x\n",
-> diff --git a/drivers/media/platform/qcom/iris/iris_utils.c b/drivers/media/platform/qcom/iris/iris_utils.c
-> index 1096cc4b01c3..5ca4d8e0836b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_utils.c
-> +++ b/drivers/media/platform/qcom/iris/iris_utils.c
-> @@ -78,6 +78,8 @@ int iris_wait_for_session_response(struct iris_inst *inst, bool is_flush)
->  	ret = wait_for_completion_timeout(done, msecs_to_jiffies(HW_RESPONSE_TIMEOUT_VALUE));
->  	mutex_lock(&inst->lock);
->  	if (!ret) {
-> +		dev_err(inst->core->dev, "session %#x %s response timed out\n",
-> +			inst->session_id, is_flush ? "flush" : "command");
->  		iris_inst_change_state(inst, IRIS_INST_ERROR);
->  		return -ETIMEDOUT;
->  	}
+On 06-11-2026 01:59 pm, Loic Poulain wrote:
+> On Fri, Nov 6, 2026 at 5:36 AM Vishnu Santhosh
+> <vishnu.santhosh@oss.qualcomm.com> wrote:
+>>
+>> On 05-11-2026 07:51 pm, Loic Poulain wrote:
+>>> On Thu, Nov 5, 2026 at 11:42 AM Vishnu Santhosh
+>>> <vishnu.santhosh@oss.qualcomm.com> wrote:
+>>>> Some Qualcomm SoCs, such as Shikra, run the modem in a separate security
+>>>> domain with restricted access to system memory. BAM-DMUX DMA mappings
+>>>> and BAM descriptor FIFOs must therefore be constrained to a designated
+>>>> memory region that can be shared with the modem. Accesses outside that
+>>>> region can trigger an XPU violation.
+>>>>
+>>>> When qcom,vmid is present, require a restricted DMA pool and assign the
+>>>> entire pool to both the local and remote execution environments before
+>>>> requesting the DMA channels.
+>>>>
+>>>> This ensures that BAM-DMUX mappings are within the assigned region. When
+>>>> the BAM DMA controller references the same pool, its descriptor FIFOs
+>>>> are covered by the assignment as well.
+>>>>
+>>>> Track the assigned execution environments explicitly and reclaim the
+>>>> pool for the local environment after DMA channels and mappings are
+>>>> released during remove or probe error cleanup. Skip the reclaim and
+>>>> leave the pool assigned if the remote side still holds its power vote,
+>>>> since it may still access the pool.
+>>>>
+>>>> Fail probing when restricted DMA pool support is unavailable, when the
+>>>> VMID property is malformed, when memory-region is missing, or when the
+>>>> restricted DMA pool is not attached to the device.
+>>>>
+>>>> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>>>> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>>>> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+>>>> ---
+>>>>    drivers/net/wwan/Kconfig         |   1 +
+>>>>    drivers/net/wwan/qcom_bam_dmux.c | 108 ++++++++++++++++++++++++++++++++++++++-
+>>>>    2 files changed, 107 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/drivers/net/wwan/Kconfig b/drivers/net/wwan/Kconfig
+>>>> index 958dbc7347fa84ee869439bf8b503037faab8bef..1b133c56231615269698140187ca3141dfe48dbf 100644
+>>>> --- a/drivers/net/wwan/Kconfig
+>>>> +++ b/drivers/net/wwan/Kconfig
+>>>> @@ -65,6 +65,7 @@ config MHI_WWAN_MBIM
+>>>>    config QCOM_BAM_DMUX
+>>>>           tristate "Qualcomm BAM-DMUX WWAN network driver"
+>>>>           depends on (DMA_ENGINE && PM && QCOM_SMEM_STATE) || COMPILE_TEST
+>>>> +       select QCOM_SCM
+>>>>           help
+>>>>             The BAM Data Multiplexer provides access to the network data channels
+>>>>             of modems integrated into many older Qualcomm SoCs, e.g. Qualcomm
+>>>> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
+>>>> index cc6ace8d64371eb8d00c638a39b234ee540b83c9..0e7ad62f8b4e059264e89837f296ee13c0c31c9b 100644
+>>>> --- a/drivers/net/wwan/qcom_bam_dmux.c
+>>>> +++ b/drivers/net/wwan/qcom_bam_dmux.c
+>>>> @@ -9,14 +9,17 @@
+>>>>    #include <linux/completion.h>
+>>>>    #include <linux/dma-mapping.h>
+>>>>    #include <linux/dmaengine.h>
+>>>> +#include <linux/firmware/qcom/qcom_scm.h>
+>>>>    #include <linux/if_arp.h>
+>>>>    #include <linux/interrupt.h>
+>>>>    #include <linux/module.h>
+>>>>    #include <linux/netdevice.h>
+>>>> +#include <linux/of_reserved_mem.h>
+>>>>    #include <linux/platform_device.h>
+>>>>    #include <linux/pm_runtime.h>
+>>>>    #include <linux/soc/qcom/smem_state.h>
+>>>>    #include <linux/spinlock.h>
+>>>> +#include <linux/swiotlb.h>
+>>>>    #include <linux/wait.h>
+>>>>    #include <linux/workqueue.h>
+>>>>    #include <net/pkt_sched.h>
+>>>> @@ -75,6 +78,9 @@ struct bam_dmux {
+>>>>           struct completion pc_ack_completion;
+>>>>
+>>>>           struct dma_chan *rx, *tx;
+>>>> +       phys_addr_t dma_pool_base;
+>>>> +       size_t dma_pool_size;
+>>>> +       u64 dma_pool_perms;
+>>>>           struct bam_dmux_skb_dma rx_skbs[BAM_DMUX_NUM_SKB];
+>>>>           struct bam_dmux_skb_dma tx_skbs[BAM_DMUX_NUM_SKB];
+>>>>           spinlock_t tx_lock; /* Protect tx_skbs, tx_next_skb */
+>>>> @@ -762,6 +768,90 @@ static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
+>>>>           return 0;
+>>>>    }
+>>>>
+>>>> +static int bam_dmux_assign_dma_pool(struct bam_dmux *dmux)
+>>>> +{
+>>>> +       struct device *dev = dmux->dev;
+>>>> +       struct device_node *rmem_np;
+>>>> +       struct reserved_mem *rmem;
+>>>> +       struct qcom_scm_vmperm dst[2];
+>>>> +       u64 src = BIT_ULL(QCOM_SCM_VMID_HLOS);
+>>>> +       u32 vmid;
+>>>> +       int ret;
+>>>> +
+>>>> +       if (!of_property_present(dev->of_node, "qcom,vmid"))
+>>>> +               return 0;
+>>>> +
+>>>> +       ret = of_property_read_u32(dev->of_node, "qcom,vmid", &vmid);
+>>>> +       if (ret)
+>>>> +               return dev_err_probe(dev, ret, "Failed to read qcom,vmid\n");
+>>>> +       if (vmid == QCOM_SCM_VMID_HLOS || vmid >= BITS_PER_TYPE(u64))
+>>>> +               return dev_err_probe(dev, -EINVAL, "Invalid qcom,vmid %u\n", vmid);
+>>>> +
+>>>> +       if (!IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL))
+>>>> +               return dev_err_probe(dev, -EOPNOTSUPP,
+>>>> +                                    "qcom,vmid requires DMA_RESTRICTED_POOL\n");
+>>>> +
+>>>> +       rmem_np = of_parse_phandle(dev->of_node, "memory-region", 0);
+>>>> +       if (!rmem_np)
+>>>> +               return dev_err_probe(dev, -EINVAL,
+>>>> +                                            "qcom,vmid requires memory-region\n");
+>>>> +
+>>>> +       rmem = of_reserved_mem_lookup(rmem_np);
+>>>> +       of_node_put(rmem_np);
+>>>> +       if (!rmem)
+>>>> +               return dev_err_probe(dev, -EINVAL,
+>>>> +                                            "Failed to look up restricted DMA pool\n");
+>>>> +
+>>>> +       if (!is_swiotlb_for_alloc(dev))
+>>>> +               return dev_err_probe(dev, -EINVAL,
+>>>> +                                    "Restricted DMA pool not attached\n");
+>>>> +
+>>>> +       if (!qcom_scm_is_available())
+>>>> +               return -EPROBE_DEFER;
+>>>> +
+>>>> +       dst[0].vmid = QCOM_SCM_VMID_HLOS;
+>>>> +       dst[0].perm = QCOM_SCM_PERM_RW;
+>>>> +       dst[1].vmid = vmid;
+>>>> +       dst[1].perm = QCOM_SCM_PERM_RW;
+>>>> +
+>>>> +       ret = qcom_scm_assign_mem(rmem->base, rmem->size, &src, dst,
+>>>> +                                 ARRAY_SIZE(dst));
+>>>> +       if (ret)
+>>>> +               return dev_err_probe(dev, ret,
+>>>> +                                    "SCM assign restricted DMA pool failed\n");
+>>>> +
+>>>> +       dmux->dma_pool_base = rmem->base;
+>>>> +       dmux->dma_pool_size = rmem->size;
+>>>> +       /* Track the destination VMIDs explicitly for the reclaim operation. */
+>>>> +       dmux->dma_pool_perms = BIT_ULL(QCOM_SCM_VMID_HLOS) | BIT_ULL(vmid);
+>>>> +
+>>>> +       return 0;
+>>>> +}
+>>>> +
+>>>> +static void bam_dmux_reclaim_dma_pool(struct bam_dmux *dmux)
+>>>> +{
+>>>> +       struct qcom_scm_vmperm hlos = {
+>>>> +               .vmid = QCOM_SCM_VMID_HLOS,
+>>>> +               .perm = QCOM_SCM_PERM_RW,
+>>>> +       };
+>>>> +       u64 src = dmux->dma_pool_perms;
+>>>> +       int ret;
+>>>> +
+>>>> +       if (!dmux->dma_pool_perms)
+>>>> +               return;
+>>>> +
+>>>> +       ret = qcom_scm_assign_mem(dmux->dma_pool_base, dmux->dma_pool_size, &src,
+>>>> +                                 &hlos, 1);
+>>>> +       if (ret) {
+>>>> +               dev_err(dmux->dev, "SCM reclaim restricted DMA pool failed: %d\n", ret);
+>>>> +               return;
+>>>> +       }
+>>>> +
+>>>> +       dmux->dma_pool_perms = 0;
+>>>> +}
+>>>> +
+>>>> +static void bam_dmux_remove(struct platform_device *pdev);
+>>>> +
+>>>>    static int bam_dmux_probe(struct platform_device *pdev)
+>>>>    {
+>>>>           struct device *dev = &pdev->dev;
+>>>> @@ -796,6 +886,10 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>>>                                        "Failed to get pc-ack state\n");
+>>>>           dmux->pc_ack_mask = BIT(bit);
+>>>>
+>>>> +       ret = bam_dmux_assign_dma_pool(dmux);
+>>>> +       if (ret)
+>>>> +               return ret;
+>>>> +
+>>>>           init_waitqueue_head(&dmux->pc_wait);
+>>>>           init_completion(&dmux->pc_ack_completion);
+>>>>           complete_all(&dmux->pc_ack_completion);
+>>>> @@ -829,8 +923,11 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>>>
+>>>>           ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
+>>>>                                       &dmux->pc_state);
+>>>> -       if (ret)
+>>>> -               goto err_disable_pm;
+>>>> +       if (ret) {
+>>>> +               /* The PC IRQ may already have powered up the RX path */
+>>>> +               bam_dmux_remove(pdev);
+>>> it's still unclear in the comment and commit message why we can't go
+>>> with err_disable_pm?
+>> Agreed. I plan to update the comment in the next revision to:
+>>
+>> /*
+>>    * The PC IRQ is already enabled and may have powered up the RX
+>>    * path. Use the full remove() teardown so that RX DMA is stopped
+>>    * before the pool is reclaimed.
+>>    */
+>>
+>> and add to the commit message:
+>>
+>> If probe fails after the PC IRQ has been requested, clean up through
+>> bam_dmux_remove(), since the IRQ may already have powered up the RX
+>> path, which must be torn down before the pool is reclaimed.
+>>
+>> Does this look fine to you?
+> That looks good, yes. Also, could this be avoided by requesting the
+> IRQ with IRQF_NO_AUTOEN and only enabling it at the end of the probe
+> sequence?
 
-Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Yes, that is simpler. The PC IRQ then cannot run before probe enables
+it, so an irq_get_irqchip_state() failure can use err_disable_pm and
+the remove() call and its forward declaration go away.
 
+For v6:
+
+ret = devm_request_threaded_irq(dev, dmux->pc_irq, NULL,
+            bam_dmux_pc_irq,
+            IRQF_ONESHOT | IRQF_NO_AUTOEN,
+            NULL, dmux);
+
+if (ret)
+     goto err_disable_pm;
+
+[...]
+
+enable_irq(dmux->pc_irq);
+
+return 0;
+
+Does this look fine?
+
+
+Thanks,
+Vishnu
+
+>>>> +               return ret;
+>>>> +       }
+>>>>
+>>>>           /* Check if remote finished initialization before us */
+>>>>           if (dmux->pc_state) {
+>>>> @@ -845,6 +942,7 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>>>>    err_disable_pm:
+>>>>           pm_runtime_disable(dev);
+>>>>           pm_runtime_dont_use_autosuspend(dev);
+>>>> +       bam_dmux_reclaim_dma_pool(dmux);
+>>>>           return ret;
+>>>>    }
+>>>>
+>>>> @@ -879,6 +977,12 @@ static void bam_dmux_remove(struct platform_device *pdev)
+>>>>           disable_irq(dmux->pc_irq);
+>>>>           bam_dmux_power_off(dmux);
+>>>>           bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
+>>>> +
+>>>> +       /* The remote side may still access the pool if it holds its power vote */
+>>>> +       if (!dmux->pc_state)
+>>>> +               bam_dmux_reclaim_dma_pool(dmux);
+>>>> +       else if (dmux->dma_pool_perms)
+>>>> +               dev_warn(dev, "Leaving restricted DMA pool assigned to remote\n");
+>>>>    }
+>>>>
+>>>>    static const struct dev_pm_ops bam_dmux_pm_ops = {
+>>>>
+>>>> --
+>>>> 2.34.1
+>>>>
