@@ -1,109 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794238881;
-	b=Pp7/UpWe+AQRVGHmC5em+MX2/ByFRi10NYIKMorFN8mtoukiHt0YK4YlUeqxhuixsDzT
-	 i2j7Gh48zA+XYY9/L/906mDGV2T/VPdai9CVlIWlLG4J8qPjlg4K3v/YIH2mYX6fFjRU8
-	 Qr/6/UnT29YRk+g4OxF+8hNEjlkHzyQqwYL+CGptU9y144Eaf7mNud26n6SoTu5w0gmuC
-	 nMGTyRO92rnrYiWSVct4l+qz39RDr7JThzdGXe3amjquyQpvuDWiQCU5vXjiU7kMWOyIB
-	 kfWraSjRUNxCKFPDQP9yIYhVPnLb2FVPEy634s7I8JUGRyDyVdm5UEnVFCis4t7M0sg==
+	t=1794238999;
+	b=4IGsZj8N4LlBeoq4hirrYr3MWnYagZh6Ehdn2vsnVA20fYA5+LsbMr7XuXsc/5nuG2m0
+	 VAzM8DOS0wzlECPEw0d+7z4ytPYaS2LHWfYGSL4yi4AaJYFTY5kQ2Vk1qpV5ShJxw7T6a
+	 hIdsIbcJ/UaMvYkEpgKGYKe3LWhRftWBLLPlECog9gxmEj6oZBsgPOvnQTwMye30ihRhP
+	 +0v6CKREt221g8G8uBN4b8PPtWNrhFGPpLx2uJU+MJLZGHaLJZ8vd061SuAGdoRE0mvJ3
+	 37I46fj00phMTEC6l7BeniZmdyiz8g4CksfMRH4S5Zqhbq6iR/x+EckAKWJ6Gsw1MzQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794238881;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
-	b=qyL2JtwdvqbjpyDGty1qlLNzs4OBdWLzqp+CbXQ+XOyDzeycQyIc6KCwT0xj5hPhIPKb
-	 0hq1j4663jZyylL0kn0jgFDzmf81eCA/RqswjLfTCg9PKjH5sPWKHBeKR7R2W0perhzIc
-	 LaRhEoF4ihHQuevZr2vAcpWZqg6vjgJMxwLxJs3HEdCPMedKViOdcJ+IuUq5oiaTZpyJe
-	 210T5N7ypqz/Z+XBqMSaEk+4QvocBfoNvTefuV0pww0hIZ/Pyal2cJ59LWTSjjGESSGWm
-	 Z1aQ7N+pxpOCfbZvc1OZBL2c3c4ud8ry3mCL0DEu0UGJUeWeBX7+VTmVXaLH+wGOxbw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794238999;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=cL++JI9C+4Cy1uXsxf69XJu4TXzjHGTPhlS+dkkhl1k=;
+	b=jZQVtoWoiErAtCR0adRjpd8WAGzR6/yahSLXk3jjLYjbDORmmT+6nvMcSfOSKRgN7lrE
+	 H6utfQ4+6/tsUDrK304Swt/Sfhon9vBr1lLrw0AoPsOmVRZHeHnJt89KEQ0MZ1CzORWK9
+	 ShxHSLu0cMyC6pw4L9sryRYjpWTSUCMB6rNEN/wd5hQAX8l6s+tglyee4jDsjnf/Xw9SI
+	 bM4hSQhrcxCyqWAPRtXfOGmsYtPE+8QwuvY/N08mn9N9kAivEQ245LBtW8gHpTdQsWdGl
+	 wpPY5rSulE4IFYAxhrwFdDuayyEZq8zxS0tHinmZURU1Hd2InPWhSiPa7UKh6zsCoSA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LIW+o5OM;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8ibVMl5;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HlazxI5W;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74FE3606A325
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 15:41:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 74FE3606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id DBC85606A31C;
+	Mon,  9 Nov 2026 15:43:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LIW+o5OM;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B8ibVMl5
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A9DFTZU023155
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 15:41:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=; b=LIW+o5OMMmMHLBd0
-	ZqN+Pt9cKAj5QI3KuNcKB/ZAXCK7Zja7T31Ro3zZBnx/olamMqxfRqZ+iDKxnOSg
-	RZSN9SyLbYZJ6GQu4Yoj3IOn3c5Jbfhfa8JYWJZHBAW8OC8sLSnER0lHNGCEeCFc
-	IWL6IqI+1nVCTaamsUVIfp1Nop0TdjBpT4cAyEomo9zGllM4iIF05QOxVrljU9e6
-	EdG+b3+ZeDYeS8W7XsQLujBO3K9+WD+UMXjaOhmauB63ac1Shm5BY3D9mGHzb7xO
-	g4LcooH0RjT5nmnXAZ/xOF7oohShEAjp89t8q6ZT+mXlqpMX6odtNKSDmz4Sy0MD
-	Rdf4Uw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucydgyxf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 15:41:19 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f2bdebfc5so28909485a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 07:41:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794238879; x=1794843679; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
-        b=B8ibVMl5tndTYPU4dQseBgIbignge38JEiekrVZYvYNLfj0ePjCEvcgkH8CRRO42RY
-         qJ+9qMcbcYuAnzLDWr01f8H2gQNNW+OuYlEWZ8Q3GvFBfrLEj9Pdx0K31NbwXy53Ue2s
-         JNUNdQMmRSw3nzB1knUCVvXF3iagZ25Y4BfVsuGu+dnaSU/wRa6ESr4gitoDuUzheSJD
-         WQZUdkA8xzfswUt81T9pEQqmu0FUAC/Em4p4KXnQUV44DBywMCKv9Swr77pF0uxjsSlX
-         xggmIpZYoJz/rZ4rGBbORjQPY16aDhSzShDJtbqEC1m7G5qeZwO20oKkruleqPBqJPHN
-         vgaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794238879; x=1794843679;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=15rx6dd152mXC9BolOmfr6zh9OId7Jtt7lhati6ZiOQ=;
-        b=Vv6QDxuZ4ffj0da4jyBzMaV6Q/G0wlKgknMXJhPNAiVQjKaDplQe8wN/seyKyQoSFT
-         L+bYyy01QMFjR5fmJZSobpYjTycziAytpHHgsYreAC/koawUSOIbmf8TpClCGPzMA4e4
-         hIb+4xUTHoKRMfqvo1zdscZLszSTtv7QcmHMhgnbOuwz92AuP91SXNnZ16WDXmIMPvRa
-         44VM+yYNgP+eiymobIe3ZmhpmV7eJqm4Ri5M6H0eu6gI+F2gHN+08x5i9CHPmm7GlY6H
-         MZb2aicDFQ1Sdb1Jp64JMhXW/He3x2kGi+v6aZxrg1womkj8ZLOR3YsIR+GEnQQW2DMi
-         pP8Q==
-X-Gm-Message-State: APuU4Z/tJQpXUmjoaJ9fiK6SF3BtmhQybQ0kmFRxiMLIFp2xsYmRTNzA
-	Kmk9emU2IVBxlLY6+pKdw245kZsxLl1lt7tM7tTSBD61eiU8aVusNuHouEWrKQQUAbrE3eR4FfF
-	24rkWlknHjNlTH3Pk2icrc3b/bPpKjX81UOMsKfThOx7AZqhd17hwCQND/mZJ9DNg3BcK
-X-Gm-Gg: AYBFou3mnIk9dpmhsHtjZkRh9vS0nhMX60T6yp+cVVnbA57FfR183EBIxJ8kxs87bp2
-	EPOZrgN1wq7RNy3z5KOX9GkFf0BgGcERrHzFpyq9QC7kO9ebakLxl+RsR4ZhlPeiVPXC8H4IgFC
-	jK9COFYEVu/IWS5juUjmFdXmQEixaPRiDYoDoLkvZjclyd8EacnAxHsXMsfv8PLN6QXbyxlkL7b
-	6ZwvNGFZn2Rq/46Fo9BbdhqOPPKV0R3cKFoeLKxHarH1VL2ly5+S8QQVB1IS0DII0ntUPVQ8O5G
-	838IcngXpcMI0BUB7gF0fhOiSa2uh2YRjFt+uU6SesQTuHUCrWlIsBACzqcy76Tnw5rbMaOklDM
-	Xu1iirc6AzJGLM1L7CTr3iDG64XPwALEMOtrbSx/sLmsC6rVE7bDIlR7DeFVcNveGbn5Hxg==
-X-Received: by 2002:a05:620a:a2c8:20b0:945:db0d:9cc7 with SMTP id af79cd13be357-94783fcd83amr660952985a.0.1794238878614;
-        Mon, 09 Nov 2026 07:41:18 -0800 (PST)
-X-Received: by 2002:a05:620a:a2c8:20b0:945:db0d:9cc7 with SMTP id af79cd13be357-94783fcd83amr660948985a.0.1794238877975;
-        Mon, 09 Nov 2026 07:41:17 -0800 (PST)
-Received: from [192.168.226.72] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b755543354sm33732a12.35.2026.11.09.07.41.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Nov 2026 07:41:17 -0800 (PST)
-Message-ID: <427e15a6-cbb1-4c3d-9547-cfaa08fa90b3@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 16:41:14 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HlazxI5W
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id E7FD81F0089F;
+	Mon,  9 Nov 2026 15:43:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794238998;
+	bh=cL++JI9C+4Cy1uXsxf69XJu4TXzjHGTPhlS+dkkhl1k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=HlazxI5WEzYsWkggYjXwI9aVHs5Rv1+vsftVJo7FV22BKBcQe6TkZG+6QLMtVG+o+
+	 Ex0iQ80VQLXKcU9eWg1MZEegeXd2LdQzTx1xvTmjHLXUGW5SssMjusEPxZ120eg//9
+	 /E2YW8WYL6Gt1cA14BBPaoYyaHfx8FedE1jam7J/gsViUX5OFEDzqz3GFWd6MnSARs
+	 3dYgxkgCjCUPmzo+zlEQL/2oXhzgcIwNtU0pLdAgpU2GVIpXwJRrcSyMq1z4qGyDfP
+	 ym9nUD4v0XWeUmjdsgUmE1vu3hhb2nUQmzyYAFr9NwHTzyh3YuJBdkUSw+GEz+Jvg9
+	 L7bTSDkh4hVqw==
+Date: Mon, 9 Nov 2026 16:43:14 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: pinctrl: document the Halliday Top
+ Level Mode Multiplexer
+Message-ID: <cdfwfoubvs6dvwojrjhryjejeqcpmtllu2ko7vhjcgxshgvsga@65rliahvcppf>
+References: <20261109-halliday-tlmm-v1-0-a181d54214cd@gmail.com>
+ <20261109-halliday-tlmm-v1-1-a181d54214cd@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,86 +61,185 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] arm64: dts: qcom: mahua-lenovo-thinkpad-t14s-gen7:
- Describe the HDMI port
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261109-t14s-gen7-hdmi-port-v1-1-1a691e6c180e@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261109-t14s-gen7-hdmi-port-v1-1-1a691e6c180e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA2MiBTYWx0ZWRfX2ZCXkYFY/gZS
- /hZihKWV6SxuFD87/C/xnIlPWh8fhJTTxUwZXk+O31nTRPAJbNRYBiyu6v51VjYjaChMTXMGgeG
- Op5ZArt3xgg84tn655K8UOaCuAFX9ts=
-X-Proofpoint-GUID: uuujwv1NlJAxeanwBhQegPxdz4gcfRKW
-X-Proofpoint-ORIG-GUID: uuujwv1NlJAxeanwBhQegPxdz4gcfRKW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA2MiBTYWx0ZWRfXyXKW35A6mXo1
- qMOcmsCioKsa+k946b2U09pQqC34eQL/zsLo8j3Ov4tgSFWWpQeFtgB+S6+xkSh3YmHNP/draQx
- GZg6jVFGmQBOsA9jgRy3iSe8LVyw5MYkBqSw+n9bRRUfavMlIqLs0XKlkC4QP3fmQd++MQoL2eu
- WGsjpwm1zoGZYSrWXb9Sknt++i9JHaz12lUOXg692EZQGccYBl7b/P83FRBlHEAwG5l97vOMvEq
- YFJrvV8URfrhNPzLU+l0DLazLXraCjEpP2p4iN7y6EDCb0/LTGLKqh0iI7j3Niqp1CK9tj5Pf87
- +MEVXZt7UgPsnDg+5RMWjbtms+LdU+AB8E1tiU6zErF3nZesRG8PyrGKWJYBmV6agSWA8yqiGfp
- CkUi5HAgmN0WqhW1iPldV6HuV2e3dwIEAHnGo+RAxhampr9zuhzvg9KMc//nXhSmGhT5WQ9kA/R
- QKZNW1JKOGBtiXUArvQ==
-X-Authority-Analysis: v=2.4 cv=XuRvqlF9 c=1 sm=1 tr=0 ts=6af1e99f cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=WC968W-qZJN9GzRUQ40A:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-09_05,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0
- suspectscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611090062
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261109-halliday-tlmm-v1-1-a181d54214cd@gmail.com>
 
-On 11/9/26 10:06 AM, Abel Vesa wrote:
-> The HDMI port is driven by the third DisplayPort controller through the
-> DP lanes of the third USB/DP combo PHY and a Realtek RTD2171A DP to HDMI
-> bridge, with the HPD signal on GPIO 126. The USB3 lanes of this PHY are
-> not connected, the third USB controller only serves the eUSB2 port of
-> the fingerprint reader.
+On Mon, Nov 09, 2026 at 12:28:37AM +0000, Stanislav Aleksandrov wrote:
+> Document the Top Level Mode Multiplexer on the Qualcomm Halliday SoC
+> (SXR2250P).
 > 
-> Describe all of this so the HDMI port works.
-> 
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
 > ---
-> This depends on the LDO voltage fix sent separately, as the combo PHY is
-> powered from one of the rails it fixes:
+>  .../bindings/pinctrl/qcom,halliday-tlmm.yaml       | 146 +++++++++++++++++++++
+>  1 file changed, 146 insertions(+)
 > 
-> https://patch.msgid.link/20261108-t14s-gen7-ldo-voltages-v1-1-e0ad0d528767@oss.qualcomm.com
+> diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml
+> new file mode 100644
+> index 000000000000..172de2d98997
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml
+> @@ -0,0 +1,146 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/pinctrl/qcom,halliday-tlmm.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm Technologies, Inc. Halliday TLMM block
+> +
+> +maintainers:
+> +  - Stanislav Aleksandrov <lightofmysoul@gmail.com>
+> +
+> +description:
+> +  Top Level Mode Multiplexer pin controller in Qualcomm Halliday SoC.
+> +
+> +allOf:
+> +  - $ref: /schemas/pinctrl/qcom,tlmm-common.yaml#
+> +
+> +properties:
+> +  compatible:
+> +    const: qcom,halliday-tlmm
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  gpio-reserved-ranges:
+> +    minItems: 1
+> +    maxItems: 112
+> +
+> +  gpio-line-names:
+> +    maxItems: 224
+> +
+> +patternProperties:
+> +  "-state$":
+> +    oneOf:
+> +      - $ref: "#/$defs/qcom-halliday-tlmm-state"
+> +      - patternProperties:
+> +          "-pins$":
+> +            $ref: "#/$defs/qcom-halliday-tlmm-state"
+> +        additionalProperties: false
+> +
+> +$defs:
+> +  qcom-halliday-tlmm-state:
+> +    type: object
+> +    description:
+> +      Pinctrl node's client devices use subnodes for desired pin configuration.
+> +      Client device subnodes use below standard properties.
+> +    $ref: qcom,tlmm-common.yaml#/$defs/qcom-tlmm-state
+> +    unevaluatedProperties: false
+> +
+> +    properties:
+> +      pins:
+> +        description:
+> +          List of gpio pins affected by the properties specified in this
+> +          subnode.
+> +        items:
+> +          oneOf:
+> +            - pattern: "^gpio([0-9]|[1-9][0-9]|1[0-9][0-9]|2[01][0-9]|22[0-3])$"
+> +            - enum: [ ufs_reset, sdc2_clk, sdc2_cmd, sdc2_data ]
+> +        minItems: 1
+> +        maxItems: 36
+> +
+> +      function:
+> +        description:
+> +          Specify the alternative function to be configured for the specified
+> +          pins.
+> +        enum: [ atest_char, atest_usb, audio_ext_mclk0, audio_ext_mclk1,
+> +                audio_ref_clk, cam_mclk, cci_async_in, cci_i2c_scl,
+> +                cci_i2c_sda, cci_timer, cmu_rng, dbg_out_clk,
+> +                ddr_bist_complete, ddr_bist_fail, ddr_bist_start,
+> +                ddr_bist_stop, ddr_pxi0, ddr_pxi1, ddr_pxi2, ddr_pxi3, dp0_hot,
+> +                edp0_hot, edp0_lcd_self, edp1_dpu0_lcd, edp1_dpu1_lcd,
+> +                edp1_hot, gcc_gp1, gcc_gp10, gcc_gp11, gcc_gp2, gcc_gp3,
+> +                gcc_gp4, gcc_gp5, gcc_gp6, gcc_gp7, gcc_gp8, gcc_gp9, gpio,
+> +                i2s0_data0, i2s0_data1, i2s0_sck, i2s0_ws, i2s2_data0,
+> +                i2s2_data1, i2s2_sck, i2s2_ws, ibi_i3c, jitter_bist,
+> +                mdp0_vsync, mdp0_vsync0_out, mdp0_vsync1_out, mdp0_vsync2_out,
+> +                mdp0_vsync3_out, mdp0_vsync4_out, mdp0_vsync5_out,
+> +                mdp0_vsync6_out, mdp0_vsync7_out, mdp0_vsync8_out, mdp1_vsync,
+> +                mdp1_vsync0_out, mdp1_vsync1_out, mdp1_vsync2_out,
+> +                mdp1_vsync3_out, mdp1_vsync4_out, mdp1_vsync5_out,
+> +                mdp1_vsync6_out, mdp1_vsync7_out, mdp1_vsync8_out,
+> +                pcie0_clk_req_n, pcie1_clk_req_n, pcie2_clk_req_n, phase_flag,
+> +                pll_bist_sync, pll_clk_aux, prng_rosc0, prng_rosc1, prng_rosc2,
+> +                prng_rosc3, pwm_0, pwm_1, pwm_10, pwm_11, pwm_12, pwm_13,
+> +                pwm_14, pwm_15, pwm_16, pwm_17, pwm_18, pwm_19, pwm_2, pwm_3,
+> +                pwm_4, pwm_5, pwm_6, pwm_7, pwm_8, pwm_9, qdss_cti, qdss_gpio,
+> +                qup0_se0, qup0_se1, qup0_se2, qup0_se3, qup0_se4,
+> +                qup0_se4_l0_mira, qup0_se4_l0_mirb, qup0_se4_l1_mira,
+> +                qup0_se4_l1_mirb, qup0_se4_l2_mira, qup0_se4_l2_mirb,
+> +                qup0_se4_l3_mira, qup0_se4_l3_mirb, qup0_se5, qup0_se6,
+> +                qup1_se0, qup1_se0_l3_mira, qup1_se0_l3_mirb, qup1_se1,
+> +                qup1_se1_l3_mira, qup1_se1_l3_mirb, qup1_se2, qup1_se2_l3_mira,
+> +                qup1_se2_l3_mirb, qup1_se3, qup1_se3_l3_mira, qup1_se3_l3_mirb,
+> +                qup1_se4, qup1_se5, qup1_se6, qup1_se6_l0_mira,
+> +                qup1_se6_l0_mirb, qup1_se6_l1_mira, qup1_se6_l1_mirb,
+
+The number of QUPv3 functions could probably be limited by merging the
+entries differing just in line numbers but this is how it's always been
+in sam8550 so let's leave it.
+
+> +                sd_write_protect, sdcc5_vdd2_on, tb_trig_sdc2, tgu_ch0_trigout,
+> +                tgu_ch1_trigout, tgu_ch2_trigout, tgu_ch3_trigout, tmess_prng0,
+> +                tmess_prng1, tmess_prng2, tmess_prng3, tsense_pwm1,
+> +                tsense_pwm2, usb0_phy_ps, usb2phy_ac_en,
+> +                vsense_trigger_mirnat ]
+> +
+> +    required:
+> +      - pins
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    pinctrl@f100000 {
+> +        compatible = "qcom,halliday-tlmm";
+> +        reg = <0x0f100000 0x300000>;
+> +        gpio-controller;
+> +        #gpio-cells = <2>;
+> +        gpio-ranges = <&tlmm 0 0 225>;
+
+make dt_binding_check will not raise an error because it ignores
+non-existent phandles but please make the example correct and add the
+tlmm label to the pinctrl node.
+
+> +        interrupt-controller;
+> +        #interrupt-cells = <2>;
+> +        interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+> +
+> +        gpio-wo-state {
+> +            pins = "gpio1";
+> +            function = "gpio";
+> +        };
+> +
+> +        i2c-w-state {
+> +            scl-pins {
+> +                pins = "gpio58";
+> +                function = "qup1_se0";
+> +                bias-pull-up;
+> +            };
+> +
+> +            sda-pins {
+> +                pins = "gpio57";
+> +                function = "qup1_se0";
+> +                bias-pull-up;
+> +            };
+> +        };
+> +    };
+> +...
 > 
-> Tested on a ThinkPad T14s Gen 7 (LCD) with a 1920x1080 monitor: the DP
-> link to the bridge trains at HBR2 x4 and the monitor shows the desktop.
-> ---
+> -- 
+> 2.55.0
+>
 
-[...]
-
-
->  
-> +	hdmi_hpd_default: hdmi-hpd-default-state {
-> +		pins = "gpio126";
-> +		function = "usb2_dp";
-> +		bias-disable;
-> +	};
-
-nit: order
-
-otherwise whichever way we end up merging the dependency
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
+Thanks,
+Bartosz
