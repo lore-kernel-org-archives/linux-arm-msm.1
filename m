@@ -1,111 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794183330;
-	b=NwQm1q3CWrtsBd+23SIUgscuesrTbJyRtb9T6gVW+pyY8/fIQ6rYg83u5lKUhdvcLIV4
-	 2qSzTUoFmWn7n1wCxVdrLuc1tp0foD6U0Tkg+2ZOfAyqYveOKxoA/3fttQrbgCXgZbEcL
-	 dSCFJi0Ta64JhGtT6oaavuAcv11IDz7r4v+H7Ys8DqeofzRqWTYgjmOeuvSY2IKvPWnyC
-	 qdZWcWZ0+WqbuO9HfBRlUZd5xt3f6n+u53Nx9fRMMfatQGaOiKF7y4GCZYT/re+nKSKfx
-	 DGObJsb9IjVb04DuK6G6uPvoJU0/cC7annHTlMy2U/GWgZ/mEgCu+VqV4kz/4QrVchQ==
+	t=1794184128;
+	b=Y9lrzzLnb5xJNUIsQ6mnZObqSyacbXR/KBohymqMOBd4WEvTywlyasxADj3b21+jmFPv
+	 cx3RIXN60rtjOxp3liKz+YkteKovfSl9AY1Hh58vGOBXvuL2YTX6e98/1fNGwmBFU0zsL
+	 PXJFruYK3dW2+1TJZ3cfbIy35YjhTq0lIhu4TFV06U3WAgwgZf8TSo2HQvQvEjCTlqa0c
+	 H8Rc3QjdGk+ANh8WqrwfncK5Aabpdfh+63nZTNzsOg7XA1GSdJsAKepz8HHEFKQMbpTdn
+	 hyV5Mom8xxsd6PvT55qZ98zei9wHO1a/Vi+wy0/YXMnwiYN9IkxmCFt24kClt58hwQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794183330;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=atcqyVfN1zAKYh6SH9e+X1cocOF3Ki1ITDoA9b75HF8=;
-	b=BbucwYZTfIYl/F92LpdzLq+Byybb9pIakOflwHbT+Yg03ZxBJ0sJ+QtVV3FOefpHJtG6
-	 mN5IksPEkdqgH/2pf8YDQheW8IMcN2FRTbkH4X8DWYq13TXpPmEQJ+vZXwKygnb2vdR2V
-	 o/0NF8Ag00rqNAJ/703KRNGh4S9L3m5dfI1UCDFSZUQZeErFbRMqfyIKF1tx8XezE6ECx
-	 X2AKTCU1UA8mZCG/JLCNZMZRW7HkuFVyJOtnUvmuqvsd3+nfkMF+01bKEqrP69UUUy7MB
-	 ShARZWNR538QBByE+omOEynAl6++vRgtQQaklmQxnLtG7L0+VIbWip3ZELX4YICHsCQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794184128;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=2CZ2W+FwZtB0njIn3FCn/JS7jnb+oXPr0gBpjVo1AC0=;
+	b=ccBbxmwqZ/fr8GMD0GMjwAajN9mxpAUI8ygDdIWnxYyXSCUeO8h2MERL4MTSaKvlD/q7
+	 d4R7XcVbX6N5ISEsZmdnlc/NxTLhY3v14vfVpZT1rmQnNRw5O+h3aZsO53tYnmepzWBWu
+	 zSpnF4Ta9KnJnzyfJ8x/rJt/VBZrCiLnAVL8g7J/i/DwIvaqumQ40efz7uvR/WRz03M5I
+	 82TgMXGiZpoTWcSFPhQQnEIIEb1gAxYI9RhnNWtlEf5Co7xSFwyNJ9TL5AaMOKJjLq6QI
+	 MHyPoTmuxyoG4fy4yiOxwnGX0QbZsjOssMk3dP2pb3nF+CkUOpuwTNvWf2N+clWxv0g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=bjrIIsE5;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FwGI0Shx;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VozrAUCC;
+	arc=none smtp.remote-ip=209.85.221.45
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5253606A332
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 00:15:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5253606A332
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 958C3606A334
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 00:28:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 958C3606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=bjrIIsE5;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FwGI0Shx
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A8Ke3rS3076664
-	for <linux-arm-msm@vger.kernel.org>; Mon, 9 Nov 2026 00:15:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	atcqyVfN1zAKYh6SH9e+X1cocOF3Ki1ITDoA9b75HF8=; b=bjrIIsE5UjStFi/9
-	jKbRcGHt46Hbhao8TnWpV0EYDWG6HSasU5PNU/Y9lbkxe81roSDy6Ks+5U5Fvhhb
-	e5U8c3dF+gEGi+4kzJYPMmbXX1upf1AsZ475bVN59oFMz5T+DjsAyxERqnRS2Dc+
-	VgZ4aG0Y+Iqv8r4Po1DCKblEPYiOqNEnGRiL+7X1SR37FvPJYboHmKH7aCkCqauk
-	VrrOqmNCAAqK8jV0+Y7VacOI45nswCQnMZKZw3tdqJDzVMfeCHy+tb7IHWbNx7/k
-	UObeBZHlC+xZb/pd0R6/SvfAA8it2eCJNyRZKpPIlPPy1J+qwabp5vWB+qWa6ypz
-	6b7heg==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsujxc2en-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 00:15:28 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1af203073e0so523487c88.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 16:15:28 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VozrAUCC
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-492fcbfaa88so227883f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 08 Nov 2026 16:28:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794183328; x=1794788128; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794184126; x=1794788926; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=atcqyVfN1zAKYh6SH9e+X1cocOF3Ki1ITDoA9b75HF8=;
-        b=FwGI0ShxRRkijK1Z36+klEQOsQzr/ymfICMUvSoet3RawoO0mBRpfrSQoOyMViNcjm
-         EOlTU7rEj2miDfmUcW/VPhfmqMTNQSM7FtznoLiGRFHou87hmFCQknBo6sV2HNwuhI6Y
-         KEEvwcl0UK+67N67LCbJXScZj1Jrne57V5yYHEqVqsCv69fQJDxTieMfX6KQgt6mfsM9
-         U9lfu7s1UZjROm38/ioJjF/grwkSX4pVouo9ETSnVfkmk3+29zQ9WtdB+ZAVJiW3IyDq
-         vTOT8L3+BEwxgVOBYeniUchZqlFZZDzitCBQmsfWSEit6k7bg+fOJHjw5xDSm1CgMZmt
-         pi4Q==
+        bh=2CZ2W+FwZtB0njIn3FCn/JS7jnb+oXPr0gBpjVo1AC0=;
+        b=VozrAUCCrlumMsUMuHo4TEKi3RjpViePUhLV+6ID5Mj2LSnoQwmCfOecgz/wADuJee
+         XM5oZXPS/DgjtdwE2g9LMZFndScws3MdNZeQYfjvGQfaLu7Ur58/FFjtKp9iZBVj2J6/
+         iAtUoPs74sCcPvCZ4KVh1/08EVC1W8TT5UIMfjQBfKt4kIaukNYlcryHjfJC4lZ0Ce8H
+         UaCt6fsaLRCl0oeL+hHZTq544aVb/RE1NbzE6naVMmus3eiTPIWimZ2B+oG1Cr1pQzQ8
+         PdnaS4NJzIoxaiZ4uLOU2lCTnGt6xf1/9j8i97OeqtRF0LE9fLhNbt86EP0gVq1RwiSH
+         Y4qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794183328; x=1794788128;
+        d=1e100.net; s=20260707; t=1794184126; x=1794788926;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=atcqyVfN1zAKYh6SH9e+X1cocOF3Ki1ITDoA9b75HF8=;
-        b=wXI7abO0nQgW8y1Y8v/XUFizXA+/7e4Gip4JvCGi+ixado4oIWlPEX8ZZBZsQLpOcC
-         n1ngxM3WYQkm1bzbeJB6Ai7So0kDk0A8El6wDGZZ+JJo9zkPT7+r04gYJ+UKRSkcQQjR
-         rXOC4T3eQ40U7VAFdYhCQ7Q6cGBT1PgbTebhU9jphlPUlNwcJs222pe/m3VSOwr+Bt4j
-         2/YBDxKK+pjOKihTERqZY+6HVNDGfvv/Sf0HzlNIdP4eCY6r0c4cWCmWw4LupI9Zgwy5
-         wzG0XnqqLbRUY9qtja/2kfvUNMri9pbS04sXhvgMv3W3rfgO58CwB5vSubMpK1QH/8H3
-         j/jg==
-X-Gm-Message-State: APuU4Z/kqraMm8iO7+jjJV5wPs4WvGZPDkPGCdIo+Imfkx41sWa/zip/
-	JAAJgJGE0CnamRNZ7g4doB07kLj16B+ENk4tol3gLCbugr5WnMGoculoGSh035kWu5bWox0WHkA
-	79dns3FVthQW5K0iVpd9OLp7beCwUovOOfFrHTKZiTrtMiroTZjXpdWUcysBDT7zRpazlIUQwG7
-	BL
-X-Gm-Gg: AYBFou3QAyIKMnsFswG1jvbw0KNLURTApN/my70BZimwl6SAbqqeAB7X7v7T/aWfiAE
-	xj7XVMjyekmY6oSKsGxsAQMnFOmrjTIVLr8glOtkuqVt1IhsVctnDhLR5HcD6Guoe72Aov/4KlU
-	OFBmqkbWbe42HqmPSvMp5XAsQt36Mb5yLCN6Bf2679vIDc2rhk6BQsfC/EstNZm+NeQOc2NXM8S
-	AkJVOp3sBxj3buqMWY/1OZCHP8mV+Nry+/q8yrhuNyz9mfQQXFK0Ra6Zk7jQTC5c32uL/Gg2WWe
-	55UZ8mK/3oOvxXuKzssKNG8Sh+xwaKb0awoHOUUa6fh5AFxvXMjRJVlGFYBbOGpEJsunKTDKrVL
-	/iF3EF9MtdjZO7czXvnsi3WUiKa+qicMaPPkoHLInhv50As/8E6X7/qkT4PCH1LCcPQ==
-X-Received: by 2002:a05:701b:21ce:b0:1b2:42e3:e5f0 with SMTP id a92af1059eb24-1b39fec1d99mr4134344c88.12.1794183327601;
-        Sun, 08 Nov 2026 16:15:27 -0800 (PST)
-X-Received: by 2002:a05:701b:21ce:b0:1b2:42e3:e5f0 with SMTP id a92af1059eb24-1b39fec1d99mr4134290c88.12.1794183326715;
-        Sun, 08 Nov 2026 16:15:26 -0800 (PST)
-Received: from [127.0.1.1] ([2600:1700:b450:a0df:c754:9665:1e1e:bbad])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3771ea85bsm9105109c88.18.2026.11.08.16.15.25
+        bh=2CZ2W+FwZtB0njIn3FCn/JS7jnb+oXPr0gBpjVo1AC0=;
+        b=YUo1fm5BJi0quAOmR20zrByfzrJWGXjULdAZpQKuSx47nb3P5iY5cF/gZet+PjzUv3
+         hb6iyXmq9GU3o/IkJTrAKnvEHfU3J6NvkDGZ+9GqUPwH8jFh/DziuxatWCxcNX++vSsj
+         SnuNWkA2Uhe/t+3qQ3+OtJzsFeBWLd35AuXeruZfcVHBRgyIoxmkXsfGxQqG5cK5qIe7
+         oMdeVGuU16qZ6UVDpwGw/GRzXC2ZbJ5Jqh3Ts7j9chSp9sh4NrOcqQ0izmdamSYYy8kl
+         c31YsgJaVZ7MqsVZu4Jc8jSh98XQMX0yelRehljAZBgX2DiBsxD/Xqo4oQ27SsN3OZOC
+         AZ8w==
+X-Forwarded-Encrypted: i=1; AL+hErGhqME8jgzVV8/BhU4QIQXVbQw/fEIVWJ3r/awmMeOctPscbzofTJpCGmF8Zn/MhO3DFGVxdCFMl/Iiziwx@vger.kernel.org
+X-Gm-Message-State: APuU4Z9kb2rCKrIHWiCpb99h15K8xx8CP7Jg1/02NB8FGbvbXSGvbidU
+	Tetut3yNB266KI3wAqDbrTa556AWNx3YYO+DAVEFMBeJ8KSo+DE+kXa0
+X-Gm-Gg: AYBFou1WC+rOAOIWr4gXXcBAOp0ZcibdWlZTpgiKfjO09Adk29cYFWKjVM9JFhZmf65
+	Eg3/fJKvw8r7PfmuPn0azos/xFvMUFK9U4iB0dA9a3MjQORGnpN7ApRIVzQMwG7kbi5I+duIxCO
+	jrwy6tf5CWY8bvNKsVzpCTJ1cdGFMLhiqyKgXQNRF2tnyhtJdZNOkKlG+K9duUIBVTmVKKbKp8P
+	nOhWgn5KpArKXcyf/81ga1AsiZ43DbnxhPTBasnHKeXAnzgEZYDt0Umq4qb82TWCe6H9TM9TIUo
+	8Qk+S41zo017zw7Azn50NaUf6HuHLTRt8OOQsiwsqQnbfkmwdtK4IrBpUxkJE04FrLkc1w5dw1T
+	x4b80XRPQyVsU/fnlrY1/4w6HpgYUZ77U0qqJH6uEm/gPGS3r9gAgl0YOCEevHAxZVOd7ZaMPdS
+	oPTg5jHp04zyh+V0s30P5TVmoz9xEdOYp6h3FJOAcOXySVmOmwCpJmk19hEunU2HWvYv2d8/15p
+	tovyDp5IIKRzMTbfQuXspQrTS4KxE3twVcgNeb09M0/ZWkesuVbS1pmi0UBGQgW3gEmaR4UNI1O
+	bv7AMrwNy9xkrnxV65Sm//L75tCciB+PQeRY40R/
+X-Received: by 2002:a5d:456a:0:b0:491:a219:8506 with SMTP id ffacd0b85a97d-49584599738mr2961808f8f.48.1794184125902;
+        Sun, 08 Nov 2026 16:28:45 -0800 (PST)
+Received: from [192.168.10.105] ([212.58.121.92])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49673b94dc1sm2688388f8f.16.2026.11.08.16.28.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Nov 2026 16:15:26 -0800 (PST)
-From: Jason Pettit <jason.pettit@oss.qualcomm.com>
-Date: Sun, 08 Nov 2026 16:15:24 -0800
-Subject: [PATCH v3 1/2] dt-bindings: arm: qcom: add HP OmniBook Ultra
- 14-kg0xxx
+        Sun, 08 Nov 2026 16:28:45 -0800 (PST)
+From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Date: Mon, 09 Nov 2026 00:28:37 +0000
+Subject: [PATCH 1/2] dt-bindings: pinctrl: document the Halliday Top Level
+ Mode Multiplexer
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,68 +95,187 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261108-hp-omnibook-v2-v3-1-f489fd0bdf33@oss.qualcomm.com>
-References: <20261108-hp-omnibook-v2-v3-0-f489fd0bdf33@oss.qualcomm.com>
-In-Reply-To: <20261108-hp-omnibook-v2-v3-0-f489fd0bdf33@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Jason Pettit <jason.pettit@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Proofpoint-GUID: yYARw-2CNAaTyk67eusNozN1lxX6YqgF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDAwMCBTYWx0ZWRfX2hL1ZicvkXif
- 9MVUG7MoHwZxcYbRPeJpqlGNVzP/3vYToVADFeLIhrmDpJV2MwjNCGDSj+KtDAGPkyKGKTu5g/J
- Oz7LklAU1ZaO9ufwCRzeJPHIX7Cq+flFivqJo0nJi619mfB5L9o6rpoeihRDd86H6x40VXe2fzY
- MkoTwmPQXotMLbp067e7m1xXBSD4Dh1TFRiIOoTzGJFkyA38YSK73BEvSz+zeK8vM9CwcS2gLOh
- i9ikV3RQMdbu4Am1qzEiAFSonadl31asYcd0fDaRJOCdefclsKVQeM9LZEG4Mx7XWdTH6gmwhPR
- W/ZXqYWhHV9XSLTbMfq1W89PCasIeOsP8Pd+MWOcwVR61HteUJcQAoSnGNHp/kwQ5nzICR7Kj2h
- uFdgcNnljkXVFIiBe0/gg871+AhxvIvKgCmsWdV9ZDJSxsAZolGB+idshjeovi9YWVwQNeuVWnt
- /2iAjRMuc+xLK95frBA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDAwMCBTYWx0ZWRfXztGDUu2Ntvmh
- 7SzudpDv4wnhI9LBRY+Lw5wJGusFbRY5FvsKEaazL6XOd+j24VJoUKjBjCuhbA8RQuqbn3ygEvX
- QgmwaCVZr/0unaqyMTtr9R2eR8B7C7U=
-X-Authority-Analysis: v=2.4 cv=TeIDJhQh c=1 sm=1 tr=0 ts=6af110a0 cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=ryRoqLvdJD4GBdKZh0kA:9 a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22
-X-Proofpoint-ORIG-GUID: yYARw-2CNAaTyk67eusNozN1lxX6YqgF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-08_07,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090000
+Message-Id: <20261109-halliday-tlmm-v1-1-a181d54214cd@gmail.com>
+References: <20261109-halliday-tlmm-v1-0-a181d54214cd@gmail.com>
+In-Reply-To: <20261109-halliday-tlmm-v1-0-a181d54214cd@gmail.com>
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Stanislav Aleksandrov <lightofmysoul@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794184120; l=5972;
+ i=lightofmysoul@gmail.com; s=20261108; h=from:subject:message-id;
+ bh=q9T+NC4u9aHo09uZQiFW4fqfa5/Pc9nEwP44Okd4IDE=;
+ b=EIHF9+Jd+cvdDl1qjO09afOx5BezUxOdifmNW9CWb/F63EEW94qnlfIxEliEUpuoOHF6MxgSl
+ 3j+6rojxDnsBEJ/eA8tJbuR65OnARPKDYOupJWZ9yNeAW0K47kacfDZ
+X-Developer-Key: i=lightofmysoul@gmail.com; a=ed25519;
+ pk=jeRUlfmkhE53CJPoeIIXgu7rTE0ybDRH0HQrEwbydzg=
 
-Document compatible for the HP OmniBook Ultra Laptop 14-kg0xxx, a
-Snapdragon X2 Elite (Glymur) laptop.
+Document the Top Level Mode Multiplexer on the Qualcomm Halliday SoC
+(SXR2250P).
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Jason Pettit <jason.pettit@oss.qualcomm.com>
+Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
 ---
- Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ .../bindings/pinctrl/qcom,halliday-tlmm.yaml       | 146 +++++++++++++++++++++
+ 1 file changed, 146 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index 121ca557ce1e..ff30fb4a91cb 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -89,6 +89,7 @@ properties:
-               - asus,zenbook-a14-ux3407na
-               - asus,zenbook-a16-ux3607oa
-               - hp,elitebook-x-g2q
-+              - hp,omnibook-ultra-kg0xxx
-               - lenovo,yoga-slim7x-gen11
-               - qcom,glymur-crd
-               - qcom,glymur-qcb
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml
+new file mode 100644
+index 000000000000..172de2d98997
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,halliday-tlmm.yaml
+@@ -0,0 +1,146 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/pinctrl/qcom,halliday-tlmm.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm Technologies, Inc. Halliday TLMM block
++
++maintainers:
++  - Stanislav Aleksandrov <lightofmysoul@gmail.com>
++
++description:
++  Top Level Mode Multiplexer pin controller in Qualcomm Halliday SoC.
++
++allOf:
++  - $ref: /schemas/pinctrl/qcom,tlmm-common.yaml#
++
++properties:
++  compatible:
++    const: qcom,halliday-tlmm
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  gpio-reserved-ranges:
++    minItems: 1
++    maxItems: 112
++
++  gpio-line-names:
++    maxItems: 224
++
++patternProperties:
++  "-state$":
++    oneOf:
++      - $ref: "#/$defs/qcom-halliday-tlmm-state"
++      - patternProperties:
++          "-pins$":
++            $ref: "#/$defs/qcom-halliday-tlmm-state"
++        additionalProperties: false
++
++$defs:
++  qcom-halliday-tlmm-state:
++    type: object
++    description:
++      Pinctrl node's client devices use subnodes for desired pin configuration.
++      Client device subnodes use below standard properties.
++    $ref: qcom,tlmm-common.yaml#/$defs/qcom-tlmm-state
++    unevaluatedProperties: false
++
++    properties:
++      pins:
++        description:
++          List of gpio pins affected by the properties specified in this
++          subnode.
++        items:
++          oneOf:
++            - pattern: "^gpio([0-9]|[1-9][0-9]|1[0-9][0-9]|2[01][0-9]|22[0-3])$"
++            - enum: [ ufs_reset, sdc2_clk, sdc2_cmd, sdc2_data ]
++        minItems: 1
++        maxItems: 36
++
++      function:
++        description:
++          Specify the alternative function to be configured for the specified
++          pins.
++        enum: [ atest_char, atest_usb, audio_ext_mclk0, audio_ext_mclk1,
++                audio_ref_clk, cam_mclk, cci_async_in, cci_i2c_scl,
++                cci_i2c_sda, cci_timer, cmu_rng, dbg_out_clk,
++                ddr_bist_complete, ddr_bist_fail, ddr_bist_start,
++                ddr_bist_stop, ddr_pxi0, ddr_pxi1, ddr_pxi2, ddr_pxi3, dp0_hot,
++                edp0_hot, edp0_lcd_self, edp1_dpu0_lcd, edp1_dpu1_lcd,
++                edp1_hot, gcc_gp1, gcc_gp10, gcc_gp11, gcc_gp2, gcc_gp3,
++                gcc_gp4, gcc_gp5, gcc_gp6, gcc_gp7, gcc_gp8, gcc_gp9, gpio,
++                i2s0_data0, i2s0_data1, i2s0_sck, i2s0_ws, i2s2_data0,
++                i2s2_data1, i2s2_sck, i2s2_ws, ibi_i3c, jitter_bist,
++                mdp0_vsync, mdp0_vsync0_out, mdp0_vsync1_out, mdp0_vsync2_out,
++                mdp0_vsync3_out, mdp0_vsync4_out, mdp0_vsync5_out,
++                mdp0_vsync6_out, mdp0_vsync7_out, mdp0_vsync8_out, mdp1_vsync,
++                mdp1_vsync0_out, mdp1_vsync1_out, mdp1_vsync2_out,
++                mdp1_vsync3_out, mdp1_vsync4_out, mdp1_vsync5_out,
++                mdp1_vsync6_out, mdp1_vsync7_out, mdp1_vsync8_out,
++                pcie0_clk_req_n, pcie1_clk_req_n, pcie2_clk_req_n, phase_flag,
++                pll_bist_sync, pll_clk_aux, prng_rosc0, prng_rosc1, prng_rosc2,
++                prng_rosc3, pwm_0, pwm_1, pwm_10, pwm_11, pwm_12, pwm_13,
++                pwm_14, pwm_15, pwm_16, pwm_17, pwm_18, pwm_19, pwm_2, pwm_3,
++                pwm_4, pwm_5, pwm_6, pwm_7, pwm_8, pwm_9, qdss_cti, qdss_gpio,
++                qup0_se0, qup0_se1, qup0_se2, qup0_se3, qup0_se4,
++                qup0_se4_l0_mira, qup0_se4_l0_mirb, qup0_se4_l1_mira,
++                qup0_se4_l1_mirb, qup0_se4_l2_mira, qup0_se4_l2_mirb,
++                qup0_se4_l3_mira, qup0_se4_l3_mirb, qup0_se5, qup0_se6,
++                qup1_se0, qup1_se0_l3_mira, qup1_se0_l3_mirb, qup1_se1,
++                qup1_se1_l3_mira, qup1_se1_l3_mirb, qup1_se2, qup1_se2_l3_mira,
++                qup1_se2_l3_mirb, qup1_se3, qup1_se3_l3_mira, qup1_se3_l3_mirb,
++                qup1_se4, qup1_se5, qup1_se6, qup1_se6_l0_mira,
++                qup1_se6_l0_mirb, qup1_se6_l1_mira, qup1_se6_l1_mirb,
++                sd_write_protect, sdcc5_vdd2_on, tb_trig_sdc2, tgu_ch0_trigout,
++                tgu_ch1_trigout, tgu_ch2_trigout, tgu_ch3_trigout, tmess_prng0,
++                tmess_prng1, tmess_prng2, tmess_prng3, tsense_pwm1,
++                tsense_pwm2, usb0_phy_ps, usb2phy_ac_en,
++                vsense_trigger_mirnat ]
++
++    required:
++      - pins
++
++required:
++  - compatible
++  - reg
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    pinctrl@f100000 {
++        compatible = "qcom,halliday-tlmm";
++        reg = <0x0f100000 0x300000>;
++        gpio-controller;
++        #gpio-cells = <2>;
++        gpio-ranges = <&tlmm 0 0 225>;
++        interrupt-controller;
++        #interrupt-cells = <2>;
++        interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
++
++        gpio-wo-state {
++            pins = "gpio1";
++            function = "gpio";
++        };
++
++        i2c-w-state {
++            scl-pins {
++                pins = "gpio58";
++                function = "qup1_se0";
++                bias-pull-up;
++            };
++
++            sda-pins {
++                pins = "gpio57";
++                function = "qup1_se0";
++                bias-pull-up;
++            };
++        };
++    };
++...
 
 -- 
-2.47.3
+2.55.0
 
