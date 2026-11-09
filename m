@@ -1,63 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.111
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.133.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794257353;
-	b=cFEAO0PSxDmZ2UCTNir3/C6ILwI9+b4xBKwFouANyZvWrGs+i3J4wyfQjEe0eaVDUQYs
-	 LHBZQRhrMrSzPYmAdrcDBBzcTXZyXDooN9tbtDjh0cESgoSJjycvrVxw+MRMwfe7rssah
-	 s+tX8a1M2UyKZDmBsfgaJRzOsoNHjTwyTS3sLLYx8wpn7agnC8ceH7jzi7vyiWRwfDVtk
-	 AkNqtdqz8sg6I0LJjGA1kAM0L+4mIpu2ArODRnMznttwxFbSvH6VP2VCatGrMsJTumZBU
-	 k8R6C35ZrToFzNpXNcLd8saFr3upb/IND4KhjQ/E16a4Zo6xBj/kagMhVXshzTOvF1Q==
+	t=1794259225;
+	b=beQUxl+UJLacquZcj/uGDjwiCwdIRAd4D0xJIGZ7+a7rfuIDz0+OzuoKcJVoDoPf9vrf
+	 rfgl42esqaRaXr3oB9LAprBDUETEWg6/JqDoLKbxGfKJs/1/4DFwOC7/q5r9Ok4hlnigl
+	 XUzXfwGwzCJoepr01kbN6+ZOLfa2E/+t5GQRdHd3teHMVxYFO39g1XsWxy1yDrhFgcBv2
+	 1f4PjSYliBOVoQkhPKasVzDHX5GMrn8P22TeNGzsPKrrexZ4ycvG9tIBji/JHFgTmc4dC
+	 OukPi949L/sI9pLDvgRiapiywj/G3y8QpIVACco7kGOgvMMw1zGDki8CformUVj8uJA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794257353;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
-	 In-Reply-To:References:Date:Message-ID:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=cs+bXmfUCXgKBgrn9ra6SkgURaov22hq6rM9gDfOPu0=;
-	b=Okc7PGh2Cxd6wDaHW0KVXGHi6lJevZO5BJmut+1cAr9DSaToQVZC9OnD9Ljbma94wvyT
-	 crzzbYx6xLnDCl8/qYiK8xO0N4whgNz0anAseORYbwZfCK5twcORt0r8yJyh5dPn/Jl2S
-	 QBBAcEe3+uznroaw1d/ZdEaaSjFPkVQYClF9h4AAl4UipnsOcptz5dgYyZsZ4Pjxf2sqN
-	 LSyrAuF4xtWvvaFQptiSJtlm8CE24GVmsbOE4Q2oaFv4CWZI8v3UoEPdRmn0daw7LOwB1
-	 vvcLGmo3QJqJQKC6wcx8a+V6wp5gYFA4nN/ZQnwvTLA39H6o2PyWnq3gpxa5eHW+/Yw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794259225;
+	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
+	 X-Mimecast-MFC-AGG-ID:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:User-Agent;
+	bh=jhTFBrZbm1nKNNYaIDvPlXMHWrRMWNpq39pjf8IlDhs=;
+	b=RxCvlPsi5F+pFktYygBB6m5E6X3J+BaqLkeaMWuHUxrvGYiEQrWehPPM8zhWnvk/dgVT
+	 7qYAkPAAd5pVnw06jfgR3ck88bNmuT44Ws8jHwWqdWVYnuF3Ww7loKsquiR1ia+GBmyAk
+	 Z6wLjNa3w6ARtcTryDlSjpyNzgs5yPM9vXDNGnyPp8JLpuYLAtFr1Br9u0geIuMlaVxCL
+	 9Hs8VgfrnU4iRV1uthk6XNCZin/nV7+9HuF+VYlyfZFFk2O4wXQfjCbvBG9x2V18vZpEJ
+	 SQwCjPUbM8gUReDGqXB9EZeOSjtZtszv0AHvMbUsG9YQlFEoP5bv3VWcm90amiujlXA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=5sf9CPwg;
-	arc=none smtp.remote-ip=79.135.106.111
-Received: from mail-106111.protonmail.ch (mail-106111.protonmail.ch [79.135.106.111])
+	dmarc=pass header.from=redhat.com;
+	spf=pass smtp.mailfrom=redhat.com;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hHYJAzHU;
+	dkim=temperror header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=nvL4ojAW;
+	arc=none smtp.remote-ip=170.10.133.124
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDEF3606A334
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 20:49:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BDEF3606A334
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4DFB606A321
+	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 21:20:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4DFB606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=5sf9CPwg
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hHYJAzHU;
+	dkim=temperror header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=nvL4ojAW
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1794259216;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=jhTFBrZbm1nKNNYaIDvPlXMHWrRMWNpq39pjf8IlDhs=;
+	b=hHYJAzHUmU/+h8rsgvJcMazixAF5ITT1OLim9qLZTRgStIMcisunBIuiQGEHx8zxxcq39h
+	1reGwF/2r4qYbKoJei5hn/UpiD9E+PUBdSAyWJa0x6sGTE7q95ngnjbS6y7a+qbCl/blgi
+	YxEU67tF96ryh+MyGTwK0ettvQlK34s=
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-182-99BY_RXzPDWKU_4dSC-r-Q-1; Mon, 09 Nov 2026 16:20:15 -0500
+X-MC-Unique: 99BY_RXzPDWKU_4dSC-r-Q-1
+X-Mimecast-MFC-AGG-ID: 99BY_RXzPDWKU_4dSC-r-Q_1794259215
+Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-8b35b88aa94so20228047b3.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 13:20:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1794257349; x=1794516549;
-	bh=cs+bXmfUCXgKBgrn9ra6SkgURaov22hq6rM9gDfOPu0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=5sf9CPwghpXHVDv5iIBVjHr+8nCs2SH9VJF7KutadA6haNVG1HvaQPdGUrCxAZpC2
-	 3s+6XD+2i1wi6IO+XCrSZ/F8iLVgOcnEg3LqkUJGVTGx7YI8rw69SlPxONGUy2FU7x
-	 gVFnfdu0E+KJl94a+l/AO4CS4orsJwFd53BdMVhHOz1IYX5z9Xa7qHML2wO6vQVfxN
-	 Y+oC8VKmUarsXfRQ49YDW5UlFBHp68N0YngCG/8KL8+ZLHHEjDh9egrLI1KpXm3ADC
-	 JJE4um0se8xvF1a5aCpoxL4r9r3SW6hJLUKPNHIT9wKuIatfNavP0+XGqJpZO40PLP
-	 6SEOvmknEALyQ==
-X-Pm-Submission-Id: 4jNhhx0phjz1DFF6
-From: Michael McAllister <me@michaelmcallister.org>
-To: robin.clark@oss.qualcomm.com, lumag@kernel.org
-Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
- marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
- linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] drm/msm: avoid an unmatched fbdev IOVA pin
-In-Reply-To: <179424371125.96483.2462884435294600442.msm-fbdev-pin-leak@michaelmcallister.org>
-References: <179424371125.96483.2462884435294600442.msm-fbdev-pin-leak@michaelmcallister.org>
-Date: Mon, 09 Nov 2026 20:47:01 +0000
-Message-ID: <179425722110.3461.10554987541005946397.msm-fbdev-pin-leak-v2@michaelmcallister.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+        d=redhat.com; s=google; t=1794259215; x=1794864015; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:content-type
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=jhTFBrZbm1nKNNYaIDvPlXMHWrRMWNpq39pjf8IlDhs=;
+        b=nvL4ojAWxrXG89Ui2evwQkpj4Vt0M0P4HWpUBwQov0ihCLpMM6dNoDqHWIasA0fyp4
+         HOYZlTmGJXjZ6lEfq9VfTIFeUlBQcxqSRzn2XncQntUdL7A3MBjSt00y1xU4M5lnx8Cl
+         YHGJF8HROCW9zVJvoZcZBdE7iR86exw61q36NzkHB4JtVmUjMXsp7p112M9PFZFytjON
+         oB/CKDRkSBq3Pmhss5ZmbEjxSBeGkqMb7ozaWd4m4acgROrf4H14VZ1nw1YUWr+nGRHq
+         V0bYcRyHqKe0dbU/MgM9aS1P/Zl0FfvlxEexbn49TtLsXe/N4auLRoTLOtppETb1nwyQ
+         mwPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794259215; x=1794864015;
+        h=user-agent:in-reply-to:content-disposition:content-type
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jhTFBrZbm1nKNNYaIDvPlXMHWrRMWNpq39pjf8IlDhs=;
+        b=rQQUNGQUkBmd8v55bfsEUgORBsbiYCoPDWqWqoXebaciLLFBxCAcCIuMun00a8RVK3
+         h8MTofJ/QMAh/WIY0K43w32ZvY+vE6RFp0Jfo8x5Ws6h9GiCzDW8bBvwAowTazbJZnMU
+         7jsU0QexeCv3cNjciVwZCHHtY4v9nhJnPMvVs1PfIIIlWx3IGtolB5mt205iWdz3CR5X
+         TBXR/HcD0MmJKwLje5HSbSsQLt25bZHamkCuMoq5SeiGYutuuDdrrsxSV5PatyvBVy0s
+         uRk1xI7DB+NCxAyG1fv0KffrWt3XSje3AFFoEoaH/Viz+i9zHr/0Ipb597rzPH9UcPmP
+         td9w==
+X-Forwarded-Encrypted: i=1; AL+hErFLM4AtG8Rg95pscd1N58Oe/talCHTninZyYjJGukuu9UbMqwfuWu+lF/4QjbcCNt7jSTzVasm3xaBKfuIs@vger.kernel.org
+X-Gm-Message-State: APuU4Z9/of8HMkgLV5Is9i6EFPhwnh+UP5OsjgTp3fwptQgYBQ99q15H
+	RNcdNF7gpU4MhYSyguilLh+ii1GodaxW1tAymJYW5B5YSIGlvN8t5DGz4zLptsgtwtY5Wzpj+W8
+	fiN2J/taVdQ4hMR49sKYUywuaIz+n+RdHVr2gLKyeFYHTUBAxuSGGS3/fD76SDrmu2x4=
+X-Gm-Gg: AYBFou3nruZK5GAEF9RClSETEbpyWdSBq0YD27DE+6Uncr42F/QPc7NOf6p+332l0S5
+	xNtveWd2fAUNcrLdEfyG4MJes5gi0Hj4okVLeE+sAHJoXb2rGQ7VANbG1etMZMI6MQyCkNbJKxl
+	Zbkc70TJbJdzl8nUM5uHmycINM5G0t5lVltdUoMxoFX9wwLsyjT11BwUiRpxZrTO5BuF5Atw1x9
+	KkwsARVAqVTb4ataMMe/YBeZzJN1FBrVJbSbNy0l+enOKc8jFSOPe2W9hykb7A6ywQA517LEQ9b
+	3LMvzBXw9NNue0uVudPNRsr7wnmlBtciYx6yA9JV2+RRk+3+5WwuO/pj22u1BBAzGvsL1F5lRvP
+	Hx4na8qvLaM+prMXmk3ygtezACuL/eMRSrXtCf1fIzJdPXMkH3M9/INUxhopM//NpzajLgvlw4N
+	r8
+X-Received: by 2002:a05:690c:a055:b0:8b0:d468:e9ec with SMTP id 00721157ae682-8b392bd0c0emr2841717b3.105.1794259214863;
+        Mon, 09 Nov 2026 13:20:14 -0800 (PST)
+X-Received: by 2002:a05:690c:a055:b0:8b0:d468:e9ec with SMTP id 00721157ae682-8b392bd0c0emr2841517b3.105.1794259214432;
+        Mon, 09 Nov 2026 13:20:14 -0800 (PST)
+Received: from redhat.com ([2600:381:e227:64a:814:7bae:8aaa:cea9])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b3933c59cfsm3832747b3.17.2026.11.09.13.20.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Nov 2026 13:20:13 -0800 (PST)
+Date: Mon, 9 Nov 2026 16:20:11 -0500
+From: Brian Masney <bmasney@redhat.com>
+To: Mark Brown <broonie@kernel.org>, Peng Fan <peng.fan@nxp.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Chanwoo Choi <cw00.choi@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	linux-kernel@vger.kernel.org, linux-omap@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, patches@opensource.cirrus.com
+Subject: Re: [PATCH] regulator: convert to subsys_platform_driver()
+Message-ID: <avI5C2UFcxKF_LoG@redhat.com>
+References: <20261106-regulator-subsys-v1-1-1f91f4204bf5@redhat.com>
+ <1b56983f-f88b-453e-bd8f-8189c3f79d1b@sirena.org.uk>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,102 +124,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1b56983f-f88b-453e-bd8f-8189c3f79d1b@sirena.org.uk>
+User-Agent: Mutt/2.4.3 (2026-10-09)
 
-Unbinding the display on the Moto G10 produces a pin-count warning when
-the console framebuffer is freed. The fbdev probe takes an IOVA pin,
-but normal teardown never drops it.
+Hi Mark,
 
-Reserve the address with msm_gem_get_iova() instead. Scanout pins the
-buffer while it is in use, and the CPU mapping holds its own pin.
+On Mon, Nov 09, 2026 at 07:14:12PM +0000, Mark Brown wrote:
+> On Fri, Nov 06, 2026 at 07:28:46PM -0500, Brian Masney wrote:
+> > Reduce boilerplate code in these drivers and convert them over to use
+> > the macro subsys_platform_driver().
+> 
+> This doesn't apply against current code, please check and resend.
 
-Keep a VMA reference for fbdev so deleting the temporary GEM handle does
-not release the reserved address. Drop that reference on probe failure
-or when the framebuffer is destroyed. This also balances the existing
-error-path VMA put, which otherwise drops the handle's reference twice.
+I see that Peng already posted a conversion for regulator. Based on
+what's in next-20261109, it looks like there's 4 more drivers that can
+be converted based on what I have in my patch.
 
-Get the CPU mapping before publishing the framebuffer in the helper, so
-a mapping failure does not leave helper->fb and helper->buffer pointing
-to freed memory.
+    drivers/regulator/qcom_rpm-regulator.c
+    drivers/regulator/qcom_smd-regulator.c
+    drivers/regulator/twl-regulator.c
+    drivers/regulator/twl6030-regulator.c
 
-Fixes: 7ad0e8cf6317 ("drm/msm: Count how many times iova memory is pinned")
-Signed-off-by: Michael McAllister <me@michaelmcallister.org>
----
-Hi,
+I'll post a v2 with just these 4 drivers.
 
-Changes in v2:
-- Keep the fbdev VMA reference until teardown and balance the error paths.
-- Get the CPU mapping before publishing the helper pointers.
-
-Thanks,
-Michael
-
- drivers/gpu/drm/msm/msm_fbdev.c | 27 ++++++++++++---------------
- 1 file changed, 12 insertions(+), 15 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
-index dd6d6c507d..ed599884bf 100644
---- a/drivers/gpu/drm/msm/msm_fbdev.c
-+++ b/drivers/gpu/drm/msm/msm_fbdev.c
-@@ -48,6 +48,7 @@ static void msm_fbdev_fb_destroy(struct fb_info *info)
- 	drm_fb_helper_fini(helper);
- 
- 	msm_gem_put_vaddr(bo);
-+	msm_gem_vma_put(bo);
- 
- 	drm_client_buffer_delete(helper->buffer);
- 	drm_client_release(&helper->client);
-@@ -137,15 +138,18 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 		goto err_drm_gem_handle_delete;
- 	}
- 
--	/*
--	 * NOTE: if we can be guaranteed to be able to map buffer
--	 * in panic (ie. lock-safe, etc) we could avoid pinning the
--	 * buffer now:
--	 */
--	ret = msm_gem_get_and_pin_iova(bo, priv->kms->vm, &paddr);
-+	/* Keep the IOVA reserved after deleting the temporary GEM handle. */
-+	msm_gem_vma_get(bo);
-+	ret = msm_gem_get_iova(bo, priv->kms->vm, &paddr);
- 	if (ret) {
- 		drm_err(dev, "failed to get buffer obj iova: %d\n", ret);
--		goto err_drm_client_buffer_delete;
-+		goto err_msm_gem_vma_put;
-+	}
-+
-+	fbi->screen_buffer = msm_gem_get_vaddr(bo);
-+	if (IS_ERR(fbi->screen_buffer)) {
-+		ret = PTR_ERR(fbi->screen_buffer);
-+		goto err_msm_gem_vma_put;
- 	}
- 
- 	DBG("fbi=%p, dev=%p", fbi, dev);
-@@ -159,11 +163,6 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 
- 	drm_fb_helper_fill_info(fbi, helper, sizes);
- 
--	fbi->screen_buffer = msm_gem_get_vaddr(bo);
--	if (IS_ERR(fbi->screen_buffer)) {
--		ret = PTR_ERR(fbi->screen_buffer);
--		goto err_msm_gem_unpin;
--	}
- 	fbi->screen_size = bo->size;
- 	fbi->fix.smem_start = paddr;
- 	fbi->fix.smem_len = bo->size;
-@@ -179,10 +178,8 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
- 
- 	return 0;
- 
--err_msm_gem_unpin:
--	msm_gem_unpin_iova(bo, priv->kms->vm);
-+err_msm_gem_vma_put:
- 	msm_gem_vma_put(bo);
--err_drm_client_buffer_delete:
- 	drm_client_buffer_delete(buffer);
- err_drm_gem_handle_delete:
- 	drm_gem_handle_delete(file, handle);
-
-base-commit: 1e59855738454b14021b64115f0090eafc7526ae
--- 
-2.39.5
+Brian
 
