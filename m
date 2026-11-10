@@ -1,117 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794334374;
-	b=tbia3PxeTTTvfYg6bm/Yv1glc0IoA9k8CBpbmWvsNvCnu0hSFqNFbhDJ+Di7ZgNjgaDM
-	 mI+4p8vRO4HWT5O5pzU+QQgvHIF+YEyvEDi3Fq854mCzw2z2TrWkhyrbvFiM4tAndlt81
-	 jRYnFybYLnzdWBTga9WBndqDC75jMHX4xMI4B/lHOoVhl0tZUOMZNfx5zvR/Iyj8agDNB
-	 Lt9sPILaP+YJNzJ0396oE4rXLieoiRE3PR7P5NGcHYxnlqofR7hMJye3PGLe9hz8ox35N
-	 FP5Ux9lvd1FYXVHcJtKxuHWX+FpRmPlsxPB3brUyjMyOD6LE6ezyCTbVq4NLvGVOjyA==
+	t=1794337090;
+	b=Jhq+0xBlX/xt7+tmywizo0x7yZ+ZRLY7KYQAWWUajCbhCMFJrJh/qXeeMPs4joZVYm3u
+	 8pyd0pfcGbO2WyRaL41P6JCZqsb5KpZc5TeblMHVDUoY9gpOapnhV9IU8yOxgIV3Yfn11
+	 HVa5J0tVJQOjZmzBZJL6jW2PZe7lUEFq6sDC0Xmitb7R5DrLFQ4eQrcH6ZYeTB/fc/ikj
+	 iaLZoci6lvfbG42QHg9Vu/XwmMpiwPcRY+I5d0r9YVlej5gw5uXrsle1m2WNT7wz3NDDv
+	 Jn3HzNAi58ppYUhQnUHjsYR3VoZetVMVyKN9Y2za4M4L1DcECZZFP3FcwL9JOjF6bHA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794334374;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794337090;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=68pKDA1p2LdEONMliWN80HdZe29k8kOJYDnRCJeXxak=;
-	b=xUoFe0WgTt3Tcn9pHfs8YB4B6CyGOh3ZUMHqePcjWzj4CTjyjVl0HLQMl50k6NziFa9C
-	 Nkx/A4ajzwqIjsZxqEvblS1HKmjvsI1iNxJLqppkymu8QW6cLrhP4ztAibccv3hzzDxPq
-	 QjOtUsWKo6aFIuAxAm1VXjzJSbVAjHj7n7/G9c34DvSHIWtDXrxTIe9fr8sKBBpIIYBUF
-	 UxlNcwnalh/y/rJqjCMYp/G8VBImeWRiEyfACrX2jj3D42cdwhMPZBw68QvO/fEQSKxq9
-	 9lzFyZfxL7Xut2nVu3Mu8g6R2KTx/tMLJHVWYse8xjszILAXq3Y4iJC90f3eEDTJOZg==
+	bh=uax/a+Cf5PnYF3LAag3fOWDgi1ERLoTCpA7WArwoVB4=;
+	b=C3GUqJKYx+NVCIIeVvRTjz52qnZPsiBCUIIYy0QcN75eRtUexd1K8Q1EnSN6fG6IR0Pp
+	 R5T/LRr8vKJr//JNXboFI9C8V09lgfz7LSFnZxK3KFeBe4rOF37DH4vRXDTDNW6rJ5O9N
+	 GLtMjRFt3P5w4RXu7LHD2aruorcZoipqRRbLTR1mfSpakf9rZ/8WETRDfWux0XB+BkgxU
+	 UQoxVJz914FqrcVTg+XQi51zqNXLJUQyeAU9BmNkiOCOk9lStUHIo8thf7vLEOgdT3fT3
+	 8Dns84HtdXl+SbbLuibXxh59qKwecx9zlOT6eEvvbe/7GBOhwv8CA6TmhDimUaG/hEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tS5pn8Yi;
-	arc=none smtp.remote-ip=209.85.219.47
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hC8j81W4;
+	arc=none smtp.remote-ip=209.85.222.171
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C94D9606A320
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 18:12:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C94D9606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BC7760A2609
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 18:58:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3BC7760A2609
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tS5pn8Yi
-Received: by mail-qv1-f47.google.com with SMTP id 6a1803df08f44-91ec08f71daso17846796d6.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 10:12:53 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hC8j81W4
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-93e64d52949so207652785a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 10:58:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794334373; x=1794939173; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794337089; x=1794941889; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=68pKDA1p2LdEONMliWN80HdZe29k8kOJYDnRCJeXxak=;
-        b=tS5pn8YiT64Zd9lexBBZTQYgUn0ddUenE2ATM8vMaZ1MPspNzyROAIXQHAXOUwIrac
-         5FpzRX+iTDtkR0zhccjnG59AFXZKzj5UpgnP1iJEC7nuuC0xu4MQ+0Bd9LfClbfc7uzf
-         IMovpPts3lyTygm2Ue1nDT7LhW2xyvsJBoT9t1XlD7OD9gf8XGs245NMk6TLlfaA5Cmu
-         xwKxenpVK3Xr4KOyt6vXpwBuiKn6psxaZ0Y+AZf8RVc611D6x4COmbVGw6l62uSOxQp/
-         i9Vg/iUhtOmE+rJlBiF/9c4q7ZO9RzeqsPBF0emRYoDIN83Wcx0wOJAbsg56/bI0AvQ0
-         j5LA==
+        bh=uax/a+Cf5PnYF3LAag3fOWDgi1ERLoTCpA7WArwoVB4=;
+        b=hC8j81W4XVy6GM6NSCd0k/bnKZL9dDfHbCnjIHZEMV4YCCxJo+rbG8Q2gJ1ziBpLGq
+         b/WGl7uM+GbW0ScCbcGRV81gVeRTeNgz0MizF5kMHCM5ZPPdbitL1rbaLNattI6y9fcm
+         0DpQSnY4WXKFOr6Wn7dT2dmcAELqKsJEKzR++vApSbK2g+bqtAQ3mQs5BCzW7QtRSntj
+         GWWCQkNu74fERR+RfULkWg5huVt0eR7NbF0yCDO4S9QOY3TsdNE17R5IVmsDeMYlMoLP
+         36wy31vJ31vDKQ9MKJyqWq+R6e/unEw5WoidBXKtWmZIODw2TxbkPGzvtWf17iNMm5uC
+         b7ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794334373; x=1794939173;
+        d=1e100.net; s=20260707; t=1794337089; x=1794941889;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=68pKDA1p2LdEONMliWN80HdZe29k8kOJYDnRCJeXxak=;
-        b=ccUWZHNrFAHf1pdM5VR0Oah5kg6rjgg/zvEo+YsC8b40uFgsmLEWU0M5CTIb4gD7R7
-         ++VTHLH+A1QO2Qsb9LW/bbpcA/GsrdBHCc9GjdUh77MUFRVviEXcihqCfpifg4hjQCSp
-         3MDLn0gykaWs5F+yWXCGirWRhvqeijwmH866de05MKpU6qia3ArS2CW3jLhVrtc3+qXz
-         BwjyMFpLLset0S1RHeAF11XAzaHGJ1ZHO8D3/hpPAzNrPr31/h6ea4+T6YOphdtXT5i+
-         7nLxed2h+5HjhgDxe905dF2+2z4cgkhO8eRdvdOH7JG0/TPEuRJWHyc9dOtXyywCQM38
-         RXww==
-X-Forwarded-Encrypted: i=1; AL+hErFnGX7s47nVHD8j30fkDItn3YpoKSo7irHt4BmbLq5rmyAFUsXtRN8gDQd+4eDF25leghepbTM7rfST8sq/@vger.kernel.org
-X-Gm-Message-State: APuU4Z/7/OrrWSCnWVinNDHlCV41mcYQmINdhcDYnYu7ZXavgxJvhKh/
-	Bj9gL66zCDDiKuFdJZyRQOOdhBwqYe65xNOAPNZTa+5h+BZENE2eCVPf
-X-Gm-Gg: AYBFou2ve0WtQq4Gg3GC+BaX1MctZX1nREV0ZpsLAzBP8eWCPviggz02r8yAbnxoLt/
-	QviXBxtP24cMlGaUnhxe3UFsZn0xwiLy1T5Gp/BNjxofTwMwdj3x8QldJBUae1O/8x4e2h+V19z
-	LSh8TQpva2u6vQWQuZb3I8QS1X0JP9IIpUgvRgghByDpHRCmztlUTHUDzy+g1vIqa6FmF/VQUEv
-	sBAoV4BLaxsaywUJ1KuneZ3dwjTL+cT27wo85/cTMaN1A3kImfp7gbTEC/buJrLeBDJMQse4vVr
-	S2rIegLzFRey/4xOJqvR7olJDxNlclOog1CgTWHBYEL2SOT7mk/VNsoHLxtNyzVe4xPLgA/ifr7
-	LU1/HbLpadKoqz5Mow2yELxbFc0kDAZdQo56VIGecEjkc4PUMHuV11+BBib/56Oqix43tBU3h6M
-	5KVoSxKNZD+ccZoWLNMbI7UiMJGc88MasOFhrdIyOx7aQO4WP7o729B6jytErY3GCWFbbYIH4Vk
-	pPNzNvUf5DSN4l39ZUlXsoWimfc/1vPXnPsU3whR1jxPdQfWhGHLC8VfIXxwsv/F0+M20QrpfP4
-	ctClCKGoig8MGTouJge1czbjcHElSTWSGVQzj3W4aUYUIDEhxK2D6siReoI7n5Wiym8K8F5zcrV
-	SkibbOinNXvBm80QggY2HvDHfFHnoQ7U40B4kba3KorSmZfseteWS8d8bq61jd5xlDnwHQytASC
-	4ccutKlVogJVtVOE8HTm1klnmsdqxDmR87V6ZzcsZFLIZBE6rcbqIG5UNDypzQgNISGe2alZoJL
-	Vr4ENsAIFoeZ7cf1u+9QAcv97Gw9NnPkd1fq4Rgd9VqiA==
-X-Received: by 2002:a05:6214:238e:b0:91e:9db6:c324 with SMTP id 6a1803df08f44-91f041351bfmr1113006d6.40.1794334372476;
-        Tue, 10 Nov 2026 10:12:52 -0800 (PST)
+        bh=uax/a+Cf5PnYF3LAag3fOWDgi1ERLoTCpA7WArwoVB4=;
+        b=j6TYb2jxoatPHYnXcSAZtNS/EW+MFcEieoHjCAMi5USuowNO2Ajx9xPjnPyN4nYPFo
+         nENKw02ZppTUIlEBj4aNvdw37FmGlkuqnFPpNMvZRM3YcAoaXAxjwrlflq0jxRyXmZwk
+         m4EDkWY5YTaH4HydI7gc+xzP2nrpo3A9sktCVCDf5W/0vQCu8hqAdvCAszmUlZhJSe2+
+         0gKFblwu5XG1+AUl6v8R7jnUUJ6aT+lqic1Y0WD6EuQqnwiqiRjhMZ51VSs+Ik8sZxPd
+         10zjzcmtaUiXX9lNWEtShNyynfghPbVYp5MPdHhZy6okXmwcVF94to7F7Q7i67yWzaR9
+         TiUg==
+X-Forwarded-Encrypted: i=1; AL+hErHD/dTbb8q/LIvH8yvDTYbXpYZwGiWg9n3EKezJACms9nT9iS3CY+BK7lnzF43pxKq9dc4R5S5qPYG7JJPb@vger.kernel.org
+X-Gm-Message-State: APuU4Z/gYoFUVL1Apdoo0ilZDOehfnGEp/ota9OIRcSnAVuv07thS7t+
+	bG2j9F7CX1ncq9swzdJKxwyKhYdZOus73BdQ4qmfSs5XBYodB/q/cnbo
+X-Gm-Gg: AYBFou3sG0g05bBxX+Tr+/yFLzvBC5TVinSiUMekIUAjq2aiEsX1zH5JFBKBu5jyJsd
+	abvViXZuqMiyAsgtEOe8bmy9psBQIXFWmlXzbDw4i4QPwUV+0G782kEk297n/su2F32y7QPSWAf
+	VcE89ltNxT9iy9SCZkejlPlBtfBggT2HXz7kxl8HNHlcBTStOGE1auV6tCMdjwvuyrxyab0qBYG
+	EH8aSOugBZ/+rIE6nTbhwPqaUWfdIIe8WNkJyP60HhP4hmExyxyRzyHDrgqZ2FRvGkU1uxhzRVq
+	zG5YYbtDdjT6zpbN6WCJ3jiPoGf3A7suZSRACm4hXtQLOugTNB7TEPdUxkHLTI2Ax5+JCZ81XLz
+	dzrxjF8+WgU4YqAE13ZnSl8IoheBtm1uV5IM/EMvhCe5RpZ/D0wzqU0qNeIO7JDeuwihAfGtzRo
+	c1UnY2lDnADCRZ9bow4aGsFwd0WPD+IGSgM7CMhBE6ZKCIjbjgthllzr+ZozEqQdM4nb779DP4R
+	YWpGQMiFFLVlGGgkaA77vYG2V7gxrOTTOjOxOAXPnKztF1eLMvYhxkB7ZT/twoRLwDMo8iWBLi4
+	9vDhaw49+R9BtIRStn32to9v994e95/4sU08MX9/Ea5ziZFR1hRY4RHRLJbi57dqB8W/yVr481h
+	/rxCGuIpEEiqfpMQsSG3jiXjQalB/UTiHuFYoZDUHxP5ENemO2NpNkojtXua4dtHDgzOyUDxXFZ
+	SpNzifRHhB2FpBuDfoJbK+KZSqSlt615SaeRjxVwN2rr0Pe/JbB8LxGO9xFJazCzK9dJLVV29Lu
+	Ck1P2UH0t1T1LT7OUZ++n2eW7UV9MJIhCH9iB8rLN1oBQ==
+X-Received: by 2002:a05:620a:4041:b0:93e:c12c:f127 with SMTP id af79cd13be357-9479f38d707mr575616785a.83.1794337089011;
+        Tue, 10 Nov 2026 10:58:09 -0800 (PST)
 Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:940a:c6ea:f292:3644])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f017737a3sm4800156d6.8.2026.11.10.10.12.51
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9479e619affsm290954085a.4.2026.11.10.10.58.08
         (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 10 Nov 2026 10:12:51 -0800 (PST)
+        Tue, 10 Nov 2026 10:58:08 -0800 (PST)
 From: Jesse Casco <jesse.casco@gmail.com>
-To: Rahul Samana <rahul.samana@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
 	Marcel Holtmann <marcel@holtmann.org>,
 	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
-	Rocky Liao <quic_rjliao@quicinc.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
 	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: linux-pci@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-bluetooth@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-pci@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	quic_mohamull@quicinc.com,
-	quic_hbandi@quicinc.com,
-	quic_anubhavg@quicinc.com,
-	Vivek Sahu <vivek.sahu@oss.qualcomm.com>,
-	Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
-Subject: Re: [PATCH v2 2/6] Bluetooth: qca: add QCC2072 support
-Date: Tue, 10 Nov 2026 13:12:50 -0500
-Message-ID: <20261110181250.47751-1-jesse.casco@gmail.com>
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Wei Deng <wei.deng@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/8] Bluetooth: hci_qca: Add M.2 Bluetooth device support using pwrseq
+Date: Tue, 10 Nov 2026 13:58:04 -0500
+Message-ID: <20261110185804.56861-1-jesse.casco@gmail.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20260727-rb3-industrial-bt-uart-v2-2-2d100f30e202@oss.qualcomm.com>
-References: <20260727-rb3-industrial-bt-uart-v2-2-2d100f30e202@oss.qualcomm.com>
+In-Reply-To: <20261005-monza-wireless-v7-1-5a6de7662dcb@oss.qualcomm.com>
+References: <20261005-monza-wireless-v7-1-5a6de7662dcb@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -123,24 +119,14 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Tested patches 1-3 on an ASUS Zenbook A16 (UX3607OA, X2 Elite), 7.4-rc1
-based. The controller (product 0x20, ROM 0x0101, board ID 0x17) now
-loads ornbtfw11.tlv, ornnv11.bin and ornbcscal11.bin instead of falling
-back to ROM firmware, and a phone pairs and plays A2DP audio.
+Tested on an ASUS Zenbook A16 (UX3607OA, X2 Elite), whose mainline DT
+connects Bluetooth through the M.2 E connector (W_DISABLE2# on GPIO
+116), with the QCC2072 support from [1] on top. Without this patch
+hci_qca asks for a "bluetooth" pwrseq target the connector doesn't
+provide, W_DISABLE2# stays asserted and reading the version times out
+(-110). With it, W_DISABLE2# is released, setup completes and a phone
+connects.
 
-With the mainline A16 DT (M.2 E connector, no Bluetooth node), patch 3
-creates the BT node, but the card only powers on with Manivannan's
-"Bluetooth: hci_qca: Add M.2 Bluetooth device support using pwrseq" [1]
-applied too. Without it, hci_qca asks for a "bluetooth" pwrseq target
-the connector doesn't provide, W_DISABLE2# stays asserted and reading
-the version times out (-110).
-
-One of five boots failed: the rampatch download timed out
-("command 0xfc00 tx timeout", "Failed to send TLV segment (-110)") and
-the "Retry BT power ON" never completed, leaving BT down until
-userspace powered it on. ath12k was bringing up WLAN on the same chip
-during the download in every boot, so I suspect contention there.
-
-[1] https://lore.kernel.org/r/20261005-monza-wireless-v7-1-5a6de7662dcb@oss.qualcomm.com
+[1] https://lore.kernel.org/r/20260727-rb3-industrial-bt-uart-v2-0-2d100f30e202@oss.qualcomm.com
 
 Tested-by: Jesse Casco <jesse.casco@gmail.com> # ASUS Zenbook A16 (UX3607OA)
