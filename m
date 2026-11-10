@@ -1,125 +1,147 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.179
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794315787;
-	b=wQg1B/s351sRIOZ6EudJw7SjuKELem5KIESpg13QrHI72qbW8xrMe8P75GVkAcMpPJan
-	 inRMrDDzCReI/VhGMHWZvIRRhEaTavXCTb9RqZ87iagM43cIaVwKOW1ocb25PJ8za/mH4
-	 bQJ0SxQ913pRz7FUx/GTN1s4/cM6pHBzC4DSaWFhBHHYghoP1e/nOrbCLZOE/eOdd5Iaj
-	 nj8/iACAggoJP7eFaF3Ps9a1ant4kAX5uStWnUdidIM8tj5ksd9z4/ng/ym/5727ZEXaq
-	 Lu4Ee9Pn6Migv7ayP+IA5lQ/RawTpk2zXKt5gTnFfIbz4WU56H41pisJOgcY7lTggLw==
+	t=1794316543;
+	b=Vm9w6ogtJOiRAEQUF5ADA+lTTd48uL0d6zRqtax33OEg7WEQIxvDiWVvrqHDPvV3EvaL
+	 k4HL7PKyWbdGUUcyEinmzHElMYnm0nGS6NoztK/nRshfyqjeigX1OBNy+9Uts0vO6T9+3
+	 Wmzl05DlufEi1KsyI8h90NPkd8sNsoJRg4Zu8RaIY50aKb71f6tkMsX9cHhBGu8so5b4I
+	 dH+gE8f60WBxJjbQzUQrptiAn7SxvNolGzeAQAVnO9KsKDc8xNmgz4qGuk3oy/AE5Ahr2
+	 zNMqZaJisvF94F3nJtwjmlnRzaMjOJ+dgdXBm2kB/+BetxIS+axrwruJKJ/E+CHJPpw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794315787;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:X-Developer-Signature:
-	 X-Developer-Key:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=OALV8vUNInuby80JCyIJlfai0hgF0F+FwNbODqepVpc=;
-	b=19iWmmOIru8TXdqkDq7Vgv61HbNGHdnr35AB4EJDhI/berNW9F4Oe8K1Mo+bILLj7j7H
-	 qb8X2BtkaxNVArYrgiWoAzA861EhO1apNSYCOhnk2NMv+nALOUXaeS8gfKJjqcyikPZhr
-	 YY4xoltK7shVNXFX377y5I8DQN8Jdha9I1xi+ZYfl5ITXVIuDWcQdKr5bheEh9GqX2SNM
-	 qClNY+7TitlAHb7L6fDfduO94aKk8YEJwgMYmNpu+GNzJKUVBir4RLQCqTU8RXlE2PYQO
-	 Oke3sryR8N/OsBtTgV+7LSSolJBdWvHmXaYy5ZSR6VoUHXTWVjDpnd0I9fUMqBfExuQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794316543;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=gWTTq5dv/I66UNaYS5lsfUTpJsiUMvTdfdpova6Cxz0=;
+	b=PFd2sshHJJNobLYDwK9vhJNPGKiwsK8Q78ckOxH6xEcBhvBbhC2+Qo2PTW63GAt8crdB
+	 PFcG7wGzJU2ML3aeruUYAqD6a1krlG+TkMfVzZU9JWz68x6/sLN9EXXOlWRIxp4y2gpeC
+	 Q4DNvSXXLsk2iuhUv0feCBmRL2ulrWKz3AxCs5au5a1VvEsZtUXS1d+ZqinPosetiT2qG
+	 dXV+jSLfQBEnsO4KmD/nmIQIYIr4UBKTvMLkJ6uL2uaICB4FVySGcGwmcWEwH+c1d3rIH
+	 eg3+ZfjDsvtLiv0V+07LEoOpyVYn1AH8tHJLoq8LnkCQ/kHZsfGf6czFHMd0Pbfyurg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YvX39h4p;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QiZVWoRZ;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mFTx+tav;
+	arc=none smtp.remote-ip=209.85.215.179
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BC606070C91
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 13:03:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6BC606070C91
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FD7A606B6F2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 13:15:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8FD7A606B6F2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YvX39h4p;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QiZVWoRZ
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AABAaat3850915
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 13:03:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=OALV8vUNInuby80JCyIJlfai0hgF0F+FwNb
-	ODqepVpc=; b=YvX39h4pORto6tcpRFvnzK5hYYt3WBlKs/UU8rpssKijGYuCc0j
-	lrpk+ZcOd3zDJrWTm9zAUHkYArNm24IEABX4HFVQ4eWNj4cFFPMexV2lYJYboioj
-	EwJnRxIe7h4ru2S6gEwgRSR3Eshjo+cc+lNVzVyT4Vnt2rMA49rxUqLBhXx+oXnb
-	jHyj9oG3VePfLUjdM4PxF7aL996dQChZNfTViT5xqVfWqKK1dqEvhBHzrGKCHTeR
-	5pVGf48m1BOjBZufKnMAzhF5Bo1rGHu95gGO+3X0TO7ZYayHSxcL+/5cdMBFEC/u
-	eMGGvXlfIvGGeLbH8q5QHspKsPSuxM65LsQ==
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hufx84stn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 13:03:06 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5ece56bfeadso1662567e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 05:03:06 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mFTx+tav
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cdac6d19ddaso744848a12.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 05:15:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794315783; x=1794920583; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OALV8vUNInuby80JCyIJlfai0hgF0F+FwNbODqepVpc=;
-        b=QiZVWoRZ6PV7R0nFyph/MQjzx86Dxu92HN4WaA4eeO6/5gtE6i4cl6y2ueqr1bMiq6
-         bio0mEUHQI+IjJtSIC6kQW6IBAySY6GZuB5IujnLA009xhkeEZR/qEB/xsFSO7r5jUBV
-         VrpYaFEtl0ZP0t1qP214mHba7oYFmzWZXEjFCTRTyIqml6Gv+ye9tQpBHTzjlViOPFoa
-         HrcfBRQcWZSGUzcpQFX+L3ZEXP7uuLbvjN9XGx8vY3vHocXKEiOKxb3KuYGmW0cqfbWK
-         5koTE4qa5cfZmFXqEkDVdCi7b+mqYCcHFpnIEbOwC9iGia0rPQj8YMXAENgKXkfHkJHi
-         wJNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794315783; x=1794920583;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794316542; x=1794921342; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OALV8vUNInuby80JCyIJlfai0hgF0F+FwNbODqepVpc=;
-        b=WWutatoVGz7p7F6cbNYTbErzd/QFXMzpR3R5MlCpRDHJbt7P2AqC3P/ZjX02D2yV3z
-         qgXIYee3J4m5oHPFBlbnbhMelBKDtbEftILMpq59TwlVhM7zBlznC/V9XTaA3ZmVXgSY
-         jUoViH89YDpOPAY8UK+YGgak74xJa10Oor9yjzfm3L0B6IIzqn8nis8FFovTuA4qfE1T
-         Ua70rbIF6ZJzTs9XUeVfDMIDIAnVDfW3c0qYo7PPsu/Bf+n9uYDcSzZOM2zrbFOTgb53
-         rPcI/jioo8QJ6FTzTXhr3exNTbOvKaAZlwEDPbHupyz15/+lawJyJ+S6kSogjuJuQmdN
-         6dTA==
-X-Forwarded-Encrypted: i=1; AL+hErHXKBH3yImAcgO4IRwu06Z1e4+Af3xZa8aV7n6KP8/CCu7rAOePn7wujAHIEqufFHmZv3qQhPqrQ0K4iOCF@vger.kernel.org
-X-Gm-Message-State: APuU4Z82AdkYrfnEh+YcGLOEBqr+SaD2M53Fmh//KXmLQRZPtZqK8PRv
-	WZ7pvbCLJBz2+pd4UmLVrI9IoOfN1xpGO84gjq0Khb2ihnvf2szzpPlmxY/JepfNbN9UJ8fbfOm
-	i6a7tiwReRTc4fysbBVMiIr2aT0dm/OlHQGxvGCUjuVrkm/r2jIGWU81FIqPldjBj0I+7P0ryTD
-	E/
-X-Gm-Gg: AYBFou3vNoRlCfx6qgiwOk+1QQKspwkJZR/MjKLRzYPZhpNx6xbtwKYdiLG0808cnb9
-	C2fEm2eOiGuoYebO1eCCdggvJ5acDvuzPNgQtCqxkfq7He0BFgpn2tvvXbKxB47ZDjSpNIpgMDd
-	YDFPG94EfNmroZEU6BXV/PfXEWU2+p7pturSxf0PAc/Lx+8ZxvgeHljye0b+03zNBaEukXrEh8S
-	vRnSqdD/fFF6V8WKAiqbFqSmJn23OCZFcdeZxy7f8G4gPW/9vfx5KjmNsOh2yDAgo3eYOiVg+St
-	C7cU7pfQpVXZpRV/BMrdgg0qrMHX26597W8iZWUXFgkPnmPvz8w4pKrDktETHb00+Stv1/6gQLa
-	k29MTQGCMuCFAwLYLx7aDTwpoiFyrtlWgVjFFNn/QmJkaIJiuBn/crJlH2Z4Ykg==
-X-Received: by 2002:a05:6122:8c8c:b0:5ec:5f1b:f725 with SMTP id 71dfb90a1353d-5ee0d1eac60mr842148e0c.23.1794315782415;
-        Tue, 10 Nov 2026 05:03:02 -0800 (PST)
-X-Received: by 2002:a05:6122:8c8c:b0:5ec:5f1b:f725 with SMTP id 71dfb90a1353d-5ee0d1eac60mr842031e0c.23.1794315781206;
-        Tue, 10 Nov 2026 05:03:01 -0800 (PST)
-Received: from quoll ([178.197.218.7])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba0236f03esm49121585e9.3.2026.11.10.05.02.58
+        bh=gWTTq5dv/I66UNaYS5lsfUTpJsiUMvTdfdpova6Cxz0=;
+        b=mFTx+tavP5+c/C9vphlYuQjwE1nBVKr1r/V5goj5JGChR211/us6Lmy6IMjujMCAJn
+         V/toLraRcAXfp2OvxlnEAK3aO4xkZ8xLSMN7eeQew+6CS0MUt+ODqafkKr7s5D4qU0pX
+         gxVhqAVA01rQNacg5mniI+aZNG9akSNH++hi4WgzSdm9oMS6vYKWCo9njkOnm4V2fpDh
+         e6yQ0DmPsPvnb7C6Fc2gxeCXjnmaSBl6IP6XhUCpqvsB+F2gZMFjlmnPNAkw/vbBYax5
+         j1v47OLnJvr/MO/HTrpJbfIaNeNnWy0bF0Q/EvyEiWTVnaoxy7IWDV0A0lUWV0F4DDzq
+         OvcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794316542; x=1794921342;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=gWTTq5dv/I66UNaYS5lsfUTpJsiUMvTdfdpova6Cxz0=;
+        b=2kqFvuc1ECW5zKiCWgUryK62ndwqZ8LrzUcCPP0dCeSwUwcTkYAtyC6Zc+lb3nxtCc
+         /kXdtJ1PXBMi72X0ffzp3nwUjsW7xSmjNtkwx4P2tSRhqb9eieCmz4o+uSe7AI1G9mZS
+         ANVlI0UtKFI2rw3g1B5uDvopeZqM+FoOwER7z9FFJ6BUPri3Th8iFDt1qq6+JDukoGbN
+         B04IsrLpssJaQF2mSOV63/yG+ooJOZCC8tm5LF6vBAq1gW7yi/Y1/Ja74r4Jubc/NhNL
+         0wj16pLXDDg6Kvd9AH6cA9BRFCRl5mNOJqdvrXcmpCpVsvohhgYQrAP8jendX9ovDpV/
+         qFvw==
+X-Forwarded-Encrypted: i=1; AL+hErG8+rfxY/lUqeKjePCYNyr0CYQuXddFnlok5Chrt9aQfTBinAAd8G1SqXMScxfUJVAjEw0n12vmc5xPHujS@vger.kernel.org
+X-Gm-Message-State: APuU4Z8QoMs73Wp0LkmZBacjTqXAmhM9NdvKmoGxlqldT6ise4LtN+Th
+	hV4aPnLQ8p1FRBVJRPwPJqQmPn4kTA4//V02+yxtUfAzrClOMQTO2+xd
+X-Gm-Gg: AYBFou1TteKq2WvDbKGj/oBtaw7TXvUTfsyOk5eQPFHxiXzP7+96ijgvl1c8PfahtQD
+	IloaiV+trekPgLWO2Xt29aOgFw05pab7BHN1F4bO7Y0ICZyjxg+7l61Tx/gUXIvWwEFMydS4BuY
+	o0CWsGAJllx+55BqOYC+S7tYBdBbcLSRMe+4nOjQ3AWxuXEFXerOyvyqoRjF9SVDBRlypQ8KxcM
+	OvQ8hPvUufibydCQPC8VnqqmBueIZEiBCfaptI1FqlZGIW9ES3J6LjE+T8jI7uhu6eAjaVtkljl
+	g9XliFtHllwg924HgE8FI9A8jobkCghESR/XztAdIIUswn0hMBp5nj8t3znssYM6aQIpPjLUJFT
+	/HPI3Phe3XChWnGPxQz9E5MaMCiMS8/+4CS/mF/L3rWXnqthCFq+twnIGUdG2nYZtVud3lj8+fn
+	npoOjRfIgMhtyA9TVYR6qfe2AyySRR14nziunnrv/EhnPyqe8eQ5Zg87ZafjvkJUFISwtr5yw0B
+	342WGyiPbioYqC65JZHHQRqrvgjeMWhe9nfPMgvtcUVtcU2KFNtdy8jItA2AzHxwN7ychsOLLhT
+	VwscLNvrGspnnic/+9AtUSRx1fFoTQY=
+X-Received: by 2002:a17:90b:1d47:b0:3ac:9d14:feb2 with SMTP id 98e67ed59e1d1-3b166cf8ccfmr2707857a91.35.1794316541655;
+        Tue, 10 Nov 2026 05:15:41 -0800 (PST)
+Received: from cryptic.lan ([2001:569:7077:be00:8191:2bfc:aa6d:704b])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b16769b589sm3806975a91.5.2026.11.10.05.15.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 05:03:00 -0800 (PST)
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [PATCH] dt-bindings: display/msm: qcom,sa8775p-mdss: Remove bouncing Mahadevan
-Date: Tue, 10 Nov 2026 14:02:56 +0100
-Message-ID: <20261110130255.134252-2-krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+        Tue, 10 Nov 2026 05:15:40 -0800 (PST)
+From: Allen Pais <allen.lkml@gmail.com>
+To: Vinod Koul <vkoul@kernel.org>
+Cc: Allen Pais <allen.lkml@gmail.com>,
+	Frank Li <Frank.Li@nxp.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	dmaengine@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Frank Li <Frank.Li@kernel.org>,
+	Ludovic Desroches <ludovic.desroches@microchip.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Ray Jui <rjui@broadcom.com>,
+	Scott Branden <sbranden@broadcom.com>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Paul Cercueil <paul@crapouillou.net>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Zhou Wang <wangzhou1@hisilicon.com>,
+	Longfang Liu <liulongfang@huawei.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Keguang Zhang <keguang.zhang@gmail.com>,
+	Sean Wang <sean.wang@mediatek.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	=?UTF-8?q?Andreas=20F=C3=A4rber?= <afaerber@suse.de>,
+	Daniel Mack <daniel@zonque.org>,
+	Haojian Zhuang <haojian.zhuang@gmail.com>,
+	Robert Jarzmik <robert.jarzmik@free.fr>,
+	Paul Walmsley <pjw@kernel.org>,
+	Samuel Holland <samuel.holland@sifive.com>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Patrice Chotard <patrice.chotard@foss.st.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Laxman Dewangan <ldewangan@nvidia.com>,
+	Jon Hunter <jonathanh@nvidia.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Kees Cook <kees@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Guangshuo Li <lgs201920130244@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-rpi-kernel@lists.infradead.org,
+	linux-mips@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-mediatek@lists.infradead.org,
+	linux-actions@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	linux-sunxi@lists.linux.dev,
+	linux-tegra@vger.kernel.org
+Subject: [PATCH v4 01/33] dmaengine: add tasklet-backed channel BH helpers
+Date: Tue, 10 Nov 2026 05:13:01 -0800
+Message-ID: <c515f9757c8d89501ecbb0f2f4530fd3b800c976.1794315350.git.allen.lkml@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1794315350.git.allen.lkml@gmail.com>
+References: <cover.1794315350.git.allen.lkml@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -129,72 +151,777 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1082; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=gnpSXTmvxtdhncMRhWieLAr3GFCRnWpMUR0hNvdBVWI=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBq8xX/gD2I5kvb1YaQbaK1Hj8UhSJ7L7MJAvGQJ
- 7k1aiqFbcyJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCavMV/wAKCRDBN2bmhouD
- 17/CD/sGFI/+wjlERaJ3BaT8xEiNlo4WsdazaWIt+yqGEwwmOGNnspemY6phkyMur0Ch/yEal3a
- a0tuhSFEl1ZsKnrVf5TyrKwbM0tO1fwW9H4NX6Zk5TFnC7IQGqlgM4UFFMgnD5TxKhZqiNQiHF+
- mW7ybexMFHJ2x5JAdfazGmya8YfXbrwUxGTFTVaEWdYhsocu4dHR3dcHaoKaUcr6Cjq5W4y7IW/
- ipdwwqFuB1NzhcwepfHTokkewlD7NKUmng7EmN7H2/d+Q3fsHye8RHRec2VJU5JfE4C94KLkNON
- zFaFlTJPRVevVce7u4pAmKFQTZoAbB0H5EoGP8Gkl4AE6yJ4+YGzKVetP69EHmnWx/NYl8rnwvf
- j51L3lxJ+U9QaPmTSITfdaTWdBqW8xSFHMyu70gYKdTTqQqqRo8l522iB3DQIaJEVyFdPhSBQnm
- 9TwE6DQVBakI2u7Wq6BdWA4zuiXfLZbTRD48o07rnK12NIQbIDI2HBFj7uJ4/Jdkje3tQ2bGu/c
- f1F1d20nWvI1MipHiWB/kSDBH4TeA01f60/GpPIpHnxIKBD24cYH65wtnF8Dd1sHIeqxinWT4Ua
- iaMIHCTyW3T8+7TGz0Viyro2IOAlOrBa34uluDdzL1rrzjccOzXbGRhRZzaPv7Y+uoBcGUC0TqR /VlewK6oh8hBQFA==
-X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=AbYkjHXG c=1 sm=1 tr=0 ts=6af3160a cx=c_pps
- a=+D9SDfe9YZWTjADjLiQY5g==:117 a=uyPgTw0bjBTS2cVxpiNm5w==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=gEfo2CItAAAA:8
- a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=VwQbUJbxAAAA:8 a=pRY3rvhn6SD9K9aC0tYA:9
- a=vmgOmaN-Xu0dpDh8OwbV:22 a=sptkURWiP4Gy88Gu7hUp:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: B0-RZNHclW5kkcderG64nlVGBUEAAWs5
-X-Proofpoint-ORIG-GUID: B0-RZNHclW5kkcderG64nlVGBUEAAWs5
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA1MSBTYWx0ZWRfX6q9nk/Xww3jj
- bx9nwCgNmXwOiyVgEpJmnLqYbHqbi4D1N0jwV6US8C+tQwucSsNcmd6PI3H1dc1IAt/JKh/vES+
- 5NirhFXYPcEixUNDe972ExMPORiBsyg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA1MSBTYWx0ZWRfX/5bCNxHFCbe5
- khabaP047TCJDxti0OHqGWQV/Y4PtfNNnM1AubmdN8q/s1DA4BVY2wZcdICOS65Nd+85+akPxkT
- odFtL2jmRFtlkrBQfgizI7E5r0UIyblWSqdRWB/75DzLi8DJmMp6n9i5SnHzdfbW8IsGVbe9raK
- f63C1a2XGetMnVyhoDJmlOQNUSHhTG6Dp+3E64TBelpMPm+gxfXI0mpY8V08q/tiuxbTMiEOrf1
- b+PUiWZhy9ftTBLA5/1xP2a+s75Wc4cbN6+K1ZrolT2JRe5B9jf8LravTHnk/Ik53fJtl8igU1D
- zNSVQBiSNqvEjGjYHyqM47zd3s5J6DRaoF1Js5Zmpb7FToqK/zXeJ23HEBgDbEGiFT1V74beVIR
- gYVFC2dQr3cRRwA4PnEOJIOWEcrMzlSwfVJZwvWge979kh5cikx3hQ7uUdpEVkW6LcuTzafDZ8n
- bmB+s0xbOi2gWPAsXAg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-10_04,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- impostorscore=0 bulkscore=0 spamscore=0 clxscore=1015 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611100051
 
-Emails to Mahadevan bounce permanently (error 550), so change the
-maintainer to DRM MSM maintainers (Dmitry Baryshkov and Rob Clark).
+DMAengine drivers commonly use a per-channel tasklet to invoke client
+callbacks. Add helpers that initialize, schedule, and kill a channel
+bottom half, with an initial tasklet-backed implementation that preserves
+the existing execution context.
 
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Convert virt-dma to the new API and remove its private tasklet. Update all
+drivers that directly kill or override that tasklet in the same change so
+no stale users remain. While touching the completion handler, avoid forming
+a result pointer from a NULL cyclic descriptor.
+
+This establishes a backend-independent API before changing how channel
+bottom halves are dispatched.
+
+Signed-off-by: Allen Pais <allen.lkml@gmail.com>
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
 ---
- .../devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml     | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/dma/amlogic-dma.c                     |  4 +-
+ drivers/dma/at_hdmac.c                        |  2 +-
+ drivers/dma/bcm2835-dma.c                     |  2 +-
+ drivers/dma/dma-axi-dmac.c                    | 10 +++--
+ drivers/dma/dma-jz4780.c                      |  2 +-
+ drivers/dma/dmaengine.c                       | 42 +++++++++++++++++++
+ .../dma/dw-axi-dmac/dw-axi-dmac-platform.c    |  2 +-
+ drivers/dma/dw-edma/dw-edma-core.c            |  2 +-
+ drivers/dma/fsl-edma-common.c                 |  2 +-
+ drivers/dma/fsl-qdma.c                        |  2 +-
+ drivers/dma/hisi_dma.c                        |  2 +-
+ drivers/dma/hsu/hsu.c                         |  2 +-
+ drivers/dma/idma64.c                          |  4 +-
+ drivers/dma/img-mdc-dma.c                     |  2 +-
+ drivers/dma/imx-sdma.c                        |  4 +-
+ drivers/dma/k3dma.c                           |  2 +-
+ drivers/dma/loongson/loongson1-apb-dma.c      |  2 +-
+ drivers/dma/mediatek/mtk-cqdma.c              |  2 +-
+ drivers/dma/mediatek/mtk-hsdma.c              |  2 +-
+ drivers/dma/mediatek/mtk-uart-apdma.c         |  4 +-
+ drivers/dma/owl-dma.c                         |  2 +-
+ drivers/dma/pxa_dma.c                         |  2 +-
+ drivers/dma/qcom/bam_dma.c                    |  4 +-
+ drivers/dma/qcom/qcom_adm.c                   |  4 +-
+ drivers/dma/sa11x0-dma.c                      |  2 +-
+ drivers/dma/sf-pdma/sf-pdma.c                 |  2 +-
+ drivers/dma/sprd-dma.c                        |  2 +-
+ drivers/dma/st_fdma.c                         |  2 +-
+ drivers/dma/sun6i-dma.c                       |  2 +-
+ drivers/dma/tegra186-gpc-dma.c                |  2 +-
+ drivers/dma/tegra210-adma.c                   |  2 +-
+ drivers/dma/ti/edma.c                         |  2 +-
+ drivers/dma/ti/k3-udma.c                      | 12 +++---
+ drivers/dma/ti/omap-dma.c                     |  2 +-
+ drivers/dma/virt-dma.c                        | 12 +++---
+ drivers/dma/virt-dma.h                        |  7 ++--
+ include/linux/dmaengine.h                     | 28 +++++++++++++
+ 37 files changed, 128 insertions(+), 57 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml
-index 4dc0055cd841..48dd897d5d5b 100644
---- a/Documentation/devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml
-+++ b/Documentation/devicetree/bindings/display/msm/qcom,sa8775p-mdss.yaml
-@@ -7,7 +7,8 @@ $schema: http://devicetree.org/meta-schemas/core.yaml#
- title: Qualcomm Technologies, Inc. SA87755P Display MDSS
+diff --git a/drivers/dma/amlogic-dma.c b/drivers/dma/amlogic-dma.c
+index 684121d13fca..4a14b2f777c6 100644
+--- a/drivers/dma/amlogic-dma.c
++++ b/drivers/dma/amlogic-dma.c
+@@ -707,10 +707,10 @@ static void aml_dma_remove(struct platform_device *pdev)
+ 	for (i = 0; i < MAX_CHAN_ID; i++) {
+ 		aml_chan = aml_dma->aml_rch[i];
+ 		if (aml_chan)
+-			tasklet_kill(&aml_chan->vchan.task);
++			dmaengine_kill_bh(&aml_chan->vchan.chan);
+ 		aml_chan = aml_dma->aml_wch[i];
+ 		if (aml_chan)
+-			tasklet_kill(&aml_chan->vchan.task);
++			dmaengine_kill_bh(&aml_chan->vchan.chan);
+ 	}
+ 	destroy_workqueue(aml_dma->free_wq);
+ }
+diff --git a/drivers/dma/at_hdmac.c b/drivers/dma/at_hdmac.c
+index b024aa2d34b2..991c572d5c19 100644
+--- a/drivers/dma/at_hdmac.c
++++ b/drivers/dma/at_hdmac.c
+@@ -1944,7 +1944,7 @@ static void at_dma_cleanup_channels(struct at_dma *atdma)
+ 			device_node) {
+ 		/* Disable interrupts */
+ 		atc_disable_chan_irq(atdma, i++);
+-		tasklet_kill(&to_at_dma_chan(chan)->vc.task);
++		dmaengine_kill_bh(chan);
+ 		list_del(&chan->device_node);
+ 	}
+ }
+diff --git a/drivers/dma/bcm2835-dma.c b/drivers/dma/bcm2835-dma.c
+index d41b0f6ec427..62844b44696b 100644
+--- a/drivers/dma/bcm2835-dma.c
++++ b/drivers/dma/bcm2835-dma.c
+@@ -829,7 +829,7 @@ static void bcm2835_dma_free(struct bcm2835_dmadev *od)
+ 	list_for_each_entry_safe(c, next, &od->ddev.channels,
+ 				 vc.chan.device_node) {
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 	}
  
- maintainers:
--  - Mahadevan <quic_mahap@quicinc.com>
-+  - Dmitry Baryshkov <lumag@kernel.org>
-+  - Rob Clark <robin.clark@oss.qualcomm.com>
+ 	dma_unmap_page_attrs(od->ddev.dev, od->zero_page, PAGE_SIZE,
+diff --git a/drivers/dma/dma-axi-dmac.c b/drivers/dma/dma-axi-dmac.c
+index dbc31b185c4d..91ec19dd4df8 100644
+--- a/drivers/dma/dma-axi-dmac.c
++++ b/drivers/dma/dma-axi-dmac.c
+@@ -1195,9 +1195,11 @@ static int axi_dmac_detect_caps(struct axi_dmac *dmac, unsigned int version)
+ 	return 0;
+ }
  
- description:
-   SA8775P MSM Mobile Display Subsystem(MDSS), which encapsulates sub-blocks like
+-static void axi_dmac_tasklet_kill(void *task)
++static void axi_dmac_kill_bh(void *data)
+ {
+-	tasklet_kill(task);
++	struct dma_chan *chan = data;
++
++	dmaengine_kill_bh(chan);
+ }
+ 
+ static void axi_dmac_free_dma_controller(void *of_node)
+@@ -1302,8 +1304,8 @@ static int axi_dmac_probe(struct platform_device *pdev)
+ 	 * Put the action in here so it get's done before unregistering the DMA
+ 	 * device.
+ 	 */
+-	ret = devm_add_action_or_reset(&pdev->dev, axi_dmac_tasklet_kill,
+-				       &dmac->chan.vchan.task);
++	ret = devm_add_action_or_reset(&pdev->dev, axi_dmac_kill_bh,
++				       &dmac->chan.vchan.chan);
+ 	if (ret)
+ 		return ret;
+ 
+diff --git a/drivers/dma/dma-jz4780.c b/drivers/dma/dma-jz4780.c
+index e610aba09418..27eaf2fa077c 100644
+--- a/drivers/dma/dma-jz4780.c
++++ b/drivers/dma/dma-jz4780.c
+@@ -1018,7 +1018,7 @@ static void jz4780_dma_remove(struct platform_device *pdev)
+ 	free_irq(jzdma->irq, jzdma);
+ 
+ 	for (i = 0; i < jzdma->soc_data->nb_channels; i++)
+-		tasklet_kill(&jzdma->chan[i].vchan.task);
++		dmaengine_kill_bh(&jzdma->chan[i].vchan.chan);
+ }
+ 
+ static const struct jz4780_dma_soc_data jz4740_dma_soc_data = {
+diff --git a/drivers/dma/dmaengine.c b/drivers/dma/dmaengine.c
+index 34be53487a21..f3c19fbb2a01 100644
+--- a/drivers/dma/dmaengine.c
++++ b/drivers/dma/dmaengine.c
+@@ -1449,6 +1449,48 @@ static void dmaengine_destroy_unmap_pool(void)
+ 	}
+ }
+ 
++static void dma_chan_bh_entry(struct tasklet_struct *tasklet)
++{
++	struct dma_chan *chan = from_tasklet(chan, tasklet, bh_tasklet);
++	dmaengine_bh_work_fn fn = READ_ONCE(chan->bh_work_fn);
++
++	if (fn)
++		fn(chan);
++}
++
++void dmaengine_init_bh(struct dma_chan *chan, dmaengine_bh_work_fn fn)
++{
++	if (WARN_ON(!fn))
++		return;
++
++	if (WARN_ON(chan->bh_work_initialized))
++		return;
++
++	chan->bh_work_fn = fn;
++	tasklet_setup(&chan->bh_tasklet, dma_chan_bh_entry);
++	chan->bh_work_initialized = true;
++}
++EXPORT_SYMBOL_GPL(dmaengine_init_bh);
++
++bool dmaengine_schedule_bh(struct dma_chan *chan)
++{
++	if (WARN_ON(!chan->bh_work_initialized))
++		return false;
++
++	tasklet_schedule(&chan->bh_tasklet);
++	return true;
++}
++EXPORT_SYMBOL_GPL(dmaengine_schedule_bh);
++
++void dmaengine_kill_bh(struct dma_chan *chan)
++{
++	if (!chan->bh_work_initialized)
++		return;
++
++	tasklet_kill(&chan->bh_tasklet);
++}
++EXPORT_SYMBOL_GPL(dmaengine_kill_bh);
++
+ static int __init dmaengine_init_unmap_pool(void)
+ {
+ 	int i;
+diff --git a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
+index 940b196b69d1..425c25028a49 100644
+--- a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
++++ b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
+@@ -1657,7 +1657,7 @@ static void dw_remove(struct platform_device *pdev)
+ 	list_for_each_entry_safe(chan, _chan, &dw->dma.channels,
+ 				 vc.chan.device_node) {
+ 		list_del(&chan->vc.chan.device_node);
+-		tasklet_kill(&chan->vc.task);
++		dmaengine_kill_bh(&chan->vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/dw-edma/dw-edma-core.c b/drivers/dma/dw-edma/dw-edma-core.c
+index d682074eaa0e..2cceb87dffb8 100644
+--- a/drivers/dma/dw-edma/dw-edma-core.c
++++ b/drivers/dma/dw-edma/dw-edma-core.c
+@@ -1505,7 +1505,7 @@ int dw_edma_remove(struct dw_edma_chip *chip)
+ 	dma_async_device_unregister(&dw->dma);
+ 	list_for_each_entry_safe(chan, _chan, &dw->dma.channels,
+ 				 vc.chan.device_node) {
+-		tasklet_kill(&chan->vc.task);
++		dmaengine_kill_bh(&chan->vc.chan);
+ 		list_del(&chan->vc.chan.device_node);
+ 	}
+ 
+diff --git a/drivers/dma/fsl-edma-common.c b/drivers/dma/fsl-edma-common.c
+index 513b0f4e5be2..85cc8791659d 100644
+--- a/drivers/dma/fsl-edma-common.c
++++ b/drivers/dma/fsl-edma-common.c
+@@ -1158,7 +1158,7 @@ void fsl_edma_cleanup_vchan(struct dma_device *dmadev)
+ 	list_for_each_entry_safe(chan, _chan,
+ 				&dmadev->channels, vchan.chan.device_node) {
+ 		list_del(&chan->vchan.chan.device_node);
+-		tasklet_kill(&chan->vchan.task);
++		dmaengine_kill_bh(&chan->vchan.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/fsl-qdma.c b/drivers/dma/fsl-qdma.c
+index 27c632e6fa78..b901fe1046ef 100644
+--- a/drivers/dma/fsl-qdma.c
++++ b/drivers/dma/fsl-qdma.c
+@@ -1254,7 +1254,7 @@ static void fsl_qdma_cleanup_vchan(struct dma_device *dmadev)
+ 	list_for_each_entry_safe(chan, _chan,
+ 				 &dmadev->channels, vchan.chan.device_node) {
+ 		list_del(&chan->vchan.chan.device_node);
+-		tasklet_kill(&chan->vchan.task);
++		dmaengine_kill_bh(&chan->vchan.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/hisi_dma.c b/drivers/dma/hisi_dma.c
+index d3ec1819aa5d..16279c332e9d 100644
+--- a/drivers/dma/hisi_dma.c
++++ b/drivers/dma/hisi_dma.c
+@@ -720,7 +720,7 @@ static void hisi_dma_disable_qps(struct hisi_dma_dev *hdma_dev)
+ 
+ 	for (i = 0; i < hdma_dev->chan_num; i++) {
+ 		hisi_dma_disable_qp(hdma_dev, i);
+-		tasklet_kill(&hdma_dev->chan[i].vc.task);
++		dmaengine_kill_bh(&hdma_dev->chan[i].vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/hsu/hsu.c b/drivers/dma/hsu/hsu.c
+index ce24e840af59..ec530e0e1296 100644
+--- a/drivers/dma/hsu/hsu.c
++++ b/drivers/dma/hsu/hsu.c
+@@ -499,7 +499,7 @@ int hsu_dma_remove(struct hsu_dma_chip *chip)
+ 	for (i = 0; i < hsu->nr_channels; i++) {
+ 		struct hsu_dma_chan *hsuc = &hsu->chan[i];
+ 
+-		tasklet_kill(&hsuc->vchan.task);
++		dmaengine_kill_bh(&hsuc->vchan.chan);
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/dma/idma64.c b/drivers/dma/idma64.c
+index e3db213e564b..d7089c4b3787 100644
+--- a/drivers/dma/idma64.c
++++ b/drivers/dma/idma64.c
+@@ -610,14 +610,14 @@ static void idma64_remove(struct idma64_chip *chip)
+ 
+ 	/*
+ 	 * Explicitly call devm_request_irq() to avoid the side effects with
+-	 * the scheduled tasklets.
++	 * scheduled BH work.
+ 	 */
+ 	devm_free_irq(chip->dev, chip->irq, idma64);
+ 
+ 	for (i = 0; i < idma64->dma.chancnt; i++) {
+ 		struct idma64_chan *idma64c = &idma64->chan[i];
+ 
+-		tasklet_kill(&idma64c->vchan.task);
++		dmaengine_kill_bh(&idma64c->vchan.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/img-mdc-dma.c b/drivers/dma/img-mdc-dma.c
+index b91807d5ae82..22288f3bae55 100644
+--- a/drivers/dma/img-mdc-dma.c
++++ b/drivers/dma/img-mdc-dma.c
+@@ -1031,7 +1031,7 @@ static void mdc_dma_remove(struct platform_device *pdev)
+ 
+ 		devm_free_irq(&pdev->dev, mchan->irq, mchan);
+ 
+-		tasklet_kill(&mchan->vc.task);
++		dmaengine_kill_bh(&mchan->vc.chan);
+ 	}
+ 
+ 	pm_runtime_disable(&pdev->dev);
+diff --git a/drivers/dma/imx-sdma.c b/drivers/dma/imx-sdma.c
+index 749f1fe77907..9bf70a682e22 100644
+--- a/drivers/dma/imx-sdma.c
++++ b/drivers/dma/imx-sdma.c
+@@ -2399,11 +2399,11 @@ static void sdma_remove(struct platform_device *pdev)
+ 	int i;
+ 
+ 	devm_free_irq(&pdev->dev, sdma->irq, sdma);
+-	/* Kill the tasklet */
++	/* Kill the channel BH */
+ 	for (i = 0; i < MAX_DMA_CHANNELS; i++) {
+ 		struct sdma_channel *sdmac = &sdma->channel[i];
+ 
+-		tasklet_kill(&sdmac->vc.task);
++		dmaengine_kill_bh(&sdmac->vc.chan);
+ 		sdma_free_chan_resources(&sdmac->vc.chan);
+ 	}
+ 
+diff --git a/drivers/dma/k3dma.c b/drivers/dma/k3dma.c
+index 079dda13cf0c..571237b15182 100644
+--- a/drivers/dma/k3dma.c
++++ b/drivers/dma/k3dma.c
+@@ -975,7 +975,7 @@ static void k3_dma_remove(struct platform_device *op)
+ 
+ 	list_for_each_entry_safe(c, cn, &d->slave.channels, vc.chan.device_node) {
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 	}
+ 	tasklet_kill(&d->task);
+ 	clk_disable_unprepare(d->clk);
+diff --git a/drivers/dma/loongson/loongson1-apb-dma.c b/drivers/dma/loongson/loongson1-apb-dma.c
+index 10a1920ff6c2..c91e933b186a 100644
+--- a/drivers/dma/loongson/loongson1-apb-dma.c
++++ b/drivers/dma/loongson/loongson1-apb-dma.c
+@@ -547,7 +547,7 @@ static void ls1x_dma_chan_remove(struct ls1x_dma *dma)
+ 
+ 		if (chan->vc.chan.device == &dma->ddev) {
+ 			list_del(&chan->vc.chan.device_node);
+-			tasklet_kill(&chan->vc.task);
++			dmaengine_kill_bh(&chan->vc.chan);
+ 		}
+ 	}
+ }
+diff --git a/drivers/dma/mediatek/mtk-cqdma.c b/drivers/dma/mediatek/mtk-cqdma.c
+index a7000608ddea..8c536c4e04ec 100644
+--- a/drivers/dma/mediatek/mtk-cqdma.c
++++ b/drivers/dma/mediatek/mtk-cqdma.c
+@@ -894,7 +894,7 @@ static void mtk_cqdma_remove(struct platform_device *pdev)
+ 		vc = &cqdma->vc[i];
+ 
+ 		list_del(&vc->vc.chan.device_node);
+-		tasklet_kill(&vc->vc.task);
++		dmaengine_kill_bh(&vc->vc.chan);
+ 	}
+ 
+ 	/* disable interrupt */
+diff --git a/drivers/dma/mediatek/mtk-hsdma.c b/drivers/dma/mediatek/mtk-hsdma.c
+index ad5883cf6165..2a2b4c38a3f5 100644
+--- a/drivers/dma/mediatek/mtk-hsdma.c
++++ b/drivers/dma/mediatek/mtk-hsdma.c
+@@ -1032,7 +1032,7 @@ static void mtk_hsdma_remove(struct platform_device *pdev)
+ 		vc = &hsdma->vc[i];
+ 
+ 		list_del(&vc->vc.chan.device_node);
+-		tasklet_kill(&vc->vc.task);
++		dmaengine_kill_bh(&vc->vc.chan);
+ 	}
+ 
+ 	/* Disable DMA interrupt */
+diff --git a/drivers/dma/mediatek/mtk-uart-apdma.c b/drivers/dma/mediatek/mtk-uart-apdma.c
+index bf242c4c262f..127e1d6a30a1 100644
+--- a/drivers/dma/mediatek/mtk-uart-apdma.c
++++ b/drivers/dma/mediatek/mtk-uart-apdma.c
+@@ -312,7 +312,7 @@ static void mtk_uart_apdma_free_chan_resources(struct dma_chan *chan)
+ 
+ 	free_irq(c->irq, chan);
+ 
+-	tasklet_kill(&c->vc.task);
++	dmaengine_kill_bh(&c->vc.chan);
+ 
+ 	vchan_free_chan_resources(&c->vc);
+ 
+@@ -463,7 +463,7 @@ static void mtk_uart_apdma_free(struct mtk_uart_apdmadev *mtkd)
+ 			struct mtk_chan, vc.chan.device_node);
+ 
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/owl-dma.c b/drivers/dma/owl-dma.c
+index 31a6c6e01a75..43663f4539f0 100644
+--- a/drivers/dma/owl-dma.c
++++ b/drivers/dma/owl-dma.c
+@@ -1050,7 +1050,7 @@ static inline void owl_dma_free(struct owl_dma *od)
+ 	list_for_each_entry_safe(vchan,
+ 				 next, &od->dma.channels, vc.chan.device_node) {
+ 		list_del(&vchan->vc.chan.device_node);
+-		tasklet_kill(&vchan->vc.task);
++		dmaengine_kill_bh(&vchan->vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/pxa_dma.c b/drivers/dma/pxa_dma.c
+index bf03009bb966..29bcda3f785b 100644
+--- a/drivers/dma/pxa_dma.c
++++ b/drivers/dma/pxa_dma.c
+@@ -1216,7 +1216,7 @@ static void pxad_free_channels(struct dma_device *dmadev)
+ 	list_for_each_entry_safe(c, cn, &dmadev->channels,
+ 				 vc.chan.device_node) {
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+index e62e411dc8f8..823b92099bcc 100644
+--- a/drivers/dma/qcom/bam_dma.c
++++ b/drivers/dma/qcom/bam_dma.c
+@@ -1389,7 +1389,7 @@ static int bam_dma_probe(struct platform_device *pdev)
+ 	free_irq(bdev->irq, bdev);
+ err_bam_channel_exit:
+ 	for (i = 0; i < bdev->num_channels; i++)
+-		tasklet_kill(&bdev->channels[i].vc.task);
++		dmaengine_kill_bh(&bdev->channels[i].vc.chan);
+ err_tasklet_kill:
+ 	tasklet_kill(&bdev->task);
+ err_disable_clk:
+@@ -1416,7 +1416,7 @@ static void bam_dma_remove(struct platform_device *pdev)
+ 
+ 	for (i = 0; i < bdev->num_channels; i++) {
+ 		bam_dma_terminate_all(&bdev->channels[i].vc.chan);
+-		tasklet_kill(&bdev->channels[i].vc.task);
++		dmaengine_kill_bh(&bdev->channels[i].vc.chan);
+ 
+ 		if (!bdev->channels[i].fifo_virt)
+ 			continue;
+diff --git a/drivers/dma/qcom/qcom_adm.c b/drivers/dma/qcom/qcom_adm.c
+index b38ee75a9637..f306b3c841de 100644
+--- a/drivers/dma/qcom/qcom_adm.c
++++ b/drivers/dma/qcom/qcom_adm.c
+@@ -918,8 +918,8 @@ static void adm_dma_remove(struct platform_device *pdev)
+ 		/* mask IRQs for this channel/EE pair */
+ 		writel(0, adev->regs + ADM_CH_RSLT_CONF(achan->id, adev->ee));
+ 
+-		tasklet_kill(&adev->channels[i].vc.task);
+-		adm_terminate_all(&adev->channels[i].vc.chan);
++		dmaengine_kill_bh(&achan->vc.chan);
++		adm_terminate_all(&achan->vc.chan);
+ 	}
+ 
+ 	devm_free_irq(adev->dev, adev->irq, adev);
+diff --git a/drivers/dma/sa11x0-dma.c b/drivers/dma/sa11x0-dma.c
+index a6fa431530e3..e14566fa2d74 100644
+--- a/drivers/dma/sa11x0-dma.c
++++ b/drivers/dma/sa11x0-dma.c
+@@ -891,7 +891,7 @@ static void sa11x0_dma_free_channels(struct dma_device *dmadev)
+ 
+ 	list_for_each_entry_safe(c, cn, &dmadev->channels, vc.chan.device_node) {
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 		kfree(c);
+ 	}
+ }
+diff --git a/drivers/dma/sf-pdma/sf-pdma.c b/drivers/dma/sf-pdma/sf-pdma.c
+index 4770ec3470cb..ca60fb46ade0 100644
+--- a/drivers/dma/sf-pdma/sf-pdma.c
++++ b/drivers/dma/sf-pdma/sf-pdma.c
+@@ -601,7 +601,7 @@ static void sf_pdma_remove(struct platform_device *pdev)
+ 		devm_free_irq(&pdev->dev, ch->txirq, ch);
+ 		devm_free_irq(&pdev->dev, ch->errirq, ch);
+ 		list_del(&ch->vchan.chan.device_node);
+-		tasklet_kill(&ch->vchan.task);
++		dmaengine_kill_bh(&ch->vchan.chan);
+ 		tasklet_kill(&ch->done_tasklet);
+ 		tasklet_kill(&ch->err_tasklet);
+ 	}
+diff --git a/drivers/dma/sprd-dma.c b/drivers/dma/sprd-dma.c
+index 55ccbb902926..704b05885cd9 100644
+--- a/drivers/dma/sprd-dma.c
++++ b/drivers/dma/sprd-dma.c
+@@ -1231,7 +1231,7 @@ static void sprd_dma_remove(struct platform_device *pdev)
+ 	list_for_each_entry_safe(c, cn, &sdev->dma_dev.channels,
+ 				 vc.chan.device_node) {
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 	}
+ 
+ 	of_dma_controller_free(pdev->dev.of_node);
+diff --git a/drivers/dma/st_fdma.c b/drivers/dma/st_fdma.c
+index a82058e27aa4..875d506d4686 100644
+--- a/drivers/dma/st_fdma.c
++++ b/drivers/dma/st_fdma.c
+@@ -733,7 +733,7 @@ static void st_fdma_free(struct st_fdma_dev *fdev)
+ 	for (i = 0; i < fdev->nr_channels; i++) {
+ 		fchan = &fdev->chans[i];
+ 		list_del(&fchan->vchan.chan.device_node);
+-		tasklet_kill(&fchan->vchan.task);
++		dmaengine_kill_bh(&fchan->vchan.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/sun6i-dma.c b/drivers/dma/sun6i-dma.c
+index 3b849833e08f..f4543e8af789 100644
+--- a/drivers/dma/sun6i-dma.c
++++ b/drivers/dma/sun6i-dma.c
+@@ -1136,7 +1136,7 @@ static inline void sun6i_dma_free(struct sun6i_dma_dev *sdev)
+ 		struct sun6i_vchan *vchan = &sdev->vchans[i];
+ 
+ 		list_del(&vchan->vc.chan.device_node);
+-		tasklet_kill(&vchan->vc.task);
++		dmaengine_kill_bh(&vchan->vc.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/tegra186-gpc-dma.c b/drivers/dma/tegra186-gpc-dma.c
+index ec12b7288b43..30fe6cfcc82a 100644
+--- a/drivers/dma/tegra186-gpc-dma.c
++++ b/drivers/dma/tegra186-gpc-dma.c
+@@ -1284,7 +1284,7 @@ static void tegra_dma_free_chan_resources(struct dma_chan *dc)
+ 	tegra_dma_terminate_all(dc);
+ 	synchronize_irq(tdc->irq);
+ 
+-	tasklet_kill(&tdc->vc.task);
++	dmaengine_kill_bh(&tdc->vc.chan);
+ 	tdc->config_init = false;
+ 	tdc->slave_id = -1;
+ 	tdc->sid_dir = DMA_TRANS_NONE;
+diff --git a/drivers/dma/tegra210-adma.c b/drivers/dma/tegra210-adma.c
+index 607f8e0848ac..0c73dc61622a 100644
+--- a/drivers/dma/tegra210-adma.c
++++ b/drivers/dma/tegra210-adma.c
+@@ -811,7 +811,7 @@ static void tegra_adma_free_chan_resources(struct dma_chan *dc)
+ 
+ 	tegra_adma_terminate_all(dc);
+ 	vchan_free_chan_resources(&tdc->vc);
+-	tasklet_kill(&tdc->vc.task);
++	dmaengine_kill_bh(&tdc->vc.chan);
+ 	free_irq(tdc->irq, tdc);
+ 	pm_runtime_put(tdc2dev(tdc));
+ 
+diff --git a/drivers/dma/ti/edma.c b/drivers/dma/ti/edma.c
+index f3a98654d126..01f9739f120c 100644
+--- a/drivers/dma/ti/edma.c
++++ b/drivers/dma/ti/edma.c
+@@ -2557,7 +2557,7 @@ static void edma_cleanupp_vchan(struct dma_device *dmadev)
+ 	list_for_each_entry_safe(echan, _echan,
+ 			&dmadev->channels, vchan.chan.device_node) {
+ 		list_del(&echan->vchan.chan.device_node);
+-		tasklet_kill(&echan->vchan.task);
++		dmaengine_kill_bh(&echan->vchan.chan);
+ 	}
+ }
+ 
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index 75bd1977fb42..b58c9bb22ddf 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -4042,12 +4042,12 @@ static void udma_desc_pre_callback(struct virt_dma_chan *vc,
+ }
+ 
+ /*
+- * This tasklet handles the completion of a DMA descriptor by
++ * This BH handles the completion of a DMA descriptor by
+  * calling its callback and freeing it.
+  */
+-static void udma_vchan_complete(struct tasklet_struct *t)
++static void udma_vchan_complete(struct dma_chan *chan)
+ {
+-	struct virt_dma_chan *vc = from_tasklet(vc, t, task);
++	struct virt_dma_chan *vc = to_virt_chan(chan);
+ 	struct virt_dma_desc *vd, *_vd;
+ 	struct dmaengine_desc_callback cb;
+ 	LIST_HEAD(head);
+@@ -4112,7 +4112,7 @@ static void udma_free_chan_resources(struct dma_chan *chan)
+ 	}
+ 
+ 	vchan_free_chan_resources(&uc->vc);
+-	tasklet_kill(&uc->vc.task);
++	dmaengine_kill_bh(&uc->vc.chan);
+ 
+ 	bcdma_free_bchan_resources(uc);
+ 	udma_free_tx_resources(uc);
+@@ -5610,8 +5610,8 @@ static int udma_probe(struct platform_device *pdev)
+ 		if (!uc->name)
+ 			return -ENOMEM;
+ 		vchan_init(&uc->vc, &ud->ddev);
+-		/* Use custom vchan completion handling */
+-		tasklet_setup(&uc->vc.task, udma_vchan_complete);
++		/* Override the default vchan completion handler */
++		uc->vc.chan.bh_work_fn = udma_vchan_complete;
+ 		init_completion(&uc->teardown_completed);
+ 		INIT_DELAYED_WORK(&uc->tx_drain.work, udma_check_tx_completion);
+ 	}
+diff --git a/drivers/dma/ti/omap-dma.c b/drivers/dma/ti/omap-dma.c
+index 93b6a4682085..aad968331162 100644
+--- a/drivers/dma/ti/omap-dma.c
++++ b/drivers/dma/ti/omap-dma.c
+@@ -1521,7 +1521,7 @@ static void omap_dma_free(struct omap_dmadev *od)
+ 			struct omap_chan, vc.chan.device_node);
+ 
+ 		list_del(&c->vc.chan.device_node);
+-		tasklet_kill(&c->vc.task);
++		dmaengine_kill_bh(&c->vc.chan);
+ 		kfree(c);
+ 	}
+ }
+diff --git a/drivers/dma/virt-dma.c b/drivers/dma/virt-dma.c
+index 7961172a780d..d407af6cc1da 100644
+--- a/drivers/dma/virt-dma.c
++++ b/drivers/dma/virt-dma.c
+@@ -77,12 +77,12 @@ struct virt_dma_desc *vchan_find_desc(struct virt_dma_chan *vc,
+ EXPORT_SYMBOL_GPL(vchan_find_desc);
+ 
+ /*
+- * This tasklet handles the completion of a DMA descriptor by
+- * calling its callback and freeing it.
++ * This bottom-half handler completes a DMA descriptor by invoking its
++ * callback and freeing it.
+  */
+-static void vchan_complete(struct tasklet_struct *t)
++static void vchan_complete(struct dma_chan *chan)
+ {
+-	struct virt_dma_chan *vc = from_tasklet(vc, t, task);
++	struct virt_dma_chan *vc = to_virt_chan(chan);
+ 	struct virt_dma_desc *vd, *_vd;
+ 	struct dmaengine_desc_callback cb;
+ 	LIST_HEAD(head);
+@@ -98,7 +98,7 @@ static void vchan_complete(struct tasklet_struct *t)
+ 	}
+ 	spin_unlock_irq(&vc->lock);
+ 
+-	dmaengine_desc_callback_invoke(&cb, &vd->tx_result);
++	dmaengine_desc_callback_invoke(&cb, vd ? &vd->tx_result : NULL);
+ 
+ 	list_for_each_entry_safe(vd, _vd, &head, node) {
+ 		dmaengine_desc_get_callback(&vd->tx, &cb);
+@@ -131,7 +131,7 @@ void vchan_init(struct virt_dma_chan *vc, struct dma_device *dmadev)
+ 	INIT_LIST_HEAD(&vc->desc_completed);
+ 	INIT_LIST_HEAD(&vc->desc_terminated);
+ 
+-	tasklet_setup(&vc->task, vchan_complete);
++	dmaengine_init_bh(&vc->chan, vchan_complete);
+ 
+ 	vc->chan.device = dmadev;
+ 	list_add_tail(&vc->chan.device_node, &dmadev->channels);
+diff --git a/drivers/dma/virt-dma.h b/drivers/dma/virt-dma.h
+index abf2ae737c30..8e7c0ca8623a 100644
+--- a/drivers/dma/virt-dma.h
++++ b/drivers/dma/virt-dma.h
+@@ -21,7 +21,6 @@ struct virt_dma_desc {
+ 
+ struct virt_dma_chan {
+ 	struct dma_chan	chan;
+-	struct tasklet_struct task;
+ 	void (*desc_free)(struct virt_dma_desc *);
+ 
+ 	spinlock_t lock;
+@@ -111,7 +110,7 @@ static inline void vchan_cookie_complete(struct virt_dma_desc *vd)
+ 		 vd, cookie);
+ 	list_add_tail(&vd->node, &vc->desc_completed);
+ 
+-	tasklet_schedule(&vc->task);
++	dmaengine_schedule_bh(&vc->chan);
+ }
+ 
+ /**
+@@ -142,7 +141,7 @@ static inline void vchan_cyclic_callback(struct virt_dma_desc *vd)
+ 	struct virt_dma_chan *vc = to_virt_chan(vd->tx.chan);
+ 
+ 	vc->cyclic = vd;
+-	tasklet_schedule(&vc->task);
++	dmaengine_schedule_bh(&vc->chan);
+ }
+ 
+ /**
+@@ -239,7 +238,7 @@ static inline void vchan_synchronize(struct virt_dma_chan *vc)
+ 	LIST_HEAD(head);
+ 	unsigned long flags;
+ 
+-	tasklet_kill(&vc->task);
++	dmaengine_kill_bh(&vc->chan);
+ 
+ 	spin_lock_irqsave(&vc->lock, flags);
+ 
+diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
+index 805668fbe437..b0d69e3083d6 100644
+--- a/include/linux/dmaengine.h
++++ b/include/linux/dmaengine.h
+@@ -12,6 +12,7 @@
+ #include <linux/scatterlist.h>
+ #include <linux/bitmap.h>
+ #include <linux/types.h>
++#include <linux/interrupt.h>
+ #include <asm/page.h>
+ 
+ /**
+@@ -295,6 +296,10 @@ enum dma_desc_metadata_mode {
+ 	DESC_METADATA_ENGINE = BIT(1),
+ };
+ 
++struct dma_chan;
++
++typedef void (*dmaengine_bh_work_fn)(struct dma_chan *chan);
++
+ /**
+  * struct dma_chan_percpu - the per-CPU part of struct dma_chan
+  * @memcpy_count: transaction counter
+@@ -337,6 +342,9 @@ struct dma_router {
+  * @router: pointer to the DMA router structure
+  * @route_data: channel specific data for the router
+  * @private: private data for certain client-channel associations
++ * @bh_tasklet: bottom-half tasklet stored per-channel
++ * @bh_work_fn: callback executed when @bh_tasklet runs
++ * @bh_work_initialized: indicates whether @bh_tasklet has been initialized
+  */
+ struct dma_chan {
+ 	struct dma_device *device;
+@@ -375,6 +383,9 @@ struct dma_chan {
+ 	void *route_data;
+ 
+ 	void *private;
++	struct tasklet_struct bh_tasklet;
++	dmaengine_bh_work_fn bh_work_fn;
++	bool bh_work_initialized;
+ };
+ 
+ #define DMA_CHAN_ID_STATIC	BIT(30)
+@@ -1970,6 +1981,9 @@ struct dma_chan *devm_dma_request_chan(struct device *dev, const char *name);
+ 
+ void dma_release_channel(struct dma_chan *chan);
+ int dma_get_slave_caps(struct dma_chan *chan, struct dma_slave_caps *caps);
++void dmaengine_init_bh(struct dma_chan *chan, dmaengine_bh_work_fn fn);
++bool dmaengine_schedule_bh(struct dma_chan *chan);
++void dmaengine_kill_bh(struct dma_chan *chan);
+ #else
+ static inline struct dma_chan *dma_find_channel(enum dma_transaction_type tx_type)
+ {
+@@ -2017,6 +2031,20 @@ static inline int dma_get_slave_caps(struct dma_chan *chan,
+ {
+ 	return -ENXIO;
+ }
++
++static inline void dmaengine_init_bh(struct dma_chan *chan,
++				     dmaengine_bh_work_fn fn)
++{
++}
++
++static inline bool dmaengine_schedule_bh(struct dma_chan *chan)
++{
++	return false;
++}
++
++static inline void dmaengine_kill_bh(struct dma_chan *chan)
++{
++}
+ #endif
+ 
+ static inline int dmaengine_desc_set_reuse(struct dma_async_tx_descriptor *tx)
 -- 
-2.53.0
+2.43.0
 
