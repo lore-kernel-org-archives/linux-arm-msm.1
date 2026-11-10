@@ -1,60 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794285309;
-	b=4BlznEhjOSNS1jJxaqMwzwAjGpl0a4o61NS375073szjYkm6yiqab4rKy75/VttZVANk
-	 APkWLH8Brgnj/faqoMWxP7Gm5TImfyTKT6cDQDS4K+XsadlBSGf/V4VEMnwUGGfPD4ee9
-	 zybdBfuNGzxjd0ApoU2m4mFQiqV4wlpWimZ7oxLUSPT5GnqhC9PMi83vaZuc4yQw86Plc
-	 mnMgefWuKtcOYsfGOgH/dfbynVaAH2EeC/aslAD+hc0fyVJRStkmYzl5pAvHTH5tZm/1A
-	 dDAccUC8DCZbTkMcumcR7+uyd2ees0K7fSzqUDu+wwz/CyIKUMPWFEqLhbQv01ESXjQ==
+	t=1794285304;
+	b=ye9gbH9PXJl58tpTsAZ9U/AYh9KfC3eEbuJvy5DZ7p4+JFhS6TnyknTgBtdzpasXpfIO
+	 Ai6p43Qa9uYcJbmRsJSDeMrbCvfAOeIQ/eywanhAAWkgL45fAdGC7+hR3Xcsb/7QXr9cY
+	 Pl8D72uFu0Y4ON1CvVIAVkvqglKtBSDSi4fpTlNsKotoOg9zOazJ6j9x1m0b1A7/8k5cy
+	 HbkZOBuCIbO8gTMbjmaeXLUVrbu/CP/RAbQT4sal977BZUjt9rsyw0jHfw94TuoYrevfk
+	 4IwJps6aJngh0AClB3u4n8rSAGElsUN14vnpsszD7NICJzpJe7I/T6ywyvR66hFdFuw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794285309;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794285304;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=crZyUUQE2/M84BqAMX/aRkPV4MGGeswqi3566mAlMu8=;
-	b=gx643+SL+Cy0JlT0EUJ0z+ESaflNNMJ/Rcyu4boLYxGO3QiSTdyy+sz2SIZnnNVDVHDr
-	 dQze1fUIdRa9ywWokVDraQi1qrzujUj2kktvK/B/aZojJmhrt3CGRZsrqoJIJkO1kd4as
-	 FmYcQ0DuUapEV3nffFeVK3JN0PtNArfhVx8dpCsMRQkD9Bz1hw3mGfSW2g/HwXLARcyRK
-	 bshkaRvaUAyPdGmmLmtMRGvMlzD3C4Ao/foAmMPMi4VC4mPC4I27flL67V/RgQKpYEbGn
-	 spIE7lCmmQFBlDimItnqHiU8A0xC6k1Bsodi3Isvvjcbkk8KPs/UQWPQmUvYk4cesmg==
+	bh=9BPNllYsfu2NobtlPrJawffGHZDwHTWu0ls7q78rVUg=;
+	b=n7qF56r21EXMqQ7KuV1b8KveljL8PjUHt+up+7JDFQIN7ay4DE6rhrK0ShoWIrTOoawq
+	 ijccz1JJKV2yn505BAlYtI92ZZu/WV/MBQWcOqHYAGI5CSzhsZu2/xKwAOpQ1VjAj171Y
+	 V8Ge24Svorf/ErOJUlRwY3DR1HoKqAs5nG35tOk1uYoJ6KKpS15v8HkIONDffn8Bg9KUR
+	 5dl3D+QNFlROFa8nKuyQQ9Fw/bKbU+RkxllYhKCexHJQIkRv68pgSZ9by5Nm5mX369cJL
+	 4RC01/mlD2rtR/IoVMYlRAG1NUm9wgDKa2GF8yPM2/jJeiV18Zg7hVz2+xk/2O/4o/w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aef4mJfG;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HrV0zLO7;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEB08606A8A5;
-	Tue, 10 Nov 2026 04:35:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DC62606A886;
+	Tue, 10 Nov 2026 04:35:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aef4mJfG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 281061F008A5;
-	Tue, 10 Nov 2026 04:35:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HrV0zLO7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 660091F008A1;
+	Tue, 10 Nov 2026 04:35:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794285308;
-	bh=crZyUUQE2/M84BqAMX/aRkPV4MGGeswqi3566mAlMu8=;
+	s=k20260515; t=1794285304;
+	bh=9BPNllYsfu2NobtlPrJawffGHZDwHTWu0ls7q78rVUg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=aef4mJfGx+XssVDlJ1KOAg/Kb8wAewcHECZaUx+eC3pMppBvB7tIbChyWGzId7mUc
-	 lAOqTCumx3uOpJ2WykgTHeL1Tt6tKcaIFnHslp+pW3mE2Dc5+nNAr2nVI0Wbrog2Vw
-	 135couv7z/J7Nifjd4+ZGCn3uLjv69gEC3y58xEv+CBlCvQJMYtWOsDvz1ACj/aXwe
-	 qMAnLH4Ptvc70QSRxTOatC7BQQ93i6ns7Vx5bcHFYHczcvLXYcFVvxLfPOhVSkbmU5
-	 cvtYkQr8uF7KsoztVcq4gkYWVdYCoMlBT1fi9WMHhIkwjqCEty+wleGO6EKitY14PF
-	 s1wj/Ilpg/hgA==
+	b=HrV0zLO7hm/R5QkGWmYBkadc0BB7WavKb/gwr+FDGWm/txhRXKSEKhi4eWFlE7+6J
+	 T4aRr93BXDdHPikleGBkOwY0MbVXViuF3bnBIKS7KjrIsrj9PcyUGNv5j33CzZGtNv
+	 k9ZYdTlxW4pqxW1uZeqBBFowMgr6bpRk3E5ZVufXqsrH3GbCSBGGZFosrjOrOF/W6K
+	 U9aECvMyCglYYEdHzhfuYlyhy2mLn7g2/zpkEJpHO3TE8Cm5Va4R6N7sCk3JiDZFTV
+	 9jaeu3okbgEELjDwBbCDrJDos0xuyOu0KehtZfUxdwi70n3IXW0XUPj9XANH2RSYdL
+	 mSjAy+x8J9yHw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Rob Herring <robh@kernel.org>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
+	Hongyang Zhao <hongyang.zhao@thundersoft.com>
+Cc: Mark Brown <broonie@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH] arm64: dts: qcom: msm8994-octagon: Remove ad7147_captouch
-Date: Mon,  9 Nov 2026 22:34:49 -0600
-Message-ID: <179428529345.1061455.14300631403027340638.b4-ty@b4>
+Subject: Re: [PATCH v4] arm64: dts: qcom: qcs6490-rubikpi3: Add audio support
+Date: Mon,  9 Nov 2026 22:34:45 -0600
+Message-ID: <179428529360.1061455.10674194152640910299.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260911-topic-lumia_drop_captouch-v1-1-6f92f1f3c6d3@oss.qualcomm.com>
-References: <20260911-topic-lumia_drop_captouch-v1-1-6f92f1f3c6d3@oss.qualcomm.com>
+In-Reply-To: <20260928-rubikpi-next-20260605-v4-1-56ac4da896fd@thundersoft.com>
+References: <20260928-rubikpi-next-20260605-v4-1-56ac4da896fd@thundersoft.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,16 +71,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 11 Sep 2026 10:43:47 +0200, Konrad Dybcio wrote:
-> This node lacks dt-bindings, producing warnings and is reportedly only
-> present on prototype hardware.
+On Mon, 28 Sep 2026 19:49:16 +0800, Hongyang Zhao wrote:
+> RubikPi 3 uses the AudioReach firmware path for its external audio
+> interfaces. Primary MI2S connects to an ES8316 codec for headset playback
+> and capture, while quaternary MI2S feeds the LT9611 HDMI bridge.
 > 
-> Remove it to get rid of the warnings.
+> Describe the ES8316 supplies, MCLK, jack detection and audio routing, and
+> add the primary and quaternary MI2S links. The 1.8 V and 3.3 V codec
+> supplies are both controlled by GPIO117.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: msm8994-octagon: Remove ad7147_captouch
-      commit: 895f14315d636dcb313db8dccfa100b53c361b13
+[1/1] arm64: dts: qcom: qcs6490-rubikpi3: Add audio support
+      commit: 562984c2301434b62d9462b9410d47f52bc6796b
 
 Best regards,
 -- 
