@@ -1,49 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794327008;
-	b=gS3T7rJRzgf75ZJ+VYHWD7ASbVtmW0qciTKZk85a+X2b0Ah524B2PinxSMjj4Ct35+UU
-	 KX+glJZHFZAUl8UMMfGtV3YK3qMg6ywmxCvs3B5RAgP1DUHsFfOuP0Cfn5HkKYKVDS4GU
-	 uNXfeGaRv7YQX1oQNt6OG0CI9GTuru+eoqPAcJR3Op2vcgbknlB+N8NmhSbvlTTqqyKvr
-	 5oEufY2JCtJLOa6utU0hlkcA60yyFCZSVYVVWuLy09ENp6zzQjc7++fsDo6bjVDiXV++v
-	 DbvB0eCE8lPRnmyW5BR/tD2ZwFSV+7irLKR1TjbT73BDSCGVYa7rhEilULRh9A6xr0w==
+	t=1794328604;
+	b=mJVFZnQf9FMlTrzKg2iW8HKsToRyTg6tq+kC6L9MXlR1dwVlOX+Vw0Urbzu3LxhuePr4
+	 1zUf8QOTcWgrqW+7CSg5B5Wdz8vUvpFfZroJTfFQXx1NOK2fSkO/gpKLSazJNUy0DOaYY
+	 MnHw9Bis1dOalzslait+LIIOOsLsjk/i9PfVDn2CN6TxMHoPYx6PmR2U+sneaRKggh1xa
+	 ck99t4i4mX6m6W1AbcItChnF0lntvJWyBOWODZ5Lv9OsEmz7n16sOYnKgtnq907eHjQih
+	 fhL0iH87V1pcFjnHK15BgAafBzSgkkMx4Hha++sZvBBGOwoeionRDMWE1/FBe9zUjVA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794327008;
-	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
-	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc;
-	bh=QE0akMupOU6kvmoPQWpMe8qJ3jt3YgwRHPsEPnaHOYo=;
-	b=oePZIss+TdZ4FtiM6QeScdU6I+alUwiT5Q7Ilk24UsgDBGwc4VWD1pZIWwZ274XXj7HC
-	 OLU32kEcOPwyg3yAzor5ZUfX/ImLgzQ4GPZgmU99jJlQvMtp7XkUUITFb+eBRXuvnA7yy
-	 85Bh9MUbSaGaMOsYqwFIv2lhN13PgpcwUZBW9GLbBufbwIcUc3zPh0yZt0YOdFhem/yXt
-	 97bHMm0TQ6Y2QP1+4af3GFJNO2lwdwAaBrf0U0vJg/0Ns4kfUejqzwMqaq8mkW7djiLPc
-	 RmnyhqWz28XvZKav81IHOF6n0j3fZ1KelMadTg446Ex77hZCZcaqFvRQowoSEeNPZdg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794328604;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=hw+3zqA7UZ9elcCZrIVlz/QptcshGa9YtO+YVN2H6Ng=;
+	b=NL2xoWPstU9ApXMExQ5ykM0jX4a8zy2n9z0O9dfIbr7mlnpmg8HYs+e/jzPvy3kHBs9v
+	 ZG/yi3qrBDeglAJY0MGbd4qMtNlHg4pc813Fq/RQCa8W7Dy1KDkcNCVjvCeUL3zN1zshR
+	 sHALgpcQPRENwuegsbD8lN/mQoK5/NgdreM40G8PcjMZiyq5sc2f84u8RYhLquD581PCM
+	 TYb4dzWUb4lS75EycxrvrMAI7d1hCBpjOTCGqwQ3ICoaBgvL2elCh6MARrT6GKEpO2Czk
+	 0CeTQtaZnud4kK2v6P1ZyQHkIT6TEQoKoOM1OSlN+kMDi5fL0vXw+m+7Xud8VMneSmw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RVnxVKX7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OXo225o5;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88B4F606A31C;
-	Tue, 10 Nov 2026 16:10:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 555E0606A20D;
+	Tue, 10 Nov 2026 16:36:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RVnxVKX7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 310671F0089F;
-	Tue, 10 Nov 2026 16:10:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OXo225o5
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94FAB1F0089F;
+	Tue, 10 Nov 2026 16:36:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794327008;
-	bh=QE0akMupOU6kvmoPQWpMe8qJ3jt3YgwRHPsEPnaHOYo=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=RVnxVKX7TB0CtmbUpXpo/tpUsnICUXHpTwg/EVcRkpLdfLrNo7m2S+WpLS4C7uCQF
-	 Q/XJ7uenR6n2ho+HvSI9+y2R049tUNAd7kvlTO1sN8cBIpTbg1ol9ialWKbk+ob+Fs
-	 08shlqJKnCmHZ6SG+S8iv3uKh7NgGSHBEz6FB3/VqZGxi8+9eWss7XklH9s/KJ/can
-	 h7/IBe3uScmw8V56GxoaewtXMgRMfalQ4kvSjkAYaUqecpNp86Q1AgG3dZzVXML+va
-	 lL770Pa9ebXbKzMzMokOnKxGPFuiIpl8jGSkcoM/6HRmscTfMPirRReOc6Ge3tOYse
-	 uCN8pTHCogHQQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 2102839D267B;
-	Tue, 10 Nov 2026 16:10:08 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=k20260515; t=1794328603;
+	bh=hw+3zqA7UZ9elcCZrIVlz/QptcshGa9YtO+YVN2H6Ng=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=OXo225o5aKjmwtCMQ1qiahGN9jED+pb8UVKbvpgxk9xIx8kQxt4djo2+ccR3cFN0P
+	 7ay1xB77ENJTsvOXJ2iHioDxl9YyePhesDBJEGG4X2YPnfRLshK/X8WHmrNGa3ClDF
+	 jFG8W0DsmCkUsH/Y3P6uACHniPYw97p7ilL/hGVpGrQKebSMEXaFUzNRb1+2CC/4KM
+	 3UdPryh+eMHPKvpU4+KApoxffNSlWBZgcGdUps5OY/WqxKaSNCv6XIvkIatJRqJYyc
+	 Te6rV406w7PszVGNP5dp8ECNo/TM3ZhINIj6cxRS0N8hFhBqiJD9gFTkCkFnjbg4yP
+	 hTWLv6U4erVqQ==
+Date: Tue, 10 Nov 2026 10:36:40 -0600
+From: Rob Herring <robh@kernel.org>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: gregkh@linuxfoundation.org, Thinh.Nguyen@synopsys.com,
+	krzk+dt@kernel.org, conor+dt@kernel.org, linux-usb@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v8 0/3] usb: dwc3: two Type-C connectors sharing one HS
+ data bus
+Message-ID: <20261110163640.GA85824-robh@kernel.org>
+References: <20261106114208.987284-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,48 +59,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v3 0/2] Bluetooth: hci_qca: Reopen port after power on for
- QCA2066
-From: patchwork-bot+bluetooth@kernel.org
-Message-Id: 
- <179432700692.4062787.5940023737695374841.git-patchwork-notify@kernel.org>
-Date: Tue, 10 Nov 2026 16:10:06 +0000
-References: <20261028111839.2148515-1-shuai.zhang@oss.qualcomm.com>
-In-Reply-To: <20261028111839.2148515-1-shuai.zhang@oss.qualcomm.com>
-To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-Cc: brgl@kernel.org, marcel@holtmann.org, luiz.dentz@gmail.com,
- linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
- linux-kernel@vger.kernel.org, chejiang@qti.qualcomm.com,
- quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
- jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261106114208.987284-1-xiaqinghuan@mail.ustc.edu.cn>
 
-Hello:
-
-This series was applied to bluetooth/bluetooth-next.git (master)
-by Luiz Augusto von Dentz <luiz.von.dentz@intel.com>:
-
-On Wed, 28 Oct 2026 19:18:37 +0800 you wrote:
-> QCA2066 needs the serial port reopened after the controller is powered
-> on, otherwise the host and the controller run into RTS/CTS
-> synchronization issues.
+On Fri, Nov 06, 2026 at 07:42:05PM +0800, Qianhui Xu wrote:
+> *** AI-assistance disclosure ***
+> This cover letter and the patches below were prepared with the help of an
+> LLM coding assistant.  The author reviewed every line, ran every gate
+> quoted in this letter himself, and takes full responsibility for the
+> content.
 > 
-> Patch 1 reopens the port in qca_power_on() for QCA2066, as in v2.
+> This is a re-post of the series sent a few minutes ago (Message-ID
+> <20261106112811.963923-1-xiaqinghuan@mail.ustc.edu.cn>): that posting lost
+> the version tag in the per-patch subjects -- they went out as "[PATCH 1/3]"
+> while the cover said v7 -- which is a tooling slip on my side.  The patch
+> content is unchanged, only the subject lines differ, so the review of that
+> posting still applies.  Apologies for the noise.
 > 
-> Patch 2 keeps HCI_UART_PROTO_READY in sync with the port state, so that a
-> port which failed to reopen is not closed or flushed again.
+> This is one complete, self-contained series of three patches: the binding,
+> the role-switch lookup it needs, and the DWC3 arbitration between the two
+> connectors.  Nothing is to be applied on top of it, and no patch of it is
+> posted separately.  It supersedes the v4 series
+> (<20261026123211.243224-1-xiaqinghuan@mail.ustc.edu.cn>), the v5 fixups
+> (<20261031150154.1106455-1-xiaqinghuan@mail.ustc.edu.cn>) and the 11-04
+> posting (<20261104032706.210042-1-xiaqinghuan@mail.ustc.edu.cn>) in full:
+> their content is folded into the three patches below.  3/3 additionally
+> answers the two High findings of the review of the 11-04 posting.
 > 
-> [...]
+> Two connectors on one DWC3 controller
+> =====================================
+> 
+> The board (Lenovo Legion Y700 4th gen, SM8750) wires the Super Speed pairs
+> of two USB-C receptacles to separate PHYs, while the High Speed D+/D- pair
+> is shared through a 2:1 mux controlled by a single GPIO.  Both connectors
+> are data-role dual and hand their role to the SoC through pmic-glink, so
+> the controller has to arbitrate between two independent role requests and
+> move the shared data path before it is reinitialised.
+> 
+> 	usb@a600000 {
+> 		port-select-gpios = <&tlmm 29 GPIO_ACTIVE_HIGH>;
 
-Here is the summary with links:
-  - [v3,1/2] Bluetooth: hci_qca: Reopen port after power on for QCA2066
-    (no matching commit)
-  - [v3,2/2] Bluetooth: hci_qca: Don't use the serdev port after a failed reopen
-    https://git.kernel.org/bluetooth/bluetooth-next/c/45e28b01e4d0
+Use the gpio mux binding.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+> 
+> 		ports {
+> 			port@0 {			/* HS path, connector 0 */
+> 				endpoint {
+> 					remote-endpoint = <&usb_0_dwc3_hs>;
+> 					usb-role-switch;
+> 					mux-state = <0>;
+> 				};
+> 			};
+> 
+> 			port@1 {			/* Super Speed, QMP PHY */
+> 			};
+> 
+> 			port@2 {			/* HS path, connector 1 */
+> 				endpoint {
+> 					remote-endpoint = <&usb_1_dwc3_hs>;
+> 					usb-role-switch;
+> 					mux-state = <1>;
+> 				};
+> 			};
 
+ports are for separate data streams. Endpoints are for mux'ed data 
+streams. This looks like the latter, so port@0 should have 2 endpoints 
+and port@2 dropped.
 
+Rob
