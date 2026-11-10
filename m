@@ -1,63 +1,65 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794285315;
-	b=DR9KCJb/xzSoEsFLBUk6BaNldDCAriz28R+ebDr5O2d1i8yFcfMXXVro87tYWbULQoKS
-	 u3pWW9TGX3oqkCnPcIP+xxHW5lWtpxm/x9g5igBtg04R/lOm6L+McZFHqjQ7WbVZ7nNCS
-	 oNsHTihXJGybyELZS6azGcxMafQGWTlVr+jiNHEAro7qOOf7xTAXUCCnCmRcrATc9rfAv
-	 E3lA/kGi2i/1zypyUEbn9Fj+G3yrG8QOaSBGSjLqcTIa1oaFmzmerlOglp84zRqYFhOBY
-	 SKmDgyX2CBhrWGacuKSsgyfINxzuJxQOxAPVM6D2kzYJIWhnxvfXFw6FFr32/61mXLw==
+	t=1794285307;
+	b=onVdWma9JN3OEKCVNXqezvTIeeE7WLQ/TP5NLq6mLLeMQfHHPOYRkYgkLk2/QZbs9Me8
+	 3mkazsRW/dpkTnF9DGGf3It/ZvTNuYe71cDrh7ZlJRk+0ujtLg+b850kYwAP5SPZdZz7p
+	 dTKmKP8AeXnSWLOa5ePHtEoEPKXm3H8YBzVdFg2YV8ts9Ie+EYpwCSrTL90L+eH9WLcH8
+	 i7WI2dXgr8jb2jfUFcA5AUv1/zdUMmkcEO7FQEYjSxdaGcH2gX8DkqWs+bGWgJbLeHmuW
+	 867GYwOz0TTG9a0DP/2ZeKq10WLcwXx1/cpH/P7fiKl6VNAJLrrtNR8j+I3IntFtsBA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794285315;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794285307;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=Y+y+dw/7F9ePtYFx0DkrH6qgsrA6IQQMbAKMyMiMpck=;
-	b=4XfDLfhqdzaoH6rZTgqc5/ZW+odsecuGpldIPW7iSnlZ4QvbZ6g/L5+iOIVYNPzuDs4q
-	 MR+may369tNXoNgFiY2UdWsoTJsl2bSV+iqNXt0zcKzPNcpNE7WjoKNQwDwhRgxS0qsyf
-	 huAdnDZ7ma/OTEaYsCrIzGxNH4RF7t3iR43kDF8JUmH9ZN3MCO0mXWntoezPL7mf9A5FP
-	 PWoUABCf8LEzAG64J+voq7IkSy6NEIIiG431/XxkXDYimNX08HZS7EhcWHhlx5k0jMlP2
-	 n0huG5T7zCX6brYxb5IfQdN6c9CH3tgybWgSVByOqosEEkwAXJGk3edKzIsSyryO9oA==
+	bh=YmXnhCl7jkWETCG6T7FluA02RpGlT/C0gV4+SRkfm0o=;
+	b=sNwFkjkpKg5mztg7Ue1O0f+PPqn38HEWN2VrITr0i8WYZXYScRKeRrIP9SbOKH9dBAON
+	 gZZ5uDAky+0PHo2faYs5Kfm34tVfD6CzGQPDCINisFv4DWqZOcWNDjT6PX3f13jQ1S+8Z
+	 aQQ9S4/LcTCLtoQxSOPvjKCx3hjJU5ERL+P0raUkJJ6RprAxgKMwZf6+5iM1B9T27iMJG
+	 7mxmm/V3LAneHwchtS2pzkt8gOCopjacSv2WDjAqzoN6VVN++D/Kb1fARfkkchII0foIG
+	 DVEpJfoxO/nQgfT41sC4wW5iJ7zdPBZX7PrgEP+tY4h+8PU7ikUYDlxYc/10c0e8QOw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QAjRDM1Z;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jikP2adD;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 937B260A2616;
-	Tue, 10 Nov 2026 04:35:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ADAB606A894;
+	Tue, 10 Nov 2026 04:35:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QAjRDM1Z
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C3191F008A5;
-	Tue, 10 Nov 2026 04:35:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jikP2adD
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F020B1F0089F;
+	Tue, 10 Nov 2026 04:35:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794285315;
-	bh=Y+y+dw/7F9ePtYFx0DkrH6qgsrA6IQQMbAKMyMiMpck=;
+	s=k20260515; t=1794285307;
+	bh=YmXnhCl7jkWETCG6T7FluA02RpGlT/C0gV4+SRkfm0o=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=QAjRDM1ZQ2uWIew7HTdjExTJeN/CQ5VzvY2lLry0aYesvqxZN4eGLnI2ymJ47oigj
-	 uGxSlGoMC+sTxCG0iZynv9ln2vK+KjGPrPcWlItocyqzPt6FJGFLBM/Hf3GBh9G4Ng
-	 KxSTblbJsnTIk97+AYmHSzgxkTebV2Lxo1dVF5sIOwNYdU7RwoLjYmowzUsA8KXwlP
-	 nQ6V7CN1z7t2YIgBkiPrn/wvYf9g2dwoO6C0maVNxVPYxRdLol9+N8x/C4rvQvm8n8
-	 olaincQ2UPhkVscKMh+YauAiVUgkeT4+dm9Drp3qW5ZLA10NRUudu+rRkxRevTQJA9
-	 1N76Z/QSgjj1A==
+	b=jikP2adD7HbW2GV6kD4CEvx9Q69n1RvqldIJ852UWcV08SzXaNFObGi5QATb1xxQn
+	 BV7Q9TF4g7FH79+jcRT7Y807C5d9+ijfEln6H/IYzDBa9G2DfjFBTX1OE53eyWot01
+	 ykRHaRKrDCmsnUx/eJ3kjFO8VmSjLVljPoxRVWseFBQ6Q0jHjxJmG1RzRrjgJv1gqU
+	 dFoNLsRz4o6QGShAQlsG9uSQtj9F17dTpw4z+fLesFna1Qb2WyFdN9uPWygBvvCFfH
+	 zjQJM4ZC6ASJ2KallT0tI+b+dXR4u35YVxTohqTf58i9+vuVFInZdV1ywTMW4xfJGF
+	 k9pw9NzUJ1XyA==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Paul Sajna <sajattack@postmarketos.org>
-Cc: David Heidelberg <david@ixit.cz>,
-	linux-arm-msm@vger.kernel.org,
+	Ilia Lin <ilia.lin@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	phone-devel@vger.kernel.org,
-	~postmarketos/upstreaming@lists.sr.ht
-Subject: Re: [PATCH v2] arm64: dts: qcom: sdm845-lg: Enable NFC
-Date: Mon,  9 Nov 2026 22:34:56 -0600
-Message-ID: <179428529344.1061455.14898677998626512432.b4-ty@b4>
+	linux-pm@vger.kernel.org
+Subject: Re: [PATCH v2 0/3] Add few more SOC IDs for IPQ5210 family
+Date: Mon,  9 Nov 2026 22:34:47 -0600
+Message-ID: <179428529357.1061455.7098131094603582662.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
-References: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
+In-Reply-To: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
+References: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,16 +73,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sun, 06 Sep 2026 14:11:08 -0700, Paul Sajna wrote:
-> Add the i2c and tlmm nodes to support the NXP PN547 NFC chip
+On Tue, 22 Sep 2026 10:03:13 +0530, Kathiravan Thirumoorthy wrote:
+> QCF3211 and IPQ5211 are new SoCs based on the IPQ5210 family. Add
+> their SoC IDs and update the corresponding CPUFreq driver support
+> accordingly.
 > 
-> Downstream dtsi for reference:
-> https://github.com/LineageOS/android_kernel_lge_sdm845/blob/lineage-22.2/arch/arm64/boot/dts/lge/sdm845-judy/sdm845-judyln_lao_com/sdm845-judyln_lao_com-nfc.dtsi
+> Viresh, since patch 3/3 depends on the first two patches, could you
+> please provide your Ack for patch 3/3 so that Bjorn can pick up the
+> entire series through the QCOM tree?
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sdm845-lg: Enable NFC
-      commit: b115248511aedffd43b82e1cae196c6836fcfe83
+[1/3] dt-bindings: arm: qcom,ids: add few more SOC IDs for IPQ5210 family
+      commit: 9b00a224f0defb1982d2569ecfafbd347d800b34
+[2/3] soc: qcom: socinfo: add few more SOC IDs for IPQ5210 family
+      commit: e19fbf2955d7f6e3be91090dea6beb77907b5262
+[3/3] cpufreq: qcom-nvmem: add support for QCF3211 & IPQ5211
+      commit: 011c427b6d209eaa944ac758a0924fc768244228
 
 Best regards,
 -- 
