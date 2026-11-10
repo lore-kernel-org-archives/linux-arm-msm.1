@@ -1,85 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794269046;
-	b=JN7bDEeeFkh13jrMECLnJs/VRbKFoKz4gkfaUMOyRO9kqoFjT3ldrzB7knjgyt3wCL4l
-	 68MSXeBWExpttNK99jWbGi+jW91JaEtrfCNJiuIn7qaG/1lCM7dE8fNA5KRrKhYLRrJAf
-	 hkYKHi5c3TyNMNANibIE9p3ri7xRajgUk+pU24mwKLv+MM9/fzBztqdJv4knGfKi+VScU
-	 ICl4TPVaOZoXWNVcVjA2HHA2E2L6KDKkpv1n5Dr4aimVZYYFxnJPie5/15mLtwqpyzg6B
-	 bzr/2FYVTKkkrUQl+NCZm3FGvB/ZVjx7FCPhbsFsXrS6q7Up4p7jSCGr7PGpJ58fHsA==
+	t=1794269940;
+	b=2pDz0g5slkgT7yD6K7LRh8GbfnSsq/xzLKvkpVixwDRGjncZew+mrveINhCRv9ZwixVf
+	 NlpnE5x4JvH4zvCpuKIjtk3kjPnABd6VpQh6tw8WOiAArXHupmye28Zvpomskn5/mh+7n
+	 W85++tr1sYytyCGs1RDeQ7nd1OYFWYlo2oFhBLS2cLMK44w8bZMqP533TN9RaDDAMOiZ8
+	 Um2sHNNzBbUlqGgPt76ApYmgBDblKIvmqsbDw/cF+SY9wiMblDWgweTHtNEKKNHAIggpW
+	 1Fh9K+kuBzThIf+QziDH0w/dZ6lwlikegWXl2UEQNAxwM79zM0HKFKoQSOckoKGMw/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794269046;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=vESg3aj26lEluvBcaUBYlDgZP/BjzkrTsmOjKAVCv8k=;
-	b=5BCJIKLIJwc1QVtHKCUWTYqq8cOjEeMec5KMhjvmwXFYYN5iFWlaRrLGT4PGsYrR1m4X
-	 1Q0MA9OM9jNJv0E4+AxHDkiUFjt8O5D0QBC0QzMBEo8z3ToV3wuPNsLNmNzkgCuwiFtiR
-	 4zqyOqtyA/e/UwCzKIclFu05XJ2l1BzqPefdhsRN+gB5E8JNjyKTTcn7pN6DfUl3TuIhm
-	 BGdUdviH4zxAiRFr+252ubHsCDnWiEiZAaNXBaHu9PrHk/bsshTlNVF+nSl8fiWKZ3tim
-	 E/5CkVDtr4Qy9xrlyB9mAAh3/P2y2aldb0Z/DtjPRZfEBl5oAyKqYo0K6WzrH0q0Cqg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794269940;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=KHE58ax+PEyPhniZNrxi/+FM1uEajhUVPzOagR6Yuok=;
+	b=u9W6M8LQixZAfy9QWwLSXdoOekj4wbOoAAy1Q7j5HkxhUUCfFouNG1IHwdmV4Y15Hsgt
+	 fxHuYToExs4t42kVAsUU3nkzGv3J5Z2NZHY3jpM83A2KiCaoXYhmGiiQclwgdJrdzrMS2
+	 TEUe0Muy/Q7XU87LF7hVGdyvFFIP95NqrvoJpDNLDO882SAqSlFsknxRqoUnB4sez9TTn
+	 i/V5NwIlGLEBShFx82MoVRXbCWWjNxsWSfCUldTGYVDuC6ue2wHG3+2LRu/0uLHcUtvMg
+	 mrYyzGNslq8XSrPm+pMB6PK1IYIyqDADem/vReEzToKJoUSqdicOjvvaldtkwVIBUag==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=YN77BDj2;
-	arc=none smtp.remote-ip=209.85.128.43
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EEvKZ78d;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A1A8606A336
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 00:04:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6A1A8606A336
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 818DF606A31C;
+	Tue, 10 Nov 2026 00:19:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=YN77BDj2
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a5087a5348so12242115e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 16:04:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794269045; x=1794873845; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vESg3aj26lEluvBcaUBYlDgZP/BjzkrTsmOjKAVCv8k=;
-        b=YN77BDj28AgJIKBjQOvbV7gOozPi0QbWFAXmF69f0sSx+uC5nwG5WFm+q2acmxICIC
-         jU3ABme9xOBIXz/YlxDAATfhxn/I4Ek26jZ32MsWxTv0SwHzXG2fchiOJvHFbpt9q7/b
-         iagEpoRSfb35tW+6AJ6KUtAKWTQAh0CAXMAASLbNe4+1LoGFkQVCkNcvxgx5M5Z9ch4r
-         gqNuq5qri/Qe6gcGW470dXFscsCTziXLbFOr6/jI+rpwaEDBcPUuRINtNUmdkVnUTqhk
-         XsXtyU6M26x36c8vWDq80w8Ran5mIWbTd9TIW9sJPUYuhW+dw8H0k1viQLJvoqVWy5yR
-         7Apw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794269045; x=1794873845;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vESg3aj26lEluvBcaUBYlDgZP/BjzkrTsmOjKAVCv8k=;
-        b=oRQOA+Lq3pyYfs18sFNPDoLcaaNQO9taygMsJaXz5RnAp7wKj4/BkfIyI6Ufyj4Ljr
-         pA09WyUCvDDfE3bFDiUtJetEesGeqUIMssKdUELr/Z0S53X7kth22gnfzQGDRNP9vOVV
-         mpDKzLBWgJmyi/ChTfqf4xOAWS/NwthdAjF7ksv+V7z3r5GColdOytv6Xv+ky/zW+pQB
-         t2zN22QPPGUEASjuSO3O29LI+5hGKp0TblIxoQ60n7bnmq9zKAclBENjB2OgjbuT1nmu
-         dz4Ac4rpG+2USZ1wOtrlhDtAezoOSZrwqY08l3XAB5q1LwWAhVe74Zi8DQVRC2yrRVWO
-         Mrkg==
-X-Gm-Message-State: APuU4Z8jOvdINDKXiq71YwCI1Rtqqkd2WYrXbKvlrcpOLWfiVE7IvsA8
-	GoEVESDIrTFKdCdcMFxoO1RILY54Sp5UvF9/jN7Aq+1HehXlrZlHJmUlF/3w0Zu+b7Q=
-X-Gm-Gg: AYBFou2te5yKhWw87VbgoRulnKYn8IBdIoUymjiAL+WhgPoJNT8Wbr3IaItZSLpi8NV
-	33X6fWrUDNtsBWI5Kxy4nMw5qptmhx8t2ke3ksXMPy/8ZYNeZPeV1mZQZX+aEXIVmycsryePJmP
-	tBeTr8lOTmJL2FONpSycg4H+RZlneiJpyhY32m5drK0vEBfV1aXyVgUpAPtJhl63oCr5ZiTFfV8
-	d9BLpb83ibkjWHTlNHeZNRHcCuelTC3Nyfhm5d3ZNFGYZLpjN1mHBEenUEYXILx5KxKmdf6+3wO
-	FUBeCbSt1Qr0ee0VCl5Qvu9cdeHW8nbE4OH3CHqeZz3oAqs+kaTDuE+FAmNGiTHkOdvxIUEMMZL
-	QaIAyLBlex371A5ad/gzzNV5L9qNZyGDuTuNBVrvjVeNl2vCR6kGVx2mvnqPkCDHKGCfvS712nO
-	Ntdj3jKW0t1MEK8PNespa92YKsEVO4yCoNFXuMk8M1SgMyIAL+08J71sKR3Fb4dnLjhV0byBbHP
-	OCIa2d62cV1VVOq7VBLYrwRnOITsGZAtwM7gexoVzcB0umQrSYrbnXzhzMe0XWMPhFAdw3IG2LC
-	GDqxk3syCMsAx+Ep7Oeefw+l8Pzgae0uPHnlA44=
-X-Received: by 2002:a05:600c:811b:b0:4a2:1197:1de0 with SMTP id 5b1f17b1804b1-4ba02344e46mr9602805e9.19.1794269044761;
-        Mon, 09 Nov 2026 16:04:04 -0800 (PST)
-Received: from [192.168.0.167] ([109.76.74.9])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba01fe2c5asm38245075e9.5.2026.11.09.16.04.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Nov 2026 16:04:04 -0800 (PST)
-Message-ID: <fef23213-8ccd-4235-a375-c00aa540bdbb@linaro.org>
-Date: Tue, 10 Nov 2026 00:04:03 +0000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EEvKZ78d
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DAE51F0089F;
+	Tue, 10 Nov 2026 00:18:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794269940;
+	bh=KHE58ax+PEyPhniZNrxi/+FM1uEajhUVPzOagR6Yuok=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=EEvKZ78djbpGqeIjeOwK5XDBVYxNbW0qUuNh6pgsFntgKUFz+fwfpRuRehHF+cQK6
+	 RwDTtcqxn4BjTZ7cE45cMqH+yYUM3f0CWSnkqicNH3AnUtPvTV4clXzuIAzbOi7sPa
+	 LtEorvj6GrP9KZFohTvoI8aLNkwgDeow4iCGCkPb+qMZSgtZ97aXX5U1hhpaXio2im
+	 RG0Fiw+QYT6lo8fRhOEpXfO/l5wRF1EwpJ0c+Zw0NwoejjKVVqjP3O2412kwqA9463
+	 Fgpcqg7KzE1ffq3a27gDSv/IPm11AqrUB7yRWYxReOtGYgiPla1iVW+ZodJ9uIZzF4
+	 h6zWQJFeIistQ==
+From: Bjorn Andersson <andersson@kernel.org>
+To: Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+	Qiang Yu <qiang.yu@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>,
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+	Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v3 0/8] Commonize Glymur regulator settings for fixed rails
+Date: Mon,  9 Nov 2026 18:18:52 -0600
+Message-ID: <179426970787.877162.11018805236130863553.b4-ty@b4>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261106-topic-sip_cob-v3-0-52cd3826ab49@oss.qualcomm.com>
+References: <20261106-topic-sip_cob-v3-0-52cd3826ab49@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,30 +74,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] media: i2c: Add Samsung S5K3M3 image sensor driver
-To: gauravsuman007@gmail.com, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261109-sm8150-camera-v1-0-3d2e7b407516@gmail.com>
- <20261109-sm8150-camera-v1-4-3d2e7b407516@gmail.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261109-sm8150-camera-v1-4-3d2e7b407516@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On 09/11/2026 22:38, Gaurav Suman via B4 Relay wrote:
-> Tested on an LG G8x ThinQ (SM8150, CSIPHY1).
 
-What would be common practice would be to post patches for the platforms 
-themselves - i.e. the DT patches to test these changes and view the 
-binding implementation on real hardware.
+On Fri, 06 Nov 2026 10:29:01 +0100, Konrad Dybcio wrote:
+> Certain rails are predefined and will ALWAYS have to be the same for a
+> given PMIC configuration (due to electrical and other requirements).
+> Factor these out to remove a layer of pain when creating DTs and let
+> one have a better way to reason about the settings across the platform.
+> 
+> Glymur-SiP will be the next target after/if this is accepted
+> 
+> [...]
 
----
-bod
+Applied, thanks!
+
+[8/8] arm64: dts: qcom: Add Glymur SiP CRD
+      commit: 83402dd1d06a97eb2a377d65afee334c24a5a3d3
+
+Seems I tricked b4 again... 
+
+On the way here I had to fix up kalambo-crd, so please help me double check
+that I got it right.
+
+Best regards,
+-- 
+Bjorn Andersson <andersson@kernel.org>
