@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.39
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794265263;
-	b=C7qg/ypx/HORGskWWp37lXddsWVuv+biQOAIuDw/oeGs9i4I7t2PC3jvDTgFEkdgUqfV
-	 J9zb4/zX+LvSO4RDjln6Zc4AlVWqU4c6e7WClDeuETMp7RfL0rX3ngVq+HDJaFqTywf7O
-	 UDWJ9VELp/HFm59Hl9j1JHmdYc+lOmNZAfgYXMCGnMn2VKX02O/I4E5OoTNQacXuqGTfc
-	 jyTcCyfxmEen2OxCF3qdKCF+HY89XN9CE//Hfw3H5TqCix196YRytPIp9GhSIQTCJrPZT
-	 6bMUofeOFFnWM2fzliXCh8pcaFhRslepTT/SlBti65tIKXxovP1bCnVUBh9BxU7Hctg==
+	t=1794268857;
+	b=35/ToM8y0nwSdKCab9DRv8DdYw6PkJIy8o/dBpURS7rCyIB3tArWZyrNdbTn47an6Nil
+	 sN8faDuVwKhuUzLbWtXhwtVLcFgobK3TSVsuyCBYANeSdR5yPD1BKyD663XvIa99jIa0d
+	 LHK66zVIMLSq7L0AkqbuIhF1L5Zy7JYALOi6qeSKlc7/m7j1RJhMDbw72LJXYQt5c1dX6
+	 LwbQcvhCOlZuv7VjXloOGjqkwtggf8n21MdjKYBDJJwX7s0DTiN/TJtse0GW5Y/3WiB7Z
+	 R5UAyE17FyM0fPwrMQqtXPcv6bqjc4Vkn2zo+wGCnU5S2/fQd2Z9/L2EkHKXnjSYrNw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794265263;
-	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
-	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To:X-AntiAbuse:X-AntiAbuse:
-	 X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:
-	 X-Source-L:X-Exim-ID:X-Source:X-Source-Args:X-Source-Dir:
-	 X-Source-Sender:X-Source-Auth:X-Email-Count:X-Org:X-Source-Cap:
-	 X-Local-Domain:X-CMAE-Envelope;
-	bh=zL8FK8P5Vsdfkx0MZ8+/mUpFCsZNRdF7JxzCjScEi5g=;
-	b=De4D4RV8Mh67Fv5wKcqw/UlKBjfwQ9A/CiR7FWk1AC9GdxVFXLi1kcAUTMxgsB+Gu+Ds
-	 +I9DI1tqyZwnH63bA50MU+SfA4kBJmuKo5aSR1t3x/DuQKNHo2BReTqBVhDBmHxsZYWax
-	 9YCyXgX1ibTKIOCwoy2BC8Y1fmKUWfMgJmif4ch1xNGp5Ao21VWyHh5VtEK9fv8kk1E6b
-	 TE4PkLHZPZH1aj2dNLlPlZv/5UfRhAgtj28IP/ipKot2UHYFd4kozqgZfsP1I4aKNYT5v
-	 q1WX6jtFpQ6etsXHMYvTiJGWjnrA4dr0QkUNHwHThTYo7u7CDoI0aC2F4TAybNLRudw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794268857;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=S6Ki4zlbzehwsQUYNDGHpittBTiQ7SrejFTBf5yJLpI=;
+	b=fyIwTaIINv7gDAlxltqTORmCvaaeR3iZb/zOYhm4vh6f+PfGhcmOH6BE/z+L4cVrlM1y
+	 HWFoGhaZHZoGwRq+QbYb4yEqQ6r8NxHHwNc0dkLjhUtfL02t9QnYF/g6kkr1+Wzr1lBaG
+	 V6XecJFJzWRb5J/9QMCTjofJsSRe9+bMgPMhFF4+1yS0RU+DvlYPna6gsp4iQATspoOw/
+	 cLQhBLOfaTVEuk8hvuq8PeLJEFeYm0EZUEKtvdiWS94jrSSexIwKqhYJ9eOCBmhq8rLtw
+	 JXELabFTNxUMZ2Ds6LYBtXNWZzidhAacnL7K9x7GLliguLWsCMfsx4oK5qfsgW9ZnKw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=fail smtp.mailfrom=roeck-us.net;
-	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=oEqpXKT3;
-	arc=none smtp.remote-ip=44.202.169.39
-Received: from omta040.useast.a.cloudfilter.net (omta040.useast.a.cloudfilter.net [44.202.169.39])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="deozIxz/";
+	arc=none smtp.remote-ip=209.85.221.42
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37107606A32A
-	for <linux-arm-msm@vger.kernel.org>; Mon,  9 Nov 2026 23:01:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37107606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57DA160A2606
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 00:00:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 57DA160A2606
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=oEqpXKT3
-Received: from eig-obgw-6003b.ext.cloudfilter.net ([10.0.30.175])
-	by cmsmtp with ESMTPS
-	id QRmux5hndOOJnQYMIx7Ctd; Mon, 09 Nov 2026 23:01:02 +0000
-Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
-	by cmsmtp with ESMTPS
-	id QYMGxS5VpGh2BQYMGx38iC; Mon, 09 Nov 2026 23:01:01 +0000
-X-Authority-Analysis: v=2.4 cv=Aszu3P9P c=1 sm=1 tr=0 ts=6af250ad
- a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=VwQbUJbxAAAA:8
- a=pGLkceISAAAA:8 a=XwxYKhIv0tpjMc_zibUA:9 a=CjuIK1q_8ugA:10
- a=KPbNTLLc3YvdawN95zVk:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=roeck-us.net; s=default; h=In-Reply-To:Content-Type:MIME-Version:References
-	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
-	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=zL8FK8P5Vsdfkx0MZ8+/mUpFCsZNRdF7JxzCjScEi5g=; b=oEqpXKT3wYL1wg/DZ1OCAmn/KQ
-	8jKL+gRhBFw50kw3/1IbtF+x3BKxyHO8/ZHuegflaUFp2X23elHmIUyEI0IVUD7Mygm00WsTG6ceO
-	JdulNAYghF6uY2e6jDXSkzFEmMkUNdPGavsBr/HVrzI5TO5K6PvbnI/THmShWtqcMHS9lOyBYbyUs
-	RWywmG6oBdddctKk8NwopLi1ceUUvqlrfkfydPoOVyqiIWoye4Fs+5P3RD/H4ypAbRDN4ekm+pXZ3
-	/z2LXMfAIkRCZJArqkzHeEjxwUsJTCSbqMzWIS16vBnedaTksTU+Lo4KeEvhybi+KVl+gSYZZke62
-	u8Musk0g==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:54458 helo=server.roeck-us.net)
-	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <linux@roeck-us.net>)
-	id 1xQYMF-00000000mLs-46PO;
-	Tue, 10 Nov 2026 04:31:00 +0530
-Date: Mon, 9 Nov 2026 15:00:58 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Hrishabh Rajput <hrishabh.rajput@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Pavankumar Kondeti <pavan.kondeti@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-watchdog@vger.kernel.org,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH] watchdog: gunyah_wdt: Re-enable the watchdog on resume
-Message-ID: <bbff9c33-0647-4608-9cd7-07a6801791e0@roeck-us.net>
-References: <20261109-gunyah-wdt-resume-v1-1-fbd84545ce92@gmail.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=deozIxz/
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-490d59c3edaso1071460f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 16:00:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1794268856; x=1794873656; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=S6Ki4zlbzehwsQUYNDGHpittBTiQ7SrejFTBf5yJLpI=;
+        b=deozIxz/aGLnxTDbgoDjHa8Nq0xmOsMrD8iijQkW1P4nF7hUt3TN6minRfpOckwpEP
+         MH8cy2KjdHGt16ApzZLcpoe+zhdeksal5/pnr6I+TcQRsTCklK2ct7oVvoeflkq0l5cL
+         OzQ85Dgs6+w3/9mQwalx+mc491efpiATwmjfct78qe7gA0CFA1q0ZOlQaauNpMBQp7K+
+         Oj9dj5lmjukGVHglA8CHXKMpdD0XmZfI29qoy+pGOEslgCu8USE8/FRmf/FYwZFW+3Vc
+         3h2a90My3w4IF2oP5UJKDZDIv+ULOx6KAwmIhCIW773jtJliQNO3c/GGW3MCixqqmSK9
+         2Ypw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794268856; x=1794873656;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=S6Ki4zlbzehwsQUYNDGHpittBTiQ7SrejFTBf5yJLpI=;
+        b=HNXwwWSZbDDtxql6qY7q+e2tHTihDTgxxtfSKn4LgTfDar7sR6zqrg4bXbYpxYmjX+
+         +p6xGKecqpjvtlSkKjWc+Odq7+ipwkEbyHRA51KIyzvuhy6m08NoYlSaleoAwqe37s+m
+         8IPkEd6zzrVORJCTQ4UJ0vJlf2WQuHr327z7E7yj0cE/RC6lC8+HbrMSqwBGMoybSwng
+         ALlRkwpLO0IoQWKpi2lSwoJocUo2KOpBk5J3zIJ2h/DI7dnEvPZcEZKy/QLP/cwzeu9e
+         0HD1tbXWj2LE+w8ySMl4XWTW2CSKQPcK0Oe91gh0CignqXQJSIN6+imLJcIZlb8m0owx
+         +Epg==
+X-Gm-Message-State: APuU4Z9GqfxzTllu+A5LFcamZZS0I2zaCCl8RTGsSwAhqYyWHArgPy7Y
+	AQt1AK6L01BsdYarunzeTOEz56//zqNZLfGEM+OnZPvDLhU58nkIQXZjUfeye4WntCA=
+X-Gm-Gg: AYBFou1qU4sskfYhVqGK6OYX7cVEWExpOY36xdGUrByBwLCQjVQ92URN/z89byxA6SQ
+	u0lHxthhz0KBLtoD5MS4a+InM01Zmx+AVRcK9YApQoqHel6uSaIpHpZmx58fyIGORQAPfZYa4RS
+	zr3CGfz87rZDM2dmkTAeZVRTSB6exOuP16dxqLxMbibC9k7xAebstQMvH1AZfo4R17hrjBk0aKr
+	uK2bARqh+jtqf4NSqT0tgIH0ouVADnnL4E7HbEWKJmiKpXhBQToALSEYMVQFpAokbVAjfI+ppLB
+	GnOOOmARj5n9UwSk6D7WIcS9gybI3qvoKfZHrN4t1g1xZc0h9l97GhFBVVDy6N3Y7l2GdA2cAcR
+	txgjQQNKop8VmUxgjHmaijuUnf9XHejgO6GkZYhydV+yQwOZXOCh4PcdbYQJW0HrRF+RJfRv07k
+	IgtL07GqfRi3s78vHbqXAcaSiTvVEFuoF3eOB3pBNJ8gw13KJFmHsdSLt2FMTlsX21l2UntZWZt
+	B4RcWqCPWR0U3vPVoHTGNnP7YMqkzE2uMSHzt0M5LVTPXszU/k61dr3MQKeEGHZ2tB//hA/J1mS
+	kdpYIP7zxlqrCL7lB3J/vnqI2che0xJ5C6T1e8U=
+X-Received: by 2002:adf:f391:0:b0:48e:d7c:4bc3 with SMTP id ffacd0b85a97d-4982f2b5ce0mr1045706f8f.21.1794268855287;
+        Mon, 09 Nov 2026 16:00:55 -0800 (PST)
+Received: from [192.168.0.167] ([109.76.74.9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-498365cbbe5sm1882531f8f.42.2026.11.09.16.00.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 09 Nov 2026 16:00:53 -0800 (PST)
+Message-ID: <5d775896-5c7e-4830-862e-a9b02b840177@linaro.org>
+Date: Tue, 10 Nov 2026 00:00:53 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,54 +89,31 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261109-gunyah-wdt-resume-v1-1-fbd84545ce92@gmail.com>
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1xQYMF-00000000mLs-46PO
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net (server.roeck-us.net) [108.223.40.66]:54458
-X-Source-Auth: guenter@roeck-us.net
-X-Email-Count: 4
-X-Org: HG=direseller_whb_net_legacy;ORG=directi;
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfOrb62qptEqRdWoGWZJrEZ0prCYiPotmVoSiPKTk0x4gas4ttLH087p0I+ikwwa09u79EWCWTtSa65ZQw9NUrQRxrtzaLW0b8trTCD4+3Z9T+Lhqplzs
- IS5XFE1b3IVL2vBOFSnNv69Vcnl7fiURyWvQR02OFCZgRt2kmTlnL27PVIUh9651nQG1QycX0N+eDHkF8x/OfuHJNiQRh/t65u3MACgxs9MAjlZI4uI2H/9y
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/8] media: qcom: camss: Add SM8150 support
+To: gauravsuman007@gmail.com, Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261109-sm8150-camera-v1-0-3d2e7b407516@gmail.com>
+ <20261109-sm8150-camera-v1-2-3d2e7b407516@gmail.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261109-sm8150-camera-v1-2-3d2e7b407516@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 09, 2026 at 08:26:52AM +0000, Stanislav Aleksandrov wrote:
-> gunyah_wdt_suspend() disables an active watchdog, and
-> gunyah_wdt_resume() enables it again with gunyah_wdt_start(). start()
-> first disables the watchdog, which fails with -EINVAL when it is
-> already disabled. start() ignores that only while the watchdog is
-> inactive, but on resume it is still active for the watchdog core, so
-> start() returns before it enables the watchdog:
-> 
->   gunyah-wdt gunyah-wdt: gunyah_wdt_start: Failed to stop gunyah wdt -22
-> 
-> So after every system suspend, the watchdog is left disabled.
-> 
-> Move setting the timeout and enabling the watchdog into
-> gunyah_wdt_enable(), and call it on resume, where the watchdog is
-> already disabled.
-> 
-> Tested on the Samsung Galaxy XR (Qualcomm Halliday) with s2idle and
-> deep suspend.
-> 
-> Fixes: ca316e145c35 ("watchdog: Add driver for Gunyah Watchdog")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+On 09/11/2026 22:38, Gaurav Suman via B4 Relay wrote:
+> This was written and tested with the help of an AI coding assistant
+> (Claude Opus 5.5, Anthropic); I reviewed the change and the results.
 
-Applied.
+Right, well please review patches on-list before sending duplicates.
 
-Thanks,
-Guenter
+https://lore.kernel.org/linux-media/20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev/
+
+---
+bod
