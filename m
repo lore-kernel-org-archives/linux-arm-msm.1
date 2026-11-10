@@ -1,59 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794285313;
-	b=SPlLz1rkPimeqg5W8qxCen/asoMH6k0QjwB3qa3JhOVRZaKo7QjSTOVUkMspeuo93Ti8
-	 LNOw61zhuhWdrpKrLhSrfmLtnBZQEF2V10m7M7zaEGUy7oYqLtZjkDVXuAOjXTPTBIakw
-	 8lXM7va067N2azD2rdDGHRijEQvRrMw2F1xL80eMBnYMCNTNDPXuKMAby56j9yqEwJ6I4
-	 YyLSr+5AvHeYbGsXRawb8M0zkp9O/eQSdRhJCRiaqQV6pGDTsFj+iAZImZrB4iw1rdp4O
-	 xrDZ6lvSBdBHjnhWuVboLHOELjimhujP+UV8hRjkgc9z5zOgrSogzG0Qd5HTuGYjFPw==
+	t=1794285312;
+	b=tRrcsjnVPCHJXxtGKwzm7dLjpdvIkuSGnMPA3V/XssnlMXLn2ZKSTo+U+DZW4iaeocU/
+	 4WwQECaFPuoMZUNh39kzKS0yC6oWP858xU3G7mf+lpvAp9HbtBgKUtsN6fjo+Zyd58slV
+	 c+VJi5Vyt4fzfMhTKd1pi30nFcqXFAojjWAJe4R0KXmGTQevGOVdRzG2Eldc4tefZOmzg
+	 1aIVlyy5+FCS+ve4CjB/XofZxpXke49QeNDprr951Zzm6UdE/62hRaIjACcDGvhS9mD24
+	 26bD8A1jPlxElVGOzSIV3L1NyAbhyRfUYZm4heWvctcQmBs24mBjUqoJZi9KTiBibaA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794285313;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794285312;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=5z+mmwdv+D6Jf8swG7oinviZ6ESeu9eruFlMRnGD6Ms=;
-	b=v60rCZVXM8QCWaP/ceMAyvlOfHCQtbKHttRZE81cxQ/oKEPCvjuj3TnQuyaSLgPZucsc
-	 Eq0PrZANgIhG9ViKIYPlQ/USH+h4OuF8+1ItS2t8/FW2R/nhuaMhtN/HfnkldaLZB26Es
-	 AJPP2DGfzafpJ26MlxBoUqMMqnRvBpTljy019++HFGlb1wy6XJK2RX57hRIqYpyf4JA+K
-	 UqpwZOdqLEjHrScw68ZpQVP+VrZVkBYFiufg7vUN5rJh08cvBa1rOtw810HWo5deuyaIG
-	 QsI6vE4nspjnExmmnAKUSn57VjhvsFjiuPjLxY3LLUOZNRKFXo96gc6RufiOSf4rMCA==
+	bh=/3NXahwG9rYFR45RPGHoLrUQ6PoSRiAulDYnegs2J9Q=;
+	b=D9y04/fUd5DSiSj03EzgR5ZjJyiauzCfVJRtooJFnyt+I/EP33Xa2yN1J4eruFGI9jo0
+	 bmAyrLDBwuFRHk+4v4JWigPYoRiIx1Z+KDbjVfilX8L5aOUn6a2VAlgF1mGDRwmhbiza1
+	 sXeuqidHb+FR9IhR5m0ASNLIO4Gqe9c4djBrsBZmbSIU1WKeZUHjJCu6gHHiWEOVxAeR+
+	 YX/gCtlCv6A5TS+FNzH8Fy61KGDfbfQv8mL7O7/y0a5IrIVGUjfRoYaw3/JIET7V7zztg
+	 LHv7Hgj27MmH+X+wT2tW8tJ8YOXSAPmJ7xtvBstsSh+pFKyePjBkAY37VlKGIFMtn4A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T8A6ClZh;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hV4MVI00;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64829606A8B9;
-	Tue, 10 Nov 2026 04:35:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CD07606DE9A;
+	Tue, 10 Nov 2026 04:35:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T8A6ClZh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E9751F008A5;
-	Tue, 10 Nov 2026 04:35:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hV4MVI00
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EEFF71F008A5;
+	Tue, 10 Nov 2026 04:35:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794285313;
-	bh=5z+mmwdv+D6Jf8swG7oinviZ6ESeu9eruFlMRnGD6Ms=;
+	s=k20260515; t=1794285311;
+	bh=/3NXahwG9rYFR45RPGHoLrUQ6PoSRiAulDYnegs2J9Q=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=T8A6ClZhOIzn1qebE2yGvNeGU/d5IFCb64dzNRu+k1FmQwmrzXnoafdG2HUQl5Nhb
-	 nJqOIeNQYt3/IPOyaSdCBbIk0DwgONuRhR/yvCp0JYGrXU9Srh9wpcNIiOO+Iw2ir1
-	 yxM8QtKLuw+pkO/8scdAU6WFHzSpaeNg6ToXqK3Xwea5PBAkLyrQp/gMu+HCkdhdg2
-	 lslVb4n5pcVMs+UGWtfWaHnB+WDKxRSFpHpJJGCc8RGQmbiid+uEzJJ5iIKHrlHVKk
-	 VZfrQr3upfB+l57VFAfIjMAn6Ysij0UNlw5yG1ElsBuC4AKYJC2Slue91NcRpgIEOV
-	 RVz1pG0L6Rfyg==
+	b=hV4MVI00CVqmynZNPevLOOzYoqok+v5uo3wDMPdSEuVTg9pU60GL8jIBlxZnDGpPS
+	 17j3StEIAsaybKDQxWLn+7WZjZQhiKjNlkiAYVpkom6RWUDL7hJ2iv38VmmFX/KMdS
+	 eHHOdr4LYX4uzdli9qk+gYjuEq526NgVRsiTz/PpJyG18dbu4YsbwXis135ukKf4/p
+	 lEai2DpeeuNcFGK56H3rBUx9M6bXnL5Sp8L76zLMLPmv6Ew1BltWjk27mOKyAyMpUn
+	 MybO95h2bAD7s96JHfH8Zs2L8Wzj4Pnab7jcj+TPy3bZThaMpzTGMVwMF5Kp81w/8L
+	 X+JSqP/kYXYHg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Qiang Yu <qiang.yu@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: gcc: Set FORCE_MEM_CORE_ON/FORCE_PERIPH_CORE_ON for PCIe pipe clocks
-Date: Mon,  9 Nov 2026 22:34:54 -0600
-Message-ID: <179428529334.1061455.7701149257476653713.b4-ty@b4>
+Subject: Re: (subset) [PATCH v4 0/3] ASoC: qcom: allow SM[456]50 HDK board to play audio via I2S
+Date: Mon,  9 Nov 2026 22:34:52 -0600
+Message-ID: <179428529338.1061455.1619866756274375415.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260714-mem_on-v1-1-f5bfb6def0a1@oss.qualcomm.com>
-References: <20260714-mem_on-v1-1-f5bfb6def0a1@oss.qualcomm.com>
+In-Reply-To: <20260831-topic-sm8x50-next-hdk-i2s-v4-0-a224aa073f9d@linaro.org>
+References: <20260831-topic-sm8x50-next-hdk-i2s-v4-0-a224aa073f9d@linaro.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,21 +68,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 14 Jul 2026 23:23:13 -0700, Qiang Yu wrote:
-> Setting FORCE_MEM_CORE_ON and FORCE_PERIPH_CORE_ON for the PCIe PIPE
-> clocks so that the inbound data path works correctly.
+On Mon, 31 Aug 2026 11:13:18 +0200, Neil Armstrong wrote:
+> Following [1], this adds the necessary settings to setup
+> the I2S link to the HDMI bridge to allow audio playback.
 > 
-> Without this, the PCIe link can come up but the endpoint can not access
-> host memory, with the host sometimes seeing a completion timeout
-> reported by the EP, even though the host can still read the EP's config
-> space.
+> All dependencies are merged v7.3-rc1
+> 
+> [1] https://lore.kernel.org/all/20260724182446.1484894-1-mohammad.rafi.shaik@oss.qualcomm.com/
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc: Set FORCE_MEM_CORE_ON/FORCE_PERIPH_CORE_ON for PCIe pipe clocks
-      commit: fbfe0c4beecfbd0e2958d91e5c95ff189bc489a0
+[2/3] arm64: dts: qcom: sm8550-hdk: Enable I2S for HDMI
+      commit: 84feb53ed8a80aa274b030f37e602db03611c304
 
 Best regards,
 -- 
