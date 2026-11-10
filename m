@@ -1,76 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794311186;
-	b=JSVnJ7fmuDz0j4rzcCGObgDglfV9qlhhHZhOVlRrnpFv+d6cG2cRxmSdVOIzLFkvTlZn
-	 0j7WOVtu1eq6vpbGjO5QeWmDaF5ze6JVAGfjdMWYMmzdE13k+a0xxCWQO7uW6lc8PP6m8
-	 fzH3dWZ/IRh7o03smkOv0m+a0jLXxC5DL+5PtocDzL6syqzv28ahMS2clzCohI2fKYDIT
-	 BnxBS70/xisa3EGix6p6yNG0viJMyStll9Ra3nC7O78P7hBlm9GjM4tDSVyNw5oI7JJvG
-	 T0m3cyr9eByf/dnK342Wev9NQjMlUt1XQAyOjuxf8QlrkLK0MilV/1GZ/ga+8Q1bjQQ==
+	t=1794311567;
+	b=myTG0hiGolm69TbPnGNTapebi7jT0Eo2J2l9uqdaVPhoZrsOOEZg8Nhtsup6K59JKZU+
+	 19XTFvmIIvKYhIgSIYRjf9zOWdgmjiq3I+/TVMu7WNqFbN7Lv9PmDnOHGbgpWLYLMJCKq
+	 U5UoC3lkBj8JbANzyaTUtOXegepCCdla+/9LOLAch1ghmTD3ew78n96SHvBk6n4AxTDfo
+	 YwuaH0WECpoXFwg3VraAnGwu43kml+OV65t1d8QJ1hvgABc4uAE4aiSZLcHRJDDvK1SIv
+	 8Yzr8ihQiVrUFq+/i76tv8OAoZu4PgvjNHV5dzwAaLmbIVbtJzso6w6NU1AZLuuA7Zw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794311186;
-	h=DMARC-Filter:Received:Received:DKIM-Signature:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=GoCnwF1puEjsvclXDKRQ/PkJe7axbawtj4cctZJn2N8=;
-	b=rbEH2FWBFn1ljlw1lrxKBXHNytFuvrcGfAlPQro9xt0z4qSZvJH6sn+6N3ZbkYFUookr
-	 7kKElfgWOOoF1kqu7E2PlCS2kvDroe0q0iOTfuccaRpVq8J7QUmKnR9zFNp6JKso9iCq6
-	 qNMxfxYMLe2i5lzJQWw5J2URbyDiW4hOqS7yhMjn47D5pVU1AtyP7DIsz422ORquKQbbp
-	 DcVqo2BCLcvucZvhkc2ahcVnQMhh3kHnaELxgGoJslGD+oj54HgPsfT22R1pg8OSnnSJl
-	 /YW/Gyo8Wuxe6LXWV5W6du50qihostgy3vSsyKLfJC0OKCkmpGw8Vf0QPeu85uf5Pow==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794311567;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Q+IkvQtL5ObOy+q62Xc96m74OgGtoWgoqKq4zQpvAZ0=;
+	b=lLz1uVuABKy0R/oE4ibXJrpYP3D4bHt/WMhu78sRimtVU14ifoJlKB8d7YV1ArVHbXQa
+	 RM2fcCEK8YK92UhdL1O05xg7XLCaVsaUBz1AqsW+L9vBPPmeWtirnN+iH+Xr3PblpzeHR
+	 PuHkU6g5Eu0O/2Bur5MOVDjblvuWZtHm6hc4leN8KJabJqoNPQRWBfBkXeNUuzfwY0S02
+	 QL4U7bs3HpEEJyU192XRtyq8Q9BH0QGXV0Ql7nxtdjIO9AJEtYt1zB7z4DuMJDR/bpQUZ
+	 akxJ1qfIi9KQeIcIr5bnhRXV2MYVX2ZiBBd+ekXSjS1qFREH4X+hCZZaRtqykjNczIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=arm.com;
-	spf=pass smtp.mailfrom=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b="s+FQ+1/p";
-	arc=none smtp.remote-ip=217.140.110.172
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76D9B606A32A;
-	Tue, 10 Nov 2026 11:46:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 76D9B606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DP8HkjU5;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96235606B5AB;
+	Tue, 10 Nov 2026 11:52:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=s+FQ+1/p
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6E0FA1516;
-	Tue, 10 Nov 2026 03:46:21 -0800 (PST)
-Received: from ewhatever.cambridge.arm.com (ewhatever.cambridge.arm.com [10.2.197.99])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D1E983F632;
-	Tue, 10 Nov 2026 03:46:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1794311184; bh=1KCGDNOweh5cRaCOrq0Ugdosxtb+ahsd5ag7b76Wa8Y=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=s+FQ+1/pvH0amBPGuFOfYpeNPht5igu72Kis1moza4Y2ZwmQeU1O/RcpRqkmM4S1A
-	 TNCz737d1tOTcjJlq71TdFyhynz+fupNXiOJA2jTdX3yif2pSOTaSsaP9xU5Fx5sgW
-	 N1K0r9FpkCXOdDXCTYjpE1+sITP53SoZurCT8HHw=
-From: Suzuki K Poulose <suzuki.poulose@arm.com>
-To: Mike Leach <mike.leach@arm.com>,
-	James Clark <james.clark@linaro.org>,
-	Leo Yan <leo.yan@arm.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
-	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-	Jie Gan <jie.gan@oss.qualcomm.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	linux-arm-msm@vger.kernel.org,
-	coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM platforms
-Date: Tue, 10 Nov 2026 11:46:15 +0000
-Message-ID: <179431113320.3326008.11214272306127557878.b4-ty@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
-References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DP8HkjU5
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69EE91F0089F;
+	Tue, 10 Nov 2026 11:52:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794311567;
+	bh=Q+IkvQtL5ObOy+q62Xc96m74OgGtoWgoqKq4zQpvAZ0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=DP8HkjU5T83IWyPjBkGBGk4rtnDD7AROqjLS347ksks61BqCyegrtofOXDOd2MLWj
+	 y5v5LekEWgJIwdi8jcSVZSOfNh6DNLeRf0oEPf/qx0r2rhECckbAgQ26HUC+9Op824
+	 TYWCdeeANpr3OrBAjhz4yPYln7Mawc17X/WCBA1PMuBGt0NlmdHwGEqMuCi+dix0x5
+	 qja565LmnhO5EGUi7MgurfmPOlTht4sa9a0fKJzxR+zIOMF4yf3pZFrolv35TtX201
+	 yu0bevNg1SHN2X4DU0xoVtcm7Zwier+QtgstMCRDMzA67VOyk+THdhPCTaOPcJMAJP
+	 vRjnlElsnjGNg==
+Date: Tue, 10 Nov 2026 12:52:43 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Demeter Barna <me@fromdisposition.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] dt-bindings: crypto: qcom,inline-crypto-engine:
+ Add SM8350
+Message-ID: <20261110-colossal-dancing-clam-1db0cd@quoll>
+References: <20261109-b4-sm8350-ice-v2-0-fd5e84985e90@fromdisposition.org>
+ <20261109-b4-sm8350-ice-v2-1-fd5e84985e90@fromdisposition.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,33 +62,24 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261109-b4-sm8350-ice-v2-1-fd5e84985e90@fromdisposition.org>
 
-
-On Tue, 10 Nov 2026 09:21:13 +0800, Jie Gan wrote:
-> The CoreSight TNOC (Trace Network-On-Chip) binding so far only allowed the
-> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
-> forces the device onto the AMBA bus, where the driver must read the
-> peripheral ID from the device registers during probe. On several QCOM
-> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
-> never probes and its trace path is unavailable.
+On Mon, Nov 09, 2026 at 01:55:29PM +0000, Demeter Barna wrote:
+> SM8350's UFS host has an inline crypto engine, version 3.2.0, with a
+> hardware key manager behind it, clocked by the UFS ICE core and AHB
+> clocks and powered by the UFS PHY GDSC. Document the compatible. Being a
+> new SoC, it stays off the legacy single-clock list, so both clocks and
+> the power domain are required.
 > 
-> [...]
+> Signed-off-by: Demeter Barna <me@fromdisposition.org>
+> ---
+>  Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 
-Applied, thanks!
-
-[1/5] dt-bindings: arm: coresight-tnoc: Bind on platform bus instead of AMBA
-      https://git.kernel.org/coresight/c/76e192f4d40a
-[2/5] coresight: tnoc: Bind Aggregator TNOC on the platform bus
-      https://git.kernel.org/coresight/c/4d443f2e0956
-[3/5] arm64: dts: qcom: kaanapali: bind traceNoC on the platform bus
-      https://git.kernel.org/coresight/c/50e7796ab751
-[4/5] arm64: dts: qcom: sm8750: bind traceNoC on the platform bus
-      https://git.kernel.org/coresight/c/f599d281541e
-[5/5] arm64: dts: qcom: glymur: use Aggregator TNOC compatible
-      https://git.kernel.org/coresight/c/1352ce9c99bd
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
--- 
-Suzuki K Poulose <suzuki.poulose@arm.com>
+Krzysztof
+
