@@ -1,105 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794341114;
-	b=grJbC0xCPoU+BPrEnnNocXyYmo4Y7LEWWcYrHwZuTgt+iybXEy1mjpfXdqirTWB13kuP
-	 tdYLVBhLQbsiglnHam3prHz6aoIsmj2C0nf/8Q7yT6aSrKE3BrnMPurc1lsoVkb3XkTOp
-	 UYJibPuttdiPPi5BfliomSajKWqwAX7ieITfUH/YMm+3yUqQ9zICBhQyaadxTsT885F5L
-	 pnLT+nqzuaMcTzktmhw2tR9JatmWQUkw4Vl5ThGIGVCtVnNypMKuZmrgIFapmRjR7pEqe
-	 PB41xU301Wzf0zxDUD1wK+PmoEyhpdNZgwrL6cz5vb2mPbJ0O100UYuaCUmCncy9o2Q==
+	t=1794342351;
+	b=NoBRROvQqIJvQJC9PIG7BCOI7HBXfBJj0ZT9yEbCOPDSEl8Y8araSlVNrPrl5SzCWHwd
+	 6NG2bizECD6BZjDVxcaORFimCTCsbdTvojeJjB+6tTiN3UkXM+T7RFy7oVGYCHK23ca+r
+	 fDxqadCQbRJxjdM2tbZfBsS0zmFZudVfCZ+7/J1f5z4Hj1G07/V+oUyITMpwTYk0yChu0
+	 St2ZQVfkc4hJA8fKhoHrZS5w6IC8ltRAzOFZFHiROyAenbbWZaTVKRGkHj+fHVT0cNZPb
+	 Zx2MI+Ispe4wxBH4yj9ciH2HWjBuIxwVk6qF6U8PxSpXfG3aZHaipBtzb3dKbWw3F7Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794341114;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794342351;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=ygUwbvCgR8EJ0INYVhYaEUA+QbfoJ2U/iRHYIVhq5NA=;
-	b=W/dUCBUnKyVd+c2ne1G5WnV+7FCEW6ynqZA+P6CzY2B7MaZ5jNECKi2IQJIYHQ1lAzon
-	 b8ASaYBBnxqRVjc72sGm1ZQb/H8XM0HjBDwOTHUN34am+CvGHKZT8AjIA50M5Ana4DwrL
-	 jDU9WD65b+Y105JVLjhW9UbBYE3wYE+bOA1eiZpSTDWoXdo868FGb51ScPPhM27yjp02n
-	 oujzhFJuNF3dAKU4CuVlf4z/tsvfwpV2kqbB2MdaqT7PuP6BvOuMP9iXG86iXCgfLXE6z
-	 pejvXxBOjjurbuI77Hsrx/8aNU3KXVYo/I66Dq27A/aOOr17ikARvquRaTFexizLnrg==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=RoyEoopnifFOj6tGri7N/w21DgtNJiN2PVsWRCx8KMw=;
+	b=Olr8HP2DbFub5AKyp88bdqml5Z9AYXzWiaoBqR/GvhpOgTfF2GQYcB42jGvoi8RB3NxX
+	 m7vkJCw3+2G0izTa6JxDV9aurTShXlOVXmUVBHLeUYHzfVQ828hlEwRqDOfRAvndaHsul
+	 iZ8096grEWDn8ZtX3FMQ6Iz/9fUNvtMahRiXlkA18ECWfNMlWMOo46opzjFZY88V5YwiH
+	 75QlbK56kr0VcHTMNHa0LOG9xsML9qbk21zQ+lD5rTnWA6dYsFVGIj7QlVoJdNnlVdhkS
+	 fFZvLQL9XueEjtV/4j3/46kCKNC/OoCWIFnHbC3XKbzJIjbI5PeohavcTlSYxvZdrhA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=O3JxG09s;
-	arc=none smtp.remote-ip=209.85.219.46
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kOHw70Pw;
+	arc=none smtp.remote-ip=209.85.161.50
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 967F5606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 20:05:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 967F5606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66BB7606A883
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 20:25:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66BB7606A883
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=O3JxG09s
-Received: by mail-qv1-f46.google.com with SMTP id 6a1803df08f44-91e8938fd01so27110426d6.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 12:05:14 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kOHw70Pw
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-6f8a519e215so2149031eaf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 12:25:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794341113; x=1794945913; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ygUwbvCgR8EJ0INYVhYaEUA+QbfoJ2U/iRHYIVhq5NA=;
-        b=O3JxG09sfOPQXyY2Jbj/5vnyw/wprNi1mWfkH9fhwBL/IZqfGFDFKlC4qZSo4GR0/z
-         Cm3zKVgy8FdT62Wy9KJL4yhL7YqGUNBczznzR4ZlfNRldoXJqT2wYz1GOvfbfxoMBDI1
-         7vMJBBR6I5aVQLNI/NwS9ddt223r4CKtLy55L2OBQB4YJbW/yernVloAbeKnqNkiEfJk
-         IMHJn3h/JG8GN3UZHhj2n7h4BPN5HQFAoeQD+Bdl4o6AsF7disKeWGLTzfGBfOkp7WwE
-         dkZJ/oJ6DY30ubArQ32v3HdwmBzP3wFK/hBot2l83IV/nc/jGSa+m72yajjYiVit/X3V
-         D9XQ==
+        d=gmail.com; s=20260707; t=1794342350; x=1794947150; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=RoyEoopnifFOj6tGri7N/w21DgtNJiN2PVsWRCx8KMw=;
+        b=kOHw70PwAP15j3Lih3uGj+Agkqt6PVJupz/DSiNlxtGHbcyMwz6ohmZzL1xhKFAUdc
+         q+hTYB6agrxlHVwWiKgq29QdFZH2GTVKpOspnwfAeW1ASXEKw8eKHdoEWGCAKWK4FLQN
+         khxvT0O52f072MND6mEAqIigRYy49pCaqnMKdwCM549pEanbWsE3WSH5e1sdIixSIbfY
+         ywRB/itephbCvt7FlqFXU3nI8z+C0odRGWDAIvJXVOqYlH0yZeV9/98b7IOs7j9A/bdr
+         pjqKA7vhcnlybYDrhVCWWsX16Ga0JV2YcOsxyNLvdioUfJzo1hg0pVdpFTxQUX61X8c+
+         pVrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794341113; x=1794945913;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ygUwbvCgR8EJ0INYVhYaEUA+QbfoJ2U/iRHYIVhq5NA=;
-        b=jke4Qfv4K08RJO0PfOhiz/OLBbLpOWtzf8vkvnFoqjV5yaerfS39lOp0gpf2r+Itag
-         a+f0nEIgGTfh7pl9gVw3FemLVV9Qa78o+AMMMTIfb+K6F5KYvAoTfbTboWK9Jg5xk/9C
-         Nd3wAh+Jq1I1nZ4WbMzduOOWefxRvaSq6gmWXcATJW8A/0ARx/bHlv1MIhokeN2wBRZW
-         F0h2GG7Il9rJ6nZqy8kPh/S23++F+0EArwr4cS4RoWuI+w5TrFZdbLXi3Db7FGHJ/gqL
-         4F6jTnu7hRZVf7Drc5+bhtSaaWjeu1ToVHT94KzuzyZnRa7VRiQvjeCpSW4tNYE9mROD
-         wE2A==
-X-Forwarded-Encrypted: i=1; AL+hErHuk00o0B5wIMejii2zOYQmKHdl6BDaFOosyBplycW7v8eM+bhdIiCSzpBxLsU4qGceP51e/kDcrb69Pxls@vger.kernel.org
-X-Gm-Message-State: APuU4Z/2Fe3F3yioZDoS1nJCej4KdrK17Cec5unkW3h/ECCg46pOLE30
-	uetMVrpwLXlmuHIhhfeY9T8zDLwA4CNN0S5PWklVNcq/LQR+ii/Lnk/R
-X-Gm-Gg: AYBFou31jQvikq1VksAhlLa0XHNgkkLP5jkMsH9iKUVhgdzu4oFbbkUicyw6X8F148p
-	SpNHqpdksaVXwxzMA1TN1Npup9erh0dadVehmUVzvIv+ATx6P5Xr7sgX0lIrJwDN0qYx+ISi/pF
-	1p/c601K8gDYHwxLDwS15o0nlVxUeG6UbvpSpBt/Krwp3dOVz6hjG8q/sqmz/pi23kmC3J1Cqwm
-	uHd38sdD1AZQcWuPUEcu+7Xg+zKYtz+Rbu0V1/COF+ggkALJe97+x5Bv1xKphTu1xQ1SIMUkABo
-	MHK63/Jh/9m8MSBQyby0VUgYvxkCjDc9vAf2nlykvJkzqeqVXt8npUS7wV0dO6nb1ZUXztNMKS1
-	zxFI4ShfAxu4a8dnrRiiGfHZ2/2O/3Wm5od/pON+WN1fAqlufj28vAewvOhfaWHVwIA4kXl0kod
-	ZZ07yCKVehlbgg6XcUwL76+HUwuhFu2ZwjhH5VuTkVVu+uuA0NYQFXsmZQF6uNFTP1vOJM1oTk8
-	r6htjY97o8Pt4AY5Zmdmu+SUvjrGfKqmK8gYjYI+oFSKVoWDhOMftcU6a69KcnvSwN2zFbWQXsI
-	edP7r8XIzWDRFiTXrvRLAeYn5WzN5OtbWVJieJuE0SelF0U3zzmlW/ZnIOLmzJ3CXro3nvrwb1A
-	Fln9x8xRyvmZQHCchOiLpwVmlBLsJ3Zk5SI8Z3SUp3c/J2sPfCprpDcz8pIRCUkGZCNw8jMpVzs
-	bEFtFvnoW2WhVpxFZYHYJWTylQDZvzrPfmw7vq9RXqhvkuN9GOg/9zHs1S02gFqPigBrSm9A5yn
-	7hwPpb4rqxJZwjNRglwPE32PCHkrfs8D/YFUTX8QovkvQ==
-X-Received: by 2002:a05:620a:4106:b0:93e:c12c:4416 with SMTP id af79cd13be357-947b00317e7mr4760385a.82.1794341113438;
-        Tue, 10 Nov 2026 12:05:13 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:940a:c6ea:f292:3644])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9479e76b1c3sm305084285a.16.2026.11.10.12.05.12
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 10 Nov 2026 12:05:12 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Jassi Brar <jassisinghbrar@gmail.com>,
-	Sudeep Holla <sudeep.holla@arm.com>,
-	Cristian Marussi <cristian.marussi@arm.com>,
-	Rob Herring <robh@kernel.org>,
+        d=1e100.net; s=20260707; t=1794342350; x=1794947150;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=RoyEoopnifFOj6tGri7N/w21DgtNJiN2PVsWRCx8KMw=;
+        b=f7+lfiHDyhWY36nm5erv0iDuL5bhMKGEUlXlfVsJ80Ly5Xm6hvfZU4X+ESn8o8w7MK
+         x0p6LBcy5GXS0r4MVGLeKQ8H/HIvx0HFxmmoa4KumPlFVFQwsGDT1q/EYipf+VARdTks
+         Q9wzhxldbQ7lWdstujdTLXctOyHgXbipSA8qFnDDUyu4b0trA+1J3NgmRY2s2L+roHNd
+         Gyd/fIsoHoryOHHOh7sES8nlM5GyTqM4Eoa+hj0HA1sul+fqpUEQkdwVqcCE1KpqwaHi
+         /6mZx6RQBU61pnczs2Kt2DAq4wv3e5A8OIogV5OYNwNvMsVWHGxQ+ZIqfYg2LN/r5VLN
+         2J5w==
+X-Forwarded-Encrypted: i=1; AL+hErEs8fw+932dfzPwg8Eck1llYxp1NRIFlpPN4aCsy/g3Sb3AkEgtavpP8fFvfKFdinIiXKWeVw2tn4HJKC3+@vger.kernel.org
+X-Gm-Message-State: APuU4Z8i3AkhHdNbxAk/KYj7VDAyPqgKuPHjYtzmzkiXc893WJypT56K
+	8HGQB/dMIQ5IroxMaMMPXjm0EBUCr4VgJzDgngSlJcXLWFDxVlYvsxlKv37cm6B2
+X-Gm-Gg: AYBFou3jQm7PZVMwXqnMWzQ0YzxRizohk8vw3WfjGBy4GY6P+8B/MUinzNLg99pb//d
+	ksgjbkenbIwYWUnOThwMJk1VyFmdT6p8plh1TgOezUH2A3G6aAOA05byZZyZ5HQZfF6at3+0i3p
+	U8ns+wqgNWnqaqrRvpuEFlfJXs6T++2hWeoV3vUTyv2CoW0rzEx/ZSR4HFOESgzvDNYwAnB3psI
+	B0H5fifgRSU9g1YOx7zWU17BWmvLLjaMBTYbxqDt8zrar16as3uKFPDn2VopERolHmDTW1X5dcg
+	F7QucQjn93QSIc2cgoRO/V7DS5WHBmoPF58MOmkmIh/UDIGk6J7ZUcH0AOdhWh2U6ZRvpg7e22D
+	Lf5pdOOtXyPlHgytX/sTMfxjsN7vrMDCYexTbvNSzkzRQYCV9vpgF5D+6lywlTlJ5caRBI9wKxt
+	LP0f+NAa7RBq7VIr53DE6bKTmIqSKiuCJ8srUf1QdBMKFDhEtPTrYR5+/NCFUsbhYPU1jRBW4mE
+	L2n5gclueuZL/ArHZ4+1GWZOqhiTiPNY7V2whCYpgP3669I0oWfQDEqsnbUetrk4YZ+WxqKFGVT
+	ZOaF/X1dvYg0N1Xiq+ny2gmRiIb2mxwrkMb6cc7lLRWE9iYxCRA8+lm7tDpqDmBVJd9PWir0l7g
+	=
+X-Received: by 2002:a05:6820:f00b:b0:712:b60d:2ed1 with SMTP id 006d021491bc7-71917857699mr90043eaf.10.1794342350259;
+        Tue, 10 Nov 2026 12:25:50 -0800 (PST)
+Received: from jeffmr (63-152-14-173.cdrr.qwest.net. [63.152.14.173])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-718a8f645d4sm2353252eaf.5.2026.11.10.12.25.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Nov 2026 12:25:49 -0800 (PST)
+From: Jeff Roach <jeff.roach0@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: glymur: use polling mode for SCMI transfers
-Date: Tue, 10 Nov 2026 15:05:11 -0500
-Message-ID: <20261110200511.71673-1-jesse.casco@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <CAEaxeoQUZKnCQPG_W0B77gB2VfC__-t7ZxY0mkVsqm1Q9pk6hw@mail.gmail.com>
-References: <20260808172211.137577-1-jesse.casco@gmail.com> <642652c2-af5d-446c-ac1a-8099639c2588@oss.qualcomm.com> <CAEaxeoQUZKnCQPG_W0B77gB2VfC__-t7ZxY0mkVsqm1Q9pk6hw@mail.gmail.com>
+Subject: [PATCH v4 0/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
+Date: Tue, 10 Nov 2026 14:24:43 -0600
+Message-ID: <20261110202445.14100-1-jeff.roach0@gmail.com>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,29 +103,72 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi Konrad, Sibi,
+This adds a device tree for the HP OmniBook X 16-cp1 (board 8F46), a 16"
+laptop with the 12-core Snapdragon X2 Elite (Mahua).
 
-I tracked down the timing issue on the ASUS Zenbook A16 (7.4-rc1 based,
-arm,no-completion-irq removed). It depends on whether PSCI cpuidle is
-already running when SCMI sends its first PERF (0x13) message:
+v4 is rebased on qcom for-next, which now has the common Glymur/Mahua
+regulator settings. Tested with Ubuntu's 7.3-based linux-qcom-x1e
+kernel. Everything listed in patch 2 works there, including suspend
+(s2idle).
 
-- CPUCP_MBOX=y: first PERF message at 0.37 s, before cpuidle starts.
-  PERF works for the whole boot, cpuidle included.
-- CPUCP_MBOX=m (arm64 defconfig): first PERF message at 1.1-1.4 s,
-  after cpuidle starts. No PERF reply ever gets a doorbell, so
-  scmi-cpufreq and scmi-perf-domain fail with -110. BASE replies still
-  ring.
-- CPUCP_MBOX=m with cpuidle.off=1: PERF works.
+Notes:
+- DisplayPort at HBR2 needs "phy: qualcomm: qmp-combo: update DP PHY PLL
+  programming on Glymur" v6 [1] (tested with v5). Without it the stream
+  runs at half rate and the monitor shows no picture. With it, about 1 in
+  4 plug-ins still gives no picture; replugging fixes it.
+- The GPU is disabled. It works with "drm/msm: Mahua GPU support" [2]
+  applied; I'll send a follow-up to enable it once that lands.
+- Audio needs a topology and UCM config for the "HP-OmniBook-X16" model,
+  which are not upstream yet. The headphone jack (SDCA) is not described.
 
-In the failing case the firmware still writes the PERF replies (the
-same request through SCMI RAW message_poll returns status 0), but
-RX_MBOX_STAT never gets a bit, with EN=0x3 and MAP=~0, the same as in
-the working case. So it looks like the CPUCP decides at the first PERF
-exchange whether to ring for PERF, rather than a mailbox driver bug.
+This series was written with the help of an AI coding assistant
+(Claude): the device tree started from glymur-hp-elitebook-x-g2q.dts and
+the laptop's ACPI tables. I went through the regulators against the
+ACPI power votes for v3. I reviewed it and tested it on the laptop.
 
-Please consider the DT patch withdrawn. Sibi, is this a known CPUCP
-firmware behavior? In the meantime I could send an arm64 defconfig
-change building QCOM_CPUCP_MBOX in, so defconfig kernels get cpufreq on
-this machine, if that's acceptable.
+Earlier bring-up report: [3]
 
-Jesse
+Changes in v4:
+- Rebase on qcom for-next: drop the PMIC includes, &apps_rsc, &tcsr,
+  the SMB2370 repeaters and the phy supplies that mahua.dtsi and
+  glymur-cob.dtsi now provide, and use the new regulator labels
+- vreg_l2f0 is now 944 mV from the common file (was 936 mV); tested
+- Keep refgen-supply = <&vreg_l1c1> on usb_2_qmpphy, which matches the
+  ACPI power votes on this laptop
+- Move the pcie4 endpoint under &pcie4_port0, since glymur.dtsi no
+  longer has pcie4_port0_ep
+- Link to v3: https://lore.kernel.org/r/20261028191800.27829-1-jeff.roach0@gmail.com
+
+Changes in v3:
+- Set vreg_l1f_e1 to 904 mV (was 880 mV, copied from the EliteBook) to
+  match the ACPI power votes on this laptop, rename it to
+  vreg_l1f_e1_0p9 (Konrad)
+- Add Acked-by to patch 1 (Krzysztof)
+- Link to v2: https://lore.kernel.org/r/20261026154001.9323-1-jeff.roach0@gmail.com
+
+Changes in v2:
+- Add static data-lanes to usb_2_qmpphy so the PHY uses USB3-only mode
+  (reported by Sashiko)
+- Drop the Assisted-by tag, describe the tool use in the changelog
+  instead (Krzysztof)
+- Link to v1: https://lore.kernel.org/r/20261024044650.9936-1-jeff.roach0@gmail.com
+
+[1] https://lore.kernel.org/all/20261028-glymur-phy-v3-v6-0-1f1d2e565a66@oss.qualcomm.com/
+[2] https://lore.kernel.org/all/20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qualcomm.com/
+[3] https://lore.kernel.org/all/CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com/
+
+Jeff Roach (2):
+  dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
+  arm64: dts: qcom: Add HP OmniBook X 16-cp1
+
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/mahua-hp-omnibook-x16.dts   | 657 ++++++++++++++++++
+ 3 files changed, 659 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
+
+
+base-commit: 14825c9204bad7f4e0bd3a528cbf4a7e24e757d0
+-- 
+2.55.0
+
