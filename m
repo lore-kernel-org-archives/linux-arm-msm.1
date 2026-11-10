@@ -1,87 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=216.40.44.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794321768;
-	b=QCRtKKfLVtXj86bo+2viDT6pBJ/JsJvMRJTl1zPgK6AGtaypB1Esyx5HX1L2gmgU5bOv
-	 J7w4fGKkXa9kdcFKjRk0mnD5GCgrGR5qHxmODo3v94Coxc0437CeZeoz+Cq/PoXEGXRUH
-	 CwuUsMd7MxGABFtW2PCNWLkK2Ue6mn2SXeP8gobIhhGi42CavvQL2Ugp63BJI/Bixuh/q
-	 08Od+q58DTtnI4xXzeoXsCCAvvuPJiV2IvnfHq+r3aCTJiRmei4PCjwQbOkfFTLFIy+qd
-	 7SYqQchAPeEvFcQAWo0dRHz6W3XJtAypt6Sd2PH118dGyUxcGdMY0GZi0q9IOipVtxQ==
+	t=1794322456;
+	b=jw7NMUu8krTrmssWk2JsnRS6qz0fVUtvT2/wXrtDXHnuDuVcalT98veygsYudN3K4CWn
+	 +HFi1FJGUaEGyzmCQAFSanJjJrmficGxxk8uHqdRA+oKE4FOnVCQ3VL8dkHFwbfjGfk5F
+	 QZBVS2w/UbvC7Yv1soWOR6QlrsXBvVTE3XGkgw6rv7djetGEz5s1TwkmX7fpkhM5eKqbd
+	 PxKVJ8nEAG9AljdtWmyNxfua8m6OPzeLdqlxzaNcwX6C0JNIfPKRW0q0dNHv/TJIeA3QU
+	 37NSZZZ0tNgjmopxnNr+mTG/ZlwxS4T2udZcqeegCdjlZlDpusKH0GFEY/W4s/KtyXQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794321768;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=iU+EzkbKMFrOZFFUWDUX+jv1j+DUirQeUzUM2Odhqp0=;
-	b=3wGa/R29nlTnowrLlSLM9j/VeLC6lbuYSowwPa6JNUaCzaEUcZURVMlFoUUpZC8HILvO
-	 s3vSayIVTfo0rf8Xd2Ecxj7yf+3A+212mJQUg3a6qSwVpAvyfzGA9m/M/1hBuLtoU8KAk
-	 b37Qc+ilPnI1yJlrOZ6aq8LmNmDR8JhROIQkd3JNV10+GqZkldI8MRTZo/onHBiWd55Ec
-	 xe5pITnnpEFeQrBH7dKVTBYtfOtknRcLtlpSSkl29aiMBeAaWJR9n7EJShDILBAAl40so
-	 9Lkk3zjriXjv/YMbuKFlKNVzYvoN3v7K/cHUvFQI7SY4+O0rS5bqFc/mvIZ4fNDyXOQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794322456;
+	h=DMARC-Filter:Received:Received:Message-ID:Subject:From:To:Cc:Date:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+	 User-Agent:MIME-Version:X-Stat-Signature:X-Rspamd-Server:
+	 X-Rspamd-Queue-Id:X-Spam-Status:X-Session-Marker:X-Session-ID:
+	 X-HE-Tag:X-HE-Meta;
+	bh=SnsgpXpf9bo/xRiNgtQgvFK55IJt7inv1vR73O1BfS0=;
+	b=ahBYx0uC0O96y4v9j6OQJPQcJ7eWlprpAc4s0VUv09jinW1hfOcdKAnFDuWh58Rcm592
+	 oxP2I7ZQ8RwuScUA6j+MY8HWhcMYXrw8NfYVkm5+Om/gC5pc++OgPZ8xagyQ8+v1YMnpl
+	 xxN+SqSui5mZNy4ipq2QoVeml65gy2tSk+o/z6t5pNjjJPfHe0a0wlekdLwH/Cw1ZVPbS
+	 MfvWaVpi7zzB/GiezAK+Cb0qGE5hX3SWMBuw0WG7DBHNssCcHBirE31Fuikn0jFQdgBwv
+	 ndrz7U7vOMC7PQ66lUopMj43sqcP+5C3nKDiAHGxGDyH4kg1ntZ/qiUMWvNTSLCaKkQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=zpSlcvgK;
-	arc=none smtp.remote-ip=209.85.218.44
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=none header.from=perches.com;
+	spf=pass smtp.mailfrom=perches.com;
+	arc=none smtp.remote-ip=216.40.44.12
+Received: from relay.hostedemail.com (smtprelay0012.hostedemail.com [216.40.44.12])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DBF560A260E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 14:42:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4DBF560A260E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=zpSlcvgK
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c5060a48ba9so23607666b.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 06:42:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794321767; x=1794926567; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=iU+EzkbKMFrOZFFUWDUX+jv1j+DUirQeUzUM2Odhqp0=;
-        b=zpSlcvgKQl4GAF+LAEWwXo102Dk6lRikWqRJTDbMVSdWsHj7c3FRe/SdIx4D6DmgCj
-         +TeNDxHm/XD7kdkMGcaXqBUFnkHMTqxgb9NhSUWUm7n1o/xzOd3YbjcZlRGl1Ly+rrf9
-         Ip8WihiP4WCqVbJBKydkH0HRz1sRDBFGoQ8HJafvhSQrODlgYoCpcZcg0U2HLEX1IRF3
-         4TaDSGjDgXx/pU4U9x5GiQxlFjtGhUHXnDwhjtMPqnXHwRsp4vMms1LgHbg0+/67vCjZ
-         /doYZIydqNjewM46rQvM56F8F/poFKOb5HpYtovpd5bT3je56+Rn4ScuTIg2GqUDPHrn
-         zTYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794321767; x=1794926567;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=iU+EzkbKMFrOZFFUWDUX+jv1j+DUirQeUzUM2Odhqp0=;
-        b=N8x7Knd719TOceDdKPF/pYHAk9lAI4zKd++9voshVnzRZTcHzj/Z/MRbZzVkQoFdPJ
-         aLoDpPztlJ1Nn4HWWKobJNyNdfDk9Abwi3EI8NmB6eaPPyAA1O45vlmZp04w2NMUqhML
-         BS81vF6gZwlgi3mSlXRd2d1QdQ5BQnkQKm959F8ksO472CH7WhzQs31lFWP1R5Wwi1+3
-         OURY+9BsoED/dWewQk8yvV13GGawYF13vVdAPolS6Vreut1swne7PkpdEjsvUDf6Aau5
-         Gdib3dtrN3exz+XkYBMkAwOUEdJob6N90q8u/9vUw1ig/jHSuQ0Wf87lLa27if+nOHAP
-         J65g==
-X-Forwarded-Encrypted: i=1; AL+hErG+syxmcnw7UU6VQP9mRphHJco+Y8M2e9Qr9JMabk3/sHMPzTd4oS10KrjeE+yxY9tDcELS0KcCIKnMLAce@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Yr+Pgn9gHLbEYuf079eGc7L8gneBk94kAUIEXyIxACZ/Sa495
-	5Do/Gk1iDs+H1lfkV0IUUZcXZsaPn5ylFtoX8J42DqYzoPdUgY+z97VK/rjuzekTjuwKRaFe3mB
-	AYFTd
-X-Gm-Gg: AYBFou03daaOrC4G+a6CIq1CWy0K/PjwAHpYxECwTs/tl6ByHOT9Z1cxypW5Y97n/qv
-	QTb0c68pIQQcQW/kwBe/gDhA2MO9s3qXra6WG9tvOLudIlCRuoweDQYXqY7NuQOjOvXNUrFW8Ng
-	BnTCPovJkYcKSNC56dookPBdQjHY+TJ7xNNisXsZQUvQPV/JDuF+uE0m5jgAn1o+JPJQFWjRZmQ
-	dakE3Ac45pK5uvHRz4oy4Nun1zFtry/fHdwyL8YJ12+cwif60DJQhr8Wlh48BTI+taAPqO+otYI
-	C4V6XO54KGF8XQ1jy6mbN9+CMqI9tesdPy7z6ogmdTf0b/Gu9Fp3yLdlNFmuRqWGSVp0UAXxWjl
-	18s8JVYoNBTPNqQsNFocKj7tCYPrc5qlOI+xNzu9S1XVEDnJypkbmgHDV3ulc9Z0sX7Ixk6eo5d
-	gtdtUeeBDzwjMHOu+WxuRtc/naLVTGEIbf1+YUJlh/7DtKC/9iQkahlAlUXhN+cqDsJAEO72MQo
-	DRoBvVATcRwKCbStA1vscDVSqhJtM2AzU7U5fGKYZNkJpwOUl+sBvtV+5GHlpD7gP+M5lnqC6fz
-	7GxumpAAVginzhO0VdmhdFJYPM6P9L/PzyK3qxb/dec=
-X-Received: by 2002:a17:907:e849:b0:c49:9383:a28 with SMTP id a640c23a62f3a-c50495ef6d1mr244854866b.35.1794321766382;
-        Tue, 10 Nov 2026 06:42:46 -0800 (PST)
-Received: from [192.168.0.167] ([109.78.220.165])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c504a65f267sm112205666b.71.2026.11.10.06.42.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Nov 2026 06:42:45 -0800 (PST)
-Message-ID: <ee2aedde-6688-4cfd-9f92-3703b081247d@linaro.org>
-Date: Tue, 10 Nov 2026 14:42:44 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E413C606AA33;
+	Tue, 10 Nov 2026 14:54:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E413C606AA33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
+Received: from omf03.hostedemail.com (lb01a-stub [10.200.18.249])
+	by unirelay03.hostedemail.com (Postfix) with ESMTP id 506DAA0930;
+	Tue, 10 Nov 2026 14:54:09 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf03.hostedemail.com (Postfix) with ESMTPA id 5F6C96000B;
+	Tue, 10 Nov 2026 14:54:07 +0000 (UTC)
+Message-ID: <42048f8fba5c2726a488b28e94625938bc045f5a.camel@perches.com>
+Subject: Re: [PATCH 0/4] checkpatch: improve exit criterias
+From: Joe Perches <joe@perches.com>
+To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+Cc: Andy Whitcroft <apw@canonical.com>, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org
+Date: Tue, 10 Nov 2026 06:54:06 -0800
+In-Reply-To: <CADLxj5T36OOBR4J1HGNT3U7H1FwwvSPmBWYRM_vGAEsXfWT0MA@mail.gmail.com>
+References: 
+	<20261108-checkpatch-fixes-hash-v1-0-d49b3085c20b@oss.qualcomm.com>
+	 <671a7f6bda4ec81f56e3eb7ee287bce4a96b9d5d.camel@perches.com>
+	 <CADLxj5T36OOBR4J1HGNT3U7H1FwwvSPmBWYRM_vGAEsXfWT0MA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (3.60.2-3.fc44) 
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,146 +61,54 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] media: iris: Fix use-after-free on unbind with
- open sessions
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Hans Verkuil <hverkuil@kernel.org>,
- Stefan Schmidt <stefan.schmidt@linaro.org>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Hungyu Lin <dennylin0707@gmail.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, sashiko-bot <sashiko-bot@kernel.org>,
- stable@vger.kernel.org
-References: <20261110-iris-handle-unbind-v2-0-86d5f6f1dea8@oss.qualcomm.com>
- <20261110-iris-handle-unbind-v2-3-86d5f6f1dea8@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261110-iris-handle-unbind-v2-3-86d5f6f1dea8@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Stat-Signature: ftwyfocdcik3mrik36hsdp4qnesfb7cj
+X-Rspamd-Server: rspamout04
+X-Rspamd-Queue-Id: 5F6C96000B
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX18wUG1UX3JvveOYgV8IDLCV0QgG02xPMKA=
+X-HE-Tag: 1794322447-284156
+X-HE-Meta: U2FsdGVkX1/6P65vIOCScvicy/0kQCG4Zv0GrTwFALzggU3lRKWqHfEhUi3rKEouAus+91uQMZVaf0WFmg+9GjPhNZGrWiMMxFMniv72rsXnfnCV6jhNFSslPeqUbtSLOUxfXc68gdymTThGzs/e64Pp08zUMaaHih7TQpQdQUqF8hv48OMu1eK1Tdbv6nmvkfzGF6UoKpsV0HPRyFgP6DqFkeoimIONeUJzd0SxWgfCO0Zd5KO57/atrLoWcrbxpLt7ZAZXAAb/kZ1gunSAZ/l6kNabHV/sDN53bPZyjzcEMhEgXsmkFMeX7PZ9SA5nA+ueec33qBORZr0xXYoOpa2doNtY1rLsEqkGaXYp437KFCJfvZAw7nUwsUaUhEB4
 
-On 10/11/2026 14:09, Vishnu Reddy wrote:
-> The driver can be unbound through sysfs while a client has a video
-> session open. The core is devm allocated and freed when remove()
-> returns, so the open sessions then use freed memory.
-> 
-> Only the core structure needs to outlive remove(), because it is the
-> only thing the file operations of an open session still use. Allocate
-> it with kzalloc and tie it to the reference count of its v4l2_device,
-> which every registered video device holds. It is freed when the last
-> file descriptor is closed. The other devm resources (register mapping,
-> response packet, clocks, power domains, interconnects) are only used by
-> the power on/off sequence, the clock and bandwidth votes and the
-> interrupt handler. All of them are released with the unbind, after the
-> core is shut down.
-> 
-> To make sure nothing uses them afterwards, set a removing flag at the
-> start of iris_remove(). It makes core init, new sessions, command
-> writes and the clock and interconnect votes fail with -ENODEV, so a
-> client still holding a file descriptor cannot power the hardware on or
-> vote for resources that are gone. A client waiting for the firmware
-> only times out and returns an error without touching them. Runtime PM
-> is also disabled explicitly in iris_remove() instead of with devm,
-> because its callbacks use the core.
-> 
-> Fixes: 38506cb7e8d2 ("media: iris: add platform driver for iris video device")
-> Reported-by: sashiko-bot <sashiko-bot@kernel.org>
-> Closes: https://lore.kernel.org/all/20260926064921.976721F000FF@smtp.kernel.org
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/iris/iris_core.c      | 10 +++++-
->   drivers/media/platform/qcom/iris/iris_core.h      |  2 ++
->   drivers/media/platform/qcom/iris/iris_hfi_queue.c | 15 +++++++-
->   drivers/media/platform/qcom/iris/iris_power.c     | 13 +++++++
->   drivers/media/platform/qcom/iris/iris_probe.c     | 44 ++++++++++++++++++-----
->   drivers/media/platform/qcom/iris/iris_vidc.c      |  3 ++
->   6 files changed, 76 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-> index d558475986ff0..bdac6b8c98e44 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.c
-> +++ b/drivers/media/platform/qcom/iris/iris_core.c
-> @@ -43,7 +43,10 @@ static int iris_wait_for_system_response(struct iris_core *core)
->   	ret = wait_for_completion_timeout(&core->core_init_done,
->   					  msecs_to_jiffies(HW_RESPONSE_TIMEOUT_VALUE));
->   	if (!ret) {
-> -		core->state = IRIS_CORE_ERROR;
-> +		mutex_lock(&core->lock);
-> +		if (!core->removing)
-> +			core->state = IRIS_CORE_ERROR;
-> +		mutex_unlock(&core->lock);
->   		return -ETIMEDOUT;
->   	}
->   
-> @@ -56,6 +59,11 @@ int iris_core_init(struct iris_core *core)
->   	int ret;
->   
->   	mutex_lock(&core->lock);
-> +	if (core->removing) {
-> +		ret = -ENODEV;
-> +		goto exit;
-> +	}
-> +
->   	if (core->state == IRIS_CORE_INIT) {
->   		ret = 0;
->   		goto exit;
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-> index 3e4cf652bf39a..379f0666a42cb 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.h
-> +++ b/drivers/media/platform/qcom/iris/iris_core.h
-> @@ -62,6 +62,7 @@ struct qcom_ubwc_cfg_data;
->    * @iris_firmware_desc: a pointer to the firmware-specific descriptive data
->    * @ubwc_cfg: UBWC configuration for the platform
->    * @state: current state of core
-> + * @removing: set when driver removal starts, blocks core init and resource votes
->    * @iface_q_table_daddr: device address for interface queue table memory
->    * @sfr_daddr: device address for SFR (Sub System Failure Reason) register memory
->    * @iface_q_table_vaddr: virtual address for interface queue table memory
-> @@ -108,6 +109,7 @@ struct iris_core {
->   	const struct iris_firmware_desc		*iris_firmware_desc;
->   	const struct qcom_ubwc_cfg_data		*ubwc_cfg;
->   	enum iris_core_state			state;
-> +	bool					removing;
->   	dma_addr_t				iface_q_table_daddr;
->   	dma_addr_t				sfr_daddr;
->   	void					*iface_q_table_vaddr;
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_queue.c b/drivers/media/platform/qcom/iris/iris_hfi_queue.c
-> index 545bbe75e1740..e0cfa5107d1d9 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_queue.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_queue.c
-> @@ -128,13 +128,26 @@ int iris_hfi_queue_cmd_write_locked(struct iris_core *core, void *pkt, u32 pkt_s
->   
->   int iris_hfi_queue_cmd_write(struct iris_core *core, void *pkt, u32 pkt_size)
->   {
-> -	int ret;
-> +	int ret = 0;
-> +
-> +	mutex_lock(&core->lock);
-> +	if (core->removing)
-> +		ret = -ENODEV;
-> +	mutex_unlock(&core->lock);
-> +	if (ret)
-> +		return ret;
->   
->   	ret = pm_runtime_resume_and_get(core->dev);
->   	if (ret < 0)
->   		return ret;
->   
->   	mutex_lock(&core->lock);
-> +	if (core->removing) {
-> +		mutex_unlock(&core->lock);
-> +		ret = -ENODEV;
-> +		goto exit;
-> +	}
-> +
+On Tue, 2026-11-10 at 07:42 -0600, Bjorn Andersson wrote:
+> On Sun, Nov 8, 2026 at 3:04=E2=80=AFAM Joe Perches <joe@perches.com> wrot=
+e:
+> >=20
+> > On Sun, 2026-11-08 at 04:21 +0000, Bjorn Andersson wrote:
+> > > When invoking checkpatch with the --mailback argument over a range of
+> > > patches the tool unexpectedly exits successfully on the first clean
+> > > patch. For example:
+> > >=20
+> > >   ./scripts/checkpatch.pl --mailback --git v7.3-rc1..
+> >=20
+> > Why is it useful to do this?
+>=20
+> My use case is that I create a maintainer branch off e.g. v7.3-rc1
+> (now v7.4-rc1), then apply a bunch of patches and before pushing that
+> out I run "checkpatch.pl --strict v7.3-rc1..".
 
-This locking scheme is looks racy, what's the point of this granularity ?
+I think the description for mailback should be changed to
+be used only for a single commit as this proposal would
+otherwise change the exit condition for the single use case no?
 
----
-bod
+> But this is quite noisy, and the compressed "b4 prep --check" output
+> is more what I'm looking for.
+
+My b4 version is 0.14.3 and the man b4 for prep doesn't include
+a --check option or description so I don't know what that output
+looks like.
+
+>  So, I borrowed the "checkpatch.pl -q
+> --terse --no-summary --mailback --showfile" from there and it took me
+> a while to realize the difference between:
+>=20
+> --mailback                 only produce a report in case of warnings/erro=
+rs
+>=20
+> and "don't produce a report if the first commit is good".
+
+So perhaps just don't use --mailback?
+
+And remove the --showfile so checkpatch adds the git commit id
+to the output and maybe add a front end little script to do
+the git commit id to commit subject to make it easier to detect
+what commit might need updating?
