@@ -1,108 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.180
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794348755;
-	b=0CiQ3A2DhLQLeCaudb6beKr5LZwlRwahIo4MoLWY2B6np0K0jrKzHppDuFl3a2mOwIWL
-	 +Z6xcNFTzbnnFqUL0HAVYUMuybU6N99hQcqer5z7TfqaFNrKUkElkM6bAQtUcgCwT6QSX
-	 lustkkQ/h8Ae9swpTTu0ILVkF7ayYaYJvmCFCrQoG0Y8Rzgen46Fu1FKV8gR/8VEDuYFa
-	 3MiT4PYPumJWXi7psGDE8gG3Yz8hT22PiBcCHp0B6WuXCM5peGXfm8yZoVVq4ZnWHRsAB
-	 j+H5rUO4SJRDLxfFLsSqCHixJnOmB02db994rAUQx1ptQt/d4vD0yUIzrJy/18wQu6A==
+	t=1794354378;
+	b=nIWQ3MH8YXzT9PE8R+wFBSMfNs1xt9HxySMKYWD6RsWdDLIF0BHjGgf8y5V7U9AUQ+nC
+	 19Mz0py21xsVxV5xIyDROdY9v65M8qN0Lnzzz6gyDE/0PhyYLIWoz9dEf64Z69YrUuCIh
+	 9AOj7iuwWUWgn123BkrQ5mhy09tcQupWfgZREzo7ed4eytCe5dXxc5pzkSuXEV8b+t8QV
+	 u6O/ywQQs8TJ+PUmYQOwggfG7/zjoPfUjJbY9qtFUaeGMx9CHoFBnX0E/c1mwhnHLC1JQ
+	 yqalKajUiAvqjcKz+5DbVIA3AS6WfgZoj9t13fuxheA7zRa868mryVVPTGfRRDIFKyw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794348755;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=QvuQY+dI7Cg/hO7294zVJsdHa2mxSYpqdORdJaVQ9KA=;
-	b=cRRiAYJ9eed3dr7vcHLe3zaVs3JOMEhuBwKWXU+L/UqQtzknbdard6wQZNzgBp5pwsAB
-	 7N/2tJnWxjAzb2WGm2MrLrMEhSr4s4GEqTqF2zKl9lGQQz0YuxkapQWJbzNRICw1e7MxT
-	 79R3BdmOqgfptEqIOF7x+g5ojric3CiyM1lwIbin7OQUymO2SofUaZJTn4M56Pyt/V7d4
-	 GGxRfKbauUoTSOwjgBzc+svO1S9dqcDplT5p5KvPIaVHF216KR7/Nm5nWij/ztoggKXOa
-	 X7COG1z9M5tRLWjB9OpRFH9sPig8Gfdxs1MO5JQOCxlv5N1rZr7GVLESoj7FoXtOWzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794354378;
+	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=WCdKUUEAMgyuIUvweS/CVZqWS7quwtCy3Zzak2dFXXY=;
+	b=PMQTv22aTQ0Luo20eyrVrXN+8h/ajn7b+IwaPnjbVFEXvmCTdGlYExPMHGbAmnJeHU2K
+	 3tNXUtWsKXvdN7d9Xsv+uW50j/fWJEIxXkAmgX7AuBJ2VEjAtNTVsXJikUpmsEWTKrHIg
+	 NLq6ECilOH9CUtB0b2ToDhrWPpcRL35rebdYNYGL9GsdNzGGkY2eVaLEq05ilAQJHNZbe
+	 es8m3EnIF7OvaNJ3x56a5jm5Boic0wl2eZ8xapQg0lTcwjv4JVqcM19Sd7LsaawcsNZK5
+	 xhhHeUc7UEBycVYshf3yBovCny6GwjewFpFQFk7Nu9VF5svzThyZ7kGBP02HCZzxNOg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
+	dmarc=fail header.from=andrewgigena.dev;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=X7aTYqVP;
-	arc=none smtp.remote-ip=209.85.222.177
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+	arc=none smtp.remote-ip=209.85.128.180
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 724E2606A32A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 22:12:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 724E2606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9D7D606A325
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 23:46:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A9D7D606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=andrewgigena.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=X7aTYqVP
-Received: by mail-qk1-f177.google.com with SMTP id af79cd13be357-93e64d52949so223157085a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 14:12:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794348754; x=1794953554; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QvuQY+dI7Cg/hO7294zVJsdHa2mxSYpqdORdJaVQ9KA=;
-        b=X7aTYqVPbG5cqr4kNYOlVXseMw8UYfuxiw/e4mO4JL6PiwzbyMKDAmXe2s4foYJNSO
-         7wGvtSx0Bc6XbtZufCkUgha15tfTNZ6Q+9TXyr/WcRWwEEFdaxS5SZDnpFWRCO63nvHM
-         cVYbbaBoC14Fig9LfOCqp/OT+KqgF+yUgzS+KFA3wPLGixmpidGjInk5cM8AW+lE3SAY
-         XcneGJKlEUn+TxITC2PzRKuv9JUUTkske6YVJBgotxZgLcZnpUWlvlKxe36zzHsNx6u8
-         fFuuivfjtUYX0yBBhbmMPWQLnIXjzxC92ASwejNyNerUOyd1xmhfg6kbc1erixnCtEED
-         5bQQ==
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-8b335ef6441so23931867b3.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 15:46:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794348754; x=1794953554;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QvuQY+dI7Cg/hO7294zVJsdHa2mxSYpqdORdJaVQ9KA=;
-        b=1HbV6G//39A1VK/MfvHE9XHNzCVzdRPeYyP8A1x4FeBGGltDTvQ6B7oZ/ZuMJk4/kO
-         0niLhkyG8PaoWZVxEz9Fl//H3DH8bVya9lQ5UMMHQZS1WYXuRFjW4e+9nCWAeAi7hLML
-         3N3BwQCqfsMDLMcLYbE/ZqGqWsa+OM9UNI8YhsuaJv6v806TrM/53fgyBI0ydOUYPMAb
-         KSXyaCNXDGsJQMCW5Q6d1jvqhA7mVMDls695ewvZ2/nDGPdX8rWiYloF7KRfF1WGk/IV
-         OOSsJvc76bSFfhd3mNqAJy17P3zuR9TkYc5/rEch+UJ5YvledAWhaqF7y0kH/mbYON89
-         nmNA==
-X-Forwarded-Encrypted: i=1; AL+hErFP8jQS7qmzh6zzPshAEjZzFOy1pJHNlqEFv9JItLQBwruIDuU13XEEV3hZgStKi5z29QG19otpe5jrleyk@vger.kernel.org
-X-Gm-Message-State: APuU4Z/Qe25lHXfk25Ptb9OdZ9z3y7f6bJoK7QUYuBo9GjbCoq8tfxD+
-	droy4fuea76lw9bRNctGkWzq9uHW8EjKm3jBeaz9uGctO55fueN7ak7F
-X-Gm-Gg: AYBFou0ggSlmVjsUB5Z30qlDaJhgFyJBAJ4nEreAMDODA8Ao4p3Y8GuhEYU227Xdzzm
-	nIkvmiQAb2/nk+pCZT/PmB6XtDkvwW132CX5hK4hK2LEBYOJEJjgb7pNeR4nr9LTQbYCRpm/KAp
-	FYhxXy6aDkKs80ldkGXHXWJ6zsXn/YxW44LVC0RSTv2EYfetjoeECNOb+5cnUDVhv38sCDmW9Hz
-	mvc6Mqba4yD6dKj5ZmQiDXhVA7NpX9KbueQD36hcL0APln7rGu2UT4M3+Rymk0DEopNBRE2NGlt
-	uXW5rpp8cegzZEe3A6kqCxQkV6VPaR+u1k1Sp7Z40ALMW8a+/w4IwRKpZ/lCjvOKaaR0ubBYIlm
-	fkZlerZtG54JZHhRrPYhzZo9y/SAGgsBpONScq46ntBSlxZOFKOKfDhpUYflQt1Hhy/5XxUECwv
-	T44ziLRJXgjMecXfxk3NOCWgsqAN1xcKdn9rCOPM4LkdW7swWKHyGfR2bgLLDyh80gi6HIUfglq
-	kNUuzS4M3YdwMclEnWOCq1TifTbYGsoTFKRVVZht5jHhP9KvrHwR1YqD1wYVSNnvmHQPgVLa7Aa
-	UiTfCeAkUE8n9YkqSALiGQnIpLq2cvqYkIo7gBNSz7S3Nhi3LUZahRicnbNGDiloSU1spclc9ll
-	TXDJ5GVWWrsBb1WfFa/V7/gUjhFT9hHctDs8Fae+ao8ixSDQzqLvMIjHm7yE7FUeYBZ73uYBBK5
-	cr0xskTtN8NodxTIR00FTu3VF5rFkD/mrERjewcKaVDD1z8G+waW6a09lI4tu1vn+hXThGfVyQ2
-	W/O5qcCKMl4C8AmdZOZHAUFzBjton/+8tlunpIC82S77w==
-X-Received: by 2002:a05:620a:6ccd:b0:93f:6e05:22eb with SMTP id af79cd13be357-947b004790fmr62140885a.48.1794348754197;
-        Tue, 10 Nov 2026 14:12:34 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:940a:c6ea:f292:3644])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9479e73a8fasm328270285a.7.2026.11.10.14.12.33
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 10 Nov 2026 14:12:33 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Suresh Vankadara <svankada@qti.qualcomm.com>,
-	Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/6] arm64: dts: qcom: glymur: Add camera MCLK pinctrl
-Date: Tue, 10 Nov 2026 17:12:32 -0500
-Message-ID: <20261110221232.3883-1-jesse.casco@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261015-glymur_camss_dts-v2-3-e7b1f403146f@oss.qualcomm.com>
-References: <20261015-glymur_camss_dts-v2-3-e7b1f403146f@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1794354376; x=1794959176;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WCdKUUEAMgyuIUvweS/CVZqWS7quwtCy3Zzak2dFXXY=;
+        b=FtOwfPY0do5yAtwvrSEnK1+BxgATfUJ8wec3De2GJDGojU3Yoce8RQZbIGhMYQ2aHu
+         edmmw1z2cmH65dcYFpJcOOCCNBYkTPCfVd8lIxeViRWGmXAtQqaTyUpYQHpb8zs/eYqm
+         z8prQjHbqAP+v0MeLwSsOSOVcV3GFJ5X0JcD545CX9MfMHbmrTJgbj3QeAigYfUfs3cx
+         ZQ2zkeNvehWdl/3UfZd+xl/AC2mK0ayArhzbFxX+nchnUHN1LaqtGMBwXQb7pI3rKwMj
+         k29ylaZ3eksNJM4Bp3qFV3d8GvhlxCJP5BGPyV7e/yCN/T95M/tI1MPKiw9MZ61m9z0D
+         Kd3w==
+X-Gm-Message-State: APuU4Z+B8XQBMOpV9HYn5E2M3ls7MNpMZmeHPygvuHp0+2xGu6LP4raZ
+	Sb4moHCW+Yg0ow/NoAAwU+Y+pfPVXs0vV8ZJ2BhnvNm5NELNXM660pU3
+X-Gm-Gg: AYBFou0jIgVFlW5RYSLwngVz2au5gsuoyFJ4wRK5u+YeDUnYkgP69KhPKuCK+BnadL+
+	phL31c+ipXu4ivOSEFhzfsgVqCQoUMUD2uMY3X6HFFE6HHkvOGOHt6o2whWBJxVIk4ZIM1bT548
+	4GEy4lV6baJdTJnFRX3BdFwavHDSco6bH5drvm2w+aNJQHcwH1lEX8UvaPbdn6BHL3m6imMrdLS
+	kHZ0M3VacAQ5tiOe++I/LkOYBZKz1yQjUBgBhZDZpUEAxxJr8lgIfxgeJBNsjWOEFKR+47sailE
+	6zqPxp+JP7bj4H95LdpBXC0gbm/rKDDsWMNzxyPNgxGjNAvvrhXWmje8Jo/CN4i0n1e2QLS7HFu
+	56CZbhoKF70TJsFtQWFsyOurzFEWfB8oXsWjcg2z1c6iY1EoxDIYm5qbvJ64EuJXY5dTe9jO5ub
+	j9lh0RMTpMm3rPZVncNsK7WACSOut3S4GXZkhQWLWTgSAuz+WiJCLXjZ8NkLYgqr2Xegp9VGuhJ
+	8ILTrjTW70TqjYiqIq0kbdn8CqRF55zy4a9n9rCXWbjFywMCgw2rOc29MLPcvABAirFxFSsH5a/
+	vk6ISnss+TIN6VN32hRiPv+7YDsfNirtoDtvtDT/NX1ymSWATgkw71yE8EAkCvCkMYIJjW75
+X-Received: by 2002:a05:690c:e3ea:b0:8b3:15c2:24a6 with SMTP id 00721157ae682-8b3a7ff3419mr7031107b3.17.1794354376630;
+        Tue, 10 Nov 2026 15:46:16 -0800 (PST)
+Received: from ?IPV6:2800:a4:806:ef00:2f77:7097:372d:6d14? ([2800:a4:806:ef00:2f77:7097:372d:6d14])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b3933c59cfsm31871827b3.17.2026.11.10.15.46.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Nov 2026 15:46:16 -0800 (PST)
+Message-ID: <ab79818e-4b4c-4b58-bd2f-57d9ae4cddc3@andrewgigena.dev>
+Date: Tue, 10 Nov 2026 23:46:06 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -112,39 +74,61 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/7] dt-bindings: media: qcom,sm8150-camss: Add SM8150
+ CAMSS
+To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Andi Shyti <andi.shyti@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org
+References: <20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev>
+ <20261106-sm8150-v7.4-rc1-camss-v3-2-0103e8a0bbcd@andrewgigena.dev>
+ <21be3761-9da9-48c6-aaa1-b56f8625167a@linaro.org>
+Content-Language: en-US
+From: Andrew Gigena <mail@andrewgigena.dev>
+In-Reply-To: <21be3761-9da9-48c6-aaa1-b56f8625167a@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 15, 2026 at 04:22:28PM +0530, Nihal Kumar Gupta wrote:
-> +			cam_mclk4_default: cam-mclk4-default-state {
-> +				pins = "gpio100";
-> +				function = "cam_asc_mclk4";
-> +				drive-strength = <2>;
-> +				bias-disable;
-> +			};
+Hi Vladimir,
 
-I've been running this series on an ASUS Zenbook A16 (UX3607OA), which
-has an OV02C10 on MCLK4 at 19.2 MHz. With 2 mA here the sensor shows
-horizontal banding, and its frame period stretches by about 9%, whenever
-the internal DMIC clock (LPASS LPI GPIO6, 2.4 MHz) is running. The bands
-are already in the RAW10 frames, and the sensor test pattern is clean,
-so it looks like the MCLK pad itself rather than CSI or the ISP.
+> That's an intermix of names, and you will get a review comment from
+> Krzysztof about it, I stand aside.
+>
+> Here too.
 
-Changing only this pin to 6 mA fixes it. A/B/A across three boots, same
-kernel, fixed exposure/gain, row high-pass RMS / frame period:
+Krzysztof did comment. I kept the vfe0/csid0/vfe1/csid1 order from
+sc8280xp-camss.yaml in reg-names and interrupt-names, and asked him if
+he prefers another grouping.
 
-  MCLK4   mic off          mic on            after
-  2 mA    0.96 / 33.28 ms  20.44 / 36.17 ms  1.04 / 33.27 ms
-  6 mA    0.89 / 33.27 ms   0.90 / 33.27 ms  0.90 / 33.27 ms
-  2 mA    0.95 / 33.27 ms  15.33 / 34.37 ms  0.93 / 33.28 ms
+> Drop 'gcc_axi_sf'.
 
-At 6 mA the frame timing holds steady at 33.27 ms and the image stays
-clean in every phase, including while the microphone is recording,
-which is exactly the case that couples interference into the 2 mA
-clock. Normal camera use with the mic on is also clean at 6 mA, so the
-fix holds up on real hardware, not just in the capture script.
+Downstream sm8150-camera.dtsi feeds GCC_CAMERA_SF_AXI_CLK to CPAS and
+x1e80100-camss.yaml has gcc_axi_sf, so it is used. Can you explain why it
+should go?
 
-Could cam_mclk4_default use 6 mA? If you'd rather keep 2 mA in the SoC
-dtsi, I'll override it in the A16 board DT instead.
+> Drop 'cam_' prefix and 'cam_sf_0_mnoc' also.
 
-Thanks,
-Jesse
+Prefix dropped. I kept sf_0_mnoc because SM8150 has a CAMNOC SF path.
+Should I remove it too?
+
+> Or C-PHY, right?..
+> In fact you shall drop bus-type from here, because the link between
+> CAMSS and PHY's output is not a CSI-2 bus, it makes it inapplicable.
+
+Agreed, bus-type is gone from the CAMSS ports. It only exists on the PHY
+sensor input now.
+
+Best regards,
+Andrew
