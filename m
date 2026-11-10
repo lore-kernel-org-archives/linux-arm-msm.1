@@ -1,58 +1,67 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794311567;
-	b=myTG0hiGolm69TbPnGNTapebi7jT0Eo2J2l9uqdaVPhoZrsOOEZg8Nhtsup6K59JKZU+
-	 19XTFvmIIvKYhIgSIYRjf9zOWdgmjiq3I+/TVMu7WNqFbN7Lv9PmDnOHGbgpWLYLMJCKq
-	 U5UoC3lkBj8JbANzyaTUtOXegepCCdla+/9LOLAch1ghmTD3ew78n96SHvBk6n4AxTDfo
-	 YwuaH0WECpoXFwg3VraAnGwu43kml+OV65t1d8QJ1hvgABc4uAE4aiSZLcHRJDDvK1SIv
-	 8Yzr8ihQiVrUFq+/i76tv8OAoZu4PgvjNHV5dzwAaLmbIVbtJzso6w6NU1AZLuuA7Zw==
+	t=1794312716;
+	b=RlJPVJrH4dcT9SB0G1V+jXKDTLCv9v2XAMely12oJQlB1vF1/W2SFbTHVMUPoX4buPIi
+	 3+yB6XSESikseSO+MRhYEn9ox5eH01ylgA99erZ6HaBaQ7KDhgjD0N8+nsWmXEbaGEYrF
+	 VxicrgjmAaXKvuytlGSnfrawx42QILKzU/UNHdXfsGXIqqkTE5baCXxTAzIRtf4uwob+6
+	 sAHu+GH7Umq7mlJxfsXTSbr+Dul1wC3hgpsZjJ+IsBP/sADQ2W5ZDfFmVINfs7B+nMlw+
+	 SgooHnWyRxj1KQdaKkSuOBpu08miqyYDXIrhLnfSV9CdC40r51wozfLVLjLo6o5cUzQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794311567;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=Q+IkvQtL5ObOy+q62Xc96m74OgGtoWgoqKq4zQpvAZ0=;
-	b=lLz1uVuABKy0R/oE4ibXJrpYP3D4bHt/WMhu78sRimtVU14ifoJlKB8d7YV1ArVHbXQa
-	 RM2fcCEK8YK92UhdL1O05xg7XLCaVsaUBz1AqsW+L9vBPPmeWtirnN+iH+Xr3PblpzeHR
-	 PuHkU6g5Eu0O/2Bur5MOVDjblvuWZtHm6hc4leN8KJabJqoNPQRWBfBkXeNUuzfwY0S02
-	 QL4U7bs3HpEEJyU192XRtyq8Q9BH0QGXV0Ql7nxtdjIO9AJEtYt1zB7z4DuMJDR/bpQUZ
-	 akxJ1qfIi9KQeIcIr5bnhRXV2MYVX2ZiBBd+ekXSjS1qFREH4X+hCZZaRtqykjNczIw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794312716;
+	h=Received:DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Cookie;
+	bh=tD7qGW/s5oeJ2DBBIRje4FsXgEysjpoBnFMFva+fOTE=;
+	b=DtAz0A4CmkMUHNB+pbsJpJjeP44GLaxbVU8IrD12I8rikY970CrOle15qYdNSs0WYqgU
+	 4Ho11cjz20yOAZzI4qzIGYEOjZBRasz/i6NJDnMUSJPZ9OfMdg24rBUFeNunUzmlnCJFE
+	 B/rxSRiUXsEjY4qGOatB1GqSKlQqJuEByMwcVsKN0vhjspxfVQwOwAiaHVWFqcnK6er+M
+	 hWrCVsp2SENolvSJIpo3SggMXOPcfu61a54IE16C+79NyyQzlVqYQiAa5wO3HRVTRXUWm
+	 5ye6c0BT2qAChcVyUYxHsN1yZ6Kdt0gqQ16SCthyrYZTOY3tU6jYpLQK6qyqMHSxf1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DP8HkjU5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WphPGQT6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96235606B5AB;
-	Tue, 10 Nov 2026 11:52:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 473FA606A338;
+	Tue, 10 Nov 2026 12:11:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DP8HkjU5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69EE91F0089F;
-	Tue, 10 Nov 2026 11:52:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WphPGQT6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6BFB1F008A1;
+	Tue, 10 Nov 2026 12:11:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794311567;
-	bh=Q+IkvQtL5ObOy+q62Xc96m74OgGtoWgoqKq4zQpvAZ0=;
+	s=k20260515; t=1794312715;
+	bh=tD7qGW/s5oeJ2DBBIRje4FsXgEysjpoBnFMFva+fOTE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=DP8HkjU5T83IWyPjBkGBGk4rtnDD7AROqjLS347ksks61BqCyegrtofOXDOd2MLWj
-	 y5v5LekEWgJIwdi8jcSVZSOfNh6DNLeRf0oEPf/qx0r2rhECckbAgQ26HUC+9Op824
-	 TYWCdeeANpr3OrBAjhz4yPYln7Mawc17X/WCBA1PMuBGt0NlmdHwGEqMuCi+dix0x5
-	 qja565LmnhO5EGUi7MgurfmPOlTht4sa9a0fKJzxR+zIOMF4yf3pZFrolv35TtX201
-	 yu0bevNg1SHN2X4DU0xoVtcm7Zwier+QtgstMCRDMzA67VOyk+THdhPCTaOPcJMAJP
-	 vRjnlElsnjGNg==
-Date: Tue, 10 Nov 2026 12:52:43 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Demeter Barna <me@fromdisposition.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: crypto: qcom,inline-crypto-engine:
- Add SM8350
-Message-ID: <20261110-colossal-dancing-clam-1db0cd@quoll>
-References: <20261109-b4-sm8350-ice-v2-0-fd5e84985e90@fromdisposition.org>
- <20261109-b4-sm8350-ice-v2-1-fd5e84985e90@fromdisposition.org>
+	b=WphPGQT60ndSl/fT00up4p6UOmimSvHl+Z4QGCnkEQD5emXwGRlQfEZAP8meg3xtt
+	 Vfyn1mKfvMGxvORVblLnZRa7PrvVFGCKsJl5TTJQRtfecAoz1uBwMqbEhh6dDuRwgx
+	 smN8cIIAgE/2IC+XLvD1oipdAj95dyH8+yMw2dfDE4om6EY4OBOKc3BblzgCT4DYH+
+	 XvQ+jg2aNOIChY32qbMh1JIvK+2hI03zOAO7Ov6o7qgS2q6yb39Iv/2X7s1D/GGrWV
+	 X9DTO07ATWUenxnzR2d2Rj7VAG46kr865p8ttVyGTSzcjmgPfReLKEkyhxcLjh4xrm
+	 k0p4UEKD5Hekg==
+Received: by traversing.sirena.org.uk (Postfix, from userid 1000)
+	id 93976310C14A; Tue, 10 Nov 2026 12:11:52 +0000 (GMT)
+Date: Tue, 10 Nov 2026 12:11:52 +0000
+From: Mark Brown <broonie@kernel.org>
+To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	shengchao.guo@oss.qualcomm.com,
+	mohammad.rafi.shaik@oss.qualcomm.com,
+	bartosz.golaszewski@oss.qualcomm.com,
+	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] ASoC: qcom: audioreach: support multichannel PCM
+ formats
+Message-ID: <7195c2b6-e1d7-4816-b86c-55e1936e11a2@sirena.org.uk>
+References: <20261026082534.986449-1-zhangfei.gao@oss.qualcomm.com>
+ <20261028024720.981971-1-zhangfei.gao@oss.qualcomm.com>
+ <CAFkd8hvXor7A5zaRtH5iQm6NsphzsxrjbADcRwedsONo=6J2gA@mail.gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,24 +71,53 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Z5PpBErLLgIutFTu"
+Content-Disposition: inline
+In-Reply-To: <CAFkd8hvXor7A5zaRtH5iQm6NsphzsxrjbADcRwedsONo=6J2gA@mail.gmail.com>
+X-Cookie: Whoever dies with the most toys wins.
+
+
+--Z5PpBErLLgIutFTu
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261109-b4-sm8350-ice-v2-1-fd5e84985e90@fromdisposition.org>
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 09, 2026 at 01:55:29PM +0000, Demeter Barna wrote:
-> SM8350's UFS host has an inline crypto engine, version 3.2.0, with a
-> hardware key manager behind it, clocked by the UFS ICE core and AHB
-> clocks and powered by the UFS PHY GDSC. Document the compatible. Being a
-> new SoC, it stays off the legacy single-clock list, so both clocks and
-> the power domain are required.
-> 
-> Signed-off-by: Demeter Barna <me@fromdisposition.org>
-> ---
->  Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml | 1 +
->  1 file changed, 1 insertion(+)
+On Tue, Nov 10, 2026 at 03:59:44PM +0800, Zhangfei Gao wrote:
+> On Wed, Oct 28, 2026 at 10:47=E2=80=AFAM Zhangfei Gao
+> <zhangfei.gao@oss.qualcomm.com> wrote:
+> >
+> > AudioReach currently rejects PCM streams with more than four channels in
+> > the PCM and shared-memory media format paths.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-Best regards,
-Krzysztof
+Please don't send content free pings and please allow a reasonable time
+for review.  People get busy, go on holiday, attend conferences and so=20
+on so unless there is some reason for urgency (like critical bug fixes)
+please allow at least a couple of weeks for review.  If there have been
+review comments then people may be waiting for those to be addressed.
 
+Sending content free pings adds to the mail volume (if they are seen at
+all) which is often the problem and since they can't be reviewed
+directly if something has gone wrong you'll have to resend the patches
+anyway, so sending again is generally a better approach though there are
+some other maintainers who like them - if in doubt look at how patches
+for the subsystem are normally handled.
+
+Please delete unneeded context from mails when replying.  Doing this
+makes it much easier to find your reply in the message, helping ensure
+it won't be missed by people scrolling through the irrelevant quoted
+material.
+
+--Z5PpBErLLgIutFTu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQReagvpf3TrrA7BoYYv73Ows9A4iQUCavMKBAAKCRAv73Ows9A4
+iRDrAQDAqT8DpX9wcQEUCFKrlo0Xwf8FZARYHt5LPoZ2z1CcWgD+NhReofjPRdwd
+dPFIv3Vl2sj2YB9DDPXF7UF478xUYAU=
+=3j0y
+-----END PGP SIGNATURE-----
+
+--Z5PpBErLLgIutFTu--
