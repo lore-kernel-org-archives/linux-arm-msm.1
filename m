@@ -1,63 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794275096;
-	b=W5zPuKkEMicCmdx7S58DOqdmEKYZabXLgBS8hFwct3coqE9tGMqixA+dm2ca2x4gVd0Q
-	 UrYsyHjvBed7eR+Pez84lEr5ooJAzjwn1u6IwZLX47j9TCDOAPF4fqqCi7jG0G6tlTcdR
-	 6fR0/fdRFtYsCc54RIo2Ed9rTJe0LTyHiZhM4zICuwCwy5p5M0paGOeTGZHqgs5l9ClT5
-	 BRBd6dVsnmq3GD0Waj/MrRX9xHWIHLd7Vs1Blc3lKWJo1RI8nk3r37EYjAlLgLn6ZO6Z7
-	 skMgRtyaukWE07/eoaGP1D1ZMYJBqMD6Ydw7RPUUL7n9n+0rQSkfm50pqoLV9u8zT/w==
+	t=1794277927;
+	b=b56o47ZOzysLQcy5i499sfTAkpoq3i6dr7BP4CO+5qD2ZdglEKMGabCw+eSRGqjDq8fr
+	 2xfoRJ6pG/fdV3aAiZ8hYzVNxRYB289cj7XIhKbmIb0r14vig0NCzNWdP3rr13XbUf6YS
+	 hO3FAy5ti5gwTyQGjCBLvDmr2Set+Gr9A0XBbRk/0qZb9RmzqKd7VKt3kxRSvn/WFvi7E
+	 Ld8O+4sG2iUW/5Mn99SFSiXQ0GsEVhghuLAG80QlAg1KgH7nlV5MIh9w2qYnoLQKHzb6g
+	 4yu9iHzXFIMkmZWzspPP+CC6F59/GNohXc2mEjV03UWVmlOv/AowFuFy/ZkIeYY2cRw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794275096;
-	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
-	 Subject:Message-Id:Date:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=z+4EY+8KKxK3cbzz2wjy14lYgyq1UFQ1PnavJMZdtnY=;
-	b=FFc5ZigVueiCFit14abjSUnY+hwG/KqdkVMzHuKcezUdm4E9dregTeFLZFsFuKYdQLNJ
-	 p9UY42JcNhdcaxyBD8PRhLtl+yLWSP7w/GeIJstn2PFXJBVJMEkP7F9Ju0pjYQVYI1t/T
-	 KKRFrEIt8FzQkvMGl06fPBoCuRLoFO/uF88MVqZV+EMlzFBQpqzNpk190IoRZrNl64G3/
-	 rLBPLCBgQr1SxydTOjZ1raBwp5xJCnaeyXyxEQ0lnaFEo4fGGoHJrJuC6s8C+cEglULpU
-	 pAC70p9soul/Ra12HQSxnzuLjANUUkayf+TAlMi3+7iFsh3WsotiC0DSewgaubYJMHQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794277927;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:X-Mailer:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=mloBGBfIYO/HMZFaOg38+4ygcggZSdvoIUbpU+sqWuc=;
+	b=0epxrFBc+xeRDlkYNdtbDEjGelXKJhgh0pJB+DWeC7PIexN+TEaIiWK4dA7KJpeP6N9s
+	 Uf81sEWSdM2nGKS2WyFpbD+W0hSoL4vnQtYlMuiNGKWzZltvb3zOl2S/Rn8DI7WW4u8L9
+	 ug7B+tU+lHMoNCMdS/pWDsF6kgaglBbqRKpvhCQs3vzvsSkLQO6Uddkvfov0nEVAll/eS
+	 9NaWNMaNrpBKoia5F0GNXimbda2kK/WDVXfrchZ19D5DBUAvQcCXFSFA70d2JLiqbJOkJ
+	 L8jSLGiHigjqPbKyBlYT8hxoPOrHUysZuQD2lAeQkBBLcRJ8ej0RABX51zgemBKS12w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="MPg/2vL6";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 622A7606A321;
-	Tue, 10 Nov 2026 01:44:56 +0000 (UTC)
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=s+NYkTDQ;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2837C606A333;
+	Tue, 10 Nov 2026 02:32:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2837C606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MPg/2vL6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B41D41F0089F;
-	Tue, 10 Nov 2026 01:44:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794275096;
-	bh=z+4EY+8KKxK3cbzz2wjy14lYgyq1UFQ1PnavJMZdtnY=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=MPg/2vL6JzdB3cjQ10UHXJVIDFvIwvy9wyubTR9zqq0p9LYJIDD4/foW9tN/+sPWK
-	 /kTLrB6X/orky8QFfBd7sp6raJdjMz9pkzFfWS3jwyTKakOw0SKRkxW8uYnLfJdyhw
-	 XXLzuLl8top8E/y4UAaZuk8IryYJJu9dLzDTySSTPlYILI1LJ0mNUZdMFn1ZXqhITV
-	 FtJjOM9GExcahyn9zeeeG+aoAD8rHCaDcz/ZlJmOPh46isthDt2jja1+m6R60wXuW4
-	 ziApxigCbHMjNxSqnKkQKZY+yUsMkLvDG/kUWl8K+IZOPeh4XIxmSkQSnw5Q9fY+8y
-	 A9+rGDE7+PxrQ==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id D39DD310B0D7;
-	Tue, 10 Nov 2026 01:44:52 +0000 (GMT)
-From: Mark Brown <broonie@kernel.org>
-To: Liam Girdwood <lgirdwood@gmail.com>, 
- Aaro Koskinen <aaro.koskinen@iki.fi>, 
- Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
- Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
- Brian Masney <bmasney@redhat.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-omap@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20261109-regulator-subsys-v2-1-370edc01ee9c@redhat.com>
-References: <20261109-regulator-subsys-v2-1-370edc01ee9c@redhat.com>
-Subject: Re: [PATCH v2] regulator: convert to subsys_platform_driver()
-Message-Id: <179426493952.3711751.3118760089270754666.b4-ty@b4>
-Date: Mon, 09 Nov 2026 22:55:39 +0000
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=s+NYkTDQ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:
+	Content-Transfer-Encoding; bh=mloBGBfIYO/HMZFaOg38+4ygcggZSdvoIU
+	bpU+sqWuc=; b=s+NYkTDQYu5iSjy4CbJGo2f4I8vPdaX8QcT63m5miUU30NnhrO
+	qs9sTJAq7rneYTXTRwAQR7z/8yfMuyQcZmUrthWthpsX1FkEH8CrlSRZZtnlMBWH
+	h7erOk8Ro/UHoCnxF3MDPkg3spmPCC+xwxd3u94pGuKOolxwKFLyuvRCU=
+Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.192.72])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgC3QEUZgvJqwQOiAA--.57S2;
+	Tue, 10 Nov 2026 10:31:53 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] arm64: dts: qcom: sm8750: mark the ADSP fastrpc node as non-secure domain
+Date: Tue, 10 Nov 2026 10:31:53 +0800
+Message-ID: <20261110023153.84262-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261107032646.32363-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261107032646.32363-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,46 +65,73 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1118; i=broonie@kernel.org;
- h=from:subject:message-id; bh=Xu2NjFsborPmWZXavBEW+5G8t7Z/Jy94NrhatdekAPo=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI+lYskv/GoYHSOTw8UyX3gkP77N/PxBxu1nf6l5B2ym
- PhiqZhiRykLgxgXg6yYIktcFvfL+pLXa/gOLmyDmcPKBDKEgYtTACbycg7Df2/NuAzXt0Uz/l1d
- +qx7nWfxBG+VSVfaNiuf9G/d9PD9GQ6G/1kv3q6oqA/8MCd61oWt//4afog+tfnTn3/rOM49YWK
- 5Jc8MAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+X-Mailer: git-send-email
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgC3QEUZgvJqwQOiAA--.57S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Cry3Ww15Jry5Ww4DGFWktFb_yoW8KrykpF
+	4rC39rWFs7KF1Fq3yjqFy0g3yFvan8JFWUGrn8J34ay3Z09r9xJr1ftr4fKw4Utrs5uw4S
+	vw4aqrW8ZF1UZa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUkqb7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4
+	vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
+	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7AKxVWUAVWU
+	twCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r
+	1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij
+	64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr
+	0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF
+	0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8SdgJUUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREHB2ryH1kW4wAQsr
 
-On Mon, 09 Nov 2026 16:26:45 -0500, Brian Masney wrote:
-> regulator: convert to subsys_platform_driver()
+v2: add the Fixes tag requested in the sashiko review
+(<sashiko-outbox-202531@kernel.org>).  The diff is unchanged from v1.
 
-Applied to
+On SM8750 the ADSP fastrpc instance used by the sensor core (and by the
+other non-secure ADSP users) is the one the firmware exposes as
+non-secure; the CDSP fastrpc node already carries
+"qcom,non-secure-domain", the ADSP one does not.  With the fastrpc driver
+keying the secure/non-secure split off that property, the ADSP only
+instantiates /dev/fastrpc-adsp-secure and userspace never gets
+/dev/fastrpc-adsp, so libssc/hexagonrpcd cannot attach to the sensor PD
+(qrtr service 400) and iio-sensor-proxy reports no sensors at all.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.5
+Observed on the Lenovo Legion Tab Y700 Gen4 (TB322FC), which is SM8750
+based: without this property /dev/fastrpc-adsp never appears and
+iio-sensor-proxy exposes neither accelerometer, ambient light nor
+proximity; with it, qrtr shows the "Snapdragon Sensor Core service"
+(id 400) and all three sensor types report as available.  The change is
+one property on one node, matching what the CDSP node already does.
 
-Thanks!
+Tested with `make CHECK_DTBS=y qcom/sm8750-mtp.dtb` (no new warnings; the
+single avoid_unnecessary_addr_size warning on dsi@ae96000 is present
+before and after).
 
-[1/1] regulator: convert to subsys_platform_driver()
-      https://git.kernel.org/broonie/regulator/c/b526cfdf5d3b
+*** AI-assistance disclosure ***
+This patch and its commit message were prepared with the help of an LLM
+coding assistant.  The author reviewed the change line by line, ran the
+checks quoted above on his own hardware and takes full responsibility
+for the content.
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Fixes: be9d54c35312479ed92c85aec3cd43153513210d ("arm64: dts: qcom: sm8750: add ADSP fastrpc-compute-cb nodes")
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+ arch/arm64/boot/dts/qcom/sm8750.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
+diff --git a/arch/arm64/boot/dts/qcom/sm8750.dtsi b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+index cf947acc57..9302481b11 100644
+--- a/arch/arm64/boot/dts/qcom/sm8750.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+@@ -2571,6 +2571,7 @@ fastrpc {
+ 					compatible = "qcom,fastrpc";
+ 					qcom,glink-channels = "fastrpcglink-apps-dsp";
+ 					label = "adsp";
++					qcom,non-secure-domain;
+ 					memory-region = <&adsp_rpc_remote_heap_mem>;
+ 					qcom,vmids = <QCOM_SCM_VMID_LPASS
+ 						      QCOM_SCM_VMID_ADSP_HEAP>;
+-- 
+2.53.0
 
