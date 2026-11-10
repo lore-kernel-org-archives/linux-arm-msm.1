@@ -1,100 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.181
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794332037;
-	b=BVgKVPzN5hVoAh1yA6LEaX3mfDwQjZfxxIPPZnKus/5Ab+yZyu5X1ZVDmo4jqU73sDuT
-	 QYxV18pTUn3pU8COQc8OKekTzAd+yDRcaXbZ7GJtxq5Pe1rAiwcP35nozJfedvW6h++oO
-	 fW/e0Mfv1axXTQpwVZK8DliR+Ds5/XtuSYdLvzXlWs9kkqi401ZPDnR/bcmiTKYAYNeVV
-	 aA7bi7BQRNtE4Wcg03HSrBmAXTrVx38gBN6mjGWK8P29kGdMW+eiZmwU06KsKtFsviGDt
-	 /ACYs0kzQRGcFushd1XG/VeqPjhEqZiO5bixEsE+izGm7DztR9O72kyZMjJq8qJWRMQ==
+	t=1794333109;
+	b=1MkLZzt1d/utJDycdR081uWTn7N+jIxIW/Cl0GI+88eUtvK6az1olaVyQluPtQHi5Zv8
+	 Ec4vMFH+UNNGxRbZftxAjprjY659KNvn6BkNIqHZZtcM4jjpA/7pshl3eowGBGMxYAJqv
+	 tB7Pmy9ICkpQFp7rZY+22u2ZjahpF1ez7vpEbtQOmoe64SWAnBxRaqa8TuafnWIKeR2WG
+	 wrgCzOGh0GLgMd0ba896bad38f22tTu14RWfBoWgI08MU0IgFvSc+5z6BuubSRTXlxL/w
+	 85gXm0y3rYPQ87dxL2sS3oPIJQPwCzrwVwIeJt7iQf55bKjRdAhuadY+WrhWV29YFxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794332037;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=9zqzYW4ru8OeiEnFYJDpvwtnOOYnHBlJKYXWpDNw1es=;
-	b=M3AiTMvn9h8nw3tlEDRklt09t5W+LLU0kpyZTEKSP36iZHH0LACZAPG4j2i7cTq4KX4j
-	 yeS3tqtZ/IbC+AGGVsceAw5VuQx7lkABxk0lcCH1d8KGP5LCG2iJLCDAjErlTW1p7Vdva
-	 BTnNwtAGZuZDkb6ij8UmTXVj5B6OlGM7BBC6zsPVJ4OGXr6dsoBluRr9AKMiPniWh4I5c
-	 5NkCf+PdGkBNdfUkg/k+nkTtylLSTdF0EUNP0TY8DImd3IgZ08Ftax7ytlKlBm4Hm9GUE
-	 j+50YYyJv4TqpLHu05+0mR4zZODrjpSTRUmtxECJ4pBntoqq+z2wUZaMi9DRy4HhyqA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794333109;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=kWkhdha3nQ+YU6W68ji72ckaJYIXt+RZxT95aMd1MIY=;
+	b=HJu5WWVzK3CLIgfqnEiemcK8dhk91eNDRGQCVOlbOentn4rSfmj/9MFGbhOu1EEFF/lU
+	 lmmpnrWYYfZjRTn47OraDZRjJsLBjAIFVSMfVhQNSCWUwzbwt86XiisSgtJrm9m8eWcSF
+	 tLRaoGHr/1C9SHiWRMl69mKwSbK9Z5HtGCbCXr7Gp+u0zYflCiWUlUizy2C7ML1phUcVx
+	 3lWkJSld8ELn2WWVvp/0dzdyXsK8Efm9MD/P8K55uY3Cj4h7fhqaCqPdJBfsu6+oE8K9t
+	 I3R5y4rzhdAb1sN0r5D0O+m8d2ZgtfLDU/1r2AkbZG74npezfD18h/zoMuctThdiKNQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=eyRphzfn;
-	arc=none smtp.remote-ip=209.85.160.181
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k0VRE6+u;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GicpfOIB;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1692606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 17:33:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F1692606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36BF3606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 17:51:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 36BF3606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=eyRphzfn
-Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-5363c8de563so22973111cf.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 09:33:56 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k0VRE6+u;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GicpfOIB
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AAF09n33183180
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 17:51:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	kWkhdha3nQ+YU6W68ji72ckaJYIXt+RZxT95aMd1MIY=; b=k0VRE6+ujr9qu2si
+	19L7uwDIWPgQxjAmR8eJP2soTnbTuM5D6BQMVozfJbxQ0VQDoa7S1cka+tgxa09Y
+	VdVu2XC0aAvTwfyA0hJuDbWyhS/bZ+Jcb8JWn1/LdU+d9j2nV5FVLl/g3kbRWfP6
+	x4m1rNg7w9iDDTRbobz8MTLGVteEsM2zFce/SZRSOYugdSOyMaD5l9g4BcvJ41x8
+	+MN95ZZsvY70KqIztZY5BnW2kLtnrHQ5VfYUJ1pImHrhMNRHaVi/2wcOv3Jk7F7f
+	JQjFWqzCvAOb4Uk6avwkjcyZbRlkzGTZQTyE2ho+gxcD1LlOfrooT+FhiOX5NS1o
+	yORTAw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4huucp3721-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 17:51:48 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb93c874bso469242585a.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 09:51:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794332036; x=1794936836; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9zqzYW4ru8OeiEnFYJDpvwtnOOYnHBlJKYXWpDNw1es=;
-        b=eyRphzfngUXPZtGUh4ciZsqVuoJdIbbdOdc0R5SX4iJRArgXjvj7ITIGNm60b6Oyub
-         1d0WvouKJHWbAXnc9UddDTEIQnpxJoWMEuZuw2oGyvmrpQBJdVVF/qVFsyz/bME9anR6
-         OdZNGDp9nwjuMGwdY+YdfbeQU6V/KEGUg4KKdwMQpZwzQdAEMY/o1SRtzfxbSbMp4DSF
-         1B6fC57Jg99jAvGZBDgxsx7IY5krV6bNBcK3owZKjk0rSnQcnDMzRs+XjJoxzwWGBMQG
-         2hjuAIoMXqtnbo0kRBwkygFhlkFBkrZ+vTP/ijTQaIrfOrQySqzRLsVdoj9jbIKdX0WD
-         OZJA==
+        d=oss.qualcomm.com; s=google; t=1794333107; x=1794937907; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=kWkhdha3nQ+YU6W68ji72ckaJYIXt+RZxT95aMd1MIY=;
+        b=GicpfOIBboq6NdMnCjdunDmggoAPlpd8aV4wH6CALQMTYAVKiIehBE5yKYUiBOQB4K
+         VLNZZlpG8MlskpSVeabkNNSGG3ok1u/0EhXfSArcCFOK23GClq0zEIyu6KP+ijd3gS8G
+         NrKmeNZzPES++wH310YC3F4nyo5IPagwWeiv3mmZnA9IcFwq9AOJ3V+3MLYPSLppvpso
+         kZ6ZuCScfKc7Zwlkcfv8/mamH19S3f7m2xkNCb5p6nenbNyOKb1N/GbLwr6FLdG1ec+q
+         FCd42zfWhbARg72aJG9bPnFdVCZXLP9/tyfVqj3pihiLp4PxBQYw+/aVzR2ypPjJ/Ss9
+         x+mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794332036; x=1794936836;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794333107; x=1794937907;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9zqzYW4ru8OeiEnFYJDpvwtnOOYnHBlJKYXWpDNw1es=;
-        b=oPU6BxjyzSFQV3/1v5cK6/me5MBrMrx51dwaWPuSRLJjLEPf0B1g2vWInUtvgNO1+f
-         HBnLgDqTBaV/2PYTh6uN0mITsSmAaMcM6cg9tKau1WXdF3ea5jskBvyDr6r3MfZ25Vq4
-         dJQCTPm55KjsxSzUTZzH/LgP5hFOsrovZTS5C0ccToZWRd0nBoHppk+/NoNwTPQUolVP
-         vmVmteg1sGacrPxlVTjlYXRL+GznvJNHFh6GZoIXQAKoWkmc84Nu9wpair5smz410M9c
-         5MtDNvRfry0k+keV0uwQ2/dv+viq4P4A3fLjDm18eGHx3xBd/NQ5RS+pO8jZACMUQ5Ns
-         YClw==
-X-Forwarded-Encrypted: i=1; AL+hErEIPUN9eBZorlUGYdmmM/cc6VNk1In3WPRr4Dxd5+5MNKihoYeDxit6PH/SX52wqsayW9nBZsNu+L/H90kW@vger.kernel.org
-X-Gm-Message-State: APuU4Z9CaW71s86+DmdT6YWFWDMDDFwt2I91Rndvq3g0SNAI6muDvRJU
-	QVwOi+kEqBKF0ea5QNWB87n+//8Zcbz31tb59YfB3bKyBMby/zOSAPvH
-X-Gm-Gg: AYBFou2MYiCcwBQNn0gMhneyIG1Oqx+nKPjlJKVNmFRxu46MVRm22d3+F0e8FaQsWOj
-	9WpMGO5P/bsi1vz/lGyz55xiArKbtkQxsXxKc5VnaYRNFaxuU/A7lDF0SjUx28GNox0uyvj1ddX
-	4KHFvdYY8mei0t42EH8zOTNySpnKXiRc1erIr0c2k/hf7d1w/zfihi73/cdnx2zbzQCMOudcv70
-	pI/estm9dbzsxh2FnbjjTRnljLMratc4ABSefKN27lHC7Fc9SS1RLE/upskgS+T1XTvI9SC4z+V
-	uwIr0/rioCMK50NJboBfoCWcOYQsNPc6XwLOgCgJ74trgCRYn1NTpTkl0/n80RPmDxfplgr9mmL
-	8PoGDDRhqgSYO28lSycZ/gymGzWHPcXk+Qohz+Xx7pPcbogvVZbmBNsxR2uOrlKm/cyzudv01h6
-	gNx2DiTfUnY0iNLcUvHumdEnfT2aG4/T/V5DByfFNcZNoOeVL/lYnF6Cc41cSK94eLvIAKwLPhQ
-	/JgB/Rq5qDyb7VDwWc+AYsc100eaLCp22SCCN1U1tW5ecZi1x76GC4tf9Ks7tfJpZRxGM5hTSJW
-	SpWFIUO11fP3mSfqtdz1EEtgwGq7iHnNsY6pYZZGlxtnCe3w3+Mgj/cGWWUqNgF6wwHsFx+Hiy5
-	QWZZIhyL+NCSQALULStvEPB4LHMpREan/Al11adEZM13qJ0Je7/3+xqVaZqw56NmCqjsS9Kc/90
-	fGlRoJcX/NIaqTtOlSG6aJA14f0LF7mGv4HHq0tlfMW/A5SSJJDFS9syAI0H5bnW8clpJk+guMJ
-	EQ9/lUoGZ9RZUby/V9TFbKJjO2SMEeyZGw2SL6/tCEKuQ==
-X-Received: by 2002:a05:622a:1ba5:b0:535:1b50:48a6 with SMTP id d75a77b69052e-55525fa6c73mr51407731cf.6.1794332035626;
-        Tue, 10 Nov 2026 09:33:55 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:940a:c6ea:f292:3644])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-555065e4ad7sm29130471cf.0.2026.11.10.09.33.54
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 10 Nov 2026 09:33:55 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-	Herman van Hazendonk <github.com@herrie.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] clk: qcom: gdsc: unwind power domains when registration fails
-Date: Tue, 10 Nov 2026 12:33:54 -0500
-Message-ID: <20261110173354.41274-1-jesse.casco@gmail.com>
-X-Mailer: git-send-email 2.56.0
+        bh=kWkhdha3nQ+YU6W68ji72ckaJYIXt+RZxT95aMd1MIY=;
+        b=f6IU7Wgq55tDFvAfdT+fbUPh08IxKjldQNjNaqC3AS2/GitCruXsb7syZIINPv2Zgz
+         Zx4djlw+D8EOAIepH2Lyr/kM8AE7cd+f32KdT3PBIqauw+rD3eCnzvTT0OPSjUlKv60v
+         1Ek39Q1IZRbEYPCq8fivX5ugqiBkGDJC121WhuFy5spCilaOIyy8HYYKxK86osMMQvM7
+         /a6myn+/Bw1s8CPXNDw02O32TkSeWExBlwgTpVPfGccTL5qBg+NZFR0qlV99BhqdPNL3
+         tqSLsEXSbj25lifrEjH67V4K+0yRwURhMVcUtSJw95iCpPOi4WLK2SJpzztzTXFvZjyR
+         rlrg==
+X-Forwarded-Encrypted: i=1; AL+hErFI7fMEwIwa3nypuIi1QDaxFtUA8XmfJ3M4quRvN+vbOJ65Q5MXSWicAWkhr7LLmb27Hpx6kNQ9ls5iyAXS@vger.kernel.org
+X-Gm-Message-State: APuU4Z89ymlqiRPueZBWvJ9kRn3z3JdMH+8WIqqzAH2aJrfuy/hRH8Vf
+	FaPxFgcczy4x0aifLYTVyLWvJ97Oh7bFdWLSwn/LEFUVN+kTFidf3DPfkSFOZGQL2e8arFAPvHk
+	P3THrsWfRFD1JfneN8/t7WwzxuW02BDe+lZ4e00TKD4y+kBZBC1uPqdmRDps4YIqkqaax
+X-Gm-Gg: AYBFou2vXtkYEDuseddKKRvKLcahKmMsiAqQQ5mOATNwQp1tZTRtnUGXlPXhgfB/FhO
+	B2zMWZj/5Fhfgk33Rkq7RBz/8632a9k/pWyJ1c7t83oYpeQnfUS9X1QUl/20jccL2PKV90KW+Y+
+	IDT8WuUZqfm9eo26o5g3h6yf7sxSPMaPFHyNEo50FfrSXp0+PL7xREAjcSCL91xhOIkgvRKWzSU
+	8u+xlWGJqjpGobBlIkXTVZfISdE/gjEq52rtKfPauKTE1ZoYipx93F5xCGavvzAC6PHbPr7dppv
+	QVQUUWSYlRw5+a2z209PLpbguuezm163epgpVaamsUMvoRxQGx3CdZ2ZCA2YdmUw66J/TzFFlh5
+	LkWDuGlENQbegxCRfCbnaO2S1lZ4G78QWGuRuj/OfA18Tz+3ZLBGIKY0U7IwLYoZA85m9++yHTI
+	Bu
+X-Received: by 2002:a05:620a:27d6:b0:945:fd9c:b26f with SMTP id af79cd13be357-947ae71efb8mr46541485a.2.1794333107423;
+        Tue, 10 Nov 2026 09:51:47 -0800 (PST)
+X-Received: by 2002:a05:620a:27d6:b0:945:fd9c:b26f with SMTP id af79cd13be357-947ae71efb8mr46534885a.2.1794333106894;
+        Tue, 10 Nov 2026 09:51:46 -0800 (PST)
+Received: from [10.216.48.249] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7578bcc7csm1415476a12.10.2026.11.10.09.51.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Nov 2026 09:51:46 -0800 (PST)
+Message-ID: <3b00916b-d47f-4b37-8142-2d844993e7c4@oss.qualcomm.com>
+Date: Tue, 10 Nov 2026 23:21:33 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,78 +116,113 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] dt-bindings: remoteproc: qcom,shikra-pas: Add
+ iommus constraints
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Kumar Patro <bibek.patro@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org
+References: <20261104-shikra-el2-v4-0-97e7019debff@oss.qualcomm.com>
+ <20261104-shikra-el2-v4-2-97e7019debff@oss.qualcomm.com>
+ <20261105-bold-seahorse-of-reputation-8db98f@quoll>
+Content-Language: en-US
+From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+In-Reply-To: <20261105-bold-seahorse-of-reputation-8db98f@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: lTugItXkCafM82UPXBnExFEcx5OFLFPf
+X-Authority-Analysis: v=2.4 cv=U4oHnuru c=1 sm=1 tr=0 ts=6af359b4 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=BJdym6yNp6BzvLZH3dgA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA3MSBTYWx0ZWRfX0S49pMqMYuyz
+ XkU1wtfDbYvyp+x3xOx/IA+2Ka1BSFYfRtHjxY4J5URcxQmV902UVFMbAUW1ROUpbzOj84hVpY+
+ wv8117bbmCUU2mh5h7Y8zu9TiavzLD2RlqCNHsK1rCwxZszTtFeuejSSThAmEWXHMWfrTYgEqcH
+ sNhP+I6X+zDKs4xgMcunFvUdao6DJK/sBcG0M6/gMPqEgfr3fnxmLMcHY+Dsiwv7rZed8WP2fiO
+ unn+tVnL9jjUkB5pGL4m/poX8LmEfotLZw8bAPtmvPZ0S49oQ+lvq52pi92P3St71rvmbRIg1D9
+ n2J3E6udcZyGFjfQisn8J1qK5MAPOM0ITB5lfZ2kE9SUxedMK4NGyl8S3NXaxn7EWkdw+bGwkEr
+ 76M7MBphRqWqt6uwENG/20YI4qh6XhoBeDphc6PlEC7k4LbVQZAdm+IYa5ZHGS7psK13or621l7
+ xhCgDpQLxNUwbvApkTQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA3MSBTYWx0ZWRfX9KUMNTWKWn0i
+ oi1TRH0JJ4vEl8MVAGGb01b5GcHD1tuHxl5HF7sWMFqbsxICUshqzTdN/+EZqv8RBoUnXIZJC7M
+ cy/5PIMWZT3xOxgnxWejzIhlqsLMDVc=
+X-Proofpoint-GUID: lTugItXkCafM82UPXBnExFEcx5OFLFPf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-10_05,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 spamscore=0 adultscore=0 phishscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100071
 
-gdsc_register() leaves the power domains it has already initialized
-registered with genpd when a later gdsc_init() or
-of_genpd_add_provider_onecell() call fails. Callers only install their
-gdsc_unregister() devm action after gdsc_register() returns success, so
-nothing removes those domains, and a later probe attempt initializes
-the same static struct generic_pm_domain objects again while they are
-still on the genpd list.
 
-Commit 86b23609d5e1 ("clk: qcom: gdsc: tear down per-domain genpds in
-gdsc_unregister()") made the unregister path remove the domains, and
-commit 16ba98dace9e ("clk: qcom: gdsc: Fix error path on registration
-of multiple pm subdomains") fixed the subdomain part of the
-registration error path. Make the rest of that error path match
-gdsc_unregister(): when the provider cannot be added, remove all
-subdomains and domains, and when gdsc_init() fails, remove the domains
-initialized before it.
 
-Fixes: 45dd0e55317c ("clk: qcom: Add support for GDSCs")
-Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
----
-Tested in QEMU on a 7.3-rc5 tree, running the real gdsc.c and genpd
-with a synthetic DT and fake registers, with failures injected at the
-first, middle and last gdsc_init(), in subdomain registration and in
-provider registration, plus sparse arrays, explicit parents, a device
-parent and a pd_list (52 cases). 36 of the 52 cases failed the
-cleanup checks before this patch; all 52 pass with it.
 
-Registering the same objects again after a failed attempt still
-reports an existing kobject (-EEXIST), with or without this patch;
-that looks like a separate genpd lifecycle issue.
+On 11/5/2026 7:06 PM, Krzysztof Kozlowski wrote:
+> On Wed, Nov 04, 2026 at 07:33:31PM +0530, Komal Bajaj wrote:
+>> Add iommus constraints for Shikra PAS compatible:
+>> - qcom,shikra-cdsp-pas: maxItems: 1
+>> - qcom,shikra-lpaicp-pas: minItems: 3, maxItems: 3
+>>
+>> CDSP uses single IOMMU stream, while LPAICP firmware uses three.
+>> These are needed to describe the firmware streams when Linux boots
+>> at EL2 without the hypervisor.
+>>
+>> Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+>> ---
+>>   Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+>> index 34a2f15e9361..8c8a7616d478 100644
+>> --- a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+>> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+>> @@ -112,6 +112,8 @@ allOf:
+>>             maxItems: 1
+>>           firmware-name:
+>>             maxItems: 1
+>> +        iommus:
+>> +          maxItems: 1
+>>           power-domains:
+>>             items:
+>>               - description: CX power domain
+>> @@ -134,6 +136,9 @@ allOf:
+>>             minItems: 2
+>>           firmware-name:
+>>             minItems: 2
+>> +        iommus:
+>> +          minItems: 3
+>> +          maxItems: 3
+> You need to list the items.
+>
+> Why maxItems? What is the limit defined by top-level?
 
- drivers/clk/qcom/gdsc.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+There is no limit from top-level now, since iommus is removed from 
+qcom,pas-common.yaml and not declared at top level for Shikra.
+I will list the items for qcom,shikra-lpaicp-pas, with one description 
+per stream in next revision.
 
-diff --git a/drivers/clk/qcom/gdsc.c b/drivers/clk/qcom/gdsc.c
-index be9c14e..8739293 100644
---- a/drivers/clk/qcom/gdsc.c
-+++ b/drivers/clk/qcom/gdsc.c
-@@ -647,7 +647,7 @@ int gdsc_register(struct gdsc_desc *desc,
- 		scs[i]->rcdev = rcdev;
- 		ret = gdsc_init(scs[i]);
- 		if (ret)
--			return ret;
-+			goto err_pm_domain_remove;
- 		data->domains[i] = &scs[i]->pd;
- 	}
- 
-@@ -666,10 +666,21 @@ int gdsc_register(struct gdsc_desc *desc,
- 			goto err_pm_subdomain_remove;
- 	}
- 
--	return of_genpd_add_provider_onecell(dev->of_node, data);
-+	ret = of_genpd_add_provider_onecell(dev->of_node, data);
-+	if (ret)
-+		goto err_pm_subdomain_remove;
-+
-+	return 0;
- 
- err_pm_subdomain_remove:
- 	gdsc_pm_subdomain_remove(desc, i);
-+	i = num;
-+
-+err_pm_domain_remove:
-+	while (i--) {
-+		if (scs[i])
-+			pm_genpd_remove(&scs[i]->pd);
-+	}
- 
- 	return ret;
- }
--- 
-2.56.0
+For the single-entry cases (qcom,shikra-cdsp-pas and sa8775p, sm8150 and 
+sm8550 bindings), is `maxItems: 1` fine, or do you want a one-item list 
+with description there as well?
+
+Thanks
+Komal
+
+>
+> Best regards,
+> Krzysztof
+>
 
