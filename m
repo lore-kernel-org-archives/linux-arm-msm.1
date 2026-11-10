@@ -1,48 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794297505;
-	b=LYGGrldRhbxta6wHYChr0MXsyM3YXFxmSALGDsDlO1vtcchPQ1mJ8iLKxnxP2kssTMB4
-	 wX1MC013rb4kP9evR/UuO4G8KxYqkpHRNClxDMOgtDREfHO6E59lfwi3vb6G+gm1QlpDP
-	 ZMVvXfUEfBlvjmj31V0vrsAdAISCfFMJ7M5l/qwOPpWzd4uJiBU0CUMFX2PJiZqWaQBtR
-	 bcVqBYW2SpSXub8DBkjtrcrewvOmmPJQlcaXp6GgI3iM7YhEQqs4/cB5X1NyaEFDGR3F9
-	 ZPlm/tWAfpMCs+XgMyOK4BhP2pe36Miurym5kHaTnJWWLFfy8IV1oG1ho5R570UGwOg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794297505;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=8SzBYWlrvwPCCHwu07tXjnrpYf5pl0jf1joi1XFugQ4=;
-	b=UZKi63RUcKkK5Oo8wbrRJd/6RH/E2s/4GHQnwo2mFJkPsp95fb4IlPx552Th3AStUeIL
-	 t1bXpwtDoOwenOAmv/0FT7Q84KuryHwx78muRi8aG2q4JeIyQqBVx/MaTCZqBmTDJvhBX
-	 g9Hl02qte2GsWHtTzviruGPHBzYxPsM/enyEg7mlY/czFpI5gE9lCqyJULz3iKEzOiyzB
-	 w4W/k6BiuD07q8W7Yq1wSTO4u7SUfh/EvhXYxDtFF/D74aufydAQX5wAcYjb5vLRuP3By
-	 DY8xcst42KdMmFkVa/OFJya2GZk5cOyzsvzT1Yj6lZGseNEOdxTflrLTo2sYJkLnNVg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IJxMwXS+;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794297599;
+	b=jdaI1KB2jpmz4U8fPrK4zg0enbRHd0DX31vbRC/ocpdNW9le3wlZ1ff98RWW5NQ2mZZc
+	 +TI4nuGED7Km9vl+6MNkn+Wl+b2g3vhSl/HG2f/Aong5diTVMcKBHF1rEYwBoWHPi56qI
+	 gWF1rUmY0uFRloUZWJDwTDnkLASubWCrT4utGCxlYkMP5SihYbeCuze6GwIiqprHpnrz3
+	 sRLVIxSAcNGhoksx0bf5zL3nGGe9/Bo+ij+CR4ei11aj+rUnZKxfFQ6H5B66iQtaZQAdy
+	 91we15hkDSjx0NqOlwsO2MSSYSetpoQC694nmRLlxWHNQR38PvYkh13KJPQoJ3AC40A==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794297599;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=1q8KZvUyx0wMnb01QCxwvBMDQ/z9mBvAgyaDAz8CIyA=;
+	b=l9z3aqvNa4RQrxE9iJaqi++xvRH0MBlqmvhlWqf3dlRY+Kqp1WXbmTirEFu7lH44HHc+
+	 uckdYjzw1kKFAo7RA42ICIgCE9igZTcfM1jyChj0QPIp8c+55GXmaQR3dWg+DHaH3WSvu
+	 Nin7fCgwayCP/Gy6TIdFbD26gP4lc5wSOFiGpLE71WdtowGLxg4eueK9tQZB3KyU9d6cJ
+	 4qv+HWXgrrEChnR9CWHMe3WaUcoGzmJ2qz2ZYWzVx4eCUCrVdIlsh34ufTrEdw2eI9hVu
+	 HTXLHyyHwE8UhHiosqEu8eX/N8GaEVJNugsf5JfG2osqOouJwNCGwiEcly8YEK4SrZw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SbNq20tY;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ggtl5LDj;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC8FA606A31C;
-	Tue, 10 Nov 2026 07:58:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B57D5606A33E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 07:59:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B57D5606A33E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IJxMwXS+
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1AEE1F0089F;
-	Tue, 10 Nov 2026 07:58:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794297504;
-	bh=8SzBYWlrvwPCCHwu07tXjnrpYf5pl0jf1joi1XFugQ4=;
-	h=From:Date:Subject:To:Cc;
-	b=IJxMwXS+Dt2bD2Czn6v3NdODkQ4R/YYkMPVrNOmvl5KL5xx2fSor9v9sAekXnrb/c
-	 k9XhL0QafsULb9NUOMCL2tQBzxhmcLiSr3WAD8rhOBvlATbpMbHXTCnq0sBZ4g6HTv
-	 x4wKSGTjjl0e8R+IwN1KaMbA2+JCBaYYdBvIFZ4bqZTC16/muA7FkApqCJSyDcOcnH
-	 PAcwhqaGJJ+MPIAsEuy9VgvMC2UW5mrNu23fyYZPIGpFMe5iUbzbfZyTVjE16ortka
-	 3ZUrz9/AIaE3qzx2Dm0zZZQtbBQggGV8rtcQO4B8Af2Zjv4ExlQDry79euzSfyAJ2x
-	 xyhmbwvQNvtWg==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Tue, 10 Nov 2026 08:58:17 +0100
-Subject: [PATCH v2] soc: qcom: socinfo: Add missing PMIC identifiers
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SbNq20tY;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ggtl5LDj
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AA7kl6i2779825
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 07:59:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1q8KZvUyx0wMnb01QCxwvBMDQ/z9mBvAgyaDAz8CIyA=; b=SbNq20tYV34HB8fk
+	LeAvcdMKNK+XYVVRzGAAGo4h9dAxGrA9qYEheoUoOBqrjM37LAk5BvnMsZFPfqm+
+	wkiwS1dTcWO/dRgDlG/B7u8iTUCWEw6ZeMnXLr9kOkZZ0yp1A9oLKRJwm7wPnZQJ
+	RN/NVpvOtgrlaxOU7tOgBc18wPU72teAZqLflZ7n1a3ALmUgYtcSzn5n/hFZ1AwR
+	DiCigAcr5aw5Bjy6KmkH+wAWMioRmjjPtgb/Os6r6VPOp5XRtJyTBog4EHUL3CI8
+	1fCdLjL98lVR+luQFY2BO8zXMSVfN3MxGJDSiXSXjxcqtgoA0R5l70Y0vGCL2n1B
+	l/rP/A==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4huy5d81sm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 07:59:58 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3b08364cdc7so1588295a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 09 Nov 2026 23:59:58 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794297597; cv=none;
+        d=google.com; s=arc-20260327;
+        b=AxPGlu+HbzfRx3BPd4jfH66co0l+Z3pqBVjJvLhuZyXs52ORrvp993LfjYTPoravGV
+         +2MvqcrclDOJvMVdpjs7WEVKm+4AYQe+2HqJMULXWcVTkFY50eZUnE24UhYGgrt8Tkz6
+         fXnyN9O0yerm7jfsZgvlae1qH2bG7HJHt+ZKkEjvM6ic+lGtT5UOaBeRD8NX9mBiJkat
+         Ox6gVn2NZZ3yyWmCiLDE6V6ChvL42Bx4GlyXDXiVKuZY77dWH7o09VHdCFO9hc+u+iRE
+         A17TBwYhfJGV0OEG8jxCMs8FTtwLO/yk0ARVPF2nl/rr9C0EO+XCdTvw9psfUBvwYdq1
+         TGPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1q8KZvUyx0wMnb01QCxwvBMDQ/z9mBvAgyaDAz8CIyA=;
+        fh=TWP5jBA+kx+nsABXOY5Wrr8dviqh8Kzv8cZtZVmmfhk=;
+        b=o7fMlV2Ys20CjCORGK0kx0dpXaGTNI7636376phVdNXgRtQmmgaBFzDrJkzjBya+xz
+         wEc3623oSFJEjcgxTqfHOh58mE0u5uI2O0SoMirLpf9acN/X1trnA3h6HNFbIeXruH1x
+         popVNsAQpjdNfSLa9gfcaT42iasbc76Aqio9egTobNqup+m8+C3vdFstFL1tWHo+85Hj
+         t0swCFpvYihf0j0eIjG+dU5AePg56YhYS7aQ0OhXRhVzCLTlY3MP+HloyDP8PjS0P3sB
+         6bFZ3dlUXhNZ56Xe638fc2xyOOj4T9zslNwiUwBe3EB/pTi8m/FSI8wAGJEYHO2fu0oA
+         kHvA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794297597; x=1794902397; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1q8KZvUyx0wMnb01QCxwvBMDQ/z9mBvAgyaDAz8CIyA=;
+        b=Ggtl5LDjbCamzGWPitlbpMhTKwtDu78N/9WUpW873qVAViJcPsp3a/i/dKbz0TKaYG
+         lbPZoTbHObJSX1WiU04nn0Js2PuBkVuyifuZgS9ram7sgPEsNf8nh0Arji92ofrBczxF
+         I0Ct7gWJWIXCnNgfBl80+CI6zFIn5+SJoYbTLGO3LHHyYVT/LS8iXA1Okq7LtcBvpmuL
+         eynb065L69FkfTxx9ZPrK5VGpaVQlmX4TdRmuSasDxL2nm9FYU+hN5b7/878gyPxdGO8
+         WgUcIykYhC/LwtLdl3JKVDRvWQEIgX6zt8WAZAOhESvR2yo6Hu+bPExNIT6tQc6Hxn8u
+         knhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794297597; x=1794902397;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1q8KZvUyx0wMnb01QCxwvBMDQ/z9mBvAgyaDAz8CIyA=;
+        b=yVLhBygz8wZ27o6jt2BJKFRfzrxAG9rn8iCPHmGnAnOvVqDZbfdVV7iflo8Dwd7tif
+         9tphTX9ldFWF0Hb8JyyTv1gOGtwdxvxMN/Re0Qd5wUNe8JbhEeeNE1UsMSJSxWicGxLD
+         SiSMb6cPUTKx4VhX4BcnEDhA3YET5bwdaCq8OxRVB2R6FcDSXWgo3eCGZ5GIalq8R8ut
+         kImVx9WtBmjAxDTE/CJoz9IckDxdpgbj+Axl5hu31OHaSiSn1P/tT1UG8lnhRARakwfN
+         w0aH0hAuqrEQRPV1gGFSY8gwjAWWw7l2sJT1oz9rsnL6uyk5o8UWfe4D/K5ZhtyVafpR
+         OR3A==
+X-Forwarded-Encrypted: i=1; AL+hErHPRyLWiq2rTNd38MkBcnjy55L8bvNKIENcz/yXQ/7ElHpeASz0tm/bHnamUSCsrSlF3FcwZ5PXLuC9kUQ2@vger.kernel.org
+X-Gm-Message-State: APuU4Z+4tZttPNp/KNDE431oGvAlH0F/RHsSltxJfXwjosB2UnIVMGOo
+	XrhA7cL16RVJxEuLJeos0SQutSghDPeVvjafD9v3nBg5mDudXN1PAa2dkw2iCDY1pURv/LmgHTS
+	uGbEgkozmaL0gWYbKJF/fPSE/AaBlfWz18HVD6CML3gUdryjr+kp1oJ2fjwAQY2pQHxAqW7jydA
+	Rq/fKXLQz4IJQ9MwIrknjkBOh52CZ/Llpbsai9dXMo5N4=
+X-Gm-Gg: AYBFou2qsGZl59k4qyYfDNI4+8eTxGlb+UHu5dtpMHV1inLYjBLJDN4VLa6wl/gL+jZ
+	UgPsw97C8eSYF12/EGeGMW6WjN9DC+iBAoinmUk9sFpuI6KKwzQnhdx2SK2grIUfd3nfKvCyIK4
+	PokUJJNJLnJ2hJ7xuHF3khEwPUYBDdb6Fwpg84mKbiPPaDfBj8XfE84q5LgA==
+X-Received: by 2002:a17:90a:e7c9:b0:3ab:e588:c295 with SMTP id 98e67ed59e1d1-3b166d19fdemr2096692a91.42.1794297597112;
+        Mon, 09 Nov 2026 23:59:57 -0800 (PST)
+X-Received: by 2002:a17:90a:e7c9:b0:3ab:e588:c295 with SMTP id
+ 98e67ed59e1d1-3b166d19fdemr2096684a91.42.1794297596521; Mon, 09 Nov 2026
+ 23:59:56 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,121 +127,341 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-topic-socinfo_pmics-v2-1-14811aa728c2@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NwQ6CMBBEf4X0bAltFMET/2GIgWUra4TFLhAN4
- d8tePcyyUtm5i1K0BOKukSL8jiTEPcB7CFS0Fb9HTU1gZVNbGpMkuuRBwItDNQ7vg0dgWg4Q3X
- KMgd5Y1VYDh4dvffXa/ljmeoHwrhdbY2WZGT/2bWz2Xr/DbPRRiM0dQqQ4jFxBYvEr6l6AnddH
- EKV67p+AWtrLNnPAAAA
-X-Change-ID: 20261109-topic-socinfo_pmics-c7ca588fc9d2
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794297502; l=2565;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=MRA3pZrfDPUVroevO92pCHHZ6IS849mzcF4oIC6Rne4=;
- b=uhFuY/0Swh8C3zwK/tirYV/AgxBtaa5Dart1bC2jGlNj49UKv+I/y1eVNpetagUjiBC5afbZK
- EzGu10DB6+fD8AQFjhlo5DkUmkoFMyYgga0Z0RL10h2ubsxRGMMPfB3
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+References: <20261026082534.986449-1-zhangfei.gao@oss.qualcomm.com> <20261028024720.981971-1-zhangfei.gao@oss.qualcomm.com>
+In-Reply-To: <20261028024720.981971-1-zhangfei.gao@oss.qualcomm.com>
+From: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+Date: Tue, 10 Nov 2026 15:59:44 +0800
+X-Gm-Features: AclHuK-Wh_FoCrAkjmR8o4Q6NvapBEp6E63cXzxrhVdtr2TiW8KWZ0PyAbif3g8
+Message-ID: <CAFkd8hvXor7A5zaRtH5iQm6NsphzsxrjbADcRwedsONo=6J2gA@mail.gmail.com>
+Subject: Re: [PATCH v3] ASoC: qcom: audioreach: support multichannel PCM formats
+To: Mark Brown <broonie@kernel.org>, Srinivas Kandagatla <srini@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        shengchao.guo@oss.qualcomm.com, mohammad.rafi.shaik@oss.qualcomm.com,
+        bartosz.golaszewski@oss.qualcomm.com,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: QhHJtJ-8Ijnr6GkY50MWDMneSnwEQNAO
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDAzMSBTYWx0ZWRfX3AlaHDX/nTla
+ i4ZNxpd2VesEh9n2s/wCJ50UcWpziYigZsIPY6YFmx1+kDMHaN1qD0f2Cr05+px6665VkQpSube
+ 8UBRdbLn5gSVooewzeHwBiAwY755p3E=
+X-Authority-Analysis: v=2.4 cv=d+9gWhjE c=1 sm=1 tr=0 ts=6af2cefe cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=-pBZ-5fkuRBhhW-rZE8A:9
+ a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: QhHJtJ-8Ijnr6GkY50MWDMneSnwEQNAO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDAzMSBTYWx0ZWRfXw96thZjyTfgf
+ Qerzw9/LSIIYU9QBKVhZcuUtgmI7s/yKXB8+OmMYXfAf22Qs06f0ld7vWrebzBLMHNEq8uIxWpy
+ Cbc9jzGm+CE6qvBmV1kzaPVV/LMcqY75Hml2hGpf14DKeAf5GwCd/U5ZS433A4sEGz9Hc5P7C65
+ eOqHaW2dvJVN3CB1DGlkiiws9RX3ksrJXWe2aNAkQ9L4U5ICTooCtz9AwrRJIe4LmpY7luXs7lR
+ R5Q5pVxNAbyd3YDEh4qn3+oCVHIIiE1W/alFo/336jFnYPm/8mfeOdK2QQRiYXKyxEX5KKA61OZ
+ 9BhGJJUSYxcUQ2/uvagygTcQZUi4fu9jE9DuExSL7LhTeWb+F9+6eWpg9Wj3akAonsl4dz/4JF5
+ PCTbA2dMixxEHDRXhsgVKQaOePqb/6Trwq3Unb0U+zWYtnkHT6yDFCIV9Y3xiz28T4RD/spDRfh
+ vitd9xHx2qahWbX+Ikw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-10_03,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100031
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+On Wed, Oct 28, 2026 at 10:47=E2=80=AFAM Zhangfei Gao
+<zhangfei.gao@oss.qualcomm.com> wrote:
+>
+> AudioReach currently rejects PCM streams with more than four channels in
+> the PCM and shared-memory media format paths.
+>
+> This prevents TDM links that expose more channels, such as the 6-channel
+> playback path used on SA8797P Ride, from being configured.
+>
+> Reuse q6dsp_map_channels() to support multichannel PCM formats and use
+> the common PCM channel limit definition.
+>
+> Signed-off-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+> Reviewed-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+> Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+> ---
+>
+> v3: reuse PCM_MAX_NUM_CHANNEL to replace AR_PCM_MAX_NUM_CHANNEL (Srinivas=
+)
+> v2: reuse q6dsp_map_channels
+>
+>  sound/soc/qcom/qdsp6/audioreach.c       | 36 ++++---------------------
+>  sound/soc/qcom/qdsp6/audioreach.h       |  5 ++--
+>  sound/soc/qcom/qdsp6/q6apm-dai.c        | 12 ++++++---
+>  sound/soc/qcom/qdsp6/q6apm-lpass-dais.c | 11 +++++---
+>  4 files changed, 24 insertions(+), 40 deletions(-)
+>
+> diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/aud=
+ioreach.c
+> index d2dc5d37bccf..e6f077a5b750 100644
+> --- a/sound/soc/qcom/qdsp6/audioreach.c
+> +++ b/sound/soc/qcom/qdsp6/audioreach.c
+> @@ -306,22 +306,6 @@ void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uin=
+t32_t opcode, uint32_t token
+>  }
+>  EXPORT_SYMBOL_GPL(audioreach_alloc_apm_cmd_pkt);
+>
+> -void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels=
+)
+> -{
+> -       if (num_channels =3D=3D 1) {
+> -               ch_map[0] =3D  PCM_CHANNEL_FL;
+> -       } else if (num_channels =3D=3D 2) {
+> -               ch_map[0] =3D  PCM_CHANNEL_FL;
+> -               ch_map[1] =3D  PCM_CHANNEL_FR;
+> -       } else if (num_channels =3D=3D 4) {
+> -               ch_map[0] =3D  PCM_CHANNEL_FL;
+> -               ch_map[1] =3D  PCM_CHANNEL_FR;
+> -               ch_map[2] =3D  PCM_CHANNEL_LS;
+> -               ch_map[3] =3D  PCM_CHANNEL_RS;
+> -       }
+> -}
+> -EXPORT_SYMBOL_GPL(audioreach_set_default_channel_mapping);
+> -
+>  static void apm_populate_container_config(struct apm_container_obj *cfg,
+>                                           const struct audioreach_contain=
+er *cont)
+>  {
+> @@ -760,7 +744,7 @@ static int audioreach_codec_dma_set_media_format(stru=
+ct q6apm_graph *graph,
+>         intf_cfg->cfg.intf_index =3D module->hw_interface_idx;
+>         intf_cfg->cfg.active_channels_mask =3D 0;
+>         /* Convert the physical channel mapping into a bit field */
+> -       for (i =3D 0; i < AR_PCM_MAX_NUM_CHANNEL; i++)
+> +       for (i =3D 0; i < PCM_MAX_NUM_CHANNEL; i++)
+>                 if (cfg->channel_map[i])
+>                         intf_cfg->cfg.active_channels_mask |=3D BIT(i);
+>
+> @@ -883,7 +867,7 @@ static int audioreach_mfc_set_media_format(struct q6a=
+pm_graph *graph,
+>         media_format->bit_width =3D cfg->bit_width;
+>         media_format->num_channels =3D cfg->num_channels;
+>         /* Convert the physical mapping to a logical mapping of the chann=
+els */
+> -       for (i =3D 0, j =3D 0; i < AR_PCM_MAX_NUM_CHANNEL && j < cfg->num=
+_channels; i++) {
+> +       for (i =3D 0, j =3D 0; i < PCM_MAX_NUM_CHANNEL && j < cfg->num_ch=
+annels; i++) {
+>                 if (!cfg->channel_map[i])
+>                         continue;
+>                 media_format->channel_mapping[j++] =3D cfg->channel_map[i=
+];
+> @@ -1185,11 +1169,6 @@ static int audioreach_pcm_set_media_format(struct =
+q6apm_graph *graph,
+>         int payload_size;
+>         int i, j;
+>
+> -       if (num_channels > 4) {
+> -               dev_err(graph->dev, "Error: Invalid channels (%d)!\n", nu=
+m_channels);
+> -               return -EINVAL;
+> -       }
+> -
+>         payload_size =3D APM_PCM_MODULE_FMT_CMD_PSIZE(num_channels);
+>
+>         struct gpr_pkt *pkt __free(kfree) =3D
+> @@ -1218,7 +1197,7 @@ static int audioreach_pcm_set_media_format(struct q=
+6apm_graph *graph,
+>         media_cfg->q_factor =3D mcfg->bit_width - 1;
+>         media_cfg->bits_per_sample =3D mcfg->bit_width;
+>         /* Convert the physical mapping to a logical mapping of the chann=
+els */
+> -       for (i =3D 0, j =3D 0; i < AR_PCM_MAX_NUM_CHANNEL && j < mcfg->nu=
+m_channels; i++) {
+> +       for (i =3D 0, j =3D 0; i < PCM_MAX_NUM_CHANNEL && j < mcfg->num_c=
+hannels; i++) {
+>                 if (!mcfg->channel_map[i])
+>                         continue;
+>                 media_cfg->channel_mapping[j++] =3D mcfg->channel_map[i];
+> @@ -1275,11 +1254,6 @@ static int audioreach_shmem_set_media_format(struc=
+t q6apm_graph *graph,
+>         int i, j;
+>         void *p;
+>
+> -       if (num_channels > 4) {
+> -               dev_err(graph->dev, "Error: Invalid channels (%d)!\n", nu=
+m_channels);
+> -               return -EINVAL;
+> -       }
+> -
+>         payload_size =3D APM_SHMEM_FMT_CFG_PSIZE(num_channels) + APM_MODU=
+LE_PARAM_DATA_SIZE;
+>
+>         struct gpr_pkt *pkt __free(kfree) =3D
+> @@ -1313,7 +1287,7 @@ static int audioreach_shmem_set_media_format(struct=
+ q6apm_graph *graph,
+>                 cfg->endianness =3D PCM_LITTLE_ENDIAN;
+>                 cfg->num_channels =3D mcfg->num_channels;
+>                 /* Convert the physical mapping to a logical mapping of t=
+he channels */
+> -               for (i =3D 0, j =3D 0; i < AR_PCM_MAX_NUM_CHANNEL && j < =
+cfg->num_channels; i++) {
+> +               for (i =3D 0, j =3D 0; i < PCM_MAX_NUM_CHANNEL && j < cfg=
+->num_channels; i++) {
+>                         if (!mcfg->channel_map[i])
+>                                 continue;
+>                         cfg->channel_mapping[j++] =3D mcfg->channel_map[i=
+];
+> @@ -1436,7 +1410,7 @@ static int audioreach_speaker_protection_vi(struct =
+q6apm_graph *graph,
+>
+>         cm_cfg->cfg.num_channels =3D num_channels * 2;
+>         /* Convert the physical mapping to a logical mapping of the chann=
+els */
+> -       for (i =3D 0, j =3D 0; i < AR_PCM_MAX_NUM_CHANNEL && j < num_chan=
+nels; i++) {
+> +       for (i =3D 0, j =3D 0; i < PCM_MAX_NUM_CHANNEL && j < num_channel=
+s; i++) {
+>                 if (!mcfg->channel_map[i])
+>                         continue;
+>                 /*
+> diff --git a/sound/soc/qcom/qdsp6/audioreach.h b/sound/soc/qcom/qdsp6/aud=
+ioreach.h
+> index 587f14ce71d2..9f4166ebdc10 100644
+> --- a/sound/soc/qcom/qdsp6/audioreach.h
+> +++ b/sound/soc/qcom/qdsp6/audioreach.h
+> @@ -6,6 +6,7 @@
+>  #include <linux/soc/qcom/apr.h>
+>  #include <uapi/sound/snd_ar_tokens.h>
+>  #include <sound/soc.h>
+> +#include "q6dsp-common.h"
+>  struct q6apm;
+>  struct q6apm_graph;
+>
+> @@ -805,7 +806,6 @@ struct param_id_hw_ep_power_mode_cfg {
+>  #define PARAM_ID_HW_EP_DMA_DATA_ALIGN  0x08001233
+>  #define AR_HW_EP_DMA_DATA_ALIGN_MSB    0
+>  #define AR_HW_EP_DMA_DATA_ALIGN_LSB    1
+> -#define AR_PCM_MAX_NUM_CHANNEL         8
+>
+>  struct param_id_hw_ep_dma_data_align {
+>         uint32_t dma_data_align;
+> @@ -998,7 +998,7 @@ struct audioreach_module_config {
+>         u16     nslots_per_frame;
+>         u16     slot_width;
+>         struct snd_codec codec;
+> -       u8 channel_map[AR_PCM_MAX_NUM_CHANNEL];
+> +       u8 channel_map[PCM_MAX_NUM_CHANNEL];
+>  };
+>
+>  /* Packet Allocation routines */
+> @@ -1009,7 +1009,6 @@ static inline u16 audioreach_gpr_dest_domain(gpr_de=
+vice_t *gdev)
+>
+>  void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uint32_t opcode,
+>                                    uint32_t token);
+> -void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels=
+);
+>  void *audioreach_alloc_cmd_pkt(int payload_size, uint32_t opcode,
+>                                uint32_t token, uint32_t src_port,
+>                                uint32_t dest_port);
+> diff --git a/sound/soc/qcom/qdsp6/q6apm-dai.c b/sound/soc/qcom/qdsp6/q6ap=
+m-dai.c
+> index 58beaf906b9f..83594b693569 100644
+> --- a/sound/soc/qcom/qdsp6/q6apm-dai.c
+> +++ b/sound/soc/qcom/qdsp6/q6apm-dai.c
+> @@ -21,6 +21,7 @@
+>  #include <asm/div64.h>
+>  #include <asm/dma.h>
+>  #include "q6apm.h"
+> +#include "q6dsp-common.h"
+>
+>  #define DRV_NAME "q6apm-dai"
+>  #define POS_BUFFER_BYTES       4096
+> @@ -344,7 +345,10 @@ static int q6apm_dai_prepare(struct snd_soc_componen=
+t *component,
+>         cfg.num_channels =3D runtime->channels;
+>         cfg.bit_width =3D prtd->bits_per_sample;
+>         cfg.fmt =3D SND_AUDIOCODEC_PCM;
+> -       audioreach_set_default_channel_mapping(cfg.channel_map, runtime->=
+channels);
+> +       ret =3D q6dsp_map_channels(cfg.channel_map, runtime->channels);
+> +       if (ret)
+> +               return ret;
+> +
+>         if (prtd->state) {
+>                 /* clear the previous setup if any  */
+>                 q6apm_graph_stop(prtd->graph);
+> @@ -1007,8 +1011,10 @@ static int q6apm_dai_compr_set_params(struct snd_s=
+oc_component *component,
+>                 cfg.num_channels =3D 2;
+>                 cfg.bit_width =3D prtd->bits_per_sample;
+>                 cfg.fmt =3D codec->id;
+> -               audioreach_set_default_channel_mapping(cfg.channel_map,
+> -                                                      cfg.num_channels);
+> +               ret =3D q6dsp_map_channels(cfg.channel_map, cfg.num_chann=
+els);
+> +               if (ret)
+> +                       return ret;
+> +
+>                 memcpy(&cfg.codec, codec, sizeof(*codec));
+>
+>                 ret =3D q6apm_graph_media_format_shmem(prtd->graph, &cfg)=
+;
+> diff --git a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c b/sound/soc/qcom/qds=
+p6/q6apm-lpass-dais.c
+> index 83f2711bceea..9a3994a4f475 100644
+> --- a/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
+> +++ b/sound/soc/qcom/qdsp6/q6apm-lpass-dais.c
+> @@ -94,7 +94,7 @@ static int q6dma_set_channel_map(struct snd_soc_dai *da=
+i,
+>                         return -EINVAL;
+>                 }
+>
+> -               if (tx_num > AR_PCM_MAX_NUM_CHANNEL) {
+> +               if (tx_num > PCM_MAX_NUM_CHANNEL) {
+>                         dev_err(dai->dev, "invalid tx num %d\n",
+>                                 tx_num);
+>                         return -EINVAL;
+> @@ -147,7 +147,9 @@ static int q6hdmi_hw_params(struct snd_pcm_substream =
+*substream,
+>         cfg->bit_width =3D params_width(params);
+>         cfg->sample_rate =3D params_rate(params);
+>         cfg->num_channels =3D channels;
+> -       audioreach_set_default_channel_mapping(cfg->channel_map, channels=
+);
+> +       ret =3D q6dsp_map_channels(cfg->channel_map, channels);
+> +       if (ret)
+> +               return ret;
+>
+>         switch (dai->id) {
+>         case DISPLAY_PORT_RX_0:
+> @@ -173,11 +175,14 @@ static int q6dma_hw_params(struct snd_pcm_substream=
+ *substream,
+>         struct q6apm_lpass_dai_data *dai_data =3D dev_get_drvdata(dai->de=
+v);
+>         struct audioreach_module_config *cfg =3D &dai_data->module_config=
+[dai->id];
+>         int channels =3D hw_param_interval_c(params, SNDRV_PCM_HW_PARAM_C=
+HANNELS)->max;
+> +       int ret;
+>
+>         cfg->bit_width =3D params_width(params);
+>         cfg->sample_rate =3D params_rate(params);
+>         cfg->num_channels =3D channels;
+> -       audioreach_set_default_channel_mapping(cfg->channel_map, channels=
+);
+> +       ret =3D q6dsp_map_channels(cfg->channel_map, channels);
+> +       if (ret)
+> +               return ret;
+>
+>         return 0;
+>  }
+> --
+> 2.43.0
+>
 
-Many indices within pmic_models[] were skipped. Fill out the ones I was
-able to confirm and leave comments for values which to the best of my
-knowledge are reserved.
+Hi, Mark
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
-Changes in v2:
-- Remove duplicate entry for PM8550VS
-- Link to v1: https://patch.msgid.link/20261109-topic-socinfo_pmics-v1-1-ecdb6cc6e40f@oss.qualcomm.com
+Any comments of this patch?
 
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
----
- drivers/soc/qcom/socinfo.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
-
-diff --git a/drivers/soc/qcom/socinfo.c b/drivers/soc/qcom/socinfo.c
-index 38efc5db7fa8..563f0e3750bb 100644
---- a/drivers/soc/qcom/socinfo.c
-+++ b/drivers/soc/qcom/socinfo.c
-@@ -154,15 +154,22 @@ static const char *const pmic_models[] = {
- 	[25] = "PM8917/PM8937",
- 	[26] = "PM660L",
- 	[27] = "PM660",
-+	[28] = "SMB1355",
-+	/* 29 is unknown/reserved */
- 	[30] = "PM8150",
- 	[31] = "PM8150L",
- 	[32] = "PM8150B",
- 	[33] = "PMK8002",
-+	[34] = "PMX24",
-+	[35] = "SMB1390",
- 	[36] = "PM8009",
- 	[37] = "PMI632",
- 	[38] = "PM8150C",
-+	[39] = "PM8150A",
- 	[40] = "PM6150",
- 	[41] = "SMB2351",
-+	[42] = "PMX55",
-+	/* 43 is unknown/reserved */
- 	[44] = "PM8008",
- 	[45] = "PM6125",
- 	[46] = "PM7250B",
-@@ -172,22 +179,39 @@ static const char *const pmic_models[] = {
- 	[50] = "PM8350B",
- 	[51] = "PMR735A",
- 	[52] = "PMR735B",
-+	[53] = "SMB1398",
- 	[54] = "PM6350",
- 	[55] = "PM4125",
-+	[56] = "PMX60",
-+	[57] = "SMB1394",
- 	[58] = "PM8450",
-+	[59] = "PMX65",
-+	[60] = "PM7325B",
-+	/* 61 is unknown/reserved */
-+	[62] = "PM1010H",
-+	[63] = "PM7325",
-+	/* 64 is unknown/reserved */
- 	[65] = "PM8010",
-+	/* 66 is unknown/reserved */
-+	[67] = "PMG1110",
-+	/* 68 is unknown/reserved */
- 	[69] = "PM8550VS",
- 	[70] = "PM8550VE",
- 	[71] = "PM8550B",
- 	[72] = "PMR735D",
- 	[73] = "PM8550",
- 	[74] = "PMK8550",
-+	/* 75 is unknown/reserved */
- 	[76] = "PM7550BA",
-+	/* 77 is unknown/reserved */
- 	[78] = "PMM8650AU",
- 	[79] = "PMM8650AU_PSAIL",
- 	[80] = "PM7550",
-+	[81] = "PMX75",
- 	[82] = "PMC8380",
- 	[83] = "SMB2360",
-+	/* 84 is unknown/reserved */
-+	[85] = "PMX35",
- 	[86] = "PM8750B",
- 	[87] = "PMD8028",
- 	[88] = "PMC1020H",
-
----
-base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
-change-id: 20261109-topic-socinfo_pmics-c7ca588fc9d2
-
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
+Thanks
