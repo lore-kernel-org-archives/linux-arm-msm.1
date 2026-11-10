@@ -1,68 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794325607;
-	b=cMku49Pu2WYj73KAVVLciZ8iDnOPJqaqvxSL+qD1IaiVP6zUCG4hLwlBK3RVdV7Pwvu9
-	 K+E5MbWI+7XkJ11e5aiSnEFmcbjhNxnqj65mtOwW0o5zTY9syaICbeS+xoYC82hxx72HP
-	 bFKvj3Bx3f8sgvCaq3v3AurNOjHYkkp+Hmalw5416LumlBg5axBVDYL2XGXBSHeFhedRk
-	 HnP1rXrA+Njp0oRaf1gbYmBJm4cCqBb4n3mtbloyv6quk9WcG6MX6CIirhNK6XvpbALkg
-	 I56wfumVsIo/BWx+eRP0RQ5cHvCrSuYqttH5H/ybIPOTXuc/51KIvpi3X7/Qr6v0PJQ==
+	t=1794327010;
+	b=i5y62gKAvCem6nGCSqyEC5QRLflKKMVCOs1OGaskIjrNRCs0fA1Eo/fQvccIThx/Ilv1
+	 0m+5jRLbvNrSm22VsQ2Hxx58qTk46+htsTZFmKEQVG+gApW+KpVOrDrLQmsIpu5E4YoqR
+	 jFqL/M7j3f4jBOdYqAW3DoZ0nEn3YTc5G2BPOux7Flpk77ojnKlfRObmHNRVldfVqoMMh
+	 iZPD0HjbL1ysXLv2c6QgpoEYaf8SBhR8Qe24Vog4IBHdwKDj8deAnbJkVIk8jBTyPay0o
+	 WuX92rVWybom0gsVSFFcWZuvhoLOJMk24L3B0mNwlmq3FDscgn82GhrbtePQSrwJ3Zg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794325607;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=zeb6oiymxFDObRDcInmYbRceyPxEMFNrP3XnY1mdxgw=;
-	b=Qe1bWGEc09ltaOj+Rw646GmJ2VSiu+sjrBJBQGLVuRjpV+/E0BTAlb0/HEwUp681pk9i
-	 TLzJrSPg2PcJjxZ+Mvw592QPnXh/b/TVsdo+c3WBKHSjCBRxQVpayRTFR9mAS+kDJvwd6
-	 k26jbhJxDT+onJy/r9YMICoYt7Tln6FbKHH9lwttBLTBMS+z2SvH3pfhlEkSvoxUWG8n8
-	 efFeLYeO3qj/KPK3ty+a/vRsB+FtCDB+1sC3WS+vq/nw0kc+0tRpywHJpMqqQ4hFisVNN
-	 uCs4D6npA0JOdlFmnRDW2OdDwtsvYK7VfNQ1FvZG7iO3Q1QVD+D01FfpCNnlO6xnhLg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794327010;
+	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
+	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc;
+	bh=LvtwQ3qjKJ7hJQFkAMWUe7ov+nTg/5q48Rt8Dv4swxM=;
+	b=Wv1Y5uh+ZYnDkyqNHfQCvvg6KE9ISkNgCbgRqu1K+z1NdlDZmaaNc9WkqFYeanLd9NIy
+	 2jrbEvFru++Iv6hKG1TExITr4sLp22jWECTc0czkJ1M4u5GUYDLEcbnvYKcasU/2LQs1O
+	 tUuRJjK8RaAuFjHelHatQNfx0PMUOTTXshiOGUZ8VMmWo0kh5Sd7/vvUt4FV58hxoB8cg
+	 4a/wh0jsVPnFJFFHI89M6cLkaMK0ZT8GKJ5vqrvgH84Z7VOEpWSW1tcYQ7aIxYMAG444J
+	 PHvAnjPNH05LKx/cIXX4HDKYRW8SknnTyE8oI2j3YobZBZHupOBEyKRHziEBkmYKomw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m8rfhSdu;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nsLpCg6I;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00B13606A326;
-	Tue, 10 Nov 2026 15:46:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBE73606A32D;
+	Tue, 10 Nov 2026 16:10:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m8rfhSdu
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 531A71F008A1;
-	Tue, 10 Nov 2026 15:46:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nsLpCg6I
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5FB61F0089F;
+	Tue, 10 Nov 2026 16:10:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794325606;
-	bh=zeb6oiymxFDObRDcInmYbRceyPxEMFNrP3XnY1mdxgw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=m8rfhSdu+qgwEFNcVdZ4mx8q4gM2VEPIdELukpJS9tJxo0nIViQ2JPw0kNyDO+2Z1
-	 ZN8uucI9P9UfXIfDZOY+7sZkrLmIDNu974cbzyFKz82lK9SKRvczFajlIhN56HvaYg
-	 q+fcYMgAj/eV9hlv+Q9Km9gxnXlixiMfBf6BGmJX1C4UXV38Wh9vz0gZeC9zNZVBku
-	 HvcAIGTa3cmRv9VzEQKXfO6BNVslhBHmwiE3DYHT9rlGUW3/1sjn1UZedgDCdUYsye
-	 Kek2TKqvr/9bDJ42HIydrPDRUb5sUBHdH+y4XCmiMuTnP+p3AVxCGZJPeiWSsr7fZS
-	 Nf9U8Mnp7oesw==
-Date: Tue, 10 Nov 2026 09:46:43 -0600
-From: Rob Herring <robh@kernel.org>
-To: Jie Gan <jie.gan@oss.qualcomm.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@arm.com>,
-	James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
-	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM
- platforms
-Message-ID: <20261110154643.GA4159803-robh@kernel.org>
-References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+	s=k20260515; t=1794327009;
+	bh=LvtwQ3qjKJ7hJQFkAMWUe7ov+nTg/5q48Rt8Dv4swxM=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=nsLpCg6IV6ACWUe83fTmTFplzjWgz6295EAsfXCpVABpXdS+To9gs6GKalR8DEcHG
+	 BOM4zko5TaVgIRlBc+L1RLkGQEmiab4uGFM/3XLpqeTD8JjhhERvpV022/qZ4nsjX/
+	 myyEQa5WmrPAtZBYLaR28EFTzKHOmRd180WBS6jF1iMvLXyzhbFZauJ3wakdY5CtNe
+	 x54mZJqZAbhLUgXhhRYWAuZyfPBUwmNJ2jvdydPIbEOrjPa8kLe26XD2FtRl2XzNOH
+	 nJ0yJHDpk5jcCUIf8nPaNcJi5jNSDKvR0AskAkCJ6dhzC00a6czanoKilQy0fMU6pg
+	 Ro3raEWLO+mLw==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 9B0AF39D267B;
+	Tue, 10 Nov 2026 16:10:09 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,23 +53,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v4 0/2] Bluetooth: hci_qca: Reopen the UART after enabling
+ QCA2066
+From: patchwork-bot+bluetooth@kernel.org
+Message-Id: 
+ <179432700817.4062787.1917987587860059113.git-patchwork-notify@kernel.org>
+Date: Tue, 10 Nov 2026 16:10:08 +0000
+References: <20261110092929.234617-1-shuai.zhang@oss.qualcomm.com>
+In-Reply-To: <20261110092929.234617-1-shuai.zhang@oss.qualcomm.com>
+To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
+Cc: brgl@kernel.org, marcel@holtmann.org, luiz.dentz@gmail.com,
+ linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+ linux-kernel@vger.kernel.org, cheng.jiang@oss.qualcomm.com,
+ xiuzhuo.shang@oss.qualcomm.com, wei.deng@oss.qualcomm.com,
+ jinwang.li@oss.qualcomm.com
 
-On Tue, Nov 10, 2026 at 09:21:13AM +0800, Jie Gan wrote:
-> The CoreSight TNOC (Trace Network-On-Chip) binding so far only allowed the
-> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
-> forces the device onto the AMBA bus, where the driver must read the
-> peripheral ID from the device registers during probe. On several QCOM
-> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
-> never probes and its trace path is unavailable.
+Hello:
 
-But it works fine on some platforms? We have a property to override the 
-peripheral-ID which would solve your issue. That would be much simpler 
-and avoid the ABI break on any of the working platforms.
+This series was applied to bluetooth/bluetooth-next.git (master)
+by Luiz Augusto von Dentz <luiz.von.dentz@intel.com>:
 
-But this is already applied and it's not any platform I use, so I don't 
-really care.
+On Tue, 10 Nov 2026 17:29:27 +0800 you wrote:
+> QCA2066 does not reopen the UART after the controller is enabled, which
+> causes RX/TX out-of-sync errors. The UART has to be reopened once the
+> controller is powered on.
+> 
+> qca_regulator_init() already enables the controller and then reopens the
+> UART, but QCA2066 does not go through it. QCA2066 was added with its own
+> SoC type and handled in the default case.
+> 
+> [...]
 
-Rob
+Here is the summary with links:
+  - [v4,1/2] Bluetooth: hci_qca: Reopen the UART after enabling QCA2066
+    https://git.kernel.org/bluetooth/bluetooth-next/c/a57a255ce204
+  - [v4,2/2] Bluetooth: hci_qca: Don't use the serdev port after a failed reopen
+    https://git.kernel.org/bluetooth/bluetooth-next/c/45e28b01e4d0
+
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
