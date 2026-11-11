@@ -1,121 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.97.179.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794412324;
-	b=hYJ2OWKMRueFGrDEV6dnwyB9hjpDZeUag7VWm70LBYnZwPW4mJWCIN9GmqTcpV4hjCoG
-	 IOWblCr5wMJnnXjouOPvLvepDwVDBo5HlvDXNhOfuXatXGytQjgnMUIy6R8vyvNVoB6of
-	 lMPxdsyPdYwHSMcknwDK0q/FFmszOb39uoiJohCQKaNvBhl0VO+FSTWsTxOt5vj7dS5wP
-	 8oKnNhFedF2SjMjcnsApNFw9pwJ7t+9ymFgdXjWiSHWGuctK4jnmo23OhF5hUS5MIf/pc
-	 +ph/mt6G+UwMuu/15GmnpLZkig8LlgyMUouk1ZX+D931GF8NznMhp5DoqoVxGHHmJFg==
+	t=1794413337;
+	b=lz7AV4Iy/xA0sURATECHUBnKQiifPneJ7p77gZXVEfqsd7R6EZ8A8GvtDeCJ5hD+hCOE
+	 w8V+Khy3Bcd9vr8q9BLW3ic+Qy8NQiLLkH4OQB4P8OCneusyfpEcFHYBJ7pYzu3cwY8Xl
+	 5GgMdnUUT1b6hvqgWGDWbmusadMu4XXulzNoYS8CVke4d2n1Z/39Xrn/qQPyuZhabXT5d
+	 DRAJYOEmehwwZwq/JtmlK5fe+edzf4wJpoHt/fs57PpkyLZhGVB0MD4IZ1+NfvxK9v+0m
+	 OimAmtjurAsA8zkE2W8c/myI20exOBNkKnNUjrRC9dY58Zix//pQFs4y+oIMzlwAkwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794412324;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=V93kB7u05RsWp0bMsBHWnhdzwP8D9erQ42L3lDrjbOo=;
-	b=3mY38rMparXRh313hTtt8pb9C+9kx8QbCTuRDEQ5RPzEErpXa9l64uxnfZCYAUIsXom+
-	 sLgnRMyUgpBZHjkXo+OM5BkMLdF5PrSqLqM/OUkkrEC7w64wIMqUTiYzx4zKnqoPwI4Fn
-	 3A7s6Ul6R8C/jO3oNppqXy9GGX5vjBE6DZY+29DveEBtJEfxJYS68K2TeNQkI5u5KWnL1
-	 5cQxpzSaAM61rjhZuRPLlRQ+EzkBCQm2jlpdTnRggE8prZXL7xqjstT6+GKnQc1QCzfPp
-	 fCpI3upVVIh9hLhwH31lKeEe9Q4XomqCv2U+n/Eilb95nAx3DGSP6NnIR0bLdI/ObcQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794413337;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=RO865FpgI8SUnM8VBsvjl2ol1ZFGSrSMCGa3F96x8cU=;
+	b=BI+0twsadVaEP3winA7mbnKm5rvjp7tlJ1G3lvedYdVXOlfTEbcLmtQeVy4mua8vJgzI
+	 IxDtxVnT8hYyISDRzPhoOcJiHnnRhCf6OonKNNTtnO3v1Om5vwA4xln3mSqPvjg77pcSC
+	 Y7Sxlz1ZT2B2HjV0qOdYWqjLXoX8gkkZQeWzqBf+FtPscyjNGAcB1xXrvW4svGjKF9qDD
+	 MAuWikfTpwm2FKh4d1Jyjxbt2xJPy8VzrICgjpFID+1BPi788DgvaqQsIpHGtpdk7lOJ5
+	 xh27d1TT/3MGztghkKfKCOaQse34Ty87yEqQScqudUtqtXCLt3tTM0ADSf/qMeHbyng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fH9+ikMx;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FYDt60Gv;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dmarc=pass header.from=igalia.com;
+	spf=pass smtp.mailfrom=igalia.com;
+	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=eP+wKo1D;
+	arc=none smtp.remote-ip=213.97.179.56
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FD8F606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 15:52:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6FD8F606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64A48606A32A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:08:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 64A48606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fH9+ikMx;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FYDt60Gv
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABF0X9W2594100
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 15:52:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=V93kB7u05RsWp0bMsBHWnhdz
-	wP8D9erQ42L3lDrjbOo=; b=fH9+ikMx82geJa3TucKjpmFU7n8JCGIyKlR0zHX5
-	VqZ6kDY9HtMQIt4WvJc9rqbXVG0X0h2fZezpU8vwLoYUtCGJGBSmz5Dtly/pHuEa
-	InOCM0hwq7g2RaG8aMwKk1yFunRudlRVNy/LapKZ+m8q5WS88xX6hhVJF1sEUmHV
-	0qNI7SpHEuwlWvRVz53b2H1MOvQfELWJ1kt/iDgMvyV4wiTTMndiH9p1HPfjNiSZ
-	9SB1jkwO8c24Q2Y+NS65/4Z7Wo4ZiK8KHwB1Tqu1jUFpDISSBQsXrxLlgjDZtVFC
-	UNSmYCRNUTn0QKDBT3xhxuFesHrv4q02zQs999Lz8zxIiQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvksm9y18-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 15:52:02 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-947a607ec40so193966485a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 07:52:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794412321; x=1795017121; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=V93kB7u05RsWp0bMsBHWnhdzwP8D9erQ42L3lDrjbOo=;
-        b=FYDt60GvAHHV/DXeSSfwMcb9m65jABnxxJFxN7tVHV7dm0x+YkJwWQ2DZGORlOk+W4
-         BDWoOWz5kupTvg3vWfR3/RuWwRRJJHsAM7d2PbYMFWQM1KghWr5kaRkoqOT4D4LfGy0n
-         NooVOFlpTq3wqSJMGue99WZhj1Qw+qkJu0/1bywu33k4qGJ6HOPuA2V4U8yVmFWacNR5
-         5PQMe0NmYbsqZ5u7fHUGne6bBodbTEjy6VjGL0pUy8mzGpgl4DPZGWRg1WHQWMLAuLqU
-         ok7RY7UpFRRfEegejdE28aTUoF4yQ9WhmNbg8+ryA68cvZLXarMA53Juw3WUXKpz/Iis
-         ReOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794412321; x=1795017121;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=V93kB7u05RsWp0bMsBHWnhdzwP8D9erQ42L3lDrjbOo=;
-        b=Z0rWmNIi7bPUOZvb77WHVnete948xfV0OspVruadI3UlpSeJD4Z/j5QatA/2wicONY
-         pjD6j/gXd6Pi3aYAFZPWSW4wOAkUupKAQFCNrlUolJNRy36G1NjTgnfOFd0E7XoYhNhx
-         HBYcp3u4BOiAGGMo3BDBfpEjw850o+Xh7AUdK6ONGtFT43o3sOQFnGjgY2l20eVHFYhx
-         4pGxM0DsZkwmsg0UJrpxs35yW3OZqigLpyu/m5B5fbEZrnSUq7NNEDZkhpXDL4yfwJBd
-         jx/FOSpFDyCw+GSGgZFrYTaJ0jFaaIcF42TjSLLEpF9+QudtLjaTF8lOeYbIpe/K1YSc
-         8Lbw==
-X-Forwarded-Encrypted: i=1; AL+hErF3uRz4hEBS2jt3uZlxWNL06l5iN3A/KC0W7GQc0UJzbc1cTaJx8V1NA5x3gk9mVDHf+Xun2TPG+OFKscwq@vger.kernel.org
-X-Gm-Message-State: APuU4Z9KHCsvYSlNCiZAlXKXtSEiQ8AzA4VDjQVtffZue8gDJHBLmTvu
-	NdWlF8BzP/0Ot+PHN8JnB8AlrHFtUYsNO0YkPA4DdnyxuEEdjr9ELlsA/3+vZe6mSbtsBgRzfOS
-	gshxHSky6gjBdgi50JY5y8kBNMPuKMVCWp6uyeUaFAKHwx//sHMWbUgmv+9llrsOcFwnvHNMDa0
-	oM
-X-Gm-Gg: AYBFou3fZRR+R1xA/2ciQ7NGfn/Yu82ErCJMxt3MMDvqfbPf8e8by7ILFeIRU3Mbq14
-	xH7uLG9Z1jY6eOGJQq2wy2XZw1j3uqXekUxlIGGppUEnDjk/NN2DOFtWXUrABJKDp0atvQpRByP
-	0rNjmFXkaq5j6zH2f27YGFW9Txm2sADnLKa+mA+i1qU7cnpRw7k/rQK3m2jmHy4LEJYBagTMqdW
-	kNsdxQU/+rnn5LMlMaF6Po2mWXf+MvaWdLyTlMRfMiljPnCPoMOoZrJXUWLei+pW+tgYifiyz2K
-	C3+neRGJBGOdBBDfXbKm2xHTVTOcFIf+O6BaE5R62Kjle42SBbN8jinpBYzzs9AFx23B0i8JYiQ
-	bStxSZbjVuhLiOD0HH4cpWtrVXPvlImLTA5WHnUvuwR0UuA9GbeD7S1z9vQwkAy/zd8y3BC/KtR
-	YBWPEjuoh+jmu2ZVZdScbCgWxcuV1sgQesRM4GV4G/CUV6aI61pHlIESp2NAk5IA==
-X-Received: by 2002:a05:620a:a01b:b0:948:d833:1bee with SMTP id af79cd13be357-948d83321camr201208585a.3.1794412321485;
-        Wed, 11 Nov 2026 07:52:01 -0800 (PST)
-X-Received: by 2002:a05:620a:a01b:b0:948:d833:1bee with SMTP id af79cd13be357-948d83321camr201199685a.3.1794412320217;
-        Wed, 11 Nov 2026 07:52:00 -0800 (PST)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae092293b0sm11950441fa.17.2026.11.11.07.51.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 07:51:58 -0800 (PST)
-Date: Wed, 11 Nov 2026 17:51:56 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-        freedreno@lists.freedesktop.org, Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] drm/msm/gem: Deal with partial mmap's in fault path
-Message-ID: <ie2suz67iwxidcggliefmuyi64rxhbslk4to34cb47ctd7jmw4@a5ran3vouptl>
-References: <20261106190317.17904-1-robin.clark@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=eP+wKo1D
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
+	Cc:To:From:From:Reply-To; bh=RO865FpgI8SUnM8VBsvjl2ol1ZFGSrSMCGa3F96x8cU=;
+	t=1794413335; x=2109773335; b=eP+wKo1DezipytxhcA9waUslC78pol0esc6EM8eb4axkoM8
+	0SAtM/wuwMddX+X9HbljOP4JGKIDwlnEpxH7VMga9smsdDhzG2zQrmFUUfB4N9SZyD7O5CCcS1YZ6
+	QGyUmAdKHgksE/+GOcy+V9q7o5/901xFBahQ31gotsYLZXHhU1fGbm7u1O7+IGAQ0r0cs/UNl88E4
+	Oqq/SA7Kj/OLbs40empZiFEQRFpXbETt7uRZMJmp5bSaJrtowbLn9Hh8gCnmRAvEkU4jc87yt94Pd
+	wjmrGqnr4XBwCpozuhfqYYruFEy6Vw3R2JVqHKqO/W3uMr73h8zuwVcq3vLCSyLw==;
+Received: from 193.red-79-147-123.dynamicip.rima-tde.net ([79.147.123.193] helo=killbill)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1xRArz-008u8Y-RS; Wed, 11 Nov 2026 17:08:19 +0100
+From: Melissa Wen <mwen@igalia.com>
+To: airlied@gmail.com,
+	alexander.deucher@amd.com,
+	alex.hung@amd.com,
+	aurabindo.pillai@amd.com,
+	christian.koenig@amd.com,
+	contact@emersion.fr,
+	daniels@collabora.com,
+	harry.wentland@amd.com,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	mwen@igalia.com,
+	sebastian.wick@redhat.com,
+	simona@ffwll.ch,
+	siqueira@igalia.com,
+	sunpeng.li@amd.com,
+	tzimmermann@suse.de
+Cc: Uma Shankar <uma.shankar@intel.com>,
+	Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
+	Xaver Hugl <xaver.hugl@gmail.com>,
+	Pekka Paalanen <pekka.paalanen@collabora.com>,
+	Matthew Schwartz <matthew.schwartz@linux.dev>,
+	amd-gfx@lists.freedesktop.org,
+	kernel-dev@igalia.com,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org,
+	louis.chauvet@bootlin.com,
+	John Harrison <John.Harrison@igalia.com>
+Subject: [PATCH v5 00/15] drm/atomic: only add states of active or transient active colorops 
+Date: Wed, 11 Nov 2026 17:05:13 +0100
+Message-ID: <20261111160814.21326-1-mwen@igalia.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,58 +92,133 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261106190317.17904-1-robin.clark@oss.qualcomm.com>
-X-Proofpoint-GUID: jH1hgQebmS2JpkwJBh9pmIj_TVgNAuSh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA2MyBTYWx0ZWRfX61Y1PaJ/INpg
- K14bZoh7sIZ7hp01kWN3ZbXz/LX9ixO6Teb/pqR+v8wNXbS3qcujksEeWMTjZP6ljSZmvWCSUoC
- TOEhZoW2fX2aWib5Hgy8b7400zBlJQD4CFPofOLD20mCj1VOeXMPoM8OAdWBsyvHcnHjCextozs
- rR5MsLm8FeGP32GpLPwBHhtCbRbV254FLC/Qslp3tTrPIOjeuJpNpbks8DZhPlYsNF00P/RfpMe
- EwWH0XKSKYA/FRj/aZ7W+XPnLsIQ4gqQ7vm0Ww1jxhIrY52FbzRld2YnvW3EoO6tajRrIJm3xUD
- sm1D4PFLCRMa45C1rcA/Okcymw2xEXW4Vh8GwrDtMSX/ZY19qmmvrpq4F9Yo76z6HP6UBIqn38J
- Ms8WZcjrbSnt/m++vJHD+mIEB3X98dky+NrgO5syHrZJcRQgdfJg3KiupF+m/nm8RlnwzmObzjT
- 6GKhqrBl6U4QvDb4dYw==
-X-Proofpoint-ORIG-GUID: jH1hgQebmS2JpkwJBh9pmIj_TVgNAuSh
-X-Authority-Analysis: v=2.4 cv=O9isLx9W c=1 sm=1 tr=0 ts=6af48f22 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=cM-CtGeE6IhlOtB9VQsA:9 a=CjuIK1q_8ugA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA2MyBTYWx0ZWRfX/QorMoCR3kEJ
- OJZB7Urtr1eHJE9k/2KDNX12bY/RsYLEjNZO4eeGEvFMRPJWc8aWJJUHcw9izOgNal+eEyZiPKq
- Vb7UUeoxd+nOs9ZdovgGpY98MxkirKY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-11_04,2026-11-11_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0 suspectscore=0
- impostorscore=0 adultscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110063
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 06, 2026 at 11:03:17AM -0800, Rob Clark wrote:
-> Historically we ignored pgoff, as it was a "fake" offset that simply
-> served to map back to the gem handle.  Mmaping a partial obj was dis-
-> allowed.
-> 
-> But we can instead just subtract off the fake offset.
-> 
-> drm_gem_mmap() still expects an exact match on pgoff, so unless we use
-> our own path for that, like some other drivers, we don't fully support
-> partial mmap.  But this at least makes things more robust if userspace
-> does funny things like partal unmap.
-> 
-> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-> ---
->  drivers/gpu/drm/msm/msm_gem.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
+This series is a follow-up of what was discussed in [1] and on #wayland
+IRC channel regarding policy and userspace expectations on changes in
+colorop properties and the current status of the color pipeline in which
+the colorop is part of. In short, we agreed that userspace can change
+properties of colorops that are currently part of an active color
+pipeline or when the pipeline is switching status in the same commit.
+However, userspace cannot change colorop properties of inactive color
+pipeline in the expactation that it will be activated at some point in
+the future.
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Userspace also expects persistence of color pipeline already set, even
+if it becomes inactive for a while, when activated, colorop settings
+previouly set should be preserved.
 
-> 
+This series uncovered some bugs on IGT tests that were already fixed [2]
+and applied. The bad merge conflict resolution mentioned in the previous
+version [v3] is already resolved. On the other hand, when rebasing this
+series on drm-misc, other issues on AMD KUnit tests appeared due to the
+introduction of the new FIXED_MATRIX colorop type. As a result, the
+first two new patches address them.
+
+I also tried to address some Sashiko's complaints on pre-existent issues
+that affects the stability of this series, but not all since I want to
+keep a healthy scope for reviews. Now some AMD fixes in this series are
+attached to the DRM changes, so better apply the whole serie in a single
+branch and hope that this doesn't get deleted in the event of a merge
+conflict.
+
+[v1] https://lore.kernel.org/dri-devel/20260526142940.504911-1-mwen@igalia.com/
+Changes:
+- define a macro to walk in the color pipeline (Alex H.)
+- fix checkpatch warning (Alex H.)
+
+[v2] https://lore.kernel.org/dri-devel/20260604180457.1110110-1-mwen@igalia.com/
+Changes:
+- [Drop] drm/atomic: duplicate state of all colorops
+  If inactive colorops state are duplicated on resume, the commit will be
+  rejected. 
+- [New] Four new patches to make AMD driver match the policy of colorop
+  updates only for colorops in active color pipelines plus individual
+  colorop updates. It also tries to untangle COLOR_PIPELINE = Bypass from
+  colorop BYPASS prop = true. I think patches 3-5 can be cherry-picked and
+  applied if it looks correct for AMD, I just included them here for
+  context (for example, Sashiko reported an issue in the previous version
+  of this series).
+
+[v3] https://lore.kernel.org/dri-devel/20260609121230.1358786-1-mwen@igalia.com/
+Changes:
+- make drm_atomic_add_affected_colorops static and move to
+  drm_atomic_helper.c (John H.)
+- skip check when just duplicating state for suspend/resume persistence.
+- [re-add] drm/atomic: duplicate state of all colorops to preserve all
+  colorop status in a suspend/resume
+- rewite commit message and better explain what's considered an active
+  colorop (John H.)
+- [new] drm/atomic: check if an active colorop has a blob if its type
+  requires one
+- drop the ternary and add just a warn_on since both current callers
+  iterate planes already in the atomic state in AMD's active pipeline
+  check (John H.)
+- explain the reason to use commited colorop in AMD's active pipeline
+  check (John H.)
+- [new] drm/amd/display: don't ignore failure on blend colorop setup
+- [new] drm/amd/display: distinguish colorop setup error from no colorop support
+
+[v4] https://lore.kernel.org/dri-devel/20260811171011.184964-1-mwen@igalia.com/
+Changes:
+- Fixes for Kunit tests related to FIXED_MATRIX type
+  - [new] drm/amd/display: Update colorop pipeline tests for new fixed matrix op
+  - [new] drm/amd/display: add missing FIXED_MATRIX colorop to AMD KUnit tests
+- Fixes for KUnit tests with the new policy in place:
+  - [new] drm/amd/display: add plane to commit on KUnit cursor mode tests
+- post-pone making drm_atomic_add_affected_colorops static to a point in this
+  series in which this is not needed by AMD anymore (Harry):
+  - In drm/amd/display: allow individual colorop change, drop the
+    drm_atomic_add_affected_colorops() call from dm_update_plane_state(),
+    since the colorop helpers now fall back to the committed state
+  - [new] drm/atomic: make drm_atomic_add_affected_colorops() static
+- check colorop type when allowing individual changes (Harry)
+- update __set_dm_plane_colorop_fixed_matrix to get the commited state if no
+  new state as for other colorop individual changes (Harry)
+- update KUnit tests accordingly (Harry)
+- [moved] drm/amd/display: only check colorops of an active color pipeline
+
+[1] https://lore.kernel.org/dri-devel/20260519211111.228303-1-mwen@igalia.com/
+[2] https://lore.kernel.org/igt-dev/20261021151929.62529-1-mwen@igalia.com/
+
+Best Regards,
+
+Melissa
+
+John Harrison (1):
+  drm/amd/display: Update colorop pipeline tests for new fixed matrix op
+
+Melissa Wen (14):
+  drm/amd/display: add missing FIXED_MATRIX colorop to AMD KUnit tests
+  drm/atomic: only add states of active or transient active colorops
+  drm/amd/display: add plane to commit on KUnit cursor mode tests
+  drm/amd/display: only check colorops of an active color pipeline
+  drm/atomic: reject colorop update from inactive color pipeline
+  drm/atomic: duplicate state of all colorops
+  drm/atomic: check if an active colorop has a blob if its type requires
+    one
+  drm/amd/display: truly bypass plane colorop 3x4 matrix and hdr mult
+  drm/amd/display: make shaper bypass mode cleaner
+  drm/amd/display: make blnd bypass mode clearer
+  drm/amd/display: don't ignore failure on blend colorop setup
+  drm/amd/display: allow individual colorop changes
+  drm/atomic: make drm_atomic_add_affected_colorops() static
+  drm/amd/display: distinguish colorop setup error from no colorop
+    support
+
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  13 -
+ .../amd/display/amdgpu_dm/amdgpu_dm_color.c   | 236 ++++++++----------
+ .../amd/display/amdgpu_dm/amdgpu_dm_cursor.c  |  26 +-
+ .../amdgpu_dm/tests/amdgpu_dm_color_test.c    | 118 +++++----
+ .../amdgpu_dm/tests/amdgpu_dm_colorop_test.c  |   4 +
+ .../amdgpu_dm/tests/amdgpu_dm_cursor_test.c   |  49 ++++
+ drivers/gpu/drm/drm_atomic.c                  | 199 +++++++++++----
+ drivers/gpu/drm/drm_atomic_helper.c           |  59 ++++-
+ drivers/gpu/drm/drm_colorop.c                 |   5 +-
+ include/drm/drm_atomic.h                      |   4 -
+ include/drm/drm_colorop.h                     |   9 +-
+ 11 files changed, 456 insertions(+), 266 deletions(-)
 
 -- 
-With best wishes
-Dmitry
+2.53.0
+
