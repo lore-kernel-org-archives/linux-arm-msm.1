@@ -1,50 +1,50 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.97.179.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794413340;
-	b=t2qoVFVWIFR7meqh3biR+1ti9jFE8vSbNyDmjQoeBzlK9HcaRd4Uffqt0MEFWaaI+aDB
-	 DWiMqiSEC41CDBuJZwsUwUHLbdG7oP1kutsl1DObfHst0j8spZouVUnENawLJjrsaGnHY
-	 94CcoTXL0RGiO8Qukc4UWSpV8YHuViPk9NzF62Rma0JDpJV1y9nWFXOfvgeOSoCpmiw+1
-	 Oze5a35+73/RlAkCJvslkNrqVQb+rG3FjpTBZSS5NQ7uUdB3rXz0ls74XPk/Khwvzp+xI
-	 63LRuQJijpTVd8Uwvf2kpqIXiNqomaSg5VT5hsKfzD7khpu55RCanl+vyZLPtiFB8gA==
+	t=1794413342;
+	b=Z08HwbZVYDmAXt/qYunwCI03LzKSWhUmkNT7KtJWrrPoOlbt2m94L2PN9Nsvg8la6WqN
+	 5xB4diVW8MKCQrNVea3yQP5UB1aVF+huPFqI2jni9+ZeO39oldm8HtzudCutUW27gZ9DG
+	 SyJ+/KmCXyEJpQuOArrKd/JFCJmCr3TVeKuCEpzEDu67mJWbbTJAFtxGHCvB80ZH7PAkj
+	 McJtYAg4x5tXDZkDXp0jZkRk0Fl3fF0a+I1lK6ZC9f3BtRyULOstr0TfooUN+QUH9ZxEy
+	 RsAgMwDwVnoGm+lzuHyC0+04Qm57/uZ88+XZPZaQyhciK5daFKGbmMPIKrWX40Y65Yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794413340;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794413342;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=/0hoarigVh/hUEDnhZ2/FihBCw3WzRHplsuscVyCxGc=;
-	b=pICzOk5lzbfhOrHL8mQn2/ZU55T8r2Qt2f+Q1JmJCYqSCQg8LUv9U4VoQUgF1cCg0Kh2
-	 9RUNuOiJqATU7I1a+D/MnxkGMxHtqxevTns6BYSo2Q5pZ3tsqXuLITfUHB8mK18EHiJLx
-	 yAfgFLJHJ0ZkqBKG1rEbsN0kwXZJdj2VyMYmPJ+M8LMDm4ZE5btqD9DmTo+mX6vCyjqFH
-	 HEv+7NoWUGEO/62i5eofID28qifjyrZORlaE3/ESkqyTja7rIaJ69d0FNZNfCGG1axw14
-	 qWyrvR9P9NrXwnB2dCV1AN6KXXg/zDcsiNsGAa4mVp0YUwAw7Rj5FWB9Qkqhzv+52dQ==
+	bh=EF6YJlWcMIKeRWjHSiUzXMiAlNQMPhIfJbX3+58lWy4=;
+	b=bBkaigvlE7Bz67Mlwwq/3WNUIFjPpP1kmTioQluoCt8cryCccdEVKL0qXAlhB83TnegB
+	 Xq6NNRRAIiO2w/SRNQeN/XM2DoTPSkUnKGmnoJ4LkNQUmcHAbBR093upkz+M1lJQBGimq
+	 0YbPAiIl5xwr2kofPh3q1AO3fp7WM45L/PU0jpqT4wOjnQMCDlLNaysWhVG4MgGn4qPQh
+	 o3aKolhLWH8jHGVAFurDwFuoLKAsxYVz00X4n2wT6gMkIHhKTgROTZHV0bN4FLmW/hQGJ
+	 awtSyHs8SVlnF3sAY8AbgJOf7icX/tUsIC2rEDP5C8sLyh92nuIbTw3CAp8r9sZB/UQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=igalia.com;
 	spf=pass smtp.mailfrom=igalia.com;
-	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=QkaehTk6;
+	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=AdaZNSv5;
 	arc=none smtp.remote-ip=213.97.179.56
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A041606A32A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5A041606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5296D606A32D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5296D606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=QkaehTk6
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=AdaZNSv5
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
-	Cc:To:From:From:Reply-To; bh=/0hoarigVh/hUEDnhZ2/FihBCw3WzRHplsuscVyCxGc=;
-	t=1794413340; x=2109773340; b=QkaehTk6rOUAztyKmuts/AsdoJlp2nPujLsxWxIx94JXppw
-	5ZPI8ejwrwFpf5siseBndNTvAN5uPRv3TcQO6XHhMvtPZHw2k01HadvQtkGykhEc/B47CpGVVbmI4
-	kBwymAfswTw3EWVAtm6w2WaTdMkvffNjs0da7MVGZOMsF+OILTnNTvaNBczIRve9OWgznpACADkGa
-	HaoRuiV9xGAG0wsKYpEtS6555bsEzEST8xGdRQxd1aCRmRPuqUOs0Bs4z/W/DdNuGP6cuRlh4AMYI
-	kck8Stlt+8P0oFwLEuoNunhGtgiUkQNwuh7BHldl1tnkEIQ0tImcu2SKG3zX68nA==;
+	Cc:To:From:From:Reply-To; bh=EF6YJlWcMIKeRWjHSiUzXMiAlNQMPhIfJbX3+58lWy4=;
+	t=1794413342; x=2109773342; b=AdaZNSv5AAxC1nnx7ICI770rxv0HTG90sWdCZaSREpEKPH6
+	JjxSF2uHTgHRLz1hZ6f5/++oHYn4qzvorBxE1SXbP/5A61V0rSytU/8QmIedn2dExN6rp2Ylq86eS
+	5msgCQeiKoeKGufdlOpuSiIZT4JWYjGC5y+3QV78AJpen51OMXn42T+ldeswolZN07i47mUCpzPbH
+	D75yW5OZXLaAhlquI2oopkwmq2pLwNjCB01meLjHUrr7hiqNiX/Kh3+LC0h4shzrYIdTEJITSDBL/
+	tCner+t9Uv9nDZ1XjpCOjay6/YV/u0Y9AiIQD2ht+8eWxLMFPbmSi2jh+6W4UaYg==;
 Received: from 193.red-79-147-123.dynamicip.rima-tde.net ([79.147.123.193] helo=killbill)
 	by fanzine2.igalia.com with esmtpsa 
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-	id 1xRAsB-008u8Y-Cu; Wed, 11 Nov 2026 17:08:31 +0100
+	id 1xRAsF-008u8Y-Uj; Wed, 11 Nov 2026 17:08:36 +0100
 From: Melissa Wen <mwen@igalia.com>
 To: airlied@gmail.com,
 	alexander.deucher@amd.com,
@@ -80,9 +80,9 @@ Cc: Uma Shankar <uma.shankar@intel.com>,
 	dri-devel@lists.freedesktop.org,
 	louis.chauvet@bootlin.com,
 	John Harrison <John.Harrison@igalia.com>
-Subject: [PATCH v5 02/15] drm/amd/display: add missing FIXED_MATRIX colorop to AMD KUnit tests
-Date: Wed, 11 Nov 2026 17:05:15 +0100
-Message-ID: <20261111160814.21326-3-mwen@igalia.com>
+Subject: [PATCH v5 06/15] drm/atomic: reject colorop update from inactive color pipeline
+Date: Wed, 11 Nov 2026 17:05:19 +0100
+Message-ID: <20261111160814.21326-7-mwen@igalia.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261111160814.21326-1-mwen@igalia.com>
 References: <20261111160814.21326-1-mwen@igalia.com>
@@ -97,261 +97,124 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The new FIXED_MATRIX colorop was introduced to DRM and this is now the
-first operation of the AMD color pipeline, but KUnit tests weren't
-updated accordingly. Add the new colorop as expected when testing
-colorops of the AMD color pipeline. Also fix the colorop sequence in
-comments.
+A colorop can only be changed while it is part of an active color
+pipeline, or in the same commit that activates or deactivates that
+pipeline. Enforce this contract by checking that the colorop belongs to
+the color pipeline of a plane in its current, new or old state, and
+rejecting the state change otherwise. Do the check in
+drm_atomic_check_only() rather than when the colorop property is set, so
+it doesn't depend on the order userspace sets properties within a
+commit.
 
-Fixes: 941222175d21 ("drm/amd/display: Implement fixed matrix colorop color space mapping")
+Link: https://lore.kernel.org/dri-devel/20260519211111.228303-1-mwen@igalia.com/
+Suggested-by: Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>
+Reviewed-by: Harry Wentland <harry.wentland@amd.com>
 Signed-off-by: Melissa Wen <mwen@igalia.com>
 ---
- .../amdgpu_dm/tests/amdgpu_dm_color_test.c    | 50 +++++++++++++------
- 1 file changed, 35 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/drm_atomic.c | 76 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
 
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-index 8c2f7ab5f8d3..d2ae35bf550f 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-@@ -2495,6 +2495,7 @@ dm_test_colorop_pipeline_setup(struct kunit *test,
- static void dm_test_update_plane_color_mgmt_colorop_bypass_pipeline(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2508,6 +2509,7 @@ static void dm_test_update_plane_color_mgmt_colorop_bypass_pipeline(struct kunit
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_INV_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-@@ -2515,7 +2517,7 @@ static void dm_test_update_plane_color_mgmt_colorop_bypass_pipeline(struct kunit
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, true, true, true, true, true,
-+		true, true, true, true, true, true, true, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 
-@@ -2532,16 +2534,20 @@ static void dm_test_update_plane_color_mgmt_colorop_bypass_pipeline(struct kunit
+diff --git a/drivers/gpu/drm/drm_atomic.c b/drivers/gpu/drm/drm_atomic.c
+index 2e82c06166be..36c9550c2749 100644
+--- a/drivers/gpu/drm/drm_atomic.c
++++ b/drivers/gpu/drm/drm_atomic.c
+@@ -986,6 +986,71 @@ drm_atomic_add_pipeline_colorops(struct drm_atomic_commit *state,
+ 	return 0;
  }
  
- /**
-- * dm_test_update_plane_color_mgmt_colorop_missing_multiplier - missing second op falls back
-+ * dm_test_update_plane_color_mgmt_colorop_missing_multiplier - missing multiplier op falls back
-  * @test: KUnit test context
-  */
- static void dm_test_update_plane_color_mgmt_colorop_missing_multiplier(struct kunit *test)
++/*
++ * drm_atomic_colorop_check - check new colorop state
++ * @new_colorop_state: new colorop state to check
++ *
++ * Ensure that the colorop in @new_colorop_state belongs to an active color
++ * pipeline, i.e. it's in the chain of colorops set to the color_pipeline
++ * property of current, old or new plane state.
++ *
++ * Userspace is allowed to finalize colorop's settings in the same commit that
++ * deactivates its pipeline, and the changes should persist for when that
++ * pipeline is reactivated later. So changes to colorop in the old plane
++ * state's pipeline are accepted even though it won't drive hardware updates.
++ *
++ * Skip this check for duplicated state, since all colorop states must persist
++ * in suspend/resume regardless of whether it belongs to an active color
++ * pipeline or not.
++ *
++ * Returns: 0 on success, -EINVAL otherwise.
++ */
++static int drm_atomic_colorop_check(const struct drm_colorop_state *new_colorop_state)
++{
++	struct drm_atomic_commit *state = new_colorop_state->state;
++	struct drm_plane *plane = new_colorop_state->colorop->plane;
++	struct drm_plane_state *new_plane_state, *old_plane_state;
++	struct drm_colorop *colorop;
++
++	if (state->duplicated)
++		return 0;
++
++	/* Not a plane colorop */
++	if (!plane)
++		return 0;
++
++	new_plane_state = drm_atomic_get_new_plane_state(state, plane);
++	old_plane_state = drm_atomic_get_old_plane_state(state, plane);
++
++	/* No changes in the plane state. Check current-committed plane state */
++	if (!new_plane_state) {
++		drm_for_each_colorop_in_pipeline(colorop, plane->state->color_pipeline)
++			if (colorop == new_colorop_state->colorop)
++				return 0;
++		return -EINVAL;
++	}
++
++	if (WARN_ON(!old_plane_state))
++		return -EINVAL;
++
++	/* Check if the colorop is active in the new plane state */
++	drm_for_each_colorop_in_pipeline(colorop, new_plane_state->color_pipeline)
++		if (colorop == new_colorop_state->colorop)
++			return 0;
++
++	/* Same color pipeline as new; no point walking old. Colorop isn't active */
++	if (new_plane_state->color_pipeline == old_plane_state->color_pipeline)
++		return -EINVAL;
++
++	/* Check if the colorop was active in the old plane state */
++	drm_for_each_colorop_in_pipeline(colorop, old_plane_state->color_pipeline)
++		if (colorop == new_colorop_state->colorop)
++			return 0;
++
++	/* Colorop is not part of an active color pipeline. */
++	return -EINVAL;
++}
++
+ static void drm_atomic_colorop_print_state(struct drm_printer *p,
+ 					   const struct drm_colorop_state *state)
  {
--	static const enum drm_colorop_type types[] = { DRM_COLOROP_1D_CURVE };
-+	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
-+		DRM_COLOROP_1D_CURVE
-+	};
- 	static const enum drm_colorop_curve_1d_type curves[] = {
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
--	static const bool bypass[] = { true };
-+	static const bool bypass[] = { true, true };
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
+@@ -1869,6 +1934,8 @@ int drm_atomic_check_only(struct drm_atomic_commit *state)
+ 	struct drm_plane *plane;
+ 	struct drm_plane_state *old_plane_state;
+ 	struct drm_plane_state *new_plane_state;
++	struct drm_colorop *colorop;
++	struct drm_colorop_state *new_colorop_state;
+ 	struct drm_crtc *crtc;
+ 	struct drm_crtc_state *old_crtc_state;
+ 	struct drm_crtc_state *new_crtc_state;
+@@ -1885,6 +1952,15 @@ int drm_atomic_check_only(struct drm_atomic_commit *state)
+ 			requested_crtc |= drm_crtc_mask(crtc);
+ 	}
  
- 	f.dm_plane_state->base.color_pipeline =
-@@ -2555,20 +2561,22 @@ static void dm_test_update_plane_color_mgmt_colorop_missing_multiplier(struct ku
- }
- 
- /**
-- * dm_test_update_plane_color_mgmt_colorop_missing_3x4 - missing third op falls back
-+ * dm_test_update_plane_color_mgmt_colorop_missing_3x4 - missing 3x4 op falls back
-  * @test: KUnit test context
-  */
- static void dm_test_update_plane_color_mgmt_colorop_missing_3x4(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 	};
- 	static const enum drm_colorop_curve_1d_type curves[] = {
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
--	static const bool bypass[] = { true, true };
-+	static const bool bypass[] = { true, true, true };
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 
- 	f.dm_plane_state->base.color_pipeline =
-@@ -2591,6 +2599,7 @@ static void dm_test_update_plane_color_mgmt_colorop_missing_3x4(struct kunit *te
- static void dm_test_update_plane_color_mgmt_colorop_truncated(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2603,13 +2612,14 @@ static void dm_test_update_plane_color_mgmt_colorop_truncated(struct kunit *test
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_INV_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, true, true, true, true,
-+		true, true, true, true, true, true, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 	struct dc_plane_state *dc_plane_state = f.dc_plane_state;
-@@ -2639,6 +2649,7 @@ static void dm_test_update_plane_color_mgmt_colorop_truncated(struct kunit *test
- static void dm_test_update_plane_color_mgmt_colorop_no_3dlut_hw(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2657,9 +2668,10 @@ static void dm_test_update_plane_color_mgmt_colorop_no_3dlut_hw(struct kunit *te
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, true, true, false, true, true,
-+		true, true, true, true, true, true, false, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 
-@@ -2683,6 +2695,7 @@ static void dm_test_update_plane_color_mgmt_colorop_no_3dlut_hw(struct kunit *te
- static void dm_test_update_plane_color_mgmt_colorop_shaper(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2696,6 +2709,7 @@ static void dm_test_update_plane_color_mgmt_colorop_shaper(struct kunit *test)
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_INV_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-@@ -2703,7 +2717,7 @@ static void dm_test_update_plane_color_mgmt_colorop_shaper(struct kunit *test)
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, false, false, true, true, true,
-+		true, true, true, true, false, false, true, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 	struct drm_colorop_state *shaper_lut_state;
-@@ -2715,7 +2729,7 @@ static void dm_test_update_plane_color_mgmt_colorop_shaper(struct kunit *test)
- 	f.dm_plane_state->base.color_pipeline =
- 		dm_test_colorop_pipeline_setup(test, &f, types, curves, bypass,
- 					       ARRAY_SIZE(types));
--	shaper_lut_state = f.state->colorops[4].new_state;
-+	shaper_lut_state = f.state->colorops[5].new_state;
- 	blob = kunit_kzalloc(test, sizeof(*blob), GFP_KERNEL);
- 	KUNIT_ASSERT_NOT_NULL(test, blob);
- 	blob->length = MAX_COLOR_LUT_ENTRIES * sizeof(struct drm_color_lut32);
-@@ -2738,6 +2752,7 @@ static void dm_test_update_plane_color_mgmt_colorop_shaper(struct kunit *test)
- static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2751,6 +2766,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_INV_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-@@ -2758,7 +2774,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, true, true, false, true, true,
-+		true, true, true, true, true, true, false, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 	struct drm_colorop_state *lut3d_state;
-@@ -2770,7 +2786,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- 	f.dm_plane_state->base.color_pipeline =
- 		dm_test_colorop_pipeline_setup(test, &f, types, curves, bypass,
- 					       ARRAY_SIZE(types));
--	lut3d_state = f.state->colorops[5].new_state;
-+	lut3d_state = f.state->colorops[6].new_state;
- 	blob = kunit_kzalloc(test, sizeof(*blob), GFP_KERNEL);
- 	KUNIT_ASSERT_NOT_NULL(test, blob);
- 	blob->length = 5 * sizeof(struct drm_color_lut32);
-@@ -2795,6 +2811,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2808,6 +2825,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_INV_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-@@ -2815,7 +2833,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
- 	static const bool bypass[] = {
--		true, true, true, true, true, false, true, true,
-+		true, true, true, true, true, true, false, true, true,
- 	};
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 	struct drm_plane_state *plane_state = &f.dm_plane_state->base;
-@@ -2839,6 +2857,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *
- static void dm_test_update_plane_color_mgmt_colorop_blend(struct kunit *test)
- {
- 	static const enum drm_colorop_type types[] = {
-+		DRM_COLOROP_FIXED_MATRIX,
- 		DRM_COLOROP_1D_CURVE,
- 		DRM_COLOROP_MULTIPLIER,
- 		DRM_COLOROP_CTM_3X4,
-@@ -2851,8 +2870,9 @@ static void dm_test_update_plane_color_mgmt_colorop_blend(struct kunit *test)
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
-+		DRM_COLOROP_1D_CURVE_SRGB_EOTF,
- 	};
--	static const bool bypass[] = { true, true, true, false, false };
-+	static const bool bypass[] = { true, true, true, true, false, false };
- 	struct dm_test_color_update_fixture f = dm_test_color_update_setup(test);
- 	struct drm_colorop_state *blend_lut_state;
- 	struct drm_plane_state *plane_state = &f.dm_plane_state->base;
-@@ -2862,7 +2882,7 @@ static void dm_test_update_plane_color_mgmt_colorop_blend(struct kunit *test)
- 	f.dm_plane_state->base.color_pipeline =
- 		dm_test_colorop_pipeline_setup(test, &f, types, curves, bypass,
- 					       ARRAY_SIZE(types));
--	blend_lut_state = f.state->colorops[4].new_state;
-+	blend_lut_state = f.state->colorops[5].new_state;
- 	blob = kunit_kzalloc(test, sizeof(*blob), GFP_KERNEL);
- 	KUNIT_ASSERT_NOT_NULL(test, blob);
- 	blob->length = MAX_COLOR_LUT_ENTRIES * sizeof(struct drm_color_lut32);
++	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
++		ret = drm_atomic_colorop_check(new_colorop_state);
++		if (ret) {
++			drm_dbg_atomic(dev, "[COLOROP:%d:%d] isn't in an active color pipeline.\n",
++				       colorop->base.id, colorop->type);
++			return ret;
++		}
++	}
++
+ 	for_each_oldnew_plane_in_state(state, plane, old_plane_state, new_plane_state, i) {
+ 		ret = drm_atomic_plane_check(old_plane_state, new_plane_state);
+ 		if (ret) {
 -- 
 2.53.0
 
