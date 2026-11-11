@@ -1,70 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794360444;
-	b=nldmGT7CTWG9TIS212ybAPhpWDGbYzcrr18Gex+8wXofD7Ew67jcjhTIhxqAIpzdEi48
-	 1n+AFBSD8qt6hE1KUvTGiCkFJwpC4aDG9oVmqQHtxvL+u5TKpVN1qFVT8TDLsbVdzZV8s
-	 XrNFEBFzVjyLkg7rPzHNosQuNEyb2VyrT4Vu2xNPCb5sshCEeP2+eFBWgyOfQH8krUxZL
-	 1ylfZF353nEByp/sAmsYH0TcVpovVO7wVWH7r2vizDJ5vb7y2V6D/cu7xIMl2Kjzs1e98
-	 E7TIBadlzhDPdqX/aLptNtBIGdowXC+kTLiyMyktwQy23BrL0/5uqH9H44SVFUyciIw==
+	t=1794363353;
+	b=wSgb2yiH+t6r86pViVFa2/Zy6IJBQis6TPk0T877TqYjX0XBImi3MG3wQ+122QlMhy+t
+	 M90KGlPnHt3jTd6JLGxzlsYLyPkoKJRf+zZVU/tTJ3NJVjga4gXqe5PORpGVcxk7sT3n3
+	 7KeiWUY4N3pc09/r0stBH+H8HRBbC1xGSecDcG0i9MvgkR6SpzWxq9nvjBD8h1C/vWBxs
+	 WLOevJ7hrGR6uU9IdDBoKLmk88mk8YAFK17MbcatWHxAvoNR9hzdW7T1Tka+m35uK8Cbu
+	 Yh/emWslFUuKSdgPs0ZNUU/48I2Y8m9VQbKnkR4349TaMiEoyYP/RzRHWOiIKt958bA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794360444;
-	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=BLSB0jc+PDfoGDhBATE5rNyu65P6DKBdBa7UuDK+sb4=;
-	b=ZlQzc6cd17k2M1v+NeIlsxAIs0stZv8ltNZhE7Lylp+uRaZcHWPfL5BL7RLdbatpsCqI
-	 1ZEJjgsP64fPYaZiKxnGI6Jb6X47XpXS9CxCcbu2H70fouAGod6y24xS3TRf84xktgQsN
-	 AzBP8htK9bRLL7rmmQ6ZMvRLJiCVqv7IXCGAyYDuvvTN8Wjtq1IgIvVYjcY06EoZHxnJo
-	 Lb/8fttGcx5zhjnUU/a/PcHwLzXmdSyi1DSe0GQODLJLlwnksow4Blr/4xIx2y/8SWOFJ
-	 moG1b0fE8ysukprNqX9Fz/Acmu3iq94XhrO6sCSxbe7nWkuGQ5GqnivVxi7/x2db9WA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794363353;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
+	b=uskHNVyCXGVxwh0Bbye5We8GhL7oa2gWK8jhB7l6RljlZ4YZ3XCETF+LXB2ZBcJSG0N7
+	 ETvKX+W7czQyCHRSB9l461ws3mypUC50bBXZSNZeTGIMFCDaUn/B64GyLOIKmCmcUne/R
+	 mACCTIyZ0VE52bFlzA0daCF7RZZzr0G3h904/njV+/jqZUVObrgrKgOkr9hRzDY460fBN
+	 NQCkAMh6Py/fxjVxZwB5XhGzHTQcoPP+V4t2OdpGWyxZDQyxCGIGgh7n9NpXske2vGdD6
+	 PfzWp3DwuM7qugC4h3/6xnfSxDfLo2vc+4voDkmZd5KCmYygKGe2zVYhLlRcg/wB3tQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=fail header.from=andrewgigena.dev;
-	spf=pass smtp.mailfrom=gmail.com;
-	arc=none smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gpzNUmNy;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4048606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 01:27:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4048606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=andrewgigena.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so5288175eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 17:27:23 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794360443; x=1794965243;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=BLSB0jc+PDfoGDhBATE5rNyu65P6DKBdBa7UuDK+sb4=;
-        b=x4cnB9kVuIQ52nUvaP8MQ6nl1w249Zq/EgaSrRcKqnE2bN0kLJIHjBCE5bJirHBh/6
-         0xgC3+i9ankeCz08pXYYrDathgA+uiAFd0dgPwk6HDl6N8vP7WlKKB3b6cb5dglnLlTC
-         cxn2TrwnbAEJMxKSYklQ9+VkvCIj2e5FD4e7JtnrCZN1i92og+WAINAzkfx1bpko2H6t
-         lYaHza56DnUgjSsvoLEwKJi2oqXPt5c27WXt7sSAOBQ+j5ini6H7vOpHmAW107Ql75FY
-         I0L0wf/BKiscyKDxXuC4jgKZINrAkB7ezzLXBt2HbXrnCk6M7JRA4xq18HbZdnGgKR2g
-         IInA==
-X-Gm-Message-State: APuU4Z82l+Ie2x9oWLSYU9UdtdDTBPBb1f7bvBVLRfveR4NlGS61LpfY
-	Stw/d/7S+tKJqGg0+0FeLIccFG+hDP0E1pfYbJoHTAsKnEjmfSDDB/Rd
-X-Gm-Gg: AYBFou1i+G0NJOe9EqbLCzaQe8vJujZTtsmYKT02qznGIQaLDpuDzvpnLKY/ae1uwkX
-	DRAHddkSEBYk5qk3zj/S532RbcizVRRpQfBY/aDJ013OiHvI2WQYsoi8PKq8hPC0M+aUmgi50zw
-	YLD5CaLaJa/NOFLZeSAV9wkkAwbVfWix1dFwttAaEjonBhiWzfT2KM9QbPWbrp+H2dybCW/xGQ4
-	sfTUPhScAT3RK0MPmEJIRDSGyb2ZRiHPyMbD6Sduf5+vHQEeXvdRpAwJp27FHVd7coiIwrDG1Ds
-	sbE4Lx5bSKzaaHbnCky9cdzzoB3FCvKJUmgknInZOlWPO/vU07z0kQDc90FPiv+EArXpol3KXBP
-	VK8Yr1DwRx65mJn7Rs3lfHgwo/2qxySXRnZYF4vAi45dsbz4spCUJhCOvOlZEwET2MAtlUR0uJ9
-	JwgLx/fsn9oQ4D9CfBe3es6m0tsfVdwwlmfJIExbGjoiBnuhkjN/yHVGXUNBABpQL4g5J2xMm4i
-	fjyGr2AoroayMUcms3n8+5yxZeQnF5daZ2173KGA6uxQNGRTMu1ccnVM0IO4mLTx4bZgCRn1Tg3
-	6irwF3xF75Qr3Ml261oWQEuoadMG6+x1ciUefv23E8OAW1vzOc/Iut6qMR23CyuOn7bRaKQi
-X-Received: by 2002:a05:693c:8219:b0:36a:1008:5815 with SMTP id 5a478bee46e88-3768385dee6mr1611656eec.5.1794360442766;
-        Tue, 10 Nov 2026 17:27:22 -0800 (PST)
-Received: from ?IPV6:2800:a4:806:ef00:2f77:7097:372d:6d14? ([2800:a4:806:ef00:2f77:7097:372d:6d14])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-375212e7d24sm16548467eec.22.2026.11.10.17.27.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Nov 2026 17:27:22 -0800 (PST)
-Message-ID: <9988b8c2-547e-405a-9c76-a4e6a59c7dbb@andrewgigena.dev>
-Date: Wed, 11 Nov 2026 01:27:15 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B0E606A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 02:15:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gpzNUmNy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61B0B1F00A08
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 02:15:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794363353;
+	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
+	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
+	b=gpzNUmNyq6qsEvzIL583I1WHX9XfM0jAP9xozMvrK3oKgjaJKM9HmydByn5NEIyRm
+	 FL9I8LN/cIEOLQxNJFqTpzUjJJ8FRmysOu6sSSlmR6wbnLmY2H/xJB0pOtjQEiIXbT
+	 ypTguvcmuTxGA4UbO/FrAsn8x4unTMCqWiFL3P3GD5T9auLrdw06/wvgIQn/Bdxh/B
+	 Vtbxsjuz93uLGRohSfPQSgdhBUp3YTnHVdyJwnyV/Whij4FUNwL1MAv4APvwxjS4gs
+	 yBjmoOTG1tb9pmFbBrbpF+3cdE4yQiSOCdPWnYQr027RTqovH7kZVDgHHcOJPfiodu
+	 juMmXw2VwYZUQ==
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5c10dc41270so2476603e87.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 18:15:53 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErF/zjK+xrdeOAiBuza3e3tyO4CO6ButOQcluVBYfmCErR0s68JkngrkOY8vCK2/e10MjHiNub5ArhHHomP5@vger.kernel.org
+X-Gm-Message-State: APuU4Z8lq7nIc+xRgfR8psyOuSIYDwJFX1Ewrk87ycGJiR8+OTEWQukw
+	EGCdJYSIGeYaaaDGlvGzVlqGH3SgRuXg/fJqnZVULwQXYMG2wfo0pwPF7eXWkKIKeUiNjDKYIcx
+	GuToJKEx0HPz/iCawaQ7lByP30BqCfZg=
+X-Received: by 2002:a2e:be8d:0:b0:3ac:429f:6d93 with SMTP id
+ 38308e7fff4ca-3ae126c230bmr1415561fa.29.1794363351836; Tue, 10 Nov 2026
+ 18:15:51 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -74,54 +59,98 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/7] media: qcom: camss: Add support for SM8150
-To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@linaro.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Andi Shyti <andi.shyti@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linux-phy@lists.infradead.org
-References: <20261106-sm8150-v7.4-rc1-camss-v3-0-0103e8a0bbcd@andrewgigena.dev>
- <20261106-sm8150-v7.4-rc1-camss-v3-5-0103e8a0bbcd@andrewgigena.dev>
- <160aa94c-c726-4cfe-b8cc-b1f974b32f13@linaro.org>
-Content-Language: en-US
-From: Andrew Gigena <mail@andrewgigena.dev>
-In-Reply-To: <160aa94c-c726-4cfe-b8cc-b1f974b32f13@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <cover.1794347059.git.u.kleine-koenig@baylibre.com> <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+Reply-To: wens@kernel.org
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Wed, 11 Nov 2026 11:15:39 +0900
+X-Gmail-Original-Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
+X-Gm-Features: AclHuK-PEU8_Ju7uMZ7QoR2Wn0i8AsTrMLtFibJe7hATAjuodc-7gCHep5Ph93s
+Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
+Subject: Re: [PATCH v4 19/20] mfd: Unify style of of_device_id arrays
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
+	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
+	Ben Bright <ben.bright@cirrus.com>, David Rhodes <david.rhodes@cirrus.com>, 
+	Richard Fitzgerald <rf@opensource.cirrus.com>, 
+	Support Opensource <support.opensource@diasemi.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Tim Harvey <tharvey@gateworks.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Sven Peter <sven@kernel.org>, 
+	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, Chanwoo Choi <cw00.choi@samsung.com>, 
+	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	Saravanan Sekar <sravanhome@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
+	Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade <andreas@kemnade.info>, 
+	Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, 
+	Tony Lindgren <tony@atomide.com>, Matti Vaittinen <mazziesaccount@gmail.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	patches@opensource.cirrus.com, linux-rpi-kernel@lists.infradead.org, 
+	linux-renesas-soc@vger.kernel.org, linux-sound@vger.kernel.org, 
+	linux-samsung-soc@vger.kernel.org, linux-amlogic@lists.infradead.org, 
+	asahi@lists.linux.dev, linux-mediatek@lists.infradead.org, 
+	imx@lists.linux.dev, linux-omap@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-sunxi@lists.linux.dev, linux-rockchip@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Vladimir,
-
-> Drop csiphy_res_sm8150[], and pull this:
+On Wed, Nov 11, 2026 at 6:56=E2=80=AFAM Uwe Kleine-K=C3=B6nig (The Capable =
+Hub)
+<u.kleine-koenig@baylibre.com> wrote:
 >
-> * https://lore.kernel.org/all/20261026224957.1115370-4-vz@kernel.org/
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
+>
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
+>
+> Adapt the offenders accordingly.
+>
+> Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MA=
+X77759
+> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas
+> Reviewed-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com> # =
+max7360
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
+> ---
+>  drivers/mfd/88pm860x-core.c    |  4 ++--
+>  drivers/mfd/ab8500-sysctrl.c   |  4 ++--
+>  drivers/mfd/ac100.c            |  2 +-
+>  drivers/mfd/act8945a.c         |  4 ++--
+>  drivers/mfd/altera-a10sr.c     |  2 +-
+>  drivers/mfd/altera-sysmgr.c    |  2 +-
+>  drivers/mfd/arizona-i2c.c      |  2 +-
+>  drivers/mfd/arizona-spi.c      |  2 +-
+>  drivers/mfd/as3711.c           |  4 ++--
+>  drivers/mfd/as3722.c           |  4 ++--
+>  drivers/mfd/atmel-hlcdc.c      |  2 +-
+>  drivers/mfd/atmel-smc.c        |  2 +-
 
-Done in v4: csiphy_res_sm8150[] is gone and sm8150_resources.csiphy_res
-is NULL, so SM8150 goes through the PHY-API path and clocks, regulators,
-registers and interrupts are owned by the dedicated CSI2 PHY driver.
 
-I folded your change into this patch instead of carrying it as a
-separate commit, and credited you with
+>  drivers/mfd/axp20x-i2c.c       |  2 +-
+>  drivers/mfd/axp20x-rsb.c       |  2 +-
 
-  Co-developed-by: Vladimir Zapolskiy <vz@kernel.org>
-  Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
-
-ahead of my own Signed-off-by, plus a line in the changelog saying the
-fallback comes from your patch. If you would rather have it as a
-separate commit, or want the attribution worded differently, tell me and
-I will adjust before resending. I am not enterely sure if this is the
-correct way to cherry-pick commits since this is my first kernel contribution.
-
-
-Best regards,
-Andrew
+Acked-by: Chen-Yu Tsai <wens@kernel.org> # axp20x
