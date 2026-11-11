@@ -1,124 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794382322;
-	b=CZ+uqz9bIITpuQ+aPlD1eyvhhptJ53zDg3EmxI/HNA9bUbB60YLMmGGw2OAzzy2pJBkC
-	 UIsSW4TGvYKpzbl+1x6ChBz1Cdy9fHKmcedEZCJgv+E2UxgGRyKYPF7+vb/uf9AvMEPzi
-	 rGnWBkThe3btgX1dhrzwG1hvamNVtwBJdcB1L1HIWmDEmvHfd90ecrvQGrvZVPDO2LdG5
-	 Sk+EWLNcDFDIy1+0Oy5tFHY/fEaEmHjsloEphUcpAYA89U+WQqVAwEb2am/2kTjRnwc9i
-	 NAlKCFT07pXwyjJtAKNPeIkz2Nl1nwfjjgzh025uvlArTz9MNhnJeddZXWNxqG/O6oQ==
+	t=1794383425;
+	b=NQXqHiNCmdz95QjsacBewGtYrFZPyNqwIxeXq3I2RsN0lmIYP4mAv22686CJEb6kbC2S
+	 CokwMyX+0WlYxqOA97OkeG5vYgMnSfijub1ekPfq03wcaBS3fCSDqSyJP/w5yhRifpJ/g
+	 uphWVbO7xNh3hWtdXr5N3FKiP/FF7qh4j696eDmGcZp5vGhmuYCMmxbXAUuQSYmXwleW5
+	 ak9ItDbL0g1AvwC+Biak8karruDEL22iJ3ybZ0aJuCCkdvwC3WwjLERflVfCAhY5oBMtC
+	 0XAD7XS/rNk1AgfzTcgMZVtU/iPNqiQnLd46SawFDsCVsYS5aPBA7evhDxse46H8fvA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794382322;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=xkbL40mO2PVdKWCtdMvkpOt86tMvFojdjVZxYUtw++w=;
-	b=tJo0B3VacwZiiyEshiffz5IzeV63huWWkrkUS7zVyqmABHZeTU1Wthgt+mOIxQ+vgDe3
-	 BucY4RL+2vcrfpKLGHK0wCuPMv7pQsOpFV+ZLHJWQfNU+frXTcMtrYpTJI158MdptSp+V
-	 RR1YbO1THhoiQnYg2pwGalvu9d9N9FLWztys/YkYNkK/R3Bxglm21/5vUowDdXmgMa9Q3
-	 tCSj31RUn+H4uGBHDcg6XiuHV072PV9w7RUv50QZaqw0/YUeJrGvNr49S7nHOIDlNMroL
-	 tG8ynrMDABfGZ6uDK01ve45d7d9vSqNXuhln58nIIOXOttFZJIcx+5zkP2UfFMqNtSw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794383425;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=uq+L6cPLS8Wa01hR151F3a5DAKKg4V5vijaXWb/aJ1k=;
+	b=svPU3C00oQSIk+xiDIG0pcCwH9BumybWTOjJ7TZYhsly3LY0Z3cBVC3zL5sHNB9RZVXM
+	 YdAbEBq13Z2SMsbE6rU0z9PoClO1s+JRk6QBjGacB/iew4JZsXVP9LT2m3qTiQpBFkwgr
+	 UnouzJYw0ahzIrRQj+DO97ATBwtLYHMrplZXiqEzxGInFvBnco0WqHaWw9XhauB0sD8g4
+	 0ViEACTIHS771I9PakjgoOKiqFHl7C1ElSxnP53xMbtd2LXamdmnxAlXrmLenp8D4Hd5M
+	 1NMrZGqPV1U4AU5PBxzw4vgZ8Z2wfaK2KD3OLhVGryWD9zDCCJBhvHdQEBulENSNJnQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HXiCbl68;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CzGeL5mW;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="F/rCe1Q8";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14CF360A2614
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 07:32:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 14CF360A2614
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E564606A31C;
+	Wed, 11 Nov 2026 07:50:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HXiCbl68;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CzGeL5mW
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AB5KHSM1369005
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 07:32:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=xkbL40mO2PV
-	dKWCtdMvkpOt86tMvFojdjVZxYUtw++w=; b=HXiCbl68r2cbTzzP531CX1UP2ce
-	EOcQf3SPT3T+2aYIWZiedPF/JwTSa92Nn/dWicRfQV6hNtBhC/x360/eN2TBBwB7
-	F71R5a/mPRnQjkaTv1vqIps0of/Vi+eUwbcwI60F8r/j0kgrst2XiqbV0/VR7xYG
-	vTswdWkaldLG39bBr9H30YkEXwDgcb0XUaJGiXZN0llYbf9QBIPXcrVcd9irUnbj
-	47MNXlc2do/ZKq7AzkJ2PpU/H8d1yTo+9hxOLqu2QiY2dxHPyckhkOpEHGo9hbTy
-	1zw5RN2yLyUkl8pl06LOUAFxEsp0ceJTi2bv3PTEwxGcNmwwuCchHLOOtjw==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvcpehk78-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 07:32:01 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1b25d977b91so3935208c88.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 23:32:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794382320; x=1794987120; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xkbL40mO2PVdKWCtdMvkpOt86tMvFojdjVZxYUtw++w=;
-        b=CzGeL5mWZUgZYW6c/UkVCbEmEIGcHweMdVp/9NH7SBmhW93x6a83ZbLj71S2/CCikG
-         zdnDsuE+CpetGEa1/vrpawJUJX004ONOCLD3q4CG2os4EUymWMMUOVHhrJr25IB/nhEN
-         dB6Cv7Sgq5UbFprSQfizQeewTl8p9s/xK1wjLPJgfV1Qr4gF6sTuyUdvE292uDMXRowU
-         nMTNViJYP+OQxUDo2Ro1DQEhhhpVIg+olaVIzUZ9ZkAa59+pw76QNFMGYcw2L+6Si9by
-         uhCuJMVs40oQbZwBbrH/8rI1qDuRASwLXBWokP8R6GWAod782a1xvDBFSKz+t1Nqc6iN
-         1e/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794382320; x=1794987120;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xkbL40mO2PVdKWCtdMvkpOt86tMvFojdjVZxYUtw++w=;
-        b=fzyNj2JeBZXC2MpOk2zInOn5Rkb6Lkr/W+j+h9fYHttkFpjmnWEhknA5wL7x4erjD1
-         RAk6mYgOz8Si+1oSVT7/fMuVdwesqrjLGWG1dnWxzugt+RD9Feb5Kv7Q3CTN8bUicR7o
-         nJ0V0NehW1ZWIC0T2MO8+rrpMApqGC3qsO9oz7uBvs2FXGMDoknH5Rn4BMw8LrYrc+le
-         oFAbomS7EcHPSAIMQ2XWn+Gb1vl0r7I2lzp8WV1zL/PcuU0rRDTYsxTS8Idc5f7JS5M1
-         kOyc0R5MWCJTd86claXANaxmucfS5AUpY6mDnfN9CDQTcXmRKTuHB90br/YW6be0H1bD
-         U77Q==
-X-Forwarded-Encrypted: i=1; AL+hErH3ebdaqPo2LuBnV6/U/yk6r8gtHIwZAuPBc8p6vEx/W+EIrtbWi/6zyIVsxaHWn3mpgMFmnr8kB74+Pmn/@vger.kernel.org
-X-Gm-Message-State: APuU4Z+wBbPZygTEfVDLNdjFBrhC9x49/awqqVGpDDfkFNp++MKEtttR
-	beXVIIarQ6ctcQZLMRT7EmWbLpzaQozFEz87DMBSMR+ocLvoyuceHwdWztkjgZE6hJBhLBn8pIR
-	kasMG03930cMg9LHc4TyUd3FOU4+R0ZG3WZMiNdWfc4dhLZUCcnyp6jhX+iwTx0RJLBZP
-X-Gm-Gg: AYBFou3lKVEpOb3Sy+3G62qDNJR7VOfkLQE7u93IxuUv1PfKXAxCSLecEeqT+Zy6zXZ
-	lffpPnkryATi/UCQoYVInKAvmzUpZJR7nSUZZXjQRhs9DTFOrz42A/fQX5E74vfN+muI70erZm7
-	2T3luQWMs8i6WCIMXAVMZbvhE59RzT3ptOvFKrYDy34dyrR0J6VRTNq0f+n5hloeoaYXVQL1s5h
-	yH7CdP75goqceebjOkWjDvxhcBCL7JakIlSH3R6XIXhi1hfB4eZCIuv3EOa01Hl2FFJpsk44ZDn
-	Rqr6/6yV1SkZ4N0HMv9GyFiuUFce+iexHM8ZrkixrDGS1xJsmEWdVTbNIPrfI4vzLjaIAMRncr0
-	B4PWmvHCoahITOFtavIZHUvEtSK8QE1jzibskQkyVnUEpZnSttFvGUAAqdvNe5IXZC7Me/bo4E5
-	jydgyYyQWNmEWxAvM+woOY/MgCoVL6/g/n
-X-Received: by 2002:a05:701a:815a:20b0:1a0:b8f5:872d with SMTP id a92af1059eb24-1b3c023c46amr1746362c88.4.1794382319873;
-        Tue, 10 Nov 2026 23:31:59 -0800 (PST)
-X-Received: by 2002:a05:701a:815a:20b0:1a0:b8f5:872d with SMTP id a92af1059eb24-1b3c023c46amr1746312c88.4.1794382318869;
-        Tue, 10 Nov 2026 23:31:58 -0800 (PST)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5b2fc09sm27220027c88.10.2026.11.10.23.31.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 23:31:58 -0800 (PST)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>, devicetree@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v3 5/5] arm64: dts: qcom: nord-rrd: Add sound support
-Date: Wed, 11 Nov 2026 15:31:21 +0800
-Message-ID: <20261111073121.3707030-6-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261111073121.3707030-1-shengchao.guo@oss.qualcomm.com>
-References: <20261111073121.3707030-1-shengchao.guo@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F/rCe1Q8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B8821F00A05;
+	Wed, 11 Nov 2026 07:50:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794383425;
+	bh=uq+L6cPLS8Wa01hR151F3a5DAKKg4V5vijaXWb/aJ1k=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=F/rCe1Q8/Z1SPdFpdpBTaG7s0720UBBSMpuVV/Yc400nPp+MT5MidrNAZqtoeSDeI
+	 FufHNaxvWqihCkZqqLkqNDEYOl/ftFdjOm8+RhKGLLn7PwKlyWcS7IS4vXww+efTjM
+	 w4NVEElC8AQQ5+hg7f96cryHiRLSqEui2DIgx155u8v21fhnGwF1OGj+ycGgYVagSO
+	 9f/HPcQZ5hGyQvPL12UzkZ0CUezLPJChWkKhXQSf1fmYmsW5570qB0oY3g8Vz9Mm4o
+	 YC7rADKquBZOpACW3GA/btlG0WgVJLFQ33ezA7pnJGkB6GCkNEJnHv9+6Qwh98/Qjk
+	 zwgnyqhkmL7Sw==
+Message-ID: <537d8cc2-7740-4e51-a4aa-8adf03322480@kernel.org>
+Date: Wed, 11 Nov 2026 08:50:19 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,230 +51,95 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDAyOSBTYWx0ZWRfX+hPh2h6+k3zN
- yAccfOHag8wlcMZYpKRIvsR6HYRLHaDZNJIQjdG3obk51NggoAABAQAbhV15n74tTvPN3iSs8fA
- dQfOjY7F7BNHY3BDMN1IGZVoKEoX8MMLeEDkxQFFVuIoLD8I+4fxDyBhnkAfT4C3sC4mXAF0wtc
- KvW/e0dArTTV5sXxYMELTrNsnObxILUhq+ltlC1F1/acpJpkN1pRQiJifcioMJEnKSdxHnQPppF
- Tfmysscx39cVtjmg4XOXvAVSrZ+6ovHLd26LPvES1hwCA9H8AJB9jWaH4BPhIk6YtP/nj01q06i
- GLmwN7n5HSQGuUw8cw0uGXxvqRSF77jm+n9FOsIf1YeikJwvvOkJCVZLXHl8egQZo+nmjzaep3O
- /QCpRYRHQSnDIl/esGEWfBf9GAUjmSN7kch6ZjZnryqeIF1AfJpn5SJQ5vJdz9ZMWGUIOL4s2am
- vvvpXhgPJzz66mv2QJg==
-X-Proofpoint-ORIG-GUID: fKzDlyaEDaZOHFnzgNgHPSLMMJLASn_j
-X-Proofpoint-GUID: fKzDlyaEDaZOHFnzgNgHPSLMMJLASn_j
-X-Authority-Analysis: v=2.4 cv=RfAFmFtv c=1 sm=1 tr=0 ts=6af419f1 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=ZlzAYip4OQkxlMcad5cA:9 a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDAyOSBTYWx0ZWRfX7JYaCo7Qw9OY
- 3fJZ6jPuMaaS77ww5ssj3aMJrpTq/JCADr6FLb0Tkv035luD1lurjfEHaRuKcTEhGhs80qtzmwJ
- S6vRcMDktH+wLIGtl86D+xxiLNE8BtY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-11_02,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 malwarescore=0 spamscore=0 adultscore=0
- clxscore=1015 bulkscore=0 lowpriorityscore=0 suspectscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611110029
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] dt-bindings: crypto: ice: Document sm8150 inline
+ crypto engine
+To: Andrew Gigena <mail@andrewgigena.dev>
+Cc: Abel Vesa <abelvesa@kernel.org>, Herbert Xu
+ <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>,
+ Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>,
+ Bjorn Andersson <andersson@kernel.org>, Andy Gross <agross@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-crypto@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org
+References: <20261104-sm8150-ice-rfc-v2-0-d697bbce0278@andrewgigena.dev>
+ <20261104-sm8150-ice-rfc-v2-1-d697bbce0278@andrewgigena.dev>
+ <20261106-offbeat-hawk-of-purring-50a8aa@quoll>
+ <fb4d03b3-eb35-4aeb-baa1-f4df54653192@andrewgigena.dev>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <fb4d03b3-eb35-4aeb-baa1-f4df54653192@andrewgigena.dev>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Enable audio on the nord-rrd board. Add a soundcard node using
-the qcom,nord-sndcard compatible.
+On 11/11/2026 05:23, Andrew Gigena wrote:
+>> This part should be a separate commit.
+> 
+> I splitted it into two commits in v3:
+> 1. Add qcom,sm8150-inline-crypto-engine compatible.
+> 2. Move qcom,sm8150-ufshc to the standalone-ICE UFS binding.
+> 
 
-Add PCM1681/ADAU1979 codec nodes on I2C18, with the PCM1681 system
-clock supplied via MCLK0.
+No clue what's this about, you completely cut context.
 
-Describe DAC_ENABLE as the enable of two regulator-fixed supplies
-(3.3V and 5V load switches) feeding the PCM1681, and the two MAX9892
-click-and-pop suppressors as one simple-audio-amplifier on
-CLICK_POP_MUTE_N, routed after VOUT1..4, so DAPM controls the mute.
+>> And what about eight clock? All existing DTS will report warning? I
+>> don't quite get the need of this move.
+> 
+> After the move, SM8150 UFS no longer provides the ICE register region or
+> ice_core_clk; those live in the standalone ICE node. The only in-tree
+> user of qcom,sm8150-ufshc is arch/arm64/boot/dts/qcom/sm8150.dtsi, which
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/nord-rrd.dts | 153 ++++++++++++++++++++++++++
- 1 file changed, 153 insertions(+)
+So you introduce the warning at this point?
 
-diff --git a/arch/arm64/boot/dts/qcom/nord-rrd.dts b/arch/arm64/boot/dts/qcom/nord-rrd.dts
-index 47978df0af92..b0abee05a8ba 100644
---- a/arch/arm64/boot/dts/qcom/nord-rrd.dts
-+++ b/arch/arm64/boot/dts/qcom/nord-rrd.dts
-@@ -7,6 +7,7 @@
- 
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include <dt-bindings/sound/qcom,q6afe.h>
- 
- #include "nord-embedded.dtsi"
- #include "pmau0102-nord.dtsi"
-@@ -53,6 +54,106 @@ bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
- 			clock-div = <2>;
- 		};
- 	};
-+
-+	/*
-+	 * MAX9892 click-and-pop suppressors on the PCM1681 line outputs. Both
-+	 * parts are muted by a single CLICK_POP_MUTE_N line, so describe them
-+	 * as one amplifier.
-+	 */
-+	lineout_amp: amplifier {
-+		compatible = "simple-audio-amplifier";
-+		sound-name-prefix = "LineOut";
-+		enable-gpios = <&tlmm 42 GPIO_ACTIVE_HIGH>;
-+		VCC-supply = <&vreg_per_3p3>;
-+	};
-+
-+	sound {
-+		compatible = "qcom,nord-sndcard";
-+		model = "NORD-RRD";
-+
-+		aux-devs = <&lineout_amp>;
-+		audio-routing = "LineOut INL", "VOUT1",
-+				"LineOut INR", "VOUT2",
-+				"LineOut INL", "VOUT3",
-+				"LineOut INR", "VOUT4";
-+
-+		pinctrl-0 = <&aud_intfc8_mi2s_active>;
-+		pinctrl-names = "default";
-+
-+		aud-intfc8-tdm-playback-dai-link {
-+			link-name = "PCM1681 Playback";
-+
-+			codec {
-+				dai-tdm-slot-num = <8>;
-+				dai-tdm-slot-width = <32>;
-+				dai-tdm-slot-rx-mask = <1 1 1 1>;
-+				sound-dai = <&pcm1681>;
-+			};
-+
-+			cpu {
-+				dai-tdm-slot-num = <8>;
-+				dai-tdm-slot-width = <32>;
-+				dai-tdm-slot-tx-mask = <1 1 1 1>;
-+				sound-dai = <&q6apmbedai AIF_TDM_RX_8>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+
-+		aud-intfc8-tdm-capture-dai-link {
-+			link-name = "ADAU1979 Capture";
-+
-+			codec {
-+				dai-tdm-slot-num = <8>;
-+				dai-tdm-slot-width = <32>;
-+				dai-tdm-slot-rx-mask = <1 1 1 1>;
-+				sound-dai = <&adau1979>;
-+			};
-+
-+			cpu {
-+				dai-tdm-slot-num = <8>;
-+				dai-tdm-slot-width = <32>;
-+				dai-tdm-slot-rx-mask = <1 1 1 1>;
-+				sound-dai = <&q6apmbedai AIF_TDM_TX_8>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+	};
-+
-+	/*
-+	 * DAC_ENABLE gates two load switches feeding the PCM1681, one for the
-+	 * analog and one for the digital supply.
-+	 */
-+	vreg_3p3_dac: regulator-3p3-dac {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_3p3_dac";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&tlmm 41 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vreg_5p0_dac: regulator-5p0-dac {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_5p0_dac";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		gpio = <&tlmm 41 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vreg_per_3p3: regulator-per-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_per_3p3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
- };
- 
- &apps_rsc {
-@@ -377,6 +478,58 @@ rtc@32 {
- 	};
- };
- 
-+&i2c18 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	/* ADI ADAU1979 - 4-channel 24-bit ADC */
-+	adau1979: adau1979@31 {
-+		compatible = "adi,adau1979";
-+		reg = <0x31>;
-+
-+		AVDD-supply = <&vreg_per_3p3>;
-+		#sound-dai-cells = <0>;
-+	};
-+
-+	/* PCM1681 DAC */
-+	pcm1681: pcm1681@4c {
-+		compatible = "ti,pcm1681";
-+		reg = <0x4c>;
-+
-+		pinctrl-0 = <&aud_mclk0_mira_active>;
-+		pinctrl-names = "default";
-+
-+		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		clock-names = "sck";
-+		assigned-clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		assigned-clock-rates = <12288000>;
-+
-+		VCC1-supply = <&vreg_5p0_dac>;
-+		VCC2-supply = <&vreg_5p0_dac>;
-+		VDD-supply = <&vreg_3p3_dac>;
-+
-+		#sound-dai-cells = <0>;
-+	};
-+};
-+
-+&q6apmbedai {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	dai@195 {
-+		reg = <AIF_TDM_RX_8>;
-+		clocks = <&q6prmcc LPASS_CLK_ID_QAIF_IF8_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		clock-names = "bclk";
-+	};
-+
-+	dai@196 {
-+		reg = <AIF_TDM_TX_8>;
-+		clocks = <&q6prmcc LPASS_CLK_ID_QAIF_IF8_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		clock-names = "bclk";
-+	};
-+};
-+
- &qupv3_0 {
- 	firmware-name = "qcom/nord/qupv3fw.elf";
- 
--- 
-2.43.0
+> is converted in the DTS patch, so there are no leftover users of the
+> embedded-ICE binding for this compatible and no schema warnings.
 
+
+Best regards,
+Krzysztof
