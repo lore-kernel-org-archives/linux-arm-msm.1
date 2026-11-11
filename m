@@ -1,112 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794356303;
-	b=xRb422cb2vMJiBOLE8QPjwOqjXcL7zbkJuEZmogEkaO3a0b+6gbNLoJ6mDvBXbTc8g6r
-	 j07uJDMqMVQdwiqzj0ul4bawqwaAbmxon931njoqPAt7rkRikSZQ0b33bnIptSJSyI2gF
-	 IYZtLWqy5nacb/fEjRl7N3w5ggLBk/4GgjfnONJBLwmKfH9qdik6TwmBpF9rmudB63AJ6
-	 M5d7R//q2tQKq66A6NGRh65CGHJEYHi4DCgszePTC/osmU7MW/CzjjpHSEcfZkSbpZC/s
-	 3qxSMJ91OKTf3l6AxuRVLGZiS/LOOS6BVFUAae6uwgLW5xZ6xtqm9SFgsJNBEXNnydg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794356303;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=6aqu2IFFdeNENdG4DQ1etmGb5Bfv2x2eRN8Su2kV72g=;
-	b=h2ZUGVfiyfFkTZqB+Ic+bvbhVcevylBAkZtcL0/y2tNyZdEQ9Kz4Oetvx2NV/j0S91c5
-	 18mRCchOrXhsBoioRMBqc/VciE2bFDyi9aXTBz46IrzFOz52uFn/1A6IEt7QgMUNIq5Bj
-	 AWHGOF6JdBKCDyS/lI/v3Rf2MWg4ikp/6I4t/9qdNYY0cHGSQ4xU3HNYHCJzdiYFCoK/T
-	 ihjej8p7UGdW/nDHD2QjL3/nduxfErso40KXPo8c9ZN86SyfEr0l97IWiDpK40C9z/XUI
-	 Vv7GnUUePg/BXJ1R73GQpcPy8TgsPMQr9d+UHDGl3zAWMDYN3IJADykwE1YdDBtL7EA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=G5MlFlj4;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="Q/3xMZQN";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794359218;
+	b=0f8IXa+FZ8LTO1X6Urykus/LH9a+LsX48dTH9UWzuvAbVoxNkzS2OncdLAiQ3mXQFE1k
+	 4CF8thH/vvVDWJVINvogguGCHeiGmJojaLK4Xkx4V2oraP8Qj+DuKegfgwENj+v5x50Gk
+	 lA6nvPIsq3EBYFBzIefNQMZ/DzBLytwbeBzGb4KLRxV8zbsai8zSrZjIFR2R8hUz0l2be
+	 9e7SUWbUVBgB0AFqjVne0fAxghh+9zCfLCp/CYWoGUwHPKlx16dbR15eCwgb22rviFXsw
+	 CVr8ZCif/IC6VRBoVWL0dKuEXvo0Sjz8K9iJes85hg70sLM00On+d9YDpuDNiD/LPSQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794359218;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=jtmK1+bR8Vpcga/gdTbnHubufTCEtNPEJ3YD6hd7teM=;
+	b=HImIm0tUzF1EIgdCWlDzL9J5o2XW1+4d5SB7eQdfGOWFOIGNrz77HeC3S418m5PYWaQu
+	 DZ2pAdU5KN2cTg65QKNP/Hvimt7AIaAGzL8MFYRi8H0aBjguLk5FZfNiaZsEiMiUVexyF
+	 1cpWcWyZtuBRJr9PoaAAOse4Zq22ElB3S59wvIKfJ4JOJ059VBq45V+gk28Xl5SrOvzEf
+	 djhY61k4eewfJVo8ajHz0afptLVX1XaXRT6YSOeFJz4HRkjmCE7NlFyDa+M+PaJj8b2di
+	 Hb1hsHB23uAMQliFR+HNefEeIZ4VJwCCcPcpByJKu1oLHIrNBVbD9J2p3GGm7fOXmgg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XcugkCBo;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49310606A31C;
+	Wed, 11 Nov 2026 01:06:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XcugkCBo
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794359218;
+	b=tgtYKebY6S4+u06/g3RpoLckz1BT1Wlgn0P8EPt9Mon/6NEBTk7Z2fmXgRPnRrJT1Qg9
+	 f17kwFnQ2QWIRdIPjnjhKTs7l2tAx8X8iaht+4GYXLoyO7qkzVXSa9jD73XBLJhCOeIRy
+	 4LeF7nSf3djC/VaGcuuFc6nbZkGd4SfuWycUuIokeT3T9UMJUhZfSgHJq940EWCAT7zge
+	 TuJqj1mHKlHKzpBIlbaIg15xwwyApxnHdAeBRTUrqXzPwvjETlrxURB8phAPL17hUxfPr
+	 GcEH0QowWRdjfthwbFl5Oh+LRoH7npVrR4vGbMZ+T2/P9V0do0xT4BpsTXjvNZCRUlA==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794359218;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=jtmK1+bR8Vpcga/gdTbnHubufTCEtNPEJ3YD6hd7teM=;
+	b=Rr21Of+zcpczI2KQadRHHuqJ2kE3YRq1m7J2yV+bys6wUsc7JJS2gPLw0u49uPGN1r4i
+	 kvpzxNqIVSxswb8mqoGQLqVT0z0Q8n1noM4MLpvWKs3pKzuJEHwTuhyUD4j8n/LcIOTgi
+	 mX3PM+pRaNFmxkNzDKp7mpR+IyYGWr8ezrXZT307sQh2Zc9al20APFhAGE7TP18CHHvSJ
+	 okFDdD+J4yPabqGXZi7d0bM//fqfwlHecIDHZLGlf9PWWD1AEEWtui3gSx++4BSVWM56W
+	 H9VRt4zceIy3DVPZCDC/vwUw4MabPniPBT68fq3DHbGJcJ3b2vTrd+iv2B22jR4s8EA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78660606A327
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 00:18:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 78660606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=G5MlFlj4;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Q/3xMZQN
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AAMKdHL1113749
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 00:18:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6aqu2IFFdeNENdG4DQ1etmGb5Bfv2x2eRN8Su2kV72g=; b=G5MlFlj4VbgYpEP+
-	MYK/WuLm932XQcq8O8hkH3Kk1kZdwESUM/Rc8pjvkoIpRue68MUBnLdnf2zvsio6
-	bWfMCW8OHgUzNLbRMsr03ODBWHTWcyy3yeeypHFcjWO3vVoP6fx6u8tXBKnrZQx0
-	Ta0Qa9ZK1f08r4XWgqjA7Umqrp0HbCQoOF2uf7EUox/LsRVW04zDT5OnqMN0vu5T
-	f/tN81PZkqLffh00KCcVB91BDKyJKtYbJURGh+uY7wHD+LR0aGbgayZXHZs4wRht
-	oKEwhe2Gzu+nCIHIu3vQyTAfXEWzXxucCpEVgmLdbb1IZoCon2XrtD9YjXZJWuSc
-	4vU/oA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hv97c92yx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 00:18:19 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-36d1353fdcdso385410eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 16:18:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794356298; x=1794961098; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6aqu2IFFdeNENdG4DQ1etmGb5Bfv2x2eRN8Su2kV72g=;
-        b=Q/3xMZQN9pVnhUTOEI4OxhMtNh2FKZGcZMHWR10MKsR88GYDdcz3UnIGJ8wCLY/bNL
-         9kPTT+icZWstTyruVXL+yuO1G+n+2DrJ3jSKlUfH4wilo61vhiy6MGspJ0lg/KTvIrun
-         z84z0PqT8WZX2hyuKO3tOVHzyve1WVI1RdEF3hjGqnykW80snOusKp8ASmcb67k9ZNKd
-         5qJIQ1V1386GF8xt6VgA2hpAilglTuPbX9HnJzKHUQKUvRJnpRKlL02JZrE777oCGfRI
-         78ai+ZkPzB9f4iokiz8QDfboUr9Jf0lMSpscY6klrt8S5wkxZOWAqADpq6uoZw5rkFQt
-         hT2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794356298; x=1794961098;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6aqu2IFFdeNENdG4DQ1etmGb5Bfv2x2eRN8Su2kV72g=;
-        b=bsxSOHYuMx4HQ8uS8fWl0bpnJJpewGmRAkqGiZEoWM+0jDCjXTqZqCQBTXRJRE7UOp
-         Ee2kIo2NAfvoRrP0lB48nTgp37U1ejryfofZRIzSfWf51SdrucujTLm/fQtEYHxqx9CH
-         bk5dyMIKxLbrsSikUQ7IGyEEucVyPPpLHnQGe4tyZ3MXJlVasho7Mi6AHLE2L9QoECrx
-         XI+I1ZmpwaIWd0WTPj3gkw0F3zlV5s1SbpbU2aBaxTYILr+AtvFd6+zYOy2cEJFcTos4
-         hDlllOxasg6FoKenJgfowD78plTbDW72glFlbmlypzJuQ/YC/098VdPlW5uO93zJN2+N
-         d3gw==
-X-Forwarded-Encrypted: i=1; AL+hErEjlTmGSzJtvBi/r3QeraEwvUYkuDTNVWBjFnfOogcfU2paCykKsPDNdPdCssqXbaR/Za+OQhsQG77fGLkZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z9NTyx9DaPoSJMBtf8mh7XN/68+T3UymLt6mhUD5cJ3pkxbPjlT
-	0j7GbEJ6/12wOoqAKlhD5JlSCnmB0ABOHv4Z5oiAPpVutzgGTIVQnPJzYNmOJVM6hzGj6Lu6GBo
-	fQPiIBL5Hp8C4jplIiZgwJi+fFDI15nwzCebJVo1yJUOz0WHqBR8/Tilh6Vwhn7CbWru/
-X-Gm-Gg: AYBFou0skWQEx8WVNobXFY190z+XmUX0uKn9Wo0Dsz+jfy57KAMTsNmNRngs9CD4elm
-	I0Gf8Qa25JkQGzBfVFJoIVxdiC8+BbuKH11Lgu3+0s8BOakU5JOSB/MK7G4j90M+tDkVR6WK1mV
-	/KmThu4K/HexTQhSWaeCFnqbttKiQQmLqzrwPIK+qPYUwDNQH+UyXLewSf+pMdjq16zSzRXProF
-	EPaW1cS9hEbqQ1CkN6zUVkmxRsqDmxW79hzIxuxNLcLTR45eQUGIgmz7dIQ4wBXoHbEfRNQLnww
-	M1mlOn+gEW3bjRplyN4PeiBi1GS7sMWC0E9vfZCGSL1rJ8qHpfEIPPRPddKfxll8QNWFEUPMFKU
-	Sdo0DqyBT+UdUrlRfR+JDINOn8XOzv/Hl53ePQHjE4YNClCY8Xhn6ArU301mnylDfhXtqDqXEDd
-	aJWOS5+HgiCl2djOuGh6oHFOm7KY4zlLA=
-X-Received: by 2002:a05:701b:451b:10b0:187:eb7f:bb4 with SMTP id a92af1059eb24-1b3c03847b4mr702353c88.46.1794356298302;
-        Tue, 10 Nov 2026 16:18:18 -0800 (PST)
-X-Received: by 2002:a05:701b:451b:10b0:187:eb7f:bb4 with SMTP id a92af1059eb24-1b3c03847b4mr702319c88.46.1794356297427;
-        Tue, 10 Nov 2026 16:18:17 -0800 (PST)
-Received: from [10.71.181.181] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b3b5b4b90csm9414671c88.14.2026.11.10.16.18.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Nov 2026 16:18:17 -0800 (PST)
-Message-ID: <cd855aac-ceb5-4b11-803c-e3f4e4bbcd9b@oss.qualcomm.com>
-Date: Tue, 10 Nov 2026 16:18:16 -0800
+	by smtp.kernel.org (Postfix) with ESMTPS id 363D01F0089F;
+	Wed, 11 Nov 2026 01:06:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794359217;
+	bh=jtmK1+bR8Vpcga/gdTbnHubufTCEtNPEJ3YD6hd7teM=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=XcugkCBox/wXm7usJasRdokWSHYEY4g9uT610gzsl+E94KhgaaxDeOATg5ovM7sW2
+	 cjBEhWwGYydRDzWDqgtjoufriaoASfABmLxw80pkw33r/YnId/ymXW0wHm3XtMr9nb
+	 NaIFmFwlBZK14EhfKroFACmAWZRRxVmDOcMHYCSOur4Bh4OYkszhyW5/32qTZGkNfU
+	 OrFkL12sP0kUaX/lyYtEjmyCYK1UfPvcwqmcR4FR+YZQ2K9P34sNwXQvxJq7vE0SeN
+	 ekRIkPcjbvptLdl4oGDehcN4yQpWU2iJoRvZi/F5L1HJ5gRQR3RXhia7Nc27MEsFf8
+	 ZaBj1GqAzyc7A==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 9579148742;
+	Wed, 11 Nov 2026 01:06:56 +0000 (UTC)
+From: Haipeng Lin via B4 Relay <devnull+jimmie.lin.gmail.com@kernel.org>
+Date: Tue, 10 Nov 2026 20:06:30 -0500
+Subject: [PATCH RFC v2] bus: mhi: host: pci_generic: Add MBIM-mode config
+ for generic SDX65
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,204 +83,152 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] phy: qcom-mipi-csi2: Add support for single
- power-domain SoCs
-To: bod@kernel.org
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        gjorgji.rosikopulos@oss.qualcomm.com,
-        hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com,
-        jigarkumar.zala@oss.qualcomm.com, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261102213936.1251316-1-anusha.nandi@oss.qualcomm.com>
- <179406008633.650304.8875272498498712274.b4-reply@b4>
-Content-Language: en-US
-From: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
-In-Reply-To: <179406008633.650304.8875272498498712274.b4-reply@b4>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261110-mhi-sdx65-mbim-rfc-v2-1-f1d71a5ac9ab@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NTQrCMBSEr1Le2idJa9voShA8gFvpIn9tH5hGE
+ gmV0rsbcgCX3wzzzQbRBrIRLtUGwSaK5JcM9aECPctlskgmM9Ss7jjjHN1MGM3ategUOQyjRiG
+ 1UJKZvhcS8vAd7EhrkT7hcb/BkMOZ4seHbzlKvFT/nIkjR8HEWZ1M05hWXScn6XXU3sGw7/sPr
+ DEQQLkAAAA=
+X-Change-ID: 20261011-mhi-sdx65-mbim-rfc-8ac8ba0d778a
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, daleyo@gmail.com, 
+ Johan Hovold <johan@kernel.org>, Haipeng Lin <jimmie.lin@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794359216; l=4467;
+ i=jimmie.lin@gmail.com; s=20261011; h=from:subject:message-id;
+ bh=ZLVxxQwkggsrloBrxJyjFyMexniwKJn2AL6lIKjlQ4w=;
+ b=QboCyMkwfvriVeAw1+gALoE8intbzqfiWahZTM9uJq33pOwZ/IHc2Yt5cJW6tboFn5cL8/ey3
+ J/ycjjJzXIhAcJLA4TBrt4m78+WfpJzLBmsDfnmRpbyr/pvzebI9x+A
+X-Developer-Key: i=jimmie.lin@gmail.com; a=ed25519;
+ pk=3KDRF1RQ/9A7ZUVTdRVEZnVrGltdmq1bRocsOYeXezI=
+X-Endpoint-Received: by B4 Relay for jimmie.lin@gmail.com/20261011 with
+ auth_id=1164
+X-Original-From: Haipeng Lin <jimmie.lin@gmail.com>
+Reply-To: jimmie.lin@gmail.com
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDAwMCBTYWx0ZWRfXw2gTjEPZhDac
- FroSh8RjdWY5rKhLgG0538/j2LiDRWHiAVSiJ/jNXlZmWvUV7VIez8Y34vQp6h7lrzZ1PM0YevO
- NAqefaxZvHX4Fh5RVGzpl2uXj8iVDphsQ9jhG9RZW8q0q1wAMHVnhpTpRjFAhOWEcw7M3/TrZ5n
- unH300hmv+U/yG9Z1NRGvopBuJyFEjefvzemdE/JMJMqOk0CRtu50VsoCsGTwpgbIPzIXw0F1CP
- JzfI2JsRirqyxAqLkRQV3mGChYrDFbzGruFtADoj8HuQiuiybnBq5Sh1Tkx+n68CTHAq/UgI4rM
- 5Nus678+F+ZeTFXyiMev1iw3fgCPoSFihsMx28Zrm6B4/Ox2El6shHHKaU/Ho+9eiSYlwocF2MH
- h63Wl09sE0czMuLjs3XA4DjAI7tQr1pYGIDLMg2mlBmT5vHieDQoxoQ3WqabNnDoqwjfhmO9Xqr
- 2+7dp0KI7Zqnu6R6g1g==
-X-Authority-Analysis: v=2.4 cv=cJl1IVeN c=1 sm=1 tr=0 ts=6af3b44b cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=VYJ2NRu09T_4qfBsX9gA:9
- a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: 9R7m-sKMrEteM1N1Bqfj32IFUuKvTGWE
-X-Proofpoint-ORIG-GUID: 9R7m-sKMrEteM1N1Bqfj32IFUuKvTGWE
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDAwMCBTYWx0ZWRfX3MNcKlV6j0rl
- ExAqCIAXm06bLjf1hIP6enYXO3USfA8oktuZ43K0Y+KmTRVES1YtayGbAjyiUuXJOfUKbXNMZhx
- QFqHg+uoJLhD5MUfeldqi2Gq/mIqAWI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-10_07,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
- priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110000
 
-On 11/7/2026 6:01 AM, bod@kernel.org wrote:
-> On 2026-11-02 13:39 -0800, Anusha Arun Nandi wrote:
->> sa8775p, qcs8300 and sc7280 each list exactly one power-domain ("top")
->> on the CSI2 PHY node. For a device with a single power-domain phandle,
->> the generic platform-bus code (platform_probe() ->
->> dev_pm_domain_attach()) auto-attaches it via genpd_dev_pm_attach()
->> before the driver's own probe() runs. phy_qcom_mipi_csi2_probe() then
->> unconditionally calls devm_pm_domain_attach_list(), which fails with
->> -EEXIST because dev->pm_domain is already set, and the driver treats
->> that as fatal:
->>
->>   1. qcom-mipi-csi2-phy ace6000.phy: error -EEXIST: Failed to attach
->>   power-domain list
->>   2. qcom-mipi-csi2-phy ace6000.phy: probe with driver qcom-mipi-csi2-phy
->>   failed with error -17
->>
->> x1e80100 is unaffected: it lists three power-domains, so the generic
->> code does not auto-attach any of them (auto-attach only applies to
->> single-power-domain devices); the driver's explicit attach is the
->> only one that runs.
->>
->> For the single power-domain case, call dev_pm_domain_attach() instead
->> of devm_pm_domain_attach_list(): it returns early when dev->pm_domain
->> is already set, so csi2phy->pd_list is left NULL rather than built up
->> by hand. The three call sites that walk pd_list for genpd
->> performance-state scaling now guard against a NULL pd_list, which is
->> harmless since scaling is unused (scaled = false) on every SoC that has
->> a single "top" domain.
->>
->> devm_pm_domain_attach_list() returns the number of attached
->> power-domains on success, so a bare "ret < 0" check in probe() is not
->> enough to catch the case where it succeeds without actually attaching
->> any domains. phy_qcom_mipi_csi2_attach_pm_domains() now also checks for
->> that case directly and reports -ENODEV, keeping probe()'s own check
->> unchanged.
->>
->> Reviewed-by: Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>
->> Signed-off-by: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
->> ---
->>  .../phy/qualcomm/phy-qcom-mipi-csi2-core.c    | 25 +++++++++++--------
->>  1 file changed, 15 insertions(+), 10 deletions(-)
->>
->> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
->> index c0a4fa20eaf0..269232499fca 100644
->> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
->> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
->> @@ -43,7 +43,7 @@ phy_qcom_mipi_csi2_set_clock_rates(struct mipi_csi2phy_device *csi2phy,
->>  	}
->>  
->>  	pstate = 0;
->> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
->> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->>  		unsigned int perf;
->>  
->>  		if (!csi2phy->soc_cfg->genpds[i].scaled)
->> @@ -174,7 +174,7 @@ static int phy_qcom_mipi_csi2_power_on(struct phy *phy)
->>  unset_rate:
->>  	dev_pm_opp_set_rate(csi2phy->dev, 0);
->>  
->> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
->> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->>  		if (!csi2phy->soc_cfg->genpds[i].scaled)
->>  			continue;
->>  
->> @@ -204,7 +204,7 @@ static int phy_qcom_mipi_csi2_power_off(struct phy *phy)
->>  
->>  	dev_pm_opp_set_rate(csi2phy->dev, 0);
->>  
->> -	for (i = 0; i < csi2phy->pd_list->num_pds; i++) {
->> +	for (i = 0; csi2phy->pd_list && i < csi2phy->pd_list->num_pds; i++) {
->>  		if (!csi2phy->soc_cfg->genpds[i].scaled)
->>  			continue;
->>  
->> @@ -231,7 +231,11 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
->>  {
->>  	struct dev_pm_domain_attach_data pd_data = { 0 };
->>  	const char **pd_names;
->> -	int i;
->> +	int i, ret;
->> +
->> +	/* Single power-domain devices are already attached by the bus core. */
->> +	if (csi2phy->soc_cfg->num_genpds == 1)
->> +		return dev_pm_domain_attach(csi2phy->dev, 0);
->>  
->>  	pd_names = devm_kzalloc(csi2phy->dev,
->>  				sizeof(char *) * csi2phy->soc_cfg->num_genpds,
->> @@ -245,8 +249,12 @@ static int phy_qcom_mipi_csi2_attach_pm_domains(struct mipi_csi2phy_device *csi2
->>  	pd_data.pd_names = pd_names;
->>  	pd_data.num_pd_names = csi2phy->soc_cfg->num_genpds;
->>  
->> -	return devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
->> -					  &csi2phy->pd_list);
->> +	ret = devm_pm_domain_attach_list(csi2phy->dev, &pd_data,
->> +					 &csi2phy->pd_list);
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	return 0;
->>  }
->>  
->>  static int phy_qcom_mipi_csi2_parse_routing(struct mipi_csi2phy_device *csi2phy)
->> @@ -369,11 +377,8 @@ static int phy_qcom_mipi_csi2_probe(struct platform_device *pdev)
->>  		return ret;
->>  
->>  	ret = phy_qcom_mipi_csi2_attach_pm_domains(csi2phy);
->> -	if (ret < 0 || csi2phy->pd_list == NULL) {
->> -		if (ret == 0)
->> -			ret = -ENODEV;
->> +	if (ret < 0)
-> 
-> I thought you said you were going to fix this ?
-> 
-> Once done you may add
-> 
-> 
-> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> 
-> But not until ;)
+From: Haipeng Lin <jimmie.lin@gmail.com>
 
-I went back and took a closer look at this than I did when I replied
-with "Applied" earlier, and I now think I may have agreed a bit too quickly.
+The Surface Pro 11 5G carries an SDX65 that enumerates with Qualcomm's
+generic IDs (17cb:0308, subsystem 17cb:0308) but runs the MBIM-mode
+firmware it ships with for Windows.
 
-Looking at the actual implementation of dev_pm_domain_attach_list(), it
-appears to have only three possible outcomes:
+Control is MBIM only (the QMI channel never answers), and data on
+channels 100/101 is framed as MBIM NTBs: the modem reports a WDA data
+format of raw IP with MBIM aggregation, up to 32 KiB downlink.
 
-1. A negative errno on any failure path (-ENOMEM, -EEXIST, or a failure
-from dev_pm_domain_attach_by_name() propagated via err_attach/err_link).
-2. A positive return value equal to num_pds on success. In that case
-*list = pds is assigned in the same success path that returns num_pds,
-so a non-NULL pd_list and a positive return always occur together.
-3. 0, but only from two early-return cases before *list is ever touched:
- a. if (!np) return 0;
- b. if (num_pds <= 0) return 0;
+The generic qcom-sdx65m entry names channels 100/101 "IP_HW0", which
+binds mhi_net. mhi_net expects raw IP, so no data session can work.
+The MBIM-mode modules in this driver name them "IP_HW0_MBIM" instead
+which binds mhi_wwan_mbim.
 
-As far as I can tell, neither of those 0 return paths is reachable here.
+Boards with a Qualcomm-ID modem in MBIM mode have so far been told
+apart by subsystem ID, like the SC8280XP CRD's SDX55 (17cb:010c).
+This modem carries the generic subsystem ID, so select an MBIM
+configuration by machine compatible instead.
 
-The !np case doesn't seem applicable because this driver only supports
-DT systems through its of_match_table; there is no ACPI path, so
-dev->of_node should be present when probe() runs.
+Like the SC8280XP CRD entry, reuse the Foxconn SDX55 channel config
+which works with this firmware. The MRU is 32 KiB to match the
+modem's downlink aggregation size.
 
-Likewise, num_pds <= 0 doesn't appear possible. We only enter this
-branch when num_genpds != 1, and num_genpds comes from the SoC's static
-soc_cfg data (for example, x1e80100 uses 3). It isn't runtime-controlled
-and isn't expected to be zero by construction.
+Tested on a Surface Pro 11 5G (Surface_Pro_with_5G_11th_Edition_2077,
+modem firmware 251216-DE-dc49bb9-00197) on a v7.2.11-based kernel:
+ModemManager registers the modem on wwan0mbim0, uses wwan0 for data and
+wwan0at0 for AT commands, and connects over LTE and 5G NR.
 
-Given those constraints, ret < 0 and pd_list == NULL seem to collapse to
-the same condition at this call site. That's what led me to revisit my
-earlier agreement: I no longer see a path where the NULL check provides
-additional protection beyond the return-value check. To me, this looks
-more like dead code than a safety net, although I'm happy to hear if
-there's a scenario I've overlooked.
+Assisted-by: LLM
+Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
+---
+Hi Mani and Jeff,
+
+A follow-up to the RFC I sent last month (linked below). 
+
+I tested the Foxconn SDX55 channel configuration on this modem and it
+works, so v2 reuses it like the SC8280XP CRD entry does, and only the
+selection is new. Hope this makes the patch clearer.
+
+I would appreciate comments on whether matching the machine compatible
+in probe is the acceptable approach, or if you would prefer a property
+on the PCIe endpoint's DT node (although that would be a bigger patch)
+
+Thanks.
+---
+Changes in v2:
+- Reuse modem_foxconn_sdx55_config instead of adding a channel table.
+  This adds the DUN channel (tested: answers AT commands) and drops
+  IPCR which is unused by the Surface Pro 11.
+- Link to v1: https://lore.kernel.org/r/20261011-mhi-sdx65-mbim-rfc-v1-1-8089b4d33d5b@gmail.com
+---
+ drivers/bus/mhi/host/pci_generic.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
+index 7193a384cca4..29b275572603 100644
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -12,6 +12,7 @@
+ #include <linux/device.h>
+ #include <linux/mhi.h>
+ #include <linux/module.h>
++#include <linux/of.h>
+ #include <linux/pci.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/timer.h>
+@@ -582,6 +583,34 @@ static const struct mhi_pci_dev_info mhi_foxconn_sdx55_info = {
+ 	.sideband_wake = false,
+ };
+ 
++/*
++ * Some machines have an SDX65 with the generic Qualcomm IDs
++ * (17cb:0308, subsystem 17cb:0308) running MBIM-mode firmware
++ * they ship with for Windows.
++ * The exact channel configuration is not known but the Foxconn SDX55
++ * configuration works with this firmware.
++ */
++static const struct mhi_pci_dev_info mhi_qcom_sdx65_mbim_info = {
++	.name = "qcom-sdx65m-mbim",
++	.fw = "qcom/sdx65m/xbl.elf",
++	.edl = "qcom/sdx65m/edl.mbn",
++	.edl_trigger = true,
++	.config = &modem_foxconn_sdx55_config,
++	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
++	.dma_data_width = 32,
++	.mru_default = 32768,
++	.sideband_wake = false,
++};
++
++/*
++ * The PCI IDs cannot tell these modems apart from QMI-mode modules,
++ * so match the machine instead.
++ */
++static const char *const mhi_qcom_sdx65_mbim_machines[] = {
++	"microsoft,denali",
++	NULL
++};
++
+ static const struct mhi_pci_dev_info mhi_foxconn_t99w175_info = {
+ 	.name = "foxconn-t99w175",
+ 	.edl = "qcom/sdx55m/foxconn/prog_firehose_sdx55.mbn",
+@@ -1389,6 +1418,10 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 	unsigned int dma_data_width;
+ 	int err;
+ 
++	if (info == &mhi_qcom_sdx65_info &&
++	    of_machine_compatible_match(mhi_qcom_sdx65_mbim_machines))
++		info = &mhi_qcom_sdx65_mbim_info;
++
+ 	dev_info(&pdev->dev, "MHI PCI device found: %s\n", info->name);
+ 
+ 	/* mhi_pdev.mhi_cntrl must be zero-initialized */
+
+---
+base-commit: 0b1883ca75c0005ab5ca52c7bc1a26329bc39746
+change-id: 20261011-mhi-sdx65-mbim-rfc-8ac8ba0d778a
 
 Best regards,
-Anusha
+-- 
+Haipeng Lin <jimmie.lin@gmail.com>
+
+
