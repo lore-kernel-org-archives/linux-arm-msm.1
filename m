@@ -1,87 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794384396;
-	b=I2SfqpJpPeTvM+TA5/6PlU7eDRsyatm1SlHm/S85EutUafeoVsO7t/gjBYfcT+APmwRl
-	 1a9WrMu7ROBpKdu/tdf5dgK2tBahbA55ubong2psaM2JKmNeUvFprhIbg1aWemXzMiBWv
-	 LENcaAg3F0SWJb1OpiFAd62GYQsLkJPlzS8IEG5aQyBorJp+4hguMIN9Z7MFdjDtmbK5L
-	 X+FtX7WUuwwkUAMxlYHS98GWr/kEaJI2OmwFGrpvz1hQiNwRh+NM+M8kpT99ITDF4Eam0
-	 n8CtnKEK+3GFBhwWZmkEd+2EaXzuM7mG2UEjUVwSbBbKUdH6yoluwaTF/C7WZPIf3TQ==
+	t=1794384397;
+	b=EZcCj+nkDldV81xFPFwNwE1SD3TYykJ4FmrSrsqATGAr+G3a1Hr6ewzb9SOWdumpLxcS
+	 C3OuTAIGynw97SrSwGAeYtpLLxDipl6FU6tyIxfEDGs35SsZ08wiz0S8W25xyIigApDaq
+	 R5+jd90YGVSXD/FtaGamCQKmTHOYqoRzEcJKf6XXWXKzQl4lSio4hL+Ea5a+tDNUSdGc5
+	 W81VAmTrVh5k4BtDj1NmMZQY86CWBYsI82PbMoipC8YoXQ3Dtv0hPNIbVldt89dnuZw1c
+	 tqHJeRR9gSodHsbSsaAgAVChtKqDLF7b2hbm4bc0h8SF+o1LQwup12RF4DY6xVJHVUw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794384396;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794384397;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=r5QHJOclG6lenrzuLdLFBV3oe5/4KSdk6d52zk+Yb/c=;
-	b=Pc2w6oAVToT1WQYEMwBKS4DqC5srpRdQRsgDoC30uk5UjiEHXei1YSBmdTdXJinqOkFo
-	 pppG+ckE/oQef3yeX+FWlhH2xAGPqWeTs52+llk/zzbZEtIyxoc1smcLDR+/85ZddncfN
-	 6vfqUUkFycvC5s9RH2Hzb89ahiAwhEosQe8zjJvjbeYTpnTM/h0JriaYO0ezbdhh18lN0
-	 IX1n6ETq/BARb9VKLFtuZBmDpfAVbmAYI2yylm+CKBxMord/wdJL2HQ5f+EwXHxqf9kzt
-	 ZNTuZBJ06f57FrH2WZlLy7m+tL/QIhUSiFvFNnGWfz1jSHO9L4qi+Fd0plVrpmkIaQg==
+	bh=bUvokNlCeYm9onJ5oM1T8ZQNs1QR3modjs0guNDfzJk=;
+	b=1S735DV/8Hs0eroy7mnu8F1a0hdFsAH+u9wH5Zq2/kdy/P/cGE/EUdShqHcreSmTdITb
+	 U2TJNG55s7UtZxzDx7hv2JgH7aC+VPJNu/FGreDzQcHh/1gDJoxdw+chBipqBstb5tX/c
+	 AF+vPnh45KQBf/WfddJYt924KZYhMkkrKm45aue8sdpTogHoWBeSV+y9c+Ln+xjtTHTXw
+	 H6BS8R00WrJ6cP5iEHZE3P+BMlyYbXoukhjl5RIloGWwj4UMPXeE+SrQn8JtQCpPDmIPu
+	 QqZxQNRkfh/bggvH0tKG/RgwNKquiC41IIoRU5mHjfB0vGthQ8mTFT+Gbomell046NQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bairaktaris.de;
 	spf=pass smtp.mailfrom=bairaktaris.de;
-	dkim=pass header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=ahFmw8U0;
-	arc=none smtp.remote-ip=209.85.218.49
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+	dkim=pass header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=G9XYGNiZ;
+	arc=none smtp.remote-ip=209.85.208.42
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EBB560A5BE3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F265560A6F48
 	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 08:06:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2EBB560A5BE3
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F265560A6F48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bairaktaris.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bairaktaris.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=ahFmw8U0
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c4c9abc1824so408434766b.1
+	dkim=pass (2048-bit key) header.d=bairaktaris.de header.i=@bairaktaris.de header.a=rsa-sha256 header.s=google header.b=G9XYGNiZ
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6b2237b596cso6358632a12.0
         for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 00:06:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bairaktaris.de; s=google; t=1794384394; x=1794989194; darn=vger.kernel.org;
+        d=bairaktaris.de; s=google; t=1794384395; x=1794989195; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=r5QHJOclG6lenrzuLdLFBV3oe5/4KSdk6d52zk+Yb/c=;
-        b=ahFmw8U0eeZvB6yv9lj/iRJo5flheWQupjk/oaf61Ec1dYOWMBk7CYVknnuBSe6KHs
-         Q2aptZKfu2hDpSIqF/N3nu3smoEDel3zL/U6Zun6n5RxqvTTwmrIfpS4W63fmJK1hSUV
-         ++6Iw4YuQn0dId1loASC2FBFFWhqATo09WL8qMb4Jn2Vx1vknwKS6Tf2onUn1a1lnCXu
-         yUoN5nhZx9LNpant22fZNKo8jyb41eLQ9UCmyOEkdQPBcW1cLNI6gSa0LBHVJy2n2dM9
-         K49xE1IMlTu4s9mm5PeaczQ61KX9BS3ZxTk4UrYdOMr91+YfUYETZwazyB84E/c8wyid
-         Weuw==
+        bh=bUvokNlCeYm9onJ5oM1T8ZQNs1QR3modjs0guNDfzJk=;
+        b=G9XYGNiZqL7cP7CR4fV/TQ3pohy/Mat/Y9YA8/O2Z8asWXdeIX3vT7ODOi6hC2FWMW
+         pIeaTOcKTAFnUcfKMb3vNASe8zwXsdnpMrAfvroi74/OAgUpnbDspnE0gMnnPhtGL5Rv
+         9JvTMJSsmfka7eHEjfqwsir2jxglkoL6LaNkqoS+tMuC3dupzZvpLpg8lbz2WP+dMgts
+         q8RZUdfOJh34+AGFdIsC49BreKaYo/VYt7r4kiaSP/wP9ObAu0fe1HuQcjqFVjA4KJRZ
+         DWsob8vj+S9jQvoiDFBmVmHFvd7TYqgX/hmMpr39ksaHwy+nTOFtzrrQ0mOvQ0mFYUhB
+         zPpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794384394; x=1794989194;
+        d=1e100.net; s=20260707; t=1794384395; x=1794989195;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=r5QHJOclG6lenrzuLdLFBV3oe5/4KSdk6d52zk+Yb/c=;
-        b=SdcT9W/qpmX8ydOeu9Ci2cJd8x6gH1DuQ0MQIO9zuJoa/7S6CFEL9z6ffwhnO3cTs7
-         zKA+o3lJlHjpUFBeiMxgVq99pQ1Qp0mDXhquYSwPNM9zmnlG2coa4UpZWaZM959BFlst
-         gvCxaoVkDaAVeIhBua+Ihf5ziQ0vKM3QyUivNS0G3Yf3tyXaz/IeJtGZDkwUQ7y4Pxio
-         gv+2EuqKu6FdS7SH2Q1jnU6hZzV7Mt5G2Iz7NTfm0I1yLZVMB9AXdV3X1bI9qVxenw2P
-         YjYPiABdWzEDzN2y5Mrj764qJHxgI1qiYsD+19zqmsGWYDGqtzIFygXPZtd6EvPMSRa+
-         JdOQ==
-X-Forwarded-Encrypted: i=1; AL+hErE/3QPNDxYFpu/g3epLG54JqsjPMY2TuT/9AwY/WdrYJgdYHoa7aQ3kgJ2U6UGEiyC89QzZtZOEYOHpL2Bg@vger.kernel.org
-X-Gm-Message-State: APuU4Z8/lXecHPg6wRp5i+asYzJF6qL4rWEF2dQ/3pYGaAY8Cm+E7hjG
-	7OD27yW3YmYx+EDMH/MH7DCVZAV3ZYkJHUwU7QBu/i5q50mOtnFDxCcwSgLsUFu6qw==
-X-Gm-Gg: AYBFou2HATHgaqjtjZKJEeu3V7/xm1fV7ybgo5g3wbLnmxdxhazliE6WkEyzkRBtu15
-	CMwuMrkYKdzFU+Ug149dTJznbkKFB/GO0eCSYBjSziDT6sQnGcWPWV5Wioei0HMgcT6w5d+QCg0
-	c/KeFUj8Idg/gN7X5k+TVd6jeQGOr7TWQWI0144eUmT/gBXfATK6uS13X5V8tbWhToSGMsfDTP4
-	px/nk6ScvqUNLVyLPaRM1pU9AdO+XLVZOggbQXhYhAhKBPm2BAji0h4YimHEbTYFYrub2Ns5AOw
-	YicaRxeoPT1PiFUOZKcIXY/4vTGU8dXDw5FQchV5fhIa+IQtCEY5wYc1SVclHbZzWr/BTjhW0FI
-	+etrFfa5D9H4BeMRJyBWJsoBaSRqT61pH+6HozLnCpBpNvBWKfk9cXFEIBlURU+YKJH9JYwwNZg
-	rZln1GbAKrWdzjbBzwALC03jbKGW39naeK09NEaSZHqLINZ7FbR7aUn1MYzZ3EupIEVz8PYjQKM
-	7jzaK7dROrFmzaNuE+Y87yODP3rmSUa5aHLWtzPyBIlhKNNGqEt2aBPt/nOdCkZhP7ZRUC3vF0u
-	+KaqWohO57RHUIroG91/BiXLh/3foQi+rfsGs8GVNpwj+jHNwDAw0R6dLApYJasoiTnJMGDqaqB
-	9DRw2MKVeGM81SnNdkVR/rismsD0hYAhlpcv6+NMD08np62R93Q+vpvu6aQLO9GS+err6VInknI
-	MxG6zpfPhlfS0sZbDkOViAx1dOlAglHKW8fhlNTpwM13P4MpEOxy/W65FIbWfUDDVIOpMXoGw9R
-	eD2olVYnPaMlMg3oGYuRRjX9tN9kKu/XbL/sUuU5gs1zLec5KN9DnP7E3pmfFN6YbnliX6ixVYT
-	XCMiWESD/p/dxKwoN2Y=
-X-Received: by 2002:a17:907:1ca6:b0:c41:960c:8c62 with SMTP id a640c23a62f3a-c5066b338dbmr122198366b.30.1794384394508;
-        Wed, 11 Nov 2026 00:06:34 -0800 (PST)
+        bh=bUvokNlCeYm9onJ5oM1T8ZQNs1QR3modjs0guNDfzJk=;
+        b=bukZ0by+Q3eimJPLPRMsA5CyMKjjzHL56V4HWjJk9FSy/FYs0kOyTxnn93gCdNJIPU
+         eh9ptlxtHooWi6KNi5uWJJg1lMqxUtwI+1HXnBKfXIQm6b6YlM+QZlf3jbWQ1e2b5pK7
+         6/nT1y8A4gQSPVsM/5p1v3aZrgX192XoQLWE5F+aGQDH4O+l/DuOlU221EMWpeFkCDsX
+         n/koNz47wOzNzH5zq1CNECfNkCjlgF0rFELfRJ6A3HXZg4dCOOIV4vWqJlqMxIkaVqbj
+         eHjnE19+43Ejofojmg5rz4LGWamMYwGW3bjy8O0QweGoGrS/tNzbUqqH1lZB/vYK0qD+
+         1nWw==
+X-Forwarded-Encrypted: i=1; AL+hErFn+FNwayuhxBLBAXoVhtDySN6MiSewfjsJGBMro9TkhEPEDp/lZau5L+uodukRn31L+KEz+4akr0SrxONd@vger.kernel.org
+X-Gm-Message-State: APuU4Z/JCCCGYj0odvpgF4s4CVkvtB7EyZpKxz72LWvomzWoEoYREVsE
+	efRWNaHxDI8gn65azyvzZAfD5lcIqW60eBayAJyK7k5stiYWUoYWFE/DTDIXd5Pb+w==
+X-Gm-Gg: AYBFou1dISBfz9q2q1BCI8iIKvLdiV2fm993MhAehUf++o6iAdXrWmKib+fSHU+JorF
+	lCHtBcbof+rlpCEQ+oo8+R3BRWJCHjITWtQzji+3hwV3AiivY0zSckrAZkP3GqNtWSniHLSA2zw
+	N7Uqc4808IwfAhJNRvI8OyaSKlJnuFBu6TOfazRrkDBMvprx8C3yYGEFHIiBZzUrqU1G4aWRPPi
+	ENGG7U8H8d5Fjgg77IOyf/Pq9/mSUgp56fMqUBOeYe0E+Ic7IJDYpey+LDvrTI4PY+2lMrqv3Eg
+	s01YEUhX9rKjGEaApgEPdN+JqJdmIwS0CCPkzaNvcP5azgFzlYlw6ksMQiLHcQ6PvClbSrGpBCc
+	Jd5YwxwihiHkPorZatbDaKNJbNUiYWdxk6YtsFlWyR+3mdVPjgT1gkmVpE+ByVXFenCpQilXV4z
+	IZ2ov5pxFD8ge4RDzhPSCbWZryfyqDUlUzs0h0GFWqaegtQl+cJz+PwYJ1A1zMwIHXw2oiHMin/
+	tqFSkx6rpFufs4f/ihkUwxNQLxH3AcnB1U+XKAoWgpWjM+Io4zO8Aca54rtJwuZzFiVGfcC9JMG
+	ugvU+E5ekqxXGxnHEtNIEYNJbPYhB8BiFQF0MKLttWa615NyPNZ/yLs8p6cuf845kIaMjxKWDaJ
+	6Ximey0wfz8T/ZY8K7g6w8fF0k9CTLFxDqCt4n8uwzllV1IWuEs4NSBHfJH1dKMe5KbOBeFlZ9J
+	uf7gjDpPXLWpOtyXk3MRBaDF89uBRrqK4mXDBaJI0vnYEBpbGYpEPuxJQQGaNvTK9ZxouLKEI4J
+	JNb6bqyHqdX/Y+a6uiiRCGJVl9zenwrg8u5+x5JYo7xq9SNPZL4rLiPCYCB4FIudj7b8IBLzu87
+	ArHGbdyIuoErdXxBLcE=
+X-Received: by 2002:a17:907:3d0e:b0:c49:d1c5:431a with SMTP id a640c23a62f3a-c5066d58e34mr133683366b.38.1794384395369;
+        Wed, 11 Nov 2026 00:06:35 -0800 (PST)
 Received: from Desktop (p54aff574.dip0.t-ipconnect.de. [84.175.245.116])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c504a6af519sm203722266b.87.2026.11.11.00.06.33
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c504a6af519sm203722266b.87.2026.11.11.00.06.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 00:06:33 -0800 (PST)
+        Wed, 11 Nov 2026 00:06:34 -0800 (PST)
 From: Julius Bairaktaris <julius@bairaktaris.de>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -99,9 +99,9 @@ Cc: Abel Vesa <abelvesa@kernel.org>,
 	ath11k@lists.infradead.org,
 	ath12k@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/3] soc: qcom: qmi: Take responses and indications only from looked-up servers
-Date: Wed, 11 Nov 2026 09:06:28 +0100
-Message-ID: <20261111080630.244427-2-julius@bairaktaris.de>
+Subject: [PATCH 2/3] wifi: ath11k: ignore WLFW servers on the local node
+Date: Wed, 11 Nov 2026 09:06:29 +0100
+Message-ID: <20261111080630.244427-3-julius@bairaktaris.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261111080630.244427-1-julius@bairaktaris.de>
 References: <20261111080630.244427-1-julius@bairaktaris.de>
@@ -116,62 +116,38 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Any local process can open an AF_QIPCRTR socket and send a datagram to
-the port of a kernel QMI client. qrtr_local_enqueue() queues it no
-matter which server the client socket is connected to, and
-qmi_handle_message() passes responses and indications to the client's
-handlers without looking at the sender. The ath11k and ath12k
-REQUEST_MEM indication handlers, for one, then free the DMA memory that
-the running firmware writes into.
+Any local process can publish a server for the WLFW service through the
+QRTR name service, which records it on the local node.
+ath11k_qmi_ops_new_server() connects to every server the lookup reports
+and starts the QMI handshake with it, so that process takes the place of
+the firmware, including the REQUEST_MEM indication whose handler frees
+the DMA memory that the running firmware writes into.
 
-A client handle learns its servers from the lookups it registered, and
-qmi_recv_new_server() keeps them in lookup_results. Drop responses and
-indications from any other address. Handles without a new_server
-callback keep no lookup results and are left as they are.
+The WLFW service is provided by the firmware on a remote QRTR node.
+Ignore servers on the local node.
 
-Fixes: 3830d0771ef6 ("soc: qcom: Introduce QMI helpers")
+Fixes: d5c65159f289 ("ath11k: driver for Qualcomm IEEE 802.11ax devices")
 Cc: stable@vger.kernel.org
 Signed-off-by: Julius Bairaktaris <julius@bairaktaris.de>
 ---
- drivers/soc/qcom/qmi_interface.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ drivers/net/wireless/ath/ath11k/qmi.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/soc/qcom/qmi_interface.c b/drivers/soc/qcom/qmi_interface.c
-index 16e2e24b60968..ba9d973279145 100644
---- a/drivers/soc/qcom/qmi_interface.c
-+++ b/drivers/soc/qcom/qmi_interface.c
-@@ -469,6 +469,19 @@ static void qmi_handle_net_reset(struct qmi_handle *qmi)
- 		qmi_send_new_server(qmi, svc);
- }
+diff --git a/drivers/net/wireless/ath/ath11k/qmi.c b/drivers/net/wireless/ath/ath11k/qmi.c
+index 7dc07339b9579..c4e4b9c5ec0da 100644
+--- a/drivers/net/wireless/ath/ath11k/qmi.c
++++ b/drivers/net/wireless/ath/ath11k/qmi.c
+@@ -3172,6 +3172,10 @@ static int ath11k_qmi_ops_new_server(struct qmi_handle *qmi_hdl,
+ 	struct sockaddr_qrtr *sq = &qmi->sq;
+ 	int ret;
  
-+static bool qmi_is_lookup_result(struct qmi_handle *qmi,
-+				 struct sockaddr_qrtr *sq)
-+{
-+	struct qmi_service *svc;
++	/* WLFW is served by the firmware, never by the local node */
++	if (service->node == qmi_hdl->sq.sq_node)
++		return -EINVAL;
 +
-+	list_for_each_entry(svc, &qmi->lookup_results, list_node) {
-+		if (svc->node == sq->sq_node && svc->port == sq->sq_port)
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- static void qmi_handle_message(struct qmi_handle *qmi,
- 			       struct sockaddr_qrtr *sq,
- 			       const void *buf, size_t len)
-@@ -485,6 +498,11 @@ static void qmi_handle_message(struct qmi_handle *qmi,
- 
- 	hdr = buf;
- 
-+	/* A client takes responses and indications only from its servers */
-+	if (qmi->ops.new_server && hdr->type != QMI_REQUEST &&
-+	    !qmi_is_lookup_result(qmi, sq))
-+		return;
-+
- 	/* If this is a response, find the matching transaction handle */
- 	if (hdr->type == QMI_RESPONSE) {
- 		mutex_lock(&qmi->txn_lock);
+ 	sq->sq_family = AF_QIPCRTR;
+ 	sq->sq_node = service->node;
+ 	sq->sq_port = service->port;
 -- 
 2.53.0
 
