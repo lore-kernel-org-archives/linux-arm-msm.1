@@ -1,86 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794398570;
-	b=twpw1Fz9eR0nP59C4oPxq1O7ms9TQIZxHY4I56n5V+p6k50hWF4Qg7LWb8oA3a2UqTSi
-	 xSbN3POrUraAHKzsmD+1H7hvmnrxzQs3k+Uozlo4MTQWUrfmdV1qChGg+fje4+gnRUJK/
-	 +K88XHbGlwDDyvjY9BdJreyaLf96Awooux/Od+i0kf1Yz+BhuWM14bV/gzKXjSw0eaLbH
-	 rwGLPFxTEXkqm3eQO0V9UH9X8UBNGH92FUI2QyaAWdilpwyL+C7R8A0yzxIpvKjJEEsAK
-	 nC+AxGS5ucIv3f4iXerY0uSkSrlBzf3MVzM6RLYrOd/b0I2Tzz3yvVm5LbHSJrgm0sw==
+	t=1794399373;
+	b=kL5MoCSbxuUgdQLaFa1D7R6J/mU7YnxZWHKH7Ew15U/Eex0kZRI8aLLh8VnVDFppMs9d
+	 hd4m00tvg1zNOZuRzPH13O4ssGqgDfzSqbI0CbTDhhx3re7k4FlhengJtZdy4b6EGh/jV
+	 5ooH8mh/QVQoXuqDJD2xTnwUm2tvHdjYs3LTCWA+0AIvSrlmDM5etMZWiUZLMSScVM3eP
+	 FKA0YmxH6pfmCjIdHQJIQ88KyNgPD5DR5rwKyVmhO7tMej4yCkt6A41Gy+fnWn9Euy+oZ
+	 55ZHYjOZkinlGLUcA7sNyx6XRCkURNY1gCfuDNmC4K9hIKp9sF8rc7mrcYUzGz34zfw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794398570;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794399373;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Mf3ojcAaOl5Wd2bB/OvSpA9q4iDAVUFZx+UCDfwTy74=;
-	b=yhBCFealzPxMlEKNz07pGs85v1qBcNMhQGYAvYlFKQj+m8/fQmtrHVcJYn+rNiVWaUpE
-	 uOnzrzQndx7V0X0EXfYxJCJcXT9NG1yk6mYLFb6L414IHso8KFz4LbzESfxJjlQiT8/FL
-	 Bfgg1Rm00GrHJs7NSI5rBF9u0zVyfq5jPk3K6FB+N/8RotUFq7Og9yldyaOHylccbqgKE
-	 zPh79LISIRzUFhndzzsLvPW9zoxoKt2CnE+p+r5T7gQNiMu9eKiJQdZ527erH2R8vfAdc
-	 4DLG3dOlEcStzNYCPs+v/Yok4cRnQUZuwRrpZoseasT6ZnQu8DgyHpBzPRyTPwJUJJQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=ShfGnGUwV/ETQzS6rKCsRFXhPpVChrJE2EQuNOxREuU=;
+	b=O8GBQCqS8XXAn7nIFomj6GSVdQkWBvzr7Z+kWdrjLIqJXo9+2MO7C6EJ1dWCYlOQ/7jO
+	 lgolqd3+nYksNjKk7qkZ8SVxqSR6F29MJ11j3tNEgPrXFx17VUYdV7fWmTEUVw7qCUS6t
+	 ppxzTxPYAObsiJi6/8bLDpGaV/L3jokY2MCXEfiU4ql1eM9Gv5vfPLu+Tt8MT32AmnfhC
+	 Ltaz/5BqV7VJFq+Zq/ZALMoVPGQWW4XkkB9lF5TmbVZX1NiWX3MqOvTZc/DAB1Ko2gFCO
+	 kHuJKLmBExwFL8fSgPHwpg3G0Sq4nKSlWNnR09UEShQ2Zze9un1HuOn3f5F7pBEB6aw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Je1CYIjf;
-	arc=none smtp.remote-ip=209.85.221.53
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qEVRdnEH;
+	arc=none smtp.remote-ip=209.85.221.44
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA894606A326
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 12:02:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DA894606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 220A8606A8B4
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 12:16:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 220A8606A8B4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Je1CYIjf
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-4922dbcee23so1781707f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 04:02:49 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qEVRdnEH
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-49134c8509fso2558481f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 04:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794398568; x=1795003368; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Mf3ojcAaOl5Wd2bB/OvSpA9q4iDAVUFZx+UCDfwTy74=;
-        b=Je1CYIjfuwflh3C8ZTO7fGiG3VT2JZ4/KZsAnIckMk5yyFTVUjMTyMSMVoowIwUALe
-         rIx+YCcQd5d3c/Oo7ywHWhe+3KSTQ7o6rFpU0FKq7oz4uEO2xHVWkEcknh525ow1mgCu
-         gWFknAYgozrE3xkB1Hf35d8etynb8NZA5amXxyEuDKuHJdX9BiOMQOk4XO6ih4oDz5ll
-         jiNbUTntFWcfE3xAvdYsPO01gTShdzNlx4xruDnGGl89qAWG/eS5QeVSu9Tt1rrguObP
-         WWiW9en2E3WuuFqlZwdLZQMuWBF1+OevnHMcH8EoqrsFJwJLse2YUIb6yJUacp0hHv8D
-         xyBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794398568; x=1795003368;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794399371; x=1795004171; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Mf3ojcAaOl5Wd2bB/OvSpA9q4iDAVUFZx+UCDfwTy74=;
-        b=jn9gOD0yQ1wd0ARl3GYnSBMpyKgptJ7WxY2EQ28pK+ottwHU9PuSh0Pu0284lROH4C
-         oaCzvVJ7oWexqr0goaJdBhsRfvrt0TejQl3qZsUwmlLQDxMLBhx8CO8FFW7SGs8s35fR
-         IBOZZTNDflI2ruCSPclTngjphTXIGrM+vH6ArO5Nsb8Zlpy/qS81kZP84QfmF3KM9K5f
-         NAKOZYTER54mVd+OEYqWC3so7iD3gXYPtbgPOAWvGwpACiav+aOotCseWoPhETFClLNr
-         rLtuFRyPCYcXReaOfOC3ME4KNmpjTUnpDzVFd2pIhKxy7Ej/i8cuFBXn6zwxBQrC7pGf
-         ed1w==
-X-Forwarded-Encrypted: i=1; AL+hErHJ2QVPCLh9bn6zQMzOLLWwyBaJ3PS8ldsmhpP5pQ5cCQjRaoees9hpSolr71qzAonkoeYflVsZVy7sD/9v@vger.kernel.org
-X-Gm-Message-State: APuU4Z9aBQHzSR65vxzdL9kPf8roCrwU5POw6PGP9/AHT3eGq0zPSyVy
-	fJmeh0ocPZuy+YAXneW9eKbcI0QQzKV9hHwNaQPbfJTWRups3XWTGTVeGLrCxr81DI0=
-X-Gm-Gg: AYBFou3bY9vzeoFaMdgFrkde3nAwPgfuYZ9TNoPNQlPXMyXu2+rPa9fNahO/3wDO543
-	GkM7omX+gD3fWvVQ1oYwNZMwnr141e5EV1p5umniGNzyACoQ2tJhdQ8GWSeTbHZn2LJDtk1yquR
-	IkjzQIGzYBshYG3/sMTrJKic0UYgYir7Hb7I9YOOiCgacYqM26dP7nzBNb0xMfCeKe1TFrVlEbt
-	b7RmjXjFneTzag5d9DnHtaILi6V0bFSXC2dsPR/86V1nhDt9MlN/ubFXPcNjRyFIXfORzzmL5V8
-	Z/JjiDeesbvn3+uDbWzAtQtr8b6PpFiNefj2d2t8D3qilvNtkSYBHPOyHvTieCe1FEtGjbZ3bIp
-	BL1D3yUqrTlrBZywhLoJJWbLwXoRcFKOf1iCE5wzL2Ojvw1nqk1DqzL9bBR/qf9B9Fs2eC4U2VP
-	74iYdgAllDlCkrcjEj8gaPtnkcIGa4fykKcp6pUaVGl5DaiWL1WCV6vzmwpNoyGuZp7LgG8UZoV
-	j1fBrdMIaXMKLu7Rsdnp4crXVTZuXxLkPa0QXt6Ml3bD8chtnyGmtYHUuy+OsJxCim2JfLYUXTB
-	27FVQ0pJ5dpqor81eQCJGFmXp15fUNYIqUxHQOPt
-X-Received: by 2002:a05:6000:420d:b0:48b:1a0:5630 with SMTP id ffacd0b85a97d-499c86a10f6mr3780756f8f.41.1794398567805;
-        Wed, 11 Nov 2026 04:02:47 -0800 (PST)
-Received: from [192.168.0.167] ([109.76.11.16])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49835c377fdsm8869991f8f.21.2026.11.11.04.02.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 11 Nov 2026 04:02:47 -0800 (PST)
-Message-ID: <3713bf13-cec6-4b02-a29b-8f76070f03b3@linaro.org>
-Date: Wed, 11 Nov 2026 12:02:45 +0000
+        bh=ShfGnGUwV/ETQzS6rKCsRFXhPpVChrJE2EQuNOxREuU=;
+        b=qEVRdnEHKR9SJkjIwuqUlDKDa/eqsVO8f8iPfjDn4hG/N9WCGa5Nx2Yzwf4jVz/kHP
+         S9iJpa6mOIjzz9wzGG9xnlTiqQFb04tfHmnI2GpXWYoH7Ypb/cYSbYUMfOGZ7Z6pXusm
+         26YrjScF08lM9kmPxMQDDfXOV14+jJMUASRjw/dswBk6bQ+pEJATDLKwR1bFJzUYXI43
+         3Yr1kJ1/SOlD9lyDQxxHULgcLQtFLfdxu5o6tH1gR8wwTgQSWcNXM5mVk7u1YtT+cEFj
+         ZMPphlKliUqEb84X0pOLOA2MaQqmVRS2zr3IeJPU/5O//YJj61HeVp0d4OiEZZJbogkV
+         yM+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794399371; x=1795004171;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ShfGnGUwV/ETQzS6rKCsRFXhPpVChrJE2EQuNOxREuU=;
+        b=gg7Ym8KEX8kBXoXnnfhYHglj6m4mZmmjFm+JySBad6GKi47yJPHl7zm+s4t246X6Bu
+         9W4IEsNqaL3zmKDswgaIHY9bQm5MEYsVbfTe7cgx4XnBKwDhMR8yNad/weXhOYk3Qou6
+         av1DPgJE/ktiG9v228MV5qemv6Jx+3G9ym4jdAWJP6PoB6h20jAD5JkToOkvxvg7jdh8
+         HJHAyLtNsC5ZUKT/5PF3BFMa++DyxSzFjTvkGrh4/UoKU1DJZiVMtM3c0AKrEY0Qk99G
+         n4eRAfhGoN+kiQUHypW+CrPtSxOs5D7faSdXwzDqQRm8QCCm0SqzhOE6/J67rU5LGE5Y
+         iYig==
+X-Forwarded-Encrypted: i=1; AL+hErEd1DFeM6OFrseTxie1LCOcJbWUGB+iq1fLAPJRo0RDolJs+sbzOrMpy8bvzfjGDMhyFuj3Us++ZVj9e55O@vger.kernel.org
+X-Gm-Message-State: APuU4Z8fmhf/ZMIRkh0TCs2nzUkCwkLJSuUaDoPMj6l3Dp/GQLh8vDPG
+	fuvwZGwtCLj1ELdcE/Q6aEq1XRWogRWiguEtexwd3pJ2Mbqs7+Af5YRi8a0/0qA2F5g=
+X-Gm-Gg: AYBFou24ySQZ+Y6zT6NVb85/sx700NjPnju7Mmz4wYFQ0clP7GOjEcIFgCU9Xif+Zic
+	bAdmI7RHu/Q0gkrw4LWzDzRQczc9ptB0pSve4qBRRstQ1UXpX5tZY7HgSYbNsYzyz43Tlzh6OiS
+	JZ0xETb3U9qSrF6kPPhGkC7sdgnPFlHI3yRJqwUd5MwAznILssYZ3WmSrkznS06So1aZVL+7Lki
+	063lw+IMcrKbahfGR4q55j3V8rbkyXg87VPxvkS21wFnmtbHDLMUnnM0Kl04lhZ4Zj/m2ujx/RK
+	an9Q+gMESDVXfPeFcmMCZ6y0eNaOUuKYGHqoKNAn1V4wqxQbABhGt10F1YDa+LJ4fln6pr9MjEs
+	uS60eyatXx8XBIe9/rJGdsCZwNx+Z/rLCWWHF2695wI94iWrQLUtO+oNw93K249Umb+PyVKJXVL
+	Fo2uxA8MI9NpE7Cd9/0W2WgQGObkb6eEIkNhNuW/if6d04czOusEVj9lR8NZrgbKJItNjZ/dnJE
+	C63EwiYvgJvhTFXuIWXkCr9BtZH9omMhvvDv7ve/I2oOmyHnDbn5wZMhMenOVO8912mv6A7ZcPl
+	W7VyI9VVqiP6aXwU9pkCMGu+0JY9xUku5uBAEGX/oLfO5y+AK0ENisnk
+X-Received: by 2002:a05:6000:2308:b0:48e:6f76:de9c with SMTP id ffacd0b85a97d-499c6e9636amr3846243f8f.28.1794399370646;
+        Wed, 11 Nov 2026 04:16:10 -0800 (PST)
+Received: from localhost.localdomain ([188.190.249.216])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49884b99869sm9544010f8f.4.2026.11.11.04.16.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Nov 2026 04:16:10 -0800 (PST)
+From: Vlad <tvlad744@gmail.com>
+To: Arun Iyengar <aiyengar1990@gmail.com>
+Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-usb@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] usb: dwc3: Keep the host bus suspended, not torn down, across suspend-to-idle
+Date: Wed, 11 Nov 2026 14:15:56 +0200
+Message-ID: <20261111121556.1871-1-tvlad744@gmail.com>
+X-Mailer: git-send-email 2.45.1.windows.1
+In-Reply-To: <20261110-dwc3-s2idle-v1-2-2ef4cc3f8130@gmail.com>
+References: <20261110-dwc3-s2idle-v1-0-2ef4cc3f8130@gmail.com> <20261110-dwc3-s2idle-v1-2-2ef4cc3f8130@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,47 +101,42 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 4/5] iommu/of: Require reg for iommu-addresses
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Vasant Hegde <vasant.hegde@amd.com>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- David Woodhouse <dwmw2@infradead.org>, Lu Baolu <baolu.lu@linux.intel.com>,
- Jean-Philippe Brucker <jpb@kernel.org>, Rob Herring <robh@kernel.org>,
- Saravana Kannan <saravanak@kernel.org>,
- Tomasz Nowicki <tomasz.nowicki@caviumnetworks.com>,
- Eric Auger <eric.auger@redhat.com>, Joerg Roedel <jroedel@suse.de>,
- Srinath Mannam <srinath.mannam@broadcom.com>,
- Oza Pawandeep <quic_poza@quicinc.com>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, Alex Williamson <alex@shazbot.org>
-Cc: iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
- virtualization@lists.linux.dev, devicetree@vger.kernel.org,
- kvm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-media@vger.kernel.org, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-References: <20261106-add_iommu_ranges-v7-0-5c0f72083e52@oss.qualcomm.com>
- <20261106-add_iommu_ranges-v7-4-5c0f72083e52@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261106-add_iommu_ranges-v7-4-5c0f72083e52@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 06/11/2026 17:14, Vikash Garodia wrote:
-> @@ -257,6 +252,9 @@ void of_iommu_get_resv_regions(struct device *dev, struct list_head *list)
->   				}
->   				type = iommu_resv_region_get_type(dev, &phys, iova, length);
->   
-> +				if (type != IOMMU_RESV_DIRECT)
-> +					continue;
-> +
+From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
 
-This change is not about requiring a reg though, which is why it should 
-be a standalone patch with its own justifications.
+On Tue, Nov 10, 2026 at 07:16:44AM +0000, Arun Iyengar wrote:
+> Suspend-to-idle does not power anything down behind the drivers'
+> back, so there is no reason to end the power sessions there. Keep the
+> core, its PHYs and the suspended ports, as is already done for wakeup,
+> and mark the device as being on the awake path so that a power domain
+> with GENPD_FLAG_ACTIVE_WAKEUP stays on as well.
 
-Basically the patch should state why a mismatch is dropped instead of 
-being reserved.
+A data point from a Qualcomm board where the first sentence does not
+hold. I have not run this series; what follows is the existing "kept
+for wakeup" path, which this patch extends to every suspend-to-idle.
 
----
-bod
+On SM8750 (OnePlus Pad 3, v7.3-rc5 plus board patches) the controller
+node is a wakeup source, so dwc3 keeps the core in host mode. The USB
+GDSCs are PWRSTS_OFF_ON in gcc-sm8750 and the qcom GDSC driver does not
+set GENPD_FLAG_ACTIVE_WAKEUP, so genpd powers them off in s2idle all
+the same. With a USB stick on the port the xHCI then comes back like
+this, in 3 of 3 cycles of 150 s:
+
+  arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0x669fd3200, fsynr=0x370011, cbfrsynra=0x40, cb=5
+  xhci-hcd xhci-hcd.3.auto: WARNING: Host System Error
+  xhci-hcd xhci-hcd.3.auto: xHCI host not responding to stop endpoint command
+  xhci-hcd xhci-hcd.3.auto: xHCI host controller not responding, assume dead
+  xhci-hcd xhci-hcd.3.auto: HC died; cleaning up
+
+With the GDSCs in retention [1], as SM8650 and X1E80100 have them, the
+same 150 s cycle passed 5 of 5 times, and two shorter cycles of 25 s
+passed as well.
+
+This is the third point of the Sashiko review seen on hardware:
+device_set_awake_path() does nothing for a domain without the flag,
+and the core is treated as kept although its power went away. I would
+expect 2/2 to bring this failure to SM8750 controllers with wakeup
+disabled too, unless [1] is applied.
+
+[1] https://lore.kernel.org/all/20261110213346.1359-1-tvlad744@gmail.com/
