@@ -1,47 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794402542;
-	b=5cjRxPhKtubbWlSeG8HRnjLz2cKWnAhnPDvHFYhkg93eHl0soQsntrOkM2nn9AUsiNl2
-	 dVlGvcuMRp3BAD6RLy0eecu75vJSbWPVv+tCff3Cw/7PC/DQgDVXJY75fYXnaTBKG1Wk+
-	 N3+59VKw7wIvkKaa92LTQzmt0YqmhY6XEm7FzZY29buu5CzOwUwNDNcBRDX08IKRNEaWJ
-	 KUOgxLDk+30eEWjn8f7Dpukwl9MHc6m3zIKfR1AWJ0BEZNkzloRWRaBaT03zhab8bZLWU
-	 u1VrPqCAMF0Gtrt9KPvz6U/K0yk0DCP4rDhShb5u0Jqhth6Wh8Vm8E0whkMPeV1bWDw==
+	t=1794402892;
+	b=Lf4SDVPtJYBt16AI/m6dPHqD3iPYDv4TE57bEfYGc5kQx/wNaNEIcxeJqWEzyDXsxNYV
+	 4+MYdvu/Ek9eJLHBzoJJwitvMfTh14jenfS3X41rywJO4ccO6beeZnFWo2bPxFhaNdqd4
+	 WtOXvVc0+fFug2A9/7vMtZnhjbfCZ3jVxgJlcNo+6emUr+KiFDB7YJcAnFxcW29dFDF6e
+	 Sn9cBX1BvQmrjwMXbxfspCkxnt/J9fy6gHaYUhFysSylKdHF3n46wTKblkZCAM2vtZh0j
+	 58lkOKgB8DuK9IAjaBjT0N9aCwPNhJKPeW3cCuoUn9U8XQZCjWIPsmetalyzuEL4jww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794402542;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=5+jBvJl/Ix9vAglpQXYTZoWyiW+U4BJ8ZU+Ewy5ieI4=;
-	b=48BT3Po7SBV6j5WKigpOhqadu3Akw8SaORXJvjyXPpyBRzQIEyZBxbTEHbW1V/4dUnOJ
-	 Niu8w8otje8MZGjRMh+VibVP5FjFmPbHqUP3ASVOr998DlbUgqL1ADAnDMkNCPNUc1VVv
-	 mD8RNHCYqN6xzWr4URt3cEDk8vw+2Shww7sZDtYjDrJYVxla623ZuOnlZCYm93Uf+3gRl
-	 Umfc+Sf6dXbeqvyjb+ne7nRCtWtG/HLiVeYz1M6rzXwB9T3euqfyRea9U5h8JNsIt8Yx+
-	 /+ITOserYXR2pByq3KjDb0u8QrdsSTquCs06pQOeHSByQ9ZTN6CDmEbBeGIlWGUk58A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794402892;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=WU9tbewfdDNGygX+WsvROhINm1RTKRFNHxU/Ul0rphA=;
+	b=rlMEuXEmjbfrc9UHHZ3GPZrfSc0VhB0wiRKymVDYJtxoi5X7r7p7gZLenpuO+4ot+9Fh
+	 mXF/cxZI7jStEInQ/OY+TIWp+r8LzaMK52fRsUNKT5i37NrZTYL8MCLj23FKqc10kMTVB
+	 kVoXb6qVxInrdRdzIr3nGU5olkOYCFb18ZvcL+Mlqn+yCbk3IGAK3uuB+8H2w2l0tQ0GZ
+	 9WK5PrTMYWCLnm58VGq1FYMomUV4SRI4Rw7ZZkJXEkqqSLGz9P0bc+fgNWb0PpUmUEMvu
+	 OVWN9+yh7xcjKSJ/X/SFayBxny7VGIh4eovyVFDCI89WZO1NPpBCtk7BOjp4uVLmfuA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FBaToKoi;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qS+OZ+8l;
+	arc=none smtp.remote-ip=209.85.161.41
+Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C019C606A326;
-	Wed, 11 Nov 2026 13:09:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B96A6606A324
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 13:14:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B96A6606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FBaToKoi
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98C851F00A07;
-	Wed, 11 Nov 2026 13:08:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794402542;
-	bh=5+jBvJl/Ix9vAglpQXYTZoWyiW+U4BJ8ZU+Ewy5ieI4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=FBaToKoiU1IGr1H0R8eaC0QuhhXh/uuJ4Z3/sed2qFNbQzjkPyDyTDAN+3LtE4ocG
-	 B5rJR0cnU53R2YosX7msMS/6nxDjHpL5pDOCod6sU1Bpb/y64T2MJxP6Eu+6h+ltQD
-	 JSyNbTQpAMLcYjtkhgw0voObZ3aBqRpgqzQA7k2DJmCTtSxwx/KWh+KbhzvGvrCPIw
-	 CJvMfjB4yzlauCf94p+Vux2iWCyMFtWIGsi7N0bx6tDfsA1OrEGYvLbif/+9oWO84T
-	 kgrrGIJmv4tpq2Ick2QQm+w/xzZeIkwaMF0bj9mtoyELgY65oJ5cI5nj0rT6XgZeXf
-	 D93H3Ua9POOFg==
-Message-ID: <c4e4c30d-ebb6-42fa-b957-dcbfa10d3e5e@kernel.org>
-Date: Wed, 11 Nov 2026 14:08:57 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qS+OZ+8l
+Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-6ddef424972so2682405eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 05:14:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794402891; x=1795007691; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WU9tbewfdDNGygX+WsvROhINm1RTKRFNHxU/Ul0rphA=;
+        b=qS+OZ+8l5x0OUYgVDcIkSVxv7Vxi8PNBKwee4x8AXelL/5+qr2Pr4Fg+UQfFw8l1rj
+         No55kaqFI71remSSwh8C0sIWEmcRXLn/LgJJ8lpGzDPnaJ/5WcocsKojdgzmaa8lHvHd
+         HQs2czIVCMURudA3gIXJ9vsP2VOZl0vZkzTqQQoaBmWWzwM574avQsLeQej92E4jBIeK
+         o/tBVm9WAiwxh/6YuHMR25V/owmTOwmrZYG0gAMJRMI7R0389sw789bnXVCewsgvem5b
+         uEApyHKz8LT0KTVR8oTw0vc6jNNTx0qwaCt0x5PcX0soUkxaXY9G9iXg3IrDp/yvIV0j
+         97/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794402891; x=1795007691;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=WU9tbewfdDNGygX+WsvROhINm1RTKRFNHxU/Ul0rphA=;
+        b=Uq3RWSGmyi/icUiVjwvtLx0o03axOKz7oUhJiyEoOOUjbErUq0sA4gcjPUeJmVvyOl
+         hDbzUVtH4kqDzaAelkm8kUSU3wwWkq4Rci+ACvs3x4sKWsSXXvpIm0PHQCZC15XGHIz2
+         RdlS++1Z3IIiHOljEmum6dOmp8JPuQOr851TbRP0xu6fXpo4/oCn/eXMjAjHvRkPU5wC
+         hYq0YiinS75gt879eoRBuiyBonPuFORls9+DVU3cJ/c2eH6miQh7r+phAdXcGwCVPy7K
+         FtaCBbLU1uXQ4mDKwsgLH9lQaihx47Oau4XjVH2zJe/BPdEPlAwuwxSFAvgl5uCxiVMH
+         N5mg==
+X-Forwarded-Encrypted: i=1; AL+hErGiC+N5qwxz8yklA9P4KrS6r83gtKK15VoFxkLOtOz524CYRuroZhaq+NccKwqNcp1M6ndNsHyETotJ0B0W@vger.kernel.org
+X-Gm-Message-State: APuU4Z+U0PQCZMrC3bECRnbpxGICwUTrMdUZ2k+51FBclNMJpoAr1Ikf
+	pCbLiqoZ+CrAhtw9NqbY3O1mleQm0f2ICA6pAZsX/Xb2bV/LxX2ouuaf
+X-Gm-Gg: AYBFou1V2D7e4/XC4HQG8wk0qPtLpmuE3YCeHXNaFXhJJf0sBZu0gnYwkRdRFjB/XtB
+	SPvf3id+W330tugiYaF9CXw/0AUnkvXuh8YeSjaK/sTewCdxvLIFbIkalxnH1l+fvTF4hqq1Bjy
+	pXak9LS5CzLrZ7eeusFY/dQNZXckQ+t/qvNV+CA2NBzIscnz8XB5sd/2cFCVFlBAIxLy8BRS2jy
+	xncihw3br5xVuEuIQt2STp6hCk+l3UCFLiJ2/zMKXAGTo8/wFc7FsnnbuP1DIgVgJZq/h/JseMJ
+	V182lPnOIdVDRqJw51gzCvs68ObV44+ZShFI2xbLv5540KLDRe8t3MqjROGclMuPUD5KFSPo1Bm
+	vcn7/TRyM6hTPBNo8kvV83nRUsH+i/6/vQrt7occ0XYwyfZJM7Nr+5iCHgWcA0mERT/Vm7dBzjH
+	1zDucZaeyobnzGO+P3wqYoKQeAH9u3v2mQ+4yySXZvPlnmd8sXoFomQAUgYOeI3kyBUc1HFNfA6
+	oQQ9h+2J4jzUiiE2PY6FdgbGY87dmNWwlUbXDHPHc/03LO9QsDzNrW2zyJEoRr9aOl0wX91Ttt2
+	nHA4KN3cVp0tEmCoxkQ8+PycktlbJls2r9buSJ2pNOyBteBVQSxpYYgK7jKLNcUTMHxrC8HH3x0
+	=
+X-Received: by 2002:a05:6820:c0db:10b0:716:f44b:2dd3 with SMTP id 006d021491bc7-719178602d7mr969188eaf.21.1794402890659;
+        Wed, 11 Nov 2026 05:14:50 -0800 (PST)
+Received: from jeffmr (63-152-14-173.cdrr.qwest.net. [63.152.14.173])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4ae22fbc9c5sm3602123fac.9.2026.11.11.05.14.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Nov 2026 05:14:50 -0800 (PST)
+From: Jeff Roach <jeff.roach0@gmail.com>
+To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	David Collins <david.collins@oss.qualcomm.com>,
+	Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Tingguo Cheng <tingguo.cheng@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-rtc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/3] soc: qcom: pmic_glink: Add GIO pmic_glink instance
+Date: Wed, 11 Nov 2026 07:14:24 -0600
+Message-ID: <20261111131424.51869-1-jeff.roach0@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261110-gio-framework-rtc-driver-2026-10-12-v1-2-e4164178183a@oss.qualcomm.com>
+References: <20261110-gio-framework-rtc-driver-2026-10-12-v1-2-e4164178183a@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,134 +107,25 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] platform: arm64: lenovo-thinkpad-t14s: Add Gen 7 EC
- support
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, =?UTF-8?Q?Ilpo_J=C3=A4rvinen?=
- <ilpo.jarvinen@linux.intel.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20261107-t14s-gen7-ec-v1-0-f4a8edaac447@oss.qualcomm.com>
- <20261107-t14s-gen7-ec-v1-2-f4a8edaac447@oss.qualcomm.com>
- <44e4ede9-3eb8-418a-b1f1-7e9dc75e2e75@kernel.org>
- <o55caq7vadrcc6ioc7n7aplbyh55n63mqgno6j2mgcksrjzb35@ptnencuakeo6>
-From: Hans de Goede <hansg@kernel.org>
-Content-Language: en-US, nl
-In-Reply-To: <o55caq7vadrcc6ioc7n7aplbyh55n63mqgno6j2mgcksrjzb35@ptnencuakeo6>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Hi Fenglin,
 
-On 9-Nov-26 22:59, Abel Vesa wrote:
-> On 26-11-09 15:52:16, Hans de Goede wrote:
->> Hi Abel,
->>
->> On 6-Nov-26 23:01, Abel Vesa wrote:
->>> The embedded controller of the ThinkPad T14s Gen 7 uses the same
->>> register layout and event codes as the Gen 6 one, but a different set
->>> of I2C commands. Going by the ACPI EC accessors in the Gen 7 firmware:
->>>
->>>   - register read:  write {0x80, reg}, then write {0x80} + read 1 byte
->>>   - register write: write {0x81, reg, val}
->>>   - event read:     write {0x84, 0x00}, then write {0x84} + read 1 byte
->>>> With the Gen 6 commands the EC never reports any event and the LED
->>> and keyboard backlight accesses have no effect.
->>
->> Thank you for working in this. I've been testing this and my own T14s gen7
->> and also I've taken a closer look at the DSDT leading to a bunch of
->> improvements. Instead of making these as suggested I've just gone ahead and
->> implemented these as fixup-s to be squashed into a v2 patch.
->>
->> For easier review by you I've split the improvements into 4 patches (attached):
->>
->> 1: Fix Fn-F12 not emitting a key-press + filter out some EC codes being reported
->> when pressing Fn + Fxx key combos which already send an I2C-HID kbd event.
->>
->> 2: Add Gen 7 suspend/resume handling
->>
->> 3: Cleanup: has_kbd_bl2_and_standby and mic_mute_led_generic checks are
->> really just checks for the original (gen6) support vs gen7 support
->> drop the bools and directly check which variant ec->variant points
->> at instead.
->> 4: Cleanup: has_kbd_bl2_and_standby and mic_mute_led_generic checks are
->> really just checks for the original (gen6) support vs gen7 support
->> drop the bools and directly check which variant ec->variant points
->> at instead.
->>
->>> Describe the bus accessors and event read per variant and add one for
->>> the Gen 7. The Gen 7 firmware does not use the second keyboard backlight
->>> register or the modern standby register, it drives the mic mute LED as a
->>> generic LED (id 0x0e) instead of a bit in the audio register and, when
->>> the keyboard backlight is cycled with Fn+Space, it also reports 3 for
->>> the high level, so handle those differences too. Also handle the Gen 7
->>> only events as known ones.
->>
->> So about these differences:
->>
->> 1: For the spk / mic mute LEDs, on a hunch I tried using std LED controls
->> with a LED idx/id of 15 for the spk mute LED and that also works.
->>
->> I did not find either way (REG_AUD vs REG_LED) for the spk mute LED in
->> the DSDT, instead the DSDT ends up sending an ACPI notify event, relying
->> on some windows driver to handle this.
->>
->> How did you find that REG_AUD still works, did you just try the gen 6
->> method ?
-> 
-> Yep, just tried the Gen 6 method and it worked. Nothing in the DSDT
-> for it either.
-> 
-> Re-checked just now: the speaker mute led lights up both via REG_AUD bit 6
-> and as generic led 15 via REG_LED. Since the mic mute led is already a generic
-> led (0x0e) on Gen 7, I'm fine with moving the speaker mute one to 15 too,
-> if you prefer. Otherwise I'll keep REG_AUD, since that path is shared with Gen 6.
+I tried this series on an HP OmniBook X 16 (X2 Elite "Mahua", DT boot,
+qcom,glymur-pmic-glink, 7.3-based kernel, firmware F.04). The RTC part
+works: rtc-qcom-gio reads the correct UTC time.
 
-I don't have a preference either way.
+But UCSI breaks when pmic_glink_gio is bound, although the commit
+message says ucsi stays on the legacy interface:
 
-I tried both methods (REG_LED and REG_AUD) for the spkr mute LED and both
-work. Which ever one is written last wins and gets to determine the actual
-LED state.
+- pmic_glink_gio loaded at boot: ucsi_glink fails with
+  "error -ETIMEDOUT: PPM init failed", no typec ports.
+- pmic_glink_gio blacklisted (patched pmic_glink still loaded): typec
+  ports and partners come up, plug/unplug is seen.
+- Same boot, then modprobe pmic_glink_gio: the RTC works and the ports
+  stay, but UCSI no longer sees any plug or unplug (old partners stay).
+  USB data and charging still work.
 
-This means that the spk-mute bit in REG_AUD may not actually reflect the LED
-state, since it stays set when disabling the LED through REG_LED.
+Happy to test a fix.
 
->> 2: For the kbd backlight, again the DSDT ends up sending an ACPI notify event
->> and does not access the EC itself at all.
->>
->> How did you find that T14S_EC_REG_KBD_BL1 also works on gen 7?
-> 
-> Same, tried the Gen 6 register and it worked. Writes change the level
-> and reads follow the Fn+Space changes, which is how I noticed the extra
-> level.
-> 
->>
->> 3: For suspend/resume the DSDT does have modern-standby handling both
->> making the LEDS glow and setting some magic bit (which presumably makes
->> the EC use less power or maybe makes it send less wakeup events if we
->> were to make the EC IRQ a wakeup source) ?  This is implemented in
->> my second fixup patch.
-> 
-> Squashed it in, thanks. Haven't been able to verify this path on my
-> unit though, suspend has some unrelated other issues. Will try tomorrow.
-> 
->>
->> Regards,
->>
->> Hans
-> 
-> All four fixups are squashed into patch 2 for v2, with your
-> Co-developed-by and Signed-off-by.
-
-Thank you.
-
-Regards,
-
-Hans
-
+Jeff
