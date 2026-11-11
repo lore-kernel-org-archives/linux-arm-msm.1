@@ -1,84 +1,80 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794393910;
-	b=kYO07gEkLYW6om+T+ng4VkgGpQdw4wehTglq7Q6gQXb5IA6+LgqJm85E3WaAXqh8Wl6v
-	 +4/gk842lVoBw2T8w009/+Z0iR7merHCGwuFwH2AX3vE3W37WdqWNUUtVTyNMZIVfJvok
-	 2W3T+L0WgivIaL6Dd0nlpFWu+SxG1FeK3urP7YBc/J8wKadeIJKhUzRXINpTebSbkkkRj
-	 E4keI7kxvNb7aljwnl/K+geMPG0zOAmjaV1KnQ4POqsemFwxHRhiPlo606A9XJN4Sm0XO
-	 b4hs8fiKU4n0ShoZOsUaEZdIsDDkK0jD1bex+q5M/RBhgwa7lDYhM9k6Hit25eXMu3A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794393910;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=K9t1L0eEjksdBZsZhvcTxG05ewTRA22gsv1oXPfTU4g=;
-	b=QPtXnVGygg/N+P2bssQNmEb73oetHZeWKEXfh8Cs0r6PYqoycaa9/I41/AnL5vY1VAer
-	 Tx3mAClYmb3osoh9Uzju9LioFuVkVSSqUtpGu+9/MvJIgVoGfLDycdW9pAXHHqzaOY5st
-	 oyGF1zAN+D5oW/S03CuGKhcdKWh21RLvpm5CEIHjyrKhCYyAzl9ubuvJkkvKA1nBm8M3d
-	 S+moZ1T5Y6Kt9zn8zO6DFbg/BC3AU6PphmiAM0PkwmO+Bbvf5QG/VztGWQQKHaW6QnVa/
-	 Y+c+MBztIgFfk7B2ABi7IEQkKl1TMTEvZ2tgP1E1d6kQWjzHC0vf9EFmApyJDW/WlNg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=grMd1WKl;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794394462;
+	b=x5BTiP7fbu+87h29tCNTOItW1uhiVH2sRtr5RxGGTZZL1IxuABH9zXTUvuH47vkeEE6J
+	 u+2KAckZ7zzgTaqKYge4zUqtXp0FMIxQz7qnc+3D8Z0P07eGYfVUHZS0uQ10dJjppsaKD
+	 IeyoN+B0PEV47i6puTCIUWf6BarWn8poDHwp/Vs5hirpgG5FLRMTwFziqytHCMNHohRtV
+	 AhMd1mhE67ADrPTH2DGlKdf/weD7O71ioO43/pyAa/cno0w4vXJp80Nhv/+qViy1uEp81
+	 fp95VWaZyuTSyGLXNOshcqV87/SO4KYvuqguFSuyvfgFidE8HsZh1FyLfMaU5LR6jyw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794394462;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=ovOSCTXiugxe7VtGCTb3pycG8k5BGyfi+pMJcRVL4/w=;
+	b=wM6UfSjOd4RFn3GYqL8Z4TN9UX/GUgxw3tPH+tRJqI9QttkXM7mC14IBko57wwdqyttU
+	 i1TmGYE4LHK02s+RoNHW+qAu5nH1e+KZaRqf/caAJVSzUCCNi/BT7rz3a+gspihK3L+g/
+	 nLNc9lnRaOPwUNPm0ZvHAu+stO6zKKz+rtPl9oYsVkwJ8wsU/vLdfGHyk0mKdTHwzuHx2
+	 pGUenhaU0fQscEOYTqKUk0d5VevB4uOuEiogk9E6QlB7hu9IMefH4Gv9tDqzX2mzZcqe8
+	 OlyCMsxM5uC2sGgfGq2QK4d/U/k9OKaMx9HOgz/8D8ZRlwLwNr8gpKt/VXZ2HMKZC5Q==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9E77TFQ;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35E05606A31C;
+	Wed, 11 Nov 2026 10:54:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G9E77TFQ
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794394461;
+	b=eqGKRQfk9pBCu2Q2BGnngtBSP3YLsebGX08yo7BaPRlm6NSXasuBKzlJnW95Ln05Embz
+	 oPNX0H2+TNIJv+axd0uaI/hG+7qJIxjIe/s4Lespash9OchuQjDsemLwL8v4vcOkNDiUA
+	 BwIaAdVuHrFNsoaO5WEGUrZ2O3Z7lL+1DjHbcudIAgf9ozMa+3/XyQ5IZJ4yi4AdxuIuJ
+	 YlMnTSH9zWiLNls9cSKwgwtsG/u8lSY742a1GEc7V+bFCHpn3IDuTh0X5pHgtfMwxdXbS
+	 Dy07sijLQAe3V6DYHODF3NN13+jRy9Vw+bcPh+oQboQs1/1irD7ggqYufIGVYvcsm9Q==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794394461;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=ovOSCTXiugxe7VtGCTb3pycG8k5BGyfi+pMJcRVL4/w=;
+	b=X91MsWfoJJ6jNKndScU5CoPjuya0/QYnIhirV6kMGrUNhVnavxTEIK9P326sznDSNOmI
+	 Qoza/MPjGMKE4WFRw9pGNlEuvUXIJ7IpydG9glWNsUaXCNyi3sAw5HOFvEIa05eAwoXM0
+	 FyoKABQN9Aw5Tci4XYTPMXsErAdf08H7W+heUQWMz/hbXboeufVR4TYBhkeANrBtMzMEY
+	 fi193wuWvWxFiSHk4F/C2NBVtlbs2UWOei8mw84dV45oWWoYl+3zJWPKfF2rfhbMxTA2b
+	 mdmZT6L0k5IUIYgEiNm2j4AoRst3eGimE/uEixeunrsGHtDas1c47pJ8Z2V7J0aNbjg==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42710606A33E;
-	Wed, 11 Nov 2026 10:45:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 42710606A33E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=grMd1WKl
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AB6Z9u7581030;
-	Wed, 11 Nov 2026 10:44:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=K9t1L0eEjks
-	dBZsZhvcTxG05ewTRA22gsv1oXPfTU4g=; b=grMd1WKlL1DyGPVb9q44nNb1sfd
-	oUTscEx+8Y7owYw2ELEwl2OjrswimDxjfVZAfDJkhF4lS51aCOeLEZANdw4SMGwr
-	Clbi7KKPamyLGK8wq661/a5gMaos91TMvPB6CpRK0u/P8uCW9p8pN3q6Zt24BreO
-	UfRPC09D4JjQVmJruw6ZO0sQvUywRqszyLr+yl/xJoDJeOX2v+ZCZVYg9z6M81ON
-	uGhipL8V4Xa6jNWlyQp0jKuwLzF3V0zwA1iiuH5oqXT7B2SmAcIbXxEn4IUcWm57
-	IYhOjD4ILG6DFGr7rmqvJWVl5RFvfgEfDGICYfAs6ZV1OKLqhh2RvDyAf4g==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvk7prwan-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 11 Nov 2026 10:44:51 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABAilHn010141;
-	Wed, 11 Nov 2026 10:44:47 GMT
-Received: from hu-devc-hyd-u24-a.qualcomm.com (hu-vnama-hyd.qualcomm.com [10.147.248.182])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 6ABAil10010120
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 11 Nov 2026 10:44:47 +0000 (GMT)
-Received: by hu-devc-hyd-u24-a.qualcomm.com (Postfix, from userid 4857718)
-	id 4E77E21C49; Wed, 11 Nov 2026 16:14:46 +0530 (+0530)
-From: naidu nama <naidu.nama@oss.qualcomm.com>
-To: vkoul@kernel.org, neil.armstrong@linaro.org, mani@kernel.org,
-        robin.clark@oss.qualcomm.com, lumag@kernel.org,
-        abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
-        marijn.suijten@somainline.org, irlied@gmail.com, simona@ffwll.ch
-Cc: Saurabh Anand <saurabh.anand@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        quic_riteshk@quicinc.com, quic_vproddut@quicinc.com,
-        quic_mkuntuma@quicinc.com, mahadevan.p@oss.qualcomm.com,
-        naidu.nama@oss.qualcomm.com
-Subject: [PATCH v2 2/3] drm/msm/dp: Remove redundant force_link_train flag
-Date: Wed, 11 Nov 2026 16:13:54 +0530
-Message-ID: <20261111104434.2222182-3-naidu.nama@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261111104434.2222182-1-naidu.nama@oss.qualcomm.com>
-References: <20261111104434.2222182-1-naidu.nama@oss.qualcomm.com>
+	by smtp.kernel.org (Postfix) with ESMTPS id 5C2B51F00A05;
+	Wed, 11 Nov 2026 10:54:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794394461;
+	bh=ovOSCTXiugxe7VtGCTb3pycG8k5BGyfi+pMJcRVL4/w=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=G9E77TFQYxWena4eH1wmiinX0ImnsRONBFjIFESJDeTYGHAXBxHuGfPUpngzlAbXg
+	 wIU6NTrqldrAonMf+gfOkOdk6CPaOMO77Lk0MDqR1CWvpCA0ASyy821AJBkT5tBhZ5
+	 QDkLdb2nvtcexSV0Bj9X+QjWUCrbdH98Pa4H8VbQZGzxG4MdDdrqfDdDuSmTmiN4bF
+	 vbLw9LElB08/VC8Rx9y2Gx8Ag3i+H4DuImNGVC5besjt4nohth1zMccSLOfaSqD/qZ
+	 MqkFo4rw8yTghbidDEr7avEvY+4qOkCYhFXqNQswVrbwGNRBp2X508rsJgrzhBfMUn
+	 X5N43u4b2gOvA==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id DD5D948F4F;
+	Wed, 11 Nov 2026 10:54:20 +0000 (UTC)
+From: Marc Herrero via B4 Relay <devnull+marcht.proton.me@kernel.org>
+Subject: [PATCH 0/2] ASoC: qcom: audioreach: fix S24_LE playback and route
+ mixer disconnects
+Date: Wed, 11 Nov 2026 10:54:16 +0000
+Message-Id: <20261111-q6apm-fixes-v1-0-1beb5702b372@proton.me>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,119 +84,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA0MiBTYWx0ZWRfX2hrk5IH3mI7I
- bf0Wzwh/4/1sDR56flrvroBPvsBI/3IBpmUzw45b5mVzTPt78bccEr5Hyucani+JoLAAb10fuez
- Q+GPlCMWCsjo6htYzlaZkn7NKYahz6g=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA0MiBTYWx0ZWRfXyhG18CF5/7Zp
- ZkO297PzgcU3+H+KPd/SKZA7v+C/bXkAwQ3DKjRlzP96WMzurrPZcE/PP13oJ+Urys7Ux9E4Rut
- PSHHOZbfjfs+ubWaLc64lP9Z6i+VxonFQCDJP1KBknZIjYP4OjYUu2jRbn5S7HNQ8nad5rI6pPb
- Vgrm4ClAK2YN5VCb1kJqlcVni8EbWQABNC3+LKa4X/JxlTiTkj1sqnvJqRw+mvuSpzcxk1ZpJBU
- +VvkKDBGEaoVik6/NoFh3yCEBf42M31LYj5RbFuGB2MscKiQJ6xxAJqMD5pQH0xOcScExliIlky
- /kCQg5XdDyDdqaF9CMIch9lwEJUM/l4YpnAlkCQud7MtijIl19LCg99eBBE0jQcZwQp3KkkI/eg
- Oy4InE8vQ6q/kHibW/JZEONKHIhtcUepC0HnVmO8dMMfru9AZZXV53ia2MqbHV4bpJ95ZCt0Idx
- 5InMn9TY8Thf44N4NAg==
-X-Proofpoint-GUID: rmLKI8a9wYoDEF5nY46EoqBOuXcGY8me
-X-Proofpoint-ORIG-GUID: rmLKI8a9wYoDEF5nY46EoqBOuXcGY8me
-X-Authority-Analysis: v=2.4 cv=BpcIUoX5 c=1 sm=1 tr=0 ts=6af44723 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8 a=09fYX2rt6u7AJZvDyXUA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-11_02,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0 adultscore=0
- priorityscore=1501 phishscore=0 malwarescore=0 suspectscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110042
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2LMQqAMAwAv1IyWzAZOvgVcWht1AzW2oIIpX83e
+ NtxXIPKRbjCZBoUfqTKlVRwMLAePu1sJaoDjeRQsbfz+bSbvFwtYQwYAkXnEfTIhf+gw7z0/gG
+ JQE3KXQAAAA==
+X-Change-ID: 20261111-q6apm-fixes-21db1bb2d6a1
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Marc Herrero <marcht@proton.me>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794394460; l=1262;
+ i=marcht@proton.me; s=20261111; h=from:subject:message-id;
+ bh=oDandKZoj9aKJ9LxqOQ1TuaE8cLg2Oz+Q5oKITxptrs=;
+ b=MLo4KyG596+Yj2uFfnkjg1GFNX1GeimwQGRcyl7E6gfpjgjkPvfkWK6SeMJ9/D4dwakUg6TFF
+ g3xmL0H/JGJD9ssPofWc08VVZD6zUApR1fXU3kL9aRHxtyPeGsFMiZv
+X-Developer-Key: i=marcht@proton.me; a=ed25519;
+ pk=pIPy6L+INgiuJt7L7umVilPgpzy/Ni3QS77ToLj/H9c=
+X-Endpoint-Received: by B4 Relay for marcht@proton.me/20261111 with
+ auth_id=1490
+X-Original-From: Marc Herrero <marcht@proton.me>
+Reply-To: marcht@proton.me
 
-From: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
+Two AudioReach fixes found while bringing up 24-bit headphone playback
+on the Radxa Dragon Q6A (QCS6490, sc8280xp machine driver, WCD9385).
 
-force_link_train is always false when passed to
-msm_dp_ctrl_prepare_stream_on(): the initial link is trained by
-msm_dp_ctrl_on_link(), and the flag is cleared before stream preparation.
-For active streams, it is never set.
+Patch 1: S24_LE was described to the DSP as packed 3-byte samples, so
+the ADSP audio_process crashed as soon as an S24_LE stream started.
+Using the 32-bit container size makes S24_LE work.
 
-Remove the dead flag and parameter. Stream preparation still retrains
-when channel equalization is incomplete.
+Patch 2: writing 0 to any "<BE> Audio Mixer <FE>" route control cleared
+the back end's link even if it belonged to another front end. As a
+result alsactl restore lost DisplayPort on every boot, and the board's
+UCM HDMI sequence disconnected the headphones (the PCM then stalls with
+hw_ptr stuck at 0).
 
-Signed-off-by: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
+Both were tested on 7.2.9 with the board's topology changed to allow
+S24_LE on MultiMedia1, and both apply to and build on asoc/for-next.
+
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c    | 5 ++---
- drivers/gpu/drm/msm/dp/dp_ctrl.h    | 3 +--
- drivers/gpu/drm/msm/dp/dp_display.c | 4 +---
- 3 files changed, 4 insertions(+), 8 deletions(-)
+Marc Herrero (2):
+      ASoC: qcom: audioreach: use a 32-bit container for S24_LE PCM
+      ASoC: qcom: audioreach: only disconnect the route a mixer control owns
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index 47647fdec9de..6b9d9a76ba05 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -2582,8 +2582,7 @@ static void msm_dp_ctrl_config_msa(struct msm_dp_ctrl_private *ctrl,
- }
- 
- int msm_dp_ctrl_prepare_stream_on(struct msm_dp_ctrl *msm_dp_ctrl,
--				  struct msm_dp_panel *panel,
--				  bool force_link_train)
-+				  struct msm_dp_panel *panel)
- {
- 	int ret = 0;
- 	struct msm_dp_ctrl_private *ctrl;
-@@ -2608,7 +2607,7 @@ int msm_dp_ctrl_prepare_stream_on(struct msm_dp_ctrl *msm_dp_ctrl,
- 		}
- 	}
- 
--	if (force_link_train || !msm_dp_ctrl_channel_eq_ok(ctrl))
-+	if (!msm_dp_ctrl_channel_eq_ok(ctrl))
- 		msm_dp_ctrl_link_retrain(ctrl, panel);
- 
- 	/* stop txing train pattern to end link training */
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.h b/drivers/gpu/drm/msm/dp/dp_ctrl.h
-index 80d9258501b4..fc884038182f 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.h
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.h
-@@ -20,8 +20,7 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_dp_ctrl,
- 			struct msm_dp_panel *panel);
- int msm_dp_ctrl_on_stream(struct msm_dp_ctrl *msm_dp_ctrl, struct msm_dp_panel *panel);
- int msm_dp_ctrl_prepare_stream_on(struct msm_dp_ctrl *msm_dp_ctrl,
--				  struct msm_dp_panel *panel,
--				  bool force_link_train);
-+				  struct msm_dp_panel *panel);
- void msm_dp_ctrl_off_link(struct msm_dp_ctrl *msm_dp_ctrl,
- 			  struct msm_dp_panel *panel);
- void msm_dp_ctrl_off_pixel_clk(struct msm_dp_ctrl *msm_dp_ctrl, enum msm_dp_stream_id stream_id);
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index c0c150e2c575..169938ba515e 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -633,7 +633,6 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- {
- 	struct msm_dp *msm_dp_display = &dp->msm_dp_display;
- 	int rc = 0;
--	bool force_link_train = false;
- 
- 	drm_dbg_dp(dp->drm_dev, "sink_count=%d\n", dp->link->sink_count);
- 
-@@ -651,7 +650,6 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- 
- 	if (!msm_dp_display->power_on) {
- 		msm_dp_display_host_phy_init(dp);
--		force_link_train = true;
- 	}
- 
- 	rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
-@@ -661,7 +659,7 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- 		return rc;
- 	}
- 
--	return msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel, force_link_train);
-+	return msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel);
- }
- 
- static int msm_dp_display_enable(struct msm_dp_display_private *dp,
+ sound/soc/qcom/qdsp6/audioreach.c | 4 ++--
+ sound/soc/qcom/qdsp6/topology.c   | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+---
+base-commit: cde5523c75f1320a55ac1d55a717ccbb566557f0
+change-id: 20261111-q6apm-fixes-21db1bb2d6a1
+
+Best regards,
 -- 
-2.43.0
+Marc Herrero <marcht@proton.me>
+
 
