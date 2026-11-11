@@ -1,79 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794399894;
-	b=H/TXtgLgPzXVfn7s6r37m8SLlahTWLQ5mZiPZE5PbEJiha++Ohd9cBIEAuPC1AlOvbtK
-	 ucTonPpUtC2V8X+pBocU7mMG90yaboPyDVIYWlY0wgSJvCXZoz7QnLr9HrExDMqW0DZWc
-	 zfbb43IDILW85lDhznuwL6RDKHDc73i2YyRT5/+eSTvC4mIw0TCjkKql8Wx+5y0ojiyOt
-	 9eGK3JkszdjhHvqVdCtvDrk8wntMZnnPEU99GnFKIUD+joxu8sYV6tPP13JeSW+Uy6Z19
-	 YgDMB4THHlDiMT4Xzu60LVcQ3CSfznAW8iK6TLR36PvKyScA8sYsFlx2lYM0qcw3K/w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794399894;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=vJymKD8wcsz1SNmg6n+0LMO/8cVup8JgUK92h3fbZKk=;
-	b=r840NH1LpJ/rlrm/T3tZClE4i2A+ZR33sHiVVdtmuIfOq5Lhs6Dm/IVi1Yurvl+8XtpD
-	 yJgxsDKWQAOjeeeA+V+ggaVkBlNU+HrkrR4gXtSMxLNpmpkzWlbgFBiNTXJWSdmBEvdlG
-	 dQ9oF3f0TqmfWcx1iIfvnI7Pi1M8d26qgeNOXdaaJ6h716YB8RAiLMqnirTEwr6zVzMMg
-	 TTbldueV2DBEPOid7N3Xlukyt6RFbsYJINgfKcg+RItLKRSZ3fnER84bhPJtnF4sn5nXE
-	 7tuq4l2SNu4g7r0j+D/VcHKw89ox6WKmT61DYNSnAMycJnzqGqM6x6LPMM+uiVVJgyg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K1UZgNnw;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794400629;
+	b=Yks3jpPC4wEtpyhZJePeiGzAEF4pRkTDuPiw8rT0/TCxhb68xlu2sCBhgkcGoFRIpkTu
+	 OeeYnk4J4MFMgwYfkM9x4KOHtA46kqLWUbGZ+UhIe5OMgoPKjQBAZvTFyKVOi8sRLDojj
+	 gy7Z1bUnzoe+ULlCE92Cg3Qf8TyxIUlEnt3OOlApnLDJyLo/paeSCTqqriGTE6OKfWiDg
+	 DUuIBdewOtWQ4xEXe7yAf3vF9a6LIjVv2Moc9bqq+1lQ6R1lrdxR/1Ab7aWir9RxDwcAz
+	 +O0OcMEZn7L2WNRhdNrGiVfrw41r5a1YaC+hurS+QdxAa4EiLKsO17/vH+lK0s0ALkg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794400629;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=DrEyZ9Dy/vdt9Enxk47/lufRYYKMANPK/dWOzZVfB0Q=;
+	b=3V2kMgtZqOcRKjwOi9vyb7bF/aboFaTL9pFCcEZ90soUAcd+sP6TWuc1MWUpMMwruV6n
+	 iNvpHtJPhlroXAoK+kAD6mnG/Ce664gOB+CzcS6kNstynqqh9VfrdnH2JPCigyNOEgLwJ
+	 6c3vUgNzlMQDiDO+D13oFEJwdn+jJRpR70mohrNGdGd38Cvyl0b+WRp+pT7aukijSRngO
+	 Xxga5z3qLq6oaPYFiECknuBWUrZ/ACiATbenBjh/jycI4Ubfd7T/M/bBo4jaLj1PNbzfW
+	 BmNvcpzz4/vQ+WQUVPrg8LD0aeWi8Gr52bt7FS6dBuWNX7Un94vX5bg6oa1WV4Uc80w==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Fm8TTeVI;
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 632AB606A31C;
-	Wed, 11 Nov 2026 12:24:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2C0E606A31C;
+	Wed, 11 Nov 2026 12:37:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K1UZgNnw
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794399894;
-	b=eO2Rw3xpma6L4XbqG9F0S+QSln3+UrxSnI7aBFw3KmvjXkcHkCOIXVFoT+QqBUARYN/8
-	 JNV/zAGF/tUsRw6aF5yawOqh6F0TSNTFez2Fu4fsDYpnSQ5infDg6DyDipVY8Iu1hhtJr
-	 0ikj4adUBOXfKBQPKBsAnX4ShnLG8WBWB0C6Rh7diZTWt9E5Nu0pONysTKE8yY/CJcNM4
-	 0zY6mWmGWFW8Lz3HMp6qy4UNrzGGXMKTh37xxytnWVzL1Lh0saBsVgSdG6dEOZBYRBWqh
-	 ZsTh8Md98kwU+wc8SMJRMlcr3oViOKzjSUrNYn3qRib2EyDoUmxOMQxQ6qDfhOc1Tag==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794399894;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=vJymKD8wcsz1SNmg6n+0LMO/8cVup8JgUK92h3fbZKk=;
-	b=GsV/iSIuqqm5hfOSLlh92wjE1fbIddIT6zJDES577E3p44PQSh7VoQ3up6jzQ0CQzhs2
-	 m4qASTQakDFdY+t12giAFPhDGtdP2oW9KnZdoVwcaK1U3xvtintCi0Lj8Up34qsy9pbf5
-	 oMAfvkAvQsWGCiw5tuFHH1TNbdD2J1CoX6Y7sjZ2zue0tvyn5tqSMhKwcFM3BDoZta0tS
-	 oApeWkAiYju6WbyfttiMyqV0OuNfM+Tnyp9fT4+GlgjzWToJVqdsH9vB9B6Yh5posT1y3
-	 5N2rn9UehvU0+EwlYQWVBQQlnfiXyusun1snPQuA5/33lwnsZeEb8y5OSKmjIJD7zog==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 859481F00A05;
-	Wed, 11 Nov 2026 12:24:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Fm8TTeVI
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5654C1F00A05;
+	Wed, 11 Nov 2026 12:37:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794399894;
-	bh=vJymKD8wcsz1SNmg6n+0LMO/8cVup8JgUK92h3fbZKk=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=K1UZgNnwX6RIJcD0Yf9egTSxGrYttybHdns1MyhG2U6b5jQsgi76bT0A3/4BfMny3
-	 GiwV00X+Ry3OSRbauLvZ7li1AJsYETMlggbMR7emw1etsQf0c+B1uLZTvYCDlauGUd
-	 TAKPQULwjMGUW6+UG7KdfvfaX0oCWL7juNiWEQB2nbNlW+HjvlB40lkpEdfuM/MV4W
-	 p3FW8li+xuJJ4JUzV1ekhbG0IUzPoS5OorQHzAkfIH4KKPomTjVN7NxSluSZmnT9VL
-	 H/xJ7RVe9qk0uORqPm/29ilrC2pVNt8hf2VJquvXEvuYAq1+pOngkfOt3SArQSBspv
-	 mXft3CU4d47UA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 1470148F9B;
-	Wed, 11 Nov 2026 12:24:53 +0000 (UTC)
-From: Vishal Balasubramanian via B4 Relay <devnull+vishal.bala.nps.gmail.com@kernel.org>
-Subject: [PATCH v2 0/2] Add Samsung Galaxy Tab S7 FE LTE (gts7xllite)
-Date: Wed, 11 Nov 2026 17:54:49 +0530
-Message-Id: <20261111-master-v2-0-5eb864e9f38d@gmail.com>
+	s=k20260515; t=1794400629;
+	bh=DrEyZ9Dy/vdt9Enxk47/lufRYYKMANPK/dWOzZVfB0Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Fm8TTeVIKgELMl8vk3ebBz7NjeNXK0VYlflbnvI+1DhF7tIPs8mjFhfsCxu4SsCEC
+	 dZj5z/6m0WsxBJK8mNC/CKIelsRlDPZdTa/pY7f0UXzHHt8WfrwUmxE9lglxm2Jtzy
+	 ius5pA6JqZ9CZAaURmR4YUp0cICYP8cHohV5iTpnxTi5YmKzzykZdIlMaAN0TRnmYd
+	 Zxzr5OmMoCKOA8mBYNhaX5S/A7N19hoWoLQBvBH9PJz6uTXVtIKiSKOWwV5aPYIwXo
+	 y8K+aQpIJIsvL9F+8W77GqC4igMTpEEwNnrjNb7YCtMZsInr7OcxaULuCk0CQzOWS6
+	 ScuUbS0ZJToZw==
+Date: Wed, 11 Nov 2026 13:37:05 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+Cc: Mark Brown <broonie@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+	Frank Li <Frank.Li@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Andy Gross <agross@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH 2/6] dt-bindings: dma: qcom-gpi: Add QSPI protocol
+ identifier
+Message-ID: <20261111-daring-salamander-from-tartarus-4c72bd@quoll>
+References: <20261106-qspi_upstream_series-v1-0-21f43042dd60@oss.qualcomm.com>
+ <20261106-qspi_upstream_series-v1-2-21f43042dd60@oss.qualcomm.com>
+ <20261109-wandering-miraculous-mamba-0cf21a@quoll>
+ <2fc8f7ea-651e-466e-9346-c47e0a38c5bb@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,73 +65,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJFe9GoC/2WMwQ6DIBAFf8XsuTRAUWNP/Y/GA8KimxQxYEgbw
- 7+Xeu27zctkDkgYCRPcmwMiZkoU1gry0oBZ9DojI1sZJJedqGNepx0j69V0a83AnVIGqrxFdPQ
- +Q8+x8kJpD/FzdrP4vX+JLBhnvJ+U450erG0fs9f0uprgYSylfAHEl89mnAAAAA==
-X-Change-ID: 20261111-master-74b35c90f44c
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
- Tony Luck <tony.luck@intel.com>, 
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Vishal Balasubramanian <vishal.bala.nps@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794399891; l=1585;
- i=vishal.bala.nps@gmail.com; s=20261111; h=from:subject:message-id;
- bh=1CzGOPtoQOQ5ftnC93rBD5AZUNBTmg/XmuRqFrI/w+Y=;
- b=t3z2R7aYNTWMCQNkyyCGEwyoK1suv1Lr6YnXtI/4XCtA9tPksBJKx19gpJMoJewJPxRI0q1RK
- RJxp18GCGA0CZKNFBWYhZ4Phuj6nWPe2B4Vcm/wLNa3xj945Fz3wjAa
-X-Developer-Key: i=vishal.bala.nps@gmail.com; a=ed25519;
- pk=GDcoc+SAK+BHD1Eq17X/BJa9U2HZkBW+dmxS8s1xMAY=
-X-Endpoint-Received: by B4 Relay for vishal.bala.nps@gmail.com/20261111
- with auth_id=1486
-X-Original-From: Vishal Balasubramanian <vishal.bala.nps@gmail.com>
-Reply-To: vishal.bala.nps@gmail.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <2fc8f7ea-651e-466e-9346-c47e0a38c5bb@oss.qualcomm.com>
 
-This series adds initial support for the Samsung Galaxy Tab S7 FE LTE
-(SM-T735), a tablet based on the Qualcomm SM7225 SoC.
+On Mon, Nov 09, 2026 at 08:03:29PM +0530, Jyothi Kumar Seerapu wrote:
+>=20
+>=20
+> On 11/9/2026 7:12 PM, Krzysztof Kozlowski wrote:
+> > On Fri, Nov 06, 2026 at 08:31:20PM +0530, Jyothi Kumar Seerapu wrote:
+> > > Add QCOM_GPI_QSPI to identify QSPI (Quad SPI) channels in GPI DMA
+> > > specifiers. Its value, 9, matches the GENI serial engine firmware
+> > > protocol ID for QSPI.
+> >=20
+> > What is GENI serial engine firmware? How does the Linux rely on it that
+> > we add bindings for it?
+>=20
+> Hi Krzysztof,
+> GENI firmware runs on the serial engine=E2=80=99s programmable sequencers=
+ and
+> implements protocols such as SPI and QSPI. Linux configures the engine and
+> submits transfers to it.
+> The existing GPI DMA specifier includes a client protocol ID. Linux progr=
+ams
+> this ID into the DMA channel and selects the corresponding descriptor
+> format. QCOM_GPI_QSPI adds the QSPI protocol encoding 9 to that interface.
+> I will clarify this in the commit description in V2.
 
-Supported in this initial version:
-- Display via simple-framebuffer
-- Volume keys and power button
-- UFS and microSD
-- USB
-- Wi-Fi and Bluetooth (WCN3991)
-- ADSP, CDSP and modem, including mobile data
-
-Signed-off-by: Vishal Balasubramanian <vishal.bala.nps@gmail.com>
----
-Changes in v2:
-- Add cover letter (v1 was sent without one)
-- Set PMK8350_SID to 6 and disable pmk8350_pon (Sashiko)
-- Fix swapped vdda-phy/vdda-pll supplies on usb_1_qmpphy (Sashiko)
-- Drop unresolvable stdout-path and unused cells from /chosen (Sashiko)
-- Use cont_splash_memory for the framebuffer instead of a duplicate region (Sashiko)
-- Add sd-cd pin configuration for gpio94 (Sashiko)
-- Drop IPA properties already set in sm6350.dtsi (Sashiko)
-- Rename knox_reserved to fastuh_mem (Sashiko)
-- Link to v1: https://lore.kernel.org/r/20261111-master-v1-0-07b4f06a9dd5@gmail.com
-
----
-Vishal Balasubramanian (2):
-      dt-bindings: arm: qcom: Add Samsung Galaxy Tab S7 FE LTE
-      arm64: dts: qcom: sm7225: Add Samsung Galaxy Tab S7 FE LTE
-
- Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
- arch/arm64/boot/dts/qcom/Makefile                  |   1 +
- .../boot/dts/qcom/sm7225-samsung-gts7xllite.dts    | 586 +++++++++++++++++++++
- 3 files changed, 588 insertions(+)
----
-base-commit: 630059a5a632377b9b7b487baccde92b7ae1dd47
-change-id: 20261111-master-74b35c90f44c
+Does not really answer. I see no reason why GENI firmware needs ABI for
+Linux.
 
 Best regards,
--- 
-Vishal Balasubramanian <vishal.bala.nps@gmail.com>
-
+Krzysztof
 
