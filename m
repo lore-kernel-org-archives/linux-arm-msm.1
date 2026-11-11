@@ -1,50 +1,50 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.97.179.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794413356;
-	b=dfAj5wn4/548b1tB7cocqID2Cu05I4vvKzu9e5cxA1JbMejoRYZjl9Smi2t7B7N0xQ6j
-	 Oc83JMDzTHiDAE0cOx3rP5anXi0HuoNSlwK/OpEz7hEKMtQjq5g+8HL2FObQ1C5uw4qax
-	 Lf/G7k6EL7jOWKymJzAcUHi1BqViSa/z1lFjL5+a+UvWfE1+iKXJIqof03KMHYZOdWTrh
-	 V1v52R/q1p3RPKSJ4DD1+HCuSGSPLRm7ch61rSfDFqUzcJIvEGW5XN7BMVSEfrbN9cnG1
-	 1fywgwcI6Q/lPYtVELse06ndkFSE13ldWzkm6JzmKdSJ3rAtEZVOce5PCrnU8GT+neg==
+	t=1794413358;
+	b=gj1OCsCM1HsetSHYeiX3DyNvZxt8e6i067DvXVEZWgH3SEBiybUObgXkh7Jmg6P/j8/7
+	 NeXp8MCPj54+BFpxKKwcdBF571NlgXBa3gz1gSqOiP62MOquSZ0YPIE8g8RUxtvdANtaS
+	 cHqIJZqHMqkcrIq4nbfJ2WEVImCG6MgvPmOQbbFWFSQ1uO7wBkvXv+hvc6DlIWd6dQBjP
+	 EHHhXK/f+X8IiASUelsf+mBNSOZvuGK/oryQXU7GamJV2bvMoRVvUmzJZyEqAJ0qDVrFE
+	 rkziQRaSogMz1SK5BOSYSMToRmGlEoxbiXlBs7vNp/wmsda8TjFIxvrELBpF7dA3Asg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794413356;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794413358;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=BAE9idnwOD10qYdzSWIYNdE/NfvRDU68ledfePCFivU=;
-	b=qOOBIVv9comRuM8LrJ+LW0P7fttgyTSZQO5pwfQA/Nr0pF0MzXxW9PKATxdn3FIx1jiM
-	 pNrcXDMxXfgOPfr/QMuZbNcwo4+QEq2+MDBpZywrCuAl8Mt45+LN1czAGpcfrEI5K4qcd
-	 8yzc/RubbDhMWWGfG1A/bUXezn+WxG4hFWPcY9GgBwzvnRkpi25LFiQn6DfbXu2PLeB7v
-	 cQiLdUoefpP8G03yZAZpcmE/UqNbyXsA9HOy5FY8kS0celSH0dwfRZ6u34RFKQtM9fFj3
-	 57fT50ym6xTZJ7sb4Cjp5ShdFLVjoEi4GWVpU6pcHatfRDIq+7VPv36fujWx20JQkzg==
+	bh=S6FVGPb1ZvpOph0pJYvEx0mS+mnul1pNHVlTgogu8qQ=;
+	b=E579S/2dBmVYB1PaSHOuMWHzAD3dWlmzkE0ebv+FgdDoyrYzccpcqei2Vjnnt0StPshD
+	 tERDsEOg7CqOdsaLtrLVM15Pf6vXGTrC02ImzRv/G4+mZbI8SRR/XJFjjXhVutzsSDqNB
+	 oA/RrPWjmcOnRJa8G6MTG4DKZMNNX8Jik2aCU5mLcL8FYQvP1DmWPa83DDiLSaABA7Zxa
+	 bknC10fdUfbT2Cz5ay1Zng29waf/Hct3edNSoWHBvWpBQP93BuwNOjZfLIuKCRvDctDGh
+	 pSg83tUFgxYKDmaq6ruXqT4uXjM8QpAsoDyT+pz7wL6E6rgXw+xOQCE0NQELqcOvgvQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=igalia.com;
 	spf=pass smtp.mailfrom=igalia.com;
-	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=KS+ssnCc;
+	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=Yj1rTxXP;
 	arc=none smtp.remote-ip=213.97.179.56
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BABAE606A326
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BABAE606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16423606A336
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 16423606A336
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=KS+ssnCc
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=Yj1rTxXP
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
-	Cc:To:From:From:Reply-To; bh=BAE9idnwOD10qYdzSWIYNdE/NfvRDU68ledfePCFivU=;
-	t=1794413355; x=2109773355; b=KS+ssnCcI5q1n26hhU4vsW93fRjL3rybO20gC1TFrQzEbEV
-	PHsIdC4sCU5EUZ0aCBPgEngge4Rmrcs2A0H9MuNzDCjNONYo4e99Du0GYE6Snftkt1TBwvl6VMNmD
-	O7C+0Zesu1yN7F3iW2Pu9SGsesdNwN0TxUZBzEs1dibP2rRqLnpSV+iQbs+yl+v5bLq0Gf4VyvlTl
-	mG7WAP4+MYuIOJF0CU2RP7eFjEQggYfZoUqLG2KQt4aPRpf1NlRWh3V8M1v4W4YZrHjrAMw0Of8GA
-	8hzzDLMbzgPWzwKbFXIGdDGrDgeOQZynxex2Q1Uwz0Cor/7uvbPDfLKT3+X/Gaxg==;
+	Cc:To:From:From:Reply-To; bh=S6FVGPb1ZvpOph0pJYvEx0mS+mnul1pNHVlTgogu8qQ=;
+	t=1794413356; x=2109773356; b=Yj1rTxXPJGh1QuufhUg7yQu4fK4xuW7rL/a8YVzq3dafYD5
+	GebVbzD+oq+ymkMbI4/6QW72tpzx/1W0vsJM4oJ5Gxi58Ef1kxCyCwG1dldBhkLtRR645rGAt2WQk
+	QSiHBgKqG0NusIoDenNUJhjmEBqPcYAJ0uYft9OS+CE5WUci/mUL4HE+uUIclco5LNPCS0KVDuAOy
+	Y6pzhx7wp4ZDPCgZp0Ht/XCWDlakflAFbuulsS+9LXKoGWMxH6IDG/UnjXnLUDjawUwmFrIOlnmzz
+	J7LE5k6RgNbw0ZayTbc8IWYEIOl65IZcjPPdmhFVHR4H6s6xuaaImSTlVaaAtx8g==;
 Received: from 193.red-79-147-123.dynamicip.rima-tde.net ([79.147.123.193] helo=killbill)
 	by fanzine2.igalia.com with esmtpsa 
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-	id 1xRAsM-008u8Y-G6; Wed, 11 Nov 2026 17:08:42 +0100
+	id 1xRAsN-008u8Y-KC; Wed, 11 Nov 2026 17:08:43 +0100
 From: Melissa Wen <mwen@igalia.com>
 To: airlied@gmail.com,
 	alexander.deucher@amd.com,
@@ -79,11 +79,10 @@ Cc: Uma Shankar <uma.shankar@intel.com>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	louis.chauvet@bootlin.com,
-	John Harrison <John.Harrison@igalia.com>,
-	Sashiko <sashiko-bot@kernel.org>
-Subject: [PATCH v5 12/15] drm/amd/display: don't ignore failure on blend colorop setup
-Date: Wed, 11 Nov 2026 17:05:25 +0100
-Message-ID: <20261111160814.21326-13-mwen@igalia.com>
+	John Harrison <John.Harrison@igalia.com>
+Subject: [PATCH v5 13/15] drm/amd/display: allow individual colorop changes
+Date: Wed, 11 Nov 2026 17:05:26 +0100
+Message-ID: <20261111160814.21326-14-mwen@igalia.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261111160814.21326-1-mwen@igalia.com>
 References: <20261111160814.21326-1-mwen@igalia.com>
@@ -98,63 +97,466 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-__set_input_tf_32() can fail on ENOMEM and let the blend transfer
-function setup in an unstable state. Check its return value and only
-enable blend if transfer function was successfully configured.
+If userspace modifies a single property of a colorop but doesn't
+resubmit the entire color pipeline, the other colorops will not be
+present in the commit; consequently, on plane recreation, the system
+would silently fall back to the legacy color path instead of maintaining
+the previously applied settings. Commit 20331505df9c ("drm/amd/display:
+pull colorops into state when recreating a plane") addresses this issue
+by ensuring that all colorops associated with a plane are included in
+the commit whenever that plane is recreated, because at this point, only
+new colorop states were taken into account in an atomic commit.
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Fixes: 5ed78b44e4e6 ("drm/amd/display: add shaper and blend colorops for 1D Curve Custom LUT")
-Reviewed-by: Harry Wentland <harry.wentland@amd.com>
+Use the committed state of a colorop within the active color pipeline
+when the commit doesn't introduce a new state for it. A colorop that is
+not included in the commit remains unchanged; therefore, its committed
+state is also its new state. Consequently, remove the call to
+drm_atomic_add_affected_colorops() from dm_update_plane_state(), since a
+duplicated colorop state would just contain those same,
+already-committed values. Also fix AMD KUnit color test accordingly.
+
+Fixes: 9ba25915efba ("drm/amd/display: Add support for sRGB EOTF in DEGAM block")
 Signed-off-by: Melissa Wen <mwen@igalia.com>
 ---
- .../drm/amd/display/amdgpu_dm/amdgpu_dm_color.c   | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  13 --
+ .../amd/display/amdgpu_dm/amdgpu_dm_color.c   | 213 +++++++-----------
+ .../amdgpu_dm/tests/amdgpu_dm_color_test.c    |  15 +-
+ 3 files changed, 92 insertions(+), 149 deletions(-)
 
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+index 0ea45ab12119..4d6a965d2b6b 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -6048,19 +6048,6 @@ dm_update_plane_state(struct dc *dc,
+ 		if (ret)
+ 			goto out;
+ 
+-		/*
+-		 * Recreating the plane re-derives its DC color pipeline from the
+-		 * colorop states in this commit. Pull the plane's colorops in so
+-		 * the derivation sees the current pipeline; otherwise every stage
+-		 * silently defaults to bypass (dropping YUV->RGB, shaper, 3D LUT
+-		 * and regamma) when userspace didn't touch color in this commit.
+-		 */
+-		if (new_plane_state->color_pipeline) {
+-			ret = drm_atomic_add_affected_colorops(state, plane);
+-			if (ret)
+-				goto out;
+-		}
+-
+ 		WARN_ON(dm_new_plane_state->dc_state);
+ 
+ 		dc_new_plane_state = dc_create_plane_state(dc);
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
-index 686f718bd155..f53228072fc8 100644
+index f53228072fc8..7332c8874397 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
 +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
-@@ -1936,7 +1936,7 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
- 	const struct drm_color_lut32 *blend_lut = NULL;
- 	struct drm_device *dev = colorop->dev;
- 	uint32_t blend_size = 0;
+@@ -1592,21 +1592,14 @@ __set_dm_plane_colorop_fixed_matrix(struct drm_plane_state *plane_state,
+ 				    struct dc_plane_state *dc_plane_state,
+ 				    struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *colorop_state = NULL, *new_colorop_state;
++	struct drm_colorop_state *colorop_state = NULL;
+ 	struct drm_atomic_commit *state = plane_state->state;
 -	int i = 0;
-+	int i = 0, ret;
+-
+-	old_colorop = colorop;
+-
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop) {
+-			colorop_state = new_colorop_state;
+-			break;
+-		}
+-	}
  
- 	tf->type = TF_TYPE_BYPASS;
- 	dc_plane_state->cm.flags.bits.blend_enable = 0;
-@@ -1971,8 +1971,10 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
- 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
- 		tf->tf = default_tf = amdgpu_colorop_tf_to_dc_tf(tf_state->curve_1d_type);
- 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
-+		ret = __set_input_tf_32(NULL, tf, blend_lut, blend_size);
-+		if (ret)
-+			return ret;
- 		dc_plane_state->cm.flags.bits.blend_enable = 1;
--		__set_input_tf_32(NULL, tf, blend_lut, blend_size);
++	colorop_state = drm_atomic_get_new_colorop_state(state, colorop);
+ 	if (!colorop_state)
++		colorop_state = colorop->state;
++
++	if (colorop->type != DRM_COLOROP_FIXED_MATRIX)
+ 		return -EINVAL;
+ 
+ 	if (colorop_state->bypass) {
+@@ -1647,24 +1640,13 @@ __set_dm_plane_colorop_degamma(struct drm_plane_state *plane_state,
+ 			       struct dc_plane_state *dc_plane_state,
+ 			       struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *colorop_state = NULL, *new_colorop_state;
++	struct drm_colorop_state *colorop_state;
+ 	struct drm_atomic_commit *state = plane_state->state;
+-	int i = 0;
+-
+-	old_colorop = colorop;
+ 
+ 	/* 1st op: 1d curve - degamma */
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    (BIT(new_colorop_state->curve_1d_type) & amdgpu_dm_supported_degam_tfs)) {
+-			colorop_state = new_colorop_state;
+-			break;
+-		}
+-	}
+-
++	colorop_state = drm_atomic_get_new_colorop_state(state, colorop);
+ 	if (!colorop_state)
+-		return -EINVAL;
++		colorop_state = colorop->state;
+ 
+ 	return __set_colorop_in_tf_1d_curve(dc_plane_state, colorop_state);
+ }
+@@ -1675,43 +1657,37 @@ __set_dm_plane_colorop_3x4_matrix(struct drm_plane_state *plane_state,
+ 				  struct dc_plane_state *dc_plane_state,
+ 				  struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *colorop_state = NULL, *new_colorop_state;
++	struct drm_colorop_state *colorop_state;
+ 	struct drm_atomic_commit *state = plane_state->state;
+ 	const struct drm_device *dev = colorop->dev;
+ 	const struct drm_property_blob *blob;
+ 	struct drm_color_ctm_3x4 *ctm = NULL;
+-	int i = 0;
+ 
+ 	/* 3x4 matrix */
+-	old_colorop = colorop;
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    new_colorop_state->colorop->type == DRM_COLOROP_CTM_3X4) {
+-			colorop_state = new_colorop_state;
+-			break;
+-		}
++	colorop_state = drm_atomic_get_new_colorop_state(state, colorop);
++	if (!colorop_state)
++		colorop_state = colorop->state;
++
++	if (colorop->type != DRM_COLOROP_CTM_3X4)
++		return -EINVAL;
++
++	if (colorop_state->bypass) {
++		dc_plane_state->gamut_remap_matrix.enable_remap = false;
++		dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
++		return 0;
  	}
  
- 	if (lut_state && !lut_state->bypass) {
-@@ -1980,13 +1982,16 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
- 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
- 		tf->tf = default_tf;
- 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
--		dc_plane_state->cm.flags.bits.blend_enable = 1;
- 		blend_lut = __extract_blob_lut32(lut_state->data, &blend_size);
- 		blend_size = blend_lut != NULL ? blend_size : 0;
- 
- 		/* Custom LUT size must be the same as supported size */
--		if (blend_size == lut_colorop->size)
--			__set_input_tf_32(NULL, tf, blend_lut, blend_size);
-+		if (blend_size == lut_colorop->size) {
-+			ret = __set_input_tf_32(NULL, tf, blend_lut, blend_size);
-+			if (ret)
-+				return ret;
-+			dc_plane_state->cm.flags.bits.blend_enable = 1;
-+		}
+-	if (colorop_state && colorop->type == DRM_COLOROP_CTM_3X4) {
+-		if (colorop_state->bypass) {
+-			dc_plane_state->gamut_remap_matrix.enable_remap = false;
+-			dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
+-			return 0;
+-		}
+-
+-		drm_dbg(dev, "3x4 matrix colorop with ID: %d\n", colorop->base.id);
+-		blob = colorop_state->data;
+-		if (blob->length == sizeof(struct drm_color_ctm_3x4)) {
+-			ctm = (struct drm_color_ctm_3x4 *) blob->data;
+-			__drm_ctm_3x4_to_dc_matrix(ctm, dc_plane_state->gamut_remap_matrix.matrix);
+-			dc_plane_state->gamut_remap_matrix.enable_remap = true;
+-			dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
+-		} else {
+-			drm_warn(dev, "blob->length (%zu) isn't equal to drm_color_ctm_3x4 (%zu)\n",
+-				 blob->length, sizeof(struct drm_color_ctm_3x4));
+-			return -EINVAL;
+-		}
++	drm_dbg(dev, "3x4 matrix colorop with ID: %d\n", colorop->base.id);
++	blob = colorop_state->data;
++	if (blob->length == sizeof(struct drm_color_ctm_3x4)) {
++		ctm = (struct drm_color_ctm_3x4 *) blob->data;
++		__drm_ctm_3x4_to_dc_matrix(ctm, dc_plane_state->gamut_remap_matrix.matrix);
++		dc_plane_state->gamut_remap_matrix.enable_remap = true;
++		dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
++	} else {
++		drm_warn(dev, "blob->length (%zu) isn't equal to drm_color_ctm_3x4 (%zu)\n",
++			 blob->length, sizeof(struct drm_color_ctm_3x4));
++		return -EINVAL;
  	}
  
  	return 0;
+@@ -1723,29 +1699,23 @@ __set_dm_plane_colorop_multiplier(struct drm_plane_state *plane_state,
+ 				  struct dc_plane_state *dc_plane_state,
+ 				  struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *colorop_state = NULL, *new_colorop_state;
++	struct drm_colorop_state *colorop_state;
+ 	struct drm_atomic_commit *state = plane_state->state;
+ 	const struct drm_device *dev = colorop->dev;
+-	int i = 0;
+ 
+ 	/* Multiplier */
+-	old_colorop = colorop;
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    new_colorop_state->colorop->type == DRM_COLOROP_MULTIPLIER) {
+-			colorop_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	colorop_state = drm_atomic_get_new_colorop_state(state, colorop);
++	if (!colorop_state)
++		colorop_state = colorop->state;
+ 
+-	if (colorop_state && colorop->type == DRM_COLOROP_MULTIPLIER) {
+-		if (colorop_state->bypass) {
+-			dc_plane_state->hdr_mult = dc_fixpt_one;
+-		} else {
+-			drm_dbg(dev, "Multiplier colorop with ID: %d\n", colorop->base.id);
+-			dc_plane_state->hdr_mult = amdgpu_dm_fixpt_from_s3132(colorop_state->multiplier);
+-		}
++	if (colorop->type != DRM_COLOROP_MULTIPLIER)
++		return -EINVAL;
++
++	if (colorop_state->bypass) {
++		dc_plane_state->hdr_mult = dc_fixpt_one;
++	} else {
++		drm_dbg(dev, "Multiplier colorop with ID: %d\n", colorop->base.id);
++		dc_plane_state->hdr_mult = amdgpu_dm_fixpt_from_s3132(colorop_state->multiplier);
+ 	}
+ 
+ 	return 0;
+@@ -1757,8 +1727,6 @@ __set_dm_plane_colorop_shaper(struct drm_plane_state *plane_state,
+ 			      struct dc_plane_state *dc_plane_state,
+ 			      struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *new_colorop_state;
+ 	struct drm_colorop_state *tf_state = NULL, *lut_state = NULL;
+ 	struct drm_atomic_commit *state = plane_state->state;
+ 	struct drm_colorop *lut_colorop;
+@@ -1767,38 +1735,32 @@ __set_dm_plane_colorop_shaper(struct drm_plane_state *plane_state,
+ 	const struct drm_color_lut32 *shaper_lut;
+ 	struct drm_device *dev = colorop->dev;
+ 	u32 shaper_size;
+-	int i = 0, ret = 0;
++	int ret = 0;
+ 
+ 	tf->type = TF_TYPE_BYPASS;
+ 	dc_plane_state->cm.flags.bits.shaper_enable = 0;
+ 
+ 	/* 1D Curve - SHAPER TF: find state */
+-	old_colorop = colorop;
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    (BIT(new_colorop_state->curve_1d_type) & amdgpu_dm_supported_shaper_tfs)) {
+-			tf_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	if (colorop->type != DRM_COLOROP_1D_CURVE)
++		return -EINVAL;
++
++	tf_state = drm_atomic_get_new_colorop_state(state, colorop);
++	if (!tf_state)
++		tf_state = colorop->state;
+ 
+ 	/* 1D LUT - SHAPER LUT: find state */
+-	lut_colorop = old_colorop->next;
+-	if (!lut_colorop) {
++	lut_colorop = colorop->next;
++	if (!lut_colorop || lut_colorop->type != DRM_COLOROP_1D_LUT) {
+ 		drm_dbg(dev, "no Shaper LUT colorop found\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == lut_colorop &&
+-		    new_colorop_state->colorop->type == DRM_COLOROP_1D_LUT) {
+-			lut_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	lut_state = drm_atomic_get_new_colorop_state(state, lut_colorop);
++	if (!lut_state)
++		lut_state = lut_colorop->state;
+ 
+-	if (tf_state && !tf_state->bypass) {
+-		drm_dbg(dev, "Shaper TF colorop with ID: %d\n", old_colorop->base.id);
++	if (!tf_state->bypass) {
++		drm_dbg(dev, "Shaper TF colorop with ID: %d\n", colorop->base.id);
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf = amdgpu_colorop_tf_to_dc_tf(tf_state->curve_1d_type);
+ 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
+@@ -1808,7 +1770,7 @@ __set_dm_plane_colorop_shaper(struct drm_plane_state *plane_state,
+ 		dc_plane_state->cm.flags.bits.shaper_enable = 1;
+ 	}
+ 
+-	if (lut_state && !lut_state->bypass) {
++	if (!lut_state->bypass) {
+ 		drm_dbg(dev, "Shaper LUT colorop with ID: %d\n", lut_colorop->base.id);
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf;
+@@ -1865,8 +1827,7 @@ __set_dm_plane_colorop_3dlut(struct drm_plane_state *plane_state,
+ 			     struct dc_plane_state *dc_plane_state,
+ 			     struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *colorop_state = NULL, *new_colorop_state;
++	struct drm_colorop_state *colorop_state;
+ 	struct dc_transfer_func *tf = &dc_plane_state->cm.shaper_func;
+ 	struct drm_atomic_commit *state = plane_state->state;
+ 	const struct amdgpu_device *adev = drm_to_adev(colorop->dev);
+@@ -1874,19 +1835,17 @@ __set_dm_plane_colorop_3dlut(struct drm_plane_state *plane_state,
+ 	const struct drm_device *dev = colorop->dev;
+ 	const struct drm_color_lut32 *lut3d;
+ 	uint32_t lut3d_size;
+-	int i = 0, ret = 0;
++	int ret = 0;
+ 
+ 	/* 3D LUT */
+-	old_colorop = colorop;
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    new_colorop_state->colorop->type == DRM_COLOROP_3D_LUT) {
+-			colorop_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	colorop_state = drm_atomic_get_new_colorop_state(state, colorop);
++	if (!colorop_state)
++		colorop_state = colorop->state;
+ 
+-	if (colorop_state && !colorop_state->bypass && colorop->type == DRM_COLOROP_3D_LUT) {
++	if (colorop->type != DRM_COLOROP_3D_LUT)
++		return -EINVAL;
++
++	if (!colorop_state->bypass) {
+ 		if (!has_3dlut) {
+ 			drm_dbg(dev, "3D LUT is not supported by hardware\n");
+ 			return -EINVAL;
+@@ -1926,8 +1885,6 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 			     struct dc_plane_state *dc_plane_state,
+ 			     struct drm_colorop *colorop)
+ {
+-	struct drm_colorop *old_colorop;
+-	struct drm_colorop_state *new_colorop_state;
+ 	struct drm_colorop_state *tf_state = NULL, *lut_state = NULL;
+ 	struct drm_atomic_commit *state = plane_state->state;
+ 	struct drm_colorop *lut_colorop;
+@@ -1936,38 +1893,32 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 	const struct drm_color_lut32 *blend_lut = NULL;
+ 	struct drm_device *dev = colorop->dev;
+ 	uint32_t blend_size = 0;
+-	int i = 0, ret;
++	int ret;
+ 
+ 	tf->type = TF_TYPE_BYPASS;
+ 	dc_plane_state->cm.flags.bits.blend_enable = 0;
+ 
+ 	/* 1D Curve - BLND TF: find state */
+-	old_colorop = colorop;
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == old_colorop &&
+-		    (BIT(new_colorop_state->curve_1d_type) & amdgpu_dm_supported_blnd_tfs)) {
+-			tf_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	if (colorop->type != DRM_COLOROP_1D_CURVE)
++		return -EINVAL;
++
++	tf_state = drm_atomic_get_new_colorop_state(state, colorop);
++	if (!tf_state)
++		tf_state = colorop->state;
+ 
+ 	/* 1D LUT - BLND LUT: find state */
+-	lut_colorop = old_colorop->next;
+-	if (!lut_colorop) {
++	lut_colorop = colorop->next;
++	if (!lut_colorop || lut_colorop->type != DRM_COLOROP_1D_LUT) {
+ 		drm_dbg(dev, "no Blend LUT colorop found\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	for_each_new_colorop_in_state(state, colorop, new_colorop_state, i) {
+-		if (new_colorop_state->colorop == lut_colorop &&
+-		    new_colorop_state->colorop->type == DRM_COLOROP_1D_LUT) {
+-			lut_state = new_colorop_state;
+-			break;
+-		}
+-	}
++	lut_state = drm_atomic_get_new_colorop_state(state, lut_colorop);
++	if (!lut_state)
++		lut_state = lut_colorop->state;
+ 
+-	if (tf_state && !tf_state->bypass) {
+-		drm_dbg(dev, "Blend TF colorop with ID: %d\n", old_colorop->base.id);
++	if (!tf_state->bypass) {
++		drm_dbg(dev, "Blend TF colorop with ID: %d\n", colorop->base.id);
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf = amdgpu_colorop_tf_to_dc_tf(tf_state->curve_1d_type);
+ 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
+@@ -1977,7 +1928,7 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 		dc_plane_state->cm.flags.bits.blend_enable = 1;
+ 	}
+ 
+-	if (lut_state && !lut_state->bypass) {
++	if (!lut_state->bypass) {
+ 		drm_dbg(dev, "Blend LUT colorop with ID: %d\n", lut_colorop->base.id);
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf;
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
+index d2ae35bf550f..8e00da61a04b 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
+@@ -1847,8 +1847,9 @@ struct dm_test_colorop_fixture {
+  * @test: KUnit test context
+  * @type: colorop type to assign
+  *
+- * Fabricates a minimal drm_atomic_commit with one colorop slot so that
+- * for_each_new_colorop_in_state() finds exactly the colorop under test.
++ * Fabricates a minimal drm_atomic_commit with the colorop in the only colorop
++ * slot (index 0), so that drm_atomic_get_new_colorop_state() returns its new
++ * state.
+  *
+  * Returns: a populated fixture (by value).
+  */
+@@ -1865,6 +1866,7 @@ dm_test_colorop_setup(struct kunit *test, enum drm_colorop_type type)
+ 	f.colorop = kunit_kzalloc(test, sizeof(*f.colorop), GFP_KERNEL);
+ 	KUNIT_ASSERT_NOT_NULL(test, f.colorop);
+ 	f.colorop->dev = &f.adev->ddev;
++	f.colorop->index = 0;
+ 	f.colorop->type = type;
+ 
+ 	f.colorop_state = kunit_kzalloc(test, sizeof(*f.colorop_state), GFP_KERNEL);
+@@ -1911,8 +1913,10 @@ static void dm_test_colorop_multiplier_applied(struct kunit *test)
+ }
+ 
+ /**
+- * dm_test_colorop_multiplier_no_match - Non-multiplier colorop leaves hdr_mult untouched
++ * dm_test_colorop_multiplier_no_match - Non-multiplier colorop: return -EINVAL.
+  * @test: KUnit test context
++ *
++ * left hdr_mult untouched
+  */
+ static void dm_test_colorop_multiplier_no_match(struct kunit *test)
+ {
+@@ -1923,7 +1927,7 @@ static void dm_test_colorop_multiplier_no_match(struct kunit *test)
+ 
+ 	KUNIT_EXPECT_EQ(test,
+ 			__set_dm_plane_colorop_multiplier(f.plane_state, f.dc_plane_state, f.colorop),
+-			0);
++			-EINVAL);
+ 	KUNIT_EXPECT_EQ(test, f.dc_plane_state->hdr_mult.value, 0LL);
+ }
+ 
+@@ -2414,7 +2418,7 @@ static void dm_test_update_plane_color_mgmt_plane_ctm(struct kunit *test)
+  * dm_test_colorop_pipeline_add - append one colorop to a fabricated pipeline
+  * @test: KUnit test context
+  * @f: color update fixture that owns the atomic state
+- * @index: colorop array index to populate
++ * @index: colorop array index to populate, also used as the colorop index
+  * @type: colorop type
+  * @curve_1d_type: 1D curve type for DRM_COLOROP_1D_CURVE states
+  * @bypass: bypass flag for the new colorop state
+@@ -2434,6 +2438,7 @@ dm_test_colorop_pipeline_add(struct kunit *test,
+ 	colorop = kunit_kzalloc(test, sizeof(*colorop), GFP_KERNEL);
+ 	KUNIT_ASSERT_NOT_NULL(test, colorop);
+ 	colorop->dev = &f->adev->ddev;
++	colorop->index = index;
+ 	colorop->type = type;
+ 	colorop->size = MAX_COLOR_LUT_ENTRIES;
+ 
 -- 
 2.53.0
 
