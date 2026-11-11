@@ -1,79 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794404970;
-	b=wBrjr1/Z2bFy7v2DMPPCn98b0tbWdga44g3+TEQ3ywOEAAQqezge4BjcCR3qpkP1pWrb
-	 e9KgOxfIlzfBchh08bk+hy0kRpj3od5+jWKJquJGds1uxlOGr2RfOd9RLJKupQedbmoPp
-	 62aAkIZXhFPb8XzpJE+4GD1RoUipgO407pvHWBiM9vfdQfNMmNt58XYi6/e0Ro2MZD3ma
-	 I2587pDopLvYhHE2D0DTc4IXA0yxMkcFYa3xjQnc4OSxOK9DjEYiQk5e2K/x0i/Bk15u6
-	 u7f3C3ykt98MUJvDMNVvtJgcul41upi53G+PA1KxHLwDYljAhCcnBljavhS+pbA12fw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794404970;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Bw9aWihjYWPZ2pc+cK7u1BOm3yUetlpv3HqSoI26ksM=;
-	b=f4U2ONsnhIc1aJbOvbbSv2DjmaTm4irz2SiRtNQUynmEePoQ5OIDXy8MkicgvWH1e9Z7
-	 ZkLb1hXk5lpWmBjQQQbSS7JRdJ7LArbliHSqOGzTcFVInLWbphSitNvw3o6p2R44CW9MQ
-	 Tl84wVz1/Kt0b8Qw5XeioXNxKD1GJsq60WIkyj1QjosaBNZPvJs6VTe5p/jaefZFlSVmr
-	 CeYT53iQu9W4fmuPzJdUgV90bCeOL+2LpavR32B8Xs5sGe4jKs666i9UkFaH8ttxY6Q8B
-	 VlNSyYxA/5U3jG1iRDWYpvZOffBqrZCL/ym58EXzIwSMbEMuozOnXbXs61JlFAIJn5A==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LfUljFbI;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F891606A31C;
-	Wed, 11 Nov 2026 13:49:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LfUljFbI
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794404969;
-	b=kpLNfU3tKpDxA2BAtCAUy1cKRkGV0rS5dwR9wTwNn94ty5LVq6uaeWBzfVf7B4SIDDzN
-	 aquRdVdWyLUQKSX3X37osQbyDScGqjAoex92KBXbgaLoh2yax+0Bamem9KNOPg5dYAjWh
-	 KN8kbYMaw+5Tt1utQ08eosU+rlRHXhJFkYH5iKlTTwZSqEFj5DbVXGacz2CBM8+ftJvSd
-	 fm2o2+h5mtEyoTJ2ET7LVdorHH5sotQCksXWXYyq+CHXrJvDh/vPokUjjxzu1bqUuTNOI
-	 jPnTb65y7SoDGbahMH4AG3oPhy2SYkjHM89qk6RBwkq9iiMjLbtgcnb6fqVdPlzXNjA==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794404969;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=Bw9aWihjYWPZ2pc+cK7u1BOm3yUetlpv3HqSoI26ksM=;
-	b=qPp0iX4ZmAbA6itnpUTWgnC7azhFI+ZSqxbeDUpjpdbhVYc3GkbxX6XAf7e5OBJueP7L
-	 INvgogA5YQyFcC+xPKujwPJDZ2uO+5k/F5iNi7YxxCD6vWBgkZoLGMmVMyypUidAVKjce
-	 JBzGsPrfuy8eI06FWJMmyKp4dUPwn2k0KVohK4OnVAAVP4SxL3cN3vySAcwl0gP7buFL8
-	 vMANpyplZdiYjam9LMuJPEaXP11uKBBm25LcL/xZ1ePK2AoJUMwuxuiX8YlUtBmmFGvzL
-	 w8p+J93hBhfQspd6afvMyIjvmW22W1Mn+wwSs1RtLoUAohTtqrz9vW8Jt8uiJJz2H6g==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.217.42
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794405227;
+	b=gVgihY+CZ7IetcIwlJIq8IameI14YAq9D0gmT5QkwJX5fR5pEF0rMv0BBJ2k7nnd3Wh3
+	 p70SMLGt6wYdfaZkcvYBYSqU7gqu8SRVy30HvpWgla8vJZGkqd2q+PDAvcVljf2R+ajds
+	 i7e0K+n8pKnEXDKUfrU1ZE0OYWd1jQuGRtgEgVqYXRei/JZItBmVUsfz8pPZFGjJ8Hqub
+	 rymWMJ08pshGgx7OaDzKNEEo4K2y1k3o/NnukG9PuN8ZrWdWVh+iWnutUvRqDwR56SmD3
+	 1oblzoYhhK3GGWsXHPWlQ+KQUR67A3uhv2frJrbz1vDWowVMb/JOM1cDb6mGpdGWADA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794405227;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=iotswADUSSGHEiRZkFhuYUuQsdnE4S9RnJjUi0KsUEY=;
+	b=1fZLgIihzfvdMeMlE0Yol41+pjnh20oKI/frbmTo7j9CbvLZ08a3xL6bkfBRPzwmqlpd
+	 or91F2qsMcIDIMHhS6VNRRi1WgHFaY8PwXwoFIiFaGXnba08mWHtYcmTzp0NJIiVyzgHZ
+	 TJPV6p0lsJ1nIetTsepdiv7v2VbwI2wl+aNemnVY+MALMB1xXgnDYYmHFGx9Db/x50/Kw
+	 iyhBpKddv87UUtvh3B0UKSXHay684GoB0hqbj9vxo/cd/ziTz/KTOzgo3MvF7CtHTuEt+
+	 NjcjBvOdvOd1h8ys2ouyZ5TZtsSwRqDr2R9MKyeBlWZpV8B49T5FDI7qYNeVkO+uwGw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=none header.from=fatecpompeia.edu.br;
+	spf=none smtp.mailfrom=fatecpompeia.edu.br;
+	dkim=pass header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=dQc6Dc1c;
+	arc=none smtp.remote-ip=209.85.217.42
+Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 523891F00A05;
-	Wed, 11 Nov 2026 13:49:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794404969;
-	bh=Bw9aWihjYWPZ2pc+cK7u1BOm3yUetlpv3HqSoI26ksM=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=LfUljFbIN8QEIUFk4G0Ke44qKTy1st9HOOWB4s9BAZbyU3YL5Glb8hgEZSZLJLg4K
-	 LSfR+XKZKDlJ7wjp+WBmf9GBRf0FNO9qxffDjawjRnGRYQPuQulAilia6GvLXLOeFm
-	 efpk2xL/2rUpHTIWi4JAxREBuOWei93aPk111/gn3+CCYZ22MEgxxHn+okutSvn3yG
-	 IbntZXWhshjoPY3WmADgCN0LuM2cftBB3aVNlSqOgcaZsnJcur0RE4L3iaGwhqT/aF
-	 aHWLZy+YIVxf7fWBDe4aG2ZiSqqdZFkOn/c8Io1Tg6j7GEO9/Lx1uJ0H+4ZziYo4vA
-	 YXp8XIj/Jw2pg==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 99E8E48FC1;
-	Wed, 11 Nov 2026 13:49:28 +0000 (UTC)
-From: Marc Herrero via B4 Relay <devnull+marcht.proton.me@kernel.org>
-Date: Wed, 11 Nov 2026 13:49:27 +0000
-Subject: [PATCH] ASoC: qcom: audioreach: apply volume changes to a running
- graph
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58641606A31C
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 13:53:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 58641606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fatecpompeia.edu.br
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=fatecpompeia.edu.br
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=dQc6Dc1c
+Received: by mail-vs1-f42.google.com with SMTP id ada2fe7eead31-74ab99038afso2483343137.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 05:53:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fatecpompeia-edu-br.20260707.gappssmtp.com; s=20260707; t=1794405225; x=1795010025; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=iotswADUSSGHEiRZkFhuYUuQsdnE4S9RnJjUi0KsUEY=;
+        b=dQc6Dc1cFeh3lUkUO2AOXY93vRxDH1gCO1sr2nYNEGrmlq42lk9DvEjZTgunacCbN9
+         R9OBXeINCBjqj6PzOxF455p1WhcfMxvU7UcCKP0xVe6L1F5CbEHd1M6nXWvALtYkacTR
+         udtl+zMqaMaTqi6JZXjCqRAViAshVdEZnvj+0vXj8FaxN6Fxjq/DY9vrU/0hx9oxG+KP
+         mhz8b/xqit94XezaLxvZuhwx2BmtZbdoJr4c+bPoXpfkBIFJklN82HSNUzDx0sBy7lvS
+         ES1sMAms0s/oy+n5HwSttmYDwDkTxplIum2uG7S7tlH9RiQe2CpugSPN09uGmP1cYI7l
+         W/4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794405225; x=1795010025;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iotswADUSSGHEiRZkFhuYUuQsdnE4S9RnJjUi0KsUEY=;
+        b=DiHlEE1r6b6h2An/anpaf+9HrFIM6BTa2GVTC8holKWV/WgL9axt8YsJmxxUMx9vXK
+         Iqj2paRjncjkrz9BrtKg1oPFpfk3kiEvjgSxWW0OgKyYWpKAYAaBZSU4oDM1bbLlsbYZ
+         S/RhZjE9fHbaHU86HRMFmS4mASaQ36AVg0w3bKJlsDxsQ6uPtDhwaO5fN/wto+9mjZZe
+         ZtMhTTm4p1CNkJoDwP47XFl/6QUZyEfV1UEIwn+NaaSWBOQCD89MGU0DnCT5OAtTFGG1
+         rmBgypBzpBBREyp2UyvEdaqjhDmiVQp/c03LAEhkO6fkW9QQ4SlDbia0EX4ZVTEPpgsa
+         N9Dw==
+X-Forwarded-Encrypted: i=1; AL+hErG9w2XQE6XiiD6Ax9Heg90eBjJn0k0RicQ+ZTb+MAJ8HQNzl92e65N/fGkXxvi4biB3nfFc1ZQlnuY4LWLu@vger.kernel.org
+X-Gm-Message-State: APuU4Z+xeOh0by780B16U0/de4NCZdyl0TgloXAEpd9n3879bLJT9+rc
+	Ez107T6dKplYNNP0/ejxyJnU52KL8hpyb1QTUyfPazglaLmrCocwYT2Vhj0spoKHku0=
+X-Gm-Gg: AYBFou28D6t9VnEfLaIWTM4ltuKaRSerDrgrCHLKw1o8aBh3NW5ovvDI38fAAP3W26o
+	FIlC6Ou4+JjIgTEnNDe7mr1S0Xvwzoj0PuZIwDMN6wHOdikbEEsEjcqKkeWxaT3K7Pbmq9TKdWN
+	LFJo1ipZwumVgxZBR+bZm3sxP33G7nhipoC+mkSQEnWIh8sxaW1NLEyrFvAgwW8Mj9ItmbgHbyE
+	unoJWiN2H1BX0EvBlJJsNf7KRkzB0mJAnI75Jx52/GDK19QaniVLACm9DJhOelSoodeo1DypsWp
+	+GdzD50ALI+h8t+DUjumrBd0GBP6cjDufSe6QfSnMhw07rudkjKwz3Oetxe5j+zQd4hTxJAwtuM
+	BwWDTyubLd8pqFpN8uchKKNPeMZADxeJGz2lYx+KB82CPoNvWk4khrpNcYpw7fMLMdRfpEqcbEu
+	v2VG2IIu+cvn7f+yuR/CazhKxYBpcRps2YH8EgO9gx8gJEz1lWqJyQuEFGck7OkiSBifSPCDAhq
+	WIUf/bClIlO6qfs5OVT5CgdyEx1chEHVNGT/+WOd0dV5vuePPlF1HtzUhzNvI4UivNCamOLL3Hv
+	RnNZ+a5OxuCs+P4efkkzvoYc9CM4YHQOdsGu+NBbub+RhCade3D0BeRIGLMeanuzUDcPe5PkSBH
+	u/ONw
+X-Received: by 2002:a67:e106:0:b0:7a8:1837:9eb9 with SMTP id ada2fe7eead31-7d5061cf3a5mr665976137.27.1794405225039;
+        Wed, 11 Nov 2026 05:53:45 -0800 (PST)
+Received: from localhost.localdomain ([104.28.212.25])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d62241eca6sm786932137.11.2026.11.11.05.53.41
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Wed, 11 Nov 2026 05:53:44 -0800 (PST)
+From: Allan Siriani <allan@fatecpompeia.edu.br>
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Todor Tomov <todor.too@gmail.com>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/4] media: qcom: camss: contiguous buffers, RDI and CSID1 streaming fixes
+Date: Wed, 11 Nov 2026 10:53:34 -0300
+Message-Id: <20261111135338.27008-1-allan@fatecpompeia.edu.br>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,95 +103,60 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261111-q6apm-vol-live-v1-1-be85eef649c1@proton.me>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MywqAIBAAfyX23EJ6MOpXooOPrRbMSkEC8d+T5
- jaHmQKJIlOCuSsQKXPiKzQRfQf20GEnZNcc5CCVaOCj9H1ivjx6zoROGSOcITvaCVp0R9r4/Yf
- LWusHTawBiGAAAAA=
-X-Change-ID: 20261111-q6apm-vol-live-d6bb1dbec7c9
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Marc Herrero <marcht@proton.me>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794404968; l=2295;
- i=marcht@proton.me; s=20261111; h=from:subject:message-id;
- bh=SqVgjL7+4cci4LPqvCK4Yw6wIkE/kOA+SDqD9jR9pW8=;
- b=FX1Y+Wi7BB5DpHA+0W6yE2XKgDCznVqlJos0UpJ8hstQWnTb3zNutOendQ72+lQoI638F5yi4
- 7XppBorHE+kCr74otdQVCgfAsNs5c2orZsVM06hNcGbVazYVy6NqYr/
-X-Developer-Key: i=marcht@proton.me; a=ed25519;
- pk=pIPy6L+INgiuJt7L7umVilPgpzy/Ni3QS77ToLj/H9c=
-X-Endpoint-Received: by B4 Relay for marcht@proton.me/20261111 with
- auth_id=1490
-X-Original-From: Marc Herrero <marcht@proton.me>
-Reply-To: marcht@proton.me
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-From: Marc Herrero <marcht@proton.me>
+Fixes found while bringing up the CAMSS on MSM8226 (Moto G 2013). The
+SoC has an IOMMU in front of the CAMSS, but it is not described in the
+upstream DT, so the CAMSS runs without one there today.
 
-audioreach_put_vol_ctrl_audio_mixer() only stores the new gain in the
-module. The gain reaches the DSP from audioreach_pga_event() on
-SND_SOC_DAPM_POST_PMU, that is when a stream starts, so changing the
-"<stream> Playback Volume" control while playing has no effect until the
-next stream.
+1. Loic's patch: use vb2_dma_contig, the write masters take a single
+   address per plane.
+2. Program the VFE 4.1 write master buffer size in frame based (RDI)
+   mode.
+3. Do not abort stop_streaming on -ENOIOCTLCMD from a subdev without
+   .s_stream().
+4. Do not fail CSID power up when there is no VFE with the same index
+   (CSID1 on MSM8916/MSM8226).
 
-On QCS6490 (Radxa Dragon Q6A) shairport-sync uses this control as its
-hardware volume: the volume set when an AirPlay session starts is
-applied, but every later change from the phone is ignored.
+Build tested (W=1, LLVM, ARM) on next-20261105, each patch on its own.
+Runtime tested on MSM8226 with the same patches on a 6.16 based kernel.
+Known issue: on the MT9M114 the first frame after STREAMON can still run
+128 bytes past sizeimage; later frames are exact.
 
-Send the gain to the DSP right away when the widget is powered, and
-report no change when the value is the same.
+Changes in v3:
+- Patch 2: added Fixes: tag, removed the comments, no clamp on the
+  height (Bryan).
+- Patch 3: removed the comment (Bryan), added Loic's Reviewed-by.
 
-Fixes: 36ad9bf1d93d ("ASoC: qdsp6: audioreach: add topology support")
-Cc: stable@vger.kernel.org
-Signed-off-by: Marc Herrero <marcht@proton.me>
----
-Found on the Radxa Dragon Q6A together with the two fixes in
-"[PATCH 0/2] ASoC: qcom: audioreach: fix S24_LE playback and route mixer
-disconnects", sent earlier today. This one is independent of them.
+Changes in v2:
+- Patch 1 replaced by Loic's "media: qcom: camss: Use contiguous DMA
+  buffers", with his Signed-off-by fixed and Bryan's Reviewed-by.
+- Reworded the IOMMU statements (Konrad).
+- Patch 3: added Fixes: tag and Bryan's Reviewed-by.
 
-Tested on 7.2.9: with the patch, moving the AirPlay volume while
-playing changes the output immediately; without it nothing changes
-until the next stream. Builds on asoc/for-next.
----
- sound/soc/qcom/qdsp6/topology.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+v2: https://lore.kernel.org/all/20261109112611.94010-1-allan@fatecpompeia.edu.br/
+v1: https://lore.kernel.org/all/20261104202313.72494-1-allan@fatecpompeia.edu.br/
 
-diff --git a/sound/soc/qcom/qdsp6/topology.c b/sound/soc/qcom/qdsp6/topology.c
-index 612d8f03e6e9..5b3378fd29fc 100644
---- a/sound/soc/qcom/qdsp6/topology.c
-+++ b/sound/soc/qcom/qdsp6/topology.c
-@@ -1323,8 +1323,19 @@ static int audioreach_put_vol_ctrl_audio_mixer(struct snd_kcontrol *kcontrol,
- {
- 	struct snd_soc_dapm_widget *dw = snd_soc_dapm_kcontrol_to_widget(kcontrol);
- 	struct audioreach_module *mod = dw->dobj.private;
-+	long gain = ucontrol->value.integer.value[0];
- 
--	mod->gain = ucontrol->value.integer.value[0];
-+	if (mod->gain == gain)
-+		return 0;
-+
-+	mod->gain = gain;
-+
-+	/* The PGA event only applies the gain when the widget powers up */
-+	if (dw->power) {
-+		struct snd_soc_component *c = snd_soc_dapm_to_component(dw->dapm);
-+
-+		audioreach_gain_set_vol_ctrl(dev_get_drvdata(c->dev), mod, gain);
-+	}
- 
- 	return 1;
- }
+Allan Siriani (3):
+  media: qcom: camss: vfe-4-1: program the RDI write master buffer size
+  media: qcom: camss: always stop the pipeline in stop_streaming
+  media: qcom: camss: do not fail CSID power up without a matching VFE
 
----
-base-commit: cde5523c75f1320a55ac1d55a717ccbb566557f0
-change-id: 20261111-q6apm-vol-live-d6bb1dbec7c9
+Loic Poulain (1):
+  media: qcom: camss: Use contiguous DMA buffers
 
-Best regards,
+ drivers/media/platform/qcom/camss/Kconfig     |  2 +-
+ .../media/platform/qcom/camss/camss-vfe-4-1.c | 23 +++++++++++++++----
+ .../media/platform/qcom/camss/camss-vfe-4-7.c |  3 ++-
+ .../media/platform/qcom/camss/camss-vfe-4-8.c |  3 ++-
+ .../platform/qcom/camss/camss-vfe-gen1.c      |  5 ++--
+ .../platform/qcom/camss/camss-vfe-gen1.h      |  3 ++-
+ .../media/platform/qcom/camss/camss-video.c   | 22 ++++++------------
+ drivers/media/platform/qcom/camss/camss.c     | 17 +++++++-------
+ 8 files changed, 45 insertions(+), 33 deletions(-)
+
+
+base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
 -- 
-Marc Herrero <marcht@proton.me>
-
+2.43.0
 
