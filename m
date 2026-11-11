@@ -1,84 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794398186;
-	b=A4HJYYe21+9Zedu0GxBGO1jjVWgRnOM5VgcEo9PRI9XB+k4nlZTcArFw19EnZaiJijYf
-	 yU8fJiMvlNAE4fU4KWF/0JhAUpNHeRzOBZdjQhxj9uazFbz6tKOcXBMKYL6vu048e6Z/y
-	 r05c1pENmR/J6ItEm4kW412LzFFBx/oEtWD87jFehYMykatAvikrwM/e7xaTN7Td+UioR
-	 2Bg/s2Ar/E2qm5CTPcZhLOefX9oyZLHg2Ds8GLo79fXwyldY/RJ/b938DlDEhsRCo0UZy
-	 PFtng8wesLjTwgGkTtpjK6I8u2JRBeENBvgvwOROurgkti/wHZRdo9YXcH4wXNqfCnQ==
+	t=1794398270;
+	b=y8EhPq7/mndsGYO3pzx7jjy7wyBaUsnLTOSORsMNSNj1gnX8M2k7zCwp1w8GWZXupPeP
+	 OZvyql+jzGAvgLc2NLmtNFENRmSXJggnJ/ywYa77RhwQs2w5CagPSTcbONiA4WEeXwVli
+	 PLqyu8zfymxjq7zeDXLylLOOX1cM0nGaX3WuXaj5UEH56OfLZJSIbmKjZ3Hj2SA6yAbrc
+	 v/dPGue+T7C2fHYvM1rW0eAiPkZg2Gycxw3gzNGHTOnMuURYW8c8zoVYJoPHwldzJa6KF
+	 3FMc3OCGnk+RTy9ls1UZ9Lxr/pru9BAlGaZdZfTsZdZHureuBgZQqmr6j+f1f6447AA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794398186;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=mB+4CSyHNjp+rbmjLUMlfuLrwoz33uSYabd9B9NkTj8=;
-	b=Rzc+0x2fL5sH42fzmLyaIy97DTURRatxXEBeczNX7i4Ktf63qUpYiIA4vDXbouk1bDmT
-	 Ep1R7zYoXZAa//xDtze1Iithw6CM6grSnNcmR8nwXOzzGTR5V8l2LEkKY2OfBUncCcYfz
-	 hQFd1YizM8pqqqrqQ2d6iWBaaujgiawU+sfL6N7Q8oOV6ajiCR2tLCVYnov03v+IktWtd
-	 As0Ozvfz4OYozQyS2kaYyG3A0AcSX//Cb58oN5kzUQImgUfmf0mT1ricReXHfFi3Ls42Q
-	 inGMG3j3+lnTkjTaLKpzOr+SwnisL+2h9mVnPk0PTy6Nr07ZHep5elnf2M6YZiMxqBw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794398270;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
+	bh=y9K5hfpcxXuOPfEUoYiaexziePCngEFsF91KAM1M6Eg=;
+	b=YqHETOlmwG8wUNfKhj7J07jYnrPgDAeXoqoVFuusxk4F3Q9pUDKDmvUV/mGPv6rn40jC
+	 2iPnEhW6SLpyt+7wPEemJw0RAYYFxJKa7uyVGvd0adnLGmd4xtO5zISf7vdWis1WltFov
+	 Eb1w5z5CaeOWhP4IIT/Te5Vw2lQYh4ztI9zmxOuQNBK2T1Wg0249p6Z3PsMI/h0l51jXP
+	 TXaJl1DiMXEuwU19sGOU6Xu3Fdu2siyz9ePkMJlcKMkbTZxVG/2MxphU69r8xb8nHgw95
+	 rqbDJLJz2RIWF7BFlTC26YDAAqcYhksYiK3VS5qcGuuxFz2eCrpRb44SXdztREIhEaw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=hKr57dyx;
-	arc=none smtp.remote-ip=192.198.163.11
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=KNDUv0sr;
+	arc=none smtp.remote-ip=117.135.210.4
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D90D2606A327;
-	Wed, 11 Nov 2026 11:56:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D90D2606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D139B606A32E;
+	Wed, 11 Nov 2026 11:57:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D139B606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=hKr57dyx
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794398186; x=1825934186;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=WAI3fHizBxLRZPCvINv8vAUYHRI9fsCvBuX37VaFgF0=;
-  b=hKr57dyxwhZgdRG1O6ZyJZDymgGGaGRIdueJD7C5KTNUUOAvVBLH+F4T
-   hq07zJkkSuvBmUlDo1vboMXaww/xX2MmOpJy3IAKsWFJMStZniGwRZ6LD
-   q9MYrMUN+IaFZ+7D8RUTDkTgmLBNON8q3zBzLwKIwKVY7dfgdI7gztGOt
-   1th6oNay1f7eufvTZNnoS6HMTkR2l9voJrlpQHHgnxghtsFQL6ZsXyAVw
-   myO7XzwaTPSMC/zsR5aKR1G7R7dNiaobeh1hPWcq1qKkE6sDzqKYR8zde
-   eUmGW+nTgYmOlEnIfVBdWSLhjpgK8801Hwo/Jp3X22UkMjrzn/NPGM8X2
-   Q==;
-X-CSE-ConnectionGUID: MAdaNEupT3C+SUUd6Fv7gQ==
-X-CSE-MsgGUID: ztxtEiR9RDOyEKzRpY5JeQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11962"; a="3087801"
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="3087801"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2026 03:56:14 -0800
-X-CSE-ConnectionGUID: LFoS2Vv7TMKMkADgfwpXQg==
-X-CSE-MsgGUID: Y5hzoYFrT1q+uD/P/lQnXA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="8579510"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa009.jf.intel.com with ESMTP; 11 Nov 2026 03:56:11 -0800
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xR6vw-00000000yof-1HmD;
-	Wed, 11 Nov 2026 11:56:08 +0000
-Date: Wed, 11 Nov 2026 19:55:39 +0800
-From: kernel test robot <lkp@intel.com>
-To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-	linux-media@vger.kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, bod@kernel.org, mchehab@kernel.org,
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	andersson@kernel.org, konradybcio@kernel.org,
-	loic.poulain@linaro.org, dmitry.baryshkov@oss.qualcomm.com,
-	gjorgji.rosikopulos@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	atanas.filipov@oss.qualcomm.com
-Subject: Re: [PATCH v8 4/8] media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
-Message-ID: <202611111900.i6qY7F4C-lkp@intel.com>
-References: <20261110163909.78085-5-atanas.filipov@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=KNDUv0sr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=y9
+	K5hfpcxXuOPfEUoYiaexziePCngEFsF91KAM1M6Eg=; b=KNDUv0srvErDWZYa5U
+	Uer59iylm6/ergp4jadBlVZEiDX546mbG7mqsGVbgv0+5X+wOLAZqTo9juT2gyi0
+	Gi2YshkhWOtTOq7UvlDuIJeGewXHTXm+4YmxDMHkzbsNK8Aa93TCoGUKs/PoGjuo
+	NKZ8jTkEmOsuYJ7xuSxpfiD8M=
+Received: from jbd-ThinkPad-X1-Carbon-Gen-14 (unknown [])
+	by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id _____wCnj78NWPRq5VWtGQ--.46389S2;
+	Wed, 11 Nov 2026 19:57:02 +0800 (CST)
+From: Slark Xiao <slark_xiao@163.com>
+To: mani@kernel.org,
+	jeff.hugo@oss.qualcomm.com,
+	bbhatt@codeaurora.org
+Cc: mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Slark Xiao <slark_xiao@163.com>,
+	stable@vger.kernel.org
+Subject: [PATCH] bus: mhi: host: Only expose controller sysfs attributes on the controller device
+Date: Wed, 11 Nov 2026 19:56:58 +0800
+Message-ID: <20261111115659.11943-1-slark_xiao@163.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,37 +64,99 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261110163909.78085-5-atanas.filipov@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wCnj78NWPRq5VWtGQ--.46389S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxCFWkXw4xXrW3tryfKrWktFb_yoW5uFW7pa
+	yDGFy5tr15Gw43Kan7uw42g3W3urs3C34UArsrKw12kwnxW3sFqFy7tFyYqFy3CFZYk3Wj
+	qr1rW3y8GayDAFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pEBOJnUUUUU=
+X-CM-SenderInfo: xvod2y5b0lt0i6rwjhhfrp/xtbC5w7wVWr0WA42tgAA3E
 
-Hi Atanas,
+The serial_number, oem_pk_hash and soc_reset attributes are registered
+through mhi_bus_type.dev_groups, so the driver core creates them for
+every device on the MHI bus.  MHI client devices (the per-channel
+devices such as mhi0_DUN or mhi0_MBIM) are also MHI bus devices, so
+each of them ends up with its own copies of these files even though
+they all operate on the same mhi_controller:
 
-kernel test robot noticed the following build errors:
+  $ ls /sys/bus/mhi/devices/mhi0_DUN/
+  driver  oem_pk_hash  power  serial_number  soc_reset  subsystem  uevent
 
-[auto build test ERROR on 630059a5a632377b9b7b487baccde92b7ae1dd47]
+This is wrong for several reasons:
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Atanas-Filipov/dt-bindings-media-qcom-Add-JPEG-encoder-binding/20261110-183902
-base:   630059a5a632377b9b7b487baccde92b7ae1dd47
-patch link:    https://lore.kernel.org/r/20261110163909.78085-5-atanas.filipov%40oss.qualcomm.com
-patch subject: [PATCH v8 4/8] media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
-config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20261111/202611111900.i6qY7F4C-lkp@intel.com/config)
-compiler: sh4-linux-gcc (GCC) 16.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261111/202611111900.i6qY7F4C-lkp@intel.com/reproduce)
+  - The attributes describe the controller, not the channel.  Their
+    callbacks all dereference mhi_dev->mhi_cntrl and read BHI registers
+    or issue a controller-wide SoC reset, so writing soc_reset through
+    mhi0_DUN resets the whole device while looking like a per-channel
+    operation.
+  - oem_pk_hash reports failures with dev_err(dev, ...), so a single
+    failing controller produces one log line per registered channel
+    device instead of one.
+  - Userspace has no way to tell which copy is authoritative.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202611111900.i6qY7F4C-lkp@intel.com/
+Move the attributes off the bus and attach them to the controller
+device only.  mhi_register_controller() now installs the group via
+mhi_dev->dev.groups before device_add(), while the channel devices
+created by mhi_create_devices() are left untouched.  No functional
+change for the controller device; the files stay at the paths listed
+in Documentation/ABI/stable/sysfs-bus-mhi.
 
-All errors (new ones prefixed by >>, old ones prefixed by <<):
+Note that trigger_edl was already handled this way, through an explicit
+sysfs_create_file() on the controller kobject, which is why it never
+appeared on the channel devices.
 
-ERROR: modpost: drivers/net/mdio/mdio-cavium.ko: symbol '__delay' undefined!
-ERROR: modpost: drivers/media/i2c/tc358746.ko: symbol 'devm_of_clk_add_hw_provider' undefined!
-ERROR: modpost: drivers/media/i2c/tc358746.ko: symbol 'devm_clk_hw_register' undefined!
-ERROR: modpost: drivers/media/i2c/tc358746.ko: symbol 'of_clk_hw_simple_get' undefined!
->> ERROR: modpost: drivers/media/platform/qcom/jpeg/qcom-jenc.ko: symbol 'clk_set_rate_range' undefined!
+Fixes: 21cb9b18edea ("bus: mhi: core: Introduce sysfs entries for MHI")
+Cc: stable@vger.kernel.org
+Signed-off-by: Slark Xiao <slark_xiao@163.com>
+---
+ drivers/bus/mhi/host/init.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+diff --git a/drivers/bus/mhi/host/init.c b/drivers/bus/mhi/host/init.c
+index fd3050889412..b4b254d1c6b9 100644
+--- a/drivers/bus/mhi/host/init.c
++++ b/drivers/bus/mhi/host/init.c
+@@ -150,13 +150,21 @@ static ssize_t trigger_edl_store(struct device *dev,
+ }
+ static DEVICE_ATTR_WO(trigger_edl);
+ 
+-static struct attribute *mhi_dev_attrs[] = {
++static struct attribute *mhi_cntrl_dev_attrs[] = {
+ 	&dev_attr_serial_number.attr,
+ 	&dev_attr_oem_pk_hash.attr,
+ 	&dev_attr_soc_reset.attr,
+ 	NULL,
+ };
+-ATTRIBUTE_GROUPS(mhi_dev);
++
++static const struct attribute_group mhi_cntrl_dev_group = {
++	.attrs = mhi_cntrl_dev_attrs,
++};
++
++static const struct attribute_group *mhi_cntrl_dev_groups[] = {
++	&mhi_cntrl_dev_group,
++	NULL,
++};
+ 
+ /* MHI protocol requires the transfer ring to be aligned with ring length */
+ static int mhi_alloc_aligned_ring(struct mhi_controller *mhi_cntrl,
+@@ -1019,6 +1027,8 @@ int mhi_register_controller(struct mhi_controller *mhi_cntrl,
+ 	dev_set_name(&mhi_dev->dev, "mhi%d", mhi_cntrl->index);
+ 	mhi_dev->name = dev_name(&mhi_dev->dev);
+ 
++	mhi_dev->dev.groups = mhi_cntrl_dev_groups;
++
+ 	/* Init wakeup source */
+ 	device_init_wakeup(&mhi_dev->dev, true);
+ 
+@@ -1455,7 +1465,6 @@ const struct bus_type mhi_bus_type = {
+ 	.uevent = mhi_uevent,
+ 	.probe = mhi_probe,
+ 	.remove = mhi_remove,
+-	.dev_groups = mhi_dev_groups,
+ };
+ 
+ static int __init mhi_init(void)
+-- 
+2.53.0
+
