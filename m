@@ -1,102 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794427442;
-	b=Q3lXM0I5n2tFrh6Z2DH6Fm1Z4CPXATwqwZh5brLFJlKMjPTiInyI+2Oy7wbeVslU2snE
-	 jpB8SKOCIXFbV+D6Q20I0cBrM6k9rH+v/uoxaLTxSO3bfuW3k2N/secXti1b9wNtw0YT6
-	 gU6RqoVukhcgL13aU/BcStzoNWk4wtgLYi204ZYqqyW45Khe/1rt3oWSEbLd8aK7C38et
-	 EHNICGqxAUm5ptcCQl5866CdrsoXIxxhWhFAahRS5Y6NZZ5yo6N4UkeWmQ28ShdWlX2Hy
-	 k6O4kmcX1ZwT+9tBlWj9ZZGdrbxnvEqO/wVkqIiZc11HK/sndkDOMjaOsBuuGr6AdbA==
+	t=1794429806;
+	b=On6yGLn7llKN4Fdeh+HajBYufbAwEC+YA45GeLetj4Vk2YauM9xgfNV/E26v3F4w00XM
+	 heb+0QpV2wzi1SXWkHGS5GAZwaMcUGoyoPJkYXZdaMfIcUbRdGb/PCLMc1pa6hcKF4zpR
+	 gygZGm52y4MUGsQ5c5raVybHNymkCCyiOhlkPbx8X9yW2o0b7DKYPNqdLN5ZMxpKTFItL
+	 jKas8d9tpgqojH7+wSN3j+Vj9g1i1dTRy1XxZk/b6Aic9jy8q0llwPqjx6WcqoCS3UWZp
+	 5iF8ARsgmq2aegT/W4Ib9GQso7597+WClZQOX/WKfTfydaZX4eMS6azKEdpf34sDjng==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794427442;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=6rcAYmO2qRHUGdCNLnQyV9a37qWMtLhxA0AKMVNF0QU=;
-	b=pv7pJl5ta0INLkVNbjorPP1euYomxOdZHJiPllXkuy25cyvj/JoTAFksoFWlb0bNL1GZ
-	 oF02EWecjKkvXcmntOgpljs9qt0cJ3BrIYKS5oRPXqfmxluc8S6kih3NbHw66bNbLiM43
-	 qEtX5er5X+34mupFH4HP+xRDKYzvKzIWsefI3vrujF+q1pa7dJP63/nlWJmj1tFMmFBzx
-	 YTTDlhdQvr7BgGFRIB/HmBM8ca0a+rXhTJ9GFWCHEmqsLFheSkbrTd8ZSJSFUjHg8yycc
-	 yS47FU4/bXp96cbVn4XeUYtqnrJC/M0hOYhuHjFwK84v94lBfmAoIw4BKe7czzhq/kw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794429806;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=YkiuKwTzFaKxocYqHbZJaiH6LJSy5oJp9dJAcEhaIF0=;
+	b=C1geta5v4tnpamtMVQEzyxHyXVJBSK1vpfgHuudaNSJgL4MTyOEP3eauDHcJ4D2k42nz
+	 W2cIDbDRWAaaQha5txn05l2WN10/QYkEaciCWhG7OZDF5TABVpyWz94IZOWGyqqT0jFLY
+	 NdBG1MTWh4Bq6znvvDzw8N4OvJgs0H+b9l16FsfpLdf2Ls1gEU9V+mHA0543UMCFgE6eh
+	 Oh25tldA3WcoSMQhz5ZsMZufyqMwH8FplMLf/rZ4ioAGyfYGlnwH07h3pmco8HzGUfKTX
+	 17295J21ZnMFEQDYpt+x6RL1B4TpoijUx9zQA2uHRAQyHdgUDmJcFzzXBtaaCVBdQAA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zugu79aa;
-	arc=none smtp.remote-ip=74.125.82.172
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBD6F606A31C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 20:04:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EBD6F606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=nwawK37F;
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1982B606A326;
+	Wed, 11 Nov 2026 20:43:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1982B606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zugu79aa
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-37071c0f42aso6034787eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 12:04:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794427441; x=1795032241; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6rcAYmO2qRHUGdCNLnQyV9a37qWMtLhxA0AKMVNF0QU=;
-        b=zugu79aaBztU/JB/0/i/jqbfCJ7mv+7un6V296+ptLLqHjoNzbL3712fxicZrxzNYb
-         jgPTQI8yspdrNlDBFW45xKAx5v3ZcLoHeRd0G28/uvmaJ+FQI9Q/V0Cl/XWYW55Pe/qA
-         afLrPj26oqRcsF2gNknTXCB90H1+WLbqscEN86OtcU2/YnEO7yfVsmf8HvTSc5hVzHv5
-         OVSD7pigMcFSmYKNwtl0sAsfU5pgaAhHoNnM5/F2u5RkZzVpHHWgYIcRuzn7dZypJKqh
-         zP+yFTaW2vvUunbj4av6KC8J8lVtgNa3lRab2dWtVtqB2n3ct+S4raNrjcb28lSCdYEA
-         pmKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794427441; x=1795032241;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6rcAYmO2qRHUGdCNLnQyV9a37qWMtLhxA0AKMVNF0QU=;
-        b=ZumfauH7n91edm+ARoE0dIkkrZpJ+4y/Uy5H4oSKTK3LR6E5M8yQl+wyzBX2l2FRVD
-         WBJpeJI49saVTPJM2HRZGJkhZFeVSiQh72rQo6nxglO7usSueO08naIsVczke/hqAmpu
-         0va4EMNFF2j1UMivklz75HGoAl7ZoqoEoWXOHuCZOB4WjfiBGIFB4L8SEbdCiRgSXfGN
-         VY0Das73x57YWyrrOra1WLsRYwMu4cb5n8g+maNunU4B5TT8VPELm3tFDha3973ukaxp
-         cDNcXCt2NphwIGsRIjXHaHb6Z5nStgk6D+AIzk8Ncf77co0ZnZ/UWlqyixxN5XK8y/nT
-         0TVA==
-X-Forwarded-Encrypted: i=1; AL+hErEYFSzOHKqk7BX8V2h00xpEXzykLdZ7LUkC5r7X/ZZ4XrXHMjrKrhYVzR6vY6eZLt9OPkLWf8TSdfYtEEiM@vger.kernel.org
-X-Gm-Message-State: APuU4Z/4osR2XZTzFH2AXKq1+QAkIv4qUsIOfVqPniMAjRok6pmgvxzL
-	MOvZ9b2KSbkziY2DANurZ9mQzCBYx4Gpmdsnm1jCCqfdE7nroYmNy3g+
-X-Gm-Gg: AYBFou2vsHL9E4dXnwy4QqBTQDJpbGazgpi9ERb7luVvZpPBG8s+/OUQLh5uT3IUXyX
-	0ojyI1Dpd5p4P9sNbCVX80bEQeczMJmRdQS4K6eGzdzMpqpeeCG5F6IZjJ21wKXKV7ANkCY8LuH
-	j4iZo4BuWiheRysrCYAWQqXINC4rZg5+/vYbPNUumc3KbdYQuEBAuGwWWaPpO51SkwZs3yNyyk2
-	FWeAFl5Hux6DnoL7A3DkFxX8ybl8zYogoKZNp9EqiXxzi4EJE3Mpq6R3u9ZEReMDfqVUECQlip1
-	pi5Hl1rqBhcesSHnHpLJvdqKsaVDQohXksgXv3lhjGZBXGooeStqFcU2d6VRFNSNxJVDJZWMQ4y
-	GjqqUhDaqTe/n7aiJpFveENYC06rFDRL7VmdnxqWHu5hQfbUj0SI70FADs/ErA299ov8T6tKukK
-	7aptjlnFpF4y8+spftUtfzV13UzPq5u6xwhNdfIhi5i0UhGohB1VNDWui3xR6D9aB94byFetdZ4
-	QearFC6WmE/+WNCkgAqAc8ElLrq6t6NgP9nx2k7mCJxi5bmGKRn6yXLmEW7bSzi9yhwHpnWacXz
-	QViyIjXLCrRuG3FWV80a7hbw/2UUxp0=
-X-Received: by 2002:a05:7300:bf91:b0:372:fa14:8b6c with SMTP id 5a478bee46e88-37685d7532amr4114764eec.19.1794427441021;
-        Wed, 11 Nov 2026 12:04:01 -0800 (PST)
-Received: from debian.lan ([121.101.132.16])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-375212e9d78sm20104476eec.25.2026.11.11.12.03.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 12:04:00 -0800 (PST)
-From: Amir Hanip <killdeath104@gmail.com>
-To: barnabas.czeman@mainlining.org
-Cc: a39skl@gmail.com,
-	abelvesa@kernel.org,
-	andersson@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	konrad.dybcio@oss.qualcomm.com,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=nwawK37F
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 41A64153B;
+	Wed, 11 Nov 2026 12:43:22 -0800 (PST)
+Received: from localhost (unknown [10.2.196.114])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D12223F85F;
+	Wed, 11 Nov 2026 12:43:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1794429805; bh=mx3VbQ9/b7aZO8Gcx1adUQM+AmPwFj6BLz1d9u/uU8U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=nwawK37Fkk3B1Dd8xpjDH02kguU+B9x/ZRaD5YNvyMo74wCWalB0GpoJEeLPKJE86
+	 31HnfzhNse3dMDQrgcPdcaEiu7fOuN33UNqHb/5GPmekgyGPYeGmqNaT+5QEIdipZn
+	 FwgeBshyJewJ+AFuAZMFCFOSPHuewTnmyAlPLNyA=
+Date: Wed, 11 Nov 2026 20:43:22 +0000
+From: Leo Yan <leo.yan@arm.com>
+To: Rob Herring <robh@kernel.org>
+Cc: Jie Gan <jie.gan@oss.qualcomm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@arm.com>,
+	James Clark <james.clark@linaro.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	robh@kernel.org
-Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: sm6115-xiaomi-lemon: Split out a common dtsi
-Date: Thu, 12 Nov 2026 03:03:49 +0700
-Message-ID: <20261111200349.6588-1-killdeath104@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <daea291c5b5d3b1ff87bbeaac4b08083@mainlining.org>
-References: <daea291c5b5d3b1ff87bbeaac4b08083@mainlining.org>
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM
+ platforms
+Message-ID: <20261111204322.GH9176@e132581.arm.com>
+References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+ <20261110154643.GA4159803-robh@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -106,40 +77,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261110154643.GA4159803-robh@kernel.org>
 
-On 2026-11-07 19:26, Barnabas Czeman wrote:
-> You should not override rpm_request node here, you can use the labels
-> from the common to change the ranges like:
-> &pm6125_s7 {
->     regulator-min-microvolt = <1280000>;
->     regulator-max-microvolt = <2080000>;
-> };
-> [...]
-> Please add the missing regulators.
+On Tue, Nov 10, 2026 at 09:46:43AM -0600, Rob Herring wrote:
+> On Tue, Nov 10, 2026 at 09:21:13AM +0800, Jie Gan wrote:
+> > The CoreSight TNOC (Trace Network-On-Chip) binding so far only allowed the
+> > two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
+> > forces the device onto the AMBA bus, where the driver must read the
+> > peripheral ID from the device registers during probe. On several QCOM
+> > platforms this AMBA peripheral-ID probing fails, so the traceNoC device
+> > never probes and its trace path is unavailable.
+> 
+> But it works fine on some platforms? We have a property to override the 
+> peripheral-ID which would solve your issue. That would be much simpler 
+> and avoid the ABI break on any of the working platforms.
 
-Hi Barnabas,
+Looking back at the earlier discussion [1], Jie in v2 already proposed
+"arm,primecell-periphid". Questions about AMBA IDs and ATID handling got
+mixed together. The series later moved towards platform-device probing,
+then became current shape.
 
-Thanks, understood. In v4 the common dtsi will define all the PM6125
-regulators with their labels, and lemon and citrus will only change
-the ranges that differ through those labels, without overriding
-rpm_requests. I assume that by the missing regulators you mean the
-ones that lemon.dts still defines (s7, l5, l7, l11, l17, l18, l22 and
-l24). Is that right?
+Hope we make the right decision on arm,primecell-periphid this time.
 
-About your previous mail: thanks for the dumps. In v4 I will move the
-ADSP and GPU carve-outs to the common dtsi with the values from your
-MIUI dump (ADSP 0x53800000/0x2200000, GPU 0x55a15000/0x2000), as a
-separate patch from the pure split, so it can be reviewed on its own.
-It changes lemon's compiled DT: the ADSP region shrinks by 4 MiB and
-the GPU region moves away from 0xfa400000.
-
-I can only test citrus. Would you, or Adam, be able to test the lemon
-patches in v4? A Tested-by would help a lot.
-
-Sashiko points out that WiFi bypasses the wcn3950-pmu regulators.
-WiFi works on citrus as is, but I will route its supplies through
-vreg_pmu_xo/rf/ch0 like qrb2210-rb1 does and test it before v4.
+Anyway, I'd like to apologise to Jie for all the back and forth.
 
 Thanks,
-Amir
+Leo
+
+[1] https://lore.kernel.org/linux-arm-kernel/9432df20-08bf-4134-b4b9-e6b5d618af81@oss.qualcomm.com/
