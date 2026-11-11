@@ -1,108 +1,108 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794415997;
-	b=jat/EMFUacBuyYKW5V8aCJgJzKOtqaHjWXbkLHt72ATBcKVeyvxRXgBJTeJmQ4KKwsCy
-	 oKWR7VWCmbK0JvOQRqK+EuaYUD22sGYTDx2D9qWCY81KkdSmOemYRUR0tmLZVk93yzeo2
-	 F1VS5YHXEgja37rgDErJh+Cu/var4kznh2q2Bcbo9KN8ThoWcOos4XJ/BUWqUzr98s667
-	 wfoON17BPhL7DXtU8PpQuXEeajr/2aZ9eV4GCxf4A+c4gbIjtbnOKgdGfRp7IFvKD9AxX
-	 biFfyxjPoJwxKdEovfO+jfePGT+2K/gwd/upuv3zEfookWr0eQA7oO3X5IxY748jWAQ==
+	t=1794416137;
+	b=teuFBDlawo6SX5J81jYGtFOlFPi1jkWZvXJy45+rQXoApe/0n6qLac26apbskFAioOQY
+	 egb0ENXbPGlmDZnik7ByC1gbKGUstMQwPpXBskSkCSU0+xd5a2j2TgmOLG87llpvcEZL8
+	 Z42wqbU6OhT8J3x85P4KVw4IMaOFPaejuT6LwxfimozpcJx7+JEpcWhb5/RCH5J1dYO8S
+	 U3BEyPVTpy38dtEB2gtAunsbbfFXpowEdoOj7LHUPZpxou3cGBnFAQUUg2ec6Lyrikhx+
+	 fBPrR+ZfrKy8Ij5pIuz14+y+/pNO3qsiJKzW7+2orVKZU6c7LCGvQT9W7B7boDR1K3g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794415997;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794416137;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
 	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=7lWeOV9IjYiGNbkklH7++lsoUrJceNa8llVVsVssTr0=;
-	b=0/S4uCfYhKosT/m8eLLvhHcGkOggkVCVg5r00hmIdOucmAtidu8x4LuQ83RfNxXc9kg6
-	 t018yKf32MTojVgpogQa1Hul3k6OyZURIbpQYXKFKxRs3bGsRmAaiuob9IN7kjISHGGFy
-	 8NAbPxJK4bt23WuEmJ8uVN7bKVuZB+317WRW0K/TrWBShH34sWGfVVyk1pORzxIcTjzEA
-	 hu143ndV2imfVZfcqcXOAFT34PKCFe9JkYAnkMrgtqenmpl6d+HQlP9rbZzUS5rF8eGzr
-	 bxIbD1toR5bHDncRmhIrJq7JX2uTIFjE/ImDqrHB2ro3LAUBB0XmS/8S3D+ARebHbQA==
+	bh=dtuAsIkr78INIV8Z/BdZHzuIPXa1ZLTXYhrmp5rxHFQ=;
+	b=RmN68zcaqsHNcm3eVLr2GlP1uhZoh/RN0jwHaWYdK6DOmK7Ozg2VqUZA8tXvZXBwx4uf
+	 7r+fR+YU0FbLuO6JOg1cDO3mbuoPr/OFRkohvl33T1WuGhp4dezOgXlXjbzc1cIBmtJ3X
+	 uSpsnw/IkvUaXs9hhJ2v8X7KaVXQw4NW/5jtbACn49jE0fdwkWGEkVoXLObPO5FtBydZB
+	 hKMcvxIi+RdJDUr6g04kL/7vkVRe1a3egLJf4X0BQg3SKF+Jta3XIZzyHlx3WFblyhNda
+	 /pTIwDBxIf2VRq+943ftmmec9XqO3njqdL7S1Hvk9MsjjAtANHtPvGOwyVl1pZYqP/g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WJU1cLp+;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aTCvjUm2;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=d4EZw+gQ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WRifLHnd;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E006606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:53:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3E006606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B160606A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:55:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0B160606A321
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WJU1cLp+;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aTCvjUm2
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABF0Wi92594095
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:53:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=d4EZw+gQ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WRifLHnd
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ABF04sc3597124
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:55:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=7lWeOV9IjYiGNbkklH7++lso
-	UrJceNa8llVVsVssTr0=; b=WJU1cLp+YpPvMnX+2WrEqieAhymCJI3DZsfYb6Ik
-	dIWfqHO4uDNn3KEl69NPcN8Mg2gOOvHcmEx7hmGyjWoz6lLqMNUjmqxomwUwfOk+
-	qNCVtL/ymnON4otGXKP2V3TRL1YAbQ+38Gz2LrkcI5qRZNhMjXInNapxaeOXuinB
-	SO5bggvMNmf80PJaM58kA+atFEU2M/3d17lEYg2USobLR7DT4P7R8FFuT/sQSbm8
-	3ohbrF5bb9HsvZT9WBrnbxLbTDjdM038jfzO2pRAx+q/MTFH/EMnq2epa84xRD3G
-	7ma2abWVuJyoqbDBADjLs/h3Rppl3Es9euHJGGsx5K9/sg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvksma7d3-1
+	:references:subject:to; s=qcppdkim1; bh=dtuAsIkr78INIV8Z/BdZHzuI
+	PXa1ZLTXYhrmp5rxHFQ=; b=d4EZw+gQL5DGX2yL82ISR0t9g0drEtP6obCGwdLG
+	kV1OOPl8npl1GABt09UbhmK55gss7ZfLf0ZTcBi6XIRw4OwH+0WM3jlNGw5BCDdL
+	PflQTMNzhigl7sx9rmuIBVIu9bcSeI+YWjyTWPwPDNHCZ+xDmCPDQXnpiD9qCZl2
+	QsIDpT3UdI5FvihPXz042kU81XnnEZSk7rBfKHj0FOVnhvtrMbZShLWmat2f1196
+	hNxDx2zyZUmmEQRek0q3pAAjItYImCB9XekENwJOcQ7cVoPCeKH4zv6H0CkJ65ua
+	v4GRskxC21h44bX24S7RAF8bb4sWUlQ1cbio0pxxgtnQNw==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvt1u8nj4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:53:15 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f13c143c8so625654185a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 08:53:15 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:55:36 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-945c60b470dso506368685a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 08:55:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794415994; x=1795020794; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794416135; x=1795020935; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=7lWeOV9IjYiGNbkklH7++lsoUrJceNa8llVVsVssTr0=;
-        b=aTCvjUm2GbXxhJufG95LMv2P6KWW1CUWtdGrFD63b6gkw/u94ag4D+A48Cm5ephM6O
-         AzAV73zGH6vhCYWLXU6zEfkzaYpAqzBOkz0z/tnlI/bidtWuIBvYRnsCFjYo1/+TQHy6
-         UW3hrynqBibAmqq4E7EMIb3QnnD8YWn3QpbPihoMMkm/j6J7AxGlDpaXPMgsR2B5qTPo
-         Z6fpQzNnNW8FcurPt2ruU7sop8MztJyM+hRNu6/raaBiVobMfBb5F+fshyqg6E1qP9bd
-         0XKvzuoK33PT2eRaxwOKi5em1aTfewrzFO7os3hdrRz+7iZugzLWmnhcn/NUNRT7M1al
-         Vkiw==
+        bh=dtuAsIkr78INIV8Z/BdZHzuIPXa1ZLTXYhrmp5rxHFQ=;
+        b=WRifLHnd3OPqy/4e7H4grgLpwvTWMXvPxYLM7TObsnKsNqoR3T51ulctqjYfCNf8Cd
+         vGCzNzS78FIwtesmJ/4jNr78cil2ewxFRaV58mchCec7c+ztguMgJnvpMW9A3WNMgJLp
+         OE/pJkYJjk2rMeuOOM/BcWfBXxb29lqWkPnpsP8pd3rRWW6cxdaO5zVjSzhE/ThYzKSZ
+         wr4xwmYTGsLowRIGksCPkb2j0C9sP5YduJulk7ZtRw0TLlPyUuDj2R5ngmXDS1FsVCV2
+         oaw81VBK4rqVFRjoQW6foExxAk9D3GXM47XcRngZ/ozcx81YBiAgEmXtmEQrqJweouRo
+         U+8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794415994; x=1795020794;
+        d=1e100.net; s=20260707; t=1794416135; x=1795020935;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7lWeOV9IjYiGNbkklH7++lsoUrJceNa8llVVsVssTr0=;
-        b=Gc8yBonLeIUX9hkRHeeTiPVXnrWvz+mpcnHsRmPw1z6b+FsdU92fY1XINYbmuz8rs4
-         z5gGBefeiJteY3+qPCFo7NBvlkZF40ujM8JbiQ8bDdHQkBuKN9Md/l/hl1aLYo1F5wyt
-         RfQkoEJVZqKsuYx663IjNWoy20VMO7BmxahA/3ohIiIeGFD7fMlQDlHbThza2KNYD3mV
-         zoj5zpwHeJZJ1r9zvuLi15sMDVrWdN6JLp8Gcaqfigz8dCq+u1A5kXY77ktl4MXlLBRq
-         5CLHxgBTCFN79uNmug4Qc1iE6ijKhp4iLwFzxquv/2KkniPvFW4m/rde02awXdAx1WXV
-         /Gpw==
-X-Forwarded-Encrypted: i=1; AL+hErEplfmNZm8+96qDugY+P3pvftLn3UzJ6ecPB8e0I2twF0pYPKXWjkaaIivm+PGvD57mlFq+SiXIaAv2I8Qw@vger.kernel.org
-X-Gm-Message-State: APuU4Z8dM0TDCxT727g1nLcm9ByxPWnCN1+7stoavAq3E1Eo7HA4b3vE
-	dqNnDiteAHDaPu00aoqc2U9YCRx3Zhe8YsViTTflyY4WiyChWJRtKOA0JA/u+Eq0HsunG442MGe
-	Lz8cR6cDTBFvgJHSwRWs+jMlLgZp+H1Iho1laJwRqtKO0TApDCreApXh8d5dlhKNA33U4
-X-Gm-Gg: AYBFou22N32hOxIz0qIMDEKHbEnuGAmK7h4VDeQRAninSZYDFPm1xsct2Gxrc1M4+tr
-	QSA/HLc8HI88yvljTKhBfiAXflrfnt800gpgaw2l+xopAEvFms/f6/7WeniTB62BVP3zprMcfUA
-	SSuFw8H/Oi7D8W0JMtp3dBH7GuZOHoxR6VvGeqTWPOHf+0dOIBXD66ueguY+5GhAOl0q5I9Oy19
-	zD9T5ZX64iQxaffYGJCTdQ4rHz5MZA+6E/ESrxlL3pkqdamMF0gSTNbei0ez3JTTUY/dg+Moalg
-	RVJojaNcTH/+R0o1asHs9mYpeB4eVIAdjpsRGAl/myA03ydOcA99QMRtF0d7zJEugRJLslOYM9V
-	5OH7zlNCceF9+j6gkMQWd0MmptvJIW5eZdR/PFZR/dyjM+qU2ldXM2ZbN2RMkD3Wn3qFYVFBLn4
-	VlNzNaUR+7+eVHXVboQlbxFKVCEc3h4BdvrFIp8NRVt9D18KVwSexPMUPd9VGHNQ==
-X-Received: by 2002:a05:620a:1a02:b0:947:7691:7316 with SMTP id af79cd13be357-947b00317damr467212685a.81.1794415994260;
-        Wed, 11 Nov 2026 08:53:14 -0800 (PST)
-X-Received: by 2002:a05:620a:1a02:b0:947:7691:7316 with SMTP id af79cd13be357-947b00317damr467207285a.81.1794415993546;
-        Wed, 11 Nov 2026 08:53:13 -0800 (PST)
+        bh=dtuAsIkr78INIV8Z/BdZHzuIPXa1ZLTXYhrmp5rxHFQ=;
+        b=hlWZilm9Y96uApuq2yAwQypQzbwo48e1MbnI42d/TDvx7oPcnXPxpJ6IMHE/1nsKG/
+         XJiXFxHaPXA9pWVmXyGdSxHYygt0WzNM28qy08Bh14gVARiGSY8KyiYXgRNb/bcCSO++
+         JEXdvk4GNkv5cHtP1oZ9pWuVSRaHAf5dbs4yry8jk8Y/mJqwGE1INuIrteX5FrRzEKxw
+         yqkVaMBGepXzvLWbUsh7qYdXzXf1esABPu02NjA2f/FdyCy+qIrZGhUkWRG1RmO9c0HW
+         SuWUIfDTzF7f/+yzZ2dfgYAKW04asRxdn7VSi5FUtrDgyt+jhTseoFtQbnlmeF5kiexR
+         ToPQ==
+X-Forwarded-Encrypted: i=1; AL+hErHMO062uI89E+wZbJlnWSWI1JZrZU5v/B5/n+fgegT3nBzU009RZg1V7dOuUdaz/UJiRbJ4tryycwRS8rHv@vger.kernel.org
+X-Gm-Message-State: APuU4Z9t/bE2QuehXLrYeb9WSOaVuH7sF2lLwoGZuF3bDqIPqaALQFCS
+	y3MKUhfhYPJl/rKrpqBBXMM+1RDZsWDAqT8+/2cqkayfcMUO4pkBLG5XfdMaedwCRlKTmdzP1sS
+	cDB6Iu4QKQt8iMO9sSwPUbzKc2Gn9cdEuztZJT1nqb6Lp2YtYFbnYR4gmusfmC9vEve0H
+X-Gm-Gg: AYBFou0nw5nDjP51gVYqGdooZaRGK9tDiUByFd3E56fmlLakTSErrRdRoxc/IhU275p
+	quOOMxBy+0xFCIli7z2Dn/Cpuzyzlf23FiAplKYrCAcUJ2vWifRsgSNYGEPGDu1w8qyrpw1k+13
+	DsPbtCKwOpQ8WV4XLw+JgaqyfLHNsfhNrz+9HJSvthdwqPwGRCnLGtoolvrZ9ZKVszdTJRF6LFC
+	N/ZF7AzgV2qIpTdZilZayN0v6/xUM3Nf6ysR41v4gUcz+hZGafCdacI2w4w8kPtpB51V8K5jfdR
+	fttZixruz8+oQe0Xg1Pe7LOxTe+5Fjhakb2t/XkJ1mUEnNNdJb6B+UFsA4zAVW5d8DELWT9XoHc
+	VlvYAWITMDsqTCkX9FVdYOlPTaJ+iEq3bmv/UsPX4tb6/iz1qiSG3yZCfyya211ImJ+el/uFnqc
+	BOT0y9IuCZTjNyGowCnhiUq6fFH6SfVVhaTTle1jaNlze5BJllC5QFX3RzjfrlZw==
+X-Received: by 2002:a05:620a:710c:b0:93f:2eaf:64cd with SMTP id af79cd13be357-947b004700emr479801785a.50.1794416135127;
+        Wed, 11 Nov 2026 08:55:35 -0800 (PST)
+X-Received: by 2002:a05:620a:710c:b0:93f:2eaf:64cd with SMTP id af79cd13be357-947b004700emr479796085a.50.1794416134544;
+        Wed, 11 Nov 2026 08:55:34 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae0922925fsm12779561fa.15.2026.11.11.08.53.12
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae0923c164sm12879141fa.20.2026.11.11.08.55.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 08:53:12 -0800 (PST)
-Date: Wed, 11 Nov 2026 18:53:10 +0200
+        Wed, 11 Nov 2026 08:55:33 -0800 (PST)
+Date: Wed, 11 Nov 2026 18:55:31 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -113,11 +113,11 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
         linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/4] drm/msm/dpu: add SSPP op to program the source split
- order
-Message-ID: <3b2yzvkwzveujzg6kyedvqlcddiqqmjzrumagiinzovhwqttsi@q53rugd3zkxk>
+Subject: Re: [PATCH 3/4] drm/msm/dpu: program the source split order for
+ split planes
+Message-ID: <fexhbxknsxgpvgtziubvp3ynoomwppzy7fl53ycynskebk6q5h@hxzunshclscj>
 References: <20261010-pipe_order-v1-0-9d8bd29fd78a@oss.qualcomm.com>
- <20261010-pipe_order-v1-2-9d8bd29fd78a@oss.qualcomm.com>
+ <20261010-pipe_order-v1-3-9d8bd29fd78a@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -129,115 +129,101 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261010-pipe_order-v1-2-9d8bd29fd78a@oss.qualcomm.com>
-X-Proofpoint-GUID: tbK9ZR416peUD7EEvYXvOdr4KcqceIJQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA2NyBTYWx0ZWRfX8Qpq1BkZgqLt
- fwVTPfkNnPSRSp3fBtt+om9O+OW5rGf38YRjSfuuEaAoWSQeZBoCHZmx7GVPyH1zZtNmjNv6DNk
- CHu4UoDiiqbS88ofsvB7Oj0AaCif1LC8EIs3dFVy94YpWKhqp2taxg+7BJs5zrzoR8BOoHAsS1F
- NE4vnKSHZI989hboE+BsHVozXPSAziONahjAoXrDyq/4ftY2Ofo0LbIH9TwGAYlvOjCD5+AaaTl
- HgrUmo1OzvcdDDrg9xY+ty4/F1hmEHnUyHBGl6NaLOG/04Y2mS0bLGiH+QVpFHfWE9SJtPpKU/e
- G4SzE/RZkjLjO8MXuuySr2mEsuglz2lvZKK+IU8V5NcWQslsooU7pmLFWxHdX4q7aCMgiHROgpf
- mePWoIul35XcOevrGv4Lv9JwIYGiY4LeXDsN+a7nB35q8fCWYHn9lL1wJp2bhhx04+MxtLG20IF
- 2Lkqcj29XKDLz/lqUrQ==
-X-Proofpoint-ORIG-GUID: tbK9ZR416peUD7EEvYXvOdr4KcqceIJQ
-X-Authority-Analysis: v=2.4 cv=O9isLx9W c=1 sm=1 tr=0 ts=6af49d7b cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20261010-pipe_order-v1-3-9d8bd29fd78a@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA2NyBTYWx0ZWRfX4OB32t/uQIHj
+ mCxlTqW5LE/1Ox4zJR67EEu9F49Psx9JuPO6bCV3bDUUWX4yvtug3cuRoltLh6EKRzlQq2ZD7r+
+ ZQjFWgQSew1dr7e/wpH6Cj3WJ+l1vmQ=
+X-Proofpoint-GUID: Kyg2ajTEUYqhzd06OwxjyGzyp0k4cPm4
+X-Proofpoint-ORIG-GUID: Kyg2ajTEUYqhzd06OwxjyGzyp0k4cPm4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA2NyBTYWx0ZWRfXwM2xk9WYMOBv
+ yuAJffLZHdE2bcfT5ZhVzsPYgx0JV+TWomdgu3fhDKTGT0KY3QOexpIryelgr0tw4c/yh1cpmKO
+ bryUbpuuQPBOaxPA+8v+JhaJFh75G+aLQ/zxgMvnHmRlIMKRMT+QsItk1t6JdgUb7DYUjQC28gx
+ FxB8e32OG4YBB4uG30/XAhLLXKYs8omJhNFEpPXKkxrxd1OwMBhjgTOY76M9g7lcUfgnF1+5k02
+ tXcWKAsPx19gmAb+ad97bnRWZYJE9EBkxYkFrzAPjJzG6IWclq9rzvwD3z9Siz6Rt51n6HnGthv
+ q/phTtB7Om8oxh1jQjAB+/Pg66wD15mbi6OzSXQ1Op50RYOL2J+rTkFvYwqzBnz6kaCSjjbsXFx
+ iHvWSZZRGuLzEPldQsC4lUoU/bFpgRySQG4uxCFzSyEcfRwWtRuBUO6u4GVRtKTPYIVBNHx3YrA
+ ljSR74VW0SH5wF7Y05Q==
+X-Authority-Analysis: v=2.4 cv=LvcHWXdc c=1 sm=1 tr=0 ts=6af49e08 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=zXlURQC4rpLtYXS3vwUA:9 a=CjuIK1q_8ugA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA2NyBTYWx0ZWRfX7+tyqJ0V3hT7
- +SZFtp2pulMF/h1+LEYybpSp697PNNgiH/nD6yHvAL10dmhy91xdabqQY99ZcOOmOxokRviDHC5
- 55slZuKP2WGjBuR24r9sb3gGGgsHcF8=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=rjQCQlUSGl8ILNuVy7EA:9 a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-11_04,2026-11-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0 suspectscore=0
- impostorscore=0 adultscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110067
+ spamscore=0 phishscore=0 adultscore=0 suspectscore=0 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611110067
 
-On Sat, Oct 10, 2026 at 07:08:22PM +0530, Mahadevan P wrote:
-> DPU 5.0 introduced SRC_SPLIT_ORDER in bit 4 of SSPP_SRC_OP_MODE and
-> SSPP_SRC_OP_MODE_REC1. For source-split pairs using legacy CTL routing,
-> this field identifies the left source with 0 and the right source with 1.
+On Sat, Oct 10, 2026 at 07:08:23PM +0530, Mahadevan P wrote:
+> Virtual planes can use two SSPPs when a plane exceeds the single-pipe
+> width or clock limit and parallel multirect cannot be used.
 > 
-> Add a setup_src_split_order() operation for the SSPP register layout
-> used on DPU 5.0 through 12.x. Select SSPP_SRC_OP_MODE for SOLO or RECT0
-> and SSPP_SRC_OP_MODE_REC1 for RECT1, and update only the ordering bit.
+> Program SRC_SPLIT_ORDER during mixer setup from the pipes' destination
+> X positions. Set the bit for the right source and clear it for the
+> left source or a source without a sibling.
 > 
+> Fixes: 8c62a31607f6 ("drm/msm/dpu: allow using two SSPP blocks for a single plane")
 > Assisted-by: LLM
 > Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 > ---
->  drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c | 35 +++++++++++++++++++++++++++++
->  drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.h | 11 +++++++++
->  2 files changed, 46 insertions(+)
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
 > 
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c
-> index b5e50fc1916f..f6ec883f9066 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c
-> @@ -84,6 +84,7 @@
->  #define MDSS_MDP_OP_IGC_EN                 BIT(16)
->  #define MDSS_MDP_OP_FLIP_UD                BIT(14)
->  #define MDSS_MDP_OP_FLIP_LR                BIT(13)
-> +#define MDSS_MDP_OP_SRC_SPLIT_ORDER        BIT(4)
->  #define MDSS_MDP_OP_BWC_EN                 BIT(0)
->  #define MDSS_MDP_OP_PE_OVERRIDE            BIT(31)
->  #define MDSS_MDP_OP_BWC_LOSSLESS           (0 << 1)
-> @@ -260,6 +261,38 @@ static void dpu_hw_sspp_setup_format(struct dpu_sw_pipe *pipe,
->  				 ubwc_ctrl_off, ubwc_error_off);
+> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+> index 77a2d1f6700d..91152d937ba3 100644
+> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+> @@ -434,6 +434,18 @@ static void _dpu_crtc_blend_setup_pipe(struct drm_crtc *crtc,
+>  		mixer[lm_idx].lm_ctl->ops.update_pending_flush_sspp(mixer[lm_idx].lm_ctl, sspp_idx);
 >  }
 >  
-> +void dpu_hw_setup_src_split_order_impl(struct dpu_hw_sspp *ctx,
-> +				       u32 op_mode_off, bool right)
-
-static
-
+> +static bool _dpu_crtc_pipe_is_right(const struct dpu_plane_state *pstate,
+> +				    unsigned int pipe_idx)
 > +{
-> +	u32 opmode;
+> +	unsigned int other_idx = pipe_idx ^ 1;
 > +
-> +	opmode = DPU_REG_READ(&ctx->hw, op_mode_off);
-> +	if (right)
-> +		opmode |= MDSS_MDP_OP_SRC_SPLIT_ORDER;
-> +	else
-> +		opmode &= ~MDSS_MDP_OP_SRC_SPLIT_ORDER;
+> +	if (!pstate->pipe[other_idx].sspp)
+> +		return false;
 > +
-> +	DPU_REG_WRITE(&ctx->hw, op_mode_off, opmode);
+> +	return pstate->pipe_cfg[pipe_idx].dst_rect.x1 >
+> +	       pstate->pipe_cfg[other_idx].dst_rect.x1;
+
+We know that the right plane has odd index. This is a total overkill.
+
 > +}
 > +
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.h
-> index 69d68cc916b2..9b9ea2e00a00 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.h
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.h
-> @@ -236,6 +236,14 @@ struct dpu_hw_sspp_ops {
+>  static void _dpu_crtc_blend_setup_mixer(struct drm_crtc *crtc,
+>  	struct dpu_crtc *dpu_crtc, struct dpu_crtc_mixer *mixer,
+>  	struct dpu_hw_stage_cfg *stage_cfg)
+> @@ -443,10 +455,13 @@ static void _dpu_crtc_blend_setup_mixer(struct drm_crtc *crtc,
+>  	struct drm_plane_state *state;
+>  	struct dpu_crtc_state *cstate = to_dpu_crtc_state(crtc->state);
+>  	struct dpu_plane_state *pstate = NULL;
+> +	struct dpu_sw_pipe *pipe;
+>  	const struct msm_format *format;
+>  	struct dpu_hw_ctl *ctl = mixer->lm_ctl;
+>  	u32 lm_idx, stage, i, pipe_idx, head_pipe_in_stage, lms_in_pair;
+>  	bool bg_alpha_enable = false;
+> +	bool src_split = test_bit(DPU_MIXER_SOURCESPLIT,
+> +				  &mixer->hw_lm->cap->features);
+>  	DECLARE_BITMAP(active_fetch, SSPP_MAX);
+>  	DECLARE_BITMAP(active_pipes, SSPP_MAX);
 >  
->  	void (*setup_multirect)(struct dpu_sw_pipe *pipe);
->  
-> +	/**
-> +	 * @setup_src_split_order: program the position of the pipe within
-> +	 *                         a source split pair
-> +	 * @pipe: Pointer to pipe context
-> +	 * @right: true if the pipe fetches the right half of the pair
-> +	 */
-> +	void (*setup_src_split_order)(struct dpu_sw_pipe *pipe, bool right);
-> +
->  	/**
->  	 * @setup_sharpening: setup sharpening
->  	 * @ctx: Pointer to pipe context
-> @@ -349,6 +357,9 @@ void dpu_hw_setup_multirect_impl(struct dpu_sw_pipe *pipe,
->  				 struct dpu_hw_sspp *ctx,
->  				 u32 op_mode_off);
->  
-> +void dpu_hw_setup_src_split_order_impl(struct dpu_hw_sspp *ctx,
-> +				       u32 op_mode_off, bool right);
-
-It's not used outside of the original file, drop.
-
-> +
->  void dpu_hw_setup_format_impl(struct dpu_sw_pipe *pipe, const struct msm_format *fmt,
->  			      u32 flags, struct dpu_hw_sspp *ctx,
->  			      u32 op_mode_off, u32 unpack_pat_off, u32 format_off,
+> @@ -475,6 +490,10 @@ static void _dpu_crtc_blend_setup_mixer(struct drm_crtc *crtc,
+>  				pipe_idx = i + head_pipe_in_stage;
+>  				if (!pstate->pipe[pipe_idx].sspp)
+>  					continue;
+> +				pipe = &pstate->pipe[pipe_idx];
+> +				if (src_split && pipe->sspp->ops.setup_src_split_order)
+> +					pipe->sspp->ops.setup_src_split_order(pipe,
+> +						_dpu_crtc_pipe_is_right(pstate, pipe_idx));
+>  				lms_in_pair = min(cstate->num_mixers - (stage * PIPES_PER_STAGE),
+>  						  PIPES_PER_STAGE);
+>  				set_bit(pstate->pipe[pipe_idx].sspp->idx, active_fetch);
 > 
 > -- 
 > 2.34.1
