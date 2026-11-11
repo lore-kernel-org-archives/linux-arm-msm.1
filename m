@@ -1,50 +1,50 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.97.179.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794413354;
-	b=Ih7h7GlAN0Sm1QZ/907nNYfDUOhjEg5eW5Hb0LxLBLqk7dj9t0BUPoQXrJh5+v0wXMWK
-	 3WSsksoEXKMaiyIF54oVoH9Hk8x/XPghZMk7UwLTPbsd1eieOkkFBa+HoKhI1BXpY5/cD
-	 YEPJx094yA2PsmW0X/XO5Ao0Ou1Tuvna/SUAjffZvMa1/Js44nuOMYvNu6rOn60WthXt1
-	 DWB/MFCUfA698O212/gHdQsWbDD6UxIo76RCfLKkghVEeeOULx5XXxbMYkJ9pbJCuTx7h
-	 7fhihXrtVWmXJniiZeLYHdGB92iklDst20vHF5+4xZHzPG1CHQ2YzODvZp57uV+pLsA==
+	t=1794413356;
+	b=dfAj5wn4/548b1tB7cocqID2Cu05I4vvKzu9e5cxA1JbMejoRYZjl9Smi2t7B7N0xQ6j
+	 Oc83JMDzTHiDAE0cOx3rP5anXi0HuoNSlwK/OpEz7hEKMtQjq5g+8HL2FObQ1C5uw4qax
+	 Lf/G7k6EL7jOWKymJzAcUHi1BqViSa/z1lFjL5+a+UvWfE1+iKXJIqof03KMHYZOdWTrh
+	 V1v52R/q1p3RPKSJ4DD1+HCuSGSPLRm7ch61rSfDFqUzcJIvEGW5XN7BMVSEfrbN9cnG1
+	 1fywgwcI6Q/lPYtVELse06ndkFSE13ldWzkm6JzmKdSJ3rAtEZVOce5PCrnU8GT+neg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794413354;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794413356;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=OaihiIEMF7+13xBp4Kj+CfcOOd15OQoUSx5DNDHnv8A=;
-	b=qKPV3yGqPGxU3VxujFQfL/MWPqXGMl9/tdqwPHuX3J0n4XhbAnTALIMl/atueTSEk23s
-	 JLEQtQHLdYZg/ELe2gc5sPPOvH1Q8fMTJYaG5DMNTfXxjxY1q5nRD6txv2gFAEq5lYkRb
-	 mQWQiA0KBOdSnuRBZISVaFesvLLMj8ug4YAQJkA/oGioPm18Lrjf9nqDgVE0A+0O1Ba+R
-	 A1Na77WOh6fLlUmeN4q/jfwEHWyNk7wI0o3W15XvGPrMd3bURq6herCXsAFJsdOey53Y5
-	 mO+Q2mcetHB/dVJuBstlrOR4BZVKO6GiSCOcAqWcIAI3dFgtzAZmIVhYHI+xfVzoIoA==
+	bh=BAE9idnwOD10qYdzSWIYNdE/NfvRDU68ledfePCFivU=;
+	b=qOOBIVv9comRuM8LrJ+LW0P7fttgyTSZQO5pwfQA/Nr0pF0MzXxW9PKATxdn3FIx1jiM
+	 pNrcXDMxXfgOPfr/QMuZbNcwo4+QEq2+MDBpZywrCuAl8Mt45+LN1czAGpcfrEI5K4qcd
+	 8yzc/RubbDhMWWGfG1A/bUXezn+WxG4hFWPcY9GgBwzvnRkpi25LFiQn6DfbXu2PLeB7v
+	 cQiLdUoefpP8G03yZAZpcmE/UqNbyXsA9HOy5FY8kS0celSH0dwfRZ6u34RFKQtM9fFj3
+	 57fT50ym6xTZJ7sb4Cjp5ShdFLVjoEi4GWVpU6pcHatfRDIq+7VPv36fujWx20JQkzg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=igalia.com;
 	spf=pass smtp.mailfrom=igalia.com;
-	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b="Ym3QK/2u";
+	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=KS+ssnCc;
 	arc=none smtp.remote-ip=213.97.179.56
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B458E606A32A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B458E606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BABAE606A326
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BABAE606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=Ym3QK/2u
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=KS+ssnCc
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
-	Cc:To:From:From:Reply-To; bh=OaihiIEMF7+13xBp4Kj+CfcOOd15OQoUSx5DNDHnv8A=;
-	t=1794413353; x=2109773353; b=Ym3QK/2ulU1mEygm3X5yuheieSp51hOipKLACuFyGmIiaVF
-	GMw1gTOg3xEi5LMQb0nSj5s8oXHccjHw7I3JogbIzv/aDtDCTpY1jsbM13XGTMEpcYJGHk5yfVCYb
-	bMHDSm7BhfTKRZn/5qhNW2KqMzqdy5Pn4IPzyf3KZ+VNqguoDpEfGy2OyP6d68qdO8PZguuPwHXsb
-	pUxJKJlvH35PPJJP9UrWdO2vhVMqeYy6m0v+o0GyAf9kQfO7LxSikrunAJXW6nGTebVmBSLoDoPzu
-	F4KUqBDwTf9d8ehBDtconbs+XDXXNtNFCdzH38ebNrky1Q4defs2pgW644oJU4ew==;
+	Cc:To:From:From:Reply-To; bh=BAE9idnwOD10qYdzSWIYNdE/NfvRDU68ledfePCFivU=;
+	t=1794413355; x=2109773355; b=KS+ssnCcI5q1n26hhU4vsW93fRjL3rybO20gC1TFrQzEbEV
+	PHsIdC4sCU5EUZ0aCBPgEngge4Rmrcs2A0H9MuNzDCjNONYo4e99Du0GYE6Snftkt1TBwvl6VMNmD
+	O7C+0Zesu1yN7F3iW2Pu9SGsesdNwN0TxUZBzEs1dibP2rRqLnpSV+iQbs+yl+v5bLq0Gf4VyvlTl
+	mG7WAP4+MYuIOJF0CU2RP7eFjEQggYfZoUqLG2KQt4aPRpf1NlRWh3V8M1v4W4YZrHjrAMw0Of8GA
+	8hzzDLMbzgPWzwKbFXIGdDGrDgeOQZynxex2Q1Uwz0Cor/7uvbPDfLKT3+X/Gaxg==;
 Received: from 193.red-79-147-123.dynamicip.rima-tde.net ([79.147.123.193] helo=killbill)
 	by fanzine2.igalia.com with esmtpsa 
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-	id 1xRAsP-008u8Y-To; Wed, 11 Nov 2026 17:08:45 +0100
+	id 1xRAsM-008u8Y-G6; Wed, 11 Nov 2026 17:08:42 +0100
 From: Melissa Wen <mwen@igalia.com>
 To: airlied@gmail.com,
 	alexander.deucher@amd.com,
@@ -79,10 +79,11 @@ Cc: Uma Shankar <uma.shankar@intel.com>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	louis.chauvet@bootlin.com,
-	John Harrison <John.Harrison@igalia.com>
-Subject: [PATCH v5 15/15] drm/amd/display: distinguish colorop setup error from no colorop support
-Date: Wed, 11 Nov 2026 17:05:28 +0100
-Message-ID: <20261111160814.21326-16-mwen@igalia.com>
+	John Harrison <John.Harrison@igalia.com>,
+	Sashiko <sashiko-bot@kernel.org>
+Subject: [PATCH v5 12/15] drm/amd/display: don't ignore failure on blend colorop setup
+Date: Wed, 11 Nov 2026 17:05:25 +0100
+Message-ID: <20261111160814.21326-13-mwen@igalia.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261111160814.21326-1-mwen@igalia.com>
 References: <20261111160814.21326-1-mwen@igalia.com>
@@ -97,125 +98,63 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-amdgpu_dm_plane_set_colorop_properties() returns -EINVAL both when the
-plane has no color pipeline selected, where falling back to the legacy
-color properties is correct, and when programming an active pipeline
-fails, so the caller treats every failure as the former and silently
-programs the plane from the legacy properties, leaving it in a mixed
-state and userspace with no error. Check if plane_state->color_pipeline
-is set instead, so the legacy path is only taken when no pipeline is set
-and any other failure is propagated out of the atomic check. Update
-AMD KUnit color tests accordingly.
+__set_input_tf_32() can fail on ENOMEM and let the blend transfer
+function setup in an unstable state. Check its return value and only
+enable blend if transfer function was successfully configured.
 
-Fixes: 9ba25915efba ("drm/amd/display: Add support for sRGB EOTF in DEGAM block")
+Reported-by: Sashiko <sashiko-bot@kernel.org>
+Fixes: 5ed78b44e4e6 ("drm/amd/display: add shaper and blend colorops for 1D Curve Custom LUT")
 Reviewed-by: Harry Wentland <harry.wentland@amd.com>
 Signed-off-by: Melissa Wen <mwen@igalia.com>
 ---
- .../drm/amd/display/amdgpu_dm/amdgpu_dm_color.c |  8 ++++----
- .../amdgpu_dm/tests/amdgpu_dm_color_test.c      | 17 +++++++++--------
- 2 files changed, 13 insertions(+), 12 deletions(-)
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_color.c   | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
-index 7332c8874397..3bc4cbe820c6 100644
+index 686f718bd155..f53228072fc8 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
 +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
-@@ -2009,10 +2009,10 @@ amdgpu_dm_plane_set_colorop_properties(struct drm_plane_state *plane_state,
- 	bool has_3dlut = adev->dm.dc->caps.color.dpp.hw_3d_lut || adev->dm.dc->caps.color.mpc.preblend;
- 	int ret;
+@@ -1936,7 +1936,7 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 	const struct drm_color_lut32 *blend_lut = NULL;
+ 	struct drm_device *dev = colorop->dev;
+ 	uint32_t blend_size = 0;
+-	int i = 0;
++	int i = 0, ret;
  
--	/* Fixed Matrix (YUV to RGB) */
--	if (!colorop)
-+	if (drm_WARN_ON(dev, !colorop))
- 		return -EINVAL;
- 
-+	/* Fixed Matrix (YUV to RGB) */
- 	ret = __set_dm_plane_colorop_fixed_matrix(plane_state, dc_plane_state, colorop);
- 	if (ret)
- 		return ret;
-@@ -2194,8 +2194,8 @@ int amdgpu_dm_update_plane_color_mgmt(struct dm_crtc_state *crtc,
- 		dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
+ 	tf->type = TF_TYPE_BYPASS;
+ 	dc_plane_state->cm.flags.bits.blend_enable = 0;
+@@ -1971,8 +1971,10 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf = amdgpu_colorop_tf_to_dc_tf(tf_state->curve_1d_type);
+ 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
++		ret = __set_input_tf_32(NULL, tf, blend_lut, blend_size);
++		if (ret)
++			return ret;
+ 		dc_plane_state->cm.flags.bits.blend_enable = 1;
+-		__set_input_tf_32(NULL, tf, blend_lut, blend_size);
  	}
  
--	if (!amdgpu_dm_plane_set_colorop_properties(plane_state, dc_plane_state))
--		return 0;
-+	if (plane_state->color_pipeline)
-+		return amdgpu_dm_plane_set_colorop_properties(plane_state, dc_plane_state);
+ 	if (lut_state && !lut_state->bypass) {
+@@ -1980,13 +1982,16 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 		tf->type = TF_TYPE_DISTRIBUTED_POINTS;
+ 		tf->tf = default_tf;
+ 		tf->sdr_ref_white_level = SDR_WHITE_LEVEL_INIT_VALUE;
+-		dc_plane_state->cm.flags.bits.blend_enable = 1;
+ 		blend_lut = __extract_blob_lut32(lut_state->data, &blend_size);
+ 		blend_size = blend_lut != NULL ? blend_size : 0;
  
- 	return amdgpu_dm_plane_set_color_properties(plane_state, dc_plane_state);
- }
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-index 8e00da61a04b..61543a3026e9 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/tests/amdgpu_dm_color_test.c
-@@ -2539,7 +2539,7 @@ static void dm_test_update_plane_color_mgmt_colorop_bypass_pipeline(struct kunit
- }
+ 		/* Custom LUT size must be the same as supported size */
+-		if (blend_size == lut_colorop->size)
+-			__set_input_tf_32(NULL, tf, blend_lut, blend_size);
++		if (blend_size == lut_colorop->size) {
++			ret = __set_input_tf_32(NULL, tf, blend_lut, blend_size);
++			if (ret)
++				return ret;
++			dc_plane_state->cm.flags.bits.blend_enable = 1;
++		}
+ 	}
  
- /**
-- * dm_test_update_plane_color_mgmt_colorop_missing_multiplier - missing multiplier op falls back
-+ * dm_test_update_plane_color_mgmt_colorop_missing_multiplier - missing multiplier op is rejected
-  * @test: KUnit test context
-  */
- static void dm_test_update_plane_color_mgmt_colorop_missing_multiplier(struct kunit *test)
-@@ -2560,13 +2560,13 @@ static void dm_test_update_plane_color_mgmt_colorop_missing_multiplier(struct ku
- 
- 	KUNIT_EXPECT_EQ(test,
- 			amdgpu_dm_update_plane_color_mgmt(f.crtc_state, &f.dm_plane_state->base, f.dc_plane_state),
--			0);
-+			-EINVAL);
- 	KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.shaper_enable);
- 	KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.blend_enable);
- }
- 
- /**
-- * dm_test_update_plane_color_mgmt_colorop_missing_3x4 - missing 3x4 op falls back
-+ * dm_test_update_plane_color_mgmt_colorop_missing_3x4 - missing 3x4 op is rejected
-  * @test: KUnit test context
-  */
- static void dm_test_update_plane_color_mgmt_colorop_missing_3x4(struct kunit *test)
-@@ -2589,13 +2589,13 @@ static void dm_test_update_plane_color_mgmt_colorop_missing_3x4(struct kunit *te
- 
- 	KUNIT_EXPECT_EQ(test,
- 			amdgpu_dm_update_plane_color_mgmt(f.crtc_state, &f.dm_plane_state->base, f.dc_plane_state),
--			0);
-+			-EINVAL);
- 	KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.shaper_enable);
- 	KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.blend_enable);
- }
- 
- /**
-- * dm_test_update_plane_color_mgmt_colorop_truncated - truncated pipelines fall back
-+ * dm_test_update_plane_color_mgmt_colorop_truncated - truncated pipelines are rejected
-  * @test: KUnit test context
-  *
-  * Covers each pipeline exit after the 3x4 matrix while all present colorops
-@@ -2640,7 +2640,8 @@ static void dm_test_update_plane_color_mgmt_colorop_truncated(struct kunit *test
- 		memset(f.dc_plane_state, 0, sizeof(*f.dc_plane_state));
- 
- 		ret = amdgpu_dm_update_plane_color_mgmt(crtc_state, plane_state, dc_plane_state);
--		KUNIT_EXPECT_EQ_MSG(test, ret, 0, "pipeline length %d should fall back", count);
-+		KUNIT_EXPECT_EQ_MSG(test, ret, -EINVAL,
-+				    "pipeline length %d should be rejected", count);
- 		KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.shaper_enable);
- 		KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.lut3d_enable);
- 		KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.blend_enable);
-@@ -2810,7 +2811,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut(struct kunit *test)
- }
- 
- /**
-- * dm_test_update_plane_color_mgmt_colorop_3dlut_no_data - empty 3D LUT falls back
-+ * dm_test_update_plane_color_mgmt_colorop_3dlut_no_data - active 3D LUT without data is rejected
-  * @test: KUnit test context
-  */
- static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *test)
-@@ -2851,7 +2852,7 @@ static void dm_test_update_plane_color_mgmt_colorop_3dlut_no_data(struct kunit *
- 
- 	ret = amdgpu_dm_update_plane_color_mgmt(f.crtc_state, plane_state,
- 						f.dc_plane_state);
--	KUNIT_EXPECT_EQ(test, ret, 0);
-+	KUNIT_EXPECT_EQ(test, ret, -EINVAL);
- 	KUNIT_EXPECT_FALSE(test, f.dc_plane_state->cm.flags.bits.lut3d_enable);
- }
- 
+ 	return 0;
 -- 
 2.53.0
 
