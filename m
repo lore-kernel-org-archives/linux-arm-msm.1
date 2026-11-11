@@ -1,50 +1,50 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=213.97.179.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794413344;
-	b=DCTU+zJ+NkF2HVoEI87bf3sx67+zmY2wtJMyYCPMemVaW2gG48FRvoxLwqWwbGyz325g
-	 OXJPXvOPhl2izTCx5Z8hfQHewSJUF/IPSVdt/Kd7LzaF/3hFqB69Uv1rnXh+dedpHyhOZ
-	 KrzwJ9vKPuK+n1/CEriFZEnkUBM0Hz0VxExHIVlbpOq2Lnnkzl5qf4OK0fvCyClJ6VttS
-	 hz+NX7YJ5gCciYi7tv+vE1qDPnx6sPrAu65DZ4lC5cyEhEfBDnPJmeVswzjW8JlYgzXhs
-	 tLU+T/2Yeimv8G8nhgF48gCaG0jwhG0vU/sSpDZIp0nB+NbBSWRCdTnYc7vq2Arxi6g==
+	t=1794413347;
+	b=Dd6R1RqIZ4UlgRTFHyzWSjOrKcRiowGYOkbY1nAKcQaaTk/UbGz1++LyruBpoowt5Boa
+	 hZ7mnimMyEghvNhh5f7EZDVdRI3F0Tdrp9nHZfFoScsTTIANkBl910/lEPQuVDfuJbv+n
+	 h3izDdNy5vf6F/dVu8rPzCvpJDTeYObzK+5UP1U5I0tzBkkfal9BeAEf7zrl2FiK/vOTN
+	 2q9mDcwLJvoIrSEA1q7HISq2cqE4PWbl/XslJf12VYxFaFvhXtiu6e73uJyudOEMZGRJs
+	 c0GHBD9Nw53ahjJH2diu/xQREcXiNr1WbWltQ5KX1fGgliO7ITF8Z13fdzpq58vV4aw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794413344;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794413347;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=rlH4vov5RMimytemQtB5DfU12GPz12p9a3viIykG/aY=;
-	b=pWXvvVI6GgGoIkgnTodT7EjYZaFDky0aV24iGn7rCJFJFfQonbuEn6HH9e0QQsP+3UJF
-	 8zJuEQmtrtJBxeDmRpUvo1Dl1WhnlnZe1y0cEEH6OHRDzXPA4vzpq6kYerfWtLSi+Hj9T
-	 bdzXf0joUMuT3Xf68iIuRTwuCI2q9BALc3d4QrzA/tmw6rsonF4DivpvaUcZD1wmeK7J3
-	 VY++XxKz3Bi2E7XAjEThxjlIp9ajiny56sPPuFRPojozhv5gJCYBM4sWm5dt8Kos20SIc
-	 ydUBmh7Vqg/GWMCwqXurLr6F8hOzZAG4KfNuYj2fUkFlCUVI+uM1C/A8yPO9zzFwTWA==
+	bh=vhJpOnyWAz5uiZosJGVLwxlp+dogNJrP1/dgdKqGrCU=;
+	b=LSeEubzhvrmNY7IR1B2RGpeOv/3X0fCEKtuzQocgowDiCu1HYy1IPGtUjYAJub9i1UfJ
+	 b9rerLHqcFhJpBS+8H3eAAGmkX6XJLlq1YNJuMaxXQTwSNRyynzhVyHbV+jDel+tmdvOq
+	 xlTdPXOZTQJTuySw4I4oHgnx8PqA5/Yxoykpn3Z1gHXaUwJfn5kk8A4ow0BZnVZ+aSevu
+	 lkbD6KqsMtrAYZhDTVuYnxbmpd9Hnsqu0XjW1aoZX4rQPR76qwgTnMgZifKa0Lr/GgXe6
+	 64FG1+ubFNVWT3VkTTcc6ztdwKhlb/UPhHhcpoK6KXKhxS/VtAGyYntbtqxkI01PIxg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=igalia.com;
 	spf=pass smtp.mailfrom=igalia.com;
-	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=b4y2fYSP;
+	dkim=pass header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=Nw6C7f+d;
 	arc=none smtp.remote-ip=213.97.179.56
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3725606A33A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E3725606A33A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B47B7606A326
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 16:09:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B47B7606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=b4y2fYSP
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.a=rsa-sha256 header.s=20170329 header.b=Nw6C7f+d
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
-	Cc:To:From:From:Reply-To; bh=rlH4vov5RMimytemQtB5DfU12GPz12p9a3viIykG/aY=;
-	t=1794413343; x=2109773343; b=b4y2fYSPp7+i1DtXpeY+0NMwC1UOYg1CMCQEj4mHIX4iCu1
-	B3sVW2k949ZgfItXZ8WBbbPxK5b49fsXH2dPz1CaSw1uAlh+qy1LlIVBwcVoMygfR2Hy0T/Hqo4ta
-	jV0f1A8a6Zz/7rUnDFww/0BYOObclvruCYEdJQt5/k9MUSmo+6UaW92RyZ0RuvOT/+nHelWZtspEq
-	bS/N+yrT377yz3MaxnFK2Mf7jRdY9V81RfoTcfF886ze49pZc4cyyJQwjPzSevvViZ2mkisNpFDpW
-	jJ5D8v0lAFABAlq0E+D1yKnAQNFhBvYh7aZDDvigUK9khLPPY61rs1wupD5lmjug==;
+	Cc:To:From:From:Reply-To; bh=vhJpOnyWAz5uiZosJGVLwxlp+dogNJrP1/dgdKqGrCU=;
+	t=1794413346; x=2109773346; b=Nw6C7f+dd5cFMopEjjuWMW0edrB2BOUQjbhrm+kt3lqUHz3
+	RHR5t12MdOfhg8zqelqb7oVGqpyAL7OEphQKC49d9S+0VP1nFgo2wAj0hvg6psTU7NE12HUlWntpX
+	43mAawsI47LWVVG7s3B0iozBjhoOiIcdXaofaEy+odcYnALoLzdVzG4z48v2PxwU+EaUxnjdBoJEO
+	t1COi3z3kj3sDsNrf6fW2LXrioA9HuqrT6Uckxt16qCesbdXtpI5xLWESh6JNzQsipgc1y39dRk6R
+	R/OfpJg6zFB21xkXkAfnNZg4ethglpDnG+aW8JBYS2p0p27KkM+rztLTUfoMgumA==;
 Received: from 193.red-79-147-123.dynamicip.rima-tde.net ([79.147.123.193] helo=killbill)
 	by fanzine2.igalia.com with esmtpsa 
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-	id 1xRAsH-008u8Y-2d; Wed, 11 Nov 2026 17:08:37 +0100
+	id 1xRAsL-008u8Y-D3; Wed, 11 Nov 2026 17:08:41 +0100
 From: Melissa Wen <mwen@igalia.com>
 To: airlied@gmail.com,
 	alexander.deucher@amd.com,
@@ -80,9 +80,9 @@ Cc: Uma Shankar <uma.shankar@intel.com>,
 	dri-devel@lists.freedesktop.org,
 	louis.chauvet@bootlin.com,
 	John Harrison <John.Harrison@igalia.com>
-Subject: [PATCH v5 07/15] drm/atomic: duplicate state of all colorops
-Date: Wed, 11 Nov 2026 17:05:20 +0100
-Message-ID: <20261111160814.21326-8-mwen@igalia.com>
+Subject: [PATCH v5 11/15] drm/amd/display: make blnd bypass mode clearer
+Date: Wed, 11 Nov 2026 17:05:24 +0100
+Message-ID: <20261111160814.21326-12-mwen@igalia.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261111160814.21326-1-mwen@igalia.com>
 References: <20261111160814.21326-1-mwen@igalia.com>
@@ -97,40 +97,31 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Userspace expects that colorop settings of an inactive color pipeline
-persist, so that, when the color pipeline is activated again, preserves
-the values they had when it was deactivated. Colorop setup is expected
-to persist even during a suspend/resume. To snapshot colorop settings
-correctly, duplicate state of all colorops in a given plane, regardless
-of whether color pipeline is active. Depends on skipping
-drm_atomic_colorop_check() for duplicated state done in previous commit.
+If userspace set blnd colorop to bypass, AMD driver just skips blnd
+transfer function configuration. Currently, this is not an issue since
+dc plane state is a reset/default state, but it's not fully correct and
+doesn't mirror shaper tf helper. Make bypass mode setup clear by
+initially set tf->type as BYPASS and let the helper change its type
+according to userspace requests.
 
 Reviewed-by: Harry Wentland <harry.wentland@amd.com>
 Signed-off-by: Melissa Wen <mwen@igalia.com>
 ---
- drivers/gpu/drm/drm_atomic_helper.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/drm_atomic_helper.c b/drivers/gpu/drm/drm_atomic_helper.c
-index ccfe3840d505..60e69061faa9 100644
---- a/drivers/gpu/drm/drm_atomic_helper.c
-+++ b/drivers/gpu/drm/drm_atomic_helper.c
-@@ -3758,12 +3758,9 @@ drm_atomic_helper_duplicate_state(struct drm_device *dev,
- 			goto free;
- 		}
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+index 6455898e2da9..686f718bd155 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+@@ -1938,6 +1938,7 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 	uint32_t blend_size = 0;
+ 	int i = 0;
  
--		if (plane_state->color_pipeline) {
--			err = drm_atomic_add_affected_colorops(state, plane);
--			if (err)
--				goto free;
--		}
--
-+		err = drm_atomic_add_affected_colorops(state, plane);
-+		if (err)
-+			goto free;
- 	}
++	tf->type = TF_TYPE_BYPASS;
+ 	dc_plane_state->cm.flags.bits.blend_enable = 0;
  
- 	drm_connector_list_iter_begin(dev, &conn_iter);
+ 	/* 1D Curve - BLND TF: find state */
 -- 
 2.53.0
 
