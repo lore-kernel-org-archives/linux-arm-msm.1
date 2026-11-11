@@ -1,73 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794399780;
-	b=UvBBD3CZ6hi3EmthtFfzUBKVspsaJ5glOoikYxsgY54yqkSrgr5fQpAb1cbFmRxyXFaR
-	 rFHFKJEjPFI85oHTTvtZl+1rDeuhuNiIlFbXFd3pj6+gF02xZsMQBZonsom6AW25vm183
-	 aB4UEWKgeaRPulYvFJrxjf3QFM9YwW2/RmMLfo6lrd7H5DXlVVkphQme5wxa7L0dOhs2s
-	 Qj1XCgG8sYjK4oAY+ajJJIiNh35CNfzYePMiv0ixLsdGsluHvMZLi5qK6+MteLa1oHt7g
-	 ZCmMdK5pZG+2yYIsZD8WjcOgWWJXhFYPmWsWTbT5U0OeAA6CUZZTKbx/thuiad+xHoQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794399780;
-	h=Received:DKIM-Signature:Received:Received:X-ME-Sender:
-	 X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
-	 MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type:Content-Transfer-Encoding;
-	bh=CAh+nvPJ+yDa0Qg7FRZRxpBHhGJqqeDvRRq0OEzlQqA=;
-	b=1Zz9d4YfZ2pJoX2Zx2Oo5xfcZN7z6YrBiTjPg+hO5Mj5cB/TI2X/AsQJSqIchC7buGLG
-	 b2RH+F+I5bFXZaQytMuDKAxxcfWdTkl4lGnYcOel/r8NmESarJNOLuRfo1piRMEn66t9L
-	 bWbZSTPdwM68D0rUDEQTItq3EKuCTZp6BLWD6lzgpz4IYzLnjUNuMHB0UoK2m40GtNuSr
-	 hC3ylzswjGo4NuxVRx5z9Oz/v8YnqFxtWIj/hIkIFrHU8U4YfMeumLUiDtdIZhhu+2p4i
-	 NKP+ylDc7ayARSethOh6pFMZeX/PtZCSIH7owThYPCwt8imCXLTXPLs2+6i4unba/Bg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bbXQbBz6;
-	arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794399894;
+	b=DVUj7NMJYfYMhREIM/5sQRsDLCyNAe6akPYXgX1bsx5UdetTxj9lpU0+xVP8iTeca8X+
+	 kYZ7o9Hi+Ac/uqrh/XtpxzM/BqbvQHtnX2XIlw5UDCBiBRUgnGl2s3jmtV/R1zDwh/f81
+	 311zPbsQhqOKR01oH7h4YM0WdASrkuur+wRIcs588/UMV/RPfyFFDAl6XMCnb7jDo4zOd
+	 Xlxlsbk/PjDD3VxJ8zIm7Iazd1tA7mhCbxsd8NSq/9An2H515Hi+WRdDx0C4oyYEVZ5u9
+	 eszX0snQjrh8Y5g8ClSs8FNZEWafKWqDj5vJq6CHe098e6FUiV/6kLSeu/Z4LGjdigQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794399894;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=ICXP/cmqLovC4R2HCOjMC4Wp+1KJ1RE5SJlC2SoQU1g=;
+	b=BXsozOJiSGoOxVaABlsF0Y12zrJI3SyGJ3sbIDJJS2l9RW2avTT/8Py1IkIG78msPJpy
+	 2n5zuS8G4w2T8VXc/pDg3BB/rtjOlccIaN3HJ51hzw6z7vpHeT7bYnCekCHbmJXN9MXbt
+	 F1Wi0rBDxVYQQvsXoZHlSA1A8HsM96IpDQz9f0/S7h0wem8F63kdCzMiNSFXpE3HPGImD
+	 TzmUJyfXK2QQwIo4KALQlrBfB/OfYnbRDMpYaSIY/jrWuJ3vdolHEW2Aaev2z3WiurWL2
+	 r+jUAYtzGzlg2aDoH9wAKVFlY2nlAd83E8yx8K92rfHnXCEStxWDCsmI8li9H3giFAQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ncwQcdGw;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF399606A31C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 12:23:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63378606A321;
+	Wed, 11 Nov 2026 12:24:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bbXQbBz6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C19C1F00A06;
-	Wed, 11 Nov 2026 12:22:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ncwQcdGw
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794399894;
+	b=qpq4D7Slk1QnZpTkQILk1aBaPxgYwHsstaeRRPAMTzCPAFv0vdUutw6d7xmgnwKRpTz1
+	 K8ry0Cij68ZJ/IVtGqRRRYDIE80f86v2OxVBijlGh0O7Fg4AdYEne8L0HYUqaNhdiVp92
+	 NusRF933Q6XUpxfH7PfwGYJY9RdMVLeMkid/ARetjBQ7apzodEzWc/evRKMBxPsWjlQXl
+	 zBsyLfLaaFSwUYoxDt3JY5zofb4mej0Tt6Y9YDG11fk4MfV4+EFx71p8+TSMo8+OxIRXC
+	 iXOPyLi1DDfPK0ADMjoKbHGOk5kzqv9r1HwF6FuP0tMglD7wJkV2PeYrtrM2FZsse+A==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794399894;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=ICXP/cmqLovC4R2HCOjMC4Wp+1KJ1RE5SJlC2SoQU1g=;
+	b=s+uwz2ySeTyM7ujO3L7/1xGWqgV3TRKba+6I+j+S1IwmwrmWU7/3znzzvTgbcfiLHEpG
+	 +DCHoB6kmp0vSQU8Qf3YKWYpeqX3i/ICVkgDUECznCADsqCk0FrhgDan+ESlvvdCq4Isq
+	 I7yWOh4aiG0qYXAjvN17PVZAmBdCU9oKqA0dyVedY5/wJaa/5vSinOFvEeetPigxYdgRc
+	 ldhnQw1SYViKPTgHQOmtqQimsm784HqtamMNI6ANfhumeQ4SJUbhqLqvbcXQ85pQd33lH
+	 XTU5FJp/wPjbuiqJUQUcUG8ZBnkCnkINUm/WnzHO83hEyBfAWfu9yut89k7aKPfJkaQ==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id AFA911F00A06;
+	Wed, 11 Nov 2026 12:24:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794399780;
-	bh=CAh+nvPJ+yDa0Qg7FRZRxpBHhGJqqeDvRRq0OEzlQqA=;
-	h=Date:From:To:Cc:In-Reply-To:References:Subject;
-	b=bbXQbBz6f5SdkwClp5bFyGE7f7ueHz+SIq6/l60Rbw9xM9ngDJ1TwV5Q7zTv3WkTn
-	 TOf/Cf5a3SVCzdb/oY0lBuVOH25+wG1EI2D9dFA06rAbmyPLo9s4cz4+A+loNdoDDP
-	 k4WkWxSycMQLFw89uiDkPXIKosVfkiayw1HGGOhwec1KgSbRaImrrBlr1/mEIMYle0
-	 8yrm6aeTfDJwxanJsncJt3P4172SRq+sN7eq36hGZc6mTEbw3y66bQSCJ4juKFuPqV
-	 c6kV05y11eltFXBr4fOBQVusOiDmwyXKbJsj/MNr4tGSNM74UIq4EmLPm/p1Cyn2Q+
-	 +1UZZ9pFVanmQ==
-Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
-	by mailfauth.ams.internal (Postfix) with ESMTP id C4D0B198003A;
-	Wed, 11 Nov 2026 07:22:57 -0500 (EST)
-Received: from ams-imap-11 ([10.64.2.31])
-  by ams-compute-02.internal (MEProxy); Wed, 11 Nov 2026 07:22:57 -0500
-X-ME-Sender: <xms:IF70alb-Rwk_AIRKiOc5jVxLRIiV12D2Pt0coxInkaxT5pLERDKrUA>
-    <xme:IF70anNi_4iDjSCNLA0hxVavhSgdy_jDg3VI9yD-1MST299UPaEdN680_y27UE6ew
-    OdgRlyt4RQS98eXsB487Y4L46tIQqZnrJ6KPmuC0R3Ij5OD0vNvV9A>
-X-ME-Proxy-Cause: dmFkZTGuiQUX0LNbcVd8j21W+23DiEwALIKvNLNcj6KOS3HRBh0oe0ltdiyn19y5qwkgP8
-    WZsl2dEbJyDMs8/HlT6JBBFWsvQ1NQX+18DKvDP1t3Ua1YOI/xNqIWeBVSOznrxZ9P2p33
-    Lmc3n7aSzjVGjsa4dMnb6mULdi8kpZdEB7wJetXNqASdqjwlX6Om4fqO34duMBYyRoHFm9
-    4xfnB5/jbpBXUdDrQLC6sUcK8UvEX4/y3YOheR/F24igDPIdeJlwwo4tpxFxCHVw3POx/j
-    2H0dcfCk+Kci/xvA8aksbHTRs0jaZYssChqkwYm40A2ipVBq7OUy+MSyQP7P8D2GYAF3qR
-    wSjSchduN5fNAItj3S5CnYyh+H4zIalXUThWeI9uMi0/zCvzYkezrI/aM3DEo5SxK2fyWJ
-    eZupMYEs6w4vFoRyb3555/fTu7FS3Ci9znLmlzo/IOAt94BVdlw7DCp/DfWZYxtNutfxcB
-    Gu+UE5zyIVPdu35ALh2ZCIJAfQ84qrmSQ95V3gyrW5lP+JyVoqIfCLHLb/1gsNIjYIDa/n
-    OM4QdL7Pbro1P+AnzX5k092r2NQDUUDYJ8AsxmgQ6YTEaNM5e1JUtnWljyY5fyWrz1Uhvt
-    rUSE156PTAhsPrFkFfNEfTBXyBf3NOzRkMJyKV5NFyt+sERBc6eaR15utI/A
-X-ME-Proxy: <xmx:IV70ajCl-t_5uxqWtbkT2BKhBgNCO48kayf1Lf84V7saaLSYFWdRyw>
-    <xmx:IV70ajnVrsjTi9xwCZ9efRuTFaZh9QCRooGC3zMJM345VJxNLar9aA>
-    <xmx:IV70audaaPhwUb62QixpIKYuLe91XKVCKq7dEa906BKmByda_ZvGCg>
-    <xmx:IV70anQ5dzM2XJL0fM1s2lQfrrn47Y_w7_lzJEAOBnyE7bUs86GxFQ>
-    <xmx:IV70alts3imEohIjud_ME-MyQFPrLSVeVLVAKOJ58tJC-mCoMPCVtsCi>
-Feedback-ID: ice86485a:Fastmail
-Received: by mailuser.ams.internal (Postfix, from userid 501)
-	id 1E36AF8008E; Wed, 11 Nov 2026 07:22:56 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+	s=k20260515; t=1794399894;
+	bh=ICXP/cmqLovC4R2HCOjMC4Wp+1KJ1RE5SJlC2SoQU1g=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=ncwQcdGw3kKUwBkYrbeQXyk5ewkbwzIDBxTq8sFL6E1l4X27uSoXzUgfq0eTdDDtO
+	 Vr7JVntDV3bTHZ6ov0d4DJCM7Ia4MtIp0J9x2YnmDDK3c9rhlJp20qOaAzCjm+yIQQ
+	 +Xz3bSahmbtynVS6B9ALlum2IPX+xCzHDlwOye/64v98SGjq8aVKx/+0vUz0P8BfoS
+	 EbstbhXdkADTPwrND3nIDVq4/ib2YspR33tC3xaDg+MjjDybRARHNZZjr6sovDGLOh
+	 BAWemmcOGKCP+bvdJh2Lcpgph/lkyXmfMqza+nmtTfRYFffShJJjcv8lWgDOABLqsN
+	 DAcqHRqOVH3YQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 40ED548F9A;
+	Wed, 11 Nov 2026 12:24:53 +0000 (UTC)
+From: Vishal Balasubramanian via B4 Relay <devnull+vishal.bala.nps.gmail.com@kernel.org>
+Date: Wed, 11 Nov 2026 17:54:50 +0530
+Subject: [PATCH v2 1/2] dt-bindings: arm: qcom: Add Samsung Galaxy Tab S7
+ FE LTE
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -77,53 +83,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Date: Wed, 11 Nov 2026 13:22:35 +0100
-From: "Ard Biesheuvel" <ardb@kernel.org>
-To: "Ard Biesheuvel" <ardb+git@google.com>,
- linux-arm-kernel@lists.infradead.org
-Cc: "Bjorn Andersson" <andersson@kernel.org>,
- "Konrad Dybcio" <konradybcio@kernel.org>, "Abel Vesa" <abelvesa@kernel.org>,
- "Dmitry Baryshkov" <lumag@kernel.org>, linux-arm-msm@vger.kernel.org
-Message-Id: <77983ae3-f4ae-4b52-903d-d5341ac0e869@app.fastmail.com>
-In-Reply-To: <20261111115303.3749380-14-ardb+git@google.com>
-References: <20261111115303.3749380-9-ardb+git@google.com>
- <20261111115303.3749380-14-ardb+git@google.com>
-Subject: Re: [PATCH 5/7] arm64: dts: qcom: c630: Wait for the touchpad at resume
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261111-master-v2-1-5eb864e9f38d@gmail.com>
+References: <20261111-master-v2-0-5eb864e9f38d@gmail.com>
+In-Reply-To: <20261111-master-v2-0-5eb864e9f38d@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
+ Tony Luck <tony.luck@intel.com>, 
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Vishal Balasubramanian <vishal.bala.nps@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794399891; l=832;
+ i=vishal.bala.nps@gmail.com; s=20261111; h=from:subject:message-id;
+ bh=9F7my3xYNlAFa6L6qVff7o9I+F4ahR3qE81wL7FFgR8=;
+ b=bf0c/fFNhMuA4w66sumeLgVl+d84Sycm7uiyCIuiYCFIvBuiPHwb70Ih0ZVrBglGljP42TgY+
+ 8pJGRVGkvRQBf/9Plwc2dQTNhFcuggJk3nuCkGdzlLgP2eO18sWkW40
+X-Developer-Key: i=vishal.bala.nps@gmail.com; a=ed25519;
+ pk=GDcoc+SAK+BHD1Eq17X/BJa9U2HZkBW+dmxS8s1xMAY=
+X-Endpoint-Received: by B4 Relay for vishal.bala.nps@gmail.com/20261111
+ with auth_id=1486
+X-Original-From: Vishal Balasubramanian <vishal.bala.nps@gmail.com>
+Reply-To: vishal.bala.nps@gmail.com
 Content-Transfer-Encoding: 7bit
 
+From: Vishal Balasubramanian <vishal.bala.nps@gmail.com>
 
+Document the compatible for the Samsung Galaxy Tab S7 FE LTE
+(SM-T735, codename gts7xllite), a tablet based on the Qualcomm
+SM7225 SoC.
 
-On Wed, 11 Nov 2026, at 12:53, Ard Biesheuvel wrote:
-> From: Ard Biesheuvel <ardb@kernel.org>
->
-> When the SoC reaches deep sleep (AOSS sleep and CX collapse) in suspend
-> to idle, the touchpad is often reset, presumably because it loses power,
-> and it may still be starting up when it is powered on again at resume.
-> If it doesn't acknowledge the power on command, i2c-hid tries once more
-> 0.5 ms later, and then fails the resume:
->
->   [  712.566907] i2c_hid_of 3-0015: failed to change power setting.
->   [  712.567528] i2c_hid_of 3-0015: PM: dpm_run_callback(): 
-> i2c_hid_core_pm_resume [i2c_hid] returns -6
->
-> hid-multitouch then never puts the touchpad back into touchpad mode, so
-> it stays in the mouse mode it starts up in, without two-finger
-> scrolling, until the next suspend and resume.
->
-> This happened after about one in eight suspends. With a debug patch that
-> keeps trying, the touchpad answered the next attempt, about 6 ms later,
-> each time it had missed the first two.
->
-> So give the touchpad a post power on delay of 20 ms, which i2c-hid-of
-> waits for at probe, and at every resume before powering the touchpad on,
-> as the touchpad isn't a wakeup source.
->
-> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
-> ---
->  arch/arm64/boot/dts/qcom/sdm850-lenovo-yoga-c630.dts | 2 ++
->  1 file changed, 2 insertions(+)
->
+Signed-off-by: Vishal Balasubramanian <vishal.bala.nps@gmail.com>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Please disregard this one - it doesn't help in the end.
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 121ca557ce1effdc95e9e97210bd9a63673f8ba4..abc3c0f53cc14b02d06b68aba3bfd8425ea4fb07 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1118,6 +1118,7 @@ properties:
+       - items:
+           - enum:
+               - fairphone,fp4
++              - samsung,gts7xllite
+           - const: qcom,sm7225
+ 
+       - items:
+
+-- 
+2.47.3
+
 
