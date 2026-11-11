@@ -1,79 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794394462;
-	b=UHqRFUy3Dlv/H63IFjLnmEaRaJ6DzeAvLxNJTXQQY7HGFbXqwae3+39npmCwqGRzt1C7
-	 ALG3ETHJDJyCQww2/VVGv4f2FiOy/o3kZca4hvo79p+PYbWF302V4uV+ShnG6HqDlILGJ
-	 amnifs2W8H0aJ8n8+ZklsXZ2EE4XM0Rf/RgjREdRX2SWDw+PgY0w15DNLVR399RGU0HNi
-	 zLuOl/HBXGAqtaC4y+4m1q3BybqmpUynYlpJrGx1TME7DXSUHjX72obhxqHgJN1wL1iz5
-	 GUerJsY7DqM+1+A5vzChnxn2II3ICwy93nk3hz63ed/63itB4HTDR5pHTpg5p3fU/IA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794394462;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=4SvOebTKFMbQya7gCBewPTnTPz0HZqTShakBlkHoz88=;
-	b=nRSTY+MuiccpjToWYH7tnRBLNiE6jvty5apQqoTvL2com6pNKwBTsGia6t/E7sdQvyHM
-	 53kaEw8lQmVCBw7SiS6r7wbblP/n32Rv5ggTwtZQAFmQlxQNZyycjxarvmvnAMMcCTWbA
-	 UFzpG92KLOpuQNmpyXFiKZoaGw0FUrxT67NjYVHsBXHBr5fTlzZ30U+A0Q0P0cWUtZZ9E
-	 Qmp6xaYiMebuaNZvPxaGEgSOeyEUnSvTbryUxlhBCMBmWSYx+MFxjPmNjh42FwoLZYLVt
-	 hiZeGGScaEE0M/T7M+OJ+Zw32E9Chf6UmnKYLhcdOHV+yEV/fvY8t+RkzT49sWiaYrA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LeCNeuyb;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794394823;
+	b=XccbVtp6xJzJodmR6N/pYFYD08qbhYTA7X9t5Os0cGIM1Iaa+/3noVxqqQYxb+/h58+k
+	 geZ3wGUtAiIvkp1eZEgXOE/VrH0mypYUycrXxJsCTJVJGgs2D1WRoc5tzUYe94wsMz3mR
+	 xHwsZJ2Ax5AgJWio2+/radDmU5PPDDUyreT2CyFS+m9cntAvgiW0Hs7Iay01Fxvg4945t
+	 T1MPIoZF49rnA9D9dF4eH9xtaQKD0/PPi0AcqvBfVuZ/x21XhYPUG3pXdSLDO2hKvS/ui
+	 u37cPBQfugZHQ0q5qXhyyybW0W087leZqOW8p8dhWBI0I7Yp7J1zdSZKqJx8u8kEpRg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794394823;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=OYfWv7t3fNfV5mHgH3rQFUU5ZnGse0SEirQFnt+sNZA=;
+	b=qZR0YCXEB88CLQI15H3l4ChQB8FMZOeWSJsRCDJgXFimek8v0pYtr4OeZeugfBoPDbwU
+	 +isXL4J1vzbo3eD1rT2wJATjcW7w0MKPNrILr4fuug3XDJFrtAGjit2mxa2s/0TFaLHaM
+	 ic0qgjkYPGn7DoQWriCQssGJcVeytZ635yeIGuD4ueb/22Dm4TibyVw1PmF4BXOmxf/bX
+	 Z9jWBKD0KtDr3xXagGelAYVRuQZusxGbTyZhu4d/Z/VNf0SksLGhJIdLd2T4KJYW2XR/r
+	 lYDML4lYF/6Mm/y96vW8MdwnesESJ+rWTySKx61dihggZhAP0X1TdTcARYjaDaKXI5Q==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gondor.apana.org.au;
+	spf=pass smtp.mailfrom=gondor.apana.org.au;
+	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cO9XoWLf;
+	arc=none smtp.remote-ip=180.181.231.80
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8953E606A334;
-	Wed, 11 Nov 2026 10:54:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7F58606A31C;
+	Wed, 11 Nov 2026 11:00:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D7F58606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LeCNeuyb
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794394462;
-	b=2ibMg6OIntHZ+s2Q+CGBOPao/gmpIiXZ1by7Mz0LS3qpRdEDrwiej0pNZ/Sy3KIC0+nO
-	 3O7YtWNGw7Lakiowf7YMrNYoJkzuWNPVGnaiTIHFH/jJZNg6jPnJOf5emui6+SmDGlCwd
-	 R4nhw7vZDw2sNOaPr2aiFe+zkjZKtR7QCiOJ7jK/a+DwOcrTGB4UPYOIncoDKp1YDSymS
-	 GB+5Lsz3rAO7G0jIs0eMlWDiUo/CkxG/Rpt+77jYHoHZSV7VtrDPlr30ObobCf9ZrZbMx
-	 yXMyFEpsnIENFPmV4R+nq6CFyBCqer2EgxDHCmoxo8nD7UxNYYAEqyMLdfeRMdUgP4Q==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794394462;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=4SvOebTKFMbQya7gCBewPTnTPz0HZqTShakBlkHoz88=;
-	b=bgLpOmzJYhKRk5Io0+0fPF68Eeel76gwlfRjy4HOfTGKzH3YEnqOVxlS8OFNtWpCNkdL
-	 3+K6jLgz9xH7bg+ZZo9Q3h2EyjWN4QLFd0xfE8HeE0IMz4P3chfWISE+fwEFtLJZJmUuD
-	 k7uJqiASOJi7CIDhYZ6W/jdOyM7IXi52mkDG0hXwIbQuZGf6U9niAylGiSrAd/kSdNJhy
-	 5tC5R8Tb/q0ti+yU/x6yzE53kvSNyyZ9Why/NefvIqKskl++7bvVGb2mcx7/TmkkdGRbP
-	 qpD+X5s/CIexb7Clkhu+u5DeU1KURHPK0TkfQJTIEEPfUb+CpgV4nPrj5asMSSUA0ww==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id B47501F00A07;
-	Wed, 11 Nov 2026 10:54:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794394462;
-	bh=4SvOebTKFMbQya7gCBewPTnTPz0HZqTShakBlkHoz88=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=LeCNeuybQ+iH1kwOsw76u3jCz6tZ1Ad789hIGy8LGg1RfCpXa1E6reUnHJxnAjz/9
-	 njYW6M1W059Q2KljpwUlho8iFIEIf605iWpwd1XPks05qaAErdju/1l/w9IEhOwYUD
-	 p0ntnSgaZ0A4auSgeAawNe1IV03AbeL1VEnC7fuhCSECQYpyPm1ns53DoIJX+0LOAd
-	 Qz9JjcBC3WLS7M+Jm9fr2mJJOMBFx7tW6w78Q9PEyCjjULzaVUhQqOb/dio66b9zQd
-	 ajR9LRnrQ3YjbFSmUQgTbGTpgWFoq6982QH5PPQtarfYCwPLwSv5/2nd3HWwPP4M3H
-	 wcMuKH3OvCQlg==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 436DE48F58;
-	Wed, 11 Nov 2026 10:54:21 +0000 (UTC)
-From: Marc Herrero via B4 Relay <devnull+marcht.proton.me@kernel.org>
-Date: Wed, 11 Nov 2026 10:54:18 +0000
-Subject: [PATCH 2/2] ASoC: qcom: audioreach: only disconnect the route a
- mixer control owns
+	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=cO9XoWLf
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=OYfWv7t3fNfV5mHgH3rQFUU5ZnGse0SEirQFnt+sNZA=; 
+	b=cO9XoWLfjDEAo8WYLWNOoEiRtgAE4GB5whJjASVlg2jl9XmeIcKVqZ99wCK8SeuajrdKFGY4a7J
+	l83YVFNtjopeZ2QhhCElQjui5HmK7/eCClUGF1gPmKhJKIJC1X1bAZVfcThNl6pKzSZkQukc1EV9o
+	8WghVTs7Cz0q6uDE8dH4X8nowKLY/jGAa/79QC9okwhA3v2LoLY3OoCd1yO5wFPukyTfmBXifjFQ0
+	y98Qrpd6yL2V7nAwtyOOaGtrXWX864+psHHS+KEFHDw+b3pJOAv183r+H151YNRbiE/jjviiT9yHh
+	+KlpasAfqR++rkd81godh9nh0zIBozgEs/iw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1xR63k-0000000DmCq-0pos;
+	Wed, 11 Nov 2026 19:00:09 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Wed, 11 Nov 2026 19:00:08 +0800
+Date: Wed, 11 Nov 2026 19:00:08 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Russell King <linux@armlinux.org.uk>,
+	Eric Biggers <ebiggers@kernel.org>,
+	Demi Marie Obenour <demiobenour@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+	Birk Skyum <birk.skyum@pm.me>, linux-crypto@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, stable@vger.kernel.org
+Subject: Re: [PATCH v11 0/2] crypto - qce: make algos optional and remove the
+ BROKEN label
+Message-ID: <avRKuPGD6QdRXrat@gondor.apana.org.au>
+References: <20261022-qce-fixes-broken-label-v11-0-0d33c34fd0c3@oss.qualcomm.com>
+ <kh74or65txfcprntqqljabnszooj5ppuwizj35flv2r245zbvo@nfue4wdblicr>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,77 +74,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261111-q6apm-fixes-v1-2-1beb5702b372@proton.me>
-References: <20261111-q6apm-fixes-v1-0-1beb5702b372@proton.me>
-In-Reply-To: <20261111-q6apm-fixes-v1-0-1beb5702b372@proton.me>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Marc Herrero <marcht@proton.me>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794394460; l=2173;
- i=marcht@proton.me; s=20261111; h=from:subject:message-id;
- bh=uwHreXeheF+PY4xZ0ZasSUnOSnlXrONYE6C8uZecUBM=;
- b=bLkWe0qoIIXe4vR/PnbDWg1bBcDb3ZcqkOH4+4smFjsy+J+H3bp+7RMSHR6hsb0g8jz20cm6Y
- IZlTr6OAuUaBpTR2JKIdOEDdty12wfeTZAMyPw/715ULBSQFkVIhSYd
-X-Developer-Key: i=marcht@proton.me; a=ed25519;
- pk=pIPy6L+INgiuJt7L7umVilPgpzy/Ni3QS77ToLj/H9c=
-X-Endpoint-Received: by B4 Relay for marcht@proton.me/20261111 with
- auth_id=1490
-X-Original-From: Marc Herrero <marcht@proton.me>
-Reply-To: marcht@proton.me
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <kh74or65txfcprntqqljabnszooj5ppuwizj35flv2r245zbvo@nfue4wdblicr>
 
-From: Marc Herrero <marcht@proton.me>
+On Mon, Nov 02, 2026 at 10:58:12AM +0100, Bartosz Golaszewski wrote:
+> On Thu, Oct 22, 2026 at 10:57:58AM +0200, Bartosz Golaszewski wrote:
+> > This is the follow-up to the three smaller series fixing crypto
+> > self-tests in the QCE driver. It makes the crypto algorithms opt-in via
+> > a module parameter and removes the BROKEN label so that the driver is
+> > built by default.
+> > 
+> > The dependencies are:
+> > - https://lore.kernel.org/all/20261016-qce-fixes-sha-v1-1-3ee5a30d84f3@oss.qualcomm.com/
+> > - https://lore.kernel.org/all/20261019-qce-fixes-skcipher-v12-0-046e6be9bd83@oss.qualcomm.com/
+> > - https://lore.kernel.org/all/20261020-qce-fixes-aead-v12-0-77a2e09abd0c@oss.qualcomm.com/
+> > 
+> > Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> > ---
+> 
+> Hi Herbert!
+> 
+> Gentle ping, can these three series + this one now get queued for v7.4?
+> The three dependencies have no more sashiko comments. The ones for this
+> one are minor about missing module params docs so can probably be
+> ignored or I can send a follow up.
 
-Each AudioReach virtual mixer route control ("<BE> Audio Mixer <FE>")
-connects a front-end stream graph to a back-end device graph by storing
-the source module in the device graph's audioreach_graph_info. Writing 0
-to any of these controls clears that link unconditionally, even when the
-device graph is connected to a different front end.
+Did you miss the Sashiko comments about missing documentation?
+Please address them first.
 
-When two front ends can feed the same back end the result therefore
-depends on write order. On QCS6490 (Radxa Dragon Q6A):
-
- - alsactl restore writes 'DISPLAY_PORT_RX_0 Audio Mixer MultiMedia2' = 1
-   and then 'DISPLAY_PORT_RX_0 Audio Mixer MultiMedia1' = 0, which leaves
-   DisplayPort disconnected although the saved state has it connected;
- - the UCM HDMI enable sequence writes
-   'RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia2' = 0, which disconnects
-   MultiMedia1 from the headphones. A PCM started on MultiMedia1 after
-   that never advances (hw_ptr stays at 0).
-
-Only drop the link when it belongs to the control being cleared, that is
-when audioreach_is_vmixer_connected() reports it as connected. Writing 0
-to a control that is not the active route becomes a no-op, which matches
-what its get() callback already returns.
-
-Fixes: e4977b91cff8 ("ASoC: qdsp6: audioreach: Simplify handing FE and BE graph connections")
-Cc: stable@vger.kernel.org
-Signed-off-by: Marc Herrero <marcht@proton.me>
----
- sound/soc/qcom/qdsp6/topology.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/sound/soc/qcom/qdsp6/topology.c b/sound/soc/qcom/qdsp6/topology.c
-index 612d8f03e6e9..e92408e09bac 100644
---- a/sound/soc/qcom/qdsp6/topology.c
-+++ b/sound/soc/qcom/qdsp6/topology.c
-@@ -1300,7 +1300,7 @@ static int audioreach_put_audio_mixer(struct snd_kcontrol *kcontrol,
- 	if (ucontrol->value.integer.value[0]) {
- 		audioreach_connect_sub_graphs(data, scontrol, dapm_scontrol, true);
- 		snd_soc_dapm_mixer_update_power(dapm, kcontrol, 1, NULL);
--	} else {
-+	} else if (audioreach_is_vmixer_connected(data, scontrol, dapm_scontrol)) {
- 		audioreach_connect_sub_graphs(data, scontrol, dapm_scontrol, false);
- 		snd_soc_dapm_mixer_update_power(dapm, kcontrol, 0, NULL);
- 	}
-
+Thanks,
 -- 
-2.53.0
-
-
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
