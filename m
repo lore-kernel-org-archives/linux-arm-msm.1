@@ -1,55 +1,101 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794363353;
-	b=wSgb2yiH+t6r86pViVFa2/Zy6IJBQis6TPk0T877TqYjX0XBImi3MG3wQ+122QlMhy+t
-	 M90KGlPnHt3jTd6JLGxzlsYLyPkoKJRf+zZVU/tTJ3NJVjga4gXqe5PORpGVcxk7sT3n3
-	 7KeiWUY4N3pc09/r0stBH+H8HRBbC1xGSecDcG0i9MvgkR6SpzWxq9nvjBD8h1C/vWBxs
-	 WLOevJ7hrGR6uU9IdDBoKLmk88mk8YAFK17MbcatWHxAvoNR9hzdW7T1Tka+m35uK8Cbu
-	 Yh/emWslFUuKSdgPs0ZNUU/48I2Y8m9VQbKnkR4349TaMiEoyYP/RzRHWOiIKt958bA==
+	t=1794363541;
+	b=o/jaBOVYq1mLOdhB7E5S47ZDCF9v+mz+/jgb8vRpEAUQHWeID5oYw/ZLwrKgIWNF88a5
+	 S+uEOW+Ap8tI+xrGBrMR0h/nfvIZZwpitgxpH+gBkz/Qxc8HqL9Si4xcwWCo2pwE2fm+n
+	 ZVv1JNwv0Zph3jMxT0p746QbS0kd6JmLTgFFDjTRyGgQEIkvyM2Wx13m2fsu65hlWEgNA
+	 Sj4OEYQ0jz0WBlILej8NJ2KyxRP04U+fanTD5IKsRK8zM2GHs8hR7Fj7BVJCrKl17UphC
+	 Ll9Z5qzYzKdBWF6ybwmzQ4b0Fo+lLU/UwGt2zin2/U85D/p1bxjAhA4GETzhUDdIc5w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794363353;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
-	b=uskHNVyCXGVxwh0Bbye5We8GhL7oa2gWK8jhB7l6RljlZ4YZ3XCETF+LXB2ZBcJSG0N7
-	 ETvKX+W7czQyCHRSB9l461ws3mypUC50bBXZSNZeTGIMFCDaUn/B64GyLOIKmCmcUne/R
-	 mACCTIyZ0VE52bFlzA0daCF7RZZzr0G3h904/njV+/jqZUVObrgrKgOkr9hRzDY460fBN
-	 NQCkAMh6Py/fxjVxZwB5XhGzHTQcoPP+V4t2OdpGWyxZDQyxCGIGgh7n9NpXske2vGdD6
-	 PfzWp3DwuM7qugC4h3/6xnfSxDfLo2vc+4voDkmZd5KCmYygKGe2zVYhLlRcg/wB3tQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794363541;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=2fMVd9+BG4VO7hqMxKMuY5cqj5bvPICv3nSW+GWLiOc=;
+	b=TZHfOAB46J9SyFR9rXCTkKdVyromGeMeKtudnTmZ5rpAySik8yjOpkuVZ5rlpgoRxU+j
+	 MfgEu1j+4xQ10+wsfpRQxIV0ajq8cfJv2hDIOkxGgoIojY5zEmYIAwDy/FhQHUg4EloP1
+	 0f+fjAaugi5w1KU4CfPOlMO+X2A5e6siV6/gA8/lVTlmI5Gp2P7wd21d2Vd7sOdPZ8MO+
+	 B5pbDtPkvKQluS3eoiJYfrotkMFPMYDGHhHhDEEubgzhztFaYhhDoZTerW+XRKR6EF+6g
+	 PcYx72H0j2Hp/wPRDIPBb5b+6ickl5vD079va4q8lDIIYvfaTF9zVkUox9P/zLO+m2w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gpzNUmNy;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=m2krku+Y;
+	arc=none smtp.remote-ip=209.85.222.44
+Received: from mail-ua1-f44.google.com (mail-ua1-f44.google.com [209.85.222.44])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B0E606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 02:15:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A795E606A320
+	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 02:19:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A795E606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gpzNUmNy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61B0B1F00A08
-	for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 02:15:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794363353;
-	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
-	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
-	b=gpzNUmNyq6qsEvzIL583I1WHX9XfM0jAP9xozMvrK3oKgjaJKM9HmydByn5NEIyRm
-	 FL9I8LN/cIEOLQxNJFqTpzUjJJ8FRmysOu6sSSlmR6wbnLmY2H/xJB0pOtjQEiIXbT
-	 ypTguvcmuTxGA4UbO/FrAsn8x4unTMCqWiFL3P3GD5T9auLrdw06/wvgIQn/Bdxh/B
-	 Vtbxsjuz93uLGRohSfPQSgdhBUp3YTnHVdyJwnyV/Whij4FUNwL1MAv4APvwxjS4gs
-	 yBjmoOTG1tb9pmFbBrbpF+3cdE4yQiSOCdPWnYQr027RTqovH7kZVDgHHcOJPfiodu
-	 juMmXw2VwYZUQ==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5c10dc41270so2476603e87.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 18:15:53 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErF/zjK+xrdeOAiBuza3e3tyO4CO6ButOQcluVBYfmCErR0s68JkngrkOY8vCK2/e10MjHiNub5ArhHHomP5@vger.kernel.org
-X-Gm-Message-State: APuU4Z8lq7nIc+xRgfR8psyOuSIYDwJFX1Ewrk87ycGJiR8+OTEWQukw
-	EGCdJYSIGeYaaaDGlvGzVlqGH3SgRuXg/fJqnZVULwQXYMG2wfo0pwPF7eXWkKIKeUiNjDKYIcx
-	GuToJKEx0HPz/iCawaQ7lByP30BqCfZg=
-X-Received: by 2002:a2e:be8d:0:b0:3ac:429f:6d93 with SMTP id
- 38308e7fff4ca-3ae126c230bmr1415561fa.29.1794363351836; Tue, 10 Nov 2026
- 18:15:51 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=m2krku+Y
+Received: by mail-ua1-f44.google.com with SMTP id a1e0cc1a2514c-98fea7e52b7so1469819241.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 10 Nov 2026 18:19:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794363539; x=1794968339; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=2fMVd9+BG4VO7hqMxKMuY5cqj5bvPICv3nSW+GWLiOc=;
+        b=m2krku+YjvL7RwAHdVnX5JwwsKjAmCTwylPED02piBX5bjzoH4ibDEntBz6HiCdspr
+         nU+8QyqtiUrsnaUjbaYHQsStgBvg3X/67QQ8hZWYApOh3F0ksrsMTvGJaDQ+1AZ8V3Ct
+         6Q40Jf3UD9YQQyYjI3//L/0W33Btupqqz8ivO5Z4dVW9QRngt+HFPgenN8crFEGxGDdN
+         VCRHCwsc1Q9F4g1OW695Y1ARMEyvtjb6LFZvr990hyM+jF8q6edfDH6irdZbQw3/uMgV
+         MF0pBlfW+dCPMd38ESEFm7u4AUX02QO6jSr1JCTX+pbbweQ6MprJg61/EDmyOC6ZTryl
+         /fKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794363539; x=1794968339;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=2fMVd9+BG4VO7hqMxKMuY5cqj5bvPICv3nSW+GWLiOc=;
+        b=Ob1AqhmOiB/cyKjjB6OGO9gmSkim0oxn1V+Z6oYp/6+EALYiYINhcIdnG0dQ+XCJLx
+         6P34yx6LKMCxTTPBz3rfxrlgBM/e2C7umhhG4/dcRRGT6no1oQdMlNYtjoEBpciaUan7
+         6s+VSTgMokRqbBp6C2Wuf9M+817GIEBkTWThd64lSlqM0ZFoFcLooeJ1axpl3QbkZzlM
+         Y1CN222seEAhq0HPW1zHbbNegEV7EtqehFPeoQNh8/eNoKJ9so3Coa9Lg9bzYVJmvqTj
+         s2tCtl3p+6c2XyEm+HlIOWF9WBrGuGzlUx/FhulkBXMji00i7ZsQNdgkjjUYx3Tq0Fh+
+         FUgQ==
+X-Forwarded-Encrypted: i=1; AL+hErH+advHHzc+qC9A1eyksmPApU0dbVpyXzULpSXDqFrzFQQW8vzZy256x2AeJuPeTxDI5fdthPt0QpD7jGGs@vger.kernel.org
+X-Gm-Message-State: APuU4Z+tfSIev+dOPEIzF0OCr+Y4gU4jWRZybmieaNj93bMaybp3PRNg
+	QaD7D1UlyRlV3LR+VIeRAHSNOh2XUipP3FwRpXEGXlu2P5GFfAiss8QC
+X-Gm-Gg: AYBFou2jzB8duOApdLurSFXI54QNtekThoLHqCSSTtDQwHzrzJJhD8VzZA794ZBaQS/
+	x82/w+BcSWG03nxokW9zCSyioFd2Re6keo+C7SjIGyb/b7NSOeJEOVEU8+zL/jxL6PwZ3D7beE1
+	L4A+1tiKg4TofD+mFzETsWcW5EGZCL3+bzZS6Lsog4HiRi6JZMmA/7NjjNIfGbUMuWlZzth5Zs/
+	pKnlt6KygaR6CkM32fgnCpGOm0vq5LkFOxykY+x9ZjmCPmVq/qtNDEgOf3oRq386comEMT1TCrn
+	5Qg/BXehGfvGLzen5S8DIGgzmZjkI1vpvL3qmIK5OyvKlnL91waKzx5fFji4q0oItEmlPhxKXE+
+	efI74p5zwzPtEY3VYb6AYWZ81sg/VDNOyo+DeE/P2tmIypBdVlKZgIwo7du25I9p8xb/EBPEJFW
+	Bkirakhgzv6JqAFDPA6H8sn7UayXu8PeDuNYjOkYWoLQa+MFgaLjH7N9F2YJDSSTBneY2FdAVIz
+	4IvQoCbg0KWsMm5caT1PB5WTsXUYC7NnZJHMXVLGA1EHF/AAel3YgQ95pIyKzVXIoyPfeuK+bm7
+	W9lZDtDznKOVG1enfWdK8BeiM9alv2ipGkWVo2QkCE1kaRgREMw=
+X-Received: by 2002:a05:6102:5092:b0:7d2:c786:5a98 with SMTP id ada2fe7eead31-7d4fb2a44camr283379137.8.1794363539520;
+        Tue, 10 Nov 2026 18:18:59 -0800 (PST)
+Received: from localhost ([174.93.36.89])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d3023aeac7sm2888590137.9.2026.11.10.18.18.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Nov 2026 18:18:58 -0800 (PST)
+Date: Tue, 10 Nov 2026 21:18:47 -0500
+From: Richard Acayan <mailingradian@gmail.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 0/9] ADSP for SDM670 and sound on Google Pixel 3a
+Message-ID: <avPQhxfKOpmihOTo@rdacayan>
+References: <20261107022453.159341-1-mailingradian@gmail.com>
+ <18dee813-d4db-49c5-9ffa-7a150747a4b5@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,98 +105,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <cover.1794347059.git.u.kleine-koenig@baylibre.com> <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
-In-Reply-To: <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
-Reply-To: wens@kernel.org
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Wed, 11 Nov 2026 11:15:39 +0900
-X-Gmail-Original-Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
-X-Gm-Features: AclHuK-PEU8_Ju7uMZ7QoR2Wn0i8AsTrMLtFibJe7hATAjuodc-7gCHep5Ph93s
-Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
-Subject: Re: [PATCH v4 19/20] mfd: Unify style of of_device_id arrays
-To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Nicolas Ferre <nicolas.ferre@microchip.com>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
-	Scott Branden <sbranden@broadcom.com>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
-	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
-	Ben Bright <ben.bright@cirrus.com>, David Rhodes <david.rhodes@cirrus.com>, 
-	Richard Fitzgerald <rf@opensource.cirrus.com>, 
-	Support Opensource <support.opensource@diasemi.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
-	Tim Harvey <tharvey@gateworks.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Charles Keepax <ckeepax@opensource.cirrus.com>, Sven Peter <sven@kernel.org>, 
-	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, Chanwoo Choi <cw00.choi@samsung.com>, 
-	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
-	Saravanan Sekar <sravanhome@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
-	Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade <andreas@kemnade.info>, 
-	Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, 
-	Tony Lindgren <tony@atomide.com>, Matti Vaittinen <mazziesaccount@gmail.com>, 
-	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	Chunyan Zhang <zhang.lyra@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
-	Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
-	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	patches@opensource.cirrus.com, linux-rpi-kernel@lists.infradead.org, 
-	linux-renesas-soc@vger.kernel.org, linux-sound@vger.kernel.org, 
-	linux-samsung-soc@vger.kernel.org, linux-amlogic@lists.infradead.org, 
-	asahi@lists.linux.dev, linux-mediatek@lists.infradead.org, 
-	imx@lists.linux.dev, linux-omap@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-sunxi@lists.linux.dev, linux-rockchip@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <18dee813-d4db-49c5-9ffa-7a150747a4b5@oss.qualcomm.com>
 
-On Wed, Nov 11, 2026 at 6:56=E2=80=AFAM Uwe Kleine-K=C3=B6nig (The Capable =
-Hub)
-<u.kleine-koenig@baylibre.com> wrote:
->
-> These arrays already mostly match the most used and generally
-> recommended coding style. That is:
->
->  - no comma after the list terminator;
->  - a comma after an initializer if (and only if) the closing } is not
->    directly following;
->  - no explicit zeros in the list terminator;
->  - a space after an opening { and before a closing }, a single space in
->    the list terminator;
->
-> Adapt the offenders accordingly.
->
-> Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MA=
-X77759
-> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas
-> Reviewed-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com> # =
-max7360
-> Reviewed-by: Linus Walleij <linusw@kernel.org>
-> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
-aylibre.com>
-> ---
->  drivers/mfd/88pm860x-core.c    |  4 ++--
->  drivers/mfd/ab8500-sysctrl.c   |  4 ++--
->  drivers/mfd/ac100.c            |  2 +-
->  drivers/mfd/act8945a.c         |  4 ++--
->  drivers/mfd/altera-a10sr.c     |  2 +-
->  drivers/mfd/altera-sysmgr.c    |  2 +-
->  drivers/mfd/arizona-i2c.c      |  2 +-
->  drivers/mfd/arizona-spi.c      |  2 +-
->  drivers/mfd/as3711.c           |  4 ++--
->  drivers/mfd/as3722.c           |  4 ++--
->  drivers/mfd/atmel-hlcdc.c      |  2 +-
->  drivers/mfd/atmel-smc.c        |  2 +-
+On Mon, Nov 09, 2026 at 02:23:15PM +0100, Konrad Dybcio wrote:
+> On 11/7/26 3:24 AM, Richard Acayan wrote:
+> > This series adds a user for the SDM660 sound support code [1]. It also
+> > adds the ADSP remoteproc for SDM670.
+> > 
+> > [1] https://lore.kernel.org/r/20260730174353.108023-1-mailingradian@gmail.com
+> > 
+> > Changes since v2 (https://lore.kernel.org/r/20261003175659.23536-1-mailingradian@gmail.com):
+> > - stop using fallback compatible and add lcx power domain (3-5/9)
+> 
+> Can you share the output of `cat /sys/kernel/debug/cmd-db`?
+> The SoC also has a LMX domain, which downstream seems not to wire
+> up to the DSP for some reason.
 
+Here's the ARC dump:
 
->  drivers/mfd/axp20x-i2c.c       |  2 +-
->  drivers/mfd/axp20x-rsb.c       |  2 +-
-
-Acked-by: Chen-Yu Tsai <wens@kernel.org> # axp20x
+	Slave ARC (v16.0)
+	-------------------------
+	0x30000: cx.lvl [00 00 10 00 30 00 40 00 80 00 c0 00 00 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30004: cx.tmr
+	0x30010: mx.lvl [00 00 10 00 10 00 00 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30014: mx.tmr
+	0x30020: ebi.lvl [00 00 10 00 30 00 40 00 80 00 c0 00 00 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30024: ebi.tmr
+	0x30030: lcx.lvl [00 00 10 00 30 00 40 00 80 00 c0 00 00 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30034: lcx.tmr
+	0x30040: lmx.lvl [00 00 10 00 c0 00 00 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30044: lmx.tmr
+	0x30050: gfx.lvl [00 00 10 00 30 00 40 00 80 00 c0 00 00 01 40 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30054: gfx.tmr
+	0x30060: mss.lvl [00 00 10 00 30 00 40 00 80 00 c0 00 00 01 40 01 80 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30064: mss.tmr
+	0x30070: ddr.lvl [00 00 20 00 80 00 a0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30074: ddr.tmr
+	0x30080: xo.lvl [00 00 20 00 50 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+	0x30084: xo.tmr
