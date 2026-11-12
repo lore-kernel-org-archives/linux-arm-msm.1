@@ -1,101 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794491380;
-	b=zFyUqXea5sQAkCyI+W033gOLg0trYPV1OuD4IUvD6KzoYh/egZUP2cM7Iqel59UW6p7l
-	 eh2L1kPNIumHHUwoAmXkHd8d1T8jZhiHw1kKn2nzBJI9C7R4Uc5oqdPNjVHkmPUpGzLLG
-	 LULgbNVAlzweTojFMRmGmAS2XnGfgQd4ioLaSQuSksDLkptgrs5qIk7Dv9PKGLw0/PAP3
-	 VE4sr/2DoPL+5IloGfQXN7yRW+R1Ls0qHN70jn+h2x9E3VWKTzVLlNKgp2ah7W1iXWe3r
-	 JGKaxbjCKoINow8T3Zv6XLJbiAaaUODJ0kyef/HYYIzVSlg4lCbnez93Tse995ilIDA==
+	t=1794491787;
+	b=VhOPDgXWQjBqlVf5X7SwUfYTiX5zII0Vlnu9M6o4ThzJu3G8yE7met0Izu/RP1P7i+EH
+	 I+x+saXy7CHsyNWY5e00k/OElNOOo7E5C2Ix84dRWRWKhCyEzXqaMHETnDeZM6SOdTPnQ
+	 NIGHZ0TGDkbXevbwmd1FBEFa4dxYqUpV0ZJ+m+6jIX7TWPWBnoXDXDpqHbRbWc+a4wGuc
+	 alOggh1kq5i0OokKEwW7HzoEJ+wOLW/mX+hOA5eRChgRSlt3JM7G15/tgjuOr+XobMVt4
+	 AWwxKAxtt/GqlwUqNMj7svHrmWNKrqXVJOOKFfb/M4E0XLQroQM+Gpy4x/23nor12ew==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794491380;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
-	b=HKKEOPQREzZ74NBj1ozsFnwBa060KrDSUjS+6uBDJ+popQKbd/of72cQwwVeu1x6zM4f
-	 ECaGdTulVZxqKrgBAy0wt2NaSyY1QmC7zBsElIUfFcuaoFEZMYB/icc3JNN/XVgJvru0j
-	 y3K7ONyhTr9wjr0syrsP6CQLDn7P6ADaHY6F4IfKi8WaXilwYCdMnipPYZrfXqw3fP4Tl
-	 3ImJotQzz4d6X3S1FCc3nnKFkEynCGto4r7v173wOgGuzHDIIvMJDZYWx9CVDwjzOK9VI
-	 eYFZ7IbQe6vGmAeb2YAGH9laLCaMfknW0418hy0joI2cWJyjuljHf7bRFoUOrlH/l4Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794491787;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=e3WkpQpA1mJ0C5moabXtGn0RQz1Qa9UFoLDbMZ87eds=;
+	b=RUlNwdEj7DT6Oe2ASDX96hCxAzzUuSDyumoe+u/ejLfAjeRWyxit/BDjytdUCxOJa0OZ
+	 mrxJFFk3hFZMrtlrnxH8ycVvHA/PexL5uAvNK4lSsQvfztbiCAhd8tHoLZHqzsa7zvMkb
+	 OVTLQhjR4wUT7+yo4qwk2aSpV/bgIDr7AmMyC8HQ9gDkeYuZFH7M7/CWLf23Lm6ABuOaS
+	 KArztKpUxxO+ciR9FS2IJ2OIINyJodtLYkhNn9uXJSNBvySuuOjVa7XGtutNDO3qFizK2
+	 WGygHCOMSeweeTy8Spf/lR12dGuBPEGuR3S4G4odiFfkJZtcZEd+1Dc9Fw+Nu/4F9Mw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JzUD2sS6;
-	arc=none smtp.remote-ip=209.85.210.180
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TGWHK1CU;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60618606A8BB
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:49:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 60618606A8BB
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25C17606A323;
+	Thu, 12 Nov 2026 13:56:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JzUD2sS6
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8a052aff9e9so3512736b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 05:49:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794491379; x=1795096179; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
-        b=JzUD2sS63ujpPtYga16vOf0Cu00MlBCD1ByXjWfdL08/dNnd94+SA2iZs0aQpVTm4h
-         +6RFMiKpt4eq+Vozhcj54rW9dvwLM50HRyubo68BRB/Z5fTVPhtP65kvgr+77bGPVFIx
-         Hwl+ERKpsRh+hsQ2484Go8J8PLvyqZzs4fSJfaizy7HUbFscH1dDciZA46RoXQQ3GQpm
-         IAZRZtl7TySsmfXGkKusqMB92CAL8q2tU1wXvyCCsN+2WxoaHTIYO30ULgIva65WKfgV
-         dtmwxR6UQJUmiPw2MeYzQf8MzhyV6uouxOlrQRLIjC7Zg4638Hf4fkqmaPQwBItQq3Nb
-         1c1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794491379; x=1795096179;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
-        b=di1NOBa6cHGAKJmJbKSPEPiCoDM1bnh96R5s2afYwoBYck2wisMHV4a4Jo+DFsFJfB
-         hhDumNL78D/1kJ6rg3h4Hv0DvI6qcSWuhW0n9TntRTI1Do5VH0fwCbOc60a9ckvl99/Q
-         9hJ1YbqCB7VT2j+cABuSmWCi2ZacpgYOBn3lyZr2t3Ca8KGtJiQWPET/+2v06We/iH3W
-         Zuj0TVDnNOprL+tKE8dWaGOKng8nhDpz+/m5+6yhbFt0jzk7X63twEJR6CI1XTfjq9i5
-         jAu0yzFvlmoC7lyDvS8bZcFdfhk6KfYbLpXzsIGfupvbpk0Ueqif8OLkrY/2uL3QVFr5
-         weoA==
-X-Forwarded-Encrypted: i=1; AL+hErEOQO2Jqb0sego9Dw8gbGglt46Hx8GT/wjTzER5mOBl675ha5zJHmt7k73wu1P8kr2uxoEMOTKLZ7GPygBq@vger.kernel.org
-X-Gm-Message-State: APuU4Z/wgp/zJe5hhfz5N6dbzY14il9MB6KtBj12pBlsAufe2AnfU0Gx
-	+UGlYDttCsI8aC1ZINxiRGRrCLWav0NDcQ/pe3L1HsCXRoORjbxk5EqY
-X-Gm-Gg: AYBFou364pYecmh/MViOCnctztYWJx+TCegxif8Jh/shBhV2Ua/+mw2eeamnmsf4uK2
-	aI5vkhGgDe8fRDoKou1zsBfuUawqRd3Rd78VL+6cZzFlbQ8jFeaihHFObvks3kPAxJ7WgcVXHQW
-	pK69FGg/fYRNQvowdEABy1iUUNplCIU+K57hgZDjn2FZDIFJBZ37E2sN1LyCkUQJh8k3ad3oQoV
-	G+FLT3aTU1oo3g5oLHFef5dRqU8Tvq6RBDTGN8rMjh53c7VQwPl6tf8gVkDuqjfDLC7sYk4qUoO
-	5NcVSHB9EEUXYtx0i0/5XgRHeiAUz3CBFHsuJqbRykxygBuUIGo9+wIFTxC4VVZoDsi6QncfEpt
-	w3AXN9Lxm6vZVPr4F7jlLxB5jyuyy5QKcfrObrqVX4Xhu+4a/H8h7SXMdMcRjf5pE5sxlYC1qeD
-	an5GxVouCxMfY/D0KizeT8gLZMXyJ9LjP3UK/HYcNyWVKIzFbCuRPBJTTmrMbOZjc/kuBUA7ZUU
-	MLiKlMHbPcDsutYMVyVwiQmNHf0JxfYaVgqX8gG7zJg3qrEPGcmicREyBO2k1wsPrcTsGH23JNY
-	OV0vkf8Zt6FAeVfNFvv++yrTXgQR5DN6hI+cUcHjCVc=
-X-Received: by 2002:a05:6a00:178f:b0:89e:3ccd:b3c7 with SMTP id d2e1a72fcca58-8bc1c1ad822mr5507356b3a.33.1794491379406;
-        Thu, 12 Nov 2026 05:49:39 -0800 (PST)
-Received: from DESKTOP-NM9EKIA ([180.67.33.100])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baaa2a6c51sm3550580b3a.14.2026.11.12.05.49.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 05:49:39 -0800 (PST)
-From: Joonhoe Kim <26rote@gmail.com>
-To: sre@kernel.org
-Cc: konrad.dybcio@oss.qualcomm.com,
-	jingyi.wang@oss.qualcomm.com,
-	kamal.wadhwa@oss.qualcomm.com,
-	anjelique.melendez@oss.qualcomm.com,
-	dhruvin.rajpura@oss.qualcomm.com,
-	andersson@kernel.org,
-	dmitry.baryshkov@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] power: supply: qcom_battmgr: expose the charge current limit
-Date: Thu, 12 Nov 2026 22:49:27 +0900
-Message-ID: <20261112134927.95-3-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <20261112134927.95-1-26rote@gmail.com>
-References: <20261112134927.95-1-26rote@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TGWHK1CU
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 572B21F00A08;
+	Thu, 12 Nov 2026 13:56:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794491786;
+	bh=e3WkpQpA1mJ0C5moabXtGn0RQz1Qa9UFoLDbMZ87eds=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=TGWHK1CUOMPKgp7v0Y5U+1YNt8qCYHG7mmiIUCzYbs+atAmw3WG2cMqnyHz1uTyqb
+	 dGMHf/0OkHSepy4onuKkNUnyYyUBWMuJ5+uXDXGsuN8Hf2h75zPkRQ8NbDeF0QeRq/
+	 wT3k7LklbR4Ze2EcOwDd6XRcBXddVWDwEqmVz/276+KPFcv/CNEUk5JNs/99zfdsb8
+	 ZtstwIB7XdWQyVD38czxumO/UaDN0TSJLt69t6tsulhLUSVaudO34st+Cd99NkdwoT
+	 Q3yDevEZ5981Cm97CfCpox3OffD5t2FvIpSIPMLia+4jJ2PRUKHtXj3F26sBvYbTGp
+	 CLpOmLmG7r6EA==
+Message-ID: <4060e67a-553b-4e1b-9e17-e6a742e62a3a@kernel.org>
+Date: Thu, 12 Nov 2026 14:56:18 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -105,160 +51,111 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] soc: qcom: geni-se: Define the QSPI firmware protocol
+To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+Cc: Mark Brown <broonie@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Frank Li <Frank.Li@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dmaengine@vger.kernel.org, devicetree@vger.kernel.org
+References: <20261106-qspi_upstream_series-v1-0-21f43042dd60@oss.qualcomm.com>
+ <20261106-qspi_upstream_series-v1-4-21f43042dd60@oss.qualcomm.com>
+ <20261109-stimulating-oyster-of-respect-620b7b@quoll>
+ <61646f06-87f1-48da-9b88-8898bb488af7@oss.qualcomm.com>
+ <20261111-prudent-polite-shoebill-add35c@quoll>
+ <b1b753ac-cb74-4b9c-8fd0-31777a020878@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <b1b753ac-cb74-4b9c-8fd0-31777a020878@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The battery manager firmware takes a charge current limit in uA
-(BATT_CHG_CTRL_LIM) and reports the highest value it accepts
-(BATT_CHG_CTRL_LIM_MAX). Expose them on SM8550 class batteries as
-charge_control_limit and charge_control_limit_max, clamping writes to
-the maximum.
+On 12/11/2026 14:48, Jyothi Kumar Seerapu wrote:
+> 
+> 
+> On 11/11/2026 6:10 PM, Krzysztof Kozlowski wrote:
+>> On Mon, Nov 09, 2026 at 08:13:33PM +0530, Jyothi Kumar Seerapu wrote:
+>>>>> -static const char * const protocol_name[] = { "None", "SPI", "UART", "I2C", "I3C", "SPI SLAVE" };
+>>>>> +static const char * const protocol_name[] = {
+>>>>> +	"None", "SPI", "UART", "I2C", "I3C", "SPI SLAVE",
+>>>>> +	[GENI_SE_QSPI] = "QSPI",
+>>>>
+>>>> Why are you creating holes in this array?
+>>>
+>>> Hi Krzysztof,
+>>> The array is indexed by the GENI protocol ID. QSPI uses ID 9, while the
+>>> existing entries cover IDs 0–5, so the designated initializer leaves entries
+>>> 6–8 empty.
+>>> The added NULL check rejects these unused entries before accessing the
+>>> protocol name. Appending "QSPI" directly would incorrectly associate it with
+>>> ID 6.
+>>
+>> And it should be 6. Just look at uses of this.
+> 
+> Hi Krzysztof,
+> 
+> The QUP Hardware Programming Guide assigns protocol ID 9 to QSPI.
+> This enum represents the serial engine's protocol IDs,
+> rather than consecutive indices for the name table.
+> 
+> The SPI/QSPI driver uses this ID to request the appropriate firmware
+> and validate the protocol read from GENI_FW_REVISION_RO. The firmware
+> loader also matches this ID against the firmware header's protocol
+> field. Changing QSPI to 6 would make these checks expect a different
+> protocol ID.
 
-Also handle the BATTMGR_BAT_PROPERTY_SET response, which was logged as
-an unknown message, and return its result.
+You miss the point. This is just a table for Linux driver, not what is
+programmed. So please explain me, if firmware comes with new protocol,
+e.g. OSPI with id 10000000, are you going to use that as an index?
 
-On a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a 45 W PD charger,
-limits of 500 mA and 100 mA give about 480 mA and 90 mA of charge
-current while the PD contract stays at 9 V. A limit of 0 stops
-charging, and this firmware does not resume when the limit is raised
-again until the end threshold is moved below the capacity and back.
+Really, why are we discussing this?
 
-Signed-off-by: Joonhoe Kim <26rote@gmail.com>
----
-v2:
-- Use guard(mutex) [Konrad]
-- Return -ENODATA when the firmware reports a zero maximum [Konrad]
-
-The downstream qti_battery_charger driver also writes this property in
-uA. The thermal mitigation series [1] took a cooling level in
-charge_control_limit; Konrad pointed out that the ABI defines it in
-uA [2], which this patch follows. Only tested on Kaanapali.
-
-[1] https://lore.kernel.org/all/20260609-cooling_device_reg-v1-2-e15bddcb0086@qti.qualcomm.com/
-[2] https://lore.kernel.org/all/d99447c8-f140-4ac1-85e1-a235c37eecde@oss.qualcomm.com/
-
- drivers/power/supply/qcom_battmgr.c | 55 +++++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
-
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index 58e103e08..1c3cd034c 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -262,6 +262,8 @@ struct qcom_battmgr_info {
- 	unsigned int charge_count;
- 	unsigned int charge_ctrl_start;
- 	unsigned int charge_ctrl_end;
-+	unsigned int charge_ctrl_limit;
-+	unsigned int charge_ctrl_limit_max;
- 	char model_number[BATTMGR_STRING_LEN];
- 	char serial_number[BATTMGR_STRING_LEN];
- 	char oem_info[BATTMGR_STRING_LEN];
-@@ -454,6 +456,8 @@ static const u8 sm8350_bat_prop_map[] = {
- 	[POWER_SUPPLY_PROP_POWER_NOW] = BATT_POWER_NOW,
- 	[POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD] = BATT_CHG_CTRL_START_THR,
- 	[POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD] = BATT_CHG_CTRL_END_THR,
-+	[POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT] = BATT_CHG_CTRL_LIM,
-+	[POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX] = BATT_CHG_CTRL_LIM_MAX,
- };
- 
- /*
-@@ -709,6 +713,12 @@ static int qcom_battmgr_bat_get_property(struct power_supply *psy,
- 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
- 		val->intval = battmgr->info.charge_ctrl_end;
- 		break;
-+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
-+		val->intval = battmgr->info.charge_ctrl_limit;
-+		break;
-+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX:
-+		val->intval = battmgr->info.charge_ctrl_limit_max;
-+		break;
- 	case POWER_SUPPLY_PROP_MANUFACTURE_YEAR:
- 		val->intval = battmgr->info.year;
- 		break;
-@@ -803,6 +813,29 @@ static int qcom_battmgr_set_charge_end_threshold(struct qcom_battmgr *battmgr, i
- 	return 0;
- }
- 
-+static int qcom_battmgr_set_charge_control_limit(struct qcom_battmgr *battmgr, int limit)
-+{
-+	int ret;
-+
-+	if (limit < 0)
-+		return -EINVAL;
-+
-+	guard(mutex)(&battmgr->lock);
-+
-+	ret = qcom_battmgr_request_property(battmgr, BATTMGR_BAT_PROPERTY_GET,
-+					    BATT_CHG_CTRL_LIM_MAX, 0);
-+	if (ret)
-+		return ret;
-+
-+	if (!battmgr->info.charge_ctrl_limit_max)
-+		return -ENODATA;
-+
-+	limit = min_t(u32, limit, battmgr->info.charge_ctrl_limit_max);
-+
-+	return qcom_battmgr_request_property(battmgr, BATTMGR_BAT_PROPERTY_SET,
-+					     BATT_CHG_CTRL_LIM, limit);
-+}
-+
- static int qcom_battmgr_charge_control_thresholds_init(struct qcom_battmgr *battmgr)
- {
- 	int ret;
-@@ -838,6 +871,7 @@ static int qcom_battmgr_bat_is_writeable(struct power_supply *psy,
- 	switch (psp) {
- 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD:
- 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
-+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
- 		return 1;
- 	default:
- 		return 0;
-@@ -860,6 +894,8 @@ static int qcom_battmgr_bat_set_property(struct power_supply *psy,
- 		return qcom_battmgr_set_charge_start_threshold(battmgr, pval->intval);
- 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
- 		return qcom_battmgr_set_charge_end_threshold(battmgr, pval->intval);
-+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
-+		return qcom_battmgr_set_charge_control_limit(battmgr, pval->intval);
- 	default:
- 		return -EINVAL;
- 	}
-@@ -995,6 +1031,8 @@ static const enum power_supply_property sm8550_bat_props[] = {
- 	POWER_SUPPLY_PROP_POWER_NOW,
- 	POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD,
- 	POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD,
-+	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT,
-+	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX,
- };
- 
- static const struct power_supply_desc sm8550_bat_psy_desc = {
-@@ -1618,11 +1656,28 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 		case BATT_CHG_CTRL_END_THR:
- 			battmgr->info.charge_ctrl_end = le32_to_cpu(resp->intval.value);
- 			break;
-+		case BATT_CHG_CTRL_LIM:
-+			battmgr->info.charge_ctrl_limit = le32_to_cpu(resp->intval.value);
-+			break;
-+		case BATT_CHG_CTRL_LIM_MAX:
-+			battmgr->info.charge_ctrl_limit_max = le32_to_cpu(resp->intval.value);
-+			break;
- 		default:
- 			dev_warn(battmgr->dev, "unknown property %#x\n", property);
- 			break;
- 		}
- 		break;
-+	case BATTMGR_BAT_PROPERTY_SET:
-+		if (payload_len != sizeof(resp->intval)) {
-+			dev_warn(battmgr->dev,
-+				 "invalid payload length for battery property set: %zd\n",
-+				 payload_len);
-+			battmgr->error = -ENODATA;
-+			return;
-+		}
-+
-+		battmgr->error = le32_to_cpu(resp->intval.result) ? -EIO : 0;
-+		break;
- 	case BATTMGR_USB_PROPERTY_GET:
- 		property = le32_to_cpu(resp->intval.property);
- 		if (payload_len != sizeof(resp->intval)) {
--- 
-2.53.0
-
+Best regards,
+Krzysztof
