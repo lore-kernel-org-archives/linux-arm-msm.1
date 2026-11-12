@@ -1,60 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794482414;
-	b=NbbvB6KYQtqn5npQ7JL4FyHRiMT+f1taLknnZAYMQQwOCibcO42PdX5+ibwXc1IvmPLR
-	 SWJlcoC7/WBsK5713xgR9RrONTKETtyh8JGNUPdi3IohRu6DsWiaMDC1ZygqWJMJMvZtg
-	 Z2o0j5SBnjqGbpbx8rfuKTRNi4Yyy6nx+6CuWreKHMFfQFF5Y3/E+CAw8sHsBwpy/fj9S
-	 Qlp+NcWNO34hpWPz7YXOiq0drcnBPWizzpcddB32ktLqNoiKtXlgsgSp74G/RbooJ71Ba
-	 fe5lJ33UaVwggv1BMsM/rXkGq4XoSMA9ZPaLxQjcy6hEHwDwPCyY5j/5z1CW5Ik6UOg==
+	t=1794482418;
+	b=dbrC2YBYCdbDKJ4T7j6AXZZCTNxiNr35t7/2dmFFYWqsukW0TV+PZ87DmXY17KMcAs2B
+	 88D+10aqBMjGQ5fjPOaQ16cGVgMF+Heirw/hl0gD7CEEnBHyI9LXaWsmJs6Lo6Iy3fNld
+	 KqzyRQeaxmnw8U2dOIWF5mxnnens706GSD9oWJwM2ofngjCbJdLdYGL+0Q05xjxj1bNHM
+	 +5hthxfYOlpYSbc1MD7GbX9/GUfixzVhh/J9GZI0Gr4fqYF+7r9e9iVWQqtVxG0Y/5qsM
+	 cTcA66NABczHUO0twYol9eKAgRKOcD/MwWdhDucpIZrdV34yaU6i3kmu/G6GNEY20ew==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794482414;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794482418;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=M92eLyM5Sw0gwYUIgBq4EZJwQthDYZqVWWHI2GtVQoQ=;
-	b=MFqh1myGGU4RJVJ7mD0SoVJB/dNX5urohbGzQdAtNNWxebMoIbT1u/V0o6XK5g29Hb/j
-	 Ggg/9QgZyzSKXB0Ls5Eh3YF7gcAo0mY21bSSmsSLWM3M03nQqcE6IJV22cpiwm+n5sdv2
-	 giFV4BKpWpGOl+U/H1XPUaMRIZIahlJQ9DrKS0xW2ThSYqFJN9oUl23aKpXYwUdwLI8AJ
-	 /u9iFBQlCKQfjeAEQJBmSR2h2j4/IaRsMmtr3B2hIkJwMMQkaockt4Z6MxMc1veidmd+r
-	 ptusHgCI41DW6WyAgca2YqhRhanwfM57ecC7j7F5wJcFEZT3c2Qr3oym1E1eTw8Rgzw==
+	bh=BXzZFv1rViA+t/kvS8iAtCAtd1WIdvaY0MOKVvctdWU=;
+	b=v/pGTjrd6ijRqDX6AFEiDTP2KP5sR51od34N6u6enZeeq+N4nz6JNEWw2GOWWOu9d2O7
+	 C2BppIcguy23Y2QK7HYNM15Jyf9XGcrZ0t4cgITXdbCc0ff+dIExCG+xmIQwrnhZe47Cy
+	 W5wImy1MBp84POptq7Wtnyzf0Tao+jYJCVh8mv925o6jOtN9vuq6as22jRBKb1q2D47Ry
+	 1Ts0WhkHAJgTpVmfsyG0s8Er5DrM4xgSsstV4KRIyDz9ZmWEu9+WyYah/qSkM5qxv8Jpd
+	 eLfkpMN5cTBzuVtGkEjuljscwWVK0CR2NVSNgDEuj4bgzclm+PIckntpFA/UgWb6dVA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Q/VXGkMM";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Jo/HQb17";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2890B606A323;
-	Thu, 12 Nov 2026 11:20:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F64B60A3839;
+	Thu, 12 Nov 2026 11:20:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Q/VXGkMM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 667351F00A05;
-	Thu, 12 Nov 2026 11:20:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jo/HQb17
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64B6A1F00A07;
+	Thu, 12 Nov 2026 11:20:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794482413;
-	bh=M92eLyM5Sw0gwYUIgBq4EZJwQthDYZqVWWHI2GtVQoQ=;
+	s=k20260515; t=1794482417;
+	bh=BXzZFv1rViA+t/kvS8iAtCAtd1WIdvaY0MOKVvctdWU=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=Q/VXGkMMwSnZU5/vlXZvG4MwejYzQM7DZIAWt/7/U+a8QqpWaBrajY76Dxnww3yhV
-	 xthV+dAbeP+4qv/0T1NrDe66Qzt9Kp29SQ6HtOF7ORMY/lY14fptdEWKZjGtA/rfEH
-	 cxZoYSXZaQx9DeZqtFlaXjoDZIw5u5DKb5/2SISwfFBLd+nemAaWUxrpaGrDg71nOH
-	 GJPuej9zqV/bAhSMhDtGyMpwgqxKksqdMpbK51evE8z9HsPCFnoYEsGrGNtaAzIRhD
-	 /ELEZ11+ZtSa6A4FB60SZ4vSxzURR6p/CW6GJVraqpqmW5IBEh9W11BndjKs2rrCYH
-	 55Gbb1WKeY48Q==
+	b=Jo/HQb17E0i8jEZbQEXkjWKCg/LQKfPCSEM9JA6Gm0rDmS/I3ESUCninPxzJNnJBz
+	 YzP+cgVGD9/rVDFkLdBJgXSIVpHC7buwyHCBUSfqinFgIMHrOZqtsHLZR7g6Saj/uY
+	 u3rQDKPOda2zHYOrLdB43qK9/NrMzMs/p/J64838H9kRXk3G6jU3Jl5rESOPpP4NRf
+	 RRSsUB6gV5/ugibkJPdUykpx0RSWzw8PB/SOYCRFj0/NZ2fb+NCswbCMWaHOwB3L4M
+	 NVsAWiSD0JqaweWMrnV7zqPWMRwi9+TSxc9hkPpO9QCupsVoWaPlruCIZOTLGskaGj
+	 is/VOboU3j0Dg==
 From: Vinod Koul <vkoul@kernel.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>
-In-Reply-To: <20261112-smb-repeater-power-leakage-v2-1-0f8ee55c4962@oss.qualcomm.com>
-References: <20261112-smb-repeater-power-leakage-v2-1-0f8ee55c4962@oss.qualcomm.com>
-Subject: Re: [PATCH v2] phy: qualcomm: phy-qcom-eusb2-repeater: Fix SMB
- Power leakage issue
-Message-Id: <179448241104.492462.10336704424380926541.b4-ty@kernel.org>
-Date: Thu, 12 Nov 2026 16:50:11 +0530
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+In-Reply-To: <20261103-sa8255p-eth-phy-v18-0-b00cc2fa0404@oss.qualcomm.com>
+References: <20261103-sa8255p-eth-phy-v18-0-b00cc2fa0404@oss.qualcomm.com>
+Subject: Re: [PATCH v18 0/2] phy: qcom: add the SGMII SerDes PHY for
+ firmware-managed systems
+Message-Id: <179448241404.492462.11258139095481555571.b4-ty@kernel.org>
+Date: Thu, 12 Nov 2026 16:50:14 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,18 +70,22 @@ Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 
 
-On Thu, 12 Nov 2026 14:07:15 +0530, Krishna Kurapati wrote:
-> On Glymur, it is observed that although the exit call is done, there is a
-> power leakage seen on SMB2370 charger (which embeds the eUSB2 module as
-> well). As per recommendation of HW team, disable the repeater during the
-> exit call to prevent this power leakage.
+On Tue, 03 Nov 2026 11:35:51 +0100, Bartosz Golaszewski wrote:
+> Vinod: Sorry for the noise but sashiko pointed out I forgot about one
+> comment from Krzysztof. This still should be good to go, there were no
+> more sashiko comments and this is just a rebase + a commit message tweak.
 > 
+> Add support for the firmware-managed variant of the Serdes PHY present
+> on the Qualcomm sa8255p platforms.
 > 
+> [...]
 
 Applied, thanks!
 
-[1/1] phy: qualcomm: phy-qcom-eusb2-repeater: Fix SMB Power leakage issue
-      commit: a6d71ecf65b357ae036012bc84b313b2e4fff679
+[1/2] dt-bindings: phy: document the serdes PHY on sa8255p
+      commit: 0eeaa6e65318b14cfecb3e7e4338f4eca7070c48
+[2/2] phy: qcom: add the SGMII SerDes PHY driver for SCMI systems
+      commit: 4cc9f70c3dc187cd45eac2815117ea81b101a1ee
 
 Best regards,
 -- 
