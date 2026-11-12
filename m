@@ -1,60 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794511437;
-	b=QuN1pUt6zjE1PlT+SDTgjopl7heuFaT0eSCf+4TFzq0xjug18tuffWsnzxvvHzDhe18Z
-	 ISzn+Uu/32DKDX600KyQAUFC2GENXP6dKhPiW/jn9/psdjm1mLjB/aEVjJ/gm17EPnEc0
-	 jFAO1wE1kDtkrNimh9rln5HhaXlNkZnZ6zpjt2IiK8Txkqb8OvzJqYj23YPrMEulrTNKv
-	 J4/pLbOuy++CK045xiqmP6ssbxoTF+qFwM+w9LXYrNc7Gp51fuonVP7ST0tuqUw6Sm5/7
-	 Fb0esYal2T+dEB4Itb2DE5sh+6c6r1KC99v5ijv0Nk3WS9FndLqa3MFXCPHofJj3+VQ==
+	t=1794511649;
+	b=XC5+qImOmjcMc1JlNuGAazs2L1JFQow7Xo3RlYs3Am0tSb+2IQMEjN9RCguqAIdTVMHs
+	 Hx1TBl0OjEYgzgk5EFBGFSzvYo8BvUk/0rMX3EFrwAEyVLHiiSlLQfZ+8XW1lKcBG7bYq
+	 PWxncELGMR67lnLIYB4928f2B9CIz1dgn1IN6yntbaCBNv43NqZnXM96Fv6QguHLNGhBj
+	 z0PIPY6KWKfsGmbNfWVJjXaKo4AVZ9jYNHIKC0OIdGDyiLs8gPot8Lc+1Alxyc7qs07Gr
+	 U8oHInJgnQs+rxa+OObwBR2ACFoFgJBYTvGvzjeAxSS3Xp56VNOWAuC68873hGWTjzA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794511437;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=i3t+AreUue7siiZH8t6zrV81m0hBjn5b8jFxGm+MTNE=;
-	b=Zze//JpMR04iIorwto257yL0fzBTQOrz6lk9eT9sQFw+0/ksAHVqbcD7CedRknm9Mpsb
-	 DbZR4+alT3U2H0q/BDVVfQIcII1fquZWMf+KP+BzKWO2nsrUem5ptCI9Lt+fnsI1kuouc
-	 xHSnrcMA9bvSaWNQjsqSDEp0Hi9qxMXmeBYe+7SHXgdkTS3VSp2/QD09I3zQ/k0G9sxNh
-	 VBIpUsHG8x00EDed1nCNhVXXdpzLCsoO6Qp2yvoH+fy2TXJT3M1o6te4JehE938bjkJiY
-	 Nov5pHxfSIKnQGP8A2E6ahmp2GbWHtBPynJNxusqniC6qTudLX8ilFyQ2/Kf7yDnMqQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794511649;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=WK76SX0nrcCBNXP9LIGbyNxGyxl1rLl1GLyCozITqPY=;
+	b=ZcrIbRJdVpqNCwGX6vyD/cZJDZPlK+iapRNLp0JB4fHgpjFhYby5AXHwh8pO90dj3Xoj
+	 h8vS/zZkGnNnEwvOnR9soGBisdAxs9ZabeS9CkskGL1nsV6S8xqhLplee/ZDi7PjM1YpT
+	 3YqRCOjD1XprBMIX3OF7tEm5cCnQw51q/yJ+vO0hp64cGC2N227EDuxDr+O2NW413U+vC
+	 i2ybdF0RBYmdEOWaZRIoO8PYe3fIdI0xRfGp8UScErcbpubFGVVOMy4XyMNzIgeTtjUO7
+	 mH+fOkPXNqI3xb0tmgQeYmiGuMyHlfuLJxvArYM+AVPF9TcV8oAXPRufgdtJsB2pGQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OSZs3QTo;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=chromium.org;
+	spf=pass smtp.mailfrom=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=WG5ACeJA;
+	arc=none smtp.remote-ip=74.125.82.51
+Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 332F4606A31C;
-	Thu, 12 Nov 2026 19:23:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D55C5606A323
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:27:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D55C5606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OSZs3QTo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD1661F000C5;
-	Thu, 12 Nov 2026 19:23:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794511437;
-	bh=i3t+AreUue7siiZH8t6zrV81m0hBjn5b8jFxGm+MTNE=;
-	h=From:To:Cc:Subject:Date;
-	b=OSZs3QTornnsEGVWo5cP+/cgdr8bt9n7x2CA05Thl1ln0yZkj4dC4NuyFRRpJa+iu
-	 PTIVAkiDPz0Ri3necM92pppNyiUqkZUmudYVe2FkdxXVUqDydo3AalIXvc1DeRDz9N
-	 JvylzoaXKZBfo50TYh99giTP+ibx954zHosbwIcQ7gHyOvFUaNaxYWiujW8r8UMYSy
-	 su+MM3w3dSdDmCCJ5YiLy8gS0jZffsOtHssspKg4aFy7GqxIjjApIPDrW/WLDZTHH9
-	 kWta8293oSdD9/9wQtjXpSb4ghaiDYgpETi76BqryINNQPgjEOoHIFF7tLY32t4200
-	 ii0LtU3AEiCug==
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Wesley Cheng <quic_wcheng@quicinc.com>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=WG5ACeJA
+Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-1b3beeaf6f9so99987c88.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 11:27:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1794511648; x=1795116448; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=WK76SX0nrcCBNXP9LIGbyNxGyxl1rLl1GLyCozITqPY=;
+        b=WG5ACeJAfsAqI/SNo4EQzMNroNtqgr9YtZsBgMQPriWcH3f0MVw5r34UoB/ls3CUCi
+         0AINdQ6584CpYLZwc6rxWtc2SykkFLUSRQ8b19368uBwvvXS3rvFLB6wIQXXm0MOuc75
+         RyXvi3kaJ2XdVHBEH3p8FNm6KFDkv60AA6ftw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794511648; x=1795116448;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WK76SX0nrcCBNXP9LIGbyNxGyxl1rLl1GLyCozITqPY=;
+        b=gj7pEu7Hpda8jWog7N5F3fNsPvk8HwxBAIVdqZwJkjv3p2UY6h48dS+5ztSQJzAnRX
+         By5AR5sfhc4AJSlYYkxe/DlAKp5CN4AzDU1opkHL1fb8nTGhuUgz/YfBp7wpy0mohYck
+         qdBh6EQCGHzv3RbuVsx+GVGLtkj9zD9yHIdo01kbueb/kVYapLEAU+RdELvnDskcsDoR
+         3UTgy+E5dJ0Vu7QrhET/ZEHUs50HhzREDJkGswACj0hLwU4jUxjElUI9l043n3KHTCTW
+         JaOukmWYBuFK+DkA5ZReRXQ6nDoaMlic3ZpxhU3VCzN+PpWkc6LRdNJcPDZN312lDLzT
+         YwKw==
+X-Forwarded-Encrypted: i=1; AL+hErE5s3DoSdUvzy/tCVX19U9Ux2H719uSMdYAACOw1wl5dPv34nQEZdXTN+t5UCdzpFO82kU9csK6GOWkmns0@vger.kernel.org
+X-Gm-Message-State: APuU4Z/+NlmEoO4/RFn7AL1XGzZkRxOLSk2RaMNvUi9DLP46fORb1Lyq
+	kPf8EJp7JfYvZtZLQ5mfSreZxvgiWYF5OucW3yDio3oKkw2Y8xTpieJdD/PO4R9N2Q==
+X-Gm-Gg: AYBFou1MNog6f1yQ25jwXQwsCs7R+hS27hZA5Zjn4AvGfdLXlOs4Qgu2RCyLO2d9XVc
+	N9nr7EbrdomZipVEOscDF/PcNumd1Ivj9VrYSf/d6/Mr4E/3VpC8Bucvetv0DYtZFJ0yF+PfhZu
+	WZrc8/I35CkVuLA8ucuS0cpl4kf4N6NpUKqUIIEgdWfPoPBR68yk4p+fh1LpPiVPQtNno2SxXfP
+	51nMGrHF7OIfLF1x/gOBpWxD5DnAvjoltGkbjPLCKl8ivXvMhM7SWCfQ9PVwp989vvvdC5wJRpg
+	l+CmDtuGUADouQBv6hQ7ZCl1B29DAlNlTCDRbQICzkxNcYztqamRLUz9BqmyQ69QXMx1i/bSO9R
+	tAo/AAuszpcXA9rSaEgrWW5x3YxIrf+4gvgEAJge/8xkix6cUNDzXpLAb8f+xbWfqeevPrEIOe0
+	DAkyjre0rDgY4pwXbexJhKHVjSZUGmfLkdjncYn4nA4Q1ejxVaw/LF9nfpSrrTvtw2hZJtbxoOa
+	1oTnGrjiB4fe8EszMRo3yd7hsSbYEeYtHuWrQMYKyfz6WoDHAbpj+VFxW7Mi0GxNsjxkgIPdKQ+
+	8EDczYOtBWEmjZy7v1fN3TT03fslUZ55+ju7fmsD6w85l1rLhQqE9FHcaggUeEiByLWf5tpNTMw
+	Wb6WxypeMHXWpj/k=
+X-Received: by 2002:a05:7022:3704:b0:189:d6bf:7eaa with SMTP id a92af1059eb24-1b5030d404cmr428948c88.16.1794511647718;
+        Thu, 12 Nov 2026 11:27:27 -0800 (PST)
+Received: from localhost ([2a00:79e0:2e7c:8:5446:563c:ac92:43a8])
+        by smtp.gmail.com with UTF8SMTPSA id a92af1059eb24-1b5031bc518sm886774c88.15.2026.11.12.11.27.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 12 Nov 2026 11:27:27 -0800 (PST)
+From: Brian Norris <briannorris@chromium.org>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	"Bryan O'Donoghue" <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3] dt-bindings: phy: qcom: Relax required supplies
-Date: Thu, 12 Nov 2026 13:23:44 -0600
-Message-ID: <20261112192345.3962577-1-robh@kernel.org>
-X-Mailer: git-send-email 2.53.0
+	linux-pm@vger.kernel.org,
+	Brian Norris <briannorris@chromium.org>
+Subject: [PATCH] media: venus: Discard pm_runtime_put_autosuspend() return values
+Date: Thu, 12 Nov 2026 11:26:50 -0800
+Message-ID: <20261112112650.1.I574fc3def9965f603755a968ae88309aafdfa285@changeid>
+X-Mailer: git-send-email 2.56.0.611.g1030f0b940-goog
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,77 +99,113 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-For the QUSB2 PHY binding, keep the three regulator supplies required
-except for legacy IPQ6018 nodes that do not describe the board rails.
+Propagating the pm_runtime_put_autosuspend() return value to callers is
+not particularly useful.
 
-This relaxes the requirements for the IPQ5210 as well as if it is
-compatible with IPQ6018, then it shouldn't have more required
-properties either.
+Returning an error code from pm_runtime_put_autosuspend() merely means
+that it has not queued up a timer or work item to check whether or not
+the device can be suspended and there are many perfectly valid
+situations in which that can happen, like after writing "on" to the
+device's runtime PM "control" attribute in sysfs for one example.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+Accordingly, update the Venus vdec and venc drivers to simply discard
+the return value of pm_runtime_put_autosuspend().
+
+This will facilitate a planned change of the
+pm_runtime_put_autosuspend() return type to void in the future, similar
+to commit 3afd8df02433 ("PM: runtime: Change pm_runtime_put() return
+type to void").
+
+Signed-off-by: Brian Norris <briannorris@chromium.org>
 ---
-v3:
- - Rebase on phy-next
+This patch was originally sent as part of a larger series here:
+https://lore.kernel.org/all/20261006161337.4.I574fc3def9965f603755a968ae88309aafdfa285@changeid/
 
-v2:
- - Fix trailing whitespace
- - Add blurb to commit msg (for sashiko)
----
- .../bindings/phy/qcom,qusb2-phy.yaml          | 30 ++++++++++++++++---
- 1 file changed, 26 insertions(+), 4 deletions(-)
+I expect it should be merged by subsystem maintainers, and we can make
+the return type change later.
 
-diff --git a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-index cfc5a1d16b7f..de0041dd2846 100644
---- a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-@@ -174,11 +174,35 @@ required:
-   - "#phy-cells"
-   - clocks
-   - clock-names
--  - vdda-pll-supply
--  - vdda-phy-dpdm-supply
-   - resets
+ drivers/media/platform/qcom/venus/vdec.c | 10 ++++------
+ drivers/media/platform/qcom/venus/venc.c | 10 ++++------
+ 2 files changed, 8 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/media/platform/qcom/venus/vdec.c b/drivers/media/platform/qcom/venus/vdec.c
+index 6a43ea191da1..35c1b6ec1f9f 100644
+--- a/drivers/media/platform/qcom/venus/vdec.c
++++ b/drivers/media/platform/qcom/venus/vdec.c
+@@ -644,12 +644,12 @@ static int vdec_pm_put(struct venus_inst *inst, bool autosuspend)
+ {
+ 	struct venus_core *core = inst->core;
+ 	struct device *dev = core->dev_dec;
+-	int ret;
++	int ret = 0;
  
- allOf:
-+  - if:
-+      not:
-+        properties:
-+          compatible:
-+            contains:
-+              enum:
-+                - qcom,ipq6018-qusb2-phy
-+                - qcom,ipq8074-qusb2-phy
-+    then:
-+      required:
-+        - vdda-pll-supply
-+        - vdda-phy-dpdm-supply
-+
-+  - if:
-+      not:
-+        properties:
-+          compatible:
-+            contains:
-+              enum:
-+                - qcom,ipq6018-qusb2-phy
-+                - qcom,ipq8074-qusb2-phy
-+                - qcom,msm8996-qusb2-phy
-+    then:
-+      required:
-+        - vdd-supply
-+
-   - if:
-       not:
-         properties:
-@@ -208,8 +232,6 @@ allOf:
-       properties:
-         power-domains: false
-         required-opps: false
--      required:
--        - vdd-supply
+ 	mutex_lock(&core->pm_lock);
  
- additionalProperties: false
+ 	if (autosuspend)
+-		ret = pm_runtime_put_autosuspend(dev);
++		pm_runtime_put_autosuspend(dev);
+ 	else
+ 		ret = pm_runtime_put_sync(dev);
  
+@@ -671,7 +671,7 @@ static int vdec_pm_get_put(struct venus_inst *inst)
+ 		if (ret < 0)
+ 			goto error;
+ 
+-		ret = pm_runtime_put_autosuspend(dev);
++		pm_runtime_put_autosuspend(dev);
+ 	}
+ 
+ error:
+@@ -1200,9 +1200,7 @@ static int vdec_start_streaming(struct vb2_queue *q, unsigned int count)
+ 		if (ret)
+ 			goto put_power;
+ 
+-		ret = vdec_pm_put(inst, true);
+-		if (ret)
+-			goto error;
++		vdec_pm_put(inst, true);
+ 
+ 		ret = vdec_start_output(inst);
+ 	}
+diff --git a/drivers/media/platform/qcom/venus/venc.c b/drivers/media/platform/qcom/venus/venc.c
+index 79acf7c1ec9a..3c7c24dd7159 100644
+--- a/drivers/media/platform/qcom/venus/venc.c
++++ b/drivers/media/platform/qcom/venus/venc.c
+@@ -617,12 +617,12 @@ static int venc_pm_put(struct venus_inst *inst, bool autosuspend)
+ {
+ 	struct venus_core *core = inst->core;
+ 	struct device *dev = core->dev_enc;
+-	int ret;
++	int ret = 0;
+ 
+ 	mutex_lock(&core->pm_lock);
+ 
+ 	if (autosuspend)
+-		ret = pm_runtime_put_autosuspend(dev);
++		pm_runtime_put_autosuspend(dev);
+ 	else
+ 		ret = pm_runtime_put_sync(dev);
+ 
+@@ -644,7 +644,7 @@ static int venc_pm_get_put(struct venus_inst *inst)
+ 		if (ret < 0)
+ 			goto error;
+ 
+-		ret = pm_runtime_put_autosuspend(dev);
++		pm_runtime_put_autosuspend(dev);
+ 	}
+ 
+ error:
+@@ -1275,9 +1275,7 @@ static int venc_start_streaming(struct vb2_queue *q, unsigned int count)
+ 	if (ret)
+ 		goto put_power;
+ 
+-	ret = venc_pm_put(inst, true);
+-	if (ret)
+-		goto error;
++	venc_pm_put(inst, true);
+ 
+ 	ret = venc_set_properties(inst);
+ 	if (ret)
 -- 
-2.53.0
+2.56.0.611.g1030f0b940-goog
 
