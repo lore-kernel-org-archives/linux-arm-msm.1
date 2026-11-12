@@ -1,65 +1,126 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=111.22.67.137
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794467837;
-	b=CWE7ULCSTXnG4TlGvXd24LLLky8As+6gVs5G2dxYxzltyC325AOZ0T9KfPaNPpGoYHDX
-	 4ltL0cUjdg9NlTqWECgKitomlCQmqAa2pcPqUXy/NBScN3g0lXnuK0WLxNWfITq5otJgg
-	 qUmAbdSXxUc4puz6bu4PtJ8ExvqqvqSTL+GA1OWcTadjU0+d4+5YP9efMW5mZ8jk4H6iv
-	 p5RtBGP+HwE4N06jI0gPtgUt0bLigzPS9bG09D0u+rejiQOmQ4AJFI5LHCd7ebcfuD0bo
-	 rn2rrrpMBy6vQFihHcoJyNCF7MFVIw5IuEvWrYDEjgRQp5P8bwOFzYZLXuZfJmgXrgg==
+	t=1794468024;
+	b=lVKsGC+UaorH6pC1/IHMVELsZqWHdp60LJ34gcclr3EwJTrp9q3T8JiVAcml21Pqf/24
+	 NUMU193L/zCla/bGXzwUen55Plt61l/XxLfWMiEVP8EQrMLi0aTxxVQIEBfAEFPsBcwfe
+	 d5x35C3W2sKHO/qCRBRPpyz7gj8jEcBZCYrcpajJZUbP2jGvzam2V54mygra9EcBOWoLO
+	 MTwAFHdlnsFHS8BKtm/SuVKXfsGLUy+fqFYe5uBAAXESXOU8jQ6BDIZBKSONaygP/dZDR
+	 Es8PBKEUhm/4yTcGGls/q7IN67ykTQrCjRIO+JU8cLWxwnzXd7ZAQ4Q5ivkPI8+7s6A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794467837;
-	h=DMARC-Filter:DKIM-Signature:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:
-	 X-RM-TRANSID:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:X-RM-TRANSID:From:
-	 To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=1lNR1+qqV1A9Vg8q2pYN7rVctFeS+AWP2a1L6Rld6aI=;
-	b=mDdV9dlLKXGUsfoLTwIlcHAjf8UeL2x9FHe8mnfklUt8af/k3Sbp7bgD0ONUWstyjL9J
-	 9ycXpHxTn8fcuWYV+l81P5izN688hX5vvDLzE3Dbk9dtifqGpjHvdJ4m47lDhmdmy616F
-	 mvFc2AmHNZT9mP47Zq6TM1O6knpKuQso7vv1T/dcjQugkIOCFeO8+Vp/WEB/Zu1DXP6J6
-	 pu+KZTJijyaKDC0YC2ZFenh/98cSxlCeFgzH877FfjBkXVUHbYRnd55lQpOIBznJSdiYY
-	 qAzu83/ePFp6srmHcICYXa6A+cOt4r1lRqtsrNl1wF5F6zYHJBbEj7nuRcfFcCoRmUA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794468024;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=i9jbtsLDZsS4FE9dYCV+4UGl52plCiZyJEyDlwed5Yw=;
+	b=3R0MqE9l3bdup3dy3WIeA0BoXjwm1+dmepFx2GCTuAlxWl8WS7VAvKKss8bvGWYHl4qy
+	 slYjSiblNp35Q7iTfVFIwpj/tYbAmNfyhSZ4Qi3X18RKC7nGt4f8hjyGPFAAJQ1+S34BB
+	 zfr1j5lVZFsUCzr2g7T195FkD6x2Yvz+IlMrQAP9i8GxSHn6CTe8bpw6mnSvCXBWhoDjR
+	 jlMKD33sf+9rZSHBJTyIELAE8d5M4R0lp4ihLZFtWuwF3+VAtjMW+ntPXBBgNmekcuu5v
+	 1V7qzgdmD6+Ut60GIcLFqw3fVXuEm/otkyxVzgg1VwM5fhNtEL4ex8II5TgaXACEu9Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=cmss.chinamobile.com;
-	spf=pass smtp.mailfrom=cmss.chinamobile.com;
-	dkim=pass header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=AxSxYvTw;
-	arc=none smtp.remote-ip=111.22.67.137
-Received: from cmccmta4.chinamobile.com (cmccmta4.chinamobile.com [111.22.67.137])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97523606A332;
-	Thu, 12 Nov 2026 07:17:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 97523606A332
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmss.chinamobile.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cmss.chinamobile.com
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pKCBwgYw;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="ZE+3n/wq";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0F5C606A337
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:20:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F0F5C606A337
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=AxSxYvTw
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pKCBwgYw;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ZE+3n/wq
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AC53mKV3476876
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:20:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=i9jbtsLDZsS
+	4FE9dYCV+4UGl52plCiZyJEyDlwed5Yw=; b=pKCBwgYwBrnc/LxUl1E/mt5JksF
+	tdlEVy+2HRxQhIjIY79Z7zmU6XbZp79c1JqTYYCF7IFim/q40yJ3b2+64HrLpS+T
+	UQKlNTUsnCx44Kz6rK6zeTM0hVAgT2Jx8kCO1GE6VPbTpnsT/jZuAqZU4PmWc/Ir
+	2ql8Voi9P5wr9oXDF/HmNREpFBDzm+yWm/HhS5fpoxaAFTxZcBiPjZlDjXMJ547u
+	3XRMh1JK3Z1TbhiQA6zwonZIenU3qIQ1HbgAbbirDaTXcaF6eCiqYhY4sVWe3LSa
+	jfCVWHKJojLfdZPlj221wCCfLQuAwdUbXeuGf4JC0AxbStE26VC4TfpQbuQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hw6yuge8g-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:20:22 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e9a4052726so3707825ad.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 23:20:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=cmss.chinamobile.com; s=default; l=0;
-	h=from:subject:message-id:to:cc:mime-version;
-	bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-	b=AxSxYvTw1PfeZks0cRQKaqr38hgaD/Gyb72Tk61p7Cn99q1aZJzHAqN/vWLNvR/QL9yY+UAibN/VA
-	 Rb8TX1N8wZEK78UkL7rCj701/4HDaJvxRf7Np/JAz8ZmGsLjA9/20jCJD8tM6IgpELSWxsdheyTWp6
-	 ayj1gVf6IgsxhVjE=
-X-RM-TagInfo: emlType=0                                       
-X-RM-SPAM-FLAG:00000000
-Received:from spf.mail.chinamobile.com (unknown[10.188.0.87])
-	by rmmx-syy-dmz-app04-12004 (RichMail) with SMTP id 2ee46af567f9e57-7ee2f;
-	Thu, 12 Nov 2026 15:17:13 +0800 (CST)
-X-RM-TRANSID:2ee46af567f9e57-7ee2f
-X-RM-TagInfo: emlType=0                                       
-X-RM-SPAM-FLAG:00000000
-Received:from devin-VMware-Virtual-Platform.localdomain (unknown[10.55.1.72])
-	by rmsmtp-syy-appsvr09-12009 (RichMail) with SMTP id 2ee96af567f8c2d-f7149;
-	Thu, 12 Nov 2026 15:17:13 +0800 (CST)
-X-RM-TRANSID:2ee96af567f8c2d-f7149
-From: Zhu Jun <zhujun2@cmss.chinamobile.com>
-To: broonie@kernel.org
-Cc: lgirdwood@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Zhu Jun <zhujun2@cmss.chinamobile.com>
-Subject: [PATCH] regulator: qcom_usb_vbus: Check the VBUS control source update
-Date: Thu, 12 Nov 2026 15:17:12 +0800
-Message-ID: <20261112071712.154524-1-zhujun2@cmss.chinamobile.com>
-X-Mailer: git-send-email 2.51.0
+        d=oss.qualcomm.com; s=google; t=1794468022; x=1795072822; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=i9jbtsLDZsS4FE9dYCV+4UGl52plCiZyJEyDlwed5Yw=;
+        b=ZE+3n/wqYeBOw3SFuLPtQUKGdcDnOH+/al8bj84d/Nb0+NJh+wullouaguoymX4mzV
+         iisyqnMQe0YVrLBsxlj/kFRC/FQgOCcX1mzyUfV1V1LfYPfLg8J6oZfR+TcxPjH667Ay
+         4idGuPQSdL1EkpIFHXLvIsT/3pzsA4TSWj/GalowLJRkqNaCLmt37PaW7ZVBINXp4Hja
+         haMxJ4wBkJXG0hEJq8A9X+R0pQ/knI+AJJDCst6kAXwV5h4y/EXlOESi7r/I7tEGH5EQ
+         zoq1Y9zxbeGJxm53o6AC4JDBcI5lsMP7g6xLPmRHzD9MhtfZyLhwDdLA6Nltyl2sa8cm
+         62fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794468022; x=1795072822;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=i9jbtsLDZsS4FE9dYCV+4UGl52plCiZyJEyDlwed5Yw=;
+        b=BwP3DWKmIlM5ojwPLQZxFOZ8K4GGXwEhFvEPcazxsNJmjpZbRIARKmzxXzw/WkrTcy
+         pJiFXGolbJvNQDadGe67gB/KHly1efkAGjfmTG/GDGvxUvbH/QnAB9CZfbq8maZoCKkL
+         gDWKWb7Geb2PMR2cm4weupfPj9KKLXbtkGG3pM4a/459t+Gbys0gu8nrzVjGDZGqzxv3
+         0bxUuwXcYYf9Iymo/z4BAXbA9aTUEenfxadIWXgnovE6Dvo1a9ABs9HFhKA63Ykb8VXR
+         eKmz4oOSrkBKZ/U4HcHZU+b8GX2c9yrdrXO6vV+1elyPA5m+3Jbxg2W1R0LevoSGP/Tx
+         NgMA==
+X-Forwarded-Encrypted: i=1; AL+hErGMwJvIwkaB8CnOqVymN1Hz/gzaPWF5YxCq38+UGjUN0/8OOQlpyEiy5LWwK8X17DvfSKF+Vchdod1mooVi@vger.kernel.org
+X-Gm-Message-State: APuU4Z+Eciici0ULHS5DZlrOCx7m+RHVuP7OzInt0+hII0IUfkav/jtZ
+	5VrEi0Nw0k28dWeCamBKY0dqsuQRMtXy6hIrHe6iF2zTWo+jw5Rv3HDlgmTDfMjbsEhJ4ib04Is
+	mpxyh2HR3lweE61y2Cc9elQNIY1lAAwbJ4OtYGIgtx7khUjcjNC4U7Aov8JAlLi1CNOYU
+X-Gm-Gg: AYBFou0bcx1qmW3nq89vVGyGTxHgIym0Gmug/VAH2YevFWh7JaXazO1CHmB9+jol0J5
+	h+nX5ldAdBkH66dz3cdvOQ462s8jUGK2fSAIY634of+I8hsiX4wILSPtE8R6Bs47deGggSl9MxE
+	/geN42ZVZBTdaaBYwCOdDNoh2RWxyL80PB10E3yvZ4c8mHhJmOpP+WAuqlFwBnIdtOqdoL1UapJ
+	T6BrIhJraPmJcAd0krlGNuUELYY/i5D96atI/+KwO48lPFzBJR9Solr0j96hDl6JPZipEheflaR
+	LGDJtje33hGgXbnD7mLAi5/AiYF3mBEcvZA9PpKJM6XlJYCiSor6Z107L5uJb8iwTfDN7Bj2QNa
+	/ETbfBAbtV8X6RXxtaWS3yCn6ayWiGyN6/BwYjytykrFglrYu9ncF+Pl1zuLq8rShG7KAgusK6l
+	wLbA==
+X-Received: by 2002:a17:90b:4b0e:b0:3ab:be66:ddc5 with SMTP id 98e67ed59e1d1-3b182f3642cmr7324459a91.6.1794468021437;
+        Wed, 11 Nov 2026 23:20:21 -0800 (PST)
+X-Received: by 2002:a17:90b:4b0e:b0:3ab:be66:ddc5 with SMTP id 98e67ed59e1d1-3b182f3642cmr7324412a91.6.1794468020967;
+        Wed, 11 Nov 2026 23:20:20 -0800 (PST)
+Received: from sdciot-sh07-lnx.qualcomm.com ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197c73e27sm3149185a91.9.2026.11.11.23.20.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Nov 2026 23:20:20 -0800 (PST)
+From: Linghui Wu <linghui.wu@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>,
+        Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>,
+        Shuai Zhang <shuai.zhang@oss.qualcomm.com>, linux-pm@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Linghui Wu <linghui.wu@oss.qualcomm.com>
+Subject: [PATCH v4 0/3] power: sequencing: qcom-wcn: support SW_CTRL wake IRQ
+Date: Thu, 12 Nov 2026 15:20:06 +0800
+Message-ID: <20261112072009.3815276-1-linghui.wu@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261019093911.3199891-1-linghui.wu@oss.qualcomm.com>
+References: <20261019093911.3199891-1-linghui.wu@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,38 +131,76 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: nAe-5NjOg50v32pNouSMxVUOKC0WWFmV
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDAyOSBTYWx0ZWRfXxkWeUqx6zoQP
+ eo/9iHI3Aw1310oV4fwT6lXSBiHO48WVmaqgs5wcepyRB4kCsG74NYpAMQSyNs97bID9ZAcrY08
+ dxJkXrW19nW4ldWrfdVXzwc3mxzzvqg=
+X-Proofpoint-ORIG-GUID: nAe-5NjOg50v32pNouSMxVUOKC0WWFmV
+X-Authority-Analysis: v=2.4 cv=d49gWhjE c=1 sm=1 tr=0 ts=6af568b6 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=FZ15NAR4OWdYCF8lCvYA:9
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDAyOSBTYWx0ZWRfX+BQCeRAKGWhs
+ RbPOmTPG50SDGrRjNUqVLMvFX1/9deIsm1Rdr4ACGS9CEUN5zD8koJnd/wTksST2aWymhUcrdnO
+ OiKMXCC5omuuvQ49zWRyqy5T8qxPlh3EOwJspniutEtHarU3CanE1Lhzc+VoeOOvSp9dhWZ8x/f
+ uCV08BgqQ6wm5yo9NHlWK2/t+P/ID5RDmNoLhrAIm5H0mVi72iCxOAEmoUVfUw9rFo89JyTnfKQ
+ TwBIckamMinTPzLCqpOw/0UJM8A3G6+t3baIYM9aWTXtirRJkXdcel38PQuP+HXM1Xt8xY5uImg
+ K7slRkVFB8Srrw943AnlDMfSS6J4S39smybrVc7cl94+JkOa/Dfx38fIzNNvAJ4aftkg4cEDMeh
+ ReS+sUxKSZ9fj7Pu2Y5OcRFtFmlOKvvpC+82X7SKRtXvrqf6COgm6bssFVmp6XRCtT9DnYsXBpb
+ re3Y+LqCd23ngomi1jg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611120029
 
-Probe disables the hardware VBUS enable source so that the regulator
-operations can control the output, but ignores a failed register
-update. Probe can succeed while the hardware still uses its previous
-control source.
+Some WCN3990-family devices use the SW_CTRL GPIO to indicate that
+resources need to remain available while the application processor is
+suspended.
 
-Propagate the update error instead of reporting successful setup.
+Teach the Qualcomm WCN power-sequencing driver to use the existing
+SW_CTRL GPIO as a dedicated wake IRQ when the power sequencer is marked
+as a wakeup source. The PM core keeps the IRQ disabled during normal
+operation and arms it for system suspend.
 
-Fixes: 4fe66d5a62fb ("regulator: Add support for QCOM PMIC VBUS booster")
-Signed-off-by: Zhu Jun <zhujun2@cmss.chinamobile.com>
----
- drivers/regulator/qcom_usb_vbus-regulator.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+The series documents wakeup-source for the WCN PMU binding and enables
+it for the Shikra CQM, CQS and IQS EVKs.
 
-diff --git a/drivers/regulator/qcom_usb_vbus-regulator.c b/drivers/regulator/qcom_usb_vbus-regulator.c
-index d909a6f2b7f1..035229d8744a 100644
---- a/drivers/regulator/qcom_usb_vbus-regulator.c
-+++ b/drivers/regulator/qcom_usb_vbus-regulator.c
-@@ -158,9 +158,8 @@ static int qcom_usb_vbus_regulator_probe(struct platform_device *pdev)
- 	}
- 
- 	/* Disable HW logic for VBUS enable */
--	regmap_update_bits(regmap, base + data->otg_cfg, data->otg_en_src_cfg, 0);
--
--	return 0;
-+	return regmap_update_bits(regmap, base + data->otg_cfg,
-+				  data->otg_en_src_cfg, 0);
- }
- 
- static const struct of_device_id qcom_usb_vbus_regulator_match[] = {
+The series has been validated on linux-next on Shikra hardware.
+
+Changes in v4:
+- Rebase onto linux-next next-20261111.
+- Revalidate the complete series against linux-next.
+
+Changes in v3:
+- Use the "dt-bindings: regulator:" prefix for the binding patch.
+- Drop the RFC marker.
+- Replace the "must" wording in the wake behavior description.
+- Report runtime validation on qcom-next and kernel 6.18.y.
+
+Changes in v2:
+- Derive the wake IRQ from the existing SW_CTRL GPIO with gpiod_to_irq().
+- Drop the separate interrupt description from the binding and DTS.
+- Focus the description on the functional behavior.
+- Rebase onto next-20261014.
+
+Linghui Wu (3):
+  dt-bindings: regulator: qcom,wcn3990-pmu: document wakeup-source
+  power: sequencing: qcom-wcn: support SW_CTRL wake IRQ
+  arm64: dts: qcom: shikra: enable WCN SW_CTRL wakeup
+
+ .../bindings/regulator/qcom,wcn3990-pmu.yaml  |  6 ++++
+ arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi  |  1 +
+ arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi  |  1 +
+ drivers/power/sequencing/pwrseq-qcom-wcn.c    | 36 +++++++++++++++++++
+ 4 files changed, 44 insertions(+)
+
+
+base-commit: aaa2f954c21b205a0bcd0961e5b2be4e82e58455
 -- 
-2.51.0
-
-
-
+2.43.0
