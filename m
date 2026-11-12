@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.180
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794491377;
-	b=HOTnn4Ue+1d5a2aZTE7+tayqDduDztwKdf81nOQgKbyjvXWyfevzB/tqDBZb6YwFn3qy
-	 jdSKrsZCukGVHByR2ZyaM8HlhIvs1Vbt13id7fpx+S5gwRcKLOgR8wkukCLHVrTgDYN0c
-	 mK+eRE5zBFqVs/nPr5tlK6IYM+vkTUGiOtLWZaEZBGPYelznGD0ox8lUWRGPQWD5raFWx
-	 6RocgUZlS4fFQKANojzszNN5WWdb7WWhD6GtmJ0FXMxRp7jgQBef4pwTZC3XpM1rxBvKl
-	 5nWnUac6fAUg9qTskM1mmOLiaswlLdWvNHubv/kRpa9NwT8gDclI8rp6U8Ed7pMF4Kw==
+	t=1794491380;
+	b=zFyUqXea5sQAkCyI+W033gOLg0trYPV1OuD4IUvD6KzoYh/egZUP2cM7Iqel59UW6p7l
+	 eh2L1kPNIumHHUwoAmXkHd8d1T8jZhiHw1kKn2nzBJI9C7R4Uc5oqdPNjVHkmPUpGzLLG
+	 LULgbNVAlzweTojFMRmGmAS2XnGfgQd4ioLaSQuSksDLkptgrs5qIk7Dv9PKGLw0/PAP3
+	 VE4sr/2DoPL+5IloGfQXN7yRW+R1Ls0qHN70jn+h2x9E3VWKTzVLlNKgp2ah7W1iXWe3r
+	 JGKaxbjCKoINow8T3Zv6XLJbiAaaUODJ0kyef/HYYIzVSlg4lCbnez93Tse995ilIDA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794491377;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794491380;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=2vHG4fjXWFVR+UOug7O+NH5YlX7OSBRB9SJwAE/JWnA=;
-	b=WjuWiaHcmaTd7yBcjv6m2u7A36ZB8qsmTppqViXmx1I1BA94a3YYL3+0RSiu9e/J1ZGh
-	 Wz/TnFXFJ8AZerb/0yfUW42qog6BWNd+z9u03IuDtUf0nQPCNYinji7DRrql9A7l0EZnZ
-	 lwYPqp7Tfoa0Z5jO2wO43UcZAC2cgAa6ZlGkSfqtoFPlMXXFVit+SNBbiV7twZuHLeeOL
-	 Fksg9SVOF6kQn/SRT8oPM7P1hGRACw7DTZsNK87WP9roTRloaMxT6tLI13Cc/aZa/1Ni1
-	 6HT4VMLhxejyTeB0dkqcRuf3rjwb7Vr3ahSp+7Xhn4YxgD3NDB9bS8dHNznWaSO8sBg==
+	bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
+	b=HKKEOPQREzZ74NBj1ozsFnwBa060KrDSUjS+6uBDJ+popQKbd/of72cQwwVeu1x6zM4f
+	 ECaGdTulVZxqKrgBAy0wt2NaSyY1QmC7zBsElIUfFcuaoFEZMYB/icc3JNN/XVgJvru0j
+	 y3K7ONyhTr9wjr0syrsP6CQLDn7P6ADaHY6F4IfKi8WaXilwYCdMnipPYZrfXqw3fP4Tl
+	 3ImJotQzz4d6X3S1FCc3nnKFkEynCGto4r7v173wOgGuzHDIIvMJDZYWx9CVDwjzOK9VI
+	 eYFZ7IbQe6vGmAeb2YAGH9laLCaMfknW0418hy0joI2cWJyjuljHf7bRFoUOrlH/l4Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="b80b3/Xu";
-	arc=none smtp.remote-ip=209.85.210.177
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JzUD2sS6;
+	arc=none smtp.remote-ip=209.85.210.180
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1293D606A8A7
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:49:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1293D606A8A7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60618606A8BB
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:49:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 60618606A8BB
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b80b3/Xu
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8a9f9473029so3536674b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 05:49:36 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=JzUD2sS6
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8a052aff9e9so3512736b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 05:49:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794491376; x=1795096176; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794491379; x=1795096179; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2vHG4fjXWFVR+UOug7O+NH5YlX7OSBRB9SJwAE/JWnA=;
-        b=b80b3/XucWAvkorPAcPXrSbu/T5ngQ7xU55B3sEoq0kWuXSr3jk/K95ufVNyALs1mQ
-         It/fh4+/vaVtl+3W3nK3Tya3xGeZiyt6oOJlWDUNpsYz06WeERQfu9Fpf0cjH7EdprcO
-         yyUvW9lm+MqFn/wp88qecQJXTfuo79RAuskBik7l7DKZm2tsDg4GRCWjJjfvl9kpQUCT
-         Yc/MJUJenBluKUBKjJvWg4pUxa/L8YkSAWS9TkpalvUtS1oMNl2WirfmQIkY4YyRtUYc
-         3BnAnnPVLjb+Og8rmMGS5AIK7yjpHVAQJXqQA+gs0XzmvuoDHcUfgEFeqMFZ+4L4X8rR
-         SFyQ==
+        bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
+        b=JzUD2sS63ujpPtYga16vOf0Cu00MlBCD1ByXjWfdL08/dNnd94+SA2iZs0aQpVTm4h
+         +6RFMiKpt4eq+Vozhcj54rW9dvwLM50HRyubo68BRB/Z5fTVPhtP65kvgr+77bGPVFIx
+         Hwl+ERKpsRh+hsQ2484Go8J8PLvyqZzs4fSJfaizy7HUbFscH1dDciZA46RoXQQ3GQpm
+         IAZRZtl7TySsmfXGkKusqMB92CAL8q2tU1wXvyCCsN+2WxoaHTIYO30ULgIva65WKfgV
+         dtmwxR6UQJUmiPw2MeYzQf8MzhyV6uouxOlrQRLIjC7Zg4638Hf4fkqmaPQwBItQq3Nb
+         1c1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794491376; x=1795096176;
+        d=1e100.net; s=20260707; t=1794491379; x=1795096179;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2vHG4fjXWFVR+UOug7O+NH5YlX7OSBRB9SJwAE/JWnA=;
-        b=avzzRhukApnOdyLxjMJg9PWLcazVYPzHKf6hmDUgkiLBRaP8bqbw9ZnAU6xu1AkYHM
-         MmBzQ2lNVszBJ/KquoUMZ20FoDXQu+TR+BKmWBw/6+jHrsW9nRu8mgtop/lk+06YO388
-         u3z/DO8TrBRwAQN3tKNzCCHhkGiLECm/0NoWhVgLQzONCViqnvrboOTRZcg87lDG479o
-         P1xtGI+u6tbE4KAL227zABgoKjy80tAJkHblpO8bEd5dEUibBfwyo67E4W42BFtGwgHd
-         GIVApwKFhOKcZFYxwUWfpo8zLWwYktKHdByitpm/Ft3U5DBXqrY152bMKjkoggIbmNCV
-         jY6g==
-X-Forwarded-Encrypted: i=1; AL+hErE8JL5vUyCXXHzeQKRJHXuzaQ4R7DOECGCnuC2o5q/dlhEaVg5YsZSprPCBaJEiyCtODh3AIAjp0hmtTFmt@vger.kernel.org
-X-Gm-Message-State: APuU4Z8MO/Y0O00eZ0vNkmm4Pg5DggzxWMT1OKssriDwdX1p9oGkL8od
-	x+Gfl5AxZLZ+Le68q5jLgJGXlcZnyYPk2grWO0DA7bWPQ+owE24tzfnx
-X-Gm-Gg: AYBFou1+g9nwcWATIwwmuvxoGzIb2oDOlxj6bRuo78RqM8HvzZIDvL9uWdXdSSybl56
-	aVO6g9O1O9/h0m1ljWN0bdEcVEhGcdyalVeFRBwMS1mOoP2+juz720IEPQyvuE12vfDwuOh3612
-	sW0KApZfCWJ9uMYx45enP1eyqTp5tHLUvV3pWJtBL7lVVsY+shv149QAa7xne+3+snM/fwxNGsM
-	1Q4O98u7KxCj5DMP/LwAvODa7MMqKuCahxXNfUflQpmuoDDBvpAnnNQarR5zeoTEWa9R7n8UGX0
-	FtVClksLFHjE2t+YRsh32NNE0emiwqkxrj1HgCAC0hkteUAKvSxFgusuy7KGSPuXWXvneyMKT+W
-	gYhrq3gpMk38fil1OXMFd0CAL6/RCNdynVfkdvzGEyVnBNj5ObZyvo32fYgkWZfoJ7jyhxoCS08
-	Y2HkFOubvzlrsB/TmXm0k+nM7h3ZDCmlxu3WvyLLtIYeoZFogNWxoke7IeSeObhJsz7hRCUiVR7
-	+JjGmqhSyiKLNVa9B99a1wYErxatAPiW47nl3CCVSSk8TBMISGJHYyV6nzFMocI44MB01rDAliS
-	8HIekGvEWXzP6AFWcbfVI0i//BEJk2fevYWSrU/wSg==
-X-Received: by 2002:a05:6a21:407:b0:3e2:7882:f14d with SMTP id adf61e73a8af0-3f2ffac4031mr5937239637.70.1794491376116;
-        Thu, 12 Nov 2026 05:49:36 -0800 (PST)
+        bh=8J3SUwGBwfavLf/E2Ow5B5AwEe3aXOGkxMOfu/9pU4Q=;
+        b=di1NOBa6cHGAKJmJbKSPEPiCoDM1bnh96R5s2afYwoBYck2wisMHV4a4Jo+DFsFJfB
+         hhDumNL78D/1kJ6rg3h4Hv0DvI6qcSWuhW0n9TntRTI1Do5VH0fwCbOc60a9ckvl99/Q
+         9hJ1YbqCB7VT2j+cABuSmWCi2ZacpgYOBn3lyZr2t3Ca8KGtJiQWPET/+2v06We/iH3W
+         Zuj0TVDnNOprL+tKE8dWaGOKng8nhDpz+/m5+6yhbFt0jzk7X63twEJR6CI1XTfjq9i5
+         jAu0yzFvlmoC7lyDvS8bZcFdfhk6KfYbLpXzsIGfupvbpk0Ueqif8OLkrY/2uL3QVFr5
+         weoA==
+X-Forwarded-Encrypted: i=1; AL+hErEOQO2Jqb0sego9Dw8gbGglt46Hx8GT/wjTzER5mOBl675ha5zJHmt7k73wu1P8kr2uxoEMOTKLZ7GPygBq@vger.kernel.org
+X-Gm-Message-State: APuU4Z/wgp/zJe5hhfz5N6dbzY14il9MB6KtBj12pBlsAufe2AnfU0Gx
+	+UGlYDttCsI8aC1ZINxiRGRrCLWav0NDcQ/pe3L1HsCXRoORjbxk5EqY
+X-Gm-Gg: AYBFou364pYecmh/MViOCnctztYWJx+TCegxif8Jh/shBhV2Ua/+mw2eeamnmsf4uK2
+	aI5vkhGgDe8fRDoKou1zsBfuUawqRd3Rd78VL+6cZzFlbQ8jFeaihHFObvks3kPAxJ7WgcVXHQW
+	pK69FGg/fYRNQvowdEABy1iUUNplCIU+K57hgZDjn2FZDIFJBZ37E2sN1LyCkUQJh8k3ad3oQoV
+	G+FLT3aTU1oo3g5oLHFef5dRqU8Tvq6RBDTGN8rMjh53c7VQwPl6tf8gVkDuqjfDLC7sYk4qUoO
+	5NcVSHB9EEUXYtx0i0/5XgRHeiAUz3CBFHsuJqbRykxygBuUIGo9+wIFTxC4VVZoDsi6QncfEpt
+	w3AXN9Lxm6vZVPr4F7jlLxB5jyuyy5QKcfrObrqVX4Xhu+4a/H8h7SXMdMcRjf5pE5sxlYC1qeD
+	an5GxVouCxMfY/D0KizeT8gLZMXyJ9LjP3UK/HYcNyWVKIzFbCuRPBJTTmrMbOZjc/kuBUA7ZUU
+	MLiKlMHbPcDsutYMVyVwiQmNHf0JxfYaVgqX8gG7zJg3qrEPGcmicREyBO2k1wsPrcTsGH23JNY
+	OV0vkf8Zt6FAeVfNFvv++yrTXgQR5DN6hI+cUcHjCVc=
+X-Received: by 2002:a05:6a00:178f:b0:89e:3ccd:b3c7 with SMTP id d2e1a72fcca58-8bc1c1ad822mr5507356b3a.33.1794491379406;
+        Thu, 12 Nov 2026 05:49:39 -0800 (PST)
 Received: from DESKTOP-NM9EKIA ([180.67.33.100])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baaa2a6c51sm3550580b3a.14.2026.11.12.05.49.33
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baaa2a6c51sm3550580b3a.14.2026.11.12.05.49.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 05:49:35 -0800 (PST)
+        Thu, 12 Nov 2026 05:49:39 -0800 (PST)
 From: Joonhoe Kim <26rote@gmail.com>
 To: sre@kernel.org
 Cc: konrad.dybcio@oss.qualcomm.com,
@@ -90,9 +90,9 @@ Cc: konrad.dybcio@oss.qualcomm.com,
 	linux-arm-msm@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 1/2] power: supply: qcom_battmgr: fix the battery current sign on Kaanapali
-Date: Thu, 12 Nov 2026 22:49:26 +0900
-Message-ID: <20261112134927.95-2-26rote@gmail.com>
+Subject: [PATCH v2 2/2] power: supply: qcom_battmgr: expose the charge current limit
+Date: Thu, 12 Nov 2026 22:49:27 +0900
+Message-ID: <20261112134927.95-3-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 In-Reply-To: <20261112134927.95-1-26rote@gmail.com>
 References: <20261112134927.95-1-26rote@gmail.com>
@@ -107,59 +107,158 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The Kaanapali battery firmware reports the battery current with
-discharge positive: on a Lenovo Y700 Gen 5 (TB323FU) current_now reads
--9.1 A while charging and +0.57 A on battery. The power_supply ABI has
-charging positive, and upower reports such a charging battery as
-discharging.
+The battery manager firmware takes a charge current limit in uA
+(BATT_CHG_CTRL_LIM) and reports the highest value it accepts
+(BATT_CHG_CTRL_LIM_MAX). Expose them on SM8550 class batteries as
+charge_control_limit and charge_control_limit_max, clamping writes to
+the maximum.
 
-Other firmware behind the same callback uses the ABI sign [1], so
-negate the value only for qcom,kaanapali-pmic-glink.
+Also handle the BATTMGR_BAT_PROPERTY_SET response, which was logged as
+an unknown message, and return its result.
 
-Fixes: 16a7c32e586e ("power: supply: qcom_battmgr: Add support for Glymur and Kaanapali")
-Link: https://lore.kernel.org/all/20260829054546.86210-1-jan.brummer@tabos.org/ [1]
+On a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with a 45 W PD charger,
+limits of 500 mA and 100 mA give about 480 mA and 90 mA of charge
+current while the PD contract stays at 9 V. A limit of 0 stops
+charging, and this firmware does not resume when the limit is raised
+again until the end threshold is moved below the capacity and back.
+
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
-v2: no code change; reworded the device name.
+v2:
+- Use guard(mutex) [Konrad]
+- Return -ENODATA when the firmware reports a zero maximum [Konrad]
 
-The sign is checked only on the Y700 Gen 5. On v1 Konrad asked Jingyi
-to check QRD/MTP; no reply yet:
-https://lore.kernel.org/all/0e5b7d2e-e141-4ce4-a873-b65bd9ef3c4a@oss.qualcomm.com/
+The downstream qti_battery_charger driver also writes this property in
+uA. The thermal mitigation series [1] took a cooling level in
+charge_control_limit; Konrad pointed out that the ABI defines it in
+uA [2], which this patch follows. Only tested on Kaanapali.
 
- drivers/power/supply/qcom_battmgr.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+[1] https://lore.kernel.org/all/20260609-cooling_device_reg-v1-2-e15bddcb0086@qti.qualcomm.com/
+[2] https://lore.kernel.org/all/d99447c8-f140-4ac1-85e1-a235c37eecde@oss.qualcomm.com/
+
+ drivers/power/supply/qcom_battmgr.c | 55 +++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
 
 diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index d6e3edbab..58e103e08 100644
+index 58e103e08..1c3cd034c 100644
 --- a/drivers/power/supply/qcom_battmgr.c
 +++ b/drivers/power/supply/qcom_battmgr.c
-@@ -316,6 +316,7 @@ struct qcom_battmgr {
- 	struct pmic_glink_client *client;
+@@ -262,6 +262,8 @@ struct qcom_battmgr_info {
+ 	unsigned int charge_count;
+ 	unsigned int charge_ctrl_start;
+ 	unsigned int charge_ctrl_end;
++	unsigned int charge_ctrl_limit;
++	unsigned int charge_ctrl_limit_max;
+ 	char model_number[BATTMGR_STRING_LEN];
+ 	char serial_number[BATTMGR_STRING_LEN];
+ 	char oem_info[BATTMGR_STRING_LEN];
+@@ -454,6 +456,8 @@ static const u8 sm8350_bat_prop_map[] = {
+ 	[POWER_SUPPLY_PROP_POWER_NOW] = BATT_POWER_NOW,
+ 	[POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD] = BATT_CHG_CTRL_START_THR,
+ 	[POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD] = BATT_CHG_CTRL_END_THR,
++	[POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT] = BATT_CHG_CTRL_LIM,
++	[POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX] = BATT_CHG_CTRL_LIM_MAX,
+ };
  
- 	enum qcom_battmgr_variant variant;
-+	bool current_inverted;
+ /*
+@@ -709,6 +713,12 @@ static int qcom_battmgr_bat_get_property(struct power_supply *psy,
+ 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
+ 		val->intval = battmgr->info.charge_ctrl_end;
+ 		break;
++	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
++		val->intval = battmgr->info.charge_ctrl_limit;
++		break;
++	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX:
++		val->intval = battmgr->info.charge_ctrl_limit_max;
++		break;
+ 	case POWER_SUPPLY_PROP_MANUFACTURE_YEAR:
+ 		val->intval = battmgr->info.year;
+ 		break;
+@@ -803,6 +813,29 @@ static int qcom_battmgr_set_charge_end_threshold(struct qcom_battmgr *battmgr, i
+ 	return 0;
+ }
  
- 	struct power_supply *ac_psy;
- 	struct power_supply *bat_psy;
-@@ -1574,6 +1575,8 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 			break;
- 		case BATT_CURR_NOW:
- 			battmgr->status.current_now = le32_to_cpu(resp->intval.value);
-+			if (battmgr->current_inverted)
-+				battmgr->status.current_now = -battmgr->status.current_now;
- 			break;
- 		case BATT_TEMP:
- 			val = le32_to_cpu(resp->intval.value);
-@@ -1804,6 +1807,9 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
- 	else
- 		battmgr->variant = QCOM_BATTMGR_SM8350;
- 
-+	battmgr->current_inverted = device_is_compatible(dev->parent,
-+							 "qcom,kaanapali-pmic-glink");
++static int qcom_battmgr_set_charge_control_limit(struct qcom_battmgr *battmgr, int limit)
++{
++	int ret;
 +
- 	ret = qcom_battmgr_charge_control_thresholds_init(battmgr);
- 	if (ret < 0)
- 		return dev_err_probe(dev, ret,
++	if (limit < 0)
++		return -EINVAL;
++
++	guard(mutex)(&battmgr->lock);
++
++	ret = qcom_battmgr_request_property(battmgr, BATTMGR_BAT_PROPERTY_GET,
++					    BATT_CHG_CTRL_LIM_MAX, 0);
++	if (ret)
++		return ret;
++
++	if (!battmgr->info.charge_ctrl_limit_max)
++		return -ENODATA;
++
++	limit = min_t(u32, limit, battmgr->info.charge_ctrl_limit_max);
++
++	return qcom_battmgr_request_property(battmgr, BATTMGR_BAT_PROPERTY_SET,
++					     BATT_CHG_CTRL_LIM, limit);
++}
++
+ static int qcom_battmgr_charge_control_thresholds_init(struct qcom_battmgr *battmgr)
+ {
+ 	int ret;
+@@ -838,6 +871,7 @@ static int qcom_battmgr_bat_is_writeable(struct power_supply *psy,
+ 	switch (psp) {
+ 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD:
+ 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
++	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
+ 		return 1;
+ 	default:
+ 		return 0;
+@@ -860,6 +894,8 @@ static int qcom_battmgr_bat_set_property(struct power_supply *psy,
+ 		return qcom_battmgr_set_charge_start_threshold(battmgr, pval->intval);
+ 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
+ 		return qcom_battmgr_set_charge_end_threshold(battmgr, pval->intval);
++	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
++		return qcom_battmgr_set_charge_control_limit(battmgr, pval->intval);
+ 	default:
+ 		return -EINVAL;
+ 	}
+@@ -995,6 +1031,8 @@ static const enum power_supply_property sm8550_bat_props[] = {
+ 	POWER_SUPPLY_PROP_POWER_NOW,
+ 	POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD,
+ 	POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD,
++	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT,
++	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX,
+ };
+ 
+ static const struct power_supply_desc sm8550_bat_psy_desc = {
+@@ -1618,11 +1656,28 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
+ 		case BATT_CHG_CTRL_END_THR:
+ 			battmgr->info.charge_ctrl_end = le32_to_cpu(resp->intval.value);
+ 			break;
++		case BATT_CHG_CTRL_LIM:
++			battmgr->info.charge_ctrl_limit = le32_to_cpu(resp->intval.value);
++			break;
++		case BATT_CHG_CTRL_LIM_MAX:
++			battmgr->info.charge_ctrl_limit_max = le32_to_cpu(resp->intval.value);
++			break;
+ 		default:
+ 			dev_warn(battmgr->dev, "unknown property %#x\n", property);
+ 			break;
+ 		}
+ 		break;
++	case BATTMGR_BAT_PROPERTY_SET:
++		if (payload_len != sizeof(resp->intval)) {
++			dev_warn(battmgr->dev,
++				 "invalid payload length for battery property set: %zd\n",
++				 payload_len);
++			battmgr->error = -ENODATA;
++			return;
++		}
++
++		battmgr->error = le32_to_cpu(resp->intval.result) ? -EIO : 0;
++		break;
+ 	case BATTMGR_USB_PROPERTY_GET:
+ 		property = le32_to_cpu(resp->intval.property);
+ 		if (payload_len != sizeof(resp->intval)) {
 -- 
 2.53.0
 
