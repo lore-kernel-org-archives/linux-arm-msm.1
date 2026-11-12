@@ -1,87 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.177
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794469946;
-	b=FChLuDwWiLVL+k4JKPlP4ZBEXa/fYXFYnQ33kn9DWzRtARXyfkzLvGwOnF5n3E6ip8+9
-	 krFQqwoWGwLqr/HLtTAGRPuLIIxLgp7/2IWS5IOwSDEp6n1STb2RD9XErm8+qGlDIi6ip
-	 8UPVZYVLIWcaLhYOLcnUE97VibsLB+D+/BzeMmAK5b/18HzkUnEUKp5N2Vwtahh/szU3/
-	 UV9q3aRyWrutSG//2kQ5IoRgQ8pEl7uS9pex4zD3sj56QwJV6PDp3fM3rRiGR8TM8pE1C
-	 qIdR6yAUQM06EGnrN2uJeADx8cF5DEZqkdMIjvfFYcStimdSXIBeg6J2inp5CstLUvA==
+	t=1794469951;
+	b=i0Lh+ogS0ab2ZxhqW3GgaB5bNNce0vXlJE2xTSx9eNAUZwoqmy9jsBGLQ7KmhBekEpr/
+	 ZKgkzJWTHd43hzSqDopuo6mhO+Gk86wq1BS22Xb9cYuevZ3/9by6/O47Zro30u2ARQ2KL
+	 0L9AqzxoVEcq1DEx3TDI/QncJYGF2np8Ap0Fmch5UUGqXyuXzGzpsTQUfKqxBhg+mSOIw
+	 al7pIjLAcrjvXtwYMbQALg6cwjolBr24YD6W/5cnUAUAruZx5Suc7B5R0qUnRtUFFkvgj
+	 XVnlXF7/GpOQyzF2n+pD/XmEMlzu3i3cO/YACOmprr2SKMaxKb9kN2zLrn8IDDjz0sw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794469946;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794469951;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=MeMBAMo08wUuxPAalzAqVHvt8LiRWsl/qLA1LJ6ugek=;
-	b=kPypPqIf4m7TTW1VkZO/y6M6BopT3kRhcC1kKN9tH+X6kWbj45L7nlzwyZLTKLSPm0dS
-	 rA1yDnc2rIyVDejgs3o0lNOT2PqWvTPL1wZ6/hSQfQMS/N89vbPHaDFwfQJ1IO1r/PKOA
-	 GA+a/4avFE/g7BzdRWVIi70Y2BkF/qqYOBC7ZdiPcEPJFqb3fnlAgWAtYtf6GinYDbQFv
-	 D01rbWx5wd/H1OEi/95WQ39OEaz+JxVpQWjf9l76Oqy+cVPEj3uIfw3YJTl9jJdNpuh8C
-	 d7vrZCKVby6IrAt0z6htz1tP7itArSaBiyFtTPDU/HSaxyy/uDP+V91wtgWxHT58tCg==
+	bh=qVNYeCbCbAXxmLLdlIMU9oCrRe4PBlONcsIqJq1mQ30=;
+	b=P1VgRNVlCc61qooToxjPJNdVcNaxp6HCvt0UtDIcxJ3LT2NouMuo2o7p74g2DysNz7yO
+	 9P27KwCT5I7jcfdSuDzzTUNq/2poRM1UZZmJ7CGZQ1znv+cejqEzNFPSPp5/vUn1orAyY
+	 rAijomNGZ+QL0zhunCW686GM6yf5DR0Owbm3hKK0qZnIVglf/sPmnQzd/TleuedNYKIHb
+	 Oqtaar6fPFRNUcQNzJBE5mwih75tHBjKbQ8oRMxCl4HJOB3tpMf/5L06rUspSD3RIYfqB
+	 PyzMV6lGlSg9hKR4r7pf4NcXUvQxa9lrcBSr0hVzA8M0BPVn37C/SyKUx1IIAuTlPFg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UBogsQ3f;
-	arc=none smtp.remote-ip=209.85.210.170
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=W8w8QZw2;
+	arc=none smtp.remote-ip=209.85.210.177
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8EDD606A327
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:52:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8EDD606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D71B0606A8A9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:52:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D71B0606A8A9
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UBogsQ3f
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8a052aff9e9so3238124b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 23:52:25 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=W8w8QZw2
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8b600fae14dso1525633b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 23:52:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794469945; x=1795074745; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1794469950; x=1795074750; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MeMBAMo08wUuxPAalzAqVHvt8LiRWsl/qLA1LJ6ugek=;
-        b=UBogsQ3fw/cqvqtoKAvJlqGEJUrT2itHn8Af4zANdJo8MoF0/opJKQp1XQTWANstDD
-         1Q/jDDORIAoitLul2Vxm2qNciEXMM0BOznAlIznUIYbTzJrP0i+uqFHH/1R6RzV2FFeV
-         EmYCxsmE5DpSjO6fCRnVSOMrazqb8xRNOyqJ6WQjK3EbVRMg8WvFzjgUK4MZq1uH4ttb
-         LK/EbgOJ0T/wn/efzm/m0QQ+NZriEQQ84CaCk6ZqhNoN4C0yoQuCFvipyorLzkaAsEGg
-         ltOaE4VhPWDnk1jBrazmT78qoXPE6HqDn9ShbF6N5QOnq5TiCWeI0i46MY0UJKg91h0D
-         oriA==
+        bh=qVNYeCbCbAXxmLLdlIMU9oCrRe4PBlONcsIqJq1mQ30=;
+        b=W8w8QZw2IRkbztOp3R9wwg/Z2c12illDRT/XSU3wrNofve18je2aIWKZIX6DWYSfo1
+         F+qn+b/r8nn8bh6RpHH7L+L9v272TxG5JrgX9Zzggls6Pud8V9PX1UxoSeaN/nxC+QMu
+         bdzrb72BnzNYw4jjMJFVCO/QMcFMxwAtrZyF6TmkmY6g33nRz6PMgn27jw0FMvYyZYda
+         T8niFFoUUh9tF0nppPb2hek+UySyoIvNrrGRj7RT7+OsvDmeS6sYJvyAq4vMHI6UdTxn
+         wIhYe1mH3M23a4ZADCfJe7T+3V9ZVmdUCxdPX1vh2mjqx33fVVLSL6DPn8Jlq0Q2WaPj
+         MjxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794469945; x=1795074745;
+        d=1e100.net; s=20260707; t=1794469950; x=1795074750;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MeMBAMo08wUuxPAalzAqVHvt8LiRWsl/qLA1LJ6ugek=;
-        b=xdtehqe3kDaT3fDNaIZFjmLuwTAcWtCNJ0IuC8zwrChL2P08KFikXBri9SDtQbvVv2
-         wiVKqKJHdFv5TnJ2NlI9RmoCNHMoV1PxzoYrjHGwoD7mOSjgT3+nFN6xzGTVPBU4dHSC
-         nJ+v7y+hzjkPX+FZGV2thrjTrL7jAla4J28akdrDc3XdMNQIsudabplmc9VGZnK1iu+N
-         OvifJUHGjKb8rxoRU0JTMtP9AMMZQAl7cBC22d2iYvhoZ8tCLbRxSOQkzJTaP3mdYsck
-         0GdERhRMaSWDUkKTzucsChiyuNUViiUbckuWOgRAh2Lctl7lxWrHDgI+hPIX7lcibyF0
-         a66w==
-X-Gm-Message-State: APuU4Z/2jmEbgmdGZISvpaEuSposWCPnEhdVoyOGf8cx2H21zW9GQX4R
-	i92eUQ77swDVi2SJLxuETUxuMiVsEa+6EFFHFiSmdY141yhSjlctP5xaN/mS6vC5jfU=
-X-Gm-Gg: AYBFou3NsL+Zizi6dOmyWp/+BOQ0h1Dzpqq3ExIDewwDbl05CbR/095yiq3S5Yzm4e5
-	tN474D9fVfj8F2rdG0c9oGEwFvvEhQCGxUhJnls6KdouBZiuNAqEDtD1X1otRlWv2Gwo7xnvLND
-	Y+6ZhN/ctMVeG4xxsgF3uOdfmWi3LuEOfDmK3CrwTiISTyMkpb/DEM7vLLSW2sOONZ8WVrWHiq9
-	KbUM/oxtoV2VwHAuuf9+QiqtqbMAS6r7ucXGqpEqQcpfsxrG7Q7WxcwSR2JKn8RydBUhYsqnkTV
-	kKGHo6iyBspjgHDX2+sx1dlphXT31Y6dJYgE55nIjqzHhzlJlCergFN4UjrDuV83DIJWYUe+Eut
-	ujok9a0+mkmq2IImpEGFE6KHxdqtDRC0yWQT6Qxt/uoXBRizCS0PfP5GXlmTjNmWwSpXiRMAoQp
-	fo5CCqLY4IHBuHquwq2Dsv8N+PiTfqQ6KDgjYqIvgoRc42OxUot4xixMbPSZ1NALM4wNhhUfb27
-	1iJGtvAjPP/5ahCw8U1OaCYEPDhu8WbJPi3d+A19WpPNvYoKym7SgSz07orzNrb83NvfP88+ZM+
-	9Jm84yA8sjGjiIzPOYZS9omhLAauWQ==
-X-Received: by 2002:a05:6a00:a27:b0:8a0:76ea:36e1 with SMTP id d2e1a72fcca58-8bc1887692emr4823477b3a.7.1794469945271;
-        Wed, 11 Nov 2026 23:52:25 -0800 (PST)
+        bh=qVNYeCbCbAXxmLLdlIMU9oCrRe4PBlONcsIqJq1mQ30=;
+        b=F3pidWlEKCQqgav2M92SOx3pSKWXk/Yb3TOwonm64qXDnhkpYoF94q5+/j8q/lGeVf
+         ilWQRPS+jV6YuiKvJg+m6q9e4IZro4YiS0Oay1CRanvUkvzrU236PgdCC1AgQ46nXiji
+         iRkZFejsCdfofskebCq9ANChq1SncBfF+O1WSQ5VtVn9wORZb3cO7eA1NqoPgiyZmyZ5
+         mlz4lGt2MUysZ993X5vOZLxgkatQe5xDJlmZjqyxDsD68yXqNjRD9ZJkxYMyRFnkU6e/
+         fV/IOJEv+EhrdlGwkbFItUZItuZzVPjOoxjdKsE9cd4NyF+F8LvtkLgmKraAybZIVfp+
+         MZEg==
+X-Gm-Message-State: APuU4Z91DpMIQV22yHPyboIYDmHDEZ3BO7NY/hIAFGUeJfoK1GsJXGjR
+	0WBG5ORTQW0H7ZsUliVVdJtbF8e0gCVNkT55WflgmtuyG8tnhrQwBW5oZzTS7NIJnLY=
+X-Gm-Gg: AYBFou36wwu8TUYC1PfjI1KXGO49x6EG3afXpwtDjURzok92ATVb0bGj3e2BFWnM1md
+	4PHgUncAFBNzy5FbDeLjvUVy/IcTQkTGBXvlasAfT4j2dSLVLxf026lzcVI/HPNSZ9PtNYCZDCT
+	Ok7O536sg0g/u3TqGQ4AH0tgfW7FuUwmqUj9vlflQThrkLwgOfwOCj0GcA7KSY6YyNETiOFbpXl
+	svlbz9ISGzW9ktWGX+3t9ymz2v8UI9W9x/JvdaX1izGAQUbXMlqTf7RGmwwJFmS1w6s3TUnPK4b
+	4GKONf77ozVZnHnB+utKQ9JsJO07UItmAXHvejC80j6bjfcI3Q4EbL3vlwYFNmKKS65im2jMNGH
+	S34aoxAuOE/tg/3wRsol47U0TiDb8QE+6E5561x4w9/aRRkZ2N58ozhxC0QpOrlqhrBT55m/ia7
+	kc7hekaWsy7PwEW91UHPVO3CruYCRDcG43NYE7T4NnkT2oMwZ91FHuRmEXG3LYm09l8RMXhdUsN
+	/FndgHuM/9k0GhYHXvQWgwjcm6mFMZA+lYhxjHo/+nl8/nxr0B6tNsVmxl3X7LxELi9hUabmc6G
+	6awdVLjdbH2b58FEXUcJ9ciJ3v1sKA==
+X-Received: by 2002:a05:6a00:3d47:b0:88d:8074:1a9e with SMTP id d2e1a72fcca58-8bc1a39e51amr4637834b3a.3.1794469950174;
+        Wed, 11 Nov 2026 23:52:30 -0800 (PST)
 Received: from [127.0.1.1] ([116.237.168.131])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baab5f3f99sm3131256b3a.51.2026.11.11.23.52.20
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baab5f3f99sm3131256b3a.51.2026.11.11.23.52.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 23:52:24 -0800 (PST)
+        Wed, 11 Nov 2026 23:52:29 -0800 (PST)
 From: Jun Nie <jun.nie@linaro.org>
-Date: Thu, 12 Nov 2026 15:52:03 +0800
-Subject: [PATCH 2/8] drm/msm/dpu: do not use DSC merge_3d for writeback
+Date: Thu, 12 Nov 2026 15:52:04 +0800
+Subject: [PATCH 3/8] drm/msm/dpu: support mapping framebuffer to 2 physical
+ WB
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,7 +94,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-cwb-upstream-v1-2-a6a88d928aa4@linaro.org>
+Message-Id: <20261112-cwb-upstream-v1-3-a6a88d928aa4@linaro.org>
 References: <20261112-cwb-upstream-v1-0-a6a88d928aa4@linaro.org>
 In-Reply-To: <20261112-cwb-upstream-v1-0-a6a88d928aa4@linaro.org>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -107,36 +108,93 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Jun Nie <jun.nie@linaro.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794469928; l=893;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794469928; l=3088;
  i=jun.nie@linaro.org; h=from:subject:message-id;
- bh=JycUzHXZbsiOgnzk6rE/otCXrlxkOXnmr2QsNNi2O6I=;
- b=LQqbXTQ2wMNTqJqqSec4r2cPKc+hwkaUa6aAoVc9FArjsp/chYhwbrHeYXtQunux8vdhNvuWb
- 4/TnnWFTb2xDJQ1E2wtc7Zn5+LoI+PVV74D/zYkWWH7p6jg8JhO/6iV
+ bh=n92yISLOg7FxejPirqGSQZt1WBDSmToFc68ZG69Z3/c=;
+ b=mws8i9pwyAQijwBNy8Z8yQ+mt7XdSqf5wyM9PZaWS1yq6P0SNsYZMNFdVdkUnMWPN+tJAYQAo
+ x+R/Jac9QhhBo8GGUWT1LBG0EODqgus7nnM1BOZcMvK2FPuXtIF+vcZ
 X-Developer-Key: i=jun.nie@linaro.org; a=ed25519;
  pk=O9aRQ3+xXWihQiRRgStCET+eFXx1EZs43Fh0Xh+8Bu4=
 
-Writeback does not output DSC-compressed data as it is meaning less.
-So reject to use DSC merge_3d for writeback encoder.
+Only single WB interface is supported in writeback use case currently.
+Dual WB interfaces are required in quad-pipe topology. Map framebuffer
+to 2 physical WBs in low level, with master physical encoder to handle
+high level communication.
 
 Signed-off-by: Jun Nie <jun.nie@linaro.org>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 3 +++
- 1 file changed, 3 insertions(+)
+ .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c    | 29 ++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-index 53d0ece792f5..d455845ba14b 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-@@ -624,6 +624,9 @@ bool dpu_encoder_use_dsc_merge(struct drm_encoder *drm_enc)
- 	struct dpu_encoder_virt *dpu_enc = to_dpu_encoder_virt(drm_enc);
- 	int i, intf_count = 0, num_dsc = 0;
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c
+index 22433bfbea1e..7d3528907670 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c
+@@ -188,9 +188,18 @@ static void dpu_encoder_phys_wb_setup_fb(struct dpu_encoder_phys *phys_enc,
+ 		cdp_usage = DPU_PERF_CDP_USAGE_NRT;
  
-+	if (dpu_enc->disp_info.intf_type == INTF_WB)
-+		return false;
+ 	wb_cfg->intf_mode = phys_enc->intf_mode;
+-	wb_cfg->roi.x1 = 0;
+-	wb_cfg->roi.x2 = phys_enc->cached_mode.hdisplay;
 +
- 	for (i = 0; i < MAX_PHYS_ENCODERS_PER_VIRTUAL; i++)
- 		if (dpu_enc->phys_encs[i])
- 			intf_count++;
++	if (phys_enc->split_role == ENC_ROLE_SLAVE)
++		wb_cfg->roi.x1 = phys_enc->cached_mode.hdisplay / 2;
++	else
++		wb_cfg->roi.x1 = 0;
+ 	wb_cfg->roi.y1 = 0;
++
++	if (phys_enc->split_role == ENC_ROLE_MASTER)
++		wb_cfg->roi.x2 = phys_enc->cached_mode.hdisplay / 2;
++	else
++		wb_cfg->roi.x2 = phys_enc->cached_mode.hdisplay;
++
+ 	wb_cfg->roi.y2 = phys_enc->cached_mode.vdisplay;
+ 
+ 	if (hw_wb->ops.setup_roi)
+@@ -206,6 +215,9 @@ static void dpu_encoder_phys_wb_setup_fb(struct dpu_encoder_phys *phys_enc,
+ 				     perf->cdp_cfg[cdp_usage].wr_enable);
+ 	}
+ 
++	if (phys_enc->split_role == ENC_ROLE_SLAVE)
++		wb_cfg->dest.plane_addr[0] +=
++			phys_enc->cached_mode.hdisplay * format->bpp / 2;
+ 	if (hw_wb->ops.setup_outaddress)
+ 		hw_wb->ops.setup_outaddress(hw_wb, wb_cfg);
+ }
+@@ -369,7 +381,12 @@ static void dpu_encoder_phys_wb_done_irq(void *arg)
+ 	atomic_add_unless(&phys_enc->pending_kickoff_cnt, -1, 0);
+ 	spin_unlock_irqrestore(phys_enc->enc_spinlock, lock_flags);
+ 
+-	if (wb_enc->wb_conn)
++	/*
++	 * For writeback with dual HW WB, only master WB is needed to handle
++	 * high level task.
++	 */
++	if (wb_enc->wb_conn &&
++	    phys_enc->split_role != ENC_ROLE_SLAVE)
+ 		drm_writeback_signal_completion(wb_enc->wb_conn, 0);
+ 
+ 	/* Signal any waiting atomic commit thread */
+@@ -430,7 +447,8 @@ static void _dpu_encoder_phys_wb_handle_wbdone_timeout(
+ 	/* request a ctl reset before the next kickoff */
+ 	phys_enc->enable_state = DPU_ENC_ERR_NEEDS_HW_RESET;
+ 
+-	if (wb_enc->wb_conn)
++	if (wb_enc->wb_conn &&
++	    phys_enc->split_role != ENC_ROLE_SLAVE)
+ 		drm_writeback_signal_completion(wb_enc->wb_conn, 0);
+ 
+ 	dpu_encoder_frame_done_callback(phys_enc->parent, phys_enc, frame_event);
+@@ -484,7 +502,8 @@ static void dpu_encoder_phys_wb_prepare_for_kickoff(
+ 	drm_conn = &wb_enc->wb_conn->base;
+ 	state = drm_conn->state;
+ 
+-	if (wb_enc->wb_conn && wb_enc->wb_job)
++	if (wb_enc->wb_conn && wb_enc->wb_job &&
++	    phys_enc->split_role != ENC_ROLE_SLAVE)
+ 		drm_writeback_queue_job(wb_enc->wb_conn, state);
+ 
+ 	dpu_encoder_phys_wb_setup(phys_enc);
 
 -- 
 2.53.0
