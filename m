@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794500297;
-	b=pKbgqezCktZfD13+aQrfDrHk7E+rP6gWb3fFyOx2Xtvhk+hea+TEFKAo7W90D7E9O/aQ
-	 x42uIdNtdHx59wVl9P5kBEb3ewy37jRrSWIN4Y8cBFLKod+U6Hjf8LxZwoTUjLDrrAe1m
-	 pEQ8rJK3VvLlV3s0FQAOkzvUY1WuwPi9ZNtLluN4s8FDQtlqklen9XuDiKbG/Tr3h6EtI
-	 Ldi3SFMJPDOr1thUz/nO32dfdGvrEgwpevoPLm/8U2Hwk5vf5K7YNRHEa3h5CRrujHcKl
-	 NPyrE3wID0MaqyHfcvgCClFVgEoV9AxFrX99I5Z0PorRCa3dXBJ137B9k7E77qsyMdQ==
+	t=1794500603;
+	b=gntDkhboOiQz+8FaIAXEqC6Pj6Zx+pHX4mNcTMo4sswuZxGmmA2vfhqgqIK/q90QSmz7
+	 pQu6apBcHJsTMQ5tBqZ2rrPxgYmI42HpfD/D1GZ/m+dzv9XN8D/mlaDOwsS3Ei2vX8bi6
+	 RzCNwVCdocCbT/YqKFTelmRtsvZDNvTv7fo/YYyK9sKglXC7r0XkiDASToVCTe8/rL3mQ
+	 AaDyaO43Cp6o8AAilc9VcfSVsUzFkWciKexaPPjnfx4IzbbOgFI+Ct4iXy93ewDtPBdWy
+	 y6SOybaD1oGurVdW4GBoPyLsqNm7sQvk1LO3R8PysFtSRjg3wW19NEUyV+dI7+QceAA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794500297;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794500603;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=GlhAJxdjsilOMplMZBepY5pTHMdFvqpv20xIyas7qpQ=;
-	b=psKPdexeUPXuFDKHeUHDGpESFXgxI65YLKQeSWSIkaKIU/k1kPJElMlwgkJ0Vi3QglSK
-	 8d98Nw6ps/G1iIB/aqRgMp1OJJoccV6NClabmqVx4ysXAGcSGLD8Ijr+F61MmhTN8yUoQ
-	 FqfP440j+p4IaYOxML4nj5wfg5yokmX/kIfruZ3HCyvEtCccdgiMLvNS3sVf4/tvnpOXS
-	 aBtT9zrqMTIUzNQEAICHomyUPd3xQSUYu5sMy7du7HPcNX3LhNB6y1qmPWoDjzUwlNiY3
-	 +ycNUKFskKpvF6OB3u/P+f96MoB8JhLS3StNPfdV9sY9jkQ2g63LzE1TDhs93aKtqrQ==
+	bh=bsHjPOn7EQIvjeBJsa/4uXXhWDfByDTlEDjI43xq1Rg=;
+	b=5ockU9PsacBD+t14dAbeoKg/Sy5G3PVKRhW5ne1Rpo28U4qcMIRM5Y9cyuIq99HI7UMC
+	 Hv/jxOpehs9gonKJ7KzASPImNg6eHupdTTNYe0CrrdmeOxxlK1bS+kLXFINO8zbPVra5l
+	 RFQBVurKiGk0YqW0bfnyK2K0aNx3JY+DH/P/XpLNuNM8JzZyxBewn6fYMqWOu46MtbLfq
+	 sTPbzEHcm2hBT//GcGUCyRHpG276HSv06x5glwsB6QUq0tdH7BkIJ0h56oJgnqU+Kdsep
+	 rQmXP/37205mM+aoSCMtMjJVnOiJfM8xBQVDCf3BOKhy1MgM5JJvJDeAGc8QganOU5w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Q1dUZ/vZ";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UhesNISn;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C58E5606A321;
-	Thu, 12 Nov 2026 16:18:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DCA7606A31C;
+	Thu, 12 Nov 2026 16:23:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Q1dUZ/vZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C6091F000C6;
-	Thu, 12 Nov 2026 16:18:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UhesNISn
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD23F1F000C4;
+	Thu, 12 Nov 2026 16:23:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794500297;
-	bh=GlhAJxdjsilOMplMZBepY5pTHMdFvqpv20xIyas7qpQ=;
+	s=k20260515; t=1794500602;
+	bh=bsHjPOn7EQIvjeBJsa/4uXXhWDfByDTlEDjI43xq1Rg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Q1dUZ/vZkw5jo1HcJmKSN2GgbzK6zoZIlBfbEdDX7bWQlMjEkG4WUmHRFHCxJ/KFB
-	 brOcgOVfWUgs9sAB6Mxg8YPPakUyvUiSpWaoUQuNEWD08Rz6YtkVEzIPPgjwJ86m3V
-	 e9fheRcmDDowBJaweiiEjrsOrIrHyatma2jtHUqEm4n1kLRZM3TVolJJN9L7s9p9rT
-	 RNIVK6sRzXkxU3vRM24tMwgC8q98VMBlYYufwzN8qnCCtfAvWR3V8TNHv1P5ypV61e
-	 BT8GtzljLh+WSFsjd0gWCMRrrykOrZ+cTmbUjF8N6PzqDDOY37yWxy8NYh6znpj33G
-	 D6L5/qO1IbdaQ==
-Message-ID: <1eddac06-1a89-4e71-a38f-ceafeb9128c1@kernel.org>
-Date: Thu, 12 Nov 2026 17:18:07 +0100
+	b=UhesNISnz1XXxAnSYD8cJ2LAInSMyJdo93FnmHXmAeAytdHghUo2RCOVedONnMfCa
+	 wiGelD/aZ53X6EYQ4RxHSHD4AdnIVDRoG15RL/o6vmZGqbsqAXTDBqIKHRcCyFKMme
+	 VKHf0W4tSN9I+fX/k7nxYItp1BnDzkUJe93p5v6zLnaBAvSPQGZQyjsTg0TTwVbhno
+	 3daJoP8JecyYB3723QifpZbwB1NOo9MFJAEFENH05DGEcdznMDDvGIK7PoJVT0QUPY
+	 bixEHNHkI+wIDgIeEf1T9uVXn0kQ53CO5JnAAg+Bhl9e2D20wkmGnnUvofNCwPf4oi
+	 EfNZpbkBxwlUw==
+Message-ID: <96e6d746-a14f-448d-a2b5-4e94d27aa4ec@kernel.org>
+Date: Thu, 12 Nov 2026 17:23:14 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,7 +52,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] drm/bridge: Add a driver for the Parade PS195
+Subject: Re: [PATCH 1/4] dt-bindings: display: bridge: Add Parade PS195
 To: Nabige Aala <nabige.aala@oss.qualcomm.com>,
  Mahadevan P <mahadevan.p@oss.qualcomm.com>,
  Andrzej Hajda <andrzej.hajda@intel.com>,
@@ -69,7 +69,7 @@ To: Nabige Aala <nabige.aala@oss.qualcomm.com>,
 Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
 References: <20261112-mahua-hdmi-v1-0-b463d7b1dd7e@oss.qualcomm.com>
- <20261112-mahua-hdmi-v1-2-b463d7b1dd7e@oss.qualcomm.com>
+ <20261112-mahua-hdmi-v1-1-b463d7b1dd7e@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -115,34 +115,53 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261112-mahua-hdmi-v1-2-b463d7b1dd7e@oss.qualcomm.com>
+In-Reply-To: <20261112-mahua-hdmi-v1-1-b463d7b1dd7e@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 12/11/2026 11:15, Nabige Aala wrote:
-> +	ret = devm_add_action_or_reset(dev, ps195_power_off_action, ps195);
-> +	if (ret)
-> +		return ret;
+> From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+> 
+> Add bindings for the Parade PS195 DisplayPort to HDMI bridge, describing
+> its power supplies, optional reset GPIO and display ports.
+> 
+> Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+> Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
+> ---
+>  .../bindings/display/bridge/parade,ps195.yaml      | 98 ++++++++++++++++++++++
+>  MAINTAINERS                                        |  6 ++
+>  2 files changed, 104 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml b/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
+> new file mode 100644
+> index 000000000000..089191570ef0
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
+> @@ -0,0 +1,98 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/display/bridge/parade,ps195.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
 > +
-> +	/*
-> +	 * Firmware drives DP HPD and services AUX, including EDID reads,
-> +	 * before a modeset. Keep the bridge powered while the system is
-> +	 * awake, including when no monitor is connected.
-> +	 */
-> +	ret = ps195_power_on(ps195);
-
-First you power on, then you add reset action.
-
-> +	if (ret)
-> +		return ret;
+> +title: Parade PS195 DisplayPort to HDMI protocol converter
 > +
-> +	ps195->bridge.of_node = dev->of_node;
-> +	ps195->bridge.type = DRM_MODE_CONNECTOR_HDMIA;
+> +maintainers:
+> +  - Mahadevan P <mahadevan.p@oss.qualcomm.com>
 > +
-> +	return devm_drm_bridge_add(dev, &ps195->bridge);
-> +}
+> +description:
+> +  The PS195 converts DisplayPort input to HDMI output. Firmware loaded from
+> +  an external SPI flash handles link training, EDID access and hotplug
+> +  detection. This binding describes operation without host control of
 
+Please post complete binding.
 
+> +  the device registers. The optional I2C control port is not required for
+> +  display operation. Reset may be controlled by a GPIO or released by a
+
+So this can does not have to be connected to I2C bus at all? I checked
+datasheet and it does not really mention having SDA/SCL floating
+(disconnected).
 
 Best regards,
 Krzysztof
