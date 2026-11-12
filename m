@@ -1,112 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794458198;
-	b=2WdH/4/SP0V/JYD+c1egEm61sXSZ3xMZfo6ZWX+bHT+v5gTMO5b1w7JaJGOJPMr22ze8
-	 d4Kb8647FGThBuodw3WYzDrcRmXkHhLA+jzgyLuLXBqE+cvjC8VTfuAQyst7iC0+KaWc1
-	 uEHH6oDYuELZYN4t4F3XU03X+82FAvYUu21SWQNVZJaUtSzsLVgFYmFx8Jn75/QbAOpoG
-	 avGJBnkYoAfcSoGkgKcfF9Af+pm0gHh1Ppr+/VKDUFob2gMhhIFfwMkgoa9sbdV97/u5d
-	 dQH9dr7gIcFUpEQF9XqKTyZUwx35z4jGslDy6xcjMAs259eGmAiNk3H8JoffQuhb/9g==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794458198;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=H0eWptuviHTuVUkbdwUfGOyXMlnjmZQuyeI/I1/RaXo=;
-	b=DyU6Zj0KqaqACyu5r9ibYpnh+5V9O38BIHivdLN0Wdp/qzeCj6O9y7bADFb5BO4X04SP
-	 QY7XiVUyrBBUvLXSPsH9lQpE1UgiidfVfMYSwHgwrZ6dYLTEeGPLcVkA78NSE4sv4YQGC
-	 hn91K02mIBmWurMGP8iMaokxqj5MbAqq/VlQ5UuX75Y2P0zzyPrhXafPMfEX5BFjRzU21
-	 SHYypVAzXzY8R/PxR//z5kUaoAT+UpKiEocEdEXTdZKDR1biMhc3IM3E1tTS/SIks3iy5
-	 HfvNnYX2rVGKuZltoJbPzhrNmdrIDiqfohgrTozFWZ9rXUSEp2tBSw4XZuZkYy3IA6w==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e1p18bIZ;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Kom2oB1S;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794458199;
+	b=bHz9wbq+hyQIhBDI6gnoBpIeyxz8Lxc+yYJnW1Kzlwuv6OLb9REUgbVuiZQwLbko77id
+	 OXaideRVqnWZZ3tQ70812KCaGtR4VIH5vd/P2tTGUwHMF2swmwFQ+ncsGNSxjUJ//7bLq
+	 N3JJTk9JB3PzUj/4zWPIpZLRzitVnwa/vvK1QyvMFc9l063XXHhfr2y2v/BEnDEy1SaQo
+	 2daU6ia1mMsjA789tgeMH8gDzCRS6EUO/N3Tzu3D2aK3dKpt9T+MI+DYIeu9+MJH+YHB8
+	 zTxlI2UKiTr0dYcIH68YINPLhgg+tZntWFie8s5TF0LyTa8mGEzVI7mL7IEv5NOv+7Q==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794458199;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=Ny6R2vZm1Ni0jFLrVg+VlcovAq7VyWWTrgFjomrIlbc=;
+	b=wpDtkOtKTy6uktPYbqT42vAw+1M9sqjFu1ni5Z8JagNBynECCrdBBfw8ZR/NsRlzYzVv
+	 3lY5JXzUc+xhzq63ASnePq8XbM30vPbDHeo+G17d6ZlCiMvI9qaE5g/P6cmYw9HgQba5m
+	 KGEr3nY5edwuZjsDllQUVucDj5MwjHsgk4MTfD5rda2vKl4LxgPQbH+b4vBaF94PFMItw
+	 2yYZh8LHnz2Xuon8o56nTViC3UVBV5MNMJUWNJzFvL6uH4PtM4k/VUZDz7gnu1iu/zSeG
+	 6HSwD910ewDMoUt1LDpIQCa3MTU9wEcxA2vx63a8CbUCDMXMQ0R+fPb+yaKi/zyy9xQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jjy6vDZe;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F29A606B697;
+	Thu, 12 Nov 2026 04:36:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jjy6vDZe
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794458199;
+	b=BddlzKv8LDDcFV5lDVGzH6+eDm5e994foq3xf/CKCAh4JNMQX6FPy1paUa5NZlfY9sA+
+	 Z56ZdmLLxw6xl6cWMBhWiLwbN9bf02EpZ3EKLjEWnrAxzGKgAqUd+1Ch2WcO6HMsOeXWl
+	 Y/BNe37xiuUtjk5lODdHSIuPUn/q2BXRzJGzil6dB08RTyXpU8no3JIQ7SXpOk4WHNlK+
+	 Jo6JCiEEs3uzU1+ZVp9/QjFjtGP7pHc/GZ/fqqATEjo6t/OSL8tWYmknWY1TQlj9T7CF3
+	 e4AURL2X9ZymR0v3EiLfnA8Wcx+7V1vhbF3q2Kx/+M0q/0m4jX7Xh8n0/jwW0B8Nhkg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794458199;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=Ny6R2vZm1Ni0jFLrVg+VlcovAq7VyWWTrgFjomrIlbc=;
+	b=vQ3N27OJgqWkUFs0U4M1eMf0sFCg2LwgNd+ju0vNHOSQnVYTGf3gYBqPPxNd1qntufzD
+	 lzJ6jBs77blQ5121bMgi+OxtYWFR8zgRb/LJCu4OdxedIFFMPxFcXh6ZJpQv0jpyYZMi7
+	 pY/dFhhqMHmkA/LQsdqr4ODRjp4zrhiu3/ohn4CMMYkS1aorGwPw3xjEA4zcNTgAAQi95
+	 wmKXnvyq8fi/9wF+vIjC0Q7fwDnu4LerzFHXyK9vWqIY0ukGPRPaBvLERBLP55AEkWLdc
+	 +3hZClYOBMxgYz/PEweBUMbASXYouYyh8ScCgbrqzZtsZV0gMNYgNuGwdZJQeD9qxWA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63129606B680
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 04:36:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 63129606B680
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e1p18bIZ;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Kom2oB1S
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AC2Zk0a2136002
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 04:36:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	H0eWptuviHTuVUkbdwUfGOyXMlnjmZQuyeI/I1/RaXo=; b=e1p18bIZXnvfBQgK
-	KvqaXZNmW3YA/3qFkBJ8cC6ZaJ+OROf165TNNZ2riXUu4Q7EjyeTJNSgWXG5a15U
-	NWgVK8pkLZWFKCA4rHj3cE6kHmdoicdv+Sg9e3xV2GSp5rPGbLzHhzPemm5ve3Ew
-	f4merjafJ4XjVq+3u2O1iiBfpYfQDFvoaaguRTJnQpSX0QhA/BFy6AsAkEXksJQ4
-	/IZrRoO8vlwUpuNTpeRzgr7LIUbR/7eGFmvK43EzqAebTQmlC3uwkC9vYc3aePb2
-	Is9lS+YbUOKMmA11ECjTXqZ+F0g43F8TyyOE7FK2MgvqDOFXlk0SSbrb0tk8kyYI
-	AWOUaw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvpjjv080-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 04:36:37 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-36d1353fdcdso1327414eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 20:36:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794458196; x=1795062996; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=H0eWptuviHTuVUkbdwUfGOyXMlnjmZQuyeI/I1/RaXo=;
-        b=Kom2oB1S5IhX+7ZhED93QW70qu6thuWu/Dakum6gnIIBmKctKrVmX2qylU9mHZD3ZY
-         wOlGVmnip6IGfRoF2/0SgFvYBqSOTYtifCKcUt6DXBNTbJPS+O4enqR7+apcd9B4JeeO
-         E3NUhZz39Df407aR4H4wD9cHjoHVxwC+8TegAEQAvM57VfQ8KClHvIvg38GdYcWRDKSj
-         5G3nrGsTx2Wb97MZ7/ZSV2ZzfCELpULVwKkjEt6ixVy/7LNvxAq1d+Cf96m2kSbM2urY
-         Ph2SFm7bgLI1P3QPVLvlyH2FRtA+uWnO1SouW3uJGB7mw2bmnBbTfDhwfSFSFnwpEG2O
-         +FFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458196; x=1795062996;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=H0eWptuviHTuVUkbdwUfGOyXMlnjmZQuyeI/I1/RaXo=;
-        b=WTvmLBzVfVHaO5gUtIONW87coU2K+dOQ8vKxa1aUWztQ22ZuzoWK02ZD0Ych5FlZfL
-         0re39qtjJgDHJUX7lojrIo//O7bpRKFCV7FTKvkWALBu8/8jdDiLw9uf9VJ43pzQUaOi
-         ySuGgcXvaAGAJcQQ82sbhlJD3sUeu0pOsEfquIh/z1VYNV0PsK3tGLpDlC0D3rzZU5SD
-         gyJvIJC0U9wLw4RwRvHpF1aEFHasXsyt17DJxXu/R+/6dSf/+EowX4t5gOBHNi9KlViG
-         Z4LDCahDg3k7NXKNbvms9RViPQ/0MJ2bIqjgLtQLv5Vm6lu6qStBXyA8vrZB+7yKalCO
-         hshQ==
-X-Gm-Message-State: APuU4Z80xogrP9Z5JtCE97/ZCbNZG2ce2gcYwUfaYqUeqwmPVV+Rznz9
-	syC3v+R4V6mM3HIkQ1BPkJdVjJJzMLRteC/6t+dRJ7jfGJDYecfEYvrFM8nI+6YGvnbLm043oB1
-	Qfo2gghv83zVEmHUALFpYwRz+/hQ0vaWTDfEd5XKNWZEsMSTGW9d9bA7l40iS9YdR1i/q
-X-Gm-Gg: AYBFou1fWBNbmPsyPGGBmPSUrepK43cg82HBMu+Q4c6GGMr3Cn1sY8fHqy4pj73WOyF
-	yGfeQKj/3fLoRcxE27d8ERsSUtVb0NIwpvyblkiWp86QfkJTeveTdKaTH+0dtz/Ucv7qI+BOOUU
-	9eD1wq4p+JiWhvn6O0EUa0Axh6o83I45vXSqyu6ZtYvlXTJcCEwKeghoL8SnbxSK9l5VAVNgj8r
-	J+ZAuFw7DK2pPrSS3vH1YY0QTF/zqN20RybuLluXibwOjvUz3PNcaYldpICqFG1XC29PO+gT4I4
-	hqfYbb5Jdp2Nl2+RRIDUdi4QEgWmMLpksK9N2XPwzUNgttYM3lpgy8+YXFN6HuWivaIZbagrCY7
-	2McwAMz+7vDITXk1Y4CTc3jwmE1QBorP+ZlrRXCF/4WxhlKYQBD0Wvf9uFkkEAZlHm6g17H3c0h
-	RHpb4iX+Uj4Ax4q5fMpOINSVn6LRcwt0dB1E4Gzwrw09M2YC+/AA87jMH3cbIYYMPC06ukN3JW4
-	ZkQ670=
-X-Received: by 2002:a05:7301:678c:b0:36d:394d:e696 with SMTP id 5a478bee46e88-37685e6c8b8mr6973029eec.29.1794458196130;
-        Wed, 11 Nov 2026 20:36:36 -0800 (PST)
-X-Received: by 2002:a05:7301:678c:b0:36d:394d:e696 with SMTP id 5a478bee46e88-37685e6c8b8mr6972983eec.29.1794458195368;
-        Wed, 11 Nov 2026 20:36:35 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3751fe2ff5dsm21856793eec.5.2026.11.11.20.36.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 20:36:34 -0800 (PST)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Date: Thu, 12 Nov 2026 10:06:21 +0530
-Subject: [PATCH v9 02/11] arm64: dts: qcom: ipq5210: Introduce RDP504
- common DT file
+	by smtp.kernel.org (Postfix) with ESMTPS id AA47A1F00A0B;
+	Thu, 12 Nov 2026 04:36:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794458198;
+	bh=Ny6R2vZm1Ni0jFLrVg+VlcovAq7VyWWTrgFjomrIlbc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=jjy6vDZecYIU7CBQzXnow8vLT6tRaFP7EJA4hPAuoYan+cGvK3Y21y2DejlSv+QU3
+	 Mx5OseeJUkhJ6V4hEwWxwCt9S7YKMbtnwHJ5ZRW2gpEK9a5j/6gzFfKHD/4V3dCOSc
+	 omq0IZHOHLubmuYeXwW1JUqJ9OJ1WCT4Sg453/GDbBQ27Db8Z5fBLPwCJ3qNbJG+lC
+	 XXktZelBJ8iwOKxJqzU21MzFnhoKAFvc+qLc6kOdvoGOCf65386WYiidjkYDHaNSjh
+	 R86WNwg97dsr/vlYxgO1aRLXreGBCZVUrWHrutkzMDXhYD37s2wXkImAssgsmJzE1B
+	 P1BsEUXdg+3yQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 3AF8D492AC;
+	Thu, 12 Nov 2026 04:36:34 +0000 (UTC)
+From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
+Date: Thu, 12 Nov 2026 10:06:32 +0530
+Subject: [PATCH v2 4/6] dt-bindings: display/msm: Add SM7250 MDSS
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,389 +83,415 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261112-dpu-sm7250-v2-4-8e925a3a8a7d@brar.si>
+References: <20261112-dpu-sm7250-v2-0-8e925a3a8a7d@brar.si>
+In-Reply-To: <20261112-dpu-sm7250-v2-0-8e925a3a8a7d@brar.si>
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Krishna Manikandan <quic_mkrishn@quicinc.com>, Ishu Brar <patches@brar.si>, 
+ Kuogee Hsieh <quic_khsieh@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794458192; l=12131;
+ i=patches@brar.si; h=from:subject:message-id;
+ bh=kN0WNCqrYBEFyXPNlngdS7t1IHzBlAndOwGQRXi/O3U=;
+ b=t9KCBbrLlAilEzW0rf2ZehrTvdhDOns5Uq89hPogcHKdRbR41V6OKGES3KG77rG9JwVGR2Z5f
+ 3M6QFd2mvXeABbnhIMd8rJJfECqamVbsoEud+QJy2ScNVPvU7QCI4Xs
+X-Developer-Key: i=patches@brar.si; a=ed25519;
+ pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
+X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
+ auth_id=1189
+X-Original-From: Ishu Brar <patches@brar.si>
+Reply-To: patches@brar.si
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-08-dts-v9-2-c34de4f78fbb@oss.qualcomm.com>
-References: <20261112-08-dts-v9-0-c34de4f78fbb@oss.qualcomm.com>
-In-Reply-To: <20261112-08-dts-v9-0-c34de4f78fbb@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDAxOCBTYWx0ZWRfX2YXotLZGIKsw
- ptftyBWhWF6jesr+j2hRknEr1tAValbj4zjK/zZ0oOMXHcqBde6MQmP11ZZUFM/VHQfNQbjdOws
- 8FF19u+PW9sZe1+yLIFa6HV4XP3fjSX3rK5o/4iCvmddcMbK5kHMwW6xRCqPaGLm/y/WlGD7EgY
- vQxOw26jqXflOvgh61l0wwSn+qpX27Xrm2wRGR17SKLvvWhu4fw3zUNL123ejjSz5ihX7BiNhYz
- FkRoNwEgjzv04pR/PtqC2e463bEBMpiGFyoDvPZkD7JM7mBvzjCrBhUyXzPaVROmLRcFvRS8F3O
- kwvTmJqI590GyOSygRwTUOkc0YYVGaVNx/xecGXk8UAYm9LvlKhgLVEXLPBwdlJNMTQW4ww2KyR
- +irE6b/8nXeQEhYckLu3C0wkohoqMiZIt+wr0bHFVQKZqOmc5HRkdwyJr/ylZbEXvKkzWBWNGfg
- iXCVqtukYbK0GNi+5Jw==
-X-Proofpoint-ORIG-GUID: RcIhidox-OfPpv3geQqm-pnuFny1vcnn
-X-Authority-Analysis: v=2.4 cv=FeuiV5+6 c=1 sm=1 tr=0 ts=6af54255 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=sBhH8NEu279NYU_71NoA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-GUID: RcIhidox-OfPpv3geQqm-pnuFny1vcnn
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDAxOCBTYWx0ZWRfXw9O7z1fOSlur
- 1umEpueALmCP6Ixkn0X1TF7s/CzKvY+qHR90LP2WiGEIFRLKOtQjxG3V05I8obkF2Pls8aKHbhq
- rR5FtpdVlGyIil4R5ZWFE/QQDMMnWGU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
- clxscore=1015 bulkscore=0 impostorscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120018
 
-RDP504 has USB, PCIe and SPI NAND devices populated. EMMC and NAND
-share the GPIOs. The board has to be reworked to change from EMMC
-to NAND variant. Rename ipq5210-rdp504.dts as ipq5210-rdp504-common.dtsi
-and include it in variant specific DTS file.
+From: Ishu Brar <patches@brar.si>
 
-Describe the fixed USB regulators, PCIe reset GPIOs, QPIC SPI NAND flash
-and required pinctrl states. Enable QPIC BAM, USB and PCIe for the board.
+Add the binding for the SM7250 Mobile Display Subsystem. It has the
+same clocks and children as the SM8250 one, so it is modeled on
+qcom,sm8250-mdss.yaml. The example uses the SM8250 clock and
+interconnect headers, as the SM7250 ones are not upstream yet.
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Signed-off-by: Ishu Brar <patches@brar.si>
 ---
- .../arm64/boot/dts/qcom/ipq5210-rdp504-common.dtsi | 225 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts        |  79 +-------
- 2 files changed, 227 insertions(+), 77 deletions(-)
+ .../bindings/display/msm/qcom,sm7250-mdss.yaml     | 357 +++++++++++++++++++++
+ 1 file changed, 357 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq5210-rdp504-common.dtsi b/arch/arm64/boot/dts/qcom/ipq5210-rdp504-common.dtsi
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm7250-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm7250-mdss.yaml
 new file mode 100644
-index 000000000000..6fb8666ffbfd
+index 000000000000..063588376612
 --- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/ipq5210-rdp504-common.dtsi
-@@ -0,0 +1,225 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
++++ b/Documentation/devicetree/bindings/display/msm/qcom,sm7250-mdss.yaml
+@@ -0,0 +1,357 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/display/msm/qcom,sm7250-mdss.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+/dts-v1/;
++title: Qualcomm SM7250 Display MDSS
 +
-+#include <dt-bindings/gpio/gpio.h>
-+#include "ipq5210.dtsi"
++maintainers:
++  - Ishu Brar <patches@brar.si>
 +
-+/ {
-+	aliases {
-+		serial0 = &uart1;
-+	};
++description:
++  SM7250 MSM Mobile Display Subsystem(MDSS) that encapsulates
++  sub-blocks like DPU display controller, DSI and DP interfaces etc. Device tree
++  bindings of MDSS are mentioned for SM7250 target.
 +
-+	chosen {
-+		stdout-path = "serial0";
-+	};
++$ref: /schemas/display/msm/mdss-common.yaml#
 +
-+	vreg_misc_3p3: regulator-usb-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+		regulator-name = "usb_hs_vdda_3p3";
-+	};
++properties:
++  compatible:
++    const: qcom,sm7250-mdss
 +
-+	vreg_misc_1p8: regulator-usb-1p8 {
-+		compatible = "regulator-fixed";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+		regulator-name = "vdda_1p8_usb";
-+	};
++  clocks:
++    items:
++      - description: Display AHB clock from gcc
++      - description: Display hf axi clock
++      - description: Display sf axi clock
++      - description: Display core clock
 +
-+	vreg_misc_0p925: regulator-usb-0p925 {
-+		compatible = "regulator-fixed";
-+		regulator-min-microvolt = <925000>;
-+		regulator-max-microvolt = <925000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+		regulator-name = "vdd_core_usb";
-+	};
-+};
++  clock-names:
++    items:
++      - const: iface
++      - const: bus
++      - const: nrt_bus
++      - const: core
 +
-+&pcie0 {
-+	pinctrl-0 = <&pcie0_default_state>;
-+	pinctrl-names = "default";
++  iommus:
++    maxItems: 1
 +
-+	status = "okay";
-+};
++  interconnects:
++    items:
++      - description: Interconnect path from mdp0 port to the data bus
++      - description: Interconnect path from mdp1 port to the data bus
++      - description: Interconnect path from CPU to the reg bus
 +
-+&pcie0_phy {
-+	status = "okay";
-+};
++  interconnect-names:
++    items:
++      - const: mdp0-mem
++      - const: mdp1-mem
++      - const: cpu-cfg
 +
-+&pcie0_port0 {
-+	reset-gpios = <&tlmm 32 GPIO_ACTIVE_LOW>;
-+};
++patternProperties:
++  "^display-controller@[0-9a-f]+$":
++    type: object
++    additionalProperties: true
++    properties:
++      compatible:
++        const: qcom,sm7250-dpu
 +
-+&pcie1 {
-+	pinctrl-0 = <&pcie1_default_state>;
-+	pinctrl-names = "default";
++  "^displayport-controller@[0-9a-f]+$":
++    type: object
++    additionalProperties: true
++    properties:
++      compatible:
++        items:
++          - const: qcom,sm7250-dp
++          - const: qcom,sm8350-dp
 +
-+	status = "okay";
-+};
++  "^dsi@[0-9a-f]+$":
++    type: object
++    additionalProperties: true
++    properties:
++      compatible:
++        items:
++          - const: qcom,sm7250-dsi-ctrl
++          - const: qcom,mdss-dsi-ctrl
 +
-+&pcie1_phy {
-+	status = "okay";
-+};
++  "^phy@[0-9a-f]+$":
++    type: object
++    additionalProperties: true
++    properties:
++      compatible:
++        const: qcom,dsi-phy-7nm
 +
-+&pcie1_port0 {
-+	reset-gpios = <&tlmm 29 GPIO_ACTIVE_LOW>;
-+};
++required:
++  - compatible
 +
-+&qpic_nand {
-+	pinctrl-0 = <&qpic_snand_default_state>;
-+	pinctrl-names = "default";
++unevaluatedProperties: false
 +
-+	flash@0 {
-+		compatible = "spi-nand";
-+		reg = <0>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		nand-ecc-engine = <&qpic_nand>;
-+		nand-ecc-strength = <4>;
-+		nand-ecc-step-size = <512>;
-+	};
-+};
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,dispcc-sm8250.h>
++    #include <dt-bindings/clock/qcom,gcc-sm8250.h>
++    #include <dt-bindings/clock/qcom,rpmh.h>
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    #include <dt-bindings/interconnect/qcom,icc.h>
++    #include <dt-bindings/interconnect/qcom,sm8250.h>
++    #include <dt-bindings/power/qcom,rpmhpd.h>
 +
-+&qusb_phy_0 {
-+	vdd-supply = <&vreg_misc_0p925>;
-+	vdda-pll-supply = <&vreg_misc_1p8>;
-+	vdda-phy-dpdm-supply = <&vreg_misc_3p3>;
++    display-subsystem@ae00000 {
++        compatible = "qcom,sm7250-mdss";
++        reg = <0x0ae00000 0x1000>;
++        reg-names = "mdss";
 +
-+	status = "okay";
-+};
++        interconnects = <&mmss_noc MASTER_MDP_PORT0 QCOM_ICC_TAG_ALWAYS
++                         &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++                        <&mmss_noc MASTER_MDP_PORT1 QCOM_ICC_TAG_ALWAYS
++                         &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>,
++                        <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
++                         &config_noc SLAVE_DISPLAY_CFG QCOM_ICC_TAG_ACTIVE_ONLY>;
++        interconnect-names = "mdp0-mem", "mdp1-mem", "cpu-cfg";
 +
-+/*
-+ * The bootstrap pins for the board select the XO clock frequency that
-+ * supports 48 MHz, 96 MHz or 192 MHz. This setting automatically
-+ * enables the right dividers, to ensure the reference clock output
-+ * from WiFi to the CMN PLL is 48 MHz.
-+ */
-+&ref_48mhz_clk {
-+	clock-div = <1>;
-+	clock-mult = <1>;
-+};
++        power-domains = <&dispcc MDSS_GDSC>;
 +
-+&sdhc {
-+	max-frequency = <192000000>;
-+	bus-width = <4>;
-+	mmc-ddr-1_8v;
-+	mmc-hs200-1_8v;
-+	pinctrl-0 = <&sdhc_default_state>;
-+	pinctrl-names = "default";
-+};
++        clocks = <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                 <&gcc GCC_DISP_HF_AXI_CLK>,
++                 <&gcc GCC_DISP_SF_AXI_CLK>,
++                 <&dispcc DISP_CC_MDSS_MDP_CLK>;
++        clock-names = "iface", "bus", "nrt_bus", "core";
 +
-+&sleep_clk {
-+	clock-frequency = <32000>;
-+};
++        interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
++        interrupt-controller;
++        #interrupt-cells = <1>;
 +
-+&ssphy_0 {
-+	vdda-pll-supply = <&vreg_misc_1p8>;
-+	vdda-phy-supply = <&vreg_misc_0p925>;
++        iommus = <&apps_smmu 0x820 0x402>;
 +
-+	status = "okay";
-+};
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges;
 +
-+&tlmm {
-+	pcie1_default_state: pcie1-default-state {
-+		pins = "gpio29";
-+		function = "gpio";
-+		drive-strength = <6>;
-+		bias-pull-down;
-+	};
++        display-controller@ae01000 {
++            compatible = "qcom,sm7250-dpu";
++            reg = <0x0ae01000 0x8f000>,
++                  <0x0aeb0000 0x2008>;
++            reg-names = "mdp", "vbif";
 +
-+	pcie0_default_state: pcie0-default-state {
-+		pins = "gpio32";
-+		function = "gpio";
-+		drive-strength = <6>;
-+		bias-pull-down;
-+	};
++            clocks = <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                     <&gcc GCC_DISP_HF_AXI_CLK>,
++                     <&dispcc DISP_CC_MDSS_MDP_CLK>,
++                     <&dispcc DISP_CC_MDSS_VSYNC_CLK>;
++            clock-names = "iface", "bus", "core", "vsync";
 +
-+	qpic_snand_default_state: qpic-snand-default-state {
-+		data-pins {
-+			pins = "gpio0", "gpio1", "gpio2", "gpio3";
-+			function = "qspi_data";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
++            assigned-clocks = <&dispcc DISP_CC_MDSS_VSYNC_CLK>;
++            assigned-clock-rates = <19200000>;
 +
-+		cs-pins {
-+			pins = "gpio4";
-+			function = "qspi_cs_n";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
++            operating-points-v2 = <&mdp_opp_table>;
++            power-domains = <&rpmhpd RPMHPD_CX>;
 +
-+		clock-pins {
-+			pins = "gpio5";
-+			function = "qspi_clk";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
-+	};
++            interrupt-parent = <&mdss>;
++            interrupts = <0>;
 +
-+	qup_uart1_default_state: qup-uart1-default-state {
-+		pins = "gpio38", "gpio39";
-+		function = "qup_se1";
-+		drive-strength = <6>;
-+		bias-pull-down;
-+	};
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
 +
-+	sdhc_default_state: sdhc-default-state {
-+		data-pins {
-+			pins = "gpio0", "gpio1", "gpio2", "gpio3";
-+			function = "sdc_data";
-+			drive-strength = <8>;
-+			bias-pull-up;
-+		};
++                port@0 {
++                    reg = <0>;
++                    dpu_intf1_out: endpoint {
++                        remote-endpoint = <&dsi0_in>;
++                    };
++                };
 +
-+		cmd-pins {
-+			pins = "gpio4";
-+			function = "sdc_cmd";
-+			drive-strength = <8>;
-+			bias-pull-up;
-+		};
++                port@1 {
++                    reg = <1>;
++                    dpu_intf2_out: endpoint {
++                        remote-endpoint = <&dsi1_in>;
++                    };
++                };
++            };
 +
-+		clk-pins {
-+			pins = "gpio5";
-+			function = "sdc_clk";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
-+	};
-+};
++            mdp_opp_table: opp-table {
++                compatible = "operating-points-v2";
 +
-+&uart1 {
-+	pinctrl-0 = <&qup_uart1_default_state>;
-+	pinctrl-names = "default";
++                opp-200000000 {
++                    opp-hz = /bits/ 64 <200000000>;
++                    required-opps = <&rpmhpd_opp_low_svs>;
++                };
 +
-+	status = "okay";
-+};
++                opp-300000000 {
++                    opp-hz = /bits/ 64 <300000000>;
++                    required-opps = <&rpmhpd_opp_svs>;
++                };
 +
-+&usb3 {
-+	dr_mode = "host";
++                opp-345000000 {
++                    opp-hz = /bits/ 64 <345000000>;
++                    required-opps = <&rpmhpd_opp_svs_l1>;
++                };
 +
-+	status = "okay";
-+};
++                opp-460000000 {
++                    opp-hz = /bits/ 64 <460000000>;
++                    required-opps = <&rpmhpd_opp_nom>;
++                };
++            };
++        };
 +
-+/*
-+ * The frequency of xo_board is fixed to 24 MHz, which is routed
-+ * from WiFi output clock 48 MHz divided by 2.
-+ */
-+&xo_board {
-+	clock-div = <2>;
-+	clock-mult = <1>;
-+};
++        dsi@ae94000 {
++            compatible = "qcom,sm7250-dsi-ctrl", "qcom,mdss-dsi-ctrl";
++            reg = <0x0ae94000 0x400>;
++            reg-names = "dsi_ctrl";
 +
-+&xo_clk {
-+	clock-frequency = <48000000>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts b/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts
-index 519307c6b61e..43cdb981a4ba 100644
---- a/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts
-+++ b/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts
-@@ -5,30 +5,11 @@
- 
- /dts-v1/;
- 
--#include "ipq5210.dtsi"
-+#include "ipq5210-rdp504-common.dtsi"
- 
- / {
--	model = "Qualcomm Technologies, Inc. IPQ5210 RDP504";
-+	model = "Qualcomm Technologies, Inc. IPQ5210 RDP504 (eMMC)";
- 	compatible = "qcom,ipq5210-rdp504", "qcom,ipq5210";
--
--	aliases {
--		serial0 = &uart1;
--	};
--
--	chosen {
--		stdout-path = "serial0";
--	};
--};
--
--/*
-- * The bootstrap pins for the board select the XO clock frequency that
-- * supports 48 MHz, 96 MHz or 192 MHz. This setting automatically
-- * enables the right dividers, to ensure the reference clock output
-- * from WiFi to the CMN PLL is 48 MHz.
-- */
--&ref_48mhz_clk {
--	clock-div = <1>;
--	clock-mult = <1>;
- };
- 
- &sdhc {
-@@ -41,59 +22,3 @@ &sdhc {
- 
- 	status = "okay";
- };
--
--&sleep_clk {
--	clock-frequency = <32000>;
--};
--
--&tlmm {
--	qup_uart1_default_state: qup-uart1-default-state {
--		pins = "gpio38", "gpio39";
--		function = "qup_se1";
--		drive-strength = <6>;
--		bias-pull-down;
--	};
--
--	sdhc_default_state: sdhc-default-state {
--		clk-pins {
--			pins = "gpio5";
--			function = "sdc_clk";
--			drive-strength = <8>;
--			bias-disable;
--		};
--
--		cmd-pins {
--			pins = "gpio4";
--			function = "sdc_cmd";
--			drive-strength = <8>;
--			bias-pull-up;
--		};
--
--		data-pins {
--			pins = "gpio0", "gpio1", "gpio2", "gpio3";
--			function = "sdc_data";
--			drive-strength = <8>;
--			bias-pull-up;
--		};
--	};
--};
--
--&uart1 {
--	pinctrl-0 = <&qup_uart1_default_state>;
--	pinctrl-names = "default";
--
--	status = "okay";
--};
--
--/*
-- * The frequency of xo_board is fixed to 24 MHz, which is routed
-- * from WiFi output clock 48 MHz divided by 2.
-- */
--&xo_board {
--	clock-div = <2>;
--	clock-mult = <1>;
--};
--
--&xo_clk {
--	clock-frequency = <48000000>;
--};
++            interrupt-parent = <&mdss>;
++            interrupts = <4>;
++
++            clocks = <&dispcc DISP_CC_MDSS_BYTE0_CLK>,
++                     <&dispcc DISP_CC_MDSS_BYTE0_INTF_CLK>,
++                     <&dispcc DISP_CC_MDSS_PCLK0_CLK>,
++                     <&dispcc DISP_CC_MDSS_ESC0_CLK>,
++                     <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                     <&gcc GCC_DISP_HF_AXI_CLK>;
++            clock-names = "byte",
++                          "byte_intf",
++                          "pixel",
++                          "core",
++                          "iface",
++                          "bus";
++
++            assigned-clocks = <&dispcc DISP_CC_MDSS_BYTE0_CLK_SRC>,
++                              <&dispcc DISP_CC_MDSS_PCLK0_CLK_SRC>;
++            assigned-clock-parents = <&dsi0_phy 0>, <&dsi0_phy 1>;
++
++            operating-points-v2 = <&dsi_opp_table>;
++            power-domains = <&rpmhpd RPMHPD_CX>;
++
++            phys = <&dsi0_phy>;
++            phy-names = "dsi";
++
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                port@0 {
++                    reg = <0>;
++                    dsi0_in: endpoint {
++                        remote-endpoint = <&dpu_intf1_out>;
++                    };
++                };
++
++                port@1 {
++                    reg = <1>;
++                    dsi0_out: endpoint {
++                    };
++                };
++            };
++
++            dsi_opp_table: opp-table {
++                compatible = "operating-points-v2";
++
++                opp-187500000 {
++                    opp-hz = /bits/ 64 <187500000>;
++                    required-opps = <&rpmhpd_opp_low_svs>;
++                };
++
++                opp-300000000 {
++                    opp-hz = /bits/ 64 <300000000>;
++                    required-opps = <&rpmhpd_opp_svs>;
++                };
++
++                opp-358000000 {
++                    opp-hz = /bits/ 64 <358000000>;
++                    required-opps = <&rpmhpd_opp_svs_l1>;
++                };
++            };
++        };
++
++        dsi0_phy: phy@ae94400 {
++            compatible = "qcom,dsi-phy-7nm";
++            reg = <0x0ae94400 0x200>,
++                  <0x0ae94600 0x280>,
++                  <0x0ae94900 0x260>;
++            reg-names = "dsi_phy",
++                        "dsi_phy_lane",
++                        "dsi_pll";
++
++            #clock-cells = <1>;
++            #phy-cells = <0>;
++
++            clocks = <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                     <&rpmhcc RPMH_CXO_CLK>;
++            clock-names = "iface", "ref";
++            vdds-supply = <&vreg_dsi_phy>;
++        };
++
++        dsi@ae96000 {
++            compatible = "qcom,sm7250-dsi-ctrl", "qcom,mdss-dsi-ctrl";
++            reg = <0x0ae96000 0x400>;
++            reg-names = "dsi_ctrl";
++
++            interrupt-parent = <&mdss>;
++            interrupts = <5>;
++
++            clocks = <&dispcc DISP_CC_MDSS_BYTE1_CLK>,
++                     <&dispcc DISP_CC_MDSS_BYTE1_INTF_CLK>,
++                     <&dispcc DISP_CC_MDSS_PCLK1_CLK>,
++                     <&dispcc DISP_CC_MDSS_ESC1_CLK>,
++                     <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                     <&gcc GCC_DISP_HF_AXI_CLK>;
++            clock-names = "byte",
++                          "byte_intf",
++                          "pixel",
++                          "core",
++                          "iface",
++                          "bus";
++
++            assigned-clocks = <&dispcc DISP_CC_MDSS_BYTE1_CLK_SRC>,
++                              <&dispcc DISP_CC_MDSS_PCLK1_CLK_SRC>;
++            assigned-clock-parents = <&dsi1_phy 0>, <&dsi1_phy 1>;
++
++            operating-points-v2 = <&dsi_opp_table>;
++            power-domains = <&rpmhpd RPMHPD_CX>;
++
++            phys = <&dsi1_phy>;
++            phy-names = "dsi";
++
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                port@0 {
++                    reg = <0>;
++                    dsi1_in: endpoint {
++                        remote-endpoint = <&dpu_intf2_out>;
++                    };
++                };
++
++                port@1 {
++                    reg = <1>;
++                    dsi1_out: endpoint {
++                    };
++                };
++            };
++        };
++
++        dsi1_phy: phy@ae96400 {
++            compatible = "qcom,dsi-phy-7nm";
++            reg = <0x0ae96400 0x200>,
++                  <0x0ae96600 0x280>,
++                  <0x0ae96900 0x260>;
++            reg-names = "dsi_phy",
++                        "dsi_phy_lane",
++                        "dsi_pll";
++
++            #clock-cells = <1>;
++            #phy-cells = <0>;
++
++            clocks = <&dispcc DISP_CC_MDSS_AHB_CLK>,
++                     <&rpmhcc RPMH_CXO_CLK>;
++            clock-names = "iface", "ref";
++            vdds-supply = <&vreg_dsi_phy>;
++        };
++    };
++...
 
 -- 
-2.34.1
+2.56.1
+
 
