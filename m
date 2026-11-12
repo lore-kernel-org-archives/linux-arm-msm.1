@@ -1,61 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794479709;
-	b=AycCJlCqV2R3YOiKvEuReR45v1nm0GS4xfTx1kpLUIN/RfDFjPB4lMctfR8vg3cSthYB
-	 U9NVJy3+XihrIEA5C5uWWHHPXz08i9sTSJySJBjb9LG5/RK3XQxSyrRYgvKWa2VLZbAut
-	 n3942Vczg7KDcuxgV/TmKJufBImR4jZgF69uMroebARFUa7H+kSpbQ4SVc9FGqSBak0Lm
-	 LcIrf28qt8gnc7Qmu9l6ERjLKWcWUAiyQkJQeXpP/csALfRHixR8oVW3+76I3Pd4dBrI8
-	 xL6603k1vQm8p2qng+SwGLJy95efl3XJv239lLxKpfeypUDOsfIAfgEfPmP+7udaRjA==
+	t=1794479969;
+	b=Ta8Ma1Q0xO2V9UMUigLOrjWSnRv8QNOve41+dCTKkU9xf1OBMY0Z5KlAL62AQk2EJHGH
+	 6rzsEuCVZPzfSAwr72wJ5wO3J0z9dlNs+JW4ODtqHZiCArJ3KNaoulKub1aa3WmD5f127
+	 nOC2oZxaLCBWK6/x+gLq1kNMBEO+8Uh3U4rdZOlMACKGkiaXLRTpBPhDSAlEucGQNnXjO
+	 WHV+MtYTuArEbnHQPqLF6LBp45EL1yk+HqQnBeB6hzmIh1VtltRf1TwmZgSuEHgxftEkS
+	 uLSIfMVxcWe3okKLSPfddpihBKy+q3X2ycZaj+pJLnO52aLsCcYVbWrW/dh/SRRC/2A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794479709;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794479969;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=ewwaBYICBsG0p5nqJ3R9zI8jsVipLJMbn+FUH/98X3E=;
-	b=YU9FDhtADKqVt1Rc2tnazUJ3naDG11wycNGBq0IXEKmmB4HPYSGEudANEasZVie7hml+
-	 KyndXR4k9u1OmxjE1VlGzm3n8TdP4qoYz1cWDOZHB/3jHTith98/Gtl/Au982l2/pVHsi
-	 wXkOxUGTOYj0YRYbgB0dPrzIapV3Alu48Ybeorokdax96Q7ufLFDEFIOOj5eR6YpvSgn3
-	 L3jxQLhbRqFSX7R/SXdPVwGL0wDlpk1Xi7RRgK3gwWnt4yO8oTINd0rg0gHS2U3EueKZJ
-	 XijHXK/aHEJsdzK+fuzC4LCL3Q7kQLwAkdzkwEeQIAaLnKHlcJm41mTwN6Gr2pRaP7w==
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=jj+KwhjsJ+azPCQ+Sz77HwA7gwWIyWEvUjsiCGUD9u8=;
+	b=Yy2xpTHw7xxOarKajJJKp2/tn/TeG7MQPTaqDHPUbTv6rTeTrQCqFQAS2/tYGb0qRByb
+	 +Abue9y3wP7c3tM+pynbCLRBznYAnxd3vVYxSxgu5hHjqa8teXrnkccMRA3iBYCOFFaHi
+	 KCQ8caIkEx/bT13qnkIaaJE7floMEQCdf6mFtzPhjpFf5dStPahMVIkCOHLbHXjnRHTh0
+	 W2dtYfn7blSADu8cFf0k6VnqeHdisp/SD2hC75Q9DxvgVIikRmIUDQ6LQdBcPeZzq//IP
+	 xIIRm2dzzc2LzFTJb+/AZ98jENXn+dRGfagk4R6N0lfY+erAvDvBBsP9eJNsSmVqDLQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M81I7Xtd;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=leoUnOsz;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69D5A606A31C;
-	Thu, 12 Nov 2026 10:35:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4792C606A321;
+	Thu, 12 Nov 2026 10:39:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M81I7Xtd
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48E931F00A05;
-	Thu, 12 Nov 2026 10:35:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=leoUnOsz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1ECE71F00A06;
+	Thu, 12 Nov 2026 10:39:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794479709;
-	bh=ewwaBYICBsG0p5nqJ3R9zI8jsVipLJMbn+FUH/98X3E=;
+	s=k20260515; t=1794479968;
+	bh=jj+KwhjsJ+azPCQ+Sz77HwA7gwWIyWEvUjsiCGUD9u8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=M81I7Xtd+G62VdeOad2AYpHmpvh90fXkXDUA/IPoVb1XsJDgDoB0ozVipb/lPfr1i
-	 pUFwO50HMHUUaAFRzevAnrozJa4PPBU3Vjf25QqjQ6/ZbZYymvLFA7IUNTNeKkSG/t
-	 6VhVsqasM9zVxDetxcluapJgRKNTo2OoUKC672/685XEOqG8wrxwJ+KYCACdIaJH68
-	 fuhomVaUay/J5kKXSuY6qbebKFG4tbV1pjHWjRCFZxcicC1rQ9Kmqs2XsTsYcrV6b5
-	 aoJqjZEHsRBJ4Cmfph91xrEvX/Ox13+Dt7CRlljF+hyQgpEYGf3+HOpMj8Jpddpq5w
-	 ZeJ1cZtbqCf4g==
-Date: Thu, 12 Nov 2026 11:35:05 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Andrew Gigena <mail@andrewgigena.dev>
-Cc: Abel Vesa <abelvesa@kernel.org>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
-	Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Andy Gross <agross@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org
-Subject: Re: [PATCH v4 3/3] arm64: dts: qcom: sm8150: use standalone ICE for
- UFS
-Message-ID: <20261112-weightless-angelic-anaconda-60740b@quoll>
-References: <20261111-sm8150-ice-rfc-v4-0-0311eac35609@andrewgigena.dev>
- <20261111-sm8150-ice-rfc-v4-3-0311eac35609@andrewgigena.dev>
+	b=leoUnOszVpSJqwsR8md0YdWjHXpHl4M2/n9Z08ff7NloH+4Flaa8LxuaBJkUUb7MV
+	 YAXJXa3RpJUht1Czmn3VGmFj0izv8qZDERStGMdyRmxcxpxIE9L00dc2Cy+zzLbCSA
+	 9d5lb6ZbcOKpybjUIYfm2y+sSXjgqw8Ej9i4TOT1wIjqMNBgg3xYV1UZjLWWVnEc6l
+	 Zrz9lLQvECj/6D9kP19PjPfN8JYS/UvnElx7kdxeGEj4CUPl4Ky5BYiejI/cKcpDiE
+	 65gp1sB/1Rkc3rDxdtWwofBgLtMQpWtz+AwvVJh32y/QWqMmenrShvlQmGJUiTOnhj
+	 gfat2VCLaBybw==
+Date: Thu, 12 Nov 2026 16:09:25 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v2] phy: qualcomm: phy-qcom-eusb2-repeater: Fix SMB Power
+ leakage issue
+Message-ID: <avWXXVE9WuLUPbn5@parshuram>
+References: <20261112-smb-repeater-power-leakage-v2-1-0f8ee55c4962@oss.qualcomm.com>
+ <avWB6_hSarfdJV5-@parshuram>
+ <dcc4d7a7-6408-48c4-8fd3-af96519fbd72@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,19 +67,24 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261111-sm8150-ice-rfc-v4-3-0311eac35609@andrewgigena.dev>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <dcc4d7a7-6408-48c4-8fd3-af96519fbd72@oss.qualcomm.com>
 
-On Wed, Nov 11, 2026 at 05:53:23PM +0000, Andrew Gigena wrote:
-> Align SM8150 with the standalone ICE representation used on newer
-> platforms instead of embedding ICE registers in the UFS node.
+On 12-11-26, 14:43, Krishna Kurapati wrote:
+
+> > This fails to build:
+> > 
+> > drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c: In function ‘eusb2_repeater_exit’:
+> > drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c:231:24: error: ‘struct eusb2_repeater’ has no member named ‘base’
+> > 
 > 
-> Signed-off-by: Andrew Gigena <mail@andrewgigena.dev>
-> ---
->  arch/arm64/boot/dts/qcom/sm8150.dtsi | 25 ++++++++++++++++---------
->  1 file changed, 16 insertions(+), 9 deletions(-)
+> Hi Vinod,
+> 
+>  When [1] got merged it removed the base pointer. Hence v1 of this patch
+> fails with error saying that base is not present. But v2 has been rebased.
+> This v1 gives the issue but not v2. I see that you have applied v1. Can you
+> revert that and take in v2.
+Done
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-Best regards,
-Krzysztof
-
+-- 
+~Vinod
