@@ -1,58 +1,117 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.67.36.66
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794508205;
-	b=iIZE9uDkzMmU6WDL/B7sJqOq62XImyf0PFGqx7xscA9wn9xnIvQ+O214/nQFwoda0EO/
-	 xYTGUrUK4AU529Eg8quTCXWOoVyGKM05zDzF4Us2M8/Vb5ONH9wXIPojiCWv/CPbi7tQ8
-	 pCg0iSNUjAOdgC/QaUpAeZkGlDSXwJ4UFuH4WuuwxnAL/xtWVQZxbmxwg1btWIKfCOhnk
-	 Nf2fa3j+54kAeedYPbu9FvLbtYr8UL2wURoJ3T+yDCoKreKt71iXwfuoMWg7vwEST9UL9
-	 WYumKCnAUc1dD9ZFtNAxGb12s9Ak3o6MZECfm6LJtT2hVMNLX8NPc0bBn64+XxbBIbg==
+	t=1794509764;
+	b=Te7/qQzodwnYgaSkcchedYW5K46ui6NdUwgX5prRlXzpp/YVz/H5qgnOmiFe7oHa0QOf
+	 o/KjSzobQux8cERvX2arU5m8tiR2LKOgxliGUtUvGHSmEjERm1UEP4lxASbVlp/onKDRI
+	 vLmuUuy+hCMGh/tbSu/2TfV4Xe1wWxWZxptPrkImVhiCjkJhxswq8+JhwQ1gS+cWZffXM
+	 ZXlZOsDhBbdujALsGqkyt/TfSd9gcbiCeDAn0HNA03T9CF+Y8RH7sFie3x8JqhIfvc7MP
+	 Ef5i0EKYwe3YOvN2Rqn/WledB9flbtKMkkkAV+GZCN0kVCLtyJBx4bJ1p3sumlOklWw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794508205;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=Rtc92rlbJoLohK4LVxmMVpKXwZ+yJ59RVuAWYMV1ddM=;
-	b=2MdoEsrwHDfe2rw1W8EXxeLRRwq05p25PAdwQGoP9dbM86TZfRysUy/LTJ3gJOFke11K
-	 tdBqX7enOzqAQTZ+1efQMJIGxKJx9dav7MHkfZieTOcFTZ6/n7sg+V4QgdH411OskarS9
-	 S3kH2SrL7yZSNElLAV8mrq0vb+q9i3oSOF7UIcBaErbTnTrmYpp2PvK1y1rgzDLLY8RBv
-	 hmNBVfnz22hano2gSGaNcwRGjQ8jzRoJrER2A9JcpF31Q53FU1WNi9VYDJ0NgTZjMNTSs
-	 RI/i3hmXWjvjg8XFeTkpr8VRYsXvudHseg+O1PfGlt7nJWKhpMTTlzIASaM3DMKpCZw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794509764;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Message-ID:Subject:
+	 From:To:Cc:Date:In-Reply-To:References:Autocrypt:Content-Type:
+	 MIME-Version:OpenPGP;
+	bh=UaCcqVGf6Uu0P/7T6aSPuRTVhpR0K764Inm2Yffey/I=;
+	b=nV+VZxheoJeTv80ya90/k4lPeLDnUw5OH5SVXOrd2ytBGZQLtNR2jWDPKwlMBAwXOxk1
+	 PPFp8kiYgfnUgtVBL0OyDr2BJ1uRMoj+Ubc+qpSLscusZI7nZomwv4h3apvMjSIqZRMZh
+	 vgJvqJfjxmcTjDpj58bzUX+/4aThGhFYTkXh4NldEcGAii2B1Xus44hdLl3ZQXnA9hTGr
+	 tlkJQ7QITJki1gLtUct2uS9TB/x4gJFmPpCKyNkD9sjCuIlPgtbpW5T32l+g3+pzXmBLY
+	 8zLJro0Z5t1tyt76T7cSDnjAayHCpkjcrwhJj8Bse1BCPy0ykSe8pxOfsr8oe+45t6Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jS3+VlNK;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=posteo.de;
+	spf=pass smtp.mailfrom=posteo.de;
+	dkim=pass header.d=posteo.de header.i=@posteo.de header.a=rsa-sha256 header.s=1984.8680eb header.b=UUAgRAb3;
+	arc=none smtp.remote-ip=185.67.36.66
+Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06F74606A327;
-	Thu, 12 Nov 2026 18:30:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5326F606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 18:56:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5326F606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=posteo.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=posteo.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jS3+VlNK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 518701F000C4;
-	Thu, 12 Nov 2026 18:30:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794508204;
-	bh=Rtc92rlbJoLohK4LVxmMVpKXwZ+yJ59RVuAWYMV1ddM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jS3+VlNKNheQKWnKJjut95GHr34G+JNaUDsAWytjTmzpXs/UwgLRHqPj5GutmW7oX
-	 dDBa2x+2TFu05dIOHA0x2pD0iZxHeowgDs4dM2vg3nitk21sVx9N26FbvPObzbFk9G
-	 FhSuVGqbBWqql8CLciAenR0idFvAbQRC8Ua7+55XqV2bjG3ptXsC7HdWnp8wRLagaq
-	 /XlU71IAuqJaSDBHumr84oYUsSzPgonQ4S7qKawOJJaAMhjvIh/i2ROGhx6GkDHDyA
-	 CSlNaBROHZZokcecgOZ3SHv7x3aegxwj8wyojRwbT5sthRNboLbdMUvq0N3ACfH61x
-	 FN5OzKne6wtTw==
-Date: Thu, 12 Nov 2026 12:29:56 -0600
-From: Bjorn Andersson <andersson@kernel.org>
-To: Rob Herring <robh@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Wesley Cheng <quic_wcheng@quicinc.com>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] dt-bindings: phy: qcom: Relax required supplies
-Message-ID: <avX9Qrcapcnutdgh@baldur>
-References: <20261021022446.3619435-1-robh@kernel.org>
- <avWbmsjkYo2LMJKs@parshuram>
- <20261112125346.GA3821108-robh@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=posteo.de header.i=@posteo.de header.a=rsa-sha256 header.s=1984.8680eb header.b=UUAgRAb3
+Received: from submission (posteo.de [185.67.36.169]) 
+	by mout02.posteo.de (Postfix) with ESMTPS id 348CB240101
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:56:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.de;
+	s=1984.8680eb; t=1794509761;
+	bh=UaCcqVGf6Uu0P/7T6aSPuRTVhpR0K764Inm2Yffey/I=;
+	h=Message-ID:Subject:From:To:Cc:Date:Autocrypt:Content-Type:
+	 MIME-Version:OpenPGP:From;
+	b=UUAgRAb3/LrJf3RDNM76QD3vhZlEGd3Gj2vjYTYU320fw9323CUD3nOQFzQz/tcCw
+	 fNiyLavlj3OJcD7b3CiRe8xxCO0FLqRyo4WSbAsyL8FQctUp2DbdKNIIPbDBM/FTCL
+	 ax4ZkjB7jjME6chhc4EtPo4oIRcnlS6je97Lj11XllKzi3bHxCxdeNmYL4OzqEv+Rg
+	 9Seroi3EPoEixzb/RYaP1tV9OCVV6gSJHzUYNzhgK27wBCddvBR4HlNPTti5AJbFth
+	 axgt7tJszN3A9Js67H6La5JtBkLcA98o5yOZoWf1QK3ByzKhP7lo6jBtReu4cG/XlN
+	 X4P8JeJoverEQ==
+Received: from customer (localhost [127.0.0.1])
+	by submission (posteo.de) with ESMTPSA id 4jQV3406T2z6v0l;
+	Thu, 12 Nov 2026 19:55:59 +0100 (CET)
+Message-ID: <341e56b1ff7d8a5b109e26e30dfed61faa54d603.camel@posteo.de>
+Subject: Re: [PATCH 2/4] Bluetooth: hci_serdev: Track whether the serial
+ port is open
+From: Markus Probst <markus.probst@posteo.de>
+To: Michael McAllister <me@michaelmcallister.org>, Marcel Holtmann
+	 <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+ Bartosz Golaszewski
+	 <brgl@kernel.org>, linux-bluetooth@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, Balakrishna
+ Godavarthi <quic_bgodavar@quicinc.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Matthias Kaehlcke	 <mka@chromium.org>
+Date: Thu, 12 Nov 2026 18:56:00 +0000
+In-Reply-To: <179322687811.94538.11949086384142524062.wcn3950-poweroff-v1-2@michaelmcallister.org>
+References: 
+	<179322687810.94538.4628148055419456389.wcn3950-poweroff-v1-0@michaelmcallister.org>
+	 <179322687811.94538.11949086384142524062.wcn3950-poweroff-v1-2@michaelmcallister.org>
+Autocrypt: addr=markus.probst@posteo.de; prefer-encrypt=mutual;
+ keydata=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
+ jfGillcaQOqFZ3WwVqyzG1BUfTow==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-egiABX/yCJ54Ho5mwMOW"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,74 +121,264 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261112125346.GA3821108-robh@kernel.org>
-
-On Thu, Nov 12, 2026 at 06:53:46AM -0600, Rob Herring wrote:
-> +Konrad
-> 
-> On Thu, Nov 12, 2026 at 04:27:30PM +0530, Vinod Koul wrote:
-> > On 20-10-26, 21:24, Rob Herring (Arm) wrote:
-> > > For the QUSB2 PHY binding, keep the three regulator supplies required
-> > > except for legacy IPQ6018 nodes that do not describe the board rails.
-> > > 
-> > > This relaxes the requirements for the IPQ5210 as well as if it is
-> > > compatible with IPQ6018, then it shouldn't have more required
-> > > properties either.
-> > 
-> > Hey Rob,
-> > 
-> > This fails for phy/next I see vdd-supply has been moved around..
-> 
-> The change in question[1] should not be applied until the .dts changes 
-> in the series are applied. It introduces a bunch of warnings.
-
-I don't understand. The change you present here relates to ipq5210 and
-ipq6018.
-
-That change doesn't touch these two IPQs, so what are you suggesting?
-Are we talking about the same warnings?
-
-> Can the QCom folks stop doing that! Coordinate applying the series or
-> take the binding and dts changes in 1 tree.
-
-I assume you're referring to "QCom folks" in the sense "any maintainer
-touching a binding change related to a qcom platform"?
-
-Do you have some CI/guidance/tooling for Vinod (and other subsystem
-maintainers) to perform system-wide DT-validation when considering
-merging a binding change?
+OpenPGP: url=https://posteo.de/keys/markus.probst@posteo.de.asc; preference=encrypt
 
 
-I unfortunately only spotted the one-way dependency when glancing at the
-seris and thereby ignored the dts patches waiting for the binding to be
-merged.
+--=-egiABX/yCJ54Ho5mwMOW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Given the patch series is 2+ months old, I'd be surprised if the rest
-> gets applied.
+On Wed, 2026-10-28 at 22:34 +0000, Michael McAllister wrote:
+> QCA setup temporarily closes the serial port while enabling the supplies.
+> If enabling the supplies or reopening the port fails, PROTO_READY stays
+> set. Error cleanup can then flush or close an already-closed port.
+>=20
+> Track the open state separately from protocol readiness. Use the same
+> open and close helpers in the transport and the QCA and Marvell drivers,
+> so setup retries do not close the port twice. Skip the serial flush when
+> the port is closed, while still flushing the protocol queues.
+>=20
+> Close the port during unregister according to its actual open state.
+>=20
+> Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+> ---
+>  drivers/bluetooth/hci_mrvl.c   |  4 ++--
+>  drivers/bluetooth/hci_qca.c    | 12 +++++------
+>  drivers/bluetooth/hci_serdev.c | 37 +++++++++++++++++++++++++++-------
+>  drivers/bluetooth/hci_uart.h   |  3 +++
+>  4 files changed, 41 insertions(+), 15 deletions(-)
+>=20
+> diff --git a/drivers/bluetooth/hci_mrvl.c b/drivers/bluetooth/hci_mrvl.c
+> index 5798a8db0..38d9add89 100644
+> --- a/drivers/bluetooth/hci_mrvl.c
+> +++ b/drivers/bluetooth/hci_mrvl.c
+> @@ -76,7 +76,7 @@ static int mrvl_open(struct hci_uart *hu)
+>  	hu->priv =3D mrvl;
+> =20
+>  	if (hu->serdev) {
+> -		ret =3D serdev_device_open(hu->serdev);
+> +		ret =3D hci_uart_serdev_open(hu);
+Hi,
 
-I've applied the two dts changes today, and they do resolve a number of
-warnings - presumably the ones that you're talking about, but I don't
-think the ones that this patch aim to fix?
+Why is `serdev_device_open`/`hci_uart_serdev_open` even called here?
 
-> 
-> This patch OTOH fixes warnings.
-> 
+According to Sashiko [1], `hci_uart_register_device` already calls
+`serdev_device_open` and directly after that `p->open` (effectively
+`mvrl_open` and thus another `serdev_device_open`). If Sashiko is right
+(which appears to be the case at first look), the device is always
+opened twice on probe.
 
-What warnings? Can you please provide actionable context when you're
-pointing out these issues.
+=46rom what I can tell, opening it twice is *undefined behaviour*. This
+patch adds a check if the device is open, before calling
+`serdev_device_open`. This solves the issue (possibly by accident), but
+does not explain why it exists in the first place.
 
-Is it the three "'x-supply' is a required property" warnings from
-ipq6018-cp01-c1.dtb? It seems unlikely that there's one chip that
-doesn't depend on those supplies.
+My patch [2] would instead return the error -EALREADY, which could
+prevent it to probe entirely. It would also allow calling
+`serdev_device_close` on a already closed serdev device, which makes
+the use in the commit message obsolete.
 
-> Rob
-> 
-> 
-> [1] https://lore.kernel.org/all/qusb2phy-v2-1-4c3f980a4560@oss.qualcomm.com
+Thanks
+- Markus Probst
 
-https://lore.kernel.org/all/20260903-topic-8996_61x5_qusb2phy-v2-1-4c3f980a4560@oss.qualcomm.com/
+[1]
+https://lore.kernel.org/linux-serial/sashiko-outbox-211656@kernel.org/
+[2]
+https://lore.kernel.org/linux-serial/20261112-rust_serdev_probe_refactor-v6=
+-1-3568ed56264c@posteo.de/
 
-Regards,
-Bjorn
+
+>  		if (ret)
+>  			goto err;
+>  	}
+> @@ -95,7 +95,7 @@ static int mrvl_close(struct hci_uart *hu)
+>  	BT_DBG("hu %p", hu);
+> =20
+>  	if (hu->serdev)
+> -		serdev_device_close(hu->serdev);
+> +		hci_uart_serdev_close(hu);
+> =20
+>  	skb_queue_purge(&mrvl->txq);
+>  	skb_queue_purge(&mrvl->rawq);
+> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+> index 8705c4543..3d9e6cd15 100644
+> --- a/drivers/bluetooth/hci_qca.c
+> +++ b/drivers/bluetooth/hci_qca.c
+> @@ -1755,8 +1755,8 @@ static int qca_port_reopen(struct hci_uart *hu)
+>  	 * Without this, we will have RTS and CTS synchronization
+>  	 * issues.
+>  	 */
+> -	serdev_device_close(hu->serdev);
+> -	ret =3D serdev_device_open(hu->serdev);
+> +	hci_uart_serdev_close(hu);
+> +	ret =3D hci_uart_serdev_open(hu);
+>  	if (ret) {
+>  		bt_dev_err(hu->hdev, "failed to open port");
+>  		return ret;
+> @@ -1780,12 +1780,12 @@ static int qca_regulator_init(struct hci_uart *hu=
+)
+>  	qcadev =3D serdev_device_get_drvdata(hu->serdev);
+> =20
+>  	if (!qcadev->bt_power->vregs_on) {
+> -		serdev_device_close(hu->serdev);
+> +		hci_uart_serdev_close(hu);
+>  		ret =3D qca_regulator_enable(qcadev);
+>  		if (ret)
+>  			return ret;
+> =20
+> -		ret =3D serdev_device_open(hu->serdev);
+> +		ret =3D hci_uart_serdev_open(hu);
+>  		if (ret) {
+>  			bt_dev_err(hu->hdev, "failed to open port");
+>  			return ret;
+> @@ -2061,8 +2061,8 @@ static int qca_setup(struct hci_uart *hu)
+>  		if (retries < MAX_INIT_RETRIES) {
+>  			bt_dev_warn(hdev, "Retry BT power ON:%d", retries);
+>  			if (hu->serdev) {
+> -				serdev_device_close(hu->serdev);
+> -				ret =3D serdev_device_open(hu->serdev);
+> +				hci_uart_serdev_close(hu);
+> +				ret =3D hci_uart_serdev_open(hu);
+>  				if (ret) {
+>  					bt_dev_err(hdev, "failed to open port");
+>  					return ret;
+> diff --git a/drivers/bluetooth/hci_serdev.c b/drivers/bluetooth/hci_serde=
+v.c
+> index 48ba017e2..05aa490a9 100644
+> --- a/drivers/bluetooth/hci_serdev.c
+> +++ b/drivers/bluetooth/hci_serdev.c
+> @@ -21,6 +21,29 @@
+> =20
+>  #include "hci_uart.h"
+> =20
+> +int hci_uart_serdev_open(struct hci_uart *hu)
+> +{
+> +	int err;
+> +
+> +	if (hu->serdev_open)
+> +		return 0;
+> +
+> +	err =3D serdev_device_open(hu->serdev);
+> +	if (!err)
+> +		hu->serdev_open =3D true;
+> +
+> +	return err;
+> +}
+> +
+> +void hci_uart_serdev_close(struct hci_uart *hu)
+> +{
+> +	if (!hu->serdev_open)
+> +		return;
+> +
+> +	hu->serdev_open =3D false;
+> +	serdev_device_close(hu->serdev);
+> +}
+> +
+>  static inline void hci_uart_tx_complete(struct hci_uart *hu, int pkt_typ=
+e)
+>  {
+>  	struct hci_dev *hdev =3D hu->hdev;
+> @@ -102,7 +125,8 @@ static int hci_uart_flush(struct hci_dev *hdev)
+>  	}
+> =20
+>  	/* Flush any pending characters in the driver and discipline. */
+> -	serdev_device_write_flush(hu->serdev);
+> +	if (hu->serdev_open)
+> +		serdev_device_write_flush(hu->serdev);
+> =20
+>  	if (test_bit(HCI_UART_PROTO_READY, &hu->flags))
+>  		hu->proto->flush(hu);
+> @@ -123,7 +147,7 @@ static int hci_uart_open(struct hci_dev *hdev)
+>  	 * BT OFF. Upon next BT ON UART port should be opened.
+>  	 */
+>  	if (!test_bit(HCI_UART_PROTO_READY, &hu->flags)) {
+> -		err =3D serdev_device_open(hu->serdev);
+> +		err =3D hci_uart_serdev_open(hu);
+>  		if (err)
+>  			return err;
+>  		set_bit(HCI_UART_PROTO_READY, &hu->flags);
+> @@ -154,7 +178,7 @@ static int hci_uart_close(struct hci_dev *hdev)
+>  	 */
+>  	if (hci_test_quirk(hdev, HCI_QUIRK_NON_PERSISTENT_SETUP)) {
+>  		clear_bit(HCI_UART_PROTO_READY, &hu->flags);
+> -		serdev_device_close(hu->serdev);
+> +		hci_uart_serdev_close(hu);
+>  	}
+> =20
+>  	return 0;
+> @@ -314,7 +338,7 @@ int hci_uart_register_device_priv(struct hci_uart *hu=
+,
+>  	if (percpu_init_rwsem(&hu->proto_lock))
+>  		return -ENOMEM;
+> =20
+> -	err =3D serdev_device_open(hu->serdev);
+> +	err =3D hci_uart_serdev_open(hu);
+>  	if (err)
+>  		goto err_rwsem;
+> =20
+> @@ -385,7 +409,7 @@ int hci_uart_register_device_priv(struct hci_uart *hu=
+,
+>  	clear_bit(HCI_UART_PROTO_READY, &hu->flags);
+>  	p->close(hu);
+>  err_open:
+> -	serdev_device_close(hu->serdev);
+> +	hci_uart_serdev_close(hu);
+>  err_rwsem:
+>  	percpu_free_rwsem(&hu->proto_lock);
+>  	return err;
+> @@ -438,8 +462,7 @@ void hci_uart_unregister_device(struct hci_uart *hu)
+>  	 */
+>  	hu->proto->close(hu);
+> =20
+> -	if (proto_ready)
+> -		serdev_device_close(hu->serdev);
+> +	hci_uart_serdev_close(hu);
+> =20
+>  	hci_free_dev(hdev);
+> =20
+> diff --git a/drivers/bluetooth/hci_uart.h b/drivers/bluetooth/hci_uart.h
+> index 7fbe8dffa..2f8e346f3 100644
+> --- a/drivers/bluetooth/hci_uart.h
+> +++ b/drivers/bluetooth/hci_uart.h
+> @@ -66,6 +66,7 @@ struct hci_uart_proto {
+>  struct hci_uart {
+>  	struct tty_struct	*tty;
+>  	struct serdev_device	*serdev;
+> +	bool			serdev_open;
+>  	struct hci_dev		*hdev;
+>  	unsigned long		flags;
+>  	unsigned long		hdev_flags;
+> @@ -112,6 +113,8 @@ static inline int hci_uart_register_device(struct hci=
+_uart *hu,
+>  }
+> =20
+>  void hci_uart_unregister_device(struct hci_uart *hu);
+> +int hci_uart_serdev_open(struct hci_uart *hu);
+> +void hci_uart_serdev_close(struct hci_uart *hu);
+> =20
+>  int hci_uart_tx_wakeup(struct hci_uart *hu);
+>  int hci_uart_wait_until_sent(struct hci_uart *hu);
+
+--=-egiABX/yCJ54Ho5mwMOW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJPBAABCAA5FiEEgnQYxPSsWOdyMMRzNHYf+OetQ9IFAmr2C7AbFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMiwyAAoJEDR2H/jnrUPS+nEP/jTtNtnueC+QwqaD9dd7
+Z2NvNiny0WTQbXoTx8I/gAgaijICIm3bn1vQEpU7ZqnNp1l96n+TAVGfDo/RmJ6h
+RHmxsipGRUUnCJxbm7I05PPDt3kziUAkxh9/sJZg0dI3/omLcacptoTZVvXIhYMP
+jKhgN89EKKkUZUAhjXfCCgV5XqOgZPTanCKOKKafqmm9d1jEyDsBp2YNtnrxjQgk
+5GhV8NDcV+N7nCw1Vwdpw8E5cJ3kq/pZZn+KVH/+HU4Z2N5/5FNIudVzVd4/iOMM
+ISge9qQz5oCJWmFbgEtdePNziFFGiOUwTrgozrmRYkzYBn17z/T/pNRlES6NHj4i
+k+l78MBN18jhPkuQd2oNqNiLyA5rFeB+7h+hRQQcfw9s39LGT1ThoOdomRP3Mt9n
+yKPkL+H0ecdxtGeQrSS+2o1lIzJdJXLC5W9+/iiJr2RdshL5D/P3GpPqEJczSWUY
+kurdSMTo0WPGJW6mX/Qgdy4lQIN9dbk185QfNRwdHANG0cHDxUUPlpyIwdqBJcCK
+ass+LvrtzkxecRhRDU6QH6tdbPhRRQoMEJ7bXA48X4bn1yuJR+r/GwMVp5uO5GiE
+5WzQyg4AHzF801LmOoIpon3bQzKntpzfKsGSjVPoTvkBWkvQJjf8ktdB98exuQxC
+vTP/rElAGqYT8cnAAilSKNL5
+=NJDm
+-----END PGP SIGNATURE-----
+
+--=-egiABX/yCJ54Ho5mwMOW--
