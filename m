@@ -1,65 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794518264;
-	b=nlHCPn3yNEK/HwXWmBsytTy66BXgLefLuQjHiFRBLWyinQq32PemAV9L2TsLjryh8Q0C
-	 KsMQKSyX8+fVUTScVyPouZ6wu4e9c1EMzt8lprPOWDSyUjy1A/RLrUrrblKbuJ3hlN2Zk
-	 /X78AXG1ss0A1nUOvJSQK6AF5hE3VB/wDtNmTSX26nzybEgj+i9OJoiia0E+DMU+bw5+T
-	 5eCsDnkJb/0BovgRHKbBQh7/I7aRJrN6AlOFGdiYJNfo5/ii3/ka4nXYJoRPtIssZH3L9
-	 HDiF46+BRNqvx53+wp43UvxgO3co7CPqyVNJFu2ZshlaEfz6VcMd2imrdjpFd/hBWAA==
+	t=1794523155;
+	b=rlqSpZ9faDBmDFkKtKBjNxNC82cqePlrg3sRP6H85/kbBICmSTJ5RvE3bGjkX5XIazst
+	 XI0eYmtlmmU22JEpt4nlx48UAydg1TZXw+FY3HHwxOAf1gMJlvYDGnZXJN5xfSpnAl2ZC
+	 GS2U1cphCLNT7Vvy/oUe4tqHhjVfLpnpeRvJG8SorIF3TYgSOXMihSTF4O2lcrDLEyw+N
+	 MUKM85WD2hVAiitP971rg+ulhB33+1KL9QN4jYy1UeGgsUxgdOXcS0OoGqWCkZ8Vie+ck
+	 qZsVwtK1hEwTfIUf+vwOLG7Q8Z8DgV1oIY1nJALAXgyRc/svUigU8EoQSg+Chk4GqOw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794518264;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=45Y4sZ8sS5eeWt0uYYzHFHzHlhbwxoDgGS6j5RpQTOU=;
-	b=AWsY3aiOKn+9Y7W7Y7qf4X4SuY9n8ZOa6VJdaX/Lv1Nmn16d0uZNioTgD6Q4z6Q62dPR
-	 nhBXslX/p2REF+Z/MHQyeoSuCekw+7FirczWH6ig2u+aFzv4nw+H/Pad/o0wTbt35D8Go
-	 ykyaZNONgiht91O14kBrIBQ2N0oXIujek21qAQc9+3r2MNY78vCkYfRUOwBi31Vodv/8Q
-	 mFAb83svPIuKUsmT002S8P+27C9OjcMWT4WbsnpYbvLb6OgNQBIaTzc9V4ZDWxEnp8TVT
-	 W74NKngmT+BJZD3xqRPyn8ff7Y5eJk4FgZxlUUh5IOH1TYVm72apMaLBWhewW4X29Og==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794523155;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=0irt2JVoUcjvaIoAcVHgoPFhj7byHj/beXrI+kj/NxU=;
+	b=NON+BKFk17am1LMV3ZwZ1HmrpfmsrW3r3HS9QTTUiS9QkoEfgInU/WS5cx5QppwfCdEE
+	 a3epb4oSytsebSbRI62epMB3+dE37BiEEmOiQUzKBch3vjqrPaJ3TBcE6vX6gTjtTQvBB
+	 atT16X6xIOkz7zfwgSPHzej6KO8FuuQZDzmVT7NqAg7FiOkoAfNwSVt9UCXqrZ1vNzlBk
+	 86RE2BYMGqgeNDXrrTh6CpMMQow9hYnCABYJVsFrLSi9mJq6XeTjWG2pqixz0YdIS6Okq
+	 1IiYQn9xMTCK4kDy1w4TTaGTlWQo+6p0m/LeJNZ/FwZaBxsmSFtb6bYZBTC+xZ2Mz7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WLlG04Ml;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=M6tzjKRJ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CI5e9VbV;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAB16606A31C;
-	Thu, 12 Nov 2026 21:17:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 369EE606A32D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 22:39:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 369EE606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WLlG04Ml
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 263BD1F000C4;
-	Thu, 12 Nov 2026 21:17:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794518264;
-	bh=45Y4sZ8sS5eeWt0uYYzHFHzHlhbwxoDgGS6j5RpQTOU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=WLlG04MlmUjhkGqlKpaKSwrJEXJiamorc0v8bqdu2OLyMgB0lmtLcpgTVYfKp4PEI
-	 deCt0pBWPSR8Db8394ehRIJhRRnQJepzq2wU9DCDPF54F9+SEqEidxGtjgrgkuHSHR
-	 aBXw8dF5rRPB5OuapSpmVMcwaQqc/TReIr6zOGHdjTJUsX5aYyqgQs8KmKWpbA05yg
-	 twkSIsPySPZomL7Je7Pl2N5BDDy9/w6NF4K6+0LzCB/I/c80co5TwuEnIZGBhSnP40
-	 SaJdG2x6YtAy7zlpsWpAEXB/jZmVZ9wGlZsLMmwcX7VMgy2o7fn+MuJy06Y4jXFgt7
-	 zLNbo3pIesXIQ==
-Date: Thu, 12 Nov 2026 15:17:41 -0600
-From: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Wesley Cheng <quic_wcheng@quicinc.com>,
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] dt-bindings: phy: qcom: Relax required supplies
-Message-ID: <20261112211741.GA279944-robh@kernel.org>
-References: <20261021022446.3619435-1-robh@kernel.org>
- <avWbmsjkYo2LMJKs@parshuram>
- <20261112125346.GA3821108-robh@kernel.org>
- <avX9Qrcapcnutdgh@baldur>
- <CAL_JsqLGqYAd-BedjNCCmxByJQ_z2Cij9J_z-ifiX9iJs_gqSg@mail.gmail.com>
- <46821acb-2db9-42e1-b93d-8b6d39f259eb@kernel.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=M6tzjKRJ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CI5e9VbV
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ACJZdkV1690736
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 22:39:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=0irt2JVoUcjvaIoAcVHgoP
+	Fhj7byHj/beXrI+kj/NxU=; b=M6tzjKRJ1lKXpr5qON/WFgt6xquIyVHz6SfhQH
+	rcsErQJDsLKjCGMrUn2SUKf9NcDztWYXBHQf8C6B8ntbxBP3lfUFx/3zp53T5xXx
+	x98JK4p4o7BVezJP9k0xgXzK4ZuJt7Jk7ob3KEDrPhvOclGUbzFy/QDSA2HlJ08A
+	qtjNcSmklDzD4A+2bGBMcjTpv5o02N2jK4ODAMcDMN1vdOf99dbOyFiQkxHvgzV8
+	9WGUmg0V6uj10msMTmGv9OA7ShnvqmTWozYj7J1e2fcjKRLOIo1V+JkFOtKC4i4S
+	hrFcCUzqC6Rjddur8D9I2AROVSFGsJzP9/DQTB7mH7A5dQVQ==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwkgw8hrb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 22:39:12 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1b3b63b9665so67425c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 14:39:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794523152; x=1795127952; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=0irt2JVoUcjvaIoAcVHgoPFhj7byHj/beXrI+kj/NxU=;
+        b=CI5e9VbVFcdcTTzvhoePS5UXqDXyZhZyaT356/iIYJ+QgpfYAhJSxohOu6eZCriItg
+         tpCnKqHiMAye0YDWzeqWmUN7gXN+vORhx0pG9C7oWF0cSIYu12iBr/cZLO1B7rTgZVs/
+         1e1/P3YYt6tYHeCEk2+QrCvQ1Otwt4QCu2S4Xd2VBfQC4zGLGOVL/JLJ8ZtEsZqXlQnp
+         bHKE+jyWVVB10lCHEtmbwRHS8GYbaxj/qH/O57w3L4XKW/nyFq3ldF8i49KhLCaAdBw5
+         1qdJNkmTJOMnBd/CNnua9wLUvhqI0ggKSNA6oRH5FzRbqjydqr+ncgXAqp286QqdTZlC
+         SDmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794523152; x=1795127952;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0irt2JVoUcjvaIoAcVHgoPFhj7byHj/beXrI+kj/NxU=;
+        b=T/15Zpm00NsahFwGq/GLR3Rhkm7nV5u4B3Y9GKk53CQN9qa7YNrl6sK37Tqs7R1+pM
+         xyWbzGRomouuMehL5Ciwf6f67r1t9yW8CtVU8bfShG8cqG/c/5ez18sBfUdPZtZMPKXL
+         p39q/ZD7f+Qu9iozRhgEIeqkKPAWWlVfLrZBn/vAjfCsiUaptbkSJ5WJGxkl1LoRn28V
+         uNE2M7D/E8F8jtwaTrcdwZAlQCxUTzxIJoIN4z+07pcH/C0CyXsxudO4gXJD39vPJqxt
+         1tEoe63lneoBcjWxyCmmTRO7D6wGrdzYeQrSqUMP5UEW2ZlzzJOSyR9JDkXRdcSs/Pcw
+         mxhA==
+X-Gm-Message-State: APuU4Z+/bQw8dZY3wAqle0QG9i7vZ1b2znAFFw14OqEVMSyiOBe/c+Tg
+	KkoNKJHyXYUTqVCLVNzeQ0d369/aV51H9hRXol5w6cUNnZ3R79zGWDea4IpFTq8WBtr5Ig8Uxug
+	qD7bwoCC1rBogn69ZR4jiL1U2xzEVkW5YXVDGWDuIBfyYAMvNCd+z/966+C7YNUa58jEY
+X-Gm-Gg: AYBFou2Pd9cBUE8lpa/93P2DSbG6P1g3oGBGCh6RlAb75kCbOFwuKMIa7lE4YUUMkEI
+	WHyFMQr4FjiBENSTaibf5yML5vGrkAMdWW8DfGJyk2lVsm0eM54CugbCwjhqawu6b8XekUFnw/n
+	BgujTfgvF8jx1sFNnnkrzlAmFDZsKceBreMXZFdEC0ggRlLhuXML1Hwya/L83L7FQcYqNM1TjsO
+	gPX35QN+q6CpBUBdVSyV3KqxgcR9SwOL3mzVygRG656yL8Y2F+G1VZ7dhcnT+F4wfiFNVggIyir
+	AOBYUEhM9gmJSz8gQD0WdgUyRcaYJPktAQhQbd09yPtycswtFt2gHjWrUDVtmMaDtAfKZZsR7YO
+	tiqGDvJ5IS0WG7UWS68/NJkSCM0XVwFsYBHVk7pqyG11NV3L5oCqlI2k2/DXuA54ilYgTTMZXqV
+	fk/4Hjyt9Pmw==
+X-Received: by 2002:a05:7023:c006:b0:1b3:a87d:a6b6 with SMTP id a92af1059eb24-1b503163eaemr788131c88.42.1794523151754;
+        Thu, 12 Nov 2026 14:39:11 -0800 (PST)
+X-Received: by 2002:a05:7023:c006:b0:1b3:a87d:a6b6 with SMTP id a92af1059eb24-1b503163eaemr788113c88.42.1794523151200;
+        Thu, 12 Nov 2026 14:39:11 -0800 (PST)
+Received: from hu-arakshit-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5031468b7sm2333496c88.5.2026.11.12.14.39.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Nov 2026 14:39:10 -0800 (PST)
+From: Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
+Subject: [PATCH v13 0/6] Enable ICE clock scaling
+Date: Fri, 13 Nov 2026 04:08:26 +0530
+Message-Id: <20261113-enable-ice-clock-scaling-v13-0-258dc817bd63@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,168 +113,193 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <46821acb-2db9-42e1-b93d-8b6d39f259eb@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAOI/9moC/3WNQQ6CMBBFr0K6dsi0QEVX3sOwqEOBxtpqq0RDu
+ Lsjezc/+S8z7y8i2+RsFsdiEcnOLrsYuMhqVwiaTBgtuJ6BUKi0lLICG8zFMyUL5CNdIZPxLow
+ gscFmqLUmbAW/35Md3Htznzvuk8vPmD7b1CzVD29WbFX938qXgIAHtZdD01Y96VPMuXy8jKd4u
+ 5UcolvX9QvD/vGQygAAAA==
+X-Change-ID: 20261113-enable-ice-clock-scaling-10505f466c08
+To: Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+        "Martin K. Petersen" <mkp@kernel.org>,
+        Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
+        Harshal Dev <harshal.dev@oss.qualcomm.com>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org,
+        linux-mmc@vger.kernel.org, devicetree@vger.kernel.org,
+        Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        "Martin K. Petersen" <mkp@kernel.org>
+X-Mailer: b4 0.14.2
+X-Authority-Analysis: v=2.4 cv=DNgacCNb c=1 sm=1 tr=0 ts=6af64010 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Exo_CllCKnlFIUbYcS8A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-ORIG-GUID: iUsJMJah3e22iItBkxCYyRUvlNjGm0tN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA5MCBTYWx0ZWRfX+K+6pBPMgnAb
+ li5nkEC3TN4sdbQLfm3JYSIPvEhyVG9K314atgqUunhewG3Fs95gYfzVLAYLcHMaAYOfUes3rN9
+ UsxSzjRJ03J8PXipszY86V8ySV2ZGGFWjcNbGdzWdYNqXui1JbYW52DB7UsrVyh/dYov3kaNpQu
+ dy6eWF1iAgGorh/C999A7Ip0boaUTJfhuCHrL3P1TH9lo+P0pmfq/rS97z1RMyP3n8MzHUUTQ2i
+ AAkVdEAgMTi+etdsIJhZGysdLhrJRJrjVmDt8INT8zA/Q1OCQImj0dvfRMb+F0ZFMdCPJSb48my
+ atXdrOjeCDy+xIUF/WmczgEo9PWctn19es0eJ/MJLo/EMtCr7a2sHYaaukGGL0F2v+a14wZajdw
+ YbCbQcDFCVuaBnNGr8flWM/pOOsPzHMHAqsM15iPvZDZAa0yYJfB+Qxg9tuah6eMqejZBGI0yko
+ FJ3GH63MP6SAdIWT+kg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA5MCBTYWx0ZWRfX8LkdpOucpvxY
+ L71C6/CnV4vHRHeUIszSZ1bZ09CAH2eUeSxB4yd0oyyvvvuTJpx9BVIz6hcCeyMlvdjhHZjALYK
+ /q8K7acWUT5DsSiuBk8RAhdonEeqbRE=
+X-Proofpoint-GUID: iUsJMJah3e22iItBkxCYyRUvlNjGm0tN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-12_03,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
+ impostorscore=0 priorityscore=1501 clxscore=1015 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120090
 
-On Thu, Nov 12, 2026 at 09:13:03PM +0100, Krzysztof Kozlowski wrote:
-> On 12/11/2026 20:22, Rob Herring wrote:
-> > On Thu, Nov 12, 2026 at 12:30 PM Bjorn Andersson <andersson@kernel.org> wrote:
-> 
-> 
-> (replying only to parts of the message)
-> 
-> 
-> > 
-> >>> Can the QCom folks stop doing that! Coordinate applying the series or
-> >>> take the binding and dts changes in 1 tree.
-> >>
-> >> I assume you're referring to "QCom folks" in the sense "any maintainer
-> >> touching a binding change related to a qcom platform"?
-> > 
-> > No, primarily you and the submitter I guess. Submitters should be
-> > aware of dependencies in their series and suggest how things are
-> > merged. Otherwise, it falls on you to care that warnings are getting
-> > introduced.
-> 
-> We all have been swamped with patches and Qualcomm have been probably
-> the busiest arm64 platform for months now.
-> 
-> for i in arch/arm64/boot/dts/* ; do echo "${i}:$(git log --no-merges
-> --oneline v7.0..v7.4-rc1 -- $i | wc -l)" ; done
-> 
-> qcom: 1016
-> freescale: 485
-> renesas: 215
-> 
-> Qualcomm SoC got one more maintainer, so there is catching up, but
-> probably not enough.
+Introduce support for dynamic clock scaling of the ICE (Inline Crypto Engine)
+using the OPP framework. During ICE device probe, the driver now attempts to
+parse an optional OPP table from the ICE-specific device tree node for
+DVFS-aware operations. API qcom_ice_scale_clk is exposed by ICE driver
+and is invoked by UFS host controller driver in response to clock scaling
+requests, ensuring coordination between ICE and host controller.
 
-Good thing QCom hired half of Linaro...
+For MMC controllers that do not support clock scaling, the ICE clock frequency
+is kept aligned with the MMC controller’s clock rate (TURBO) to ensure
+consistent operation.
 
-> > I would not care so much when there are transient warnings in next,
-> > but I don't want to be the one chasing them down. But AFAICT, it's
-> > always me. No one beats me to it and I'm not all that fast in
-> > noticing. I just compare all the warnings by platform for Linus vs.
-> > next with "gl-diff-dtb-warning -p arm64" from this repo[2], and look
-> > for things moving in the right direction. Of course this is all after
-> > applying which isn't ideal.
-> 
-> FWIW, I do test all Samsung ones and I look only at some of Qualcomm
-> boards, because there were just too many warnings to have a clean
-> dtbs_check for qcom. I do report them to Bjorn/Konrad [1], but that's
-> indeed only subset of entire qcom ecosystem. I know that a few other SoC
-> platforms keep track (TI at least).
+Dynamic clock scaling based on OPP tables enables better power-performance
+trade-offs. By adjusting ICE clock frequencies according to workload and power
+constraints, the system can achieve higher throughput when needed and
+reduce power consumption during idle or low-load conditions.
 
-The too many warnings excuse is about to run out.
+The OPP table remains optional, absence of the table will not cause
+probe failure. However, in the absence of an OPP table, ICE clocks will
+remain at their default rates, which may limit performance under
+high-load scenarios or prevent performance optimizations during idle periods.
 
-Here's Linus's tree ATM for qcom (I'd list next, but warnings have gone 
-up):
+Testing:
+* dtbs_check
+* Validated on Rb3Gen2, qcs8300-ride-sx and LeMans-evk
 
-     12 syscon@9a10000 (syscon): compatible: ["syscon"] has less than 2 items
+Merge Order and Dependencies
+============================
 
-https://lore.kernel.org/all/20261112-dtbs-qcom-v1-0-1978370c7cad@kernel.org/
+Patch 2 is dependent on patch 1 for the qcom_ice_scale_clk() API to be available.
+Patch 3 is dependent on patch 1 for the qcom_ice_scale_clk() API to be available.
 
-      5 usb@6af8800 (qcom,msm8996-dwc3): Additional properties are not allowed ('extcon' was unexpected)
-      2 usb@76f8800 (qcom,msm8996-dwc3): Additional properties are not allowed ('extcon' was unexpected)
+Due to dependency, all patches should go through Qcom SoC tree.
+ 
+Patchset v13 is rebased on top of latest changes picked onto linux-next.
 
-In the wrong spot or needs to be added to the binding?
+Signed-off-by: Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
+---
+Changes in v13:
+- Rebased on top of latest linux-next due to conflicts on the tip.
+- Link to v12: https://lore.kernel.org/r/20260824-enable-ice-clock-scaling-v12-0-09271f583dc6@oss.qualcomm.com
 
-      2 touchscreen@2c (syna,rmi4-i2c): Unevaluated properties are not allowed ('incell-supply' was unexpected)
+Changes in v12:
+- Rename ice_mmc_opp_table to sdhc_ice_opp_table.
+- Fix typo and remove redundent comments.
+- Remove caching of the core clock frequency as suggested.
+- Move sdhci_msm_ice_scale_clk() before sdhci_msm_ice_init().
+- Link to v11: https://lore.kernel.org/r/20260609-enable-ice-clock-scaling-v11-0-1cebc8b3275b@oss.qualcomm.com
 
-https://lore.kernel.org/all/20260921232738.3135429-1-robh@kernel.org/
+Changes in v11:
+- Include 20260530-add-opp-table-for-lemans-ice-ufs-v2-1-2b46d3ac37d5@oss.qualcomm.com as suggested.
+- Link to v10: https://lore.kernel.org/r/20260603-enable-ice-clock-scaling-v10-0-b0b728435356@oss.qualcomm.com
 
-But seems to be a hack, so?
+Changes in v10:
+- Rebase on top of latest changes for ICE driver conflicting with previous patchseries.
+- Link to v9: https://lore.kernel.org/r/20260525-enable-ice-clock-scaling-v9-0-c84613e9ce47@oss.qualcomm.com
 
-      2 panel@0 (jdi,fhd-r63452): "power-supply" is a required property
+Changes in v9: 
+- Kodiak ICE eMMC OPP-table entry corresponding to 300MHz is updated with SVS_L1.
+- Add 75MHz for Monaco ICE eMMC OPP-table.
+- Fix error handling and initialization of has_opp variable.
+- Pass ULONG_MAX as target freq instead of INT_MAX from sdhci_ice_init as it better adjusts the data-type of
+  the function qcom_ice_scale_clk.
+- Link to v8: https://lore.kernel.org/r/20260409-enable-ice-clock-scaling-v8-0-ca1129798606@oss.qualcomm.com
 
-???
+Changes in v8: 
+- Instead of scaling to TURBO in ICE probe, sdhci_msm_ice_init calls qcom_ice_scale_clk for setting freq to max.
+- Fix error handling in qcom_ice_scale_clk.
+- Fix error handling in ufs_qcom_clk_scale_notify for the call to qcom_ice_scale_clk.
+- Move the registering of OPP-table to qcom_ice_probe and remove passing legacy_bindings argument to qcom_ice_create.
+- Add OPP-table for kodiak and monaco ICE eMMC and UFS device nodes.
+- Link to v7: https://lore.kernel.org/r/20260302-enable-ufs-ice-clock-scaling-v7-0-669b96ecadd8@oss.qualcomm.com
 
-      3 phy@7411000 (qcom,msm8996-qusb2-phy): "vdd-supply" is a required property
-      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdd-supply" is a required property
-      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-pll-supply" is a required property
-      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-phy-dpdm-supply" is a required property
-      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required property
-      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a required property
-      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is a required property
-      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required property
-      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a required property
-      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is a required property
+Changes in v7: 
+- Replace the custom rounding flags with 'bool round_ceil' as suggested.
+- Update the dev_info log-line.
+- Dropped dt-bindings patch (already applied by in previous patchseries).
+- Add merge order and dependencies as suggested.
+- Link to v6: https://lore.kernel.org/r/20260219-enable-ufs-ice-clock-scaling-v6-0-0c5245117d45@oss.qualcomm.com
 
-https://lore.kernel.org/all/20261112192345.3962577-1-robh@kernel.org/
+Changes in v6: 
+- Remove scale_up parameter from qcom_ice_scale_clk API.
+- Remove having max_freq and min_freq as the checks for overclocking and underclocking is no-longer needed.
+- UFS driver passes rounding flags depending on scale_up value.
+- Ensure UFS driver does not fail devfreq requests if ICE OPP is not supported.
+- Link to v5: https://lore.kernel.org/all/20260211-enable-ufs-ice-clock-scaling-v5-0-221c520a1f2e@oss.qualcomm.com/
 
-      1 panel@0 (lg,sw49410-lh609qh1): Unevaluated properties are not allowed ('reg', 'vsn-supply', 'vsp-supply' were unexpected)
-      1 panel@0 (lg,sw49410-lh609qh1): "power-supply" is a required property
-      1 panel@0 (lg,sw49410-lh609qh1): compatible: ["lg,sw49410-lh609qh1","lg,sw49410"] has more than 1 item
-      1 panel@0 (lg,sw49410-lh609qh1): compatible:0: "lg,sw49410-lh609qh1" is not one of "ampire,am-1280800n3tzqw-t00h", "ampire,am-1280800w8tzqw-t00h" or 178 other candidates
+Changes in v5: 
+- Update operating-points-v2 property in dtbindings as suggested.
+- Fix comment styles.
+- Add argument in qcom_ice_create to distinguish between legacy bindings and newer bindings.
+- Ensure to drop votes in suspend and enable the last vote in resume.
+- Link to v4: https://lore.kernel.org/r/20260128-enable-ufs-ice-clock-scaling-v4-0-260141e8fce6@oss.qualcomm.com
 
-https://lore.kernel.org/all/20260614-judyln-panel-v3-2-07f4134441bd@postmarketos.org/
+Changes in v4:
+- Enable multiple frequency scaling based OPP-entries as suggested in v3 patchset.
+- Include bindings change: https://lore.kernel.org/all/20260123-add-operating-points-v2-property-for-qcom-ice-bindings-v1-1-2155f7aacc28@oss.qualcomm.com/.
+- Link to v3: https://lore.kernel.org/r/20260123-enable-ufs-ice-clock-scaling-v3-0-d0d8532abd98@oss.qualcomm.com
 
-      1 panel@0 (flipkart,rimob-panel-nt35532-cs): compatible: ["flipkart,rimob-panel-nt35532-cs"] has less than 2 items
+Changes in v3: 
+- Avoid clock scaling in case of legacy bindings as suggested.
+- Use of_device_is_compatible to distinguish between legacy and non-legacy bindings.
+- Link to v2: https://lore.kernel.org/r/20251121-enable-ufs-ice-clock-scaling-v2-0-66cb72998041@oss.qualcomm.com
 
-Fixed in next
+Changes in v2: 
+- Use OPP-table instead of freq-table-hz for clock scaling.
+- Enable clock scaling for legacy targets as well, by fetching frequencies from storage opp-table.
+- Introduce has_opp variable in qcom_ice structure to keep track, if ICE instance has dedicated OPP-table registered.
+- Combined the changes for patch-series <20251001-set-ice-clock-to-turbo-v1-1-7b802cf61dda@oss.qualcomm.com> as suggested.
+- Link to v1: https://lore.kernel.org/r/20251001-enable-ufs-ice-clock-scaling-v1-0-ec956160b696@oss.qualcomm.com
 
-   Undocumented compatibles:3
-     'jdi,fhd-nt35596s'
+---
+Abhinaba Rakshit (6):
+      soc: qcom: ice: Add OPP-based clock scaling support for ICE
+      ufs: host: Add ICE clock scaling during UFS clock changes
+      mmc: sdhci-msm: Set ICE clk to TURBO at sdhci ICE init
+      arm64: dts: qcom: kodiak: Add OPP-table for ICE UFS and ICE SDHC nodes
+      arm64: dts: qcom: monaco: Add OPP-table for ICE UFS and ICE SDHC nodes
+      arm64: dts: qcom: lemans: Add OPP-table for ICE UFS device node
 
-https://lore.kernel.org/all/20260921232609.3130272-1-robh@kernel.org/
+ arch/arm64/boot/dts/qcom/kodiak.dtsi          | 42 +++++++++++++++
+ arch/arm64/boot/dts/qcom/lemans-embedded.dtsi | 26 ++++++++++
+ arch/arm64/boot/dts/qcom/monaco.dtsi          | 37 +++++++++++++
+ drivers/mmc/host/sdhci-msm.c                  | 22 ++++++++
+ drivers/soc/qcom/ice.c                        | 75 +++++++++++++++++++++++++++
+ drivers/ufs/host/ufs-qcom.c                   | 21 ++++++++
+ include/soc/qcom/ice.h                        |  2 +
+ 7 files changed, 225 insertions(+)
+---
+base-commit: 6d582d78fad9d828e575ca0cdcff8ea47a77220b
+change-id: 20261113-enable-ice-clock-scaling-10505f466c08
 
-But probably belongs in this:
+Best regards,
+-- 
+Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
 
-https://lore.kernel.org/all/20261011-nt36672a-panels-v3-3-9ea238627f8a@minlexx.ru/
-
-     'lg,sw49410-lh609qh1', 'lg,sw49410'
-
-See above
-
-     'qcom,ipq6018-wcss-pil'
-
-Fixed in next
-
-
-So 3 unique warnings left without fixes in flight.
-
-> 
-> [1] https://krzk.eu/#/builders/102
-> 
-> 
-> > 
-> >> Do you have some CI/guidance/tooling for Vinod (and other subsystem
-> >> maintainers) to perform system-wide DT-validation when considering
-> >> merging a binding change?
-> > 
-> > This one is an ABI break because it adds new required properties. I do
-> > have some tooling that looks for ABI changes, but haven't committed it
-> 
-> because I haven't figured out the best way to deploy it. I think for
-> > anything that is an ABI change, the binding and dts files need to go
-> > in together.
-> > 
-> > I think it is time to reconsider the default of bindings go in with
-> > the driver. That works okay for new bindings as long as the platform
-> > maintainer doesn't take .dts changes before bindings land (also an
-> > issue). However, for cases like this, we need the opposite order. We
-> > need to figure something out because this is only going to be more of
-> > an issue as we get to warning free (and we are close).
-> 
-> We have been talking about this for some time and recent consensus was
-> that SoC maintainers can freely take such bindings when driver subsystem
-> maintainers lag behind. The case here is a bit opposite - driver
-> subsystem was before SoC.
-> 
-> So let's change the generic recommendation/policy? Whenever patchset
-> touches bindings and DTS, and the bindings do not need any driver
-> updates like they add only front-specific compatibles, the SoC should
-> take entire set?
-
-Yes. Platforms that are warning free already do that.
-
-I also think we (the DT maintainers) need to get stricter on handling of 
-adding or removing required properties. For adding required, delay the 
-binding change a cycle (or after dts is in next). For dropping required, 
-delay the dts change a cycle (or after binding is in next). That's 
-probably too much for any maintainer to check other than DT maintainers. 
-Or maybe add this to sashiko prompts...
-
-Rob
