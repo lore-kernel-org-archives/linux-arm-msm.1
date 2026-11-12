@@ -1,83 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.20
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794490766;
-	b=eUObc4W+TXcV8WM7yla/Pou4SA6yd75Eyru18VzugTt9on5I9VrnzeQAfwJzmNb9cw4V
-	 skNwi+yqvELs1lVO28vMmI9d0oQ4eey1DnJh/2jKK+oIUerXhF9E+se7Ah2Syd9dewh6/
-	 AsWysruA7gBlDhdsv2HIofZ6Mi9FzzQvMp4ws2ng9SSANlS2I6ma+f1Cnxb2dI2+EpGYT
-	 37+3ZPMAPeeShf5Aw8Vi7gKNzKO7hdNw5GkHMB6R5pIyxZHfUj9d3DnTQS+2XZx7lDRcX
-	 +4g6D+/innD4KvgYs6jzR6BDKkyJ05/2NePc357a2ZXInKxl9s3CocxcBjIGp8NWA4g==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794490766;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=6mTsU7SiJn/LCB9rHS17WTPqu/JpjhK0J6xpMHSVII8=;
-	b=vQVN7MzsN2oX0DDomRFg6kk6LZOeN1RKqIDQRl2oUsOCjQP22pZclNcRNGKLCxrBm0Uc
-	 6y4jb18yCRmsuGOnVirG2Uz3eSLowf4u+bAXBAiiO9JsEL4w40YLHV+gugGTC2l3L8VQG
-	 VEg/1VJpmtAiWTCqozP3PRwI9vBXzqH2i4qOsX5hvpaHG/gv05bdRBR8GJbmR90g6WbOT
-	 9j5mD5tJUtYxPktoa9fp3NJOSneGnbZ1x+Zm1rN1W1ll2KGPEXiRw+Kt1qcvitly8TnzH
-	 SPXiMLqeeVOKRipb7MdPDRvGQwZ40rLgwyPsxQlCufBW941tMoIvYSIIH6RoNZLqIeQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=GpLKvZTW;
-	arc=none smtp.remote-ip=198.175.65.20
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.remote-ip=209.85.214.179
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=fail;
+	t=1794490773;
+	b=EzAiwWmxHy91is5XjIYL7HlZJ2hBcEBYb82iTAKPBzDDXj56Zsr8pJXP3o7Zo4Ay+G8v
+	 YO9HgpOXuMhvdLnOXmX7gnV0aS2jJSY1tx8OrgWm78t33WjtaPc4CS2wO9tIWkxPMk4/S
+	 bpIbiwfYMmX9eVoGTXJid51Hk8ZFI6z6jL9H1ok78UnkqStbRvwo4Mj/icE95JBVMTvDK
+	 NI5sdPtmm7K6gssKqCOnChVUtdAhWHaXYt2kRyIFDIzwOMlwacE7yIvS+TtVW1h2x35U8
+	 OmyPEaOmjadpp27dMdAAeZZFwpatK4s0CK+tcHN7MCcyt41qSVHyqjYGNTwVZ79Q5LQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794490773;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=hinaE5bXyUrpJk+LwEFRwoOnfVOGtmBFwj0E2lD/oHg=;
+	b=bNG0RrUcXPK0MhBVBGG4FZrqeUEaaROfrWYxqnHneUhjVPBsibSrYcsRH4b6P/vSsTeP
+	 ktUCIy8XouXSbpwCUmJyXTi0rzvaY8sUdlUgdtym5txJEjlwfDZZ0CSV/pnK+YQLpsMFm
+	 7yuGAVKPzQYKaYFpb8gvwgUQgc9OOK37Qggrfn+90WgdDMrKenc74NQ3wUfOOeLpoH/oq
+	 e3LtLs1cmh61JAWxf9TLiUWVq1Q7gq7nY7FajtmfkH5rqnG0Wj5XrPPBgssfbpb4hI68g
+	 v+sQAkYlVwvfVTCprzlk+LBo8xm1crk6iE8nKkNEb5nBIJP3PZ/cZoy9YOFYsmjWxNA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o3+kfEWc;
+	arc=fail smtp.remote-ip=209.85.214.179
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FAF2606A31C;
-	Thu, 12 Nov 2026 13:39:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5FAF2606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 784F0606A8A3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:39:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 784F0606A8A3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=GpLKvZTW
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794490766; x=1826026766;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=SFwVMt/H0xErcXlhJS33OEJlSasnR5vPHpX9RH9wU5A=;
-  b=GpLKvZTWD7OyTv5fB62EcSB+Lv2cgaWBlUA6x94vRRvZJ/1K5yS2x/7p
-   7zQVhCBiOJQYdHgWUQScSsPjpjeeTJ0ahaih5NuR6e5MPb3zn0wQ+FOta
-   bWYiRVx3Hpd3889bOc9jTJA+txs5Eb/OUdkVY7c7EsR2+WZQJm8bj0VgQ
-   oRVXUv9N/FEz/d+k2NE+/IPsaJblVRPJas28F7i9Wqr7ofDleKe7sQq8s
-   xLNftvRfJuDSoDwwNMtJmEwVCuoGy4lG/YtWHJDkowBBZ1EaZBJU107hP
-   BOaIuP6yCXWAKSWzkDpiJvs0TNDAQqEUE/rmzW95dubKPSU3a/ypQDm+1
-   A==;
-X-CSE-ConnectionGUID: dgKHZlPqSi6tSNN0aDXF8A==
-X-CSE-MsgGUID: w7UZFzg6QCmUf81+x8cBTw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11963"; a="3305821"
-X-IronPort-AV: E=Sophos;i="6.27,209,1787036400"; 
-   d="scan'208";a="3305821"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Nov 2026 05:39:25 -0800
-X-CSE-ConnectionGUID: tpYu0zSdRsWVI3EnQFrG1w==
-X-CSE-MsgGUID: SrVBhbs8TpuaatP+Ljp65w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,209,1787036400"; 
-   d="scan'208";a="8485126"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.6])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Nov 2026 05:39:22 -0800
-Date: Thu, 12 Nov 2026 15:39:19 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, kamal.wadhwa@oss.qualcomm.com,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Subject: Re: [PATCH] thermal: qcom-spmi-adc-tm5-gen3: move hardirq actions
- into threaded handler
-Message-ID: <avXBhyKMlqaLUeGQ@ashevche-desk.local>
-References: <20261111-adctm5_gen3_hardirq_removal-v1-1-536ed503396c@oss.qualcomm.com>
- <avR6cHb6ZUsDzIV2@ashevche-desk.local>
- <5c879271-6e88-4683-a280-eef292c442ba@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o3+kfEWc
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2ea7190aea1so18145435ad.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 05:39:33 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794490772; cv=none;
+        d=google.com; s=arc-20260327;
+        b=SJP/QuPhHhbKK4Sz+hEQcgxX8QCAsGaHfqZEVtmJzLIbsiFuoPrwdrgCksW7epqolM
+         wQlYpLdhaeNeShnSeDFANYW91Xil0x9b6S7DZA7iKIRzi7ibU8sfoARrdhl1JfwB4ydN
+         DgvTGFmChw1UhNLsPeK2SW0jy/S8m99n3ffUQlWwv5fk0bg4sMAMO35bVV0QrGr9GxbP
+         MHmSy52L3JR66Tstv8XkJjbG9UTE5RXs9dHt+fh3D96/KK6v82tyQaEe5X0yMuKRoNlk
+         xTUuh8G+6oAq4Eu7FEzkWDLgRUzYiYzplbcbTxMDoHXGP7SzDZ4h2cGWJGw86/5qWA7K
+         Ifsg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=hinaE5bXyUrpJk+LwEFRwoOnfVOGtmBFwj0E2lD/oHg=;
+        fh=FF2AvpVyQB2TWmS8upOD2qyQ0Vv5nWbt3bx1sXMqdG0=;
+        b=hJxG6Gxgx5NNCicaqhR1lCRMkaOh7tyfFb08YS7TOyn0IchyZwvLVvLpSxqgJuVqi/
+         iKahc3ES6+Inx6NntVL8IVAmc+Zl8HL42cMPCKBTLCq/dJnHppHK2VNVpLKaLz5t3KHr
+         o85n93W8V4XpuWoM4XfPk1sbFvUwpbrrZW7Hov12AoC5LqUkwHDRkBPbw+8mRR6BNZga
+         kgVnapLQ6xIEelt/dy7t73P3RTWwzIzg+WdZGWWwiG/iaVMttHSaFizUTCbHg9VaxECu
+         X1qyhrSvu4qCPq7OPRdW3Fub5a7+BFtkNjVmkN/ewr7v6JEQk9Nkm0RJlAlzUgz1+mk/
+         bhWQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794490772; x=1795095572; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hinaE5bXyUrpJk+LwEFRwoOnfVOGtmBFwj0E2lD/oHg=;
+        b=o3+kfEWcRSjRpnaVC5BXZKuL2kXjIQHclfzpt6+dHbhdh4Q6hf9C3pmuQuds+9EpGv
+         XaxNNfh0D9MQ4cnsO6NytlHcJUL0RE6lWpqnrCQ+3QkxlmdR++71qXfGEXWn+N6dngcb
+         bwAgvGl+3PYQ0cvL7dvepdIKzygBCUJqWR5ktSitplquzfJdrhZBFAF6oeC0H+IQ3zMh
+         yHqyDIYw1v3VnagA0ZNV3r0N31Qb97+qe9VWSSm+I+AWbGmhoty5fvU1SQSIDm7H+bkg
+         /ahGhTUYTNYcBepjiuZOI6JrH+7kYfWkSsHHi+vRV67EhJrWZUT04BfCTjUKF4RYk6uo
+         InnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794490772; x=1795095572;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=hinaE5bXyUrpJk+LwEFRwoOnfVOGtmBFwj0E2lD/oHg=;
+        b=sgI1UZBHIReGXYhBNz+eZSC95mgZVIsQWPlPCPUhwaPD8vWRnAccDVMg0Yd5qcQeJl
+         DOC3YvoSMKCp0eRetCkfCT/864inzG+Hsflxx8lSQIAO1WvdtWDF98FrdRSBXY2SauEQ
+         RJ6/i3gYuo0f8AeA2XuxVWFgtyAP2YxubamwdNE0dKMWUQKeALQZ7VsEzYh1GnBlRKDU
+         mFN3LQ49vnia4MqK0gBvfc5Qwn4POsucchEPENtPEE02vvy3votjUANLOz4KDGxd0b0f
+         ffJ1uont0RsWwt/GpiC/RqQvru3EAfnlAQE0DhUpPdicfRSfZkhQkizkTIDeHla0GhYq
+         b0tQ==
+X-Forwarded-Encrypted: i=1; AL+hErF3iEDGS72GjFujs8Hw3le1rbhDPEdyls9Pt9or1khkq9GWVyoFXouNyyAvSi9bEZeC0RAfZNUhywUg35MZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z8lC/QFZdBxc4DGGM6D12ILNH2ItHvthVpciGt72/RvKmk4TbtI
+	wOyJjO4b8/Qu1hUaODe+f/x5YIShbg9ONw+hoVYm7y4Dwywu28h0lmRMA5wbELr+vFgpPwPYL9q
+	DjyT42PLAcb3IYvfi3ftsvrE7YvTg6A==
+X-Gm-Gg: AYBFou0vgkXmdxsq8Kzqxbe9GDTuQ/RVzJZ8bvCpL1fk16C/pBBbksnqE5dhLg3gpRD
+	Vbe+yJUrjTanyRHiKg0qnYSF46W3K+sa+2u90Q3wcF2+AQeIYVIQ+RqXtKll+dXGKA+CVPW5cRW
+	iWO+mIUb+5FfWxPJ3oUOGIWNCSYcd94vunN1efnPeWVMcBVHctFchDzYikbH8OkJ5LF0qMgD2l+
+	FMYSpMNp83kiK6vTQ3CMt9aqMXfRqyICyRX+P1XZ/fPdRD0TzkIMWrKaf7wPaaHuK5HdPv/yzP6
+	/q2mS/EUHZ8m2e7VBEux9cfO4wG1x3ADY/ays1n85E9dgPO8GMwZ3Boe8LkB3AdynQC+7EY9lwy
+	WEzEo/QCUmH8RQzlPpvIPOUr+Ab7qxAIRWkJR
+X-Received: by 2002:a17:903:3c2b:b0:2e9:723a:cf30 with SMTP id
+ d9443c01a7336-2edd747589amr58537755ad.2.1794490772460; Thu, 12 Nov 2026
+ 05:39:32 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -87,65 +103,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5c879271-6e88-4683-a280-eef292c442ba@oss.qualcomm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+References: <20261111-m52xq-dts-v2-0-063289405882@gmail.com>
+ <20261111-m52xq-dts-v2-2-063289405882@gmail.com> <20261112-sophisticated-peculiar-husky-c8ce51@quoll>
+In-Reply-To: <20261112-sophisticated-peculiar-husky-c8ce51@quoll>
+From: Asdlerto Korry <korryasdlerto@gmail.com>
+Date: Thu, 12 Nov 2026 15:39:21 +0200
+X-Gm-Features: AclHuK9wD85pxbo8x4o0sO-zJHkPTBWQEPCcLtvvrU2Ak_t5O0goATrr7wKH0Tw
+Message-ID: <CAARotkfQxp0xE_XnixLeRLrcdrWx2PgC78BKv46e2NJiVnmmBw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] dt-bindings: net: nfc: samsung,s3fwrn5: Add pvdd-supply
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
+	David Heidelberg <david@ixit.cz>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	oe-linux-nfc@lists.linux.dev, netdev@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Nov 12, 2026 at 01:54:13PM +0530, Jishnu Prakash wrote:
-> On 11/11/2026 7:53 PM, Andy Shevchenko wrote:
-> > On Wed, Nov 11, 2026 at 02:12:01PM +0530, Jishnu Prakash wrote:
+Hi Krzysztof,
 
-...
+Thank you for the review.
 
-> >> -static irqreturn_t adctm5_gen3_isr(int irq, void *dev_id)
-> >> +static irqreturn_t adctm5_gen3_isr_thread(int irq, void *dev_id)
-> >>  {
-> >>  	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
-> >> -	int ret, sdam_num;
-> >> +	int sdam_index, ret;
-> > 
-> > Was the variable rename so important for the fix? Can we defer it to the later
-> > cleanups, if ever needed?
-> > 
-> >>  	u8 tm_status[2];
-> >>  	u8 status, val;
+Who will pick up patches 2/4 and 3/4 (the s3fwrn5 binding and driver change)?
+Should I resend them as a separate series to netdev with the net-next prefix,
+or will you take them with the tags as they are?
 
-...
+Patch 1/4 and 4/4 are the Qualcomm side (arm,qcom binding and the DTS), so I
+assume they go through the Qualcomm tree separately. Please correct me if the
+split should be different.
 
-> >> -	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
-> >> -	u8 tm_status[2];
-> >> -	int sdam_index;
-> > 
-> > Okay, I see the reason now why it's done, but I noticed no mention of this in
-> > the commit message. Also it's unclear which variable is used more often and
-> > what is the real semantics of its value. Is it number or index?
-
-> > With all this
-> > in mind, please at bare minimum elaborate in the commit message and, if it's
-> > actually a number, replace the other part instead.
-
-^^^
-
-> In both adctm5_gen3_isr() and adctm5_gen3_isr_thread(), we needed a variable to
-> store the index of the SDAM whose IRQ was triggered. We called it 'sdam_num'
-> in adctm5_gen3_isr() and 'sdam_index' in adctm5_gen3_isr_thread(). In the rest
-> of the file, it is called 'sdam_index', so ideally that same name should have
-> been used in adctm5_gen3_isr() too, as it is more accurate than 'sdam_num'.
-> 
-> As I mentioned at the end of the commit message, I just meant to drop adctm5_gen3_isr()
-> and expand adctm5_gen3_isr_thread() to include the actions formerly done in
-> adctm5_gen3_isr(), but I see the diff makes it look more like I modified adctm5_gen3_isr()
-> into adctm5_gen3_isr_thread() with a variable rename, which is a bit misleading.
-> 
-> I can add a line in the commit message to emphasize that 'sdam_num' is the same as
-> 'sdam_index' if you think it helps.
-
-Yes, see above.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+Best regards,
+Asdlerto Korry
