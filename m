@@ -1,93 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.43
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794452445;
-	b=Pb3LSzeCyD+JGL0W5RBi/M/FUAqzh9nMyNiUtE9CJyTANmH+DHmr2V3pOcxRX69sdjNC
-	 3Coh6+W0Yif1b/Q42KsqqenolkzfhZcmix1o3zeH0d1+tOPa7qZ6YOlp01xvft1/BflQx
-	 6etWm73xjHKOR/uQhTmB1hIdiCja+PwrKLS69lNdLPBCtjt+iQtjbJSOvkdZNINMEP73n
-	 zJ9FXLnX+82h/DGJNJu50XVUmB5cCAdrSKxEcylKYfnyMuIBHK4r09Gj61G5v1PdN897u
-	 8/rkLkKzP8oOzbFnPxctpfl7RRZjJ3/bL/M0bkdYbTE19iuNlZfTO+f3jA0KDA+qEuA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794452445;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:Content-Type:Content-Disposition:
-	 In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=n5C/jtSJ4hNFqVai0fu6OYmHh1O8vcx2s7ZB3WwXtq4=;
-	b=5DM5TG0LPKvexPyvKIo0Dw8f3fTZseZCf4H/Z7EeM+UAvSO4f79HOPlHtBGy2n1xgO5W
-	 DAMqYjls35juz0l6XjmdRwv8vabNF+e1uruKIOMHsLtfu34Ga0gmicx4p6sjXKT7aGyn9
-	 YrAMSoRO9kAuqWIBU4RUeTcgVUe1DJE62xNHtr0IMeFzBomQr8dcPmRDyn/bkprJy9hai
-	 Z4GDs3bVHHxDwAxVWJ1oN4297dmaePJgsv3UTcROjJMYSwSO8eNguVczSpz+wXZzw15DO
-	 sh05HSTkYqX/t/V5QDtZtDrgTpNck0PLcQec8pjK3LL6GuFldXYxHC+wGqyPaNTdrqw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.nxp.com;
-	spf=pass smtp.mailfrom=oss.nxp.com;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=JkjJUxMe;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.43
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013043.outbound.protection.outlook.com [40.107.162.43])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794452510;
+	b=QZ1pPVjfdP36ImcaqiF91ifxD3tLoo4G2wnQBKbsVtDWrZDXBdKvGm/tTO2flgIjOV4h
+	 7OixNMJ+TEA1/B9S6hEjYjc9WswrB1juwQq7vSmJZrh8T+yp+qlew/XqUSCFVGK6xhFFp
+	 rNAgdXmo0IpTPyl7B7OJOkA21prpzyg9+9qrZboMgCccvT70+XyuH2e7cp8mTiCtjTEMH
+	 cXNfrEivVEFHg1QFVy7TJfy9spKM2Q2mKOqa82o7y7Vyk/4viV3qpVvf22xlT0+LyoyBB
+	 lN7wZU6GiBmOFVg6NEe7vfdSNjHZrKdRr+JT0lPJ58mPJzyMwb3vUu9lEDWYgma0OBg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794452510;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=GFlYTaZ/DTPqn5NM9gQvna8OY4eihfNgKjvdWrnQAxY=;
+	b=OG+E7JcGpWnUQFUPgtpl24J7xPj8oLSPz3Ii6n8DeN9DjQu7UE1NsZTdjHLZSM8+MijO
+	 1e9o/zzsxuSZVmKiXRjn6KaF5wdGLdb5EK1kpnzlQiu5kVepkaz+R3K7PM943HQaPkGtX
+	 qmenMk0Uj71dN7FUpsX2hSEWZ7T6U3nJyWicQQVMPJtdqbHpG1YWwSMqarAkAemy+3Cam
+	 5PQyQyDgo3ks7pVNqcvm34KOzO4nwNOcCSb3G4E23O+aVq+hGiDkzGTd5szUxJxac7wI4
+	 2z3GfaMqLH0+3IMfqAIMvkNLaVXU0AuzRZ6gL6TU+J/Kg7PoqdmCG5oDoLgiz5v0yMA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IE8NhPF1;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UxLDpPDv;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93EAF606A321;
-	Thu, 12 Nov 2026 03:00:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 93EAF606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 369A7606A326
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 03:01:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 369A7606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=JkjJUxMe
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q3yyUO6oIIpoNDoNOw0WI+h38NoAp9GBlChwYHapFyDCE9IWAJF/EdiAdNZlo9O7/hTgHueZvSMKRYBt341izyARW6abBdozjR8rK6jQ7NvS0oKjNC1Ln9Y40516IHT7W5O90qFAdG406nGdMaQSbmsKJhChlq25DAbfMyRz81t2ePEOxLo2E0WCJfT+QlQB2AblGZW+9zF5Adv3kB92XST3oLNQdDv+UBjdFEzy6bmzhJe+Ai4GHHhF5DUHKmCcO2nGFO7rb3cGRYgxIGa1Rr6AgInIlUOTQ2U0UnM4IAEz/Dz66mzdtFdlSfL+4+ms84ntaIktEXe8CbhFm78FiQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n5C/jtSJ4hNFqVai0fu6OYmHh1O8vcx2s7ZB3WwXtq4=;
- b=jNQD6dqTsyHLVn2QQTEmQwwW7jsSJXu4yB3RJar+j8BUCembPRxQ0L0EyBFQC/THIV1IYKJFEFwErVmuY7I8MSg6oRd4f079m7ZZwEQZGvQFhQnyPi9T331CE2ZCLg3EtT4x5jmL8U3KpEBP25VFfTFMAnGHoa+UwYKx/PAgZgIUCR2dNdzBz/jyc0B1HMLBoNwcT3cJ8RKp2giVmKoHcJIGChZsOaqWfMkZ/1hREGUuEDHjAC+BlGkZNCX0oEL9a4PdKCxroyYsx+/X6iAoXp3uHeZjHqgPwyeyl6j4lfyw0i20uCT9LiPYOa8gqKQlNX36u2/8Tle3ieh4CpDH9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n5C/jtSJ4hNFqVai0fu6OYmHh1O8vcx2s7ZB3WwXtq4=;
- b=JkjJUxMeg3pmjb1dOOZuq2pAz00nsgjH0oPlPoavLQtmaBV4tehe9o8naTL66uYrF7NWyBw4zlae6NRx2t1ZGo4DgjZxNzYxiHldpLY7GPbJaRLS5fZ9/sZ0XtimLss11dFNC0cHWKdLiIY57L596Ep8ucewHMTqLgXyyN1TfDgHAb3QKlGrQGaDdPzOkeALct0vfRNf3d32sPw8JjVGDRa/Yme2STuKx+R+gXvjKLbJfIEAewK2aGNY6pOwUyi640rMu82qvksKJPw+ip28Gf2H7mdrbVRmD/ZLhZ61l6vn6CeIwN9GclZUMdl+lIHx3B1pLA5McUYhd75sB6rvWQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com (2603:10a6:290:76::14)
- by AM9PR04MB8954.eurprd04.prod.outlook.com (2603:10a6:20b:409::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Thu, 12 Nov
- 2026 03:00:41 +0000
-Received: from MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b]) by MI3PR04MB12438.eurprd04.prod.outlook.com
- ([fe80::c715:c32:8bb1:b70b%4]) with mapi id 15.21.0615.007; Thu, 12 Nov 2026
- 03:00:41 +0000
-Date: Wed, 11 Nov 2026 21:00:30 -0600
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Shawn Lin <shawn.lin@rock-chips.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-	Manivannan Sadhasivam <mani@kernel.org>, linux-pci@vger.kernel.org,
-	imx@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
-	linux-rockchip@lists.infradead.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH] PCI: dwc: Check the pme_turn_off callback return value
-Message-ID: <avUrzss_VTn5m3I3@SMW015318>
-References: <20261111041821.2259326-1-shawn.lin@rock-chips.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261111041821.2259326-1-shawn.lin@rock-chips.com>
-X-ClientProxiedBy: DS7P220CA0039.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:8:223::33) To MI3PR04MB12438.eurprd04.prod.outlook.com
- (2603:10a6:290:76::14)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IE8NhPF1;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UxLDpPDv
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AC2Zeo33607726
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 03:01:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	GFlYTaZ/DTPqn5NM9gQvna8OY4eihfNgKjvdWrnQAxY=; b=IE8NhPF1wvBH1YRx
+	1pJlvxUr4JzEIlPPTB8C4I28YPgzngJ4p2wa1tWyJY3ei+yzY6lgeLuKHu/kY+Hy
+	/0+w3EoW+sBxOIpFHQFWl5jDdOOTebm+2xHegXiBsbLtTTIOcIoJBeSqU3ekm6UU
+	cSAtVDK/jKmD2OdxW6zpP3j68K7AggCMsOWNvoaH2D+h5VnIcuUW5EPYXkS2RLaY
+	nk0xUrzS3ynz0q7OqBJa1u8Zp2v4AngESTB4U87pJRgHBZBv+/9l3VVs0vkvpSbJ
+	uaFuCkQRmmXzcBzdEvTgRtZ8EECBcr1QkANBXK2D1I3K3pLm07RZtBf5i07URELA
+	trhFxg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvfawn4gb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 03:01:49 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-934963b2bc0so784825385a.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 19:01:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794452508; x=1795057308; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GFlYTaZ/DTPqn5NM9gQvna8OY4eihfNgKjvdWrnQAxY=;
+        b=UxLDpPDv9sET3msrr37ETaSsEOgb8d+USeppPAB7UcBSO0cBwXv8H4LHe0qJKtLYDt
+         YRgw2oSkjBt9hh9CjoKS+s78QER34YEfsDEFGy9bUKHrLGhv74MUf/Ek9Yp1tNSistl9
+         +EDaK2JUKC2h8pyMYc83y2GOEVdYbIjUk9PKbo2QETVIigEcq2tCyNIFZ1iF5Hes6blY
+         leiE3e9O+XdYgF6TnvELIezegdoAo3yjHlWft32OeFZfv/ZJV2uG9A8a9tIadSJVZ9jW
+         WLZttaBIqUE/Q0CvFvDt/vsjonHg7RoKzoDfdo922jnRtz3iLEyJqFyrhtg4HGrhrZN2
+         7RuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794452508; x=1795057308;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GFlYTaZ/DTPqn5NM9gQvna8OY4eihfNgKjvdWrnQAxY=;
+        b=2xtC+UBNZjP7sPoQSEBH9oJY17bMMSaEqxcG/OBfu1DcoC7BM6C52TH8OCRCLpAPZH
+         gF/aFLVOgiGyOOnrM9G/4A0i/Ukp3+elxbHdstkcxtIS4gEWoVZgOJNGMI8pT4aRu+kE
+         ajW46zXunPVArrg0TzVp5USGyFXUnhoNs4nMC61+jY28aKjsHuiHO1YjBxk3wIgh5T4z
+         3VnaHLaDZ4WP+wVzlIZusqEofkgTeykCW3+5wndUooTMLso4kuOpnLpfOLmWn3gRP795
+         /yKbIOYrIsLnaB1uTLBMUTijqWKcnACS4qGiTunxEvqB7uJNm9DF6YwQLjNNscG8bYLq
+         3BYA==
+X-Forwarded-Encrypted: i=1; AL+hErGV9YRQIXWol/pMqcriJfEhfTczrNQig7ZKqNN+CgBKQ5DMfoR9i4TRbBOfsdVyIiAdXod1nn7dyI74Bs9x@vger.kernel.org
+X-Gm-Message-State: APuU4Z8M8XKDUDK/HVmcLHyTwqtHQGuFoIMTpCHI452uVa0135zXjaTJ
+	CD6lKvUjhUsEwva2aYVrdMYMgMhWPDZcaB+rWXDmpzOtuag4NasN5mz3tuvCSVDrQ+pp5ZMigin
+	nYp+AHUDwcwSJ0qezEibdtPGv8U7wNIldqQFkejsIj4c7LsPN0/SErMFKKdnXZRqBKV8b
+X-Gm-Gg: AYBFou2jFpDxtAH7jsBaTVqko6thWqRSeV5iLqJQaH32uO1jHg3aD5W9WO4GwnN/hFL
+	xP/dXMs7g37c3Wa4/gd+I8IVBQHFcjgwJ+x/2fGZN7+KxEHZaiq1F2xj0QK7DAOdpLXa5Pg06ct
+	MsPRG3wwradxjsWHi6yP6ihcUDIdyD9X29GbjSZKsoQkREw9NTFIfHrbOJlBa2+TrMbNf6ql2+N
+	jG3SxPZNYuq87xQn1+FEGsbNlJPbpdTjGOWH9H3f1jkfrBs6D33Cewa6lGmC0YXkoSN/+l3C/eS
+	jbzy2V8N2jfMVE7qhPsyH2wewxKqdJVziVGRp8nVXXlUCgyMsVJWCES9M5DDSoSpnWonkxewmXc
+	J6grOEaj8fOf7fbvErtki/Mf5zUPKPb8jmpkKwyBogGM3A3MJwAzAEkEn+9TjxIW7sA7SjWjgiO
+	pQ58u6ZOIQwjdVI7btLruP7IZgyq/F8YnsQh5GFA==
+X-Received: by 2002:a05:622a:1f8e:b0:535:1fe4:64df with SMTP id d75a77b69052e-556bf740b76mr71292731cf.12.1794452508113;
+        Wed, 11 Nov 2026 19:01:48 -0800 (PST)
+X-Received: by 2002:a05:622a:1f8e:b0:535:1fe4:64df with SMTP id d75a77b69052e-556bf740b76mr71292031cf.12.1794452507574;
+        Wed, 11 Nov 2026 19:01:47 -0800 (PST)
+Received: from [10.111.167.254] (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5550b451570sm65260281cf.13.2026.11.11.19.01.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 11 Nov 2026 19:01:47 -0800 (PST)
+Message-ID: <c7d46cf6-04d3-4c77-b628-046693004891@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 11:01:37 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -97,336 +116,336 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MI3PR04MB12438:EE_|AM9PR04MB8954:EE_
-X-MS-Office365-Filtering-Correlation-Id: cae4ca29-d5ff-4898-30cb-08df406922ee
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|19092799006|261022105027099003|261021121427099003|261021123027099003|5023799004|11063799006|261009223027099003|261102123227099003|56012099006|261028144727099003|261026140227099003|261022075727099003|22082099003|18002099003|261026121527099003|6133799003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	EaWZb4yRTbDR3qHmls18aAS3dlnbr8nDZsjYz3ocOuwNBl7arSPoBwY5oni+tHdkWLXFiEAQJTJFTvCbGm4i0VOSjCAs9KAp+6sexEhHa4ZOuQyVvJIPCI0NUxHhkg1nLu9S4iATkx2ojMhzkbu5CFAUok+VYmITZDnZkGYOFbLaf+gu66mqJCiyL820v1NKhMbB18V0JGW4YVba/mGX458eperFua9OTVHXJH+MJBhVRAV97Z5pDoi0SU+IvtU1XBAWjFBcBH22xotcCyC8Z1Ze7vESroVH2/il+87HTKKQB82lk0OCSwWU9ojROynTLgElXdbHtJR4c42ATAeoenawaYwyrXjk9Gy4HlwT4XhqU+8HyDaZsFRO1SldYHqEhBd9TLRjrnHt3q/Bcta3IurtkeSTz9lC56VxsrSRZmoxYPh+BoLlFzw3izV5Yyf7hWcu+nJjW8g2NhwyKJkUsXp0rNetAgxMrXp+TPuwKpYjZlcXISHG08eUrBMvFTAoKMlUVTeexy/xppe2RKPZDGp6tkMZ+lX80zFPG6TMkbvT3JUmv7JAMc+mdF9oRADzqrCM5ITFZrMNJhVZMe9JPS5ISRyPLmysMXqVMbRPG/MdtR0hRNSzk2k03wabTLb8VGxcB5pReKLOK31ukzR2vamowoPlY/pldn/5QFTAcvc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MI3PR04MB12438.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(19092799006)(261022105027099003)(261021121427099003)(261021123027099003)(5023799004)(11063799006)(261009223027099003)(261102123227099003)(56012099006)(261028144727099003)(261026140227099003)(261022075727099003)(22082099003)(18002099003)(261026121527099003)(6133799003)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?JQEf3ogBgmZbaoaFON28Kde/EWryKjO3cFxjl21aO1fKGjjZU7G6ZLtyqaw0?=
- =?us-ascii?Q?HVcNVV9CvG4mtYxuGnEeCWe/+m4+npRH/r55Qy8vBg/TWmyjIsEyKPA1OCve?=
- =?us-ascii?Q?40zFj6TcUvAOm4WlcPc4ZtFGlHs0+6IDw8OekoedNHrjQnaFioeTrhwa1wzI?=
- =?us-ascii?Q?lLSPb5zRUEPbYBVBXZg1ljHgO/GBj3GEe4e+8AMo3BPd4UB14C4KH8+jCJ6m?=
- =?us-ascii?Q?mlsBSXT/n9qLlPK6X6YhkjrXmRkLc0NiBjySSmIVHRIeEYxxAwPzIQALe6jn?=
- =?us-ascii?Q?iCHp0cDngVgESqyxKFnpR6vkoXVgs2EgcUS9OuwR1IqUpzWqqL8cOG+0Tjey?=
- =?us-ascii?Q?MM7dN8vkmLzAPZMV+ua6XVOrX4h+NMN52FIM6UR6A/UML3cqEMB73rdQhE7k?=
- =?us-ascii?Q?uhsLBhR/23Cck5GgxhsPsk+B4ev2ENTjJ1iFG5CtWuk+ttJkOssgk+g6F4fH?=
- =?us-ascii?Q?4bMr0ryU7wCKEil2NECukjQj8Nk7yobsnWPQlJ8mrodu7I440qL7bgjh1bco?=
- =?us-ascii?Q?p0SCcRmhD4WCTpY2BTcztM9FrjQntQxtVFaJJPj3eaXMsElgzrgWAQikAJxZ?=
- =?us-ascii?Q?HMheSoB6Nb/NxpCv+60niawLlWVNuB+Ysr/GupBPE3RR67K3VIF6u2N79wYo?=
- =?us-ascii?Q?jEWU5Ht7cgjTQgcSnCoA/zWbrDkGyD0A/VCbXWKx6e7/25NFKU5aaqEfHyYJ?=
- =?us-ascii?Q?kBepnoEGMN9xmjg0kz4sYGNBm+XO7ukmRRtwGwnYWW6bG8hBcr4N5O1ump87?=
- =?us-ascii?Q?7xYb9HleBs/hd6dmXa7f6Ez1RW5GO+HeKfY/ME4Qmoylj/+/MWJgEUtpCbjD?=
- =?us-ascii?Q?fZU1f/pxwveKMwn0tzTehWOg3A8GzfxKcs798Y9wOTlltXoP6g0wp8DtjgyD?=
- =?us-ascii?Q?tt6iaUjiI7uG+awQyLIRPf8qtgjRDo9f2/zTquK3/J9RAoPK0IZ96JPAc7Iz?=
- =?us-ascii?Q?D/lwlujOmF70Z9Srsx4BIZxBxDNslmhGrFyy8DhyyJBkMYexhMd3W2YybiZo?=
- =?us-ascii?Q?OpEDcRH9dM9OcUUGVg+jelYEdRRD68oCiUeZwNolJcNoCcQ+YkWBQJAcWOaX?=
- =?us-ascii?Q?mBspLa0Gvooc6gWdKiCk/WE2cU6u8SxyCjXhzA4A8mKnV+bTW8vpn5euMcue?=
- =?us-ascii?Q?W8NwH+4fkKpCNZ8mEqZ89AcEf2kJbO5wEubV4yHJ/q3z8BMLiWpfLRhEBVnF?=
- =?us-ascii?Q?IqkVbK69hGMspGwsiV1NQNyl7aUvg2N079j0U07QLmhyDzfBCRr9tYHNXz2Y?=
- =?us-ascii?Q?Zk+H54WYIBkAOCy5392Bmb0V3p+Ruc4oHN0W0o1Crryo27zdzNaOZOKlwU5T?=
- =?us-ascii?Q?suYFq5gUoQTvl/2Bc7BrdaniEa1Aue2JCNheGKDafL6cJmcQuwsDBKf2Zz6w?=
- =?us-ascii?Q?Hx5JMniTwNK9IYmLeWCOdbrqVeYx91Sqwm8Sf/0tvncpQMNgiSqqOjfMb+DQ?=
- =?us-ascii?Q?/fXp0ZwGwwT2twwkJ/uO9ufwwT7fnf3Z30eZ32Lm5QEJk1JARmdEGrKzUQ5P?=
- =?us-ascii?Q?Tku+yAeISQ720yQcDcSZR+VF8pLzUlo08mMg1lGl2Mh7xpG49PG7cRbav1pY?=
- =?us-ascii?Q?1T4B35Tchh1l/yKtIqoBQocq0wW1wuZ+qE+pnHLM2B+Z4XuVfdE+B1wf0sPZ?=
- =?us-ascii?Q?FoNZ9BR1pvqaWM608UAX2L9hAxOUYPgo4yGvJm/e+Lq2wN4i3B9JUMBq6+B5?=
- =?us-ascii?Q?0jBPSCRZyd2U+9rKJ6VA0SszTfAI83r4Ki+Jc/ohqO9ua9WVGhxVJMvYUlwE?=
- =?us-ascii?Q?aPcSzn2UgzNBc8Nuf3mLQ7dAHmQ9X+cK5Vlhu0YyuNqwEtXzcxRR?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cae4ca29-d5ff-4898-30cb-08df406922ee
-X-MS-Exchange-CrossTenant-AuthSource: MI3PR04MB12438.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 03:00:41.3493
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gVCFwLZMwlIEVy4jbAlfTgfyj2ndVezoHxfmla4XyicYX4gidmO5KTAcZa4DnhAKxaPToxSsVG7vChTTstRec5spMfdzr+Y967Olzgd1MNlFKAPKKqQEdv1tEW4PGRFH
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8954
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/3] dt-bindings: display: msm: Add INT2 GDSC to
+ Kaanapali DPU
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar
+ <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Krishna Manikandan <quic_mkrishn@quicinc.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Yuanjie Yang
+ <yuanjie.yang@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Joonhoe Kim <26rote@gmail.com>
+References: <20261109-msm_gdsc2-v5-0-4a3159b5e4b8@oss.qualcomm.com>
+ <20261109-msm_gdsc2-v5-1-4a3159b5e4b8@oss.qualcomm.com>
+ <20261109-mammoth-of-delightful-potency-b1ede2@quoll>
+Content-Language: en-US
+From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+In-Reply-To: <20261109-mammoth-of-delightful-potency-b1ede2@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDAxMSBTYWx0ZWRfXz11hFO2AICBO
+ pYhqF44OpaYWQnkaeCt6Qk+surYG5HdIo2USXE2VaMHrb78RFKQ03S6j+qprpJbeFEmwg4kbtkW
+ sdGuv958dzdtPU/pjF9hNLe5sJnbYPE=
+X-Proofpoint-ORIG-GUID: Q6opfSBZzmKAUYF9qgCk-LFkbz6YP1iG
+X-Proofpoint-GUID: Q6opfSBZzmKAUYF9qgCk-LFkbz6YP1iG
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDAxMSBTYWx0ZWRfX4wDUcfkDMjaD
+ R8UNGsTEkMP0IbGCbK7+TZNTOMJiAlGi4eWyIXddq50fTdUkCE8Yy2IN5ADCmbJxBEd6VI7913M
+ ABUODdvrPSyk+gGhxdP9rQT2M/AtpOv0sQEtC3OUQwvfBdk4yqcws0VW4Zt/vnSOqNRGfAnIel2
+ dWaPxpvvaAv+At+InRaGOL1S0I8yfxZV6TL4uPD5cjwTZ7K7RTm8yY/4R03OOscZOhqo3MpAnC2
+ e1QLRTmq+RQ+lvq5NIO4tQAqrilNV7nQTNmx0PbuiL6OZSir3V4WLqC7aNsxcdPUvUgzkJ1YY9T
+ zB9PRSRADBJe4f46SBhSiIs2yeMipeAneYRsGNEolvgtY35nTzCsZJ0xR6WyM82meNFfpIJNl9x
+ f0iNOc2ZIyXDnCl1YTgsKo12fXga1QT0X3PRsJBXddQFvySOTd24sKX3Ga9jV/13I+4bTyu2Hzz
+ Vp/ulqJZQQVLHUN47aA==
+X-Authority-Analysis: v=2.4 cv=CZadd7rl c=1 sm=1 tr=0 ts=6af52c1d cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=pxrNA04Hk7ndIpWV2-sA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0
+ phishscore=0 adultscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120011
 
-On Wed, Nov 11, 2026 at 12:18:21PM +0800, Shawn Lin wrote:
-> dw_pcie_suspend_noirq() invokes the optional host ->pme_turn_off()
-> callback but ignores its result, so a platform that fails to send
-> PME_Turn_Off still has the link brought down as if the handshake had
-> completed.
->
-> Turn the callback into an int returning function and propagate its
-> error from dw_pcie_suspend_noirq(), matching how the generic
-> dw_pcie_pme_turn_off() path is already handled.
->
-> All existing implementations return 0 except:
->   - the Layerscape PF LUT variant, which now returns -ETIMEDOUT when
->     the PME_Turn_Off handshake does not complete instead of only
->     logging it;
->   - the Rockchip host, which now returns an error only when
->     PME_Turn_Off could not be sent at all.
 
-I remember first version it is return int.
 
-How do you know PME_Turn_off have not sent out at all?  I remember spec
-require continue after timeout.
+On 11/9/2026 8:25 PM, Krzysztof Kozlowski wrote:
+> On Mon, Nov 09, 2026 at 04:36:35PM +0800, Yongxing Mou wrote:
+>> Kaanapali (SM8850) has two display GDSCs. CORE_GDSC supplies shared
+>> MDSS hardware and most of the DPU, while INT2 GDSC supplies the
+>> VIG2/VIG3/DMA5 source pipes. Without INT2 GDSC, these source pipes
+>> remain inaccessible.
+>>
+>> Describe CORE and INT2 as power domains of the DPU device, matching
+>> the hardware partitioning. INT2 only supplies DPU-local source pipes,
+>> while CORE also remains attached to the parent MDSS device because it
+>> supplies shared MDSS hardware. DPU performance-state votes on CORE are
+>> propagated through the genpd hierarchy to its parent MMCX domain.
+>>
+>> Keep the widest valid power-domain constraint in dpu-common.yaml and
+>> narrow it in each platform-specific binding. Require two domains and
+>> their names for Kaanapali, while retaining the existing single-domain
+>> constraint for all other DPU platforms.
+>>
+>> Repeat power-domains in qcom,sm8650-dpu.yaml because dtschema requires
+>> power-domain-names to have a power-domains sibling in the same file.
+>>
+>> Tested-by: Joonhoe Kim <26rote@gmail.com>
+> 
+> Drop
+> 
+> Anyway, where did it happen? Nothing in v4, nothing in v3.
+> 
+Sorry for this mistake, will drop it next version.
+> 
+>> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+>> ---
+>>   .../bindings/display/msm/dpu-common.yaml           |  3 +-
+>>   .../bindings/display/msm/qcom,kaanapali-mdss.yaml  |  4 ++-
+>>   .../bindings/display/msm/qcom,msm8998-dpu.yaml     |  3 ++
+>>   .../bindings/display/msm/qcom,qcm2290-dpu.yaml     |  3 ++
+>>   .../bindings/display/msm/qcom,sc7180-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sc7280-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sc8180x-dpu.yaml     |  3 ++
+>>   .../bindings/display/msm/qcom,sdm845-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sm6115-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sm6150-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sm7150-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sm8150-dpu.yaml      |  3 ++
+>>   .../bindings/display/msm/qcom,sm8650-dpu.yaml      | 34 ++++++++++++++++++++++
+>>   13 files changed, 69 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/Documentation/devicetree/bindings/display/msm/dpu-common.yaml b/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+>> index 3f953aa5e6949..c67199011f263 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/dpu-common.yaml
+>> @@ -26,7 +26,8 @@ properties:
+>>       maxItems: 1
+>>   
+>>     power-domains:
+>> -    maxItems: 1
+>> +    minItems: 1
+>> +    maxItems: 2
+>>   
+>>     operating-points-v2: true
+>>     opp-table:
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+>> index 9f935defd6b12..6d6391970d6b6 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.yaml
+>> @@ -125,7 +125,9 @@ examples:
+>>   
+>>               operating-points-v2 = <&mdp_opp_table>;
+>>   
+>> -            power-domains = <&rpmhpd RPMHPD_MMCX>;
+>> +            power-domains = <&mdss_gdsc>,
+>> +                            <&mdss_int2_gdsc>;
+>> +            power-domain-names = "core", "int2";
+>>   
+>>               ports {
+>>                   #address-cells = <1>;
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+>> index d5a64c8a921f1..bded43a34b87d 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,msm8998-dpu.yaml
+>> @@ -15,6 +15,9 @@ properties:
+>>     compatible:
+>>       const: qcom,msm8998-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+>> index 034d3df8d2470..6c1476a0faaf5 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,qcm2290-dpu.yaml
+>> @@ -19,6 +19,9 @@ properties:
+>>             - const: qcom,shikra-dpu
+>>             - const: qcom,qcm2290-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+>> index 8137618237ce7..3fa0f02f44892 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc7180-dpu.yaml
+>> @@ -19,6 +19,9 @@ properties:
+>>         - qcom,sm6350-dpu
+>>         - qcom,sm6375-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+>> index df9ec15ad6c3c..7703d9b017cfc 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc7280-dpu.yaml
+>> @@ -24,6 +24,9 @@ properties:
+>>         - qcom,sm8450-dpu
+>>         - qcom,sm8550-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+>> index a411126708b80..8e10f9e0d1769 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sc8180x-dpu.yaml
+>> @@ -15,6 +15,9 @@ properties:
+>>     compatible:
+>>       const: qcom,sc8180x-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+>> index dc11fd421a27f..9dafe1d827e13 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sdm845-dpu.yaml
+>> @@ -17,6 +17,9 @@ properties:
+>>         - qcom,sdm670-dpu
+>>         - qcom,sdm845-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+>> index 510eb6c193649..173c2f034241c 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm6115-dpu.yaml
+>> @@ -15,6 +15,9 @@ properties:
+>>     compatible:
+>>       const: qcom,sm6115-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: MDP register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+>> index 8cbf99f9fcba5..b8344ff8895ac 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+>> @@ -16,6 +16,9 @@ properties:
+>>     compatible:
+>>       const: qcom,sm6150-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+>> index c79b2d4428003..8e50942f3e1f2 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm7150-dpu.yaml
+>> @@ -15,6 +15,9 @@ properties:
+>>     compatible:
+>>       const: qcom,sm7150-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+>> index a88d22f30a602..b407bc3994620 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm8150-dpu.yaml
+>> @@ -17,6 +17,9 @@ properties:
+>>         - qcom,sm8150-dpu
+>>         - qcom,sm8250-dpu
+>>   
+>> +  power-domains:
+>> +    maxItems: 1
+>> +
+>>     reg:
+>>       items:
+>>         - description: Address offset and size for mdp register set
+>> diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+>> index aa0cf0ec5b93f..c3bf4e7ca1ffe 100644
+>> --- a/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+>> +++ b/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml
+>> @@ -54,6 +54,15 @@ properties:
+>>         - const: core
+>>         - const: vsync
+>>   
+>> +  power-domains:
+>> +    minItems: 1
+>> +    maxItems: 2
+>> +
+>> +  power-domain-names:
+>> +    items:
+>> +      - const: core
+>> +      - const: int2
+>> +
+>>   required:
+>>     - compatible
+>>     - reg
+>> @@ -61,6 +70,31 @@ required:
+>>     - clocks
+>>     - clock-names
+>>   
+>> +allOf:
+>> +  - if:
+>> +      properties:
+>> +        compatible:
+>> +          contains:
+>> +            const: qcom,kaanapali-dpu
+>> +      required:
+>> +        - compatible
+> 
+> Droo required
+> 
+>> +    then:
+>> +      properties:
+>> +        power-domains:
+>> +          minItems: 2
+>> +
+>> +        power-domain-names:
+>> +          minItems: 2
+> 
+> How did you resolve my previous comment?
+> 
+>> +
+>> +      required:
+>> +        - power-domain-names
+> 
+> Why adding this?
+> 
+> Best regards,
+> Krzysztof
+> 
 
-Frank
-
->  Its PME_TO_Ack and
->     L23-ready wait timeouts remain non-fatal and just log, consistent
->     with the generic path, which does not abort the suspend when an
->     endpoint fails to respond: such timeouts are an endpoint behaviour
->     and must not make the whole system suspend fail.
->
-> Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
-> ---
->
->  drivers/pci/controller/dwc/pci-imx6.c         |  4 +++-
->  drivers/pci/controller/dwc/pci-layerscape.c   | 22 +++++++++++++------
->  .../pci/controller/dwc/pcie-designware-host.c |  4 +++-
->  drivers/pci/controller/dwc/pcie-designware.h  |  2 +-
->  drivers/pci/controller/dwc/pcie-dw-rockchip.c | 16 ++++++++------
->  drivers/pci/controller/dwc/pcie-eswin.c       |  4 +++-
->  drivers/pci/controller/dwc/pcie-qcom.c        |  4 +++-
->  drivers/pci/controller/dwc/pcie-ultrarisc.c   |  3 ++-
->  8 files changed, 39 insertions(+), 20 deletions(-)
->
-> diff --git a/drivers/pci/controller/dwc/pci-imx6.c b/drivers/pci/controller/dwc/pci-imx6.c
-> index 38a59795f98f..643b591c789f 100644
-> --- a/drivers/pci/controller/dwc/pci-imx6.c
-> +++ b/drivers/pci/controller/dwc/pci-imx6.c
-> @@ -1575,7 +1575,7 @@ static void imx_pcie_host_post_init(struct dw_pcie_rp *pp)
->   * register is reserved, so the generic DWC implementation of sending the
->   * PME_Turn_Off message using a dummy MMIO write cannot be used.
->   */
-> -static void imx_pcie_pme_turn_off(struct dw_pcie_rp *pp)
-> +static int imx_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct imx_pcie *imx_pcie = to_imx_pcie(pci);
-> @@ -1584,6 +1584,8 @@ static void imx_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  	regmap_clear_bits(imx_pcie->iomuxc_gpr, IOMUXC_GPR12, IMX6SX_GPR12_PCIE_PM_TURN_OFF);
->
->  	usleep_range(PCIE_PME_TO_L2_TIMEOUT_US/10, PCIE_PME_TO_L2_TIMEOUT_US);
-> +
-> +	return 0;
->  }
->
->  static const struct dw_pcie_host_ops imx_pcie_host_ops = {
-> diff --git a/drivers/pci/controller/dwc/pci-layerscape.c b/drivers/pci/controller/dwc/pci-layerscape.c
-> index 475aea3ef58a..8bd879226971 100644
-> --- a/drivers/pci/controller/dwc/pci-layerscape.c
-> +++ b/drivers/pci/controller/dwc/pci-layerscape.c
-> @@ -117,7 +117,7 @@ static void ls_pcie_pf_lut_writel(struct ls_pcie *pcie, u32 off, u32 val)
->  		iowrite32(val, pcie->pf_lut_base + off);
->  }
->
-> -static void ls_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
-> +static int ls_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct ls_pcie *pcie = to_ls_pcie(pci);
-> @@ -132,8 +132,12 @@ static void ls_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
->  				 val, !(val & PF_MCR_PTOMR),
->  				 PCIE_PME_TO_L2_TIMEOUT_US/10,
->  				 PCIE_PME_TO_L2_TIMEOUT_US);
-> -	if (ret)
-> +	if (ret) {
->  		dev_err(pcie->pci->dev, "PME_Turn_off timeout\n");
-> +		return ret;
-> +	}
-> +
-> +	return 0;
->  }
->
->  static int ls_pcie_exit_from_l2(struct dw_pcie_rp *pp)
-> @@ -179,7 +183,7 @@ static int ls_pcie_host_init(struct dw_pcie_rp *pp)
->  	return 0;
->  }
->
-> -static void scfg_pcie_send_turnoff_msg(struct regmap *scfg, u32 reg, u32 mask)
-> +static int scfg_pcie_send_turnoff_msg(struct regmap *scfg, u32 reg, u32 mask)
->  {
->  	/* Send PME_Turn_Off message */
->  	regmap_write_bits(scfg, reg, mask, mask);
-> @@ -195,14 +199,17 @@ static void scfg_pcie_send_turnoff_msg(struct regmap *scfg, u32 reg, u32 mask)
->  	 * to complete the PME_Turn_Off handshake.
->  	 */
->  	regmap_write_bits(scfg, reg, mask, 0);
-> +
-> +	return 0;
->  }
->
-> -static void ls1021a_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
-> +static int ls1021a_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct ls_pcie *pcie = to_ls_pcie(pci);
->
-> -	scfg_pcie_send_turnoff_msg(pcie->scfg, SCFG_PEXPMWRCR(pcie->index), PMXMTTURNOFF);
-> +	return scfg_pcie_send_turnoff_msg(pcie->scfg, SCFG_PEXPMWRCR(pcie->index),
-> +					  PMXMTTURNOFF);
->  }
->
->  static int scfg_pcie_exit_from_l2(struct regmap *scfg, u32 reg, u32 mask)
-> @@ -222,12 +229,13 @@ static int ls1021a_pcie_exit_from_l2(struct dw_pcie_rp *pp)
->  	return scfg_pcie_exit_from_l2(pcie->scfg, SCFG_PEXSFTRSTCR, PEXSR(pcie->index));
->  }
->
-> -static void ls1043a_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
-> +static int ls1043a_pcie_send_turnoff_msg(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct ls_pcie *pcie = to_ls_pcie(pci);
->
-> -	scfg_pcie_send_turnoff_msg(pcie->scfg, SCFG_PEXPMECR, PEXPME(pcie->index));
-> +	return scfg_pcie_send_turnoff_msg(pcie->scfg, SCFG_PEXPMECR,
-> +					  PEXPME(pcie->index));
->  }
->
->  static int ls1043a_pcie_exit_from_l2(struct dw_pcie_rp *pp)
-> diff --git a/drivers/pci/controller/dwc/pcie-designware-host.c b/drivers/pci/controller/dwc/pcie-designware-host.c
-> index f531c5b51b3c..eb11556aca72 100644
-> --- a/drivers/pci/controller/dwc/pcie-designware-host.c
-> +++ b/drivers/pci/controller/dwc/pcie-designware-host.c
-> @@ -1249,7 +1249,9 @@ int dw_pcie_suspend_noirq(struct dw_pcie *pci)
->  		return 0;
->
->  	if (pci->pp.ops->pme_turn_off) {
-> -		pci->pp.ops->pme_turn_off(&pci->pp);
-> +		ret = pci->pp.ops->pme_turn_off(&pci->pp);
-> +		if (ret)
-> +			return ret;
->  	} else {
->  		ret = dw_pcie_pme_turn_off(pci);
->  		if (ret)
-> diff --git a/drivers/pci/controller/dwc/pcie-designware.h b/drivers/pci/controller/dwc/pcie-designware.h
-> index 0ece9c433229..9836ea9127bd 100644
-> --- a/drivers/pci/controller/dwc/pcie-designware.h
-> +++ b/drivers/pci/controller/dwc/pcie-designware.h
-> @@ -440,7 +440,7 @@ struct dw_pcie_host_ops {
->  	void (*deinit)(struct dw_pcie_rp *pp);
->  	void (*post_init)(struct dw_pcie_rp *pp);
->  	int (*msi_init)(struct dw_pcie_rp *pp);
-> -	void (*pme_turn_off)(struct dw_pcie_rp *pp);
-> +	int (*pme_turn_off)(struct dw_pcie_rp *pp);
->  };
->
->  struct dw_pcie_rp {
-> diff --git a/drivers/pci/controller/dwc/pcie-dw-rockchip.c b/drivers/pci/controller/dwc/pcie-dw-rockchip.c
-> index 525a26ee1d07..ea7ef0be1214 100644
-> --- a/drivers/pci/controller/dwc/pcie-dw-rockchip.c
-> +++ b/drivers/pci/controller/dwc/pcie-dw-rockchip.c
-> @@ -464,7 +464,7 @@ static void rockchip_pcie_host_post_init(struct dw_pcie_rp *pp)
->  	pp->bridge->broken_l1ss_resume = true;
->  }
->
-> -static void rockchip_pcie_pme_turn_off(struct dw_pcie_rp *pp)
-> +static int rockchip_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct rockchip_pcie *rockchip = to_rockchip_pcie(pci);
-> @@ -478,18 +478,16 @@ static void rockchip_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  				 status, !(status & BIT(4)), PCIE_PME_TO_L2_TIMEOUT_US / 10,
->  				 PCIE_PME_TO_L2_TIMEOUT_US);
->  	if (ret) {
-> -		dev_warn(dev, "Failed to send PME_Turn_Off\n");
-> -		return;
-> +		dev_err(dev, "Failed to send PME_Turn_Off\n");
-> +		return ret;
->  	}
->
->  	/* 2. Wait for PME_TO_Ack, bit 9 will be set once received */
->  	ret = readl_poll_timeout(rockchip->apb_base + PCIE_CLIENT_INTR_STATUS_MSG_RX,
->  				 status, status & BIT(9), PCIE_PME_TO_L2_TIMEOUT_US / 10,
->  				 PCIE_PME_TO_L2_TIMEOUT_US);
-> -	if (ret) {
-> +	if (ret)
->  		dev_warn(dev, "Failed to receive PME_TO_Ack\n");
-> -		return;
-> -	}
->
->  	/* 3. Clear PME_TO_Ack and Wait for ready to enter L23 message */
->  	rockchip_pcie_writel_apb(rockchip, PME_TO_ACK, PCIE_CLIENT_INTR_STATUS_MSG_RX);
-> @@ -497,8 +495,12 @@ static void rockchip_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  				 status, status & PME_READY_ENTER_L23,
->  				 PCIE_PME_TO_L2_TIMEOUT_US / 10,
->  				 PCIE_PME_TO_L2_TIMEOUT_US);
-> -	if (ret)
-> +	if (ret) {
->  		dev_err(dev, "Failed to get ready to enter L23 message\n");
-> +		ret = 0;
-> +	}
-> +
-> +	return ret;
->  }
->
->  static const struct dw_pcie_host_ops rockchip_pcie_host_ops = {
-> diff --git a/drivers/pci/controller/dwc/pcie-eswin.c b/drivers/pci/controller/dwc/pcie-eswin.c
-> index 5639666d5148..ed498601312f 100644
-> --- a/drivers/pci/controller/dwc/pcie-eswin.c
-> +++ b/drivers/pci/controller/dwc/pcie-eswin.c
-> @@ -269,7 +269,7 @@ static void eswin_pcie_host_deinit(struct dw_pcie_rp *pp)
->  	clk_bulk_disable_unprepare(pcie->num_clks, pcie->clks);
->  }
->
-> -static void eswin_pcie_pme_turn_off(struct dw_pcie_rp *pp)
-> +static int eswin_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->  	struct eswin_pcie *pcie = to_eswin_pcie(pci);
-> @@ -281,6 +281,8 @@ static void eswin_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  	 * the skip_l23_ready has been set.
->  	 */
->  	pp->skip_l23_ready = pcie->data->skip_l23;
-> +
-> +	return 0;
->  }
->
->  static const struct dw_pcie_host_ops eswin_pcie_host_ops = {
-> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-> index eba1b2cb30f0..9548c6568c82 100644
-> --- a/drivers/pci/controller/dwc/pcie-qcom.c
-> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-> @@ -1594,11 +1594,13 @@ static void qcom_pcie_host_post_init(struct dw_pcie_rp *pp)
->  		pcie->cfg->ops->host_post_init(pcie);
->  }
->
-> -static void qcom_pcie_host_pme_turn_off(struct dw_pcie_rp *pp)
-> +static int qcom_pcie_host_pme_turn_off(struct dw_pcie_rp *pp)
->  {
->  	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
->
->  	writel(ELBI_SYS_CTRL_PME_TURNOFF_MSG, pci->elbi_base + ELBI_SYS_CTRL);
-> +
-> +	return 0;
->  }
->
->  static const struct dw_pcie_host_ops qcom_pcie_dw_ops = {
-> diff --git a/drivers/pci/controller/dwc/pcie-ultrarisc.c b/drivers/pci/controller/dwc/pcie-ultrarisc.c
-> index ee844ff7ed55..493b6c68b42f 100644
-> --- a/drivers/pci/controller/dwc/pcie-ultrarisc.c
-> +++ b/drivers/pci/controller/dwc/pcie-ultrarisc.c
-> @@ -77,12 +77,13 @@ static int ultrarisc_pcie_host_init(struct dw_pcie_rp *pp)
->  	return 0;
->  }
->
-> -static void ultrarisc_pcie_pme_turn_off(struct dw_pcie_rp *pp)
-> +static int ultrarisc_pcie_pme_turn_off(struct dw_pcie_rp *pp)
->  {
->  	/*
->  	 * DP1000 does not support sending PME_Turn_Off from the RC.
->  	 * Keep this callback empty to skip the generic MSG TLP path.
->  	 */
-> +	return 0;
->  }
->
->  static const struct dw_pcie_host_ops ultrarisc_pcie_host_ops = {
-> --
-> 2.25.1
->
->
