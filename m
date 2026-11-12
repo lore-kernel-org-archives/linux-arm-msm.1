@@ -1,123 +1,192 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794490145;
-	b=YQkoOPMA81PWWCuesncEUTC0H+RFv3LBW5BgXg7CYevMhiO3P80D8KZj1m5i6MadQi1U
-	 l6J3SiGDN5beE/q3UIM9RyMtjZfKC6L79RDZMmVlWnDHDzdZNMNMJkwybOqc6pvsujDRn
-	 jmltbAunpCAAlJ1JHkCVSJEjwXLiOlu0btloRTAkLgUja6z7Q7Gf/O+toV/e8F1I+yf36
-	 ejAgTL8QGZS8/AXBWhk62Cctx/p0DtqLMieKntswoSt4WkEGksR857y4hErpU63dIMESG
-	 2i+1OFbKSSH45Iq5umbUx4hV1fBbZvpNZrYcCXheYcT1SbT6ECRLvj0s3oo5ei3KhvA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794490145;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=G3Q7qE6C41WE2EwR7PBZ31iNaUmwvqxyBhTAIBDkPGg=;
-	b=t/gpOdGZIiUpLK9l+4I8oQ8S0BLk7jZRCwiLpZA2o4N0G9att9vOQxdOORW8KshH7Ma3
-	 GXljpIJfM556BIgEoKekzUOrpuVsoVHl/lfx9WiRu+b860cCAzDlKJf/a0mBfSXkPMZZ6
-	 oBnzs8SZhtCHeaXOfiGkjc46I109jhfaEvlsHVN/CGesZ7ccb0CvnONtac+OJBmaH++A5
-	 pMoU2n8BLMlHTTLlbqTLDmlHoq0EvNEi/CLC3sSRj3X6YfKewCZdowL04svaAZcKUgD5o
-	 tQuGiTZRXJnZAcLDwmVbuuDZJIci3C+x4XaZ2NBwBJ/lr3VYyBipDiUpQjjNXjZIc4A==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aHKb5eDi;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=C0bQsvZc;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794490338;
+	b=dBbTQVg9FKf32B9WLZbZzJkJgNMA/1JgsqOpcf/dAoPjELJ5Zde8PYUXj7cnN4CFkQHn
+	 WIDutEH5+3/IDbxCu/8vprSm4kOl2X3F7IWXo/csz8q9fjxH/pK07bLm5hp50IYItjmIM
+	 jeuC0vDZKeHwbi4FUa4lGpHeV2QYgQfAsqZepA6vmDbWas4X7n0gH8tdri/D3z1lhxwSN
+	 J1r4PJDu0s82fuJYcs1HGe7y0m1ykckIPmq6VKwHhPW0UZ4tY0U1X1DEyfWG8QlLPF9CO
+	 hCHjOVUbzInGXzuapCpnzNd8JGVg/LQjyfunkLqUCnBVxyBRO+X8f8QJEraI8oVo85w==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794490338;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=r6ZiRY3FXltBOTurpbapfkXrVhZHo2axQtDyRtG/+Kg=;
+	b=eDwvbQvHfU7MNUk/ZOEuXN9ow8WA+f6iaHSQRBFsDq0Ypw+GnSCN8PcBX9jvLYVvYLGX
+	 NprXp1LdFV4ZgaVwyd3NIJyJYkwgL7qHpP0Bc4e8peh3i/XM94KMb9I5pSx2pUpxFcT57
+	 RySAjV6QyOebRnmgM4mtrT/VEVLfeAwyynvY5HOs7iPXuGGvx16jC9uBMNodXB7O7Thb4
+	 oaXKvfBUOuZ+wBzhMouGsWvK6MDAmKRlgwVXbrPx2K5OumlhQsPYG5BGeWQh5CJfi++1z
+	 4a+C1bRrSE/Tcr8U3EgEkQsN9g3nCa6hQqldMXszP1p2R+hZIW5FHjg7g7qhZI8AVYQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wy8GlGPy;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3911A606A33B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:29:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3911A606A33B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86C5C606A334;
+	Thu, 12 Nov 2026 13:32:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aHKb5eDi;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=C0bQsvZc
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ACB735Y3893195
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:29:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	G3Q7qE6C41WE2EwR7PBZ31iNaUmwvqxyBhTAIBDkPGg=; b=aHKb5eDiJpJBZRFN
-	dRbClG27Ae9U79uxSNr929uJvTBsePeZmwMFP3+eDEXVhbw4wfjnyg1JPybA8N3G
-	+qmEq+oY953GmpmWM8i/ru2g6aexJeAFwthKXyWr1FNvfS8mD2cM+QSA4YByU9yC
-	fAgJHz3YO/43bTF7pM74x9pKJSJGocSqZ+6Grq6M+tO45wV9GAaP6kALoHFrKjGc
-	RQRkQAv5mtOJYmxjtaiTu68Jg+5S7rfBPCbK2iPM9I/QzFFkLMqTldmoAfr577yP
-	gWO3W/JiqEAGig25TIPQaU9lp6XMR0r0BRmJAd5bh2vlj52oUhR/X/JY1Vw9Dj+5
-	0pxj2Q==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hw6re1rvr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 13:29:03 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5ecd7e10ca7so1047368e0c.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 05:29:03 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794490142; cv=none;
-        d=google.com; s=arc-20260327;
-        b=hn3wzXDwgAsRCQjHqmpT/eRsNOUZOCs3DpcnYZzOamYFJAbY1LWG/63IO5TOBPbGuI
-         SwsZdn0mju0Ehcbmr3fNmfsKzarLvdD2iVxWkYkz4vHbeQ+hQeu15khc9fExcNKoS0I0
-         4E0c1Pv+7ogAq1fN4tQpMiNtgKwQlvzYs42L3EGcJ9Foi5zonWe3DhahkkZWH1LWbOQm
-         PlIxtd58FN19r5H+4mMoByiIBAzibfSdlxJ0RiFvcGEz9EJyHGT500Os3y5gnAWiXfF0
-         aRwTpH7pd9Dp5cwesV5k66dQxtnSwEzH5gosMXn9RIYyBlStJw0mvsxAEYQ0yjD00Qj7
-         Embg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=G3Q7qE6C41WE2EwR7PBZ31iNaUmwvqxyBhTAIBDkPGg=;
-        fh=Rid0tZPZO8xo/68q6/34oUaVJg43S6uHEhIgjBwdt+A=;
-        b=fxhYtTg+YkAg4hiwwI8e9DfuukshmoNc2SkLwoSd/q5UhDq2FcQTnqBJQ4A7cOZioK
-         36N3N9tuHOel2pCG+AsuVyAZD1Y4uO6qg5wWxHPl+Ou+M6T7eDo8RnypZZeIA3yy70RI
-         c4Feno4tr6cCUhhW5zhSs647R8QHGvu2Xq72+WxFGEsJrFjrjT2eG9ZMfg+edCxf5npi
-         dY6tU58uztCxm/dLcLD6CdCdFQX0DC1qvk85kZwS/SGX7Wwf257ojjit3Wh82a9alEOI
-         OEcJvTZTyQ7vEdbox1rX6idnzHOGR20VGnWRNBHMAW9yxWdl+3or+bKD/8yqy2UX4fgn
-         18mg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794490142; x=1795094942; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=G3Q7qE6C41WE2EwR7PBZ31iNaUmwvqxyBhTAIBDkPGg=;
-        b=C0bQsvZcLSG3G+FUDQMbBHnANZDfLe6x7EFQosPHhfJoEwGw+dCy0doUj76ujJCuN7
-         qFP2YT0rIqESS7uHX4EIvDrKpM38V5KYPalkz3KRxuQ5rpmREUoLO/KxNFyQl4qs5nFp
-         FT5XTwxct1D/AyoyVX0Z9Oi8liXbFA7wMQ4CikjphnsJPKgMpwuZ3Zg0Ro+Dw3SiCT0Q
-         YHhBZv5mJhu+jmNd/ygNKwNoYmnMm0HiySlbWd4OCeTnzPANdeHhEe9pDqBLfOWAvzCo
-         v4R4fyAJAC6ZF2CmL1twKgXoZFgabVtsVRLt3GLd4LFFd2H+78oK8ZXW5jXr1Cst4brA
-         ViPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794490142; x=1795094942;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=G3Q7qE6C41WE2EwR7PBZ31iNaUmwvqxyBhTAIBDkPGg=;
-        b=gAX2DQJPfgh/qyNlwgkrz5z8Nt2A+F0MQgYZmSdyZYhQ0EEAerKvyKt9uJy1fXRZNY
-         UgeDc7u8T7iaS4BG0kKpjqNPzDhnIppJ2SqPiQc5+tq7HNuStlWUhBsMZFeeW7xaq/At
-         CvmjF2RsJjTtJDfVHYfYYMqo8HtWm1KAQ4pXRYQov/rOWdJ333muFqv3YRqFqgKwhnTJ
-         nBMONGMVkKjhJ6bYp8iLFDYv0QBwz1s0CwdhG8F2gFXoMWf7zqznmL07pVru09sdB5X1
-         y/t0b3pRV6I1vCXH8GcbdfI67non5gfpfJR9ZqQJbZQ5Sp+hHDoScmurMqlUAin09Coa
-         4fTA==
-X-Forwarded-Encrypted: i=1; AL+hErFi7tm9QoUtldL6toPPghBYmz1obxaobzrKODWTGPkdDVG9yrQhKWPgBhmSJx1XLwNgJOMJNiem25SDdaCc@vger.kernel.org
-X-Gm-Message-State: APuU4Z8+awIdaY7Lq6B3x4hpGhPspA7GPST6rDMZhFj3vhmUP01lxstA
-	CPKwGiz0ZLA7UV/SuCqCrakAprL1pwZnHb/PTIiAV5TfA3ygdIhFG/KB7nWO5cNiNcd4PGrSFuL
-	q3nkFiYjUdVzdz4x3Tof0vJlRu3Gq6vJyOSPUGLOsHlvn/RasSJhdFdqHZhnMMffo2BlFt0UpHL
-	bUnqtyP33Eb6PxWJtgLflU7xlqLRtU1C2xCXdjoFqAPwI=
-X-Gm-Gg: AYBFou3JAY3rQILp5WjRaFZJLf8juAhXiIvfDCYEV6XJ+qHAg1AsjhdSrjIWl9++S6Y
-	qm1iyrAhPF2MF8vMeV4oqXsD9BpKW/76LCmL+NirouEregtdVNIGiBN5f8mVPYKLHLJZXYn6J1Z
-	woZuUMQCt86622GFW+zqCmnuGcyi2FZ+nOxn8/L8eJhLUpur4qqMR1YNC34Q==
-X-Received: by 2002:a05:6122:e153:b0:5ea:d649:d1bc with SMTP id 71dfb90a1353d-5ee1c4862bemr2162810e0c.18.1794490142293;
-        Thu, 12 Nov 2026 05:29:02 -0800 (PST)
-X-Received: by 2002:a05:6122:e153:b0:5ea:d649:d1bc with SMTP id
- 71dfb90a1353d-5ee1c4862bemr2162804e0c.18.1794490141804; Thu, 12 Nov 2026
- 05:29:01 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wy8GlGPy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 227E61F00A06;
+	Thu, 12 Nov 2026 13:32:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794490338;
+	bh=r6ZiRY3FXltBOTurpbapfkXrVhZHo2axQtDyRtG/+Kg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=Wy8GlGPynbdgDuFWN722xaQwNevNtmZMEu0BUn6KzojIS2khSDKExmF3/xNVEdtLl
+	 eg+MrKwjSLQKSwX6KGIm3YdAvMrdpehkw2SEwXk5ITkqGQcbqHO3TpHS2uV2Am897/
+	 10/dPietBwB77+JGc07RnvIwJDQCioeWxjJS5APKr5zv02KG/1GvxTvI2xPg8l2nj9
+	 8rVb9kzBJiR4zpdkhL90XWtOFJlNgS29gDuGDeXDl5g8bz1BkEPEanNxu3FAmYKlIF
+	 uvbMxLrCr7ffOATZvlIHAx+q1QfPvgRNTBbsvWHfJ7CKtkZD92nfbknljW1KTrGL27
+	 2KvO5+WPab9Vw==
+From: Maxime Ripard <mripard@kernel.org>
+To: David Airlie <airlied@gmail.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Maxime Ripard <mripard@kernel.org>
+Cc: dri-devel@lists.freedesktop.org,
+	Janne Grunau <j@jannau.net>,
+	Sasha Finkelstein <k@chaosmail.tech>,
+	asahi@lists.linux.dev,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	amd-gfx@lists.freedesktop.org,
+	Aun-Ali Zaidi <admin@kodeit.net>,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Andrew Jeffery <andrew@codeconstruct.com.au>,
+	Joel Stanley <joel@jms.id.au>,
+	Dave Airlie <airlied@redhat.com>,
+	Jocelyn Falempe <jfalempe@redhat.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Dharma Balasubiramani <dharma.b@microchip.com>,
+	Manikandan Muralidharan <manikandan.m@microchip.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Inki Dae <inki.dae@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Seung-Woo Kim <sw0312.kim@samsung.com>,
+	linux-samsung-soc@vger.kernel.org,
+	Alison Wang <alison.wang@nxp.com>,
+	Stefan Agner <stefan@agner.ch>,
+	Ruben Wauters <rubenru09@aol.com>,
+	Tian Tao <tiantao6@hisilicon.com>,
+	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+	Yongbang Shi <shiyongbang@huawei.com>,
+	John Stultz <jstultz@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Xinliang Liu <xinliang.liu@linaro.org>,
+	Yongqin Liu <yongqin.liu@linaro.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>,
+	Saurabh Sengar <ssengar@linux.microsoft.com>,
+	linux-hyperv@vger.kernel.org,
+	Fabio Estevam <festevam@gmail.com>,
+	Frank Li <Frank.Li@nxp.com>,
+	Liu Ying <victor.liu@nxp.com>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	imx@lists.linux.dev,
+	Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+	Lucas Stach <l.stach@pengutronix.de>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Paul Cercueil <paul@crapouillou.net>,
+	linux-mips@vger.kernel.org,
+	Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+	Paul Kocialkowski <paulk@sys-base.io>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+	Jianmin Lv <lvjianmin@loongson.cn>,
+	Mingcong Bai <jeffbai@aosc.io>,
+	Qianhai Wu <wuqianhai@loongson.cn>,
+	Xi Ruoyao <xry111@xry111.site>,
+	Linus Walleij <linusw@kernel.org>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	linux-amlogic@lists.infradead.org,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	freedreno@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	Marek Vasut <marex@denx.de>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Lyude Paul <lyude@redhat.com>,
+	nouveau@lists.freedesktop.org,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	spice-devel@lists.freedesktop.org,
+	virtualization@lists.linux.dev,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
+	linux-renesas-soc@vger.kernel.org,
+	Biju Das <biju.das.jz@bp.renesas.com>,
+	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+	Sandy Huang <hjc@rock-chips.com>,
+	linux-rockchip@lists.infradead.org,
+	Marcus Folkesson <marcus.folkesson@gmail.com>,
+	David Lechner <david@lechnology.com>,
+	Iker Pedrosa <ikerpedrosam@gmail.com>,
+	Javier Martinez Canillas <javierm@redhat.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Alain Volmat <alain.volmat@foss.st.com>,
+	Raphael Gallais-Pou <rgallaispou@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Philippe Cornu <philippe.cornu@foss.st.com>,
+	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+	Yannick Fertre <yannick.fertre@foss.st.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Samuel Holland <samuel@sholland.org>,
+	linux-sunxi@lists.linux.dev,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	linux-tegra@vger.kernel.org,
+	Jyri Sarha <jyri.sarha@iki.fi>,
+	Alexey Brodkin <abrodkin@synopsys.com>,
+	Hans de Goede <hansg@kernel.org>,
+	Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
+	Alex Lanzano <lanzano.alex@gmail.com>,
+	LiangCheng Wang <zaq14760@gmail.com>,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+	Dave Stevenson <dave.stevenson@raspberrypi.com>,
+	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Haneen Mohammed <hamohammed.sa@gmail.com>,
+	Louis Chauvet <louis.chauvet@bootlin.com>,
+	Melissa Wen <melissa.srw@gmail.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Zack Rusin <zack.rusin@broadcom.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Aditya Garg <aditya.garg@linux.dev>,
+	Andy Yan <andyshrk@163.com>
+Subject: Re: (subset) [PATCH RESEND 00/83] drm: Switch drivers to drm_mode_config_create_initial_state
+Date: Thu, 12 Nov 2026 14:32:12 +0100
+Message-ID: <179449030440.677082.2648325087165275258.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261105-drm-no-more-config-reset-v1-0-1f58d1e33380@kernel.org>
+References: <20261105-drm-no-more-config-reset-v1-0-1f58d1e33380@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,177 +196,69 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261013-genpd-boot-performance-floor-v1-0-a765dc83e6d7@oss.qualcomm.com>
- <20261013-genpd-boot-performance-floor-v1-2-a765dc83e6d7@oss.qualcomm.com>
-In-Reply-To: <20261013-genpd-boot-performance-floor-v1-2-a765dc83e6d7@oss.qualcomm.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Thu, 12 Nov 2026 14:28:49 +0100
-X-Gm-Features: AclHuK_Jzud3kBQ84L6hP3FUx4DNmy2hVYEuv1wt_UfgwdBavzJj52wOLQfTyB0
-Message-ID: <CAPx+jO8krEjuMvgCP5Hy1V=oV+13dRj0WQkGCjUpN1cQn5XwNw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] pmdomain: core: Prepare boot performance floors
- before system suspend
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Ulf Hansson <ulfh@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: d4VPUUMkqPEVcA1haPdRijG4jNq_jtu_
-X-Proofpoint-GUID: d4VPUUMkqPEVcA1haPdRijG4jNq_jtu_
-X-Authority-Analysis: v=2.4 cv=NJhAaE6g c=1 sm=1 tr=0 ts=6af5bf1f cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8 a=CEUtmdPz_awSc1UMDkkA:9
- a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA1MyBTYWx0ZWRfX4WYXPGusYWYe
- 5BnfhkRty2/egOTOsKgBtPOMvykDg0YZ8ZVc4wGEKPTQhDEmTbMr/uK4tKXQC5BhfqZxQm4tvtd
- jHCOLkX6W/wnAQe4TDj9guKFv0ImCuA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA1MyBTYWx0ZWRfXyv+9W9euL+b+
- rY8NWr9O74ChUii607/tSwtylWK+x3n05J6xZZOMaUWA6HGw/T/R+7tczA/2uU6+JfjsO0T/EEf
- 22fZm9khqdn43RRItnkQzggDfRWxrLq8v8b4bebJNXpo8vLSTzCeLpUVWKdxYPo+u11u2bgphdq
- kSuX9hnswaXWW0J1U3iQ5Ce3yB53LNDDOlwBEvBOZaV9wi6/5uPoapSggIOOqX/HsAMzIR+Tb4G
- LrOYUKq0oSNCsn1lDOxI9NammoaiIvoPVZFDhP1c/P34rwESy6WnVMjJrxxjF+0WUe1TW3o2axO
- xG/XY5hDNRIwIONSEu2jvbaIJTUHFrYHAR32fKa9oUlXx/05bA/IHd1IDk+NNlVikIyIlwa9yE4
- 0tWsJy2boFdniULMN67fP5eHlynn3kW+YgxGQfdTFKLZpoCFoScQ1mcYfkuqGxNBUyMRIlkfje9
- GG8CDvki7eBSklU8cKg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 clxscore=1015
- malwarescore=0 adultscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120053
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 13, 2026 at 2:49=E2=80=AFPM Abel Vesa <abel.vesa@oss.qualcomm.c=
-om> wrote:
->
-> A system suspend can occur before a provider has received sync_state().
-> If a domain has not been used through runtime PM, its boot performance
-> floor may not have been applied when genpd_sync_power_on() enables it
-> during resume-noirq.
+On Thu, 05 Nov 2026 16:29:09 +0100, Maxime Ripard wrote:
+> drm_mode_config_reset() has a dual role: it creates the initial KMS
+> state at probe time, and resets hardware and software state during
+> suspend/resume cycles. However, the two roles need different
+> behaviors, notably for objects like drm_private_obj that must persist
+> across suspend/resume and are excluded from drm_mode_config_reset()
+> by design.
+> 
+> [...]
 
-Would you mind elaborating a bit more why this is a problem for the
-platforms in question?
+Applied to misc/kernel.git (drm-misc-next)
 
->
-> Prepare boot performance floors from genpd_prepare(), where performance
-> callbacks may sleep. Walk the parent hierarchy even when the device's
-> own domain has no boot floor: a parent without direct consumers would
-> otherwise miss preparation entirely. Take parent locks in the existing
-> child-to-parent order and propagate preparation failures to the PM core.
+[03/83] drm/appletbdrm: Switch to drm_mode_config_create_initial_state
+        commit: 24f5141d0266b391fda87dd3458aad31c26e28df
+[04/83] drm/komeda: Switch to drm_mode_config_create_initial_state
+        commit: 95b07f6f1f820601f9bc4f9dd8cb01e008c4441d
+[06/83] drm/malidp: Switch to drm_mode_config_create_initial_state
+        commit: b0507da85fdd7060decd29d35f5819259718f741
+[08/83] drm/aspeed: Switch to drm_mode_config_create_initial_state
+        commit: fe87bfb1dfa04dd73bb89e60820ced02967faee8
+[10/83] drm/atmel-hlcdc: Switch to drm_mode_config_create_initial_state
+        commit: b36f26eb85d8032b458fab7c6912650c0e5b5561
+[13/83] drm/gud: Switch to drm_mode_config_create_initial_state
+        commit: a53dc66784822a101541c54e1e7e471bbad3e8ee
+[15/83] drm/hisilicon/kirin: Switch to drm_mode_config_create_initial_state
+        commit: 1e8db0d2a2383ce3fb96ea1db26180350d972786
+[17/83] drm/imx/dc: Switch to drm_mode_config_create_initial_state
+        commit: 39283d6d8fbaca8d7bb7e98f7406dad5286bfc6e
+[18/83] drm/imx/dcss: Switch to drm_mode_config_create_initial_state
+        commit: dc54c1bc909873caf0f910677f3de899cdf3b62d
+[24/83] drm/mcde: Switch to drm_mode_config_create_initial_state
+        commit: 046b692dc7d3910b6a85d71e5e941c712bad30ee
+[26/83] drm/meson: Switch to drm_mode_config_create_initial_state
+        commit: a26760da1f8bebdcc7fe6fdcb5df5c6ca007e4cc
+[29/83] drm/lcdif: Switch to drm_mode_config_create_initial_state
+        commit: 0f3e257909538e9cce0213c2d1b9d3a7edf8f348
+[30/83] drm/mxsfb: Switch to drm_mode_config_create_initial_state
+        commit: 99da25e15ccbfb1d0717de28d3b6f45f72958127
+[33/83] drm/pl111: Switch to drm_mode_config_create_initial_state
+        commit: 4b9008133a7b14dbb1eeab84266926062d126ba7
+[38/83] drm/rockchip: Switch to drm_mode_config_create_initial_state
+        commit: c07d0dfba08808c90ab8ccc23a1f0ce9aafae536
+[43/83] drm/ssd130x: Switch to drm_mode_config_create_initial_state
+        commit: d7938a168f56608626d62a7015b448da1cee4dba
+[48/83] drm/corebootdrm: Switch to drm_mode_config_create_initial_state
+        commit: 207a0f90ce3953131806ead64bb512364de260c4
+[49/83] drm/efidrm: Switch to drm_mode_config_create_initial_state
+        commit: 8fa2e7e1b3642113677a6a77f81aa186f3b16293
+[50/83] drm/ofdrm: Switch to drm_mode_config_create_initial_state
+        commit: 1fd3ed4c330b8f56bbcd7d2684e1dae5961ee8ab
+[51/83] drm/simpledrm: Switch to drm_mode_config_create_initial_state
+        commit: cde728838797cdce3bc488acb1338c1dc20c24d2
+[52/83] drm/vesadrm: Switch to drm_mode_config_create_initial_state
+        commit: 705557cddfcbea6c6ee2e50057394c6c6fc2ab8b
+[74/83] drm/tve200: Switch to drm_mode_config_create_initial_state
+        commit: 4b40cfa3178f00188314a1da55dd899e635d2d73
+[77/83] drm/vc4: Switch to drm_mode_config_create_initial_state
+        commit: 6d8d9311bc9daac0e5acc3e5d34ca067abdd1fe4
+[80/83] drm/vkms: Switch to drm_mode_config_create_initial_state
+        commit: 63a80293361bc276fb07cd68511b5f887ff5fa41
 
-Question, if doing this in genpd_prepare() how would that protect us
-from changes happening later on during system suspend, when a consumer
-driver decides to update the performance state vote for its device?
-
-In regards to system suspend, even if the sync state has not happened
-yet, we are doing a power off of the genpd. I assume this is okay,
-while still keeping the current genpd->performance_state or maybe it
-isn't?
-
-If there is no problem with that above, maybe it's easier to continue
-to let the genpd provider (through its ->power_on() callback) manage
-the restoring of the genpd->performance_state itself? In that case, we
-don't need to care about the genpd->boot_performance_state, as it
-should be indirectly applied anyway, right?
-
->
-> Also retain boot power protection in genpd_sync_power_off() for domains
-> with a boot performance floor. This prevents the system-sleep path from
-> withdrawing their power vote while boot protection remains active.
-
-I don't get this, sorry. What is "boot power protection"?
-
->
-> Keep performance programming out of resume-noirq. Domains with their
-> floor already satisfied do not need another performance update, and
-> no floor is imposed after sync_state() releases boot protection.
-
-Please rephrase this. I don't understand what "releases boot protection" me=
-ans.
-
->
-> Assisted-by: LLM
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-
-Kind regards
-Uffe
-
-> ---
->  drivers/pmdomain/core.c | 35 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 34 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/pmdomain/core.c b/drivers/pmdomain/core.c
-> index 6f2b406ce049..4ff55175d899 100644
-> --- a/drivers/pmdomain/core.c
-> +++ b/drivers/pmdomain/core.c
-> @@ -1538,7 +1538,9 @@ static void genpd_sync_power_off(struct generic_pm_=
-domain *genpd, bool use_lock,
->  {
->         struct gpd_link *link;
->
-> -       if (!genpd_status_on_unlocked(genpd) || genpd_is_always_on(genpd)=
-)
-> +       if (!genpd_status_on_unlocked(genpd) || genpd_is_always_on(genpd)=
- ||
-> +           (genpd_is_power_unknown(genpd) && genpd->stay_on &&
-> +            genpd->boot_performance_state))
->                 return;
->
->         if (genpd->suspended_count !=3D genpd->device_count
-> @@ -1623,6 +1625,31 @@ static void genpd_sync_power_on(struct generic_pm_=
-domain *genpd, bool use_lock,
->         genpd->status =3D GENPD_STATE_ON;
->  }
->
-> +/* Called with the domain lock held, before entering noirq. */
-> +static int genpd_prepare_boot_performance(struct generic_pm_domain *genp=
-d,
-> +                                        unsigned int depth)
-> +{
-> +       struct gpd_link *link;
-> +       int ret;
-> +
-> +       /* Parents may need a boot floor even when this domain does not. =
-*/
-> +       list_for_each_entry(link, &genpd->child_links, child_node) {
-> +               struct generic_pm_domain *parent =3D link->parent;
-> +
-> +               genpd_lock_nested(parent, depth + 1);
-> +               ret =3D genpd_prepare_boot_performance(parent, depth + 1)=
-;
-> +               genpd_unlock(parent);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       if (genpd_needs_boot_performance_state(genpd))
-> +               return _genpd_set_performance_state(genpd,
-> +                                                  genpd->performance_sta=
-te, depth);
-> +
-> +       return 0;
-> +}
-> +
->  /**
->   * genpd_prepare - Start power transition of a device in a PM domain.
->   * @dev: Device to start the transition of.
-> @@ -1644,6 +1671,12 @@ static int genpd_prepare(struct device *dev)
->                 return -EINVAL;
->
->         genpd_lock(genpd);
-> +       /* Performance callbacks may sleep; prepare the hierarchy before =
-noirq. */
-> +       ret =3D genpd_prepare_boot_performance(genpd, 0);
-> +       if (ret) {
-> +               genpd_unlock(genpd);
-> +               return ret;
-> +       }
->         genpd->prepared_count++;
->         genpd_unlock(genpd);
->
->
-> --
-> 2.54.0
->
+Thanks!
+Maxime
