@@ -1,47 +1,98 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794504079;
-	b=yY0Tc325u2Vc3UscTzJFk/3XDmYbQX1EWP1wRj8jZDLwVBVUz5Xe3eNSQuw8OjOR/TKV
-	 orGaIpPeSLq4V8JcvK/atbIcHW2waO5Gmkv8SgpA6VYKMXabbMnEbqynpEZGJNmAkmoqC
-	 BR2Y1aH//JiV8B3oQ5Nj4uZ0r8LqqZ422HtZMwOA55NpHrfz+DTKaVOaDVVy5kOmaY2Ew
-	 xziU0eU50LcgA/qj4zgyBJ/GpV1k4Uf2Rjd0dCh99n2caXkjv45ffpw+x2Wpj0L/lVzAt
-	 xPO9dED24plktSwteheprsYfiv2OKnfDxW5lK9eGQhJ+k+nhKh3U3OOgP5KZObnjuDQ==
+	t=1794504937;
+	b=G0Va+pj5RTB29sqVbgSIyvJYj4MqkOf7fvl7pgf1DCGuZrji555pCycc5bL0JO0a0bqh
+	 NPMvAdourq3nKlr4yrlmMWYgGy20nmkC/cuj3ulRiF0Ifm4Assef/AKPrzKoT7YbMD3Wx
+	 k7okruma+py7h4dmyGkuyo7G5eI3fm5nv1OsOuFohac6Cs9epyWSJtS85kACHeWPG9MxL
+	 4uK+Bspom0PNdA6l9if+NOwpoQY/Wwdjw+0LBH+wUAmoI9RA0sxH92JwlvRukwLP6zqjK
+	 doWFdKBl1+/sEcRoqwy/9qudd5CkbtrID15XDuvf3abIWPns95zxxlsUjVZSBRPKR8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794504079;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:From:To:Cc:References:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=eXdLq4VpQrc3pLNlS0vz0mjfNa2LKyEz8zqt+39dnpA=;
-	b=l5aWpGcm822ttwC9YHSLVsS6FH/PTMBHkyB7dZEvjHj8ehmhY/1oigYFJz4gfNX4jGy3
-	 QYGNdwOCUjuR1K594yTpYr4SvygO4muwa4/EmFzndwoETTf13beDWZP2mSPFiiHoVBptI
-	 j37A4bcCnUtA0e2Gii7kcUnuAPl+44KzPQ5E7SCmvJj+DXvYM6oOhOwvKmtomwInTPjQy
-	 43zYLHbnvBPNS+BEMIYZJ5BsYI/nCcb3AhVHvpgVucBBBhtob8Dpumekgc1ehXU3+xR4O
-	 ey3UMBLPerhKmQJdxv40IaKD2U6KvGcHWmgKO67/Yw+xZqC1aUYCV+EjMnI7Gl/Hqsg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794504937;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=XkIbYXadeaMG9HKV2rC3JRZDLd4J3RXCWFCJdXi08X0=;
+	b=opaIY+n9kuw73trdLnwjdif1TkRaXB6mE9rRvHViW0O+vSDk9gFeG1QwonItUQUpz1vz
+	 qayJ7F4ccgoa9r6oOS7djCX1ISEUot83B8Pf2kvaDKWsfqXvbxEgInWowmAQyLL2UcTJk
+	 2/g6KkyYQ/Z719f59V16pz4IslbS9Nms6g7LqIuGfDwEq+/Mm0JTg/dyvOsn7kvxkARKo
+	 7kmQw5OFhlLEYIRXllKiv6hepdRMv3TsXUoGQCrJdwMvKhymxPy7Kq7rqDFa/x0Yx/bgv
+	 toVykFDVE4ytGP5vEYDcH3UFf+V0lgMPGsYYpSohgjI0aKr6Za8gAzH1ET8Oays3MrA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Nfke2sL/";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LIMP2nB3;
+	arc=none smtp.remote-ip=209.85.221.47
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E6D9606A31C;
-	Thu, 12 Nov 2026 17:21:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98D0A606A880
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 17:35:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98D0A606A880
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nfke2sL/
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B27BA1F000C4;
-	Thu, 12 Nov 2026 17:21:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794504078;
-	bh=eXdLq4VpQrc3pLNlS0vz0mjfNa2LKyEz8zqt+39dnpA=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To;
-	b=Nfke2sL/sXeXWgIPPISdEdw7sGin5a53bUK+xzslYxXJR8Tg627nY3WJIABgaNWPL
-	 w8zG2LCYd4bNIlUQ3kZMoQDOvih/c48INhQ/T/rkT7SCqoQg47iBwFezynk9plkpSU
-	 cEixol31RYjGYIcQkK3ZcLBQEGnO7KDDL8mZJN+/FY2viUkvLoEbiTC90iKvBbXVdg
-	 jQPhSS1WVZvlAshJ7PRvufjMAa+dQ9dnR1ICF+j0EYTEElM3j2vCtBsT345WiUR1ah
-	 Trpk0bf2Y27/gKgcemJUuZhgG0zjmXStvRRryH4Y4Crq9XuWgpiZQYl4KNKmRc+U9K
-	 5aCfwZy0GaI5g==
-Message-ID: <c4bcc25b-636c-4eb9-ad04-3c267af877ce@kernel.org>
-Date: Thu, 12 Nov 2026 18:21:09 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LIMP2nB3
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-4922523d1afso12326f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 09:35:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794504936; x=1795109736; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=XkIbYXadeaMG9HKV2rC3JRZDLd4J3RXCWFCJdXi08X0=;
+        b=LIMP2nB3cPMUdhws5RaIXR4tga9oAlQTraWtWrHTJKOqs5l0cXKzgKLK7GCwR58MIR
+         V0+47hH9R5MrphjjrCXy5PNmubHhEyJwWQyX+OAPcp1UrfnxUJP/zwQSU0PcsmJcKeJO
+         ZEVVgeEfZy+Kj3YWrlSmySRLjJGWy85AIg5gQU5hbH6iUea8dXk2Z6XoyI4PSe5UhkoX
+         WXtiL25Qpd1k7lOn6PIPnJfJhks4HD+3lSMpGNr3lKjeXEiI9niaqqzJnyLdud7j9e7C
+         pc2g/aov7gImzhFjDKgQSkGKy24pzW7kE+CPEL09oDrlTkH3Br51aO3wyoV9OUOHqXAw
+         XE3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794504936; x=1795109736;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=XkIbYXadeaMG9HKV2rC3JRZDLd4J3RXCWFCJdXi08X0=;
+        b=TDDDO89MBxeu3LqJaPemVIisw/dAyJpH8sfW4z64x4yAimek0siU4FlHCkwilLayhR
+         QFEZN+07OkF321rSmahcn0IoURaTeBPgXYp/9xzHKuRzuYkGpqQYSh9/lQNCY2jBZ9P7
+         yGqNhqX1ehpDKhFUdLfUfSswPLnoXsTBSYRf5Pcv30AP0erwSoKze+dMzA5kP+cW3Bc3
+         TWaNqAOQqtfDntASc8w6ZrReFC0gIF/c3WkLlJFPS0ImTmYiH7U5NEK3cEW/bw3RZFfG
+         yzITzeWc93+1cj/bZY+qK6U92g7gl6cJxg+AzGv/a5w2tLJZNh6iwEZRW0fIKh1gcPrr
+         1Prg==
+X-Forwarded-Encrypted: i=1; AL+hErFuhrvuUqhYmun+Y8GorOFpGmUxEFfNJTTSFRWmnC5a2IMv8dL1tO4cVOLYLTb3fKA899r/YFFrnT5cZ7+h@vger.kernel.org
+X-Gm-Message-State: APuU4Z92kCuwQ1rG3BYg6lwjjr1N0jhUwjXuGsDiYb+a3ZLNiDWYrLW/
+	JnjJLJILjxOgzS0G9bp7cYfrhnEEapRDJypAEfHQAMfd6ILWkgPzFidjJS9jY7RCme8=
+X-Gm-Gg: AYBFou21PrMFrtORafJHJqxxcc6UNSm6ynpHWEVWfkPl/o6yW9CgitYVeHGzBYJ6TuU
+	q8IYKltsmPfPybwPkx7gj5V8QhMmrgq8XFAHp0wItSbSPfRhdiDpBx07nu4ty32wU1e3YamcEVN
+	tmEul52l69umh/HKhhZxM4MVEro2aGr0PJEO8Wqea2CAl1OxNf3ZcLeoRJ66C6jccaxxKonFcwc
+	QmnnDLWtkJwfEag5LcqC6/zapHoVAQDUDpfxsoh5I2IZ1dfkl8ZiHZTnR6BhHvcGWT3iVRsbQ6G
+	OmFv/TZ1VofSzmVbKyJFJNWK6ggU/7Fzc4IstpncJe+37ynNlgWHpC1YxiH/Hq5nQePRXi3VwvN
+	ALFdrWi1RXgEgxh7LVgETAqulMCIBeNap+44ZymWGRINS4o7gRAnDzdUlziO6mlN4FhoddGXbc1
+	rRhctjo9uCSGWDQL4CSBFbdOUw7RXIel58waPmkuZJxfYj443+s8UClULEl9YwR5ghuDorqyJ8C
+	7Zudp69NqFX1txqaphSrW50K6+INrVLpZxbraE2atu7e92bj1k+9a4er7WPj+JdnvaBz0V1R4zg
+	nC4Ol3H7eLVxQbZK/EDJ+tTRgGAvgnjVlxr3JPdcjecQJYcaLcwNG38K
+X-Received: by 2002:a05:6000:4693:b0:490:c68e:5d5d with SMTP id ffacd0b85a97d-49c74864785mr53180f8f.49.1794504935838;
+        Thu, 12 Nov 2026 09:35:35 -0800 (PST)
+Received: from localhost.localdomain ([188.190.249.216])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c5f7828a4sm401037f8f.23.2026.11.12.09.35.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Nov 2026 09:35:35 -0800 (PST)
+From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+To: yzddMr6 <yzddmr6@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Melody Olvera <melody.olvera@oss.qualcomm.com>,
+	Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] soc: qcom: llcc-qcom: Reserve ISLAND1 ways on SM8750
+Date: Thu, 12 Nov 2026 19:35:23 +0200
+Message-ID: <20261112173523.1474-1-tvlad744@gmail.com>
+X-Mailer: git-send-email 2.45.1.windows.1
+In-Reply-To: <20261111-sm8750-llcc-island1-v1-1-64055702ca3f@gmail.com>
+References: <20261111-sm8750-llcc-island1-v1-1-64055702ca3f@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,93 +102,52 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] arm64: defconfig: Enable the Parade PS195 bridge
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Nabige Aala <nabige.aala@oss.qualcomm.com>,
- Mahadevan P <mahadevan.p@oss.qualcomm.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20261112-mahua-hdmi-v1-0-b463d7b1dd7e@oss.qualcomm.com>
- <20261112-mahua-hdmi-v1-3-b463d7b1dd7e@oss.qualcomm.com>
- <2dfe6739-2d36-4e47-b7fd-c10fb5374317@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <2dfe6739-2d36-4e47-b7fd-c10fb5374317@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 12/11/2026 17:14, Krzysztof Kozlowski wrote:
-> On 12/11/2026 11:15, Nabige Aala wrote:
->> From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
->>
->> Enable the PS195 bridge driver as a module for HDMI output on Glymur,
->> Mahua and Kalambo CRDs.
-> 
-> Same comments as previous patches from you. Don't send Qualcomm internal
-> stuff, that's defconfig for all SoC platforms so you need to properly
-> describe it. What is Glymur? Samsung Glymur? It's impossible to get what
-> you are referring here to.
-> 
-> By coincidence I know what is Glymur, but how Glymur could have Parade
-> chip? It's not possible.
+On Wed, Nov 11, 2026 at 03:21:13PM +0800, yzddMr6 wrote:
+> With this table, system suspend can reset the SoC once nothing votes
+> for the LPASS core. On a Xiaomi Pad 8 Pro with the LPASS_HW_MACRO_VOTE
+> and LPASS_HW_DCODEC_VOTE votes released, 16 suspend attempts (15 with
+> s2idle, one with PSCI system suspend) ended in a reset. The PMIC PON log
+> shows only PS_HOLD-triggered resets and no PMIC fault.
 
-And good examples:
-8b8d8aa9d482b08d5315e4d26631b9891c90e02e
-6f422914412bde4c431706079525c581bf439e03
+I tried the patch on another SM8750 tablet, the OnePlus Pad 3, which has
+what looks like the same symptom: the SoC resets about a minute after
+s2idle entry, and the PMIC PON log shows a PS_HOLD warm reset followed
+by a PS_HOLD hard reset.
 
-Best regards,
-Krzysztof
+It does not cure the reset here. The tree is v7.3-rc5 with out-of-tree
+board support, without Ajay's series. Each run is one 60 s s2idle on
+battery with the USB cable disconnected:
+
+  this patch, Wi-Fi WoWLAN enabled                    reset
+  this patch, Wi-Fi WoWLAN disabled                   reset
+  this patch, rpmhpd domains left at their highest
+    corner (rpmhpd sync_state callback removed)       reset
+  no patch, MC0 kept voted in the sleep set           resumes
+
+The last line is a local workaround in the interconnect driver that
+keeps a minimal MC0 vote in the sleep bucket. It is the only thing that
+avoids the reset on this tablet so far, and with it cxsd, aosd and ddr
+in qcom_stats stay at 0. The first three runs are without it.
+
+> Holding LPASS_HW_MACRO_VOTE or LPASS_HW_LPR_VOTE across suspend let one
+> s2idle cycle each resume, but cxsd did not increase in either case.
+
+On this tree the two votes do not seem to be dropped: with all five
+macro codecs runtime suspended, clk_summary still shows LPASS_HW_MACRO
+and LPASS_HW_DCODEC with a prepare count of 6 (LPASS_HW_LPR_VOTE is 0).
+I read that on the workaround kernel while awake, not during suspend,
+and the codecs have no system sleep callbacks here. So the resets above
+most likely happened with both votes held, which is the state your
+tablet resumes in.
+
+> All of these suspend tests were done with a USB cable connected.
+
+Does your tablet also resume with the cable disconnected? And does your
+tree leave anything voted on MC0 in the sleep set?
+
+I can run other variants here if that is useful.
+
+Thanks,
+Vladyslav
