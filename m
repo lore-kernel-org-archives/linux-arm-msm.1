@@ -1,100 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.178
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794483563;
-	b=al+PsFPk2Qu8VqXtMBHiQadkcrppIfwi7XAFwrRUm4U7Pfp20cgk5VwB7p+J8++7xSSW
-	 oMiOJ7DjCDj49hSYE09a78rvNg3vI19hkwc3x1tCNkgEp7nNM/qzl83kgGWGMhnZ2yqNB
-	 34YnC9luebgboU6lT58kRORDMNakpj+ijtyHYiWV2LqacKX0M6rSrQc4MvDcy6SEA+7yP
-	 m6o3e+ZyHL+Gm2MQ1ptY46OTZDMujxIDqbugvrcGXmWobjUstlbwD620S0cAAyoxupXkr
-	 2sSgiC/+c/Tj7eROzFXcxt+BUV9Xl9E4HmqlkINuimVN/K2UCFjfT1b7tlpjg5xYzKQ==
+	t=1794483599;
+	b=18e6P0APUQ9j+FEEPRaWxX9vLqTQ2r3r1nALnjWbiTPCb4XZSwu8AxqvmU4gaArQngK/
+	 P+WmQZgwVonIGDcmI/dkuhyUTWRNj2OZALohpwxqmOvmgm0PsQvvCcmc3REbQGGEWD6s8
+	 BaWWNEXdj3tBCqopMid/nNQCqrizs3vIPFMjnJn0aOpwAP7ZajqM/MZ8eeUKkZr5C1TMl
+	 G/Rz7iyMQ3++zVE9T6CkmDEnsKPpdD6Ph/0ZRQKz1GIDb0siawfGqFwQJqjee6ES3N+6f
+	 AEZ1kwgrIDdlp8Le1C5HuRFSobnwYBSMD5r+2CPFP6xM/ojNFUD7eevjbLPmeeseJHw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794483563;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794483599;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=Z0idzHJpOPMEmuTZcMJ9SVqFYTY6Bea8g7XD+5xn8cg=;
-	b=ZcBwnyNta4lAvTGOVNT88Wihgf50MHhHLayc6hhzHC+7bXptpxF+hADqo/SpUbRONYFG
-	 tRiFM2azx5YwpMTIgCt7BQz0QWkpz7JbxSg6b/KlnmoHX514f4nV62zI3lPbrVrfyM1KQ
-	 6TIWikkdoKX7uFk/V8GHL15Hxby+hRBXSFAx+mTyqObZh/ZBi3j0TF/Vf5hyklmkslOJe
-	 PP5mNlV+Nlx5E8YH0FRbVKVs70zkbYxzfa60xspHUpx1aCS/q6gFWJ3g65khMR5MzbvyV
-	 c/NAsWYZIkv9auGppJMcmgpT0ILGiyzI+hRCiPpiT/wwH61XfoZGvhA/g4PtDcrkr7A==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=wvzeSRN1LnFuQrjCW1cXNkgqhbYpZ/s7WcQkRBfJar8=;
+	b=xQ5WxZg+ILkYhvFA1+nMnog+1D1bfMMWaFr92CvFYxPB1hP3Cm61LZEyMnUpgG6Lf+JW
+	 hyyC0oJxO1bP64evwYKdpKdVEn3TVetEEawj4A2oyWbN99ZDQ9LK6v5pntQmwrcFheIeQ
+	 5EJc+sAK2HCXju/4prbdBkXkquL0rfI1sCt3nw84090dpE2dKadsrYwQP09KyANUCuv1b
+	 Fb9afY7zgL/my6ivgYAQJtIkAORmadD75FE0by4nDum9ekMEaCv2Wt+itWgt2Qrg1B0dr
+	 ffU+75USn3j5WnlME9yblm7W3SU35kHK6Aeb6WMzOfV0IAOk/P+/a3byIi8xI3evHKQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZQiQiMkQ;
-	arc=none smtp.remote-ip=74.125.82.178
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=T6CgA7Xa;
+	arc=none smtp.remote-ip=74.125.82.175
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EA7E606A327
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 11:39:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2EA7E606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA13606A338
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 11:39:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7BA13606A338
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZQiQiMkQ
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-36fc0a3fe93so8216008eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 03:39:23 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=T6CgA7Xa
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3704d30b84fso5347885eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 03:39:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794483562; x=1795088362; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Z0idzHJpOPMEmuTZcMJ9SVqFYTY6Bea8g7XD+5xn8cg=;
-        b=ZQiQiMkQOMcVGamNhTE25y4QZhUr1Nzg+7k7wGWjxsMBIIbCY6AS57Y8BdbW9DIxFR
-         nYAXRq9XpFzD4MQm7ApOAvu89hlhWk0j5OYGoTJUk/JFw7cmlJyCYcqO7jJ7CGUYajRC
-         j7cKFW6RwAJGofo6DngGt7TCaSVIrrqiUAlqHVBRInPkWDzFm3Xv4GFEBuTnpGmGe9my
-         mO4ylqh2Eh2UsGyqD8obdHISoPOVBNkDEGHNP/Y/W9N04KEzWHFW+JM5zEd3YOnnRq9D
-         tPqAzJ6fORiWnvK1oQqaWm9QMsleWIu7ycLWcTvyNy0GiGQBGo0Y3R3S5MTTxK2UTnHu
-         SXJw==
+        d=gmail.com; s=20260707; t=1794483599; x=1795088399; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wvzeSRN1LnFuQrjCW1cXNkgqhbYpZ/s7WcQkRBfJar8=;
+        b=T6CgA7Xa+cVkv2hSHOQWAxxU+GzxdpUpsHUeocnBwjETXvZDphUtdviLfhq77/SV13
+         Ph4BpYspEPzgljg7wu8frf+cR6OFDiHwQB7YLoQ35y4iwHMkg+BeGp3e6wHiq8/H+tK1
+         9GR+aM1Lwnoyl+CEkrmpqwd4tkG5wl2ygPGz4ppj6jfrJFGiDJthObRp3iSlwwdI6Dct
+         OUNFqgfEMshiZAKzhPp7AW45P317r5rbjIFVzYYg/1JbByenrqrAklz+Grdzwqszhh9R
+         QKx/9CjeHcz0GXqlzCkFs+oXV7js+yQxjMjweAgjqktHgbjkTwqhX7iuvuZOr7ra8yIK
+         /+4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794483562; x=1795088362;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Z0idzHJpOPMEmuTZcMJ9SVqFYTY6Bea8g7XD+5xn8cg=;
-        b=1Zal3L3wa1QXVtrIYZpGxNLLI3KwmkWJRXDwWEwXgfYD2EEe1AQE5zVWaJ6ydRmaOR
-         pASDf+6yU5N8CPdXbXk8OB01V1BD8DQgFxaSNuqKDSBnCKlWC80zduyHWBdmtNGCcMTp
-         weRktvSQaDwR44LVYbqRUjgHjK+oZrh8M2DNod3aafGUnvvz+ZuVdDgUiqhN1hsAH41d
-         AHMjqlB0LhsDSFBxsd6lkkCliePVybs9dyBJDVtp2rmByUGaWKrCOHPJNlmQW51t7dVT
-         eSI0xYj38wkZjdyA1FrggrHnVTQr7DW8U4E7eH/m2gzTUk2Dz2PBXhsZ+SL2TKgpxio1
-         mV3g==
-X-Forwarded-Encrypted: i=1; AL+hErE4EB5BsfkkPTcbZ+5wbvOdM8iUdKmlYlDDGA724v/smFJM/UWYpjx2bWHYMj+rhBDlI+rLmhec1C0t4H4q@vger.kernel.org
-X-Gm-Message-State: APuU4Z+zzQcWp+gKbfKwy0Hy8qV7sy8RYWHUEpbM++i7S+2mvP4YMqTr
-	z6gs1oUr97d0mDsGjZp5m7UH5SMegXzUieAE/B07Wcgnjo5HqlrZdAly
-X-Gm-Gg: AYBFou0ozL4QCST9FBHljqE/qn7darbcZdCMHLHoyTossZsozaTbOcRMubNRKXDpsx6
-	OyXFTRLQliQivQvv2Sosehhc81W3lrlVKI8KXq4OpU0konVv7Dv61o6NL/1tZUdG56YMB1AIten
-	dY8AdGz36JrXGFwVQ33efyXTCr7mf/iK6pXgk9GZ3CD4aoNYuVRQYB+FL69SWF6RflTXbN0nLXt
-	B1FcYOe6qDlMD4rRFMFihnUcRySkLycV4J0WoAYw2sOklom0eceB8Y4LAIgsRFM6P4P99J1/jGi
-	0120EH0Oi7Sn5ALi7rY0LTCcxIU5kjXIgUnHNprEgsgKey+VsrmXhrqGntuDl8LccHi0w32JgGK
-	vt36Ne4dD62oV5eFeV8613/jTMS/K8SI59getbcV6/4k45oIGZYD+Y4icX5ASZhGSm0SfPHFeYJ
-	cqiRQpOoLlXOcTJ3E3tm7T3ptGd1pg/mh77JIV1kTO5wc1P9l7ofafmlv5H5B2CltiXNyFI3odr
-	DXwMmox0zrp8ew2QkRi9EfjwXr8M13BX1VXRdLsbh5Em7dKw/P6EwjBFmazdWylAMAbSbP+3LHq
-	ci79WETTIKJQkcrzseLbu6hYAQgvAGiBkpV4YGQzofDOeXnEib1vpSTvyy9iNP0=
-X-Received: by 2002:a05:693c:8642:10b0:36c:9e26:88b6 with SMTP id 5a478bee46e88-37685c7a32fmr6157941eec.9.1794483562280;
-        Thu, 12 Nov 2026 03:39:22 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794483599; x=1795088399;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wvzeSRN1LnFuQrjCW1cXNkgqhbYpZ/s7WcQkRBfJar8=;
+        b=0mzpHDtmAzd7cztHKdfyLIH7qc8fDg0r4GGnKCJN4De7O6xkn4r4f9UBursDb/pO/k
+         3QEKAZrqEGsQxxAPeDTpsMUHqFCLq2UqqHGhKAt0E1Qf8KaxAbf6uhW2owagYPhFdazI
+         FmMHMuU+bdQaYv4vs921hqkZ5FOyavSBy5YUpL0djqcrQkjW7ayBFvNBWyguiACLGs6h
+         FOyUxftCOnAPcV277oLVF5aIUdmw3M1sEsEBzyjsqoOc9gDn0mib9wWS0HPu7SI+OrEr
+         Qj7dBN4nIsdawsyTWoNs2aQfXxbRFQkqvm46tRJF5Rt5d3BappcvhmnJBDcDOLlfnGXF
+         jL9A==
+X-Forwarded-Encrypted: i=1; AL+hErFIxXp/EW4mhTSlz8iMqA3qYSVGoMtzht9Vzb73xz8DrkGt8u/S7cr0iX3ko0hyxMlEZVm3cfjN8p2fHg7X@vger.kernel.org
+X-Gm-Message-State: APuU4Z9MctzVDcGEj3Yi2gtZYLUz+dWfv/gwJv5TMJfjtLtdM8Ug0gyX
+	hFnZJPRyww6BC1KfVhijWJq4wSbueSTBYo5Xh0XMXWLGSO67A7iP/foH
+X-Gm-Gg: AYBFou01JNPcGSAsHIJrsHkSH6XrWljf7yozufA9Z0O+0ueBbwocCt9GSEpL7l6Hfb2
+	BKfAiu/3dQFGuv5v9dBa8uMLAyRkgWFrAET8c3YxyUG4vhlz/OIve0mzh0Cf+Z0fWxR+hfeNck9
+	PeTPqn/1Xaya4Au4jNoFUlS4x5P+NM402kG8bZO79KXtOcI0IUUdP7plnhat42ZBJ4yIBXglscU
+	Vz2BXZsHttWpeJ5ERfVxp2H8r1wT0nksOXnUtsZUrbnRnrI8mQh2nSDbquHp0I9A1btDkeSLnB1
+	mH7rPsyHU5XJGXcEH6xQvmRoqqt5O419Sn3DQ4z3PsbYCDSAtLkW5ZlGc//Z4ekpkIJbhhFfmDM
+	Cv3pjjcD4mDaTTr3qDembEHVn+clCD7F+SDBiDEqBRt+pZr4YO8jp/xkhTuEvVfPSHKhyjDuilN
+	h+owbD0c3BtuBFvD2Wqkvu4g+Z4BT4zzR4Tpjo+8m9dXiaCZZX7lpBM5IU631Kp6VVUD4HFxn/1
+	gCzJunuQx6dzdyfx5sxxDbV+XsgsqH2SeP/IyRb1CcKtOr2qHI5pYTojmVBd7CrfGBroJVPAPn5
+	fw5uy22wgFlSe54GuMju5yRgH3zbGqZbp9t2fzomLyMjj66NCrkGelgyP3UNskM=
+X-Received: by 2002:a05:7301:4902:b0:376:f63a:cb24 with SMTP id 5a478bee46e88-376f63ad124mr4989397eec.3.1794483598526;
+        Thu, 12 Nov 2026 03:39:58 -0800 (PST)
 Received: from DESKTOP-NM9EKIA ([180.67.33.100])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37520cfdfc6sm28352798eec.17.2026.11.12.03.39.18
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-375212e9e03sm50308720eec.23.2026.11.12.03.39.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 03:39:21 -0800 (PST)
+        Thu, 12 Nov 2026 03:39:58 -0800 (PST)
 From: Joonhoe Kim <26rote@gmail.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org
-Cc: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	abel.vesa@oss.qualcomm.com,
-	abelvesa@kernel.org,
-	konrad.dybcio@oss.qualcomm.com,
-	dmitry.baryshkov@oss.qualcomm.com,
-	balaji.kalkonda@oss.qualcomm.com,
+To: sashiko-reviews@lists.linux.dev
+Cc: sashiko-bot@kernel.org,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-usb@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3] arm64: dts: qcom: kaanapali: Add mode-switch to the USB controller
-Date: Thu, 12 Nov 2026 20:39:21 +0900
-Message-ID: <20261112113921.1143-1-26rote@gmail.com>
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH v2 2/3] usb: dwc3: qcom: Use the UTMI clock as PIPE clock in DisplayPort-only modes
+Date: Thu, 12 Nov 2026 20:39:58 +0900
+Message-ID: <20261112113958.166-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
+In-Reply-To: <sashiko-outbox-195459@kernel.org>
+References: <20261103135057.1682-1-26rote@gmail.com> <20261103135057.1682-3-26rote@gmail.com> <sashiko-outbox-195459@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,56 +107,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When the USB3-DP combo PHY is a mode switch, DisplayPort pin
-assignments C and E put it in DP-only mode, where it stops the USB3
-PIPE clock. Add mode-switch to the USB controller as well, so that it
-gets the Type-C mode, moves to the UTMI clock first and keeps its USB
-2.0 port working.
+On Tue, 03 Nov 2026 14:35:19 +0000, sashiko-bot@kernel.org wrote:
+> [Severity: High]
+[...]
+> Should state->mode == TYPEC_STATE_SAFE and TYPEC_STATE_USB be checked
+> before inspecting state->alt, and can gating qcom->dp_only on
+> !qcom->dp_active miss valid transitions to DP-only mode?
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Joonhoe Kim <26rote@gmail.com>
----
-Depends on:
-- "usb: dwc3: qcom: Keep USB 2.0 working in DisplayPort-only modes",
-  which adds the binding and registers the mux in dwc3-qcom. Without
-  it, pmic_glink_altmode defers its probe indefinitely:
-  https://lore.kernel.org/all/20261112113838.506-1-26rote@gmail.com/
-- patch 3 of Balaji Kalkonda's Kaanapali DisplayPort series, which
-  makes usb_dp_qmpphy a mode switch:
-  https://lore.kernel.org/all/20261022-kaanapali_dp-v3-3-b5ae8e6083c3@oss.qualcomm.com/
-- with dwc3-qcom built as a module, Yongxing Mou's "drm/bridge:
-  aux-hpd-bridge: replay last HPD status on hpd_enable", or a monitor
-  attached at boot is not detected:
-  https://lore.kernel.org/all/20260803-drm-usbdp-preboot-v1-1-2539b362be00@oss.qualcomm.com/
+Yes to both.
 
-Changes in v3:
-- Sent on its own, split from the dwc3 series (Krzysztof)
-- Subject and message: the controller gets the mode, it does not switch
-  anything
-- v2: https://lore.kernel.org/all/20261103135057.1682-4-26rote@gmail.com/
+typec_altmode_set_mux() passes the DP altmode with the safe and USB
+states as well. pmic_glink_altmode passes no altmode with the safe
+state, so this did not show up in my tests. v3 checks the safe state
+first and treats only the modal states with the DP SVID as
+DisplayPort.
 
- arch/arm64/boot/dts/qcom/kaanapali.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+The USB states from the DisplayPort altmode driver (exit, removal,
+configuration back to USB) all follow a safe state, so they now switch
+back to the PIPE clock. Always selecting the UTMI clock for C or E also
+covers a change from D to C/E without a safe state in between.
 
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-index e48a179d0722..a06d5d867488 100644
---- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-@@ -3941,6 +3941,7 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
- 			tx-fifo-resize;
- 			dma-coherent;
- 
-+			mode-switch;
- 			usb-role-switch;
- 			wakeup-source;
- 
+v3 also always selects the UTMI clock for pin assignment C or E. It
+keeps the UTMI clock on a change from C/E to D/F while DisplayPort is
+active. If the PHY switches then, USB 2.0 keeps working and USB 3 waits
+until a USB state follows the next safe state. The PIPE clock while the
+PHY is in DP-only mode would stop USB, so v3 errs towards the UTMI
+clock.
 
-base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
-prerequisite-patch-id: a793fca7329dac964c21459f8d7a8b003d36d84d
-prerequisite-patch-id: 0f4b3497a5b65f978f8ee3de20953e111d9a4721
-prerequisite-patch-id: c6020a82fa07088ac3e07cc89d3059fff044d39e
--- 
-2.43.0
+> [Severity: High]
+> How does the synchronization between dwc3_qcom_mux_set(), system sleep, and
+> runtime PM handle the following cases?
+[...]
+> Could the clock selection check be performed inside dwc3_qcom_resume() (so
+> both system resume and runtime resume apply any pending change before the
+> core resumes), with qcom->pipe_clk_lock and qcom->pm_suspended covering the
+> full suspend and resume sequences?
 
+Yes, the cases are real. v3 follows the suggestion:
+
+- The mux callback no longer resumes the glue.
+- A flag set under the lock at the start of a runtime or system suspend
+  and cleared after the core has resumed makes the callback only
+  record the state in between (cases 1 and 2). If the suspend fails,
+  the flag is cleared and the state applied right away.
+- dwc3_qcom_resume() compares the recorded state with the clock
+  selected in QSCRATCH and switches before the core resumes (cases 1,
+  3 and 4). v3 has no cached clock state any more. A change recorded
+  while the core resumes is applied when the flag is cleared.
+
+I kept pm_suspended as it is, because the resume interrupt handler
+uses it.
+
+Tested on the Lenovo Y700 Gen 5 (TB323FU, Kaanapali); details are in
+the v3 cover. In those tests the mux state came after resume or needed
+no clock change, so a recorded change was not applied on resume.
+
+v3: https://lore.kernel.org/all/20261112113838.506-1-26rote@gmail.com/
+
+Thanks,
+Joonhoe Kim
