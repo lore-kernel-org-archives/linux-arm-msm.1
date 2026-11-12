@@ -1,100 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794511218;
-	b=YuSR4wZ62AWtRPVry/TUTQIalIZNJr8xWuVPL72+5PiW4CbZIkMBG/F1YToR8XOUT1DA
-	 F3qGUealNdXtUJHdAlAbpr5GxKa4FixDZbWQpfej9y+JFU2EVE9gNt4GZHsCXU51x64i5
-	 ZWoZTc+SIYDBL9E1LrLpZZd3wNZrkIykkjbINFvRU2nyTOpBphovGf6V7XIvKBV721KWB
-	 NAd1WybQ6snhP8R04sHFavGo7X1OkqbZ95abXsR9Eyi9ad66hoGuVnxb1+tpXgEoOH0qj
-	 KSNX8XogHXA23AfIUgp9VgGT69eMkBTuDtIJ7SCkS71qDWkBT4EmBjn5IG1S9Ek7KQA==
+	t=1794511349;
+	b=eQJuLOezXclKh+1RNsUrjzHTAKjav2vIo42Ii8UDa/tj5P/z72r2HYVgeWuPy7pggcST
+	 6dCnoyCsKkxn5pjt36FTSeD5Bc2ILPko63EP0GJSxQgMXK6ohFMUA8v8X4BiP8pqM7fkR
+	 FnxSNVYkPSRg6LMewekBey9mBRto2wxqC8FG5cRdtXthE3profCiPjzvVsIfv+zN2WZOf
+	 TQMJfhJ9C36BFHnPCojXshjwcOleePMolQhrreh6VYrsh0Di+J7NiYyFybWpXD8O3LYog
+	 yrOR5EL/qpQZtGudsWOR6xsfh9Yx3AJTB2RjBdV2HnoyEhQAIRjEDJS+dAQ5lRdEIgA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794511218;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=PVPJ6zKdJ7kgvRyUlRiPX5ovk6pUYsEuwV1lOtnjEfA=;
-	b=Apjo7Wpz8nITlttjHe7sTbJy3/0JucEOOFlIkBYbMd6owzaSiM/hvTyuDKahkyoUjER8
-	 mlk+V/Pf9rFnTtxXUfyFP3DQ/jRFLJCTdFVHzNK6/MbWf172gr/zZpRhkdh4CCL/31nhi
-	 aYCiQtsjfk1KeDwfesll685gm0TrEfytEcsWYUf/+4sYfNnoJSdLF/2iut195U522baFz
-	 N2u6uCSNMyTJAgX2Op6CxZj83Qm2fZUuaHgVBgJiFDwEwgZHn6yZGsg7fpwRY03V7uYEG
-	 vcBPSMRdRMu2UY3j7AxN3UR0Jz+IB5FOiEHTUBOfIqBiebPIW6EdRlLnto2Vr/KtYdQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794511349;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=eKEe30sKgUjFzvZ2CgdBS8YcRmwTAfqhuKIIKVboUOA=;
+	b=gju4nmZyGFihYlQ3s8AvAn6mK7hlJgHA+2HEMLfve9KqVVm0mSTkHaAtzOhcP4MOK3ls
+	 bNUneJwet16hxg6ZCIGPWYuDTjCWpEpQyqlQlqEEQ5G/vHVj9/LS5Vk//ryGFCWGscEde
+	 bxkPHJbYIM0ILmYJbr4ZbqNk4M0R2Eyc+qHCXVV/tKJ8UzsRpdMvfOlPQKDGqwtHPT/Vj
+	 IZJiJX1YbaMIGx5pDCCwh0CH0yzZEGlZBqdqnCL7Y894lFwpd/h/6DsO0O1itKbdjtPSM
+	 bg/3ksScbYwy1GZuU2ZppTIckmHdgmg0JuFIXSWP6gvmRKimJ5BDFlx26Ykc8t1zAeQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=chromium.org;
-	spf=pass smtp.mailfrom=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=BFbfdZRs;
-	arc=none smtp.remote-ip=74.125.82.170
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bdf7MvZa;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0BF8606A327
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:20:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B0BF8606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7AEB606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:22:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=BFbfdZRs
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-37071c0f42aso333902eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 11:20:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1794511217; x=1795116017; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PVPJ6zKdJ7kgvRyUlRiPX5ovk6pUYsEuwV1lOtnjEfA=;
-        b=BFbfdZRsrkf/O6yYdWUn/qjrTGRP1SnCuPyAnUf2g31z+r8f7LYKu4p1+7P9M286HU
-         rBcyk3gcIDdHrIYRAqc+TxMKHp87rsNzKzXKXZvJyeukjWLefmDIOk+d3F07qpOrczbF
-         l6hPPcQqjo5KuDUR09wdAGQFYzn682P6Udnbs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794511217; x=1795116017;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PVPJ6zKdJ7kgvRyUlRiPX5ovk6pUYsEuwV1lOtnjEfA=;
-        b=Qfdf0VK1ECgVXG9maGW8DoxIXsCHuqhzZaBU1ebABWRNzSwqwJLudGGK7ul7QANiHj
-         7YkMiDts9zAP/hUgV2MlYhCTOle/L5fIpLO+lf1NIuLzwwwnTJ7YL58ze+PD5Q8WoFJL
-         hgBdGwuyOWNOtoqDLGSEJLhjbFGxvXZM5SC1IrorkO2fhYKM1tTH06fx+eJpZ2I0HoTB
-         QDGWJvO4vOHQXcfG2Qa77Ofrd+ePsuinqvGaLXWNmW1TDsK5GcT1Ff/Nk/r1si5WCNnn
-         bNHJvrVPEJ1P6tN5vRpu+IIXT0ir+7F9mNTb78VnO1GvxBtfJK+4JT1iuyFPzJWkgVkY
-         YErg==
-X-Forwarded-Encrypted: i=1; AL+hErH4H0FHdmnGXq669BvrLFq4cy758ur4AxJB3Lea0T/LmKWlpSjCODrrNIBw1e/PhPYTAogRlYbkjrbqFlU3@vger.kernel.org
-X-Gm-Message-State: APuU4Z91pdfKAkIzo5hlmSDCcJZT5t41nAzOqiN9Psop+f74Cdrbjiq6
-	vkk/8Wx4gWdEHWOw9srM4UsiAaPX6Jt+wf37ysFT93viZjocteVopPOgiTbX3g4Z1Q==
-X-Gm-Gg: AYBFou2Yi2xKHGr8io67fI64G9woSxPqEV9XIOPEVAwNoBifQ/OhcWYT188ui4dUafC
-	tWc7wxG61NH3c2wlWwuKkqOt1sg0w5MmgGMR03+7bdA6hm650WmAw1PmpOTSxwZ3ttI/0hxJMa5
-	Oy7xZa2hJEX3cTxaXYpnPNvX50ExeE4/m+5ZvMSp8dlogGg/Ce4NLJCEXD3KatqcujDpmafgB9O
-	hICGUM19PfTYp4nHoNW17c/pKcYJux/8c04GJem4DIHkJOBpTn6cwrXzxoLK7HLhVnWYzSBkeAb
-	0WLXvrLicSLi1cFhjAFqzQ1gBPpS0q4oJdYyhZsruIIjlDoESyqhZmdj4NDX9dT5061n58ysdJU
-	+MTS/P3eVercItWQTrzlNQ0kE1no9X7XaAsOeqCwEb5HLnYpGP1Do1yI+KuYgXWziFGS9ARxdIO
-	Q/zPauEL1KyZesrqSsV+/6iPaEfpwaWOgMFyWAEIqrDnJPMk84vefjHX6ur4zxQjzB0kSlgyR38
-	rRIqbizS9luHF0OsiwrQJipNWxbMxuxE3T12xWcoF3jFRVGy29JvE8yhkOlsUIXoKdGJC4SJ6jE
-	tKs2GHVNy7BK0SMLX0GUIc1+DGCfuiJXgHjeHXliXzbTIa+zOFhbOvWt2vLg5UeWdBxr
-X-Received: by 2002:a05:7301:2a9c:b0:372:79a0:e8a3 with SMTP id 5a478bee46e88-37963374fdemr130138eec.1.1794511216522;
-        Thu, 12 Nov 2026 11:20:16 -0800 (PST)
-Received: from localhost ([2a00:79e0:2e7c:8:5446:563c:ac92:43a8])
-        by smtp.gmail.com with UTF8SMTPSA id 5a478bee46e88-379558231eesm516606eec.12.2026.11.12.11.20.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 12 Nov 2026 11:20:15 -0800 (PST)
-From: Brian Norris <briannorris@chromium.org>
-To: Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>
-Cc: Cezary Rojewski <cezary.rojewski@intel.com>,
-	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Daniel Baluta <daniel.baluta@nxp.com>,
-	linux-pm@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Vijendar Mukunda <Vijendar.Mukunda@amd.com>,
-	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Brian Norris <briannorris@chromium.org>,
-	linux-arm-msm@vger.kernel.org
-Subject: [RESEND PATCH 1/3] ASoC: codecs: lpass: Discard pm_runtime_put_autosuspend() return values
-Date: Thu, 12 Nov 2026 11:19:37 -0800
-Message-ID: <20261112111937.RESEND.1.I5cd238b1d4516d4d6980565e0a4e1b83d9abce63@changeid>
-X-Mailer: git-send-email 2.56.0.611.g1030f0b940-goog
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bdf7MvZa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81DA51F000CF
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:22:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794511349;
+	bh=eKEe30sKgUjFzvZ2CgdBS8YcRmwTAfqhuKIIKVboUOA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=bdf7MvZaAhnATHsUyEBrdPOmkBPZwsuzAUmn7cqKmMa4cRO9i0WcPi1CgouyW1JVl
+	 UcnecQOSp3UE2a3KiB/v1p0EyZMZaTyEG6XI0uFsbUyi+LZnPwwi3bpLXBOZDyaN3U
+	 hcVywCRG6T/yI6KBy/xMW5EnGJr3JDvhx25GrjTlgB3ZEsR+q9ZwTztrsr+QPIoYSi
+	 +shqKDoRb2W2XGOwA+f1wxe3xgyBS2egq/QaNKfyAIQmwexp8BmMLr+AGUaZaJOlN1
+	 jiGPmfwCnHMojtIfZstOIGmRK9FYOJJ06wuylmzloGifz9w/dUDnksiyHDXbYrewqq
+	 LFgJlqjg+ZwMA==
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6b577addee9so276474a12.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 11:22:29 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErFDmKTTn3sEw8O6vZPutzxt1ddEKuSv/OFrRGGXVshgbdE8oVWyGVR8Wws8K2/ociw1v4ccPIDztTqwXzIP@vger.kernel.org
+X-Gm-Message-State: APuU4Z9WweOBma6je/4MiSXuQbNIM2TkEWdRcbzrvxo/OotCxRjOyWou
+	xbuFYzu2VN+4WDtnmE9ZCcIy1XNn0SA++bgqLQMK188RRJJgmqn2wqLHDIUQJVSxP37NofWpol4
+	rNl94uXbfBSBz8CtNPgJGraZZKXxZ3Q==
+X-Received: by 2002:a05:6402:4243:10b0:6b1:bb19:deb3 with SMTP id
+ 4fb4d7f45d1cf-6b7c0c500d7mr438413a12.25.1794511348048; Thu, 12 Nov 2026
+ 11:22:28 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,151 +59,158 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261021022446.3619435-1-robh@kernel.org> <avWbmsjkYo2LMJKs@parshuram>
+ <20261112125346.GA3821108-robh@kernel.org> <avX9Qrcapcnutdgh@baldur>
+In-Reply-To: <avX9Qrcapcnutdgh@baldur>
+From: Rob Herring <robh@kernel.org>
+Date: Thu, 12 Nov 2026 13:22:16 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqLGqYAd-BedjNCCmxByJQ_z2Cij9J_z-ifiX9iJs_gqSg@mail.gmail.com>
+X-Gm-Features: AclHuK8_kIf7XzeWGReWc3eG8QnzvITOafe7fZqs02NgfRS8BOSjQMTL0cAbEpA
+Message-ID: <CAL_JsqLGqYAd-BedjNCCmxByJQ_z2Cij9J_z-ifiX9iJs_gqSg@mail.gmail.com>
+Subject: Re: [PATCH v2] dt-bindings: phy: qcom: Relax required supplies
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Wesley Cheng <quic_wcheng@quicinc.com>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Printing warning messages on pm_runtime_put_autosuspend() returning
-negative values is not particularly useful.
+On Thu, Nov 12, 2026 at 12:30=E2=80=AFPM Bjorn Andersson <andersson@kernel.=
+org> wrote:
+>
+> On Thu, Nov 12, 2026 at 06:53:46AM -0600, Rob Herring wrote:
+> > +Konrad
+> >
+> > On Thu, Nov 12, 2026 at 04:27:30PM +0530, Vinod Koul wrote:
+> > > On 20-10-26, 21:24, Rob Herring (Arm) wrote:
+> > > > For the QUSB2 PHY binding, keep the three regulator supplies requir=
+ed
+> > > > except for legacy IPQ6018 nodes that do not describe the board rail=
+s.
+> > > >
+> > > > This relaxes the requirements for the IPQ5210 as well as if it is
+> > > > compatible with IPQ6018, then it shouldn't have more required
+> > > > properties either.
+> > >
+> > > Hey Rob,
+> > >
+> > > This fails for phy/next I see vdd-supply has been moved around..
+> >
+> > The change in question[1] should not be applied until the .dts changes
+> > in the series are applied. It introduces a bunch of warnings.
+>
+> I don't understand. The change you present here relates to ipq5210 and
+> ipq6018.
+>
+> That change doesn't touch these two IPQs, so what are you suggesting?
+> Are we talking about the same warnings?
 
-Returning an error code from pm_runtime_put_autosuspend() merely means
-that it has not queued up a timer or work item to check whether or not
-the device can be suspended and there are many perfectly valid
-situations in which that can happen, like after writing "on" to the
-device's runtime PM "control" attribute in sysfs for one example.
+This is what I get with phy-next because it has the binding change
+from [1], but not the .dts changes in the series:
 
-Accordingly, update the LPASS macro codec drivers to simply discard the
-return value of pm_runtime_put_autosuspend().
+arch/arm64/boot/dts/qcom/apq8096-db820c.dtb: phy@7411000
+(qcom,msm8996-qusb2-phy): "power-domains" is a required property
+        from schema $id:
+http://devicetree.org/schemas/phy/qcom,qusb2-phy.yaml
+arch/arm64/boot/dts/qcom/apq8096-db820c.dtb: phy@7411000
+(qcom,msm8996-qusb2-phy): "required-opps" is a required property
+        from schema $id:
+http://devicetree.org/schemas/phy/qcom,qusb2-phy.yaml
 
-This will facilitate a planned change of the
-pm_runtime_put_autosuspend() return type to void in the future, similar
-to commit 3afd8df02433 ("PM: runtime: Change pm_runtime_put() return
-type to void").
+(and then duplicated for every 8996 board).
 
-Signed-off-by: Brian Norris <briannorris@chromium.org>
----
-This patch was originally sent as part of a larger series here:
-https://lore.kernel.org/all/20261006161337.9.I5cd238b1d4516d4d6980565e0a4e1b83d9abce63@changeid/
+> > Can the QCom folks stop doing that! Coordinate applying the series or
+> > take the binding and dts changes in 1 tree.
+>
+> I assume you're referring to "QCom folks" in the sense "any maintainer
+> touching a binding change related to a qcom platform"?
 
-I expect it should be merged by subsystem maintainers, and we can make
-the return type change later.
+No, primarily you and the submitter I guess. Submitters should be
+aware of dependencies in their series and suggest how things are
+merged. Otherwise, it falls on you to care that warnings are getting
+introduced.
 
- sound/soc/codecs/lpass-rx-macro.c  |  4 +---
- sound/soc/codecs/lpass-tx-macro.c  |  4 +---
- sound/soc/codecs/lpass-va-macro.c  | 17 ++++-------------
- sound/soc/codecs/lpass-wsa-macro.c |  8 ++------
- 4 files changed, 8 insertions(+), 25 deletions(-)
+I would not care so much when there are transient warnings in next,
+but I don't want to be the one chasing them down. But AFAICT, it's
+always me. No one beats me to it and I'm not all that fast in
+noticing. I just compare all the warnings by platform for Linus vs.
+next with "gl-diff-dtb-warning -p arm64" from this repo[2], and look
+for things moving in the right direction. Of course this is all after
+applying which isn't ideal.
 
-diff --git a/sound/soc/codecs/lpass-rx-macro.c b/sound/soc/codecs/lpass-rx-macro.c
-index ab8a1c2b0489..c703275fc442 100644
---- a/sound/soc/codecs/lpass-rx-macro.c
-+++ b/sound/soc/codecs/lpass-rx-macro.c
-@@ -3919,9 +3919,7 @@ static int rx_macro_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto err_rpm_put;
- 
--	ret = pm_runtime_put_autosuspend(dev);
--	if (ret < 0)
--		dev_warn(dev, "runtime PM put failed after probe: %d\n", ret);
-+	pm_runtime_put_autosuspend(dev);
- 
- 	return 0;
- 
-diff --git a/sound/soc/codecs/lpass-tx-macro.c b/sound/soc/codecs/lpass-tx-macro.c
-index def7dcc2058d..26e8486ce041 100644
---- a/sound/soc/codecs/lpass-tx-macro.c
-+++ b/sound/soc/codecs/lpass-tx-macro.c
-@@ -2370,9 +2370,7 @@ static int tx_macro_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto err_rpm_put;
- 
--	ret = pm_runtime_put_autosuspend(dev);
--	if (ret < 0)
--		dev_warn(dev, "runtime PM put failed after probe: %d\n", ret);
-+	pm_runtime_put_autosuspend(dev);
- 
- 	return 0;
- 
-diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
-index 61b24a1e4dde..a090b3e7b5e1 100644
---- a/sound/soc/codecs/lpass-va-macro.c
-+++ b/sound/soc/codecs/lpass-va-macro.c
-@@ -1352,7 +1352,7 @@ static int fsgen_gate_enable(struct clk_hw *hw)
- {
- 	struct va_macro *va = to_va_macro(hw);
- 	struct regmap *regmap = va->regmap;
--	int ret, rpm_ret;
-+	int ret;
- 
- 	ret = pm_runtime_resume_and_get(va->dev);
- 	if (ret < 0)
-@@ -1360,11 +1360,7 @@ static int fsgen_gate_enable(struct clk_hw *hw)
- 
- 	ret = va_macro_mclk_enable(va, true);
- 	if (ret) {
--		rpm_ret = pm_runtime_put_autosuspend(va->dev);
--		if (rpm_ret < 0)
--			dev_warn(va->dev,
--				 "runtime PM put failed in fsgen enable unwind: %d\n",
--				 rpm_ret);
-+		pm_runtime_put_autosuspend(va->dev);
- 		return ret;
- 	}
- 	if (va->has_swr_master)
-@@ -1378,7 +1374,6 @@ static void fsgen_gate_disable(struct clk_hw *hw)
- {
- 	struct va_macro *va = to_va_macro(hw);
- 	struct regmap *regmap = va->regmap;
--	int ret;
- 
- 	if (va->has_swr_master)
- 		regmap_update_bits(regmap, CDC_VA_CLK_RST_CTRL_SWR_CONTROL,
-@@ -1386,9 +1381,7 @@ static void fsgen_gate_disable(struct clk_hw *hw)
- 
- 	va_macro_mclk_enable(va, false);
- 
--	ret = pm_runtime_put_autosuspend(va->dev);
--	if (ret < 0)
--		dev_warn(va->dev, "runtime PM put failed in fsgen disable: %d\n", ret);
-+	pm_runtime_put_autosuspend(va->dev);
- }
- 
- static int fsgen_gate_is_enabled(struct clk_hw *hw)
-@@ -1693,9 +1686,7 @@ static int va_macro_probe(struct platform_device *pdev)
- 		goto err_rpm_put;
- 	}
- 
--	rpm_ret = pm_runtime_put_autosuspend(dev);
--	if (rpm_ret < 0)
--		dev_warn(dev, "runtime PM put failed after probe: %d\n", rpm_ret);
-+	pm_runtime_put_autosuspend(dev);
- 
- 	return 0;
- 
-diff --git a/sound/soc/codecs/lpass-wsa-macro.c b/sound/soc/codecs/lpass-wsa-macro.c
-index e3fe8d0af8be..6d330bd4eddb 100644
---- a/sound/soc/codecs/lpass-wsa-macro.c
-+++ b/sound/soc/codecs/lpass-wsa-macro.c
-@@ -2559,9 +2559,7 @@ static int wsa_swrm_clock(struct wsa_macro *wsa, bool enable)
- 				   CDC_WSA_SWR_CLK_EN_MASK, 0);
- 		wsa_macro_mclk_enable(wsa, false);
- 
--		ret = pm_runtime_put_autosuspend(wsa->dev);
--		if (ret < 0)
--			dev_warn(wsa->dev, "runtime PM put failed: %d\n", ret);
-+		pm_runtime_put_autosuspend(wsa->dev);
- 	}
- 
- 	return 0;
-@@ -2833,9 +2831,7 @@ static int wsa_macro_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto err_rpm_put;
- 
--	ret = pm_runtime_put_autosuspend(dev);
--	if (ret < 0)
--		dev_warn(dev, "runtime PM put failed after probe: %d\n", ret);
-+	pm_runtime_put_autosuspend(dev);
- 
- 	return 0;
- err_rpm_put:
--- 
-2.56.0.611.g1030f0b940-goog
+> Do you have some CI/guidance/tooling for Vinod (and other subsystem
+> maintainers) to perform system-wide DT-validation when considering
+> merging a binding change?
 
+This one is an ABI break because it adds new required properties. I do
+have some tooling that looks for ABI changes, but haven't committed it
+because I haven't figured out the best way to deploy it. I think for
+anything that is an ABI change, the binding and dts files need to go
+in together.
+
+I think it is time to reconsider the default of bindings go in with
+the driver. That works okay for new bindings as long as the platform
+maintainer doesn't take .dts changes before bindings land (also an
+issue). However, for cases like this, we need the opposite order. We
+need to figure something out because this is only going to be more of
+an issue as we get to warning free (and we are close).
+
+> I unfortunately only spotted the one-way dependency when glancing at the
+> seris and thereby ignored the dts patches waiting for the binding to be
+> merged.
+>
+> > Given the patch series is 2+ months old, I'd be surprised if the rest
+> > gets applied.
+>
+> I've applied the two dts changes today, and they do resolve a number of
+> warnings - presumably the ones that you're talking about, but I don't
+> think the ones that this patch aim to fix?
+
+Other than the warnings it introduces, the [1] series fixes this one warnin=
+g;
+
+      3 phy@7411000 (qcom,msm8996-qusb2-phy): "vdd-supply" is a
+required property
+
+
+> > This patch OTOH fixes warnings.
+> >
+>
+> What warnings? Can you please provide actionable context when you're
+> pointing out these issues.
+>
+> Is it the three "'x-supply' is a required property" warnings from
+> ipq6018-cp01-c1.dtb? It seems unlikely that there's one chip that
+> doesn't depend on those supplies.
+
+Of your 20 unique warnings, it's these 10:
+
+      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdd-supply" is a required pro=
+perty
+      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-pll-supply" is a
+required property
+      1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-phy-dpdm-supply" is
+a required property
+      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required prop=
+erty
+      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a
+required property
+      1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is
+a required property
+      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required prop=
+erty
+      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a
+required property
+      1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is
+a required property
+
+Rob
+
+> > [1] https://lore.kernel.org/all/qusb2phy-v2-1-4c3f980a4560@oss.qualcomm=
+.com
+
+[2] https://gitlab.com/robherring/ci-jobs
