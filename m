@@ -1,87 +1,88 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794469956;
-	b=aFLqP27gfG8qU8nRlJKRj/ZWI2VGeZOAY+C6z6rCWuYqfCAi2EBXbXW5Pqz2ZJ3ZYSUr
-	 GnbRy8CNCD6buM3rq+4c6NZzl6yhqEVluFsQ+BY+1FXJQQwgplBm6tUCshECDdXfecxc1
-	 6nPvSMIlUMhttvP8iqlzL5ePFH06L4JYjE61DFZHX8P8S9xce2iWzx91WQqpc3pBMbK4E
-	 me//6XVVlidRgoZ4svGVKtkuVH9ZrVQWN6EH3AmU+VuZW4Ve/4WL8x5qU6G6ypjYZ7ooU
-	 mbgghTsTJUOUZFBKCICD8y19tPwpv6E2mM71P6YnbtC7AnwBaxonvP9z/E1VpGhCKbQ==
+	t=1794469962;
+	b=xaJvkP1Z/NovGZqu28njpbc9hsqjHIqC3v2c4jDH4tcZO6TkW8Nc+sP3kGBhZSPidNa5
+	 6Prbw9EaXfLFl0q6Mr+1whiaRThB6jCzYIXxXrgQX4I7txg7CMkzZACZo+HsCw8HAF/CO
+	 JGFVEED6BMrt24y2VD1GLhSdB6x9cOXRVn8eHPIeHn2csM0r6XMp03T4N/UmzcaOd9QQn
+	 FRJDD89sEb5TlfdvVznmH7skAzjCgiEkCIK5iU0wN/udHc1iWyAWnCj1hIlAPyNq/hswo
+	 TGeUPM2DRx4GuGPyuSzOdTfuv7/A1+K0j2bEahDylHL8qD/hALUTi6rtX+BurJIFV4w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794469956;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794469962;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=zR8Eij2FPJgIUhxryQ5YRxF7TN8W0EpDXclL86k6m10=;
-	b=BoE07i5Lyq6vdyOWAoVOBDaxSLxs+IgM60a2BVPeFCnXQH8NBgAEI9esEdwYndVhw2oR
-	 cl3NKQ48V8hm4GQsAIsW7ZNl9Sgj09at/B/OOA6vs+EklERNYV0xwTIR6KGJT0klMarGl
-	 plNfHQ/YOLXdHAB6fq3xn+QLHTV7bVStWcgvrSLX39N1ZYJq80NVbi7LeT13m9zaXlvz2
-	 qf2Z+2YNjBkDlWk0HB/n0g4eo/3GpStFLfdYfCH99IapXHUxU06hAr66VhKMunDQqQCSy
-	 decdOKB8ELH5S0BuMtNQbHi1vVrlOGBxh+5i/p/DN84KvIsDFxPyZiJt35vWXTufj7Q==
+	bh=MfIiMtH3vcQ8rnl3Mz2iz7HrvbyC+ZkC2w1Z98pOQoE=;
+	b=rIcrbjWxIpPxUzTXDv5ymFUjQsDUqwYQrXHEG9XB/bZD91eMBx35eKkaVMQJL5Sc+lF+
+	 QvobJoHzHydU3QySyiUTIgGLLhjqXJBTIVGj2rdTJeHB967deP7Yg4cYL5zWQrSX0+Bz1
+	 TpLdUlsXNFuWY8RRTT/PQO813fKCrszirrSpcyi9ZvamDCLmy3WEDDBbI2Hv9z3Xg/j2r
+	 ZP5+e6++GJ/2Fa3NIUOJJZ5JJPugMlqcSDaF8EQCbZcvUOZhpj9StE31r9+fFBkJ3ohSx
+	 /iA/lc3Dc38rGcI8T+q4M/wTxSC4B97F5cRuPQBgJMYZCc2AA5RGBOVo0epOiqsjArw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wllTw1FJ;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=FBvRObHc;
 	arc=none smtp.remote-ip=209.85.210.174
 Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3320606A8A2
-	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:52:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3320606A8A2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76977606A327
+	for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 07:52:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 76977606A327
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wllTw1FJ
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8b904d10882so1787089b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 23:52:35 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=FBvRObHc
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8a0880a46e7so350181b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 11 Nov 2026 23:52:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794469955; x=1795074755; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1794469962; x=1795074762; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zR8Eij2FPJgIUhxryQ5YRxF7TN8W0EpDXclL86k6m10=;
-        b=wllTw1FJSefjRxI8dVg3xqjiIbINMTysvEHAsLVpjmtTDs0Vk4sHhe/4viz5kZQIm9
-         o7kZ0MHndEa9Y/HNeMXly4ImlsThnxmhqHOZjlcMp/OZ7MeJYzekTB8wpi6ZOOFLBR9a
-         4ozlncFErpROdBjQHwRKXmUNAQ9tHUA2mublHQ8uhlAVwsEADvH8rAR3z1u23rhKcTOJ
-         Ca1rOyvzjiHcBe/nC1BJj3DhOHZPUUEU3a51iRoUquNY9cdBbqvA7LJnqrHAPv800FaW
-         D7drMUD6KYb1Mmaj4H0iiux6CzmIErw9WhZl3yM/8wjcDDXyeTKdWGoRKRLR0yrx7LK4
-         KwGA==
+        bh=MfIiMtH3vcQ8rnl3Mz2iz7HrvbyC+ZkC2w1Z98pOQoE=;
+        b=FBvRObHcaGUTLBOh5MpYX4l3YsH/d9FuewJxp3uPDj5v4U6Riz/gxXk9PLIUIZcM6j
+         c55xYENrxWMXDVY4q1Gfs8bf6tnZQ5vg4gh+/sePoFnfiyMH0iad1S9vYjiIYj0Y6Fe2
+         E/LYIpkDkwOqFaTvfeCngK23KdmGs8RIXLUF61TwZ/1Bu1UIvK8ok4vMQh0HWdde+Ojp
+         TkPORE7m3x5J1nz2liUAFVJHs4yoGc1Yyh//5j/lMojaaBp2KFVE03etrfEJcqS+zlBP
+         3NLXlfVBNq46i0WtGzlxrkHCtTDzyVFirWuAA77hX2e3/FN2+pefslW1DEx/wwYXWVtO
+         yBwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794469955; x=1795074755;
+        d=1e100.net; s=20260707; t=1794469962; x=1795074762;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zR8Eij2FPJgIUhxryQ5YRxF7TN8W0EpDXclL86k6m10=;
-        b=rBC5okM7ULhyV1G5fnuYHwajO3w2SFRpvNTveS8zf7aMjwiWz5aWueUPyI9+KHUqxj
-         uqC/RI4bchUdo687wxlE9YWirAKK83tdyfFgT5cMchdz9c9VCUd3TEHQB7QQegybUYQd
-         YovJBI79sC/P4lXDeV4f8vqQ0SmsjEPu5kMKk+eXe2m3744KgAvRX4Jj1VieWgE/0D8X
-         huXuzFz4vXfxi1O9QdBz/sajGkypzZBDW0KnpOOH6cX9dryOINh47TsRbCe5ydTjIDBN
-         C6xQ/SVqHDS7TmIM1BwBzfyQC12qPbCof2Q8Tymup9FcGMQiJlsXkYggKGy34j+VE16I
-         VrTQ==
-X-Gm-Message-State: APuU4Z+Fl/KY8tXr5Ev+x2xJZd/4vSTwm181dVCNOo4GbCAJQAHkphr0
-	EqRFbVV90PuYgGJuAv9evR/tV19ucJQ88vRyxHlJQImDxprN+ty42X+kZGRs7tBAP9I=
-X-Gm-Gg: AYBFou1MBM5ruSU4gRCMpg1QQSZ8bxF1agzc2J4ygKn+61h0paQPMwMlTPWEsaiBVd8
-	Q4lN6PJlDEvHDM5gfBcmqorgU1bpZFD235kFm2QnRMiY38nBSUMV09TKQdwZ4pjwPPZuesH/OOY
-	ocaeiWkiy7lzxMw2lo8Tdpk9BL26TLph6fvbN70R9dczaOxHqScqQpOv1bDUY46ToJwFflz5Ptv
-	hb1Zsn6K5Sx3Rd/6cn0KNH5z+ykQnNJfudolP+5Yt0ugalHTWbtP9SaEULdMJPcZ6MbkXSz30s9
-	G0lyAHmeT8Wuw26Bo6M1/tW6ZWCTppu4VbJOweKQncQWOYeubGOOtiij7OoL7+ItoFNywvhT09q
-	hTevgzcevLhbMg6NGBf18Ic+rue2w4oo5g/bFcUCmbfN4dsMHdJ+sWgRv95JAeY14230WBbmv8t
-	wE1pueY5qmrzVJbHOITs9W5sHq9oe4tIO0byCjeaW3L8uKFtVYgdQIG+prFkvuBOcod4OZ8cytO
-	aMJ0QYHg95mvaYzZfQ3lWPPLrIlk1LZSi8OfsC/Fjw6yDHrH3CFK+n2WnwxDriCUIZxNvpk+FfQ
-	xQ91LGySh8j6Svoukp/4ArvcpllROA==
-X-Received: by 2002:a05:6a00:2343:b0:8a0:3336:4b45 with SMTP id d2e1a72fcca58-8bc1c594810mr5000583b3a.12.1794469955132;
-        Wed, 11 Nov 2026 23:52:35 -0800 (PST)
+        bh=MfIiMtH3vcQ8rnl3Mz2iz7HrvbyC+ZkC2w1Z98pOQoE=;
+        b=LqKYruIHrLuZkmD8BsXpk8uQaDhrKHDtjswPC3K9AkE20fjR1pH1Dy21XY6N1RsU0+
+         F96qRpd0wX6ib3s1pTRO2e8ZLa9m6OezC9VgeZkEBuh8b+ThQxB70P1GNYt9c6IRwx2I
+         1JRq0UeziRl5oG9LB8/9u5eDhCEulfViys62csVP88XwuQdN8PMtdUPGrFHMux5CyEma
+         Q0vY7WKb4i8faBdeXKdQiJ8Mu3Lib/ajfqNyedLgkyEzc6E4cXNvHqkYJR4RYV4awQRc
+         HWA29MEqKduAbJG5CX1NplqxDFkEQBC0nd2CnmfLQD2n/gIcliyzSdiJm/KWgGLeYnp8
+         VyvQ==
+X-Gm-Message-State: APuU4Z/SIa7qykGEBoxFh+6/EBlOlL+FNY05nAhQ/9OQuAUDYJAJ3Tn/
+	F5zsYg4Lnq3lYmMXSDSoOlu4wlpAx1djv1fNjK/QTtSilMi+aaBcBh7Llm9E0A1HvyE=
+X-Gm-Gg: AYBFou0wGFuxZ5VneaTX35EDt9ZyaT8xAUWE4moVC87+9QhpGx4YiuRZYig2HEY4B+3
+	5agjbPhjBKy3oaWYruXwr082/AfZRR+Ys2gC3FIqXntd9CXzXfqRGptdG/BQ4c290BTO6gXWoyI
+	2jfMCm7mg0umcC+KBngyTjBB3hv6M0JAid17scjmvcB55qLdStZKUlcrH0j5oqYrvnrbXsu840h
+	/LIy+5UnnlEA6Ou3lxUewwZKoxlkY1cpxPJQVyBzZwnTWWjPaEFGuL7serGzQGhduKmPNjyDjMx
+	oraQDZRNsOWykfxc+Fi+Ea81DLA3iXuKtHQ9Nvjvm65TLfXE/0S1p5lQj7uruIYGivP5c3dgY+M
+	xXmQg+eZVVv6sKnmgTkHPNSCFMzVfeXDGL+twE2eDLmgY/+c9S0Lymsz88jErIkdg1SdCdOudAj
+	+QkG5/WxT5IiOtOAV9QfsTOiPuVW4nHwATT7hg8cI9yjsn/FftGhcu7jHKWVDnRkhhbsR2rGcrY
+	qvzKEKZhRr/oiS2Rpxe/wS8MbGZG8O9AfR0y60IkMwqR/Nni8C1N2bo0L0np/8XsGiaNxrzWcGv
+	DlteQmTjwfFjjosigIiQdR27bTQNVUBp8yDU+cGd/ex6xvwdrgM=
+X-Received: by 2002:a05:6a00:b41:b0:8a0:3617:b53a with SMTP id d2e1a72fcca58-8bd5cc7ffddmr1156441b3a.18.1794469961776;
+        Wed, 11 Nov 2026 23:52:41 -0800 (PST)
 Received: from [127.0.1.1] ([116.237.168.131])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baab5f3f99sm3131256b3a.51.2026.11.11.23.52.30
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8baab5f3f99sm3131256b3a.51.2026.11.11.23.52.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 23:52:34 -0800 (PST)
+        Wed, 11 Nov 2026 23:52:41 -0800 (PST)
 From: Jun Nie <jun.nie@linaro.org>
-Date: Thu, 12 Nov 2026 15:52:05 +0800
-Subject: [PATCH 4/8] drm/msm/dpu: expand CWB to 4 pipes
+Date: Thu, 12 Nov 2026 15:52:06 +0800
+Subject: [PATCH 5/8] drm/msm/dpu1: Support wider writeback width in dual-WB
+ case
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,7 +94,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-cwb-upstream-v1-4-a6a88d928aa4@linaro.org>
+Message-Id: <20261112-cwb-upstream-v1-5-a6a88d928aa4@linaro.org>
 References: <20261112-cwb-upstream-v1-0-a6a88d928aa4@linaro.org>
 In-Reply-To: <20261112-cwb-upstream-v1-0-a6a88d928aa4@linaro.org>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -107,95 +108,46 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  Jun Nie <jun.nie@linaro.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794469928; l=3075;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794469928; l=1480;
  i=jun.nie@linaro.org; h=from:subject:message-id;
- bh=4/WCCF14ztFcYuwH5sdlLJ/Y7c6CkeQnN0+bpY4resY=;
- b=nyBY/lFPmt026D4jaKbY3LdrTEesIm0s11kGJMZMD+33M+x3eBjnEEOkuqbVPgMHoBAu76oXa
- DrBwZvYJAoCA6o82V6wAXorre2C0gYxNXBja5PIX5ldV+gQZX1gnuoZ
+ bh=b9gZBtsMHkv6i4rFUNaaYmsibNAluP0D+iRz7WdouOA=;
+ b=nriIuNstQpH6u1NeHbBWbbt/EWyGeA/Ja61WQashquCcYkdMxW4+ytxZE/H0TKh/NUh1w3eVV
+ VZeK6dZRQ9mC9DpmXS95dnr/dImCWX4Ploqmh5peeRVL9BqlJ2sbVRP
 X-Developer-Key: i=jun.nie@linaro.org; a=ed25519;
  pk=O9aRQ3+xXWihQiRRgStCET+eFXx1EZs43Fh0Xh+8Bu4=
 
-Only 2 CWB is supported in topology currently. Expand to 4 CWB
-with dedicated CWB counter to support quad-pipe use case.
+Current width limit is 2560 with single WB interface. 2 WB interfaces
+can double the limit in quad-pipe topology case.
 
 Signed-off-by: Jun Nie <jun.nie@linaro.org>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c    | 4 +++-
- drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 2 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_rm.c      | 7 ++++++-
- drivers/gpu/drm/msm/disp/dpu1/dpu_rm.h      | 1 +
- 4 files changed, 11 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-index 09563a766390..7ac2cdbce8de 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-@@ -1423,7 +1423,6 @@ static struct msm_display_topology dpu_crtc_get_topology(
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
+index e7b09013ae4c..b1177e4bd16e 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
+@@ -14,15 +14,11 @@ static int dpu_wb_conn_get_modes(struct drm_connector *connector)
+ 	struct drm_device *dev = connector->dev;
+ 	struct msm_drm_private *priv = dev->dev_private;
+ 	struct dpu_kms *dpu_kms = to_dpu_kms(priv->kms);
++	/* we support dual-WB at most so far */
++	int wb_count = min(2, dpu_kms->catalog->wb_count);
  
- 	if (topology.num_intf == 2) {
- 		if (dpu_use_virtual_planes && caps->has_3d_merge &&
--		    !topology.cwb_enabled &&
- 		    (mode->hdisplay > 2 * caps->max_mixer_width ||
- 		     mode_rate > 2 * dpu_kms->perf.max_core_clk_rate))
- 			topology.num_lm = 4;
-@@ -1443,6 +1442,9 @@ static struct msm_display_topology dpu_crtc_get_topology(
- 	if (dsc)
- 		topology.num_dsc = topology.num_lm;
+-	/*
+-	 * We should ideally be limiting the modes only to the maxlinewidth but
+-	 * on some chipsets this will allow even 4k modes to be added which will
+-	 * fail the per SSPP bandwidth checks. So, till we have dual-SSPP support
+-	 * and source split support added lets limit the modes based on max_mixer_width
+-	 * as 4K modes can then be supported.
+-	 */
+-	return drm_add_modes_noedid(connector, dpu_kms->catalog->caps->max_mixer_width,
++	return drm_add_modes_noedid(connector,
++			wb_count * dpu_kms->catalog->wb->maxlinewidth,
+ 			dev->mode_config.max_height);
+ }
  
-+	if (topology.cwb_enabled)
-+		topology.num_cwb = topology.num_lm;
-+
- 	if (crtc_state->ctm || crtc_state->gamma_lut)
- 		topology.num_dspp = topology.num_lm;
- 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-index d455845ba14b..11eae4b19684 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-@@ -56,7 +56,7 @@
- 	(MAX_H_TILES_PER_DISPLAY * NUM_PHYS_ENCODER_TYPES)
- 
- #define MAX_CHANNELS_PER_ENC 4
--#define MAX_CWB_PER_ENC 2
-+#define MAX_CWB_PER_ENC MAX_CHANNELS_PER_ENC
- 
- #define IDLE_SHORT_TIMEOUT	1
- 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.c
-index 4ada16cf8610..9519cc59e9f3 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.c
-@@ -240,12 +240,17 @@ static int _dpu_rm_reserve_cwb_mux_and_pingpongs(struct dpu_rm *rm,
- 						 uint32_t crtc_id,
- 						 struct msm_display_topology *topology)
- {
--	int num_cwb_mux = topology->num_lm, cwb_mux_count = 0;
-+	int num_cwb_mux = topology->num_cwb, cwb_mux_count = 0;
- 	int cwb_pp_start_idx = PINGPONG_CWB_0 - PINGPONG_0;
- 	int cwb_pp_idx[MAX_BLOCKS];
- 	int cwb_mux_idx[MAX_BLOCKS];
- 	int cwb_mux_idx_start = 0;
- 
-+	if (!topology->num_cwb) {
-+		DPU_ERROR("invalid number of cwb: %d\n", topology->num_cwb);
-+		return -EINVAL;
-+	}
-+
- 	/*
- 	 * Reserve additional dedicated CWB PINGPONG blocks and muxes for each
- 	 * mixer
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.h
-index ccd64404f12d..9b2ea51608de 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_rm.h
-@@ -62,6 +62,7 @@ struct msm_display_topology {
- 	u32 num_intf;
- 	u32 num_dspp;
- 	u32 num_dsc;
-+	u32 num_cwb;
- 	int num_cdm;
- 	bool cwb_enabled;
- };
 
 -- 
 2.53.0
