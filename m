@@ -1,61 +1,69 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794482418;
-	b=dbrC2YBYCdbDKJ4T7j6AXZZCTNxiNr35t7/2dmFFYWqsukW0TV+PZ87DmXY17KMcAs2B
-	 88D+10aqBMjGQ5fjPOaQ16cGVgMF+Heirw/hl0gD7CEEnBHyI9LXaWsmJs6Lo6Iy3fNld
-	 KqzyRQeaxmnw8U2dOIWF5mxnnens706GSD9oWJwM2ofngjCbJdLdYGL+0Q05xjxj1bNHM
-	 +5hthxfYOlpYSbc1MD7GbX9/GUfixzVhh/J9GZI0Gr4fqYF+7r9e9iVWQqtVxG0Y/5qsM
-	 cTcA66NABczHUO0twYol9eKAgRKOcD/MwWdhDucpIZrdV34yaU6i3kmu/G6GNEY20ew==
+	t=1794482432;
+	b=NnLpRhi4xdFWpXcHrE9tx1RFQhzPckaFbnQxl/V7jkBnMsFDcoOf9CzHARDvEMmtF2al
+	 +n0dLk79KVk6dVJ+bjI30bURLZV3J4HswiY78ADTcxg6Q8dt4eUGbeqXa29ghrLzPvXO5
+	 6SYIwImbBWWVPexc8QqSr/rTslYw+f3SKqNDsOj1Ct+Q4/gHuehjmXSs1Q+HRwPNn+5Oh
+	 7irrRtFK07qpeozspptdsez7TH+zoMoIAsRPfZt5w9dPA1yrF6LHBQxRIfk3VAf72Ww65
+	 /+vyXplXAs8/oKZpv5NhstXH/ifc+u+UAxkr7C9HKbmI3S+5uvJZE8A/OPFceR1/7zw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794482418;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794482432;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=BXzZFv1rViA+t/kvS8iAtCAtd1WIdvaY0MOKVvctdWU=;
-	b=v/pGTjrd6ijRqDX6AFEiDTP2KP5sR51od34N6u6enZeeq+N4nz6JNEWw2GOWWOu9d2O7
-	 C2BppIcguy23Y2QK7HYNM15Jyf9XGcrZ0t4cgITXdbCc0ff+dIExCG+xmIQwrnhZe47Cy
-	 W5wImy1MBp84POptq7Wtnyzf0Tao+jYJCVh8mv925o6jOtN9vuq6as22jRBKb1q2D47Ry
-	 1Ts0WhkHAJgTpVmfsyG0s8Er5DrM4xgSsstV4KRIyDz9ZmWEu9+WyYah/qSkM5qxv8Jpd
-	 eLfkpMN5cTBzuVtGkEjuljscwWVK0CR2NVSNgDEuj4bgzclm+PIckntpFA/UgWb6dVA==
+	bh=hAfL/WFmB05akBiWgGs8l8XrwU7+jMrFoaHWisRpDqE=;
+	b=tUmvDEGfK/Ohh76gTCI0dJhW7dAIlsihEqOupkCAvHo+G8+t0vaGS/5zg7K5mNZmj+5z
+	 Phf0MfKX+QVWd9FiFCcDS0oVFiDIEDkrAkYHLIziJXZXUV3egGOlRvTpysFklbbu+bUWr
+	 0v5NdMLtFdj5G+LHrn1NIC7/mR+6fECOyEP+VQHxWdAbf6Dyt8CqxqpTfdjrjlCCjDmv/
+	 TiBQHtpemokbZCFKveYKaGyFveef+T1jsAt+SAQZbUXQzwEcIJ/VALhL+mW6G89WTWPEM
+	 qPcYYd6coonuULaDDhpSkYU8GwxBBBJ+GKQBZYqBYTLb0AXOMssafiNnqKz/V7yPIxw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Jo/HQb17";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O9B82kd8;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F64B60A3839;
-	Thu, 12 Nov 2026 11:20:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77256606E757;
+	Thu, 12 Nov 2026 11:20:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jo/HQb17
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64B6A1F00A07;
-	Thu, 12 Nov 2026 11:20:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O9B82kd8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 953891F00A09;
+	Thu, 12 Nov 2026 11:20:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794482417;
-	bh=BXzZFv1rViA+t/kvS8iAtCAtd1WIdvaY0MOKVvctdWU=;
+	s=k20260515; t=1794482432;
+	bh=hAfL/WFmB05akBiWgGs8l8XrwU7+jMrFoaHWisRpDqE=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=Jo/HQb17E0i8jEZbQEXkjWKCg/LQKfPCSEM9JA6Gm0rDmS/I3ESUCninPxzJNnJBz
-	 YzP+cgVGD9/rVDFkLdBJgXSIVpHC7buwyHCBUSfqinFgIMHrOZqtsHLZR7g6Saj/uY
-	 u3rQDKPOda2zHYOrLdB43qK9/NrMzMs/p/J64838H9kRXk3G6jU3Jl5rESOPpP4NRf
-	 RRSsUB6gV5/ugibkJPdUykpx0RSWzw8PB/SOYCRFj0/NZ2fb+NCswbCMWaHOwB3L4M
-	 NVsAWiSD0JqaweWMrnV7zqPWMRwi9+TSxc9hkPpO9QCupsVoWaPlruCIZOTLGskaGj
-	 is/VOboU3j0Dg==
+	b=O9B82kd8G3xrpV7RRBTWam1Xbr5BivytF0MyJC0hZPGsQTfR2S6JIx9WTBLucYoEh
+	 eTrPgMRUvFY9s4CMw+AQ/HMrXIVCwhrVk/qs7uXt1a/ofmJsL9L1VX9IvlYPQObpJp
+	 ekBo398K8SVCEO75zGzCbxtaUqpvrb2niUUSvjDw41/MhP45sFWq6flqfa4+DtbmOA
+	 1VxAxZ2Knel6Qe107ru9mBRtye9E5wJ+3pqySdSOHdGJCWQjU0VL3u8/sO11PTNfKP
+	 PsyOiqeWIMkP56w3YInIhb5zK9Kc9eMGPVboa8IRkKrXDV0YAw1SH5uJfaM9Jfz3c0
+	 tkhIPklAbSsyw==
 From: Vinod Koul <vkoul@kernel.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
  Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
  Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+ Conor Dooley <conor+dt@kernel.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+ Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ gopikrishna.garmidi@oss.qualcomm.com, jagadeesh.kona@oss.qualcomm.com, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>, 
+ Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ linux-scsi@vger.kernel.org, nitin.rawat@oss.qualcomm.com, 
+ sibi.sankar@oss.qualcomm.com, Taniya Das <taniya.das@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-In-Reply-To: <20261103-sa8255p-eth-phy-v18-0-b00cc2fa0404@oss.qualcomm.com>
-References: <20261103-sa8255p-eth-phy-v18-0-b00cc2fa0404@oss.qualcomm.com>
-Subject: Re: [PATCH v18 0/2] phy: qcom: add the SGMII SerDes PHY for
- firmware-managed systems
-Message-Id: <179448241404.492462.11258139095481555571.b4-ty@kernel.org>
-Date: Thu, 12 Nov 2026 16:50:14 +0530
+In-Reply-To: <20261028-glymur_ufs_qcb_enablement-v5-0-09cda5e3bab3@oss.qualcomm.com>
+References: <20261028-glymur_ufs_qcb_enablement-v5-0-09cda5e3bab3@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v5 0/3] Add UFS support for Glymur Qualcomm
+ SoC
+Message-Id: <179448242524.492462.1764919670468855498.b4-ty@kernel.org>
+Date: Thu, 12 Nov 2026 16:50:25 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,22 +78,17 @@ Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 
 
-On Tue, 03 Nov 2026 11:35:51 +0100, Bartosz Golaszewski wrote:
-> Vinod: Sorry for the noise but sashiko pointed out I forgot about one
-> comment from Krzysztof. This still should be good to go, there were no
-> more sashiko comments and this is just a rebase + a commit message tweak.
+On Wed, 28 Oct 2026 17:54:45 +0530, Pradeep P V K wrote:
+> This series adds the device tree support for the UFS PHY and UFS
+> Host Controller, along with the required PHY driver updates to
+> enable UFS support on the Glymur Qualcomm platform.
 > 
-> Add support for the firmware-managed variant of the Serdes PHY present
-> on the Qualcomm sa8255p platforms.
 > 
-> [...]
 
 Applied, thanks!
 
-[1/2] dt-bindings: phy: document the serdes PHY on sa8255p
-      commit: 0eeaa6e65318b14cfecb3e7e4338f4eca7070c48
-[2/2] phy: qcom: add the SGMII SerDes PHY driver for SCMI systems
-      commit: 4cc9f70c3dc187cd45eac2815117ea81b101a1ee
+[3/3] phy: qcom-qmp-ufs: Add Glymur support
+      commit: a3ed89addd954c5c2ab6f745da93559612392d7d
 
 Best regards,
 -- 
