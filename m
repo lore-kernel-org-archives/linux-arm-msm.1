@@ -1,56 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794474246;
-	b=2AKVoZtI3PNQq6EyOqjV6p+779Y+bpsNzcL21zIJQfIX6rkKIIvIPY40fFqQ6tc9UPTh
-	 e+iS5znzr8gX1xSzrPLUQKDQvfVYgmLuniZiWjLgtQ6V2cJOqxVLC/vNn61CxQ1JVtjKz
-	 SET51rcutIJXNW3kmrpJrDoJLVV74orH/y8EjI+jzWe7/WGNlUts0TuBqgwYyDfbF71Kl
-	 5hHfPY4gCWc9ghTwtV+uL26h6mhkBMaog0LPNwehPFDV0plOScFsPvS5aL7j+ZQawDMTF
-	 ipYDYwBaFGAo0kKl5J3x+cRUYKn0070VUP4xGY0L1gDkGkM98KLLqXYn6BFh2THHR4A==
+	t=1794474253;
+	b=Jhp9bQZlH8y2vZU1v9mnxRhZ6iT8UAXHSWHOIOXy2AvH1om/1TV3vQvtj1IIveZfdVEO
+	 /QArDyxTwD37iuwISeUKLZxmGcdu8QErGctJy33M+fNAlYpIS2YWAfJC6Bi0dsQCv85UT
+	 ARAXaGPkRsA6WZ5v/7WSOGtK5/VNOWXL+dZMUc5qONuxOfAaEWXIrOM8Zvr6gQtzcrFt5
+	 Eet2Ckc70kYbLe22ehJIWvky5LMlKM4rpb3R3mUH6PAFyUEqXQ8oDQRBdy1PPQSSWz1jb
+	 qlQ8GnKmlu84nSo+hpXTtftZPQ127tkGgSKKdwwsApo57cwSYpaOjzHbiVUA5OfMbTQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794474246;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794474253;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=5fCCCXEOfM/ae3w8SM+2GzfEV3C2pd0/CFQFdIizuLk=;
-	b=ZTCKrUcTlZjt8SvkG23EYkRwXbspybvACxX86CL4pLAlh5h7GEpo8Uzn1RWIAHXaQ9Gz
-	 wRE8kbnJyhjm/cmcEDP3pxND/vdruArKpP2t/KZ/MnQjcwpbzwuMQAcBn1PBmc1VDDloW
-	 yfQas+L3TGvXC5P6Ash+GlhtlSPv8nFtrN1UCzxqmFb+WUw6rM7TJYHpq5Z/gjpShoiDZ
-	 O2zjItjVnEUcjwwZdQAz84E5sbivAvJXPr93SApLr5AXc0nnuFzKf9PT2xf7f8e19eshP
-	 U8riABajG65SlGQgqH9+xknhZXQ6KGpAjhvclWesAJ6ls5vKmKw4ttAMRLQMe4c0LZQ==
+	bh=4vl0yf9MswuE4OKPGllY340LXxGifnWzots3uBoUDjc=;
+	b=ROKR36Se9hwQGO7OcOTcuK/ATrwfX33m/K07ioOnPmA75Olbsou05Akr4RoJYvMxSLts
+	 z2c84VZXqBzhWLz3zXCly4EbfsS6Y1/iBgTvyfW1okgN8u6Jwtjj0nI05tjjSENzkcK2j
+	 FoMrFum9ZLtapfm9amqA6hldkLJcwMdmAdEFE3vVCWRh0WVWDegrkAWj3ymgK8mQgb514
+	 JXCvmLMXSh44D+jiwLIT6q6YRqxf5gF0H8+rJpi0rNq7iCJE2e9MSGXveLnSqwCcrEq0H
+	 dd/cVAxc6kmuG9kmSsxct9F6kEwb5ExgqTtUfL4uTo8xK5b5+BnMfQsZxM/QdgaKJnA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JZ0GgMow;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Md3oxjWO;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 452F7606A887;
-	Thu, 12 Nov 2026 09:04:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D1AC60A3803;
+	Thu, 12 Nov 2026 09:04:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JZ0GgMow
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3A931F00A05;
-	Thu, 12 Nov 2026 09:04:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Md3oxjWO
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 611741F00A06;
+	Thu, 12 Nov 2026 09:04:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794474245;
-	bh=5fCCCXEOfM/ae3w8SM+2GzfEV3C2pd0/CFQFdIizuLk=;
+	s=k20260515; t=1794474253;
+	bh=4vl0yf9MswuE4OKPGllY340LXxGifnWzots3uBoUDjc=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=JZ0GgMowVVv7gOw9QlHwThCBEBbt3JKeRmM2MgNzEBiiSTB5cL7g2TYhJm+ks+UGu
-	 b/juZDJBmThfJUGHjty10H9GkhqRnDeFx8MARIlIYbZG7YpEqUvbKN4ZMmm9KHl4ye
-	 s0ZwehVI3m7Gdp3+C6qOrTrNO7ileHDk91EQt7bH8UGEt/5291lWMnBMSmTUK84eyK
-	 aBJ6m5ZE3jcNRXZsvijkZaN8Xqn3zO4oLHf9uXm3tMWEBcJ7qya8wtJXlKP5Ht7IR8
-	 BU7rqOFrhbiY7BMVzb2X1GEwNL+1J4UHIEoViThRgPu31DTuf9+7TbmwYuwSoxmhcc
-	 K/q60NXSCUKZw==
+	b=Md3oxjWOP0QsaCVItxOJ2e0NVSHIeOak5RTpFOBi7xgFTJN3RnXxrTfSvDmbNby74
+	 I4W/k72ozIDZvPuqluY6IXFYQMtv5TpUCnEZg66M1wZfiv/uywP7oq6i004d3FOuJ3
+	 RiJH35a+t5A5n6wQARIaCyK1P17OdhDKslpsG+JI77cFqtUJcoVPW9C7NBO/OIVWSo
+	 qwQOhX6Oz09bVBtJpUaRxtbx+Y0MFugoxi3bjgzEeFZVki7kRps4XDAGX7iqfzHVJx
+	 yHllbNLD3+ZBZFvI2CVXKxYwqRUhsOIeHi2pi2yaztjLsgwMly1Ma8h2EUSdXFQ4lu
+	 8A+KlsRIUQ1VQ==
 From: Vinod Koul <vkoul@kernel.org>
-To: Pengpeng Hou <pengpeng@iscas.ac.cn>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
  Manivannan Sadhasivam <mani@kernel.org>, 
- Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org, 
- linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20260830131442.3025-1-pengpeng@iscas.ac.cn>
-References: <20260830131442.3025-1-pengpeng@iscas.ac.cn>
-Subject: Re: (subset) [PATCH] phy: qcom: m31: propagate reset errors
-Message-Id: <179447424330.428303.14422230960411700772.b4-ty@kernel.org>
-Date: Thu, 12 Nov 2026 14:34:03 +0530
+ Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260917-smb-repeater-power-leakage-v1-1-6d7311c3c03e@oss.qualcomm.com>
+References: <20260917-smb-repeater-power-leakage-v1-1-6d7311c3c03e@oss.qualcomm.com>
+Subject: Re: [PATCH] phy: qualcomm: phy-qcom-eusb2-repeater: Fix SMB Power
+ leakage issue
+Message-Id: <179447425103.428303.413537830630174514.b4-ty@kernel.org>
+Date: Thu, 12 Nov 2026 14:34:11 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,21 +67,18 @@ Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 
 
-On Sun, 30 Aug 2026 21:14:42 +0800, Pengpeng Hou wrote:
-> m31usb_phy_init() enables the regulator and clock, then performs an
-> unchecked
-> reset pulse before reporting that the PHY powered on.
+On Thu, 17 Sep 2026 15:10:09 +0530, Krishna Kurapati wrote:
+> On Glymur, it is observed that although the exit call is done, there is a
+> power leakage seen on SMB2370 charger (which embeds the eUSB2 module as
+> well). As per recommendation of HW team, disable the repeater during the
+> exit call to prevent this power leakage.
 > 
-> Return reset-controller errors and release the clock and regulator that
-> were
-> enabled for the failed power-on attempt.
 > 
-> [...]
 
 Applied, thanks!
 
-[1/1] phy: qcom: m31: propagate reset errors
-      commit: ad2bf54fe7267f9e7cba90afdc8d91dfd17957f3
+[1/1] phy: qualcomm: phy-qcom-eusb2-repeater: Fix SMB Power leakage issue
+      commit: a3e5158b43691c447eb77d43ea4f1ec6b1675605
 
 Best regards,
 -- 
