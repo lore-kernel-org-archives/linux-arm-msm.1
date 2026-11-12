@@ -1,55 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=103.117.158.53
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794479471;
-	b=ghy0YkM6veXtKZVi0mcyWTQZKEn7VOfRg+eP+XpCOac22BQv3UuOznfdLvGi5TiQZoP2
-	 lQ3IM/CpAPgVYBXjpU/54w3woZBwxdoOEhxTNBMcFJwJ5IvkIPBXR5TskSuptF32uNtJZ
-	 NaLcQsy/T62//Ql+3aEM5KjViS2grcApxZn7vJgDoOH1fJAzMqtTaO9vjwEWAnKwmFXrJ
-	 j8j73RT9/nY5LzOuYLAQObu9pkHEcckiE+f6YdxymnzJl/zxVo5hLTX0UZhrXURHvDdUL
-	 u5xmYFZBOM3FZXFQMmRCx0vicBKWM8R5/f98xajzARbDWpztQT6ZlNJ4UDj53xEmoUA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794479471;
-	h=DMARC-Filter:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-ZohoMailClient;
-	bh=imBESoRgV2d2CnSmnZxMUqC/sG5K0E9/d8t7a5xctgk=;
-	b=jrF3Mx5MWdFyacz/gLaOrhWzmIYtck3dSlHPZkO3OvQ415INHPni6Q+G4RsVtvluyy2M
-	 tDhHLKluROzLZu9QgZh9UYaqMt10Jdtkv3MtyHhQ3awJwAUhj/P4JWNLW52Xi3Wl+cyZc
-	 dDk4CHkFAAOAHJs6mCeKzhOXjoBvumTj0m0647bPxOzrnN7Ve3eWZIGFTKz+YHPmFma4U
-	 vGZr/GbfFWwFC13y9Bp5Rq+KxPYUpCFRN7NdcQkIrlAj8B34KBYVR/8H+9sJ+vk6g0fh8
-	 2WpbKnX9E4OtD6tSoW5XXI2BvrcbOXYcdDvVvBxMw3sITwo9keo1ApJ06Hw39X568Yw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=none header.from=inferno0230.in;
-	spf=pass smtp.mailfrom=inferno0230.in;
-	dkim=pass header.d=inferno0230.in header.i=@inferno0230.in header.a=rsa-sha256 header.s=zmail header.b=E2ZmU7g2;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=103.117.158.53
-Received: from sender-of-o53.zoho.in (sender-of-o53.zoho.in [103.117.158.53])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794479579;
+	b=nd8BYtgYFhedaZ86r6JDcU6SMmlmjQhrRxfDsY7kYgbhPn7exNilaF9LWdN5BaLUJU9R
+	 oEFQUhY6C2O6G8tZxIvoponZLhEc9ecY+Oaul4ZYUmyf4DuM6EGvfGCd29s6qR9i3eLX9
+	 efqk/cFDH8LUbkYxbyoberJ6IA5S4gvIVGB0Tf3X3Sh1uNpwfVSHezd8kXEhyMQKMZXq9
+	 CVWXeEZnFdTmWxqz4R33tmu8PhGawGgjnTZVDevENNg539fBXdcZb0A6QgaaJd2DedxQ6
+	 S6r+t5jNXjjyteuObNDNgQxGs9iy/FZLTDV7QRECO4yjfuMNgAGwfpCAlTz8usyPKdA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794479579;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=7asrFaHTzZllDDUNciX3JSRX5gXUC5F4fBVc9Jkwf0E=;
+	b=0UJdqs4GhwfSDAoko7yE4+1jniLZacCE97EDZPG6OXzvnlFDRHItjcKT7s7GcCJkPLvf
+	 dFlCK+gmuB+gAIcq/rLIEK9uCW/xWPsftRWSnKg7oU/TnmL2nY+L3DYdCx7V5TMiZ+rDK
+	 p+PvP4dp5MRZ5bVVr8rBy7yj2XMS7MuO0q0yazR8hI767tKNeLGrKLsOdTfjuata0xqm9
+	 yI3XNLVhb2M4o4ydlMxRW25s8Bd8U0WSwk/O3RYl0k4pG/fDDFsAvHS77i7rmFaHC7DBU
+	 rEDfZ+eQmMvWS1MxCyNZGB45XOUbs75/p/xdD9K/DARy0t1BTiJCN7lJbKtrn0SF9ag==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SGb2yDtZ;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21E60606A32D;
-	Thu, 12 Nov 2026 10:31:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 21E60606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=inferno0230.in
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inferno0230.in
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CF86606A31C;
+	Thu, 12 Nov 2026 10:32:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=inferno0230.in header.i=@inferno0230.in header.a=rsa-sha256 header.s=zmail header.b=E2ZmU7g2
-ARC-Seal: i=1; a=rsa-sha256; t=1794479448; cv=none; 
-	d=zohomail.in; s=zohoarc; 
-	b=eJgO9PgXfIDvyCESmbPFW5AZpxmhi2O2T4edhtPZMTLmPb7oa3FXvlY+d3aILCRXi3y4ViH5I3+hWV6B6Z4E1gsgAyKAIcwLrhB5ExsPrrf6BJRXhsgT/jBdRF6PSOg0tcwGl4vTKq46dRHBklbDsogLQsjucngZKZDPnpdyXDE=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in; s=zohoarc; 
-	t=1794479448; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=imBESoRgV2d2CnSmnZxMUqC/sG5K0E9/d8t7a5xctgk=; 
-	b=a1NzeROtHpDtm43krFknTsUECXZceELRCFXBm27pMWmSNrDdcj7FNfyWjQcUeru6dAvjUCkJcvmoxIUht/RMAeNqwEQNLYk8ZmdEdgj+9RWIziJpu6X5hIL8Qf8NpP3EiZK3IbsYtSdVB5LbNp1drthAkrJ8+JITAB1bk/Aw2LA=
-ARC-Authentication-Results: i=1; mx.zohomail.in;
-	dkim=pass  header.i=inferno0230.in;
-	spf=pass  smtp.mailfrom=mail@inferno0230.in;
-	dmarc=pass header.from=<mail@inferno0230.in>
-DKIM-Signature: a=rsa-sha256; b=E2ZmU7g2Dsxya06MygQiX+8IPPwX0cMkLC88UsMwmuEB9xjhaxLxBnKlRAZCov3pGe8OOZ43mpan+KatIKt03slP0H9COcJ2qtRvjNWe90+rK2OofV4s/9UyIyp4H+c03UvBCR5DW1eh0nqUmci0yqmpCBG//TWO5YcwOrKPc6A=; c=relaxed/relaxed; s=zmail; d=inferno0230.in; v=1; bh=imBESoRgV2d2CnSmnZxMUqC/sG5K0E9/d8t7a5xctgk=; h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zoho.in with SMTPS id 1794479446315827.1478497824277;
-	Thu, 12 Nov 2026 16:00:46 +0530 (IST)
-From: Aditya Choudhury <mail@inferno0230.in>
-Date: Thu, 12 Nov 2026 10:30:26 +0000
-Subject: [PATCH 1/2] dt-bindings: arm: qcom,ids: Add SoC ID for SM7550
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SGb2yDtZ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1E9D1F00A05;
+	Thu, 12 Nov 2026 10:32:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794479579;
+	bh=7asrFaHTzZllDDUNciX3JSRX5gXUC5F4fBVc9Jkwf0E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SGb2yDtZZqWFVT0guABW2rgY6yde91AMAt54K9zUMc6UNmu7S/V4fgWu69fKsfyPV
+	 7Es8RO7tpcRecCeER9guaREA7sPOuG3WBLnorqOoYS6/o/S+jqXwzN2exs1B8sA3N/
+	 ZF4JGs3m2/skadvs75aHgR/H6ByuPWU7sQ1BdFy1mJYih50uf3Zp+ccuiPVeVwtDCA
+	 bR7Q5WXN7kDBxMaW3Jvayc6JUP0xbthJyaw/KGsHM7Svirv2yXY2jesLK5/Jg9PZyO
+	 7OsRdD1RmzyyESGfks3oK20chkDsepDNhUJxWgPddg2c6NE2aQVDzmY1ONk0PsuEG1
+	 X2DZOwBkjArtw==
+Date: Thu, 12 Nov 2026 16:02:46 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Val Packett <val@packett.cool>
+Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-pci@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Wei Deng <wei.deng@oss.qualcomm.com>
+Subject: Re: [PATCH v7 5/8] Bluetooth: hci_qca: Support QCA2066 on M.2
+ connector via pwrseq
+Message-ID: <avWVnjF86FLFvfOC@debian>
+References: <20261005-monza-wireless-v7-0-5a6de7662dcb@oss.qualcomm.com>
+ <20261005-monza-wireless-v7-5-5a6de7662dcb@oss.qualcomm.com>
+ <bc7730e4-8b47-4c2b-84ef-277749f2aab8@packett.cool>
+ <CAFEp6-3Mt-CCJEz=RAJUh6pxH-Ssgkqfx3QQfyzvS9HwzFp9QQ@mail.gmail.com>
+ <906ebec9-de19-4a1e-9472-dcf8529fa232@packett.cool>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,40 +69,95 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-sm7550-soc-id-v1-v1-1-57299906d81a@inferno0230.in>
-References: <20261112-sm7550-soc-id-v1-v1-0-57299906d81a@inferno0230.in>
-In-Reply-To: <20261112-sm7550-soc-id-v1-v1-0-57299906d81a@inferno0230.in>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Aditya Choudhury <mail@inferno0230.in>
-X-Mailer: b4 0.15.2
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <906ebec9-de19-4a1e-9472-dcf8529fa232@packett.cool>
 
-Add the ID for the Qualcomm SM7550 SoC, whose internal codename is crow.
+On Mon, Oct 12, 2026 at 04:10:26PM -0300, Val Packett wrote:
+> 
+> On 10/9/26 1:40 PM, Loic Poulain wrote:
+> > Hi Val,
+> > 
+> > On Thu, Oct 8, 2026 at 12:58 AM Val Packett <val@packett.cool> wrote:
+> > > 
+> > > On 10/5/26 9:21 AM, Loic Poulain wrote:
+> > > > For QCA2066 (and other QCA chips) on M.2 connectors, the UART enable is
+> > > > controlled by the W_DISABLE2# signal managed by the pcie-m2 power sequencer
+> > > > rather than a dedicated BT enable GPIO.
+> > > > 
+> > > > When the serdev controller has an OF graph (indicating it is connected to
+> > > > an M.2 connector), acquire the 'uart' pwrseq target from the connector's
+> > > > power sequencer and use it to control BT power instead of the bt-enable
+> > > > GPIO. This is factored out into qca_serdev_get_m2_pwrseq().
+> > > > 
+> > > > Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
+> > > > Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> > > > Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> > > > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> > > > ---
+> > > >    drivers/bluetooth/hci_qca.c | 47 +++++++++++++++++++++++++++++++++++----------
+> > > >    1 file changed, 37 insertions(+), 10 deletions(-)
+> > > > 
+> > > > diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+> > > > index 1d27ff98034ba99d0783e48db5c605f3b31117ea..b6ec1a57248e2cf4bd138898ffc5cad45b1b4a8b 100644
+> > > > --- a/drivers/bluetooth/hci_qca.c
+> > > > +++ b/drivers/bluetooth/hci_qca.c
+> > > > @@ -1875,6 +1875,9 @@ static int qca_power_on(struct hci_dev *hdev)
+> > > >                        /* Controller needs time to bootup. */
+> > > >                        msleep(150);
+> > > >                }
+> > > > +
+> > > > +             if (qcadev->bt_power.pwrseq)
+> > > > +                     pwrseq_power_on(qcadev->bt_power.pwrseq);
+> > > >        }
+> > > > 
+> > > >        clear_bit(QCA_BT_OFF, &qca->flags);
+> > > > @@ -2396,6 +2399,34 @@ static int qca_init_regulators(struct qca_power *qca,
+> > > >        return 0;
+> > > >    }
+> > > > 
+> > > > +static void qca_serdev_put_pwrseq(void *data)
+> > > > +{
+> > > > +     pwrseq_put(data);
+> > > > +}
+> > > > +
+> > > > +static int qca_serdev_get_m2_pwrseq(struct qca_serdev *qcadev)
+> > > > +{
+> > > > +     struct serdev_device *serdev = qcadev->serdev_hu.serdev;
+> > > > +     struct pwrseq_desc *pwrseq;
+> > > > +
+> > > > +     if (!of_graph_is_present(dev_of_node(&serdev->ctrl->dev)))
+> > > > +             return 0;
+> > > Seems like of_graph_is_present does *not* return false for the existing
+> > > (non-connector) setup which is currently used in all the laptop device
+> > > trees..
+> > If I understand the issue correctly, this can only occur when a UART
+> > 'port' is left unconnected, in which case the failure is legitimate.
+> > The laptop device trees should be fixed accordingly, either by
+> > connecting the port to the corresponding M.2 device or by using the
+> > usual Bluetooth UART child-node approach. I don't see this issue in
+> > mainline.
+> 
+> So it looks like this is because commit 014501d141ed ("arm64: dts: qcom:
+> hamoa: Add graph port/endpoint anchors to pcie4_port0 and uart14")
+> unconditionally added the uart14 endpoint to hamoa.dtsi itself in
+> preparation for the future transition to proper M.2 descriptions.
+> 
+> The laptop dts'es themselves still have the older child-node description for
+> bluetooth, with a dummy port { uart14_ep: endpoint {}; }; that's not used
+> yet.
+> 
+> Could the check be extended to actually verify that there's actually
+> something the graph endpoint is connected to? Or should that commit be
+> reverted?
+> 
 
-Signed-off-by: Aditya Choudhury <mail@inferno0230.in>
----
- include/dt-bindings/arm/qcom,ids.h | 1 +
- 1 file changed, 1 insertion(+)
+Taken care now: https://lore.kernel.org/linux-arm-msm/20261112-hamoa-dt-fix-v1-1-55efbac840f4@oss.qualcomm.com/
 
-diff --git a/include/dt-bindings/arm/qcom,ids.h b/include/dt-bindings/arm/qcom,ids.h
-index d89d3b5dd00c..80e6fb741def 100644
---- a/include/dt-bindings/arm/qcom,ids.h
-+++ b/include/dt-bindings/arm/qcom,ids.h
-@@ -283,6 +283,7 @@
- #define QCOM_ID_IPQ5302			595
- #define QCOM_ID_QCS8550			603
- #define QCOM_ID_QCM8550			604
-+#define QCOM_ID_SM7550			608
- #define QCOM_ID_SM8750			618
- #define QCOM_ID_IPQ5300			624
- #define QCOM_ID_SM7635			636
+I shouldn't have given my r-b tag for the offending patch :/
+
+- Mani
 
 -- 
-2.56.0
-
+மணிவண்ணன் சதாசிவம்
