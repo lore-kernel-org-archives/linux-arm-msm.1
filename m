@@ -1,47 +1,77 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794570955;
-	b=io++788yuQNegftpDJq6Sg+i2lQsubnrFCYLnBdv1IJlTmxbyHKqJv+KQeZkryAC8Qw6
-	 2L61TM9MMk/V4PxUWiAZPcmT4jGATGHHcyKunyKSvHNV2usLJ170kzLjMEgQw0pNtwGHO
-	 uHD0GVXShJxJyIlcEOQ9QdIB7EjMEg68FUf2Rbehm55FFDRGNpx3zlILnf7onXsgZXyOH
-	 9copiAt6054IvEzpDzhqHfd9au9PB8eBM0CJsnDoXIOMnkL4fENhinE9koTGrDKlCyeU+
-	 x+li9jr7zYfvwMPy7RJjO1/KxH8uS744W/fNpErME3Bq5VYilptY2GXVVIyu10lsZCw==
+	t=1794571530;
+	b=ptNhdyZUbscTzYjAhJ66y10slF80wxx/0WLXAlrUEwCOPyodKjQHLkIuEFlJOX71dst6
+	 A42Txoqr4IHWnNdUlJlNuhaqlWWW6evR7RLAt9ooXEEsB3doE0K+bVSYD3BmH9xjnMV9Q
+	 Qv5ixjg6rYftsc/SMW7NIwg+qi2H/K6Awi7Ck1V4/x7VTTQmTYC9ujPA6hqE76dPsIlTl
+	 4uBIkW7vocnN2H4+u0nuVgVa3/9ifOMM/6fC6oClJ5sb8JPi9GTSXZVC1wKR3Bb5Eyir2
+	 LrV950eiomTBrNeZzFgBlE1YgmCwnmaw4boJerf8rFs15s+arYaJeZcK+pXUl0s6SMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794570955;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=QS4YjeR27Geix3mIJ8Kxr1HEC+u+MKwupprXA7M8Gr4=;
-	b=1V1BR9uvCfdLczk6QY6dO88a51i7A3lHXAGzM0VmIjGuLPNev3Ox9W3nWONJ7NpAUQo+
-	 9FlQYU9w6elWukqGmkLz/g8FdBc2TZ7iFUizVMHU3BiwZwrm6s2AdkjcsxWCHakwBSlvv
-	 XJwzmZ9dVj05RUFhfQbSWNLdx0njOKsC4RbdDdwVwromrfuPeLQQIkMyD9ApE3hbH3JWv
-	 QRCTWB1guOvcynWQgwBD1OiOBHCS9PqQY3HaTsyuSk0Ov20izXlDd1Y6vAnPO4ALdDnFl
-	 M3ESJ7CQcVwDnDACRetDr1uN79lstb53trmSZo4FlFcthS8HA+xpGHUR62RQFwnZftQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794571530;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
+	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=JCyADuE7MAyHJhJI3+8pvWzlvXz5TnZK+HIgXhrnClU=;
+	b=R7tACoZ1rqjs58cfPidpf38S9t9QhiP9obSVQoUIj1NMHKFL3mS72LXblBnViv1FNISz
+	 xupYeVbQ3/yzoxmOOclxidBECuG/fs+c2qllJaHslpHtBWBhSOCwvzsDTB0MXFapAkPrA
+	 TqzC1MPWBQf9vRbSLaGF9145FZFYFZrTa/rn7u9Z6UJqH058orzAoX0K/QqVYKyrkfA1v
+	 ou4uTFB3JOlOG+3iu0CZz2Ongd+Id+h9I4b+X1thR/KDW/iKK4y5E+Sdly8qB81cd2FDG
+	 2TnWHJ233Hsl/5lI57+akXfpu/3sPd0tujMNP5MQtXpIeUSXHpSfTwcvxCr5q1Fhc3A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fXKx+cjp;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=PQ+E46Xc;
+	arc=none smtp.remote-ip=198.175.65.11
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BC54606A31C;
-	Fri, 13 Nov 2026 11:55:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75FE1606A8F9;
+	Fri, 13 Nov 2026 12:05:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 75FE1606A8F9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fXKx+cjp
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB34E1F000C4;
-	Fri, 13 Nov 2026 11:55:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794570954;
-	bh=QS4YjeR27Geix3mIJ8Kxr1HEC+u+MKwupprXA7M8Gr4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=fXKx+cjpQ1a9rKBEo0i9efxYspyNNyRf/LNwgW48sDZazH0mdC2mGvDawoIqHuFTw
-	 PELc25wtBHYiCeVRHVxJdcZ1e1vp3tjAkLbPUF3dATHS9vMSpHDNbQVeKMfwp5e1/+
-	 u1ppqKk8cYO+8MFXu58AGinaIvTc/ZJ39uDzbgdgFLaGcmEEqJpQzl6IRQOX7hz9gl
-	 6j6oQ7ZHDRl1xWTxZ98GGTB+g6XqnEBflo7MrjHzIhpdUwHrtdMpNfdd2X2nKCu5ha
-	 iWpm1szZzisnEpfUnRiMuvZIXexT9T5QiqnhM9533RUc1t3aidYXhC4rWJTm2rkozB
-	 UP+KGwlcG1n0g==
-Message-ID: <ddd0c71f-87f8-43c1-b3a3-055cd1d380e3@kernel.org>
-Date: Fri, 13 Nov 2026 12:55:48 +0100
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=PQ+E46Xc
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794571531; x=1826107531;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=stDOacIHpZsQKcozLdna80o9rydyKM8XxSmzyeGn9PU=;
+  b=PQ+E46XcMan/e8voQGQPKry7UpWKlBzhIc/JV5+ziGqmEUluYVAma8Dc
+   vBz3GS0LzzNBx8KIbEokcS2YmSfNWcQCqqxIl8odKvBB20xVOtTtXsXmW
+   hZOf0Jvj+/xp01xSm12To0e8UYWuiCIald7z4Usevhxeytx+WUjvnsQr3
+   uTTctwlVuzTeYD6E8qn7vHQsiVHDYUhTngLQaZwindwomgV2I5Z3SePFD
+   d5+W9Bz5469Z0WdYm47vIZlqHtbvm1tFX3oaQ56Q2gwn3WIwSOlywdxhH
+   AY0yMxGpMSo/anV1yQDKVHkJ6XgcNs+mHpjSgED+3cU4DH4/elZrnaYUI
+   g==;
+X-CSE-ConnectionGUID: GHaD37YyQbmo7906bwqjFg==
+X-CSE-MsgGUID: AP8KsE/SRR+tbtlGIY4QLQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11964"; a="3264210"
+X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
+   d="scan'208";a="3264210"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2026 04:05:30 -0800
+X-CSE-ConnectionGUID: dGo70yMbQiOj77x0eMxSJA==
+X-CSE-MsgGUID: 8cEgRXuDQIm1sQfBQO+jgA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
+   d="scan'208";a="9067875"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa003.fm.intel.com with ESMTP; 13 Nov 2026 04:05:28 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1008)
+	id 1A93299; Fri, 13 Nov 2026 13:05:27 +0100 (CET)
+Date: Fri, 13 Nov 2026 13:05:27 +0100
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
+Cc: bryan.odonoghue@linaro.org, linux-arm-msm@vger.kernel.org,
+	linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] usb: typec: tcpm: qcom: Release connector fwnode after
+ regulator lookup
+Message-ID: <avb9Bwr_VSkB56rP@black.igk.intel.com>
+References: <20261112021836.1851-1-laixiangwu@cmss.chinamobile.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,84 +81,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] dt-bindings: arm: qcom: Add Talos Lyra EVK board
-To: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
-References: <20261027-talos-lyra-evk-v2-v3-0-658fd5a7ec99@oss.qualcomm.com>
- <20261027-talos-lyra-evk-v2-v3-1-658fd5a7ec99@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261027-talos-lyra-evk-v2-v3-1-658fd5a7ec99@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261112021836.1851-1-laixiangwu@cmss.chinamobile.com>
 
-On 27/10/2026 12:31, Ruchira Revdekar wrote:
-> From: Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
+On Thu, Nov 12, 2026 at 10:18:36AM +0800, Xiangwu Lai wrote:
+> pmic_typec_port_probe() looks up the "connector" child node with
+> device_get_named_child_node(), which takes a reference on the
+> returned fwnode.  The node is only used for the VBUS regulator lookup
+> from the connector node and the reference is never dropped, so every
+> probe leaks one fwnode reference.
 > 
-> Add the qcom,talos-lyra-evk compatible string for the Talos Lyra EVK
-> board. The Talos Lyra EVK pairs the Talos Lyra SoM with a carrier board.
-> The SoM uses the same QCS615/SM6150 SoC as the existing Talos EVK, so
-> qcom,talos-lyra-evk is grouped under the existing talos-evk block rather
-> than introducing a SoM-specific compatible.
+> Release the reference right after the regulator lookup, mirroring
+> the parent driver which already manages its own reference on the
+> same node.
 > 
-> Signed-off-by: Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
-> Signed-off-by: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>
+> Fixes: 506927b6bf29 ("usb: typec: tcpm: qcom: prefer VBUS supply from the connector node")
+> Signed-off-by: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
+
+Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+
 > ---
->  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> index d3523435f..084e8e9a8 100644
+> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> @@ -733,6 +733,8 @@ int qcom_pmic_typec_port_probe(struct platform_device *pdev,
+>  	pmic_typec_port->vdd_vbus = devm_of_regulator_get_optional(dev,
+>  								   to_of_node(connector),
+>  								   "vbus");
+> +	fwnode_handle_put(connector);
+> +
+>  	if (pmic_typec_port->vdd_vbus == ERR_PTR(-ENODEV))
+>  		pmic_typec_port->vdd_vbus = devm_regulator_get(dev, "vdd-vbus");
+>  	if (IS_ERR(pmic_typec_port->vdd_vbus))
+> -- 
+> 2.50.1.windows.1
+> 
+> 
 
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-Best regards,
-Krzysztof
+-- 
+heikki
