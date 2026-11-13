@@ -1,85 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794581660;
-	b=w6i4vvKQu7Hbg5oekTvPsWv9iCWFoZHZajTjR14OYyEXFZG9cjZTQXS6jS5LKzZa6CyN
-	 NN5lLOENsb9d/O6kkPQ7cfqfd2aGjVhIcN94RlOAjNFOwAC5ylp77N5VrMl1TGYEnRizn
-	 RtQtjblBz52cgyclsJ6Ca17aWXwVHQ2lgTsbjceJSFSrzzt9z80aOhoDNRLl/4SLadZjH
-	 Km/dV0NzhOiDx/Qfh3x0c7roZpGJ9B3l5nvt6NFWts1fPHd4atk8CIVog7FroJsrRnVgJ
-	 C7XEJ2jQaGgzv6yFYk20tmJV+vWGy/hR8LKPIe4KB1xmjsfqsUaPJmVghMI8u58WkOg==
+	t=1794581843;
+	b=21hiFzi1w2pj7vsiLjA0aOZ3ptO7bi5Uy/8KsC2nKjZSW97UM8qwRZuOynPlR4hMePDk
+	 3A6PtfzeOCQuXl2laTg52UVuRf1tRijT+K2tnuK/XuZGIe/5PG1b2tukjtN1sm4E0ZMJu
+	 4g4GS8DFti7eSmn8m5yx5Jn9xyRyUpWjgcU3d8L06Wl4XgrvrwHRjJD9Clq1zoZa4n7s7
+	 rOmN2fY2+Kb/j0PL1yBADNilROEAwMcmE88s7tF9t4H4NuYXVqORArmYsj/OMnBG1IwDm
+	 HkYKijCPphRDARb1q9etbwQUjeUpNrGBAjqDH2mwRwkCRlAktvmDOted7utV8oXKkjw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794581660;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Message-Id:
-	 Cc:Subject:From:To:X-Mailer:References:In-Reply-To;
-	bh=sfMyyD6XfhgAeue3zFE3sM8+ryuauYFxxOAZ8sEwYNc=;
-	b=dhKajkDOn1DfldhJnX3VOq6ARYGzGBif9QSs+hvaI+1TkHRAB5iKEZG7yUfpjKWAsCLu
-	 O2wP5OF3S0U1VnNMIg23TbTzZo0vLwQMy6OcLC+HZHmqFfKoXGr5qSEn4W36snKslKt5b
-	 peLgyUyOr1a6jy71qosXgJJH8pKHZtFLLX1ssCDTjZgn2ivdVWsVU3QBxDsbAkC+NUvbj
-	 178v0aHMMmZyPsMVsAwFvmbnltgp8WmPpwGW7aaUOldmEKfdLoAPntVTU9Ph2mbUsDXpe
-	 sR2GGhLceU2kS1zWdH/v1Sl9lokumiK9u6d5o2pxO/mWMV2jQRK4WkhG8fnI1pRjTtQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794581843;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=Dh0sPs1sXxgYkXVsn06kIIGGOH++u3xH+hz++HRb9QI=;
+	b=e+pumySKzGGsMnuNzP5HW9Ja9bx0RYHNdrpTydm1WmEC6o2p2Ri3Esjz1KUg/VgkKV04
+	 Ycxky01GZ0sU0BlNYkmqltnd4QR0MEL37EP2L+nwnA378fxVNNVVQT+XfMcbmn0uBlS6a
+	 aOY87yxFYqwKB1rF0dIkjODIFn+CcCwfwqk5ol/RzqJnjV3i/LT66QMLMVM56iPOuyzFb
+	 5F7bT0tI9vxMbc3yxnjsH3+PUvvHUpSIwHlOUPU2ferUGKU0co8XQRiq7zhyn3kDZZMtZ
+	 DzfB8ebqsDh9niZ2WJ+x2uz6xHyGD9ch74pmMVhWWlxRjzjLh2AubvMOVIA04aFTVwA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fairphone.com;
-	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=DtUb2MSs;
-	arc=none smtp.remote-ip=209.85.218.49
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="aIla0wr/";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9294F606A333
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:54:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9294F606A333
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40F35606A323;
+	Fri, 13 Nov 2026 14:57:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=DtUb2MSs
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c5067a2411bso204131066b.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 06:54:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1794581659; x=1795186459; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=sfMyyD6XfhgAeue3zFE3sM8+ryuauYFxxOAZ8sEwYNc=;
-        b=DtUb2MSsTrLlshbb82Qrnc7nt2mk7Di/3LVlJvL+a+hyBCjKmoyE0a3v6Lz0I7liwB
-         R3K2EeLS5F7QYb0Nz5bXmUSDqnPOI1WSnzrKMViW88wuGkzfF+xl/UBdQXCablxE4Wan
-         Y3ZhfYDrLnPIDnTZ7hSk62AG5/+tmmjCTrQFKjC/EOCY09k/1bY0RZnFNcq+zsKk4XZi
-         eIs87xMiMyXOwCK1T7zuhkfN6s6nb5Gd7Y00aJuq+UExYKM3NuGb6dAtWan9VpQjLkPz
-         jwX9oVYTvUmuB9MY+5dXaTOTRWj676J+TyeoH7V3rmUu/c1SJkaK3aSRaOy6OP/HP4CT
-         HdHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794581659; x=1795186459;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sfMyyD6XfhgAeue3zFE3sM8+ryuauYFxxOAZ8sEwYNc=;
-        b=zLmrD3VxyW/hrszImP/yGbITPCZOOGj1kE1N3cYHCTTF5a9O+dVq/ifq1DYwlK3x9D
-         2zE0WEv0yATJ8gSesG72E2yv6X2b9M7j6J8UXAt90ef0xnPqKB/lF7oSjhAICmPtLfP3
-         w0xA42I3zIVUJaTs2yBck9jacNsXwa39dETPlwaxRJvsxPWdpCQR0aFraxF8Ww11iMUc
-         WqRvjLB2b5rt8eOXvcG6VULBRR9Lu6ycGYbAhI4U/f01CTQX97Kj2r4ylvmM5wytsXMX
-         a9KmmwUsnwL4IfdqvsFytbYrN1BMSRizAEBHZzr9IuwWBFVIVmODLn2q7TMs6EaVSDR9
-         3hTg==
-X-Forwarded-Encrypted: i=1; AL+hErHMnHX3DCBe3CR2Nfqo1NsVTCN2E+Wm1Cex58QSfYAgZ+GPUI7drx/Uwbdq/QzIedCm6troTJBN51vbFuzn@vger.kernel.org
-X-Gm-Message-State: APuU4Z/Il980B9akADfw8kiC8+vL6Eg4/EeJ/oNbt8591u8iVRBgkfvh
-	WepMUEX1i1lqSSEjE1e2lQ8G6ZZHeshY7R+48pRAvUY2xLOy11UhKS54TWRb2WzOAm0=
-X-Gm-Gg: AYBFou2mR5UtYkkefLbp29ycZn5ulrv3E9zHFOyMQDP6mFGGe/gzdu305IctNCGrwn/
-	DCOuhRpQGDHimxMJtxY+my8XnLtCCMisrDIOpRjkTHcENVY0WfhHCPYWAuPazIyQ8k0xekq5JO8
-	NA457VqiHJxwnoMCuGtzEXC2uyQwn7v/2Ou+nKW7I/5lqtLnu0qWD0iFU2L3TyWCACTao5T0Sga
-	DT6/SxLzbm8vLsnkBcwgR4JHENLN2xHMkuPfrIrHyNtk3OqrY4yIuUSdtYkZVpZTpAdQY4LzsJ0
-	8zYQePPuI8S2HJ3HoRZuCZYOV4jwkVwbAG+2C6h22Ehhf4KJEwD3pkbossnfyzv0bCbCnz5IFqS
-	pTdTwjm4bujJHWr8RSjVRGCrZ95zP+2ke7gh7/lwmGeHPHjTgDcRjavG2fXKWtX24KapdKwfpmk
-	XVfknZyCJEI6NA42jFQXJ8fc1KKNa24aFnm1301Mf46kwHLM/mWU8OHBnrSBwY0a5bXv3W7Trf/
-	fh/sbw+SsZGNyRIUBjrcXfDtCfhOwvIHd+czCqdFypDn0rNkI0tBTJO/0P4k/Q3aClGDBdLXONU
-	9PPTJ37QLhrc/eFXYHtIcAv9CMAvNabDCd6tooh3ka7MC06TwrLSeK4YPM2rjnXkn5rMHpq3erg
-	=
-X-Received: by 2002:a17:907:a089:b0:c46:9876:e9b1 with SMTP id a640c23a62f3a-c509664a09fmr236807866b.43.1794581658937;
-        Fri, 13 Nov 2026 06:54:18 -0800 (PST)
-Received: from localhost (144-178-202-142.static.ef-service.nl. [144.178.202.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c78asm112075866b.10.2026.11.13.06.54.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 13 Nov 2026 06:54:18 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aIla0wr/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A78D41F000C4;
+	Fri, 13 Nov 2026 14:57:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794581843;
+	bh=Dh0sPs1sXxgYkXVsn06kIIGGOH++u3xH+hz++HRb9QI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=aIla0wr/sXCZuqFGrrzCXRh5qvkWM2v9+W1o+f8OJAjQDWMIHX1aSH+cFBh+d3Kv8
+	 nGD3yJZ0YdHCCcwtvigWqBuxBGQkL59Z0F2m75J9sUK9/CI5GzhX71V9YsHvRS4UgY
+	 FO7/WXGnAZfexI+isO9V1u7h77LSD335xqXbc1TesUzhuf+AG5Eeywa3OTpZ+53NEg
+	 AvA5zTlwz+VDcS6vzGIQeHv5zHFt79lU61Bzc4UJHT70mz2zJk/bdNWUWUNV6kENi8
+	 F15w1D79R+kbQHqhMEU+DpRM/Cdi4RBrNjxx1xAUfo5zQpgYPUVLzpZ2w7YlNp6Ds1
+	 oJkzvV41ZwCTQ==
+Message-ID: <b945d65b-60a9-4437-999f-15b5f0307b5e@kernel.org>
+Date: Fri, 13 Nov 2026 15:57:17 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,90 +50,103 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] dt-bindings: arm: qcom,ids: Add SoC ID for SM7550
+To: Aditya Choudhury <mail@inferno0230.in>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261112-sm7550-soc-id-v1-v1-0-57299906d81a@inferno0230.in>
+ <20261112-sm7550-soc-id-v1-v1-1-57299906d81a@inferno0230.in>
+ <20261113-ambitious-solemn-narwhal-cbaeec@quoll>
+ <avce6OKgtVIi15tR@mediaserver>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <avce6OKgtVIi15tR@mediaserver>
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 13 Nov 2026 15:54:18 +0100
-Message-Id: <DMU63SK443BB.1CQ2KXXP5PNW4@fairphone.com>
-Cc: <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
- <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] arm64: dts: qcom: kodiak: Elite-ify LPASS macros
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Luca Weiss" <luca.weiss@fairphone.com>, "Konrad Dybcio"
- <konrad.dybcio@oss.qualcomm.com>, "Bjorn Andersson" <andersson@kernel.org>,
- "Konrad Dybcio" <konradybcio@kernel.org>, "Rob Herring" <robh@kernel.org>,
- "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>, <cros-qcom-dts-watchers@chromium.org>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260522-kodiak-elite-macros-v1-1-487661ac1270@fairphone.com>
- <b39e4b4f-c166-48e1-901c-51694cf8172b@oss.qualcomm.com>
- <DJFFMB9BO7GF.3CIRW26SHUSD@fairphone.com>
- <DLIISWYS60TX.BBXK30H05VRL@fairphone.com>
-In-Reply-To: <DLIISWYS60TX.BBXK30H05VRL@fairphone.com>
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 13/11/2026 15:30, Aditya Choudhury wrote:
+> On Fri, Nov 13, 2026 at 12:17:35PM +0100, Krzysztof Kozlowski wrote:
+>> On Thu, Nov 12, 2026 at 10:30:26AM +0000, Aditya Choudhury wrote:
+>>> Add the ID for the Qualcomm SM7550 SoC, whose internal codename is crow.
+>>
+>> >From where did you get internal codename? Downstream does not use the
+>> proper codenames.
+>>
+> crow is the codename used in downstream sources. I assumed it was the
+> internal codename since SM7550 is publicly known as Snapdragon 7 Gen 3.
+> I was also unsure about this because SM7635 uses milos upstream instead
+> of volcano downstream.
 
-On Fri Sep 18, 2026 at 4:43 PM CEST, Luca Weiss wrote:
-> Hi Konrad,
->
-> On Mon Jun 22, 2026 at 10:23 AM CEST, Luca Weiss wrote:
->> On Wed Jun 17, 2026 at 12:05 PM CEST, Konrad Dybcio wrote:
->>> On 5/22/26 4:46 PM, Luca Weiss wrote:
->>>> Due to initial kodiak/sc7280 bringup being done for Chrome platforms,
->>>> some Chrome-specific bits still remain in kodiak.dtsi, like the clocks
->>>> and power-domains for the LPASS RX/TX/WSA/VA macros.
->>>>=20
->>>> Move them to sc7280-chrome-common.dtsi and put Elite (q6afecc)
->>>> equivalents in its place. The qcs6490-audioreach.dtsi file can also dr=
-op
->>>> deletion of power-domains properties then.
->>>>=20
->>>> This follows previous commits moving Chrome-specific configuration to
->>>> the correct file, leaving kodiak.dtsi for Elite and
->>>> qcs6490-audioreach.dtsi for AudioReach.
->>>>=20
->>>> No functional change intended. The clock-output-names property will no=
-w
->>>> exist for both Chrome and AudioReach devices but this shouldn't have a=
-ny
->>>> relevant effect. And WSA macro clocks weren't added to Chrome because =
-I
->>>> don't believe this would've ever worked given it already referenced
->>>> q6afecc and the nodes were originally added during AudioReach bringup.
+As you can easily check, names in downstream are not codenames and have
+no meaning. Don't use them.
+
+> 
 >>>
->>> I think it's better to keep them, if only to make sure that the result
->>> of dtx_diff isn't outside the expectation of a commit that claims to
->>> only reshuffle data for these platforms
+>>> Signed-off-by: Aditya Choudhury <mail@inferno0230.in>
+>>> ---
+>>>  include/dt-bindings/arm/qcom,ids.h | 1 +
+>>>  1 file changed, 1 insertion(+)
 >>
->> I documented this in the commit message for this purpose.
+>> Where is any user of this? Why do we need such SoC patches separate from
+>> the actual new SoC?
 >>
->> But I'd argue not putting (likely incorrect) wsa_macro overrides there
->> is the better thing to do. Probably somebody should've taken care of the
->> Chrome platforms when adding the wsa nodes in the first place.
->
-> Is that okay, or do you want me to change this? I'm still of the opinion
-> that adding a very-likely-broken WSA macro to chrome is not great.
->
-> Anything else to note? R-b would be nice :)
+> I sent these patches first because I expected a possible codename
+> change, just like what happened with SM7635. I wanted to settle the name
+> before sending the actual SoC support patches, so it wouldn't need to
+> be changed everywhere later.
 
-Any further comment or review? I can also resend if that's helpful.
+But this does not settle the name! You only sent SoC ID, without the
+actual name. Organize your work in proper chunks, not split without
+proper reason. This only limits the view and makes review unnecessarily
+difficult.
 
-Regards
-Luca
-
->
-> Regards
-> Luca
->
->>
->>>
->>> It looks OK as-is for Elite and Audioreach platforms (for the record, I
->>> checked rb3gen2 and FP5)
->>
->> Thanks!
->>
->> Regards
->> Luca
-
-
+Best regards,
+Krzysztof
