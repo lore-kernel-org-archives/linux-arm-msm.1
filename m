@@ -1,110 +1,111 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794580376;
-	b=RE8/hsTUN3IkyA5pjWD+yqkKtXK9SRJOF45SQqUskHc5TPwL4E2GmcRIe0Y9dCLyoU2t
-	 kz6gv6+UHrmOwdsMAE4ZVrWFdYRXJ4kCXhr/ItQ8cE3O3LsL7/MrXRl9RkAZoijIVoP9K
-	 Sp5OfmwmlB8UX7k4OCBMinbqsLl7kXyCF3wVOsriSXPqAmFmJTBIW6SjtYze+gNMoKt6+
-	 PTR0PsfgafX111DN+rcQGiguekFAV1FuXceKJrw7D3cmSkuFdR/ItzJjnCKaz/73ux808
-	 kfITlVZafpSkc2hZrlifUU2RjU9nKe0ZAVRr0IUvK2EvxCy2IIm8WgapjYKnUVblYwg==
+	t=1794580381;
+	b=tk8Rn/JIiujCPRP2SSImlJtpopxo8JQDGJD64LHNNYMAKN6UX6gQZ5qnc3gnoeW4IxWp
+	 NSXkpUPQexUcYCwn02nZ+A3pxV/qe7SAzjOWxdTa7CbpsIq5Vf6GunPBCVUtWMyjVN7nD
+	 TsNHtGO4RC3UWD5111sAViH5mI7Owy6WSSug9KtLcSB1ZxpM4pSTeLbCpja0BjVwaJbXH
+	 GwqXdEFNL+oJygelE7Gj9YKBQQntaqsv/eKhbhdR64ZF7dLGNPLeWvgRg9OQMBv+72MRB
+	 VTROEzVXQgEEqSMxHy1w6RwXxTQz+vRfVBayi7bJg8/HeZudNlQHCS5Ps5AHbSDRWBg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794580376;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794580381;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=2QVeo5lJOkGdek0bBf8H4J2bimgDzpm4CgJ/jKHEj+c=;
-	b=LOBs+Y48OwT3BtSjTR7zd4X68mqtSUsPPQlLWqGoIsvswuuvKEHBMYOOikVhvZAVSz4m
-	 6UAS1GiRNsZqP+IGiaUvhGCdel7xmTQXvRu72RDLAINY30roJfqCDp0UD+ei4QGUmN3EU
-	 bEy+B5c2rNTaaVCdQubDdgoAGeC3auBAQEs5sxvxPP+GaYVtdpCxN9W7tweyJ3bScg0tk
-	 eQgcTil9DPuqwFF97T3MYoqdaftHG+jzazABH1Wz/MUoc3VaHBF5SBSAM7sZeWyDbBDsd
-	 CqnTAhg7c8YVSuNT6xHYp6LVCZExfVgu/aJLVz/BPGQcsK7sPb05psC9EZnOSFyxl8Q==
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=gx91eDJpaU6S9gSHrYisO86Vlpx4mJs+TeI82IVUj98=;
+	b=mtLNtA6BkgBL5/l4aNkffAPay4SKMPx1t81yzC6tbxFuMCJaX4+37KsFUQKdatq39egZ
+	 BGaX6pSAyQSuYPIxS11XAXbb7ekDc7I8z/fyXSLfYuosOxmsvMzb3O+pYZSW8PUeFvWEQ
+	 p6qqaOiXeidd8p7kAabgYgwocvOeEP7B2QRnhsf3o4fvucni2V6fotekYPg4tdlbqlK4A
+	 tZZ8RGB7Y+eh2kumQY/Avlxavn+Sn8CoeOYV3+4KnyLdpp1MeecnOOMGSLQs/I9oZKERt
+	 azIA5WaG+VrlWpBp2rr84qx23zHodK+D8vE4i4mmY2UJLkE4VTrmJ/ouQIrdsd+8XSA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JSCjFhaC;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=D3Li7M7i;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p6LcTAxS;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JCzP9o40;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C752606A899
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:32:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2C752606A899
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68D13606A8AA
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:33:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 68D13606A8AA
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JSCjFhaC;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=D3Li7M7i
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ADCJot4516556
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:32:55 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p6LcTAxS;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JCzP9o40
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ADCJTbS033800
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:33:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	2QVeo5lJOkGdek0bBf8H4J2bimgDzpm4CgJ/jKHEj+c=; b=JSCjFhaC4ibUOLCb
-	lqKAQhI+kL3ed9Vd+lhJbSMUbAzchjGLXlauk6Ez71a7Udmjx0ajT2vb/vFffxRc
-	6KQUmdncpobX0S10TmRb0Pp/Ov7pSwDBfvaMXgKevUe5KP0QxgDYJ5ialqvcur13
-	BTI/V44mgefD6Uipdn9eyb4AW+TCGoJ5OJZOvfK/ijqVxsGB9YxTeTlI2LLt+gND
-	0QfXXB3TKKHd37GOWh8mTDpkGWU4d4ziMgRWMLD3TjJdHnFODw1qjYRpEtw2HJEX
-	BSgebtyokpRVKhSiATCQkHSVepqpkzvy8KHTtEhnd21Rf0Cr6npthfCNLkwof6Ia
-	cKzPiA==
+	gx91eDJpaU6S9gSHrYisO86Vlpx4mJs+TeI82IVUj98=; b=p6LcTAxSLBPS48Cd
+	MH3YQQ1EsSIZjcS2uPf7SdzFAu4A5RxpP2eMpW56ge6qo6vfDIhLmF03xEqv31x6
+	14lWdjH88HiDAd+UUR7HtMHeZrIr5xhHfLgjQxdGkgpeet7X3nEXLBGs/eEk6B2N
+	nHfIl7NAPKN5KaLX0hjwYCrk8GVDTRVm3kHR2uOSggAyeAfS7LTeOnpBU4IXdfwG
+	PHgL1oAU0eYSVC5QVyfNbPu5gHxZMn98EspesPMD8O9VhgWB+ZP8egsyOGZAsGHI
+	DYIfHf6xqfteN/8zXKBcO1y3p0vw2otSOKiYwwPSID0PzVzEwpRpBJjl171soltE
+	rGNbow==
 Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwkfdkjgp-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwvja9sy5-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:32:55 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f13c143c8so194538085a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 06:32:55 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:33:00 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f5844cb60so212618185a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 06:33:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794580374; x=1795185174; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794580380; x=1795185180; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2QVeo5lJOkGdek0bBf8H4J2bimgDzpm4CgJ/jKHEj+c=;
-        b=D3Li7M7i2pz8mb0tdoPgdA5hftj/rwrWx0OmZH27bozUKM6Qu33dAdbLJ0u1IByhIp
-         dwfvlKjKjmFDKqINMYYLlJxNbxoqYLa3UtQkRtPFI0erZUigfzTZJfM1ZegYOS0WlZ7X
-         eqOBc7pHLaYV3X494iqdFRd/zPfBWRwe45vsJDgvR0sEIQIlEJd/i77ia9th6ykz9rCN
-         WSqiQALFi3up5SWS8swYtR8quoVXJ0XWYgjT9fcc0ForDN5EijXJqWCfCR3HP6gKz0wn
-         WjR/0pS9eFWdtNzWyB/QX4YIQqknjAWAl1gxzxBa4zuiXz46N5kGuelRytvvjXNQ0VVK
-         OloA==
+        bh=gx91eDJpaU6S9gSHrYisO86Vlpx4mJs+TeI82IVUj98=;
+        b=JCzP9o40ucS9Xd8yC6Pj0Sg4E6M9RNEza9icZkrlgBQbf5pETQvpsPhnqoSZNvdgOL
+         cC5PJAxpWKt/X4EJbNipl2YqsEGwEFqq8IjZEm31PHJTwD/kr5IdOxF4g5FZhYPhpan5
+         WP3dmJtGDk187w3/ITY3DcbJaicK5SJRFvseQ3oGq/Fllu4Yp1jGluXhYpI3YqtB7ud/
+         kSAPZCeGHuS5ivpVo7WEqnxwQC6TfdDFr6XoV/qeqjXufgx0duAfH/Md0+zSLlMVn4+c
+         PBOERuDvZwd7LgkV7BNUMaM5vyehSayp0UPk5cZkUn2X5u6J+GQbiNAOjC231XdTO9yV
+         rbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794580374; x=1795185174;
+        d=1e100.net; s=20260707; t=1794580380; x=1795185180;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2QVeo5lJOkGdek0bBf8H4J2bimgDzpm4CgJ/jKHEj+c=;
-        b=h3oXSHCHWp9Xc/1mOYa2Esmety3o5tGCSHG3Fb/wqHLo9T+B3kyqI85jcuWfIOuMTh
-         30NuSh3JoZbs/nEbFKIspf7tLKeQmCeayxNOjBWFjnEZVEyl2KdpEdwt3yELHsVp6CK7
-         J66QD46C+PSJawroGyofkZUQsWsEMNi77uZEHS3Uy2vy3GYIE0g2uDP0V6d4k+ErPUiH
-         UvJuSVVm4g1V3bzdTGHxCFiHKv4pNC6uF8y8Hs4UGO5oSb51EjU3bFeQB0cGSRr1Y2Qa
-         askyuctEJJzPatmJ5xPgVm77btHmmAKFYATlCwF8xtdPmgktQfPtXSYBo3+f75C8Iig/
-         Zvgw==
-X-Gm-Message-State: APuU4Z9P6FTsK1gjZ02oYeUJSKY7G9Du3iXUO+jOQCstfORemPx+2FRa
-	RKsvK4al2q5ciqXWbRlKSy3RAFAubzxfMafywatBq9A10mqjuZcNYi9K1ixEDz3isQLth60i9dW
-	6ylWD2NKttNklyo1uNtMgoKgGkzcIjMmjfw9YqN66lTtSRQExFquHT/zvr+5V3hR1fStm
-X-Gm-Gg: AYBFou0mv4xCCNLHyWAfe+1asrL/+PCRwMULg76xEWgGdKM7QjALP2E1o57qlh3X7Ie
-	qGI3Hb6JaSmIwD46HCpSkfxB2Ov1Pphmd6KP8dF4rrWbwLvbBUbFmcP/RFgTOgDb3RzDykSZEtT
-	AK/+GIaXi79gnIslgrme6hVay299jWJoqKAQ7sW61WFOm8fOmaPv1+57v+su+u5aUm43U4/4Ieu
-	eQr7FiEQwszTy3ozcgbYPEqFiJDfRr3SFuEvg0vYS/sZUKZbIIryFOTpHHv+F3vKOhBM+tcazZu
-	JhYuIMhc1PpsEL9kumJSWobw6vNieJVLqGpd4ZhIHoZX1ySQd8omCm0L/AjnO4LtUOkSZl9ac2+
-	/KTLa8amtveZeWuM78YIo/GxRPlw9HMCkTYghLkbFaCQgNT9ToMFksYxG6SfhTCI=
-X-Received: by 2002:a05:620a:684a:b0:945:f6b0:db0 with SMTP id af79cd13be357-9494bb3103bmr412284885a.30.1794580374137;
-        Fri, 13 Nov 2026 06:32:54 -0800 (PST)
-X-Received: by 2002:a05:620a:684a:b0:945:f6b0:db0 with SMTP id af79cd13be357-9494bb3103bmr412275485a.30.1794580373281;
-        Fri, 13 Nov 2026 06:32:53 -0800 (PST)
+        bh=gx91eDJpaU6S9gSHrYisO86Vlpx4mJs+TeI82IVUj98=;
+        b=YmaTI35PN+8rcsTQ+pBT3Dv6YQEbx+/FF+4SwDrq1luh9WIvB9aK4i8nCITkSQ5DSb
+         CV68qgIw53Ju0WiirNz2n8DTg4hGKyJ5TiUXnipdWFxvqRbcWbmxYeAnsiiX3Hzvizy0
+         Lgkb7/azWEP/vKR/yrrDD6W9qFrB45rUtwM6d4f4sZl6Tmg82FlL4mGDnIIozKdtSp6o
+         CzbyZAcyuQdKF72Oj5WjiyhRj++a4df2seu9BS+0m9vMpFmtggT9qgjYxGp7mGBs9Et/
+         DxyHGYfAPVUT0cGxLSUMGC8J9tnTO++gjjFSDO0CttN+tV/wBrlKyMoM47ZwywfIGood
+         rjnA==
+X-Gm-Message-State: APuU4Z/xZ+fOVcX31Fz6Ch/EuqULR5Epgd93YDSC7ZI4BCRIiuv8m7yX
+	pLEVoOsoaSrdbTfqlmjCVj+hzk6rrYqN8Ftqjr3U8A7DYXgpeUBRyWUEtjNP+R6PrvRabBiHnWE
+	y9gdlGE7HUE9EC/AaPe383qkFYpp5LbhQqSx685HSqLUH4d1lOXEiK+M0GJlHmHJB2cic
+X-Gm-Gg: AYBFou1oPQKlEtI8cPOvc4Mzx78lAKR7cx7R70CllxtRFyS8JuUP0TL+zY+BmLO3pVs
+	tCF14qSwHMkk3nxKx+ya4ni5S8E5xMZrRh+dXru3RHn1ZcMY852maaHaOElWIbID+4M5mfJ6ImU
+	dyMWRk9AApryvWj846WzvFjK9zDLZdJlOVsYb1eTF97vmbG14cToZFLEkQ12X1ZK8arW00vPn0f
+	UlUS3bi+n2BpKaILQju2bYyA8YN/EvNIzsCHZnRUYKvZGOIWGPSuAzcrDv7Zlhnj8pZOTjilPQ+
+	ss9BOFRLNPvYJhmMnYeJr8tMfxWKIFKFnpxl7QV5OnQhFGWRRnONwz9Cbgr1u0j5UrZlYypwxF+
+	ag/us4fk6szuP2SFkVyk7a7M+u+Vr1bUSn2QgCt7E0RaFukYzGkNPf6ijSpLBpiA=
+X-Received: by 2002:a05:620a:a719:b0:949:5cb8:6bd8 with SMTP id af79cd13be357-9495cb86f22mr83103485a.22.1794580379668;
+        Fri, 13 Nov 2026 06:32:59 -0800 (PST)
+X-Received: by 2002:a05:620a:a719:b0:949:5cb8:6bd8 with SMTP id af79cd13be357-9495cb86f22mr83099085a.22.1794580379090;
+        Fri, 13 Nov 2026 06:32:59 -0800 (PST)
 Received: from [10.213.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9495a5ef5c4sm71948685a.6.2026.11.13.06.32.47
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9495a5ef5c4sm71948685a.6.2026.11.13.06.32.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 06:32:52 -0800 (PST)
+        Fri, 13 Nov 2026 06:32:58 -0800 (PST)
 From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 20:02:20 +0530
-Subject: [PATCH v5 1/3] dt-bindings: remoteproc: Move iommus constraint to
- SoC-specific bindings
+Date: Fri, 13 Nov 2026 20:02:21 +0530
+Subject: [PATCH v5 2/3] dt-bindings: remoteproc: qcom,shikra-pas: Add
+ iommus constraints
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,7 +117,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261113-shikra-el2-v5-1-8aca743de97f@oss.qualcomm.com>
+Message-Id: <20261113-shikra-el2-v5-2-8aca743de97f@oss.qualcomm.com>
 References: <20261113-shikra-el2-v5-0-8aca743de97f@oss.qualcomm.com>
 In-Reply-To: <20261113-shikra-el2-v5-0-8aca743de97f@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -132,161 +133,85 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org,
         Komal Bajaj <komal.bajaj@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794580360; l=4275;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794580360; l=1410;
  i=komal.bajaj@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
- bh=ix1p+s4/5FlmtMKNK3IrENkc79CTbj3oJEUhEGUvIiQ=;
- b=puyWhF/W3owc44RYAXXdymbp85R+5+n49L0XBd3Me95/ff/5yOnGTpjkg5ks4LNlLkbBV6q9F
- dT9vc0FbZ7nDvoWfteB8iX+gevNczmLiapdMWivy+t5G4kkUfo88b5/
+ bh=AP6m7K9bcNvLKnjx7yin31NugzckAmQBmT7FmQR5FW8=;
+ b=3grAOrtRV282qWHFnvr0tb1SE6cYWndVBqaZAYbo7EGP8AmopSFDhWgbOvmACGOGHjHaUAlCp
+ RCF5uyMrJ05BQEUzi2/HAtn57bemSJCmsfbesJuzu59nAB5M2jy6YwJ
 X-Developer-Key: i=komal.bajaj@oss.qualcomm.com; a=ed25519;
  pk=wKh8mgDh+ePUZ4IIvpBhQOqf16/KvuQHvSvHK20LXNU=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA1NyBTYWx0ZWRfX63UpR5wPs3mF
- VKvFi5ezK2ya+qw09XWo4up4DMNw1qph3JQMphzYVY0ZueTK97j9fmWU7zeJ9dKdzOaC+VPkMD+
- Giynqjm25GR75D0N+vSssKjmgMabH9A=
-X-Proofpoint-ORIG-GUID: 3foCHXx0Vv7WE0vCr2GAdyYaADGPa7wi
-X-Authority-Analysis: v=2.4 cv=DoTDa2/+ c=1 sm=1 tr=0 ts=6af71f97 cx=c_pps
+X-Proofpoint-GUID: PY6Jzqo_wGmR3nQj0YX_fb6GxhFINccs
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA1NyBTYWx0ZWRfX6n5P6svpj6JS
+ Bx7Y4dNC192w7dW6WvL2d9CRjzApxRxTI64IWPAhUI/k/UdV4ZTJrXi+MNVy+z7NE6KtytKoIO3
+ 0R3UJETA5pfm9JxNMGFEfp9lphs/t08=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA1NyBTYWx0ZWRfXx64rMtK98Hms
+ E2QezqnyOgeJV7G7nfc5iB9olReL+xf7DBPowzhogWlIurum8/3nNngxoh32chR8/6UIVXu5Q25
+ bBtByqPjPLCXUxw5sh5N25hp5ySkvEIDZN604eWP5pkrD77s+v5p/0BdBUaQ7B7/TUwvMMUvihM
+ oMzbkg06iuFXcyj9SPj3LSX/4iNDQspih1YKm9IPwXswZMIvtMnX6AKEf0kDQ8BDSRSmOYwvGah
+ p/nA0PBvMWfZKpMCp30OcxuPK1ITsCeeNXO5gc+CJehkwWk1lL6oakJkoi93I/9qKOcvHqM/ZaC
+ O0CIGyBxoGuKY3oCO0g9a/c8KenESvmB0YzfyHPANyjU0UT1SVGqTGVS/kWkqOaGTHZS/Osa+AU
+ fl5yySZfMiWXAc1/tly0FGldUpvUvGOqdbHF/njgM4tCCTSh+Wo++vAnVdftS5TdxHP+Y46N/5g
+ GL5pB0E5849hQ4o/3lg==
+X-Proofpoint-ORIG-GUID: PY6Jzqo_wGmR3nQj0YX_fb6GxhFINccs
+X-Authority-Analysis: v=2.4 cv=AoN7T+9P c=1 sm=1 tr=0 ts=6af71f9c cx=c_pps
  a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=K1dVU9MMS2i6ScopwDcA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=Q89ptBQ9mced--_tLTIA:9 a=QEXdDO2ut3YA:10
  a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA1NyBTYWx0ZWRfXzaSp5lDKeKGo
- jmEIVL3U3h6Oglw1o9NUKL+Vo/4xNH/BLFL7xBbKQrdvxnycX0Wvku0sIxPzboYChYem2yvOMG5
- AaKIT/rY0IMTchLR8WiHdjqQOMQciVBbSE4HW/C7TEBoOQOF3dAYj6cf1eMF48ce2jwM8tWsN5K
- PYMVOAoxPUdrT40to7nzVt355gf+/EFP3zGbfa7e/tvE8+XTT7AbcU2BCRKm9kOjaeD15jar/KQ
- hy8d1w+ALTpQKvsq58kOJ5hAyn54OnKPfpdtWVOd+I9zuEEvWZMUF61GyfcSK3G/NzBG2k9o7nT
- GAeXTpG6LsP2ehtMAz0usLP61BMo0uvGyk0ke9ZZDOzhfuPxh4ygRpevyCeSMxH8TEhHmTzFJiI
- tkk8eJfMghMjRuEo82AASZwwILEmzyTRe5HJZy62crgggX3N5JT/YZFBnO7DO3J/esY8RJglR2c
- k3yDMEzc5PCmxUfVXjQ==
-X-Proofpoint-GUID: 3foCHXx0Vv7WE0vCr2GAdyYaADGPa7wi
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-13_04,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130057
+ clxscore=1015 impostorscore=0 bulkscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0 spamscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611130057
 
-qcom,pas-common.yaml limits iommus to a single entry for every PAS
-remoteproc, which is too restrictive for SoCs whose firmware uses
-multiple IOMMU streams.
-
-Drop iommus from common binding and let each SoC-specific binding declare
-it with its own limits. These bindings set unevaluatedProperties: false,
-so a compatible that does not declare iommus rejects it. Declare it for
-every compatible whose nodes use it.
+Describe the iommus streams of the Shikra PAS remoteprocs, needed when
+Linux boots at EL2 without the hypervisor: CDSP uses a single stream,
+while LPAICP firmware uses three.
 
 Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
 ---
- .../devicetree/bindings/remoteproc/qcom,pas-common.yaml   |  3 ---
- .../devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml  |  4 ++++
- .../devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml   | 12 ++++++++++++
- .../devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml   | 13 +++++++++++++
- .../devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml   | 15 +++++++++++++++
- 5 files changed, 44 insertions(+), 3 deletions(-)
+ .../devicetree/bindings/remoteproc/qcom,shikra-pas.yaml  | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-index f75cab6b4ed9..4662fe4cff62 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-@@ -32,9 +32,6 @@ properties:
-     minItems: 5
-     maxItems: 6
- 
--  iommus:
--    maxItems: 1
--
-   power-domains:
-     minItems: 1
-     maxItems: 3
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-index dda2d144b720..3c35da52204d 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-@@ -38,6 +38,10 @@ properties:
-   reg:
-     maxItems: 1
- 
-+  iommus:
-+    maxItems: 1
-+    description: Firmware Stream
-+
-   clocks:
-     items:
-       - description: XO clock
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-index b20780e5e26b..8aebc785f212 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-@@ -169,6 +169,18 @@ allOf:
+diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+index 34a2f15e9361..1688d198cc5a 100644
+--- a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
++++ b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+@@ -119,6 +119,17 @@ allOf:
+           items:
              - const: cx
-             - const: mx
  
 +  - if:
 +      properties:
 +        compatible:
 +          enum:
-+            - qcom,sc7280-adsp-pas
-+            - qcom,sc7280-cdsp-pas
++            - qcom,shikra-cdsp-pas
 +    then:
 +      properties:
 +        iommus:
 +          maxItems: 1
 +          description: Firmware Stream
 +
- unevaluatedProperties: false
- 
- examples:
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-index 5a7c5f8c92d1..5c41c8936960 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-@@ -178,6 +178,19 @@ allOf:
-             - const: lcx
-             - const: lmx
- 
-+  - if:
-+      properties:
-+        compatible:
-+          contains:
-+            enum:
-+              - qcom,qcs615-adsp-pas
-+              - qcom,qcs615-cdsp-pas
-+    then:
-+      properties:
+   - if:
+       properties:
+         compatible:
+@@ -134,6 +145,11 @@ allOf:
+           minItems: 2
+         firmware-name:
+           minItems: 2
 +        iommus:
-+          maxItems: 1
-+          description: Firmware Stream
-+
- unevaluatedProperties: false
++          items:
++            - description: Firmware Stream
++            - description: Firmware MMIO Stream
++            - description: QUP Stream
+         power-domains: false
+         power-domain-names: false
  
- examples:
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-index 99e9aeeb4f62..f838b98c43f4 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-@@ -317,6 +317,21 @@ allOf:
-             - const: mx
-             - const: nsp
- 
-+  - if:
-+      properties:
-+        compatible:
-+          contains:
-+            enum:
-+              - qcom,glymur-adsp-pas
-+              - qcom,glymur-cdsp-pas
-+              - qcom,x1e80100-adsp-pas
-+              - qcom,x1e80100-cdsp-pas
-+    then:
-+      properties:
-+        iommus:
-+          maxItems: 1
-+          description: Firmware Stream
-+
- unevaluatedProperties: false
- 
- examples:
 
 -- 
 2.34.1
