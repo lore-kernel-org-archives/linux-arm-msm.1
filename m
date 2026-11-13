@@ -1,109 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794557586;
-	b=bqA/BTWB9Bi7bGtF1QXSzt/J4rcHL8OaYDU9j9eOJxMUfc7599SOxyuI/WvXAb3JCbx8
-	 8CBTJ/lcUDWiB0IMVLUl9OjGRLcBl381YBQ2PIYQMk2kuIOSePo+GJ3mZw4OntT0XXu4B
-	 58TgFCmg0/aSiuSmAPUOV64+3JwUnpSTuuVW2vA64duCjxByzCVtcf4gIAXtHfkJHZlvA
-	 O5ysesfh3jpKT4lvM/Jlyb1jJZtHHLqTxSRgzmWU0EtwABnVHG9YlWO2/ygWmGk7uSgOE
-	 Xvr9XEFY0a0GOD70zSHcoG/vRWGJPX1SUF7NverXcuqAUi71vb4eU0u6YFyg+3+xb7w==
+	t=1794557774;
+	b=BIAugMmHGDx2mFlx0oboSMFYLAQoLIf5fhvKVumXNZpRWmcE1U/zOkrURidyMcqro+cm
+	 4QBfNeuVJhIlPM4D101h9YWYaTJL//Z3QDVv28vqYcZlSi5XJdoufLNPSldG+4b8Xpia0
+	 tYvlJvpabR9G4jPGDnJqEZbX9Mp2DGSfrar6Rs2wM2qL9gkzSDc0wLKtUiSW1nahe/Xro
+	 1CBPaU8PutmonggClvWQBXiC5sRVH8poVidJYOO4IkeyHqEYf2eyPpGgad97ArpElmKrN
+	 UWGzIUhAhs5NEahYmJQGXBOwMTvJvr3fMWpEvQy0oLSvNSeTVTQbd7vP3T4sgtyVEyg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794557586;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=h6K5DZ6BT6PPRrqksZkUMcUpto2/+I23hqXq9QoTxbY=;
-	b=TECIpWCz+dPoS2IQGN1eltgr36kkAE0eaVShfSZADKEcBvJPvCiLwtNd/VNn2X5OQkBf
-	 IgAdyViD0vjCU1FdQ2W7sv0HO/uUZVu3xJQkBSZDz33zSVOjpleMfZ0agnJXDUZb9Jq0e
-	 rwje74iMqxyJbkhxSByQQYv/bldp82WFUBhmVSD/jMSLrVr0VKBXj6XhS8yvGJu983sAH
-	 a6L4tNlct7qghn3vWqGzfLdtWmtJlYgcMl/UZRHf00M1tssO4qKbiPqMkJyZgYragN+R2
-	 QhmAKmV9nirkZ0STHtm+Dc8gn299L8p/0sPBdYSDpv514snKMwpjJJ5R5ZqunzbLW8A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794557774;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=9U8aC1QAz9A7FHMAgGcgXCwjyuajaml/x5tjK2P7TO0=;
+	b=nl9GeykJ4Pn+USoU/AY+r6UDk12a0FdZmJxBoiIaV93XpASfoyHpY3b846xgm5iR1tqj
+	 a5dcE4d7tanKqKx+MvnY6oCognmtnkcNzL0x9NZ5pucePX3mBgQmakhmz1wuFFVEjLXxN
+	 3TROUyI8gqKEHzRppQKRrVEeXJ25UT2Lo+z73+aJswmZByF3Z8butvbeMSJdwh+tchjHG
+	 SzK96ila5xr1KgVgy48z7hXnE39kwEhqw0j/O7ZcS7XYZbW87T2v7LAVM6yF3B/LLrpc8
+	 NCPftV1CnNWYiGlftmEXYA6v9f/BmQhetX95jC6wUHmh0hFcqE2zMhwNAL0tBeDBYQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EUDuXOlR;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jtw9YpE0;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XwAtRhqm;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91D20606A32D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:13:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 91D20606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FE3C606A321;
+	Fri, 13 Nov 2026 08:16:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EUDuXOlR;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jtw9YpE0
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AD57AJ93615962
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:13:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	h6K5DZ6BT6PPRrqksZkUMcUpto2/+I23hqXq9QoTxbY=; b=EUDuXOlRXuJ3IcDz
-	2DcpKzQGdALG+oJDx5gaNbkmaoThuRjrdXnMyNVETD/BnGS4mT2ZtezAOyg54iao
-	79VA2Txb4loofUy9wCNDUlB1P473ZkSWTWHSAbMXoeBh9FTrDyrd8eJlUovndr4L
-	SFEmT/suSlm9O+JSa4xFACYwStZnNnLg5GfFB5fPpI2x0Tshr6GTYylPN/hHtz9M
-	S7wxj0dzXZSVXMYtFWgqHYe2RMZ7RAT8i9R+sYrXxjLmcEMB1x/98LUb1rF2rVyi
-	s+rfGrs/EwC0sM4y5HjuCmW9p3l6VbsQ7wBiNDO6iDzZHIw6VQcNtctmQjYWVvLV
-	K89yBw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwh0aju02-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:13:04 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93e629c7b16so19377585a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 00:13:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794557584; x=1795162384; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=h6K5DZ6BT6PPRrqksZkUMcUpto2/+I23hqXq9QoTxbY=;
-        b=jtw9YpE0gDV9HKApclCQGi/Gw8fBuf9exXV9R/cCEJn6BhH/G0QiMFuarhbYcg0BMN
-         xvMzHKUjSLdtEI+UYIszwNqAb1ulYHGMaRCWJBtkMxwLd46fLHTDiXhJaq/d0pV1g0GD
-         VOUJ6JlzI3WJ/Bfy5SsCmKHEgjc8BB29WGRslb/+gIGIQBzNOCubYzSHyPiEkHmY84WG
-         4j1p8vRubZuBO2AGOKHG2cS1eF1R4uPsQC5UtAL+vXeZ+2FOJhdOqDEU0UMx0UBan6uE
-         kxgkCtymJ5EIina33xdCRhTW66A2kjBKjQnMVXnnCLnU0HQhuM8J7dVdhctgDkuyedQ/
-         4zFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794557584; x=1795162384;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=h6K5DZ6BT6PPRrqksZkUMcUpto2/+I23hqXq9QoTxbY=;
-        b=W2f9E7m5aY7TvVHmZyTG5ggr9Kh80hWThbMpdnF07qD+i1Z2pVOilZqUM+y19vsmWT
-         aUlIq19/5YRZtkuZYpZX5Iw4E0CavgltFAaQJgOwMllwTr8+cC5mF4phUju6FUr0TOzj
-         0/f2YmzOk39fsotGXSfPghIhei/ZRGWoalN2oRbjOtr8DCSGA6vp0yc02xcxYvlKGbY8
-         jKZ2Y5yo5nNV+SrHMcwJ0M7e2kSim1WzxcOYas5N685HF7C5K0NaF8EdhAgnFVUjWPUr
-         zt6RoxZxuMIj5G1coX4fHHvsFQPRMPuV4eIIHomugSooOcAfaEL5kiDdzUmNj9BDmgHf
-         95wA==
-X-Gm-Message-State: APuU4Z/ftIMTWwhCNRUhAPs4PQzyQkOHkASzCcfpuoCx84aQ/n8FlSOJ
-	H/vLNjwoc57DtmpSBBlSAPqcoNr1HWaF8TTn4jhkUC/1I0s4eezt4xChXWE4KL9QBn/t7uVVmaa
-	5YqByN+Og5zYA1LXIKF3Z1NzwRQ14kOmnqJtqyEkhS+ZtfOPuIwPtBKuYyO0X+VYCKMiN
-X-Gm-Gg: AYBFou3q2WEBG0wDZaiSu79Yz+bwORtuSyegHBdD2hKtLyWiA7ziqDNf8fDfkWNiamE
-	hjFF3JNPLAqrCicgEPsvvQ9//bvhb5WLgwbvd524y9C+W01ctLNWxBKvWvsc82AYc4jIDdDE/y4
-	Vv9O1uLqmgc69U87P4tBu4apR4ifJFD05Z9/JGm1OiNIKlHgVPvRAe32OAWehwkpPZjhMnpsFP/
-	EOQxCRHurAB4zWKiGfTKLAOzLMelrGlB2aiKucHPMeP3NPBoaygbP7QpVd8p8eM5EyJO1ZsPJ+o
-	SZv6w6QUYrQsApJaBT3uyreevwujvKip8SiYlfA4v3FdXIJODrAC8o7UoUnh51cw13DbJjAw53O
-	9N+T09bNOCPrkNmFI9W4iqfjBDKrTvdjdR/0ILSAe9DRls/9NppyUe9Dqsv3WCK+L7T73oDM=
-X-Received: by 2002:a05:620a:a819:b0:949:4dcd:da3f with SMTP id af79cd13be357-9494dcddd38mr215156585a.6.1794557583777;
-        Fri, 13 Nov 2026 00:13:03 -0800 (PST)
-X-Received: by 2002:a05:620a:a819:b0:949:4dcd:da3f with SMTP id af79cd13be357-9494dcddd38mr215154485a.6.1794557583413;
-        Fri, 13 Nov 2026 00:13:03 -0800 (PST)
-Received: from [192.168.226.72] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095b7e5cfsm63993866b.76.2026.11.13.00.13.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 13 Nov 2026 00:13:02 -0800 (PST)
-Message-ID: <83150fee-ae52-40ab-a3b4-ef180a29d48b@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 09:13:00 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XwAtRhqm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05A3B1F000C5;
+	Fri, 13 Nov 2026 08:16:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794557773;
+	bh=9U8aC1QAz9A7FHMAgGcgXCwjyuajaml/x5tjK2P7TO0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XwAtRhqm/46Poatyah/AeXbWbrpA8kEStrR7ZmF0vhoAneIEHkWjyUbKFhsuvVQGO
+	 uA1i0FIzugDj9yEgPM1jBfsOzFBZoj/jXdHzn84/47ly+mgTINgVVVCdtEBm3YkPR2
+	 njK8peGsRM73X7LxKXV7ZSQbqNeXyvzE5rufDFNaxrjrC/x74OnibONarmnBRqiDzs
+	 yjVawsxx5+Qom/pooTwLFSNZy97lwwEFRWdt70WALWEBcZflowqCiFq+Go8Lad0BiK
+	 ZI5+DIZ3b7cG8OjhvA2xreCDYeG4EJkGKyhi9PUe8PWV+8HCLJjJEl0avMsYat+Kmu
+	 VOqUoYi08rgcQ==
+Date: Fri, 13 Nov 2026 09:16:10 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: gregkh@linuxfoundation.org, Thinh.Nguyen@synopsys.com, robh@kernel.org, 
+	krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org, 
+	konradybcio@kernel.org, heikki.krogerus@linux.intel.com, abel.vesa@oss.qualcomm.com, 
+	abelvesa@kernel.org, wesley.cheng@oss.qualcomm.com, krishna.kurapati@oss.qualcomm.com, 
+	konrad.dybcio@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com, neil.armstrong@linaro.org, 
+	val@packett.cool, balaji.kalkonda@oss.qualcomm.com, tvlad744@gmail.com, 
+	effeffe99@gmail.com, prashanth.k@oss.qualcomm.com, yongxing.mou@oss.qualcomm.com, 
+	linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 2/2] usb: dwc3: qcom: Use the UTMI clock as PIPE clock
+ in DisplayPort-only modes
+Message-ID: <20261113-artificial-quixotic-firefly-84baef@quoll>
+References: <20261112113838.506-1-26rote@gmail.com>
+ <20261112113838.506-3-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,57 +65,178 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] dt-bindings: arm: qcom,ids: Add SoC ID for SM7550
-To: Aditya Choudhury <mail@inferno0230.in>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261112-sm7550-soc-id-v1-v1-0-57299906d81a@inferno0230.in>
- <20261112-sm7550-soc-id-v1-v1-1-57299906d81a@inferno0230.in>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261112-sm7550-soc-id-v1-v1-1-57299906d81a@inferno0230.in>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAzMiBTYWx0ZWRfX51EoVdNUhFgF
- piRdznjIwgW+SHULaoYmjBbsbVbiagwUAEA1AnQ4BCxI9hgdekOGUXzQRfmvKcdGrg27R9I6mc8
- CEWtyQ3HfKACfVTpd2WsXBqHvAJpuEs=
-X-Proofpoint-GUID: 348vwVvyl253i1RPPi-SkY37LslfHKfk
-X-Authority-Analysis: v=2.4 cv=N+e8hG9B c=1 sm=1 tr=0 ts=6af6c690 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=mPRu1C3yLCZmAX2_wYUA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAzMiBTYWx0ZWRfX9GOZw5Kmf5Wx
- PuO6sJko6/EIqy0Sjiu2b1cnFu97w0fvyY0NgHeCLunsvTCnpYPutOBBdAH3HPr415DWWFgYkyM
- IBHxdvT+RC3sr1MPY2QOOiNGAto88EHqY8x+M1O6+QgDwaYBpA2Cwa3BH9W/NqdQVFFIe7ARcWy
- m33gAXY5eK/ccnGXXq+Rfx6SF9P2ca64AdxG1sZKiBYtX31FUcocL3sFE6DnsB/pL3HE8eAU0hv
- 7B2TTsIuHll21+TO8kKEO7QSQ61YiCRDCNuE/20+sedmaVqGp43aiHZjOEk0BobZDmXqY5CuUaD
- Xx5ZH34qwBFPx3oyq6eEzqtrNkPaq8wq8u6t37qRP4Lpw8GzyND6k1Dt+6PBni1lbSkFQfyX5jU
- 32ctWvawgjXUOyJJC4SXYef3fhwlQlidR0+HcQAGZaN28s4QKUZ6d5EnUfnX/iYRpP/aY14uhaA
- 503iN18S8g8tbXt9z/g==
-X-Proofpoint-ORIG-GUID: 348vwVvyl253i1RPPi-SkY37LslfHKfk
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-13_02,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0 priorityscore=1501
- phishscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130032
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261112113838.506-3-26rote@gmail.com>
 
-On 11/12/26 11:30 AM, Aditya Choudhury wrote:
-> Add the ID for the Qualcomm SM7550 SoC, whose internal codename is crow.
-> 
-> Signed-off-by: Aditya Choudhury <mail@inferno0230.in>
-> ---
+On Thu, Nov 12, 2026 at 08:38:38PM +0900, Joonhoe Kim wrote:
+> @@ -336,16 +346,19 @@ static void dwc3_qcom_enable_interrupts(struct dwc3_qcom *qcom)
+>  		dwc3_qcom_enable_port_interrupts(&qcom->ports[i]);
+>  }
+>  
+> -static void dwc3_qcom_select_utmi_clk(struct dwc3_qcom *qcom)
+> +static void dwc3_qcom_select_utmi_clk(struct dwc3_qcom *qcom, bool utmi)
+>  {
+> -	/* Configure dwc3 to use UTMI clock as PIPE clock not present */
+>  	dwc3_qcom_setbits(qcom->qscratch_base, QSCRATCH_GENERAL_CFG,
+>  			  PIPE_UTMI_CLK_DIS);
+>  
+>  	usleep_range(100, 1000);
+>  
+> -	dwc3_qcom_setbits(qcom->qscratch_base, QSCRATCH_GENERAL_CFG,
+> -			  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
+> +	if (utmi)
+> +		dwc3_qcom_setbits(qcom->qscratch_base, QSCRATCH_GENERAL_CFG,
+> +				  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
+> +	else
+> +		dwc3_qcom_clrbits(qcom->qscratch_base, QSCRATCH_GENERAL_CFG,
+> +				  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
+>  
+>  	usleep_range(100, 1000);
+>  
+> @@ -353,6 +366,38 @@ static void dwc3_qcom_select_utmi_clk(struct dwc3_qcom *qcom)
+>  			  PIPE_UTMI_CLK_DIS);
+>  }
+>  
+> +static bool dwc3_qcom_utmi_clk_selected(struct dwc3_qcom *qcom)
+> +{
+> +	return readl(qcom->qscratch_base + QSCRATCH_GENERAL_CFG) &
+> +	       PIPE_UTMI_CLK_SEL;
+> +}
+> +
+> +static void dwc3_qcom_update_pipe_clk(struct dwc3_qcom *qcom)
+> +{
+> +	lockdep_assert_held(&qcom->pipe_clk_lock);
+> +
+> +	if (qcom->mode_switch && !qcom->utmi_as_pipe_clk &&
+> +	    qcom->dp_only != dwc3_qcom_utmi_clk_selected(qcom))
+> +		dwc3_qcom_select_utmi_clk(qcom, qcom->dp_only);
+> +}
+> +
+> +static void dwc3_qcom_defer_mux(struct dwc3_qcom *qcom)
+> +{
+> +	guard(mutex)(&qcom->pipe_clk_lock);
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Why aren't you using simple and most readable mutex lock/unlock? guard()
+is not more readable.
 
-Konrad
+> +	qcom->mux_deferred = true;
+> +}
+> +
+> +static void dwc3_qcom_undefer_mux(struct dwc3_qcom *qcom)
+> +{
+> +	guard(mutex)(&qcom->pipe_clk_lock);
+
+Here it makes sense, but other places, why?
+
+> +
+> +	if (qcom->is_suspended)
+> +		return;
+> +
+> +	qcom->mux_deferred = false;
+> +	dwc3_qcom_update_pipe_clk(qcom);
+> +}
+> +
+>  static int dwc3_qcom_suspend(struct dwc3_qcom *qcom, bool wakeup)
+>  {
+>  	u32 val;
+> @@ -413,7 +458,10 @@ static int dwc3_qcom_resume(struct dwc3_qcom *qcom, bool wakeup)
+>  	 * clock ("failed to enable ep0out").
+>  	 */
+>  	if (qcom->utmi_as_pipe_clk)
+> -		dwc3_qcom_select_utmi_clk(qcom);
+> +		dwc3_qcom_select_utmi_clk(qcom, true);
+> +
+> +	scoped_guard(mutex, &qcom->pipe_clk_lock)
+> +		dwc3_qcom_update_pipe_clk(qcom);
+>  
+>  	/* Clear existing events from PHY related to L2 in/out */
+>  	for (i = 0; i < qcom->num_ports; i++) {
+> @@ -446,6 +494,52 @@ static irqreturn_t qcom_dwc3_resume_irq(int irq, void *data)
+>  	return IRQ_HANDLED;
+>  }
+>  
+> +static int dwc3_qcom_mux_set(struct typec_mux_dev *mux,
+> +			     struct typec_mux_state *state)
+> +{
+> +	struct dwc3_qcom *qcom = typec_mux_get_drvdata(mux);
+> +	bool dp = state->mode >= TYPEC_STATE_MODAL && state->alt &&
+> +		  state->alt->svid == USB_TYPEC_DP_SID;
+> +
+> +	guard(mutex)(&qcom->pipe_clk_lock);
+> +
+> +	if (state->mode == TYPEC_STATE_SAFE) {
+> +		qcom->dp_active = false;
+> +	} else if (dp) {
+> +		if (state->mode == TYPEC_DP_STATE_C ||
+> +		    state->mode == TYPEC_DP_STATE_E)
+> +			qcom->dp_only = true;
+> +		else if (!qcom->dp_active)
+> +			qcom->dp_only = false;
+> +		qcom->dp_active = true;
+> +	} else if (!qcom->dp_active) {
+> +		qcom->dp_only = false;
+> +	}
+> +
+> +	if (!qcom->mux_deferred)
+> +		dwc3_qcom_update_pipe_clk(qcom);
+> +
+> +	return 0;
+> +}
+> +
+> +static int dwc3_qcom_mux_register(struct dwc3_qcom *qcom)
+> +{
+> +	struct typec_mux_desc desc = {};
+> +
+> +	if (!IS_ENABLED(CONFIG_TYPEC) ||
+> +	    !device_property_present(qcom->dev, "mode-switch"))
+> +		return 0;
+> +
+> +	desc.drvdata = qcom;
+> +	desc.fwnode = dev_fwnode(qcom->dev);
+> +	desc.set = dwc3_qcom_mux_set;
+> +
+> +	qcom->mode_switch = true;
+> +	qcom->mux = typec_mux_register(qcom->dev, &desc);
+> +
+> +	return PTR_ERR_OR_ZERO(qcom->mux);
+> +}
+> +
+>  static int dwc3_qcom_request_irq(struct dwc3_qcom *qcom, int irq,
+>  				 const char *name)
+>  {
+> @@ -625,7 +719,6 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+>  	struct resource		res;
+>  	struct resource		*r;
+>  	int			ret;
+> -	bool			ignore_pipe_clk;
+>  	bool			wakeup_source;
+>  
+>  	qcom = devm_kzalloc(&pdev->dev, sizeof(*qcom), GFP_KERNEL);
+> @@ -688,11 +781,10 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+>  	 * Disable pipe_clk requirement if specified. Used when dwc3
+>  	 * operates without SSPHY and only HS/FS/LS modes are supported.
+>  	 */
+> -	ignore_pipe_clk = device_property_read_bool(dev,
+> -				"qcom,select-utmi-as-pipe-clk");
+> -	qcom->utmi_as_pipe_clk = ignore_pipe_clk;
+> -	if (ignore_pipe_clk)
+> -		dwc3_qcom_select_utmi_clk(qcom);
+> +	qcom->utmi_as_pipe_clk =
+
+You use some odd formatting, making this unreadable. That's one line,
+eventually wrapped.
+
+I don't get why you are changing these lines in the first place. Mixing
+style changes and actual code changes make it difficult to spot the
+differenec, but the code looks the same, no?
+
+> +		device_property_read_bool(dev, "qcom,select-utmi-as-pipe-clk");
+> +	if (qcom->utmi_as_pipe_clk)
+> +		dwc3_qcom_select_utmi_clk(qcom, true);
+>  
+>  	qcom->mode = usb_get_dr_mode(dev);
+
+Best regards,
+Krzysztof
+
