@@ -1,61 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794526870;
-	b=vBamdlF8Xh0bncrPLdYPiSnB7+BkMK+sFqMiJb2SwOmq4fvCWKEIbNBZH8gZuUFEALQ6
-	 mRz3Kqw+ld7778DZMjJMZwTBrAoILlDw4jt9w3IfXhHCt/JMQUw5sPyOYOJUzV6xqcwfa
-	 TRVDfssCznvV5cz2ZCPXq+caLtdkWfngNdRLwTHx5y5CGxCn4lMgQFvrsGOY5a/QSBAmf
-	 kkl2C2qeQVeg+I5wm2yM4xO9gAG7HqTY/3v0wCbg/oV7DtWa2hcAKQg1tdnBjAa4gRzQG
-	 MRHOn2NrifvhvMRweZteuJKAojFc0Kz8U3cFBnSTc59gEe5vWjnucYHtgPTYXCCoRKg==
+	t=1794531345;
+	b=3WO8cZUpH410hjHwmBSUDLNtCkYvEWyFFZvkWcgd0KQGHTbSpQHhtU1GahO1bSLU4iel
+	 OAtEIZQ3l/57Owh+7HE7qha8bEq/72dCBppPaTNFeh5RQT5QrXJC3riIUt00fGjIjvQHQ
+	 Y11aZULGn0YTJPWlhgrUni5SR6/0SBwHbcgDGEjfofNfOK6YmCXGY+zH8+XfzG6/Oh2zn
+	 JB3CFMUbTYm4vznhc5KijYLqATYtJOhJPRUErvaQvsYKRefzz+7ej5wXkiArqHDcWD8iM
+	 354LgvPpBsy+F9mTgyw9mxcJaCAyc6o/gXbZTzEeUzOOp+zYCLgYFaFawXS/yGvlbIg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794526870;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=L5KWhhbeBXZKmzDTgoYpamBPxic157lvyeKhXzre0Ig=;
-	b=sI55IzJpaIAxX8Uxp5ccO95IwHh7MGqIJ68z4q6PXjILje4iWJu2aYrJTwLpQj/jtWvA
-	 76AfQgsgpd25FKF/mGuahv2z/P9Kwj8JfmFcLsIR8CneCXFls/MHe+LaxfAwswFYMFYbQ
-	 7F52pVE7v+B+2DuR1H0oaQyA4cnUXHDjD5zc0qEchf+eAh7caCw4BIbxTgXZ8xFq5GG+t
-	 TWLboF/nhox0Dfy9sNNpxjqXFHPoC6jp2mRKLaQIBubw8dfnXQOYnuhOBkiTQ2kHrUnxL
-	 xbFRS0Qt1SszSqmrKbUWLxNis48sVJxL30WIv9Cd1SSPOUyXu6kIkbzM+fkkY1Wxeyw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794531345;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=0tUZ/r90AwSeslzGso6dCb5vC4FbswESQba0fvf+Foo=;
+	b=d3ehjlyShvx6GIw6d7VNwyd/dntLvubuuGeP+PIE0Ulp7mT0zXRKh+E4c0UQ7MHOrqJp
+	 XcZBA6UmsSB5DQ/aaxqxHDJCMJCYdVCBhcmIOJbgdy9rOkDEkO/oq7FGuYJqZcfh/jpks
+	 ni67u3uhFZqoTbUsGjEgP2yeXXcgypGXuX+BXM+Z7tWsNYVrwKsmgHElhohjx6Qbg98Wb
+	 9lCwHTZIkNpUkc/T0HtmrVxMN72BqiVWiwiulrFm9mSqJ+arhMOEW5HfyTqBnCVVnB9cd
+	 wtvrFee6ns5zgeaxYw0jX0LJUs6chl2zwPEFwZGylb44QBLJx4sj4K7LZkh7eTAVgcA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W29hfTdP;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lPKSbQ+v;
+	arc=none smtp.remote-ip=209.85.221.41
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF130606A31C;
-	Thu, 12 Nov 2026 23:41:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D597606A31C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 00:55:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1D597606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=W29hfTdP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A63AD1F000C4;
-	Thu, 12 Nov 2026 23:41:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794526870;
-	bh=L5KWhhbeBXZKmzDTgoYpamBPxic157lvyeKhXzre0Ig=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=W29hfTdPUcxSvyo08U23g3NvUtFivFYvlzc0Py6OZucOa83R/tuav9t+TdGtAAARk
-	 reXr2Q5kcw7LL1IwvHQm4MT5fLAiZqo0NYdxubIEjdTcs/8FslIPdvk2uoVTNhBgDh
-	 7I7BMv8eMfN8IoBAqi+0HuotB/sEd3AUA7L9ffjVIyCGJsMDVFb511iNraW//HTrSm
-	 cJ/6lgvQBMSJusEmPBA2EYy/q2Uc+k+GzjnGeg5uGdrTJzaTVelWk0Q7uedEwyZA4t
-	 6NMyuDs14WDrvP+tYZpYOZOXUZCYAiZny7uesuyeHPMNVShQphNDqKxBZqw9GibMaI
-	 pc994UM+wz30w==
-Date: Thu, 12 Nov 2026 17:41:06 -0600
-From: Bjorn Andersson <andersson@kernel.org>
-To: Rob Herring <robh@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Wesley Cheng <quic_wcheng@quicinc.com>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] dt-bindings: phy: qcom: Relax required supplies
-Message-ID: <avYyrAKAQs6pHNbh@baldur>
-References: <20261021022446.3619435-1-robh@kernel.org>
- <avWbmsjkYo2LMJKs@parshuram>
- <20261112125346.GA3821108-robh@kernel.org>
- <avX9Qrcapcnutdgh@baldur>
- <CAL_JsqLGqYAd-BedjNCCmxByJQ_z2Cij9J_z-ifiX9iJs_gqSg@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lPKSbQ+v
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-490f38e9688so258044f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 16:55:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1794531344; x=1795136144; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=0tUZ/r90AwSeslzGso6dCb5vC4FbswESQba0fvf+Foo=;
+        b=lPKSbQ+v6cn0qckNZ2HObZqsWk1yflt0gbSiGlrodWsODQWWsX8iNNAe/NiVO7iZ7K
+         pxsKAgVOAe01/xg1mq2bEoXzeKmqT3eiHSQW0hUIspOlUMg5aOoNqKoBSQopIKlrxgA4
+         5upzWRZcqdU74/2IGFFH+DYcZ7RXy45EEvY/nIwEVwWM8pzaNyptVAlRvgc0xagJ5uTS
+         KB3XF3mEz8jm04ufGZclHmxIaSvhwbmRdNlox3Hi3gZ9m/lwj+w5XtEyuEsjsZkMuPTd
+         ByppVfwoDb5r6hyYUseRFotpWidghcACbYAHKRmQ0y6P252Rn4VeYz6tjgxivGAZq9Fy
+         npbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794531344; x=1795136144;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0tUZ/r90AwSeslzGso6dCb5vC4FbswESQba0fvf+Foo=;
+        b=vLyqdYvKBhmJL2rlbM4IAa7FLUEnPaPWvFbzY5GDdtMN38Rzzl84MB7WfY9MFhZxE/
+         s8Gap8MQQeojDWf2he9+thrvO4dIcZZP6qiwb5YWAw97PKID1GCLvyD0WGCh96qVPkyh
+         KhcY645CaWLtb1PhqvTGXsyqvMQWHGlppRPofE7op4mkvyB/LJc0M80u8lBIOJQFNJ2k
+         +FTIQDHr2SsZmooFdNWWaHlFsnu7dW+sGuGT95nuEvXxFcrXQyHBbFKDzDLrtL9zIJHO
+         xGRyuGechJPU0MnSzVhfciYDrRrBPKYW/F8qHdFfcUWU0tqqgl7k3te9N9/PJ8p0qXcD
+         rJhw==
+X-Forwarded-Encrypted: i=1; AL+hErE/QmFfVlQ3Ug9zfWdcMfrO4cdVbg2uwQWW6wm8AT6ES7TaTUymxDub3Ze57eHeXePnRUqSQcVjqmfaQyVX@vger.kernel.org
+X-Gm-Message-State: APuU4Z+6Ydjs4HRy3JBGVnovdcPtliAAndiCyiOWWUG15095QkLNhKsP
+	QPRSj9vPC58YT6EOLpX2Jfid40VTkwP519x0qtTsYuaCKD0HSJTc8OLhU1RNBp6n9Q6OX5HttR6
+	figk8
+X-Gm-Gg: AYBFou3IQWYI0q92Xd0Rau/jLSGKezCpsk0ZB0fqOJ56kN8y4TpBINvdOBrW3vhNwTa
+	cDC47aV1aRdh9X+/Rr8c7j91hPr341NJFZTIvVEqqB8S+gGcLbmVA8ToRlzLpv8/L9pHjq/qDqS
+	YQKrCO0CONSnOg+jOo7kH1qZ1ZD0sI1fu35VlSFnBNVrs2bCjJPYtcXCgPLdn5nYD+M5dKLii8A
+	K6axtjkpgkzPqwGo5L9Pa22CxJgDgO/ewJriBo2cw43bzoNymEmA05+Q1dWYmayxyqSXGpKYHIh
+	M8Ivmy2aGa9WiWJvPk7Gd/9wdZq7wzKpA48QsjiIpQ4CFvplidIZuuThLPjn13T8m/HZ2CEaNxU
+	yvEjqawYazyqfwhyMVNHMNZg/jOcdR7yslkLe5UfbOQM8YfgHTCyH5gt93XDiIDvhx7LrZXoj9C
+	hP3aq0Qo+QpklHuR7QpwYbHqwJvS0CdNy1I5mHNbH/fTIRo02Rf1j4xdBR7u5st5VUEIP+VhR+H
+	UjxOi+Bu8caFPOEx1pVzr4NvsgpNHUzt/6T2lVxY2f5WCQ3ScDCu3IXgOqhVite7QWdb0wgvGDA
+	8eOD1fVRRd9R1RkXgmFuHxyNJkLBw8qK7YbaXXSAFHQ=
+X-Received: by 2002:a05:6000:47ca:b0:488:8347:a110 with SMTP id ffacd0b85a97d-49c6f5e9818mr1560854f8f.7.1794531343598;
+        Thu, 12 Nov 2026 16:55:43 -0800 (PST)
+Received: from [192.168.0.167] ([109.78.26.158])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c60f8e794sm2106178f8f.59.2026.11.12.16.55.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 12 Nov 2026 16:55:42 -0800 (PST)
+Message-ID: <39881cfa-6f44-41fb-aade-041d9cdf2f9e@linaro.org>
+Date: Fri, 13 Nov 2026 00:55:39 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,180 +91,63 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAL_JsqLGqYAd-BedjNCCmxByJQ_z2Cij9J_z-ifiX9iJs_gqSg@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] Revert "media: qcom: iris: use disable_irq()
+ during power-off"
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Hungyu Lin <dennylin0707@gmail.com>,
+ Stefan Schmidt <stefan.schmidt@linaro.org>,
+ Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261111-fix-disable-irq-safely-v2-0-8e13f68c2ef9@oss.qualcomm.com>
+ <20261111-fix-disable-irq-safely-v2-1-8e13f68c2ef9@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261111-fix-disable-irq-safely-v2-1-8e13f68c2ef9@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 12, 2026 at 01:22:16PM -0600, Rob Herring wrote:
-> On Thu, Nov 12, 2026 at 12:30 PM Bjorn Andersson <andersson@kernel.org> wrote:
-> >
-> > On Thu, Nov 12, 2026 at 06:53:46AM -0600, Rob Herring wrote:
-> > > +Konrad
-> > >
-> > > On Thu, Nov 12, 2026 at 04:27:30PM +0530, Vinod Koul wrote:
-> > > > On 20-10-26, 21:24, Rob Herring (Arm) wrote:
-> > > > > For the QUSB2 PHY binding, keep the three regulator supplies required
-> > > > > except for legacy IPQ6018 nodes that do not describe the board rails.
-> > > > >
-> > > > > This relaxes the requirements for the IPQ5210 as well as if it is
-> > > > > compatible with IPQ6018, then it shouldn't have more required
-> > > > > properties either.
-> > > >
-> > > > Hey Rob,
-> > > >
-> > > > This fails for phy/next I see vdd-supply has been moved around..
-> > >
-> > > The change in question[1] should not be applied until the .dts changes
-> > > in the series are applied. It introduces a bunch of warnings.
-> >
-> > I don't understand. The change you present here relates to ipq5210 and
-> > ipq6018.
-> >
-> > That change doesn't touch these two IPQs, so what are you suggesting?
-> > Are we talking about the same warnings?
-> 
-> This is what I get with phy-next because it has the binding change
-> from [1], but not the .dts changes in the series:
-> 
-> arch/arm64/boot/dts/qcom/apq8096-db820c.dtb: phy@7411000
-> (qcom,msm8996-qusb2-phy): "power-domains" is a required property
->         from schema $id:
-> http://devicetree.org/schemas/phy/qcom,qusb2-phy.yaml
-> arch/arm64/boot/dts/qcom/apq8096-db820c.dtb: phy@7411000
-> (qcom,msm8996-qusb2-phy): "required-opps" is a required property
->         from schema $id:
-> http://devicetree.org/schemas/phy/qcom,qusb2-phy.yaml
-> 
-> (and then duplicated for every 8996 board).
-> 
+On 11/11/2026 09:05, Vishnu Reddy wrote:
+> iris_vpu_power_off() is always called with core->lock held.
 
-Good, then we're aligned. These 18 warnings are resolved in my tree, so
-they should drop again in the next linux-next.
+This statement is not true : int iris_hfi_pm_suspend(struct iris_core *core)
 
-> > > Can the QCom folks stop doing that! Coordinate applying the series or
-> > > take the binding and dts changes in 1 tree.
-> >
-> > I assume you're referring to "QCom folks" in the sense "any maintainer
-> > touching a binding change related to a qcom platform"?
+And TBH as I look at the code I wonder if it should have a lockdep 
+assert if that lock is a requirement...
+
+  The threaded
+> IRQ handler also requires core->lock to proceed. If the handler is woken
+> and queued around the same time power-off is entered, it cannot acquire
+> core->lock because it is held by the power-off caller. disable_irq() waits
+> for the handler to complete, resulting in a deadlock.
 > 
-> No, primarily you and the submitter I guess. Submitters should be
-> aware of dependencies in their series and suggest how things are
-> merged. Otherwise, it falls on you to care that warnings are getting
-> introduced.
+> Fixes: b9c2215bdedc9c ("media: qcom: iris: use disable_irq() during power-off")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/iris/iris_vpu_common.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_vpu_common.c b/drivers/media/platform/qcom/iris/iris_vpu_common.c
+> index 243bd845349f..1e183fc4e58c 100644
+> --- a/drivers/media/platform/qcom/iris/iris_vpu_common.c
+> +++ b/drivers/media/platform/qcom/iris/iris_vpu_common.c
+> @@ -240,7 +240,7 @@ void iris_vpu_power_off(struct iris_core *core)
+>   	iris_unset_icc_bw(core);
+>   
+>   	if (!iris_vpu_watchdog(core, core->intr_status))
+> -		disable_irq(core->irq);
+> +		disable_irq_nosync(core->irq);
+>   }
+>   
+>   int iris_vpu_power_on_controller(struct iris_core *core)
 > 
 
-I currently do catch these things while applying dts changes, and I've
-recently cooked a dashboard to track the overall state of mainline and
-linux-next, but I don't have any solution to catch things prior to merge
-- or a good solution for catching regressions coming from binding
-changes prior to them being merged.
-
-> I would not care so much when there are transient warnings in next,
-> but I don't want to be the one chasing them down. But AFAICT, it's
-> always me. No one beats me to it and I'm not all that fast in
-> noticing. I just compare all the warnings by platform for Linus vs.
-> next with "gl-diff-dtb-warning -p arm64" from this repo[2], and look
-> for things moving in the right direction.
-
-I'll try to wire something up to catch these faster. At least until this
-regression things has been fairly stable for a while now...
-
-> Of course this is all after applying which isn't ideal.
-> 
-
-Thanks to the --cache-dir and --json support it's a bit more convenient
-to catch things during the merge, but the CPU-power needed for a
-system-wide sanity check remains a concern.
-
-I would prefer to catch more issues prior to touching the patches, but
-so far my efforts there has run into issues as contributors keep sending
-things with loose dependencies.
-
-> > Do you have some CI/guidance/tooling for Vinod (and other subsystem
-> > maintainers) to perform system-wide DT-validation when considering
-> > merging a binding change?
-> 
-> This one is an ABI break because it adds new required properties. I do
-> have some tooling that looks for ABI changes, but haven't committed it
-> because I haven't figured out the best way to deploy it. I think for
-> anything that is an ABI change, the binding and dts files need to go
-> in together.
-> 
-
-After a second look, that would have made more sense, since the driver
-changes wasn't related to the binding change after all...
-
-> I think it is time to reconsider the default of bindings go in with
-> the driver. That works okay for new bindings as long as the platform
-> maintainer doesn't take .dts changes before bindings land (also an
-> issue). However, for cases like this, we need the opposite order. We
-> need to figure something out because this is only going to be more of
-> an issue as we get to warning free (and we are close).
-> 
-
-There's also the ever growing number of small incremental changes to
-bindings, where subsystem maintainers leave the binding changes to me.
-
-But then there's also the many changes where the driver patches depend
-on the binding changes. Not sure how to structure this and keep the
-velocity up.
-
-> > I unfortunately only spotted the one-way dependency when glancing at the
-> > seris and thereby ignored the dts patches waiting for the binding to be
-> > merged.
-> >
-> > > Given the patch series is 2+ months old, I'd be surprised if the rest
-> > > gets applied.
-> >
-> > I've applied the two dts changes today, and they do resolve a number of
-> > warnings - presumably the ones that you're talking about, but I don't
-> > think the ones that this patch aim to fix?
-> 
-> Other than the warnings it introduces, the [1] series fixes this one warning;
-> 
->       3 phy@7411000 (qcom,msm8996-qusb2-phy): "vdd-supply" is a
-> required property
-> 
-> 
-> > > This patch OTOH fixes warnings.
-> > >
-> >
-> > What warnings? Can you please provide actionable context when you're
-> > pointing out these issues.
-> >
-> > Is it the three "'x-supply' is a required property" warnings from
-> > ipq6018-cp01-c1.dtb? It seems unlikely that there's one chip that
-> > doesn't depend on those supplies.
-> 
-> Of your 20 unique warnings, it's these 10:
-> 
->       1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdd-supply" is a required property
->       1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-pll-supply" is a
-> required property
->       1 qusb@59000 (qcom,ipq6018-qusb2-phy): "vdda-phy-dpdm-supply" is
-> a required property
->       1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required property
->       1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a
-> required property
->       1 phy@79000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is
-> a required property
->       1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdd-supply" is a required property
->       1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-pll-supply" is a
-> required property
->       1 phy@59000 (qcom,ipq8074-qusb2-phy): "vdda-phy-dpdm-supply" is
-> a required property
-> 
-
-I'd prefer to actually populate those, I'll take another pass to see if
-I can find documentation/schematics to resolve them.
-
-Regards,
-Bjorn
-
-> Rob
-> 
-> > > [1] https://lore.kernel.org/all/qusb2phy-v2-1-4c3f980a4560@oss.qualcomm.com
-> 
-> [2] https://gitlab.com/robherring/ci-jobs
-> 
+Looking at the next patch I'm fully recoiling.
