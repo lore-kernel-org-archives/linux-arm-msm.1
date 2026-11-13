@@ -1,11 +1,11 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1794557802;
-	b=d6pWG5QExPRFjelMw+pwFPXBkfBsXke90vCZPFSGoaYR0jpae0WqaKqUpebZdwK07taU
-	 0wJ2DguAKDCiXI/9F0Bctbo1BKsyIiiHSrhpPWbPVHvhSWLMosvp/TMp6I+GZFkkBQ+bE
-	 D5DXoivJTrl6q/A3VdUcK33ikAdCGuw+Ulw5OEF5XyQ1/MrNasF7SnA9whfM9E9R5/oCE
-	 L+9e4UdMZb5lg5UjSb9H/iS4GAzbqu1I2D5N56XZ4Vjl5mgOqlcQihSePMgpoDGeBkI2l
-	 kZC5xtiu4QXv1kG89XOqtzifnXWT0N/NH6hU6F2PnZYeH9Azq+mWmuvFhhY51oJsEEA==
+	b=xt8qJ/pelIDoW6xY5fSfXH1SqPEox3FTxSXg3RHUZe5CYs70vZIDxac/rgF8HSA4fQkI
+	 iSO0R7tqUo8TLw9xELvbhJm6kV4pIjeYrj88w2KjpGJ+Id+GB8ULt2AOXwbRWHU7KHEkZ
+	 BiGpu2lMYMdzaH4O5tG2Lvqd2ovvTZ9F5vWMA/UsKURIFMOk6ar1VF3O6znhOGffpgWQj
+	 W5nMsiF3U7wVgABbwRaMGXEx41SNPQfx7b62kmN8B9/pEVrxqhOfhTzUY8DiktVftG//0
+	 CAm8Es7ptGDX+NQEqVColHW5yhM5/SXFF3LVhcDx5laUspHqSHiSAMc9lbsZs+L624w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1794557802;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
@@ -13,78 +13,78 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=xteIZdPAt29TQvnBYpNhyztO/+db/w+uWq4mUr1II3s=;
-	b=qdz0cy8LiaZU80D10tVLrOrRgzPt8/IAtY0QGb1kpoEXfMQfHeiN2XWIKBcsc4m57N4Q
-	 N0HzTzLKHKsRFWAFB2jUF54I/F4uDRrbj90fb9Vt0H+Om5X8GBVVDBLWJER5G45OtlzXu
-	 jWJIctgWZrsoG6lhD5cKD87HUCUursfc0XmebHEbuy3+hT6gwRMfTL3jurwlhsEkADiVQ
-	 4MHPGHMqPYctXafhekhNfEHWdh0m72s6RBid+POXpLQs0j/6TET7kpvKmeEK3Mg0hyv+F
-	 GLKo8sirUbu8OIHhPoVPHTzSZNsRUgBbQJXIv20rag5vAwnYByYple0z6YZyrCZxN8w==
+	bh=iQFTvmXhc7Os6jgWWtbp3W0a+iCMVy4yMh4ovPL/AhI=;
+	b=FZ0zjyzIYILinW7wiglMes0ouz/fIo2iGFLVQm76JGK4cz+mAI0ltFSMdsg4kWeOdLZv
+	 QeZFlYUaOnNGNxzUgIR66qAqSVbA0AqvmTQBfwVTnVZWYaM8jf0eG4osrM+vkUP6cj/7+
+	 fhQ+P5JT6FvJJD5izgMrGCCCu57uNUW0dlorcwMQZlD5Pt6lRY0QZ3VKFpZCIKWszPyca
+	 a0pkKtfGEvcntes/A1JHtf6cmW1K3X0wLtFRLHILo9tXgTBd5NwN3LVcAe6HuQe2OZLnI
+	 2g/1NfgIZWyjIRJ0XbZXop0Q3iVm5PvMDhqba5LfBQjof3mgc8Lid5V56EpjRU+/j9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=fairphone.com;
 	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=M+i9Sqh6;
-	arc=none smtp.remote-ip=209.85.218.51
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=MSscyRQQ;
+	arc=none smtp.remote-ip=209.85.208.46
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C43D4606A894
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:16:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C43D4606A894
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41991606A8A3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:16:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 41991606A8A3
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=M+i9Sqh6
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c4682977f9aso118310266b.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 00:16:41 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=MSscyRQQ
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6b6f42095bcso1255168a12.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 00:16:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1794557800; x=1795162600; darn=vger.kernel.org;
+        d=fairphone.com; s=fair; t=1794557801; x=1795162601; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xteIZdPAt29TQvnBYpNhyztO/+db/w+uWq4mUr1II3s=;
-        b=M+i9Sqh65cBeC99GKRtTsjvKA9eNz0Ojf3HZlQQLVFkDeHuf2fyP7xQj7nwPBTorfr
-         BxtJD1FlwF/J63TjhMSp0XKAlMq78yP9xnYAcjtnPaEou3Uz/4gxonmqi0QIAhlN7rlE
-         Z/VoHH1aID9T9UZ04qrXheKbcAfkDMeAecv5xTFBBXgVWfjjY8yCBXYQGJvStlQiFiN1
-         rQlL0C5I9R5Eq8iz+D8sb7u0+fINDGe8S/Adw4/w7fLuHcO2P10u/9CAFCPL4F2SSR5l
-         vidkkaVmfhAftFhuOKgymjFj3RQvbGRDE9shADZLkTh3i68BX4NFKjwYdKBK5rHZ+REe
-         lQyw==
+        bh=iQFTvmXhc7Os6jgWWtbp3W0a+iCMVy4yMh4ovPL/AhI=;
+        b=MSscyRQQ4ju3BAXAXTqwR+KnoFm3xqXW+bk05zNcYmZZ/GU3BcPBJNmWgnFWB3+u/B
+         2207JCdcECYzl3Ckdq9gwJKzEXaxeefn0qlLcWzFVGzJK8eHO/YGboT+aW22A5V9tieX
+         vMyFzTi/kbdPCg6VtFGgFm0EZhbIZWpmbqZDi22qYLCcsstULFdSTExzs1E766mwH6J+
+         JvQmD4DNikUfbjPN+QjlpF+aFFsjlkwu6YYXmzBDndXhYWTz+qGJPvZjD0zvi84ahmj+
+         5fvUTnA2Kl/gLwBnCgHambLU/GmtoBf/G2OIVLHlMPH+spsKfIVgbHT39AVZ0PF6xvZ8
+         lyLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794557800; x=1795162600;
+        d=1e100.net; s=20260707; t=1794557801; x=1795162601;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xteIZdPAt29TQvnBYpNhyztO/+db/w+uWq4mUr1II3s=;
-        b=Y/FuHyTyqUu/qZWL3+RtzyPS+/QkCRNFB0fkHQcD29P18Iqpn2gC1HRqz13mSHywXj
-         hZ7sqfvm2KmCXXPza5kyDc1dOECh2wIDYfg2O3sDL9KLAfLul9EDvoGfvIYZzg5kJBiZ
-         OR2StTjFTdBlQvcanY+t6XAkdEanZA2hrT16a8Ffw1aMaQM3V9ldl7joUbAEpc6RsIHF
-         +NxFgLI5LPPU6m9dfm41eKr+db+OZR1Fu21rN4y5a7TbJY+t2maXZwJBcLjQUlWR7r5Z
-         jbA68tmcDBPH+J1xEKcoDVQFhLuImi+b7of/n2gPz2nq3BQpEUYF2Q9BieOpljQiaHwM
-         bzgA==
-X-Forwarded-Encrypted: i=1; AL+hErHa/RZ8dAvfZqP2KsSDRU5kaxVNbysd57K6Is7WUMWto5kvfCVYy1VmG1iq9iMfly1OuY2tXJANb6dKl+8G@vger.kernel.org
-X-Gm-Message-State: APuU4Z8KrM6DHRvoocxVaNJ7gyqVTrtA6tqXZhwuNnD1/3x2wdswthLn
-	G40ydT+KuT7i4CBabdNDufbccjEmf4GAyLM+DDnADYqeCg7Q4r17lwv0eeoLjmPCXC57cznFPr+
-	543Z6UM4=
-X-Gm-Gg: AYBFou06Pt3jj8r5hTSv2E18aTry5XLR9MBCL6Q5/9vnB09M9Ze4STRXK8Kub4ly1Oa
-	l9kT9VLfuteTuU2GqEhYGzcU81DcSsH6FPYOXE8bVY1m6ktdxwDgrvaEejJdxSIcOePy5AXR7jN
-	NN2bX3h9MK49sPmgoV0rqPRpiV+L3vqhe1QV5NLyw+xYinoJMxzU1TKRurT3YlUjesDcz+Qf4e0
-	iMV/eS0Apf7pQ++edEaYbTSPEbZ1bCzNG0ZD34AwcJNv9AJBcpuOJWUiYFCZcLp4SCFHI9Sikw9
-	PQk7PnwqMndshPawqkjKGalMjN33FzND5wIIJBxLEBOo+Fz4gBtzRAMVyzTUNuUdtcudigMChm3
-	++0hkH1Mjx6WUpwm0A3QsXjSoZaITNu12OW64DM/uwyuEMHDok3VeqZs4olO9O65DzmozIYGVzK
-	T3+dbuBd6+xSH2BnvoAY/gLtjRqLLhD+Hp44/s/Eyi3ntUB+MWSfmgvdbGpa1K+XBYu2pc5hqSq
-	1782tDnmheV3A54TWuTdEJJNMEFCWesnggGrSHy2Z1v4sLd+Tr3JuIHpC6dszmVezBYv0tBMbXY
-	La7n6znFY/jXwpSvk729b25iviDsVFsspZzL/lNNtYC9Z1Fp1Vc0g/vQVoszQkbiAurf7Cia1u+
-	GP78vwVM=
-X-Received: by 2002:a17:907:3f91:b0:c42:102f:15d7 with SMTP id a640c23a62f3a-c5096398ac9mr127750066b.10.1794557800269;
+        bh=iQFTvmXhc7Os6jgWWtbp3W0a+iCMVy4yMh4ovPL/AhI=;
+        b=MueUy+7xVdbMT3VUgiEmX7FKa4kGUheGjacNxu6vvrctg68FQIR3MNlYoNDpUmRyU6
+         uLGTQw1E4ExID6twWQXap+xKRenmdsJzTcnQd5+Rjp5d5RvvwFNceXtkXqrnNhBm5M/r
+         fvOe2wcjjLC8XS9rqxIGJz6Fea5mRGYk0OPZ5F/pL5k/i11efI0m0CoTLhvNJHvMEYa0
+         IgcqslOaRqgeZfZXFbQXNEgaxU9u3qA81/1ih44wRhS0GFlPOlSwDs42S433QwtdMz+p
+         hTO52CGhO0e+l9/RbsTjMQgyGzC4PrLGQpmgI1/IRh27gp3mDNHyy+Y00E24YbNVsAJY
+         K4mw==
+X-Forwarded-Encrypted: i=1; AL+hErEMiRUHCTcDzx3KjF86TrvEuWINTMsLPJ9gAQld9KlKWBX3CEIGo+Hz0RvGzT6ZFmIB2EmU5B9bwXR+LpcR@vger.kernel.org
+X-Gm-Message-State: APuU4Z8EbBLW0ZOLWV+3LtxJisAHBH0lVHHyfdvUz62K8tjNxEozJznq
+	kzglGYw2Wz85MrtGX1JbAOKglVoWkLMrccOgnDhGMbNTYuKMBQDF+BQwGYe68YrDctI=
+X-Gm-Gg: AYBFou0I6oP8u3nNwFz5A8U8OuueObWj+DnPjnkNBw+HiFpZsAFualmZcD6tt+SeJz7
+	skyls3n6osbNSH0amKgGmGd33xkLrZpO1Ep+1faweE8/UJc1luJGwjg65MhPjkcMTEdsfcMAERv
+	7Gw/Kpl6TEmSMAuIdloBf/RHfnEmNN2WBdaHCM42g4H7RhI6kLGsQpF7Lh/l+rKCMxlZV80U60u
+	+2Jf1RnMovm7FHiRnXpIPIUrOlaoi5fo5Xfkj//sdea6UkaKXFM0FMdTrsL/9Lf1nsA3lIPZkrB
+	WrtyQolwK928eb1xGWPUxyL2pxjr9qoFRRI5ndpY/hElrSMeiqgAESdw8Qoe2j+AkNRsjMczp7L
+	9kQZVEvXVmntlsyGzLNopMQhHfc0ssz3JxkBg6tkUg7evjYGe/lXTB+jXboPflhJ6DC+0yDyxJ6
+	Tq3sxPinOv9axKiLsAnLl+gr41CpsaDPi4JZ1ntGwDuhZdJSA+01X662YVVnNreXNQtTl//01v4
+	ajoAoy0ACQsjbGr9RCNBLww6QMxJcggZzbidB4FARJmWuiZvEcJ6E+ZYtJ1u3GvhVmIKYCffgcv
+	8FVhA3m6lCcZkyO93PN0n4th6nKUefkYtVh2fFEDCj/6WfO2P5hoNU3mrqMOVTQBc8Y2nj5S/Gu
+	hYhpIlBw=
+X-Received: by 2002:a17:907:72c8:b0:c4c:fd37:bb0c with SMTP id a640c23a62f3a-c509642fa91mr120493666b.29.1794557800810;
         Fri, 13 Nov 2026 00:16:40 -0800 (PST)
 Received: from [172.16.240.104] (144-178-202-142.static.ef-service.nl. [144.178.202.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095b4214fsm65243866b.35.2026.11.13.00.16.39
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095b4214fsm65243866b.35.2026.11.13.00.16.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 00:16:39 -0800 (PST)
+        Fri, 13 Nov 2026 00:16:40 -0800 (PST)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 13 Nov 2026 09:16:37 +0100
-Subject: [PATCH 3/4] arm64: dts: qcom: pm6150l: add LCDB regulators
+Date: Fri, 13 Nov 2026 09:16:38 +0100
+Subject: [PATCH 4/4] arm64: dts: qcom: sm7225-fairphone-fp4: Wire up
+ PM6150L LCDB
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -96,7 +96,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261113-lcdb-enablement-v1-3-1dc40b49ed82@fairphone.com>
+Message-Id: <20261113-lcdb-enablement-v1-4-1dc40b49ed82@fairphone.com>
 References: <20261113-lcdb-enablement-v1-0-1dc40b49ed82@fairphone.com>
 In-Reply-To: <20261113-lcdb-enablement-v1-0-1dc40b49ed82@fairphone.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -109,46 +109,73 @@ Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  devicetree@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794557797; l=914;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794557797; l=1746;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=jSFr6IDnvz36B8/Z3/vtjUsuHYxlF+1hv1m2I+QA4eY=;
- b=gYNntGCDYW2h8z5NxO9fK4rn5jIALH26kXQ6PcSladSms/2hW6O+tYlHjv3FEYFwHg4rVJ11U
- 4WJBHNDkSF5BVgI3WYlq5TENmYxC7hoKB97X5jRUuatY9UMUmgi+enl
+ bh=KjTKTH9Miq+8wMoPpDn8TAAfkWHtiUZa4QdKBZGsgPQ=;
+ b=0gEdfshP1PkmZVEL/h2v+0KFiWjmOvW0x74d6gZcB7Mc88ZUGZl6AjEnXDATqUxlfd90qJxBn
+ i6waAEMPGQbC+r+RZ5r+EKzsjOrbv6MuRFlWCZp+Cz6OAfHYIEskU9Z
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Describe the LCDB block providing the LCD bias rails. Leave empty
-regulator nodes, forcing board files to provide correct voltage.
+Since Linux has gained LCDB support now, wire up the LCDB regulators so
+we can turn them off and on as desired.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- arch/arm64/boot/dts/qcom/pm6150l.dtsi | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 26 ++++++++++++++---------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/pm6150l.dtsi b/arch/arm64/boot/dts/qcom/pm6150l.dtsi
-index 334f976f1154..095b24a8a01b 100644
---- a/arch/arm64/boot/dts/qcom/pm6150l.dtsi
-+++ b/arch/arm64/boot/dts/qcom/pm6150l.dtsi
-@@ -135,5 +135,19 @@ pm6150l_wled: leds@d800 {
- 
- 			status = "disabled";
+diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
+index 37aa272019cc..d592bede6a61 100644
+--- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
++++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
+@@ -72,14 +72,6 @@ key-volume-up {
  		};
-+
-+		pm6150l_lcdb: regulator@ec00 {
-+			compatible = "qcom,pm6150l-lcdb", "qcom,pm8150l-lcdb";
-+			reg = <0xec00>;
-+			interrupts = <0x5 0xec 0x1 IRQ_TYPE_EDGE_RISING>;
-+
-+			status = "disabled";
-+
-+			pm6150l_lcdb_ldo: ldo {
-+			};
-+
-+			pm6150l_lcdb_ncp: ncp {
-+			};
-+		};
+ 	};
+ 
+-	/* Dummy regulator until PM6150L has LCDB VSP/VSN support */
+-	lcdb_dummy: regulator-lcdb-dummy {
+-		compatible = "regulator-fixed";
+-		regulator-name = "lcdb_dummy";
+-		regulator-min-microvolt = <5500000>;
+-		regulator-max-microvolt = <5500000>;
+-	};
+-
+ 	reserved-memory {
+ 		/*
+ 		 * The rmtfs memory region in downstream is 'dynamically allocated'
+@@ -784,8 +776,8 @@ panel@0 {
+ 		reset-gpios = <&pm6150l_gpios 9 GPIO_ACTIVE_LOW>;
+ 
+ 		vdd1-supply = <&vreg_l1e>;
+-		vsn-supply = <&lcdb_dummy>;
+-		vsp-supply = <&lcdb_dummy>;
++		vsn-supply = <&pm6150l_lcdb_ncp>;
++		vsp-supply = <&pm6150l_lcdb_ldo>;
+ 
+ 		port {
+ 			panel_in: endpoint {
+@@ -925,6 +917,20 @@ pm6150l_adc_default: adc-default-state {
  	};
  };
+ 
++&pm6150l_lcdb {
++	status = "okay";
++};
++
++&pm6150l_lcdb_ldo {
++	regulator-min-microvolt = <5500000>;
++	regulator-max-microvolt = <5500000>;
++};
++
++&pm6150l_lcdb_ncp {
++	regulator-min-microvolt = <5500000>;
++	regulator-max-microvolt = <5500000>;
++};
++
+ &pm6150l_wled {
+ 	qcom,switching-freq = <800>;
+ 	qcom,current-limit-microamp = <20000>;
 
 -- 
 2.56.1
