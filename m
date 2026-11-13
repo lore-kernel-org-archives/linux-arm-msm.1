@@ -1,68 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=103.117.158.51
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794585580;
-	b=03RV45N9iya5Ya9mk5dJ5Pq+nwhL8MQvubyarv1k6W21BMXABN7Nm4GU8B5hvhgZKeYG
-	 P6VXJJxENTn3EC/XPbXD4wb1344kw9lS7bMOWcuy4Yrjbg1cA15d7vhbxmuGbNGU1c6yB
-	 Icyge9kx+5ZfYV7bbQy2D0fW1z3G2Pnn1eTKrZ/SahXGHxmMgeVVP5g25qCOyyra774Av
-	 j9fjrvZ/XX8GpAE59OrqQ3eg0p9lC5xAzlAdsRbAASRjS2bwhWe85n9pDSAQg8PEHd2LG
-	 ghsrqge42V5PonayC7KcI6oYZwnj3lZo1oT2qK5Kd5Njq/1nJE2FOB77EDp5xes+pEg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794585580;
-	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
-	bh=Nl31PSuEy3Lo+qkXIEnbHDtDvbYKP5sZm75lN1/UelY=;
-	b=PttbybguB7rZsH2CNsbbUslbMHJffc6a7GCUk/pLk3zL1aws13MZYAY9dp/4jY5JA7fQ
-	 2nUDBx8xryhJPqMwtvgu/dgozOqs4qnac3KcUdz/ixRdv4idn9onZOu9ma/YEeGC/Sxoo
-	 sIr20Vf/MPrqEZkyfJst52NkMYL/rsSwe7d9sE38/MORIa7XmRFUsMm8LxtJBnNMksBET
-	 3a1In75/LE9Z/1UsmpyHXzczQLROlA4ttlqeN2OU2jWNdqSvAkO847za2x8wd0s40pwUF
-	 HJ3JVeKWzf5Hd74hGezaEbVUxpgZXQiomhzaQrODePP5HhX8jubiJ3wiRjcjecx3B5w==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=none header.from=inferno0230.in;
-	spf=pass smtp.mailfrom=inferno0230.in;
-	dkim=pass header.d=inferno0230.in header.i=@inferno0230.in header.a=rsa-sha256 header.s=zmail header.b=OWMSJV8c;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=103.117.158.51
-Received: from sender-of-o51.zoho.in (sender-of-o51.zoho.in [103.117.158.51])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.50
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794585901;
+	b=3hbtQeUppkb/HQFnciFRLUta8Q6Q6m2XIdxSPbVzgUDTuQWED+Has/AB0SDaZB63JbxC
+	 nVf93YgQ4SzWzBec0QrmkTCu1CQeB7zusz3aaQkrhd0OvbVAAAdsNUDg4Eq4lmiSgGpxo
+	 F/XlDDwbeIjuKxUs8UWH7oxJMN0vBDiBavz41Mp38KA7XjICC/QyNIG0wg6pagZu/uKYn
+	 ttWR2wfLr9GE7prjyTkbn4/CBnEddxlEQJGOgmnoh8zonPSG9hT781X5u+GMr+439zz0D
+	 +TLN+4dHSsB6BFjTacdCBWQHOzjNU7nNLLUa7qEwJuKtr+qvlrGvKaBgLi1wh30Q/jQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794585901;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=FO0bSEZPctK4SYPQqqbCp52sfheQb98k2br9y1SkDKs=;
+	b=lLIuLCthqeSPfqmF5kGmdbmIW/dzl7DPTonhnaaQyH0inadTexEINpTLo4LYFadMbB6/
+	 HkZyVa0DycdwM4WoU/DTM4AdGt4+uqHCLYUI2tuCUnKSJYApvo7FEcAW33S2vjG7wkuHd
+	 2A0XXhL74s8eYl2jJBlBCvMGAZAphfQxqu9l0dBveihQAFIEhbfCKSOtv9XphFRYPWHRj
+	 F8ckBGC1RomMd7QjRWcyVawh8/0xhugRVI/4IzgFe2QVLhDHb3sO8ZrBUJCK9GsjJRI9F
+	 cN38deXtNFlG6WnObjgNdfkSjW8643a2ebQrj0BofO8HYJmNIYMXQRD+4S61Kh2FeaA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=fairphone.com;
+	spf=pass smtp.mailfrom=fairphone.com;
+	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b="UbcRd/9F";
+	arc=none smtp.remote-ip=209.85.208.50
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF59760A2628;
-	Fri, 13 Nov 2026 15:59:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF59760A2628
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=inferno0230.in
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inferno0230.in
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1DD6606FFDD
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 16:05:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D1DD6606FFDD
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=inferno0230.in header.i=@inferno0230.in header.a=rsa-sha256 header.s=zmail header.b=OWMSJV8c
-ARC-Seal: i=1; a=rsa-sha256; t=1794585566; cv=none; 
-	d=zohomail.in; s=zohoarc; 
-	b=ejwCJWvcaUWkbeGgTZIb+iy9k5lTriZ9j6jD1e02zOit4YxgqAEQ2X1Syoa9wo1FwbW9+9+8wF4GfPVV8juaj3VeKMRJmlk+uUg0mhjlOb6OzOlXOtbelwv2MTDXMffuHfFUAsF6rbljbWRac1PvpsggdUCsR6vkYN0Okcq3lDM=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in; s=zohoarc; 
-	t=1794585566; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=Nl31PSuEy3Lo+qkXIEnbHDtDvbYKP5sZm75lN1/UelY=; 
-	b=IzubNrgY/b9qep5tU/q7McQWrEF/ENI4ZxnNLmWO7iErCgoP5sHeaC7c5sWt/jR3m8dUNaR6DcmwnDVEuH5gDH8o15mg8idnS5SUMDMcuNg7YNvsNlUbUekvVvmUcHRQC2VX3sY+rtlYbRUZaSqt1LumJfjRE8bUboG7lgizCNw=
-ARC-Authentication-Results: i=1; mx.zohomail.in;
-	dkim=pass  header.i=inferno0230.in;
-	spf=pass  smtp.mailfrom=mail@inferno0230.in;
-	dmarc=pass header.from=<mail@inferno0230.in>
-DKIM-Signature: a=rsa-sha256; b=OWMSJV8cqWV4Hd82XI0dtyYS+fB3lMYDWLps0Pz5sOS73WXmllhhNG0pe5BttTC7T+XeEYLq07VLsmjpi0aFzi7CQGWJKPkcOZ7C0Tpf4XQlGyL6xC0tJK+iX4SEKATPuwi+ZFdVcu/wap7taR2U5txqWEJEQ73Q7Llg4EcPZQQ=; c=relaxed/relaxed; s=zmail; d=inferno0230.in; v=1; bh=Nl31PSuEy3Lo+qkXIEnbHDtDvbYKP5sZm75lN1/UelY=; h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zoho.in with SMTPS id 1794585564858467.445858350549;
-	Fri, 13 Nov 2026 21:29:24 +0530 (IST)
-Date: Fri, 13 Nov 2026 15:59:17 +0000
-From: Aditya Choudhury <mail@inferno0230.in>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: arm: qcom,ids: Add SoC ID for SM7550
-Message-ID: <avcz1Z6OnT-c2kgQ@inferno0230.in>
-References: <20261112-sm7550-soc-id-v1-v1-0-57299906d81a@inferno0230.in>
- <20261112-sm7550-soc-id-v1-v1-1-57299906d81a@inferno0230.in>
- <20261113-ambitious-solemn-narwhal-cbaeec@quoll>
- <avce6OKgtVIi15tR@mediaserver>
- <b945d65b-60a9-4437-999f-15b5f0307b5e@kernel.org>
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=UbcRd/9F
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6b577addee9so2376425a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:05:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fairphone.com; s=fair; t=1794585899; x=1795190699; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FO0bSEZPctK4SYPQqqbCp52sfheQb98k2br9y1SkDKs=;
+        b=UbcRd/9FwWBdLAt5jyAX8bSLG00aIKvRanBB1yuP9xq1emw0f4SmvcZ8KpwCIjoSUq
+         bgEKSheDRaM1VXBBhmS1+aEiaRkNbcxgfhOHxm3ypbyFeXnqUebBrxX3WrpusQjvZlcN
+         Qoi13ObKTXUrQdg96Onqr0+BNJGgn8WqlDnl/bqWngrR28/VwudT8Dm302ZpSRkU3jem
+         H3KEu9go6LCQSxTirg8LvOvTZFdLHD40dqigtl0xPT4KBKicv7zEhR97Sj9HqRRqlYya
+         50caTAqTLqT/FYpXHQZ0Wn5tgKbOTHhheOCW0cJ1LuyiOf5OP1F86TdNjKW+UI+2VPfZ
+         vInQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794585899; x=1795190699;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FO0bSEZPctK4SYPQqqbCp52sfheQb98k2br9y1SkDKs=;
+        b=LWISHMo5ustxu7LJETdxOb+Q0yhDKeDCg6GI6gB6zqBXKHlaIe7KFXxP8Yxqs/Eeog
+         ixJEtxyDrV+SIgKhXcFJLSQRrEeg2k4TLGhFhsfdAlePghxgns8EdfrT9vheiDC/Nq0n
+         TUSLZBKqWxDBY8rsNR3xlSbNw/aKJavtIrFKs8GNYNZx5mM6rZtiPfXFoMSJSlrfeL8C
+         eacvebYkqUWNyx5X5HGwY06Kd0IHCM5MCjMYmzQTjI2C/8Xs04UyfsjsFcxk1YlrD1wb
+         AwWJ/iNmUHZv8uI3PT/XHXm4zAGB9eQjmvowq24Tr1nyQfqSlFn3ZrQUlRpTVeQ//aJ7
+         vZZw==
+X-Forwarded-Encrypted: i=1; AL+hErEjVQzp2W1Yr7HJWTEMPFoXQ1nRP56/rRxSEhKTxfJlUta9ImV7m9KNZ8sT0ljHJmLCFJDUPtWwm9lW5ru6@vger.kernel.org
+X-Gm-Message-State: APuU4Z81GSf15t4dE3uFHqMKN9FGj/Fzp3tmeB4jxlayf1BIV2V4FVq+
+	sy358XV64aFHynRagI0sJUYr8VPXL2yMavJgpNItN6cpM9oVYBT+xgwyKeJOi5Pr/Oc=
+X-Gm-Gg: AYBFou0OMFHLJZ8MXEtto7efYb1D86gGQVnib0kzAhDSAhg2Ur2c6lrIaJylFBdzpSX
+	vMQuKx9E03fpNBjTkfn2ZtDfD+BN3CkimdSULkN9YjHOVvH3GSGlVv1Jq1rSG9/GKxl7jl7FCBy
+	5Q0DCFcmS/vd++h+XDGszBwCcPA7aEqImya2LDArTHTP3SEIwkbTby4XzidbQuDteWODgPeceoy
+	O0gT9WVRbQClOiJzH3MxAb0i4idJDogt3/HXwOJ89Xcg0qGoKh0obANz7TW0YGz09kRqifFlFNM
+	lc3/1o5MIPjFZpWbFod4ALmVRmGkAmIy2FBK2jejxBoJ/1w5M/jDAz8k1C9JDCd8f5glRtc7Y6l
+	/NeqQUM0OO5ugCFS5Cev5tsEOTmGLxYWxmupAeydIIsUgt40od2heNuNIRrvWBmBLsNyI6wLJ0J
+	lTllvRp6/aWogm01uiC8vrCbZk64Tlk4zxAsbo2RD8xeIIjpW1Zzgj8wd2b5pu4EEUQarwGEEMa
+	PNMNsUFSshPwlPvv/8phhm9fN8qo4YF4Bhv/nB/c5j4+QcItHd1zDG4pb4xbclTSb66+rYpRhwI
+	lZnTJYcqAz5tILM8lPO2xVEDn3X9pPJo5fUm0qCzP/hXpxtEfsNdjzlvauF9Af49DfHs
+X-Received: by 2002:a05:6402:849:b0:6b7:c9d4:6b96 with SMTP id 4fb4d7f45d1cf-6b7c9d47044mr1699353a12.8.1794585899214;
+        Fri, 13 Nov 2026 08:04:59 -0800 (PST)
+Received: from [172.16.240.104] (144-178-202-142.static.ef-service.nl. [144.178.202.142])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c264d99csm1123946a12.36.2026.11.13.08.04.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2026 08:04:58 -0800 (PST)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Date: Fri, 13 Nov 2026 16:56:42 +0100
+Subject: [PATCH v3 1/5] iio: adc: qcom-spmi-adc5: Add battery thermal
+ channels
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,64 +93,131 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b945d65b-60a9-4437-999f-15b5f0307b5e@kernel.org>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.12.1.5.3/294.567.56
-X-ZohoMailClient: External
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261113-bat-temp-adc-v3-1-743979a8fd90@fairphone.com>
+References: <20261113-bat-temp-adc-v3-0-743979a8fd90@fairphone.com>
+In-Reply-To: <20261113-bat-temp-adc-v3-0-743979a8fd90@fairphone.com>
+To: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andy@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Laxman Dewangan <ldewangan@nvidia.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Hans de Goede <hansg@kernel.org>, 
+ Jens Reidel <adrian@mainlining.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, Val Packett <val@packett.cool>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>
+Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+ devicetree@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794585895; l=4306;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=Ls9YOP9s76H+ik3WPl/H56mlsU6FAYkwGa/NKoyDkp4=;
+ b=R2YRFU8uP5cAi2o3bXqmiSspceyOk5f/xOzUX7K2BBsMMg/O0iMgjMpLnMhrGAQUny70QlwBl
+ qtDr/DTeAoaBpRRa50quPWV3UdAiGi4AjIKM55zMif+7z9CRpgHfylz
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-On Fri, Nov 13, 2026 at 03:57:17PM +0100, Krzysztof Kozlowski wrote:
-> On 13/11/2026 15:30, Aditya Choudhury wrote:
-> > On Fri, Nov 13, 2026 at 12:17:35PM +0100, Krzysztof Kozlowski wrote:
-> >> On Thu, Nov 12, 2026 at 10:30:26AM +0000, Aditya Choudhury wrote:
-> >>> Add the ID for the Qualcomm SM7550 SoC, whose internal codename is crow.
-> >>
-> >> >From where did you get internal codename? Downstream does not use the
-> >> proper codenames.
-> >>
-> > crow is the codename used in downstream sources. I assumed it was the
-> > internal codename since SM7550 is publicly known as Snapdragon 7 Gen 3.
-> > I was also unsure about this because SM7635 uses milos upstream instead
-> > of volcano downstream.
-> 
-> As you can easily check, names in downstream are not codenames and have
-> no meaning. Don't use them.
-> 
-> > 
-> >>>
-> >>> Signed-off-by: Aditya Choudhury <mail@inferno0230.in>
-> >>> ---
-> >>>  include/dt-bindings/arm/qcom,ids.h | 1 +
-> >>>  1 file changed, 1 insertion(+)
-> >>
-> >> Where is any user of this? Why do we need such SoC patches separate from
-> >> the actual new SoC?
-> >>
-> > I sent these patches first because I expected a possible codename
-> > change, just like what happened with SM7635. I wanted to settle the name
-> > before sending the actual SoC support patches, so it wouldn't need to
-> > be changed everywhere later.
-> 
-> But this does not settle the name! You only sent SoC ID, without the
-> actual name. Organize your work in proper chunks, not split without
-> proper reason. This only limits the view and makes review unnecessarily
-> difficult.
-> 
-Sorry about that. I sent only the SoC IDs because I had seen it done
-that way in the git history, and I hoped it would also get the codename
-sorted out first.
+Add the BAT_THERM channels with millivolt as output, which can then be
+used along with information regarding the NTC in the battery, to get the
+actual battery temperature.
 
-I can either send a v2 of this series with crow reworded to Camano, or
-send the whole SoC bring-up with the SoC ID patches included in it.
+A static lookup table in the ADC driver won't work since different
+devices have different Ohm and Beta values in their battery NTCs, for
+example a NTC can be 10kOhm & B=3435K.
 
-If I send the whole bring-up, should it go out as v2 of this series, or
-as a new series?
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+---
+ drivers/iio/adc/qcom-spmi-adc5.c         |  6 ++++++
+ drivers/iio/adc/qcom-vadc-common.c       | 16 ++++++++++++++++
+ include/linux/iio/adc/qcom-vadc-common.h |  3 +++
+ 3 files changed, 25 insertions(+)
 
-Either works for me, whichever you prefer.
+diff --git a/drivers/iio/adc/qcom-spmi-adc5.c b/drivers/iio/adc/qcom-spmi-adc5.c
+index d57ba8526e0c..24ac84580570 100644
+--- a/drivers/iio/adc/qcom-spmi-adc5.c
++++ b/drivers/iio/adc/qcom-spmi-adc5.c
+@@ -542,6 +542,12 @@ static const struct adc5_channels adc5_chans_pmic[ADC5_MAX_CHANNEL] = {
+ 					SCALE_HW_CALIB_DEFAULT)
+ 	[ADC5_XO_THERM_100K_PU]	= ADC5_CHAN_TEMP("xo_therm", 0,
+ 					SCALE_HW_CALIB_XOTHERM)
++	[ADC5_BAT_THERM_30K_PU]	= ADC5_CHAN_VOLT("bat_therm_30k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
++	[ADC5_BAT_THERM_100K_PU] = ADC5_CHAN_VOLT("bat_therm_100k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
++	[ADC5_BAT_THERM_400K_PU] = ADC5_CHAN_VOLT("bat_therm_400k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
+ 	[ADC5_BAT_ID_100K_PU]	= ADC5_CHAN_TEMP("bat_id", 0,
+ 					SCALE_HW_CALIB_DEFAULT)
+ 	[ADC5_AMUX_THM1_100K_PU] = ADC5_CHAN_TEMP("amux_thm1_100k_pu", 0,
+diff --git a/drivers/iio/adc/qcom-vadc-common.c b/drivers/iio/adc/qcom-vadc-common.c
+index b03cf584b165..09a13e2b0ef4 100644
+--- a/drivers/iio/adc/qcom-vadc-common.c
++++ b/drivers/iio/adc/qcom-vadc-common.c
+@@ -309,6 +309,10 @@ static int qcom_vadc_scale_hw_calib_therm(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+ 				u16 adc_code, int *result_mdec);
++static int qcom_vadc_scale_hw_calib_therm_volt(
++				const struct u32_fract *prescale,
++				const struct adc5_data *data,
++				u16 adc_code, int *result_mdec);
+ static int qcom_vadc7_scale_hw_calib_therm(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+@@ -333,6 +337,7 @@ static int qcom_vadc7_scale_hw_calib_die_temp(
+ static const struct qcom_adc5_scale_type scale_adc5_fn[] = {
+ 	[SCALE_HW_CALIB_DEFAULT] = {qcom_vadc_scale_hw_calib_volt},
+ 	[SCALE_HW_CALIB_THERM_100K_PULLUP] = {qcom_vadc_scale_hw_calib_therm},
++	[SCALE_HW_CALIB_THERM_VOLT] = {qcom_vadc_scale_hw_calib_therm_volt},
+ 	[SCALE_HW_CALIB_XOTHERM] = {qcom_vadc_scale_hw_calib_therm},
+ 	[SCALE_HW_CALIB_THERM_100K_PU_PM7] = {
+ 					qcom_vadc7_scale_hw_calib_therm},
+@@ -583,6 +588,17 @@ static int qcom_vadc_scale_hw_calib_therm(
+ 				 voltage, result_mdec);
+ }
+ 
++static int qcom_vadc_scale_hw_calib_therm_volt(
++				const struct u32_fract *prescale,
++				const struct adc5_data *data,
++				u16 adc_code, int *result_uv)
++{
++	*result_uv = qcom_vadc_scale_code_voltage_factor(adc_code,
++				prescale, data, 1000);
++
++	return 0;
++}
++
+ static int qcom_vadc_scale_hw_calib_die_temp(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+diff --git a/include/linux/iio/adc/qcom-vadc-common.h b/include/linux/iio/adc/qcom-vadc-common.h
+index 3bf4c49726a7..ce037994b019 100644
+--- a/include/linux/iio/adc/qcom-vadc-common.h
++++ b/include/linux/iio/adc/qcom-vadc-common.h
+@@ -93,6 +93,8 @@ struct vadc_linear_graph {
+  *	voltage (uV) with hardware applied offset/slope values to adc code.
+  * @SCALE_HW_CALIB_THERM_100K_PULLUP: Returns temperature in millidegC using
+  *	lookup table. The hardware applies offset/slope to adc code.
++ * @SCALE_HW_CALIB_THERM_VOLT: Returns voltage in uV of a temperature channel.
++ *	The hardware applies offset/slope to adc code.
+  * @SCALE_HW_CALIB_XOTHERM: Returns XO thermistor voltage in millidegC using
+  *	100k pullup. The hardware applies offset/slope to adc code.
+  * @SCALE_HW_CALIB_THERM_100K_PU_PM7: Returns temperature in millidegC using
+@@ -114,6 +116,7 @@ enum vadc_scale_fn_type {
+ 	SCALE_PMI_CHG_TEMP,
+ 	SCALE_HW_CALIB_DEFAULT,
+ 	SCALE_HW_CALIB_THERM_100K_PULLUP,
++	SCALE_HW_CALIB_THERM_VOLT,
+ 	SCALE_HW_CALIB_XOTHERM,
+ 	SCALE_HW_CALIB_THERM_100K_PU_PM7,
+ 	SCALE_HW_CALIB_PMIC_THERM,
 
-> Best regards,
-> Krzysztof
+-- 
+2.56.1
 
-Best regards,
-Aditya Choudhury
