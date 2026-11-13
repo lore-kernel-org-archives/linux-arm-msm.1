@@ -1,56 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794596912;
-	b=AYswvNr+39NSp3CwMaFQPLtLgXGuCzZBc2QGV9fvwNvXWiTD4H6IT3kjSgPy7bL7ioG1
-	 ruvwfOp3cAEvGaFwe3WCxCyGSs8o+OGXk/3LYME+VcT4ZxpFMgsuRVN59OmY6XzReByZv
-	 uAJZu34Tc1skEMK4k+oekpSYTUjS5HC1lKUB81+e14bDF1i1IrZbRe9uPTXfUWnY0q7ck
-	 2vuPy0OwS01JwvO2N0H4+vGkEpdwo7i/YqwhP0Lk5ah4mIYJzCAbD0dANBF8OvZ8X2k86
-	 8BhRtYYoqZPceNtOcusbpsxvcdhIFUtPwqmOhPtwkHeTezvL7RHtsk2UAPZxa3GxUIw==
+	t=1794599238;
+	b=hYyeICPOeY31PFXbnFFfaTxuEvk1s/iD7pv071hvQIsNRnKv+uDOoW7AWTWr8E04RYaR
+	 D9ark/eK1FMt3/4EQE541OZAKVByNsPloSRyh8n43/Z7HvyyquHmIgxxDBr5v2o5K2NTb
+	 SyIwzwiqskeyqPAIzIMB5KbZEVfh9l1VsD1h1HAvfFyQXkGV2kqPPy4eQMVl2d/rfy+8z
+	 MzYILi2AhlMrTSrtdHRc4HdZQJCPj6PdORQ5+zov4BFJO52TEGCxPu7uWH47yyjDY2Gyc
+	 j0yVr8rz60xgCKPyew+/QqXn4iia7bPtPt2n75AXfceql+Ju3fWSdGRjP9r0Kt5RbCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794596912;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=NiMttAxHEHBNM2Bdz60wUAPak8r8g2qu7dmT3GxddHs=;
-	b=voDA/imnPNq8vpSgMxCHtxi0iurzi5FGKz8yECSDl1YFeswaqBsPDwfxZQzQQxS/BsO8
-	 zRgvJuU4spChZ7tTrZbOu29QVQJQI6bN0/vKSpZNFPRj6BgQbWjwTHbSvUTFd77eM2llJ
-	 9rO0PuYhKTI46yyERljrvOHhq5+eEL/d+9nnCGIrrQXgZTnAm71FFVO7U+q2Xr8Ge+sPw
-	 vLgRfsKT59Ib5M+fizwmfuBv6gHOQEtQYe3tTJqnr5G9I7oJzM9SODvot/NcRuiBZHBhC
-	 H/8VmqE9KvECYycf+nfOToQFpHH/9rMH4GU3S4Y7gqQ5HjbaI6Sz6Kk0ys4Tt2SdCwQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794599238;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=IeG8GW29CPTq2V+5DOuKsl8l1CpVGznlbRHng5hlVeQ=;
+	b=S++DqXrQCDyMY2S0fP/1FLaCGT1uE7hCSDqhyL7AZguYY1LeRiknhTI2BAkz4o5jJNdn
+	 9Y2U4JtZPjXaCqmdRfxQ5OqavFD6zaIX2TXvpdaMZvs7DXgW4tDxLrplhl2mpJAZMVY0T
+	 sDZ+edpzklqou7yPLBA9SFDu03T+0pHLkMmN/JuRLVdpRRmZlV3uYxS5qKkkf+8/cuJpM
+	 5oixWmym3+/lGxILwiI6Hl7OmRIHTG2cP3hIY5eff38wC4vsWAxFRkUuFc/bWvMDr3EpL
+	 BIOTXuMtya0oTHa1ofPR8Spm1zlRJrf8z40ZKbY8/FAMYmR9iWr206Uf/mVe8uxIp7A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=oxrguvVQ;
-	arc=none smtp.remote-ip=91.218.175.50
-Received: from mta0.migadu.com (out-50.mta0.migadu.com [91.218.175.50])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FGpcEftj;
+	arc=none smtp.remote-ip=74.125.82.171
+Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FEEF606A886
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:08:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3FEEF606A886
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1F22606A333
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:47:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C1F22606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=oxrguvVQ
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=KGxUgSFY69U8aWf7k/qkbKFdiAll7pLEb3REyMKc05U=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794596909; v=1; x=1795201709;
- b=oxrguvVQtVhHPyqX4FZ9pVaaoxVtGAsdLH5lLRE+5aNomFMtQknjE/1xoWSY1O1f1v73siky
- UebY1VJU2KX/TTFsZVAIaPWyVi32MnJxG7xK5zy1gFVIUBHAuqj1Qk5WIrneH832XH8jsRaYH1I
- tsIsQ8SM5nOCKH1MhFWhbOtjV5m/07zrzDcvftUBHrpWyTIIq0YTzD5WDKW1zTNVhREr9w3Hh6S
- uFv0HV4Ia0nxDy3LsDvnDQOMYQkNdJe5ymiwGIcdlQYioMdXRgKEypj27MaC6FrTEaKQOROO7nB
- dGhvccu+v1I0EgIc5j3/KTg0SGoT0R15zgRDdzXhi87LQ==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 6891a72dc87223a4;
-	Fri, 13 Nov 2026 19:08:29 +0000
-X-Mizu-Trace-ID: 6891a72dc87223a4
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <f5bc0271-5ecd-49b7-aa5b-d5742bf2fe03@packett.cool>
-Date: Fri, 13 Nov 2026 16:08:20 -0300
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FGpcEftj
+Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-36dbde64409so2086673eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 11:47:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794599237; x=1795204037; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IeG8GW29CPTq2V+5DOuKsl8l1CpVGznlbRHng5hlVeQ=;
+        b=FGpcEftjGf/8FeLN5xx8lCOAqwDTwoq4kDQD/mgzYbfy+mu5nR+BGXOJ0a/01GFvSx
+         Eq53qQ35WUOg89/AJrzV5OQu5EVEf3qMAdin182glN9Yl0/NWgtVQYH//8aOcdKYqavQ
+         lK10NcJw7FiG4CTWFP95gxEDOspGbopsMws5QHEQKGHGVPC2d6jLoeUeDBTfJvg+V8Mr
+         Op7NpOmFiIIWblp6grKK+UhaJ5tTzIoVh7hSgqJYlYx9M4ot0z3Ae4T6pxW/hQzcQfPd
+         GKjPKAbhFHA12Ato5S20OJM6PdX3IPwr/KngIqGmYk13Znt7ecuUm5ULe5biyqNw5LuW
+         K9ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794599237; x=1795204037;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=IeG8GW29CPTq2V+5DOuKsl8l1CpVGznlbRHng5hlVeQ=;
+        b=eCqr7ukQObeOOl+UVYUzNxGqdFFzQHcdJiZnCmLi1HusI51rv/jtDfwbJm1x6kLlx9
+         m9+tsz2H9nIvlr4RVe2PJVzog18wSiW7LmpLpPUFgsgjx5xE09OVdcCZQoJBT4mbGLx3
+         Rd4KlGTYkKjCeVtqGLtNbS1xkAkuJSvhqeDW2nEoaUlQj17NeezDuFO4IjFdjxAqYliA
+         Yh6e2fXT6j9OF+8xA9kIQ8U7lxlr0Q4niS7v//F+vcbGeI3hCxZdpP85yvaW8kFa4kl5
+         464N5XPiLgp8Yq8ZZSu7JzWEbW8Qp9Y5NHpVYMzd9/+pXbmXhTceYgkyYkXNYLfc2nJs
+         iV8A==
+X-Forwarded-Encrypted: i=1; AL+hErHW94MBekK8UHd7R6+cDC8MwT8O/C4jiQXh9H8sFHd5nr4SCpaMLQvLM7NSJzN7CVjcGJdnZdRJJdj61OHX@vger.kernel.org
+X-Gm-Message-State: APuU4Z8XWc0n52i8caDAjP3+/WxG6zfcw8+jW1usq/6y1ZM0yaZsH6QW
+	KPA5sFfH6dCJGhlZNCY1OpV+sTaI4hsoyVKxqKNRTnl6IycqWY9yB6l0
+X-Gm-Gg: AYBFou3gcQ+mAqw7DRYY70sS26UsZwnrvmnRf4fJzS1uVdlJgn63zeBYIgTcB7NoXPY
+	JtA92af3Q1be+w9/HNFXPehzzxBSB8cizKLjvC+euYyGyUCRJ2PijyFJzsfEPsORijGa2lNtvpC
+	KeO3+mnnD/QZrjxz93aigxj6RgcpqPg+RZFd27Ainq4R8/pTnzCKLKn9Ldf81RzVUrV1U2S9ytm
+	HpkPuPONgh3iczV6LgXaUvhkOXwXplXN4WQLwlDzVda2hCp0l+Owgfv8hEA/vGIRWiF8JmQs0og
+	oexLmcs42gxTULiLszBbZ2EzQtaDqwH3gnOin+69zRhwGxbvEqFEkIUkaJYj8yj2ZlgiHuAmbd0
+	2FMbbXZSmv9me+hq5EA0XvyjHEryR2nWoS0v5D7kHOStCsgzPYtbSOFOOc5KMdUHkOVQe3BwuYv
+	wRtLXj4PJ2Ioio/RaGpfaHUqAWrPwYkJYBLHlDxFF3qNF3VoIS4hcbU2ua803nEhCko308QlPr1
+	qTIxZUZ6SSA5uQRCf2rl8VME2GAEDbYzY8FSDotnGBbe6SRiunEtAy6QdG54ZPBjvadfZ+CX4T5
+	bl0wFeGPKg0o+yGl2qvm2weDIhSBrpNi4zE7cNMuLeTye6PVXIlTKW0fqk5QxzXhTQ==
+X-Received: by 2002:a05:693c:83cb:20b0:375:388:a6d5 with SMTP id 5a478bee46e88-379675fc8fbmr2832268eec.32.1794599236582;
+        Fri, 13 Nov 2026 11:47:16 -0800 (PST)
+Received: from [192.168.35.9] ([218.50.238.131])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955a1c5c2sm10172682eec.14.2026.11.13.11.47.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 13 Nov 2026 11:47:16 -0800 (PST)
+Message-ID: <953597c5-80f6-4ee7-b8db-ec7264d99e40@gmail.com>
+Date: Sat, 14 Nov 2026 04:47:09 +0900
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,61 +93,78 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 20/23] arm64: dts: qcom: sm8650: move EL1 Gunyah nodes
- to sm8650-el1.dtsi
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Srinivas Kandagatla <srini@kernel.org>,
- Rohit kumar <quic_rohkumar@quicinc.com>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>, Konrad Dybcio <konradybcio@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-clk@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>,
- linux-gpio@vger.kernel.org
-References: <20261113-topic-sm8650-el2-v1-0-5183f6aab9fc@linaro.org>
- <20261113-topic-sm8650-el2-v1-20-5183f6aab9fc@linaro.org>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261113-topic-sm8650-el2-v1-20-5183f6aab9fc@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v2 2/5] devfreq: Use %pe to print error pointers
+ symbolically
+To: Sumeet Pawnikar <sumeet4linux@gmail.com>, rafael@kernel.org,
+ krzk@kernel.org, amit.kachhap@gmail.com, daniel.lezcano@kernel.org,
+ thara.gopinath@gmail.com, talel@amazon.com, hayashi.kunihiko@socionext.com,
+ mhiramat@kernel.org, mmayer@broadcom.com, viresh.kumar@linaro.org,
+ sumitg@nvidia.com, peter.griffin@linaro.org, myungjoo.ham@samsung.com,
+ kyungmin.park@samsung.com, cw00.choi@samsung.com, Frank.Li@nxp.com,
+ s.hauer@pengutronix.de, matthias.bgg@gmail.com,
+ angelogioacchino.delregno@collabora.com, sven@kernel.org, j@jannau.net,
+ marcan@marcan.st, casey.connolly@linaro.org, sre@kernel.org,
+ wens@kernel.org, t.schramm@manjaro.org
+Cc: bcm-kernel-feedback-list@broadcom.com, linux-samsung-soc@vger.kernel.org,
+ kernel@pengutronix.de, imx@lists.linux.dev,
+ linux-mediatek@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260912191156.185448-1-sumeet4linux@gmail.com>
+ <20260912191156.185448-3-sumeet4linux@gmail.com>
+Content-Language: ko
+From: Choi Chanwoo <cwchoi00@gmail.com>
+In-Reply-To: <20260912191156.185448-3-sumeet4linux@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 
-On 11/13/26 3:38 PM, Neil Armstrong wrote:
-> The reserved memory map, remoteprocs, SMP2P, IPA, GPU zap shader and the
-> q6prm LPASS clocks only apply when booting at EL1 under Gunyah, and
-> boards booting Linux at EL2 had to delete them.
-
-This might be true in practice for this specific SoC just due to these 
-being the only devices made,
-
-but in general, "boots Linux at EL2" does not automatically imply "does 
-not use smp2p/remoteprocs" (see Glymur; and earlier laptops with hacks 
-that happily use ADSP under EL2) so the dtsi that includes all 
-remoteprocs being called "el1" is quite strange IMO
-
-> Move them into sm8650-el1.dtsi, included by the EL1 boards, and drop the
-> node deletions from the Deckard dts.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+On 9/13/2026 4:11 AM, Sumeet Pawnikar wrote:
+> Replace PTR_ERR() and %ld with %pe and pass the original pointer directly
+> to dev_err(). The %pe format specifier prints a symbolic error name (e.g.
+> -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it falls back
+> gracefully and prints the raw integer value. This makes messages more
+> readable without any functional change.
+> 
+> Signed-off-by: Sumeet Pawnikar <sumeet4linux@gmail.com>
 > ---
->   .../boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts      |   1 +
->   arch/arm64/boot/dts/qcom/sm8650-el1.dtsi           | 775 +++++++++++++++++++++
->   arch/arm64/boot/dts/qcom/sm8650-hdk.dts            |   1 +
->   arch/arm64/boot/dts/qcom/sm8650-mtp.dts            |   1 +
->   arch/arm64/boot/dts/qcom/sm8650-qrd.dts            |   1 +
->   arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts  |  21 -
->   arch/arm64/boot/dts/qcom/sm8650.dtsi               | 774 +-------------------
->   7 files changed, 801 insertions(+), 773 deletions(-
-> [..]
+>  drivers/devfreq/imx-bus.c    | 4 ++--
+>  drivers/devfreq/imx8m-ddrc.c | 3 +--
+>  2 files changed, 3 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/devfreq/imx-bus.c b/drivers/devfreq/imx-bus.c
+> index 49798f542d68..dba76d8b9e5a 100644
+> --- a/drivers/devfreq/imx-bus.c
+> +++ b/drivers/devfreq/imx-bus.c
+> @@ -75,8 +75,8 @@ static int imx_bus_init_icc(struct device *dev)
+>  	priv->icc_pdev = platform_device_register_data(
+>  			dev, icc_driver_name, -1, NULL, 0);
+>  	if (IS_ERR(priv->icc_pdev)) {
+> -		dev_err(dev, "failed to register icc provider %s: %ld\n",
+> -				icc_driver_name, PTR_ERR(priv->icc_pdev));
+> +		dev_err(dev, "failed to register icc provider %s: %pe\n",
+> +				icc_driver_name, priv->icc_pdev);
+>  		return PTR_ERR(priv->icc_pdev);
+>  	}
+>  
+> diff --git a/drivers/devfreq/imx8m-ddrc.c b/drivers/devfreq/imx8m-ddrc.c
+> index 52beeb5b7d65..28d7c595fa17 100644
+> --- a/drivers/devfreq/imx8m-ddrc.c
+> +++ b/drivers/devfreq/imx8m-ddrc.c
+> @@ -340,8 +340,7 @@ static int imx8m_ddrc_check_opps(struct device *dev)
+>  	for (i = 0, freq = 0; i < opp_count; ++i, ++freq) {
+>  		opp = dev_pm_opp_find_freq_ceil(dev, &freq);
+>  		if (IS_ERR(opp)) {
+> -			dev_err(dev, "Failed enumerating OPPs: %ld\n",
+> -				PTR_ERR(opp));
+> +			dev_err(dev, "Failed enumerating OPPs: %pe\n", opp);
+>  			return PTR_ERR(opp);
+>  		}
+>  		dev_pm_opp_put(opp);
 
+Hi,
 
-Thanks,
-~val
+Applied it.
+
+Thanks
 
