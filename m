@@ -1,80 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794606277;
-	b=MOu6M6yQFGa/tGoIivf4a2fj2pMdi45trtipbnrd34T8YOHAc/5qPR/qmTsu/4YfsJOQ
-	 PEKmVXMK2RNXdtQbVb2KsjpkOGO1WnDWdw/MrabRPQ3I8ggJeZS5TMCJTFyseDbG7nqow
-	 5SX8vXfWeNL0vGTyk/FMCycEHAY+9zCyBwlmUXxnCsk5Z639HIXh/VcqSt7fiuWOvXVjf
-	 bq3oxzUa9F7hzOBUWqSUz7gi9+5W2ykBsNYM/n4Dq83IextmqNoq3uBuQYs9BoBbJiYAb
-	 lGS54l4NBrtJAVuxx1rC23fGN8pxoMESFvoq/MTcwl0L6okFMQKFsg6jqLHn3elmzRA==
+	t=1794606292;
+	b=edqcaM/mNYP6N9vrsHkEqIjxF8HAcKoUy6ZQ49H82BlNhRDzsbaEi9zaPXVIdPw47BK1
+	 8+B95QKB5ThWoLVBAFgTSpBccDKij3tYkDsdzS2dfaDU76CR7IDzchfhQujBb1yUvzVJH
+	 mLMYxi1EtQ1KPQL/6CX3z8T1biUppERSyx2gGBn/v67z2QC54Cmc6w0j+2NxqBmjoqgop
+	 /70Xmj9HQCTHWT23oNkh3I8feoaOAj7ppzAjGo+3lIVBq6awMQVIzOlGV8WukPPBPbX06
+	 euQIrlCi2O9kf+RjN14SpQm2IdRMqc8cDPZM/9oqzC6vdyLTYNlbjJfDlQu32he4waA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794606277;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794606292;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=idHWYPumru9E8eUEsbTnG7m5cr0Qeebr13UTD3g+dNk=;
-	b=ihwwTfm5c1JVPNwbzcvWP7s/MWZItUFeODqDwpw78AV4uP3AUB7mtPp944/KkIEy+lSG
-	 4C58bizJrbVzFynauUZnDYahfIIKUZS31JrA6M6GN0fqrQX8r1O69TbQsLo2ULelNwQ0B
-	 b3IaR9DIF/i02SVuj1Yr8xLvvPRxS6q5/koFgQl0yf1sca+onMF2t0S48EIFF3ch9JeCf
-	 pvBqy8jc3G1T5zWfPn80352NTvDHAIepVOFuf4PdqHG4GdjlvN0eoDpayFKPzuFyjUBbU
-	 B89IGR7uvt6k1GCHE0TwcVJy69d8R657s7gnJMr//oWXqJ7az8MSQ+eNJB4jCJmSiSA==
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=VSNciQwXoLzNC38H4Cu8pkuiuhLtNiZHzowcIJLxJLQ=;
+	b=b9kwUe/soVKT3jtl28VLUAr913ucxKKrJWOe3e80HIzLGQs66j8jX6akJclhxgmEDnev
+	 JJNCRk+ebzl//l055WHOYFT2tDMUulk/3w6OtbZ4eTcGf9M+QPMQOkUzITdeQSoQOBAEs
+	 lPtAh4AiCsnurLiTEAUlS7+4lSb5Txg2O6tmU0VUx/oXimljydKiAoNlyVh6Xtm5yrvHc
+	 DCSbub+334yh4Nb0t/1FAxvWpY9phXNWdOELVm5sR7CphM+SovVk64Cue87us8m7gKzRG
+	 YrtKKO6LJMGdYi8dXQdCcyr23lagB32yMf3HmVXDottJSH0EmQgHHYDPvQNxpIuCZJw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="kI/JEfWF";
-	arc=none smtp.remote-ip=209.85.221.49
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="nhOwUvm/";
+	arc=none smtp.remote-ip=209.85.128.42
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65F4C606A33B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 21:44:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 65F4C606A33B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3144E606A886
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 21:44:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3144E606A886
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kI/JEfWF
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48b001cd92bso1168012f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:44:37 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nhOwUvm/
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4ba013938d7so19473505e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:44:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794606276; x=1795211076; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=idHWYPumru9E8eUEsbTnG7m5cr0Qeebr13UTD3g+dNk=;
-        b=kI/JEfWFxnNd2OdQAFjZk6WGtBuxQ0b2J1AxChRphTz9LtqA+crMd6d/JSq2A4uEvW
-         8xEn8XPjVKMiXFOIWmMKfD7MxNh+Bxuqn7hm+udWlxQdIzQXr7ZNCbFOydxEiXQ7F9uc
-         zJwHZQR6kplPB0GxYj/ofAShObktk2YAAe8tx0E63/rUUtRWwGhQwJbTifwqsJkfT6IK
-         4P9oXauZi3svoArETQAU2dnOgAqvKCFtIGvakO5vosGIW4BIqJp2Fu8WCFu4Z3m//yOX
-         KmxHY5pZuciNqybfUReUFYuEiDGadUqgzzIPQVb+O4v1agvHqo28BTQztGYreMzNSdBv
-         gNBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794606276; x=1795211076;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794606289; x=1795211089; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=idHWYPumru9E8eUEsbTnG7m5cr0Qeebr13UTD3g+dNk=;
-        b=docMvcE2/YDm1ag+V5TFoQthrJvZm8tJEwbmogYqe+YCFYDWZYVKOx71yiSbSZjQav
-         DMQ13U4o3aAxQMXW5Es+qLskF5eKzFnSrZ396bshymrS2gs2CSV3MWBhATAb93OKWAJf
-         6SQ7l+knd93O5K68z5f/his7WpQpAoKj8LFpKe6b21xtuoquJpH467WC1+4UMV5J/fwQ
-         jGZb8hE5DCfOqMoBFegPCLQb7wrHVbJUqZv+K51u6xLS+yIvV9YrftOWBspcWqdV+JdX
-         UK3ByhV/xOiC+aSIEkF/fERyr6mtmrhzlwYvwb5dv4yeMahZq0pQCGUz/CeGQRQqWG25
-         AlhQ==
-X-Gm-Message-State: APuU4Z9gHOpNfoWiN39qSLSrrmI1o/toQ6rIvWkKZfKYsARXOehQqfA8
-	PCNJ7Ur5EAMBDkCQgzn59U33JnyXGxXpjRDdPujvB9EW/t5U3HhyQXod
-X-Gm-Gg: AYBFou0XxCm5QklbONkYvNmsjnhwYYu8KYOyqb+//xW2xIKBn+ZHDXdtIg9+BDSDeDC
-	3LzL3kq+gQzr2WpxLS+e4lRwRDuREIArfDWzmJrc+RzPsKDqXlx5FTUcuZvQlA3GadsD+6AEZ7y
-	NeDbFIMO/p4V/JQ63WhwpXl274nIf39kzHxSm8+pCDTQa6ogtQ+UlmCzxE8UIn+0MyClIXaouhd
-	rjjQJ/pU8rRhtoiZD90jWqY+HJfeyycbyte5Iy/P5faX9Z5JFg5n7ooLxbfl4Y/6dQIkcZaqcPn
-	boC5g+QFbW3sVBYl3SRbiSoZ720/E9CA9Y4qmL3kF/jG1vRQR1hdX8YZDWxxn3ZuYytZey7lHX2
-	atmXQdHlEowmvJ8xCU4Vbisuz9wpirImBXFpEJyYibXaeT5EIKNzUxdYDsDK0lPeqLhOe81B+bz
-	CzM1YQ5Iwa4d3C7YNLOkUCWn45NDjHb33smQ6zeN7ywZFY8BwnZW3ZLbrKpFxUz+vzzAO39aNy/
-	xNQMatVP7RPUSb343WDEcFpnKuBbO2Pkw/OWM3LWPQw1cxTh+3NyMg17LsGnrPM6bLrJXqmMI5w
-	lvUvnlkCEeAbjnsRylTV9GdOWrZkQqeijigcF+EZOinRlJyUJw==
-X-Received: by 2002:a05:6000:993:b0:48f:bc59:ab9c with SMTP id ffacd0b85a97d-49c6fd932f0mr8024260f8f.12.1794606275654;
-        Fri, 13 Nov 2026 13:44:35 -0800 (PST)
+        bh=VSNciQwXoLzNC38H4Cu8pkuiuhLtNiZHzowcIJLxJLQ=;
+        b=nhOwUvm/CbESYpvABc6bNV4x/SqUyA7LVECFI3YGDJDEH0wgu3eha8ut6df2uzN5bw
+         o6Nc0gSzp8VX54fSjOyVQDKDWVvSHSHBkbG+EqDg5z6tAnAR3hJYDpe6WYF2PHIJBOzF
+         0IL+2SuX6exmoNCwgbQxOKey405yshwiX7lL4A/kmvahqR8mm0pn4YsYlQnSNWDL9x5w
+         BixJAAEASN/aPt+VKfmZzBa66+mrG58BGauwdZYjQFQZsCSBjxuOPTOBdxJK4c96Mdnd
+         J/sAC9ZChBGA5OQFX6BdJeuEKL+iVapjlX2wXMViNzheJR0P/g8H9W4F0ZNtjvde4TsO
+         Y0vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794606289; x=1795211089;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=VSNciQwXoLzNC38H4Cu8pkuiuhLtNiZHzowcIJLxJLQ=;
+        b=wp7P3eIrTOxtzJFhudwUQoyOtMbUxqWb9RAIK8ehg1pHN5tX2AlqMlZX33Cu0GDf+h
+         3OimrZYTcaRdUI8HlVtAPksCG+2+Mh/Np9N+bBjT48MZEMEIxobZooJ9G1YbDT+eGIMJ
+         yi0rLy2tVwHoRtutD0J23SjISekjtT88662lD7w3DT6xpSrsBbWHs5bxHLMdoXDZpJZg
+         H5Ievo0HJ2fU/h84ZFxzGjQwxtiFTNjSU1JkIK8KpVWM9cQIIt3yLjOPPKwcVthJxyKX
+         yfnwV+mdiyCh5NgmL767b7o2y1GIOVsrflK0dsgEsdEXkNYlnQO6d19rckULSGcL/EaQ
+         gP0A==
+X-Gm-Message-State: APuU4Z+RbqHz8igRhpg9uJxMrjTXBK/lryVc/7t9ScBrASVJ0dwvIjwT
+	7pa7PaeEFXoOTlZy1KUH8fx3e5/GvnJHSZuvJrPNNV3KRSyN1sNFCvX/
+X-Gm-Gg: AYBFou27HngRWYGv13aeUYk2JGh6ALlLYki5LlaXSpCjRTlwN+q2Fo5asi+jWtGBAq5
+	yVVlSdPaJsdWDuuRXqFAVwO+Ohpz+sUrVCxDS/CUjOOE7+z+jdJGP5BXXlYMFRwbRWOkiBf3KJy
+	Nqkoh5fvcY3GNttqOwA0OxquLxuWIQVWF90lW9MVpLeNdsImUCkmZ00twlLAPMc2jj32ogJDgws
+	+15/tvI6B5Bk/K5n1nITAGLpfyytv3bYc02CsMOKr0tFhBmETU35U0jY5mkxFuPZwHAbs7yfBT/
+	wo8a5DaPtxZwm/6K1hTT7xVg6ft+MJU+zSNsRx2M4Uyuefx8jSUx6gCS7jpRNdaPsUIZGpkziqf
+	w5+0GJ8JARAXqExxkYCL7pqyPWfOzAImI2FKRaLDdksD26jB1RqUi33doxf9k7jkWglLvVkzVDH
+	dyZOamkKWGj8V7xR/uYO/daWWie2+/VozHtk48PRA+mMA/L1PtGQ98ctOd2V8ny4OcH4wD7De8W
+	NGQyhsV7WDeblnMLLclX0HbucGlNyu/gr1+1L/N3HFKEvSRaD4VKNAPZ1wEaN3KJTg5asek2aXQ
+	TZIBVRa19FGDNspEGax/L4nSpTPkvVAi3mxoPBpyJEaGQQ8pq8J3y3cadX+iICn+JUUrSTE=
+X-Received: by 2002:a5d:64c9:0:b0:48f:ead0:631a with SMTP id ffacd0b85a97d-49c72ba5d3emr8894959f8f.47.1794606289387;
+        Fri, 13 Nov 2026 13:44:49 -0800 (PST)
 Received: from vivobook-s16.fritz.box ([2a02:908:e843:f280:6cae:291b:a1:8362])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c8d286480sm11644595f8f.7.2026.11.13.13.44.34
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c8d286480sm11644595f8f.7.2026.11.13.13.44.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 13:44:35 -0800 (PST)
+        Fri, 13 Nov 2026 13:44:49 -0800 (PST)
 From: "Ingo A. Kubbilun" <ingo.kubbilun@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -86,10 +88,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	"Ingo A. Kubbilun" <ingo.kubbilun@gmail.com>
-Subject: [PATCH 0/2] arm64: dts: qcom: Add ASUS Vivobook S16 S3607QA
-Date: Fri, 13 Nov 2026 22:43:39 +0100
-Message-ID: <20261113214424.220241-1-ingo.kubbilun@gmail.com>
+Subject: [PATCH 1/2] dt-bindings: arm: qcom: add ASUS Vivobook S16 S3607QA
+Date: Fri, 13 Nov 2026 22:43:40 +0100
+Message-ID: <20261113214424.220241-2-ingo.kubbilun@gmail.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261113214424.220241-1-ingo.kubbilun@gmail.com>
+References: <20261113214424.220241-1-ingo.kubbilun@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -101,46 +105,31 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series adds support for the ASUS Vivobook S 16 S3607QA, a 16" laptop
-based on the Snapdragon X X1-26-100 (X1P42100, Purwa) with 16 GB RAM.
+Document the ASUS Vivobook S 16 S3607QA, a laptop based on the
+Snapdragon X X1-26-100 (X1P42100, Purwa).
 
-The device tree was derived from the Windows ACPI tables (DSDT, PEP) and
-the existing X1 laptop device trees (Vivobook S15, Zenbook A14).
+Developed with the help of an AI coding assistant (Anthropic Claude),
+which drafted the changes from the Windows ACPI tables, existing device
+trees and test logs; reviewed, built and tested on the device by the
+submitter.
 
-Working: eDP panel and backlight, GPU (Adreno X1-45), HDMI, USB-A,
-USB-C, NVMe, Wi-Fi/BT (WCN6855 NFA765), keyboard,
-touchpad, lid switch, battery, speakers (2x WSA8845), headphone jack
-(WCD9385), efivars/RTC via QSEECOM, CPU frequency scaling.
+Signed-off-by: Ingo A. Kubbilun <ingo.kubbilun@gmail.com>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Not enabled yet: video codec (iris; the Windows firmware is rejected) and
-the camera.
-
-Note for review: the CPU thermal zones get 90 C passive trips with
-cpufreq cooling; the SoC dtsi only has critical trips, and without an
-EC fan driver the machine reached its thermal limit under sustained
-load.
-
-Tooling: the changes were drafted with an AI coding assistant (Anthropic
-Claude) from the Windows ACPI tables, the existing X1 device trees and
-boot/test logs, then reviewed, built (dtbs_check clean) and tested on the
-device by me. The laptop runs it daily with Linux 7.3.3; this version was
-tested with next-20261112 (several cold boots, all hardware listed above,
-without clk_ignore_unused/pd_ignore_unused on kernel cmdline).
-
-Related patches sent separately: panel-edp entry for the BOE NE160QDM-NX4
-panel, the qcom_scm QSEECOM allowlist entry and an ASoC line-out jack fix.
-
-
-Ingo A. Kubbilun (2):
-  dt-bindings: arm: qcom: add ASUS Vivobook S16 S3607QA
-  arm64: dts: qcom: add ASUS Vivobook S16 S3607QA (X1P42100)
-
- .../devicetree/bindings/arm/qcom.yaml         |    1 +
- arch/arm64/boot/dts/qcom/Makefile             |    1 +
- .../dts/qcom/x1p42100-asus-vivobook-s16.dts   | 2137 +++++++++++++++++
- 3 files changed, 2139 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-s16.dts
-
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 7ffa4f69987f..2390568de805 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1350,6 +1350,7 @@ properties:
+       - items:
+           - enum:
+               - asus,vivobook-s15-x1p4
++              - asus,vivobook-s16-s3607qa
+               - hp,omnibook-x14-fe1
+               - lenovo,thinkbook-16
+               - qcom,x1p42100-crd
 -- 
 2.47.3
 
