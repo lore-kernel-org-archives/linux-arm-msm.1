@@ -1,85 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794583380;
-	b=JLkpZQ4oQcf/Pr1A3a3OwSqzc03X/k7tLaCbxVqQu0fYsaibL/NawQNeBKHU1YMXN7P5
-	 GYEPBeMD35D0+KjwIFhgxXzw1/Cld5HMbdg59qEKRkvD1ACp3tkqkYBTYXosFl54fArcB
-	 /YOAqho9/ItY1MzupmKuJ13xQgX686JhON6q0B/GexuzyVZYrqmmZxpRwaz+yy6ETtHan
-	 GZ/zyOfj2G0BVNWg3YdnG0m1Y+pyKpJycQBlbb3n74/R0q0ruQew6Jk7iZA/r7R5BumJJ
-	 H0jQmi5pS78ofznq1nQhWC87GnuTbN0R4CIVD8zabjpYps8pY7mqwOIrZZnvRMabJRw==
+	t=1794583984;
+	b=kl1Z63BdKmPdVZ0W7ZZOOVSm2+cEbC5tY0HnfBO02OdiWwlsMt5rrC4Vy6jFa6otsYmu
+	 Gh9Iiwm41hVxL8LzobWNzcLwN8z9b0FtqO25QD2Nsj4xSEqjXZW5hS5Ed9GzlvQHl23m9
+	 RGU17PLnFfm1EfZCGtR5v7MXjfF2L4d4KravTLEbdUnpWTnimiXpapgmheKwF3w7HyfK3
+	 73gXyJJ2QUhSTaz4J9KIZURyDydW0HWZ5DnJVDMbWhiUMb9igMqeCpi8qmHmsXpHhCHdd
+	 cHyqRRGA5WgAO3W75SGNicU4Yth9TSNFBwwLIZF5A818T6ZBX3PFu5mWzKlQSg8Ypiw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794583380;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794583984;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
-	 Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
-	b=jSr/Wh8Z9QwIARp6aDgcDiVgy3khbtpfv5W8VXWsFlLEjqbYTwZSqBW4Lk8DSEy+1dwE
-	 vTSgdRI+pmcpyE4THdAyYcRb9G15mJzGv7tcY6Ax/dSTjvdpB73Obif6L78vXW4lPX7qm
-	 Lo20kSRpw4jI/e+/9V398lviCDeG/AutNgueDXHrCLLUcW9ekrUk9YKp8injNjNhwDdWJ
-	 4XtH8y/u32LK68CnTCvy9iUGjGWxli4Y2cuILtHva5VzyqucGpESVums4nMh6aGRdKkjw
-	 8krzSbCBE5b7GSCq0kl8aCT4yyFKDrZ4biLeNTRZx1T/sA/2Yj5h75/56AEQlncSo2A==
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
+	b=BdSLQ4v0LijpM3u/30DvoSaXOqypIqCFbRf9UPbajCE/BvtO3VY8zW20g2dTi25PaRYS
+	 +hq2ozhvV6ZKzfkBGerYtFIKd6DLVYEvS81j3UY2FvR2llz3XzWsfD3aYszSlTg+kH/VN
+	 mShxcyrOzSR9wtNandteDgkMkAJwXDYAiNT1YwPjeP2U7b1mKjU8YC5dp4j4ZsJyHuASv
+	 GUkdqrH4UwxE1Htj4cR1N39asG1vUp+U+4l2/yQG0yexGopYwFgz70cepCJX/pnIYf3V3
+	 5MqZTewpJiHd/xhpaShfINRK/tkvlVU7BkhPa3xv9mJqA2PK7W+7zgdFexxHBeBAj8g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=baylibre.com;
-	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="Z4j/Mghi";
-	arc=none smtp.remote-ip=209.85.128.54
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sxafsgr9;
+	arc=none smtp.remote-ip=209.85.128.53
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E77CF606A330
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 15:22:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E77CF606A330
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6FE3606A327
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 15:33:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B6FE3606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Z4j/Mghi
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4b4571ff080so16850565e9.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 07:22:59 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sxafsgr9
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4b7252a32c8so17445905e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 07:33:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1794583378; x=1795188178; darn=vger.kernel.org;
-        h=message-id:date:references:in-reply-to:cc:to:from:subject
-         :content-transfer-encoding:content-type:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
-        b=Z4j/MghiCfLl4geHxV/1zp0iqZFNnntdJLs/GhAqDGduqb9DsAilkkq7STQnBeZ0um
-         RhRvKy/5eCZ7/YOf4I6ESuLz+SNm9tkajr2e8phIKwLpPUNrxEs8ow/NIQakyHXKpUNB
-         wPRM4oSCycrLGiF2jbCbowm/BJ1BtJIjJDTObxah1B0fXda8R77uAxdV6HE+5EK+QdF0
-         ZQ/ACHOwMrY+sj8numw/aMHMwEY/vMqvifjApBhJUHkH1EPJavyUdNHLq4MyAxwPC7SK
-         kmDg9bJ14RbAv6hk4/IhmI1flTTg7vsqzz+2ixhoxgveX2xQhoYUeoYm2BbSsiArcb0j
-         7a9g==
+        d=linaro.org; s=google; t=1794583982; x=1795188782; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
+        b=sxafsgr9q4WtgV5gGf+FAMXBcr0gPNBz6e4/ZPt9ERGdyxnXLNQbiJkzQVPb9lAp1i
+         JKzzXnYbIiA5nGEtvpcTVc1YvAIKP4SjTDd5DqDmgg+i9rC2p3MFO1Hw8P0HZ3EvCzFM
+         w5hKtMfXa4xdj1X8btbQyM9qIcJfWEPcS3e8QeojL1AoOON61oyIE3HGrOhTvnYHZrs7
+         KZxCN52Lsol1nJNEtLmkxpX8y2Sj++ro04MxVbmcyUSV0xYNjOOnrZ5/tXSURA9fR+Gs
+         wPpS+J91oUCjdmfGIksePGdlfiBAl9E2nvYDp5YcFaN2qfhumzat9z/4V/NxnwIMncgc
+         M4wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794583378; x=1795188178;
-        h=message-id:date:references:in-reply-to:cc:to:from:subject
-         :content-transfer-encoding:content-type:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
-        b=mMNyX35m8RuAUmH/H1HLvyzAlQ7QRY8q2mtQbi+nqQMy4J1zhAh8va7oK71qX7alhO
-         3+6nGkQGuzcZ/57YQKzsCNDDZLRc8sSeF4r5hzljq3jGtegCwIhnvCsFjpJ32SbnAUA4
-         P0ErUekDB3Tccgj04oPXoTrT/lMVrBLRd3oo7UOWH2oqhljkbw305J4XT5M0Ps2SrF80
-         fDp4+dKWVzKYq+N3ZRkQtAENg+89HAVNRKMnX2HZXnIRm9q5Le2Hc1pyzfflvzrprUoa
-         qhdQXVarih3DyRDlat7wBm2ZLwDL5Ul4kWT8/bk4lQQkQ3cPHVbfsWC1yXqaGxN6g2cV
-         K+aA==
-X-Forwarded-Encrypted: i=1; AL+hErGzwdWHCKPgkGJACHp7IlkLQGBysrs0xgird3PYM6laRVFB//4QVMPsTGVkOgZtA++q75dZx8f1D8k4JjTu@vger.kernel.org
-X-Gm-Message-State: APuU4Z/5Wp5vUB/P7aYHUkPGN69xkZBf2yimdha3qdFf3NH6vLtanFJh
-	HK8lBJ15vouxLewVBS18khsQVJdEXg9lKgsu9m0wCrqkM2dvcVPdESOpWtEHIBtl5RQ=
-X-Gm-Gg: AYBFou2k/G1pPrH4I/0gwuxwWw9DkGIpGAdcBphTYLmlpXp0tR4QX9sy57LfirN41HY
-	50hVj2fdhF89UshK2mHB6DtKWT89AvU07EPN84EqPWB8ooif+gbBpVsoFJP4reiKJ74iZ2ylDHh
-	h9uSE5sGvFGmrrC87CpoqkGEJe603UiRusT2HeKKVGhsvzv0pCa7rzDEdp1cpto6Ntfhxbcws5D
-	nOQLej/ZRv2VaOTP8BtjvANjQIqhZo5OnPMVsjNVbW7ImhRFHW+bfNnrIq+Phn+f88AZlYXNjIc
-	CNgTyb0sUwK9GSLKWNDMeR3Zx7jzKdCLla1o/PLZ0xhV/wv3rK2Pdndm7Y4x8iesK7J7uhY2qkd
-	sfeF+QJ0VPEcDTbBv5TMAN2cLjiKFd+IyK4W9VIaiO+gRLmKVqQFdY8Jiw18YCbDqHLdO/TlMzJ
-	x3RP6WcOXTGPSaZhzqpZmNjRLDRS/H1kY/bzMTZCgfeJmXfUEq9vt/9IofKqAM16BcPF8w1NcqA
-	vFAuNVD0y/JzuD1Mu+CMB/D3wkYyjpASIrofTxZ2BVUXxspwQGqePy4KFpYvTza+/TPvbE+YS39
-	k3vhTxO4Yv/jifLdSuo2R5Z5XyBc0F35Rg7QFSPX56QOP3b4
-X-Received: by 2002:a05:600c:470a:b0:4a1:f7f4:7cf1 with SMTP id 5b1f17b1804b1-4bb55a44996mr54909955e9.11.1794583378164;
-        Fri, 13 Nov 2026 07:22:58 -0800 (PST)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb4e252f7fsm169848395e9.2.2026.11.13.07.22.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 07:22:57 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794583982; x=1795188782;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
+        b=Ck1Q0tUo5VEEWiIfUAqcqseLGPrJ924f1x0hupzX6D3VyCRS4C1v7Qw946w/KahQoJ
+         sihVvPvvSxgicbNeQM1S+bMKZZMjOaeY63oCghkqB48SWO2Wi189o1qVesw//u9CwQeT
+         Vmc3l+DAIpoqrgY79+mdl5NC1k8aXzY5in1IKD+ClgVsArvP/vRqUspcmwDqhYy4OLf+
+         aTszdYoGMw6RVlPr0c8lpHkDVpVdAKMJn9slJNVvJUf8d+38gRGq0C/1fYsintYYP0TL
+         yHl8aYWtbOHqMNOrKR3WNZIcx8H+4G6WNbH5YdEPSbE8oSu4sY5BxVr8WxeaKdRHiUIm
+         73nQ==
+X-Forwarded-Encrypted: i=1; AL+hErHS21Cv1BDW8mkqgzBEq0Rw8K1sl57T8q4TYJ98ZCDMtjocLxvf9ZJaMrsBUhAGxAbw4SEpdIkZ54qfex+e@vger.kernel.org
+X-Gm-Message-State: APuU4Z/6LXJWx30Na+1s1cBFtUmQ/n0gVungyi4IP/7TyzZ8x3YnOiE4
+	zgVszG49oRJoUmzDNd7+Fh2lY4vEbGmM7U77xIc1d7zqH3Q4ABesh7Gw/RGDeDya9qE=
+X-Gm-Gg: AYBFou2LyWBTFlsGROMluA84GirTpcKoYt93WZY7AboPu2Dy6K0Dj+NLoPr4LAuA0od
+	wxl/6R3cynLqRP0U17vxCmKDhSBkNyhrPwoHK7n1VCxqu07s/BXePEPeYrVeo6KugiekR6LC9cd
+	O4fo56PIZo88snVvzvWiLz5ysUSAsWq5irM4aAh1rkvJkxv0Hsky015ghIBei9KQEZseURB7/mV
+	jkjxl5yZ7LxX0+UgXzqzrUUnKBJPD2edm+SHMuKgrbZqHoHy6rBfZ16PGW/hmkvx745Pbf4jQii
+	Oc5YBImT229Yo/GCbUxjFjYMdcOoamaNvSN4qr35iNK4gapNZFeMTS5VmqjdkYCLqNxZt97K3vl
+	GLf3dRQ3sLg+bGlh0hTP84Kob9FHQWotnqb03JNIZfz2adu18rL2ahpR6MIeTH/eW0V4l8Wlm4L
+	dZ1LdD9pPnUr/mjcTYLxldWT8JrthKppJ4CCNdECfU3t35fIGwRyk5j8YTKWHuYF15cjnTzBl1X
+	Bd26J70EKbb5uRRgMbpeCr/gqsQYndH5fJ6u1DeD/8ujuDdS7jTb/t4S/sO7R6rmVhGuEdSq+XL
+	OMIMDPs1HhDa+Y7wcDJK5XICOZpSNwIYOTqRRnA=
+X-Received: by 2002:a05:600c:8509:b0:4a6:4d6b:a840 with SMTP id 5b1f17b1804b1-4bb55ab74fdmr55626085e9.31.1794583982026;
+        Fri, 13 Nov 2026 07:33:02 -0800 (PST)
+Received: from [192.168.0.167] ([51.37.10.72])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb5b4a3fcdsm33490835e9.0.2026.11.13.07.33.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 13 Nov 2026 07:33:00 -0800 (PST)
+Message-ID: <2392b6bf-d1af-4fba-84d2-e8e60b7dcecf@linaro.org>
+Date: Fri, 13 Nov 2026 15:33:00 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,110 +90,153 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] media: qcom: iris: venc: keep the crop rectangle in
+ visible resolution space
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Wangao Wang <wangao.wang@oss.qualcomm.com>,
+ Hans Verkuil <hverkuil+cisco@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261112-iris-fixes-v1-0-22b759c3c285@oss.qualcomm.com>
+ <20261112-iris-fixes-v1-1-22b759c3c285@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261112-iris-fixes-v1-1-22b759c3c285@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH RFC 02/16] clk: Acquire resources for clock transitions
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Jerome Brunet <jbrunet@baylibre.com>, 
- Konrad Dybcio <konradybcio@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
- Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Viresh Kumar <vireshk@kernel.org>, 
- Nishanth Menon <nm@ti.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
- Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Danilo Krummrich <dakr@kernel.org>, Johan Hovold <johan@kernel.org>, 
- Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mike Tipton <mike.tipton@oss.qualcomm.com>, 
- Taniya Das <taniya.das@oss.qualcomm.com>, linux-clk@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
- driver-core@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org
-In-Reply-To: <825fbfbe-a9a0-43e2-bb54-f9e38ce779f4@oss.qualcomm.com>
-References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
- <20261014-topic-qc_clk_dvfs-v1-2-3041b788e9f7@oss.qualcomm.com>
- <179275170360.4070168.11650113664838519061.b4-review@b4>
- <f0ca2bd4-851e-473d-bf21-678cf964f854@oss.qualcomm.com>
- <825fbfbe-a9a0-43e2-bb54-f9e38ce779f4@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 16:22:56 +0100
-Message-Id: <179458337623.3308909.8679910347462508471.b4-reply@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3271; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=n9gjeLxQD41dq62t9Q1UDoH8EzTxjE0oy5fasIAenSY=;
- b=owGbwMvMwCW2VtK+WnvWU3HG02pJDFnftQNYFjZnu9ws4l/TOn1RRddMPbttkjGdaTOj796rf
- TLVYhFvRykLgxgXg6yYIksNd7X4O0mtL7Om69yGmcPKBDKEgYtTACZiVMDI0GWS98twnrmegNbD
- XZYWZY3fVXqXcW6esoxPSy1QcfHdMEaGC//MfS5kr/0fcIBJuSN16412sdN5/5b/Mpj7ZUnLzj5
- 3PgA=
-X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
- fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
-On 2026-11-09 15:06 +0100, Konrad Dybcio wrote:
-> On 10/26/26 2:11 PM, Konrad Dybcio wrote:
-> > On 10/23/26 12:35 PM, Jerome Brunet wrote:
-> >>> Preparing a clock protects its current requirements, not the resources
-> >>> needed while changing its rate or parent. A transition can temporarily
-> >>> use both parents or access an unprepared clock, and a parent rate change
-> >>> can cause other clocks to be programmed too. Raising resources one clock
-> >>> at a time leaves those operations exposed to insufficient power.
-> >>>
-> >>> Failures make this worse: hardware may already have changed when the
-> >>> operation returns an error. A matching cached rate is then not proof
-> >>> that resource reconciliation finished. Retaining a temporary enable
-> >>> reference without a corresponding prepare reference also breaks a
-> >>> consumer's normal disable/unprepare sequence after a failed reparent.
-> >>>
-> >>> Make CCF acquire the affected tree's and parent paths' resources before
-> >>> notifiers or programming, and reconcile them only when the walk stops.
-> >>> Keep fault recovery independent of rate shortcuts and subsequent
-> >>> consumer reference-count changes. Require explicit recovery of an
-> >>> ancestor's uncertain parent selection rather than reporting success
-> >>> from a descendant request.
-> >>
-> >> I don't think all this is necessary to address the problem described
-> >> here and in the cover letter.
-> >>
-> >> IMO a new provider API is the wrong layer. The framework already has
-> >> the hook a provider needs: the rate change notifiers. What the core
-> >> should do instead is fix those notifiers, which do have a few issues.
-> >> You are fixing one in patch 1. Another fix, about setting the parent,
-> >> was sent recently:
-> >>
-> >> https://patchwork.kernel.org/project/linux-clk/patch/20261021-submit-clk-parent-abort-v1-v1-1-2936181822fc@gmail.com/
-> >>
-> >> You want to act on some changes before anything is programmed. PRE
-> >> notifiers are the right tool for this. The user of this change in
-> >> patch 7 could use them AFAICT: PRE sets a temporary vote, POST settles
-> >> it, ABORT drops it.
-> >>
-> >> Also, what is acquired here follows the requested clock. When an
-> >> ancestor switches parent, the chain of its new parent is not acquired,
-> >> although it feeds the whole subtree after the switch.
-> >>
-> >> With notifiers, the parent fault state is not needed either. As it is,
-> >> it blocks every request on or below the clock until the same switch is
-> >> retried.
-> >>
-> >> Could you tell me what you need from this approach that cannot be done
-> >> with (fixed) notifiers?
-> > 
-> > I'm a little worried about the ordering there, since some device
-> > drivers may also be registering listeners in parallel, so we don't
-> > get a clean split of what PRE means ("has power for sure " or "may
-> > not have power")
+On 12/11/2026 16:15, Loic Poulain wrote:
+> The encoder keeps two source resolutions. inst->fmt_src holds the padded
+> buffer geometry handed to userspace, with width aligned to 128 and height
+> to 32. enc_raw_width and enc_raw_height hold the visible resolution sent
+> to the firmware as HFI_PROP_RAW_RESOLUTION.
 > 
-> Do you have any thoughts on this? I'd like to proceed with this
-> series in one way or another.
+> inst->crop must use the visible resolution, because
+> iris_hfi_gen2_set_crop_offsets() computes
+> 
+> 	bottom_offset = inst->enc_raw_height - inst->crop.height;
+> 
+> iris_venc_s_fmt_input() seeded inst->crop from the padded fmt_src instead,
+> so any height that is not a multiple of 32 underflows. 
 
-As I have replied before, if there are things to fix in notifiers, we surely
-can discuss it but, at the moment, I don't think the complexity of what you
-are proposing here is justified.
+I think this explains the bug enough TBH.
 
-Please allow some time for Brian to have a look.
+<snip>For 1280x720,
+> crop.height becomes 736 and bottom_offset becomes 0xfffffff0. The two
+> offsets share one payload word, so the right offset is corrupted too.
+> 
+> iris_venc_s_fmt_output() compared the requested coded size against
+> fmt_src, so a plain 1280x720 session looked like a 736 -> 720 downscale.
+> Seed fmt_dst from the visible size. The encoder does not use fmt_dst for
+> stride programming.
+> 
+> Seeding fmt_dst from the visible size also means the codec alignment has
+> to be applied on every path and not only when scaling, so that the
+> CAPTURE queue keeps reporting the coded size. For 1920x1080 that is 1088,
+> and the firmware signals the visible 1080 with SPS frame cropping.
+</snip>
 
--- 
-Jerome
+> Report CROP_BOUNDS and CROP_DEFAULT from enc_raw_*, so the bounds match
+> the real source frame.
 
+> G_FMT is left as is. For contiguous NV12 pix_mp.height is the only way to
+> report the vertical luma padding, and the hardware is programmed with
+> scanline_y = ALIGN(h, 32).
+
+>    v4l2-ctl -d /dev/video1 \
+>        --set-fmt-video-out=width=1280,height=720,pixelformat=NV12 \
+>        --get-selection-output=target=crop
+> 
+> Before:
+> 
+>    Selection Video Output: crop, Left 0, Top 0, Width 1280, Height 736
+> 
+> After:
+> 
+>    Selection Video Output: crop, Left 0, Top 0, Width 1280, Height 720
+
+Nice.
+
+> Fixes: d9967fa37ca9 ("media: qcom: iris: Improve format alignment for encoder")
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/iris/iris_venc.c | 20 ++++++++++++--------
+>   drivers/media/platform/qcom/iris/iris_vidc.c |  4 ++--
+>   2 files changed, 14 insertions(+), 10 deletions(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_venc.c b/drivers/media/platform/qcom/iris/iris_venc.c
+> index 2f2c56bf9122c73e10e86815b1aa5fad99b0fb42..b367367ac2ccf874a00606b8b1352fed37b37a57 100644
+> --- a/drivers/media/platform/qcom/iris/iris_venc.c
+> +++ b/drivers/media/platform/qcom/iris/iris_venc.c
+> @@ -240,14 +240,18 @@ static int iris_venc_s_fmt_output(struct iris_inst *inst, struct v4l2_format *f)
+>   	 * If output format size != input format size,
+>   	 * it is considered a scaling case,
+>   	 * and the scaled size needs to be saved.
+> +	 * Compare against the visible source resolution.
+>   	 */
+> -	if (f->fmt.pix_mp.width != inst->fmt_src->fmt.pix_mp.width ||
+> -	    f->fmt.pix_mp.height != inst->fmt_src->fmt.pix_mp.height) {
+> +	if (f->fmt.pix_mp.width != inst->enc_raw_width ||
+> +	    f->fmt.pix_mp.height != inst->enc_raw_height) {
+>   		inst->enc_scale_width = f->fmt.pix_mp.width;
+>   		inst->enc_scale_height = f->fmt.pix_mp.height;
+> -		fmt->fmt.pix_mp.width = ALIGN(f->fmt.pix_mp.width, codec_align);
+> -		fmt->fmt.pix_mp.height = ALIGN(f->fmt.pix_mp.height, codec_align);
+>   	}
+> +
+> +	/* The CAPTURE queue reports the coded size, in whole macroblocks. */
+> +	fmt->fmt.pix_mp.width = ALIGN(f->fmt.pix_mp.width, codec_align);
+> +	fmt->fmt.pix_mp.height = ALIGN(f->fmt.pix_mp.height, codec_align);
+> +
+>   	fmt->fmt.pix_mp.num_planes = 1;
+>   	fmt->fmt.pix_mp.plane_fmt[0].bytesperline = 0;
+>   	fmt->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_OUTPUT);
+> @@ -293,8 +297,8 @@ static int iris_venc_s_fmt_input(struct iris_inst *inst, struct v4l2_format *f)
+>   	fmt->fmt.pix_mp.quantization = f->fmt.pix_mp.quantization;
+>   
+>   	output_fmt = inst->fmt_dst;
+> -	output_fmt->fmt.pix_mp.width = fmt->fmt.pix_mp.width;
+> -	output_fmt->fmt.pix_mp.height = fmt->fmt.pix_mp.height;
+> +	output_fmt->fmt.pix_mp.width = f->fmt.pix_mp.width;
+> +	output_fmt->fmt.pix_mp.height = f->fmt.pix_mp.height;
+>   	output_fmt->fmt.pix_mp.colorspace = fmt->fmt.pix_mp.colorspace;
+>   	output_fmt->fmt.pix_mp.xfer_func = fmt->fmt.pix_mp.xfer_func;
+>   	output_fmt->fmt.pix_mp.ycbcr_enc = fmt->fmt.pix_mp.ycbcr_enc;
+> @@ -312,8 +316,8 @@ static int iris_venc_s_fmt_input(struct iris_inst *inst, struct v4l2_format *f)
+>   	    f->fmt.pix_mp.height != inst->crop.height) {
+>   		inst->crop.top = 0;
+>   		inst->crop.left = 0;
+> -		inst->crop.width = fmt->fmt.pix_mp.width;
+> -		inst->crop.height = fmt->fmt.pix_mp.height;
+> +		inst->crop.width = f->fmt.pix_mp.width;
+> +		inst->crop.height = f->fmt.pix_mp.height;
+>   
+>   		iris_venc_s_fmt_output(inst, output_fmt);
+>   	}
+> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+> index 05aab6e3005d5c3788f5dfe5857f2d6b782e7a83..e3eaec1b7c2e30c065d8419ac3278756f70a8a97 100644
+> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
+> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+> @@ -522,8 +522,8 @@ static int iris_g_selection(struct file *filp, void *fh, struct v4l2_selection *
+>   		switch (s->target) {
+>   		case V4L2_SEL_TGT_CROP_BOUNDS:
+>   		case V4L2_SEL_TGT_CROP_DEFAULT:
+> -			s->r.width = inst->fmt_src->fmt.pix_mp.width;
+> -			s->r.height = inst->fmt_src->fmt.pix_mp.height;
+> +			s->r.width = inst->enc_raw_width;
+> +			s->r.height = inst->enc_raw_height;
+>   			break;
+>   		case V4L2_SEL_TGT_CROP:
+>   			s->r.width = inst->crop.width;
+> 
+
+Could crop and scaling go into separate patches ? Feels like it could be 
+made more granular.
+
+---
+bod
