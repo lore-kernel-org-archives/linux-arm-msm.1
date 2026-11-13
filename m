@@ -1,61 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794557963;
-	b=koDDy9rP4DmbQ7W5JR4BeD2mGsYexUXBPYvf+o6enb+0bTrjy/ljm+WIkpXOUI7HoQPI
-	 Ndb2d6opLkBBKAd3Kb1v+6ATuAcGm35m5UitEhBIgwEvhSOBWeJ72nAyZL2Q9Sz8+9Gtk
-	 hFTpCnn3RwAbYS/ztCDpbNM1q6bg4wLuDt+IAyLXHsdLco68s8WYc+oR172qsDne+5dWP
-	 k70gW5fL+BkewU2OHrT0C9jM54POdg8VFTlV1pLW+UAro105KjyWSJ25Kj/v1S5PNNY99
-	 ggXPQoUJaDY/Z5Qt29LpfHeFS+q7EloxVxqTLFqRhCdr04k4UfK0D8mG1Mhy3klvMvQ==
+	t=1794558046;
+	b=rJ2wHk+KHA0wDApZTR0QtyIkaoGB6uRRM3DBiYKGzcPdx3pZaAX5n/zEseV8zSmD6SZO
+	 fuLN9LG26oxBI5ZPYYsdRcKs3exS/eOdGZ5FuqQmg8pCskIxttUtmKhazdmeCCA3n/TW1
+	 uG5NeKFFLC3U6C92KNuTlJZDcuqQuX2BGckr2Za+3uq4IN6i4MkaaAqxh5ApvPq0up8Q0
+	 xPgnOB/dfc+jEDvARF2friP8qT8q5L6I6B/M5W38vutmyXtJFuFbYKhFQvMhM37YtY3Cj
+	 ylR/6vyZie0WYrgnahJkroE4AdKMEIbnvW4Uay8RUvE060WW301awOHVT6fd9eKyDlA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794557963;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=oHc+4wiOP77Y6rdhUER6E6O/YlekIux0worEr8HMXOU=;
-	b=Su31jSOFyJqiWSgMXrQmvjfqZAV7tBGFXezVS5/5DZqwXZFRt6SQNyoDMrT5iVr6EFqm
-	 y1BIKTKBuFIwVfaV3lbnLnOXIyvkrXGzsnLNAbHFxY/bFYegDnFr1iOBr+lQ0JW9zlBNP
-	 9E2xfgzy8mGdwC54n1NsSUoqEq1DrUtFbz2FUFm/PDDRwDZRKItyjE8a/By6vg4RcTNb6
-	 XUZu5aBaF5G1RMuOhQ5XmhysHG+sbYzZFCXn3HQJjRSbGfQFl/XMWJTZCu850wcpzzrrg
-	 GBOQ1xy6E2T0qeHaytG6nAkyfUPPKSEQmJ8H9nRYN9/8Pmp8CcGZfNg29Tf1zbbqzWA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794558046;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=8+HhukhZuFpUmESx9rrAxlUZVKyiO21AXgcFpUXvUvs=;
+	b=2OatcAzFEtHyfoGltH3CpwjRAYxbc8gcsgUkkLeAfbTgWLDvYRNggXcYkBFVXOcryJK9
+	 bhHidT5cXdJi32hyqb3YHIBzHN8s9a6Dn3zqdhuXVTx9qfP2BH9YZ/YElTG2Oja1ACE0w
+	 t25zX5Re5K0fQvScfAYlw15y0bSFzb9pRv+zQaaLsZJah3iA8fUWdr9Q143RJ721PHns0
+	 He4gim2PdELvsG1xh2PmFigejybzw7AzLb+JbL/Ezeqgte+zV33VCHW4jBk6aJZNU2T/7
+	 ggtGwG0y9loXDrb/A6g0UKH+BSAJ9oTiiisifXzZ0AzULnmr99LLF1V8A+m9jD9dxDw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=hVCHP98J;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C307606A323;
-	Fri, 13 Nov 2026 08:19:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C307606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZdXx7Gw8;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XviP7BGW;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9781E606A336
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:20:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9781E606A336
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=hVCHP98J
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZdXx7Gw8;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XviP7BGW
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AD57W1N3120260
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:20:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=8+HhukhZuFpUmESx9rrAxl
+	UZVKyiO21AXgcFpUXvUvs=; b=ZdXx7Gw877oUzcqjI/khCD4wl/8tumGoJRseaD
+	dp31C2d2ZuAlsev+5Bcx7FPzZgzlQJGV1W4pSgfBSp1G6tOkuNVzG//4PHRObgKu
+	y0YqF+ohHJASIbRtbV9cgR865nMJ1RJtY4QkEdvk9WCj6UFMIa/2k/Q1UwQOXb/H
+	ZvOJIVeuKbX4i3vo2UzZOa+hljTci6ZUd3BVTEXYVrU4HEcK2zAxR4HxzK27hXLE
+	0nRkgDEeTdJzAiazoKxrZjHuMhzSga/f0KRkfzYjgPFNK5KPseJCduuB8yAcDjWG
+	1EwIdDfcprBsyxhohO5dF/2SfP6V1v0+8a6nghMIUh9DtZ+Q==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwkgwa5p5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 08:20:44 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-30bcb065bfdso972063eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 00:20:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=oHc+4wiOP77Y6rdhUER6E6O/YlekIux0wo
-	rEr8HMXOU=; b=hVCHP98JM59qeGHZ21Ry+mCmfeadCjPiRVEMfTINoievTjjtk/
-	MvyBQIAsn26FoJKaY0xzx+OfTFr6BlsDW4zQh/O13m8a67RvGaq/J3cfnUlv9oOF
-	zyX7cj7ALlnNFg/zM3qlh0FVZLez5mMRrl8m8Rn3J6IlN8PPXmgZ5gp54=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.188.15])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgBX1DgCyPZqlSK4AA--.7571S3;
-	Fri, 13 Nov 2026 16:19:18 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH v11 1/2] regulator: dt-bindings: willsemi,wl2868c: add the WL2868C camera PMIC
-Date: Fri, 13 Nov 2026 16:19:13 +0800
-Message-ID: <9ab5e5937264bb408be43986acb8553464e44a49.1794557667.git.xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1794557667.git.xiaqinghuan@mail.ustc.edu.cn>
-References: <cover.1794557667.git.xiaqinghuan@mail.ustc.edu.cn>
+        d=oss.qualcomm.com; s=google; t=1794558043; x=1795162843; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=8+HhukhZuFpUmESx9rrAxlUZVKyiO21AXgcFpUXvUvs=;
+        b=XviP7BGW9macQtt8bKsVdFJZWd3zkZrRCnMigzK1JPzSuzGEKTh4TkGYGfjOkY/nkW
+         LMaqVziN5Q73g095hK8NYt0jH1hI947ky1DeWht7fuNkvZ96gvHjUmmIQkEMn7n4xSkp
+         bbDtjNuH9N6hotZFHQnCmkCXSEkh6yiXLjdGYL0VuKi/bv9cnnJhP1dA6xe8R1uPS+EQ
+         ndk4/nZCznv+b1t9AxWcPn+f6CUHDipEzFx6vONt2Cr3vd6JGORD3/6faA4Ugjx/FOG2
+         xOQ4jW5rZj0WEe1zMDp175YDrleZrF83y2R6zT9CMst3MJpxJxbDOlw6G84bT35pwL99
+         w/4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794558043; x=1795162843;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=8+HhukhZuFpUmESx9rrAxlUZVKyiO21AXgcFpUXvUvs=;
+        b=wDlO6sGezGlUigh0TfcTeDiwU0AYCIVgY1Z2kD6wtCSL06LNFAxuKxixCj8vkrsyhF
+         Pk4F9bIKYCShdN+4KlVGsX//HAUhgF34djwv1mCjVkXp73bljvCqCxPBhc/dacVl+/lV
+         H2Kz9pvKOanp/2hV8hgyL1kWltenzBwzsf5yX0VhIJb6hGHh3ZCpZSCrn4O89DCQTewk
+         I3tvsikh5+Ob4jqzt9JwhSFpHN7Fx6sEi4StDxrLF1dOopv0aem3/wpMwUDGz5qJ+0vG
+         i7dWVx4hQesKiieai1q+lzgmrecJsyUF62tl/pNvAoKYUJ4QWpXH7A6mzDezhUavDSvt
+         g81A==
+X-Gm-Message-State: APuU4Z9OVt8lsO0LW57ZYSAN6QybR8fzfn5dXNTGCWx+8jUKZJQ6DCRb
+	9rBjIEiPuNublvH0hHkjSlAiBwY6DkxW54PCblw7TXt54iQ9eYyeSRzxHG7WRHpOH52Rf6ni8ej
+	DqDevSWc3dEka2d10zKD1slfIm+52WuEZPlcfQEZjH4S6cZ6wEjw1jHRoj+wQzSbaZPdL
+X-Gm-Gg: AYBFou3YrcR45nTtq6hUydhTZAbriDNh5KO9IBl9YQ+UT6DfzgDBoPFb52KWS6/eXYk
+	v6oFb2KamTVyfQcTCrAmaorzdzRF3u7BDGUJ6p3EBfz1Cgh9EkKJhBrwbW6JfM4q5KCwNJVZuPk
+	b9dRfmKobbPMhDqzmwQ1XNU96jbWxpXY+hD1O4TgbkzQMAZtz7fZG7zXbTpnKRVGNqVttl6jXcx
+	2fw7qqVLtQ3D2ZK33SPPIVJ4D/piLc13UQ6uCreIDueBqEeGQfWWoLI3E0u2VIqHMlxGe0SqgXx
+	aUlaz4UAJwqDAnZB/Rktsb+q876UTTvPom7qKShNQwoep930vNvWeBzIMHuvzzvhdgYy35lwds0
+	Hby2MDM0R/543YT/iCUL0eDVtgU6hGWe0I/w0d5C/fLb5Z7IeiwOKeMyPRhvVR0LokIcmHo8on4
+	ohP1M9
+X-Received: by 2002:a05:7300:5994:b0:37a:1be1:e70a with SMTP id 5a478bee46e88-37a1be1e7ecmr176110eec.29.1794558043334;
+        Fri, 13 Nov 2026 00:20:43 -0800 (PST)
+X-Received: by 2002:a05:7300:5994:b0:37a:1be1:e70a with SMTP id 5a478bee46e88-37a1be1e7ecmr176086eec.29.1794558042788;
+        Fri, 13 Nov 2026 00:20:42 -0800 (PST)
+Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955822d58sm4971713eec.10.2026.11.13.00.20.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2026 00:20:42 -0800 (PST)
+From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] media: qcom: camss: Fix Glymur CSIPHY topology
+Date: Fri, 13 Nov 2026 13:50:21 +0530
+Message-Id: <20261113-glymur_camss-v2-0-b1b76509c744@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,173 +114,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgBX1DgCyPZqlSK4AA--.7571S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxCrW5JF45urykZr17WF4kZwb_yoWrZF1kpF
-	Z8GrsFkFs5Cr1xGw4xK3W8u3W3KF1rArn5Ar1UC348Kan0qFnaqr9Ikw15Za4Fyw48GFWa
-	yryDZF47J3WrZrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBSb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l42xK82
-	IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
-	0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
-	IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
-	0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87
-	Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU4s2-UUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREJB2r0wlk29gAesF
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEXI9moC/22OywqDMBBFf0Vm3YiJ1teq/1GkxDw00JiaUamI/
+ 96o224GzjD3zN0AlTcKoY428GoxaNwQgN0iED0fOkWMDAwsYTmlCSPde7WzfwluEQkVukx1xrO
+ s0BAiH6+0+Z66Z3OxV+McrNO1hJajIsJZa6Y6yuW9ZLIoNZcVHPe9wcn59Wyz0DPw//FCSUK0a
+ HNaaVGktHo4xHic+ftwx2FAs+/7Dy6mUtffAAAA
+X-Change-ID: 20261102-glymur_camss-1cf83f4a447f
+To: Bryan O'Donoghue <bod@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Suresh Vankadara <svankada@qti.qualcomm.com>,
+        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794558038; l=1301;
+ i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
+ bh=ZIVdnv/pVYDJ6VtZ6cVcvJh54NuXewcKEXwu1xtFH1Q=;
+ b=ezUhCnPza1MWnKyzNnbcZxiMALh33SYPFT4aqKXPshbyjjRg7x3Nwlbcpd0iqNPft+UqOp1Qu
+ 2ckjaTSNqZSC32kw7mcM1REEM1GIN3Bi489FpmLStDFe8xQYpoJR9BY
+X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
+ pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
+X-Authority-Analysis: v=2.4 cv=DNgacCNb c=1 sm=1 tr=0 ts=6af6c85c cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ffzozp4-zBr36aKF_PUA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-ORIG-GUID: ZZnJuuPsQdHfkcqpShSUE2ENIYoP60R3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAzMyBTYWx0ZWRfXwJfUYV2o7p3w
+ egg0EOJmuLIstQUyo3v8PwaT1HdpMoUUQyviiVC23l62eH8EIIS6C0vtcRHMrhqmIixMwNycU/H
+ 0hwaAhnAiH+2RShcGEWhPTP5t/2+RD4gAMGsh6fiKPoLILmS9jQyjzqzHf4kk5zc/uV8ot06Uee
+ PQ78LGmwQe0SXrcQHWo6nJlvOvjAmV1Vwu/bOjt95fUrdmW8pF2ekoTe3o2NtfyqNUZYPRFKkST
+ OtQNRZ/tQZ5VgwFU+W6KdERltOocIFFFS4twy3/oQ8kOPS0R775LRlBm57g7drwegZwLq8GNrix
+ td10WHc2JSP+4/OukfJcaQe/kVzJKzdIBSNyxOzpeDPJUGsfMKykGk92MUFVnmaeQoMjLUGH1iR
+ y5Ru3awYSsJbBosnVMYPpQ7O8zMK8xVYB5xKC0xrA3K4YehyC4S1YWmEq4yrz+A8k8zoYCHLCup
+ n3Lr0kMoIICzTQpTrdA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAzMyBTYWx0ZWRfX2+aadCFeTC1h
+ +63laJ5aItkiZZ1CnJb8YXHZfB6mpu8Z79vAbDd38rPFSiTsmzIeGavC8qRu0sP2bIpeSy6pXzw
+ 9hXNUGm4vBqBe7RKZ52kqAyqmeFu3TI=
+X-Proofpoint-GUID: ZZnJuuPsQdHfkcqpShSUE2ENIYoP60R3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-13_02,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
+ impostorscore=0 priorityscore=1501 clxscore=1015 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130033
 
-The WL2868C is an I2C-controlled camera power management IC from Will
-Semiconductor. It provides seven programmable LDOs: LDO1 and LDO2 are fed
-from a shared VIN12 input and cover 0.496 V to 1.512 V, LDO3 and LDO4 share
-VIN34, and LDO5 to LDO7 each have their own input, covering 1.504 V to
-3.544 V. All outputs are programmable in 8 mV steps and are gated by
-per-output enable bits with a chip-wide SYS_EN master. The chip also
-exposes an optional active-low RST_N input.
+Glymur reuses the X1E80100 CAMSS block resources, but has only three
+CSI2 PHYs instead of four.
 
-VIN7 and VSYS are both inputs of the internal control logic, which is
-powered from the higher of the two voltages, so a device tree has to
-describe at least one of them. The remaining inputs only feed LDOs, so
-they stay optional: an input can be left unconnected when the outputs it
-feeds are unused on a given board.
+Update the binding to describe three logical CAMSS input ports, and add
+Glymur-specific CSIPHY resources for the PHYs present on Glymur while
+continuing to reuse the common X1E80100 CAMSS resources.
 
-The example enables ldo1, which is fed from VIN12, so it also describes
-vin12-supply; the binding says an input may only be left out when the
-outputs it feeds are unused on a given board.
+The Glymur DTS is still under review, so this updates the schema and
+example before the old port@3 example is used.
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 ---
- .../bindings/regulator/willsemi,wl2868c.yaml  | 99 +++++++++++++++++++
- MAINTAINERS                                   |  6 ++
- 2 files changed, 105 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+Changes in v2:
+- Rebase on next-20261112
+- Use logical CAMSS ports 0-2 in the Glymur binding example - Krzysztof
+- Add Glymur-specific CSIPHY resources for the three available PHYs.
+- Link to v1: https://lore.kernel.org/r/20261102-glymur_camss-v1-0-fcb619fc7319@oss.qualcomm.com
 
-diff --git a/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
-new file mode 100644
-index 000000000..972813fbd
---- /dev/null
-+++ b/Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
-@@ -0,0 +1,99 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/regulator/willsemi,wl2868c.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Will Semiconductor WL2868C camera power management IC
-+
-+maintainers:
-+  - Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-+
-+description: >
-+  The WL2868C is a camera power management IC with seven programmable LDOs.
-+  LDO1 and LDO2 share the VIN12 input and cover 0.496 V to 1.512 V; LDO3 and
-+  LDO4 share VIN34, and LDO5 to LDO7 have one input each, covering 1.504 V to
-+  3.544 V. All outputs are programmable in 8 mV steps.
-+
-+  VIN7 and VSYS feed the internal control logic, which is powered from the
-+  higher of the two, so at least one of them has to be connected. The other
-+  inputs only feed LDOs, so an input may be left unconnected on a board that
-+  does not use the outputs it feeds, which is why they are not mandatory.
-+
-+properties:
-+  compatible:
-+    const: willsemi,wl2868c
-+
-+  reg:
-+    maxItems: 1
-+
-+  reset-gpios:
-+    maxItems: 1
-+    description: Active-low RST_N input.
-+
-+  vin12-supply:
-+    description: Input supply for LDO1 and LDO2.
-+
-+  vin34-supply:
-+    description: Input supply for LDO3 and LDO4.
-+
-+  vin5-supply:
-+    description: Input supply for LDO5.
-+
-+  vin6-supply:
-+    description: Input supply for LDO6.
-+
-+  vin7-supply:
-+    description: >
-+      Input supply for LDO7 and one of the two supplies of the internal
-+      control logic.
-+
-+  vsys-supply:
-+    description: >
-+      System supply, the other supply of the internal control logic. The
-+      control logic is powered from the higher of VIN7 and VSYS.
-+
-+  regulators:
-+    type: object
-+    additionalProperties: false
-+
-+    patternProperties:
-+      "^ldo[1-7]$":
-+        type: object
-+        $ref: regulator.yaml#
-+        unevaluatedProperties: false
-+
-+required:
-+  - compatible
-+  - reg
-+  - regulators
-+
-+anyOf:
-+  - required:
-+      - vin7-supply
-+  - required:
-+      - vsys-supply
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        pmic@2f {
-+            compatible = "willsemi,wl2868c";
-+            reg = <0x2f>;
-+            vsys-supply = <&vreg_vsys>;
-+            vin12-supply = <&vreg_vin12>;
-+
-+            regulators {
-+                ldo1 {
-+                    regulator-max-microvolt = <1128000>;
-+                    regulator-min-microvolt = <1128000>;
-+                };
-+            };
-+        };
-+    };
-+...
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8014b9f82..435beaf95 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -29058,6 +29058,12 @@ L:	linux-input@vger.kernel.org
- S:	Maintained
- F:	drivers/hid/hid-wiimote*
- 
-+WILLSEMI WL2868C CAMERA PMIC
-+M:	Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-+L:	linux-kernel@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
-+
- WILOCITY WIL6210 WIRELESS DRIVER
- L:	linux-wireless@vger.kernel.org
- S:	Orphan
+---
+Nihal Kumar Gupta (2):
+      dt-bindings: media: qcom,glymur-camss: Drop port@3
+      media: qcom: camss: Add Glymur-specific resources
+
+ .../bindings/media/qcom,glymur-camss.yaml          |  6 ++--
+ drivers/media/platform/qcom/camss/camss.c          | 42 +++++++++++++++++++++-
+ 2 files changed, 44 insertions(+), 4 deletions(-)
+---
+base-commit: 6d582d78fad9d828e575ca0cdcff8ea47a77220b
+change-id: 20261102-glymur_camss-1cf83f4a447f
+
+Best regards,
 -- 
-2.53.0
+Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 
