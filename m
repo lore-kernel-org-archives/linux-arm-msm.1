@@ -1,62 +1,71 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.72
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794580131;
-	b=E1EsB40QSscwAhbkUjSx5BY+eXXyBz5KVCV7XDnoRQ9AmWVvv74lD8e8k4DuckyRTrh0
-	 PTk7P269OF+P9Q0YGYGAYtkJvjTtApzhgsR/gMmCSvcJsdNBDuS6DBZFERUuIphzD9EF9
-	 Ppioppzt3gn89XV2BiEJun9K20cHnpGxAM9ZFI8E6TnamejWVZRGE+FMdPB5itGHZfpyu
-	 GuZaFKoqp10E08atb3gr0RSu1bpsSCy93VvSpEThSpHLY82jQSG5RHK3fBbwIF3GuIzQs
-	 fc8TxaLDfxkNrKZQ6uP+HSwikjBL4fpOnBOJtGXJ8BMUsuTIToUCxL5SI9V39yqHQAg==
+	t=1794580160;
+	b=u4vMYz35QRKB/tzrJm0nZxmn6rdvGfHeLSMrl0xJ8HPA9M5qWC5BAdXP8FcDUWnXEO1B
+	 HD+qjs84V+6/0tUAc07bz9UlmFvy/hoEcWAJVc7to/77XjWgbCNeMCegj1JolOl+8aGZU
+	 UMMijMwuH8+fRPmbq7p0Vvdak81nh8mYLIl7L/KO8kYNURBFmgGszifQknEmfAeUdMDW0
+	 XUwQFGfV7/M8G7gR3moxCqewF4tijmvbqgIa/0up2E5rujBkDutukgDx2LPt09GoPjcgV
+	 PDyb0mw3FXCLTy8Eoo3A5LAm1b9V7AeLbhkysmicTrEVQYSZZnkQASIDRepohcdiyMQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794580131;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=lNzgQv09ZNdkTLeSeL52VctJTRtMJtQCI0H+/MVWODc=;
-	b=VuAd7CM6w8zDXyBZQ1bfvDZPVZh/lU5ujHTe+hBWbpH88oqiSQhmB4wLX7VIPWh77B9P
-	 VL1Z4xvYa5La7UBz9N1cNJsSbvWI8miI8XiLDThIme7+eBd5HnOTH/Phz8M1/68QBUgjO
-	 oSVRbuCBLnfpYkqBH90MnEcAQVSUj4RNAT2EqcbvpKqsGOjNiGdhWXiCwTwzulkbqgIaM
-	 6xADwqkV4rhkrgTMCdV8bujvVC3I329DUpJUpm5JW6J6SlEpB39OntlZ2MNRiD/I5A73H
-	 zJxztY6NWkCfh9jsrJb7p4ZTKMMnhAO6eoBI+Ynl1+HiisEMy4hD0K+Z5FFXOV30e/g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794580160;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Received:Date:Mime-Version:X-Mailer:Message-ID:
+	 Subject:From:To:Cc:Content-Type;
+	bh=mrFnkSpDwPeFa+M1IqygXhZz7/qA6wHfwFX1sY22H8I=;
+	b=uA7sEhPZW7mEOAlpBG5KI5nYaWEZf1ooxxkoXFvw8VTc8Lva5LE/7SMDVHaWGSlaXKdz
+	 Y5esTB6ch/ZUCUhungXHjT2ysdAQ5AZuH5yb5/TsVpklxkzBysRozpc1J9MxwBXCH85N3
+	 /vXyvRG5fwsPUTmZj0Rj+MD4hElSGX3Vtx8+PSz7ocGa7sKGLWKGlGCtm5aU8L97n002I
+	 0xD2gyYkYs+NOMV+I/mAh6A07yBclsG5Qy5V+33zANp5f7lIQXGlhp2YPpsBzN06yYShi
+	 x8ohO99d/kCn66EqP/CCigfe2QAbQg7ZOUrxjaOsLzuNF3CvF2Ub6rE1Q6LYUUKSCXA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jPjxic89;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=google.com;
+	spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com;
+	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=p5Wfyz1+;
+	arc=none smtp.remote-ip=209.85.128.72
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com [209.85.128.72])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id C8037606A890;
-	Fri, 13 Nov 2026 14:28:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F721606A333
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 14:29:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8F721606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jPjxic89
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id C2A4E1F000C5;
-	Fri, 13 Nov 2026 14:28:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794580131;
-	bh=lNzgQv09ZNdkTLeSeL52VctJTRtMJtQCI0H+/MVWODc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jPjxic89jp27FBMG72SVoJCjyog9Fk72fa0sSThJpbNGUhJNO2tRE22dZ66TunITa
-	 GV/peItiCNYgobVHdnuzGEn/MjyoYqK7gFw3oFM9eYQa6yipWvclbkKOp2QzMzQl9l
-	 nx3Vv1Aksfxg5C0tZgQYmXrzBAEXrb3cOIZM7+0KYj6E3Z7xo/SIZ55Pvwln0M86sf
-	 eKcLPdo59HY/ep/rE6YGqecNDaJJcl+cFRLif2epOxtexzQfgjUk9p7WR/RKbXEiqh
-	 PXOI13Aq1+ScqVFkFSS3fKy7thLkf6DH76uC9+Imzzf20aPpVuhcJ8EoF+RtFx1i8S
-	 NMkHXo0ctUi5Q==
-Date: Fri, 13 Nov 2026 15:28:47 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: phy: qcom,sc8280xp-qmp-usb43dp-phy:
- Add the cfg_ahb clock for Nord
-Message-ID: <lv6hzzf4kif7gio6vuuvy4dy6ugcnkelnfvbrcow3hkgvvondp@mrirempjyi64>
-References: <20261112-qcom-nord-ahb2phy-clk-v2-0-30ad3d947217@oss.qualcomm.com>
- <20261112-qcom-nord-ahb2phy-clk-v2-1-30ad3d947217@oss.qualcomm.com>
- <20261113-influential-lumpy-goose-68ec0f@quoll>
- <zo5qopdc6gxeoonqxohmnrzwmmrwa3wnim72op5zq2cjtn4pjs@kdjl3hwgxph3>
- <4dc982c8-af04-4af8-8a56-66459f91cf3a@kernel.org>
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=p5Wfyz1+
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4a77c1cbd15so8877085e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 06:29:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20260707; t=1794580159; x=1795184959; darn=vger.kernel.org;
+        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mrFnkSpDwPeFa+M1IqygXhZz7/qA6wHfwFX1sY22H8I=;
+        b=p5Wfyz1+aOhdni0i8oRYNdeaB/FihhXMOA/hsI0gZ6rbVCzONfqA9Xl9iYkcY1FwWN
+         RLBzMAMRG/aZMRBqdCLYCentT0hGBVfCq7AGv2f9dtZOpvi01PBQFt7y4NmqQHXL6poe
+         SYD9Mhh1eE/kMR2O0R4HeDtWvCNKNuNjYtwLyHhj4JKqIMumA8Wcv2JILtn25HIUOQtE
+         xNBlqCwRGvvUpp3konTq9sYZFr6+sMFW5grY8x13KBYYqq9en3famQyQRQ4/gSmrmF4g
+         4C6UUdLpk8rc+wwiXI10YkS1lSVwZvZlVVb/vSCo2ZPvAVD/TBjwc1EBWuaM6IqAePYd
+         X9Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794580159; x=1795184959;
+        h=content-type:cc:to:from:subject:message-id:mime-version:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=mrFnkSpDwPeFa+M1IqygXhZz7/qA6wHfwFX1sY22H8I=;
+        b=fafiy+juYdWXnbOaxyPwr7969IyVXmQFPsLnnXm+P4XI0v3bim1qA+oHHf+7x5m0GK
+         ltO1vw7vO2VqZpSteqrI7lfYpkD3RPDfsJPS/sC8/twH5jrJOu0vC1XEwHYH3eKkluuo
+         VjI/RLb2udLuaDWXxJy0WzFkV91yLCcubUjKb6rMaKKbUeLGHhPJj/z5Qly3EMijz56+
+         i6m4/YFXRNapW28JHq50tZUL6wwwiZx4bw/MM2NicRFg7LuH0AkBJc/qsZHBPPaJ8kVd
+         F/m/oPTeLUOVz6nxRJtlvsvi8FoWWJbC3PZbQH0/pb7roMf4sQbtgcQgsd+lwB+44Njt
+         9rIQ==
+X-Gm-Message-State: APuU4Z9cK+4IEdoEnIfBdaGLQ9FR8v1lGF8pc4TGktHYMuYOdF4Zw+Bo
+	HpHyBAo4zMNOavZJ+7gFsO83O50mwQAOc6AL0eEJnQ6XwjFt2JJus8sv08wY69uzYKYSS0Kjjx6
+	oAjdId8+F8fvMAw==
+X-Received: from wmg12.prod.google.com ([2002:a05:600c:22cc:b0:4a1:989a:a866])
+ (user=smostafa job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:5852:b0:4a0:1fb9:2f51 with SMTP id 5b1f17b1804b1-4bb55a832d4mr36306945e9.14.1794580158523;
+ Fri, 13 Nov 2026 06:29:18 -0800 (PST)
+Date: Fri, 13 Nov 2026 14:29:08 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,38 +74,46 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <4dc982c8-af04-4af8-8a56-66459f91cf3a@kernel.org>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.56.0.611.g1030f0b940-goog
+Message-ID: <20261113142910.3477757-1-smostafa@google.com>
+Subject: [PATCH v3 0/2] dmaengine: qcom: bam_dma: Fixes for unbind
+From: Mostafa Saleh <smostafa@google.com>
+To: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org, vkoul@kernel.org, Frank.Li@kernel.org, 
+	bartosz.golaszewski@oss.qualcomm.com, Mostafa Saleh <smostafa@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Nov 13, 2026 at 12:47:16PM +0100, Krzysztof Kozlowski wrote:
-> On 13/11/2026 11:45, Bartosz Golaszewski wrote:
-> > On Fri, Nov 13, 2026 at 11:07:38AM +0100, Krzysztof Kozlowski wrote:
-> >>> @@ -229,6 +231,7 @@ allOf:
-> >>>            compatible:
-> >>>              contains:
-> >>>                enum:
-> >>> +                - qcom,nord-qmp-usb3-dp-phy
-> >>
-> >> I don't understand why it is added to two blocks constraining clocks.
-> >> Does it even pass checks?
-> >>
-> > 
-> > Yes, it passes dtbs_check in my WiP branch for USB nodes that will be
-> > sent as v4 and takes the binding changes into account.
-> > 
-> > First we add the "qcom,nord-qmp-usb3-dp-phy" to the if block that sets
-> > minItems to 5. Then we exclude that compatible in the block that does an
-> > if not and sets minItems: 4 for all non-matching compatibles. This is in
-> > line with what's being done for existing "qcom,sc7180-qmp-usb3-dp-phy"
-> > and "qcom,sdm845-qmp-usb3-dp-phy" compatibles.
-> 
-> Oh my... what's with this binding :/
-> 
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->
+On Lenovo Mini-x Gen 10 (X1P42100 based) I am using VFIO-platform [1]
+to assign the QCE/BAM to VMs.
 
-I will try to untangle it but let's do it in a follow-up.
+During unbind:
+echo 1dc4000.dma-controller > /sys/bus/platform/drivers/bam-dma-engine/unbind
+echo 1dfa000.crypto > /sys/bus/platform/drivers/qcrypto/unbind
 
-Bart
+I see a system reset quite often, looking more into this,
+that seems to be related to runtime PM, with those fixes I don't
+see that anymore.
+
+[1] https://lore.kernel.org/all/20261024161902.2093581-1-smostafa@google.com/
+
+Changes in v3:
+v2: https://lore.kernel.org/all/20261023101536.3965344-1-smostafa@google.com/
+- Rebase on 7.4-rc1
+- Collect Bartosz Rb
+
+Changes in v2:
+v1: https://lore.kernel.org/all/20261020180804.140766-1-smostafa@google.com/
+- Collect Frank Rb
+- Drop call to pm_runtime_dont_use_autosuspend()
+
+Mostafa Saleh (2):
+  dmaengine: qcom: bam_dma: Take a PM ref at remove()
+  dmaengine: qcom: bam_dma: Do not touch remote BAM in remove()
+
+ drivers/dma/qcom/bam_dma.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+-- 
+2.56.0.611.g1030f0b940-goog
+
