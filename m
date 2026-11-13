@@ -1,86 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794583984;
-	b=kl1Z63BdKmPdVZ0W7ZZOOVSm2+cEbC5tY0HnfBO02OdiWwlsMt5rrC4Vy6jFa6otsYmu
-	 Gh9Iiwm41hVxL8LzobWNzcLwN8z9b0FtqO25QD2Nsj4xSEqjXZW5hS5Ed9GzlvQHl23m9
-	 RGU17PLnFfm1EfZCGtR5v7MXjfF2L4d4KravTLEbdUnpWTnimiXpapgmheKwF3w7HyfK3
-	 73gXyJJ2QUhSTaz4J9KIZURyDydW0HWZ5DnJVDMbWhiUMb9igMqeCpi8qmHmsXpHhCHdd
-	 cHyqRRGA5WgAO3W75SGNicU4Yth9TSNFBwwLIZF5A818T6ZBX3PFu5mWzKlQSg8Ypiw==
+	t=1794584678;
+	b=Hb3+zozKsrkgvEf9xr2TaxO7ZlAODnRsBSeO0ZnoOMShPMO2DLyEBCULilM/EYmLtbfr
+	 o4TQG6nMqU5u5xJ/NccfOqQC8j+UpQ6bSCaCf7/Vw+WYbYalOEivDuJcl8/E7bDmlGh8v
+	 hdP6U4zG8LHIc/mBW3d7tY4qHBicxR/Iojqep/r0O8eLKNwxMG8vbNArL6tweIWcnBesZ
+	 TiWovhxHVd19DMX3Ol483HIKlM7pOdXvRlBNWTsnKKhfVACRO2WxzkQs7eA7N8PltRbg7
+	 b+NKLruvwajg7WQcbff/V0/S0hp1W00W5j3Xd2iwUwIt/E2PTbMdj3tQ6bdR4gENNwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794583984;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
-	b=BdSLQ4v0LijpM3u/30DvoSaXOqypIqCFbRf9UPbajCE/BvtO3VY8zW20g2dTi25PaRYS
-	 +hq2ozhvV6ZKzfkBGerYtFIKd6DLVYEvS81j3UY2FvR2llz3XzWsfD3aYszSlTg+kH/VN
-	 mShxcyrOzSR9wtNandteDgkMkAJwXDYAiNT1YwPjeP2U7b1mKjU8YC5dp4j4ZsJyHuASv
-	 GUkdqrH4UwxE1Htj4cR1N39asG1vUp+U+4l2/yQG0yexGopYwFgz70cepCJX/pnIYf3V3
-	 5MqZTewpJiHd/xhpaShfINRK/tkvlVU7BkhPa3xv9mJqA2PK7W+7zgdFexxHBeBAj8g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794584678;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=PbD4AtMB8bc+XYwJsGjxS6XrtV8DXvidAzLVTNW7qq0=;
+	b=GBr/gQYvlwSx54HZUFWSVCnCUkJOVWe9a09bit5qWUwnUClVdeAZlvGaVIN0owB3P0Qw
+	 w5nfq2xZjjF9O71g8RAFOISPjOx8XFFXJ6TEfwzyIFX69XwWyxItciOXouhenv/vTxC0A
+	 2DW/nv6oVyu2HA2kz3ev0G7CEl/XNcKnacw1XHX5U8475g6EqCCnmrw0dIAzGva/coGKf
+	 VZ0xHRGP+KD304CzeGnmfWP3ci1yR4WfClJWppBZtnHrO209s0vvl2bV/2n7Egscy4+cD
+	 DjMqI5ycCyZsC0Al6pNBYokLo6poZTnQW1dtOO63yWWW9U5eAzjaj4pSJM5f5xASIlQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sxafsgr9;
-	arc=none smtp.remote-ip=209.85.128.53
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+6TskSy;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6FE3606A327
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 15:33:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B6FE3606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50A9D606A327;
+	Fri, 13 Nov 2026 15:44:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sxafsgr9
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4b7252a32c8so17445905e9.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 07:33:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794583982; x=1795188782; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
-        b=sxafsgr9q4WtgV5gGf+FAMXBcr0gPNBz6e4/ZPt9ERGdyxnXLNQbiJkzQVPb9lAp1i
-         JKzzXnYbIiA5nGEtvpcTVc1YvAIKP4SjTDd5DqDmgg+i9rC2p3MFO1Hw8P0HZ3EvCzFM
-         w5hKtMfXa4xdj1X8btbQyM9qIcJfWEPcS3e8QeojL1AoOON61oyIE3HGrOhTvnYHZrs7
-         KZxCN52Lsol1nJNEtLmkxpX8y2Sj++ro04MxVbmcyUSV0xYNjOOnrZ5/tXSURA9fR+Gs
-         wPpS+J91oUCjdmfGIksePGdlfiBAl9E2nvYDp5YcFaN2qfhumzat9z/4V/NxnwIMncgc
-         M4wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794583982; x=1795188782;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZczA9sgPjaI7i0jiqSjl5uIsFc87U1KMYtOFZr38zvc=;
-        b=Ck1Q0tUo5VEEWiIfUAqcqseLGPrJ924f1x0hupzX6D3VyCRS4C1v7Qw946w/KahQoJ
-         sihVvPvvSxgicbNeQM1S+bMKZZMjOaeY63oCghkqB48SWO2Wi189o1qVesw//u9CwQeT
-         Vmc3l+DAIpoqrgY79+mdl5NC1k8aXzY5in1IKD+ClgVsArvP/vRqUspcmwDqhYy4OLf+
-         aTszdYoGMw6RVlPr0c8lpHkDVpVdAKMJn9slJNVvJUf8d+38gRGq0C/1fYsintYYP0TL
-         yHl8aYWtbOHqMNOrKR3WNZIcx8H+4G6WNbH5YdEPSbE8oSu4sY5BxVr8WxeaKdRHiUIm
-         73nQ==
-X-Forwarded-Encrypted: i=1; AL+hErHS21Cv1BDW8mkqgzBEq0Rw8K1sl57T8q4TYJ98ZCDMtjocLxvf9ZJaMrsBUhAGxAbw4SEpdIkZ54qfex+e@vger.kernel.org
-X-Gm-Message-State: APuU4Z/6LXJWx30Na+1s1cBFtUmQ/n0gVungyi4IP/7TyzZ8x3YnOiE4
-	zgVszG49oRJoUmzDNd7+Fh2lY4vEbGmM7U77xIc1d7zqH3Q4ABesh7Gw/RGDeDya9qE=
-X-Gm-Gg: AYBFou2LyWBTFlsGROMluA84GirTpcKoYt93WZY7AboPu2Dy6K0Dj+NLoPr4LAuA0od
-	wxl/6R3cynLqRP0U17vxCmKDhSBkNyhrPwoHK7n1VCxqu07s/BXePEPeYrVeo6KugiekR6LC9cd
-	O4fo56PIZo88snVvzvWiLz5ysUSAsWq5irM4aAh1rkvJkxv0Hsky015ghIBei9KQEZseURB7/mV
-	jkjxl5yZ7LxX0+UgXzqzrUUnKBJPD2edm+SHMuKgrbZqHoHy6rBfZ16PGW/hmkvx745Pbf4jQii
-	Oc5YBImT229Yo/GCbUxjFjYMdcOoamaNvSN4qr35iNK4gapNZFeMTS5VmqjdkYCLqNxZt97K3vl
-	GLf3dRQ3sLg+bGlh0hTP84Kob9FHQWotnqb03JNIZfz2adu18rL2ahpR6MIeTH/eW0V4l8Wlm4L
-	dZ1LdD9pPnUr/mjcTYLxldWT8JrthKppJ4CCNdECfU3t35fIGwRyk5j8YTKWHuYF15cjnTzBl1X
-	Bd26J70EKbb5uRRgMbpeCr/gqsQYndH5fJ6u1DeD/8ujuDdS7jTb/t4S/sO7R6rmVhGuEdSq+XL
-	OMIMDPs1HhDa+Y7wcDJK5XICOZpSNwIYOTqRRnA=
-X-Received: by 2002:a05:600c:8509:b0:4a6:4d6b:a840 with SMTP id 5b1f17b1804b1-4bb55ab74fdmr55626085e9.31.1794583982026;
-        Fri, 13 Nov 2026 07:33:02 -0800 (PST)
-Received: from [192.168.0.167] ([51.37.10.72])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb5b4a3fcdsm33490835e9.0.2026.11.13.07.33.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 13 Nov 2026 07:33:00 -0800 (PST)
-Message-ID: <2392b6bf-d1af-4fba-84d2-e8e60b7dcecf@linaro.org>
-Date: Fri, 13 Nov 2026 15:33:00 +0000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+6TskSy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 446111F000C4;
+	Fri, 13 Nov 2026 15:44:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794584678;
+	bh=PbD4AtMB8bc+XYwJsGjxS6XrtV8DXvidAzLVTNW7qq0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=D+6TskSyn0FKpFu5tg/C7jAmpR5r/CKULYkdn4H71AEu0ZAs9GFKfxg7OI7ZpOVRP
+	 PjKWss5sth0A9kyeIT+Xw650IetB4HFv44Fcbc83BAOBuG1CEUizlfVq7hXMptDdkB
+	 S6LonQFgC5YlwuVsEcMamNf0FmLS4x11t3ePv6T4BrvdqlMLSlSITqks+AX2DUR/tU
+	 Uaew2SvQbL8Ifz3lxo+XwVuecy1lCOsirWJbbk3MonDPJ7ApEh4AyKuSE/HLjy0dRx
+	 5C/kV1s5GzQMpBi4muWFF3VXOCHh7qpkf9DC1XD4lh8bHu2DNMIXtl3hSBBmOZDHoA
+	 HdVlrjdk+Kb5Q==
+Message-ID: <5a61c395-9eef-4c97-99a5-30f434ad2c7e@kernel.org>
+Date: Fri, 13 Nov 2026 16:44:29 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,152 +52,119 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] media: qcom: iris: venc: keep the crop rectangle in
- visible resolution space
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Wangao Wang <wangao.wang@oss.qualcomm.com>,
- Hans Verkuil <hverkuil+cisco@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+Subject: Re: [PATCH 1/2] arm64: dts: qcom: add device tree for Asus Vivobook
+ 16 X1607QA
+To: yass27106 <yass27106@gmail.com>, andersson@kernel.org,
+ broonie@kernel.org, srini@kernel.org, konradybcio@kernel.org
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ vkoul@kernel.org, tiwai@suse.com, perex@perex.cz, lgirdwood@gmail.com,
+ pierre-louis.bossart@linux.dev, yung-chuan.liao@linux.intel.com,
+ abelvesa@kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org
-References: <20261112-iris-fixes-v1-0-22b759c3c285@oss.qualcomm.com>
- <20261112-iris-fixes-v1-1-22b759c3c285@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261112-iris-fixes-v1-1-22b759c3c285@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <01b2c920412848ab85493acc2d4f5fc1@gmail.com>
+ <5cfd0705da5845b88ffe6d9e8bfeb966@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <5cfd0705da5845b88ffe6d9e8bfeb966@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 12/11/2026 16:15, Loic Poulain wrote:
-> The encoder keeps two source resolutions. inst->fmt_src holds the padded
-> buffer geometry handed to userspace, with width aligned to 128 and height
-> to 32. enc_raw_width and enc_raw_height hold the visible resolution sent
-> to the firmware as HFI_PROP_RAW_RESOLUTION.
-> 
-> inst->crop must use the visible resolution, because
-> iris_hfi_gen2_set_crop_offsets() computes
-> 
-> 	bottom_offset = inst->enc_raw_height - inst->crop.height;
-> 
-> iris_venc_s_fmt_input() seeded inst->crop from the padded fmt_src instead,
-> so any height that is not a multiple of 32 underflows. 
+On 13/11/2026 14:24, yass27106 wrote:
+> arch/arm64/boot/dts/qcom/Makefile             |   1 +
 
-I think this explains the bug enough TBH.
+Please run scripts/checkpatch.pl on the patches and fix reported
+warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
+patches and (probably) fix more warnings. Some warnings can be ignored,
+especially from --strict run, but the code here looks like it needs a
+fix. Feel free to get in touch if the warning is not clear.
 
-<snip>For 1280x720,
-> crop.height becomes 736 and bottom_offset becomes 0xfffffff0. The two
-> offsets share one payload word, so the right offset is corrupted too.
-> 
-> iris_venc_s_fmt_output() compared the requested coded size against
-> fmt_src, so a plain 1280x720 session looked like a 736 -> 720 downscale.
-> Seed fmt_dst from the visible size. The encoder does not use fmt_dst for
-> stride programming.
-> 
-> Seeding fmt_dst from the visible size also means the codec alignment has
-> to be applied on every path and not only when scaling, so that the
-> CAPTURE queue keeps reporting the coded size. For 1920x1080 that is 1088,
-> and the firmware signals the visible 1080 with SPS frame cropping.
-</snip>
+Please read submitting patches document to understand DCO.
 
-> Report CROP_BOUNDS and CROP_DEFAULT from enc_raw_*, so the bounds match
-> the real source frame.
+Looks like completely corrupted anonymous patch.
 
-> G_FMT is left as is. For contiguous NV12 pix_mp.height is the only way to
-> report the vertical luma padding, and the hardware is programmed with
-> scanline_y = ALIGN(h, 32).
-
->    v4l2-ctl -d /dev/video1 \
->        --set-fmt-video-out=width=1280,height=720,pixelformat=NV12 \
->        --get-selection-output=target=crop
+>  .../x1p42100-asus-vivobook-16-x1607qa.dts     | 239 ++++++++++++++++++
+>  2 files changed, 240 insertions(+)
+>  create mode 100644 arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
 > 
-> Before:
-> 
->    Selection Video Output: crop, Left 0, Top 0, Width 1280, Height 736
-> 
-> After:
-> 
->    Selection Video Output: crop, Left 0, Top 0, Width 1280, Height 720
-
-Nice.
-
-> Fixes: d9967fa37ca9 ("media: qcom: iris: Improve format alignment for encoder")
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/iris/iris_venc.c | 20 ++++++++++++--------
->   drivers/media/platform/qcom/iris/iris_vidc.c |  4 ++--
->   2 files changed, 14 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_venc.c b/drivers/media/platform/qcom/iris/iris_venc.c
-> index 2f2c56bf9122c73e10e86815b1aa5fad99b0fb42..b367367ac2ccf874a00606b8b1352fed37b37a57 100644
-> --- a/drivers/media/platform/qcom/iris/iris_venc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_venc.c
-> @@ -240,14 +240,18 @@ static int iris_venc_s_fmt_output(struct iris_inst *inst, struct v4l2_format *f)
->   	 * If output format size != input format size,
->   	 * it is considered a scaling case,
->   	 * and the scaled size needs to be saved.
-> +	 * Compare against the visible source resolution.
->   	 */
-> -	if (f->fmt.pix_mp.width != inst->fmt_src->fmt.pix_mp.width ||
-> -	    f->fmt.pix_mp.height != inst->fmt_src->fmt.pix_mp.height) {
-> +	if (f->fmt.pix_mp.width != inst->enc_raw_width ||
-> +	    f->fmt.pix_mp.height != inst->enc_raw_height) {
->   		inst->enc_scale_width = f->fmt.pix_mp.width;
->   		inst->enc_scale_height = f->fmt.pix_mp.height;
-> -		fmt->fmt.pix_mp.width = ALIGN(f->fmt.pix_mp.width, codec_align);
-> -		fmt->fmt.pix_mp.height = ALIGN(f->fmt.pix_mp.height, codec_align);
->   	}
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+> index 88230c4e00e..7332a73dbac 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -509,6 +509,7 @@ x1e80100-qcp-el2-dtbs	:= x1e80100-qcp.dtb x1-el2.dtbo
+>  dtb-$(CONFIG_ARCH_QCOM)	+= x1e80100-qcp.dtb x1e80100-qcp-el2.dtb
+>  x1p42100-asus-vivobook-s15-el2-dtbs	:= x1p42100-asus-vivobook-s15.dtb x1-el2.dtbo
+>  dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-vivobook-s15.dtb x1p42100-asus-vivobook-s15-el2.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-vivobook-16-x1607qa.dtb
+>  x1p42100-asus-zenbook-a14-el2-dtbs	:= x1p42100-asus-zenbook-a14.dtb x1-el2.dtbo
+>  dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-zenbook-a14.dtb x1p42100-asus-zenbook-a14-el2.dtb
+>  x1p42100-asus-zenbook-a14-lcd-el2-dtbs	:= x1p42100-asus-zenbook-a14-lcd.dtb x1-el2.dtbo
+> diff --git a/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
+> new file mode 100644
+> index 00000000000..fc572d779b3
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
+> @@ -0,0 +1,239 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/* Hybrid device tree for ASUS Vivobook 16 X1607QA (X1P-42-100).
+> + * Base: proven x1p42100-asus-vivobook-s15 (panel, USB, boot path).
+> + * Transplanted from x126100-asus-vivobook-16: audio stack
+> + * (WCD9385 codec, WSA8845 speakers, soundwire, sndcard) + firmware paths.
+> + */
 > +
-> +	/* The CAPTURE queue reports the coded size, in whole macroblocks. */
-> +	fmt->fmt.pix_mp.width = ALIGN(f->fmt.pix_mp.width, codec_align);
-> +	fmt->fmt.pix_mp.height = ALIGN(f->fmt.pix_mp.height, codec_align);
+> +/dts-v1/;
 > +
->   	fmt->fmt.pix_mp.num_planes = 1;
->   	fmt->fmt.pix_mp.plane_fmt[0].bytesperline = 0;
->   	fmt->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_OUTPUT);
-> @@ -293,8 +297,8 @@ static int iris_venc_s_fmt_input(struct iris_inst *inst, struct v4l2_format *f)
->   	fmt->fmt.pix_mp.quantization = f->fmt.pix_mp.quantization;
->   
->   	output_fmt = inst->fmt_dst;
-> -	output_fmt->fmt.pix_mp.width = fmt->fmt.pix_mp.width;
-> -	output_fmt->fmt.pix_mp.height = fmt->fmt.pix_mp.height;
-> +	output_fmt->fmt.pix_mp.width = f->fmt.pix_mp.width;
-> +	output_fmt->fmt.pix_mp.height = f->fmt.pix_mp.height;
->   	output_fmt->fmt.pix_mp.colorspace = fmt->fmt.pix_mp.colorspace;
->   	output_fmt->fmt.pix_mp.xfer_func = fmt->fmt.pix_mp.xfer_func;
->   	output_fmt->fmt.pix_mp.ycbcr_enc = fmt->fmt.pix_mp.ycbcr_enc;
-> @@ -312,8 +316,8 @@ static int iris_venc_s_fmt_input(struct iris_inst *inst, struct v4l2_format *f)
->   	    f->fmt.pix_mp.height != inst->crop.height) {
->   		inst->crop.top = 0;
->   		inst->crop.left = 0;
-> -		inst->crop.width = fmt->fmt.pix_mp.width;
-> -		inst->crop.height = fmt->fmt.pix_mp.height;
-> +		inst->crop.width = f->fmt.pix_mp.width;
-> +		inst->crop.height = f->fmt.pix_mp.height;
->   
->   		iris_venc_s_fmt_output(inst, output_fmt);
->   	}
-> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-> index 05aab6e3005d5c3788f5dfe5857f2d6b782e7a83..e3eaec1b7c2e30c065d8419ac3278756f70a8a97 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-> @@ -522,8 +522,8 @@ static int iris_g_selection(struct file *filp, void *fh, struct v4l2_selection *
->   		switch (s->target) {
->   		case V4L2_SEL_TGT_CROP_BOUNDS:
->   		case V4L2_SEL_TGT_CROP_DEFAULT:
-> -			s->r.width = inst->fmt_src->fmt.pix_mp.width;
-> -			s->r.height = inst->fmt_src->fmt.pix_mp.height;
-> +			s->r.width = inst->enc_raw_width;
-> +			s->r.height = inst->enc_raw_height;
->   			break;
->   		case V4L2_SEL_TGT_CROP:
->   			s->r.width = inst->crop.width;
-> 
+> +#include "purwa.dtsi"
+> +#include "x1-asus-vivobook-s15.dtsi"
+> +
+> +/ {
+> +	model = "ASUS Vivobook 16 (X1607QA)";
+> +	compatible = "asus,vivobook-16-x1607qa", "qcom,x1p42100";
 
-Could crop and scaling go into separate patches ? Feels like it could be 
-made more granular.
+Missing bindings.
 
----
-bod
+Best regards,
+Krzysztof
