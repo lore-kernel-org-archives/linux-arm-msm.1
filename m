@@ -1,59 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.204.34.129
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794552940;
-	b=XrhD1waWer5KmRP5vTsHXGNe+kF4eyaYRMpjt2KnJbDqKo189ib4czHcclQuWivru2CG
-	 H6Ws4wB3TP4fna4A64Tc3oiI1s1QElpJb+FSX1NnCTF3QXAfgtwYFdUrSYd+u10bpNuW1
-	 MI5K5bdH6IVyPU+PKZGC+40vjSMcK3zK3lvyRxNCA/yh2CgllnFIus1DwBe7sHfE9k235
-	 UpLWA6q3ABS/L+fdh53ckX2WYNBqS96OIUDYL6hUUfw1ACMftP8vdnIxjNiIqGQDYaH7A
-	 8Anu+4bVVsLSihTQyhvwC2Fk5ym6zP/yJnpMZis0rZy61vF1AIFjGmepF9rmNQ/hWGA==
+	t=1794553419;
+	b=e0CKiU4IQ6pz6HDDj3PhFw9xxti7LzSCZymvExsl1LJYh3sPs1xoMlwSO6ozHB3d/Z0Y
+	 oFKkeboAMhptiv66ZicHrIhYO0RUbP6oaHWHQxTaYAQMv5OvY1zRZdj+jJs/jufmTSlKI
+	 Ud6chMDyw02SyY4UDGaoMuj7ClUAICc0hlJGLnjoipjrU0Uel7y0QWCavcKL2+fxLKE4X
+	 TuJoW8MkgHv6Q0bsVYB51mltKi6Lv5ErwphP9jnvXVnQGMiCeZJ0PlBvJ0C5wKadNASde
+	 v01fGRXP5VixjAgB2SwElDi0n7WXjdScHUSvYLzhtWEUGyPEKrM9A6d8yFiY897PTYw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794552940;
-	h=DMARC-Filter:DKIM-Signature:X-QQ-mid:X-QQ-Originating-IP:Received:
-	 X-QQ-SSF:X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-QQ-SENDSIZE:
-	 Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM;
-	bh=A1CsuQjmcAkOAaAS3S0yQLoSRdVX2EIZP3LSLTBOykw=;
-	b=RNJOBacGlw9XPmAnzoFNNYw4Zuphe3iDJEvRdQI79zUKw2qzFYF5p4rOZKEOkcE4VtFZ
-	 2QYeGxDXLxk4gUbkD5r521oX+RfNCq5wtIb8tRa/+TMWLQA4KdfCaH4z/i9bCeO6noQvQ
-	 12cI69OCyClT7VNn99IXk3hVMDu9mOPz3kz5JfeSkuKxMKMVBMbCiZlalGidvFbgUVvj/
-	 qbI27kvK9XjWmPyCEhbvY7MbtjZRn2XUltORcAV5kXk+v26QfOda0jgI5lAeNUWPuT77L
-	 t0SlGTG/Mkt6SUd1VldRHV6FCOc2fMU1kFfU/RysEdTnkLpF6SUBnGxXe7T/zSnxlBQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794553419;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=VPOK7kX1ObHoz/VqLCSAnjInW4wUgoK0aAhR/RviB0k=;
+	b=043DbFw1Vi+izpFJ9QM+mXGAUxd0AcQFuSdE6vmuWEKKNbULM+rj+pKED5iJ9NYB+DYR
+	 qHczMhnIlGcfwNLm3htWmv8gUU3amch7OQHfE+6I0g5D3kVjW8Omhn3qJWnNIP7QUHcwo
+	 8nOpWLcg7XVjm0GGBYsgSf2ImlgGMHCwSlTjQ1JkK4jnw460bWOX7tufp6WpnPsHYZRkT
+	 Cunh/DpSEm6DdtwrU4Ob849lUMNwqVMjXmIMXlVmj5jvorGK7xttPSAFwYI3P8DKtpcmv
+	 mw+ERqpAbH4QnC0QaB2pwmGTJuZPzHLYvdZJHOIAG5Zs62FXVohBysWpoCUnCESPL1A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=uniontech.com;
-	spf=pass smtp.mailfrom=uniontech.com;
-	dkim=pass header.d=uniontech.com header.i=@uniontech.com header.a=rsa-sha256 header.s=onoh2408 header.b=OMrgw8we;
-	arc=none smtp.remote-ip=54.204.34.129
-Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WtvJOwGA;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62F3C60A2629;
-	Fri, 13 Nov 2026 06:55:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 62F3C60A2629
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55220606A31C;
+	Fri, 13 Nov 2026 07:03:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.a=rsa-sha256 header.s=onoh2408 header.b=OMrgw8we
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1794552897;
-	bh=A1CsuQjmcAkOAaAS3S0yQLoSRdVX2EIZP3LSLTBOykw=;
-	h=From:Date:Subject:MIME-Version:Message-Id:To;
-	b=OMrgw8weOaRti5vrvPC7a6+EprrvAa1Cg5Gkq9cu43bmLovVd5B2DHlcYvuEqii7A
-	 Kv3nmPI/Eewk0kEJJulQNsvx9Utz3iO8MoResfdPpBBBzzALaizyKdfKnE4hCQwbRJ
-	 PKU52lRiCegeOA1/TEXmT/sCkib6FbAqViu6sw9o=
-X-QQ-mid: zesmtpsz3t1794552881t89786f1a
-X-QQ-Originating-IP: NprMIgge9uLDowXW/Wd1cYNUKtLb7jbxgkdSwOMhDPk=
-Received: from [10.10.7.69] ( [124.126.19.250])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Fri, 13 Nov 2026 14:54:39 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 8924661771922529570
-EX-QQ-RecipientCnt: 11
-From: ZhaoJinming <zhaojinming@uniontech.com>
-Date: Fri, 13 Nov 2026 14:54:19 +0800
-Subject: [PATCH v2 1/7] crypto: qce - unmap the correct scatterlist in the
- CCM error path
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WtvJOwGA
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E74081F000C4;
+	Fri, 13 Nov 2026 07:03:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794553418;
+	bh=VPOK7kX1ObHoz/VqLCSAnjInW4wUgoK0aAhR/RviB0k=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=WtvJOwGAtzAklSRELG54o32eP8je5vQlr46jXkX8K/GFaTXC+BanjPFO6yH7aKfGb
+	 zZJOLcwJkvF9uvW/AvvEO62MGVmYOwaIc+kcQB/MhislEmKV2NnvNb8qljwsem8YFl
+	 XnKxofXc5lOYIvuqCG6IYlSE410u3Vr7LdIPKuwIuIGQjVugh97xoruTIu8PPh0FWs
+	 yeiKMpUk4MGaA6V1mLBa/KI0ylWPbGzTWMGeLAFhZf6wZUO6D3YSDErkZGA2+rJCFP
+	 PrtWkq7gNwr74yDMl5EvI4fHioVl1+wW0M7qOa8QydwM60JrcBQLagn/SNAxyEuGM/
+	 FqBiIeemfLtww==
+Message-ID: <2cd4da54-1dd2-424d-a9ba-e3e4fdad502e@kernel.org>
+Date: Fri, 13 Nov 2026 08:03:30 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,85 +51,110 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/10] dt-bindings: ptp: Document the TSCSS on Qualcomm
+ SA8775P and QCS8300 SoCs
+To: Imran Shaik <imran.shaik@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Richard Cochran <richardcochran@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Eric Dumazet <edumazet@kernel.org>,
+ Abel Vesa <abelvesa@kernel.org>, Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+ Taniya Das <taniya.das@oss.qualcomm.com>,
+ Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20261108-tscss-v2-0-d5f575010427@oss.qualcomm.com>
+ <20261108-tscss-v2-1-d5f575010427@oss.qualcomm.com>
+ <20261109-qualified-pristine-newt-ba1c0c@quoll>
+ <f2b119c7-ba01-46fd-96c4-10b918f98d53@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <f2b119c7-ba01-46fd-96c4-10b918f98d53@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261113-fix-qce-ccm-adata-leak-v2-1-914501377a62@uniontech.com>
-References: <20261113-fix-qce-ccm-adata-leak-v2-0-914501377a62@uniontech.com>
-In-Reply-To: <20261113-fix-qce-ccm-adata-leak-v2-0-914501377a62@uniontech.com>
-To: Bartosz Golaszewski <brgl@kernel.org>, 
- Herbert Xu <herbert@gondor.apana.org.au>, 
- "David S. Miller" <davem@davemloft.net>, 
- Thara Gopinath <thara.gopinath@linaro.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, ZhaoJinming <zhaojinming@uniontech.com>, 
- Eric Biggers <ebiggers@kernel.org>, 
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
- stable@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpsz:uniontech.com:qybglogicsvrsz:qybglogicsvrsz4b-0
-X-QQ-XMAILINFO: Ma4CB9LXNscGDY4Mg4V5ImxeGD3frA/nABZt7QFomX7RXk89weQNe5zH
-	uyXlrXcEO8QvWf0KVXTEBVqSxrFfjoLTQMfla19YM1AKTzs54UOOx6hyksd3jDQ5LuvD2s3
-	xs6D+zMDUDlrP44eeA78+eTWgpzU4ZiKLqdSz08FU532MqixgY8DZkbcBGkPycFOg9cMN52
-	Im8C4rQL60Kb36y4oI2J886Gy5FQG8evadeAbOPbHtZVH4fnaG8Udd6rNfcgBEHiZib+aD0
-	G3o1GhKDMBP6Av8mCRdbL6UcUKU6g0brCEi6nozNCdIfn3N5rGnq2lWuBnocBR8PAuWrbZR
-	T6kEIs+Ak0RgS5uf/3roH+zEqFvZaCiyIVvtC76ik2BJ9INDTcNZvFWY9N/chQTmW/ltOSP
-	98hXnDVj2GZrrl+rF6BPJerfzN3MjUv1tz11M0z0ps23bcsrCyEwaK3g6IVXbxwem2H66jk
-	A7HttXRhQZ04orKDSm08oeSXYc7KS8nJOABlTywEU5mf0vLeQwjby3ogY653b1I+dVnwQkW
-	su+gkSus7Ojd0ZhaflOdL4ugomgIeyyqVV9G4VDhvSe9Eibr4kQqxbnJ3aUDcqo36UohVYE
-	jWHn7t9OY+Hq0CGIkxke2sYRglzX1AXCBEsPBW8KYwl6KMLhKkjG+EMjLegCX5A5lEYyvwu
-	AiwD7NwuM7YXECpmK57hTkSRNsrSj1czC+YOmRJ0NdpGB7rZt/agjikPOpYD17KXZC9r8zN
-	ixGn4SgSegpzpdOQfrADgB7lWzil6lQSLPnNgxl7P/PR7PcxR+G0KCC3ZeeMk25+dWevKKa
-	/PSAIV4aFscBXAtWrfL5SKspBmD4HVrGve621uhwEy1NVEAPPnsaltknMPrHvZDDUASM7nW
-	Vm7zfOjXfFMPJGrxsvLORCB4PtZzuZEm9v6Tm5OAfZs4joiLWBuPuJGZxkV+FmDv+MdQjNd
-	KBKTa6MbYLVRNz1nhBBhuFFKMmNCRcmxgyuO/TmzKmV20SquyB7mTVTa74OZiBURqH8T/hH
-	XWW5uceikbjU2Jk9KZcnD+1s7arZwqCs0GBbsaCDPDE2bI59BVS863pFS7JcA=
-X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
-X-QQ-RECHKSPAM: 0
 
-qce_aead_async_req_handle() maps the source with
-dma_map_sg(qce->dev, rctx->src_sg, rctx->src_nents, dir_src), but its
-error path unmaps req->src instead:
+On 12/11/2026 10:31, Imran Shaik wrote:
+>>> +allOf:
+>>> +  - if:
+>>> +      properties:
+>>> +        reg-names:
+>>> +          contains:
+>>> +            const: etu
+>>
+>> Reason for same devices with different address space details should be
+>> provided somewhere, preferrably in description. Assuming in the first
+>> place, that this stays because how two devices can be basically
+>> identical (same compatible) if they have different programming
+>> interface?
+>>
+> 
+> TSCSS is a single hardware device, split into two sub-blocks - TSC and
+> ETU, each with its own register address. Every SoC with this compatible
+> has both blocks in hardware.
 
-	error_unmap_src:
-		if (diff_dst)
-			dma_unmap_sg(qce->dev, req->src, rctx->src_nents, dir_src);
+This is not what the binding said.
 
-For CCM requests with associated data and separate source and
-destination buffers, rctx->src_sg is a scatterlist freshly built by
-qce_aead_ccm_prepare_buf_assoclen() that carries the AAD, message and
-result buffers, so it is not req->src.  The mapping created for
-rctx->src_sg is therefore leaked, and req->src is unmapped with a nents
-count that does not belong to it.
+> 
+> What changes is whether the vendor/board actually wires up the ETU's
+> external event. The ETU block captures a timestamp from the TSC block
+> when an external event fires one of the ETU slices, which are driven
+> through board-level GPIO/IRQs. If a board doesn't wire any slice,
+> there's nothing in the ETU region for Linux to use.
 
-Unmap rctx->src_sg, matching the dma_map_sg() call, as qce_aead_done()
-already does on the completion path.  This also makes it safe to free
-rctx->adata on this path, which the next patch does.
+This is not what the binding said. The binding said there are different
+types of devices, one with etu and one without. Look, easy to spot:
 
-Fixes: 9363efb4181c ("crypto: qce - Add support for AEAD algorithms")
-Reported-by: Eric Biggers <ebiggers@kernel.org>
-Link: https://lore.kernel.org/linux-crypto/20260723183438.GB93534@quark/
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: stable@vger.kernel.org
-Signed-off-by: ZhaoJinming <zhaojinming@uniontech.com>
----
- drivers/crypto/qce/aead.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
++  reg:
++    minItems: 1
++    maxItems: 2
 
-diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
-index a9642c67f476..f8e6054ff15d 100644
---- a/drivers/crypto/qce/aead.c
-+++ b/drivers/crypto/qce/aead.c
-@@ -478,7 +478,7 @@ qce_aead_async_req_handle(struct crypto_async_request *async_req)
- 	qce_dma_terminate_all(&qce->dma);
- error_unmap_src:
- 	if (diff_dst)
--		dma_unmap_sg(qce->dev, req->src, rctx->src_nents, dir_src);
-+		dma_unmap_sg(qce->dev, rctx->src_sg, rctx->src_nents, dir_src);
- error_unmap_dst:
- 	dma_unmap_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
- error_free:
 
--- 
-2.50.1
-
+Best regards,
+Krzysztof
