@@ -1,78 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794549400;
-	b=vOCcwWUZ93Z7vQzxtZnbAKxLy9CYXfaDVF30PorCfwdczVuzxXp+RQsQ61nrpXeNARPd
-	 7KgNjcxVIlQVJva+n7mNnRs9l++ihY4EM12mTpihrFb5gWBSATn7AQSU/R4ZPWfgnccrC
-	 55saufOOb97KDX+CLJqfe0VNdgI8gYp4Yee41NG3KcS6bGzsgtn4fTdS8an8mDWGf6bJq
-	 UIFwh7FgFlZUQ+NUfgEi4asHlq9bgW38fcTu8nBIxFadhiYzkwM5oneq8FTRwXSLU3RBT
-	 dY2npRzJy/Ks7UvLOayg4IMb08UEYSp1mbustdVOuyA54kk9+/RA6aRXFlZfuSl8daQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794549400;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=QsdXK00ok2dK52xHoi2iP584d6cGLmA7sdyL4hjzj3k=;
-	b=1ugSiyuj5Pm2LG6niyPUwTpclq/Z+Sf4ZNY/EhEY0jm8sY+uYB9N55AaoFV79N5b0ODU
-	 flnQVnC1LsZ7I/fpflj9PVKGz+9MN+ktF3zN/OMayNBbsMnPOb4O3qguM8ym0ShCmDQFH
-	 WugXKoc7tw3arHW07dCSI7YKPnhcwd/URClIy0n2AVspFMDxVvovDSYjNOkZaue5UX4/A
-	 eGRhkP2o5ufT/gqqrl6OPPI+QGX+ZfJG2D32MXW5gsiAAt8xjidaeQfdW/b9Vr+B3XxZ8
-	 zmMyAoMJwUmPqU41AnXMUrFRyXrucbifUNUHhLTpJTFW5yv3Fsi0D0ZR83FuhMGZbZQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iq0rqMjf;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3119606A8A5;
-	Fri, 13 Nov 2026 05:56:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iq0rqMjf
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794549400;
-	b=Son1qCy3TtNsRhYs5QwhTaQikL7QtjM5iX7OjcikNj1D8Up5jFOTQNa7bbxLPvpxEZfe
-	 j71wFBjDdDFTxFbCpiSpRv158T6BK7YT2OpxhIkpauW1CxpLKhLSO8rX0+o3kz4P8tLZd
-	 WHVJPo6z56XYMyiyHHFSu0qSTQscR2/tTn7Al1u2SalJJGX3he9mqdRhNvfPG1QUUoBkQ
-	 ZiEIu9UCKWgFEZyYUx21tnWUfz957OVerlO/w5ebjv67b3qD0jLSQtVXJSzo3qVDcSMnh
-	 WT2I0248OxxMPdmZ8yvXmnfrlUSYjuxA+uaDcE6W/bw9fR2nrDS6qaX5MtC7e+36CfQ==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794549400;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=QsdXK00ok2dK52xHoi2iP584d6cGLmA7sdyL4hjzj3k=;
-	b=vTght3gntNcI/vuEJmyS2V6RvL1d4Vo+m0yyQ5pQKEdfKZLUUkKcTdU3TYW0nKvGYtaR
-	 sHoPfoxmrTgSQFkQlkiKzWrM6ql6yaHED+E9ZMggaPavHi436mSV8OxG6NY94p0LjRZtd
-	 0Bh0Yh9DfjVjibNVHT6ZvEV6twD3UNinNJ0pisLl7mwH3s0/o/JUy6Si/tgi0nYTogvOC
-	 A0dK2RJ9uFOLVj3LCN7NSJRkpuyj7ZJN7FgQuAwpe14h6EPSzSkuFXQex+7iAAFD+/nLc
-	 oXtZVHqNX37Q5KnPMGqPURKYgkysK7uyoWUBmJSkkMY8XJGCxm+DoGmQssUVSpz6/AQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794551230;
+	b=5DUV13WjpIatugsQbM69zR8h3WG4FeO5kMtB9JMrGdv8S4mu+GLlrdCW/RZLXp59gMV9
+	 swzVGPxh7nogRdNIQoDADIaTLf/hmoJ0VMbo6l0VrQwmqWoQpakLWgfjVeUoLajaBONlD
+	 fd54w1mcoB40h4y90Gss8hN/moUBOloJQCWgudOnQQyqb3A6rNQGBlvhIMfUHinldK26o
+	 09ppjwGyN3/HdtIpNM9P8fVpaNyC91zXUDwhBQyPp7hy3yG3k8/lGvwG84lzhVlOgq5lE
+	 sMjVt55oNNPyBqL3ufSkmc4VXdRTLysU3XT8zNcsVB2Gu4iMQuhY5kp0bKdjSqvQtHw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794551230;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=XltNWiKtwG9iBw8+GH1SYk3VMgJFEJVDDOL9ejVnQFk=;
+	b=BEYqbL4GGklZawW469qsWy6rpll80n+kG8UuhKjkBK+reLl/W7G0qaiuddOLJhdVkoEk
+	 k7mbO/Ov492oLCt0OTMLJupxCnri0H5sSSYU0Q0CSmJOHVqcBeWMTllXZW7oxwL0bW1MG
+	 YJADvflV1SlXxI7/Zme40l6xpdSt/wKS5ACGh7PFgK24LawxM5lkCNk3pWSnUDIk/6xPE
+	 hLkOqBAK6D5FVfhsQwypdq4ANGi14cMqAz4azncyBDb4tJ+4LkGI7z2S14vCyPuZO9xiS
+	 3dAVpwtCeWTxBAHWJzR9CiWdpr2sagsKTzrW5rxWxMOVYdFouzpmTq/QgBIVXOm6yGQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=baylibre.com;
+	spf=pass smtp.mailfrom=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=MUvxZhYm;
+	arc=none smtp.remote-ip=209.85.128.44
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 158351F000C5;
-	Fri, 13 Nov 2026 05:56:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794549400;
-	bh=QsdXK00ok2dK52xHoi2iP584d6cGLmA7sdyL4hjzj3k=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=iq0rqMjfObog/EsfoJsWP18sKz6aPPla7dkjOIDwhIHJsIpjKsEUwRllTmn0vbYg6
-	 SupKV6Fl5nNz+wY/CmNbfMMQS76Af7qjoyF1hwvhmjCc10WRI1RMTUTt21UiIaOltG
-	 4MbtN3DJNhUZIiFt2tur4chmQbnMVPWvSv1KwStJOwinyHCcP/IZ5nXRSURLhsk/4S
-	 2O6q+2gy81eTMgW1OKjkQUhqF7Iu7imu45l+eN6hItHdXfaI+QJJdjxhDF+rPAsgzb
-	 NGkmWUJiHMrtoyQS+nX6MC0SkFP/TbCSBgeXKtj5UxY7RXJ5ToNII0gkf7H4DICjCJ
-	 tfEKuKdSFGvuQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id C1B4247617;
-	Fri, 13 Nov 2026 05:56:37 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Date: Fri, 13 Nov 2026 11:26:38 +0530
-Subject: [PATCH v3 5/6] drm/msm/dpu: Add SM7250 support
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A36D606A32E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 06:27:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7A36D606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=MUvxZhYm
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a59100fa83so3681885e9.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 22:27:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1794551229; x=1795156029; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=XltNWiKtwG9iBw8+GH1SYk3VMgJFEJVDDOL9ejVnQFk=;
+        b=MUvxZhYm5+xi+SJfP8nHhsZ1GXHZRgKcmtYpFlDoXTjjRpAAhHrxK/sL0p5zR3UDxZ
+         zoFe6J+qpK86Rz4t3v2DUKvCLnSK0WziR5goLmM6ybJ96s52a7n4l6ssjhqsUYaR+Jm/
+         Xs9hOLXj9PE+uwryRlkvLuERCrqJTf3zLvvS2FCslyTZTd9wswIAMULtnwF8vJn7f2H0
+         3wTzjD8Hp6/wsmtQJ0eNgdgUe4JwuhUhUM8UnvqdKeyZwp2YYRSg+jZBqsj6tEhsE3zD
+         Pz/u5C9YRb5rfcke4Gy7OJXnRI/iCfjiVWknhEe2HE/M51peV4kwHUDOt1TkMoov2shs
+         xFfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794551229; x=1795156029;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XltNWiKtwG9iBw8+GH1SYk3VMgJFEJVDDOL9ejVnQFk=;
+        b=1/W1VoMnGGWuJAKZO+yielcZaEpW8hBXv6xXMQFyYl4ijyJzxWVXIBBjCJdtt3vZBx
+         hNNoBiPxbqIv9BoKVv+VbqPC2MIj+xkeH1+RWUdrxl/apvvIzjYH3iteGge4j3L6X8cG
+         eQUPjI01v08K1K9rsT44btE4rm6OmlVpPfKVPdJW6m3yzJBeo2IDxyRa51aT0hOWu9hD
+         06r8dXKfjVkzuXN040LrdyBtVBqUgVzn3rAerXRqREjNlCukgSyUl/dPj5vHZiIAd8VS
+         tFgO6YOB4s6W+Egb6SltBhR0B6bbSZ/FBQsWnk3NZcTti40nX+RgOrWvZ41VXdXwgXBk
+         W7TQ==
+X-Forwarded-Encrypted: i=1; AL+hErE0abUjxAJ5hr2DUSWytvRTBG8NKe7oNAXF9qRGj9sjGsEmlYbWeQE/32XUMdno/rDXmlzZlRnJHkFMjH+s@vger.kernel.org
+X-Gm-Message-State: APuU4Z8lq1e+f9OIAkcqQPlygUHFQKWWYfs5Z02ayEnL/X10uN4oARUZ
+	ESS0Rm/LIdDuyeaTFBnWpnDWEmoWc5FG/3bKCeOBf40TVdxzAU46Lws+C/Vo9k68nXY=
+X-Gm-Gg: AYBFou03qCOWB/YPAj78NAatRPZG9nhI3x///QnHyXFLdTgjdaRsfX4myEvNa9p4dkO
+	tK6HYNov665kYaUM7toXAfhrS3qQWTrylupj2MptiyEluVs+JJ8vtmrjetLfaVhHU6oyVFH5tF3
+	3RNWfmnkpGidc2mNbP/fN1XHfAX9WqQJUi8/HOM9TrFxXmvo58sn/ZBbJcAXbZHGC9O4j3YndI8
+	38jIOKIfOKcBkM4Mjr+W2iwgiZ7RfQnS5dbaKoj4ztahb8rVbDFAAELHFT1L8jzDK3gr3thwFO+
+	2ieIyn+r8wHX1Suv4puSM2rJy74OXBcYLobgNQXYT8+DTiG00/T1EX4EW3IQrQK/TYiweEmM9Kl
+	euXNceHHzqTeeWQwqxf3aOGaftQDh3XmJcFq2q3e7kn32sgSg9zHY0+mXc90YuOpoe0kwth501M
+	VN42bq92TyTztRJRpuQ8TY6eG0BN/NZ3KAJvCMxXm9w+BHgWzQ88yNDkXLc2vreqSiSn9r7I0R8
+	izm0fc8RzEjTRpp38UB+LbmFhzG8ZQOJhMC1Q8QfPT6JqcWojnYVfnPr3+9ishz9UIzh1WH1vpO
+	Xt4C17y5ZP6/rcFULCUiIBpjgdMT/66eIxTY+yGGeTt9EOtwgkK/Hv8Eo1D4QWpPsGBFWBuzOQ=
+	=
+X-Received: by 2002:a05:600c:4ecd:b0:4a1:e6a9:4086 with SMTP id 5b1f17b1804b1-4bb5599a73fmr36037725e9.0.1794551228841;
+        Thu, 12 Nov 2026 22:27:08 -0800 (PST)
+Received: from localhost (ip-091-089-005-024.um28.pools.vodafone-ip.de. [91.89.5.24])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb4e29daa5sm133039875e9.12.2026.11.12.22.27.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Nov 2026 22:27:07 -0800 (PST)
+Date: Fri, 13 Nov 2026 07:27:06 +0100
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Val Packett <val@packett.cool>
+Cc: Sebastian Reichel <sre@kernel.org>, 
+	Marc Lainez <marc.lainez@gmail.com>, Luca Weiss <luca.weiss@fairphone.com>, 
+	=?utf-8?B?QmFybmFiw6FzIEN6w6ltw6Fu?= <barnabas.czeman@mainlining.org>, Danila Tikhonov <danila@jiaxyga.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	linux-pm@vger.kernel.org, devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
+	linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/5] power: supply: add Qualcomm QGauge (qcom_qg) fuel
+ gauge driver
+Message-ID: <avatRCrAgoPjV7rP@monoceros>
+References: <20261112170841.2189322-1-val@packett.cool>
+ <20261112170841.2189322-3-val@packett.cool>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,405 +107,55 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261113-dpu-sm7250-v3-5-30bdec59d204@brar.si>
-References: <20261113-dpu-sm7250-v3-0-30bdec59d204@brar.si>
-In-Reply-To: <20261113-dpu-sm7250-v3-0-30bdec59d204@brar.si>
-To: Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krishna Manikandan <quic_mkrishn@quicinc.com>, Ishu Brar <patches@brar.si>, 
- Kuogee Hsieh <quic_khsieh@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794549395; l=11844;
- i=patches@brar.si; h=from:subject:message-id;
- bh=il6yhgDNJbG62CMGd7GHrWu0+lPZwRXrZvV9rV6U7AU=;
- b=IxGO51DcmU2OecxpMRHMr1uXrkXZzAUfuiArdLM88JKMHb9JW5nGO6Fcmib+T+tpPIR37ZnMF
- y7+1kYHuTVXDQx6tlmS/E8yA7jSDbWMRztyIkEgusuJ3Q2ktn7sR+J9
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
-Content-Transfer-Encoding: 7bit
-
-From: Ishu Brar <patches@brar.si>
-
-Add definitions for the display hardware (DPU 6.1) used on the Qualcomm
-SM7250 platform. The values come from the downstream lito devicetree.
-
-Signed-off-by: Ishu Brar <patches@brar.si>
----
- .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_1_sm7250.h | 309 +++++++++++++++++++++
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c     |   1 +
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h     |   1 +
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c            |   1 +
- 4 files changed, 312 insertions(+)
-
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_6_1_sm7250.h b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_6_1_sm7250.h
-new file mode 100644
-index 000000000000..dfa442c438b1
---- /dev/null
-+++ b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_6_1_sm7250.h
-@@ -0,0 +1,309 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) 2022. Qualcomm Innovation Center, Inc. All rights reserved.
-+ * Copyright (c) 2015-2018, 2020 The Linux Foundation. All rights reserved.
-+ *
-+ * SM7250, SDE hardware revision 6.1.0. Block offsets are relative to the
-+ * "mdp" register region.
-+ */
-+
-+#ifndef _DPU_6_1_SM7250_H
-+#define _DPU_6_1_SM7250_H
-+
-+static const struct dpu_caps sm7250_dpu_caps = {
-+	.max_mixer_width = DEFAULT_DPU_OUTPUT_LINE_WIDTH,
-+	.max_mixer_blendstages = 0x9,
-+	.has_src_split = true,
-+	.has_dim_layer = true,
-+	.has_idle_pc = true,
-+	.has_3d_merge = true,
-+	.max_linewidth = 2880,
-+	.pixel_ram_size = DEFAULT_PIXEL_RAM_SIZE,
-+};
-+
-+static const struct dpu_mdp_cfg sm7250_mdp = {
-+	.name = "top_0",
-+	.base = 0x0, .len = 0x494,
-+	.clk_ctrls = {
-+		[DPU_CLK_CTRL_VIG0] = { .reg_off = 0x2ac, .bit_off = 0 },
-+		[DPU_CLK_CTRL_VIG1] = { .reg_off = 0x2b4, .bit_off = 0 },
-+		[DPU_CLK_CTRL_DMA0] = { .reg_off = 0x2ac, .bit_off = 8 },
-+		[DPU_CLK_CTRL_DMA1] = { .reg_off = 0x2b4, .bit_off = 8 },
-+		[DPU_CLK_CTRL_DMA2] = { .reg_off = 0x2c4, .bit_off = 8 },
-+		[DPU_CLK_CTRL_REG_DMA] = { .reg_off = 0x2bc, .bit_off = 20 },
-+		[DPU_CLK_CTRL_WB2] = { .reg_off = 0x2bc, .bit_off = 16 },
-+	},
-+};
-+
-+static const struct dpu_ctl_cfg sm7250_ctl[] = {
-+	{
-+		.name = "ctl_0", .id = CTL_0,
-+		.base = 0x1000, .len = 0x1dc,
-+		.intr_start = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR2, 9),
-+	}, {
-+		.name = "ctl_1", .id = CTL_1,
-+		.base = 0x1200, .len = 0x1dc,
-+		.intr_start = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR2, 10),
-+	}, {
-+		.name = "ctl_2", .id = CTL_2,
-+		.base = 0x1400, .len = 0x1dc,
-+		.intr_start = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR2, 11),
-+	}, {
-+		.name = "ctl_3", .id = CTL_3,
-+		.base = 0x1600, .len = 0x1dc,
-+		.intr_start = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR2, 12),
-+	},
-+};
-+
-+static const struct dpu_sspp_cfg sm7250_sspp[] = {
-+	{
-+		.name = "sspp_0", .id = SSPP_VIG0,
-+		.base = 0x4000, .len = 0x1f8,
-+		.features = VIG_SDM845_MASK_SDMA,
-+		.sblk = &dpu_vig_sblk_qseed3_3_0,
-+		.xin_id = 0,
-+		.type = SSPP_TYPE_VIG,
-+		.clk_ctrl = DPU_CLK_CTRL_VIG0,
-+	}, {
-+		.name = "sspp_1", .id = SSPP_VIG1,
-+		.base = 0x6000, .len = 0x1f8,
-+		.features = VIG_SDM845_MASK_SDMA,
-+		.sblk = &dpu_vig_sblk_qseed3_3_0,
-+		.xin_id = 4,
-+		.type = SSPP_TYPE_VIG,
-+		.clk_ctrl = DPU_CLK_CTRL_VIG1,
-+	}, {
-+		.name = "sspp_8", .id = SSPP_DMA0,
-+		.base = 0x24000, .len = 0x1f8,
-+		.features = DMA_SDM845_MASK_SDMA,
-+		.sblk = &dpu_dma_sblk,
-+		.xin_id = 1,
-+		.type = SSPP_TYPE_DMA,
-+		.clk_ctrl = DPU_CLK_CTRL_DMA0,
-+	}, {
-+		.name = "sspp_9", .id = SSPP_DMA1,
-+		.base = 0x26000, .len = 0x1f8,
-+		.features = DMA_SDM845_MASK_SDMA,
-+		.sblk = &dpu_dma_sblk,
-+		.xin_id = 5,
-+		.type = SSPP_TYPE_DMA,
-+		.clk_ctrl = DPU_CLK_CTRL_DMA1,
-+	}, {
-+		.name = "sspp_10", .id = SSPP_DMA2,
-+		.base = 0x28000, .len = 0x1f8,
-+		.features = DMA_CURSOR_SDM845_MASK_SDMA,
-+		.sblk = &dpu_dma_sblk,
-+		.xin_id = 9,
-+		.type = SSPP_TYPE_DMA,
-+		.clk_ctrl = DPU_CLK_CTRL_DMA2,
-+	},
-+};
-+
-+static const struct dpu_lm_cfg sm7250_lm[] = {
-+	{
-+		.name = "lm_0", .id = LM_0,
-+		.base = 0x44000, .len = 0x320,
-+		.features = MIXER_MSM8998_MASK,
-+		.sblk = &sdm845_lm_sblk,
-+		.lm_pair = LM_1,
-+		.pingpong = PINGPONG_0,
-+		.dspp = DSPP_0,
-+	}, {
-+		.name = "lm_1", .id = LM_1,
-+		.base = 0x45000, .len = 0x320,
-+		.features = MIXER_MSM8998_MASK,
-+		.sblk = &sdm845_lm_sblk,
-+		.lm_pair = LM_0,
-+		.pingpong = PINGPONG_1,
-+		.dspp = DSPP_1,
-+	}, {
-+		.name = "lm_2", .id = LM_2,
-+		.base = 0x46000, .len = 0x320,
-+		.features = MIXER_MSM8998_MASK,
-+		.sblk = &sdm845_lm_sblk,
-+		.lm_pair = LM_3,
-+		.pingpong = PINGPONG_2,
-+	}, {
-+		.name = "lm_3", .id = LM_3,
-+		.base = 0x47000, .len = 0x320,
-+		.features = MIXER_MSM8998_MASK,
-+		.sblk = &sdm845_lm_sblk,
-+		.lm_pair = LM_2,
-+		.pingpong = PINGPONG_3,
-+	},
-+};
-+
-+static const struct dpu_dspp_cfg sm7250_dspp[] = {
-+	{
-+		.name = "dspp_0", .id = DSPP_0,
-+		.base = 0x54000, .len = 0x1800,
-+		.sblk = &sdm845_dspp_sblk,
-+	}, {
-+		.name = "dspp_1", .id = DSPP_1,
-+		.base = 0x56000, .len = 0x1800,
-+		.sblk = &sdm845_dspp_sblk,
-+	},
-+};
-+
-+static const struct dpu_pingpong_cfg sm7250_pp[] = {
-+	{
-+		.name = "pingpong_0", .id = PINGPONG_0,
-+		.base = 0x70000, .len = 0xd4,
-+		.sblk = &sdm845_pp_sblk,
-+		.merge_3d = MERGE_3D_0,
-+		.intr_done = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 8),
-+	}, {
-+		.name = "pingpong_1", .id = PINGPONG_1,
-+		.base = 0x70800, .len = 0xd4,
-+		.sblk = &sdm845_pp_sblk,
-+		.merge_3d = MERGE_3D_0,
-+		.intr_done = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 9),
-+	}, {
-+		.name = "pingpong_2", .id = PINGPONG_2,
-+		.base = 0x71000, .len = 0xd4,
-+		.sblk = &sdm845_pp_sblk,
-+		.merge_3d = MERGE_3D_1,
-+		.intr_done = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 10),
-+	}, {
-+		.name = "pingpong_3", .id = PINGPONG_3,
-+		.base = 0x71800, .len = 0xd4,
-+		.sblk = &sdm845_pp_sblk,
-+		.merge_3d = MERGE_3D_1,
-+		.intr_done = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 11),
-+	},
-+};
-+
-+static const struct dpu_merge_3d_cfg sm7250_merge_3d[] = {
-+	{
-+		.name = "merge_3d_0", .id = MERGE_3D_0,
-+		.base = 0x83000, .len = 0x8,
-+	}, {
-+		.name = "merge_3d_1", .id = MERGE_3D_1,
-+		.base = 0x83100, .len = 0x8,
-+	},
-+};
-+
-+static const struct dpu_dsc_cfg sm7250_dsc[] = {
-+	{
-+		.name = "dsc_0", .id = DSC_0,
-+		.base = 0x80000, .len = 0x140,
-+	}, {
-+		.name = "dsc_1", .id = DSC_1,
-+		.base = 0x80400, .len = 0x140,
-+	},
-+};
-+
-+static const struct dpu_intf_cfg sm7250_intf[] = {
-+	{
-+		.name = "intf_0", .id = INTF_0,
-+		.base = 0x6a000, .len = 0x280,
-+		.type = INTF_DP,
-+		.controller_id = MSM_DP_CONTROLLER_0,
-+		.prog_fetch_lines_worst_case = 24,
-+		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 24),
-+		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 25),
-+	}, {
-+		.name = "intf_1", .id = INTF_1,
-+		.base = 0x6a800, .len = 0x2b8,
-+		.type = INTF_DSI,
-+		.controller_id = MSM_DSI_CONTROLLER_0,
-+		.prog_fetch_lines_worst_case = 24,
-+		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 26),
-+		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 27),
-+		.intr_tear_rd_ptr = DPU_IRQ_IDX(MDP_INTF1_TEAR_INTR, 2),
-+	}, {
-+		.name = "intf_2", .id = INTF_2,
-+		.base = 0x6b000, .len = 0x2b8,
-+		.type = INTF_DSI,
-+		.controller_id = MSM_DSI_CONTROLLER_1,
-+		.prog_fetch_lines_worst_case = 24,
-+		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 28),
-+		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 29),
-+		.intr_tear_rd_ptr = DPU_IRQ_IDX(MDP_INTF2_TEAR_INTR, 2),
-+	}, {
-+		.name = "intf_3", .id = INTF_3,
-+		.base = 0x6b800, .len = 0x280,
-+		.type = INTF_DP,
-+		.controller_id = MSM_DP_CONTROLLER_0,	/* pair with intf_0 for DP MST */
-+		.prog_fetch_lines_worst_case = 24,
-+		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 30),
-+		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 31),
-+	},
-+};
-+
-+static const struct dpu_wb_cfg sm7250_wb[] = {
-+	{
-+		.name = "wb_2", .id = WB_2,
-+		.base = 0x65000, .len = 0x2c8,
-+		.features = WB_SDM845_MASK,
-+		.format_list = wb2_formats_rgb_yuv,
-+		.num_formats = ARRAY_SIZE(wb2_formats_rgb_yuv),
-+		.clk_ctrl = DPU_CLK_CTRL_WB2,
-+		.xin_id = 6,
-+		.maxlinewidth = 4096,
-+		.intr_wb_done = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 4),
-+	},
-+};
-+
-+static const struct dpu_perf_cfg sm7250_perf_data = {
-+	.max_bw_low = 5800000,
-+	.max_bw_high = 8600000,
-+	.min_core_ib = 4800000,
-+	.min_llcc_ib = 0,
-+	.min_dram_ib = 800000,
-+	.min_prefill_lines = 35,
-+	.danger_lut_tbl = {0xff, 0xffff, 0x0},
-+	.safe_lut_tbl = {0xfffc, 0xff00, 0xffff},
-+	.qos_lut_tbl = {
-+		{
-+		.nentry = ARRAY_SIZE(sm8150_qos_linear),
-+		.entries = sm8150_qos_linear
-+		}, {
-+		.nentry = ARRAY_SIZE(sc7180_qos_macrotile),
-+		.entries = sc7180_qos_macrotile
-+		}, {
-+		.nentry = ARRAY_SIZE(sc7180_qos_nrt),
-+		.entries = sc7180_qos_nrt
-+		},
-+	},
-+	.cdp_cfg = {
-+		{.rd_enable = 1, .wr_enable = 1},
-+		{.rd_enable = 1, .wr_enable = 0}
-+	},
-+	.clk_inefficiency_factor = 105,
-+	.bw_inefficiency_factor = 120,
-+};
-+
-+static const struct dpu_mdss_version sm7250_mdss_ver = {
-+	.core_major_ver = 6,
-+	.core_minor_ver = 1,
-+};
-+
-+const struct dpu_mdss_cfg dpu_sm7250_cfg = {
-+	.mdss_ver = &sm7250_mdss_ver,
-+	.caps = &sm7250_dpu_caps,
-+	.mdp = &sm7250_mdp,
-+	.cdm = &dpu_cdm_5_x,
-+	.ctl_count = ARRAY_SIZE(sm7250_ctl),
-+	.ctl = sm7250_ctl,
-+	.sspp_count = ARRAY_SIZE(sm7250_sspp),
-+	.sspp = sm7250_sspp,
-+	.mixer_count = ARRAY_SIZE(sm7250_lm),
-+	.mixer = sm7250_lm,
-+	.dspp_count = ARRAY_SIZE(sm7250_dspp),
-+	.dspp = sm7250_dspp,
-+	.dsc_count = ARRAY_SIZE(sm7250_dsc),
-+	.dsc = sm7250_dsc,
-+	.pingpong_count = ARRAY_SIZE(sm7250_pp),
-+	.pingpong = sm7250_pp,
-+	.merge_3d_count = ARRAY_SIZE(sm7250_merge_3d),
-+	.merge_3d = sm7250_merge_3d,
-+	.intf_count = ARRAY_SIZE(sm7250_intf),
-+	.intf = sm7250_intf,
-+	.vbif = &sdm845_vbif,
-+	.wb_count = ARRAY_SIZE(sm7250_wb),
-+	.wb = sm7250_wb,
-+	.perf = &sm7250_perf_data,
-+};
-+
-+#endif
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c
-index 107150a8553f..a6c20dfb954a 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c
-@@ -777,6 +777,7 @@ static const struct dpu_qos_lut_entry sc7180_qos_nrt[] = {
- #include "catalog/dpu_5_4_sm6125.h"
- 
- #include "catalog/dpu_6_0_sm8250.h"
-+#include "catalog/dpu_6_1_sm7250.h"
- #include "catalog/dpu_6_2_sc7180.h"
- #include "catalog/dpu_6_3_sm6115.h"
- #include "catalog/dpu_6_4_sm6350.h"
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-index f45faf87333e..7e0dfed99c71 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-@@ -780,6 +780,7 @@ extern const struct dpu_mdss_cfg dpu_sdm670_cfg;
- extern const struct dpu_mdss_cfg dpu_sm8150_cfg;
- extern const struct dpu_mdss_cfg dpu_sc8180x_cfg;
- extern const struct dpu_mdss_cfg dpu_sm7150_cfg;
-+extern const struct dpu_mdss_cfg dpu_sm7250_cfg;
- extern const struct dpu_mdss_cfg dpu_sm8250_cfg;
- extern const struct dpu_mdss_cfg dpu_sc7180_cfg;
- extern const struct dpu_mdss_cfg dpu_sm6115_cfg;
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-index da3556eb6ecc..6eb6f65ada91 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-@@ -1506,6 +1506,7 @@ static const struct of_device_id dpu_dt_match[] = {
- 	{ .compatible = "qcom,sm6350-dpu", .data = &dpu_sm6350_cfg, },
- 	{ .compatible = "qcom,sm6375-dpu", .data = &dpu_sm6375_cfg, },
- 	{ .compatible = "qcom,sm7150-dpu", .data = &dpu_sm7150_cfg, },
-+	{ .compatible = "qcom,sm7250-dpu", .data = &dpu_sm7250_cfg, },
- 	{ .compatible = "qcom,sm8150-dpu", .data = &dpu_sm8150_cfg, },
- 	{ .compatible = "qcom,sm8250-dpu", .data = &dpu_sm8250_cfg, },
- 	{ .compatible = "qcom,sm8350-dpu", .data = &dpu_sm8350_cfg, },
-
--- 
-2.56.1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="mwyna4jkd5v6s5iv"
+Content-Disposition: inline
+In-Reply-To: <20261112170841.2189322-3-val@packett.cool>
 
 
+--mwyna4jkd5v6s5iv
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [PATCH 2/5] power: supply: add Qualcomm QGauge (qcom_qg) fuel
+ gauge driver
+MIME-Version: 1.0
+
+On Thu, Nov 12, 2026 at 02:07:28PM -0300, Val Packett wrote:
+> +#include <linux/mod_devicetable.h>
+> [...]
+> +#include <linux/platform_device.h>
+
+Please don't include <linux/mod_devicetable.h>. That introduces a bunch
+of unneeded build dependencies and of_device_id is already provided
+(without these dependencies) by <linux/platform_device.h>.
+
+> [...]
+> +static const struct of_device_id qcom_qg_of_match[] = {
+> +	{ .compatible = "qcom,pm6150-qg" },
+> +	{ .compatible = "qcom,pmi632-qg" },
+> +	{}
+
+Please make this { } (i.e add a space) to match the most common style.
+
+> +};
+> +MODULE_DEVICE_TABLE(of, qcom_qg_of_match);
+
+Best regards
+Uwe
+
+--mwyna4jkd5v6s5iv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmr2rbYACgkQj4D7WH0S
+/k7nbgf/b6/rA4kIW1NyMoOtnNVBeGIHHHNfMkct33HHb1h0CiT6Hd1RLEJ6HH+F
+sW4pjg7G0QStID55MbOeFsfsHKUaOEsaLwutZ3fATturnz7k7RZRvLfAjNtR3k18
+hiWFbFdsTjH6SuQ/g7OijXpDO+E2v/5FHg8g/V0U5xwL0w4sWAME2Gxrc9Aed+1Z
+yb1H38UcmdaYkNs0WgAyYt2rGVtGDyt5nQqLm9gBfrCvoxDzCIxgiXJ61C9JMF0t
+UIk/sLbujBcPF2qrtmodX0CUE07kBKD7PV1TOWjB7Gcz+f3E/X3eQGPNNOk8mEQn
+pqgA7hr5DNGO6zRenFbDHgtssAhenA==
+=HgBt
+-----END PGP SIGNATURE-----
+
+--mwyna4jkd5v6s5iv--
