@@ -1,81 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794582873;
-	b=JDh8nQ/CKte/RZzFkDmBbJSoWBYOLAsqnJMGuSfnBPUsO5xV83mLyZIg/goKLn8uSABX
-	 9odeTJiSEjI6GR9I3oFy8i0AeYu79nJ/oCtseto/XWhE/MocRKN1VOFb2unkcajY7HzHY
-	 iQVw/Bhbtqq+ZC1Vg1puZo7IDwhXcpy3mI3rE8NewH3KABuAfHcGkUz+YUcD33TPGsTy3
-	 2v/DEramqCf25aonXnNqdxtYJMa2/dPXQTBqtk+HiyCpO7toEAwqbU9VW3irqimtnqKTu
-	 npSg6Vr5Typ2BbDuowh+QkeMXUPTmlT2qCbp5DdsN7cskynlGHxONBM3SB01vXJk2rg==
+	t=1794583380;
+	b=JLkpZQ4oQcf/Pr1A3a3OwSqzc03X/k7tLaCbxVqQu0fYsaibL/NawQNeBKHU1YMXN7P5
+	 GYEPBeMD35D0+KjwIFhgxXzw1/Cld5HMbdg59qEKRkvD1ACp3tkqkYBTYXosFl54fArcB
+	 /YOAqho9/ItY1MzupmKuJ13xQgX686JhON6q0B/GexuzyVZYrqmmZxpRwaz+yy6ETtHan
+	 GZ/zyOfj2G0BVNWg3YdnG0m1Y+pyKpJycQBlbb3n74/R0q0ruQew6Jk7iZA/r7R5BumJJ
+	 H0jQmi5pS78ofznq1nQhWC87GnuTbN0R4CIVD8zabjpYps8pY7mqwOIrZZnvRMabJRw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794582873;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=7PZQk9at42RPP00VjylZfLgVP0j8otNjkZjY5qVieyc=;
-	b=Vqvm+x8QSg428/wRPkPrJxZ58KiHoc6n3AnfAbxY6Y1sQTCTd/ZBI3kwpLwby/hJikX4
-	 qlOSjHNATH1Vhv9c4iLQiMs/I18j7CSltDy9waLK3/XwH1AEAreXvE0LpuK8iVUauy3vd
-	 qcrBkWatZFTc9IH6GjwIPK98bk8nI1xXkBsupgJj3e+7O/6QsArY7akH2I3udlrB0kZGJ
-	 r+i6p2l0wnQoK34pSCEnzc1l32Begv8GtIgZ/Z1qLRJySsXYUljVOt7Fi7LklmAt1FWOs
-	 FzZys5eNRL/9Z0CgmtsZ8R8mzZTGMEbSBQlC85I5l9psr4YHiQdTGzZo99q7X+l9xVA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794583380;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
+	 Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
+	b=jSr/Wh8Z9QwIARp6aDgcDiVgy3khbtpfv5W8VXWsFlLEjqbYTwZSqBW4Lk8DSEy+1dwE
+	 vTSgdRI+pmcpyE4THdAyYcRb9G15mJzGv7tcY6Ax/dSTjvdpB73Obif6L78vXW4lPX7qm
+	 Lo20kSRpw4jI/e+/9V398lviCDeG/AutNgueDXHrCLLUcW9ekrUk9YKp8injNjNhwDdWJ
+	 4XtH8y/u32LK68CnTCvy9iUGjGWxli4Y2cuILtHva5VzyqucGpESVums4nMh6aGRdKkjw
+	 8krzSbCBE5b7GSCq0kl8aCT4yyFKDrZ4biLeNTRZx1T/sA/2Yj5h75/56AEQlncSo2A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=HJQad12g;
-	arc=none smtp.remote-ip=198.175.65.13
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=baylibre.com;
+	spf=pass smtp.mailfrom=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b="Z4j/Mghi";
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B423D606A327;
-	Fri, 13 Nov 2026 15:14:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B423D606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E77CF606A330
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 15:22:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E77CF606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=HJQad12g
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794582873; x=1826118873;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=0E09P4cshhR0pA962/xhxsk8LxaAyvozUk3q+5rP5tU=;
-  b=HJQad12gBxW/YSELY9h6hvndzh7d1/Chy9oFShEqEyP53uHoN7Q/+8h8
-   Vhn2IHzFXRaiAh1wquSxB2bGkPoRqcl3noPuuZdTiaJcrbk7e37ifht9B
-   C4NX3K0SvjL60GsWnKjXO+3hZZd7owSc8X10IIOomU6YYXCbQP8/3Zuna
-   Br1BHwZYfDotSjiDjZOqLzfWascZT+JIpFFHfQPW/Ifz9MbVmeFlxfITj
-   YY47AjKNP8o87zA7nRZl1Q8+2xrdDQuCkaTXwROQORKfzp9OO/vOALC4w
-   xEYnfXLA/MhsntANUIGPEZtXrOea6xyzEdwLYTnNkJsr1krktw9EkT738
-   g==;
-X-CSE-ConnectionGUID: G97+oQKiREi+48JkHadm4g==
-X-CSE-MsgGUID: bff+tO2bT3qwrWPKxXKZtw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11965"; a="3265151"
-X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
-   d="scan'208";a="3265151"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2026 07:14:32 -0800
-X-CSE-ConnectionGUID: 1knF8BGSReeEVyZXaL2Llw==
-X-CSE-MsgGUID: pZGnz9HKS3ysu7EE8Z9NtA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
-   d="scan'208";a="9265561"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.148])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2026 07:14:29 -0800
-Date: Fri, 13 Nov 2026 17:14:27 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, kamal.wadhwa@oss.qualcomm.com,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Subject: Re: [PATCH v2] thermal: qcom-spmi-adc-tm5-gen3: move hardirq actions
- into threaded handler
-Message-ID: <avcpU3P1jw8NESMu@ashevche-desk.local>
-References: <20261113-adctm5_gen3_hardirq_removal-v2-1-a0c9c4800941@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Z4j/Mghi
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4b4571ff080so16850565e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 07:22:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1794583378; x=1795188178; darn=vger.kernel.org;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
+        b=Z4j/MghiCfLl4geHxV/1zp0iqZFNnntdJLs/GhAqDGduqb9DsAilkkq7STQnBeZ0um
+         RhRvKy/5eCZ7/YOf4I6ESuLz+SNm9tkajr2e8phIKwLpPUNrxEs8ow/NIQakyHXKpUNB
+         wPRM4oSCycrLGiF2jbCbowm/BJ1BtJIjJDTObxah1B0fXda8R77uAxdV6HE+5EK+QdF0
+         ZQ/ACHOwMrY+sj8numw/aMHMwEY/vMqvifjApBhJUHkH1EPJavyUdNHLq4MyAxwPC7SK
+         kmDg9bJ14RbAv6hk4/IhmI1flTTg7vsqzz+2ixhoxgveX2xQhoYUeoYm2BbSsiArcb0j
+         7a9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794583378; x=1795188178;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bIqcVrxwFlf/MOw6E2I1r/DVGSQU9l7E6EGdUXXdXtE=;
+        b=mMNyX35m8RuAUmH/H1HLvyzAlQ7QRY8q2mtQbi+nqQMy4J1zhAh8va7oK71qX7alhO
+         3+6nGkQGuzcZ/57YQKzsCNDDZLRc8sSeF4r5hzljq3jGtegCwIhnvCsFjpJ32SbnAUA4
+         P0ErUekDB3Tccgj04oPXoTrT/lMVrBLRd3oo7UOWH2oqhljkbw305J4XT5M0Ps2SrF80
+         fDp4+dKWVzKYq+N3ZRkQtAENg+89HAVNRKMnX2HZXnIRm9q5Le2Hc1pyzfflvzrprUoa
+         qhdQXVarih3DyRDlat7wBm2ZLwDL5Ul4kWT8/bk4lQQkQ3cPHVbfsWC1yXqaGxN6g2cV
+         K+aA==
+X-Forwarded-Encrypted: i=1; AL+hErGzwdWHCKPgkGJACHp7IlkLQGBysrs0xgird3PYM6laRVFB//4QVMPsTGVkOgZtA++q75dZx8f1D8k4JjTu@vger.kernel.org
+X-Gm-Message-State: APuU4Z/5Wp5vUB/P7aYHUkPGN69xkZBf2yimdha3qdFf3NH6vLtanFJh
+	HK8lBJ15vouxLewVBS18khsQVJdEXg9lKgsu9m0wCrqkM2dvcVPdESOpWtEHIBtl5RQ=
+X-Gm-Gg: AYBFou2k/G1pPrH4I/0gwuxwWw9DkGIpGAdcBphTYLmlpXp0tR4QX9sy57LfirN41HY
+	50hVj2fdhF89UshK2mHB6DtKWT89AvU07EPN84EqPWB8ooif+gbBpVsoFJP4reiKJ74iZ2ylDHh
+	h9uSE5sGvFGmrrC87CpoqkGEJe603UiRusT2HeKKVGhsvzv0pCa7rzDEdp1cpto6Ntfhxbcws5D
+	nOQLej/ZRv2VaOTP8BtjvANjQIqhZo5OnPMVsjNVbW7ImhRFHW+bfNnrIq+Phn+f88AZlYXNjIc
+	CNgTyb0sUwK9GSLKWNDMeR3Zx7jzKdCLla1o/PLZ0xhV/wv3rK2Pdndm7Y4x8iesK7J7uhY2qkd
+	sfeF+QJ0VPEcDTbBv5TMAN2cLjiKFd+IyK4W9VIaiO+gRLmKVqQFdY8Jiw18YCbDqHLdO/TlMzJ
+	x3RP6WcOXTGPSaZhzqpZmNjRLDRS/H1kY/bzMTZCgfeJmXfUEq9vt/9IofKqAM16BcPF8w1NcqA
+	vFAuNVD0y/JzuD1Mu+CMB/D3wkYyjpASIrofTxZ2BVUXxspwQGqePy4KFpYvTza+/TPvbE+YS39
+	k3vhTxO4Yv/jifLdSuo2R5Z5XyBc0F35Rg7QFSPX56QOP3b4
+X-Received: by 2002:a05:600c:470a:b0:4a1:f7f4:7cf1 with SMTP id 5b1f17b1804b1-4bb55a44996mr54909955e9.11.1794583378164;
+        Fri, 13 Nov 2026 07:22:58 -0800 (PST)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb4e252f7fsm169848395e9.2.2026.11.13.07.22.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2026 07:22:57 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -85,70 +89,110 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261113-adctm5_gen3_hardirq_removal-v2-1-a0c9c4800941@oss.qualcomm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH RFC 02/16] clk: Acquire resources for clock transitions
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Jerome Brunet <jbrunet@baylibre.com>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+ Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Viresh Kumar <vireshk@kernel.org>, 
+ Nishanth Menon <nm@ti.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Danilo Krummrich <dakr@kernel.org>, Johan Hovold <johan@kernel.org>, 
+ Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mike Tipton <mike.tipton@oss.qualcomm.com>, 
+ Taniya Das <taniya.das@oss.qualcomm.com>, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+ driver-core@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org
+In-Reply-To: <825fbfbe-a9a0-43e2-bb54-f9e38ce779f4@oss.qualcomm.com>
+References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+ <20261014-topic-qc_clk_dvfs-v1-2-3041b788e9f7@oss.qualcomm.com>
+ <179275170360.4070168.11650113664838519061.b4-review@b4>
+ <f0ca2bd4-851e-473d-bf21-678cf964f854@oss.qualcomm.com>
+ <825fbfbe-a9a0-43e2-bb54-f9e38ce779f4@oss.qualcomm.com>
+Date: Fri, 13 Nov 2026 16:22:56 +0100
+Message-Id: <179458337623.3308909.8679910347462508471.b4-reply@b4>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3271; i=jbrunet@baylibre.com;
+ h=from:subject:message-id; bh=n9gjeLxQD41dq62t9Q1UDoH8EzTxjE0oy5fasIAenSY=;
+ b=owGbwMvMwCW2VtK+WnvWU3HG02pJDFnftQNYFjZnu9ws4l/TOn1RRddMPbttkjGdaTOj796rf
+ TLVYhFvRykLgxgXg6yYIksNd7X4O0mtL7Om69yGmcPKBDKEgYtTACZiVMDI0GWS98twnrmegNbD
+ XZYWZY3fVXqXcW6esoxPSy1QcfHdMEaGC//MfS5kr/0fcIBJuSN16412sdN5/5b/Mpj7ZUnLzj5
+ 3PgA=
+X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
+ fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
-On Fri, Nov 13, 2026 at 05:23:03PM +0530, Jishnu Prakash wrote:
-> adc_tm5_probe() registers the ADC_TM interrupt with both a primary
-> handler and thread function (adctm5_gen3_isr/adctm5_gen3_isr_thread)
-> with IRQF_ONESHOT. The primary handler calls adc5_gen3_read(), which
-> takes the SPMI regmap's lock (a regular, non-raw spinlock) from hardirq
-> context. With CONFIG_PROVE_LOCKING enabled, this leads to a warning
-> about an attempt to take a lock in an invalid wait context:
+On 2026-11-09 15:06 +0100, Konrad Dybcio wrote:
+> On 10/26/26 2:11 PM, Konrad Dybcio wrote:
+> > On 10/23/26 12:35 PM, Jerome Brunet wrote:
+> >>> Preparing a clock protects its current requirements, not the resources
+> >>> needed while changing its rate or parent. A transition can temporarily
+> >>> use both parents or access an unprepared clock, and a parent rate change
+> >>> can cause other clocks to be programmed too. Raising resources one clock
+> >>> at a time leaves those operations exposed to insufficient power.
+> >>>
+> >>> Failures make this worse: hardware may already have changed when the
+> >>> operation returns an error. A matching cached rate is then not proof
+> >>> that resource reconciliation finished. Retaining a temporary enable
+> >>> reference without a corresponding prepare reference also breaks a
+> >>> consumer's normal disable/unprepare sequence after a failed reparent.
+> >>>
+> >>> Make CCF acquire the affected tree's and parent paths' resources before
+> >>> notifiers or programming, and reconcile them only when the walk stops.
+> >>> Keep fault recovery independent of rate shortcuts and subsequent
+> >>> consumer reference-count changes. Require explicit recovery of an
+> >>> ancestor's uncertain parent selection rather than reporting success
+> >>> from a descendant request.
+> >>
+> >> I don't think all this is necessary to address the problem described
+> >> here and in the cover letter.
+> >>
+> >> IMO a new provider API is the wrong layer. The framework already has
+> >> the hook a provider needs: the rate change notifiers. What the core
+> >> should do instead is fix those notifiers, which do have a few issues.
+> >> You are fixing one in patch 1. Another fix, about setting the parent,
+> >> was sent recently:
+> >>
+> >> https://patchwork.kernel.org/project/linux-clk/patch/20261021-submit-clk-parent-abort-v1-v1-1-2936181822fc@gmail.com/
+> >>
+> >> You want to act on some changes before anything is programmed. PRE
+> >> notifiers are the right tool for this. The user of this change in
+> >> patch 7 could use them AFAICT: PRE sets a temporary vote, POST settles
+> >> it, ABORT drops it.
+> >>
+> >> Also, what is acquired here follows the requested clock. When an
+> >> ancestor switches parent, the chain of its new parent is not acquired,
+> >> although it feeds the whole subtree after the switch.
+> >>
+> >> With notifiers, the parent fault state is not needed either. As it is,
+> >> it blocks every request on or below the clock until the same switch is
+> >> retried.
+> >>
+> >> Could you tell me what you need from this approach that cannot be done
+> >> with (fixed) notifiers?
+> > 
+> > I'm a little worried about the ordering there, since some device
+> > drivers may also be registering listeners in parallel, so we don't
+> > get a clean split of what PRE means ("has power for sure " or "may
+> > not have power")
 > 
->   swapper/0/0 is trying to lock:
->   ffff000b67201018
->   (qcom_spmi_pmic:259:(&spmi_regmap_config)->lock){....}-{3:3}, at:
->   regmap_lock_spinlock+0x20/0x40
->   other info that might help us debug this:
->   context-{2:2}
-> 
->   Call trace:
->   regmap_lock_spinlock+0x20/0x40
->   regmap_raw_read+0x88/0x328
->   regmap_bulk_read+0x10c/0x340
->   adc5_gen3_read+0x38/0x50 [qcom_spmi_adc5_gen3]
->   adctm5_gen3_isr+0x90/0x130 [qcom_spmi_adc_tm5_gen3]
-> 
-> There is no requirement for any of the work done in the primary handler
-> to run in hardirq context. Drop the primary handler and move all the
-> actions in it to the threaded handler, which removes the invalid wait
-> context warning.
-> 
-> Note that both handlers used a local variable to hold the index of the
-> SDAM whose IRQ was triggered ('sdam_num' in the primary handler and
-> 'sdam_index' in the thread function). These are the same value under
-> different names and 'sdam_index' is kept now, since that is the name
-> used for it at other places in the file.
+> Do you have any thoughts on this? I'd like to proceed with this
+> series in one way or another.
 
-But this is not the point. The point should be semantics of the variable
-and not frequency of use.
+As I have replied before, if there are things to fix in notifiers, we surely
+can discuss it but, at the moment, I don't think the complexity of what you
+are proposing here is justified.
 
-...
-
-> -static irqreturn_t adctm5_gen3_isr(int irq, void *dev_id)
-> +static irqreturn_t adctm5_gen3_isr_thread(int irq, void *dev_id)
->  {
->  	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
-> -	int ret, sdam_num;
-> +	int sdam_index, ret;
->  	u8 tm_status[2];
->  	u8 status, val;
-
-I probably missed to point that at the same time we can split semantically
-different variables.
-
-	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
-	u8 tm_status[2];
-	u8 status, val;
-	int sdam_index;
-	int ret;
+Please allow some time for Brian to have a look.
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
+Jerome
 
