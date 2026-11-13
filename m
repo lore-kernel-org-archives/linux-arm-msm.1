@@ -1,76 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.110
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794575112;
-	b=dpOP7LJ4wQG2sq5uAtdAPcK44GdFXT4+Ro0xS7bOAlYfgI8ymFhFzQ6l2PxFymqy6oDM
-	 6s37wgvP3VWPPbPjnVOqgLqx4GiJ16aM7z8kcyXis8Z5rW1Wk/kYTsxG6Jz9hf69qIT7L
-	 RoxHDB1MM5uuH3qJFO9lccHOSywUNWNymKEbMo43iaQkesMCYajJYhvAoM5U51AewbQhj
-	 f0Sn8zO+cBY2Me/u+kiRQbyiExkGNFPu+4/RJwEcnt64c9JVvt4j/gnG7o+TUXuEyKYyI
-	 XTa4Qti966gp9/bfdOhgvfwfUBHkaen/VnJm7BPYw4IxI2UAL/p1wo2JbomtHq9GmsA==
+	t=1794575363;
+	b=GF4kyHD3XYcIWMyXe4IYHnlK9DdpxC44hKLKLaDZfJFTxCRFrL2RVWg6E26kFuTDUqng
+	 I6suYiqiwRELz6o9+Sv3Xj/AXXiK3rEW/TCLRRDot0dMhaisTPAyfvk9cwTCdNJRc4Yyo
+	 X5rpaVoPfHDxc9q8Z624LkDvt+zsL6FhXTyV1XNbjPzBMovxah86gp1CV3m/+ER39uoh+
+	 p4hafjxh0IaP+Nb+tySFJ6nfDhyQiPjtdKyx7P4Wzd/8VS6hhWVeSF+4wXDNGn4QAFSM7
+	 uNRgv459F4znRlToYmA/+icAHiJqaZHYeWGN05hTCEC0ps8Kqnma2gGnnzPz62z1+3A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794575112;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=sBw3P7XEecuUSrnOX7EuT/qRSUKWDAXXiFgzDBf5980=;
-	b=ax4mn1jRqzxQkNGiwLOFyhQahZLWqtZGtWqDH5MqFJtWRHWJdxJu3VG6rD7xyLZJyI50
-	 Zy2Pg15DAPe25w1Ju7qFIJopGpt4/9Qgdh2IsvSV0nBtlqgNYC3/ktY1s/dQj5+QE0jUF
-	 ksm4baQlJBNu6B36mfe5tgLF3S0gstfj6p3CxwnIcb0damz7AhcAAw/2oDbObuNxdIeA2
-	 +412Dv/zGR1ZJTnlh4EhDdQVydZC3mWPnrEw6UHt9ri+O0zUaSo38toqnIArYV1HjCeip
-	 pOR4sEH4JX1lCZy+t5dFBvyFU9Q8/y8h+ONufWVHLKnFoCq/x9QnTcLzJoDvik9OtBg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794575363;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=TgkZPDfiJjMh2J8e/Fv34yjDTX8rPL0Qo9+0DabzE0k=;
+	b=ugxPtrnaH4SE7cplroTIHnX4n4ol/J7imN4Kos0ux1xEJiaIxtk87v9z3TXYbT6FeP/I
+	 hTNYv+Zv1kpxnn5QTjjLt6W8/STEXQvuVRh1vDcXQxioCA4PH8xu0vUlgPdB/8rEHIp2M
+	 dpb9+ILJ8jnhNYNcQZXhZaxUdZzMbOR2Ok3u+0PuMKinGCspIri3qJD8Q1oMro+TNHE4A
+	 6hmVPwIsnDNW/FyRnKAk8wIs6ITHN8J72H9uz40IIBGcWMOaRJ7VsVYEhPpo6yw1w89At
+	 KFDtXRQf15ns/XwRE7p8pvVsQK5sOZ4kU69eCF9qxOSwZWyavzKq5FsZokVFfdq1cQg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gondor.apana.org.au;
-	spf=pass smtp.mailfrom=gondor.apana.org.au;
-	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=BG6GxORi;
-	arc=none smtp.remote-ip=180.181.231.80
-Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=NwTvgcSx;
+	arc=none smtp.remote-ip=95.215.58.110
+Received: from mta1.migadu.com (out-110.mta1.migadu.com [95.215.58.110])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47819606A88F;
-	Fri, 13 Nov 2026 13:05:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47819606A88F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AD82606A327
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:09:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0AD82606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=BG6GxORi
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
-	from:content-type:reply-to; bh=sBw3P7XEecuUSrnOX7EuT/qRSUKWDAXXiFgzDBf5980=; 
-	b=BG6GxORi3Hgn6fmiF3iJoLXnALrcRu7/DWSuWkLSjwtM14z1LDCE9Pk+ohHHk7Rw3LKZ6mI6G9o
-	vLbHQV1Dg3af3NiYd5QQpUFvjTVoz+W9pHNiX8eA531UB4Gu4oxChZRqjaMrqpmYCFI9lDTIxa7i/
-	IDPl+d6U6zkc5sMVwafPfqRM4zeeqZIECnDDJ4gQIDsC/OcYv7Y29VsS4EWmtT3GYFgSQhLYQ9k7m
-	HTEhtyrfTmMVgrXiqaB5B9CpIkkf6E5oIvC79IjGm/g2jLc5gTFI9Q+lP7bZlY5EIYEBknZm4oCDK
-	jaICX6gwvaTmuWHOrMgW2evLXVqir8trjFwg==;
-Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
-	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
-	id 1xRqxO-0000000EfDG-00ou;
-	Fri, 13 Nov 2026 21:04:43 +0800
-Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 13 Nov 2026 21:04:41 +0800
-Date: Fri, 13 Nov 2026 21:04:41 +0800
-From: Herbert Xu <herbert@gondor.apana.org.au>
-To: Frank.Li@oss.nxp.com
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Jia Jie Ho <jiajie.ho@starfivetech.com>,
-	William Qiu <william.qiu@starfivetech.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	T Pratham <t-pratham@ti.com>, Thorsten Blum <blum@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>, Pan Chuang <panchuang@vivo.com>,
-	Maxime =?iso-8859-1?Q?M=E9r=E9?= <maxime.mere@foss.st.com>,
-	"open list:CRYPTO API" <linux-crypto@vger.kernel.org>,
-	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:QUALCOMM CRYPTO DRIVERS" <linux-arm-msm@vger.kernel.org>,
-	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
-	imx@lists.linux.dev, vkoul@kernel.org
-Subject: Re: [PATCH 1/1] crypto: use dmaengine_desc_set_callback()
-Message-ID: <avcK6e1eMqcyW66R@gondor.apana.org.au>
-References: <20261102164538.3834039-1-Frank.Li@oss.nxp.com>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=NwTvgcSx
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=n6h5sbKyK6McEKrI8Ar5CJ+toQhqjA8M6q8V8BhhvW4=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1794575360; v=1; x=1795180160;
+ b=NwTvgcSxn8AY/+67Sg7b8RjgRni0YoEnbPQBc4O24To2nFZI+ytKa0ofJpRPTyFB9EeHpfmI
+ 4wsQY7tOPf8QsbAPViKs6kyQygdtrzYZ4xqRkEj99iCNV+LlppDKrrU3vMGmhJllmrUj3JjgBBw
+ wdPnOWLkBjMtRCsqR5+tsaXGyfjTRwjowK2ZSy5eeVIRcGa1M1vlPSSgbaeZfumWe0JiRK12wmr
+ Dss1LW32CT0P09CjGXidT7Ua00bRbzoT2t1Vm35817v0YW+joxkVsh2g6JIsjbCTwkxY739jMOz
+ lNI5nsBPz/8bYUjUJytvfq6l7Kr6xuDduiwgj9xWgQ2bQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id c0668823f57e9852;
+	Fri, 13 Nov 2026 13:09:19 +0000
+X-Mizu-Trace-ID: c0668823f57e9852
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <e2f89f72-be30-495d-99c8-828cd170ce50@packett.cool>
+Date: Fri, 13 Nov 2026 10:09:13 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,40 +60,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261102164538.3834039-1-Frank.Li@oss.nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] arm64: dts: qcom: sm7225-fairphone-fp4: Wire up
+ PM6150L LCDB
+To: Luca Weiss <luca.weiss@fairphone.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org
+References: <20261113-lcdb-enablement-v1-0-1dc40b49ed82@fairphone.com>
+ <20261113-lcdb-enablement-v1-4-1dc40b49ed82@fairphone.com>
+ <DMU3O9G3L6PD.2CE9WCHR9LV0J@fairphone.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <DMU3O9G3L6PD.2CE9WCHR9LV0J@fairphone.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 02, 2026 at 11:45:30AM -0500, Frank.Li@oss.nxp.com wrote:
-> From: Frank Li <Frank.Li@nxp.com>
-> 
-> Replace open-coded assignments to callback and callback_param fields
-> of struct dma_async_tx_descriptor with calls to the
-> dmaengine_desc_set_callback() helper across various crypto drivers.
-> 
-> No functional change intended. Prepare make to struct
-> dma_async_tx_descriptor private to the DMA engine.
-> 
-> Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> ---
->  drivers/crypto/atmel-aes.c            | 3 +--
->  drivers/crypto/atmel-sha.c            | 6 ++----
->  drivers/crypto/atmel-tdes.c           | 3 +--
->  drivers/crypto/img-hash.c             | 3 +--
->  drivers/crypto/omap-aes.c             | 8 +++-----
->  drivers/crypto/omap-des.c             | 5 ++---
->  drivers/crypto/omap-sham.c            | 3 +--
->  drivers/crypto/qce/dma.c              | 3 +--
->  drivers/crypto/sa2ul.c                | 3 +--
->  drivers/crypto/starfive/jh7110-aes.c  | 3 +--
->  drivers/crypto/starfive/jh7110-hash.c | 3 +--
->  drivers/crypto/stm32/stm32-cryp.c     | 9 +++------
->  drivers/crypto/stm32/stm32-hash.c     | 3 +--
->  drivers/crypto/ti/dthev2-aes.c        | 9 +++------
->  14 files changed, 22 insertions(+), 42 deletions(-)
 
-Patch applied.  Thanks.
--- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
+On 11/13/26 9:59 AM, Luca Weiss wrote:
+> On Fri Nov 13, 2026 at 9:16 AM CET, Luca Weiss wrote:
+>> Since Linux has gained LCDB support now, wire up the LCDB regulators so
+>> we can turn them off and on as desired.
+> Actually after some more testing with extra patches, it seems that on
+> FP4 the touchscreen stays dead after toggling the lcdb regulator, while
+> on FP3 it works perfectly fine.
+>
+> So please ignore this specific patch for now, I will figure out what the
+> problem is and re-submit. All the other patches in the series are still
+> good to go in!
+
+Your touchscreen needs to be a drm panel follower and/or reference the 
+same supplies as well :) Most modern touch controllers are part of the 
+same physical DDIC as the actual display side
+
