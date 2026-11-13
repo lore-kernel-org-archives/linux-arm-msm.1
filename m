@@ -1,47 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=180.181.231.80
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794574823;
-	b=v5UIAhDHWUV9aSaKwCEofP21TzVgUwnr7/e5pJRTnTK52Xo/TwfNGFunYQZgXnDzIIdh
-	 YpKepxCnxwPgiDbHWnOa/TDxaRLyRAKCIheHWz/Jn/EjBwwKib3wMB5UKKtiCRBOHi0v7
-	 FsfUgk4htCtgqJUco7wMKA+zl3BtcvKYd7uzfT3Jq7Crto08OKIiCpn4+ktqnKAgcc/So
-	 grr4tQ3K/LUmNAgGk5p6k11wzi8I5X1iigDd28lFBqtySNG2yOLgA0fUptO29QnCWksII
-	 9ggpnfCepjs9C1H00DIw0DRAr/xubLTiUytR246zjzJbGnBsDBp6xaHH3X+yLCxuhBA==
+	t=1794575112;
+	b=dpOP7LJ4wQG2sq5uAtdAPcK44GdFXT4+Ro0xS7bOAlYfgI8ymFhFzQ6l2PxFymqy6oDM
+	 6s37wgvP3VWPPbPjnVOqgLqx4GiJ16aM7z8kcyXis8Z5rW1Wk/kYTsxG6Jz9hf69qIT7L
+	 RoxHDB1MM5uuH3qJFO9lccHOSywUNWNymKEbMo43iaQkesMCYajJYhvAoM5U51AewbQhj
+	 f0Sn8zO+cBY2Me/u+kiRQbyiExkGNFPu+4/RJwEcnt64c9JVvt4j/gnG7o+TUXuEyKYyI
+	 XTa4Qti966gp9/bfdOhgvfwfUBHkaen/VnJm7BPYw4IxI2UAL/p1wo2JbomtHq9GmsA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794574823;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=XC1S22UbkTI9Hs3X5FcI1GncSQzwIasUhPAH3Atb5hw=;
-	b=diXcP/8Qp5m/XURw8SyWZkNuVXMufC6UPLgKFF5+gxlqwatgUYZ6T+0iRsb87s15Dced
-	 0dmo08LkDtUEJczIj33fvfOKPNFD2R3fN2b0ZcXLYA1FmTD7sOJnmE7SEyzkByrOeIM60
-	 1KOD7xRyE/NP/0MlX1SqMOZmkm9O0V21drmdVAVIs7zps7yBHWzMuEQyVjXXKo8q84+8J
-	 dNuwygV6uszoZfhhpMi+GnsWx1CHTep87utb6DCAUondDCbOMUrafMdfVhlNmor9dK4sT
-	 OU22t8eiNUDEtzGy6LaDjEomouNJ5n1LAJ+bWCFTR15hXh/KHQzD3ju2umK4FQ7f3HA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794575112;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=sBw3P7XEecuUSrnOX7EuT/qRSUKWDAXXiFgzDBf5980=;
+	b=ax4mn1jRqzxQkNGiwLOFyhQahZLWqtZGtWqDH5MqFJtWRHWJdxJu3VG6rD7xyLZJyI50
+	 Zy2Pg15DAPe25w1Ju7qFIJopGpt4/9Qgdh2IsvSV0nBtlqgNYC3/ktY1s/dQj5+QE0jUF
+	 ksm4baQlJBNu6B36mfe5tgLF3S0gstfj6p3CxwnIcb0damz7AhcAAw/2oDbObuNxdIeA2
+	 +412Dv/zGR1ZJTnlh4EhDdQVydZC3mWPnrEw6UHt9ri+O0zUaSo38toqnIArYV1HjCeip
+	 pOR4sEH4JX1lCZy+t5dFBvyFU9Q8/y8h+ONufWVHLKnFoCq/x9QnTcLzJoDvik9OtBg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KJOWmu3j;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=gondor.apana.org.au;
+	spf=pass smtp.mailfrom=gondor.apana.org.au;
+	dkim=pass header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=BG6GxORi;
+	arc=none smtp.remote-ip=180.181.231.80
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD875606A32E;
-	Fri, 13 Nov 2026 13:00:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47819606A88F;
+	Fri, 13 Nov 2026 13:05:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47819606A88F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KJOWmu3j
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FBCD1F000C4;
-	Fri, 13 Nov 2026 13:00:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794574823;
-	bh=XC1S22UbkTI9Hs3X5FcI1GncSQzwIasUhPAH3Atb5hw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=KJOWmu3j5FHk5Ozuxx29WamfDOFUe0FP05+TjrWRExS8GQ3Y5JM5kjaj8b4AfgFMT
-	 a/xlIVbn+b9E5NnUGMiywqYJ46J8DyUrku0+0oS6XzNF2WOMibOxqAuEX3d9Vd7RJG
-	 Xrbf0qfq9u8+QncOr41Q3cIf1mjD/l2rt5o6P+A92VDCiY1Ms+FVoaOQwEFj+B8+AS
-	 5pUXc2wdcQxAXbgYNHQPT3JRq6/t2WXRJSmO4/NY/Z42N2/hzZ6Bry9KeqPIX5JYOo
-	 q3VZiJmzeP4024Zh4/aP84/zhhGaPcPMh278dt3+fxmPy533CvDCKEdginokn3+/+J
-	 f+HGYpO8x7dsA==
-Message-ID: <290eea3b-a4c9-40d4-876e-395cefa4843e@kernel.org>
-Date: Fri, 13 Nov 2026 14:00:16 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.a=rsa-sha256 header.s=h01 header.b=BG6GxORi
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=sBw3P7XEecuUSrnOX7EuT/qRSUKWDAXXiFgzDBf5980=; 
+	b=BG6GxORi3Hgn6fmiF3iJoLXnALrcRu7/DWSuWkLSjwtM14z1LDCE9Pk+ohHHk7Rw3LKZ6mI6G9o
+	vLbHQV1Dg3af3NiYd5QQpUFvjTVoz+W9pHNiX8eA531UB4Gu4oxChZRqjaMrqpmYCFI9lDTIxa7i/
+	IDPl+d6U6zkc5sMVwafPfqRM4zeeqZIECnDDJ4gQIDsC/OcYv7Y29VsS4EWmtT3GYFgSQhLYQ9k7m
+	HTEhtyrfTmMVgrXiqaB5B9CpIkkf6E5oIvC79IjGm/g2jLc5gTFI9Q+lP7bZlY5EIYEBknZm4oCDK
+	jaICX6gwvaTmuWHOrMgW2evLXVqir8trjFwg==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1xRqxO-0000000EfDG-00ou;
+	Fri, 13 Nov 2026 21:04:43 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 13 Nov 2026 21:04:41 +0800
+Date: Fri, 13 Nov 2026 21:04:41 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Frank.Li@oss.nxp.com
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Jia Jie Ho <jiajie.ho@starfivetech.com>,
+	William Qiu <william.qiu@starfivetech.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	T Pratham <t-pratham@ti.com>, Thorsten Blum <blum@kernel.org>,
+	Frank Li <Frank.Li@nxp.com>, Pan Chuang <panchuang@vivo.com>,
+	Maxime =?iso-8859-1?Q?M=E9r=E9?= <maxime.mere@foss.st.com>,
+	"open list:CRYPTO API" <linux-crypto@vger.kernel.org>,
+	"moderated list:ARM/Microchip (AT91) SoC support" <linux-arm-kernel@lists.infradead.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:QUALCOMM CRYPTO DRIVERS" <linux-arm-msm@vger.kernel.org>,
+	"moderated list:ARM/STM32 ARCHITECTURE" <linux-stm32@st-md-mailman.stormreply.com>,
+	imx@lists.linux.dev, vkoul@kernel.org
+Subject: Re: [PATCH 1/1] crypto: use dmaengine_desc_set_callback()
+Message-ID: <avcK6e1eMqcyW66R@gondor.apana.org.au>
+References: <20261102164538.3834039-1-Frank.Li@oss.nxp.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,76 +80,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] arm64: defconfig: Enable PCA9685 PWM controller
-To: Mohit Dsor <mohit.dsor@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Florian Fainelli <florian.fainelli@broadcom.com>,
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com
-References: <20261113-draco-evk-display-v1-0-28a19c6aea87@oss.qualcomm.com>
- <20261113-draco-evk-display-v1-4-28a19c6aea87@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261113-draco-evk-display-v1-4-28a19c6aea87@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261102164538.3834039-1-Frank.Li@oss.nxp.com>
 
-On 13/11/2026 11:55, Mohit Dsor wrote:
-> Enable CONFIG_PWM_PCA9685 as a module to support the NXP PCA9685
-> 16-channel PWM controller used for backlight control in the
-> lemans-draco-evk LVDS panel overlay.
+On Mon, Nov 02, 2026 at 11:45:30AM -0500, Frank.Li@oss.nxp.com wrote:
+> From: Frank Li <Frank.Li@nxp.com>
+> 
+> Replace open-coded assignments to callback and callback_param fields
+> of struct dma_async_tx_descriptor with calls to the
+> dmaengine_desc_set_callback() helper across various crypto drivers.
+> 
+> No functional change intended. Prepare make to struct
+> dma_async_tx_descriptor private to the DMA engine.
+> 
+> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> ---
+>  drivers/crypto/atmel-aes.c            | 3 +--
+>  drivers/crypto/atmel-sha.c            | 6 ++----
+>  drivers/crypto/atmel-tdes.c           | 3 +--
+>  drivers/crypto/img-hash.c             | 3 +--
+>  drivers/crypto/omap-aes.c             | 8 +++-----
+>  drivers/crypto/omap-des.c             | 5 ++---
+>  drivers/crypto/omap-sham.c            | 3 +--
+>  drivers/crypto/qce/dma.c              | 3 +--
+>  drivers/crypto/sa2ul.c                | 3 +--
+>  drivers/crypto/starfive/jh7110-aes.c  | 3 +--
+>  drivers/crypto/starfive/jh7110-hash.c | 3 +--
+>  drivers/crypto/stm32/stm32-cryp.c     | 9 +++------
+>  drivers/crypto/stm32/stm32-hash.c     | 3 +--
+>  drivers/crypto/ti/dthev2-aes.c        | 9 +++------
+>  14 files changed, 22 insertions(+), 42 deletions(-)
 
-git grep lemans-draco-evk
-Also there is no such file, so maybe you want to use full model name?
-Qualcomm foo bar?
-
-Best regards,
-Krzysztof
+Patch applied.  Thanks.
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
