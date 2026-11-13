@@ -1,85 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794596640;
-	b=4sbTCzNIBVJRprkpAcHwjkJbWCUHdIv2tgjm5cIs81vgVO5bmVefmAdjrfDpRcmPtxFN
-	 z1eWHfYxumE3LkqHLourd/mSYv92wXM5G11QRRoTLrC/K/NuqKjtmolM+Mf+Sju/YGEHc
-	 +OotcF/fRhzrq9s3sTlk/+/LWVRk/afcFeIz837EoILYzpHJXfltui0lLjdMaGWjLV6YY
-	 H2f4RUXuPwc04zjm4YB5hEg9RP54CUmWD7dTsvlorDbrLaSXf8f0SK38rgdF2X7vJRX52
-	 ZlmfGNv2kcPwbrUx98vlpAv8oPnOfn8nESloLABNokuzcq8t23Jrket2lH7RT0gWFqg==
+	t=1794596758;
+	b=K45526nVsmeIhRG2u67dDYdMQixnzMj8vnPWTgBN5uryqGadoRy2KhMBoNGiw2Mnm16l
+	 VlyPDvyMyZ44nr49pYOPTrDqz23PyXdikPja82qIJunoOGKQQqTL73G8Cy+m23yjaC1Np
+	 ThoMBOGvEmaO+5QmDZqceBr0sB+1EiraQgJsSVT1FG5Nnw15tJUUfS4a8rulje93oWNhm
+	 PLwSU54lG3hQs3N9JIBf1ktA/PtxvpQZt7ApXwSWd/N8oYF2JbDKFbYaMf2SI5d80rOhK
+	 ovFXoggnxffxktaH4WutRtRBuUoqGp6kY15S3G+eFVRcbUPRoK4FfUc8vhmItBJ0Ztg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794596640;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794596758;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=5v4390+5+0gQiMHK1KicuB/Gp64Vkth2gdQzKankJ34=;
-	b=Z6q0vNqr9D+XHS6xGcZV4TNt0dLgVjBOJfg9jGwAgtjztixz3+ohhS/1L6veSgzM8pSk
-	 MUo0oPG9W2v05UoIJM9D7odPTddULIvYvbN5fGDqu/T6fZcQ6hPtaWpgLoFutAN4Cd1RC
-	 DD76H9Ml3+sNJJdqWYHKj3IZIeuZF3tK+WL4S8TL245BO0LIVkpIxPdJp6lTNATnyyqnf
-	 2kUjpz3b4leubnNtIE0nvXzQY+z2nP1fi9gW1w2Tyfx23HwCZaZRBb8WzPW5XlS3/fBaz
-	 4mLmy1kU0aHFj695ob72gzM9jQ+mNT0PaFH7/AAlcZCoDklW5MPSs2w2FnV5OVZCaHQ==
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=IRMABT5sMDAiNtPTGVEgBO064GSIu27fmFheEbmfxO0=;
+	b=gZSNVeU77z9WdGa5USULDF/+6Ydpg6AG1Jiq3thKhAbgRraIFeC1iGegRX/a6RsLqJCG
+	 mKiHzzG+oHXlsrVnBV4Ljl0CYQf+Tk61HWj1mgayMd7jVFI2VMhyfr9bztPyssck7NegY
+	 r7voFhPBrUgHuCqtgMTS+5PRE7X1fjQQvHY82an087OqzXQV9S84K+smlJP5eVZY9eMTm
+	 tpXxqNqk6SHpj/6ltldoOsQoDHgrto7tuEQjbQs3lcwzqTqIi8o5DcDSgJHvJnOaYggAl
+	 L98uvtScZwfsvsgaqRt4CBTRbof1X9ctW0kLSjgt2HWfFvfafRwdmokNAO5wAX5SO2Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ieee.org;
-	spf=pass smtp.mailfrom=ieee.org;
-	dkim=pass header.d=ieee.org header.i=@ieee.org header.a=rsa-sha256 header.s=google header.b=OBl7H+i6;
-	arc=none smtp.remote-ip=209.85.219.44
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=naturzKn;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=D1SmIDf6;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7336E606A887
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:04:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7336E606A887
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ieee.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ieee.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66251606A32D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:05:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66251606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ieee.org header.i=@ieee.org header.a=rsa-sha256 header.s=google header.b=OBl7H+i6
-Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-91e8a05ec5aso27611146d6.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 11:04:00 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=naturzKn;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=D1SmIDf6
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ADJ1rPJ1085624
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:05:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	IRMABT5sMDAiNtPTGVEgBO064GSIu27fmFheEbmfxO0=; b=naturzKns/Ro24Ut
+	42kO1hKMZb39rcdjc/j+jUi5OossdXeht+2JJb9mkcTOmi9HGwyczRA4363X889O
+	LCSCjUOJWqEU3Gie3i8r+lBPGt3oW1xsAo8CXA4Wn3Sq6xzqWWCQ/+tJUHQzX9Tl
+	eoiSoopRd8HdnULH127qu9iWTHq9aINfRw3PiFrmyiscHxbrrr/mXpvdTJTPpRAu
+	MjMIzXrxEehOQI0KBKCEPnWFhEjuvR+yg+9mcXA4o7AsD1YvsrSNcX1ACyzi5M1C
+	U1iqf89Tf9ZMr+zL3DshxqCz096BDZtNrr4KaTAEHp3SJ08ndImHL/JnLJRGq2Y5
+	TNdi2A==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwvjaatxk-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:05:57 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-37549877380so1646851eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 11:05:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ieee.org; s=google; t=1794596639; x=1795201439; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794596757; x=1795201557; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=5v4390+5+0gQiMHK1KicuB/Gp64Vkth2gdQzKankJ34=;
-        b=OBl7H+i6ZwCYqyZENMFkOks9QMvP3Q1O5CrDefd7QEnoWxR7Gzg2PWplPwjprGwO9m
-         ONLcl2A+SicRV5yCDWOMiHwCcJzaUmNARnD8racf2rem5cydfXkKMyTLGas/HjHQXhp0
-         TTMH+rLW9ObkrPLd+QQ+P9H/NwQsFwau/hQwA=
+        bh=IRMABT5sMDAiNtPTGVEgBO064GSIu27fmFheEbmfxO0=;
+        b=D1SmIDf6Oma65ySp5zJ3r+77cHhai2Qam6WZ4wV+ae2yiDrGtwH8Df8JDbKid/64r/
+         hGfscZ1xdLioYa8LS70b7MwI0JilsZZcQZKreJYHtlKHNPTcDHBQWPoD5MNlHyI0Volb
+         0r1JbqikeHvIL8bybnvb+G78V5FBN14W0NGI2JXjTeOedKQuoPPy6rLQ16JMOa0rBY8K
+         Nnta1EhovAORwKsEEUWqn6ohxi5MvrfIzxsh029UbZjzvaYPQBwuiwm8wRNCabYx6OXC
+         WBULmkpVZLeEEWF1YgtSt+dKO3fPHzIWSFP84ie9tZQyBh6rkRpl79n+Jgeii5mmBBN4
+         udHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794596639; x=1795201439;
+        d=1e100.net; s=20260707; t=1794596757; x=1795201557;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5v4390+5+0gQiMHK1KicuB/Gp64Vkth2gdQzKankJ34=;
-        b=2iw43mJtyrMCryFMAl5D2daEjFHvCgT2IjcmMua0spAzQAbJkM1Q64ueKhyT/2z5EY
-         EaLVa5eMLCIoa20OfYpUp73u2QOESLORgyRWFqB1d+6qGa++nFPM9rGeTMAaGxY8S+dW
-         fRyw7QoTi0Mu5dWsFVT+ctA5VZ54m041RE7QEkmvXFLoOBnLaM3bcQ2yaedtysqdbk0r
-         UuJK4Qcpthe5T/CiCB7LrtUe+w62AEGhnlJNomGlsOMYtTKacyxMOcMMcfqHSIf9lcmu
-         VactBBT+XHthrokjlPMueST1F/Bq5DByDm2VCiZCQM+syFIjDXsiidCNuF7t+fr5M/mo
-         disA==
-X-Forwarded-Encrypted: i=1; AL+hErGDNBZFHPS/0tdKsStaVgI30SIM6ifz60WkmbMD86pJMWxAC5DuhTsQL+ZyjI0spGa3Ucid6FwrdMsR+FHF@vger.kernel.org
-X-Gm-Message-State: APuU4Z+ZEqnK8Q/IWObikWkwV6mysV92eeDS0EVUhvhLdiLVJwp6V3O1
-	Sr+KeI8aoFdObHmw5I3i+nbmDxVaBSnqXfnVj63UnLCjT8+u8xd3usPWwuW8W4omcA==
-X-Gm-Gg: AYBFou2PjYGlvYtT8DEwV1fu2cpm3UoHGlHpSxKkJT70peu4m0Feq1vDIddX+GHNUY4
-	uD0uab27ecA+oFMK0Vi2cTXE+DEJes9qIfJtvKnXXeotiVoJQ8R8vixUFS7Siyf+LLUOiwfeMlc
-	Frigje3a4MnPgaCL0qviK+RNBhPHG4Cru1cxUfLOPszNWZx9y1Nk87wJNXtaqcATKnEevOElNRU
-	ghyRYNmTnp5wRU07TJyfSQwirgjbLLMUx96VUSQHaWEVx2uLFPFIIiATZ7Sm8BVjpqgu8fizHb9
-	2Yuuvq75/AQ/4m1ozX7nZwH4p0bzFsKP3fN4Sa6baUm9QZl9kP13htl++8g0bnntFXN4tr40a0Z
-	558j69J/WDmCQli+NDEmbwPoCOhViWdgpzFeBMQUSNSEkolVHVfkMta+NoY5ool9dhWpGRkwkTP
-	cwjbNcs87uNHWt1suQJ+UtpIXSlCwr4M9d4xln9O3DPqW1FrKniyqp211uQbei3Xpy7SIpMaf/g
-	6icmpuHI3Iz8HoaxO4YohGjH3YJJ06cPD+ym1/DuKrkpiIAB9AZMALVD2trPARj+2X9VGG1imyR
-	jZW3My8qffFk27FvWJJAsqAt
-X-Received: by 2002:a05:6214:4409:b0:91c:74ce:a452 with SMTP id 6a1803df08f44-91f241ddd3fmr55479136d6.46.1794596639018;
-        Fri, 13 Nov 2026 11:03:59 -0800 (PST)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.googlemail.com with ESMTPSA id 6a1803df08f44-91f23d780e8sm27000686d6.27.2026.11.13.11.03.53
+        bh=IRMABT5sMDAiNtPTGVEgBO064GSIu27fmFheEbmfxO0=;
+        b=D+geWLtHj/i3xRcrL99IyVkUdprAIr1XBor+niHvqpVdiOd1MvpwSnl7SJZFfq0/EL
+         VJ6NNjsLcfB4np0fxrArf+wcm2P7z2NRS6eMlT1UdcJb+iMNYm10dRdPEQwZMvwqLiBj
+         9R+YqO+QbwOJurxgwCcpj26TxS7RRI/YMk78ZBrJkUU2QJbmcFaGqRCCftawpworERUf
+         vDnWG+el/D63YCZZfSLDOzLTIVJtGz2hl+KB4mZk9o+8k9+qrzIxyjCn2YESJ8/3j/kI
+         p4v+5A20YOB30eChTwnAlGrmd4LeuujHxhTfs3H/7akXvNrh8l/9U08GA9bKC+pac+c+
+         bmuQ==
+X-Forwarded-Encrypted: i=1; AL+hErFEjZn68GKgfgBakslRnLlOpvDXcmguQXy3948pANSEVHRab8M/6mcBQG7+HdAVe66hOLkaEsJVjFrCDM0s@vger.kernel.org
+X-Gm-Message-State: APuU4Z9J8PVcx9o77aCdajJ/GvISeN2cQ87tLPB+1ZcdFbgw3rUfcEH8
+	jKZ37DzImELSmnJWtfeSt5jnhJbjU2uo3P7m8J5RVJGlyOzoxd66moUmocdpLRq5PbAlpNgFH6P
+	FiTmAhBqyHD9iwtlmP0XJ54gZkCERxeic3a7sbn5kzaVDCV9DAgLEhFEJyhpKqTgG3jMN
+X-Gm-Gg: AYBFou3y9IjSHiNmrnF2pIg+l93wZXi0cKNyYOCeJxNeaIBAss0M9CGndUueF4iY3qP
+	l5PZYXR7FKCvewsVWpM3RtHjmTnya1GxUBRccGBGSfOK1x2hc/e+8qfLLdPOivAl5EE5ystnxjj
+	LX7tFXprvT0S/lW9MJL2hWfUOou5RGgvcSWgdqlDWaRGFCo78HuKSoHyeyHoMVmHLm7W5v2AZg3
+	UuE0goin5RLK9eoifjlCsSvFGf9TD04fvGOyDom1rLyYM8pfyvfZH2QNyGmcI8VVatDh39XaGFQ
+	6rmIrn34KMvPolLSxy8a6DZdb4pIoN8RGA8A/EgXPbwvCNlIrDLp+uXPGsAW3qLq1MOcoOhWLRX
+	kUBZObPlvkGG0vVzQNP3FG0+h8ZY3g95coe983NV62rXWToe1+jNRUBwxJEP/uUU52mTsFMa/53
+	vp/4ySCXWg+tpqZJAMs8COK48=
+X-Received: by 2002:a05:693c:26c6:b0:36a:1cbc:1093 with SMTP id 5a478bee46e88-379684b548bmr2697352eec.30.1794596756845;
+        Fri, 13 Nov 2026 11:05:56 -0800 (PST)
+X-Received: by 2002:a05:693c:26c6:b0:36a:1cbc:1093 with SMTP id 5a478bee46e88-379684b548bmr2697326eec.30.1794596756183;
+        Fri, 13 Nov 2026 11:05:56 -0800 (PST)
+Received: from [10.226.59.182] (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955332a77sm8616314eec.4.2026.11.13.11.05.55
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 13 Nov 2026 11:03:56 -0800 (PST)
-Message-ID: <1b84bbe8-28b6-4a74-af0c-5b9cfdd8b394@ieee.org>
-Date: Fri, 13 Nov 2026 13:03:53 -0600
+        Fri, 13 Nov 2026 11:05:55 -0800 (PST)
+Message-ID: <6b3fbc60-34ec-4b7e-bbc7-84a0ec5d496e@oss.qualcomm.com>
+Date: Fri, 13 Nov 2026 12:05:55 -0700
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,119 +117,86 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/9] net: ipa: migrate firmware loading to
- qcom_mdt_pas_load() and qcom_pas_prepare_and_auth_reset()
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Alex Elder <elder@kernel.org>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Jeff Johnson <jjohnson@kernel.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, Sean Paul <sean@poorly.run>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-media@vger.kernel.org, netdev@vger.kernel.org,
- linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
- linux-remoteproc@vger.kernel.org, Alex Elder <elder@riscstar.com>
-References: <20261113185009.157893-1-mukesh.ojha@oss.qualcomm.com>
- <20261113185009.157893-7-mukesh.ojha@oss.qualcomm.com>
+Subject: Re: [PATCH 1/2] bus: mhi: host: Add debug port personality switching
+To: Hongxing Xu <xing1989093@163.com>, Manivannan Sadhasivam <mani@kernel.org>
+Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261113122302.2174-1-xing1989093@163.com>
 Content-Language: en-US
-From: Alex Elder <elder@ieee.org>
-In-Reply-To: <20261113185009.157893-7-mukesh.ojha@oss.qualcomm.com>
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <20261113122302.2174-1-xing1989093@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: vFocD7-54X0p5JJ9CD8jJnXdv8hDEw1h
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA3NiBTYWx0ZWRfXyqg/7D2PvQ5q
+ G32h4P4FN+lcNIQ2RH9V0YG8NNqaDOag1WzrxZYnjmg82BOU1ZLWN0pQNtHhylsCNz/LnP6iQ/s
+ fwUPFUqbl3jrv1zvJX1c1j+K9hih6iA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA3NiBTYWx0ZWRfXwnugTcCq+41l
+ /hl6GJBmRtE5urvi53OptdnGi0un0JHEYv9me0HIkcRHDk0v91El0Xf4E9JFcdjO+NzrXnFzji8
+ ijzhdZMD86O9q+2OiMZRebiJmJ7QPi2M7p6ELFzjPfxuvY6H7ZZFn4QCSBOnahSYcgKkn+qL1kT
+ BoHw9WTyDH04Egt5nG9mJrxX49lTWVLB16yf8vRI4NcnKf+uy3w7+mefxjVe8XnsshVlRX6ti/m
+ +ePwPqlBG4mqMrkPCX0jAabgfzA8VeQm/s8kmbAqLQ1NX42GLjqmBd6VNJQ5jkUvwnlMOr0jw/f
+ bCTbaR0Uhf0fq/80wE0XbNIDhKwVj0nwM4K/IpauIjllwrjBnItLmtEjhsR7olz/bmi5J/1GIRU
+ G9I8akXvS2szCSKoe4VMdHx1ekcPo3anB33HEef+jB0fp44HvDlc2ZS8wj5M8YSHjIi8JBGoCHR
+ iq37c39tcFG3x3MaPCg==
+X-Proofpoint-ORIG-GUID: vFocD7-54X0p5JJ9CD8jJnXdv8hDEw1h
+X-Authority-Analysis: v=2.4 cv=AoN7T+9P c=1 sm=1 tr=0 ts=6af75f95 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=gG0Lje7BzgQcJ5p3n2kA:9 a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-13_06,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 impostorscore=0 bulkscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0 spamscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611130076
 
-On 11/13/26 12:50 PM, Mukesh Ojha wrote:
-> ipa_firmware_load() calls qcom_mdt_load(), which bundles metadata
-> initialization, memory setup, and segment loading into a single API that
-> does not expose a PAS context. Later it calls qcom_pas_auth_and_reset() for
-> TrustZone authentication, which is the intended behaviour. However, a new
-> qcom_mdt_pas_load() has recently been introduced that works with a PAS
-> context and can handle everything qcom_mdt_load() provides, along with
-> additional functionality such as shmbridge creation and retrieving memory
-> from the shmbridge buffer when the same remote processor needs to run while
-> Linux runs at EL2.
-> 
-> Replace the open-coded memremap()/qcom_mdt_load()/memunmap() sequence with
-> qcom_pas_context_init() and qcom_mdt_pas_load() and
-> qcom_pas_auth_and_reset() with qcom_pas_prepare_and_auth_reset().
-> 
-> Acked-by: Alex Elder <elder@riscstar.com>
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-
-I haven't reviewed the rest of what the PAS library does but
-I trust it does the same thing as this did before.  So thanks
-again for implementing the non-devm interface.  This looks
-good to me.  My ack is already present, but I'll reiterate:
-
-Acked-by: Alex Elder <elder@riscstar.com>
-
-> ---
->   drivers/net/ipa/ipa_main.c | 23 ++++++++---------------
->   1 file changed, 8 insertions(+), 15 deletions(-)
-> 
-> diff --git a/drivers/net/ipa/ipa_main.c b/drivers/net/ipa/ipa_main.c
-> index 14ac2d2faf7c..0a37741c2285 100644
-> --- a/drivers/net/ipa/ipa_main.c
-> +++ b/drivers/net/ipa/ipa_main.c
-> @@ -585,12 +585,11 @@ static void ipa_deconfig(struct ipa *ipa)
+On 11/13/2026 5:23 AM, Hongxing Xu wrote:
+> diff --git a/Documentation/ABI/stable/sysfs-bus-mhi b/Documentation/ABI/stable/sysfs-bus-mhi
+> index 8b9698f..1fe8510 100644
+> --- a/Documentation/ABI/stable/sysfs-bus-mhi
+> +++ b/Documentation/ABI/stable/sysfs-bus-mhi
+> @@ -30,6 +30,20 @@ Description:	Initiates a SoC reset on the MHI controller.  A SoC reset is
+>                   non-responsive, or as a means of loading new firmware as a
+>                   system administration task.
 >   
->   static int ipa_firmware_load(struct device *dev)
->   {
-> +	struct qcom_pas_context ctx;
->   	const struct firmware *fw;
->   	struct resource res;
->   	phys_addr_t phys;
->   	const char *path;
-> -	ssize_t size;
-> -	void *virt;
->   	int ret;
->   
->   	ret = of_reserved_mem_region_to_resource(dev->of_node, 0, &res);
-> @@ -615,24 +614,18 @@ static int ipa_firmware_load(struct device *dev)
->   	}
->   
->   	phys = res.start;
-> -	size = (size_t)resource_size(&res);
-> -	virt = memremap(phys, size, MEMREMAP_WC);
-> -	if (!virt) {
-> -		dev_err(dev, "unable to remap firmware memory\n");
-> -		ret = -ENOMEM;
-> -		goto out_release_firmware;
-> -	}
-> +	qcom_pas_context_init(&ctx, dev, IPA_PAS_ID, phys, resource_size(&res));
->   
-> -	ret = qcom_mdt_load(dev, fw, path, IPA_PAS_ID, virt, phys, size, NULL);
-> +	ret = qcom_mdt_pas_load(&ctx, fw, path, NULL);
->   	if (ret) {
->   		dev_err(dev, "error %d loading \"%s\"\n", ret, path);
-> -	} else {
-> -		ret = qcom_pas_auth_and_reset(IPA_PAS_ID);
-> -		if (ret)
-> -			dev_err(dev, "error %d authenticating \"%s\"\n", ret, path);
-> +		goto out_release_firmware;
->   	}
->   
-> -	memunmap(virt);
-> +	ret = qcom_pas_prepare_and_auth_reset(&ctx);
-> +	if (ret)
-> +		dev_err(dev, "error %d authenticating \"%s\"\n", ret, path);
+> +What:           /sys/bus/mhi/devices/.../debug_ports
+> +Date:           November 2026
+> +KernelVersion:  7.5
+> +Contact:        mhi@lists.linux.dev
+> +Description:    Controls which set of ports the MHI controller enumerates.
+> +                Writing 0 selects the commercial personality, in which the
+> +                channels that are only useful for debugging are not
+> +                enumerated. Writing 1 selects the debug personality and
+> +                additionally enumerates those channels, so that the extra
+> +                WWAN ports appear, e.g. one for the diagnostic interface.
+> +                Reading returns the currently active personality.
+> +                Controllers that do not describe any debug-only channel are
+> +                unaffected by this attribute.
 > +
->   out_release_firmware:
->   	release_firmware(fw);
->   
+
+Why sysfs and not debugfs?
+
+>   /**
+> @@ -381,6 +384,16 @@ struct mhi_controller_config {
+>    * @no_m3: Device doesn't support M3 state
+>    * @irq_flags: irq flags passed to request_irq (optional)
+>    * @mru: the default MRU for the MHI device
+> + * @debug_ports: Whether the debug port personality is active, i.e. whether the
+> + *		 channels marked with debug_only are enumerated. Controlled
+> + *		 from userspace through the debug_ports sysfs attribute and
+> + *		 applied by debug_ports_work. Zero-initialised, so a
+> + *		 controller starts in the commercial personality.
+> + * @debug_ports_pending: Latest personality requested from userspace, applied
+> + *		 by debug_ports_work
+> + * @debug_ports_work: Applies @debug_ports_pending from the ordered high
+> + *		      priority workqueue, so the device creation it performs
+> + *		      cannot race with a state transition
+
+Are these optional?
+
 
