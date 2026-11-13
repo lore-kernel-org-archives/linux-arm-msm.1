@@ -1,56 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.188
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794576588;
-	b=XsDI1E57Vwf6sDauHsLyIUA0gUBRxeRg1wmPxNHQFAJrF7JWGGNX/CeIBZvIuleOaDwA
-	 uWTNLYD3Q11F3zRVnfACdMQjgKWoTYzHCix50HsQBtjHOGCnoBzw/r2JdzCHOewtkiexC
-	 0FduiEDJPuZhrKNSXXxbOIKZYiuSh1ivQPkB2tqjk88dWFU0IkobEC82vduOq1MEgXbAD
-	 x0jrqCtEiKbXFVF5+ox5r5+Hub6HQDsZO3FtqW8IaqqfGhGTFh1EUwBT4LZZdWwndqCNA
-	 ejqf1eINOBCAt4dgVQq9FIfgnsPLe4MZv/Rhk2ZGmfijpAkucx+OJG2Lg0MSYrYJz9g==
+	t=1794577556;
+	b=i7Q+Ufw1koCdh9iIgsRTghC1NcGxrCKYi0Zlh9O+XyNrlfaPKccDKOLowaStOyl6OOf7
+	 1aUGaOwjChnMK2JdZQxSujLXJMomu6mnetYiUiMoA+idRwAdln8aeQqrAu3Im10XfVtSR
+	 IriafvAoHs65j4A+PbXA4MQQgbQCIaEDBBKuu3yQ2K0Pis01jfZAaA+sVw2kVgFu3pYWc
+	 u91I/SD/6Sae/9byKKNB8GOVCdEDfbjPuv96ZIz7ddeT1C+Obe0E3w5XIvYeSKd3QBdks
+	 Kc0ZQoylkXJqjTSGij8UblaCuay82BdlE+RzSz9zirumHQgxo15hs52CQsUnhI8fbsg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794576588;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=GovTyvydkVkQrCGZJ5TyYvPpzcYH6KA5p9NlJ4kAQIs=;
-	b=fJf3eVlgGGY57aGje1RYAlYvYa83XbpxtDdb8OCyvKp2lEVQRMIIRRter6rtcOrhNGMI
-	 VHxfNR4wgkDYQkW/2S5ZxXgc3pBO07/3rn+fgLkwJ4khe601demtSmCDfcLxy1YROpfsD
-	 p72bLkFfh+YyD+Il4JyFZBEFIGxjNGlSZIrghPf622BJccOApConB/iQb7Mjwas5e+pKe
-	 7QGzvFwdc+xKTv7JBlDd184wVOaf58F+/fxOUTEnWfSAj8r3ICHmAji4O5bhavYFYxpiN
-	 xxDL5Zrf+wvSdQNzKJUgJHra41/B9ZFIEvkKtI62SL8l2tWw1nCdePefkuo18d+lMkQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794577556;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=OvqHYn6eA8PtE24P7V+m3zkPkqDeUlBhbG2I0ibGcWA=;
+	b=leu/gzggHNsmgHgLEOo4b8VIJ+7U4c69RjqJljN5NWawgWAy8TC5TaZe+8XAPN9AJOEI
+	 Qn1fEIX+kK4mzedWbiC5h4Ufi2Tswg+IpucU5krC3HkPCKj19nxreCOcBs4JSQ96kf/7F
+	 JVUxilEUwnovwWAyQpmx5usi3J40DQt8p7WMHD4rO9ZwQwh4geai59FfJImGUVAQIJUoA
+	 7MmAHWwAOwHhkKqykNQXIlVRPriWySY8DU8z8KVAVB5owdcZfrqpFHduzNmoaVIOqvB4l
+	 R7Fi/hlAvSY9MxQ6ETg6B4MpBdRaxBHmpUJEAIgufcx9qst9uvermqAeImXWOYMg0ag==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=EF7PKa36;
-	arc=none smtp.remote-ip=91.218.175.188
-Received: from mta0.migadu.com (out-188.mta0.migadu.com [91.218.175.188])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RAVE2pBZ;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3307F606A89E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:29:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3307F606A89E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1457E606A327;
+	Fri, 13 Nov 2026 13:45:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=EF7PKa36
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=fhhvaKaF0+C06GIQnzgQPEoqdFIJSGlkTUn8H9rIHNM=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794576585; v=1; x=1795181385;
- b=EF7PKa362tPelz+tq20jjG0cOKYDPORaPArw2Fnjk5ikOOMtb2dzeZMA/a1ptUQIHGaJ1vJ8
- t6sScc/UVWYjZUekicRdLPqrU/6MrRdIAlmiS++CkDQzo+OegB9j698qLjL6/8HhrPS4xdjRRgc
- Ydj6hcP+qpzoLb5CyYqy4xhzA0V6mrYEcOpmIYz0rCAyoLuHvun3LXnStuRIWrj+CN8lfU+jUAI
- aLcHvT451J5hyN7C0cIIWb+EwN39Z8CJRzVl7cKKYPLbruwP4YmKXpE3sFvdU+Mfi14PMzLdbyp
- td6nrRqW8dCPu43k6aQk5pQdoJKmDe+Kcf2ILknQOy2Qw==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 0231a53ba74ca531;
-	Fri, 13 Nov 2026 13:29:44 +0000
-X-Mizu-Trace-ID: 0231a53ba74ca531
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <f354e6b0-c4ce-44f0-b315-60895e90ec3d@packett.cool>
-Date: Fri, 13 Nov 2026 10:29:36 -0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RAVE2pBZ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFF1B1F000C4;
+	Fri, 13 Nov 2026 13:45:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794577555;
+	bh=OvqHYn6eA8PtE24P7V+m3zkPkqDeUlBhbG2I0ibGcWA=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=RAVE2pBZRhxZT+r0zmPwbt0hUj2UbsD2d2pFMJVpezo9arETI2uh8ItFsqfgJJdX+
+	 y/yK0oDsIryzfvNUevGwvAaLHhd75u7Dj4lTMi/tIT7Sn/jaTwUnpRRyC/k5plbaRj
+	 +hyvQNaaN7h6XYqdRI+IEWdXTFvwlKM4y4Sdc9VAhPzl7+I0aTqIjvkUDPxub2zpZk
+	 +kz+Iib3q9eTMwrA+In/HPAsFI7K7HapmorR3hR/ynOmGovwEmJDzieYyQh2Ioq16l
+	 pdklyvOZnip8A6wwTm0AkdwxMezVwBUsCjimnD7P7joYqL2g5/v6c1fv+BrExcCjsb
+	 dMGEoboU13aLQ==
+From: Vinod Koul <vkoul@kernel.org>
+To: Bryan O'Donoghue <bod@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, jeyaprakash.soundrapandian@oss.qualcomm.com, 
+ Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Vladimir Zapolskiy <vz@kernel.org>, 
+ Frank Li <Frank.Li@nxp.com>, Atiya Kailany <atiya.kailany@oss.qualcomm.com>, 
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261112-kaanapali-camss-v25-0-1d709f57f370@oss.qualcomm.com>
+References: <20261112-kaanapali-camss-v25-0-1d709f57f370@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v25 00/15] media: qcom: camss: Add Kaanapali
+ support
+Message-Id: <179457754639.652128.11064545317839632813.b4-ty@kernel.org>
+Date: Fri, 13 Nov 2026 19:15:46 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,74 +77,38 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] dt-bindings: arm: psci: Add
- skip-suspend-mode-switch property
-To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>,
- Reza Kurniawan <imkyufie@gmail.com>, Sudeep Holla <sudeep.holla@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>,
- Christian Loehle <christian.loehle@arm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, Alejandro Tafalla <atafalla@dnyon.com>
-References: <20261022-psci-fix-v3-0-9ce2133c5659@gmail.com>
- <20261022-psci-fix-v3-1-9ce2133c5659@gmail.com>
- <CAPx+jO-rMeg8BvemcMUcC10enjt0dkqWvsK+uRwc75rWpLXhMg@mail.gmail.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <CAPx+jO-rMeg8BvemcMUcC10enjt0dkqWvsK+uRwc75rWpLXhMg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
 
-On 11/13/26 10:09 AM, Ulf Hansson wrote:
-> + Sudeep
->
-> On Thu, Oct 22, 2026 at 11:41 AM Reza Kurniawan <imkyufie@gmail.com> wrote:
->> From: Alejandro Tafalla <atafalla@dnyon.com>
->>
->> On some SoCs (e.g. Qualcomm MSM8917 and MSM8937), PSCI_FEATURES reports
->> that OS-initiated mode is supported, but every PSCI_SET_SUSPEND_MODE
->> call is rejected with NOT_SUPPORTED.
->>
->> PSCI provides no call to read back the current suspend mode, so the OS
->> cannot tell which mode the firmware is operating in or why the switch
->> is rejected.
->>
->> Add an optional flag that tells the OS not to issue
->> PSCI_SET_SUSPEND_MODE on such firmware.
-> I think it would be nice to further clarify what's going on in the
-> PSCI FW. If I understand correctly, the only supported mode is the
-> PSCI OS-initiated mode, hence it's always running in this mode, right?
->
-> This is clearly a violation of the PSCI spec - and I guess updating
-> the FW isn't possible at this late state, or is it?
->
-> [..]
+On Thu, 12 Nov 2026 21:33:32 -0800, Hangxiang Ma wrote:
+> Add support for the RDI only CAMSS camera driver on Kaanapali. Enabling
+> RDI path involves adding the support for a set of CSIPHY, CSID and TFE
+> modules, with each TFE having multiple RDI ports. This hardware
+> architecture requires 'qdss_debug_xo' clock for CAMNOC to be functional.
+> 
+> Kaanapali camera subsystem provides:
+> - 6 x CSIPHY (CSI Physical Layer)
+> - 3 x TPG (Test Pattern Generator)
+> - 3 x CSID (CSI Decoder)
+> - 2 x CSID Lite
+> - 3 x VFE (Video Front End), 5 RDI per VFE
+> - 2 x VFE Lite, 4 RDI per VFE Lite
+> 
+> [...]
 
-Updating low-level FW in retail devices just doesn't happen, sadly. 
-Can't be done by the user, IIUC not even if Qualcomm wanted to help out, 
-because firmware is signed by the OEM and won't load w/o that signature.
+Applied, thanks!
 
-And OEMs, well.. we can't even get the vendors for modern high-end 
-laptops to pull important bug fixes from Qcom.. Thinkpad X13s still 
-requires that stupid arm64.nopauth workaround, retail Hamoa laptops all 
-struggle with the DC ZVA crash/reset 
-(https://github.com/icecream95/x1e-crash) that no one from the Qcom 
-IoT/Linux world has ever encountered because of different firmware 
-apparently, and so on..
+[01/15] dt-bindings: phy: qcom,x1e80100-csi2-phy: Add Kaanapali CSI2 PHY
+        commit: 846aacbf8322a2e395dcadbfb866ba500bb4358c
+[02/15] phy: qcom-mipi-csi2: Parametrise the common status register offset
+        commit: 478577f3db4a929c5a68a79828cb607feb6acfd6
+[03/15] phy: qcom-mipi-csi2: Add Kaanapali support
+        commit: 00926bc50707312038be9a2c8035198f6a868260
 
-MSM8917/MSM8937 are found in decade old low-end mobile e-waste, only 
-could be updated by force if someone finds a bug in firmware secure boot :)
+Best regards,
+-- 
+~Vinod
 
-
-Thanks,
-~val
 
