@@ -1,111 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794540905;
-	b=G6aIHQEP/atPWSr1QIBZcthKwWc7R3nTpfGvHMo9v5O8m85k3Wukb5vAmdBsg2hvLsQ1
-	 RWqxfh6fpFzxy8l/talROyx9+3AW9ZWS3tlMcodAHq89bY+7WzHMWRLQAKenCZ5BGZ/ii
-	 GGocu04/7Hk5Z33op/YlMtXEfIWS5fuPZIdX63tkDEQ8awHd196c50y/MO6FHczmXGPaz
-	 w46sKGhu1dUG70LD2wlENFrf6XYn6Ec13OTQOwfgL+rtz0kRsUgT4ik9Ql2iWzyeDecc9
-	 Rkfv2geP0NLSwcdGDBURC+t08HiOrZokOrmOJtj4JMYkZkmViZYqzDEJKZyDJwsunJQ==
+	t=1794542340;
+	b=QOLtD1VvtbTigHkW20Kf/Haoqsbo7lbIiXXNwxsYXr39/BVKRG1ZS7Mx2yR8HLKDnBBR
+	 zHR1AlmTQhzDjH6Vp9S7Beetl9lIj6+A63OPoX0PzDdQA1DfPPydP75hbYQMsvsDOvVbU
+	 LK+zCRfldFSCSsC39Fu/WsWr8zJ58p8/fEjNS9ipHFbyJgqD/Ruu/QXJ48mK/V3crXlBO
+	 7dagQvz19yoSWazM3Unpbqc2WA2cf0Amhb07S0+xt/eZwq4l9E1c8tGCcdtp86UGR8Pwe
+	 N8bBoe6Zj8L8v9A+6jeP8R6IzOOyg/COFbboyENyseMWWXau5tcsfnWKthquN5/8rQg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794540905;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=IPZ3HOktLUKO7C6+7rK8PWwT7CibQnKEc7TizM3393o=;
-	b=2Qc5eI4+8XEgvBEXmgehhDGU5X/nGcpDdL5q/MKEX8yDor+Z2J5qwpTRqcimt7XXy8tj
-	 HTkoYG6CkmaPoK7LZLb9e2d+z104kTQfzy1qN6op4ZE2XS4EOsKPKJZyfIeaLN0MV0Pl0
-	 RB/WOudJ53woJ9hmRH8XY+tBky76UXzqHpcqQM+FrTFenXKMUnltpbfQ1USpOUb4irLFS
-	 kJvRIZwb60+S1l0aFfCTv77f8BC3Xbkdwm1op/hbbzqZHjwnLxU+duqJ3v+wZek+jYLr6
-	 /ckCSxsRNWGmqkHYS4fxA/ag67BLjkXmoBKU8AKpbK+tX0r4t40D+/Xr4/h6MSFO0Eg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794542340;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=YNwftnnoDQaO1cbVmr7F7KU58HWyTpxMeoA5xvSqT3k=;
+	b=ngDnG/H94kIv7r8TAz3YMo6ev5FccFa2YN5qddLwhRVxiaB9Ry3pUsHHplZkipGxGPTU
+	 P0yEvLabpSNMD5cnkR7ekfVu/MFuRCc25i8NAkYOyqTFajtoXkyANDuHS6RruiBGY8a6+
+	 elyH0eP1iSN3T2iqY71gfY/UHM4rgPASHz0FwC0cMSRRbrxQVFfZQA+wVdZrhDrRXT+wL
+	 461vlwS81lAAIOxtTnBIK88VUiscf1VmfoGnWhdSERyyXQ3yYoG4b3FHwSbTuvNliJFAT
+	 zxAgnnKPPFc5+Ve8f5drSte4O2lYpoSogBfD5zVUjnV5UTzbAWW8F9dA9QLb/a13HrQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gRnXIVRB;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PTaLV2oO;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BahpqMvX;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52F29606A32E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 03:35:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 52F29606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A02F8606A321;
+	Fri, 13 Nov 2026 03:59:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gRnXIVRB;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PTaLV2oO
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AD2K80g4120351
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 03:35:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IPZ3HOktLUKO7C6+7rK8PWwT7CibQnKEc7TizM3393o=; b=gRnXIVRBJDeM8ySw
-	aPNieEiH7Q31za35m7BrDXSXEwzVomjsjQmGkm4/SgoUxgWkcCtfB99OQ5Wlez8X
-	p9Avu5YAaCgt5F/3mUxfJKrMz3MVgU3cglt6YLqxcYi4++JGPGeE1Y+eNB1RfbiF
-	IldTPCGIsLsb0GZL+cK3UUv/y2gmhXNyhvVqhhvROtlbLIONAp/gGQOABiUI4+ly
-	+eSxZJxnhnrFlgzT2lAyrrN7M8gC+r7K873liA/SHsrV+fN8oTsW70bHscT1jGgG
-	Jav1fzcVOB5XlpJ6DVvZSPVnbZv+aDbbCyjNq3plOrf3KVAuTOtJFOQCjQQRstLe
-	8ppyDA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwbx338k9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 03:35:03 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cd652c0385bso332632a12.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 19:35:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794540903; x=1795145703; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IPZ3HOktLUKO7C6+7rK8PWwT7CibQnKEc7TizM3393o=;
-        b=PTaLV2oOe3UKjSpdSc2iI73FcRNBDEWGiPqwIg+uPoJjTj9JmjbHf5BccxN3dpSgDK
-         YRQYmJ3P9kZDUMYkZG/JBG6UB9Mg8M/B2qJGCP3PvORsfJOcPknJEn7hYwiTDYz00RS8
-         GcBCrI/eGVqXgJa41vBvnvnrVqUdHHl5tdKQgO62tbZ7zaGjCXG8jRLY2KXpEg9Cafyi
-         F3rRyqiIzDyJ7lXZmhRFwkkTFH1ZNEB2Fx26g9t7Z56eLx1hthODRXG69Ro6i97bEMCk
-         TtXb9CZ1Vi+AD1Mj88XbivvmOrKeaVTVudNJpl9Cn8tEA7Zu66pEIXMWu/1+8VUyuAtr
-         NWKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794540903; x=1795145703;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IPZ3HOktLUKO7C6+7rK8PWwT7CibQnKEc7TizM3393o=;
-        b=ZrNBO9yuadeGVbUi4a7UDCAFI6mYj84H3n0dW8UeFm5SZ3+P6wnrPs6aMKSipSosHJ
-         roGlRg4/q2j+n5E6fCwGDRtjM4LB9OMHxwmuN6iFCISQohccmiDb4P4hWbMs/xVjC+03
-         TvWRGl4JAmUnlNW01TeZp8roqN9n+7FtjZaSguAaDmGEvhNYWrc9/EqIRxcnjqCW1NgA
-         hogg8EQYQuo8jlV9CqWL4hY7TB8v4+B4zrgbvHvDsPFJfqozfEemcGDiIfcr7jbFE8Dv
-         MSYyPXMVSRwdy/KlENrK9ZzIQNNVIEfTjo7uTnpZg+u0MYjJ9gU94Es6wbXPoL10q+ik
-         YHgw==
-X-Forwarded-Encrypted: i=1; AL+hErGEH8TqcIEMgSCsD7dZP2WbZsUWw7LN6mnajo3cAsLsVCWhWrDENcWXYs8Bhbi+mg0BkIPmsiQpNuYn9Nth@vger.kernel.org
-X-Gm-Message-State: APuU4Z9M8fn1/6YWEolqpjl3JYWGEKbPVHKanK+HMkksROtpMGg29G9V
-	2BfiZYfwmUn75b6ECGHFQAKvsENbW+RMmODJakeehWfqGxXORf4hNOb4zHqvuur3kfdHEJMYFB0
-	XPwQBW6/QabYjW4YxISZhVeQtju9IunfktOcD0vkcI+ySpk8VujTvr7I9pg3sJLSsugyD
-X-Gm-Gg: AYBFou2OHuAdntR+0hlpg2sVR8Z12c4Kn1wObgAWhQ/y0XmMGHZmginpebYxj9DC/0b
-	IjnSPoep4x2KQ2hxRlJY1DbNTKhnnmE9AJcnH5WwSuo/BnYMKH5bYf3fXm03ITgQUK7RcHluKB7
-	7+UXs/hfiwYhs+HRjWIQ70TRhWe3afwbIXXJPBU1pZ5mGzwT86oeHnmEcFBKdbMJyBjflFPX6PB
-	hDsV3Gn6ixj9qo77Lpxe1vFSei4IaObW/hf02vGAVOOp6Kc8BvFJ71jpFAOpgM8a934p7OjzmO8
-	ayf5l8xkEpJ2MgkJnji9Z9Zmc6whO8klP8Sa8XEFdt9c13pRKaS9u1r7WYpv/wCCvz9UQJ5EV50
-	hYXrn5rJGqFhs0uXWpiigO5v2/fdhBBAa3tY0wDZpv65s/dps0M1vUkZP+A06t79JQ5aZiQ==
-X-Received: by 2002:a17:902:e882:b0:2e8:3d48:4d88 with SMTP id d9443c01a7336-2ee0da31ea2mr13290295ad.7.1794540902738;
-        Thu, 12 Nov 2026 19:35:02 -0800 (PST)
-X-Received: by 2002:a17:902:e882:b0:2e8:3d48:4d88 with SMTP id d9443c01a7336-2ee0da31ea2mr13290065ad.7.1794540902273;
-        Thu, 12 Nov 2026 19:35:02 -0800 (PST)
-Received: from [10.235.8.108] ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ee0f7e4e47sm3464175ad.38.2026.11.12.19.34.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 12 Nov 2026 19:35:01 -0800 (PST)
-Message-ID: <15996045-3f5e-4680-95f9-925c97301ab0@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 11:34:53 +0800
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BahpqMvX
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E0F01F000C4;
+	Fri, 13 Nov 2026 03:58:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794542340;
+	bh=YNwftnnoDQaO1cbVmr7F7KU58HWyTpxMeoA5xvSqT3k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=BahpqMvXKdY1E7ojyt66ROo53+0AotY+niLlLRTwhYPOSjguOlEVRCO9MF6C1vwXN
+	 3SS9CQPC3FuRzw66vpdXvdCgOYkU7apaubFDPvp90mkjut6CcurUFg0fjJE+TiCK40
+	 w/Ymlq4hrjt6AoL6vurmaalsullWo0cyFledIqIsTbc+7eZudpy7K+NUXrFsqiOLFU
+	 HeZU14g8tRGAFm2DHJwIqNsyJKOU97qGamBCXw/dwK6K1wa969ejhOrpk050G8gWB6
+	 NQxyz9zjyG69dd3oVt3bZ+XV3Sk5yHF0FNfclQSSuIHAXiUim2fnWMQkdtI5i0tqKr
+	 WizazPJV0756A==
+Date: Thu, 12 Nov 2026 19:58:58 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	"Martin K. Petersen" <mkp@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>, linux-mmc@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org
+Subject: Re: [PATCH 1/3] mmc: sdhci-msm: Enable ICE before enabling crypto
+ support
+Message-ID: <20261113035858.GD1742@sol>
+References: <20261022-qcom_ice_pm_enable-v1-0-f7a84086c651@oss.qualcomm.com>
+ <20261022-qcom_ice_pm_enable-v1-1-f7a84086c651@oss.qualcomm.com>
+ <20261024182904.GD2553@quark>
+ <172229a8-a4c5-4103-a38b-e4cce3f18718@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,153 +67,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: clock: qcom: Add NSS clock controller
- for IPQ5210 SoC
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Georgi Djakov <djakov@kernel.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-        netdev@vger.kernel.org, quic_kkumarcs@quicinc.com,
-        quic_linchen@quicinc.com, quic_leiwei@quicinc.com
-References: <20261111-qcom_ipq5210_nsscc-v2-0-7e2c1dda3ed2@oss.qualcomm.com>
- <20261111-qcom_ipq5210_nsscc-v2-1-7e2c1dda3ed2@oss.qualcomm.com>
- <20261112-wild-accurate-cockatrice-a80efa@quoll>
-Content-Language: en-US
-From: Jie Luo <jie.luo@oss.qualcomm.com>
-In-Reply-To: <20261112-wild-accurate-cockatrice-a80efa@quoll>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=S+5MU4sP c=1 sm=1 tr=0 ts=6af68567 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=vjzNbMJ68Ufz2hOSJBcA:9
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAxMyBTYWx0ZWRfX4oLV5XAnWrdg
- PlOK2Fx4fbdlLZrd4iICVPMCyPrVyv3ELsSYsdsGbrDAePJz9IgYqq9/+GOxlzpJZFHC2QzGf/g
- sJTiCD+WDbqR6wSR5um82VqjoVTQC827X+RE9j4b7DSNqdQ7HaqbiusL3ZQr2IAM8/emGEcB80W
- 7HniaCs7AbqjBfwQQ/MseC01MIpoTi/buFrFizPEwOd27NcK3FbVb3dmrP9grhrjx59+aWVrMN+
- 6lOPzGvzROgCF8GmrxmFZPqPyzfPqS+j8ZVhg//m4TJ3eXlYaQiLxkMFkYxDIX5bNSsDDFw/+uI
- Bv3cp+6Y9YR51mgibw7hgwmYd4lxp62Po1IEHvv+zJAzTbhiXOtFXIH4Mejzbk6+dfo8Bx1vEIB
- JIeRT6wpP9aGsUF0AM5WsiBDkmdJQSwjbDYiLX0eptoMB8FebBKoK5HVvR3vd+l8AUXd1jDN9O/
- uurGE4apEl2dOzXNezQ==
-X-Proofpoint-ORIG-GUID: _5HIqYnqAjk62u8Gp0sFjGwFgqBraiL_
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAxMyBTYWx0ZWRfXw8MNPmdY+oKL
- AR5kMhY4GK4WTXr1fk8aFZDYe7GDG5WjT+o7e3+TeqWE9N1thisahx7uhceEIl+GNNEdqWntIPd
- yiN627S52xbX8YsaIUMCTa5AqJmf4WQ=
-X-Proofpoint-GUID: _5HIqYnqAjk62u8Gp0sFjGwFgqBraiL_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-13_01,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 clxscore=1015 phishscore=0 malwarescore=0
- adultscore=0 spamscore=0 suspectscore=0 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130013
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <172229a8-a4c5-4103-a38b-e4cce3f18718@oss.qualcomm.com>
 
-
-
-On 11/12/2026 6:57 PM, Krzysztof Kozlowski wrote:
-> On Wed, Nov 11, 2026 at 02:00:55AM -0800, Luo Jie wrote:
->> NSS clock controller provides the clocks and resets to the networking
->> blocks such as PPE (Packet Process Engine), UNIPHY (PCS) and EPHY on
->> IPQ5210 devices.
->>
->> Add support for the compatible string "qcom,ipq5210-nsscc" based on the
->> existing IPQ9574/IPQ5424 NSS clock controller Device Tree binding. IPQ5210
->> additionally exposes a pair of EPHY-RAW Rx/Tx clock sources used to derive
->> the clocks for its integrated 2.5G Ethernet PHY, so extend the clocks and
->> clock-names lists with "ephy_rx" and "ephy_tx".
->>
->> Also add master/slave ids for IPQ5210 networking interfaces, which are used
->> by the nsscc-ipq5210 driver for providing interconnect services using the
->> icc-clk framework.
->>
->> Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
->> ---
->>  .../bindings/clock/qcom,ipq9574-nsscc.yaml         |  47 ++++++++-
->>  include/dt-bindings/clock/qcom,ipq5210-nsscc.h     | 106 +++++++++++++++++++++
->>  include/dt-bindings/interconnect/qcom,ipq5210.h    |  18 ++++
->>  include/dt-bindings/reset/qcom,ipq5210-nsscc.h     |  60 ++++++++++++
->>  4 files changed, 228 insertions(+), 3 deletions(-)
->>
->> diff --git a/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml b/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
->> index a35bbc7b1924..dc7d90a99dc7 100644
->> --- a/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
->> +++ b/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
->> @@ -4,24 +4,28 @@
->>  $id: http://devicetree.org/schemas/clock/qcom,ipq9574-nsscc.yaml#
->>  $schema: http://devicetree.org/meta-schemas/core.yaml#
->>  
->> -title: Qualcomm Networking Sub System Clock & Reset Controller on IPQ9574 and IPQ5424
->> +title: Qualcomm Networking Sub System Clock & Reset Controller on IPQ SoCs
->>  
->>  maintainers:
->>    - Bjorn Andersson <andersson@kernel.org>
->> +  - Luo Jie <jie.luo@oss.qualcomm.com>
->>  
->>  description: |
->>    Qualcomm networking sub system clock control module provides the clocks,
->> -  resets on IPQ9574 and IPQ5424
->> +  resets on IPQ9574, IPQ5424 and IPQ5210
->>  
->>    See also:
->> +    include/dt-bindings/clock/qcom,ipq5210-nsscc.h
->>      include/dt-bindings/clock/qcom,ipq5424-nsscc.h
->>      include/dt-bindings/clock/qcom,ipq9574-nsscc.h
->> +    include/dt-bindings/reset/qcom,ipq5210-nsscc.h
->>      include/dt-bindings/reset/qcom,ipq5424-nsscc.h
->>      include/dt-bindings/reset/qcom,ipq9574-nsscc.h
->>  
->>  properties:
->>    compatible:
->>      enum:
->> +      - qcom,ipq5210-nsscc
->>        - qcom,ipq5424-nsscc
->>        - qcom,ipq9574-nsscc
->>  
->> @@ -42,6 +46,9 @@ properties:
->>        - description: Uniphy2 NSS Rx clock source
->>        - description: Uniphy2 NSS Tx clock source
->>        - description: GCC NSSCC clock source
->> +      - description: CMN_PLL EPHY-RAW Rx clock source
->> +      - description: CMN_PLL EPHY-RAW Tx clock source
->> +    minItems: 11
+On Thu, Nov 12, 2026 at 05:00:56PM +0530, Kuldeep Singh wrote:
+> On 24-10-2026 23:59, Eric Biggers wrote:
+> > On Thu, Oct 22, 2026 at 03:21:50PM +0530, Kuldeep Singh wrote:
+> >> Remove ICE enable call from CQE path, since ICE is now enabled
+> >> during SDHCI crypto initialization only.
 > 
-> Please place minItems at the beginning, before "items:".
-
-Thanks, I will move minItems before "items:" in the next version.
-
+> Sorry for delayed response as I was away on vacation for more than
+> 2weeks and hence couldn't catchup on the thread!!
 > 
->>  
->>    '#interconnect-cells':
->>      const: 1
->> @@ -63,6 +70,9 @@ properties:
->>        - const: uniphy2_rx
->>        - const: uniphy2_tx
->>        - const: bus
->> +      - const: ephy_rx
->> +      - const: ephy_tx
->> +    minItems: 11
+> > 
+> > This change makes the low-power and "optimization" settings in
+> > QCOM_ICE_REG_ADVANCED_CONTROL be set only once, during probe.  Is that
+> > correct?  Those settings never get lost at runtime?
 > 
-> Same here
+> Yes, the low-power and optimization settings are set once and are
+> retained over suspend/resume cycle.
 
-OK.
+What about hibernation?  We recently went through this for keyslot
+reprogramming, and it was established that keyslots need to be
+reprogrammed after a hibernation image is restored.  See the commit
+https://git.kernel.org/linus/8b190e9c0b36aac5
+Doesn't the same apply to qcom_ice_enable()?  If so, this commit breaks
+ICE upon restoring a hibernation image.
 
-> 
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> 
-> Best regards,
-> Krzysztof
-> 
-
+- Eric
