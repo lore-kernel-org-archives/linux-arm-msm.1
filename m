@@ -1,135 +1,65 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.112
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794590550;
-	b=C3oV8Qvlj/KJm6YBfSP4uWia0KL0dYoJR7VMrq3vEE6gDp4aqEpKrq3ueEFVbwCTwO5h
-	 oaBkXN2W7Di3lpmCHa9u0VLpU5VsPIJH2CqnZ6w/sLE+CY6X6cZOMYJT9FU98y4TXBO2N
-	 w+x969hWGqGuqLNAqfvE7MwHXaAswXeCQx1CCD44xjSDESgsqy6lzvyX0RvHefeIha1gL
-	 wasfMEaKopwwcrbJBE7SQp6jkRjGbij8Lqz9gpDlB5p9aQi6tbjjiRItARILjVWG+TrN2
-	 4WpkrxVdM4+0c0GxJy5AKIOb4IDhuRhZZi08V6mcBIU4J+OtjV7lFXgc1e7+ihM2BUA==
+	t=1794590639;
+	b=h2HYxqhSrbic1GNCXZ0aoiaTa/a1xAKCN2nTxuDIkbvXDrXKsm1JcEX/uf7CwXPKKEXD
+	 +AkZrRm8W5aC5o0j4NTRLiCLr233z+VlINb/6hamXNlpL2//x259vGB25s1pxjGw2DC0l
+	 np5GxsrYS+xLAEJvF3cN/iwdIfgm13uJ8ROOCXZWHHlIYUQEgsiC5zGr9StzNZmzbwgit
+	 7p+jHA2mPuPYe5Gshrqwx9o2W57dbBVbWLVFLgqMFqcJdDx9kkJ6eKl976bPHUCITMuij
+	 NPJduOEjW6zgba1eNe/OmCDMZjLkp+XhtPadnorpo27YxCpRJKLzELf1zJ4JlWDCo6A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794590550;
-	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
-	 X-Mimecast-MFC-AGG-ID:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:User-Agent;
-	bh=fHukDD0UbvmUT77AtdgTmVuLRMj4asR7tQ0Y9WypVT0=;
-	b=b2PPHUmheIebvIDvy2tsHBqnKWMSR35GoE3/uMfz6n55pGS8k3U3jsjiPeb+0lSYaSoJ
-	 +wxmV6V7okAzL8ktlNSwL3RgyVpbXDqKRyOvsB2njVvBfAbrW9EQ+AiRf4Kwtt4mOcmcC
-	 UcGqNFSrJkf6g9SBtuhTHyupc9Kh67+EjeA/ElwkUkx24uLvoK8rtlLXFWeE2LcLIZUgx
-	 b0rPEcIjCSzuwBQR4ZJ0TKlDJ3sUeEkH0h+d9C+P+TItObKIaPzbnon2BjjgC5jLs3ftk
-	 LC3ZxLCUeMdB5FDuwuZWlyY54hed5/e29SCVodihHPw6VyliaeYceYdjMqqikQZFLuA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794590639;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
+	 Date:Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=NMDZysfT7XZcy4Vr7EExZgccS2DkId56v85Kwhm7tdY=;
+	b=EAmI3J9VZbodElvZVkRwyJVTZ9Cg1mt9zd8Eseeus3n/Uw9l2vt0Fpl36WUCBxk+uO0l
+	 LSWu+kt9xyAz3PsmJ5rvga1rEB7nBRl031Zr+V/Th5TioHPJFcFmmG2nK9Hkr+OyoVxAi
+	 HullSmvNd+d6yOk1EoyTvU+hS7ssp5DsS/dnRTDjGbYZTfc1Dly+kLTzHdUZ8IZ5rF2Zp
+	 WR+PpG313+mulajhE5OFhJPIKIB4iLXnYrpOumVNffNIbMIOYPZOhDgyKYu+ZRxYrdeNB
+	 880f1aIqhSEe2e0Aqbo8OmqLHG6IsiLW6aiDIGjvt9L7WWOMmBoSWnQJ3Y0FXxiqafA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=redhat.com;
-	spf=pass smtp.mailfrom=redhat.com;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KRcjhF+R;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=OtW9r7JX;
-	arc=none smtp.remote-ip=170.10.129.124
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=4+QetiTn;
+	arc=none smtp.remote-ip=79.135.106.112
+Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D55A3606B372
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 17:22:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D55A3606B372
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 811D360A263A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 17:23:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 811D360A263A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KRcjhF+R;
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=OtW9r7JX
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1794590548;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=fHukDD0UbvmUT77AtdgTmVuLRMj4asR7tQ0Y9WypVT0=;
-	b=KRcjhF+RtPnWX3GsI5skqntxmM0vHfqxVFBaRIAMHiglw7l5fvmshDNlkEcxnXX2sGhmEn
-	1LGqslG4j2Ha9ldDyoOCdacOqOjtCppDXtqyObg+okfSoVsFOSY7AdDkXIjX/8SH0Lzt2c
-	YwM2L7y8GWeHknfZbzILuN0XDElmMqs=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-679-6xVEwqtBP5maA2Kw6NvvzQ-1; Fri, 13 Nov 2026 12:22:27 -0500
-X-MC-Unique: 6xVEwqtBP5maA2Kw6NvvzQ-1
-X-Mimecast-MFC-AGG-ID: 6xVEwqtBP5maA2Kw6NvvzQ_1794590547
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-536720195ebso24774561cf.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 09:22:27 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=4+QetiTn
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1794590547; x=1795195347; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-disposition:content-type
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=fHukDD0UbvmUT77AtdgTmVuLRMj4asR7tQ0Y9WypVT0=;
-        b=OtW9r7JXbnyn7IcLoiUeJRRYwV30QCLlQsmVB600ewBp4Lvq5aeqQ2mrVwNpR08wb1
-         e35g2VxQ1d7UhLAJVUu8qY2dZ47ZUhilAh8bmL1Rn9b+S5iffMzKVk0O5offhoYBw65Q
-         5e9wVmEvCOL2PIPyVrDnKcXzUFNB2nFJ5j53Qh/Wu7R7vk/TC25TjVrRtJ1Vc6wts4Ic
-         oRYgYHSs5j0IM5jXk3rcfn5fYR12DPDDm6eEZJzIQZILfYYgGLJ21ZzN4GEYjs36kseZ
-         hCVclv4XM2DPwoheGQKqIkezr8r5g7bp0UM/zFi2zR1ElMe4AAVB3HLuDaLP9n3xcWqI
-         tCUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794590547; x=1795195347;
-        h=user-agent:in-reply-to:content-disposition:content-type
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=fHukDD0UbvmUT77AtdgTmVuLRMj4asR7tQ0Y9WypVT0=;
-        b=jNGSpZxx3TllcZA9bSZJ4xgZABuCZaS+M7VxXvC1Vvny+kG1lWuLJMC6JwP7p5l+Cq
-         WOBU0pIombV4Upo5v0A/wIOSvnlaB9AsnzJAE3mgPEGyX3yGMGgCZMYg2EVD1XzBxn6W
-         6WhzDM6gomxdFfMBDJ3CilFJXqF7d8G6BJG8z0zx581UU8vpSGP07yCn6lRGyFMuq2lI
-         aPVnrTIvAgoMmv0DCj9AGEEsLMJGPfVVyltlCNvaewbYotgzYu/cx1/MdwgsYbXaJQNi
-         OJiUXDj69XQFol6E9Hvc7nJ0z8UA20v0bt8ePl49cZyzLfswz1AY2mInGH/+sIAKThno
-         pb4Q==
-X-Forwarded-Encrypted: i=1; AL+hErEc9qAyerKyJ1Y2pGgYpkfgaATmZ1AcrziObl5KQLbgTHVHdal3E6xlXZn7tpnvoofcAxP8ktTtPdKAtVVu@vger.kernel.org
-X-Gm-Message-State: APuU4Z99zzb+Uc2LUEjmKfNOyh2GShY8A7ZYtgRs+4iihlPqhb/gJslo
-	dHrSuGWzUUBkTs6LBUL9+/Mg0AQl2Qq6GbBQFyGGZLdiL6tdRgI5ypyvlS6vMWx0IttcDPlKHFx
-	Ok+PKBmK4ptd6GoUuiFVD1MhIvV0HHRvf1zdqnf2cmzSwyVafIXgIVeR5VUV9tmLZTfM=
-X-Gm-Gg: AYBFou3O6/q7Z/i+nDsPXYYFLkffvEaf8cyB/XhSaqTAiu1avFT8NH7M6P9G7OZwW9J
-	tqtyNGyLDearX44wT8LxxrgP0viEnNS91dY5lPSLV/wNRg5vCIkIq90ptQVLl/IP/VsBiB1gyaV
-	bK9NEwgpKikUYnfOo8qXbh+iHrXGjD/C2W3RyQRun14mqx7EMswv7TBTomCHVC08gvVjNIizSai
-	n8BLNgW0/BFWLFwQwVSv695jIK0MuiI0pHaK3sf4vTP5klR/0QbnnwGGMCxfbTYbG2uCWj0qv/1
-	2B0IH91Hg5SktGt/fENEwnhlYVIJ7jRH5rDny1sGLrExPS94lSQLqayQY+rUpoB7sy/Iox/RsDq
-	c49m0qhuPgFVI4pAAMMtrse97v7D/7XPjwt50iW0RLvxAcNhwwNNE5is35k3S6eFFNs58Crww24
-	luXd8jwcLoQFmzRQWIzzWco/nkXb4qq6L+3j6uR3Fi
-X-Received: by 2002:a05:622a:550e:b0:535:70b4:3f7c with SMTP id d75a77b69052e-55ac937d6e5mr45976421cf.66.1794590546853;
-        Fri, 13 Nov 2026 09:22:26 -0800 (PST)
-X-Received: by 2002:a05:622a:550e:b0:535:70b4:3f7c with SMTP id d75a77b69052e-55ac937d6e5mr45975821cf.66.1794590546274;
-        Fri, 13 Nov 2026 09:22:26 -0800 (PST)
-Received: from redhat.com (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-55ad14f1ecasm22347291cf.24.2026.11.13.09.22.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 09:22:24 -0800 (PST)
-Date: Fri, 13 Nov 2026 12:22:22 -0500
-From: Brian Masney <bmasney@redhat.com>
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Danilo Krummrich <dakr@kernel.org>, Johan Hovold <johan@kernel.org>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Mike Tipton <mike.tipton@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>, linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-	driver-core@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH RFC 02/16] clk: Acquire resources for clock transitions
-Message-ID: <avdHTgDnTmQYy3CN@redhat.com>
-References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
- <20261014-topic-qc_clk_dvfs-v1-2-3041b788e9f7@oss.qualcomm.com>
- <179275170360.4070168.11650113664838519061.b4-review@b4>
- <f0ca2bd4-851e-473d-bf21-678cf964f854@oss.qualcomm.com>
- <825fbfbe-a9a0-43e2-bb54-f9e38ce779f4@oss.qualcomm.com>
- <179458337623.3308909.8679910347462508471.b4-reply@b4>
+	d=michaelmcallister.org; s=protonmail2; t=1794590635; x=1794849835;
+	bh=NMDZysfT7XZcy4Vr7EExZgccS2DkId56v85Kwhm7tdY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=4+QetiTnG+aX2TZxE6bU9DMiGMtNKo/HdPNtutcXNz4P6tFfGIAyjhy1BB2KUcGc4
+	 hegf7JEySkjUyXagYmUxQOqjvjKXfaAJFIEjd8iIV75xeeqQT6JzBk5+wEHyTTHA2G
+	 9J8tNrGtr6Nc+d+CtgWm3aOqHQq6iPIy5AWCZiJGEowxWRoPd5fz7CRuVAQeoPS7dX
+	 c6d4x6S8v1qokmxvWr/NYloOZwwenDLVzGy52ecaZB5ZYyommQKTvwYeF875ycHTmC
+	 3MW3BceSK2IgkE5OzRKw/siR6uWEriVNcxJR3vtzmLryDEqdWnieYhQdDiHjQyAvDk
+	 IEsgfwaVfAm0g==
+X-Pm-Submission-Id: 4jR3yJ2ND0z2ScX9
+From: Michael McAllister <me@michaelmcallister.org>
+To: robin.clark@oss.qualcomm.com, lumag@kernel.org
+Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run,
+ marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch,
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dmitry.baryshkov@oss.qualcomm.com
+Subject: [PATCH v3] drm/msm: release the fbdev IOVA pin on teardown
+Date: Fri, 13 Nov 2026 17:23:44 +0000
+Message-ID: <179459062437.56042.7618212515796640496.msm-fbdev-pin-leak-v3@michaelmcallister.org>
+In-Reply-To: <179425722110.3461.10554987541005946397.msm-fbdev-pin-leak-v2@michaelmcallister.org>
+References: <179424371125.96483.2462884435294600442.msm-fbdev-pin-leak@michaelmcallister.org>
+ <179425722110.3461.10554987541005946397.msm-fbdev-pin-leak-v2@michaelmcallister.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -139,77 +69,50 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <179458337623.3308909.8679910347462508471.b4-reply@b4>
-User-Agent: Mutt/2.4.3 (2026-10-09)
 
-On Fri, Nov 13, 2026 at 04:22:56PM +0100, Jerome Brunet wrote:
-> On 2026-11-09 15:06 +0100, Konrad Dybcio wrote:
-> > On 10/26/26 2:11 PM, Konrad Dybcio wrote:
-> > > On 10/23/26 12:35 PM, Jerome Brunet wrote:
-> > >>> Preparing a clock protects its current requirements, not the resources
-> > >>> needed while changing its rate or parent. A transition can temporarily
-> > >>> use both parents or access an unprepared clock, and a parent rate change
-> > >>> can cause other clocks to be programmed too. Raising resources one clock
-> > >>> at a time leaves those operations exposed to insufficient power.
-> > >>>
-> > >>> Failures make this worse: hardware may already have changed when the
-> > >>> operation returns an error. A matching cached rate is then not proof
-> > >>> that resource reconciliation finished. Retaining a temporary enable
-> > >>> reference without a corresponding prepare reference also breaks a
-> > >>> consumer's normal disable/unprepare sequence after a failed reparent.
-> > >>>
-> > >>> Make CCF acquire the affected tree's and parent paths' resources before
-> > >>> notifiers or programming, and reconcile them only when the walk stops.
-> > >>> Keep fault recovery independent of rate shortcuts and subsequent
-> > >>> consumer reference-count changes. Require explicit recovery of an
-> > >>> ancestor's uncertain parent selection rather than reporting success
-> > >>> from a descendant request.
-> > >>
-> > >> I don't think all this is necessary to address the problem described
-> > >> here and in the cover letter.
-> > >>
-> > >> IMO a new provider API is the wrong layer. The framework already has
-> > >> the hook a provider needs: the rate change notifiers. What the core
-> > >> should do instead is fix those notifiers, which do have a few issues.
-> > >> You are fixing one in patch 1. Another fix, about setting the parent,
-> > >> was sent recently:
-> > >>
-> > >> https://patchwork.kernel.org/project/linux-clk/patch/20261021-submit-clk-parent-abort-v1-v1-1-2936181822fc@gmail.com/
-> > >>
-> > >> You want to act on some changes before anything is programmed. PRE
-> > >> notifiers are the right tool for this. The user of this change in
-> > >> patch 7 could use them AFAICT: PRE sets a temporary vote, POST settles
-> > >> it, ABORT drops it.
-> > >>
-> > >> Also, what is acquired here follows the requested clock. When an
-> > >> ancestor switches parent, the chain of its new parent is not acquired,
-> > >> although it feeds the whole subtree after the switch.
-> > >>
-> > >> With notifiers, the parent fault state is not needed either. As it is,
-> > >> it blocks every request on or below the clock until the same switch is
-> > >> retried.
-> > >>
-> > >> Could you tell me what you need from this approach that cannot be done
-> > >> with (fixed) notifiers?
-> > > 
-> > > I'm a little worried about the ordering there, since some device
-> > > drivers may also be registering listeners in parallel, so we don't
-> > > get a clean split of what PRE means ("has power for sure " or "may
-> > > not have power")
-> > 
-> > Do you have any thoughts on this? I'd like to proceed with this
-> > series in one way or another.
-> 
-> As I have replied before, if there are things to fix in notifiers, we surely
-> can discuss it but, at the moment, I don't think the complexity of what you
-> are proposing here is justified.
-> 
-> Please allow some time for Brian to have a look.
+The fbdev probe pins its buffer, but normal teardown never drops that
+pin. This produces a pin-count warning when the framebuffer is freed.
 
-I'm hoping to be able to look at this, plus some other requested changes
-to the clk core, next week.
+Keep the setup pin and release it in fb_destroy. Drop the object pin
+under its reservation lock, since fbdev destruction can be delayed until
+after the KMS VM has been torn down.
 
-Brian
+Fixes: 7ad0e8cf6317 ("drm/msm: Count how many times iova memory is pinned")
+Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+---
+Hi Dmitry, thanks for the feedback. This keeps the setup pin and drops
+it when fbdev is destroyed.
+
+Changes in v3:
+- Release the pin during teardown instead of removing it from probe.
+- Unpin under the object lock so delayed destruction does not need the
+  KMS VM.
+- Keep this patch focused on the pin leak; leave the mapping and probe
+  error-path changes for separate follow-ups.
+
+Thanks,
+Michael
+
+ drivers/gpu/drm/msm/msm_fbdev.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
+index dd6d6c507d..29f5dcabc5 100644
+--- a/drivers/gpu/drm/msm/msm_fbdev.c
++++ b/drivers/gpu/drm/msm/msm_fbdev.c
+@@ -47,7 +47,11 @@ static void msm_fbdev_fb_destroy(struct fb_info *info)
+ 
+ 	drm_fb_helper_fini(helper);
+ 
+-	msm_gem_put_vaddr(bo);
++	/* fbdev can outlive the KMS VM; release the object pins directly. */
++	msm_gem_lock(bo);
++	msm_gem_put_vaddr_locked(bo);
++	msm_gem_unpin_locked(bo);
++	msm_gem_unlock(bo);
+ 
+ 	drm_client_buffer_delete(helper->buffer);
+ 	drm_client_release(&helper->client);
+-- 
+2.39.5
 
