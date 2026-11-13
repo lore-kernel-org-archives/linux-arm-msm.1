@@ -1,47 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794584678;
-	b=Hb3+zozKsrkgvEf9xr2TaxO7ZlAODnRsBSeO0ZnoOMShPMO2DLyEBCULilM/EYmLtbfr
-	 o4TQG6nMqU5u5xJ/NccfOqQC8j+UpQ6bSCaCf7/Vw+WYbYalOEivDuJcl8/E7bDmlGh8v
-	 hdP6U4zG8LHIc/mBW3d7tY4qHBicxR/Iojqep/r0O8eLKNwxMG8vbNArL6tweIWcnBesZ
-	 TiWovhxHVd19DMX3Ol483HIKlM7pOdXvRlBNWTsnKKhfVACRO2WxzkQs7eA7N8PltRbg7
-	 b+NKLruvwajg7WQcbff/V0/S0hp1W00W5j3Xd2iwUwIt/E2PTbMdj3tQ6bdR4gENNwQ==
+	t=1794585010;
+	b=JDbGrrTmAb5RFHk46iIhpQZA14krwyOdmGd++sEP6bSFpF+hj6lkK2nnngCczZGGjQiR
+	 Ca0OZLwHCtb6IuIZ8ZiPk0CjJWky29pdIOnWlhN/m8DvvdVWJPwznU1wMk/NlmOd8ttk6
+	 8EVy4RRJ2NxaEo8yK5HNwdkxbMGV+xYlLeULuKzctpuyeKqUaWfD6sRvI6D0XmK3qfWZO
+	 KZIGCe4a0H1C2B+EnhrUz+6TEuVTEYEaTDOEPRkYurQ5aga4PLXy7/ZqwMLvZGGfH0nQz
+	 /CHcELMkuws6Tg2bDOBQAGZwRpu8VMQJAhg0DlesuoBPdfgXXYAqycfSWrLS5Qnf80w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794584678;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=PbD4AtMB8bc+XYwJsGjxS6XrtV8DXvidAzLVTNW7qq0=;
-	b=GBr/gQYvlwSx54HZUFWSVCnCUkJOVWe9a09bit5qWUwnUClVdeAZlvGaVIN0owB3P0Qw
-	 w5nfq2xZjjF9O71g8RAFOISPjOx8XFFXJ6TEfwzyIFX69XwWyxItciOXouhenv/vTxC0A
-	 2DW/nv6oVyu2HA2kz3ev0G7CEl/XNcKnacw1XHX5U8475g6EqCCnmrw0dIAzGva/coGKf
-	 VZ0xHRGP+KD304CzeGnmfWP3ci1yR4WfClJWppBZtnHrO209s0vvl2bV/2n7Egscy4+cD
-	 DjMqI5ycCyZsC0Al6pNBYokLo6poZTnQW1dtOO63yWWW9U5eAzjaj4pSJM5f5xASIlQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794585010;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=LNHsVij+5x9JgaPUweBLaKGHplyWWoiTn0aitA03H2I=;
+	b=5a1XH5oJIdf9DP74+5eL8pOAaKjvzXkFf5F7Qe+/7AMHSS8xb3bQC0XQByG5boBQKyH7
+	 AZIWZFS9K8Zwb/KqPQkTXnt8MGJ5FvS0f9KFtUPEvsFMwLJ14/9BGrgqbbDBvRe+J0hNp
+	 qGKbumGZeFQwV6LjZH0lK1DhdTHRGJL7jTKlTcGur3dnXKdBzg+KdH885zphHBlmfa2zP
+	 +mdZAcdANk6rYS74CsTe2M1UHOIJLqn9u3uYeGykXgjNDJ5smlTcpQGhdE3l76+AvGb34
+	 MEagCuXueoVL+64VMMid71sX65RdpQ6VpVzte3t7JJXwYqgGk/mreNMg99oMpIwZIOg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+6TskSy;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50A9D606A327;
-	Fri, 13 Nov 2026 15:44:38 +0000 (UTC)
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=tkkKofEl;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81FCA606A327;
+	Fri, 13 Nov 2026 15:50:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 81FCA606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+6TskSy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 446111F000C4;
-	Fri, 13 Nov 2026 15:44:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794584678;
-	bh=PbD4AtMB8bc+XYwJsGjxS6XrtV8DXvidAzLVTNW7qq0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=D+6TskSyn0FKpFu5tg/C7jAmpR5r/CKULYkdn4H71AEu0ZAs9GFKfxg7OI7ZpOVRP
-	 PjKWss5sth0A9kyeIT+Xw650IetB4HFv44Fcbc83BAOBuG1CEUizlfVq7hXMptDdkB
-	 S6LonQFgC5YlwuVsEcMamNf0FmLS4x11t3ePv6T4BrvdqlMLSlSITqks+AX2DUR/tU
-	 Uaew2SvQbL8Ifz3lxo+XwVuecy1lCOsirWJbbk3MonDPJ7ApEh4AyKuSE/HLjy0dRx
-	 5C/kV1s5GzQMpBi4muWFF3VXOCHh7qpkf9DC1XD4lh8bHu2DNMIXtl3hSBBmOZDHoA
-	 HdVlrjdk+Kb5Q==
-Message-ID: <5a61c395-9eef-4c97-99a5-30f434ad2c7e@kernel.org>
-Date: Fri, 13 Nov 2026 16:44:29 +0100
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=tkkKofEl
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:Content-Type:
+	Content-Transfer-Encoding; bh=LNHsVij+5x9JgaPUweBLaKGHplyWWoiTn0
+	aitA03H2I=; b=tkkKofElPkfzCs7g3VoIizyQ+jHk7+TPYige9O0fEiupXcGbH0
+	cz3sgBSB6GUeKRynXXL4pexWpcqx2iSmB6Dh2u72IzBUnCZ4W/yTILbvDeIVD8zr
+	f0udTUvUz5G/a0PZSh9KHJFn5lJFa7hOnXB0fB+TfDkybqYBPZo5hvyd4=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.188.15])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgDXYEWnMfdqQwm6AA--.1802S2;
+	Fri, 13 Nov 2026 23:49:59 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>
+Subject: Re: [PATCH v4 3/3] arm64: dts: qcom: sm8750: describe all MDSS block resets
+Date: Fri, 13 Nov 2026 23:49:59 +0800
+Message-ID: <20261113234851.42e0bacd02fa-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <8a0c75949fcf428a2163a2e63b27fcf08d3b4f9c.1794558882.git.xiaqinghuan@mail.ustc.edu.cn>
+References: <8a0c75949fcf428a2163a2e63b27fcf08d3b4f9c.1794558882.git.xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,120 +68,140 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm64: dts: qcom: add device tree for Asus Vivobook
- 16 X1607QA
-To: yass27106 <yass27106@gmail.com>, andersson@kernel.org,
- broonie@kernel.org, srini@kernel.org, konradybcio@kernel.org
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- vkoul@kernel.org, tiwai@suse.com, perex@perex.cz, lgirdwood@gmail.com,
- pierre-louis.bossart@linux.dev, yung-chuan.liao@linux.intel.com,
- abelvesa@kernel.org, linux-arm-msm@vger.kernel.org,
- linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <01b2c920412848ab85493acc2d4f5fc1@gmail.com>
- <5cfd0705da5845b88ffe6d9e8bfeb966@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <5cfd0705da5845b88ffe6d9e8bfeb966@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgDXYEWnMfdqQwm6AA--.1802S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3XF45AFWDCw4fArWDXr1UWrg_yoW7uF4xpF
+	W3Ga1UGrsYqr1S9w17Cw409a4rCws3GFW7GFZ8tryUZws8KF1xZFZ7Kry0gFyUCrn5Xa4F
+	yFWa9ry5uF4DZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
+	wI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
+	0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
+	17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
+	C0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
+	6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
+	73UjIFyTuYvjxUqiFxDUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/
 
-On 13/11/2026 14:24, yass27106 wrote:
-> arch/arm64/boot/dts/qcom/Makefile             |   1 +
+Hi Konrad,
 
-Please run scripts/checkpatch.pl on the patches and fix reported
-warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
-patches and (probably) fix more warnings. Some warnings can be ignored,
-especially from --strict run, but the code here looks like it needs a
-fix. Feel free to get in touch if the warning is not clear.
+thanks for the Reviewed-by.
 
-Please read submitting patches document to understand DCO.
+Replying to the sashiko finding as well, because it raises a point I should
+answer properly rather than wave away: is 0xa000 a secondary display core
+domain rather than the interrupt block?
 
-Looks like completely corrupted anonymous patch.
+Partly yes, and my commit message overstated it.  Let me separate what is
+established from what is not.
 
->  .../x1p42100-asus-vivobook-16-x1607qa.dts     | 239 ++++++++++++++++++
->  2 files changed, 240 insertions(+)
->  create mode 100644 arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-> index 88230c4e00e..7332a73dbac 100644
-> --- a/arch/arm64/boot/dts/qcom/Makefile
-> +++ b/arch/arm64/boot/dts/qcom/Makefile
-> @@ -509,6 +509,7 @@ x1e80100-qcp-el2-dtbs	:= x1e80100-qcp.dtb x1-el2.dtbo
->  dtb-$(CONFIG_ARCH_QCOM)	+= x1e80100-qcp.dtb x1e80100-qcp-el2.dtb
->  x1p42100-asus-vivobook-s15-el2-dtbs	:= x1p42100-asus-vivobook-s15.dtb x1-el2.dtbo
->  dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-vivobook-s15.dtb x1p42100-asus-vivobook-s15-el2.dtb
-> +dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-vivobook-16-x1607qa.dtb
->  x1p42100-asus-zenbook-a14-el2-dtbs	:= x1p42100-asus-zenbook-a14.dtb x1-el2.dtbo
->  dtb-$(CONFIG_ARCH_QCOM)	+= x1p42100-asus-zenbook-a14.dtb x1p42100-asus-zenbook-a14-el2.dtb
->  x1p42100-asus-zenbook-a14-lcd-el2-dtbs	:= x1p42100-asus-zenbook-a14-lcd.dtb x1-el2.dtbo
-> diff --git a/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
-> new file mode 100644
-> index 00000000000..fc572d779b3
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-16-x1607qa.dts
-> @@ -0,0 +1,239 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/* Hybrid device tree for ASUS Vivobook 16 X1607QA (X1P-42-100).
-> + * Base: proven x1p42100-asus-vivobook-s15 (panel, USB, boot path).
-> + * Transplanted from x126100-asus-vivobook-16: audio stack
-> + * (WCD9385 codec, WSA8845 speakers, soundwire, sndcard) + firmware paths.
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "purwa.dtsi"
-> +#include "x1-asus-vivobook-s15.dtsi"
-> +
-> +/ {
-> +	model = "ASUS Vivobook 16 (X1607QA)";
-> +	compatible = "asus,vivobook-16-x1607qa", "qcom,x1p42100";
+What the DT and the driver currently describe:
 
-Missing bindings.
+- mdss is an interrupt controller: "interrupt-controller;" plus
+  "#interrupt-cells = <1>", and its children take IRQs through it --
+  DPU "interrupts-extended = <&mdss 0>", DSI0 "<&mdss 4>", DSI1 "<&mdss 5>".
+- The mdss irqchip itself only reads one status register and demultiplexes
+  (msm_mdss.c, offset 0x10).  It has no per-line enable/ack registers; the
+  mask is a software bitmap.  The block that does have clear/en/status is
+  MDP TOP's INTR/INTR2 group, driven by the DPU driver.
+- dispcc-sm8750 does describe 0xa000 as its own domain: its own GDSC
+  (mdss_int2_gdsc at 0xb000) and its own clock family (disp_cc_mdss_mdp1_clk,
+  disp_cc_mdss_ahb1_clk, ...).
+- The mdss node does not attach that domain: power-domains is MDSS_GDSC only,
+  and the clocks list has AHB_CLK/MDP_CLK/GCC_DISP_HF_AXI_CLK, no mdp1 family.
 
-Best regards,
-Krzysztof
+So the reviewer is right that 0xa000 is not "the mdss interrupt controller"
+and that asserting its BCR reaches into a domain the mdss device has not
+attached.  That is a fair reading of the code.
+
+What the measurement says, and its limit:
+
+On this board, resetting only DISP_CC_MDSS_CORE_BCR leaves the display
+intermittently broken at cold boot: 5 of 9 cold PORs fail with
+  msm_dsi ae94000.dsi: command DMA timeout: status=0x2200200
+  panel-novatek-nt36536: Failed to initialize panel: -5
+whereas the same kernel asserting the group gave 15/15 clean boots.
+
+Two limits on that number, both of which I should state rather than let the
+"15/15" look stronger than it is:
+
+- That arm asserted three resets (0x8000 + 0xa000 + 0xc000), because it was
+the shape before you asked for RSCC to be dropped.  The two-reset shape in
+this v4 has not been booted; the driver-side change is the same, so I expect
+it to behave the same, but that is an expectation and not a measurement.
+- I have not isolated 0xa000 as a single variable either.  The correlation is
+with the group, not with any one member, so I am not claiming 0xa000 is the
+sole cause -- the honest statement is that asserting the group is what
+tracks with a working display.
+
+What I do not have: a datasheet-level statement that the INTR2 group and the
+0xa000 domain are the same hardware block.  My evidence for that is naming
+(dispcc calls the reset ..._CORE_INT2_BCR, the GDSC MDSS_INT2_GDSC, MDP TOP
+calls its second group INTR2) plus structure (same MDSS core, separate
+BCR/GDSC within it).  That is why v4 no longer claims INT2 "was left out of
+reset and caused the DMA timeouts"; the message only states what dispcc
+provides and that firmware hands over with the display block running.
+
+Given all of that, two honest options, and I would take whichever you and
+Dmitry prefer:
+
+  a) keep the series as is, with the commit message narrowed to what is
+     observable (group reset correlates with clean cold boots; no causal
+     claim about INT2), and
+  b) split 3/3 out and drop it, keeping only 2/3 (the array API change,
+     which is uncontroversial), and revisit the SM8750 second reset once
+     someone can confirm the block boundary from documentation.
+
+My preference is (a) because the failing boot is reproducible on this
+hardware and the group is what fixes it, but (b) is cleaner if you consider
+the un-attached-domain concern disqualifying.  I can send a v5 either way,
+including a reworded 3/3 that drops the "interrupt controller" framing and
+describes only "a second block reset provided by dispcc for the MDSS core".
+
+Unless you would rather have (b), I will go with (a) and send a v5 whose only
+change is the 3/3 commit message below -- the diff stays byte-identical to v4,
+and your Reviewed-by is carried over.  If you would prefer (b) instead, say so
+and I will drop 3/3 from the series.
+
+--- >8 ---
+arm64: dts: qcom: sm8750: describe the second MDSS block reset
+
+The SM8750 display clock controller provides two block resets for the
+MDSS core area: DISP_CC_MDSS_CORE_BCR and DISP_CC_MDSS_CORE_INT2_BCR,
+at 0x8000 and 0xa000.  The second one belongs to a domain that dispcc
+describes with its own GDSC (mdss_int2_gdsc) and its own clock family
+(disp_cc_mdss_mdp1_clk, disp_cc_mdss_ahb1_clk, ...).
+
+Bootloaders hand over with the display hardware still running, so the
+MDSS reset should return the whole group to a known state before any
+display hardware is programmed.  Describe both resets so that the
+array-API change in the previous patch asserts and releases the group
+together.
+
+On this board, resetting only DISP_CC_MDSS_CORE_BCR leaves the display
+intermittently broken at cold boot (command DMA timeouts followed by a
+panel init failure, 5 of 9 cold PORs), while asserting the group gave
+15 clean boots out of 15.  That measurement used the three-reset shape
+that also included RSCC; it has not been repeated for this two-reset
+shape, and the second reset has not been isolated as a single variable.
+What is observable is that resetting the group correlates with a working
+display at cold boot.
+
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+--- 8< ---
+
+One more thing worth stating explicitly: this series was written with AI
+assistance.  I reviewed and edited every line, the measurements above are
+mine, and I am responsible for the content.
+
+Thanks,
+Qianhui
+
