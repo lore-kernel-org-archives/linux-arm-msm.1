@@ -1,123 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794575412;
-	b=K52og1Q0Kd29sVcThWplIW0Vz0yunWsfsxYIQqlsbUKs1ocNkLkk+BPsS1fy0MFO0lva
-	 zgl68GvRYOX42YTjt/HKFgJKCYSGrVI0QGtaiNToT+jMoPr078Bm53J4+EtPflDwKxMJI
-	 0JSjPQSA1Aw4hIRJIQGrTM5jtDayatNLQV2uMvDSolq2LMJBsBM2bjAyextIot/6Y/Vyd
-	 +L8eWlkhIk6rP4MQxOASHqCITQI67HkYu2fLHNXW8wFNRT2Pc3j3yCSoRRTF0Lv3QF3Aq
-	 F/s6Np5JgTIaKlzSCTSyiSDl0WDkr5MmKpWZbP44WmGxgVYel1mxHMGOkhtzcv4FDfA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794575412;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=j8L2acpwy+A3uiHYtid26iwQmvXr9vBuqO0OxDxRSPQ=;
-	b=FoBVptXpD+6q6b+/FLdmRwhNtDqsm+wHH6BcktRLm3zTYYcJEF2eqPs12/RQnJ5uIbY7
-	 pmZWMh2eueKMTicS/7qELU3eseSMOoOI8g1t/uNxk+ZdQ0Dkd1IKqwseIUkwS7B9UUOya
-	 CM+wz4egH7KGK2cG59Nu7q3ofhj7HM8Ed26WVu+H9cIdjRkzhglE0mqDQlgVDpSBNYvHM
-	 l0cYeAWFeQRtNy1EW5YCdGHP6P3enD9PJdDJjCX9ymaiaUJFts6zDY6AVVyt9ODNnK/ux
-	 lL5Uy1V2gBUrYGSeU1HzLgY2HrklEXAGn+ZfYj1uldFtJeStpXV0pNXMQIEJZ/ik4mw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SQZEuSZ7;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FHGCVubF;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794575500;
+	b=vU1SvFRo5Epe70xdtZshrzYHTLrmVUBIsdH+Jgjh/bHV7RYOTLE6q/OLVwLnHa+KDqPX
+	 3XMQ+u6eTY/rAJUUXlbGuR6qeMZRlcvgbVfmuVYCkpJZJPWK7Es9OaxGvZqNOKhyS2shR
+	 9H8BLSUdPYhRE0x5UWTIb5HoaiY7OHVjpVof4/lukB2me5A+GwmKkNg3+q2YKAMrBHK2k
+	 bT+NoyFHZSwwxpIPc7XYYz7/yCXLrWH1y5hLuMYk4L/J7axJeUewYwL1TaUNpT6b8w1kM
+	 JQRKpDQRTxUp7TGSgoVpMktDDg4oKoPc7xqr3o9H/1t54p6QAWoBxL1KP9mxBZGIH5g==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794575500;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=UJJGqVjSBQwrXCt5oO1oVp31bm2wr0tRxTzs6y+s5eY=;
+	b=iQ2fofjGwAm8s/O7r7hvbnpEQzOn3cbPDIL4NjBfuMsK7OC8RxDTTaZd4RA43N5/id9r
+	 B3a2psO9X6O0V0rUPSJPYBjp3OCdVLFY8Nz6nI3LILfB6ZvhAP+qPDAsU8ij+lYcKiLXS
+	 fWHRbbkQP8gUAVFzLgbq+nUMdXrtt2wGEW3T9wi9XDEkUhnM6Pz94stmK+Vmz8kBrLwvA
+	 jnsfraS7vxdXQHI6/qyAJJ1q/GjVdtJ9Nh3H/8iD7QmaBxeSyMpDQuwj/Zsr2m7AKsp8A
+	 3rK9J5sPNdqp7ELiP7lytDtR/xv2qJmSH98V3ceJGCwUCedhqOXRFT9ihagu0mFS7FQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HhntSPDz;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48E56606A327
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:10:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 48E56606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68156606A339;
+	Fri, 13 Nov 2026 13:11:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SQZEuSZ7;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FHGCVubF
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ADCJQ2Z1525303
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:10:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	j8L2acpwy+A3uiHYtid26iwQmvXr9vBuqO0OxDxRSPQ=; b=SQZEuSZ7/wGLKUxh
-	SZQafe4FKG169IlGo5w2z5LX2QhGIOIambc41mKtHex1LIldaOimJFyoDqEMriAd
-	1fwZQnuIc8aTSa740MiCIvO9X0N5M0wCHPjDupl/80QPEMSOrkkzhosQHAviy5dc
-	mFxZB8cYlzWfDg43f9HAaM8JWZnI5CppA1JmvN7rlCuwOj6x22NK0Hzysox6dfgN
-	igJ45io14zaZwgQDWfPaxpRT5XbkhekdxvdvNJYSa8DLQKlZs8C3jAbNqhnLVTLQ
-	R1kO3B/Sj7jr686oS1akO7kAS2ji0+1fMGEgtaYJyKc15Z91AdJgwyzHe3hGZe9p
-	wv5euA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hx0g20m1b-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 13:10:10 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3ad704d4760so725602a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 05:10:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794575410; cv=none;
-        d=google.com; s=arc-20260327;
-        b=AduQZlo66tzRL0TL1k2dgRK6gu6VAE0ceBBOJgN9eJ9SKgBiof6kqpSXiuV/cV8Xnu
-         8tn119urpcUA+FPY1pRd30jd53gh35YzZnOqWylHNUDdzZq2BRh/g1yCBDcfdrQ+giyV
-         0P9gKyp6yFEhrIeXcOFiFv7uRRH6/5WCQgd4TdLi/kIMf3cnQVCQ1Z7SIJXE56lPKOT6
-         owgcxCGraAl6aynt+msPQD1+x31CuWV9W8O5QIGnZtuczUWmvWh9u2y4SuCbsI/nFNh4
-         arzGOcmgUkbykvq01NVbLPJHNo86UC41TJoPI5wezSmi4Q1aUJIOKayuSe9FM6Lee99g
-         eQ0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=j8L2acpwy+A3uiHYtid26iwQmvXr9vBuqO0OxDxRSPQ=;
-        fh=Cyl9941+Fkhvfuzexu+FXAYwxTtT0cvXQsOG8/oNCvY=;
-        b=WXz6NcRHsDTeWMh5CEjYmrlCF0B5pjPCFndX1L9b1ZYcnLLEF34gvxnOzLF0UGm3TV
-         XiHo+LIkjOxrULQWhdqrYC2+WDJ+tl+ETRmkds6i5HGkFPEIFatlzsAlI2LxSjuEYStj
-         /MOeu46DtevAUsIXgZNdQT0CfRJ7KoyzOywXJu829MXDtx1OYIbJNPnYbBXKX2qQMoS0
-         OFqBzfvD66wIHfaMhGESm08HB5N61LlmbZH6XlyyqonLtDi8egjim6Q53FSFxYkg9Ulm
-         QCB3odqXFIcb2GPD+1PvQQMoJk5bVn5O6zf9JWZzFpR3pZkg+vA+V6il4rstrz6tlBv4
-         gUEA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794575410; x=1795180210; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=j8L2acpwy+A3uiHYtid26iwQmvXr9vBuqO0OxDxRSPQ=;
-        b=FHGCVubFmUzYHITtw/8v/jAj1vRj8VZZ7EFvT47bna43R8aeFAuUDykqPRR0lBo8ZN
-         rAukflUV6vljEk10jmN4oQm6GdC2lYSW6cn1iCkKchMrS0+cm/xkNmx1kD7SoyCriMMt
-         O8c3fl82wUS0BYwxQIq/06aQwFo1u+pvsGInk9VaDalb80yvuuB2GhOWYxWeIA0hHClB
-         4zZLYyaF+UQXCIUx+H4qAFKYs/qfwOsz2gAJq6qEAiw4AVQJuwkSqnWs0c8o8HqLa8UA
-         cPFIasqyb9vAPfFLZZm48xjmo7a9lUJ2MYF2RY6Kf1/4F8C2XEzfnfwe0nbzN9AXml3y
-         iS3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794575410; x=1795180210;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=j8L2acpwy+A3uiHYtid26iwQmvXr9vBuqO0OxDxRSPQ=;
-        b=C15/GMyAMOjVwiQL6WfSlUwM3gqHaQq1AkbrzhT6zbRDCAt96KolSBc9AJs2KjRIKU
-         y3uQulp9XS0HCS8U1XllqZB/9qaaJaJJUuKtuAOeCySXlwlkuX9MO2j2HH4r2WBW0UTp
-         XYHTa/zVjjl6mggDXPkm0kqqLstz0VFBIfmfHebIbRzkubaN9igd4ah3XDD/S1uAWiBk
-         dffqyqNahytFk8aIlX37am48//ku5ljQWndLghPndsDGRLj6wC3XLKrrGVx0A19hKsvp
-         OQzIqqa07DhDCFwf0ILv2R2NOJ7uR24ip1Kh8SAtEUDfW5p14fZLXTzkx3MEigB01++n
-         booA==
-X-Forwarded-Encrypted: i=1; AL+hErHvuAr6kQJ41XE7j4bBnW7pNi6rNSAmFNmzWXB5sNccHNsQJGuMQSGVU1ZjM9ITIJWW1JS0+ndsJoa8VVSo@vger.kernel.org
-X-Gm-Message-State: APuU4Z+dCzOOA8/3/yTvTxoUegzc0iBabJfbfV7Umydu4tevXhHLddi1
-	NX5Ljd3kmoHqHU2YIABCJiZ9Hf09ywOuU2P8PdVOif52XLMHjrPA6o6u37vbt7TtFxsgmF8YGyx
-	vnBD/wcK83j/R5rZuixFE1hnMBS8N3vLYW/tKYGpLEycyQZm1D96+ObbslOm4gIOpC65x2EIJnk
-	rsqRUN2lZB8LkFsGdOZ4J7UJ3og7eQXg6AINbdw9gbwII=
-X-Gm-Gg: AYBFou0NEecXAccbdG9tZuVMEf1TkPFyYgFUyoEu8+IlvOo0Ufr6fx6jOo9Nan1Vw6A
-	R5A95lnZnBus3Pi5pGKQFWmeB4YfON2F/r9bjJGd5Gri936ObDaEM/UFMWmaGHyKUKza1lsPjE1
-	L8iKGRFP3Sv8kEFjBaKa7yVEQ2TyPYbXCtC7Etb5OxTvQ=
-X-Received: by 2002:a17:90b:2f0c:b0:3ac:6e91:3f22 with SMTP id 98e67ed59e1d1-3b1b0b85d23mr1919427a91.52.1794575409663;
-        Fri, 13 Nov 2026 05:10:09 -0800 (PST)
-X-Received: by 2002:a17:90b:2f0c:b0:3ac:6e91:3f22 with SMTP id
- 98e67ed59e1d1-3b1b0b85d23mr1919378a91.52.1794575409140; Fri, 13 Nov 2026
- 05:10:09 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HhntSPDz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 151971F000C4;
+	Fri, 13 Nov 2026 13:11:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794575500;
+	bh=UJJGqVjSBQwrXCt5oO1oVp31bm2wr0tRxTzs6y+s5eY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=HhntSPDz4hBtYpgjSDSSVhehC3ugFdt3d8uKPZhC9zPonuqtlUMxXtQgAXMu51sk+
+	 c6XaBX4mO0q+UZo6swHPzJFo/cu1cNYby+GumuSJb/pVqWa6M9JH4jlEBT/Exzl7GL
+	 ilydPvL3dZGNK7a2kUtrXtR0vCyfsSfrp37MQPRL04JKFaIyA2wxO0cy5ZJPxSTlr0
+	 v8iYKnqyavXMWdSClMn6YoV3XhTdrYpDGEwipYibWKjBD7yNxpuoauoWKAYDDvAG18
+	 HB+RxkZpbQXP1mMGqKExpbXk0lrd8Hkf6F0/bRiOljbAPatD7c8Cs1nGKblzyWcaU1
+	 yoMV4p8by0Ezg==
+Message-ID: <3e4b6491-2b58-4b9c-90ad-0912f47cb217@kernel.org>
+Date: Fri, 13 Nov 2026 14:11:30 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,134 +51,157 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261022-psci-fix-v3-0-9ce2133c5659@gmail.com> <20261022-psci-fix-v3-1-9ce2133c5659@gmail.com>
-In-Reply-To: <20261022-psci-fix-v3-1-9ce2133c5659@gmail.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 14:09:57 +0100
-X-Gm-Features: AclHuK-XrooPPikBTcYU6ieoCi2hLf5EMDtx-gXhYpRfrFw3mVoiL0ydev7kJnM
-Message-ID: <CAPx+jO-rMeg8BvemcMUcC10enjt0dkqWvsK+uRwc75rWpLXhMg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/4] dt-bindings: arm: psci: Add skip-suspend-mode-switch
- property
-To: Reza Kurniawan <imkyufie@gmail.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Val Packett <val@packett.cool>,
-        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, Alejandro Tafalla <atafalla@dnyon.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA1MiBTYWx0ZWRfX5Uh4lZftJnfp
- c5Sao/tO3/Co0DFPzp6tY02lmOH8dHkPdRo+rgohp1oVmvbw8n9yV4TVXw73OJrzfeWz/9FcoxH
- ckOQAtUAl1CXwqaROYprd7ANgXJnKJji2MS6u3vkpom0t8dEBm/4/1P1E2XRx3oasG2bXYbXVR2
- 69ngGbHzLkFWHTasv5MvnQ6WQxg6BaptTXxFLwa3C3T1pIr06WZhjlIRVChIcrmsMlXgt8WtScD
- s1myhs8Xu2T1a1iIWyEW6YusFsKW1jayhBQaIRLUxYMyYzoaxT3CkOqUGf+ZZNS/FIR+D6aHI0z
- 5WexQQG+ZkCubAeTHXS65VbskqQ+NX6uwzT4IumJEfYDfUEblF9nQlqg2OruUHDPy6+tQ7qc+Yy
- OcwDXi9Y9bEJkL37vPUVjiAjC9JJWNLXtMkHijiFOPrLvF7JTNHEt6XuaPkM+U0s57TL2IEFhiW
- aNgJL8og2MOb3++Jk1g==
-X-Proofpoint-ORIG-GUID: ozS9IIVm6dxjnmXqOg-4UQm11UQVxU7e
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA1MiBTYWx0ZWRfX9l2A060n3Gvq
- uLAXA3JkydkXowYEnI5yYL0A7GLEkHalQOOUID9z+bHP9M7utS5sy/eXA1yZMPLlNyHnXIPmg7e
- OiTLXCp+H3LcIo9Pbrc7HLbtr/FMe6o=
-X-Proofpoint-GUID: ozS9IIVm6dxjnmXqOg-4UQm11UQVxU7e
-X-Authority-Analysis: v=2.4 cv=SpIFe/O0 c=1 sm=1 tr=0 ts=6af70c32 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=pGLkceISAAAA:8 a=UY4Qpe7uAAAA:8
- a=E9o5ywDmFEx5B8TChakA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
- a=Dz9CbhmWzz49oM4s8yQO:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-13_04,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 adultscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 phishscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611130052
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/5] iommu/of: Require reg for iommu-addresses
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Vasant Hegde <vasant.hegde@amd.com>,
+ Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
+ Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+ David Woodhouse <dwmw2@infradead.org>, Lu Baolu <baolu.lu@linux.intel.com>,
+ Jean-Philippe Brucker <jpb@kernel.org>, Rob Herring <robh@kernel.org>,
+ Saravana Kannan <saravanak@kernel.org>,
+ Tomasz Nowicki <tomasz.nowicki@caviumnetworks.com>,
+ Eric Auger <eric.auger@redhat.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Joerg Roedel
+ <jroedel@suse.de>, Srinath Mannam <srinath.mannam@broadcom.com>,
+ Oza Pawandeep <quic_poza@quicinc.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>, Alex Williamson <alex@shazbot.org>
+Cc: iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux.dev, devicetree@vger.kernel.org,
+ kvm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-media@vger.kernel.org, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+References: <20261106-add_iommu_ranges-v7-0-5c0f72083e52@oss.qualcomm.com>
+ <20261106-add_iommu_ranges-v7-4-5c0f72083e52@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261106-add_iommu_ranges-v7-4-5c0f72083e52@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-+ Sudeep
+On 06/11/2026 18:14, Vikash Garodia wrote:
+> The "iommu-addresses" property describes an identity 1:1 mapping between
+> an IOVA range and the physical memory specified by "reg" in the same
+> reserved-memory node. Without "reg", there is no physical memory to map.
 
-On Thu, Oct 22, 2026 at 11:41=E2=80=AFAM Reza Kurniawan <imkyufie@gmail.com=
-> wrote:
->
-> From: Alejandro Tafalla <atafalla@dnyon.com>
->
-> On some SoCs (e.g. Qualcomm MSM8917 and MSM8937), PSCI_FEATURES reports
-> that OS-initiated mode is supported, but every PSCI_SET_SUSPEND_MODE
-> call is rejected with NOT_SUPPORTED.
->
-> PSCI provides no call to read back the current suspend mode, so the OS
-> cannot tell which mode the firmware is operating in or why the switch
-> is rejected.
->
-> Add an optional flag that tells the OS not to issue
-> PSCI_SET_SUSPEND_MODE on such firmware.
+This looks like ABI break.
 
-I think it would be nice to further clarify what's going on in the
-PSCI FW. If I understand correctly, the only supported mode is the
-PSCI OS-initiated mode, hence it's always running in this mode, right?
-
-This is clearly a violation of the PSCI spec - and I guess updating
-the FW isn't possible at this late state, or is it?
-
->
-> Signed-off-by: Alejandro Tafalla <atafalla@dnyon.com>
-> [Reza Kurniawan: split out the patch, rewrote the property description,
->  renamed the property]
-> Co-developed-by: Reza Kurniawan <imkyufie@gmail.com>
-> Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
+> 
+> The DT schema now requires "reg" whenever "iommu-addresses" is present.
+> Align the kernel implementation with this requirement.
+> https://github.com/devicetree-org/dt-schema/pull/207
+> 
+> An identity mapping requires matching IOVA and "reg" ranges. Reject
+> mismatched ranges and report an error.
+> 
+> Suggested-by: Rob Herring <robh@kernel.org>
+> Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/arm/psci.yaml | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/Documentation/devicetree/bindings/arm/psci.yaml b/Documentat=
-ion/devicetree/bindings/arm/psci.yaml
-> index 0d04389c81..2eee38d155 100644
-> --- a/Documentation/devicetree/bindings/arm/psci.yaml
-> +++ b/Documentation/devicetree/bindings/arm/psci.yaml
-> @@ -98,6 +98,19 @@ properties:
->        [1] Kernel documentation - ARM idle states bindings
->          Documentation/devicetree/bindings/cpu/idle-states.yaml
->
-> +  skip-suspend-mode-switch:
+>  drivers/iommu/of_iommu.c | 32 +++++++++++++++-----------------
+>  1 file changed, 15 insertions(+), 17 deletions(-)
+> 
+> diff --git a/drivers/iommu/of_iommu.c b/drivers/iommu/of_iommu.c
+> index 6675fc900e6c2d55b34c61dc9effaeb48e24f18f..00b02c19f27e195fc36c4bc1d91253255147c9ab 100644
+> --- a/drivers/iommu/of_iommu.c
+> +++ b/drivers/iommu/of_iommu.c
+> @@ -174,19 +174,12 @@ iommu_resv_region_get_type(struct device *dev,
+>  {
+>  	phys_addr_t end = start + length - 1;
+>  
+> -	/*
+> -	 * IOMMU regions without an associated physical region cannot be
+> -	 * mapped and are simply reservations.
+> -	 */
+> -	if (phys->start >= phys->end)
+> -		return IOMMU_RESV_RESERVED;
+> -
+>  	/* may be IOMMU_RESV_DIRECT_RELAXABLE for certain cases */
+>  	if (start == phys->start && end == phys->end)
+>  		return IOMMU_RESV_DIRECT;
+>  
+> -	dev_warn(dev, "treating non-direct mapping [%pr] -> [%pap-%pap] as reservation\n", phys,
+> -		 &start, &end);
+> +	dev_err(dev, "non-direct mapping [%pr] -> [%pap-%pap] is not supported\n", phys,
+> +		&start, &end);
+>  	return IOMMU_RESV_RESERVED;
+>  }
+>  
+> @@ -211,12 +204,14 @@ void of_iommu_get_resv_regions(struct device *dev, struct list_head *list)
+>  		struct resource phys;
+>  		int size;
+>  
+> -		memset(&phys, 0, sizeof(phys));
+> +		maps = of_get_property(it.node, "iommu-addresses", &size);
+> +		if (!maps)
+> +			continue;
+>  
+>  		/*
+> -		 * The "reg" property is optional and can be omitted by reserved-memory regions
+> -		 * that represent reservations in the IOVA space, which are regions that should
+> -		 * not be mapped.
+> +		 * "iommu-addresses" must be used in combination with a "reg" that provides
+> +		 * the physical address and size of this memory region, for an identity 1:1
+> +		 * IOVA mapping to that physical memory.
+>  		 */
+>  		if (of_property_present(it.node, "reg")) {
+>  			err = of_address_to_resource(it.node, 0, &phys);
+> @@ -225,11 +220,11 @@ void of_iommu_get_resv_regions(struct device *dev, struct list_head *list)
+>  					it.node, err);
+>  				continue;
+>  			}
+> -		}
+> -
+> -		maps = of_get_property(it.node, "iommu-addresses", &size);
+> -		if (!maps)
 
-Maybe a more descriptive name can be found?
+I miss the point why you are moving this part. Irrespective to actual
+ABI break, why do you nee to check for iommu-addresses before?
 
-osi-mode-only or broken-suspend-mode-osi-only?
 
-> +    $ref: /schemas/types.yaml#/definitions/flag
-> +    description: |
-> +      Do not issue PSCI_SET_SUSPEND_MODE.
-> +
-> +      Some firmware advertises support for OS-initiated mode but rejects
-> +      every suspend mode switch with NOT_SUPPORTED. Since PSCI cannot re=
-port
-> +      the current mode, the OS cannot verify the state the firmware is i=
-n.
-> +
-> +      This property is an assertion that the firmware works correctly wi=
-thout
-> +      a mode switch. This is a workaround for non-compliant firmware, on=
-ly set
-> +      it for devices that ship with firmware known to behave this way.
-> +
->  patternProperties:
->    "^power-domain-":
->      $ref: /schemas/power/power-domain.yaml#
->
-> --
-> 2.56.0
->
-
-Kind regards
-Uffe
+Best regards,
+Krzysztof
