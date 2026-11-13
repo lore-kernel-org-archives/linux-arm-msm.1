@@ -1,122 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794538335;
-	b=p9p1wg8y8U8Z4Jz/J8uTsfuZRjeIXkXrpD1SkTUAWqM1pn0HXoileVrbaSEYFb0qcJNw
-	 17lTWM2A6gwRBpmUM1JXIxiFayewp9YLuJOChNhbP+LjK/GsYBsQtE1SF1KqjQ0uY3whN
-	 J/Vx2PtVQQ7uqGSDNl/Xee9YUCNn9GyQpSZj+VnrjUPbhvlcdaPy2apVS/6wbOpJ05NpE
-	 fw8mAPmtpWOdCDmYGc0KD/W8eXW2fVH3sFpv5L55Bi+CRk9Wdl0DcobyjOdJ1Kajr8MGW
-	 rD4dywrm6gT4yMuTVlbBgZcoNC1BC23gWAa6bfKNOUvVK60brMdk2HUlP97zEUGR0uw==
+	t=1794538494;
+	b=zn5qJXGkL/zNwimu3ioZLvDirwbTHtnJ1FbhQQl77B6PA4oWhWQMP4hvdeX6U5Ip/jLN
+	 /PkCsMqhVOC7hfBae4Nm0SfBFBwR+7hMb6hDVqhaCbth79VgKQkWvVhIRHAf1JReDwVRD
+	 +u3Pj/koNGudd1i2NHbkB0t46/u0tWAhtt0IJJ9Psc6Ig4iNTjmzMkcnJAHv/2JZcDfIk
+	 xMOZGIA/hakM9p94nPJ/eYoly07rUdv8FIisMPTjE2pzfcBOIcgAptmZSQaXRT3ypR4fG
+	 pchZR8B1/VbY+y7jhElLdnIOBUFtiBR+09rDM01IKEQj7vxKDwKIPsp/RhDgGXlpOVA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794538335;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794538494;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=MU2+tmmCPa26DXQExpMSKDNbgJ1/fyIMIRynINL7wAE=;
-	b=uq+EJUh5kdMI+5v1bIKTxicvAbZrZjUVzVIpShs13IW41wOeb31m9BFZ273fo0FETokV
-	 I6Ff51ZqSN/8BpmV6evykXKoK0NpLVUT6aeNvJzWeaVeTIGmoEeY1siW0ge/25c9RY9u+
-	 hZT+H6vITR6mZJgnVAdDa7oVrY9nmaqTsauQK5xlCiFFca6t23vIAHVp14JX3jl4/Jgi7
-	 fCCy2pPtbm8SpVZsG+CNx1n0+L4bH3mxh4w0QSwsTJg/gtV9I6ge9tvEFZJgGx9+Qn/tA
-	 ZPOwkiIdD9oOtRl6UxRis3XGwjdNOBXo0xZqS5DyAjIE2vvi52q2sZiGURhfCMX8Dmw==
+	bh=3IFlEUS0jw9JEezJjoa+Ahcnwnp+ipK5GvAoLO2eIuc=;
+	b=VY3MuRltBlTQyO003NQjA4uyNESz1oE2S9J2QaUbGCiuzpSXY1JhrHdD0Z7fsyZ2TFRR
+	 J4L5KiXNeXYZH/ru63Fkv8TfY3Za5eQFeS5AbjTiFcuEv3h3uA7bMu4PoteUfvOSNvLOd
+	 f/S/o1vYpdo8NqUysDCNUju0xPubCoKt1y6nXYAzZd1GVUw5JcZpoQbUFcqUYhUOL04mq
+	 FpaYkmqupJ0S0Jxfot1KpYX7CuWqZqZk/nEWeSVmdq2K+zCCNXRm9fhd0a3XCZtOuC1cq
+	 KD+MmWnCg8wbxppZBaxdM52GP8OZkCS/am+2+UbGGiZBsXQAqFuOKO6I18zV/AI4Tvw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=X3CLyaDf;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FUOoJ3F4;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mAeMaPNT;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=guDtYZxZ;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7FB3606A332
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:52:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A7FB3606A332
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 793B7606A31C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:54:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 793B7606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=X3CLyaDf;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FUOoJ3F4
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AD2KEng2636878
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:52:14 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mAeMaPNT;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=guDtYZxZ
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AD2K5Cj3179214
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:54:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=MU2+tmmCPa2
-	6DXQExpMSKDNbgJ1/fyIMIRynINL7wAE=; b=X3CLyaDfMtzkIwaFplQPGeVstFM
-	Q5gGWmDtDwy4Cnz6EMbicmdiQepEeWHMsWJysf7SHQYnBKRvWOpeWtzEDFteIZYz
-	0ZKV6ydaJs0ZIUkWVIDzifSy0WqpDhzEAulPCl5lrwPuaed22dnjzXoIcY7djyuf
-	nzoSqCtTICnf6yTPeACHG5r/mLVl1xzeqR1yptt6ZiQ55CQrJE9dAlGvoahS8IV+
-	/6P7M3qmO85Q3a8a6+CLW4u0QFx9NYoeFS1IpuMnR8iEnXo1B3Yrs6lZ6RlldRRy
-	V106EwLq3ZYOFF+iKB/14+Uei7wFn6y4268s5vRLFt5NfX2grqbQ/ewrlRA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hw6re4as9-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=3IFlEUS0jw9JEezJjoa+Ahcn
+	wnp+ipK5GvAoLO2eIuc=; b=mAeMaPNTVcH/RfulSEEcf4Mi0l/zKk1TLAWJAtut
+	+wC78LhpJPRTAQlt58ob7fzUWFONgyOCpXNUrTn56jZOeh3Gjrop6WZyyV7/G/R9
+	mLEkkduNNJE+IeiZ/afjYjkQbM4X+BmS8fyBY21rQ/+UlFW1Pz6PhUIgU9sBXOOU
+	X/A/pHJKgyDyzySC5gfzIRAJ15Uys/qUtmWxpYBc0XGQkukWFTHdKozsi4WvyQg4
+	aRGnso0JKeArYZA8K+cd2h5kd4j+hOti4g94W6curiWoahmahS75i7hgKVPLRl4A
+	+kuxpU3VuVTTxDbcclph6ghL5FH+SgYLxX2I1zFEvZucHQ==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwh0ahtk9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:52:13 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2ed02a00b24so4323615ad.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 18:52:13 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 02:54:52 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-375bac6bd21so352962eec.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 12 Nov 2026 18:54:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794538333; x=1795143133; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MU2+tmmCPa26DXQExpMSKDNbgJ1/fyIMIRynINL7wAE=;
-        b=FUOoJ3F4IWTHhsYo586UB3V715kZIrzVBOfEs8h1PXVGAtOKN4U/Hhd6QI/Sio7sS7
-         XSacMMkbqSAVGqTl81Yts2uDvMps7ghl/ah4kIWc7nbiLM/fRDG3/HLvq5Rd6DWSvWRG
-         +ZpyV0RQwoZ4KuDD/gYiPt4iuOfXXxjnp72r1GAdhUCmFPIfY7n9G/sQts9eaTJoi7o8
-         nRL4NUvty4hb4NnPqlCOd9eiE8qCuJ1CejL+jdMwnUAouCPYSEWkgzpTznrx4BtDfPwE
-         0ahwBNxnjN6urYiGrQk5mHViS/XJTHwfYqwXB0KzSZivfzXCZAOYZVo0HD+LxbPVSII8
-         Gk2A==
+        d=oss.qualcomm.com; s=google; t=1794538491; x=1795143291; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3IFlEUS0jw9JEezJjoa+Ahcnwnp+ipK5GvAoLO2eIuc=;
+        b=guDtYZxZ64ptWGyTeSX0Z2mpOWhSvzMJ3uJMNmDuodMfYOkarOtXwZTYAQjKbLO+k1
+         BXQJToSfmNJ1djhw2MwzqQkBKgcOjyLp2noskNzk/WeIvogTQHs8Wz4vFWcy2HiA956K
+         +abZcaNwp6qckPxxDqx4XqrZLYjJHMLW3vlFtGHVoy8Kld3kfcjTzuud4/mBwBUc5y9R
+         a89RmFDsMY4OUi3QE7NyA3UOUhp2VI0XSgKJuiKh1mux69MwIC26P7pDadG5W+ULDF9Y
+         x4c+zqorS1sCeMcfx5C53RRWj7t9BxBPm/zkHG+mcRmp5vlnpA1MYjHAGM39wB6niNWm
+         u/4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794538333; x=1795143133;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MU2+tmmCPa26DXQExpMSKDNbgJ1/fyIMIRynINL7wAE=;
-        b=bYSsDHh2ljMHzSJRxmGMqO/QLBk1nNtwaX6pB0jSSKZmSSwMCI9IXXwh5HtJ4BwG/w
-         khYmxM9dzBOiEnfxDad54oS3H8inJ1rp2zo1A/O5x9AGbhItW3uVlSHcsAMCZp0g32jF
-         l6le/EvoBo3Goy3DEEu16jLGeX2cUInJp/05kOL3susPOLy5d3SYqhKeQ1WZMQPTCRsC
-         tugIlNrQh3Ak8XFM46B3joLBOv6qrYTKEo8vOys5qKbgn9gTr/cpQg5wqSwlB49BOYtn
-         wZvztKP157yR4IJu7Uhexspc2SfN5QpYDTYRf9dX1GMktYJE18t5AVd/C+rCIycmXhfB
-         yQDA==
-X-Forwarded-Encrypted: i=1; AL+hErFEVrIuJwtqM+V9hz7Wj24kVrE8dchhA20ouIQdfAPUTCXYYfVCrQDW7c8WBht7YMylWuE3vIVexlH9ZEoU@vger.kernel.org
-X-Gm-Message-State: APuU4Z9aQUox0WqSFkz1waevZJZC0Yx2j50xGn3YO1c3sJ3oW2lqqylX
-	lGIf8WU1smFBNDYI3oKjOXEcK9HIG/5S1dP677x2hd3lrwVKw14O5OzzUz5xyvnUXycKaFkt9eq
-	ed7MznxE+5Qm2UPOerYvaIZBVKLSp/OLwrHyBVCTh1NkP6m4dmE7RDHvVTSNPFQiSy64A
-X-Gm-Gg: AYBFou0YWmiMHmnQ/+LFOGieXaLgtRAdSDJuTJIYLBt4ZYRpVgW5gblho2hvXrhmkRS
-	+2pqayLGPAgJ/3Ceq/0pv/L6ZIYkIxoFtyMYC/KQgDj1WARRbDeLJ+NmtXkBIOcqz04rxuCWk1P
-	QAuGWd6ld93rkS8zjfUoZ5ECEZTSy2XseorAMOqw8GsNJ+WdGcTXIEBjW/wKO1Zy0ttsK+ftRug
-	00wPNN69PGGGjRMWRZLPfa78GDsJlYi6ARgeiQqTUoq1enfQ6iEwcxPqvTCypTGQx2gOpVdhP5Z
-	BSLeISq/ikMuAkvPelOhtxw5khagrNq18ouEBY7d5RZ/4ozH4hsCfaO6FJxxL1cPm/l53S316Ay
-	khEEtCic0Hxogv6ak76exXDq/5kfmKv1HGxv5tmcNq1YY+qYA4nsJnfO0gmOu/UVXD2GcvOfSUp
-	b12JxMJ5c=
-X-Received: by 2002:a17:902:c94e:b0:2dd:ad74:ac32 with SMTP id d9443c01a7336-2ee0dad0617mr11244215ad.27.1794538333017;
-        Thu, 12 Nov 2026 18:52:13 -0800 (PST)
-X-Received: by 2002:a17:902:c94e:b0:2dd:ad74:ac32 with SMTP id d9443c01a7336-2ee0dad0617mr11244075ad.27.1794538332498;
-        Thu, 12 Nov 2026 18:52:12 -0800 (PST)
-Received: from ap-cloud-sh02-lnx.qualcomm.com ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ee0fa0b3c6sm3044435ad.68.2026.11.12.18.52.07
+        d=1e100.net; s=20260707; t=1794538491; x=1795143291;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3IFlEUS0jw9JEezJjoa+Ahcnwnp+ipK5GvAoLO2eIuc=;
+        b=zRjMG9u+nQaTBLqTFId8WTyapshkdnKyHxIB4BHmH+bMCcgdo3LNDzNc5z8A+88XjX
+         V/Pnmt9OTncwC9J1TFE6m+h1Ua+QLENAWjAiIAODN5P+APobL8F2ADjM2b3wu1zQQ+qp
+         2R8Se+93prAbzk3pS7OAtqnwaZpGUxDFzXAb8sUJ0Naj3o78+a6ju9AAiCJBsdO1b7D2
+         saRx+3Av3I1Dlxbt1dKcQAZNUJFaGetK9XTe0VLETLFcmesSujiXRJjYmF+Unwdb2Uuv
+         f9V4N5bZm7xvjjr+EYMq2A01UVxbdat9NofpZUbCGqK8aQ/Kji1SFvE9daEpSvqYxy4m
+         S36w==
+X-Forwarded-Encrypted: i=1; AL+hErHh8Qe/RKJ6HRQcvQVxQ3o27ISXzqU3wmoIag5wyY5kvje7DE7lRsP5Ja89gaytGd0wM6N0oUOspXiqRv+G@vger.kernel.org
+X-Gm-Message-State: APuU4Z8FLZ8RXV/lNaRROtvv/B3gmUTNJ8HU/DO73b/eDl1KwNvjmQJE
+	ymyMcN8cp5UPBxYTwkOWbitRkeTgWi0j4AHfWdUPRc4O0rbWPhzGRV4YSDz5JwBKdLmIyR4BZ8y
+	sJM1O5s5aDp+HuiRIKDblBTpPNB5itTO9jt1KxNhux4jeT/sqqrLFSDtzMt53ISGgJmCy
+X-Gm-Gg: AYBFou3XbV/nypMbXxPzAniw2n3nCkKahe7f6EA8nUz3L2pOFe8t9TBqVn/P5nR8j5Y
+	hlPJhe63AQznAvvWdAAb8Qq3e/VqFKIApgDW7WRenEFoIN1Mbgdd3I1lut5YoI8gyK1jS3S+9JC
+	e2+wpdYWjZuaG1oJVMzS36MlIOH9kKXlFJsqhU3oeaqe6CfRhjIGsnzWtEXyBa5pIdDEE1+imVu
+	d7149IlPqAyMJ9zpfO0ekLL/Dl+UUz+et1OySsS9Cmg1ofR7lERNBHTIZA7Wih9hA9VxqITfwYa
+	nNwlZKjQ6hrrtuiEZwlVSVCRdvNr+v1BQMEgDLJEVyv5ZRx27R0KhZfjpi2+V0TFQ+KhokL1uMp
+	sam3aCNTBdufKCis5n4jqq8/NQIyxLNH4u6e25kaRImE6WbEUl1l0cNlzcLaXhIxOjhe5foFOfE
+	XKsFt9V6EK/xTuBqwCpfOS4w==
+X-Received: by 2002:a05:693c:87d4:10b0:371:197b:5ade with SMTP id 5a478bee46e88-377e1016802mr3939814eec.11.1794538491192;
+        Thu, 12 Nov 2026 18:54:51 -0800 (PST)
+X-Received: by 2002:a05:693c:87d4:10b0:371:197b:5ade with SMTP id 5a478bee46e88-377e1016802mr3939768eec.11.1794538490435;
+        Thu, 12 Nov 2026 18:54:50 -0800 (PST)
+Received: from hu-petche-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379569b8389sm3910027eec.25.2026.11.12.18.54.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2026 18:52:12 -0800 (PST)
-From: Songwei Chai <songwei.chai@oss.qualcomm.com>
-To: andersson@kernel.org, alexander.shishkin@linux.intel.com,
-        mike.leach@linaro.org, konrad.dybcio@oss.qualcomm.com,
-        suzuki.poulose@arm.com, james.clark@arm.com, krzk+dt@kernel.org,
-        conor+dt@kernel.org
-Cc: Songwei Chai <songwei.chai@oss.qualcomm.com>, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        coresight@lists.linaro.org, devicetree@vger.kernel.org,
-        gregkh@linuxfoundation.org, songchai@qti.qualcomm.com,
-        Jie Gan <jie.gan@oss.qualcomm.com>
-Subject: [PATCH v17 10/10] qcom-tgu: Add reset node to initialize
-Date: Fri, 13 Nov 2026 10:49:35 +0800
-Message-Id: <20261113024935.3173715-11-songwei.chai@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261113024935.3173715-1-songwei.chai@oss.qualcomm.com>
-References: <20261113024935.3173715-1-songwei.chai@oss.qualcomm.com>
+        Thu, 12 Nov 2026 18:54:50 -0800 (PST)
+Date: Thu, 12 Nov 2026 18:54:48 -0800
+From: Peter Chen <peter.chen@oss.qualcomm.com>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: gregkh@linuxfoundation.org, Thinh.Nguyen@synopsys.com, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
+        konradybcio@kernel.org, abel.vesa@oss.qualcomm.com,
+        wesley.cheng@oss.qualcomm.com, krishna.kurapati@oss.qualcomm.com,
+        konrad.dybcio@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
+        neil.armstrong@linaro.org, val@packett.cool,
+        balaji.kalkonda@oss.qualcomm.com, tvlad744@gmail.com,
+        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 0/3] usb: dwc3: qcom: Keep USB 2.0 working in
+ DisplayPort-only modes
+Message-ID: <avZ7-Ax-_VwcJhYG@hu-petche-lv.qualcomm.com>
+References: <20261103135057.1682-1-26rote@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -126,164 +127,144 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: E1GnOXW_HVMlabsUpKf9QfOnp4-icGVH
-X-Proofpoint-GUID: E1GnOXW_HVMlabsUpKf9QfOnp4-icGVH
-X-Authority-Analysis: v=2.4 cv=NJhAaE6g c=1 sm=1 tr=0 ts=6af67b5d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=u6OCHy2KTxjFLSf8iyQA:9 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAxMCBTYWx0ZWRfX+pmwnngD3dn4
- tpX8u9bmsOTp6xExwEldbsQrakglSgYp68XUZb8t4GyIgeesSKqEAWVnd1+tFmYrCjqdPacaFW8
- PZiOGAsPAoLaUL+jHK9WiFRc087yaXY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAxMCBTYWx0ZWRfX6mzeQFYe69HP
- 8b6nc9xyicLliIVi6DY20s4Ka8B5jPJQcLKlKPt3FqAeRoCExDERkWoSqlScZ6lwzXVsykg6SHT
- 0yg4kxKwsVjgiZU1FuaIAS5mVkm6+fx+CQ7AD0pqrT9bQlT5sc8qx8kz2KcH5agBMoXckavNTrq
- lpd7SNDEg8DAwjz6rVQR8DjLgsKz85K1F+YNi7IyBrKlm5z8ZuBXREC5zitql/nVUqvzf6pJ4Dt
- Blw2KZW+fR5TnggpwRG0hSiSZihsU/jqKVxgq3LJiqpR5ANo6zGAZpv5ajPOlcT8trYlEH/R1lc
- 3HFTltR4CR9sqBlh/+mxK4suEzrfRyEoG9W9GpNMGQTu4PWj0K/vccLmhB05FizN3Agos7gorNT
- qoeGyfoQXpIhhoe2cvVwbFbytjD4SHoXclT0uVqS6iNeZBZ43Z+kJAbklShqobmTMhv7oXG2MHV
- ieERgyloz7sWNLCxvzw==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261103135057.1682-1-26rote@gmail.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAxMCBTYWx0ZWRfXxBeHD/qsiW94
+ r+rsy6je28gRERk9OMsfqjq7S+QLH7KFdXOkXfutnYVCqhyHkAiR6qM/3UsH6QTpASsPr+mvb5E
+ flffA3UxFeOR0BertFrbsWz6XnipZhc=
+X-Proofpoint-GUID: oZ7j5w5X3_-AZ8LD3_UsuHo9dpO46pKo
+X-Authority-Analysis: v=2.4 cv=N+e8hG9B c=1 sm=1 tr=0 ts=6af67bfc cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=QX4gbG5DAAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8
+ a=76iuuaO-dfIhFSRFSN0A:9 a=CjuIK1q_8ugA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=AbAUZ8qAyYyZVLSsDulk:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAxMCBTYWx0ZWRfX3JvnRD93QCEm
+ 02qI0RHVIpTlOBOGTyL5evlALPbIgowGw6b0Vi+MNtB2CoI5IEb/NHbK3V1OfK85IXHv8b7cdRp
+ xavhqXFanw3NM8hE7lAB5ZvfVHYixueSIZwhVhQKSI8NVmilBoPo18oCzsfPUmuIMVgJuUdUixK
+ bayzkPEbf93GIteiWRRsc6tcP1ej3p8siugkZyCHR4VHndkLBZ3Q2j66k6mhm4WabhhYA9380YT
+ zRDn+5+0aHZ2mLV4pfrm0OQYP8Xw4IkLQMGc7WoykkoC9S4zsJB0EQb09ghrb6T38SR6tEKTd+d
+ ZccLy98wK7zMV11t3fs51O78sqUK3LmkitGwBWVkvCiB1Et4zirV6U+Ra/LCWYHD7H7fUg3i9+Z
+ xQP95VbgbodF5qU1cuIXq6eejlnLhkCsndwz2la2GP81Bp/kKK5qzREWChJmdj/WDKTk8w2FxSc
+ c0zVC5JaKHZrf6/vcPw==
+X-Proofpoint-ORIG-GUID: oZ7j5w5X3_-AZ8LD3_UsuHo9dpO46pKo
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-13_01,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 clxscore=1015
- malwarescore=0 adultscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
+ suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0 priorityscore=1501
+ phishscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130010
 
-Add reset node to initialize the value of
-priority/condition_decode/condition_select/timer/counter nodes.
+On 26-11-03 22:50:54, Joonhoe Kim wrote:
+> With a USB-C monitor in DisplayPort pin assignment C or E, the QMP
+> USB3-DP combo PHY gives all four lanes to DisplayPort and keeps its USB
+> PCS powered down. The USB 2.0 pair still works. Such monitors often
+> have a USB 2.0 hub. But the dwc3 controller still depends on the USB3
+> PIPE clock. On Kaanapali the next xHCI reset in this state times out
+> ("Host halt failed, -110"). USB stays lost until the cable is replugged.
+> Commit f546912bcac6 ("phy: qcom: qmp-combo: Move pipe_clk on/off to
+> common") keeps the pipe clock branch enabled. That is not enough here.
+> 
+> This series lets the controller be a Type-C mode switch next to the PHY
+> and moves it to the UTMI clock, the way "qcom,select-utmi-as-pipe-clk"
+> does statically, before the PHY switches to DP-only mode.
 
-Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
-Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
----
- .../ABI/testing/sysfs-bus-amba-devices-tgu    |  7 ++
- drivers/hwtracing/qcom/tgu.c                  | 85 +++++++++++++++++++
- 2 files changed, 92 insertions(+)
+Joonhoe, thanks for adding this generic features for Qcom platforms, it
+is not only for Kaanapali, but also for platforms which have USB/DP combo
+PHY.
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-index e0ea5419188e..c0f10678e4df 100644
---- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-+++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-@@ -51,3 +51,10 @@ KernelVersion:	7.5
- Contact:	Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai <songwei.chai@oss.qualcomm.com>
- Description:
- 		(RW) Set/Get the counter value with specific step for TGU.
-+
-+What:		/sys/bus/amba/devices/<tgu-name>/reset_tgu
-+Date:		November 2026
-+KernelVersion:	7.5
-+Contact:	Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai <songwei.chai@oss.qualcomm.com>
-+Description:
-+		(Write) Write 1 to reset the dataset for TGU.
-diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
-index 1cb131a3c521..2386c71ab8d1 100644
---- a/drivers/hwtracing/qcom/tgu.c
-+++ b/drivers/hwtracing/qcom/tgu.c
-@@ -251,6 +251,18 @@ static ssize_t tgu_write_all_hw_regs(struct tgu_drvdata *drvdata)
- 	int i, j, k, index = 0;
- 
- 	CS_UNLOCK(drvdata->base);
-+
-+	/*
-+	 * Quiesce the detection engine before mutating any comparison input.
-+	 * This function is also reached from reset_tgu_store() while the TGU is
-+	 * already running (TGU_CONTROL == 1); rewriting the priority/condition/
-+	 * timer/counter registers register-by-register on a live engine could
-+	 * feed a transient, half-updated match into CTI/interrupt consumers.
-+	 * Programming with CONTROL == 0 and only re-enabling at the end keeps the
-+	 * program-then-enable ordering for every caller.
-+	 */
-+	writel(0, drvdata->base + TGU_CONTROL);
-+
- 	for (i = 0; i < drvdata->num_step; i++) {
- 		for (j = 0; j < MAX_PRIORITY; j++) {
- 			for (k = 0; k < drvdata->num_reg; k++) {
-@@ -470,8 +482,81 @@ static ssize_t enable_tgu_store(struct device *dev,
- }
- static DEVICE_ATTR_RW(enable_tgu);
- 
-+/*
-+ * Element counts for drvdata's shadow tables, shared so the reset path
-+ * below can't drift from how each array is actually sized/indexed.
-+ */
-+#define TGU_PRIORITY_COUNT(drvdata) \
-+	(MAX_PRIORITY * (drvdata)->num_step * (drvdata)->num_reg)
-+#define TGU_CONDITION_DECODE_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_condition_decode)
-+#define TGU_CONDITION_SELECT_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_condition_select)
-+#define TGU_TIMER_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_timer)
-+#define TGU_COUNTER_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_counter)
-+
-+static ssize_t reset_tgu_store(struct device *dev,
-+			       struct device_attribute *attr, const char *buf,
-+			       size_t size)
-+{
-+	struct tgu_drvdata *drvdata = dev_get_drvdata(dev);
-+	unsigned long value;
-+	int i, ret;
-+
-+	if (kstrtoul(buf, 0, &value) || value != 1)
-+		return -EINVAL;
-+
-+	/*
-+	 * Hold the mutex across the whole sequence so it cannot race with
-+	 * enable_tgu_store()/tgu_dataset_store(): the enabled check and the
-+	 * hardware access stay consistent. No PM reference is taken or dropped
-+	 * here - the shadow tables are plain memory, and the hardware is only
-+	 * touched when the device is already resumed via the enable reference.
-+	 */
-+	guard(mutex)(&drvdata->lock);
-+
-+	memset(drvdata->priority, 0,
-+	       TGU_PRIORITY_COUNT(drvdata) * sizeof(*drvdata->priority));
-+
-+	/*
-+	 * Every decode register is about to be overwritten with the neutral
-+	 * 'NOT' value below, so there is nothing for a prior memset to zero;
-+	 * calculate_array_location()'s step/reg indices for TGU_CONDITION_DECODE
-+	 * densely cover the whole 0..TGU_CONDITION_DECODE_COUNT(drvdata)-1 range
-+	 * with no gaps, so a flat loop over that range reaches every decode
-+	 * register.
-+	 */
-+	for (i = 0; i < TGU_CONDITION_DECODE_COUNT(drvdata); i++)
-+		drvdata->condition_decode[i] = TGU_CONDITION_DECODE_NOT;
-+
-+	memset(drvdata->condition_select, 0,
-+	       TGU_CONDITION_SELECT_COUNT(drvdata) *
-+		       sizeof(*drvdata->condition_select));
-+
-+	memset(drvdata->timer, 0,
-+	       TGU_TIMER_COUNT(drvdata) * sizeof(*drvdata->timer));
-+
-+	memset(drvdata->counter, 0,
-+	       TGU_COUNTER_COUNT(drvdata) * sizeof(*drvdata->counter));
-+
-+	/* If the TGU is running, apply the cleared configuration immediately. */
-+	if (drvdata->enabled) {
-+		ret = tgu_write_all_hw_regs(drvdata);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	dev_dbg(dev, "Qualcomm-TGU reset complete\n");
-+
-+	return size;
-+}
-+static DEVICE_ATTR_WO(reset_tgu);
-+
- static struct attribute *tgu_common_attrs[] = {
- 	&dev_attr_enable_tgu.attr,
-+	&dev_attr_reset_tgu.attr,
- 	NULL,
- };
- 
+We did an internal discussion for this use case, we may prefer the solution
+that let the PHY notify the controller this PHY lane is going to change from
+USB to DP (4lane) event, it could keep driver independent with dts for this
+feature.
+
+We more prefer an general solution like [1], but it seems PHY maintainer Vinod
+prefers private interface between controller and PHY [2].
+
+[1]: https://lore.kernel.org/all/20260924-b4-rockchip-dwc3-rockchip-glue-v16-1-126a2e9133c3@collabora.com/
+[2]: https://lore.kernel.org/all/avZvYlYyL3Doc8qt@hu-petche-lv.qualcomm.com/
+
+Peter
+
+> 
+> On Kaanapali the PHY becomes a mode switch with Balaji Kalkonda's
+> DisplayPort series [1]; patch 3 is the controller side for the same
+> SoC. Other SoCs whose PHY is already a mode switch (e.g. SM8650,
+> SM8750) may need the same property on their controller node (not
+> tested).
+> 
+> Related fixes sent separately: "phy: qcom: qmp-combo: Leave the USB PCS
+> alone in DP-only mode" (suspend in DP-only mode) [2] and "usb: typec:
+> mux: fsa4480: Keep the USB 2.0 switch on in DP-only modes" (boards with
+> an FSA4480 on the USB 2.0 pair) [3].
+> 
+> Patch 2 conflicts with Vladyslav Tymoshchuk's "usb: dwc3: qcom: Defer
+> VBUS override update during system suspend" [4] in
+> dwc3_qcom_pm_suspend() and dwc3_qcom_pm_resume(). Both add a lock
+> there. Like [4], the mux callback defers the QSCRATCH write while the
+> glue is suspended for system sleep. On top of [4] the two locks can
+> become one.
+> 
+> Patches 1-2 are for the USB tree. Patch 3 must not be applied before
+> patch 2: with "mode-switch" on the controller and no mux registered by
+> dwc3-qcom, pmic_glink_altmode defers its probe indefinitely.
+> 
+> Tested on a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with the series
+> backported to v7.3, plus [2] and [3]. A USB-C monitor ran over 4-lane
+> HBR3. Its USB 2.0 hub worked after 10 replugs and after a plug-in during
+> s2idle. In the s2idle case the mux state came after resume, so the
+> deferred clock switch was not exercised. With the monitor
+> unplugged, a USB 3 stick enumerated at SuperSpeed. Quick replugs (under
+> a second) worked 9 times out of 10. The other time no PD contract was
+> made, so no alternate mode was entered.
+> 
+> Changes in v2:
+> - Patch 1: use the common usb-switch schema
+> - Patch 2: switch back to the PIPE clock in the mux callback, when a
+>   USB state follows the safe state. v1 waited for the next role change,
+>   which can come before the mux state (Sashiko)
+> - Patch 2: keep the UTMI clock on a change of pin assignment while
+>   DisplayPort is active, as the PHY keeps its mode then
+> - Patch 2: while the glue is suspended for system sleep, only record
+>   the mux state and select the clock on resume
+> - Patch 2: depend on TYPEC || TYPEC=n. Skip the mux without
+>   CONFIG_TYPEC. The arm64 defconfig has USB_DWC3_QCOM=y and TYPEC=m,
+>   which failed to link (Sashiko). It now builds the glue as a module
+> - Patch 2: no change to the role notifier
+> - Patch 3: note the dependency on [1] for the PHY's "mode-switch"
+> - Patch 3: add Reviewed-by from Abel
+> - Link to v1: https://lore.kernel.org/all/20261102215121.738-1-26rote@gmail.com/
+> 
+> [1] https://lore.kernel.org/all/20261022-kaanapali_dp-v3-0-b5ae8e6083c3@oss.qualcomm.com/
+> [2] https://lore.kernel.org/all/20261023123512.1912-1-26rote@gmail.com/
+> [3] https://lore.kernel.org/all/20261022165143.1327-1-26rote@gmail.com/
+> [4] https://lore.kernel.org/all/20261018143126.3978-1-tvlad744@gmail.com/
+> 
+> Joonhoe Kim (3):
+>   dt-bindings: usb: qcom,snps-dwc3: Add mode-switch
+>   usb: dwc3: qcom: Use the UTMI clock as PIPE clock in DisplayPort-only
+>     modes
+>   arm64: dts: qcom: kaanapali: Mark the USB controller as a Type-C mode
+>     switch
+> 
+>  .../bindings/usb/qcom,snps-dwc3.yaml          |   3 +
+>  arch/arm64/boot/dts/qcom/kaanapali.dtsi       |   1 +
+>  drivers/usb/dwc3/Kconfig                      |   1 +
+>  drivers/usb/dwc3/dwc3-qcom.c                  | 103 +++++++++++++++---
+>  4 files changed, 95 insertions(+), 13 deletions(-)
+> 
+> 
+> base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
+> -- 
+> 2.43.0
+> 
+> 
+
 -- 
-2.34.1
 
+Thanks,
+Peter Chen
