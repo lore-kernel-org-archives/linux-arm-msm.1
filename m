@@ -1,123 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794592104;
-	b=IJr4JhSF71tWvO9bvug1DRFT9qG2RBNGJX899RwLvrxs0cNi+k+t1S+fJ9e75MW5WIud
-	 6HHUTWmSCFSAMZJiox+gX/jPOxObH0hZLWhnpYE7xBVegwqsPuplxmeAvPfMlDlLddiQ2
-	 x5m+5LqtdjVTqrqf3b30+mPcyxIK53S+4WCHSYLEwSYm00QClv8LGJwjCJDkxK5AAUd82
-	 jO3Vdgms073wb+9lIeLKNbGBJVf5+8mLQqxEcAE64goUZnJJuOFCii31FEgIYnD+2W3a3
-	 G3CoKKgtbUI/D6DZ7Nh/CKVH2LLQsjLklj5gCspKRICOF1JrwJkPrGZi0hseA4TFyXw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794592104;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Y1gktfBHpWHBxsfGL/xBUGKxuJBDF2lVN2TGmLj0SVk=;
-	b=ZrunQodHHAe3WP3DEAz+pGZf4R453tEgbnSjU+DvyZbW0+hPG/Ps0mbg23HKT70/RqrR
-	 dvxbUvKeqtJTq1qHOAl9amCPGxfcD9GH7CcOt8DyZocFOY+mAc2/Y8X2rJxMQrck8g8sp
-	 4Y+bPkfgjFFaVE4iw33EBqFXMGVztyS8T1nUxfbmTGCCLSR4RH+AokfZIhE8ho0+0+B7g
-	 Klk/Pv3/1pkts6X8xJtB5e5KhkLDAIgKBiWPxLeH900ijQaXTcKryoWkG2tTIrcBhsPal
-	 HvqQAXGuFppNximI0aCjy+TdJGWsGcIH96e3JymrzpRDMKDH5omb1PhT3GHR18mZWWg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BMatpwbj;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eyXx5eHl;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.42
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794593716;
+	b=R5SZDz0spRuHGc6vL2VVIws3cDEamrZF0hjjrMSbhjsnmtMVXS5YZS6WSTdUOYM+agpI
+	 KcyUkbzP5PKXo/arA1wnDDgdvG2/CZ3jzbncIq1FxjsuvsQf6B/bOQNeW0kXvmoF1r14h
+	 HeCNlcmf4nCloNSQpEmv161JJhI7D9tycjtYfZsipDuoxCF2FcUc1dzV3eYeMat7HFEib
+	 1ufWjyIuf0qYhGznZUdOZo2YoB0nVFJRJrwQ+jTk+UK4d5nuM4nNQ0hESX1WEKSc5982l
+	 R4bIK6f82XsoHwNNDl/NiVC4HHOQdmUR/uXuvo+E1LoKrkS8N4UIpKn9bjw7iMyLSXQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794593716;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+	bh=npRJKj6BlqdwFJKciGGphf3F65mEV9WXqQjzPBUisy8=;
+	b=f0HfitmyeDdSOCcQjgaaIDNFILgUWLLpQI3Y11I9rTLr+L7j1+bbc5tAaZ9uNUyjRgI6
+	 oXeOL6KSqhHe4H2M/yAtB1J3t0pG6ErCX0NaYZev2BJLhHXFP6r/tiC7KCPXp2qASDwMg
+	 sVlnQikjVA8Gcjc4b8gFS6BTKHV8ixBJJqojtZyGpnBKTUo9MNia7DjW6vB967Bqw7k2d
+	 OWDGC5ERmzWuqi2iVxUmolWS06jhAlHg+0sBbuPMzKfGbWAxSobvFA3d47ajmLwo2wK4J
+	 V65KOtVYH2TvSFuM+0kubXq8WBgR/nHRGPPi5mjCf95eROvHJVoUrA1lkDkdTbSLKIg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="J/k7awWC";
+	arc=none smtp.remote-ip=209.85.210.42
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6D98606EDAE
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 17:48:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A6D98606EDAE
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66FE9606A331
+	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 18:15:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66FE9606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BMatpwbj;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eyXx5eHl
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ADFQpBO074616
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 17:48:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Y1gktfBHpWHBxsfGL/xBUGKxuJBDF2lVN2TGmLj0SVk=; b=BMatpwbjJXhz7tmC
-	ljasbfmlGO95hnJLqxJOCrP4eQA5/NxRquVwQI3nLTw2AQPvJfq6nrHByqab//Or
-	5cbUlGEvb4Ay1pzSqsgpN9VN66PuxfhxglCSwt38Bcz5q4qZEJMmu93sMzSrplGf
-	jpt5AhTtjiAuqNRwyv3gZisR+GTvitPePq3x637xstffZODbFPHWA6ygF6EFyNef
-	NImCZYdSZCXJxJ46T/kfSXeFigDFJ/2LEFXabR7rv3oDAZ/HTgWrm08IPCrIHaAT
-	ZCIYO+VDeRCRqlUe1Kgnhgr8042q0MdFVDTRgX5Ceh4yC0Ttwb4HqH4Nq7uJFu11
-	UrX1zA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwu2mtupj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 17:48:22 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3b0ac277beaso1037567a91.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 09:48:22 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794592102; cv=none;
-        d=google.com; s=arc-20260327;
-        b=L+AXQIetUbQG+R+O2YdUlvR3n0dz8RZ9NT/pEI6zAuy4UcthkG6KTI69IoufJmIdxc
-         jI9W11z6tHlWt9j4hKty6ZBQwPnXOD4zSM0GAho77iYB+euEEosTPjlPCMxu+unKw3/T
-         jxRheWAcsBsOp1PRfN98iFL3ZeX9ElcItNxX0e+EHpQSeld7aCqo4lO3y8UB4lirPqYb
-         IxucvusPyWjLahGo7Ey83vrx3UpFCnyw1i5bWqiB6uyif/N6DGhNIreOieqY+vY0FN9u
-         deKx1sATxaHcHQKTA/7XbSiWqjJeBg7VsuZIlANJUXISIGwlxS6/q3FbmwVakIylwhiF
-         XXGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Y1gktfBHpWHBxsfGL/xBUGKxuJBDF2lVN2TGmLj0SVk=;
-        fh=J/KNkTQ45uTeCq5YqBPWlPjinx+fNp53GCGogE18DlU=;
-        b=ilCoO+LHRdEwJtnhDNsRgOzAnbS+twLobjdfBkE6gU5L/JC4Di3DXlBIQRvBQrRL9d
-         Jnm+1GDVq8oZ0o656REe+YxLBGJHBvx1lTxGNlbP76ArDUfGJTR6BzOa1wgH5/J5JHV3
-         vJ1kbhoBuLA7Nkkp4DhjP1Yuc9CifpZnqeCwe0DMg8pM2LUCLcVyXKTFLCNNEckcCx1m
-         PnjS1swacP4/e93SEY1xFJSiCpKxYFSTxxO3u7obIz0HI2C3Do+L4Mjr9ffXVFSk7DZ/
-         mMl+NRJBMIPRCPgwZureU8s0LmbgXAoN7Qziuksobk5iVFYM/IJHgRVQfSXcOWNqzRDj
-         j5Og==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=J/k7awWC
+Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-843cf077f10so2768395a34.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 10:15:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794592102; x=1795196902; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Y1gktfBHpWHBxsfGL/xBUGKxuJBDF2lVN2TGmLj0SVk=;
-        b=eyXx5eHlWjvxQ7pOghP2ubvUgEExQgX0/gUBQbUpxTN49gYoxLlNmvm7INGY7PZJcY
-         kT7DM47eXITsRGRSwJejVust9xBILN+xYTdIu8RgBgGwbzR38Hwe2paJ1xryS7cxdjWx
-         TzD7+ZzmfWWq+wImSmNtgZYNhJsZnoAhWVPUf+UIdDFKkzLDQ6wL/g8gP4stJ740NlZ0
-         +OQ2ucpKq9djWPRPDZRA7Pqs57bQKv17vgmqd31N2O1wHsu1lWeBnrkvTTEUCFuYRkHr
-         tuEr0ezMWBgDxZzoeFzzt/TMipnZhAiuPIjCQdIdwfYtvI68mVtQmN5B/bnFWQhU1xd9
-         INpQ==
+        d=gmail.com; s=20260707; t=1794593714; x=1795198514; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=npRJKj6BlqdwFJKciGGphf3F65mEV9WXqQjzPBUisy8=;
+        b=J/k7awWCTtExBlaoJV2L0+ligF6OnNLrc+PngL/zx2l/yo0p19NlLwSvJNpr9DM/1d
+         sD4i78zgkfDOTAXz2wB1oqXDxuZRCzIaPe+HU71YgkAfeRhO1SNKXoWEqU8v26my/lYv
+         TDqc0Nd2S1tWGhncZr/Ya+qPqTCir9VjVGRS6EdKZh18idaRXUnRtjxgr6D5axupo9CS
+         J6sRL3UjSOY441Q3i/3AuLcF8efUXw3LSRltVEbj5xbEfYsdTBDcVU+17yIpRKq9c8mo
+         wG4zjkpTHk1pn3rqtWLtjIVuZ6QE/8riLtYuygjIR0VGv3A0uWoBlk/r4UBCiFZxssJf
+         7DKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794592102; x=1795196902;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Y1gktfBHpWHBxsfGL/xBUGKxuJBDF2lVN2TGmLj0SVk=;
-        b=MG1HquWPDwuByd045ztOBUEop/q3n03LL4Eipas1JCoyMJsXcrKl4joyUO1dXMtCow
-         4Hije51QJL9Xcghdpzk35aVZ1Y457xL3gRjqUwl6c+hA1YrMubwfLmfeuXJl0roCaDM6
-         hnm+8P28baOkQy58OodBAd5DkoQkkHxTbo3HsvEE8czBxzv/2q9LXBH4v+fQW6Ov0c9U
-         TQPcSYwPhMcHUHde1hEhCD05tPwpQTBoRx1n2K3qspwIUooO4d0kHUwnWlEgJoobxJk0
-         a/UVCcXeM4aRwegp1T3coo7YmKiTVjLApqHXy8jSHPaenoGF1J5CwjiT1cRxhE2TTGJV
-         GY1w==
-X-Forwarded-Encrypted: i=1; AL+hErGkr6dgFi3EVGy9tbkrQXrhTpD8BOSUxKZeLJF4Lw1giF7pxhSbvjhXNv4uMNv71SyoHJ2SdhNNnuQNaAFE@vger.kernel.org
-X-Gm-Message-State: APuU4Z8Vm3Qa3C5Ne7RbM7C301LgMKT00kTuox1UeKpcAL7QkITrF9oT
-	AtWuDr3kP55oegjds5HWBrJ7Pyb+YeAnfMiIGK3vIfuWZ46ZVu0xAgT5yaHW26YFeoDgs4QNHCm
-	RS94GiKBIg5u97NOJ8HXOCxKW+GzMM4F5ek69iz/tJ98+8KrlbzVT2Nr4qrBO+vk4qcAmSs2MSt
-	nFOcBsorTYcz39YLUvMgtgUZQr0pB5VE+5gh7i+clX/UM=
-X-Gm-Gg: AYBFou1X3DR5FqJclusYGW3BigEusCzP3libPTxFtbobkiblkyt1/hqGS8RDMSJMBtE
-	QJw7qSQHiaCL/+lgh9GPOfOnBp8yPvY9iHXQ9fZTda7YPOdmtL8Mjr3h8Jhp4QvIhGsZFr5S2M8
-	sk4HRebwKyQql4wyA1CE1oQV2ux2LhqkLnaoJIkNivl1AuhUA/Wka+gpWXWw==
-X-Received: by 2002:a17:90b:993:b0:3b0:e2a9:3466 with SMTP id 98e67ed59e1d1-3b1b09fa555mr2052187a91.16.1794592101964;
-        Fri, 13 Nov 2026 09:48:21 -0800 (PST)
-X-Received: by 2002:a17:90b:993:b0:3b0:e2a9:3466 with SMTP id
- 98e67ed59e1d1-3b1b09fa555mr2052164a91.16.1794592101492; Fri, 13 Nov 2026
- 09:48:21 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794593714; x=1795198514;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=npRJKj6BlqdwFJKciGGphf3F65mEV9WXqQjzPBUisy8=;
+        b=PFTWXz5vAiyaSTb1cG0J0Ty4zgpadeflkXDL2t2TH6Vc2HM6X12Mz3Wq7cRtVLg4FO
+         RipOen0IGzWK0vwxIYMYnK7VkGRj0AVSDQW34iXt+8Wr4yYndFJnSYXs71RxqiteYRQ1
+         5bdvtiPz6XaT1dAAjtomc8E/AbPwS6uPf/kmggk2USIsOOQPUXtzzbvdEl/uZm1h1ERB
+         JKnv7DCiABs3/8H5pMz0DjSgxu/KMBW1e4EGuS3KbhLSLJCHP6C60c5H+sc5uMOKKr8x
+         PRomJJjGvyqhfPige5quT9E0CIIat8ZgyvUfaqYIcozLwVJtsjr3LWHlUuc+v4a3wlEc
+         r7cw==
+X-Forwarded-Encrypted: i=1; AL+hErGI/35jjPNWI3PYpcZwXayiehWJUA3L42x0hdRBNbxvXDxMJ2q2M0NVbUZOsCyWecKzPZB1zrMMqAIJICpU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+DjtAfTocFZoQtnGTMWphcSekzTTyYgGdX64N++G47OftV5BRW
+	bx5c5qor079Jo2yQg3pgu0EfOS5MyjTbos8tnPBj2ou/OxvfLzTbeXTD
+X-Gm-Gg: AYBFou03/OFdvKSz4b6qybfMuU77SWQKKSonfNcsqZTbMK2Eiy32JfgL96XvkS7pRG9
+	F/9b93xteObfAAPgEc+VrVIwbRHYQv5MceLkS9rDG76XxcZ0Gk/v/XCNCAwzq7hrtjMZ/tRIpux
+	eRN/TbzoeuH3UJN6ZOb/vCxa2MWig4rX4hmXvhFrurHveiTWrXfbPFwWC9E23CW6fqW38L+60dD
+	4EKuwbHo/H15lW8EeoVrhx9znpA1ZrXp8dcENieNBnpfDxan6Jhut5c8L/BZc8DtsSyzl3pd6nj
+	pN0Ct5lqbyUsTIGE4sVbbgNgQ9VAh6z9GwX2/k7vEJXrkuQLJJLBbWYGTXCKymuMpGP/m/snwDc
+	dhOHvFlASO09/+5P4sER2DjV40RF98h3+Z/NFaQFIsg9eKMJxUi9yUFYCB20yl4pwa5O7r1mIO8
+	0JqrHV2V/E7Ah/NOIl3LQjZ8cSGh1zwW03DF4NvRvI+e6RJDBHi5nl0tF1GlO8n5mPK5V0nJbTY
+	UnmV51CE3MkpjS1RhPuC2uW/hQkYuduhpGxrjG6SbJkyxhdGbV9mw+qkcxqXmJTcerQWvEEeoat
+	YkdpdVf9Y6OD67hpHg7nzU9SGsKIYezpP969+CDWVU+9Jqy0dbW/THGkZU09+CiDYPKFLX5+fIw
+	og/LOyzhXRfbvZnxI7A9jZXOB1lGSjt6LENJGcUENdtlnNNrdwI5B5aVefNkXdFF8Kv+8kWRBpu
+	uHJ8/lf8qY0mbwBW0gyRjbWna3hqtjBXOe5fLSAFlEbKbEPvTAM9o=
+X-Received: by 2002:a05:6830:230f:b0:85f:aa6:b7f1 with SMTP id 46e09a7af769-862898e6a6cmr2948369a34.23.1794593714124;
+        Fri, 13 Nov 2026 10:15:14 -0800 (PST)
+Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-8628817d979sm3253414a34.22.2026.11.13.10.15.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2026 10:15:12 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v4 00/58] mtd: rawnand: retain chip and controller state
+ across removal
+Date: Fri, 13 Nov 2026 11:14:16 -0700
+Message-Id: <20261113-submit-rawnand-retained-handle-lifetime-v1-v4-0-556b1d7c6221@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,116 +94,422 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261021080517.2161-1-okerixx@gmail.com>
-In-Reply-To: <20261021080517.2161-1-okerixx@gmail.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Fri, 13 Nov 2026 18:48:09 +0100
-X-Gm-Features: AclHuK_cX9nfIfMsECKx5geydS7UVI339oofu71FfWZMTLtQ_zkBB1Cw2kA9Opo
-Message-ID: <CAPx+jO8N4yLD8pZ2vr9_3MD9==FFMdvQG+=1JjDoe2kG7DR1iA@mail.gmail.com>
-Subject: Re: [PATCH] pmdomain: qcom: rpmhpd: don't clamp gfx and gmxc before sync_state
-To: Oleg Keri <okerixx@gmail.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Rob Clark <rob.clark@oss.qualcomm.com>,
-        Thorsten Leemhuis <regressions@leemhuis.info>,
-        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, regressions@lists.linux.dev,
-        Konrad Dybcio <konradybcio@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: Cxn_6XL731lhiu8CoSLeDgqWYJFIuzN7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA3MCBTYWx0ZWRfXye2O4zDSAS0m
- cTp4H+OKyVBk1BdCu02BLMxuN/eeBpmFY0t/shrOlxe8GNf/LO0M+m+WflWYIGUBFbaL8UQ3ca7
- OTlrelYVhGF3dQv4CaIJD51Xmfh/3aui6l3IBYL8iM67UfYMKAx8FKwxGEXrKzA9Ka739TFAJsP
- Wz3y5h3scPXtKpxwM4ql3G/Gfsb8oVmUSQ/01N29mzV25Bq2QxzXdRjP/oIhw9RVdymqduJb+0q
- Tmnouc2ofsUyj5KGavS1tcCKv+PL53+NZ1K2H6fQ+KfbnYWkuDllzPel222cZAJZYn2twumfOxT
- TS0Pv28AIN8j7rkvYy/Zwww97gA1X+NxXWWxGgGI45hHjaXcPPxWfMOx0LoIUXLrrpWTmC8IlUS
- mDwdnm4s0jHUwrHpjFlLXR49LBqa0xCr2h3UevC3WTRtg2AeI5gDhuCBpTJEU3/zY6o+gv+ERdj
- 7B6b1WHUowmHTV1Nhog==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA3MCBTYWx0ZWRfXx+BIY6TUgB4u
- a7xpqrnCgv8nzkuTX9yGHFwRzpp5OlZLNLkdZg5r6FSIQIR3Li33yw1EEg+atoo2RrZk26ssp9K
- wYTq2zpVRgw/jSq5s11aPN8VPEBSqXQ=
-X-Authority-Analysis: v=2.4 cv=ddQVTnXe c=1 sm=1 tr=0 ts=6af74d66 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=4GocJDDa9GRkIFf5CVIA:9 a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: Cxn_6XL731lhiu8CoSLeDgqWYJFIuzN7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-13_05,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 impostorscore=0 priorityscore=1501 phishscore=0
- suspectscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130070
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5VUzW6jNwx8lcDnuqAoSpRy6nsUPYh/m69InK3tT
+ Vss8u6lvYsi9i3QSYBmhuIM+X138uPmp93jw/fd0d+20/Z6yAv98rDTp3X44vvN8r5DwF4K0P7
+ 0TV628/64/j6sg+2Pfl7bwW2fj+3Z989b+Hl78f1b2YMQYvOmDrJLwq9Hj+2fq9jvf/y4J9ufr
+ ueLws8XR//rW1Zx/vFs93Wd9SlreHxYrchUIWAu0GjOUqtSqdaG8jIsNrlKHVee/1FSO0+1RZb
+ QrCTBKBGOZtC4CzayILJbFLA0ZXCiZbMVQ3Bfk3joHGGrNlfuTeEWtcRXA+Q2EcNrm8aoqZwdE
+ MVSBEjEGt+iGvOljkIRArWWWmYAEhWM/FNKka4Jrd9VOMVR1sqvlIBWGQh7VSUBqzMw1qKgqbc
+ orctG6wCmY/LSWkCcGtiwtTArD5nF/U6L1hXTWjVTZZO2Zip6WNa1uKh1rNHb/b/mnNk3WjRx5
+ mttq80qAJ4qalxjleZ3fmGqlzVWxbBCbA0dYhpUbqNXmgVtSHjcogoNthjqw7vSIC5hzMrEoD7
+ TgIGWjtx1I10UHz0mDpuadkqgSod0tnVGhtFKCaU7l7UPn9Kb1bVa70UsOwmBmS3TyNy00PC7b
+ DhD5FEyqmBU+rpYQUMqRywrPVks4C4b2V5TM9EGwdTcsRPIyDBFleC+sHAgzTtU/kF4SS+zA/e
+ oyDpLBqY5yxBBaGlywQtK1sn3+vqSM/34kJVloqpzhkPSdZvC6E1ARzfrjhlmzgDtLtP7tJ3Or
+ 8d/r5vjrVyH9eeS4M8sicue2EMZxbM7Sjp++/Kytudfs6arzBt+oC7wKWpM6lwTbDByRizuqet
+ H6vIp6prU6jkFGXKmYh+p39/f/wM6ZulZWAUAAA==
+X-Change-ID: 20261104-submit-rawnand-retained-handle-lifetime-v1-0b4225e5ce0b
+To: Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>
+Cc: linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Srinivas Kandagatla <srini@kernel.org>, Tze Yee Ng <tze.yee.ng@altera.com>, 
+ Richard Cochran <richardcochran@gmail.com>, 
+ Jonathan Lemon <jonathan.lemon@gmail.com>, 
+ Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
+ Yuqiang Sun <izaiahsun@gmail.com>, 
+ Amit Kumar Mahapatra <amit.kumar-mahapatra@amd.com>, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+ Bernhard Frauendienst <kernel@nospam.obeliks.de>, 
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, Kees Cook <kees@kernel.org>, 
+ linux-hardening@vger.kernel.org, Arseniy Krasnov <AVKrasnov@sberdevices.ru>, 
+ Boris Brezillon <bbrezillon@kernel.org>, 
+ Brian Norris <computersforpeace@gmail.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
+ Samuel Holland <samuel@sholland.org>, Chen-Yu Tsai <wens@kernel.org>, 
+ David Woodhouse <dwmw2@infradead.org>, Thomas Gleixner <tglx@kernel.org>, 
+ Vitaly Wool <vitalywool@gmail.com>, 
+ David Woodhouse <David.Woodhouse@intel.com>, 
+ Russell King <rmk+kernel@arm.linux.org.uk>, Mike Rapoport <rppt@kernel.org>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Christophe Kerello <christophe.kerello@st.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Jason Roberts <jason.e.roberts@intel.com>, 
+ Boris Brezillon <boris.brezillon@collabora.com>, 
+ Michal Simek <michal.simek@amd.com>, Mason Yang <masonccyang@mxic.com.tw>, 
+ Ramuthevar Vadivel Murugan <vadivel.muruganx.ramuthevar@linux.intel.com>, 
+ Lucas Stach <dev@lynxeye.de>, Dmitry Osipenko <digetx@gmail.com>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, linux-tegra@vger.kernel.org, 
+ Stefan Agner <stefan@agner.ch>, Thierry Reding <thierry.reding@kernel.org>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ linux-mediatek@lists.infradead.org, 
+ Matthias Brugger <matthias.bgg@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
+ linux-rockchip@lists.infradead.org, 
+ Yifeng Zhao <yifeng.zhao@rock-chips.com>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+ Nicolas Ferre <nicolas.ferre@microchip.com>, 
+ Keguang Zhang <keguang.zhang@gmail.com>, linux-mips@vger.kernel.org, 
+ Shan-Chun Hung <schung@nuvoton.com>, Jacky Huang <ychuang3@nuvoton.com>, 
+ Fabio Estevam <festevam@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
+ imx@lists.linux.dev, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, Han Xu <han.xu@nxp.com>, 
+ linux-renesas-soc@vger.kernel.org, Jerome Brunet <jbrunet@baylibre.com>, 
+ Kevin Hilman <khilman@baylibre.com>, Liang Yang <liang.yang@amlogic.com>, 
+ linux-amlogic@lists.infradead.org, 
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, 
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, 
+ Vladimir Zapolskiy <vz@mleia.com>, Harvey Hunt <harveyhuntnexus@gmail.com>, 
+ Paul Cercueil <paul@crapouillou.net>, 
+ Maxim Levitsky <maximlevitsky@gmail.com>
+X-Mailer: b4 0.15.2
 
-On Wed, Oct 21, 2026 at 10:05=E2=80=AFAM Oleg Keri <okerixx@gmail.com> wrot=
-e:
->
-> Until rpmhpd's sync_state every vote is clamped to the highest corner,
-> so that hardware the bootloader left running keeps the rail level it
-> needs until its driver takes over.  Nothing the bootloader leaves behind
-> runs on the GPU rails, but the clamp hits them anyway: the GPU clock
-> controller's probe runtime-resumes and suspends its GFX and GMXC
-> domains, and from then on both rails are pinned at their highest corner
-> until sync_state.
->
-> On Glymur gfx.lvl has 14 levels and the clamp holds the rail at the top
-> one, 0x1d0, while the GMU's own performance table ends at level 11,
-> 0x1c4.  With the GPU driver and firmware built in, the GMU boots long
-> before sync_state, and its CLX DCVS calibration does not survive a gfx
-> rail held that high: the firmware gives up with HFI_F2H_MSG_ERROR
-> 0x007306c7 (ResMgrCalibrateDcvsLvl), the first HFI_H2F_MSG_GX_BW_PERF_VOT=
-E
-> times out and the first GPU init fails.  On the Lenovo Yoga Slim 7x
-> Gen 11 this means the compositor cannot start at first login.  Pinning
-> gfx at level 11 or 12 instead fails the same way, level 10 and below
-> boot fine, and pinning gmxc alone has no effect.
->
-> Leave gfx and gmxc out of the clamp: they have no bootloader-configured
-> consumer to protect, and the GMU votes them through its own RSC.
->
-> Fixes: 93b6c8d10fad ("drm/msm/a8xx: Enable CLX feature on Adreno X2-85")
-> Link: https://lore.kernel.org/r/179248663855.32151.9955864156939592299@gm=
-ail.com
-> Acked-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-> Signed-off-by: Oleg Keri <okerixx@gmail.com>
+An MTD handle can outlive controller unbind. Its metadata and NAND locks
+must remain valid, including when a writable file closes and calls sync,
+while further hardware access must be rejected after disconnection.
 
-Applied for fixes and by adding a stable tag, thanks!
+This builds on earlier MTD removal-lifetime work. Commit 19bfa9ebebb5
+("mtd: use refcount to prevent corruption") added MTD reference counting
+[0], but retaining an MTD reference does not by itself retain the
+driver-owned allocation containing the master. The read/unbind discussion
+also covered raw NAND [1] and draining active operations [2]. Tze Yee Ng's
+SPI-NOR series addresses the corresponding SPI-NOR paths [3].
 
-@Konrad, can you please confirm this makes sense, at least short term wise?
+Following Greg's review [7], separate class-device data from the MTD
+backing allocation. Delete the device's interfaces and drain NVMEM and
+class PM callbacks before releasing backing data. Bare device references
+retain an independently allocated device, whose type, PM dispatch and
+final release are built in even when MTD is modular. NVMEM similarly
+disconnects and drains provider and layout callbacks before unregister
+returns; retained consumers keep core-owned metadata and receive -ENODEV
+on subsequent access.
 
-Kind regards
-Uffe
+Introduce opt-in backing-object ownership for MTD masters. Registered
+nodes and acquired MTD handles retain the chip, while nested partitions
+also retain their parent metadata. Unregister first so removal notifiers
+can finish I/O, then disconnect raw NAND and drain admitted operations.
+Hardware resources can be released without waiting for open files to close.
 
+Virtual concatenations serialize publication and removal across physical
+controllers. Disconnect and drain a published concatenation before any
+component can disappear, then release its component references. An old
+handle keeps the disconnected virtual device, independently of a later
+replacement.
 
-> ---
->  drivers/pmdomain/qcom/rpmhpd.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhp=
-d.c
-> index fa8fed5bd3e5..2c9d4beeffbe 100644
-> --- a/drivers/pmdomain/qcom/rpmhpd.c
-> +++ b/drivers/pmdomain/qcom/rpmhpd.c
-> @@ -1006,7 +1006,7 @@ static int rpmhpd_aggregate_corner(struct rpmhpd *p=
-d, unsigned int corner)
->         unsigned int peer_active_corner =3D 0, peer_sleep_corner =3D 0;
->         unsigned int peer_enabled_corner;
->
-> -       if (pd->state_synced) {
-> +       if (pd->state_synced || pd =3D=3D &gfx || pd =3D=3D &gmxc) {
->                 to_active_sleep(pd, corner, &this_active_corner, &this_sl=
-eep_corner);
->         } else {
->                 /* Clamp to highest corner if sync_state hasn't happened =
-*/
->
-> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-> --
-> 2.55.0
->
+Run NAND and controller-specific cleanup during disconnection, while
+the controller driver is still bound. Snapshot the OOB layout in core-owned
+data before publication so metadata queries remain valid without driver
+callbacks. The NAND core frees retained chip and controller allocations;
+the final MTD put never calls back into the controller module. Ordinary
+MTD and NVMEM handles retain the NAND core that implements their
+operations, rather than the hardware driver.
+
+Share allocation ownership across the raw-NAND drivers, including
+partially published probes. Shared controllers remain allocated until
+their last retained chip is released. R852 allocates a new chip for each
+card, and NDFC allocates controller state per binding.
+
+Based on NAND next at 30daaf3e7897, with Tze Yee Ng's module-reference
+ordering fix [4], Karl Mehltretter's OTP cleanup fix [6], and the separately
+posted registration, operation-locking and controller probe/teardown fixes
+identified by the prerequisite metadata. TLA+ models and their assumptions
+and coverage limits are available in [5].
+
+[0] https://lore.kernel.org/r/20230620131905.648089-2-alexander.usyskin@intel.com
+[1] https://lore.kernel.org/r/CAND4H7dz94Gsi_tXSQmLNme9uROnouOUwuCX9BW_+RCc2ZFDqA@mail.gmail.com
+[2] https://lore.kernel.org/r/mafs0bjs73tbq.fsf@kernel.org
+[3] https://lore.kernel.org/r/20261022035352.52129-1-tze.yee.ng@altera.com
+[4] https://lore.kernel.org/r/20261022035352.52129-2-tze.yee.ng@altera.com
+[5] https://github.com/jameshilliard/linux-h616-nand-tla
+[6] https://lore.kernel.org/r/20260816163027.10044-1-kmehltretter@gmail.com
+[7] https://lore.kernel.org/r/2026111037-stir-hermit-cb21@gregkh
+
+Assisted-by: Codex:gpt-6-astra
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes in v4:
+- Keep MTD subdirectories behind CONFIG_MTD so boolean child options
+  do not become built-in users of a modular MTD core.
+- Serialize partition publication with deletion and retain a handle
+  while parsing subpartitions. Reject children of removed partitions.
+- Distinguish explicit NULL NVMEM owners from the parent-module
+  fallback, including OTP providers backed by built-in NAND code.
+- Register layout-owned cells explicitly, preserving provider cells
+  added before or after a layout binds.
+- Rebuild cell attributes across layout bind/unbind, free partial
+  allocations on failure and remove attributes before device deletion.
+- Pair NVMEM_REMOVE notifications only with successful NVMEM_ADD
+  notifications and remove the redundant disconnected-device check.
+- Resolve concatenation OOB layouts through the first component's
+  master, including partition-backed components.
+- Link to v3: https://patch.msgid.link/20261111-submit-rawnand-retained-handle-lifetime-v1-v3-0-ce537999741d@gmail.com
+
+Changes in v3:
+- Finish NAND and driver cleanup during disconnection, leaving final
+  allocation release in the NAND core, following Greg's networking example.
+- Snapshot OOB layouts before publication and drain complete BBM/BBT
+  updates before releasing their working state.
+- Separate MTD class-device allocation and final release from backing-object
+  ownership, following Greg's review.
+- Drain class PM callbacks under the device lock before detaching backing
+  data; keep device-type and PM dispatch storage with the built-in device.
+- Drain NVMEM provider and layout callbacks during unregister, retaining
+  core-owned metadata for old consumers and retiring cells across rebind.
+- Keep NVMEM consumer-owner references, with converted raw NAND
+  providers naming the NAND core instead of the controller module.
+  Release write-protect GPIOs once provider callbacks are drained.
+- Acquire an MTD handle for PTP OCP firmware updates through a class device.
+- Drain concatenation operations before releasing components, including
+  concurrent removal of masters without opt-in lifetime ownership.
+- Use scoped cleanup consistently in Tegra probe and add the introducing
+  commits for Socrates and FSL UPM, following Sashiko's review.
+- Link to v2: https://patch.msgid.link/20261110-submit-rawnand-retained-handle-lifetime-v1-v2-0-9137d08f05df@gmail.com
+
+Changes in v2:
+- Keep the MTD device callback owner pinned through callback return,
+  with the final module put performed by the device core.
+- Retain virtual-concat components across removal and rebind, serialize
+  staging/publication and unwind incomplete partition registrations.
+- Balance Tegra's probe-time child-node reference separately from the
+  reference retained for the chip lifetime.
+- Refresh the prerequisite stack to the separately posted fixes, using
+  the latest QCOM child-probe revision.
+- Keep the lifetime changes on top of those fixes: preserve QCOM scan
+  before publication, R852 per-card initialization and Intel probe
+  hardware shutdown.
+- Fold Macronix disconnection handling into the NAND disconnect patch;
+  its operation locking is supplied by the posted prerequisite.
+- Use Karl Mehltretter's posted OTP cleanup fix as a prerequisite in
+  place of the duplicate preparatory patch.
+- Keep the NVMEM context callback module pinned until its final callback
+  returns, independently of the provider's consumer owner.
+- Use the posted fixes for dynamic partition publication and partition-node
+  ownership. Keep master get/put accounting independent of
+  later master registration in the MTD ownership patch.
+- Propagate disconnection through BBT error recovery without marking
+  the eraseblock bad.
+- Make suspend of a disconnected, retained NAND device a no-op.
+- Handle R852 card events during removal while preventing new work from
+  being queued.
+- Initialize Denali and Atmel cleanup variables at allocation and add
+  the introducing-commit trailers for Orion and MPC5121.
+- Link to v1: https://patch.msgid.link/20261107-submit-rawnand-retained-handle-lifetime-v1-v1-0-0181ef0cc4c8@gmail.com
+
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Richard Weinberger <richard@nod.at>
+To: Vignesh Raghavendra <vigneshr@ti.com>
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-mtd@lists.infradead.org
+
+---
+James Hilliard (58):
+      nvmem: disconnect provider callbacks before unregister returns
+      mtd: acquire an MTD handle from a referenced class device
+      mtd: separate class devices from retained backing objects
+      mtd: retain virtual concatenations across component removal
+      mtd: rawnand: separate hardware disconnection from cleanup
+      mtd: rawnand: share retained chip and controller ownership
+      mtd: rawnand: sunxi: retain chip state until the final MTD put
+      mtd: rawnand: plat_nand: retain open-handle state on removal
+      mtd: rawnand: gpio: retain open-handle state on removal
+      mtd: rawnand: stm32_fmc2: retain open-handle state on removal
+      mtd: rawnand: denali: retain chips across controller removal
+      mtd: rawnand: arasan: retain chips across controller removal
+      mtd: rawnand: mxic: retain open-handle state on removal
+      mtd: rawnand: intel: retain open-handle state on removal
+      mtd: rawnand: tegra: retain open-handle state on removal
+      mtd: rawnand: mtk: retain chips across controller removal
+      mtd: rawnand: rockchip: retain chips across controller removal
+      mtd: rawnand: atmel: retain chips across controller removal
+      mtd: rawnand: orion: retain open-handle state on removal
+      mtd: rawnand: socrates: retain open-handle state on removal
+      mtd: rawnand: fsl_upm: retain open-handle state on removal
+      mtd: rawnand: pasemi: retain open-handle state on removal
+      mtd: rawnand: ams-delta: retain open-handle state on removal
+      mtd: rawnand: xway: retain open-handle state on removal
+      mtd: rawnand: hisi504: retain open-handle state on removal
+      mtd: rawnand: vf610: retain open-handle state on removal
+      mtd: rawnand: technologic: retain open-handle state on removal
+      mtd: rawnand: loongson: retain open-handle state on removal
+      mtd: rawnand: ma35d1: retain open-handle state on removal
+      mtd: rawnand: pl35x: retain open-handle state on removal
+      mtd: rawnand: mxc: retain open-handle state on removal
+      mtd: rawnand: fsmc: retain open-handle state on removal
+      mtd: rawnand: gpmi: retain open-handle state on removal
+      mtd: rawnand: omap2: retain open-handle state on removal
+      mtd: rawnand: marvell: retain open-handle state on removal
+      mtd: rawnand: renesas: retain open-handle state on removal
+      mtd: rawnand: meson: retain open-handle state on removal
+      mtd: rawnand: cadence: retain open-handle state on removal
+      mtd: rawnand: qcom: retain open-handle state on removal
+      mtd: rawnand: cafe: retain open-handle state on removal
+      mtd: rawnand: brcmnand: retain open-handle state on removal
+      mtd: rawnand: au1550nd: retain chip state across removal
+      mtd: rawnand: sharpsl: retain chip state across removal
+      mtd: rawnand: davinci: retain chip state across removal
+      mtd: rawnand: sh_flctl: retain chip state across removal
+      mtd: rawnand: lpc32xx_slc: retain chip state across removal
+      mtd: rawnand: lpc32xx_mlc: retain chip state across removal
+      mtd: rawnand: ndfc: retain chip state across removal
+      mtd: rawnand: txx9ndfmc: retain chip state across removal
+      mtd: rawnand: ingenic: retain chip state across removal
+      mtd: rawnand: mpc5121: retain chip state across removal
+      mtd: rawnand: bcm47xxnflash: retain chip state across removal
+      mtd: rawnand: fsl_elbc: retain chip state across removal
+      mtd: rawnand: fsl_ifc: retain chip state across removal
+      mtd: rawnand: r852: retain chip state across removal
+      mtd: rawnand: nandsim: retain chip state across removal
+      mtd: rawnand: cs553x: retain chip state across removal
+      mtd: rawnand: diskonchip: retain chip state across removal
+
+ drivers/Makefile                                   |   2 +-
+ drivers/media/pci/cobalt/cobalt-flash.c            |   2 +-
+ drivers/mtd/Kconfig                                |   5 +
+ drivers/mtd/Makefile                               |   5 +-
+ drivers/mtd/devices/bcm47xxsflash.c                |   2 +-
+ drivers/mtd/devices/docg3.c                        |   4 +-
+ drivers/mtd/devices/mchp23k256.c                   |   2 +-
+ drivers/mtd/devices/mchp48l640.c                   |   2 +-
+ drivers/mtd/devices/mtd_dataflash.c                |   2 +-
+ drivers/mtd/devices/mtd_intel_dg.c                 |  30 +-
+ drivers/mtd/devices/powernv_flash.c                |   4 +-
+ drivers/mtd/devices/spear_smi.c                    |   2 +-
+ drivers/mtd/devices/sst25l.c                       |   2 +-
+ drivers/mtd/devices/st_spi_fsm.c                   |   8 +-
+ drivers/mtd/hyperbus/hyperbus-core.c               |   2 +-
+ drivers/mtd/lpddr/lpddr2_nvm.c                     |   2 +-
+ drivers/mtd/maps/lantiq-flash.c                    |   2 +-
+ drivers/mtd/maps/physmap-core.c                    |   2 +-
+ drivers/mtd/maps/plat-ram.c                        |   2 +-
+ drivers/mtd/maps/pxa2xx-flash.c                    |   2 +-
+ drivers/mtd/maps/sa1100-flash.c                    |   2 +-
+ drivers/mtd/maps/vmu-flash.c                       |   2 +-
+ drivers/mtd/mtd_blkdevs.c                          |   2 +-
+ drivers/mtd/mtd_virt_concat.c                      | 526 +++++++++++----------
+ drivers/mtd/mtdconcat.c                            | 103 +++-
+ drivers/mtd/mtdcore.c                              | 306 +++++++-----
+ drivers/mtd/mtdcore.h                              |   5 +
+ drivers/mtd/mtddevice.c                            |  59 +++
+ drivers/mtd/mtddevice.h                            |  12 +
+ drivers/mtd/mtdpart.c                              |  61 ++-
+ drivers/mtd/mtdpstore.c                            |  50 +-
+ drivers/mtd/nand/ecc.c                             |   3 +-
+ drivers/mtd/nand/onenand/generic.c                 |   2 +-
+ drivers/mtd/nand/onenand/onenand_omap2.c           |   2 +-
+ drivers/mtd/nand/onenand/onenand_samsung.c         |   2 +-
+ drivers/mtd/nand/raw/Makefile                      |   1 +
+ drivers/mtd/nand/raw/ams-delta.c                   |  28 +-
+ drivers/mtd/nand/raw/arasan-nand-controller.c      |  49 +-
+ drivers/mtd/nand/raw/atmel/nand-controller.c       |  44 +-
+ drivers/mtd/nand/raw/au1550nd.c                    |  23 +-
+ drivers/mtd/nand/raw/bcm47xxnflash/main.c          |  18 +-
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c           |  65 ++-
+ drivers/mtd/nand/raw/cadence-nand-controller.c     |  51 +-
+ drivers/mtd/nand/raw/cafe_nand.c                   |  27 +-
+ drivers/mtd/nand/raw/cs553x_nand.c                 |  44 +-
+ drivers/mtd/nand/raw/davinci_nand.c                |  26 +-
+ drivers/mtd/nand/raw/denali.c                      |  28 +-
+ drivers/mtd/nand/raw/denali_dt.c                   |  13 +-
+ drivers/mtd/nand/raw/denali_pci.c                  |   9 +-
+ drivers/mtd/nand/raw/diskonchip.c                  |  17 +-
+ drivers/mtd/nand/raw/fsl_elbc_nand.c               |  56 ++-
+ drivers/mtd/nand/raw/fsl_ifc_nand.c                |  48 +-
+ drivers/mtd/nand/raw/fsl_upm.c                     |  20 +-
+ drivers/mtd/nand/raw/fsmc_nand.c                   |  19 +-
+ drivers/mtd/nand/raw/gpio.c                        |  18 +-
+ drivers/mtd/nand/raw/gpmi-nand/gpmi-nand.c         |  19 +-
+ drivers/mtd/nand/raw/hisi504_nand.c                |  20 +-
+ drivers/mtd/nand/raw/ingenic/ingenic_nand_drv.c    |  41 +-
+ drivers/mtd/nand/raw/intel-nand-controller.c       |  20 +-
+ drivers/mtd/nand/raw/internals.h                   |   2 +-
+ drivers/mtd/nand/raw/loongson-nand-controller.c    |  21 +-
+ drivers/mtd/nand/raw/lpc32xx_mlc.c                 |  38 +-
+ drivers/mtd/nand/raw/lpc32xx_slc.c                 |  40 +-
+ drivers/mtd/nand/raw/marvell_nand.c                |  46 +-
+ drivers/mtd/nand/raw/meson_nand.c                  |  49 +-
+ drivers/mtd/nand/raw/mpc5121_nfc.c                 |  26 +-
+ drivers/mtd/nand/raw/mtk_nand.c                    |  40 +-
+ drivers/mtd/nand/raw/mxc_nand.c                    |  23 +-
+ drivers/mtd/nand/raw/mxic_nand.c                   |  23 +-
+ drivers/mtd/nand/raw/nand_base.c                   | 103 +++-
+ drivers/mtd/nand/raw/nand_bbt.c                    |  24 +-
+ drivers/mtd/nand/raw/nand_lifetime.c               | 246 ++++++++++
+ drivers/mtd/nand/raw/nand_macronix.c               |   8 +-
+ drivers/mtd/nand/raw/nand_onfi.c                   |   4 +-
+ drivers/mtd/nand/raw/nandsim.c                     |  21 +-
+ drivers/mtd/nand/raw/ndfc.c                        |  34 +-
+ .../mtd/nand/raw/nuvoton-ma35d1-nand-controller.c  |  42 +-
+ drivers/mtd/nand/raw/omap2.c                       |  27 +-
+ drivers/mtd/nand/raw/orion_nand.c                  |  24 +-
+ drivers/mtd/nand/raw/pasemi_nand.c                 |  22 +-
+ drivers/mtd/nand/raw/pl35x-nand-controller.c       |  38 +-
+ drivers/mtd/nand/raw/plat_nand.c                   |  20 +-
+ drivers/mtd/nand/raw/qcom_nandc.c                  |  39 +-
+ drivers/mtd/nand/raw/r852.c                        | 111 +++--
+ drivers/mtd/nand/raw/r852.h                        |   1 +
+ drivers/mtd/nand/raw/renesas-nand-controller.c     |  37 +-
+ drivers/mtd/nand/raw/rockchip-nand-controller.c    |  45 +-
+ drivers/mtd/nand/raw/sh_flctl.c                    |  22 +-
+ drivers/mtd/nand/raw/sharpsl.c                     |  22 +-
+ drivers/mtd/nand/raw/sm_common.c                   |  15 +-
+ drivers/mtd/nand/raw/sm_common.h                   |   2 +-
+ drivers/mtd/nand/raw/socrates_nand.c               |  19 +-
+ drivers/mtd/nand/raw/stm32_fmc2_nand.c             |  19 +-
+ drivers/mtd/nand/raw/sunxi_nand.c                  |  46 +-
+ drivers/mtd/nand/raw/technologic-nand-controller.c |  22 +-
+ drivers/mtd/nand/raw/tegra_nand.c                  |  27 +-
+ drivers/mtd/nand/raw/txx9ndfmc.c                   |  41 +-
+ drivers/mtd/nand/raw/vf610_nfc.c                   |  20 +-
+ drivers/mtd/nand/raw/xway_nand.c                   |  24 +-
+ drivers/mtd/nand/spi/core.c                        |   2 +-
+ drivers/mtd/nand/spi/esmt.c                        |   2 +-
+ drivers/mtd/nand/spi/micron.c                      |   4 +-
+ drivers/mtd/nand/spi/otp.c                         |   2 +-
+ drivers/mtd/spi-nor/core.c                         |   2 +-
+ drivers/mtd/ubi/build.c                            |   2 +-
+ drivers/nvmem/Kconfig                              |   1 +
+ drivers/nvmem/core.c                               | 463 ++++++++++++------
+ drivers/nvmem/internals.h                          |  16 +-
+ drivers/nvmem/layouts.c                            |   2 +
+ drivers/nvmem/layouts/fixed-layout.c               |   2 +-
+ drivers/nvmem/layouts/onie-tlv.c                   |  20 +-
+ drivers/nvmem/layouts/sl28vpd.c                    |   3 +-
+ drivers/nvmem/layouts/u-boot-env.c                 |  25 +-
+ drivers/ptp/ptp_ocp.c                              |   7 +-
+ include/linux/mtd/concat.h                         |  22 +-
+ include/linux/mtd/mtd.h                            |  21 +-
+ include/linux/mtd/rawnand.h                        |  37 +-
+ include/linux/nvmem-provider.h                     |  16 +-
+ 118 files changed, 2744 insertions(+), 1263 deletions(-)
+---
+base-commit: 30daaf3e7897b4a8d9b72e5b0c86dd6e2a4d7d85
+change-id: 20261104-submit-rawnand-retained-handle-lifetime-v1-0b4225e5ce0b
+prerequisite-patch-id: a51b9cb4077105499133c413d58c7ad21d973b38
+prerequisite-patch-id: b3679cda4dcb45ce7712bffe2dd0576b254df44d
+prerequisite-patch-id: 07b5c70e44ad951d20eea9478c98fda35ec765c0
+prerequisite-patch-id: abea50275922fe359d72ca4de5cbc211b04bbd57
+prerequisite-patch-id: 57776b214ffb0331319f024412f21d35e4ca9056
+prerequisite-patch-id: 09be2baaffe1f053704263cc4b0d39f2faa4f49c
+prerequisite-patch-id: c3ad85600dc897ac310be450d8daa2275fb91ee6
+prerequisite-patch-id: 4a85600553ddcc7db5a9537efd905a71cd623f65
+prerequisite-patch-id: 579990ee4a49297efc5a593b00efb9cd73fa15e8
+prerequisite-patch-id: 2ee61a8a32fd147d52e0f9d03758634912d8bfef
+prerequisite-patch-id: 1487df8ce8e6c48471fd77c7470ce9de582dfe3c
+prerequisite-patch-id: 5ecbe86f928d9c5c0bf2cb6065c5672708511fc4
+prerequisite-patch-id: ac68e9b65d3aa5661bd7ac0f2e77dcf5c75fcfe0
+prerequisite-patch-id: e70f0f0c4d430d416a3ad848b37ffad16bd7df07
+prerequisite-patch-id: 05adcddbc50f745ee2640b8c21f3bf76a217f249
+prerequisite-patch-id: 0b60b7ab6196076f327c919be5e7b8bb2051ee12
+
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
+
