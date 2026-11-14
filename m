@@ -1,112 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794621680;
-	b=UmjURdWfEovGhuYrXp+uUmKGOtIc5fWWvvXgRLXFElL576tRlrRnEyogPCjAqaEoSmD5
-	 sqZ/AZvEmkGwW5bWpTb92RQ7voRzpoBIwhQaNtqguFjWvC3C/e779c8phxLzxALV2nF6+
-	 WRMrh66Bbkh4MFRe0Dyx934VMG89JGbPv6oVK270s1BKVAiv0NEk5Aj4fZ89hRy/wV5Ct
-	 W3AeHpxTvSNIisHdpeVN4zIg28tzvQK0AjvpqQs9gwyJKra+gg8oppEAUJCUZQ+xImsjO
-	 eFQBXwrZTdwska0mG2C4Ay3PxtTKHAXcqtXGoKPq+OemiGXrvSe4l8GFHGdTEtC6QgQ==
+	t=1794621969;
+	b=WXNLDRg/GpEzaSOPLSuOUz+hUIG7DjmAxAtLLepGvoAJUm7ko1+TUiq0sFkHsXGEglra
+	 RNBmVbfLmzhNNbeLemfHZF+PGZsZgTEPIH/4xjBp573vGG0j3FrudjmpPzPdu17LG9yDL
+	 11YODwWlqIQ8GwhHZ5KE8yG8sZrog0bqs8j8GwkRQ3SBsCVEvkEDbnuIQQofPlckJh4MT
+	 cINVRiVaUJ72WymWzsqTbGDZB6euwBUp2BmMGOsgH/OXZChA3rz96Rb4iB3XOSD/2Na9o
+	 gE6ssKbPNaf3pLZFlVBpGUqj7/Qz7ulUW1sRDb+JauQnwjxzCBa7VWIuVS4OYy54VBA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794621680;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-	b=DdnMO6/iwT8BMQ6l1mO8I00PatQV7sFoSUwK00w8urlxS+mDSbQ5Q0AbA3HSqgpOK4fl
-	 XgPOErAasa9a2jFEBWPHTLlZQY6TqMsYgb+m3Jmh9gXZnBqwUoSL4inFD+KTpex5sBLwF
-	 PdH1R0hSRZkBFyO9yI5i3vv1wZANkW1fIrLdMr14qic2WKJ6GF0Wu/XAzS8kkM+i9ICe8
-	 h1NkFDfB+bJS06rBdD10nwmDB6nHClQyes6bazBMAINmAsHV29M7OuMAZxCpqe25/A79w
-	 XQqeev+o3bgcVqGA4ecS5xndtwgnam/Qbv2dUyRk2Ck5RJdGfXWif1frPDhY/VahlHg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794621969;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=MwHNjXTNt0u+bCEWd1wPqor93Tx9nuqFvKCrmT6b1ZE=;
+	b=MziELrCSj41lerNLallHd+bW+7ugpL3OANXhv74xt6IrjaZHWOkRM1oFjC+yNcpzsdAi
+	 7nSbJlbeGhX0RurkdcwWAZcLHWITWq6r2zHckZfhqm91k+rOSBlgls3obPd28G+CtBBjh
+	 Z7NaP0T+zpLj8B67OThqZxq9Emfcozhr+HVBEIAMVTsJ3FKfFUoClnasfuseA36R6vYXM
+	 OGL46js5DYVVCGBA3cFymrlu9chmtPDSNtEL/OqaTkDTNsf/LxW4iZ8Mg42dC8kek2c92
+	 2BWe+2sZJbtXo1sZRUczwmsUqYbfZlLNrFJYyK0EDCdCk+dspG1O+5mkQnE2coNT0jg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RnBEZk5t;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=H10LznKh;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SrV+dAjR;
+	arc=none smtp.remote-ip=209.85.210.46
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0ECB7606A8BB
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 02:01:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0ECB7606A8BB
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E15F606A323
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 02:06:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1E15F606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RnBEZk5t;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=H10LznKh
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE20HV4072019
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 02:01:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=; b=RnBEZk5tijUDlM4m
-	NLIIw3VVnwnpgiQUSi9DxfZZapBB49T+a/PeQZHNkBn07Bjf1NrA1+D4fBVVB2de
-	Yyt46JOGyPdisT8VD6KrXMA111rEfPgrML6MxQ3zxQ3kwyv+ORmO/L+lgJ1pg2Yn
-	v37k6Y2bKfoeBTrvUHbWBKgg0GxgUWTGC9vOgjwEa23WGo4XjkGnCX5ACeB/LiYG
-	ZSCI68WRX/mKwrvShw6CZCIWldmGS1oDCkTp9SGmJqt7zfUNZX2FkU00zb5JHXN7
-	meMHOh1khq8oAozGW/WdHhGe6knfjeVvHCnoulQCC7tQAsIh/EVJ5SSvKy6dy8MX
-	5ioiVA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hx662sthg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 02:01:17 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-341eff9e381so2370886eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 18:01:17 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SrV+dAjR
+Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-843b6f8e2c7so2479860a34.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 18:06:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794621677; x=1795226477; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-        b=H10LznKhMirjtmPfeKXhuqx6cVugDvmWNEEDM+9ViOxi76SKeRzNJoWw1PBnOVdhJp
-         1PoiteNwHfV+bNNzARAf65G+Zu4762xxREZNcBRYBFRLtiwCBiOrG71H6JKbHlvl/Vkq
-         7vK43AyZtGGTiQ4bx/NRfKr+PcCeuMJHg1nQq3aKQHvrCP9K970cr96PFN3/3l58PUGu
-         KB1/tHDAPgIsqZ7KVYtlkOjvaPYeLq3ic+a2Xvwqv30irnd1wfzPVo2OnqTHbjE5biap
-         NkDTUSIZz856NGjc4EVGoBa9eoS+nAXgmlQgHR9wuV9VanAG87ebYr55pcINQAWbJyMP
-         5QGQ==
+        d=gmail.com; s=20260707; t=1794621968; x=1795226768; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=MwHNjXTNt0u+bCEWd1wPqor93Tx9nuqFvKCrmT6b1ZE=;
+        b=SrV+dAjR8I1l440+SPZa5VXt5CnSngO+8rg8puX7LGOii7nOX+yhoTZlMMmqbH3I51
+         u0Vk1HzoA1/EhlzQlBItuoEwGYEld6gCwr75pm3TeAAPjaU91IgAKlcJR9ZVdvW4AVq9
+         mpJq6UYEBKbYFOb6TsTREQlPXTBpTTnXos1Buh5qi5YWs9KooQMNWjjwsE9Gqm/TmMkw
+         xrI2z0i5k09Wflw+52Y4QJrtB/ZeZtI3HlLvZK2tJPAT1IbQYTg/UmN4Ef2UBKp4X5Ao
+         kxF4rF+VpYPrR5hB2kQNtCSA6ulsHi+m2Lrf0S3dDW/2ZcvmlqxgvNCtVxTXpSog37BS
+         INNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794621677; x=1795226477;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-        b=Zg6DyF/iX9uwmHhz0csupr+XuAluFIi/dp0irKgXH8Z2TVxnlnF2mfuWJu7B1pbDNl
-         2yQrbb+O+xDZrjE4YsxZ5QrkSOf+CpFfQ4NR9P8KFJvd3Yd6h9xdyJ8+Hv7vIbUKOF45
-         C9bIU/mWan1+EjiRXw6pX1DOcfemQi/qL/n3i7Jb6lu0VtllYKa+TqvBVUdNy/3d+lc2
-         UulHse+fE0zo/Ant3qm0XAHPaJ3oVSjn+e/kb3LVToTJYl2u1lCB3l1hwBh7W6kHpvi8
-         i54yVw3Z8lHwHKevo4hImHcQKi66c94S/5RyAolWzCurh7f4LpPCPMPgQKsMcoW0gwlB
-         b9Ew==
-X-Forwarded-Encrypted: i=1; AL+hErECVxWtKvsmY+oam0es1txy932YM4I7bnSmCO4Kw05A3JoLHdv0f9rmDGUa4ZyK0MZPXAEwfVViyd4fLrzl@vger.kernel.org
-X-Gm-Message-State: APuU4Z+1S5hMk28BPnGYra8RhEh0gy2nGDjDuYovGwyztLoH+j/y+8NL
-	d27i98E4bDL7Ctza54ecGtHQJbbp6eWJdP+L3rM2hBNFoQC1w/OOSjCp/p9j/mUr/NnjVbUcuoz
-	FJNnKqKQwmK9FYONdH6JBLHcSg3UK8qTiPJd0vwizExFN8gxmWZKemVOfT7zpR20mVCLa
-X-Gm-Gg: AYBFou2e6cmP5juB3M/kSXar1mnaKVjfHyffCUojUcI2OWyPmALr3+Se6GNxlUeRFsG
-	1QTy+CMVY51zqBowXKdXPgl3cGKT5YnejgsciIAP/mJxN0aFfKRX7+twDBzCInXoBz4qvKNfjql
-	4ax5XGai9Z4KAsCNf6ZX1fCfpo7ZJloScCUprVu/z9BACQEMX0tQu9D9r3kOOi1o/zJBiaM9U1x
-	w/9J6thST7Beyg4UXlaAabytEDvtUf09Yx6cqSr/NRIlR/UE66bRWWQvZS2JF3RYoxN7R1oEwZs
-	hNbKEoLfFmzU3RPP2iBc4Lgkc8GBEiOAFvR5RoDBE7sbeowzCuVs/uQ6cFcC04Zb3Eh/MceBE+1
-	ORKG0O+XLTrAj2sHogL9J0f8nar+T5yKTH91v0MjWYuTSO4vN1Dv0fqfEzM2653Y3KblITzZGEz
-	3Y9jhfkY29
-X-Received: by 2002:a05:7022:ed07:b0:1b2:588e:f89b with SMTP id a92af1059eb24-1b503169362mr4105659c88.47.1794621676334;
-        Fri, 13 Nov 2026 18:01:16 -0800 (PST)
-X-Received: by 2002:a05:7022:ed07:b0:1b2:588e:f89b with SMTP id a92af1059eb24-1b503169362mr4105627c88.47.1794621675559;
-        Fri, 13 Nov 2026 18:01:15 -0800 (PST)
-Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b50316d9c2sm9952742c88.7.2026.11.13.18.01.11
+        d=1e100.net; s=20260707; t=1794621968; x=1795226768;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MwHNjXTNt0u+bCEWd1wPqor93Tx9nuqFvKCrmT6b1ZE=;
+        b=AFrU9d3X8D8L8qlph9hYwAc0wSp+tC17RYX2aViVrRZEXe6uoj4x41oiwAtxnH8Swn
+         ZNP4ihvB1g6ykbTsuH98nMieOmPRdJLmbA3HxMrPUG3NZ+GJ4z5iymc6Qbi6ufWRzJzl
+         nxJCgwiRXPF6RSB8MgCxVfpxECCsQ+Xz02x6WKsd1xxIe7e/+ITI52TQuttPx2QZd3tn
+         iTfuTQ3VqQvOVKIstNBeBp4SC0f7ldojdJ7P0v4pe9PmE8+lGG5D/+prC0CFG2Sq0abg
+         gV/U47fR2+EZv/0hQuwMV9BB6DOGJrrPbU3Qu4gKapyoD7v2bp44yLndEPV9E0v2wcVa
+         bvUQ==
+X-Forwarded-Encrypted: i=1; AL+hErGi1LDWlWMtmVt9LOoKT3BfzE2nv2OleEovzT+rJoDMb0SdnhthkkDYNR7jtPQZsh+fDRcAe/ecvXrrlJvZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z9HQ50SIcaAtMrdrLLaGt83bs68cgHgvl/zmqxTzLdq1tJ0rgiU
+	t/5YrvbrsEjY21xjV2j6rALykKz80yoly1HLDoquVtaKbVApuPWGHzLa
+X-Gm-Gg: AYBFou3zvNajIbfOKqAy1XZrHU7fspGPwRXfcE8PvGboQLND5aH2Nii9qUgMz5T4YYP
+	8gUO1HfUtYverC9P+KFrfABCPKpXsjvTktBBTjK20VVLQkn3CnPhlR8+Oxaxb6Ypp5VNMoOQFV7
+	H7b8EjCZUdc6HmHR0pZSToF+2i/2KDJ799bJDnIf0ZMhUHIXG249cEvwQIaWhXcSE7vwunat5kO
+	UNtDRfWH6hAnryh2O6Ydl+ko4W/1OI0QMv649r+mbLAiRwlMw5lUVNvacR//Mtp83N81hzRwLuZ
+	tu2Q2cmusb9XRily1sELxVw9icvwqGC0EaBVxvL5SP1oy04zkUKLp3I+2fZe9XpjFfZPGU7RaFy
+	XGs7X6aejX1+3PbDc/e5qqrupPMTRi5wUyNjeAQ5q4JqQyb+wzLthGTG40giBPcF2XcPbm+s1qm
+	U55B/WR5/sMrA9o7eFbaJjAlAxlotIy5vDqcp7dmq/JKu//D4YfHG/vtTTJvZK0y6/5iUw2DqmC
+	3ackS8ekqENIqi02ACV1cFOaJoP+2LZP8DFDjU/gHr2UYoSiiV0jciR8y+Ss9ihoiGTveQTkTsc
+	/901dAxlYyYRfTLBnoMOE8l4aaXq9FPM4IDm9YYfqjJqGNimiXbI
+X-Received: by 2002:a05:6808:244f:b0:4e9:7d56:846f with SMTP id 5614622812f47-56e640bc904mr4002307b6e.41.1794621967148;
+        Fri, 13 Nov 2026 18:06:07 -0800 (PST)
+Received: from jeffmr (63-152-14-173.cdrr.qwest.net. [63.152.14.173])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-56e6fc3f179sm3385433b6e.6.2026.11.13.18.06.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 18:01:15 -0800 (PST)
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Sat, 14 Nov 2026 07:30:54 +0530
-Subject: [PATCH v9 4/4] PCI: qcom: Implement shutdown() callback
+        Fri, 13 Nov 2026 18:06:06 -0800 (PST)
+From: Jeff Roach <jeff.roach0@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v5 0/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
+Date: Fri, 13 Nov 2026 20:05:06 -0600
+Message-ID: <20261114020509.632311-1-jeff.roach0@gmail.com>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,157 +100,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261114-shutdown-v9-4-5430c9f242ed@oss.qualcomm.com>
-References: <20261114-shutdown-v9-0-5430c9f242ed@oss.qualcomm.com>
-In-Reply-To: <20261114-shutdown-v9-0-5430c9f242ed@oss.qualcomm.com>
-To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794621655; l=3652;
- i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=THWTFBYwq2lZQWgLvpr0AlF/FWIRcJOgtOn7/GBUACc=;
- b=Ju38qQrTI2vyg60ari8vmEap8HMp9kPUucQv+4rdG74A0mFYkoU4CwYRBokY1nZ4S0lGjGzKI
- jYtJlGjeNqvD1r08rt0/GOUEn4dt+GT67DwQDtJh7PcMqjdGR11lF1H
-X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
- pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-ORIG-GUID: V6AIw9izxNHf3wthoOdbgiT7ZlwwU5sY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDAwNyBTYWx0ZWRfXxJFSg8OOiOe1
- +iUAio0kdqdNvLGhyKQPbPwNQ4rVou8Fsp2pvvn2DUxIvQi525MLxSeW7xNwyxQP+E9xqnrtaJv
- Ng18OjpIDpzUaaFIEndetdFQXpSyG9+HBLXZxgQp6xm42rMp/+ree/QY16r6/cxatDrAYKTPv9y
- ZjWspsgPAMYoadmZag24ALBNEPCABgNY/KAvcHglyFMLuAHFh3uSybuoQm//aptE+X2L04BphiW
- scv6I4vOFBXs2cYXg3xLippK9cr82sz0ZnhN+kEK4fNQIgJ7biyYuzJue5Wtxqp1yFszgZ74aWw
- CfzlkbglG1xx/wzA1ISj2YCTITx4A/9uK+87q/sIlzF0rD8/JIiDBBOFD7pY0OvWTEigH0Gc7cx
- sJy8qJOqBkMSvaZRMWMS0uHwdKnTJpmUWR43hRs8HNY3E8lx4QgqF3ZzUtF5XdlhLLVuOCsD9O3
- nW58V029cQk+lu52PUA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDAwNyBTYWx0ZWRfX4yZ9KMMEv52W
- IpWFSoBYoEk9qOpPIwoZ/DZanU8DLdWbg9bnscHHzad6pttDXJbfcyqmYc0QuGoAqrtD+TblqP0
- GFrUCrX5JCSbgL7v3qdVaYGb3SKicBQ=
-X-Proofpoint-GUID: V6AIw9izxNHf3wthoOdbgiT7ZlwwU5sY
-X-Authority-Analysis: v=2.4 cv=M/nYuCws c=1 sm=1 tr=0 ts=6af7c0ed cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=gM652YqJFP5vwQx0TG8A:9
- a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-14_01,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 priorityscore=1501 spamscore=0 suspectscore=0
- bulkscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140007
+Content-Transfer-Encoding: 8bit
 
-From: Manivannan Sadhasivam <mani@kernel.org>
+This adds a device tree for the HP OmniBook X 16-cp1 (board 8F46), a 16"
+laptop with the 12-core Snapdragon X2 Elite (Mahua).
 
-PCIe host controllers should bring the link down cleanly before system
-shutdown/reboot proceeds to remove power/clocks from the controller.
-Without this, the link may still be up and endpoints still have
-transactions in flight when power/clocks are cut, which can trip SMMU
-translation faults or NoC protocol errors.
+Tested with Ubuntu's 7.3-based linux-qcom-x1e
+kernel. Everything listed in patch 2 works there, including suspend
+(s2idle).
 
-Reuse dw_pcie_suspend_noirq() in the shutdown path to force the link
-into L2, putting it into D3cold.
+Notes:
+- DisplayPort at HBR2 needs "phy: qualcomm: qmp-combo: update DP PHY PLL
+  programming on Glymur" v6 [1] (tested with v5). Without it the stream
+  runs at half rate and the monitor shows no picture. With it, about 1 in
+  4 plug-ins still gives no picture; replugging fixes it.
+- The GPU is enabled as in mahua.dtsi. Tested with the msm driver
+  patch from "drm/msm: Mahua GPU support" [2].
+- Audio needs a topology and UCM config for the "HP-OmniBook-X16" model,
+  which are not upstream yet. The headphone jack (SDCA) is not described.
 
-device_shutdown() runs with interrupts enabled, unlike suspend_noirq().
-Mask the chained MSI IRQ(s) and the Global IRQ before tearing down the
-link and clocks/PHY, since a late/spurious interrupt could otherwise
-reach a handler that touches now-unclocked PARF/DBI registers. Use
-dw_pcie_mask_msi() rather than dw_pcie_free_msi() so the MSI IRQ domain
-and the MSI mappings held by downstream devices (which device_shutdown()
-does not remove) are left intact.
+This series was written with the help of an AI coding assistant
+(Claude): the device tree started from glymur-hp-elitebook-x-g2q.dts and
+the laptop's ACPI tables. I went through the regulators against the
+ACPI power votes for v3. I reviewed it and tested it on the laptop.
 
-Stash a struct qcom_pcie in the platform drvdata in both the normal and
-the firmware-managed (ECAM) probe paths, so shutdown() has a single
-path and recovers everything it needs (Global IRQ, config, dw_pcie)
-uniformly via platform_get_drvdata().
+Earlier bring-up report: [3]
 
-Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
----
- drivers/pci/controller/dwc/pcie-qcom.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+Changes in v5:
+- Drop the &gpu and &gmu "disabled" overrides, mahua.dtsi now describes
+  the Mahua GPU (reported by Sashiko)
+- Drop refgen-supply from usb_2_qmpphy and use the common l4f1. The ACPI
+  tables vote both l1c1 and l4f1 for this port, so they don't decide it
+  (reported by Sashiko)
+- Drop the stale regulator sentence from the commit message
+- Link to v4: https://lore.kernel.org/r/20261110202445.14100-1-jeff.roach0@gmail.com
 
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index 532779295734..0f548c6ce6a8 100644
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -2020,9 +2020,14 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- {
- 	struct device *dev = cfg->parent;
- 	struct dw_pcie_rp *pp;
-+	struct qcom_pcie *pcie;
- 	struct dw_pcie *pci;
- 	int ret;
- 
-+	pcie = devm_kzalloc(dev, sizeof(*pcie), GFP_KERNEL);
-+	if (!pcie)
-+		return -ENOMEM;
-+
- 	pci = devm_kzalloc(dev, sizeof(*pci), GFP_KERNEL);
- 	if (!pci)
- 		return -ENOMEM;
-@@ -2032,6 +2037,9 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- 	pci->dbi_base = cfg->win;
- 	pp->num_vectors = MSI_DEF_NUM_VECTORS;
- 
-+	pcie->pci = pci;
-+	pcie->cfg = of_device_get_match_data(dev);
-+
- 	/*
- 	 * dw_pcie_msi_host_init() is called directly here, bypassing
- 	 * dw_pcie_host_init() where pp->lock is normally initialized.
-@@ -2047,6 +2055,9 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- 
- 	dw_pcie_msi_init(pp);
- 
-+	/* Stash pcie so qcom_pcie_shutdown() can mask the MSI IRQ(s) later */
-+	platform_set_drvdata(to_platform_device(dev), pcie);
-+
- 	return devm_add_action_or_reset(dev, qcom_pci_free_msi, pp);
- }
- 
-@@ -2467,6 +2478,24 @@ static int qcom_pcie_probe(struct platform_device *pdev)
- 	return ret;
- }
- 
-+static void qcom_pcie_shutdown(struct platform_device *pdev)
-+{
-+	struct qcom_pcie *pcie = platform_get_drvdata(pdev);
-+	struct dw_pcie *pci = pcie->pci;
-+
-+	if (pcie->global_irq)
-+		disable_irq(pcie->global_irq);
-+
-+	if (pci->pp.use_imsi_rx)
-+		dw_pcie_mask_msi(&pci->pp);
-+
-+	if (!pcie->cfg->firmware_managed && !pci->suspended)
-+		dw_pcie_suspend_noirq(pci, true);
-+
-+	pm_runtime_put_sync(&pdev->dev);
-+	pm_runtime_disable(&pdev->dev);
-+}
-+
- static int qcom_pcie_suspend_noirq(struct device *dev)
- {
- 	struct qcom_pcie *pcie;
-@@ -2658,5 +2687,6 @@ static struct platform_driver qcom_pcie_driver = {
- 		.pm = &qcom_pcie_pm_ops,
- 		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
- 	},
-+	.shutdown = qcom_pcie_shutdown,
- };
- builtin_platform_driver(qcom_pcie_driver);
+Changes in v4:
+- Rebase on qcom for-next: drop the PMIC includes, &apps_rsc, &tcsr,
+  the SMB2370 repeaters and the phy supplies that mahua.dtsi and
+  glymur-cob.dtsi now provide, and use the new regulator labels
+- vreg_l2f0 is now 944 mV from the common file (was 936 mV); tested
+- Keep refgen-supply = <&vreg_l1c1> on usb_2_qmpphy, which matches the
+  ACPI power votes on this laptop
+- Move the pcie4 endpoint under &pcie4_port0, since glymur.dtsi no
+  longer has pcie4_port0_ep
+- Link to v3: https://lore.kernel.org/r/20261028191800.27829-1-jeff.roach0@gmail.com
 
+Changes in v3:
+- Set vreg_l1f_e1 to 904 mV (was 880 mV, copied from the EliteBook) to
+  match the ACPI power votes on this laptop, rename it to
+  vreg_l1f_e1_0p9 (Konrad)
+- Add Acked-by to patch 1 (Krzysztof)
+- Link to v2: https://lore.kernel.org/r/20261026154001.9323-1-jeff.roach0@gmail.com
+
+Changes in v2:
+- Add static data-lanes to usb_2_qmpphy so the PHY uses USB3-only mode
+  (reported by Sashiko)
+- Drop the Assisted-by tag, describe the tool use in the changelog
+  instead (Krzysztof)
+- Link to v1: https://lore.kernel.org/r/20261024044650.9936-1-jeff.roach0@gmail.com
+
+[1] https://lore.kernel.org/all/20261028-glymur-phy-v3-v6-0-1f1d2e565a66@oss.qualcomm.com/
+[2] https://lore.kernel.org/all/20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qualcomm.com/
+[3] https://lore.kernel.org/all/CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com/
+
+Jeff Roach (2):
+  dt-bindings: arm: qcom: Add HP OmniBook X 16-cp1
+  arm64: dts: qcom: Add HP OmniBook X 16-cp1
+
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/mahua-hp-omnibook-x16.dts   | 647 ++++++++++++++++++
+ 3 files changed, 649 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
+
+
+base-commit: 14825c9204bad7f4e0bd3a528cbf4a7e24e757d0
 -- 
-2.34.1
+2.55.0
 
