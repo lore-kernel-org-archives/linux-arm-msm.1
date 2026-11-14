@@ -1,110 +1,125 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794673761;
-	b=FrDuTMETZdkdBDJbagLIrtyXt5BynatzRidP+UQx3yHf/wGDd+bJnco6CPJZNvu0Yea+
-	 sN4/Yh0yfDoUIc457gialdbx6Wec+PU3xd6FybP/Z1qefsHuwxaQGM0czlslfx24Pbt+B
-	 cpvHr40gVQWoJC7oS+gv9hoFO4+MOfX1lUpwKNnlk2/VA41P8Weh6XzujtQVZMsgCyQIv
-	 ar4HblAB24Tdgwh7Rzuskvqry2Lh6YWFItu9rKur3AcDPccUYrNWsEUeftJGx1HHPDQna
-	 JwFl9ndReQD24BLWziEYrObOVTgxMpnN/niwU+sp2LBkldHIbmPUfhE61x5dT2vTxVQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794673761;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794674445;
+	b=MZLdAyTFe8ShQenpBDnWOJXN/zNFOEe3nr1ZxblJcvSS8YHiL6cp0sCkkzk0rOHuGzkq
+	 8D3Rhgp9yREcD/Vn4kv6smumLsF/doWaERQYUknf2WH86vLelCEv0pSpQ+uVj4cNO2+wW
+	 o/lOOJxdybhl9g2V2WSk7SC9bvk60qnaMUcpk3BSTEMy+ZEzrZVOb8tQ9xm8FYiI4S3GJ
+	 xAnfaVI32Znz1lQhiuwUtXXU5couAqCbjzV6fufguY9/SMpch/EJ1VWPfc6r8Xg+n17VD
+	 y/3JvMLItUAjWfzUotJNqC1MzIzxZAg0hCaqoUYNpO1jssXDZFxuqss9C7hSJO24KZw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794674445;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=cFSv36haa/S2tWhIqa+FIbiJpV2o1Z/WfYOu8JEVZLE=;
-	b=bafYvSmY24G1Q0lfKJ90KNa/Wq5Khe8hZekl6i5hqboIO1Gjvzu08LLL5eMPNVf6LmVX
-	 4VIoboJnPTvDIPDQthRvw20zsZpPGSt6kk9CJGmPx9IEZ4YyaBHzqaS4K7G2voSe41diW
-	 Ys6S8f39+NjaqBHdZibQduo6e9XgWKpnt/hVz7V8ZtBOeaCHHLci0LiMtUkpoTMFQ1De/
-	 YeE1k/Gseu1zj+u0UuoxR0hmxaNHP+FxME/xBlB97l6DZprbTbMMjGZVM9/dizIAv/6or
-	 ZESJkhxQHAUuHgNrkSa2D6zhKIpxmHFOY5cy/p/vQCBN2BOMXy68o8Y/fi8hB0rnk0Q==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
+	b=Eu7Eho+20Ly/vBmeEheBPcrSi6Zu26tIDtiZOQaVVYKvOs9m0YdGRmM9WWbHcEQzVJZY
+	 lN8nnhg7CxTVyjbdUV+tjg0kRbGe1FdMibgCcKj3y5dhhO6tJ4fHcVdYAcDEEcnyrN03n
+	 EQcZn3L3ntO4XX2uCJHUCM5bPY6AFgB6E5rAntNsPxAQ5glpKR7c02xUgn4e1wUXBLTVC
+	 s4/zpgWp5OICrM51Tg+1TSOmQsNmqdj7IUL4t4VWaXZmyhf6bgA+nzJLcwDPhB4zBiH7J
+	 GgvQjcumgcVj4W0AMkKCuzIWzROzBOaQaUPDuyuBVylP79B0pfGSeVhFfNANyZbM1Rg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UvznF1Xh;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CIGaB6OB;
-	arc=none smtp.remote-ip=205.220.180.131
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fpYXnSkd;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PEyKBndF;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 679BA606A32E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:29:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 679BA606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BB9F606A329
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3BB9F606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UvznF1Xh;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CIGaB6OB
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AEDkht14184261
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:29:19 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fpYXnSkd;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PEyKBndF
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AEDkLPL1556292
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cFSv36haa/S2tWhIqa+FIbiJpV2o1Z/WfYOu8JEVZLE=; b=UvznF1XhPrghuV2M
-	PrLHrrYddfSUSSJ1n8PYnT6QykUVLrDWkEP/ZkswjOW+z6avptbOaQXIkm7wTwgE
-	TCBDTryheIMQHfSqTqEzyueFvC0Tr4L+ekmzi7jKVZAcmX6nFHhsy2Zq/v78ltc7
-	BZ05eiOpV5p3gArlYLR60JGc0p0V7rPOzQUzwF70GZBY4r77KXA1E5KENnA8bN/i
-	O0W/Q6++mZC+m/H/vjx9EQFEf/pzIBpM2WqkIF0gb/DJl6dsxFDTcgfWBn71QR5Q
-	bXZ09I8PiU9AHAOjWFJA9Wc5iCjo2loxEqAURDhLG1uFRv8Z8Ps1C6XdAyXEaU5Y
-	EdX4qQ==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhk217ar-1
+	:message-id:mime-version:references:reply-to:subject:to; s=
+	qcppdkim1; bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=; b=fp
+	YXnSkdnG4BA4y8XDLRl8x2Co9x2NAPivGl8Owm4IYNiITvILAgSN3/MakeeFTb51
+	oQ8ysc9yiMQMzZ6pOGm6khvyUOxdnIydruCt5uqV4NQvj3bpmKyr+kOnzdaUlXKB
+	hevt+FA4bZxt2sFFHBKSpKAMO1WBHi30sU/FjKa0QRmwba52oYXcestA+zmoVJft
+	Yym1C5/qt8+wUAa/sTnxPbYtcn4CE8g9YUD0UZo6STZrnIOTbUaR5h4Z7ev67KyG
+	3CA7GXlrMqCtC3IE49B4siNKjkxkxF1tIYcUo3ePvlp92/FNIZAg6xKIAOZmIsjV
+	NCZGFDSvrVLBR78lAFWA==
+Received: from mail-ot1-f72.google.com (mail-ot1-f72.google.com [209.85.210.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhm8s65w-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:29:19 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-378722fd4a3so2348788eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:29:19 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:43 +0000 (GMT)
+Received: by mail-ot1-f72.google.com with SMTP id 46e09a7af769-86285932977so2804018a34.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:40:43 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794674443; cv=none;
+        d=google.com; s=arc-20260327;
+        b=pvNypFwBu+lGiSpgHuuB0r6T4DM8cUSVhXE2Z87j6HOULTwIl748qxHXIW0HB/Cy4w
+         pjLPSw8Wtm6wiosnF6q+6sOydJiOL1d0VvF27EGA3Dw7MLZmcrQf6hTiNlBr2E6KvAN4
+         /BCtZ1Y6DgBoa231ydARiiGfRwj6ipzi4441Evc2tbAUubC+gkIJn/e0F1Af5D12Iq3t
+         Tpz9/aTup+1uN+yVf3zP+d1CUSBZ0jMHai4FeRnvNd5BfOboNMfVWoltAj1g7rFHWf+n
+         lsFjH/w4kEKzJ9CEnLW6fkcynetUwNwTRgAHhChUXRVzhVthbJ5nyNsdxGG6CrGCwncT
+         WN8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
+        fh=Vj2TRir2I+40y+a0xWvPsK+irKBZFDREEmMlevo+1S8=;
+        b=ma1IYSGYRZ2AjqknJYBxaQxBiRT17OdUoOlFJlCHxNB0ra7JbCpR2VBO8geVlnStGi
+         uMND+I+jLulSnAJ+/MouZ/SXkcgCUQPUmq46/uooGE+MwKTazQcMW1LzF1j5RTzGQUo/
+         CnZSf3NE6aBA+2OeB97LxLmfheroyFdwdqXbP1UbGreWLVS95aoqQaY2TvzBscQmbxUV
+         96Cim3eCTa0/S2bQWaaULnZRvWMzTupoZYx31SKCiJ9Uivjo9UqkKspRaxNF4KUJZUuW
+         +UpESCbyBpXFTRE5wkSBNIm1Ca1uvlJEV1JEzSv8mxeYer0LKAFwM4N3YjshIxrC9Hbz
+         uFmA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794673758; x=1795278558; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cFSv36haa/S2tWhIqa+FIbiJpV2o1Z/WfYOu8JEVZLE=;
-        b=CIGaB6OBcuJStLHbOWYc/o7PukfiRwqFS1hm0IriIJapguovIxEWDsCCUTiq5kpoyq
-         nBmoALJfc+wUnFfqx2m/RpObSk4wugb63gReCTTFDYj160BgIwPMWRzpAN1076Lx4NZJ
-         GTY0yGdqGdoA+qT5f+Z7AHM51yOUj8SpdYYjcG80yjPADr60h+CnixNMW5MWnPzosjdz
-         nM+ibGlg20LMcmhekVIWLIqSCraD8PDtuaGV56xfuubXtw9a2/pFRF9EV5KiBxfYt88e
-         hWwaKZd/oKrOE/4uG9q7HDK9GAdpflR5ZR4DvIO9mbRnrTNQTcc3Cwxh1bgBytP+iiBe
-         03CA==
+        d=oss.qualcomm.com; s=google; t=1794674443; x=1795279243; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
+        b=PEyKBndFsBRy6cE+pH6wvUPpxLuqOFsAMgUnt6zROwdejjuihiLQYeOlCBoLvqUiHI
+         NLrND11V6vM9gjVqZMMrelLjeLmYj1wDFK1X2Ldq0nQ2xT96OQRxjbGywolczIHnudsG
+         gmFL+d4iKq1E6nJUbFVW5VRqr841KnY3HZNv7OAtqswQvjb3aE0bqGVngXb2nbyl0Bp0
+         TkzLqPI8j0OdDrkDWZfYOm+6gF4C0YC25rElTQE8HWIUck6KdnJEh8KQvUqn10jntAH6
+         MlFC7E7/nJQw7wYZxz0PYlY7XVboE5D1FkuogrYeCywEDFY8VSN910NjT0FFbUuLGWJP
+         WYYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794673758; x=1795278558;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cFSv36haa/S2tWhIqa+FIbiJpV2o1Z/WfYOu8JEVZLE=;
-        b=DSfHs8KsVGar3xT6NKRUYT1fp6vd+Wtb7g0eIT95J44bVRF3MOG2TrZQ916M5AZpTY
-         UIa1ddaCFJkKgF70ZH07bq2pU1OmXKSHWYt/r74l4u/H9lZzZYJHR90hpYgZq7NebT2s
-         lU2t9b3oKbsdOJCbMGsr6xNUul+kw/yCAf/L0bH0ukaTYWxjDb4/Sp9cFRRV/dA/yTh8
-         36E0HFY5pPHSWMNqq11sibEP/6pv2P69tIKIBqs0Q7mS3LTVeBjtE1tWqeeC2vMw8UWg
-         3eeJUy0Is1h+wZcbS0LKU6XPIZojeU2nXoGLv1L0yFl+DLkTHwlAcy4GkSPYmFVuDJyO
-         qwxw==
-X-Gm-Message-State: APuU4Z9JNLRtuKudBGIxU1D4B/wWYtlz5z7tiEcn8WvkR6zBWmaHZSO0
-	jDaapdQyBFc22ZxNttJrBjD73veGYmulTDtYYMOvT9xAzk1D+OIMaSSIGlb9B8lfQHAG7dCtppv
-	zQXoq/V6nzOE7pxwGrhFElKkUrBq0qoOqul2FmZeKH5Ga6x7ssFqlwTwQG8EmUQr2Pq4v
-X-Gm-Gg: AYBFou1hBYUgd2MNA4k6vMEHmKaQGbfOTpuV/i2JWH+3uUP0ZUdeCmuadp8x4K/UuKk
-	c6ySPeRzgpvj9N1A8OS+fhI8fQVxKIl9cK/lhHwlkjI4yMxy+Bvn/mMHrVTxrG6sDi6luuUbE/U
-	hHy9p+jwGPwTMyTkfihY2DSIyAtPiZwKHnRqSXe7Heda4g2KJNMuoS7/NQ5Zm0O78daf+zNTSYb
-	50HVEMfFFYqqCRYKAhMgxrMkOl+amTZCpdPjRAIuVOVo3MdtYc7SMUukNtrJkmC1svb4yBk8ECA
-	DTQ1Hy4ITbMv0AYMMWCP0AeEWY+4RIebGtdUAI5+7qIDc/hjLm+T+0cfc5eMNHuq/cYQziqMKaT
-	VHHLxwQI5P3ZKAmlhJvOnr5Hf9xbn/xZu212HVPupNBlQuhxgfIEz9RJKf/xqksP42F4i+Q+TEF
-	nh7AyYNL9QAppj6EiWTw==
-X-Received: by 2002:a05:693c:808f:b0:375:ed63:5f12 with SMTP id 5a478bee46e88-37966a5595bmr6632330eec.22.1794673758038;
-        Sat, 14 Nov 2026 08:29:18 -0800 (PST)
-X-Received: by 2002:a05:693c:808f:b0:375:ed63:5f12 with SMTP id 5a478bee46e88-37966a5595bmr6632287eec.22.1794673757370;
-        Sat, 14 Nov 2026 08:29:17 -0800 (PST)
-Received: from [192.168.1.12] ([122.164.84.214])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379569b8389sm30930509eec.25.2026.11.14.08.29.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 14 Nov 2026 08:29:16 -0800 (PST)
-Message-ID: <4a2b0d2a-129b-452e-84d1-dad83353b10f@oss.qualcomm.com>
-Date: Sat, 14 Nov 2026 21:59:09 +0530
+        d=1e100.net; s=20260707; t=1794674443; x=1795279243;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
+        b=pB+twotfUa5z1GFmxeVk0ezbq0QVddIXjSU6nS1g6BLSPOa8YO0XTn416pzxsiuaF6
+         2Rz8h3M5o55lV0kRA12CnHeJtnG7wg95cA5yfOBrUxwhWTTqieJdGVIfQp7Qf2vPlMZs
+         bsdKe60JgP4RL58IRyp4/lG4wec0nbzaF3H2kXjmxozi6O/GivZSjSAuhljszG9lQxWn
+         d8tJEPvRdjFtCcS2NLG6gpdLGz4FW3GuXk095GZ+NiQ3/0t5e/nzgv18XRMPChx30L94
+         yOmy343BNkOT+WMCsHVu4esaMnTxuB7Xxp5IcR5LFP/Pd2zm/QoZV7ZsjEyf3p6M7pux
+         qhjA==
+X-Forwarded-Encrypted: i=1; AL+hErHz0ej+FK72zPWLQcodGwHs5PT9apntWdWnZ9pv4eUePjLcltyYm9k5R9Y3RF58FubwdRoOLP03N5empRAx@vger.kernel.org
+X-Gm-Message-State: APuU4Z/JKypnjC1TQeShs9yDAs5BVFvUZXWfPOXi99d2GOEjBPENW2Ck
+	rqxmM4Y09zUUbb4xBQN9Q4bXd4x4SgsyVz5VBI6QsUcQrQu23hqD9fGCM5KZ1ZVpPG+UlM/O2g0
+	7iUIF/RAdvaDQlQHijNaoV+hPDr6J9tqEPLqlvKv5P4oYRjruUCN/YTA8f/Wh7dIyLtzFGB+v3/
+	vXGdRwNWUOVx8qe89JDa6F128QTIDvp3Td8HEwUUpgmWg=
+X-Gm-Gg: AYBFou1hwvDBhnTHMVJKr6oPtlYdze31yoQ8zzDQSKhDw6GfKhNCZNXdk6++fuPxkMx
+	wk03dnYxs64F18x+lx2+Gvu3wHHet20rRBDCHken2cZnb7UlJzyiWtH4Hs+adELnSkOJQBtUk3D
+	twhd29OZVDczOuxAFxw/+/j9jQttxha0A693aWXsHK6GaC+/VM6OnLN9lX4PMy0wYg2bzGELP0i
+	HC8QaEASKoDX/48/RMFLQ==
+X-Received: by 2002:a05:6820:1394:b0:715:453:c6e2 with SMTP id 006d021491bc7-71ab4fbfbebmr3860143eaf.33.1794674443092;
+        Sat, 14 Nov 2026 08:40:43 -0800 (PST)
+X-Received: by 2002:a05:6820:1394:b0:715:453:c6e2 with SMTP id
+ 006d021491bc7-71ab4fbfbebmr3860118eaf.33.1794674442621; Sat, 14 Nov 2026
+ 08:40:42 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,184 +129,149 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/11] dt-bindings: clock: qcom: ipq5332-gcc: Describe
- clock inputs per compatible
-To: Krzysztof Kozlowski <krzk@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Georgi Djakov <djakov@kernel.org>,
+References: <CACSVV02fCwbFXVjE+XHCo68xMxYUHovJ9ZHRYd98L74N1T14Hw@mail.gmail.com>
+ <20261114153622.148125-1-arpe1618@gmail.com>
+In-Reply-To: <20261114153622.148125-1-arpe1618@gmail.com>
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Sat, 14 Nov 2026 08:40:31 -0800
+X-Gm-Features: AclHuK8v6yocAMov5_kcb3jEgrVHdGlRUdiYk4AGEpFJ8mzDlgn5asj4NprUyOQ
+Message-ID: <CACSVV00ZppfBKwsHJ+NBYBB7a2f3g1O=6J4Gt1m_A74fudZQoQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] drm/msm: Fix VM_BIND job, queue and entity lifetimes
+To: Jiwoo Kim <arpe1618@gmail.com>
+Cc: Dmitry Baryshkov <lumag@kernel.org>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
         Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <lumag@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-pm@vger.kernel.org
-References: <20260921-ipq_clk_changes-v1-0-d242e3d49648@oss.qualcomm.com>
- <20260921-ipq_clk_changes-v1-5-d242e3d49648@oss.qualcomm.com>
- <62a5fabc-3a06-42fa-9c6b-6504650e712b@kernel.org>
- <7bcffc7c-5dda-4ead-a053-7eb4980e43a4@oss.qualcomm.com>
- <bec2bee4-dd38-4846-91d7-006fe38fc9da@kernel.org>
- <af43c724-89b9-456d-a5da-0d8ba46a9b8d@oss.qualcomm.com>
- <e8dadc91-226d-4b05-8de1-4b22318fc7ea@oss.qualcomm.com>
- <ed3c4e4b-7c6a-46ea-b07c-ba7ce6214830@kernel.org>
-Content-Language: en-US
-From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-In-Reply-To: <ed3c4e4b-7c6a-46ea-b07c-ba7ce6214830@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4ZhiTMGcebL4_SekE1SkRIlMEpbaS_X3
-X-Authority-Analysis: v=2.4 cv=QanzLcbv c=1 sm=1 tr=0 ts=6af88c5f cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=cs/8+e8xk1Wfje/1H545Gg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Mw7ywA0MMAP2sS5nzLUA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA2NSBTYWx0ZWRfX1Bl6aPnr4q1d
- KIARQOUmsAS8nvnpdEJFaEiXI2ndATRJvvXPxdtPbKY4MawR1pq8kwemzLDRYLPpAfP1fFYqEwv
- EkOXZ8qA4k6clhaW9c+zGU41a/Bn22n/MD2FSc1EGPsy+5yCsMGM1r3nYh+UuglZEeSSB10aYlf
- 6SdHoqpW2VAnsDuu1/tkwc9CSl8TgJTAS2blKee38YQg22HDYt/J97VGebGMIoiSroX//jNQGF6
- SZSext811BarJpyrCMkbG/52Q9sfQhfVA7nw2rYitLAIHEILn2KPQqSGdeWAM1pyq6UOKm+aTqi
- RFFWDdwXwuUNSJugRZdcEwtLOMAQ3N90s466BpT8GnrBE+VI/H87y/Mkz7VETC3e5lPqi5pO8IS
- QnlOaZVSnUvTqM5DKOdwbRM7eclb0ZoQiilsiCT5O5FdKpRngUsa4uLKR7GlegFdtbWtGv5jllu
- gU2o202A9yBsDjNJysA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA2NSBTYWx0ZWRfX6Zd2Gp9GiJyc
- rrfwm+fxgC3ChwXfEC4Y2LJ83OesHeDlwV8LD/IXosrgZV0ilj6Xv2a5zPZySlNw0f2uRL7N6IH
- lBjo75TNsafAlMHm/8I8TWIV2VKLSlI=
-X-Proofpoint-GUID: 4ZhiTMGcebL4_SekE1SkRIlMEpbaS_X3
+        Anna Maniscalco <anna.maniscalco2000@gmail.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=ItKL47/g c=1 sm=1 tr=0 ts=6af88f0b cx=c_pps
+ a=+3WqYijBVYhDct2f5Fivkw==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
+ a=2g9MNY1Fx1-Z8oZBzW0A:9 a=QEXdDO2ut3YA:10 a=eYe2g0i6gJ5uXG_o6N4q:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA2NiBTYWx0ZWRfX3MFd+H0Z7FPj
+ /5kKFwtqmBW31VmDpr8/k1Pxc42skyucyxpzp9x5TliVa6kpozzH7wnEu2DOo8n3u8tgnscOEiW
+ Ha4nDxEPGQn3XYG6V7AJbkA08uwgfPg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA2NiBTYWx0ZWRfXy/QDAyuQMnZ3
+ 7EXQHjOR7r1BcwF0/YIN1xjdIp9IaTNlbzg2uW16JB/jJY/+s3DKm6JxJhhuQetzpD5EkHQZH06
+ hj3s3VI+6F3Dtk6lZfJGuafDYp1K7If7oFzzVRMJP89Z1jAKUkbToP4z/ND5uQMWMqDaf9Fz8E/
+ sCilb41brcgbAZQZC2vBclhiwrNTQ8AnP8eI+s/spiW3EmgthpQWXJkiTZJkmrJ1jXpzspxyWM5
+ t8pCyfdMy9tvLdtZjMe5GytWAq5oTl9PWgHNV9tuLVdjVxFS73hYTmqRDhR6sZ4iXZv0IlPtXx6
+ qU9aY/0uwXRwIvy5fHpbrPpg0ZM9AdSm+snq6uDSxq3ZU0uJ1MjW8PnTn0qBzNobx6ZFxSTPANL
+ 3BHVWGq6WYafeBIlSOXOhnt5zjnWsrDyuHVSvINTMm0waVtupy7hZaIwv5BSRgnn9sDnxv8lpW1
+ yBADjHEbsiV7CPMlR2g==
+X-Proofpoint-ORIG-GUID: qjaR3VjhkRsk00IoQFSGeZ5cN2NaABfb
+X-Proofpoint-GUID: qjaR3VjhkRsk00IoQFSGeZ5cN2NaABfb
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-14_04,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 impostorscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140065
+ clxscore=1015 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 impostorscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611140066
 
-
-On 11/12/2026 3:02 PM, Krzysztof Kozlowski wrote:
-> On 12/11/2026 10:12, Kathiravan Thirumoorthy wrote:
->> On 9/25/2026 12:09 PM, Kathiravan Thirumoorthy wrote:
->>> On 9/24/2026 4:28 PM, Krzysztof Kozlowski wrote:
->>>> On 24/09/2026 11:15, Kathiravan Thirumoorthy wrote:
->>>>> On 9/23/2026 2:17 PM, Krzysztof Kozlowski wrote:
->>>>>> On 21/09/2026 08:19, Kathiravan Thirumoorthy wrote:
->>>>>>> The IPQ5332 and IPQ5424 GCC blocks use different clock input
->>>>>>> orderings.
->>>>>>> Document the clock inputs in compatible-specific schema
->>>>>>> constraints instead
->>>>>>> of using a common clock description.
->>>>>>>
->>>>>>> Also add the 375 MHz PPE clock generated by the CMN PLL to the
->>>>>>> IPQ5424
->>>>>>> clock input list.
->>>>>>>
->>>>>>> This keeps the binding aligned with the clock ordering used by the
->>>>>>> existing DTS and GCC driver implementations.
->>>>>>>
->>>>>>> Signed-off-by: Kathiravan Thirumoorthy
->>>>>>> <kathiravan.thirumoorthy@oss.qualcomm.com>
->>>>>>> ---
->>>>>>>     .../bindings/clock/qcom,ipq5332-gcc.yaml           | 26
->>>>>>> +++++++++++++---------
->>>>>>>     1 file changed, 16 insertions(+), 10 deletions(-)
->>>>>>>
->>>>>>> diff --git
->>>>>>> a/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
->>>>>>> b/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
->>>>>>> index 1230183fc0a9..fb39dffca988 100644
->>>>>>> --- a/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
->>>>>>> +++ b/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
->>>>>>> @@ -25,14 +25,7 @@ properties:
->>>>>>>          clocks:
->>>>>>>         minItems: 5
->>>>>>> -    items:
->>>>>>> -      - description: Board XO clock source
->>>>>>> -      - description: Sleep clock source
->>>>>>> -      - description: PCIE 2lane PHY pipe clock source
->>>>>>> -      - description: PCIE 2lane x1 PHY pipe clock source (For
->>>>>>> second lane)
->>>>>>> -      - description: USB PCIE wrapper pipe clock source
->>>>>>> -      - description: PCIE 2-lane PHY2 pipe clock source
->>>>>>> -      - description: PCIE 2-lane PHY3 pipe clock source
->>>>>> You are changing the order which is ABI break. Describe the actual
->>>>>> problem to justify such change. Are you saying this was broken since
->>>>>> beginning or what exactly is not working here? The driver was added by
->>>>>> Qualcomm in 2024, so how did it even work? It's not some 10 yo legacy
->>>>>> where we did some mistakes in binding while converting from TXT.
->>>>>>
->>>>>> Also, I do not get why the list cannot be shared.
->>>>> When the bindings was posted, list is combined for both IPQ5332 and
->>>>> IPQ5424. But the driver wasn't updated and it was following the below
->>>>> order, so was DTS, which is not compatible the DT binding description.
->>>>>
->>>>> enum {
->>>>>            DT_XO,
->>>>>            DT_SLEEP_CLK,
->>>>>            DT_PCIE30_PHY0_PIPE_CLK,
->>>>>            DT_PCIE30_PHY1_PIPE_CLK,
->>>>>            DT_PCIE30_PHY2_PIPE_CLK,
->>>>>            DT_PCIE30_PHY3_PIPE_CLK,
->>>>>            DT_USB_PCIE_WRAPPER_PIPE_CLK,
->>>>>            DT_CMN_PLL_NSS_375M_CLK,
->>>>> };
->>>>>
->>>>> So I'm splitting the description between IPQ5332 and IPQ5424 to
->>>>> matching
->>>>> with the DTS and the driver description.
->>>> So we asked back in 2024 to have the common part of the list. I even did
->>>> the effort to dig it:
->>>>
->>>> https://lore.kernel.org/all/ruti7hmkxkayzmqfbme6rw6j2vbhlx4ul4ptcckwamcpd4cyfx@owufhxwpvlcj/
->>>>
->>>>
->>>> Authors implemented it partially, broken drivers. Now you basically
->>>> revert what we asked, which is BTW logical option. It's logical and
->>>> reasonable, but leaves bitter feeling.
->>>>
->>>> I have feeling there is no accountability and no responsibility of the
->>>> IPQ at all.
->>>>
->>>> No, that's not going to work. You cannot come 1.5 year later and revert
->>>> what reviewer asked you, even if issue was just by mistake in the first
->>>> place. And you should not even try to do that.
->>> I understand the concern, and I agree this should have been caught much
->>> earlier.
->>>
->>> I only discovered the mismatch while working on the IPQ5424 clock
->>> additions. My intent here is resolve the inconsistency that currently
->>> exists between the binding and implementation.
->>>
->>>> NAK
->>> I'm happy to explore an alternative approach if updating the binding is
->>> not considered acceptable.
->> Krzysztof, I understand the frustration behind this, and we will make
->> sure issues like this are caught earlier going forward.
->>
->> Could you please advise us on the acceptable way forward for this series?
->>
-> Unfortunately I don't know what to advise. I cannot Ack it, because
-> people look at history commits, take them out of context and use as
-> arguments in discussion ("oh look, here you acked such change, so I can
-> do the same").
+On Sat, Nov 14, 2026 at 7:36=E2=80=AFAM Jiwoo Kim <arpe1618@gmail.com> wrot=
+e:
 >
-> Maintainer's feedback was basically only partially implemented and now
-> you want to revert that part which was implemented, basically opening
-> the gate to allow such patterns in the future. I don't know how you are
-> going to guarantee such issues will not happen in the future, so I guess
-> you need to live with broken platform. Please align with Qualcomm SoC
-> maintainers on this, because I will not ack it.
-
-Bjorn, could you please share your thoughts on this and suggest how we 
-should proceed? These clocks are required by the networking modules.
-
-Patches 11 and 12 are independent of this discussion. Since resolving 
-this may take some time, would it make sense for me to send those 
-separately so they can move forward independently?
-
+> On Sat, Nov 14, 2026 at 7:03 AM Rob Clark <rob.clark@oss.qualcomm.com> wr=
+ote:
+> > msm_gem_vm_close() waits on vm->last_fence which will be signaled
+> > after msm_vma_job_run() returns.
 >
-> Best regards,
-> Krzysztof
+> vm->last_fence only collects the fences of GEM_SUBMIT jobs, in
+> submit_attach_object_fences(). VM_BIND jobs don't add theirs, so
+> msm_gem_vm_close() waits for a VM_BIND job only if a submit depends
+> on it.
+
+Oh, right.  We should probably just update last_fence for VM_BIND in
+the same way.  (Ie. using dma_fence_unwrap_merge() to deal with the
+case that the current last_fence is on a different timeline.)  I
+overlooked that.
+
+> > My expectation is that if thread A is in midst of a VM_BIND ioctl,
+> > perhaps not having created/updated last_fence yet, while thread B is
+> > racing it closing the device fd, that file_operations::release will be
+> > called after thread A's ioctl call returns.  Is this not the case?
+>
+> It is the case. (The vm_bind_closed check in patch 2 is only for
+> MSM_SUBMITQUEUE_CLOSE, which can race with a VM_BIND ioctl on the same
+> queue in another thread.)
+>
+> The problem is a job that the ioctl has already pushed and that is
+> still waiting for its in-fence, e.g. one from another device or
+> drm_file, when the file is released:
+>
+> - If the queue was closed with MSM_SUBMITQUEUE_CLOSE first,
+>   msm_submitqueue_close() no longer sees it, and nothing waits for the
+>   job. Otherwise drm_sched_entity_flush() waits at most
+>   MAX_WAIT_SCHED_ENTITY_Q_EMPTY for an exiting task, and kills the
+>   remaining jobs only on SIGKILL. Either way, the job's reference
+>   keeps the queue, and so the entity in it, alive.
+> - msm_gem_vm_close() then calls drm_sched_fini() on vm->sched, which
+>   frees the run queue that the entity still points to.
+> - When the in-fence signals, drm_sched_entity_wakeup(), which the
+>   scheduler registered on it, uses entity->rq->sched;
+>   drm_sched_entity_kill() leaves that callback in place. A killed job
+>   is freed then too, and the final put of the queue calls
+>   drm_sched_entity_destroy(), whose flush reads entity->rq->sched
+>   again.
+
+I think if last_fence is also accounting for VM_BIND jobs, this should
+ensure that all VM_BIND jobs are also finished.
+
+> Patch 2 destroys a VM_BIND queue's entity when the queue is closed,
+> by MSM_SUBMITQUEUE_CLOSE or on file close, so always before
+> msm_gem_vm_close() tears the scheduler down.
+>
+> This comes from code review (see the note in the patches), and I have
+> not reproduced it.
+>
+> v3 is at
+> https://lore.kernel.org/r/20261114141851.134290-1-arpe1618@gmail.com
+> and its patch 2 is unchanged from v2.
+>
+> Separately, Sashiko's review of v3 found an ordering problem that
+> predates this series: the VM_BIND queues of a VM update the VM's VMAs
+> at ioctl time, but their pgtable updates are not ordered across
+> queues, so an unmap can reach the pgtables before the map it undoes.
+> That does not need a queue to be closed, but v3 patch 1 adds another
+> way to get there: the unmaps it applies when freeing a killed job are
+> not ordered against other queues either. (Its other point, that a
+> killed job's fence signals before those unmaps are applied, I'll
+> address in v4 as well.)
+
+Yes, userspace must use fences/syncobjs to synchronize VM_BINDs if it
+is using multiple VM_BIND queues with overlapping updates.  An error
+would mark the vm unuseable, and the kernel will stop accepting
+SUBMITs and VM_BINDs.  But maybe we should also handle errors in the
+UNMAP path as well, as that also indicates that userspace is doing
+something wrong?
+
+Userspace shouldn't be allowed to cause the kernel to do something bad
+(use-after-free, freeing pages that are still mapped, etc).  But it is
+perfectly fine to let userspace shoot its own foot, for example
+triggering an SMMU fault due to pages unmapped while the GPU is still
+accessing them.
+
+BR,
+-R
+
+> For v4 I would make a job that unmaps a VMA wait for the job that maps
+> it. The other way round, a map that overtakes an unmap of the same
+> range fails or gets undone, which breaks that VM but doesn't leave
+> freed pages mapped. Ordering all VM_BIND jobs of a VM would be
+> simpler, but turnip uses one VM_BIND queue per device plus one per
+> Vulkan queue. Would that be the right direction?
+>
+> Thanks,
+> Jiwoo Kim
