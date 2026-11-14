@@ -1,110 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794660377;
-	b=xduJU+YTi+6XB9Np73vR9Xb8Ca2fx0t9Z+BbZr64IE4ixyan0/ouyYtWbr8Qo+MxZZYZ
-	 IejgQS0m41h3OpbrSawtlBkK28BFXCAurCT/i4RQqHX9z4syOuqTvfFPAV5xuHB4S0cLx
-	 u7ln2W2lLv7Bz7yN2Sykuh/FppQEQcPtzb5uBwyGsgA/eL8xb85EuliTyU3SPodqaW4Qq
-	 I9gvndGFz61U73+O3Qt3eHEpB0HVvTgwStXdWBpOEap5SFrELtnB9va4owF5Zl+HwZIm7
-	 F5OyA08ba6bPejBUSHS+Nt1fv/QQzuofaCR65M407vBl78FqDrXV8NcLoSzDLosUfnQ==
+	t=1794661103;
+	b=PF3N3KCqdAoZ09pOE/d7ugSWPgHcB7nftItI61iUtylh53YmE8rTgIu3beV8tCOhVuvJ
+	 EcyIXTNHY8BeSOYe5v5Xifdc8UThmt9nkV+8TgUCG7RwQvv3ji954wPy3+0392kJUmbSC
+	 CqY+ZGdSCOpN22C5eRH1ez0xJlMEgPivqvSaX8bdaT53A8B6/pI/AT9eev0R1iM1TyWjN
+	 BCF41ybOdgeSWLVoVyrqzi2IIOUHT4Xw1KPRBgKU0F1DU26AXcJNqs3gYcWFNi1NIes+R
+	 D3ag2luJLax5TYmvQeBP930NRYo3Ev1QuMdPKfPcPZ0SsEJC0rN1CZQhXkEd9PrWxug==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794660377;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794661103;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Sm2zRheHuhx9Zfz6c0YchR95H9wicGcjsIbHYljiQzg=;
-	b=4LkIq8aXOMsiZTuOxxXMmO/JnEEb07SVgr2yYH0Fm7FyhYvBpAyI2kzGRprecoVHz7y6
-	 h0IN5nbGTyU4LKvDoSes1G5d62GuwjLYBpqN5Lqpmr3N83SACKk6J6HhiRPDLXvbuVmeh
-	 WGVawraE5vy9+Vh3w1ghRG5XbDDKm9pymb9rB6ARy/320ys5YL7H31WwwnOBrMvckGKxb
-	 prQfKc6YZxKkwEWSDlst4ATx1RgcYJmaaY1lIKeNOTzXm33nox4An5RXUF/X6SNg2MGCW
-	 YuoCGjR5rnMu4jCN8nMaB4bWv+iuAkN9pL2cvsT97jvM55GjNGML5ru7zHB0eedm7VQ==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=j/rZrx6MN30UMQmgv5sHNe382bHvIt1HflERn7+b+/s=;
+	b=5ebYMIkeiTIP1UOBWX38/mPja+7Ov+YhtTm5vpPSb8cCB21BZNbWeZ9VqEObEzFJd5Rf
+	 PFZ3P9sn7KxSe/StCzcH18tXuHDJM+jqjnle32FeWfWygsHX/B4AE6mz9itTaf+MYcFP5
+	 3/T7NGaac+CyeBWZYY4pIR/iOGpZHX7Z4UqmvxutsIe8Sg88tAtV00ajwUkwU/9YvyM8H
+	 gJiB5tfY1+Ctvahw5hOv5Zbd5WO2pS6Y5asvQ+OriY4bWP1J/kIMsq84LW5P8PaPOnO0N
+	 VTQ6LN5xcmjPs6BWD27dDVDaN0e/Cims+u5B0g+g9Nk59UIqrnU583Uu1qLKCYOUWlQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nUfF77o3;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="e/NVHpaZ";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OAlW+kr8;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DMUZ441j;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C9A6606A327
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:46:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C9A6606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BFF3606A32D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:58:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5BFF3606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nUfF77o3;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=e/NVHpaZ
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE9w9jR1750090
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:46:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OAlW+kr8;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DMUZ441j
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE9wNXV3650146
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:58:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=Sm2zRheHuhx9Zfz6c0YchR
-	95H9wicGcjsIbHYljiQzg=; b=nUfF77o3/iOd6MsuLJdqvO4ApQD0hF1NDWYmjB
-	15agaB6YpomQwUipoNyMhXUP34ctRob3dJ7168tFq9KK67E9XEKprTQH3wBnaVgu
-	d5m9Z+xo7k3HTkb3l+1NF/7pjVdyTukpgdIVo2Q0vzba4gBWTcZmzr6Gm+87/p3q
-	rrb/W1wZzVHCSO9oFJe82szq0tKHYp0mc0QZYByljGTeiOEcL9SNo0aKnjGU2gGt
-	O8OgQD/j3uEPGsOZGWx8HgBPPtsulxVNx0lbII5yqZCldOoijs45eCLlA6kiBKVG
-	7CBcKw3c0opUsaY8QJE3hDEQO1rxpDB0eZomcoKD6yMBavXQ==
+	:mime-version:subject:to; s=qcppdkim1; bh=j/rZrx6MN30UMQmgv5sHNe
+	382bHvIt1HflERn7+b+/s=; b=OAlW+kr8VUC4IFmdyOpDqfG5IUjEHtoo9X2UEu
+	xx5io+27xX/pmtyVkLLDyjahu8FgRSPRT51D6eCJFAMVWShJsgkI4pcqDqnyg3ix
+	lkNm7vch7G5n9/iArc3ERBhSkdvEM1n6uupryO9bqXGlYoYjcyqVkqsZY2PpbKvX
+	ocV38DnS8ep1JBVnAOkWJAUnPeiI2fO4E+xE02+1zyOXiTwH1YNuP5OIvUewy7wT
+	JceRYuqmmYfz5Ca2QRdKFHQxBrubsjX2xprsHHRMlmFqKwl/U96WVyRz6p/StSRV
+	AU2keB2iZ8LX/d4ziApMHaOL4arLA22TG5z1ISorOlzGDDbg==
 Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhj40s13-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhhjrtdy-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:46:14 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9496ff065bcso18899685a.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 04:46:14 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:58:22 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93909014c85so431457185a.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 04:58:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794660374; x=1795265174; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794661101; x=1795265901; darn=vger.kernel.org;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Sm2zRheHuhx9Zfz6c0YchR95H9wicGcjsIbHYljiQzg=;
-        b=e/NVHpaZNMqalYTrcDKHk/2vjx7t2zTQWFjYqRoTwDkh+HFfgjhBYRFPIUfhPtgxOq
-         4sIWxCdWvlcdGYIxQk3p7mYXVFKH2oAbEYfJuCoWy9RcGEkmJL6S85/l14zvIe1xZ1uJ
-         iWHU0D2kwgMVYqTwKnWCgCkT80ZOGkNz0Q55TrwBgKQbxrgWLdJu8vIpAJNLKp4wwCZl
-         CpxGD7fGECsGEvBeoVqkpjk3Dtpn4RVMY0sQhIuYwhP08eT5P2PpVTE8yzDSQv6lGxiA
-         BTOPlx/LJvLTqRlnym5oIYiQtOjf/IKoiRR0FC03g/makLLcU6o7tVlOVVvS/FacF1Ch
-         DVZQ==
+        bh=j/rZrx6MN30UMQmgv5sHNe382bHvIt1HflERn7+b+/s=;
+        b=DMUZ441jEQmJJwJns4vrSU73fsJkWsLmSTVM6RMFmnLbOdX6nZJKSm656GGkcWK+mx
+         +QvblMxxca5u2xg0IHW4QOf77istkc6SvgMocHhekD2dptFMEJNWWbE26/vMvO2UJvR3
+         iAV8UxLYqJ6OadjprlGKykShaaMhlwzvKwoQF3kxdQcw7549vc10QQypGazSGqE4XZ3p
+         H3v2mgQO0rZKwtqXOnVZuULQ7o9aWbRRdutXpysS12GpUDBqvrtxayEVr5ZS1IIJOSw0
+         BljR7Taqq/Ns131lrh8K20XgY9l8T8/bUymtE5EfIpP2Wb0LIdLBlqgbIYqPFinBkYPX
+         qEkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794660374; x=1795265174;
+        d=1e100.net; s=20260707; t=1794661101; x=1795265901;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=Sm2zRheHuhx9Zfz6c0YchR95H9wicGcjsIbHYljiQzg=;
-        b=KmBZwVBA4o1/d4kiRSWjIZNm8Wk3DmtP3GkvEb840vXIUlD/BYkuO2xC/I2ULK4n0c
-         xUP/VPV+zuMQmq0uUEgEOaeDktaSwXGoTZ8Iy+l78NXEwrymm6FAjXfiyzvCNQzhetS5
-         ku4r6rEvF8Do/eQMxtyJChw7IS+3UTIBbZQKdjQkiL/SAKC+cLoxDfDOElB906/GU+GA
-         qkJwBm7sq8uKpOBpT6wCBos2ESRQ34Jwcv84ZFHiSpgstfKo4DUy6c6TES9zc9W0ntDA
-         f+5bO3lwHPgXzm9iIDq/5mqvW6NPOp0gfBbEnYuLsyLwYKs/Hxkphfo0i8smsRn5tf5a
-         VolQ==
-X-Gm-Message-State: APuU4Z8LVXsHjwSYGkJ0ox8iE4O2i2PXqs5MI70cIxCTAhQtsWpaRT2m
-	49nP3PCP7TErBphDTBtr9nL0xIM2mdeGg85NZBvdKAKAlqyTyG3UmRmlrEHgwsc2dKXTuYCRSQY
-	jxzHFkr6pHcO9WNSrs4G3sdAhB+4Ta2c0cX1kEge9ZB/mvEJr7eA5uJOkyQcFIkkmgE6QbRjG3O
-	Tj
-X-Gm-Gg: AYBFou3FDKZF8YudCzsvXCN+640bPACVYhdgW//D0owc0Hejw+bJ8t94a4wHncuI8Gz
-	VovY8+238YXWWqXIdYeXnfbN/2iGxGL9BT1PJxWd1bwcqt8QWWyeQMAMkJ2BRzGd6JKW/LioA0P
-	4dt25sdc3EYZq24cK3+7D9U14vi0Tl8DsQyr1WX6e7Zeb+nXAtzshiuVug2FZM7ptGOe4dxQdsY
-	ITIGnH9VxPK6UjvzvzKLO9oA1MfsOI0eQVhLUmJPk9B412ZAxo0Qhqf5V/h8U9EFDZoBlS0AXD+
-	olplv1gjj3lmO55JpQl4tTJi/9LXo0RmGiowJIRE7A+hn3pH2z86aqYq1MxsLSPxciufzC2gIUW
-	qCKvKcNLcDdgGnkWtydd+0IBtsuUZNcMOx+pY1WcOno7HRqeh+mdmsBBaTpl4sV8zkkg6Z/Eakn
-	WNGmJy683wqidI
-X-Received: by 2002:a05:620a:701b:b0:949:3ba5:15d1 with SMTP id af79cd13be357-9494ba607f9mr836093485a.4.1794660374057;
-        Sat, 14 Nov 2026 04:46:14 -0800 (PST)
-X-Received: by 2002:a05:620a:701b:b0:949:3ba5:15d1 with SMTP id af79cd13be357-9494ba607f9mr836091585a.4.1794660373584;
-        Sat, 14 Nov 2026 04:46:13 -0800 (PST)
+        bh=j/rZrx6MN30UMQmgv5sHNe382bHvIt1HflERn7+b+/s=;
+        b=qWTokBrm5Ymcl7gHVe++qGwVlAB2B3DTvmmoOqKQpMFEevsgmV0zpEewL2J0sFnxkc
+         bsgIe7mUEUTmIKclysDdbcY7QzQwt16m4pY17X1DSZGKhB0ZK3a5C/jNy3t3N6oVC4Ka
+         pc6yl+0kK94hssOJhPWjt40xGvcShecvMv/ndu8CpXS70ZP7tD1rTo3oOEME1fqbvEO0
+         zWi52xlEpv2HRJLyDg6lmvDOSHWDJ9kgWCzraJ9QQ3nMIqS/eii/olaNR57UA/NPNJYN
+         vevqSiQQ7VOCxqlmkjACM9dDD/dbt6k1Mfd2AYkJHT1GzfvF52qhCgiHRV08HqvoR6XE
+         DHLA==
+X-Forwarded-Encrypted: i=1; AL+hErElCy5gOmuytQ/Wnp9TCX99AYx+0Ic8Mb9uIJCBBXKTW8MM6wZeTZLcxojWh27l7B5mv8yhuWrfIRBm8TCz@vger.kernel.org
+X-Gm-Message-State: APuU4Z/DL+ja8/puEutdFNwvkBIMgd2D6uFGHgLLsgtaYOF8LC2vBEjD
+	GiCI5OZ2PG3H3Lrnsek4EHthbg63A20ybqCLkBPXn6b7QRGy3GCeFKUpkXpO+u/ceqONIksZsbi
+	IkXBHOGy16fkdQjywE25PmM3gHejaptFFb+fYRhrPQO9k77tVtZbFTdJOP9zeWUp/vUzWJzPpkt
+	Qz
+X-Gm-Gg: AYBFou3d/c81gK2SYX4ovvfxQ8AOBcQ/V4VgeFLlmRYk/VQc91Qwe+8Ya5YtYAg2v0k
+	xziXSC8jsftP4HndWUbKV9rLSfUtfRhRHydZlozuYJi4eanuZFVg4sOHklNQLY786AlTYyZ0GyG
+	IJPk3DmPllh0IU7JABP8kLjND5LsZlb1GtwbRPnJbWnXyVSMFzlOsIWujSQ1CEiHm3WHzjKuGEu
+	pX8uJ1K5HGCZemCsiWk3WFKOg1nwY+kcZbWa4Pww/6EG8yLjpZYOu0E/tYIHArvwZfXqxFm7M8V
+	Xfe7MiTglUGT5uc3B+EZc2aHM7TPtHctYKQUJbDR1HC83Ci8Rq9rHuHFk8OQLbpv72p027ojFAh
+	M/ddhARF15K+YeQK2AGDuiboApbdNvXmWfA2hYB8qnI++NAhKNvvS6T5m8QeU6l2iDve71XmQcP
+	gDk5uA28pzyrXV
+X-Received: by 2002:a05:620a:6606:b0:93f:3cb0:4639 with SMTP id af79cd13be357-9494bcc695dmr812346685a.72.1794661101464;
+        Sat, 14 Nov 2026 04:58:21 -0800 (PST)
+X-Received: by 2002:a05:620a:6606:b0:93f:3cb0:4639 with SMTP id af79cd13be357-9494bcc695dmr812343485a.72.1794661100961;
+        Sat, 14 Nov 2026 04:58:20 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c50a6c826bcsm153977266b.11.2026.11.14.04.46.11
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c21b1b5asm2134684a12.4.2026.11.14.04.58.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 04:46:12 -0800 (PST)
+        Sat, 14 Nov 2026 04:58:19 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Sat, 14 Nov 2026 13:46:11 +0100
-Subject: [PATCH net v2] net: qrtr: ns: keep notifying local servers after a
- failed send
+Date: Sat, 14 Nov 2026 13:57:47 +0100
+Subject: [PATCH] arm64: dts: qcom: arduino-imola: probe the sound frontends
+ first
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,151 +117,149 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261114-upstream-qrtr-hello-gate-fix_b4-v2-1-2fb62c2853bb@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/41OWwqDMBC8StnvriRBbO1X71GkxLhqihrNRmkR7
- 95oL9CfgXkwMysweUsMt9MKnhbL1g2RqPMJTKuHhtBWkYMSKpNC5jiPHDzpHicfPLbUdQ4bHQh
- r+36WKRpFV6PqtM5FBrFl9BSdY+EBAwUofiLP5YtM2Lv3WGs5OP85fizyCP89uUgUWFapEpqMv
- Mjy7piTadadcX2fRIBi27YviTSiV+wAAAA=
-X-Change-ID: 20261019-upstream-qrtr-hello-gate-fix_b4-c2e8c2f4f906
-To: Manivannan Sadhasivam <mani@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+Message-Id: <20261114-imola-sound-link-order-v1-1-71d8bf1129b4@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MywqDMBBG4VeRWTvgBC/YVykugvltB21SJlgK4
+ rsbXH6Lcw7KMEWmR3WQ4adZUyyQuqL57eMLrKGYXON6EWlZP2nznNMeA28aV04WYCxdQNuPDgM
+ WKvHXsOj/Hj+n87wAE1/+zGgAAAA=
+X-Change-ID: 20261114-imola-sound-link-order-15de4692e7ef
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        Alexey Klimov <alexey.klimov@linaro.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org,
-        Chris Lew <christopher.lew@oss.qualcomm.com>,
         Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA1MCBTYWx0ZWRfX1/R1PSRbM+fe
- d5Cctm6sWsl3FQtuDHSseiRj8mQ0QYVpm5/Z8JfK7Pjyls6QdOTrMHaZHpfbKDeGwmM0dCDqiqd
- /YvoRo619GZccc62Ec1KZMmQSF+AHB1TaxgPTTq3eml9/3nMdy9ziZVmnx85ax9VKE3YA48IHAb
- Rczopal95ZV83H/1MCGgOtyymQyxRGvhfe9KgiZab2rUFOHetYENvP+Abk8xL6zuaSwa8wUzTgH
- FiThguG9RL8ADVSsslyo+8jPeQPf7ec+C2FAFhIk/BIBAqqb4eJUqCCDa3ys2VESLVAEEMAGbdm
- t36YLJwB1cjkczwEaI+4ga37TK5bkuXVFDPdQDqSGixvwm5pDiyHYUCNTfSGOzccQuAZ6ZvNX/8
- p3CzFtZTabYCbGD4OCtjiC0HQnBKucRs2+o6e49YnP+C1vkJXzuO3eSqRdkiiVScTxiixty41Jz
- jl944MBX5OpG++gkndQ==
-X-Authority-Analysis: v=2.4 cv=av0nmiZV c=1 sm=1 tr=0 ts=6af85816 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA1MSBTYWx0ZWRfX6CyplRfb5szg
+ sA9rt+NUcBC1W2070CAZReX1WJtdv+bhV1s2gjfwv/d1HmDMICwCn58po6yX/U7tQxy0bhthyjc
+ FLkTjwMWgkeJ7ZF5nLMBn26SSGSW87HgTARixMGY+tCoTyqoTj81X7Dmq09bEz7mOglmCHQ69md
+ Ra0nJ9cI3ZvydjNfZ4AIRecMxYRM9S1fMacs6w3v9IFOHUj1psRO7YXsKEcw3+DJ8IJRqpZ7bez
+ c3RzaS9qw1picn1AcLpykYcmESmgp5C7fcS7KDmTDEx200DKvnVW+nRS9gw7zw7PYapVZiIIDWx
+ 5BjuKeK8HxA3ieutfUtETYauve56bt9MBhuyx/7APaOfqDGkW6OOXOFlp/gnWYLE4rES4zhHnPK
+ 011XZLm1ELcgz5wv8xc5Lt8UWWu2YqDtphN0S+6dmKtQ2JbQG1z1JZ23Qs0l08lvsChCxjRgsrn
+ hD+aVFoik/O5D92v9Tg==
+X-Proofpoint-ORIG-GUID: OXhK-A5fjyM8ZhLOOenZxRgMnV-wzQ-p
+X-Proofpoint-GUID: OXhK-A5fjyM8ZhLOOenZxRgMnV-wzQ-p
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA1MSBTYWx0ZWRfX2J5PAZhrR9tb
+ +Qo9AlIJEB3/VN5SKL+Ett4HMh1Z+NMdCLSbjb5KnzzikLtlf4lzPvVZTMtsGJO6OqgqENYOlb8
+ YeE6RQ+f1z4vTUgaYmra50Y+uqCAXGk=
+X-Authority-Analysis: v=2.4 cv=X9rHu2Te c=1 sm=1 tr=0 ts=6af85aee cx=c_pps
  a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Pio92nEW-iWscqj-QAQA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=QaMh6c9EJkddkog0sY0A:9 a=QEXdDO2ut3YA:10
  a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: LR79ANUy-r10otj9ZvrHUlW_gUuxPhM1
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA1MCBTYWx0ZWRfX3B+oam3SaHLu
- 8nRiRSDuiwabGF3tL7Xa9Ip/SgP2d1BV1ksOhu5UYQMV005dP0iv5/N3RiONswjar7WOVz+UZ+J
- eieT2welGhJ8JLwdhCS+a3Gcvxb4pps=
-X-Proofpoint-ORIG-GUID: LR79ANUy-r10otj9ZvrHUlW_gUuxPhM1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-14_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
- impostorscore=0 clxscore=1015 spamscore=0 priorityscore=1501 adultscore=0
+ phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
+ adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140050
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140051
 
-ctrl_cmd_bye() and ctrl_cmd_del_client() forward the event to every
-local server, but stop at the first failed send. Each send goes to a
-different socket, so a single server with a full receive queue
-(-ENOSPC) hides the event from all servers after it.
+The card probes its components in DAI link order. With the codec DMA
+backends listed first, q6routing is probed before q6asm-dai, so its
+routes from the MM_DL and MM_UL widgets (created by q6asm-dai) cannot
+be added, the component probe fails and the card is not registered:
 
-Log the failure and carry on. Likewise, keep notifying local lookups
-when the NEW_SERVER broadcast fails, which can only happen on -ENOMEM.
+  q6routing ...: ASoC: Failed to add route MM_DL1(*) -> [MultiMedia1] -> HDMI Mixer
+  ...
+  snd-sm8250 sound: ASoC: failed to instantiate card -19
 
-Fixes: 0c2204a4ad71 ("net: qrtr: Migrate nameservice to kernel from userspace")
+List the MultiMedia frontend links first, as the other qcom sound card
+device trees (RB5, RB2) do.
+
+Tested on the Arduino UNO Q: the card registers and a tone plays on
+the headphone path (all 11 DAPM widgets powered).
+
+Fixes: 61a95870e0f3 ("arm64: dts: qcom: arduino-imola: add support for sound")
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
-The lost-announcement problem v1 went after is fixed by commit
-743b5c86276b ("net: qrtr: announce local services again once our HELLO
-is sent"), so v1's patch 2 (holding control packets behind the HELLO) is
-dropped, as Mani suggested. This is v1's patch 1, reworked after the
-Sashiko review: it no longer touches announce_servers() (every
-announcement there goes to the same node), and instead fixes the BYE and
-DEL_CLIENT loops, which stop at the first local server that cannot take
-the packet.
+The UNO Q sound card from 61a95870e0f3 does not register as merged in
+arm64-for-7.5 (snd-sm8250 "failed to instantiate card -19"); with the
+MultiMedia links first it does.
 
-qrtr_bcast_enqueue() still ignores the per-node enqueue results and stops
-at a failed pskb_copy() (Sashiko, pre-existing); not touched here.
-
-Tested on the Arduino UNO Q (QRB2210) with next-20261112 plus the board
-support it needs, with a test program that publishes a server whose
-receive queue is full, and then a second one, on a higher port:
-- unpatched: the second server gets neither the DEL_CLIENT of a closed
-  client nor the BYE of the stopped modem ("failed to send del client
-  cmd" / "failed to send bye cmd", -ENOSPC);
-- patched: it gets both, and the name server logs the failed sends with
-  their destination; modem stop/start, 3 boots and the board tests
-  (WiFi through the modem, ADSP, Bluetooth) pass.
-Built with W=1; checkpatch clean.
-
-Changes in v2:
-- Rebased on top of 743b5c86276b; v1's patch 2 dropped (Mani).
-- announce_servers() left as is: carrying on there only repeated the
-  same failure and could print up to 256 lines per HELLO (Sashiko).
-- ctrl_cmd_bye() and ctrl_cmd_del_client() keep going after a failed
-  send, rate-limited log with destination and error (Sashiko).
-- Commit message: lookups are local observers only; the NEW_SERVER
-  broadcast fails only before enqueue, in practice -ENOMEM (Sashiko).
-- Fixes: points at the commit that added these loops; for net.
-- Link to v1: https://lore.kernel.org/r/20261019-upstream-qrtr-hello-gate-fix_b4-v1-0-bd420aec171b@oss.qualcomm.com
+The DTB differs from the current one only in the order of the dai-link
+nodes (and the phandle numbering that follows from it); dtbs_check is
+clean before and after.
 ---
- net/qrtr/ns.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts | 47 +++++++++++-----------
+ 1 file changed, 24 insertions(+), 23 deletions(-)
 
-diff --git a/net/qrtr/ns.c b/net/qrtr/ns.c
-index bcb090ee79d4..8209573221a5 100644
---- a/net/qrtr/ns.c
-+++ b/net/qrtr/ns.c
-@@ -374,11 +374,11 @@ static int ctrl_cmd_bye(struct sockaddr_qrtr *from)
- 		msg.msg_name = (struct sockaddr *)&sq;
- 		msg.msg_namelen = sizeof(sq);
+diff --git a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts b/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
+index e99d2a56dc28..3efd80f36c6c 100644
+--- a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
++++ b/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
+@@ -117,6 +117,30 @@ sound {
+ 				"IN2_HPHR", "HPHR_OUT",
+ 				"AMIC2", "MIC BIAS2";
  
-+		/* A server that cannot take it must not hide it from the rest */
- 		ret = kernel_sendmsg(qrtr_ns.sock, &msg, &iv, 1, sizeof(pkt));
--		if (ret < 0 && ret != -ENODEV) {
--			pr_err("failed to send bye cmd\n");
--			goto delete_node;
--		}
-+		if (ret < 0 && ret != -ENODEV)
-+			pr_err_ratelimited("failed to send bye cmd to %u:%u: %d\n",
-+					   srv->node, srv->port, ret);
- 	}
++		mm1-dai-link {
++			link-name = "MultiMedia1";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
++			};
++		};
++
++		mm2-dai-link {
++			link-name = "MultiMedia2";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA2>;
++			};
++		};
++
++		mm3-dai-link {
++			link-name = "MultiMedia3";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA3>;
++			};
++		};
++
+ 		ear-playback-dai-link {
+ 			link-name = "Ear Out Playback";
  
- 	/* Ignore -ENODEV */
-@@ -458,11 +458,11 @@ static int ctrl_cmd_del_client(struct sockaddr_qrtr *from,
- 		msg.msg_name = (struct sockaddr *)&sq;
- 		msg.msg_namelen = sizeof(sq);
+@@ -181,29 +205,6 @@ platform {
+ 			};
+ 		};
  
-+		/* A server that cannot take it must not hide it from the rest */
- 		ret = kernel_sendmsg(qrtr_ns.sock, &msg, &iv, 1, sizeof(pkt));
--		if (ret < 0 && ret != -ENODEV) {
--			pr_err("failed to send del client cmd\n");
--			return ret;
--		}
-+		if (ret < 0 && ret != -ENODEV)
-+			pr_err_ratelimited("failed to send del client cmd to %u:%u: %d\n",
-+					   srv->node, srv->port, ret);
- 	}
- 	return 0;
- }
-@@ -487,11 +487,10 @@ static int ctrl_cmd_new_server(struct sockaddr_qrtr *from,
- 		return -EINVAL;
+-		mm1-dai-link {
+-			link-name = "MultiMedia1";
+-
+-			cpu {
+-				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
+-			};
+-		};
+-
+-		mm2-dai-link {
+-			link-name = "MultiMedia2";
+-
+-			cpu {
+-				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA2>;
+-			};
+-		};
+-
+-		mm3-dai-link {
+-			link-name = "MultiMedia3";
+-
+-			cpu {
+-				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA3>;
+-			};
+-		};
+ 	};
  
- 	if (srv->node == qrtr_ns.local_node) {
-+		/* The lookups below still need to hear about the server */
- 		ret = service_announce_new(&qrtr_ns.bcast_sq, srv);
--		if (ret < 0) {
-+		if (ret < 0)
- 			pr_err("failed to announce new service\n");
--			return ret;
--		}
- 	}
- 
- 	/* Notify any potential lookups about the new server */
+ 	vreg_anx_30: regulator-anx-30 {
 
 ---
-base-commit: aa40afa831ebfe45e40a23721711059f2ac584d4
-change-id: 20261019-upstream-qrtr-hello-gate-fix_b4-c2e8c2f4f906
+base-commit: eac8f0411262ea7d156407da4baf260291cbfe32
+change-id: 20261114-imola-sound-link-order-15de4692e7ef
 
 Best regards,
 -- 
