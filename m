@@ -1,125 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794674445;
-	b=MZLdAyTFe8ShQenpBDnWOJXN/zNFOEe3nr1ZxblJcvSS8YHiL6cp0sCkkzk0rOHuGzkq
-	 8D3Rhgp9yREcD/Vn4kv6smumLsF/doWaERQYUknf2WH86vLelCEv0pSpQ+uVj4cNO2+wW
-	 o/lOOJxdybhl9g2V2WSk7SC9bvk60qnaMUcpk3BSTEMy+ZEzrZVOb8tQ9xm8FYiI4S3GJ
-	 xAnfaVI32Znz1lQhiuwUtXXU5couAqCbjzV6fufguY9/SMpch/EJ1VWPfc6r8Xg+n17VD
-	 y/3JvMLItUAjWfzUotJNqC1MzIzxZAg0hCaqoUYNpO1jssXDZFxuqss9C7hSJO24KZw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794674445;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
-	b=Eu7Eho+20Ly/vBmeEheBPcrSi6Zu26tIDtiZOQaVVYKvOs9m0YdGRmM9WWbHcEQzVJZY
-	 lN8nnhg7CxTVyjbdUV+tjg0kRbGe1FdMibgCcKj3y5dhhO6tJ4fHcVdYAcDEEcnyrN03n
-	 EQcZn3L3ntO4XX2uCJHUCM5bPY6AFgB6E5rAntNsPxAQ5glpKR7c02xUgn4e1wUXBLTVC
-	 s4/zpgWp5OICrM51Tg+1TSOmQsNmqdj7IUL4t4VWaXZmyhf6bgA+nzJLcwDPhB4zBiH7J
-	 GgvQjcumgcVj4W0AMkKCuzIWzROzBOaQaUPDuyuBVylP79B0pfGSeVhFfNANyZbM1Rg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fpYXnSkd;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PEyKBndF;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.173
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794675145;
+	b=XRm3QgJf/1p7Kdu6y1l0taxb70cs3jFayUF8I96xBzjqG+WypYWDsoxWwsVD49IGUvJo
+	 peB6L6M7773LKO+Ll+X76x6gTi5HIRJbhKw89jBbsiFznOun37vgJUHEA1aNX0NU1LAp4
+	 ARyET80ucGo9GzCMVXzE71c7IspaTRxY8dTOgiu/tJzB5emqKPctcAamgu85vGKg4h8U3
+	 FMYcV7MST3Wh5BI1S4XK3S7QaVwK3XQygmoBiujkO5lIlcOR7CesTcrSJNLZAyAapOgj6
+	 TyEszO6G9hVBINk4gVJ7lUuYs2gM/LOBfV9oDmKeDo98fIpzJZby9WOJASoO2WSp+Qw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794675145;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=xQ/h2xJmHfHF1kr2P2KfFjzjewHnVPr88Pq0nhSFTMg=;
+	b=OGmr88X9wCYuoNwYHeQf1WnEa0Vu1gAlOJQ89wqydMDh6958pcgJAMZ+niVu1E2R+36j
+	 Ue6Ipsazfn1BEtnzMRsTrK5zKxuix00oZDVbLmGcBgYKACaM2j5XaHpBUS+mVkJp6xmP1
+	 98PamYtzhx6jzzyqS1SQuad2QUftuYVHKi5z6AvB5GUw7YlnjnvUEaeJ1uJhS5kk2w4oi
+	 9PhYxc+7KTbhsT6AHFppoh9IxttMED5HW4Sfg/a63kQUp/iqx1Z/s45SC0TSF0xyDaT8A
+	 B2LPHP0G/9k2kMFAnY+ArzgldLgMd1sbohgte1bk18Mwo+Y2PWi22QEEvy62wNfdQiw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="Tdr/SSph";
+	arc=none smtp.remote-ip=209.85.160.173
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BB9F606A329
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3BB9F606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1FCC606A327
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:52:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1FCC606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fpYXnSkd;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PEyKBndF
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AEDkLPL1556292
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=; b=fp
-	YXnSkdnG4BA4y8XDLRl8x2Co9x2NAPivGl8Owm4IYNiITvILAgSN3/MakeeFTb51
-	oQ8ysc9yiMQMzZ6pOGm6khvyUOxdnIydruCt5uqV4NQvj3bpmKyr+kOnzdaUlXKB
-	hevt+FA4bZxt2sFFHBKSpKAMO1WBHi30sU/FjKa0QRmwba52oYXcestA+zmoVJft
-	Yym1C5/qt8+wUAa/sTnxPbYtcn4CE8g9YUD0UZo6STZrnIOTbUaR5h4Z7ev67KyG
-	3CA7GXlrMqCtC3IE49B4siNKjkxkxF1tIYcUo3ePvlp92/FNIZAg6xKIAOZmIsjV
-	NCZGFDSvrVLBR78lAFWA==
-Received: from mail-ot1-f72.google.com (mail-ot1-f72.google.com [209.85.210.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhm8s65w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:40:43 +0000 (GMT)
-Received: by mail-ot1-f72.google.com with SMTP id 46e09a7af769-86285932977so2804018a34.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:40:43 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794674443; cv=none;
-        d=google.com; s=arc-20260327;
-        b=pvNypFwBu+lGiSpgHuuB0r6T4DM8cUSVhXE2Z87j6HOULTwIl748qxHXIW0HB/Cy4w
-         pjLPSw8Wtm6wiosnF6q+6sOydJiOL1d0VvF27EGA3Dw7MLZmcrQf6hTiNlBr2E6KvAN4
-         /BCtZ1Y6DgBoa231ydARiiGfRwj6ipzi4441Evc2tbAUubC+gkIJn/e0F1Af5D12Iq3t
-         Tpz9/aTup+1uN+yVf3zP+d1CUSBZ0jMHai4FeRnvNd5BfOboNMfVWoltAj1g7rFHWf+n
-         lsFjH/w4kEKzJ9CEnLW6fkcynetUwNwTRgAHhChUXRVzhVthbJ5nyNsdxGG6CrGCwncT
-         WN8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
-        fh=Vj2TRir2I+40y+a0xWvPsK+irKBZFDREEmMlevo+1S8=;
-        b=ma1IYSGYRZ2AjqknJYBxaQxBiRT17OdUoOlFJlCHxNB0ra7JbCpR2VBO8geVlnStGi
-         uMND+I+jLulSnAJ+/MouZ/SXkcgCUQPUmq46/uooGE+MwKTazQcMW1LzF1j5RTzGQUo/
-         CnZSf3NE6aBA+2OeB97LxLmfheroyFdwdqXbP1UbGreWLVS95aoqQaY2TvzBscQmbxUV
-         96Cim3eCTa0/S2bQWaaULnZRvWMzTupoZYx31SKCiJ9Uivjo9UqkKspRaxNF4KUJZUuW
-         +UpESCbyBpXFTRE5wkSBNIm1Ca1uvlJEV1JEzSv8mxeYer0LKAFwM4N3YjshIxrC9Hbz
-         uFmA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Tdr/SSph
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-5363c8de563so31237611cf.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:52:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794674443; x=1795279243; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
-        b=PEyKBndFsBRy6cE+pH6wvUPpxLuqOFsAMgUnt6zROwdejjuihiLQYeOlCBoLvqUiHI
-         NLrND11V6vM9gjVqZMMrelLjeLmYj1wDFK1X2Ldq0nQ2xT96OQRxjbGywolczIHnudsG
-         gmFL+d4iKq1E6nJUbFVW5VRqr841KnY3HZNv7OAtqswQvjb3aE0bqGVngXb2nbyl0Bp0
-         TkzLqPI8j0OdDrkDWZfYOm+6gF4C0YC25rElTQE8HWIUck6KdnJEh8KQvUqn10jntAH6
-         MlFC7E7/nJQw7wYZxz0PYlY7XVboE5D1FkuogrYeCywEDFY8VSN910NjT0FFbUuLGWJP
-         WYYA==
+        d=gmail.com; s=20260707; t=1794675144; x=1795279944; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xQ/h2xJmHfHF1kr2P2KfFjzjewHnVPr88Pq0nhSFTMg=;
+        b=Tdr/SSph4bL3uPoPNTAiRt39kpSkq3axC8GHbRy/sVm6783VsM9QjvdkO9U9lx9p33
+         j7ABSqraFUxV01ofQfM/5QnuGJucaLcpnxSGJM9mNsjFXPtDL+nyIRhDKs2Y/+8K4wE7
+         n6lAuwc9tcMJZ3PUA/r0r/bq585EO1qnbROUv+BQI9QI8FvlAo1ouSD25tJCV3lQwqch
+         dHYnmv1luoRdERcx3e9zuaUv1p8yrluWRDZTYpLh6s3wDULEGPscFl7KdXMjQtN3eUsx
+         z36ceq5+TBEpDr6TTmVWs263cCOEOyiqw7tslymuppTTTe3uCb8vt7umurRZ5q6DnJB4
+         rVrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794674443; x=1795279243;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bXkHJphoEY20da+45qB+WjPGBGb3UoQAwSXHDIUPxh4=;
-        b=pB+twotfUa5z1GFmxeVk0ezbq0QVddIXjSU6nS1g6BLSPOa8YO0XTn416pzxsiuaF6
-         2Rz8h3M5o55lV0kRA12CnHeJtnG7wg95cA5yfOBrUxwhWTTqieJdGVIfQp7Qf2vPlMZs
-         bsdKe60JgP4RL58IRyp4/lG4wec0nbzaF3H2kXjmxozi6O/GivZSjSAuhljszG9lQxWn
-         d8tJEPvRdjFtCcS2NLG6gpdLGz4FW3GuXk095GZ+NiQ3/0t5e/nzgv18XRMPChx30L94
-         yOmy343BNkOT+WMCsHVu4esaMnTxuB7Xxp5IcR5LFP/Pd2zm/QoZV7ZsjEyf3p6M7pux
-         qhjA==
-X-Forwarded-Encrypted: i=1; AL+hErHz0ej+FK72zPWLQcodGwHs5PT9apntWdWnZ9pv4eUePjLcltyYm9k5R9Y3RF58FubwdRoOLP03N5empRAx@vger.kernel.org
-X-Gm-Message-State: APuU4Z/JKypnjC1TQeShs9yDAs5BVFvUZXWfPOXi99d2GOEjBPENW2Ck
-	rqxmM4Y09zUUbb4xBQN9Q4bXd4x4SgsyVz5VBI6QsUcQrQu23hqD9fGCM5KZ1ZVpPG+UlM/O2g0
-	7iUIF/RAdvaDQlQHijNaoV+hPDr6J9tqEPLqlvKv5P4oYRjruUCN/YTA8f/Wh7dIyLtzFGB+v3/
-	vXGdRwNWUOVx8qe89JDa6F128QTIDvp3Td8HEwUUpgmWg=
-X-Gm-Gg: AYBFou1hwvDBhnTHMVJKr6oPtlYdze31yoQ8zzDQSKhDw6GfKhNCZNXdk6++fuPxkMx
-	wk03dnYxs64F18x+lx2+Gvu3wHHet20rRBDCHken2cZnb7UlJzyiWtH4Hs+adELnSkOJQBtUk3D
-	twhd29OZVDczOuxAFxw/+/j9jQttxha0A693aWXsHK6GaC+/VM6OnLN9lX4PMy0wYg2bzGELP0i
-	HC8QaEASKoDX/48/RMFLQ==
-X-Received: by 2002:a05:6820:1394:b0:715:453:c6e2 with SMTP id 006d021491bc7-71ab4fbfbebmr3860143eaf.33.1794674443092;
-        Sat, 14 Nov 2026 08:40:43 -0800 (PST)
-X-Received: by 2002:a05:6820:1394:b0:715:453:c6e2 with SMTP id
- 006d021491bc7-71ab4fbfbebmr3860118eaf.33.1794674442621; Sat, 14 Nov 2026
- 08:40:42 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794675144; x=1795279944;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xQ/h2xJmHfHF1kr2P2KfFjzjewHnVPr88Pq0nhSFTMg=;
+        b=cUkAgXlDCe3sgXA1ak+/jc9yVa5RD0PWnIWxy3cvMMF0HK8+fr0q828GNHm9P9I1lM
+         DkoHpURKS+TK5ZxYC042Ar9QcAGqNLmR5+ev4YjS08S86JCJxfZqPodlOF+eJB9J7ArE
+         rv2jv9gntEaN0CWGibC12W3vtW5etoLhnYyQXyEi2CiRw5H/+hOgCT+2RG102qYy/Wk6
+         P6NZEG5uOKAAJn1y7IKH5m5LKaLO67hEcJ5OXf8aWhlnIiV2TpkBUHnD2Kxf0hifF6X6
+         ujmS4w82hI6jGrlmY0wtxxmy/RQjYeAz7hIPVDisH3cZzY4DnOe631z1e3B48uMUK6BG
+         t6fQ==
+X-Forwarded-Encrypted: i=1; AL+hErFkFhElYB2QAJ1LmVNjxQ8FoPCGOWUam1RB8t66NDE3zirs5Ks8HAaoUlXHeNpnxHq8vCI639M8RZnTXRKa@vger.kernel.org
+X-Gm-Message-State: APuU4Z+UdcLObt60i+2ZWXYBwpjHLvWnjjdUMQFpb5p0qv6jdiiwN14j
+	pqnUyr2XQlPDgnSNeYdTLtkBj2qrnzvOjFcwP/0md9AwbCgTSw68n7Mo
+X-Gm-Gg: AYBFou3YhWYZsiKVNHev6QVWJ1cO+8v+CLAhXX6F/RS7SoalNea/2xdDF2Sp1Pj5qmM
+	Dw1pxI/I7EBxLBciPYSXlXr/kQ10z9MryLJc1fqreemWsufvrxdBsZr4vC1f3XnZdMemRCO41+3
+	MXbSJeb5/Pc7z/QAFjes9tVkj/lcpPdfugOJlHqLLGBSKWhiP8Y5LfmzTf/jIms2W4lbW2TCU1g
+	nN83KOMH6FjYOw/E3lYx2aiJAuzO9wUqS/VBRsJlNiB/PAqD6XDJQK//rNk4OGVmVdSC+Uteybr
+	M0J6IFcANU4nVw75VSoGGELaSY9+Db4h0J+4BpDWA8j4uZcz8p96X+e8BwV0NG9cZKZ6w1bozxc
+	ikxpAbu6KPc4SWe9ryoEfrPGJSLRO4Yp+hhc3yVfFP+Y8vCDVdzq7mAXX66kSanrjNJlmzCegmx
+	0Yr5b9H32gFW9yO2hvm64JzW+JmrNEeF6WmR8yBhzXqYbpYX/+y7MwJDS2Tcq9TC/3B31aNq3z9
+	Anv3/mnt82c/bTNp+7R5qqb6Tn5X7Q5OcvlpwUKU9GebRgTwTfGZd10eXBAAw1/+poDZ9wHENVU
+	Z+V2I92zWNeVRJKZm156BSByKMYe1wtRv2Y88IcS/tAdZIp54ebVG3zExEqVbYEDsH6ywU0963H
+	G9x0z2AnUOMHbmZNH9RcC5PzJnOAPqn4yzTul6ZvEssC+TlHB18UWa54rIV2lAUzXJy3xkalr1j
+	/WYIU+fOnFrlaof/5ZCxvAC8Eah4AzX3hn8JUlLQ80v9ll+dgzSmh1JzffRGS9Fun5lppXFvbI2
+	apazrm69dXsxYB2VAqlELG2fZoR1sINWmhc4RNAca1phA==
+X-Received: by 2002:a05:622a:1ba1:b0:533:3868:1f6d with SMTP id d75a77b69052e-55ac8b998b7mr99136571cf.59.1794675143733;
+        Sat, 14 Nov 2026 08:52:23 -0800 (PST)
+Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:7961:9008:8b93:d491])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-55d2df66cb7sm2635421cf.21.2026.11.14.08.52.22
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Sat, 14 Nov 2026 08:52:22 -0800 (PST)
+From: Jesse Casco <jesse.casco@gmail.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org
+Subject: [RFC PATCH] arm64: dts: qcom: glymur-asus-zenbook-a16: Describe BOB1 and the IR emitter
+Date: Sat, 14 Nov 2026 11:52:21 -0500
+Message-ID: <20261114165221.70310-1-jesse.casco@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -129,149 +100,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CACSVV02fCwbFXVjE+XHCo68xMxYUHovJ9ZHRYd98L74N1T14Hw@mail.gmail.com>
- <20261114153622.148125-1-arpe1618@gmail.com>
-In-Reply-To: <20261114153622.148125-1-arpe1618@gmail.com>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Sat, 14 Nov 2026 08:40:31 -0800
-X-Gm-Features: AclHuK8v6yocAMov5_kcb3jEgrVHdGlRUdiYk4AGEpFJ8mzDlgn5asj4NprUyOQ
-Message-ID: <CACSVV00ZppfBKwsHJ+NBYBB7a2f3g1O=6J4Gt1m_A74fudZQoQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] drm/msm: Fix VM_BIND job, queue and entity lifetimes
-To: Jiwoo Kim <arpe1618@gmail.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Anna Maniscalco <anna.maniscalco2000@gmail.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=ItKL47/g c=1 sm=1 tr=0 ts=6af88f0b cx=c_pps
- a=+3WqYijBVYhDct2f5Fivkw==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=2g9MNY1Fx1-Z8oZBzW0A:9 a=QEXdDO2ut3YA:10 a=eYe2g0i6gJ5uXG_o6N4q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA2NiBTYWx0ZWRfX3MFd+H0Z7FPj
- /5kKFwtqmBW31VmDpr8/k1Pxc42skyucyxpzp9x5TliVa6kpozzH7wnEu2DOo8n3u8tgnscOEiW
- Ha4nDxEPGQn3XYG6V7AJbkA08uwgfPg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA2NiBTYWx0ZWRfXy/QDAyuQMnZ3
- 7EXQHjOR7r1BcwF0/YIN1xjdIp9IaTNlbzg2uW16JB/jJY/+s3DKm6JxJhhuQetzpD5EkHQZH06
- hj3s3VI+6F3Dtk6lZfJGuafDYp1K7If7oFzzVRMJP89Z1jAKUkbToP4z/ND5uQMWMqDaf9Fz8E/
- sCilb41brcgbAZQZC2vBclhiwrNTQ8AnP8eI+s/spiW3EmgthpQWXJkiTZJkmrJ1jXpzspxyWM5
- t8pCyfdMy9tvLdtZjMe5GytWAq5oTl9PWgHNV9tuLVdjVxFS73hYTmqRDhR6sZ4iXZv0IlPtXx6
- qU9aY/0uwXRwIvy5fHpbrPpg0ZM9AdSm+snq6uDSxq3ZU0uJ1MjW8PnTn0qBzNobx6ZFxSTPANL
- 3BHVWGq6WYafeBIlSOXOhnt5zjnWsrDyuHVSvINTMm0waVtupy7hZaIwv5BSRgnn9sDnxv8lpW1
- yBADjHEbsiV7CPMlR2g==
-X-Proofpoint-ORIG-GUID: qjaR3VjhkRsk00IoQFSGeZ5cN2NaABfb
-X-Proofpoint-GUID: qjaR3VjhkRsk00IoQFSGeZ5cN2NaABfb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-14_04,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 lowpriorityscore=0 phishscore=0 impostorscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611140066
+Content-Transfer-Encoding: 8bit
 
-On Sat, Nov 14, 2026 at 7:36=E2=80=AFAM Jiwoo Kim <arpe1618@gmail.com> wrot=
-e:
->
-> On Sat, Nov 14, 2026 at 7:03 AM Rob Clark <rob.clark@oss.qualcomm.com> wr=
-ote:
-> > msm_gem_vm_close() waits on vm->last_fence which will be signaled
-> > after msm_vma_job_run() returns.
->
-> vm->last_fence only collects the fences of GEM_SUBMIT jobs, in
-> submit_attach_object_fences(). VM_BIND jobs don't add theirs, so
-> msm_gem_vm_close() waits for a VM_BIND job only if a submit depends
-> on it.
+PMH0101 BOB1 feeds the PM8010 camera LDOs and the PMH0101 flash module.
+Describe it, and wire the IR illuminator: flash channels 1 and 4 ganged,
+350 mA torch, 700 mA flash, attached to the HM1092 via flash-leds.
 
-Oh, right.  We should probably just update last_fence for VM_BIND in
-the same way.  (Ie. using dma_fence_unwrap_merge() to deal with the
-case that the current last_fence is on a different timeline.)  I
-overlooked that.
+Values:
+- channels 1+4, 350 mA torch, 700 mA flash, 1280 ms timeout: Windows
+  LEDFLASH configuration (FlashLED_1)
+- BOB1 3.384-3.512 V: within the AOP OTP limits for B1B_E0
+  (3.296-3.520 V); BOB2 is not populated
 
-> > My expectation is that if thread A is in midst of a VM_BIND ioctl,
-> > perhaps not having created/updated last_fence yet, while thread B is
-> > racing it closing the device fd, that file_operations::release will be
-> > called after thread A's ioctl call returns.  Is this not the case?
->
-> It is the case. (The vm_bind_closed check in patch 2 is only for
-> MSM_SUBMITQUEUE_CLOSE, which can race with a VM_BIND ioctl on the same
-> queue in another thread.)
->
-> The problem is a job that the ioctl has already pushed and that is
-> still waiting for its in-fence, e.g. one from another device or
-> drm_file, when the file is released:
->
-> - If the queue was closed with MSM_SUBMITQUEUE_CLOSE first,
->   msm_submitqueue_close() no longer sees it, and nothing waits for the
->   job. Otherwise drm_sched_entity_flush() waits at most
->   MAX_WAIT_SCHED_ENTITY_Q_EMPTY for an exiting task, and kills the
->   remaining jobs only on SIGKILL. Either way, the job's reference
->   keeps the queue, and so the entity in it, alive.
-> - msm_gem_vm_close() then calls drm_sched_fini() on vm->sched, which
->   frees the run queue that the entity still points to.
-> - When the in-fence signals, drm_sched_entity_wakeup(), which the
->   scheduler registered on it, uses entity->rq->sched;
->   drm_sched_entity_kill() leaves that callback in place. A killed job
->   is freed then too, and the final put of the queue calls
->   drm_sched_entity_destroy(), whose flush reads entity->rq->sched
->   again.
+Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
+---
+Konrad, this goes on top of your A16 PM8010 and IR camera commits in
+qcom-laptops; feel free to fold it in. Tested on a 7.3 kernel with the
+same DT: ir:flash probes with no faults and lights the HM1092 scene.
 
-I think if last_fence is also accounting for VM_BIND jobs, this should
-ensure that all VM_BIND jobs are also finished.
+ .../qcom/glymur-asus-zenbook-a16-ux3607oa.dts | 29 +++++++++++++++++--
+ 1 file changed, 27 insertions(+), 2 deletions(-)
 
-> Patch 2 destroys a VM_BIND queue's entity when the queue is closed,
-> by MSM_SUBMITQUEUE_CLOSE or on file close, so always before
-> msm_gem_vm_close() tears the scheduler down.
->
-> This comes from code review (see the note in the patches), and I have
-> not reproduced it.
->
-> v3 is at
-> https://lore.kernel.org/r/20261114141851.134290-1-arpe1618@gmail.com
-> and its patch 2 is unchanged from v2.
->
-> Separately, Sashiko's review of v3 found an ordering problem that
-> predates this series: the VM_BIND queues of a VM update the VM's VMAs
-> at ioctl time, but their pgtable updates are not ordered across
-> queues, so an unmap can reach the pgtables before the map it undoes.
-> That does not need a queue to be closed, but v3 patch 1 adds another
-> way to get there: the unmaps it applies when freeing a killed job are
-> not ordered against other queues either. (Its other point, that a
-> killed job's fence signals before those unmaps are applied, I'll
-> address in v4 as well.)
+diff --git a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
+index c2ecabb3..75018ccc 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
+@@ -379,6 +379,17 @@
+ 		compatible = "qcom,pmh0101-rpmh-regulators";
+ 		qcom,pmic-id = "B_E0";
+ 
++		vdd-l6-l7-supply = <&vreg_bob1_e0>;
++		vdd-l8-l9-supply = <&vreg_bob1_e0>;
++
++		/* B2B_E0 (BOB2) is not populated on this board */
++		vreg_bob1_e0: bob1 {
++			regulator-name = "vreg_bob1_e0";
++			regulator-min-microvolt = <3384000>;
++			regulator-max-microvolt = <3512000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
++		};
++
+ 		vreg_l1b_e0: ldo1 {
+ 			regulator-name = "vreg_l1b_e0";
+ 			regulator-min-microvolt = <1800000>;
+@@ -624,6 +635,7 @@
+ 
+ 		reset-gpios = <&tlmm 109 GPIO_ACTIVE_LOW>;
+ 
++		flash-leds = <&ir_led>;
+ 		leds = <&privacy_led>;
+ 		led-names = "privacy";
+ 
+@@ -751,10 +763,10 @@
+ 
+ 		reset-gpios = <&tlmm 106 GPIO_ACTIVE_LOW>;
+ 
+-		// vdd-l3-l4-supply = <&vreg_bob>;
++		vdd-l3-l4-supply = <&vreg_bob1_e0>;
+ 		// vdd-l5-supply = <&vreg_bob>;
+ 		// vdd-l6-supply = <&vreg_bob>;
+-		// vdd-l7-supply = <&vreg_bob>;
++		vdd-l7-supply = <&vreg_bob1_e0>;
+ 
+ 		gpio-controller;
+ 		#gpio-cells = <2>;
+@@ -1037,6 +1049,19 @@
+ 	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
+ };
+ 
++&pmh0101_flash {
++	status = "okay";
++
++	ir_led: led-0 {
++		function = LED_FUNCTION_FLASH;
++		color = <LED_COLOR_ID_IR>;
++		led-sources = <1>, <4>;
++		led-max-microamp = <350000>;
++		flash-max-microamp = <700000>;
++		flash-max-timeout-us = <1280000>;
++	};
++};
++
+ &pmh0101_gpios {
+ 	nvme_reg_en: nvme-reg-en-state {
+ 		pins = "gpio14";
 
-Yes, userspace must use fences/syncobjs to synchronize VM_BINDs if it
-is using multiple VM_BIND queues with overlapping updates.  An error
-would mark the vm unuseable, and the kernel will stop accepting
-SUBMITs and VM_BINDs.  But maybe we should also handle errors in the
-UNMAP path as well, as that also indicates that userspace is doing
-something wrong?
+base-commit: 2010e0d9557fe1d37d04f13e539adf24cbb785f6
+-- 
+2.56.0
 
-Userspace shouldn't be allowed to cause the kernel to do something bad
-(use-after-free, freeing pages that are still mapped, etc).  But it is
-perfectly fine to let userspace shoot its own foot, for example
-triggering an SMMU fault due to pages unmapped while the GPU is still
-accessing them.
-
-BR,
--R
-
-> For v4 I would make a job that unmaps a VMA wait for the job that maps
-> it. The other way round, a map that overtakes an unmap of the same
-> range fails or gets undone, which breaks that VM but doesn't leave
-> freed pages mapped. Ordering all VM_BIND jobs of a VM would be
-> simpler, but turnip uses one VM_BIND queue per device plus one per
-> Vulkan queue. Would that be the right direction?
->
-> Thanks,
-> Jiwoo Kim
