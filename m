@@ -1,107 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794670598;
-	b=ZzNglk1ls9zEmCEnYWUKT7Kq+mM4ewmfew0Ecl6UBuzM3zuP2PibROq+ZLwbk0OlRKnc
-	 oe6EWJdiAsvQ+ek1kCUs/t3vaOzCbYD0sCebw0StpW99wmjaQQObQE37qOXIshEAqNvA9
-	 r/sMXzu/jMFq4rpjz117cYXLKIh1+LNqqDlwRiKA2m2i1r2kbIj17jO+T4ZiyJ6SKCH6W
-	 n19CDB9KmnMxq20oE7ZlTNuiHOqpy8bFsXeHW8RKCWczTpen9WZCUsbCTPb+j6N9a0MEp
-	 kwRc5Xh/TCm9K6rmNJXS/rdnYgxS2+c6PBgHxX7egIJYGB9jhfhYAaYNoKStc2mSRvA==
+	t=1794670765;
+	b=utuDtJkFwxRODAgxgwTOMll+5nsHxy2MHLsSpr/pJtL0SQGwvjZdImLNZrb61vXD5QUX
+	 oJKYuplQxusB5De/LpNrBfDxgoMySGOcjhf6okaI1FA3oc7gd8gArfffis6rNOL+OVung
+	 6YZgAQgWJIkxYN69ebYmeR43WRP8zZfxOjlERLY8Qw+4gyznd9OE+v2yzcxquxv/qZLSq
+	 nZ8sV6ej8PHyNu5NmLivSCQUpCgEi/Q9rqSQW8seQ5uAVeJhO8xw2GFbp0w0I4eW36Ic5
+	 uCBZv1795V3WXoofq+B0pLCLEnngSNl/r2i3jCCGbTWaONi9Fz9xisTn6eL8mE080mA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794670598;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=dcf1VprQ5tReiauPDZRL2T+Bt75/dPprqyKIItbhiW4=;
-	b=MHnrGpXQ0D1m3/Z8maZgVgNWuGMNpptaZzF/deztzcgCVoW9vZwwGPjx6s6JMpL+x1Z5
-	 eGpSMMGo2Q5a5zxga3oAxggCIJwe+xrqNYUL5gkpxeGO3vj5T8zlCW6aUPAeZRdWhdAxG
-	 +BPhAyfABrT9l/uiuUbostl6xSIqKqaOLJORVdlwgFgISzEuybT8pKvX6DxbLVV39g76E
-	 EFo8kfFMPKwuEThiq133Hp4yC1Hk0iq4tefGL5Zm39e9gitU6Lv8icwdxOx6pdqC3j7OQ
-	 2Ap0JoiNW0RInjQqEUL4LdkIqy5l8AmxxLHu/+fJc3bvOZjpFFKgUxAcmU3BzoGjU2Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794670765;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=hrqRIR6qjCPCM/+FGJdCXYUIyo0/YN8fZuFRUdFOn44=;
+	b=fyJetI40TKrWSiEwJJh3cHlupERBGJWq2Lq+B+33KNAzV0eGiRxSiyB97ujo14hE0f7s
+	 HWcyEI0rPyOco+Jz+BeZZwUE2Dl8ziogkcyyw2fWJ8+IkL0A7aQdUeNNqex8e2xemjw6o
+	 8Y46BQpI20a1RVwaDPEFlPZEL8T4EKaFYE/X58NoQr+leCb77kdM+Zj3UtC+8oVPJ7gne
+	 ExRHQwJ2/Ektu2Sh6rI/1lPBmuzDuoqNX71OgNC4bPwovrEQeTNbDD41hoyUBpZibbX9T
+	 zXcsI3l55+BXFGF5vopB0+fQDOnJCs7W/4/1w8D6jygp2k0UpVzTwZlMOHTBIJruoQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kLaBAw7w;
-	arc=none smtp.remote-ip=74.125.82.177
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NJ5dERUP;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=K91jUdB8;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AAC3606A32D
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 15:36:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9AAC3606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3B2B606A330
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 15:39:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3B2B606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kLaBAw7w
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-36ecc11bd26so250092eec.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 07:36:37 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NJ5dERUP;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=K91jUdB8
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AEDn0a04190319
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 15:39:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=hrqRIR6qjCPCM/+FGJdCXY
+	UIyo0/YN8fZuFRUdFOn44=; b=NJ5dERUP40lOCuplzsjQIQvEd1F/kSuFP2mZsz
+	MtROmKsv3rhLeZkBKDu36LnnT4L/+FT340iAaUa+hgGU75PtXhQVZd8xKJyLmRt3
+	vhXnKKhiGDpOu4Nf7Oj/r80zkjoYlGPpEVgyYAPSoS71O0N9rfb+u1zxe8+c2qDn
+	H+EXHuROidDO317QMgW6jERiqZoTW7z1YAmUrUmMlxdcK0FY7TJScS3U8nVgLEWy
+	aetipLGOtjNlgP9xGYJfimwdbC2e1ilg38tDQsgs6HFch41sQ9VzUOVGKbyO8DGb
+	SOaH6/CF60lQaqKBAoW+ZfHd14f4E6syAS71oiVIFMGkULXQ==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhk213qf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 15:39:23 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93f37c94ceeso597599585a.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 07:39:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794670597; x=1795275397; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dcf1VprQ5tReiauPDZRL2T+Bt75/dPprqyKIItbhiW4=;
-        b=kLaBAw7wyQvWZ1O6H9Z8EVRT4c99eFtSlk56PDSgX/V6PzrRUop9EQDiwhc82HP0Ro
-         vZjCaqh3rTP6wYrvWhgrfd1ai4cSFfSfR0e6sPGVmiS+4OMduJvG/HxiCXWz9Ynwxty4
-         eXB0yDpJR/j8cHEcV/ihE5tg2mMIDcso6aprXMWAhQGuS4FTxJvWCIeflnTdJ63ZhHNw
-         KUgN5CTvm54ELruJCnCxb89I3myrjv/UoP91i5EWajaojOjSS1X8aryBt0VcXgWfsdnj
-         yocOp9imlaUMah/UTOksDTx6uWjPD1ClSeF9qf4+8I8L3ALSaUM8Qwv2f5ulRnPcVybA
-         BqDw==
+        d=oss.qualcomm.com; s=google; t=1794670763; x=1795275563; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=hrqRIR6qjCPCM/+FGJdCXYUIyo0/YN8fZuFRUdFOn44=;
+        b=K91jUdB88Plo788fch13ZtsICCRBETCrLq0QvtWPxK4C0raM+ojhua9hmEIdnq+yfv
+         Ce5thanxSEX0/fp1wlCA2FZxaL6DhE753hoPTOedBZa1aANXdhPuH7+m+6h9S9QsobpC
+         0yXd1d8qvxZDUWW0op+A92+x8fG4+YwCCMTS2HrDqGqIs69FNcI3U4cv9t0qwC9u4QF5
+         v6IstF+Zf+Tg/WqiSLW5byTHp2fzZC51mWdgjo/8orCpm4ZpUZHBA6kMaM7fSksyW3xa
+         VV9xK8Ox3yYIgmdXMCGyHpx13NpijUc/92NkBcr7e1MF/3OpUrq5ZkbPQaavIJxopwdp
+         7/TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794670597; x=1795275397;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dcf1VprQ5tReiauPDZRL2T+Bt75/dPprqyKIItbhiW4=;
-        b=Qr4Ck/C0td6xniWntj5p9Z7g73upu5X07mRQA8VYtqqNCOqBLEdZaf6ElyXg2gFnI9
-         RE8zZDB9X4v4TD3ND4vhyTu/5+Lyrbb+ZgbdI6Pjwn0KviwcsKfTM4QxswlECIDB5Wix
-         osa6hK9mgwpROLEQ5kuqiLSgex5KXDfI2s2ptpevUxg8CYYQ60g9v0ychqPUgEvXQXYS
-         OVo/uzT+iMxOsdpRdePlbWKHfLz81epIJnrfDRmhFdvpMTXiBREMIhxXZze8FY+GV24H
-         hXychqNxQ2CfktUuGO052nMa7ONGDu7kxRg7MZRUYOgkqSbGK3veRbXXp9VU6rIvv5Ah
-         MHag==
-X-Forwarded-Encrypted: i=1; AL+hErHsoOP2mhPYhaoKRZ+UsjohiaPY3ItLyZFwJG8Ukdu6DUb+SbB0i07QWIVjvqLjZl0iKHBsjxAHonySeuNP@vger.kernel.org
-X-Gm-Message-State: APuU4Z+vbk9vSkDAHQWXnQ+7jlhLT3hCGKu+poLsrZRSfMk05whQDoBN
-	WG0oWp2ye5txUDOV8xAwYqx5iPXGLc8ZseACyifOjOcBDIJZdg3hZkbg
-X-Gm-Gg: AYBFou3CT1E3RWvfFy2LZkWpk7gW5yZW7yKCFFvBxPRfx9W/BggIsr3esekshFbmvNV
-	YttByY71oIkXKhh2anoNZrusiCvb3K5DuYQnR0dZdNPvQJD5HLkXcFDnYrZYlmx0O1Kuqp+cVJn
-	GohJNpRNfmN/eH1pz4c2gx9VYK4eMHI0unE6YI03mIrunC1Vbi5BPmsHtogTTLx81PNJL2YKfij
-	/YkLh3Iiy29O1zSG9nkd/KXOhKCR9W6ZEi7rUqB4Pc2/ALSc8VgcwGNOLl4jDi5RjXN/Pr4g/uT
-	MInsH4+o0pAX7tz3BuLad4YLmUKDR7hS//40zcilx4dTm6ufoeWFXMEGb0hEE1Pe1UxVo6VkVZZ
-	6T4AKqviI0zQ9ibyCu+HeXpFZsq87Bdiv05qujzRsu32M9BS+n2ba78QD+Wpf4/J1pbUks8k+sy
-	cpCDAtP94ywwSjWYn8hd71zjrZmokNsAa6PIk4SaKZlkGbrX44giv2YeYnZmKcoPSBVwOPnNWnk
-	DJMBFO+mlSxA/lHUkrhFp+Fv7QRGgbL28BasSU8nPLrogXa3rEdAQKWklm1Jol1uveUQnZfn8cy
-	h5y8/1UZJ16ig/hM0Vnf6rxRWWqIE8/Th3TpssshMB65R8aBOCu6HkQ8ZPI1a6mL/FMXr7QHgMA
-	QPGc=
-X-Received: by 2002:a05:693c:20cd:10b0:36a:13fd:b5c with SMTP id 5a478bee46e88-379652f16f8mr8568423eec.2.1794670596552;
-        Sat, 14 Nov 2026 07:36:36 -0800 (PST)
-Received: from DESKTOP-CJ1L666.localdomain ([211.198.99.62])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-379508762a5sm17527126eec.0.2026.11.14.07.36.32
+        d=1e100.net; s=20260707; t=1794670763; x=1795275563;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=hrqRIR6qjCPCM/+FGJdCXYUIyo0/YN8fZuFRUdFOn44=;
+        b=MwFW5PBPZQE4BuBauYeJRPeN93PasG9FUXZEmNOWIo66MeAXvirFaI6QQk60o3Rr8d
+         PTXCvELCQdKb9amkV4nBKbHgTyAGI8CtzG9CAnuyQ6WJBsAciYI+VCLDdAH4JlcwdZPU
+         fYEwF9weeGMO6Poth9xQcGELoU9hpAjWMbFuTLP4n6jjGrBkTFIi/Ir0Znyyi/9ajhFV
+         iZFTCJdWj5wQT7u2sNtIaJJ1M5ijvZuFtmioc/j27i54J30TZwGs8ITOo1kfV9pFz70w
+         BU5z438ys1+2HSxg+MbVs1y5+6Ho1WRkK67u48FK6Dpl4/bFNESUVSkxLdoa8aHbOKME
+         6M3g==
+X-Gm-Message-State: APuU4Z98xuV/m7tugJVeFByfJuK5oRgmwKkCyrrDh2wAV7sZ8HllVOTD
+	1JUxUHv8eMprrt1NwqXzLzdBctw0F1z5RbK0aQmJbPiE5L8mirXXm3hDS27C5h25RJMSCg4BnBM
+	qpOJ3ED1ZJWfVOkfJIat0Cku7fXTHFEBYwr9TAyCYiT9gpsvdd9J53d4vm1WTN7j61CQt
+X-Gm-Gg: AYBFou2W0Z/p4/Wi0TvEYuewlM4Vlwp74vBNbOHi6aZBun5Ech4cejlfUT+ZQQ82kRl
+	aMMQ0QrPPkdjChZ062wYRtWZ7zXQOYJ6Wp9k8xROMw2rIacrF/2vJ9lbhCE4eA5xqH2AHpsR3r0
+	Zwi6kryGAZa51pZoi1ExgNcBgnlZSJ4KmkFabuSJviRCqqtktO7hNZAjEYaF2sw9B620fAEdGEz
+	5aY5Jro3UKuu7sAEooZth3FGjG7BxHwO8JyecFOdC6EfyjrQXX2ZcvfTWSJ+UzSem9s09kCMWAU
+	z/mZqFmktuGWAwYyxC1zyZUIQ6yamazYqJ3cgtJJklhMadiaVpsZZUg9I8LaSfyMgbDOTvRxSlf
+	8MT00kYIEwzUdClx+C43KFwE7YnhAFL8LQnX4B1llmrphxQ4eUqCtAGBZTmDYtnhuNo4G5rnL/E
+	+815o+/mGDIQp1
+X-Received: by 2002:a05:620a:1a17:b0:945:c430:1c09 with SMTP id af79cd13be357-9493314ae9bmr1452402885a.37.1794670762778;
+        Sat, 14 Nov 2026 07:39:22 -0800 (PST)
+X-Received: by 2002:a05:620a:1a17:b0:945:c430:1c09 with SMTP id af79cd13be357-9493314ae9bmr1452400285a.37.1794670762326;
+        Sat, 14 Nov 2026 07:39:22 -0800 (PST)
+Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c50a6c826bcsm167268366b.11.2026.11.14.07.39.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 07:36:35 -0800 (PST)
-From: Jiwoo Kim <arpe1618@gmail.com>
-To: Rob Clark <rob.clark@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Anna Maniscalco <anna.maniscalco2000@gmail.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH v2 0/3] drm/msm: Fix VM_BIND job, queue and entity lifetimes
-Date: Sun, 15 Nov 2026 00:36:22 +0900
-Message-ID: <20261114153622.148125-1-arpe1618@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <CACSVV02fCwbFXVjE+XHCo68xMxYUHovJ9ZHRYd98L74N1T14Hw@mail.gmail.com>
-References: <CACSVV02fCwbFXVjE+XHCo68xMxYUHovJ9ZHRYd98L74N1T14Hw@mail.gmail.com>
+        Sat, 14 Nov 2026 07:39:21 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Subject: [PATCH 0/4] arm64: qcom: QCM2290: add the Embedded USB Debugger
+Date: Sat, 14 Nov 2026 16:39:03 +0100
+Message-Id: <20261114-qcm2290-eud-v1-0-b6157b817377@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,72 +113,123 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQ0MT3cLkXCMjSwPd1NIUXQvDVEODNONEi1TTNCWgjoKi1LTMCrBp0bG
+ 1tQBgwEv3XQAAAA==
+X-Change-ID: 20261114-qcm2290-eud-81e10f3a8e5f
+To: Souradeep Chowdhury <quic_schowdhu@quicinc.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
+        Elson Serrao <elson.serrao@oss.qualcomm.com>,
+        Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-ORIG-GUID: TlsV35EAX-xkJJq0UsalGDRMvyzO4DPN
+X-Authority-Analysis: v=2.4 cv=QanzLcbv c=1 sm=1 tr=0 ts=6af880ab cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=b45o4kL6AAAA:8 a=EUspDBNiAAAA:8 a=rVLXYBqpOHlN8aflTEgA:9 a=QEXdDO2ut3YA:10
+ a=O8hF6Hzn-FEA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=dhdsR-PFWuPJUldTnwXm:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA2MiBTYWx0ZWRfX+fxeKYm2keNN
+ qE+yin/BD4C0Q2uWOkmwX1R1/l/iGEZcv3QBNz0o5C9i1tt0bMA1yKVy9yCDWn0C5weq0ItRGQK
+ 87S9iE9s4ibLBTC4CkmgsMBudvo3haNCI+Xr42C86vUAEkfmK4bTHd6VWcFvBncpc/Lnt7EN9KK
+ 9RYL5d/M+H3au1Fbecz0ARXsTOkZWibXnZgpYfErkyOXyvJOvbZ+xrWefSZ1MtW7a/xmP9XAhVg
+ dfZqwGR6NoRcYLlPWofVMjtPLNX6nj6qvZrVlNBFKArZrn/AfCCxsh1ixlgrIlKEfHMZT3hJHgH
+ zpyb5h1g8pIzTm2yr+Su05gmwaglWO2+nOCTAz7y3xhLgeeKNZsp1MOZN+IJtUnATFf4jFXNtxc
+ xSIxyl8hokOJJcHedYbd51/Ams89yh+AxVrH6hec+b0eZrlLYCLVAKUYI/h0EvJO2Eg/fJ78lS9
+ V5nzdUc9KBwGLv+1lng==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA2MiBTYWx0ZWRfX2mbdKLVjjTdg
+ Qvw0j7IUWry5P9g9r2utAQc22M5C8djXwqp4fM4usuby8KSfUZ+qYK7VhApEMAaKbYGlhGvKnDJ
+ EsC7lWn7QbohVZf/V6eclq2u1aUVayM=
+X-Proofpoint-GUID: TlsV35EAX-xkJJq0UsalGDRMvyzO4DPN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-14_04,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 impostorscore=0
+ bulkscore=0 priorityscore=1501 suspectscore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140062
 
-On Sat, Nov 14, 2026 at 7:03 AM Rob Clark <rob.clark@oss.qualcomm.com> wrote:
-> msm_gem_vm_close() waits on vm->last_fence which will be signaled
-> after msm_vma_job_run() returns.
+The Embedded USB Debugger of the QCM2290 is the block the SC7280 has,
+with one difference: its mode manager ignores the enable (EUD_EN2)
+unless the TCSR register TCSR_APSS_SPARE_REG1 is set first. XBL_SEC,
+the secure part of the boot loader, does exactly that when it enables
+the EUD itself: it sets TCSR_APSS_SPARE_REG1, then EUD_EN2.
 
-vm->last_fence only collects the fences of GEM_SUBMIT jobs, in
-submit_attach_object_fences(). VM_BIND jobs don't add theirs, so
-msm_gem_vm_close() waits for a VM_BIND job only if a submit depends
-on it.
+Patch 1 adds the compatible and describes that register as a third
+reg entry, patch 2 has qcom_eud write it through the secure IO call
+like EUD_EN2, patch 3 adds the EUD to agatti.dtsi and patch 4 enables
+it on the Arduino UNO Q.
 
-> My expectation is that if thread A is in midst of a VM_BIND ioctl,
-> perhaps not having created/updated last_fence yet, while thread B is
-> racing it closing the device fd, that file_operations::release will be
-> called after thread A's ioctl call returns.  Is this not the case?
+Why Linux sets the bit and not the firmware:
+- XBL_SEC runs that sequence only when the device's debug policy (an
+  optional signed image that enables JTAG) asks for it. Without one,
+  as on the Arduino UNO Q, the board boots with both registers clear.
+- The stock TEE (QTEE) does not set the bit either. It allow-lists
+  TCSR_APSS_SPARE_REG1 for the HLOS secure IO calls next to EUD_EN2,
+  with the same policy (write allowed when secure boot is off or
+  debug is not disabled), i.e. it expects the OS to set it before
+  EUD_EN2.
+- TF-A does the same on Agatti [1][2]: TCSR_APSS_SPARE_REG1 is open to
+  the normal world in all builds ("this register only permits EUD to
+  be enabled"), EUD_EN2 in debug builds only.
+So with either TEE only the driver can complete the sequence, while
+the secure firmware keeps deciding whether the EUD may be enabled at
+all. Where EUD_EN2 is refused, enabling fails with -EINVAL as before.
 
-It is the case. (The vm_bind_closed check in patch 2 is only for
-MSM_SUBMITQUEUE_CLOSE, which can race with a VM_BIND ioctl on the same
-queue in another thread.)
+Tested on the Arduino UNO Q (QRB2210) with next-20261112 plus the board
+support it needs. The A/B runs use the same kernel, with and without
+the third reg in the EUD node; without it the driver only writes
+EUD_EN2, as today:
+- TF-A, built to allow EUD_EN2: with the TCSR write the host enumerates
+  the EUD hub (05c6:9500) and its control function (05c6:9501) in each
+  of three enable/disable cycles; without it the writes are accepted
+  and the enable reports success, but nothing enumerates in three
+  cycles.
+- Stock QTEE + Gunyah (secure boot off): with the TCSR write the first
+  enable after a fresh boot attaches (two boots); without it nothing
+  attaches (two boots). Reading both registers back through the secure
+  IO call shows them taking every write. The USB controller node was
+  disabled in this setup (Linux cannot program the SMMU under Gunyah
+  with this DT), and there only the first enable per boot attached;
+  re-enabling after a disable was not looked into further.
+- OpenOCD's EUD adapter attached over SWD on the TF-A setup (earlier
+  build, same enable sequence). Not tested: RB1.
 
-The problem is a job that the ioctl has already pushed and that is
-still waiting for its in-fence, e.g. one from another device or
-drm_file, when the file is released:
+dt_binding_check, dtbs_check (qrb2210-arduino-imola, qrb2210-rb1) and
+W=1 are clean. Elson Serrao's pending EUD rework touches the same
+binding and driver; this series does not depend on it, whichever lands
+second needs a small rebase.
 
-- If the queue was closed with MSM_SUBMITQUEUE_CLOSE first,
-  msm_submitqueue_close() no longer sees it, and nothing waits for the
-  job. Otherwise drm_sched_entity_flush() waits at most
-  MAX_WAIT_SCHED_ENTITY_Q_EMPTY for an exiting task, and kills the
-  remaining jobs only on SIGKILL. Either way, the job's reference
-  keeps the queue, and so the entity in it, alive.
-- msm_gem_vm_close() then calls drm_sched_fini() on vm->sched, which
-  frees the run queue that the entity still points to.
-- When the in-fence signals, drm_sched_entity_wakeup(), which the
-  scheduler registered on it, uses entity->rq->sched;
-  drm_sched_entity_kill() leaves that callback in place. A killed job
-  is freed then too, and the final put of the queue calls
-  drm_sched_entity_destroy(), whose flush reads entity->rq->sched
-  again.
+[1] https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/55733
+[2] https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/55964
 
-Patch 2 destroys a VM_BIND queue's entity when the queue is closed,
-by MSM_SUBMITQUEUE_CLOSE or on file close, so always before
-msm_gem_vm_close() tears the scheduler down.
+---
+Igor Opaniuk (4):
+      dt-bindings: soc: qcom: eud: add the QCM2290 EUD
+      usb: misc: qcom_eud: set the TCSR check register before enabling on QCM2290
+      arm64: dts: qcom: agatti: add the Embedded USB Debugger
+      arm64: dts: qcom: qrb2210-arduino-imola: enable the EUD
 
-This comes from code review (see the note in the patches), and I have
-not reproduced it.
+ .../devicetree/bindings/soc/qcom/qcom,eud.yaml     | 19 +++++++++++++
+ arch/arm64/boot/dts/qcom/agatti.dtsi               | 33 +++++++++++++++++++++-
+ arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts |  4 +++
+ drivers/usb/misc/qcom_eud.c                        | 19 +++++++++++++
+ 4 files changed, 74 insertions(+), 1 deletion(-)
+---
+base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
+change-id: 20261114-qcm2290-eud-81e10f3a8e5f
 
-v3 is at
-https://lore.kernel.org/r/20261114141851.134290-1-arpe1618@gmail.com
-and its patch 2 is unchanged from v2.
+Best regards,
+-- 
+Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 
-Separately, Sashiko's review of v3 found an ordering problem that
-predates this series: the VM_BIND queues of a VM update the VM's VMAs
-at ioctl time, but their pgtable updates are not ordered across
-queues, so an unmap can reach the pgtables before the map it undoes.
-That does not need a queue to be closed, but v3 patch 1 adds another
-way to get there: the unmaps it applies when freeing a killed job are
-not ordered against other queues either. (Its other point, that a
-killed job's fence signals before those unmaps are applied, I'll
-address in v4 as well.)
-
-For v4 I would make a job that unmaps a VMA wait for the job that maps
-it. The other way round, a map that overtakes an unmap of the same
-range fails or gets undone, which breaks that VM but doesn't leave
-freed pages mapped. Ordering all VM_BIND jobs of a VM would be
-simpler, but turnip uses one VM_BIND queue per device plus one per
-Vulkan queue. Would that be the right direction?
-
-Thanks,
-Jiwoo Kim
