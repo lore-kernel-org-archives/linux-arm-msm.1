@@ -1,107 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.178
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794644367;
-	b=zQaiPWgMasSxe6FtzCuh96fHNJd9sYlWiiX+14tEeWXgWHRT+SAOkeoeF35KAW+VQl2Z
-	 /xm8GZeCK+W4QR8RHWIkO4gxrqfVke9PCckT3BeJPn4iwDyL3KQd4eNXK/SVebD0RU01l
-	 uw0lG8PuQyecJuIsmhnP3l2YrpRs1p0rQUVzH8SfdCfOQXBVZPGL5ZPLuEvcA0Aawt6u0
-	 QkkJ1biIa+PjBLcNtg0n6Vl8ernCPDxS6IWibDKYXcsf7BTEncga4aOpKEX7SxwdFpvaG
-	 /7l9dnq3DL80usB+lDoiin0tr69gaM5eZoxEkqytBMTrdhUjthor32b22tUXduj0dpw==
+	t=1794645014;
+	b=i8yrR91BweyZQ7lfBkvRmInKkVyhBY+1xtlaCKDXjSaoeS/2hfDy6Vx3GnHUv67wYSio
+	 ZC3xLfe8gfIx05uSOnKythoYhyaKHIyrAfDgwqWCdYKma8VHWZ6KPrhb4Ho8GfYKIWkmq
+	 i4EdYs1eHT9yQJ8FgHJK9+fTw3pwD06n2phyAUape9x9o66OI/eaVTpsk++Os7bV9rdXu
+	 ejS7xJeebsiwT0EHZtkzZZMllp7ZxuU6Xz7hYZG7mqnoBQH0PIjlcFHZPgVjZ93kORagx
+	 20iy6C9n9o3XapSaImTU2p4/MQtOjF6FZsoBRQ5QUBjveGfQEFKIDBgoGpbVNQmSxkA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794644367;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794645014;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=C58R8Pgzd1hKqtVMoaWOgYvgQVTOllRn5nwLnk9mw7k=;
-	b=29/SNbGEyXQZXde5OKx7D7y3CYC99c66UrQBTv2R+36b0n2GkxCD2y2PhJWd34PrJ1IO
-	 Krc6Fa67XY29VzH53ddIvHsrXBjthRs0o6Kkbrzi+2fXlmD9U+LVW/bZA2qS2mvx9Y0Qx
-	 bidO5quWiW3DuXjJcVS6iFoFPYbFDJpjv5ybpMF1Y3FW/60t+64NL0JUJYTE5OKoXWZ2d
-	 O8ypw3tenmCaGWJ7gNayBsSvbsjX3mqmYXQT0I5mj+mmUKBAHII4Sul34cGtyFWIIIvGS
-	 QCUI/Txw7cAPR++ViOx2cO5QhGkeasGwjs1FJ2aOGS3aQJNuODlAqqhMaWWBWjybBPA==
+	 Date:Content-Type:MIME-Version:Content-Transfer-Encoding:From:To:Cc:
+	 Subject:Message-ID:MIME-Version:Content-Type:Content-Disposition;
+	bh=87OUlDLdiPl8LEjQWIrube4poxJsANmReia1ITL8LaE=;
+	b=mQ95Sfv38Dg68Ge7kR3uFOJzLpJCVUaawf35/I/pSKsopVtHnjtw1goigtJ/MfMEfkTG
+	 /Q2dskKbR1EWfLK3O5V3M9pREexzNp+/IK6g5gvNhRCTgSGdp5NJ1OgEA+u3NoYz/mXUJ
+	 2V4crLvpDpd9MsQPfx8JVoX9ZGiSWmiO4sf3DhRMhHyZWBmBr8S0qEf38pysnQ5fGhZWO
+	 0fTu//HWgKf69u3qxDgO5RbaB2zV+oGbLg8l7sKz82kHcgZbDWjFMTlWKFXBYT2UirllL
+	 OxD+1OlM70f4fxcYNkWpkER5qiWngurZRAD82cfZCvvCfEFx19h0kSUIIy8nTkGOASQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EXb5T5gB;
-	arc=none smtp.remote-ip=74.125.82.178
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=l1cNDI6m;
+	arc=none smtp.remote-ip=209.85.221.41
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3617606A33D
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:19:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F3617606A33D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9800D606A33E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 08:30:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9800D606A33E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EXb5T5gB
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-370f4e5cfc9so218706eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 00:19:26 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=l1cNDI6m
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-49412eb1474so820183f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 00:30:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794644366; x=1795249166; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=C58R8Pgzd1hKqtVMoaWOgYvgQVTOllRn5nwLnk9mw7k=;
-        b=EXb5T5gB5jjsfWt7HDzjvl+XqaWGVUS/bSslZmlUqzZyaggFpVpgJscso1Oqqn79Ps
-         bwz+OV1KpZiN6nFUhZsB9fe0drNScYB3Ct5lR1azIJsovPl/tLFRo7eSJUw0k1D+dPeK
-         FnhwIkm0vN6qd4U2BFLu8W0siU4GWLKsix7UIlUYf+J5GXKxhS5XfHXMjB+ETofnBIaX
-         0mdxDtqq5peMFIDeMqNKhOBgItgcX9aTXyOhieIkIK1IPWrUY0ySje0h2R+meEJIWWlq
-         pmwrtsBLanmQ3S1qFyARuhDlFcvWq9REY5mvfwWBQPt4YOkSqVh1s2dp8MZekKjezYg5
-         RjjQ==
+        d=gmail.com; s=20260707; t=1794645013; x=1795249813; darn=vger.kernel.org;
+        h=content-disposition:content-type:mime-version:message-id:subject:cc
+         :to:from:content-transfer-encoding:mime-version:content-type:date
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=87OUlDLdiPl8LEjQWIrube4poxJsANmReia1ITL8LaE=;
+        b=l1cNDI6maJQghXoN5Bi3lRgzuojcOPv/fbKoo6wB7B4ANNCwdsmC1uDJGvRWeh+8Or
+         RczhXvtEz7U2aEfXDHYHHb100veeL5CTuQgmKX1Ahgpy7/Iy+myvw5N8OG46JM7KQZq/
+         6yOBt95prApmoYTfLzMf0TpHbSdwEXR1SSUnEvVJBEUHvkhiezddLe0hYD48Q4w7a+a2
+         QlLp35R69SBgrBQd/m7x+VYQdUd3iEwhsiSN/8nMNuxExrvVmAJLutWH8lzjW16BN1YT
+         brJ3a0A2uD2PK5qVBbtyqFMYT0yheWw30f2Q9bto0taHAZoJ2qihB1W2jC+IeF9Kd15X
+         MtFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794644366; x=1795249166;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=C58R8Pgzd1hKqtVMoaWOgYvgQVTOllRn5nwLnk9mw7k=;
-        b=lpYegYnxkDoj/FRji5+G5lT2Q4crqnQilUGf2LRSEeIaMLqLWINEWH6sIJpTTDWm5a
-         u8ax7h5nNC5Zplmi3ID0ZFJdI57wQkCRAHFT+wN+ctEH5iw3sdOIt4ywjnnQMVCzVF6x
-         CPUiQfWVAs0geNzsIPutDt60Dvlb7JKhWaA3GYdYlzotgvQA7PSpH/IRVKo+rAHYac/6
-         8ENMBI9evu0BRXDEzOIa2GsoqyDaxJqgyyrIXwB0aTz5bchOQH2X7lC6eTdwnJEXG3ML
-         BRjv8XAeuLx9qrBKmZoI34vUZ+4XfaHty73yxxCnzdM5uTk5FNe/bQxObU7Je/+w1D4U
-         h/vg==
-X-Forwarded-Encrypted: i=1; AL+hErGGLA78keJ/mFSPRYxcPyRmKV4USLMxtSaLStITy2a9mES8Au90g6SYtVyXPUC4rPSq4fKk7p8F2LZ9dqDT@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Z3UYT08eSMTnkQ1cLHpOo/LABosSeyJ3mwzHkdntEu1TPNsXX
-	OgMZprhHLdA331nLmpQb08uU02yJVDSvmNpaOQfz4yi2A1v00vwtMZh0
-X-Gm-Gg: AYBFou0LTfZJu2+izP+oKHWdhjopbuwg6oAZSNT/p2pa+rNwtwt3p1LhlZK8ONbD3iZ
-	VEG2S39gKF49nyzwubn67PDujoVJ9P6/Kz4JQWDHLTxCIRW66VUk8vUUOZzpCaTCP9huJyjdsSp
-	2T2j+H887Fa1m0NetXGJuBQ5BdLt8EyXfbqywkIfzYbrKCQI2rU5gZwzwnnd2C9xlQ58K2kTLUy
-	OvdN8xwjc/jYILgvklF0fT3tRo5E0h+cPYvjsgo+QWLIxuOA4oKehSe51KjIWps2lg0CmuXmjDu
-	HiY2QHUYx6/GTklZbPvBAihKwWsWkpOjKYUYbJp7H3Z+cba6V6OCRyti06OGgoPKBQa1Y4kS/yh
-	Yoi7bjWcjIPV0XBp7TJLQ4taqRg5qZGTvxjSdW6JUGB3SyE/miBgsmK6QnyB5a9QAa38bxQFIhw
-	wPMpeKvBQJ0DA0hUdQI9pIgVM/e6xVeQPQdcPn1hiKXqvKmYc/HoqsLxuDUzIz3dA1vvhv/lFW3
-	YINu3M4XRvN3KaRRCChMEmWV4QlWaBNelGYfokrNd9oMPzyFvJN1efU7hjXygG9m4V9Ltj8hQwN
-	U10zhD/7fuizjJsgKmQGIcAVISO/xvH+qQTbDWwtayaYo7BlM/U05+Czfxv9PXnOO77lA24UEx8
-	QJ7OhZ1eNBkze03rZfVp6EuAY
-X-Received: by 2002:a05:693c:881a:20b0:36e:66d8:1424 with SMTP id 5a478bee46e88-3796047ff23mr7029007eec.0.1794644366120;
-        Sat, 14 Nov 2026 00:19:26 -0800 (PST)
-Received: from DESKTOP-CJ1L666.localdomain ([211.198.99.62])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795378d7e5sm14008333eec.3.2026.11.14.00.19.21
+        d=1e100.net; s=20260707; t=1794645013; x=1795249813;
+        h=content-disposition:content-type:mime-version:message-id:subject:cc
+         :to:from:content-transfer-encoding:mime-version:content-type:date
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=87OUlDLdiPl8LEjQWIrube4poxJsANmReia1ITL8LaE=;
+        b=AwFcHs4VTtxKpHQij4z7B9tlGQbqDS94SB/hr0Xfj0pozv9I9fjB68dhIts/ZNgye9
+         ym3p3p01Q3nM4dRsqNiB2LM//KqM4hurq8NiY7fOYm3v14U68HRdPyuIJUOgEf7aOKOL
+         29g7WBoCo0EfB4Q3MKxVZJYLAz0iqdprzotcjMIhpOmd3kUuEwRVL93faqHypW1I2+7+
+         MMQeF7gdbGwckexVmaNADaOPd/zfHAUZVn1MtAPd70+uX92Yiu4JJHOd5t4WDer6zWR5
+         YdXApbhLQu7xzjNqELehE+RmAOnxlSQx5QKy7nKoUgqn1n8KAVlw+aA7kEsQoXZ7XBLr
+         P4gg==
+X-Forwarded-Encrypted: i=1; AL+hErHlVU7htQBIlxjbAkv2iBuLfQsuMaZquTzIRnDO1eT7hNM1AVSUoD1vdgV/k2A+948go84allapdOrNTfH5@vger.kernel.org
+X-Gm-Message-State: APuU4Z8t7xPpXDITsbDbn0Oddi8akZnDU6qIfjSZeVNW7lEoBk+p+g9R
+	DMbcv5I/rh7GWF5DVJWeHwenLEwYzh3+nZAjaVdoy2k8/MTEZreTEOMl
+X-Gm-Gg: AYBFou09ETPNebXfQQ6gE0Lk9zBTj0zF5qNm8ra02S+hOlkYvFRe1Dc32iJoKeT81P2
+	CFxwY94gG7L7eFXvHTFID/UVuj8f02YlBTfwABjqQipWgPAh5WrtcgAjAEgOheS+Zpl35TlVJV9
+	RO0WgDNYYQApqeTRMSSYIY58i2zQpOgY6Fl1XQ7lZM3+jqgi8Blu1GT/Wmjt08yawJtad6NWd/j
+	LcdYxptNeu0rYTwl5BiNs7aTulqkb/h82gbskh1vy2NnkqSWFMTPxroKTlVsHCNX+K+nUCmDzIw
+	QpKXGVuPjX1KjzI1IEwcXI49VPBuzAcQ5VCemkKxwWbO6lZE8iujuqFOuF+32/rLlBD54jHb+Px
+	K9mjta2hXUppUiBkvyLgiKrS0H0zpHwjLzNIEBVtfMPdMcDWRSJK7DSf9ui3cw3VesDWNcZdVBv
+	f37BX5H6MM0GxOxPmZFMKyt9dqQMAAxVOLm0mkcBSptOXS0g4OemuTSTiDMBd4NdhgwFVx0HwO0
+	4pYj40cQTd6TH5EWkD+XVdOREYdz+ivPCc11Uq7eZ1lwkcd66pm
+X-Received: by 2002:a5d:64c3:0:b0:490:1358:2265 with SMTP id ffacd0b85a97d-49c72ab09fdmr11144513f8f.34.1794645012869;
+        Sat, 14 Nov 2026 00:30:12 -0800 (PST)
+Received: from [127.0.1.1] ([165.50.16.69])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c609c8a77sm9834201f8f.49.2026.11.14.00.30.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 00:19:25 -0800 (PST)
-From: Jiwoo Kim <arpe1618@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Antonino Maniscalco <antomani103@gmail.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH v2 3/3] drm/msm: Put the VM_BIND queue last in msm_vma_job_free()
-Date: Sat, 14 Nov 2026 17:19:02 +0900
-Message-ID: <20261114081902.1669-4-arpe1618@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261114081902.1669-1-arpe1618@gmail.com>
-References: <20261114081902.1669-1-arpe1618@gmail.com>
+        Sat, 14 Nov 2026 00:30:12 -0800 (PST)
+Date: Sat, 14 Nov 2026 00:30:12 -0800 (PST)
+Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -111,57 +89,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: base64
+From: Daniel Carter <yass27106@gmail.com>
+To: krzk@kernel.org, andersson@kernel.org, broonie@kernel.org,
+ srini@kernel.org, konradybcio@kernel.org
+Cc: robh@kernel.org, conor+dt@kernel.org, vkoul@kernel.org, tiwai@suse.com,
+ perex@perex.cz, lgirdwood@gmail.com, pierre-louis.bossart@linux.dev,
+ yung-chuan.liao@linux.intel.com, abelvesa@kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, yass27106@gmail.com
+Subject: [PATCH v4 0/3] arm64: dts: qcom: add device tree for Asus Vivobook 16
+ X1607QA
+Message-ID: <2dc9301fc1ec46cdb66dc49a85f721b1@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Disposition: inline
 
-msm_vma_job_free() puts the job's submitqueue and then wakes up
-vm->prealloc_throttle.wait. The job does not hold a reference to the
-VM of its own: the VM is kept alive by the context, which the queue
-holds a reference to. When the job holds the last reference to the
-queue, as it can once the file has been closed, for example when a
-cancelled job is freed, the put can drop the last reference to the VM,
-and the wakeup then uses a VM that msm_gem_vm_free() has released.
-
-Since commit 01c8d1f385f7 ("drm/msm: RCU-free the scheduler-containing
-ring and VM objects"), msm_gem_vm_free() frees the VM with kfree_rcu(),
-but msm_vma_job_free() is not in an RCU read-side critical section, so
-a grace period can still end before the wakeup, e.g. if the task is
-preempted in between. Before that commit, the VM was freed right away.
-
-Put the queue only after the last use of the VM.
-
-This was found with an AI coding assistant, which also drafted this
-patch and its changelog. It has not been reproduced, and the change
-has only been compile-tested.
-
-Fixes: b74fae5492d1 ("drm/msm: Add VM_BIND throttling")
-Cc: stable@vger.kernel.org
-Signed-off-by: Jiwoo Kim <arpe1618@gmail.com>
----
- drivers/gpu/drm/msm/msm_gem_vma.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_gem_vma.c b/drivers/gpu/drm/msm/msm_gem_vma.c
-index b1fa1d749c2f..1bffade78623 100644
---- a/drivers/gpu/drm/msm/msm_gem_vma.c
-+++ b/drivers/gpu/drm/msm/msm_gem_vma.c
-@@ -816,11 +816,16 @@ msm_vma_job_free(struct drm_sched_job *_job)
- 	job_foreach_bo (obj, job)
- 		drm_gem_object_put(obj);
- 
--	msm_submitqueue_put(job->queue);
- 	dma_fence_put(job->fence);
- 
- 	wake_up(&vm->prealloc_throttle.wait);
- 
-+	/*
-+	 * The queue may hold the last reference to the context, and so to the
-+	 * VM, so put it only once we are done with the VM.
-+	 */
-+	msm_submitqueue_put(job->queue);
-+
- 	kfree(job);
- }
- 
--- 
-2.43.0
-
+SGkgS3J6eXN6dG9mLCBoaSBhbGwsCgp2NCBvZiB0aGUgc2VyaWVzLCBub3cgc2VudCBhcyBhIGZy
+ZXNoIHRocmVhZCAodjMgd2FzIHNlbnQgYXMgcmVwbGllcwppbnNpZGUgdGhlIHYyIHRocmVhZCwg
+d2hpY2ggbWFkZSBpdCBlYXN5IHRvIG1pc3MgLSBhcG9sb2dpZXMgZm9yIHRoYXQsCmFuZCBmb3Ig
+djIgcmVhY2hpbmcgeW91IHdpdGggdGhlIGNvbW1pdCBkZXNjcmlwdGlvbnMgc3RyaXBwZWQgYnkg
+bXkKbWFpbCBzZXR1cDsgdGhlIGNvbW1pdHMgdGhlbXNlbHZlcyB3ZXJlIGFsd2F5cyBjb21wbGV0
+ZSkuCgpDaGFuZ2VzIHNpbmNlIHYzOgoKLSBEcm9wcGVkIHRoZSBMUEFTUyBtYWNybyAvIFNvdW5k
+V2lyZSBjbG9jay1yZXRyeSBwYXRjaCBmb2xsb3dpbmcKICBNYXJrIEJyb3duJ3MgcmV2aWV3LiBU
+aGUgZHJpdmVyIGNvcmUgYWxyZWFkeSByZXRyaWdnZXJzIGRlZmVycmVkCiAgcHJvYmUgd2hlbiBz
+dXBwbGllcnMgcmVnaXN0ZXIsIGFuZCBhIGJvdW5kZWQgcmV0cnkgbG9vcCBvcGVuLWNvZGVkCiAg
+aW4gZml2ZSBkcml2ZXJzIGlzIG5vdCB0aGUgcmlnaHQgZml4LgotIHNvdW5kd2lyZTogdGhlIGNs
+a19wcmVwYXJlX2VuYWJsZSgpIGNoZWNrIG5vdyByZXR1cm5zIElSUV9OT05FIGZyb20KICB0aGUg
+aW50ZXJydXB0IGhhbmRsZXIgKHRoZSBzdGF0dXMgaXMgbmVpdGhlciByZWFkIG5vciBjbGVhcmVk
+IG9uCiAgdGhhdCBwYXRoKSwgY2FycmllcyBGaXhlczogdGFncywgYW5kIHRoZSBydW50aW1lIHJl
+c3VtZSBlcnJvciBwYXRoCiAgcmV0dXJucyB0aGUgZXJyb3Igd2l0aG91dCB1bm1hc2tpbmcgdGhl
+IGxldmVsLWhpZ2ggd2FrZSBJUlEuCi0gYXJtNjQvZHRzOiBzdHlsZSBjbGVhbnVwcyAtIHN0YXR1
+cyBwcm9wZXJ0aWVzIHBsYWNlZCBsYXN0LAogIGFscGhhYmV0aWNhbCBvcmRlcmluZyBvZiBEQUkt
+bGluayBzdWJub2RlcywgY29udGludWF0aW9uIGxpbmVzCiAgYWxpZ25lZCB0byA4LWNvbHVtbiB0
+YWJzLCBjaGFzc2lzLXR5cGUgbm8gbG9uZ2VyIGR1cGxpY2F0ZWQgZnJvbQogIHRoZSBzaGFyZWQg
+ZHRzaS4KLSBUaGUgYmluZGluZ3MgcGF0Y2ggbm93IHVzZXMgdGhlICJkdC1iaW5kaW5nczogYXJt
+OiBxY29tOiIgc3ViamVjdAogIHByZWZpeC4KClNlcmllczoKWzEvM10gZHQtYmluZGluZ3M6IGFy
+bTogcWNvbTogZG9jdW1lbnQgQXN1cyBWaXZvYm9vayAxNiBYMTYwN1FBClsyLzNdIGFybTY0OiBk
+dHM6IHFjb206IGFkZCBkZXZpY2UgdHJlZSBmb3IgQXN1cyBWaXZvYm9vayAxNiBYMTYwN1FBClsz
+LzNdIHNvdW5kd2lyZTogcWNvbTogY2hlY2sgY2xrX3ByZXBhcmVfZW5hYmxlKCkgcmV0dXJuIHZh
+bHVlcwoKQmVzdCByZWdhcmRzLApEYW5pZWwgQ2FydGVyCg==
