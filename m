@@ -1,99 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794621971;
-	b=DCjAlPKaroAmEntzU/md1tWiNJ7S4KTcMto9UPoAgs1Q9nKksJigDvRwW04lbTi6PCFy
-	 BkGMH8VoIHx9opiy5wwk541JEyARZJ/prjz9UWfLJ9lsyzfH05R/nJ8Deu7qujQZF7OMF
-	 s//oaBjdF3TVI7Ek5Xbc1L3l2HuU9Kc1Rpbs0CDiiIo5W8WxbLXnN2Nw8cmwy3/sHaZEZ
-	 Up3BtXSiuqbceptT6G3x+YrGdYbN08sShSP7fwxO1MriqB+QLisdyFUqNhRaVJypuretH
-	 EdiQM9OXzI4mpAKvpak6NdgH9itySDZuLIJQMBSjWdDRtuLMdSsAquR5LFNvvbD3VPg==
+	t=1794625768;
+	b=Q+b8rPBEnBUiJQxExzTiYZ85u5Ccp8fqdrmpjwKuEWL98r1OiThej4iVJKmre6nF+noS
+	 UgHZo9vKyL5UvjMhQNDoV+rv9gs4yNYgZ/6paEQ9O4B1tYfec22vCHzd8NpsKKdW290Zu
+	 rnZWYM8RhijJRcOK6Ymrn6p0wH71ZrAjAkb9YJvlLSDhaU+4EYLlnAUtpAOR2wUdFg/yS
+	 30nW7SAUVrtx89J38XUjhZPj0i4qBZUlMBenGCiRNaHB+j1HUejr5ZLpMDwiTQfnLBQGQ
+	 o8iey0Ksc6zBUr8SUqFc6jnORW58MJ/yLGzqM7E2KE4dy6Q2KP30/ejzD0UHtN4oeQA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794621971;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=+AqJaPo1Vq76xc8sc0TpBwwjASCHawiOJ7TFM/JvB8s=;
-	b=g3WqLba9A868cMZm7BkxQEGQCEeBO189n46K7PzCJTJHlixhPNWuuM3M+If/1sR6KwzM
-	 aerdXpOBSNd5iNzSO2JnrBqQCD4eSo4Z2jbkRlnB1X9id/yOs3KnaUVbNm/XZ5nds64x0
-	 LvQQqeI4gb5Kusck0+HNws6p8UCf8gHEDgXVjMZDLJQotiTuEF00laOQJNqsUracB9rla
-	 4WOiPoB922LWoD1o+W279GdK+3giXBGysH5LLDjen/LwRl0NaBjVvIgKdob0VQBce9bt9
-	 PKICpVtNjiwUuvcaeW4mLvK4f4aGeqOnJjNHc1iCcRXlyT+CwNCe8b8lPk11hyC5B5A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794625768;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=sq435F/wJA+E0xSa4XwelO5DXysz3c6ASxv95R7h0Ok=;
+	b=uM+U6+XH3HOzlf1PGq5RlooXIvXBOBVc5rtce8oWluDn9oycX2dBmOxnYr9tcEINjnaQ
+	 PASUbK6yP/+xPhoLQM+WyqQTXq/Ixl6yYsDj521E9x6zzUh9UNdGDeqvX/ZQyowEjJbTK
+	 obEtSF3YCMi4cOABkqOxHT7qTKCdbeakErVDoIM66MxKYYfK19BHB/Dgy+5tPyD0yD+JC
+	 NY4DX1ibZxet+ohPVmoYmHlN8R1h4SMh2oLO9JbSCcgIWuX29TKBxCC7SLEhzA/L5WdvR
+	 AnfPrkiTM17zQk1tmPpKy1sih2wmFt4KKKXGnPqsZXmWQ2vAWXOggh87pssDs+3+Gcw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zD+NnX02;
-	arc=none smtp.remote-ip=209.85.167.177
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JNEI6wkj;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QEM7e7hW;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A22AA606A887
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 02:06:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A22AA606A887
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEA95606A32E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 03:09:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DEA95606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zD+NnX02
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-53a448f86e0so1906542b6e.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 18:06:10 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JNEI6wkj;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QEM7e7hW
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE2qCAA201221
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 03:09:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=sq435F/wJA+E0xSa4XwelO
+	5DXysz3c6ASxv95R7h0Ok=; b=JNEI6wkj3Uxk0NHEp8eV/ayvTGMTP4JXMTtVTS
+	J+3F0yoIbmadlefyxo3tHsfupk/hxy0yQA824nVwwO/EBsClkLbsE5tNgSVdJilg
+	jL5McbUKJWnOUgPAcjm5CgJU7KQoGACAhGRYtyPghyawAix37GdBT1tSdi94IrrZ
+	7yMEU+/e5PgxKQiSix9AkPNVdcF63bnllkvuKHNu/h/yO59yNHyaYs+h+xDicNTg
+	Qc+q8hnun4RpjnFg0Wi4vpPOPbOT/6nEUFRE2XeutPVN9WP0hYdwh670yiJQkXEI
+	G/B84YSJg56+s8Ea+naR1Gmha0owo8l61wib/AuyqucO6q+g==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxf7yr145-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 03:09:26 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-30c58d35c0aso266625eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 13 Nov 2026 19:09:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794621969; x=1795226769; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+AqJaPo1Vq76xc8sc0TpBwwjASCHawiOJ7TFM/JvB8s=;
-        b=zD+NnX02te7aW8UF9fEx0T7tmeG7nlBi+TfDNmysPuGZWqYcnr3iKpOrVV+1xGtJ/q
-         NG3BKkE1GpmTfk/AhtWx8dMW9D44qU40CF8HImjWiAQxT9E0pNSYzcww7jFnIbGt30Wl
-         41mc6w6Ns3RfyiqldzVX1jS357g4Zqn2a3AV1U3+yu8GIBEIjHc3ZgepX2g2weCz4CPi
-         63G12lHy0SvexswlLwg0dFniR/NGTew/rGdRcvdmj4uJUXqnwMUHTi09J172+hYSRRg9
-         407CUZguwoxG/ob0M8WXgex7tOggTr3hlD2FafFfM//VOOo+702I4yer1cYFlLMA3GqY
-         b0YA==
+        d=oss.qualcomm.com; s=google; t=1794625766; x=1795230566; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=sq435F/wJA+E0xSa4XwelO5DXysz3c6ASxv95R7h0Ok=;
+        b=QEM7e7hWD3GA9SgKYN99Ll4wK5B5Pn2bMhcCkEqYkEFXbIcEbzM2zCVRgAp0IMTU+z
+         Uk+z6YXGEE4iiVtY5dNXMID8wsakQeoQ3Tt9lzLLR1XaWO7oTI21vrXr1UayQ8gUUjeI
+         1xrLvH2KYwk0kTgQ9ipkhQI7aGz9HsEBxaSNaoPyDiBSwj49ObsBzcbq6KE96yaxQozC
+         ElS9r28r54sHwBeFOuxsRaDYM+i3DaxWpNQe616NMDa2APd9FuUev7pSxwO0d2ASekTc
+         SPleskxYRLFYeMXWpNCuDkv1f+A0VE2h+DQEI/vt6xVHHbGFl4wkWEFHNbb3YXukTJw0
+         6Z2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794621969; x=1795226769;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+AqJaPo1Vq76xc8sc0TpBwwjASCHawiOJ7TFM/JvB8s=;
-        b=r1Z3ng4UvtSBeVAw6DVrd+GeuV4jxk+VFpw6z8JyAzFd4e0tGPCOkyDBsLGi46JSY1
-         wM3Ipcfcmz1aCfThA+YA/01+sEKyhWbXWih9ENIfUJL14caApRTuU6tJV0uTdqtFsEFm
-         Lj6HytkptHVwzjrD94z7fhEhKN4sngXJm4uQN65e77jNcV/qqtIbsHnPm3M1WfW6gHla
-         cODWgloMY4kW9KEwVP8FB8to95UTlsUcZKv+T79N2FzODpC8p403mbSDcMnFj5x3lFXW
-         16ZInSUyjxr5XFMPBD+UVeHco+08chOxNE0urpicBRMBLX8tqStCpulphhN+T4slmFJ8
-         ohqg==
-X-Forwarded-Encrypted: i=1; AL+hErG4VuHQrozbUQadDhp+2u1VD1n3zOAJN++O2ulTDY0/73j/EK5LZrxMiL/17WKjYBG99yjyxKS4/tQDHjVe@vger.kernel.org
-X-Gm-Message-State: APuU4Z9k1SSrkeZC8Z++0gCwfg4xGFBMB9YShn3FiRpi6YL8+6QeyTEJ
-	faEPTC4tgh6o4oQQc8Y/QjSR16Zq2EvEKjYOhLdLVb6YSiWzvM2oCae17oqG5lDs
-X-Gm-Gg: AYBFou3QXAyzjL1R9AWozUHo8RIhBnC/GZ8rY/3BJTNnRehai4BdcdnRNL6XIknCLHZ
-	K3Sc3rFd46Yb9YBF5XqXE+aUClhWxSt9/rTcXXp9r6wx2ZzxV4D4yohI0lKMuFcUdh/v0U1TXPT
-	zOpGFmRS0Zx28fTDJNEnyO0GmPfDcmc7zMIvfaNkK3Cy1Kun4ekIKv8wR3jIK96dN2b4xpLm8nc
-	AH9vVilPp95EU0i62DHHFbVcRkJTuBFb1vcbxR5syWvU5y6dn8ItaTKYnhALlQPDNlavlV6yWl0
-	oQvbA3ZDXQS4X96n5RyVeUvjTEsxJ9kf7Z2ScMfi4JefL2pIfNMqp1m4X8cdCYqI0w9ZCWZOwPC
-	Oi7+Ppruo8E6jjwdm5TWhyJo9SB1HfCc1+RD1W2Dq7Hu9kSObGKlsf6mbF9LrdiOQ/MHwHtgDD7
-	jtdFgbjH/HL5u9jYgFdDmBGNjqE39cIzDwj4rl0gz+xtag1O5A2xeSefKur+9LVWUU1kau2f9En
-	W64BIXSqnNSakA/SthMW8zJRfDLJS3hpBJDJVzyt2HUL7sbZ7IyAMIoKZQVmZufKW8mKRM9w2vm
-	zd7otggQ1vapJiyEYKRuZmiEpqsR8SobhmrKEVtD9lYq8+zvF5XI2A==
-X-Received: by 2002:a05:6808:309d:b0:533:87ee:d131 with SMTP id 5614622812f47-56e64effd43mr4146215b6e.25.1794621969480;
-        Fri, 13 Nov 2026 18:06:09 -0800 (PST)
-Received: from jeffmr (63-152-14-173.cdrr.qwest.net. [63.152.14.173])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-56e6fc3f179sm3385433b6e.6.2026.11.13.18.06.08
+        d=1e100.net; s=20260707; t=1794625766; x=1795230566;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=sq435F/wJA+E0xSa4XwelO5DXysz3c6ASxv95R7h0Ok=;
+        b=aK7Yh2hs8RG/7TI1iaUL50FyHXvSe6LtDysDIRFQYwpYnwhqjiVkqJbufoDP413hvb
+         nL68pxDiXLd/wC1wvqZjrUgc1YRoh+i/rXw6DKVoCiyKv0s4UsXcmA6d2f9dhIclEvty
+         9l3gNU3JodE4kObjo54PLlQxJ2qkRVYLZVEGnTLaRMIca91eqPhKrjNt0ScXC6nvCq6P
+         SwPRt/2Vwzo+PbpZ6xPH6Pv9g66yyD4bmDn2yaWgkuL+VBLP2S59Sd4aDRS0Mq+mZhAd
+         fQaqPr7UQDvy3h8qNZkUUrTKpIj0TNl/DJl3OY1auAtvlbfrz9yhQThHvVX1+lY4deIA
+         cuug==
+X-Forwarded-Encrypted: i=1; AL+hErHZGDczIDgXdLkYUBh/Xal7o6HH3XZxpPG6XEB9vNV8JFViPQDbewtePYSajeBMFpK4jjr1qCpmzIhdEJwY@vger.kernel.org
+X-Gm-Message-State: APuU4Z/XL9MRNzxS2L9YbrbAox31Y2BtP6EnPP9fj6Wd+nmgLGr0ocAt
+	6shmjAvWSelVc7NR7aqHn7FCX+wVgeZo9DmVafaBoCRMd3/QqNkciOloKVieP2jRTVQcz6lG0Pj
+	1mJEe5gqKwF+TgWOO09/VHjm/uBCaDA6Ac+JiMHvDP0cSDefe9KdJ7UgzM4pnZmbvFnOl
+X-Gm-Gg: AYBFou1vQWkstickoIVROaR8OTrggaZHYhhB1ABuqBADjBLhLoDV+593LlfzZfluOcu
+	sdsnuLMwVbKIq8h4wrke708rH9/WrkGXYIQQD2JFaN/yV2HpXGJERkQPbuUULMvlbbfVZjbqQmT
+	zoNcBBExJqOnCzsv/PWx6dcl488FaBDRY9XN3J4ouBNEdWZYhPOmTN4ygjH2Oj7iYK7sDwQBKWF
+	VP0JFN27IZkTgXlmaqTMfbrxg/2mHtKWjlIkfhI7QvQvVObzfxCe5aKLi2MLV20FqdI2EaJ0ocZ
+	U+6neh6eI0tsVM2CdwqgjrdT0GdAi8YKIwpBUSbVZNaLQEy/YhScCTTncDYfKfFC5HKbizTJJH7
+	9PIN6ztXjvvSHV/9eSIPJ1QlHCwmDlWEDj850JaWqPG5Bo7nNk6kqwvWZlUmCMSlBGaME61fGO7
+	DuUucrUYwlDiD7NOil7nBtg3p4z5Lh19r9
+X-Received: by 2002:a05:7300:6da8:b0:36a:e7a:e89 with SMTP id 5a478bee46e88-379659c6815mr7729431eec.2.1794625765419;
+        Fri, 13 Nov 2026 19:09:25 -0800 (PST)
+X-Received: by 2002:a05:7300:6da8:b0:36a:e7a:e89 with SMTP id 5a478bee46e88-379659c6815mr7729361eec.2.1794625764809;
+        Fri, 13 Nov 2026 19:09:24 -0800 (PST)
+Received: from gu-dmadival-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955f02ff0sm11158803eec.16.2026.11.13.19.09.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Nov 2026 18:06:08 -0800 (PST)
-From: Jeff Roach <jeff.roach0@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v5 2/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
-Date: Fri, 13 Nov 2026 20:05:08 -0600
-Message-ID: <20261114020509.632311-3-jeff.roach0@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261114020509.632311-1-jeff.roach0@gmail.com>
-References: <20261114020509.632311-1-jeff.roach0@gmail.com>
+        Fri, 13 Nov 2026 19:09:24 -0800 (PST)
+From: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+Subject: [PATCH 0/3] media: iris: Add support for mahua platform
+Date: Fri, 13 Nov 2026 19:09:21 -0800
+Message-Id: <20261113-mahua_iris_enable-v1-0-b7107e1cbcaa@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,702 +115,222 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOHQ92oC/yWN7YrCMBBFX6Xk90YyafqRIovvISLTZKKBpl0zV
+ nYR331T/XPh3GHOfQqmHInFUD1FpkfkuMwF4KsS7orzhWT0hYVWugWAWia8rniOOfKZZhwnkj3
+ V5YgGlTGi/P1kCvH37TyePpzpthb1/VOKRMz4Vg/VfjMrC528TH9pzfIBIJUk5frRWTCd0YeFe
+ XdbcXJLSrsS39vMiExya+J9qJS3Xvkx6OC9C6HpG+tbXZNVDrvaGdUY3bUE4vR6/QNIQdsd9AA
+ AAA==
+X-Change-ID: 20261113-mahua_iris_enable-8e3026a4a044
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794625764; l=6751;
+ i=deepa.madivalara@oss.qualcomm.com; s=20250814; h=from:subject:message-id;
+ bh=UAOFohLlAkRJuqkvMW5XFSaAlnCozqr7GdnVJY9icxc=;
+ b=zkbeDYPgxbBkyW5xkZl8hgzC1THjGS/Ld89+GZfcCumOoTWUtOekkgRDbY6NZ7KWAmCANcJBy
+ McX3o/WwIwwDa8uvK8d/NcK/P+/J9hDfjYiMtqdh6LzIkYvo6eC/QNY
+X-Developer-Key: i=deepa.madivalara@oss.qualcomm.com; a=ed25519;
+ pk=MOEXgyokievn+bgpHdS6Ixh/KQYyS90z2mqIbQ822FQ=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDAxMiBTYWx0ZWRfXzPdh/YNp7JJS
+ RjXoaGUJkWmWvzKm/8yCcbT0JsCtEdj1G4X1/MsUIyvZGyQc7Q51I+qrNCjiFokSY3epwhk9/4N
+ QKZxrYqxRg/Qbdu5lP4j5wAa1ms5GmE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDAxMiBTYWx0ZWRfX/XoZYYHSEjVK
+ F+u/Yz/mP+kKrJnP/1Zg+AT8umDUjLkATu1lbQb8QPVxgNFgvjh0wo4bL5T5YtnWDpaAAzw9cDX
+ w4HMcz472cJSzZBsC4H/QOFWFjx0mR2NOW7vl67DpTUneQcJgaan6DyGax4rd+WustbBzRRntnf
+ hE4GZFnkjfuLq/985B9++S4fTfBxSTuM7CMNrcmeu6hgzICOREmCoQhKTyrFkze/+wrDDJbOiy/
+ 5Lhl8G+uDV4yWnnI+wdqUcRC+kvhrVLGV/1w3wHaAgNoRtK13GF8PZORwBC11FjmQDboN15O8Wt
+ 6Y43vdCeq8Gqeuzxa34WKp5OpQQ13cEEMXB6bBAFqZasYiPIVLOahwp+Nr3Ou8MX8HYi7FWMW1Z
+ oLbXkuaqvKpwphe9BByQoK1LIRFKQC10ylEcup/7PG6vnjvd2x9ocEfE2F+ODQn74y/qwOHhNW+
+ 9xyVwG6NdAM6G+zdUYA==
+X-Authority-Analysis: v=2.4 cv=HLVWhYtv c=1 sm=1 tr=0 ts=6af7d0e6 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=NmW7APauWtKYNL66ANAA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-GUID: ogNagFgzCVRBkaDW3qqmUSJyVGDHvi5U
+X-Proofpoint-ORIG-GUID: ogNagFgzCVRBkaDW3qqmUSJyVGDHvi5U
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-14_01,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0 suspectscore=0
+ priorityscore=1501 spamscore=0 clxscore=1011 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140012
 
-Add a device tree for the HP OmniBook X 16-cp1 laptop, based on the
-Qualcomm Mahua (Snapdragon X2 Elite, 12 cores) SoC.
+Mahua is a derivative of glymur video accelerator with single core.
+As Mahua is inherited from glymur, this series introduces necessary dtsi overides
+to enable only single core. Mahua platform data is added in iris driver to enable 
+qcom,mahua-iris.
 
-Supported and tested:
-- Keyboard, touchpad and touchscreen over I2C HID
-- Lid switch
-- NVMe SSD (PCIe 5)
-- Qualcomm QCC2072 Wi-Fi (PCIe 4, M.2 key E slot)
-- Two USB-C ports with orientation switching, USB PD and battery
-  reporting through pmic-glink
-- USB-A port (usb_2)
-- Webcam on the internal USB 2.0 host
-- eDP OLED panel with DP AUX backlight
-- DisplayPort alt mode on both USB-C ports
-- ADSP and CDSP remoteprocs
-- Two speakers (WSA8845) and two digital microphones
+Compliance test for iris_driver device /dev/video16:
 
-This device tree was written with the help of an AI coding assistant
-(Claude), starting from glymur-hp-elitebook-x-g2q.dts and the laptop's
-ACPI tables. I reviewed it and tested every feature listed above on the
-laptop.
+Driver Info:
+        Driver name      : iris_driver
+        Card type        : Iris Decoder
+        Bus info         : plat:aa00000.video-codec:dec
+        Driver version   : 7.3.0
+        Capabilities     : 0x84204000
+                Video Memory-to-Memory Multiplanar
+                Streaming
+                Extended Pix Format
+                Device Capabilities
+        Device Caps      : 0x04204000
+                Video Memory-to-Memory Multiplanar
+                Streaming
+                Extended Pix Format
+        Detected Stateful Decoder
 
-Signed-off-by: Jeff Roach <jeff.roach0@gmail.com>
+Required ioctls:
+        test VIDIOC_QUERYCAP: OK
+        test invalid ioctls: OK
+
+Allow for multiple opens:
+        test second /dev/video16 open: OK
+        test VIDIOC_QUERYCAP: OK
+        test VIDIOC_G/S_PRIORITY: OK
+        test for unlimited opens: OK
+
+Debug ioctls:
+        test VIDIOC_DBG_G/S_REGISTER: OK (Not Supported)
+        test VIDIOC_LOG_STATUS: OK (Not Supported)
+
+Input ioctls:
+        test VIDIOC_G/S_TUNER/ENUM_FREQ_BANDS: OK (Not Supported)
+        test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+        test VIDIOC_S_HW_FREQ_SEEK: OK (Not Supported)
+        test VIDIOC_ENUMAUDIO: OK (Not Supported)
+        test VIDIOC_G/S/ENUMINPUT: OK (Not Supported)
+        test VIDIOC_G/S_AUDIO: OK (Not Supported)
+        Inputs: 0 Audio Inputs: 0 Tuners: 0
+
+Output ioctls:
+        test VIDIOC_G/S_MODULATOR: OK (Not Supported)
+        test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+        test VIDIOC_ENUMAUDOUT: OK (Not Supported)
+        test VIDIOC_G/S/ENUMOUTPUT: OK (Not Supported)
+        Outputs: 0 Audio Outputs: 0 Modulators: 0
+
+Input/Output configuration ioctls:
+        test VIDIOC_ENUM/G/S/QUERY_STD: OK (Not Supported)
+        test VIDIOC_ENUM/G/S/QUERY_DV_TIMINGS: OK (Not Supported)
+        test VIDIOC_DV_TIMINGS_CAP: OK (Not Supported)
+        test VIDIOC_G/S_EDID: OK (Not Supported)
+
+Control ioctls:
+        test VIDIOC_QUERY_EXT_CTRL/QUERYMENU: OK
+        test VIDIOC_QUERYCTRL: OK
+        test VIDIOC_G/S_CTRL: OK
+        test VIDIOC_G/S/TRY_EXT_CTRLS: OK
+        test VIDIOC_(UN)SUBSCRIBE_EVENT/DQEVENT: OK
+        test VIDIOC_G/S_JPEGCOMP: OK (Not Supported)
+        Standard Controls: 12 Private Controls: 0
+
+Format ioctls:
+        test VIDIOC_ENUM_FMT/FRAMESIZES/FRAMEINTERVALS: OK
+        test VIDIOC_G/S_PARM: OK (Not Supported)
+        test VIDIOC_G_FBUF: OK (Not Supported)
+        test VIDIOC_G_FMT: OK
+        test VIDIOC_TRY_FMT: OK
+        test VIDIOC_S_FMT: OK
+        test VIDIOC_G_SLICED_VBI_CAP: OK (Not Supported)
+        test Cropping: OK
+        test Composing: OK
+        test Scaling: OK (Not Supported)
+
+Codec ioctls:
+        test VIDIOC_(TRY_)ENCODER_CMD: OK (Not Supported)
+        test VIDIOC_G_ENC_INDEX: OK (Not Supported)
+        test VIDIOC_(TRY_)DECODER_CMD: OK
+
+Buffer ioctls:
+        test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: OK
+        test CREATE_BUFS maximum buffers: OK
+        test VIDIOC_REMOVE_BUFS: OK
+        test VIDIOC_EXPBUF: OK
+        test Requests: OK (Not Supported)
+        test blocking wait: OK
+
+Test input 0:
+
+Streaming ioctls:
+        test read/write: OK (Not Supported)
+        Video Capture Multiplanar: Captured 465 buffers
+        test MMAP (select, REQBUFS): OK
+        Video Capture Multiplanar: Captured 465 buffers
+        test MMAP (epoll, REQBUFS): OK
+the input file is smaller than 7077888 bytes
+        Video Capture Multiplanar: Captured 465 buffers
+        test MMAP (select, CREATE_BUFS): OK
+the input file is smaller than 7077888 bytes
+        Video Capture Multiplanar: Captured 465 buffers
+        test MMAP (epoll, CREATE_BUFS): OK
+        test USERPTR (select): OK (Not Supported)
+                warn: ../utils/v4l2-compliance/v4l2-test-buffers.cpp(2223): Cannot test DMABUF, specify --expbuf-device
+        test DMABUF (select): OK (Not Supported)
+
+Total for iris_driver device /dev/video16: 55, Succeeded: 55, Failed: 0, Warnings: 1
+
+Fluster test report:
+
+77/135 while testing JVT-AVC_V1 with GStreamer-H.264-V4L2-Gst1.0.JVT-AVC_V1
+141/147 tests passed while testing JCT-VC-HEVC_V1 with GStreamer-H.265-V4L2-Gst1.0
+234/305 testcases passed while testing VP9-TEST-VECTORS with GStreamer-VP9-V4L2-Gst1.0
+200/242 tests passed while tesing AV1-TEST-VECTORS -d GStreamer-AV1-V4L2-Gst1.0
+
+Dependencies: 
+https://lore.kernel.org/linux-media/20260917-glymur-v11-0-e0c8bc914742@oss.qualcomm.com/
+Changes were made locally to test as the series is dependent on Glymur series
+Patch is created with base-commit: 0d9d0dbf2fddcff5859d623e90ca73c4054276e1 
+to avoid conflicts.
+
+Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../boot/dts/qcom/mahua-hp-omnibook-x16.dts   | 647 ++++++++++++++++++
- 2 files changed, 648 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
+Deepa Guthyappa Madivalara (3):
+      dt-bindings: media: qcom,mahua-iris: Add Mahua video codec
+      arm64: dts: qcom: mahua: add iris video codec node
+      media: iris: add mahua platform data and enable qcom,mahua-iris
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 8329c06b60..e84836e5c5 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -74,6 +74,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-el2.dtb
- lemans-evk-ifp-mezzanine-dtbs	:= lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-ifp-mezzanine.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= mahua-hp-omnibook-x16.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-lenovo-thinkpad-t14s-gen7-lcd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-qcb.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= milos-fairphone-fp6.dtb
-diff --git a/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts b/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
-new file mode 100644
-index 0000000000..fd0ee66473
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/mahua-hp-omnibook-x16.dts
-@@ -0,0 +1,647 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * Copyright (c) 2026 Jeff Roach <jeff.roach0@gmail.com>
-+ */
-+/dts-v1/;
-+
-+#include "mahua.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/gpio-keys.h>
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
-+
-+/ {
-+	model = "HP OmniBook X 16-cp1";
-+	compatible = "hp,omnibook-x16-cp1", "qcom,mahua";
-+	chassis-type = "laptop";
-+
-+	aliases {
-+		i2c0 = &i2c0;
-+		i2c4 = &i2c4;
-+		i2c8 = &i2c8;
-+		serial0 = &uart21;
-+		serial1 = &uart14;
-+	};
-+
-+	clocks {
-+		xo_board: xo-board {
-+			compatible = "fixed-clock";
-+			clock-frequency = <38400000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		sleep_clk: sleep-clk {
-+			compatible = "fixed-clock";
-+			clock-frequency = <32000>;
-+			#clock-cells = <0>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&lid_default>;
-+		pinctrl-names = "default";
-+
-+		switch-lid {
-+			label = "lid";
-+			gpios = <&tlmm 92 GPIO_ACTIVE_LOW>;
-+			linux,input-type = <EV_SW>;
-+			linux,code = <SW_LID>;
-+			wakeup-source;
-+			wakeup-event-action = <EV_ACT_DEASSERTED>;
-+		};
-+	};
-+
-+	pmic-glink {
-+		compatible = "qcom,glymur-pmic-glink",
-+			     "qcom,pmic-glink";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		/* Left rear USB-C port */
-+		connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			power-role = "dual";
-+			data-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					pmic_glink_hs_in: endpoint {
-+						remote-endpoint = <&usb_0_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					pmic_glink_ss_in: endpoint {
-+						remote-endpoint = <&usb_0_qmpphy_out>;
-+					};
-+				};
-+			};
-+		};
-+
-+		/* Left front USB-C port */
-+		connector@1 {
-+			compatible = "usb-c-connector";
-+			reg = <1>;
-+			power-role = "dual";
-+			data-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					pmic_glink_hs_in1: endpoint {
-+						remote-endpoint = <&usb_1_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					pmic_glink_ss_in1: endpoint {
-+						remote-endpoint = <&usb_1_qmpphy_out>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	sound {
-+		compatible = "qcom,glymur-sndcard";
-+		model = "HP-OmniBook-X16";
-+
-+		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
-+				"SpkrRight IN", "WSA WSA_SPK2 OUT",
-+				"VA DMIC0", "vdd-micb",
-+				"VA DMIC1", "vdd-micb";
-+
-+		va-dai-link {
-+			link-name = "VA Capture";
-+
-+			codec {
-+				sound-dai = <&lpass_vamacro 0>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+
-+		wsa-dai-link {
-+			link-name = "WSA Playback";
-+
-+			codec {
-+				sound-dai = <&left_spkr>, <&right_spkr>,
-+					    <&swr0 0>, <&lpass_wsamacro 0>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+	};
-+
-+	vreg_edp_3p3: regulator-edp-3p3 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VREG_EDP_3P3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&edp_reg_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-boot-on;
-+	};
-+
-+	vreg_wcn_3p3: regulator-wcn-3p3 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VREG_WCN_3P3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 94 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&wcn_sw_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-boot-on;
-+	};
-+
-+	/* Qualcomm QCC2072 Wi-Fi/Bluetooth module in an M.2 key E slot */
-+	wlan-connector {
-+		compatible = "pcie-m2-e-connector";
-+		vpcie3v3-supply = <&vreg_wcn_3p3>;
-+		vpcie1v8-supply = <&vreg_l15b0>;
-+
-+		w-disable1-gpios = <&tlmm 117 GPIO_ACTIVE_LOW>;
-+		w-disable2-gpios = <&tlmm 116 GPIO_ACTIVE_LOW>;
-+
-+		pinctrl-0 = <&wcn_wlan_bt_en>;
-+		pinctrl-names = "default";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_pcie_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&pcie4_port0_ep>;
-+				};
-+			};
-+
-+			port@3 {
-+				reg = <3>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_uart_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&uart14_ep>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&i2c0 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	keyboard@3a {
-+		compatible = "hid-over-i2c";
-+		reg = <0x3a>;
-+
-+		hid-descr-addr = <0x1>;
-+		interrupts-extended = <&tlmm 67 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&kybd_default>;
-+		pinctrl-names = "default";
-+
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c4 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	touchpad@15 {
-+		compatible = "hid-over-i2c";
-+		reg = <0x15>;
-+
-+		hid-descr-addr = <0x1>;
-+		interrupts-extended = <&tlmm 3 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&tpad_default>;
-+		pinctrl-names = "default";
-+
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c8 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	touchscreen@10 {
-+		compatible = "hid-over-i2c";
-+		reg = <0x10>;
-+
-+		hid-descr-addr = <0x1>;
-+		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
-+
-+		post-power-on-delay-ms = <200>;
-+
-+		pinctrl-0 = <&ts0_default>;
-+		pinctrl-names = "default";
-+	};
-+};
-+
-+&lpass_vamacro {
-+	pinctrl-0 = <&dmic01_default>;
-+	pinctrl-names = "default";
-+
-+	qcom,dmic-sample-rate = <4800000>;
-+};
-+
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_dp0 {
-+	status = "okay";
-+};
-+
-+&mdss_dp0_out {
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+};
-+
-+&mdss_dp1 {
-+	status = "okay";
-+};
-+
-+&mdss_dp1_out {
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+};
-+
-+&mdss_dp3 {
-+	/delete-property/ #sound-dai-cells;
-+
-+	status = "okay";
-+
-+	aux-bus {
-+		panel {
-+			compatible = "samsung,atna33xc20";
-+			enable-gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
-+			power-supply = <&vreg_edp_3p3>;
-+
-+			pinctrl-0 = <&edp_bl_en>;
-+			pinctrl-names = "default";
-+
-+			port {
-+				edp_panel_in: endpoint {
-+					remote-endpoint = <&mdss_dp3_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dp3_out {
-+	data-lanes = <0 1 2 3>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+
-+	remote-endpoint = <&edp_panel_in>;
-+};
-+
-+&mdss_dp3_phy {
-+	status = "okay";
-+};
-+
-+&pcie4 {
-+	pinctrl-0 = <&pcie4_default>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+&pcie4_phy {
-+	status = "okay";
-+};
-+
-+&pcie4_port0 {
-+	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
-+
-+	port {
-+		pcie4_port0_ep: endpoint {
-+			remote-endpoint = <&m2_e_pcie_ep>;
-+		};
-+	};
-+};
-+
-+&pcie5 {
-+	pinctrl-0 = <&pcie5_default>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+&pcie5_phy {
-+	status = "okay";
-+};
-+
-+&pcie5_port0 {
-+	reset-gpios = <&tlmm 152 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
-+
-+	status = "okay";
-+};
-+
-+&pmk8850_rtc {
-+	qcom,no-alarm;
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/glymur/hp/omnibook-x16/qcadsp8480.mbn",
-+			"qcom/glymur/hp/omnibook-x16/adsp_dtbs.elf";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/glymur/hp/omnibook-x16/qccdsp8480.mbn",
-+			"qcom/glymur/hp/omnibook-x16/cdsp_dtbs.elf";
-+
-+	status = "okay";
-+};
-+
-+&swr0 {
-+	status = "okay";
-+
-+	/* WSA8845, left speaker */
-+	left_spkr: speaker@0,0 {
-+		compatible = "sdw20217020400";
-+		reg = <0 0>;
-+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
-+		#sound-dai-cells = <0>;
-+		sound-name-prefix = "SpkrLeft";
-+		vdd-1p8-supply = <&vreg_l15b0>;
-+		vdd-io-supply = <&vreg_l18b0>;
-+		qcom,port-mapping = <1 2 3 7 12 14>;
-+	};
-+
-+	/* WSA8845, right speaker */
-+	right_spkr: speaker@0,1 {
-+		compatible = "sdw20217020400";
-+		reg = <0 1>;
-+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
-+		#sound-dai-cells = <0>;
-+		sound-name-prefix = "SpkrRight";
-+		vdd-1p8-supply = <&vreg_l15b0>;
-+		vdd-io-supply = <&vreg_l18b0>;
-+		qcom,port-mapping = <4 5 6 7 13 15>;
-+	};
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <4 4>, /* EC TZ Secure I3C */
-+			       <10 2>, /* OOB UART */
-+			       <44 4>, /* Security SPI (TPM) */
-+			       <65 1>; /* EC reset */
-+
-+	tpad_default: tpad-default-state {
-+		pins = "gpio3";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	edp_bl_en: edp-bl-en-state {
-+		pins = "gpio18";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	ts0_default: ts0-default-state {
-+		pins = "gpio51";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	kybd_default: kybd-default-state {
-+		pins = "gpio67";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	edp_reg_en: edp-reg-en-state {
-+		pins = "gpio70";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	lid_default: lid-default-state {
-+		pins = "gpio92";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	wcn_sw_en: wcn-sw-en-state {
-+		pins = "gpio94";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	wcn_wlan_bt_en: wcn-wlan-bt-en-state {
-+		pins = "gpio116", "gpio117";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	pcie4_default: pcie4-default-state {
-+		clkreq-n-pins {
-+			pins = "gpio147";
-+			function = "pcie4_clk_req_n";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+
-+		perst-n-pins {
-+			pins = "gpio146";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+
-+		wake-n-pins {
-+			pins = "gpio148";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+	};
-+
-+	pcie5_default: pcie5-default-state {
-+		clkreq-n-pins {
-+			pins = "gpio153";
-+			function = "pcie5_clk_req_n";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+
-+		perst-n-pins {
-+			pins = "gpio152";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+
-+		wake-n-pins {
-+			pins = "gpio154";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+	};
-+};
-+
-+&uart14 {
-+	status = "okay";
-+
-+	port {
-+		uart14_ep: endpoint {
-+			remote-endpoint = <&m2_e_uart_ep>;
-+		};
-+	};
-+};
-+
-+&usb_0 {
-+	status = "okay";
-+};
-+
-+&usb_0_dwc3_hs {
-+	remote-endpoint = <&pmic_glink_hs_in>;
-+};
-+
-+&usb_0_hsphy {
-+	phys = <&smb2370_j_e2_eusb2_repeater>;
-+
-+	status = "okay";
-+};
-+
-+&usb_0_qmpphy {
-+	status = "okay";
-+};
-+
-+&usb_0_qmpphy_out {
-+	remote-endpoint = <&pmic_glink_ss_in>;
-+};
-+
-+&usb_1 {
-+	status = "okay";
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&pmic_glink_hs_in1>;
-+};
-+
-+&usb_1_hsphy {
-+	phys = <&smb2370_k_e2_eusb2_repeater>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_qmpphy {
-+	status = "okay";
-+};
-+
-+&usb_1_qmpphy_out {
-+	remote-endpoint = <&pmic_glink_ss_in1>;
-+};
-+
-+/* USB-A port on the right side */
-+&usb_2 {
-+	dr_mode = "host";
-+
-+	/delete-property/ usb-role-switch;
-+
-+	status = "okay";
-+};
-+
-+&usb_2_hsphy {
-+	status = "okay";
-+};
-+
-+&usb_2_qmpphy {
-+	/delete-property/ mode-switch;
-+	/delete-property/ orientation-switch;
-+
-+	status = "okay";
-+
-+	ports {
-+		port@0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			/delete-node/ endpoint;
-+
-+			usb_2_qmpphy_out_usb: endpoint@1 {
-+				reg = <1>;
-+
-+				data-lanes = <1 0>;
-+			};
-+		};
-+	};
-+};
-+
-+/* Internal USB 2.0 host for the webcam */
-+&usb_hs {
-+	dr_mode = "host";
-+
-+	status = "okay";
-+};
-+
-+&usb_hs_phy {
-+	status = "okay";
-+};
+ .../devicetree/bindings/media/qcom,mahua-iris.yaml | 243 +++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/mahua.dtsi                |  66 ++++++
+ drivers/media/platform/qcom/iris/Makefile          |   1 +
+ .../platform/qcom/iris/iris_platform_common.h      |   1 +
+ .../media/platform/qcom/iris/iris_platform_mahua.c |  44 ++++
+ .../media/platform/qcom/iris/iris_platform_mahua.h |  14 ++
+ .../media/platform/qcom/iris/iris_platform_vpu3x.c |  34 +++
+ drivers/media/platform/qcom/iris/iris_probe.c      |   4 +
+ drivers/media/platform/qcom/iris/iris_vpu3x.c      |  10 +
+ 9 files changed, 417 insertions(+)
+---
+base-commit: 0d9d0dbf2fddcff5859d623e90ca73c4054276e1
+change-id: 20261113-mahua_iris_enable-8e3026a4a044
+prerequisite-message-id: <20260917-glymur-v11-0-e0c8bc914742@oss.qualcomm.com>
+prerequisite-patch-id: c790c17f7113da72001a1b83fa0dc0fb82e22760
+prerequisite-patch-id: 5a2f89fdc7312d46f01aeb1507c3d179203c1357
+prerequisite-patch-id: 1e1b6daab984b81b7ad83108fb532ea25345638d
+prerequisite-patch-id: dc22e163717edf23b847a79af253c6b85bec58dc
+prerequisite-patch-id: 2cc01cddaccf18ead1c1e2506f0182193afc1dcf
+prerequisite-patch-id: a1e82173cdbb9c315bb6cce35108a7a4057cb235
+prerequisite-patch-id: 4ed1c23d97cb438c917ab31f4193c58e3deeecda
+prerequisite-patch-id: facfccd32a2f70f2bae3357106a3fe493b4c8c32
+prerequisite-patch-id: 59bcb5096aef6258f4732dc8f8789c3e846e16c0
+
+Best regards,
 -- 
-2.55.0
+Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
 
