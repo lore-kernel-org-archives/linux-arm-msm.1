@@ -1,47 +1,115 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.168.172.158
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794678990;
-	b=JhU8MgwcHncC1j1qOdTrqL2F7rd3A2xSsN9wsCFg0ZwDZr+1RJCLr22qJs3f77HOG6jR
-	 gc/Ka4BtsgEa8lxnHYGg014/aE8zvTuOcBiwdbqHQUm4NKDj+iYsH6ytiEfkiMOKg9w9r
-	 qDGDTkm3GFuVDlIhCdQHWwN8JYuRbxsceIjNXDZISj7bkYgJLwnBWLXyRwKhit4IG/Acz
-	 gwUpx0YPnFxL3hHVtiM3cYfGCO1tA4P3o+adKMX3aPSFDmCcgXnbD22pvv9+OJLD0j+j6
-	 GYKwmLNYlhX2LXy5hEMODbVLw/01m9TF1Tdw5QPw4PcbZbjFSZCORvxfXda/MaRSVQg==
+	t=1794679080;
+	b=HRm4h62AD0j6jvqxd0QQXiRLcMfU90aWAwfOt0/qkwD61iBmtAV08DRGokaIunaRV/nX
+	 STCgrttNaysGMqR7Yt/Plk1rNyOrGT5xdPRsZy6GF9pxDKwr9MxF1ePzv66w3fLAtx53i
+	 1rRQezO4Yjl1vXHfASCZzpJr0c+nvepYdVD6ED9Fzm7xgkPPBP4/876v8w8cHoIuHwgZ+
+	 X2SJKcEF1Y1EHt1GN4cKmkaZ4rDDJv8y0fuHgh+kdl87gGBl92kupLvQFK7buIiqysebS
+	 u8QA6+BLbGyaBHHCvtcdNqcdP8dm2SIMZPmfzJVu83VNwRFIxirfUx6LgawRoHmAOpg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794678990;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=8nnbYITGa8aaldnPt7EKexDXGqEX6dsyutbdrhCQQ4w=;
-	b=dY6VxHyKD5TMNUlC0qVWTTj4GtPwlxdqYy8M47z8yQ6uuhdWTf54LJpOif4yBcmSRSSS
-	 mOpq7huWQLrcaFhRj1DKB6wegYux54lpzMGJJ7DswLER1RK6+Vm0Lup2Lq3uEBXzJZHR6
-	 9VeK521Ipg3WwOYemL0T6BM9nGqIVbqjr3bukgaKU6gNHnvKUU+AuRaC7NewoNoT8HQye
-	 zPev8Ti+ZFOycz0un+K8yZafGGJTWM7eG1MZScW1sBbPIWkbDkpHK7J7dy3yH1FhHb5eQ
-	 nUndSU2o0SBPJrhiCpF003zpqdoCs9uOlD2NjG0rdasf8SQyXs4rANTU45nZMHwUKew==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794679080;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:DKIM-Signature:
+	 X-DKIM2-Info:DKIM2-Signature:X-DKIM2-Info:Message-Instance:
+	 X-ME-Sender:X-ME-Received:X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=CI3BCrrM6S0a2tk2nkE8USBufOr5oglVDVMGzlb/u8Y=;
+	b=no5h6A3EQ1N9YUInTkQgxZWR81gMlm4VNcc8JhOw13tz626wyDWJkhUwqbkn7TkI1NKo
+	 O7+kcrDhOO6Q24mi9LR6cVtr4DqnyySWLOMCKNS/HJg4vF/VUxNb6LtbnQY5AueXDEmJh
+	 a3hM6jd6S5ryXDhsFqj+7JejkVrwKaO3H9xkUlsDtoH4XRC75qVciwhb6QUaY1ZSNHoPK
+	 OoAUCuekNn11mJ0c+/xsrkma6qNwESuU21Wg6wp5dvPQ8t6DM3bTOgGlRu4KeUW8joXIN
+	 JKqjX94l8u6TydzklzPgWpsPuoqicl4O4DfhA1oWcOviIQ/qVmWbB/TBv9PG1ulVobw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gFA9zAEJ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=none header.from=jaseg.de;
+	spf=pass smtp.mailfrom=jaseg.de;
+	dkim=pass header.d=jaseg.de header.i=@jaseg.de header.a=rsa-sha256 header.s=fm3 header.b=vfgK+1SH;
+	dkim=pass header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=H7H2Yym+;
+	arc=none smtp.remote-ip=103.168.172.158
+Received: from fhigh-a7-smtp.messagingengine.com (fhigh-a7-smtp.messagingengine.com [103.168.172.158])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BBBF606A336;
-	Sat, 14 Nov 2026 17:56:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBF2A606A337
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 17:57:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EBF2A606A337
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jaseg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jaseg.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gFA9zAEJ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FF0C1F000C4;
-	Sat, 14 Nov 2026 17:56:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794678989;
-	bh=8nnbYITGa8aaldnPt7EKexDXGqEX6dsyutbdrhCQQ4w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=gFA9zAEJgCZmf0CyRj7rPpRFSgas20aDgQhOLU9TSOT4/kE1DU9f9nccmgMxQOP17
-	 ZfhwcZvY7RKEsnvzqGfaHf4KvniaGCM6zP9f11XonxXjyYWUo/1Bjya3pqsAwCGxx8
-	 eETpoSakvkYu03xiANQnwkZpiezxwWel92eycLjWZpkrN5rjVbOCYdpDOX26WrOQ7r
-	 /173HFg48JUJtIxlMc0lg9wqayDwuDGhCq72oiBddAmxLTi4y8LarVezWXIA0qXs9b
-	 zLysu3QdlGVnwppFjMJBz/aD2HLqUSMQNNXxA4zq1mUo74KikcqZJOKsmCcOyCIDYJ
-	 KapyOuZ1LWCPA==
-Message-ID: <243ffea6-2d4e-40d0-b864-e1b8c0bc6440@kernel.org>
-Date: Sat, 14 Nov 2026 18:56:23 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=jaseg.de header.i=@jaseg.de header.a=rsa-sha256 header.s=fm3 header.b=vfgK+1SH;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=H7H2Yym+
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id B780B1400040
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 12:57:57 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-04.internal (MEProxy); Sat, 14 Nov 2026 12:57:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jaseg.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1794679077;
+	 x=1794765477; bh=CI3BCrrM6S0a2tk2nkE8USBufOr5oglVDVMGzlb/u8Y=; b=
+	vfgK+1SHr9oiV/4fkfj4w5rPn5LPF0RzZaCYEKTaRdFA+ASeCIWTT2xFGxKoj+8j
+	MR47G8foJ0qc8f5KfdAIeWf7wAAqdjDkrLFHfPW2ygSIp2kfj8D3U3z8mgGFpUOG
+	FvdDLYURXhAHTkGRZboY4gTLzffF3DlJTk9jNXJQe93+Ja+ayHOIOhEeXFZDmPfm
+	HZgRS/99rP22FKMdNpv5jCiK5kj7iNwC6ofJmK+it/kxojXlhaU+AWyWHSwGWol8
+	PBOyUUkK6WNyxBMQjIoHEOuCou+jUMutryNMCEr7KphI5mm7JYrCeS3hN3VFNEAV
+	SeRIZdfqYz9G5g2yvaHYQA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1794679077; x=
+	1794765477; bh=CI3BCrrM6S0a2tk2nkE8USBufOr5oglVDVMGzlb/u8Y=; b=H
+	7H2Yym+xKk/bZedSTt+LxKY4x4H7agPWlt+FeKxnGBd8rIYNkHJKDMcvF3ZMCiHH
+	1jWor4fgrGyO5vqFtOQRAUKg3S+wa84bzr16wqbixTLqbZ5E74oAJc/imu+1JsEb
+	plpsJ0W2nOXmsPz9UV9zcSZ077cKSgIuPZZV6BcXWbRpRW+P8uRJH9Ie1jQ5XkvU
+	b/D6J+umSaK518NMBwj3daRV7sv5B+INBBLK2Z6LATkwFnPseTR4KUXUwMMyH640
+	gvumqO3ocbvEs9U7DdT/H5Lmv/UFDIgtAOLcaOe4+BGlexn1zEF67kZFHhbMTqlR
+	Aywvw+LB3eQgS2z/jxIWg==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=jaseg.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1794679077; d=jaseg.de;
+	mf=PGxpbnV4QGphc2VnLmRlPg==;
+	rt=PGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnPg==;
+	s=fm3:rsa-sha256:KrMkXv4Hi4qetXyuKgGBI0VGDrG0YbqvPI4Y3cw5FtuoiPO
+	ODwrLQeDdPO+mESFIkhD30V85bIxCXeS0AzlsYXn7v/JwU+N8A9gU2G/pye1BgNY
+	H45xok+/I5sFoj7G3JMNeQQBpGedpXYAX+8j8Om2HyfxsMHxZxmw0KFrkyVdDqGj
+	hlN/fg9ZaOT6cvTzGH/kPbdDuCaBjMJpODeDxzx3vHWvTwr2DoigPgkeasSvd6UZ
+	4H0MpFsKojX06Lu1Wfjc4413iyUFBjqmb+3QzUAZUs3ONJVCecgdDNyRlxsl0EeH
+	X2m8gg6ky9MYI5I5GaOApD3X6Wpx16KNh957+9g==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=14;
+	hn=cc,content-language,content-transfer-encoding,content-type,
+	date,feedback-id,from,in-reply-to,message-id,mime-version,
+	references,subject,to,user-agent;
+Message-Instance: m=1; h=sha256:fY7X0z7LldTHt79gxHxiZCmzIZljlhzw73fCozI9lZ8=:nt/UwJpbWE72ZU0e93SnePpLVAMG8C5iQifbZ66MrbM=;
+X-ME-Sender: <xms:JaH4ak6YMCHRarwrthSeaLFa9bBUIbTJ-8DBLvgy1EfuZxt8Ylgb0g>
+    <xme:JaH4ahtYoJOflPYz5UW8TXXeGDmAG7PtmS2sb-96ZUGSUad9fryv28GtlWCmQFnvu
+    73QxFQz1vl2t15AVu7i7k5kSqwRRMA3ttNHSgB0Jq7rP3jQdvZ_uA>
+X-ME-Received: <xmr:JaH4au3-olXUsQpTUXRM4L2q9sRsP34ZTSwhi5FHT9iUGDrbZTVK0FNEOCT3sgX_5j8N24yHJ46In9Sj2ULe_GtU8BikwhmxyooH1Ns>
+X-ME-Proxy-Cause: dmFkZTEhm5E7Z6ZRBlBV9g4Ry/msUZzJ0LiKeTMEFVUrdxGjSFt2m64gXlT3aTVC6dPQTm
+    ZfSUA+D9IBMj2GWSt9GdG/VSDb9cxDNJjG3uSarSdzLqxo9hhySslKaEf5HIuKHgwP5wz9
+    Z9xboVdHmRusbbANNl8Dxx9TO5uv7nInEQ6u3rDubRcrReTC9VP9sQ19qx259xWy0kE6tG
+    UaAYUz8mH2LBvGQ5hyqMpcp4BSdYV1hJs1zwRgFFFWthGQKut5S6my2FAR0l0VubWlDYCq
+    88wxMwOrNat82x+QX4IeDz34FHRuQsC2DQDyteYdaPMpp/yNuikKlq0p8RZErYOB0ImrCv
+    fXg9Ly4QkZVbGdjiaEjkAhfXlLGh4jUuv6BZQu6KR/uEIc/uy5RpncCI71r7EC7YBJ99U6
+    ZSe3hrtkv8YiWdKfd9+zBlHourlhiZle4dMd7Qt6RN3FrWmCvio31l40vLKaAwsV4lSprs
+    JHFBW1CY+ZDwDiIGGAQCsW+SHeCXBpck3TkitzKCS8dXCGrIiS8bdbBHCmY3Y+yXTDcVIJ
+    lo+npnorKIuY3O8nzpjroIsN60ssIIJEfXGKcpJwEFe8/VTq3JeVjW9IKFgvEqKYUSGXNl
+    uV8Hxe6jME8GfR1BXyvKOIxktYNHVZLpsFWem31zwK9eQ07YSm6lyjW1Bjnw
+X-ME-Proxy: <xmx:JaH4aiq2maLzwQqOQHPE8Lz1IgLZ4oPbHP_NLfGfmBJc-6WrggbUkw>
+    <xmx:JaH4amLiXvaWUUNc1lrv0rEkBLt62kZsDeUs_YwigsG7eycjPLie9A>
+    <xmx:JaH4amRBIf_YBrcS_H40ZRm01RIaelC-wxTLQzCiD-VqLFGlB7kLXw>
+    <xmx:JaH4amO9sUtogLsb29weYAMkVW-Ar8j4WpcXo0OZfSkMIym2iSeZ3A>
+    <xmx:JaH4as3N9mg23iF1WTWgpPMNcHSLxWCtPL3sPsEU6swnyDMCYVB4h7cs>
+Feedback-ID: i60a14417:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 14 Nov 2026 12:57:55 -0500 (EST)
+Message-ID: <f6d30c90-05cd-48ad-a278-3277eaafd207@jaseg.de>
+Date: Sat, 14 Nov 2026 18:57:52 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,78 +120,33 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] dt-bindings: arm: qcom: Add ASUS Ascent QN10
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261113-qn10-v1-0-e09b2aa7ccbe@oss.qualcomm.com>
- <20261113-qn10-v1-1-e09b2aa7ccbe@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH v2] pmdomain: core: Wait for device link removals before
+ dropping genpd->dev
+To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Ulf Hansson <ulfh@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ stable@vger.kernel.org, Saravana Kannan <saravanak@kernel.org>
+References: <ivkwuomer5vsajf2lq6otpgxwqljkwooh3p7e5ne23j37pv22t@iluamo6gxmq3>
+ <20260731131002.142671-1-linux@jaseg.de>
+ <CAPx+jO8DKyuNMEKCHyKzw5DS62U2Xu6mcL3BtitRwrYP0gad0A@mail.gmail.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261113-qn10-v1-1-e09b2aa7ccbe@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: =?UTF-8?Q?Jan_Sebastian_G=C3=B6tte?= <linux@jaseg.de>
+In-Reply-To: <CAPx+jO8DKyuNMEKCHyKzw5DS62U2Xu6mcL3BtitRwrYP0gad0A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 14/11/2026 05:28, Bjorn Andersson wrote:
-> The ASUS Ascent QN10 is a compact desktop computer based on the Qualcomm
-> Snapdragon X2 Elite (Glymur) platform, featuring an 18-core Oryon
-> CPU, Adreno X2-90 GPU, and Hexagon NPU. The system comes with 16 or 32GB
-> of LPDDR5x memory, two M.2 NVMe SSDs slots, Wi-Fi 7, Bluetooth 6.0, 2.5Gb
-> Ethernet, three USB Type-C ports, four USB Type-A port, and HDMI output.
+On 11/13/26 18:47, Ulf Hansson wrote:
+> On Fri, Jul 31, 2026 at 3:10 PM Jan Sebastian Götte <linux@jaseg.de> wrote:
+ >> [...]>> Fixes: 18a3a510ecfd ("pmdomain: core: Add the genpd->dev to 
+the genpd provider bus")
+>> Cc: stable@vger.kernel.org
+>> Signed-off-by: Jan Sebastian Götte <linux@jaseg.de>
 > 
-> Add a compatible for the device.
+> I decided to apply this patch as is, for fixes! Apologize for the delay!
 > 
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> ---
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-Best regards,
-Krzysztof
+> Let's try to come back to this and see if there is a better long term
+> solution, along the lines of what Saravana suggested.
+Please feel free to CC me when you find the time to write a more long 
+term fix, I'm happy to test over here.
