@@ -1,56 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794684245;
-	b=oTIC7CG1rBbCC/kmwJcWncIajvGPKVO7ba+jSkoynTKEHEOXYyQnQWrr3iQ0CvbqkgZm
-	 yhCVQ+a2QbEIuh4Tqtsq5WpGCiK4svA1COXXD1BtlWrY1Qc5RYopovpU+nnulXlq4bnSf
-	 uT0oraDohnjqvO0mpgZ+/pvjo7t6Gn8SgLGGI8CAgoYNneKHIaqQ1/IgJjjTqlB2a/c3V
-	 chuPdGoxxj+4zW4/y+oluD8QJIFj5v9TWoJirvL9FJVIv7+h0qWciDw3XQhhklctNoKgC
-	 +J/KBlRnJ8oTgXGfL7YEOA5ejwBsevunbi5bkf5Up+tmkYZE12b3PIqUii9C8ERy7GA==
+	t=1794690104;
+	b=mTaAkxe/1SJblUS7JywyXHxuNsQPau1lq0bfXOgBQrY1ExbND45Xnw5LW43jeTCOPAv/
+	 z1x59iGTG8OuyTo9u5AAgVs06/GIpreuviNWnhneGTcgDKw29dfOvfg3nC0vEIN5zWyPa
+	 9vNTysrNciv6VS6vDBw3CfgmCUI/h7zEg7jFmHolKmZNBBVnXNDudWfmOvRB0KiwBMHXH
+	 FVb07wgToYrwylEO53Jj/f496HiWUe0dzp5bJb2Y6OiJYjyFrGwUTNCHLEgbGNWAcmytL
+	 69SEm4WVwLvSU+XxRDl4Rxwwr3Mgu2TkXz/Hy4lEFNtbnF+zWa2tDuYMHA1r60u8UZw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794684245;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=bSfznyjyyxgW7NWy756/MCGywrVfq6ig5ub7RPY5VKg=;
-	b=BS+OFx1EEPlWqR/1RXpuZIx8KjOYKCyo2eOFpAfQMfeJxHq5tzl20eohSGpAqxUbifHW
-	 txVBSdZrpz2gLrdYohFI/UZIqGGqPgIbHU6XfJyZua5en4/EJ1XET3V/wotdZtyUSqt6p
-	 yKoN+7uqVGLCJhWVXNWaqtbWg6QSlvG5s1Wc4yJG3SRDR5XtNsif819kkHhMljku8E3l7
-	 7NxVfrIhApZe81fQi/UlawQc0+8O1mHrxZbaD0algOyKdrVNC5nODrZl30iu0DtHm23ho
-	 GuUB8KJusIvfqjHyGn4k2GdiMiSMwTxWMQ7aBvAMuu241nIWO+NRs+egXyF+AkF+2cw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794690104;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=fJ5ePlRQ3ctDArxbodZpAid0v47e6mJlXhyHTr9zcZM=;
+	b=yXO7oMxVNU9uA9i/SmPVuFKmBVOcUHebOOk938RKTzyj2MezU2Xy9E3mwjmRgnIib1TX
+	 BPJdnWmfRL+RIrVbYbUafhF5lvdIgS6OXbGVtkdXHmBplKpfntbDNJhkXXsE3DZauGAX7
+	 Q1sK70ZV/lrJ3/Q2WkyNityxIbbAcpvcCPe8RHbnh+jo1o8ST3ojqmcJpFRD72/uvixHd
+	 bGqHP9GVrBBPTC4HuIueWrhS/LNYrjynyDPfBtQT4bna4FzESocDAO1pLyTApPStUyLoo
+	 WkGQTW/Sn7z9R0ugEDgpyYgk2s2ZTflch5lhRgD0Qx29Wel3UA5b9+uQ4Vkz3AfWeKQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mainlining.org;
-	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=RsV7WYiV;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=r28wpaYL;
-	arc=none smtp.remote-ip=5.75.144.95
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ErVKCOcU;
+	arc=none smtp.remote-ip=209.85.128.53
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD986606A882;
-	Sat, 14 Nov 2026 19:24:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BD986606A882
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB131606A337
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 21:01:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EB131606A337
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=RsV7WYiV;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=r28wpaYL
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1794684227; bh=bSfznyjyyxgW7NWy756/MCG
-	ywrVfq6ig5ub7RPY5VKg=; b=RsV7WYiVWUtREKS+7CF8mQ4cYb3Jh4d0VWHkADvk/MXrxzWWY1
-	KWghW5K+6a/XmR5d4th3RCKxlEJvajC1WR8c52FWVAYhAdYNc339P3KbCKfe+nrV7tIswugrRXY
-	rzAFyVnVieRDEqyn11NK8w5ByjRJ6Gx6k7V1CQhQFL8j/V6o6tuzfntR05nOHH1n5JroXBkX3IC
-	OYxYjbn7q0X+YSccUQfGWuJZuJMlhf9mtBcZoU4L1cF/4oqFjbuhbsmxduStdQav5V4XgSvCXIC
-	fMFOeuTjyy60/tiWwP7L4uZa64+ugV2Tb4lj9+XwT7kWTQVEAIAW99uqTfY52xLagEA==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1794684227; bh=bSfznyjyyxgW7NWy756/MCG
-	ywrVfq6ig5ub7RPY5VKg=; b=r28wpaYLxWtIxJs3cNihqDakGPwpZMMWAo3mVA/cMQ49H4q3qZ
-	NSDZboPqqWAofpLIz6hIxGmMatKYTQMSP7Dg==;
-From: Nickolay Goppen <setotau@mainlining.org>
-Date: Sat, 14 Nov 2026 22:23:45 +0300
-Subject: [PATCH 1/2] remoteproc: qcom: change resource descriptor for
- sdm660 adsp
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ErVKCOcU
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4bb68c197c7so2877315e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 13:01:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794690102; x=1795294902; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fJ5ePlRQ3ctDArxbodZpAid0v47e6mJlXhyHTr9zcZM=;
+        b=ErVKCOcU84Ds/S6P5yAsvjlHW5ED6oVPBK3r/ouFYhcuz2n/ROUmxaT9uHw4Jy22v/
+         lyiifSzSIhKPRtDn3SGYSBs4tjbeoPHnx/QMFTqmsIz7qfpAwmD1PtAqnvwSI9/9L/6W
+         dcAg953KhZHdNTUm0AHbUTwLc7qwPzzEijyTJs4ORhfKRKW3+yRWltH6Gme/WLFP+nYm
+         8Z8vh6aEDglOT5K8tE8u6bHNB9IDPbZdLepQPHRRL6R6Qb8723yNEBioOUSEj0ekfDAp
+         Hy5WYGRYR/BD0lzP0v+1Uu3IjweGYQ//7IdOF385/tfadcHzJmDovFZU0TI99XW/59tT
+         IHRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794690102; x=1795294902;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fJ5ePlRQ3ctDArxbodZpAid0v47e6mJlXhyHTr9zcZM=;
+        b=oXknqKjvwZdYXGeOa1p0J4HH297kHTfzapwXs3nGQNEA46MulzuFCzH20VjfZNPZxe
+         tEB2TnALy+VAqZdS4YxLAtCcyNCq2+gUP6tGtUhD40zrWzzWehrIu+i8iskBWhXL7qqG
+         u+L9py2DyOjxdOMpUgrL87hdOVB50/9v8aFKC6qzU3snyNlel/2e1FAL1t2ViQliy92l
+         0qBIbJWLqf3B4Hb5JxHBeISOPS3sxic06UvDxIwZfDafSmI5ywj89bNhu7VGQHZ7FKYZ
+         /aaaytBj5VD6Og1IR/U7Lys08AaAqifsBPBzQrMbs+wHm0vuXfGVgEEbjFOrJoxlJh01
+         ettw==
+X-Forwarded-Encrypted: i=1; AL+hErHMujKn0KBfj6La7liWk05I8kdkq2Ra8YWmDERwxxr04ewsq1A8d0xoS+i4EnK2vVI33cXjFjUvA+Pj4UUF@vger.kernel.org
+X-Gm-Message-State: APuU4Z/vTYuNq+jdZrdvmQXN1TOY4F57n2zs3WE/w3tkRdrpOsvJ1tbH
+	jZT2/I0rSdPkYY31ggwqkt4oGAsKaftPSNb4H7Y4ABYTGXZiXDAnNmMu
+X-Gm-Gg: AYBFou1Se7hum8RSwYPLtCfUhvJHepYKWm9sFQSr13zHiiPhxqX1LYwfaM/gFZxjb61
+	7ekvEESRVun//lWRxvTO47sO2NhvRXvYAmgb31DNcuNsN6ct3LIbRlLAMZSWtcGuW1KAkRMvV4F
+	VY1A4UnhsdUEdrIZYvsO3cC6fKQvABIzvJp1NjX9NGN9MbPwXx/hkFoo2T7xLS8Pil0P1a/LwXC
+	y299qBo8xLCcZ8EnYnKGAiqGbMZYBIkODC9qrktzllmwFU/WlHzRqvLFtv7gdjdoYwxSeVOigWp
+	HJfhLsQ4LQPZXjyZkIFYF+qKf9wSQuVq6rhoxUkgg2yFjNzeih8AF3chHAyz5enl1MTLAUNe+nq
+	YSoCf+VAAvnbVXA9AniIYDA2QFI+xNoAA4jH8hqSXL9MRZWu/ZEW3y5lG7q5iLZOm+dbyWu3270
+	kAV7tqrw/SUwNE5TTp7RIgiRK94p4wmr6B5fgpxVVlJKTM3dVjVzXfHr5cFZ7OJWomAqxT1VdsD
+	nyE/3/rVDHr8zueyWz99Da4yzgl30WFO+1O2mMLyLgbX+FyvokfRyML7OHGd4amDYi1ulk86KfN
+	W9vR33Hvq1zro8PHvwnf69z7ymTUFeZ/SMvjgV6AmmDfw4cC
+X-Received: by 2002:a05:600c:4f07:b0:4bb:6a5a:7834 with SMTP id 5b1f17b1804b1-4bb6a5a7a48mr7149015e9.20.1794690102290;
+        Sat, 14 Nov 2026 13:01:42 -0800 (PST)
+Received: from flare5 ([212.58.121.92])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb666a3ca1sm68359985e9.9.2026.11.14.13.01.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 14 Nov 2026 13:01:41 -0800 (PST)
+From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: arm: qcom,ids: Add SoC ID for SXR2250P
+Date: Sat, 14 Nov 2026 21:01:29 +0000
+Message-ID: <20261114210129.1925778-1-lightofmysoul@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261112-alluring-meerkat-of-elegance-dbec9c@quoll>
+References: <20261108-sxr2250p-socinfo-v1-0-06244862f5c6@gmail.com> <20261108-sxr2250p-socinfo-v1-1-06244862f5c6@gmail.com> <20261112-alluring-meerkat-of-elegance-dbec9c@quoll>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,50 +104,17 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261114-qcom-sdm660-rproc-pmdomain-v1-1-980f956e5154@mainlining.org>
-References: <20261114-qcom-sdm660-rproc-pmdomain-v1-0-980f956e5154@mainlining.org>
-In-Reply-To: <20261114-qcom-sdm660-rproc-pmdomain-v1-0-980f956e5154@mainlining.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Nickolay Goppen <setotau@mainlining.org>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794684226; l=1421;
- i=setotau@mainlining.org; s=20250815; h=from:subject:message-id;
- bh=oZjr821oVKgTPy6HDhPW3GidnL9QRHRurAqP1nB6LBQ=;
- b=r4G7nDLyM5T90rXt64hEruugJxpp6prl8AzpctVIb1s8oT4GFx+xahwDoEKCQPmnaqSEFtpwz
- plSsV+EMaKlAE//BvsJD1B0Lj7tEVHbvI+Oufd4Z/rVC+xa7ALD84D9
-X-Developer-Key: i=setotau@mainlining.org; a=ed25519;
- pk=Og7YO6LfW+M2QfcJfjaUaXc8oOr5zoK8+4AtX5ICr4o=
+Content-Transfer-Encoding: 8bit
 
-Generic adsp resource descriptor lacks support fot the cx power domain
-although it is defined in the sdm630 dtsi, so change it to msm8996's
-descriptor to add support for cx power domain for sdm660 adsp on the
-driver side.
+On 12/11/2026 12:16, Krzysztof Kozlowski wrote:
+> This goes with the SoC/board bindings often. Why keeping it separate?
 
-Fixes: a0a77028c85ad1f6f36c3ceea21b30dc43721665 ("remoteproc: q6v5_pas: Add sdm660 ADSP PIL compatible")
-Signed-off-by: Nickolay Goppen <setotau@mainlining.org>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Resending, I forgot to Cc the lists.
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index ff2483529d73..d5b03a433a6d 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -2050,7 +2050,7 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,sc8280xp-adsp-pas", .data = &sm8250_adsp_resource },
- 	{ .compatible = "qcom,sc8280xp-nsp0-pas", .data = &sc8280xp_nsp0_resource },
- 	{ .compatible = "qcom,sc8280xp-nsp1-pas", .data = &sc8280xp_nsp1_resource },
--	{ .compatible = "qcom,sdm660-adsp-pas", .data = &adsp_resource_init },
-+	{ .compatible = "qcom,sdm660-adsp-pas", .data = &msm8996_adsp_resource },
- 	{ .compatible = "qcom,sdm660-cdsp-pas", .data = &cdsp_resource_init },
- 	{ .compatible = "qcom,sdm670-adsp-pas", .data = &sdm670_adsp_resource_init },
- 	{ .compatible = "qcom,sdm845-adsp-pas", .data = &sdm845_adsp_resource_init },
+There were similar patches for other SoCs and my DT wasn't ready yet.
+I'll add this patchset to DT v2.
 
--- 
-2.56.1
+Thanks for the review.
+
+Best regards,
+Stanislav
