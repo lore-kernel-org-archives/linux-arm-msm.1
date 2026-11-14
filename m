@@ -1,113 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794655803;
-	b=TpCfJE9S3Xrzg9Dr+VnKnaQtN44OgmexV5p01xu15uHlStH7TphwRgL1LjE5RW/1eblX
-	 cxTmNvxrhR92wtFmJjSFJv7lm8Gf3NZwTpUPr4g06L0mv/+ODYsm5lpiaPFKnAz7tD4U6
-	 dkTk2WJz0vWxYc64pSKNhMhQvIWJXx9Go8nr1jm+KqMMH16+PD1Q9iH9FG60reG+t2RFU
-	 PB1l0aopfAQ59zJ+r3VTzrQ3ZSSvtgF7UoRJ4PNt+HBiAQY5eF13w1FmWMWDMZeqYPyVK
-	 5L4tRCsbKjKC/IqXgVEih9j9XeMGBbAoJVUqUsq1UTpYsJl/HEEDgd3MrSr3jjvFh0w==
+	t=1794655814;
+	b=XUC3cUGnQsvW/Woa5m7niKN+HX/e9pBOTPvvuAiY+AepwMOBA97eRcTGAywt9oYxlu9n
+	 NdE/dMVivZdLXp5Pgved70j6zVHR7wDQKNhKY0xNEipTMtF2kdcCOoMIELMhtvvulront
+	 IesI+hx+H3OdQOA8TjSElsQ0b1SdB1m2lRyJ0WjgE3IOt25sKirwSm3fMGNrdP4TYejyM
+	 vB6xs0kcuCHGXsTPVSbFMFG5b2fslZJTh2mhsQuIkk0BGJD32AdBNC/YeZ3JSHOcxjM8e
+	 Z2T5326qXMR6kZHqDOnRGCB1Z9p5bivmwJKQ1FWqqaaHs3fgGKOTc2galG/GulEtUtQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794655803;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794655814;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=StjpzzgV3K5FMka2TqMOP7NLAIJFL8U/IFU/fNStwV0=;
-	b=FAo5J6C4DwcJZJDB1O+LtCpZ97uD/dVxUzTzt44yksY58IU7VzkD7zPWWUGuFcP3BBLE
-	 Z5VpIDsQ4r0rsmFt+kNUj5H9mXg35cGM32y9ttPHwJ5YL3BgxfmYvsVX60/iDBts8s4Lq
-	 PfhOJr7lMijVk5kKRaSWwtMuTlGHunmOnUEI0KqhZ2bG8KIAWwDxbXD1ZubwKwAL91/ub
-	 iMd2e5ACxHJguXZ/bTRkQcAE+UC09ognF5UMoTIpFeCC+IL+2QE5S6+b2VW0mOON6A+ZA
-	 TFq5KAlfQwAdRNYRHNKxJw+i6ae/+rEGqeMWMxWcYujDdMq+HA3oJ6WgpqMJW8rEtMA==
+	bh=hcdILR3xyf7f8ySp8tYpqHBnHrARzRGQO+9FgjgHBks=;
+	b=CdWW/NX4HE5XR1Id+e6b3Hibv+XIRodYrwV9XwyFfX2GDKuFj0WZEbUZgx/TH+MuDV9r
+	 U8mvzEnT5B+61Umh+14SkU1TTXtUhG4R6MNaj8/8RET0hUSrTP8v2yDEolTVrV7SCfe9+
+	 1HJOmJXU/FAV18amH4U1UYW5YukYnXAKncJ1fRJVOSr1YH7pPVG0e0k25FS6sU0EYjZyg
+	 rCQVJsydOxMEAQm+VdnyaP5TLdfuZq+nxVES7Jq2JxuRxS6Gu0WauqFO38jUM7B7UgKd2
+	 hwRJPDCcsfYochQNElTxObaxBLR+UAWk/zjzymmLcMZ64UQTJV6IWhYcEYPiOgmGbxA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=l1PCjtMg;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bVgWY2tA;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cTJ6s3aR;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GgP86eUV;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 402C8606A8A6
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 402C8606A8A6
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6460C606A336
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6460C606A336
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=l1PCjtMg;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bVgWY2tA
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE9x6E43166878
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:02 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cTJ6s3aR;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GgP86eUV
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AE9w86a1750087
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	StjpzzgV3K5FMka2TqMOP7NLAIJFL8U/IFU/fNStwV0=; b=l1PCjtMgREQfKx4P
-	zjv2l9uRq5lMe43qTPNoJN0Tgj6vGJILER7VcC32DvWY2sX+zSIKQ8OTrq0TE+7D
-	fjcH2qGfoVzvYn2ZhyEwUs+cxRtx0qpm06b3raicfchLlLbpW3xk0c+yqaTz3Leu
-	KcsIsdAzM50jijoUyYsiGhDnUZvQh4kxAi5XzHPDDTYPm1fCWtELPxbmkJTWJYth
-	Eg4wv+nGokkQGHpPLq/dYUMk4XYdoglyVlZm4C7n3d0vf1gH5ZwOMcnwOJypuWdS
-	wa6AlcnnAwH+RqnjbnCFpyWq28cE7AtGpE3wuwQCqeMOC0vinla7fOSW4FbYyx48
-	LnlicQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhkw8kfg-1
+	hcdILR3xyf7f8ySp8tYpqHBnHrARzRGQO+9FgjgHBks=; b=cTJ6s3aRh19wkTsF
+	H/K6BHslxjC8hzN+VWNrLXaj/TZow405xJNfC1755wdMinzHsLKhUlI1DnxArzP2
+	FSBf1emn0BZzXkenv+tjkmB4GKsUXW6FY92zxpIx0mInq4q1VXoJhjxFso99NJPU
+	DZBhZLKuzyqgorDYFlJ0y+5/uo07UwrF46wG2VncCiYedWU23onVEbTl2aZgUjUe
+	DwRWQgqFT32DB7hPyzaHMeS3xPVT2UyAizNoPXZZ0rHSPrbEpLqfurK8ZPVLUQqc
+	Fj8tUW0Tvv4H+WFdxm7oiW6WyTivbJ/q1qrZTTT6DWKJ/8k5KmDOrmsjyfvRmeZF
+	qOQE9g==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhj40mux-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:02 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93909014c85so417786785a.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 03:30:02 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 11:30:13 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-91ea0c20af3so37377806d6.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 03:30:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794655801; x=1795260601; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794655813; x=1795260613; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=StjpzzgV3K5FMka2TqMOP7NLAIJFL8U/IFU/fNStwV0=;
-        b=bVgWY2tAD01OCKJ/mba2Y0ESA3h8UP4edt6Dxo0NHS/BjVkux5aR0n73hlnzhCrVQu
-         vJpGaqRuIhjug2C8IYSrJYh7SZM60BfXPYR4a3Hx04CkNyrNFTxrr4piePuxo7ObWcdd
-         gigXCcYYtnf8y8d4P7WHlakzvmOzUr+woXz7SUCXBehAMQAgw7nz9rotd6NeQr+0vkng
-         0D1rk79BC0tskVhFvMDMEieSyXy0SnNbwnsoKUosE9A9/j8hTA2WbO9QGQ+M7Yxn2d9v
-         IdEWk1Aku4kZ4Ny05Yt6KgoQJ1az/WGnY4Dgk7p++EdsoV1c2LegrUAICAtdAq2seRPb
-         +u1g==
+        bh=hcdILR3xyf7f8ySp8tYpqHBnHrARzRGQO+9FgjgHBks=;
+        b=GgP86eUV9W4cE25/m5mGFJthRY7eL232wJ3NBVQx84xX9g7tkeWoRTT4v7AC0MG0GJ
+         6TymiXZhhm4D20byyKPXJAmmIHpVCEghm6TD3CwENh9Ohz0l8uEobOyElcZl9pc5vKOP
+         mrUsxoe1jEtKpj3yq2xM3tzXK+0/15HxvTJR0Kf1t8sgX/rv+tmpYtvpGUzSkWHw4agw
+         agd7tnGKJKHtnFILJkYIQEE6xNA7yHbUmrK78Kcuw2l3OFQeTiD0KugoG2XGp9/+QlCh
+         sIBp3wMKFO/Y60SWtqDsHJL8mlUihmo+CoS6s6bdGTmdo2XRBylffZQ10jREoYvH3d1A
+         exmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794655801; x=1795260601;
+        d=1e100.net; s=20260707; t=1794655813; x=1795260613;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=StjpzzgV3K5FMka2TqMOP7NLAIJFL8U/IFU/fNStwV0=;
-        b=AvUm3kQ7bOEOwlzfRGf1oMRwTTGIfHSt6y2KlO+iQ/+Y9NMq+yv65aQWUA0xrO5hV4
-         r2+vfH9DuC+PuszRAh2abZZWLW2k9wRbey64SuxEc26ue+DBfXaKpQrPKjwtuu/YJzyF
-         EVTFxcSniCyrjzYorMKcj82cPosd6ThNR5jM673CNyMitj3tNmKVe6joPLwRZNCrZVhA
-         DXIOUXc2oXw87y84f4HoimobeUZEACv1mtgEeT1T5Ly9bVVRts+ka/pgvhKF8fZ7KBwc
-         7itIC/NnMntpe9uSAirIzRdu/78RgW7f59TFAs0o8TEYGh6twKjsFNHNG+uQMkk6eqO2
-         bSsA==
-X-Forwarded-Encrypted: i=1; AL+hErHl4AWEKqfYLMH15vburqtlJOFlVDU8iZPGG03Zax4rYvzwrL+FS0ZEksB3WqbNxAPLLmEnckxoPoNrZCSS@vger.kernel.org
-X-Gm-Message-State: APuU4Z809W1W+DHvVwEIg2v+MY6W0d7aUNicA850skuY4XEIO6JJzKqT
-	fNnaJWrYabsLLauLHDuzGwsAbTmXXmoYBM4bzBrcycju2pNnQXLzM+aWSSiTKuhOyAATUY8s9pX
-	PT0gEbryhdgFLU3im8RA4yctrzThdcWgji4W8z4t35hXaMNtBPT3+AachGBbh0TAY/cB6
-X-Gm-Gg: AYBFou3COXKpcPQXgGSmxEbxcNic7O6cC6HHr03pQHexCkqi8nQrwZ4je33SvpgCVkW
-	tKWvstUDfo6ZdrU3xHsMigQBu1v7TqlY2JAqxzFv2CKs71MTeEF/rNou5bCg/mI0j8oOnDkSkyh
-	U15kGF2mQhasCatZ/+HJ6GoSZ3UMEgt6C3Os9wVqJxTyxSJjvTdpViHJFuQHWM7ULJKUsCfrtL2
-	6FMfa9tYSOrttPqJCzJXGdz7r79HgjneX4iV32zlD3xZgzfS32rqeSQVI8oIvJvsq0TlzpM2esw
-	LzkUqcx8axTEZouDf/z2Be0/QPedd5hEZWqPTVhh9jKWiYKS9exhqwMFXRw3AWdQeUBZfkXrWIH
-	ke9USTsUUEnVKGNRvHFIFHrY6NAMvGz4pQE8p4v1+LIxG53Rq8zNsTcC41Ced7HMyRBx05kJRG3
-	AqCtp3+r7Ecx9L8k0xy9LFWMgf9yVC1riQ0qG0lQqI
-X-Received: by 2002:a05:620a:2b96:b0:93e:5fbf:a41c with SMTP id af79cd13be357-9494bbb7e8dmr822388485a.16.1794655801427;
-        Sat, 14 Nov 2026 03:30:01 -0800 (PST)
-X-Received: by 2002:a05:620a:2b96:b0:93e:5fbf:a41c with SMTP id af79cd13be357-9494bbb7e8dmr822385185a.16.1794655800997;
-        Sat, 14 Nov 2026 03:30:00 -0800 (PST)
+        bh=hcdILR3xyf7f8ySp8tYpqHBnHrARzRGQO+9FgjgHBks=;
+        b=HvJQEzlUHIWsHEl/GV2IVjkS3CIn2sjRgy6x3Vp8rrMzsc3gA/L3yeCAVeNRX8x7O0
+         +229PuiqXhYoXLbZWU/y3RkWKCxLBy4fnFKrtx4MoPVj/4ick/zWi4KWHtwzM0Uj4SE1
+         /fjCAjOuf37X197rfm7X1g01lSsPNGiKvwk8aWAuygE+g9jeKgcYUy157ltwAP8ZaVek
+         /4bpcwX/tml50eQL9+ITZP9vHMlEGdPR1ldhc4BB6lAG8dEAVL/2Q/ITw8btrJIxbktH
+         7tV1dTGAj9J7jpZbu3TNlXGfrz+8iYM0xmhFpzYCHNqqqVpYoTg2G1NJA8eWsaS0Idlh
+         INHQ==
+X-Forwarded-Encrypted: i=1; AL+hErHeVO1IO/I3bpwEaN7q9uTq98mLnBhpvlnBdTZ8eErqAEu3j8kl0ZQecuPpZ3WKyg7t8ThCOoRWR+F8yFO9@vger.kernel.org
+X-Gm-Message-State: APuU4Z8FYH/axjb5Zqkgdei+/B9ozNcYBj06cLPIWH9pnG40MedVZ2Mv
+	5lkVCtg6A4LMKXwC2pf8PWADEcRJwPn+QYt2iaYdG8WpQNXJbZxWcjhszMeDzAgO++qg20kNdWU
+	K87+3yVDxJuHVT6ato++MUUNqO8ymgFI+ixV85IVoDlCQA5csmhOkw/8BoRjSVf8aSqI3
+X-Gm-Gg: AYBFou1fd76cLJKEVJvc4jnYGpDIaT+n/QdoYOjIxgsi9p/wtfIrG8M698vrxIDJLJM
+	JfbO/lih0yfSvP+YkPq/65TvfMK8v8q8Kk+LaO/0BzlzW7OkAosYZEwoM6JMyffDuuNqOw7OXAh
+	bYxuytaIGChbrmNdTRbUMOw1GzvJb+eTJCStWDl/+uVcIMktkvNAAIBEOxtK0Lst9x6XV8RkZxA
+	b6dtnp0UePf2eqlJIKElddL6hnyTxjBJK5ImglzgQcJ8qs1x2kvOn6706ID5VBzuaIE0zO48CxO
+	nYcHZ4rFu/Qa+7lrXIOlK7L76XbR+1aO9qvppfQ0q+EncSvLgNgQIu6FaOtulQZ7P3lMDlpkaOI
+	kxYN8phJifr0tlhgicn6HcXwVpCHFdNAR1ifgAmpXiqSMZshNTgp1Fi4B70x+PiEbibaBUl0z6W
+	/14vv8zP2PHzpDVptP8aZxeIY1xwGDgx0ti1exPfF0
+X-Received: by 2002:a05:6214:5684:b0:917:8a83:a15c with SMTP id 6a1803df08f44-91f2417a770mr75225776d6.34.1794655811322;
+        Sat, 14 Nov 2026 03:30:11 -0800 (PST)
+X-Received: by 2002:a05:6214:5684:b0:917:8a83:a15c with SMTP id 6a1803df08f44-91f2417a770mr75224976d6.34.1794655810708;
+        Sat, 14 Nov 2026 03:30:10 -0800 (PST)
 Received: from WENMLIU-LAB01.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f23d7ba48sm41389746d6.28.2026.11.14.03.29.52
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f23d7ba48sm41389746d6.28.2026.11.14.03.30.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 03:30:00 -0800 (PST)
+        Sat, 14 Nov 2026 03:30:09 -0800 (PST)
 From: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-Date: Sat, 14 Nov 2026 19:29:19 +0800
-Subject: [PATCH v7 02/23] dt-bindings: phy: qcom,x1e80100-csi2-phy: Add
- Eliza CSI2 PHY
+Date: Sat, 14 Nov 2026 19:29:20 +0800
+Subject: [PATCH v7 03/23] dt-bindings: media: qcom,sm8750-camss: Add SM8750
+ CAMSS
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,7 +119,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261114-add-support-for-camss-on-sm8750-v7-2-8ff2a11835f6@oss.qualcomm.com>
+Message-Id: <20261114-add-support-for-camss-on-sm8750-v7-3-8ff2a11835f6@oss.qualcomm.com>
 References: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
 In-Reply-To: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
 To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
@@ -141,78 +141,362 @@ Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
         Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794655774; l=1564;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794655774; l=10729;
  i=wenmeng.liu@oss.qualcomm.com; s=20250925; h=from:subject:message-id;
- bh=QtLaeWAMwSvDdk5BkCV2zOXsDrkSYOKz3w000Imr2GU=;
- b=ayq0vPZ8usswe3DyeKH5IP05zg0wiuLc2SqaQYyKdo7ap2j6Eu99cswy46uQjGiABqtEkkTgk
- NJnxyDfwEYnBqhIjRcSBPIsviU6LYc8w5T8W63QcoOphFlwacdYlmcP
+ bh=6ECCq5dmZrMTJAeaCZmdGOCSRUKo5+lFZTMMouXNrMo=;
+ b=AwznNgiH+vGHgSPLrz35eVn+WtJVtKV9Spl8X36JFZNJ77cwosaGCGCx+x7/W5AGQZ7fCKz6J
+ /0epyZXXeTkAfInlIKkLYtdNMWRUmV9CqIwUNnEviBzQnkYtKkEKd4M
 X-Developer-Key: i=wenmeng.liu@oss.qualcomm.com; a=ed25519;
  pk=fQJjf9C3jGDjE1zj2kO3NQLTbQEaZObVcXAzx5WLPX0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA0NSBTYWx0ZWRfX4hj38H+/goH7
- lCatb8nkwOMIp458eXF2UdtQxw1WDEV2qvB1fhA4psiHjpCZWgcR480wxXQdxJwNoRK4Ug6ex+q
- SJpbWJQFeq5Dx/TOu/s5ywvu1NGxoKPFUB1vv8X1t9c1HLSJEi5hX0tB/8fXY4L75K/5wmluFf6
- y/jW96cQdm3qPU4EFEdAda5+++an8zA6JT6sIKnRb9hE21vpcvgJ3fY0NjptJjAxoy7tPhRscg6
- 3PWkGp1qUU+KcOJUaogIwhmOFFW4Owu7+h5BXk7mAJp6UpaEsnbeTa+E+o+KwojFzhtFOeAb4Z9
- BSLuO8qG7AgGrDeJk2RB/PYyP/zeccDF5X+PG9L72l/ci/DTIshU9l6KrgYgxhsCgfqYXPmkULp
- dieriAdBgqcrmnKCKLQx/ZCcDz2SWzJN7fEJ4mtK5Mf+7YkYOvv/HSzwVpqh9x1Ckcd8zNE2Fe5
- kVz/4bnZ6VmAc67w2bA==
-X-Authority-Analysis: v=2.4 cv=YPYKWhGx c=1 sm=1 tr=0 ts=6af8463a cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE0MDA0NSBTYWx0ZWRfX7y3kxSi4c+Jp
+ +lb7yhsXmgvdSzmriVb0hQoNyp3bKHAuCIbsGYWptBde3CsNPt7YD3R1eOhzlDW0bhxnaxBLSmc
+ +Rob3wlwpi4vYVPAiw+Wk34zJJjMTr7x4CdmV9ecQfxTs5dZUGusFzGBrq2i732scl9eC4F1dIm
+ nG3fo3HboYj4l8YCihFn/SIICoTERJu5Clni/ATlCaUnEM89xN9riaxLs+NDsMqFlrz7x7ArLfg
+ FwQBbzTYTC103H6j0GO7+HR8D0rh2avKqlcBzfurtP7kLHMteVf586wI2NMI+ukMbaQKWUkkhQS
+ oqMcGS4OkMVeGxKtvSkwrzs5EkK7j0aYOUVO/66GiWLw2VBXJWCIKKZUSpr4iP0a0e000wMbb1f
+ bjb5zpVtTh3E51jsQx6c6XO2zeD125Q1/oIi4rVGSZns5Djtsa2TxZ6mHQpd2S7JmbYgvxHyWSS
+ NhENjIIzbOWp0UZlFew==
+X-Authority-Analysis: v=2.4 cv=av0nmiZV c=1 sm=1 tr=0 ts=6af84645 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=Cn39VxbTSVwEGcu4l40A:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-GUID: IZahIDFxlGpk1z2hncNRt4ieHf0pTIMx
-X-Proofpoint-ORIG-GUID: IZahIDFxlGpk1z2hncNRt4ieHf0pTIMx
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA0NSBTYWx0ZWRfX950yEtpNy8E/
- rBvAStbEFaPk4xp07+ekNrM76qaijmhqnD1KS9kPdy1PhQ4snAbzqSmBJRpJYr2x6erYj/REXAb
- bEA/QAJie8lk1AYCkGrULlxEK0d3daY=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=yzr0uxE_ijXmPgLYsrIA:9 a=QEXdDO2ut3YA:10
+ a=1HOtulTD9v-eNWfpl4qZ:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: i_rlbdkf28rnPZhIOeNn-LmKXf8n3fb4
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE0MDA0NSBTYWx0ZWRfX4STTtLfgn0aG
+ MgldquYCNE4NnWAaElkxytkVl9YZSr2cU28YQhJlW8Be8sVuEEtmH6Mm9x2Orm8FLzoFrtVFPgm
+ 6z4Dn6nj295WCTdhDjs9RWtqhGmtHLQ=
+X-Proofpoint-ORIG-GUID: i_rlbdkf28rnPZhIOeNn-LmKXf8n3fb4
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-14_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 clxscore=1015 spamscore=0 adultscore=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 bulkscore=0 malwarescore=0
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 clxscore=1015 spamscore=0 priorityscore=1501 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611140045
 
-Add "qcom,eliza-csi2-phy" falling back to "qcom,x1e80100-csi2-phy", as
-Eliza integrates the same CSI2 PHY IP.
+From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
 
-Eliza has no MMCX and MXC rails: CX feeds the existing "mmcx" input and
-MX the "mx" input, so only the power-domain descriptions need updating.
+Add bindings for Camera Subsystem (CAMSS) on the Qualcomm SM8750 platform.
 
+The SM8750 platform provides:
+- 6 x CSIPHY (CSI Physical Layer)
+- 3 x TPG (Test Pattern Generator)
+- 3 x CSID (CSI Decoder)
+- 2 x CSID Lite
+- 3 x VFE (Video Front End), 5 RDI per VFE
+- 2 x VFE Lite, 4 RDI per VFE Lite
+
+Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
 Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 ---
- Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ .../bindings/media/qcom,sm8750-camss.yaml          | 297 +++++++++++++++++++++
+ 1 file changed, 297 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
-index 8ff3df1d0d2787b2af0499c1e4106b86f56ff82c..884984f6f6b9e595df9bb3b0027c0bcf285b8058 100644
---- a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
-@@ -22,7 +22,9 @@ properties:
-           - qcom,sm8750-csi2-phy
-           - qcom,x1e80100-csi2-phy
-       - items:
--          - const: qcom,glymur-csi2-phy
-+          - enum:
-+              - qcom,eliza-csi2-phy
-+              - qcom,glymur-csi2-phy
-           - const: qcom,x1e80100-csi2-phy
- 
-   reg:
-@@ -48,8 +50,8 @@ properties:
-   power-domains:
-     items:
-       - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
--      - description: MMCX voltage rail
--      - description: MXC or MXA voltage rail
-+      - description: MMCX or CX voltage rail
-+      - description: MXC, MXA or MX voltage rail
- 
-   power-domain-names:
-     items:
+diff --git a/Documentation/devicetree/bindings/media/qcom,sm8750-camss.yaml b/Documentation/devicetree/bindings/media/qcom,sm8750-camss.yaml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e7ab61d71ffbdf653f8a3b92b26035a2b29093df
+--- /dev/null
++++ b/Documentation/devicetree/bindings/media/qcom,sm8750-camss.yaml
+@@ -0,0 +1,297 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/media/qcom,sm8750-camss.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm SM8750 Camera Subsystem (CAMSS)
++
++maintainers:
++  - Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
++
++description:
++  The CAMSS IP is a CSI decoder and ISP present on Qualcomm platforms.
++
++properties:
++  compatible:
++    const: qcom,sm8750-camss
++
++  reg:
++    maxItems: 14
++
++  reg-names:
++    items:
++      - const: top
++      - const: csid0
++      - const: csid1
++      - const: csid2
++      - const: csid_lite0
++      - const: csid_lite1
++      - const: tpg0
++      - const: tpg1
++      - const: tpg2
++      - const: vfe0
++      - const: vfe1
++      - const: vfe2
++      - const: vfe_lite0
++      - const: vfe_lite1
++
++  clocks:
++    maxItems: 21
++
++  clock-names:
++    items:
++      - const: camnoc_rt_axi
++      - const: cpas_ahb
++      - const: cpas_fast_ahb
++      - const: cpas_vfe0
++      - const: cpas_vfe1
++      - const: cpas_vfe2
++      - const: cpas_vfe_lite
++      - const: csid
++      - const: csiphy_rx
++      - const: gcc_axi_hf
++      - const: vfe0
++      - const: vfe0_fast_ahb
++      - const: vfe1
++      - const: vfe1_fast_ahb
++      - const: vfe2
++      - const: vfe2_fast_ahb
++      - const: vfe_lite
++      - const: vfe_lite_ahb
++      - const: vfe_lite_cphy_rx
++      - const: vfe_lite_csid
++      - const: qdss_debug_xo
++
++  interrupts:
++    maxItems: 10
++
++  interrupt-names:
++    items:
++      - const: csid0
++      - const: csid1
++      - const: csid2
++      - const: csid_lite0
++      - const: csid_lite1
++      - const: vfe0
++      - const: vfe1
++      - const: vfe2
++      - const: vfe_lite0
++      - const: vfe_lite1
++
++  interconnects:
++    maxItems: 2
++
++  interconnect-names:
++    items:
++      - const: ahb
++      - const: hf_mnoc
++
++  iommus:
++    items:
++      - description: S1 HLOS IFE and IFE_LITE non-protected stream
++
++  power-domains:
++    items:
++      - description: IFE0 GDSC - Global Distributed Switch Controller for IFE0.
++      - description: IFE1 GDSC - Global Distributed Switch Controller for IFE1.
++      - description: IFE2 GDSC - Global Distributed Switch Controller for IFE2.
++      - description: Titan GDSC - Global Distributed Switch Controller for the entire camss.
++
++  power-domain-names:
++    items:
++      - const: ife0
++      - const: ife1
++      - const: ife2
++      - const: top
++
++  ports:
++    $ref: /schemas/graph.yaml#/properties/ports
++
++    description:
++      CSI input ports.
++
++    patternProperties:
++      "^port@[0-5]$":
++        $ref: /schemas/graph.yaml#/$defs/port-base
++        unevaluatedProperties: false
++        description:
++          Input ports for receiving CSI data on CSIPHY 0-5.
++
++        properties:
++          endpoint:
++            $ref: video-interfaces.yaml#
++            unevaluatedProperties: false
++
++            properties:
++              data-lanes:
++                minItems: 1
++                maxItems: 4
++
++              bus-type:
++                enum:
++                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
++                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
++
++            required:
++              - data-lanes
++
++required:
++  - compatible
++  - reg
++  - reg-names
++  - clocks
++  - clock-names
++  - interrupts
++  - interrupt-names
++  - interconnects
++  - interconnect-names
++  - iommus
++  - power-domains
++  - power-domain-names
++  - ports
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,sm8750-gcc.h>
++    #include <dt-bindings/clock/qcom,sm8750-camcc.h>
++    #include <dt-bindings/interconnect/qcom,icc.h>
++    #include <dt-bindings/interconnect/qcom,sm8750-rpmh.h>
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    #include <dt-bindings/power/qcom,rpmhpd.h>
++
++    soc {
++        #address-cells = <2>;
++        #size-cells = <2>;
++
++        isp@ac04000 {
++            compatible = "qcom,sm8750-camss";
++
++            reg = <0x0 0x0ac04000 0x0 0x1000>,
++                  <0x0 0x0ad27000 0x0 0x2b00>,
++                  <0x0 0x0ad2a000 0x0 0x2b00>,
++                  <0x0 0x0ad2d000 0x0 0x2b00>,
++                  <0x0 0x0ad6d000 0x0 0xa00>,
++                  <0x0 0x0ad72000 0x0 0xa00>,
++                  <0x0 0x0ad8b000 0x0 0x400>,
++                  <0x0 0x0ad8c000 0x0 0x400>,
++                  <0x0 0x0ad8d000 0x0 0x400>,
++                  <0x0 0x0ac86000 0x0 0x10000>,
++                  <0x0 0x0ac96000 0x0 0x10000>,
++                  <0x0 0x0aca6000 0x0 0x10000>,
++                  <0x0 0x0ad6e000 0x0 0x3000>,
++                  <0x0 0x0ad73000 0x0 0x3000>;
++            reg-names = "top",
++                        "csid0",
++                        "csid1",
++                        "csid2",
++                        "csid_lite0",
++                        "csid_lite1",
++                        "tpg0",
++                        "tpg1",
++                        "tpg2",
++                        "vfe0",
++                        "vfe1",
++                        "vfe2",
++                        "vfe_lite0",
++                        "vfe_lite1";
++
++            clocks = <&camcc CAM_CC_CAMNOC_RT_AXI_CLK>,
++                     <&camcc CAM_CC_CAM_TOP_AHB_CLK>,
++                     <&camcc CAM_CC_CAM_TOP_FAST_AHB_CLK>,
++                     <&camcc CAM_CC_CAMNOC_RT_TFE_0_MAIN_CLK>,
++                     <&camcc CAM_CC_CAMNOC_RT_TFE_1_MAIN_CLK>,
++                     <&camcc CAM_CC_CAMNOC_RT_TFE_2_MAIN_CLK>,
++                     <&camcc CAM_CC_CAMNOC_RT_IFE_LITE_CLK>,
++                     <&camcc CAM_CC_CSID_CLK>,
++                     <&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
++                     <&gcc GCC_CAMERA_HF_AXI_CLK>,
++                     <&camcc CAM_CC_TFE_0_MAIN_CLK>,
++                     <&camcc CAM_CC_TFE_0_MAIN_FAST_AHB_CLK>,
++                     <&camcc CAM_CC_TFE_1_MAIN_CLK>,
++                     <&camcc CAM_CC_TFE_1_MAIN_FAST_AHB_CLK>,
++                     <&camcc CAM_CC_TFE_2_MAIN_CLK>,
++                     <&camcc CAM_CC_TFE_2_MAIN_FAST_AHB_CLK>,
++                     <&camcc CAM_CC_IFE_LITE_CLK>,
++                     <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
++                     <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
++                     <&camcc CAM_CC_IFE_LITE_CSID_CLK>,
++                     <&camcc CAM_CC_QDSS_DEBUG_XO_CLK>;
++            clock-names = "camnoc_rt_axi",
++                          "cpas_ahb",
++                          "cpas_fast_ahb",
++                          "cpas_vfe0",
++                          "cpas_vfe1",
++                          "cpas_vfe2",
++                          "cpas_vfe_lite",
++                          "csid",
++                          "csiphy_rx",
++                          "gcc_axi_hf",
++                          "vfe0",
++                          "vfe0_fast_ahb",
++                          "vfe1",
++                          "vfe1_fast_ahb",
++                          "vfe2",
++                          "vfe2_fast_ahb",
++                          "vfe_lite",
++                          "vfe_lite_ahb",
++                          "vfe_lite_cphy_rx",
++                          "vfe_lite_csid",
++                          "qdss_debug_xo";
++
++            interrupts = <GIC_SPI 601 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 603 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 605 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 376 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 433 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 436 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 457 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 606 IRQ_TYPE_EDGE_RISING>,
++                         <GIC_SPI 377 IRQ_TYPE_EDGE_RISING>;
++            interrupt-names = "csid0",
++                              "csid1",
++                              "csid2",
++                              "csid_lite0",
++                              "csid_lite1",
++                              "vfe0",
++                              "vfe1",
++                              "vfe2",
++                              "vfe_lite0",
++                              "vfe_lite1";
++
++            interconnects = <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
++                             &config_noc SLAVE_CAMERA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
++                            <&mmss_noc MASTER_CAMNOC_HF QCOM_ICC_TAG_ALWAYS
++                             &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
++            interconnect-names = "ahb",
++                                 "hf_mnoc";
++
++            iommus = <&apps_smmu 0x1c00 0x00>;
++
++            power-domains = <&camcc CAM_CC_TFE_0_GDSC>,
++                            <&camcc CAM_CC_TFE_1_GDSC>,
++                            <&camcc CAM_CC_TFE_2_GDSC>,
++                            <&camcc CAM_CC_TITAN_TOP_GDSC>;
++            power-domain-names = "ife0",
++                                 "ife1",
++                                 "ife2",
++                                 "top";
++
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                port@0 {
++                    reg = <0>;
++
++                    camss_csiphy0_ep: endpoint {
++                        data-lanes = <0 1 2 3>;
++                        remote-endpoint = <&csiphy0_out>;
++                    };
++                };
++            };
++        };
++    };
 
 -- 
 2.34.1
