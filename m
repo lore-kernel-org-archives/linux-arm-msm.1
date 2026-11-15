@@ -1,86 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794744973;
-	b=b32Df+Mmqb7Q0RvxFVmtM1QoYhMKHAvhXWeujuM0An0kfyR8nSRlBwF4fA1P7TGTbw/z
-	 i0awlRdJP7/C23jHpuIRtni5kZm6mrEFAXPDeDnbFQG7yn4NOmZ2P1Uu+gVlk61Rm4Zo6
-	 UjsQhfP+XDn+00pJebvTZAci7exp+kmbl2AC9F6X5yPco9a/ik/UEPrFmtXoiB3rmlzl3
-	 COgllyl1e7+YqaRwIpPn3NtsvYQdPcJSGH662ibEM9zbZUTqx9sIzbf4dYNCqniVT90Px
-	 VPaWlm8U4kbedycG0iTJ+o2FTyJPWtN5VJc4Ium3Qu3l86iC9/tfdQSeLU3vKiGwnbA==
+	t=1794747298;
+	b=E2c2dF/YxEXA6kvNcu3BIF5IiLfUeIS0EcWnM12u/DStEA4kQilaFlpgdWwhe0S5DFUH
+	 XGaOUgo6bPVRQ8BLgquJmrHFJgi6UcbdZ05VJboYuMDYGJxfdywVvzyjzDPbFrCPYby+1
+	 1lhdlRlpUkIQPmtt3VR+EtJbCqkYe0N97gYBYp2peguczNGMiO3jRwHIgK1nhLup61P9Z
+	 /l+HjxIrle3CMCOSC08Kb2YzG2imcYXC/6SMbZhbe86wDzRzwEBJ0sNr02XXfok9oprdi
+	 N/TK7CgYc4aMSHLKo3JRPENfsO9aZEwf2JufkUaMI9GaGm5pZ6BjQH7fq/gTpiGYMRQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794744973;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Cze6EXMazudJouVIRWBezoVb+gMXv48f+e410Dy7G9s=;
-	b=F8VRdLAdzmMofr3Lf+bCKIvNUBwDXFz2JeRBos28zoHPtMa2WgLv3BMJ2V0xIA3iwisN
-	 zw+nOWY0uHzpqFA+ocMBdkKBmzYecZuaq6V+Z56dxYJ4ElN0vOZF/YpVLAuFcSBaAb4yG
-	 fvr4vMqgdIdVDpWmCVlNchHXnkMjoS48fJJ7VVKb58jSc7Z3ffxTdPBqrPP6RMPZy4YzK
-	 +6ufaFt7rUrlMkyjq2pZ1HU/NVHHemLz2BuUHfjZTHfx5JtGRKOXOgyf2OEHUpVwj3tzr
-	 tYvhpytjnidU2H41J0KbK+49Y/PFTNqpJL7PcXjiZ/1ZGnAISclIAIfYcMw8gNKSorA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794747298;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=AJTKULYseaeK5WjHYtGrkruJIYuQWcLHf4wiRJSayYY=;
+	b=UdmJ18/UITpNIqb5z+iZoKvKsYfNZEVVCqm5z6huhkYeVo0DXeHTdXCwBkV7gn4xkCcV
+	 HidpKPFbfHazwpzv+l69ZkUKts60cV/rXaRLOSih6yDAvee/25Sbk49ofR38QWfAZvd1k
+	 6x9DSgv1woo/5KBosjFg1pVgqdsF5B+hxM3Bxaw4QNmGAJfCSHE+0Co6IFlGtGbk/P/Mw
+	 DdkLar0tkSTrw4UbJ/+OzntmFGsITfw6dYpltNE7NfXcVPpp1u/WX1O5nsB/aedcbGMHq
+	 K0Q5TfLI9XO5Jp2nrQMYGEdgE4lWHsB199PSMPkzbLXANz3zgx4m9t3IQNqlVy77nWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UMWGuZNB;
-	arc=none smtp.remote-ip=209.85.128.53
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gSIPRigB;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 115A1606A31A
-	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 12:16:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 115A1606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F42606A31A;
+	Sun, 15 Nov 2026 12:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UMWGuZNB
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4ba013938d7so28199465e9.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 04:16:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794744971; x=1795349771; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Cze6EXMazudJouVIRWBezoVb+gMXv48f+e410Dy7G9s=;
-        b=UMWGuZNBsMnss2pwsw8rRFNOryhk6F4P5MsSQtbTOUSYf7p8ABU3vk4PaN1KFgXJ4m
-         sLw57i7wKveAJsqJXa81ii4bayts99u5hg3J+aNyMOI795yl24cB+IpfYz5/HXSDqzz5
-         8J81IXNBLkrq8pNuLrlDSWMlsmGEW+JxD6BDFcXHLBQjB+J9eOnH/escoFzz40YDBxpa
-         l4K4aqxKU+xhxj/c2gSNDaf+IV7G2FNCNjefQ2qzQHvzhnP9uPM67bTReYKQRNnzW10P
-         /U8EwovAUK3sCoJtrorcb/qNryT5hTEQM7Pctt8EMwGpw2KT7wD4z3gD8bIyUjh/OWZF
-         nvvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794744971; x=1795349771;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Cze6EXMazudJouVIRWBezoVb+gMXv48f+e410Dy7G9s=;
-        b=q49bmhK2JwxSMH2KSfDKyjHLLOq+Tq1Bju7bAT0yQdLxV5veE4bniQeL4wlPD7rywN
-         eBbUcBPeMGx8d7beyboJJ8K2ZwZQ945RB5tkxmpCEkD0uD17JUSAy3JgGLRBvFGNNfih
-         +sQaTysmw9N4Ej2ah7icRDGF+66UtSIghtjq3HP9XBeK0di9Woa0c138Wlba6GnhpXgx
-         XD9n7rLa2PAaObqvRDaMZV0Htk29o2AthBkBviWtK7hhwMRKvO39ueadrqp4ErXuEo4V
-         Wjs4SqUUh7oDhqrKM3I5FKOEVw/l/qvLfMtLR+qPk/IQ1GW99GDzIHfPgwKmO+ZMgxhp
-         9TFQ==
-X-Forwarded-Encrypted: i=1; AL+hErFh5ClY4NCEra9A5wv1DVUbGBKl1oQVmhTSvmL907lkWHH038vA8wgFTqEepLls6HpNIigmhVToh6NDvElu@vger.kernel.org
-X-Gm-Message-State: APuU4Z/O+apRkpBiHMVd5FkmKhUPIySQkLq4easHCi1MphKTTdSkonHY
-	qjIRY8TmXKfufdcZUgWhHZHgNftbX51EsxieVTZfsszcXARWF9HnymnCyoh9l2g8BKk=
-X-Gm-Gg: AYBFou2UlNiZw2d8clV7BnRM7vubrWXgdccvDUE2DOlCwxdbGmsnMPuLqHaCxlVcA9A
-	EKgEEI687O6uFmVxcNoiZ+2+Sjmp0TyXz8Qbj/bcUQg5kN/oMNpJ/XFQoGZgk3GOhof4441+/9D
-	69+RSLVLa3U5lmEGn2SbOzdSmgYAaZhmXvHNAKePPASlGyXPK7+RqnIAOQ+L1k86C+RO2o7VY02
-	RhySrC2EcXOOkwZMr67pfOZ/s9l94H6TorZAMlWoJMrDQLyWNNKIEGm/Fh68MMm76AnbF0ZjtDO
-	8SvTlkc7Stb60JsZBh4LqmjEplRwyLPEXmHajrgSfy6G6luiKK22xkkKEoZAgMQIre2LXp6v4x1
-	jhhdMNV1fKHOGqMstlJ4zEAkTNPXioh/C5pF2Y0eHS9vzDvdPJ3e/XMrnjoGTcWvImh9IiuW+aY
-	0KjBvit/5uHeP+f2RuNU0pO7VInkzl//IpFaLMHJku8aiR681dAnDwVKaPtwAp5IooyRNGKduyw
-	OZTMtt9IxDGmm9kwmcwln/+PO+JpcWIEHdM2LZPa+nWH/Uwavs7j7d6C1yO8gw9mFPeDYe8x1L6
-	brHlxKZ/aE3NpaMKKIACo6dEyrz/qzFNzuyVYyCeHEU=
-X-Received: by 2002:a05:600c:8b0a:b0:4a1:da58:1ee with SMTP id 5b1f17b1804b1-4bb55a95dbamr161321305e9.31.1794744970969;
-        Sun, 15 Nov 2026 04:16:10 -0800 (PST)
-Received: from [192.168.0.167] ([78.152.238.245])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb65ce005bsm126726035e9.14.2026.11.15.04.16.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 15 Nov 2026 04:16:10 -0800 (PST)
-Message-ID: <ea2dea8f-e696-4e86-be9f-248cb6ec86b9@linaro.org>
-Date: Sun, 15 Nov 2026 12:16:06 +0000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gSIPRigB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC6801F000C4;
+	Sun, 15 Nov 2026 12:54:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794747298;
+	bh=AJTKULYseaeK5WjHYtGrkruJIYuQWcLHf4wiRJSayYY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=gSIPRigBwIctPck5wIv4+u3hlMzO9GbAF+hN46/IM8ZR/4VJvencCFeC7m39EKC+x
+	 1OeFidqcun9/TmXmsYVHvoPET+7UA+ch7CizWKYVKfbfA6jbs1rL0+alcaUBbhIF/k
+	 Q8n+85uJ/E1wp0wy/Seaa5T7g/dE6VPfMu66sZZDLpQUKvLCVIULhEmedbTfAZbsf+
+	 hOsaG54OLjJ10OqiWsNvWPj3hEttquU86bcNCuegwZfNoU8d85wMVSwSRRATnrStwc
+	 DKw663nyW9jjXuOz5I8FLtA7lSa01HlYlulIxCETbfzUHMhaZ2J+BJrbATVGNB/tF4
+	 Tg5ynOFW+ga4g==
+Message-ID: <c81473c3-e735-44ba-b9b3-ef71a206e4c9@kernel.org>
+Date: Sun, 15 Nov 2026 12:54:51 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,49 +52,157 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 10/23] media: qcom: camss: csid: Add support for CSID
- 980
-To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
+Subject: Re: [PATCH] media: iris: Fix out-of-bounds read in timestamp metadata
+ fallback
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
  Mauro Carvalho Chehab <mchehab@kernel.org>,
- Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Frank Li <Frank.Li@nxp.com>
-Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
- Atiya Kailany <atiya.kailany@oss.qualcomm.com>
-References: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
- <20261114-add-support-for-camss-on-sm8750-v7-10-8ff2a11835f6@oss.qualcomm.com>
- <130fecb6-5372-44d9-8261-c3ac88248631@linaro.org>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+ Hans Verkuil <hverkuil@kernel.org>,
+ Stefan Schmidt <stefan.schmidt@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <MHYjgQwKyl4g6PykXAKsc_qby-VHmaZ8ZyKEoTM1Fpmve-Cg_dUJaQT0a2MReqplHxr4JLS7xunPQ6qB5AlxVg==@protonmail.internalid>
+ <20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com>
+From: Bryan O'Donoghue <bod@kernel.org>
 Content-Language: en-GB
-In-Reply-To: <130fecb6-5372-44d9-8261-c3ac88248631@linaro.org>
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 15/11/2026 12:14, Bryan O'Donoghue wrote:
-> On 14/11/2026 11:29, Wenmeng Liu wrote:
->> +            for (k = 0; k < CAMSS_INIT_BUF_COUNT; k++) {
->> +                __csid_addr_update(csid, i);
->> +                __csid_reg_update(csid, i);
->> +            }
+On 17/10/2026 04:25, Vishnu Reddy wrote:
+> inst->tss[] has VIDEO_MAX_FRAME (32) entries, so valid indexes are 0
+> through 31. iris_set_ts_metadata() writes at metadata_idx and then
+> increments it. After the 32nd input buffer, metadata_idx is 32 until
+> the next input buffer is queued.
 > 
-> Why does this run twice for the same index ?
+> If iris_get_ts_metadata() finds no matching timestamp in that window,
+> its fallback reads inst->tss[32], one entry past the end of the array.
+> UBSAN (Undefined Behavior Sanity Checker) reports this as an
+> array-index-out-of-bounds error.
+> 
+> Use the last written entry, metadata_idx - 1, in the fallback instead.
+> Fall back to slot 0 if nothing has been written yet. Even if stream off
+> and stream on happen multiple times on the same session, the fallback
+> always uses the latest metadata received.
+> 
+> Fixes: 17f2a485ca67 ("media: iris: implement vb2 ops for buf_queue and firmware response")
+> Cc:stable@vger.kernel.org
+> Signed-off-by: Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/iris/iris_buffer.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
+> index eb8de60c1177f..31cba99a665c1 100644
+> --- a/drivers/media/platform/qcom/iris/iris_buffer.c
+> +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
+> @@ -865,9 +865,11 @@ static void iris_get_ts_metadata(struct iris_inst *inst, u64 timestamp_ns,
+>   		return;
+>   	}
+> 
+> +	i = inst->metadata_idx ? inst->metadata_idx - 1 : 0;
+> +
+>   	vbuf->flags &= ~mask;
+> -	vbuf->flags |= inst->tss[inst->metadata_idx].flags;
+> -	vbuf->timecode = inst->tss[inst->metadata_idx].tc;
+> +	vbuf->flags |= inst->tss[i].flags;
+> +	vbuf->timecode = inst->tss[i].tc;
+>   }
+> 
+>   int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf)
 > 
 > ---
-> bod
+> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+> change-id: 20261013-fix-oob-tss-7d317d612cf0
+> 
+> Best regards,
+> --
+> Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
 
-"run CAMSS_INIT_BUF_COUNT" for the same index ?
+Just control the variable where it is owned/assigned - the index should 
+never run outside of bounds - dealing with that out-of-bounds is a fixup 
+that shouldn't have to be done.
 
-You don't increment a buffer index. How can this be logical ?
+Don't let the index overrun at all. That way the next function that 
+reads the index, doesn't have to know or care that the index might run.
+
+[0] % git diff
+diff --git a/drivers/media/platform/qcom/iris/iris_common.c 
+b/drivers/media/platform/qcom/iris/iris_common.c
+index 25836561bcf3e..b2b9349c38ea9 100644
+--- a/drivers/media/platform/qcom/iris/iris_common.c
++++ b/drivers/media/platform/qcom/iris/iris_common.c
+@@ -33,9 +33,6 @@ void iris_set_ts_metadata(struct iris_inst *inst, 
+struct vb2_v4l2_buffer *vbuf)
+         struct vb2_buffer *vb = &vbuf->vb2_buf;
+         u64 ts_us = vb->timestamp;
+
+-       if (inst->metadata_idx >= ARRAY_SIZE(inst->tss))
+-               inst->metadata_idx = 0;
+-
+         do_div(ts_us, NSEC_PER_USEC);
+
+         inst->tss[inst->metadata_idx].flags = vbuf->flags & mask;
+@@ -43,7 +40,10 @@ void iris_set_ts_metadata(struct iris_inst *inst, 
+struct vb2_v4l2_buffer *vbuf)
+         inst->tss[inst->metadata_idx].ts_us = ts_us;
+         inst->tss[inst->metadata_idx].ts_ns = vb->timestamp;
+
+-       inst->metadata_idx++;
++       if (inst->metadata_idx + 1 >= ARRAY_SIZE(inst->tss))
++               inst->metadata_idx = 0;
++       else
++               inst->metadata_idx++;
+  }
+
+  int iris_process_streamon_input(struct iris_inst *inst)
+
+There should exist no window in time where the index is invalid.
 
 ---
 bod
