@@ -1,85 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=35.89.44.37
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794783149;
-	b=gDDfzaaDK4OYt+SRtME8nZkZo7uwmvvsA1KI2C5ZOnrHyon+V9RAVBMc+bQ5afWiiLSW
-	 lgEXd+mLpRAJQCq91re2d4GvNV8gQyN90WVjb9IcRrDNCpeAPWWXcufFoFZEoK98b91xQ
-	 bZrW8rfiKOfloSkThxk7sgm3E4pi2Ywt3zyUjvIwItQeJ14c7jBjYr045k9g1RTkLMb45
-	 mqqXLx1SnlkGpIapb6KxY16Nz90gVM1TvYmfSIfk/IHUrGDgspXGzSh8CI2zf07IApUv8
-	 SdfsCNNj6JuLjrF6BFmclJAMwFsJ2UMPv3Cso1Hwfr0pWoiYzD5ZcvGDx5aRGvU6A4w==
+	t=1794784589;
+	b=KOI2uLacSRRZ1R3yKFp2K8PfxdgBWd+YBq/mjdnlIvUiwhjHw8oCQA1agjo1JPC3UN2c
+	 Hjm1mdzs0ttlkN2GYzxlpLyeluTpzzKFsntdB2CFvvEAXCB/gCilk/JfDQpB8TtTnXB62
+	 pdvgrpGlCxikIoSykVbIJHeAG2uZZVhqkoDHqIuqJXsej7jEqwaD8FicLYgJL4lsYUAR3
+	 z1bHEOCa21bt93jRcOuOK9bjTweg4d6MDxejGrvBcyL3Ayt30AsnSfyuLdnS4qm/d9SvD
+	 Tns8dqSkqEE20F/y3Nlp2KoEkjawATRDG6v7h3xvm1tLLTajKr1i+FzIM59G90YbfWw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794783149;
-	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
-	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To:X-AntiAbuse:X-AntiAbuse:
-	 X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:
-	 X-Source-L:X-Exim-ID:X-Source:X-Source-Args:X-Source-Dir:
-	 X-Source-Sender:X-Source-Auth:X-Email-Count:X-Org:X-Source-Cap:
-	 X-Local-Domain:X-CMAE-Envelope;
-	bh=ElkOEwzqFMVazDgPfmPJH8YI8hCqGrmAc8l3kEGiXOs=;
-	b=I48Kb1t8WnZSQdJhiClCa7WkGR1wUFpk1MeQsLd5mbUp2UDRQgMryHApHUmTH9XjSBbH
-	 jDO/Ekhc0nu6+XHez7wXn45C1eEy88wNqyEzRoNeGVAqxcpKc4LQ8UPGrpOg3n0LHGtBX
-	 Zr2er1vLUc1rxP0LZjJ5oyWqD4E6fxoodWhvzcllxMYrXLiaCgFvllIgDXUbrEGrZHHZs
-	 DE0jhgNxrrCr3as6dgS3GNnhQr1k+CYOT39i8a6YlFrLvQNuWW5domzPKErDBOJ+Z94NR
-	 iuObX4W8q2KSKH4ZCtO4l6fTNrYf+JoguKbWGxd6wBndD04UScuPoYAVnceo5qTMWUg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794784589;
+	h=Received:Received:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=LeOiLhcf1q+p6at9rZXmc8rKAqsk6n/O5F6TnwP4dPM=;
+	b=MjR1b+GP91hKfvx18jb8sUldhwMJchsMo1dfyKNkU+aUCCm6At3RaH7OYAx8g0rrGE2z
+	 3yx7iiibVTcP6/PqejmrsTHvipO8XFYUCAwFRGFUssmSBUMFTpH11aZj4T1j8jlUMrxVM
+	 Qf+tumfSsfeI9vTsQJHkC4XOFzUr0XaVvGnVQfYhVFPmJWA7pqN8I692JBJNo4krT1ipR
+	 T7BjxS8YgADBQLHKsz/xKh9WPKieXB8BCz9kKeqYkbj7fj+d+kp7mhR66oXtjp8+jnYfc
+	 cLe3E5Le2yUV4KJTRZQuB13gMOzIL9finp7kzQmCHRTNNag50wwGbLoNdJLMCJRU0oA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=fail smtp.mailfrom=roeck-us.net;
-	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=FepVLd+0;
-	arc=none smtp.remote-ip=35.89.44.37
-Received: from omta38.uswest2.a.cloudfilter.net (omta38.uswest2.a.cloudfilter.net [35.89.44.37])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C530606A31F
-	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 22:52:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C530606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=FepVLd+0
-Received: from eig-obgw-5002b.ext.cloudfilter.net ([10.0.29.226])
-	by cmsmtp with ESMTPS
-	id SiGZxOG4YVK9USj5IxsKic; Sun, 15 Nov 2026 22:52:28 +0000
-Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
-	by cmsmtp with ESMTPS
-	id Sj5Hxe8dIb2qJSj5HxUjCK; Sun, 15 Nov 2026 22:52:28 +0000
-X-Authority-Analysis: v=2.4 cv=A7tsP7WG c=1 sm=1 tr=0 ts=6afa37ac
- a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=1XWaLZrsAAAA:8
- a=GU_cOIP1yHUKzuPKd5EA:9 a=CjuIK1q_8ugA:10 a=KPbNTLLc3YvdawN95zVk:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=roeck-us.net; s=default; h=In-Reply-To:Content-Type:MIME-Version:References
-	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
-	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=ElkOEwzqFMVazDgPfmPJH8YI8hCqGrmAc8l3kEGiXOs=; b=FepVLd+0XyTfhGfWi2zYTb2dCo
-	mcQNf6o5gX92ChWdE+XflwR3p9AlWicMoCdct9OHP2k2u2zVi+K5MTgx7GhGGHY7dOefDzIYaebdg
-	dpMyDyg8lePJdF5RD24oSuZXYDXHlknH3uB7FFc+GKO+WkxfiG9l2/SN3OGZ+DS970NBC6jJpZRie
-	OFWj0YeaEPDIFvGZnQTObjZbzThOp/hfTWP+0fmqGujmtyNYOzTYKD2MgSudbGIfSTAVZmsKCR7QP
-	f0FyfyVTHXgRhZrcFWI+75ky4G0XcS8i9P0+Xs++AguHZ2RKIFUUv8O1K0026U+UujKjuQ4pbmxwf
-	bQaSnIkg==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:50630 helo=server.roeck-us.net)
-	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <linux@roeck-us.net>)
-	id 1xSj5H-00000000p0X-0myw;
-	Mon, 16 Nov 2026 04:22:27 +0530
-Date: Sun, 15 Nov 2026 14:52:26 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Mayank Rungta <mrungta@google.com>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>,
-	Marc Zyngier <maz@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	"Kirill A . Shutemov" <kas@kernel.org>,
-	Douglas Anderson <dianders@chromium.org>
-Subject: Re: [PATCH v4 6/7] watchdog: pretimeout_panic: Use nmi_panic() when
- invoked from NMI context
-Message-ID: <1720d199-fc7e-49db-9c64-6733c75caba5@roeck-us.net>
-References: <20261112031629.396819-1-mrungta@google.com>
- <20261112031629.396819-7-mrungta@google.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 986F0606A32C;
+	Sun, 15 Nov 2026 23:16:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C7131F000C8;
+	Sun, 15 Nov 2026 23:16:29 +0000 (UTC)
+Received: by venus (Postfix, from userid 1000)
+	id 7DAE9181BF9; Mon, 16 Nov 2026 00:16:27 +0100 (CET)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Sebastian Reichel <sre@kernel.org>, Hungyu Lin <dennylin0707@gmail.com>
+Cc: Fenglin Wu <fenglin.wu@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20261113221732.97506-1-dennylin0707@gmail.com>
+References: <20261113221732.97506-1-dennylin0707@gmail.com>
+Subject: Re: [PATCH] power: supply: qcom_battmgr: return charge threshold
+ write errors
+Message-Id: <179478458749.205616.9260603997709976458.b4-ty@b4>
+Date: Mon, 16 Nov 2026 00:16:27 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,48 +49,29 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261112031629.396819-7-mrungta@google.com>
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1xSj5H-00000000p0X-0myw
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net (server.roeck-us.net) [108.223.40.66]:50630
-X-Source-Auth: guenter@roeck-us.net
-X-Email-Count: 21
-X-Org: HG=direseller_whb_net_legacy;ORG=directi;
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfIxrWtGeg2x/IikQTyA1JXiNRj368R0pP1SHbM7Ha6UEnmpLoly46dC3V/0gg8HCYv7kuiH1HOFU/aNjGxSF7aqvts8GCuvF29JxS6DbtcTZvF6zzprj
- 89lqSD2jVDwpg058LHhVFo2hAhR+lrh+LvnhFv72EUOxFc44N+nrqXaqCyfPJllIC/Rq7endM4BUs1xa0Hg8bM75ARv1SVWsVZE9LZl9hIil8Sl3QtAGMDl+
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16.0
 
-On Wed, Nov 11, 2026 at 07:16:28PM -0800, Mayank Rungta wrote:
-> When a watchdog pretimeout interrupt is registered as an NMI (or
-> pseudo-NMI), pretimeout_panic() executes in NMI context. Calling plain
-> panic() from NMI context is unsafe if the current CPU was already inside
-> vpanic() with regular interrupts disabled (where the watchdog is no
-> longer fed): vpanic() assumes panic_cpu == raw_smp_processor_id() only
-> occurs when entered via nmi_panic(), so it falls through into a
-> recursive panic on the same CPU, corrupting the static panic buffer,
-> panic notifiers, and crash dump state.
+
+On Fri, 13 Nov 2026 22:17:32 +0000, Hungyu Lin wrote:
+> Both charge threshold setters return success even when
+> qcom_battmgr_set_charge_control() fails. If the PMIC GLINK transport
+> returns an error or the firmware does not reply in time, the sysfs write
+> still reports that it consumed the input while the cached thresholds
+> retain their previous values.
 > 
-> Invoke nmi_panic() when in_nmi() is true so that an NMI interrupting a
-> CPU that is already panicking safely returns, or stops via
-> nmi_panic_self_stop() if another CPU is panicking.
+> Return the request status from both setters so userspace can detect the
+> failed write.
 > 
-> Signed-off-by: Mayank Rungta <mrungta@google.com>
+> [...]
 
-Similar to the previous patch, this patch is independent of the rest
-of the series. Applied to watchdog-next.
+Applied, thanks!
 
-Thanks,
-Guenter
+[1/1] power: supply: qcom_battmgr: return charge threshold write errors
+      commit: ffce9bb777f28733e981928fb19f2d13be40b6b9
+
+Best regards,
+-- 
+Sebastian Reichel <sebastian.reichel@collabora.com>
+
