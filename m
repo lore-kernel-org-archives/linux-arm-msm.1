@@ -1,136 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.48
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794691849;
-	b=YxMs7SnFN4SaQPX/+1hKpsVk49Ff9fgiktAK45c92V7MAVM7+Zll0xQOuRlTWm7taAbf
-	 PNQe6eyKJLgJFeK/xh+SvXln/UBUMinoe9DfqS/1JJND1xKkD9CudU22ZDpB3A4ehjvSu
-	 1TuDjJXtYeVWndDcV8J1dj8HNneQ0xCx8fFrZ/4mmXgcp3EgR1VRP4Xa1VdqbnvvBw6cz
-	 HCYqnsXjGVTLPdmM1r3v0tk8wxyyoapqWYOxc559w75JEDqfeoQqsQBI7ODjPt03yv12x
-	 YT7/bIPaprHJSoy17zt2dttYveuT8HGXsUah+zxiN3466pAIamyyYkIHfLq7EZZ4wtw==
+	t=1794700824;
+	b=lZur61lHq+4s59ewSUy2NJfnZ/TIIbtJ5bXpzaPvMxdPAI63Xtc5+M9oYbnVwkeBtf0R
+	 dkBMT9cy6Oc9gkBJpRK/CsAfdCjQ2WGuJAB32s6XajvY3sTU6dYXxAvMdoyJVwW+NPUNJ
+	 c/r/NgBCqXvBkITi9ecDGPGAnf4HhZsQIxwh+Ocr2q6GI1jRQN3Dlpp26gZlsaZYZqKRt
+	 b/9DDQaORxaXBEJEKmfVDfX6TXIoW/soGUekIb3sqHrNF6T17Ejd2GPKopCy16lacONGX
+	 5eeLktbFXKS/cI6qJFDa1Tmx5tKwnDNzgb51Rzy+g/CpEf9GW9oDT1csNkpifezgk8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794691849;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794700824;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-	b=VLbQYfcLZ5vZFo72pOcE5X0d9iB6wllgdSpiKkRqQsne3An7LjxCoeDd3Y8wDo3tXMui
-	 cCuQMNlAgpItBL+G6HaR49T8oy4q+mWBX28M0kK4Txt18fIVyvVBNg4BAwBnyMldHvSyV
-	 IByxjy5Zdc0EZgtK5W4efBiCgjC8oq1dtq7Ol02q9CmEQrFEL2Ujn+Q7NtMWwxx6697o9
-	 G1otb40nN5ZMtgW+na9A+ybroLn7lpiKeYDPbuLi/Sr3o6jIALYQy8IEaaibU8T/s+ywc
-	 edbPMNgx3XDTF7KUaUmE1VCWcZbCmK07Ec/KivdCx/KoNA/ImEUI8iCyAgi7dZf3d8g==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=47yra+ALozbc0fVpexoyxbUMKoA6BWbtB+u45dbkO3Y=;
+	b=3v5FXoejDmg3KjY5j7w8jdOM9iob6ITRJfpMeLh9hJK+lYuAujBwuf0uKXR2YkWvkS+M
+	 ghYLvG//v0/ysnDCjFCHGpSXRHrTkyo/oP7N8mwrmSm1xPEeto0t2QeEKN0kdD8ZbcJyq
+	 XjRCSewzt/TOoYZSsc7dUCO8eqfZUTCbcF6lJS/8PI2gWttYrw3jroHDEkJhzuetkVkGd
+	 h9BRJFoecBolTKvcqIMJchr5uEoNigICe6IkKb8P/CHFqdzJR8r5aulu/GKQYkhIlyt+T
+	 hGCIIVrmovWiY5ExnCKxjVuDqFFjEF5TomwkjS64j0s0Uab772DaxqHldx4zaMhVpBw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lWlSLmZa;
-	arc=none smtp.remote-ip=209.85.128.49
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PQyl8f22;
+	arc=none smtp.remote-ip=209.85.219.48
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD3E1606A32E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 21:30:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BD3E1606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AA91606A329
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 00:00:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0AA91606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lWlSLmZa
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a9a8d6cea8so22067665e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 13:30:48 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PQyl8f22
+Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-91ecd81cd67so32760636d6.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:00:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794691847; x=1795296647; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-        b=lWlSLmZaPq3CwNa2GvJ5HLBZxwrHAyR4KYWcNLYDoejqq+bHE47WezKQusTce17cqB
-         UTWjdD/IlmKTsXW86lcI5Re+obIoVIb9t86LrcMAeziz9eDWUmhlf0tEDJWLXl6iumFV
-         A0KOTfltxQB7iH/1NZqAz8vQsctKFp7PZfZL10agBOyW0+/+Nlq4fquLxNOefQolK0q1
-         7b1VyBrgPTzn3K2O93/7d5x0teNBV9W1gjmQsMpDfJX8yxuUQvPJ+6K/Js0FjGNLg/bj
-         pddRJxGyyKNTa55ItmUV+vqh3pU2XKCHu2EjpM7+mnWtIVQHlY7yLwHWBA9Qc69Hd/il
-         +DeQ==
+        d=gmail.com; s=20260707; t=1794700823; x=1795305623; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=47yra+ALozbc0fVpexoyxbUMKoA6BWbtB+u45dbkO3Y=;
+        b=PQyl8f22/c3gghnWE2LGTIohsdt76WYwo/5YSjvXwwSESCjFlxldyVhVcbxVmDMMoj
+         ylqCa9z0BylOho52I2dMQ5Hy/AdSQFBSlDYih1vSq0W5/Z5OG2sqt4hDMPMtpuhUpf+N
+         c51qT2hq1h7hI7JcDm9P9T0Cc40x+hprFp1G7QWwZSqLIJ0RcRNaQHlzq7W720oh3yVx
+         j0fDAaCMNb85JTTy+BKirlQF5Y2ydIY0WK99PJ41qhDUmtPuEi1ReVcB1xWVUc4dxTgT
+         bPULwS+YwypQo3idazwbRSDuhJeVZ2X3AAnKct5ZWODhdaAzkEd4wr+6DC/ziDWNgFeU
+         jPCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794691847; x=1795296647;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-        b=T/UbN4F29Ag8QHu4B4WbPnQONHC2HRQLWxFM5wZ390rmrN8NSuyUTBEnBdpiFG0/nV
-         b9+ShquemKFqISGasPdb8Y7Vi0dI+dBttDWXQsgmN7ypq7+eu3Wb+7m8UeAjiNAQuGV7
-         J4jleuwsyun+Fl3fnYt3kaIo1BrxdyHqo5hdo17qXNOYWwSepAYLzP1W5ANVRj3jdU21
-         9YDvYmOf7MtvHPdlqhF1yxAxzOCpZWwzS7zqTr+SFisWpF2AyLtBq1AGYKD5FqEWB93A
-         bd7EO/ja53AwdkstAU0BjkkdSjhMEJqMAnePi0FOYPmScZXhBrkxanqw5w9xkPGVHUhJ
-         DBHw==
-X-Forwarded-Encrypted: i=1; AL+hErHYTPVJDouui9JRYjK6u3ZFDvnUdLamgj9zM3Jn/WfAKplpWREOf3PioMiCB7sO1Mzvoy/aDW8EZX3TpzX8@vger.kernel.org
-X-Gm-Message-State: APuU4Z/xWFwjg/CXHnK8tM3DUvrwfLARkUw9xzqUkN2cOmYbpMi/fsLW
-	J/PQ9Bbc9HlAR31zhmMgstKPakRgupChKJRYurhaGmxklgPB2EhEIBtt
-X-Gm-Gg: AYBFou3Y21mRk6FFTQrdxymCjrclO2VTjEqrFxpLCk/tTWyvTVylaiktzGd+akkhScH
-	qLlwz/8AcrN94YNTYc3VNFzzSlk3Yqx/nyfEaaaC0XYZdoKvbLHdAxr2ed8KKJDDMnIKUzXwWdV
-	tLEB4jj5gx+i6vURwcuFVryYkwZzcQAmOpcIZl1789jtVUe7AcIEEyk7sm3zi+KpKVu2byZj6Ww
-	THPX78s19KdZjPsZeZ+7JnzeA73JnVLKVGZJK50+AKES56KLKrNvBnVK38OYwYjPY6gLcnXgdI3
-	RBoRFjMcpz/gtzKJ+osyKtQp2ar+Nt0XalQT6QRw2/zJry4BF38iemRNtmSjbj1O8Ha6Fmo7p3+
-	HAZ4k5rpnnyOyOPpsP0cul/tT1MriCRm2bnlAaNVL/VP1UEoaKxxdXak3vcHSbpGOAfI/IHbck/
-	fWpLLos02KXJf0idLoqoV/ohkdiSrElvHQAelmGoMgQ7mOx6hsOYFBFzPy4j2x2BwWh6Nm6smRE
-	5oxixc4hiQJ5CZN+Nue2USuGgjow29lxDMRlkjN5P0IbxIW5EZqRNVVQSWRhdIEbuHNblPSdpsr
-	EpbpFpxulRSAmYRraD8OP2DBenU=
-X-Received: by 2002:a05:600c:2784:b0:4a1:d49e:9ce with SMTP id 5b1f17b1804b1-4bb4e2918b1mr187322445e9.2.1794691847097;
-        Sat, 14 Nov 2026 13:30:47 -0800 (PST)
-Received: from flare5 ([212.58.121.92])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c603f4e2esm12803478f8f.36.2026.11.14.13.30.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 13:30:46 -0800 (PST)
-From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Robert Marko <robimarko@gmail.com>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Radu Rendec <radu@rendec.net>,
-	Lee Jones <lee@kernel.org>,
-	Will Deacon <will@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	"Joerg Roedel (AMD)" <joro@8bytes.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Bean Huo <beanhuo@micron.com>,
-	Stanley Jhu <stanleyjhu@google.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	Georgi Djakov <djakov@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        d=1e100.net; s=20260707; t=1794700823; x=1795305623;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=47yra+ALozbc0fVpexoyxbUMKoA6BWbtB+u45dbkO3Y=;
+        b=fXeLCWipaqnWnXmlUz2hQ3Z/4OvTys2JRqpMBQDqnZ8MrlzOJNheGqHpcwFrRoxlvn
+         Iz2RCqgOcwVrqaVAB6lJiGe7uJoKteFEX9zvJntYt+s4ujUJuLKoiPqI6XTSY309/FpZ
+         n7JoZKEyoXGYSL5qs65ycFrlAAkXtVMOjL9Y0byUlkxm+6rgOzjocRnMP18aqDMStZBN
+         QzuGsS+W23xvf0WtjUhJU0GbWoMk35lrLCWQnUWNSbblavgJofMVGDfKXEOpnYqAyQ7w
+         UFDJHHTQ6XGtuYiieYmqNkBrFsV4Q+SOz3On7JPNVn9c9RX6i/dOa8iGVzPd7APKDA16
+         kWmg==
+X-Forwarded-Encrypted: i=1; AL+hErF1PTjncHsdtzzLZxOlm0JUezPDyYE0lmin0ctIXqpfuSdpo8DJ9ua0sKyOWZPvcXft+E39EZ7eccX8wTxD@vger.kernel.org
+X-Gm-Message-State: APuU4Z+QEJXJXYKW0N34SVfEz0m2rVVJL0CYXVkUd2razacdOpDysxkB
+	ANNDovPTsen3hmvI/JrBG22beqrgl35hKQ2ciQQ23eMIqG7VmXh6cKpB
+X-Gm-Gg: AYBFou2JV4kNVimnc2s2+p1LPYMxQ59G/dpJv6X6lQJEvm+gGff/bNuNgHp8p3ESXIL
+	zh9hxW3teC5W7NLZZqig968/PpezTgZxDvwDd+mizdzj4Ov6RBDCuD/FQ7OyDYfemSTYnp8BW2u
+	3BU/5Yb780FeIdaMeJnvLIbOBhEI397JJdOF2tdkaDTVd/PnHwD9UaATsMWBmZEaDkCjFluD8AL
+	NZv7gou5qdoMP+WQjUP/1LZI7M+P6UCHblY5YxIYvLIpZCcQqoGbCH6ccuAu926HiVkbNuHYKp9
+	UbjM9izrjLls3SMHR741vvK4XAbfpkXnroWJtJ9Et52eOgY2aBEV03oSK3ujXkDRhvgNV7Ai9+q
+	wxTyP6jEdU2w4upoAl+BDGyeklmZzvbMHpKOmFwh3fISdALguD7GQNCZEoLQR31fcO0d0ZXjsuy
+	LAXSz5Vl7a0N9pjZJkcEKHebVdgpYtOHUbkdsSR1uR6lhS8HSpkfHtgL68n5iTiuRjl555Fr0gs
+	8OIgHQ3et8RoUtn2Cpk2eNoWc6KP1KnJDGlQHrzk0Dhb+OdZNMbKKKEItjgxvo4kuyDdmGYkhQD
+	1NAPVk1pR9vWgWWWQ+B0wv6uI6gmE2M03Q6a5ma4+JghVx2/N6whCk0Zgyjk+UXqqXJlMDhCIoq
+	Tx315a2zUEtx27yqArLtTeD7F+LNt6Xt4r07+x0Uej07YqnZdytf/MSl5+3EIx6P94MDGnjRkEC
+	Kyf7NUlljqJ9BQ+4W9zNhLIU8y8sbnl5mu3d3XSC1jRiaHJSavo38kcwldQBOLA/xgcO1PbHyCE
+	QP9KMXgtc1FX/PCDbG10y+Fp97+v8znxWWPEuambxM5WA==
+X-Received: by 2002:a05:6214:5284:b0:91e:a38a:74e with SMTP id 6a1803df08f44-91f241cd1f4mr112380336d6.28.1794700822815;
+        Sat, 14 Nov 2026 16:00:22 -0800 (PST)
+Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:2cba:4fbd:5596:d1cd])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f23d70489sm52516536d6.21.2026.11.14.16.00.21
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Sat, 14 Nov 2026 16:00:22 -0800 (PST)
+From: Jesse Casco <jesse.casco@gmail.com>
+To: robin.clark@oss.qualcomm.com,
+	lumag@kernel.org
+Cc: abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	sean@poorly.run,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	iommu@lists.linux.dev,
-	linux-usb@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-scsi@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH 16/17] arm64: dts: qcom: Add initial Halliday dtsi
-Date: Sat, 14 Nov 2026 21:30:28 +0000
-Message-ID: <20261114213028.1933448-1-lightofmysoul@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <0cac5090-a135-4a6c-8221-846b34ed5513@oss.qualcomm.com>
-References: <20261109-halliday-dts-v1-0-289114ab8197@gmail.com> <20261109-halliday-dts-v1-16-289114ab8197@gmail.com> <0cac5090-a135-4a6c-8221-846b34ed5513@oss.qualcomm.com>
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] drm/msm/dp: don't fall back to a link that can't carry the eDP mode
+Date: Sat, 14 Nov 2026 19:00:21 -0500
+Message-ID: <20261115000021.78869-1-jesse.casco@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -142,21 +108,88 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On 13/11/2026 13:10, Konrad Dybcio wrote:
-> Please add the other idle states (D4 and E3) from the downstream
-> devicetree and match the order of properties (psci-suspend param)
-> to glymur.dtsi
+When channel equalisation fails after clock recovery succeeded,
+msm_dp_ctrl_on_link() halves the lane count and trains again. Nothing
+checks that the reduced link can still carry the current mode.
 
-Thanks for the review. D4 and E3 are already there, as cluster_sleep_0
-(0x41000044) and cluster_sleep_1 (0x4100c344) in domain-idle-states,
-just above idle-states. In v2 I'll move that node below idle-states and
-order the properties like glymur.dtsi.
+On the ASUS Zenbook A16, channel equalisation at 4 lanes x HBR2 fails
+on some DPMS wakes. The 2-lane retry trains but can't carry the mode
+(17.03 Gbps needed, 8.64 Gbps available), so the panel stays dark
+while userspace sees the output as on.
 
-> Please use '0x0' for zeroes in reg values
+For eDP, check the reduced link against the mode with the same
+bandwidth check as msm_dp_display_mode_valid(), and retry at the
+previous parameters when it falls short. External DisplayPort keeps
+the existing fallback.
 
-> Let's break up such long lists into one-a-line
+Tested with 100 DPMS off/on cycles before and after: channel
+equalisation failed on 6-7% of wakes either way. Without this patch
+each failure left the panel dark; with it, each one recovered on the
+first retry at 4 lanes.
 
-I'll fix both in v2.
+Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
+---
+ drivers/gpu/drm/msm/dp/dp_ctrl.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-Best regards,
-Stanislav
+diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+index abd3dcd..261645c 100644
+--- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
++++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+@@ -1587,6 +1587,16 @@ static int msm_dp_ctrl_link_rate_down_shift(struct msm_dp_ctrl_private *ctrl)
+ 	return ret;
+ }
+ 
++static bool msm_dp_ctrl_link_fits_mode(struct msm_dp_ctrl_private *ctrl,
++				       struct msm_dp_panel *panel,
++				       unsigned long pixel_rate)
++{
++	const struct msm_dp_link_info *params = &ctrl->link->link_params;
++
++	return (u64)pixel_rate * panel->msm_dp_mode.bpp <=
++	       (u64)params->num_lanes * params->rate * 8;
++}
++
+ static int msm_dp_ctrl_link_lane_down_shift(struct msm_dp_ctrl_private *ctrl,
+ 					    struct msm_dp_panel *panel)
+ {
+@@ -2383,6 +2393,9 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_dp_ctrl,
+ 	struct msm_dp_ctrl_private *ctrl;
+ 	u32 rate;
+ 	int link_train_max_retries = 5;
++	bool is_edp = panel->connector &&
++		      panel->connector->connector_type == DRM_MODE_CONNECTOR_eDP;
++	struct msm_dp_link_info prev_params;
+ 	u32 const phy_cts_pixel_clk_khz = 148500;
+ 	u8 link_status[DP_LINK_STATUS_SIZE];
+ 	unsigned int training_step;
+@@ -2420,6 +2433,7 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_dp_ctrl,
+ 		return rc;
+ 
+ 	while (--link_train_max_retries) {
++		prev_params = ctrl->link->link_params;
+ 		training_step = DP_TRAINING_NONE;
+ 		rc = msm_dp_ctrl_setup_main_link(ctrl, panel, &training_step);
+ 		if (rc == 0) {
+@@ -2472,6 +2486,18 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_dp_ctrl,
+ 			msm_dp_ctrl_clear_training_pattern(ctrl, panel, DP_PHY_DPRX);
+ 		}
+ 
++		/*
++		 * An eDP panel has one fixed mode. A lower rate or lane count that
++		 * cannot carry it trains, but leaves the panel dark: retry at the
++		 * previous parameters instead.
++		 */
++		if (is_edp && !msm_dp_ctrl_link_fits_mode(ctrl, panel, pixel_rate)) {
++			ctrl->link->link_params = prev_params;
++			drm_dbg_dp(ctrl->drm_dev,
++				   "eDP mode needs rate=%d lanes=%d, retrying\n",
++				   prev_params.rate, prev_params.num_lanes);
++		}
++
+ 		rc = msm_dp_ctrl_reinitialize_mainlink(ctrl, panel);
+ 		if (rc) {
+ 			DRM_ERROR("Failed to reinitialize mainlink. rc=%d\n", rc);
+-- 
+2.56.0
+
