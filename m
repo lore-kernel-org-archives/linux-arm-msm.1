@@ -1,32 +1,32 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794770467;
-	b=TQO+YscYgRxKOOv1l0LvYigYMjShEpwLgbMaTPiS18FYZYQiovHdfxo+WpcbjgME15qE
-	 LrUbhWxDWeZVDC31XXRkoslariA427nbsB/RO/UEJ8aLBB6z9DGjSxJMOkBDTuB9DW4y2
-	 GHvvSEKkT7ozHcHh1+rLrRHweO0xKy3GIYuu8L4YNkEPDjKcu+JOmwEp76tt+NXrHWcDx
-	 4wADvDISnuPvYzGcg04Cyvp3Dn+gPGmZqQ5LwHqjfjXFqtpTh0cBu9BU0JitxlcbuwU3R
-	 dn8jbdkmANb9MXGFi+Px72tky0TylU0/PCHEG+fe3t5DYE5UtkwFPZDchKdhJKbpeew==
+	t=1794770895;
+	b=KVd1mBpzl2nJMBixcCMsJZ1eeAHzEtqe+Rd4XrCR78eeVOjmDEr1yy6KsLspDi5irX6F
+	 UpFCw6q//og5ItnSxc/cRuMDhqF5Un67Giz6vBxVlG3jIyq4yhknbOVQ30qW1y40tTtle
+	 2gv45AHSLLYKoLZFM5lDozPDf9u0xtgV+xAjdTZj/ju5sVjQYqj8BruNKdNt1anFKs2ua
+	 IE31tfiUrN0t9SzpPffDp8DCgUD/iX7H+4iRsRo3/9KtbUGQOEtLdyYxulm8MJy/ILDnV
+	 SeWLvy/ZLrf2jjcAGJxFThHSyBGaQBN4ftAPJ8lXLbW+dxkkkFfnzSzl8QijgoVoAlg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794770467;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794770895;
 	h=Received:MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:
 	 From:To:Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=U+51QAUSyzB+DcRMoMVMr+zf+XTPZAFIXU5itFRU/J8=;
-	b=sFEMvOaXSs77ZM07jV7QMjmL2MQG/ZFMGLDpu7PAc/i9wZ1aRtSLZx4hxUG2hvJUeIZ8
-	 Gb1Wx2BMxXvEFyRdfjN410Di1tBKDhj80GL/TQZcMhWyd5+/G9SRs6bl2Z1CiqEFFO4iF
-	 L0f2RGOukUh0WDdOyphN7NtF/h1aTTLqD/dTy+t7s67YpbuuU9qzW1NzsQm+jv0B3idBp
-	 bgBH+MggkI6UyvKlY5TjFPEairQO0mwFEUXAzByotPuIPNyu+DNHO5FuZS0dkFbbej3q/
-	 Nj8UOjxQOyzPxG5ehtUZgOMExkBG+pP9oiLfP8EjixjZmTv2mf+rQwEzlnfxPYugoPA==
+	bh=8vXUwT5n2Ez9H80tnR2LUwnWnU9RLKteDWZxZYsi4Ms=;
+	b=kEgs6T5YbTp27IEBSveEbL9jhxkQWN4MzDnONCEOr2cZ9WSlExh5KvdWpv48vf5KcGv7
+	 KiE+DgUSVt07ia11ZuXlVUsKrspWQAvaXWiv3USplzDNTFTBYG8dYYZmb9OSuiBg7C9xi
+	 lfOizVoWJJjQ1XF9MEGwkYAreEk2rEngbl1XlYcexrUpihqBLpbY5qWuJbMkDc166VmQD
+	 pGIQvhof6Teg50ZRdf6wKDtyhZBdEhiEAjE/3loAGJ0Uns30tXkhFrZRZoRCzguj2YVZL
+	 jr2/Da1yxUa6gD2MemsUC4TbUPY2albjNhEZlVpCEyK/Pty3ba7Po0rGrTOUCPQBdxA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B838606A32C;
-	Sun, 15 Nov 2026 19:21:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8555E1F000C4;
-	Sun, 15 Nov 2026 19:21:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4369606A890;
+	Sun, 15 Nov 2026 19:28:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D29B1F000C4;
+	Sun, 15 Nov 2026 19:28:10 +0000 (UTC)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -38,66 +38,108 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 1/2] dt-bindings: phy: qcom: Add SA8797P eUSB2 PHY
+Subject: Re: [PATCH v2 1/1] phy: qualcomm: m31-eusb2: Add register
+ XCFGI_159_152 for SE0 recovery
 From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Hiren Gohel <hiren.gohel@oss.qualcomm.com>, 
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+To: Peter Chen <peter.chen@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Elson Serrao <elson.serrao@oss.qualcomm.com>, 
+ Ronak Raheja <ronak.raheja@oss.qualcomm.com>, 
+ Wesley Cheng <wesley.cheng@oss.qualcomm.com>, 
+ Udipto Goswami <udipto.goswami@oss.qualcomm.com>, 
+ Jack Pham <jack.pham@oss.qualcomm.com>, 
+ Pratham Pratap <pratham.pratap@oss.qualcomm.com>, 
+ Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
  linux-kernel@vger.kernel.org
-In-Reply-To: <0032f652-4ba1-4a52-9241-635207f0caa1@oss.qualcomm.com>
-References: <20261026094118.3264112-1-hiren.gohel@oss.qualcomm.com>
- <20261026094118.3264112-2-hiren.gohel@oss.qualcomm.com>
- <0032f652-4ba1-4a52-9241-635207f0caa1@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 11:20:55 -0800
-Message-Id: <179477045510.107393.16167606981222781332.b4-reply@b4>
+In-Reply-To: <20261027015545.2758784-1-peter.chen@oss.qualcomm.com>
+References: <20261027015545.2758784-1-peter.chen@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 11:28:07 -0800
+Message-Id: <179477088797.132702.6764909412562148256.b4-reply@b4>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1276;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2666;
  i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=CmDdC5yIx2xWLSRLzs1ukzwBn8nzVj0C0NkdH037HDk=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq+gYZimshdPDzOc4sRn6gnSD/oT3DoXrlvEjdO
- 15rkiPgtheJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCavoGGQAKCRBVnxHm/pHO
- 9eOEB/sHtI5U7bRC2uNbuJ7/GYjoeaJ8CAINi7Q6/Xt6MxNRMpbXi3g7+C7o+tlVxa6f94KyB8I
- Pny3DgHE91A9vhgrv8GTx1xw/OAZmJRc8PkHuERYkmHBJHKno/Us7XASR0jebuvIRj6/C3XfNGE
- gJDfAZi/Wxjp/7jCDT+THFGgKMMLOWL8IZd7QaAao77Mn2X2J0tsL7VhusXUcLyo83jjeY+2nK2
- bVedOn9DtCzb8qnUA7KPocb2eGo0PJWM8nprAMNgpS/Dr4Gy9U3R+ok+15ZrUK6JWCV2maucAVv
- 2ha2fQK1Zy+LL5Qy0YeH8KYga2HZG313QGtoBMkvsVVBOx5+
+ bh=CkVV2Z6n887sHlq0y6Nrzi6ogW1akCFY6515LpCrso8=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq+gfKPwG9ryOEGXLeuMHwXxU0JzlEI+Op9xvr5
+ o02zWKbG2mJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCavoHygAKCRBVnxHm/pHO
+ 9QiBB/9d1C+xOeJntv2ZEA4qL+U2A8rvd+Qi2LaeOrgEaGIBehuvRlFrcfPHZssTYRG5/F+8Iee
+ 6wIrplH/Z3ZZWtOOn6Gf/KshKcKRiZ30b7XPDQSB5sRFmy+TZMdlMYjrDl06cMFdtIkN0xNv6SF
+ IkghtKBRGiE118GbO2J2cyCEzSJmXUqzWyiLxo1+aAvi6ScZYlRiO18XQihDkRwpzkyEoyGzFfM
+ 42jv6Ilu57qGbzBkw9P3UjQuIIjrnaXxwc8SNwdR7LdVhX82mYdUEKrl4iR8mdvZRoYwgtmsOZh
+ zURmrMqkN8YbQH3BHK6EKFxvXS+7RVk/kfu/2OhkxUNVqi6E
 X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 
-On 2026-10-27 12:00 +0100, Konrad Dybcio wrote:
-> On 10/26/26 10:41 AM, Hiren Gohel wrote:
-> > SA8797p platform abstracts resources such as resets, clocks and
-> > regulators in firmware. The SCMI firmware exposes multiple protocols to
-> > control such resources which are identified by protocol_id.
-> > 
-> > For this USB phy, 2 SCMI protocols are exposed by the firmware:
-> > * power domain management protocol (protocol_id=0x11)
-> > * performance domain management protocol (protocol_id=0x13)
-> > 
-> > The power domain has 2 indices: 'core' and 'transfer'.
-> > * core controls the regulators, the clocks and the reset
-> > * transfer only controls the clocks
-> > 
-> > For example, to power on/off the PHY, we should use the 'core' domain.
-> > To disable data transfer and keeping power enabled, we should use the
-> > 'transfer' domain.
-> > 
-> > Add a new binding for the Synopsys eusb2 High-Speed USB PHY
-> > found in SA8797P.
-> > 
-> > Note: the performance domain (0x13) exposes opaques values (0xa to 0x11)
-> > for which we don't have any information.
+On 2026-10-26 18:55 -0700, Peter Chen wrote:
+> From: Elson Serrao <elson.serrao@oss.qualcomm.com>
 > 
-> How come we don't have any information for what the firmware
-> that ""we"" wrote does?
+> This patch introduces support for the XCFGI_159_152 register to enable a
+
+Avoid using 'This patch'. Once a patch gets merged, it will become a commit.
+
+> hardware-based SE0 recovery mechanism in the M31 PHY when operating in
+> host mode.
+> 
+> During PHY initialization, spurious pulses from external devices can
+> interfere with speed negotiation, potentially leading to abnormal
+> behavior. To mitigate this, the M31 PHY provides a fail-safe mechanism
+> controlled by bit 159 of the XCFGI register.
+> 
+> When XCFG_SE0_TIMEOUT_EN (bit 159) is set, a hardware counter is
+> activated to monitor the SE0 state. If SE0 persists for more than 2.5 ms
+> before entering L0 mode, the PHY interprets this as bus inactivity and
+> resets the state machine to its default state. After transitioning to
+> L0, the PHY resumes normal operation in accordance with the eUSB
+> specification.
 > 
 
-And it always puzzles me how each peripheral invents its own ABI for power
-domains :/
+Please rewrite the commit message in imperative tone.
+
+> Fixes: 9c8504861cc4 ("phy: qcom: Add M31 based eUSB2 PHY driver")
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Signed-off-by: Elson Serrao <elson.serrao@oss.qualcomm.com>
+> Signed-off-by: Peter Chen <peter.chen@oss.qualcomm.com>
+> ---
+> Changes for v2:
+> - Add Fixes and Reviewed-by tags
+> - Link to v1: https://lore.kernel.org/all/20261020061811.3127511-1-peter.chen@oss.qualcomm.com/
+> 
+>  drivers/phy/qualcomm/phy-qcom-m31-eusb2.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-m31-eusb2.c b/drivers/phy/qualcomm/phy-qcom-m31-eusb2.c
+> index 275df38256de..8d954e772585 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-m31-eusb2.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-m31-eusb2.c
+> @@ -56,6 +56,9 @@
+>  #define USB_PHY_XCFGI_7_0		(0x15c)
+>  #define PLL_LOCK_TIME			GENMASK(1, 0)
+>  
+> +#define USB_PHY_XCFGI_159_152		(0x1a8)
+> +#define SE0_TIMEOUT_EN			BIT(7)
+> +
+>  #define M31_EUSB_PHY_INIT_CFG(o, b, v)	\
+>  {				\
+>  	.off = o,		\
+> @@ -88,6 +91,13 @@ static const struct m31_phy_tbl_entry m31_eusb2_setup_tbl[] = {
+>  };
+>  
+>  static const struct m31_phy_tbl_entry m31_eusb_phy_override_tbl[] = {
+> +	/*
+> +	 * Set XCFGI[159] to enable SE0 timeout mechanism in M31.
+> +	 * This enables a counter which will assume bus inactive if
+> +	 * SE0 is more than 2.5ms and reset the state machine to default
+> +	 * state.
+> +	 */
+
+Any reason on not making use of 80columns for comments?
+
+With these fixed,
+
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
 - Mani
 
