@@ -1,79 +1,78 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794773968;
-	b=TyocSVwMS/uBWGTxmxPwz/yQ0c8PGPLZOBSjSs27x+YvIuHas+wJmYPku0rsgJ9u044L
-	 ltqmPw94R8It1oizn7Pd3+MYuHCEH6PHTXubWyjhBeOsDA2wjAUBhn0hL6thK2k+RuJz2
-	 m/l3U2QVGU5PZR5qt6CB6sC4Xv3RNS5kkJPApac/RmnL5IhD0esM+e+wbXcuRKw9yJTVA
-	 NZNvOwsJP+VVtM0YRNiTSecZdC8x3q+X7mSV/8A+7etRKNQZ9PYrvtZF7rJ7W31AdtwBw
-	 a4MSxj7EQK5jYxcmqWu/UZI5Iuu7sCHCuVFSfYd0Ma36fprKbGtgeY5yGj97sRFDpVQ==
+	t=1794773975;
+	b=MwWGshYuEsFlReMi43TXN5vseAD1z1IhBt/KPbbw8svwE+o4YtRJpMqzH/rvnaeCiRP/
+	 KALieFy4+1MSXckPDrXgTRi7VyE5Xfa3o/+pCZ1cnsqcSN3F8T6q26FhIxb9n7rmgvfCe
+	 e58NN3MgrMSrHi2W2JlFeFFM1DhMNVUiAcwXdjPvpJjTxn6FHMcHzdzyXcSMkkMdCJZKC
+	 ryLCGf9On3JTVUUN9CZWtFHbWMPHjMU1dZ9Mvo8V+EvnrN9aWtEVmiFAopycftPJ1YFkO
+	 u/Rj0FheTWoaRajcDo/OZahsLWyhZtDCn3wpEf7bf52sfgmpwTXoSLFc6AN4o4ON28g==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794773968;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794773975;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=7ndt2cfEqLXAyi5+BTS23mgZKfifPOIvVbQiP/cMxMY=;
-	b=W510nY40O2pyXkbXGgjGZz8eXxMvWgq3OqGrM3AQoxnJwb2BfSCaDi8BFCG3H9DY5/bS
-	 QhTXIYuA/d/kt5+s1oInxey8jE7gqCy59Xg7fAvHZLM9jZahZvj/ZijPz1vT5QQbVVtfn
-	 CZVLy0fD+GOjk+h4YHD3zs01+Oxf79mmGICNASoggx65K9Z0cHHLJN8K2GubKLU0+li/z
-	 3m3wtcaySGyC97bhdOBJn90T1ezWg12nC3rp14amdA8ssSA+AA01b55a0Ru7+s+NlJhnz
-	 ovD9pb9hY5X27GzRAWzq9SunzOb7HjI4sPvTK4BwpS6WAgZKzUe3nlPlTolB1FTe9xQ==
+	bh=q4IgntDazxo2KddnGYy4M31C62yJDP5JDGNHab2DSxU=;
+	b=5h5k9/SkJwlZy1ZJe2vkZ8YuDZOeJj1TJEp+fupgcNNBqqpmhDSsNSbniNeraFptdiz1
+	 mLIbMmvBH2yRu9411/d77bkHOvH7Mmey0jpyX/WbqAZcJPpP0CiKm/2iZ6/xcr37g4oBb
+	 6T15KQ7NqAaFTKyW43gAQw8mzYdoc49KvS5T4T/1/rqWj/SgtFNY/0AFX759EWdohxhak
+	 UaikeVVn2JWqu4dWKVxBiS7JNCQMOPZWwU2Xlvi6gL5PVSwYlowshP7XwLDXtM9xXxRdn
+	 LuKmp1RMCjCTwi35OCVrwOJGVoCpJFJjy7MeHU6pCH8eKu9su08ZWeeguMIYgyMBcKw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DC18DA7M;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g8vDAwNm;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9A7B606A336;
-	Sun, 15 Nov 2026 20:19:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 960D6606A89F;
+	Sun, 15 Nov 2026 20:19:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DC18DA7M
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g8vDAwNm
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794773968;
-	b=GjUYHjo4BkyvOZmxuPPJ+o70rezCk9AWioX3ClUf1AyIdidoZ2NZ7qUZDfqaUBf2yyWc
-	 qOqzDuiwKyh4iclMDtGtbkifRxN/1NJWm+XfM6fhPqOloeRFv3MB6LzdzDcoPfAF9coZU
-	 CDwwOforBGCa7Sy8ddO6Nftbj3CjBqzpuR/IRF+XzRZkVI413T3rNzJuRNLQP0NJfS4Ej
-	 sW0v6x6xX/yfbLxXBHdMqzHYO3DmngKMntoYbF8y2PkFjfg+bAckU0tKG35ncuXAV1QI4
-	 jQAU++aLrOfg0WhZurOv6fcOti+YBVWJfiQ4FADKnsvNURKhiiE0ioHKfKj4w+4nHpg==
+	t=1794773975;
+	b=C/K76IDeanjpZW2hI1ea/yvCttKcTGI5H8QaRw2x16kM8vLZP3OdTOZRN7bK83QejokO
+	 vNoYsGGGtFp1xLQHrNKUsD0Yvnw3yyLJaNFJex4AEkibiHT3Q/XsI6QRfffxFrL5TonbQ
+	 uKJPQvys6IHUcdCthXuqgX56yiUHlnTjRfvuF1ha3UMuLkqxTphaFxYm3Se4WVokcUBHZ
+	 oXgdPJg1OMso7GCmovwYsWxqntG3glL8BKBOCewge1m2i4ZsIQ9JgADv5Se10WOIXvtNV
+	 osGMFwYVt2w64QFxYdqq2I+meQsMTPmA+3R+NiVmcvxu1I5TtJE5yKWeScvOT12TLig==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794773968;
+	c=relaxed/relaxed; t=1794773975;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=7ndt2cfEqLXAyi5+BTS23mgZKfifPOIvVbQiP/cMxMY=;
-	b=kaj619dSFM/7X63ukZdGTevbZSXOIqpGt6lKTTsNOckYVWC/8/Uvz3wzotLuXFhotHW1
-	 bzLzrVpaA7DoV+w667h66SZ4coujmZB4ZIk4jvvuGevz1kn19Kis+nzI/SSK1zBEbVi20
-	 4y+e/BkbSgAB/VAavZM8WuIaPNoBmR89ya37luXszsgA23QQRcrxB2Pj7SntkR58orR5n
-	 LaSD7wEM2dxPUF72jRobsYrbPIv4P7+tzHpKlGUiwjFxL2ywkDbfylS0lksRL3a269KWe
-	 uw8ud/7eAkVm1qdgGav2FKFHsajKx/mnT8bw5wjGy2pLLCQbrmdnJH9TpG0X2xtfTBQ==
+	bh=q4IgntDazxo2KddnGYy4M31C62yJDP5JDGNHab2DSxU=;
+	b=Mz4lQd9KLWG0Hdr6bzaGikSlIVawI8ajh5/S60K0nlWy3IlbYa8N+0dK2dFTJE4MVI8P
+	 tWKGvJqBHd+KprBLkbPWcwYW9h3Te2QbrKoREAInhy6rbeJS856IrnJiwRuOuGBhLySGc
+	 Q5bL/5UHOh6pASl1psyJZBGaSHbjmdyFA9KsupMFDYR/ulTOHRwbSqs5SJW7+E2mb1xlo
+	 BQLfikB2QMu8Qx+cg0NmJva+o9PaN8II9WzS7VkKLq6kggx0C9HDUZwNk97ZdijXBue8i
+	 hwaXhhcO01FROCe8hz9+Qc5fQCX6Ggygg4qcfhP/JpN932jqriTVzoyviyOqXY56mOQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id E43081F0092A;
-	Sun, 15 Nov 2026 20:19:27 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 730481F00930;
+	Sun, 15 Nov 2026 20:19:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794773968;
-	bh=7ndt2cfEqLXAyi5+BTS23mgZKfifPOIvVbQiP/cMxMY=;
+	s=k20260515; t=1794773975;
+	bh=q4IgntDazxo2KddnGYy4M31C62yJDP5JDGNHab2DSxU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=DC18DA7MNm1nXH7eCoQXWPO3t8aiXpn+wfSJLsor9sOg3cCqPNGB41guVEz0hWLYE
-	 M+/wVwklaI+4Buda1ef8f31iEeawKBxXFGID0tgfD0nkRxMonuDF1Fpct0z4hxqVNt
-	 SmKpZ9z1nKVMf4fUThlt60JaIrrOcN9ccFTwKrRaZQo6GCvb6+YeK/+IH8hrDRZXFy
-	 QLtSJ4ezXRPFjX46DoF96+9fsI8IMnYpJ7HFk/UGoCvIVRxv+6PNw5NAFuI5K4UbGr
-	 WEJ/APr3D45+jZcPyIe/TjvxlSgPyWPxjgZEjjU/Kb8N1qa6qSD774TqnnPq4noQCM
-	 ErVZwdPHA9VaQ==
+	b=g8vDAwNmPgd2C6o0SP2NSQ+dLEpgfbSK+QHUq28G4G273wqw5X25jj6MULy+ZTkKZ
+	 Ym5dyba1WFYeDF9ZTKjUu2yuqBMwqj/vXnDC2AA+bpdzGzjrKOSN7JPoDfOeGucjMO
+	 SGdVPCD03/Qhpu0pJXRZbAkKqaUMWPxHlFf1GqQt63JMP2/ege4+9mL+LYumivFMlB
+	 10SWCk3/C1c0ZgrupSvj8f2eE6KYjYrFNW8bmZkHeBO2diT6qCO5VHWlNJxrgD4fKZ
+	 WutJGLoE0mZjmHArfYvRlcjsdLfhtoGSHZW0c3h1fqYuI06SGW8VGi89neHALDtH19
+	 p4CQ7Q8BEBm5A==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 7116E4A194;
-	Sun, 15 Nov 2026 20:19:27 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 037D54A19E;
+	Sun, 15 Nov 2026 20:19:34 +0000 (UTC)
 From: Venkat Yadlapati via B4 Relay <devnull+venkat.yadlapati.yahoo.com@kernel.org>
-Date: Mon, 16 Nov 2026 01:49:27 +0530
-Subject: [PATCH 1/2] dt-bindings: clock: qcom: sm8450-gpucc: Add Molokai
- GPU clock controller
+Date: Mon, 16 Nov 2026 01:49:34 +0530
+Subject: [PATCH 2/2] drm/msm/adreno: Add Adreno 829 support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,24 +83,29 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261116-molokai-gpucc-v1-1-07cb3bf37c78@yahoo.com>
-References: <20261116-molokai-gpucc-v1-0-07cb3bf37c78@yahoo.com>
-In-Reply-To: <20261116-molokai-gpucc-v1-0-07cb3bf37c78@yahoo.com>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+Message-Id: <20261116-molokai-a829-v1-2-fb3005bfa921@yahoo.com>
+References: <20261116-molokai-a829-v1-0-fb3005bfa921@yahoo.com>
+In-Reply-To: <20261116-molokai-a829-v1-0-fb3005bfa921@yahoo.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
- Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794773966; l=1014;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794773972; l=7782;
  i=venkat.yadlapati@yahoo.com; s=20261023; h=from:subject:message-id;
- bh=e0GmbRVbOneNgtdi0twGJ0KyCrMgnbqGUTQplz7+HHk=;
- b=KeSbHUuS2dURMP2SyRTWeJtBpjccQkUq2fxIYif0kcWMqbjW6DNhetYxb7Nw16hXVcG6n0CAf
- 1BEDGnfvLBQAAQOm3gweBZOHEtB2xyRBn0j6PqxxbmJSnMkcgFN0014
+ bh=D20N1/4DcSsehd9i7f6YeYD4O0S37h52fimLuF0CZM0=;
+ b=Xv6cO6L8akgb3himKYbdjYphBeUQ4WoaACrqfxWdXzZyy389UhHBQ1xZXtb47SqfUaeMc08p0
+ tRc3QPSYMOWDVjBdeiXy0RqKM9jBYQb1OKz+Qn+CkJMzNM8KuzEu/4o
 X-Developer-Key: i=venkat.yadlapati@yahoo.com; a=ed25519;
  pk=e8KStCtEMvUP1Se/riB/KVnDAQFEVR2Dw2PcuA8/eME=
 X-Endpoint-Received: by B4 Relay for venkat.yadlapati@yahoo.com/20261023
@@ -112,29 +116,170 @@ Content-Transfer-Encoding: 7bit
 
 From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 
-Document the graphics clock controller of the Qualcomm Molokai (SM8845)
-SoC. It is the Kaanapali one with a different PLL configuration and three
-branch clocks at different offsets, so it is not compatible with it.
+Add support for the Adreno 829 (gen8_9_0) found on the Qualcomm Molokai
+(SM8845) SoC. It is a two slice variant of the A840: same protected
+registers, power-up lists and GBIF settings, but a smaller GMEM
+(2432 KiB, hence a different GMEM protection range), its own firmware
+and a smaller preemption context record.
 
-An LLM was used to help write this commit message.
+Like on the A840, the GPU RSC signals that it is off through bit 30.
 
+Assisted-by: LLM
 Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 ---
- Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c     |   3 +-
+ drivers/gpu/drm/msm/adreno/a8xx_catalog.c | 100 ++++++++++++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h   |   5 ++
+ 3 files changed, 107 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-index 7eca456211e4..e62e6127b06f 100644
---- a/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-+++ b/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-@@ -37,6 +37,7 @@ properties:
-       - qcom,glymur-gpucc
-       - qcom,kaanapali-gpucc
-       - qcom,milos-gpucc
-+      - qcom,molokai-gpucc
-       - qcom,nord-gpu2cc
-       - qcom,nord-gpucc
-       - qcom,sar2130p-gpucc
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+index 662f09bec9d5..b8d94b2ca227 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+@@ -658,7 +658,8 @@ static void a6xx_rpmh_stop(struct a6xx_gmu *gmu)
+ 	if (!test_and_clear_bit(GMU_STATUS_FW_START, &gmu->status))
+ 		return;
+ 
+-	if (adreno_is_a840(adreno_gpu) || adreno_is_a850_family(adreno_gpu))
++	if (adreno_is_a829(adreno_gpu) || adreno_is_a840(adreno_gpu) ||
++	    adreno_is_a850_family(adreno_gpu))
+ 		bitmask = BIT(30);
+ 
+ 	gmu_write(gmu, REG_A6XX_GMU_RSCC_CONTROL_REQ, 1);
+diff --git a/drivers/gpu/drm/msm/adreno/a8xx_catalog.c b/drivers/gpu/drm/msm/adreno/a8xx_catalog.c
+index 55a805ab438c..6478849f6c96 100644
+--- a/drivers/gpu/drm/msm/adreno/a8xx_catalog.c
++++ b/drivers/gpu/drm/msm/adreno/a8xx_catalog.c
+@@ -840,6 +840,69 @@ static const struct adreno_reglist_pipe a840_nonctxt_regs[] = {
+ 	{ },
+ };
+ 
++static const struct adreno_reglist_pipe a829_nonctxt_regs[] = {
++	{ REG_A8XX_CP_SMMU_STREAM_ID_LPAC, 0x00000101, BIT(PIPE_NONE) },
++	{ REG_A8XX_GRAS_DBG_ECO_CNTL, 0x00000800, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_GRAS_TSEFE_DBG_ECO_CNTL, 0x00200000, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A6XX_PC_AUTO_VERTEX_STRIDE, 0x00000001, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_VIS_STREAM_CNTL, 0x10010000, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_CONTEXT_SWITCH_STABILIZE_CNTL_1, 0x00000002, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_CHICKEN_BITS_1, 0x00000003, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_CHICKEN_BITS_2, 0x00000200, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_CHICKEN_BITS_3, 0x00500000, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_PC_CHICKEN_BITS_4, 0x00500050, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	/* Disable Dead Draw Merge scheme on RB-HLSQ */
++	{ REG_A6XX_RB_RBP_CNTL, BIT(5), BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A7XX_RB_CCU_CNTL, 0x00000068, BIT(PIPE_BR) },
++	/* Partially enable perf clear, Disable DINT to c/z be data forwarding */
++	{ REG_A7XX_RB_CCU_DBG_ECO_CNTL, 0x00002200, BIT(PIPE_BR) },
++	{ REG_A8XX_RB_GC_GMEM_PROTECT, 0x02600000, BIT(PIPE_BR) },
++	{ REG_A8XX_RB_RESOLVE_PREFETCH_CNTL, 0x00000007, BIT(PIPE_BR) },
++	{ REG_A8XX_RB_CMP_DBG_ECO_CNTL, 0x00004000, BIT(PIPE_BR) },
++	{ REG_A8XX_RBBM_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_SLICE_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_POWER_UP_RESET_SW_OVERRIDE, 0x70809060, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_POWER_UP_RESET_SW_BV_OVERRIDE, 0x30000000, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL, 0x00000030, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL2, 0x00000030, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_INTERFACE_HANG_INT_CNTL, 0x0fffffff, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_GBIF_CLIENT_QOS_CNTL, 0x22122212, BIT(PIPE_NONE) },
++	{ REG_A8XX_RBBM_CGC_P2S_CNTL, 0x00000040, BIT(PIPE_NONE) },
++	/* Disable mode_switch optimization in UMAS */
++	{ REG_A6XX_SP_CHICKEN_BITS, BIT(24) | BIT(26), BIT(PIPE_NONE) },
++	/* Disable LPAC large-LM mode */
++	{ REG_A8XX_SP_SS_CHICKEN_BITS_0, BIT(3), BIT(PIPE_NONE) },
++	/* Disable PS out of order retire */
++	{ REG_A7XX_SP_CHICKEN_BITS_2, 0x00c21800, BIT(PIPE_NONE) },
++	{ REG_A7XX_SP_CHICKEN_BITS_3, 0x00300000, BIT(PIPE_NONE) },
++	/* Disable SP2TP info attribute */
++	{ REG_A8XX_SP_CHICKEN_BITS_4, 0x00000002, BIT(PIPE_NONE) },
++	{ REG_A6XX_SP_PERFCTR_SHADER_MASK, 0x0000003f, BIT(PIPE_NONE) },
++	{ REG_A7XX_SP_HLSQ_DBG_ECO_CNTL, BIT(14), BIT(PIPE_NONE) },
++	/* Ignore HLSQ shared constant feedback from SP */
++	{ REG_A7XX_SP_HLSQ_DBG_ECO_CNTL_1, BIT(17), BIT(PIPE_NONE) },
++	/* Disable CS dead batch merge */
++	{ REG_A7XX_SP_HLSQ_DBG_ECO_CNTL_2, BIT(24), BIT(PIPE_NONE) },
++	{ REG_A8XX_SP_HLSQ_DBG_ECO_CNTL_3, BIT(7), BIT(PIPE_NONE) },
++	{ REG_A7XX_SP_HLSQ_TIMEOUT_THRESHOLD_DP, 0x00000080, BIT(PIPE_NONE) },
++	{ REG_A7XX_SP_READ_SEL, 0x0001ff00, BIT(PIPE_NONE) },
++	{ REG_A6XX_TPL1_DBG_ECO_CNTL, 0x10100000, BIT(PIPE_NONE) },
++	/* BIT(26): Disable final clamp for bicubic filtering */
++	{ REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x04000720, BIT(PIPE_NONE) },
++	{ REG_A6XX_UCHE_MODE_CNTL, 0x80080000, BIT(PIPE_NONE) },
++	{ REG_A8XX_UCHE_CCHE_MODE_CNTL, 0x00001000, BIT(PIPE_NONE) },
++	{ REG_A8XX_UCHE_CCHE_CACHE_WAYS, 0x00000800, BIT(PIPE_NONE) },
++	{ REG_A8XX_UCHE_GBIF_GX_CONFIG, 0x010240e0, BIT(PIPE_NONE) },
++	{ REG_A8XX_UCHE_VARB_IDLE_TIMEOUT, 0x00000020, BIT(PIPE_NONE) },
++	{ REG_A7XX_VFD_DBG_ECO_CNTL, 0x00008000, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_VFD_CB_BV_THRESHOLD, 0x00500050, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_VFD_CB_BR_THRESHOLD, 0x00600060, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_VFD_CB_BUSY_REQ_CNT, 0x00200020, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_VFD_CB_LP_REQ_CNT, 0x00000020, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ REG_A8XX_VPC_FLATSHADE_MODE_CNTL, 0x00000001, BIT(PIPE_BV) | BIT(PIPE_BR) },
++	{ },
++};
++
+ static const u32 a840_protect_regs[] = {
+ 	A6XX_PROTECT_RDONLY(0x00008, 0x039b),
+ 	A6XX_PROTECT_RDONLY(0x003b4, 0x008b),
+@@ -1664,6 +1727,43 @@ static const struct adreno_info a8xx_gpus[] = {
+ 			{ 252, 2 },
+ 			{ 221, 3 },
+ 		),
++	}, {
++		.chip_ids = ADRENO_CHIP_IDS(0x44030a00),
++		.family = ADRENO_8XX_GEN2,
++		.fw = {
++			[ADRENO_FW_SQE] = "gen80900_sqe.fw",
++			[ADRENO_FW_GMU] = "gen80900_gmu.bin",
++			[ADRENO_FW_AQE] = "gen80900_aqe.fw",
++		},
++		.gmem = 2432 * SZ_1K,
++		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
++		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
++			  ADRENO_QUIRK_HAS_HW_APRIV |
++			  ADRENO_QUIRK_PREEMPTION |
++			  ADRENO_QUIRK_IFPC,
++		.funcs = &a8xx_gpu_funcs,
++		.a6xx = &(const struct a6xx_info) {
++			.protect = &a840_protect,
++			.nonctxt_reglist = a829_nonctxt_regs,
++			.pwrup_reglist = &a840_pwrup_reglist,
++			.dyn_pwrup_reglist = &a840_dyn_pwrup_reglist,
++			.ifpc_reglist = &a840_ifpc_reglist,
++			.gbif_cx = a840_gbif,
++			.max_slices = 2,
++			.gmu_chipid = 0x8090000,
++			.bcms = (const struct a6xx_bcm[]) {
++				{ .name = "SH0", .buswidth = 16 },
++				{ .name = "MC0", .buswidth = 4 },
++				{
++					.name = "ACV",
++					.fixed = true,
++					.perfmode = BIT(2),
++					.perfmode_bw = 10687500,
++				},
++				{ /* sentinel */ },
++			},
++		},
++		.preempt_record_size = 3708 * SZ_1K,
+ 	}, {
+ 		.chip_ids = ADRENO_CHIP_IDS(0x44010000),
+ 		.family = ADRENO_8XX_GEN1,
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.h b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
+index 4b2156825bdf..af13d4599d0d 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_gpu.h
++++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
+@@ -612,6 +612,11 @@ static inline int adreno_is_x285_family(const struct adreno_gpu *gpu)
+ 	       gpu->info->chip_ids[0] == 0x44070001;
+ }
+ 
++static inline int adreno_is_a829(struct adreno_gpu *gpu)
++{
++	return gpu->info->chip_ids[0] == 0x44030a00;
++}
++
+ static inline int adreno_is_a830(struct adreno_gpu *gpu)
+ {
+ 	return gpu->info->chip_ids[0] == 0x44050001;
 
 -- 
 2.56.0
