@@ -1,56 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.254.49.197
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794743291;
-	b=ac+fTe3X+YsAkOhRs0/UZX6v5VSlP0qZdBqCqCOszRVud+SODhpfni/dJPRkATHekLGH
-	 zL/xyMA8z1rvCmsepT6QV2kBamtfIRFHdcAYfakw9KdCEFG7YyF62gn6PpIsVr+hCzLdt
-	 7mxWAa9SXnpJrCWTxcfKyI2FaEx0JBL/4LuJQyTCE4bHitlRU60KHfRETIzHQSzA+r30g
-	 +w/7H3c/u5fC6bl7RWh/XOTEmw/pu014U7KVjvlOBKcBh/hZGbROS61yOR3KG22rE0U/v
-	 8jnpKNOrlgMHuATBoPdukV/xwibPCVSTdvf0KDpqvXT2jemDqS7GRyeVnC12DioeMiA==
+	t=1794743542;
+	b=2Ydputign2iyF+j7JRM/DMW1JT4UoklJj4+6+Bkj3qDBY9l3ob+ETujDEQE7yFnOj3hE
+	 KaE78HqIo//D7y5i25W/8F8YmsLoCGC58JPcU/2jyil4RSIQRrsrxXAolH/5aHO0EHbTg
+	 5zJ908DCY+FYwW5f9r4i8aWfG4hjdb6MSg0lufT1yfYRmTdvEQ4P0YeN6uCMzLeBoImPM
+	 1M6kV+HocxGYWI+8dfwW23pHsTcdg2PTHI08+kTYPepS41zYNp3qmFJlPUA7quTRoXlQJ
+	 enwItXU5LWiVkIQh2hINJoCEX/GfWYFwcljUeNNAsIZLDYrTjK+HNvL8h3s08Tj7atQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794743291;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:
-	 Content-Type:Content-Transfer-Encoding:MIME-Version:X-HM-Tid:
-	 X-HM-MType:X-HM-Spam-Status:DKIM-Signature;
-	bh=JuWsfAp8paSqsFy21hQ7TQ2kPA5+o4Jt7FI0our2Ftc=;
-	b=su45Nttz3SKzJBH/BptHVQ08J4jht0TKc8S5GA+2ytSSJraL8lh5Ghe5dp72Zqmd5l+X
-	 Y8ysdcu5zkO9tvrDkHLhQ8HpwbFZOVnBysaklWawS2CrN1EA36STORvDjh9bz97wftT32
-	 hMCW2ThW2YkGstJA7suWq4m8IC3QVqwFt6ad3KMWCthrRhlNkPjPpMyyP5ogV/M8C9L8n
-	 EjJ3a6wBiBV9Tma/1ZiMX20PBBllQvUJWlwTufhKWTNEtjLAFmPTtsY49JmWTJ7P3K+We
-	 a+NkdIzi12RW7589gy97cJok+InURUCzY03Zh3BShezk1PMSXZ538TRdwUtj0NZAFOg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794743542;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=oxYiqKJNYD9KdwN7WAZXVLTObyEuT47URNMJY5W5BKU=;
+	b=lIJttndzv64g9wUyOBuetvKExwNfTsxEl/9te7NxpJLdG9FnJBQYIEoq/qOstUqSlPq4
+	 6Qk5BjvuIz18BBRuCAny77M6mHgzr9R2SMgWzz3uHTcQP0rZSeTuwtzGfPlrnXcpOIP0A
+	 AnyWI7afbDNIlyBocKr7qp64K0NbiUMHPISdmnrFWid5h6wheFwjvROIrzU0p7k6vbPDU
+	 Rt6P+DEu5SaFZ6Y+VsEZDDGmJLHd5H1qh6OHmNqY0iyClteogfkJKKpAyejIIN+7kuFGB
+	 sYfc16QxySyfuXj/q/yVdr3EzY85umPQW3qBKa5oVH/3VkNlBjqgGzkDNhBwnhSf+hw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=seu.edu.cn;
-	spf=pass smtp.mailfrom=seu.edu.cn;
-	dkim=pass header.d=seu.edu.cn header.i=@seu.edu.cn header.a=rsa-sha256 header.s=default header.b=YGvR4bFD;
-	arc=none smtp.remote-ip=45.254.49.197
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gpZwIVyR;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hER6r06X;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28E2260A2625;
-	Sun, 15 Nov 2026 11:48:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 28E2260A2625
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=seu.edu.cn
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9F6F606A31F
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 11:52:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E9F6F606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.a=rsa-sha256 header.s=default header.b=YGvR4bFD
-Received: from [192.168.17.1] (unknown [124.79.98.159])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 54b7e04e5;
-	Sun, 15 Nov 2026 19:47:59 +0800 (GMT+08:00)
-From: Hongyan Xu <getshell@seu.edu.cn>
-To: Stephan Gerhold <stephan@gerhold.net>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Sergey Ryazanov <ryazanov.s.a@gmail.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, David S. Miller <davem@davemloft.net>,
- Eric Dumazet <edumazet@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>
-Cc: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
- Johannes Berg <johannes@sipsolutions.net>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: [PATCH net v6 0/3] net: wwan: qcom_bam_dmux: fix DMA channel and
- power-control lifetimes
-Date: Sun, 15 Nov 2026 19:47:56 +0800
-Message-ID: <179474327647.103840.9539614513141118915@seu.edu.cn>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gpZwIVyR;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hER6r06X
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AFBm1jm2334726
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 11:52:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	oxYiqKJNYD9KdwN7WAZXVLTObyEuT47URNMJY5W5BKU=; b=gpZwIVyRgd1j6fy7
+	dcYCnJJYu0zIvOCxOyoatxcJDiwNFyLqip9pHtPveVY2+ferjcMo6Q4fcZPlqdlV
+	zrs76Xo2AMXnitQejM3RYw6p1Mx0Z01qDIPRpnHlvU+hDj0uYvwiciEorTQlgDSi
+	A/+G0ngnkN9P0fnc8AqcVc9YLp3aHM8BPJupXikd7aqjQ80ryXhUFMuTRlkV1iry
+	mToXGICmpHo/augQYxe8+Tct9Dn7xkkCNFLXZ260COSULf/K1Y4cGhPOHgbCW2OJ
+	gOEZg1nPB+T0bMgvvPkd6zVt4IAsXJBKXOPu95VC3o1rL/P6HWgW43Jp5XiFyVsO
+	KjmTIQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhnx300a-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 11:52:20 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9495dd0f07eso406817285a.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 03:52:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794743540; x=1795348340; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=oxYiqKJNYD9KdwN7WAZXVLTObyEuT47URNMJY5W5BKU=;
+        b=hER6r06Xo6bDW7lTR4W6w7xZuYtoW16ZRUcDan9PtrGu6X76NhAIQk3fSX2BsCQRmN
+         uurXUCWAP0HZGBlqMyDQvIwCSzeFefOy5PlqudDOz4rGWEgiQ1j//8B8UnNLitMSQjQ9
+         bOuonyXPeqiXMWJuouG6SSHk4mmTp2tx0iTqGv0d9T6+ezokh40cb2k56i4hgoATOjyZ
+         klpj8x5VHU/bJMqeCKx8cbI0/sWo8GnMDyjnnBhPFtLyXX1B1QEbSRhZQorsVhJJjKA3
+         NZn1g0BFv47kmMeKNpQI19Gr6fcvooFfPyUh5feQLpTMVthIDE/0/d7KzPlcPTrJQJFe
+         25ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794743540; x=1795348340;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oxYiqKJNYD9KdwN7WAZXVLTObyEuT47URNMJY5W5BKU=;
+        b=Gtmcu5QXHuP20vQbzMWHP0tXWHkl7SRx6a0JgBDafS9YdoG312wfu9JfEW3fOok5lW
+         UUMk5btafHH1W034Cw1Ypfp+qMO/VVV88v81Gc96AzFCzH7c931JbQv9MnBOubHLeUdj
+         64w2iHHc4Kqd6mfuzpJ9DWJqohGUlDu67XHfg0t8MVzryehU6DD1VeH3av8ShrvdClUK
+         2eT0t3WaEFllfL7ZmP5ySHjy4S6bnLpIcP5g3bVtI17QWitBOx36CumochzYusSYgtDH
+         rnMaPK56SY8RHPgBfy73lSsf0huLnMkS5t6weqX7+/6RctsDgWit5lbJtsNWkTtKGEm7
+         5diA==
+X-Forwarded-Encrypted: i=1; AL+hErE6W97tpOh5kT67n820sUupLw9G+BHj/uTs1aj5JHdIC6dl5FSgt6BZrpo0kk5MsZz7pcYAity6iKsypbTP@vger.kernel.org
+X-Gm-Message-State: APuU4Z/K0LddmNXKRQmlI4C07TdV1oHZcYKtNBeZmVX6x6wsBXEWyg3p
+	YHAdZrjId0A5PKYUiLKWKajlSXmnQOxxcVqcZMx94/rgNnwoeX/ZoZdPxRHWQiRGUKn3uqovFub
+	gf8+XnQlWwQnvXzWlC+wKyLCzAq3M1qGVmHSjtIY9vib0lnvn6KU686ORVxB+ELk80jB2
+X-Gm-Gg: AYBFou0kaPzDe8mOYqruSMXwY70Mbfw47Ww66M/tPLk9oGPeJXWDrKLrA4KnoH43Ku/
+	+y9BZig6/GkzaWTn9wIwKJw+DuF9w4+9LlMjkwBELZHOjoDbmfygJ6RQ4EBi8ILoy2cDHTRix5N
+	j7HEf39tryrEmATQXAdwxvPPcWh+MsnoomOgs79CteHD/BIhhmgDVYkAwaBpyKhMsBaZL7XQo9c
+	kq1DnfbT0pnMbF7PgPSSiVADXtgTKLryh2dzHxLPt8otOJmIKm87oWRBON8bw/Zw6BC75bOOCUW
+	T10MrKEDtmjbEb8/hK7K8AA6gCNn4nyZlSGWN1Fyihb7iCQTsxYFErmXYjguacLj2aEk2kUffid
+	hPkqjT/mP2bOoLbZ5D8TzYL6Unqd2HHN5GYFTkcdmFwepmrVgN+MDx5hdbD8atxx/4uAgZL8EBF
+	WX
+X-Received: by 2002:a05:620a:880a:b0:93f:3bb5:5452 with SMTP id af79cd13be357-9494bb77243mr1195838785a.15.1794743540147;
+        Sun, 15 Nov 2026 03:52:20 -0800 (PST)
+X-Received: by 2002:a05:620a:880a:b0:93f:3bb5:5452 with SMTP id af79cd13be357-9494bb77243mr1195836985a.15.1794743539691;
+        Sun, 15 Nov 2026 03:52:19 -0800 (PST)
+Received: from [10.2.25.60] ([212.140.138.201])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-49c60116323sm15767904f8f.32.2026.11.15.03.52.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 15 Nov 2026 03:52:18 -0800 (PST)
+Message-ID: <9cb2cc9e-7224-48d6-84d2-308ce31fd93d@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 11:52:17 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,34 +114,118 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-HM-Tid: 0aa1df091dbd03a1kunmbac61c98bf79a
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZSh4fVk0YGkhKTUJMTktCS1YeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKSU9VTEJVQkNVSk5CWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0
-	NMVUpLS1VLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=YGvR4bFDoeBSUkTOrZt9kluRG7Ucxon95IgkXaU5i3BZubhkWbw4kEKYrd9GY4LDqiRySGnJ5d7Slkowh4Cc+LPEKAfvPoY0eNPB8BnxY/NRbS+ng16ByFzQvnsg7agzgBv77ZD6vVHDY/qukdR5hvRwUpY6OLHf5PdxwzRx5kY=; c=relaxed/relaxed; s=default; d=seu.edu.cn; v=1;
-	bh=JuWsfAp8paSqsFy21hQ7TQ2kPA5+o4Jt7FI0our2Ftc=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] ASoC: qcom: audioreach: use a 32-bit container for
+ S24_LE PCM
+To: marcht@proton.me, Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261111-q6apm-fixes-v1-0-1beb5702b372@proton.me>
+ <20261111-q6apm-fixes-v1-1-1beb5702b372@proton.me>
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261111-q6apm-fixes-v1-1-1beb5702b372@proton.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE1MDA0NiBTYWx0ZWRfX4wG/py2ActPf
+ ZS9xIcAJ04HpqpXDpJ0bHTc0pUCNTRCeXWttIko+aGBc8/G9MxZvdH+BRieWhhJatV70fd6R6S0
+ NnU5dQxOCxjDWIz01poR7EiCKB5ANaK+1I0pmizHX+suHXX2d9Jw5r5zG8X/AaiwuOWMCpBRxgI
+ NXi5HYmXZwdEJeh9Er1p/rJEdDftPRnBryO4GbZmhUUHKWvR4cjk+bPhLg/TYJnUNz+zM8PNVFn
+ gx0Z3LHibo42GrN8xnhbGRAsf32xcBBmKEqEq9fhjdHsRhKYcEl8dsB8VNfy8hSGQ1AZIhNwDGj
+ SdC4GuQ7LiFxu04yrsbSESzLPfutyAAyd0V3ntZ/OKMS+HOIg53WhHXT57dB5jmq2saPbQfojWm
+ 0fTV31vFgfzEUNqe1i7sxcpDNa+ixDmTAE+3ATj1dFesw8hL2xbM4i8JQoTAdcED4XdD6tDwdGt
+ a74yGSRKmGulQYLEIFg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE1MDA0NiBTYWx0ZWRfX5xCbc7eW4eoP
+ yINvsyNz7g+T8ei/MXQZVWmQDoyk4xXpGt08VbW2AfyGI3my6+RqUpPfVvATecbFF7jwLtExVA1
+ /mnCU1zmPJjUvL7awUTBxVBcR3QEsXI=
+X-Proofpoint-ORIG-GUID: BQzFmW9iywAV39IElt96ugSYcshT2JZb
+X-Proofpoint-GUID: BQzFmW9iywAV39IElt96ugSYcshT2JZb
+X-Authority-Analysis: v=2.4 cv=Jr5kP84C c=1 sm=1 tr=0 ts=6af99cf4 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=YCedeovXjpRL1ZDdAGOthw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=05h1Iz1xiaL5QSpjF5EA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-15_04,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 adultscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611150046
 
-The original report described a TX DMA channel use-after-free during
-runtime power transitions.  This revision splits the work as requested:
-the DMA provider now offers device_synchronize(), the client serializes
-power-control and DMA lifetimes, and removal stops the state publishers
-before tearing the interfaces down.
+On 11/11/26 10:54 AM, Marc Herrero via B4 Relay wrote:
+> From: Marc Herrero <marcht@proton.me>
+> 
+> SNDRV_PCM_FORMAT_S24_LE carries 24 valid bits in a 32-bit container, but
+> audioreach_shmem_set_media_format() and audioreach_pcm_set_media_format()
+> set bits_per_sample = bit_width = 24 in PARAM_ID_MEDIA_FORMAT and
+> PARAM_ID_PCM_OUTPUT_FORMAT_CFG, which tells the DSP that the samples are
+> packed 3-byte words.
+> 
+> q6apm-dai advertises S24_LE, so with a topology that allows it on a
+> playback front end the DSP walks the buffer with the wrong stride. On
+> QCS6490 (Radxa Dragon Q6A) this crashes the ADSP audio_process:
+> 
+>   PDM: service 'audio_process' crash: 'EX:audio_process:0x2:...'
+>   q6apm-lpass-dais ...: Failed to start APM port 113
+>   remoteproc remoteproc0: crash detected in adsp: type fatal error
+> 
+> Use the container size (32) for 24-bit data and keep bit_width = 24,
+> alignment = PCM_LSB_ALIGNED and q_factor = 23. With this change S24_LE
+> playback works on the headphone path (codec DMA RX -> LPASS RX macro ->
+> WCD9385), tested with the back end at S16_LE, S24_LE and S32_LE and at
+> 48, 96 and 192 kHz.
+> 
+> The DSP then reads each 32-bit word as Q23, so S24_LE samples must be
+> sign-extended into the top byte, as alsa-lib's conversions do.
+> 
+> Fixes: 25ab80db6b13 ("ASoC: qdsp6: audioreach: add module configuration command helpers")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Marc Herrero <marcht@proton.me>
+> ---
+
+Thanks Marc for fixing this,
+
+>  sound/soc/qcom/qdsp6/audioreach.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+> index d2dc5d37bccf..937506edf34a 100644
+> --- a/sound/soc/qcom/qdsp6/audioreach.c
+> +++ b/sound/soc/qcom/qdsp6/audioreach.c
+> @@ -1216,7 +1216,7 @@ static int audioreach_pcm_set_media_format(struct q6apm_graph *graph,
+>  	media_cfg->interleaved = module->interleave_type;
+>  	media_cfg->num_channels = mcfg->num_channels;
+>  	media_cfg->q_factor = mcfg->bit_width - 1;
+> -	media_cfg->bits_per_sample = mcfg->bit_width;
+> +	media_cfg->bits_per_sample = mcfg->bit_width == 24 ? 32 : mcfg->bit_width;
+
+I think it will be worth adding a comment about the wire format vs the
+sample format so it helps others.
+
+other than that it looks good to me.
+
+Reviewed-by: Srinivas Kandagatla<srinivas.kandagatla@oss.qualcomm.com>
+
+--Srini
 
 
-Hongyan Xu (3):
-  dmaengine: qcom: bam_dma: synchronize outstanding callbacks
-  net: wwan: qcom_bam_dmux: serialize power and DMA lifetimes
-  net: wwan: qcom_bam_dmux: stop state publishers before remove
+>  	/* Convert the physical mapping to a logical mapping of the channels */
+>  	for (i = 0, j = 0; i < AR_PCM_MAX_NUM_CHANNEL && j < mcfg->num_channels; i++) {
+>  		if (!mcfg->channel_map[i])
+> @@ -1308,7 +1308,7 @@ static int audioreach_shmem_set_media_format(struct q6apm_graph *graph,
+>  		cfg->sample_rate = mcfg->sample_rate;
+>  		cfg->bit_width = mcfg->bit_width;
+>  		cfg->alignment = PCM_LSB_ALIGNED;
+> -		cfg->bits_per_sample = mcfg->bit_width;
+> +		cfg->bits_per_sample = mcfg->bit_width == 24 ? 32 : mcfg->bit_width;
+>  		cfg->q_factor = mcfg->bit_width - 1;
+>  		cfg->endianness = PCM_LITTLE_ENDIAN;
+>  		cfg->num_channels = mcfg->num_channels;
+> 
 
- drivers/dma/qcom/bam_dma.c       |   6 +
- drivers/net/wwan/qcom_bam_dmux.c | 317 +++++++++++++++++++++++++------
- 2 files changed, 266 insertions(+), 57 deletions(-)
-
--- 
-2.50.1.windows.1
-
-Discovery: found by the author's in-house static analysis tool.
