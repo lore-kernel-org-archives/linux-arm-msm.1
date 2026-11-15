@@ -1,47 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794747298;
-	b=E2c2dF/YxEXA6kvNcu3BIF5IiLfUeIS0EcWnM12u/DStEA4kQilaFlpgdWwhe0S5DFUH
-	 XGaOUgo6bPVRQ8BLgquJmrHFJgi6UcbdZ05VJboYuMDYGJxfdywVvzyjzDPbFrCPYby+1
-	 1lhdlRlpUkIQPmtt3VR+EtJbCqkYe0N97gYBYp2peguczNGMiO3jRwHIgK1nhLup61P9Z
-	 /l+HjxIrle3CMCOSC08Kb2YzG2imcYXC/6SMbZhbe86wDzRzwEBJ0sNr02XXfok9oprdi
-	 N/TK7CgYc4aMSHLKo3JRPENfsO9aZEwf2JufkUaMI9GaGm5pZ6BjQH7fq/gTpiGYMRQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794747298;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=AJTKULYseaeK5WjHYtGrkruJIYuQWcLHf4wiRJSayYY=;
-	b=UdmJ18/UITpNIqb5z+iZoKvKsYfNZEVVCqm5z6huhkYeVo0DXeHTdXCwBkV7gn4xkCcV
-	 HidpKPFbfHazwpzv+l69ZkUKts60cV/rXaRLOSih6yDAvee/25Sbk49ofR38QWfAZvd1k
-	 6x9DSgv1woo/5KBosjFg1pVgqdsF5B+hxM3Bxaw4QNmGAJfCSHE+0Co6IFlGtGbk/P/Mw
-	 DdkLar0tkSTrw4UbJ/+OzntmFGsITfw6dYpltNE7NfXcVPpp1u/WX1O5nsB/aedcbGMHq
-	 K0Q5TfLI9XO5Jp2nrQMYGEdgE4lWHsB199PSMPkzbLXANz3zgx4m9t3IQNqlVy77nWg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gSIPRigB;
-	arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794748383;
+	b=RhepWzx/3b+9uB96m5H+GhtFoUoerS8q7Ux0z1lGfnImi4ShGu9WWYHeT0OLxqYPdn4i
+	 RfL4m3VwiqileZ3fO/m26tK1tKuHq+MP+uf5MLDws7Q/KEKMndrzPJtzxr/zbRZjX6dEp
+	 SQJssW8+D+WSp4a/eYY4e39gjakDCZ7CKcwzirAxbZ3n/+gj3ZfLYweh3QEGP7g1Dh6SR
+	 Jao35FxDpkB6RQegtcRsq3CStjeIgvL1JD1Xg3Oo1Hi5E6KKo8Wh8ZIoMWfp0pjVs8wv7
+	 GMTADJf8Kseo4/zuu/wO3iMdWP2/sFZkLph6Kisdo4EZEkpH0OerzWblzWELXCrTl7w==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794748383;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=IqR561dWiplqXUp1PMLGBdY5P8lIwtM8j4jl0EFni5Q=;
+	b=SE/mz0XFPfSbWK9iO9iDlxxQuVcHnJdM2O0Wamk57e+69Q0N6Hidr2IaeKkHYyu077Ew
+	 Yj3m/Tl76YYatkYx5p4vYyclUI0fboen5i+bJlkBo2tl8d9WWJegfXmFOVc1d8PGBssZc
+	 RTbGybZBhdEWgpqyo26Zski6oxQDIyhKEIgdmM14dHWLu6FroFdxpGuxy5mB36R5DPIx5
+	 BGQ0utdWQhZ/zK7W/hDg9v0Nqi654nubkhNiSG6bKe2xXllO5cs5LjfoK3MBPZV0QJcZ6
+	 m16hmidBZ9NkR3bOn+5KVtEj0S1J2se3h/2XpL4kqzHSVMw0X7z04dTmazQN1aSlppg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IJAuXMgc;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F42606A31A;
-	Sun, 15 Nov 2026 12:54:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA622606A31E;
+	Sun, 15 Nov 2026 13:13:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gSIPRigB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC6801F000C4;
-	Sun, 15 Nov 2026 12:54:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IJAuXMgc
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1794748382;
+	b=YUMDaxtYaKnTDtTrUrC8JpkhAfk6EfuC3FcLXU5KbbxxJ+lnVorlsv9saBsddQpsFbSd
+	 MG1az+RV5ZIFxYMxoY+eGo9hGlpH2KyU0Z00G9CldbrWuVQWqctofHvVJRDQLlXRyHtjY
+	 H5Hc3V2qea+rLnzOwe7We2iGl8yAjQdjsa+rYlWejFCNZahDyeEcRoNqNJzTkZd940xDr
+	 BwsdJm/R/J5eYjGcajMa0QbvI25tOO+L2eORNIr0ETe1w23tUDmyw6rcw6DqER84Ns0lR
+	 bxibclKUfA0eso0pET45uuXJc5IQV/Ju+5B3pePyO74KjdA+chKTFMWDt2WzqBlU6EA==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794748382;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=IqR561dWiplqXUp1PMLGBdY5P8lIwtM8j4jl0EFni5Q=;
+	b=1yyRud+L+rYKtwZ6PO7D2QJ8P7vTG2Mfx+nijfhYAerqxx4OtSBrOagyfE4QVRmwn+kS
+	 gN8lHPHi1otlue1fFiQ6kIoHyJBU7/bOrVKKsKz6x9rQv9k7gVZflGZrCf8JUuAIEp8xM
+	 HpOlyvQvi3FUpRCC//FuaUpguLEiSUfceYHjLQqnY1eD3FIMvgbvCEpd0Iotibvb1n+SP
+	 8H1MCQsAs34HAErjcMUYMuz4eFsQN/tZnRRGs2VwK2NBPNbhj9yFNuJl5HUyz+DE0wcei
+	 +6iXtrcX7rYgbLdTo6IHWwJ2BZExhUb3cVYcAVcn5N2itmQ1CQYJCSmv4jRSIK/WIiA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id 14F661F000C5;
+	Sun, 15 Nov 2026 13:13:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794747298;
-	bh=AJTKULYseaeK5WjHYtGrkruJIYuQWcLHf4wiRJSayYY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=gSIPRigBwIctPck5wIv4+u3hlMzO9GbAF+hN46/IM8ZR/4VJvencCFeC7m39EKC+x
-	 1OeFidqcun9/TmXmsYVHvoPET+7UA+ch7CizWKYVKfbfA6jbs1rL0+alcaUBbhIF/k
-	 Q8n+85uJ/E1wp0wy/Seaa5T7g/dE6VPfMu66sZZDLpQUKvLCVIULhEmedbTfAZbsf+
-	 hOsaG54OLjJ10OqiWsNvWPj3hEttquU86bcNCuegwZfNoU8d85wMVSwSRRATnrStwc
-	 DKw663nyW9jjXuOz5I8FLtA7lSa01HlYlulIxCETbfzUHMhaZ2J+BJrbATVGNB/tF4
-	 Tg5ynOFW+ga4g==
-Message-ID: <c81473c3-e735-44ba-b9b3-ef71a206e4c9@kernel.org>
-Date: Sun, 15 Nov 2026 12:54:51 +0000
+	s=k20260515; t=1794748382;
+	bh=IqR561dWiplqXUp1PMLGBdY5P8lIwtM8j4jl0EFni5Q=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=IJAuXMgc3/CrVFvtvJGHJ/gPL2mdVN5ctgD7Lp2r4pLqY2YIWRbpQmQcx5dZSIB6B
+	 9L5KtDAifjS4jFFDpJqDGFL6MgcpYHN1T6oVlWcfuNDN1UUZfZHpMXorYs4s4Hh7pJ
+	 VBhNS/I3/UDpchk+OS2uOIoCz7QbTQ8slEKNMhw5VA/4hgH4gUGpibYycB+8jAJPAH
+	 7LE4yp75z9xbw/gnbObKKVZsaXIteIV2TGFghAr9J+nWrMzp9J9HMQBOyMNURDn6sL
+	 eXzcS1KFY4tm317BYu/Y7d97gK7JDVhJPF5CwS5ainxK8hNEIVNbnZ3pJRoCObX/LD
+	 E0zvBA7dWlbvg==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 99DE44A0A8;
+	Sun, 15 Nov 2026 13:13:01 +0000 (UTC)
+From: yzddMr6 via B4 Relay <devnull+yzddmr6.gmail.com@kernel.org>
+Date: Sun, 15 Nov 2026 21:12:57 +0800
+Subject: [PATCH] ASoC: qcom: q6dsp-lpass-clocks: Set driver data before
+ registering clocks
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,158 +83,144 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: Fix out-of-bounds read in timestamp metadata
- fallback
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Hans Verkuil <hverkuil@kernel.org>,
- Stefan Schmidt <stefan.schmidt@linaro.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <MHYjgQwKyl4g6PykXAKsc_qby-VHmaZ8ZyKEoTM1Fpmve-Cg_dUJaQT0a2MReqplHxr4JLS7xunPQ6qB5AlxVg==@protonmail.internalid>
- <20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
+X-B4-Tracking: v=1; b=H4sIANiv+WoC/zXMyw6CMBCF4Vchs3aUVgLiqxgXvQxSL4Az0JgQ3
+ t2CcfmfnHwzCHEggXM2A1MMEvouhdpl4FrT3QiDTw0616VSqsBpkJHJvPBdehnQPR/oOXozGqS
+ 89rpq9Km2R0jAwNSEz4Zfrr+Wyd7Jjau4PqwRQsumc+06/e3DtsdqXyA7DcvyBbn5X9OnAAAA
+X-Change-ID: 20261114-upstream-q6dsp-clk-drvdata-e09d27f289b3
+To: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org, yzddMr6 <yzddmr6@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794748380; l=4515;
+ i=yzddmr6@gmail.com; s=20261028; h=from:subject:message-id;
+ bh=IhpdDzjG8SfUTWw69Q02/8xD6GDVJahHeSuoz5N6di4=;
+ b=1VjHJ+3hckZdc0O+FuL60XGYogx0ZxwJhD+VOXHMKTe3EPdoyEnpqTWiIqO8cOPhscKIRQjan
+ UBcaxw7PFcQAtzV+3B+D6bnxJHIYHcKVusuuFUHGEN5vOJxUKkfxkEN
+X-Developer-Key: i=yzddmr6@gmail.com; a=ed25519;
+ pk=QLT2mwairk4R38oU379hkHynqjoLrlqd0Cl1ERUqIqY=
+X-Endpoint-Received: by B4 Relay for yzddmr6@gmail.com/20261028 with
+ auth_id=1489
+X-Original-From: yzddMr6 <yzddmr6@gmail.com>
+Reply-To: yzddmr6@gmail.com
 Content-Transfer-Encoding: 7bit
 
-On 17/10/2026 04:25, Vishnu Reddy wrote:
-> inst->tss[] has VIDEO_MAX_FRAME (32) entries, so valid indexes are 0
-> through 31. iris_set_ts_metadata() writes at metadata_idx and then
-> increments it. After the 32nd input buffer, metadata_idx is 32 until
-> the next input buffer is queued.
-> 
-> If iris_get_ts_metadata() finds no matching timestamp in that window,
-> its fallback reads inst->tss[32], one entry past the end of the array.
-> UBSAN (Undefined Behavior Sanity Checker) reports this as an
-> array-index-out-of-bounds error.
-> 
-> Use the last written entry, metadata_idx - 1, in the fallback instead.
-> Fall back to slot 0 if nothing has been written yet. Even if stream off
-> and stream on happen multiple times on the same session, the fallback
-> always uses the latest metadata received.
-> 
-> Fixes: 17f2a485ca67 ("media: iris: implement vb2 ops for buf_queue and firmware response")
-> Cc:stable@vger.kernel.org
-> Signed-off-by: Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/iris/iris_buffer.c | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
-> index eb8de60c1177f..31cba99a665c1 100644
-> --- a/drivers/media/platform/qcom/iris/iris_buffer.c
-> +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
-> @@ -865,9 +865,11 @@ static void iris_get_ts_metadata(struct iris_inst *inst, u64 timestamp_ns,
->   		return;
->   	}
-> 
-> +	i = inst->metadata_idx ? inst->metadata_idx - 1 : 0;
-> +
->   	vbuf->flags &= ~mask;
-> -	vbuf->flags |= inst->tss[inst->metadata_idx].flags;
-> -	vbuf->timecode = inst->tss[inst->metadata_idx].tc;
-> +	vbuf->flags |= inst->tss[i].flags;
-> +	vbuf->timecode = inst->tss[i].tc;
->   }
-> 
->   int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf)
-> 
-> ---
-> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-> change-id: 20261013-fix-oob-tss-7d317d612cf0
-> 
-> Best regards,
-> --
-> Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
+From: yzddMr6 <yzddmr6@gmail.com>
 
-Just control the variable where it is owned/assigned - the index should 
-never run outside of bounds - dealing with that out-of-bounds is a fixup 
-that shouldn't have to be done.
+The clk ops of the q6dsp clock controller look up struct q6dsp_cc with
+dev_get_drvdata(), but q6dsp_clock_dev_probe() sets the driver data only
+after it has registered the clocks and added the OF clock provider. A
+consumer that gets and prepares one of the clocks in between
+dereferences a NULL pointer.
 
-Don't let the index overrun at all. That way the next function that 
-reads the index, doesn't have to know or care that the index might run.
+fw_devlink does not keep consumers out of that window. The q6prm and
+q6afe clock controllers are described below the ADSP remoteproc node,
+and their devices are only created once the ADSP has booted and its
+GPR/APR services have come up, long after the remoteproc device has
+bound. fw_devlink therefore makes the remoteproc device the supplier of
+their consumers. A consumer such as the LPASS LPI pinctrl then just
+defers until of_clk_get() succeeds, and its retry from the deferred
+probe worker can run while the clock controller is still in its probe.
 
-[0] % git diff
-diff --git a/drivers/media/platform/qcom/iris/iris_common.c 
-b/drivers/media/platform/qcom/iris/iris_common.c
-index 25836561bcf3e..b2b9349c38ea9 100644
---- a/drivers/media/platform/qcom/iris/iris_common.c
-+++ b/drivers/media/platform/qcom/iris/iris_common.c
-@@ -33,9 +33,6 @@ void iris_set_ts_metadata(struct iris_inst *inst, 
-struct vb2_v4l2_buffer *vbuf)
-         struct vb2_buffer *vb = &vbuf->vb2_buf;
-         u64 ts_us = vb->timestamp;
+That happened once on a Xiaomi Pad 8 Pro (SM8750). While the LPI pinctrl
+probe registered its GPIO chip, gpiolib read a GPIO direction, which
+runtime resumed the device and prepared its q6prm vote clocks through
+pm_clk. The prepare op then faulted with a NULL pointer dereference at
+virtual address 0x350 (trimmed):
 
--       if (inst->metadata_idx >= ARRAY_SIZE(inst->tss))
--               inst->metadata_idx = 0;
+  pc : clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common]
+  lr : clk_core_prepare+0x7c/0x298
+  Call trace:
+   clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common] (P)
+   clk_core_prepare+0x7c/0x298
+   clk_prepare+0x28/0x44
+   pm_clk_resume+0x10c/0x188
+   pm_generic_runtime_resume+0x2c/0x44
+   ...
+   __pm_runtime_resume+0x50/0x94
+   ...
+   lpi_gpio_get_direction+0x4c/0x8c [pinctrl_lpass_lpi]
+   gpiochip_add_data_with_key+0x7b0/0x10dc
+   devm_gpiochip_add_data_with_key+0x38/0x8c
+   lpi_pinctrl_probe+0x2b8/0x320 [pinctrl_lpass_lpi]
+   ...
+   deferred_probe_work_func+0x88/0xc0
+
+0x350 is the offset of desc in struct q6dsp_cc; the driver data pointer
+it was loaded from was NULL. The oops left the clk prepare_lock held,
+which blocks every later clk_prepare(), and the system did not finish
+booting.
+
+On mainline the window is short, but it includes a wait for prepare_lock
+in clk_core_reparent_orphans(), which of_clk_add_hw_provider() calls
+right after listing the provider. The kernel that hit this had
+out-of-tree changes to drivers/clk/clk.c that do more work at that
+point, which makes the window wider.
+
+Both q6afe-clocks and q6prm-clocks use q6dsp_clock_dev_probe(). Set the
+driver data before the first clock is registered.
+
+The oops was analysed and the fix written with the help of an AI coding
+assistant.
+
+Fixes: 9ab71ac37240 ("ASoC: qdsp6: q6afe-clocks: move audio-clocks to common file")
+Cc: stable@vger.kernel.org
+Signed-off-by: yzddMr6 <yzddmr6@gmail.com>
+---
+The kernel that hit this was v7.4-rc2 with out-of-tree board support and
+other changes, including the clk.c changes mentioned above. The oops
+showed up once in the 23 boots of that kernel I have logs for, and I
+have not been able to reproduce it on demand. The patch is build-tested
+(arm64 defconfig, W=1) on the base commit below.
+
+I used an AI coding assistant for this work. It analysed the oops,
+traced the probe ordering and drafted this patch and changelog. I have
+reviewed the change.
+---
+ sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
+index 94d96130245e..c3628f90fdb2 100644
+--- a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
++++ b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
+@@ -146,6 +146,12 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
+ 	cc->dev = dev;
+ 	q6dsp_clks = desc->clks;
+ 
++	/*
++	 * The clk ops look up cc through the driver data, so set it before
++	 * any of the clocks can be prepared.
++	 */
++	dev_set_drvdata(dev, cc);
++
+ 	for (i = 0; i < desc->num_clks; i++) {
+ 		unsigned int id = q6dsp_clks[i].clk_id;
+ 		struct clk_init_data init = {
+@@ -174,12 +180,6 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
+ 			return ret;
+ 	}
+ 
+-	ret = devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
+-	if (ret)
+-		return ret;
 -
-         do_div(ts_us, NSEC_PER_USEC);
-
-         inst->tss[inst->metadata_idx].flags = vbuf->flags & mask;
-@@ -43,7 +40,10 @@ void iris_set_ts_metadata(struct iris_inst *inst, 
-struct vb2_v4l2_buffer *vbuf)
-         inst->tss[inst->metadata_idx].ts_us = ts_us;
-         inst->tss[inst->metadata_idx].ts_ns = vb->timestamp;
-
--       inst->metadata_idx++;
-+       if (inst->metadata_idx + 1 >= ARRAY_SIZE(inst->tss))
-+               inst->metadata_idx = 0;
-+       else
-+               inst->metadata_idx++;
-  }
-
-  int iris_process_streamon_input(struct iris_inst *inst)
-
-There should exist no window in time where the index is invalid.
+-	dev_set_drvdata(dev, cc);
+-
+-	return 0;
++	return devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
+ }
+ EXPORT_SYMBOL_GPL(q6dsp_clock_dev_probe);
 
 ---
-bod
+base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
+change-id: 20261114-upstream-q6dsp-clk-drvdata-e09d27f289b3
+
+Best regards,
+--  
+yzddMr6 <yzddmr6@gmail.com>
+
+
