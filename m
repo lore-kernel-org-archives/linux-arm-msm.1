@@ -1,83 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794702724;
-	b=KWTBfXs5xFtiTKEjOBJFghj6Cr1lfkFTXi2dpDOxpc/Do35CQSAJ0C0rX9fvZXfbJ2TQ
-	 rpGakI39Ck3sb39E278t00dlp6acpKu0IbZR3njCKonxNaPzrxAusnC1XAT2unnZd56b9
-	 QfeGXr/vQu/EOnSODmXwZ0EteV85Z3xVGn7D9jM0Bh/rubP2QgvcuZ4+GR9apiGa+/T6o
-	 oQdlYpfJSfY4owfnMqve2kEI/waqdU+G6PFaD66LjQ7VJizw8mp3yZ9pXmh88Ue8p2YBa
-	 OpQcYMSMyTBEUiQO0iJrBVaXi+1IhFyh+B07xwuFgXI+7OITsvzwsg2RqSRPSw690mg==
+	t=1794702728;
+	b=x7z9bB6TaGTkSsH9QH29rZCMw8HeJ9zV3JvIGcYD1mhyaWxIfVqK6G1Uh8q7YS6k7B7t
+	 0E0osriSr2QV6xYUujShp9sHg4xwtj7J032/issgvg+mtDi2bz7NhnAp7dXomxnNiTwfP
+	 fsd5GP1PcczPNtqC0RmeohrQs8wvMhl3U9uugXMy+L7LFqNBIGaV1hMzd6sWqUvG1TMDX
+	 QRfGsSQDgXTbOxVekOXYoXdulvIUNlTdwQ0Y2gqPVg0xDfXInN5D7XqCOgXiMPgB9kWRV
+	 2PlrJG2kkB71kBo7mV7VM6CzDOF77hp1+JUS66kEbsCbLcfshUbzLrYyflIn9oTtQiQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794702724;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794702728;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=1ORxa+4DrubomnpEFvgyCRsCft1wmp5DXp98YT3uKLs=;
-	b=TYafsMmi4IPTaMTtkKH0WuktRLdZ1QsIZS7SCev2EJ616ZxlknkuW80U+6BoViP2upQ3
-	 HH8w2EYGQepNDx06yG2T58lkR0b0kIIsd0T0tOQDJ0sdJ10OEs+kCCJxRCpkqHJ4j6tG4
-	 +te/x3RWF5utoQHeglpQ2tWU5l6ZwRsOqOOvnBxDyj5iXKv2/7U7rnriMQrschCtpD7TA
-	 3pcGMN4F+GvCM1vq3mAHILkZw/X8ejzp1odJFUrEE3FKJyxyYqAxYpE/rrz57rxZWamIl
-	 9nA1rjLTUAbthiswWs25U6S6jQ1SZOTxXsnBdf/Dj5cRa3DMvMsLh8dyJBPZBpWvygQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=GVBi/BtHwXrMR59M0e8R1++dDkkmRGqCyH13CxDS4UI=;
+	b=LhwZZ7kDboLusWD/0lhVQEHosM/i1n4Czt8biPJmP66CajZ3WUvSC90ezN55oOpSJeJr
+	 5TaOoZdm6+3ZTgxEGtSyWHvBJ+NgVKYOudVimhBLbjEKYaCgIFliVh2FBPYt7yw+o4Xmk
+	 B2Ckfp5Gih8JSmH3u4PMF23pp8CeE/Kxs7h506NM0vBrOLyZrus9Kvu5anYHXYG3vpC6G
+	 wAeEiVTp5UF1H/KFl8W6AXoDmJ4sdvZo4/D+DLCS2IgytpucA2W8M2M/cmYFEVrF19kU7
+	 iMG3AjXuVaSx5o1DKfaHaEq2C/F2sTdT7OhvY9o2G9O9c6sisL0T+x5uRywf6IpzJOw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DlcA9+xv;
-	arc=none smtp.remote-ip=209.85.218.51
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=F5NY6n4p;
+	arc=none smtp.remote-ip=209.85.218.47
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A49D606A32C
-	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 00:32:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A49D606A32C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B735F606A332
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 00:32:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B735F606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DlcA9+xv
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c4d473cfff6so325024266b.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:32:03 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=F5NY6n4p
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c50a2efbe1dso370570666b.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 14 Nov 2026 16:32:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794702722; x=1795307522; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1ORxa+4DrubomnpEFvgyCRsCft1wmp5DXp98YT3uKLs=;
-        b=DlcA9+xv6ovQ7U0XnP+svbUjFjhy51cSsHATRyAaPicXbRqayB+mIxzC5TpzMRQLk3
-         LDt5Ce3qRNLH8PwS7YhfnLJTO3sZ5Jw0SIlH+98arhzVSvxqqfGBH5JYZFwoL62y15su
-         wSgCV634hpJfX8qy5Sb+HU/i8rQ5zkT+wDnjFhLakA+1o2GAbK6M37u3xkX7TGJCtZ/p
-         /7FfFneDcaHDSw8ccfL0X3aXh4yn7de6KDDMUFRs915zjJgwJLIwM0iiQKphMMH1y0I2
-         UwFWMlH9SmtKMcd+Wmt5YwkcdjMUUlhOlT2Z/geKLUE4DmiJdkinMK5Zw5D6J0D4iRwD
-         4kOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794702722; x=1795307522;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794702726; x=1795307526; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1ORxa+4DrubomnpEFvgyCRsCft1wmp5DXp98YT3uKLs=;
-        b=WJsgGOFqBR2cQCZoc/ZDx1LU11ViquWw5n8ex5M6hb1Xn/5oh7y4fulWqiGx8jwD7r
-         rcVFJnhTbEn//AoXBYSF5pT7OM1VKLJLnA4nENjT4F8rlRjIDeMJVABOSUv4FrmDzOSd
-         LPjMMtnBimir7mlcfUL3Pg3u1hgJp10qzBcsdzFra3+mjFDSdjrFEuvloTRrmfiMAmY6
-         YwBYylFvOVhOhOCAclN0onREcNyydELGixplfZTzd3ja2+In8+N9EddsBuAF4PIA5iao
-         WrinWupCyIYuPNj1K/WD9bX42Z8swcJ7TkwgjxWDCkyCCSOdsoiugxyiM73Sge62Dd5E
-         2VLw==
-X-Forwarded-Encrypted: i=1; AL+hErFiGYS9psYR0bhDmBl5sojjwyQDAfQ0MbRL19YCJgLh4Kie3hVer0S3s4Noy3O7QN55JodQndDsfh33mUHn@vger.kernel.org
-X-Gm-Message-State: APuU4Z8GpLdhApLacQ3y6C4g4CpkA1JXY8j/LUeEh1YDPI7iUYU/gCtB
-	WOAUZaQTwifGaS5M8HLR9rK/XBx6g3nGWyMiY0xQ+FTK9lidIrVQPdg=
-X-Gm-Gg: AYBFou1ICrOCmP6MLQqmvMlfKCRbIcKYSpqtBSNiL6FD/SEyI6DehSmBGhgTiYolxEw
-	z1TRHNdVU8mrkuFzYgFEu/YQZ3hSwjnEMRNXlYCBaB/Hmrhw+ZwBj897nJeCG7+QwrJZVX4t6zg
-	qo19B2Yu12Sxj/iEBCFUd3Y2wVm7iwaPUyDQD8FkCC4Air7xpdtcGwjiPx1wRXVwCqWnE5RSs/D
-	G8MFNfewgae4x+vEd37mka2pfTb5VgHmRMH5YvC3cgCMP+W+uWvXDaoxVLTtQrxEKUB2DB6ScpB
-	i+ol1SOAOLTRu1dRHa4tXkxh+7NYJy6csJi6qAx8JPnFSc2/p7/e+qT9fbZvnxyN3yenJJINY54
-	Zzdp9W1A0Mt8rZz3Jyb5fMM0E5xUi53fESQJAyVLCaGRlDGEk3CAaby9IWwT/ZiQTM7Pw+iMaUE
-	J0fouijr41Dms7HRUA4wNF8jMCNjrxGpG4vuKlmosGUDSgU17Mc4XVjxGzcamRQOG/E2X7h01JE
-	fqJogML0ZUVBs1KRFr3SPTllamUPDkerRa82eDykt86KaMohoq8XVEuh49OL3rWR6fAJZEgtW+P
-	4FGICkVeM7mfb708Nrx/QVg6seKaTcP6ufl5uTfIjgooOPolmVKbOo+ZgEwRDbz31LumrouxgKd
-	+u98ur2LlRRRcqdahlDLspuzwBHdrbNmfFZ4=
-X-Received: by 2002:a17:907:a714:b0:c42:5363:38dc with SMTP id a640c23a62f3a-c509637e20cmr507032166b.25.1794702721723;
-        Sat, 14 Nov 2026 16:32:01 -0800 (PST)
+        bh=GVBi/BtHwXrMR59M0e8R1++dDkkmRGqCyH13CxDS4UI=;
+        b=F5NY6n4pA3zJoPJKQRZ8qrnhPh4iiSBXipyS7ZZeZZk1Jhgi5od6w1ljHwxc4TFJP6
+         N4RH5tiGrt0q8MU3f86r2HBDR9A6Xb9OViFPa5swY1F7qYvJquKfK1j+NbvGY5tQHQPZ
+         Qj+is9aboixvTiNwW4IEIIq7cGKLrD1Xs3/n7mmKxauASaPGQFt3J5v6yzVGHvXvISEI
+         n+KcHLw2WdJSS5FneYfKXWFzsDyGgY1I+yGZBgmkzshmKDFGEu/vmKNWG470+G6EE5Cu
+         RIK8CCuHbKZLfU1KmA/VpeWOKvFvZAfEzS+jibYRyTkbRMqMKs9sIZ1s9KIcRGVogHH/
+         5obQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794702726; x=1795307526;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GVBi/BtHwXrMR59M0e8R1++dDkkmRGqCyH13CxDS4UI=;
+        b=ZEBxR9Z3kLoArx4eZltvn5djet8LlB+aD06Kcgkk03XYuoAv4j/AZTfLxBoE6hIdK9
+         4tKawBIKdSSnVSYdsN+avTaZ9p+AFlzfOZcMPYwZCMxrqHXQK1jn0QI+XHuaS3+EOyRD
+         VrbaFTzgqfrVwFqCquKMGilJGS4suHDmcFP3x1X+euxgpcq+gNotRERT0uP2itcsSCov
+         Jq3BnEApAHeuPVC6OtuIN8jCbZWr0kFTnNasURiFDu+kEcAnTy15OSxSA/fMQEyU45GE
+         dapWXJBqwF/MVLy/gL4fl3MYKjeoK4ICSK1vBVctUH9as4h72CyaDqSmX5b7wXvhV341
+         hIBw==
+X-Forwarded-Encrypted: i=1; AL+hErGPQKZmXCrumtj/fOqO40i4M+0wV4pQVtZqMjjq1WRrHQqL1izaNLW3inYvLnCKvVxyKHrfnCkROAx93sLQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z/pqBpJvC7g8i6U4f03XLVd+zsAdJqHt+NvwYab/yyoc+2g3tKt
+	Pl+4kHEHl3vioAeuocg1OEEdkWiy1FFy55eDKYhMvyL6yO30ajmK2xA=
+X-Gm-Gg: AYBFou1Q5813Dra4ghJGVxry/14PZpyAhjgybn6zlQBKQs4insAKLRsd3H1oFB6eyQ6
+	bNIwGIyEZFvQbSNQffD2ge10ixiA0ZldaOyHGW37Hvo18N8XH/Tq1fjOAPDHacBcaOV/w1HV2mB
+	snfXtQ7EZunHMmVcaT3iEbafp4mYJxhhth+FGitr09LZBx9a8vpgWTkYzt/dpMwIKBUCJEjGZy8
+	r+qbwKDCsn4IT64ea7yEM5+DT/DPmqiJcWWCBKJ3hhg6vFY+NyoGSWNYOe9/wEi2cI5rdDH3wXf
+	cWYhND5w+x/OqDHDi0fXHiVGNgiYJmBuci5WE6r6zb8OzjJY2aZGg4FCslPuk09RFbzGCTHzM/8
+	BpAvkoNriKUCaqLLJEcE1vQOU2Ckijqg6chWSpEkEw0BImXWDpwyvcJlwPTwd/ooAoL+xfCdtqR
+	BsbWP89U7T3x99rA3nRV+NRsVEyj0R2+OvF22cTcY/MJj1gkZYzDnrnur8uecvXHBF1TvTHSxuO
+	MWuvvJy1JKJy2NEUD4+shC6m5yndwktel3XHpOMjWca+bSmPbfMQdziubL09/Bg+06cXYOAWMYT
+	OR9sYUuRedGTDYajg3ryx3V+cNyMODwp0CaoQOjzs+25HKYU8L80ZaAuj89LM4OKDJVjZay69Hx
+	ltCxMcKRSOdXRVKh9TAip5ojzCquEfar7ER0=
+X-Received: by 2002:a17:907:843:b0:c2b:4142:2db1 with SMTP id a640c23a62f3a-c5096387a3dmr518400366b.40.1794702725988;
+        Sat, 14 Nov 2026 16:32:05 -0800 (PST)
 Received: from sohrab-omarchy.taila18b31.ts.net (2a02-a44e-4ae7-1-c0e-6d5a-8ae2-915.fixed6.kpn.net. [2a02:a44e:4ae7:1:c0e:6d5a:8ae2:915])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c4b7sm260695166b.1.2026.11.14.16.32.00
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c4b7sm260695166b.1.2026.11.14.16.32.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 16:32:01 -0800 (PST)
+        Sat, 14 Nov 2026 16:32:04 -0800 (PST)
 From: Majid Hajiheidari <majidhhdri@gmail.com>
 To: andersson@kernel.org,
 	konradybcio@kernel.org
@@ -93,10 +94,12 @@ Cc: rafael@kernel.org,
 	linux-pm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 0/3] arm64: dts: qcom: sm6125: Add cpufreq-hw and CPU idle states
-Date: Sun, 15 Nov 2026 01:31:55 +0100
-Message-ID: <20261115003158.391171-1-majidhhdri@gmail.com>
+Subject: [PATCH 1/3] dt-bindings: cpufreq: cpufreq-qcom-hw: Add SM6125 compatible
+Date: Sun, 15 Nov 2026 01:31:56 +0100
+Message-ID: <20261115003158.391171-2-majidhhdri@gmail.com>
 X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261115003158.391171-1-majidhhdri@gmail.com>
+References: <20261115003158.391171-1-majidhhdri@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,41 +111,35 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-SM6125 has no CPU frequency scaling and no CPU idle states in mainline:
-the CPUs stay at the bootloader clock and only ever enter WFI.
+Document the cpufreq-hw (OSM) block on SM6125. Like SM6115 it has two
+frequency domains with one register region each, so add it to both the
+compatible list and the two-region constraint.
 
-The blocks are the same as on SM6115. Register addresses and idle
-latencies come from the downstream "trinket" device tree of a Xiaomi
-Mi A3 (laurel-sprout), where the CPU low power levels match the SM6115
-values exactly.
+Signed-off-by: Majid Hajiheidari <majidhhdri@gmail.com>
+---
+ Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Tested on the Mi A3 on next-20261113: cpufreq 300 MHz - 1.80/2.02 GHz
-with schedutil, WFI plus per-CPU power collapse in cpuidle with rising
-usage counters.
-
-This is meant to go together with Roman Linev's SM6125 TSENS series [1],
-which adds #cooling-cells to the CPUs and per-CPU cooling maps that stay
-inert until a cpufreq driver registers cooling devices. That is why
-#cooling-cells is not added here. On my phone the same TSENS
-description (derived independently) runs together with this series and
-the cpufreq cooling devices bind.
-
-Not done yet: cluster idle states (PSCI OSI parameters need checking) and
-an energy model.
-
-[1] https://lore.kernel.org/r/a3f071d3-6082-47a1-bb00-9d8e72fa3cdd@mswin.me/
-
-Majid Hajiheidari (3):
-  dt-bindings: cpufreq: cpufreq-qcom-hw: Add SM6125 compatible
-  arm64: dts: qcom: sm6125: Add cpufreq-hw node
-  arm64: dts: qcom: sm6125: Add CPU idle states
-
- .../bindings/cpufreq/cpufreq-qcom-hw.yaml     |  2 +
- arch/arm64/boot/dts/qcom/sm6125.dtsi          | 61 +++++++++++++++++++
- 2 files changed, 63 insertions(+)
-
-
-base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
+diff --git a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
+index 98eb36bff..8dfe77d08 100644
+--- a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
++++ b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
+@@ -28,6 +28,7 @@ properties:
+               - qcom,sdm670-cpufreq-hw
+               - qcom,sdm845-cpufreq-hw
+               - qcom,sm6115-cpufreq-hw
++              - qcom,sm6125-cpufreq-hw
+               - qcom,sm6350-cpufreq-hw
+               - qcom,sm8150-cpufreq-hw
+           - const: qcom,cpufreq-hw
+@@ -146,6 +147,7 @@ allOf:
+               - qcom,sdm845-cpufreq-hw
+               - qcom,sm4450-cpufreq-epss
+               - qcom,sm6115-cpufreq-hw
++              - qcom,sm6125-cpufreq-hw
+               - qcom,sm6350-cpufreq-hw
+               - qcom,sm6375-cpufreq-epss
+     then:
 -- 
 2.56.1
 
