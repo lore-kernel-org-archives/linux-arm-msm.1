@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794773951;
-	b=oCYqidv58iO5FKsx04XoOGX6QuwvYQCwdHiLzD+KXZlBBbC8IEs/1ueyjvlPUzE5FJ26
-	 8f0fZ5ej1F/mRdViG0kEcZWzhfMBydcsNLOou7x1s8ik8tf3rnyjz/9q4ONgVAvZSO2TU
-	 Lk91sYUeNkBU2Cw7eHAQR0SL1bE0IY2ObtdwqjqLfr47p0RTZKGYlN8ar1pVtn71jEp4n
-	 gh5M3OVoedD7VMbfjxFT+exwkZ4qJCFarw8wrjkQ/tvc6ZiirZ6UXOsoJZiCEkcl25Qac
-	 b2ehTuBia2bJj6iFkuaJ2p+SbILpn9qMb4kV3OyFrBtOW1PCVefzpcmmSkZyNb6I+NA==
+	t=1794773965;
+	b=V2MCEtujSMeTW3Xwpa5yOxfQj6uc3S53P2xXE3d7WskYbm3WYYPZT1wwYhXCqvhiHdhN
+	 hJUDZP8WIcAFvImlXz88kCqkDKMwTV0jk6JFy1c5XMyCSTsAE6uervS9zPYXkunnRuEkB
+	 s4JqUHh7P74+M5qF0JoE3v3JGlXqhNoWi6UYi+3ganTHzsJbJTXJ/WgpVNN4Tl9jYZr1t
+	 NyiroqbhIXR94DENhDhW5pQCaTlFDKR2aFBQWbWsKjAXN7WkKb/8UgWjLNPkRcPsL4hee
+	 jtPl7V28D9xdycWKIg5AcDBtBRre3f7XP6+mKkb/pA85hCWDp8l4eDPVsUU71e8fD6g==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794773951;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=xbPrB86BknoS9rdJM+cIMNmZoWf9bXqGDcdQjshBvPQ=;
-	b=Hed1r2F8cycEshvmqXIhmXN557lY7cY+tMo0FBkW9ap7lWS2NMcid3zJhZ4ZN0zKju/t
-	 rdONrVXZ9IZ5AvfyW1u/G7pHRQEwqjAEFTSWDC/qR3KkgB4v0oIt7jqVp7qCKX8XGbkle
-	 bfIPAMrylP2LAEjpRnmywdtJtt93QLjheNSJhx3RAIW/Nf99w03Q39Ez9c4NpVtjOvKL3
-	 6DUd7+AquA9GFCCc/cBOQ7UOXt+RnXgLdUZSEwGuPQ3CaeccVdTBH8IzhBGYRXN8+OE8w
-	 F1iSUNFSfzyFoXviVVNKLcWBkeIfTO/DXIIPsKYFncnZVTn1aC6ntecxjAsyVvc9Z9w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794773965;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=aae1bjh24PUdqN+Loi5xRzc5UHxFDAQVmu+y4W/NfUQ=;
+	b=U9CUyOnISVfkys6AYCrRP3a3TqfDUT1qOKU5ENmfMeNUvyQFtM/D7OKGi6Kl21vfI/n6
+	 XSn682/PnFkpIF7za7jlbEHGVqpKnP28b6xOZABsbybq2mFQJRH71IKe+L29WG9qOV1Mq
+	 0FG3+eV3aE5aTS2TIt46I3xf98SxumQb4Db4X4kJweanuOKHoZHZWYehXccQeEW4uXgrg
+	 5RhJdrk9k0E/r4cbKZ6SLGmpTA1tnbJNJ5dRcDa/adAQ12WMgGmPPHUwbGmfo8qqjVNxb
+	 w9UuGPHV0rUNFOr01UG9pbJz3I6l4/jKlj30zJzpgnT305DqpSzlIs30jT4oKZrP/Pw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AE6SLmFS;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GWfWGzt1;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 454D7606A32C;
-	Sun, 15 Nov 2026 20:19:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67834606A330;
+	Sun, 15 Nov 2026 20:19:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AE6SLmFS
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GWfWGzt1
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794773950;
-	b=J72OSoKhlmbBaO1YhLT/RuRfi6XyHx9ED6Jm8uC/8XVwLXSd3owgLH1HdvA6rumCfxL6
-	 bjYWwMM638AaQXe0qG1NKXOPTD/627XR7i1pPAVgcWTEtiatB2151JtADqATP+zDUQqMp
-	 GoiqzZi0uHjFsJgmYm3LDN/qCacgr7so/Gr2v+CMYrSgx13O8yz56GjGeWzQQpgzJPymB
-	 EKXg+XvNQbDWKEdLnvhFps4zg+YDwpgX1F3EFvhaUGr948AKRbHAE4PYG6BTPido3HQnP
-	 wF0qb4pfbHrjl+ztWvpzKMrt7e6XBjKs8OhIbXuNwrlo93bdvyBoc049CEk994DxnwA==
+	t=1794773965;
+	b=t6dSadnpIjqv8b+RPfCdbTQSJLIiX2LXI7QAQe7CqqHfidhCGn8qP+DX6sjUJZ+1qAPC
+	 b4UXwo29P/63Sh21H+4KigRCv4EdESReG9No7MmB9Tpc3HZ3RA1FJK/vmG1pIDjYcfm93
+	 3NBWl9M0EtOLdHQDJMI0xqIq/pwMc0e8PB2Magj4XKnm2BqV7h89dW2QIzQ1taVGmhsbz
+	 Kqx4A18FvMXL6of/3OWb9gyiK1T3QsGowlAls5aO4CMzf5ldHYLDWIoI2iveRIjnjJVKe
+	 PIOzTLs4HVMKJL+b1AI0qCjJkd9H5CwKtV+orSbv6DQpcEtROkhUfS6o+4jJIVyYmjg==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794773950;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=xbPrB86BknoS9rdJM+cIMNmZoWf9bXqGDcdQjshBvPQ=;
-	b=je+4NUFCVYDfU7kPOwEG4pGSEdiBrbVjApY4HWvk6goorcjraCBJfGvD03BAXTbSd0BK
-	 X5nKvJ9dFNhkD1SyLiarlYk8x/jtFSXDa0pyUF+WBU2+LiPK+62lROeu7bFPUVVP0Vvmm
-	 YBKr+8idO8rBwmZvP3yLJJ6gSraM1/PY6i9L1u96CHL/ZYvFLNvmMVv2/qgySghneCNvr
-	 KyCwR3F1JlbAxSqQx0CO9BmWWarOJWuO/6bQacDEtVd3bHlgB2k5AWAxoa1BZTc+oIwvF
-	 kee4Pls/kb+HOCMolrO5zA5bonr0JAGdoxkhvekgnaCSR8L7Oty+lse8PRtuxR+UzVQ==
+	c=relaxed/relaxed; t=1794773965;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=aae1bjh24PUdqN+Loi5xRzc5UHxFDAQVmu+y4W/NfUQ=;
+	b=1edQiZvZfgpiZ3NFEa7l9xgDLmLvmSkelb3wAerz8YrANKXZn84q0fISeiUe4aC1wCs6
+	 oVs/drsVBNlTilIVAWjnRqGbVc/pFufDwTgeus4Cd45S48NxCt7EspiPqo/cGG6+SoYbQ
+	 WDH6s/zKnEbEPkFzpyl7oFcMkVP5nN4VEnLlYZPLvAu++dmGshumXWB/q9P9Oty/CmyD/
+	 6yZEN6hn+u/QQqdmaeH3p8OqhSuriv/lmbSV2u4zHItwm3gzfvlFYcH776FeuPg3W3pzI
+	 3p9S8pCZihvH/uGfvGhX+PehYoB0mDPKCDdJ4NJvKhEq/s9IYuGPIjgyqI7LmIHmCqA==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 72DF41F000C6;
-	Sun, 15 Nov 2026 20:19:10 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 819081F000C4;
+	Sun, 15 Nov 2026 20:19:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794773950;
-	bh=xbPrB86BknoS9rdJM+cIMNmZoWf9bXqGDcdQjshBvPQ=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=AE6SLmFSFerHbOiBAF9jkmjHENliDMCG+nRRc8MB+uH6Pv2oAW6ewEh6P5nMbmLbl
-	 hTGuGa41UQntXl63zZOvFuVV6Kpy+pLHfB9ZobhUq3vRUhpSd0QeGg/khkof+2xLSu
-	 nLJjPbwMAeQpv8SKGpZ4nEbSE89T3Oc6mkzMs2t9vKCglQrv9xFlBDEc1SmrXQim9N
-	 NdECPhDa+vTP7mIwJuLWotdDA0JDTJgsHx4cvyyhpndnUftaq97ajxfC/55vyszA0I
-	 cGxLLUh04RwUrcPqVfjolQeGn/eXWj12lu35s8PhswEJcVGpTdKdapwdJN0mMWfyCH
-	 wFYwkuUQynk1g==
+	s=k20260515; t=1794773964;
+	bh=aae1bjh24PUdqN+Loi5xRzc5UHxFDAQVmu+y4W/NfUQ=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=GWfWGzt1IqHwQaAC5/LaUVihv4N6R2KvR53SumDY7BYcpFIh21Vi857wlPI4iXGxs
+	 VHel/ovxl+avD8dgki2KbTcjkhkfXPOIuRFdUj9BcewhvZb8zkxTnQuIxb52rJzxe7
+	 zjFyTCWnURsW16dfkNUr9sa3q2y1hN/SI+ixsbE4v6e0fzHZ6LAoqSHNXxIJBJuOYW
+	 EkrIaw2o8ii7XQt+E5oj5ZXjR3Sl6CEX1b4oIoxqN26hGf9CVfdwLwJMeWg1F3o/13
+	 PT5l8gTgpiKW+WjajTHf7ygDLv3I6bWh6vQA1Ee4Gt7CbJUGF8ZQCKux8Z81pYKyhe
+	 0FrmCOYGGwL8A==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 03D6D4A170;
-	Sun, 15 Nov 2026 20:19:10 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 110544A185;
+	Sun, 15 Nov 2026 20:19:24 +0000 (UTC)
 From: Venkat Yadlapati via B4 Relay <devnull+venkat.yadlapati.yahoo.com@kernel.org>
-Date: Mon, 16 Nov 2026 01:49:10 +0530
-Subject: [PATCH] drm/msm/a6xx: Fall back to MX when GMxC has no levels
+Subject: [PATCH 0/2] pinctrl: qcom: Add the Molokai TLMM
+Date: Mon, 16 Nov 2026 01:49:22 +0530
+Message-Id: <20261116-molokai-tlmm-v1-0-3ba4840002cb@yahoo.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,100 +84,60 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261116-msm-gmxc-fallback-v1-1-a9daad716a1e@yahoo.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB1oAg2tVxEXyTjaqUYl0xZBv
- LvRLt/i/w2Uk7BCVWyQ+Ccq85RhygLo5aeeUdpssDfrjDEOo0bs40rY+XEMngYM92fgh2VHtoX
- cLYk7Wa9n3fyt3/Bm+pwj2PcDMV8WrnUAAAA=
-X-Change-ID: 20261116-msm-gmxc-fallback-b59be82e6c2d
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQ5EMBRG4VeRu9bEZXQxryIWxT9coyotIhHvP
+ mWW3+KckwK8INA7OcljlyBujuA0oXYwcw8lXTTlWa6ZWSvrJvc1otbJWtWYDHixRskFxWTx+Mj
+ x7Kr677A1I9r1ftB1/QBl/OSdcAAAAA==
+X-Change-ID: 20261116-molokai-tlmm-ba0ee416e513
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
  Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794773949; l=2658;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794773962; l=1461;
  i=venkat.yadlapati@yahoo.com; s=20261023; h=from:subject:message-id;
- bh=BA89LyPLwbpk5+OPvueWTT6sDxsYtskxk6HHZayfkmQ=;
- b=Mc+/cZ8bF9Ufxr4KlPw90MYzIclxGRxJCOCF2QMi2DJdCfve/8sIQxpJucNuBPujQjEYWS/HC
- YdW2ZPHan7oArZj622DLM1t4YiOHoRAceWuqy6qnu5DqxhXZUsPwyi2
+ bh=ycrpenfnV06XhWlfcVWQ1HMmfcwzHDxYlIujTz54+LI=;
+ b=OXUKtRiR3bN02LazYY80nM1rysJOYuqGc7EfCK1ErDXCW/w7ClFnBr/9vpUf9KDOu9u//uHi2
+ hjoXzWW0vnpC4l6q7FKapNOkjmB25tNDI83Mn6YY3MayXH4YGDBEZKy
 X-Developer-Key: i=venkat.yadlapati@yahoo.com; a=ed25519;
  pk=e8KStCtEMvUP1Se/riB/KVnDAQFEVR2Dw2PcuA8/eME=
 X-Endpoint-Received: by B4 Relay for venkat.yadlapati@yahoo.com/20261023
  with auth_id=1303
 X-Original-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 Reply-To: venkat.yadlapati@yahoo.com
-Content-Transfer-Encoding: 7bit
 
-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+Molokai (SM8845) is a Qualcomm SoC derived from Kaanapali (SM8850), found
+for example in the Motorola Signature. Its TLMM has the Kaanapali register
+layout, but 205 GPIOs instead of 217, different functions on every pin and
+a different GPIO to PDC wakeup map. With the Kaanapali tables a
+wake-capable GPIO interrupt is routed to the wrong PDC input and never
+fires, so this adds a binding and a driver of its own.
 
-The command DB of Molokai (SM8845) lists the gmxc.lvl resource without
-any level. Since a6xx_gmu_rpmh_read_arc() trims the trailing zero
-levels, reading it now fails with -EINVAL, so the GX votes are never
-built and the GMU of the Adreno 829 hangs on the first GX vote:
+The SoC and board devicetree that use it are sent separately in "Add
+support for the Qualcomm Molokai (SM8845) and the Motorola Signature".
 
-  Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 8 timed out waiting for response
-  Timeout waiting for GMU OOB set GPU_SET: 0x4
-  gpu hw init failed: -110
+Tested on the Motorola Signature: the UFS reset, the keys and the GPIO
+interrupts that go through the PDC (touchscreen, amplifiers) work.
 
-Before, the empty list made the GX votes use the lowest GMxC corner and
-the GPU worked. Read gmxc.lvl the same way when choosing the secondary
-rail, so that a GMxC without levels is treated like a missing one and
-the GX votes use MX.
-
-Fixes: b5269bf0e1ad ("drm/msm/a6xx: Factor out RPMh arc-vote helpers")
-Assisted-by: LLM
-Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
----
-Found while bringing up the Adreno 829 of the Motorola Signature
-(Qualcomm Molokai, SM8845) on next-20261113: the GMU firmware loads but
-never answers the first GX vote. Bisecting the arc vote rework points at
-commit b5269bf0e1ad: the Molokai command DB lists gmxc.lvl without any
-level, which the new helper rejects, so the GX votes are never built.
-
-Tested on the Motorola Signature: the GMU answers, the GPU comes up and
-Phosh renders on it.
-
-I used an LLM (Claude) to help write this patch and its commit message.
-I reviewed it, bisected the regression on the device and tested the
-result there.
----
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-index 662f09bec9d5..914434b49eed 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-@@ -1889,13 +1889,17 @@ static int a6xx_gmu_rpmh_votes_init(struct a6xx_gmu *gmu)
- 	struct msm_gpu *gpu = &adreno_gpu->base;
- 	const char *sec_id;
- 	const u16 *gmxc;
-+	size_t gmxc_count;
- 	int ret;
- 
--	gmxc = cmd_db_read_aux_data("gmxc.lvl", NULL);
-+	gmxc = a6xx_gmu_rpmh_read_arc("gmxc.lvl", &gmxc_count);
- 	if (gmxc == ERR_PTR(-EPROBE_DEFER))
- 		return -EPROBE_DEFER;
- 
--	/* If GMxC is present, prefer that as secondary rail for GX votes */
-+	/*
-+	 * If GMxC is present, prefer that as secondary rail for GX votes. Some
-+	 * SoCs list it in the command DB without any level, use MX there.
-+	 */
- 	sec_id = IS_ERR_OR_NULL(gmxc) ? "mx.lvl" : "gmxc.lvl";
- 
- 	/* Build the GX votes */
+I used an LLM (Claude) to help write these patches and their commit
+messages. I reviewed all of them and tested the result on the device.
 
 ---
-base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
-change-id: 20261116-msm-gmxc-fallback-b59be82e6c2d
+Venkat Yadlapati (2):
+      dt-bindings: pinctrl: qcom: Add Molokai TLMM
+      pinctrl: qcom: Add Molokai TLMM driver
+
+ .../bindings/pinctrl/qcom,molokai-tlmm.yaml        |  128 ++
+ drivers/pinctrl/qcom/Kconfig.msm                   |   10 +
+ drivers/pinctrl/qcom/Makefile                      |    1 +
+ drivers/pinctrl/qcom/pinctrl-molokai.c             | 1679 ++++++++++++++++++++
+ 4 files changed, 1818 insertions(+)
+---
+base-commit: 7bbad7337a81d1d73559b783280a76a65a9de191
+change-id: 20261116-molokai-tlmm-ba0ee416e513
 
 Best regards,
 --  
