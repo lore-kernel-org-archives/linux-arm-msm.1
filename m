@@ -1,51 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794749397;
-	b=yB7r05ERIs3UGcQxZpExlfIDmguEQFME5InpTdzvj3qqd0+Du5MffMClbHjeVokvZDUE
-	 otMlqyoLrnLc2wTuJuTbv5Pm8TZ6vAEggBBepkTGPknZbIbiKh20H0iEDk88l4h83GqwJ
-	 5ckFgIdhsgbSxQplke4w8Bqyn3Ki6DY2BlBbyeKBaE3YUDHrYISlaAK5ifnFUkyw3+6vE
-	 y5ZtljzVHWHfXA5pOw0gVFRvUltUxVQ0aIhxaUYOQ0Btb7XfAHkO9anIhPQ45N1byhQ36
-	 JSQkeVHG9aPsBydXu70NeHv01DHvuhiwYePqHTkOj2h8OoFYvDkj897GLpcbz4ZdHog==
+	t=1794751371;
+	b=NhoqQMDGRRTINx0oua3LZy2hIKkuJUi+0F+O9TOScgtjOVc8F9duOO9x9rJZj0KDgGSu
+	 FMAjNTbiG+OR8c/BqAxD7cbnr4PnMEkXNOXxnVYasJXeoXAO1fRP90POTB/Zo8Sbk/gz8
+	 EjNUxy923vjWnoxkZbam0pVtc/RsIxOnMSpO4yKVi0CEGUSGczits3kBcbUFWOm1LIvU1
+	 9ukdHVvwhc78bVM6C3Eo4y0k+rVJm6uLjS+rddgK+B28flWSiue1EiWs/XXeVo5dr1QK6
+	 w4UZ34r6TBiB8Z6NdFbNvbI5Mgo4EJ+pRB0sprYmriHtfl5i9mNSf2AiFCORfHUiVnQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794749397;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:MIME-Version:Date:From:To:
-	 Cc:Subject:In-Reply-To:References:Message-ID:X-Sender:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=iktG5hjiD/wYVGQdP9GzsEFDIk8eVu3FBLZrJbjfmyk=;
-	b=2Jtw1BVSI4Glo0nPdBbTUWXLON+pg8us+U2un4j5OReR8LedImko2AAvywKTUOvUXBU3
-	 6u0dkwyF1lREOlPrdC4JPZvqYmPMqoL8XvuGAdRRbIoYzPkT3+idx3UVk/HJ9Q19gS1MS
-	 +P8kzaOugafin3Oue0gk30QEo6cEb6mzTIs1yWEafuSoobqXVvPoFL+fQWMOhg7ovg6Ju
-	 5MgfS93B+RM4mlBF6OswIBbTGSU+A72y6pnLD0E4sCe2Oz2xaUg+aymh0NEHLn0nD5jNQ
-	 sS+o4KfWJQdQVwfaEkMANO/vYb/U1fb5xOaMkEXV1jodnrkQpsrgykU12nm6vMJa/6g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794751371;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=L8xLGYVH3k+8EgRXZyKrd8PgBYSTsjRfbQ37kLtIgTY=;
+	b=ODDd6T4JMgUqOcA+y6LQDJKapdUucclpb9FjN0joWMx9mcIhfoUl7CUj7py5uQtFo1uM
+	 XNe04qRwLksFpQyzhHaktovF2L/6qST13AIjPGr2ey/2Mk+rN4huwFSYSvnciThajPpwF
+	 0WI9pVPVTdPOuHGlYkfxxFjA+p4Wekibf7CqY/cwopY9gJb6oXL/LB9JEQT0UypyveDa5
+	 WqkSpjLeXm9LvPaQk7baF94XxbYCFLqrkY8p3MNU4LOEI1elyz0NPsXyFeyDNVTg0e7Ib
+	 JhNH/F9D5FMCUQ5ej6xRS9uNLeSQ17W3OoV8rlTSl/GcTWr62zKwBG5QsPL1/GnL0IA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=mainlining.org;
 	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=MOxDdhU6;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EQ4SX2ST;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=r1viSbAv;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=w2HwxNQ6;
 	arc=none smtp.remote-ip=5.75.144.95
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2948606A31E;
-	Sun, 15 Nov 2026 13:29:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2948606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBCEF60A383F;
+	Sun, 15 Nov 2026 14:02:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CBCEF60A383F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=MOxDdhU6;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=EQ4SX2ST
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=r1viSbAv;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=w2HwxNQ6
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1794749339; bh=iktG5hjiD/wYVGQdP9GzsEF
-	DIk8eVu3FBLZrJbjfmyk=; b=MOxDdhU6nnU67Cyz5OnXbvX8DuGGzLlbpd3/0KY0Z49y7eTRik
-	iIYQIm13HyvTnb7n55LuPLbAM5HLBMoflka7L+gJjvUGTOIimWFKfmXcwsxJnwBGRze8llEi4MR
-	3wDEOtDgBGKZ9O+her2MzDqQCvuSVs1FhsmD4AIzF3Ntfz9KSJEMb9AenHfX/OeWteaiyF3XF94
-	W3PiINZDPVOjAf5eWk1eWtJHG37lwgBbOkTIX+vu8SyPA8JUMnORiB/kP/6j6/Y6oEVVetVjeCb
-	2iozFRHDlkr6UQoViXq1l9FxOTEbPIWdf41Mo93k1WVZ6Mi06n37L+MWtIXKs/brMSw==;
+	h=To:Message-Id:Date:Subject:From; t=1794751364; bh=L8xLGYVH3k+8EgRXZyKrd8P
+	gBYSTsjRfbQ37kLtIgTY=; b=r1viSbAvO/rDEcOLpZdwQE34QgwFyvH7Nb9m6CWi4EEO5Sf6CG
+	cjf/6PdAtUAoT2zileX5U5OBfXmlCtZGa4qRH5juFK5whCeptYS8SL2UJ+3RjFofdw0QJ8uWptH
+	FWoFsZF1FXrzOZnfMqKsYJSYHiFEc6B+fMEEEXdw1fFHtpN4qhjJKBgZ9zBToiCosKOJi/uSPJZ
+	pIFF7gKFj+jAut2okgDT7hqMkxAg7rcH9Viy8tiQDri09jHnY0b4CyLh4qVBS8fgjg5b1Iwp5iN
+	Wzb628eT4Kdk1TPFndw8J3ntBREQIp7qYUAGqZjIPkoJuMCcqaMG1VpX6viJy6MQUpg==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1794749339; bh=iktG5hjiD/wYVGQdP9GzsEF
-	DIk8eVu3FBLZrJbjfmyk=; b=EQ4SX2STQDQ3q722WsMhoUpMLMG9ZDzovAK5ZVkJVhuGxAVp9p
-	nESLkS0ewhV4yExAKMmw4eFgDF/r0LvuFfBA==;
+	h=To:Message-Id:Date:Subject:From; t=1794751364; bh=L8xLGYVH3k+8EgRXZyKrd8P
+	gBYSTsjRfbQ37kLtIgTY=; b=w2HwxNQ6MLt8/Hk3gjZhpMahwsQPHbr4CiLejeu28/2L5f9FN/
+	TXqbV6rwADQveOcjrN9/Hc9ywEQD3QToKuDg==;
+From: Nickolay Goppen <setotau@mainlining.org>
+Subject: [PATCH 0/3] dmaengine: Add support for immediate commands
+Date: Sun, 15 Nov 2026 17:02:42 +0300
+Message-Id: <20261115-qcom-bam-dma-immediate-v1-0-9a0df4ca3be1@mainlining.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,67 +60,66 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Date: Sun, 15 Nov 2026 14:28:59 +0100
-From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
- <barnabas.czeman@mainlining.org>
-To: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
- <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Stephan Gerhold <stephan.gerhold@linaro.org>,
- =?UTF-8?Q?Otto_Pfl=C3=BCger?= <otto.pflueger@abscue.de>, Dang Huynh
- <danct12@riseup.net>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Luca Weiss <luca@lucaweiss.eu>, Vladimir Lypak <vladimir.lypak@gmail.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/3] MSM8917/MSM8937/MSM8953 fix prng
-In-Reply-To: <20261001-prng-fix-v1-0-72f924527465@mainlining.org>
-References: <20261001-prng-fix-v1-0-72f924527465@mainlining.org>
-Message-ID: <fbd93a808dbd9c4ab859494d7b33c7d3@mainlining.org>
-X-Sender: barnabas.czeman@mainlining.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMAyA4VeRnBcwFVfYq4wdahpnBtGtVRHEd
+ 7fbjt/h/3fIklQy3KodkqyadRoL6FIBD2F8CmosBle7KxG1+OHJsAuG0QKqmUQNs2DrPTUNe89
+ OoMTvJL1uv/H98Xdeupfw/L3BcZwMsuNVegAAAA==
+X-Change-ID: 20261115-qcom-bam-dma-immediate-577133c77c2e
+To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Randy Dunlap <rdunlap@infradead.org>
+Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ Nickolay Goppen <setotau@mainlining.org>, 
+ Sireesh Kodali <sireeshkodali1@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794751364; l=1978;
+ i=setotau@mainlining.org; s=20250815; h=from:subject:message-id;
+ bh=KLb0ocTbeYFA6ePesTNKBcDGe/DlIQdK1DaNB180ZCE=;
+ b=glRsAbWZXw/lsfW93DEFHf7mJLXlH31PaDWDkbfyisRbJS9UuzdsCITKefipzGo7yP7xfT0TJ
+ ycbJfw2QJk6Au/ekNmLZ/MD2Vc7Ypw/Yzxtu769rvCICxFsmqObdSku
+X-Developer-Key: i=setotau@mainlining.org; a=ed25519;
+ pk=Og7YO6LfW+M2QfcJfjaUaXc8oOr5zoK8+4AtX5ICr4o=
 
-On 2026-10-01 07:51, Barnabás Czémán wrote:
-> On MSM8917/MSM8937/MSM8953 HW QRNG is configured by TZ.
-> qcom-rng driver will not have access to the configuration registers.
-> Change the compatible to qcom,prng-ee for skip the initialization 
-> sequence.
-> 
-> Compatbile changes are fixing this issue:
-> Call trace:
->  qcom_rng_init+0x6c/0xe8 [qcom_rng] (P)
->  crypto_create_tfm_node+0x154/0x198
->  crypto_alloc_tfm_node+0xa4/0x1b4
->  crypto_alloc_rng+0x34/0x48
->  rng_bind+0x60/0xa8 [algif_rng]
->  alg_bind+0x15c/0x1f4 [af_alg]
->  __arm64_sys_bind+0xb8/0x120
->  invoke_syscall+0x6c/0x11c
->  el0_svc_common+0x98/0xe8
->  do_el0_svc+0x2c/0x3c
->  el0_svc+0x40/0x9c
->  el0t_64_sync_handler+0x88/0x134
->  el0t_64_sync+0x1a0/0x1a4
-> 
-> Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
-> ---
-> Barnabás Czémán (3):
->       arm64: dts: qcom: msm8917: change prng compatible
->       arm64: dts: qcom: msm8937: change prng compatible
->       arm64: dts: qcom: msm8953: change prng compatible
-> 
->  arch/arm64/boot/dts/qcom/msm8917.dtsi | 2 +-
->  arch/arm64/boot/dts/qcom/msm8937.dtsi | 2 +-
->  arch/arm64/boot/dts/qcom/msm8953.dtsi | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
-> ---
-> base-commit: 6c2cb8b8b843d216ab549b678a0d8831c43153e0
-> change-id: 20261001-prng-fix-5366a05da970
-> 
-> Best regards,
-> --
-> Barnabás Czémán <barnabas.czeman@mainlining.org>
+The IPA v2.x block, found on some older Qualcomm SoCs, uses BAM DMA to
+send and receive packets from the AP. It also uses BAM to receive
+commands from the AP (and possibly the modem). These commands are
+encoded as "Immediate Commands". 
 
-I hope it is not forgotten, should I resend it?
+Immediate (IMM) (only for BAM-NDP): Allows the software to create
+descriptors of type immediate, which does not generate any data
+transmissions or registers configuration, it is simply supplied to the
+peripheral, the peripheral then parses its fields (which are
+irrelevant to the BAM). Only the flags of this descriptor are relevant
+to the BAM, address and size are irrelevant, and BAM simply passes
+them as is to the peripheral. This can be used for the software to
+operate peripheral-specific operations within regular data operations.
+Immediate descriptors are published on the sidebands as 1 byte size
+descriptor, once BAM_NDP fetches an immediate descriptor, it publishes
+all recently fetched descriptors including the immediate descriptor
+with immediate indication, to inform the peripheral that the last
+published descriptor was immediate descriptor.
+
+Adding support for immediate commands is trivial, but requires 
+also adding Immediate Commands to the dmaengine API, which is 
+what this patch series does.
+
+Signed-off-by: Nickolay Goppen <setotau@mainlining.org>
+---
+Sireesh Kodali (3):
+      doc: dmaengine: client-api: Add immediate commands in the DMA client API
+      dmaengine: Add support for immediate commands in the client API
+      dmaengine: bam_dma: Add support for immediate commands
+
+ Documentation/driver-api/dmaengine/provider.rst | 10 ++++++++++
+ drivers/dma/qcom/bam_dma.c                      |  3 +++
+ include/linux/dmaengine.h                       |  4 ++++
+ 3 files changed, 17 insertions(+)
+---
+base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
+change-id: 20261115-qcom-bam-dma-immediate-577133c77c2e
+
+Best regards,
+--  
+Nickolay Goppen <setotau@mainlining.org>
