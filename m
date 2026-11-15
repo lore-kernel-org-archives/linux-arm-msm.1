@@ -1,79 +1,80 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794774013;
-	b=RGLXxdGTgPtvUTHxw4HHW9O2Q+iZrqqMFU94HNKkHLzNLjXlLEbdZNyHYHSLnASN1XFq
-	 NkyVg9p7ePqYL/tidk4nLhRI43PIl+Y66ehoTfg/9X0OFwhCuSPIRffxrfWsz8U4tNIA9
-	 QTHNowfbv8XLfslU6dcP1Se3pIEByDTTTCLN6QUJoTyc7+8Cd7fDYcUuFaKnbsywZuJLv
-	 vjepYMRGy+TSaTi+HPREr1ii7/FBS5vWfjBuSHlvJLegcBbS0ehBL1Q4J04VEIBF2Xtaw
-	 wN7USGhClPwuBrto6AE4nt5/Prtv0qIfL6LeHp7SjLERXDRN8zeZaAdhRcszWcbJVVg==
+	t=1794774029;
+	b=zd0snCSLVLV4xt6ljpO2QBateP+XIc42Uttlqg6qpCjj63e2WfO0aErGUejVcmocj8X5
+	 a1zVnaQc+brrxrRbqDSO2pTkmTmdOTJmHVbcQiKhqkeRTs+nJ0XMVb9ckyqLXVoIzFtOu
+	 +rNH3jvtdZRAtQUbq+sbDFr7Yg90fv96HgxFbVOrr02SRV4sdBRuhN+rK3skoJfLCw4oA
+	 SWe27tZApaixj7YSz6e8TRtIw9dHxWl7y8sxiFHTv3nM8jCLgB2EKrLr1VNVXpYIXbbfF
+	 sUatx4afmadN6X7byTGOoRdonBpNsILRGZeJ+CkzrW4Qm+Ar4GHC3CVgGVH2c9QU2wg==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794774013;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=6Paw/b+RIc+aKTS7OUv3PBvek0+fzrgyRmq3Dz6yZ1c=;
-	b=LruIPRrZp1QSgsc0wezf5D9Vy7n9aP+BSnPT5+mDXQF4wJUdm/Pjwte5OnIPDRLMcrU5
-	 THq4HcXXSyOZPgHJyw1JDQkccYuJpJ9i25DxTdrYWwWSZekpMf6oTOJuA3+pFjWjx+ttB
-	 RbkzLSS8e0MjS7/YSRVg0qtJwtSMhjv0l/rmhui0MsTCvEPNG+CyTtMVgJJdbNjibFdAt
-	 V3tfLMCE6TMJhVKm2D9XdJICdLGHeL9KWc0F0sG5qa5Tgz0zUt5tTO4sxMNKbomHzrAXB
-	 wEm1UDSfw0i3rX+o1+iXldkt8in8sJ9B0SxULn/62V3TkmQN44w4UNV/1Cq0mZti8HA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794774029;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=ruXxIOgPU4StBLWWgdLOPSQXt2hA6YQg13ko5zLV/EY=;
+	b=AeXzr1d1GUqn9veEexNJzAA377bvYiI4rAAPb3W27ra+CcCTWzhrZ7p+A/CIsUssDG+a
+	 6+tnzrFAJocxWFaNSIZdKKfcFv24Ua+E940Mevzn/scvpcXbePguBBJNmVCGzSxaKjJLe
+	 rv2bDHKjHqRulxhFYlXGcXVeSkF49FL2OTPmBxivpbmCTG/8ytFxkFzF+tq1TEYySRRjb
+	 XI00KEzQN9ZsHHJzXXJFV0wOYuNAYR5UvflR565dVOTJTlQ49wGsau11Qqz86XqgAednC
+	 MVpa5AWK24ajmOO3GjtVlai7OqGmbAOboi/7iobdzA/uG/WSk8SaBzDWyVgEn1UM1LA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Evkl4KDr;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Yc8eeL1P;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDCA260A2614;
-	Sun, 15 Nov 2026 20:20:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E5ED606BB3F;
+	Sun, 15 Nov 2026 20:20:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Evkl4KDr
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Yc8eeL1P
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794774013;
-	b=ibtqU7IvfTCrnE8ti3MXnH0YSqCTeXtmCbE9FhCw+XDcTPAKzaKD5bLuNnZ4jUaga/ZY
-	 98TUPWv6B6VriMQjT3BlqNQlZN1aCol8jEvsXdVoW6GoJSbC2NcMOkiC7UWzPgLPVT5ZU
-	 nemoBs4jSrlX8BURym81GBQZ5jB+FAeJxKlgpHjD6CaU+EZmdqARfMPzzMA+goY2N4kib
-	 pdvtcfQ3NS5fa4W9YIvN5Uyc/3xtMo1HdofoebO0btiUeg223W3YXqlZJl8xBwEnEYKS4
-	 +J0rcwPaC3oFeKf4Q5lk17mViR0h/40LY+sya9MYEJLztVNyWTOVYZnHSZKSzuZcuMw==
+	t=1794774029;
+	b=G94t3VrxBj2CrjvdOCS5NYkx5wMXfG7uRAWuhc1Vli2vTrrSL5rUMjpHXq78vhUiHw3K
+	 ONOYjDr3j8bAnzA3tCOFF+JKKQAVb92l/YW8KGalChvlXmjXV7YsdCHyLdGKb30EGrDTc
+	 54dlmznlkely5QzhP7a/TtK2sQfbAmp54cvfbSleiXVRQRfG+1xUbPAMGagRoscmWC0FJ
+	 g0ag9x4ocgmPKAddPaa7Z6f593V+O2lI7EnQTtd84Cc+oofzii/3MANy91biiVZXZ2Knu
+	 Rm/5O2y5bPoJliB5GzZPAPD/eYbwaOVL4s3JLB9o1pFXvEdYbTbowrnklxfT9xzK8ug==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794774013;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=6Paw/b+RIc+aKTS7OUv3PBvek0+fzrgyRmq3Dz6yZ1c=;
-	b=b9E88iKeQh1vi6rQcK4UfAfVUOBY7FjId5Dy4HXTotp5uunz5XJkCpgWEA2TfC3brA7E
-	 48s+6rrvNNet9y8ok/RTrbUb+rQrM/SfHXaNm6eBJ3kyRBhlIO4YtM7L4e2h+mDxGJuu6
-	 EL27NCYcdFu9l/jKZ+6G2KcJC9WDRpbqPSNCTIGRGxg9UXbShLZLQrTIJ0bI2Y8P1EG+H
-	 s7mU2Y06HzOqv55/w7pQR4lauAzJGe8Y3Qiv0O4gr9vuP3H94caiXiA0SE2DqpP6rSEUr
-	 wkI0ujaM7ccsVp2mxB2TKXjeijbTV7ItcacRhUsHg3chQp5Q8Xa4/1FWP6cxCoIfYgA==
+	c=relaxed/relaxed; t=1794774029;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=ruXxIOgPU4StBLWWgdLOPSQXt2hA6YQg13ko5zLV/EY=;
+	b=tc8HVyAdv8vFXZ+SAOdoJ/KmzyvJiQkkfBsN6HUe9UE7hr+o3M1AQHBWwhexXZNHSXEk
+	 fk366QKDJLg3yHzo7MdeXl/s33KFBzVtohR9psYNp2XYbDNwKGFtIu7XG3CQ35oJ8YU41
+	 NIcvdJkCyIAiC2mRr9R/TkMW9blWaUoV42ZKlbBIhCvooV6Md2Z3wccXaRQJLjTaNy8BR
+	 sFBPmlYk9816Voxj3EJd2igg2ZcAynx/3CC3oXXtxRmUcRyV7zuvtp9pKHYdV/BA8pfux
+	 h/nMfyA8eMr1Tj/+FVBDyU82r5nzXsEtnqZHN2rPcnUVYCV2Cr0pmN+vQ10jasn3Ebw==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 885B31F000C8;
-	Sun, 15 Nov 2026 20:20:12 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 8DD7F1F02801;
+	Sun, 15 Nov 2026 20:20:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794774013;
-	bh=6Paw/b+RIc+aKTS7OUv3PBvek0+fzrgyRmq3Dz6yZ1c=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=Evkl4KDr502uxke1EVDeV12/dz4Ek19c89wRfwJad2YfrHGu0dW5rFNoL5BdNBKiR
-	 W3dhM0nkDLihhb9XNxqcGI49Xhsn20YNg4c3QamuYlnhnSeduiq2DIjSQ66kWdhxkI
-	 NChU8h/F4Osqm2iGrYH+Tlz0kc2ICgyCljDiSZk79wSaYquqQjTE+xBRqH+otaO4tn
-	 5zTQC+xEIgGs1jMiNfMTnexwhBm0M7r5N4zWnCEHUJaSjutnX+Vh5Vl/gGQrx9B6rF
-	 Z/ibQty9xbhQUh9Nq0Gfy49Ec8SL6ctGJry70zgekggAfAkaVb4fBf7offOyMJvPSH
-	 rCXTleObJoLnQ==
+	s=k20260515; t=1794774029;
+	bh=ruXxIOgPU4StBLWWgdLOPSQXt2hA6YQg13ko5zLV/EY=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=Yc8eeL1PZuHOicRKAEGqMNeOa1MJlwWc/AOUVfWHSXX9YSE0k6zOJxlZtqux6a1NX
+	 hoH45EGI75RuFVxghgwf3AWl2Dcq74K65n2PB7whK2iAZdyS9ZH8IOxYaX73O0Rpsr
+	 f5GdzsXPAPYP1/D0v1795vZfpPJDT1TTAapbImh7YCcnDIAbQJWLfRctKSjGxNVeZz
+	 dp/iXABXzEe6KvFtZdQSbQ44zvwMXkhFTvwzmVOPl70m8d6q8z+59kz5HlJS983UsY
+	 X3MUmsv/ZRVBFcLcsaN9WyYA41MMiPYwAathJEgot8V1XsmPsYWc0AxMJzAYCLHW0D
+	 xJa9SGhm+LZAQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 095E54A1CB;
-	Sun, 15 Nov 2026 20:20:11 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 1B00C4A181;
+	Sun, 15 Nov 2026 20:20:28 +0000 (UTC)
 From: Venkat Yadlapati via B4 Relay <devnull+venkat.yadlapati.yahoo.com@kernel.org>
-Date: Mon, 16 Nov 2026 01:50:18 +0530
-Subject: [PATCH 10/11] arm64: dts: qcom: molokai: Describe the Adreno 829
- GPU
+Subject: [PATCH 0/2] ASoC: qcom: Add the sound card of the Motorola
+ Signature
+Date: Mon, 16 Nov 2026 01:50:27 +0530
+Message-Id: <20261116-vantage-sndcard-v1-0-df69a8759833@yahoo.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,186 +85,58 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261116-molokai-soc-v1-10-3b2ee920fa3b@yahoo.com>
-References: <20261116-molokai-soc-v1-0-3b2ee920fa3b@yahoo.com>
-In-Reply-To: <20261116-molokai-soc-v1-0-3b2ee920fa3b@yahoo.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqAIBCF4avErBMaCYOuEi1Mx5oWFk5FEN09q
+ +X34P0XCCUmgba4INHBwkvMwLIAN9k4kmKfDbrSBhGNOmzcbJ4lemeTVwGx1k6b0Pga8mtNFPj
+ 8il3/W/ZhJre9GbjvB/YVkhNzAAAA
+X-Change-ID: 20261116-vantage-sndcard-f1142c26f7d4
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
- Radu Rendec <radu@rendec.net>, Kees Cook <kees@kernel.org>, 
- Tony Luck <tony.luck@intel.com>, 
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+ Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794774008; l=4118;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794774027; l=1069;
  i=venkat.yadlapati@yahoo.com; s=20261023; h=from:subject:message-id;
- bh=KV10ej5y8FLKIBJyutRokQTWdFziMzi+9h+0oYQJfbE=;
- b=RmYt54SKvuY4Vl5r+LDManwJ6/CCHWu6VZ18TN5sBbrBnUnoGnMGiu2KaTkplWRTzPOVfq6BA
- HCE/dzGfDZhA4tbUEso0knXYHwWfViSDQDITwKlNqe76D4i50VkCYwF
+ bh=Oe6OeT8RwHKrTHvPAPN/a1CWaI7nMbR56LFpTyYY3Gs=;
+ b=an9vVmlYBD2jj71PQbdMkvSlN1WF1nLtTvg+plnabK/0blSY1L2gBLnDwWkvvo+TDcBuRNmZL
+ jvWHpds9rT+DcpXDqZN0yVwCofKjzuXdvYAM9FqKzWC2Dye+JMvc2iS
 X-Developer-Key: i=venkat.yadlapati@yahoo.com; a=ed25519;
  pk=e8KStCtEMvUP1Se/riB/KVnDAQFEVR2Dw2PcuA8/eME=
 X-Endpoint-Received: by B4 Relay for venkat.yadlapati@yahoo.com/20261023
  with auth_id=1303
 X-Original-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 Reply-To: venkat.yadlapati@yahoo.com
-Content-Transfer-Encoding: 7bit
 
-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+The Motorola Signature has two TFA9865 amplifiers on the senary MI2S
+interface. They expect 32-bit I2S slots, which the sc8280xp machine
+driver does not support so far. This series documents the sound card
+compatible and adds an option for 32-bit MI2S backends together with the
+card.
 
-The Molokai GPU is an Adreno 829 instead of the Kaanapali Adreno 840. It
-has no speed bin fuse and its own set of operating points.
+Tested on a Motorola Signature together with the TFA9865 driver: the
+speaker and the earpiece play audio.
 
-Assisted-by: LLM
-Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+I used an LLM (Claude) to help write these patches and their commit
+messages. I reviewed all of them and tested the result on the device.
+
 ---
- arch/arm64/boot/dts/qcom/molokai.dtsi | 123 ++++++++++++++++++++++++++++++++++
- 1 file changed, 123 insertions(+)
+Venkat Yadlapati (2):
+      ASoC: dt-bindings: qcom,sm8250: Add Motorola Signature sound card
+      ASoC: qcom: sc8280xp: Add Motorola Signature sound card
 
-diff --git a/arch/arm64/boot/dts/qcom/molokai.dtsi b/arch/arm64/boot/dts/qcom/molokai.dtsi
-index 82fd31bda1d9..3b9772edd68f 100644
---- a/arch/arm64/boot/dts/qcom/molokai.dtsi
-+++ b/arch/arm64/boot/dts/qcom/molokai.dtsi
-@@ -12,6 +12,7 @@
- #include "kaanapali.dtsi"
- 
- /delete-node/ &gpi_dma4;
-+/delete-node/ &gpu_opp_table;
- /delete-node/ &i2c_master_hub;
- /delete-node/ &qupv3_4;
- /delete-node/ &uart18;
-@@ -37,6 +38,128 @@
- /delete-node/ &sdc2_default;
- /delete-node/ &sdc2_sleep;
- 
-+&gmu {
-+	compatible = "qcom,adreno-gmu-829.0", "qcom,adreno-gmu";
-+};
-+
-+&gpu {
-+	compatible = "qcom,adreno-44030a00", "qcom,adreno";
-+
-+	/* No GPU speed bin fuse */
-+	/delete-property/ nvmem-cells;
-+	/delete-property/ nvmem-cell-names;
-+
-+	gpu_opp_table: opp-table {
-+		compatible = "operating-points-v2-adreno",
-+			     "operating-points-v2";
-+
-+		opp-195000000 {
-+			opp-hz = /bits/ 64 <195000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS_D2>;
-+			opp-peak-kBps = <2136718>;
-+			qcom,opp-acd-level = <0xc82f5ffd>;
-+		};
-+
-+		opp-301000000 {
-+			opp-hz = /bits/ 64 <301000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS_D1>;
-+			opp-peak-kBps = <5285156>;
-+			qcom,opp-acd-level = <0xc82f5ffd>;
-+		};
-+
-+		opp-403000000 {
-+			opp-hz = /bits/ 64 <403000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS>;
-+			opp-peak-kBps = <5285156>;
-+			qcom,opp-acd-level = <0xc8295ffd>;
-+		};
-+
-+		opp-496000000 {
-+			opp-hz = /bits/ 64 <496000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS_L1>;
-+			opp-peak-kBps = <5285156>;
-+			qcom,opp-acd-level = <0xc8295ffd>;
-+		};
-+
-+		opp-589000000 {
-+			opp-hz = /bits/ 64 <589000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
-+			opp-peak-kBps = <6074218>;
-+			qcom,opp-acd-level = <0xc02b5ffd>;
-+		};
-+
-+		opp-660000000 {
-+			opp-hz = /bits/ 64 <660000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_SVS_L0>;
-+			opp-peak-kBps = <6074218>;
-+			qcom,opp-acd-level = <0x882f5ffd>;
-+		};
-+
-+		opp-714000000 {
-+			opp-hz = /bits/ 64 <714000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
-+			opp-peak-kBps = <6074218>;
-+			qcom,opp-acd-level = <0x882f5ffd>;
-+		};
-+
-+		opp-732000000 {
-+			opp-hz = /bits/ 64 <732000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_SVS_L2>;
-+			opp-peak-kBps = <8171875>;
-+			qcom,opp-acd-level = <0x882e5ffd>;
-+		};
-+
-+		opp-795000000 {
-+			opp-hz = /bits/ 64 <795000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
-+			opp-peak-kBps = <12449218>;
-+			qcom,opp-acd-level = <0x882d5ffd>;
-+		};
-+
-+		opp-891000000 {
-+			opp-hz = /bits/ 64 <891000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
-+			opp-peak-kBps = <12449218>;
-+			qcom,opp-acd-level = <0xa82b5ffd>;
-+		};
-+
-+		opp-975000000 {
-+			opp-hz = /bits/ 64 <975000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_TURBO>;
-+			opp-peak-kBps = <14398437>;
-+			qcom,opp-acd-level = <0x882b5ffd>;
-+		};
-+
-+		opp-1025000000 {
-+			opp-hz = /bits/ 64 <1025000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L0>;
-+			opp-peak-kBps = <14398437>;
-+			qcom,opp-acd-level = <0xa82a5ffd>;
-+		};
-+
-+		opp-1075000000 {
-+			opp-hz = /bits/ 64 <1075000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L1>;
-+			opp-peak-kBps = <14398437>;
-+			qcom,opp-acd-level = <0x882a5ffd>;
-+		};
-+
-+		opp-1150000000 {
-+			opp-hz = /bits/ 64 <1150000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L2>;
-+			opp-peak-kBps = <18671875>;
-+			qcom,opp-acd-level = <0xa8295ffd>;
-+		};
-+
-+		opp-1225000000 {
-+			opp-hz = /bits/ 64 <1225000000>;
-+			opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L3>;
-+			opp-peak-kBps = <18671875>;
-+			qcom,opp-acd-level = <0x88295ffd>;
-+		};
-+	};
-+};
-+
- &gpucc {
- 	compatible = "qcom,molokai-gpucc";
- };
+ .../devicetree/bindings/sound/qcom,sm8250.yaml       |  1 +
+ sound/soc/qcom/sc8280xp.c                            | 20 ++++++++++++++++++++
+ 2 files changed, 21 insertions(+)
+---
+base-commit: 4e019254b80b70f6fb90d17a50f211de1daf7ffe
+change-id: 20261116-vantage-sndcard-f1142c26f7d4
 
--- 
-2.56.0
+Best regards,
+--  
+Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 
 
