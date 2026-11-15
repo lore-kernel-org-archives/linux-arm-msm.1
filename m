@@ -1,48 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.169
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794764205;
-	b=BdW87SVONeUjAzZJu2Gsx8G7Bf5t3U7h7msj9M2x7IxdBRlIC1w0HKBcJynk3y0WSRkR
-	 4ao6Ncf+6OQF4FxCXj3d1wlEdlj+KXDf66uDQYJo1orNCi+5Orj0HMJZlQliCE+Va/fSP
-	 YMiiYNs6ic93KG31dq79JGtCMA/WS4Yw9ftTIWixO5YvGtcEO8rk5IiDo3GqN5UQNokUQ
-	 oW20uIy0Rosq6tDZCkP6xTTKxpkFbyAaiGJ4TJo8bWF1+tNUhM4Ocj13Dfa7MSyBv8TaS
-	 SwKXAOxE46unaS7l+988t+xiMwqgtJ519yM9EzebOKjXLe0LFhM22VVp6uYL9vbTxEw==
+	t=1794764589;
+	b=f8jrBxbfIzO21JFqEgfyddcwRQuun8lmXRzTyGrwG7ikxbe+ODTN0VTm6VjtN/Wyjqu1
+	 ewXaY4z/I8NQvxzeYhGhFJC26wNX5WyIsoE3jWSAfMuhE9onyhaQakcTuGHcMf7XK4Aq/
+	 CYRGGCmtYBYJtt7r0yPE9q4Fc9AxGTPOTTH0BfXl3vDrZgfy8b5rc+II9CbFnhk16DVVn
+	 Nr4Wr3Ub/CvRaAsXHFhV9owU9HwSqGCF8yQDzOqwE8dbjZCI52SaFYMWv+KuP1UbBxmkp
+	 W1iujKecUViKlmLCP4/DZBgSwHzPzx2y7lvBY4CmYgaZRpSSfOCdSZViT0pyMwmGonw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794764205;
-	h=Received:DKIM-Signature:Received:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=bEwEZ9dVUhd/OuLg/B3M1oMzCE1ik6XNDQvyNSWBWJw=;
-	b=zDIl0KL/nHmk8dvitfPQgegG8N+QVh6yvwKYii3yM2v6ZIFgN5HK+a/eSONE8RqiOgNg
-	 qEB/5sBJ5vkPYWn+jySdk8b9C9JqX2wStaa4rgWhraaEMz8L/RJB/bG41QpUI9J3qkmXo
-	 6UjhiOeLAcEG87cFHixrXQqqS1wMf2WcbpVG8wA1GWqr2O8ZfKb1TkBSl7tmnG/sPH6uY
-	 QrQ8qRN41bvvuoeidFf/7nvqj8DzbDQt/HPTm+6Faufn9q7vZM/54eIa9FxRDUNE1WAcA
-	 Ywvrbe27UyP110dSkIOtjVZlGYl+IJCixhq/f094LXBvCtXiHSaafN46sufhP8a/tGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794764589;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=nEj//Ut3LvAdBYHkruCpeRqw/TE1nQ9XZ0jccIaxI0M=;
+	b=1eB26Qt7iXvvNY4bQyaG0Q/bE6l2D115CB6pDppKgzMKAo6uppIteIbdARZkBjPAKl7V
+	 0DeRaBHqxT8cdFDJI6/mGJCF+86NI6pSwZe8rLWW39OA/j0hGg56npsvUXkwbUoLJyabh
+	 SXu/0sleUKqk5mxPnctNXS0fNGeuy1vo49mQWodtpYhwqbm6U9fXWJqMdYa/+hi6uzsYd
+	 3tfTvjYzRTjBZKQ3D541MFA/p44buK5T+bq+pWGSiDHwULbzZHFX7GeWM0519JkgtMtbM
+	 TjEcARWpCXggCtjf4KS4FIXnZIq/h5A5TTVibhNoxbOaouaqcEMIqFB1sn/5lmjzhFQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I+Lt7XkY;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PcvgdI2h;
+	arc=none smtp.remote-ip=74.125.82.169
+Received: from mail-dy1-f169.google.com (mail-dy1-f169.google.com [74.125.82.169])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B8C0606A31A;
-	Sun, 15 Nov 2026 17:36:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E633B606A31D
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 17:43:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E633B606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I+Lt7XkY
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E33121F00927;
-	Sun, 15 Nov 2026 17:36:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794764205;
-	bh=bEwEZ9dVUhd/OuLg/B3M1oMzCE1ik6XNDQvyNSWBWJw=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=I+Lt7XkY1zPz9aeCyeXLCe0SOQSsMMuWUdtuchNBHByvjiTH+g5YN8rycZNdlpdtY
-	 vmvfZbJTfVqi08CapQgkyhazEkedlKrHCcCkA3TiSKM5j7lWO1qKmrIoBLUoy9nax8
-	 fr9cT61OXmOupTj3cEprikzHFXt63yAj3uCnO5YT4N9itL+U0E3hzRA0VuzeiafnvF
-	 IxX8b1rC+tqhukcGXBwmMNmvhbbwkXJ30peA9mouL2F3ImO7p81BtPLTBWIfMOgBXb
-	 Bx0yN7Mt3Bn+jmqF0Li3sh65bmIoQCbXzR64JISrZ6raaXrIl4fkr1jh4sOZZu63+e
-	 sKf2HYFeNKY0g==
-Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
-	by traversing.sirena.org.uk (Postfix) with ESMTP id 7AC4E3386D13;
-	Sun, 15 Nov 2026 17:36:16 +0000 (GMT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PcvgdI2h
+Received: by mail-dy1-f169.google.com with SMTP id 5a478bee46e88-3712b6d9843so2027698eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 09:43:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794764588; x=1795369388; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nEj//Ut3LvAdBYHkruCpeRqw/TE1nQ9XZ0jccIaxI0M=;
+        b=PcvgdI2hMpvMdiW1+HQUyQPn73hNMwjQBCwx2gkXPzGcBD40Rm7sqewFwAMwQCrvSt
+         dujQtw5KC39VuO4ARpPHiz3Iu+zKcCuXu8Lq0tBgOi9SUEdX/QGMVciLkHTJEwOvAjfM
+         Z9hMoL2L90bxWRmAxOxqdqU1DyiRABaDLILrtFT50DBkiGTsLzDOE48d/UAbjKMf1AwG
+         feu6Fha2eouQLYBnnvCedkwY0fj4ZGKC4bXCNatK44fRWUVlJWVfupyap9ckJWUErR+0
+         eUl3RMiNb7nhdmEhxuhtFwZ7jvv7hluUuX6DMiuvI+kXR41QKL7swfA8LdDJotG8cZfc
+         2f0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794764588; x=1795369388;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=nEj//Ut3LvAdBYHkruCpeRqw/TE1nQ9XZ0jccIaxI0M=;
+        b=n/KU0WG8l6YLPW1ZvZwD7AJ/Qd+MQY7dK7hyyr02CnOi26xi7x4nTMAHn54ZUugFyI
+         WwmockD0sXlf6RMVV1t/fZfhHNGHJFMYpSupqJbW2sNKp0iC417ts3LNlkFUodM2p4EV
+         /Igdj4aQr5hpSHDOHkMm9VwM5a37J4VKQB6uFBGgPQvtKgl8j5tOQwNoncwbAcWBg+Vt
+         tfEQhH+ER29tFXaQTrTVmUOQilgWszAqsJyiylqfumGfIfVUzfCNbgAHOF51d9rhYoXJ
+         pUxCZ+aFWoXi8Q14k744l/BVMkjuMumrPenlVZ2gi+rolJNs+DfYOGuE/+qaJKEqomR9
+         qLBw==
+X-Forwarded-Encrypted: i=1; AL+hErHl3b5xNOVnq5ezQdFi7x7ToK05v6LVNjw04UDVvFyiGHzexGfNO9Zk75fjVZdCgWSRZP/+I8TxCIxNvTGl@vger.kernel.org
+X-Gm-Message-State: APuU4Z8eJ6bXYSXu3eDluaHqexFC/EPxOEhJqsQ+lAiIM+dzBCSXZR1i
+	3bDboPNdzY2EuxSsURVrBQg9q2sfYvkej4+kgv21q7B+VOGQadDIIyc4
+X-Gm-Gg: AYBFou2fX4GRjhm+VPNnZw2+j52mqWWyAIjYOThrx8URGQcQnpVJ4YXMI+1giCdgj1R
+	PegsfK+9LsDkLbxlJ3JVDpXPoKh7hunn2Or41EHlPCUpiuKbPg2c6z4YWV29dvPo7DQg7VwalyD
+	x3HcRtAdPYIBY4bjdYNrnc778Lpbou7Wrltglkk0NBGdTjSvIAp8hCpUAYti8MXQK+JVntJFAtU
+	nL8aMi8im5kTXknimF6+wQEJvXe3XBR/RQnD7n0spahrc0UvigxYXMizgFhd952WOhrcFlzNlkW
+	RnkSim5pr9NEGN4RFKte2tsB0hvTKGNe/2W/BAzjVWDemqamkxCtgCUb50X92H7rVNwBzGbNSxr
+	c9avhCcCm1n1cgLE8boH+KZYrqpSJjXX6aTHv5X/wwaXqF2O3nzh5ThvAUBhR81RGPd6g2/ZvFG
+	JNu5oF5MF88sDtv8jCwzAaKseP7DwPZVMy6VSXgODWdRHpXeaVX0q9Ba9i0AHQGU+9yozvSw4L2
+	aCPzNbi0lmrzIEsy4C38bafse3274u+GSqoRlJefAWFa5GY4k9DULZr6c2ZqlDZUCSOWwa375WF
+	OEn27w+xcpZieh0Gtnp9amt/pJe0Z9mcMw+tZ53duFGF1ZhWUFe+NlxcWipPlXfzmauuU5yikZC
+	e4Pl5Cu87Tp1x90iFEz6Cp/Rh9DlInnh2eWBI8B173mgk64avz5VXhDUcs9G+sHJmzu2xPgn+Ng
+	3ZLO5aYzE3M4yNXYoQ5Y6iqFxXJ7EPF1t31fefEfJu96Lr/EE=
+X-Received: by 2002:a05:693c:87d5:10b0:379:f7aa:1013 with SMTP id 5a478bee46e88-379f7aa1638mr6773932eec.15.1794764588005;
+        Sun, 15 Nov 2026 09:43:08 -0800 (PST)
+Received: from suraj-HP-Laptop-15s-fq2xxx.tailee6f87.ts.net ([2402:a00:163:3509:9ac3:b274:12a6:a1c4])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37956bb0c40sm28204663eec.28.2026.11.15.09.43.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 15 Nov 2026 09:43:07 -0800 (PST)
+From: Suraj Sonawane <surajsonawane0215@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Linus Walleij <linusw@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Suraj Sonawane <surajsonawane0215@gmail.com>
+Subject: [PATCH v2 0/2] pinctrl: qcom: sc7280-lpass-lpi: add ext_mclk1_c
+Date: Sun, 15 Nov 2026 23:12:35 +0530
+Message-Id: <20261115174237.48908-1-surajsonawane0215@gmail.com>
+X-Mailer: git-send-email 2.34.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,72 +106,25 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC PATCH 03/23] ASoC: qcom: sdw: add per-direction stream
- runtimes for multi_direction links
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Alexey Klimov <alexey.klimov@linaro.org>, 
- Ravi Hothi <ravi.hothi@oss.qualcomm.com>, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20261023171433.820092-4-srinivas.kandagatla@oss.qualcomm.com>
-References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
- <20261023171433.820092-4-srinivas.kandagatla@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 17:36:09 +0000
-Message-Id: <179476416982.140154.5480409059266128218.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1263; i=broonie@kernel.org;
- h=from:subject:message-id; bh=M2c5onV3XhSQ8hlJUvEO3Yh71Gb+lxu4Q3iPvrqeZ6I=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLJ+vu3/+U80surV2p2zNTdnzL+6Nptl+pnqFxN/qqjLz
- dZQvFoZ0lHKwiDGxSArpsgSl8X9sr7k9Rq+gwvbYOawMoEMYeDiFICJPDNl+O+dLs8bILJkw46Q
- mZMt/7cnm7+3N5Eu/vTpleHKdy2Jbw0YGY4sfXzhsKq/9bxzeXsPbOc9FlQlNuva+v37dph6yfs
- ll3MBAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Transfer-Encoding: 8bit
 
-> A SoundWire BE link with multi_direction_codecs carries codec DAIs of
-> both directions, and each direction needs its own sdw_stream_runtime.
-> 
-> Split startup, prepare, hw_free and shutdown into per-direction helpers
-> and run them for both directions on such links.
+SC7280 LPASS LPI gpio5 can mux EXT_MCLK1_C, but the function slot was
+unnamed and the binding did not allow it. Name the slot and allow
+ext_mclk1_c in the DT schema.
 
-> +/*
-> + * Inline direction check that doesn't require snd_soc_dai_stream_valid
-> + * to be exported for module use.
-> + */
-> +static bool sdw_dai_has_dir(struct snd_soc_dai *dai, int dir)
+Changes in v2:
+- Add the DT binding as patch 1, as requested by Linus Walleij and
+  Konrad Dybcio.
+- No functional change to the driver patch.
 
-This looks a lot like snd_soc_stream_valid().
+Suraj Sonawane (2):
+  dt-bindings: pinctrl: qcom,sc7280-lpass-lpi: add ext_mclk1_c
+  pinctrl: qcom: sc7280-lpass-lpi: add ext_mclk1_c function
 
-> +static int qcom_snd_sdw_setup_dir(struct snd_soc_pcm_runtime *rtd,
-> +				  int dir, const char *cpu_name)
->  {
-
-> -	sruntime = sdw_alloc_stream(cpu_dai->name, SDW_STREAM_PCM);
-> +	sruntime = sdw_alloc_stream(cpu_name, SDW_STREAM_PCM);
-
-Both directions will end up with the same name which won't help
-debugging.
-
-> +int qcom_snd_sdw_startup(struct snd_pcm_substream *substream)
->  {
-
-> +
-> +			for_each_rtd_codec_dais(rtd, i, cd) {
-> +				if (!sdw_dai_has_dir(cd, substream->stream))
-> +					continue;
-> +				sr = snd_soc_dai_get_stream(cd, substream->stream);
-> +				if (!IS_ERR_OR_NULL(sr)) {
-> +					sdw_release_stream(sr);
-
-sdw_find_dir_stream() (there's other copies).
+ .../bindings/pinctrl/qcom,sc7280-lpass-lpi-pinctrl.yaml      | 2 +-
+ drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c              | 5 ++++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
 
 -- 
-Mark Brown <broonie@kernel.org>
+2.34.1
+
