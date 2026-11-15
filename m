@@ -1,85 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=35.89.44.33
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794782052;
-	b=h9eK3zro54iaa71D8nDyceb/EwcUVOFXWS3MXu4xxO5sXe2KqKU9d7YoOug611fqVkFy
-	 jAbh8xbRyS3tUWVwG0zI3VuG1zrYu/Nwl/2ASDrjwtfbIr0HthrJ+WN2u3gfDx+IOz+V5
-	 XA8VLAdLNgNHFU7sjeHn5uZtSLNlUBlRQ217u0Hi9a9zEo9yWoJ9LlM9X+dT/LPCqssO6
-	 8unvrxmQcnYqPOAykrInHHDK8aKEtHhTYMqm5DAfJFRhOd/BK7qYbofnlKcgNMneKifWK
-	 rKkrujIw8SfeYCE8EzrLHsjTvG0UQFX6UiJ3sIrcOZBiYwNjXcGmST8RdiRqSkrDi7Q==
+	t=1794783079;
+	b=di0zKA6q54JMXljET/uHKDFLA54G6S9329sefFi1C6Mi4G9/PRzMMBh6HjyVcxDWOmVy
+	 tIH87AlZpppf3ojklU2fUSwyVlXiHcorcmi1oOi7+w0oRWgY/puCjWSJlo85oJrJ4+AO6
+	 uVUBBv4z+ckbENpWqPwwgeli1uUvDAfU6ptvw5DeOeaTRksmgpQCMxQ3kPAbg7K4318Hi
+	 OX7yXzfcvP3EaCqQnFBX/pA7JOHGBK6rZUNcZ/oCKsqyZ0aqgItiKEZkQQUzHYaanhG4F
+	 clMP2UsOA3Iv/EZ9Np3KXRF180MpqYoWoN1zPsOuXjKvILskTNzYxEw+/Ez/tt5ef8A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794782052;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
-	 Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=hLJ6bSKi+ZgPvgTZTEL6AiSyPJLqudm0XPJJoELWh0Q=;
-	b=Onb8clusqWNoEGgixZL5YgekyhuBtKApyJg63fDfvHnKdcQkDfQ4HdZs/c3fMuYz3ViA
-	 E3ImhiJmq72k8ByQY00k9aTOrrk3e2syEOXTkJBYa2pDyDIX5SDcz5IEYjC+KGLMRcG4M
-	 GFWGlpH/A0SxId3tyvJIYsSW4pPa5RATmCEwln6GQU+Ivqzyqa5PnzvPmJ1f7seayDqmg
-	 RlLZZuZxu3g6bs+gV6Fo6RJN8sf7wsM1TIbaYThhWsICTR9SegsLVbvY9Yb1BUKDuSAE5
-	 QKjzCHwXBqHaA1/XjRT5jcguRo5KmwaP0zU6lK8+kI5ymVqVY6pDLCVubOi5wWPP5Kw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794783079;
+	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:
+	 X-Source-L:X-Exim-ID:X-Source:X-Source-Args:X-Source-Dir:
+	 X-Source-Sender:X-Source-Auth:X-Email-Count:X-Org:X-Source-Cap:
+	 X-Local-Domain:X-CMAE-Envelope;
+	bh=ZEo0RCkuB+G1P+dMTl+JdqE+nU+TtyxQ2YWAokX/k+E=;
+	b=xuQvdOFkzBpgnju4cDW9pvy9zdeMpv//TvjPfFr6IGQFztGwLCvyIwNIoF/PbMXHwhv3
+	 avBqd0TshVwXiXV2m004HtKLFR0FJ2VBRVWtiV/j/IMgCRVWRRCBQaQG1k6ByFBx7kgJj
+	 3CuFu5+DZhDNZD8v5gX4rijX5vAdM/ew+uuo83AIaS0zxK1kU/V2NqJDIOeT2WQNku4M9
+	 7aKThh6E+09nx3qWSSaKDsc2JKJ2r0qiBsPgfgkZklomsmph1iQJp7ahqMsQNJJBXv3SZ
+	 uzqdbBNiQla9ADeUcoik36+EM3oZBJBhIPRKMyZEmc+4PEarmwIe/nxmmv1y2tiJuzw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=baylibre.com;
-	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=CJd3QEEj;
-	arc=none smtp.remote-ip=209.85.128.49
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=none header.from=roeck-us.net;
+	spf=fail smtp.mailfrom=roeck-us.net;
+	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=Jt9dwDYV;
+	arc=none smtp.remote-ip=35.89.44.33
+Received: from omta34.uswest2.a.cloudfilter.net (omta34.uswest2.a.cloudfilter.net [35.89.44.33])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36392606A333
-	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 22:34:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 36392606A333
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4F1A606A31F
+	for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 22:51:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B4F1A606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=CJd3QEEj
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4bb61185057so9238955e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 14:34:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1794782049; x=1795386849; darn=vger.kernel.org;
-        h=message-id:date:references:in-reply-to:cc:to:from:subject
-         :content-transfer-encoding:content-type:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=hLJ6bSKi+ZgPvgTZTEL6AiSyPJLqudm0XPJJoELWh0Q=;
-        b=CJd3QEEj8pQwODGjB/Hvsm1Kz8XiytWNDpUjUiysP8iwPosQ6yW3gdLOLRH20X4Owa
-         0JtLC5im59ZkIs5S3uiF2dyb1/b0W6sEAIXxh3hqmTeNyMKe7nwPlu17c/gf4iAu6cBU
-         4y0sp2DgHz6LvxI92R/65FyuHGltuJnCbV89+YgAYch/er4OOAO4xTog7mzZDiYoN7/w
-         sRBEaSqnhB/VU7CFPMMVnakJq0S5UBmp9QqWpa4hHjWni9z2K4sonGaN/XYvwXyXKbqW
-         15MumIhxvuJhPEyRyEbNm3tCt2dmSbs/6BsQifBNlgTCuSlf+tnV/IyEeqPPeVV8jLc3
-         /sOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794782049; x=1795386849;
-        h=message-id:date:references:in-reply-to:cc:to:from:subject
-         :content-transfer-encoding:content-type:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hLJ6bSKi+ZgPvgTZTEL6AiSyPJLqudm0XPJJoELWh0Q=;
-        b=q9rV7bqVu8uuPXudo5nhLh2Xjclv0IGKeqH5bdvKtLjtzXZF7xaPT91KGejWSPnMAN
-         JC+UH2NaxLRbDqkTSXT231oljormliVbllM47HLBaP+SE+cNChDL0NTTPECZPeA237fj
-         D5Pz1Mwlz3QNlvNbdvtZ1LuDsxCeAUl42SpKOr9uAiOkKfKm3YQW9+znErZYTSDvV3yw
-         4AH9/yJL7GfJ/Xf34c9qai7aXsk6TG3M2VXeCjeWe3x33MyMoPUOZUZNXk+vV30ZIOBD
-         Q4/PPkGSRDQQQ4Q1NP397hysqQRhJFqYA4tcvMx/zsI2QbDgdbP9I2ULJwKyOINCICiW
-         skpA==
-X-Forwarded-Encrypted: i=1; AL+hErHXMOodrGI9kKYGc59a/uKkZWQ832DqKNWWZTBKGxkISJ4AhLm8vKHcWuCIhqkXiGJk8vMGl8jBYHWkBIZp@vger.kernel.org
-X-Gm-Message-State: APuU4Z/J3qLwe3k6ANXpMXlFzYIav9dLajMXxqdncu5zd5dTJX0wOZZ5
-	AFwOEBNYh4n4JnDpdLYuRF/Z9j6CX11i57YTPCvI3+yJhR6wl3pTRcY2xmJosmQPXAM=
-X-Gm-Gg: AYBFou0fX5/gEpLr/w5OisSnwLPbnpsfZmOMOLXmUIdrzqdLuuHlQBZ7av6vBO6Drq/
-	eXE6rr6JryTcXp1DTedgieZ+zMD2GKlZWOMZ/Po/hkJFTKDrJj6oqg0QlfDnykM6DQv+N3wM9RI
-	lTL50WmvjyNQg4fUnq+hO6pJDZogj7Uh9qdXUui9Lv6+ueXQUOJBf+SnjbhDGEwUzp0DU95mUbr
-	SgGxMYcVdu4miEXTxkwt9zJDX2dKoczT9I6IPAqZULdPURSSyqS78+YDBogCz7p9UQPKXy+omKC
-	51oktFqp+3WSSgbHxypIFYAWZMxio/whFvUOipNJ9UUf01OFpX77CF50vsOu9aNhHJDB4E1nvYE
-	ZdoH2o7pZKQRByjWe13tPpzb0s79dVN37aSf6jk2rN75zIoBTiU/H3o1qlI3YvBKFl8I4NmG+Gd
-	e+v3uAUDK8RzLQf8cbTF4jmgfqpHEtzmnFgd53RVkFwmv52lbq/CD76p1cmCOOFiuvOIahqms0B
-	jGA+c9Ji8hB0m/7Pviidh4WR0fmcHJDyCBOW6sWtp/+qkdSfA5VO+JH6yq9Ypvz91wchFaKW3VT
-	VOugzHTptWBmKBVuCJyKSy+QmS0TrHTVvcDneqXCZeiMTTTi
-X-Received: by 2002:a05:600c:3e0d:b0:4bb:6f41:39be with SMTP id 5b1f17b1804b1-4bb6f413bfbmr46240405e9.15.1794782049461;
-        Sun, 15 Nov 2026 14:34:09 -0800 (PST)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb55acdfebsm222898225e9.7.2026.11.15.14.34.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 14:34:08 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=Jt9dwDYV
+Received: from eig-obgw-5004b.ext.cloudfilter.net ([10.0.29.208])
+	by cmsmtp with ESMTPS
+	id SdaFxu27OAR1iSj4AxUDbr; Sun, 15 Nov 2026 22:51:18 +0000
+Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
+	by cmsmtp with ESMTPS
+	id Sj49xn9tbuJrPSj49xT0s4; Sun, 15 Nov 2026 22:51:18 +0000
+X-Authority-Analysis: v=2.4 cv=WLZ/XmsR c=1 sm=1 tr=0 ts=6afa3766
+ a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=cm27Pg_UAAAA:8
+ a=1XWaLZrsAAAA:8 a=f31WFe-OUQ4saVoOFyIA:9 a=CjuIK1q_8ugA:10
+ a=KPbNTLLc3YvdawN95zVk:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=roeck-us.net; s=default; h=In-Reply-To:Content-Type:MIME-Version:References
+	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=ZEo0RCkuB+G1P+dMTl+JdqE+nU+TtyxQ2YWAokX/k+E=; b=Jt9dwDYVbP0LYcT/tMPfdaxAMJ
+	cbyMMpEuR7PidUgFzfSsnYT28elVlvOzLSDEz89roSRYOPUEvAS+KDPjeqFcKGbnPLOnVjr9GGvrb
+	7fb5iwL3VR9AWrSCfPuFjg1k9WCp+Im0P3I9C0h7FAFjTqqwizR1qRWXGP5ovM9vwade39NvD6fJn
+	lJr3vymcGJCsWrHqWon2oLrs80c+1OJxDLEYl9+AWUPbqPhoCkC88WC5FewE4ZiXMoJFHIHr3pYjP
+	4gRj0EApfIfyPE0th7+RXt92H0AOWCnjZ6iTr77cxDa8YFisgQbwcj83k1L30vomgzT2LKAB6yClG
+	zlmL1JwA==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:55486 helo=server.roeck-us.net)
+	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.100.1)
+	(envelope-from <linux@roeck-us.net>)
+	id 1xSj49-00000000oYp-0Yzc;
+	Mon, 16 Nov 2026 04:21:17 +0530
+Date: Sun, 15 Nov 2026 14:51:16 -0800
+From: Guenter Roeck <linux@roeck-us.net>
+To: Mayank Rungta <mrungta@google.com>
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>,
+	Marc Zyngier <maz@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	"Kirill A . Shutemov" <kas@kernel.org>,
+	Douglas Anderson <dianders@chromium.org>
+Subject: Re: [PATCH v4 5/7] watchdog: pretimeout: Protect governor access
+ with RCU for NMI safety
+Message-ID: <9da7693d-4cac-466e-a3c1-bbe491fcff0c@roeck-us.net>
+References: <20261112031629.396819-1-mrungta@google.com>
+ <20261112031629.396819-6-mrungta@google.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,107 +90,181 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH RFC 0/3] clk: Restore the clocks of a provider after a
- hibernation
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Russell King <linux@armlinux.org.uk>, 
- Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, Taniya Das <taniya.das@oss.qualcomm.com>, 
- Konrad Dybcio <konradybcio@kernel.org>
-In-Reply-To: <20261028-b4-clk-restore-after-hibernation-v1-0-86cf62747a7f@oss.qualcomm.com>
-References: <20261028-b4-clk-restore-after-hibernation-v1-0-86cf62747a7f@oss.qualcomm.com>
-Date: Sun, 15 Nov 2026 23:33:56 +0100
-Message-Id: <179478203647.13037.1560944178171749849.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3673; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=Ig1JMbXRCmJfdJcT1sGueTmWJmoPRP4AdJybNvm12MY=;
- b=owGbwMvMwCW2VtK+WnvWU3HG02pJDFm/jCPjSy54XHH/JcHw7lbPogWvLvcvvvPHcV4z5/k4g
- 23ccZ+mdpSyMIhxMciKKbLUcFeLv5PU+jJrus5tmDmsTCBDGLg4BWAiOxIY/keyTtq72s/setcz
- ngy5rDnH4sWbDvWxb7S9uny2/2GP1Q2MDE/Lj7BLzb3MN1Oyfb9IzkeXggVrTYRME/cLcl+U+V/
- GzAIA
-X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
- fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261112031629.396819-6-mrungta@google.com>
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1xSj49-00000000oYp-0Yzc
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net (server.roeck-us.net) [108.223.40.66]:55486
+X-Source-Auth: guenter@roeck-us.net
+X-Email-Count: 9
+X-Org: HG=direseller_whb_net_legacy;ORG=directi;
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfObdZqQkDOmrx+RbimtVWuso06s09IL4hatLBNqfaJYSKosEDT3I3bkMASRqfqj8lqFTNTCGC0/JrkYyn8/2W7CL5s7y/Dldho0nQRkIvPkTbeV0ZAcP
+ n3hvPjEvtAKmnmgMUnhX4PNKf3t4gPk1JnycxJXqxVDt6SCHEtYPL3bICbDOeDCqOYjLmhQiv8j0hQVcwOx2SROnHHHewVynsAuRnA6otqO5uZ4ag0nF6w2S
 
-> When a hibernation image is restored, the clock hardware has been through
-> a power cycle and a boot kernel, while the clock framework in the image
-> still holds the rates, parents and enable state the consumers asked for
-> before the image was created. The consumers ask for the same rates again
-> when they resume, the framework sees no change, and the clocks the boot
-> kernel did not touch keep whatever the boot firmware left in them.
+On Wed, Nov 11, 2026 at 07:16:27PM -0800, Mayank Rungta wrote:
+> When watchdog pretimeout interrupts are configured as NMIs (or
+> pseudo-NMIs), pretimeout handlers execute in NMI context. Accessing
+> the watchdog governor via spinlocks in watchdog_notify_pretimeout() is
+> unsafe in NMI context and can cause deadlocks if an NMI arrives while a
+> spinlock is held.
 > 
-> Whether the kernel that loads the image probed a given controller at
-> all depends on whether its driver is built in or available from the
-> initramfs. On the Qualcomm Glymur CRD, the display clock controller
-> driver is a module that it does not probe, so after the restore the DPU
-> runs at the 333MHz the firmware configured the PLL for instead of the
-> 717MHz the framework believes it runs at, underflows, and the panel
-> shows a solid blue screen.
+> Protect governor assignment and dereference with RCU instead of
+> spinlocks, allowing lockless, NMI-safe governor notifications while
+> preserving safe runtime governor switching.
 > 
-> The first patch adds clk_restore_context_dev(), which re-applies the
-> cached state of the clocks registered by a provider device, parents
-> first, as an alternative to the global clk_restore_context() that
-> depends on every clock implementing the restore_context operation. The
-> second one adds a hibernation restore callback to the Qualcomm clock
-> controller common code, which redoes the probe time configuration and
-> restores the clocks, and the third one uses it for the Glymur display
-> clock controller.
+> Reviewed-by: Douglas Anderson <dianders@chromium.org>
+> Signed-off-by: Mayank Rungta <mrungta@google.com>
+
+This patch is independent of the rest of the series, so I applied it
+to wachdog-next.
+
+Thanks,
+Guenter
+
+> ---
+>  drivers/watchdog/watchdog_pretimeout.c | 45 ++++++++++++++------------
+>  include/linux/watchdog.h               |  2 +-
+>  2 files changed, 26 insertions(+), 21 deletions(-)
 > 
-> Sent as RFC, as the same applies to every clock controller and I would
-> like to know whether this is the right level to handle it at before
-> wiring up the rest. In particular:
-> 
-> - Instead of programming the cached state into the hardware, the
->   framework could read the parents and rates back from the hardware
->   after the restore, so that the consumers asking for the same rates
->   again go through the normal clk_set_rate() path. Would that be
->   preferred?
-
-I would much prefer this approach. IMO, we should not try to restore
-the cached values. There is no way to be sure we would get it right:
-the HW may require a specific sequence to reach the final state,
-intermediate values, timings, who knows what else! I'd rather not go
-down that path.
-
-Consumers know (or should know) what they need, so they should release
-their clocks when suspending and request what they need again when
-resuming.
-
-On the provider side, it should just resync with the HW from its
-.restore callback: re-read the parents and rates, a bit like
-CLK_GET_RATE_NOCACHE does, as well as the accuracy, phase and duty
-cycle, and re-enable the CLK_IS_CRITICAL clocks.
-
-CCF should provide a helper for this. It is likely going to redo a fair
-share of what __clk_core_init() does. The prototype could be fairly
-simple, something like clk_resume_hw_sync(struct device *dev), to
-resync the clocks registered by that device.
-
-> 
-> - Programming the cached rate of a clock that is not enabled may not
->   work on every clock type, for example on an RCG whose source is off.
-
-What I'm suggesting should not have such problem I think
-
-> 
-> - The Qualcomm callback finds its state through devres, which only
->   covers drivers that call qcom_cc_really_probe() once per device.
-> 
-> Clocks left enabled by the firmware but not by the framework stay
-> enabled, and the phase and duty cycle are not restored.
-
-CCF has no sync_state support (yet!), so the unused clocks of providers
-built as modules are never disabled, even on a normal boot. You would
-not be creating a new problem here.
-
-Anything cached needs to be resynced though, including the phase and
-duty cycle, everything else.
-
--- 
-Jerome
-
+> diff --git a/drivers/watchdog/watchdog_pretimeout.c b/drivers/watchdog/watchdog_pretimeout.c
+> index 02e09b9e396d..7fb586c77403 100644
+> --- a/drivers/watchdog/watchdog_pretimeout.c
+> +++ b/drivers/watchdog/watchdog_pretimeout.c
+> @@ -4,6 +4,7 @@
+>   */
+>  
+>  #include <linux/list.h>
+> +#include <linux/rcupdate.h>
+>  #include <linux/slab.h>
+>  #include <linux/spinlock.h>
+>  #include <linux/string.h>
+> @@ -67,12 +68,14 @@ int watchdog_pretimeout_available_governors_get(char *buf)
+>  
+>  int watchdog_pretimeout_governor_get(struct watchdog_device *wdd, char *buf)
+>  {
+> +	const struct watchdog_governor *gov;
+>  	int count = 0;
+>  
+> -	spin_lock_irq(&pretimeout_lock);
+> -	if (wdd->gov)
+> -		count = sysfs_emit(buf, "%s\n", wdd->gov->name);
+> -	spin_unlock_irq(&pretimeout_lock);
+> +	rcu_read_lock();
+> +	gov = rcu_dereference(wdd->gov);
+> +	if (gov)
+> +		count = sysfs_emit(buf, "%s\n", gov->name);
+> +	rcu_read_unlock();
+>  
+>  	return count;
+>  }
+> @@ -91,7 +94,7 @@ int watchdog_pretimeout_governor_set(struct watchdog_device *wdd,
+>  	}
+>  
+>  	spin_lock_irq(&pretimeout_lock);
+> -	wdd->gov = priv->gov;
+> +	rcu_assign_pointer(wdd->gov, priv->gov);
+>  	spin_unlock_irq(&pretimeout_lock);
+>  
+>  	mutex_unlock(&governor_lock);
+> @@ -101,16 +104,13 @@ int watchdog_pretimeout_governor_set(struct watchdog_device *wdd,
+>  
+>  void watchdog_notify_pretimeout(struct watchdog_device *wdd)
+>  {
+> -	unsigned long flags;
+> +	const struct watchdog_governor *gov;
+>  
+> -	spin_lock_irqsave(&pretimeout_lock, flags);
+> -	if (!wdd->gov) {
+> -		spin_unlock_irqrestore(&pretimeout_lock, flags);
+> -		return;
+> -	}
+> -
+> -	wdd->gov->pretimeout(wdd);
+> -	spin_unlock_irqrestore(&pretimeout_lock, flags);
+> +	rcu_read_lock();
+> +	gov = rcu_dereference(wdd->gov);
+> +	if (gov)
+> +		gov->pretimeout(wdd);
+> +	rcu_read_unlock();
+>  }
+>  EXPORT_SYMBOL_GPL(watchdog_notify_pretimeout);
+>  
+> @@ -140,8 +140,8 @@ int watchdog_register_governor(struct watchdog_governor *gov)
+>  		default_gov = gov;
+>  
+>  		list_for_each_entry(p, &pretimeout_list, entry)
+> -			if (!p->wdd->gov)
+> -				p->wdd->gov = default_gov;
+> +			if (!rcu_access_pointer(p->wdd->gov))
+> +				rcu_assign_pointer(p->wdd->gov, default_gov);
+>  		spin_unlock_irq(&pretimeout_lock);
+>  	}
+>  
+> @@ -170,11 +170,14 @@ void watchdog_unregister_governor(struct watchdog_governor *gov)
+>  	if (default_gov == gov)
+>  		default_gov = NULL;
+>  	list_for_each_entry(p, &pretimeout_list, entry)
+> -		if (p->wdd->gov == gov)
+> -			p->wdd->gov = default_gov;
+> +		if (rcu_dereference_protected(p->wdd->gov,
+> +					      lockdep_is_held(&pretimeout_lock)) == gov)
+> +			rcu_assign_pointer(p->wdd->gov, default_gov);
+>  	spin_unlock_irq(&pretimeout_lock);
+>  
+>  	mutex_unlock(&governor_lock);
+> +
+> +	synchronize_rcu();
+>  }
+>  EXPORT_SYMBOL(watchdog_unregister_governor);
+>  
+> @@ -192,7 +195,7 @@ int watchdog_register_pretimeout(struct watchdog_device *wdd)
+>  	spin_lock_irq(&pretimeout_lock);
+>  	list_add(&p->entry, &pretimeout_list);
+>  	p->wdd = wdd;
+> -	wdd->gov = default_gov;
+> +	rcu_assign_pointer(wdd->gov, default_gov);
+>  	spin_unlock_irq(&pretimeout_lock);
+>  
+>  	return 0;
+> @@ -206,7 +209,7 @@ void watchdog_unregister_pretimeout(struct watchdog_device *wdd)
+>  		return;
+>  
+>  	spin_lock_irq(&pretimeout_lock);
+> -	wdd->gov = NULL;
+> +	rcu_assign_pointer(wdd->gov, NULL);
+>  
+>  	list_for_each_entry_safe(p, t, &pretimeout_list, entry) {
+>  		if (p->wdd == wdd) {
+> @@ -216,4 +219,6 @@ void watchdog_unregister_pretimeout(struct watchdog_device *wdd)
+>  		}
+>  	}
+>  	spin_unlock_irq(&pretimeout_lock);
+> +
+> +	synchronize_rcu();
+>  }
+> diff --git a/include/linux/watchdog.h b/include/linux/watchdog.h
+> index 29cd03686154..5a3c35968cc8 100644
+> --- a/include/linux/watchdog.h
+> +++ b/include/linux/watchdog.h
+> @@ -105,7 +105,7 @@ struct watchdog_device {
+>  	const struct attribute_group **groups;
+>  	const struct watchdog_info *info;
+>  	const struct watchdog_ops *ops;
+> -	const struct watchdog_governor *gov;
+> +	const struct watchdog_governor __rcu *gov;
+>  	unsigned int bootstatus;
+>  	unsigned int timeout;
+>  	unsigned int pretimeout;
