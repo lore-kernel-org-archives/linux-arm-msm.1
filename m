@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=142.132.183.134
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794869440;
-	b=loBaVAGMVB/i2iY/rZYDBi5T2B+WgZlYI//SmJ1tuiBZG0siuKM2JMNuoOfPWf3Zgnqo
-	 vBHLqi+qvQR20Uk8spcJZcW6/NgnqXGGIK6XSCJyZfEC/EiQ/vCuEfUdTowCKI6WXuSeh
-	 7eI0Z38/pVawIpRN2VoHZgrtiharx6mtFF9YHKAQS/bxiXeo7HdzeQlxlY310Ehcwdrc9
-	 pgCEBX1mpl4d5gKBZPaTtgelkRbS0YYFEOoJAjGFH5+9wOAznCa5Em/HQD01mbu2PkCkK
-	 5lEDiWsPj9vdBORnAFcLycKL6z7nQg6ljVKEg1U3BNNBOqBVwUaqxZPZQ43A2Ot58Kw==
+	t=1794869435;
+	b=fO//W5EQt5CfvAMG5p8Ivky97DDKpeuyZTuScpntEVi/SKRCLUmkM/qRmkAvwN4qeuZD
+	 EhYhVmz4HGq8FFhJ8uK/nzQeTy4DapV0f8QVueD/lbepJXmQ5a+hjcGGzl7//7g1y4MuS
+	 XLnFj06i8/BTYmCuoW8GEEFTJU5baeI9+q40SeT0stbVdPaCgT59sUt7UOnkT6HQ5GIJi
+	 JpVbbpJLq1qqyiAmRcJqKl9WgsbmE7eh8TaeWSSnjZ2jvG+AsVXCya46CYYs8//lPB4wO
+	 2xHlqhWmQzzns8SQhPbAVe/Ec4ai0+A6O93QxKnexIzBjM3seImtNA6PEU6ZgHJ243A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794869440;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794869435;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=UVXogK0Xp8i0EBmC2ZK1Dc5+jlLc6ZnhpSU8R1J3taU=;
-	b=EmidxGo9cHKhfzg9Smv3TtwqEDIX2nSmx8Zi5bgAa7+0ZMJukkZ4V1F8oqOU0hos/rWn
-	 XnycP79/mxy1GxumKyju8eEUfAFqn1AhilPQMYIDx+OMhAkTJVQiPSlkDaaCo/rWOK+gz
-	 ycnC8Eoytse52rwOmnM6D0FTMaDam4ivRmm/6mGu6/Y6mUw3aqlBt6eLkx3tlHGD2liF+
-	 43ox2dfnkkM0gfeeH0BLnjKOSkR4ZufnkHJS4ooWY6MS94BnFhkgufISJ5qTw0FCixbA5
-	 uEz+k/6fAElcM4lSLxFS2/UlX8EH/Xar2eo52nrJGO2boQBXIb5cwjL+fSk6bt40lKQ==
+	bh=FRTZ0UZ+O5UMbm2peSSpDUxiOixTmh4Ad8SIaAVLsT8=;
+	b=Krj2QblP+57w+9GoYtO84R6A/89Q3xVIs8Rg9EWpzFneyl4y7/xxVBKyJ0mXjPmEV5sj
+	 ZzAQdbjOzmPsSIwI2DrDS7meNXNLAuM7n4dXUNaL4YZUKPtpv2q5g5Pf/rJS0Z5tqVBTX
+	 YZOAF8Whnv5SVXa5x4O9sBhOeXdCu69UfX38yMnWDTD5v1sn1yD1y6puW6kpGTA4aocyl
+	 tG3wf95I60DUBI05CG7sl4w4QdsBz3ZCqBfw9VlZPF/kLZqPyKc1MbvvZ+sW6hMSXXHHW
+	 UtkpdJIuznJD8Ii2/cn7gYlETwYUdRTSS2vmSrYZf6sMiw410ABHg/j0p/slEhtc6iQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=erebion.eu;
 	spf=pass smtp.mailfrom=erebion.eu;
-	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b=fdgdxbYo;
-	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b=FtRxI8hn;
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b="Sm77vU/r";
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b="NoaC/YnX";
 	arc=none smtp.remote-ip=142.132.183.134
 Received: from erebion.eu (erebion.eu [142.132.183.134])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BB6860A260A;
-	Mon, 16 Nov 2026 22:50:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3BB6860A260A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4958606A31C;
+	Mon, 16 Nov 2026 22:50:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4958606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=erebion.eu
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=erebion.eu
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b=fdgdxbYo;
-	dkim=pass (2048-bit key) header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b=FtRxI8hn
+	dkim=pass header.d=erebion.eu header.i=@erebion.eu header.a=ed25519-sha256 header.s=202508e header.b=Sm77vU/r;
+	dkim=pass (2048-bit key, unprotected) header.d=erebion.eu header.i=@erebion.eu header.a=rsa-sha256 header.s=202508r header.b=NoaC/YnX
 DKIM-Signature: v=1; a=ed25519-sha256; s=202508e; d=erebion.eu; c=relaxed/relaxed; r=y;
-	h=To:Message-Id:Subject:Date:From; t=1794869438; bh=UVXogK0Xp8i0EBmC2ZK1Dc5
-	+jlLc6ZnhpSU8R1J3taU=; b=fdgdxbYoaeLqG00oiuluCpcMcwWIG6w979V8jtsv+nGAUhK76O
-	hakIU7HzCrOqUtN2Id9A9PDuKta3ZaKoHxAg==;
+	h=To:Message-Id:Date:Subject:From; t=1794869432; bh=FRTZ0UZ+O5UMbm2peSSpDUx
+	iOixTmh4Ad8SIaAVLsT8=; b=Sm77vU/r7NfX+5HnVXq1nuqVkjmtScptK3wHFoEULPZxXDB0Cc
+	n6RVdeMggm29fJWwtFCPz70nN8goey/qhaBA==;
 DKIM-Signature: v=1; a=rsa-sha256; s=202508r; d=erebion.eu; c=relaxed/relaxed; r=y;
-	h=To:Message-Id:Subject:Date:From; t=1794869438; bh=UVXogK0Xp8i0EBmC2ZK1Dc5
-	+jlLc6ZnhpSU8R1J3taU=; b=FtRxI8hnNl5uvfrtK9yOX8BoMEx/9C3qNsNvCWyFVW/LT9/pPE
-	1Dmq3Zd0L0tX84Vp+1DO9D9J6bnDpuEZbh9+ikJ5YwX9z305nQFWE35o1mkOGxPlJy3kIekr7rT
-	t4rDgmlAHQiVROs6CebqJtzxO2Xim79OIOe6RfwMsCbQMIntS8N7DhLlPuv/D5nAlzg1xQe795H
-	UlMToEMCHt1uYtCKq9DNg3xVhLunBdJd3AZwmpfJrmA49Au5RfzHVk0YGXR+kA2LKyIT/FyqSER
-	dSmbVCzts1HobTun4YHtIqSTkTVvrf3utDrOwu9a3D/AITfpLMf//ulfdVv/3xOE4Ug==;
+	h=To:Message-Id:Date:Subject:From; t=1794869432; bh=FRTZ0UZ+O5UMbm2peSSpDUx
+	iOixTmh4Ad8SIaAVLsT8=; b=NoaC/YnX38nou3GqsnFmEyfLDFVgDaZ8p4gkesAUrSctYCi7a4
+	cDn0WmO1qnSKYJNOELvtlcEC4AKFHv32ZA9znHVuEbaeHFIvCURWmxWQNMeSSokOEWPaIYE8k4U
+	CmLi6cQdKUGZfx/L28icGGIsB3MsE7M9zaUlArehzdrMHvKqBhB/SWmIVvTvEaUI2IPVqKONY8u
+	8UxwCc7A0m71j/XOjqS4Qf3BLZs83iLABmuqc6wvMJZmCOfyJTCL2WFvL/cJIGGv129HKV4FwZv
+	1Lq8i+r19TvUnhHjM+ZhYCaucZJ8RQzk74b7VRfLUYMGMsNHtttVLfQI45rnGTtoZfw==;
 From: erebion <erebion@erebion.eu>
-Date: Mon, 16 Nov 2026 23:50:41 +0100
-Subject: [PATCH v5 11/12] arm64: dts: qcom: sm6350-lena: Add PM6150L
- thermals
+Subject: [PATCH v5 00/12] Enable more nodes for the Xperia 10 III
+Date: Mon, 16 Nov 2026 23:50:30 +0100
+Message-Id: <20261116-pdx213-upstream-3-v5-0-7318a19806eb@erebion.eu>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,9 +62,12 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-pdx213-upstream-3-v5-11-7318a19806eb@erebion.eu>
-References: <20261116-pdx213-upstream-3-v5-0-7318a19806eb@erebion.eu>
-In-Reply-To: <20261116-pdx213-upstream-3-v5-0-7318a19806eb@erebion.eu>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XP3U7DMAwF4FeZck2m2Gn6syveA3FRJx4LUteSt
+ NXQ1HfH6xACrRKXVo4/n1xV5hQ5q8PuqhLPMcf+LIN72il/as9vrGOQWaHB0tTY6CFcEKyehjw
+ mbjttdTBUm2NVNORIyd6Q+Bgvq/nyep/zRO/sxxv0nUj8Mcmx8R5T1GbWvu+6OB52c7W3OnlQt
+ +1TzGOfPteCM6zhtUuD5UaXGbTRIK8eanIewrNcIvnTnqeVm/FfAoWgogRky+Rs+UDYHwLA4BZ
+ hhfDBW+KmDOiqB6L4RcjuBlEIUZAB70xbI/g/xLIsX2e5Rbi6AQAA
+X-Change-ID: 20260829-pdx213-upstream-3-d0b80f749b5b
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
  Jessica Zhang <jesszhan0024@gmail.com>, 
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -76,227 +79,94 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Conor Dooley <conor+dt@kernel.org>
 Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- phone-devel@vger.kernel.org, erebion <erebion@erebion.eu>
+ phone-devel@vger.kernel.org, erebion <erebion@erebion.eu>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794869432; l=4742;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794869432; l=4197;
  i=erebion@erebion.eu; s=20260607; h=from:subject:message-id;
- bh=SrgfBWKMShf32cHnltJ3Uilw219RibDG24/HOTUZrUc=;
- b=YmiQ0koJz/c+c8VlXkCgb7FIxeQiGSMjecKiyGY+YQcH/qfIYEHQQhKRU8c91R3dfOBQhYOfa
- N7A7PmziCSZDdhbCYcYhftx1xV1x/qi5DpOmVzvBwA5nzRnipwGlOt0
+ bh=B6kkZUwaP6FohDG2oMa6B64oG+I7IHAtHRL6P3bj/+E=;
+ b=WlJVwIV1K2qaE4D/gTcTEsiShpIVngO8dbB221L0mtm2FAyaXH+5OLZhYs25r1UuoMO2wlZ0T
+ OoxHBlLfH7DBn+3RR0miXE8Jzxo9L4uNNIrfr2LV1qYcmbwJds88RrS
 X-Developer-Key: i=erebion@erebion.eu; a=ed25519;
  pk=rOCVlR8khmBtCFe4ZlDcbCbIcORxdaNzPDkoIiHM7xc=
 
-Configure the thermals for the PA_THERM1, MSM_THERM, PA_THERM0,
-CAM_FLASH_THERM and QUIET_THERM thermistors connected to
-PM6150L.
-
-Due to hardware constraints we can only register 4 zones with
-pm6150l_adc_tm, the other 2 we can register via generic-adc-thermal.
-
-RFC_CAM_THERM is intentionally omitted for now and will have to be
-added once it is clear how it should be added.
-
-The trip points can really only be considered as placeholders, more
-configuration with cooling etc. can be added later.
+Enable some more nodes for the Xperia 10 III.
 
 Signed-off-by: erebion <erebion@erebion.eu>
 ---
- .../dts/qcom/sm6350-sony-xperia-lena-pdx213.dts    | 160 +++++++++++++++++++++
- 1 file changed, 160 insertions(+)
+Changes in v5:
+- sort some nodes alphabetically
+- fix firmware paths to use codename "lena" instead of "pdx213" for consistency with other device trees
+- PM6150L thermals: fix commit message after removing RFC_CAM_THERM in v4
+- Link to v4: https://patch.msgid.link/20261113-pdx213-upstream-3-v4-0-4b01c50a821c@erebion.eu
 
-diff --git a/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts b/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-index b86fe11fd5296..b19e76b3c1a75 100644
---- a/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-+++ b/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-@@ -81,6 +81,13 @@ memory@fe901000 {
- 		};
- 	};
- 
-+	msm_therm_sensor: thermal-sensor-msm {
-+		compatible = "generic-adc-thermal";
-+		#thermal-sensor-cells = <0>;
-+		io-channels = <&pm6150l_adc ADC5_AMUX_THM2_100K_PU>;
-+		io-channel-names = "sensor-channel";
-+	};
-+
- 	thermal-zones {
- 		chg-skin-thermal {
- 			thermal-sensors = <&pm7250b_adc_tm 0>;
-@@ -106,6 +113,74 @@ active-config0 {
- 			};
- 		};
- 
-+		pa0-thermal {
-+			thermal-sensors = <&pm6150l_adc_tm 1>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		pa1-thermal {
-+			thermal-sensors = <&pm6150l_adc_tm 0>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		quiet-thermal {
-+			thermal-sensors = <&pm6150l_adc_tm 3>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		rfc-flash-thermal {
-+			thermal-sensors = <&pm6150l_adc_tm 2>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		sdm-skin-thermal {
-+			polling-delay-passive = <1000>;
-+			polling-delay = <5000>;
-+			thermal-sensors = <&msm_therm_sensor>;
-+
-+			trips {
-+				trip0 {
-+					temperature = <45000>;
-+					hysteresis = <0>;
-+					type = "passive";
-+				};
-+
-+				trip1 {
-+					temperature = <55000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+		};
-+
- 		xo-thermal {
- 			thermal-sensors = <&pmk8350_adc_tm 0>;
- 
-@@ -392,6 +467,83 @@ &mpss {
- 	status = "okay";
- };
- 
-+&pm6150l_adc {
-+	pinctrl-0 = <&pm6150l_adc_default>;
-+	pinctrl-names = "default";
-+
-+	channel@4d {
-+		reg = <ADC5_AMUX_THM1_100K_PU>;
-+		label = "pa_therm1";
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		qcom,ratiometric;
-+	};
-+
-+	channel@4e {
-+		reg = <ADC5_AMUX_THM2_100K_PU>;
-+		label = "msm_therm";
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		qcom,ratiometric;
-+	};
-+
-+	channel@4f {
-+		reg = <ADC5_AMUX_THM3_100K_PU>;
-+		label = "pa_therm0";
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		qcom,ratiometric;
-+	};
-+
-+	channel@54 {
-+		reg = <ADC5_GPIO3_100K_PU>;
-+		label = "rear_cam_flash_therm";
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		qcom,ratiometric;
-+	};
-+
-+	channel@55 {
-+		reg = <ADC5_GPIO4_100K_PU>;
-+		label = "quiet_therm";
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		qcom,ratiometric;
-+	};
-+};
-+
-+&pm6150l_adc_tm {
-+	status = "okay";
-+
-+	pa-therm1@0 {
-+		reg = <0>;
-+		io-channels = <&pm6150l_adc ADC5_AMUX_THM1_100K_PU>;
-+		qcom,hw-settle-time-us = <200>;
-+		qcom,ratiometric;
-+	};
-+
-+	pa-therm0@1 {
-+		reg = <1>;
-+		io-channels = <&pm6150l_adc ADC5_AMUX_THM3_100K_PU>;
-+		qcom,hw-settle-time-us = <200>;
-+		qcom,ratiometric;
-+	};
-+
-+	rear-cam-flash-therm@2 {
-+		reg = <2>;
-+		io-channels = <&pm6150l_adc ADC5_GPIO3_100K_PU>;
-+		qcom,hw-settle-time-us = <200>;
-+		qcom,ratiometric;
-+	};
-+
-+	quiet-therm@3 {
-+		reg = <3>;
-+		io-channels = <&pm6150l_adc ADC5_GPIO4_100K_PU>;
-+		qcom,hw-settle-time-us = <200>;
-+		qcom,ratiometric;
-+	};
-+};
-+
- &pm6150l_flash {
- 	status = "okay";
- 
-@@ -405,6 +557,14 @@ led-0 {
- 	};
- };
- 
-+&pm6150l_gpios {
-+	pm6150l_adc_default: adc-default-state {
-+		pins = "gpio7", "gpio10";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+		bias-high-impedance;
-+	};
-+};
-+
- &pm6350_gpios {
- 	vol_down_n: vol-down-n-state {
- 		pins = "gpio2";
+Changes in v4:
+- &pm6150l_flash: fix extra zero for led-max-microamp value accidentally added in v3 (this was setting the max value 10x to high), remove Lua's Reviewed-by
+- rename touch-en-regulator patch: fix rebase mishap and remove a regulator that's not part of this patch series, remove Konrad's Reviewed-by
+- IPA: remove redundant properties that are now set in sm6350-lena board DTS, remove Luca's Reviewed-by
+- fix pm7250b thermals after a rebase mishap
+- pm8350: disable PON, as pm6350 already has it enabled, remove Konrad's Reviewed-by
+- rear_cam_sensor: fix gpio to use correct one
+- remove includes that aren't actually used
+- re-order alphabetically: &pm6150l_adc before &pm6150l_gpios
+- remove a superfluous tab at the closing brace of rear-cam-flash-therm@2
+- enable remaining i2c busses: fix rebase mishap
+- fix firmware paths to use upper-case "Sony" instead of lower-case "sony" for consistency with other DTs, reset Luca's Reviewed-by
+- remove rear_cam_sensor, as it does not work and I haven't found the issue, will submit later when I get it actually working
+- Link to v3: https://patch.msgid.link/20261102-pdx213-upstream-3-v3-0-cdc3be96d257@erebion.eu
 
--- 
-2.53.0
+Changes in v3:
+- re-order some properties, generic properties first, then qcom,*
+- &pm6150l_flash: fix led-max-microamp value
+- rename touch-en-regulator to regulator-touch-en (to keep any future fixed-regulator sorted together as well)
+- Bluetooth: remove incorrect property that does not exist
+- Bluetooth, &qup_uart1_cts: do not overwrite a bias-disable with bias-bus-hold as it is not necessary
+- &pm7250b_vbus: fix regulator-max-microamp value
+- Remove comment from reserved-memory as suggested by Konrad Dybcio
+- Squashed the patch enabling IPA into the one enabling ADSP, CDSP & MPSS, as suggested by Luca Weiss (therefore not adding the Reviewed-by from Konrad Dybcio)
+- Configure thermals for PMK8350, PM7250B, PM650L as used in pdx213
+- Enable remaining i2c busses
+- Link to v2: https://patch.msgid.link/20260926-pdx213-upstream-3-v2-0-b4612e3eb536@erebion.eu
+
+Changes in v2:
+- Remove panel_reset_pin that shouldn't be part of this patch series
+- Remove incorrect reg from mpss
+- Fix conflicting bias pinctrl, as pinctrl nodes from sm6350.dtsi already contain a bias-* property
+- Fix incorrect unit name in &pmk8350_vadc
+- Link to v1: https://patch.msgid.link/20260926-pdx213-upstream-3-v1-0-1609c18b5c1d@erebion.eu
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+erebion (12):
+      arm64: dts: qcom: sm6350-lena: Add flash LED
+      arm64: dts: qcom: sm6350-lena: rename touch-en-regulator
+      arm64: dts: qcom: sm6350-lena: Add qcom,rmtfs-mem node
+      arm64: dts: qcom: sm6350-lena: Enable ADSP, CDSP, IPA & MPSS
+      arm64: dts: qcom: sm6350-lena: Enable Bluetooth
+      arm64: dts: qcom: sm6350-lena: Enable wifi
+      arm64: dts: qcom: sm6350-lena: Enable PM7250B
+      arm64: dts: qcom: sm6350-lena: Enable PMK8350
+      arm64: dts: qcom: sm6350-lena: Add PM7250B thermals
+      arm64: dts: qcom: sm6350-lena: Add PMK8350 thermals
+      arm64: dts: qcom: sm6350-lena: Add PM6150L thermals
+      arm64: dts: qcom: sm6350-lena: enable remaining i2c busses
+
+ .../dts/qcom/sm6350-sony-xperia-lena-pdx213.dts    | 457 ++++++++++++++++++++-
+ 1 file changed, 456 insertions(+), 1 deletion(-)
+---
+base-commit: e5e04726cdd043e309677071ab1b65a4b18f422b
+change-id: 20260829-pdx213-upstream-3-d0b80f749b5b
+
+Best regards,
+--  
+erebion <erebion@erebion.eu>
 
