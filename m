@@ -1,79 +1,136 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794844258;
-	b=Jbm38bH21a7XK+PDLjDT7o9JZVWbk/yWV1H1TOL8nNLm4/ZAK1xnUjfRDrYlzmbEk0BA
-	 kRx6rteW4rzTE6m8V2t6uGoI4CBmJPRnx2yMDENpJ3NTgAjtMzO2ShI/YKTfJKRC2g9B8
-	 mN+1/FfhTS0Qry9y3aFYMlDm5Cy0MTXq4/vWvF8plUgZ2KVpICIlsXCM6MljZunFl/TCu
-	 WKRftG1z7uNJv5soZfUIdZU+EfebTI0UlQXw0S2NbUGUixz34mehb6wPgmDnVKJvxY/Cx
-	 QzxP+ElIYpDQUvgh4MFpKykDEz/XYLADCS6Qb39eeSx3KJTR5Yex2wvcztPGNbtpfrA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794844258;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=6ssSK9Tt4+XhArVjaEIM5RbRLyrHDd3C/uRLjdFVntw=;
-	b=roFp0roJJLWfQH1msMmw1kP6iU7HhMMbO/u85CFKyA2RyMAzYY1X9/vIOZr950rZiQAs
-	 MF2LU1PJL4sj1ZKrLBGpMdKQyMPCQI4dapn+ePjGWLQDsW9C8SxFksjYMnZ6nxuVrDSDk
-	 Hp4JU8KQYmT88g0BbSuaZka7caT1iOTux02guBmVbIgcmjlZTzNtliF+n81w8iZAawFqH
-	 98Lrc1IdBIiRU7auy0q+62zaqreGO8jRLp1NbIMVVEyi7OXPJsOdWXDBwZSm9V+PIfxfX
-	 YxYqxcxGsDDeJkydroq3uhUq3kQHbOXynTz7gMJPDgiQlAnWceNDcIaI8i1ZMlnUTdA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="dv56/JHC";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E15D606A330;
-	Mon, 16 Nov 2026 15:50:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dv56/JHC
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1794844258;
-	b=N02Yxw7vTZxVa7zYPguXGm1EYi97+TdQh6MJQeCdddqBJLd0UxHPgNdFncw9a8zc/xFi
-	 eu5zzLWJ5oOxhfZgitZ1Qq2Jg7L14eVuxwHHhxEkbmUBOIDyl1gKD8TVc6vVRSHLOJrNt
-	 sozNLmcKL+/bqqwQdQ/mfdde1dWAKxsU+shIVahTIk53QE8zcWsVyi0jBXLtx3fxemK2y
-	 x/iHnz5XSLnM9gR9n+wM7K5xcDjYQoYRhVt22LFsMaXTLK4qHIYzP+zSK3mubSZl68pMp
-	 T0yKIsDz5ltA9bsJEpb4wL5KpD6ehjUvb//ZCIo5pbMEAkpAegoczdXvnrqPD9VRkfg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794844258;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=6ssSK9Tt4+XhArVjaEIM5RbRLyrHDd3C/uRLjdFVntw=;
-	b=ByRKkD8udnKTLf73OS70CK6XBYy/esFHOMFXzK4O/nz1bCEvcm73lLt8ahVieB0v27CA
-	 dYPlGjqFIkDlKnIuOx1p2MqNA36Kr0+6av5X0U/Cqrvnrsy+uFcb0N2Pk6/uvQ0sDTWEW
-	 slqHUUMwDNDg0z36ONfveQl9rLSJeXk8CAv//teVmDzhmeSoVrJ+lhF+QUnr3KlI+dWda
-	 VzI5EoMfCgGz5Wz/NsomZNVyQVNsynrhfsaZVpk++m8iA32Q/79+0HqanqkldEXG4GuZD
-	 2JXL5eSSpRGHbsF+U/sm/7lulRKlxClSduSb/vGb4seIIcn2uZ+svkuh1MjBNVD69Gg==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794846126;
+	b=Kixk8qmpVgyO0g7gKkRCda9R7X7x6RQBqQTyFkLwlZWYsN38qFoOJaGfwv4or8+8Xi/I
+	 IJUDXOd87yHdZaZ8FlT/0gTtzeKqugYvwT6yV+oSgRriuc4o+HuMPllcTKoZ229Wlysa/
+	 c/PPrxkXwLb3b5uT4+M/bv4MI1WRk7NN9oJ6To7CD9Ho77dikLDCaJDSyBa5cPeDHVFwS
+	 i3ZnhGzKQhNXxe8qE/vnQJEOiMFTzpwIVOJ/oefF3KfWyVwegL5YYTuEgl52nQPOvhrpH
+	 dK4N0AfpPvaXVpXAFYezTXc+vTslBA70jLQuUADiE742YeWUVI3XFYvdaH+wjK2LHGg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794846126;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=jOFnPdS9OzKd2pQAuWQI40FvjqklDv0OYhhO4gHPm10=;
+	b=T6MC/THOjT7VxVJmK37ZgCbzj1+RSPYiqQl3s5RGff3jAb4CWOXtGLl4aQBFIcMkaFGh
+	 hkNxTMCqiAmeTTN4O5lVnwg9l3xWyNye99BTOoRJsi5Jqf/BLJCn6GRnLpTJQUjcnRyNX
+	 HoZ4ul+omlO19HIN7jYTjp8PW6d3/7M+PRLW5b+XUIviUFrfYlJliyWLcPRFe9+d3WJ0J
+	 hXFFI/gJ/3rXkJ+8J9thQev+10oxhh7i0zWMM55kBISN+lsmcxhGbCbrqdtmOLU1sbc/q
+	 WTAD98/5r+OdGoo1OYLsoR2ejuwGuRcNyclmaxeL3LYuctG93JZE6seGPEmlKJ/WXXw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p7OfNETp;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xn6B8mkZ;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 091EC1F000C9;
-	Mon, 16 Nov 2026 15:50:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794844258;
-	bh=6ssSK9Tt4+XhArVjaEIM5RbRLyrHDd3C/uRLjdFVntw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=dv56/JHCEGIxccDheu8lZjTCr941yzhelUX8GDJyctE0JMJJ/Hn2TEMckUkRtEY20
-	 F7G7Nlh8gZtShAcxUR9Q4Sn7cj06HnMXZZxsFRLMdzeb41LJGbZY6C3vRMGjlGbQsk
-	 446gnf36jkGaSniHozMYsgxFyip2jpnn868x4h/T9V0mJdLgDa9rdqnUJLmgNxIm63
-	 9CHjM+w4bgU/c9psJhCxXhU+NRkJK6ij7HWalY5qXfiNRRCtKCEXPPoEpzNXRYLc//
-	 qlszKF7IEHt8D6FyR8SF+FSqVjo6WdeCO/kBbItvV0otRtxXJBsdLK0j26M+avfzxg
-	 YllQfaCRTEDEg==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 8D4EC4A4CC;
-	Mon, 16 Nov 2026 15:50:56 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Mon, 16 Nov 2026 16:50:43 +0100
-Subject: [PATCH v3 1/3] dt-bindings: remoteproc: qcom,msm8996-mss-pil:
- Document google,require-socinfo
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CB9C606A322
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 16:22:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9CB9C606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p7OfNETp;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xn6B8mkZ
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AGGKAHS3693035
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 16:22:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=jOFnPdS9OzKd2pQAuWQI40FvjqklDv0OYhh
+	O4gHPm10=; b=p7OfNETpEr68CLI0FHZnru+WSdSkOWcv95PEkSOO17XhebYpD14
+	DfEypxXf9qv30Nno20G5GbZdH4vUA3yytNSqTdr3jQyerOMYoNX1kbXLqUeE8Xm3
+	z2Amb0sNDDdy1hNjpFWoKsJuhvJIplQtmtAZGdMXE+f5NlINe+yFbbK4RRC5Ytyb
+	tAUx0aeQRf8n+viyoAihM06FWVfPSZD9kU71jhEz7na1nkNmtBuqcuBgrY+rrbAR
+	ZFAyEDhlZ/4gSypJ2dXu9AQmSvDFrhSrR2tpFFbE04k+Y47f95sguXhUF7fnxqGz
+	TLMba/Bnqx6GI/MB5R1SWBV8ytMR4dK7m2A==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j01f8104f-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 16:22:04 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1a71dd190b0so5163172c88.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:22:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794846123; x=1795450923; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jOFnPdS9OzKd2pQAuWQI40FvjqklDv0OYhhO4gHPm10=;
+        b=Xn6B8mkZSfmNeEcNaeCxnrHt/+2ZgdGHpcMa5RaA87K7Hbkk7M4aPYMvkrEhFiZ2vm
+         Rar/ENgh/HHaZ4bTPH4FLFFlLcYSD3ATSZWPZpgLjLTwMNzBByyDlqWlJauPNryGHRlQ
+         69591C/kHb280LmTy8Ch9EnuOFohfsuDTq+ZGB4Y0GRLTQXv7SCQn3Fat0dxcV4jpmNN
+         SZAWwunZ+vsmhJKbvFDN4/moW3PjPJ/MCJV2HynRxRDHzuv69KIEFUYweqkseCQKSzHL
+         5T4Y8lJzf+pyYLvjj9R3S4KhJ0470t2TdJLUmP4kkJETvASA6Ha67lfn+432dJvU+PQI
+         Vd5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794846123; x=1795450923;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jOFnPdS9OzKd2pQAuWQI40FvjqklDv0OYhhO4gHPm10=;
+        b=rdlv7/qZ0MD22cAzyU/TffVCPVPjeXTzoB3vpqDaXcRI+rDYVLQCwUeAABVcQ9uZF7
+         aALNGQ2AR4b+u5PJQyRYh8B+/8Tt98y0+6jpy13mJsswBE/pWnRGoV7F7bNk2XlY2B8Z
+         JC8uZdJseM809HnOViNeuTlzjdFmt05ZKt9kQIXp1I9+zoZFc/MnNrLgNwyoCnVBnDgs
+         VfEqHYJJsGoSz+E1/VMrn+APy5OEjPRdXn9c9sIDGjG8o3WzHlBqaPKGYXz7cIuNPfK4
+         Z54IUAItO4N2nMmBkqgs6KnsRiGU8L17nvtacoLvKBE5eRgsegSWKCCW3DuBhUej7M+D
+         K3Mw==
+X-Forwarded-Encrypted: i=1; AL+hErGDKO4nRdG1/5cDhOMXgI+tHQoC+oMsnOCNgdRXu6JSuUL+zc8RJoW/SzldzNv3qPwo1L3W5e8vJ0XYsHdP@vger.kernel.org
+X-Gm-Message-State: APuU4Z+6nF4isMCeH10j00uwIzNC4UUEZCM+LuX9rMMjH9BZbrj1XcDb
+	j9+fiWaKSJQwPkQFZ/Mz99pmPNDeY8MtUubX1lZi20ZPqaCvURZBxxNBOBAVL+j1D4p9zxymq20
+	JcPV5bZbl66yAunxUinOTkxrU1dNS6qy1w3gSS3H3A+xtw9dg2lrvXsJ+eli+tU2K5Cch
+X-Gm-Gg: AYBFou3UOAsxLSCsa6g48DR7gO7IeTg6H1Mw7cwG4Par8TzG7gIpkQVT3fbYjUnBMIA
+	60jK2rLqiq+39QnnMdpsxmxDECXiMM8CNT4+fuQFfm4+0JuFA0S0r2tz0IjK+Jx25K6DwmdVc6T
+	HW10d1p70JSNJpN0siRCxB/l1/1lv0xj/MiJNVHIQtG+MP72xbq0at5gAIdZEnEXvgcr16DEhcm
+	CElF4tU2/gpLWXFhbYCYHfJ8HfE7+41yoQWjqazYbNIG5qo8qDWlcNxq2nXzF2N88W0aOZlU75i
+	k+MVMFjdeYQ3oWQjEgUbfQtE6k3rQcApTbTQqHk2+8x476MWTp9OqV9BH8JNdMhB/hnEZZe70fO
+	Wgw6loLzCmlLuhqSkIvBRZqK0yVNIcP0ZEgjgLxTYi3ab79RlmaI4v476vx/kDN9HRYcUorGG9V
+	Nk
+X-Received: by 2002:a05:701b:42c6:10b0:1b3:ba92:145a with SMTP id a92af1059eb24-1b503171008mr11928414c88.19.1794846123227;
+        Mon, 16 Nov 2026 08:22:03 -0800 (PST)
+X-Received: by 2002:a05:701b:42c6:10b0:1b3:ba92:145a with SMTP id a92af1059eb24-1b503171008mr11928366c88.19.1794846122515;
+        Mon, 16 Nov 2026 08:22:02 -0800 (PST)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5031468b7sm38623826c88.5.2026.11.16.08.21.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Nov 2026 08:22:01 -0800 (PST)
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Sumit Garg <sumit.garg@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
+        Simona Vetter <simona@ffwll.ch>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        "Bryan O'Donoghue" <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Alex Elder <elder@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Jeff Johnson <jjohnson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, Sean Paul <sean@poorly.run>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-media@vger.kernel.org, netdev@vger.kernel.org,
+        linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
+        linux-remoteproc@vger.kernel.org,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Subject: [PATCH v3 0/9] Migrate PAS clients to qcom_mdt_pas_load() and qcom_pas_prepare_and_auth_reset()
+Date: Mon, 16 Nov 2026 21:51:39 +0530
+Message-ID: <20261116162148.2864501-1-mukesh.ojha@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,93 +140,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261116-modemsmem-v3-1-24ebc7ed6eb9@ixit.cz>
-References: <20261116-modemsmem-v3-0-24ebc7ed6eb9@ixit.cz>
-In-Reply-To: <20261116-modemsmem-v3-0-24ebc7ed6eb9@ixit.cz>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Miro Mraz <mraz.miro@seznam.cz>
-Cc: Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
- linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2146; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=dCs1MzKn71TC5kAKQTc11AV3zsTZPlHuU7+NyOvVTSc=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq+yZfrxNRyDKy8SjJi+RVA+BwJBXF+Ey6BInnV
- LyRqxF37M6JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCavsmXwAKCRBgAj/E00kg
- cuFtEACIgsmFbpk7AQG8NTu1bJUZ9BhYkOBOYhqOMUgMjmblG8GfVQ2UElxxD/oGJVD0pzkqLUs
- t/NZWd/+xQe7p4F6LrXTO7b7+8ypiMfeKoUh4RCcOBQ7k4oXkvYY62k/hQ64xJALH8NAQOCSw87
- en21mrrg4CL93CC9gdUUY8ic/pDJlvXCT97OJV9CJytcE1uFsfBC5kqKkD9kYyHcwnOaXuV5q4h
- BxW5pJsemtayIglZazZkwQ7C28LMSdgMSz2ErKBrj6cHl42IHtB8wVd48d/3klBq/5C6E72VOso
- ElVYxVWiz4XNV0wbSyA6b0wPTbb8tqXzBztYENFEftLz3nkvJ5bB8GeJ+3tu9aIKxnN4dvYhdHf
- eha0CvnZdD4YCPU2pp5I1IPKxyBQJsZgeBCkh6fr0e177bloUO5LmXvAOxgyYWxQGAVdF2odQLo
- ytWbP7p4Wz/clCgk6JzytRfghl19AbsXm1rO+zUGO/MHb4ZXfyouOhIpMDNBdRy3Lgh88tr9JLs
- n4RSiZzXf5H1jfW7sz3MxSHV1v0eFkbRrgAjMcrpU2H+6O16yMnTKYrzSVfZ8kCHP0bwI91P046
- ZzAyNod1BH4h0vEtaGpkFBd8GsYHMaDBTZA6gksq494sVvS8FCf+6ffG88VBXEPq3b18uaEvfHO
- 0rmQkbX4nUfxCAw==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA2NCBTYWx0ZWRfX87CWGi3g/IcJ
+ 4DHz9GRR8Z8b+Mdx6/Xhg/42wfQ+n7rE2dBqLbLM4sowLwaIYWMyorlv9WHYpPzc1JwGjh4tE4i
+ nj2qwXoMKpkMyjL0wzFCmpgzaT+fSDnXT6D91Rq2vyq6cgUr9T37gdDup3QLSKyxYOJJ1kKyDAS
+ gn/+xSHvK+236p2hmnB9RuVwiYgMPltXQnys9XWKfIqaCcdKayNw/bKZjyLxZYBDIrs+KnRjmgg
+ U21oBT7RvBTccPeMRoa1dXwas5wlDPXf27yWyaGQQAPtnxHOv67kSJ9aVdH6s54s5myXg3UxwRw
+ ZxfVCsbBVv1fpxz5++3/4h7svOlaP9zvnMO4GFvPJLYa3FJbmPtAvhuoq1WZN5WvgVarNs7ylFq
+ sx5QzTI2N6pf+0PxDxBuDKYpnbHCxLMGPzlJObxUhqfqgcnPp68IBj2LKu8cnLMc5r+xlLOHqYJ
+ F2j8x6Mp9eFFTMVAeUg==
+X-Proofpoint-GUID: NpF2p3rpFx5webx0FI4ouZELq8awQskG
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA2NCBTYWx0ZWRfX6AI+CsVCQYip
+ 4xrIUOGqz++Jd6C/ibaLog6k2x+GYUV0PLncFdGyB7Z9w1xrkk9F4BtoW1wLFKwcDlVc2Q1grZf
+ 0uUhAgfrWy0trxaYbGd6MgpeyD3w8ZM=
+X-Proofpoint-ORIG-GUID: NpF2p3rpFx5webx0FI4ouZELq8awQskG
+X-Authority-Analysis: v=2.4 cv=VMpIDNPX c=1 sm=1 tr=0 ts=6afb2dac cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=HLFs0uR_R7ZgEvxmAyIA:9 a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-16_05,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 malwarescore=0 suspectscore=0 impostorscore=0 bulkscore=0
+ spamscore=0 adultscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160064
 
-From: David Heidelberg <david@ixit.cz>
+In preparation to remove qcom_mdt_load() and qcom_pas_auth_and_reset()
+public function, migrate every user to the new PAS context-aware API
+qcom_mdt_pas_load() and qcom_pas_prepare_and_auth_reset().
 
-The modem firmware on Google Pixel boards (Pixel 3 through Pixel 5a)
-expects the application processor to publish the SoC platform type,
-subtype and revision in the first vendor-reserved SMEM item before the
-modem is started. Represent that requirement as a boolean property on
-the MSS remoteproc node so the MSS driver can publish the data before
-booting the modem, instead of carrying a separate node and driver for
-it.
+This series migrates every remaining caller of the deprecated APIs
+(qcom_wcnss, adreno zap shader, iris, venus, IPA, ath12k) and then
+removes qcom_mdt_load() and qcom_pas_auth_and_reset() entirely.
 
-This patch was written with assistance from a large language model.
+Requesting the Ack from subsystem owners to get this series merge
+through Bjorn's tree.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- .../devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml     | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Changes in v3:
+ - Added Acked by tag.
+ - Fixed build warning.
+ - Link to v2: https://lore.kernel.org/lkml/20261113185009.157893-1-mukesh.ojha@oss.qualcomm.com/
 
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml
-index 4a1b439f985e3..ecc6782a92245 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml
-@@ -91,16 +91,25 @@ properties:
-       - const: mss_restart
-       - const: pdc_reset # only valid for qcom,sdm845-mss-pil
-     minItems: 1
- 
-   qcom,qmp:
-     $ref: /schemas/types.yaml#/definitions/phandle
-     description: Reference to the AOSS side-channel message RAM.
- 
-+  google,require-socinfo:
-+    type: boolean
-+    description:
-+      The modem firmware on Google Pixel boards (Pixel 3 through Pixel 5a)
-+      expects the application processor to publish the SoC platform type,
-+      subtype and revision in the first vendor-reserved SMEM item (item 134)
-+      before the modem is started. When present, the MSS driver fills that
-+      item from the socinfo SMEM data before booting the modem.
-+
-   qcom,smem-states:
-     $ref: /schemas/types.yaml#/definitions/phandle-array
-     description: States used by the AP to signal the Hexagon core
-     items:
-       - description: Stop modem
-         items:
-           - description: Phandle to the Shared Memory Point 2 Point or Shared
-               Memory Manager device handling the communication with a remote
+Changes in v2:
+ - Addressed Sasiko comments.
+ - Addressed Alex comment and added 1/9 as new patch in this
+   series and use the  API to other patches.
+ - Commit description change.
+ - Link to v1: https://lore.kernel.org/lkml/20260925155737.4161358-1-mukesh.ojha@oss.qualcomm.com/
+
+Mukesh Ojha (9):
+  firmware: qcom: pas: add qcom_pas_context_init() for pre-allocated
+    context
+  remoteproc: qcom_wcnss: migrate to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  drm/msm/adreno: migrate zap shader loading to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  media: iris: migrate firmware loading to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  media: venus: migrate firmware loading to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  net: ipa: migrate firmware loading to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  wifi: ath12k: migrate firmware loading to qcom_mdt_pas_load() and
+    qcom_pas_prepare_and_auth_reset()
+  soc: qcom: mdt_loader: remove qcom_mdt_load()
+  firmware: qcom: pas: remove qcom_pas_auth_and_reset()
+
+ drivers/firmware/qcom/qcom_pas.c              | 42 +++++++------
+ drivers/firmware/qcom/qcom_pas.h              |  3 -
+ drivers/firmware/qcom/qcom_pas_tee.c          |  6 --
+ drivers/firmware/qcom/qcom_scm.c              |  7 +--
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c       | 22 ++-----
+ drivers/media/platform/qcom/iris/iris_core.h  |  2 +
+ .../media/platform/qcom/iris/iris_firmware.c  | 27 ++++----
+ drivers/media/platform/qcom/venus/core.h      |  2 +
+ drivers/media/platform/qcom/venus/firmware.c  | 29 ++++-----
+ drivers/net/ipa/ipa_main.c                    | 23 +++----
+ drivers/net/wireless/ath/ath12k/ahb.c         | 23 ++++---
+ drivers/remoteproc/qcom_wcnss.c               | 12 ++--
+ drivers/soc/qcom/mdt_loader.c                 | 63 +++++++------------
+ include/linux/firmware/qcom/qcom_pas.h        |  3 +-
+ include/linux/soc/qcom/mdt_loader.h           | 12 ----
+ 15 files changed, 116 insertions(+), 160 deletions(-)
 
 -- 
 2.55.0
-
 
