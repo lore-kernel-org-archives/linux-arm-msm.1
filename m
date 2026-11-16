@@ -1,113 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.64
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794816329;
-	b=i9I6M7ckX01cIRuDw3nCfIWieTS0C9I7yl69jpb1MG+0J4Flqt4RH9S0AmPa5JHGoQpf
-	 m4o2ylADZCUqvOmceTMVu+sOJbeNjHrtn4J+D76rdHzjYY0gWtICf6YGJt3CvlnB10r8Y
-	 zq8/4aZDfzGxYRE7TzxSeUyfeVVtD9INRGlm+kDyU87rOD7iewgT9vF1L8QX2lfwyBDb1
-	 oy/CBOKYbk6337DzWwPKKJXkURkSFgx/EpROVyCQyXQWYkn6zxKRW1w/6v/kevB1JE+JX
-	 9WDxP2abRVCqv/xOCOoDWLeTC3vjCkzPmfj7DCYa0TFu36JqgiEWzFAPiFc+e6UmiNw==
+	t=1794816668;
+	b=yfleWpZmo9GkYBxjwVc+g5/HjcRTPlb4U+Pi6NBJg6SVBxb7z18+BfwVG4epvoj0cqB2
+	 13zqYjMNc4zabwZNRx0w8h36JZpFoF/bkGbFAD4b9hPmvshWP4Xc7XVsz507hLEk6S0db
+	 /2jP5RiZaTZN+EmyuMAK3uSLz6NJfydnGWvg+kHL9HD79v5U2aTfkHpLKJmp0G/RRAz0/
+	 Vlb39kmJSepA+F7p287wRLLq+24kVGjBxL06kEcIy1k74DtszPyXyBJjrqVW+u9gcrXEK
+	 uiMM8lbsz6kEqoX2eGM+nP5+77cjkqLP2VWos5D57gKhaxlHL3prAFIVovbTrb1YwCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794816329;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=XVFz9C+2CptBLlpcJnnRg89qTX6lg0FjVcFiDt+w7ME=;
-	b=bzdk3g/FScxDMYRFDIb01lUaTSiYEjM5UPu/U5a+chvitHW8oC/iQpaYZI7IJvVpY244
-	 vvWEB3J0/ZdFyGZRXtrht1yhWeyM9hZ2Guj/66NDcwrJz9sHJji0x9TOz+lpRZ1ccoK3u
-	 Quv78ODwQVY+SCd/Qm87P4GVVSQqiaRPyqFy+uPsUVJFVa2PvF4II3CUwWOFX0LQu3JWg
-	 WxfK/Epmv9AmcXgfDSDCBvydiyt1tnj+9aHm64Wj8Bj8Kt7jzBuEU2NOcwJQGntwu4pJ0
-	 6U86MklOu9a4tEKSZ5i8BCu8BrxfHAPk2TegniBWM37LVHIJHhwQcn1avCuZHg2Y5pQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794816668;
+	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
+	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:Date:X-OQ-MSGID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding:MIME-Version;
+	bh=XusKqhnxM/yWQdrnmEkU+hu9+GGtSe+ZGMgwKQgdJAI=;
+	b=eGJ2xDL87RTHBZQyN/12Ljr6dwWXQYxUGaNKkFY2TU9I/hNlMn81OUZjQZFJaD/jaSjE
+	 5110w3Znj3EV16Xk3nLmOzqnu7nYtZAFwtgYOsrTzM6/ppBZQ155gSQ7/fxaOGUjNC4kD
+	 3LsSmkYc1mYQvCi1xz+E3jQxWyep7i6PdBdTFbKMTiY0pSLeF2Mf2nrxw0rT9atMwLBOH
+	 lXvMWqACj2R/6TkzSQOw/9Lb/Njs5xtGeo/hTYEIrwb4Rua+jYClnkGlHkWzddMNZMMQI
+	 dK/n4GEIAHPkvCj0TJ+HYYsaqUykIS5Bb9G/LOliCHIOGCBEd9LuBLCo9YleITUUFNg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MWs12k+x;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SXWCpUx5;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=qq.com;
+	spf=pass smtp.mailfrom=qq.com;
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=FPRWlP4P;
+	arc=none smtp.remote-ip=162.62.57.64
+Received: from out162-62-57-64.mail.qq.com (out162-62-57-64.mail.qq.com [162.62.57.64])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E75D606A31C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:05:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0E75D606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57D22606A323;
+	Mon, 16 Nov 2026 08:11:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 57D22606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MWs12k+x;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SXWCpUx5
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AG7erW5903109
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:05:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XVFz9C+2CptBLlpcJnnRg89qTX6lg0FjVcFiDt+w7ME=; b=MWs12k+xdUeW7raB
-	CVJo6RMai7ewpBdgv/jMet087UbbyYTot/c/J7xfEPhRWxz3cAYMnEUsyrdWgl8O
-	/LFOBBB96M2CfIPWM98R7IKkWzp1I/j+5PPVnJb1Mwf7bAnzMXjfidGsnjkmwEmz
-	DlfgcYD3GH5BMJq8H+pdcQUQbnqFlF5jpHkkm6j0Z9AqPdcAytF5AjqPth+XaxZ5
-	wT97p67cU265amV8C/m5LuIpoufE/G3YnwZviu4n7UqYKfdt8Q+eSlcFsCvR6ynb
-	ILGtQXTO000c9F5p1EI9FVIR1x5E9Ksk3i+DLc1FbWTH+UjJxXf8/GqmNgnpuois
-	d5Rgbw==
-Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhhjwh2u-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:05:28 +0000 (GMT)
-Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5ee30bf935eso728772e0c.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 00:05:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794816327; x=1795421127; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XVFz9C+2CptBLlpcJnnRg89qTX6lg0FjVcFiDt+w7ME=;
-        b=SXWCpUx5o+laRSbzd2svgln2riTFNRf/b8S8MLXSQlfX78QXi83fkeg50Upi2Na9De
-         wEmbGKWeNb9OY+46FnWSca0ATbzd6ky2e2GdVw3ZI1FPS/hZX7SmB8QS9c2kND4vf0TF
-         nfEtmsgkc8+mFoCyWr7EdB0LSL4boHvESKyN96kHvjC7c4KvwrfkG3TgGizpgVZWXhvj
-         gkQ4ZcRtSWaBMBA96UaN43NKKvxaufk7/Up4FxGNHUvah233ZDF6w8Xs+6IbRJb1he04
-         g+Ds7yWuX8pfELYhK6Nmzs7+o1e61K43eUMZoN6zr0N/7tPHk4l7xE+CBaOv1y+elPFV
-         c8Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794816327; x=1795421127;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XVFz9C+2CptBLlpcJnnRg89qTX6lg0FjVcFiDt+w7ME=;
-        b=jJ7Iktd53bWq4yPMcFwC4GkqqxgaIvXLOoJQQQLtPZ80VehiENA5aLwx4b3+0tm5JW
-         lgA39rJzJP5O5jir2GwShWPfrTftK9w8AcLCshM7tG62me/siRsUHhdxG4sjhT/OWHHE
-         iRgmQ5BV7uGZJsBOUSzyg4U+/23Wd98gOMCwn1wyBpJWQUi7J1u406/Rd/GukDCABfmH
-         CbxEwtpmEthA7qkPSXG3VzORCfXXAWthbQtgf55OIBjv8gZt7qHbeszef2PC39UCF8Hx
-         vJ7irWH8VwBq6WlVwxbElthkIlpk9zaUY+hBarhRPCIEcH42FV9mM5nAsvW0H2R7Ineh
-         nOFQ==
-X-Forwarded-Encrypted: i=1; AL+hErFZJJxBt+B6/gIJNF4VjANSp25WLXvgnOODHRDEgyLtqPJb0iAMNXgvBuiG8Ds8KDyCOHymulLqPJ2rmBvq@vger.kernel.org
-X-Gm-Message-State: APuU4Z/fZTASQaFjBBzZvw/5S8m42aruAVhw5mDtuqR2YJxt7uoQHNcG
-	umB9qnG7GpczMDKTMfO/aLkrM/KFIskb+I29uwi8euuwreJQYh/Gh2x0/X1tlI3qmZgMCPlLOfB
-	NVgoNel5LGT2gQs1iOtnl1bePBlouZflRxHwpkOAbDsmAY1COfR3SRSAVjt3DFE3I3ivhABTMUG
-	rJ
-X-Gm-Gg: AYBFou0/U6kKOx7XZWEd/aDwRIrEFgw0rsGUcCjV+yriyslfYQdtLsMbuDpDDtRgAm1
-	IgcdqvgxUGK87dD2te0Mx4bXLLAoK2yADhkaYKDZf9TW43gz0D8WdXn8dHZK9BowuVnYZEkrdku
-	d149E91TMjx4ZAw8jT09im7lYjsmzFRGnKit2BpzP4JyFtlbIe2lvyEy3GXML3T1zQ3VtUgmg1t
-	szR2CCW4yblHlRET4kVYRgMlf9zvO92A4OSu61m9zXaqru1klgkyBFwvVNgReJzuEPCmZh8OoUj
-	GTfCePi8jb24XDJwQd5hzTswVJBUjl2lzdp1ZuACRN3etMaWelcND5WQvPL2J033KyIFkfzrBFf
-	XyjPM4maKcKtAXhDWr78R0NA6YWVp1aDgQabaiJYkG4Vr+uFMRrXvUqaQ3KUzuVAxIN7KPKIkwn
-	q/GJx76Ev5YgEckw==
-X-Received: by 2002:a05:6102:54a3:b0:7d2:7266:2c71 with SMTP id ada2fe7eead31-7d64d12f547mr2599469137.0.1794816326993;
-        Mon, 16 Nov 2026 00:05:26 -0800 (PST)
-X-Received: by 2002:a05:6102:54a3:b0:7d2:7266:2c71 with SMTP id ada2fe7eead31-7d64d12f547mr2599460137.0.1794816326493;
-        Mon, 16 Nov 2026 00:05:26 -0800 (PST)
-Received: from [192.168.25.64] ([94.155.124.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb5720f6basm136597195e9.4.2026.11.16.00.05.25
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Nov 2026 00:05:25 -0800 (PST)
-Message-ID: <04db2c7c-b9ad-4c10-a7c5-117e1a2db414@oss.qualcomm.com>
-Date: Mon, 16 Nov 2026 10:05:25 +0200
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=FPRWlP4P
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1794816654; bh=XusKqhnxM/yWQdrnmEkU+hu9+GGtSe+ZGMgwKQgdJAI=;
+	h=From:Date:Subject:To:Cc;
+	b=FPRWlP4P4HOyMGheFZ7wlvbtlYdPW7bv34aE2uLrid0UchNj4lBEVJQ73/uj+UdcZ
+	 p0wD5dRPds/7toLeyZ8/9IMET1yQXW26XzUAGpJEf3aFcgD68SgAJX1Hu6zsWWefi6
+	 bzzpP869HsmRC7fLr8HDsQN3mt7VYgUvS73qXJI0=
+Received: from 2508871010 ([240e:36f:15d5:9321:d492:2643:ce55:ff7e])
+	by newxmesmtplogicsvrszc43-0.qq.com (NewEsmtp) with SMTP
+	id 2B422A84; Mon, 16 Nov 2026 16:10:52 +0800
+X-QQ-mid: xmsmtpt1794816652tb8u1sujy
+Message-ID: <tencent_4D458B8B4F511E5B0F06C5C858627990C306@qq.com>
+X-QQ-XMAILINFO: MllZffuBkEb5NI1TIG5SPgjauQhtlI8otlmJIpTkeKE4nyh3+pnZvnLpZeHCHK
+	 WYG4fDGByf0oSQ5ekYkhCNmOas61Y/VHyKVld/08994HkCHixYctnPU7jNJMQZx+xAjATf8KUc59
+	 QkHmPwzJimcC/iQQv1uvpiPgI1HmbPzS2StRscJyBX6hwBR82EKzYta9D4D2jS8v9OrZM3XM3H05
+	 1Y/Y2dLDWou/mg6TEdI9y+76jY37UlQ8hqJfZb4rMKSaBv2efgxHeE7Yo858vVL6TGu7Htb+MIDg
+	 SBN/oaGEx7uDC5H8Ve8tqoO2kdzXxxzfk+OopOkaSbu6moSCaV0kgSLkbOtlIT4rJQXujWpvoLKe
+	 /Vl7gnggClDyc7scfAdxcG7zOLTkXtzQlAsjTKKh/dAmrO9KBdyQCc5RiEhs0PrBHb1ez+0ZmEFt
+	 L6rwZIRanP3UHHWmDA8BrtLZtJlGhwKrXfMfpj8B8vQjpYIN10S6kue/GqEIWdGh9VDEIHT6XCWU
+	 cOmvbwdBGlFxgjUIO+2/HYlwcPJt02z0z3NnnvtMdsk4jh4s+AM3dccE/Bl0tvcDvEe8188m3CUQ
+	 8onpEOO74x024dyqAD8vG50kjGlSKjy5ERFAA9f393eipyhh8kxyl+h/saMYuv8/1J/iPxwyMF5I
+	 nOssYIwcD2UdLHcqqBh+NeyJ2csnKFBvusJyyWsQInVolxBXEGIoJKVzR1fpXBN3tgnp9xYTMV/m
+	 zPNUvyy5GEYs7HkzkwN5+jdVY1BPmIZQnA3GbErdqQVCdHOw37p2Pl8rY0+qLeDFZrQF0ztgMyCZ
+	 h9YktZs1RTsHI0fTtnldAjIhjLJhHWK4XjXSGFAX7pryf5oBMNmIH/ufM4NsDejtvoPGqpD2mhJ4
+	 daaltlVC5E7vP/NWmegm4rWW8lPe9mRlx8C9/iz8ZJQE3RmQW86DlELhyVkkRqUfPevmBeFO0eHs
+	 gDB92uyK2IEF1kOCvLQno+M2889avOP6xPARba/xF2klpZTM2XEdCrq30ezDM0ueZvrfnL5xyLKe
+	 Li8ULU2aIFrMdehQVDW0XuAzQxY1p6dK67oeaLi7SpT7POm4/Tdhiu+JCpk4UZXg8ZxDg7ogec5F
+	 z4hLQ7SfnnHERhYaA=
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
+From: Chen Liu <2508871010@qq.com>
+Date: Mon, 16 Nov 2026 16:10:52 +0800
+X-OQ-MSGID: <179481665225.482942.4973717177724251703@qq.com>
+Subject:
+ [PATCH v2] ASoC: wcd937x: bound the DT channel mapping to the channel tables
+To: linux-sound@vger.kernel.org
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ 2508871010@qq.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,117 +82,123 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/4] media: qcom: camss: rebase fixes and SC7280
- enablement for the streams API
-To: Hitesh Patel <hitesh@ebytelogic.com>
-Cc: linux-media@vger.kernel.org,
-        Bryan O'Donoghue
- <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, ravi@ebytelogic.com
-References: <20261021134959.2599575-1-hitesh@ebytelogic.com>
- <20261116054402.234004-1-hitesh@ebytelogic.com>
-Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <20261116054402.234004-1-hitesh@ebytelogic.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDAzMSBTYWx0ZWRfX9vqIINxPahAU
- t4Wwq+hIilX0q4gYylo0c8wOc7nD+pst9xUIXggbd/uHOCbA8LEHCHvDgoVArTZ1Qbc9FehJBV4
- SV4/oqNGAgjpQYlgjzEYTSUYpRmrLN+sJuBsh8ViyyWSPEXoIecUQjXGdDMi2U88hP0sh2tH66j
- DWQ6QnGTBk6O6rF7bZK9XZmI6kGXWpJW9M59QWuqv2WI44RUhhs/KgPZbKlz/dBZ11z/WIneWRB
- jSCvmRKEBeATgCwY0E7Khn4ayzmrzdAwTlWCxoKjffG8OPOBxoOl7QN7Lhf6ldGeDx8F/tV9zfS
- EMrh82pB0JzyW2mAYnMZ1d7NYJ9UfxpNVOVjm6L0OuDUDmYwWWOYjlNR1MaVKAF8CB8laF5ErZ/
- 5F1St0aLDYOG0rmrSCzhFjCNdITNfl3/oCLUZ0J/4xmkwfjO1FkoBn8PqeP32QoRc0XiW4cz9vf
- cVOonbzvchX+OLvFGvQ==
-X-Proofpoint-ORIG-GUID: Jvfj-CYWf7ac_fbswPigE9GBRn3z1eIr
-X-Proofpoint-GUID: Jvfj-CYWf7ac_fbswPigE9GBRn3z1eIr
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDAzMSBTYWx0ZWRfX6d+mIJU3uRtb
- /JERZSyuz/uUIMRpG/RrB8qGRbRoAgU2HkJMXK/DjUsnQw98vfvSh05ikKKqA1Bby1jqTpt42Fa
- Jy2GOgi19YijAfsAhV6XpQvux5B6Gws=
-X-Authority-Analysis: v=2.4 cv=X9rHu2Te c=1 sm=1 tr=0 ts=6afab948 cx=c_pps
- a=wuOIiItHwq1biOnFUQQHKA==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=GYxySZPKsXQMR3QF6vMA:9 a=QEXdDO2ut3YA:10
- a=XD7yVLdPMpWraOa8Un9W:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-16_03,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
- adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160031
 
-Hi Hitesh,
+>From 1121be9da86c87962c365f844af9b13dce9a64e3 Mon Sep 17 00:00:00 2001
+From: Chen Liu <2508871010@qq.com>
+Date: Mon, 16 Nov 2026 14:16:10 +0800
+Subject: [PATCH v2] ASoC: wcd937x: bound the DT channel mapping to the channel
+ tables
 
-On 11/16/2026 7:44 AM, Hitesh Patel wrote:
-> Hi Gjorgji,
-> 
-> Just back from the Diwali break and catching up on everything that
-> went quiet while I was away, so apologies for the gap on this one.
-> 
-> Back in October you said you would try to include these four patches in
-> your next series:
-> 
->   > Thanks i will try to include your changes in my next series,
->   > it will need verification from your side as well.
-> 
-> Is a v2 of
-> 
->   [PATCH 0/8] media: qcom: camss: add V4L2 subdev streams API support
->   https://lore.kernel.org/r/20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com
-> 
-> still on your list? No pressure either way - I am asking because I have
-> been assuming these four would reach the tree through it, and that has
-> left them sitting where nobody can build them.
+wcd9370_probe() copies qcom,{tx,rx}-channel-mapping into the per-channel
+tables with the length of the DT property as the loop bound.  Nothing
+checks that the property describes no more channels than
+wcd937x_sdw_tx_ch_info[] (11 entries) and wcd937x_sdw_rx_ch_info[]
+(8 entries) hold.
 
-I am working on v2 sorry for the delay. I am almost done and this week
-latest they will be posted, i hope this will remove the need of posting
-re-based series. Note that the patches will based on top of Bryan changes
-for the SOF event support.
+The DT binding requires exactly 12 entries for qcom,tx-channel-mapping
+("adc1, adc2, adc3, dmic0, dmic1, mbhc, dmic2, dmic3, dmic4, dmic5,
+dmic6, dmic7"), while the driver's table stops at WCD937X_DMIC6, i.e. 11
+channels.  Any board that follows the binding therefore writes one entry
+past the end of the table; both boards in mainline that use the property
+do so (qcm6490-idp.dts and sm7150-xiaomi-davinci.dtsi both spell out 12
+values).
 
-~Gjorgji
+Both tables live in .data right next to each other, so the stray write
+lands in wcd937x_sdw_rx_ch_info[0].ch_mask.  The 12th value, 4, stores
+WCD937X_SWRM_CH_MASK(4) =3D=3D 0x8 into HPH_L; the codec then asks for
+SoundWire RX channel 4 (EN_CHAN =3D 0x8) while the AFE keeps sending two
+channels (active_channels_mask =3D 0x3).  The CDC DMA never completes a
+block, the DSP never reports WRITE_DONE, and playback on the RX codec
+DMA path fails with -EIO after the wait_for_avail() timeout.
 
-> 
-> The practical problem is that my series cannot be applied by anyone but
-> me. The CI gets six of your eight patches from the list by
-> patch-id and then stops, because my copy of
-> 
->   [PATCH 1/8] media: qcom: camss: Add streams API support for CSIPHY
->   [PATCH 2/8] media: qcom: camss: Add streams API hw_ops to CSID interface
-> 
-> carries the CSIPHY rebase we discussed, so its patch-id no longer
-> matches what was posted and prerequisite-patch-id cannot find it. The
-> result is an apply failure in camss-csiphy.c that looks like my bug but
-> is really just a missing dependency.
-> 
-> Three ways out, whichever suits you:
-> 
-> 1. You post v2 with these folded in. Still my preference - it is your
->    series, and I will test and send Tested-by as before.
-> 
-> 2. If you would rather not carry it, I can post the whole thing as one
->    series, your eight patches with your authorship and Signed-off-by
->    intact plus my four, so that it is self-contained and the CI can
->    build it. I would not do that without your agreement.
-> 
-> 3. I post my four alone against media-committers next with the CSIPHY
->    amendment included explicitly. That unblocks the CI but leaves 1/8
->    amended in my series rather than fixed in yours, which seems wrong.
-> 
-> For what it is worth I have your eight rebased onto media-committers
-> next and they apply cleanly there, so whichever route you pick the
-> rebase work is already done and I am happy to hand it over.
-> 
-> One thing worth watching: camss has had a lot of traffic in the last few
-> weeks, including Vladimir's CSIPHY device-name change, so the longer
-> this sits the more rebasing it will need.
-> 
-> Thanks,
-> Hitesh
+Bound the length to the scratch buffer before reading the property and to
+the table size before filling it in, so that an over-long mapping is
+truncated instead of corrupting the RX table.  Only the upper bound is
+involved: a missing property still yields a negative count, so the
+existing fallback (the read fails, "Static channel mapping not
+specified ..." is printed) keeps working unchanged.
+
+The overflow was found while debugging RX codec DMA playback (no
+WRITE_DONE from the DSP, playback failing with -EIO) on an SM7150 phone:
+a temporary printk showed exactly one entry of the runtime table
+differing from .data, which led to the 12th iteration of the loop.
+Diagnosis, patch and this changelog were produced with the help of an AI
+coding assistant (Claude, Anthropic); the submitter reviewed the change,
+built it for arm64 with W=3D1 and verified on that phone that playback now
+completes and that the codec enables the SoundWire RX channel it actually
+needs (EN_CHAN =3D 0x1 for HPH_L) instead of channel 4 (EN_CHAN =3D 0x8).
+
+Not done: qcm6490-idp was not booted, there was no KASAN or reproducer
+other than the phone, and the DT binding still advertises 12 TX channels
+while the table holds 11, so the last entry of a conforming mapping is now
+ignored instead of written out of bounds (binding update left as a
+follow-up).
+
+Fixes: c06c4f7cbea1 ("ASoC: codecs: wcd937x: Add static channel mapping suppo=
+rt in wcd937x-sdw")
+Signed-off-by: Chen Liu <2508871010@qq.com>
+---
+v2: this is the first resend of the patch.  v1 reached the archive with a
+truncated Subject header ("...to the channel"), because the sending script
+did not unfold the RFC822 continuation line of the long Subject.
+
+It also addresses the Sashiko review of v1:
+
+  - The fallback diagnostic is preserved: bound the length with min_t()
+    instead of clamp(), so a missing property still yields a negative
+    count, of_property_read_u8_array() still fails and
+    "Static channel mapping not specified ..." is still printed.  Only the
+    upper bound changes, so boards without the property see no difference.
+  - Fixes: now points at c06c4f7cbea1 ("ASoC: codecs: wcd937x: Add static
+    channel mapping support in wcd937x-sdw"), which added the property
+    parsing and made the tables writable, instead of the original
+    SoundWire driver import.
+  - Author/Signed-off-by: full name instead of a single-word handle.
+ sound/soc/codecs/wcd937x-sdw.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/sound/soc/codecs/wcd937x-sdw.c b/sound/soc/codecs/wcd937x-sdw.c
+index 575495187..5ad6b30d6 100644
+--- a/sound/soc/codecs/wcd937x-sdw.c
++++ b/sound/soc/codecs/wcd937x-sdw.c
+@@ -1003,6 +1003,8 @@ static int wcd9370_probe(struct sdw_slave *pdev,
+ 	if (wcd->is_tx) {
+ 		master_ch_mask_size =3D of_property_count_u8_elems(dev->of_node,
+ 								 "qcom,tx-channel-mapping");
++		master_ch_mask_size =3D min_t(int, master_ch_mask_size,
++					    ARRAY_SIZE(master_ch_mask));
+=20
+ 		if (master_ch_mask_size)
+ 			ret =3D of_property_read_u8_array(dev->of_node, "qcom,tx-channel-mapping",
+@@ -1010,6 +1012,8 @@ static int wcd9370_probe(struct sdw_slave *pdev,
+ 	} else {
+ 		master_ch_mask_size =3D of_property_count_u8_elems(dev->of_node,
+ 								 "qcom,rx-channel-mapping");
++		master_ch_mask_size =3D min_t(int, master_ch_mask_size,
++					    ARRAY_SIZE(master_ch_mask));
+=20
+ 		if (master_ch_mask_size)
+ 			ret =3D of_property_read_u8_array(dev->of_node, "qcom,rx-channel-mapping",
+@@ -1023,6 +1027,8 @@ static int wcd9370_probe(struct sdw_slave *pdev,
+ 		pdev->prop.source_ports =3D GENMASK(WCD937X_MAX_TX_SWR_PORTS, 0);
+ 		pdev->prop.src_dpn_prop =3D wcd937x_dpn_prop;
+ 		wcd->ch_info =3D &wcd937x_sdw_tx_ch_info[0];
++		master_ch_mask_size =3D min_t(int, master_ch_mask_size,
++					    ARRAY_SIZE(wcd937x_sdw_tx_ch_info));
+=20
+ 		for (i =3D 0; i < master_ch_mask_size; i++)
+ 			wcd->ch_info[i].master_ch_mask =3D WCD937X_SWRM_CH_MASK(master_ch_mask[i]=
+);
+@@ -1040,6 +1046,8 @@ static int wcd9370_probe(struct sdw_slave *pdev,
+ 		pdev->prop.sink_ports =3D GENMASK(WCD937X_MAX_SWR_PORTS - 1, 0);
+ 		pdev->prop.sink_dpn_prop =3D wcd937x_dpn_prop;
+ 		wcd->ch_info =3D &wcd937x_sdw_rx_ch_info[0];
++		master_ch_mask_size =3D min_t(int, master_ch_mask_size,
++					    ARRAY_SIZE(wcd937x_sdw_rx_ch_info));
+=20
+ 		for (i =3D 0; i < master_ch_mask_size; i++)
+ 			wcd->ch_info[i].master_ch_mask =3D WCD937X_SWRM_CH_MASK(master_ch_mask[i]=
+);
+--=20
+2.43.0
 
