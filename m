@@ -1,110 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794824397;
-	b=SwSdUdxX/49HGX5YFrthCSkG0IRdhLcVPiyl3juShti66Y9s2Hpblj9xdo3dY0Hf9DHw
-	 uDVTKtU6ot8y392s/LXwOAvsTdB4Ma+jnO4oGqDiqCjDYldQt23ch6PtIzm1FoqOwlkYO
-	 u8oOoX+QhiJ0J9ivDs/iQpF4e6pvmN6ENYd0AZWM6JUClHxfSHYlbSR8qw6h+1EKOKsTw
-	 dXXjvXXdCekxcXyYb7zBKeMMSI0ynGKg8bi/2n9s457ME+iHuQN2SG3Aqm8mWCNyUx4y4
-	 wZlQnVDHTmjgux/BWf7nY4LK9L7jnlRquV2EyT6I6WXjY1HBLTmDixWbSX44c1892yg==
+	t=1794824400;
+	b=ChlYKH9B6ORqn4lvPA0jDpAZ/H9v/FNW8Cijp6dT8AFWGRkqaRePr1IIeL/90HJlh6dy
+	 orWLkYkj30XF+14vzTV6GSyritOcI/mtvmdoadoKOgZN1K+Pqi1VCALR6k/q1Kd7PzKCu
+	 QkElr9PcXB4JXv5+WBHFuRMs0Y85fHWaBltPG5BIVHxipYxWIRoilRYrCE7ZS01d0xn0L
+	 iGacasdU585pspSuUgbdnxvGy1YFLHLXfI1m7djjxeO/gCWXaZJJQpOjRHQIrYhM64K/j
+	 3A1CjsvJXtKCjrIIw6k5x36F50f67NnL69n6xyRKBcLVTZeSxBvhP9COT3mlS4beJhw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794824397;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794824400;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=wsTtCStfZOEa8ZGHTWImCLz++db4z8y5qc0EyI6LI2Q=;
-	b=MWVf6AH+RvtDorl7Msrdpf5g8QagWTCXfqqznpn0UjDQRXIYV/ECgf28OtZRW3m2X2Al
-	 CHkK5kbZMt345eg0OSWk42dOwtW5CozDWEJIBkrmH3sKt2dPqf6n9xVGQl881ON+XORkJ
-	 GZ2SwhE0JJ39ATMfpj6FmJJwN7e2ZOdGSJAqZk/31YUTbE5h3RWqHLMHbWuOtslmVNQg2
-	 MTC/6FWkXwxN3X0Lw33LHt+xxLz2tX0uowhgESm7wOnslNUHZvrby3qO2JcUFm7mHoCNJ
-	 LOcpxnug9gjAmvQWNDRbw4vb85RtYxrC+U6LkQ/cqGBiIA4d2JjhqISlPWzM27ZYk/Q==
+	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=ZtCX4xQXTEPkv73DiejIQwicvHDcj4jWWQYQqoWbQC0=;
+	b=CZcsw8J47mImtB2OG2KV9iOtv6rzY5JzCq9OHU6+7vqoySC7i7xftrBVrO9VsNpWgLvp
+	 BqrdVOsM8c3mDn6naUMCG6njsae2LcSHSxKGNH3FVmvbzPq8g1HMZmWLS8w9RfItT+oBc
+	 /ZHoXtOr6A5LORVOCNS5rYH34/Ds2uS6Fa0Kl1ZuxdqFkjKxwZYqt4xParBPm3WllGFWJ
+	 W0vR/uxlkbBCr62sqDbipmDhucdUGnn7XSXfBwDU22F2WGdiGNKDGFvzblXN6PmuKqG/d
+	 8luANiC1QYTSkS440ndxdq538vaotUdRWeFfzTnw9JOgWC4lEWx7XKRFv4QfTP0HhDA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=a2oxxKUs;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fRlt6cpA;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Jrdefy10;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FT77magM;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8094606A323
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B8094606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7EEB606A8BF
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D7EEB606A8BF
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=a2oxxKUs;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fRlt6cpA
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AG9BxUk1313830
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Jrdefy10;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FT77magM
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AG97OfK1160926
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=wsTtCStfZOEa8ZGHTWImCL
-	z++db4z8y5qc0EyI6LI2Q=; b=a2oxxKUsSlkV5lSLbkFaayR1AEBYjRbmxTL93P
-	8yygEooa4QQkGmWzsklBE8YUgcTmH5vKOu1s7//vpsM/Ji1Y2szQ2Yuz0XttLAbC
-	zEYVp0y/geHtnJiZhNZYtYLM/b6oilJOLrZ1EP/Jx3nQSh4A5glco3mg6Io79rMj
-	EjJIGfpVATBKCaajF3UJExxm/B9NoTPMTxzwbyfiie/UYpaqM+rCz6blZ4PUHZ/H
-	vasjVW4Fr3u0mUzPxDjZFAp5y71Mm9Dj076yEkz51O0g+ky7z/EXsDsJ5bHuMlqP
-	rPlIqer3FgQRbtm1zfOEEokAxAHldg8jqcbkShlOv03xR0iQ==
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZtCX4xQXTEPkv73DiejIQwicvHDcj4jWWQYQqoWbQC0=; b=Jrdefy10jF+Pol4f
+	Z+88dFBv60zuPaXXMoYFbGDXPgfDbMBOLyu7PIyKzTGFTKIn6ZsX5Wi0nT/kSDK8
+	auqWu0gMqa5Cpr7nJ17/WAlRpGzJu+bwQl9YwL3LKkB7mf66hoNDPLq2mdr4w/h6
+	w28nmzYBzrqL7t7eLTSWOssmlpbeVwlD6jj6rdYkz1CihDpHgjqoMOE/CvGfHiy6
+	O+i+diBeYyERliMASPaq8nbK/3eJgT1gDEnjSZ9FnHUTif3M1O0zIMAbbzbwMZwk
+	WHaq5vUbDt0TNjwnDaeC7Mf/l7A1d24O3jo28eRTH1CO6oHdhcun1yxYKwwSdNhb
+	sq1pTw==
 Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyrmc1p7y-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyxx2g8v2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:55 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-33713e5e6daso3057545eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 02:19:55 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 10:19:58 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-370230d93efso2223181eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 02:19:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794824395; x=1795429195; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=wsTtCStfZOEa8ZGHTWImCLz++db4z8y5qc0EyI6LI2Q=;
-        b=fRlt6cpAgE738SYlurG98Ppez407MDWPebNBOFBD/fQ3+Do7ZerUXAgzR8/ccB06Hy
-         DENAB94tcViY6rdUxatVnldzKbJKehYmfjGc26HUde8RWMLwfUNnPHOpQ0SVbgqNBLFh
-         jSILYM3vIEK9V3F6GLm953qEm8ej7L9Ez+1g2EQ1KbwgnmXkA7sFNA2QosPBCDIgJZEa
-         Fi4sa3iwBXIoc9jHd++f4LFJEdB2QEOqx5bfZzfIovHOpSjIbSgNikWPheD44lH1xA/5
-         qiXNVsAptau7TWfKhX5DRNBSZPeJUilt9pd9vqE2fIiFNUvnoIRgRTtcA0TUPIqiXXT8
-         dY8Q==
+        d=oss.qualcomm.com; s=google; t=1794824398; x=1795429198; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZtCX4xQXTEPkv73DiejIQwicvHDcj4jWWQYQqoWbQC0=;
+        b=FT77magM7a9D6n1olYcEnaphWUFMRT/wA8rx7Q5b894+bgC4tM+8L4m2anafEfQFeO
+         ABP569TDwYKUCOpebX7l3ZPI7bGpEXF9aZwSXlDFmoucTrlvbh3404pjkIeIWjUEe99U
+         Y62dqfdxVg9Z5r3CXoFrMqjse5YWdPX40NgPQMF11EYolzC7jKKRx1slZ53c64wH3XHc
+         nVjFtq/H3L5JrivjcMZAVOMuFo6EWCwpocCn2OiHfwmoThTxB7TUEhGr5r6PI9AzSlCk
+         e+JaEdaN4qPui4SR1prHPl4KVpyGNPhBpNisR7TMqORaWwiu5aUFklNgy5vnyufNcMP3
+         UErQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794824395; x=1795429195;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=wsTtCStfZOEa8ZGHTWImCLz++db4z8y5qc0EyI6LI2Q=;
-        b=uwrB2mV534rrjZFqS4WngmbbrW/sKiCi4hjDOQvkPFsr5vJIX01wI5MUs5kZNpInrn
-         8TPANCIV1VOGuqWRDMOGjRCEmkwoAoYkUS0Ft15OR5xcFRFCo5UELZNqMCX5MzEneD/N
-         C9s3hRoLq3beBagmFKLpDjCoHQM0UmcC3lomlELtZiJL8rzkDoStRgwcaxGkW0zspFyH
-         H+RSjwvgqiPf8GgYqDqtyITn6YUtZdtV353+9rS3hyj4ALYFVqfT13L6xXZ+YEPt9dsz
-         dPz1Svt0txCK+QWrUGZhIb1crXk+DXlMjktaX2E75faCWYypGJ6QOIYJIwnID5+RYI+/
-         hPzw==
-X-Gm-Message-State: APuU4Z/UECCKOTJPef60Ezm+OaXJS8SqHTG/o08qF9znOchV11DKVr3c
-	2XUzdVgc2LVOQiKLXUWVujlRrF5Y0/f878UNZtxlUW2T8T4GhqXDLabYVbxf/HSx0yLaF+9/ksN
-	ca0U2bQnIXlKKpBjHB16u3fta3UL9cjIN6QpyIifnVS+piDlPExkZ/faUzKJDzpXuRhLi
-X-Gm-Gg: AZFdTZcLR7XPWf5BRteSdh5c4gnxCWLbQLoetnTVxbzVNAARTAm3H+Pm+1prrfhE7FV
-	8uBFNlR4sDRQq9ZCKl3PeYDOtOXeg2WKgvEng2tpA/62tOFfuXDunA9Vx3rpUnfr9lwPo7hC/F0
-	S0op+Wh3JJMt0Kw5CFjfaWqaIGKjPMpvlx+V4O2/3Ka7OgmGfd1ttxRnaF78snwJco8FX2HcwjN
-	TQwNtL4frri39h99vHsECE23ecSchCGEe43jHyEs8b9j8es5xLqtELFZVQKIb3+RlOSy3Nf3jDC
-	mDZmt42iQPDT+HYp/bWhttXCSBywjfm2n81wm8LCfHCBXnmmAZoUsMpEzsAbpMbjGbhDlng87XX
-	SCrtL/fbTud+o2p3K86nk7MLTa6taBOKpKJ8neJk+WWePfB0rxtdxoaoHOzJ6AmKIK9ZnE6xCIj
-	JU1WhQazGJWN+5KaPl
-X-Received: by 2002:a05:7300:f694:b0:376:203e:7d7b with SMTP id 5a478bee46e88-3796337436amr15671276eec.2.1794824395272;
-        Mon, 16 Nov 2026 02:19:55 -0800 (PST)
-X-Received: by 2002:a05:7300:f694:b0:376:203e:7d7b with SMTP id 5a478bee46e88-3796337436amr15671238eec.2.1794824394601;
-        Mon, 16 Nov 2026 02:19:54 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794824398; x=1795429198;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZtCX4xQXTEPkv73DiejIQwicvHDcj4jWWQYQqoWbQC0=;
+        b=H1S5tB11NHjk3iHhTCf7X85XcipzKTAn1x1bIBlDGWl7zgYKtFUwev6LGqWvUtfyco
+         DC4fj7MOUtT6HsXIA08c1nxr/5U5cGV/e/8N2I3DvaabBahiFoOoD/6yPsGZqo5Gqrkh
+         MgQDQqzYZmkiHjQQ/egzT26hkRZJ+pCPYqHBbKdhzm6rcxf3qpZX1i8elLbpp4SsPrqP
+         b3IH5doNRNjX5003yWqUzfFWN0UV7uCBg2vr0DxmryjPj9ZrPb67dd7eBJuKGZqZjquL
+         O1QWGmLRoEvrtmoTP8HIrrOKfvERGvN/Lpx9ubkfMYpId86nnEfZQGi2R66TDRvKDrfi
+         r82w==
+X-Gm-Message-State: APuU4Z/JstnimBqKA1NDEbXICBtuRNOjfrrT5iTUQzZd49shGUpd75ZH
+	6Vzbd/hSsLVtLisurCb01/Ld5xgANH/Pvp4XQUAWGTGA0AyMaj9Y/aCDo614xZyeiaNXT9/FWjm
+	1PsrzmUYj/S1oeT9abdLfbcMu1Qopccn5Pt1AMMaE043TGQ5UIDBWbyoxx2otKvi9KORT
+X-Gm-Gg: AZFdTZcRG7u1+iI98lB/7HJfDo3tU9gwJgCu1h7c8Ip2BCW2jissd8U/6fk1NrP0kJT
+	Nd+Otb2MU2o9adIFWfeAQAAiJawy6/F5XBoDDbMm3T33lZ7S/om+ljjgOMNB0KK8Q9r4+0G5/z9
+	ajdMDxmoBCMH/Srxf7IwjFtQv1Prb+zqwo+ZpZpFnVA6aC0HEOABaVG7unSfwb6ucCabbLTaPrB
+	b1+6eAdfNx4eG6SDSVRVZ8NtptU1efhnfyIkvVOP06Jw3hvy9f6RqFX07SxHs7YHvzqoyH9UfGG
+	6ndd8T0pJecCZM0cFuZ+4fyxNOBaZbnaNJ0glnJwFDpHZDJwUC1VMSlXno4NRH/qwtPCfQIyOAD
+	gIbz3xzEnNmJZMUqU2n5pmaaaouL9N3NeWkTr6Kqf5EgNFpsi1uH4t6KSqxWO8MFx1q7s63HWeH
+	mOkMjPaoRlr3L9pQBU
+X-Received: by 2002:a05:7301:fd09:b0:36d:4570:a32d with SMTP id 5a478bee46e88-37963953f0amr10216797eec.2.1794824397544;
+        Mon, 16 Nov 2026 02:19:57 -0800 (PST)
+X-Received: by 2002:a05:7301:fd09:b0:36d:4570:a32d with SMTP id 5a478bee46e88-37963953f0amr10216771eec.2.1794824396845;
+        Mon, 16 Nov 2026 02:19:56 -0800 (PST)
 Received: from hu-luoj-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37956bad6casm32599557eec.26.2026.11.16.02.19.53
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37956bad6casm32599557eec.26.2026.11.16.02.19.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 02:19:54 -0800 (PST)
+        Mon, 16 Nov 2026 02:19:56 -0800 (PST)
 From: Luo Jie <jie.luo@oss.qualcomm.com>
-Subject: [PATCH v3 0/4] clk: qcom: Add NSS clock controller support for
- IPQ5210 SoC
-Date: Mon, 16 Nov 2026 02:19:47 -0800
-Message-Id: <20261116-qcom_ipq5210_nsscc-v3-0-1eaf92698379@oss.qualcomm.com>
+Date: Mon, 16 Nov 2026 02:19:49 -0800
+Subject: [PATCH v3 2/4] dt-bindings: clock: qcom: Add NSS clock controller
+ for IPQ5210 SoC
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,11 +118,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMPY+moC/22N3QqCQBBGX0X2uhVn1JKueo8I0dkxN/J3VArx3
- VuNoAtvBg58c86shHvLos7erHqerNimdhAePEVlVt9ZW+NYYYBHgCDSHTVVatsuRgjSWoRIFxz
- lSImJDCTKPbY9F/a1Sa+3L8uYP5iG1bQuSitD07+36gTr7heI9wIT6ECbqKA8phDzGC6NiN+N2
- dNtK98dtXYm/DMB7JrQmU6MBMZkIRvcMS3L8gEj0kE7FwEAAA==
-X-Change-ID: 20261104-qcom_ipq5210_nsscc-fe4b2c8d4d18
+Message-Id: <20261116-qcom_ipq5210_nsscc-v3-2-1eaf92698379@oss.qualcomm.com>
+References: <20261116-qcom_ipq5210_nsscc-v3-0-1eaf92698379@oss.qualcomm.com>
+In-Reply-To: <20261116-qcom_ipq5210_nsscc-v3-0-1eaf92698379@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
         Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
         Jerome Brunet <jbrunet+clk@baylibre.com>,
@@ -136,97 +136,388 @@ Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
         linux-pm@vger.kernel.org, netdev@vger.kernel.org,
         quic_kkumarcs@quicinc.com, quic_linchen@quicinc.com,
         quic_leiwei@quicinc.com,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794824393; l=2532;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794824393; l=12425;
  i=jie.luo@oss.qualcomm.com; s=20251128; h=from:subject:message-id;
- bh=3WMMLf5nFNS4ZIF56t2dXflK4rsLx1axqH/8+3GQJi8=;
- b=C01jZMPRHCEeDXYE6TOqGcOQLUxRLAyRKMkL6pQPPT4JJlAKNA4L2j3J9MoMPvlerQPS0/yGD
- FYdTdEzggZUALPnzRM+F3Q8qyUSZIRE6CvpLbcpw09ihK5L9/IXh63W
+ bh=osDt9Wx7l8Dwz1s9gshsRSw/jihamPUhGKdWi/poDxE=;
+ b=t0XyA1Zs9Sq39Vl1rI3dTGND2lWe3o9b7AjcbwzTGOD6k3Ito7/o8esqlpQ4ygQ2/naTMsIqV
+ 9co/g2OdRTcBIac2/Ku067F6ppm3Qkk0uP/7kD+hfAIHvnABvBQ4Kgr
 X-Developer-Key: i=jie.luo@oss.qualcomm.com; a=ed25519;
  pk=gSsYMDakxtd6UDFYDdA9y9yjIs5Etp5GK/3DoXWPyS0=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA0MCBTYWx0ZWRfX6GHrtUUaF37N
- j7fRpYl1aMKHZIZV7959cTftYdQ2DLw+Xw1np9C3zYz/eD+Mg6jGSo1F0IfKbfeHl1tv9vukG9/
- 7hbdyXHK5OgMuWsykNkL5QdGabFQAAM=
-X-Authority-Analysis: v=2.4 cv=C9N8WgP+ c=1 sm=1 tr=0 ts=6afad8cc cx=c_pps
+X-Authority-Analysis: v=2.4 cv=R7WWitRX c=1 sm=1 tr=0 ts=6afad8ce cx=c_pps
  a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=8DxjrM3GApEK5qXUAGkA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-ORIG-GUID: wVlvZl5itZLrZ5fjqExWUExejcIgi6WD
-X-Proofpoint-GUID: wVlvZl5itZLrZ5fjqExWUExejcIgi6WD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA0MCBTYWx0ZWRfX9gO2Q1jo9CW1
- CBYNAgBEVZqQjcVN0c/1qN9jI++voCJ45c3bo0e9jnFrGXqcUO6j6gGyzO4HOvETCJ3fAAQHvJa
- cSpfRfh7U21AwhI8LWr2y+MgIsJ9g8A4jX2BoYOhoNm5H83AwhxEpG3Uy1ngl9JOj6VMX+yrvP3
- UnsRuSqRe7MG8rOshC4Wp8yqimeWP+I1glfhKdglxC1sU1Z1nWD7yuFtAal3btFqNNWZV7H4ob+
- WoPwyIUrRMYYTCPf7sDSY5JVwfY4J8lSsc8Sm8Qeim6OihX5y9V4RLtKqeuVI+tJr5PmSUhVZJ2
- GB9giuxCsPmH07WKPXG/Wt4JZkljOrxsUQjyZFWjFA4yrNPWQRPJqfWxKv9eidgld1NaLG1koIg
- ret6dLCmIE2mPm5pHs1r+WM0amphaJx/BEEmZVteGaFPjKQNqgzJ6x2jPA8pUOofsRLDucwCgBj
- +DBMEv1QVuAz2iVzxgA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=5BNNu1SJyhHsDrVplQ0A:9
+ a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA0MCBTYWx0ZWRfXyunY2GUv/aAE
+ IsFe/6XXT7cqF9T6Q2dgB+eRxDuQ6jV66cETuUiV1rSoc6PLLmnlCPSlRqE3eEonSnmZeMP980K
+ kTdSMm3bttGhS/kh6xd22LVl4/0CIrE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA0MCBTYWx0ZWRfX624Owxj9EF+7
+ KWGpYARqua7JR8EeOVv8qXdt2dexI6mdsuNQJg4+LG8kiKJ4XcKUWgVJfegW9sLr8RAdIYi+ZaJ
+ YLMCbph6XJwYXBVLONqc0gDYe9a1FVujXw0etWR+aK7A1p4ODaNewalXC37U1j35YgDdKF/MWmu
+ 1OrF/6dHlPNJ7IIX0/72j/ytGVi6Kr78atkLpiBU0t9It6k7YMtRJjiODKgoSXiqiSmpBus88lZ
+ rkFIZFvMKAbU+Pes/dbe1Y46ilkQEGnkK5vwyKrd3aZmDH/3v/KKF1OVX07AR5LvMDXts1MBeho
+ 7ntSew7DGFIMp9tHAIbLiuxveDouSjq10mV/reVNHceOKQKsrXnWIad/JRb6zhhddxhReCinJC+
+ aMD0qFNkdCst3vUUEEjuoaa+u6jEuA9RaNM02vqESoOsCqAAPmkc19FIbHF4O1HsaLrnU2HCGtd
+ HT97oWPYJSliW7MakvA==
+X-Proofpoint-GUID: N5IWJmMCAxTlcE8zvUfuIKq_rHQzx3iz
+X-Proofpoint-ORIG-GUID: N5IWJmMCAxTlcE8zvUfuIKq_rHQzx3iz
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-16_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0
- clxscore=1015 spamscore=0 adultscore=0 bulkscore=0 phishscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611160040
+ lowpriorityscore=0 clxscore=1015 priorityscore=1501 phishscore=0 adultscore=0
+ bulkscore=0 malwarescore=0 suspectscore=0 impostorscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160040
 
-The NSS (Network Subsystem) clock controller on the IPQ5210 SoC provides
-clocks and resets to the networking related hardware blocks such as the
-Packet Process Engine (PPE), the six ports, XGMAC PTP reference clocks,
-PON, EIP crypto engine, and the SoC-integrated EPHY (2.5G Ethernet PHY).
-Its parent clocks are sourced from the GCC and CMN PLL blocks.
+NSS clock controller provides the clocks and resets to the networking
+blocks such as PPE (Packet Process Engine), UNIPHY (PCS) and EPHY on
+IPQ5210 devices.
 
-The NSS NoC clocks are also enabled to use the icc-clk framework, enabling
-the creation of interconnect paths for the network subsystem's connections
-with these NoCs.
+Add support for the compatible string "qcom,ipq5210-nsscc" based on the
+existing IPQ9574/IPQ5424 NSS clock controller Device Tree binding. IPQ5210
+additionally exposes a pair of EPHY-RAW Rx/Tx clock sources used to derive
+the clocks for its integrated 2.5G Ethernet PHY, so extend the clocks and
+clock-names lists with "ephy_rx" and "ephy_tx".
 
-The patch series is organised as follows:
+Also add master/slave ids for IPQ5210 networking interfaces, which are used
+by the nsscc-ipq5210 driver for providing interconnect services using the
+icc-clk framework.
 
-1/4  DTS: fix xo_board parent clock to ref_48mhz_clk
-2/4  dt-bindings + clock/reset/interconnect ID headers for IPQ5210 NSSCC
-3/4  NSS clock controller driver for IPQ5210
-4/4  DTS: add NSS clock controller node in ipq5210.dtsi
-
-Changes in v3:
-- Add patch 1 to parent xo_board to ref_48mhz_clk instead of xo_clk.
-- dt-bindings: Move minItems before items for clocks and clock-names.
-- Drop CLK_SET_RATE_PARENT from the XGMAC PTP reference dividers, so
-  setting the PTP reference rate cannot reparent the shared PPE clock.
-- Collect the Reviewed-by tags.
-- Link to v2: https://patch.msgid.link/20261111-qcom_ipq5210_nsscc-v2-0-7e2c1dda3ed2@oss.qualcomm.com
-
-Changes in v2:
-- Use RUNTIME_PM_OPS() and pm_ptr() for dev_pm_ops.
-- Rebase on next-20261110; drop the CMN PLL DTS patches, which are now
-  merged.
-- Link to v1: https://patch.msgid.link/20261105-qcom_ipq5210_nsscc-v1-0-d4fcb5c32b51@oss.qualcomm.com
-
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
 ---
-Luo Jie (4):
-      arm64: dts: qcom: ipq5210: Fix xo_board parent clock
-      dt-bindings: clock: qcom: Add NSS clock controller for IPQ5210 SoC
-      clk: qcom: Add NSS clock controller driver for IPQ5210 SoC
-      arm64: dts: qcom: ipq5210: Add NSS clock controller node
+ .../bindings/clock/qcom,ipq9574-nsscc.yaml         |  47 ++++++++-
+ include/dt-bindings/clock/qcom,ipq5210-nsscc.h     | 106 +++++++++++++++++++++
+ include/dt-bindings/interconnect/qcom,ipq5210.h    |  18 ++++
+ include/dt-bindings/reset/qcom,ipq5210-nsscc.h     |  60 ++++++++++++
+ 4 files changed, 228 insertions(+), 3 deletions(-)
 
- .../bindings/clock/qcom,ipq9574-nsscc.yaml         |   47 +-
- arch/arm64/boot/dts/qcom/ipq5210.dtsi              |   42 +-
- drivers/clk/qcom/Kconfig                           |   12 +
- drivers/clk/qcom/Makefile                          |    1 +
- drivers/clk/qcom/nsscc-ipq5210.c                   | 2201 ++++++++++++++++++++
- include/dt-bindings/clock/qcom,ipq5210-nsscc.h     |  106 +
- include/dt-bindings/interconnect/qcom,ipq5210.h    |   18 +
- include/dt-bindings/reset/qcom,ipq5210-nsscc.h     |   60 +
- 8 files changed, 2483 insertions(+), 4 deletions(-)
----
-base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
-change-id: 20261104-qcom_ipq5210_nsscc-fe4b2c8d4d18
+diff --git a/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml b/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
+index a35bbc7b1924..0064866bea82 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
+@@ -4,28 +4,33 @@
+ $id: http://devicetree.org/schemas/clock/qcom,ipq9574-nsscc.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: Qualcomm Networking Sub System Clock & Reset Controller on IPQ9574 and IPQ5424
++title: Qualcomm Networking Sub System Clock & Reset Controller on IPQ SoCs
+ 
+ maintainers:
+   - Bjorn Andersson <andersson@kernel.org>
++  - Luo Jie <jie.luo@oss.qualcomm.com>
+ 
+ description: |
+   Qualcomm networking sub system clock control module provides the clocks,
+-  resets on IPQ9574 and IPQ5424
++  resets on IPQ9574, IPQ5424 and IPQ5210
+ 
+   See also:
++    include/dt-bindings/clock/qcom,ipq5210-nsscc.h
+     include/dt-bindings/clock/qcom,ipq5424-nsscc.h
+     include/dt-bindings/clock/qcom,ipq9574-nsscc.h
++    include/dt-bindings/reset/qcom,ipq5210-nsscc.h
+     include/dt-bindings/reset/qcom,ipq5424-nsscc.h
+     include/dt-bindings/reset/qcom,ipq9574-nsscc.h
+ 
+ properties:
+   compatible:
+     enum:
++      - qcom,ipq5210-nsscc
+       - qcom,ipq5424-nsscc
+       - qcom,ipq9574-nsscc
+ 
+   clocks:
++    minItems: 11
+     items:
+       - description: Board XO source
+       - description: CMN_PLL NSS (Bias PLL cc) clock source. This clock rate
+@@ -42,11 +47,14 @@ properties:
+       - description: Uniphy2 NSS Rx clock source
+       - description: Uniphy2 NSS Tx clock source
+       - description: GCC NSSCC clock source
++      - description: CMN_PLL EPHY-RAW Rx clock source
++      - description: CMN_PLL EPHY-RAW Tx clock source
+ 
+   '#interconnect-cells':
+     const: 1
+ 
+   clock-names:
++    minItems: 11
+     items:
+       - const: xo
+       - enum:
+@@ -63,6 +71,8 @@ properties:
+       - const: uniphy2_rx
+       - const: uniphy2_tx
+       - const: bus
++      - const: ephy_rx
++      - const: ephy_tx
+ 
+ required:
+   - compatible
+@@ -77,6 +87,8 @@ allOf:
+           const: qcom,ipq9574-nsscc
+     then:
+       properties:
++        clocks:
++          maxItems: 11
+         clock-names:
+           items:
+             - const: xo
+@@ -90,8 +102,35 @@ allOf:
+             - const: uniphy2_rx
+             - const: uniphy2_tx
+             - const: bus
+-    else:
++  - if:
++      properties:
++        compatible:
++          const: qcom,ipq5424-nsscc
++    then:
++      properties:
++        clocks:
++          maxItems: 11
++        clock-names:
++          items:
++            - const: xo
++            - const: nss
++            - const: ppe
++            - const: gpll0_out
++            - const: uniphy0_rx
++            - const: uniphy0_tx
++            - const: uniphy1_rx
++            - const: uniphy1_tx
++            - const: uniphy2_rx
++            - const: uniphy2_tx
++            - const: bus
++  - if:
++      properties:
++        compatible:
++          const: qcom,ipq5210-nsscc
++    then:
+       properties:
++        clocks:
++          minItems: 13
+         clock-names:
+           items:
+             - const: xo
+@@ -105,6 +144,8 @@ allOf:
+             - const: uniphy2_rx
+             - const: uniphy2_tx
+             - const: bus
++            - const: ephy_rx
++            - const: ephy_tx
+ 
+ unevaluatedProperties: false
+ 
+diff --git a/include/dt-bindings/clock/qcom,ipq5210-nsscc.h b/include/dt-bindings/clock/qcom,ipq5210-nsscc.h
+new file mode 100644
+index 000000000000..62ead8d9b076
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,ipq5210-nsscc.h
+@@ -0,0 +1,106 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef _DT_BINDINGS_CLOCK_QCOM_IPQ5210_NSSCC_H
++#define _DT_BINDINGS_CLOCK_QCOM_IPQ5210_NSSCC_H
++
++#define NSS_CC_PPE_CLK_SRC			0
++#define NSS_CC_PPE_SWITCH_IPE_CLK		1
++#define NSS_CC_PPE_SWITCH_BTQ_CLK		2
++#define NSS_CC_PPE_SWITCH_CLK			3
++#define NSS_CC_PPE_SWITCH_CFG_CLK		4
++#define NSS_CC_PPE_EDMA_CLK			5
++#define NSS_CC_PPE_EDMA_CFG_CLK			6
++#define NSS_CC_PORT1_MAC_CLK			7
++#define NSS_CC_PORT1_RX_CLK			8
++#define NSS_CC_PORT1_RX_CLK_SRC			9
++#define NSS_CC_PORT1_RX_DIV_CLK_SRC		10
++#define NSS_CC_PORT1_TX_CLK			11
++#define NSS_CC_PORT1_TX_CLK_SRC			12
++#define NSS_CC_PORT1_TX_DIV_CLK_SRC		13
++#define NSS_CC_PORT2_MAC_CLK			14
++#define NSS_CC_PORT2_RX_CLK			15
++#define NSS_CC_PORT2_RX_CLK_SRC			16
++#define NSS_CC_PORT2_RX_DIV_CLK_SRC		17
++#define NSS_CC_PORT2_TX_CLK			18
++#define NSS_CC_PORT2_TX_CLK_SRC			19
++#define NSS_CC_PORT2_TX_DIV_CLK_SRC		20
++#define NSS_CC_PORT3_MAC_CLK			21
++#define NSS_CC_PORT3_RX_CLK			22
++#define NSS_CC_PORT3_RX_CLK_SRC			23
++#define NSS_CC_PORT3_RX_DIV_CLK_SRC		24
++#define NSS_CC_PORT3_TX_CLK			25
++#define NSS_CC_PORT3_TX_CLK_SRC			26
++#define NSS_CC_PORT3_TX_DIV_CLK_SRC		27
++#define NSS_CC_PORT4_MAC_CLK			28
++#define NSS_CC_PORT4_RX_CLK			29
++#define NSS_CC_PORT4_RX_CLK_SRC			30
++#define NSS_CC_PORT4_RX_DIV_CLK_SRC		31
++#define NSS_CC_PORT4_TX_CLK			32
++#define NSS_CC_PORT4_TX_CLK_SRC			33
++#define NSS_CC_PORT4_TX_DIV_CLK_SRC		34
++#define NSS_CC_PORT5_MAC_CLK			35
++#define NSS_CC_PORT5_RX_CLK			36
++#define NSS_CC_PORT5_RX_CLK_SRC			37
++#define NSS_CC_PORT5_RX_DIV_CLK_SRC		38
++#define NSS_CC_PORT5_TX_CLK			39
++#define NSS_CC_PORT5_TX_CLK_SRC			40
++#define NSS_CC_PORT5_TX_DIV_CLK_SRC		41
++#define NSS_CC_PORT6_MAC_CLK			42
++#define NSS_CC_PORT6_RX_CLK			43
++#define NSS_CC_PORT6_RX_CLK_SRC			44
++#define NSS_CC_PORT6_RX_DIV_CLK_SRC		45
++#define NSS_CC_PORT6_TX_CLK			46
++#define NSS_CC_PORT6_TX_CLK_SRC			47
++#define NSS_CC_PORT6_TX_DIV_CLK_SRC		48
++#define NSS_CC_NSSNOC_PPE_CLK			49
++#define NSS_CC_NSSNOC_PPE_CFG_CLK		50
++#define NSS_CC_UNIPHY_PORT1_RX_CLK		51
++#define NSS_CC_UNIPHY_PORT1_TX_CLK		52
++#define NSS_CC_UNIPHY_PORT2_RX_CLK		53
++#define NSS_CC_UNIPHY_PORT2_TX_CLK		54
++#define NSS_CC_UNIPHY_PORT3_RX_CLK		55
++#define NSS_CC_UNIPHY_PORT3_TX_CLK		56
++#define NSS_CC_UNIPHY_PORT4_RX_CLK		57
++#define NSS_CC_UNIPHY_PORT4_TX_CLK		58
++#define NSS_CC_UNIPHY_PORT5_RX_CLK		59
++#define NSS_CC_UNIPHY_PORT5_TX_CLK		60
++#define NSS_CC_UNIPHY_PORT6_RX_CLK		61
++#define NSS_CC_UNIPHY_PORT6_TX_CLK		62
++#define NSS_CC_XGMAC0_PTP_REF_CLK		63
++#define NSS_CC_XGMAC0_PTP_REF_DIV_CLK_SRC	64
++#define NSS_CC_XGMAC1_PTP_REF_CLK		65
++#define NSS_CC_XGMAC1_PTP_REF_DIV_CLK_SRC	66
++#define NSS_CC_XGMAC2_PTP_REF_CLK		67
++#define NSS_CC_XGMAC2_PTP_REF_DIV_CLK_SRC	68
++#define NSS_CC_PON_CLK				69
++#define NSS_CC_EPHY_RX_CLK_SRC			70
++#define NSS_CC_EPHY_RX_CLK			71
++#define NSS_CC_EPHY_TX_CLK_SRC			72
++#define NSS_CC_EPHY_TX_CLK			73
++#define NSS_CC_UNIPHY_PORT1_RX_DIV4_CLK_SRC	74
++#define NSS_CC_UNIPHY_PORT1_TX_DIV4_CLK_SRC	75
++#define NSS_CC_UNIPHY_PORT2_RX_DIV4_CLK_SRC	76
++#define NSS_CC_UNIPHY_PORT2_TX_DIV4_CLK_SRC	77
++#define NSS_CC_UNIPHY_PORT3_RX_DIV4_CLK_SRC	78
++#define NSS_CC_UNIPHY_PORT3_TX_DIV4_CLK_SRC	79
++#define NSS_CC_UNIPHY_PORT4_RX_DIV4_CLK_SRC	80
++#define NSS_CC_UNIPHY_PORT4_TX_DIV4_CLK_SRC	81
++#define NSS_CC_UNIPHY_PORT1_RX_DIV4_CLK		82
++#define NSS_CC_UNIPHY_PORT1_TX_DIV4_CLK		83
++#define NSS_CC_UNIPHY_PORT2_RX_DIV4_CLK		84
++#define NSS_CC_UNIPHY_PORT2_TX_DIV4_CLK		85
++#define NSS_CC_UNIPHY_PORT3_RX_DIV4_CLK		86
++#define NSS_CC_UNIPHY_PORT3_TX_DIV4_CLK		87
++#define NSS_CC_UNIPHY_PORT4_RX_DIV4_CLK		88
++#define NSS_CC_UNIPHY_PORT4_TX_DIV4_CLK		89
++#define NSS_CC_EIP_BFDCD_CLK_SRC		90
++#define NSS_CC_EIP_CLK				91
++#define NSS_CC_NSSNOC_EIP_CLK			92
++#define NSS_CC_CFG_CLK_SRC			93
++#define NSS_CC_NSS_CSR_CLK			94
++#define NSS_CC_NSSNOC_NSS_CSR_CLK		95
++
++#endif
+diff --git a/include/dt-bindings/interconnect/qcom,ipq5210.h b/include/dt-bindings/interconnect/qcom,ipq5210.h
+new file mode 100644
+index 000000000000..44f8d35a372a
+--- /dev/null
++++ b/include/dt-bindings/interconnect/qcom,ipq5210.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef INTERCONNECT_QCOM_IPQ5210_H
++#define INTERCONNECT_QCOM_IPQ5210_H
++
++#define MASTER_NSSNOC_PPE		0
++#define SLAVE_NSSNOC_PPE		1
++#define MASTER_NSSNOC_PPE_CFG		2
++#define SLAVE_NSSNOC_PPE_CFG		3
++#define MASTER_NSSNOC_NSS_CSR		4
++#define SLAVE_NSSNOC_NSS_CSR		5
++#define MASTER_NSSNOC_EIP		6
++#define SLAVE_NSSNOC_EIP		7
++
++#endif /* INTERCONNECT_QCOM_IPQ5210_H */
+diff --git a/include/dt-bindings/reset/qcom,ipq5210-nsscc.h b/include/dt-bindings/reset/qcom,ipq5210-nsscc.h
+new file mode 100644
+index 000000000000..0616a3623897
+--- /dev/null
++++ b/include/dt-bindings/reset/qcom,ipq5210-nsscc.h
+@@ -0,0 +1,60 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef _DT_BINDINGS_RESET_QCOM_IPQ5210_NSSCC_H
++#define _DT_BINDINGS_RESET_QCOM_IPQ5210_NSSCC_H
++
++#define NSS_CC_PPE_BCR				0
++#define NSS_CC_PPE_SWITCH_IPE_CLK_ARES		1
++#define NSS_CC_PPE_SWITCH_BTQ_CLK_ARES		2
++#define NSS_CC_PPE_SWITCH_CLK_ARES		3
++#define NSS_CC_PPE_SWITCH_CFG_CLK_ARES		4
++#define NSS_CC_PPE_EDMA_CLK_ARES		5
++#define NSS_CC_PPE_EDMA_CFG_CLK_ARES		6
++#define NSS_CC_PORT1_MAC_CLK_ARES		7
++#define NSS_CC_PORT2_MAC_CLK_ARES		8
++#define NSS_CC_PORT3_MAC_CLK_ARES		9
++#define NSS_CC_PORT4_MAC_CLK_ARES		10
++#define NSS_CC_PORT5_MAC_CLK_ARES		11
++#define NSS_CC_PORT6_MAC_CLK_ARES		12
++#define NSS_CC_PON_CLK_ARES			13
++#define NSS_CC_XGMAC0_PTP_REF_CLK_ARES		14
++#define NSS_CC_XGMAC1_PTP_REF_CLK_ARES		15
++#define NSS_CC_XGMAC2_PTP_REF_CLK_ARES		16
++#define NSS_CC_NSSNOC_PPE_CLK_ARES		17
++#define NSS_CC_NSSNOC_PPE_CFG_CLK_ARES		18
++#define NSS_CC_PORT1_RX_CLK_ARES		19
++#define NSS_CC_PORT1_TX_CLK_ARES		20
++#define NSS_CC_PORT2_RX_CLK_ARES		21
++#define NSS_CC_PORT2_TX_CLK_ARES		22
++#define NSS_CC_PORT3_RX_CLK_ARES		23
++#define NSS_CC_PORT3_TX_CLK_ARES		24
++#define NSS_CC_PORT4_RX_CLK_ARES		25
++#define NSS_CC_PORT4_TX_CLK_ARES		26
++#define NSS_CC_PORT5_RX_CLK_ARES		27
++#define NSS_CC_PORT5_TX_CLK_ARES		28
++#define NSS_CC_PORT6_RX_CLK_ARES		29
++#define NSS_CC_PORT6_TX_CLK_ARES		30
++#define NSS_CC_EPHY_RX_CLK_ARES			31
++#define NSS_CC_EPHY_TX_CLK_ARES			32
++#define NSS_CC_UNIPHY_PORT1_RX_CLK_ARES		33
++#define NSS_CC_UNIPHY_PORT1_TX_CLK_ARES		34
++#define NSS_CC_UNIPHY_PORT2_RX_CLK_ARES		35
++#define NSS_CC_UNIPHY_PORT2_TX_CLK_ARES		36
++#define NSS_CC_UNIPHY_PORT3_RX_CLK_ARES		37
++#define NSS_CC_UNIPHY_PORT3_TX_CLK_ARES		38
++#define NSS_CC_UNIPHY_PORT4_RX_CLK_ARES		39
++#define NSS_CC_UNIPHY_PORT4_TX_CLK_ARES		40
++#define NSS_CC_UNIPHY_PORT5_RX_CLK_ARES		41
++#define NSS_CC_UNIPHY_PORT5_TX_CLK_ARES		42
++#define NSS_CC_UNIPHY_PORT6_RX_CLK_ARES		43
++#define NSS_CC_UNIPHY_PORT6_TX_CLK_ARES		44
++#define NSS_CC_EIP_CLK_ARES			45
++#define NSS_CC_NSSNOC_EIP_CLK_ARES		46
++#define NSS_CC_NSS_CSR_CLK_ARES			47
++#define NSS_CC_NSSNOC_NSS_CSR_CLK_ARES		48
++#define NSS_CC_DEBUG_CLK_ARES			49
++
++#endif
 
-Best regards,
---  
-Luo Jie <jie.luo@oss.qualcomm.com>
+-- 
+2.43.0
 
