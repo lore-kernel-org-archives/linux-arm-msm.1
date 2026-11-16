@@ -1,89 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794864268;
-	b=l4xLM3GJ4+KMdrZ4EBx6mhkSpsnJzBEkTVv9S6LUXdMFRvkWaShggFgPOSoWKlgcOJtS
-	 5upyyp1armdsUOMoJcdp7KpBYkhG7M6ZdYJunOV9JyqZNeovzzUchtBh+MN6hQ0o0zjdU
-	 vQ0/uEOsArNpqKVN3hLYHHxP+U07XJgPF0MOKF+f3kWp3X35sO4Y86GUD2eZUu7lba1fp
-	 N9WwoMGkdmuZqE9cXFlvA6gV7pQ5EXyvG1ChwYb4BCBdwW+rljm1IGq5b5rvSzCKloH/d
-	 OB+C0GZ9qiJ1aenaSzOqzRkJ+dyVirrcC5wmoiq0D2Ga2iwl9GzoWEuO9rrv02bcTlg==
+	t=1794864272;
+	b=Zbw4bqQTgwrYKv1CRb/0LIfd4vPBEtZ1RfQzVdO52MtVdfDXaTKKEmF4kEXA9hQPc8Md
+	 9C4yJxajtIL9/lwYBQGLkNbVN3xLXq7JK3m0y7hXLonD14OKAwngdscylKczXySvTfVhd
+	 fmVRi/9jm1tFY3HvaBRMR7d1O/0d1LPu4ZTHgqWsynDCqrGuclmZ2ojeoh5xd35JT1EiC
+	 lVLcmR119oIdSaYkDdCsZXhL1LsWSiM2dveB3Xb+Kedjbqt58w8ON2fP+BG8vw9uMMRMW
+	 B9pBzwx9BWzIeFXJ9bi/61sjp58Z8qW6ol70QF8kteP6sladaDCSmOMpROWcZeTjbNw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794864268;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794864272;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=SVbBJIE0UBMoZDDXFUbCowdBxaKmTm3xtl/vwOrYCpo=;
-	b=2KZwCLjPzZA2qlIfM/sHHCtpAA8wVygHvbcB+CR/U7V4oOP6M4ftZsRO9Ri/IWNoZvFi
-	 eGqf1+ST1mkyFAZL584AkLoc53lzGk4PXvs7hTGJP56kb1iKfzoYWK+XY0MJJPsOE4R6a
-	 uMzAU5GXIck203KaSNf1WN/TrovxyDeSfJMzecIbjny0UCWgTHHZDtHS8bi32jkBp44dx
-	 ++3eVLjpVeVxopyr8CerTWRf1JR3Dy0Tma/fpAXb4tNgjJ/ONlbZo9EVbIAG9+oMEVS0f
-	 LOVbYvIMzyKJgOMK9Lb0tFhccXg4khZrQOf2uhISb3bw1tCOkQqrYfd1EYJP3Gy/ovg==
+	bh=wREO8yYhEaVkQGcf5OnBaEHgwkaJ4zZ//5ZqjDA9MsI=;
+	b=TjKX6TPr7S/WNv9jXdViM0XcfHeCZOx0vc3mQE6oo//kw1zKzz94dhm/YeFA9CaxJTmy
+	 ax88TfRx9FmVVNHRGAUEZGhvC8HYygm0CfBWUiGBa5/8N48aLCnbt2H2sE9GE8xEQBDK8
+	 TXQojwN5dLI7V3XzexFQ5/sIpKshXQapRWMrmLv2bdHe1NvK8xIMAw6TucicOiroV3Kv9
+	 JffgVcqtrP1M4TKjg78fRZiFduQCiwWTXmKJkOuwR02MtjLO8cr6YXrp4WHZzXmIVYQnW
+	 h+p0O35KCWup0kFpDC1Dw8UPkrJdcP+hYduzXRsG6zyugvUDbcD4KjFcfLoYAJbn8Mg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=juy0Ini1;
-	arc=none smtp.remote-ip=209.85.221.46
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RV5akAzK;
+	arc=none smtp.remote-ip=209.85.128.44
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86B0C606A32A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 21:24:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86B0C606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0414606A334
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 21:24:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E0414606A334
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=juy0Ini1
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4a358881793so193609f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 13:24:27 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RV5akAzK
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4bb6c7b6dbdso21041385e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 13:24:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794864266; x=1795469066; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=SVbBJIE0UBMoZDDXFUbCowdBxaKmTm3xtl/vwOrYCpo=;
-        b=juy0Ini1YCCl1DbqXHd9Am/uDxlGe4PFtG8GyDtQM8Yy9fqEcKuyZCICFaQv0iQXET
-         MyHh/WhuPMcqOVXnKk6qJ5TVHBCO6xMMlTCnVGdITFJg/lS6vQxgH4lg4cUp4p1GlYVp
-         ihdw0RrKSjzIDIyOO9eGusBtzL5aQg7+n5GXl8R2HMOHo2eK3o6Rv3NtsX0+QTf4q3Zf
-         TAG6JVMp2Lv9ACtz5tf4kIQq88jSD5E/bAGRX+s4McU+XiYW8lBnBr11zLMsfD4SKCG+
-         P8+tiYvPyyQZKtBEZMVxF+5ox7ZrVBsXl6rDYZMikOONvIAriDSdYHGbAeZmUTjk9vOf
-         VeWA==
+        d=gmail.com; s=20260707; t=1794864270; x=1795469070; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=wREO8yYhEaVkQGcf5OnBaEHgwkaJ4zZ//5ZqjDA9MsI=;
+        b=RV5akAzKeEP/HsoNcLz+tuXg/klRUBB6/ajYSY8bldxfs0c2Wg+HpBnTCD/Y8LH9+c
+         NNlt8M8zDTRk6x9IMeaNnXYBk2Ukh8FupoMFwapHXDDrsGsCkfnllkxfXzLWS40pizoV
+         sauVGsgQDC5bTT8n+BJCAdFB0JvrXevd8l7ESWJ4s0tQwvt0MZM6b6ID1XnDE5Q2dzCO
+         agazdYBU5OJ9N6j0YgByNIOIFUyEkYZsIG62Rn/LpoAt2mB02bD6aBzOfZl+yDeHTu7M
+         viRJimN2nQmnxbvXfZ+sFPTNDg2v1NTHJIrFyJXRNXveqXZa61J3C0t6dC+tbqF8OwTJ
+         EoCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794864266; x=1795469066;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=SVbBJIE0UBMoZDDXFUbCowdBxaKmTm3xtl/vwOrYCpo=;
-        b=CJgkpHLBFjLHpB2xWsk9moMe9PP4bdhlWuQyIcZipvZcMlcFd22opy6FwPSzIx8jp7
-         TXWi257eP0p5AqqEuDxrYZS603fwXF/iEvUMI2wxXQPEPXw02aABXe7LGVnCxYsNtujJ
-         EsHO3+1W48KFuGFiSsXMxrDCD0F6dqkMAZ48xESglZ8vr1Ob1jXFlDpoVVyif+tceFin
-         Asx9IssbrTU5hjXd27Y+em8R9+pELmPieGWMD6Ntd8aVJciQGhyo7FiKu03Nlt+BU28I
-         cDPFAUNdzVaUaUByQIhu+fuG9nDL24PTaBXkuBynaxwjWQPAcbEQrZDljvhnDaboaqdh
-         Onmg==
-X-Forwarded-Encrypted: i=1; AL+hErHhphv0HIh0AjgEVrWSDLr9ABMnP+xoAwTI1ef7BTDIF8ue1YC7pYfvtou8tRsFiHP5rnS3OcfxrNxTafTn@vger.kernel.org
-X-Gm-Message-State: APuU4Z/jiTCcfdSYBZXLNalWxoVFE7uuEJotnU/c2Tq7ivRp86WcCbtK
-	zYpEHZ8jJTTHm2Ckq4MeC7XlYxAq6voxaa1fGOb2mqb3qrrf0HaMzJw3
-X-Gm-Gg: AZFdTZftQoyhOhwyfSTa+EO2ZgbOLCruCEbA4lMPZRdydGWdcNJm0L4wtvZCklVKS3q
-	9LImHruOhXa0B46a9Q7jheq/mus+eL4zHb3NDRQ/x5/W2kJkPPGdljqEZvwJXOhJJIiA4/+XyKi
-	o4kOZqJBlCYJmzBaBBVhht38PkDPpA+4SMpVozuxsWYfciLlOv7RXE4r0E7350g8ezyapdiSpMd
-	EU6ennpPHT0Xw+hz4JP5fL4QBjkAwOqLe+Q0djY3MT742hQlPoJKaXRuneLyFAEqTOxONwJYnXD
-	GEhJnWBNma4bfH+dJrEurxaERfiXUnNFRarDx6GEUIqdKGaZg+jBSKf4es+XMLD8o06slKleCGG
-	uODcJ1vFikZbtOByZG5tTivVJpFwdzBrXxMenNtSqG5rCTjJO2KC3WBKx6xKlsZpdgV+fC5n7Mb
-	+z8n2oXljYPQa4RKW+JinSzg8809VmjQH8PQUkEQoVW/geaEuTI0y2NFijdBFlD4spfVi/WQ5J6
-	Hmqf2CaWlvS41PoHQGldjntQ4zHj/a2baCxWBg4pDnzHLaMKzvYqzZ0RKwiIk0Hl/OV9yzgJTLz
-	evOHJydSUC9gT3ergFbKiye9js1ajnhfjM2Hu10O
-X-Received: by 2002:a05:6000:41d7:b0:492:b5d9:f627 with SMTP id ffacd0b85a97d-49c7353c794mr23553821f8f.46.1794864266042;
-        Mon, 16 Nov 2026 13:24:26 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794864270; x=1795469070;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wREO8yYhEaVkQGcf5OnBaEHgwkaJ4zZ//5ZqjDA9MsI=;
+        b=w7nO6rr/Jw8+oqlVcj/muiLfv2PwrcuKAnQ/D8VzTOOVFqcINGi8tSFPivKMuSAKsd
+         yUeA3oe+Zjylvrom4qQndONHETpR/GFSgq6jMbSgo0ZFmJyX9I9NVVtdvSt8jdhuhzc9
+         VuYmaHWBHtcojpho6skA2U32/EQeCKxzwYxoh97G6ZTdA887L5A02Qk5ArCVq0yB96KV
+         LdYFAUD+e44tJBR+/2cqaN87HpEHak69aNcLSoZImyPGsEBhdPpNHMl0h1NKJ0EoVV5p
+         pfZBJz0j3+qwmHCsim2l9GlUXYwfKDT8jFOgI8HhHNjCoXzGhBMA5ifaVj97/YZpaotM
+         n+EA==
+X-Forwarded-Encrypted: i=1; AL+hErHWSD/kiEYp5DwLPFCW4U00O5fBNCl5kvMIkq08TGmjUB4dbd3aquz9lmpWqbFKVBmN0oDSZm/ddOowuJCT@vger.kernel.org
+X-Gm-Message-State: APuU4Z8jMp8XLRgH6mN36tGJu06r98RihJZ85M8IQGq0+W67Ha9EfV3j
+	XFTKXvy3+h65OYTEoO87zBMHbHDPDhzeIp0Y0igrrajZrzsXS+wl+f90
+X-Gm-Gg: AYBFou3kDnyGmRBPOMoYVU4dQVozrd8oxQrn5GvmuEQuzjrIUBAhnrWBlPtdb0LxIB1
+	bersquD7YFaXb+bRVATix8KPD0sFODs6k4Rypjfu6rSc8pUavqcQV1/RSeLHQCamtZCIPhw9dr7
+	G2SRS7+6BNf3Scd2ZRzbsw+zRUFCmoVYyGV4XTR/oTHme1oP7amZQtcWS33tlcJNYeLjMxSLyYl
+	vUuhDijkgUaPL8vYpR14/xnp2FD+mciHdmC/gXC/IMUCVY/urpXCb8WGvYRYzL8C7Ka4sQkMynB
+	czNr/IukdQiW1NG5iZ0IwMj5jOaLJQasy/kdIz4asparYoUoOWY5G03DGl8s4ZVhGK5IdndWKSC
+	+skqMUnwWYKym+EMikr6Uh7neaM3muHqAv22cLQ6VocYSDUK9/ZE/QWgUXZUs08GvHqKpf0KTln
+	IKaryVozYalUF/7JvC9CmidtP9R9hCgVUxR3NSDCDMD0N2CcZYXfrGZZ3W6S41Yse1GFOm8n3wF
+	RCg+hxtC4V0w4P8cCyvSxwdBfGdD3bg2SuJf/4sVyLO+kjzhg4O9OJb1ykCzyVMo0NqLMvtGbjv
+	cWxDYNsb8Qmmjz+2YIvO+I3iAFhpy/XQxTP3giNpNg==
+X-Received: by 2002:a05:600c:4685:b0:4a6:eca1:7d5c with SMTP id 5b1f17b1804b1-4bb55a91e31mr246195125e9.32.1794864270391;
+        Mon, 16 Nov 2026 13:24:30 -0800 (PST)
 Received: from [192.168.10.105] ([212.58.121.92])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4a2f61c0989sm2414728f8f.48.2026.11.16.13.24.22
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4a2f61c0989sm2414728f8f.48.2026.11.16.13.24.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 13:24:24 -0800 (PST)
+        Mon, 16 Nov 2026 13:24:29 -0800 (PST)
 From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Subject: [PATCH v2 0/5] Add RPMh and global clock controller support for
- Qualcomm Halliday (SXR2250P)
-Date: Mon, 16 Nov 2026 21:24:18 +0000
-Message-Id: <20261116-halliday-clk-v2-0-28208928da36@gmail.com>
+Date: Mon, 16 Nov 2026 21:24:19 +0000
+Subject: [PATCH v2 1/5] dt-bindings: clock: qcom: document the Halliday
+ RPMh Clock Controller
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,11 +95,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIJ0+2oC/1WNyw6CMBBFf4XM2pq2KAFX/odh0ccAowVMi0RC+
- u8WjAuXJzn33BUCesIAl2wFjzMFGocE8pCB6dTQIiObGCSXhRC8ZJ1yjqxamHEPlhdSVLw5NWd
- rIU2eHht677lb/eXw0nc009bYjI7CNPpl/5vF5v3S1X96FowzyU2uVamRa3tte0XuaMYe6hjjB
- xff0P66AAAA
-X-Change-ID: 20261108-halliday-clk-362190f4f5dd
+Message-Id: <20261116-halliday-clk-v2-1-28208928da36@gmail.com>
+References: <20261116-halliday-clk-v2-0-28208928da36@gmail.com>
+In-Reply-To: <20261116-halliday-clk-v2-0-28208928da36@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
  Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
  Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
@@ -111,72 +109,38 @@ Cc: Qiang Yu <qiang.yu@oss.qualcomm.com>,
  linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, 
  Stanislav Aleksandrov <lightofmysoul@gmail.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794864262; l=2616;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794864262; l=893;
  i=lightofmysoul@gmail.com; s=20261108; h=from:subject:message-id;
- bh=1wKNlxbUO05hN5xuomY/VWb202BKFBlZseityHzBS6g=;
- b=QLeMRLS3lJhKq/slwW2g7GS+lXLf7jP40aImaALzbPkpD1trwZ+XOVRhn6iAC4ieIOkTp5e6j
- v7kaITBUy8mAfz7eyrfabPUk1zp5iwyVBaDR5tE9u/x4K+DSeNrTXCG
+ bh=ZdWzIM6bnI4voexzohsmWp0z+avf5ks6mjxw3tb8aUQ=;
+ b=9ADXxuWTDwY36Y5okN2pDe1MsHpuUDbA3CsIUSMxe7gUP2WuRMP+n/AfTAr9ogCLf1caA/cG3
+ Q3NVDXq40X/B3Zshwa1u8FXTTp0InIEh6gsOU0Rc03SofrH+/GKLLA2
 X-Developer-Key: i=lightofmysoul@gmail.com; a=ed25519;
  pk=jeRUlfmkhE53CJPoeIIXgu7rTE0ybDRH0HQrEwbydzg=
 
-Add the RPMh clocks and the Global Clock Controller of the Qualcomm
-Halliday SoC.
+Document the RPMh Clock Controller on the Qualcomm Halliday SoC
+(SXR2250P).
 
-The GCC has the clkref_en gates on the outputs of the QREF block, whose
-supplies are shared with the UFS PHY. Patch 4 lets drivers built on
-qcom_cc_desc register clk_ref clocks next to their other clocks, so
-that the GCC can vote for those supplies.
-
-Halliday (SXR2250P / Snapdragon XR2+ Gen 2) is the SoC in the Samsung
-Galaxy XR headset. The DT changes follow in a separate series.
-
-The series is based on v7.4-rc1, like clk-for-7.5. Patch 4 conflicts
-with commit 4dd10fbbeb9c ("treewide: Convert devm_kmalloc() family to
-the devm_kmalloc_obj() family") in v7.4-rc2, which touches
-qcom_clk_ref_register(): the resolution is to take that function from
-this series.
-
-This work was made together with Claude, ChatGPT and Gemini.
-Reviewed and tested on my Galaxy XR.
-
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
 ---
-Changes in v2:
-- common: Return a NULL clock, not -EINVAL, for a protected clk_ref
-  with an ID above the last regmap clock (Sashiko)
-- common, clk-ref: Use devm_kzalloc_obj() and devm_kzalloc_objs() for
-  the clk_ref allocations
-- gcc-halliday: Reuse the wrap0 S0 frequency table for wrap1 S0/S1
-  (Sashiko)
-- Link to v1: https://patch.msgid.link/20261109-halliday-clk-v1-0-20c3ba8be0bd@gmail.com
+ Documentation/devicetree/bindings/clock/qcom,rpmhcc.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-Stanislav Aleksandrov (5):
-      dt-bindings: clock: qcom: document the Halliday RPMh Clock Controller
-      clk: qcom: rpmh: Add support for RPMh clocks on Halliday
-      dt-bindings: clock: qcom: document the Halliday Global Clock Controller
-      clk: qcom: common: Register clk_ref clocks from qcom_cc_desc
-      clk: qcom: Add support for Global clock controller on Halliday
+diff --git a/Documentation/devicetree/bindings/clock/qcom,rpmhcc.yaml b/Documentation/devicetree/bindings/clock/qcom,rpmhcc.yaml
+index 5c9b653bc2aa..72223566da1e 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,rpmhcc.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,rpmhcc.yaml
+@@ -20,6 +20,7 @@ properties:
+       - enum:
+           - qcom,eliza-rpmh-clk
+           - qcom,glymur-rpmh-clk
++          - qcom,halliday-rpmh-clk
+           - qcom,hawi-rpmh-clk
+           - qcom,kaanapali-rpmh-clk
+           - qcom,kuno-rpmh-clk
 
- .../bindings/clock/qcom,halliday-gcc.yaml          |   84 +
- .../devicetree/bindings/clock/qcom,rpmhcc.yaml     |    1 +
- drivers/clk/qcom/Kconfig                           |   11 +
- drivers/clk/qcom/Makefile                          |    1 +
- drivers/clk/qcom/clk-ref.c                         |   90 +-
- drivers/clk/qcom/clk-rpmh.c                        |   22 +
- drivers/clk/qcom/common.c                          |   68 +-
- drivers/clk/qcom/common.h                          |    9 +
- drivers/clk/qcom/gcc-halliday.c                    | 3533 ++++++++++++++++++++
- include/dt-bindings/clock/qcom,halliday-gcc.h      |  249 ++
- 10 files changed, 4016 insertions(+), 52 deletions(-)
----
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
-change-id: 20261108-halliday-clk-362190f4f5dd
-
-Best regards,
---  
-Stanislav Aleksandrov <lightofmysoul@gmail.com>
+-- 
+2.55.0
 
