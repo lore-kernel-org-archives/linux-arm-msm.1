@@ -1,49 +1,48 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=51.68.154.128
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794820787;
-	b=dHeJ6KGdAKTfVLPh1n44ShLjpeEtYi0PzPTK65IJEJnkTRXzmMQ7tvSHrhyomm5tlYCm
-	 VvF9cw1HOIs7L6j1gagwKRV2nvgyRl7Gtg1zlucDiNgmey7zxji5kdJfWag8Fapr2QKyy
-	 3C7uj1qPG5qcKhrKVMV23h7uVbFwFtHKGhHBvNmMf02B2XUM1v00ZW8IV5VnSq/aLlrGL
-	 2G1QNKZ9tfcC7Ew9WVtPMwO/ZAHzF2WFnCF2wut+O3ErWAjeP8B1XFomFRbt83pyodh8o
-	 ZmTbPpA9jmnrP4M124Bmfk231w07JWYlgw7yu9kkNxqtNtIoL/O/uJ2Xk18D+5sOA/Q==
+	t=1794820820;
+	b=E4bGDO7R0m9BXFyo1hsIVn5CobP017bx2nU7tde1wz4VONiY/bk8c6Xn6f56+HM9vw3o
+	 ksHDlpAPjmv7QEUJvcJIK6+uYTatEbkj5Q25SWNsg1YjVr+MsGvJkm3VsbRRPvndkbSrP
+	 hw92HiMiF+AtvryTft3iN6IdBK3Y4r7f6tGiGNjPZGFSm5EPlN7KLEjotp/ZHESPcobn+
+	 07cUoBprAd0tuOeNb7TD8tFucHJBuY6GAa/ULiQ/bbbV+fZ37DKRg4vNceO4EtLMvnRYx
+	 0O9VwuRIEJGnrIHa5US5bpxjyTEU7WydjqK2vpZlM21IFWC2xtrH/DdgdUv2PAl5F4w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794820787;
-	h=DMARC-Filter:Received:Received:DKIM-Signature:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=CZnwncXttnoeDTUcItONMH1HUxzaUc0HeWzS8YajeZo=;
-	b=ICe4Qd3XWWkQQpt1Qna1M2K7fmZZEMZU67dFZkl2Mu5CgIiMxle0wnlunR3df930WgBI
-	 6aqssyqJK6OjTee/Td08q36wBE8V8XCuL286qM56obLIS4+JRVA4vTunIMf9FMSjlXBdo
-	 6sJpT3wKghFfrgyple40Abgg8PkxqhwJHSbKDkjIaGSuK8rV5pQklvh0EbopEErH8TTck
-	 0LZuN4S4FMBUqICC7YpTZ+Zoy0QO9drzUaqwjU305Ty1LK3s3eXeZRhRxJgHvHp4Gzl5D
-	 NVuNAasE2N2ihvMZZ4Yp3vVk8QGw5lRUHIfGp02RX+prRk6KP3lPtWXqFY+KHOZV9SQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794820820;
+	h=DMARC-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
+	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=k+wOuVk0Dr+o/+JpRBrIEXz83gTiweTC0xIvCalJCXc=;
+	b=sqVJh5FlJA99j3sR2PsKuslUsODeuCJm5/pYvoH0HYIFxcgJizFmjV0nyAojFV+214rU
+	 ypFyJx2EzuaN/xWq76qiraeicKAOZdQlyATT2cFrqi8mIkTZLqT9rF6ITBnv/u7aqc44R
+	 R7aVLBa4z635RAWnhRyCYWf0EN6OIxn1C8RjVUfpThUoW1HRyOD5W4O4FQN17QFd5YN1a
+	 bQzroM9mbQEW0EwuoqCNc9StqRcdIczCO26wCsfDat5R3S2vd31Z0Mf1d0jNdJuEVBsAd
+	 QgQgWM6xxQD5by5I3f0SDOX0GI+y1Kke2j77s9kBRcNm37dXQIRhdKX6xKroNEQfcyA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=arm.com;
-	spf=pass smtp.mailfrom=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=MDYQ3pcg;
-	arc=none smtp.remote-ip=217.140.110.172
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2391C606A334;
-	Mon, 16 Nov 2026 09:19:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2391C606A334
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	dmarc=pass header.from=fromdisposition.org;
+	spf=pass smtp.mailfrom=fromdisposition.org;
+	dkim=pass header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=AoKjACI+;
+	arc=none smtp.remote-ip=51.68.154.128
+Received: from 4do.net (4do.net [51.68.154.128])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A94A8606A323;
+	Mon, 16 Nov 2026 09:20:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A94A8606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fromdisposition.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fromdisposition.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=MDYQ3pcg
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 437321476;
-	Mon, 16 Nov 2026 01:19:43 -0800 (PST)
-Received: from [10.2.197.99] (ewhatever.cambridge.arm.com [10.2.197.99])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BCAB23F763;
-	Mon, 16 Nov 2026 01:19:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1794820786; bh=x48MGglr2CAwjlYCBk5Uk7nESxpqLnVRRwqaJD9EKQQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=MDYQ3pcgq/fyazZWav1V8GCbaXniG47/MsXdi+L8kJg/9MnJZQMg0rd30s8dNGend
-	 f74CGwzElmESwFiQFd/98nrfKDbHv7OvYnk8N0T7X/E7Epm8s30n6ECITioJzXdOOK
-	 UkxLipbRfhTxaer6gx/Mmr1orXbV/YSFH8ZAp4WY=
-Message-ID: <3bb22604-1850-44d7-9388-3bcb06813eff@arm.com>
-Date: Mon, 16 Nov 2026 09:19:41 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=AoKjACI+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fromdisposition.org;
+	s=mail; t=1794820811;
+	bh=GrxWz7efrCMYHUVm6uX3hNeflkQ7aBKkrpH9+rrDivQ=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=AoKjACI+BQ0t/iCTSnaeCeZL0VUkjIlbPm9eHZc8yzrb7B1uPNAG6TuZ4jT+Y1+EP
+	 01LuJPqGtt+SVAWSkoPqgpXZm9U9WAQkFc6Kvjy08AbmleItojeYAejBr1wrP/OflL
+	 kswuC4d6jwqxD8Phl8M2I+Y3JFRnOyVZDYH51aCQN7+fJy4104vF2kVaHdHXzR/sdW
+	 Y1a5TPNV9YXqIeo9NGlunMk8qvhhrlxrXPYVvZ+XBDd5vidpU7dkNX3vX5a6qSoHds
+	 Ed0Copt4Jecygq+J7BJsvUVCMLHskcJEdlv53J/+kHsmkgwRKZ2G2cFI9EkI3uHb+6
+	 bc8GTSk6e8gsQ==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,76 +52,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM
- platforms
-To: Jie Gan <jie.gan@oss.qualcomm.com>, Leo Yan <leo.yan@arm.com>,
- Rob Herring <robh@kernel.org>
-Cc: Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
- Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Jingyi Wang <jingyi.wang@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
- coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
- <20261110154643.GA4159803-robh@kernel.org>
- <20261111204322.GH9176@e132581.arm.com>
- <e0e07848-361d-4977-a585-a0810452e150@oss.qualcomm.com>
-Content-Language: en-US
-From: Suzuki K Poulose <suzuki.poulose@arm.com>
-In-Reply-To: <e0e07848-361d-4977-a585-a0810452e150@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Date: Mon, 16 Nov 2026 09:20:11 +0000
+From: Demeter Barna <me@fromdisposition.org>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Michael McAllister <me@michaelmcallister.org>, Srinivas Kandagatla
+ <srini@kernel.org>, Mark Brown <broonie@kernel.org>, lgirdwood@gmail.com,
+ perex@perex.cz, tiwai@suse.com, linux-sound@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] ASoC: qcom: q6asm: Correct the 24-bit PCM format
+In-Reply-To: <16b8f649-f464-43a3-b372-868351df9117@oss.qualcomm.com>
+References: <179355993304.51321.11135059681945648585.q6asm-capture-format-v1@michaelmcallister.org>
+ <f3485a790ffdafe635b84b5d68730dad@fromdisposition.org>
+ <179416102230.53258.7301268454500974217.q6asm-pcm-format-v2@michaelmcallister.org>
+ <16b8f649-f464-43a3-b372-868351df9117@oss.qualcomm.com>
+Message-ID: <8832ef4d735b3fcdf48a2bf2a9997975@fromdisposition.org>
+X-Sender: me@fromdisposition.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 16/11/2026 02:03, Jie Gan wrote:
-> 
-> 
-> On 11/12/2026 4:43 AM, Leo Yan wrote:
->> On Tue, Nov 10, 2026 at 09:46:43AM -0600, Rob Herring wrote:
->>> On Tue, Nov 10, 2026 at 09:21:13AM +0800, Jie Gan wrote:
->>>> The CoreSight TNOC (Trace Network-On-Chip) binding so far only 
->>>> allowed the
->>>> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
->>>> forces the device onto the AMBA bus, where the driver must read the
->>>> peripheral ID from the device registers during probe. On several QCOM
->>>> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
->>>> never probes and its trace path is unavailable.
->>>
->>> But it works fine on some platforms? We have a property to override the
->>> peripheral-ID which would solve your issue. That would be much simpler
->>> and avoid the ABI break on any of the working platforms.
->>
->> Looking back at the earlier discussion [1], Jie in v2 already proposed
->> "arm,primecell-periphid". Questions about AMBA IDs and ATID handling got
->> mixed together. The series later moved towards platform-device probing,
->> then became current shape.
->>
->> Hope we make the right decision on arm,primecell-periphid this time.
->>
->> Anyway, I'd like to apologise to Jie for all the back and forth.
->>
-> 
-> Never mind.
-> 
-> Hi Suzuki, Rob,
-> 
-> The "arm,primecell-periphid" override is the simplest fix for the issue. 
-> Which fix are your preferring for the issue? If we want fix it with DT 
-> property, we can revert the patch series and I will post a new one to 
-> fix it.
-> 
-> As Leo mentioned, the AMBA probe is not affecting by the series.
+On 2026-11-15 13:12, Srinivas Kandagatla wrote:
+> Can you please try this change and see if it helps. I have not tested
+> this myself as am travelling atm.
 
-Alright, I will remove it from the coresight next, please send the DT
-fix.
+Hi Srinivas,
 
-Cheers
-Suzuki
+Thanks, I gave it a go on SM8350.
 
+The DSP takes the V4 blocks without complaining, but nothing changes for
+me: S24_LE playback is still 48 dB down, same as without the patch. I
+played a 440 Hz tone and recorded it with the DMICs:
 
+                                     without    with
+   S16_LE                            -25 dBFS   -25 dBFS
+   S24_LE (bits 23:0)                -73 dBFS   -73 dBFS
+   S24_LE, shifted into bits 31:8    -25 dBFS   -25 dBFS
+
+Capture is the same story, the samples still come back in bits 31:8.
+
+Michael's v2 does work here, for what it's worth: S32_LE playback comes
+out at -25 dBFS like S16_LE, and S32_LE capture records the tone at the
+same level as S16_LE.
+
+So it looks like this DSP just ignores mode 23. Maybe that depends on
+the firmware version, but with the firmware this device ships it doesn't
+work. If you have another way to fix this in mind, I'm happy to test it.
