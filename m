@@ -1,65 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794789855;
-	b=2G7R8cXLILRb3lqFxJpbfaGJ2psCldAdP2Bk9o5/uLLVVEYSQBLtNdITlN/7W2JazsGv
-	 Yb/AwctSyGGAbfQn1cp+xSXOfmbLY2/KWk8rR32VeIVA1M2NH3PeNHIc9gu5OxpDWJ8TY
-	 M0FjGyLEdC6ZbO9G6+hTg/OUHsl9NTEADA3h/WLfaHSU9Z8FcBlE3ddudlUw1YaoHinAJ
-	 qj3tZv4+46sW8DwpXtSQDfZlmvVkISkTvKY+cVOxFYAdoPoa/xQilJ8ZxwQJ9G4QusUTm
-	 sRQov0EuSzrOuxKVYP/A6Zg9DET46HK95NqAihWhahtpXuc7nrc1Hukxk2uKanuyI/A==
+	t=1794794611;
+	b=gAPiYcLj8RNiFl6ufZ+DLRCwelrS03QQg0a+dqaqdzxgjPxAI9HunuvoR0eDgv/yiuQK
+	 vrs5/jOQ0bOx+h6+BLub37a/agbSurNtUtpeKDhCBC9EeDbXSJLHj6RqJ6V5MROOR72iJ
+	 KjtsUIlPJN8NwJkx0p8w1oQz3g14wDYdpr0sITiXFHlwIl+zh7upLs33da7F+rj9/NQre
+	 JahvmvyHDvzM9zwJzg652R4i52dydAAlm1flWDCiaiqpfNA25nFgWl8rZjd03UImhNuHl
+	 /m1rx7K1ZC5opPcJebkPMLiTkjPP1KOloMEqlxa0wik8drHRQXGUpxkrbZJlPbANS5Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794789855;
-	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
-	 In-Reply-To:References:X-sashiko-severity:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=ISEuVjYQM8NCj0mZGFd4fsXBhv05BIQupK8d1+cRaYE=;
-	b=UzsuWr6djodHRtJVSfJTJLjlcF32IDfvKBA22p3l5l0TxtIp9/lAbUDl2k+DOKBKcKX3
-	 XoLluieB5RJckTCip2h9T8F/z8Sa/9cv2rGUNuHjTgw6R94WZtDY7WTow8Ovn/x9NcK+O
-	 1gJ1kbPzNuam84KNd6py4jRFz3WtXq/CTG/nbUUars5Dk3aLq6VxTIBW6RHZS68rpNqEk
-	 UZFFx+0Gk3Wcf/jz2MbQ0YE4TZL+jUmJmCSveZ9XdYa+I6h1gHdXAkgQZyom1q7iN4KjF
-	 Q63s4EeagncW91vs97iLvNkAExt3a74vgLnuflqt+Aa2YiqlhvdhQ+fQPT5ibv5eV3g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794794611;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=M9UeinhBxfqxsLlFJluuE+xqGWcUT3hi0lMKGG1MyGQ=;
+	b=VxoU3HMPHuf8rzEl3DADP+aiUXEHxC6WNqwFeg0ZI2qAlMEZH6aSV8/vwfuTTMFG2kxC
+	 op1pJprrb/c53V2BS94SAPvqlpcIAfWq0ymNIfl6yVeQv8kGQPp4nupls2pBgWii2HHgg
+	 3USG/UVPUMPGKkma/asezssRuDnf1tvk6avgXUIvGeL4/PxkTh2T7sW71yKbfiRRmtyze
+	 6iJQz83Av6Iy7fsKKZZoSjhuvmha6ZoVxJ/WpbzL7xw63wiHDzdVSEqzcA0XWkZ7PmeYC
+	 T7qN1THO9QBELKSv0w1YwyOR84XeLMbM4LqIB5xWS4XaVehqkIc6Q8D5BIJA+vX3V6Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JhKuUoN2;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N5ah1Fsb;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NgjYcElN;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C78B9606A337;
-	Mon, 16 Nov 2026 00:44:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B05FC606A321
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 02:03:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B05FC606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JhKuUoN2
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32DE31F000C9;
-	Mon, 16 Nov 2026 00:44:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794789855;
-	bh=ISEuVjYQM8NCj0mZGFd4fsXBhv05BIQupK8d1+cRaYE=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=JhKuUoN2sfEI9yRCyu1pG3d3cKdyt4ERpoS8Y53YUTXlWV2wA4MXSnKolapdX6jyK
-	 mfjBWb6JMNeJY7Iyh3zBogRLSlmAjVZaXAMDrUxML6yNpjKO4764Rmj65MoE9D5Cxs
-	 fKzR+OZguQGjsa1Y3NIFHR8jmwE7qi7P5klN/IJpjBdd2QrIKzTyIao2RDZsdW22zh
-	 +WTEO5z9zDChgcMo55NcKv/aJTXL8VQT13+h6+Uj2L432f9x0/v+HZBmuAO/Ff7i8x
-	 0WQnk1TTqK1RhhgSMe72cuA5E7qtnAYLLazNoGCcoQOzb13Pi3JTUwMW0AuX1QZ4tu
-	 WPbz0nQdOYGmg==
-Subject: Re: [PATCH net-next v6 2/4] net: qrtr: Assign unique node id for MHI
- endpoints
-From: netdev-bot+sashiko@kernel.org
-To: manivannan.sadhasivam@oss.qualcomm.com
-Cc: mani@kernel.org, davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com,
- horms@kernel.org, jjohnson@kernel.org, edumazet@kernel.org,
- linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, ath12k@lists.infradead.org, andersson@kernel.org,
- christopher.lew@oss.qualcomm.com, deepak.singh@oss.qualcomm.com,
- raj.bhagat@oss.qualcomm.com, juha-matti.tilli@iki.fi,
- jeff.hugo@oss.qualcomm.com, daizhuang.bai@oss.qualcomm.com,
- jeff.johnson@oss.qualcomm.com
-Date: Mon, 16 Nov 2026 00:44:13 +0000
-Message-ID: <179478985375.3136.1235406838106549470@kernel.org>
-In-Reply-To: <20261114-qrtr-multi-ep-v6-2-2eb9885659e2@oss.qualcomm.com>
-References: <20261114-qrtr-multi-ep-v6-2-2eb9885659e2@oss.qualcomm.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N5ah1Fsb;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NgjYcElN
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AG1Kscc2361684
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 02:03:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	M9UeinhBxfqxsLlFJluuE+xqGWcUT3hi0lMKGG1MyGQ=; b=N5ah1FsbeT0W4Wvd
+	aQ8LpFyVl+juaE5h9YPvH4ymv4aBF0E7lV3d/Y6FbD1e+cpTzke0vlO4S1DB5BO9
+	aEv/SsPShzP0YbNU5ggpZkOfKQx56WxIvGU9NlydHM1R9aJB+2tjSrx5R9WyDvhT
+	6AdVPKZUkvYuh2+VifsxyoKfYD/D1mquEGIhisIek92rVW3iHYS/xFZ1TXAtP4mS
+	cfBk6fC5pqHxbKk0UB4AOvMJ5EgJeKH+64++uz0deZ02T1beae6KPE2VaWq9MXd1
+	UoMQyxF6plOaNGrb27jIDvcqpsnqgmQoYn2ke/kIFa+tNwn+DlKIsM7yJAmvGmuC
+	FjmNdA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hxhj44anc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 02:03:23 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cddc4bde4adso1251770a12.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 15 Nov 2026 18:03:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794794602; x=1795399402; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=M9UeinhBxfqxsLlFJluuE+xqGWcUT3hi0lMKGG1MyGQ=;
+        b=NgjYcElNGrU9hqJ+ngd9s8FK+UZytN4cbCkcox8sAUoEyRsknRrWfO5NL9BoHJYaJu
+         Ve11HLk6dz2EpHqQ+Msb2forsd3I5DGKAC88BnpKfztbXvoubLLI8GfrN3nKISD3Nd/H
+         oj6vh0O4DNziane62f2HIqcA87odYNN/hmVohEUse0cABlHMkwyCM7B2V+6J5iCmLSg0
+         ZrTz5VUjgS0hWMC4mSPpFV3hyZd68Dd6D04k3pgjLDMBRF6JzegRxl7T76T0Gaw38qNs
+         Wlkpv4XWlkIZJGSK2o8zW5QPDccZqjOEEzL/O7VfknJXmrCg00Ccp3R2XH3YKUv+Lr9v
+         mj2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794794602; x=1795399402;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=M9UeinhBxfqxsLlFJluuE+xqGWcUT3hi0lMKGG1MyGQ=;
+        b=r/EzvenoFMeODh80h7bgv4PvKfgfiAtk+EGANJptMCyqtV5JE4z8PNsy5hQ2qUFn8K
+         1VUBOBY5GmTTKz62oW/6+mEgOj/JwBNgNMX9HbtMjU4z16hQYDvjvoXoh6T+ge+PMDIU
+         3hYPrlTZGQ4kZS88peyd3ZOfKwloKytilgIE3TTaF13vZGchaTrzzWEIGHnIQm3O8KrN
+         jymoLQ6d3fvTjy3eiXtQ1+JtzIh5JCjKpq/hQOKIYg1P6CbvJE2sRDbC3sYwr/5zqnsH
+         PyFiYpf+r7EHOUbeyd52EYxP4opneyjzZpoBTeA7lCM29yryXkiK7IuyCpyRaS8BhnCj
+         P6FQ==
+X-Forwarded-Encrypted: i=1; AL+hErHtMjEEBkQZyNR2EFRfuJdbJhtfhKuiHYk3oFLxfW46s55AVwFjGC4gvO9Ys5JTfr8FAJpy+KfbvGQ6w0B2@vger.kernel.org
+X-Gm-Message-State: APuU4Z+VIxNkXi0SusMH796rJCJrZbCIMDadjzbzZz1xTrKvIZZpecDE
+	ejGZ9lbzXeSrE6M/URMlF+Cm6SqOjNMO9w8Dk8R3ORfhB7zYtlBvEH98dhN0WTkyonSN+DVeD13
+	Xvx8UUC768cx11QFhPff5y4oYqDAY4C1PxYvhkn4LE/SHS8VjZR0MiZmxI2G/sVaRmkeB
+X-Gm-Gg: AYBFou35GvXTz28gLUlTZXLeyLEBxf54CHQhLZualRMEIRV7D0f5hjITFvCFQhquBXa
+	vb3d+oTyN/ZqYThc2dppkYljRfH6gmqMmFdnJurD7VMNtAdOkD+1+0l9/tElL1VqVZy83NoEktq
+	CgxTJAHFAK1FxFi91XgwUXPnLu4GT81od93nN7n9IAa0nILy7JSqnSnp1HO1vNCONmPRg5kdZoa
+	9i98a48XNZY0R5B09BTdQCSY0q+sZaJGM181b6srIUsuJRnVODDyHE2kH8NqY/AQLmXu/u1Q9nI
+	4WUw+jW1lop58RqKx6MmMDgpNNPakIH6zm8JVSiPLDTWvuU1EystoH0L6v6O+SQ4noyj/3jBIij
+	ZTDsq+F5GJnsSiNDkNPcm8GtemRyaCHVgxC251cH1h7TdaKuEnSEBU40EE0PLe+RRExYFqVeZ93
+	3J3zoa8zmEv4GEroP6/3USeVMJOxmie6lD1kM8
+X-Received: by 2002:a17:90b:3f43:b0:3ad:43c1:7d41 with SMTP id 98e67ed59e1d1-3b1b0b531b1mr8635789a91.33.1794794602518;
+        Sun, 15 Nov 2026 18:03:22 -0800 (PST)
+X-Received: by 2002:a17:90b:3f43:b0:3ad:43c1:7d41 with SMTP id 98e67ed59e1d1-3b1b0b531b1mr8635767a91.33.1794794601836;
+        Sun, 15 Nov 2026 18:03:21 -0800 (PST)
+Received: from [10.133.33.28] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197d257a0sm19748961a91.11.2026.11.15.18.03.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 15 Nov 2026 18:03:21 -0800 (PST)
+Message-ID: <e0e07848-361d-4977-a585-a0810452e150@oss.qualcomm.com>
+Date: Mon, 16 Nov 2026 10:03:14 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,246 +116,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM
+ platforms
+To: Leo Yan <leo.yan@arm.com>, Rob Herring <robh@kernel.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+ <20261110154643.GA4159803-robh@kernel.org>
+ <20261111204322.GH9176@e132581.arm.com>
+Content-Language: en-US
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+In-Reply-To: <20261111204322.GH9176@e132581.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDAwNyBTYWx0ZWRfX+WvCRdccCcCa
+ aXXJ3cPcm2bRv5IGTCoNbx1s+SNtTFVYATu/iQEKu/zHIkf9wQ4qZVLpsqDy552K5hgdjYSSShQ
+ AfgpWmSHNurOcPwKI1OxQ2aohpwKoCQgt5ZbSG/Cc4S5ArZ9l2l59vp+4dUGQ0DU6/VzWmFtXld
+ FowyyjCYHUBBTSTmRWCUPMkt7eQNnsCP03GHBaMxQhM9HkOnhVD98cQE1Tw2WjCRKOT/8DoDF4A
+ UKI5TXHN1o5x+a7Qv3hPgZt4H3jFofyT/KeZtcrokyzh3c5dJJK4YDS4KsL2xGg/2oty2wPegxS
+ akzTE5NGnpOLFRD2uDOrc42CMa6TBHOsvf/l3LYBjyBrScxJhqSuCl39YIi9ab0tGWOo3yc9UNg
+ qkRKiPXn+XpDauhe4XxtgEw2vObVClQnHy7LQpe/RGLwY/CZhcclWc8WeyH1CykpjtBmhyw/LpA
+ fUgNT5I3S6QQvucSKDw==
+X-Authority-Analysis: v=2.4 cv=av0nmiZV c=1 sm=1 tr=0 ts=6afa646b cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=9Yhdbyfe_LZq1WiuscQA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-GUID: oehIPyO5ZfxQGemo-bvoWBcOCwZBc-hR
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDAwNyBTYWx0ZWRfX88G48bSWZGO6
+ lO37dis8qC/yOuluTOsM7JE6CV420G6wnOPu7cZzSQj2bG5tbiG/v+phk4cRR5hLnC/05p/YDmy
+ p9fKzR/Uhfwp/6EvvZ4kfPn3qJnTwkM=
+X-Proofpoint-ORIG-GUID: oehIPyO5ZfxQGemo-bvoWBcOCwZBc-hR
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-16_01,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 clxscore=1015 spamscore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160007
 
-Thank you for your contribution! Sashiko AI review found 5 potential
-issue(s) to consider.
 
-Critical: 0 · High: 0 · Medium: 3 · Low: 2
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+On 11/12/2026 4:43 AM, Leo Yan wrote:
+> On Tue, Nov 10, 2026 at 09:46:43AM -0600, Rob Herring wrote:
+>> On Tue, Nov 10, 2026 at 09:21:13AM +0800, Jie Gan wrote:
+>>> The CoreSight TNOC (Trace Network-On-Chip) binding so far only allowed the
+>>> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
+>>> forces the device onto the AMBA bus, where the driver must read the
+>>> peripheral ID from the device registers during probe. On several QCOM
+>>> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
+>>> never probes and its trace path is unavailable.
+>>
+>> But it works fine on some platforms? We have a property to override the
+>> peripheral-ID which would solve your issue. That would be much simpler
+>> and avoid the ABI break on any of the working platforms.
+> 
+> Looking back at the earlier discussion [1], Jie in v2 already proposed
+> "arm,primecell-periphid". Questions about AMBA IDs and ATID handling got
+> mixed together. The series later moved towards platform-device probing,
+> then became current shape.
+> 
+> Hope we make the right decision on arm,primecell-periphid this time.
+> 
+> Anyway, I'd like to apologise to Jie for all the back and forth.
+> 
 
-- [Medium] Both the commit message and the new comment in
-  include/net/qrtr.h say that 'an endpoint using v2 can never claim an…
-- [Medium] MHI QRTR now registers a fixed nid, 0x10000 +
-  mhi_cntrl->index, and this id is reused.
-- [Medium] net: qrtr: missing sysfs ABI for host node ID in
-  qcom_mhi_qrtr_probe()
-- [Low] The comment in include/net/qrtr.h says 'A collision is caught
-  when the id is added to the node lookup table.' One case is not…
-- [Low] The host nid is now in qrtr_nodes from the moment
-  qrtr_endpoint_register() runs.
+Never mind.
 
---
+Hi Suzuki, Rob,
 
-net: qrtr: Assign unique node id for MHI endpoints
+The "arm,primecell-periphid" override is the simplest fix for the issue. 
+Which fix are your preferring for the issue? If we want fix it with DT 
+property, we can revert the patch series and I will post a new one to 
+fix it.
 
-This adds include/net/qrtr.h. The header defines QRTR_NODE_HOST_BASE
-(0x10000) and a qrtr_host_node_id() helper that returns the base plus a
-per-device index. The MHI QRTR driver now registers its endpoint with
-qrtr_host_node_id(mhi_cntrl->index) instead of QRTR_EP_NID_AUTO.
+As Leo mentioned, the AMBA probe is not affecting by the series.
 
-> diff --git a/include/net/qrtr.h b/include/net/qrtr.h
-> new file mode 100644
-> index 0000000000000..e2a8d93564b58
-> --- /dev/null
-> +++ b/include/net/qrtr.h
-> @@ -0,0 +1,27 @@
+Thanks,
+Jie
 
-[ ... ]
+> Thanks,
+> Leo
+> 
+> [1] https://lore.kernel.org/linux-arm-kernel/9432df20-08bf-4134-b4b9-e6b5d618af81@oss.qualcomm.com/
 
-> +/*
-> + * Base for the node ids the host assigns to endpoints. It sits just above the
-> + * 16-bit range a v2 header can express, so a v2 endpoint can never claim an id
-> + * in it. A v1 endpoint can claim any 32-bit id, so a collision is possible,
-> + * but unlikely as the firmware assigned node ids are either smaller than this
-> + * base or in the range of 0x08e5ff85. A collision is caught when the id is
-> + * added to the node lookup table.
-> + */
-> +#define QRTR_NODE_HOST_BASE 0x10000u
-
-[Severity: Medium]
-Is it accurate that a v2 endpoint can never claim an id in this range?
-The commit message makes the same claims:
-
-  "The base is chosen just above the 16-bit range a v2 header can
-  express, so an endpoint using v2 can never claim an id in the host
-  range."
-
-  "Such a collision is caught when the id is added to the node lookup
-  table."
-
-In qrtr_endpoint_post(), the NEW_SERVER handler reads a 32-bit node id
-from the payload, whatever the header version:
-
-net/qrtr/af_qrtr.c:qrtr_endpoint_post() {
-    ...
-	if (cb->type == QRTR_TYPE_NEW_SERVER) {
-		...
-		nid = le32_to_cpu(pkt->server.node);
-
-		if (nid != READ_ONCE(node->ep_nid)) {
-			rc = qrtr_node_assign(node, nid);
-    ...
-}
-
-That means a v2 endpoint can insert an id such as 0x10001 into
-qrtr_nodes as a bridged key. A v1 endpoint can do the same through
-src_node_id. __qrtr_node_assign() does not check the id against
-QRTR_NODE_HOST_BASE.
-
-The only collision handling is radix_tree_insert() returning -EEXIST,
-so whoever claims the id first keeps it:
-
-	rc = radix_tree_insert(&qrtr_nodes, nid, node);
-	if (rc)
-		return rc;
-
-The host ids are easy to predict. They are 0x10000 plus the lowest free
-IDA index, and they stay the same across MHI recovery. Another remote
-endpoint could claim 0x10000 + N before MHI controller N registers, or
-while it is between remove and re-probe. That endpoint could be another
-MHI card's firmware, an SMD/rpmsg remoteproc, or a /dev/qrtr-tun user.
-
-In that case, wouldn't
-qcom_mhi_qrtr_probe()->qrtr_endpoint_register()->qrtr_node_assign()
-get -EEXIST and abort the probe, so the device's QRTR link never comes
-up? With QRTR_EP_NID_AUTO, registration could not fail on an id
-conflict.
-
-[Severity: Low]
-One collision is not caught the way this comment describes: a
-remote-claimed id that equals the endpoint's own host nid.
-__qrtr_node_assign() returns success without an error in that case:
-
-	if (radix_tree_lookup(&qrtr_nodes, nid) == node)
-		return 0;
-
-Suppose the remote behind MHI endpoint N sends a v1 src_node_id of
-0x10000 + N (which differs from ep_nid), or a NEW_SERVER with
-server.node = 0x10000 + N. The assign succeeds silently. The source id
-is not rewritten either, because qrtr_endpoint_post() only rewrites
-ep_nid:
-
-	if (cb->src_node == READ_ONCE(node->ep_nid))
-		cb->src_node = READ_ONCE(node->nid);
-
-A local reply to 0x10000 + N is then rewritten in qrtr_node_enqueue():
-
-		dst_node = to->sq_node;
-		if (dst_node == READ_ONCE(node->nid))
-			dst_node = READ_ONCE(node->ep_nid);
-
-Wouldn't that send the reply to the endpoint's own node rather than the
-bridged node that sent the packet? It would also merge the bridged
-node's services with the endpoint's own.
-
-[ ... ]
-
-> diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
-> index 1040c3c8cfd68..e9377f818b4dd 100644
-> --- a/net/qrtr/mhi.c
-> +++ b/net/qrtr/mhi.c
-
-[ ... ]
-
-> @@ -127,7 +128,8 @@ static int qcom_mhi_qrtr_probe(struct mhi_device *mhi_dev,
->  	if (rc)
->  		return rc;
->  
-> -	rc = qrtr_endpoint_register(&qdev->ep, QRTR_EP_NID_AUTO);
-> +	rc = qrtr_endpoint_register(&qdev->ep,
-> +				    qrtr_host_node_id(mhi_dev->mhi_cntrl->index));
-
-[Severity: Medium]
-This changes the node id that userspace sees for every MHI QRTR
-endpoint. Before, the remote's own id was what ended up in qrtr_nodes
-and in the NEW_SERVER notifications delivered to AF_QIPCRTR sockets.
-Now a host nid is passed to qrtr_endpoint_register(), and
-qrtr_endpoint_post() and qrtr_node_rewrite_ctrl() rewrite the
-firmware-advertised id (node->ep_nid) to node->nid. Lookups therefore
-report 0x10000 + mhi_cntrl->index.
-
-How is a userspace client supposed to map an MHI device to its QRTR
-node after this? As I understand it, on QAIC the firmware nid matches
-the serial number exposed through sysfs and the QAIC control channel,
-so a client could correlate the two. The lookup notifications only
-carry service, instance, node and port. They have no device
-identifier.
-
-In-kernel users such as ath11k and ath12k can call
-qrtr_host_node_id() on their own mhi_cntrl->index. However,
-include/net/qrtr.h is not UAPI. The only option left for userspace
-seems to be parsing the mhiN controller name and hardcoding
-QRTR_NODE_HOST_BASE. That would turn an internal constant into ABI
-without documenting it.
-
-My understanding from earlier review of this series was that the
-assigned node id would be exposed through a sysfs attribute. I can't
-find that anywhere in v6. Was it dropped on purpose, or is it planned
-for a follow-up? Since this is the patch that changes the ids
-userspace sees, shouldn't the attribute land together with it?
-
-[Severity: Medium]
-Can a re-probe fail here while the previous qrtr_node is still
-referenced?
-
-This nid is now fixed and gets reused. mhi_unregister_controller()
-frees the IDA index, and mhi_register_controller() gets the same value
-back from ida_alloc(). MHI SYS_ERR recovery or a power cycle also
-recreates the devices on the same controller.
-
-qrtr_endpoint_register() now inserts the nid into qrtr_nodes at
-registration time and returns -EEXIST if the slot is taken. However,
-qrtr_endpoint_unregister() only drops its own reference:
-
-	qrtr_node_release(node);
-	ep->node = NULL;
-
-The radix tree slots are removed only in __qrtr_node_release(), on the
-final kref put:
-
-	radix_tree_for_each_slot(slot, &qrtr_nodes, &iter, 0) {
-		if (*slot == node)
-			radix_tree_iter_delete(&qrtr_nodes, &iter, slot);
-	}
-
-qrtr_sendmsg() takes a node reference with qrtr_node_lookup() and holds
-it until qrtr_node_release(). In between it calls
-sock_alloc_send_skb(), which can block, and memcpy_from_msg(), which
-can fault on user memory. qrtr_send_resume_tx() holds a reference in a
-similar way.
-
-qrtr_create() has no capability check, so an unprivileged user can
-sendmsg() to the predictable host nid with a slow-faulting buffer, for
-example a FUSE-backed mapping. That keeps the old node referenced.
-
-If the device is re-probed during that window, wouldn't
-radix_tree_insert() return -EEXIST and make qcom_mhi_qrtr_probe() fail?
-The QRTR link would then stay down until the next probe. With
-QRTR_EP_NID_AUTO, registration always succeeded and later packets
-retried the assignment.
-
-[Severity: Low]
-Does passing a concrete nid here open a window where DATA packets go
-out with a broadcast destination node id?
-
-The node can be looked up by 0x10000 + index as soon as
-qrtr_endpoint_register() runs. node->ep_nid stays QRTR_EP_NID_AUTO
-(0xFFFFFFFF) until qrtr_endpoint_post() receives the first packet.
-qrtr_hello_work() sends HELLO right away, and hello_sent is set once
-xmit succeeds, whether or not the remote has replied.
-
-Consider a qrtr_sendmsg() of a DATA packet to (0x10000 + index, port)
-in that window. It passes the lookup and the hello_sent check, and then
-qrtr_node_enqueue() does:
-
-		dst_node = to->sq_node;
-		if (dst_node == READ_ONCE(node->nid))
-			dst_node = READ_ONCE(node->ep_nid);
-		hdr->dst_node_id = cpu_to_le32(dst_node);
-
-Wouldn't that put dst_node_id = 0xFFFFFFFF (QRTR_NODE_BCAST) in a
-unicast DATA header sent to the firmware? With QRTR_EP_NID_AUTO, a node
-only became findable in the same critical section that set ep_nid, so
-this state could not occur.
-
->  	if (rc)
->  		goto err_unprepare;
->
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261114-qrtr-multi-ep-v6-0-2eb9885659e2%40oss.qualcomm.com
