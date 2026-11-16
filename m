@@ -1,63 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794823494;
-	b=mhxqlzs2PU6912vfBXd5YYH3e520F79yWycXw9Cb6eoveXzqU/CzVWd/CSfbXr2FB85P
-	 iGx6RncqsiJUF3UqOcM/95non3677d0GdhmWmER5VaPVD5IWjGyY/Bgj5fxoJ47XT5GjA
-	 lG+xaak0y+L+RlkHLYaleaTrNTeU68Q90Qw9RwhVkrjJdvo2Xejznv6slBDlS4dXDFpH5
-	 OaYa2eyCoVRx6IAGMHL05uPoKztPkeHumMAoFF7xHTNNPO2EdkRQrY7mrIniDiaf51v67
-	 Z5ryvc40arCqwixk1fbrS12DOr4JtkV2SruWChddlFkAdR7DfQjxB3jcNRgC3QJozWA==
+	t=1794823527;
+	b=VkmTXc3h2cQqj8wgLRizSuili3zPh3z9vgAoiMAfjpksagIrVZHLGsfqtN+Ld0h/HsHE
+	 N+d5lYPfZKCHvLl6ltNuNYWj+mFyguhusqSpsOmDDHmq9qc4re6uwXt7Rsb/De5PBYCLU
+	 Qq7OoOqRfiS1TpZGrEZYlfkZ1x6QkuJfpUfUzKKvgEA3Oax0B15n9xDY2wYZoussbMyV2
+	 I/9ybFpSGAQmt0y0brOJXwgZgdZAKN6o55/aJLWWPRUrNjXibYiQEWD7HzCFWzHUqkA01
+	 PkAZh7bn0Aw1RdnFfBI3B1W6eQUGDuXdNB3QR2CWit1zLxL7N13PG23LYALQO7bjv6w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794823494;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=nWbqV/2GgvrCv1bHqZ+LVKd/sYtL0RqidrX2JSrXj94=;
-	b=oAawlL0aX7kcQhUjECZWSae9FdgA5m6gR06YuOXNcuvT+RhBTXrX4g12kD2snm8ljJqZ
-	 cVy6VlATuvW8lYbOODlQLSqNTnbpOFJJdXfwo1jraXLLhjMRd08g7JBA5er0jsSxp1bCd
-	 q7HR46ByyBd/+/OLR+932PBXS4Wu661e1Oqy/w8Cw40rFrtDPP8wDKlrj1LHKL7cLkklI
-	 89PwTXM0h49ctRPABtWFOGIt78QcLSOCb68lvYdx34M6g5D8O6E907Oq6pjTxeeRNCaeK
-	 no0mFNUDJBF2fyoWv8hPoufnYzdQBXzrVo7YjTiUOjQ843wFbpTFqK5OQyGNVOyT30w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794823527;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=jZJQub7WVBqa3DlcYaGmxuwOzFvkFwraR0ZB0NxDfgk=;
+	b=Vuhyg4kHFPv8b2WAZmGMHuPmTW7C9odDOolep4r611inh5MxM9SsjM3ZR+rr4uZVQ5zl
+	 moQBgOwNS11pplvDtYgXf7tdRpnjiv+OyQRGkjO8iwuisBqBglDkZuFbclgEtuG40BYo+
+	 GQS9TtbpL9XNSf/98e7bRI2Xxpy2XyJsuf4AvSWAQ0huhG7SnPku/VWXp2N1X7TCZ3XFc
+	 vThffMYSnCQOPTUTyvRkBHlGQKlchBHs0yJ/D/K0vN1eQYvXNYprtGZki5ytdtlVaApXq
+	 i5GlevVMws0M/xB86OOguFKeRWc5IjMBY/U795vRFZaAzFAemio54ALVSpvM7sU64Hw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SmGCEJUf;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XV1xRc9w;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E49F7606A32F;
-	Mon, 16 Nov 2026 10:04:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F336606A329;
+	Mon, 16 Nov 2026 10:05:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SmGCEJUf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E36011F000C5;
-	Mon, 16 Nov 2026 10:04:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XV1xRc9w
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29F4B1F000C4;
+	Mon, 16 Nov 2026 10:05:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794823493;
-	bh=nWbqV/2GgvrCv1bHqZ+LVKd/sYtL0RqidrX2JSrXj94=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=SmGCEJUfFitU+d0elvKkqVrw54HlBbcB29j78bP0CsUwsAbWRPluoXK30w+hamf1Z
-	 02iKBkoP1WFXp1jrAkpJzv4jLBiLuaArvLeoKfbySw2ab9PG6uFjPCwc5Rmhn21Eyq
-	 sDctT6Ct086veH0ivfHZSjabY7totIx8CNqZr/IXMR0SRWZex9lqDFQTfpqr3+Axkc
-	 7+fbaM/FJYJpvx5jH802a3RoZdU6SOU9+fQCDdVDmpn+ToYavESLd4RsuU8TdEkvpJ
-	 hgbB911M+qmNDO4+x4xpOHuPqEm+WgGRIP+zWX8Vpe42SfuMPTW1ZdUIZ7hHMpVPdk
-	 aquj6h/KexujQ==
-From: Srinivas Kandagatla <srini@kernel.org>
-To: Amol Maheshwari <amahesh@qti.qualcomm.com>, 
- Arnd Bergmann <arnd@arndb.de>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
- Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, Bharath Kumar <bkumar@qti.qualcomm.com>, 
- Chenna Kesava Raju <chennak@qti.qualcomm.com>, devicetree@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20261102-dup-sessions-v7-0-03f06c014e78@oss.qualcomm.com>
-References: <20261102-dup-sessions-v7-0-03f06c014e78@oss.qualcomm.com>
-Subject: Re: [PATCH v7 0/3] misc: fastrpc: fix ADSP duplicate session
- creation
-Message-Id: <179482349066.14925.18435181444934097603.b4-ty@kernel.org>
-Date: Mon, 16 Nov 2026 10:04:50 +0000
+	s=k20260515; t=1794823527;
+	bh=jZJQub7WVBqa3DlcYaGmxuwOzFvkFwraR0ZB0NxDfgk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XV1xRc9wRL6M/+N2/7RiJ3+T/xrZAp36SDEvKDQ0TG2oPFvZzzKkb/C0etl1x9zOf
+	 1nPF0fqGhWxMp7vw5GMfmsrMyIS02hvje7wAT2CdCG/q1dN9pQoq4QruhzXa155zfN
+	 8+iZAZuDxo+GNmZ5oVgG9PjFYSOyg5zHaHOhl6qGGPFCG26U0/mcjODIs+9g5RWdu1
+	 /Poj3CICZfP+2pFFwuyK3xMqEzpBTsYC8X6ZuJ9G3f85Xo+m58Ub8GjIxf3yWkmLTa
+	 cXkkArI3F+qkdP/LawmGytMpDwLDYrji7lHqP10KyRy5GIS/Wpq7+Dl5EqVPFicYn5
+	 wea1jY6tyFMsQ==
+Date: Mon, 16 Nov 2026 11:05:23 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Ajit Pandey <ajit.pandey@oss.qualcomm.com>, Imran Shaik <imran.shaik@oss.qualcomm.com>, 
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-pwm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/3] dt-bindings: pwm: qcom: add Shikra PWM controller
+Message-ID: <20261116-grumpy-pudu-of-reputation-9fb39e@quoll>
+References: <20261116-pwm_qcom_shikra-v1-0-67ee4553adc5@oss.qualcomm.com>
+ <20261116-pwm_qcom_shikra-v1-1-67ee4553adc5@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,36 +62,36 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261116-pwm_qcom_shikra-v1-1-67ee4553adc5@oss.qualcomm.com>
 
+On Mon, Nov 16, 2026 at 12:29:48PM +0530, Taniya Das wrote:
+> +patternProperties:
+> +  "^pwm@[0-9a-f]+$":
+> +    type: object
+> +    description: Per-frame PWM channel sub-node.
 
-On Mon, 02 Nov 2026 14:01:01 +0530, Vinayak Katoch wrote:
-> For ADSP, only a limited number of FastRPC context banks (CBs) are
-> available. Each CB supports a single session, which means only a few
-> processes can run on ADSP simultaneously. If all sessions are consumed
-> by fastrpc daemons, no session remains available when a user application
-> starts, causing the application to fail.
-> 
-> To work around this, some DT set:
->   qcom,nsessions = <5>;
-> which duplicated sessions inline during context bank initialisation.
-> Upstream feedback indicated that this policy does not belong in DT and
-> should be handled at the driver level instead.
-> 
-> [...]
+I don't get the need for the children. The the parent has pwm-cells, so
+it should be enough.
 
-Applied, thanks!
+> +
+> +    properties:
+> +      reg:
+> +        maxItems: 1
+> +        description: This frame's own absolute register range.
+> +
+> +      qcom,frame-index:
+> +        $ref: /schemas/types.yaml#/definitions/uint32
+> +        description:
+> +          Hardware frame index within the PWM block. It is the PWM index
+> +          used in the first cell of a consumer PWM specifier and selects
+> +          the corresponding enable bit in PWM_TOPCTL0.
 
-[1/3] misc: fastrpc: iterate CB nodes manually instead of of_platform_populate
-      commit: 81b3908cf7b9b19a8a47521a18281399c55db889
-[2/3] misc: fastrpc: move ADSP duplicate session creation to the driver
-      commit: 112dc91edd51e964351513d876c2e5a63cbe980a
-[3/3] dt-bindings: misc: qcom,fastrpc: deprecate qcom,nsessions
-      commit: 641dd7dd0f68dacb8e972aded126887c17d6cf37
+And this seems to be duplicating the value passed through phandle/pwm-cells.
+
+> +        maximum: 9
 
 Best regards,
--- 
-Srinivas Kandagatla <srini@kernel.org>
+Krzysztof
 
