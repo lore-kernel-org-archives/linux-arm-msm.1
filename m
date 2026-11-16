@@ -1,112 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794828893;
-	b=mApV0ImOVEezYBy6i2m5UvRMQVJXNYJjIBmwWr4SvVqcFxAd3spqdwGp2KpsX1BQpA21
-	 KR6qih3I8PU6hYMd4Adxiyn+M/gEt+3KMYSiYutt7BO8MutEEghSbb9QmKjTfz6MxJvyO
-	 mdnRqJlhUUMAOjlSEOH7YtpromVl2FEMAsLc2URsBiDVRQ+2iscBOOhqvJsTasgJzeMed
-	 BnsbvxeGhKAwtK4p5bDypzm9NqjbecWrSD2o4l4oFuqvvErUz9IsrQHIYsMTc5D3lp2lB
-	 zVL5y3DzZOvU+9G0jOlbWY3dhGFBEU2Xc5xTaUY/I9wcM+VWnSgW2whILEWQ4KsMLWA==
+	t=1794828899;
+	b=q9R2Qznl+26nUYeUYt9rEmtzTDAlRyAuDm/IZ41N4zuJuhwqqJG6X5acQhx8rZMQBdAp
+	 9Qhq8e1M529NPaBoNqNiHV+nuAgHuu3V2i2NDVUEV317piV1P/JwMf1YagcQ7KGCEh/eb
+	 hs7EqUUOB8D7UXrLuKQYgmPipqYXEhYn3TZiyfJ5wQcQeseNKncL+a9tp+S88Yfh4YwEv
+	 xxXLiG/rePqfH7ooY9EfHFF6kScAVb8Cxcp3sGqsLWbEDGZU2ckc9iJngioofmg3ai1eB
+	 eIYlpvaWjW8wk8RyoMnN9nWfkfbW/GAOYbTgneKoF82feGuhNrYp6FEIlLgXbQuMVGg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794828893;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794828899;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=gnF7nUiKa64cGMOPkzafRQ+xlLpRILvOHKnNIMFoPAk=;
-	b=U8T1cwxk/WYN7HTFrYQ3t1vpUhOKFViVmbv9X9VrTw7klmBPuzopPMSS6HUvOzcdDGiC
-	 9kkWCAcq1rPxxrfwJ42N4Lz0gxxI9mvndTMsfjZKGiJQ8psNYDfDsUzqPg2u9nvXSaHIi
-	 GQMK9pDieVXc/fQkQK8cpJwN4Aj+V+EdQztiv5ri/+8Xa/vUwSRS0rXUAjpM9oHirvGrm
-	 YPNpGqheGkBVVdhTbnlVF67vl04PTEZWAXKNXw4aiWc8oYSwURbrbJaoll7rHZLTTYuk6
-	 7+6xB0g4kwA8OT01rcutpYLNTBrNk5oUdf/eaiwQmBmg31WX8hRhZpW849oJfNxvIHQ==
+	bh=McYXQoZTRR4jelBpYJQLXbTjC1H0/Dkidy5fvWiEook=;
+	b=2E4bLuujnpREf08yO9nbDXRKxnWFQhmozSUqY1H0mEXn2kDkSm5ck4pWZ9hd9qhEBOVm
+	 nKChMTyXG+ave0mwoEgCJQvW2wE+tKf1twm7GggV3bD0w+06OadgjcAEF8aqvkG+8kQBn
+	 h90F6A1D0youf7rNpRKR66E5jdP8b3aEtB139JBL17IPySWEdw9RA/jwX3VnG1hjS3goq
+	 Hr0fJ+1ersC9PNSL+U/RCoRoMwcG7eAZEG97Dntj3+pk8k8gD+39PJM6djFyfTPqJ6tBN
+	 7kI8M51AaeumuzqzsuEF/urP19vF7n/VoG1ijDxXsM5p4BrVCnHailBKcK3uU3TqGGw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Z2QX+32Y;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="gQG/wRoO";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="IN5V/NE0";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DFN3rSib;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 178CF606A31C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 178CF606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A527606A323
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0A527606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Z2QX+32Y;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gQG/wRoO
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AGBLRbB3685284
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:51 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IN5V/NE0;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DFN3rSib
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AGBLNcD1603163
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gnF7nUiKa64cGMOPkzafRQ+xlLpRILvOHKnNIMFoPAk=; b=Z2QX+32Y9/8Ixjps
-	svM98CT7t5nw8ZiK3q6x0xO2l/iDYJE8ktbl2uCG5wSDEa0hn1SCcOup2LVclavB
-	nRO4Sb1fsmByzbRybkNmer9HNSC6zHPbGT98DvohpPOkmqsObH3+9gwt5mY39PUg
-	A3CimrVpsK7eq2F3Fd8T0rM1u+Y9QBzVVeOl1rkJemmGgqLyJebzqwNvUGXS8goI
-	lA0dYZ+RnWjNFa9+OXi8DNyJuiHuI3ghuiM3hkuJrE2jazUtCU36z7a+aqHlAwR/
-	x2sFX8a4O0GmQ0ROAlEeLquVxUnlHXcL8YElvcuHH2OygFEwJE193bXyTqLU4kOd
-	kkSR5w==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyy6ggenq-1
+	McYXQoZTRR4jelBpYJQLXbTjC1H0/Dkidy5fvWiEook=; b=IN5V/NE0Wj3QuPDj
+	2wklJ9MTqjKUKIQfxAPHx+aZ8hdGJPnCjQDj76XqLmYl3CRcdPczHp8BkZRJ9znA
+	PpfZKM2TiaPd2oV72D/leOkjhLT7to2LdutFNVU9GOaCgP4E9Tluj01dClvLz8MK
+	RKDgEpU2Sj+wCwJWM0m3AkkAdVKiwWdnYXb/IrP/ltDCD5bpdEtMwcWLof/8qmBS
+	lkgN3SGG35nitvS2hKgSZzyATH/oooTLgWv9E/4C+tm4tQ4uGPlI9esKX8GtSmgu
+	KtmAW4mxlPv81oxea0D+AaX+lILG3JJeCKxqODhZOAKHHUa2r7egQBxAZVPb/54R
+	u7BRkA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyrmc1xcj-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:50 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3b10afdf947so4218571a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 03:34:50 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 11:34:58 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3b08aee6b3eso3097027a91.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 03:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794828890; x=1795433690; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794828897; x=1795433697; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gnF7nUiKa64cGMOPkzafRQ+xlLpRILvOHKnNIMFoPAk=;
-        b=gQG/wRoOhlna4BgUQLnLC3GW6qAdmCaxtKJ5mHeqiYMj1B2uBRmJ2SrfuKNCMHYE/W
-         72mpiI0lMujz3FlA+rFzTbpM54vXltVq3yElt6eoEpXuBIm+KCPxAEXuDDJ6gQRiJ+oe
-         KGB3P01asLfDqxW1PVOBhZfLWAIB1opKTmoQ7NWg6MCgoUSAMv0J9pmHrl6/GIE7Vj40
-         MDTAd3y5NTA0qzH1wHp5a09MIrbrkcK+U+E32Yf8AfVQ7+DGhyY18CBQR2v1mHyeusvU
-         q6YoEvYjPmif8cQEBeh9aC8t4MLudkwKF8Qr8Jlqwn2s1hghBVPx/XkNL1Gj8EIydMbS
-         A/JQ==
+        bh=McYXQoZTRR4jelBpYJQLXbTjC1H0/Dkidy5fvWiEook=;
+        b=DFN3rSib92pXssvQE6ZXbUb8GlqOsYAU/Zf8QCzsB7fiabO738bWO7UR3QZTiFYu5+
+         OSFWtSjYtbwATW4YU6xoOZNfmZ/M8f9xiNTh8jJY64DwDLwVyHS7SXAP3qhxPaIxtbZJ
+         NAYsciplDSIkz7xYkzzi1qdWpf/SnBuv8sRJLYUQ+C9dTosKqyi+/EDyITFW14mlVYxq
+         V5exd8Rs4UY2H65ycAVmhHAuqwOc7nZtQ+d0hU+qcx7A5Ury9kPn+eS1FXdNlgndQQRN
+         J3c/mhmqPH3rMsK9lqDn4CFyIqKdN7OgvfH/SEItAiURp2YIUUXGEUvCxul8XgSdZOmn
+         DokQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794828890; x=1795433690;
+        d=1e100.net; s=20260707; t=1794828897; x=1795433697;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gnF7nUiKa64cGMOPkzafRQ+xlLpRILvOHKnNIMFoPAk=;
-        b=rVw5Wk2t8J4UWrqGNedLX/aQPAqbgp8Z+JFmzSoLkvNu+HeyKxz28E880LUlwm9XkG
-         WmKDR1g6GN3igmPqhccvUe664ZffXeQzncwlCX4sNe9Wv3J28kSzDOndk4rCrFSfOUqO
-         M8YObwMXcLs9mM5AnkfjWYBYsUg66F65uvzLjylg9eEpZ+HG2iyFuqL0RD0t0qp1l5AD
-         zx25LfQz4b3ur5yyweZ5ndX5Kyvg7bQfk8k0ZrzpgZXWoFYQQOzmxVbkuZTkUFeC2g7h
-         PQgcsF+lcp86AiGTtcNHP8HroJE9CYsyQDXW76BXly7wA02TBZsGTshJVjNs/kx6y6BB
-         qJ1g==
-X-Forwarded-Encrypted: i=1; AL+hErF408F/QrALbZmPu5Cab1+B/cbwL79M7uxrTS8c4Ae4Z35Qi3jNnox1O7nAXgbLWTzDTtN2YGKNTu6gy5+5@vger.kernel.org
-X-Gm-Message-State: APuU4Z+NQ7Ejn9yg0Qp25t2z7ia3tSCKo/kPzL4y4OSBRW+MIb8dZ2Jx
-	zQQ0XBciIizDnc7IiYKWFSeeqptam2sWl3e6fPrGTku3cM4rSlVSySQ1NnOTLyuKMdOzontUCLZ
-	sWg+V9rWlwKtwgcO0qZDrpGuLc6ao8rEWUkj4wlr+ztBOF1FcYXhKCJYXiJNGHxh1bdp0
-X-Gm-Gg: AZFdTZfsNAgF57A9AScXFWrOArYbcjZYleYlY2fG2A4F8DZ7HF7t0D42s+O+HBIYg63
-	jI5g6aOqdLcLRdASdenD+BSEDTm+cJObQ6fSBrK2K79LGZ2bB4f2kdErQQ/CcVB/fLJK8zeFLoD
-	Md/jOukje/PJXt0yM8b4BHX6r2/kAHA/NnpKFma5lEG2cXQ6MYE4T2Tq6265CmLjCOWEXP7TZSr
-	YxIWPV+vegRgHBzyTKoPenxF+kjea/DBhXxFWA/PlbkZ7xftxg9FFNxRPTyP47HKD+3PucD1Eq4
-	zVjYZLzAtIeIRsNAAeXpi561gjTO0IYhlrbu/Hx6kGZ32P4HrXXpwmiBHQjJRBBxmS6ZgJlPs7P
-	kuT0TjKHDXYZSCjhoZ/Pw0lT8MZFVDL9Urlik9FAgDc7xGHP/2WWQNm3GjbWO1Prwz1geWTWGYt
-	F1
-X-Received: by 2002:a17:90b:184b:b0:3ac:9ed8:f301 with SMTP id 98e67ed59e1d1-3b1b0ccf45cmr6831670a91.30.1794828889778;
-        Mon, 16 Nov 2026 03:34:49 -0800 (PST)
-X-Received: by 2002:a17:90b:184b:b0:3ac:9ed8:f301 with SMTP id 98e67ed59e1d1-3b1b0ccf45cmr6831633a91.30.1794828889253;
-        Mon, 16 Nov 2026 03:34:49 -0800 (PST)
+        bh=McYXQoZTRR4jelBpYJQLXbTjC1H0/Dkidy5fvWiEook=;
+        b=QNj3HpaOszOdyu8y4Hfe/kxA/y/gHB6NYJhVmHLKs2Sru3bv3nCXYSWroyRU8R8NMm
+         Z5I/XjG3FFACszp88MstJWVY4cl+pSaZ51ghOSPNEO1YLd86sSjbZE6RcRDsEJeN/8R/
+         KXI9EusdzwrMGJtyUXHJRLhOPW6Xm7ty7IyMHp666Ggk7wXioDO8qzUzXX2PtVkqhJay
+         p7zOTELBvv2LNytL5foVOtApWg9FQi84N05MJILDmGiFFgl+Ojf7H5jXoSjDPqyaKOjh
+         AWdD3+fwteApZzzXubXMIaneBVXntS5nRp5hSSF24L6AjQ/W2LZdNUYF0LTwrYVUVXl5
+         LGCA==
+X-Forwarded-Encrypted: i=1; AL+hErGfPEi1P82OCuRwIvjSew+d647lLtN4VGK9ZjcB59fxV/uwT5yAbcuUoP7GkgG8WgjYCjCl7i+tAj1vFhhm@vger.kernel.org
+X-Gm-Message-State: APuU4Z8Eo/iPMPVfxta+UDaEFDFS1zhqt+m6AjxLfcuvBUYqXrop9Ntn
+	I1uvW+syn01m5WCVTaP0lOE+FvygOakatbVrhpDJfXzMyfiIszhfmlx4T0mXbiddyXH60nPHASD
+	PaW7EhShtqxkw0noC5ocF08sm7IPmynC0QmFCbYBWN0KTyQXP+B97HRSpOYTG7lra+KVL
+X-Gm-Gg: AZFdTZcRVbMtHgxinp8kKdRMA5aX2hy/1igiw2Izw2NbgzRI2LJUbdGxsVBmZzbSz/C
+	x+RTuYUHuNtqlAZ205ps8H1/EwkVNUzMdwqNoWx8JHBPr4kLfetkUtwxstawKkwDnX0VH3dyN4C
+	u1CuwehcSlR6Mi57CH+8uQ0pXx5sb3a5J0Wahu0wl2DX+XIyfhxD+y5e67rUew6nVETUmHs4Nu5
+	n/Nyqz5e9hOvUX0+UvZjMt4eQOntZCYV6zdycSkpbXJSMqMs+8sNZLzPQQlKG/MnOG0h82eS10d
+	iQEahpakWBS83ivXFThVe/G0iKpY2KfJfuWlsicdcJe6/qfOLxIFiKfXwkYfKij4yCXoTOxP5+p
+	ebkroDaOYxR1MfcNc3hSnd7DVZS3pCoUCO1+vk7omcclQsU4XanaOOOalWQXsUdq8ZAHiptq4TO
+	ON
+X-Received: by 2002:a17:90b:3985:b0:3ab:b39f:41c8 with SMTP id 98e67ed59e1d1-3b1b0b53626mr9701289a91.46.1794828897305;
+        Mon, 16 Nov 2026 03:34:57 -0800 (PST)
+X-Received: by 2002:a17:90b:3985:b0:3ab:b39f:41c8 with SMTP id 98e67ed59e1d1-3b1b0b53626mr9701256a91.46.1794828896692;
+        Mon, 16 Nov 2026 03:34:56 -0800 (PST)
 Received: from hu-naala-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197d27d26sm21000719a91.13.2026.11.16.03.34.42
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b197d27d26sm21000719a91.13.2026.11.16.03.34.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 03:34:48 -0800 (PST)
+        Mon, 16 Nov 2026 03:34:56 -0800 (PST)
 From: Nabige Aala <nabige.aala@oss.qualcomm.com>
-Date: Mon, 16 Nov 2026 17:04:04 +0530
-Subject: [PATCH v2 1/4] dt-bindings: display: bridge: Add Parade PS195
+Date: Mon, 16 Nov 2026 17:04:05 +0530
+Subject: [PATCH v2 2/4] drm/bridge: Add a driver for the Parade PS195
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-mahua-hdmi-v2-1-0b5af6bf9e70@oss.qualcomm.com>
+Message-Id: <20261116-mahua-hdmi-v2-2-0b5af6bf9e70@oss.qualcomm.com>
 References: <20261116-mahua-hdmi-v2-0-0b5af6bf9e70@oss.qualcomm.com>
 In-Reply-To: <20261116-mahua-hdmi-v2-0-0b5af6bf9e70@oss.qualcomm.com>
 To: Mahadevan P <mahadevan.p@oss.qualcomm.com>,
@@ -142,188 +142,316 @@ Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         Nabige Aala <nabige.aala@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev-d5d98
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794828874; l=4283;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794828874; l=8574;
  i=nabige.aala@oss.qualcomm.com; s=20260520; h=from:subject:message-id;
- bh=XqWVS/G6kyEGs7FM3vsOHGEHaxWN/UrO6qm6Co6aCVI=;
- b=WtBTscvQ0DovqRE3dOcQSKtm7PgukaEYc6NSnRNGQ6EeL0dXOyYpjQV5IcW+0oPs2xVZ5B56F
- oeXiTxWZuOTB1Znac4fzZm5gCusQZAZeTeJaJSrWwzttE7+xenJOj3B
+ bh=u3JvQjryjspDemBxOKTLJflG54nVSgowfdSpO4RkoPI=;
+ b=zJnv6dFaTzzCbDSBBuuxaPG86dZSn7btDV4cHf8Ks9tuuV51Ws3cNSur5+E8/+4E5dWepXDcE
+ 3FUpOXAtryIB+RL9U9isfn8TkGobkFjTzPxEucJLf9XRxexTKdxirrE
 X-Developer-Key: i=nabige.aala@oss.qualcomm.com; a=ed25519;
  pk=PYHJom8sPos1IGkrbCCsWiE7XTBQrQZd9jzAo051tgw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA0NSBTYWx0ZWRfX3t43laIEpoMX
- xGNsqKNEwufjNx7/iyDLdrxiIy+TUnSe9usMUSfJb41sQGhulphVDjotQmJKZrAPqO66+ie5bpt
- KovCbYZN0NEKczjEZB6R0vwzqqWRD4sopV2V62NwiCBMq+Kgi4inddFmR7QBPCRysVXs3WaHdRc
- G2mDkzKBp7P5tpgWXHsFdqmcvLsb6lnRyWVZKuxLhALUCjsM+gpsZhGgNNUVNd45bscDIrffNlA
- nggdR1Hm8BIjyz29+LFhq8uGz15O1S6CN9CwlcQriSJ8o3c0bPe7dlsiG6loOBoLVyHzZBT2cNb
- ZSvVdeGmaTVMeJNt3l8xYPl7UcaGODFFfzJ3mOWKRq8hc01YZOsqbdxHCnKCvI2HXj0Jsv89cgE
- kDhH1V18y4BystSrRhxGykuTBD9/WDIK8lppqfzfXdnGFHjQkGqD23fHC2v8fAvfTeybSox5tq9
- 6yKHzUhr7uNxyjtKaiQ==
-X-Proofpoint-GUID: XIylX_wxxGGuNQVSx2R1ZxchSdQKprWx
-X-Proofpoint-ORIG-GUID: XIylX_wxxGGuNQVSx2R1ZxchSdQKprWx
-X-Authority-Analysis: v=2.4 cv=D/DSufRj c=1 sm=1 tr=0 ts=6afaea5a cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA0NSBTYWx0ZWRfX2Il+n6CATd9s
+ ycPdTOhyJO394Ag7xPtLUUporkN7cFuhjDhyi2OBSxyQevs6c0HOsdX96kfSqkmNFhlFxnjyrBJ
+ z60MmXaK1CERu2TX66Id6p0WhLyyTKw=
+X-Authority-Analysis: v=2.4 cv=C9N8WgP+ c=1 sm=1 tr=0 ts=6afaea62 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=e5mUnYsNAAAA:8 a=cm27Pg_UAAAA:8
- a=9e7qC0O8hlTshWeg44oA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
- a=sptkURWiP4Gy88Gu7hUp:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA0NSBTYWx0ZWRfX7VYoPmG35jj4
- Twn1MyjpWccLNWtjLcMJz+AcP8DTj0DRnXmzJiug1/4ohhm+Au6GgLH2BJDnBA/hwRt+AmAnZ3F
- xcVTLceywi+y9TPRmHr/DcYmlbtpX1Y=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=e5mUnYsNAAAA:8 a=cm27Pg_UAAAA:8 a=_PMkZo2J1_9kd9osg98A:9
+ a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-ORIG-GUID: 0ghljuuBnIc2xsyhTwOgJ4ancqF1AIvv
+X-Proofpoint-GUID: 0ghljuuBnIc2xsyhTwOgJ4ancqF1AIvv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA0NSBTYWx0ZWRfX9qiGYUPCwvSP
+ cXpD03cDV+QxaP8EEOkuOl4g+I9CQI6k9k5DxM9jRV1z7s4zMlLzsLNpFhXgBDENt6+rUtqnGH4
+ 3BEMWKyRjYeHFVzSnreLhITwoFZxU0vKxTcXOB5D0dMeTnseEcujhbZAv52bajUdEkiNhM2QF/I
+ +roeEn0D4dkPpYZMSQ7qYJ19fIEtEwfHaaGf/rf4ozsBwfcHVE08aufuXnmMTiRJjr44Uox7pDs
+ 1lDukaSKp5UpNSOqpBXAzO9VwQZsxQY4aVRmqezR/t7iVbm36CmcFZUNCNJ9DOhlYnqMOuO2zXr
+ Hs0eKkXM2rkounblysm2dmvFsULfZFdFR/ptyW5RdTklj/OeKy/W3UrmjmDWOT/DARCz4ZUXWy3
+ GtRUOOQQYhoOqtezaDAwhXV9oLph/2Yo64u5XnxxGgs9ZE5DVw7p/eGM8g0/qA42RzJm9aBayXG
+ bZd9grIi107vhONYvug==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-16_04,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- clxscore=1015 adultscore=0 malwarescore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160045
+ malwarescore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 spamscore=0 adultscore=0 bulkscore=0 phishscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611160045
 
 From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 
-Add bindings for the Parade PS195 DisplayPort to HDMI bridge, describing
-its power supplies, optional reset GPIO and display ports.
+The Parade PS195 is a DisplayPort to HDMI converter that runs firmware
+from external SPI flash. Add an I2C bridge driver to sequence its power
+supplies and optional reset GPIO.
+
+Keep the bridge powered for AUX and HPD handling between modesets. Use
+late suspend and early resume to order power transitions around the
+display controller.
 
 Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
 ---
- .../bindings/display/bridge/parade,ps195.yaml      | 111 +++++++++++++++++++++
- MAINTAINERS                                        |   6 ++
- 2 files changed, 117 insertions(+)
+ MAINTAINERS                           |   1 +
+ drivers/gpu/drm/bridge/Kconfig        |  10 ++
+ drivers/gpu/drm/bridge/Makefile       |   1 +
+ drivers/gpu/drm/bridge/parade-ps195.c | 204 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 216 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml b/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
-new file mode 100644
-index 000000000000..b7484caf93b6
---- /dev/null
-+++ b/Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
-@@ -0,0 +1,111 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/display/bridge/parade,ps195.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Parade PS195 DisplayPort to HDMI protocol converter
-+
-+maintainers:
-+  - Mahadevan P <mahadevan.p@oss.qualcomm.com>
-+
-+description:
-+  The PS195 converts DisplayPort input to HDMI output. Firmware loaded from
-+  an external SPI flash handles link training, EDID access and hotplug
-+  detection. An I2C control interface provides access to the device registers.
-+  Reset may be controlled by a GPIO or released by a board resistor-capacitor
-+  network.
-+
-+properties:
-+  compatible:
-+    const: parade,ps195
-+
-+  reg:
-+    description:
-+      I2C address, selected by GPIO11. The address is 0x08 when GPIO11 is low
-+      and 0x48 when it is high.
-+    items:
-+      - enum: [0x08, 0x48]
-+
-+  vdd09-supply:
-+    description: 0.95 V core and analog supply.
-+
-+  vdd12-supply:
-+    description: 1.2 V I/O supply.
-+
-+  vdd33-supply:
-+    description: 3.3 V supply.
-+
-+  reset-gpios:
-+    maxItems: 1
-+    description: GPIO connected to the active-low RESETB input.
-+
-+  ports:
-+    $ref: /schemas/graph.yaml#/properties/ports
-+    unevaluatedProperties: false
-+
-+    properties:
-+      port@0:
-+        $ref: /schemas/graph.yaml#/properties/port
-+        unevaluatedProperties: false
-+        description: DisplayPort input.
-+
-+      port@1:
-+        $ref: /schemas/graph.yaml#/properties/port
-+        unevaluatedProperties: false
-+        description: HDMI output.
-+
-+    required:
-+      - port@0
-+      - port@1
-+
-+required:
-+  - compatible
-+  - reg
-+  - vdd09-supply
-+  - vdd12-supply
-+  - vdd33-supply
-+  - ports
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/gpio/gpio.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        hdmi-bridge@8 {
-+            compatible = "parade,ps195";
-+            reg = <0x08>;
-+
-+            vdd09-supply = <&vreg_hdmi_0p95>;
-+            vdd12-supply = <&vreg_hdmi_1p2>;
-+            vdd33-supply = <&vreg_hdmi_3p3>;
-+
-+            reset-gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
-+
-+            ports {
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+                port@0 {
-+                    reg = <0>;
-+
-+                    bridge_in: endpoint {
-+                        remote-endpoint = <&dp_out>;
-+                    };
-+                };
-+
-+                port@1 {
-+                    reg = <1>;
-+
-+                    bridge_out: endpoint {
-+                        remote-endpoint = <&hdmi_connector_in>;
-+                    };
-+                };
-+            };
-+        };
-+    };
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 46c416cadacd..9e1db88ec1c9 100644
+index 9e1db88ec1c9..cd83b47d9f85 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -8581,6 +8581,12 @@ S:	Maintained
- F:	Documentation/devicetree/bindings/display/panel/olimex,lcd-olinuxino.yaml
- F:	drivers/gpu/drm/panel/panel-olimex-lcd-olinuxino.c
+@@ -8586,6 +8586,7 @@ M:	Mahadevan P <mahadevan.p@oss.qualcomm.com>
+ L:	dri-devel@lists.freedesktop.org
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
++F:	drivers/gpu/drm/bridge/parade-ps195.c
  
-+DRM DRIVER FOR PARADE PS195 BRIDGE CHIP
-+M:	Mahadevan P <mahadevan.p@oss.qualcomm.com>
-+L:	dri-devel@lists.freedesktop.org
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/display/bridge/parade,ps195.yaml
-+
  DRM DRIVER FOR PARADE PS8640 BRIDGE CHIP
  R:	Douglas Anderson <dianders@chromium.org>
- F:	Documentation/devicetree/bindings/display/bridge/ps8640.yaml
+diff --git a/drivers/gpu/drm/bridge/Kconfig b/drivers/gpu/drm/bridge/Kconfig
+index c7da6b02d7b6..a14128d611d7 100644
+--- a/drivers/gpu/drm/bridge/Kconfig
++++ b/drivers/gpu/drm/bridge/Kconfig
+@@ -273,6 +273,16 @@ config DRM_OF_DISPLAY_MODE_BRIDGE
+ 	  It exists for compatibility with legacy display mode parsing, in order
+ 	  to conform to the panel-bridge framework.
+ 
++config DRM_PARADE_PS195
++	tristate "Parade PS195 DisplayPort to HDMI converter"
++	depends on OF && I2C && REGULATOR
++	select DRM_KMS_HELPER
++	help
++	  Enable support for the Parade PS195 DisplayPort to HDMI converter.
++	  Its firmware handles the display protocol; this driver controls
++	  the power supplies and reset input.
++	  When built as a module, the module is called parade-ps195.
++
+ config DRM_PARADE_PS8622
+ 	tristate "Parade eDP/LVDS bridge"
+ 	depends on OF
+diff --git a/drivers/gpu/drm/bridge/Makefile b/drivers/gpu/drm/bridge/Makefile
+index 15cc821d85b7..425722c7becb 100644
+--- a/drivers/gpu/drm/bridge/Makefile
++++ b/drivers/gpu/drm/bridge/Makefile
+@@ -23,6 +23,7 @@ obj-$(CONFIG_DRM_MEGACHIPS_STDPXXXX_GE_B850V3_FW) += megachips-stdpxxxx-ge-b850v
+ obj-$(CONFIG_DRM_MICROCHIP_LVDS_SERIALIZER) += microchip-lvds.o
+ obj-$(CONFIG_DRM_NXP_PTN3460) += nxp-ptn3460.o
+ obj-$(CONFIG_DRM_OF_DISPLAY_MODE_BRIDGE) += of-display-mode-bridge.o
++obj-$(CONFIG_DRM_PARADE_PS195) += parade-ps195.o
+ obj-$(CONFIG_DRM_PARADE_PS8622) += parade-ps8622.o
+ obj-$(CONFIG_DRM_PARADE_PS8640) += parade-ps8640.o
+ obj-$(CONFIG_DRM_SAMSUNG_DSIM) += samsung-dsim.o
+diff --git a/drivers/gpu/drm/bridge/parade-ps195.c b/drivers/gpu/drm/bridge/parade-ps195.c
+new file mode 100644
+index 000000000000..6f92681497be
+--- /dev/null
++++ b/drivers/gpu/drm/bridge/parade-ps195.c
+@@ -0,0 +1,204 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Parade PS195 DisplayPort to HDMI protocol converter
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <linux/delay.h>
++#include <linux/gpio/consumer.h>
++#include <linux/i2c.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/pm.h>
++#include <linux/regulator/consumer.h>
++
++#include <drm/drm_atomic_state_helper.h>
++#include <drm/drm_bridge.h>
++
++/* Enable the supplies in this order and disable them in reverse. */
++static const char * const ps195_supply_names[] = {
++	"vdd09",
++	"vdd12",
++	"vdd33",
++};
++
++struct ps195 {
++	struct drm_bridge bridge;
++	struct device *dev;
++	struct regulator_bulk_data supplies[ARRAY_SIZE(ps195_supply_names)];
++	struct gpio_desc *reset_gpio;
++	bool powered;
++};
++
++static void ps195_disable_supplies(struct ps195 *ps195, unsigned int count)
++{
++	int ret;
++
++	while (count) {
++		count--;
++		ret = regulator_disable(ps195->supplies[count].consumer);
++		if (ret)
++			dev_err(ps195->dev, "Failed to disable %s: %d\n",
++				ps195->supplies[count].supply, ret);
++
++		/* Allow discharge before disabling the next rail. */
++		if (count)
++			usleep_range(1000, 2000);
++	}
++}
++
++static void ps195_power_off(struct ps195 *ps195)
++{
++	if (!ps195->powered)
++		return;
++
++	gpiod_set_value_cansleep(ps195->reset_gpio, 1);
++	ps195_disable_supplies(ps195, ARRAY_SIZE(ps195->supplies));
++	ps195->powered = false;
++}
++
++static int ps195_power_on(struct ps195 *ps195)
++{
++	unsigned int i;
++	int ret;
++
++	if (ps195->powered)
++		return 0;
++
++	gpiod_set_value_cansleep(ps195->reset_gpio, 1);
++	for (i = 0; i < ARRAY_SIZE(ps195->supplies); i++) {
++		ret = regulator_enable(ps195->supplies[i].consumer);
++		if (ret) {
++			dev_err(ps195->dev, "Failed to enable %s: %d\n",
++				ps195->supplies[i].supply, ret);
++			goto err_disable;
++		}
++
++		/* Allow the rail to settle before continuing. */
++		usleep_range(2000, 3000);
++	}
++
++	gpiod_set_value_cansleep(ps195->reset_gpio, 0);
++	ps195->powered = true;
++
++	return 0;
++
++err_disable:
++	ps195_disable_supplies(ps195, i);
++	return ret;
++}
++
++static void ps195_power_off_action(void *data)
++{
++	ps195_power_off(data);
++}
++
++static int ps195_suspend(struct device *dev)
++{
++	ps195_power_off(i2c_get_clientdata(to_i2c_client(dev)));
++	return 0;
++}
++
++static int ps195_resume(struct device *dev)
++{
++	return ps195_power_on(i2c_get_clientdata(to_i2c_client(dev)));
++}
++
++static const struct dev_pm_ops ps195_pm_ops = {
++	/* Keep AUX and HPD available until the display controller suspends. */
++	LATE_SYSTEM_SLEEP_PM_OPS(ps195_suspend, ps195_resume)
++};
++
++static int ps195_bridge_attach(struct drm_bridge *bridge,
++			       struct drm_encoder *encoder,
++			       enum drm_bridge_attach_flags flags)
++{
++	return drm_bridge_attach(encoder, bridge->next_bridge, bridge, flags);
++}
++
++static const struct drm_bridge_funcs ps195_bridge_funcs = {
++	.atomic_create_state = drm_atomic_helper_bridge_create_state,
++	.atomic_destroy_state = drm_atomic_helper_bridge_destroy_state,
++	.atomic_duplicate_state = drm_atomic_helper_bridge_duplicate_state,
++	.attach = ps195_bridge_attach,
++};
++
++static int ps195_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	struct ps195 *ps195;
++	unsigned int i;
++	int ret;
++
++	ps195 = devm_drm_bridge_alloc(dev, struct ps195, bridge,
++				      &ps195_bridge_funcs);
++	if (IS_ERR(ps195))
++		return PTR_ERR(ps195);
++
++	ps195->dev = dev;
++	i2c_set_clientdata(client, ps195);
++
++	ps195->bridge.next_bridge = of_drm_get_bridge_by_endpoint(dev->of_node, 1, -1);
++	if (IS_ERR(ps195->bridge.next_bridge))
++		return dev_err_probe(dev, PTR_ERR(ps195->bridge.next_bridge),
++				     "Failed to get output bridge\n");
++
++	for (i = 0; i < ARRAY_SIZE(ps195->supplies); i++)
++		ps195->supplies[i].supply = ps195_supply_names[i];
++
++	ret = devm_regulator_bulk_get(dev, ARRAY_SIZE(ps195->supplies),
++				      ps195->supplies);
++	if (ret)
++		return dev_err_probe(dev, ret, "Failed to get supplies\n");
++
++	ps195->reset_gpio = devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_HIGH);
++	if (IS_ERR(ps195->reset_gpio))
++		return dev_err_probe(dev, PTR_ERR(ps195->reset_gpio),
++				     "Failed to get reset GPIO\n");
++
++	/*
++	 * Firmware drives DP HPD and services AUX, including EDID reads,
++	 * before a modeset. Keep the bridge powered while the system is
++	 * awake, including when no monitor is connected.
++	 */
++	ret = ps195_power_on(ps195);
++	if (ret)
++		return ret;
++
++	ret = devm_add_action_or_reset(dev, ps195_power_off_action, ps195);
++	if (ret)
++		return ret;
++
++	ps195->bridge.of_node = dev->of_node;
++	ps195->bridge.type = DRM_MODE_CONNECTOR_HDMIA;
++
++	return devm_drm_bridge_add(dev, &ps195->bridge);
++}
++
++static const struct of_device_id ps195_of_match[] = {
++	{ .compatible = "parade,ps195" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, ps195_of_match);
++
++static const struct i2c_device_id ps195_i2c_ids[] = {
++	{ "ps195" },
++	{ }
++};
++MODULE_DEVICE_TABLE(i2c, ps195_i2c_ids);
++
++static struct i2c_driver ps195_driver = {
++	.probe = ps195_probe,
++	.driver = {
++		.name = "parade-ps195",
++		.of_match_table = ps195_of_match,
++		.pm = pm_sleep_ptr(&ps195_pm_ops),
++	},
++	.id_table = ps195_i2c_ids,
++};
++module_i2c_driver(ps195_driver);
++
++MODULE_AUTHOR("Mahadevan P <mahadevan.p@oss.qualcomm.com>");
++MODULE_DESCRIPTION("Parade PS195 DisplayPort to HDMI bridge driver");
++MODULE_LICENSE("GPL");
 
 -- 
 2.34.1
