@@ -1,100 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.53
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794847002;
-	b=DS8H9qL8dt8+HBBZq0B46xdPtGpYUp6AJGAOfabRJzXpc/vAIYTPPRW47g2gOtqoxpIZ
-	 /pVhEkpn2fuuaAy1x0VivO1voACXQ83odzsD3pgdesbPVDXsX4v9iEXfaGG1bF45kPf5I
-	 KuVRNM9/iyvPGrqPWO7e5y27lc+UiOXBdoEkk8EFxSumUxAux31mdciKGu1VlVT6dBZaw
-	 crrZYX6gen/d3PfjDFEmSoMDJQs7YfFmb/DFxvi1yETEKnc7chtxJzjBmBAYD/w4KK+Qr
-	 vrZXoY7HeWnAH0x5gRXEHUXujCqrc1/8m7lLeCgH9SUQfp3QtqEZsyUPAY8aazGpHeg==
+	t=1794847685;
+	b=eNlf8SaYiXtqO5uPJJxJFLfN22wu/Cr64ZpiiFwem7/duLj0vEXWvajrnANYpSznrjLP
+	 lMFx9Webjc/Fs73v1HSgyKkUF6T/RGTHxOxWfvlY/jTb69jgln6ugk5s8x4pdEdm1NMvU
+	 799qnj7nNOuF8JyIHwWjB+uUW4Q19C75063MQPG6rgZ4KLCxhzXeThav0Tvk+MllLjdAP
+	 NkMu5qKYaFS7f8zMxhBNtA3MGsC0+STqSZKYEG/rRQj/JUcBLPO0k47rNQ+ibj8AQnqJ9
+	 lJhqoKcDmK/KaqVJFFOZaQxVlq0o3x3HxpCDEQ/hkhTEmF9ROsFnlj/7gXV+ejGgL1g==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794847002;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794847685;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
 	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=mFDPbu01PjjV/nM7xHQeqVmy8LYarSe5Gqy53VK5FjY=;
-	b=lR9zp5xOgtJ5wwshYvldh1bCw4CFL3gSkmSWrTEWK7m4OwKJfcgZmYo+y4c/TCUTDrLU
-	 cLsEHhQ6dj0tP9SnXs4udxZqj/jJOR7EpZ+Nxzu5kJV0+AZz7fCS5mN5axO9l/tj2gXQ2
-	 H1QIUdaOWPaIpopMFFdNVLWKFF7Ic0Pd0ezYwJV9DLReI0a67v5XzDYYojBoqPevPjPZM
-	 +BTZYtniwBfbKq8KYUz5AaDeJO4Lxqbj/Ly/ffDthBMD6DGHWJVmqqDojYgnl26eX38Fo
-	 5yrJhATroU/znGRGn7DTikUuIa/OysQxtBUNB6WZqtgH4RMgWEF+neS6XQK/I+xCmkA==
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=9ucaiasafJWVLo8H1ml0lvhBlTDBTGfYuTcr2tmIkkk=;
+	b=BBPQDakElin9vDb3emErULK72ovTvoS8VkcuFA5wQGmac4YbjwficP+vFsyJwhpmOgtR
+	 LIwkC2BdSamiyeGxfpXPBGSfW3C3eqUgxLFGqpdFzKFvNM9EippLxq9iWvEt1oPLnW5YY
+	 EAYoMjs9rQBtCTyGVzz769QsKaK8MRbxHsqn5HCr+DXRoxmvHj8HCEqNj6VL5NhHtOa7g
+	 yoKKCZWMIMyO6eV7jXEnY+ewiQK3mcl2zyDYHLAXvM7tTb5Y0HkBWTBl7iEANiPSPYE/V
+	 WgYoBW8EQXdWqi4nhg/Xd29x129oDJMHWIuApgpW8yOHjjPrA8WhGdRpz50YPbSqi2Q==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Jn8ar1Yi;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.49
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BRZpPH7C;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.53
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE112606A330
-	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 16:36:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CE112606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C76B5606A32F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 16:48:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C76B5606A32F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Jn8ar1Yi
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c5075fa7ed0so613196366b.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:36:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794847000; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BRZpPH7C
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c4d2b741ed9so595002166b.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 08:48:04 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794847683; cv=none;
         d=google.com; s=arc-20260327;
-        b=kJV2YsFCLHxgUDo7ItLmwyGW31WTHbhsO1xHQolhaIDUaY2fu7jUU9T83iy4+Va63c
-         TwIZtD9p6ZH9UqdWAn/gtWsBUQjaliY+W6Wmk+cBYuCJXCuQaHMhlMeI3x4lEmmOvvDf
-         7p9URX4MOVa88cnKY57bYHLBNltEZd4Fr1+YKLXdoXr43L8slAXg/Uez7nlog7fo/Q4Y
-         WEdyKa1imcXLyD/iNOSVW+pJ4uLVCLUD5Qcj7l3K2OvIZ2kBjL3VmekoPqzyvj2aPLji
-         BKeyIjdyJZ0HWbGi+0noT5qAp35LdLCkiClss/by1hhNwAc7++iqyOXNPqijbqjzOo4m
-         kVWw==
+        b=m0MepnnSpLfPxNC6LLGN9qrdmN5QFLf78hqBsHrTxX7+OoypBHR2AViVhOV7BVMPxJ
+         IxWAWlFWiXQN+P7lFnbWQ/dULWta+BlLT5k48+PTaDQen8FiJw5jM74P5Jm1chL7Fzml
+         mk4IM/faMtrVRcFqYUNKXH4/oTi14hOW8SHat+q/00ecuC59xeLgsCPZtLfHw6tIN3xM
+         xU8nSBfJOqsfAKPvgDOBYZJuameVmgwFJxAmi0HArOmDdOee58uj4HtRcjMTlpHITO+K
+         tiNEeRFQN5zhrgqodSy/QGvhFrnN07RLS0uVOLIb3/K188H7qc0OMrgAd0uT91M/1LiH
+         g1xw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=mFDPbu01PjjV/nM7xHQeqVmy8LYarSe5Gqy53VK5FjY=;
-        fh=kgA1RpL+29r4StKpzOvZC+KUViQDAc5SWtqi5+2pIbo=;
-        b=NMaBsI23szkATZ306EMgx2fDDX74LP+rZ26Od/artShHIvuST3I3T+1gf5pb3HHhaC
-         4sjoy2QwIjP66ZRzXNlmh5+e/N1YFgQ4uBGCObzQZ5robFz6ItJ+0zwt7o4o5Mgw+bVB
-         jM0OGPZMx/JIROJLq6hTd81oXGoqh0w0ixGqh+eq3rrNDEN2oXbHICuqkey7xEf2XNOW
-         qnGldK+dd/FwuAFplsIi1xD9SmghqqgDW7MaaTyU/GCkgIywspBhh9NfRe0BpwpHDOc9
-         toTehDpo6v27Cpm/C2oNM2LbIFj24Cnnb7Jx6X08cl+s3Jw9lxH7jaD/TaqgMAR3saeI
-         SRKw==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=9ucaiasafJWVLo8H1ml0lvhBlTDBTGfYuTcr2tmIkkk=;
+        fh=UL+zeOm+U/q81g5oqe+BYnHI0Kp5pyF2FDvYFxhi0kM=;
+        b=o94cUPyBGNPGEAtL30jMj7EkYARsMbLSXP3BSWeMrQ3eNLgYbpFep211tA24xng+hu
+         mkdGhcHnM+acm9/38y2+yI8ZZtVtsNKcUMjKKIIDnAGN9yr+rSQn8mp9KtjyPUAvjXeJ
+         +bFRAZ5BuueCYG3ENtMEhMdWfmJcwzviIzWdQSg26+vFs9pDz0Ycoeh1yk3HzrAOXqAD
+         MNM/dB9OBDvbvbnqxZjoYA2SbCYo4uHORi3Z5oNRUFoKexlsub9cgxyG398bfbW3/aIs
+         wSFa9CwCQ8SHmxd0pOUtqcQq5WRT9N6o+Lmgp6fyQNzYgqxJINYb7zZokb3Qcz9F3Q3i
+         l4/w==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794847000; x=1795451800; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=mFDPbu01PjjV/nM7xHQeqVmy8LYarSe5Gqy53VK5FjY=;
-        b=Jn8ar1YivSQcH87J+OnEM75qtqq0sLVQnwHekt3WVBx/jd1dPNAPe/LHK0kwmmrF4x
-         DPiB/59oC7Ew4qxMdr9hYYh+6NpwThWWc8VjMnG4WCTaWKcDd8DdUryIy3Qv+/OjsvFd
-         eAhqm+hMkrnenGI3mbucI/i5AVVPeMYxhp/vSvoZJFAIIlsju80tzzwMpxo2rx8dTC7t
-         S7nYU+ZqAgL9cjqI42QrRjZbE14UOEv86XTDWLKXbpUJEcpPMV1AYnm+boLpkZebpCmh
-         uCoHXfU5pMPu3RCkVaLFIrzM2lohPTf27w1n2sPofvTx7VZ23HRMD/SFy9rPniHTctxJ
-         QKEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794847000; x=1795451800;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20260707; t=1794847683; x=1795452483; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mFDPbu01PjjV/nM7xHQeqVmy8LYarSe5Gqy53VK5FjY=;
-        b=g/poVHRg1C/Zxttf4O9UzWGA/t6b6y71/IUn4oD8LG5wbW+UYGNUh7ZW+AK0juM0VH
-         ycp7z63iLmnwxWVkrcU4EBma+sELRQScH7j0j85nbCXzuw9GoC2VnZruRFh9qUr+kOuu
-         TA9EqaL8w+MktvLEd6n28AHxDNZlMiePdb7mU+9LFvywKurwp+NEjg2KEDLbl5MU/yb9
-         wRh0+dnCDA/cACjpHUufFgiYqVGQol/Mz7peCmLwHhlkrD+4nHp5gHLQwsI/5PAIertj
-         5GMRsbnV6OKdDo10aTYE9MUiDnynxIsIUgtsuILZwlXQGObK7e1qfynJN4H7O3xPQd4x
-         fPRw==
-X-Forwarded-Encrypted: i=1; AL+hErE7ZklHiOIBk69IxexK0E1tozU1sJQQcWsyMvpHbp8lbb8poJEK6NrScjqKZVNRX5COPykLpf98IQiyqEr3@vger.kernel.org
-X-Gm-Message-State: APuU4Z/dqfVhLOHfq8GtCq9IgJ8OFI5JSRV30DVEQ2b2Fldx8lT+iB6Y
-	pmF71o0/Czm6Gw2FXjZAi8acZkBDPfoR7FCdZKwuOIpJ9ALvz4aSSR13CY6RjB5E44mNmNK3u13
-	SOzrAwLJ8Z+Z93U4QK0XduvZy1BPtvpE=
-X-Gm-Gg: AYBFou2rVwuMeIKje6p9nMBz2yFcGfYqPZPl5QNJvILAo4TsR2vAUHbTJrDqM7Ajz8e
-	FnWFEGxkdE4W1jnPZkyQS3WdaVmj3tc9IGV4OBF4x69tf7yikK2HG5nctGmHBQRqdQcDoGQzDit
-	dQYKUspZrBhddrlzJuO96t/ZI5TPIUezrpRg5JofaVniYppq2Kf8NNkSbAqeqDq4yJhUTuTqMiE
-	FF/ZJY1C4tt6Rh2m71AsVHvZDX70dT07JREyMrCtLTWvShAesyG3HjVLPzOUlGIMnmT4YQ0dcCR
-	7S3a8TAM98AV0TcRw3W58TEQ/sY+R+FbydCzft62d8NiCtX9ScnGVvTycB9v/gQ97wNxhvY0w6g
-	c9A7RzngUdI/k2q4UzrNd26inZEHiPBBrwe9+0Q==
-X-Received: by 2002:a17:907:8e08:b0:c24:6985:d7a1 with SMTP id
- a640c23a62f3a-c50961104demr817704066b.7.1794846999932; Mon, 16 Nov 2026
- 08:36:39 -0800 (PST)
+        bh=9ucaiasafJWVLo8H1ml0lvhBlTDBTGfYuTcr2tmIkkk=;
+        b=BRZpPH7CWREXoIQVx4hqWeRD2Q55mF2ONQt/rqbgFw+JCVZynGVS5mcNl9MqThYOT9
+         20+ObweLK0jkmtZ1W290Qf+4riG2nCByG2J+6GdLBeskWBTA2tLFL5mcEmBDnPSWATBU
+         BQI5CY9G1xEXxZu55qFcoBCQwGmjz9Z9pC3gd3xNAHs29aEmMKIRONon9FOOpo2uHZ2Q
+         ywr+KylRdBAE1Eik7ZBk3/A7E+nr4uU+WVQ7mcRDCRBv5n02bfNhsTlxCqKMeqNtrDyF
+         VbvgectNG77arQt+0qlPXBhIA+2vS1vGuQyqbekduzFfPYsk9xzMDhHUNP9rb2ifqGnD
+         6T1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794847683; x=1795452483;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=9ucaiasafJWVLo8H1ml0lvhBlTDBTGfYuTcr2tmIkkk=;
+        b=QZoukPU56nZZhAT7ojJqCQerdLMHt2lG4LkxVbKnl5bsIBnlrcOzJyCNACwB4MqgRh
+         dpf1ggeArR6Qiof1E4P9wfbY/Am2jJjJMzTl1UOmIX3k+3euFX7kxthQF72WFl4X3/hw
+         QuzC2QjEI6emspFtqKWaM4JYkIQu2lrs2dc95cpKNXIzjUcbrdMVL34OM5NlfeQ3eAa2
+         K9YTsbZKkh5srXKREIalnwzqb0/+zuSw0Ta482RXKoEIl6IqxZK3wHhHba6SZRB/l8GC
+         fShqWjs488s+M9/ZOjtRwjNdzhJrFk85PEtfXzoZOMDSl5MKMoWcaEoq2UncpprGKgLe
+         2ZaQ==
+X-Forwarded-Encrypted: i=1; AL+hErFdkp/0Jx/ET8jj+fMNuvsSFhHxx4Qag9UEOdZ4SnODG/ZhvUhSEFUqWmYH6fP+pc+UTN5zYhtXATvC1rnM@vger.kernel.org
+X-Gm-Message-State: APuU4Z+K9BWtO5mzboT3EnN2oeP9voKtIOrDH/PVUc9sNjgHwFlid8Xr
+	Dp9WdbWxtfOH50DP1ftZjtfZQg79xKj4Vqtj1RwiMJjfv8bSctJTrp6Dq1gG6triD+NvOtq5IHa
+	u2LMTmptrLd8q2cKgPvPJcLTCZFFvThM=
+X-Gm-Gg: AYBFou2e60Y8b38juxY3kSfMhQa48Aa5G78dRo8i0pomIwMezOjP+ADNuJL3YXDvHGO
+	CVpY+wGMbqcyXBcHC2IbyViN7oaiF5Y6AJ6TDplVxNGvBrKbz5d23C7Fb/J8O6CNETbE1zt8aW9
+	AVS/2WfmhclRf/JWn6VuG+/ompFcPcNuyn4uXjFk2WfCD/CiihXRhuw02OHjgz4qQ8L1rf5FX67
+	UZcL77MQw/+q7j5I2WChFm6AYmVQ72c/3ajgE4UJ8NQS3SO9a2mG4w5TB25bZ0NsSVOwvh00jc0
+	6KlFjk1kmbd9o4gR1HQfd2oUDuu8rNcvgDM5EtsLIeTFCL/yIgSfsnJRHdEZOCWISp34OsmwUDI
+	s1z+lOJyoJTW8LwVnxJVSi+CNPNShJnqQ2YQcLxNqm8t8xwHj2VzNB6i/nEk=
+X-Received: by 2002:a17:907:1b06:b0:c41:23bf:18af with SMTP id
+ a640c23a62f3a-c509614e4famr897868466b.5.1794847682879; Mon, 16 Nov 2026
+ 08:48:02 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,197 +103,126 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261113-topic-8750_llcc-v1-1-6536cb46d7fe@oss.qualcomm.com>
- <DMTYT7CTC6JP.2UXJ6MWGKPX49@fairphone.com> <CAB63uaF3kB5AAW_FNXu93pyF4YS4XP3zzLtLt12r=XMK8E5kDA@mail.gmail.com>
-In-Reply-To: <CAB63uaF3kB5AAW_FNXu93pyF4YS4XP3zzLtLt12r=XMK8E5kDA@mail.gmail.com>
+References: <20261111-sm8750-llcc-island1-v1-1-64055702ca3f@gmail.com> <79ac053a-3235-4da0-87da-ebd8da01e4a4@oss.qualcomm.com>
+In-Reply-To: <79ac053a-3235-4da0-87da-ebd8da01e4a4@oss.qualcomm.com>
 From: yzddMr6 <yzddmr6@gmail.com>
-Date: Tue, 17 Nov 2026 00:36:28 +0800
-X-Gm-Features: AclHuK8R7d_cGEXXPrjH8PM8Odn5LsGhXmg_ElS1vdImCrIJeC5fTDG7nWnQUn8
-Message-ID: <CAB63uaEVR494r2vj54vpvV379U6nHTxEM49xhu_uEygU4g0_1Q@mail.gmail.com>
-Subject: Re: [PATCH] soc: qcom: llcc-qcom Fix SM8750 settings
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-	Melody Olvera <melody.olvera@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
+Date: Tue, 17 Nov 2026 00:47:50 +0800
+X-Gm-Features: AclHuK-Lr4J3nNZOiRUCcA8IWzVao3HnhljllZthBc3TfeqQ8ypxS6Przkn-9Ek
+Message-ID: <CAB63uaGQzATJHQgA2ohAothVDYsAhAhPDrcPmgLzwO9EvnB-Vw@mail.gmail.com>
+Subject: Re: [PATCH] soc: qcom: llcc-qcom: Reserve ISLAND1 ways on SM8750
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Melody Olvera <melody.olvera@oss.qualcomm.com>, 
+	Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-(Resending as plain text; the lists rejected the first copy as HTML.)
+On Fri, Nov 13, 2026 at 08:55:33AM +0100, Konrad Dybcio wrote:
+> On 11/12/26 6:35 PM, Vladyslav Tymoshchuk wrote:
+>> It does not cure the reset here. The tree is v7.3-rc5 with out-of-tree
+>> board support, without Ajay's series. Each run is one 60 s s2idle on
+>> battery with the USB cable disconnected:
+>>
+>>   this patch, Wi-Fi WoWLAN enabled                    reset
+>>   this patch, Wi-Fi WoWLAN disabled                   reset
+>>   this patch, rpmhpd domains left at their highest
+>>     corner (rpmhpd sync_state callback removed)       reset
+>>   no patch, MC0 kept voted in the sleep set           resumes
+>
+> This means something is accessing DDR as your platform sleeps
+> without voting for it. That indicates it's likely something that
+> Linux set up, as various subsystems (ADSP etc.) cast their own
+> votes.
 
-On Fri, Nov 13, 2026 at 10:01:27AM +0100, Konrad Dybcio wrote:
-> Bring the settings in line with the with the recommendations (and also
-> with the downstream kernel).
+Thanks, Vladyslav, for trying it on the Pad 3, and Konrad for the
+table fix [1], which includes this change.
 
-Thanks for doing this. With it applied, sm8750_data matches sun_data
-in the downstream kernel [1] in every field of the upstream struct, for
-all 32 slices; before, 8 of them differed.
+On this tablet the reset went away once the ISLAND1 ways were
+reserved, with CX and DDR still collapsing, which fits that reading.
+Some of the numbers below are from a second tablet, a OnePlus Pad 2
+Pro (OPD2413, from the same erhai project as the Pad 3), which runs
+this patch on the same v7.4-rc2 based tree as this one.
 
-Of these changes, only the ISLAND1 one has a known symptom, the reset
-in system suspend described in my patch [2], which is why that one has
-Cc: stable. Would you consider taking it as a separate patch, such as
-mine, with this one on top? Then the fix can go to stable without the
-changes to the camera, video decoder and CVP slices. If you prefer a
-single patch, could you mention the reset in the commit message and
-add Cc: stable@vger.kernel.org?
+>> On this tree the two votes do not seem to be dropped: with all five
+>> macro codecs runtime suspended, clk_summary still shows LPASS_HW_MACRO
+>> and LPASS_HW_DCODEC with a prepare count of 6 (LPASS_HW_LPR_VOTE is 0).
+>> I read that on the workaround kernel while awake, not during suspend,
+>> and the codecs have no system sleep callbacks here. So the resets above
+>> most likely happened with both votes held, which is the state your
+>> tablet resumes in.
 
-Nit: "with the" is doubled in the first line.
+In the one s2idle cycle I ran with each of LPASS_HW_MACRO_VOTE and
+LPASS_HW_LPR_VOTE held, this tablet resumed with cxsd, aosd and ddr all
+staying at 0, as with your MC0 vote, and Gopi reports that held LPASS
+votes keep CX and DDR from collapsing on Glymur too [2]. So with the
+votes held I would expect DDR not to collapse in your runs either, and
+the MC0 vote to make no difference. Since it does, I think the votes
+were released in the runs that reset.
 
-[1] https://github.com/OnePlusOSS/android_kernel_oneplus_sm8750/blob/6028f4=
-7faddaa27700f8dd3a1d83906ea8f27170/drivers/soc/qcom/llcc-qcom.c#L479
-[2] https://lore.kernel.org/r/20261111-sm8750-llcc-island1-v1-1-64055702ca3=
-f@gmail.com
+On v7.3-rc5, as on v7.4-rc2, the six consumers of these votes in
+sm8750.dtsi, the five macros and the LPI pin controller, take them
+through pm_clk, which drops them on runtime suspend. With the five
+macros suspended, only the LPI pin controller could still hold them,
+so I would expect a count of at most 1; 6 looks like all six were
+active when you read it. A device that is still active when system
+suspend starts stays active until resume, though, unless it has a
+system sleep callback, which is what Gopi's LPI and SoundWire patches
+[2][3] add.
+
+Here the count read right before suspend was 3, 3 and 0 for MACRO,
+DCODEC and LPR in each of the 23 s2idle cycles I recorded with this
+kernel, 18 on this tablet and 5 on the Pad 2 Pro. Still, cxsd and ddr
+grew by about the time asleep in 21 of them; in the other two, both
+on this tablet, they did not grow at all. This tree forces all six
+consumers and the SoundWire controllers into runtime suspend at system
+sleep (Ajay's TX/VA patches, changes equivalent to [2] and [3], and
+the same for the RX and WSA macros), which drops the votes during
+suspend. Without such callbacks, a non-zero count read right before
+suspend would mean the votes were held.
+
+>>> All of these suspend tests were done with a USB cable connected.
+>
+> I don't think ToT linux will let you get cxsd with a cable connected.
+
+On this tree it does: 21 of the 23 cycles above reached cxsd with the
+tablet attached to a PC as a USB device, and so did the tests in the
+patch. The tree carries a fair amount on top of v7.4-rc2, though,
+including Vladyslav's USB GDSC retention patch [4], so I can't say
+what ToT does.
+
+Vladyslav, to your two questions: yes, this tablet resumes with the
+cable disconnected, though the battery cycles with stats here were
+PSCI system suspend, not s2idle. Each tablet ran two cycles on
+battery, with an RTC alarm 180 s and 70 s ahead, and resumed at the
+alarm every time. On this tablet mem_sleep was deep, and cxsd and ddr
+grew by 179.1 s and 69.2 s. On the Pad 2 Pro they were s2idle, and
+cxsd and ddr grew by about 178 s and 65 s. aosd stayed at 0 in all
+four, as in every cycle I have recorded on either tablet.
+
+As for MC0, nothing that I can see is voted on it in the sleep set.
+The interconnect drivers are as in v7.4-rc2, where the MC0 keepalive
+only votes in the active and wake sets, and a sleep-set vote on MC0
+would keep ddr from growing in every cycle, while it grew in 25 of the
+27 cycles above (21 of 23 with the cable, all four on battery).
+
+One difference between the two tablets that may matter for the Pad 3:
+on the Pad 2 Pro, adsp_island did not grow in any of its five s2idle
+cycles with the cable connected, which ran from 59 s to 2.9 hours,
+although the ADSP does enter island mode there while awake, and cxsd
+and ddr count a new entry every 5 s or so (every half second on
+battery). On this tablet the ADSP stays in island mode for nearly the
+whole sleep, and with this kernel cxsd and ddr count at most three
+entries per cycle, even in one of 1.8 hours. If the Pad 3 behaves like
+the Pad 2 Pro, the ISLAND1 slice is not in use during its s2idle, and
+this patch could not make a difference there.
+
+Since you offered to run variants: could you read the three prepare
+counts right before suspend on the kernel that resets?
+
+[1] https://lore.kernel.org/r/20261113-topic-8750_llcc-v1-1-6536cb46d7fe@oss.qualcomm.com
+[2] https://lore.kernel.org/r/20261112-lpass-lpi-system-sleep-v1-1-438cb997e0e9@oss.qualcomm.com
+[3] https://lore.kernel.org/r/20261112-qcom-swr-system-sleep-v1-1-a61a83f6475d@oss.qualcomm.com
+[4] https://lore.kernel.org/r/20261110213346.1359-1-tvlad744@gmail.com
 
 Thanks,
 yzddMr6
-
-
-6 Mr <yzddmr6@gmail.com> =E4=BA=8E2026=E5=B9=B411=E6=9C=8817=E6=97=A5=E5=91=
-=A8=E4=BA=8C 00:30=E5=86=99=E9=81=93=EF=BC=9A
->
-> On Fri, Nov 13, 2026 at 10:01:27AM +0100, Konrad Dybcio wrote:
-> > Bring the settings in line with the with the recommendations (and also
-> > with the downstream kernel).
->
-> Thanks for doing this. With it applied, sm8750_data matches sun_data
-> in the downstream kernel [1] in every field of the upstream struct, for
-> all 32 slices; before, 8 of them differed.
->
-> Of these changes, only the ISLAND1 one has a known symptom, the reset
-> in system suspend described in my patch [2], which is why that one has
-> Cc: stable. Would you consider taking it as a separate patch, such as
-> mine, with this one on top? Then the fix can go to stable without the
-> changes to the camera, video decoder and CVP slices. If you prefer a
-> single patch, could you mention the reset in the commit message and
-> add Cc: stable@vger.kernel.org?
->
-> Nit: "with the" is doubled in the first line.
->
-> [1] https://github.com/OnePlusOSS/android_kernel_oneplus_sm8750/blob/6028=
-f47faddaa27700f8dd3a1d83906ea8f27170/drivers/soc/qcom/llcc-qcom.c#L479
-> [2] https://lore.kernel.org/r/20261111-sm8750-llcc-island1-v1-1-64055702c=
-a3f@gmail.com
->
-> Thanks,
-> yzddMr6
->
-> Luca Weiss <luca.weiss@fairphone.com> =E4=BA=8E2026=E5=B9=B411=E6=9C=8813=
-=E6=97=A5=E5=91=A8=E4=BA=94 17:11=E5=86=99=E9=81=93=EF=BC=9A
->>
->> Hi Konrad,
->>
->> Missing ":" after llcc-qcom in the subject?
->>
->> Regards
->> Luca
->>
->> On Fri Nov 13, 2026 at 10:01 AM CET, Konrad Dybcio wrote:
->> > Bring the settings in line with the with the recommendations (and also
->> > with the downstream kernel).
->> >
->> > Reported-by: yzddMr6 <yzddmr6@gmail.com>
->> > Closes: https://lore.kernel.org/linux-arm-msm/20261111-sm8750-llcc-isl=
-and1-v1-1-64055702ca3f@gmail.com/
->> > Fixes: 2c04e58e30ce ("soc: qcom: llcc-qcom: Add support for SM8750")
->> > Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->> > ---
->> >  drivers/soc/qcom/llcc-qcom.c | 19 ++++++++++---------
->> >  1 file changed, 10 insertions(+), 9 deletions(-)
->> >
->> > diff --git a/drivers/soc/qcom/llcc-qcom.c b/drivers/soc/qcom/llcc-qcom=
-.c
->> > index d7a42a8040a16388a79c24e4d1f1e88de9c87ec0..df213548637351fdaeeb81=
-b860f0ee2631f2062a 100644
->> > --- a/drivers/soc/qcom/llcc-qcom.c
->> > +++ b/drivers/soc/qcom/llcc-qcom.c
->> > @@ -3869,7 +3869,8 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .priority =3D 5,
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> > -             .vict_prio =3D true,
->> > +             .ovcap_en =3D true,
->> > +             .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_MODPE,
->> >               .slice_id =3D 29,
->> > @@ -3923,7 +3924,7 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .max_cap =3D 7936,
->> >               .priority =3D 7,
->> >               .fixed_size =3D true,
->> > -             .bonus_ways =3D 0x7fffffff,
->> > +             .res_ways =3D 0x7fffffff,
->> >       }, {
->> >               .usecase_id =3D LLCC_DISP_WB,
->> >               .slice_id =3D 23,
->> > @@ -3946,7 +3947,7 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .cache_mode =3D 2,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CAMOFE,
->> > @@ -3956,7 +3957,7 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .stale_en =3D true,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CAMRTIP,
->> > @@ -3966,7 +3967,7 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .stale_en =3D true,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CAMSRTIP,
->> > @@ -3976,17 +3977,17 @@ static const struct llcc_slice_config sm8750_d=
-ata[] =3D {
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .stale_en =3D true,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CAMRTRF,
->> >               .slice_id =3D 7,
->> >               .max_cap =3D 3584,
->> > -             .priority =3D 1,
->> > +             .priority =3D 3,
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .stale_en =3D true,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CAMSRTRF,
->> > @@ -3996,7 +3997,7 @@ static const struct llcc_slice_config sm8750_dat=
-a[] =3D {
->> >               .fixed_size =3D true,
->> >               .bonus_ways =3D 0xffffffff,
->> >               .stale_en =3D true,
->> > -             .ovcap_prio =3D true,
->> > +             .ovcap_en =3D true,
->> >               .parent_slice_id =3D 33,
->> >       }, {
->> >               .usecase_id =3D LLCC_CPUSSMPAM,
->> >
->> > ---
->> > base-commit: 8b7179210b22f8e48a82c5ceacb9d56a9c4cfec4
->> > change-id: 20261113-topic-8750_llcc-bd228d96b455
->> >
->> > Best regards,
->>
->>
