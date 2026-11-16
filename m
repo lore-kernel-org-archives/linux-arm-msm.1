@@ -1,105 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794820429;
-	b=qGTkzWZW99poiDLizk2WSXbsldFtDfYLtdsmQRDXi0rxR/oi7F6FjPDjHvI5GOu4PTvd
-	 7SETqEbdC7dGtFBUWiu4iSyqqvVkyJ2TfokRu4AzBHXjcFH4Ecw2wNs2EgrvBPYdd7kwU
-	 9FnEVcMeyOz+axuTwkjZSHYfSDekkuZjl60Cj6CYjnTDt8g2GOzFWw9A+SkMe/D0vQJRv
-	 Xwy5jEspC7IlyqLAejHl0PM5T7T9qKe5NS1mNyQDPYkW8QLqunjweR8l3Y/MU1754pIxr
-	 9GRsWUN1tff0wREINzbTdJfaTko8EXU6zlmMp8fRdMdp3ZBdOZNJ0Gn7t2Gjvh9Gnug==
+	t=1794820787;
+	b=dHeJ6KGdAKTfVLPh1n44ShLjpeEtYi0PzPTK65IJEJnkTRXzmMQ7tvSHrhyomm5tlYCm
+	 VvF9cw1HOIs7L6j1gagwKRV2nvgyRl7Gtg1zlucDiNgmey7zxji5kdJfWag8Fapr2QKyy
+	 3C7uj1qPG5qcKhrKVMV23h7uVbFwFtHKGhHBvNmMf02B2XUM1v00ZW8IV5VnSq/aLlrGL
+	 2G1QNKZ9tfcC7Ew9WVtPMwO/ZAHzF2WFnCF2wut+O3ErWAjeP8B1XFomFRbt83pyodh8o
+	 ZmTbPpA9jmnrP4M124Bmfk231w07JWYlgw7yu9kkNxqtNtIoL/O/uJ2Xk18D+5sOA/Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794820429;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Type:Organization:Content-Transfer-Encoding;
-	bh=q+IeP9KxR1ltj3JOOG9VwsrHbqw44F6E5PTklAlXz8o=;
-	b=SLLLYfNHayYPMWfxOxUZkfaperpiSJMBSI6yUFUzb+Jvn7tAOLC9bMDvIqOziSEyYnP7
-	 NtGbQUd4wLXjSTMsnNzdTsGq9o8cfKXo5HoITnVehbW+G2bLMWqjhdzvshfA5/m42szxc
-	 bllQ15Ro1d0z0UdYfXKe2xtHBlLcajBBUPRA5pz3rIfd+MEgf0KTsZdJdbQHNqAhWicGz
-	 fDidzZbiyZ/LMkhosNVVbG3XvFJ7mGsEPHdxkF+40yf+2wYUjqCQ6BNuuL3ypCQGxrCq6
-	 LfL6br917Su8aEUBo+b8x6ps6OxPEmvKnIqwoSCC0GHFStJ1eSO53EqbJ9riIzsYP6Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794820787;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=CZnwncXttnoeDTUcItONMH1HUxzaUc0HeWzS8YajeZo=;
+	b=ICe4Qd3XWWkQQpt1Qna1M2K7fmZZEMZU67dFZkl2Mu5CgIiMxle0wnlunR3df930WgBI
+	 6aqssyqJK6OjTee/Td08q36wBE8V8XCuL286qM56obLIS4+JRVA4vTunIMf9FMSjlXBdo
+	 6sJpT3wKghFfrgyple40Abgg8PkxqhwJHSbKDkjIaGSuK8rV5pQklvh0EbopEErH8TTck
+	 0LZuN4S4FMBUqICC7YpTZ+Zoy0QO9drzUaqwjU305Ty1LK3s3eXeZRhRxJgHvHp4Gzl5D
+	 NVuNAasE2N2ihvMZZ4Yp3vVk8QGw5lRUHIfGp02RX+prRk6KP3lPtWXqFY+KHOZV9SQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=dbNL2dqZ;
-	arc=none smtp.remote-ip=198.175.65.10
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0E5C606A329;
-	Mon, 16 Nov 2026 09:13:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D0E5C606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=MDYQ3pcg;
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2391C606A334;
+	Mon, 16 Nov 2026 09:19:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2391C606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=dbNL2dqZ
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794820428; x=1826356428;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=6RcgTJRMkf6knyitWUlwWvr0eo1SGio0/PgROTWQTvY=;
-  b=dbNL2dqZOhPpk77vkRZJVkE4vKJLyWsmP3DLker4eMFSZv5jO1qzmaKK
-   fWjlEYrN47n2ST7NpDyxspVyo2jGf9fa3IXHa7lz4kWRL5+5uyTVkqmd3
-   uaZDzL1ByPOHD7W3QTDZ01aDTA8cEJQin1peJkXIaL4qj8ww+Sz/3+tC4
-   JBbaNtdM78TjgmqNUkJYapd3CLe1Lss6l1uw4qFXoTEow5j4Sdo85DdOQ
-   EqBbf07Zx1OhvCnMI3m1hVHwWBn1s+BtzXQc4uaRBIurmzndTWariIoMr
-   DRv5023BQfcrMZmsXyssh1hNfxpxt6jD6S440XX3MMwu9CPKzNcWvDaF0
-   A==;
-X-CSE-ConnectionGUID: UXPvN6JsRAyIHUIDmlzRiQ==
-X-CSE-MsgGUID: pIbIlFFqQJS6jQA49+5NQA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11967"; a="3458233"
-X-IronPort-AV: E=Sophos;i="6.27,216,1787036400"; 
-   d="scan'208";a="3458233"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2026 01:13:47 -0800
-X-CSE-ConnectionGUID: bvoRwiFQRNi3Az4Cm0njaA==
-X-CSE-MsgGUID: pGwRFgaZQoqDY1QJ87JxXg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,216,1787036400"; 
-   d="scan'208";a="9692160"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.93])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2026 01:13:40 -0800
-From: Ville Syrjala <ville.syrjala@linux.intel.com>
-To: dri-devel@lists.freedesktop.org
-Cc: intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	Erwin Springer <aot.lerwin@gmail.com>,
-	amd-gfx@lists.freedesktop.org,
-	=?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>,
-	Boris Brezillon <bbrezillon@kernel.org>,
-	Christopher Snowhill <chris@kode54.net>,
-	Dave Stevenson <dave.stevenson@raspberrypi.com>,
-	Dharma Balasubiramani <dharma.b@microchip.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	freedreno@lists.freedesktop.org,
-	Gustavo Padovan <gustavo.padovan@collabora.com>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
-	Jianmin Lv <lvjianmin@loongson.cn>,
-	linux-arm-msm@vger.kernel.org,
-	linux-mediatek@lists.infradead.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
-	Manikandan Muralidharan <manikandan.m@microchip.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Mingcong Bai <jeffbai@aosc.io>,
-	nouveau@lists.freedesktop.org,
-	Qianhai Wu <wuqianhai@loongson.cn>,
-	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
-	Simon Ser <contact@emersion.fr>,
-	wayland-devel@lists.freedesktop.org,
-	Xaver Hugl <xaver.hugl@kde.org>,
-	Xi Ruoyao <xry111@xry111.site>
-Subject: [PATCH 12/12] drm/atomic/uapi: Extract {connector,crtc,plane}_async_flip_check()
-Date: Mon, 16 Nov 2026 11:11:30 +0200
-Message-ID: <20261116091130.13950-13-ville.syrjala@linux.intel.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261116091130.13950-1-ville.syrjala@linux.intel.com>
-References: <20261116091130.13950-1-ville.syrjala@linux.intel.com>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=MDYQ3pcg
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 437321476;
+	Mon, 16 Nov 2026 01:19:43 -0800 (PST)
+Received: from [10.2.197.99] (ewhatever.cambridge.arm.com [10.2.197.99])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BCAB23F763;
+	Mon, 16 Nov 2026 01:19:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1794820786; bh=x48MGglr2CAwjlYCBk5Uk7nESxpqLnVRRwqaJD9EKQQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=MDYQ3pcgq/fyazZWav1V8GCbaXniG47/MsXdi+L8kJg/9MnJZQMg0rd30s8dNGend
+	 f74CGwzElmESwFiQFd/98nrfKDbHv7OvYnk8N0T7X/E7Epm8s30n6ECITioJzXdOOK
+	 UkxLipbRfhTxaer6gx/Mmr1orXbV/YSFH8ZAp4WY=
+Message-ID: <3bb22604-1850-44d7-9388-3bcb06813eff@arm.com>
+Date: Mon, 16 Nov 2026 09:19:41 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -109,315 +53,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/5] Fix traceNoC probe issue on multiple QCOM
+ platforms
+To: Jie Gan <jie.gan@oss.qualcomm.com>, Leo Yan <leo.yan@arm.com>,
+ Rob Herring <robh@kernel.org>
+Cc: Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+ Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Jingyi Wang <jingyi.wang@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+ coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+References: <20261110-fix-trace-noc-probe-issue-v7-0-2f06905c77fe@oss.qualcomm.com>
+ <20261110154643.GA4159803-robh@kernel.org>
+ <20261111204322.GH9176@e132581.arm.com>
+ <e0e07848-361d-4977-a585-a0810452e150@oss.qualcomm.com>
+Content-Language: en-US
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+In-Reply-To: <e0e07848-361d-4977-a585-a0810452e150@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+On 16/11/2026 02:03, Jie Gan wrote:
+> 
+> 
+> On 11/12/2026 4:43 AM, Leo Yan wrote:
+>> On Tue, Nov 10, 2026 at 09:46:43AM -0600, Rob Herring wrote:
+>>> On Tue, Nov 10, 2026 at 09:21:13AM +0800, Jie Gan wrote:
+>>>> The CoreSight TNOC (Trace Network-On-Chip) binding so far only 
+>>>> allowed the
+>>>> two-string AMBA form "qcom,coresight-tnoc", "arm,primecell". That form
+>>>> forces the device onto the AMBA bus, where the driver must read the
+>>>> peripheral ID from the device registers during probe. On several QCOM
+>>>> platforms this AMBA peripheral-ID probing fails, so the traceNoC device
+>>>> never probes and its trace path is unavailable.
+>>>
+>>> But it works fine on some platforms? We have a property to override the
+>>> peripheral-ID which would solve your issue. That would be much simpler
+>>> and avoid the ABI break on any of the working platforms.
+>>
+>> Looking back at the earlier discussion [1], Jie in v2 already proposed
+>> "arm,primecell-periphid". Questions about AMBA IDs and ATID handling got
+>> mixed together. The series later moved towards platform-device probing,
+>> then became current shape.
+>>
+>> Hope we make the right decision on arm,primecell-periphid this time.
+>>
+>> Anyway, I'd like to apologise to Jie for all the back and forth.
+>>
+> 
+> Never mind.
+> 
+> Hi Suzuki, Rob,
+> 
+> The "arm,primecell-periphid" override is the simplest fix for the issue. 
+> Which fix are your preferring for the issue? If we want fix it with DT 
+> property, we can revert the patch series and I will post a new one to 
+> fix it.
+> 
+> As Leo mentioned, the AMBA probe is not affecting by the series.
 
-Reduce the clutter in drm_atomic_set_property() by
-extracting the async flip related checks to
-connector,crtc,plane}_async_flip_check().
+Alright, I will remove it from the coresight next, please send the DT
+fix.
 
-Cc: amd-gfx@lists.freedesktop.org
-Cc: André Almeida <andrealmeid@igalia.com>
-Cc: Boris Brezillon <bbrezillon@kernel.org>
-Cc: Christopher Snowhill <chris@kode54.net>
-Cc: Dave Stevenson <dave.stevenson@raspberrypi.com>
-Cc: Dharma Balasubiramani <dharma.b@microchip.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>
-Cc: freedreno@lists.freedesktop.org
-Cc: Gustavo Padovan <gustavo.padovan@collabora.com>
-Cc: Huacai Chen <chenhuacai@kernel.org>
-Cc: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-Cc: intel-gfx@lists.freedesktop.org
-Cc: intel-xe@lists.freedesktop.org
-Cc: Jianmin Lv <lvjianmin@loongson.cn>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-mediatek@lists.infradead.org
-Cc: linux-rockchip@lists.infradead.org
-Cc: linux-tegra@vger.kernel.org
-Cc: Liviu Dudau <liviu.dudau@arm.com>
-Cc: Maíra Canal <mcanal@igalia.com>
-Cc: Manikandan Muralidharan <manikandan.m@microchip.com>
-Cc: Maxime Ripard <mripard@kernel.org>
-Cc: Mingcong Bai <jeffbai@aosc.io>
-Cc: nouveau@lists.freedesktop.org
-Cc: Qianhai Wu <wuqianhai@loongson.cn>
-Cc: Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
-Cc: Simon Ser <contact@emersion.fr>
-Cc: wayland-devel@lists.freedesktop.org
-Cc: Xaver Hugl <xaver.hugl@kde.org>
-Cc: Xi Ruoyao <xry111@xry111.site>
-Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
----
- drivers/gpu/drm/drm_atomic_uapi.c | 215 +++++++++++++++++-------------
- 1 file changed, 124 insertions(+), 91 deletions(-)
+Cheers
+Suzuki
 
-diff --git a/drivers/gpu/drm/drm_atomic_uapi.c b/drivers/gpu/drm/drm_atomic_uapi.c
-index 87181aba1451..65e1be6c4ad5 100644
---- a/drivers/gpu/drm/drm_atomic_uapi.c
-+++ b/drivers/gpu/drm/drm_atomic_uapi.c
-@@ -1194,6 +1194,124 @@ int drm_atomic_connector_commit_dpms(struct drm_atomic_commit *state,
- 	return ret;
- }
- 
-+static int connector_async_flip_check(struct drm_atomic_commit *state,
-+				      struct drm_connector *connector,
-+				      struct drm_property *prop,
-+				      u64 prop_value, bool *is_noop)
-+{
-+	const struct drm_connector_state *current_connector_state;
-+	u64 old_val = 0;
-+	int ret;
-+
-+	current_connector_state =
-+		__drm_atomic_get_current_connector_state(state, connector);
-+	if (IS_ERR(current_connector_state))
-+		return PTR_ERR(current_connector_state);
-+
-+	ret = drm_atomic_connector_get_property(connector, current_connector_state,
-+						prop, &old_val);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Note that for WRITEBACK_FB_ID and WRITEBACK_OUT_FENCE_PTR
-+	 * the old value will always be 0. So any commit that sets either
-+	 * property to any other value will not be considered a no-op.
-+	 */
-+	if (old_val != prop_value) {
-+		drm_dbg_atomic(prop->dev,
-+			       "[CONNECTOR:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
-+			       connector->base.id, connector->name,
-+			       prop->base.id, prop->name);
-+		return -EINVAL;
-+	}
-+
-+	*is_noop = old_val == prop_value;
-+
-+	return 0;
-+}
-+
-+static int crtc_async_flip_check(struct drm_atomic_commit *state,
-+				 struct drm_crtc *crtc,
-+				 struct drm_property *prop,
-+				 u64 prop_value, bool *is_noop)
-+{
-+	const struct drm_crtc_state *current_crtc_state;
-+	u64 old_val = 0;
-+	int ret;
-+
-+	current_crtc_state =
-+		__drm_atomic_get_current_crtc_state(state, crtc);
-+	if (IS_ERR(current_crtc_state))
-+		return PTR_ERR(current_crtc_state);
-+
-+	ret = drm_atomic_crtc_get_property(crtc, current_crtc_state,
-+					   prop, &old_val);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Note that for OUT_FENCE_PTR the old value will always be 0.
-+	 * So any commit that sets the property to any other value
-+	 * will not be considered a no-op.
-+	 */
-+	if (old_val != prop_value) {
-+		drm_dbg_atomic(prop->dev,
-+			       "[CRTC:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
-+			       crtc->base.id, crtc->name,
-+			       prop->base.id, prop->name);
-+		return -EINVAL;
-+	}
-+
-+	*is_noop = old_val == prop_value;
-+
-+	return 0;
-+}
-+
-+static int plane_async_flip_check(struct drm_atomic_commit *state,
-+				  struct drm_plane *plane,
-+				  struct drm_property *prop,
-+				  u64 prop_value, bool *is_noop)
-+{
-+	struct drm_device *dev = plane->dev;
-+	struct drm_mode_config *config = &dev->mode_config;
-+	const struct drm_plane_state *current_plane_state;
-+	u64 old_val = 0;
-+	int ret;
-+
-+	current_plane_state =
-+		__drm_atomic_get_current_plane_state(state, plane);
-+	if (IS_ERR(current_plane_state))
-+		return PTR_ERR(current_plane_state);
-+
-+	ret = drm_atomic_plane_get_property(plane, current_plane_state,
-+					    prop, &old_val);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Fail everything that isn't no-op or a pure flip.
-+	 *
-+	 * Note that for IN_FENCE_FD the old value will always be -1.
-+	 * So any commit that sets the property to any other value
-+	 * will not be considered a no-op.
-+	 */
-+	if (old_val != prop_value &&
-+	    prop != config->prop_fb_id &&
-+	    prop != config->prop_in_fence_fd &&
-+	    prop != config->prop_fb_damage_clips) {
-+		drm_dbg_atomic(prop->dev,
-+			       "[PLANE:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
-+			       plane->base.id, plane->name,
-+			       prop->base.id, prop->name);
-+		return -EINVAL;
-+	}
-+
-+	*is_noop = old_val == prop_value;
-+
-+	return 0;
-+}
-+
- int drm_atomic_set_property(struct drm_atomic_commit *state,
- 			    struct drm_file *file_priv,
- 			    struct drm_mode_object *obj,
-@@ -1202,7 +1320,6 @@ int drm_atomic_set_property(struct drm_atomic_commit *state,
- 			    bool async_flip)
- {
- 	struct drm_mode_object *ref;
--	u64 old_val;
- 	int ret;
- 
- 	if (!drm_property_change_valid_get(prop, prop_value, &ref))
-@@ -1215,36 +1332,10 @@ int drm_atomic_set_property(struct drm_atomic_commit *state,
- 		bool is_noop = false;
- 
- 		if (async_flip) {
--			const struct drm_connector_state *current_connector_state;
--
--			current_connector_state =
--				__drm_atomic_get_current_connector_state(state, connector);
--			if (IS_ERR(current_connector_state)) {
--				ret = PTR_ERR(current_connector_state);
--				break;
--			}
--
--			ret = drm_atomic_connector_get_property(connector, current_connector_state,
--								prop, &old_val);
-+			ret = connector_async_flip_check(state, connector,
-+							 prop, prop_value, &is_noop);
- 			if (ret)
- 				break;
--
--			/*
--			 * Note that for WRITEBACK_FB_ID and WRITEBACK_OUT_FENCE_PTR
--			 * the old value will always be 0. So any commit that sets either
--			 * property to any other value will not be considered a no-op.
--			 */
--			if (old_val != prop_value) {
--				drm_dbg_atomic(prop->dev,
--					       "[CONNECTOR:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
--					       connector->base.id, connector->name,
--					       prop->base.id, prop->name);
--				ret = -EINVAL;
--				break;
--			}
--
--			if (old_val == prop_value)
--				is_noop = true;
- 		}
- 
- 		/* No-op connector property changes can be completely skipped */
-@@ -1270,36 +1361,10 @@ int drm_atomic_set_property(struct drm_atomic_commit *state,
- 		bool is_noop = false;
- 
- 		if (async_flip) {
--			const struct drm_crtc_state *current_crtc_state;
--
--			current_crtc_state =
--				__drm_atomic_get_current_crtc_state(state, crtc);
--			if (IS_ERR(current_crtc_state)) {
--				ret = PTR_ERR(current_crtc_state);
--				break;
--			}
--
--			ret = drm_atomic_crtc_get_property(crtc, current_crtc_state,
--							   prop, &old_val);
-+			ret = crtc_async_flip_check(state, crtc,
-+						    prop, prop_value, &is_noop);
- 			if (ret)
- 				break;
--
--			/*
--			 * Note that for OUT_FENCE_PTR the old value will always be 0.
--			 * So any commit that sets the property to any other value
--			 * will not be considered a no-op.
--			 */
--			if (old_val != prop_value) {
--				drm_dbg_atomic(prop->dev,
--					       "[CRTC:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
--					       crtc->base.id, crtc->name,
--					       prop->base.id, prop->name);
--				ret = -EINVAL;
--				break;
--			}
--
--			if (old_val == prop_value)
--				is_noop = true;
- 		}
- 
- 		/*
-@@ -1324,46 +1389,14 @@ int drm_atomic_set_property(struct drm_atomic_commit *state,
- 	case DRM_MODE_OBJECT_PLANE: {
- 		struct drm_plane *plane = obj_to_plane(obj);
- 		struct drm_plane_state *plane_state;
--		struct drm_mode_config *config = &plane->dev->mode_config;
- 		const struct drm_plane_helper_funcs *plane_funcs = plane->helper_private;
- 		bool is_noop = false;
- 
- 		if (async_flip) {
--			const struct drm_plane_state *current_plane_state;
--
--			current_plane_state =
--				__drm_atomic_get_current_plane_state(state, plane);
--			if (IS_ERR(current_plane_state)) {
--				ret = PTR_ERR(current_plane_state);
--				break;
--			}
--
--			ret = drm_atomic_plane_get_property(plane, current_plane_state,
--							    prop, &old_val);
-+			ret = plane_async_flip_check(state, plane,
-+						     prop, prop_value, &is_noop);
- 			if (ret)
- 				break;
--
--			/*
--			 * Fail everything that isn't no-op or a pure flip.
--			 *
--			 * Note that for IN_FENCE_FD the old value will always be -1.
--			 * So any commit that sets the property to any other value
--			 * will not be considered a no-op.
--			 */
--			if (old_val != prop_value &&
--			    prop != config->prop_fb_id &&
--			    prop != config->prop_in_fence_fd &&
--			    prop != config->prop_fb_damage_clips) {
--				drm_dbg_atomic(prop->dev,
--					       "[PLANE:%d:%s][PROP:%d:%s] Unsupported property change during async flip\n",
--					       plane->base.id, plane->name,
--					       prop->base.id, prop->name);
--				ret = -EINVAL;
--				break;
--			}
--
--			if (old_val == prop_value)
--				is_noop = true;
- 		}
- 
- 		/* No-op plane property changes can be fully skipped */
--- 
-2.56.0
 
