@@ -1,62 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794837272;
-	b=AdUNGqLYDuuUvmCCy8cFLJJN6dPJ2mU6u7gJv2sxbGMOc/OQAuHgwZSdunnFRLRR0J06
-	 2TX6SFQM/XYtvrEjkpR0q1rxVMhXU2oymR5ZYQ+i62jFxhMJJFPjLjVjIT+IlBpIkcF2l
-	 /ULyPo/vKkwcv/13pA4dtRGYaXNoAzzUTFKaLH0MAqMagw1WcTV1R7jf+SjyX4pl8xTlh
-	 LkiSRVF19rEiGTedx/tJz6bFqPt5f3I28bEvr8iFcYHtk9LA18d0QgcITFBsOwidvL+G6
-	 GAMGCwABO1MZt1wt3c3Anl7BEdd4OL2A6oFoXSP0KWaw8++v9+CUeGAnvWwi0xnZ5MQ==
+	t=1794837433;
+	b=svR61QokqzcFTjW6/n8rcDNu23jGfOdKT0VK729RPeMdi2RLW4B0KbnACQ+F6o8VKaXo
+	 cDaihPhGfLooWcoZyLYfzGEp+1b0L81Obm6NHSatTb4MPdxoxFgMURKVGI4mds6J30UG7
+	 wT6WentmaR6qa70CzfjTK1G0eK6gTd9PZAIL6PJx+Hv8q0KuIefs77cbxUC1LLD5LbDzF
+	 YRjvLafI2YUxvoLZbrANS4/O59gZNmD7vaK6Q3CVhjn4moN8qDtKAS39nu+gvF4FlrvK8
+	 7X/9KkUtpEW6tkey4MYM0YpG3+X3KiOUmW0mgm+d+PUqD3IXUUANSb9bPaWo/pSI1bw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794837272;
-	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
-	 In-Reply-To:References:X-sashiko-severity:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=f2Q5INHps8CgWYe8Z/tRA0v/mRlLliNxSIPqAqP1nD4=;
-	b=14yWhX0ZUc9CrZ9wwR8Lti9bCogj702fVzi3d8ZECsfFgrN2TiEXqqTYeAVD6VZboZMZ
-	 PTrL6VbhPgufaNHoNa+pHouc3ezFn2XcV61s8tWiy5FiZ5LHohsvGyA1bbY1UCiHxIuij
-	 yiMz6LqZaYbXMwaBhqGfQx8zx6IOZwsJLE710HvxtOLlvO/iHHaqqXOgSocyeZE10dcOv
-	 lvem1tF5yc9rPQcH84DJFJF8Yo1SQdsGWEa5B2pJRlrxAL23y/bMQqCHbhx8kAYC4cEe/
-	 uzwkv6Da8gCu3Kas0g364pFbS5r1vi6k1ul3m8JWRbzFRyCr5j+9VGRPlhZiaxE0qRw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794837433;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=QENVAfGaOo7cG1bvZbxpHS9yVMi7DsE5+E5r95kzd9U=;
+	b=jt+DmHdEQpbs6zA9IAa3vcJIo/IKLWYrHQpNNP4SbudDU+KVrzN7dvZQzOTYekl3IROR
+	 FEUqdsONmZJdSxdolamBckbH4+OTZNQVCV7Jcn4VKAhF5kXVKVCey/UdsmkuLji4fhWJH
+	 k7jyUU6mgB8jBlMgl5iDQ+fxk8JkR6WgdPyOo7V9NhXqq162sTuUMb2grpmE/8HWUv11F
+	 /9GExcmVeslo0l0RCPDi1hGPMoEGBMupReQ17MQwph9Xi1wf7qY999+RuUS5Ro6erg7Gg
+	 2Gq4ltxUCgMc6vSfn91yGIi97t1GhEePohiD39zgKfaBWqCMJOdt4SiYbHmZkjobqaQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YsmekRUP;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ml95Tpkh;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C9EA60A2636;
-	Mon, 16 Nov 2026 13:54:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ED33606A323;
+	Mon, 16 Nov 2026 13:57:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YsmekRUP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2D921F000CB;
-	Mon, 16 Nov 2026 13:54:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ml95Tpkh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C59961F000C4;
+	Mon, 16 Nov 2026 13:57:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794837272;
-	bh=f2Q5INHps8CgWYe8Z/tRA0v/mRlLliNxSIPqAqP1nD4=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=YsmekRUPgihP5LeFNecvW6m74jLjk5PIhw5udNGkh2Oaf2qildpkCuaSODBjLpFLC
-	 oHAz1Mq/nbbTIRtqC13OkJxpOrFca93eq45v7wx+nZtqYciNxBt529deGV5aQQyEN6
-	 0+XiV2gKb5cdcwxmWL30xRgPJB4qVF+6QoSOHHwW2RostqSquJQrEIqoXqS+kCjoVS
-	 j5dm//w5UWgrlMcMty7pBlUNXjklhV0+EPl6xsGQ6jluEPhp38VCjRdG4uCnQbjZnk
-	 J9E6SmAHjvXK+btwqO6wtFMAMv6I+qkFLw8toSE/FQ+sbnf2949H00L7ljCzyAQOSG
-	 TGVLRiQfStibQ==
-Subject: Re: [PATCH net-next v6 1/2] dt-bindings: net: qcom,bam-dmux: Add
- memory-region and qcom,vmid properties
-From: netdev-bot+sashiko@kernel.org
-To: vishnu.santhosh@oss.qualcomm.com
-Cc: stephan@gerhold.net, andrew+netdev@lunn.ch, davem@davemloft.net,
- kuba@kernel.org, pabeni@redhat.com, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
- johannes@sipsolutions.net, edumazet@kernel.org, linux-arm-msm@vger.kernel.org,
- netdev@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, deepak.singh@oss.qualcomm.com
-Date: Mon, 16 Nov 2026 13:54:30 +0000
-Message-ID: <179483727050.3136.1539014411037771065@kernel.org>
-In-Reply-To: <20261112-qcom-bam-dmux-vmid-ext-v6-1-7a16bd3dff18@oss.qualcomm.com>
-References: <20261112-qcom-bam-dmux-vmid-ext-v6-1-7a16bd3dff18@oss.qualcomm.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=k20260515; t=1794837433;
+	bh=QENVAfGaOo7cG1bvZbxpHS9yVMi7DsE5+E5r95kzd9U=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=ml95TpkhccdOdCRgqDBw8B/20phX6V6A1Xts98+iUqCBqyfrGl9bqmmewT7LZDLgB
+	 cNg/PJOeL3JnR2R55byH5qrj3ZptnSPxy4JQdqDzVVZg+m6fkBOUAMH9lRK1nALKJV
+	 AxJNo2XgUr6Z0vvRUMX8JAQ47s7okiQhWRpQfkynY+ckEa8lCu7C2h20mFBxjsYFKk
+	 jH2kXTbqCv0PDJWTovf2UJ2hN+TLAZXxZ641uUdD5lbprL4pDuYASJ3V2dlA5KonvJ
+	 eRS5afGshQcH8COdh7BY+pqoHZKyENZ7EraGDoT4FTd0ruLcJYH7pO6KX/rW8Yd8Q2
+	 Xgj0IYb/C3U2A==
+From: Srinivas Kandagatla <srini@kernel.org>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
+ Arnd Bergmann <arnd@arndb.de>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Thierry Escande <thierry.escande@linaro.org>, 
+ Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+Cc: Bharath Kumar <bkumar@qti.qualcomm.com>, 
+ Chenna Kesava Raju <chennak@qti.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <20261022-fastrpc-probe-fixes-v2-0-a6b3f6f62571@oss.qualcomm.com>
+References: <20261022-fastrpc-probe-fixes-v2-0-a6b3f6f62571@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/2] fastrpc: fix probe-time races between rpmsg and
+ userspace
+Message-Id: <179483743046.37272.7082029810163966845.b4-ty@kernel.org>
+Date: Mon, 16 Nov 2026 13:57:10 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,140 +65,36 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider.
 
-Critical: 0 · High: 1 · Medium: 0 · Low: 1
+On Thu, 22 Oct 2026 14:38:46 +0530, Vinayak Katoch wrote:
+> This series fixes two races in fastrpc_rpmsg_probe() that can be
+> triggered when userspace opens a fastrpc device node concurrently with
+> the rpmsg probe sequence.
+> 
+> fastrpc_device_register() calls misc_register() before the channel
+> context is fully initialised. A concurrent open() in that window hits
+> kref_get() on a zero refcount, and because fastrpc_cb_devices_create()
+> has not yet run sesscount is 0, the error path calls kref_put() on the
+> saturated refcount, triggering kfree() of the channel context. A
+> subsequent IRQ-path fastrpc_rpmsg_callback() then dereferences the
+> freed spinlock, causing a kernel panic. A NULL dereference in the
+> fastrpc_device_open() error path when cctx->rpdev is concurrently
+> cleared by fastrpc_rpmsg_remove() is also addressed.
+> 
+> [...]
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+Applied, thanks!
 
-- [High] The series confines only the BAM-DMUX client's own DMA mappings
-  to the restricted-dma-pool.
-- [Low] The patch adds the Shikra-specific compatible `qcom,shikra-bam-
-  dmux`, but the only placement the driver supports cannot pass schema…
+[1/2] misc: fastrpc: fix NULL rpdev dereference when session alloc fails
+      commit: 2b22e3266386190d2027d9f12f317e0662a40711
+[2/2] misc: fastrpc: fix init ordering race in rpmsg probe
+      commit: 1bf78aac760fd25b684153f8c477aede9b9dd634
 
---
-
-dt-bindings: net: qcom,bam-dmux: Add memory-region and qcom,vmid properties
-
-This patch adds optional memory-region and qcom,vmid properties to the
-BAM-DMUX binding. With them, DMA mappings can be confined to a restricted
-DMA pool that is shared with the modem through SCM. It also adds the
-qcom,shikra-bam-dmux compatible, with qcom,bam-dmux as fallback, and
-requires both new properties for it.
-
-> diff --git a/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml b/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
-> index 33746c238513d..f7388d24c8612 100644
-> --- a/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
-> +++ b/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
-> @@ -22,7 +22,11 @@ description: |
->  
->  properties:
->    compatible:
-> -    const: qcom,bam-dmux
-> +    oneOf:
-> +      - const: qcom,bam-dmux
-> +      - items:
-> +          - const: qcom,shikra-bam-dmux
-> +          - const: qcom,bam-dmux
-
-[Severity: Low]
-Will a Shikra DT that uses this compatible pass dtbs_check?
-
-The bam-dmux device is only created from a child of the PAS remoteproc
-node:
-
-drivers/remoteproc/qcom_q6v5_pas.c:qcom_pas_probe() {
-    ...
-	node = of_get_compatible_child(pdev->dev.of_node, "qcom,bam-dmux");
-	pas->bam_dmux = of_platform_device_create(node, NULL, &pdev->dev);
-    ...
-}
-
-So on Shikra the node has to sit under the qcom,shikra-mpss-pas node.
-
-Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml does not
-define a bam-dmux child and ends with unevaluatedProperties: false. The
-qcom,pas-common.yaml schema it references does not define one either.
-
-Should the series also update the Shikra PAS binding to allow the
-bam-dmux child node?
-
-[ ... ]
-
-> @@ -72,6 +76,22 @@ properties:
->        - const: tx
->        - const: rx
->  
-> +  memory-region:
-> +    maxItems: 1
-> +    description:
-> +      Phandle to a reserved-memory node compatible with restricted-dma-pool.
-> +      The BAM-DMUX device uses the pool for DMA mappings.
-> +
-> +  qcom,vmid:
-> +    $ref: /schemas/types.yaml#/definitions/uint32-array
-> +    maxItems: 1
-> +    items:
-> +      minimum: 1
-> +      maximum: 63
-> +    description:
-> +      VMID of the remote execution environment that is granted access to the
-> +      restricted DMA pool through SCM.
-> +
-
-[Severity: High]
-Does this also cover the BAM descriptor FIFOs, or only the bam-dmux
-buffers?
-
-Only the bam-dmux node gets the restricted pool. qcom_bam_dmux.c maps the
-skb buffers with dmux->dev, so only the payload buffers go through the
-pool. The descriptor FIFO is allocated on the BAM DMA controller device
-instead:
-
-drivers/dma/qcom/bam_dma.c:bam_alloc_chan() {
-    ...
-	bchan->fifo_virt = dma_alloc_wc(bdev->dev, BAM_DESC_FIFO_SIZE,
-					&bchan->fifo_phys, GFP_KERNEL);
-    ...
-}
-
-That address is then programmed into the hardware:
-
-drivers/dma/qcom/bam_dma.c:bam_chan_init_hw() {
-    ...
-	writel_relaxed(ALIGN(bchan->fifo_phys, sizeof(struct bam_desc_hw)),
-			bam_addr(bdev, bchan->id, BAM_P_DESC_FIFO_ADDR));
-    ...
-}
-
-The follow-up commit "net: wwan: qcom_bam_dmux: Assign restricted DMA pool
-to remote processor" says "BAM-DMUX DMA mappings and BAM descriptor FIFOs
-must therefore be constrained to a designated memory region", and that
-accesses outside the region can trigger an XPU violation. It relies on
-"When the BAM DMA controller references the same pool, its descriptor
-FIFOs are covered by the assignment as well."
-
-However, Documentation/devicetree/bindings/dma/qcom,bam-dma.yaml does not
-define memory-region and has additionalProperties: false. The
-dma-controller.yaml and dma-common.yaml schemas it references do not
-define it either.
-
-With a schema-valid Shikra DT, wouldn't bam_alloc_chan() allocate the
-FIFO from ordinary memory outside the SCM-assigned region? The BAM
-descriptor fetches would then land outside the shared region.
-
-Should the series also extend qcom,bam-dma.yaml to accept memory-region?
-It may also need to check how iommus interacts with
-of_dma_set_restricted_buffer(). Failing that, could one of the bindings
-document where the descriptor FIFO has to live?
-
-[ ... ]
-
+Best regards,
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261112-qcom-bam-dmux-vmid-ext-v6-0-7a16bd3dff18%40oss.qualcomm.com
+Srinivas Kandagatla <srini@kernel.org>
+
