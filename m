@@ -1,48 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.5
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794906851;
-	b=ftnVELA927tCgbotkrNfs8dNKpVjbKjWh6tnWQKOIT8xL5oJrRRznefGmS2VhqNpGuu+
-	 vN7s/ehu9H4yommPro/PFu+B0LkRn2tKfQhfc3wxnV7ye1Bw2WsphxKj4j7X9tBxojVHw
-	 Oj7SLWRayY2VATJGrktMuuZQSS9YFCCl5o47+tXSLO2pD3ki/XKB9IwBAH0/itJ6QMQ/a
-	 V14VreD7So+KxXRV9ZpLMyBAQLqkIMS7ITQjIz5aPQYRsQBx41C6p/fD9THAJ/JMAWR/2
-	 rXuTcV5DA/EVSdqhUegEuJaIZ/KSx72Li9fXxrJB0g18ZJgpBm/uSLrHMdEtVIsFs0w==
+	t=1794906853;
+	b=YtlvZ+5mTzklso77uhdOzHapUshAMIT7VsI/OUvHk3SaYRtCrnwLoorWZ6Htn2R562iz
+	 LxERPvr3Z/4kNn9b/bBZ/bv9WtSFJli05YEZ0BSkg3vtxickIc6HlfaeOLWiarbs2Swxp
+	 SOi6vFXTMx4D3ZWrlD/2Dq69Cvlb569WikZvdhz0OQtvo4zv2YU8xddet6NaEufoVHJ5r
+	 VZYp/G9LXZso5TxDDOPY4wt/Tr1399t3KjSLufKoJoNpYZ/bVMdbkwB0ZWAnpjkOZXcN5
+	 8dqPpciiENf2wvlXiVJjuhJke50If17fAcEjnwsrMPoXZuPox8NBUAxQFRSQEHSFjFw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794906851;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794906853;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=Q3V60X/cuBh42d34gBp1xIimrGQdT/S3EQ0ZytO9pbQ=;
-	b=a6ptISzSA+ARwy42Z2G2FkV4Paq81qjN64aVS4GHEWNrhFq+Ae2FmEjtAVjCvCds1CK5
-	 eYkL+1JX4ailBbFIbl5oBGKZRl080NcrUToNYvoAqAqCY+Ybcmoe+7bGvbnhJL4YSa/75
-	 P0MVnwHsrotbcOTeJrY/EFhwXUQ1qZP/gdClnls53aIOLQBRzBWWHkhjtt13Am2IpIiul
-	 eKzIWWFVgeUJwcuh8S4SwhOO5z619vHhsd+XMi/p/U+oTHpWKYs+uaWwER9nOr/CedCNn
-	 MtxNLUB3CYpNca0rEr5dUJ7YAMqTG9WU94n4omL8Wurruz1f+lMlPfY4TT9q//YXyWQ==
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=pZ5s6RoGkC1ZyNr/O6eROnVnYOQpUVLD9YWFjmstH7U=;
+	b=eVuVpM+lVtfw+lQ11kquV6ae1GSRDMHWX1LfhiQ8n3IDy/Q5kWzZhODwJJQcw2QNKED1
+	 /mH7XMQLbWp0vcYkEye9SNCgSx/c5xuQocS7b3wS8lF/w3UJvsrJXzxEyoAPAlb2FPLQF
+	 W+ZYJFrqyPQmOT8HrjwrAYc9tdvNlGwU4CXoPIkzzM4rqhoURXxFwXs6gAl8EYInkptto
+	 CruxFrG/e3PmB6nnQxKp6vgLzgKXriximv+ir+7/OMBbbrawlcUXK6utP4NvsQ4WQH2+p
+	 pxKZRqZ+nS2NXkSReagfjix0QTWGgOHWoF9S7ZgcmOTtS/mAsa2138xQndY7l39su3g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=163.com;
 	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=Rh462Mdm;
-	arc=none smtp.remote-ip=220.197.31.5
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=Vr4AegD5;
+	arc=none smtp.remote-ip=220.197.31.4
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6644D606A323;
-	Tue, 17 Nov 2026 09:14:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6644D606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93500606A331;
+	Tue, 17 Nov 2026 09:14:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 93500606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=Rh462Mdm
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=Vr4AegD5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Q3
-	V60X/cuBh42d34gBp1xIimrGQdT/S3EQ0ZytO9pbQ=; b=Rh462MdmjIjzDc9rM+
-	3m7+2B9aNJ1O9/LwJfybdvIZ7u5AUYKjLXIrNfOKfZLCefnssF+pMX3OKROHS1Zi
-	aqp4Lw2X3iZn0AZ060DWT1e15sQ6+fI4fXmKC7qgxfZ+8cuOgmlrmw9kNYI8k8n6
-	jp7rr//g2o4TLGwuc7Tn/7tLE=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=pZ
+	5s6RoGkC1ZyNr/O6eROnVnYOQpUVLD9YWFjmstH7U=; b=Vr4AegD52umo1lC73M
+	8VzOnaRO5aWJ03q1y0BpxZGGgTo7QaJpntmmAoFrnr74KR7DfMPkuI/RV6u6ZEDo
+	SgD0VIZf2nQkaofydyXrlyJe6HsYvyQLRlrmf77ivl9V+M+jeL5YHzkvsASHuzz8
+	qDjqMY00rjB/JTbjGWpLTbuII=
 Received: from GHT-5854251031.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wAX9iK1GvxqVX_fIA--.31468S3;
-	Tue, 17 Nov 2026 17:13:28 +0800 (CST)
+	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wAX9iK1GvxqVX_fIA--.31468S2;
+	Tue, 17 Nov 2026 17:13:26 +0800 (CST)
 From: Wanquan Zhong <zwq2226404116@163.com>
 To: mhi@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
@@ -57,12 +56,10 @@ Cc: Wanquan Zhong <zwq2226404116@163.com>,
 	Andrew Lunn <andrew+netdev@lunn.ch>,
 	"David S . Miller" <davem@davemloft.net>,
 	Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH v7 1/2] bus: mhi: pci_generic: add Rolling Wireless RW135R-GL and RW151 support
-Date: Tue, 17 Nov 2026 17:13:23 +0800
-Message-ID: <7a9617af129fac54b3a2575e39a006c57854142e.1794905977.git.zwq2226404116@163.com>
+Subject: [PATCH v7 0/2] add Rolling Wireless RW135R-GL and RW151 MHI support
+Date: Tue, 17 Nov 2026 17:13:22 +0800
+Message-ID: <cover.1794905977.git.zwq2226404116@163.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1794905977.git.zwq2226404116@163.com>
-References: <cover.1794905977.git.zwq2226404116@163.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -73,229 +70,44 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wAX9iK1GvxqVX_fIA--.31468S3
-X-Coremail-Antispam: 1Uf129KBjvJXoWxtr45ZF43ZF47JF1UGFW3ZFb_yoWfZr47pF
-	WfArZ5tr4ktw1rWFW8A34kKF9Yvan8WryUKrnrKw1Ig3WFya10vay8K347trWYvw4vqr1F
-	gFnxCryxuFsrJrUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRq9aPUUUUU=
-X-CM-SenderInfo: h2ztjjaswuikqrrwqiywtou0bp/xtbC9BiO5Wr8GrhrRwAA3f
+X-CM-TRANSID:_____wAX9iK1GvxqVX_fIA--.31468S2
+X-Coremail-Antispam: 1Uf129KBjvdXoW7JryrJF4kXr1fCrW3Ar4fXwb_yoWkArg_uF
+	Z7GFyfWrsrZFn7CFWxGF47XrZ5Ka18Xrn0qFyktF9F93sFkr1DWwn5Jr1DJrn5WF4rGF18
+	KFyUuw48Ar1YvjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRRApnDUUUUU==
+X-CM-SenderInfo: h2ztjjaswuikqrrwqiywtou0bp/xtbC0heN5Gr8GrcI4wAA38
 
-Add MHI PCIe device configuration for Rolling Wireless modules:
+v6 was not merged on mhi-next. This v7 series is standalone again on
+current mhi-next and includes the full v6 Rolling config plus the RW151
+SKU update below.
 
-- RW135R-GL (Qualcomm sdx35): SAHARA, DIAG, MBIM, DUN, FIREHOSE, ADB,
-  NMEA and IP_HW0
-- RW151 (Qualcomm sdx75): MBIM-based config for most SKUs
-- RW151 SP (2099:1502): QMI on channels 14/15 instead of MBIM
-
-Register PCI_DEVICE_SUB entries per chipset:
-
-- RW135R-GL on QCOM 0x011a (sdx35): sub-vendor 0x2099, sub-device
-  0x1300/0x1301
-- RW151 on QCOM 0x0309 (sdx75): sub-vendor 0x2099, sub-device
-  0x1500/0x1501/0x1502; HP OEM sub-vendor 0x103c, sub-device
-  0x8fb8/0x8fb4
-
-Use Rolling-specific EDL firmware paths under qcom/sdx35/rolling/ and
-qcom/sdx75/rolling/.
-
-Tested suspend-to-RAM (mem) on Rolling RW135R-GL and RW151 hardware: MHI
-resumes cleanly and MBIM/wwan function after wake. Hibernate (disk) could
-not be tested on this platform (/sys/power/state lacks "disk", ENODEV).
-
-Tested-on: Rolling RW135R-GL hardware (MHI probe, MBIM, DIAG, ADB,
-suspend-to-RAM)
-Tested-on: Rolling RW151 hardware (MHI probe, MBIM, DIAG, ADB,
-suspend-to-RAM)
+Patch 1/2: device config and PCI IDs. Patch 2/2: ADB wwan_ctrl (split as
+before).
 
 Signed-off-by: Wanquan Zhong <zwq2226404116@163.com>
+
 ---
 Changes in v7:
-- Standalone series on mhi-next (v6 not merged); includes full v6 content
-- Add mhi_rolling_rw151_sp_* for 2099:1502 (QMI instead of MBIM)
+- Resubmit standalone series (v6 had no maintainer reply / not merged)
+- Add RW151 SP config for 2099:1502: QMI 14/15 instead of MBIM 12/13
+- Use 163.com for From and Signed-off-by (same as send-email identity)
 
 Changes in v6:
-- Full RW135R/RW151 channel config and PCI IDs; no_m3 dropped; MBIM ring 32
+- Resend as standalone 2-patch series against mhi-next
+- Include full RW135R-GL/RW151 config; split ADB to patch 2/2
+- Drop no_m3; RW151 MBIM ring 32; SAHARA SBL; NMEA on 60/61; all PCI IDs
+
+v6: https://lore.kernel.org/mhi/cover.1792573876.git.zwq2226404116@163.com/
+
+Wanquan Zhong (2):
+  bus: mhi: pci_generic: add Rolling Wireless RW135R-GL and RW151
+    support
+  net: wwan: mhi_wwan_ctrl: add ADB channel support
 
  drivers/bus/mhi/host/pci_generic.c | 152 +++++++++++++++++++++++++++++
- 1 file changed, 152 insertions(+)
+ drivers/net/wwan/mhi_wwan_ctrl.c   |   1 +
+ 2 files changed, 153 insertions(+)
 
-diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-index b636e2c23b4d..ce9a1205c2e9 100644
---- a/drivers/bus/mhi/host/pci_generic.c
-+++ b/drivers/bus/mhi/host/pci_generic.c
-@@ -948,6 +948,137 @@ static const struct mhi_pci_dev_info mhi_netprisma_fcun69_info = {
- 	.sideband_wake = true,
- };
- 
-+static const struct mhi_channel_config mhi_rolling_rw135r_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(36, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(37, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(60, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(61, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 128, 2),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 128, 3),
-+};
-+
-+static struct mhi_event_config mhi_rolling_rw135r_events[] = {
-+	MHI_EVENT_CONFIG_CTRL(0, 128),
-+	MHI_EVENT_CONFIG_DATA(1, 128),
-+	MHI_EVENT_CONFIG_HW_DATA(2, 1024, 100),
-+	MHI_EVENT_CONFIG_HW_DATA(3, 2048, 101),
-+};
-+
-+static const struct mhi_controller_config modem_rolling_rw135r_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(mhi_rolling_rw135r_channels),
-+	.ch_cfg = mhi_rolling_rw135r_channels,
-+	.num_events = ARRAY_SIZE(mhi_rolling_rw135r_events),
-+	.event_cfg = mhi_rolling_rw135r_events,
-+};
-+
-+static const struct mhi_pci_dev_info mhi_rolling_rw135r_info = {
-+	.name = "rolling-rw135r",
-+	.edl = "qcom/sdx35/rolling/prog_firehose_ddr.elf",
-+	.config = &modem_rolling_rw135r_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+	.edl_trigger = true,
-+};
-+
-+static const struct mhi_channel_config mhi_rolling_rw151_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(36, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(37, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(60, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(61, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 128, 2),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 128, 3),
-+};
-+
-+static const struct mhi_channel_config mhi_rolling_rw151_sp_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_UL(14, "QMI", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(15, "QMI", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(36, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(37, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(60, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(61, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 128, 2),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 128, 3),
-+};
-+
-+static struct mhi_event_config mhi_rolling_rw151_events[] = {
-+	MHI_EVENT_CONFIG_CTRL(0, 128),
-+	MHI_EVENT_CONFIG_DATA(1, 128),
-+	MHI_EVENT_CONFIG_HW_DATA(2, 1024, 100),
-+	MHI_EVENT_CONFIG_HW_DATA(3, 2048, 101),
-+};
-+
-+static const struct mhi_controller_config modem_rolling_rw151_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(mhi_rolling_rw151_channels),
-+	.ch_cfg = mhi_rolling_rw151_channels,
-+	.num_events = ARRAY_SIZE(mhi_rolling_rw151_events),
-+	.event_cfg = mhi_rolling_rw151_events,
-+};
-+
-+static const struct mhi_controller_config modem_rolling_rw151_sp_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(mhi_rolling_rw151_sp_channels),
-+	.ch_cfg = mhi_rolling_rw151_sp_channels,
-+	.num_events = ARRAY_SIZE(mhi_rolling_rw151_events),
-+	.event_cfg = mhi_rolling_rw151_events,
-+};
-+
-+static const struct mhi_pci_dev_info mhi_rolling_rw151_info = {
-+	.name = "rolling-rw151",
-+	.edl = "qcom/sdx75/rolling/prog_firehose_lite.elf",
-+	.config = &modem_rolling_rw151_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+	.edl_trigger = true,
-+};
-+
-+static const struct mhi_pci_dev_info mhi_rolling_rw151_sp_info = {
-+	.name = "rolling-rw151",
-+	.edl = "qcom/sdx75/rolling/prog_firehose_lite.elf",
-+	.config = &modem_rolling_rw151_sp_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+	.edl_trigger = true,
-+};
-+
- /* Keep the list sorted based on the PID. New VID should be added as the last entry */
- static const struct pci_device_id mhi_pci_id_table[] = {
- 	{PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0116),
-@@ -961,6 +1092,12 @@ static const struct pci_device_id mhi_pci_id_table[] = {
- 	/* Telit FE912C04 (sdx35) */
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x1c5d, 0x2045),
- 		.driver_data = (kernel_ulong_t) &mhi_telit_fe912c04_info },
-+	/* Rolling RW135R-GL (sdx35) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x2099, 0x1300),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw135r_info },
-+	/* Rolling RW135R-GL (sdx35) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x2099, 0x1301),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw135r_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x011a),
- 		.driver_data = (kernel_ulong_t) &mhi_qcom_sdx35_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0304),
-@@ -995,6 +1132,21 @@ static const struct pci_device_id mhi_pci_id_table[] = {
- 	/* Telit FE990B40 (sdx72) */
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x1c5d, 0x2025),
- 		.driver_data = (kernel_ulong_t) &mhi_telit_fe990b40_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1500),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1501),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1502),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_sp_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x103c, 0x8fb8),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x103c, 0x8fb4),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0309),
- 		.driver_data = (kernel_ulong_t) &mhi_qcom_sdx75_info },
- 	/* QDU100, x100-DU */
 -- 
 2.53.0
 
