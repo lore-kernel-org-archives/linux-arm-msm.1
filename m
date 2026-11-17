@@ -1,68 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794877515;
-	b=Qyh+aSTl8sdHToYaZSw+YMyCAn2CRxcYvKuQQJa31H+yAuGJB7Xi8m8nKRfR/4kbD6Kv
-	 sROrrcXwZhcFi3XWmHEjjlg8NBsbOckB1mKZpHlF0WDfie7tLPJv3dYFW7r5S2NkvE7IQ
-	 UveMdTLocYLvKagK0CHUHoiMjOyB1HDY59qEAONLi0jfS0jjG4wscLHk88dkOzbQ8q0DK
-	 rnYe96jXxWUkll0k1HfzIaFd6lWslXSxH7Lf8BdbqK5DPNupyxSFH+0pWgIrC/Ff8InsO
-	 a3ZoEY11N7vGUKLWtPW5mhZtBy9bV1+P4GxwdBj7bW2Lx8Rg1bi4DYEu3PXMbsPpE2g==
+	t=1794877517;
+	b=LZ8vNagJl7VRFLKw3yKGipSkzi1QlhQPkjBuOi263qsNnc7EQNCRHyGU1zwOpxIyc2O9
+	 /Y9ngSYOKovdnttwGrRLykcEYaoUBfyXvckagkssPzp0Z2bgBP3TaJVO3F3pUCX53PER6
+	 OUPIf7a3X1agPslCxpLYL2hUNaAKy72ENwB2rCTH+CzcjW/lyWFMdQ9e8UqNX5ebadzX8
+	 A1QjfwLlGiSUHIIGhgvnl2qrQAij5bpb3boKUqVoGJ392d41jZ5B5cSZH6CjQcmkgM4eV
+	 PGw0sL1gcbw8ae2gwdgBuwfyHvjrJFi2YCBMrfkYs7dVda0UjDz5lbMM40sIK6U6hwA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794877515;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794877517;
+	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=lHhPx45EzMrHgV7McmNCL88bK4Z2K8BRykVtkSy5gkA=;
-	b=lOuMveeZuDkm3VltHAdLfbCt+1SGffxPIYAu10SjG4wovTrX/psezItuqoHuqJpMDrAI
-	 S72IHGEi8LG43BDWtijlx3HrbmpL1WN+PzrcGz7LPt9F61gjZ08XEM3yVV4O8RmA37I5I
-	 ty7VkqH6sILiZ1xBnFxvwiV1UP5as0IoiesyW3qp2wQvaC9Csgw/HZnb+eX0148AytksN
-	 szrPMNm3pS/v277B7nkE46hesLSGGawh0KgWc570go+mA5BH7dRJ45JJLlOZ/g/ROQdkP
-	 HUQU4u+9QGFhUNesrVN+bidtXJ5ua/s1onLFWrkUxvYWSbT86qH9BYkjFpalWD1sJ7Q==
+	bh=t2JM5GCECTkMdM3S+MJpk56aIu7bFWfVAUq5lccAk5o=;
+	b=gUv1KGmksTXS+nyaT//GQOP9H6rbdg4iZxfE1NOG7nobu9/QcgzsDE+bMzs4OmKK13KZ
+	 KcfbTBTFsgLlzZNhdnLj0Lw3qSinPE1cuV4yuN03QDL8Om9WWs9L2ii0sHZxZcoVbQVaD
+	 3qkc1Ni/i6FTjLEpIfvuMfiHbprtqVx10qCGcp4pmPboQDPZnxuq3CfXkTFaDvdDJF6uD
+	 vC1Uc/zGM8iIGfzWeUl1ngU28btIXubP2xhldYOjjdgalPDb0iMDwDGCF9z+R3F7V2dOo
+	 0GiQkQL4kiLkVBOFG3T9G+9tnl0TcD2Z6gQBN+vGlLAuvYUEf0JUa9RWwO0BEoWy/gg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UpHI11Gz;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="A4lKAN/L";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAA260A2620;
-	Tue, 17 Nov 2026 01:05:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA73E606A330;
+	Tue, 17 Nov 2026 01:05:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UpHI11Gz
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B18391F000C6;
-	Tue, 17 Nov 2026 01:05:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=A4lKAN/L
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 657631F000C4;
+	Tue, 17 Nov 2026 01:05:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794877515;
-	bh=lHhPx45EzMrHgV7McmNCL88bK4Z2K8BRykVtkSy5gkA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=UpHI11Gz5lGa8oZjNxbsZaO0jSPDd2nrqjnWp0BekzOTz4UVw/NHcvyuYfCoOWj5S
-	 nsNvtxWb6Yv1WjvhN7/un+G5ohWnpvzkarNC2e+8FcI6saGk47uCg0/3+LAy6LvZDq
-	 7C7Zzs07ubmzzlwvd00RtBrNRHrsOINYR1upCr0ooa4t204YPg1ShR50izJKwUkHu+
-	 PWkycck1Ay1lcLRFPjogt2qO1BlJ6qZ1fOsgjV7H1Ac90u2tWRfO8X/vdT3HeYaCOf
-	 6HfsZ//gUASXgv7N9UOT3jvQbdFjgC+O/9QaSnN7aQZJFhokWgVuyhX9u1+pue/tY7
-	 q1EwTBsxDC4jg==
+	s=k20260515; t=1794877516;
+	bh=t2JM5GCECTkMdM3S+MJpk56aIu7bFWfVAUq5lccAk5o=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=A4lKAN/LGZVzhwYKQJM0fKcJSTSH2zx+1uuV7kQ6ytSoWP+Jmkfit3Pb6fluFP6HO
+	 URy5FutMhwT5baHbX6qPXZ/RnDrns1hsLogu2WnGXfcytun5cRponp4d7thBkZRKNz
+	 EFqR5LaIg4trtKcu96bxLRZECESKL486UeIKE1MfbYpTuG13qCQPm5I6XtWoBYq+eP
+	 ilW+UVj2y2oft1VQs1dnEJmraf/dmbkwTZoKzSb7od431g3qKLD1rWcVVPP3mmffm/
+	 LdJ/FKclruaPYhQ05rh4hUX242OFm86UYI0+Hhd2p1ABFBdtQQduv2YHQA5WKdcRdQ
+	 yr909Z5YJGuQA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Rob Herring <robh@kernel.org>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v4 0/4] Asus Zenbook A16/A14 (UX3607OA/UX3407NA) EC driver
-Date: Mon, 16 Nov 2026 19:04:47 -0600
-Message-ID: <179487749308.432567.16654659744519848527.b4-ty@b4>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH 1/2] arm64: dts: qcom: Correct white-space style
+Date: Mon, 16 Nov 2026 19:04:48 -0600
+Message-ID: <179487749339.432567.6694138389097894424.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261015-topic-asus_ec-v4-0-af6305ffcb10@oss.qualcomm.com>
-References: <20261015-topic-asus_ec-v4-0-af6305ffcb10@oss.qualcomm.com>
+In-Reply-To: <20261113185426.183501-3-krzysztof.kozlowski@oss.qualcomm.com>
+References: <20261113185426.183501-3-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,25 +69,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 15 Oct 2026 10:55:28 +0200, Konrad Dybcio wrote:
-> The Snapdragon X2 series-based Zenbooks come with a bespoke embedded
-> controller firmware, bearing some resemblence to the reference Qualcomm
-> implementation (qcom-hamoa-ec.c), albeit with too many changes made to
-> consider them anywhere near "compatible".
+On Fri, 13 Nov 2026 19:54:27 +0100, Krzysztof Kozlowski wrote:
+> Correct minor style issues around white-spaces (e.g. double space before
+> '=', missing space before bracket, spaces used for indentation) to fix
+> dt-style-check warnings like:
 > 
-> This series introduces a new driver to let the user retrieve current
-> RPM of the two fans, the temperature readouts from 2 temperature
-> sensors and get/let keyboard brightness levels. The driver also
-> notifies the EC of system suspend entry/exit.
+>   monaco-ac-evk.dts:825: [redundant-whitespace] extra whitespace after :
+> 
 > 
 > [...]
 
 Applied, thanks!
 
-[3/4] arm64: dts: qcom: glymur-zenbook-a16: Add Embedded Controller
-      commit: 9947a8980a94319aa4546407b656eb588c9dfcd5
-[4/4] arm64: dts: qcom: glymur-zenbook-a14: Add Embedded Controller
-      commit: 2622886dcb5fcc519cd8e697e35c476c1b46392f
+[1/2] arm64: dts: qcom: Correct white-space style
+      commit: c4ec9fced70f2445d11cf77dbb04f5c01d0cf9ae
+[2/2] arm64: dts: qcom: qcs8550-ayntec: Use hyphens for nodenames
+      commit: dc607958bc6a13a212a947cd3a29acc704b8c446
 
 Best regards,
 -- 
