@@ -1,113 +1,62 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794887078;
-	b=vloXWTifgEzk18GReJXS7+ZvbE7KbNUX4bwED5B0lPSPgfUh+6PCz1WUUfabQO3ZI4wA
-	 S+zpFl0oppRGnS4hwgrGQOzzEyUL9hNyAoirZzzSevMUFge4kshE71h3fykMNPQOa7jC/
-	 tL9hUcQXU6HXqak7W2cLjGHE3CBZZ/ndK4unLpey9awqvzpwR/aHZZFZ+t/phEYQL7flU
-	 mkvhqNP9QbwmXHzIwJQGZWDnlKNXwMMy+mhPXhx5CQXt3AxL90RLpnHIzURRXmOYS81FZ
-	 z5TOUJc+JsajDrJSUyX1GZykjMVHcEnEVrpwEjtIWlALn/Q3ntyDQWXu61qP4tGBioA==
+	t=1794889044;
+	b=3vll9Gd8FXdPAOmh6oeNKA+L11/V7tgq/H8R9AzGGCCN8sKk0Wfo1QT2TH/1XH927wUR
+	 2n13J3v//AK5etJKGYQW7KGEa7nFNgyNpcY1e5BtOW3vH9AGhSmmPHhccK/hXGeIpmg5X
+	 EgMb8BzegTI78S+81y22pR7oGQxg1q+OwX+qHYbh0a9+qqqh7sM2BE+G4J/9eNFI7OreC
+	 raY/hPMnozF15k6PfsWTnhEhMQUWvzV0hB9Ek628e7FJNhswunLEaXqIWzPanXIW7G/o/
+	 vQEeITo85Q3YYtbL1OiaMYM8FDx+1Sps1or3peEoqwv+HP08pgOBza332J9B+eQuO/A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794887078;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=FTr2Ir2VveDHvZNQ/ZtxXIYmnzC4Bm1U9lZRzd2tUxc=;
-	b=OTkVhkXpT4VQ5odSbtb5t2091EV1vL/IJhJoHUzxIfquuQUSGTkmdGlNAfT/VtJ3XlhU
-	 awUgJNju5IRjt2yDaVBPP0Jm+cS/06rIBxZPrYQn5boqSrQpYvBF6hKRMZq0F0Iz58cDb
-	 EPM4vi845WHC7L/NB3J3zVAB+K4duiwiNe9hhmwFB6YKISizt1iQZJJwIMpAlBc7/cqWA
-	 lFjdHyg7ZzGv75zT6kWPDfmr1TLTZwb5FFdFcIGFp9G9LhwhknQuOFwcX85i5eduTTYJE
-	 udpxYffyJhqOU2bumUw6MVQ1S/tdCUaPfFSsoD8Pifpygfg8xYbImR6k3ZofcaPk4/A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794889044;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
+	 X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=OBSo/4IN7S6trP7CgPBOd4llSonUbNqkrJxw7CQiCqA=;
+	b=NIZaC7B1GZjlElqYTayMG6I3QZnxZGxRjQozxZtDxj+9Del97SYEd2vyibPf7H9lPziI
+	 aIPfbhbDw4c1MFIvZlgfEWWYhUOnPP00SVbpeXVAjWUN+O63SrWT2YlGGgVD04umyuq8U
+	 +KKznzPpi7B0+jpoCEyZd9YL7OVmufirbJPV6y1BpGzZwiPA1jglpbzX5f2TnAikyWryk
+	 P/XO0WrAIerc0plG4a/TXw0XW/DYAS7QZSATU5lvXBcl+nFRA+1erklPdCfN3STrQ0lAJ
+	 pbDE/vSWwA0YFYgBeD8QRfMJWI16VueZL2/q8EPdS2WBuXW7z8RlRgoS7qnD3V97aQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Zpye+J1d;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U7tAESKo;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2906606A323
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:44:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E2906606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=wqSPP4SN;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E424606A31C;
+	Tue, 17 Nov 2026 04:17:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E424606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Zpye+J1d;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U7tAESKo
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH2aFpZ200038
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:44:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FTr2Ir2VveDHvZNQ/ZtxXIYmnzC4Bm1U9lZRzd2tUxc=; b=Zpye+J1dDGbqiBFt
-	sn4WDsBEVwwAyErMkl4ZOUe2hs9uQorbN8DiZS+A3FLVAlymAJr6diWQ6FtJXvOr
-	5zVe6qIyqxTTTz/XO5+rN4U1ZrGt0o0DvDqeKAB02i8qoWSR6Q4/t+j2ta7kkWYH
-	2CDgyeR2mvK3madBJsoCCPnx6N5iMxS9AexuxI/UK9H+YRppV61mcIe7mHHk9zFu
-	Y/LocpQajLjVeFeRdA8dce0tjKkqxhn7zXU/zKy5RPew6/Yk6PLIhx3qSCF28jW4
-	J3VfdM6Zdz1WVS2qCYZT7DUehNRmKFvEqPGICtYhRUnY/ZlDh/dxoIInw2z0pfHv
-	B21fmA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j038maupw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:44:35 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b3a9ee822fso799034a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 19:44:35 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=wqSPP4SN
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794887075; x=1795491875; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FTr2Ir2VveDHvZNQ/ZtxXIYmnzC4Bm1U9lZRzd2tUxc=;
-        b=U7tAESKoKneO2Q0kwazMemh9tT8DW92NdC2EioH6ugHqkWjcUCixLqn6TfQGvI2jH1
-         ZZHUWvCx6w/9vVEORf2Es3Qsk0kuRfrTQv3nvRPBFOZn9BjWLIWsrTX9nuuGAo7zBhme
-         scnbeykVpYbGONUluIluJvVQg+4wJvzothUP7Vl3GQdjK7O+1UbvvHKft30USbOWFdp1
-         LyYX+Ftzn8ohBu3wouvxzc4aBYtiiWawa0UX9W6cVOSjZFir6KKltC/chFsv/abO/4wi
-         qkdOggor6AeQMyy86dg8V+Hm5BYzhAZDGrTodkfHSpUzH4VOH0skYgIzy27MADJ9fheB
-         arvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794887075; x=1795491875;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FTr2Ir2VveDHvZNQ/ZtxXIYmnzC4Bm1U9lZRzd2tUxc=;
-        b=xBPGKKMymirwdUNn7+STZr+gTN8h+qvx+ks7/9oEjpkB9t1HW83CyBw+E0yKwgbPmV
-         Lr0ea9pNe47q1hN8Jlyy7AxwgKgs0atkFTdaDHfRvuAMBd/LB+DNDgFASHsVf7C4F/Md
-         /Hq+b7jK+xc9I2HvVp0nYHxaJ32gt8/v6nORjOh6TvhlKUWYN9UkBGGut3K2gBIn+21b
-         qEXsUgZxnYAB5tXrcCSvu7dN0OhRUgiNbq2ACektzHjjerqQ5kp3hPWpbHgCEfZ8WgBP
-         K2xkaKVdAhJzhQvhh7Dc593a7zaYX4kzhVezc0b50OOr/bpOUj7hNhlron48E9joQ8Nm
-         n2dg==
-X-Forwarded-Encrypted: i=1; AL+hErGuHiJ7ATnAqSdL72vi+8kwtx0bD9JhLCS9i7AhbVwOA8L1kehpdb4bwuiDZJWuaH7L/CZ5Fvr3Y2rV6Iwl@vger.kernel.org
-X-Gm-Message-State: APuU4Z/mzU/qABwGham8n0A2pYLU+WKg3D6Jkq7vK0+FzxfvRV/B38Wo
-	rwVqTqjzB3LDO80d4JhtkzWQ1fK15Wgjs01gsdf6GcjAxoy0/mun3t/OilHXzDaCg4rNBC7Jrt9
-	fkxW0rK8h2u86NrdCKCaUxL0AZgxLVTOBSCrpTNjvOPTre05wT2KmpEJRCJh0NehQNCt5ye7YfG
-	IbbKwoYQ==
-X-Gm-Gg: AZFdTZdgIIQ+PZ3qTCvvxROGCjjHhFlYBBVgYqC6oORtt9huT0TmKbnroIaVjHrLdrL
-	vKNRIOxkWGn3llr4Tnmw1h/LV4/jT59ekbiJhzk8/rccTUhIb3WRPAT6EAgtdUPE/55/doJApfG
-	rdoCwya5xxTgMIQeTTUBtbf0lq/K8xAZ1WZvghfCLgqxGpYwR36Tzee9LCo6n2coSHSM1961C9B
-	txwJTCL5sVrsBO6i1yixH4kvTnd4r+EwJ1JEbxKg4Ym4o2Zwp6MvZ2k3qalht6WBx25P8uJsaQa
-	ljHg38AE2vdsZvixUP+UU9Qj4A/z03ryhrSyjgP6Qa5UR2ho+LpCOHznofIX2zfuyd1ffeejOaa
-	tUE2MimkeJBK1p8HP97YwsTWimeDnIZjE9NrK/ZkMvmLDJVNp24Yb1OXeXvuLK8IFzf1ccBI66z
-	DKeBwHf/mJi2wmEgOdfQumy2edUOrJiZKeeOoB
-X-Received: by 2002:a17:90b:4c41:b0:3ac:aa8d:19de with SMTP id 98e67ed59e1d1-3b1b089e2dcmr13233282a91.3.1794887075240;
-        Mon, 16 Nov 2026 19:44:35 -0800 (PST)
-X-Received: by 2002:a17:90b:4c41:b0:3ac:aa8d:19de with SMTP id 98e67ed59e1d1-3b1b089e2dcmr13233254a91.3.1794887074764;
-        Mon, 16 Nov 2026 19:44:34 -0800 (PST)
-Received: from [10.133.33.70] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b3ac70ea45sm1718121a91.17.2026.11.16.19.44.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Nov 2026 19:44:34 -0800 (PST)
-Message-ID: <b586f418-a8e0-4502-9372-ed15d559305d@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 11:44:29 +0800
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:Content-Type:
+	Content-Transfer-Encoding:MIME-Version; bh=OBSo/4IN7S6trP7CgPBOd
+	4llSonUbNqkrJxw7CQiCqA=; b=wqSPP4SNDPs9mlVJhVqodlTTM8hCkkL9ov8+3
+	EuWJ/U4hWyJfNTMieF64k1+L9CI/7g1H+EYsCj7jLh170O8nxj3eHaGU+pa4KE16
+	gFWSsRpFxTiHKK1vc+ekuQdLqUJJ/50c/ucrEEkBKsFZ3pfoCf/w88lX09tub+m0
+	7LcH/Q=
+Received: from [127.0.1.1] (unknown [114.214.186.145])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCHATZH1ftqQgjLAA--.1640S2;
+	Tue, 17 Nov 2026 12:17:11 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>
+Subject:
+ Re: [PATCH v5 0/3] drm/msm/mdss: reset all block resets described in DT
+Date: Tue, 17 Nov 2026 12:17:11 +0800
+Message-ID: <179488903160.260870.8168848839719897744@mail.ustc.edu.cn>
+In-Reply-To: <20261113155635.1677541-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261113155635.1677541-1-xiaqinghuan@mail.ustc.edu.cn>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,214 +66,118 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: gcc-ipq5018: fix swapped MDIO clocks and
- resets
-To: George Moussalem <george.moussalem@outlook.com>,
-        =?UTF-8?Q?Dav=C3=AD=C3=B0_Steinn_Geirsson?= <david@dsg.is>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
-        Varadarajan Narayanan <quic_varada@quicinc.com>,
-        Sricharan Ramabadhran <quic_srichara@quicinc.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261112155801.610730-1-david@dsg.is>
- <LV2PR19MB7970413DF8BA90E631C5D6CD349D7C2@LV2PR19MB797041.namprd19.prod.outlook.com>
-Content-Language: en-US
-From: Jie Luo <jie.luo@oss.qualcomm.com>
-In-Reply-To: <LV2PR19MB7970413DF8BA90E631C5D6CD349D7C2@LV2PR19MB797041.namprd19.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAxNCBTYWx0ZWRfX5gVSDPqv/iX2
- QDMXGS+Fdcl+DNXKPLeI7sqJb+2BIhmIQ2t3Z6UqXF+p75T12IHrnjrwXIrNGSwhDDgw0S22ZDa
- +A/bWpBcDCexw7n4D2Tb/TTdMA72/WqawkWig8SJ531D8UhZ935wg2UqpiaLdlkUk5hxZpcG8N1
- B4V2Y0dGaVG5XAbpWhhfuce6ViRYGl+ELwAWV0cblzUt3bE5+2fmywkqyC28r5gm3riuke+c/Vi
- szca0j0vR/TUk4ApaoxXSvgqDaOLuLlif6cyC6LJmdPFXKC1CjZnPv3VtQVQBg0GBOjTTTzgLjv
- Am8m7rZCueRbVFX+xLgAm2Z620WLrI5ynZkeWf3IXDJVpbpjFTbeeUj7WXxDaYblttwlFYfoMfx
- c9szLUOu4i1JbTm7CwF9+tWxwk0x4dtIJrf6CvijhWxEM6tX1mv3VxAJXo7UFD8mo0mI5g+fnk3
- nIXJdXEncnyz4OUg1uQ==
-X-Authority-Analysis: v=2.4 cv=TckDJhQh c=1 sm=1 tr=0 ts=6afbcda4 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=9htlYK_AAAAA:20 a=UqCG9HQmAAAA:8
- a=xG9mJ1_p4bxWt3gOV00A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: KD5LZJ0KkG0CF70M93pLI_d0h19De9qV
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAxNCBTYWx0ZWRfX1pPfRcnfvrHr
- y5A/J42wl5s96AZNDMWYQqRhfM/WZCT6qIGPVfkOFtOtjlrW6SqWe53QFlwqWijgpShyVTjAW7R
- QzNvvNHvMtJZU5ROl9k5pO/lucz6zrM=
-X-Proofpoint-GUID: KD5LZJ0KkG0CF70M93pLI_d0h19De9qV
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 phishscore=0
- suspectscore=0 clxscore=1015 spamscore=0 malwarescore=0 adultscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611170014
+X-CM-TRANSID:3pYKCgCHATZH1ftqQgjLAA--.1640S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxGr15KF4rtF18AFWkuw4fuFg_yoWrtr43pF
+	ZrKwsxKr1kGry0kFn7Aw4jva4I9wsYkFZ8GF15tryYvan8Kw18Ar93Kw1Fq3429Fs7Xa4j
+	va4jgw18CFWvqaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvjb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_Jw0_GFylc2xS
+	Y4AK67AK6r45MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
+	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8
+	ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
+	0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
+	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUgR
+	pPUUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREOB2r7WdojVwACs9
 
+Hi all,
 
+3/3 says "5 of 9 cold PORs became 15 out of 15" and leaves it at that.  That
+is the only place the Q28 evidence has ever appeared upstream, and it does not
+let anyone judge it.  Here is the underlying data and, more importantly, the
+boundary of what it does and does not show.  No code change in this message;
+take it as material for the commit message if you think it belongs there.
 
-On 11/16/2026 7:41 PM, George Moussalem wrote:
-> On 11/12/26 19:57, Davíð Steinn Geirsson wrote:
->> The GCC has a block reset (BCR) and an AHB clock branch for each of the
->> two MDIO controllers. The pair at 0x58000/0x58004 belongs to the
->> controller at 0x90000 (mdio1 in ipq5018.dtsi) and the pair at
->> 0x58010/0x58014 belongs to the controller at 0x88000 (mdio0). The driver
->> maps the GCC_MDIO0_* IDs to the first pair and the GCC_MDIO1_* IDs to
->> the second, so each MDIO node gets the clock and reset of the other
->> controller.
->>
->> ipq5018.dtsi enables mdio0 and leaves mdio1 disabled. On a board that
->> does not enable mdio1, clk_disable_unused() gates 0x58014 and the
->> controller at 0x88000 stops responding. Its registers then read back a
->> stale bus value, so MDIO reads return garbage instead of failing.
->>
->> Observed on a Ubiquiti UniFi 6 Pro, which has the internal GE PHY on
->> mdio0 and nothing on mdio1:
->> - Gating 0x58004 leaves the 0x88000 controller working and every
->>   0x90000 register reads 0xffff. Gating 0x58014 does the reverse.
->> - Asserting the BCR at 0x58000 resets the 0x90000 controller and halts
->>   the 0x58004 branch. The BCR at 0x58010 resets the 0x88000 controller
->>   and halts the 0x58014 branch.
->>
->> Swap the clock and reset offsets so that each ID controls the
->> controller it is named after. No in-tree DT uses the MDIO resets.
-> 
-> confirmed working on Linksys MX2000 and MR5500. Both devices don't have
-> the internal GE PHY on mdio0 wired up. With mdio1 enabled and mdio0
-> disabled, ethernet comes up.
-> 
-> Adding Luo Jie: I think this patch can be reverted because not all
-> boards use the internal GE PHY and its LDO needs not be enabled for
-> ethernet functionality on externally connected PHYs or switches
-> controlled by mdio1
-> -
-> https://lore.kernel.org/all/20260902-qcom_ipq5018_mdio_pinctrl-v3-2-629c7bb05c44@oss.qualcomm.com/
-> 
-> Tested-by: George Moussalem <george.moussalem@outlook.com>
-> 
+Board: Lenovo Y700 Gen4 (TB322FC), SM8750P, bonded dual-DSI panel
+"csot,pp8807hb1-1" (driver novatek,nt36536), 1904x3040, DSC, two DSI hosts.
 
-Thanks for testing on the MX2000 and MR5500.
+1. What actually fails, and how it is classified
 
-All of the Qualcomm RDP boards have the internal GE PHY, so it makes
-sense to keep it enabled by default. A board that doesn't use the
-internal GE PHY can disable it in its own board DTS, as you already
-did for the MX2000 and MR5500:
+The failure is a cold boot (real power-on reset) that brings up no image.  It
+is ~50% of cold PORs, it is random per boot, and it clusters in time; it is
+independent of the kernel image - the same binary is good and then bad in
+neighbouring boots, and seven different kernel variants were tested against
+this.  Three distinguishable forms:
 
-	&mdio0 {
-		status = "disabled";
-	};
+  A. cardN exists, panel init fails.  Five dmesg lines, in order:
+       command DMA timeout: status=0x2200200
+       peer command DMA timeout: status=0x2200200
+       bonded command DMA failed: master=-110 peer=-110
+       sending dcs data ff 20 failed: -110
+       Failed to initialize panel: -5
+     followed by intf1/ctl 1 reset failure -22 and a vblank/frame-done storm.
+  B. no DRM card at all, with "DSI PLL(0) lock failed, status=0x00000000" at
+     about 0.86 s and a failed device link for panel@0.
+  C. dark panel with everything in the DRM state looking healthy: connector
+     connected, DPMS On, frame counter advancing, backlight non-zero, and the
+     DSI pclk held.  This one is the reason "no DMA timeout in dmesg" must not
+     be read as "display works".
 
->>
->> Fixes: e3fdbef1bab8 ("clk: qcom: Add Global Clock controller (GCC) driver for IPQ5018")
->> Signed-off-by: Davíð Steinn Geirsson <david@dsg.is>
->> ---
->>
->> Tested and confirmed working on the Ubiquiti U6 Pro with both
->> OpenWRT's v6.18.60 kernel and `qcom/clk-for-7.5`.
->>
->> A comment in OpenWRT's `ipq5018-archer-ax55-v1.dts` indicates this
->> bug has bitten people before:
->> https://github.com/openwrt/openwrt/blob/main/target/linux/qualcommax/dts/ipq5018-archer-ax55-v1.dts#L273-L279
->> That workaround should become unnecessary with this patch, though I
->> do not have the right hardware to confirm that.
->>
->> diff --git a/drivers/clk/qcom/gcc-ipq5018.c b/drivers/clk/qcom/gcc-ipq5018.c
->> index 37ccdc44a8..bf1a4745d1 100644
->> --- a/drivers/clk/qcom/gcc-ipq5018.c
->> +++ b/drivers/clk/qcom/gcc-ipq5018.c
->> @@ -1969,28 +1969,28 @@
->>  };
->>  
->>  static struct clk_branch gcc_mdio0_ahb_clk = {
->> +	.halt_reg = 0x58014,
->> +	.clkr = {
->> +		.enable_reg = 0x58014,
->> +		.enable_mask = BIT(0),
->> +		.hw.init = &(struct clk_init_data) {
->> +			.name = "gcc_mdioi0_ahb_clk",
->> +			.parent_hws = (const struct clk_hw *[]) {
->> +				&pcnoc_clk_src.hw,
->> +			},
->> +			.num_parents = 1,
->> +			.flags = CLK_SET_RATE_PARENT,
->> +			.ops = &clk_branch2_ops,
->> +		},
->> +	},
->> +};
->> +
->> +static struct clk_branch gcc_mdio1_ahb_clk = {
->>  	.halt_reg = 0x58004,
->>  	.clkr = {
->>  		.enable_reg = 0x58004,
->>  		.enable_mask = BIT(0),
->>  		.hw.init = &(struct clk_init_data) {
->> -			.name = "gcc_mdioi0_ahb_clk",
->> -			.parent_hws = (const struct clk_hw *[]) {
->> -				&pcnoc_clk_src.hw,
->> -			},
->> -			.num_parents = 1,
->> -			.flags = CLK_SET_RATE_PARENT,
->> -			.ops = &clk_branch2_ops,
->> -		},
->> -	},
->> -};
->> -
->> -static struct clk_branch gcc_mdio1_ahb_clk = {
->> -	.halt_reg = 0x58014,
->> -	.clkr = {
->> -		.enable_reg = 0x58014,
->> -		.enable_mask = BIT(0),
->> -		.hw.init = &(struct clk_init_data) {
->>  			.name = "gcc_mdio1_ahb_clk",
->>  			.parent_hws = (const struct clk_hw *[]) {
->>  				&pcnoc_clk_src.hw,
->> @@ -3585,8 +3585,8 @@
->>  	[GCC_GMAC1_SYS_ARES] = { 0x68438, 1 },
->>  	[GCC_IMEM_BCR] = { 0x0e000, 0 },
->>  	[GCC_LPASS_BCR] = { 0x2e000, 0 },
->> -	[GCC_MDIO0_BCR] = { 0x58000, 0 },
->> -	[GCC_MDIO1_BCR] = { 0x58010, 0 },
->> +	[GCC_MDIO0_BCR] = { 0x58010, 0 },
->> +	[GCC_MDIO1_BCR] = { 0x58000, 0 },
->>  	[GCC_MPM_BCR] = { 0x2c000, 0 },
->>  	[GCC_PCIE0_BCR] = { 0x75004, 0 },
->>  	[GCC_PCIE0_LINK_DOWN_BCR] = { 0x750a8, 0 },
+The only physical discriminator we found for C is the DSI interrupt counter:
+41 on a lit panel, 0 on a dark one, with identical DRM state.
 
-The GCC driver is correct here. GCC_MDIO0_AHB_CLK (0x58004) and
-GCC_MDIO1_AHB_CLK (0x58014), along with the matching BCRs, follow the
-IPQ5018 hardware register definitions. What is wrong is the clock
-assignment in ipq5018.dtsi: the MDIO controller at 0x88000 is clocked
-by GCC_MDIO1_AHB_CLK, and the controller at 0x90000 is clocked by
-GCC_MDIO0_AHB_CLK.
+2. Why "reset the MDSS blocks" was picked
 
+Because in a bad boot the failure is not inside the DSI controller and a DSI
+host reset does not clear it.  Registers read from a live bad boot:
+STATUS0 = 0x20003 (engine and DMA busy), DSI interrupt count 0, PLL unlocked
+bit not set (the PLL is locked), and CLK_STATUS sitting at 0x1743/0x3743 with
+DYN_PCLK_ACTIVE never released, where a healthy boot shows 0x343 -> 0x743 ->
+0x343 around each command.  Repeated retries after that point fail with
+identical values, which is why a single bad boot costs the whole session.
 
-Please drop this change and fix the DTS instead, for example:
+Against that, the change under review makes the display driver de-assert the
+MDSS block resets described in DT before anything is programmed, which puts
+the whole MDSS block into a known state before the first DCS command.
 
---- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-@@ -220,7 +220,7 @@ mdio0: mdio@88000 {
-                        #address-cells = <1>;
-                        #size-cells = <0>;
+3. The measurements
 
--                       clocks = <&gcc GCC_MDIO0_AHB_CLK>;
-+                       clocks = <&gcc GCC_MDIO1_AHB_CLK>;
-                        clock-names = "gcc_mdio_ahb_clk";
-                        clock-frequency = <6250000>;
+Campaign of 23 real power-on resets, arms sampled alternately in the same
+session, identical kernel/config/ramdisk/dtb/cmdline except for the change:
 
-@@ -243,7 +243,7 @@ mdio1: mdio@90000 {
-                        pinctrl-0 = <&mdio_pins>;
-                        pinctrl-names = "default";
+  base (no reset)                 9 boots: 4 good, 5 storm
+  base + MDSS block reset         5 boots: 5 good
+  base + block reset + DIGTOP    10 boots: 10 good
+  base + DIGTOP only              4 boots: 1 good, 3 storm
 
--                       clocks = <&gcc GCC_MDIO1_AHB_CLK>;
-+                       clocks = <&gcc GCC_MDIO0_AHB_CLK>;
-                        clock-names = "gcc_mdio_ahb_clk";
+Fisher exact, two-sided: block-reset+DIGTOP vs base p = 0.011; DIGTOP alone
+vs base p = 1.0 (no effect); the two arms containing the block reset merged,
+15/15 vs 4/9, p = 0.003.  So the block reset is the thing that does something;
+the DIGTOP/PLL-lock tweak does not, on its own, at all.
 
-                        status = "disabled";
+Moving the same reset out of the clock driver's probe into the display driver
+(the shape of this series) then measured 5/5 good cold PORs.
+
+4. Two boundaries I do not want to paper over
+
+- The 15/15 figure is a merged group and it predates this series' shape.  It
+  measures "MDSS block resets are de-asserted by the display side early", not
+  literally patch 2/3 of v5.
+- The reset set that was measured on hardware is the three-entry set (core,
+  core_int2, rscc).  After sashiko's remark about 0xa000 v4/v5 dropped to two
+  entries, and the two-entry set has not been through a cold-boot sample yet,
+  nor has 0xa000 been varied on its own.  A paired cold-boot run of two-entry
+  vs three-entry is queued; until it completes, 3/3 stays worded as "not
+  repeated with this exact set" rather than as equivalent.
+
+5. What I would like to know
+
+Is this evidence useful for merging the series, or would you rather see it
+condensed into 2/3's commit message?  And separately: given that the failure
+is a cold-boot race that upstream cannot reproduce on any other board we know
+of, is a quirk-style "reset everything described in DT" acceptable here on its
+own merits, or does it need to be tied to a named hardware erratum to be
+mergeable?
+
+AI-assistance disclosure: this message was drafted with an LLM coding
+assistant; the author verified every number and register value above against
+his own logs and test records and takes responsibility for it.
+
+Thanks,
+Qianhui
+
