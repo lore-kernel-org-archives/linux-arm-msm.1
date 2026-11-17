@@ -1,112 +1,113 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794905161;
-	b=W6bVQ8Hmx04tPXApgYqtQDdkmwf75Eg3evoegLFOgQpJKrSMMwqQXrTx/Rtus7qC3Ct2
-	 Mi3sM5sZYh2wxYcRF70gl6yKTxh2F2LiiFGhbD5jesvWyNUXEjTGEssHV8I1WsKtzum4k
-	 e6AIKkfhaagjqJtZKqGHRBoF0hpy6woCM2RF5meZX9xmunvtHKJxCx4Tycxb4awXVn9MN
-	 yXDDl1fpe2xQ4+bojb2ANjUh1cWeRL0Pm5+4vVZKBz9YPGjakTlt/cbwbbievjWglGHLP
-	 BFVjyaM8SfIu4pxhKI4O0uGvISJVVBTPkKgz8/3OQbQXmXkj2axYlnfWc1OAMRD7Qgg==
+	t=1794905174;
+	b=cdLe3HEJLa0Y8ZA8lfaxFT0Z3z70dlgipsqhX0mTYbKLG9iQdAtrg8wV3fCOMv0oQIWu
+	 dVpPpkModdo9g2TOCJb8jKoFHJse0uUSR8Pl5yRNdmuvKwa2lNFrzOD4UawGEteggTc2P
+	 4GuLvxjXTcz8j4yVVpe1cSvxl/yyINRveuoiECzXS4Hm952i+TyOoeHevMgP0lDNMC7bB
+	 v9OS4wvJN0ZfYwN2776MVRMKPEcoFvBuCMTy/I0wCluROG3GGuQL4/P7f0lcQGaUtQmlL
+	 1/ZLitF/lunkf1cUOdXHO9YR84ImrhdhQP8Guw3/wzc+wt18KJQoloh2it8N3ssJ8Ng==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794905161;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794905174;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
 	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=A6pdC35Th33dCRVfmfQIEPxZrmhsEjdcOjU50FNkALA=;
-	b=qezKYOEK+NK8F5TiEMa9JRJTwBELHo3s92nm7RnKcH/Lt/Kqm7DXdMaGVz6HjI/Vsp3a
-	 CxK5/kORsgF/d1JmqnZHNQGS4LNoYzUg5uTC8TmI4hKmjVB1AGbfh6Br1mpzBsLd7m7X4
-	 YIld9425eVuE0p/7snL2zAFlFUrmcNWfPzHyZHFAxsyEniXReDJVUBmuH85hPT8OPckQd
-	 CrOUWh0ToFyysSQIjIfhqSUPU06kJpl+eKVC4Sl1WRmd+nYMVJTysard2C5sdUJpNwRfN
-	 ZpY+9m2XzKMkzmnqAncm1Bvj3U2TzdYg589CvB0IFGuUxK3jCaoI5Wfzb+ZbLPgUdjg==
+	bh=ONajPToWNQsH3bje9f4YKZ8akR+X/G6mwA9UKMn3Cu4=;
+	b=gCiEG0KLIX7znWpSzo193MvciPYCxWJdCNibiMqHcdl19eruR4yfDUZHB4IE2oPRZofW
+	 Wwjp+9tG1NQZNDurYAN/3h5ihdBgR5zd6knrWfFl0BXVJh7Za/zYgNkMCYyQ947af4V/B
+	 lDlEE8QvIRSDgA4aMtJdfMdVF+SLaVsNXkIi5hzkbV786Qd0AF50bCaq6MF645tjhVcio
+	 k4EX6j5SHtAzdK6XfgDdZwG2518K5hDkpJGErEEMY0pSTwK9WnQyAJ4IbcFIC4y7gnc/d
+	 C1zVajPK8KS3q8/hD61P7bmQWLW113kTpiBkfB9MsXT/zSUwP9ufS4pSttNLiio22ig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eD67Bjpp;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="OhG/gJGg";
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="Q/rnF6/Q";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IK1Kk2GB;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E8CF606A8BC
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:45:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8E8CF606A8BC
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFE79606A8B7
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:46:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DFE79606A8B7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eD67Bjpp;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OhG/gJGg
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Q/rnF6/Q;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IK1Kk2GB
 Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH2aFs4200043
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:45:55 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH8LvfM200079
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:46:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=A6pdC35Th33dCRVfmfQIEP
-	xZrmhsEjdcOjU50FNkALA=; b=eD67BjppWIgyG1YJe5RiUzc7gZht597ihqsjb3
-	FlveHaXzG9kBtZS8LUjjb4kOSbw9nn4E0aQCOO16UfnwTAopmJl6oI+w6cF9jcPe
-	W1c1BeiNLtRApO3TlDyrFM5wWmnjsdblZUNacJI1QrL9HJqkWbuR5eCJLgJfyE0U
-	n0R9QFuZeZGPwKKDTCyfoETUzZmX+XpbWN4zRi10CBZRVi9yQXUXq2SR0lKdnIu7
-	0CR6m6AquQEavnpMmm0ZQSLKbFWmkG+CjlH5vTkCQiwDh0FkzJAZ42G43aWXWQeu
-	t+f8WMEkof2QOn9dzObkdinvHXZ+iKVdR9cKf6Z8oQ4Vh0xw==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j038mbv8k-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ONajPToWNQsH3bje9f4YKZ8akR+X/G6mwA9UKMn3Cu4=; b=Q/rnF6/QYmoq0Fp3
+	l5EArxNdwZ/4pyRKzw3wdqxLwoeL3EIwtX758TA2dtLtcZldx1uZXIgn/uI8Uhg3
+	iZEbWY8o6ybfVTr20hDbMZjGJf3JViCf0Q0nvD73gkTNPJhhFp/xnGVD0mKuAGJp
+	x1z7Z70d/mMr2NlZDy+HNwJ3nsEaDa2oXrN4jOqwqcmCwyR1iPop5e915Bct9ZWh
+	EX6QPoF+OdiKzQ/kshG99O/qnGfgAbBKglE6CUR1hqB3drmDeBH/CS62dI6u8mMX
+	CYclj77C5qr5YFA23iNwl3vBOxq8pjVdCHydpOgmFQWK1+eSh/A2CRDt3RrSA4Hr
+	H4Bl4g==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j038mbv99-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:45:54 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cddc4bde4b1so2101415a12.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:45:54 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:46:03 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8b647bbf8a9so4964175b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:46:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794905154; x=1795509954; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=A6pdC35Th33dCRVfmfQIEPxZrmhsEjdcOjU50FNkALA=;
-        b=OhG/gJGgAtDPOL9OWKhfURY65H3xojezNiZLKP51QMSjgRmQgcmhL2z5hCZxKAWRGt
-         NsiiW0WbPHD3ctdJZdjIu/46MGTSxD0bEUePR3L2rZxRh8JAFMu+fU0A+g3tJYd1M5A+
-         1dTwJR2Yh/vYnaY35cOkRCZKdVuWZFOL7K2veB9wBHGqEJoMpBRJGLPF36SiRXxj+Bfb
-         /ipjbRRt2r9mdbmSQIppTp6xrNbJ/pr87tpuhC2VR9Fe5X8LdKHW6nAlj/4d8inLI/ih
-         tyJHX5Xpw4IVqIe38Fbpjj//UJIjdjrHpom1ZCyn1mEeCwiRQs2xbOkJs+kM7E2Y5T0K
-         eZOw==
+        d=oss.qualcomm.com; s=google; t=1794905162; x=1795509962; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ONajPToWNQsH3bje9f4YKZ8akR+X/G6mwA9UKMn3Cu4=;
+        b=IK1Kk2GB+mP/f9YnL4naocz/yWFyR5d0sNvGIH8z/WUPPxCqXvyOMVTAOuPKDf73kh
+         upPmQ1Ly2ohCKHUult7uvNH0pwXgJZgij8HDCcW92wbXi3TRV1oaxXSn9wItR1YZyfga
+         1DKrLqLfJ1MY6rP6ibuFSjluVWA3DL3hDnjStn8hpppi6zf1NyiJwB480QullZ7Two8f
+         X+CqCxdkmUWMMYFu1d2n/ReUWZNINcuTFFFpHmXCPf5HVqfpCrOM/NOysyRp12dTXF4M
+         3Marf5dMLGt/dv9yZR2iiaVD+oL981L+GHb9GJQDR4UPoMm6FLHfEUHDNyB2E0n9fo7v
+         JvLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794905154; x=1795509954;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=A6pdC35Th33dCRVfmfQIEPxZrmhsEjdcOjU50FNkALA=;
-        b=mJ2JLgRk5948ykEbg9LYeJn0amWtsR6bNh/nBaO760uuseSjaKYoEVDBinTX+3gt7o
-         dYtmACYk/DVds0jpWt/u8qa1ukHveaWblFu2c917G4UXFL884Cv82uSDR523uldnmD4S
-         Tu3vS0nC/d4lXedWw2orZKIbbmfdN4/CgkHklv1JiJDG42pqQ5cqUztCLvG31oAQ/lPg
-         d8rN6n+TPZ4oEuzIFenp6u/q6BE99S6Ka1Qn3WbF8zDa5iASZn6llwhmJBWypLod/xnf
-         +9eG2IgQoiN/Q3+k6WYlyMy2RrmXcXi1NhQcxonRgBmfaPOseZ8N4YeqYMJvnnR3utPM
-         5HGw==
-X-Forwarded-Encrypted: i=1; AL+hErERIssNh/fGas5v6lbB2/fKFIpz2msbC759vw2+D5uU4jN3xDFIXbJPaUAxxicGmjxmKMKsHQ7Ai4NJ1WLR@vger.kernel.org
-X-Gm-Message-State: APuU4Z9ekEjc5jib9+Xspz4SBibD7VV1TsZRrDbndekzU2KApPS6uAPO
-	sTU9MC56oUgPU5opWO9ty0r07S6QNUI3D81ztVu2/PuzJVPeNaL5ZMhGkmtYqa4aHW5MNNJgb5l
-	cOallNzickGUxqu6qYVZPkN+t92ws/q+tD4QVoKXdtJ3V4pXaPVsdwExCccBYqsiEdv+s
-X-Gm-Gg: AYBFou0UCG5lHPyi+rzi8qlLmUu6n8RaxeylGn4jkiprMxl30hqpLD+/5l7QQNj8PDD
-	d770Aa5XaHOm3aV+JcLboFQPjRGBNJ3aeeetAYxppR8AxrGaUmHjDgVOhMY5g22fzi0VKMLegaw
-	MMq6qDVbs4U4yQWp/bTuWqdgnWOy/hxsLE81Zdb4c7WUYmylbHHiqcBd+pVL48VaOosnQ5fMx9y
-	hXI/mSXZddB1UgUI7g9QFcMOg6u3ZOa6tYXVZvkjb9nC0wMr08HzyZRByYwWLCcEtOCAZn6Vquv
-	2IGSoj0Tlh5S1cz+VRh/A2a3FqD79RP/unj7T9q1utK3M9exj8JjPr7QRLCStmapAYkf/B18tuD
-	uRaGq3uJp5y4MtxNe3/tME3o6Z73HQuz8oudQJcJOt2tUed90jjom0mgkqWLCQ2C+TWL7Gijk68
-	KNOA==
-X-Received: by 2002:a05:6a21:798f:b0:3e2:2b76:bf40 with SMTP id adf61e73a8af0-3f7a6e9f331mr10335163637.26.1794905153892;
-        Tue, 17 Nov 2026 00:45:53 -0800 (PST)
-X-Received: by 2002:a05:6a21:798f:b0:3e2:2b76:bf40 with SMTP id adf61e73a8af0-3f7a6e9f331mr10335143637.26.1794905153312;
-        Tue, 17 Nov 2026 00:45:53 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794905162; x=1795509962;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ONajPToWNQsH3bje9f4YKZ8akR+X/G6mwA9UKMn3Cu4=;
+        b=vY64PciAhhZcKGv5e+7PITgYPM1d/EUsRIBCd5iHfngxgJaPRoDwooJTtU3cG2kOeB
+         nApsgGkLBOybB4HNgNHYfyK6vMtcb5b83Ps+ndQ37P72lGbILSx1X1nPCVO/69jsT5G4
+         eJtqtiz958CisuLIdg4s1PLaZhuWYcpF/oJfDdLsr+NZUhhBsS/5MwXp2IPIINmLDYoK
+         u7/3Up5+e6gRyizwWAaFzKnnItbOhgKrDDwCupxeXFHXVaVT5tiGFto4s4uFncSISIdo
+         3vAN/kaIhOTqgJ/5jcNZlHBLup7CEO6wBRjkGJ7NV5G2VWVel7uZ/JuxoVylR5AZU7NC
+         lMKA==
+X-Forwarded-Encrypted: i=1; AL+hErGwzk4eNHVUUQnL3napeMprff1PgJ64nwX2ipmr8hfU8MUJNAWLBTeZerq6nT5CddbIK5JlizKLjkTy/rbt@vger.kernel.org
+X-Gm-Message-State: APuU4Z/3hxxVccgMof8oNFbzL9jWnphjtB4dKW8l14Wr6cZvHuJNraWO
+	xbHIqLyhZ6a/f1ITdpeLFP5cgAGi23BzdhHAdk99C6xram5XAiRoJaAGfV4zS0x3CxoisPcrC8s
+	cORze3fwLCDF3Nn4Y0UjtLgq5wg+V/JfLDnUsZnn37D/t9mTD1Y9AQHL5POeA2cJlkHS1
+X-Gm-Gg: AYBFou1R09pL2LQ29droGLWyHvggatQxVep8PiQVTlKKFZKbJQ6MeAAVKUO52SqZjqE
+	96J1Ah92wWduJAezRFdSlx6DdWd0u3ck17I69O47ZuZr74WjnqNc0+KYJ216jleQaCfElAjigEB
+	iLAlxf3s3ryQQnhJMeNuQA6WcX35DIe6rpgQehYdQjdgZ23QyXBkdzOEMc5ubkzZMPoCGxDI2P+
+	ZaGfNDY14SETTamDQRzZohW8CMVlnOI6NR9zuUf2K80XQdBNTq8baIdTH3WGXY4po63OOU65RQo
+	bIgj52Qa/4xxTdVppbZ6wbhPcUeMKuKrG8j4TRqh5qTm2+rLGc3QS39Dm4vPyZygtoLlW6dcKob
+	QdHg0A64E5HK14G7YRjei49TNfjij2BEPeghBpBL9SSCvmi+sthgdklGhMn01ACp5SvlMQGHk+x
+	zhfA==
+X-Received: by 2002:a05:6a20:3c89:b0:3eb:a2d9:58f1 with SMTP id adf61e73a8af0-3f7a4abed30mr13500684637.9.1794905162426;
+        Tue, 17 Nov 2026 00:46:02 -0800 (PST)
+X-Received: by 2002:a05:6a20:3c89:b0:3eb:a2d9:58f1 with SMTP id adf61e73a8af0-3f7a4abed30mr13500655637.9.1794905161882;
+        Tue, 17 Nov 2026 00:46:01 -0800 (PST)
 Received: from hu-mohdayaa-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cddc18736b3sm5699585a12.7.2026.11.17.00.45.45
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cddc18736b3sm5699585a12.7.2026.11.17.00.45.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 00:45:52 -0800 (PST)
+        Tue, 17 Nov 2026 00:46:01 -0800 (PST)
 From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Subject: [PATCH net-next v4 00/10] net: stmmac: qcom-ethqos: add Shikra
- EMAC support
-Date: Tue, 17 Nov 2026 14:15:20 +0530
-Message-Id: <20261117-shikra_ethernet-v4-0-c41902e5f2fa@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 14:15:21 +0530
+Subject: [PATCH net-next v4 01/10] dt-bindings: net: ti,dp83867: add supply
+ properties
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,11 +119,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACAU/GoC/23NQQ7CIBAF0KsY1tJQKLR15T2MMbQdhWhBAUlN0
- 7uLxIVJ3Uzy82fezMiD0+DRbjMjB1F7bU0K1XaDeiXNBbAeUkaUUEFawrBX+urkCYICZyBgCXU
- HwKEhFaB0dXdw1lMWD+izYGAK6JgapX2w7pVfxTL3X7VaqbHEBEtOasHbVhDG99b74vGUt96OY
- 5FGJiP9ZZo1QxPTdcBY0w5EcPqHWZblDSbxwQIGAQAA
-X-Change-ID: 20260903-shikra_ethernet-ae7bee5e804e
+Message-Id: <20261117-shikra_ethernet-v4-1-c41902e5f2fa@oss.qualcomm.com>
+References: <20261117-shikra_ethernet-v4-0-c41902e5f2fa@oss.qualcomm.com>
+In-Reply-To: <20261117-shikra_ethernet-v4-0-c41902e5f2fa@oss.qualcomm.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>,
         "David S. Miller" <davem@davemloft.net>,
         Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
@@ -146,32 +145,32 @@ Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
         linux-arm-kernel@lists.infradead.org,
         Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794905144; l=6868;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794905144; l=2011;
  i=mohd.anwar@oss.qualcomm.com; s=20250907; h=from:subject:message-id;
- bh=7TpJOavRGewnNemNBQ57hic/9O2QRq+vTMnnYYXy8eM=;
- b=RfA2sASEs8xpYrFLwoQcuuPJhqXZDFQkC/PbaIje71xl1STw+4Axt40DjssPJxfugzILBwQ1M
- S6rkIJ+BWKkBoNOcCSqsy4A8k88UtbqPGK7LE5SFiDva9PWoH5o0lXC
+ bh=mjS6fhMb+ocKCpwPGoezcQxON+tek+N3jqUG0k3PUBM=;
+ b=UsajLsR4goRt9vLB8c8weWLqISCqGRYgLriF+2Qva5JGkNQYR1Xf/cnWnH9z5/FOM8VStJqU4
+ Q2P+2dmPjHaDuPD/KD+Wqbv3dmD1+74n+G6rHFACeaFivzupgQ24HDK
 X-Developer-Key: i=mohd.anwar@oss.qualcomm.com; a=ed25519;
  pk=7JNY72mz7r6hQstsamPYlUbLhQ5+W64pY4LgfSh9DJU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAzNCBTYWx0ZWRfX5PsUPmo80pp3
- byHeM2uhG5pN6XCmU+1nWKIbjFooW+Ob08L6wliG794/Zo8lO8OQu7tQuDFiSYsV1wUodopXOwJ
- YruuEdcP5AmOtE5JzEL0VfWZ2SamE8NFmAaGZ6j9Hbne/iCVCFjerT+mNJmQc2AIKi/0/GhRrhT
- 30dQIzuxsI6SNRfwcLd8zp9OTZyQgbM8L2XxJVV7FbNcOOA+aI+x2gnNN+PaskbrxJ4b45MkIKM
- LVJyEYOOHFGL+Vk8yhjNO5XpSlKwEZiiFZ7qCdmAKsrTAVVVNgHmXDu2u+hqM4iN2pWwZC3xgZG
- /5y0n3ZQWuFvyE6LI306yPwA5rf0j9jNXc+F/R22dLMuT2YzpVHK2wjdh5H053WZ3fhD5+bF9dB
- 5QjiHoGnmZPWpamMQHy+htwhH8oOCVMJwj7vVimgJ9fPnVHRudrFsMVpJbCtvOstGh/qFkjhY+l
- /YzmQFUBf6NbhpTkqTQ==
-X-Authority-Analysis: v=2.4 cv=TckDJhQh c=1 sm=1 tr=0 ts=6afc1442 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAzNCBTYWx0ZWRfX4KIowuPygDky
+ Js5PrOx5qotpTG9Yt1n+JuCxsGQmNHexQQnqCCNenkPNPbCN/nZ5WbsIRVKT71Hdv3wRYmu+e2L
+ mC6DFbPYktiydxcEW6BHabVjnXg0QAQeX8tkUpDaPtfn4Ehy7VLx7Zm2abyX2aSzuKa1vV00Lz7
+ u9a5crQ6HhTLf8z3/Pyxm48fWL2u2v5WjVk0YleUPxSfswYiqV4gqrKrV4XCTjjvMPUcLsGktwo
+ CKmx3+rrsNRax1sMJn3k18eNIsofcE3MNdRjIhCxhxJ+Pw32FiGcGPvOhN15Yd1x9SyH6yaRwaN
+ fFL+sV6Ypy1eKtLOmw4tBJXC7twTqvzgzC+inPvs8Vk2jTZSxASCWZ5mXf0RNyFEpSTASjC7gfW
+ /N7z+VFglAQv3ISzOrpsp2A93fjJf/Az7rL6ZNJRh0/YEjQtWRyPxyOKHSjQ7o1c1i6NLkLjvGG
+ N8KZfOC4DnXpGw3mFlw==
+X-Authority-Analysis: v=2.4 cv=TckDJhQh c=1 sm=1 tr=0 ts=6afc144b cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=ee_2aqc6AAAA:8 a=EUspDBNiAAAA:8 a=3FMM8ssWo7dxxMFcYGwA:9
- a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22 a=VOpmJXOdbJOWo2YY3GeN:22
-X-Proofpoint-ORIG-GUID: idVUXF09DlKLT87RfQ3mci_7PcdyBcqD
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAzNCBTYWx0ZWRfX68Yq4ZHDBP3F
- Ha/CVKf/8qqubBSiCcqqZ9/QWZ/P+FyDF4BZ0cz4V7dMsRzCPKwpv/Dmhm7iDXrl3prcIvk/jFy
- DW06GX/5RcclYC+T3IjroDJvGKB458U=
-X-Proofpoint-GUID: idVUXF09DlKLT87RfQ3mci_7PcdyBcqD
+ a=EUspDBNiAAAA:8 a=9lbML-Ic3bjincHAjDUA:9 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-ORIG-GUID: 8wmKZSu05g9ooDFYnWQaN3nMyKWznX5f
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAzNCBTYWx0ZWRfX3oOFqiAy5LCM
+ Pphqf1EViy/v5Qu9YQhkp9g+1QbumdAZT0x7PFwb/S0Xep5N2wogP5aPa2asWwNt9UEq92VPtXH
+ po9kMw8J3kCjs8iAk7Qu+SEW7SbA8Nw=
+X-Proofpoint-GUID: 8wmKZSu05g9ooDFYnWQaN3nMyKWznX5f
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
@@ -182,136 +181,62 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
  definitions=main-2611170034
 
-This series incorporates feedback from the RFC and adds the dt-bindings
-and driver changes required to enable Gigabit Ethernet support on the
-Qualcomm Shikra SoC. DTS changes will be sent out separately.
+The DP83867 PHY has four distinct power supplies:
 
-The series has grown from the RFC and can be broadly divided into three
-areas: PHY power supply management, proper support for RGMII ID mode in
-the Qualcomm ETHQOS driver, and Shikra specific clock dependencies
-required for NOC access.
+  VDDA2P5 -- 2.5V analog supply
+  VDD1P0  -- 1.0V digital supply
+  VDDA1P8 -- 1.8V analog supply
+  VDDIO   -- I/O supply, which can be 3.3V or 2.5V or 1.8V
 
-1. Shikra EVK boards use a GPIO-gated regulator for the DP83867 PHY
-power supply. Patches 1 and 2 add supply management to the DP83867
-driver so the PHY driver holds the regulator vote at probe. These
-changes are largely inspired by similar work done for the QCA8081 PHY:
-https://lore.kernel.org/netdev/20261015143849.483339-1-elder@riscstar.com/
+The DP83867E/IS/CS datasheet (section 8.3) describes two power supply
+configurations - "two-supply" and "three-supply".
 
-2. The generic RGMII fixes from the RFC remain. As suggested, the new
-flow to use phy managed delays is protected by a platform specific
-boolean to ensure that it affects only tested hardware. Legacy boards
-will remain unaffected. Some other optimizations are carried forward
-(initial link clock to SPEED_10, common structure for custom
-dwmac4_addrs).
+  1. Two-Supply Configuration: VDDA2P5 and VDD1P0 connected, and the
+     VDDA1P8 pins are left unconnected.
+  2. Three-Supply Configuration: VDDA2P5, VDD1P0 and VDDA1P8 are all
+     connected.
 
-3. NOC clock voting (patch 8) now uses dev_pm_opp_set_opp() so the
-required VDD_CX performance state can be propagated through the clock
-controller. The Shikra binding (patch 3) is updated accordingly: an
-if/else block constrains Shikra to exactly six clocks and requires
-operating-points-v2 and power-domains.
+VDDIO is a separate fourth supply present in both configurations. The
+datasheet specifies that it can either be 1.8V or 2.5V or 3.3V.
 
-Testing:
-The following boards have been tested with this new (proper) handling
-for RGMII ID:
-  - Shikra CQ/IQ variants (with the TI DP83867 PHY)
-  - QCS615 Ride (with the Micrel KSZ9031 PHY)
-  - Talos EVK (again with the Micrel KSZ9031 PHY)
-  - Talos Lyra EVK (TI DP83867 PHY, this board also has a GPIO-gated
-    regulator for the PHY power supply)
-
-Changes in v4:
- - Re-added the bindings patch for DP83867 PHY regulators which was
-   accidentally dropped in v3.
- - Skip dp83867_power_on() if CONFIG_REGULATOR is disabled to avoid
-   unintentional delay due to its code stub: Sashiko.
- - Moved operating-points description to the top-level of ethqos
-   bindings: Krzysztof.
- - Added power-domains as a required property for Shikra due to its OPP
-   dependency: Sashiko.
- - Protect the phy-managed delay sequence with a platform specific
-   boolean to avoid impact on legacy hardware: Andrew.
- - Dropped "net: stmmac: qcom-ethqos: warn about legacy RGMII PHY modes"
-   since only Shikra and QCS615 are going to use the RGMII-ID mode.
- - Added additional details to some commit messages to clarify Sashiko
-   queries.
- - Since QCS615/Talos was also tested, a new patch adds its platform
-   descriptor with phy_managed_delays set to true.
- - Link to v3: https://lore.kernel.org/netdev/20261017-shikra_ethernet-v3-0-26a8beb44b8f@oss.qualcomm.com/
-
-Changes in v3:
- - Remove #ifdef CONFIG_OF from the dp83867_power_on() function. This is
-   a result of the recent discussion regarding similar handling in the
-   qca808x driver:
-   https://lore.kernel.org/netdev/atCSWZQAyqvz62_K@aspen.lan/
- - Clean up the -ENODEV handling in dp83867_power_on() and use a boolean
-   to identify if supplies are provided -- Lorenzo.
- - Patch 7's commit message now says set_clk_tx_rate instead of
-   fix_mac_speed -- Sashiko.
- - Add a new patch to abstract away the common dwma4_addrs for different
-   versions of ethqos rather than duplicating them -- Lorenzo.
- - Use OPP table to set both the required clock rates and power state,
-   update ethqos bindings accordingly to specify how the clock rates are
-   described in DTS -- Konrad, Lorenzo.
- - Link to v2: https://lore.kernel.org/r/20260908-shikra_ethernet-v2-0-bbe3389d0652@oss.qualcomm.com
-
-Changes in v2:
-  - Collected Maxime's Reviewed-by tags.
-  - Updated Patch 9's commit message to explain the double enable vote
-    on the "stmmaceth" clock. Open to discussion on how best to handle
-    this.
-  - Wrapped regulator vote for dp83867 inside an #ifdef CONFIG_OF check
-    to avoid adding an unnecessary 200 ms delay on systems where
-    devm_regulator_get_enable_optional() would return 0. The change now
-    mirrors the QCA8081 patch -- Sashiko.
-  - Fixed ethqos_set_clk_tx_rate() to double the rate for all PHY modes
-    other than RGMII-ID -- Sashiko.
-  - Moved warning about the use of non RGMII-ID mode to probe instead
-    of fix_mac_speed to avoid spamming during each link up event --
-    Sashiko.
-  - Fixed error unwind drops OPP before stopping link_clk -- Sashiko.
-  - Fixed OPP vote set in probe not cleaned up on error -- Sashiko.
-  - Link to v1: https://lore.kernel.org/netdev/20260904-shikra_ethernet-v1-0-a50765996035@oss.qualcomm.com/#t
-
-Changes since RFC:
-  - Two new patches add supply management for the DP83867, replacing
-    the gpio-hog approach for PHY power -- Konrad, Andrew.
-  - Use dev_pm_opp_set_rate() for the NOC AXI clock and require
-    operating-points-v2 for Shikra -- Konrad.
-  - Warn on legacy "rgmii"/"rgmii-txid" to encourage DTB migration --
-    Andrew, Maxime.
-  - Updated binding document for qcom,ethqos and snps,dwmac.
-  - Drop the duplicate "axi" clock from Shikra's DT; use "axi-noc" and
-    "pcie-tile-axi-noc" as the only additional clock-names.
-  - Initialise RGMII link clock at SPEED_10 rather than SPEED_1000 on
-    probe.
-  - Link to RFC: https://lore.kernel.org/netdev/20260612-shikra_ethernet-v1-0-f0f4a1d19929@oss.qualcomm.com/
+Some embedded board design expose a GPIO-controlled regulator to control
+any one or more of these supplies. Therefore, document all four of the
+available supply properties.
 
 Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
 ---
-Mohd Ayaan Anwar (10):
-      dt-bindings: net: ti,dp83867: add supply properties
-      net: phy: dp83867: add regulator supply management
-      dt-bindings: net: qcom,ethqos: add qcom,shikra-ethqos compatible
-      net: stmmac: qcom-ethqos: convert ethqos_rgmii_macro_init() to void
-      net: stmmac: qcom-ethqos: add DLL-bypass for PHY-managed RGMII delays
-      net: stmmac: qcom-ethqos: set initial RGMII link clock to lowest speed
-      net: stmmac: qcom-ethqos: share common GMAC4 address table
-      net: stmmac: qcom-ethqos: add per-platform NOC clock voting
-      net: stmmac: qcom-ethqos: add Shikra EMAC support
-      net: stmmac: qcom-ethqos: add QCS615 EMAC support
-
- .../devicetree/bindings/net/qcom,ethqos.yaml       |  54 +++-
- .../devicetree/bindings/net/snps,dwmac.yaml        |   2 +
- .../devicetree/bindings/net/ti,dp83867.yaml        |  14 +
- drivers/net/ethernet/stmicro/stmmac/Kconfig        |   1 +
- .../ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c    | 286 ++++++++++++++++-----
- drivers/net/phy/dp83867.c                          |  35 +++
- 6 files changed, 327 insertions(+), 65 deletions(-)
+v4: This patch was accidentally dropped in v3. It has been re-added
+as-is from v2.
 ---
-base-commit: 6964ff21c5d8b75649211a52dbfd92753e605649
-change-id: 20260903-shikra_ethernet-ae7bee5e804e
+ Documentation/devicetree/bindings/net/ti,dp83867.yaml | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-Best regards,
---  
-Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+diff --git a/Documentation/devicetree/bindings/net/ti,dp83867.yaml b/Documentation/devicetree/bindings/net/ti,dp83867.yaml
+index 4bc1f98fd9fe..e78f08ded3d0 100644
+--- a/Documentation/devicetree/bindings/net/ti,dp83867.yaml
++++ b/Documentation/devicetree/bindings/net/ti,dp83867.yaml
+@@ -118,6 +118,20 @@ properties:
+       Transmitt FIFO depth- see dt-bindings/net/ti-dp83867.h for applicable
+       values.
+ 
++  vdda-2p5-supply:
++    description: 2.5V analog supply (connected to the VDDA2P5 pins).
++
++  vdd-1p0-supply:
++    description: 1.0V digital core supply (connected to the VDD1P0 pins).
++
++  vdda-1p8-supply:
++    description: 1.8V analog supply (connected to the VDDA1P8 pins).
++
++  vddio-supply:
++    description: |
++      I/O supply (connected to the VDDIO pins). The supply can be 1.8V,
++      2.5V or 3.3V.
++
+ required:
+   - reg
+ 
+
+-- 
+2.34.1
 
