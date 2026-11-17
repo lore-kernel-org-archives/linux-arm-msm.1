@@ -1,112 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794896534;
-	b=Ig5di5QLwKHLp/lB2LYE7hQ1bo9dZJ69iSnmmJiINPwWQEhHXpKUD1vkWai2WMePg+3j
-	 fMMoMEQBgBjEmSs4HUzYfTEzPbGRZH/i4JeDhbJDY93Iu+tw08T9ZJ4FyxY32vfA8V1a9
-	 LRwk283plObIGjxZlnBtDWyjbIjYkttzpRSgwRNKOV15hsrFE1eZ88APkJjX3xjI8Sjro
-	 k+21aUbHKlChSae9wIr87B7E4jiCODhV9AXfjeOP1nlQkjoxYW8nqK5nWs0WzdiFnXj/p
-	 nEpNtP0ZdEjYswrFpwHMW7HFD6nY/l46mwAFCZ3zil6oLj+T8PSRHHmSATWsV13kTBQ==
+	t=1794896726;
+	b=Fzy44J6v6u6KhcwsgDiLVZ4O0/bFhewhfATsMElhSYVcJWBmd9Bzu2qGYOPn29B2Njil
+	 BLpliSqmMv9cVwLnPGCuHgDPUXiUrPcP/cEGq4KOTwncLwfhvpyuBsxYBJMGzUI2kuv0b
+	 3FejA2QeJq8FkYRQ96fIdKeGS3LnCbopBQQeJPPvPQywnUM4KvXClxmAmenBebpWqsAbk
+	 onli5lq8+wVg2ULB5886Z4v5SjEm9jrCdjFRmH6aKh2Tj2hup+PQkoMPcbOvDGbUvnOJ7
+	 UUwsFdogN8xIP19gxiXlLYUoxoLyi7RcIZFpYtgHwJc4Tf2+nCvFDkn2HDaXAjKFmPQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794896534;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794896726;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
 	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=un94qjLPd69gCihb+f/tlZVshjSmODDedEDHnUli6kg=;
-	b=aQp0QTgv4B6WrpkiiBQDe7kXusRO9s/kabOCYUHrA/kOXvCGAw7XndasKvJRH+UdF5Ud
-	 JGayn6ZHm51mSkGeV1bAcwS2BE7vBxc6HQpQ7SHBhbgGnMhvhd4vXwkbwcBXCSkyFFoyc
-	 kMfAFb4FgjJz6rieOy7m5zadWsqZCVs1ylWzX5/6CjwisrSkw1wujzTmqCgxmHzanOcNQ
-	 9SIfGv+QC9TDYd1UbnAgD7Qrm8H23EW+9sUjawqwLfleU75gkMJ7y0ZY5kX0y5SWPglEu
-	 icgp3hJXBVCFTFsQipnpxjbabHzvHXdp7qSCurIr8yYAM86C/1qFMSSYr1Y67xizXJg==
+	bh=5yD+WOgs/w0UEROtpGaM1H5zLUeHVWQoG0KCTRfw/gg=;
+	b=QwfeLSXgfjDnDMjWHJ4UvE57Dt600CZpwzp2gL4+c9TxqKYRB74MCIBd4QSKse8Inpuy
+	 svjswaXzwrxCS9Pwu/dSB99N1L7GxwDehCYcX7oU/mdgP4FxBPiO+gOdfErZhLn9l5x3a
+	 Y4IQz0x4i6jL+4p7WBG2/xQoYNoxfAIJGhTC/ZrY+ewswzjCdmbqnnx2v4EDhk5hUeoRY
+	 +U/9FTFZI9Lnmj0T/XDjLx23u0z4+j8DsqnCz0Fj0bAuO3oaffU0YGIZUj7ZYk1LcyBhk
+	 lB15MTI0le3cOU2ehRk5pwyrZ1n7EJEKBvp9MaOop+GAbNLeh5MJUEw4YP9Im7NdzjA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KIPuptyg;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BbDBws8y;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gbyetD6M;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="PlRPIE/B";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5643F606A323
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:22:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5643F606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5594606A32A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:25:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5594606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KIPuptyg;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BbDBws8y
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH44Avp1699369
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:22:12 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gbyetD6M;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PlRPIE/B
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH2aF2H200048
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:25:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	un94qjLPd69gCihb+f/tlZVshjSmODDedEDHnUli6kg=; b=KIPuptygNSc6cyrg
-	8MXRzQMzJL4sjlpQq2CUwBP7oAf+zTniUj8QE/ogJFmisceueJb0/Fbt6QyfkXi2
-	xRkhJD2r6WRK/SEAi4GlPZz8B6+sqMftDRNt1lqYnNQNttXhTozQ0GxCu2MKxPbN
-	bHCqAsEahXpK0Wg4UqOTR0owUAomIUICDEFidiepJarRkx2S+R0yFpVtULsi+Oya
-	hBYjYZK2Irx0fSP93Afvju29ESwiy5qUjunls2wqoReiGHM9IKavWGUhN5gLKYyM
-	1eFPPPtTd+TKZJiIEeXGBGwhtAc0w86xwPweDnI0ULQW7G9s3OmUFC5yoZgyPU4S
-	pRAXeA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0fjugdh9-1
+	5yD+WOgs/w0UEROtpGaM1H5zLUeHVWQoG0KCTRfw/gg=; b=gbyetD6M55TyiFm3
+	+stp9xNsuzewD6E8kFAsyawp5FF072tq6NjzsIltJ7irOevxHhCSj+ZmW9ZZzb1l
+	zrPvgKQ5RXuPXSd/JDUiT0ys6YqqDTbR61RHq2zPEi9tiOu+i3OQqyi1JDbVLg9d
+	5HrxoW+p+U/eH3fdc0kHyW6cwWTJ6mqhlmpqLhxFWchN3xebtE4XHvRzZ7+AY4s2
+	W3S/ajc0vQbZMgK+IXbts6rotjdK482j8fv55Tj0lnwTwoFsrJbpCKnKODVcP6kD
+	u2HkI0ZdLdSuCYrqs0+ePH3GlwZRx11H7b9glala1Np7gOkLzJn9UMqkv8FFmM/9
+	Z/AixA==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j038mbb67-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:22:11 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2ea71803effso38858565ad.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 22:22:11 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:25:24 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b191f8a9b3so5558408a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 22:25:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794896530; x=1795501330; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794896724; x=1795501524; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=un94qjLPd69gCihb+f/tlZVshjSmODDedEDHnUli6kg=;
-        b=BbDBws8yZrsMwmzI7nQtsls8t7NJAkXs7pmWAVEdNrgyEitBbkZVuZ/JTgJJRNkLcV
-         TFkRJIa9dc6v4MVSrgfB/A9xjWGrIZaVWc3bz1XAi4pFwTBMwwg9ITYqZLMPWv15QNl7
-         kecUfQ6tPavPFU5RZWw3OYTYo8mjI3bLYqmWOXUGRGEGoSXx6qabPIc6lIwGPhZLNIYT
-         FnpwXHhh3RsSZmHj84RUdI1pWd9qMvNBmvhfPu1ifO2a2Q8x71RX7e2V99LuTpDqpsdL
-         nA5pHS/iLbVZj0C40eYuW6YZye3ckkdW5oz12tW3/l8rwZcgmVADhCfY8+MYwegtMa74
-         MwHw==
+        bh=5yD+WOgs/w0UEROtpGaM1H5zLUeHVWQoG0KCTRfw/gg=;
+        b=PlRPIE/BlbSEjGRRF3p/sf5Gr75YyDeMBhFr7+iOMzhXqi8cpoVD8XJ3vFo2PInZLv
+         rPyFt+mru5NGo4boxHxjr/oHKFXKr4YSROjz79eGjJAXc9AkTg456CHzAzROygmUT2mq
+         JE9VCulQSn6afpm8P3BTUF3kMJZbyEWdNKVSK3l/c36uAj7ORHiS6UQODEwyhnlxzALR
+         QdEbR0woB0ZMn79hgBRsUmjzDIX4h2tVlxx7XG7o227I6aaSfMajtOJaQ02KYWrsnLyb
+         4eao2jFOzq4nH+q+jrTjtpPOAYuxdFFBz/9rp1d4sXW6muiF6eqiFcn0rRGcGmnxCXLJ
+         ReKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794896530; x=1795501330;
+        d=1e100.net; s=20260707; t=1794896724; x=1795501524;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=un94qjLPd69gCihb+f/tlZVshjSmODDedEDHnUli6kg=;
-        b=rl4yr/d/+5nzAdcxckBS7rxJFaTjDd+nRr29A5VlUO2fqQpTSiV5ons8//6ERFjiXg
-         toaLAFzKyKlkliR2j2sU3DhzoSkw9XDuAEPaj5y+nnUcx4lRH4Vk7LRRaF0d22IID1gA
-         Qrwx0fSfwbnCrTOk/mPB4p/wILlNM5gbjYlfU16nmKuZZq4fihYeJSu2/TMOvCZsnW4U
-         au9b/S4qksXpikflPvKtVRpLdP5k41XZ2QL+hW/OD3lZwoRq8T8GdyeRkzzjRt/LKj7w
-         skYFDSxyLr9cZjOKgjviekrcBmwy4Y7k/XDFDoH8FolZNjUTbEB7dYuGT7qrocw60e6q
-         3Dyg==
-X-Forwarded-Encrypted: i=1; AL+hErEBCfg5NKOA/xXUmODRmw/6mPnmFxJWB9YiyAMZRQDFX5aXEJqpidkI6jxV6xmqphBZ1VuNlVmmFJfg1Uub@vger.kernel.org
-X-Gm-Message-State: APuU4Z8M1bAdXN2GkWadAGloHBSu9EprTGjmA9VB0AEp8E1r/tyhSPGi
-	t+r4Rmz9Qqr6TqBQtT1Hva05go+5X1tWI2d4YKaUgTLwxndduw6qYM6vr7ntiPtEHaxBXfyUcCO
-	5SEEpiVWsCSyHwnmtuUOoTw86WPb+m/Qo/rFimLKm9Y+wPb6kq5aqAuKP4l/DpCtZfSMq
-X-Gm-Gg: AZFdTZfX7n3bf+rtT3djIgiMCpvbHS3Duen2WVoZW4b2kKTe6XAI2ZKnRGFqXtrNHwo
-	kehILGxSPi1CRa6peb+fTCa0GTDIs0ezevI/y9MDOh6ZMZYYrHmED9Ar3sfPMPUNY6ZFVBjMHR8
-	3sm/0fTVl4mpPXapg0tevF/4bEMhj0tvT1UcBogESyNmw2Y9xypRxIommihk38zRhH+QyGnAlgQ
-	P0Gl+QbyI7i8iE3G4UEhIEUKzKRLOrrUqWPyxsw9NLwrMe/wMraqmxAri9EhSLlFZDWrSTy8+oX
-	eXZhxWW+qr6TC/3oxzzr5S9XowB58YJ1OAXZjp1mYzT9+3KomITa03L7nn6cWTzESTujfwG+UEC
-	X+WGp7iWcEBt0WuWZf8cprkIMExUhrKBfnQhnuZcK3hYvciyqNNJhzDFDs7760ckmccsvWKHlI1
-	Hju+4rYRu6P7yGvBl/vOIKMoRRmCnBZ6cRp9qzJys+4oA=
-X-Received: by 2002:a17:903:26c3:b0:2e9:4e83:1969 with SMTP id d9443c01a7336-2ee0dcd1143mr112813495ad.34.1794896529980;
-        Mon, 16 Nov 2026 22:22:09 -0800 (PST)
-X-Received: by 2002:a17:903:26c3:b0:2e9:4e83:1969 with SMTP id d9443c01a7336-2ee0dcd1143mr112813055ad.34.1794896529374;
-        Mon, 16 Nov 2026 22:22:09 -0800 (PST)
-Received: from [10.133.33.59] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2efd76db8acsm9019055ad.11.2026.11.16.22.22.04
+        bh=5yD+WOgs/w0UEROtpGaM1H5zLUeHVWQoG0KCTRfw/gg=;
+        b=vp+6c+WSH/CURoTKvlP3bKWmY0ZaoTQ/am5bSu1KXyrczrpDF1m0gdVEqGwFPJsGKx
+         zg2KbW1D5dwUKp/pI4bTaf/h2TGMnnTOvqN0JRez7BteJS/hPQPHafSoCFwBOq+e4kIp
+         DmmQ/PYqYVGRPRel+QdThwY/Ni2NG+Flk1JkISZxkc+wNLWwCiy6pkKc3ext9WBYMqVb
+         c6MDdEVf1Dt4d6YiKmJHaEJFL7ToxDAar3ha2+VROyzfeSnHPGVeQPjx3ip3GV6NCwLw
+         rovKyvvB0xS7ePHTh9C9OjiAWa3TrdLyXEroAc+rsoA7wZfsVrninrQriDrvIU+TU5lT
+         K3Nw==
+X-Forwarded-Encrypted: i=1; AL+hErFyxYIFo90WtMwkXFwA8v5gDPRf0zWSRkv+BuKwuctrSziDV2XWX4tflJkhiA33PC/iGM3W5DiYIouyIjih@vger.kernel.org
+X-Gm-Message-State: APuU4Z80HUhl4IWJ9/bvPVHkbir7btnkDxc+IcbGnN8kBL+jbfP6oYrm
+	g85y7QCd8Z+akSB2DEb+Ws/uYZ97DcFB6dx4cV5SUzGH9ZtOV4Rs4oYJdNJBlaPSRpqLt1hMj9C
+	O0SRGcY809uZsX0itwhWBpVptqdNd4q4NjWGWbR4rQAsfHiaNsz+TE4tj5YMmEaOs6HJPB933vp
+	CV
+X-Gm-Gg: AZFdTZdOGQVnDjSuxPUD8RHyr3KcsCyQ7n07bSYlis1XatQzXUnv7eDN/W669eN5NaE
+	UkdwdJ9/MNdbDbbiG/1gaAGsJDLhe7i4YASVd+a7IuJ+cldGDA8SGvsDJocGRLUohoMh6LkuYIS
+	g9pPt1uMC2lNwAXJYzGfzJW4Ls1wk0ywNA3DNSu7yskklv7pnOqN90sae9B/tD+TI7qpUiqoDip
+	tAQTYNZGkMIg8iv5ZFOTRC9y0rDEEIx/Dztwyqj61E9ejak9eU/Aq9SHx8KkuenCvyDKpm+5Z8B
+	MRljRsUxc5Kro5QQhDwNg/ED3KDow/qSK54eeSMpBhttWEm9JdzOlZG0sdo3xU8eRizEFacs72u
+	WX0GLfYotz0qtFnfEt4Q2qdT4uOdJzjGy2Pf57yhRbUO89vqhsZY79HrBKB80vTto5qz3KZtQsp
+	mF64c=
+X-Received: by 2002:a17:90b:3f8e:b0:3ac:945c:7f69 with SMTP id 98e67ed59e1d1-3b1b0b5f193mr11585571a91.66.1794896724059;
+        Mon, 16 Nov 2026 22:25:24 -0800 (PST)
+X-Received: by 2002:a17:90b:3f8e:b0:3ac:945c:7f69 with SMTP id 98e67ed59e1d1-3b1b0b5f193mr11585546a91.66.1794896723403;
+        Mon, 16 Nov 2026 22:25:23 -0800 (PST)
+Received: from [10.218.31.125] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b3abebf1aesm2512101a91.16.2026.11.16.22.25.19
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Nov 2026 22:22:08 -0800 (PST)
-Message-ID: <b66bd620-e0a2-4869-9cfc-94364f772f64@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 11:16:39 +0800
+        Mon, 16 Nov 2026 22:25:22 -0800 (PST)
+Message-ID: <2a4f99e9-4b51-42c5-9852-8747bf8f1a14@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 11:55:17 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,494 +118,130 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v18 4/8] qcom-tgu: Add signal priority support
-To: Suzuki K Poulose <suzuki.poulose@arm.com>, andersson@kernel.org,
-        alexander.shishkin@linux.intel.com, mike.leach@linaro.org,
-        konrad.dybcio@oss.qualcomm.com, james.clark@arm.com,
-        krzk+dt@kernel.org, conor+dt@kernel.org
-Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
-        devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
-        songchai@qti.qualcomm.com, Jie Gan <jie.gan@oss.qualcomm.com>
-References: <20261116074118.822731-1-songwei.chai@oss.qualcomm.com>
- <20261116074118.822731-5-songwei.chai@oss.qualcomm.com>
- <c23c116b-063a-4658-a6da-b79146226d4a@arm.com>
+Subject: Re: [PATCH v2 2/2] ufs: ufs-qcom: Enable ICE before enabling crypto
+ support
+To: Eric Biggers <ebiggers@kernel.org>
+Cc: Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        "Martin K. Petersen" <mkp@kernel.org>, linux-mmc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-scsi@vger.kernel.org, stable@vger.kernel.org
+References: <20261112-qcom_ice_pm_enable-v2-0-177e454d6f22@oss.qualcomm.com>
+ <20261112-qcom_ice_pm_enable-v2-2-177e454d6f22@oss.qualcomm.com>
+ <20261113040820.GE1742@sol>
 Content-Language: en-US
-From: "Songwei.Chai" <songwei.chai@oss.qualcomm.com>
-In-Reply-To: <c23c116b-063a-4658-a6da-b79146226d4a@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNSBTYWx0ZWRfXxD+CKSvxW+68
- fZ7D3kMnzBc7ndGFMX30Mn/dnOKnyJZnyKkfg8W53ztKUo/9Z0Hfi/4cklRvytkCoIzFOBzzApK
- jxXIeK2CEalMECmUwd/WfwkvnwJBI6HdnB5OwbcvdavZQXdaQjrdekhE5bhamPNnjsM9wBxmuZk
- QuX4d5h1uCFTevR4j2A4rIAw2idFR19y2iU2YvKNegcXk6rI6lYsUyDSqY/AGvHkqvUwuRl5car
- oA+j/do3ZBQpHIqh4RzZ4E3pkr9TPQW4tJQCIHN4YLXjQo/yoalomfp9cjc0W3Mw+sU1bKD6uiB
- fBpnZVigsUjQASLclwZWYkDE63O+7KMDKz37cWQByzGedx95y8DnJTfCYhlr9yXEKDrD0IxKPox
- vHMA997gVjbUhHbsK21JLvnSW16Qcw6c2EoCI86Zot1v57FhyZl3+PfHxwsy+C92Wy+H9iR+f8u
- zrg2RtyIiV6wnx91Dyw==
-X-Authority-Analysis: v=2.4 cv=JfIpPkKV c=1 sm=1 tr=0 ts=6afbf293 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+In-Reply-To: <20261113040820.GE1742@sol>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNSBTYWx0ZWRfX8kBi+0T1ni/w
+ S1VTnHFsAr0hg8utjNf3sC7F3OlcCujeUVd6ZlLUy6LpQzKLf1+L6xGB/svOla+8r3vNBF9xNfj
+ NPjWXFZiCjjPRMl46mkRcrKXHUSDTtXN11TsGLxDi+WOEbNde1uuTdSnBeX+/pcvTpWPbIKcVp9
+ 7Gqyrk0xRY+rJulzq9mX+TNEaXWIIusx0vwgOgV4NicZkVHjSmOBEsN+CZRzYIy/WvO5jkHrkNx
+ vdiKxZA3KeHQ20++q4tZ+H19QFJohX2Zk/Cd4Y8q5U/apfC6CnaoI/xnPxMlTQchezjVsSA4kVw
+ ksg3aUjwICbIRrM+nIE0RuNgVLLNWD7s3ZURC1j5OYluYa0nLv0/kS62vnQHzp72JZQ1vcBUqJ9
+ jk7gY1FPDe20wcY+QoQpPmydNdIbZDCc1B+s2BSda9GfhvAIs/S0YsqfrDWquXnQ5JKORru9d0Z
+ 7juk+2h4cdBiUVTSbLA==
+X-Authority-Analysis: v=2.4 cv=TckDJhQh c=1 sm=1 tr=0 ts=6afbf355 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=hjJ2taPkbwp8OrdV2tUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: rTg354M1XdM4cbmWBoQIVP49mqInyiGK
-X-Proofpoint-GUID: rTg354M1XdM4cbmWBoQIVP49mqInyiGK
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNSBTYWx0ZWRfX1NDYP3+VeYHc
- WEsCv1cRZiJFH2PAG9l2thJ2mdPIpV+gIU158M+7aF/2ZexfXIPVoH43tUO6IVnc9ML4BFD0xUv
- 1UqIPWVWWHeOnlwb0tYUmq+A/Sp7xLo=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=x_L3ctan3gn5YDiFMPYA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: 0B-nS1Uu5tyQwiNGvEy5RQvnQ893URnK
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNSBTYWx0ZWRfX9Ils57GSbfgY
+ kSbOdJUebULdwXeT4tWC5Dis7TEWPzCKazDWHWoKpBqHBaSQ6BCxDpoYJ61zOQXGz2zNuq1//+u
+ e47A2rI29Iw+sPdz77r8tBgBICRXc4k=
+X-Proofpoint-GUID: 0B-nS1Uu5tyQwiNGvEy5RQvnQ893URnK
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 clxscore=1015 suspectscore=0 spamscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 malwarescore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 phishscore=0
+ suspectscore=0 clxscore=1015 spamscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
  definitions=main-2611170025
 
+On 13-11-2026 09:38, Eric Biggers wrote:
+> On Thu, Nov 12, 2026 at 06:48:18PM +0530, Kuldeep Singh wrote:
+>> ufs-qcom currently exposes UFS crypto profile and sets UFSHCD_CAP_CRYPTO
+>> before enabling ICE. This leaves a window where blk-crypto can issue
+>> keyslot programming calls before ufs-qcom has explicitly enabled ICE.
+> 
+> Please be more specific about what actually goes wrong, and why.  During
+> probe, the crypto profile hasn't actually been registered with the block
+> layer yet.  So the above seems inaccurate.  Likewise in the MMC patch.
 
-On 11/16/2026 7:16 PM, Suzuki K Poulose wrote:
-> On 16/11/2026 07:41, Songwei Chai wrote:
->> Like circuit of a Logic analyzer, in TGU, the requirement could be
->> configured in each step and the trigger will be created once the
->> requirements are met. Add priority functionality here to sort the
->> signals into different priorities. The signal which is wanted could
->> be configured in each step's priority node, the larger number means
->> the higher priority and the signal with higher priority will be sensed
->> more preferentially.
->>
->> Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
->> Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
->> ---
->>   .../ABI/testing/sysfs-bus-amba-devices-tgu    |   7 +
->>   drivers/hwtracing/qcom/tgu.c                  | 211 ++++++++++++++++++
->>   drivers/hwtracing/qcom/tgu.h                  |  68 ++++++
->>   3 files changed, 286 insertions(+)
->>
->> diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu 
->> b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> index 798a0e51e27a..3be0b912c937 100644
->> --- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> +++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> @@ -7,3 +7,10 @@ Description:
->>           Accepts only one of the 2 values -  0 or 1.
->>           0 : disable TGU.
->>           1 : enable TGU.
+Seems i explained problem in cover letter and didn't mention here.
+Please refer here:
+https://lore.kernel.org/linux-arm-msm/20261022-qcom_ice_pm_enable-v1-0-f7a84086c651@oss.qualcomm.com/
+
+Actual bug got reported in storage drivers after introducing runtime PM
+in ice.
+
+In UFS probe, setting UFSHCD_CAP_CRYPTO enables the crypto profile and
+let blk-crypto layer send key programming calls(i.e
+qcom_ice_program_key() in ice.c) even before UFS get ice handle (i.e
+qcom_ice_enable).
+
+OTOH, with no runtime PM in ice, clocks are remain voted after probe
+too. When key program call comes from blk-crypto(qcom_ice_program_key),
+it calls qcom_ice_writel(ice, 0x0, QCOM_ICE_REG_CRYPTOCFG(slot)); and
+works fine as it's clocked register access.
+
+With runtime PM in ice, clocks are voted off after probe and now same
+sequence(ufs-probe -> key program call -> qcom_ice_enable) introduces
+kernel panic as it's *unclocked* register access in ICE. That's why it's
+important to enable ice instance in UFS before blk-crypto trigger any
+key program call and hence moved qcom_ice_enable in probe.
+
+Same sequence applies to MMC.
+
+Though the issue reported once runtime PM in ICE got enabled, it's
+actually persistent always and ideally UFS should not assume ice clock
+cycle and get the instance early.
+
+> 
+>>  static int ufs_qcom_ice_init(struct ufs_qcom_host *host)
+>>  {
+>> @@ -188,6 +190,12 @@ static int ufs_qcom_ice_init(struct ufs_qcom_host *host)
+>>  
+>>  	host->ice = ice;
+>>  
+>> +	err = qcom_ice_enable(host->ice);
+> 
+> Use the 'ice' local variable.
+
+Ack.
+
+> 
+>> @@ -636,12 +645,15 @@ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
+>>  		 * is initialized.
+>>  		 */
+>>  		err = ufs_qcom_enable_lane_clks(host);
+>> +		if (err)
+>> +			return err;
 >> +
->> +What: 
->> /sys/bus/amba/devices/<tgu-name>/step[0:7]_priority[0:3]/reg[0:23]
->> +Date:        November 2026
->> +KernelVersion:    7.5
->> +Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai 
->> <songwei.chai@oss.qualcomm.com>
->> +Description:
->> +        (RW) Set/Get the sensed signal with specific step and 
->> priority for TGU.
->> diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
->> index 5bae46db4f8c..917d506cddf9 100644
->> --- a/drivers/hwtracing/qcom/tgu.c
->> +++ b/drivers/hwtracing/qcom/tgu.c
->> @@ -16,14 +16,145 @@
->>     #include "tgu.h"
->>   +struct tgu_attribute {
->> +    struct device_attribute attr;
->> +    u8 step_index;
->> +    u8 priority;
->> +    u8 reg_num;
->> +};
->> +
->> +/*
->> + * drvdata->priority is a flat [priority][step][reg] array.
->> + */
->> +static int calculate_array_location(struct tgu_drvdata *drvdata,
->> +                    int step_index, int priority,
->> +                    int reg_index)
->> +{
->> +    return priority * (drvdata->num_step) * (drvdata->num_reg) +
->> +        step_index * (drvdata->num_reg) + reg_index;
->> +}
->> +
->> +static ssize_t tgu_dataset_show(struct device *dev,
->> +                struct device_attribute *attr, char *buf)
->> +{
->> +    struct tgu_drvdata *drvdata = dev_get_drvdata(dev);
->> +    struct tgu_attribute *tgu_attr =
->> +            container_of(attr, struct tgu_attribute, attr);
->> +    int index;
->> +
->> +    index = calculate_array_location(drvdata, tgu_attr->step_index,
->> +                     tgu_attr->priority,
->> +                     tgu_attr->reg_num);
->> +
->> +    /*
->> +     * Serialise against tgu_dataset_store() and tgu_enable(), which 
->> read
->> +     * and write the same priority array, so the value is not observed
->> +     * while being updated concurrently.
->> +     */
->> +    guard(mutex)(&drvdata->lock);
->> +
->> +    return sysfs_emit(buf, "0x%x\n", drvdata->priority[index]);
->> +}
->> +
->> +static ssize_t tgu_dataset_store(struct device *dev,
->> +                 struct device_attribute *attr,
->> +                 const char *buf, size_t size)
->> +{
->> +    struct tgu_drvdata *tgu_drvdata = dev_get_drvdata(dev);
->> +    struct tgu_attribute *tgu_attr =
->> +        container_of(attr, struct tgu_attribute, attr);
->> +    unsigned long val;
->> +    int index;
->> +    int ret;
->> +
->> +    ret = kstrtoul(buf, 0, &val);
->> +    if (ret)
->> +        return ret;
->> +
->> +    guard(mutex)(&tgu_drvdata->lock);
->> +    index = calculate_array_location(tgu_drvdata, tgu_attr->step_index,
->> +                     tgu_attr->priority,
->> +                     tgu_attr->reg_num);
->> +
->> +    tgu_drvdata->priority[index] = val;
->> +
->> +    return size;
->> +}
->> +
->> +static umode_t tgu_node_visible(struct kobject *kobject,
->> +                struct attribute *attr,
->> +                int n)
->> +{
->> +    struct device *dev = kobj_to_dev(kobject);
->> +    struct tgu_drvdata *drvdata = dev_get_drvdata(dev);
->> +    struct device_attribute *dev_attr =
->> +        container_of(attr, struct device_attribute, attr);
->> +    struct tgu_attribute *tgu_attr =
->> +        container_of(dev_attr, struct tgu_attribute, attr);
->> +
->> +    if (tgu_attr->step_index >= drvdata->num_step)
->> +        return SYSFS_GROUP_INVISIBLE;
->> +
->> +    if (tgu_attr->reg_num >= drvdata->num_reg)
->> +        return 0;
->> +
->> +    return attr->mode;
->> +}
->> +
->>   static void tgu_write_all_hw_regs(struct tgu_drvdata *drvdata)
->>   {
->> +    int i, j, k, index;
->> +
->>       CS_UNLOCK(drvdata->base);
->> +    for (i = 0; i < drvdata->num_step; i++) {
->> +        for (j = 0; j < MAX_PRIORITY; j++) {
->> +            for (k = 0; k < drvdata->num_reg; k++) {
->> +                index = calculate_array_location(
->> +                            drvdata, i, j, k);
->> +
->> +                writel(drvdata->priority[index],
->> +                    drvdata->base +
->> +                    PRIORITY_REG_STEP(i, j, k));
->> +            }
->> +        }
->> +    }
->>       /* Enable TGU to program the triggers */
->>       writel(1, drvdata->base + TGU_CONTROL);
->>       CS_LOCK(drvdata->base);
->>   }
->>   +static void tgu_set_dev_caps(struct tgu_drvdata *drvdata)
->> +{
->> +    int num_sense_input, num_reg, num_step;
->> +    u32 devid;
->> +
->> +    devid = readl(drvdata->base + CORESIGHT_DEVID);
->> +
->> +    num_sense_input = TGU_DEVID_SENSE_INPUT(devid);
->> +    num_reg = (num_sense_input * TGU_BITS_PER_SIGNAL) / 
->> LENGTH_REGISTER;
->> +
->> +    if ((num_sense_input * TGU_BITS_PER_SIGNAL) % LENGTH_REGISTER)
->> +        num_reg++;
->> +
->> +    if (num_reg > TGU_MAX_PRIORITY_REGS) {
->> +        dev_warn(drvdata->dev,
->> +            "DEVID reports %d priority regs, clamping to %d\n",
->> +            num_reg, TGU_MAX_PRIORITY_REGS);
->> +        num_reg = TGU_MAX_PRIORITY_REGS;
->> +    }
->> +    drvdata->num_reg = num_reg;
->> +
->> +    num_step = TGU_DEVID_STEPS(devid);
->> +
->> +    if (num_step > TGU_MAX_STEPS) {
->> +        dev_warn(drvdata->dev,
->> +            "DEVID reports %d steps, clamping to %d\n",
->> +            num_step, TGU_MAX_STEPS);
->> +        num_step = TGU_MAX_STEPS;
->> +    }
->> +    drvdata->num_step = num_step;
->> +}
->> +
->>   static void tgu_enable(struct tgu_drvdata *drvdata)
->>   {
->>       tgu_write_all_hw_regs(drvdata);
->> @@ -103,8 +234,86 @@ static const struct attribute_group 
->> tgu_common_grp = {
->>       .attrs = tgu_common_attrs,
->>   };
->>   +#define tgu_dataset_rw(name, step_index, priority, 
->> reg_num)              \
->> +    (&((struct tgu_attribute[]){ {                                   \
->> +        __ATTR(name, 0644, tgu_dataset_show, tgu_dataset_store), \
->> + step_index,                                              \
->> + priority,                                                \
->> + reg_num,                                                 \
->> +    } })[0].attr.attr)
->> +
->> +#define STEP_PRIORITY(step_index, reg_num, priority)              \
->> +    tgu_dataset_rw(reg##reg_num, step_index, priority, reg_num)
->> +
->> +#define STEP_PRIORITY_LIST(step_index, priority) \
->> +    {STEP_PRIORITY(step_index, 0, priority), \
->> +     STEP_PRIORITY(step_index, 1, priority),  \
->> +     STEP_PRIORITY(step_index, 2, priority),     \
->> +     STEP_PRIORITY(step_index, 3, priority),  \
->> +     STEP_PRIORITY(step_index, 4, priority),  \
->> +     STEP_PRIORITY(step_index, 5, priority),  \
->> +     STEP_PRIORITY(step_index, 6, priority),  \
->> +     STEP_PRIORITY(step_index, 7, priority),  \
->> +     STEP_PRIORITY(step_index, 8, priority),  \
->> +     STEP_PRIORITY(step_index, 9, priority),  \
->> +     STEP_PRIORITY(step_index, 10, priority), \
->> +     STEP_PRIORITY(step_index, 11, priority), \
->> +     STEP_PRIORITY(step_index, 12, priority), \
->> +     STEP_PRIORITY(step_index, 13, priority), \
->> +     STEP_PRIORITY(step_index, 14, priority), \
->> +     STEP_PRIORITY(step_index, 15, priority), \
->> +     STEP_PRIORITY(step_index, 16, priority), \
->> +     STEP_PRIORITY(step_index, 17, priority), \
->> +     STEP_PRIORITY(step_index, 18, priority), \
->> +     STEP_PRIORITY(step_index, 19, priority), \
->> +     STEP_PRIORITY(step_index, 20, priority), \
->> +     STEP_PRIORITY(step_index, 21, priority), \
->> +     STEP_PRIORITY(step_index, 22, priority), \
->> +     STEP_PRIORITY(step_index, 23, priority), \
->> +     NULL                   \
->> +    }
->> +
->> +#define PRIORITY_ATTRIBUTE_GROUP_INIT(step, priority)\
->> +    (&(const struct attribute_group){\
->> +        .attrs = (struct attribute*[])STEP_PRIORITY_LIST(step, 
->> priority),\
->> +        .is_visible = tgu_node_visible,\
->> +        .name = "step" #step "_priority" #priority \
->> +    })
->> +
->>   static const struct attribute_group *tgu_attr_groups[] = {
->>       &tgu_common_grp,
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(0, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(0, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(0, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(0, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(1, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(1, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(1, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(1, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(2, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(2, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(2, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(2, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(3, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(3, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(3, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(3, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(4, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(4, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(4, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(4, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(5, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(5, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(5, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(5, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(6, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(6, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(6, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(6, 3),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(7, 0),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(7, 1),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(7, 2),
->> +    PRIORITY_ATTRIBUTE_GROUP_INIT(7, 3),
->>       NULL,
->>   };
->>   @@ -129,6 +338,8 @@ static int tgu_probe(struct amba_device *adev, 
->> const struct amba_id *id)
->>       if (ret)
->>           return ret;
->>   +    tgu_set_dev_caps(drvdata);
->> +
->>       drvdata->enabled = false;
->>         ret = sysfs_create_groups(&dev->kobj, tgu_attr_groups);
->> diff --git a/drivers/hwtracing/qcom/tgu.h b/drivers/hwtracing/qcom/tgu.h
->> index c6426b4e3617..d769379b8421 100644
->> --- a/drivers/hwtracing/qcom/tgu.h
->> +++ b/drivers/hwtracing/qcom/tgu.h
->> @@ -6,9 +6,70 @@
->>   #ifndef _QCOM_TGU_H
->>   #define _QCOM_TGU_H
->>   +#include <linux/bitfield.h>
->> +#include <linux/bits.h>
->> +
->>   /* Register addresses */
->>   #define TGU_CONTROL        0x0000
->>   +#define TGU_DEVID_SENSE_INPUT(devid_val) \
->> +    ((int)FIELD_GET(GENMASK(17, 10), devid_val))
->> +#define TGU_DEVID_STEPS(devid_val) \
->> +    ((int)FIELD_GET(GENMASK(6, 3), devid_val))
->> +
->> +#define TGU_BITS_PER_SIGNAL    4
->> +#define LENGTH_REGISTER        32
->> +
->> +/*
->> + * TGU configuration space Per-step register layout.
->> + * (one step occupies STEP_SIZE bytes) Offsets below are relative to
->> + *                                                         the start 
->> of that step's block.
->> + * x-------------------------x x-----------------x
->> + * |   coresight management  | |     reserved    |
->> + * |        registers        | |-----------------| +0x1F4
->> + * |                         |                       ---> |   
->> priority[3]   |
->> + * |-------------------------|                       | 
->> |-----------------| +0x194
->> + * |         step[7]         |                       |     | 
->> priority[2]   |
->> + * |-------------------------| step[0] + 7*STEP_SIZE | 
->> |-----------------| +0x134
->> + * |           ...           |                       |     | 
->> priority[1]   |
->> + * |-------------------------| step[0] + 1*STEP_SIZE | 
->> |-----------------| +0xD4
->> + * |         step[0]         |-----------------------|     | 
->> priority[0]   |
->> + * |-------------------------| step[0] (base+0x40) 
->> |-----------------| +0x74
->> + * |    Control and status   |                             | 
->> condition select|
->> + * |          space          | |-----------------| +0x60
->> + * x-------------------------x base                        | 
->> condition decode|
->> + * |-----------------| +0x50
->> + *                                                         | 
->> Timer/Counter  |
->> + * x-----------------x +0x40
->> + */
->> +#define STEP_SIZE        0x1D8
->
-> Something is really weird. STEP_SIZE is 0x1D8, but the diagram above
-> shows the "reserved" is at 0x1F4 ? is it because you have added 0x40
-> (of the Control and Status space) to the offsets for the step0 ?
->
-> Please could we simply define the fields for a step with offset 0 as
-> the base for each step ?
->
-> i.e., Timer/Counter -> 0x0
->       Priority[0]-> 0x34
->
->
-confirmed.
-> Also, please could you keep the naming consistent.
-> STEP_SIZE vs PRIORITY_STRIDE ? I prefer SIZE
->
->
-> #define STEP0_BASE        0x40
-> #define STEP_SIZE        0x1D8
->
-> #define PRIORITY0_BASE        0x34
-> #define PRIORITY_SIZE        0x60
->
->
-> and
->
-> #define STEP_OFFSET(s)        (STEP0_BASE + STEP_SIZE * (s))
-> #define PRIORITY_OFFSET(p)    (PRIORITY0_BASE + PRIORITY_SIZE *(p))
->
-> with that we could replace
->
-> > +/* Calculate compare step addresses */
-> > +#define PRIORITY_REG_STEP(step, priority, reg)\
-> > +    (PRIORITY0_OFFSET + PRIORITY_STRIDE * priority +\
-> > +     REG_SIZE * reg + STEP_SIZE * step)
->
-> with :
->
-> #define PRIORITY_REG_OFFSET(step, prio, reg)        \
->     (STEP_OFFSET(step) + PRIORITY_OFFSET(prio) + (reg) * REG_SIZE)
->
-confirmed.
->
->
->
->> +#define PRIORITY0_OFFSET    0x0074
->> +#define PRIORITY_STRIDE        0x0060
->> +#define REG_SIZE        0x4
->> +
->> +/*
->> + * Upper bounds on the DEVID-derived per-region counts, used to clamp
->> + * whatever the hardware reports so writes never fall outside the
->> + * ioremap()'d window or spill into an adjacent region.
->> + *
->> + *   TGU_MAX_STEPS         matches the static step0..step7 sysfs 
->> tables.
->> + *   TGU_MAX_PRIORITY_REGS matches the static reg0..reg23 sysfs tables.
->> + *
->> + * Each priority level's block spans a full PRIORITY_STRIDE (0x60 
->> bytes),
->> + * i.e. PRIORITY_STRIDE / REG_SIZE = 24 registers, all of them 
->> implemented.
->> + */
->> +
->> +#define TGU_MAX_STEPS                  8
->> +#define TGU_MAX_PRIORITY_REGS          24
->> +
->> +/* Maximum priority that TGU supports */
->> +#define MAX_PRIORITY                   4
->
-> nit: TGU_MAX_PRIORITY for consistency
-confirmed.
->> +
->
->> +
->>   /**
->>    * struct tgu_drvdata - Data structure for a TGU (Trigger 
->> Generation Unit)
->>    * @base: Memory-mapped base address of the TGU device
->> @@ -16,6 +77,10 @@
->>    * @lock: Mutex serialising enable/disable and the associated PM 
->> runtime
->>    *        reference counting against concurrent sysfs access
->>    * @enabled: Flag indicating whether the TGU device is enabled
->> + * @priority: Per-step, per-priority-level, per-register values 
->> staged by
->> + *            sysfs writes and flushed to hardware by tgu_enable()
->> + * @num_reg: Number of priority registers implemented per priority 
->> level
->> + * @num_step: Number of steps implemented
->>    *
->>    * This structure defines the data associated with a TGU device,
->>    * including its base address, device pointer, the lock serialising
->> @@ -26,6 +91,9 @@ struct tgu_drvdata {
->>       struct device *dev;
->>       struct mutex lock;
->>       bool enabled;
->> +    unsigned int priority[TGU_MAX_STEPS * MAX_PRIORITY * 
->> TGU_MAX_PRIORITY_REGS];
->
-> Please add a symbol for this
->
-> #define TGU_MAX_PRIORITY_REG_SIZE
->     (TGU_MAX_STEPS * TGU_MAX_PRIORITY * TGU_MAX_PRIORITY_REGS)
-confirmed.
->
-> Suzuki
+>> +		err = ufs_qcom_ice_enable(host);
+>>  		break;
+>>  	case POST_CHANGE:
+>>  		/* check if UFS PHY moved from DISABLED to HIBERN8 */
+>>  		err = ufs_qcom_check_hibern8(hba);
+>>  		ufs_qcom_enable_hw_clk_gating(hba);
+>> -		ufs_qcom_ice_enable(host);
+>>  		ufs_qcom_config_ice_allocator(host);
+>>  		break;
+> 
+> Needs an explanation for why ufs_qcom_config_ice_allocator() and
+> ufs_qcom_ice_enable() need to be called at different times.
+I didn't get any issue if we enable ice in POST_CHANGE, I added as good
+to have change so as to make ice available at earliest.
+As no issue observed, I am planning to drop the change.
+
+-- 
+Regards
+Kuldeep
+
