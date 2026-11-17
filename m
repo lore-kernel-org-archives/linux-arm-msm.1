@@ -1,94 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794884715;
-	b=5s18G/JYzdP2oxVzJT8ACDqvfgOZ8PI6O+8Nop4CYf1VMe5vPJcUdDa4Vk3Krh+WTEa7
-	 nkue+BGPkVDxw2WrP/PaE/G66r5PZ2DJsn3IXIUvroMOI1KshHGAL02VLIp3hhAW5j6rg
-	 kftHOlx6zXvuv2h6b19WKK9Aw5feCGeQPEUzPUxeR6rwxVXniKb9ajVHfNn4ZBUDO6pyB
-	 rwhWpOgaw15lpjOAaTiOOrSgjsN2TyFE7bziBzUvSqI9MkXTBxuANT62UQhMgyoFoo1iy
-	 gcltRN8IFmnmAfiaIYbNDjjeA1q0mPPrWSB3XCWQTu4MOZtFEXew+F9DeSzC6ogR3Ew==
+	t=1794884916;
+	b=EkS7gNl4c1/L/1lL8EOjZBuQ5GmXqvJRzPfs0mUMXUXVOWh12fHgBJ5QJA/3qsVgLBDM
+	 Z2c/xFLui2JGm/kyiErFfzMVsz3Ulam9RSnDimElVkN1vNsX75Lt7jX6t28Hz7N5lcMdp
+	 nwNkgv3n0sgUToRybubCNDGxq8S2ogeAjx5pT/F6/87WgInlppsTXFXLyaxvZrJFa3Vmw
+	 P6JBw0PXwj8MVfYXfJWh93UnAJAMdOA5XRlunJoB/HpS0KazxPELegoknNRwTvB+q/gXZ
+	 s/xut1XHO6GS/nJjAJda4vv74g2aB1RBcy7OMnTcmSuX+4R+owZy2PGoHaWsMXTnBDw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794884715;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794884916;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=mCoALzMhu5q7+FAJc0HEyB8F4qmrYW3UsJsZLcqOZX4=;
-	b=NHToyuQ/Dojkz0GvlUmfZgfzSaLtu7x+AubzeUMdmGGmpCGsr5ww/W1FYT+TUqRl3Bq+
-	 Q1UBogglQG/aoIjliBEHsxzJ34omAWl8C71Kt2J03YY80ijjyZPcMFA50R2gTxAwSRYPw
-	 3jQy7K4XNXC7FPdoPmudcGFdFC6gJwQ//NRaLhJA6xC8f92f7tvMcLPNhNuu3m/zoiIDa
-	 XAN4UkQDbM3a7GfaCDAoiWGFBDp3L5IawLGM6MXOw+YD/8AhdeQ5jQETH+/WPmEZ/emzi
-	 9gfNWh72lczP4SgDRfq5zGjJNoRVH8oUy7KwLF+DOS+6NJ0RlfYIkDxh16/MzwDww4Q==
+	bh=w+Y3p4UcYcjN90HcYXfFfPpl0FynM3uDCS4/JoEqrWk=;
+	b=Rad3mR1EyJEMsdEeta6GzPxZHUN0LdcGR7n1jCxQWBHHinqQKyW0nYrnaw+q8C1Mqk+C
+	 Fgk0df+zm/gApD5TLe87PK/jq2ES1w+6iPG4sECNdaRZ0t8lK4TpDZfuWE8JLlBHb9mgf
+	 NNcM2m3NRtlc2h5HzGmKiLFGVQdk1Z+E50RWlJRGgRjCwmG7l1oe86XFf0iG+pI/pYF24
+	 GftumAS/IMxIZFIRHZcXqtMfvW2LHRO0WMfRAHMmvZkmzkEwU7hlrCgfuhKYPXN+1Uro/
+	 AI/+oQhOSwedFgxIArjpcat0eq5mv4lf14n13+2N9b//+2e8hFueki+rvsQOE2NkZ1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="xjR7/BNc";
-	arc=none smtp.remote-ip=209.85.160.182
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VBkv9UQO;
+	arc=none smtp.remote-ip=209.85.222.174
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49954606A31C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:05:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 49954606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67276606A329
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:08:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 67276606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xjR7/BNc
-Received: by mail-qt1-f182.google.com with SMTP id d75a77b69052e-5364d86f7f0so23592711cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 19:05:15 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VBkv9UQO
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-94961ed97bcso362582985a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 19:08:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794884714; x=1795489514; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mCoALzMhu5q7+FAJc0HEyB8F4qmrYW3UsJsZLcqOZX4=;
-        b=xjR7/BNcxJw6s62M/s+PdhaTGRoIONz4etd8ABsWI4I9NKfSdNlDj0TddCPf02hnZz
-         lD3LxUVkgZ3r6ulmA/U4G4bxkKqafcPQ8yj4+UCUruC3FGh644jW9RrAWX5Hwr/lhzcT
-         Qarvkt/O1ecdlybAFOS90B/d5oTWMeSh7opB+CcxUg+9mKmUPSYqdtHZEWtW22MkxIVS
-         ehPOd7Ml0WXYSWllhmH10Q27i23Y8YlOnIolDHUVl5pZV1SbCBAaCPRIsS00m4As8QrC
-         So8fEpJxSXKuSI5t5CJK088L7VOOjUXfcL9uRuHiWa9xIAo7lZq/fSUoUTUi+zFY+n5f
-         FZNQ==
+        d=gmail.com; s=20260707; t=1794884915; x=1795489715; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=w+Y3p4UcYcjN90HcYXfFfPpl0FynM3uDCS4/JoEqrWk=;
+        b=VBkv9UQOOPEmqtLq2jGc1a9+225+MsIBCZBLqH3Tc7s9QB0MBXyOp3M/H8VNA4o1A0
+         CLDcAfHKCej8L81PwawUkfoaPTILZZeH57wo2RmqGs4mu5NmrRLaQElQAww3dqCfh6MR
+         qykJ6abRYcl67Nv5XKY2o9EHkZBli0VTgEu0N3iUio0rXoPEZGtZ0SHJQUEIc24QKi7V
+         jYLOgUFpGKGZCNgYeXrStIwnhV9tFtAKGVSJz6/zHPTBXGYE7X6mSQcMWLs98xVI1FQn
+         qLcN68G1XA5PswLF62/o9SbRCkR+iw4tHcqS82QC9pxY+oQ3OO6miorvL7CkXd/UAHwt
+         8ywA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794884714; x=1795489514;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794884915; x=1795489715;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mCoALzMhu5q7+FAJc0HEyB8F4qmrYW3UsJsZLcqOZX4=;
-        b=ZBIk83AKYnmAB0ojYE/T1X6cueiqG9m1Ru8lYcgPlqtKdElwtD4TkOI7jhKMuNDLHA
-         6+Gp/nlfKzShUXoMo5fTTORrPA+XiHIbXzlLGK9+xw6efiE+9AeEKu9xTupEbGnMQPii
-         QymAoOCQOL9IRDYk5O09308Vduw1nYmSEVyCJfmDsL/cHC6ISeX8h4z7gczkj4e3QbRq
-         q/T9yVFV22+nhMsBWPGfjbXs+mqGl8I3+BvVzMIBMCGK5GOJhffJw8GfGE2kGLBBwTTe
-         ZbP2CHPbNK33rhNnh8R2sXL9NhvExi0NPpgPX1b6M1G8lKOOq6a2FXHfHuuBSOocz0oh
-         9nRQ==
-X-Forwarded-Encrypted: i=1; AL+hErFffzYgujDqeJrph2u+8eSVXZwm4DJqKC/6FKzU2gJjSLItuok8+McdcpvHUNJpAEJ4sQkR/UCl/RFkeT3r@vger.kernel.org
-X-Gm-Message-State: APuU4Z8ClLFS3C0vG4CuyQKkgZxiLnSfxHwDcr0ZkgyM7nWSMUwAFcxc
-	PfmwJc6NMguK+Jcn+QHaBCkGx16IG5gHKJCiK/75xzA/cYnyMQKXhchh
-X-Gm-Gg: AYBFou2i8AjhKP+EN+Lu0DNsxtabmZUXoaHGxsPBWOiQohMZ+PChqlyS35YUpuIfbNp
-	Sfi7GTOIBNJOXz8VkH0NCu282J3TrmZ8pHyffd7h3EejYnGXdeHWxL7KYGWBfy5xWv/PB3CrubQ
-	ZOsUfbIyj2oAva2rmXfVRNPFpI6oyf/PLoSIHYmUFJH0n7AGIb408AsrqnW+CqASlV0dIMCdO7v
-	qR0wmw1ePFTKwVSB0EParh3yQMsBuKa8cQy52zaazly/tNaeUUDHZ13pTB39bbwFSl5acUmSRkW
-	xM02Zk0fi/L/N3pfBrHPSwZSxzXwdFmBjopOW2aFJmrPaA/L98B1z56JS3UFTrKdGBKYACyY0lC
-	+CtIUBI4L3pskERFRUhHmBzBjEKU4RAoMEpk/vjoZGSBLYc5alyiWDUiiQ0ElMdtpZZhW6KmJSg
-	DtDbrZwFsV/kz6CGtKYvE9lT0cug0Cul0Svwth1TT+v58gnmuuy6QZdm4wmC8cunbq4DwRVaoQl
-	Zd7JCUxqQ4TA6B/mo8BW8EkRvric2EiucMrKw0HJOwKoc58kygwC4gdoKOs3hgJxAsfl4zEVcEY
-	Jfs5JAk+HiolEPASnlIbtIT3y1aStADeNnLCPdSxoKQIN9UxvGBP38g69sl2ysqHBHMlMG/kz8I
-	=
-X-Received: by 2002:a05:622a:c8c:b0:55d:3695:c1b8 with SMTP id d75a77b69052e-55d3695c801mr97933321cf.11.1794884714307;
-        Mon, 16 Nov 2026 19:05:14 -0800 (PST)
-Received: from linux.. ([8.34.174.240])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91f23d453casm100066256d6.10.2026.11.16.19.05.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 19:05:13 -0800 (PST)
-From: Changyul Lee <lcy8047@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: linux-remoteproc@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Changyul Lee <lcy8047@gmail.com>
-Subject: [PATCH] rpmsg: glink: hold idr_lock while completing open_ack
-Date: Mon, 16 Nov 2026 22:05:09 -0500
-Message-ID: <20261117030509.1708983-1-lcy8047@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=w+Y3p4UcYcjN90HcYXfFfPpl0FynM3uDCS4/JoEqrWk=;
+        b=0UBeHgFPX9X01vR/GvWnvksNj7OljCccBl5YYlukmjayKkjPDU2GB30OgsrUkSucVy
+         pa7rkV56sD6mZ+g3ybqE5T6h012h6aY7Tka+F5jjqS3LDMYZ7SkrrNDj8eMnAKMQE/Gj
+         P2HDf8zm3cz3+mt/tE/o+dkXuIoasWYKmeWsn1PAyPooWxWGy0keYLI7B+GbcHY8f/qq
+         kAF7oPqZoIUviEbPvlwugJY26vbxr/KXz4m1FLv7hMwzQFDdipENgO681ALS0yomzN1A
+         //B4/GWSZKNxYbsaQh+Tn2/MQxK73LSbjy3DxKdpxyTgqi5qBMOc7HXV2QAOzd+1dPcW
+         l05Q==
+X-Forwarded-Encrypted: i=1; AL+hErH+p06ITrPZqvlOHDQxz+OphXynacabR3vP8s890SnJje5xJxv9eIRBcxxjcftSbthjs8aq024ze6+F0gdr@vger.kernel.org
+X-Gm-Message-State: APuU4Z985JJaKFqdopw6cnr8A5Dgh2Ba7OCfMvbMR3JfmouRpkfii5yx
+	Ef10wLKy6WW994atyKvpJMDAD44GjXuwfMHqF7GQ66i6pr3GTZKper+T
+X-Gm-Gg: AYBFou1J9DG7etQfJBNRjvG48XsD5tNBpgAaKznY14xW3HECPSqhCluIXxOAlTAwI/G
+	BhRiphvyYWk6v6R5wvigX5MmcZVH3aFRh8QKnmmxzTLVXCqSArVy7Hh02ccwPvOMJ8buOktQaP8
+	2sgBZqIENLk3YfgsPuC0k+++lQRJBweJeS1jhRwKFGLWdLiIygAHhkGYSVDcYwfhP2Y/0Y8qDqP
+	zvmh0EOJxc6/azVC1boMTEC+StC8hoDM/CDo0V2S4/rcf19ivG97bRZ0S5n8BmmywefxJ9ALO4x
+	tpvXTjjsZHMKVIkaM4BEbAUZgojIciRuy84eGo30XGeQaenVnpbKK8m0TS3RjBaH4z7rm9J1wE5
+	rN1eiQstflFIr7GE9a2/UTFe6j5k0ea4LKB9Ng4ZQCDs2zG2Lsp614wc5oHexnIUBtlTH2tinUe
+	kM4Z2JraPaQdTzWnxUgirAypftFmTrjG8Ym+Rm4rBRXHtI6o+wZto0MBrLWfRrXCgd7UreDtM5t
+	wtfmzy/8lFszM92GSd7/SgCw0Q29BTA0tWPJgp9AV2uJ1+Xa4AWh5uS7o5zNQqkAFtTwvTN7fYp
+	g41o/+Tfr2wFTwDGWa9pIALhoCmLF7HS7CwDOqxsjpeh3+aDDs0QY8+nZfQm7mm6oAP4OqWQOQT
+	sdk4B5vxQqXe0kNxun3Vtvv7M3Sada/7/muUgGhYamESgdVloWIJY
+X-Received: by 2002:a05:620a:2a10:b0:93f:2eaf:64d6 with SMTP id af79cd13be357-9494bb90266mr2006054585a.48.1794884915318;
+        Mon, 16 Nov 2026 19:08:35 -0800 (PST)
+Received: from ?IPV6:2600:4040:5abf:f200::9dd? ([2600:4040:5abf:f200::9dd])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9494c803fb4sm981181585a.9.2026.11.16.19.08.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 16 Nov 2026 19:08:34 -0800 (PST)
+Message-ID: <93f7aabc-4a92-4d3c-a6af-a84b461c0e0c@gmail.com>
+Date: Mon, 16 Nov 2026 22:08:34 -0500
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -98,59 +93,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v2] bus: mhi: host: pci_generic: Add MBIM-mode config
+ for generic SDX65
+To: Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, daleyo@gmail.com,
+ Johan Hovold <johan@kernel.org>
+References: <20261110-mhi-sdx65-mbim-rfc-v2-1-f1d71a5ac9ab@gmail.com>
+ <84fd339d-c8b2-435d-8e3e-648fb4f889cb@oss.qualcomm.com>
+Content-Language: en-US
+From: Haipeng Lin <jimmie.lin@gmail.com>
+In-Reply-To: <84fd339d-c8b2-435d-8e3e-648fb4f889cb@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-qcom_glink_rx_open_ack() looks up the channel in lcids under idr_lock,
-drops the lock and then completes channel->open_ack.
-qcom_glink_create_local() waits for that completion for five seconds.
-If the wait times out at the same moment, it removes the lcid under
-idr_lock and drops the last two references, which frees the channel.
-The OPEN_ACK handler then reads channel->name for the trace event and
-calls complete_all() on freed memory.
+On 11/13/26 1:53 PM, Jeff Hugo wrote:
+> On 11/10/2026 6:06 PM, Haipeng Lin via B4 Relay wrote:
+>> From: Haipeng Lin <jimmie.lin@gmail.com>
+[...]>> Boards with a Qualcomm-ID modem in MBIM mode have so far been told
+>> apart by subsystem ID, like the SC8280XP CRD's SDX55 (17cb:010c).
+>> This modem carries the generic subsystem ID, so select an MBIM
+>> configuration by machine compatible instead.
+> I'd like it if we could query the hardware to determine if it is in this mode as maybe one of these systems has a SDX65 dongle attached where this workaround does not apply.  However, I am failing to identify such a mechanism so what you have proposed seem to be the best solution so far.
+> 
+> Unless someone identifies a better idea, this seems reasonable given the situation.
+> 
+> -Jeff
 
-Keep idr_lock held until complete_all() returns. The timeout path
-removes the lcid under the same lock before dropping its references,
-so the channel cannot be freed while the lock is held. Taking a
-channel reference instead would not work here, because the handler
-runs in interrupt context and the final put may call
-cancel_work_sync() from qcom_glink_channel_release().
+Hi Jeff,
 
-Fixes: b4f8e52b89f6 ("rpmsg: Introduce Qualcomm RPM glink driver")
-Signed-off-by: Changyul Lee <lcy8047@gmail.com>
----
-Found with a static analysis tool we are developing.
+Thank you for your reply. I tried to look for a hardware hint since we
+have to select the channel layout before opening a channel (so that
+can't be the way to select MBIM, I think). The oem_pk_hash on this SP11
+SDX65 is non-zero (12 words) so it could potentially tell this module
+apart from a dongle, but using it would mean reading BHI before the
+controller is registered plus adding a table of hashes in the driver.
 
-Compile-tested only, with x86_64_defconfig plus MAILBOX, RPMSG_QCOM_GLINK_RPM
-and W=1.
+I can try the hash route if preferred. The machine match is simpler
+although it wouldn't cover the situation e.g., a SDX65 dongle is attach-
+ed via PCIe tunneling/USB4 you mentioned...
 
- drivers/rpmsg/qcom_glink_native.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/rpmsg/qcom_glink_native.c b/drivers/rpmsg/qcom_glink_native.c
-index f848ab46161d..862565bf965d 100644
---- a/drivers/rpmsg/qcom_glink_native.c
-+++ b/drivers/rpmsg/qcom_glink_native.c
-@@ -1101,16 +1101,17 @@ static int qcom_glink_rx_open_ack(struct qcom_glink *glink, unsigned int lcid)
- 
- 	spin_lock(&glink->idr_lock);
- 	channel = idr_find(&glink->lcids, lcid);
--	spin_unlock(&glink->idr_lock);
- 
- 	trace_qcom_glink_cmd_open_ack_rx(glink->label, channel ? channel->name : NULL,
- 					 lcid, channel ? channel->rcid : 0);
- 	if (!channel) {
-+		spin_unlock(&glink->idr_lock);
- 		dev_err(glink->dev, "Invalid open ack packet\n");
- 		return -EINVAL;
- 	}
- 
- 	complete_all(&channel->open_ack);
-+	spin_unlock(&glink->idr_lock);
- 
- 	return 0;
- }
-
-base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
--- 
-2.43.0
+Best,
+Haipeng
 
