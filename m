@@ -1,76 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=51.250.56.165
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795002350;
-	b=b9sxGNbTN8EvQmOSBudsu3gj9fBB31jK+HqSSTocivWzQylL6I4blM/u5Xz8KbTKcbfQ
-	 yaXldtjsqaQkk/GZ41iWZ2TK2058NVZlpnkIpWfJXd0fgcxZ7yCwUTOl9EiYXyalYLbD/
-	 I/Zhm9JAysjgSwK/GOeQJbtrtZoRZJgVreVZk7yzyPcGYWFfU3qpNmMZ4mAxgZ7Kifg6P
-	 Imzi5ep5xqTyUJOJSpiXYOxXHbstWoeVh4zuYOV/SnTauHIV5iZSzBvTptB6ibOYiNpY+
-	 wMDKi77dAx4oPC9W/nKwK8E16R3zBZZcukYQjQSZla7bK7h7/zQ4GvqIzaTLu2MLaaA==
+	t=1795003128;
+	b=b0TxN/hKyHp8z3zAaTx+xq8CMC6Ok+tLHkaHRG68oFTr80cnLtFnLGm4kDXlYDoyd3ua
+	 8qtc3rgMVAwrcnZPMgqBc1Pebb4egq4emSd3IDoByafAwFact2LUkHtNDA/i8ILprYaiz
+	 5ZYzJdKyF1eeG/uQhE9D5u3EIOgQ0gGuH+vHoxsCfjgFN9f6DEwl3/R1s1kDGyeMNM/d2
+	 8VWf/imFD8znbw/+pGcYKLNc3m991cj7vyG8UfyufZDhbPZjR7a1mYPt3FWCtlCWn65ok
+	 Aqx1mG32WFP6oa4Ab9//Z9KL8JryrR+hSBZG7+IUyiQGWVX7u+weqQ0mf6Dx9KxSF8A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795002350;
-	h=DMARC-Filter:Received:Received:DKIM-Filter:DKIM-Signature:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=1JRIv9JnGPmcxoiqjpUqTov6v+IUBflbTYS4wehLTT8=;
-	b=lHWvpLPkU+dfwWE2L519W2qDHnHmAtncnAz8/my0iQWt5knUAqPQ8UbjEfi8OzN1lOg0
-	 ERKuGnz+giFdqOsAREOhnP8dffm6bdeT66OARZM1WEFWvH9WWFCOHegInVy0y5ecofx1L
-	 LJS6zX1cwAhBv78QDSDM/vSvoBHxDKgyI/V4oyVn63pkIsEWRgt37pWhM3dH5H3wenDoZ
-	 H/BdCdbkHBMZCeAO5iiWr4W63tjupY0Pi1f+aqqtzBXieXl8dfVu5LJNx3q8BfkLo3HcY
-	 mmDyjBI4uCwlpm7Izl+/nEp7hamuIUc9ghTWmlYM3IiHwkX//8mb1vIjKajEJQX7A/w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795003128;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=Ceeo/ntELrKUitdM0OHqKpT1WoY/7+qNt/bG4v1anlE=;
+	b=ik/vSZOKfZyzchjJWSdIBqxXtPTbOgyk3AC5/D3ECJpg7qRdk3MoOVsi2VAUM8YRS8XL
+	 s6yQZimyNrMkNLdnjfrxwbWKbkuesK0fY+/MknjpMJjkqEwLodIEKVXgzv/Vs/+d894EQ
+	 fC0f2m/IbLSyiRR99e1+6YFENJoBlIiQf+CJcwv5JX+kWghK400J9AvEPkGs9pdR10XoT
+	 gwsjE6I0T95XGAs3+P6+FfViXbsjnn+PL/3r/UC7u5RulEq0BzGm0sJ2ofe65pIuOyix0
+	 Xos6jjyoLY4PrqbQMo13m+RYIbaREx6UDmqmnMGSh/a4GdIWfbGbndVWuMkQzp8VBtA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ideco.ru;
-	spf=pass smtp.mailfrom=ideco.ru;
-	dkim=pass header.d=ideco.ru header.i=@ideco.ru header.a=rsa-sha256 header.s=ics header.b=lK1PIszr;
-	arc=none smtp.remote-ip=51.250.56.165
-Received: from smtp.ideco.ru (smtp.ideco.ru [51.250.56.165])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=h4ze9EIb;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FA5860A3827;
-	Wed, 18 Nov 2026 11:45:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4FA5860A3827
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ideco.ru
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideco.ru
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB5D8606A31C;
+	Wed, 18 Nov 2026 11:58:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ideco.ru header.i=@ideco.ru header.a=rsa-sha256 header.s=ics header.b=lK1PIszr
-Received: from [169.254.254.254] (localhost [127.0.0.1])
-	by smtp.ideco.ru (Postfix) with ESMTP id 7C15026BC9;
-	Wed, 18 Nov 2026 16:45:48 +0500 (+05)
-Received: from laptop-ak.home (unknown [5.189.116.195])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.ideco.ru (Postfix) with ESMTPSA id 884BE26BC4;
-	Wed, 18 Nov 2026 16:45:46 +0500 (+05)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp.ideco.ru 884BE26BC4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ideco.ru; s=ics;
-	t=1795002347; bh=1JRIv9JnGPmcxoiqjpUqTov6v+IUBflbTYS4wehLTT8=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=lK1PIszrdizNrpkP6n1L+r955Lj/dzIjSYFXHZ8r8QCWCnGWCiryoQonRpBSjG8Hc
-	 y1/CCNgLZ2Zyk79eIJSiH1gIRCZ26xilt2ByxAmy/aTcQFd/cDoFIqKVJZQHpW8aiP
-	 C/HJKoMlSueGqmcHbEdN2wCXvMy1VrhKT/8u/EIHHjBtF+gdanthuD7/AtgeKPSoOm
-	 uNXA8oBi3Nx82OuKKYIbxLMpJYBSPiMVqxVHQ41JG4SXFvj0qwUFuIeD0y+9MmTEvz
-	 3bIWIJkLsCSxniFEC9SIMpQ47QlNY34rXr6PKlzCeJFI5uKohuTV9srDQUApQRiCwH
-	 xJ0O0u4sEZ6+Q==
-From: Andrey Karelin <a.karelin@ideco.ru>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Mark Brown <broonie@kernel.org>
-Cc: Andrey Karelin <a.karelin@ideco.ru>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	lvc-project@linuxtesting.org
-Subject: [PATCH RESEND 2/2] ASoC: codecs: wcd-common: propagate sdw_write() error from bus_config
-Date: Wed, 18 Nov 2026 16:45:09 +0500
-Message-ID: <20261118114521.203207-3-a.karelin@ideco.ru>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261118114521.203207-1-a.karelin@ideco.ru>
-References: <20261118114521.203207-1-a.karelin@ideco.ru>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=h4ze9EIb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5F931F000C8;
+	Wed, 18 Nov 2026 11:58:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795003128;
+	bh=Ceeo/ntELrKUitdM0OHqKpT1WoY/7+qNt/bG4v1anlE=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=h4ze9EIbmC7wuluzCjXPmQ/bB2idEoWMXH9cjcYyun4Jjtmi1A5cSIChccDCG9IZP
+	 HIfzzdmdzUF/I4VaFh7qMTpFGttrcvND9q5JYOW3shrC7nQmLL/UbgKXqt6Hjgculm
+	 9/o1NQuc3FlRn6rp8ooq2p18XM5RS5oKfRjuz7dsnjgBnW0FdMzLYXk6ADqBBZC7TI
+	 WENw+UIZx4CuMLg0ObQsATUUS8EgDKJz4SxEx1npH9xWLHs9GL2mTDix1dYrBbuG4q
+	 XCMoHT2z/1BxbrN7xiS2Wz3cHR+Ggm7ntYyNqoj7OxiUlvX+iep6xpOz/99BIb2BvT
+	 dQdpsao9bSqwA==
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, 
+ Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260928-xo-sd-runtimepm-v1-final-v1-0-e3ebade3aeb7@oss.qualcomm.com>
+References: <20260928-xo-sd-runtimepm-v1-final-v1-0-e3ebade3aeb7@oss.qualcomm.com>
+Subject: Re: [PATCH 0/5] ASoC: codecs: lpass-macro: manage clocks in
+ runtime PM
+Message-Id: <179495450703.2707353.11141992622291494884.b4-ty@b4>
+Date: Tue, 17 Nov 2026 22:28:27 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,47 +62,61 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1927; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=CHbFh/AiN4hAaP8cOsMNzLRWYGULx4EVga2AtppxHNM=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+TvqqJDep0uyKcM6pCUGdgg/82V4xcrOb3BJmZd/68
+ 9jN/hlRHaUsDGJcDLJiiixxWdwv60ter+E7uLANZg4rE8gQBi5OAZhI6W9Ghq3KBxZKWKrP0W+v
+ K3+2+kWvY0Kvp/OW5Gt7PW7tP3456hMjw3Xvcy0NMwVMQv8sVrZUv2njmC3Y2fxht9KlTPvP2+L
+ fsgAA
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-wcd_bus_config() programs the clock divider for the next bank via
-sdw_write() but ignores its result and always returns 0. A failed write
-is therefore hidden from sdw_notify_config(), which aborts programming
-of the stream parameters when a bus_config callback fails, and the
-codec may keep running with a wrong clock configuration after the bank
-switch.
+On Mon, 28 Sep 2026 16:02:18 +0530, Ajay Kumar Nandam wrote:
+> ASoC: codecs: lpass-macro: manage clocks in runtime PM
+> 
+> The LPASS macro codec drivers currently rely on the PM clock framework
+> to manage their clocks. The PM clock framework is useful for the common
+> case where drivers only need clocks enabled while the device is active,
+> but its lifecycle is not a good fit for these codec clocks.
+> 
+> [...]
 
-The callback is shared by the WCD938x and WCD939x SoundWire drivers.
-It was moved to the common helper as is by commit 59aebbbb0b47 ("ASoC:
-codecs: wcd-common: move status_update callback to common"); the
-original per-driver callbacks had the same problem.
+Applied to
 
-Return the result of sdw_write() instead.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
+Thanks!
 
-Fixes: 16572522aece ("ASoC: codecs: wcd938x-sdw: add SoundWire driver")
-Fixes: be2af391cea0 ("ASoC: codecs: Add WCD939x Soundwire devices driver")
-Signed-off-by: Andrey Karelin <a.karelin@ideco.ru>
----
- sound/soc/codecs/wcd-common.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+[1/5] ASoC: codecs: lpass-rx-macro: manage clocks in runtime PM
+      https://git.kernel.org/broonie/sound/c/80ba2cdbe084
+[2/5] ASoC: codecs: lpass-tx-macro: manage clocks in runtime PM
+      https://git.kernel.org/broonie/sound/c/8af1ecd5b81c
+[3/5] ASoC: codecs: lpass-va-macro: manage clocks in runtime PM
+      https://git.kernel.org/broonie/sound/c/7b982a5e39b1
+[4/5] ASoC: codecs: lpass-wsa-macro: manage clocks in runtime PM
+      https://git.kernel.org/broonie/sound/c/0feec3d75d41
+[5/5] ASoC: codecs: lpass-macro: drop PM_CLK dependency
+      https://git.kernel.org/broonie/sound/c/acff34eebdc2
 
-diff --git a/sound/soc/codecs/wcd-common.c b/sound/soc/codecs/wcd-common.c
-index 9016e974582f..74bd718b8a34 100644
---- a/sound/soc/codecs/wcd-common.c
-+++ b/sound/soc/codecs/wcd-common.c
-@@ -115,9 +115,7 @@ EXPORT_SYMBOL_GPL(wcd_update_status);
- 
- int wcd_bus_config(struct sdw_slave *slave, struct sdw_bus_params *params)
- {
--	sdw_write(slave, SWRS_SCP_HOST_CLK_DIV2_CTL_BANK(params->next_bank), 0x01);
--
--	return 0;
-+	return sdw_write(slave, SWRS_SCP_HOST_CLK_DIV2_CTL_BANK(params->next_bank), 0x01);
- }
- EXPORT_SYMBOL_GPL(wcd_bus_config);
- 
--- 
-2.56.1
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
 
