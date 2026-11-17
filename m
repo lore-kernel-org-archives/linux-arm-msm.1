@@ -1,61 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794892984;
-	b=o3bTxnqHaCWHfJF3kjEmTrC1wcbV+gBEijSaJrrtMjtBjuF76g6zu3Ih+xgdr9+Zs2fJ
-	 o8+rUx+UcIj94IA2O7LLB8y8DjoOM1yeVlPEz6Wsa2ilTdVjxAHBTMIckQa40ZeUUBAEl
-	 FoFD0IRw+V4CU1BZBS41D8Ig+xlKatpmgVGKAoQbBhhK/Fp36rG8tMbM53vwDVAXv9UNn
-	 m4xSP1JMGMSt4M7vnMFTMlzFOklJXJFrrW3Vzb8hFCXw/B3HMnlCr5uQdGa70yBM7AOHC
-	 EMBEeF/KEZqE+qkt9K+3auwKBuS0CUjJlmCrLvVm+I4My4kOOPpxIo8mf4HNNN/R6fw==
+	t=1794893325;
+	b=kJDEw2z4jyJOZTjWAM8su3/xnc2OEHaAfjuPIk3jpYOVfDQr9NdlBNfQCjSC23oArcIf
+	 e8jo6pUFIxFM2W49wNFyfyc77xOvhQ8Qdj2w82OQmcmpqauWJ2yCqo6iCElyeBFqlidGY
+	 5qN3WOAei/5Y6/ae9d+QdoD9o/6cd0NNn79ZIHBHfLv4IQC4VFwBklFiIMlC1F+Eg+2El
+	 XN/LI/Hi7UIAuqnCfEw6dM20di1b/N3j8Pqjtcaj8nIQieImwHFalvv7Ilzy9z0aSzS2S
+	 iJjSuq4XomSvGLo+fEpp827xPiO7mpYcPG2SB5zJ4zojRwq1db76/d9P1Io6dDJ/+Eg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794892984;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=iO3C0qwkx/2/OW6tUnlCC7klG0lJ071qcVyOmvICxIg=;
-	b=ESaylg7vYbQZOFFYsPDMVBGyNS3qeM09kJgH8YYvfw3Olnd4QbU3IkiwkCmTS7Spb2+8
-	 swiE0EWd1aoRlLGFeUoUYc2qa7xRxIrCD9LkW179LDZzbzbv7daO46O9gLEam8Skwu4Dt
-	 QW+lSBc0jZV3nwnnaMuh8asuwmB7m9WjR+weif2f+tBq/aHY9mH68ZsspY9L8/+ueTQiU
-	 T318SR25tSkn40zKPeFRRa2kb2T1NUME2QUmtC//bUGqAIn6Gkd0aRLtgL8N9oJ0h9V8h
-	 zUBUK/QJ3lRFy3v3IVr2YaLbkw34zk4In/j5YZUrzx62XQUvkUwBlxZYJHa5zcgHh6g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794893325;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=NiXyMdzo/anqEnQBYGUdLPU8J41tqXReCV4OWaoYlKw=;
+	b=Wy+Yf7rS3+9gB6gJ0CXw3KiBmdnb1Ymb59lCbME8ZI0e0TtRYoeIyQV5ndfeSENorjvH
+	 qvo8mPw0Q/kEHraXqB2fzlgBPYLVPc37StZ0lqPtomjveFTNKU5zq4kaNweT/RLeJmicp
+	 jQ1ORUE4HanEkITcz1j/YhSlge0Ws2yYuYXuSpGl6uwVktfTDJuO+yPGMMtF/dZxnD26y
+	 TgD5DSUwgj3xX7lZxE0FQGLBz4+3V5kTNrVmWje+OcyuhxbP83ccqQLZ1ljkC+Y1K09fm
+	 /Q9pnfJNhV8xtff5v7AgzkXAFNB/QT3o0u5JZc02xKFmoGUm0EGFvEismxZHLrYG1Hw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=jeZwz2tR;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B29A2606A335;
-	Tue, 17 Nov 2026 05:23:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B29A2606A335
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=a4G1VUPB;
+	arc=none smtp.remote-ip=209.85.222.176
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55441606A32C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 05:28:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 55441606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=jeZwz2tR
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=a4G1VUPB
+Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-9495f083657so409579485a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 21:28:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=iO3C0qwkx/2/OW6tUnlCC7klG0lJ071qcV
-	yOmvICxIg=; b=jeZwz2tRpOHEWzwpW0y0k9VdJn34h4GOEwuk4Lb2lBfLWTD/Ux
-	/AhbEAjRsZ+H5GBr7ijoAC44xs1O5gRj6NjEIIORPW7yt1VMJGtRyf9VJoV3RRzf
-	F85s/r1mAec3QQ3O4bW0jF7pS/yv/i+vmLfr2Fa3s/ArqR3B2F/yQOr6c=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.190.181])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgBHxTmx5PtqLkTLAA--.216S4;
-	Tue, 17 Nov 2026 13:22:59 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
+        d=linaro.org; s=google; t=1794893324; x=1795498124; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=NiXyMdzo/anqEnQBYGUdLPU8J41tqXReCV4OWaoYlKw=;
+        b=a4G1VUPBwFozVSJ9pZWtGGe3P/BSlrTS0JxuehOk1p5N92O6uUy2HhIQLfi8OMbDT9
+         601KjjSoxgZUiRERjHSID+ipaeVN68+bUPDXh0T2G4805BfyH1woCTFu1AHWJ54ot9of
+         7u2+6Jr1E4kz37l92De7sZNn7sCjNUG8AMAHO4/eb4oy/xhI685YrCMCkeblQ18J0jGi
+         4gd4cjI42FTMsjAQe03j5f1RLup0iDZPCuGMmhX6ZLn/7p7Bffss1N1WPYmWwiR7/5gj
+         lcUDPF9vBTOI2umX2D/m0BlejKGR4uHOBkZBB6fyxcFkmzRUzkuN3vtnPbuh3H8p9VI2
+         Rreg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794893324; x=1795498124;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NiXyMdzo/anqEnQBYGUdLPU8J41tqXReCV4OWaoYlKw=;
+        b=ozacU4o8jAt0+XYRMVaQAja/JOufFkgdf0J/nG+4d43AQ2Zmd3ebZ4E2te6CT/W9ds
+         EPBmX+VVEAeA8t3XO/zuCT3f/mt9gfdb/vQGeKaaZIHRwsw15Z50pJS09rJZuFp3mAo9
+         DhGH4LJFIQ1i2Cr+gCpsQ72LbB3UnsMOmvKMJLyC2+ICFWJeTkSx7jbE4lZBSO0M9ms7
+         +gPzIFckgjmPFbh034KFNQZVOTt4bVGJEuPHopksScsdAkvrchP+lPmfUiRl2jVOIgiO
+         MMT0U69w9Bem6yFfn7HIf0jHzFETYZhNScdbZfriCZqm75SooSNHXFSBoeEPH0gUYa5r
+         im0g==
+X-Forwarded-Encrypted: i=1; AL+hErEsFe5XW3yh8ZNRjN86hVkPbWl8ydo3aEMn/UK/YrTq5GayzB/UYFDuFiNREtwRR56Jha5ABJ/Ub+cOzJCg@vger.kernel.org
+X-Gm-Message-State: APuU4Z/9idmgkwLakxYBLlNmiGQ7GDWd1XrsZvq0uycbRhP3gA6qafDy
+	n7Aa4YKmN3N5CjDOEYVKYsC4NGh8OawnzvRJr5QoPA+BxR1ljzD5ZOQ3CRPPc+xc6Y/eXxTtxUM
+	TFzo3
+X-Gm-Gg: AYBFou0rx+elgqoGAkvLv2Vwa0dhl6wFUEiB06ZZz90SbH3bfusqTZXzQrCUXJbaMAA
+	UbGTgKyNWpOkrwl7yPdDNo7zikTA5U5bf+03d6g5BTmh6i1QnA/aPQJ8L++eaAKNw/Q5TgqBfBs
+	w+tcK4Wns2JQLSy7eCmPzvyfsTn/5fL8eI5O6uGbFvIeBF2gpTW3pgsr2BpR5z4GIbenTs9ew9O
+	jWIpBbIRNzOEFlVKGxADS1lQfdtJQ6RkMipTl3o7N2wGrJ0uDyOpUfUIRskKJlmMpZ5h2SeGqC6
+	SUPTd8eG6C29DEoiY6j45Awf9agvk+CbEP+l9cY9xzyrIl2MXgAGy/5Op1L+lz55X4xvDCEh2nh
+	8+TaaVaRoL8wswpjCMrpyzQ35JQh4lXkKiUYXzO7ohPmndjjKLYe6BYbBCTBvzKvZQjHDH1K5Lw
+	sdIX0ZwoWFHNlnwy1xqhovqE1r4WYeBSbSQhVSKIdWIt+rPuVXxeYaCUeQ5Cm9Q0TGGxvTlCoVf
+	zSJUeV7y6npLprWOesSz7n0zebvd5Yd3RjCMQKaFQ6Rnozzb8PCCnbW68KJ1aIqq1VbyoF59M63
+	rtYlq/KGriEZbKCbjqlnAIb9GQUH6g==
+X-Received: by 2002:a05:693c:88db:10b0:381:93eb:9529 with SMTP id 5a478bee46e88-38193eb98e5mr451811eec.19.1794892841137;
+        Mon, 16 Nov 2026 21:20:41 -0800 (PST)
+Received: from localhost ([122.172.83.36])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-37955a1c5c2sm39990857eec.14.2026.11.16.21.20.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Nov 2026 21:20:40 -0800 (PST)
+Date: Tue, 17 Nov 2026 10:50:37 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Ilia Lin <ilia.lin@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH v12 2/2] regulator: willsemi,wl2868c: add the WL2868C camera PMIC driver
-Date: Tue, 17 Nov 2026 13:22:57 +0800
-Message-ID: <20261117052257.34849-3-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261117052257.34849-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261117052257.34849-1-xiaqinghuan@mail.ustc.edu.cn>
+	Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH] dt-bindings: cpufreq: qcom-cpufreq-nvmem: Simplify
+ bindings
+Message-ID: <avvkJSN9zh8tnS2x@vireshk-B250M-D3H>
+References: <20261105194606.772346-2-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,434 +103,145 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgBHxTmx5PtqLkTLAA--.216S4
-X-Coremail-Antispam: 1UD129KBjvAXoW3ZrWxAw4fuFWkWF1rZFW5Wrg_yoW8XrWrAo
-	WIqr1Y9w48tw4rW3yFkF1UC3srXrWjk34rZ3W5KFs5uFyDZ3W3C34a9ay3XFnxtr4UKrW3
-	u34ftrnxGF4xJFZxn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UjIYCTnIWjp_UUUOe7k0a2IF6w4kM7kC6x804xWl14x267AKxVWrJVCq3wAFc2x0
-	x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87
-	I2jVAFwI0_Jryl82xGYIkIc2x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY
-	1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20x
-	vEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280
-	aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzV
-	Aqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S
-	6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r1q6r43MxkIec
-	xEwVAFwVW8WwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
-	F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
-	ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
-	0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
-	07bzYLPUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREOB2r7WdojVwAwsP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261105194606.772346-2-krzysztof.kozlowski@oss.qualcomm.com>
 
-The WL2868C is an I2C camera power management IC with seven LDOs.
-LDO1 and LDO2 are fed from VIN12 and cover 0.496 V to 1.512 V with a
-7-bit voltage selector; LDO3 and LDO4 share VIN34, and LDO5 to LDO7
-have one input each, covering 1.504 V to 3.544 V with an 8-bit
-selector. All outputs step by 8 mV.
+On 05-11-26, 20:46, Krzysztof Kozlowski wrote:
+> This binding selects a few top-level compatible machines, but since
+> commit 389de9c5a677 ("dt-bindings: cpufreq: qcom-cpufreq-nvmem: make cpr
+> bindings optional") only qcom,qcs404 is present in  "if:then:" clause
+> which enforces specific OPP properties.
+> 
+> For all other machines, this is a no-op, because there is no schema here
+> enforcing a specific compatible for OPP nodes or any of OPP table
+> properties: one can switch to standard OPP table (operating-points-v2)
+> and this binding will not complain.
+> 
+> OTOH, this binding has complicated "if:then:" blocks so is not easy to
+> maintain and causes false positives when regular OPP table is
+> encountered in matched machines.
+> 
+> Drop all machines except QCS404 and move the subschema to top-level.
+> 
+> Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> ---
+>  .../bindings/cpufreq/qcom-cpufreq-nvmem.yaml  | 78 ++++++-------------
+>  1 file changed, 24 insertions(+), 54 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml b/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
+> index 547265b8b118..dfc7a27a7bdd 100644
+> --- a/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
+> +++ b/Documentation/devicetree/bindings/cpufreq/qcom-cpufreq-nvmem.yaml
+> @@ -25,22 +25,30 @@ select:
+>      compatible:
+>        contains:
+>          enum:
+> -          - qcom,apq8064
+> -          - qcom,apq8096
+> -          - qcom,ipq5332
+> -          - qcom,ipq6018
+> -          - qcom,ipq8064
+> -          - qcom,ipq8074
+> -          - qcom,ipq9574
+> -          - qcom,msm8909
+> -          - qcom,msm8939
+> -          - qcom,msm8960
+> -          - qcom,msm8974
+> -          - qcom,msm8996
+>            - qcom,qcs404
+>    required:
+>      - compatible
+>  
+> +properties:
+> +  cpus:
+> +    type: object
+> +
+> +    patternProperties:
+> +      '^cpu@[0-9a-f]+$':
+> +        type: object
+> +
+> +        properties:
+> +          power-domains:
+> +            maxItems: 1
+> +
+> +          power-domain-names:
+> +            items:
+> +              - const: cpr
+> +
+> +        required:
+> +          - power-domains
+> +          - power-domain-names
+> +
+>  patternProperties:
+>    '^opp-table(-[a-z0-9]+)?$':
+>      allOf:
+> @@ -48,10 +56,13 @@ patternProperties:
+>            properties:
+>              compatible:
+>                enum:
+> -                - operating-points-v2-krait-cpu
+>                  - operating-points-v2-kryo-cpu
+>          then:
+>            $ref: /schemas/opp/opp-v2-kryo-cpu.yaml#
+> +          patternProperties:
+> +            '^opp-?[0-9]+$':
+> +              required:
+> +                - required-opps
+>  
+>        - if:
+>            properties:
+> @@ -62,47 +73,6 @@ patternProperties:
+>  
+>      unevaluatedProperties: false
+>  
+> -allOf:
+> -  - if:
+> -      properties:
+> -        compatible:
+> -          contains:
+> -            enum:
+> -              - qcom,qcs404
+> -
+> -    then:
+> -      properties:
+> -        cpus:
+> -          type: object
+> -
+> -          patternProperties:
+> -            '^cpu@[0-9a-f]+$':
+> -              type: object
+> -
+> -              properties:
+> -                power-domains:
+> -                  maxItems: 1
+> -
+> -                power-domain-names:
+> -                  items:
+> -                    - const: cpr
+> -
+> -              required:
+> -                - power-domains
+> -                - power-domain-names
+> -
+> -      patternProperties:
+> -        '^opp-table(-[a-z0-9]+)?$':
+> -          if:
+> -            properties:
+> -              compatible:
+> -                const: operating-points-v2-kryo-cpu
+> -          then:
+> -            patternProperties:
+> -              '^opp-?[0-9]+$':
+> -                required:
+> -                  - required-opps
+> -
+>  additionalProperties: true
+>  
+>  examples:
 
-Every output is gated by a per-LDO bit in the enable register, and the
-whole chip is additionally gated by the SYS_EN bit in the same
-register. The driver sets SYS_EN together with the LDO bit on enable
-and requires both to read back before reporting the regulator as
-enabled, because no output comes up while SYS_EN is clear. An
-optional active-low RST_N GPIO starts asserted, is released only after
-the control supply is up, followed by a delay for the device to come
-up, and is asserted again before the supply is disabled on unbind.
+Applied. Thanks.
 
-The enable register is written as a whole rather than updated bit by
-bit: the per-LDO bits can be preset by the firmware while SYS_EN is
-clear, and setting SYS_EN together with a single LDO bit would then
-switch the preset outputs on as well. The driver therefore tracks the
-set of LDOs enabled by consumers and writes exactly those bits, so
-enabling one output cannot power another one. That set is seeded from
-the register during probe, but only when SYS_EN is already set: with
-SYS_EN clear the per-LDO bits are presets for outputs that are off,
-and seeding them would make the first enable() of one output switch
-all of them on. disable() commits the tracked state only after the
-register write went through, so a failed write cannot make a later
-enable() switch off an output that the core still believes is on.
-
-The control logic and the I2C interface are powered from the higher of
-VIN7 and VSYS. The driver enables VSYS, falling back to VIN7 on boards
-that do not describe VSYS, and keeps it enabled for as long as it is
-bound: without it the device does not answer on the bus. The device ID
-is read only after the control supply is up and RST_N has been
-released.
-
-The LDOx_SEQ fields also have to be taken over: a non-zero slot moves
-that output from the LDOx_EN bit to the power-up sequencer, and writes
-to the enable register then have no effect on it (datasheet WL2868C
-Rev 1.4, "0x0A, 0x0B, 0x0C and 0x0D: LDOx_SEQ", p.35). The binding
-describes no sequencing, so the driver clears the four slot registers
-during probe and keeps the enable register as the only control path;
-otherwise enable() and disable() would silently do nothing for an
-output a slot had claimed. The reset value is 0 and no known board
-programs it, but firmware runs before us and may.
-
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- MAINTAINERS                           |   1 +
- drivers/regulator/Kconfig             |  11 +
- drivers/regulator/Makefile            |   1 +
- drivers/regulator/wl2868c-regulator.c | 301 ++++++++++++++++++++++++++
- 4 files changed, 314 insertions(+)
- create mode 100644 drivers/regulator/wl2868c-regulator.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 435beaf95..5a3913c45 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -29063,6 +29063,7 @@ M:	Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
- L:	linux-kernel@vger.kernel.org
- S:	Maintained
- F:	Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
-+F:	drivers/regulator/wl2868c-regulator.c
- 
- WILOCITY WIL6210 WIRELESS DRIVER
- L:	linux-wireless@vger.kernel.org
-diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
-index a54a54919..79bdba077 100644
---- a/drivers/regulator/Kconfig
-+++ b/drivers/regulator/Kconfig
-@@ -1851,6 +1851,17 @@ config REGULATOR_VQMMC_IPQ4019
- 	  This driver provides support for the VQMMC LDO I/0
- 	  voltage regulator of the IPQ4019 SD/EMMC controller.
- 
-+config REGULATOR_WL2868C
-+	tristate "Will Semiconductor WL2868C regulator"
-+	depends on I2C
-+	select REGMAP_I2C
-+	help
-+	  Support the seven LDO outputs of the Will Semiconductor WL2868C
-+	  camera power management IC.
-+
-+	  To compile this driver as a module, choose M here: the
-+	  module will be called wl2868c-regulator.
-+
- config REGULATOR_WM831X
- 	tristate "Wolfson Microelectronics WM831x PMIC regulators"
- 	depends on MFD_WM831X
-diff --git a/drivers/regulator/Makefile b/drivers/regulator/Makefile
-index 134eee274..662f31a14 100644
---- a/drivers/regulator/Makefile
-+++ b/drivers/regulator/Makefile
-@@ -211,6 +211,7 @@ obj-$(CONFIG_REGULATOR_RZG2L_VBCTRL) += renesas-usb-vbus-regulator.o
- obj-$(CONFIG_REGULATOR_VCTRL) += vctrl-regulator.o
- obj-$(CONFIG_REGULATOR_VEXPRESS) += vexpress-regulator.o
- obj-$(CONFIG_REGULATOR_VQMMC_IPQ4019) += vqmmc-ipq4019-regulator.o
-+obj-$(CONFIG_REGULATOR_WL2868C) += wl2868c-regulator.o
- obj-$(CONFIG_REGULATOR_WM831X) += wm831x-dcdc.o
- obj-$(CONFIG_REGULATOR_WM831X) += wm831x-isink.o
- obj-$(CONFIG_REGULATOR_WM831X) += wm831x-ldo.o
-diff --git a/drivers/regulator/wl2868c-regulator.c b/drivers/regulator/wl2868c-regulator.c
-new file mode 100644
-index 000000000..9ffb08dcb
---- /dev/null
-+++ b/drivers/regulator/wl2868c-regulator.c
-@@ -0,0 +1,301 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Will Semiconductor WL2868C seven-channel camera regulator driver.
-+ *
-+ * Copyright (C) 2026 Qianhui Xu
-+ */
-+
-+#include <linux/cleanup.h>
-+#include <linux/delay.h>
-+#include <linux/gpio/consumer.h>
-+#include <linux/i2c.h>
-+#include <linux/module.h>
-+#include <linux/regmap.h>
-+#include <linux/regulator/driver.h>
-+
-+#define WL2868C_DEVICE_ID		0x00
-+#define WL2868C_DEVICE_ID_VALUE		0x82
-+/* 0x0a..0x0d: seven 4-bit LDOx_SEQ slots; 0 = driven by LDOx_EN in 0x0e. */
-+#define WL2868C_LDO_SEQ		0x0a
-+#define WL2868C_LDO_SEQ_LEN		4
-+#define WL2868C_LDO_ENABLE		0x0e
-+#define WL2868C_SYS_ENABLE		BIT(7)
-+#define WL2868C_LDO_ENABLE_MASK		GENMASK(6, 0)
-+
-+/* RST_N must be released after the control supply is up, not before. */
-+#define WL2868C_RESET_RELEASE_US	1000
-+/* Time the device needs after RST_N is released before it answers on I2C. */
-+#define WL2868C_STARTUP_US		1000
-+
-+struct wl2868c {
-+	struct regmap *regmap;
-+	/* LDO enable bits owned by consumers, in WL2868C_LDO_ENABLE layout. */
-+	unsigned int enabled;
-+	/* Protects enabled. */
-+	struct mutex lock;
-+};
-+
-+static int wl2868c_enable(struct regulator_dev *rdev)
-+{
-+	struct wl2868c *chip = rdev_get_drvdata(rdev);
-+	unsigned int bits = rdev->desc->enable_mask;
-+	unsigned int ldos;
-+	int ret;
-+
-+	guard(mutex)(&chip->lock);
-+
-+	/*
-+	 * The enable register is written as a whole on purpose. SYS_EN gates
-+	 * every output of the chip, and the per-LDO bits may be preset by the
-+	 * firmware while SYS_EN is still clear: setting only SYS_EN and our own
-+	 * bit would then bring the preset LDOs up as well. Writing the register
-+	 * with the bits of the LDOs consumers have enabled, and only those,
-+	 * keeps the other outputs off. chip->enabled was seeded from the
-+	 * register in probe() when SYS_EN was set, so an output the firmware
-+	 * left on is carried over instead of being cleared by the first
-+	 * enable; when SYS_EN was clear no output is on at all.
-+	 */
-+	ldos = (chip->enabled | bits) & WL2868C_LDO_ENABLE_MASK;
-+	ret = regmap_write(chip->regmap, WL2868C_LDO_ENABLE,
-+			   WL2868C_SYS_ENABLE | ldos);
-+	if (ret)
-+		return ret;
-+
-+	chip->enabled = ldos;
-+
-+	return 0;
-+}
-+
-+static int wl2868c_disable(struct regulator_dev *rdev)
-+{
-+	struct wl2868c *chip = rdev_get_drvdata(rdev);
-+	unsigned int bits = rdev->desc->enable_mask;
-+	unsigned int ldos;
-+	int ret;
-+
-+	guard(mutex)(&chip->lock);
-+
-+	/*
-+	 * SYS_EN stays set while at least one output is enabled; the per-LDO
-+	 * bits of the other outputs stay clear so that setting it cannot
-+	 * switch anything else on.
-+	 */
-+	ldos = (chip->enabled & ~bits) & WL2868C_LDO_ENABLE_MASK;
-+
-+	/*
-+	 * The tracked state is committed only once the register write went
-+	 * through: a failed write leaves the output on, and the regulator core
-+	 * keeps its own use count unchanged, so dropping the bit here would
-+	 * make the next enable() of another output switch this one off.
-+	 */
-+	ret = regmap_write(chip->regmap, WL2868C_LDO_ENABLE,
-+			   ldos ? WL2868C_SYS_ENABLE | ldos : 0);
-+	if (ret)
-+		return ret;
-+
-+	chip->enabled = ldos;
-+
-+	return 0;
-+}
-+
-+static int wl2868c_is_enabled(struct regulator_dev *rdev)
-+{
-+	struct wl2868c *chip = rdev_get_drvdata(rdev);
-+	unsigned int mask = WL2868C_SYS_ENABLE | rdev->desc->enable_mask;
-+	unsigned int value;
-+	int ret;
-+
-+	ret = regmap_read(chip->regmap, WL2868C_LDO_ENABLE, &value);
-+	if (ret)
-+		return ret;
-+
-+	return (value & mask) == mask;
-+}
-+
-+static const struct regulator_ops wl2868c_ops = {
-+	.list_voltage = regulator_list_voltage_linear,
-+	.map_voltage = regulator_map_voltage_linear,
-+	.set_voltage_sel = regulator_set_voltage_sel_regmap,
-+	.get_voltage_sel = regulator_get_voltage_sel_regmap,
-+	.enable = wl2868c_enable,
-+	.disable = wl2868c_disable,
-+	.is_enabled = wl2868c_is_enabled,
-+};
-+
-+/*
-+ * LDO1 and LDO2 have a 7-bit voltage selector, the other five have an 8-bit
-+ * one; all of them step by 8 mV.
-+ */
-+#define WL2868C_LDO(_num, _supply, _min, _n_voltages, _vsel_reg, _mask, _en) { \
-+	.name = "ldo" #_num,				\
-+	.of_match = "ldo" #_num,			\
-+	.regulators_node = "regulators",		\
-+	.id = (_num) - 1,				\
-+	.type = REGULATOR_VOLTAGE,			\
-+	.owner = THIS_MODULE,				\
-+	.ops = &wl2868c_ops,				\
-+	.supply_name = _supply,				\
-+	.min_uV = _min,					\
-+	.uV_step = 8000,				\
-+	.n_voltages = _n_voltages,			\
-+	.vsel_reg = _vsel_reg,				\
-+	.vsel_mask = _mask,				\
-+	.enable_reg = WL2868C_LDO_ENABLE,		\
-+	.enable_mask = _en,				\
-+	.enable_time = 150,				\
-+}
-+
-+static const struct regulator_desc wl2868c_regulators[] = {
-+	WL2868C_LDO(1, "vin12", 496000, 128, 0x03, 0x7f, BIT(0)),
-+	WL2868C_LDO(2, "vin12", 496000, 128, 0x04, 0x7f, BIT(1)),
-+	WL2868C_LDO(3, "vin34", 1504000, 256, 0x05, 0xff, BIT(2)),
-+	WL2868C_LDO(4, "vin34", 1504000, 256, 0x06, 0xff, BIT(3)),
-+	WL2868C_LDO(5, "vin5", 1504000, 256, 0x07, 0xff, BIT(4)),
-+	WL2868C_LDO(6, "vin6", 1504000, 256, 0x08, 0xff, BIT(5)),
-+	WL2868C_LDO(7, "vin7", 1504000, 256, 0x09, 0xff, BIT(6)),
-+};
-+
-+static const struct regmap_config wl2868c_regmap_config = {
-+	.reg_bits = 8,
-+	.val_bits = 8,
-+	.max_register = 0x25,
-+};
-+
-+static void wl2868c_reset_assert(void *data)
-+{
-+	gpiod_set_value_cansleep(data, 1);
-+}
-+
-+/*
-+ * VIN7 and VSYS both feed the control logic and the I2C interface, which run
-+ * from the higher of the two. The binding requires at least one of them, and
-+ * whichever is present has to stay up for as long as the driver is bound:
-+ * without it the device does not answer on the bus at all.
-+ */
-+static int wl2868c_enable_control_supply(struct device *dev)
-+{
-+	int ret;
-+
-+	ret = devm_regulator_get_enable_optional(dev, "vsys");
-+	if (ret != -ENODEV)
-+		return ret;
-+
-+	ret = devm_regulator_get_enable_optional(dev, "vin7");
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to enable the control supply\n");
-+
-+	return 0;
-+}
-+
-+static int wl2868c_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct regulator_config config = { .dev = dev };
-+	struct regulator_dev *rdev;
-+	struct gpio_desc *reset;
-+	struct wl2868c *chip;
-+	unsigned int id, value;
-+	static const u8 no_seq[WL2868C_LDO_SEQ_LEN];
-+	int ret, i;
-+
-+	chip = devm_kzalloc(dev, sizeof(*chip), GFP_KERNEL);
-+	if (!chip)
-+		return -ENOMEM;
-+
-+	mutex_init(&chip->lock);
-+	config.driver_data = chip;
-+
-+	/*
-+	 * RST_N starts asserted and is released only once the control supply is
-+	 * up. The reset action is registered after the supply action on
-+	 * purpose: devres unwinds in reverse order, so RST_N is asserted again
-+	 * before the supply is disabled on unbind, not after.
-+	 */
-+	reset = devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_HIGH);
-+	if (IS_ERR(reset))
-+		return dev_err_probe(dev, PTR_ERR(reset), "Failed to get reset GPIO\n");
-+
-+	chip->regmap = devm_regmap_init_i2c(client, &wl2868c_regmap_config);
-+	config.regmap = chip->regmap;
-+	if (IS_ERR(config.regmap))
-+		return dev_err_probe(dev, PTR_ERR(config.regmap),
-+				     "Failed to create regmap\n");
-+
-+	ret = wl2868c_enable_control_supply(dev);
-+	if (ret)
-+		return ret;
-+
-+	if (reset) {
-+		fsleep(WL2868C_RESET_RELEASE_US);
-+		gpiod_set_value_cansleep(reset, 0);
-+		ret = devm_add_action_or_reset(dev, wl2868c_reset_assert, reset);
-+		if (ret)
-+			return ret;
-+		fsleep(WL2868C_STARTUP_US);
-+	}
-+
-+	ret = regmap_read(config.regmap, WL2868C_DEVICE_ID, &id);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to read device ID\n");
-+	if (id != WL2868C_DEVICE_ID_VALUE)
-+		return dev_err_probe(dev, -ENODEV, "Unexpected device ID: %#x\n", id);
-+
-+	/*
-+	 * LDOx_SEQ[3:0] (0x0a..0x0d) assigns an output to one of the seven
-+	 * power-up sequencer slots; any value but 0 moves that LDO from the
-+	 * LDOx_EN bit in 0x0e to the sequencer, where writes to 0x0e have no
-+	 * effect (datasheet WL2868C Rev 1.4, "0x0A, 0x0B, 0x0C and 0x0D:
-+	 * LDOx_SEQ", p.35). The binding describes no sequencing, so clear the
-+	 * slots: every output then stays under the enable register this driver
-+	 * owns. The reset value is 0 and no board is known to program it, but
-+	 * firmware can, and a stale slot would make enable() silently inert.
-+	 * Outputs a slot had turned on are switched off here; no consumer is
-+	 * up yet at probe time.
-+	 */
-+	ret = regmap_bulk_write(config.regmap, WL2868C_LDO_SEQ, no_seq,
-+				WL2868C_LDO_SEQ_LEN);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to clear the sequencer slots\n");
-+
-+	/*
-+	 * Seed the tracked set with the outputs the firmware left enabled, so
-+	 * that the first enable() or disable() of any output preserves them.
-+	 * SYS_EN gates the whole chip: while it is clear no output is up, the
-+	 * per-LDO bits are only presets and is_enabled() reports every output
-+	 * as off. Seeding them in that state would make the first enable() of
-+	 * any single output switch all the presets on.
-+	 */
-+	ret = regmap_read(config.regmap, WL2868C_LDO_ENABLE, &value);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to read the enable register\n");
-+
-+	if (value & WL2868C_SYS_ENABLE)
-+		chip->enabled = value & WL2868C_LDO_ENABLE_MASK;
-+
-+	for (i = 0; i < ARRAY_SIZE(wl2868c_regulators); i++) {
-+		rdev = devm_regulator_register(dev, &wl2868c_regulators[i], &config);
-+		if (IS_ERR(rdev))
-+			return dev_err_probe(dev, PTR_ERR(rdev),
-+					     "Failed to register LDO%d\n", i + 1);
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct of_device_id wl2868c_of_match[] = {
-+	{ .compatible = "willsemi,wl2868c" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, wl2868c_of_match);
-+
-+static struct i2c_driver wl2868c_driver = {
-+	.driver = {
-+		.name = "wl2868c",
-+		.of_match_table = wl2868c_of_match,
-+	},
-+	.probe = wl2868c_probe,
-+};
-+module_i2c_driver(wl2868c_driver);
-+
-+MODULE_DESCRIPTION("Will Semiconductor WL2868C regulator driver");
-+MODULE_LICENSE("GPL");
 -- 
-2.53.0
-
+viresh
