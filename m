@@ -1,97 +1,98 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.181
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794893597;
-	b=ZShppx48ivbPeHSXMchdz4xSE7Hb8FQ19/NiD99/WUHNw8/dKFe12XMMjxlvsx5p0Mdw
-	 0UoYU8/Zrh7dalrD+XdlcO/+SmmreMDUsw6f+Ayf6nRfdXNKYiShqaoCKyvR50DXoKfkO
-	 uZ51R6qiWcnYB7Y4WKluLfOa/RULTG3qPfoJdFiJGc0i8/2VP4RM2+2EYov1eVUoSRxU3
-	 7Q1bSp3O+SFxdSH5n27VJG4KliXrUFNClhmUpr/5FSXzmgxRTlINVv0ccysZtEKxoGj0S
-	 YjXJvLKfUxMxwqLPFIg4aB357kaRWfRElto3dk1hmVUjWAPsyGac/Ldq5MSHjN1C22Q==
+	t=1794894081;
+	b=bqcyaUWhONANAuPbr9rGRl1WoQ/JQ4HIJJTfhr1YZIUR8X+DutXFYr1WCkxW4UD03+g7
+	 E1l0UF3Tz+7+w7kU6vktCpRzglpQ4t9OfRinotfZ/CRIgXoFTI7a/kQSaxkEjOIz2g5/e
+	 57XQQYJK3LI2kZ8UzbmukyUZXyD/IpDm0J7gWcG0bYYS/M+oozrNiQ5tU09R7xvvqo3jI
+	 syEJUIYKO9CyYsbJUWAWHX2V+4AXveQqCb+8QEAGpqOnqgrjE9EcVlwIaWzKU+HRr9Zv7
+	 0BKZJ9lwuCozbW25YTNNB+gnJWPBibFn5RBCcJW6MhbHjVbQzGS6x3kA+OxfSbhFtXA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794893597;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794894081;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
 	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=Cz1YEfgAYIVyaKhtnxIgh6hL4aaxiRbKUnEOpQeT7xk=;
-	b=tImFeik/tw4Q5NKYneM/T6D/+gNvjBwfh5xNOPQHc+qDIeywJEImlXjx4N1kiCe0yH40
-	 rsqLHbPrUhI2qEu1jDTFH/+C686TXRxDAR1ls9Fk1Fm9rL3UY+hzWe1cUcVuF0poa2G0I
-	 C+NLwbOyEY6rukyrYYU6TpPLGb6cDAt7elGyvUAqGP4KZEkfOJtWQdmUJ5fZW/z8jVQXc
-	 scN6nOqKkK5bgX322Iple5u4Ubs8MXvdDEd9cVxEhSS7e5yZbQhlFF1BxvYSTYHvwV88Y
-	 XB8GawA4Qg85s+vpIAwrouYFtL9y3Y3dfyoQmnLofCb7oYmHqsnCJqu/X5MEGpNEo0Q==
+	bh=kgXAga4SQ2gGcYIcOPrgNzb4Xfca195d5V/zBY0TA5E=;
+	b=Bf3W5cMT7Ac5E/aU+4n6iyEJo8kWgRLiMD6heGa1iEZPVf4QMH/Yt3SaF3ziO73oFx/O
+	 ZCvIZTHkpUcpiXV8Y8R2Mmwia2S0+ieJ6TTt2OE1dY1jeBz+xFmc8rNTnENYeKhd8S+iJ
+	 5a4pZjRGtwPyzVq9Dh4+kbuICtuOpzmuHH1TZ+ggidP/04coBRbRs4ML2P/MMORvkK1Xo
+	 9docaugKNbTJ0dtAAyKs3eYruq4fH1JYc5MyhjG+0idmyW83Rz2yowvnWoBtwLGTxjvZ5
+	 ekYhx14jMNRM/dA0gwjzlUebrKkIQW0BvrIKihlrlxr+LtoXEpGlseWNs4YT8XCv+Yw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=AGL+KI8L;
-	arc=none smtp.remote-ip=74.125.82.181
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=PQr3PgP+;
+	arc=none smtp.remote-ip=74.125.82.44
+Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54C72606A31C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 05:33:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 54C72606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9456606A32A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 05:41:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A9456606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=AGL+KI8L
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-372bdb942dbso3827137eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 21:33:16 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=PQr3PgP+
+Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-1b3ada81853so3923697c88.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 21:41:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1794893595; x=1795498395; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1794894080; x=1795498880; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=Cz1YEfgAYIVyaKhtnxIgh6hL4aaxiRbKUnEOpQeT7xk=;
-        b=AGL+KI8LRIwJ8cdflaNKNFX41d2JvLSAp7FK7DVGhFMM95xQ2g6hkZnMXfgy9Dk+tz
-         jF/FOlGQCot53XTV7jjbVzexEd1ibyLLbiTnWYmzyGIob6wfhXry4Yrmn9Xjpx4n0mmx
-         64xX9MjzM7kY4bo5/t/gzirbKWGfsp9tEyCAHOimcl08rU5Jl4uBa0Wx9mSgCrQuQqsP
-         BuKV0XZjl8k+qcTtAmGxUGGvp7T/UmVu1wwVOJRLskCsA7D8hi57ogVTzIBQqTPazWwz
-         2lnQjRhPrDRp+kLd+NWigdsX7LEWGmKltMB5scA64g+l8CZQH+UdN3I43rrZuJuzgNuT
-         z4VA==
+        bh=kgXAga4SQ2gGcYIcOPrgNzb4Xfca195d5V/zBY0TA5E=;
+        b=PQr3PgP+hc6DT0aQU/F4mOKsRUSEulybv2c1ObP3i+DkihztlWEctX0OrUgl6usesp
+         LjVss/ez54+GKqptmSO447ZTgQARt4/Hqnxbxe4wKrARIDHxATiTAuXAUYnd5srby+N9
+         vIOlcV7Nd504l6AaiMlFfzLDi9l5+R6A7aeaaPeYS/SdAVWDOIhSPf47Riiy2R6M+m75
+         Ukgmqhi7cJ0OgnvcKLaHEGrytFD+SRwSV0uvePUfCnI6UPFqzp3h2OWF+CpLD3vPaxqN
+         L2GFjD1uwlGTm474BmzBxVLJXBEP3UcTQIALBo1pSXC6QfWbbogt02vvQ0hKRpb2TPsp
+         1BtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794893595; x=1795498395;
+        d=1e100.net; s=20260707; t=1794894080; x=1795498880;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Cz1YEfgAYIVyaKhtnxIgh6hL4aaxiRbKUnEOpQeT7xk=;
-        b=ahjSmfzo+Hthxg4RzayVMvSoEtFQyoJE7ThH1A24jdCKHQxP8ecbVBmBwpXX2+T29f
-         gqEfFtKXgvp78iqbtxYe+4za2iz25kGXvYbXkVELt27wCBbrJk1GH51MVm6cFgTUhTAp
-         zqSc7vBxA7Ei/RTrxvcPnmUn6tfhiUCWue6CeSIHZjK3czgDfOExNMxaOPaZYkj0T9h5
-         HKIOaJAHjdfqm8n8qfjM6lfy8Vp68+jKKPikk8EtNXohuQtNNMuRZpUsKJTXgo3wI52J
-         Hr4t9orL/sk0+Bm+owbn4Bfdtz7trij4xESbaEV3WVnaRp6EPI4rnW/M1zmUoKMjrns2
-         RU/A==
-X-Forwarded-Encrypted: i=1; AL+hErGAXHAPhdBextaNy5kX9ZM5kvQU0OIp16LS2qBAK7fGs17qey3phFU9jRB8xXXvaP7dRh2JdSXd0O1P3vn9@vger.kernel.org
-X-Gm-Message-State: APuU4Z+q6GPpsklHd5Gsd8es27I9ANn1BJn/QAVTzdz+P/Ui4EXBlKxF
-	VoFjccv2h//RBQvod/sxaFqXrVJKQAP76SCntAqvC6zcqJZ7VYE7OnL+YyjHDxQgDjE=
-X-Gm-Gg: AZFdTZfi+P1iaY/WcH3YyetOB5BN3WIS7wEgwy2Vv/MG3xarDLgNcBmIAgeoOrOkoyH
-	lI1SXj9yj3KEQ9QVcOCZc2Lez/frRG626gvupklwa0sCqeO5g7Tt4l45LP9jqQPh8/l10+8tZhW
-	b9I0GFJfSxM8FCQwp9728En4iO7Yz1Tn8AqLJr3Hwg5FC1TvDF0Y+uTnd1AssgMDoi94TYcaXQV
-	9qEIAsz8r6HAfkHtxx8mjiGrnONTrhk2gcrW7zkgeGCd9bFNslKoaNqqw3ecOWRaTZ6fIL82E8x
-	ZcSZ79YrLV807uLZLG25SZiY7jA2JKd6GJImsZHzWHTQXIHKSKBoSSKxW6dpQuAZCLl1WcI1Vao
-	tTQ8GSn84hz70I1frxojtIZw7co/iwTOL9ee8mw8vMQs49aT3ZqsEj2Mj9SoZF1JrdDLOfIVBx9
-	7+SI9A5HwMTVmSpK4A0EDHk3vInzlCYplOWWsJmX4AIhn8E89fvaOlYr+BjZB8h7vbScRP1AhAS
-	+AdtlsIpGrCD1Kim5khY3Xg7EkKnn4bInkdrCjMGmzXQjaGMOfbTcVmxdaPawm3Fpet3GhNdHjM
-	YMOSyDgv4MEXnVXOQq7pnYBW6vYYFQ==
-X-Received: by 2002:a05:7301:b06:b0:376:13e5:e8fe with SMTP id 5a478bee46e88-37964b08f4cmr11532201eec.3.1794893595271;
-        Mon, 16 Nov 2026 21:33:15 -0800 (PST)
+        bh=kgXAga4SQ2gGcYIcOPrgNzb4Xfca195d5V/zBY0TA5E=;
+        b=VIAUV0j7l/q14KxLEi7Nc9c6zvL//DPMvPgbN/cJVBST0ztUU+GNJZ+JoLofXZNDqw
+         SokfqxxHaK+McPoqrTozMclo0Cn+Mx4TREy3Yh2OJplZ+EZapJ/Od6cBZGEqlyO1y+DG
+         9iZsR4rm8COP65ysN9xhbRsms95CsPxXxUpeYaJ9SZHCdpZpXNrrGeN3mX7UaoyLBeGJ
+         IWGDKW37qU0qBKOUp/Zv4r2HE6DkvrhaQsrowptUuxurO2uyx04PE7dNGnXhECIOOmPk
+         ImxjfntWeB0GrkkitNtsyptsoyPQERCz8Tpuj5iA0+AS68WA33yo706oO/kdDDdn44vu
+         +WOQ==
+X-Forwarded-Encrypted: i=1; AL+hErFhs0yrw8YIN6SCq40agspNHeOdRiMAPcEaYEGlIlje+WSRWTuG9wTRqf4Y6i7m23JRWYqHIBw7+41URpr1@vger.kernel.org
+X-Gm-Message-State: APuU4Z+nd5slGBifTwNTQvneCjI4gFM5mE6A4NChpZ/10eRxamjMRSIo
+	5XNSDOvdgdQbgBZRaCWZ/jZ5EE2UYZpM2QGpQvUednU7Z4mwMiVfOHK6Dm8kBV16Rkw=
+X-Gm-Gg: AYBFou3YOEpSM+Ph+JL4m2F2yDEvuOwzNJ7BKgPl/dfvvhbaLBSixsFK/0/UScjvxHN
+	h8OFELAbqfOIQB/QwJczqg4K6sYaYYz8o6vUh9V7xL5rKju6Ow1rv4l/G/t70pFKRPyHONSyDT4
+	CUXyx/dcnHIBvaVk9+0MNRrSg/v7AFmrKms4c3wgmNgW+W4G6ElzH2UkFmSwcO9tnnbOXjjQ1HU
+	m7IUH4qn2QB1gi+MHjpIE64GpHIGZu0Oe7EhNZNFngmQscwFRPkawPPCyXH1MHgfNyQc2gZjTXr
+	cHI4rB8pe911RdI6XWgZu9S3ncQzLZLgmHl7Xn6sDnFQjJNQlYyA0RLgshH2l6+nRC0anJ4SVCC
+	N/pjE8X70uQyyJ7y8e7mqQpEagD7fJ0Dc0NmAGDABIbILtEo+ZNTdPRZcclg9f+Z5GXphoypGPw
+	tdQ37Dzx7lAiBLBjJuwZlEf/E1RYMrJPXkK/mYVH1V2jX5TZM7ol8E0hbrdzMWPI3fHcreHyeo/
+	7D9ijkGbcQm+ZYPJZm468Rt1GlooIR4M0XrxYkr6sbsJLlAwZGN3sN0Ge69wEvl4HOCEo4Efcsg
+	85H9xgvutSl1L/kUVSBCYDzFMsC93g==
+X-Received: by 2002:a05:7022:290:b0:185:4ad4:3d15 with SMTP id a92af1059eb24-1b503068235mr10688010c88.1.1794894079483;
+        Mon, 16 Nov 2026 21:41:19 -0800 (PST)
 Received: from localhost ([122.172.83.36])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3795533170csm40174212eec.7.2026.11.16.21.33.13
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b524049e0asm17957878c88.4.2026.11.16.21.41.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 21:33:14 -0800 (PST)
-Date: Tue, 17 Nov 2026 11:03:11 +0530
+        Mon, 16 Nov 2026 21:41:18 -0800 (PST)
+Date: Tue, 17 Nov 2026 11:11:15 +0530
 From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Majid Hajiheidari <majidhhdri@gmail.com>
-Cc: andersson@kernel.org, konradybcio@kernel.org, rafael@kernel.org,
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	abelvesa@kernel.org, mani@kernel.org, admin@mswin.me,
-	linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/3] dt-bindings: cpufreq: cpufreq-qcom-hw: Add SM6125
- compatible
-Message-ID: <avvnF7zQfYhF11so@vireshk-B250M-D3H>
-References: <20261115003158.391171-1-majidhhdri@gmail.com>
- <20261115003158.391171-2-majidhhdri@gmail.com>
+Subject: Re: [PATCH v2 0/2] Add cpufreq support for Qualcomm Halliday
+ (SXR2250P)
+Message-ID: <avvo-0Gj9u4ZdCyh@vireshk-B250M-D3H>
+References: <20261116-halliday-cpufreq-v2-0-e518cc055457@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,40 +104,36 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261115003158.391171-2-majidhhdri@gmail.com>
+In-Reply-To: <20261116-halliday-cpufreq-v2-0-e518cc055457@gmail.com>
 
-On 15-11-26, 01:31, Majid Hajiheidari wrote:
-> Document the cpufreq-hw (OSM) block on SM6125. Like SM6115 it has two
-> frequency domains with one register region each, so add it to both the
-> compatible list and the two-region constraint.
+On 16-11-26, 21:25, Stanislav Aleksandrov wrote:
+> Document the CPUFREQ hardware (EPSS) of the Qualcomm Halliday SoC and
+> keep cpufreq-dt from probing on it.
 > 
-> Signed-off-by: Majid Hajiheidari <majidhhdri@gmail.com>
+> This is part of the bring-up of the Qualcomm Halliday SoC (SXR2250P)
+> in the Samsung Galaxy XR. The DT changes follow in a separate series.
+> 
+> This work was made together with Claude, ChatGPT and Gemini.
+> Reviewed and tested on my Galaxy XR, where cpufreq runs through
+> qcom-cpufreq-hw.
+> 
+> Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
 > ---
->  Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml | 2 ++
->  1 file changed, 2 insertions(+)
+> Changes in v2:
+> - Add the qcom-hw binding from the DT series (12/17 there), so that
+>   the cpufreq patches are in one series:
+>   https://patch.msgid.link/20261109-halliday-dts-v1-12-289114ab8197@gmail.com
+> - Use the "cpufreq: dt-platdev:" subject prefix (Zhongqiu)
+> - Link to v1: https://patch.msgid.link/20261109-halliday-cpufreq-v1-1-d87a397396fd@gmail.com
 > 
-> diff --git a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
-> index 98eb36bff..8dfe77d08 100644
-> --- a/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
-> +++ b/Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml
-> @@ -28,6 +28,7 @@ properties:
->                - qcom,sdm670-cpufreq-hw
->                - qcom,sdm845-cpufreq-hw
->                - qcom,sm6115-cpufreq-hw
-> +              - qcom,sm6125-cpufreq-hw
->                - qcom,sm6350-cpufreq-hw
->                - qcom,sm8150-cpufreq-hw
->            - const: qcom,cpufreq-hw
-> @@ -146,6 +147,7 @@ allOf:
->                - qcom,sdm845-cpufreq-hw
->                - qcom,sm4450-cpufreq-epss
->                - qcom,sm6115-cpufreq-hw
-> +              - qcom,sm6125-cpufreq-hw
->                - qcom,sm6350-cpufreq-hw
->                - qcom,sm6375-cpufreq-epss
->      then:
-
-I hope this can be applied independently.
+> ---
+> Stanislav Aleksandrov (2):
+>       dt-bindings: cpufreq: qcom-hw: Document Halliday CPUFREQ hardware
+>       cpufreq: dt-platdev: Add Halliday to blocklist
+> 
+>  Documentation/devicetree/bindings/cpufreq/cpufreq-qcom-hw.yaml | 2 ++
+>  drivers/cpufreq/cpufreq-dt-platdev.c                           | 1 +
+>  2 files changed, 3 insertions(+)
 
 Applied. Thanks.
 
