@@ -1,56 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794904185;
-	b=2lcLCeDyZb0CivlPAg7DQFamAuZMLJu9+Tpg283JKVY+dZml0wCeJdX3HG0hTGgbMEGN
-	 t/r9Z7XrIeJdLCG7jSSlzEjn3aVRn+JNTwxmLdDQ0WtTkMPIVEbHrZ5Q4XwzXLPLkaXrn
-	 R4unPsC1GqupZdaz3uPbu67d1NvITb2Wu96T74ob+Va3ZQRS6oV6wYVDnQOnZgsVHPgeH
-	 70ZtqfICCeHOuDHLBSaciX5GIh3hbV+FFS089EooQAmMxa44wjzTFI1MA0CC1FC5jZIs5
-	 +spajpWrJOAmrYhg1cYO3M0CAlFK57RtgCJzxV6mIwFpWsMUfX+9jszYkyDIfmloTXg==
+	t=1794904333;
+	b=xwo5qDTPiDN5gUzFMn2aGBxDn1WG9Ars4E4Lvi5ajSSJwvS6P7yzJ5MR2E8yHVp1mrDA
+	 dVJPnUQDeiUwmiG9tVn+UHBMbUr1huI4i1rmc+ChOd4vGfOo8DjeFDASiWQTBaVJMmPQY
+	 lMq0PhTohVqiVLJA8fNCNwuXYCadldbbfD1aIGj2kTlGS+g2uO1mkXuDS2voTFVkPoOPl
+	 NW+gF+YRB1xNu/uwI7iQV6K6frfaeh1uEA3d8niIxJXpYUPSzZroGLF0DW69x5nzPn9Vf
+	 AL/61ZTN2JQAgqralP1gcj6e2TIBgEOVOefsLp65ZvgdwfNXpgU7fApLxAhYOOqmkJw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794904185;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794904333;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=oFYnf9rWIV7nuvHktcNWchTcAeise6OHwBzCHmWfzfU=;
-	b=tw46KUWVN//3P9tI8GL8UJlfRIDF7qxkVNr8Z36wb9ROQ0jSb+awiUxrLhO2Wa2nTK2x
-	 1g9DQmYBsT8Cc5C25mCD7Rxs1JDvgstJlUv32h8lFygNMolc6PT6OXhKnC0AtPIy5lifd
-	 v8Gfmb60akjWfEU3Uh4HvgjzwDHIEVhAi2ZDhS38gHyK4QOWMKucX90iJTBLzyDVpEKXl
-	 wEDJm7LnelA2tYku2cjn0Fsl1ppwJOF02iWFW0uBUj1JKOf+B5J5LvAeQaknJHHzEOFMl
-	 fsIkvc6RmkKm2Wn1hQkQciEJWsLTbZY6DecoT2IXes5vlkVfaU0AofmcvBCy2sFFZ4Q==
+	bh=x66uC76W1OU86H6gKf2MJX5drvOwcsSMX7Gy6dbeK1w=;
+	b=SLosoTo/bkuJZGJrTEjgTrh6ERFhFMJEhojWDSpf0oFvzL1X5fYebP38dStT92lBszoT
+	 HJxiopP4+AqWFysa5gjIkRvcxMlUrYLci2sgkZUT3/W7jpUgDlcFG68ocwurkUM4UFT9T
+	 WlCXNAssa9ksRNcxbP5CvnVcSlr/BXUp1Py76899IMYWEwNgHhK6xO5fePHBWL6if79JG
+	 EeQItg2/NJaWEmZUYsH9+I85w7wLIKwd/4Sk0oROvLO72QjdcLCtaZAXEZgq/GAZ+invB
+	 4cZYqKJVh40raZXfb71BfcZAs9DftqWAQM/F9DmjpLxW2GRMpDAeruDooo6CHhY/0aQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BTi2Jgpn;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PVOl8S5N;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 4646A606A8A1;
-	Tue, 17 Nov 2026 08:29:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id B087D606A894;
+	Tue, 17 Nov 2026 08:32:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BTi2Jgpn
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id EE77E1F000C5;
-	Tue, 17 Nov 2026 08:29:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PVOl8S5N
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id A38B41F000C4;
+	Tue, 17 Nov 2026 08:32:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794904184;
-	bh=oFYnf9rWIV7nuvHktcNWchTcAeise6OHwBzCHmWfzfU=;
+	s=k20260515; t=1794904333;
+	bh=x66uC76W1OU86H6gKf2MJX5drvOwcsSMX7Gy6dbeK1w=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=BTi2JgpnWkMwq1Ej1zvMX6FGEqdcxEbaXzeTou9sYU552qluNjXrbIMBhK/eRy6OJ
-	 27kHuK/F2HaMRFvN8LIb0awh0Fmhpyv2L47ra1TU1DqRe1Xx6r87KqisKItLG2tlsB
-	 5U+Xb+EoOgMO/Uj8dF4ALfEdFE3uufnsJjZwNxMfsfg/ehBrx1UT4bOS2qR8XIl6O2
-	 t2BB+qd8EQJ2tjlNhkZxjd1dli358kuUGBvGGQmKGAT8RlDtvcjKj5lr2zusADq9Jb
-	 mjHPMpAKBGZSiiSSdbP4z9tAzejFS5hCTFz5WLajLqtrJgg3FCz0iW+wrondcDCJzv
-	 3RSY+FUxb8ffg==
-Date: Tue, 17 Nov 2026 09:29:40 +0100
+	b=PVOl8S5NmeDXA3tBtiCy07OQr5sYrfDgylLbnZpsHAvGeRarjSr15GSdj7sDzq1fU
+	 nXYUQsfqnd5mv+nxmgVv9olAq4gocOuMhyVidx1TNWR2ZU7fQMY13JunCBs5Gqa8l0
+	 BTzH1Knn+fVtWzQ9zVgIFRCBW/XMin/fPQ1gJeBWYXLBUJpLZhapsPMukdfJdUZbW2
+	 Y9rqQB0HxKBiTcLfBqeo68hOJp938fmlaJMPmiGx/QUFGtAWrBIInvw8hZeZ1HPfQc
+	 dZQNLkFd13dWViog1SjvBHqwGy91R+Gq3GEFN6suzeyXz3RoIvfyfqhhHzwX9r9uQb
+	 suxHX1+U5pAfw==
+Date: Tue, 17 Nov 2026 09:32:10 +0100
 From: Bartosz Golaszewski <brgl@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/4] soc: qcom: socinfo: Fix SA8797P and add IQ10800MD
- SoC IDs
-Message-ID: <osbkd43sxblbz2jk76oosfqlw7qxb6w6fzxflw7cwa7ibmmtat@xkji4brv6nxj>
-References: <20261114133304.989635-1-shengchao.guo@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Subject: Re: [PATCH v4 0/4] firmware: qcom: scm: simplify code by using
+ classes
+Message-ID: <fcocwofapa7sfuzobdrhyx7dfw7lwxozlikptnnrrk2huc3iom@nflswbjbknea>
+References: <20261102-qcom-scm-code-shrink-v4-0-21fdbe876883@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,25 +61,20 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261114133304.989635-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20261102-qcom-scm-code-shrink-v4-0-21fdbe876883@oss.qualcomm.com>
 
-On Sat, Nov 14, 2026 at 09:33:00PM +0800, Shawn Guo wrote:
-> The Qualcomm Nord (NordAU) SoC ships in several SKUs, each reporting
-> its own SoC ID through SMEM:
+On Mon, Nov 02, 2026 at 11:18:51AM +0100, Bartosz Golaszewski wrote:
+> There's a pattern of enabling the clocks and/or setting the bandwith
+> limits before performing an SCM call and reverting the above after it's
+> node. In all places it's done unconditionally and can be simplified by
+> providing appropriate classes. There are also a few places where we can
+> use __free() for tzmem pointers.
 > 
->   - SA8797P    648  default chip info variant of the family
->   - QAM8x97P   690  Snapdragon Ride modules (QAM8797P/QAM8397P)
->   - IQ10800MD  798  Dragonwing Robotics module, e.g. on IQ10 RRD
-> 
-> SoC ID 690 was added as SA8797P, but that ID actually belongs to the
-> QAM8797P/QAM8397P modules, while SA8797P is 648. As a result, boards
-> with these modules report a misleading "SA8797P" as machine in
-> /sys/devices/soc0.
-> 
-> Patches 1-2 correct QCOM_ID_SA8797P to 648 and add QCOM_ID_QAM8797P
-> for 690. As 690 is shared by QAM8797P and QAM8397P, socinfo names it
-> "QAM8x97P" to cover both. Note this changes the value of an existing
-> dt-bindings define; the socinfo driver is its only in-tree user.
-> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Hi Bjorn! Gentle ping. This has been reviewed and has no sashiko comments,
+could you now queue this for v7.5?
+
+Thanks,
+Bartosz
