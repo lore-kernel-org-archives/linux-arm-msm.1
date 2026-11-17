@@ -1,61 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794877517;
-	b=LZ8vNagJl7VRFLKw3yKGipSkzi1QlhQPkjBuOi263qsNnc7EQNCRHyGU1zwOpxIyc2O9
-	 /Y9ngSYOKovdnttwGrRLykcEYaoUBfyXvckagkssPzp0Z2bgBP3TaJVO3F3pUCX53PER6
-	 OUPIf7a3X1agPslCxpLYL2hUNaAKy72ENwB2rCTH+CzcjW/lyWFMdQ9e8UqNX5ebadzX8
-	 A1QjfwLlGiSUHIIGhgvnl2qrQAij5bpb3boKUqVoGJ392d41jZ5B5cSZH6CjQcmkgM4eV
-	 PGw0sL1gcbw8ae2gwdgBuwfyHvjrJFi2YCBMrfkYs7dVda0UjDz5lbMM40sIK6U6hwA==
+	t=1794877519;
+	b=Md3fCSKT9avp72Wy+mVkjpA9prjZvflyiQoqUe6xN4MdjGeFvOt3hpKCDMto/WW0fAMq
+	 U0y24I6gmHHqnkLrdJlz0Nh1i/4Fd6JJnSIqD0ZwQh7yMHLSJd1PBnBm7Qn7+bNdhGRJl
+	 7s1kF6Fv/BrNI51KEQ6/jzdZ2PTRGagwIc1ZetcNd/n0fERSMQ/HwBYb617hTmmCNFZek
+	 4MDK2jvygMouP7anOeCfiEzTxa70xCHJiBNS8OPvXi582Rkkg3Ks7szg22Y4i6derhH6F
+	 LHpz38vstcC8LaHdltwUOM5TgwOt3jnlc4d2mitsyNI+EYi7e7m1jUpVa2w5qnexR0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794877517;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794877519;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=t2JM5GCECTkMdM3S+MJpk56aIu7bFWfVAUq5lccAk5o=;
-	b=gUv1KGmksTXS+nyaT//GQOP9H6rbdg4iZxfE1NOG7nobu9/QcgzsDE+bMzs4OmKK13KZ
-	 KcfbTBTFsgLlzZNhdnLj0Lw3qSinPE1cuV4yuN03QDL8Om9WWs9L2ii0sHZxZcoVbQVaD
-	 3qkc1Ni/i6FTjLEpIfvuMfiHbprtqVx10qCGcp4pmPboQDPZnxuq3CfXkTFaDvdDJF6uD
-	 vC1Uc/zGM8iIGfzWeUl1ngU28btIXubP2xhldYOjjdgalPDb0iMDwDGCF9z+R3F7V2dOo
-	 0GiQkQL4kiLkVBOFG3T9G+9tnl0TcD2Z6gQBN+vGlLAuvYUEf0JUa9RWwO0BEoWy/gg==
+	bh=dzbohmIAJ5H/eQ/hR64LwPbLV1TV2nHgnrkXo5UDSbU=;
+	b=gSPnfh4oGgv12osJMoq7v4jBillr6u3RuE+rdzQcz50Fh4lVn2rgwcx9ikwKc/gfi8az
+	 Qb2sIup1CqO62G9bNoWGb9WuHacJCCrEGGJtPu0XzcaRVsEabAnod/+ZT+dSmU0wRgR4e
+	 NZ0AJDmkNZwKBO4NkJtLEzHhWQ+dvfHcjAZfHDrfyzA6vvnxO1kKikW+beJvRPYg+oYOR
+	 CnEsLexMAcrbCPio6yMrqIZW0DKRivYCcGLPQ22RHheO0BQz2eLwbbyPOxR0F3tE6UHOY
+	 e2zKETqq8zn88YSMsC92+Z6/pD7jtQeHxG310xORw2p934KATDHC9Cgw2ZFUaDUQKGw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="A4lKAN/L";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VE4hRI64;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA73E606A330;
-	Tue, 17 Nov 2026 01:05:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E2EC606A331;
+	Tue, 17 Nov 2026 01:05:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=A4lKAN/L
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 657631F000C4;
-	Tue, 17 Nov 2026 01:05:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VE4hRI64
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21E541F000C4;
+	Tue, 17 Nov 2026 01:05:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794877516;
-	bh=t2JM5GCECTkMdM3S+MJpk56aIu7bFWfVAUq5lccAk5o=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=A4lKAN/LGZVzhwYKQJM0fKcJSTSH2zx+1uuV7kQ6ytSoWP+Jmkfit3Pb6fluFP6HO
-	 URy5FutMhwT5baHbX6qPXZ/RnDrns1hsLogu2WnGXfcytun5cRponp4d7thBkZRKNz
-	 EFqR5LaIg4trtKcu96bxLRZECESKL486UeIKE1MfbYpTuG13qCQPm5I6XtWoBYq+eP
-	 ilW+UVj2y2oft1VQs1dnEJmraf/dmbkwTZoKzSb7od431g3qKLD1rWcVVPP3mmffm/
-	 LdJ/FKclruaPYhQ05rh4hUX242OFm86UYI0+Hhd2p1ABFBdtQQduv2YHQA5WKdcRdQ
-	 yr909Z5YJGuQA==
+	s=k20260515; t=1794877518;
+	bh=dzbohmIAJ5H/eQ/hR64LwPbLV1TV2nHgnrkXo5UDSbU=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=VE4hRI64bXQX06/eHSHWbNkeefBPhGnE3xSZrHwMUKCFuqZsyLfz1zBIKeLcDeauv
+	 50QhsJ7wRMIRUYEmnmTEHTOUF6acbCYs5/hhwyecXlzZAGcY0cnVhxA16RG6CSj54q
+	 8TcQYN5mHofPSoJoQ3FtUUyTfp9Jj09s4JuyAEQnx+gIimvXh4J4Qh+PI9GfzxcnpG
+	 zewBbUvy2dxuFFr2EIqMh7xuLKmFX7six7VyKpPWfGV+86sdzl8sITk149qal8wVOP
+	 kPlpFYqPI/R+Ef/oZ73eaQr4Q0BXJO3EezDl/vDLGD1mVfsNTsnjRMbIo+ruXbCVWP
+	 KxTz9p53ZQjKg==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
+	Luca Weiss <luca.weiss@fairphone.com>
+Cc: ~postmarketos/upstreaming@lists.sr.ht,
+	phone-devel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH 1/2] arm64: dts: qcom: Correct white-space style
-Date: Mon, 16 Nov 2026 19:04:48 -0600
-Message-ID: <179487749339.432567.6694138389097894424.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: milos-fairphone-fp6: Enable Iris
+Date: Mon, 16 Nov 2026 19:04:49 -0600
+Message-ID: <179487749340.432567.2387680298357856590.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261113185426.183501-3-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20261113185426.183501-3-krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20261113-fp6-iris-v1-1-5496b6d99911@fairphone.com>
+References: <20261113-fp6-iris-v1-1-5496b6d99911@fairphone.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,22 +71,14 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 13 Nov 2026 19:54:27 +0100, Krzysztof Kozlowski wrote:
-> Correct minor style issues around white-spaces (e.g. double space before
-> '=', missing space before bracket, spaces used for indentation) to fix
-> dt-style-check warnings like:
-> 
->   monaco-ac-evk.dts:825: [redundant-whitespace] extra whitespace after :
-> 
-> 
-> [...]
+On Fri, 13 Nov 2026 15:52:23 +0100, Luca Weiss wrote:
+> Configure the firmware-name and enable Iris so that hardware-accelerated
+> video decoding & encoding works.
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: Correct white-space style
-      commit: c4ec9fced70f2445d11cf77dbb04f5c01d0cf9ae
-[2/2] arm64: dts: qcom: qcs8550-ayntec: Use hyphens for nodenames
-      commit: dc607958bc6a13a212a947cd3a29acc704b8c446
+[1/1] arm64: dts: qcom: milos-fairphone-fp6: Enable Iris
+      commit: 311cdb1e0597f848359da8be1c63b4cc97c65e94
 
 Best regards,
 -- 
