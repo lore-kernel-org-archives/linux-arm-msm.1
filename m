@@ -1,90 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794903871;
-	b=oK2yzFhgffBRfBGA34Je0yXqdx8jFZ1v3KyKpX12JtCzZBJmU2dg29G0Cg0oTA71E/v0
-	 J06cTEHGWkHB39tyvgyeIfaqRQz/kbXmCCDIyyx8UT+DUMKoq2EBrxoAWvqygi6bxE0h5
-	 9epCTPi0c8tD1+YDdS0HLdjxJTKlk+/eVlllt9IqOp3wAism3CXwtJGHDi/xTC8qGbkZp
-	 1DAbTdcs7Mu6KxPZ1xIwadjQ0/EdOBBpgTuHxNb5623ETpBa7eheaOkB4tp6jvs/lzsOl
-	 FkX9jbd8uBox0yo3PFsr1b/i1dYHBOLL6vetLPShHHsEdbocqFOpg/e+ZBiRO2xFRpg==
+	t=1794903867;
+	b=e5WFB5uezZFba6QITROfz+6v4IjW4kqL9f5zEnmoZexbXAQtBkK5RPPOPKPou1fsuFR/
+	 RhMFW2PDdd5CzwE8lm1v/bHosiRt14ox6/yIhaJlmIWDONquFdNIQ/3jOgVmYek+5ddxt
+	 fcFiJyMGMObWrSPotbztHuQxUa0eeoUkE4nDXHPn7HgXpgClO53CKfBTANRcK2jjqoCNn
+	 w6cfvr9SCIsvymAwcApHiWcWcjyWyVLadaegvbh3OaZ8JrivuQ0kkT4BB4oVXLLpGofjC
+	 4rwCrYzFqEh4L5+0r/XfwfGwlJcCp3DHFJm+Onk9J0OPOiJLSNk5O/xOFYM64NwdtqQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794903871;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794903867;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=FIAdVkEWa+YKpNqjyEpkUHZm+KoAzH84s76F1+g9tmo=;
-	b=rqsYt2N5UfN2hYxObSL5CdZ5v6piZw5RuNP4O3wrHr819H95zUm3skRAC2jBhKMcd9dn
-	 S0u+ZyPdV40Am3VBG24IfUibZw7VGCzqn8nv6YoS2C3onPblHtR/55dtWxHFwM99hHKEo
-	 eynm673P4y4NI1FAvF+QDro5sqkPvOcdGGR8Fv68cOjFiy2W7hGBuN9N8VX0c2mPe40wg
-	 SztdRuD1xs7EW/yZZpDmaUU8h4HSLr4tXYlAZkhhn3cPS1ivrG9XLEjvEwbZPAzoSbBIk
-	 s3M2yfk5u17+OzcqM7RsFgrW+yBu/DIs7DJs5MmQ2a7qSMg77tCPspx25QNefLMnZTg==
+	bh=LxaI5uY4Qt4PnmH4r73IhaYkI9KKxux57STKlfaXPiI=;
+	b=N2GsShWdZ6C/tiocu4wb4yNnbgr8t/hA2QcerJARU83TajwO4CM299ajwku9pDUIUsEe
+	 kOmGYZeQZCi57dhC/5gdhm2rcDEj4QsTsImrqtUHbFrUGDXkx3Zyd6sGK79CoVnv7cGaj
+	 N8qgSPEhGnZi3nzL6kU2cm3ssSu8lOrUvtSp3FsswerGU9nuesSkYoUvLB1C+u7ONn87p
+	 cF3sfS0YYyhydUeWzFeKBrh2V+X+QFopraj3tMzzcoJiIZ0Na1Z7DYpKcwhClTxhDvp7I
+	 VR5rU6FgN3S+bQA3tOFI+UWJ1wYgRAIXvE7IsN9JxHHdk/riwVxP66kSBek3ZIXT8HA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=fairphone.com;
 	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b="m5rd/aHW";
-	arc=none smtp.remote-ip=209.85.208.41
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=nTBhyNmU;
+	arc=none smtp.remote-ip=209.85.208.46
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5354C60A2626
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:24:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5354C60A2626
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA4D3606A332
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:24:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BA4D3606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=m5rd/aHW
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6b571979178so6724547a12.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:24:31 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=nTBhyNmU
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6b65d69f5c2so6088212a12.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:24:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1794903870; x=1795508670; darn=vger.kernel.org;
+        d=fairphone.com; s=fair; t=1794903865; x=1795508665; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FIAdVkEWa+YKpNqjyEpkUHZm+KoAzH84s76F1+g9tmo=;
-        b=m5rd/aHW4x8+LC4Hoff/y+voqA2dzKC/QkkgsLWsQFHr+HtEIpj0YzM8GS/0DT4I4/
-         gwV4XFvMdtCFyCncu1foTtxnDag3pLIodRg9GKg4EOvngWrgE7sZf/xsl6V+6Ap5bEyj
-         IfqsLVRwRZ3PRMZAO15NX/asAngzwzq9p1KuCe5/mpybyPr7EGhUvziZOlA73MmTyKbC
-         C0w+7/iASWvgEdcoZAcQ+u0CcLjvDSlVePv0LRLBtM4mwr3FChD8MUkxDKZFSxIvNkyy
-         vVEs8Kiu6GDR0RjpRDwnNpojC2/T6aoCDk0SEKATRH5nXRiR+Xqd4hY0eQczVQSmDFra
-         uDPQ==
+        bh=LxaI5uY4Qt4PnmH4r73IhaYkI9KKxux57STKlfaXPiI=;
+        b=nTBhyNmUa5BEoqc2nlcEE2caCO8zzZlWsMqiZhg+CUPKF2pNcTuJj70fg6gcEg+AlC
+         PELJ/MDs4dOrr5Rb9zR5Vw0PgdK9Hz0L9CVyPvrVrFu77DUyWnUR/NokQ7Vo429i0rFv
+         oYozS2QZ6o8VOzua9RXwMdqSWyevTL7WuaJkv50LmViR7OeqmvSx3qLB016DVs+HlFso
+         Lcn+NF9hGra5dyi+IYksIN9NSJzTOoOyZEo/zYUYQBnPC9ySV+5YhTMC1YhQj5c6A1F8
+         wae8WVTYK3inJ7MCl8ZJFvWc7h69CHsCMCjInfzyd41DJex/QkT8+2Nhq0TUfBsrOAqZ
+         A/TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794903870; x=1795508670;
+        d=1e100.net; s=20260707; t=1794903865; x=1795508665;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FIAdVkEWa+YKpNqjyEpkUHZm+KoAzH84s76F1+g9tmo=;
-        b=Hp316lml2FEW+OLvhQdlDmRv6OvgezQXyu+ZmtKMKNfMhtrwgzbrVk8jdPnnxz2YJ7
-         2tWP0TpLqtP/UvcJXFemJEZgQl9qdhldZAV7q/J4PJU5h8azQB5tZz7dZAAIKHYP+Xn8
-         oCq56JTx/eat3pE2ugycYATQIZXHJosgcxrBGMr8fNN7X3U+dLed9FkSBnvarUBPNu7k
-         EsVpPZYV6uARyD5M2AvwCbyNlSFBp0L9Y7tkSnZX3Msx0g+BbUwuvQ9F6ov5rWz4bdLN
-         UCjVY48W2CvdqjeQ5CjjB/sX5kZvGLNo2+ii4LrAHEsPpYRRAjEItsD1+LCpCP1LpLwz
-         uFHQ==
-X-Forwarded-Encrypted: i=1; AL+hErGuRjQBtJrZSVnb6+XZqoB3swf/NZHodm8PiFlzMXWe80+ybiY0rmP1+BQrt+O5mCxn36uNnTgsTgECfmpb@vger.kernel.org
-X-Gm-Message-State: APuU4Z9HM8LYpLPQH770GIojMans1gTj6TJVUWxQXYyQL9tmGgWBViDr
-	Ke0qn5RBuApaCO+xLy3OT0gHfl6+NnCcdXkQaPEC1jxXuhaib/yuY+oKeMi7IPsFsXg=
-X-Gm-Gg: AYBFou2ALq9WTtxYO+lToZNpgzuUAE5R78kD5q33S0CNEhJ66sboZ+1vrLIx3ktkVoL
-	CMn8ZGvGT30c3ZTPSBYszJQpeV3oVUOYFwqwygEErP8apTXjESuYS5qbJuyxejBKiUwIoSBZKQT
-	mQfwbNm4ZHg9P9vf7Z+PDKN2jKpKTLcODFJKfzgxpj3LSc5kep+ZwsvEku2inM/a2QIrhsxXSvn
-	VQ0rXAyRLjYyVgQLyaXEjMvTWKfZsNSpQOMp9S8PeSPupC+fVQaKqt3iDxQfQuOItj/Z4CsiieX
-	HGQ1nYQ/LD7iWOVhiIoXItArqWDUbzw4XAFSuwdEi5mBB4EaJyFcXUfIaqv5U+ZOAHylxc4ndL/
-	ZrY3trUdjWCUPALRC34kn6agfInZ8zs164sgPMqNBOcy2Z49hHGrvNk/iB1Jo5a0ycbskA7k4Yl
-	Y5DYff6v9pHBgChQttAqA/XaDGIZ9IsstLHOWeJ21gbvaiN0jsHSnku8PBz/ALqG3ikj4xTgJKz
-	K3X6OQYMoIyAgdOx37mcZqdNnTZHYsirBaMc4yGM4W12GgCsoCWCyaIdvZbteREme7+AFnP3xl+
-	vxv0xRutEVu3cFB4+m9yd7Psq4rjymVBBQ6IZfpUfK2TLvQM/w3S7VeDdLICgoYb1RXzABW8ZyA
-	zx4fvh7N/H7lCHPYaGdS4OAhqt2NKYNehpdNU6judGZG08qVc
-X-Received: by 2002:a05:6402:4349:b0:6b7:cad6:a020 with SMTP id 4fb4d7f45d1cf-6b7cad6a0cdmr8624241a12.8.1794903869734;
-        Tue, 17 Nov 2026 00:24:29 -0800 (PST)
+        bh=LxaI5uY4Qt4PnmH4r73IhaYkI9KKxux57STKlfaXPiI=;
+        b=nvBlhjCRrqrOxwsHKd0zjGzlREoDb/mNq67xrd5nXaCfZ2i0odSh+LN0yoSwgIc/P3
+         ybN2a7PPISo31Im6I2gxzI0eG4CZU3LboQIXl5TelYtLfaZK3rEMs/KaWK7Uh0H5qXzR
+         Uk2JnKU7uk8IgQDWR/S8aQ7cVNb99Ne0iloEuiNj3EFwUkFUDFDo5k4pWxxr+nYMbhDE
+         VHFMG6FByT8QoZCzRC0ZBkiCaWMY7dwfCzN1iEJ4aDWknJZcHhzOXi4fIO2z0eFFs6Yi
+         UvsLXepA2ybVq89qmc2kZtb8PBZ31NYiKWovggrDpuLGm8E13/q9vMeVd16LtMci3ydB
+         EEVA==
+X-Forwarded-Encrypted: i=1; AL+hErGXpUrzavppMZllLJy+7IiRhQ0q6L5osvwuyIPiI9eo2W+uyR67h/1171ERdajHAzwE4z5ac33aN5rx5fA5@vger.kernel.org
+X-Gm-Message-State: APuU4Z82rrjhTMEPU0p7j4WoWbj7cgGD/KrnC76lBvnbVuY2h6hoDHlF
+	gau6nuiYXoyngixe+V8pDNFxXSmT2XZLWSzHo0iXIDEWhZ4lLUFL2VWVsTQuxL3rT3c=
+X-Gm-Gg: AYBFou01/MGesTqMANycEq2DumifF7STk5jQpKtvz+KlgvSReyN23oXTw/efwb9FY22
+	fz9zcm7wfHUW7U97wMoD8zjQyzm+tIo01S6uZWQHfE4R0Iapl/K7xP4/NHAXTwmyUN668G90y8s
+	8Kw0q54il/fB+L0ZxK9EyhxyvuzJLTQzVPfuYxGk9wc0rj3w4obcCOZ5m90GSJC+Qmho0mav1Tw
+	b4L6wXYB9P36xrTHJ7Bu5cLxExnZ7OK4Fykb8tLgTX15Q68b2GzcO9ym9QefH+fnRjK64vxiSyp
+	ZDWlZZeiPKCLm7Vl6oUEgeIfaYC+HCPZKHc5W9guGRxIs8NxDwGsl5POf4c0mFIotjyPguYPLZd
+	+PnPOvVBvvnTwxa5VcwddHXCkpIFonAmmlNYkhXfu2P6jZXWMuaxJt3Gkomi5oCRpXGDhFkBS94
+	ZUVY9e/gzXswcg1wN/VzAYn8S40CI61UIbVN0vaKTFa8hrY1fS21Zr+q4nt091iUeaIjtRbyKFk
+	so2DlNL7DCodrOw7lN2nAO9XTiMU+W0wRJyYNkJzmEyfkTKDlpO3/zEe7VqetMh0pZpyRAt9syA
+	RUec5XHazAwdMMPSPhJ62ay77lIFyikDhmWVmL7weaBMAzodOmULTMZoFsvvz/qOBtsRvoT/eWk
+	6KWDCVGLpaHbCCisI/HJNEq3MFP8RZwFJQzx5ZGrDYqfWezk4
+X-Received: by 2002:a05:6402:a6d0:20b0:6b7:7785:e390 with SMTP id 4fb4d7f45d1cf-6b7c0c53c03mr6564860a12.39.1794903865178;
+        Tue, 17 Nov 2026 00:24:25 -0800 (PST)
 Received: from [192.168.101.179] (2001-1c04-0504-7401-4b2e-1820-6d24-b264.cable.dynamic.v6.ziggo.nl. [2001:1c04:504:7401:4b2e:1820:6d24:b264])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c23611casm5616953a12.9.2026.11.17.00.24.28
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c23611casm5616953a12.9.2026.11.17.00.24.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 00:24:29 -0800 (PST)
+        Tue, 17 Nov 2026 00:24:24 -0800 (PST)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Tue, 17 Nov 2026 09:23:15 +0100
-Subject: [PATCH v4 5/5] arm64: dts: qcom: sm7225-fairphone-fp4: Add battery
- temperature node
+Date: Tue, 17 Nov 2026 09:23:11 +0100
+Subject: [PATCH v4 1/5] iio: adc: qcom-spmi-adc5: Add battery thermal
+ channels
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,8 +95,8 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261117-bat-temp-adc-v4-5-14d5d309ebfa@fairphone.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261117-bat-temp-adc-v4-1-14d5d309ebfa@fairphone.com>
 References: <20261117-bat-temp-adc-v4-0-14d5d309ebfa@fairphone.com>
 In-Reply-To: <20261117-bat-temp-adc-v4-0-14d5d309ebfa@fairphone.com>
 To: Jonathan Cameron <jic23@kernel.org>, 
@@ -116,123 +116,108 @@ Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
  devicetree@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794903862; l=2686;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794903862; l=4313;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=UM7jmORMPxSdPO1xNc3zcibihjU+NS+ZaaeZNpYbWE8=;
- b=bSCoKLweeKiJ1WF6rrWxDJ5PvVPJnM1jcFj2jNkvwbajxykkdKa/8c/FNqE+qSnRKKtFDBFZe
- 6H+h7QU7eoJBq1AUVzYpXMfKx8YKghowLXcfI8OqIxgz9zMVaz1nDYE
+ bh=iidYg1ApengXgpBRX/y8L8A1Ccs7ge5DzCxZFBc4ifo=;
+ b=OXqeH5UusaY7rzg6vlI0anOhN1stHwSh6BCMbSMu0R8cuLLxS4RgGW7U9l8YXlIbAQAThR9WZ
+ HLFmZmTZ/JyDa1Jo56d996TCbjpNtysUUaEQGqlHPSh/dYU8cM/Q/fN
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Add a generic-adc-thermal node to convert the voltage (in millivolt)
-read by the battery temperature ADC into degree Celsius (in
-millicelsius) using the provided lookup table.
+Add the BAT_THERM channels with millivolt as output, which can then be
+used along with information regarding the NTC in the battery, to get the
+actual battery temperature.
 
-This will later be used as input for the fuel gauge node (QGauge on the
-PM7250B).
-
-The lookup table is generated using a Python script:
-https://codeberg.org/lucaweiss/batt-ntc-calc
+A static lookup table in the ADC driver won't work since different
+devices have different Ohm and Beta values in their battery NTCs, for
+example a NTC can be 10kOhm & B=3435K.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 83 +++++++++++++++++++++++
- 1 file changed, 83 insertions(+)
+ drivers/iio/adc/qcom-spmi-adc5.c         |  6 ++++++
+ drivers/iio/adc/qcom-vadc-common.c       | 16 ++++++++++++++++
+ include/linux/iio/adc/qcom-vadc-common.h |  3 +++
+ 3 files changed, 25 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-index 37aa272019cc..0b8c6f353f96 100644
---- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-+++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-@@ -96,6 +96,89 @@ memory@efe01000 {
- 		};
- 	};
+diff --git a/drivers/iio/adc/qcom-spmi-adc5.c b/drivers/iio/adc/qcom-spmi-adc5.c
+index d57ba8526e0c..24ac84580570 100644
+--- a/drivers/iio/adc/qcom-spmi-adc5.c
++++ b/drivers/iio/adc/qcom-spmi-adc5.c
+@@ -542,6 +542,12 @@ static const struct adc5_channels adc5_chans_pmic[ADC5_MAX_CHANNEL] = {
+ 					SCALE_HW_CALIB_DEFAULT)
+ 	[ADC5_XO_THERM_100K_PU]	= ADC5_CHAN_TEMP("xo_therm", 0,
+ 					SCALE_HW_CALIB_XOTHERM)
++	[ADC5_BAT_THERM_30K_PU]	= ADC5_CHAN_VOLT("bat_therm_30k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
++	[ADC5_BAT_THERM_100K_PU] = ADC5_CHAN_VOLT("bat_therm_100k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
++	[ADC5_BAT_THERM_400K_PU] = ADC5_CHAN_VOLT("bat_therm_400k_pu", 0,
++					SCALE_HW_CALIB_THERM_VOLT)
+ 	[ADC5_BAT_ID_100K_PU]	= ADC5_CHAN_TEMP("bat_id", 0,
+ 					SCALE_HW_CALIB_DEFAULT)
+ 	[ADC5_AMUX_THM1_100K_PU] = ADC5_CHAN_TEMP("amux_thm1_100k_pu", 0,
+diff --git a/drivers/iio/adc/qcom-vadc-common.c b/drivers/iio/adc/qcom-vadc-common.c
+index b03cf584b165..101b3c724f8d 100644
+--- a/drivers/iio/adc/qcom-vadc-common.c
++++ b/drivers/iio/adc/qcom-vadc-common.c
+@@ -309,6 +309,10 @@ static int qcom_vadc_scale_hw_calib_therm(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+ 				u16 adc_code, int *result_mdec);
++static int qcom_vadc_scale_hw_calib_therm_volt(
++				const struct u32_fract *prescale,
++				const struct adc5_data *data,
++				u16 adc_code, int *result_mV);
+ static int qcom_vadc7_scale_hw_calib_therm(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+@@ -333,6 +337,7 @@ static int qcom_vadc7_scale_hw_calib_die_temp(
+ static const struct qcom_adc5_scale_type scale_adc5_fn[] = {
+ 	[SCALE_HW_CALIB_DEFAULT] = {qcom_vadc_scale_hw_calib_volt},
+ 	[SCALE_HW_CALIB_THERM_100K_PULLUP] = {qcom_vadc_scale_hw_calib_therm},
++	[SCALE_HW_CALIB_THERM_VOLT] = {qcom_vadc_scale_hw_calib_therm_volt},
+ 	[SCALE_HW_CALIB_XOTHERM] = {qcom_vadc_scale_hw_calib_therm},
+ 	[SCALE_HW_CALIB_THERM_100K_PU_PM7] = {
+ 					qcom_vadc7_scale_hw_calib_therm},
+@@ -583,6 +588,17 @@ static int qcom_vadc_scale_hw_calib_therm(
+ 				 voltage, result_mdec);
+ }
  
-+	bat_therm_sensor: thermal-sensor-bat-therm {
-+		compatible = "generic-adc-thermal";
-+		#thermal-sensor-cells = <0>;
-+		#io-channel-cells = <0>;
-+		io-channels = <&pm7250b_adc ADC5_BAT_THERM_30K_PU>;
-+		io-channel-names = "sensor-channel";
-+		/*
-+		 * Voltage to temperature table for 10kΩ (B=3435K) NTC with a
-+		 * 1.875V reference and 30kΩ pull-up.
-+		 */
-+		temperature-lookup-table = <
-+			(-40000) 1673
-+			(-38000) 1649
-+			(-36000) 1623
-+			(-34000) 1596
-+			(-32000) 1566
-+			(-30000) 1535
-+			(-28000) 1502
-+			(-26000) 1467
-+			(-24000) 1430
-+			(-22000) 1392
-+			(-20000) 1352
-+			(-18000) 1311
-+			(-16000) 1269
-+			(-14000) 1226
-+			(-12000) 1182
-+			(-10000) 1138
-+			 (-8000) 1093
-+			 (-6000) 1049
-+			 (-4000) 1004
-+			 (-2000) 960
-+			       0 917
-+			    2000 874
-+			    4000 832
-+			    6000 791
-+			    8000 752
-+			   10000 713
-+			   12000 676
-+			   14000 640
-+			   16000 606
-+			   18000 573
-+			   20000 541
-+			   22000 511
-+			   24000 483
-+			   26000 455
-+			   28000 430
-+			   30000 405
-+			   32000 382
-+			   34000 360
-+			   36000 340
-+			   38000 320
-+			   40000 302
-+			   42000 285
-+			   44000 269
-+			   46000 253
-+			   48000 239
-+			   50000 225
-+			   52000 213
-+			   54000 201
-+			   56000 190
-+			   58000 179
-+			   60000 169
-+			   62000 160
-+			   64000 152
-+			   66000 143
-+			   68000 136
-+			   70000 128
-+			   72000 122
-+			   74000 115
-+			   76000 109
-+			   78000 104
-+			   80000 98
-+			   82000 93
-+			   84000 89
-+			   86000 84
-+			   88000 80
-+			   90000 76
-+			   92000 73
-+			   94000 69
-+			   96000 66
-+			   98000 63>;
-+	};
++static int qcom_vadc_scale_hw_calib_therm_volt(
++				const struct u32_fract *prescale,
++				const struct adc5_data *data,
++				u16 adc_code, int *result_mV)
++{
++	*result_mV = qcom_vadc_scale_code_voltage_factor(adc_code,
++				prescale, data, MICRO / MILLI);
 +
- 	msm_therm_sensor: thermal-sensor-msm {
- 		compatible = "generic-adc-thermal";
- 		#thermal-sensor-cells = <0>;
++	return 0;
++}
++
+ static int qcom_vadc_scale_hw_calib_die_temp(
+ 				const struct u32_fract *prescale,
+ 				const struct adc5_data *data,
+diff --git a/include/linux/iio/adc/qcom-vadc-common.h b/include/linux/iio/adc/qcom-vadc-common.h
+index 3bf4c49726a7..7586016ff14d 100644
+--- a/include/linux/iio/adc/qcom-vadc-common.h
++++ b/include/linux/iio/adc/qcom-vadc-common.h
+@@ -93,6 +93,8 @@ struct vadc_linear_graph {
+  *	voltage (uV) with hardware applied offset/slope values to adc code.
+  * @SCALE_HW_CALIB_THERM_100K_PULLUP: Returns temperature in millidegC using
+  *	lookup table. The hardware applies offset/slope to adc code.
++ * @SCALE_HW_CALIB_THERM_VOLT: Returns voltage in mV of a temperature channel.
++ *	The hardware applies offset/slope to adc code.
+  * @SCALE_HW_CALIB_XOTHERM: Returns XO thermistor voltage in millidegC using
+  *	100k pullup. The hardware applies offset/slope to adc code.
+  * @SCALE_HW_CALIB_THERM_100K_PU_PM7: Returns temperature in millidegC using
+@@ -114,6 +116,7 @@ enum vadc_scale_fn_type {
+ 	SCALE_PMI_CHG_TEMP,
+ 	SCALE_HW_CALIB_DEFAULT,
+ 	SCALE_HW_CALIB_THERM_100K_PULLUP,
++	SCALE_HW_CALIB_THERM_VOLT,
+ 	SCALE_HW_CALIB_XOTHERM,
+ 	SCALE_HW_CALIB_THERM_100K_PU_PM7,
+ 	SCALE_HW_CALIB_PMIC_THERM,
 
 -- 
 2.56.1
