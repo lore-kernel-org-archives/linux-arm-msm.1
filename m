@@ -1,90 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794903868;
-	b=uxYj+oDcKx3UDm4z1VEy2a65nyQuUcz3flCi23adj0W8oZJ/DZ7a3LeijUks16GnUSq1
-	 u29NrQuc9cG3tIFSyzdAl5kEAeveTa4oImh/ZyfU7E6xkPc7IOket5CEizuUxNbgKwMLk
-	 ZDfUCG9GhAGQ7hqwpc5nRHZRa6U6YZPzxAN9XP3Ik9kvVhYHi5zx/6+aMIwl8e/Xkh3GU
-	 LYvGI4ocBkKnz/3fFn/x+R1ve4yLvO2LxbsYYmppCGDQW2UfjM7vWwBeLJA3BQSg/VX8C
-	 5X/5xg0CHjDH+YewX8ZKHY1Oype8imiSuy69OE5j2PKOnwvxEYsUrgmgCs/LKLdvAFA==
+	t=1794903869;
+	b=0yYF0HEcY1HVES27OLp9ISdwPrVc3DerLEzrqUS3xqJUGE6uoinENzXZZztO5eMv5Ib0
+	 15GNZd6H9osy3PEliItm69LMOgp3edMlqUVCYxpJpfqqdmY/1wfQ1mfYvt2Q38he6gb7j
+	 JhfZ3kYklr4gglb9yueTHTUH/jvZSAROJmD36a6hbFPGd2JfRHP2wlR3bcGy/4nO0Xhiq
+	 S965pzJHH3MhvHwsmiunSN8nlGh26PbC+/Cnq3FOTerJhm/m5QkoCpd8S3msGDqxFFLp/
+	 5sj5xrZKaGVQQaQTbTqA8n4sdZo17+KIOCWIYqtHqIg6Fh1zXfoZzgfcFagi3/l87GA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794903868;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794903869;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=qnzy4BU7CFfQoiDwnU+oR7x0cJx2X4FyBHG/I6YKRMg=;
-	b=07YQp2JGavJHCUteF4qvDKS/FvShwvyU14oK48NRFPyjQLAimJ4Irywl05o6bZPIENNh
-	 1xGhPD0DW+gmLSkH8VK9cS8Nwf2VGau9CQaKnQ7fqwsy0Hz7Bv12ydHouRJCEXapREfXJ
-	 Z82WChlixZXnGPXZyw6WKyU4Uj3xsRuHAZsfoUm5NQybIesPuqAhGl53ySFoZXBIo75ZQ
-	 W4NrcFBg9v70aLt0+p9tNMadB0oewUYxsN4tEB9OqthbUXkq/ECjC70TajykwZH9THjAX
-	 DEzYppOAxUDuVcsevcQA3Zfiv97x3r4hxURQ1jC6aVlk758Hv1DPNMB22HwnvfE0Z/Q==
+	bh=EgrVZa2eZmqWGHTSXzSBkx9rK3FiMfFpfyVDiLiMkq8=;
+	b=1MBrzYxhHrQCSbaRxk7ohjU5sIea1d8x7nWzbITekkL8rJZiTEfb8+pPhSAbOpzz7q2i
+	 etEC8QDiBW+7U4WXg6E0q+bIiw0b3pgrMAn8piBJtc91XkXqJzoT/1cDkpfsvTaLrud6A
+	 EFwG16OF4+tLhqBqeITkLMFR0A8YY79t767c6zMlr3iIe7f/nM5Bol8iRkiyRddtcJEQK
+	 NcvPmt/J3pyHEdfeS6mJ+2mjspS+b4WO38V8AM+e3Za1RaGk6C9ZrKvh6/UfupS1G+dfb
+	 0yIximGdf9g6h1lqox9H0FrQcKL9dzpfSea4Kby+MmtvqR3XKAAcEzyhUkIi5UNtp0w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=fairphone.com;
 	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=OOSmJG84;
-	arc=none smtp.remote-ip=209.85.208.41
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=qJ0w7yjt;
+	arc=none smtp.remote-ip=209.85.208.47
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA166606A895
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:24:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CA166606A895
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE72E606A8A4
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 08:24:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE72E606A8A4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=OOSmJG84
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6b7a488a0a4so4846889a12.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:24:27 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=qJ0w7yjt
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6b7efd3bc26so3051576a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 00:24:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1794903866; x=1795508666; darn=vger.kernel.org;
+        d=fairphone.com; s=fair; t=1794903867; x=1795508667; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qnzy4BU7CFfQoiDwnU+oR7x0cJx2X4FyBHG/I6YKRMg=;
-        b=OOSmJG84RijGLublSYWVTMpImlN/WVaYVWH8oU+ddcnl85mJ/nXFQyXqkaCNhDH+47
-         KhPkhKvIgNqhs/kM6bF4Bjnb8RAXPDNiq+6SRu1e4EJd5VM2sQCBSKFGSnfCqWk9sOeV
-         MIVJpk5h3nFj9f/1YrTEHJMEXcWrwO99d/pZ5BtX58KFjfbONFw225vcTxt9ec8AUS/y
-         2axT99gaXokVpb6sSCIlV0RXDZWOkSp2aDJuhAZhA3KYRVANLXZ0bHRnUjRTl+KsPlKC
-         aKx7YZKcZ3YEuWgllL/cLAeG8Fp9dk+/dWZQ1/7ZMIicNIKl+4smwKMlxNp6B8uf2lWw
-         hoig==
+        bh=EgrVZa2eZmqWGHTSXzSBkx9rK3FiMfFpfyVDiLiMkq8=;
+        b=qJ0w7yjtJE1lC1zKPwOibwHew9VyeF40XwkE7/3yvx5PT+Ju5NAaJ4PAYpSd+gwHGY
+         w7cc1v7y04SypaBVvpt0FdJ28SLaaLsSZoQeNlJY+q4fNMRgEosPLHV3CHWwRikNnAx1
+         GmpPsBD7FywbCP4QoC/tQcG+Bwl3jGw0dQYN3ntPTRr5NsIOkJK7aiGBYTPyHA9B3Yhf
+         m9wg2+ELiGZz1v/ioIhxWmVh2DL4jz1BZ6oJLEFOPFEMV0/0NSkxHHhQAeV0VysiAjI7
+         ZrbLuE9PTGnkywNGKg28gayA6JsZ5rWJo/l+NwLWZQZynBQktGrHxtKU7fZkqerZZW1Y
+         G6BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794903866; x=1795508666;
+        d=1e100.net; s=20260707; t=1794903867; x=1795508667;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qnzy4BU7CFfQoiDwnU+oR7x0cJx2X4FyBHG/I6YKRMg=;
-        b=jvqRVMb3E0hVg5eatu3zoPbIG6d7dbDqQP4QLuZCf1KCbXL1S5KXGpOaGmVRnN4aZn
-         VdjytUXpo2S4zv9tZxbDeV+HG8U++3+AZl7Qv03yCYYT/Ys1htt4c+6lelgnWppoIAKc
-         E9wdS9ZqT8/0fAkV+TT0IUDVWLAFQaJcyP3sFnfv0DM3JxuDXapgm8rR4fim6oi9qqOy
-         +N1fd13rHiuOTzyRGTLETWtig52mMyGHa+kEfjVyE++yM4mInjw/sy1wsCssj5chK+SB
-         uihFnaDMfLtO7/NBp6bygUBp23bfLGrBPc5KgbKSIWGHrJTAs+fgxy2BY1ZNm6Itx9O2
-         8bBQ==
-X-Forwarded-Encrypted: i=1; AL+hErGGXmQH/4f1wgKp508P/z/jOha/pmVPxhkFBhhYzvYul2qmVucP5E981k5ln8n98GCFvBrnp+VOtD1Bs8ul@vger.kernel.org
-X-Gm-Message-State: APuU4Z8QBz38vSjf49q5BR9cPzupLWbqVjs7/npsSezXf9XFmhUuz/w4
-	rWoA+sJcqEeTcLZMASR+9j15BNX6Fz2JAUP0Mswn4whJepNVpD34Mwku1AKcxEzY4UI=
-X-Gm-Gg: AYBFou0jl8bRF8ThfVVVoXuVjqGCJt+lD5JgokGgXd4ZAQn98VQuzo5JvnWbpijhhgi
-	vz3SPTnEvr9hpjn5a9VVe2gMit75LkX27xAtd5qQfpMwdCiDfTZiKn07iRtaWynvZNMM1ay+YAS
-	Ta4mVUqUxCCCDlq3uZkgdC3F9b7dCxKlWmHHrnu/yhcyj8qBcO5S5Wk9f/La4RvmVWaPMbZuBbw
-	MgcOB39lKW+CrcMGBF4RimKNz+bYjqyyXHKhEIezPpKuB/bUODs2LF8HkBlYSfD8R8PLQ944YhW
-	TSHYzonX3OJmXT2hPvlswHLSp7zMDe+/clxDyBj5r4ipURbLOFNwzvt+t4CXCP5Z7Cj7riMMWg1
-	ai2dVCOEagAIUaBsOigHIZ++A0Y7nmA/8oKo0/Zd3hr2DeNOax3irgEZfYJD3pT/+zkSN1WVLsm
-	o3rPu154R6gowsoswRjlfZXtORGCPyWvXizsX1vsLl40bCx/huklgL3opXH3fmo7MMW6ulVD2M2
-	MdMA9wuUupx6EPTAG+7luXJJ6hA2ozmg9fyZdE8HUS1849t7e8IMBKyk8e1a4pfXscRjF3A+9w5
-	tuUowSi0nKMbAClOUNAiHNK+JsKjBtTs9T+mUp7wZaJLIXQLpJ8A5MPcrSHL4mGFG2HDY3MJ9eA
-	JwyTvJpcPzLZerg0FYd+zxq4uuWYUkUtV9A3hFp3WS5yulcjJ
-X-Received: by 2002:a05:6402:210d:b0:6b7:9ced:824 with SMTP id 4fb4d7f45d1cf-6b7c0c6f70amr9699533a12.26.1794903866141;
-        Tue, 17 Nov 2026 00:24:26 -0800 (PST)
+        bh=EgrVZa2eZmqWGHTSXzSBkx9rK3FiMfFpfyVDiLiMkq8=;
+        b=220Eazhvr82zAP2gXFUEqIvp268C6zL2zZGH9X68+hvCuAP6j8XdjNIOyQaTfv00yG
+         a7XhVCXg8ZsbbkSRRAy+RPmPADFsLHynJuIJFpEMrcDznAfSjrnd5DkAvXG9l1ZpQO/v
+         Kt1us4pXAQ23h6qpDJx7iPHEZJz7fmbp+9GArPSWqXiGx2F1sg8UViMMYfRuGzKrknAo
+         LLaIHv2ygQ9dY2XcfNfgwIdGx2Ivm3NWZhjredXBjpdvg7FvP/Cce4+vhwnoePQ2njH7
+         OlbSm1SUjngugMWwbzygOes1JcsgpRvCwpq9mH0aWVuJ3+WbvO6tDcX9nmEUWdTUkto1
+         4Suw==
+X-Forwarded-Encrypted: i=1; AL+hErHe0GiBrQ3iOxJk2hgm+MpSNWeBwX6hGCaXI8q/Vk6+h4ctKSof5F6wHp06fMahIwEY57z9+LoMtWssZLvB@vger.kernel.org
+X-Gm-Message-State: APuU4Z9OZrKLUuwWI2VmjbMSblgQRXH7CmV6VYwsaCTEFH0BsT9fQ9VN
+	t5lP0Y2bgECrWYHa+6oens+oaTOvz+3g7FkM3EL6fIVnYNpNeOsmw4Y4msy4Fei7uS4=
+X-Gm-Gg: AYBFou2qf1lYVwRhIVrJHF59OqpSHkM9avLGHyC/TbK7gf5tFLDsxZusBRBJ9fnDgPz
+	4QCF+ZiOxmonch8rk49aFM92ACMx+UIyl0Xeg4lLuz8u+yUgvGKiQIlTTNlN/JZPdXNWVN8YYvC
+	jN/fX12/9HicT/rBbsvIUS+J9tMWKSwnHHYGASCBPhTRx3v5lsFpVkTzvRpLwnOWhzlQE/zlEa9
+	i1nPrjvPZwSqkT8L2GBPld8shPHRwrC1fFXNVmMp+zkt78K73eT/1zIbhJK8oM6nhqx8jOQex+Q
+	b3bn3WJr10PSY543g5GsNR8iAlLkGlNeltrCzJwIbowUsrVzVAeUwW1iFFNjbTb9Nlh+HUbMrTF
+	+DTtL6UhKECOeRUxaOk04sJRoMv6eYDfKktA9MyMk0WKimk6dl+WEXmOm87QFKIsFEJPdMerypd
+	Hc+r4+e6v5aJ1QEb/XewH1VzWDIuJt1H0qrwU3BLFpy1UDhIB09YIzSvcGxIv7Vc3YnAU+i3LGp
+	LjB82itx/8HM5aA8/QPaatpyGTKuTovRu1jfVYNYLP3Kcoqx5HAl4Svz66WOQB/IpxHRheJf6qy
+	zRm6MP7qHj2YrpP5hoHAQ7SIWOFAc5816lEpXQblQsj78w9qu690ka6hleVhChoW9pHmoXUdJI1
+	vJ7jOsmCm/8bFrYvcvOkZuhVCc7R8H8RoYLIC8v8OOxCJyUpj
+X-Received: by 2002:a05:6402:88a:b0:6b5:5530:c9af with SMTP id 4fb4d7f45d1cf-6b7c0bb79ebmr6791992a12.15.1794903867414;
+        Tue, 17 Nov 2026 00:24:27 -0800 (PST)
 Received: from [192.168.101.179] (2001-1c04-0504-7401-4b2e-1820-6d24-b264.cable.dynamic.v6.ziggo.nl. [2001:1c04:504:7401:4b2e:1820:6d24:b264])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c23611casm5616953a12.9.2026.11.17.00.24.25
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b7c23611casm5616953a12.9.2026.11.17.00.24.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 00:24:25 -0800 (PST)
+        Tue, 17 Nov 2026 00:24:26 -0800 (PST)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Tue, 17 Nov 2026 09:23:12 +0100
-Subject: [PATCH v4 2/5] dt-bindings: thermal: generic-adc: Document
- #io-channel-cells
+Date: Tue, 17 Nov 2026 09:23:13 +0100
+Subject: [PATCH v4 3/5] thermal/drivers/generic-adc: Allow probe without TZ
+ registration
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -96,7 +96,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-bat-temp-adc-v4-2-14d5d309ebfa@fairphone.com>
+Message-Id: <20261117-bat-temp-adc-v4-3-14d5d309ebfa@fairphone.com>
 References: <20261117-bat-temp-adc-v4-0-14d5d309ebfa@fairphone.com>
 In-Reply-To: <20261117-bat-temp-adc-v4-0-14d5d309ebfa@fairphone.com>
 To: Jonathan Cameron <jic23@kernel.org>, 
@@ -116,50 +116,90 @@ Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
  devicetree@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794903862; l=1375;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794903862; l=2598;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=I/NJZJX7ehckBNBNEstT8hdZRvbJ5dgDjnQjjzYNTLs=;
- b=Va/ZiG9pLV9kgIqnenCHkblc6VfgP1Axc4rzf1uTf/VYu24H6meIDJzjF7cPq8pDHyZN9T6da
- Mb3xtpa7EcBDjzIwW6JQazspouxo37NOrWeZduY4MV8OdBzf5BelcoA
+ bh=IewvetNZMf9FalFWEd0iq4I/lCqxZHq/FLtsO53H2jA=;
+ b=K0QTEVwf1uzSjckbKxKpcCKrAkkngarK9NjPv21hTvhJ9thkoh3P+WGons6vpo/CWOd5JylkV
+ h4KSZ3LpFcKCi0kZt4zAzExS9pRPsxol5yvMrSY/2FHbt73E/Xe8w2m
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Document the property to allow using this sensor with io-channels.
+If the devicetree node is not referenced in a zone under /thermal-zones,
+devm_thermal_of_zone_register() will fail with -ENODEV.
 
-This means that the output of generic-adc-thermal can be used as an
-input into a different node.
+Since the driver is now also registering as an IIO device[0], allow the
+probe to continue without the thermal zone.
 
-As a specific example, generic-adc-thermal takes in an ADC io-channel in
-Volt, outputs temperature in degC, which can then be consumed by a fuel
-gauge driver to provide the battery temperature readings to user space.
+We also can't use gadc_thermal_get_temp() anymore because we haven't
+necessarily initialized tz_dev.
 
+Link: https://git.kernel.org/torvalds/c/3762f5851ac5 [0]
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- Documentation/devicetree/bindings/thermal/generic-adc-thermal.yaml | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/thermal/thermal-generic-adc.c | 27 +++++++++++++++------------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/thermal/generic-adc-thermal.yaml b/Documentation/devicetree/bindings/thermal/generic-adc-thermal.yaml
-index 12e6418dc24d..317fc39ed46a 100644
---- a/Documentation/devicetree/bindings/thermal/generic-adc-thermal.yaml
-+++ b/Documentation/devicetree/bindings/thermal/generic-adc-thermal.yaml
-@@ -24,6 +24,9 @@ properties:
-   '#thermal-sensor-cells':
-     const: 0
+diff --git a/drivers/thermal/thermal-generic-adc.c b/drivers/thermal/thermal-generic-adc.c
+index c6a7a65aa6a6..b73cd47bffa6 100644
+--- a/drivers/thermal/thermal-generic-adc.c
++++ b/drivers/thermal/thermal-generic-adc.c
+@@ -55,9 +55,8 @@ static int gadc_thermal_adc_to_temp(struct gadc_thermal_info *gti, int val)
+ 	return temp;
+ }
  
-+  "#io-channel-cells":
-+    const: 0
+-static int gadc_thermal_get_temp(struct thermal_zone_device *tz, int *temp)
++static int gadc_thermal_iio_to_temp(struct gadc_thermal_info *gti, int *temp)
+ {
+-	struct gadc_thermal_info *gti = thermal_zone_device_priv(tz);
+ 	int val;
+ 	int ret;
+ 
+@@ -70,6 +69,13 @@ static int gadc_thermal_get_temp(struct thermal_zone_device *tz, int *temp)
+ 	return 0;
+ }
+ 
++static int gadc_thermal_get_temp(struct thermal_zone_device *tz, int *temp)
++{
++	struct gadc_thermal_info *gti = thermal_zone_device_priv(tz);
 +
-   io-channels:
-     maxItems: 1
++	return gadc_thermal_iio_to_temp(gti, temp);
++}
++
+ static const struct thermal_zone_device_ops gadc_thermal_ops = {
+ 	.get_temp = gadc_thermal_get_temp,
+ };
+@@ -90,7 +96,7 @@ static int gadc_thermal_read_raw(struct iio_dev *indio_dev,
  
-@@ -58,6 +61,7 @@ examples:
-     thermal-sensor {
-         compatible = "generic-adc-thermal";
-         #thermal-sensor-cells = <0>;
-+        #io-channel-cells = <0>;
-         io-channels = <&ads1015 1>;
-         io-channel-names = "sensor-channel";
-         temperature-lookup-table = <
+ 	switch (mask) {
+ 	case IIO_CHAN_INFO_PROCESSED:
+-		ret = gadc_thermal_get_temp(gtinfo->tz_dev, val);
++		ret = gadc_thermal_iio_to_temp(gtinfo, val);
+ 		if (ret)
+ 			return ret;
+ 
+@@ -193,16 +199,13 @@ static int gadc_thermal_probe(struct platform_device *pdev)
+ 
+ 	gti->tz_dev = devm_thermal_of_zone_register(dev, 0, gti,
+ 						    &gadc_thermal_ops);
+-	if (IS_ERR(gti->tz_dev)) {
+-		ret = PTR_ERR(gti->tz_dev);
+-		if (ret != -EPROBE_DEFER)
+-			dev_err(dev,
+-				"Thermal zone sensor register failed: %d\n",
+-				ret);
++	ret = PTR_ERR_OR_ZERO(gti->tz_dev);
++	if (ret == -ENODEV)
++		dev_dbg(dev, "Thermal zone sensor register failed: %d\n", ret);
++	else if (ret)
+ 		return ret;
+-	}
+-
+-	devm_thermal_add_hwmon_sysfs(dev, gti->tz_dev);
++	else
++		devm_thermal_add_hwmon_sysfs(dev, gti->tz_dev);
+ 
+ 	return gadc_iio_register(&pdev->dev, gti);
+ }
 
 -- 
 2.56.1
