@@ -1,60 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794956677;
-	b=ra6QiHhgDI7RkJ7sSwXqf8IHgfBBUb0VsooEURUpqN1w9VyErDLH8gSosPK8AvMHuVTg
-	 mtkfbAn4bRGFWb2jjq/DHLB2kjZRXh21SfC4H+L/5+YEP4T2XzXQXbn0PxT1m1TbwUBSW
-	 r0ZNMv6pLdmJDPQQhc1lz3/41uw7z0R9T8gWPsb2HMWaONhbYftyq+RlcEW5IAAPvs6g4
-	 qx4n2Tvio2cPIs1zrQec5Fj6/6IcaXAfUC/uiH6nQLWB/L6bGaETZx0Icse4GRDU2VIlW
-	 GGnfqjuMQK8Lcnvk8v2unN1LYAWU6sNUiL9PA+rtN9+BxdnGSS2cdJ5f0mYFGpIJIyA==
+	t=1794957726;
+	b=iGXlm24LUEEyGi5yMjXqSnCz5XT2/lgaM3yzM0CAIO91rL6FC6vSyj/I+GY5jhWJVFTz
+	 QtOjZxcaUTfWW/bDnSYhqDva/yc7epesMHleFHuhn49Lx3I6Cb/huCuUukwK3FScRv9HR
+	 4tIxWymTVPC4bhU+LRnCxKx8x/+l9rIFi6jRt0yhA0hoJT13Bk0pFhOZZaWcLpnLYKVwH
+	 KLY2/RnaNzeeiMWF9LDc0e2fMmJAH0burFQDufI6XaQBnp8Vh+tkLy590eQJouIEaV4pD
+	 JKOd3wzPtQPX9jBwXtSyYaG3HNBSBKOktK3/V1cOr6/P2pb940punROzGemMDikh0Zg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794956677;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794957726;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=NpQhc381XiJQ2fH83GjkO0QvX8xd4FEwf5E14MxfCaY=;
-	b=joRgk1h4Z+LjWJRIMKK13yic/P057jyFimPaVhKdtiMBoopm1oFZN9lW+GX2tEjIf5m4
-	 cxyoIP2bJLkfG9rGfuCS5gcZtLzycLfRfRUF7akpGfNKsKKjcFkh8BqCcbZVOfqM+H1za
-	 IsoRwJaCjnLwa3KtZoCnwzRyE1lvqJqZU5G4LnrpwIhBjz6QLg7oe+4Ii7mc7GJ6MoI31
-	 cxt0dd94UQ2zC61fx829Hv6sQVTjBVWL/F58h943nlyKoi5ZjuHdi0bo0lAy93hzTmZjv
-	 6gfubuQPVUfvH8NI0mAqV1HXwM1D3FRSLzouAw8CSx19z4ty7XobQx8kThR2g1414Tw==
+	bh=ygUD6LKaufwsn6Rjs6y4Bk6NYn5eKQXWH9peKVdR/gg=;
+	b=smLt/5NFf2ogDEK3Cl/dfp7SbpcP5qUSWjEtXnJe/LFHKaII3PnKMlK4H8/L+C3QVN8d
+	 0kKmMsMvb58HcOEPs8zpsk3Ks3w9s6f6cjEOf/ZUM5jrhne6GO+5qAupSJrc3Pfd3OCzj
+	 CMPVyWn1twaq02ftFx3g2tl1+yBh8pkB3c5U5oeWwX0oEsbE3yQAj5QU0zsQLLp41mQsG
+	 y4n4oGvho9FSdZyaSt+5g19DjJUc7yDPaLE1IuX/OOvklb2+UFySCVzLMLbdhJ4KaBvtx
+	 LX9qs1mxb+Mr3dOHqvRUT8CnXbbi+TP+VpWUx/ddBX8y8Y2iiIIKL/kGGck9HfXWSQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YbWhNvws;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ncjdvree;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75B8A606A31C;
-	Tue, 17 Nov 2026 23:04:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28893606A31C;
+	Tue, 17 Nov 2026 23:22:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YbWhNvws
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 369851F000C4;
-	Tue, 17 Nov 2026 23:04:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ncjdvree
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 935F61F000C5;
+	Tue, 17 Nov 2026 23:22:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794956677;
-	bh=NpQhc381XiJQ2fH83GjkO0QvX8xd4FEwf5E14MxfCaY=;
+	s=k20260515; t=1794957725;
+	bh=ygUD6LKaufwsn6Rjs6y4Bk6NYn5eKQXWH9peKVdR/gg=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=YbWhNvwsaIj18DW+pogt8GI+vju6DCg1lXO2FTzH/nE6fSIKoHigtpnAIdMxLT2Oq
-	 JSmwFacANLecgpfE7voYDdkBpgXXHjXlZlCJsaEvEvFwIC/oZnL43q35NZuQBp25V5
-	 Ymfzf2YtGR2VNHXJHgbqE+P9YfTn+M5mYN2oLvENQKiy5fTjSRkVJwEPcXzzdt9OTu
-	 fI/GQfCwVr85map0ftHa71RMA+jNCaU8pAUSzz5mLt8AQdKd9rVMDEJxcW90GPg9Ug
-	 S+uHMOz8LsrB9x/yldB2137mAB+p0fslaAle3Wwy2N1VDXUKrRRaWUU9H6tJZbl80O
-	 VppkNUiQdg4BQ==
+	b=NcjdvreeN5L9GELNEQybuEBsK8RiQmTQpeqWbT6ECPt4b69jxzLd18vfS6duwbA3W
+	 3uAxA7IFkFu+MwzpvCXY1c687Zkx8BKNEnvJGDkZhQ74d8lyejhuzWa2Xvu1OfbeFc
+	 ukhe1s7a2XQLCe2aeMdtAxxIK9nYlvPPKAJBxjorz7HmDLwDtFvevw+imjmxoXhjdN
+	 fFce83JLtKNIRuerg69c0/iINqK1s+BNcmsqCQrAU8CuMXT2ZLtyWdWimCawrDEH0z
+	 4V9wPSoNF6GmbYFdn7BYzFqC8uIvBTg6NAjC6pn13FVWphdKS1BlEIWBsYf0Ym1v+c
+	 d/ngLbIvS4PTA==
 From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, 
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
- Marc Herrero <marcht@proton.me>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <20261116-q6apm-fixes-v2-0-ea89fb43316a@proton.me>
-References: <20261116-q6apm-fixes-v2-0-ea89fb43316a@proton.me>
-Subject: Re: [PATCH v2 0/2] ASoC: qcom: audioreach: fix S24_LE playback and
- route mixer disconnects
-Message-Id: <179495307219.2707353.8339502612153999902.b4-ty@b4>
-Date: Tue, 17 Nov 2026 22:04:32 +0000
+To: Liam Girdwood <lgirdwood@gmail.com>, 
+ Jesse Casco <jesse.casco@gmail.com>
+Cc: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261112160942.27909-1-jesse.casco@gmail.com>
+References: <20261112160942.27909-1-jesse.casco@gmail.com>
+Subject: Re: [PATCH] regulator: qcom-rpmh: Don't overwrite the initial mode
+ with the boot readback
+Message-Id: <179495432153.2707353.3044269872667802859.b4-ty@b4>
+Date: Tue, 17 Nov 2026 22:25:21 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,37 +63,26 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1652; i=broonie@kernel.org;
- h=from:subject:message-id; bh=5Z8ABWEC5xPS6lG2iuk9aWLFYo/9y6R9jHXMcCTNkGY=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+3G3c+c7UXefvnCbtL94ti33Y6pveJDDN/S5tNE0nZ
- Z5Us9GVjlIWBjEuBlkxRZa4LO6X9SWv1/AdXNgGM4eVCWQIAxenAEykKI/hF5OTu1DCuULzpLZp
- aTceVL9a8uf/m+aVHcu2Lm4TvZq6houR4YjCteNXZny7tmzHx7cfrAu6RIRnzDq2puuyug2v+dK
- U/wwA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1179; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=xAIaSDEb//e5VUnSkayGFDoP6L9h748N3X9P91qPRdc=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+PJw12ZX7h1zUhP8PJy65vyA+IE9xjsaWyh7GU1e3x
+ 8cfSt+2r6OUhUGMi0FWTJElLov7ZX3J6zV8Bxe2wcxhZQIZwsDFKQATaXVlZNgSw8Qh43RsmeLe
+ 7VqRwlJsu1gnLpY9L2P5+er6CfYt9eIM/yNi66usg84JNubfMq6dIqRl7h0mqb1b6kt/4vljFzO
+ D+QE=
 X-Developer-Key: i=broonie@kernel.org; a=openpgp;
  fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Mon, 16 Nov 2026 20:16:19 +0000, Marc Herrero wrote:
-> ASoC: qcom: audioreach: fix S24_LE playback and route mixer disconnects
-> 
-> Two AudioReach fixes found while bringing up 24-bit headphone playback
-> on the Radxa Dragon Q6A (QCS6490, sc8280xp machine driver, WCD9385).
-> 
-> Patch 1: S24_LE was described to the DSP as packed 3-byte samples, so
-> the ADSP audio_process crashed as soon as an S24_LE stream started.
-> Using the 32-bit container size makes S24_LE work.
-> 
-> [...]
+On Thu, 12 Nov 2026 11:09:42 -0500, Jesse Casco wrote:
+> regulator: qcom-rpmh: Don't overwrite the initial mode with the boot readback
 
 Applied to
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.5
 
 Thanks!
 
-[1/2] ASoC: qcom: audioreach: use a 32-bit container for S24_LE PCM
-      https://git.kernel.org/broonie/sound/c/feb416ba626e
-[2/2] ASoC: qcom: audioreach: only disconnect the route a mixer control owns
-      https://git.kernel.org/broonie/sound/c/562b2cc2aa88
+[1/1] regulator: qcom-rpmh: Don't overwrite the initial mode with the boot readback
+      https://git.kernel.org/broonie/regulator/c/d979b7807189
 
 All being well this means that it will be integrated into the linux-next
 tree (usually sometime in the next 24 hours) and sent to Linus during
