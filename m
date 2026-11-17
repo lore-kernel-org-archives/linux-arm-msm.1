@@ -1,110 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794929795;
-	b=pjNGNHs/U0GFFRn2K6KPaUH8MeZXLKZ2vmbztFHi0hzxqMBCmVgKuoX2eaKKESLA4NcV
-	 lmsfFTtRfRdpLG0wlog1K/9C246J+WWv5h0U7isnhnwPX53ezrm8a1C9zqKCFP9etxjei
-	 kqz+cQEW0m3+Gs2zC69S2Chx3qtyoLfEjxu5LnF0VJvMT4/6pQqEwpi0jYmfVW7iyScLt
-	 dfJuo0rQgvze6Yvf+Y53G38OgPowcw+sGB6ynwI7GY4ytWzopgFJgLUzMXLzbPybSsQJ5
-	 mhxNqqZaI0E61YlV1Jb+NjmO/YfG/i+fD8IzS6F312vnXtrvPCzgsXdFLH7pyIxWdjA==
+	t=1794930068;
+	b=Bomes+ldcaAb2VArHTwaQeo6XWV92OXxq4kG8MIjOabx+wH+GXSCakDslfN8U8EiZZ98
+	 rXj1yrYf/uk5CLiwcJQtijF8vwWVeMNjya26sAJ23m0mt9+u3e9xr8NCXi7wE3UuAxdYE
+	 V9/vMsyjsj74MD5pdGnlejXa/y/JSPrjs5b0m0Ptal0Ns5xP2rKwap4fA5JI1Vy6ntAku
+	 331IgqZ5/ldWfBPpx+wbar6xJcCb3SygVHC1a7JOle+O+MHUVgTmdsm/8OrtCEnlhVOiT
+	 DWqFMmEi7y5xvqmXVr3UGXnnjiG8bAOgOeJaESoHLc3YnZ4zlKbN4++nb5bEGnnkUXA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794929795;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
-	b=EuKguyw6KR6syxmRmnh8P8u+WVOegzLhmgHFXJfuUO4OsOW1zQeSbvgu+mNT64B24YT3
-	 jEHj/TIC6hmoqndmGJGk9bwoW07zKwYqlzBNNeuP+02+lwg/oeu8BBsyC7DyRckd59OWB
-	 do/bBzjBNIxTX7auLvD+QaQDxr87gy3XOEHdXKGvaCeYSc124ClUesVyyPIZISeA52+pT
-	 MtSULJtpYPxmpLGHkBm6O8qyeBl6JzlAFQQEOUvzPE9bDMHviZxSBFN6z1fB+C86jTzFl
-	 +EPkt7QbYbtfi5ctC+vd08RH0eJxd5LspCAyDhb29DTZ7HdYpwJN/bw8frqKzbx9TLA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794930068;
+	h=Received:DKIM-Signature:Received:Date:Message-ID:From:To:Cc:Subject:
+	 In-Reply-To:References:User-Agent:MIME-Version:Content-Type:
+	 X-SA-Exim-Connect-IP:X-SA-Exim-Rcpt-To:X-SA-Exim-Mail-From:
+	 X-SA-Exim-Scanned;
+	bh=ADeZTUG4nb3axn4kjrDhg1zAcLadBlUVGSnVkOKn6IA=;
+	b=WYKu+dQToy9hkESKGgnc1941O/scxVqSp74JceCfnbwkBhpi6bQhjK+PWCYHU0lk+d5A
+	 RPKQyvdetRy5MkkZzZWT2xSz06AyKnLVU3IMvDH0Jpf3MSy9lzX3bP3jRirb3ix2Eu0CL
+	 eb44TK5ew4jw+iF30KYJzigPu2OL3qtx8KBj7bKMIQQT8oDP4LucK2T3SvQyp1idBHXHk
+	 g8+eQozXKF6X4mboWEk3D2wrMoW5VUwkjOaRCTFm++J/bmukMhz0152Uern3uYqdNuo2t
+	 +je4M97Vg1YYPchehDzyt6AfqgpVPUbQjKH8tYIrnW5ET4wop0gC39w3oQLHalFvPgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=anHTQfGT;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="eWbrFrw/";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="IP54/r+V";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A6DD60A381E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A6DD60A381E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09387606A31C;
+	Tue, 17 Nov 2026 15:41:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=anHTQfGT;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eWbrFrw/
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHFQhQd534589
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=; b=anHTQfGTNUfJhltw
-	JdjFJIw1vlt50liTTE6kzzm3wE6ww8FHTIic2iGqzuK2CJF+04/IfTPElzGT8eFl
-	VRYt3GnTMHEp76+IUMgYCm4WYQzpVg98IBG47F+YX6rU7oegkq3PtMcfjEPaq+NP
-	9+D/cpze7el9fxHT2uvvJW63o4Qk7oNw++enZEBVhIAXrNWjLPcXLNW0cI9PvBYJ
-	n54o+5JrwwuwCgtGFQNLPf66HgIcGHDmqpdtuvFecu3V+rO9r8bSz4SMRxj/QWpS
-	XjusrJWKWjcukmSJ2wcp3TAK8zYwTeBEZw0sVECBXdspfF73GPFWqrGtG3+29olq
-	xUi1bQ==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0gfr2ewu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:33 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7d2cba05824so4008021137.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:36:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794929793; x=1795534593; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
-        b=eWbrFrw/UCkHtywquS+wnebU/CS265/ydsXk/BYIHDL1Qhlj4tS2l8dCror1TltJUX
-         BBC36q+p69urs6rGkdp7mw6XxfoJsNt3agrQJG2u9+lmG+LlOtlA3jcyp/24Du/KZ+RD
-         cIKfh0i4sUH8hiK0u5UMa9KqCzyK7ahuc1O5I7PyP6eCRAC8jIa2AzXriFXgBq9SFSmd
-         0CePOkKV8smYrXe0TeXjKklcV1TL8sdDdJDbp+xBhVoisJ0HxsVhDlmI6QFeS8NQIIvi
-         gHV4t4wv02/qTsdCM55nwx6oo8RFGK3ZPLf8y7bcXBxbWTYeDVwlY/CyY0FOgF70JFjL
-         K3qQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794929793; x=1795534593;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
-        b=SjMec/S7SSgvqfNr7NUBVzzSvEuSILn5vDhrhPH1Xh4LIO2iygTAqibYrgMfom4MpQ
-         Vr3WqnEcandq3LkQ9AjEPRzCjv5n1G7qr3wIIQRAHQSdmTNzTot5JGJB0lr0fuenulVu
-         t6KKtXv/Czhz4a7JSdLoJLieTo283WSQDhRYsKlOsMcb3iHQvWx+XT1ebb74XMk183pn
-         FAzB4G9zWLSTIEEe7Y+vF04zpkOky7prVy4/y1QNpcE79LZHlAgLqk3T7G5TY3iWCzU2
-         aNiPoHkMD134sIJea6a+GFgbUpMLjM1Ash3NKUGdwquDhfhDNxIaULya/oA7GLnZ/W9+
-         kbJQ==
-X-Forwarded-Encrypted: i=1; AL+hErGCAXufoIG9fVJstSaqIQNx0jzIycs/iyM+knCOKPMBsCY9t2+AJzh8p04xLhugfNjVxRltkg0rW2ukAxM+@vger.kernel.org
-X-Gm-Message-State: APuU4Z9gP+g94WKuga/Ut2J4GZGQn7hqpDa3f/fXo/jux2ieG3hqkk8V
-	pbpmJnuwkeDs9RfYnwK5WcaJylvGAcSA5xn3fc5+koYDcFNb4XMGVUT2ALrxIedqZOOOz7vJ2dO
-	JQhVxi1Za1okxOP7WZAukmgQQDujAGSpTSQpd2Od/7db7t/cfFxzHB0yG9Ihw+DgJR/Cj
-X-Gm-Gg: AYBFou1dypBjvy4bq8ZNu8D4q5B51FLcWLZMMSJgV+EBW+a3SBp3vLnAmt34fhlfrOD
-	q9NsYE78/bxSzg0goB1oyoWGK3AHIa89JI0VAafXlYou3gqc+mxNvzOwidu6R0utSecNRvSh6gH
-	kfqZ+5VA/dT0flbWaCqazGQc4XgcZ9zsGXpT4EgPYH/xO/op6hi2R2+qzEjoHur7ZMR0LEJNqlk
-	Jd6y5Y+b01LrDtAFP3w3J0nWyIYwtNyrIqTLB0Kz2cp5N3EXerc2RRGsjde8DOHCJ+5pIIbZuWU
-	11mG663Vvj9sjUtkRyMKwiTQ//4YiZQColJBL5ZYEE54uuOWhBhwVtoYwGQBAoe5Y0a9PRieNd2
-	V+6yWwL/hsqXPdQSzPyrezVxNVSaAttXflFzPJygR7e84YKUt3dUzHJ/YtqtSJLU0QZO727jTpk
-	Y=
-X-Received: by 2002:a05:6102:5815:b0:7d2:7be1:271f with SMTP id ada2fe7eead31-7d64d8228camr6206096137.31.1794929792710;
-        Tue, 17 Nov 2026 07:36:32 -0800 (PST)
-X-Received: by 2002:a05:6102:5815:b0:7d2:7be1:271f with SMTP id ada2fe7eead31-7d64d8228camr6206081137.31.1794929792052;
-        Tue, 17 Nov 2026 07:36:32 -0800 (PST)
-Received: from [172.20.2.50] ([195.50.164.66])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb7839cad7sm80688825e9.10.2026.11.17.07.36.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 17 Nov 2026 07:36:31 -0800 (PST)
-Message-ID: <65e501e0-b6d5-4204-ba6a-2d35091e2ae6@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 15:36:29 +0000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IP54/r+V
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D57FB1F000C6;
+	Tue, 17 Nov 2026 15:41:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794930067;
+	bh=ADeZTUG4nb3axn4kjrDhg1zAcLadBlUVGSnVkOKn6IA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=IP54/r+VWtpieoKrwFU/ZNX99gK/L1z3dz4iUGhYYXL1qwEiRW9xJse7SpdapBJEs
+	 qP7jIeNE92nAJN9aoh615SSz//YjG+sDSb0fpEttOJSpF3/B8W3aLyVTHVqE8mBXJK
+	 bfjIrCdZ4WsMXdBOHq0JsCh7aWzecmswWKdjxsRk96zjOOiYn9i9crP4PUnfUAaoj/
+	 NjD5uNN4iNO2cg20oZ8uBNXLPK5MOkRplzd2fqzBRKhssaTFUL1iGLt8BuYm0zYY19
+	 ditRSmDOOgXomGjMgttOd9XT9j4pZAH21hRKeutTKt7uEBFzWaI/fw9jgyBA6kXZy6
+	 4LzTdawDW7w+w==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <maz@kernel.org>)
+	id 1xTLIv-0000000H5jg-3EL7;
+	Tue, 17 Nov 2026 15:41:05 +0000
+Date: Tue, 17 Nov 2026 15:41:05 +0000
+Message-ID: <86eccj1n5a.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/3] arm64: dts: qcom: glymur: Add ASUS Ascent QN10
+In-Reply-To: <20261115-qn10-v2-0-19b11603e776@oss.qualcomm.com>
+References: <20261115-qn10-v2-0-19b11603e776@oss.qualcomm.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,172 +76,52 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ASoC: qcom: q6dsp-lpass-clocks: Set driver data before
- registering clocks
-To: yzddmr6@gmail.com, Srinivas Kandagatla <srini@kernel.org>,
-        Mark Brown <broonie@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-References: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=X/rHu2Te c=1 sm=1 tr=0 ts=6afc7481 cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=pGLkceISAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=mFCCqUHryluRUJtW3YUA:9
- a=QEXdDO2ut3YA:10 a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-GUID: TnY4WN2qRiAkNMubZ41J5WiLWRPVI5Wd
-X-Proofpoint-ORIG-GUID: TnY4WN2qRiAkNMubZ41J5WiLWRPVI5Wd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA2MiBTYWx0ZWRfX8HgDTw4hOXI4
- Oac2m08YXeQVPYoxl7+vmZOTNWd84KRzA6v1RVSCcKHSaun7CZCgIYkSoo117rauUOXka+FntZI
- oV6ZYIZUesj63G7rIgROiwekc5I3hUkQ6eBSU5jsCkfR3bVhsBrajrleMuxXubbg1rCsJdMMEQJ
- gRhQrNN3WUZWf+N+xfwNe1ZnhFbaKrYV5Af/0Eebz1mq2GdkLJH7MhADqapbGkkr5eXszIzzSkT
- wNgUfP0kBBoAoqFjRzNfgKHBWYhSm8lXRKPNwve/9RFfqtuvtFZ50KXRa8swB9byOPo+0qFp4Yt
- wHd5DIHiD5Hyb4f+NcvWjCFKp9TT5io0xmAKdFr2wlCYasmNCOzcQQVqCrrBZNrrlOrcfiBDFh9
- Gn4xf/juEOqaRkZuk7eB/ZO1LN3GQz+P9ZEJtvOwmBc1zz0frpYUxILRRfQRmNhI+2YVDONLkz2
- VTlqtZ56hyFS+mVh2bA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA2MiBTYWx0ZWRfX8C+ZO55pBuO6
- eyVcMHsU5NeLCTI2Eai5e7MUV4r6YNPnhl/7A2KscMRGWyupC4cz2bGoFQ4J1NHDBxX8TdOxn30
- c9Tb8jN8z37rx2FS0HauWIlJhZkouec=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-17_03,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
- lowpriorityscore=0 impostorscore=0 priorityscore=1501 phishscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611170062
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: bjorn.andersson@oss.qualcomm.com, andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, krzysztof.kozlowski@oss.qualcomm.com, abel.vesa@oss.qualcomm.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-
-
-On 11/15/26 1:12 PM, yzddMr6 via B4 Relay wrote:
-> From: yzddMr6 <yzddmr6@gmail.com>
+On Mon, 16 Nov 2026 03:48:58 +0000,
+Bjorn Andersson <bjorn.andersson@oss.qualcomm.com> wrote:
 > 
-> The clk ops of the q6dsp clock controller look up struct q6dsp_cc with
-> dev_get_drvdata(), but q6dsp_clock_dev_probe() sets the driver data only
-> after it has registered the clocks and added the OF clock provider. A
-> consumer that gets and prepares one of the clocks in between
-> dereferences a NULL pointer.
+> Introduce the ASUS Ascent QN10 compact desktop computer.
 > 
-> fw_devlink does not keep consumers out of that window. The q6prm and
-> q6afe clock controllers are described below the ADSP remoteproc node,
-> and their devices are only created once the ADSP has booted and its
-> GPR/APR services have come up, long after the remoteproc device has
-> bound. fw_devlink therefore makes the remoteproc device the supplier of
-> their consumers. A consumer such as the LPASS LPI pinctrl then just
-> defers until of_clk_get() succeeds, and its retry from the deferred
-> probe worker can run while the clock controller is still in its probe.
-> 
-> That happened once on a Xiaomi Pad 8 Pro (SM8750). While the LPI pinctrl
-> probe registered its GPIO chip, gpiolib read a GPIO direction, which
-> runtime resumed the device and prepared its q6prm vote clocks through
-> pm_clk. The prepare op then faulted with a NULL pointer dereference at
-> virtual address 0x350 (trimmed):
-> 
->   pc : clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common]
->   lr : clk_core_prepare+0x7c/0x298
->   Call trace:
->    clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common] (P)
->    clk_core_prepare+0x7c/0x298
->    clk_prepare+0x28/0x44
->    pm_clk_resume+0x10c/0x188
->    pm_generic_runtime_resume+0x2c/0x44
->    ...
->    __pm_runtime_resume+0x50/0x94
->    ...
->    lpi_gpio_get_direction+0x4c/0x8c [pinctrl_lpass_lpi]
->    gpiochip_add_data_with_key+0x7b0/0x10dc
->    devm_gpiochip_add_data_with_key+0x38/0x8c
->    lpi_pinctrl_probe+0x2b8/0x320 [pinctrl_lpass_lpi]
->    ...
->    deferred_probe_work_func+0x88/0xc0
-> 
-> 0x350 is the offset of desc in struct q6dsp_cc; the driver data pointer
-> it was loaded from was NULL. The oops left the clk prepare_lock held,
-> which blocks every later clk_prepare(), and the system did not finish
-> booting.
-> 
-> On mainline the window is short, but it includes a wait for prepare_lock
-> in clk_core_reparent_orphans(), which of_clk_add_hw_provider() calls
-> right after listing the provider. The kernel that hit this had
-> out-of-tree changes to drivers/clk/clk.c that do more work at that
-> point, which makes the window wider.
-> 
-> Both q6afe-clocks and q6prm-clocks use q6dsp_clock_dev_probe(). Set the
-> driver data before the first clock is registered.
-> 
-> The oops was analysed and the fix written with the help of an AI coding
-> assistant.
-> 
-> Fixes: 9ab71ac37240 ("ASoC: qdsp6: q6afe-clocks: move audio-clocks to common file")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: yzddMr6 <yzddmr6@gmail.com>
-
-Reviewed-by: Srinivas Kandagatla<srinivas.kandagatla@oss.qualcomm.com>
-
---Srini
+> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 > ---
-> The kernel that hit this was v7.4-rc2 with out-of-tree board support and
-> other changes, including the clk.c changes mentioned above. The oops
-> showed up once in the 23 boots of that kernel I have logs for, and I
-> have not been able to reproduce it on demand. The patch is build-tested
-> (arm64 defconfig, W=1) on the base commit below.
-> 
-> I used an AI coding assistant for this work. It analysed the oops,
-> traced the probe ordering and drafted this patch and changelog. I have
-> reviewed the change.
-> ---
->  sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
-> 
-> diff --git a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
-> index 94d96130245e..c3628f90fdb2 100644
-> --- a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
-> +++ b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
-> @@ -146,6 +146,12 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
->  	cc->dev = dev;
->  	q6dsp_clks = desc->clks;
->  
-> +	/*
-> +	 * The clk ops look up cc through the driver data, so set it before
-> +	 * any of the clocks can be prepared.
-> +	 */
-> +	dev_set_drvdata(dev, cc);
-> +
->  	for (i = 0; i < desc->num_clks; i++) {
->  		unsigned int id = q6dsp_clks[i].clk_id;
->  		struct clk_init_data init = {
-> @@ -174,12 +180,6 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
->  			return ret;
->  	}
->  
-> -	ret = devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
-> -	if (ret)
-> -		return ret;
-> -
-> -	dev_set_drvdata(dev, cc);
-> -
-> -	return 0;
-> +	return devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
->  }
->  EXPORT_SYMBOL_GPL(q6dsp_clock_dev_probe);
+> Changes in v2:
+> - Move the RPMH regulator override below the SOCCP remoteproc node.
+> - Sort the GMU and GPU node overrides by label.
+> - Drop the unused EC interrupt pinctrl state.
+> - Link to v1: https://patch.msgid.link/20261113-qn10-v1-0-e09b2aa7ccbe@oss.qualcomm.com
 > 
 > ---
-> base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
-> change-id: 20261114-upstream-q6dsp-clk-drvdata-e09d27f289b3
+> Bjorn Andersson (3):
+>       dt-bindings: arm: qcom: Add ASUS Ascent QN10
+>       arm64: dts: qcom: glymur: Add ASUS Ascent QN10
+>       firmware: qcom: Allow QSEECOM on ASUS Ascent QN10
 > 
-> Best regards,
-> --  
-> yzddMr6 <yzddmr6@gmail.com>
-> 
-> 
+>  Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
+>  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+>  .../boot/dts/qcom/glymur-asus-ascent-qn10.dts      | 664 +++++++++++++++++++++
+>  drivers/firmware/qcom/qcom_scm.c                   |   1 +
+>  4 files changed, 667 insertions(+)
 
+I've thrown this DT at the Ubuntu installer, and ended up with a (more
+or less) working machine, so something here must be good!
+
+I get a 2-minute timeout in EFI services though, something that mostly
+speak to the quality of the firmware rather than the HW description,
+and is worked around with an 'efi=noruntime' on the command-line.
+
+Now off to locate the UART on the debug connector...
+
+FWIW:
+
+Tested-by: Marc Zyngier <maz@kernel.org>
+
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
