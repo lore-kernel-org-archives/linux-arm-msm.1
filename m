@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794912959;
-	b=cSCYuu4cAi5HowSAvXowx80hA4c0osc9BJK77Qo00P+etBStNvSOc8i18NqVJEtKQK8c
-	 0anfxN+3gVXopYXluiqZ7NBvwy+VqAJUDgnIg67+seFEID/HN7+fWz9uRyoXym01oCEYw
-	 XtfG762wVxL6rx2DpwPhys++MaOod83mly37GX5JhVRt81R0N91/dFaTE84pLAxeHLBsp
-	 Qy+24H6ZbnRq+l7LwRapV94ab1gx5QQpqoqMcONnVa7/lkD+YTnRkWYysT9PFWEwffK/w
-	 gk8jXOL6gpo6J8LXPypNxrQigYaUS/2orajCKJfIWGujE8x3x2GfE/TX31Iurhffg6A==
+	t=1794913003;
+	b=BWyHL+K8wDGMeTR8FNQlJLcVTFwZP2yxNmlzqmA++rmLJL+coE4j0OxmIiXnuH2PAxl9
+	 7ECfdZRiaX0eN9foH+XN+O2Hq4oL0pt+t4w7QgbpMEG/+UkcMUq4bqh2Je/RbY99ewEXQ
+	 tPsxjwEBt5tNGKqZKVEhXemNPyLXROByUT6tV3o7C8ri2Y2pu8mJCUsPYEl1kelRCoEEF
+	 e9MFSN9mkSqdSvdyZ9tCVexPfMPfyxcGqahLUVo3eUcYn5HmMOWn9QBl1yI/Oa3Z9WT5/
+	 bSQwRbShtIQ4tYcaF6/By6whYLVeowwiwrMzsY38hFgoPVPyDm5cuNePYUJYaZgogMQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794912959;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794913003;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=xS0440FtKfMwEmTrZkEhY2BxW0kibwnd9GhpU6vovwA=;
-	b=oJcC8tnqNWBG36BIJLhtTHTevAyKi3HJ8OITGhhhrxsdxD0e9L8netlzZFl8gJYl9jct
-	 ckYtwLPPOK30mkl29w5s6oiDJ8xQydxFX/yebvj+Y4x7NpDt0zNWHfnNpGlMRhj0df6Q4
-	 V5rKzHRtEc3NLmjMC3d3GjsE+Y/r0qmctKblXlvpLhb07OhbVoeeqdRjCodTjZMtlAeIf
-	 eu19Kx6Ce/5MgdC5NL2a4wPlJhVHEo1UhtU1y+ioGh2YtppX/Uv/gUGxtZsgiogrORGol
-	 PIChApXXwwJ51wIZwY1q6ZOELQdclY3H7JE+1OUxUcPjZLbiNUoVstBDxGfZQ25+HLA==
+	bh=kRR0b/2CxLoJ3+wmiwkw4XNCa+7qpRwB3hSD0k5yFdE=;
+	b=43GUUGUIxYI7bRQd9t4e4PUJk/+KRB1ciP5CdGtDJ8d3bLFyZEv52kDKY0D5ibuNty0y
+	 QYCLtMCoF+Av0rYW3xQu48yvXq81qQm8yhp8pdAIO8y6oyJ5PQYbPkzsw+eOaVD17SAkx
+	 tXM5QG28EqiR3eE4VLpG5FokFXcmu0XNd1dZjBM4pBa5yHJdAQs1jcmAXfqdVjQR9tHqK
+	 72I+oBRvm1k4oQvGa7/7L3MvyKIBw6wdxvIklYqMAps2K6qrPsdT3jFAZuorUc36ReC1E
+	 p9Km4OiSt5ECJ1Gj3D7yjzLdCvzCu9/GVceTkmSBOrO7cWMhsIfenbU2arvgEF7OTSg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Kka8SJrt;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="XB5Tn/Ce";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F62F606A31C;
-	Tue, 17 Nov 2026 10:55:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21332606A31C;
+	Tue, 17 Nov 2026 10:56:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Kka8SJrt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8C8F1F000C4;
-	Tue, 17 Nov 2026 10:55:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XB5Tn/Ce
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19A931F000C4;
+	Tue, 17 Nov 2026 10:56:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794912958;
-	bh=xS0440FtKfMwEmTrZkEhY2BxW0kibwnd9GhpU6vovwA=;
+	s=k20260515; t=1794913002;
+	bh=kRR0b/2CxLoJ3+wmiwkw4XNCa+7qpRwB3hSD0k5yFdE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Kka8SJrtzU+zlKhOxAFZQtNfVqU+QnM/8bWH6BNerV9xtS9uZpIe2+XesLlqP6B4k
-	 Leq2eGqUbGj/oL82k0nqUujo3/fdpw2Wg0FjP3U5HEuuT9e+OcN7PBpbx2L9kLyRqY
-	 q6CQGDm9ax5XogH2fSCIO+YGLUFKxhGNA+SC5vdNxg7RDs3LQqx74PibKgT3GWWyi8
-	 b9lGsjdtuS/cQk8YQPfh+1kP4OCqqCfdvjDaNjXRZK6ccdFGr3jN8ydfwTrdtwruCu
-	 QRiQpH0Q8HJJyvV/7W1MNMHhup2isel+LZXu9PR04iBgZepClNZBRZmP6WergV6ahA
-	 GKgJjwiHa7bzg==
-Message-ID: <cf31b852-60a2-425a-863a-488534033043@kernel.org>
-Date: Tue, 17 Nov 2026 11:55:54 +0100
+	b=XB5Tn/CegR7UQZf7ElAhz7WckJDzJysNV2WDnJLL+rkIBMiY39Ry7QNUMzJFYOwsL
+	 LcfFKAeX3LIh1kxXx+eUKLqfACY+9v41SCIwWtBvvhLh0VENBusztlk6+1b09xF7uW
+	 TSY6/qUeKkWTGHCjP0Gs3Uhfn/EqNrqXY82hPxoIxxjj1prLkXR6bEWNqjnS+QOyg+
+	 kob0oo5KDAy+tj/mLMxaVT90l0AefNkukAwG92ITwiqZqk+NU60o7IzCjk+gj9BBaY
+	 l7EqEs6At2omIJz0kgEhet5uUs1UeiEEy9oOINb6LRotmE9B+aaPxbUGoZM7yuAZlH
+	 PLbft3jGjCk2w==
+Message-ID: <eb25e99c-aa96-43d2-9d7d-61911310df14@kernel.org>
+Date: Tue, 17 Nov 2026 11:56:38 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,7 +52,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/2] arm64: dts: qcom: talos-lyra-evk: Wire up CYPD6129
+Subject: Re: [PATCH v3 0/2] arm64: dts: qcom: talos-lyra-evk: Wire up CYPD6129
  USB Type-C ports
 To: Akash Kumar <akash.kumar@oss.qualcomm.com>,
  Bjorn Andersson <andersson@kernel.org>,
@@ -61,7 +61,7 @@ Cc: Dmitry Baryshkov <lumag@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261116130520.1763088-1-akash.kumar@oss.qualcomm.com>
+References: <20261116120623.1726089-1-akash.kumar@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -107,26 +107,20 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261116130520.1763088-1-akash.kumar@oss.qualcomm.com>
+In-Reply-To: <20261116120623.1726089-1-akash.kumar@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 16/11/2026 14:05, Akash Kumar wrote:
-> ---
-> Akash Kumar (2):
->   arm64: dts: qcom: talos: Add graph port placeholders for USB Type-C
->     muxing
->   arm64: dts: qcom: talos-lyra-evk: Wire up CYPD6129 USB Type-C ports
+On 16/11/2026 13:06, Akash Kumar wrote:
+> From: Akash Kumar <akakum@qti.qualcomm.com>
 > 
->  .../boot/dts/qcom/talos-lyra-evk-som.dtsi     | 121 ++++++++++++++++++
->  arch/arm64/boot/dts/qcom/talos-lyra-evk.dts   |  42 ++++--
->  arch/arm64/boot/dts/qcom/talos.dtsi           |  35 +++++
+> This series wires up the CYPD6129 UCSI PD controller on the Talos
+> Lyra EVK carrier board, enabling USB Type-C role switching and
+> SuperSpeed/HS muxing on both USB-C connectors.
+> 
 
-No such files.
-
-So instead sending complete board, you pile up patches on top of patches
-on top of patches. Didn't we have extensive talks about this? How
-anything improved here?
+Three versions per day is way too much. Even the base of this was not
+applied.
 
 Best regards,
 Krzysztof
