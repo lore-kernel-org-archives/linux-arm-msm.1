@@ -1,112 +1,128 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794898374;
-	b=ahkVPmRivDd6xUuzZeqBUgm75OS80/AeqDDlx811DbmeKfMzhgbfdkSk7Acg/7wyoUIO
-	 n97xEstpAOc0zk9iQ7+aJhELXsTwvhHMVZoadp9uCWPeWUfh+MprpDTH7csD+U+AOhDMf
-	 mngNPUsJIpTdFz4bpd5Z6nMH3PTyEnimFc45C9QKuOxFpNU1huF5cbRs+op0wjwKUyr6u
-	 m09+9cr6eHqJBVNgq6DRbL/tNSR1nMWDCx3ZbqFylURmBRLeS3R8Q3YIzQPgJf1yUluZ1
-	 6yxyFLBzsuObuEoq18S4zXKB6lM6OCe0k1aQcDUUlOmaGykOCnUP1bkvNK6UI472cLg==
+	t=1794899005;
+	b=XaO3CQMsT8BZd8TWuErLHe03GcFX5fMGbEmamlRkPk7q/he2/ZUl2F33gLxdwx6j+l00
+	 Tw7qToOc28DqfBdLPYyXH+/ryUgDfIbRtvdFs6MJJCY9v2coZUE479BMb6wk2qiorn9Dp
+	 /fzQH5RcIxK6cUY5rooz4pDjt4zt37VH/wHc1Sg5hNXP/9jBkDJbjjjkcgitGfoJPl6yj
+	 /0L7+vUuWFGI3UrlvQGopYLAYlAuFhhHJcIrRjV2fhwCsG6XX/KIltAnr7gWRm/vsiZar
+	 YwgyOl0no77mWMBz58cMIwDC+js+4e5iK9pgSW5D1bopCFKHI9L4qjosGZfpVw7e0BA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794898374;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794899005;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
-	b=sKVmTEn/sAArwpSsMY6Q90N+/oX88wKpAH0CH5nRtcr0wfUD+jHaYkEf8/VPt8JFP1KM
-	 eYm6ulMBDpkvtWc5ZbqKGoM/oSVzT1nhxqegYHmyAvvN/3wC0g9iSpt0FbG6tlMwKGffS
-	 2ZqyxWMM7zBIaWQYSQ/mE/NZ2JZ+rjoTusWlXHIRxeuuv7f4H7PrRkX7uM54RZyYcTjIW
-	 Am1cGGkPXWHPIUYQ8DeDV8qs21oXqKN3qW13r6VYvfEnrwpTYGM8sE6ys4NTMqi1g8bPG
-	 wRzjkCVQdLjZPtm08J4Naj836Ix4EYQH5516bonmZ34Rcs+m4dTMVAkwmMZ8ob3eSfA==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=lBwQtKsaWDkw06NQG+ONWSv2LveE3CT9fBPJlpwloXo=;
+	b=q1Ex40m8T4hV8T/LXCQDfbvWVQda0CcoW+MtKdphZE8zImSvqXSGFhqUFsd4NZ5KTVOf
+	 i02kxaUJ6Xiq1hpSTIHvxfGN7noOoH37U4MzhRR+BAXfK1+vA127YB+rC9kddu3Rh5c4M
+	 CEQqIuAA8U/KfkJhovUlQ1g5/cT4FjAHGHWcyBtI+dUOlHoIj4NC2XICudR6ha8r6mjx9
+	 yimOs+TyfucIl37YGNe6A9yQSag4IzmxlMax/IKum22TFR3LKhOCW7keOuEwdOTBs0ZkE
+	 Ns3NV6nSwuk5s1k8EjeJ4dtuOCJtXO/WRLElTp1jJFSBGiheF1oWRxUi4xHMbIwtm5g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FY6TukEg;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T2X0tpNc;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YOfgiqYX;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Q3h38kFL;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B96C606A335
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7B96C606A335
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A8FF606A329
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:03:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2A8FF606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FY6TukEg;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T2X0tpNc
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH6f0Od2998611
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:53 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YOfgiqYX;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Q3h38kFL
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH2aPx3844324
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:03:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=; b=FY6TukEg4N87MmNX
-	ltmoHDXoAdRNtrO+2hnqUxY5RIvEBYVUI7EsPa9LcjBFWWcIhGS+A1F4AwEgR5K3
-	XdUvJDBpvSWLkLKf4OO5Us/ENe1Iya4iAQby4099nCsNoLOMSpo9Fq/ZGHxG941+
-	5tQag7DZX/fL2iLpyHDyoGAec0/T2Ajy0YsJRkGMABf31+jcFSnssahAMoe2VuvI
-	94IFm/utr/MYhXMFjjuoPCXVZHvDU26MTdQA7f1DZ6B3R63NZLbriSLdS+c6oy57
-	LXTCCDLvcPO9Dpxr4HRq6qKXGaBZGi9nWkSLPl99ceKuyPjMYaRhSseXegCKycrz
-	YlfbeQ==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0hve018n-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=lBwQtKsaWDkw06NQG+ONWSv2
+	LveE3CT9fBPJlpwloXo=; b=YOfgiqYX2aKuJDkVKIDfbOa1ABub0VL951BIfu5K
+	a7zBtsdygFyn49hTn6Wja2iMQ9XFDLBdJXUO+H5c0k7qkw2mW/qGNYyo2XUVSFcU
+	zBEDVv/TKQYNXqGUkan0yzzQa7hluVC3v1pM9hfQ1Ufu0ncJB1B4V/TVZHyaJFVz
+	pjcexW15AhzALuUjKE/hqSrPFay+MFn/8nfKn8eq5YCyrG9pBaxz9AHOawGAl0cp
+	XCjryMi1G5URPMu4bTPVh8FKu8ZjQH5DbjUFUjsxZ5Ts9k9DBWgb78YB3CH8YE9I
+	nYuyVVCc4TM3D1RjOGJVB+LfusFEXe9aTildqnlDSlOmyA==
+Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com [209.85.210.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0c7h17sg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:53 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8a59717b0c0so2994412b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 22:52:53 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:03:23 +0000 (GMT)
+Received: by mail-ot1-f69.google.com with SMTP id 46e09a7af769-8615bdcc5cfso5249791a34.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 23:03:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794898373; x=1795503173; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
-        b=T2X0tpNc74Ywqljtl/gR+GXxfLRNzTGmBo56anksIzEy9tFVDNGr8UkkGZUDeMs/yy
-         ezSi7cbLWJ5czhpBhDKSqasbES1rI+4hGewv2UbDZCoflTM573iGQrxdxaRBnWA6bwuA
-         L2kWv2pLvPV66En7NNC0HiJZ+QWtDjzC0WeyMa4AbadFP8vGhuDqJNVPeQeXyL95vUc0
-         Vwd+T5JWVywhwKH8LghfkzqpZzoGcOnWPZ/lJNTaxd+i8BFVMAs80O6Z8Od6lxKDPQsG
-         SShZt7o2DKLtbYPyH312wMTgwr6DWXqOC3Mb8/Qew9oOA3UIaFSBXbdRDQxKfPYq8ua3
-         Y7kw==
+        d=oss.qualcomm.com; s=google; t=1794899003; x=1795503803; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=lBwQtKsaWDkw06NQG+ONWSv2LveE3CT9fBPJlpwloXo=;
+        b=Q3h38kFLb7tgsSHzmvkmDPezrBMHJyfeOag+oUqD4JKyBMIqNKviAZXHmh4CmukBUH
+         gVjOnasYOlDPefsp+MEA9UegMnKIIJLQ1x3StuhRq9EPlUu2JJXzcX+gL5MiwTV22BzO
+         IuYWKDbMYiyrMGrkW85w1eIt5Y3L6XAb00UEqfnLS1bJGbBLh7Zt14sR728mhu6zsTxP
+         0dOklm4Q4CtLlAullhySd2yMOCXP33bDG6B/w4rywDZ00BlpuognTLDdByELjcu6KcSy
+         BSOvLOKK7ga08cHaw5rg12axZLLvh0goN3WaSLD+jqkMf5CD8nGpmUjvJFdfSYpA+RPY
+         5b2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794898373; x=1795503173;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
-        b=kLtInkbZ3I7fqUhBZWkmmWWbdEZVQlwTL/koKMtLFJECPMYUdUlFrx7vBxNZP2nn6N
-         njqe/8O7PlLr6GOBeMH3V2cE+CHCmXJOoEiPBw1TwP8gATwvxmVahQU5hvC+2sPSGRBv
-         NjhpCoZUBWtLYh9JpMyQDzpr1D3Omrxy4GbpTltzHAj66IpxGPJt45I5Tmx7RtDAg5Fn
-         bsHQsL1DBSkPQ55Z+F0itJMSOkq2Ki53a4qrttge7GHctvIL3NZpCaYWZyZE31tKyPEt
-         ikxf4UMrNpyONDuV+RoFhW/y4lwnUDaEJjtZxJwP6Z2kxIzGM7ubq/R2LQgmDdWE+hR6
-         djQg==
-X-Forwarded-Encrypted: i=1; AL+hErHiUs3ZBhrCJwoouFU9o+Dc4z79kuyoCG+5ZUYwXIughs7uO8cxETLMwd7WnJ8MJPdEpcGMHP/igVRsIyyi@vger.kernel.org
-X-Gm-Message-State: APuU4Z/x472R6vC98JV4Rir388G31H/XWInexK5qGHaOixeOAlf4QSBa
-	5VCS8qwRq8n3rb96QntyXkOb+c+50Yt+bG0pzQriA3wIAFx0TQ9P0LGKgifVYLL9U1aDn57FOKr
-	Pqvw8j4p0EnN8fDB7Sc/dNOeuwSnOn06e0rjI+Zt0j59y600H9zCe/x1xaghGL9Ubu8sM
-X-Gm-Gg: AYBFou1sBagURcHawmDK4e23eNrwVRR8k+xjS599Rm7C/fDNSnwAPJCynJ/9FCfrvgU
-	L47ib3fvwJh38nRdUROTAXXaMVCEwrFcd2P7sZeRxT/Nav3pdqNxEBRUK6kIAbXntX6XbZ/4A41
-	zpMdmnvEwup2Wzr06/e2zW9V/JxykNiNo7yA1o7R6LHXX4g4x0xQBwWTCEuJSpUhqbhlhwZKHSJ
-	7ZsD2LDwIcmG8e1TlWJx87H9VjxIflpzyWE5ifAf75P+9/z7sMFvYrW2sXAVBP9GojZox+4nR4H
-	J+p0Uujyw288jFM/rKhLGWiM2sK6ZggffRYDPDzBr7YP6Lhzzja92WNrP2G0xMD9iVp74h4L8wM
-	aba3t45b0Yo84chEGbfJPEiA4Nr2447wWHUqO1EkFCNzq9w/3UjbrQCLMPcDN4ElIMKFDEJYIxh
-	j9fS1pGLbjaEqZgVbiedly2hDojXomOHe5daWvsxmPPvRJ
-X-Received: by 2002:a05:6a00:1a92:b0:8a0:18bc:e01a with SMTP id d2e1a72fcca58-8beb1fd9a34mr12202643b3a.3.1794898372824;
-        Mon, 16 Nov 2026 22:52:52 -0800 (PST)
-X-Received: by 2002:a05:6a00:1a92:b0:8a0:18bc:e01a with SMTP id d2e1a72fcca58-8beb1fd9a34mr12202615b3a.3.1794898372225;
-        Mon, 16 Nov 2026 22:52:52 -0800 (PST)
-Received: from [10.133.33.59] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8bed1f5aef9sm4764381b3a.34.2026.11.16.22.52.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Nov 2026 22:52:51 -0800 (PST)
-Message-ID: <4bdb2999-d8c9-400e-8a23-d950a95e43b4@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 14:52:47 +0800
+        d=1e100.net; s=20260707; t=1794899003; x=1795503803;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lBwQtKsaWDkw06NQG+ONWSv2LveE3CT9fBPJlpwloXo=;
+        b=I6vpEON7ZyjabAbCTnKkC+eTerQhEixtQvxcF9FhtEoHyIZXwHTy880ePxhZxM8ZaY
+         k1N7eoAWuGp9kauDFbpyYEhqmc8jb5fdo0WB7paxpXoGSw46zcRS9SIbdBDlSA7JyB/u
+         pCw/6gwB8Jwf18pJYKWY7k08/ZwmLkRbL67I9TM0Gnf+kgDbZeeBf5B4mGmM6b8yjSnC
+         vzpuCcSwK8UM32eusrC8lT65VQ/92WYYxYcq7+aEtR7MUqMLlwwpfx8s/6UfYZzemxXt
+         AxD3pDQRpnpcslEZHcgf1LjMPHAlaO2SfuMpk6Sziwj5D4SYsYai33hb8+Y2YDXHczIw
+         hwcg==
+X-Forwarded-Encrypted: i=1; AL+hErFTWXk89g/DgOAB9aGoI1lfay+gWetZWzRpw8oy4ZCbhHAtpzKMyWWK8QSSxi7ShIq4ie9OgjuU29m0jgtQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z83CtEaWO+xZTqfAI1FJ9Vyb8wiJ0Fb0GiXcqiX7KdXwN1QSWRL
+	2rxeTvk3KE1iQySn9SETAOXlrzqNhi7Zga8VhhdSOe10hjSL6QISbZhyH/G//8ym1+04L0gmCo8
+	PQl/deVhcSsybqvDbOPc6k8hWKWtR4vI5rGwFf+gLJsJLF0LyqX7fVHR0j7JWFOvZcrhk
+X-Gm-Gg: AYBFou0WQkyUBuj2IvR9ZEAbnNlQLOttFhef4UAnFu1hWWz9YM0Fwb2lO+oFzkBmBri
+	qkKLqxsvhsQVpGj0Ff0ZJRU2JLIhh7vhYRKzCQ5gG97032lQZ5wmaar1QFHn7c9xfbM0NN3OMU5
+	LiDW+2O8eo81v7emoo0wGzIlwS/1TwxYAx0eBVDVbW/fTLdI7pPD2lnO4jwXYsS5/PYGzRESRug
+	aV7nTFAobHHJom2tubuOIsedYgs/Rf2KIRSWSGRmcY3PaDXjuSDhGaJV7LPDn4m1cG+rbEM820N
+	8enCSXvtDyM6W66pq8CbgL3eYw0BbC4SKmSM7baworVvXwJ/CVQCR4vLu6rUixRYyGWV7TilqIj
+	MjOfi/86XKI9TxfzUWtnTb+fOY2abnHjzopjpIAvK75bIN1RnPLKJ7c6ctx04GnG/DX4tzIHuo4
+	fzZRkoUbEvApRvm3tLsguM
+X-Received: by 2002:a05:6830:4c16:b0:862:af57:790 with SMTP id 46e09a7af769-862af57495emr9530816a34.16.1794899003013;
+        Mon, 16 Nov 2026 23:03:23 -0800 (PST)
+X-Received: by 2002:a05:6830:4c16:b0:862:af57:790 with SMTP id 46e09a7af769-862af57495emr9530792a34.16.1794899002579;
+        Mon, 16 Nov 2026 23:03:22 -0800 (PST)
+Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-862a82c4625sm8601782a34.22.2026.11.16.23.03.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Nov 2026 23:03:21 -0800 (PST)
+Date: Mon, 16 Nov 2026 23:03:19 -0800
+From: Qiang Yu <qiang.yu@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        peter.chen@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/4] phy: qcom: qmp-pcie: Add qref and refgen
+ regulator vote for QCS8300 and SA8775p PHY
+Message-ID: <avv8Nx/ikeIML9DE@hu-qianyu-lv.qualcomm.com>
+References: <20260916102023.2054761-1-ziyue.zhang@oss.qualcomm.com>
+ <20260916102023.2054761-3-ziyue.zhang@oss.qualcomm.com>
+ <ded7f87c-74d5-423f-acd9-efa83a472c2b@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,293 +132,87 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v18 5/8] qcom-tgu: Add TGU decode support
-To: Suzuki K Poulose <suzuki.poulose@arm.com>, andersson@kernel.org,
-        alexander.shishkin@linux.intel.com, mike.leach@linaro.org,
-        konrad.dybcio@oss.qualcomm.com, james.clark@arm.com,
-        krzk+dt@kernel.org, conor+dt@kernel.org
-Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
-        devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
-        songchai@qti.qualcomm.com, Jie Gan <jie.gan@oss.qualcomm.com>
-References: <20261116074118.822731-1-songwei.chai@oss.qualcomm.com>
- <20261116074118.822731-6-songwei.chai@oss.qualcomm.com>
- <e621c3a7-5633-4d03-9494-a6fa45daea02@arm.com>
-Content-Language: en-US
-From: "Songwei.Chai" <songwei.chai@oss.qualcomm.com>
-In-Reply-To: <e621c3a7-5633-4d03-9494-a6fa45daea02@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfX7iZr5WaqGDPW
- sz4Cw/AKrpCWrnDzlvJTVurYgZbgUPR1/c2kSIj1PitDhoPnbnYagj74IIH00P2X41fybUlLN0T
- A4Cq3D25ydMjT47G8F33ANWxq4V740M=
-X-Proofpoint-GUID: sSBZpzMeShT6oDFJz8RWGdIfuaBkqprg
-X-Proofpoint-ORIG-GUID: sSBZpzMeShT6oDFJz8RWGdIfuaBkqprg
-X-Authority-Analysis: v=2.4 cv=dqhOmFg4 c=1 sm=1 tr=0 ts=6afbf9c5 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=W-u9qbw9fePND_ABPHcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfX2neBwP1rA2e2
- i++RD89m1ccKb2o2GX0YjwksKh7XVGLZl96IBaWSR8P8fWV3I2SMuGRJPrv+ydhrvP061cnQ8Da
- FPpFLQJx0IGLD9RwjNIFv69o99fO4sssWhR/ficwThmY5ZNGso0DVVA/RtpelqCDJCCHThkXrj8
- bvOvVtRJWHdRx+FfMVp70iGsgDWhYPmCuB4aDixXmteWobR0NHkcWxHTYG9QB7mXg6Q7VyN2TBR
- c9XPWqswKGBpVrLUxeixJlGUwFCmz2Bqd7Yqd7Zb5zTaetI/dw+iF9HaeRCKHdcl7kuxBccK5Tu
- MWJvBPVWM2tMjQ3+kPsa7RuzT9a3Ra3Z1nd9KT6ptzeK+/JpA+SqxeTkzuGny2FyhMwN6s52jti
- r9eTWhV00fsCEdVnCGHWFzOFN4EPJVBWKmLL8MCV6ZfPvgGV/7JYYJ79fYK8T980sPTDlEPEnOb
- m2/Jt2miR7jUQfRvp6w==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ded7f87c-74d5-423f-acd9-efa83a472c2b@oss.qualcomm.com>
+X-Proofpoint-GUID: hitS534_kVX0i6a9_SE6FrFNhY_Y7J7o
+X-Proofpoint-ORIG-GUID: hitS534_kVX0i6a9_SE6FrFNhY_Y7J7o
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfX+QQY8RJ8AIDy
+ zTtf0TxJ2hmFUdhLA9nzRFYVEkApqCisb8/KA7asQWiKn01d5H01+exgGovL2lZDK/AOWYXLwt9
+ 5yz4jiKgID5Sz/bjgBrj6Lx9iZbLOK1lf9FrtpOADEtfNgy9MeWw//DaJ+tXNZl0O0iuhxh/WwY
+ BmdzbqyfJd/LyXHBE3Vohy6hequ9wcfLxm/UKHXTzlwhDq7BCiF6E7bDgml/Cz685UYJ6vrBmT9
+ 2NtsPOO1SbOb4Qj3Rvk7SQyG6PZlwlBYVkbmcEZ9e93m+5iMRKoES1tCrWVw9OjpVfJ9S1Qsmbt
+ BDsCfkaOziCnSxv547BUdffuoB8YXxh1BYeSBN/G5ySB1lQRp3zsREBkUn0raFew+aHp7VaGMsn
+ Nz7yMuTEzfgHn8oCCkScjlOOO+eWfFm5hykIUYOYflqCO92+kYWEhF00aM0TqXaAinW/jmxtc+m
+ RVqyfjCAvaFlB47nCEw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfXymIgpoHVvLUo
+ CmhZa4KMHOE2GcCgVqksZuKiLnz7MjpMmypZyOhepNT9Mtw+s9+FOuGZMoNRb/foDBpD1N6EhIE
+ dI/gYXq2b2UiKXY6ON53yr1tlUsHOto=
+X-Authority-Analysis: v=2.4 cv=bobZl0ai c=1 sm=1 tr=0 ts=6afbfc3b cx=c_pps
+ a=z9lCQkyTxNhZyzAvolXo/A==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ddo9B1qCPzyyS7SsBnQA:9 a=CjuIK1q_8ugA:10
+ a=EyFUmsFV_t8cxB2kMr4A:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015 phishscore=0
- bulkscore=0 malwarescore=0 adultscore=0 impostorscore=0 suspectscore=0
+ impostorscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
+ priorityscore=1501 phishscore=0 clxscore=1015 malwarescore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170027
 
+On Wed, Oct 28, 2026 at 03:37:40PM +0100, Konrad Dybcio wrote:
+> On 9/16/26 12:20 PM, Ziyue Zhang wrote:
+> > Add a new sa8775p_qmp_phy_vreg_l that includes vdda-phy, vdda-pll,
+> > vdda-qref, vdda-refgen and refgen supplies, and use it for QCS8300
+> > and SA8775p PCIe PHY configurations. This avoids modifying
+> > sm8550_qmp_phy_vreg_l and breaking SM8550 and SM8650.
+> > 
+> > These supplies were missing from the original driver, which was found
+> > to be the root cause of occasional system crashes observed on QCS8300
+> > and SA8775p platforms. Without voting for these supplies, the PCIe PHY
+> > lacks stable reference clock and voltage, so the PHY never becomes
+> > ready and initialization times out:
+> > 
+> >   [    7.303119] qcom-qmp-pcie-phy 1c04000.phy: phy initialization timed-out
+> >   [    7.309948] phy phy-1c04000.phy.0: phy poweron failed --> -110
+> > 
+> > Note that due to a hardware issue, QREF actually depends on refgen3
+> > rather than refgen2 as documented; refgen3 is therefore voted manually
+> > via the refgen supply as a workaround.
+> > 
+> > Fixes: a05b6d5135ec ("phy: qcom-qmp-pcie: add support for sa8775p")
+> > Fixes: ebf198f17b5a ("phy: qcom-qmp-pcie: add dual lane PHY support for QCS8300")
+> > Signed-off-by: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
+> > ---
+> >  drivers/phy/qualcomm/phy-qcom-qmp-pcie.c | 16 ++++++++++------
+> >  1 file changed, 10 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+> > index da83358c97ea..ab81c6e584a8 100644
+> > --- a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+> > +++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+> > @@ -4094,6 +4094,10 @@ static const char * const sm8550_qmp_phy_vreg_l[] = {
+> >  	"vdda-phy", "vdda-pll", "vdda-qref",
+> >  };
+> >  
+> > +static const char * const sa8775p_qmp_phy_vreg_l[] = {
+> > +	"vdda-phy", "vdda-pll", "vdda-qref", "vdda-refgen", "refgen",
+> > +};
+> 
+> I think we could grab them unconditionally, as QREF/REFGEN appears
+> on most/all SoCs (perhaps with regulator_optional_get so that we
+> defer the correctness of this to dt-bindings for any specific
+> platform)
+>
+Do you want to add "vdda-refgen0p9", "vdda-refgen1p2", "refgen" in
+sm8550_qmp_phy_vreg_l?
 
-On 11/16/2026 7:43 PM, Suzuki K Poulose wrote:
-> On 16/11/2026 07:41, Songwei Chai wrote:
->> Decoding is when all the potential pieces for creating a trigger
->> are brought together for a given step. Example - there may be a
->> counter keeping track of some occurrences and a priority-group that
->> is being used to detect a pattern on the sense inputs. These 2
->> inputs to condition_decode must be programmed, for a given step,
->> to establish the condition for the trigger, or movement to another
->> steps.
->>
->> Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
->> Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
->> ---
->>   .../ABI/testing/sysfs-bus-amba-devices-tgu    |   7 +
->>   drivers/hwtracing/qcom/tgu.c                  | 200 +++++++++++++++---
->>   drivers/hwtracing/qcom/tgu.h                  |  35 ++-
->>   3 files changed, 214 insertions(+), 28 deletions(-)
->>
->> diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu 
->> b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> index 3be0b912c937..c7e6f13da83d 100644
->> --- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> +++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
->> @@ -14,3 +14,10 @@ KernelVersion:    7.5
->>   Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei 
->> Chai <songwei.chai@oss.qualcomm.com>
->>   Description:
->>           (RW) Set/Get the sensed signal with specific step and 
->> priority for TGU.
->> +
->> +What: 
->> /sys/bus/amba/devices/<tgu-name>/step[0:7]_condition_decode/reg[0:3]
->> +Date:        November 2026
->> +KernelVersion:    7.5
->> +Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai 
->> <songwei.chai@oss.qualcomm.com>
->> +Description:
->> +        (RW) Set/Get the decode mode with specific step for TGU.
->> diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
->> index 917d506cddf9..1809cca4a94f 100644
->> --- a/drivers/hwtracing/qcom/tgu.c
->> +++ b/drivers/hwtracing/qcom/tgu.c
->> @@ -18,8 +18,8 @@
->>     struct tgu_attribute {
->>       struct device_attribute attr;
->> +    enum operation_index operation_index;
->>       u8 step_index;
->> -    u8 priority;
->>       u8 reg_num;
->>   };
->>   @@ -27,11 +27,36 @@ struct tgu_attribute {
->>    * drvdata->priority is a flat [priority][step][reg] array.
->>    */
->>   static int calculate_array_location(struct tgu_drvdata *drvdata,
->> -                    int step_index, int priority,
->> +                    int step_index, int operation_index,
->>                       int reg_index)
->>   {
->> -    return priority * (drvdata->num_step) * (drvdata->num_reg) +
->> -        step_index * (drvdata->num_reg) + reg_index;
->> +    switch (operation_index) {
->> +    case TGU_PRIORITY0:
->> +    case TGU_PRIORITY1:
->> +    case TGU_PRIORITY2:
->> +    case TGU_PRIORITY3:
->> +        return operation_index * (drvdata->num_step) *
->> +            (drvdata->num_reg) +
->> +            step_index * (drvdata->num_reg) + reg_index;
->> +    case TGU_CONDITION_DECODE:
->> +        return step_index * (drvdata->num_condition_decode) +
->> +            reg_index;
->> +    default:
->> +        break;
->> +    }
->
-> > +
-> > +    if (result == -EINVAL)
-> > +        dev_err(drvdata->dev, "check array location - Fail\n");
->
-> see more below
-confirmed.
->
->> +
->> +    return -EINVAL;
->> +}
->> +
->> +static int check_array_location(struct tgu_drvdata *drvdata, int step,
->> +                int ops, int reg)
->> +{
->> +    int result = calculate_array_location(drvdata, step, ops, reg);
->> +
->> +    if (result == -EINVAL)
->> +        dev_err(drvdata->dev, "check array location - Fail\n");
->> +
->> +    return result;
->
-> Could we not fold this check in to calculate_array_location as shown
-> above ?
->
-confirmed.
->
->
-> ...
->
->
->> index d769379b8421..7d88ad8e730f 100644
->> --- a/drivers/hwtracing/qcom/tgu.h
->> +++ b/drivers/hwtracing/qcom/tgu.h
->> @@ -16,7 +16,8 @@
->>       ((int)FIELD_GET(GENMASK(17, 10), devid_val))
->>   #define TGU_DEVID_STEPS(devid_val) \
->>       ((int)FIELD_GET(GENMASK(6, 3), devid_val))
->> -
->> +#define TGU_DEVID_CONDITIONS(devid_val) \
->> +    ((int)FIELD_GET(GENMASK(2, 0), devid_val))
->>   #define TGU_BITS_PER_SIGNAL    4
->>   #define LENGTH_REGISTER        32
->>   @@ -44,6 +45,7 @@
->>    */
->>   #define STEP_SIZE        0x1D8
->>   #define PRIORITY0_OFFSET    0x0074
->> +#define CONDITION_DECODE_OFFSET    0x0050
->
-> nit: s/CONDITION_DECODE_BASE    0x50
+What about this patch that adds "vdda-refgen0p9", "vdda-refgen1p2" for
+glymur, https://lore.kernel.org/all/20261104-phyrefgen_1104-v4-2-ba508fc6ab40@oss.qualcomm.com/
+Do I need to remove glymur_qmp_phy_vreg_l and add "vdda-refgen0p9",
+"vdda-refgen1p2" in sm8550_qmp_phy_vreg_l?
 
-confirmed,
-
-use "#define CONDITION_DECODE_BASE 0x0010" as offset is relative to the 
-start of the step's block.
-
->
->>   #define PRIORITY_STRIDE        0x0060
->>   #define REG_SIZE        0x4
->>   @@ -54,6 +56,7 @@
->>    *
->>    *   TGU_MAX_STEPS         matches the static step0..step7 sysfs 
->> tables.
->>    *   TGU_MAX_PRIORITY_REGS matches the static reg0..reg23 sysfs 
->> tables.
->> + *   TGU_MAX_CONDITION_DECODE decode region 0x50..0x5F holds 4 u32 
->> registers
->>    *
->>    * Each priority level's block spans a full PRIORITY_STRIDE (0x60 
->> bytes),
->>    * i.e. PRIORITY_STRIDE / REG_SIZE = 24 registers, all of them 
->> implemented.
->> @@ -61,15 +64,40 @@
->>     #define TGU_MAX_STEPS                  8
->>   #define TGU_MAX_PRIORITY_REGS          24
->> +#define TGU_MAX_CONDITION_DECODE       4
->>     /* Maximum priority that TGU supports */
->>   #define MAX_PRIORITY                   4
->>   +/*
->> + * Values for struct tgu_attribute.operation_index: TGU_PRIORITY0..
->> + * TGU_PRIORITY3 select a priority level, TGU_CONDITION_DECODE 
->> selects the
->> + * condition decode registers instead.
->> + */
->> +enum operation_index {
->> +    TGU_PRIORITY0,
->> +    TGU_PRIORITY1,
->> +    TGU_PRIORITY2,
->> +    TGU_PRIORITY3,
->> +    TGU_CONDITION_DECODE,
->> +};
->> +
->>   /* Calculate compare step addresses */
->>   #define PRIORITY_REG_STEP(step, priority, reg)\
->>       (PRIORITY0_OFFSET + PRIORITY_STRIDE * priority +\
->>        REG_SIZE * reg + STEP_SIZE * step)
->>   +#define CONDITION_DECODE_STEP(step, decode) \
->> +    (CONDITION_DECODE_OFFSET + REG_SIZE * decode + STEP_SIZE * step)
->
-> Please
->
-> #define CONDITION_DECODE_OFFSET(step, reg)        \
->     (STEP_OFFSET(step) + CONDITIION_DECODE_BASE + REG_SIZE * reg)
-confirmed.
->
->
->> +
->> +/*
->> + * Neutral ('NOT') value for the condition decode registers. This is 
->> the
->> + * driver's default so that, before userspace programs a real 
->> decode, an
->> + * enabled step does not spuriously match. Used both when seeding 
->> the shadow
->> + * table at probe and when clearing it via reset_tgu.
->> + */
->> +#define TGU_CONDITION_DECODE_NOT 0x1000000
->
-> minor nit: TGU_CONDITION_DECODE_DEFAULT 0x1000000 ?
-I think |NOT| reflects the hardware-defined decode operation rather than 
-an arbitrary driver default,
-so I’d lean towards keeping the current name. But I’m happy to change it 
-to |_DEFAULT| if you prefer.
-
->
->
->
->> +
->>   /**
->>    * struct tgu_drvdata - Data structure for a TGU (Trigger 
->> Generation Unit)
->>    * @base: Memory-mapped base address of the TGU device
->> @@ -79,8 +107,11 @@
->>    * @enabled: Flag indicating whether the TGU device is enabled
->>    * @priority: Per-step, per-priority-level, per-register values 
->> staged by
->>    *            sysfs writes and flushed to hardware by tgu_enable()
->> + * @condition_decode: Per-step, per-register decode values staged by 
->> sysfs
->> + *                     writes and flushed to hardware by tgu_enable()
->
->
->>    * @num_reg: Number of priority registers implemented per priority 
->> level
->
-> This now looks awkwardly generic with other registers coming in. Should
-> we name it num_prio_regs from the beginning ?
-confirmed.
->
-> Suzuki
->
->>    * @num_step: Number of steps implemented
->> + * @num_condition_decode: Maximum number of condition_decode
->>    *
->>    * This structure defines the data associated with a TGU device,
->>    * including its base address, device pointer, the lock serialising
->> @@ -92,8 +123,10 @@ struct tgu_drvdata {
->>       struct mutex lock;
->>       bool enabled;
->>       unsigned int priority[TGU_MAX_STEPS * MAX_PRIORITY * 
->> TGU_MAX_PRIORITY_REGS];
->> +    unsigned int condition_decode[TGU_MAX_STEPS * 
->> TGU_MAX_CONDITION_DECODE];
->>       int num_reg;
->>       int num_step;
->> +    int num_condition_decode;
->>   };
->>     #endif
->
+- Qiang Yu
