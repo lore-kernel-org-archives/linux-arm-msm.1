@@ -1,57 +1,80 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794874229;
-	b=k9vfGC8+xV33LmGTeGjrTBiUdPISP+efXruJEa2do4X9tX/ctproRtQKX9P/QtkGQAwa
-	 dIhJ8RPHxpGQysqsqhVIMgU4BDsGaxdg1mECmav0QllA1plB0GvrDYXBYs1hPmQYlSX54
-	 2UvOrtHP2n8M5B7KvwnnNRa9WJBISwZvcgfjxUi6T2UHc+Ow6W6RmSokPq0bNiyEcQxQD
-	 3fBC5iPDG/VXmKIunPrILkX+BAmFj9VmRNV9JmygKG/2jP1ZRIvFDe4YKDo5v8DyTsKvn
-	 irV9sPn+0zRDjI3QmRhRcochAv3igG82i7IgVKxCmQkJN/bUoYhDypQjCLKYXZT33TQ==
+	t=1794877504;
+	b=B9WqbTsuHkonvvxk7IGRm0l77tvpUtHFwuZh+tL3bX+TzflQns5lL3Rh/UiI1Hfw63Dv
+	 OATXARcyw/nPQ0XDqWPcG/Abg6Z9uh10+U4qCrZ1qd0i35HaX0stgBr7TrQLri+EE8hOo
+	 neB+KSFj0u76Ib/Vw9x/KiKRuKbHqX6rJQdVQnKCXhJmw2vTThIO07BWxEwOU5qk/eqGb
+	 N81dEIY66JbiWtRI0tMPyxn+01ioF0lwF8Q9e2m8Tqx67L/xBpM8w2XuYDVo6G0BwS6PN
+	 L9YIr5ssWdft7MbV32z8307R7CD7XF3T8FbEj9ne83xWVS68e17k6PG+L0EaMnTYSKA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794874229;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=lQ/lPICoJiotyWHSrRapNHgIRmX8DECgld58kqB9Z4o=;
-	b=EzCYkMgk4mVLksVAInZRLoa/DV/C6fJjpAHGINLQEUwn4Ddow1+SwWl9RTORBZ4kwK2C
-	 2+8iVOVrr4TdcY+FiHv8+O814oMUWZyqg8iLxMLXOZ16G2b07/l5gTvxXoCSXZUADdHoL
-	 881sznOhzISwdnnEctGWHiURDyIAlwL5FONWC8Xs73tkkxYmAi8N/Uhe4h4+SqcavRdc7
-	 5Wsd9dmmBEXaYL6qBf1JPOzicsVIK8rJI/2FwWXsbd9KqR4vvzgOytd4teuagN68qDxrr
-	 J/P3DEBD80L0EIczS4hwqELGQbfQeFkegPXlFP6oZpB16acKg6j+c/Vs4vPJF1zpNLg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794877504;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=P1GbrACwDJFLCQ00w48sjT3/YMiKr4B3U/MTFVQ9cU8=;
+	b=g+Wwe/+4MU1NLllbsTq7NngdzmuaBdB2HREtEDcVfydYJtjPbdzT/wwYzZZ8DUGLMjxB
+	 1gin9+c7Ldkcx1tnAo+zrZpUjQeRCpIlcqdIykHUKo8jO3tDZadu0nZByK2+0HHfJzoxo
+	 1zw8zFuGNUYaAboA+w0lNBpfI73pkHY2QBqCIi8ZBbwEIhpWcKJ+r2b0oyD3XAWZkC++J
+	 uTNd6d7IQaRmUTqt7yNddfdyptjQpjk2INZosCsDxUzgQotJgewXQWCpYEnkk2nVjf3Lm
+	 BQfynyeUMDbGvp5TKCmWHWErtaYMMQtKtVn7h0xiav2HDfm8Xoj6q2QrSh8e2RdxFoA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EZ7xLxP5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e6X67APH;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34835606A31C;
-	Tue, 17 Nov 2026 00:10:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62A3C606A332;
+	Tue, 17 Nov 2026 01:05:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EZ7xLxP5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFF9A1F000C4;
-	Tue, 17 Nov 2026 00:10:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e6X67APH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC2771F000C6;
+	Tue, 17 Nov 2026 01:05:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794874228;
-	bh=lQ/lPICoJiotyWHSrRapNHgIRmX8DECgld58kqB9Z4o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EZ7xLxP5L5//W6YKkGmAlJ5gDACGbJzl8N6pTI2UZnE7+9vAQegVXC0U+PgJh5NVk
-	 cdV7QCwcbqz8mrPwR7nsSnQJx/FZT7We3cz5FjOACcGtPKHJQ03/Uv2lQL//7DtssJ
-	 Yy3/H4fayB+XP+HNQEw6Q5GdZWV8t7YmSs/oQ0Wl31LRRjdt0K0GKWheD5PL0aOPcE
-	 pCRMMfGYKZl20o3HhCVXJnXZoj0n1pu7nnVcDzbN2r5MT0cFOY7X+uUq9Z8T8/cz32
-	 9LEv6CnMq9Y5RxZOSt1eNVgMnZD5DyQ/Cpp7N4C+JJ4khWymKn9YJDJxXI+vcBXFHy
-	 g6vsyR/TgR14g==
-Date: Mon, 16 Nov 2026 18:10:25 -0600
+	s=k20260515; t=1794877504;
+	bh=P1GbrACwDJFLCQ00w48sjT3/YMiKr4B3U/MTFVQ9cU8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=e6X67APHkqpxvINqIFMPGoNU+Wsdqe7QScwFqn30wo3d9irGn7GEns0YozCHY/cZw
+	 R/oh48MT/xswmMPTTfdkOH07S0z5EN1uTcQC1PsJDVEcP6oN2PboT0nUkW1xiTTLIR
+	 Ug6Rx7phB1R/6WBvVH38iy7Ymt+80RvTfVSIbv83Vm/c9FLd/N6R6z4M2TlbEt/DVl
+	 6/faf7aF8skowd0UuSyU0sV3z1+UzZJ+6F3/X9W/A9Fsk3Mx74rGlUMr/1dWS2CRnu
+	 1/j4OXR9FoFkbb7qPpEu0u8EPK/1hLF9ncYb07E4wP2lTY7G/QhhemIv+Z36SLndfW
+	 N6A1Q8zkj8SXg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Richard Acayan <mailingradian@gmail.com>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 7/9] arm64: dts: qcom: pm660l: add analog audio codec
-Message-ID: <avubHsbu-zkf5Uqc@zenbook>
-References: <20261107022453.159341-1-mailingradian@gmail.com>
- <20261107022453.159341-8-mailingradian@gmail.com>
+To: Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Joonwoo Park <joonwoop@codeaurora.org>,
+	Imran Khan <kimran@codeaurora.org>,
+	Rajendra Nayak <quic_rjendra@quicinc.com>,
+	Jeffrey Hugo <jeffrey.l.hugo@gmail.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Ilia Lin <ilialin@codeaurora.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Yassine Oudjana <y.oudjana@protonmail.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Christopher Obbard <chris.obbard@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH 00/10] clk: qcom: several fixes for stability on MSM8996/98 platforms
+Date: Mon, 16 Nov 2026 19:04:41 -0600
+Message-ID: <179487749319.432567.7239081834486864574.b4-ty@b4>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261019-msm8998-fix-clocks-v1-0-370949e4d8a0@oss.qualcomm.com>
+References: <20261019-msm8998-fix-clocks-v1-0-370949e4d8a0@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,79 +84,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261107022453.159341-8-mailingradian@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 06, 2026 at 09:24:51PM -0500, Richard Acayan wrote:
-> The PM660L analog audio codec (PMIC revision 4) controls the headphone
-> jack, and optionally the earpiece and speaker, at the vendor's decision.
-> Add the analog audio codec.
+
+On Mon, 19 Oct 2026 16:40:59 +0300, Dmitry Baryshkov wrote:
+> The MSM8996/MSM8998/SDM630/SDM660 platforms face several issues with
+> stability (e.g. setting running at the halved frequency after certain
+> frequency switches, resetting if run without clk_ignore_unused, failing
+> to scale GPU clock, etc.). In preparation for scaling core, cluster, CBF
+> and GPU voltages, fix these issues affecting platform stability.
 > 
-
-Trying to merge this on top of linux-next gives me a number of
-DeviceTree validation warnings related to "sound-name-prefix". There's
-also a number of warnings from the later "arm64: dts: qcom:
-sdm670-google: add sound card".
-
-Please review, update and resubmit.
-
-Thanks,
-Bjorn
-
-> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> ---
->  arch/arm64/boot/dts/qcom/pm660l.dtsi | 37 ++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
+> Compared to other patches in the series the patches for MSM8996-Pro were
+> lightly tested, as a part of the larger series and only remotely.
 > 
-> diff --git a/arch/arm64/boot/dts/qcom/pm660l.dtsi b/arch/arm64/boot/dts/qcom/pm660l.dtsi
-> index 3f8b9eafe164..608c1c2120c9 100644
-> --- a/arch/arm64/boot/dts/qcom/pm660l.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/pm660l.dtsi
-> @@ -87,6 +87,43 @@ pm660l_wled: leds@d800 {
->  			status = "disabled";
->  		};
->  
-> +		pm660l_codec: audio-codec@f000 {
-> +			compatible = "qcom,pm660l-wcd-analog-codec",
-> +				     "qcom,pm8953-wcd-analog-codec";
-> +			reg = <0xf000>;
-> +			interrupts = <0x3 0xf0 0x0 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x1 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x2 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x3 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x4 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x5 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x6 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf0 0x7 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x0 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x1 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x2 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x3 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x4 IRQ_TYPE_EDGE_BOTH>,
-> +				     <0x3 0xf1 0x5 IRQ_TYPE_EDGE_BOTH>;
-> +			interrupt-names = "cdc_spk_cnp_int",
-> +					  "cdc_spk_clip_int",
-> +					  "cdc_spk_ocp_int",
-> +					  "mbhc_ins_rem_det1",
-> +					  "mbhc_but_rel_det",
-> +					  "mbhc_but_press_det",
-> +					  "mbhc_ins_rem_det",
-> +					  "mbhc_switch_int",
-> +					  "cdc_ear_ocp_int",
-> +					  "cdc_hphr_ocp_int",
-> +					  "cdc_hphl_ocp_det",
-> +					  "cdc_ear_cnp_int",
-> +					  "cdc_hphr_cnp_int",
-> +					  "cdc_hphl_cnp_int";
-> +			sound-name-prefix = "Analog";
-> +			#sound-dai-cells = <1>;
-> +			status = "disabled";
-> +		};
-> +
->  		pm660l_spmi_regulators: regulators {
->  			compatible = "qcom,pm660l-regulators";
->  		};
-> -- 
-> 2.56.0
-> 
+> [...]
+
+Applied, thanks!
+
+[10/10] arm64: dts: qcom: msm8996pro: use the MSM8996 Pro CPU clock compatible
+        commit: 0f45504f2319e2ba423c7996740746e4fbc8129c
+
+Best regards,
+-- 
+Bjorn Andersson <andersson@kernel.org>
