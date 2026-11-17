@@ -1,58 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794926644;
-	b=r3bbfoJVy/PIwfnUyRT8THySeqr4pxHDH0WceA48LyGQkUzVpapuv1a98icm/mEKvj4b
-	 suwSG7WROkSHXMK3vjLiBvi2hw33ukr1uV4U8VLBded4P7+DhOPKrIOYqoW+5aWg9TBw0
-	 nl3SFGBVdT/AylK1v93Pi0GdtG2Hx5tH+Kvu2CZF6MBxtQb4o9ojv9QA9ErFnUBaiJUI9
-	 1ZKqUolBtywLn49J+DliGa4GrLhVqpfZLze7oi3b816ON+/25Ytg04B7LiACixoO9vuqb
-	 clSKW9JYbBHrQAQ1vAvhRP9U8ApyHBICerzp6H5VHIEuyqwLYhZgoWLA+52XOfKKskw==
+	t=1794927821;
+	b=fvsYVx+MJGJaNLS/eu08YwI/dSZSD43Gb3vfEf3fAHq6IlH+L5g+jzJ6n8UbvK9N3qxN
+	 q8S17xvw/njkbImF1C6FC2M8v/6Ce8Ln3ZyuCGzXlzMjFg2jhrE24+aC2fHo6a23QiCUM
+	 zbUnNC7Cj2KLQX91nIRXqTc4swYP33weG68IGzUGnjDTPooS8CS4GIdbIfetccLQ63DdU
+	 EtQC/cjX3dTs4X7UQBIlqUquvgI9Jz/YS8K7mrLnhkpAGPfKRHAUEWC3ezRL+X30JTnFn
+	 GNyB9ikyIMjLbe8VKU5MA+yohpP71h2bNqDASioIOjY/GK9Oxm5hN4HAjAOUq1EQjEg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794926644;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=5kbl0iyyIPyhHgE6lBDF/EkGEn92mMrlFsxtkKsy+D8=;
-	b=cSh/69kvtOPyiWo7POakGsrUOoEdimKowgBj3iM+X3gflgeSMnq5QOlUvbLWUNOTtjVa
-	 ZDLWVlky+m2VgBk6YAkuirkx9TTvvrWSfOulnlwTq0cRFk9kL3r8N6J9HnbrxoiYdiBfL
-	 aG6qHUa4i0INv/TonrAguoEposZdMgta6OA7Q/3HnNAvyGj0NnVUUoa+K/P6JWxK8bFON
-	 Hw+JtNy3t8Bw+8fS8+0t+FYrcyteXQz9HP1LhpD/ZNpcCUtQOi9gnzmZH/WTpAcEgWAlv
-	 qnwfEdI42ZrF/dj7pRhnkxwQ/a7YWT3ncA8GQreRBE6rJKJTSQwEjc6GvtQkoVBfQKQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794927821;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=FhDkCY+HRr1h2SeUFyi3k83ZYwhiKXXvaa6v5p+Q4oQ=;
+	b=2RUp1JsmmIr1uceyg8v+9LPqpepTQFIkTYqGEV3nLvxrYI96v/wJ/cJa2CBQOP1s1gPI
+	 ITGnIOwD2pAmqQOOXk9+A72q2lGpj+ZaL3BfymEcOuICGYqrSCfubsg9NlgvVzbTuLzrj
+	 CgJT/F4W1pUo2J+XIPKuGQMuFYNjFL0ULvBRfPyYTRZWOE0ogxZKocHLm0lWE21Yyx2Dl
+	 sAO4BxVo/YFf0jTPoUfBS9xdBu8XrKqXjUldCBOJWRxFVQfBkBpwu3Nn20dF3aDNoedQq
+	 gqpsObzEmus9xOPaeieR0C1YC9oIOf1Hb3GjhnwvD+GfxGaWNsONlXVp3pKUwcrGbKg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FsxR1C6m;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IjYLqhvo;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iZ7wEJSt;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id EA3C5606A31C;
-	Tue, 17 Nov 2026 14:44:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 560A7606A32F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:03:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 560A7606A32F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FsxR1C6m
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 16B781F000C4;
-	Tue, 17 Nov 2026 14:44:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794926643;
-	bh=5kbl0iyyIPyhHgE6lBDF/EkGEn92mMrlFsxtkKsy+D8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=FsxR1C6mEsyhDYgtZrfgj0CjWiOEfj0D6COdEjdx1spFCylPvFwjNq3u8RmtzRHm1
-	 xaU2GDojIUBwqdPht8VPT3CTviHPbs+4zzoG6vjwbUuZn2YBIdvCo5UP6QANwFKI+7
-	 Jk3iLoGsLVISATSKR5hujN0g3ORYAkkhWYkVvhhHHdpxCAI5UBhQnurlgCC/4JzG2j
-	 wYYTq5eicJYCEye5V36RuobTQkQTHR3vS/bkCegjsNiU8goItukoSAE7Guu+r3LOMI
-	 COT3A/DN87F3IT29inkSMtLOGsqX0M94WuMfw3BUs+5PgJQtDise28BofLHIeVlhVE
-	 T7EpPDkiKm0Pw==
-Date: Tue, 17 Nov 2026 15:44:00 +0100
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-To: Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Ajit Pandey <ajit.pandey@oss.qualcomm.com>, 
-	Imran Shaik <imran.shaik@oss.qualcomm.com>, Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-pwm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/3] pwm: qcom: add Shikra PWM controller support
-Message-ID: <avxh7fQliDF_wCms@monoceros>
-References: <20261116-pwm_qcom_shikra-v1-0-67ee4553adc5@oss.qualcomm.com>
- <20261116-pwm_qcom_shikra-v1-2-67ee4553adc5@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IjYLqhvo;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=iZ7wEJSt
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHC0lEX1457338
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:03:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	FhDkCY+HRr1h2SeUFyi3k83ZYwhiKXXvaa6v5p+Q4oQ=; b=IjYLqhvoDTx9eYks
+	sIT5oTYw2E5MkagUa+mevANfzpfmGN54T0YhBs+ckHnPfL3vRHD4/lR2Oq+faCym
+	TFlCK0Tol6wN+jll4NzC3tSrIjdSks89yw2MMTpasHQanE9zCgqpwew0ISI3VEj7
+	heW9VdDAu+IzE6fNLNa3lG2txvlouUdVxDKlSfbBETkzGECWQ0+i664otnL2RFI+
+	hZqlPRN7LTZn+k6Z8MQKClujYwgXm6BzxyHxUYQTLPBU7YaYg7BxuPGtbWsc7WuQ
+	4VBCEAZ1Lpc952f1YLSaMkayrqmaaAt2mzBu1vtWBcV8R4Y0JcS8WxF+VuQaXOXm
+	TK1G0Q==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0nc8135s-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:03:39 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5ec78f43e7fso178029e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:03:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1794927818; x=1795532618; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FhDkCY+HRr1h2SeUFyi3k83ZYwhiKXXvaa6v5p+Q4oQ=;
+        b=iZ7wEJStucinL6uy2ztEuKeeUwyHRaZlGCIXOV39fKUo8SnOdn7JWB/Vg6pEa41QIZ
+         PtntL9K2UBg4+yjnC9VkpLn065IaqBHR4vxI/HwKTxs1nw8X3vWxHiUXJbRWuyoU0Y4i
+         I9MUwg/KjCaeMqKijxq8Rhl0Yh0Yv5px71QUO4Xo7hkLXw3TWbkKydo64aNWuGB6sxrX
+         KEMTLRICKFa/TKGsdImux1kw1xs9YNliBBxxbHjw+G3/hRXS5mG67l7vK2woiFpeRTnU
+         A69IIGO+dp4uYcshzYT9TGORFXTowYDDX7JvUvV0GYTq7nZ/nuRLXlXxNFAAHb1jl9t6
+         /dtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794927818; x=1795532618;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FhDkCY+HRr1h2SeUFyi3k83ZYwhiKXXvaa6v5p+Q4oQ=;
+        b=XkL1Mx1snyCqtoZQ77xYTEMRWo3V6m8o5ejOWJ3P80gVoxgiHowxpQOnoc9HB0VAXo
+         daEW8C29seomUqTLT3RnTBMJCQEOOc+khiGufnsT39V3c8/FrpoYUawMmEeo1Wne2Hhb
+         qnGUGe7UT6MOmhRgUUnB5C5vlyAJXWUJY1o2bqmL2q4XGdCQ05CN3HmtSkEBg6JL8XuC
+         xJ6n1r6VuccATGK24tDg74ZS7YYKNVdp/fYJxIzhTPCcCRIX1MhaytOeZ9puTXOIvihr
+         467q31dx04bXcggt5OsLcP9uFdx5GJMfk5z5h3XsW+IU0QALQ3ofxdagc8+94rJOfY0j
+         +edw==
+X-Forwarded-Encrypted: i=1; AL+hErFOzhN0Iocspa0Ol015L2jXuEEbCOLUUZlKIKV3JmQ0a/jpvwclMds9rUaoCUOzvCUxgrwdRhlqCBFh7vUN@vger.kernel.org
+X-Gm-Message-State: APuU4Z+ImDwHtwpsKmsZ6UgaBKppUIz0xpN9CU1Uju+02sV+ABb9Mcne
+	2/mc532gVB2zwZehvp5QKP6dmpqH/25OT4gCXdXFINWunZkpiU7d4ujPXnHi2jrRDubW34pF1eQ
+	91X5ZyYXNNltcT/BWGFse3D4q4PbPzeASn2elhS8jv6d/+TbXKU+XdWdyhsl46uhxwpfxwji9Jh
+	XTRRPx/g==
+X-Gm-Gg: AYBFou3ZZoaxSJq0MIz7GMibktNwumBOWHLarw1MOa51nWH8YdOEYk9cTKgM2x9j3rO
+	D+XET5TghmTmGGkr9bn7AZdAWn0s4hM9tdtowTlxF6nCnvRbLsew1sCXYkxhxC033hmqRLTVMfV
+	GGOWGnbh6Ezc5EfLe1s7OBu2WuF2d87rzvR0xX+sq2gkc6tW/ODUek6LksS8/smeW95ASf2Cor9
+	m1KBDeJghPh5+5gsW6RG7nqGdkCI1ajGcCkyLReXmTHNENpj5kDDH+/tBJZXK854ryL3hrAYv1L
+	hasuDdoR/62sWGOJgVOo3HAqyNRG4MYif+1DMXjs+Fai1lr/9Gvde5/Np59LuX7NYmaVsy7rbR0
+	CXM+gH01px2BkoMn9l1lDHPqgHYDAlUPRJzl+XrkCFu/gH51+rq7vieW7XljdXNOEKV2DHKdTI0
+	a670U=
+X-Received: by 2002:a05:6122:3b1a:b0:5d2:d60c:6c48 with SMTP id 71dfb90a1353d-5ee344e8201mr6488205e0c.0.1794927817994;
+        Tue, 17 Nov 2026 07:03:37 -0800 (PST)
+X-Received: by 2002:a05:6122:3b1a:b0:5d2:d60c:6c48 with SMTP id 71dfb90a1353d-5ee344e8201mr6488100e0c.0.1794927817243;
+        Tue, 17 Nov 2026 07:03:37 -0800 (PST)
+Received: from [172.20.97.52] ([195.50.164.66])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7ad96096sm37231895e9.9.2026.11.17.07.03.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 17 Nov 2026 07:03:36 -0800 (PST)
+Message-ID: <c0b63f73-6491-4da9-b550-f5ad3d276415@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 16:03:34 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,861 +117,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="munz3fsjlz5cz7th"
-Content-Disposition: inline
-In-Reply-To: <20261116-pwm_qcom_shikra-v1-2-67ee4553adc5@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] Fix up AON clamps on qmp-combo-phy
+To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
+References: <20261102-topic-qmp_aon_clamp-v1-0-141c2cb6cdf6@oss.qualcomm.com>
+ <179477514161.135135.15496134606156270634.b4-reply@b4>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <179477514161.135135.15496134606156270634.b4-reply@b4>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=LaipeTfi c=1 sm=1 tr=0 ts=6afc6ccb cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=R_VssaL8g6-HNQvAZl0A:9
+ a=QEXdDO2ut3YA:10 a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA1OSBTYWx0ZWRfX6QwAoJXrdauh
+ i5yc/okuN5hwtm6ttUR6l6fP/7lI2brHmAMpxaBB23fUyfOGZ6Z4HJ8cffHZlq5t9sQQFb8f8Bu
+ ToPPzZYk56/UznJObfgxgGh4la2vAyY=
+X-Proofpoint-GUID: iJwspIluNJKWXuSAO9dwuqiZp3a7fevK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA1OSBTYWx0ZWRfX6keu6QgRwniL
+ vk4RNwvxkObhkWAuHdLSDSMICbzCEF6AlrZULzXUdLDSbqv3QASCM9A93+P9T865idl0/fux8PB
+ o28IT2JszlgwwSGh7YD1R8ZXzDxm2eQqQbtkUHGH3O2CtF+sDOX3wArdRF9RJsMqYsLkqOel5vG
+ eLTjyhoKeWLV+9brR9p4ORCZacv5c1GW1FrlpTc6BbAd7SaRdfMCy9N/m0Owh24iSUdLdXM7x0C
+ s313mAYStSf21Cxxt+xmyOFqSEq0/xXJJ+hZuHD/xLnEprxtOUnYT5vONBOJttLnoosQOwU+A52
+ ruweXRIsjcS8cWojC623gXW9EBKrsW4nmDNoKf6u5826SBb2KnEs4MMRJm0Xo7kcaZvUZf16Da/
+ AGomfxTgFVGuRgf3k7GzJHCdIHJKk7QHPpZpJi6gVrvfu+5QCRp4Q1l3u/solPPqSc1qZJ1ndYt
+ tq1MhJi9Rd9VI9qJIcw==
+X-Proofpoint-ORIG-GUID: iJwspIluNJKWXuSAO9dwuqiZp3a7fevK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-17_02,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170059
 
 
---munz3fsjlz5cz7th
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 2/3] pwm: qcom: add Shikra PWM controller support
-MIME-Version: 1.0
 
-On Mon, Nov 16, 2026 at 12:29:49PM +0530, Taniya Das wrote:
-> Add support for the Pulse Width Modulation (PWM) controller on Qualcomm
-> Shikra SoCs.
->=20
-> The controller has a shared output-enable register and up to ten frame
-> blocks with independent configuration registers. Model each available
-> frame from its DT child node, and retain the shared AHB and PWM core
-> clocks while an output is active.
->=20
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> ---
->  drivers/pwm/Kconfig    |  13 +
->  drivers/pwm/Makefile   |   1 +
->  drivers/pwm/pwm-qcom.c | 685 +++++++++++++++++++++++++++++++++++++++++++=
-++++++
->  3 files changed, 699 insertions(+)
->=20
-> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-> index aacd800687e7c98b2272ddb01447356349425032..ae229e922521e97d88610887d=
-a5ccb0f7433fbd3 100644
-> --- a/drivers/pwm/Kconfig
-> +++ b/drivers/pwm/Kconfig
-> @@ -566,6 +566,19 @@ config PWM_PXA
->  	  To compile this driver as a module, choose M here: the module
->  	  will be called pwm-pxa.
-> =20
-> +config PWM_QCOM
-> +	tristate "Qualcomm PWM support"
-> +	depends on ARCH_QCOM || COMPILE_TEST
-> +	depends on COMMON_CLK && HAS_IOMEM && OF
-> +	select REGMAP_MMIO
-> +	help
-> +	  PWM framework driver for the PWM block found on Qualcomm SoCs,
-> +	  which supports multiple PWM frames. Each frame can be
-> +	  configured independently of the others.
-> +
-> +	  To compile this driver as a module, choose M here: the module will
-> +	  be called pwm-qcom.
-> +
->  config PWM_RASPBERRYPI_POE
->  	tristate "Raspberry Pi Firmware PoE Hat PWM support"
->  	# Make sure not 'y' when RASPBERRYPI_FIRMWARE is 'm'. This can only
-> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-> index 7e2c34cc4f6a955b04edcdd08721264d0d477f2e..a7e0095b573448cb643b19f4d=
-a2e6f02ada4bc39 100644
-> --- a/drivers/pwm/Makefile
-> +++ b/drivers/pwm/Makefile
-> @@ -50,6 +50,7 @@ obj-$(CONFIG_PWM_NTXEC)		+=3D pwm-ntxec.o
->  obj-$(CONFIG_PWM_OMAP_DMTIMER)	+=3D pwm-omap-dmtimer.o
->  obj-$(CONFIG_PWM_PCA9685)	+=3D pwm-pca9685.o
->  obj-$(CONFIG_PWM_PXA)		+=3D pwm-pxa.o
-> +obj-$(CONFIG_PWM_QCOM)		+=3D pwm-qcom.o
->  obj-$(CONFIG_PWM_RASPBERRYPI_POE)	+=3D pwm-raspberrypi-poe.o
->  obj-$(CONFIG_PWM_RENESAS_RCAR)	+=3D pwm-rcar.o
->  obj-$(CONFIG_PWM_RENESAS_RZG2L_GPT)	+=3D pwm-rzg2l-gpt.o
-> diff --git a/drivers/pwm/pwm-qcom.c b/drivers/pwm/pwm-qcom.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..9b15cdcaa5c76a3f2a9d7871b=
-4e12d52cf89610a
-> --- /dev/null
-> +++ b/drivers/pwm/pwm-qcom.c
-> @@ -0,0 +1,685 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + *
-> + */
+On 15-Nov-26 21:39, Manivannan Sadhasivam wrote:
+> On 2026-11-02 14:59 +0100, Konrad Dybcio wrote:
+>> Various platforms have apparently not had the AON clamp writes end up
+>> at the desired registers. This fixes that up, based on the robot's
+>> findings.
+>>
+>> Depends on (reviewed and ready to be picked up):
+>> https://lore.kernel.org/linux-arm-msm/20261023123512.1912-1-26rote@gmail.com/
+>>
+>> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
+> No Fixes tag for any of these patches? Anyhow
 
-Please describe the general hardware properties in a "Limitations"
-paragraph. Look at other drivers for the format and what to mention
-there.
+I concluded that with the amount of churn in this driver it'd
+take an unreasonable amount of time to pinpoint it exactly
 
-> +
-> +#include <linux/bitops.h>
-> +#include <linux/clk.h>
-> +#include <linux/math64.h>
-> +#include <linux/mod_devicetable.h>
-
-Don't include <linux/mod_devicetable.h>. <linux/platform_device.h>
-already gives you of_device_id, so just drop it.
-
-> +#include <linux/module.h>
-> +#include <linux/mutex.h>
-> +#include <linux/of.h>
-> +#include <linux/of_address.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/pwm.h>
-> +#include <linux/regmap.h>
-> +
-> +/* Offsets */
-> +#define PWM_TOPCTL0			0x0
-> +
-> +/* offsets per frame */
-> +#define PWM_CTL0			0x0
-> +#define PWM_CTL1			0x4
-> +#define PWM_CTL2			0x8
-> +#define PWM_CYC_CFG			0xc
-> +#define PWM_UPDATE			0x10
-> +#define PWM_RESET			0x18
-> +
-> +#define PWM_FRAME_POLARITY_BIT		BIT(0)
-> +#define PWM_FRAME_ROLLOVER_CNT_BIT	BIT(4)
-> +#define PWM_FRAME_RESET_BIT		BIT(0)
-
-Please add a proper prefix to these defintions. "PWM_UPDATE" sounds much
-more generic than it is.
-
-Also ideally the bit defintions start with the register name.
-
-> +/* All per-frame 16-bit value fields (CYC_CFG, CTL1, CTL2). */
-> +#define PWM_FRAME_VAL_MASK		GENMASK(15, 0)
-> +
-> +/*
-> + * struct qcom_pwm_priv_data - per-compatible hardware description
-> + * @max_channels: number of frames supported by this hardware variant.
-> + * @pwm_reset_support: whether PWM_RESET is implemented, allowing the pe=
-riod
-> + *	to be changed after it has already been set once.
-> + * @pwm_cnt_rollover: whether PWM_FRAME_ROLLOVER_CNT_BIT is implemented,
-> + *	needed so period changes don't get stuck waiting on the counter.
-> + */
-> +struct qcom_pwm_priv_data {
-> +	unsigned int max_channels;
-> +	bool pwm_reset_support;
-> +	bool pwm_cnt_rollover;
-> +};
-> +
-> +/*
-> + * struct qcom_pwm_frames - Information regarding per PWM frame
-> + * @frame_id: Id number associated with each frame.
-> + * @polarity: Current polarity of the particular frame.
-> + * @regmap: regmap covering this frame's own register block. Each frame =
-now
-> + *	owns its own "reg" range in DT, so registers are accessed at their
-> + *	plain offsets within this regmap instead of as an offset into a
-> + *	shared parent regmap.
-> + * @current_period_ns: Current period of the particular frame.
-> + * @current_duty_ns: Current duty cycle of the particular frame.
-> + * @current_freq: Current frequency of frame.
-> + * @freq_set: This bool flag is responsible for setting period once per =
-frame.
-> + * @frame_lock: mutex lock per frame.
-> + * @cnt_rollover_en: This bool flag is used to set rollover bit per fram=
-e.
-> + */
-> +struct qcom_pwm_frames {
-> +	u32	frame_id;
-> +	u32	polarity;
-> +	struct regmap *regmap;
-> +	u64	current_period_ns;
-> +	u64	current_duty_ns;
-> +	unsigned long current_freq;
-> +	bool	is_enabled;
-> +	bool	freq_set;
-> +	struct mutex frame_lock; /* PWM per frame lock */
-> +	bool cnt_rollover_en;
-
-Only a single space between type name and member name.
-
-> +};
-> +
-> +/*
-> + * struct qcom_pwm_chip - Information regarding per PWM block
-> + * @regmap: regmap of the shared PWM_TOPCTL0 enable register.
-> + * @frames: structure for all frames of each PWM block.
-> + * @priv_data: per-compatible hardware description.
-> + * @ahb: AHB clock providing access to the PWM block.
-> + * @core: shared clock providing the PWM frame rate.
-> + * @lock: mutex lock per chip (enable/disable path).
-> + * @num_frames: number of frames in each PWM block.
-> + */
-> +struct qcom_pwm_chip {
-> +	struct regmap		*regmap;
-> +	struct qcom_pwm_frames	*frames;
-> +	const struct qcom_pwm_priv_data	*priv_data;
-> +	struct clk		*ahb;
-> +	struct clk		*core;
-> +	/* This lock to be used for Enable/Disable as it is per PWM channel */
-> +	struct mutex		lock;
-> +	u32			num_frames;
-> +};
-> +
-> +static inline struct qcom_pwm_chip *to_qcom_pwm_chip(struct pwm_chip *ch=
-ip)
-
-If you rename that to qcome_pwm_from_chip it also has the common
-function prefix.
-
-> +{
-> +	return pwmchip_get_drvdata(chip);
-> +}
-> +
-> +static int qcom_pwm_clks_enable(struct qcom_pwm_chip *chip)
-> +{
-> +	int ret;
-> +
-> +	ret =3D clk_prepare_enable(chip->ahb);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D clk_prepare_enable(chip->core);
-> +	if (ret)
-> +		clk_disable_unprepare(chip->ahb);
-> +
-> +	return ret;
-> +}
-> +
-> +static void qcom_pwm_clks_disable(struct qcom_pwm_chip *chip)
-> +{
-> +	clk_disable_unprepare(chip->core);
-> +	clk_disable_unprepare(chip->ahb);
-> +}
-> +
-> +static int qcom_pwm_calc_frequency(struct qcom_pwm_chip *chip,
-> +				   u64 period_ns, unsigned long rate, u32 hw_idx)
-> +{
-> +	struct regmap *frame_regmap =3D chip->frames[hw_idx].regmap;
-> +	u64 cycles;
-> +	int ret;
-> +
-> +	/*
-> +	 * PWM client can set the period only once if the HW version does
-> +	 * not support reset functionality.
-> +	 */
-> +	if (chip->frames[hw_idx].freq_set && !chip->priv_data->pwm_reset_suppor=
-t)
-> +		return 0;
-> +
-> +	/*
-> +	 * Number of core-clock cycles in one PWM period. Round down so the
-> +	 * implemented period never exceeds the requested one, as the PWM API
-> +	 * requires. PWM_CYC_CFG holds (cycles - 1) in its low 16 bits, so
-> +	 * cycles is bounded to [2, 65536], i.e. an output frequency from
-> +	 * rate / 2 down to rate / 65536.
-> +	 */
-> +	cycles =3D mul_u64_u64_div_u64(period_ns, rate, NSEC_PER_SEC);
-> +	if (cycles < 2 || cycles > 65536) {
-> +		dev_dbg(regmap_get_device(frame_regmap),
-> +			"period %llu ns out of range for rate %lu Hz\n",
-> +			period_ns, rate);
-> +		return -ERANGE;
-> +	}
-> +
-> +	ret =3D regmap_update_bits(frame_regmap, PWM_CYC_CFG,
-> +				 PWM_FRAME_VAL_MASK, cycles - 1);
-> +	if (ret)
-> +		return ret;
-> +
-> +	chip->frames[hw_idx].current_freq =3D div64_ul(rate, cycles);
-> +	chip->frames[hw_idx].freq_set =3D true;
-> +	chip->frames[hw_idx].current_period_ns =3D period_ns;
-> +
-> +	return 0;
-> +}
-> +
-> +static int qcom_pwm_get_state(struct pwm_chip *pwm_chip, struct pwm_devi=
-ce *pwm,
-> +			      struct pwm_state *state)
-> +{
-> +	struct qcom_pwm_chip *chip =3D to_qcom_pwm_chip(pwm_chip);
-> +	struct qcom_pwm_frames *frame =3D &chip->frames[pwm->hwpwm];
-> +	unsigned long rate;
-> +	u32 topctl, ctl0, ctl1, cyc_cfg, cycles;
-> +	int ret;
-> +
-> +	if (!frame->regmap)
-> +		return -ENODEV;
-> +
-> +	/* Both clocks are needed for register access. */
-> +	ret =3D qcom_pwm_clks_enable(chip);
-> +	if (ret)
-> +		return ret;
-> +
-> +	rate =3D clk_get_rate(chip->core);
-> +	if (!rate) {
-> +		ret =3D -EINVAL;
-> +		goto err_clks;
-> +	}
-> +
-> +	mutex_lock(&frame->frame_lock);
-> +
-> +	ret =3D regmap_read(chip->regmap, PWM_TOPCTL0, &topctl);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_read(frame->regmap, PWM_CTL0, &ctl0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_read(frame->regmap, PWM_CTL1, &ctl1);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_read(frame->regmap, PWM_CYC_CFG, &cyc_cfg);
-> +	if (ret)
-> +		goto out;
-> +
-> +	cycles =3D (cyc_cfg & PWM_FRAME_VAL_MASK) + 1;
-> +	state->enabled =3D !!(topctl & BIT(frame->frame_id));
-> +	state->polarity =3D (ctl0 & PWM_FRAME_POLARITY_BIT) ?
-> +			  PWM_POLARITY_INVERSED : PWM_POLARITY_NORMAL;
-> +	/*
-> +	 * Round up so re-applying the returned state reproduces the same
-> +	 * register values, since qcom_pwm_config() rounds the period and duty
-> +	 * cycle down.
-> +	 */
-> +	state->period =3D DIV_ROUND_UP_ULL((u64)cycles * NSEC_PER_SEC, rate);
-> +	state->duty_cycle =3D DIV_ROUND_UP_ULL((u64)(ctl1 & PWM_FRAME_VAL_MASK)=
- *
-> +					     NSEC_PER_SEC, rate);
-> +out:
-> +	mutex_unlock(&frame->frame_lock);
-> +err_clks:
-> +	qcom_pwm_clks_disable(chip);
-> +
-> +	return ret;
-> +}
-> +
-> +static int qcom_pwm_config(struct qcom_pwm_chip *chip,
-> +			   u32 hw_idx, u64 duty_ns, u64 period_ns, int polarity)
-> +{
-> +	struct regmap *frame_regmap =3D chip->frames[hw_idx].regmap;
-> +	u64 ctl1, duty_percent;
-> +	unsigned long rate;
-> +	u64 current_period =3D period_ns;
-> +	bool clks_enabled =3D false;
-> +	int ret;
-> +	u32 cyc_cfg;
-> +
-> +	mutex_lock(&chip->frames[hw_idx].frame_lock);
-> +
-> +	if (!chip->frames[hw_idx].is_enabled) {
-> +		ret =3D qcom_pwm_clks_enable(chip);
-> +		if (ret)
-> +			goto err_unlock;
-> +		clks_enabled =3D true;
-> +	}
-> +
-> +	rate =3D clk_get_rate(chip->core);
-> +	if (!rate) {
-> +		ret =3D -EINVAL;
-> +		goto out;
-> +	}
-> +
-> +	/*
-> +	 * Set the counter rollover enable bit, so that counter doesn't get stu=
-ck
-> +	 * in period change configuration.
-> +	 */
-> +	if (chip->priv_data->pwm_cnt_rollover && !chip->frames[hw_idx].cnt_roll=
-over_en) {
-> +		ret =3D regmap_update_bits(frame_regmap, PWM_CTL0,
-> +					 PWM_FRAME_ROLLOVER_CNT_BIT,
-> +					 PWM_FRAME_ROLLOVER_CNT_BIT);
-> +		if (ret)
-> +			goto out;
-> +
-> +		chip->frames[hw_idx].cnt_rollover_en =3D true;
-> +	}
-> +
-> +	if (chip->frames[hw_idx].freq_set &&
-> +	    chip->frames[hw_idx].current_period_ns !=3D period_ns) {
-> +		if (chip->priv_data->pwm_reset_support) {
-> +			ret =3D regmap_update_bits(frame_regmap, PWM_RESET,
-> +						 PWM_FRAME_RESET_BIT,
-> +						 PWM_FRAME_RESET_BIT);
-> +			if (ret)
-> +				goto out;
-> +		} else {
-> +			ret =3D -EINVAL;
-> +			goto out;
-> +		}
-> +	}
-> +
-> +	ret =3D qcom_pwm_calc_frequency(chip, current_period, rate, hw_idx);
-> +	if (ret)
-> +		goto out;
-> +
-> +	if (chip->frames[hw_idx].polarity !=3D polarity) {
-> +		ret =3D regmap_update_bits(frame_regmap, PWM_CTL0,
-> +					 PWM_FRAME_POLARITY_BIT, polarity);
-> +		if (ret)
-> +			goto out;
-> +
-> +		chip->frames[hw_idx].polarity =3D polarity;
-> +	}
-> +
-> +	ctl1 =3D DIV_ROUND_CLOSEST(rate, chip->frames[hw_idx].current_freq);
-> +	duty_percent =3D mul_u64_add_u64_div_u64(duty_ns, 100, current_period /=
- 2, current_period);
-> +	ctl1 =3D mul_u64_add_u64_div_u64(ctl1, duty_percent, 50, 100);
-> +
-> +	ret =3D regmap_read(frame_regmap, PWM_CYC_CFG, &cyc_cfg);
-> +	if (ret)
-> +		goto out;
-> +
-> +	if ((ctl1 > cyc_cfg || ctl1 =3D=3D 0) && duty_ns !=3D 0) {
-> +		dev_err(regmap_get_device(frame_regmap),
-> +			"duty cycle out of valid range\n");
-> +		ret =3D -ERANGE;
-> +		goto out;
-> +	}
-> +
-> +	ret =3D regmap_update_bits(frame_regmap, PWM_CTL2, PWM_FRAME_VAL_MASK, =
-0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame_regmap, PWM_CTL1, PWM_FRAME_VAL_MASK, =
-ctl1);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame_regmap, PWM_UPDATE, BIT(0), 1);
-> +	if (ret)
-> +		goto out;
-> +
-> +	chip->frames[hw_idx].current_duty_ns =3D duty_ns;
-> +out:
-> +	if (clks_enabled)
-> +		qcom_pwm_clks_disable(chip);
-> +err_unlock:
-> +	mutex_unlock(&chip->frames[hw_idx].frame_lock);
-> +
-> +	return ret;
-> +}
-> +
-> +static int qcom_pwm_enable(struct qcom_pwm_chip *chip,
-> +			   struct pwm_device *pwm)
-> +{
-> +	struct device *dev =3D regmap_get_device(chip->regmap);
-> +	int ret;
-> +	u32 val, hw_idx =3D pwm->hwpwm;
-> +
-> +	ret =3D qcom_pwm_clks_enable(chip);
-> +	if (ret)
-> +		return ret;
-> +
-> +	mutex_lock(&chip->lock);
-> +
-> +	dev_dbg(dev, "enable: hw_idx=3D%u frame_id=3D%u\n",
-> +		hw_idx, chip->frames[hw_idx].frame_id);
-> +
-> +	val =3D BIT(chip->frames[hw_idx].frame_id);
-> +	ret =3D regmap_update_bits(chip->regmap, PWM_TOPCTL0, val, val);
-> +	if (!ret)
-> +		chip->frames[hw_idx].is_enabled =3D true;
-> +
-> +	mutex_unlock(&chip->lock);
-> +
-> +	if (ret)
-> +		goto err_clks;
-> +
-> +	return 0;
-> +
-> +err_clks:
-> +	qcom_pwm_clks_disable(chip);
-> +	return ret;
-> +}
-> +
-> +static int qcom_pwm_disable(struct qcom_pwm_chip *chip,
-> +			    struct pwm_device *pwm)
-> +{
-> +	struct device *dev =3D regmap_get_device(chip->regmap);
-> +	u32 val, hw_idx =3D pwm->hwpwm;
-> +	int ret;
-> +
-> +	mutex_lock(&chip->lock);
-> +
-> +	dev_dbg(dev, "disable: hw_idx=3D%u\n", hw_idx);
-> +
-> +	val =3D BIT(chip->frames[hw_idx].frame_id);
-> +	ret =3D regmap_update_bits(chip->regmap, PWM_TOPCTL0, val, 0);
-> +	if (!ret)
-> +		chip->frames[hw_idx].is_enabled =3D false;
-> +
-> +	mutex_unlock(&chip->lock);
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +	qcom_pwm_clks_disable(chip);
-> +
-> +	return 0;
-> +}
-> +
-> +static int qcom_pwm_apply(struct pwm_chip *pwm_chip, struct pwm_device *=
-pwm,
-> +			  const struct pwm_state *state)
-> +{
-> +	struct qcom_pwm_chip *chip =3D to_qcom_pwm_chip(pwm_chip);
-> +	struct pwm_state curr_state;
-> +	u32 hw_idx =3D pwm->hwpwm;
-> +	int ret;
-> +
-> +	pwm_get_state(pwm, &curr_state);
-
-Don't call PWM functions from callbacks. pwm_get_state() doesn't take
-the chip lock, but that's an implementation detail that you shouldn't
-rely on.
-
-> +
-> +	if (state->period &&
-> +	    (state->period !=3D curr_state.period ||
-> +	     state->duty_cycle !=3D curr_state.duty_cycle ||
-> +	     state->polarity !=3D curr_state.polarity)) {
-
-Don't do these checks, the PWM core already handles stuff like that.
-
-> +		ret =3D qcom_pwm_config(chip, hw_idx, state->duty_cycle,
-> +				      state->period, state->polarity);
-> +		if (ret) {
-> +			dev_err(pwmchip_parent(pwm_chip),
-> +				"failed to update PWM configuration\n");
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	if (state->enabled !=3D curr_state.enabled) {
-> +		if (state->enabled)
-> +			return qcom_pwm_enable(chip, pwm);
-> +
-> +		ret =3D qcom_pwm_disable(chip, pwm);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int qcom_pwm_request(struct pwm_chip *pwm_chip, struct pwm_device=
- *pwm)
-> +{
-> +	struct qcom_pwm_chip *chip =3D to_qcom_pwm_chip(pwm_chip);
-> +
-> +	if (!chip->frames[pwm->hwpwm].regmap)
-> +		return -ENODEV;
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * Reset the software state and the frame's own registers (the same
-> + * PWM_CTL0/PWM_CTL1/PWM_CYC_CFG registers qcom_pwm_get_state() reads ba=
-ck)
-> + * to their power-on defaults, and disable an active PWM frame.
-> + */
-> +static void qcom_pwm_free(struct pwm_chip *pwm_chip, struct pwm_device *=
-pwm)
-> +{
-> +	struct qcom_pwm_chip *chip =3D to_qcom_pwm_chip(pwm_chip);
-
-The variable name "chip" is reserved for variables of type pwm_chip. So
-please use "chip" instead of "pwm_chip" and something else for the
-struct qcom_pwm_chip variables.
-
-> +	struct qcom_pwm_frames *frame =3D &chip->frames[pwm->hwpwm];
-> +	bool enabled;
-> +	int ret;
-> +
-> +	mutex_lock(&chip->lock);
-> +	enabled =3D frame->is_enabled;
-> +	mutex_unlock(&chip->lock);
-> +
-> +	if (enabled) {
-> +		ret =3D qcom_pwm_disable(chip, pwm);
-> +		if (ret) {
-> +			dev_err(pwmchip_parent(pwm_chip),
-> +				"failed to disable PWM on free\n");
-> +			return;
-> +		}
-> +	}
-> +
-> +	ret =3D qcom_pwm_clks_enable(chip);
-> +	if (ret) {
-> +		dev_err(pwmchip_parent(pwm_chip),
-> +			"failed to enable clocks on free\n");
-> +		return;
-> +	}
-> +
-> +	mutex_lock(&frame->frame_lock);
-> +
-> +	ret =3D regmap_update_bits(frame->regmap, PWM_CTL0,
-> +				 PWM_FRAME_POLARITY_BIT | PWM_FRAME_ROLLOVER_CNT_BIT, 0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame->regmap, PWM_CTL1, PWM_FRAME_VAL_MASK,=
- 0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame->regmap, PWM_CTL2, PWM_FRAME_VAL_MASK,=
- 0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame->regmap, PWM_CYC_CFG, PWM_FRAME_VAL_MA=
-SK, 0);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret =3D regmap_update_bits(frame->regmap, PWM_UPDATE, BIT(0), 1);
-> +	if (ret)
-> +		goto out;
-> +
-> +	if (chip->priv_data->pwm_reset_support) {
-> +		ret =3D regmap_update_bits(frame->regmap, PWM_RESET,
-> +					 PWM_FRAME_RESET_BIT, PWM_FRAME_RESET_BIT);
-> +		if (ret)
-> +			goto out;
-> +	}
-> +
-> +	frame->freq_set =3D false;
-> +	frame->current_period_ns =3D 0;
-> +	frame->current_duty_ns =3D 0;
-> +	frame->current_freq =3D 0;
-> +	frame->polarity =3D 0;
-> +	frame->cnt_rollover_en =3D false;
-> +out:
-> +	mutex_unlock(&frame->frame_lock);
-> +	qcom_pwm_clks_disable(chip);
-> +
-> +	if (ret)
-> +		dev_err(pwmchip_parent(pwm_chip),
-> +			"failed to reset PWM registers on free\n");
-> +}
-> +
-> +static const struct pwm_ops qcom_pwm_ops =3D {
-> +	.request =3D qcom_pwm_request,
-> +	.apply =3D qcom_pwm_apply,
-> +	.free =3D qcom_pwm_free,
-> +	.get_state =3D qcom_pwm_get_state,
-
-I don't accept new drivers with .apply() and .get_state(). Please use
-the waveform callbacks instead.
-> +};
-> +
-> +static const struct regmap_config pwm_regmap_config =3D {
-> +	.reg_bits   =3D 32,
-> +	.reg_stride =3D 4,
-> +	.val_bits   =3D 32,
-> +	.fast_io    =3D true,
-> +};
-> +
-> +static int qcom_pwm_parse_dt(struct platform_device *pdev,
-> +			     struct pwm_chip *pwm_chip,
-> +			     struct qcom_pwm_chip *chip)
-> +{
-> +	struct device *dev =3D pwmchip_parent(pwm_chip);
-> +	struct device_node *np =3D pdev->dev.of_node;
-> +	struct device_node *frame_node;
-> +	void __iomem *base;
-> +	unsigned long frame_ids =3D 0;
-> +	int ret;
-> +
-> +	base =3D devm_platform_ioremap_resource(pdev, 0);
-> +	if (IS_ERR(base))
-> +		return PTR_ERR(base);
-> +
-> +	chip->regmap =3D devm_regmap_init_mmio(dev, base, &pwm_regmap_config);
-> +	if (IS_ERR(chip->regmap))
-> +		return dev_err_probe(dev, PTR_ERR(chip->regmap),
-> +				"failed to initialise regmap\n");
-> +
-> +	chip->ahb =3D devm_clk_get(dev, "ahb");
-> +	if (IS_ERR(chip->ahb))
-> +		return dev_err_probe(dev, PTR_ERR(chip->ahb),
-> +				"failed to get ahb clock\n");
-> +
-> +	chip->core =3D devm_clk_get(dev, "core");
-> +	if (IS_ERR(chip->core))
-> +		return dev_err_probe(dev, PTR_ERR(chip->core),
-> +				"failed to get core clock\n");
-> +
-> +	chip->frames =3D devm_kcalloc(dev, chip->num_frames,
-> +				    sizeof(*chip->frames), GFP_KERNEL);
-
-I think devm_kzalloc_objs is the right function to use here.
-
-> +	if (!chip->frames)
-> +		return -ENOMEM;
-> +
-> +	for_each_available_child_of_node(np, frame_node) {
-> +		u32 n;
-> +		struct resource res;
-> +
-> +		if (of_property_read_u32(frame_node, "qcom,frame-index", &n)) {
-> +			of_node_put(frame_node);
-
-If you use for_each_available_child_of_node_scoped you don't need to
-care about the of_node_put() calls for earch error path.
-
-> +			return dev_err_probe(dev, -EINVAL,
-> +					"missing qcom,frame-index property in DT node\n");
-> +		}
-> +
-> +		if (n >=3D chip->priv_data->max_channels) {
-> +			of_node_put(frame_node);
-> +			return dev_err_probe(dev, -EINVAL,
-> +					"invalid qcom,frame-index %u\n", n);
-> +		}
-> +
-> +		if (test_and_set_bit(n, &frame_ids)) {
-> +			of_node_put(frame_node);
-> +			return dev_err_probe(dev, -EINVAL,
-> +					"duplicate qcom,frame-index %u\n", n);
-> +		}
-> +
-> +		chip->frames[n].frame_id =3D n;
-> +
-> +		ret =3D of_address_to_resource(frame_node, 0, &res);
-> +		if (ret) {
-> +			of_node_put(frame_node);
-> +			return dev_err_probe(dev, ret,
-> +					"failed to get frame-%u resource\n", n);
-> +		}
-> +
-> +		base =3D devm_ioremap_resource(dev, &res);
-> +		if (IS_ERR(base)) {
-> +			of_node_put(frame_node);
-> +			return PTR_ERR(base);
-> +		}
-> +
-> +		chip->frames[n].regmap =3D
-> +			devm_regmap_init_mmio(dev, base, &pwm_regmap_config);
-> +		if (IS_ERR(chip->frames[n].regmap)) {
-> +			of_node_put(frame_node);
-> +			return dev_err_probe(dev, PTR_ERR(chip->frames[n].regmap),
-> +						 "failed to initialise frame regmap\n");
-> +		}
-> +
-> +		mutex_init(&chip->frames[n].frame_lock);
-> +	}
-> +
-> +	/* The hardware requires all PWM outputs to be disabled at probe. */
-> +	ret =3D qcom_pwm_clks_enable(chip);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D regmap_update_bits(chip->regmap, PWM_TOPCTL0,
-> +				 GENMASK(chip->priv_data->max_channels - 1, 0), 0);
-> +
-> +	qcom_pwm_clks_disable(chip);
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct qcom_pwm_priv_data shikra_pwm_data =3D {
-> +	.max_channels =3D 10,
-> +};
-
-As long as there is only a single variant, just hardcode the info here.
-
-> +static const struct of_device_id qcom_pwm_of_match[] =3D {
-> +	{ .compatible =3D "qcom,shikra-pwm", .data =3D &shikra_pwm_data },
-> +	{ },
-
-Drop the trailing comma after the list terminator.
-
-> +};
-> +MODULE_DEVICE_TABLE(of, qcom_pwm_of_match);
-> +
-> +static int qcom_pwm_probe(struct platform_device *pdev)
-> +{
-> +	struct pwm_chip *pwm_chip;
-> +	struct qcom_pwm_chip *chip;
-> +	const struct qcom_pwm_priv_data *priv;
-> +	struct device_node *np =3D pdev->dev.of_node;
-> +	u32 child_count;
-> +	int rc;
-> +
-> +	priv =3D of_device_get_match_data(&pdev->dev);
-> +	if (!priv)
-> +		return -EINVAL;
-> +
-> +	/* At least one available frame resource must be described. */
-> +	child_count =3D of_get_available_child_count(np);
-> +	if (!child_count)
-> +		return dev_err_probe(&pdev->dev, -EINVAL,
-> +				"at least one PWM frame must be described\n");
-
-Error messages start with a capital letter.
-
-> +	pwm_chip =3D devm_pwmchip_alloc(&pdev->dev, priv->max_channels, sizeof(=
-*chip));
-> +	if (IS_ERR(pwm_chip))
-> +		return PTR_ERR(pwm_chip);
-> +
-> +	chip =3D to_qcom_pwm_chip(pwm_chip);
-> +	chip->priv_data  =3D priv;
-
-Single space before =3D please
-
-> +	chip->num_frames =3D priv->max_channels;
-> +	mutex_init(&chip->lock);
-> +
-> +	pwm_chip->ops =3D &qcom_pwm_ops;
-> +
-> +	rc =3D qcom_pwm_parse_dt(pdev, pwm_chip, chip);
-> +	if (rc)
-> +		return rc;
-> +
-> +	rc =3D devm_pwmchip_add(&pdev->dev, pwm_chip);
-> +	if (rc)
-> +		return rc;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct platform_driver qcom_pwm_driver =3D {
-> +	.driver		=3D {
-> +		.name		=3D "qcom-pwm",
-> +		.of_match_table	=3D qcom_pwm_of_match,
-> +	},
-> +	.probe		=3D qcom_pwm_probe,
-
-Please use a single space before =3D.
-
-> +};
-> +
-> +module_platform_driver(qcom_pwm_driver);
-> +
-> +MODULE_DESCRIPTION("Qualcomm PWM driver");
-> +MODULE_LICENSE("GPL");
-
-Best regards
-Uwe
-
---munz3fsjlz5cz7th
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmr8aC0ACgkQj4D7WH0S
-/k5fhgf/dOcfREDSKpy1pX8FjB6CbOwWtfiZSlmGhAJs2eSfiCYM+dLJnhKzm1YG
-HPLlraPDvOZx2TreovUuDQKg7atCDFRKhjVf6mT24lfkrPN2WZJFIskAgvI6SEfP
-CNtahwttjFrciyal+zb2bf5YtHIFpwgUv3KzysD8g8qvCogybBtILL2Ek79wgCq7
-EajyuuY+h8MnEaleEl1HXkqxnT2mdgGVdrF0WjLhlRn/0phWsKvp8Hfu+DmD2Eg4
-5tzTdBhHOIoxpYH/welgsbIGuXQ5I/0BbUyBtvSGcSOVvB3jfvjCY+uET5gzN3q8
-+bpQwqf0beMdl0q2eDCGLbNc41mb+A==
-=4CHV
------END PGP SIGNATURE-----
-
---munz3fsjlz5cz7th--
+Konrad
