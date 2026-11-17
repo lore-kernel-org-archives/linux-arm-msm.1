@@ -1,122 +1,80 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794900844;
-	b=io1HcMVuWIbUQMc0KLQfbKZZH2Q6lqTdmzt2macjT6lkawtWLQp7hUS+sZ1XuoHS3eXs
-	 hw+ibUnBLbmJ/7es5kQb/Nj6VcKrS4rmdvX6tc1Mzp9Naym3psoeWyBV0gmzyGrhRnAYf
-	 5IYZGd1ro4h7kjmB/39K/J0elhqFFWjE4xCmZeledLE/pb6cywHuIOKgV4OCkQtOH8o1M
-	 iLH0Y+6yEin2B1mD10zqc1GMlmkySbtfshFYAeOzh1QRDBfzFT8dHEcu39TgzIkPzlqWZ
-	 Xe4NiLxkMMiqL/uXle6oiAAqhL9xupJrQXR7mF/RZEEBHNWMAgABNpkcmvidEsB8i4A==
+	t=1794901871;
+	b=r952WIGGM8ybsnIVnAkMBlfFqKCrYLmkv657D1n3FQqBQrye2mC1qIXneEfncUvSxQYV
+	 WbHesa8N6bcxHa/oBFch29h0hc2GB4HknFGCK1jvAnLOIthk0RRe+X9gp+LuxK21PXy/b
+	 0Xks7KYshCXWQQJfFXPAgdUUJkcaq4Nl51/crVzdBXoJ2HT40IR1auxRRtsKD956FqusK
+	 jNGYclA6yXZ1BXd5spVjiMY7PsOJI9x0Pix82+qB0JFw4aDxhHDZUgY1ujmOs0W1j9hlb
+	 A5b7s/toqFJVO2prfrHSq7UqydwAiklw7DUJiBGfnjM9Nlcx/Oxr3oDgpW4BxZea11A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794900844;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794901871;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
+	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
+	 X-QCInternal:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=C1U6sGJ1wofOSp0VAiQlaKb1uloa76oQfH+mRg/e3Uo=;
-	b=IVGEF+KB7CFLI6b1pBuGDWyFTXDDGhqgOJEVn51DUKG7QlzSBSURPLWvhlTLU0dNXb/w
-	 xoa7fFGr6+HXEttI+74Axip0IqkPpE4JfJkZby7HGsDztNXzZGwX6Req02HPAv23owiHi
-	 uz27HinXaXsqB8EBcwDfBIiSANOU98ShVszBuQEOXkZ2D4oxKPA28qVGpNABRy17AeK13
-	 MMUezds2ijlhG7sd6R8t/7XNkUoKOGQT4fOSz12hubEGT+NZQAT28Mdv9N/DJ4mV5/R7G
-	 ub8TkEh29gEuewJyls5edl/vv8CB71htIfY1aSjW0s8qZ2lWB5eHdFpNEsVJ1DF1OHg==
+	bh=/mAS3fCA1J4k59HYYCZ66lkkBnbONZz6zHLIx9dLCWQ=;
+	b=5EEcPIeHKmqcSEBNykNEuW+x31ME31IHZhfFVwVOhkAM5DswNFySnjgfKWYdQz2vwUQ+
+	 tM5yDDKr/DWJd0ygLdP92ExIkDohWKsMxQPA1klR0hVZBNC02t79DfqOoIzWldAgbcJMC
+	 FQSSMk25VYKecdL/W5fJWgqak0ABNOe462NXL5ZF+i4zaRB9wAVoC53IJTMQt+ptZ28yI
+	 CNQ5hDI5HAKDEhpvTlA52HaoTKNTx2xQY7UqJHQULbjtUQSm8zenmttOPdmwkFp3XZ8lI
+	 JyV0UokPNk20+tZ4ToG5y/k6OZAH2nPWlR++DF9h3tg4Zo/YBNjqMFgQI1LO5sPuHVw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LuPxAYH5;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TwL4z1UP;
+	spf=pass smtp.mailfrom=qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RbuIwaxM;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BED1D606A32A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:34:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BED1D606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A313C606A31C;
+	Tue, 17 Nov 2026 07:51:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A313C606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LuPxAYH5;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TwL4z1UP
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH449mS1699358
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:34:02 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RbuIwaxM
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH535aK3458009;
+	Tue, 17 Nov 2026 07:51:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=C1U6sGJ1wof
-	OSp0VAiQlaKb1uloa76oQfH+mRg/e3Uo=; b=LuPxAYH5NJgQOpppiP1xJ6eD+Ha
-	uGKcXWmiEqWBP9HMl77Z1m06AOijLxs+hlTG0FcEhaq6e//0IhtaKJ6pmTXgmKIJ
-	NdCsB9XDnKQzv2hsycnW/4F5MMdl0OmVIeQiuivYIPCqRubnt729mpNx/xNgBP5e
-	7R3whG3gXooQwLBJSsLnTPLtj9Yi3lB3lDcL3M4HZ1zdIniqthkT2a65ISO5qdCo
-	XM6wMpEUhFSecf3WeQHnbSHzLgQ5eVvrPYwGIp94YYQAJdjUEd7mxEG4MKwPne8U
-	YmNeT0k+d05DzZKQMjRShpAW6kBOxGk2v9ghw/ynIiGmHw09CJP/xsmIsEA==
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com [209.85.210.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0fjugnpn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:34:02 +0000 (GMT)
-Received: by mail-ot1-f70.google.com with SMTP id 46e09a7af769-862ad1e3959so1738458a34.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 23:34:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794900842; x=1795505642; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=C1U6sGJ1wofOSp0VAiQlaKb1uloa76oQfH+mRg/e3Uo=;
-        b=TwL4z1UPOJ7N/+x8s/gf4sL4B9+FV0S5uC01PuWd3cD07jZ3p9ckZ40EmVYWsMyKqj
-         gTZOI3aMlmB5q8o1NW5AdEFK4OksYa65exApYzDl/KHFddorVMMiTE2kWg/NXQJoQP8M
-         nOwGBUojeyPWU4MaIDpOvPkSFGSV6wbRxr4/qVQ052g0JvAXsBgxmd2dWj0Cvt+Z1Urg
-         vclmXS7wnNT+EQONZfazqWkMiKNcjIKQgL30mcXkMnkJ7Pi+CaYndwdg6XLxLKdFfSTB
-         bF8442gWRYAM/oGD7iVs97zj7EfsBmydjxnapHk7wKm8o5+ohKmjhjnnW2A9ZmkC4iFK
-         GKfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794900842; x=1795505642;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=C1U6sGJ1wofOSp0VAiQlaKb1uloa76oQfH+mRg/e3Uo=;
-        b=DUfxS6eSJWTmc+k0DjNod0SgIWXWPaD/N9N0awZC9LcHpVQBZEzpsvPC9fdECrMzqA
-         7v8pVWhUy3tuHkrVBcEvefK1pi2tM4At5t3PV/Bq6ynAQHXDjMngQhRqhUVbXQXttglR
-         mXjgFul4MqAlYVkhsamQO6C4sxWDS4cR0FGPFmnrzY/SfCg7uP8njudMpFT6B0s1f/4m
-         PN5RswjdNgkZkhAq80Wc0fZQAUMt5b50Al2NR23qeAuoI1kgJWAzfgjdr/ZYa4VimJZf
-         8xc4Z/HWrDNY1TghoZ+OPFpzS8ZYIxCLN8szYJ9mf+8k0AJoHNtIRimAVR7JSWPPZrZ+
-         BcKQ==
-X-Forwarded-Encrypted: i=1; AL+hErHv1eCfkz9ZtQtoQBc7MdbuAslTF1nQW9NAK9SDODoEHn9UUs/QWtMlTXXqQSKtvWZrSfsn8ls0HTozBDLk@vger.kernel.org
-X-Gm-Message-State: APuU4Z9f9dHavqBcQgbXqdkJIfH8ahMelVojymeaS10X3nMTBPjYTPfF
-	x7RM95mp4gYNhw2VaY4v5KwjRzDvG5WSAMKPAWNQcvl2hbi36c/VnDVAhPmkvBXyo8p7ErIn+4l
-	p5kf5Sq66ZIkOnOxobSy0/8ojS+5kpmTRp3o72baJHMq0LKTrIbyz+T22S+3mvP6OrvSZ
-X-Gm-Gg: AYBFou3T9QcH2JmtdzszZIlXCr0+0eZt9TYyweeo7d7rpedJnu5b3fo/hMVhDhgfhi1
-	veyCup9lFYQvwZFk3OIbpzJQqOaPcRA1zCtP491U1ePjk0g9ObDGj082m5V5LN6cNHU35jeVJJg
-	tnVpA3gwHg4PgIxrZ720qDA3uS5sTW5SeOQgpcBxi5PThHDKFNXPQ8JMTPsWOK0kckBhXe0dePo
-	FMq4Gg7zx0gY8JNWprGm+jPgDlpXT1U82xZwSMNO/sWG+ECboqQ1xU0z+nBKoDfnSQT8Oi46Xz+
-	DhJPpCDP+Wh7PNfODMl1HHq8zQtCxaeuWg8G+6d/ECWCEcQmbYIMYfduyLM8DdJBM3+1LJQIFj1
-	/dCV4YO0yxrwKDMBXptXJ7C+EbaeJvZMqJgYO+JVQQPR5OJVcIeJj8wxsySAi/SrV7TAtuUSbvo
-	I/475AnW86BtQrobA1Nw/LDWZMSs7uvZWKcg==
-X-Received: by 2002:a05:6820:1ca3:b0:71a:e9eb:6b94 with SMTP id 006d021491bc7-71b014fdaeamr1468378eaf.20.1794900841823;
-        Mon, 16 Nov 2026 23:34:01 -0800 (PST)
-X-Received: by 2002:a05:6820:1ca3:b0:71a:e9eb:6b94 with SMTP id 006d021491bc7-71b014fdaeamr1468362eaf.20.1794900841323;
-        Mon, 16 Nov 2026 23:34:01 -0800 (PST)
-Received: from ap-cloud-sh02-lnx.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-862c67db8basm4944508a34.13.2026.11.16.23.33.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 23:34:00 -0800 (PST)
-From: Songwei Chai <songwei.chai@oss.qualcomm.com>
-To: andersson@kernel.org, alexander.shishkin@linux.intel.com,
-        mike.leach@linaro.org, konrad.dybcio@oss.qualcomm.com,
-        suzuki.poulose@arm.com, james.clark@arm.com, krzk+dt@kernel.org,
-        conor+dt@kernel.org
-Cc: Songwei Chai <songwei.chai@oss.qualcomm.com>, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        coresight@lists.linaro.org, devicetree@vger.kernel.org,
-        gregkh@linuxfoundation.org, songchai@qti.qualcomm.com,
-        Jie Gan <jie.gan@oss.qualcomm.com>
-Subject: [PATCH v19 8/8] qcom-tgu: Add reset node to initialize
-Date: Tue, 17 Nov 2026 15:33:05 +0800
-Message-Id: <20261117073305.3854951-9-songwei.chai@oss.qualcomm.com>
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=/mAS3fCA1J4k59HYYCZ66lkkBnbONZz6zHL
+	Ix9dLCWQ=; b=RbuIwaxMU7Vqs0DwLMAi4Tj/3ctJvYrH9FSaB58bjwTHKLYJWhE
+	8N/AR26B9QZ9s/t94K7/+3wlzx6/BP+ZhjlDs8bnq0ywKWEUXTjB5u3+ed/GaA9Q
+	0XpsoSmwy9mtR9iFHN/CHpYVz7+A1/5YIoRRLnm4g5bgdNsj83ZUSQtFOO3/I+ei
+	HCeh3KUFZtG6KIUVXBh6NC6X3pTImHkW3P0f9LjfGR0Evhl3+rKgevjUiuMApt0F
+	lhoLUDFMmCktGrio8+mhDXr0PR2ruQiypVFMOzyKIAt9tPUjbTDPaNTCE7JuJGIZ
+	4rmPP87WYbxadYTaqffa4a9qhaF/ggNKLtA==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0geh8jfx-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 17 Nov 2026 07:51:06 +0000 (GMT)
+Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH7p4gT2335637;
+	Tue, 17 Nov 2026 07:51:04 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ks5-hyd.qualcomm.com [10.147.255.18])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 6AH7p3XD2335631
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 17 Nov 2026 07:51:03 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4763723)
+	id B11B85F8; Tue, 17 Nov 2026 13:21:02 +0530 (+0530)
+From: Karthik S <karthik.s@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Karthik S <karthik.s@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/3] pinctrl: qcom: Add QCS615 LPASS LPI pinctrl support
+Date: Tue, 17 Nov 2026 13:20:57 +0530
+Message-Id: <20261117075100.272535-1-karthik.s@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261117073305.3854951-1-songwei.chai@oss.qualcomm.com>
-References: <20261117073305.3854951-1-songwei.chai@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,164 +85,72 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyOSBTYWx0ZWRfX7F50/JLQh35k
- mFauAb01uKz7E4go0RbBYkqfbt/HZRN2mGkGImUXYW686N7UlrV4S/lbo5f1jGYyuUz55W9KEtg
- mWjp7+SF74+J3OvZhu5qBxpMD/OXi6MvLZ8OWLEzfKpW/EmF+PyYMfvDZ6TkrO1HPps04RbvSfm
- UlcvHub02pf2vNyXBpEXnzgHLmfqySYPpfxVn1XwOQEhmCNXtHMK75fhOr89xIvvIryS5eCFj/Q
- mtQjrMXArW5MD1yRQDREfPCMSFOOG+LOUT0g2xgA6TWNHSc/JSFIKrE9USszBjuEL3NZxphNst0
- rbO1NYGiUJTwSLi9uc033+y01xaR9rpxv6mbuKSk0BX/lCt6gBoziuPD81i2jyBCFjx8wR98feQ
- YenTl4cvmnJV0NK6w0NstXJG22moOaMAX8RnhwESOIduJs5RhmV9cUqfRWh8eFPi6VhoZUsCtuQ
- FdquB9uxJGgKv4dWpWg==
-X-Authority-Analysis: v=2.4 cv=JfIpPkKV c=1 sm=1 tr=0 ts=6afc036a cx=c_pps
- a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=u6OCHy2KTxjFLSf8iyQA:9 a=EXS-LbY8YePsIyqnH6vw:22
-X-Proofpoint-ORIG-GUID: 44CjuR3cBnMlQez8ci6giKATTC8W_3rb
-X-Proofpoint-GUID: 44CjuR3cBnMlQez8ci6giKATTC8W_3rb
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyOSBTYWx0ZWRfX5yQRHzVoISq5
- Txbiu2wpoPDh9Porx2vSh30YnZP62B0he7j4z3DJgtC6VHDoGoEiM5Gz/xZh8FtdmPVb8aOKA17
- Z6/3JTDjjyRbTpHTT4aIe2F/XO2Vs3I=
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-ORIG-GUID: aHW8cXOxT2II1D5eG7CrdKQyR_pHVU-0
+X-Authority-Analysis: v=2.4 cv=dLkzC+Zb c=1 sm=1 tr=0 ts=6afc076a cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=ZpdpYltYx_vBUK5n70dp:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=Mw9ciAu2lmQUcE6dV2wA:9
+X-Proofpoint-GUID: aHW8cXOxT2II1D5eG7CrdKQyR_pHVU-0
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAzMSBTYWx0ZWRfX0Tnh5R8zRq4z
+ 3xQH+oBmJfT1kIgl+nNx5s7qVqGVycJDjX5k+cQcKh1J2RYd+qYKGlKeSquOdZ0E/LLZoVWPySN
+ duGcbALVKDVH6MftkrhIMltoKBd342Y=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAzMSBTYWx0ZWRfX+3R/1dmKqkoY
+ 20FzM5lwI11KiqsHFYOeDGis9b4B+5UI4vLjAAyWkxNAWNIAd9DC52qaG0vUKxQ4i9wgIGGzyaX
+ rpAaPeu/Z5iXHFI9NhodRXnI3JGwUoxuSsyabJKnG65/AmA4WeGgjyHz050urUM70+b759i8YP4
+ uzmnSRld/Hyt00pGIq0AU8VFaWumy4t2kFSmpGz8c1PpZJLBNcsq9m3z+pGEkIhFa3AUREHBO1a
+ gHKx3dNvaMud+chMYeVLM8czU/e67RpDwDs0Y1wKvfmUb+SGevJCVwJktk6VYuOHhlTkJ987kU4
+ jBGvyBOIm90rsgCXUjUx3/KpHGgdj8vM3i+8+iCHnwWOYpkLYncgCEKFdpBTInwIk98h1x/iNQU
+ JIx+h5ldW0/Sa5Ew8X/S8pA2h6e03H7kfu9gs6z5TYOa22E/Qzz/mne+lr32JwVY4QIo62WxrHC
+ tW6yiobijhZxd6zDVnQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 clxscore=1015 suspectscore=0 spamscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 malwarescore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 suspectscore=0 impostorscore=0 malwarescore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611170029
+ definitions=main-2611170031
 
-Add reset node to initialize the value of
-priority/condition_decode/condition_select/timer/counter nodes.
+This series adds LPASS (Low Power Audio SubSystem) LPI (Low Power
+Island) pinctrl support for Qualcomm QCS615 SoC.
 
-Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
-Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
+The LPASS LPI TLMM is a dedicated pin controller for audio pins on
+QCS615 which supports 32 GPIOs (gpio0-gpio31) with mux functions for
+i2s1, i2s2, dmic1, dmic2 and spkr_i2s_mclk_a.
+
 ---
- .../ABI/testing/sysfs-bus-amba-devices-tgu    |  7 ++
- drivers/hwtracing/qcom/tgu.c                  | 85 +++++++++++++++++++
- 2 files changed, 92 insertions(+)
+Changes since v1:
+    - Retained pinctrl-qcs615-lpass-lpi as a separate driver rather
+      than extending sdm670-lpass-lpi, due to register layout and
+      function mux deviations between the two SoCs.
+    - Added i2s2_clk, i2s2_ws and i2s2_data mux functions on
+      GPIO23-28 to support a 4-lane I2S bus.
+    - Removed unused gpio*_pins[] arrays that were mistakenly copied
+      from the top-level msm pinctrl driver.
+    - Split defconfig enablement into a separate patch per subsystem
+      convention.
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-index 71187071cbc8..b3a2fb9cba6e 100644
---- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-+++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
-@@ -51,3 +51,10 @@ KernelVersion:	7.5
- Contact:	Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai <songwei.chai@oss.qualcomm.com>
- Description:
- 		(RW) Set/Get the counter value with specific step for TGU.
-+
-+What:		/sys/bus/amba/devices/<tgu-name>/reset_tgu
-+Date:		November 2026
-+KernelVersion:	7.5
-+Contact:	Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai <songwei.chai@oss.qualcomm.com>
-+Description:
-+		(Write) Write 1 to reset the dataset for TGU.
-diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
-index 5045c0f344d0..dc8572628f57 100644
---- a/drivers/hwtracing/qcom/tgu.c
-+++ b/drivers/hwtracing/qcom/tgu.c
-@@ -241,6 +241,18 @@ static ssize_t tgu_write_all_hw_regs(struct tgu_drvdata *drvdata)
- 	int i, j, k, index = 0;
- 
- 	CS_UNLOCK(drvdata->base);
-+
-+	/*
-+	 * Quiesce the detection engine before mutating any comparison input.
-+	 * This function is also reached from reset_tgu_store() while the TGU is
-+	 * already running (TGU_CONTROL == 1); rewriting the priority/condition/
-+	 * timer/counter registers register-by-register on a live engine could
-+	 * feed a transient, half-updated match into CTI/interrupt consumers.
-+	 * Programming with CONTROL == 0 and only re-enabling at the end keeps the
-+	 * program-then-enable ordering for every caller.
-+	 */
-+	writel(0, drvdata->base + TGU_CONTROL);
-+
- 	for (i = 0; i < drvdata->num_step; i++) {
- 		for (j = 0; j < TGU_MAX_PRIORITY; j++) {
- 			for (k = 0; k < drvdata->num_prio_regs; k++) {
-@@ -460,8 +472,81 @@ static ssize_t tgu_enable_store(struct device *dev,
- }
- static DEVICE_ATTR(enable, 0644, tgu_enable_show, tgu_enable_store);
- 
-+/*
-+ * Element counts for drvdata's shadow tables, shared so the reset path
-+ * below can't drift from how each array is actually sized/indexed.
-+ */
-+#define TGU_PRIORITY_COUNT(drvdata) \
-+	(TGU_MAX_PRIORITY * (drvdata)->num_step * (drvdata)->num_prio_regs)
-+#define TGU_CONDITION_DECODE_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_condition_decode)
-+#define TGU_CONDITION_SELECT_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_condition_select)
-+#define TGU_TIMER_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_timer)
-+#define TGU_COUNTER_COUNT(drvdata) \
-+	((drvdata)->num_step * (drvdata)->num_counter)
-+
-+static ssize_t reset_tgu_store(struct device *dev,
-+			       struct device_attribute *attr, const char *buf,
-+			       size_t size)
-+{
-+	struct tgu_drvdata *drvdata = dev_get_drvdata(dev);
-+	unsigned long value;
-+	int i, ret;
-+
-+	if (kstrtoul(buf, 0, &value) || value != 1)
-+		return -EINVAL;
-+
-+	/*
-+	 * Hold the mutex across the whole sequence so it cannot race with
-+	 * enable_tgu_store()/tgu_dataset_store(): the enabled check and the
-+	 * hardware access stay consistent. No PM reference is taken or dropped
-+	 * here - the shadow tables are plain memory, and the hardware is only
-+	 * touched when the device is already resumed via the enable reference.
-+	 */
-+	guard(mutex)(&drvdata->lock);
-+
-+	memset(drvdata->priority, 0,
-+	       TGU_PRIORITY_COUNT(drvdata) * sizeof(*drvdata->priority));
-+
-+	/*
-+	 * Every decode register is about to be overwritten with the neutral
-+	 * 'NOT' value below, so there is nothing for a prior memset to zero;
-+	 * calculate_array_location()'s step/reg indices for TGU_CONDITION_DECODE
-+	 * densely cover the whole 0..TGU_CONDITION_DECODE_COUNT(drvdata)-1 range
-+	 * with no gaps, so a flat loop over that range reaches every decode
-+	 * register.
-+	 */
-+	for (i = 0; i < TGU_CONDITION_DECODE_COUNT(drvdata); i++)
-+		drvdata->condition_decode[i] = TGU_CONDITION_DECODE_NOT;
-+
-+	memset(drvdata->condition_select, 0,
-+	       TGU_CONDITION_SELECT_COUNT(drvdata) *
-+		       sizeof(*drvdata->condition_select));
-+
-+	memset(drvdata->timer, 0,
-+	       TGU_TIMER_COUNT(drvdata) * sizeof(*drvdata->timer));
-+
-+	memset(drvdata->counter, 0,
-+	       TGU_COUNTER_COUNT(drvdata) * sizeof(*drvdata->counter));
-+
-+	/* If the TGU is running, apply the cleared configuration immediately. */
-+	if (drvdata->enabled) {
-+		ret = tgu_write_all_hw_regs(drvdata);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	dev_dbg(dev, "Qualcomm-TGU reset complete\n");
-+
-+	return size;
-+}
-+static DEVICE_ATTR_WO(reset_tgu);
-+
- static struct attribute *tgu_common_attrs[] = {
- 	&dev_attr_enable.attr,
-+	&dev_attr_reset_tgu.attr,
- 	NULL,
- };
- 
+Link: https://lore.kernel.org/all/20260908075854.3015560-1-karthik.s@oss.qualcomm.com/ [v1]
+
+Karthik S (3):
+  dt-bindings: pinctrl: qcom: Add QCS615 LPASS LPI pinctrl bindings
+  pinctrl: qcom: Add qcs615 lpass lpi pinctrl driver
+  arm64: defconfig: Enable QCS615 LPASS LPI pinctrl
+
+ .../qcom,qcs615-lpass-lpi-pinctrl.yaml        | 114 +++++++++++++
+ arch/arm64/configs/defconfig                  |   1 +
+ drivers/pinctrl/qcom/Kconfig                  |  10 ++
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ .../pinctrl/qcom/pinctrl-qcs615-lpass-lpi.c   | 161 ++++++++++++++++++
+ 5 files changed, 287 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/pinctrl/qcom,qcs615-lpass-lpi-pinctrl.yaml
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-qcs615-lpass-lpi.c
+
 -- 
 2.34.1
 
