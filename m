@@ -1,73 +1,86 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794930068;
-	b=Bomes+ldcaAb2VArHTwaQeo6XWV92OXxq4kG8MIjOabx+wH+GXSCakDslfN8U8EiZZ98
-	 rXj1yrYf/uk5CLiwcJQtijF8vwWVeMNjya26sAJ23m0mt9+u3e9xr8NCXi7wE3UuAxdYE
-	 V9/vMsyjsj74MD5pdGnlejXa/y/JSPrjs5b0m0Ptal0Ns5xP2rKwap4fA5JI1Vy6ntAku
-	 331IgqZ5/ldWfBPpx+wbar6xJcCb3SygVHC1a7JOle+O+MHUVgTmdsm/8OrtCEnlhVOiT
-	 DWqFMmEi7y5xvqmXVr3UGXnnjiG8bAOgOeJaESoHLc3YnZ4zlKbN4++nb5bEGnnkUXA==
+	t=1794930315;
+	b=YhHwqydTB6FpgnEUh8INVYcgKMk2O2+gJ981KunElgjFLPD8VF8dqISJK5QYI7iaYLmG
+	 bnL0m1iLT9VXVmgOsu4NSWsBtor4jYA35cNZGLw8vTslbQIYENH2GpuFR9awJ2r2FztNR
+	 357AhjzXYOCz2F2iwP19Utm19eFGI1aGHAWO0HlSNdPGpy53IUW1MOXCBvP6QjjgpmFWd
+	 xtCXzX9/Yzehts3YcbumIXfvOrADqd5Aw/36r+2/y8PfatMc4aU2/QZ4iJ0BovVgvk7mC
+	 VeM0Vznkn/vQHyhL6E4X4izfKJcp6KUoaZKr7HjvtnD2x+egqJUiNLVGMFikgE0rk/Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794930068;
-	h=Received:DKIM-Signature:Received:Date:Message-ID:From:To:Cc:Subject:
-	 In-Reply-To:References:User-Agent:MIME-Version:Content-Type:
-	 X-SA-Exim-Connect-IP:X-SA-Exim-Rcpt-To:X-SA-Exim-Mail-From:
-	 X-SA-Exim-Scanned;
-	bh=ADeZTUG4nb3axn4kjrDhg1zAcLadBlUVGSnVkOKn6IA=;
-	b=WYKu+dQToy9hkESKGgnc1941O/scxVqSp74JceCfnbwkBhpi6bQhjK+PWCYHU0lk+d5A
-	 RPKQyvdetRy5MkkZzZWT2xSz06AyKnLVU3IMvDH0Jpf3MSy9lzX3bP3jRirb3ix2Eu0CL
-	 eb44TK5ew4jw+iF30KYJzigPu2OL3qtx8KBj7bKMIQQT8oDP4LucK2T3SvQyp1idBHXHk
-	 g8+eQozXKF6X4mboWEk3D2wrMoW5VUwkjOaRCTFm++J/bmukMhz0152Uern3uYqdNuo2t
-	 +je4M97Vg1YYPchehDzyt6AfqgpVPUbQjKH8tYIrnW5ET4wop0gC39w3oQLHalFvPgA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794930315;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=yx0f3Yir639syvYfkg79O7Kpd9xzBO9aaexbdF9atUs=;
+	b=izB1FUCNGMrwxHcIZjpnwC1s2oUedyCZZITd0m7/wgMoerXdp2hkp1yzWyqUo7z+hlFw
+	 y6uvXq22q+w3ubakcRXyXcSweedHNdhWvQr2zN/zcOu9qrwxegdLLq08VjZxvd+tR43cF
+	 sCq31I8NeImohJdFYBvqzvSbl1k8VvEGkOSOnJMX8GEuwFGzabaZ4ZZkxQsK+Ni2eISMh
+	 +EK9xWu5RrXS7jLpITGyrSM51epQaapmMHGMqIAZYlDjHZAxr7aQYxSHCKMmFWkNasMdY
+	 EqPqJdvKYp0lhduxM8YCUTF15wYq19B5HtzG3c0z7LOD5RbtXK6ydJCxn11VInEbyWA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="IP54/r+V";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FUFEc8xz;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09387606A31C;
-	Tue, 17 Nov 2026 15:41:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A514606A32C;
+	Tue, 17 Nov 2026 15:45:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IP54/r+V
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D57FB1F000C6;
-	Tue, 17 Nov 2026 15:41:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FUFEc8xz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5285A1F000C4;
+	Tue, 17 Nov 2026 15:45:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794930067;
-	bh=ADeZTUG4nb3axn4kjrDhg1zAcLadBlUVGSnVkOKn6IA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=IP54/r+VWtpieoKrwFU/ZNX99gK/L1z3dz4iUGhYYXL1qwEiRW9xJse7SpdapBJEs
-	 qP7jIeNE92nAJN9aoh615SSz//YjG+sDSb0fpEttOJSpF3/B8W3aLyVTHVqE8mBXJK
-	 bfjIrCdZ4WsMXdBOHq0JsCh7aWzecmswWKdjxsRk96zjOOiYn9i9crP4PUnfUAaoj/
-	 NjD5uNN4iNO2cg20oZ8uBNXLPK5MOkRplzd2fqzBRKhssaTFUL1iGLt8BuYm0zYY19
-	 ditRSmDOOgXomGjMgttOd9XT9j4pZAH21hRKeutTKt7uEBFzWaI/fw9jgyBA6kXZy6
-	 4LzTdawDW7w+w==
-Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
-	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <maz@kernel.org>)
-	id 1xTLIv-0000000H5jg-3EL7;
-	Tue, 17 Nov 2026 15:41:05 +0000
-Date: Tue, 17 Nov 2026 15:41:05 +0000
-Message-ID: <86eccj1n5a.wl-maz@kernel.org>
-From: Marc Zyngier <maz@kernel.org>
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v2 0/3] arm64: dts: qcom: glymur: Add ASUS Ascent QN10
-In-Reply-To: <20261115-qn10-v2-0-19b11603e776@oss.qualcomm.com>
-References: <20261115-qn10-v2-0-19b11603e776@oss.qualcomm.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
- (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+	s=k20260515; t=1794930315;
+	bh=yx0f3Yir639syvYfkg79O7Kpd9xzBO9aaexbdF9atUs=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=FUFEc8xz6COW3EN33vCksYZgW8fYeid15xpqnE6bkjYb8ds8GnfyBq3Jbse/StGin
+	 aFc60FNTgNgw3W7d5QemIGS0no4qXZ1Y57Q9TPuawziXH2c0TuhNEaoDdCicQt1eXO
+	 mLINKQJOly7zZT9EFWEI89QXybe9XKEKLynkfDPWAdsbnbF1QJFyvbCGaJTiW5m1kG
+	 XV+aUd9kYT4zdS55zGYU4rzkdTaIqOWm/F3pmctvLM4fIiS4R5++zvkDuE/N2nVRgc
+	 xtB6/ntvlXr7/lq7RG0/fxX7qf/mQPblvAEk0mrhKHaLqmggThe5uOeR1czsdpOvVx
+	 mwyhL/Fo9nomA==
+From: Srinivas Kandagatla <srini@kernel.org>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>, 
+ Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Wim Van Sebroeck <wim@linux-watchdog.org>, 
+ Guenter Roeck <linux@roeck-us.net>, 
+ Rajendra Nayak <quic_rjendra@quicinc.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Jassi Brar <jassisinghbrar@gmail.com>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Krishna Manikandan <quic_mkrishn@quicinc.com>, 
+ Mathieu Poirier <mathieu.poirier@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>, 
+ Tony Luck <tony.luck@intel.com>, 
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Muzaffer Kadir <muzafferkadir@mainlining.org>
+Cc: David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
+ linux-watchdog@vger.kernel.org, linux-clk@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+ linux-remoteproc@vger.kernel.org, linux-input@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261105-msm8952-initial-support-v8-0-311ae8e8f14b@mainlining.org>
+References: <20261105-msm8952-initial-support-v8-0-311ae8e8f14b@mainlining.org>
+Subject: Re: (subset) [PATCH v8 00/11] Add Initial Support For MSM8952, Add
+ General Mobile Shamrock
+Message-Id: <179493030479.124445.18019484431206678491.b4-ty@kernel.org>
+Date: Tue, 17 Nov 2026 15:45:04 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,52 +89,29 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-SA-Exim-Connect-IP: 185.219.108.64
-X-SA-Exim-Rcpt-To: bjorn.andersson@oss.qualcomm.com, andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, krzysztof.kozlowski@oss.qualcomm.com, abel.vesa@oss.qualcomm.com
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-On Mon, 16 Nov 2026 03:48:58 +0000,
-Bjorn Andersson <bjorn.andersson@oss.qualcomm.com> wrote:
+
+On Thu, 05 Nov 2026 13:54:04 +0300, Muzaffer Kadir wrote:
+> MSM8952 is a SoC with 8 core cpu and Adreno 405 gpu.
 > 
-> Introduce the ASUS Ascent QN10 compact desktop computer.
+> Ported without uart connection. ramoops and usb
+> mainly used to debug.
+> USB is not enabled in this series because it
+> depends on the not yet upstreamed (and not developed by me)
+> pmi8950_smbcharger.
 > 
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Move the RPMH regulator override below the SOCCP remoteproc node.
-> - Sort the GMU and GPU node overrides by label.
-> - Drop the unused EC interrupt pinctrl state.
-> - Link to v1: https://patch.msgid.link/20261113-qn10-v1-0-e09b2aa7ccbe@oss.qualcomm.com
-> 
-> ---
-> Bjorn Andersson (3):
->       dt-bindings: arm: qcom: Add ASUS Ascent QN10
->       arm64: dts: qcom: glymur: Add ASUS Ascent QN10
->       firmware: qcom: Allow QSEECOM on ASUS Ascent QN10
-> 
->  Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
->  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
->  .../boot/dts/qcom/glymur-asus-ascent-qn10.dts      | 664 +++++++++++++++++++++
->  drivers/firmware/qcom/qcom_scm.c                   |   1 +
->  4 files changed, 667 insertions(+)
+> [...]
 
-I've thrown this DT at the Ubuntu installer, and ended up with a (more
-or less) working machine, so something here must be good!
+Applied, thanks!
 
-I get a 2-minute timeout in EFI services though, something that mostly
-speak to the quality of the firmware rather than the HW description,
-and is worked around with an 'efi=noruntime' on the command-line.
+[01/11] dt-bindings: nvmem: Add compatible for MSM8952
+        commit: a3543a8b163f1edb45f0e631ea0f5905256a3684
 
-Now off to locate the UART on the debug connector...
-
-FWIW:
-
-Tested-by: Marc Zyngier <maz@kernel.org>
-
-	M.
-
+Best regards,
 -- 
-Without deviation from the norm, progress is not possible.
+Srinivas Kandagatla <srini@kernel.org>
+
