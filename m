@@ -1,111 +1,110 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794915897;
-	b=LOFR/Eou5jckohIiWuCn/RlpkUSKwoYLlAlDUOORcvY2pHZDbFGyqEUd5HL0Iu5h5ShE
-	 KbWWtIGMhmh6Rm6PsMn2sgqkObAKANRBtfpxjARSqosyKE7E3vueYaiED4SBGgcgfN+wR
-	 85esyP1PhGKeOXfGcbBGN7FODvIoy8mH3Wuj9CZnTJUCWE2AOiz2L63IlZ6jwGKYea+hg
-	 SXl/cOdr9B2db2FWzEtWQiRei88k8agCDuEnIuWndJP5qmt9g8LuSLNabQOG6TfAMGlFF
-	 cBk5KtXj2Xq77ToTR627bmJl97lXYOjN/D9g6vc4/1kMVbUPay9A7nFvkKI3JOzlKaA==
+	t=1794915940;
+	b=kB9nNnhwSbjFE1l4pfrcIAQaSJdakwx/ADLyFW8SPxEO25VJEw9vUh8M0fHt0ZD0eB+W
+	 NXAIJtiN5/fZ2HmbDus/0beWHgEoZ62xGbCZL1gFCCDAGv5ltA7j38IInzuQZYmVuELj6
+	 Cu+pElN3DDxopjeAHZarrbB1sQKBRamTOweDVaQOHlHADWusEBQJbu1NJxMxJkCSiRwAn
+	 lY/cw9enXLjsY33Jud9QStPC9iH3EtPRJevH/34mXt4CHjIjplaPqyZShO93Hv7OkkZ0t
+	 VWXYqvtPMRwv8iRyPCZevU/z+oOf7sTE/PZIaJCiU0wd6qabzqFbL/wqn6i2K1fKApQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794915897;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794915940;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:Content-Language:To:Cc:
+	 References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=Nbu8rQxMaMgMEPPSkppPthaf3CvTR3LtDewzs5lk7CM=;
-	b=kWSZfHkiWl9Znjjt9GheFUORwqdaSQlgyRnkpU7eM4kbCQaizry+BMgOZAlCuXIF/v75
-	 jOV6jjIgST0A4F0SFezYJTKL0Tn91XKC++dsFtqkCS7nSM5loIe1i9NUy164aoZNpwbx3
-	 GzZZBXENph2m3aLIOHxV8THd449wMqHysgQxJ/fpHLFT1FIHELpRRdzqRXa2nzuhq/4fN
-	 22nlSanN7SYsQ4cZFJ+yh8CZeCIoqK88nf32Ii8pVT7NWN6OKyq66NnShkCPhgiJez3rw
-	 OhetE7DQohJwg2UFyUL4bKxRhXBqN6y5rtzG2UdvcBzQ2+mRVonpl4150peyPN+SK8A==
+	bh=ZuldvTFGqvoThScV3eP1J10a3bvY6Jb5DSXjzpU3950=;
+	b=IyIfu3ctMhCS4A+144i4nxXb9rEu/Ao91R/k3Wv3OIJKVAf4FItbTvYSl33u34i7XzHe
+	 bchFDo9aYXHxnhrLeFIwtMGGjXhamlHTRQyXPbvwP90CjTlabBB38XcTnEYVqTfi4kA0m
+	 AyRidAHOX/8HjOS4577BKJUM1PjOvCtBWeb2AwxQO/3PrE7NqbZjpzP/AhToEDH7IvLAw
+	 qv03RXmkRvVDtyXb/3a9NnmkvCEAbGAZD8LR5eAfDp4RbZrhrVWKILQ14DLIFeLEn0Vgm
+	 e9v12HclVszrMkHcOJ7qtfweeiNkIHmjV6Yk0AssE2sK0q25p1JCRcSZHY2lwc1biBQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E8AjxNev;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Or6SNHNt;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ef6CtlAd;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DKGNStEw;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E31D5606A330
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:44:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E31D5606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61CF3606A32F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:45:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 61CF3606A32F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E8AjxNev;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Or6SNHNt
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHAdVNb1279108
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:44:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ef6CtlAd;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DKGNStEw
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH5e7DX3809962
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:45:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=Nbu8rQxMaMgMEPPSkppPth
-	af3CvTR3LtDewzs5lk7CM=; b=E8AjxNevxKGiR8+3lv2VKepeheN+iAlDGnMjZM
-	pSEGYbLsAKJdyid94RryJyKFAbyG9fkILrv9C/NjDfN0krHwMzDurrtlxBwX0btL
-	jxdofFhJjAAANj7AULLpiMjhcbeOmhDDUMdHVFILOizmxGcaSzR8VN7ZUC7+oc8d
-	La8otQ+OtsiJ+zMPMrF3fPuAV4mE+gFBgDNMSm05ldPujWadNZ9YMqO7eWK25/mg
-	NRUt+pbVzK8Kn+BQFNNz/GQ8Cc+3NxG2ecDXIRuDPV5IA90QVBcKyG0Ic18vaGrl
-	zfT+fqBGXaVpu8jN8HtG7WmFsR0o1PLVqWnUT99S1Vz5iPYg==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0nc807x5-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZuldvTFGqvoThScV3eP1J10a3bvY6Jb5DSXjzpU3950=; b=ef6CtlAdlzQsPznc
+	1LfAdj7bPyn+8o1f88i9Yc6QEnL+vdNkcUSHPCOfDxcRGMTo9SYel6SL9eOJ/8rB
+	3vhtc5sgq66Fdpbr/FiOqYtn/m6U/c46m/qPYuMYAybAciMR9iKfo2PrEVbLl2Am
+	2ouCOYRzSEOk/8sDVIJ/zwKklVDMkTGhRn+/rcr6SO/yvRK4MfICEWh0q3U9PKVr
+	Himln70OmQiqFzUIHnWY/Kd/AvKNOXNzQMtxlLyirG1MAxzUCOA1QW5ZrUBuKWfR
+	lf9+yGmeeh2l93c87dtbZQck8oEwRXbqQ/upslIidr7qQ3AAFz+ZVhl2em+Ht6q2
+	ogUOFA==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j09htjwpx-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:44:55 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cd652c0385bso3154752a12.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:44:55 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 11:45:39 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1b53bfc9534so226596c88.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 03:45:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794915895; x=1795520695; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Nbu8rQxMaMgMEPPSkppPthaf3CvTR3LtDewzs5lk7CM=;
-        b=Or6SNHNtHB5KVtmjVrsGg+kBqKQAl+UdTjbgL+VXfDRAiAzclHm0aDm4On8r5gBj0R
-         KzAzF7BKr5lBbcCvDg8DCjFXsVSoMj8kMaIfh7CMjwZZ/2slKCwi143fH5ZSeJwKuNTc
-         YR8rdsdiPshYUfBTCgKQ/1HgK9S0FiLWUjs9lf7cniGw0msb96l+CqqxeAnccuBLA34c
-         wt9p39P/gWKL5PsJTpC3s+tTBXY+Z/gUkk0beYw9m4TCmp9uOy0zx7mWxknAJ5Q2TctO
-         pucxsP/0jvscCTRh3GuE3objfdPKZh3rwTDJB7iyhiDWvDeu7C8eHUQsoGzVBtBU88eZ
-         SYww==
+        d=oss.qualcomm.com; s=google; t=1794915939; x=1795520739; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZuldvTFGqvoThScV3eP1J10a3bvY6Jb5DSXjzpU3950=;
+        b=DKGNStEw0OOdlx4fL2M+MTRytbVB85jjL9m5pkqJHqf0a8e3q7nmE/JiYpVp2jXGKk
+         8YOThlJKCbCSGcznv0W5EJd+gs4fhPlIKxOcbH6jlmjT34NlgCVLNkMCvC4gEuxuNeHb
+         OfjLash39isBTiJvU2RDHw56tUOCzAC4MdDWO/qSlc43anTMjgZvgkKoxPSGuPbntCmV
+         6SiMT8Md1WKUhAvCdDTvpfmTE3VHCvSN1LpJovCYRUqUVWayKn+3M1eaA2qUpnsCBrFy
+         WgPFhEDvKa0ipS2qf0O1opHNm0Lojo8r2CJJtHxsx5xbukFtEnaA5IVTSgJRPmZ+guhS
+         0j4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794915895; x=1795520695;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Nbu8rQxMaMgMEPPSkppPthaf3CvTR3LtDewzs5lk7CM=;
-        b=m2VvnUj2gllEF0tp8ggcfMruBuFtMWxk8V6STERSQplcv0Z+TwV6KNgGJyKE0lUa5d
-         jErxuVN/t49NcyOvfPrm4rBZCfu1LbGIadAMI++a671S+M5gy4UdBNXHEmyS3HoXFgor
-         hVBD0KfnM0JwF7qULh9AbaWXHJUcNvbxdnqGH4Pb3De70ya8NbwUtx35blFCI1QGUoCK
-         I5NY45fcDorUp8AsOU1dGCxYa+uDG7nTeDKIwWGIJWVCzPZGrWqYuIFS+nyI9O1z8qe/
-         bJQ00h0ytWVT2LRupWOT+9Zb0PrHbS9VAJMlIDWftCh1kBfUOpGQ4cCSMAWRAE4QjXyb
-         xuhQ==
-X-Forwarded-Encrypted: i=1; AL+hErEouc1tF41qlhkuGak89WQilF/0T7vwXca40hKEQ/Hd65X/3I0IuDqO/QJjIgYjYd84s043QTtrIFjt8Hgp@vger.kernel.org
-X-Gm-Message-State: APuU4Z+65c0sdpuvi2jiae6QlRESvcfMIthfb0URk3tH6tQSlKwBZCMl
-	bYJVH2gqkw9V21zkLlf/DkCiAcZnLFtihydhDk8Km9gmU2jCbNsNh0Y9zKJbb3HXPz6h3hbIAHz
-	BQqwjg8JfbzSkTzSISleqMenx5AQ7duOfMvNn/ZL1cJ+A0rMZ1m++Sz0sm8PLlQNhmRlU
-X-Gm-Gg: AZFdTZcwOFth6UCMIIoLZl+NFfHk/Nt7PpnEj+j/DLVE307Jg8mSiyiMc3mjgykKtua
-	La3FN16WFpoxlP0xjIKEzFGC//ouFbXZBosluu20CWuRQ4jexmGYo0CqrNKGhQGTUcT1gTffi82
-	cAjlgzW0QpZW2SXzrjCucbyXb/d+5cpYt45fyHUB2KJmRzcRvaGV5ntBIGON6Cft4Sbi8QDWRLb
-	FV+BwNNSyvCRwX17IScTRn8NRnIdO8Wnun4XWFc9JgxWK6auxS6sylGdu/uZ8O5GVNWQUOC3Nqa
-	opemFiBC0GeXLjLt+TVUDjuQ9f0QfYoLH/2RFdrk6xmeuoMDYmw30OcK4r3ZlM9vDFsmXWS74Xg
-	/e5lBUenFdnfj+8h+0aacg09J+Vq17itG5CjxRZrLGVTLlTNtP9lgEkVtn5pVBDFNFoEtxpaqBi
-	MklK+78Og=
-X-Received: by 2002:a17:90b:2cc3:b0:3ac:8af9:4a73 with SMTP id 98e67ed59e1d1-3b1b0a0db9emr12314427a91.28.1794915895315;
-        Tue, 17 Nov 2026 03:44:55 -0800 (PST)
-X-Received: by 2002:a17:90b:2cc3:b0:3ac:8af9:4a73 with SMTP id 98e67ed59e1d1-3b1b0a0db9emr12314374a91.28.1794915893918;
-        Tue, 17 Nov 2026 03:44:53 -0800 (PST)
-Received: from hu-bvisredd-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b1bfb607e7sm7915954a91.3.2026.11.17.03.44.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 03:44:53 -0800 (PST)
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 17:13:57 +0530
-Subject: [PATCH v2] media: iris: Fix out-of-bounds read in timestamp
- metadata fallback
+        d=1e100.net; s=20260707; t=1794915939; x=1795520739;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZuldvTFGqvoThScV3eP1J10a3bvY6Jb5DSXjzpU3950=;
+        b=ySwRvMrX6fdQh/hL4XOo4aYPcUEEcz4lv8QwZBCXmDIo0xgLJdkcQzdrFstqHWsf26
+         ZNrH6U8Tb0NN4AIcQJo2C6IGI1dX7roHlw8hkN4G68NjdPjz0iC9NRtVelGPwfCGPO9b
+         vJGjFYmRbMNuyDo0zY3CO8M17WJhxVhyeCOgcZ2VmVWaytEgRgDfPLdhylq/orE/rmVe
+         R/x1BQyqUPPtP2UPJqhxn0QJCH/hsproYa2nCNDbQ3HnUuCp2nvaJC9iaSEaAlMnPzmP
+         VRGtNpK3WUImFwGUC38DRSCEgyrVm8F6QLDiI9TKSMdVXJu++oEnlQ34vnr/hcL+IeHP
+         uWVg==
+X-Forwarded-Encrypted: i=1; AL+hErEphaXVEFeEEZQwehzF0G4kkf0yTCdl9TzCVb/vjb79G0nv2rBQDnwuNt7YY9RkgiNMtkD1pX3D4Q0t1ZGc@vger.kernel.org
+X-Gm-Message-State: APuU4Z9PbG+45dJwiOquqUZQ+mGQecZu8UYuhZ3YObdbXcDdOqx5XrVk
+	4sdhnejHS1zO3ahmq0l9uVbplQQWLMSZTYhG9rpB5q25pKxN+5afawr2JiQjYmznyhbATZmpddR
+	h+rZNcTZlxumxlGbo5Q0McF2qK0MUCGEVjV7RBJEgO47MgkkJ8Ypylo0TahcwJKeTifC1
+X-Gm-Gg: AYBFou0JofGpeSd8g3xGIau8j47AIbdTcfgbUbJE9EejWupiHMOi47Z+9+vuvhPZQUN
+	Lv6oYWXf/84rafnJcijj4C+lpmV27gbMOUJEhAseSSfTcXge9/unF4Va5qOtlfaD4BA2C/ZUQDt
+	p3AC76MVfWIj60LKgB7POzJcEylqWc+sm5Qd2cyPPmzF0IH2cTn64+wzgIc8z5zmLh2IBS0kbfk
+	W0hPwPcUhooCVBKtqFBskAWD6FM5OZYmx0ZwQrkCQ+aCUBeyA9jhpPTiQaojPK4gowTzbRC280+
+	gzjf2Hg3jsEbng+WNDjVMav6UTQPanFlHxgZDX74oDeHSdGDlyXY/nc8OQT8ohiSUVp1OFuuFzz
+	4vhi/uhq+TEqM0OuMFUkH2QqSawm6+7mN/159yxQf5T6TsSW9WDMLCTQ8lGIUtBoQfB0+Gpo2r+
+	Wlff0I
+X-Received: by 2002:a05:701b:424b:20b0:1ab:6b10:461 with SMTP id a92af1059eb24-1b50310fab8mr12608194c88.45.1794915938572;
+        Tue, 17 Nov 2026 03:45:38 -0800 (PST)
+X-Received: by 2002:a05:701b:424b:20b0:1ab:6b10:461 with SMTP id a92af1059eb24-1b50310fab8mr12608167c88.45.1794915937985;
+        Tue, 17 Nov 2026 03:45:37 -0800 (PST)
+Received: from [10.204.100.41] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b50316e195sm46094903c88.8.2026.11.17.03.45.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 17 Nov 2026 03:45:37 -0800 (PST)
+Message-ID: <f8e072d3-3fe4-2538-d88f-26bfd3fb075c@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 17:15:32 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,130 +114,158 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-fix-oob-tss-v2-1-8bbf753a4ee0@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAPw9/GoC/1WNyw6CMBBFf4XM2iFM0WJc+R+GBX1JjVDtANEQ/
- t2CceFmkpN775kZ2EZvGU7ZDNFOnn3oE4hdBrpt+qtFbxKDKISkgkp0/oUhKByYsTIlVUaS0K6
- AtHhEm+LNdqm/zKO6WT2sirXReh5CfG/vJlp7P3P1Z54ICZ06SrfXjXLycA7M+XNs7jp0XZ4O1
- MuyfADbvGrTvwAAAA==
-X-Change-ID: 20261013-fix-oob-tss-7d317d612cf0
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] media: iris: Fix out-of-bounds read in timestamp metadata
+ fallback
+Content-Language: en-US
+To: Bryan O'Donoghue <bod@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
         Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
         Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>,
         Hans Verkuil <hverkuil@kernel.org>,
         Stefan Schmidt <stefan.schmidt@linaro.org>
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-        Birk Skyum <birk.skyum@pm.me>,
-        Deepa Madivalara <deepa.madivalara@oss.qualcomm.com>,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794915889; l=3032;
- i=busanna.reddy@oss.qualcomm.com; s=20260216; h=from:subject:message-id;
- bh=I/GiyQmoZ483N/YWsU85jJMknyYU+leyDsAvu9qjAKU=;
- b=CdfZCYPqRbRh2RcrYm8twA7+SB3Md25+5j/7Oi6rznTX5pC+e34vFD8ON43mgBhW8uKuNPc6r
- NIcGubfpw6IBdEaRT5rc/H7P1+CA61AZvLONtvFc/XpEUr+uWqS2Sb6
-X-Developer-Key: i=busanna.reddy@oss.qualcomm.com; a=ed25519;
- pk=9vmy9HahBKVAa+GBFj1yHVbz0ey/ucIs1hrlfx+qtok=
-X-Authority-Analysis: v=2.4 cv=LaipeTfi c=1 sm=1 tr=0 ts=6afc3e38 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <MHYjgQwKyl4g6PykXAKsc_qby-VHmaZ8ZyKEoTM1Fpmve-Cg_dUJaQT0a2MReqplHxr4JLS7xunPQ6qB5AlxVg==@protonmail.internalid>
+ <20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com>
+ <c81473c3-e735-44ba-b9b3-ef71a206e4c9@kernel.org>
+From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+In-Reply-To: <c81473c3-e735-44ba-b9b3-ef71a206e4c9@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX6sr1SL84pV+l
+ 9fnrClf/JX2zCDx17je+4+UeuzMrJHdhvF0ZiMeDsewCM5Y6SugvoXOaUi8gbIo+k9tdO/elOXT
+ 0rRNXXVPhoTvFsU/OBPWDopeJnPyVq8=
+X-Proofpoint-ORIG-GUID: wPMkTqcQOfVDzWBGLXmHsqFAu5IJgENn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX6JQ9WD5//g/c
+ dSvrXVMkxEDUTuiIPzW+GDOC+q22A5Ylk+YeHSg/l9r7ZxDT5qw1do06pfSnEjiQ22Mwhb410RB
+ pOjZA3ZPM1Ty1KmK2PoAqGWhU4NPaMg0V4JJaAxd7QF2eSluUlDQFbeqQbnCmo1USNKwWuOCSCt
+ ia9COZ05ts7TmNDlXnB9DQyn8v7hZlvs+VqR34XuktebWLcGrVrezri1zC4rbUMdwcU7AjqEY96
+ bsxKqA+2ojYBXgLkbbl4m1WbhOgn6UB0A01ywQuqD61I6bXzT8SbefhtYysXsLeR34Y2lyf0re9
+ 8cJCrtifWEKbv/fsDGJ81X9w29rZ37RgoIkZaNQIkztALQBZa8kMoPkWztmXAxS/vQWFXH8JHxi
+ BarT/3F7ojvq2WQNAsjs3YmY0tpQq0smhhBXVBp8aHXyBsPTe9JDIrrcx24pMHhCz8GUyuXMpKV
+ 1yM7ewSbI9I9xWQiVoA==
+X-Authority-Analysis: v=2.4 cv=K963jCWI c=1 sm=1 tr=0 ts=6afc3e63 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=WY0cn2rLi3i19Q4nf74A:9
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX0krn0ve7IvnR
- YsHzJHO7X6B11O85KSzpaC5qbTs2GB0VoIBEuZSTRJ24aDBOzx1A21Obr8J1s06gU/ZPLqcJVdb
- LsqRD4edpnYV3sTV0g2uFVhLwgcLfX4=
-X-Proofpoint-GUID: 3iSp47RHeamLo5gAxV8wkiyzGDyU1VnX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA0NiBTYWx0ZWRfX2CY49nIjSQvN
- uKK9BuFtbclxv6J9v31HFdxLmonD8Z48agff6js11VnogFLw0drXkdPBZH/eCj0j7t6jZvQDbi6
- R3Tah2wrFUXVl1n1BQBgYwOsDejcK16RroCvkYpJvCUdtHdJyRC/Dl1jOp4tHZ5wqTEyxXCEzwQ
- bUiAl4pkrkdIJdXMsYAnxGu1O0JqaW4AwFD+DOO+Boo2mgKfby4GywI+OQMdLzwWOTz+zAW+t7i
- sdzWyGY99apvpnMjF4+Vb8TiXMCeSoKfEXjHZm8GU4Bf6abarid2womgkjPOkmE3hMabcPeYFHL
- MyZzQxjIbCkbDnNP7AliEDvegAMCYvQfUDkLy2y3b+/IFhoDw6z6u0swFuceovRoSfurIVXa4HT
- B0IR3LQT2lFnohg2tBgVyBdo88DeoDtsUbkBcEkEtUL6O3DSnn2Va9yUB7/WsekBwdT9VVuu9ZH
- mjPb8l9fucltQAONllA==
-X-Proofpoint-ORIG-GUID: 3iSp47RHeamLo5gAxV8wkiyzGDyU1VnX
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=l-SxXqRTaWQHASsAo6AA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-GUID: wPMkTqcQOfVDzWBGLXmHsqFAu5IJgENn
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- lowpriorityscore=0 phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0
+ impostorscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170046
 
-inst->tss[] has VIDEO_MAX_FRAME (32) entries, so valid indexes are 0
-through 31. iris_set_ts_metadata() writes at metadata_idx and then
-increments it, wrapping only on the next call. After the 32nd input
-buffer, metadata_idx is 32 until the next input buffer is queued.
 
-If iris_get_ts_metadata() finds no matching timestamp in that window,
-its fallback reads inst->tss[32], one entry past the end of the array.
-UBSAN reports this as an array-index-out-of-bounds error.
+On 11/15/2026 6:24 PM, Bryan O'Donoghue wrote:
+> On 17/10/2026 04:25, Vishnu Reddy wrote:
+>> inst->tss[] has VIDEO_MAX_FRAME (32) entries, so valid indexes are 0
+>> through 31. iris_set_ts_metadata() writes at metadata_idx and then
+>> increments it. After the 32nd input buffer, metadata_idx is 32 until
+>> the next input buffer is queued.
+>>
+>> If iris_get_ts_metadata() finds no matching timestamp in that window,
+>> its fallback reads inst->tss[32], one entry past the end of the array.
+>> UBSAN (Undefined Behavior Sanity Checker) reports this as an
+>> array-index-out-of-bounds error.
+>>
+>> Use the last written entry, metadata_idx - 1, in the fallback instead.
+>> Fall back to slot 0 if nothing has been written yet. Even if stream off
+>> and stream on happen multiple times on the same session, the fallback
+>> always uses the latest metadata received.
+>>
+>> Fixes: 17f2a485ca67 ("media: iris: implement vb2 ops for buf_queue and
+>> firmware response")
+>> Cc:stable@vger.kernel.org
+>> Signed-off-by: Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
+>> ---
+>>   drivers/media/platform/qcom/iris/iris_buffer.c | 6 ++++--
+>>   1 file changed, 4 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c
+>> b/drivers/media/platform/qcom/iris/iris_buffer.c
+>> index eb8de60c1177f..31cba99a665c1 100644
+>> --- a/drivers/media/platform/qcom/iris/iris_buffer.c
+>> +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
+>> @@ -865,9 +865,11 @@ static void iris_get_ts_metadata(struct iris_inst *inst,
+>> u64 timestamp_ns,
+>>           return;
+>>       }
+>>
+>> +    i = inst->metadata_idx ? inst->metadata_idx - 1 : 0;
+>> +
+>>       vbuf->flags &= ~mask;
+>> -    vbuf->flags |= inst->tss[inst->metadata_idx].flags;
+>> -    vbuf->timecode = inst->tss[inst->metadata_idx].tc;
+>> +    vbuf->flags |= inst->tss[i].flags;
+>> +    vbuf->timecode = inst->tss[i].tc;
+>>   }
+>>
+>>   int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf)
+>>
+>> ---
+>> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+>> change-id: 20261013-fix-oob-tss-7d317d612cf0
+>>
+>> Best regards,
+>> -- 
+>> Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
+>
+> Just control the variable where it is owned/assigned - the index should never
+> run outside of bounds - dealing with that out-of-bounds is a fixup that
+> shouldn't have to be done.
+>
+> Don't let the index overrun at all. That way the next function that reads the
+> index, doesn't have to know or care that the index might run.
+>
+> [0] % git diff
+> diff --git a/drivers/media/platform/qcom/iris/iris_common.c
+> b/drivers/media/platform/qcom/iris/iris_common.c
+> index 25836561bcf3e..b2b9349c38ea9 100644
+> --- a/drivers/media/platform/qcom/iris/iris_common.c
+> +++ b/drivers/media/platform/qcom/iris/iris_common.c
+> @@ -33,9 +33,6 @@ void iris_set_ts_metadata(struct iris_inst *inst, struct
+> vb2_v4l2_buffer *vbuf)
+>         struct vb2_buffer *vb = &vbuf->vb2_buf;
+>         u64 ts_us = vb->timestamp;
+>
+> -       if (inst->metadata_idx >= ARRAY_SIZE(inst->tss))
+> -               inst->metadata_idx = 0;
+> -
+>         do_div(ts_us, NSEC_PER_USEC);
+>
+>         inst->tss[inst->metadata_idx].flags = vbuf->flags & mask;
+> @@ -43,7 +40,10 @@ void iris_set_ts_metadata(struct iris_inst *inst, struct
+> vb2_v4l2_buffer *vbuf)
+>         inst->tss[inst->metadata_idx].ts_us = ts_us;
+>         inst->tss[inst->metadata_idx].ts_ns = vb->timestamp;
+>
+> -       inst->metadata_idx++;
+> +       if (inst->metadata_idx + 1 >= ARRAY_SIZE(inst->tss))
+> +               inst->metadata_idx = 0;
+> +       else
+> +               inst->metadata_idx++;
 
-Advance metadata_idx before the write instead, starting from the last
-slot so the first write still lands in slot 0. The index then always
-refers to the last written entry and is never out of range, so the
-fallback read needs no special handling.
+Thanks for the review. The issue with wrapping after the write is that
+metadata_idx then points at the next slot to be written, not the last
+one. After the write to slot 31 the index becomes 0, so the fallback in
+iris_get_ts_metadata() reads tss[0], the oldest entry, instead of the
+latest. For v2 I advance and wrap the index before the write, so it
+always points at the last written entry and is never out of range.
 
-Fixes: 17f2a485ca67 ("media: iris: implement vb2 ops for buf_queue and firmware response")
-Cc: stable@vger.kernel.org
-Tested-by: Birk Skyum <birk.skyum@pm.me> # Lenovo Yoga Slim 7x (X1E80100)
-Tested-by: Deepa Madivalara <deepa.madivalara@oss.qualcomm.com>
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
----
-Changes in v2:
-- Wrap metadata_idx in iris_set_ts_metadata() instead of fixing the fallback read (Bryan)
-- Link to v1: https://patch.msgid.link/20261017-fix-oob-tss-v1-1-fb86f4cabf65@oss.qualcomm.com
----
- drivers/media/platform/qcom/iris/iris_common.c | 4 ++--
- drivers/media/platform/qcom/iris/iris_vidc.c   | 1 +
- 2 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_common.c b/drivers/media/platform/qcom/iris/iris_common.c
-index 25836561bcf3e..2ff15edeac286 100644
---- a/drivers/media/platform/qcom/iris/iris_common.c
-+++ b/drivers/media/platform/qcom/iris/iris_common.c
-@@ -33,6 +33,8 @@ void iris_set_ts_metadata(struct iris_inst *inst, struct vb2_v4l2_buffer *vbuf)
- 	struct vb2_buffer *vb = &vbuf->vb2_buf;
- 	u64 ts_us = vb->timestamp;
- 
-+	inst->metadata_idx++;
-+
- 	if (inst->metadata_idx >= ARRAY_SIZE(inst->tss))
- 		inst->metadata_idx = 0;
- 
-@@ -42,8 +44,6 @@ void iris_set_ts_metadata(struct iris_inst *inst, struct vb2_v4l2_buffer *vbuf)
- 	inst->tss[inst->metadata_idx].tc = vbuf->timecode;
- 	inst->tss[inst->metadata_idx].ts_us = ts_us;
- 	inst->tss[inst->metadata_idx].ts_ns = vb->timestamp;
--
--	inst->metadata_idx++;
- }
- 
- int iris_process_streamon_input(struct iris_inst *inst)
-diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-index 05aab6e3005d5..c85626195285b 100644
---- a/drivers/media/platform/qcom/iris/iris_vidc.c
-+++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-@@ -183,6 +183,7 @@ int iris_open(struct file *filp)
- 	inst->domain = session_type;
- 	inst->session_id = hash32_ptr(inst);
- 	inst->state = IRIS_INST_DEINIT;
-+	inst->metadata_idx = ARRAY_SIZE(inst->tss) - 1;
- 	kref_init(&inst->kref);
- 
- 	mutex_init(&inst->lock);
-
----
-base-commit: 749a4de370409464cf8501ec5b2451df45c84eb4
-change-id: 20261013-fix-oob-tss-7d317d612cf0
-
-Best regards,
---  
-Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-
+>  }
+>
+>  int iris_process_streamon_input(struct iris_inst *inst)
+>
+> There should exist no window in time where the index is invalid.
+>
+> ---
+> bod
+>
