@@ -1,85 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794912199;
-	b=vJvYu425VnrDkPkTDLxKJx7Myg+b6JP3YUHOWHAgjEdDErnc2qYvgnw+qvqHjALNWmI+
-	 NIf920sUK1hRWjBiL9fPbA+c6lw0zptBLshKYKQ4YU6+YGC0JpXviei35TF9aLSNgEWgZ
-	 8Aw2SLWkgeYsYh3GL1wdzAtzCxkNYS1XUMvO99G07XBj9Fa5pR/hQPAierfdD9GxSMUdw
-	 M3fpmf64pCipeF3T9ktcc36DUZAJW5Ejr4waW+JnpSP/yJdzngKo6UDsUSlx4I5NwTpj/
-	 BhVxmI81dAxvfHRPGNt7UB7POaJkFf8pEQIYUOCVWoqXT2eXYgY0k1fu8SmPCWBGw+g==
+	t=1794912314;
+	b=JToX3LP0E4WK+2nlUTn/82cn+uhFZMqozsk3akmsBN0i6Zf9CW6mq66V/oNwUhGyhTtI
+	 C+DJFukOvL76Aiv3eOfxmX54IZkBb4FdgRV4OKF84XX7uOae9R2IWCTM54H5qh6iyh4/S
+	 2W29LSfX7iTiFP3ZUZuXqfpZkyZiQLDjZNq5YUhRo1Dms5ZzkZTGEFhMil+XrbRCxZn6j
+	 k8Q4WqKQsqAu2KZpr3/eYuDjRBIkFLUo9HvrNnSUFGj/Xy3kFd7C9GL/3OVK2klDkH/o6
+	 UU3RMd5uWLkIyPpYOdCshj0amj2qEV1qxhmG1GGvvvPG+7NI+W1eF4wGha/2ckYKvHg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794912199;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:
-	 X-Proofpoint-Reinject:X-QCInternal:X-QCInternal:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=AmFyTq8+uqkJH4tj9t4qc/NvmUt0N/WlpNwjoyv8T6g=;
-	b=gp6XyxTCxmwdAgSn7hi9su6HlHIqo7E5PJi0C//dsZbTB7orP2+eLI5CRXNKOJ5M8hN/
-	 3QBAzb/Jpe8OKTfSrwPwKJX7LNKivOhs5bDhpCxC7fxHBErBWriaS41512DQ41bpesHiP
-	 7GNIc7wh1PJx3ol5ZBm++Rsx/Ml09kgjDowK5xMhJD9PCs3xpasNuDQD4kYoATuzi6KNe
-	 oJdrLos7gyUqoVcAsd832bTLNypc5qjxvKyKOs6bJCnouXuLtS+PpHeCrOgUsUCLyU+wn
-	 SrvlocQIlnVOcbz3yqQDi70+UABEsFblQgoTjmFTfh3urH9YjtTUSbrd11vAsISS+JQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794912314;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=uzUIZzED4hR+jEu4P1YFmt2PNtdzFcv6S+BMZtUimCE=;
+	b=nGxzXIfwb3jwZ9ZB+75FXeRfQUVCfHULpRUt49+phfuWxmA+P8YlH6IQeX/x3h504BU7
+	 5X3gsDEK/+uHwcmEwhR8m69svHRq+MuRTsdZm84v/JP9NR+GwPGXIz+M6SZCvwbDqjjXB
+	 yFEhai4+kCJROoOJvpgB/6LJ7B2+/eObM7SP+Cfm5RU8UTM3PeXUFrbNVfi4Yqx85vY+p
+	 dL+zUyKJJMuocjcStbBM9CEUBuX0l12f1F4bnyPN3fFHGBrEzkJzdI2pTC8oogbT0owMm
+	 MbqocpMCDnjastqOhykYxTIGsB4F62G7XChIqdzcSmccyKz6HRe6c5v/U6LUGd9Pt3Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dAvKtIU5;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BbK9k3Xt;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0169E606A893;
-	Tue, 17 Nov 2026 10:43:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0169E606A893
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EC50606A31C;
+	Tue, 17 Nov 2026 10:45:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dAvKtIU5
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH8nLnQ844338;
-	Tue, 17 Nov 2026 10:43:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=AmFyTq8+uqk
-	JH4tj9t4qc/NvmUt0N/WlpNwjoyv8T6g=; b=dAvKtIU5kBqsExE0BQjGjokpcKN
-	5am41B7e4b7ol9ZdSCkXWAEv14d23AxbuPZJgAKdl6pyiEOHcyYhtCf6XrICjvxd
-	EgBfNwkc2iEUGyDyzyUF88kU3G2xkwB/hBLzrVylYU1TM4ES69zDmBcT6nMttEd5
-	PWuuBn/TaCzcYbo8DmAl3KV1yyb+0TTCfNF9GsGHVtZ3ywyBPBQXX1n51UnnYQWp
-	gexTQKu+oIT26CzYsVd9uF6oKRWj5zXW9JiN5GaZBieSRHJ7AzsO3H3oObzM6xMi
-	tLb4JoZkt2zkdZr8YB/zkjeNiZzNzKvoZy96mAhSBFhBIXBXR1WgF5iDXYg==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0c7h24d8-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 17 Nov 2026 10:43:08 +0000 (GMT)
-Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHAh6bN2583092;
-	Tue, 17 Nov 2026 10:43:06 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ks5-hyd.qualcomm.com [10.147.255.18])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 6AHAh6sp2583084
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 17 Nov 2026 10:43:06 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4763723)
-	id 52CE5681; Tue, 17 Nov 2026 16:13:05 +0530 (+0530)
-From: Karthik S <karthik.s@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Karthik S <karthik.s@oss.qualcomm.com>
-Subject: [PATCH v1 1/3] arm64: dts: qcom: talos-lyra-evk: enable audio support
-Date: Tue, 17 Nov 2026 16:13:01 +0530
-Message-Id: <20261117104303.435294-2-karthik.s@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261117104303.435294-1-karthik.s@oss.qualcomm.com>
-References: <20261117104303.435294-1-karthik.s@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BbK9k3Xt
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC08A1F000C4;
+	Tue, 17 Nov 2026 10:45:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794912314;
+	bh=uzUIZzED4hR+jEu4P1YFmt2PNtdzFcv6S+BMZtUimCE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=BbK9k3XtiYbyGbOENblk4eRB3A3Wnatb6CAyt9R6+CKJTVqaSPb6nr14LhWNHXOQb
+	 QIxBMfI/mizZidFesOp08klrKMiUPxFefcnKSbSuCJwuHL9602AuNMi9cdZzNlOBpE
+	 bQgptu0h6SXocozA3f1sKX3/ydxOJ+mfH30DWMiKEEWm69OawaogojYBNtRysvK7zE
+	 ggge73YY2fveokb4H4kH7eYi6z6zyOZct95UH8MH9RAgHUAIXVazQA0h6V4kc3FX9O
+	 TpV7BIGwm6I0Ly+dKMk2mEr711zqvGrVmaLCIjlsnwHLgWwv/gCmJgZU0sb9qatfvT
+	 rZZv0cvJTiQIg==
+Message-ID: <5de47ef8-58b6-40b7-9c62-f4c306cceb40@kernel.org>
+Date: Tue, 17 Nov 2026 11:45:07 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -89,372 +51,118 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-GUID: OMU7TwQo-aVB6ipzYerByQ2IB6GhKtEn
-X-Proofpoint-ORIG-GUID: OMU7TwQo-aVB6ipzYerByQ2IB6GhKtEn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA0MiBTYWx0ZWRfX9qpgDKby5ZF6
- 0G/9xglQKUe4T7XDVmBWudVIkKvKNNPzu0LByNkSEboM1J+l7ADGLV2A5et/jK3KdjsTO5OBigf
- 2Xsk0WyVdtHqIoCe8nsbsMLa/Qwa4MttDHIPuIsxdYoqbmo5GC+SmVIE37zyVWLKoulJbtq2FWw
- QsiXa+nXqa7vRnx2HsTj8ZxaAGbfy6g5QG0bFwFHvfalLRMZ86xOLwEf59+pf31vPAl1xktV3nK
- SkmtfKWj6BRYobQJONotCUElTTjj+5WYShBMivHIaPlJOBruOzbbWgPpeER9untvBL/LhFjALTu
- 0d2IYB1aW2Eyn9MB+UmniRRj3ZbheAzu/qB07JHPQTB4yGpubYx0QKXXmRtH25EsdZBWlRn7KGO
- KL1pVrQx7DMgbxND7dsBTy/55qrrgoDMpe3JZZeKYTMOpUZhd+424x9yFhyo1qo07aXo7nUvSjM
- +qwSdSYmSN0SnJlZwHg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA0MiBTYWx0ZWRfX0nfm8emtFsNt
- Vyx+W8EgfMeBNkJa8x6wRXhhcG2bN5NmySndd/LgvBQFLNQxft/orRbsHEoTW0prpBs0C8+1Hca
- 14AWlVOzbpy7aPTbVc9Ub68i2zfhBHs=
-X-Authority-Analysis: v=2.4 cv=bobZl0ai c=1 sm=1 tr=0 ts=6afc2fbd cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=P0P8N6AqG3O3ojdu1EwA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
- priorityscore=1501 phishscore=0 clxscore=1015 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170042
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] dt-bindings: media: qcom,mahua-iris: Add Mahua video
+ codec
+To: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261113-mahua_iris_enable-v1-0-b7107e1cbcaa@oss.qualcomm.com>
+ <20261113-mahua_iris_enable-v1-1-b7107e1cbcaa@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261113-mahua_iris_enable-v1-1-b7107e1cbcaa@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-enable playback and capture over max98091 codec interfaces
-for talos-lyra-evk platform.
+On 14/11/2026 04:09, Deepa Guthyappa Madivalara wrote:
+> Add a devicetree binding for the Iris3.9 video encoder and decoder block
+> found on the Qualcomm Mahua SoC. This is a single core derivative,
+> leveraging most of Glymur data with the clks, resets present only
+> for vcodec0 core.
+> 
+> Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/media/qcom,mahua-iris.yaml | 243 +++++++++++++++++++++
+>  1 file changed, 243 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,mahua-iris.yaml b/Documentation/devicetree/bindings/media/qcom,mahua-iris.yaml
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..cbae6bddf7fd4b67330ce47033874f3d349e5a3d
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/media/qcom,mahua-iris.yaml
+> @@ -0,0 +1,243 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/media/qcom,mahua-iris.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm Mahua SoC Iris video encoder and decoder
+> +
+> +maintainers:
+> +  - Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+> +
+> +description:
+> +  The Iris video processing unit on Qualcomm Mahua SoC is a video encode and
+> +  decode accelerator.
+> +
+> +properties:
+> +  compatible:
+> +    oneOf:
+> +      - items:
+> +          - const: qcom,mahua-iris
+> +          - const: qcom,glymur-iris
+> +      - const: qcom,mahua-iris
+> +
 
-Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
----
- .../boot/dts/qcom/talos-lyra-evk-som.dtsi     |   1 +
- arch/arm64/boot/dts/qcom/talos-lyra-evk.dts   | 271 +++++++++++++-----
- 2 files changed, 202 insertions(+), 70 deletions(-)
+I don't understand what you want to express at all. See DTS101 slides, I
+gave the talk in Qualcomm office this year even.
 
-diff --git a/arch/arm64/boot/dts/qcom/talos-lyra-evk-som.dtsi b/arch/arm64/boot/dts/qcom/talos-lyra-evk-som.dtsi
-index d254a32760df..7cc1ebec9903 100644
---- a/arch/arm64/boot/dts/qcom/talos-lyra-evk-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/talos-lyra-evk-som.dtsi
-@@ -5,6 +5,7 @@
- 
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include <dt-bindings/sound/qcom,q6afe.h>
- #include "talos.dtsi"
- #include "pm8150.dtsi"
- / {
-diff --git a/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts b/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-index dffe64475ded..f3db271517b5 100644
---- a/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-@@ -7,109 +7,240 @@
- #include "talos-lyra-evk-som.dtsi"
- 
- / {
--    model = "Qualcomm Technologies, Inc. QCS615 Talos Lyra EVK";
--    compatible = "qcom,talos-lyra-evk", "qcom,qcs615", "qcom,sm6150";
--    chassis-type = "embedded";
--
--    dp0-connector {
--        compatible = "dp-connector";
--        label = "DP0";
--        type = "full-size";
--
--        port {
--            dp0_connector_in: endpoint {
--                remote-endpoint = <&mdss_dp0_out>;
--            };
--        };
--    };
-+	model = "Qualcomm Technologies, Inc. QCS615 Talos Lyra EVK";
-+	compatible = "qcom,talos-lyra-evk", "qcom,qcs615", "qcom,sm6150";
-+	chassis-type = "embedded";
-+
-+	dp0-connector {
-+		compatible = "dp-connector";
-+		label = "DP0";
-+		type = "full-size";
-+
-+		port {
-+			dp0_connector_in: endpoint {
-+				remote-endpoint = <&mdss_dp0_out>;
-+			};
-+		};
-+	};
-+
-+	sound {
-+		compatible = "qcom,talos-lyra-sndcard";
-+		model = "qcs615-snd-card";
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&lpi_spkr_i2s_mclk_a>, <&lpi_i2s1_clk>,
-+			    <&lpi_i2s1_data>, <&lpi_i2s1_ws>;
-+
-+		sec-mi2s-playback-dai-link {
-+			link-name = "Secondary MI2S Playback";
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai SECONDARY_MI2S_RX>;
-+			};
-+
-+			codec {
-+				sound-dai = <&max98091>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+
-+		sec-mi2s-capture-dai-link {
-+			link-name = "Secondary MI2S Capture";
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai SECONDARY_MI2S_TX>;
-+			};
-+
-+			codec {
-+				sound-dai = <&max98091>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+	};
- };
- 
- &i2c5 {
--    clock-frequency = <100000>;
--
--    status = "okay";
--
--    expander0: gpio@20 {
--        compatible = "kinetic,kts1622", "ti,tcal6416";
--        reg = <0x20>;
--        #gpio-cells = <2>;
--        gpio-controller;
--    };
--
--    expander1: gpio@21 {
--        compatible = "kinetic,kts1622", "ti,tcal6416";
--        reg = <0x21>;
--        #gpio-cells = <2>;
--        gpio-controller;
--    };
--
--    expander2: gpio@38 {
--        compatible = "ti,tca9538";
--        reg = <0x38>;
--        #gpio-cells = <2>;
--        gpio-controller;
--    };
--
--    expander3: gpio@3c {
--        compatible = "ti,tca9538";
--        reg = <0x3c>;
--        #gpio-cells = <2>;
--        gpio-controller;
--    };
-+	clock-frequency = <100000>;
-+
-+	status = "okay";
-+
-+	expander0: gpio@20 {
-+		compatible = "kinetic,kts1622", "ti,tcal6416";
-+		reg = <0x20>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander1: gpio@21 {
-+		compatible = "kinetic,kts1622", "ti,tcal6416";
-+		reg = <0x21>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander2: gpio@38 {
-+		compatible = "ti,tca9538";
-+		reg = <0x38>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander3: gpio@3c {
-+		compatible = "ti,tca9538";
-+		reg = <0x3c>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	max98091: max98091@10 {
-+		compatible = "maxim,max98091";
-+		reg = <0x10>;
-+		#sound-dai-cells = <0>;
-+		clock-names = "mclk";
-+		clocks = <&q6prmcc LPASS_CLK_ID_SPEAKER_I2S_OSR LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <119 IRQ_TYPE_NONE>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&int_codec>;
-+	};
- };
- 
- &mdss {
--    status = "okay";
-+	status = "okay";
- };
- 
- &mdss_dp0 {
--    pinctrl-0 = <&dp_hot_plug_det>;
--    pinctrl-names = "default";
-+	pinctrl-0 = <&dp_hot_plug_det>;
-+	pinctrl-names = "default";
- 
--    status = "okay";
-+	status = "okay";
- };
- 
- &mdss_dp0_out {
--    link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000>;
--    remote-endpoint = <&dp0_connector_in>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000>;
-+	remote-endpoint = <&dp0_connector_in>;
- };
- 
- &pon_pwrkey {
--    status = "okay";
-+	status = "okay";
- };
- 
- &pon_resin {
--    linux,code = <KEY_VOLUMEDOWN>;
-+	linux,code = <KEY_VOLUMEDOWN>;
- 
--    status = "okay";
-+	status = "okay";
-+};
-+
-+&soc {
-+	lpass_tlmm: pinctrl@62B40000 {
-+		compatible = "qcom,qcs615-lpass-lpi-pinctrl";
-+		reg = <0x0 0x62B40000 0x0 0x20000>,
-+		      <0x0 0x62B00000 0x0 0x10000>;
-+
-+		clocks = <&q6prmcc LPASS_HW_MACRO_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+		clock-names = "core";
-+
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+		gpio-ranges = <&lpass_tlmm 0 0 32>;
-+	};
-+};
-+
-+&lpass_tlmm {
-+	lpi_spkr_i2s_mclk_a: lpi-spkr-i2s-mclk-a-state {
-+		pins = "gpio19";
-+		function = "spkr_i2s_mclk_a";
-+		drive-strength = <16>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	lpi_i2s1_clk: lpi-i2s1-clk-state {
-+		pins = "gpio8";
-+		function = "i2s1_clk";
-+		drive-strength = <8>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	lpi_i2s1_clk_sleep: lpi-i2s1-clk-sleep-state {
-+		pins = "gpio8";
-+		function = "i2s1_clk";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+		input-enable;
-+	};
-+
-+	lpi_i2s1_data: lpi-i2s1-data-state {
-+		pins = "gpio10", "gpio11";
-+		function = "i2s1_data";
-+		drive-strength = <8>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	lpi_i2s1_data_sleep: lpi-i2s1-data-sleep-state {
-+		pins = "gpio10", "gpio11";
-+		function = "i2s1_data";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+		input-enable;
-+	};
-+
-+	lpi_i2s1_ws: lpi-i2s1-ws-state {
-+		pins = "gpio9";
-+		function = "i2s1_ws";
-+		drive-strength = <8>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	lpi_i2s1_ws_sleep: lpi-i2s1-ws-sleep-state {
-+		pins = "gpio9";
-+		function = "i2s1_ws";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+		input-enable;
-+	};
- };
- 
- &spi6 {
--    status = "okay";
-+	status = "okay";
- 
--    tpm@0 {
--        compatible = "st,st33htpm-spi", "tcg,tpm_tis-spi";
--        reg = <0>;
--        spi-max-frequency = <20000000>;
--    };
-+	tpm@0 {
-+		compatible = "st,st33htpm-spi", "tcg,tpm_tis-spi";
-+		reg = <0>;
-+		spi-max-frequency = <20000000>;
-+	};
- };
- 
- &tlmm {
--    dp_hot_plug_det: dp-hot-plug-det-state {
--        pins = "gpio104";
--        function = "dp_hot";
--        bias-disable;
--    };
-+	int_codec: gpio-irq-state {
-+		pins = "gpio119";
-+		function = "gpio";
-+	};
-+
-+	dp_hot_plug_det: dp-hot-plug-det-state {
-+		pins = "gpio104";
-+		function = "dp_hot";
-+		bias-disable;
-+	};
- };
- 
- &usb_1 {
--    dr_mode = "peripheral";
-+	dr_mode = "peripheral";
- 
--    status = "okay";
-+	status = "okay";
- };
- 
- &usb_2 {
--    dr_mode = "host";
-+	dr_mode = "host";
- 
--    status = "okay";
-+	status = "okay";
- };
--- 
-2.34.1
+Anyway, glymur is undocumented. There is nothing about dependencies in
+top of the cover letter (sorry, not going to scroll further - you ALWAYS
+put the most important information first), but anyway then it means this
+is untestable or unreviewable.
 
+Best regards,
+Krzysztof
