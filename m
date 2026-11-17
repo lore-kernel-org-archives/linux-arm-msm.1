@@ -1,111 +1,110 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794929734;
-	b=JSbm+A28acW6GEnx/nPhiVvKpN3Fd7ByEmWXjlwxlKftY2fqqKWI4ip8B2EUAWVrhgqQ
-	 4s45crXWBkSYRmuLZcEfe9+KInl6AcgQo36pcO07vKnMQgbrGY7dy4ACcyg/zS/6Ofpbr
-	 7XMFwVcEttvoSoaE4nVw7i2m8J5mNtJxk017JWsiAApy9mavsClE6moYdGD2PTWwQ9L2r
-	 D1ly2hoQprXcS5YM8uTxfOpMmCR9uCLLSJ47QXzIyjwB3LZ88Bus0FLVH7tqdOxVSsEg+
-	 rJIRxFbFTs/E/Fttf0yLxpO/2Pfx2bNR+6XHUn8EqwnYNkMcy4pfUIYGsv8r+H8mo1g==
+	t=1794929795;
+	b=pjNGNHs/U0GFFRn2K6KPaUH8MeZXLKZ2vmbztFHi0hzxqMBCmVgKuoX2eaKKESLA4NcV
+	 lmsfFTtRfRdpLG0wlog1K/9C246J+WWv5h0U7isnhnwPX53ezrm8a1C9zqKCFP9etxjei
+	 kqz+cQEW0m3+Gs2zC69S2Chx3qtyoLfEjxu5LnF0VJvMT4/6pQqEwpi0jYmfVW7iyScLt
+	 dfJuo0rQgvze6Yvf+Y53G38OgPowcw+sGB6ynwI7GY4ytWzopgFJgLUzMXLzbPybSsQJ5
+	 mhxNqqZaI0E61YlV1Jb+NjmO/YfG/i+fD8IzS6F312vnXtrvPCzgsXdFLH7pyIxWdjA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794929734;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794929795;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=67Ks5b0HSYrXo9kOcZY2qc0sEU+LdootGD3SBNdOIvc=;
-	b=ZDwHEuenJ5kiBBrp4AZ81+9GaiUB3R3OYTIloQinkEw1FFdcq6dUoXHkUsZmx9sRZvM+
-	 0RVIjrs4/p2dsa0BwTiQIYNrl3fPW05LoThPqmAF5Vo8EiKuim9bOS6a8AUxXPJiqRp1c
-	 NTETYiqndehVA+42Ez7k5+p4OBYtuWSwYt37Kaf1c24sgbLa5D5dx3hH0bPF8M5PSMaip
-	 LcSuCkqsBkS7b8e1OUaWRPVw4ZUCu8+q+GWsBDUXeNTYazG96ayTzOr6Dzh/05X60vKf/
-	 /ihHD0mjnyN3HTckHswHZ9W0u/foKuG4VCIhpatfbhaKNg0IXZLnMb/53+DYbTehNcQ==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
+	b=EuKguyw6KR6syxmRmnh8P8u+WVOegzLhmgHFXJfuUO4OsOW1zQeSbvgu+mNT64B24YT3
+	 jEHj/TIC6hmoqndmGJGk9bwoW07zKwYqlzBNNeuP+02+lwg/oeu8BBsyC7DyRckd59OWB
+	 do/bBzjBNIxTX7auLvD+QaQDxr87gy3XOEHdXKGvaCeYSc124ClUesVyyPIZISeA52+pT
+	 MtSULJtpYPxmpLGHkBm6O8qyeBl6JzlAFQQEOUvzPE9bDMHviZxSBFN6z1fB+C86jTzFl
+	 +EPkt7QbYbtfi5ctC+vd08RH0eJxd5LspCAyDhb29DTZ7HdYpwJN/bw8frqKzbx9TLA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IJIfwHeK;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AP0RgrI2;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=anHTQfGT;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="eWbrFrw/";
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4128606A31C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:35:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4128606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A6DD60A381E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A6DD60A381E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IJIfwHeK;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AP0RgrI2
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHFQdeU995092
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:35:32 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=anHTQfGT;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eWbrFrw/
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHFQhQd534589
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	67Ks5b0HSYrXo9kOcZY2qc0sEU+LdootGD3SBNdOIvc=; b=IJIfwHeKeh1kWGsD
-	UR/tfSp6lnTJa42WLngOIKIW1tSHjFKyFl1CY9pStbMnzKmvzz+cwvkWU5qQSH2C
-	WgIxsCJ3NNJ6LmQVXKS/oEZJM72aYKkqtm6SC4iSuIJJEXM3MQNbMEgqE7K76ejp
-	X3/S9oEgoyYjtkrJd4F9D3P/YBc1T90SSfBhjOwQaG1SnVhI2CaoqVOdOvI2p+Xa
-	0czEjLPfAh/8Sm5Q8r5xjStSjaZvUTkoQ5NhpLmeqVd0S6KQbSnfrfQ5p1hrUQ7Y
-	wvyVstFbHa2XrbKDWV+ugGBuvdMZ99iAhobVtQfawIpAWdDNa7VyVKGJNiq8SzLO
-	9EeVLg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0hkd26n7-1
+	Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=; b=anHTQfGTNUfJhltw
+	JdjFJIw1vlt50liTTE6kzzm3wE6ww8FHTIic2iGqzuK2CJF+04/IfTPElzGT8eFl
+	VRYt3GnTMHEp76+IUMgYCm4WYQzpVg98IBG47F+YX6rU7oegkq3PtMcfjEPaq+NP
+	9+D/cpze7el9fxHT2uvvJW63o4Qk7oNw++enZEBVhIAXrNWjLPcXLNW0cI9PvBYJ
+	n54o+5JrwwuwCgtGFQNLPf66HgIcGHDmqpdtuvFecu3V+rO9r8bSz4SMRxj/QWpS
+	XjusrJWKWjcukmSJ2wcp3TAK8zYwTeBEZw0sVECBXdspfF73GPFWqrGtG3+29olq
+	xUi1bQ==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0gfr2ewu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:35:31 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3b0e00d7cc2so4377529a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:35:31 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 15:36:33 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7d2cba05824so4008021137.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 07:36:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794929731; x=1795534531; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=67Ks5b0HSYrXo9kOcZY2qc0sEU+LdootGD3SBNdOIvc=;
-        b=AP0RgrI2xb+CrGSUuLkY7o+1tfY8te/RBp6aFbTuTC1u6YE9yA4qnKfnv++SteB3En
-         HoqD9+MWC5zTgQjO2y2ZFt0XUMH/dbo4UtrLy+FQ/zfws+kW9Q3bXl+2c/Yr8Wey0hIX
-         9i6alLP2CFPP4NgdZSIo3/2tcyCi/wY23N5+RrbicnQ98WhO8mLicOYm1W91YAxWI5Ym
-         qxnISn2bxgsWhKSPZYoHan74RYmiwCkBntHhxkCAEBtNvQPSocYO/ifrARn28HJzwxFn
-         4GkPRSxyiUMRDzM1Yw1qMwNGG871kWgVSfBfFJJl8RU179C5LVgClgfi9FSLfrbV/q7x
-         IJRw==
+        d=oss.qualcomm.com; s=google; t=1794929793; x=1795534593; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
+        b=eWbrFrw/UCkHtywquS+wnebU/CS265/ydsXk/BYIHDL1Qhlj4tS2l8dCror1TltJUX
+         BBC36q+p69urs6rGkdp7mw6XxfoJsNt3agrQJG2u9+lmG+LlOtlA3jcyp/24Du/KZ+RD
+         cIKfh0i4sUH8hiK0u5UMa9KqCzyK7ahuc1O5I7PyP6eCRAC8jIa2AzXriFXgBq9SFSmd
+         0CePOkKV8smYrXe0TeXjKklcV1TL8sdDdJDbp+xBhVoisJ0HxsVhDlmI6QFeS8NQIIvi
+         gHV4t4wv02/qTsdCM55nwx6oo8RFGK3ZPLf8y7bcXBxbWTYeDVwlY/CyY0FOgF70JFjL
+         K3qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794929731; x=1795534531;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794929793; x=1795534593;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=67Ks5b0HSYrXo9kOcZY2qc0sEU+LdootGD3SBNdOIvc=;
-        b=ykoa/U6OC92KcMO+2HXE6wS3N8UCTCUsL4Aji2wXWj254IfN4Pfp8+AlSjqFFTTc8a
-         NGNfX1AlOUQS8eoDxsRUZ9oMnkQ36Z0aI8YXItytam8+c8V6Xf/WXXmlOOrTT5MhnxwW
-         PQsBVZXE9X+ayOlbGA0AJubTEBgooGM7ExPBc1rOeHFFoAa4b+3xNohr00zUDdd27v1T
-         sFKBvXSY9njlGzjBZ2S+4GKeWkbvpCCzgQovRn/Uob8xsxZP0Eqss51mVAeYHplLTUH0
-         sqx3QBXpKnLNz7bcQP1fcMYjDQ0gEU4cE55RszVUaQ2ktgeaxTeIxzkUCGqbwsyJe6Oz
-         +4Eg==
-X-Gm-Message-State: APuU4Z+1rvz0JzjC8l5oPY9H1JnSxRZqRjuu6V2T4G4U0SiphKRalpmO
-	rfCY48E+8Od7ZM0DRTi7myebh09jK+DJxmK6HKfrIC3iibzjN62016i380nIYkMDV3XSID7Jl6e
-	gEaZAkGJGHr0TVFkrW95uUiRZoBfOaZQDYQrLp2C0kXAWtEnHpYnER3GLhnHtTi8vx3GA7cmeiw
-	ft
-X-Gm-Gg: AZFdTZfByiPk1er9DBp1Phagx53IOO0V34YHLfu3RGypKZZoG1LMFV5EZFHiLOyTGP3
-	0DjC1JmFNIE32MTZ6uS9LwEGjP7FJfjO0PF94I5zpbKUQKekUVPuzJophAuTjLxbyjAVMqm4f9o
-	/lUW0p6h/26gghfNhzR8l111GRVGI74y8df/HLZtdgqHUBLL7KNBBZCLkZv+n77rCQFiwreWu8Y
-	X1IfOWLe52S55SDvB2IhJSubbRcQR0tYM6H9A7xTQGyBJaxdGRXuIGZsBjETDSD7szIg9OgthwN
-	Yb+1jbbWmj7HOI6mpl/nK5nEvwlcFgDP50YQobM2Gi/7/KGmP1djQ7txjg3K/SJ9Du5h0iEIxdg
-	FFEOJf8fTZAOqD4qJMqmH8oE4IcDSubjzPzKhWiEIGHQZe4DRFBEj2JRiRb6ax028p9veVa4RF9
-	cIQg==
-X-Received: by 2002:a17:90a:f947:b0:3b1:2810:dfdb with SMTP id 98e67ed59e1d1-3b1b0b86ae0mr13484112a91.48.1794929730732;
-        Tue, 17 Nov 2026 07:35:30 -0800 (PST)
-X-Received: by 2002:a17:90a:f947:b0:3b1:2810:dfdb with SMTP id 98e67ed59e1d1-3b1b0b86ae0mr13484075a91.48.1794929730181;
-        Tue, 17 Nov 2026 07:35:30 -0800 (PST)
-Received: from [172.20.15.99] ([195.50.164.66])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b3abec8092sm4658652a91.17.2026.11.17.07.35.20
+        bh=Iu0dxZTO8PcDzOB+6qCjf2Tg6FKjgEK34SzfNcCThyQ=;
+        b=SjMec/S7SSgvqfNr7NUBVzzSvEuSILn5vDhrhPH1Xh4LIO2iygTAqibYrgMfom4MpQ
+         Vr3WqnEcandq3LkQ9AjEPRzCjv5n1G7qr3wIIQRAHQSdmTNzTot5JGJB0lr0fuenulVu
+         t6KKtXv/Czhz4a7JSdLoJLieTo283WSQDhRYsKlOsMcb3iHQvWx+XT1ebb74XMk183pn
+         FAzB4G9zWLSTIEEe7Y+vF04zpkOky7prVy4/y1QNpcE79LZHlAgLqk3T7G5TY3iWCzU2
+         aNiPoHkMD134sIJea6a+GFgbUpMLjM1Ash3NKUGdwquDhfhDNxIaULya/oA7GLnZ/W9+
+         kbJQ==
+X-Forwarded-Encrypted: i=1; AL+hErGCAXufoIG9fVJstSaqIQNx0jzIycs/iyM+knCOKPMBsCY9t2+AJzh8p04xLhugfNjVxRltkg0rW2ukAxM+@vger.kernel.org
+X-Gm-Message-State: APuU4Z9gP+g94WKuga/Ut2J4GZGQn7hqpDa3f/fXo/jux2ieG3hqkk8V
+	pbpmJnuwkeDs9RfYnwK5WcaJylvGAcSA5xn3fc5+koYDcFNb4XMGVUT2ALrxIedqZOOOz7vJ2dO
+	JQhVxi1Za1okxOP7WZAukmgQQDujAGSpTSQpd2Od/7db7t/cfFxzHB0yG9Ihw+DgJR/Cj
+X-Gm-Gg: AYBFou1dypBjvy4bq8ZNu8D4q5B51FLcWLZMMSJgV+EBW+a3SBp3vLnAmt34fhlfrOD
+	q9NsYE78/bxSzg0goB1oyoWGK3AHIa89JI0VAafXlYou3gqc+mxNvzOwidu6R0utSecNRvSh6gH
+	kfqZ+5VA/dT0flbWaCqazGQc4XgcZ9zsGXpT4EgPYH/xO/op6hi2R2+qzEjoHur7ZMR0LEJNqlk
+	Jd6y5Y+b01LrDtAFP3w3J0nWyIYwtNyrIqTLB0Kz2cp5N3EXerc2RRGsjde8DOHCJ+5pIIbZuWU
+	11mG663Vvj9sjUtkRyMKwiTQ//4YiZQColJBL5ZYEE54uuOWhBhwVtoYwGQBAoe5Y0a9PRieNd2
+	V+6yWwL/hsqXPdQSzPyrezVxNVSaAttXflFzPJygR7e84YKUt3dUzHJ/YtqtSJLU0QZO727jTpk
+	Y=
+X-Received: by 2002:a05:6102:5815:b0:7d2:7be1:271f with SMTP id ada2fe7eead31-7d64d8228camr6206096137.31.1794929792710;
+        Tue, 17 Nov 2026 07:36:32 -0800 (PST)
+X-Received: by 2002:a05:6102:5815:b0:7d2:7be1:271f with SMTP id ada2fe7eead31-7d64d8228camr6206081137.31.1794929792052;
+        Tue, 17 Nov 2026 07:36:32 -0800 (PST)
+Received: from [172.20.2.50] ([195.50.164.66])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb7839cad7sm80688825e9.10.2026.11.17.07.36.29
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 17 Nov 2026 07:35:29 -0800 (PST)
-Message-ID: <443de2a5-d6ca-461e-b842-47b3acbf4031@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 21:05:15 +0530
+        Tue, 17 Nov 2026 07:36:31 -0800 (PST)
+Message-ID: <65e501e0-b6d5-4204-ba6a-2d35091e2ae6@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 15:36:29 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,98 +115,170 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] misc: fastrpc: remove dead context drain in
- fastrpc_user_free()
-To: Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, stable@kernel.org,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-        quic_bkumar@quicinc.com, quic_chennak@quicinc.com
-References: <20261117-interrupted-invoke-v4-v4-0-2320a8a7eda2@oss.qualcomm.com>
- <20261117-interrupted-invoke-v4-v4-1-2320a8a7eda2@oss.qualcomm.com>
+Subject: Re: [PATCH] ASoC: qcom: q6dsp-lpass-clocks: Set driver data before
+ registering clocks
+To: yzddmr6@gmail.com, Srinivas Kandagatla <srini@kernel.org>,
+        Mark Brown <broonie@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org
+References: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 Content-Language: en-US
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-In-Reply-To: <20261117-interrupted-invoke-v4-v4-1-2320a8a7eda2@oss.qualcomm.com>
+In-Reply-To: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=eqFKXYpX c=1 sm=1 tr=0 ts=6afc7443 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
+X-Authority-Analysis: v=2.4 cv=X/rHu2Te c=1 sm=1 tr=0 ts=6afc7481 cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=tAvVqsXYnFiDWnUM2kgA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA2MSBTYWx0ZWRfX9sJQtShlruyf
- 2r/hOSJYGlAs+xUzFO96wi8O05kRUa2A4lFraiqvGeFpqjSM7Un3AFJnKnbrBc8jHBLvlbQt/wP
- 65FiQC5UjlVn4+yYTjapqngVRGurJYU=
-X-Proofpoint-GUID: _JbmmyoJlSUeB1yxXrnIIeOxsYz8Go82
-X-Proofpoint-ORIG-GUID: _JbmmyoJlSUeB1yxXrnIIeOxsYz8Go82
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA2MSBTYWx0ZWRfXzJ5tsHGPZ0Zc
- xxigmW2r0mKA5ybCuwCY/hflo2zPS0IIZMgs9L0CBgmwslX5If26lLJt2VuTReNtnGSfnNFAN/1
- X2wMGD+2lBMdg1IZqsgBW7vWt7lMWafR0gQjdoGTIT9DoMW4k3tLpQJ+7yVhr0yG48r2uUacsZl
- sqykVvgth5sxaFfLOhX7iya9nMossILW8DEr7TjiP1UWHs/FYMQ93jHEbzZxtY9FLtA4LeCChrM
- f8UWljMywpLvzkAvFuu1WtoVu81TnwGrWtraWRNwY2vHKBCHUyT3HwuetxYRRFXJ6BYLZOqZ7qY
- 2Bhp66hCm+nrq67vwsfv5Puf+ZZyrIOqfEL11LKvElsqxkACepakKpNsmR7x4cZhZCbM4IJ57uU
- 9U3+YMm99ta9JzPTj0D6lfRg6fqqIO0Lymipf2tAV0FKB9jERkr/FOFZ7C0WhpQzi5eeNjwzkTn
- AFQgnPW3zqcovntkwrA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=pGLkceISAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=mFCCqUHryluRUJtW3YUA:9
+ a=QEXdDO2ut3YA:10 a=crWF4MFLhNY0qMRaF8an:22
+X-Proofpoint-GUID: TnY4WN2qRiAkNMubZ41J5WiLWRPVI5Wd
+X-Proofpoint-ORIG-GUID: TnY4WN2qRiAkNMubZ41J5WiLWRPVI5Wd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA2MiBTYWx0ZWRfX8HgDTw4hOXI4
+ Oac2m08YXeQVPYoxl7+vmZOTNWd84KRzA6v1RVSCcKHSaun7CZCgIYkSoo117rauUOXka+FntZI
+ oV6ZYIZUesj63G7rIgROiwekc5I3hUkQ6eBSU5jsCkfR3bVhsBrajrleMuxXubbg1rCsJdMMEQJ
+ gRhQrNN3WUZWf+N+xfwNe1ZnhFbaKrYV5Af/0Eebz1mq2GdkLJH7MhADqapbGkkr5eXszIzzSkT
+ wNgUfP0kBBoAoqFjRzNfgKHBWYhSm8lXRKPNwve/9RFfqtuvtFZ50KXRa8swB9byOPo+0qFp4Yt
+ wHd5DIHiD5Hyb4f+NcvWjCFKp9TT5io0xmAKdFr2wlCYasmNCOzcQQVqCrrBZNrrlOrcfiBDFh9
+ Gn4xf/juEOqaRkZuk7eB/ZO1LN3GQz+P9ZEJtvOwmBc1zz0frpYUxILRRfQRmNhI+2YVDONLkz2
+ VTlqtZ56hyFS+mVh2bA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA2MiBTYWx0ZWRfX8C+ZO55pBuO6
+ eyVcMHsU5NeLCTI2Eai5e7MUV4r6YNPnhl/7A2KscMRGWyupC4cz2bGoFQ4J1NHDBxX8TdOxn30
+ c9Tb8jN8z37rx2FS0HauWIlJhZkouec=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_03,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 impostorscore=0 malwarescore=0 priorityscore=1501
- adultscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170061
+ adultscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
+ lowpriorityscore=0 impostorscore=0 priorityscore=1501 phishscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611170062
 
-On 17-11-2026 15:09, Anandu Krishnan E wrote:
-> fastrpc_context_alloc() takes a reference on fl via fastrpc_user_get()
-> for the lifetime of every context, and fastrpc_context_free() always
-> unlinks the context from fl->pending before releasing that reference
-does it? I don't see this in the driver code
-> with fastrpc_user_put(). This means fl->refcount cannot reach zero -
-> and fastrpc_user_free() cannot run - while any context is still linked
-> on fl->pending: whichever context's release happens to be the one that
-> drops the last reference has, by construction, already removed itself
-> from the list a few lines earlier in the very same call.
+
+
+On 11/15/26 1:12 PM, yzddMr6 via B4 Relay wrote:
+> From: yzddMr6 <yzddmr6@gmail.com>
 > 
-> The list_for_each_entry_safe() loop over fl->pending in
-> fastrpc_user_free() can therefore never find anything to iterate. It
-> has been unreachable since fl's own lifetime was switched from
-> file-close-synchronous teardown to kref-counted teardown; it was never
-> updated to reflect that the list it walks is now guaranteed empty by
-> the time this callback can run. Remove it.
+> The clk ops of the q6dsp clock controller look up struct q6dsp_cc with
+> dev_get_drvdata(), but q6dsp_clock_dev_probe() sets the driver data only
+> after it has registered the clocks and added the OF clock provider. A
+> consumer that gets and prepares one of the clocks in between
+> dereferences a NULL pointer.
 > 
-> Fixes: e85eb5feca8e2 ("misc: fastrpc: fix use-after-free of fastrpc_user in workqueue context")
-> Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+> fw_devlink does not keep consumers out of that window. The q6prm and
+> q6afe clock controllers are described below the ADSP remoteproc node,
+> and their devices are only created once the ADSP has booted and its
+> GPR/APR services have come up, long after the remoteproc device has
+> bound. fw_devlink therefore makes the remoteproc device the supplier of
+> their consumers. A consumer such as the LPASS LPI pinctrl then just
+> defers until of_clk_get() succeeds, and its retry from the deferred
+> probe worker can run while the clock controller is still in its probe.
+> 
+> That happened once on a Xiaomi Pad 8 Pro (SM8750). While the LPI pinctrl
+> probe registered its GPIO chip, gpiolib read a GPIO direction, which
+> runtime resumed the device and prepared its q6prm vote clocks through
+> pm_clk. The prepare op then faulted with a NULL pointer dereference at
+> virtual address 0x350 (trimmed):
+> 
+>   pc : clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common]
+>   lr : clk_core_prepare+0x7c/0x298
+>   Call trace:
+>    clk_vote_q6dsp_block+0x24/0x58 [snd_q6dsp_common] (P)
+>    clk_core_prepare+0x7c/0x298
+>    clk_prepare+0x28/0x44
+>    pm_clk_resume+0x10c/0x188
+>    pm_generic_runtime_resume+0x2c/0x44
+>    ...
+>    __pm_runtime_resume+0x50/0x94
+>    ...
+>    lpi_gpio_get_direction+0x4c/0x8c [pinctrl_lpass_lpi]
+>    gpiochip_add_data_with_key+0x7b0/0x10dc
+>    devm_gpiochip_add_data_with_key+0x38/0x8c
+>    lpi_pinctrl_probe+0x2b8/0x320 [pinctrl_lpass_lpi]
+>    ...
+>    deferred_probe_work_func+0x88/0xc0
+> 
+> 0x350 is the offset of desc in struct q6dsp_cc; the driver data pointer
+> it was loaded from was NULL. The oops left the clk prepare_lock held,
+> which blocks every later clk_prepare(), and the system did not finish
+> booting.
+> 
+> On mainline the window is short, but it includes a wait for prepare_lock
+> in clk_core_reparent_orphans(), which of_clk_add_hw_provider() calls
+> right after listing the provider. The kernel that hit this had
+> out-of-tree changes to drivers/clk/clk.c that do more work at that
+> point, which makes the window wider.
+> 
+> Both q6afe-clocks and q6prm-clocks use q6dsp_clock_dev_probe(). Set the
+> driver data before the first clock is registered.
+> 
+> The oops was analysed and the fix written with the help of an AI coding
+> assistant.
+> 
+> Fixes: 9ab71ac37240 ("ASoC: qdsp6: q6afe-clocks: move audio-clocks to common file")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: yzddMr6 <yzddmr6@gmail.com>
+
+Reviewed-by: Srinivas Kandagatla<srinivas.kandagatla@oss.qualcomm.com>
+
+--Srini
 > ---
->  drivers/misc/fastrpc.c | 6 ------
->  1 file changed, 6 deletions(-)
+> The kernel that hit this was v7.4-rc2 with out-of-tree board support and
+> other changes, including the clk.c changes mentioned above. The oops
+> showed up once in the 23 boots of that kernel I have logs for, and I
+> have not been able to reproduce it on demand. The patch is build-tested
+> (arm64 defconfig, W=1) on the base commit below.
 > 
-> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-> index 9e760f68bc..bb0c304196 100644
-> --- a/drivers/misc/fastrpc.c
-> +++ b/drivers/misc/fastrpc.c
-> @@ -568,17 +568,11 @@ static void fastrpc_context_put(struct fastrpc_invoke_ctx *ctx);
->  static void fastrpc_user_free(struct kref *ref)
->  {
->  	struct fastrpc_user *fl = container_of(ref, struct fastrpc_user, refcount);
-> -	struct fastrpc_invoke_ctx *ctx, *n;
->  	struct fastrpc_map *map, *m;
->  	struct fastrpc_buf *buf, *b;
+> I used an AI coding assistant for this work. It analysed the oops,
+> traced the probe ordering and drafted this patch and changelog. I have
+> reviewed the change.
+> ---
+>  sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
+> 
+> diff --git a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
+> index 94d96130245e..c3628f90fdb2 100644
+> --- a/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
+> +++ b/sound/soc/qcom/qdsp6/q6dsp-lpass-clocks.c
+> @@ -146,6 +146,12 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
+>  	cc->dev = dev;
+>  	q6dsp_clks = desc->clks;
 >  
->  	fastrpc_buf_free(fl->init_mem);
+> +	/*
+> +	 * The clk ops look up cc through the driver data, so set it before
+> +	 * any of the clocks can be prepared.
+> +	 */
+> +	dev_set_drvdata(dev, cc);
+> +
+>  	for (i = 0; i < desc->num_clks; i++) {
+>  		unsigned int id = q6dsp_clks[i].clk_id;
+>  		struct clk_init_data init = {
+> @@ -174,12 +180,6 @@ int q6dsp_clock_dev_probe(struct platform_device *pdev)
+>  			return ret;
+>  	}
 >  
-> -	list_for_each_entry_safe(ctx, n, &fl->pending, node) {
-> -		list_del(&ctx->node);
-> -		fastrpc_context_put(ctx);
-> -	}
+> -	ret = devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
+> -	if (ret)
+> -		return ret;
 > -
-you should also remove the forward declaration of fastrpc_context_put().
-
->  	list_for_each_entry_safe(map, m, &fl->maps, node)
->  		fastrpc_map_put(map);
->  
+> -	dev_set_drvdata(dev, cc);
+> -
+> -	return 0;
+> +	return devm_of_clk_add_hw_provider(dev, q6dsp_of_clk_hw_get, cc);
+>  }
+>  EXPORT_SYMBOL_GPL(q6dsp_clock_dev_probe);
+> 
+> ---
+> base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
+> change-id: 20261114-upstream-q6dsp-clk-drvdata-e09d27f289b3
+> 
+> Best regards,
+> --  
+> yzddMr6 <yzddmr6@gmail.com>
+> 
 > 
 
