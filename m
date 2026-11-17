@@ -1,82 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794919195;
-	b=A0TRMYE+N3TXpH+aGGbh2nPu2KzqkHmR4uNOJEIyIRNSrAEQxf+SsfPALxBAXWyfT8BW
-	 MIlLQAcveZ4x02co8DIs9vYSInK1QxZH4Ipnr3iu0Zu06yWCotnQ7LpFjQmC1ZHQHFFIG
-	 wVravWQFpzzVb3A74eB7nEDDJMBx/VpT/reF1g0rFztU3EnxLG+elzEusN8qpHSJSmS2b
-	 nR075hIB5hXplPjAbP+V4zhdAEbUD/xzZuKtgfQkjyowabaYZYmEsMgW2K09VY5Q1/u9N
-	 HBmE6FIqXY8KJDokQFyqXpgokR/nKPTvEGwfn8aTtlRy9JaGoYNBfNHLwIWC6+B+5qA==
+	t=1794919199;
+	b=ow4I0HeLlvwP6Dx0sFqoTi5l9Z8QzsvuKcVQOvRD6jIlrRwiR6RFIzeLjlAOhXHz3lQM
+	 QcgWiREJhUcSOknQYQmuXbdLjsYDuXK5wvsFgNA9aVydCoXTbFL9qU14cyplR8jqLUrlk
+	 KlsP5tOPnRh2RU2Vne3dE4dikp00m/CiQudWZtzIZ+p0nu6iMlJQt819c19WXfNajWJHS
+	 /fokL/sMuWwhGBIOJzwWjGXRyYFMwE0cEtEwwxNFmIuDFpQK1CkCasU/CQ1Y/bM4BPgG7
+	 qpMH9uY62y+Ni6/wSiLKDt6Mv/fuuFTY9Wtj6oRPf1FHOZAMdabnf2BmEkvtQY8WMNA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794919195;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794919199;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=T5qIDqJW1HylN9V1krTTvvmwCzdpLearj6f6TGS/cFE=;
-	b=BFzQSeD9zdNhjUeS44m0RNPtkJtakkzzqKsom+37uzR2fJisT00zCqPGFSIszecrMHsB
-	 hK5/6DeiTo74Cp5aK6qZtNGFZJ7r/O7W+pfUFwqtCsB2Dm2q0ZKqzfI1hw3c3ypx1bltY
-	 zPx8hnKroUbT6xwZLnaQzCtHWDR61arYAIPLuouuO+0X84RBHVgoyFX/mpDCv9nH9pOvl
-	 l5W8THDDknOjLVcc5s4kg/Uli/tppzB5B7tFlhkHJ1Zm5rPkJbwU/yMV0OwQ9gaSP4Lr5
-	 1ubCMRn9cKJi7Wx8MimL4zF8EYlfiQL58epfBer0aTZA2GPBfsDB4kQupK3kjgYCIKg==
+	bh=/HMGwwhGC6wtM16fz47LMMhy0kaE1LvMkOQV7+Ogndc=;
+	b=B8agtg1duE0uzi0Q+f0AC4o4dXqqq4HG/aLTGrn4R79hrGNn3gQMAgB/n4ROLr1ukknJ
+	 E+5avclWtHR2c1K8sZB8KKy3A8IFGwrLwIOsSjt5PgYvAkbpsbgqtTFEf54GI0SrgqTfT
+	 2A8DT7v3/+2S0TknRek+Qd5of38CKj7RgnqyTqA/amI1/de/3vc2fypcaD3uRaj6kjk3Z
+	 UgnmO8qFciiGzirNOa/lEBtb0xgVV4iP3sANNSflE/rv/6L/5CQpqXE8Q0cfso2QpxU3i
+	 w+qe9FJ96W/GFWo/X6UJA5WIWvV6+KZJRNvHAX60T988vsXgzOB7cRmZG+MT6rJIG6g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gKqmelpS;
-	arc=none smtp.remote-ip=209.85.128.51
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mYvJk5UD;
+	arc=none smtp.remote-ip=209.85.128.52
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B138760A2614
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 12:39:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B138760A2614
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF1B360A5BC8
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 12:39:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF1B360A5BC8
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gKqmelpS
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a5b2be99a8so32234945e9.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 04:39:54 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mYvJk5UD
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a140e7405dso47378085e9.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 04:39:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794919193; x=1795523993; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794919197; x=1795523997; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=T5qIDqJW1HylN9V1krTTvvmwCzdpLearj6f6TGS/cFE=;
-        b=gKqmelpSihWWG/SBPNWiup0TtC/pZsi60X7mAIi+TAQYFt7+0MgqlU2IIuIunAogkw
-         a6LBtOHF+5Axo0gsL0Q8UtGMP3PE5yvnyE4naACIO3TQgR1mJZkAjQ9H9fCdYHWMF7at
-         OIV6MH3ix5xMyDw26/RHwNQt8F1lYEXEpM5gZfn+6R3opTm/PuzNERQufwkd0RpEEB6Y
-         pHp7Jv7hrkK4qCoouK2+6aXkteZIpikR36SiwLUg6ev4S44x98ON4EPlPfpYhEQHszhE
-         Xj2sA7CeWqo8bciqV7gr/OSJXSlDgHrg7zblmIwxvct8C3ooV7y+OPknTctlMMHlT3qs
-         mNqQ==
+        bh=/HMGwwhGC6wtM16fz47LMMhy0kaE1LvMkOQV7+Ogndc=;
+        b=mYvJk5UDb5fY1RAaiAbz1ZaR7v4hnh+Nf3dD2aEUknU7gJH+VMHD4pmvofPyt/7iZj
+         c3YlOgiC2zKp/KFrRsgtPLolPLB3NBgB92GVn8ZJrwalll7AjrLdDslnMVXqyIpwSgME
+         P7K3LvBrX+gC2C0UwdgkfyrrHkzSz0toEZq+kFu+4k0MEru+y1OFbhxFnQHZYbfCHR4j
+         iEhtzr5ClE4SzLx1u4gAyG0Xmy0pWQtbzIy4BO/W+fRxMeviEY1MWGwx7TI30t9oQLv9
+         oSI6sK/rUwLLvO2OEYNN0fWpaqEFqoS6bWRg0toUmL6VXaahvbx7xOa1VFK9gWumkcQZ
+         baHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794919193; x=1795523993;
+        d=1e100.net; s=20260707; t=1794919197; x=1795523997;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=T5qIDqJW1HylN9V1krTTvvmwCzdpLearj6f6TGS/cFE=;
-        b=eN/Av2WSOHsMkgNZf+FpYXL2UtxEJMsYH4Y0uAs2GG0AXWwS4aeopspdSCeO/GTUYa
-         zAbQrpcUS+/lrij9fKiT8RkZODVmMGDVBgpAoXlZ4mujFZPtmJI71oBcWxtCyLaeXVfM
-         TKyMN+QetMaE92EWyCV521qVMTj80Tr59qRpW+ckqzWKx3M5cfXU5914eOMco8g0YUKh
-         sygf1dLLY1ZHbZuaYp0hhEjdN8VtdNazu/IfMq9XBwHrZQlk68fbTbe8xwC9xQd2tWqq
-         A4rwE3yvLu+JVeGjU8sqxbrxC2Yq8rCF6i6YEO1zauyVBWaqovVLQMEQvfDtr4B3/GTK
-         RVYQ==
-X-Gm-Message-State: APuU4Z8h4o03emKu8UibNaCWJdRn/xny3sBPf1k8ZpgVNE9szGSx6KVz
-	vCkb8y8hLnya4uCEac1rC3kAmylyZU7V/m4M6GyeqNbhIy1elJ5g0C33CozJhEBo7Isl7w==
-X-Gm-Gg: AYBFou1TRTNMzGG8F+IGj3AbqLqbCa3rygjbGCtfUdOtkYNgAa67aD66rNm2CzYQelf
-	vBuExQz/aNXSP9IZ9z1vaq6ByfnERkAh2gnDXV+T0M48JmeC/QYsvBM/X5DW0IXIsEjzZ7i8riQ
-	8RVZvIPbjwvG7+BB7Lfd98Kf0WZ3l1REVprDACnbmtj4RxlgrwYFqiNCGf/vQbtlKm1lS4lpFbA
-	DQwpbCd2SmEgISJB+6lokp3ycOERt36s29p88kEvCGqUUOGjOxDXVhgRTCRvct3GnVDehUV+tJQ
-	B8WXTS7N7FTkAzt9vbXe8XiQeCXFJASToB1G2Qjx1OjqC0HGo6AjZdrCUxUUovsWEOKEMSxE2Nu
-	4LwOWmIpCvzYUsiyFJ8rX8brqmneF8vjq7vEbn8EZIqX2LpeGsSdifHUv2uWzmeHZVUXKA2LeUq
-	0PutGgQNAKlyNrB9UlCEjtTNRJQJIisV3vixgYDxCxFK6ok7MexNStLFqRW3QnU18Aid8hpC6f8
-	ANgTFTlOHnq5eCS8TGdNTLAzpTFK3gUt/MbEsQDRaOdrW75+k8QG2tqM48z3uWxTFwr3g8A6RR0
-	OCaPj5pjKctPSaASDGYpwvcruCOXkNo7n0R0UUiKi5iuwMEM0jF88X2mb2vL6Odu1pKG6g==
-X-Received: by 2002:a05:600c:3152:b0:4a2:677:ad8e with SMTP id 5b1f17b1804b1-4bb55aac0bfmr303633355e9.34.1794919192859;
-        Tue, 17 Nov 2026 04:39:52 -0800 (PST)
+        bh=/HMGwwhGC6wtM16fz47LMMhy0kaE1LvMkOQV7+Ogndc=;
+        b=0HagHXiNVXFz1m4oseqt0o1Oakro1kcUMswNiyRj4Hx2sUzdXPFURXuPCpzbNRlJwY
+         6nTT0JJ17whl11BLTqT3AMeAi7QWNDPdPF0BgOojzyLGDMWqHvWq2JAxyLQbycmfF8Da
+         GZQ0m/lXXCNaJbjBej5fvv79rqJVBT4HstT8m+IJs9Zkq6p51C69tXrI8F6yne8IFyHy
+         iNhKgOw6ZL3PSKwmWlbVKeacsIgcroWz6rU9kAXfFkyvOMcfeWIAvmiVAv+MDO3XdA/G
+         mcAcFI1DKp4pT6k5yhEg0+rEMxQ8wFT5UDjT1e53p2uoJPcmEGbxvvdjuzUPyxWKc3i+
+         BjQA==
+X-Gm-Message-State: APuU4Z9V9+IN45xVA2U32civzcEF+6QfeXsVW4eZUIllzhFFKmgjdtjB
+	AHEUykRQ1mRHsSBrrUXQdH0vXQArNMH3QveH/uLOGSAcf0IdSeyI98etInWSDxCaxsV4BQ==
+X-Gm-Gg: AYBFou1c/IDtpDloodusE+ETJiFIYAdgbxqR1MNAH/6rPV8hIW+PVp8JFsvcaMOFADy
+	zK/fCUFrxIg0DLxU/vZrbP+Mnb+jhrT+qHiu2mpwqRKL2WP7lQbE40693WaKI2trhj+LVFm0dQY
+	gzyiLlfG+IlGW99GyWRVTFoXtZ/PAVOxSxqkiFos/SP3tKWw+IkRpkAoHhkqfKp+Oh10ACdUsvO
+	LFLqKn4WL5awQAGPWlO3WrECEw+L06Ha7aHOfxgJGKY1kByW/YuvXkm3lk9NZ9CIBX/GirohN0C
+	iI0hKYbh7M4kDWJD7myYd7UtAgEnRRt7oP63Tpq6l08oV/V6EGem/tNvywLTbsxt1+hBWym6w2G
+	tdJ8N9VdnWvwY+M720qGBQEjrAAln14JDcCCkiFdWjF/CWxqpIjJMYXPYAbo3BHPpGbOcuPepVu
+	0w3tBmAKxh2RnRliNrMUBPrdL1WLj1FyRUnnxFlK3F1eIp5FB59P2pDsHcciCuFtRaOefR9V1Uf
+	APsw0THv4VA8zmJCQN6AQcjeOwGBF95WUg3VcAV3enJaRv8Awd7tyy5fzk4+kwK4bjTkPxNbapv
+	cnzHOC8YwG3OMyGK5yWBOvVGkRUPFO26qjv8CN8kKebaN5oBEmR9k4DrX4RF+wAxVylg5g==
+X-Received: by 2002:a05:600c:670b:b0:4bb:7987:fbbc with SMTP id 5b1f17b1804b1-4bb7987fdc3mr32412055e9.1.1794919197198;
+        Tue, 17 Nov 2026 04:39:57 -0800 (PST)
 Received: from DESKTOP-BJ3EVC4.lan (94-21-223-203.pool.digikabel.hu. [94.21.223.203])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb783f8154sm71474905e9.4.2026.11.17.04.39.51
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb783f8154sm71474905e9.4.2026.11.17.04.39.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 04:39:52 -0800 (PST)
+        Tue, 17 Nov 2026 04:39:56 -0800 (PST)
 From: rofikkerneldev <rofikcoga@gmail.com>
 To: linux-arm-msm@vger.kernel.org
 Cc: devicetree@vger.kernel.org,
@@ -91,9 +91,9 @@ Cc: devicetree@vger.kernel.org,
 	Neil Armstrong <neil.armstrong@linaro.org>,
 	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
 	rofikkerneldev <rofikcoga@gmail.com>
-Subject: [PATCH v1 04/11] dt-bindings: display: panel: add LG SW43103
-Date: Tue, 17 Nov 2026 13:39:39 +0100
-Message-Id: <20261117123946.668557-5-rofikcoga@gmail.com>
+Subject: [PATCH v1 08/11] arm64: dts: qcom: sm8250-lge-timelm: enable SW43103 panel
+Date: Tue, 17 Nov 2026 13:39:43 +0100
+Message-Id: <20261117123946.668557-9-rofikcoga@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20261117123946.668557-1-rofikcoga@gmail.com>
 References: <20261117123946.668557-1-rofikcoga@gmail.com>
@@ -108,108 +108,61 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document the SW43103 FHD+ AMOLED panel used by the LG V60. The panel
-uses DSI command mode with DSC and DCS backlight control.
+Enable DISPCC, MDSS, DSI0, and its PHY. Attach the SW43103 panel with
+its power rails, reset GPIO, and four-lane DSI link.
 
 Signed-off-by: rofikkerneldev <rofikcoga@gmail.com>
 ---
- .../bindings/display/panel/lg,sw43103.yaml    | 70 +++++++++++++++++++
- MAINTAINERS                                   |  5 ++
- 2 files changed, 75 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/display/panel/lg,sw43103.yaml
+ .../arm64/boot/dts/qcom/sm8250-lge-timelm.dts | 39 +++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/display/panel/lg,sw43103.yaml b/Documentation/devicetree/bindings/display/panel/lg,sw43103.yaml
-new file mode 100644
-index 0000000000000..edd007e2c0d76
---- /dev/null
-+++ b/Documentation/devicetree/bindings/display/panel/lg,sw43103.yaml
-@@ -0,0 +1,70 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/display/panel/lg,sw43103.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-lge-timelm.dts b/arch/arm64/boot/dts/qcom/sm8250-lge-timelm.dts
+index ecbff27976fc2..fca48472f5dfe 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-lge-timelm.dts
++++ b/arch/arm64/boot/dts/qcom/sm8250-lge-timelm.dts
+@@ -557,3 +557,42 @@ &usb_1_qmpphy {
+ 	vdda-phy-supply = <&vreg_l9a_1p2>;
+ 	vdda-pll-supply = <&vreg_l18a_0p9>;
+ };
 +
-+title: LG / BOE SW43103 1080x2460 DSI cmd mode panel
++&dispcc {
++	status = "okay";
++};
 +
-+maintainers:
-+  - rofikkerneldev <rofikcoga@gmail.com>
++&mdss {
++	status = "okay";
++};
 +
-+description:
-+  This panel is used on the LG V60 ThinQ 5G (timelm). It is a 60 Hz FHD+ AMOLED
-+  panel driven by a Silicon Works SW43103 DDIC, operating in DSI Command Mode
-+  with DSC (Display Stream Compression).
++&mdss_dsi0 {
++	vdda-supply = <&vreg_l9a_1p2>;
++	status = "okay";
 +
-+allOf:
-+  - $ref: panel-common.yaml#
++	panel@0 {
++		compatible = "lg,sw43103";
++		reg = <0>;
 +
-+properties:
-+  compatible:
-+    enum:
-+      - lg,sw43103
-+      - boe,sw43103
++		vddi-supply = <&vreg_l14a_1p8>;
++		vpnl-supply = <&vreg_l11c_3p0>;
++		reset-gpios = <&tlmm 75 GPIO_ACTIVE_LOW>;
 +
-+  reg:
-+    maxItems: 1
++		port {
++			panel_in_0: endpoint {
++				remote-endpoint = <&mdss_dsi0_out>;
++			};
++		};
++	};
++};
 +
-+  port: true
-+  vddi-supply: true
-+  vpnl-supply: true
-+  reset-gpios: true
-+  enable-gpios: true
++&mdss_dsi0_out {
++	data-lanes = <0 1 2 3>;
++	remote-endpoint = <&panel_in_0>;
++};
 +
-+required:
-+  - compatible
-+  - reg
-+  - vddi-supply
-+  - vpnl-supply
-+  - reset-gpios
-+  - port
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/gpio/gpio.h>
-+
-+    dsi {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        panel@0 {
-+            compatible = "lg,sw43103";
-+            reg = <0>;
-+
-+            vddi-supply = <&vreg_l14a_1p8>;
-+            vpnl-supply = <&vreg_l11c_3p0>;
-+
-+            reset-gpios = <&tlmm 75 GPIO_ACTIVE_LOW>;
-+            enable-gpios = <&pm8150l_gpios 4 GPIO_ACTIVE_HIGH>;
-+
-+            port {
-+                endpoint {
-+                    remote-endpoint = <&mdss_dsi0_out>;
-+                };
-+            };
-+        };
-+    };
-+...
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 315a4a000b405..bca5065166c25 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15231,6 +15231,11 @@ Q:	http://patchwork.linuxtv.org/project/linux-media/list/
- T:	git git://linuxtv.org/mkrufky/tuners.git
- F:	drivers/media/dvb-frontends/lgdt3305.*
- 
-+LG SW43103 PANEL DRIVER
-+M:	rofikkerneldev <rofikcoga@gmail.com>
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/display/panel/lg,sw43103.yaml
-+
- LG V60 THINQ 5G (TIMELM) SUPPORT
- M:	rofikkerneldev <rofikcoga@gmail.com>
- L:	linux-arm-msm@vger.kernel.org
++&mdss_dsi0_phy {
++	vdds-supply = <&vreg_l5a_0p88>;
++	phy-type = <PHY_TYPE_DPHY>;
++	status = "okay";
++};
 -- 
 2.39.5
 
