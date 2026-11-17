@@ -1,110 +1,111 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794908395;
-	b=b23siFObnvStCb7NtJW+PU+v3Fn3YOAVqUuNg4XMtpbalZRk+8v8/Td9KmydbE6rgbPa
-	 CalNKm2zczdnSJ7IDMPZv8kAnueaqhIO82PDpSgs8blo9SvsD2NWf+PHrNzOWD4ZC6nBS
-	 NBIH7H9hO/POLiIOz0P+9A5jBjhyA3duxcOD57wUYAlniLuxBNGjqse0+9iKJlLLTlWF1
-	 wdXC9dQwhReGLBBqs3a7RoYP492MiTfFobCxrT1gmQgJGZZb0dEljG5nCGcs+naMPfW33
-	 DNxv0z0HKgYUSATxZfPZWBN4yyu+Q2hsqaJ51yXf1jsBT6P7+NNcGhtS480EcPRXWYQ==
+	t=1794908399;
+	b=goA538l8cc4Qxx/TkF9Sr+iT8TOmz38tBscbj/6dhvgh59ymI8lT93Dj9IsC/cmCn6gq
+	 BLwDpfeSz6QXvsWyms8Qnb4bGWOaMb4FrGZGpHbPbDZfOnsP/fBQVuhd6gj2PX1HnDWvt
+	 8L+/VkyXcLaqwW+mJqp5y8wrjJE+gCHyt1syZUCv4jU9ZB3U8nMciYduWPSv1nN9Ilhnu
+	 5lk6geofAkxl10oAAsgK4nIhs0ydGG7Y2Iu+IMcHR9n7wAAx4BbM7+76KlYPXyv+/Lipj
+	 ediK/SMk2P1/jr2Lor6GYEltDh7orYQovY5+KJYX5monSYUGFNARwnwO+c4hAtRGAPQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794908395;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794908399;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=jkwCDTDY34gysHX4eD/Jtbt83iR/Xm5caRAcO2dYSpk=;
-	b=b0vNCpWwpQCPk0MtVeNPB3pK3s4QEOQ4Uqcvw1AEUktPF3q+mP6SUDq0ix5nGNU1B8qT
-	 oj09GQEhCmrKJz9rDMYJlSrJamdLALCdsqZa74zMPM99i2Z1e94XpHjWq6aELXr+c/Wyu
-	 oAaPkYGnK3w8Ps9J0fHeuXxAcxUzl+1ayF+L6Fi+5HvmBS5p28kLxFAGSFAhX5qh7zb8z
-	 becOtTsccBcFKKboFeuYyYvNSrm2UbAZOO/2y09uwhXiuLKYSwwhpX+dw7S1fIbuc2Tx9
-	 uOwVDpZXvVoBUKM71A6A/RNAYrYodstEXcyp54mrA7jioSCwPF13qDEEVYAg3KfKDpQ==
+	bh=L/i7IYiuIaVVWbjkdWvvY+6fiNJJwG9zMVxNqhNCzTY=;
+	b=oyNgGhs7U/t6UybJdQEIgtptOXeEU+VX8JXiUIBZcUMOSr1cSTu4bGtW1xOBwBiUnURM
+	 6xdOM7XXEut5s13G7qjbiqF3DmZ2Pr6WC6MMxV2byQ2m+R6rvbtri08ifqv8MmLCypLme
+	 hgxc74lLTGMY+FKL3gTT8uZBVwFq4WpKm8NMUDjFe1vfPR0WdeZZz+t7ZhmZTRMlhc82F
+	 0kVCPYgVlaKSMNSOJnjkzVypAo8Hl0/7WW7r4MHYaWSDbZdn0fLmYdODZz58lVmKKjYbq
+	 lgfXldSnpz8jKwfGJ8mdIiXSbz+exE3ZitsTL/ivgsNR0kTm2R7DOb5EPxzRoBUIlgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="MMCeIdX/";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IhMV3eks;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K5EX1VGn;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jfgMpGZk;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E34F5606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E34F5606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CF0E606A32A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3CF0E606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MMCeIdX/;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IhMV3eks
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH53HlZ3458230
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:52 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K5EX1VGn;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jfgMpGZk
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH449F51699358
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=jkwCDTDY34gysHX4eD/Jtb
-	t83iR/Xm5caRAcO2dYSpk=; b=MMCeIdX/qLiJeARaBfQjBVicy9JDQqcVTluqTE
-	G3JPO9FlBLxUM8656v6aNX4e3SuaC2KFg1tCW/bSeTg++o+DyYOrgxx1ZMYuzmbW
-	wgzKlbDncDj6ZHri3BtcXa2fXw+p47GftulV/i0/vXDz1PAE+ploI357fKG8RLEV
-	GcZIph2skaH70mhCiBxzCiBdPPqqh14vPap72N1uS2hD7ri2uQpf3cWC9ZtVSqWF
-	Cbgk3AXQt3PYpAosLWehozKze9ZYqn6it2kTlqQHov65tZGpayzh8Ead+wu3uD+q
-	WNIgJ1x1PD+I2eBqeEg0i6cN1qTWTtzZBFsctbYL+BeP9eXA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0geh9105-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	L/i7IYiuIaVVWbjkdWvvY+6fiNJJwG9zMVxNqhNCzTY=; b=K5EX1VGnwQ0lHazX
+	Qn/VB1nIWA0KwSp42sUqG0nCachWGe7zVf6S6RujqTdQ60QB6tU7WFT3Kq6Rh7jb
+	Xt2zUSkwApWzF5N6slRgZUlGIalfmVJNXPh9/yIr0Ns6Sjz9U9s2Rvt7KzTfgHJU
+	XFu5wAnAiPGUDW7s7elNoC3oqmQjhyKQoKtXoxGb5pQfJKvvrZ84p5xXeBh+WaR0
+	jAxPJddCH8d9YFIEJyoyn9Pyv42SO7lmDb31HJRklDoVasfcHHpFsS/CaPEhqSiP
+	cGQ9dM9+qarHoXyS4NWKIe8EKR5RIU/VYCmUGf6cQEoEYBQOHZaLsO/+5S7PVq59
+	DUSy3w==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0fjuh746-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:52 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cd0cf3b1c70so2731083a12.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 01:39:52 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 09:39:57 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cdb8e8bccdeso2166330a12.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 01:39:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794908391; x=1795513191; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=jkwCDTDY34gysHX4eD/Jtbt83iR/Xm5caRAcO2dYSpk=;
-        b=IhMV3eksm4T6ReBGPsQjEU12EKRUzidfFlqe5qA8xjfzf1tDa/3cO/dzk3ypRH5puY
-         sobgOcCVSNaFXwYAkIiQosiFAvY/93kGjTD9AHkhc+ypPPGjWaldp2bK1xzj2xgPfuJV
-         v/r1KUANFlSy/WJAd+G/Tj5ZJsg+UiQSb7fazdTQGeJ0ZEusBEhyJDAJ6d6Ppx+R0HaT
-         RTKqIbmi17uxwYtVxCBUDYptl5FkChjnQWLJXZmHDGABRXDAb784hvWbi+qHGcWkr2BH
-         czucNL2r4htUvbV/ffaPCoG+8GcZLqVZH/drMEkNuKApfllhH/rsp7BuT0Fqk+QWfYy+
-         hB5g==
+        d=oss.qualcomm.com; s=google; t=1794908396; x=1795513196; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=L/i7IYiuIaVVWbjkdWvvY+6fiNJJwG9zMVxNqhNCzTY=;
+        b=jfgMpGZkLdFKJeovVW9ldelVBoaCw+2PEWzewgId4OejIpjDGhCGzEIdYSU07RaGcL
+         /7LL2lI8mwJ6f5MpgA/uJIKpxIx4dF0F+aoxOLoqJMxmXhmaR/ye5x7uqTtU/hB2dd61
+         Ksy3EkMgx1+6oEGb8ybr3qiStxJuQA171MG+sNhPfUBvFKwA9UkfoNt+sJxf5lHY8wnr
+         qDT88r6XEklvl0P9NZGXHaFpGP8R5Q05gDCbWA3O5VA8YXDIehqH8Er0bIyiyJ2h7UKA
+         b+g9kTBuM1sa8DY6oeXeCtI38nDohHJphltAANNExPmYrmTvW4LGiTOVifIK8YWa5uI8
+         XUHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794908391; x=1795513191;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=jkwCDTDY34gysHX4eD/Jtbt83iR/Xm5caRAcO2dYSpk=;
-        b=csoVrlflBpxgNcNhTqspzhmVPTv4SqzXx487AcInNnZ8/dS9pwXhS/ENNNtYn2aC9Z
-         drd1kgKEt0aqBjZs6soH2MZjQTZhlQ8vyMSmpjxSEFLas6yaXxWa/niJYlEMAha8H5r9
-         6S6l63nAwvgjj+cmm4k9/VXziEsDuiNsAyR7/u6RBJTK/HtfoVoPfofxnS14jz2EQNx0
-         yiprZwQ9Ub6IENICfdrBp51V1qXmTrLtp6pESruqXUFyAszeiDY0R2JVV5teBrMdunDE
-         mGMmKVSIf4QC0hCuTgoFWBPc+749T6EGg/RWu6QFv713pXzqtc8It1QLgzAtJ+rlTVn8
-         x0yQ==
-X-Forwarded-Encrypted: i=1; AL+hErFF4Ri8ZbuR1c4fgQGUtyNkqyvLggwqoz2ZweP+HAN+mOU9e0OzEtHy6xKiNQLBIln+stDLt2T4sl6sGvB0@vger.kernel.org
-X-Gm-Message-State: APuU4Z9L0knJLUWOFPYH5ji8VemuE33sipFsJWJ3nEEbEgyA9mPrjN7A
-	nmrQTqlvPuImvLF2EyWUDySS2YONHA2MUlpuwV7HnDSiaAO45LXUHa3DPpkZ2yPQi9phi83i3Vx
-	wdaCIy8wmbUPGB92+zBfEgHOQjbAXkHBvxWOnVfW+SKyjsczTjYjcfEmUegGZl2zCZNFg
-X-Gm-Gg: AYBFou3pXAGTuFtvmm6eM8sZDh5jmn5p+zE9yacAp7XBJJfZxVHzivCRDRxjhQOwIvg
-	UEQWBnfJdJFrx41EjZxODO+tYtBDI3OXig5EyP7w/vRAQUk1qc9t02KSnXadyyW7YwLiyFZ4Dv7
-	FqcIN6SRsQL2WgyF9YS5ClrQ71TwSju8BHj8nbV37hO3CDWNVxNt7u3uM94GYh3vBB9Loi2MkT/
-	fVn0IqYuK/p6TixNoqscnszt3ZhQdqNtVYR3EAeue2WuC56wUUYyhcrnIbcnZ4Jibyz84HLSF1R
-	69MkL2xMeWBSigsvqzF7Mm4pFURCsU1OdboKYhJbjEhyxrW4VKvezMixwBGws+spy+YfTlG6Nxs
-	JbDno6QkuB0bGyuvkJFniPDQxzpEaDelM9r9CeUJsFLGRIRbyP+AFSPT6wg==
-X-Received: by 2002:a05:6300:8189:b0:3eb:a628:10e9 with SMTP id adf61e73a8af0-3f7a79c61ffmr10478983637.39.1794908391466;
-        Tue, 17 Nov 2026 01:39:51 -0800 (PST)
-X-Received: by 2002:a05:6300:8189:b0:3eb:a628:10e9 with SMTP id adf61e73a8af0-3f7a79c61ffmr10478956637.39.1794908390903;
-        Tue, 17 Nov 2026 01:39:50 -0800 (PST)
+        d=1e100.net; s=20260707; t=1794908396; x=1795513196;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=L/i7IYiuIaVVWbjkdWvvY+6fiNJJwG9zMVxNqhNCzTY=;
+        b=0wrnSR1hz74oOi0PqlGlFvusrICAbOPBxSVVWgZ64QJacyAzG77i9M+haYjn4Dtwrg
+         LosHDMzGupWHV7X4eRbEjdBX3zXP0ORZJTfSz+jURlHFHvax0ZQFep+sw926clCKbhDO
+         C+fcsorgZ7Pmk9K4xEySUxAmt4Qn86dKctDcu4TAk1+qIv6cao3RW4eSL+4NY4Q9grOM
+         b1aHxNmNWmHwN+idjorYhsWn2biyj3x+StOuZWMMXrO++21Jl59J2Q2maQgfT7ug5u+x
+         ZQYm8MPkIiTwPkNEdZ29FCrr6O0hN7qQ43oAxyi2x+5gjhJQBFS4y509eKGS/0UDKALT
+         UXmg==
+X-Forwarded-Encrypted: i=1; AL+hErHdkkd+oVqxDA1SEra0Xouy+29tS1nDExDZ1K72aw9x8JKqy8XK+uagdiRPT+2vz1PHy886YCEY0eImT6dt@vger.kernel.org
+X-Gm-Message-State: APuU4Z/myCaju5sih747T3cQcte+pQXEsqa9lgh7sVXt5GybLZoGkb7g
+	1zox/T+d9/aBkKk6+A7yOu9GfYxWW1S6IPgN6WMbQK3rKlUBVgiSgLPROICpOdsL68eiZlRF+LQ
+	tVkqfqWBYCKoqFkzEsAhQydMefkf+VAiCWUQJCyKMHV5EPc8RhvgPirfsIhQU062jTCiv
+X-Gm-Gg: AYBFou15iZ58fRjYLDohVp1mi9420qzcXKhyPp0uBDIFYSVt//Zem+9nX475zm5B4vh
+	qdwFA3OXu8YH5a+FC2099doKRz3KpVeKLS/rL0miqBwIyiTeaAzQSm2twHh0RAkOoPug0sjBd83
+	i1cSUDlWG60cOby66UOyzUCX9mg+imkgpDSZii7AwikQPNfkhaD4cciz4Mw8qmZDYlT8q8f4Q00
+	2Uo/RZS2cGUHTlitdPRHsAGfQ6uQteWU6T/oaFsvuL5KyidFhBkzkpYa6VBPJpEQYrR2qDbEknN
+	Q1kr6vvL/qqw/KOwFFaHt9nLXVh+9I82xplzVWwEvtxTn9D9icIqBy3DpJXF4uZmA9kveKCrRNt
+	Nj+9rzrRM+ext5qFIohuHhHZ+fhFfzI3PFtjVsSQmvzQJ6siEVP+e588wtQ==
+X-Received: by 2002:a05:6a21:200a:b0:3eb:aedf:a93f with SMTP id adf61e73a8af0-3f7a81bc2cfmr10369234637.47.1794908396096;
+        Tue, 17 Nov 2026 01:39:56 -0800 (PST)
+X-Received: by 2002:a05:6a21:200a:b0:3eb:aedf:a93f with SMTP id adf61e73a8af0-3f7a81bc2cfmr10369219637.47.1794908395509;
+        Tue, 17 Nov 2026 01:39:55 -0800 (PST)
 Received: from [10.213.99.236] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cddc160bfabsm5299078a12.4.2026.11.17.01.39.46
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cddc160bfabsm5299078a12.4.2026.11.17.01.39.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 01:39:50 -0800 (PST)
+        Tue, 17 Nov 2026 01:39:55 -0800 (PST)
 From: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
-Subject: [PATCH v4 0/3] misc: fastrpc: fix context leak and hang on
- signal-interrupted invoke
-Date: Tue, 17 Nov 2026 15:09:44 +0530
-Message-Id: <20261117-interrupted-invoke-v4-v4-0-2320a8a7eda2@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 15:09:45 +0530
+Subject: [PATCH v4 1/3] misc: fastrpc: remove dead context drain in
+ fastrpc_user_free()
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,10 +117,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOAg/GoC/yXMSwqEMBCE4atIrw2Y4Iu5yuDCaDnTDkTpxCCId
- zeju/oW9R/kIQxPr+wgQWTPi0so84yGb+8+UDwmkylMrbVuFLsAkW0NGNOOyw8qlmoyqCyaFrZ
- vKX1XwcT73X13j/1mZwzhH6PzvAARkmwQeQAAAA==
-X-Change-ID: 20261117-interrupted-invoke-v4-f2e5be78eba8
+Message-Id: <20261117-interrupted-invoke-v4-v4-1-2320a8a7eda2@oss.qualcomm.com>
+References: <20261117-interrupted-invoke-v4-v4-0-2320a8a7eda2@oss.qualcomm.com>
+In-Reply-To: <20261117-interrupted-invoke-v4-v4-0-2320a8a7eda2@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
         Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
         Arnd Bergmann <arnd@arndb.de>,
@@ -131,150 +131,80 @@ Cc: Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
         quic_bkumar@quicinc.com, quic_chennak@quicinc.com
 X-Mailer: b4 0.15.2
-X-Proofpoint-ORIG-GUID: 4HYwyAGVgMrMIkg7Gs2lEqH2DQprSxA4
-X-Authority-Analysis: v=2.4 cv=dLkzC+Zb c=1 sm=1 tr=0 ts=6afc20e8 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAzOCBTYWx0ZWRfX82q69+wXDFz0
+ wujd2C3HQxBzcpWQytG2HcKhD77r2MPZDwamcUk9T2K8wzJWx0q+sxRwGITB19V2FVMiDowJKlu
+ nOCeidltCZs21s/1DeBHCuPDxgmLvENzByPDlwQQyEUc9S9cq5l7Dn1s2RDkhpY7iPa5PRNDwFK
+ WNHV1+MpI+iOacot7jDCnwRMiKq85EqyYMH4zkEAuXwmBNFcOYCedxkLq4uwGA7a/h1JuiYJi2v
+ /HfOPt4cu/CXOz/MJpyRTt8tse/LkFFGFxzN5ZMMGH8Yvxl1SHiQ/RyYAfauBYh8IumYUlGuRZ+
+ 9upiFctV9j22AUvo7R/6I/bes3MkZ/YwQFeUQsmH4XAeTOLhmKVGdME35as8/QCjnqW2EXVKuM/
+ Mb5NZuzXpbSiqz7VcXcY61lkA9H1fpv74ejuvh0UqkayTxhxcRjG+WTZj88o1Rl1kQcoHfCHf1T
+ PlHcdbDZ4rpfgj4Qb2w==
+X-Authority-Analysis: v=2.4 cv=JfIpPkKV c=1 sm=1 tr=0 ts=6afc20ed cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ag1SF4gXAAAA:8 a=e5mUnYsNAAAA:8
- a=COk6AnOGAAAA:8 a=-vHKDIwpwqHdDy8GyowA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22 a=Yupwre4RP9_Eg_Bd0iYG:22 a=Vxmtnl_E_bksehYqCbjh:22
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: 4HYwyAGVgMrMIkg7Gs2lEqH2DQprSxA4
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAzOCBTYWx0ZWRfX/Hpopk4DP7Bm
- xExqMqhGQR2QaMp0wZhrMpMNIFhsKTmvpAzEsvkkVdRWF6R9y5umxbJZ3lwn8dYsPa/Uyo9tH4q
- Z3sSuic+j4RX3Uh4Zz8kI9FHRboNCpo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAzOCBTYWx0ZWRfX5iJOyx9oIhoR
- p7umRcw3VkITpWourqgNuCzbHNME3ypU3UMAj1qvVxPp93FSCA41gxLHC4/lLO67sTsXDo1I4Cs
- YVtEm2HX8Q2qMyj/6NlIrOg6vpZdwjvyyOVaW6Ial2vMoVAz0HcoRg7ztz6BdbG+jVL/30jGJad
- NZTrgIMDkJ0+bSljYDHl+KP1+2pfuKC3kjx6gZQeYQKy7PwFzrTWT18phsH+/MmhNrPQza1iYip
- ezl9WLcZq4W89HAKNSAN3f804o2X4N6pR0da10zloAWFnPZFLalY7WoDO3ALFxzjoe+ykH3XHh6
- c6qynjFcj3wfEGLPlq4OSkXU8X3mREYelhFT5ZRScSy4BkrugD9dJdoNTtqJtUcBXzWLExfG0Vr
- Gos0GpZEmeJPb5IkYZegDG6ASBEzDwtXWOPlPlccpScXpC1PzTatW+g2i65CormV8Qa66GsR2zT
- fpNgD8vQGhJ9GD2jbMg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=J-4xhamgBsHxLUkLQesA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: MJp8c6PNjwaARDqRCYgcMOwLpK_TNeN-
+X-Proofpoint-GUID: MJp8c6PNjwaARDqRCYgcMOwLpK_TNeN-
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAzOCBTYWx0ZWRfX3dl7IXCbuTG/
+ 5TKFhVUxqn5zDWTmVzTh7aJZZGWhKQLoPWLUlrlRgJ1tl80Wt9KTOp3cXmGwnhx6cHna3vWtV8X
+ MOH8S1LBqaMqAXl1pUpAxRgMWrqsENU=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
- priorityscore=1501 suspectscore=0 impostorscore=0 malwarescore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 adultscore=0 clxscore=1015 suspectscore=0 spamscore=0
+ priorityscore=1501 bulkscore=0 lowpriorityscore=0 malwarescore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
  definitions=main-2611170038
 
-This series fixes a context leak and DSP hang that occur when a
-fastrpc invoke syscall is interrupted by a signal (patch 3), plus two
-independent, pre-existing bugs the refcounting audit for that fix
-surfaced along the way (patches 1 and 2).
+fastrpc_context_alloc() takes a reference on fl via fastrpc_user_get()
+for the lifetime of every context, and fastrpc_context_free() always
+unlinks the context from fl->pending before releasing that reference
+with fastrpc_user_put(). This means fl->refcount cannot reach zero -
+and fastrpc_user_free() cannot run - while any context is still linked
+on fl->pending: whichever context's release happens to be the one that
+drops the last reference has, by construction, already removed itself
+from the list a few lines earlier in the very same call.
 
+The list_for_each_entry_safe() loop over fl->pending in
+fastrpc_user_free() can therefore never find anything to iterate. It
+has been unreachable since fl's own lifetime was switched from
+file-close-synchronous teardown to kref-counted teardown; it was never
+updated to reflect that the list it walks is now guaranteed empty by
+the time this callback can run. Remove it.
+
+Fixes: e85eb5feca8e2 ("misc: fastrpc: fix use-after-free of fastrpc_user in workqueue context")
 Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
 ---
-Changes in v4:
-- Split the single patch into a 3-patch series. Patches 1 and 2 are
-  standalone, pre-existing bugs the refcounting audit for this series
-  surfaced - dead code in fastrpc_user_free() and a worker-reference
-  leak on SSR for ordinary (never-interrupted) pending contexts - each
-  with its own Fixes: tag, landing ahead of the actual
-  interrupted-invoke fix in patch 3.
-- Fixed a hang inherited from v1-v3: fastrpc_invoke_send() failure
-  shared the same bail: label as a post-send wait interruption, so a
-  message that rpmsg_send() itself never delivered to the DSP could
-  still be parked as resumable, and a retry would then wait forever
-  for a response that was never going to arrive. fastrpc_invoke_send()
-  failure now gets its own dedicated cleanup path instead, without
-  needing an extra flag to tell the two cases apart.
-- fastrpc_device_release() now also accounts for a successful
-  fastrpc_release_current_dsp_process(): if the DSP confirms it is
-  done with the whole process, the worker reference on any parked
-  context is dropped immediately instead of always waiting for a
-  later event.
-- fastrpc_user_free() no longer unlinks fl from cctx->users
-  unconditionally at fd close; it now does so only once fl truly has
-  no references left, so a context still awaiting a DSP response
-  after fd close remains reachable by a later SSR.
-- Extended the same unreachable-orphan fix to timed-out kernel
-  invokes (-ETIMEDOUT), which had the identical problem on
-  fl->pending.
-- fastrpc_context_restore_interrupted() now uses kref_get_unless_zero()
-  when reclaiming a matched context on retry, closing a race where a
-  concurrent drain (SSR, fd close, or a delayed DSP response) could
-  already have dropped the context's last reference and be waiting on
-  the same lock to unlink it.
-- Link to v3: https://lore.kernel.org/all/20261002-anandu-fastrpc-interrupted-invoke-v3-v3-1-31e90439d2ba@oss.qualcomm.com/
+ drivers/misc/fastrpc.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-Changes in v3:
-- fastrpc_context_save_interrupted() no longer drops a reference when
-  parking the context, fixing a kref double-put that left the context
-  under-refcounted.
-- Restoring an interrupted context now matches on both handle and sc,
-  not sc alone, so a stale/differently-shaped retry cannot be handed a
-  buffer layout it didn't allocate.
-- A mismatched handle/sc on retry now falls through to allocating a
-  fresh context instead of returning -EINVAL, so a thread issuing a
-  different call after an interrupted one is never permanently
-  wedged.
-- Added a put_work_scheduled flag, checked and set under fl->lock, to
-  guard against fastrpc_notify_users() and fastrpc_rpmsg_callback()
-  both scheduling put_work for the same context.
-- fastrpc_device_release() now drains fl->interrupted and drops the
-  invoker's reference on each parked context before releasing its own
-  reference on fl, fixing a leak of both fl and the context if the fd
-  is closed while a context is still parked.
-- fastrpc_device_release()'s and fastrpc_user_free()'s drain loops now
-  use list_del_init() instead of list_del(), avoiding a poisoned-node
-  list_empty() check in fastrpc_context_free().
-- fastrpc_invoke_send() can return -ERESTARTSYS from rpmsg_send()
-  itself before the message is ever delivered to the DSP. This is now
-  distinguished with a `sent` flag so only a completion-wait
-  interruption after a successful send is parked as resumable.
-- ctx->args is now repointed at the retry's args on resume instead of
-  pointing at the original call's already-freed buffers; an
-  args_owned flag lets fastrpc_context_free() free ctx->args if a
-  parked context is drained/abandoned without ever being resumed.
-- Link to v2: https://lore.kernel.org/all/805d5de8-477c-41e9-b192-d889d1cca9b6@oss.qualcomm.com/
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index 9e760f68bc..bb0c304196 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -568,17 +568,11 @@ static void fastrpc_context_put(struct fastrpc_invoke_ctx *ctx);
+ static void fastrpc_user_free(struct kref *ref)
+ {
+ 	struct fastrpc_user *fl = container_of(ref, struct fastrpc_user, refcount);
+-	struct fastrpc_invoke_ctx *ctx, *n;
+ 	struct fastrpc_map *map, *m;
+ 	struct fastrpc_buf *buf, *b;
+ 
+ 	fastrpc_buf_free(fl->init_mem);
+ 
+-	list_for_each_entry_safe(ctx, n, &fl->pending, node) {
+-		list_del(&ctx->node);
+-		fastrpc_context_put(ctx);
+-	}
+-
+ 	list_for_each_entry_safe(map, m, &fl->maps, node)
+ 		fastrpc_map_put(map);
+ 
 
-Changes in v2:
-- Fix kref imbalance: fastrpc_context_save_interrupted() now drops the
-  extra reference taken by fastrpc_invoke_send(), so the worker's put
-  correctly reaches 0 and triggers context_free.
-- Fix -ETIMEDOUT context leak: remove the ETIMEDOUT exception from the
-  bail path so timed-out kernel invocations go through the same
-  list_del_init + context_put cleanup as all other error paths.
-- Fix dangling node: fastrpc_context_free() now calls list_del_init()
-  under fl->lock before releasing resources, preventing a dangling node
-  in fl->interrupted if a racing channel removal fires put_wq.
-- fastrpc_notify_users() now calls schedule_work(&ctx->put_work) for
-  interrupted contexts to drop the worker ref on channel removal.
-- Add dev_warn() on TIMEOUT and ERESTARTSYS for post-mortem debugging.
-- Use list_del_init() instead of list_del() in the bail path.
-- Link to v1: https://lore.kernel.org/all/20260525124222.3082420-1-anandu.e@oss.qualcomm.com/
----
-To: Srinivas Kandagatla <srini@kernel.org>
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-To: Arnd Bergmann <arnd@arndb.de>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Cc: stable@kernel.org
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: quic_bkumar@quicinc.com
-Cc: quic_chennak@quicinc.com
-
----
-Anandu Krishnan E (3):
-      misc: fastrpc: remove dead context drain in fastrpc_user_free()
-      misc: fastrpc: drop the DSP-response reference on channel removal
-      misc: fastrpc: fix context leak and hang on signal-interrupted invoke
-
- drivers/misc/fastrpc.c | 187 ++++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 146 insertions(+), 41 deletions(-)
----
-base-commit: 749a4de370409464cf8501ec5b2451df45c84eb4
-change-id: 20261117-interrupted-invoke-v4-f2e5be78eba8
-
-Best regards,
---  
-Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+-- 
+2.34.1
 
