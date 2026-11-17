@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794910901;
-	b=XS5mIYxKTgsvGulSJ76hNy7fOwr+zNPCeZ5j97ZAnNZdjWlGM5VpBdIEoWqr46XlHDtl
-	 B9nqGySd9eB3tulmfo4sdxCCJAfsy0N8fpvITJCvbRNgGEb14YAzr/gDjCdmIJEHo/35q
-	 PLOgYvSTiDSuEClHHF+J0hobVoQ2nKJN44Pwf/cQ8Y1KbykDdWkSIpDYPcYQHjWTm2HTS
-	 +oJhVYOC6Ro/bbUQofv1w2toXj14tusUfM9PeWgtft6sue6FfrrhNi1prSZyUYWCf3n24
-	 0nDskcGHzLYmygxt800g/90SBlTQH//zz5mZEKYBsYMWmJLzzSZV/fiRpPgzWDmbMIg==
+	t=1794911082;
+	b=eu7P1nTSUZD1umq7O+7Fbr0NXa+G8LLh8wwBowKhB6BDejl6mQiKPm+5vne+BECS/B//
+	 dBkrmaccicaMlC+kKXK3oiVqoRddVbG31kqLu6BhozAy/jm1FSQ+PbNSk5wz5+6f9xB8/
+	 bZz/TjxcM78COG4fPPaHmsijQ+o/wAUxJE3oMz2FQt/PkAfZnZD8ELX5/rn7sWuxzQxQs
+	 /sHmV/Mgehm5fprQWpQbh9FWCrxdosV6YsSsMu8UYXjsc33e3CNXLAw5CLm2OkxenJTeR
+	 B8ETq1SVJ68WNrPDC32puQvL2Q1+gJH9TbgW/HrbclqX+OJXniV8HsSeV6OB8H5SaxQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794910901;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794911082;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=D942YyHXcVgnkkaU/11BZPN4JzbqpBRwvdb/nOY3osc=;
-	b=UZjUwf4ALFUjHS/32p8ia79c8wTkEVJzjMmVX36jYQWy65VaGqTit8/3XJDJdr4K/vle
-	 ljlXiYdQmVt1CXw/N6Z8DqnlS6dlxvMxSTTY4VW64HTbILUWPb7yaecj/CZYli1c2qENT
-	 gEo00oPCwW0vQS8P6KpkI1RfuSUXtuto8yTadg0Y9fdlH7MpebgnqoolUVpm4zGCNK16N
-	 wZouCKwHKf6IiOvfRqLGJstB+L+R5fc9VjhM1QtkoIe7zJDxkRo64RFUYP8A2H5HhnRPR
-	 MMY+r2J6yxrGZpWEmvOI9MGgeCfdzgy61mCKi94uDZ7CNCeLhPhEFoz3lFP+TBw4oAw==
+	bh=XfB5B52dyRgHhh4XLOsPPMRBRcmUL0nbC6YT+G0tvD0=;
+	b=nBGgpuSNi2F7L73ES7DCtMquqcfqDkm2Ob3OjfFl9RGRV0o4FKeN+l2OcZxz5T6k3FLS
+	 N/zSe2sitHPDzJpyNz2RXU/Xspvkj/4bX99Fqr+RVGjlGUt5ehrI1gdUAlB0wfDFPHXZ5
+	 ZmnygEw+e44x7xmwGglCqodVAHbXCeOCoMlfHvRK7x6iCbhVch5vnZW/5rpEZEXb8HDxT
+	 3cAuwnF172wWE6NyjMmemPq1R6nKdIKZfeU/R37AycUBLxZvxUEBORABRA0rTp3smlyix
+	 061XEs3fKvCPwsRB5YBQDyHjE2l9IVDOFd0/XU9DkgJDg9cLab2vhovbwsBWvAKcEVg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NaDwIaZj;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bt5z6Z9q;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47DF2606A883;
-	Tue, 17 Nov 2026 10:21:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB708606A329;
+	Tue, 17 Nov 2026 10:24:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NaDwIaZj
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B8741F000CA;
-	Tue, 17 Nov 2026 10:21:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bt5z6Z9q
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 903781F000C4;
+	Tue, 17 Nov 2026 10:24:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794910901;
-	bh=D942YyHXcVgnkkaU/11BZPN4JzbqpBRwvdb/nOY3osc=;
+	s=k20260515; t=1794911082;
+	bh=XfB5B52dyRgHhh4XLOsPPMRBRcmUL0nbC6YT+G0tvD0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=NaDwIaZjAtMuIEkp98fdkOCUA7cozk999b994AOay8tjTHoGsKuVjDk5c7IE6GWs3
-	 oI0Z4VD/73ZXG31vMuuHr0FtPQs88NYXh2q+gaqouQJnVyYO04WKA69euwU+b710fF
-	 A+1WdNjEFVgQMfk9thjT4XsSLHSC4nf9gfkjxI1odqHAbW+2f7+Vzo2xdUzFZ0xDqG
-	 f9Yk3vwWmtXxjadVcd8FY0XIi2G5ovmsuJQE6ipFvl6w9gNMbV14IHRQFfpSEKqy2D
-	 Xn8rqrWjGLCWnOlrombXU+x35LGUIkXyRWR5zYluXCVDhX4aGy31IZCilZhkzv6oH0
-	 fvW/411LiEF0Q==
-Message-ID: <f290ccf7-1475-44c2-8152-b88db79d46fb@kernel.org>
-Date: Tue, 17 Nov 2026 11:21:36 +0100
+	b=bt5z6Z9qAIHck9s6Z9YBZ6Zky/qSjwuhm5MTYTtCvkbtB6EtaaIsuAS8HByVm1Pt7
+	 rhlslJwscU26ScWpndfeX5lLxHIsCnJUZVNspLNJrh4sf2t/RfWhu/8PsgTahBAncD
+	 9/o5++v3iEUwTEUxlASDeMRcGtzRvsOQDysYf27OViR/fCE6sBx1QH2P6MIpdxY+EK
+	 8M27dZnOhiA5qF8Pv8eI5waL687rv/tMZwDy0/UH/HOQZ+NiIhr8VS2+mQZNAQailz
+	 bNz1LM6YzjclXcBLNxlOg4fk1YhDNp8ebRDrNlpyZzuceT6LC7KYkw+GQB9yGrpI5w
+	 +W6ozZkpTWr+Q==
+Message-ID: <357f0fcb-792b-4b40-84d2-cdfd05ca05eb@kernel.org>
+Date: Tue, 17 Nov 2026 11:24:34 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,17 +52,24 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: pinctrl: qcom: Add QCS615 LPASS LPI
- pinctrl bindings
-To: Karthik S <karthik.s@oss.qualcomm.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson
- <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>,
+Subject: Re: [PATCH v2 0/4] Add Parade PS195 bridge support to enable HDMI on
+ Glymur/Mahua/Kalambo CRDs
+To: Nabige Aala <nabige.aala@oss.qualcomm.com>,
+ Mahadevan P <mahadevan.p@oss.qualcomm.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261117075100.272535-1-karthik.s@oss.qualcomm.com>
- <20261117075100.272535-2-karthik.s@oss.qualcomm.com>
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <20261116-mahua-hdmi-v2-0-0b5af6bf9e70@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -108,34 +115,34 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261117075100.272535-2-karthik.s@oss.qualcomm.com>
+In-Reply-To: <20261116-mahua-hdmi-v2-0-0b5af6bf9e70@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 17/11/2026 08:50, Karthik S wrote:
+On 16/11/2026 12:34, Nabige Aala wrote:
+> This series adds initial Linux support for the Parade PS195 DP-to-HDMI
+> bridge and uses it to enable HDMI on the Qualcomm Glymur CRD family
+> (Glymur CoB/SiP, Mahua, and Kalambo).
+> 
+> The PS195 operates autonomously using firmware loaded from external
+> SPI flash — it handles link training, EDID access, and hotplug detection
+> without host register intervention at runtime, so no existing bridge
+> driver fits its power-sequencing and reset model.
+> 
+> It introduces:
+> 
+> - a DT binding for PS195 (supplies, optional reset GPIO, and port graph),
+> - a DRM bridge driver that implements PS195 power sequencing and PM handling, and
+> - arm64 integration (defconfig + shared glymur-crd.dtsi wiring) so all three
+>   variants can route DP over USB2 QMP combo PHY to HDMI through PS195.
+> 
+> Deps:
+> PHY PLL change: https://lore.kernel.org/all/20261028-glymur-phy-v3-v6-0-1f1d2e565a66@oss.qualcomm.com/
+> Glymur commonize change for regulator: https://lore.kernel.org/all/20261106-topic-sip_cob-v3-0-52cd3826ab49@oss.qualcomm.com/
 
-A nit, subject: drop second/last, redundant "bindings". The
-"dt-bindings" prefix is already stating that these are bindings.
-See also:
-https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
-
-> +    properties:
-> +      pins:
-> +        description:
-> +          List of gpio pins affected by the properties specified in this
-> +          subnode.
-> +        items:
-> +          pattern: "^gpio([0-9]|1[0-9]|2[0-9]|3[0-1])$"
-> +
-> +      function:
-> +        enum: [ dmic1_clk, dmic1_data, dmic2_clk, dmic2_data, gpio, i2s1_clk,
-> +                i2s1_data, i2s1_ws, spkr_i2s_mclk_a ]
-
-It's the first time spkr_i2s_mclk_a name appears. Are you sure that is
-the name of the pin function in the datasheet? You won't be able to
-change it later.
-
-
+So this cannot be merged. DTS cannot depend on drivers patchset. We
+talked about this multiple times already, please do not couple
+unnecessary dependencies.
 
 Best regards,
 Krzysztof
