@@ -1,112 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794898084;
-	b=BQG900oOUVZ0Wu9eZYL6MXLKNZ3xqpBTd33o3nNba87NO06AIlwm9TP3dia5PEK3AeFm
-	 WNer8zuTeMOzWvVyUwH8h1l2uPf3zI+5hQ30qmsyPOcNAFoo5NXtMS2QZHkDsdkwmub2r
-	 4+gJtjrhhSWQLKljAYbUzKr6s++GvgpXbWqYuG9lEA7RNpte6ztmj1hWqGbkfj6JFYpxt
-	 1iD0mZmAO2GzI5wSqPZqwEIcgNRIoCZfvfkp372fOWMFnpeWq1svDD1lTCEz/zTxUvHnA
-	 yS+T8cj8IEW4st8gnMGvQOieLlk0zbB6VjM4Goh/Mfg1fwDfFejFbsQvV6uNTLxKb0A==
+	t=1794898374;
+	b=ahkVPmRivDd6xUuzZeqBUgm75OS80/AeqDDlx811DbmeKfMzhgbfdkSk7Acg/7wyoUIO
+	 n97xEstpAOc0zk9iQ7+aJhELXsTwvhHMVZoadp9uCWPeWUfh+MprpDTH7csD+U+AOhDMf
+	 mngNPUsJIpTdFz4bpd5Z6nMH3PTyEnimFc45C9QKuOxFpNU1huF5cbRs+op0wjwKUyr6u
+	 m09+9cr6eHqJBVNgq6DRbL/tNSR1nMWDCx3ZbqFylURmBRLeS3R8Q3YIzQPgJf1yUluZ1
+	 6yxyFLBzsuObuEoq18S4zXKB6lM6OCe0k1aQcDUUlOmaGykOCnUP1bkvNK6UI472cLg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794898084;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794898374;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
 	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=HsuQV8u3e7WFMB5SmWlfvmRte2dGPsZZ/I5dS+pGQLE=;
-	b=M9pFtqPBCKaYwAAG5iuBclN3UeVLkPAPWFEVU7My4GpBkBGbpp+imHiBE9coeUx+O7/y
-	 2AY3M16uXqKCGTgZ5Hvt+3GJ2labGNLaK7xeyNv9G9CuZEqjqzL+0GZuCzXKl+sLp6KWh
-	 xM6bTtiTVBaKo+VGYFsFI03LDwwDA77CpB4i3PhbMjpTQA6p2CsYznB2mhMbL1PsaQn45
-	 t15D2XdduChdMQry0O8QThTYNvK8CF0gto3SD2ICM+RboTwelWrudS6iVKNrkamadGTH8
-	 c4IdzTfSNg3MBL/nKc7+V84fWSvyywsrO/AXXa53L923bLvWogUeQR4gIhx6lfIy15A==
+	bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
+	b=sKVmTEn/sAArwpSsMY6Q90N+/oX88wKpAH0CH5nRtcr0wfUD+jHaYkEf8/VPt8JFP1KM
+	 eYm6ulMBDpkvtWc5ZbqKGoM/oSVzT1nhxqegYHmyAvvN/3wC0g9iSpt0FbG6tlMwKGffS
+	 2ZqyxWMM7zBIaWQYSQ/mE/NZ2JZ+rjoTusWlXHIRxeuuv7f4H7PrRkX7uM54RZyYcTjIW
+	 Am1cGGkPXWHPIUYQ8DeDV8qs21oXqKN3qW13r6VYvfEnrwpTYGM8sE6ys4NTMqi1g8bPG
+	 wRzjkCVQdLjZPtm08J4Naj836Ix4EYQH5516bonmZ34Rcs+m4dTMVAkwmMZ8ob3eSfA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="f4CDS/mQ";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QHSutkEj;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FY6TukEg;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T2X0tpNc;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AA3D606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:48:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6AA3D606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B96C606A335
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7B96C606A335
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=f4CDS/mQ;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QHSutkEj
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH2aADu3624121
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:48:03 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FY6TukEg;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T2X0tpNc
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AH6f0Od2998611
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HsuQV8u3e7WFMB5SmWlfvmRte2dGPsZZ/I5dS+pGQLE=; b=f4CDS/mQCAQF/Q3i
-	uECsG2khaXrlUO4NKrOfZTK1RidCSVeLNp/JsdPIamvhRJXW+QMseSLG7H6p8cff
-	DZg+ss1xgOm+tJwkOiOO5EM6KbxtnANqor/UpQDlUPI5eodNEwhoaT2dloYfEOBI
-	9K1+jVgbc2NVdhfIcEzfX4QiFSbusm+K5DQZMHJmCjxbNrdsfHSryt7vSnJX2eez
-	37KRdfL8NDuGxok0twLt74c0WTCLGMw5PYHX5Ca3o8HK/8h/sb3SNpjF4j4zOpLh
-	CRFKT+MC0gRVEM1FXWt1c0vi2L0ql1uOSl+0QrAVD8jMuTgiqYUlFHNoJq3Wu1/h
-	bhXDJA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j07rej7hf-1
+	7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=; b=FY6TukEg4N87MmNX
+	ltmoHDXoAdRNtrO+2hnqUxY5RIvEBYVUI7EsPa9LcjBFWWcIhGS+A1F4AwEgR5K3
+	XdUvJDBpvSWLkLKf4OO5Us/ENe1Iya4iAQby4099nCsNoLOMSpo9Fq/ZGHxG941+
+	5tQag7DZX/fL2iLpyHDyoGAec0/T2Ajy0YsJRkGMABf31+jcFSnssahAMoe2VuvI
+	94IFm/utr/MYhXMFjjuoPCXVZHvDU26MTdQA7f1DZ6B3R63NZLbriSLdS+c6oy57
+	LXTCCDLvcPO9Dpxr4HRq6qKXGaBZGi9nWkSLPl99ceKuyPjMYaRhSseXegCKycrz
+	YlfbeQ==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0hve018n-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:48:03 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3ad30487d55so3352275a91.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 22:48:03 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:52:53 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8a59717b0c0so2994412b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 16 Nov 2026 22:52:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794898083; x=1795502883; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1794898373; x=1795503173; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HsuQV8u3e7WFMB5SmWlfvmRte2dGPsZZ/I5dS+pGQLE=;
-        b=QHSutkEjJhEtk/vGQeb2EMphpn6RitDr5xZzqFjYaPWcsFhzJqSPwS1E/OGzZMgdOl
-         nHM8JatDJqkEhUkL2S88/4kwrlcM8ivyWSegLKRXRBFllni4GlNd8EJxE19aDT2bTEwa
-         03+8X/8ec5VdBVmCv9WPrVTeYPX7MPOiG18yU2gO+nYa0+72zm3FCYxegwDaPkYIAFfy
-         Z+hq4tWbobw+ccBIaS8nbQjrqbt5dolVQTVPluscaiwrv9h2dLXLdrefnnQdtQRUre98
-         xHYSHPoMJ1M9UcdidxdsXirIPQW7+6WMGHevsYo+5KQ0P8bsnUhGT0+1ceBNq46DeM9d
-         7i+w==
+        bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
+        b=T2X0tpNc74Ywqljtl/gR+GXxfLRNzTGmBo56anksIzEy9tFVDNGr8UkkGZUDeMs/yy
+         ezSi7cbLWJ5czhpBhDKSqasbES1rI+4hGewv2UbDZCoflTM573iGQrxdxaRBnWA6bwuA
+         L2kWv2pLvPV66En7NNC0HiJZ+QWtDjzC0WeyMa4AbadFP8vGhuDqJNVPeQeXyL95vUc0
+         Vwd+T5JWVywhwKH8LghfkzqpZzoGcOnWPZ/lJNTaxd+i8BFVMAs80O6Z8Od6lxKDPQsG
+         SShZt7o2DKLtbYPyH312wMTgwr6DWXqOC3Mb8/Qew9oOA3UIaFSBXbdRDQxKfPYq8ua3
+         Y7kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794898083; x=1795502883;
+        d=1e100.net; s=20260707; t=1794898373; x=1795503173;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HsuQV8u3e7WFMB5SmWlfvmRte2dGPsZZ/I5dS+pGQLE=;
-        b=SbSvpqe/xaEkYh0M0KGe+pye8yYS4hBmxyTJCmvyOIP/6ymvJlvPQUSyfb6z4PJ9+T
-         HQuCgj+udSHWtGs3JbMdBo6ou+EZKBqpVDUQbuCTqeGceOVwoo4wUeQQBp4yqzNqJvNs
-         kgusapf+sINvD74fSkkPfWH8GxxId6sI5Y4wL4LkJlx/eLRQyruBstS5qvw/rtE2kzJI
-         k5s3qAayNBnxoM84iiNNdWN3OR1wxMFZHu3OOk/uBF+kF/t/LSmTBMAInXcN9FaPjzEu
-         YubwcYs0mRyCDMOWKa477PZfIK1UEmnpFDOvyHwqc2G7LKFF6zr9LkDl4DdUyuBigJPa
-         j6Rg==
-X-Forwarded-Encrypted: i=1; AL+hErEkjQ/Rp/vkC7a4Bx2uABw3nzi20nFxveon8cn0vnqqJ/F5XExopgtXUBt2sq2OOFmYckzpsrfj9j+Hs3Mn@vger.kernel.org
-X-Gm-Message-State: APuU4Z/a7FlSU+VOOAClsgDq07vFSdpZQexzTYlbwU416pRzyaQq51IU
-	DEuMKR0Zzx8cTs05YRwQkXwmyuZI2vHYfNJ0EnMiNqJLGk5BWRZ3FgU+Bd4fRvvfU7FbwCigmbl
-	sI8tsng7QknlcJihiSKSPQianTB7IhjC+rBOkRGrK6GlSOP6WimswwBpml2wokU8Rd2bF
-X-Gm-Gg: AZFdTZd3j/1EIHxTxUv90NSLEkBh5PEABVeXX1iAjYGkAjCk1uD6fjr01IyhfpPkrIr
-	659I+6TH0DO5sdSvm1f2gDZEl/kxZgcxJjpGx+4Ub/5gnEcWJtOqT469vSLKbW36h3d78pSYrT6
-	DgCkc04QcEYwZsoipOnMNAt3ZSphRKDvZvFvIxYLXTgQ2AjY9OUU4Tv8KNrYKNFh1ZBCXP1jmvn
-	GZZigUYodxaeQfbu2sQ7dihPDGTR0bFeGzaX7Sij9d0uve4E/UjRNheY9Prp6SAgYfNFQ9CBkIR
-	B63aQlOjCC1G9Dl6V73JbQMPPV2iyj8kfuoZ/bTpaDoWbVj9WtB1eN/X3RGl2i8HKi9p1t06nV+
-	iHqZRQZq2oiSeoSdboQSTkvbqaDZj3uzizlCOpCHkdu+BvqXvf2N5r4gxLcNd6CzrTI9gBTh9vu
-	fPcESzTFGTllHElKXdZlflKeBwGH/0r4pRt3ww59RYw+YEow18Q42QJO1+hI+T
-X-Received: by 2002:a17:90b:28cd:b0:3a5:147a:3b63 with SMTP id 98e67ed59e1d1-3b1b087c1c9mr11650340a91.8.1794898082837;
-        Mon, 16 Nov 2026 22:48:02 -0800 (PST)
-X-Received: by 2002:a17:90b:28cd:b0:3a5:147a:3b63 with SMTP id 98e67ed59e1d1-3b1b087c1c9mr11650312a91.8.1794898082257;
-        Mon, 16 Nov 2026 22:48:02 -0800 (PST)
-Received: from [10.79.117.97] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b1b25ebf34sm8650420a91.1.2026.11.16.22.47.58
+        bh=7Gc1K6ilCvMVYzqcG5slTedvJ3YGR03Jfpu0LCvN3hE=;
+        b=kLtInkbZ3I7fqUhBZWkmmWWbdEZVQlwTL/koKMtLFJECPMYUdUlFrx7vBxNZP2nn6N
+         njqe/8O7PlLr6GOBeMH3V2cE+CHCmXJOoEiPBw1TwP8gATwvxmVahQU5hvC+2sPSGRBv
+         NjhpCoZUBWtLYh9JpMyQDzpr1D3Omrxy4GbpTltzHAj66IpxGPJt45I5Tmx7RtDAg5Fn
+         bsHQsL1DBSkPQ55Z+F0itJMSOkq2Ki53a4qrttge7GHctvIL3NZpCaYWZyZE31tKyPEt
+         ikxf4UMrNpyONDuV+RoFhW/y4lwnUDaEJjtZxJwP6Z2kxIzGM7ubq/R2LQgmDdWE+hR6
+         djQg==
+X-Forwarded-Encrypted: i=1; AL+hErHiUs3ZBhrCJwoouFU9o+Dc4z79kuyoCG+5ZUYwXIughs7uO8cxETLMwd7WnJ8MJPdEpcGMHP/igVRsIyyi@vger.kernel.org
+X-Gm-Message-State: APuU4Z/x472R6vC98JV4Rir388G31H/XWInexK5qGHaOixeOAlf4QSBa
+	5VCS8qwRq8n3rb96QntyXkOb+c+50Yt+bG0pzQriA3wIAFx0TQ9P0LGKgifVYLL9U1aDn57FOKr
+	Pqvw8j4p0EnN8fDB7Sc/dNOeuwSnOn06e0rjI+Zt0j59y600H9zCe/x1xaghGL9Ubu8sM
+X-Gm-Gg: AYBFou1sBagURcHawmDK4e23eNrwVRR8k+xjS599Rm7C/fDNSnwAPJCynJ/9FCfrvgU
+	L47ib3fvwJh38nRdUROTAXXaMVCEwrFcd2P7sZeRxT/Nav3pdqNxEBRUK6kIAbXntX6XbZ/4A41
+	zpMdmnvEwup2Wzr06/e2zW9V/JxykNiNo7yA1o7R6LHXX4g4x0xQBwWTCEuJSpUhqbhlhwZKHSJ
+	7ZsD2LDwIcmG8e1TlWJx87H9VjxIflpzyWE5ifAf75P+9/z7sMFvYrW2sXAVBP9GojZox+4nR4H
+	J+p0Uujyw288jFM/rKhLGWiM2sK6ZggffRYDPDzBr7YP6Lhzzja92WNrP2G0xMD9iVp74h4L8wM
+	aba3t45b0Yo84chEGbfJPEiA4Nr2447wWHUqO1EkFCNzq9w/3UjbrQCLMPcDN4ElIMKFDEJYIxh
+	j9fS1pGLbjaEqZgVbiedly2hDojXomOHe5daWvsxmPPvRJ
+X-Received: by 2002:a05:6a00:1a92:b0:8a0:18bc:e01a with SMTP id d2e1a72fcca58-8beb1fd9a34mr12202643b3a.3.1794898372824;
+        Mon, 16 Nov 2026 22:52:52 -0800 (PST)
+X-Received: by 2002:a05:6a00:1a92:b0:8a0:18bc:e01a with SMTP id d2e1a72fcca58-8beb1fd9a34mr12202615b3a.3.1794898372225;
+        Mon, 16 Nov 2026 22:52:52 -0800 (PST)
+Received: from [10.133.33.59] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8bed1f5aef9sm4764381b3a.34.2026.11.16.22.52.48
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Nov 2026 22:48:01 -0800 (PST)
-Message-ID: <de12e109-54f2-465d-9586-89734051f373@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 12:17:56 +0530
+        Mon, 16 Nov 2026 22:52:51 -0800 (PST)
+Message-ID: <4bdb2999-d8c9-400e-8a23-d950a95e43b4@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 14:52:47 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,246 +117,292 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] dt-bindings: remoteproc: qcom: Add Glymur OOBMSS
- PAS
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-References: <20261015-oob-support-glymur-v2-0-715435f52dd7@oss.qualcomm.com>
- <20261015-oob-support-glymur-v2-1-715435f52dd7@oss.qualcomm.com>
- <20261116180223.qk2k4zabk6tp6ihx@hu-mojha-hyd.qualcomm.com>
+Subject: Re: [PATCH v18 5/8] qcom-tgu: Add TGU decode support
+To: Suzuki K Poulose <suzuki.poulose@arm.com>, andersson@kernel.org,
+        alexander.shishkin@linux.intel.com, mike.leach@linaro.org,
+        konrad.dybcio@oss.qualcomm.com, james.clark@arm.com,
+        krzk+dt@kernel.org, conor+dt@kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, coresight@lists.linaro.org,
+        devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
+        songchai@qti.qualcomm.com, Jie Gan <jie.gan@oss.qualcomm.com>
+References: <20261116074118.822731-1-songwei.chai@oss.qualcomm.com>
+ <20261116074118.822731-6-songwei.chai@oss.qualcomm.com>
+ <e621c3a7-5633-4d03-9494-a6fa45daea02@arm.com>
 Content-Language: en-US
-From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
-In-Reply-To: <20261116180223.qk2k4zabk6tp6ihx@hu-mojha-hyd.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNiBTYWx0ZWRfX+9Au36zvyjuc
- 4I+67+E7GmOuQ9q53lSH8d68qP8bk1xvl23A4uRZLoa77hmJ3EsjhqypGwqOpXQYtWOajc4HEvR
- 0fACsGH6w4IoKR/45U9DfGA4DllnxV8=
-X-Proofpoint-ORIG-GUID: YFIJJF_rUZuXSDSb3buX5yVVOrcS4ShY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNiBTYWx0ZWRfXwTdMpD+8S92/
- xIaDVAVRZN39ZxwQRRMUzW+DnhDadpqX1t8AgbIco4/YvgVUGVCKS77xRsjw7arXyAv5ndvt7AK
- wzWAKC4/Q4IDzSzTtFgZf3TvxIWcVClLpZn8eGcMC7wjuzYbF0pFKtwJfImVOFMnn9AZdFWLjd9
- ZlexA2+8FfNgC2o5FUixniTGK0og2PCExa6BxerCf5YQ2RECjqiSkNw7WvV1D3uBFH1NZHC+Ql4
- 0I+1mGelMRoUDLhvij19MVsWA7lKl4LUsd43K/DurVH1Mg7MihueiI5bnuTGyILNTUkd/iYUUjB
- WUFmR0e9vs0eUetwHuYmjaeeu6RPa2hlWnfyO7KDRYNez9T04y7fHH9d/oU0zN1lUHwkd3T77iR
- sYjPlgjsQV90xVrZEMYa3k/PjyJUXDE+NMkptzaT0gPibH8zx3WPw4sSqNvj5pN/PbHFXrODKr8
- 9CccZKKkyKs8D5oVXKQ==
-X-Proofpoint-GUID: YFIJJF_rUZuXSDSb3buX5yVVOrcS4ShY
-X-Authority-Analysis: v=2.4 cv=R9uWitRX c=1 sm=1 tr=0 ts=6afbf8a3 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+From: "Songwei.Chai" <songwei.chai@oss.qualcomm.com>
+In-Reply-To: <e621c3a7-5633-4d03-9494-a6fa45daea02@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfX7iZr5WaqGDPW
+ sz4Cw/AKrpCWrnDzlvJTVurYgZbgUPR1/c2kSIj1PitDhoPnbnYagj74IIH00P2X41fybUlLN0T
+ A4Cq3D25ydMjT47G8F33ANWxq4V740M=
+X-Proofpoint-GUID: sSBZpzMeShT6oDFJz8RWGdIfuaBkqprg
+X-Proofpoint-ORIG-GUID: sSBZpzMeShT6oDFJz8RWGdIfuaBkqprg
+X-Authority-Analysis: v=2.4 cv=dqhOmFg4 c=1 sm=1 tr=0 ts=6afbf9c5 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=7OpPFmXP-hqOOPK_F8cA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22 a=sptkURWiP4Gy88Gu7hUp:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=W-u9qbw9fePND_ABPHcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDAyNyBTYWx0ZWRfX2neBwP1rA2e2
+ i++RD89m1ccKb2o2GX0YjwksKh7XVGLZl96IBaWSR8P8fWV3I2SMuGRJPrv+ydhrvP061cnQ8Da
+ FPpFLQJx0IGLD9RwjNIFv69o99fO4sssWhR/ficwThmY5ZNGso0DVVA/RtpelqCDJCCHThkXrj8
+ bvOvVtRJWHdRx+FfMVp70iGsgDWhYPmCuB4aDixXmteWobR0NHkcWxHTYG9QB7mXg6Q7VyN2TBR
+ c9XPWqswKGBpVrLUxeixJlGUwFCmz2Bqd7Yqd7Zb5zTaetI/dw+iF9HaeRCKHdcl7kuxBccK5Tu
+ MWJvBPVWM2tMjQ3+kPsa7RuzT9a3Ra3Z1nd9KT6ptzeK+/JpA+SqxeTkzuGny2FyhMwN6s52jti
+ r9eTWhV00fsCEdVnCGHWFzOFN4EPJVBWKmLL8MCV6ZfPvgGV/7JYYJ79fYK8T980sPTDlEPEnOb
+ m2/Jt2miR7jUQfRvp6w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-17_01,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 malwarescore=0 phishscore=0 priorityscore=1501
- adultscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015 phishscore=0
+ bulkscore=0 malwarescore=0 adultscore=0 impostorscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170026
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170027
 
 
-
-On 11/16/2026 11:32 PM, Mukesh Ojha wrote:
-> On Thu, Oct 15, 2026 at 11:25:49AM +0530, Anvesh Jain P wrote:
->> Document the Glymur OOBMSS PAS node with its secure GLink edge,
->> shared-memory signaling, firmware carveouts, and power resources.
+On 11/16/2026 7:43 PM, Suzuki K Poulose wrote:
+> On 16/11/2026 07:41, Songwei Chai wrote:
+>> Decoding is when all the potential pieces for creating a trigger
+>> are brought together for a given step. Example - there may be a
+>> counter keeping track of some occurrences and a priority-group that
+>> is being used to detect a pattern on the sense inputs. These 2
+>> inputs to condition_decode must be programmed, for a given step,
+>> to establish the condition for the trigger, or movement to another
+>> steps.
 >>
->> Signed-off-by: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
+>> Reviewed-by: Jie Gan <jie.gan@oss.qualcomm.com>
+>> Signed-off-by: Songwei Chai <songwei.chai@oss.qualcomm.com>
 >> ---
->>  .../remoteproc/qcom,glymur-oobmss-pas.yaml         | 154 +++++++++++++++++++++
->>  1 file changed, 154 insertions(+)
+>>   .../ABI/testing/sysfs-bus-amba-devices-tgu    |   7 +
+>>   drivers/hwtracing/qcom/tgu.c                  | 200 +++++++++++++++---
+>>   drivers/hwtracing/qcom/tgu.h                  |  35 ++-
+>>   3 files changed, 214 insertions(+), 28 deletions(-)
 >>
->> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oobmss-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oobmss-pas.yaml
->> new file mode 100644
->> index 000000000000..3aa96d2262f1
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oobmss-pas.yaml
->> @@ -0,0 +1,154 @@
->> +# SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/remoteproc/qcom,glymur-oobmss-pas.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> diff --git a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu 
+>> b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>> index 3be0b912c937..c7e6f13da83d 100644
+>> --- a/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>> +++ b/Documentation/ABI/testing/sysfs-bus-amba-devices-tgu
+>> @@ -14,3 +14,10 @@ KernelVersion:    7.5
+>>   Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei 
+>> Chai <songwei.chai@oss.qualcomm.com>
+>>   Description:
+>>           (RW) Set/Get the sensed signal with specific step and 
+>> priority for TGU.
 >> +
->> +title: Qualcomm Glymur Out-of-Band Management Subsystem (OOBMSS) PAS
->> +
->> +maintainers:
->> +  - Anvesh Jain P <anvesh.p@oss.qualcomm.com>
->> +
->> +description: |
->> +  Qualcomm Glymur Out-of-Band Management Subsystem (OOBMSS) contains two
->> +  processors running Zephyr, managed together as one remoteproc instance.
->> +  The Out-of-Band Trusted Execution Environment (OOB-TEE) is the primary
->> +  processor. The OOB-Non-Secure processor is an auxiliary processor that
->> +  depends on the primary processor and cannot function independently.
->> +
->> +  The primary processor runs the primary image, while the auxiliary
->> +  processor runs the secondary image. Each processor has its own DTB.
->> +  The two images and their DTBs have separate PAS identifiers for
->> +  authentication and dedicated reserved-memory carveouts.
->> +
->> +  OOBMSS is booted by earlier-stage firmware and uses an XO clock and the
->> +  CX and MX power domains. Shared Memory Point-to-Point (SMP2P) provides
->> +  boot, shutdown, handover and ping/pong signaling, as well as fatal error
->> +  notifications. The subsystem exposes a secure GLink edge to the host,
->> +  with doorbell interrupts provided by the Inter-Processor Communication
->> +  Controller (IPCC).
->> +
->> +properties:
->> +  compatible:
->> +    enum:
->> +      - qcom,glymur-oobmss-pas
->> +
->> +  reg:
->> +    maxItems: 1
->> +
->> +  interrupts:
->> +    items:
->> +      - description: Watchdog interrupt
->> +      - description: Fatal interrupt
->> +      - description: Ready interrupt
->> +      - description: Handover interrupt
->> +      - description: Stop acknowledge interrupt
->> +      - description: Pong interrupt
->> +
->> +  interrupt-names:
->> +    items:
->> +      - const: wdog
->> +      - const: fatal
->> +      - const: ready
->> +      - const: handover
->> +      - const: stop-ack
->> +      - const: pong
->> +
->> +  clocks:
->> +    items:
->> +      - description: XO clock
->> +
->> +  clock-names:
->> +    items:
->> +      - const: xo
->> +
->> +  power-domains:
->> +    items:
->> +      - description: CX power domain
->> +      - description: MX power domain
->> +
->> +  power-domain-names:
->> +    items:
->> +      - const: cx
->> +      - const: mx
->> +
->> +  memory-region:
->> +    items:
->> +      - description: Secure firmware carveout
->> +      - description: Secure device tree carveout
->> +      - description: Non-secure firmware carveout
->> +      - description: Non-secure device tree carveout
->> +
->> +  firmware-name:
->> +    items:
->> +      - description: Secure firmware
->> +      - description: Secure device tree firmware
->> +      - description: Non-secure firmware
->> +      - description: Non-secure device tree firmware
->> +
->> +  qcom,smem-states:
->> +    minItems: 2
->> +    description: States used by the AP to signal OOBMSS
->> +
->> +  qcom,smem-state-names:
->> +    minItems: 2
->> +    description: The names of the state bits used for SMP2P output
->> +
->> +required:
->> +  - compatible
->> +  - reg
->> +  - power-domains
->> +  - power-domain-names
->> +  - memory-region
->> +
->> +allOf:
->> +  - $ref: /schemas/remoteproc/qcom,pas-common.yaml#
->> +
->> +unevaluatedProperties: false
->> +
->> +examples:
->> +  - |
->> +    #include <dt-bindings/clock/qcom,rpmh.h>
->> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
->> +    #include <dt-bindings/interrupt-controller/irq.h>
->> +    #include <dt-bindings/mailbox/qcom-ipcc.h>
->> +    #include <dt-bindings/power/qcom,rpmhpd.h>
->> +
->> +    remoteproc@1f000000 {
->> +        compatible = "qcom,glymur-oobmss-pas";
->> +        reg = <0x1f000000 0x30000>;
->> +
->> +        interrupts-extended = <&intc GIC_SPI 86 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 0 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 1 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 2 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 3 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 9 IRQ_TYPE_EDGE_RISING>;
->> +        interrupt-names = "wdog", "fatal", "ready", "handover", "stop-ack", "pong";
->> +
->> +        clocks = <&rpmhcc RPMH_CXO_CLK>;
->> +        clock-names = "xo";
->> +        power-domains = <&rpmhpd RPMHPD_CX>,
->> +                        <&rpmhpd RPMHPD_MX>;
->> +        power-domain-names = "cx", "mx";
->> +
->> +        memory-region = <&oob_secure_mem>, <&oobdtbqc_mem>,
->> +                        <&oob_nonsecure_mem>, <&oobdtboem_mem>;
->> +        firmware-name = "qcom/glymur/oobmss_tee.mbn",
->> +                        "qcom/glymur/oobmss_qc_dtb.mbn",
->> +                        "qcom/glymur/oobmss_ns.mbn",
->> +                        "qcom/glymur/oobmss_oem_dtb.mbn";
->> +        qcom,smem-states = <&smp2p_oobmss_out 1>,
->                                                  ^
-> Normally, it is                                  0 ?
-> 
-> is it different here ?
+>> +What: 
+>> /sys/bus/amba/devices/<tgu-name>/step[0:7]_condition_decode/reg[0:3]
+>> +Date:        November 2026
+>> +KernelVersion:    7.5
+>> +Contact:    Jinlong Mao <jinlong.mao@oss.qualcomm.com>, Songwei Chai 
+>> <songwei.chai@oss.qualcomm.com>
+>> +Description:
+>> +        (RW) Set/Get the decode mode with specific step for TGU.
+>> diff --git a/drivers/hwtracing/qcom/tgu.c b/drivers/hwtracing/qcom/tgu.c
+>> index 917d506cddf9..1809cca4a94f 100644
+>> --- a/drivers/hwtracing/qcom/tgu.c
+>> +++ b/drivers/hwtracing/qcom/tgu.c
+>> @@ -18,8 +18,8 @@
+>>     struct tgu_attribute {
+>>       struct device_attribute attr;
+>> +    enum operation_index operation_index;
+>>       u8 step_index;
+>> -    u8 priority;
+>>       u8 reg_num;
+>>   };
+>>   @@ -27,11 +27,36 @@ struct tgu_attribute {
+>>    * drvdata->priority is a flat [priority][step][reg] array.
+>>    */
+>>   static int calculate_array_location(struct tgu_drvdata *drvdata,
+>> -                    int step_index, int priority,
+>> +                    int step_index, int operation_index,
+>>                       int reg_index)
+>>   {
+>> -    return priority * (drvdata->num_step) * (drvdata->num_reg) +
+>> -        step_index * (drvdata->num_reg) + reg_index;
+>> +    switch (operation_index) {
+>> +    case TGU_PRIORITY0:
+>> +    case TGU_PRIORITY1:
+>> +    case TGU_PRIORITY2:
+>> +    case TGU_PRIORITY3:
+>> +        return operation_index * (drvdata->num_step) *
+>> +            (drvdata->num_reg) +
+>> +            step_index * (drvdata->num_reg) + reg_index;
+>> +    case TGU_CONDITION_DECODE:
+>> +        return step_index * (drvdata->num_condition_decode) +
+>> +            reg_index;
+>> +    default:
+>> +        break;
+>> +    }
 >
-
-Hey Mukesh,
-
-Thanks for reviewing the patch.
-
-Yes, OOBMSS uses bit 1 for graceful shutdown and bit 0 for ErrorFatal.
-
->> +                           <&smp2p_oobmss_out 8>;
->> +        qcom,smem-state-names = "stop", "ping";
+> > +
+> > +    if (result == -EINVAL)
+> > +        dev_err(drvdata->dev, "check array location - Fail\n");
+>
+> see more below
+confirmed.
+>
 >> +
->> +        glink-edge {
->> +            interrupts-extended = <&ipcc 56
->> +                                         IPCC_MPROC_SIGNAL_GLINK_QMP
->> +                                         IRQ_TYPE_EDGE_RISING>;
->> +            mboxes = <&ipcc 56 IPCC_MPROC_SIGNAL_GLINK_QMP>;
->> +            label = "oobmss";
->> +            qcom,remote-pid = <20>;
->> +        };
+>> +    return -EINVAL;
+>> +}
 >> +
->> +    };
->>
-> 
-> 
-> -Mukesh
-> 
+>> +static int check_array_location(struct tgu_drvdata *drvdata, int step,
+>> +                int ops, int reg)
+>> +{
+>> +    int result = calculate_array_location(drvdata, step, ops, reg);
+>> +
+>> +    if (result == -EINVAL)
+>> +        dev_err(drvdata->dev, "check array location - Fail\n");
+>> +
+>> +    return result;
+>
+> Could we not fold this check in to calculate_array_location as shown
+> above ?
+>
+confirmed.
+>
+>
+> ...
+>
+>
+>> index d769379b8421..7d88ad8e730f 100644
+>> --- a/drivers/hwtracing/qcom/tgu.h
+>> +++ b/drivers/hwtracing/qcom/tgu.h
+>> @@ -16,7 +16,8 @@
+>>       ((int)FIELD_GET(GENMASK(17, 10), devid_val))
+>>   #define TGU_DEVID_STEPS(devid_val) \
+>>       ((int)FIELD_GET(GENMASK(6, 3), devid_val))
+>> -
+>> +#define TGU_DEVID_CONDITIONS(devid_val) \
+>> +    ((int)FIELD_GET(GENMASK(2, 0), devid_val))
+>>   #define TGU_BITS_PER_SIGNAL    4
+>>   #define LENGTH_REGISTER        32
+>>   @@ -44,6 +45,7 @@
+>>    */
+>>   #define STEP_SIZE        0x1D8
+>>   #define PRIORITY0_OFFSET    0x0074
+>> +#define CONDITION_DECODE_OFFSET    0x0050
+>
+> nit: s/CONDITION_DECODE_BASE    0x50
 
--- 
-Best Regards,
-Anvesh
+confirmed,
 
+use "#define CONDITION_DECODE_BASE 0x0010" as offset is relative to the 
+start of the step's block.
+
+>
+>>   #define PRIORITY_STRIDE        0x0060
+>>   #define REG_SIZE        0x4
+>>   @@ -54,6 +56,7 @@
+>>    *
+>>    *   TGU_MAX_STEPS         matches the static step0..step7 sysfs 
+>> tables.
+>>    *   TGU_MAX_PRIORITY_REGS matches the static reg0..reg23 sysfs 
+>> tables.
+>> + *   TGU_MAX_CONDITION_DECODE decode region 0x50..0x5F holds 4 u32 
+>> registers
+>>    *
+>>    * Each priority level's block spans a full PRIORITY_STRIDE (0x60 
+>> bytes),
+>>    * i.e. PRIORITY_STRIDE / REG_SIZE = 24 registers, all of them 
+>> implemented.
+>> @@ -61,15 +64,40 @@
+>>     #define TGU_MAX_STEPS                  8
+>>   #define TGU_MAX_PRIORITY_REGS          24
+>> +#define TGU_MAX_CONDITION_DECODE       4
+>>     /* Maximum priority that TGU supports */
+>>   #define MAX_PRIORITY                   4
+>>   +/*
+>> + * Values for struct tgu_attribute.operation_index: TGU_PRIORITY0..
+>> + * TGU_PRIORITY3 select a priority level, TGU_CONDITION_DECODE 
+>> selects the
+>> + * condition decode registers instead.
+>> + */
+>> +enum operation_index {
+>> +    TGU_PRIORITY0,
+>> +    TGU_PRIORITY1,
+>> +    TGU_PRIORITY2,
+>> +    TGU_PRIORITY3,
+>> +    TGU_CONDITION_DECODE,
+>> +};
+>> +
+>>   /* Calculate compare step addresses */
+>>   #define PRIORITY_REG_STEP(step, priority, reg)\
+>>       (PRIORITY0_OFFSET + PRIORITY_STRIDE * priority +\
+>>        REG_SIZE * reg + STEP_SIZE * step)
+>>   +#define CONDITION_DECODE_STEP(step, decode) \
+>> +    (CONDITION_DECODE_OFFSET + REG_SIZE * decode + STEP_SIZE * step)
+>
+> Please
+>
+> #define CONDITION_DECODE_OFFSET(step, reg)        \
+>     (STEP_OFFSET(step) + CONDITIION_DECODE_BASE + REG_SIZE * reg)
+confirmed.
+>
+>
+>> +
+>> +/*
+>> + * Neutral ('NOT') value for the condition decode registers. This is 
+>> the
+>> + * driver's default so that, before userspace programs a real 
+>> decode, an
+>> + * enabled step does not spuriously match. Used both when seeding 
+>> the shadow
+>> + * table at probe and when clearing it via reset_tgu.
+>> + */
+>> +#define TGU_CONDITION_DECODE_NOT 0x1000000
+>
+> minor nit: TGU_CONDITION_DECODE_DEFAULT 0x1000000 ?
+I think |NOT| reflects the hardware-defined decode operation rather than 
+an arbitrary driver default,
+so I’d lean towards keeping the current name. But I’m happy to change it 
+to |_DEFAULT| if you prefer.
+
+>
+>
+>
+>> +
+>>   /**
+>>    * struct tgu_drvdata - Data structure for a TGU (Trigger 
+>> Generation Unit)
+>>    * @base: Memory-mapped base address of the TGU device
+>> @@ -79,8 +107,11 @@
+>>    * @enabled: Flag indicating whether the TGU device is enabled
+>>    * @priority: Per-step, per-priority-level, per-register values 
+>> staged by
+>>    *            sysfs writes and flushed to hardware by tgu_enable()
+>> + * @condition_decode: Per-step, per-register decode values staged by 
+>> sysfs
+>> + *                     writes and flushed to hardware by tgu_enable()
+>
+>
+>>    * @num_reg: Number of priority registers implemented per priority 
+>> level
+>
+> This now looks awkwardly generic with other registers coming in. Should
+> we name it num_prio_regs from the beginning ?
+confirmed.
+>
+> Suzuki
+>
+>>    * @num_step: Number of steps implemented
+>> + * @num_condition_decode: Maximum number of condition_decode
+>>    *
+>>    * This structure defines the data associated with a TGU device,
+>>    * including its base address, device pointer, the lock serialising
+>> @@ -92,8 +123,10 @@ struct tgu_drvdata {
+>>       struct mutex lock;
+>>       bool enabled;
+>>       unsigned int priority[TGU_MAX_STEPS * MAX_PRIORITY * 
+>> TGU_MAX_PRIORITY_REGS];
+>> +    unsigned int condition_decode[TGU_MAX_STEPS * 
+>> TGU_MAX_CONDITION_DECODE];
+>>       int num_reg;
+>>       int num_step;
+>> +    int num_condition_decode;
+>>   };
+>>     #endif
+>
