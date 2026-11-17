@@ -1,112 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794926346;
-	b=C7l2xQNfw9MzTn1ijWoHHsxNCDdhbR1hCGOaweAA2uhwDZGnMhfaFXgHqM31JyD0TddW
-	 snOMWBrK1+SQ57FdkpJwwNOgx+1eDzIdXHIQCS9vL/oML0tE2cfmPERWFvnya/oUqQe73
-	 WdkYPGmoNIKh64gFOontE2mnBtX/MTyPcw4XQbfZFn5Fx+gc2GDfBcxkER0DUiAzrC8ez
-	 Wf7CoNBH9mu8lRmuSk5Ast6vtQ2qVXE+xdrwY/3fVvEUNnXEhPDkIvw2Pmh7EGZDqA7uo
-	 A9rfeuLaRLH8uISumS2WaQhou7zYuVYqrPK6/qIzCXltThhN6gAkJ6Mxn1nui7WYZBw==
+	t=1794926556;
+	b=YEi6BUUc9yf0EIsUE2nSEYtdL7PzVxl+E+4D0uB+P4o04sRAXzC5kC0HGgIRLUpzjRLl
+	 bxZQT2fcr5qEqFMZvpVAkXsKDtF21ymTobNUSWO8JD5Qsd3/U9SPWClmfDxxCEBceIFse
+	 csd5FbqBi1w+1ZWte56sXHjSok0Lfgu6ATfJBQwhuYYy/Nd0+75b3TSJ2fxjZ+YXo+l6q
+	 6vKMWpNpz5Yf0VXN9aKfyJaF6Ak9q7RV+amwj2+E9fQRYMcO+uQeYn4MHOhEK8M9nS+Y2
+	 8WoK9pni2etDKvLlxhHhCi0ljPb9R4nW6sk0pIfhhX1iwAkcjvNLfJ3SoKsJmDbxE9w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794926346;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=J/4vLvyNqeORXrBPoXGUzzn2IETQe9KRQ40Tt84ca5g=;
-	b=IaQB3T4FDBmIx0J7X9EIrVdO0d8uFuFQ/EH84+qiLDD9Co1yM4/uKc/fgSi7mYilpfqT
-	 T3hyr8GxqYAeoXLl7ThctEzI26ex3knsCwXmd38/IbG1phaVH1ad27SBlZed1XoBKa+2T
-	 Z4RTzZyKJiHsnnwLKq23Ffb8kmj+sDlom7JD5iOy5Yr40f2qzlXTOwXxk0Ekb86HcsuNV
-	 N5pH1gNTSWAn1VSZym1q5Nas+xLrni9zZb6NzMYUYgtka02fgqizjJHCX+jee2CDXP27v
-	 1L8JgyxASAii8c7F/PcA3Lrr2G5Cy+COIPPQaxTviv3f7mDGEyQQAPTBixVoiE8Q89w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794926556;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
+	 X-Patchwork-Hint:Organization;
+	bh=SRBX595u4PLbEZc9F7XExdDcjw+uc2OQezv3cOuRJUw=;
+	b=op191ZEbsPAgY8EJofSsvCIOlCpwZA4U2i4fi0oCIxVu4AMVpvVeXPqrsV0RjMibgTow
+	 lBdZTtwVNS61eNGV+GqJILi0QobboNRvfXeiy6xt09mtk1L5OpNr6FmXE8FhTWNnZLInC
+	 DQGtXLE5NLWkRXosBOKsvkObG/C5/E/hG4m1fSR88/37R5uxIw8EmXOd8ON3xUbbAYER7
+	 GxZV93Cbup/M7cqe3U1ynhIJuBb9Pi+v9AjALrHb1Ja9KkLNav56ZiT3w52ydYGFLqJcT
+	 5ghBI/jVrpDs/lwMG7p0505eaY+XP+35VrZHKEKkWIoCvpKCZEPoF6lZ0PXN/K5S/bA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RaZdnNrX;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=I2eYdPIa;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CDA+btKW;
+	arc=none smtp.remote-ip=192.198.163.12
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A201C606A8A3
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 14:39:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A201C606A8A3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67A59606A31C;
+	Tue, 17 Nov 2026 14:42:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 67A59606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RaZdnNrX;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=I2eYdPIa
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AHC3uKN2096481
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 14:39:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	J/4vLvyNqeORXrBPoXGUzzn2IETQe9KRQ40Tt84ca5g=; b=RaZdnNrXIXuujHIL
-	b9gDY6DkKpfcXz3+RtJMNcSG2CBbjvyZvwfuE3SPA1MzNtWuWLPkv0xOk3corQGb
-	9hnsSeU//oJ8Xfddv4H2/ry7020h+5yagaaVpQpSz7oxja90XPUrw1XDo/8PBigI
-	CALjD9jco/hHbq+V9D9XRgpEh5T2P6iWO+x71wV/QuYtotFLUcispWkEaAg0pAqU
-	7hmUtvgFJJtB/jnoLUIArmuG01TjjmN1fdT2x3Ak/n/0OvWhffI4K5jOktBNlKu8
-	PPDe1XT16GpXB9ydVlfUIORhu1hKDnkSYLosgk+VlfZG4A3AUDfcz0iY11Kt/oO+
-	py7HgA==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0c7h32c2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 14:39:04 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7d2c415bb8fso526576137.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 06:39:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1794926344; x=1795531144; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=J/4vLvyNqeORXrBPoXGUzzn2IETQe9KRQ40Tt84ca5g=;
-        b=I2eYdPIawMDuzDv8t8nyVyMKHJBCpnsseE6P92OcAlApTbDGO86XNhM4CJib78ZQ3/
-         0zxxPDDwVxubVpkREA2V/q8Ao/QicgYvYiqfNYFJalPfdhNPQHNYw4e/dvX6XiiqSdJv
-         I37jEB4waTNWfvOm9n2pWgbVNgd9jsVqap+c59iizmhMpSq/ta5Jtdz4FiNX3a876ODU
-         S9FyZHrmLeUZBUDlJCe3JgTXRzQyVwnTx1Ykcjcy2jdE1pwqWuNsIRCYzdgqob2UqKBM
-         IEZSuPbXFX4czfGlTagrAvAbQgn/t6nNEQpSGIqTPu89+ZxXXHLfkVCijoDPu97MH3dI
-         FINA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794926344; x=1795531144;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=J/4vLvyNqeORXrBPoXGUzzn2IETQe9KRQ40Tt84ca5g=;
-        b=quSKgErRQ/sVntvLujlo7rqCN34kpeYdJYRYgZCPkXcjDisDtO8aYTRB0mYH1Lzr8b
-         5yi0m369fuMoDvQ3YF/hHlP/2bt6AZ+gxs87to1vkjFmtUBrSkHgh7HDG1PQFRvBnxzD
-         A1bE0p61b1d/HH9zuONnRCFlKnOvJ1iznyhJ3uN1WKGdO67XUuarrdcQUSCGUPTimgaQ
-         g00AnJAcy0du9tE92u/NsUp0+X1Kn5g11e1VQwSkB2+yqFPKKs1mBArzg1wVDTGywORt
-         dU7ridsQ0Yv0HAjTaUGiG9qDQZ8baQlw7D2tlF5nmzDcYkUilnpdilwLTzatO/fLkTGi
-         EoyQ==
-X-Forwarded-Encrypted: i=1; AL+hErH0VQanhc0vW9wTmRKV5vDi4XDRoskxE3J6BLw6g7WWitbYeRhoUlRMo/E8g3fwLqCmoOcBb8auNcS86BIE@vger.kernel.org
-X-Gm-Message-State: APuU4Z88Hg8/EJiyB2V0KSCpX/c4CVL666vPm8OCRgT6ve4OiqNJ7PEv
-	plc4fGSW4O7dqlITzLsRTshw7wILEiQ6IhC6FWPP3duf6ye88xx0srp1gztWzytxXj5KtozQmns
-	0A6koVbXqkibZd6z/3HkopPdKNS9VSXsNXKf7qLsP1ATz7+P2PvblRiL+2G/VJBFsQzqf
-X-Gm-Gg: AYBFou0SXZA7hBgEBCSO6x+vrq8qEaxFGXqIbhOx4oBmyDt0CqEh09Gh/TMEPELjwi4
-	v0cPlHRypj4UC//0GbVuGHwC6XgYVt1qpuoVgvhDC+lpVpEUeM8OLo6pfZrfSRqnjH6VjuYRvLq
-	jEXZqwj3ZZg3KD5nKx2xc0vuuEa518GDhyamg0YVShNqVwbaGiHROAFq6RZd1+mGW+/8oRgdJqy
-	lpCMQwpcs3IZbz27TiIVONJZz2gWZinkXLLp0EU5MTQ5qKcUTtG1qSrTSx0n0LPoqr76RRhB5CH
-	PhnbDZAqdVkfxiVmo9oListGpWje5+Yl4NaPhwnbUGHTiq2ZUTPDv8sXtNYPhp4G1WPEHnriXOR
-	Sr0N9ZkMabXv23bXctm0iV5yMfVddhVQHw4oucbvjr9fAnIV81ShJCvNitj/yctPzkupW1o/sIX
-	gVkurl
-X-Received: by 2002:a05:6102:6050:b0:7d6:48c4:ed56 with SMTP id ada2fe7eead31-7d64d69dbf2mr3523243137.6.1794926343513;
-        Tue, 17 Nov 2026 06:39:03 -0800 (PST)
-X-Received: by 2002:a05:6102:6050:b0:7d6:48c4:ed56 with SMTP id ada2fe7eead31-7d64d69dbf2mr3523224137.6.1794926342900;
-        Tue, 17 Nov 2026 06:39:02 -0800 (PST)
-Received: from [10.218.50.86] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d69e02d340sm2636416137.8.2026.11.17.06.38.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 17 Nov 2026 06:39:02 -0800 (PST)
-Message-ID: <d55bbf0a-3556-420f-852d-7a15ed8d5aac@oss.qualcomm.com>
-Date: Tue, 17 Nov 2026 20:08:54 +0530
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CDA+btKW
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794926556; x=1826462556;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=q4W2BYtbGrF9b+Sza6/X9rpK+8tQ7WvHYOd7Ql0pQuI=;
+  b=CDA+btKWxaQTRb/tQxMrPzVlH75jUF5eA8x+tddSWn9OU8Z6SlR2NM0n
+   aaqYCQAirc8SyZ0StwKgMndhEy80mAbByIE6YyCCqG4944L6UQzY2M/T4
+   +EqjQ6kzQz17G6h7pGp4SJ3MFR8jpqwzmQWmOozOQUAUiPOy5eFT6VwJl
+   u9udteOA0xN5KpOJmUwtBP4MAmyuhAQXmIh0y73L7iloaAmLMbg3EnUY8
+   d6SUiqP5Fed73ZY/o6Hh+YAQeJ5M3PEt2vlbGjUybNL4LRs4miDebSyGF
+   r4KP3zc2W/t2r9XfO/G5+Q5oDmZepDBY2O8A9x7Jv7G4Jl33XRHdVbYk6
+   Q==;
+X-CSE-ConnectionGUID: wrKPfydDRs2HSdkNoXdzAg==
+X-CSE-MsgGUID: nZDpssPjRf667hI38dJ2RA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11969"; a="3600728"
+X-IronPort-AV: E=Sophos;i="6.27,218,1787036400"; 
+   d="scan'208";a="3600728"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2026 06:42:35 -0800
+X-CSE-ConnectionGUID: BX821WPNTgqlq2KMILKrdg==
+X-CSE-MsgGUID: atJO8mfxQl62FlzFQ0EonQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,218,1787036400"; 
+   d="scan'208";a="9714237"
+Received: from mkosciow-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.236])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2026 06:42:27 -0800
+Date: Tue, 17 Nov 2026 16:42:23 +0200
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Erwin Springer <aot.lerwin@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+	=?iso-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>,
+	Boris Brezillon <bbrezillon@kernel.org>,
+	Christopher Snowhill <chris@kode54.net>,
+	Dave Stevenson <dave.stevenson@raspberrypi.com>,
+	Dharma Balasubiramani <dharma.b@microchip.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	freedreno@lists.freedesktop.org,
+	Gustavo Padovan <gustavo.padovan@collabora.com>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+	Jianmin Lv <lvjianmin@loongson.cn>, linux-arm-msm@vger.kernel.org,
+	linux-mediatek@lists.infradead.org,
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	=?iso-8859-1?Q?Ma=EDra?= Canal <mcanal@igalia.com>,
+	Manikandan Muralidharan <manikandan.m@microchip.com>,
+	Maxime Ripard <mripard@kernel.org>, Mingcong Bai <jeffbai@aosc.io>,
+	nouveau@lists.freedesktop.org, Qianhai Wu <wuqianhai@loongson.cn>,
+	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+	Simon Ser <contact@emersion.fr>,
+	wayland-devel@lists.freedesktop.org,
+	Xaver Hugl <xaver.hugl@kde.org>, Xi Ruoyao <xry111@xry111.site>
+Subject: Re: [PATCH 00/12] drm/atomic: Try to make atomic+async usable, and
+ clear up the "async update" helper confusion
+Message-ID: <avxnz4Nt1IufM6oM@intel.com>
+References: <20261116091130.13950-1-ville.syrjala@linux.intel.com>
+ <1b7a7d94-e349-4f3c-b973-c365041c15f2@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,141 +103,59 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] dt-bindings: dma: qcom-gpi: Add QSPI protocol
- identifier
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Mark Brown <broonie@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Frank Li <Frank.Li@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dmaengine@vger.kernel.org, devicetree@vger.kernel.org
-References: <20261106-qspi_upstream_series-v1-0-21f43042dd60@oss.qualcomm.com>
- <20261106-qspi_upstream_series-v1-2-21f43042dd60@oss.qualcomm.com>
- <20261109-wandering-miraculous-mamba-0cf21a@quoll>
- <2fc8f7ea-651e-466e-9346-c47e0a38c5bb@oss.qualcomm.com>
- <20261111-daring-salamander-from-tartarus-4c72bd@quoll>
- <c9427a03-8b45-4e35-a29d-7ebe30f07ed7@oss.qualcomm.com>
- <5b6e4031-4c52-4b67-82c2-0033d13b15d6@kernel.org>
- <0d4fa5af-e406-4761-aa58-534c3c6a043a@oss.qualcomm.com>
- <4c3bf92c-2434-46e8-8a3a-ab34cc50c72d@kernel.org>
-Content-Language: en-US
-From: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
-In-Reply-To: <4c3bf92c-2434-46e8-8a3a-ab34cc50c72d@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: DgoHV6rnCygmaIRdzNGj7liKkMQG0lkd
-X-Proofpoint-ORIG-GUID: DgoHV6rnCygmaIRdzNGj7liKkMQG0lkd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE3MDA1OCBTYWx0ZWRfX+V6tchtHDGkB
- J+V5fq557n67iFYr6LUsUlOMBypy6SR6VuEDu9U4saMELj/pXSUNg4aSevcPQFNepR2lW04mTax
- IuDmamclkBslFbMipmjehH0fHb4Tn3T+jhBDIYg95PKwbvJxsZ6JIhUTgbXkjGDpmk5X+JqyIYI
- C2nWg14MU0aJxGHKitaI6RaSKkkreZ+hXLsuQjWT4ZsNK8zePlyWpq4UbI9Ca+nD9MOxFw4KSql
- PgezupWQuhm1HGWY71/Ji/YAKkm4xJ5W17jpwq5vvBkhVk4sHw5sKMcNt4HR6EurIPZLU8npwW3
- cHwIlGJO8y1Fi5ZATtddZ045atDEzsuMWlf48d7xea6k23ORKIzKtbzkmworp/1LjLLqpPRBP4K
- SIy1UC8w52EDGbk0k5FofLn3oImAnZ2k4bIyrrVQxlPMgmb7Rt8F1gWDpROoPEXcRx2FrtN6rql
- 1nKXt/JBuxNRnwkPIUw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE3MDA1OCBTYWx0ZWRfXy64ZLJA1FKqG
- G+WbHUYBSjKKcjbUnjoIngpKsJCby8wKSCMwsnio7y9XtZ0PIuW6ERtvFIEXYQ/9Z8K7MZLPcfu
- yAhTZ/MnKe2SY84SJnnBmYwskHnrM9c=
-X-Authority-Analysis: v=2.4 cv=bobZl0ai c=1 sm=1 tr=0 ts=6afc6708 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=fQRhRBuJyxsiCmdI730A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-17_02,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
- priorityscore=1501 phishscore=0 clxscore=1015 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611170058
+In-Reply-To: <1b7a7d94-e349-4f3c-b973-c365041c15f2@gmail.com>
+X-Patchwork-Hint: comment
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
 
-
-
-On 11/16/2026 6:56 PM, Krzysztof Kozlowski wrote:
-> On 16/11/2026 11:36, Jyothi Kumar Seerapu wrote:
->>
->>
->> On 11/12/2026 7:27 PM, Krzysztof Kozlowski wrote:
->>> On 12/11/2026 14:47, Jyothi Kumar Seerapu wrote:
->>>>
->>>>
->>>> On 11/11/2026 6:07 PM, Krzysztof Kozlowski wrote:
->>>>> On Mon, Nov 09, 2026 at 08:03:29PM +0530, Jyothi Kumar Seerapu wrote:
->>>>>>
->>>>>>
->>>>>> On 11/9/2026 7:12 PM, Krzysztof Kozlowski wrote:
->>>>>>> On Fri, Nov 06, 2026 at 08:31:20PM +0530, Jyothi Kumar Seerapu wrote:
->>>>>>>> Add QCOM_GPI_QSPI to identify QSPI (Quad SPI) channels in GPI DMA
->>>>>>>> specifiers. Its value, 9, matches the GENI serial engine firmware
->>>>>>>> protocol ID for QSPI.
->>>>>>>
->>>>>>> What is GENI serial engine firmware? How does the Linux rely on it that
->>>>>>> we add bindings for it?
->>>>>>
->>>>>> Hi Krzysztof,
->>>>>> GENI firmware runs on the serial engineâ€™s programmable sequencers and
->>>>>> implements protocols such as SPI and QSPI. Linux configures the engine and
->>>>>> submits transfers to it.
->>>>>> The existing GPI DMA specifier includes a client protocol ID. Linux programs
->>>>>> this ID into the DMA channel and selects the corresponding descriptor
->>>>>> format. QCOM_GPI_QSPI adds the QSPI protocol encoding 9 to that interface.
->>>>>> I will clarify this in the commit description in V2.
->>>>>
->>>>> Does not really answer. I see no reason why GENI firmware needs ABI for
->>>>> Linux.
->>>>>
->>>> This extends the existing GPI DMA binding, not a GENI firmware ABI.
->>>
->>> OK, so it is not ABI for the firmware. Period. Let's stop discussing this.
->>>
->>>>
->>>> The third argument of the DMA specifier in the dmas property selects
->>>> the peripheral protocol. The GPI driver programs this value into the
->>>
->>> Yes, so the third argument can be value of 6 because it has no meaning
->>> for the firmware.
->>>
->>> Again, follow standard DT bindings ABI rules, you don't get an exception.
->>
->> The existing GPI DMA driver and binding uses its third cell to identify
->> the client protocol. The driver takes that value from DT and programs it
->> directly into the channel's SCRATCH_0 protocol field.
+On Mon, Nov 16, 2026 at 06:29:38PM +0100, Erwin Springer wrote:
 > 
-> So register value? Not a binding...
+> Am 16.11.2026 um 10:11 schrieb Ville Syrjala:
+> > From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+> >
+> > The weird uapi semantics of the atomic async flip support make it
+> > really hard for drivers to implement. Try to fix that by filtering
+> > out the no-op junk from the commit that userspace likes to put there.
+> >
+> > Also a lot of people are apparently confusing the
+> > .atomic_async_{update,check}() hack with async flips. The two
+> > are completely orthogonal, so try to clear up that mess by
+> > renaming the hack to .atomic_bypass_{update,check}().
+> >
+> > TODO: atomic+async is in serious need to proper tests, somehow
+> >        all that seems to have gotten skipped when the feature
+> >        was added :(
 > 
->> Its mandatory to maintain protocol ID-9 for QSPI.
+> thanks, this fixes the KWin case for me, so my patch is no longer
+> needed..
 > 
-> How can it be mandatory if we did not define in the bindings so far...
+> tested on Raptor Lake-U (Iris Xe) with unmodified KWin 6.8.2 and a
+> fullscreen client that requests tearing through wp_tearing_control_v1,
+> without my patch. I applied the series to the CachyOS 7.3.4 kernel,
+> the only conflicts were the renames in amdgpu and msm.
 > 
-Hi Krzysztof,
+> Before, none of about 350 frames per run was presented without vsync.
+> With the series 3330 of 3336 frames tear over four runs (with and
+> without CCS modifiers), and the "async flip not supported" message is
+> gone. What is still rejected is the first flip after the modifier or
+> format changed, once per run, as intended, and in three of the runs
+> one commit that touches the cursor plane, which can't do async flips:
+> 
+>    [PLANE:146:cursor A] does not support async flips
+> No warnings and no flip_done timeouts in the log.
+> 
+> If you think it fits, feel free to add:
+> 
+> Reported-by: Erwin Springer <aot.lerwin@gmail.com>
+> Tested-by: Erwin Springer <aot.lerwin@gmail.com>
 
-Existing SPI, UART and I2C use the same number for the DT identifier
-and hardware encoding. gpi_of_dma_xlate() stores the third DMA
-argument in gchan->protocol, and gpi_alloc_chan() writes it directly
-into SCRATCH_0 without translation.
+Thanks. There are quite a few unresolved issues left here
+though, so we might want you patch as a short term fix.
+I'll have to go read it with some actual thought...
 
-Neither 6 nor 9 has been defined in the upstream binding yet.
-Would it be acceptable to follow the existing SPI, UART and I2C
-approach and use 9 for both the DT identifier and hardware encoding?
-Or should I use 6 for QCOM_GPI_QSPI and explicitly translate it to
-hardware protocol ID 9 when programming SCRATCH_0?
-
-Regards,
-JyothiKumar
-
->>
->> Other protocol IDs which are not part of upstream are for AFC (6), SPMI
->> (7), HID_QSPI (8).
-> 
-> 
-> 
-> Best regards,
-> Krzysztof
-
+-- 
+Ville Syrjälä
+Intel
