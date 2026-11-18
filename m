@@ -1,115 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795019032;
-	b=rn/5Lj6cS39S7KbqZro0PgPakRz3Zvh5WO754wxNs/U6BIC4ZZU9arPtVz+raGXuRqzu
-	 NEumtXmgOtwBAAgIQc1R7OOYbTeUZmuQ76RpGoJYEzCAvEG96tciUcQt2sD7uJMvyNhGF
-	 xj3EvpURLcJnOnHVt+eBaALzFmyKqIXPDjLdfcj17CDKKQj2j1HT1XaQ9p24FmKrxRqHa
-	 +Qh/wpCd5uv6o8Lo4OLxyMmscStuq00eXc7TIwDQI8d7dqlFFi6zeMPq2YW/ClxZv/W7r
-	 r22m+Z/kFpzjJS3yjE6mzVNLw3olF+nNHGR/s141S/Ou3YSKrk+fvqZ9MTKNPzusjfw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795019032;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=gja9id1+VOW1RNlfA96nCbcm7qe2Qf7QRAaccXjN1QU=;
-	b=AWnAdETDL2/6TqRdQLhIRP8zrHYgnB2Mp0CEgUWBDJ44Kpihmiq2bmxjJ7wJeXUTAKgY
-	 /FugSW2OB4zgDh2l81EWObQ2hODkFqLmoyx1zWqL7eMMv736snzvmL5CwydvwRVkrCP5T
-	 gMQajB1X0HccI8I8KN/ZOMyQ3P4vDXsu84x6r9sLjHa3BTYFuHT37GG9+jUCnrtris1Fy
-	 sFt4wz83gTnhiGFuDeb0jmBF1BazIVPprbA+Nm99q4zKroCqL5lfe6q5OVkOpneaeCswh
-	 K2YXic0wZph+lx8ni2/off2pUUo9w9GNgLurKzaR3rkFarlLBTfGFJa+dPW4s7967XA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UnQIASL4;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=KqjOXKK2;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795019093;
+	b=F/INkbxEsHxhDPMkUN3aRPBIcE3U+Q4vbdWizUI22U7L3UofIQhvpAQASuB+Bodfm5c4
+	 V8TGtVqEjWok50/N65PZq5wOGvZAPZNuTMxYnmaQAMZXUYX2CYygzdMK1phXYZ8zJboXp
+	 n8YANoytRgByM/YyF+GfEXTma5B50ai4wcbnaAOa27e45D3PMWRlACCc1Dm2tct3CF4M/
+	 cS7MsYSJHwt/TMtVskGLj7lcEBeQXKg+3b0a9vSUxjhwSslXc4zVxozOL0eO8BzLy/OJe
+	 Te+ptss6nkghznqowjj9S2DyxOlRFj8Lhkp48Et/9+tLQAvvwcSTYzKfmyOSzQ4qgXQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795019093;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=FLHmE0yNJa1Jt3TSGOVe+8qhekufs+6/Lxt/MWi4vX4=;
+	b=KOgY51L0HZiZ6KIhh2vXgv8sUkX2p/YWTA2GjQret0b0H6uYpedaW8gXj8KF1A/DtBjl
+	 SVzgQ90yG3u3rlMxhThOMVMPxeJcv5gWXos89eebqEyKnBvAtOVLq9tV/CqbDab+Piw2L
+	 ECZQlyjtwnwHpuRUwA0QhKT7vhRK0VfiP011INWjEJrXCrwPtQTku4Y1Qh4uREqF6t9RS
+	 f2mFaCwSz8sP+yL2mE5L+Ks0ICfmJZ8rmHbTXFvNQ8cuF0vgz7aFUuln7CuW3cFIVJYxX
+	 5wEKwhvzd/cxdLZkhkMqmUDQBcW7Ne2chVZCnNsjY0wj7lD9lmpam3QCHgaMMVm0UhA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="LtJ5mu/I";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0B04606A320;
+	Wed, 18 Nov 2026 16:24:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LtJ5mu/I
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795019092;
+	b=DCp54GR7zvsCZlWc9t8ik1qySMsIGSO9UtJBb7VTInxMUU3Gwx+Ls4evb0+18DxFInBQ
+	 CgRloqFgL2a6ChmJT0b+aBtSTQFWHnvqZJLd64oPHbfCsYOMeURUImY6x3pGY19nZiVIp
+	 wKwYnmLGYRki6F/VIm28m8/hlPxr3J7a0GicEh0ZbnNc0f1x0xP6d1efDrRiZzYOeNs6+
+	 MicXKLW36GdBmXxAAxPm2s7PXSSkzB7MUZEz6ngLTkKGsQhhjsEFnTm0vs9nae2q5rpdZ
+	 cffCzklRSIy/d2b7+5FR5/ICjjLNM3ljkdAmrvXfu7XG2XbpaAv5CVTKXcozHHs9toA==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795019092;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=FLHmE0yNJa1Jt3TSGOVe+8qhekufs+6/Lxt/MWi4vX4=;
+	b=UeEz/fhg4+oe3OUnMCgTYwLVbixloCRSHVs98y8rrLe/7DupdWNcpn7fLLujaI4kMtpy
+	 jB7ZwPbf2Sl+COuOHPbgFU55d/sqdIzIEFgG9EC4BwVGypOmIh+2lhoaEew5Pg9pX5UnR
+	 1D9dF1T5/tPU9fpMGOwqIHg2MZRlz4Az2VkwmZTFFcthSOH4uSBQomec+6EQVBMGBnBD7
+	 KaGETM0fqrmf1t01H7lnzkmYx9XRDgPuLYZesZbDUGl+H08sX+Atv0wOoqnLxUwRXD6da
+	 UfUKc6VvIMLRi4R+g5eqh9xaz3ApsnHWpHfhBjX3IAcAJm9g5AzfmF/0ktMibDDW/uA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B2FC606A331
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 16:23:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6B2FC606A331
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UnQIASL4;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=KqjOXKK2
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AIDQ90q3912222
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 16:23:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=gja9id1+VOW1RNlfA96nCbcm7qe2Qf7QRAa
-	ccXjN1QU=; b=UnQIASL43i2iU6Q01eD9Hmky0gd5FzKSUjCz9YoNvM/zIRd0Bmp
-	8aS2V/oPSRt8TZ3IBh+gAGPz4S544Indo17t996TZvOF4hfno7u0z57RPTPGXHzN
-	LNvDcb6JPMc6e99acqFrLBEUymEevIBJJRDZNTooM61u7d7WzFSJEdAiEZRwaxge
-	xhl5mpiyKgw39gq9gNI30C4jfronNINTpp8UJoLg2EAWfcIDqKbi+ueHe68NGXgk
-	jBiTHDlmqN2ae4cFZjP7C5ID5NKftsyysuXSVLK5kOZVnLZjVilcZvr0OARIALUC
-	jqhFyHLOURq9v998o8mXJVc5nFQiKEcK8BQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0yv9c1d9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 16:23:51 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9493e89d4f9so198402285a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 08:23:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795019031; x=1795623831; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gja9id1+VOW1RNlfA96nCbcm7qe2Qf7QRAaccXjN1QU=;
-        b=KqjOXKK2oTxDJBol7Nlh+NKBaSyTHZ3Op0rfFmjb2rUVyVjMBBrrHKdNofS/Gm3xiR
-         UbB/0E/2VOKVW/T170Tii8rP2IdahA1v938SYjf9723heP2Mo9+aqy/qHeJ4xuouxPVH
-         9f+PA77z7YhnzeoT4tV7I6QvHMC4Q6JJE/Dv/vWzIBaAmXmYQkaemhddDNTNZqLrjjdB
-         ra+W2wrd290auaNkfC88Ose6D27DlNLVaq8Uhnu+YBuyWZZ+E/icawvRvPd54TekK+mk
-         WRDCrjmGZM1mW7A+q4kZbfh82LOLVgHvCIjAvNabRxhJWYU1/Uns0xk1xQk+gDhuQLpC
-         gjEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795019031; x=1795623831;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gja9id1+VOW1RNlfA96nCbcm7qe2Qf7QRAaccXjN1QU=;
-        b=lzpDEsyhvbpDN+x/qAq7oZA/z1SPURdCkRsO+o670KL3+B0RRWOMZIaBSSV3w2SFhB
-         xcBL+XmObbAOd7Q/Ggo1MXmOESPgXxJInu9oIODVm8UsdG6sFBDSmQHc6u+rlx4j/w4+
-         NvX4YamwCYvlSFAuJgu42xkBc9shLRMXN6/+0x0b9FR1d2/NDFeiNONE63OOqeU9kSYR
-         e5CkH/l5wU2H6RiQFztGu8AsoxCHeqjyZYdlKcCYW8K+XraMnC+QG0sFC+iglLXlofeM
-         Ce9IKFkSyI8htA0eO0Af0rNIvtbXHBES0ORpMys2fg2duz01ta9PYxG3iF8XRfLSSqoH
-         ykww==
-X-Forwarded-Encrypted: i=1; AL+hErEKUk08zXTK9F/jukzxwIG2rqpCAY5gSyIxKANoKGK9oOZdaTkIEr4oY1/ZgFPAf27A6r0NAZ9If/mlbdyp@vger.kernel.org
-X-Gm-Message-State: APuU4Z/2OCcAMn/0ONxMH6Uo79DgsPnq2Nnuy4VYJs5CecC0hFebS7HK
-	RMmTg+GSWbjb/mt9j4ZJvspx1u5SsNgKKgLmBJui1OOBZiyJwoLD3NYgoZbI11AZD8tTjFRnczc
-	p1cMmKUHmgpE4IET02hxk+/L5x2B2PtDiErdUm6UYmT9q2rM5RW4PU1eEfBNEZfJIq79b
-X-Gm-Gg: AYBFou38ntOLvtmTycmplxCtc0whG0eWdPJLi8rok+xoKT/4We8mkUpaujMYoklhMlR
-	lUuGz87BWwAedcQELSX8sLnFHSTZ7zp8l3pIh7v7lw/m1kepP70JYvv6TMqk5L6vl2hrzzSQ4q0
-	ejvhpja0/iG/GYvH+58XOcF82sJ7YkIS/qK0VWqBqv8LYGDHhZ0sJFxAEQbaSpLPU4LmpCfTDXZ
-	diu9CJnQRR9EkKFbHpejT6xmC3GtS+tj3a8+eK/cYFPP48zZcdbqmE0dFI/xNmjshQcJRqla5Bu
-	ifbFwfcXxLk+R3w9slCjcIzwIUcq/w5kCsCNnFyo4Cp2PyeuWS5wTRXQlkxONKiYFPF5f5+gVgn
-	32dPYSGEgiNLAz8iOsYjn6ymTHmUY8bSU14tJwi9pnLbzyEgifoklfpVE
-X-Received: by 2002:a05:620a:268c:b0:949:698f:8bea with SMTP id af79cd13be357-949996896a6mr571641385a.34.1795019030546;
-        Wed, 18 Nov 2026 08:23:50 -0800 (PST)
-X-Received: by 2002:a05:620a:268c:b0:949:698f:8bea with SMTP id af79cd13be357-949996896a6mr571635985a.34.1795019029889;
-        Wed, 18 Nov 2026 08:23:49 -0800 (PST)
-Received: from t14s ([195.50.164.66])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7843bd79sm153190055e9.14.2026.11.18.08.23.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2026 08:23:49 -0800 (PST)
-From: Hans de Goede <johannes.goede@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-Subject: [PATCH v2] arm64: dts: qcom: x1e78100-lenovo-thinkpad-t14s: Fix touchscreen power on
-Date: Wed, 18 Nov 2026 17:23:43 +0100
-Message-ID: <20261118162343.16197-1-johannes.goede@oss.qualcomm.com>
-X-Mailer: git-send-email 2.56.0
+	by smtp.kernel.org (Postfix) with ESMTPS id 207AC1F000C6;
+	Wed, 18 Nov 2026 16:24:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795019092;
+	bh=FLHmE0yNJa1Jt3TSGOVe+8qhekufs+6/Lxt/MWi4vX4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=LtJ5mu/ITXdGcgrDYnbPjz8XEhaKSb3H3NaaYxRntqOVPmEiP48UR5uYvH7Yjkojn
+	 XdsQwbg70MUrCnRRbA5WkyKVFB8HcLGJUm4azFeu7M9FoeIPxNS+E2SF9uOX3g2zcu
+	 lzMgBXg8QuKohq05qYyz+oKaGjaRmk+QYfBdwuYxvcvz9SZ8oiaA6H/oefsyFEL9wN
+	 P6KvzDV0TClTN/M9jHZ5cPotaGlpNeu3F1UUd33fQ6ckVFvbBlv3XwSCJblmZSa7HR
+	 4OTeCY/6r521m7fOKUp1vnlduZ2QJtifNIe8oEGHpVfPKEXmi0YgoOnqRkaenQzjAM
+	 Fh5+A/aRQEE8g==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id A35B94AE44;
+	Wed, 18 Nov 2026 16:24:51 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 18 Nov 2026 17:23:57 +0100
+Subject: [PATCH RESEND v6 2/3] arm64: dts: qcom: sdm845-shift-axolotl: Add
+ actuator for main rear camera
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,68 +83,183 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE4MDA2NSBTYWx0ZWRfX4u4Wi5fRjpyQ
- jZORA4bm1j/F81Gv44/db207YxgHP96oHH3YPurxonTLR99LAsRkRnhxF5JWXj/6YeKAVibPkAC
- ZUKM5YDfm5JfdVHbeQ3SHWJXb47Fnyk=
-X-Authority-Analysis: v=2.4 cv=acT0Dhot c=1 sm=1 tr=0 ts=6afdd117 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=rYM_yondQcVyUL2waWkA:9 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE4MDA2NSBTYWx0ZWRfX7DOBLbYXtj9l
- rRN15fGdDUyhJ7vlz+ooIzRb3z7Vq1Zn8OlAln2KoXL2CLY+rMrx1JeiDQWavfu3bnannbmOqSR
- e3V/6QMZbWzi7Ef99QBtMjZDDhzC9MR2/uE6QQ/o5fe9EDJqvVdeZBGrjwdc3i5zcZPm5FpXhLa
- WEBEpYoO1a50pOcP2IfMZvmEZyGe+00QvB7DfuvBv40rmFWy9f5LGNEKAKlnMYo4Su0OPJ4q10E
- 4LhEKw5lPJySEFhZlNLbIilXNmdiw0tBefolMoZjdI6hppLvsubRF/EQcwsrCvrustoAjYAoWDa
- bDumY9drfN+/ilMupAGYV3wrg6LRBP86JkRFqDwLVqI2EPBFQD9gWWdnc0yjS2O21CjaZjLR9nI
- DBQjqsXZ0sON52ItYR4ULLK1IOL9nh1GPgyEax36J1Z6eMhqi/KU0OUQz+ONyoQ7/HdujZ9qPHk
- VRMechv4vdZEVAicUPg==
-X-Proofpoint-ORIG-GUID: o7X8qJs9x6_w3tTqnlFzsrTgGItpTBnf
-X-Proofpoint-GUID: o7X8qJs9x6_w3tTqnlFzsrTgGItpTBnf
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-18_04,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 impostorscore=0 bulkscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611180065
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261118-dw9714v-v6-2-48cfd8ee4c4c@ixit.cz>
+References: <20261118-dw9714v-v6-0-48cfd8ee4c4c@ixit.cz>
+In-Reply-To: <20261118-dw9714v-v6-0-48cfd8ee4c4c@ixit.cz>
+To: Alexander Martinz <amartinz@shiftphones.com>, 
+ Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-media@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3473; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=gHZ8gqtaNh8wddZIfEMQhnQ9mvQzrc6d6pxFqY4z7/w=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq/dFSDVeoU+ogRKSTSq1LtinQlCi1F7xkyuCGe
+ AjJASiz8/6JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCav3RUgAKCRBgAj/E00kg
+ ctsgD/9YYXMWCMb2+IejH9jtrpNb06tLclp/9Ig5zML1AYZPaXhYP5okBacdzQBNGGoFFDrcANI
+ ihhK0n7RVoPlA2g1c8qNXnHBGFD1X/sycxhNpGsMux5Vq/rTJ2rPRwLWf/oN+K3MCS2lCiY2iD5
+ 9d/MOrKjdBTfdk+HnGfdO0JXLOEWkc6nXsR6HbpqoP7UW2GJ58tBFGSdgixClI6Bzx+E0t6lqh/
+ 3gvRAlva0huNuVW9yQ12qYht2oZoprgPKPf/OqaqvpEgdAxFUnIRGNPEfx3JhPfY4VqJpvhi1SA
+ P2x7AKjn9LMIHmnuLCGciFRm6CeJnXf3Y3cc7KD1e1UrHP0mHUnDbG/i02bZPpfXpFFGZdmGADp
+ 6d6dEui2w21JK9hSEbEseCdLWfIH/fcADOFBDxRYcjr1PHniW6IKTWfPhW7y7imye5BFz65U3le
+ /dPL3x7T48mu+cCr48fhGGzp61skv6BQhcKFjbBT49tBNLCxdKQiqC7ckRwd6SRrMJ8u2D66ugj
+ 6OJHZ7+cUG3eTqQx0WV5exshwQ8elmUCKNr2dfGoXei4vg6fs7LQ9Zp/gLrJdFAyVbAo0eeq7oc
+ iMao9X5r3SlJQCqmEdy0BD/R2U6aedxiRc9JwbL6rE6s+2+z670fSC5R8hYwJxrUFAlndk+DYP1
+ GVGt/weotWRz8nw==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
+Content-Transfer-Encoding: 7bit
 
-When the i2c-hid driver is builtin the touchscreen on the ThinkPad T14s
-fails to probe at boot. When the driver is builtin the touchscreen gets
-probed immediately after being taken out of reset. At this point
-the touchscreen is not ready to talk on the I2C bus yet, causing
-the probe to fail.
+From: David Heidelberg <david@ixit.cz>
 
-The touchscreen on this laptop needs a delay of 200ms (taken from ACPI
-power-sequences) before it will accept I2C transfers.
+Main rear camera uses Dongwoon DW9714V actuator. Add regulator and
+actuator node.
 
-Add a post-power-on-delay-ms = 200 property to the touchscreen DT node
-to fix this.
+Since the actuator sits on the CCI I2C bus, whose 1.8V side is fed by
+vreg_lvs1a_1p8 and there is no place to describe that, keep it always-on
+for now, until bus-supply exists.
 
-Fixes: 7d1cbe2f4985 ("arm64: dts: qcom: Add X1E78100 ThinkPad T14s Gen 6")
-Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
-Changes v2:
-- s/touchpad/touchscreen/ in commit msg
-- Add fixes tag
----
- arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts | 50 +++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-index 7c9424248120..16b25e596f0d 100644
---- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-@@ -1349,6 +1349,7 @@ touchscreen@10 {
- 		reg = <0x10>;
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
+index 1b0eaeafbd517..f14fe8e175e96 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
+@@ -81,16 +81,34 @@ ramoops: ramoops@b0000000 {
+ 	battery: battery {
+ 		compatible = "simple-battery";
  
- 		hid-descr-addr = <0x1>;
-+		post-power-on-delay-ms = <200>;
- 		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
+ 		charge-full-design-microamp-hours = <3850000>;
+ 		voltage-min-design-microvolt = <3600000>;
+ 		voltage-max-design-microvolt = <4400000>;
+ 	};
  
- 		vdd-supply = <&vreg_misc_3p3>;
++	/* SGM2036-2.8YUDH4G/TR */
++	cam_main_af_2p8: regulator-cam-main-af-2p8 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "cam_main_af_2p8";
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++		regulator-enable-ramp-delay = <100>;
++
++		gpio = <&tlmm 8 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_main_af_default_state>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_bob>;
++	};
++
+ 	vph_pwr: vph-pwr-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vph_pwr";
+ 		regulator-min-microvolt = <3700000>;
+ 		regulator-max-microvolt = <3700000>;
+ 	};
+ 
+ 	vreg_s4a_1p8: pm8998-smps4 {
+@@ -403,16 +421,23 @@ vreg_l28a_3p0: ldo28 {
+ 			regulator-min-microvolt = <2856000>;
+ 			regulator-max-microvolt = <3008000>;
+ 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+ 		};
+ 
+ 		vreg_lvs1a_1p8: lvs1 {
+ 			regulator-min-microvolt = <1800000>;
+ 			regulator-max-microvolt = <1800000>;
++
++			/*
++			 * Supplies the 1.8V side of the CCI I2C level
++			 * shifter; keep enabled until a generic
++			 * bus-supply property exists.
++			 */
++			regulator-always-on;
+ 		};
+ 
+ 		vreg_lvs2a_1p8: lvs2 {
+ 			regulator-min-microvolt = <1800000>;
+ 			regulator-max-microvolt = <1800000>;
+ 		};
+ 	};
+ 
+@@ -441,16 +466,34 @@ regulators-2 {
+ 
+ 		vreg_s3c_0p6: smps3 {
+ 			regulator-min-microvolt = <600000>;
+ 			regulator-max-microvolt = <600000>;
+ 		};
+ 	};
+ };
+ 
++&cci {
++	status = "okay";
++};
++
++&cci_i2c0 {
++	/* sony,imx519 @ 1a */
++
++	/* rear camera actuator */
++	camera-lens@c {
++		compatible = "dongwoon,dw9714v",
++			     "dongwoon,dw9714a",
++			     "dongwoon,dw9714";
++		reg = <0x0c>;
++
++		vcc-supply = <&cam_main_af_2p8>;
++	};
++};
++
+ &cdsp_pas {
+ 	firmware-name = "qcom/sdm845/SHIFT/axolotl/cdsp.mbn";
+ 
+ 	status = "okay";
+ };
+ 
+ &gcc {
+ 	protected-clocks = <GCC_QSPI_CORE_CLK>,
+@@ -699,16 +742,23 @@ &slpi_pas {
+ 	firmware-name = "qcom/sdm845/SHIFT/axolotl/slpi.mbn";
+ 
+ 	status = "okay";
+ };
+ 
+ &tlmm {
+ 	gpio-reserved-ranges = <0 4>, <81 4>;
+ 
++	cam_main_af_default_state: cam-main-af-default-state {
++		pins = "gpio8";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
+ 	sdc2_default_state: sdc2-default-state {
+ 		clk-pins {
+ 			pins = "sdc2_clk";
+ 			drive-strength = <16>;
+ 			bias-disable;
+ 		};
+ 
+ 		cmd-pins {
+
 -- 
-2.56.0
+2.55.0
+
 
