@@ -1,112 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795001326;
-	b=K/QvABCIhfsX79WlgoCGu/SJHx0IjUV4RywCB2pI8wmifTcOCiVv9c6Sjy8aG8De7GFd
-	 SlgDGTtfemAkFD+dgkAkowjnc3GOVvS4PXNzWgEchXRdrCxn5og7h0Jg0UIJEQDFxH9zb
-	 4FxeCUQsA9Bz7gCIHYmZkdRyYMbNkLAc3VlQHtYQd7+3RNL9Tisg1JYxVfaiEkBtjwj40
-	 ECGN/+1DhoCP6aE1k72zhyTzABe8JVLJiBhdfKw/lMB9K8RbEJyKkfkEgDObf3acMSa+M
-	 b02v3xcVLZJF/5ECtRqjOd2WHHDvDLMAqTNR02XsWSSGdy3Y7NpDq/VYDOJUqA4Z/sQ==
+	t=1795001614;
+	b=qH7C8jTYD+wo8E17JyQ2m/xkH1uIxYqyd+7n92gLlF8dOL98WxndpCOSxsQPDpAJl65A
+	 31GBVuz7c8U0yZo9BzO1IUnZWxUlzPiOkDtqd6CZ2U3PhsatTNxSTDXjGVgMLGq3wsONf
+	 VHTfgCpkjXgvXeYhNlDWxr7Zb/J0oanTNnaQMQwFdSUcRLRXdLDlCWn0n0vXLWjFDJo1j
+	 UJGrNYtCzP+myQBBW1zZ/AwCbcqP4hjhh6R2CWUqN6+HdGOO1w1mTPoofyYX7kgyjcXRo
+	 XLcMEcWjGV+lCuz9y57x9Rirl5R7iL9H/pJwS11QAvTGFXPx59tDnZe96o+LnTCJ2/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795001326;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=nG1apVdiiVH5xMYZQ+1A0shEqwCnl5EZjE+Zf2il+6o=;
-	b=eYtIUDWUvwE5GoCLSUSMcIYDXbaufpHF2FqPhu9qBicQnZKvXVI7TeFyH8Tvt/WPTk2D
-	 nHHe3lTDVtQGu/4yYnlR2tIL97BSHzLEMYrQJD3HYps/QCXXBk8dJkCnA2wviS4OkU5b+
-	 /jvQOhxMRRNelBCUU4h2PlAuOsH6iUBkWUX1xJENBVS2KXD958FFLkjVoZKC0FWL3jy1V
-	 YihhUb+vR8+J714tkUlaYlSSr8GHYFY5+HnoQ5eONHmwT/64A2ZOKPRBzbj50JrOLt99S
-	 KTMA1JLGqI9DMry5QbQiHqUqEmx6uU20MOnyxSGu1IYCrTPhpbUTTKrKfbIz/u6AjbQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795001614;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:Content-Language:To:Cc:References:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=FkG1M7L3zIjGXumIoOOlMZR+O73PQTM6nqG0PHku6sU=;
+	b=Yzz0y6avUpmpFvJo+WeOeLxi9bVOzHuEjJI9bX3PjoRy7PkaDwo9/g7q/NStj4m8zd60
+	 //1OikksBxrSgorNZUQN3j+aC5e3oFCtY609LZWGg7TFb1Ks9/2vSeZnR+xMBbXLsm4CO
+	 /zbcDbQibhlUCrsRBj3OEwRhxying8DJBnUue/10ta0IsJOCmJ8Rv/fZKI2n8Im9mcwdm
+	 aYs2HVbuCpyciXnmDszdUiuiTTwYnzSIDIyR3o7gopFPTr0eewn3lcTotfmxu0ajSfU6y
+	 pDNxK+mm1sC9Parmku7rKZ8KD1G8TEXl75fxE9k6cLbrWi7OIGl6ndeujKSzd8iOsDw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ntylGciU;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NoTaO4RE;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AA3C606A337
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 11:28:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6AA3C606A337
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=eyo362ur;
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59731606A31C;
+	Wed, 18 Nov 2026 11:33:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59731606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ntylGciU;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NoTaO4RE
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AIBL196354435
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 11:28:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nG1apVdiiVH5xMYZQ+1A0shEqwCnl5EZjE+Zf2il+6o=; b=ntylGciUuJZfpWf0
-	c9UM6MyqepvVZTCUP0ikndK0p570RLatJXjQ8tNCA42mvik8m09Q7kgxjCpYLS5w
-	3be24pUUqP+OfFXhNIl/dv7A8fLLeH6RfrBGHOO/30xV0aBqh2ZfzKxI677TTEDd
-	KcbZ5VbENV+w640ft3HbjuEvm/246WpbBNMsmpm1min/ZK1eV/GhMmmg5YZH3KU0
-	zAgVZSwH03j1TilDVNNqaeyEAJ8AqtYa9gTsWf9+netIh/R8bQgtN/NKSM5Ri6RX
-	MunrHSIsDg22tgIDcwR6X4XJZb2Z0OVbk665hfMAIpeETNnFmWOLuL8vK6pqqlau
-	GQpvbQ==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j0yv8trgu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 11:28:45 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-30bcb065bfdso1091599eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 03:28:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795001325; x=1795606125; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nG1apVdiiVH5xMYZQ+1A0shEqwCnl5EZjE+Zf2il+6o=;
-        b=NoTaO4REEb9T1/yy2aYwwQCVR409nQ7wTShxB4gtJ8U/OW5PfgaUONKvVLtTb2CVr1
-         50RcLXlF9+Z4pz9bDGYoRvXFLT9/Y8aj2FBnBKaMtkXH0qsCjRnPXqezeEvlBJwb0IcT
-         Yt82bwHCyTUFZmqrvjOc6iyS8ZyWip5ebCafzkfi+uzk8HYYl2U4gDjhEVnoz4einNBo
-         QyoNokoRzRhxBRxU6L/w4hFCpMDKANZrvcN2XQV5GsCejOLwMCYtADaE2w2p0EGhurHq
-         4MUcjK1AaEPZiYe2vQEm6S98XFI40IdBDf9a/UfWVDzjx+ltweHFBzx2XFz2FvjxyXct
-         VVtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795001325; x=1795606125;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nG1apVdiiVH5xMYZQ+1A0shEqwCnl5EZjE+Zf2il+6o=;
-        b=ojHzsL9jI6MW6sPwksjbp4Ie8CJZ7Au9aPp6Pdl64/ZwTmvxCVvf2YKsdR0y711fJ7
-         l7l8AErGi82qxNAkCJEgv9aQEMOTIgboqW3ctx2NhtZ+iLC6ExX6W/875vALbzyWEwb5
-         v6Y0AyjQo0k18QbzNZbaDMjnMorAKdLiOu05El4aBQH6pGSYcLzmW5VNtkcUjb971xMh
-         v0wQi4q4nAv7ZhTAqDAv4az82yvYyJgkmIFG32gPWcBqt4elKAh+WlOPuiQxST6bbXVK
-         AFuKTGxlh0TY8ytz7ihFX3HcsXC9Le4WlmtPjENisw6VIKHyIrJJvAtnYUPcB+R6rxrv
-         RCng==
-X-Forwarded-Encrypted: i=1; AL+hErF7rLvEg6T5tSCU7A3fPtoU0rmmdbSQltSB9IPMIszsRMTPBqzMW+8AkyxqqxE2XcJH2RtCGfkyNs6eoKpo@vger.kernel.org
-X-Gm-Message-State: APuU4Z8mfU8dD80J1bJmybyhx4xqvFLJ2Wp1DaGtavvopnEe6q0E3fW5
-	/AMvPaoNDIP8uO+VN/kf2gXW7ooe1B1dvH7JTfLcrhrWiVF+XzT5zrzXIlKsncmgqhHFxBWHwgi
-	Zu0D0DsSI46mmqyeQ8EtVC9Xm8BizFFnrtWkMqPhKcocY4b20ZAZEAKr26GPxmTm13e7B
-X-Gm-Gg: AZFdTZdafG48bol5yloxFiAf0dpeojhMMkqdvYPlxuN6aomk8I0U4CBUsj/NYG/26vs
-	zbnJVE/Erou061mCFnUCYprapXrKfHm3QCls+7CTe0QF4Myh//bMb+HgB+VudfEsCHH1/LR/UCR
-	qYrtqrli9AXV54UumVEoTgbDG+4iAMQvz9smhN5kkUklXUvVSGQeBi8mnvNKzXdw79ueV2wFoax
-	z4MW0hNl1u7Po5ArRwRc0A31l2d5W3vrqayf9Q5ruhsK1+8p3nh0f1K5N7y64HpoNlnWapmKiQt
-	W3lopTwwMjif5yxCDpDk8nuvIGTOAPs3SrD95zAkCnNBKpaZ2CY5IRpuic72HLGe6ll10MKSwS+
-	ZCafwISIEyOOxGPRg311G4cXKXZeDEzuAk+fh2kVbVm++QnguNHEdiW6FhXU8viHo8tuXSc7lLB
-	LTD0CEyg==
-X-Received: by 2002:a05:7301:18aa:b0:381:e45d:be08 with SMTP id 5a478bee46e88-38280a3c1e2mr2400862eec.21.1795001323972;
-        Wed, 18 Nov 2026 03:28:43 -0800 (PST)
-X-Received: by 2002:a05:7301:18aa:b0:381:e45d:be08 with SMTP id 5a478bee46e88-38280a3c1e2mr2400813eec.21.1795001323169;
-        Wed, 18 Nov 2026 03:28:43 -0800 (PST)
-Received: from [10.204.100.88] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a72eb2f3sm8539071eec.18.2026.11.18.03.28.34
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 18 Nov 2026 03:28:42 -0800 (PST)
-Message-ID: <1fcd89e4-feaa-4072-a5c4-56318b1d8475@oss.qualcomm.com>
-Date: Wed, 18 Nov 2026 16:58:32 +0530
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=eyo362ur
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 693131596;
+	Wed, 18 Nov 2026 03:33:30 -0800 (PST)
+Received: from [10.57.70.68] (unknown [10.57.70.68])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7F90C3F673;
+	Wed, 18 Nov 2026 03:33:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1795001613; bh=csl8kCTvz4XLKbFvRoYYYYrgaV2LpO+qLRWnlyKVl84=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=eyo362urxliBQcBcqOcEl9e1QlQWWWQHXvpyHTu/vd/bS3HdZH8Bd4wi6QQ4+0ddq
+	 vYaGDIBsof+HNIzGdS0nbDVtuXoFA+k5vXjogbBUsVR1xSuvVlaEQfHOOCEl/Xe0HU
+	 E9Hg+ss0vh+eH7NXWRpy7lSLWwc7qY8stVcYjyZY=
+Message-ID: <878eabf1-0742-45ad-892a-4c6a7b615d1f@arm.com>
+Date: Wed, 18 Nov 2026 11:33:28 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,123 +54,162 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 3/5] iommu/of: Make OF_IOMMU depend on OF_ADDRESS
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: "Joerg Roedel (AMD)" <joro@8bytes.org>,
-        Vasant Hegde <vasant.hegde@amd.com>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        Jean-Philippe Brucker <jpb@kernel.org>, Rob Herring <robh@kernel.org>,
-        Saravana Kannan <saravanak@kernel.org>,
-        Tomasz Nowicki <tomasz.nowicki@caviumnetworks.com>,
-        Eric Auger <eric.auger@redhat.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Joerg Roedel
- <jroedel@suse.de>,
-        Srinath Mannam <srinath.mannam@broadcom.com>,
-        Oza Pawandeep <quic_poza@quicinc.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Alex Williamson <alex@shazbot.org>, iommu@lists.linux.dev,
-        linux-kernel@vger.kernel.org, virtualization@lists.linux.dev,
-        devicetree@vger.kernel.org, kvm@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-References: <20261106-add_iommu_ranges-v7-0-5c0f72083e52@oss.qualcomm.com>
- <20261106-add_iommu_ranges-v7-3-5c0f72083e52@oss.qualcomm.com>
- <yvkcq3zirv5tz2amfbk52a7smbsqs7jrzdisq3qxzw6xkoxklu@rplx3gvxhcoz>
- <dd62aee3-4f23-4904-827c-7f776c4be60a@oss.qualcomm.com>
- <vwg74npvbwdhepp4uownnzlj2ybpiknfktfvrpy6462rdw7snd@tj4vgnn3dtml>
-Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <vwg74npvbwdhepp4uownnzlj2ybpiknfktfvrpy6462rdw7snd@tj4vgnn3dtml>
+Subject: Re: [PATCH v23 3/8] coresight: tmc: add a function to switch the ETR
+ to a free etr_buf
+Content-Language: en-GB
+To: Jie Gan <jie.gan@oss.qualcomm.com>, Mike Leach <mike.leach@arm.com>,
+ James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Mao Jinlong <jinlong.mao@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>,
+ Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
+Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com
+References: <20261118-enable-byte-cntr-for-ctcu-v23-0-67fd9db6bc0e@oss.qualcomm.com>
+ <20261118-enable-byte-cntr-for-ctcu-v23-3-67fd9db6bc0e@oss.qualcomm.com>
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+In-Reply-To: <20261118-enable-byte-cntr-for-ctcu-v23-3-67fd9db6bc0e@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Eu1HPicA c=1 sm=1 tr=0 ts=6afd8bed cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=HfRq2NBFtK1Lh0_1ebIA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-GUID: Au-Gf3mZzoS48gcNxVBrhHsz-0uHNPYH
-X-Proofpoint-ORIG-GUID: Au-Gf3mZzoS48gcNxVBrhHsz-0uHNPYH
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE4MDA0NSBTYWx0ZWRfXx3doODQHlJK8
- wIwK5s58rSd9pnR0anYLTVObb8ALeCwKJfVn47midZZPiDsCezk1H42tsDbZ4XSbgMQButdTeUq
- S55Yu8qMfUvJFybNF3XvF6EMnO6w3/zdCCTUtynPT6te7fC4dKlOzicUJeugjKLThiJhHjSZali
- aRcu1c/Q9Piomqs5FO02twxFyoFFf4wLEzcEDafre+WN61JIizl3B8SxamHg8q+ezNKdRA8v1Vc
- qkXTvXqIe8dr7+A2aFhH40/XMTViUeVes9UT/CMl8EE5KknpzfxhTtkyepwRGBn0roHT/K3SbPc
- eCF+pONMUMNgygFOcpXUsemTc6XZnGrwQYiMQ48xmef078bk2HLTdY1JK+6hAfruFrUZMSemBO0
- PnNWisl0r4Dnkg3RahKdaZ2ItTirQz0cmQJqRnIgHzeEvqoFtpDiUvLmCKQlPfQQ1ArjYtPqUV3
- KgxEWaTDNNTfc3baSeg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE4MDA0NSBTYWx0ZWRfX/TzsrB2NE354
- 0TFvVh8vjs7kuijH7gKxeqKcAhPfMp4il1V1ifwOgO41S9KP/musjXnEoAdHWvTKV57HYWQJq8U
- pvKMgXewGKUuQoI0N2Bm6PW1bkmT26g=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-18_03,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 spamscore=0 suspectscore=0 bulkscore=0
- lowpriorityscore=0 malwarescore=0 priorityscore=1501 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611180045
 
-
-
-On 11/18/2026 2:32 PM, Dmitry Baryshkov wrote:
-> On Thu, Nov 12, 2026 at 07:10:38PM +0530, Vikash Garodia wrote:
->>
->> On 11/11/2026 6:33 PM, Dmitry Baryshkov wrote:
->>> On Fri, Nov 06, 2026 at 10:44:26PM +0530, Vikash Garodia wrote:
->>>> The OF_IOMMU code relies on OF address parsing helpers, but the
->>>> dependency on OF_ADDRESS is not expressed in Kconfig. As a result,
->>>> of_iommu.c contains CONFIG_OF_ADDRESS guards and a __maybe_unused
->>>> annotation to handle configurations where OF_ADDRESS is disabled.
->>>>
->>>> Make OF_IOMMU depend on OF_ADDRESS and remove the now unnecessary
->>>> preprocessor guards and __maybe_unused annotation.
->>>
->>> Why? What's the problem that you are solving? Why is the current code
->>> bad?
->>>
->>
->> The commit describes the problem as "The OF_IOMMU code relies on OF address
->> parsing helpers, but the dependency on OF_ADDRESS is not expressed in
->> Kconfig"...and instead the code had checks for config or __maybe_unused for
->> cases like sparc.
+On 18/11/2026 08:02, Jie Gan wrote:
+> Add tmc_etr_switch_buf_node() to switch the ETR to a free etr_buf of the
+> etr_buf_list without disabling the sink. It returns the node of the
+> switched out etr_buf, so its synced data can be read while the ETR keeps
+> tracing into the new one.
 > 
-> What is wrong with this approach? What is the problem? There is one, but
-> please state it in the commit message. Something is wrong, otherwise you
-> wouldn't be fixing it.
+> Stopping the ETR, swapping the etr_buf and restarting the ETR have to be
+> done in one critical section. Otherwise tmc_disable_etr_sink() can run
+> in between and leave drvdata->etr_buf out of sync with the hardware.
+> Provide the sequence as a TMC helper, so callers don't need to know
+> about the locking of the ETR state.
 > 
->>
->> It was discussed in prior rev
->> https://lore.kernel.org/all/20261104160346.GD3951195-robh@kernel.org/
+> Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+> ---
+>   drivers/hwtracing/coresight/coresight-tmc-etr.c | 65 +++++++++++++++++++++++++
+>   drivers/hwtracing/coresight/coresight-tmc.h     |  4 ++
+>   2 files changed, 69 insertions(+)
 > 
-> That's fine, but the reason must be capturedd
-> 
+> diff --git a/drivers/hwtracing/coresight/coresight-tmc-etr.c b/drivers/hwtracing/coresight/coresight-tmc-etr.c
+> index e9213f456834..5032f5598e15 100644
+> --- a/drivers/hwtracing/coresight/coresight-tmc-etr.c
+> +++ b/drivers/hwtracing/coresight/coresight-tmc-etr.c
+> @@ -1224,6 +1224,71 @@ static void __tmc_etr_disable_hw(struct tmc_drvdata *drvdata)
+>   
+>   }
+>   
+> +static void tmc_etr_reset_sysfs_buf(struct tmc_drvdata *drvdata)
+> +{
+> +	u32 sts;
+> +
+> +	CS_UNLOCK(drvdata->base);
+> +	tmc_write_rrp(drvdata, drvdata->sysfs_buf->hwaddr);
+> +	tmc_write_rwp(drvdata, drvdata->sysfs_buf->hwaddr);
+> +	sts = readl_relaxed(drvdata->base + TMC_STS) & ~TMC_STS_FULL;
+> +	writel_relaxed(sts, drvdata->base + TMC_STS);
 
-Ack.
+see below
 
->>
->> Regards,
->> Vikash
->>>>
->>>> The only architecture supporting OF without OF_ADDRESS is SPARC, which
->>>> does not use OF_IOMMU, so no functional change is intended.
->>>>
->>>> Suggested-by: Rob Herring <robh@kernel.org>
->>>> Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
->>>> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
->>>> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
->>>> ---
->>>>    drivers/iommu/Kconfig    | 2 +-
->>>>    drivers/iommu/of_iommu.c | 4 +---
->>>>    2 files changed, 2 insertions(+), 4 deletions(-)
->>>>
->>>
->>
+
+
+
+> +	CS_LOCK(drvdata->base);
+> +}
+> +
+> +/**
+> + * tmc_etr_switch_buf_node - switch the ETR to a free buffer of the etr_buf_list.
+> + * @drvdata:	drvdata of the TMC device.
+> + *
+> + * Stop the ETR, hand over the current buffer for reading, switch to a free
+> + * buffer and restart the ETR. All of this is done with @drvdata->spinlock held,
+> + * so it can't race with the sink disable path.
+> + *
+> + * Return: the node of the switched out buffer, or NULL if the sink isn't in
+> + * sysfs mode or there is no free buffer. The ETR is left untouched in both
+> + * cases.
+> + */
+> +struct etr_buf_node *tmc_etr_switch_buf_node(struct tmc_drvdata *drvdata)
+> +{
+> +	struct etr_buf_node *nd, *curr_node = NULL, *picked_node = NULL;
+> +	unsigned long flags;
+> +
+> +	raw_spin_lock_irqsave(&drvdata->spinlock, flags);
+> +	if (coresight_get_mode(drvdata->csdev) != CS_MODE_SYSFS)
+> +		goto out;
+> +
+> +	list_for_each_entry(nd, &drvdata->etr_buf_list, link) {
+> +		if (nd->sysfs_buf == drvdata->sysfs_buf)
+> +			curr_node = nd;
+> +		else if (!picked_node && nd->is_free && !nd->reading)
+> +			picked_node = nd;
+> +	}
+> +
+> +	if (!curr_node || !picked_node) {
+> +		curr_node = NULL;
+> +		goto out;
+> +	}
+> +
+> +	__tmc_etr_disable_hw(drvdata);
+> +
+> +	/* The switched out buffer is free again once it has been read */
+> +	curr_node->is_free = true;
+> +	curr_node->pos = 0;
+> +	curr_node->reading = true;
+> +	picked_node->is_free = false;
+> +	drvdata->sysfs_buf = picked_node->sysfs_buf;
+> +	drvdata->etr_buf = picked_node->sysfs_buf;
+> +
+> +	tmc_etr_reset_sysfs_buf(drvdata);
+
+Why are we doing this, when the following __tmc_etr_enable_hw() already 
+does the right thing ?
+
+Suzuki
+
+
+> +	if (__tmc_etr_enable_hw(drvdata))
+> +		dev_err(&drvdata->csdev->dev, "Failed to restart the ETR\n");
+> +out:
+> +	raw_spin_unlock_irqrestore(&drvdata->spinlock, flags);
+> +
+> +	return curr_node;
+> +}
+> +EXPORT_SYMBOL_GPL(tmc_etr_switch_buf_node);
+> +
+>   void tmc_etr_disable_hw(struct tmc_drvdata *drvdata)
+>   {
+>   	__tmc_etr_disable_hw(drvdata);
+> diff --git a/drivers/hwtracing/coresight/coresight-tmc.h b/drivers/hwtracing/coresight/coresight-tmc.h
+> index 7c604b9f92e5..30b15c38b080 100644
+> --- a/drivers/hwtracing/coresight/coresight-tmc.h
+> +++ b/drivers/hwtracing/coresight/coresight-tmc.h
+> @@ -212,12 +212,15 @@ struct tmc_resrv_buf {
+>    * struct etr_buf_node - node of the etr_buf_list
+>    * @sysfs_buf:	Allocated sysfs_buf.
+>    * @is_free:	Indicates whether the buffer is free to choose.
+> + * @reading:	Indicates the buffer attached to the node is being read by
+> + *		the user.
+>    * @pos:	Offset to the start of the buffer.
+>    * @link:	list_head of the node.
+>    */
+>   struct etr_buf_node {
+>   	struct etr_buf		*sysfs_buf;
+>   	bool			is_free;
+> +	bool			reading;
+>   	loff_t			pos;
+>   	struct list_head	link;
+>   };
+> @@ -465,5 +468,6 @@ struct etr_buf *tmc_etr_get_buffer(struct coresight_device *csdev,
+>   extern const struct attribute_group coresight_etr_group;
+>   void tmc_clean_etr_buf_list(struct tmc_drvdata *drvdata);
+>   int tmc_create_etr_buf_list(struct tmc_drvdata *drvdata, int num_nodes);
+> +struct etr_buf_node *tmc_etr_switch_buf_node(struct tmc_drvdata *drvdata);
+>   
+>   #endif
 > 
 
