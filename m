@@ -1,56 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795022488;
-	b=mOpz0SKWRhHe+LIkglE5PMhA0sjRugmbp579Wn0oLSn5Nsd6Bvrr++spOJCrwUMfWJSK
-	 O4xaE/wJTnndSw2ZqK0aXZfKjFQ7wfBctaKxM12pL5YpXZ2PHer853E3YOunj6JvlJall
-	 2ot1aWhDO8b8bcd73szmVqQIQ9Xb0rBSQ5PGKXXPv99ByPtX3yyqVR7yCd9A+X264TL++
-	 MldVh4kfhA8kI/01uiVnm5FzpC9hN+h7JClNiIIR86LSpGgU2HkVLgCGQ2M/JiLfSKbhw
-	 eGpGcvpnbSabpz0EGpFX+YOC+qAxexTxqQMFmsaXEh4aAMndL0EGnQ6h80XHkABKPNw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795022488;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=lWq+h9eeWuqpYIRpLSpbfHl49BeBPQNL7S4WHdN0ecI=;
-	b=KNlHABTw9akmTa03cit5U1b6ZxpGv6pI2pHmLv3c3e73AtyXk8igM8xn/3y7ZBX30zRk
-	 QghaU5NvhBn56wRT2nWF4y94OlPYpOobtCrzdWG83+G0Wew+nGDQ09Lm4OXDGPpCEzIeL
-	 NV+h0rW6dBfUYNwnxyCR/K418m4yF5U4pPNkWk9s42rQgjvqbmLEzAX1RVW1t7DTvfYYz
-	 2rrvBP0wPvDrW8Pj/ZNaof8Lbk1rAgr+Rdq+40AsQApHwccsEWNJSd1RE88aZzJMMU9vG
-	 fsnw0I2qFpQ/gGyFB6x+4L/q5a4JbpMSpAuW5cB9yQqYdn8ZywB+BOFxFaPfMc23z6Q==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b="v8cfi9/d";
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795022746;
+	b=OO266iAjABiCGq9tMwl3RtRDkTzkKM+yfg8JthR/8UqjyDS1R6yb/ysZD41lyRtIR4ql
+	 CZxXbT2TeVdZ51SiiVVSDL7bjbyxr2DW3U6kDbjz/2z59ZbnpKS83Cpskfe5n1okSn6ja
+	 588F215KwNF3wy72emsmq6UBjsiHB5HNXopVu4emEHQSuagcJyW/JY9Lr6JEflnw8Ta/O
+	 84ex282qmUBP7u6SumE5XchIrRTfNpD+1iAFfDZ9EhTVoC4USf+CxY6uRKoF8gaI2AGic
+	 /9N/DOjDw8LzoADgjvsJNWaAqXm1bfxMRh5O6HbU5jDcRddC2anZcK62jzTCCnfCL2g==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795022746;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=aeD5uCDGesSovlbMQ/jFI6qOUKSvFgQeSaLSjqHk7Xw=;
+	b=Dm18W8OcbjpraKdcDD9lJLDjLhfsICRjeGBdL3Bl3YMCIVLIH6Pp/t5Led3UUacOSY1x
+	 lVS73nQlRiDq6fCHtMH4zfqcEMfbRJL9XW30jx7hFfRYf9+VA+j2hbGN0hSNzoWnX8uH4
+	 ZoH6T0CsPaFU2Jiax2XJwjOH2gYpDHOMYNKY4Sl7Qva2tyhCWD4UQwPtW7UzDTaGLUE+B
+	 xLPUmyfin2NzVftq7fD40EdaE8Gu/YIc72U1CrRRS+IvUpAqm6NsnV2gOEkJDFdk27sG8
+	 R5E5E8+24K+aO0HWN9f/SFsfzGp2IywnVr/dS5Ce9wO7UiUCIOXzGuZIKOch3UXcoJg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=faUcQm8+;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE55860A2616;
+	Wed, 18 Nov 2026 17:25:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=faUcQm8+
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795022746;
+	b=LaQk/Ii6LopjwdAqmePPWBHjlN+XPyWZMa6Sj6/UzQRcdTK99ryeZpTugMGTvD+NbpNN
+	 IZRev0bnI1s3GSjVbtBhh7XL0lZnmIZ/qoDoYrGgET4tJ7t2zt+zrLNE0iI2feNCb0rra
+	 Us073UCEwUz9kfA5OstMRYmqt07eEfAq3MfGOcf6AXYXOIwnBEMP2LpW8Rm3E6IDjO4Rc
+	 SJJbVApfdGEAlLAnTfb2c6iTC5/0nOnZWafWcL+0AEuo5XOzFz7Bmn78blu+z1uZyBo8n
+	 3tN4FPf6g2UQfDmowcArciyTXpJZvb5nvQZfmt2hXFjOrRAM/oXCG+iArDXCokojzUg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795022746;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=aeD5uCDGesSovlbMQ/jFI6qOUKSvFgQeSaLSjqHk7Xw=;
+	b=OVmMhajHiYPLZgdgNxsvE9RsTVEUQG2PeDW2E+WaEjctWqULAxr2IQwmF3qnSwGHugSl
+	 hItTyFN3AEpda3zLyHo3OJOcJ5RUYa6eetR9WMO200JCCp5UyPHoUqR1kJMmJLikt31j1
+	 kTd+0btmYlfJlvlsOup0Ua4AHo92K2NLiNaSmg/j/KqP0q4NYt9gnOEL0N0v4LDYXtrjg
+	 yyZ+qAzEOl0sOhf+X3L6Psj45VZGnPbgyYcPi746ls1JnVoAzzKRAgXL9gtzzldQSgPHQ
+	 LG9QGfC+qjoL5IE1Q34oukznqY6FGuLpjsmI3D5TXBheLt8Yv9+YxZPSHTKkXmFAXhg==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B096E606A33D;
-	Wed, 18 Nov 2026 17:21:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B096E606A33D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=v8cfi9/d
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 527CB53406BA;
-	Wed, 18 Nov 2026 18:21:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1795022479;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=lWq+h9eeWuqpYIRpLSpbfHl49BeBPQNL7S4WHdN0ecI=;
-	b=v8cfi9/dImiLlSmbZQLnLiUS4IOoxTDyg78fDefnS7eTBB8bAWLog6eeEQfh3QU4R55hLW
-	UhG1csp2GWvmKrg/tJSVHBHaS9jbVKe00tEbMYeIVkvt1xbXmjUjNsR6iiFYPmpGvv3F3U
-	4n9PR3sUzPOhR3NCyFFCfr13XnEhy+c=
-Message-ID: <fabeba76-a32e-4a50-a625-0d16bd69bc59@ixit.cz>
-Date: Wed, 18 Nov 2026 18:21:18 +0100
+	by smtp.kernel.org (Postfix) with ESMTPS id AD0811F000CE;
+	Wed, 18 Nov 2026 17:25:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795022746;
+	bh=aeD5uCDGesSovlbMQ/jFI6qOUKSvFgQeSaLSjqHk7Xw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=faUcQm8+kQi6Fg0JtJC8e3PzxMrNvBees4MpOGJkBt+T3RQ2+CSTWCVRp5WBDieiU
+	 YlI6jEVpcvtjMGeJSnEqoiPy2knA3inU8xx6Tin41ywESZL0USbTsUWBh2nI8C+PyT
+	 a1CNsb8n8udvqzxZEpj0+87YF+/jbquCwLynmUDakKfQN2PL5syZ14grqVCrzUrnNZ
+	 Muwl2yeAftB0qrnRHZb81zYA7Pyw9JboearWzUBlvlvj/jWRfUpPRwTq9Zz3XiW775
+	 17a/jNAH6dWKgzyeXDRqb+TRfpcKpRwmO7MuXUllSARIci44F7oJD9AZ0vgQ99LxQo
+	 zOXvjzLQEwKhQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 35AAB4AEE6;
+	Wed, 18 Nov 2026 17:25:45 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 18 Nov 2026 18:25:37 +0100
+Subject: [PATCH v2 04/12] dt-bindings: regulator: qcom,usb-vbus-regulator:
+ Add pmi8998 and pm660
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,99 +83,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] dt-bindings: regulator: qcom,usb-vbus-regulator:
- Add pmi8998 and pm660
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Alexey Minnekhanov <alexeymin@minlexx.ru>, Robin Snyders
- <robin@snyders.xyz>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Casey Connolly <casey.connolly@linaro.org>,
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261118-pmi8998-vbus-v2-4-3c77a72b280a@ixit.cz>
+References: <20261118-pmi8998-vbus-v2-0-3c77a72b280a@ixit.cz>
+In-Reply-To: <20261118-pmi8998-vbus-v2-0-3c77a72b280a@ixit.cz>
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>, 
+ Robin Snyders <robin@snyders.xyz>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
  Sebastian Reichel <sre@kernel.org>
-Cc: Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- linux-pm@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20261031-pmi8998-vbus-v1-0-4d805e5a0f27@ixit.cz>
- <20261031-pmi8998-vbus-v1-3-4d805e5a0f27@ixit.cz>
- <8433ec2e-0f0e-4816-b3a5-6cdd7a6d1040@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <8433ec2e-0f0e-4816-b3a5-6cdd7a6d1040@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ linux-pm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1376; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=iOvaxT1G2XggGbeguNuBhCumUCCnVFoo/EJHZMzemjU=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq/d+XFuPrWspHz0miqC/yWOVsqMFXFIgZPsEzr
+ ljLnGzKRAeJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCav3flwAKCRBgAj/E00kg
+ coz0EACAFvKPWMjZK+r8pF7ySaq6i5bl+/hHZqLw2+kVCr/AEwVpylT8fEjDTOy/OHRd4NHOUJ7
+ hWaboAHTpc+okUIpvDJ78EdCXinzoasks3mKnUMicEdVjDD3JV2tmb4Wxgi7X6e+1bNONR4tkZk
+ /dYUrC/1NwP2Go9bE9VeAbtuWOngNMIw+SrgJmjztAhW01saymfaWcrUjeV/C0XCeRMpGnL+S5/
+ yQweeho95OuyO8isF7R13wENLfQ/79Jf45dzN/x87i7/g46DXLtUBD6EFfk4DVvdsuHlQIMD1/o
+ /gqFXcD2fiZMXPReThwSQAdkP7IUwjNHu+S5tLXNn2DSqIFPpzb6K2/CiXSxF00wU7/Gg1XIL+c
+ 0IAv34gION47c3ka75ph+pKOnaoZPsgvZjqgB/7nTF7ATG/1ENLkPUhyzazowN3h37y+jdnpYmI
+ EjDv06WI1w5Mlsg6jKZahoQN5bi9RrDgveaC1xDLJYJzsfBe1ZKDlrEBce9JSjp/foLEheniWO8
+ BLh+1K8yKi9/jV9RmQiq+3a5ttHiv9pDfxCtrSSRvjenf2SX6zgK0uXx0x5nCIYf3HHPbtCRZ81
+ cbMGev6iXiGRKfi1JpK5WWfjSQmhssmbjTvGnHhMJVyabbZxeHBrhJJCHezfYKWszOCndEUZ4RH
+ 9ABGTObMyUKmtcw==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 Content-Transfer-Encoding: 7bit
 
-On 02/11/2026 10:58, Konrad Dybcio wrote:
-> On 10/31/26 4:05 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
->>
->> The VBUS register block on the PMI8998 and PM660 PMIC shares the design
->> with the PM8150B one. Define corresponding compatible string, having the
->> qcom,pm8150b-vbus-reg as a fallback.
->>
->> Signed-off-by: David Heidelberg <david@ixit.cz>
->> ---
-> 
-> This is absolutely not true. They both have a similar CMD_OTG
-> register at +0x40 which makes the driver seem like it's working
+From: David Heidelberg <david@ixit.cz>
 
-While as it's now just sets the value to default, later with type-c it works as 
-expected - at least the on/off part, we need for now as a base.
+The VBUS register block on the PMI8998 and PM660 PMIC shares the design.
+Define corresponding compatible string, having the
+qcom,pmi8998-vbus-reg as a fallback.
 
-> for you, but otherwise the register layout diverges a lot.
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ .../devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml       | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Ok, I separated the pmi8998 struct within the driver and fixed the commit wording.
-Sending v2.
+diff --git a/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml b/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
+index 024b34d0eb1a6..96f984060ce4d 100644
+--- a/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
++++ b/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
+@@ -22,22 +22,27 @@ description: |
+   and 5.0 V.
+ 
+ properties:
+   compatible:
+     oneOf:
+       - enum:
+           - qcom,pm8150b-vbus-reg
+           - qcom,pm4125-vbus-reg
++          - qcom,pmi8998-vbus-reg
+       - items:
+           - enum:
+               - qcom,pm6150-vbus-reg
+               - qcom,pm7250b-vbus-reg
+               - qcom,pmi632-vbus-reg
+           - const: qcom,pm8150b-vbus-reg
++      - items:
++          - enum:
++              - qcom,pm660-vbus-reg
++          - const: qcom,pm8998-vbus-reg
+ 
+   reg:
+     maxItems: 1
+     description: VBUS output base address
+ 
+ allOf:
+   - $ref: regulator.yaml#
+   - if:
 
-David
+-- 
+2.55.0
 
-> 
-> Konrad
 
