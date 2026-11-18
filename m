@@ -1,61 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795095907;
-	b=uZDPMKz5hJd3ZKyFp8kacsD9qeU+/nWu+usqbhud0MoQSCOnJfq8pW3oDllN6fjNwCYb
-	 dlyignGjwtgLKCmQDnDQUcolcJ4pQVcS9We7ircHEwh78hJwRD0XVGu20hX7c2nIC1bDy
-	 sgEQEwlkmma1G4FMjQPlchHp+rRtg4tN8aNt7aEwcFpxHgd6uV45ZtgtIZ6mufYB91Srt
-	 ARwenvtiehyryDxxWCWPzSa/XpfAh7gTAO32tdT62akekHwWfGUgPhrqC9o1QCWsPOV6r
-	 neQgErxQyO8OUszoNkDd9j+b6fJ377oGEM0ZkShGXUF4Dwv7OK+2590AbCzLZH1Lgyg==
+	t=1795096051;
+	b=4IB2pJROGBrsSfXrgjpKCETa78x+rNQnNHX07v4TYTfvdgT9iwEqmldW347e3B1Y5daK
+	 82gVxEdc22DTJvy31C1b5yc3m9V+psozPYs2kCwDlXDR7NajI/iiiIoiuqOaFPDnbNboE
+	 Ep1jAMci8eZvqN+zsikRXcIY0cs6WD87EYcv8H3vDtBNNh4EhEnFkg8zuuwWLFAj3Tdzg
+	 ctOyxH1beNDLSwMMv+GjWMt46TCP36yrJ+fWrNf5B2+pOoROKsYkzxkIOufk4ADjHBeK7
+	 zN0QpQy/PVwaRT0J1msb75XzCK/Y8SC+zxe03Dsu/AkFCfTDsP6IdymdGG6FfiPP1pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795095907;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=InDwd5ord1uO7JbO8/j2hh0MYhOZynVPTKgcMtQwGnM=;
-	b=P/ihMUrLdI/i4Qof3ppeWMdxk7dQNOno8p4yZjUMqispO8TfXFLAfz2Dbi/g86BB5ibu
-	 XMCPuEiF87sZPpJph7DQPK+OPwbbp1i2VEAcOriiO3mBbsSjlhn2yB5Ee1pPT8bniYiSH
-	 vcHP2/Xdi10j3j5esTwRx8HZtlG9JG3HnVfO2jr5CWceamiFF0Nt90fPKgReNF4xb9ZeY
-	 +k1coeBxIDvphbNoRD2QElAiX7eKQU5C8jZ3m75hYfC0o3xUsxKEc3/zYg9QOq337+iUO
-	 YBVaTbL+LQwC/C1RBK3h1ZQyWhYFZXP4PWL9o5HImv9dx9QVnuXTwiTVTAgn9p+mdgg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795096051;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=dXQP2m+btkvG5QiKdm+wviw3/2QTYitkPuS/MHWOAlc=;
+	b=Uc3Ak4LmwFbc6KX1mYf/dRSnmjDtUgh6Om4Kaz9k5rqLDaQ3iyXrXFKRShMiJSYs40Ek
+	 JVmJrpZZwWt34p6PxkspDBEtxeOYzLY+fOCJ+tiqHOth7PRe6pcaRCfSSN6m/CM3O8+Gq
+	 R2gxStEk9QuXjwfnZ7VYg+eadJA/TKqbkJ/CPQsyxIjbOWt9w3QdJ0D5gBOdjA3H6BRST
+	 BdppWVR1vHzeik+ASzxCQ9GG4KRQ9+MJ9CPvkzDabW46Mf9ZauBIdrdEhvklewcMbMa2m
+	 PuDWX+CrwObXY061rLQpveyTRrEohU9JDhee2mULXYV4Il6LOrzWBsBar4XLhqG6CQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HkQRt1Cy;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jx4y7bRk;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38786606A32C;
-	Thu, 19 Nov 2026 13:45:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCEB9606A325;
+	Thu, 19 Nov 2026 13:47:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HkQRt1Cy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F2BD1F000C6;
-	Thu, 19 Nov 2026 13:45:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jx4y7bRk
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F20821F000C6;
+	Thu, 19 Nov 2026 13:47:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795095906;
-	bh=InDwd5ord1uO7JbO8/j2hh0MYhOZynVPTKgcMtQwGnM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HkQRt1CyUzzLeeQiWK+I8pHR3mpKF/2lBOk7R9mTATNCzRbq/H2ZS0aI8cfolga2c
-	 D5nM0vfwdB4jo2fazdkaT0yVN5HV2BooIPx3XKiy4h+RS+HJhMRlWyTdb1ED/dHcSr
-	 u3pZkKCmVCtGJl+CsDVOixMivK5Pvdg38PvE6TnX9/Q683bzuHVlGxC/r/joxCAvpF
-	 IqeGGaFp7V4w+0yqJhBHj6v5ZNHtygYs+zVhijAt17KWb0FTxicTNpmTusLgyRFMo6
-	 9pK+ZJxT5lKz+8RdMBT+zN/n/QySOuZH3f7Bdq5DcuUQ+/1kOuHcv/0cDHSHT/Q+lp
-	 LRdIhhQjkZQZA==
-Date: Thu, 19 Nov 2026 19:15:03 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Sriram Dash <quic_sriramd@quicinc.com>
-Subject: Re: [PATCH v4 0/2] Add support for SA8255P in the
- phy-qcom-snps-femto-v2 phy driver
-Message-ID: <av79X0gPyQDXgZwR@parshuram>
-References: <20261027-phy-qcom-snps-femto-v2-8255-v4-0-874023825a63@kernel.org>
+	s=k20260515; t=1795096051;
+	bh=dXQP2m+btkvG5QiKdm+wviw3/2QTYitkPuS/MHWOAlc=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=Jx4y7bRk8IjxoGzrIhZXjKfl15cbteZALMnnd+jMHWZ8ds2tSCgcGe8Hbhkm2tGyl
+	 2ab0rfTBsmsOAoXy1lIJVftVhfdWNkEakKAuVqe0D1tuSoKjPodcQuGCMErWhezMcH
+	 BFQ/zthHdbWaXW+R+TkSLlRd2bo+6c+c+pcurVhULNlTPyTebbha/OZzW2UCQfU6rz
+	 nQAVUPl6gZGqZ1u82V+zmvzklRrAucFfmgRXs+xJKYs0CMfsgEymkPKk8ypLxitYfA
+	 ySOyYJ4E2SKhb/LBFA72jQ0ddh4PQOkGtOVi8DTlKew0VWdQ67S0Bz54nYquw7X0Lu
+	 XrSXWMs7xVyOA==
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Gaurav Suman <gauravsuman007@gmail.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261109-wcd934x-mclk-v1-1-ab86342e7ead@gmail.com>
+References: <20261109-wcd934x-mclk-v1-1-ab86342e7ead@gmail.com>
+Subject: Re: [PATCH RFC] ASoC: codecs: wcd934x: keep MCLK enabled so init
+ writes reach the codec
+Message-Id: <179501573710.349622.15357136971746348293.b4-ty@b4>
+Date: Wed, 18 Nov 2026 15:28:57 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,28 +61,46 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261027-phy-qcom-snps-femto-v2-8255-v4-0-874023825a63@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1160; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=En7UEdzltcZ12Wa7wjNpSD3vfnoA2uYlkmf9ijhqAdM=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+/f2Q8vhTtdvkyI1Gf02rlSLe+y7r/9/gvTbthKeLd
+ ZllQKNjRykLgxgXg6yYIktcFvfL+pLXa/gOLmyDmcPKBDKEgYtTACYSacvIcNHjlp5B/PKnN+Zw
+ 7/lXs6lolpOZxomInDsFW1V87JbxbWP4py27e77pvvPqH49WLrK7KSGT8T0jT2b1xOvXH0vse6u
+ iyQQA
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On 27-10-26, 14:00, Mattijs Korpershoek wrote:
-> The Qualcomm automotive  SA8255p SoC abstracts resources such as resets,
-> clocks and regulators in firmware. The SCMI firmware exposes multiple
-> protocols to control such resources which are identified by protocol_id.
-> 
-> For this USB phy, 2 SCMI protocols are exposed by the firmware:
-> * power domain management protocol (protocol_id=0x11)
-> * performance domain management protocol (protocol_id=0x13)
-> 
-> The power domain has 2 indices: 'core' and 'transfer'.
-> * core controls the regulators, the clocks and the reset
-> * transfer only controls the clocks
-> 
-> For example, to power on/off the PHY, we should use the 'core' domain.
-> To disable data transfer and keeping power enabled, we should use the
-> 'transfer' domain.
+On Mon, 09 Nov 2026 22:33:47 +0000, Gaurav Suman wrote:
+> ASoC: codecs: wcd934x: keep MCLK enabled so init writes reach the codec
 
-Hey, this fails on phy/next for me, can you please rebase
+Applied to
 
--- 
-~Vinod
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
+
+Thanks!
+
+[1/1] ASoC: codecs: wcd934x: keep MCLK enabled so init writes reach the codec
+      https://git.kernel.org/broonie/sound/c/34430741db6b
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
