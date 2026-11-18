@@ -1,60 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.15
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795008254;
-	b=mgqtCH6V6gsJrmTQ2OB0Gdp75NX3ezE5m4ACNdgkERKDiAj+2b3v0qxNHWv7hF9AW+kB
-	 PS9eImZxOsFFmwkFrP0FUSg4uAXUspOrf8ah5yX7Sose2bM80QHoSaeQmar/Ce3UY31XJ
-	 VrxQoXQ2yUO0hAPDWuQfd1SgU1c55aCSqkz4+aKzRs5VLpGSHksQDSORmtu4m6vW/U5fZ
-	 U2ARZT5fzOa52pMy2RIDrSL8YgWzVFSVHsxnZtwE9zS7OGNlpfALUxkhjmyBu9pMUY/90
-	 wvwGRvdzj03kvsTPKQWGyKgCO08N6j+e2YswjIhZY+1TEbgFegQI6C11mCya/BCBiNA==
+	t=1795008503;
+	b=nhPhusVgeLe9u3qiMfUVCYG+xY6ux3/JoSU1MUXaI9TY/EYeyhPNqWTWa7X6fsB5/nf7
+	 PbWW5YUsjOiPzWXoM9/mAWRypbKPCZydYV0KtuLrido0EQhzF3GbSrkOouYKMFNSNPBbW
+	 DDjEd6y1RqdMLrGf1g9kIHTitX/pVSikNGJJ5A48qvnHzJ4V7JYaSs5PYJBhbB9WWu3OS
+	 +6qOAcWWtd9P0SB990PGcFW1leDtjpb7D1EHxoCOxw2Yu4ID8wiBfRAKS1foFm67Zeebx
+	 samkmzcsZqCcSn3SFrTkobmBksK525D1lggiHGLjGJUEcAWcMlNHR87MI3blSJyJdIg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795008254;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-CM-TRANSID:X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
-	bh=zwh9/RgZ9buOdjk59loExjfzNV3sTF0q3vmVzocq4s4=;
-	b=ZH11vJJPGG2Jz9l8uor/b3nLgcYk8VQO5DtBp5+mU9UeTc1+UMPnx+HmARBNxhPsEMDz
-	 i3URo5L5Uxm0zHDkrGuBrM1RyDHDe2HXlxxt6MEneAk3gnA8iJ5BMTgT/KiUa5IE7Tkir
-	 WnaXxV2T2z9Lq2fSedsUwOqoeftZSULhsjBMt5d0dTtsfoTSKaMsQ3Sv9GsDFBA7FcuFl
-	 v16rRfX1bx5ibEcI0TxFPZDm2NQPDPdqeizRGspup9sGGajIHZCtiqpmgRe+9Y5nd+6DF
-	 YjDq/QmQvJf5KmIq/Lybn+khoYQbymR719rnmhM39LjThi7j/xqiT9iz3PztDn6+Jvw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795008503;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:To:Cc:Subject:
+	 In-Reply-To:Organization:References:Date:Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=xrbOr3k8zHV2i5uttrL4VksfyxzivrA+exHcMjQwxoA=;
+	b=uDYJOAYgflOlDWJk7JL+ziSDczHxTOhzJKZn71kUqG2qitUWIjWYbUfE1yeQARpwVg+k
+	 4Oyk37erEMnYCCVPDo5kBhAe4MkDW6Uul361ieJMvDS2ynq/SUY2yJSYrggUkinm46OLZ
+	 Hn9to89HPkSpmj258/eC20+Etg9DRQeLEfItKe9jlf2YOrMi75Lp0wEnCeK+9wAoqIQ4q
+	 b067C2NRZpOa5rA00rWFo2SokMhfLPrbKP/oPqM0oKtQ/KtxhZqj/Od9fjXcHsnl3g7D6
+	 Wnf9zlnV9drKymbso4+leAxnuYKvMjHWpgLMbRl6uW02kAKlMoOYQMjMOpIqVIAfKaQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=163.com;
-	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b="Z/KD2fhY";
-	arc=none smtp.remote-ip=117.135.210.3
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b="K3D+/KxA";
+	arc=none smtp.remote-ip=198.175.65.15
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBE51606A320;
-	Wed, 18 Nov 2026 13:24:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DBE51606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67289606A320;
+	Wed, 18 Nov 2026 13:28:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 67289606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=Z/KD2fhY
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=zw
-	h9/RgZ9buOdjk59loExjfzNV3sTF0q3vmVzocq4s4=; b=Z/KD2fhYKnq15hooxe
-	oyYpjPy5uboMD+Ew9TcPmGBYaH3qpszMNh0AtiMtwiwl0sUoCpfmjK/x6plj2U0U
-	koC3opqAVSlcAvrq/xSQjL/tp170B9DNqAoTpLaGne4FvU4SZwAhqpKou6wiWxoa
-	MN7OxURPPvWUXrlDxHjN89MiI=
-Received: from localhost.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id _____wD3X0Tgpv1qlRFsIg--.36225S2;
-	Wed, 18 Nov 2026 21:23:46 +0800 (CST)
-From: Haoxiang Li <haoxiang_li2024@163.com>
-To: brgl@kernel.org,
-	andersson@kernel.org,
-	konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	quic_eberman@quicinc.com
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Haoxiang Li <haoxiang_li2024@163.com>
-Subject: [PATCH] firmware: qcom: tzmem: Clean up SHM bridge on pool add failure
-Date: Wed, 18 Nov 2026 21:23:43 +0800
-Message-Id: <20261118132343.2350034-1-haoxiang_li2024@163.com>
-X-Mailer: git-send-email 2.25.1
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=K3D+/KxA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795008501; x=1826544501;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version:content-transfer-encoding;
+  bh=9s0PP2tU8ramnQ9P7B7e47VS/Lqt+TFQgn/D6GHoCw4=;
+  b=K3D+/KxAKDTaaTF8bOj6cZkSODKUhC6p/kRZMaUxv2XWr1uEc9NEmIkY
+   jjX8U8iymukQurWXCQ184nolI8E56CyMhMkregzjUKFowm2O5T6s6Qe7a
+   JYVHwbPO5xZw18RCzdYdpByN8yGvrcyRWWa185bpaPcmVkIvU3wJ6Mhxe
+   RBpWOrkffQVZGjjC4fQl3iALkaxyi4sGeXOUVk3XCiUo5dJ9VpvcQ4CMk
+   rlYwt+P2ZHKbA8I4+M8kSPe57iXJd4rvs669Au9vBJXGEcgGj2A8AoErv
+   SdoTepnmxTej+o3rxcj7mBbflA11UqRiNPt2uI1zr7mzNAIhB9oDfQaiY
+   g==;
+X-CSE-ConnectionGUID: tAEjINjwQo6+nlu7uedVAg==
+X-CSE-MsgGUID: zfyQK7vFR/W+3brMVUK8+A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11969"; a="3818333"
+X-IronPort-AV: E=Sophos;i="6.27,219,1787036400"; 
+   d="scan'208";a="3818333"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2026 05:28:21 -0800
+X-CSE-ConnectionGUID: yZhr9dpARI60OAP4iow+yA==
+X-CSE-MsgGUID: +rfdIahmSKCYwfI5yMV7+A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,219,1787036400"; 
+   d="scan'208";a="10544495"
+Received: from mkosciow-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.187])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2026 05:27:43 -0800
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>, David
+ Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: Sasha Finkelstein <k@chaosmail.tech>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Andrzej Hajda
+ <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Robert Foss <rfoss@kernel.org>, dri-devel@lists.freedesktop.org,
+ asahi@lists.linux.dev, linux-aspeed@lists.ozlabs.org,
+ linux-arm-kernel@lists.infradead.org, imx@lists.linux.dev,
+ linux-riscv@lists.infradead.org, etnaviv@lists.freedesktop.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, imagination@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, lima@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org,
+ linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev,
+ linux-tegra@vger.kernel.org
+Subject: Re: [PATCH v1 9/9] drm: Unify coding style for *_device_id arrays
+In-Reply-To: <a2d5ce256b8ec150de4a6494c177b19693a33222.1795002467.git.ukleinek@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
+ 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
+References: <cover.1795002467.git.ukleinek@kernel.org>
+ <a2d5ce256b8ec150de4a6494c177b19693a33222.1795002467.git.ukleinek@kernel.org>
+Date: Wed, 18 Nov 2026 15:27:40 +0200
+Message-ID: <7692c160e418e7ad0528739fcc879b11fbac8ab0@intel.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,40 +100,340 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wD3X0Tgpv1qlRFsIg--.36225S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWrtw4Uur1ktF45GFW3Ar45GFg_yoW8Jr4Dpa
-	1UXrW7G3y8Wan7t347G3yrur95Jwn7trWYgry7Aa4F9w1fXr1Fyryjvr4fWFs8CF1vyr43
-	tF4SgF18Xa4Ygr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pEL0ehUUUUU=
-X-CM-SenderInfo: xkdr5xpdqjszblsqjki6rwjhhfrp/xtbC7QL7amr9puIGdAAA3f
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-If gen_pool_add_virt() fails after qcom_tzmem_init_area() succeeds,
-qcom_tzmem_pool_add_memory() frees the DMA memory and area descriptor
-but leaves the SHM bridge and its handle allocated.
+On Wed, 18 Nov 2026, Uwe Kleine-K=C3=B6nig <u.kleine-koenig@baylibre.com> w=
+rote:
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
+>
+>  - list terminators in a single line;
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator (unless there is a comment);
+>  - proper tab indentation for multi-line initializers;
+>
+> Adapt the offenders accordingly.
+>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@baylibre.com>
+> ---
+>  drivers/gpu/drm/adp/adp-mipi.c                |   4 +-
+>  drivers/gpu/drm/adp/adp_drv.c                 |   4 +-
+>  .../gpu/drm/arm/display/komeda/komeda_drv.c   |   8 +-
+>  drivers/gpu/drm/arm/hdlcd_drv.c               |   4 +-
+>  drivers/gpu/drm/arm/malidp_drv.c              |   8 +-
+>  drivers/gpu/drm/armada/armada_crtc.c          |   2 +-
+>  drivers/gpu/drm/aspeed/aspeed_gfx_drv.c       |   2 +-
+>  drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c  |   4 +-
+>  .../drm/bridge/analogix/analogix-anx6345.c    |   4 +-
+>  .../drm/bridge/analogix/analogix-anx78xx.c    |   2 +-
+>  drivers/gpu/drm/bridge/analogix/anx7625.c     |   4 +-
+>  drivers/gpu/drm/bridge/chipone-icn6211.c      |   2 +-
+>  drivers/gpu/drm/bridge/chrontel-ch7033.c      |   2 +-
+>  drivers/gpu/drm/bridge/display-connector.c    |   2 +-
+>  drivers/gpu/drm/bridge/fsl-ldb.c              |  23 +-
+>  drivers/gpu/drm/bridge/imx/imx8mp-hdmi-pvi.c  |   7 +-
+>  .../drm/bridge/imx/imx8qxp-pixel-combiner.c   |   4 +-
+>  .../gpu/drm/bridge/imx/imx8qxp-pixel-link.c   |   4 +-
+>  drivers/gpu/drm/bridge/imx/imx8qxp-pxl2dpi.c  |   2 +-
+>  drivers/gpu/drm/bridge/imx/imx93-mipi-dsi.c   |   2 +-
+>  drivers/gpu/drm/bridge/imx/imx93-pdfc.c       |   4 +-
+>  drivers/gpu/drm/bridge/ite-it6263.c           |   2 +-
+>  drivers/gpu/drm/bridge/lontium-lt8912b.c      |   4 +-
+>  drivers/gpu/drm/bridge/lontium-lt9211.c       |   2 +-
+>  drivers/gpu/drm/bridge/lvds-codec.c           |   2 +-
+>  .../bridge/megachips-stdpxxxx-ge-b850v3-fw.c  |   4 +-
+>  drivers/gpu/drm/bridge/microchip-lvds.c       |   6 +-
+>  drivers/gpu/drm/bridge/nwl-dsi.c              |   2 +-
+>  drivers/gpu/drm/bridge/nxp-ptn3460.c          |   2 +-
+>  drivers/gpu/drm/bridge/parade-ps8622.c        |   6 +-
+>  drivers/gpu/drm/bridge/sii902x.c              |   2 +-
+>  drivers/gpu/drm/bridge/sii9234.c              |   2 +-
+>  drivers/gpu/drm/bridge/sil-sii8620.c          |   2 +-
+>  drivers/gpu/drm/bridge/tc358767.c             |   2 +-
+>  drivers/gpu/drm/bridge/tc358768.c             |   4 +-
+>  drivers/gpu/drm/bridge/tc358775.c             |   4 +-
+>  drivers/gpu/drm/bridge/tda998x_drv.c          |   2 +-
+>  drivers/gpu/drm/bridge/th1520-dw-hdmi.c       |   2 +-
+>  drivers/gpu/drm/bridge/thc63lvd1024.c         |   4 +-
+>  drivers/gpu/drm/bridge/ti-sn65dsi83.c         |   2 +-
+>  drivers/gpu/drm/bridge/ti-sn65dsi86.c         |   4 +-
+>  drivers/gpu/drm/bridge/ti-tfp410.c            |   2 +-
+>  drivers/gpu/drm/bridge/ti-tpd12s015.c         |   4 +-
+>  drivers/gpu/drm/bridge/waveshare-dsi.c        |   4 +-
+>  drivers/gpu/drm/etnaviv/etnaviv_gpu.c         |   2 +-
+>  drivers/gpu/drm/exynos/exynos5433_drm_decon.c |   6 +-
+>  drivers/gpu/drm/exynos/exynos7_drm_decon.c    |   2 +-
+>  drivers/gpu/drm/exynos/exynos_dp.c            |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_fimc.c      |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_fimd.c      |  33 +-
+>  drivers/gpu/drm/exynos/exynos_drm_g2d.c       |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_gsc.c       |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_rotator.c   |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_scaler.c    |   2 +-
+>  drivers/gpu/drm/exynos/exynos_hdmi.c          |   5 +-
+>  drivers/gpu/drm/exynos/exynos_mixer.c         |  15 +-
+>  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c     |   2 +-
+>  drivers/gpu/drm/hisilicon/kirin/dw_drm_dsi.c  |   2 +-
+>  .../gpu/drm/hisilicon/kirin/kirin_drm_drv.c   |   7 +-
+>  .../drm/i915/display/intel_display_device.c   |   2 +-
+>  .../gpu/drm/i915/display/intel_lpe_audio.c    |   6 +-
+>  drivers/gpu/drm/i915/i915_pci.c               |   2 +-
+>  drivers/gpu/drm/imagination/pvr_drv.c         |   2 +-
+>  drivers/gpu/drm/imx/dc/dc-drv.c               |   2 +-
+>  drivers/gpu/drm/imx/dc/dc-ic.c                |   2 +-
+>  drivers/gpu/drm/imx/dc/dc-pe.c                |   2 +-
+>  drivers/gpu/drm/imx/dcss/dcss-drv.c           |   4 +-
+>  drivers/gpu/drm/imx/ipuv3/dw_hdmi-imx.c       |  11 +-
+>  drivers/gpu/drm/imx/ipuv3/imx-drm-core.c      |   4 +-
+>  drivers/gpu/drm/imx/ipuv3/imx-ldb.c           |   4 +-
+>  drivers/gpu/drm/imx/ipuv3/imx-tve.c           |   2 +-
+>  drivers/gpu/drm/imx/ipuv3/parallel-display.c  |   2 +-
+>  drivers/gpu/drm/ingenic/ingenic-drm-drv.c     |   2 +-
+>  drivers/gpu/drm/ingenic/ingenic-dw-hdmi.c     |   2 +-
+>  drivers/gpu/drm/ingenic/ingenic-ipu.c         |   2 +-
+>  drivers/gpu/drm/kmb/kmb_drv.c                 |   4 +-
+>  drivers/gpu/drm/lima/lima_drv.c               |   2 +-
+>  drivers/gpu/drm/logicvc/logicvc_drm.c         |   2 +-
+>  drivers/gpu/drm/mcde/mcde_drv.c               |   2 +-
+>  drivers/gpu/drm/mcde/mcde_dsi.c               |   2 +-
+>  drivers/gpu/drm/mediatek/mtk_cec.c            |   4 +-
+>  drivers/gpu/drm/mediatek/mtk_disp_ccorr.c     |  14 +-
+>  drivers/gpu/drm/mediatek/mtk_disp_color.c     |  20 +-
+>  drivers/gpu/drm/mediatek/mtk_disp_gamma.c     |  20 +-
+>  drivers/gpu/drm/mediatek/mtk_disp_merge.c     |   4 +-
+>  drivers/gpu/drm/mediatek/mtk_disp_ovl.c       |  50 ++-
+>  drivers/gpu/drm/mediatek/mtk_disp_rdma.c      |  26 +-
+>  drivers/gpu/drm/mediatek/mtk_dp.c             |   2 +-
+>  drivers/gpu/drm/mediatek/mtk_dpi.c            |   2 +-
+>  drivers/gpu/drm/mediatek/mtk_drm_drv.c        | 395 +++++++++++-------
+>  drivers/gpu/drm/mediatek/mtk_ethdr.c          |   4 +-
+>  drivers/gpu/drm/mediatek/mtk_hdmi_ddc.c       |   4 +-
+>  drivers/gpu/drm/mediatek/mtk_mdp_rdma.c       |   4 +-
+>  drivers/gpu/drm/meson/meson_drv.c             |  28 +-
+>  drivers/gpu/drm/meson/meson_dw_hdmi.c         |  24 +-
+>  drivers/gpu/drm/meson/meson_dw_mipi_dsi.c     |   2 +-
+>  drivers/gpu/drm/msm/adreno/adreno_device.c    |   2 +-
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |  70 ++--
+>  drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |   6 +-
+>  drivers/gpu/drm/msm/dp/dp_display.c           |   2 +-
+>  drivers/gpu/drm/msm/dsi/dsi.c                 |   2 +-
+>  drivers/gpu/drm/msm/hdmi/hdmi.c               |   2 +-
+>  drivers/gpu/drm/msm/hdmi/hdmi_phy.c           |  38 +-
+>  drivers/gpu/drm/msm/msm_drv.c                 |   2 +-
+>  drivers/gpu/drm/msm/msm_mdss.c                |   2 +-
+>  drivers/gpu/drm/mxsfb/mxsfb_drv.c             |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_drm.c         |   2 +-
+>  drivers/gpu/drm/omapdrm/dss/dispc.c           |   2 +-
+>  drivers/gpu/drm/omapdrm/dss/dsi.c             |   8 +-
+>  drivers/gpu/drm/omapdrm/dss/dss.c             |   2 +-
+>  drivers/gpu/drm/omapdrm/dss/hdmi4.c           |   4 +-
+>  drivers/gpu/drm/omapdrm/dss/hdmi5.c           |   6 +-
+>  drivers/gpu/drm/omapdrm/dss/venc.c            |   8 +-
+>  drivers/gpu/drm/omapdrm/omap_dmm_tiler.c      |   2 +-
+>  drivers/gpu/drm/panel/panel-arm-versatile.c   |   4 +-
+>  drivers/gpu/drm/panel/panel-boe-himax8279d.c  |   4 +-
+>  .../drm/panel/panel-boe-th101mb31ig002-28a.c  |   4 +-
+>  .../gpu/drm/panel/panel-boe-tv101wum-nl6.c    |  47 ++-
+>  drivers/gpu/drm/panel/panel-dsi-cm.c          |   2 +-
+>  drivers/gpu/drm/panel/panel-edp.c             |   5 +-
+>  .../gpu/drm/panel/panel-feixin-k101-im2ba02.c |   2 +-
+>  .../drm/panel/panel-feiyang-fy07024di26a30d.c |   2 +-
+>  .../gpu/drm/panel/panel-focaltech-ota7290b.c  |   4 +-
+>  drivers/gpu/drm/panel/panel-himax-hx83102.c   |  47 ++-
+>  drivers/gpu/drm/panel/panel-ilitek-ili9882t.c |  17 +-
+>  drivers/gpu/drm/panel/panel-innolux-p079zca.c |  11 +-
+>  .../gpu/drm/panel/panel-jadard-jd9365da-h3.c  |  30 +-
+>  drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c |   2 +-
+>  .../gpu/drm/panel/panel-jdi-lt070me05000.c    |   2 +-
+>  drivers/gpu/drm/panel/panel-khadas-ts050.c    |   4 +-
+>  .../drm/panel/panel-kingdisplay-kd097d04.c    |   2 +-
+>  drivers/gpu/drm/panel/panel-lg-lb035q02.c     |   4 +-
+>  drivers/gpu/drm/panel/panel-lg-sw43408.c      |   4 +-
+>  .../gpu/drm/panel/panel-lincolntech-lcd197.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-lvds.c            |   4 +-
+>  .../drm/panel/panel-magnachip-d53e6ea8966.c   |   2 +-
+>  drivers/gpu/drm/panel/panel-nec-nl8048hl11.c  |   4 +-
+>  drivers/gpu/drm/panel/panel-novatek-nt35950.c |   2 +-
+>  drivers/gpu/drm/panel/panel-novatek-nt36523.c |   2 +-
+>  .../gpu/drm/panel/panel-novatek-nt36672a.c    |   2 +-
+>  drivers/gpu/drm/panel/panel-novatek-nt36850.c |   2 +-
+>  drivers/gpu/drm/panel/panel-novatek-nt37801.c |   2 +-
+>  .../drm/panel/panel-osd-osd101t2587-53ts.c    |   5 +-
+>  .../drm/panel/panel-panasonic-vvx10f034n00.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-raydium-rm67191.c |   2 +-
+>  drivers/gpu/drm/panel/panel-renesas-r63419.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-ronbo-rb070d30.c  |   2 +-
+>  .../gpu/drm/panel/panel-samsung-atna33xc20.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-samsung-db7430.c  |   6 +-
+>  drivers/gpu/drm/panel/panel-samsung-s6d27a1.c |   4 +-
+>  drivers/gpu/drm/panel/panel-samsung-s6d7aa0.c |   6 +-
+>  .../panel/panel-samsung-s6e88a0-ams427ap24.c  |   2 +-
+>  .../panel/panel-samsung-s6e88a0-ams452ef01.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-seiko-43wvf1g.c   |   5 +-
+>  .../gpu/drm/panel/panel-sharp-lq101r1sx01.c   |   2 +-
+>  .../gpu/drm/panel/panel-sharp-ls037v7dw01.c   |   4 +-
+>  .../gpu/drm/panel/panel-sharp-ls043t1le01.c   |   2 +-
+>  drivers/gpu/drm/panel/panel-simple.c          |  70 ++--
+>  .../gpu/drm/panel/panel-sitronix-st7789v.c    |  18 +-
+>  drivers/gpu/drm/panel/panel-sony-acx565akm.c  |   4 +-
+>  .../drm/panel/panel-startek-kd070fhfid015.c   |   2 +-
+>  drivers/gpu/drm/panel/panel-summit.c          |   2 +-
+>  drivers/gpu/drm/panel/panel-tdo-tl070wsh30.c  |   2 +-
+>  drivers/gpu/drm/panel/panel-tpo-td028ttec1.c  |   6 +-
+>  drivers/gpu/drm/panel/panel-tpo-td043mtea1.c  |   4 +-
+>  drivers/gpu/drm/panel/panel-tpo-tpg110.c      |   6 +-
+>  drivers/gpu/drm/panel/panel-visionox-r66451.c |   2 +-
+>  .../gpu/drm/panel/panel-visionox-rm69299.c    |  12 +-
+>  .../gpu/drm/panel/panel-widechips-ws2401.c    |   6 +-
+>  drivers/gpu/drm/panfrost/panfrost_drv.c       |  36 +-
+>  drivers/gpu/drm/panthor/panthor_drv.c         |   4 +-
+>  drivers/gpu/drm/pl111/pl111_versatile.c       |   4 +-
+>  drivers/gpu/drm/qxl/qxl_drv.c                 |   6 +-
+>  drivers/gpu/drm/renesas/rcar-du/rcar_cmm.c    |   6 +-
+>  drivers/gpu/drm/renesas/rcar-du/rcar_dsc.c    |   2 +-
+>  .../gpu/drm/renesas/rcar-du/rcar_dw_hdmi.c    |   2 +-
+>  .../gpu/drm/renesas/rz-du/rzg2l_mipi_dsi.c    |   6 +-
+>  .../gpu/drm/rockchip/analogix_dp-rockchip.c   |  12 +-
+>  drivers/gpu/drm/rockchip/cdn-dp-core.c        |   8 +-
+>  .../gpu/drm/rockchip/dw-mipi-dsi-rockchip.c   |  32 +-
+>  .../gpu/drm/rockchip/dw-mipi-dsi2-rockchip.c  |   2 +-
+>  drivers/gpu/drm/rockchip/dw_dp-rockchip.c     |   2 +-
+>  drivers/gpu/drm/rockchip/dw_hdmi-rockchip.c   |  32 +-
+>  .../gpu/drm/rockchip/dw_hdmi_qp-rockchip.c    |   6 +-
+>  drivers/gpu/drm/rockchip/inno_hdmi-rockchip.c |  12 +-
+>  drivers/gpu/drm/rockchip/rk3066_hdmi.c        |   2 +-
+>  drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |   4 +-
+>  drivers/gpu/drm/rockchip/rockchip_lvds.c      |   6 +-
+>  drivers/gpu/drm/rockchip/rockchip_vop2_reg.c  |   4 +-
+>  drivers/gpu/drm/rockchip/rockchip_vop_reg.c   |  92 ++--
+>  drivers/gpu/drm/sitronix/st7571-i2c.c         |   2 +-
+>  drivers/gpu/drm/sitronix/st7571-spi.c         |   2 +-
+>  drivers/gpu/drm/sitronix/st7586.c             |   4 +-
+>  drivers/gpu/drm/sitronix/st7735r.c            |   4 +-
+>  drivers/gpu/drm/sprd/sprd_dpu.c               |   2 +-
+>  drivers/gpu/drm/sprd/sprd_drm.c               |   4 +-
+>  drivers/gpu/drm/sprd/sprd_dsi.c               |   2 +-
+>  drivers/gpu/drm/sti/sti_compositor.c          |   5 +-
+>  drivers/gpu/drm/sti/sti_drv.c                 |   4 +-
+>  drivers/gpu/drm/sti/sti_dvo.c                 |   2 +-
+>  drivers/gpu/drm/sti/sti_hda.c                 |   4 +-
+>  drivers/gpu/drm/sti/sti_hdmi.c                |   5 +-
+>  drivers/gpu/drm/sti/sti_hqvdp.c               |   2 +-
+>  drivers/gpu/drm/sti/sti_tvout.c               |   2 +-
+>  drivers/gpu/drm/sti/sti_vtg.c                 |   2 +-
+>  drivers/gpu/drm/stm/drv.c                     |   8 +-
+>  drivers/gpu/drm/stm/dw_mipi_dsi-stm.c         |   4 +-
+>  drivers/gpu/drm/stm/lvds.c                    |   2 +-
+>  drivers/gpu/drm/sun4i/sun4i_frontend.c        |   8 +-
+>  drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c        |   6 +-
+>  drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c        |  12 +-
+>  drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c         |   2 +-
+>  drivers/gpu/drm/sun4i/sun8i_tcon_top.c        |   6 +-
+>  drivers/gpu/drm/sysfb/ofdrm.c                 |   4 +-
+>  drivers/gpu/drm/sysfb/simpledrm.c             |   4 +-
+>  drivers/gpu/drm/tegra/dc.c                    |   5 +-
+>  drivers/gpu/drm/tegra/dpaux.c                 |   2 +-
+>  drivers/gpu/drm/tegra/drm.c                   |  84 ++--
+>  drivers/gpu/drm/tegra/dsi.c                   |   2 +-
+>  drivers/gpu/drm/tegra/gr2d.c                  |   2 +-
+>  drivers/gpu/drm/tegra/hdmi.c                  |   2 +-
+>  drivers/gpu/drm/tegra/hub.c                   |   9 +-
+>  drivers/gpu/drm/tegra/nvdec.c                 |   2 +-
+>  drivers/gpu/drm/tegra/nvjpg.c                 |   2 +-
+>  drivers/gpu/drm/tegra/sor.c                   |   2 +-
+>  drivers/gpu/drm/tegra/vic.c                   |   2 +-
+>  drivers/gpu/drm/tidss/tidss_drv.c             |  12 +-
+>  drivers/gpu/drm/tilcdc/tilcdc_drv.c           |   6 +-
+>  drivers/gpu/drm/tiny/arcpgu.c                 |   4 +-
+>  drivers/gpu/drm/tiny/ili9225.c                |   4 +-
+>  drivers/gpu/drm/tiny/ili9486.c                |   2 +-
+>  drivers/gpu/drm/tiny/mi0283qt.c               |   4 +-
+>  drivers/gpu/drm/tiny/panel-mipi-dbi.c         |   4 +-
+>  drivers/gpu/drm/tiny/pixpaper.c               |   2 +-
+>  drivers/gpu/drm/tiny/repaper.c                |   4 +-
+>  drivers/gpu/drm/tiny/sharp-memory.c           |   4 +-
+>  drivers/gpu/drm/tve200/tve200_drv.c           |   2 +-
+>  drivers/gpu/drm/v3d/v3d_drv.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_crtc.c                |   2 +-
+>  drivers/gpu/drm/vc4/vc4_dpi.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_drv.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_dsi.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_hdmi.c                |   2 +-
+>  drivers/gpu/drm/vc4/vc4_hvs.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_txp.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_v3d.c                 |   2 +-
+>  drivers/gpu/drm/vc4/vc4_vec.c                 |   2 +-
+>  drivers/gpu/drm/verisilicon/vs_dc.c           |   2 +-
+>  drivers/gpu/drm/xlnx/zynqmp_dpsub.c           |   4 +-
+>  drivers/gpu/host1x/dev.c                      |  20 +-
+>  drivers/gpu/host1x/tegra114-mipi.c            |   2 +-
+>  drivers/gpu/ipu-v3/ipu-common.c               |   8 +-
+>  drivers/gpu/ipu-v3/ipu-pre.c                  |   4 +-
+>  drivers/gpu/ipu-v3/ipu-prg.c                  |   4 +-
+>  254 files changed, 1155 insertions(+), 940 deletions(-)
 
-Since the area has not been added to pool->areas, pool destruction
-cannot reclaim these resources. Call qcom_tzmem_cleanup_area() before
-freeing the DMA memory to delete the bridge and release its handle.
+How do you expect a patch of this size be merged?
 
-Fixes: f86c61498a57 ("firmware: qcom: tzmem: enable SHM Bridge support")
-Signed-off-by: Haoxiang Li <haoxiang_li2024@163.com>
----
- drivers/firmware/qcom/qcom_tzmem.c | 1 +
- 1 file changed, 1 insertion(+)
+> diff --git a/drivers/gpu/drm/i915/display/intel_display_device.c b/driver=
+s/gpu/drm/i915/display/intel_display_device.c
+> index 055396f85e4a..6b51a5102201 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display_device.c
+> +++ b/drivers/gpu/drm/i915/display/intel_display_device.c
+> @@ -1442,7 +1442,7 @@ static bool has_no_display(struct pci_dev *pdev)
+>  {
+>  	static const struct pci_device_id ids[] =3D {
+>  		INTEL_IVB_Q_IDS(INTEL_VGA_DEVICE, 0),
+> -		{}
+> +		{ }
+>  	};
+>=20=20
+>  	return pci_match_id(ids, pdev);
+> diff --git a/drivers/gpu/drm/i915/display/intel_lpe_audio.c b/drivers/gpu=
+/drm/i915/display/intel_lpe_audio.c
+> index ff2cf479d8e1..3d92cb307251 100644
+> --- a/drivers/gpu/drm/i915/display/intel_lpe_audio.c
+> +++ b/drivers/gpu/drm/i915/display/intel_lpe_audio.c
+> @@ -185,10 +185,10 @@ static bool lpe_audio_detect(struct intel_display *=
+display)
+>  	if (display->platform.valleyview || display->platform.cherryview) {
+>  		static const struct pci_device_id atom_hdaudio_ids[] =3D {
+>  			/* Baytrail */
+> -			{PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x0f04)},
+> +			{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x0f04) },
+>  			/* Braswell */
+> -			{PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x2284)},
+> -			{}
+> +			{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x2284) },
+> +			{ }
+>  		};
+>=20=20
+>  		if (!pci_dev_present(atom_hdaudio_ids)) {
+> diff --git a/drivers/gpu/drm/i915/i915_pci.c b/drivers/gpu/drm/i915/i915_=
+pci.c
+> index 84a7dc6ab5db..faceb3de4fa3 100644
+> --- a/drivers/gpu/drm/i915/i915_pci.c
+> +++ b/drivers/gpu/drm/i915/i915_pci.c
+> @@ -870,7 +870,7 @@ static const struct pci_device_id pciidlist[] =3D {
+>  	INTEL_ATS_M_IDS(INTEL_VGA_DEVICE, &ats_m_info),
+>  	INTEL_ARL_IDS(INTEL_VGA_DEVICE, &mtl_info),
+>  	INTEL_MTL_IDS(INTEL_VGA_DEVICE, &mtl_info),
+> -	{}
+> +	{ }
 
-diff --git a/drivers/firmware/qcom/qcom_tzmem.c b/drivers/firmware/qcom/qcom_tzmem.c
-index e1d944d0eb63..b2ca1d18bf3b 100644
---- a/drivers/firmware/qcom/qcom_tzmem.c
-+++ b/drivers/firmware/qcom/qcom_tzmem.c
-@@ -219,6 +219,7 @@ static int qcom_tzmem_pool_add_memory(struct qcom_tzmem_pool *pool,
- 	ret = gen_pool_add_virt(pool->genpool, (unsigned long)area->vaddr,
- 				(phys_addr_t)area->paddr, size, -1);
- 	if (ret) {
-+		qcom_tzmem_cleanup_area(area);
- 		dma_free_coherent(qcom_tzmem_dev, area->size,
- 				  area->vaddr, area->paddr);
- 		return ret;
--- 
-2.25.1
+Personally, I would *always* use {} instead of { }, and would rather not
+change.
 
+Across the tree, {} is slightly more common than { }. IMO changing them
+is pointless churn.
+
+
+BR,
+Jani.
+
+
+--=20
+Jani Nikula, Intel
