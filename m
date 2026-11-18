@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795013896;
-	b=rXvJL2Aj/M5KU22CbMhfqJeBYBJUbYH+YSDNRzftQcNIzdWQhBOSBdM5wFYHcb9BZnuF
-	 TW1wWyl2rKsexTt5BHUe0EPjczfO15Yo6skqT7LUFpGpggBZL6I3KfJk+XrT2wW19tIPI
-	 d4PUmep8OiKH9oYaP1IH+i2MDE48O/r/JT5D6ux4iSZ6/atcP+kWVwyO9WM63knSf9zy5
-	 U51Qv2xITtIuqiLZx/nkf3WG1xv2vUALEe4xa/bPPW9ZKkAdTuayzycSOkqE9yorCDQ2W
-	 4gOAUIYhgbWAJhvfFXp/N9PXPPWJzNUQHeR1WzW144VrKNGUHQmcGdF4hpjK49WJscw==
+	t=1795013897;
+	b=oK9+BerXBqpHWTgHE1iYBWfB3sh1MMwb14i15RKc1zbHx7E0kp9ITb0elAj55msJy3Hs
+	 pa38V2WSLCvyNB0qSrmAMHiEobSMT5ciIy8R3HyAzr3r7ZifLn0WvwNiCZCJSHxstBUpq
+	 fhrAO6SrlcddX9CfVuNqR8LuHQQSx7sVlP+sn58Y8UD+5gLxuyEQrYWhZ4psDxOzjQ2zk
+	 UHrHcqBNXCyxAgoQgKXpaDi3bXJp+r1T0jwzVeWGwHyaG9smVSC/Of2AlVa7DmWnsow6B
+	 1KE9d7WVD+vY+Ley7BJrVSgddg4TFZUG3gk/rWV/RmPrnFpi8DvqWRTRmCf1f0lvMcA==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795013896;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=0XaXdrDvphgQpimZx5cBV74V3RkBkYmldb9F3GdEaZY=;
-	b=t3uT5wwUzOjXIlitOKk7gRgYqhPMi+ZdphiBBxbB8WBAahCUGs6um7W/7y9edJFXbcKO
-	 Buiuv6bBbOT9ulxaTXehWmwsQ8GjklEIJVGMsM3ElJOoPQkwjMpGGPBbuEvkAMfXpvie4
-	 wc+7cb6H6i7h2QjsNXBHYkhnV/EfY7Rkxa7lMoQdTUDQgVTcaxfrBxx8MLHOQ2sxbbiOd
-	 0s+fVuQgNjyBpdk0WjKNIMyKDmQSLwFuBwQ6LmeYS9OKKqLRba/LFjwbSZPfkZKuBq+YF
-	 +LJUMCjdHlIQhOI2+d2RGMRWmLh64JpC38evFC4yPzQVi7VctFcNK6qT/BAi1HT7+7Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795013897;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=pu/Zc8lWUl4Jnr74f98ic/pN2AH2QRpGA1MQ3JEWhKQ=;
+	b=cXSkKhC6YWIT7bqOFg3flOumr2AhwrO34R/nHtjKT80Mjl9SbDGzFCjACa65dOCJzt3j
+	 dsplg31VmYXha+hMSaM1NIXQ8AIUhMvJo8RVXvSJ7kDYEBB2WQbGMlEayVRJ8GOgS8+PK
+	 07V26SnHA9jOAoSW/3Q32LZv/Tl7fJ+nhjm06kztMkkhVxmz0g48aALAUuhGQgqigkiEi
+	 7v4enIWRHkv9mivJwCUmDJVNFhzIBemouL9ZqDjUUAsWR2KTNMgLF40jxjpjGMBUNgUdb
+	 luJx0FFiHm03KCgOdxHy9pZB02ZbKvp/tvDqhX3uCP82gCy4A/ezNsT2UxXu63VTR9A==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fR9D4MB2;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n4H5SIKk;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3FEC606A31C;
-	Wed, 18 Nov 2026 14:58:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7577C60A261D;
+	Wed, 18 Nov 2026 14:58:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fR9D4MB2
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n4H5SIKk
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795013896;
-	b=H13zCjhqAj44AdEcbGfIzoxvZBj1ciT969lPjo5Ny+E3i2CkadgynjZRAMBJRco0h8bY
-	 evIpZs+Jywqf2ItcbnL45slwuFnxyDnLZvHQL7QMkfJrPWVKc3V1U3o4EngtIm8oJWNcU
-	 3E0FuGSYDASVhdl6ZNk9ECUfMpUass/DK1HsCFljvCKHjF7tM04wN7+gvemaXFEf8hNyM
-	 N4dFUf3vHkFaxywM7Qqa4wKt94TkLhEZvQUzVOcq+JDCgoeA09ExYkCrUCa944xJRcpOz
-	 6IsfWyII6oB0C876rIsjMEfj230mAflETNpWY7wsWCErOeJJwewpv8Am/gYBdN7ik0w==
+	t=1795013897;
+	b=SoSOg0l+wrngvklntDOYtZ9WSK64rxOlpACqmGCRhGwhzJ1SwGPgA8b1mn/F7bmZ2zpU
+	 exWsEwoY3+SBwykGQ0fKQD8RQlWEea3fPrFbDXeL4/o2Gq1GS0P/mlXP11O4evkB3yHlY
+	 HQ787V4mVGP1J9ApQBnvabZJSksDydMYMGJcEFULWm5rJKeo7fSd0Ehtp51wcCgm6+55a
+	 8SlhGin+CeUT0DHeZdyNRa77gCCLqhKDiyWtzFCzOWNcuF41Ot1lhNgwl/1HQ48C709sV
+	 MD50J2p+etNBmbtQKSzccPwTP9RBEnsyem/TRpw16obp/ToBGoSV3FPv8F0f2PiKS/A==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795013896;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=0XaXdrDvphgQpimZx5cBV74V3RkBkYmldb9F3GdEaZY=;
-	b=sket0ox6sk0kIyGBk1VBx0uebXGuyaqlQc7BTfL8x0vQ/JJ2+tS1jGduP5zaEis+pLc0
-	 pkRgByU6BBUwEEeM7tqt1GjLgphOGc5c+CNsUTGDyuMEM3nliYO2/tCVwmF25wM8rHG7I
-	 UJoG9siI9ZVMMm77vjfUE9Lq8nKqo4E8ee7I+1gMQCD3RLR2qKxqiiyNmmXRKUc24KzUk
-	 NhVqrmXiyAfsj1TLgYYkdC+CvZOMYlIdCIrkYIzrElByWyBQJrOUpvxX+F07C0GFQLL/i
-	 jX40VkN1aw8VNmdJpn6r6SjtZn/uchf9ivqjH5LRt1hQ06PVyS0f3URo4HRRzG+69aw==
+	c=relaxed/relaxed; t=1795013897;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=pu/Zc8lWUl4Jnr74f98ic/pN2AH2QRpGA1MQ3JEWhKQ=;
+	b=FYJQbjxGfB2ilHHuTdCWi9sg2yn+j61wLVXyMf0CBAJhgkDMBfJslymMjcA8ROBwZLVm
+	 9aHHY4EmhIQ8iDACsWM5JjiynkxFbVpx8h1M5H7JwJGQd5ZiEwR1SsZiObYnLhSxONKDC
+	 OxOb3KSmzhG+Ry95ekevBx6Q5i1/pV8Yd49YiEKnrqrsTlcvSEAtchpLyy0d65nI6oyom
+	 0jV8hUEeUPavnw8MSu/6+nfKKkbWX/xbB/A9misX0BZMqCdoX3kIqE9FCjYII7jUQhqe8
+	 8OlA029GwkGxVWM/ofsq0TKUiE4R7b+0L1FDRKVLgpmykhzXNvtnsJe+vd3SkE8nlVA==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 8F2901F00925;
+	by smtp.kernel.org (Postfix) with ESMTPS id 78AE81F000CD;
 	Wed, 18 Nov 2026 14:58:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795013896;
-	bh=0XaXdrDvphgQpimZx5cBV74V3RkBkYmldb9F3GdEaZY=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=fR9D4MB2d1Qjol8H8XVYBNwby89AJ3DOQ/sBGoTxJ+CWo5X1QAvhJj+ks5HoLwlZR
-	 hL2K8ZA6yO5997znys+egTGtGoJfYd4BbiF82PEs03hxYtPNAu0gTZNZHs43g/Uce8
-	 RISzsc1HfngjZcBAVuv5XVuF23ESo3u+K3tzTFFzFGrqFYotGAMnF7IBR4k2TR2dmU
-	 YpJpjNuYMrUix1yahje/32vGKdqnfOwZugLqZ8q9+cBy8WhFAE/kmwe/W3W2EwSI8C
-	 W3mQT8Voi62kUiMyzeT95ccj2vMWgJ2sUwWudrYiZ2SAEQPahUTJ0UmzaoJYJz4m7+
-	 h+b014e3Av9Dw==
+	s=k20260515; t=1795013897;
+	bh=pu/Zc8lWUl4Jnr74f98ic/pN2AH2QRpGA1MQ3JEWhKQ=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=n4H5SIKkVyAt8HZyplafcs7eB8PJEdWcHqaCbpzFmrb4kIzHYzqIWHQ1A88A19JCO
+	 8RsORUwte12anA0oRRG+SCxwfIkZIf6L717oy2DHMVjt/rFyQo9Y3iUh7e8fjuChSu
+	 Ft8XZoeLyNY5cFD+45gklTCflm/MwAlU1nCC2tski9Vm2GytnK5uW+TVWWWkLkl5Fr
+	 Cprb1QAXnCUG2jJ4kXVk0gyggRY8xppaBZjlxRcYxTrPf5oda25dI/7dUTsBn/jluG
+	 gGEuYxmPCkAvafMCDEoKqufiWqr+AJRIHBvq0Uzlio08tjOBSTcFnNe2eBVGenY12a
+	 wht2CVvU0pWfw==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 0A0704AE00;
-	Wed, 18 Nov 2026 14:58:13 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id CA47A4ADFC;
+	Wed, 18 Nov 2026 14:58:12 +0000 (UTC)
 From: Alexandre Rapaille via B4 Relay <devnull+arapaille.atlr-engineering.com@kernel.org>
-Date: Wed, 18 Nov 2026 15:58:00 +0100
-Subject: [PATCH 2/3] wifi: wcn36xx: Do not enforce interrupt trigger type
+Subject: [PATCH 0/3] msm8974/wcn36xx: recover Wi-Fi after a WCNSS crash
+Date: Wed, 18 Nov 2026 15:57:58 +0100
+Message-Id: <20261118-wcnss-series-v1-v1-0-a64d82e151bf@atlr-engineering.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,9 +84,11 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261118-wcnss-series-v1-v1-2-a64d82e151bf@atlr-engineering.com>
-References: <20261118-wcnss-series-v1-v1-0-a64d82e151bf@atlr-engineering.com>
-In-Reply-To: <20261118-wcnss-series-v1-v1-0-a64d82e151bf@atlr-engineering.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPa8/WoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQ0ML3fLkvOJiXYgu3TJD3bQ0E7OUJAPTRGPDZCWgroKi1LTMCrCJ0bE
+ QfnFpUlZqcgnIGKXaWgBmx6bscwAAAA==
+X-Change-ID: 20261118-wcnss-series-v1-ff46db05a31c
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -97,55 +100,48 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-wireless@vger.kernel.org, 
  Alexandre Rapaille <arapaille@atlr-engineering.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795013892; l=1329;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795013892; l=1299;
  i=arapaille@atlr-engineering.com; s=20261118; h=from:subject:message-id;
- bh=khOZHEXRcSQmbq7KDArufnHPyg+ogBAkMuAIzDyD5GI=;
- b=nII4Tr6E80HN1n9xJCpvsfRQtm3voa4KEvn2sUb3dTDXcNFbHiKQ1Jq+Xa7RgMMY+0XXn1unX
- 8swV0TgKt1hB9hMZ9nFdCy06x0CvWp/RXPAMmDJqGYkbiJHEgW3AC9T
+ bh=n8yc64Of0fWZA21WPMBAjcjFUjAVUPNfN5qZlFFTgjA=;
+ b=dpaJKsS/juYfwL649WABQZENlJBbG0CSt4JcWP76DIQsmjbq6WYGPqFEPosdK4mUTQFxjDjL2
+ j32TXZ4SamWALlqXNrknkI4jl2C1PlFhOWdJlM3yvi3hodUyEquqK9X
 X-Developer-Key: i=arapaille@atlr-engineering.com; a=ed25519;
  pk=xskH/sIiNU/aZCeGeBB1TK/AuiG3MXlX0m2wMlbMl08=
 X-Endpoint-Received: by B4 Relay for
  arapaille@atlr-engineering.com/20261118 with auth_id=1560
 X-Original-From: Alexandre Rapaille <arapaille@atlr-engineering.com>
 Reply-To: arapaille@atlr-engineering.com
-Content-Transfer-Encoding: 7bit
 
-From: Alexandre Rapaille <arapaille@atlr-engineering.com>
+On msm8974 the wcn36xx re-probe after a WCNSS crash fails on an IRQ type
+mismatch (DT edge, driver level), so wlan0 stays gone until reboot; seen
+on deployed Fairphone 2 gateways.
 
-Forcing IRQF_TRIGGER_HIGH over the DT type makes the re-probe after a WCNSS
-restart fail ("type mismatch, failed to map hwirq"). Rely on the DT, as
-commit 1ee6c5abebd3 ("ath10k: do not enforce interrupt trigger type") did.
+Tested on a Fairphone 2 (6.12.113 plus this series): 10/10 forced WCNSS
+crashes recovered in ~20 s; unpatched, none did. Build-tested on
+next-20261117, dtbs_check unchanged.
 
-Fixes: 8e84c2582169 ("wcn36xx: mac80211 driver for Qualcomm WCN3660/WCN3680 hardware")
+Patch 1 is for the qcom tree, 2-3 for ath. Patch 2 needs patch 1 on
+msm8974, or its WCNSS IRQs would turn edge-triggered.
+
 Signed-off-by: Alexandre Rapaille <arapaille@atlr-engineering.com>
 ---
- drivers/net/wireless/ath/wcn36xx/dxe.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Alexandre Rapaille (3):
+      ARM: dts: qcom: msm8974: Fix WCNSS wifi interrupt trigger type
+      wifi: wcn36xx: Do not enforce interrupt trigger type
+      wifi: wcn36xx: Stop waiting on a dead firmware during remove
 
-diff --git a/drivers/net/wireless/ath/wcn36xx/dxe.c b/drivers/net/wireless/ath/wcn36xx/dxe.c
-index 801f1218ef..7852f71368 100644
---- a/drivers/net/wireless/ath/wcn36xx/dxe.c
-+++ b/drivers/net/wireless/ath/wcn36xx/dxe.c
-@@ -552,14 +552,14 @@ static int wcn36xx_dxe_request_irqs(struct wcn36xx *wcn)
- {
- 	int ret;
- 
--	ret = request_irq(wcn->tx_irq, wcn36xx_irq_tx_complete,
--			  IRQF_TRIGGER_HIGH, "wcn36xx_tx", wcn);
-+	ret = request_irq(wcn->tx_irq, wcn36xx_irq_tx_complete, 0,
-+			  "wcn36xx_tx", wcn);
- 	if (ret) {
- 		wcn36xx_err("failed to alloc tx irq\n");
- 		goto out_err;
- 	}
- 
--	ret = request_irq(wcn->rx_irq, wcn36xx_irq_rx_ready, IRQF_TRIGGER_HIGH,
-+	ret = request_irq(wcn->rx_irq, wcn36xx_irq_rx_ready, 0,
- 			  "wcn36xx_rx", wcn);
- 	if (ret) {
- 		wcn36xx_err("failed to alloc rx irq\n");
+ arch/arm/boot/dts/qcom/qcom-msm8974.dtsi   | 4 ++--
+ drivers/net/wireless/ath/wcn36xx/dxe.c     | 6 +++---
+ drivers/net/wireless/ath/wcn36xx/main.c    | 1 +
+ drivers/net/wireless/ath/wcn36xx/smd.c     | 8 ++++++++
+ drivers/net/wireless/ath/wcn36xx/wcn36xx.h | 4 ++++
+ 5 files changed, 18 insertions(+), 5 deletions(-)
+---
+base-commit: 20eef29b7c8465ac98d7dd6d6f2ac07a8d8056ca
+change-id: 20261118-wcnss-series-v1-ff46db05a31c
 
--- 
-2.43.0
+Best regards,
+--  
+Alexandre Rapaille <arapaille@atlr-engineering.com>
 
 
