@@ -1,47 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795005784;
-	b=P1SAeDT2KUZjsL4MdrLpcQ7yVuJn6+Rzp1Rv1FVtoZ2B2jwiH5QZ9/eNBP3YL8MfbnL6
-	 tBlWaOpJiV2/o7VJZBiOTMdd5hRM+hvK5qs/VrCZGLOI5jps0DZjLkYhBHT698sxq/3px
-	 P5gaQTPE3buwfuBi7bJEKhBPQn6OKbQgdBcaw47f2BoPAzUdH85VIO0L1aVwWqy89TQJN
-	 uGRaDkqa6vFkh4AacwLeSF2fpaB1EVVI3i/Pk1HhVrs7B/7rhQKH1IHzfBoJiBaVapfPF
-	 BpE7acxmvEas37uSX4inoOyCKnDbkdQMlmxD4VERyr1ng2NRy30qcxL5dGTNVTtoJfg==
+	t=1795006087;
+	b=FkyOJ1hB42mSKEzTuUShylIFsukTlgh7p0TMmAkOghPa841OLgLHeG0I6NT4QXOvFRpH
+	 vaiTNnAvAC9QV4SRL3syEEzegKo4udTnEvmyQ4SzuvR653VcWrqciFlX0QhzLgVaOQ+qg
+	 1PfXgW6r6PDjXMeBeXbtGTMA456Qwoaz4UiTlOHhmjQUHGMRFvRKZcVccpKSAX/E1QdjL
+	 Js6VftdB3bIRK0G7j9GN7cBau3Ue3/fSzREUaB+7zF0d2D1tdQLYJ754/Bjsh7vLaRzZx
+	 pi6l90BB6a52LTS5I1y++F8TAG1344xh7WFutuZI9UrryQ6NLzBXjI3d02MbAa0JbYQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795005784;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=i7BOqRCeyCtAF/WP5xZtoPvyJhiNeF0I4oiRbcf0zpc=;
-	b=OMAlAB2szhSZEA1oOR2Q/hkpDmQNprfiCKYK8N4pWSJPzJSF5XInKAdZh7uuatsqcxii
-	 LbRjyO493sJVVOgYNRMb/R2WvfspQzEX8Cr3wpJ7BdEXRwqk6rBwE45VFvxYErqkcYZjV
-	 7ePU5LnCmmDrQM5wHHNHtp0X+qXMFcLWgiTfksOvKyiVgsinsCObBmekpwvMvSlTyzm31
-	 dQ6ISL2ogpB4GFKiNAPDIpU3Pt36k96Ny9E7rsWsSNFVF3UnNRySrLa0ypQhDZYrKczwR
-	 cKPRAEc+Vf0DVzJS4Z/zaIGSHQDyvwfQ8phde/sdINR1KqLU9LcM6bD5h/h3Pkocj1g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795006087;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=LjfmYi6jxAobL2J/ncBt2ONxTq2J0U69VJpQ5IVs6qU=;
+	b=4w45TDW9/fTv1VWg0Tm1++GTjPJmNo0IISRACvKXDIiwbx/e/PlqJVQgzCgqOjrMwl7a
+	 HDd951zVkWD7mgLYnq2L++8xs2mkd7CP2EPysKLGsuHPXatBRqdxIPCbyPp9zFS3sM8OO
+	 TS4DPVIGE6zG85MG+0wm2iB+K7j8q56Ot2IJevqS3KYwud8lfJ0TGOBZwjZoW6ytB0PrG
+	 4Xm4KH6Z9iAzMSOuNQ/9ed1xPpshvXobKLaaDyUxM+OkR1ai6r/bUWIdUKi7BPJUdaC1J
+	 +Wb4E8EQlRvv7zBMEbPcrX3202G9xeFDZhRKvlYdyqJzvZGdG9qWR/txKVgQyc3V5kg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HJfNtYoA;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Tdk29yw3;
+	arc=none smtp.remote-ip=209.85.214.182
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B15860A260A;
-	Wed, 18 Nov 2026 12:43:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B74B606A331
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 12:48:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4B74B606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HJfNtYoA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 108711F000C5;
-	Wed, 18 Nov 2026 12:42:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795005783;
-	bh=i7BOqRCeyCtAF/WP5xZtoPvyJhiNeF0I4oiRbcf0zpc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=HJfNtYoANKaHZ2oDdH8fQ/6C/p6v3PUgE8GPyx361yKWpTeixsXnScDij65hbQ9MQ
-	 SqHEWaD9MmqvK1z2hp5jkH9wtqeNTFWUCJk75BCZIHos99tIiVq9VDCAb4qOWhBort
-	 jPh4v3Dd7f0K/u3bNtflMuM1JAFORoRBBPz5wf7+kd9C+Tnh11nlv/TVWpVaJ8IzDq
-	 7Tnu4QKM0Mqo7KtS33OBo/l35HQKzCntM18P0Y2+q8rZv9tR9aUkqrXXFt4ZxxiPnX
-	 SHzi39sJLIa4EEtkW4cZlV4EcQVkI7IjH4sJV/7Muc5TF6yNMXdwNK2HyP1++CMYTU
-	 4PkN5XJJK++ng==
-Message-ID: <c20a2a9f-f40d-4ef0-9aa3-f6eee24ed2b1@kernel.org>
-Date: Wed, 18 Nov 2026 13:42:57 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Tdk29yw3
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2e9ae391a05so5301595ad.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 04:48:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795006086; x=1795610886; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LjfmYi6jxAobL2J/ncBt2ONxTq2J0U69VJpQ5IVs6qU=;
+        b=Tdk29yw3/PRUl38+VNvz9P8HeVNbv/SXLOtLIZdOIz0pPeo9ny+AnQ0JTzs/oGlqxD
+         EAJG0Auya2snuQ5mfsVmIL5uZXeEX3e3odvhDwwBaw01oT/obzyGhflt+2xwPtpjqxuL
+         6CGDnwVPGxZ2C11PGN5I7/YS0x+41+m+fJdX8mZtoHF2uWrj1zpbo8nnVNUa0PLlJhFK
+         0F789cia/Cj5tXTZF0A7Sj/d4dJzoNDY5AUtsRregNUm3qp3kupQO1s/j6u4xRf0gTgs
+         9RCvCauILyPsYlN+dtT5ExsFzLu37Z3YrGnLDBeGa6smWRYWP60/hM+0mmNg+ilRvPRT
+         5FBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795006086; x=1795610886;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LjfmYi6jxAobL2J/ncBt2ONxTq2J0U69VJpQ5IVs6qU=;
+        b=x35gHstdQP2SXSG1rFuRzsRkgIzF9wuaogqjKCb+fy999RWEBpahW6zv1H/zn9QBTy
+         c8s+9OMfijfwckXjgqQPrJLXrDq2JTulmsEarfH1KXrL9esbG+Z0WdQr9gnO/MLYZZen
+         OTQBju5sXYoVEfrCnB7U0BX6BxdpWPs3nIFcWT+E/hxBty44S/+0LD0BCxbgacZVSrqw
+         6JSedSQP48jXuNi4YZHj5pgNmtz8iL0UyBIkACFr82khvK+OFlUzNGTX6d1HqSo+xHrk
+         RCApbq2uKiD8BarxvrySiOTt+/T1/AWvYQ2OpIgDst8+HSLZBJoED4fyMiJ1SuzV5uwv
+         ci3g==
+X-Forwarded-Encrypted: i=1; AL+hErH9qJ9ps5EpuJ9YKNuEyYMH9uLTNyizPhiV2GDfc2lermyhi3f73Twx5KO+JVP04PF0ULtrwrZZhKVqOkuo@vger.kernel.org
+X-Gm-Message-State: APuU4Z/ja9/bQbWUAgxdEG5/gEuAayf0jcM5NOroym9LxpW5k2txUhET
+	RwtN9IL/gfIzKRODxrcfWGPoZNWV1TQFuhKqzMY+C0+SHG9EpTH9LheU
+X-Gm-Gg: AZFdTZeF1LM21s3/YI7p58mYXq2ONS2miXZ1VZzBXqeS2nDBNll0lqsZS4ELsC+4hKw
+	lu7tvaSRVJ96meZtzLPNamKGnPYqkRSXx9PqVSDFLUo1Xnt6Hf3LPswr1vzbV+VXKa1EKBP/tk8
+	n4BGxlaM9xHYF0teR8zuVOH8N/HlI0j18bMr/tq6vKOow7jdmk8WR4xAHznGO0EB9YIxba1NmkJ
+	MReIVYxI2IRIbNWvZsxH8FMakhqUiUdmjJXYO1Xt4B8cNgJpZw7ON+gbzfMg+rFCrFH4897m2By
+	hh/QSzMys1xz3CnItxBKflukqx6Q6yPZGpJlQwpUhh0L8mTzEXJXrY3YIiPuwbGcgwSgiuFsoRF
+	CQTrNNwVE+yfNw4iEpgtNRLf9bGxqIQEcOgv0lEJjtlxz+99/Mxoi+YYjFsIIp2suuvRulCJup3
+	dTMDgjZ0lziCP04fn8KEWnhUJIaurfLRsmWfoCsgJZPFxN3wMp8bw+ensY1F7610eHaduENKo1M
+	cyfTf2VKVy3IRefA9hDlkPD6ZjTLRA02WIxX95RAd4vdi2tKEChnWr3EvckxApGg+lqKoz3YVaK
+	vLfg7KwB02gIEwc06YWv+0td4piGGzunvggoDKNToFz+7YaJtgEfmhVF/Hg=
+X-Received: by 2002:a17:902:cf09:b0:2ef:db5d:59a6 with SMTP id d9443c01a7336-2eff75209famr17213905ad.23.1795006086041;
+        Wed, 18 Nov 2026 04:48:06 -0800 (PST)
+Received: from G7XWH7K1F3 ([2408:8256:2e80:7371:2c16:ada8:2d24:d03])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2eff6214f4dsm12775795ad.43.2026.11.18.04.47.50
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Wed, 18 Nov 2026 04:48:05 -0800 (PST)
+From: Zhao Li <enderaoelyther@gmail.com>
+To: Michael McAllister <me@michaelmcallister.org>
+Cc: Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	brgl@kernel.org,
+	linux-bluetooth@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	quic_bgodavar@quicinc.com,
+	lumag@kernel.org,
+	mka@chromium.org,
+	markus.probst@posteo.de,
+	shuai.zhang@oss.qualcomm.com
+Subject: Re: [PATCH v3 2/5] Bluetooth: hci_serdev: Track whether the serial port is open
+Date: Wed, 18 Nov 2026 20:47:27 +0800
+Message-ID: <20261118124727.2330-1-enderaoelyther@gmail.com>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <179484638195.54009.8903355214693287470.wcn3950-poweroff-v3-2@michaelmcallister.org>
+References: <179484638195.54009.1916641645532262287.wcn3950-poweroff-v3-0@michaelmcallister.org> <179484638195.54009.8903355214693287470.wcn3950-poweroff-v3-2@michaelmcallister.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,78 +106,22 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: defconfig: enable the SerDes PHY for Qualcomm
- SA8255p
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
- Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261118-qcom-scmi-sgmii-phy-defconfig-v1-1-d0c7d2e881c7@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261118-qcom-scmi-sgmii-phy-defconfig-v1-1-d0c7d2e881c7@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18/11/2026 11:31, Bartosz Golaszewski wrote:
-> Enable the SGMII/SerDes PHY driver for the firmware-managed variant of
-> the Lemans platform. This module is required for ethernet to work on
+Hi Michael,
 
-Which Lemans? This is a generic defconfig, not vendor specific.
+The hci_uart_close() hunk touches the quirk branch that clears
+HCI_UART_PROTO_READY and closes the port. That branch has a separate
+race: it clears the flag without hu->proto_lock and closes the port
+without waiting for write_work, so a transmit that is still queued can
+reach the tty while the port is being closed.
+hci_uart_unregister_device() already clears the flag under
+percpu_down_write() and calls cancel_work_sync() first.
 
-> sa8255p-ride.
-> 
+Your patch does not change the ordering, so I think it is better kept
+as is. I will send a separate fix for the close path. It changes one
+context line of your hunk (the close call), so it will need a trivial
+rebase on whichever series lands first. If you prefer, fold it into
+your series and I will send it to you.
 
-`git grep` gives me only piece of a compatible, not even DTS. There is
-no such board simply. We don't take changes for non-upstream boards.
-
-
-Best regards,
-Krzysztof
+Zhao Li
