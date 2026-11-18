@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795096068;
-	b=fGtb1Z2iQafsVGEq8B3SeBOxeCCKXo6I9wUorNp+eBEjbiGFxcaqyFhqTbK6OPjXW/Vg
-	 Ggxc1T4EaseeVTmr047oCZEAiStj25t7kR3sjeE9HO8oszXEoCekfDF3UjHHZCop4d6O1
-	 FNHALZ1GRdYshfQQWodoAKBIZgyXVoaWgIkGRHGvLSgf1BfCNP1/+zQ8Qc3BbxZsd1f40
-	 nJm9VEqmG6fMw4YmY9pufi6MWo05lBgCvKOThCoYqG/D70Jw2LrcaHaigzJODzaARihBd
-	 EDwe3UqKVvpamxTthuQ8RoiCUXVB+UFsYLS8Be5dBffvNBrPs61JJZlizCXTbmtB1QQ==
+	t=1795096071;
+	b=FEuM66kxpYvJRFGCVxWO07F1ttvjojdsYErM3dv5PrY/M7xIF1/+aNXb6ktQzQXAtCuJ
+	 1VCaVAbQzR7enq+qLd3AxAAqizgXlYMhw9CI2eHZBhCe0l5GZYpbaF4FfXX8dSUsxnGyX
+	 jDUMPbr/VlWJf0HQv7nDO7XTjMomFvTWvTBf/KEVGe2g8Mm4vtz+0HANntOuEV3GsOEqZ
+	 YIApvHC6Wtkmb/tKtQBMdbww35uLsszefeu/U06EaQ6uHVIRlQHjtwsCp1heL0v832JvW
+	 dIJOD7MDyeU6WRBoodrvahkKfYewBn9xPKD+yqFT7ey79t3uDouHmLzS7lkfGOeWKKw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795096068;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=/aUkR2dZtbFzFdTxiIcu8jaum48sVObo0flYILxu/V8=;
-	b=lPemvpvauTMaBm6+Uj3C5quyTbm1WYqxsm76MMaR9tUpmYHlK7FZzBcIvcKRGwevR8+7
-	 7JbIOZ+Dmc7qo/jNjg1Wqf0M5Tn0jU6ICFRPIIuuWfiSTBCRxV8dqc6Zvy1TuQ+ge9Dr9
-	 ZM1mvOeWX85wpU4J1nhMHVkZP0WZzNH4rj2rAXQFrIWcYmUxJozMMSoxMobMcI9L2gZAI
-	 RO3YsYjYnfMSy/3fTaVv4ubthqzMuOTZEKUeScrJsx4jD2edFUWo212LvLNCAFttOeT5N
-	 sYXWZWKkw5qqS4oExAMnXzfaFkwqTxNQZSKMMUeXscYKP/5KIVZehdP39mDazJrTCVQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795096071;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=pV2o9KSUGm6ks634juMQPCOu5KrGLDfQVoB76XP1OTU=;
+	b=E9jbPw3SbZm0ElsdrrrqqAsfnExkDzzUCB7bhm5Z3Vk1/l5617cWbkKB7kM3lpN81uul
+	 B9SZnM9ThF/7r0Ew3IzgAN2nbc3WWETOn+OZ4dTjYN931XNjsAfYmJl5yZM5SkTfEOSd7
+	 YE+z6PGZvzT3FknDW6as6zlmsNc0ndopb08+ToLiFFMD/xY+7sMUSa3F3z+xs7x9tFUFw
+	 UBT9C31HnQHDTTEtIo3bWpbQBRxJdp6WJ0Kav66bdBVvo02zmmVHI7SZwtR5ADEMIknpp
+	 WhUKQnHfFsQ4JBuAyZ7rUxlDDgXG2S3ggw7NCo10vnDvvb+ivYJUQdKifTL+aMNqxqw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ed8chs7W;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Cg5xV/ri";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 470CE606A336;
-	Thu, 19 Nov 2026 13:47:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05D2C60A2615;
+	Thu, 19 Nov 2026 13:47:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ed8chs7W
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 0908C1F000CF;
-	Thu, 19 Nov 2026 13:47:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cg5xV/ri
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCD6A1F00923;
+	Thu, 19 Nov 2026 13:47:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795096067;
-	bh=/aUkR2dZtbFzFdTxiIcu8jaum48sVObo0flYILxu/V8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ed8chs7WaJt8q6FQslIocScqdEwLnMEhjIx8ewmFiCjgE2EP06utqiIHU4wtGkB6n
-	 4U0k8+sTi01VtzUmpxUZcxdtdYtI4lhoe9gz0+7BuejhwrlCdFYq8YuzxThgOlQFnx
-	 lzlMJsvIFpPzqGirTmEqPUj3OZZ3uomwZYDiO+0ZDihK7S7Ae+aYPTBCDMXMsRgu3W
-	 ISdwYbaFEFRw9GjOMGLonNR9SmIYvz3FB1lnv9FMWmHmwt8Yub/jrgqokAN3skuwU6
-	 dmE5NClPdYarXRP47ucWwGB9kIT7RxXrmbO+ZZI8mtyWBBIFEtI8aepz98jGlIZfeP
-	 hw7cuVbhkdA6g==
-Date: Thu, 19 Nov 2026 14:47:44 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Karl Chan <exxxxkc@getgoogleoff.me>
-Cc: linux-arm-msm@vger.kernel.org, andersson@kernel.org, 
-	konradybcio@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	mturquette@baylibre.com, sboyd@kernel.org, linus.walleij@linaro.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org, 
-	linux-gpio@vger.kernel.org
-Subject: Re: [PATCH v6 4/5] pinctrl: qcom: ipq5018: allow it to be bulid on
- arm32
-Message-ID: <ehikivdig5q4hvfdb76p2l6xtw5dlyhhvxfj5sfhjlj4btc27r@ickrtvtsi4ui>
-References: <20241007163414.32458-1-exxxxkc@getgoogleoff.me>
- <20241007163414.32458-5-exxxxkc@getgoogleoff.me>
+	s=k20260515; t=1795096070;
+	bh=pV2o9KSUGm6ks634juMQPCOu5KrGLDfQVoB76XP1OTU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=Cg5xV/rifGT+vBk0r0qOAOdrVDX2uKQGs3Pv6IR5iRTQM9oJeei47EKtr7cm5J8V8
+	 2AJkfqR1I3xoaA5RZfHAW357zl+RWjSikRjbF0k2ZP68Gfj2LRJqnl86ldMSHenbhP
+	 PVj+rPtVbKPz1Twh2PhwtWBq8CuS+oePo3BDY24mQ4LR8GbnjgPHdwfbC/sQli0md7
+	 ALowlG9PfJYq7MXhPBvBnhbfqn9Vg+bSWyCRfQHG+HmS13wfy1tpckgHLqlaSfABbn
+	 abknRDNeJa3XVCKkGCt7KeDO3uDPoc6ENQTtabvsjV998Vm6yxWamVJMtiFJdq5tgh
+	 yl+vPgPA5o5tw==
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, yzddMr6 <yzddmr6@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
+References: <20261115-upstream-q6dsp-clk-drvdata-v1-1-4d7dbea52e52@gmail.com>
+Subject: Re: [PATCH] ASoC: qcom: q6dsp-lpass-clocks: Set driver data before
+ registering clocks
+Message-Id: <179500957901.349622.12400179007846918256.b4-ty@b4>
+Date: Wed, 18 Nov 2026 13:46:19 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,18 +61,46 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241007163414.32458-5-exxxxkc@getgoogleoff.me>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1159; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=pmK2pUw157FCEpTJkuQI8zV+eBL+T38cqNjovMfug9A=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+/WPiOe69QTn8a3v9mzuKmz6IVW+repMRvNLd2C9+Y
+ uelvcvKOkpZGMS4GGTFFFnisrhf1pe8XsN3cGEbzBxWJpAhDFycAjCROxMYGZbsXm3ZZPBgxUbf
+ kwFLlvBof5HMiXwVyGF1QG2dzJ+pWv8Z/sexdXwOMLii8OrtogPrdv7aNnmPe8sM42yPwM8qN3b
+ 7G7ABAA==
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Tue, Oct 08, 2024 at 12:34:13AM +0800, Karl Chan wrote:
-> There are some ipq5018 based device's firmware only can able to boot
-> arm32 but the pinctrl driver dont allow it to be compiled on
-> arm32.Therefore this patch needed for those devices.
-> 
-> Signed-off-by: Karl Chan <exxxxkc@getgoogleoff.me>
-> ---
+On Sun, 15 Nov 2026 21:12:57 +0800, yzddMr6 wrote:
+> ASoC: qcom: q6dsp-lpass-clocks: Set driver data before registering clocks
 
-This doesn't apply on top of current linux-next.
+Applied to
 
-Bart
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
+
+Thanks!
+
+[1/1] ASoC: qcom: q6dsp-lpass-clocks: Set driver data before registering clocks
+      https://git.kernel.org/broonie/sound/c/bd6e011c8121
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
