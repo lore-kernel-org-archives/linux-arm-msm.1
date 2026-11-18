@@ -1,102 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795034284;
-	b=AeCu4AG160SYc3ynBHj71Va+uRNynj5OsO9g/WHvrrpzHnXw1GJlnvGdUfv/N6/nKztP
-	 PT4XW3sq0RV3/yKYAeem4WrYOutp8nv/qv5nAtHSLgRMmeYJPwfT0cz6JLmkP0hhtoqrh
-	 jJe7jbjBSctnDvhHJJZtjfixPAI30o+AfZ1+bJ/U+hdLK/bidAt7d0h2EbtkYYBuWaY3o
-	 wvLFMCVXz1/uLXs7YLJcgmVQi6c/i3p5UQMqorv3YPh9iPrHwrnoNBeNQfRj/C3mAgObr
-	 mAB5GigTlOcwQf5FdeLcwcdKa8XykY1FpTnkpy8H7h2CU+VO5DNTMgZ6jUZTpLNtpLA==
+	t=1795035059;
+	b=wUs0f6TanTTctTZLG9jaAiob6QkJfOh4umzuvumZc5hU9mTdpMfYJw7EQPEAxGAhASyo
+	 hUWpGSIulByy6I13HIF+xABrtYcruby2jTsYlZS9/bpNEACjQ+yfQlWRhu4fTnOYHpySi
+	 gSiZm06xbS4WPmnJV46RdQTT/nGnRLBE9IVHbF8fjSYcw645vj/9fuffrSoW9OK+4Awq9
+	 RishGLuuIW0Zhtvnbp87apggvmnWjEYh9X/pmy7ENJ7cxl1F+ZSVILTzGwiV5rub+uCA0
+	 H0XBoVWLLcIyUlKwN9kbJXwRddT7TZVDFuLTA5TKJEdcV9CyBOHKgLLzhbYxdt+Agbw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795034284;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=YoDhXeC9eAY7IXgT8Ctr9LEdWE8O3Jm6he0UDGeXJ/c=;
-	b=Kbhv0gEGXr+gNw5lyBfiX+SNLYM2sLH+8BRTB+WWFvLgCNe9OdRDF16lhCXETAvw4b/x
-	 GfnV61ugWy9FUdZbDx2w0yXB6eAnOwzGti0vcfqQ5+1Euf9J6fAKx4/2ud6hRuo4CNR2x
-	 zr6XgTFGnVwRPzSmQtICFg3W2OZ37bLmLFxKik15jsFjmWbWZCUhMC44OLAXuZbyodhIv
-	 s8bU4A12HAQGX9zynFq1ys0Z/Y08fmJ3av40S/W2rhDdOF+P0pVZ5dC7BewLQ1vT3ys2n
-	 oO6xaPhQpYfEs1i8dP4grTXTStYbN0wd/McQjZljB8oLMMggBmxSoufvFvfNBznkbBw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795035059;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=0aMgbQQmw1MPLXYBpDbUKS5IgiG3zEQxMu5gz/miA1Y=;
+	b=Pr9VeHX8XlGwvPQFaPrtFjETimeGTIMz16EneEn0IbvxW3upSApEz1/+UloMlAt7y/gk
+	 tVKU4HgTB5PfM0WYlB8lNfHe9Ygs+Np2Z2oBOaV+hzW3Ghb1doh4Yzq+aDy29WG1+Mv1h
+	 yq7E0r/2htzy3qjGxJoIb7iiLuWsW+yEgbtqXqdri5x4wZAfw7ytqguQzEKXu3AABYNj6
+	 7eK8c4nkzNJRR5rEUMuagHBHX2z9l4slr4FS2yHrlyyx5G47sqYvQ5ZyHFFVUnOyRu9eu
+	 BM/LImaqCaSFRm6X++zQrt3iH9iyGWHArwkrNZzNLt+B3ifidJeM/9MrJvtR+jPkj5Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LTYMQlHE;
-	arc=none smtp.remote-ip=209.85.160.177
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D9H2bQLM;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 314DD60A260A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 20:38:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 314DD60A260A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C2F0606A320;
+	Wed, 18 Nov 2026 20:50:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LTYMQlHE
-Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-55d30c054dfso15497071cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 12:38:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795034283; x=1795639083; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YoDhXeC9eAY7IXgT8Ctr9LEdWE8O3Jm6he0UDGeXJ/c=;
-        b=LTYMQlHEbQdTlKUxPBuAzs7VvXrbF1oiYVatGoqHremn64qVP2+VtOWCtRF5qWcysZ
-         l5agRzunf1PTVH+OhcBmq9jYrHAzemjz4WyV3wBLt36wZrQ0x7fPwVhjlRLFVGESKxPf
-         +/4B6655MaEsnAyT5EMT3L3L+5LMMNqr7/S/RSS3WUY0tltxdQDvgW5sBwl/iDgiaEIt
-         NlvV7HMBuHOAHp6Gijb+5GONLMQZNPRG9xI4O5mYqn0+7y/TECNF/vOwxcJscQJ/bRbn
-         Vlqk5jktTZtNoIyio7RbDVQL5gsV3UILZXv8IJLnDskLLzk55xz7abbhpMmUb8SqWpqp
-         A9cA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795034283; x=1795639083;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YoDhXeC9eAY7IXgT8Ctr9LEdWE8O3Jm6he0UDGeXJ/c=;
-        b=ogXXno4DRnmsishJUf+ouZYtSP6ANiVy6vbXuJ9jH98lRtAojEyXZFT3qw1lgJZz6F
-         XGZreyzo/TyjfoDswyqrrZBBVKmKESdOVQcf0vupXf9W19xLYDc0d+I6fMrx8WfMGVdN
-         AdXlc7El8VVUO7edSbBfIkcLIjlCjJ1B5LE0b6QoNYHMlZO0ngQ30RYBjNMU5sPfpbgm
-         RYZeBGrRBzqUxDQN6aQtuNE6F9crXN0uwT5yFrtYYj0CquKE1f4XXmEWID0OxHAlV2LU
-         4AiTwPqjTRiW/J73LWkHAOPW0GHCjzIeTYESpGRZy5Xfyk5NrLWwCoxb89aY5abvzDeX
-         MGtQ==
-X-Forwarded-Encrypted: i=1; AL+hErF1sX+XFc7PIw604g0Y9m4eU7fYf+2qkd19w9PeNMJICtMIszFXQSmkWBEuL18H52a7EClZpDp2o9xJcGLt@vger.kernel.org
-X-Gm-Message-State: APuU4Z+dqvsCm1q0s+QKeml+8a1YzUnWIGZ0mOOVn+ma1x6hh0pQxxSv
-	ZcYBc9/IV8ca/FNLRZSrRcWRYEFoNRFtqSly1d49pGbHlSIOrQXGLKUz
-X-Gm-Gg: AYBFou2UgCXqmbBdY0a/mRGCI0JAoW1ubvMWInVFxuvioXZvDx1Nk6O8sns0Gh39Y6V
-	M84mEIlvCqpG7yKKMbg3iMFY323VdVo8yCYArqmDQckQxZSVxc3XB46k3r8Ss1phnkIJk+sLJ+c
-	Bp/UwtISHTaJv9F7t08UtotNnhsjgmCyYbb6s7Noi4HOW1Q/jHtg/gBPq7QZZwVBOxYHQIvq+vZ
-	LL4MNesrnMJaWEoTfFGrVW5wTdMRRnPv6msMKkovLBHtY/xp72/V96B2wAS1nV5hV6fKpjxiwwT
-	Jyw4lFWK7ufin4uIDnrwQkH+2eVSDqT9seS4GE8rtPr6cjgSQQs1PD/D5IErCB2rCwJR2LAkTOe
-	9bSjgq4F7AarB8cnf0DrpoSXprj5RXsdOdYHXg2QQ24Pk5PrMtUYn+flOozfnGZsKcbM8R2kpNc
-	YOnCB+VtWfHWRnjZjAK7pxoKuxVvYK/2kqePjAha5HJVIpwifg5EVPvYZDl/TVDjV8Wpkefefmf
-	zPcvl96cDAsNibZQmBdNdP8YC2vEHJuYC3Ahokv2tI7XVcBxxkTJfDDtN0OcTZZTe83CDLLGSaD
-	/fwY8LaelT+0eBanHOSi9KArvTlO1eK3jrKxGLqIq3qA05KgTxcKhoB7uljOQLRUysdaL+AFxTc
-	2ECpVuEukhhqSX6E=
-X-Received: by 2002:ac8:5d4a:0:b0:533:370c:7600 with SMTP id d75a77b69052e-55d5a57da20mr64973751cf.27.1795034282998;
-        Wed, 18 Nov 2026 12:38:02 -0800 (PST)
-Received: from localhost (bras-base-toroon2176w-grc-63-174-93-36-89.dsl.bell.ca. [174.93.36.89])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-921149f58dbsm30837106d6.6.2026.11.18.12.38.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2026 12:38:02 -0800 (PST)
-Date: Wed, 18 Nov 2026 15:38:01 -0500
-From: Richard Acayan <mailingradian@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Rob Herring <robh@kernel.org>,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D9H2bQLM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 212241F000C4;
+	Wed, 18 Nov 2026 20:50:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795035059;
+	bh=0aMgbQQmw1MPLXYBpDbUKS5IgiG3zEQxMu5gz/miA1Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=D9H2bQLMpNjY6yIUL4eRNe9xtgDcK4QHGxXWLYzlvB1bmUo8C+4C6H57Z6jg9sUA4
+	 KI2MfNZWHMF0hbxVFAJ4MbtoVerLZ8UCGf2jV4yN0WNM83SnHWTl5kcf6+9BmecA9C
+	 IR0ruJ0M3TZlseY9cOHVO+iRxj4W52ZhRlcTe1jTuvyyFF4rkiRGxbwbj80laq823k
+	 sOcXFUIbefvYS3SiHJo54xS8UrUoQKer4+6ur1h7Ye26LX07X6NmyiPvizyO0GovtJ
+	 ElEuzkCk84eFx59EadSVPsP+OrgTdyY+X8s8oUb5aHLo4Pf+umJYh0Ni2alCtb4A1m
+	 PeHU9oYDdRbqg==
+Date: Wed, 18 Nov 2026 14:50:56 -0600
+From: Rob Herring <robh@kernel.org>
+To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Amit Kucheria <amitk@kernel.org>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 7/9] arm64: dts: qcom: pm660l: add analog audio codec
-Message-ID: <av4MqUrrZ0OgMjlI@rdacayan>
-References: <20261107022453.159341-1-mailingradian@gmail.com>
- <20261107022453.159341-8-mailingradian@gmail.com>
- <avubHsbu-zkf5Uqc@zenbook>
+	Abel Vesa <abelvesa@kernel.org>, linux-pm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+Subject: Re: [PATCH v3 1/6] dt-bindings: thermal: thermal-zones: add
+ hardware-binning trip properties
+Message-ID: <20261118205056.GA839455-robh@kernel.org>
+References: <20261113-thermal_bin-v3-0-878df6eef8bc@oss.qualcomm.com>
+ <20261113-thermal_bin-v3-1-878df6eef8bc@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,22 +74,51 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <avubHsbu-zkf5Uqc@zenbook>
+In-Reply-To: <20261113-thermal_bin-v3-1-878df6eef8bc@oss.qualcomm.com>
 
-On Mon, Nov 16, 2026 at 06:10:25PM -0600, Bjorn Andersson wrote:
-> On Fri, Nov 06, 2026 at 09:24:51PM -0500, Richard Acayan wrote:
-> > The PM660L analog audio codec (PMIC revision 4) controls the headphone
-> > jack, and optionally the earpiece and speaker, at the vendor's decision.
-> > Add the analog audio codec.
-> > 
+On Fri, Nov 13, 2026 at 02:13:44PM +0530, Gaurav Kohli wrote:
+> From: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
 > 
-> Trying to merge this on top of linux-next gives me a number of
-> DeviceTree validation warnings related to "sound-name-prefix". There's
-> also a number of warnings from the later "arm64: dts: qcom:
-> sdm670-google: add sound card".
+> Differences in SoC packaging can be used to provide multiple SoC SKUs at
+> different thermal and performance characteristics. The underlying SoC
+> remains the same except for how much heat the packaging can dissipate,
+> thereby influencing the critical trip point at which an SoC SKU needs to
+> be throttled. This SKU-specific data is typically burned into fuses
+> during manufacturing and can be read back at runtime.
+> 
+> Add two optional trip-point properties to describe this:
+> 
+>   - 'temperature-bin': an array of per-bin trip temperatures, used
+>     instead of 'temperature' when the trip depends on the hardware
+>     revision encoded in fuses.
+> 
+>   - 'thermal-hw-bin': one or more bitmask groups describing the hardware
+>     revisions for which a trip point is valid, modeled on the
+>     'opp-supported-hw' property of the OPP framework.
+> 
+> Signed-off-by: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/thermal/thermal-zones.yaml | 60 +++++++++++++++++++++-
+>  1 file changed, 59 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
+> index 999ad40a20d5..cb9a8c96d053 100644
+> --- a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
+> +++ b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
+> @@ -152,6 +152,58 @@ patternProperties:
+>                  situation where the trip gets constantly triggered soon after
+>                  cooling action is removed.
+>  
+> +            temperature-bin:
 
-Oh, sound-name-prefix can be removed from the digital codec and the
-sound subsystem can just overwrite "PDM_RX1", "PDM_RX2", etc.
+Use the standard unit suffix. 
 
-I hope overwriting the analog codec "PDM_RX*" doesn't break more than
-what we have now.
+> +              $ref: /schemas/types.yaml#/definitions/int32-array
+> +              items:
+> +                minimum: -273000
+> +                maximum: 200000
+
+minItems: 2
+maxItems: 32 ?
+
