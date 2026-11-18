@@ -1,55 +1,86 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795009518;
-	b=R5NkvfOws+GLtFaXvBLza58lMJFv9Ee80x6MgydnZCUkbRA6sOa/f4wKJhkX2KuBFYiK
-	 bPHfQRS85suKVTxZ1a+baduaTQwDXxnlj/S+TapvA9LzFQv7p2i/gJ0ofVbjkDOzvznZP
-	 c9Sltjq6t7I49Brd6vfPA3cKjnDBOkq4KblzIXwlCUDqlK9OB8TS/14hhNo5rSo6xHjuJ
-	 xQd5doNAxmTX1H3Wj/DXHqm9F1lCxOPRDnnTggOJaunCPj8T24S488d2pjC8jSWYYqK5K
-	 ejxhkI1oAaKCjXvPEBHmDxKrfmUTWu9D7V/e8NLBNdtRiS7nJ/sf575g+jrQhnw5AEw==
+	t=1795009547;
+	b=haOa/Yjq8sCogjZuL3m/XGHgIj+KVRzGltGYVmGJvyqXxnB0/Yz7I36X95XZ8bj+YHM4
+	 6t1Ny6XwdyEKp5FK91mV8c55mlXV/hLgjuDVwKwkAxMfcvyv5KMY+T/402Ed43eHJ0uBr
+	 Qjtkrfj36yX2N1j+AD3BgDHtpkO/aKRNAGO6ysxrZwayGvfzq3wEb1+A9JPa0eJkUWZWx
+	 O8QxnvBNlfUlWJCe8Mw6Sf7ARZoaVUY9zw3ATHwQAqsKwlpWH+WBJHrEqSX4fsIbyqDKP
+	 XgVk6uSBa7a2qnuxbRyaVbeOyooNnbmVi4UG0ECqb2FYnoFASV94IG4BvD/Fqus5jeA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795009518;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=zbYI8uP1li72NzJh/wjWDJ72bmhe8G4M88p9Kdrkgp4=;
-	b=wB8BFn7q6ipWnxYXY7rX4MvI1A8Ufd9nK8gH+bq0ti+C+KVvhv33HutZWE98E3shv1h5
-	 3VJ4mCzYFBwziLShYj9aXUPV0UczIal/YMdEVpziwq4pr7kchmWqzIBRgyAwzR9vi3NtM
-	 X83cf06P9Va2rpM8rM0iYxkEjUVDYxOJCxXlwQX9/izLlLWiFNNYJgmWSMZMcmZdaftaP
-	 ffYKS3d7wmGKB14oIMvU0Bq+r6tETIiuV5SbpRYq0lAmLBYZFy22cf9ojVcd77FFDj5Vl
-	 rLiArXLLFI1KkF/IYQj5Qb7o1W9QucakivPMzVnzgA4HnLwqacxFcDqBjEBj8ovrQYg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795009547;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=6cCL93ssdEirtEIN7IN1AXWvsFJlWDaYl18DuhqCOQs=;
+	b=Y/m8GJKA4xWkJkfeXNLVihLsifQfrWWK0cr9o5jHC7dXPjai7QguQ3UiOHr1BFIpkz1k
+	 ADOQz0nLwZenj0nnADXGcsXL4Y1jqxCw3MTovUJiJtmJX1XkIZSnDxICIIJAJe5SfuKTc
+	 1zMhrYjGYYi4MD8jQPJkXk7t2d5Xtsd8b56jfEA27N9ken9n7FyOv76eFf+zOwnvxvpFY
+	 sskoyxqASaSp3iK5DW5hk9xt+u7xWSMTrKSdHQbZBw85onOSw8Cq1XPFRT+zZmRaPiqHl
+	 LFgC4+p00QfpduoGXGQFx6jjtXuxOcSTsy3nQDtLZI6SCsHmgMepeD+WbXFKfP2cbvw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RxwDW1Jg;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UnAsgjRT;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C586F606A331
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 13:45:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55CDD606A31C;
+	Wed, 18 Nov 2026 13:45:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RxwDW1Jg
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A421B1F000C9
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 13:45:18 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UnAsgjRT
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 337C41F000C5;
+	Wed, 18 Nov 2026 13:45:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795009518;
-	bh=zbYI8uP1li72NzJh/wjWDJ72bmhe8G4M88p9Kdrkgp4=;
-	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
-	b=RxwDW1JguCDucDNsShayzwrpopd1ZL9Qf2ZCAagnmVvg0zW+stUUkU79tiVnQB/Zo
-	 Pmp7J5O40OKniL5gftISQKy3xeMQgqfUbNtMIYx/OgRyH5+WyU2VySZ2IsBbRbmLyD
-	 Lcv2pp9ib1bXBYNArl1iETwXLKN6wdgElDCYFpz/BMJc+rZuNQ37QytMx+d2WMCe0H
-	 FOrOeLU8pFP47A4NCAla2ZZdXV5MbYDeQMlL1zoWCPwvU6TpWK/+ZlW3NnD/6hU3zj
-	 TjvzFKfPvmXqp86SHZoCLdg9t9YdEaZ5DJG81/QUfM4q8+rzPhOD6DXr9sxVvO3l1m
-	 hi3EWHj5PIRRg==
-Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-3ad0102edd4so9974411fa.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 05:45:18 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErHRVcLG81E3beXiDSMZsMMKprfMIuE15nUixsry3HfoBmeAOg1udcdMG1Wchp1Bpw1DVB1h7fWzEA2CEwrm@vger.kernel.org
-X-Gm-Message-State: APuU4Z9NA/BhRYHTHSxW9PViOW4OgtMXI18ZLYpvzrKKbyR5yFFONEuj
-	66PxjVcM5QiLf/OU4MtGj6xwlaN89aZVhQ7KnxP3XJTYSAfFhAgMloKNjw/P0aPp6Yv9oqc6xiv
-	pmHkw7xznGzDLg+DjfhLJMeD1xK9s7gE=
-X-Received: by 2002:a05:651c:b27:b0:3ab:3b73:4560 with SMTP id
- 38308e7fff4ca-3ae670b2ef1mr8658421fa.11.1795009516447; Wed, 18 Nov 2026
- 05:45:16 -0800 (PST)
+	s=k20260515; t=1795009547;
+	bh=6cCL93ssdEirtEIN7IN1AXWvsFJlWDaYl18DuhqCOQs=;
+	h=From:To:Cc:Subject:Date;
+	b=UnAsgjRTHy0X5p6+yQJK1J7Ig6nX5Irnk6nGzKNbeg36UPsZaYClq6NCtB6/N5WD4
+	 k1P+gLlIbKTDTx0Dja5qIrmXbuB01KxoalS9L381uKEW4sjsbG9LWJWJF+6I0ewgb0
+	 srQzRqHUN6vavVY9eU3eoednEHrkmEEMLcP4N45Qztet6mF+tPtjWkEfrXCkQb6kCe
+	 skH45IXlffpjzwSPTOH6AeTFX/YVvTMlnRUUrLSWf3uy+5YDAZU6iMm9R85Sv2D5oy
+	 PYCKr/ezc9EO8vagVPtUbzsWH2NigoK9xyJQF7nNXAELRH6UPxyNq/PcrYq5wJazuO
+	 jwgYcnLh6RBYQ==
+From: Philipp Stanner <phasta@kernel.org>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Philipp Stanner <phasta@kernel.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Sunil Khatri <sunil.khatri@amd.com>,
+	Vitaly Prosyak <vitaly.prosyak@amd.com>,
+	Prike Liang <Prike.Liang@amd.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+	David Rosca <david.rosca@amd.com>,
+	=?UTF-8?q?Timur=20Krist=C3=B3f?= <timur.kristof@gmail.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Dave Stevenson <dave.stevenson@raspberrypi.com>,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	amd-gfx@lists.freedesktop.org,
+	etnaviv@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	imagination@lists.freedesktop.org,
+	lima@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org,
+	virtualization@lists.linux.dev,
+	spice-devel@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org,
+	linux-tegra@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-usb@vger.kernel.org,
+	rust-for-linux@vger.kernel.or
+Subject: [PATCH v2 0/3] dma-buf: dma-fence: Remove dma_fence_init64()
+Date: Wed, 18 Nov 2026 14:45:20 +0100
+Message-ID: <20261118134522.1646892-2-phasta@kernel.org>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,122 +90,96 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261114-irqchip-cleanup-api-v1-1-4a9d598b0bdb@nxp.com>
-In-Reply-To: <20261114-irqchip-cleanup-api-v1-1-4a9d598b0bdb@nxp.com>
-Reply-To: wens@kernel.org
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Wed, 18 Nov 2026 21:45:03 +0800
-X-Gmail-Original-Message-ID: <CAGb2v65uyYnE-sryit44oXBwstxkG7HRtYWip5nyuHeZ034TbQ@mail.gmail.com>
-X-Gm-Features: AclHuK_Ko1utGgb-Cp6pja7wJidoLs_raftCWPKZ3OajYizpg1rSK6L9ElxDv8s
-Message-ID: <CAGb2v65uyYnE-sryit44oXBwstxkG7HRtYWip5nyuHeZ034TbQ@mail.gmail.com>
-Subject: Re: [PATCH] irqchip: Convert chained handlers to guard_chained_irq()
-To: Peng Fan <peng.fan@linux.dev>
-Cc: Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Alim Akhtar <alim.akhtar@samsung.com>, Andrew Lunn <andrew@lunn.ch>, 
-	Gregory Clement <gregory.clement@bootlin.com>, 
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, 
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Joel Stanley <joel@jms.id.au>, 
-	Andrew Jeffery <andrew@codeconstruct.com.au>, Billy Tsai <billy_tsai@aspeedtech.com>, 
-	Tan Siewert <tan.siewert@9elements.com>, Eddie James <eajames@linux.ibm.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
-	Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Caleb James DeLisle <cjd@cjdns.fr>, 
-	Marc Zyngier <maz@kernel.org>, Miodrag Dinic <miodrag.dinic@mips.com>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, Herve Codina <herve.codina@bootlin.com>, 
-	Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, 
-	Jiaxun Yang <jiaxun.yang@flygoat.com>, Vladimir Zapolskiy <vz@mleia.com>, 
-	Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, Anup Patel <anup@brainfault.org>, 
-	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Alexandre Ghiti <alex@ghiti.fr>, Samuel Holland <samuel.holland@sifive.com>, 
-	Qin Jian <qinjian@cqplus1.com>, Changhuang Liang <changhuang.liang@starfivetech.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Nishanth Menon <nm@ti.com>, Tero Kristo <kristo@kernel.org>, 
-	Santosh Shilimkar <ssantosh@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Michal Simek <michal.simek@amd.com>, Anirudha Sarangi <anirudha.sarangi@amd.com>, 
-	Tushar Nimkar <tushar.nimkar@amd.com>, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, openbmc@lists.ozlabs.org, 
-	linux-aspeed@lists.ozlabs.org, linux-rpi-kernel@lists.infradead.org, 
-	linux-mips@vger.kernel.org, imx@lists.linux.dev, loongarch@lists.linux.dev, 
-	linux-riscv@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-sunxi@lists.linux.dev, git@amd.com, linux-arm-msm@vger.kernel.org, 
-	Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Sat, Nov 14, 2026 at 11:06=E2=80=AFPM Peng Fan <peng.fan@linux.dev> wrot=
-e:
->
-> From: Peng Fan <peng.fan@nxp.com>
->
-> Use the scope-based guard_chained_irq() helper in all chained handlers
-> under drivers/irqchip/ so that chained_irq_exit() is always invoked when
-> the handler returns. Handlers that duplicated the exit call on an error
-> path or jumped to a common exit label simply return now and rely on the
-> guard.
->
-> No functional changes.
->
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
-> With [1] now merged in irq/drivers, convert the chained IRQ handlers in
-> drivers/irqchip/ to use guard_chained_irq(). This removes the explicit
-> chained_irq_exit() calls and the gotos that only existed to reach them,
-> reducing boilerplate.
->
-> I use a script to do the job, and after that, do mannual checking.
->
-> No functional changes.
->
-> [1] https://lore.kernel.org/all/179417458323.2093942.14330197609841896598=
-.tip-bot2@tip-bot2/#t
-> ---
->  drivers/irqchip/exynos-combiner.c          | 7 ++-----
->  drivers/irqchip/irq-aclint-sswi.c          | 4 +---
->  drivers/irqchip/irq-armada-370-xp.c        | 4 +---
->  drivers/irqchip/irq-aspeed-i2c-ic.c        | 4 +---
->  drivers/irqchip/irq-aspeed-scu-ic.c        | 8 ++------
->  drivers/irqchip/irq-ast2700-intc1.c        | 4 +---
->  drivers/irqchip/irq-ath79-misc.c           | 5 +----
->  drivers/irqchip/irq-bcm2836.c              | 4 +---
->  drivers/irqchip/irq-bcm6345-l1.c           | 4 +---
->  drivers/irqchip/irq-bcm7038-l1.c           | 4 +---
->  drivers/irqchip/irq-bcm7120-l2.c           | 4 +---
->  drivers/irqchip/irq-brcmstb-l2.c           | 4 +---
->  drivers/irqchip/irq-dw-apb-ictl.c          | 4 +---
->  drivers/irqchip/irq-econet-en751221.c      | 4 +---
->  drivers/irqchip/irq-gic.c                  | 6 ++----
->  drivers/irqchip/irq-goldfish-pic.c         | 4 +---
->  drivers/irqchip/irq-idt3243x.c             | 4 +---
->  drivers/irqchip/irq-imx-intmux.c           | 4 +---
->  drivers/irqchip/irq-imx-irqsteer.c         | 7 ++-----
->  drivers/irqchip/irq-imx-mu-msi.c           | 3 +--
->  drivers/irqchip/irq-ingenic-tcu.c          | 4 +---
->  drivers/irqchip/irq-lan966x-oic.c          | 3 +--
->  drivers/irqchip/irq-loongarch-avec.c       | 4 +---
->  drivers/irqchip/irq-loongson-eiointc.c     | 4 +---
->  drivers/irqchip/irq-loongson-htpic.c       | 3 +--
->  drivers/irqchip/irq-loongson-htvec.c       | 4 +---
->  drivers/irqchip/irq-loongson-liointc.c     | 4 +---
->  drivers/irqchip/irq-loongson-pch-lpc.c     | 3 +--
->  drivers/irqchip/irq-lpc32xx.c              | 4 +---
->  drivers/irqchip/irq-ls-scfg-msi.c          | 4 +---
->  drivers/irqchip/irq-ls1x.c                 | 4 +---
->  drivers/irqchip/irq-mmp.c                  | 7 ++-----
->  drivers/irqchip/irq-mscc-ocelot.c          | 4 +---
->  drivers/irqchip/irq-mvebu-pic.c            | 4 +---
->  drivers/irqchip/irq-mvebu-sei.c            | 4 +---
->  drivers/irqchip/irq-pruss-intc.c           | 4 +---
->  drivers/irqchip/irq-realtek-rtl.c          | 7 ++-----
->  drivers/irqchip/irq-riscv-aplic-direct.c   | 4 +---
->  drivers/irqchip/irq-riscv-imsic-early.c    | 4 +---
->  drivers/irqchip/irq-sifive-plic.c          | 8 ++------
->  drivers/irqchip/irq-sp7021-intc.c          | 4 +---
->  drivers/irqchip/irq-starfive-jhb100-intc.c | 4 +---
->  drivers/irqchip/irq-stm32-exti.c           | 4 +---
+(Only adding vc4 and dma-fence folks to Cc to avoid noise)
 
->  drivers/irqchip/irq-sunxi-nmi.c            | 3 +--
+Changes in v2:
+  - Rebase due to conflict in drm/vc4
+  - Change dma_fence_flags_invalid() to dma_fence_flags_valid()
+    (Christian)
 
-Acked-by: Chen-Yu Tsai <wens@kernel.org> # sunxi-nmi
+We recently had a discussion about reworking dma_fence init to close a
+race-window [1].
+
+The community agreement seems to have been that we can get rid of
+dma_fence_init64(), so let's do that already. In the meantime we can
+continue our discussions regarding the race in [1].
+
+This also touches the Rust dma_fence, which actually should use 64-bit
+seqnos (was forgotten so far). Rust fence has no users currently, so
+needs no backporting, so I would like to address that in a distinct
+patch.
+
+Tested on Nouveau with and without the SEQNO64 flag. Nouveau also uses
+the USER flag, so I hope we're fine.
+
+
+P.
+
+[1] https://lore.kernel.org/dri-devel/20261029095542.1526750-3-phasta@kernel.org/
+
+Philipp Stanner (3):
+  dma-buf: dma-fence: Add flags parameter to dma_fence_init()
+  dma-buf: Port users of dma_fence_init64()
+  dma-buf: dma-fence: Remove dma_fence_init64()
+
+ drivers/accel/amdxdna/amdxdna_ctx.c           |  2 +-
+ drivers/accel/ethosu/ethosu_job.c             |  2 +-
+ drivers/accel/ivpu/ivpu_job.c                 |  2 +-
+ drivers/accel/rocket/rocket_job.c             |  2 +-
+ drivers/dma-buf/dma-fence-array.c             |  2 +-
+ drivers/dma-buf/dma-fence-chain.c             |  4 +-
+ drivers/dma-buf/dma-fence.c                   | 57 +++++++++----------
+ drivers/dma-buf/st-dma-fence-chain.c          |  2 +-
+ drivers/dma-buf/st-dma-fence-unwrap.c         |  2 +-
+ drivers/dma-buf/st-dma-fence.c                |  2 +-
+ drivers/dma-buf/st-dma-resv.c                 |  2 +-
+ drivers/dma-buf/sw_sync.c                     |  2 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c  |  2 +-
+ .../drm/amd/amdgpu/amdgpu_eviction_fence.c    |  7 ++-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c     |  2 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_userq_fence.c   |  5 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_vm_tlb_fence.c  |  5 +-
+ drivers/gpu/drm/drm_crtc.c                    |  2 +-
+ drivers/gpu/drm/drm_writeback.c               |  2 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gpu.c         |  2 +-
+ drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c  |  2 +-
+ drivers/gpu/drm/i915/i915_request.c           |  2 +-
+ drivers/gpu/drm/i915/i915_sw_fence_work.c     |  2 +-
+ drivers/gpu/drm/i915/i915_vma_resource.c      |  2 +-
+ .../gpu/drm/i915/selftests/i915_sw_fence.c    |  2 +-
+ drivers/gpu/drm/imagination/pvr_ccb.c         |  2 +-
+ drivers/gpu/drm/imagination/pvr_queue.c       |  2 +-
+ drivers/gpu/drm/lima/lima_sched.c             |  2 +-
+ drivers/gpu/drm/msm/msm_fence.c               |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_fence.c       |  4 +-
+ drivers/gpu/drm/panfrost/panfrost_job.c       |  2 +-
+ drivers/gpu/drm/panthor/panthor_sched.c       |  2 +-
+ drivers/gpu/drm/qxl/qxl_release.c             |  2 +-
+ drivers/gpu/drm/radeon/radeon_fence.c         |  2 +-
+ drivers/gpu/drm/scheduler/sched_fence.c       |  4 +-
+ .../gpu/drm/scheduler/tests/mock_scheduler.c  |  2 +-
+ drivers/gpu/drm/ttm/tests/ttm_bo_test.c       |  2 +-
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  2 +-
+ drivers/gpu/drm/v3d/v3d_fence.c               |  2 +-
+ drivers/gpu/drm/vc4/vc4_gem.c                 |  2 +-
+ drivers/gpu/drm/vgem/vgem_fence.c             |  2 +-
+ drivers/gpu/drm/virtio/virtgpu_fence.c        |  2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_fence.c         |  2 +-
+ drivers/gpu/drm/xe/xe_hw_fence.c              |  2 +-
+ drivers/gpu/drm/xe/xe_oa.c                    |  2 +-
+ drivers/gpu/drm/xe/xe_preempt_fence.c         |  2 +-
+ drivers/gpu/drm/xe/xe_tlb_inval.c             |  2 +-
+ drivers/gpu/host1x/fence.c                    |  2 +-
+ drivers/iio/industrialio-buffer.c             |  2 +-
+ drivers/usb/gadget/function/f_fs.c            |  2 +-
+ include/linux/dma-fence.h                     | 14 +++--
+ rust/kernel/dma_buf/dma_fence.rs              |  2 +-
+ 52 files changed, 95 insertions(+), 93 deletions(-)
+
+
+base-commit: 17a180572ca50c8d38f3aa47d6fc81ce7c5594da
+-- 
+2.56.0
+
