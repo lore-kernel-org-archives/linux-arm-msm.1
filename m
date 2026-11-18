@@ -1,97 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794986696;
-	b=qX71vxR11hktHaBkH0Sp+OlgH2i/f87iPLfu5d/yApqzjgxQLe1ec8NCaPR8FQhgXJhE
-	 w3xgDzyXnMjs9t2GZ5imsJxPMQG0B1kf27xvfGGDjg+2KvuoRMMVnQg6zC9RwCKydO3Qb
-	 9w3LAUClaAoRCmWvo1eFXLmCEJ/fYpIFlom8GjGeB7Ucbt4O6WPF75GPS4IGD0GA4ADgd
-	 pWIkAnlL/N6/A3lkFOoTezgFtaL+Xi/tc5JPoTR/KydShKPPi6bSh+9AeNyp4GJblqdBg
-	 Qh1Y/o4x3bBauUKAq2m1WxetWFcrZyCR6Hw7bIvkxwRgfjIfSp/OIo6n+1P3G4lQI5w==
+	t=1794987819;
+	b=3QWeH7uAjuv8D3wsMXcgRyq0rjWw3gRihl783hDWdposNL09l0RkEMxh2DNgDtx0UiU0
+	 qqPydUMDTE5h5DgvIidcn/1hYPXHCDeKYNP5q4u50QGmvwE3KD3mYrRq2inWELyal4HjS
+	 A7AZpwD/bsldRnnABvtOWlaYBVzeqSvFPQjKuxZb5OROG6/wdTzYZ5ee4ilaDXnHTh6M5
+	 I700U/WlUyDcuXYgU/kPRQmeyelPtMfivb72no/e9bymZyHtHZ/Ie7lMpMZD8JgAuEAVs
+	 7ArOq1E7PghYmdZaE+XzURGBF6DKob1SItPcp9upezCEehudocI9dJ7GfccfyGQvLrw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794986696;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
-	b=dNEGKoPjZfR9lVrx2M2K4hOVmNO00TsOwy4tZNZo6h7gzLVNbC19v3HUtq720w5XyrKD
-	 7UITfI6vpCaNCyXB6SiNgXnLEenrS6bPmWxq3LTvfhyzOz7OrthppJ45b4k6xVqjrTsAA
-	 QhxQCardkGWAzzecAyRN7NyWhv3H0L/EGlENPL/jsJQ/zA37/Lmi8wfQ4ba6w4AlFkahH
-	 +mE/alVwusS/gYW4V5A0Q+uMdMP+QsTpQjk2dg5q21EbtLq0+13wieN4T1B5RA65UtUeN
-	 hRyBL3erF/Sc8LsIjH9minxh2iaNxGXhUU+Yo1c8BzH1qfGwEFqGF29mu/mYeDAxr7w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794987819;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Date:From:To:
+	 Cc:Subject:Message-ID:In-Reply-To:References:Organization:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version;
+	bh=5tdOi87MUQVrh0lDnm0y5zaT0nPUT+qlg7v5xkEiqMk=;
+	b=TxVvarORMjBhMiO0g4U4vrGV4Uj2b64IcPBWMHqGX+pNj9TCXxagqOBn/wtFmXCwoQGj
+	 YKAinlWT1wakHNKE3Cgnz6aje59BUNfFCcmhSXt/LZ64GXOhg/VfPHrsFSgYffwJHdYbd
+	 50nS4494bspCNjSHeyma5zieDa+1uM9o33LWSjQDjhqpHULFOwx8DYX0NhOkl9HiPcjsA
+	 QAeCjoAGq0lcsB1xslCcqXxM+qLYFXXePDT9F7HuQXC5iVz+PermwFnVnBW34Ixrl1W6Z
+	 vxbN5WP0eB71PDWzGO0thbDDEPyGFP1ZS6TVupr4Dpvy2hrnpZFnxMzQKctd+XJ7ECg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bHVGsYVs;
-	arc=none smtp.remote-ip=209.85.215.182
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=lvlw2APD;
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47724606A325
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 07:24:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47724606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CBF9606A325
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 07:43:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6CBF9606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bHVGsYVs
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cdba1bbde0bso313202a12.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 23:24:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794986696; x=1795591496; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
-        b=bHVGsYVshDuBPLd5wfU4E2Dv0/H7SOWZgvWb2MPz1dHjqZrbhfeOtQtQV2g3B5mPEv
-         HWSiKGIRwAV1cHk6hq9OLuwAaKJfVsj1kxuZtIjb1AB2sjm7Ihkp1kMoT0CEzfWVZmge
-         kjToBmF+WhtM0brpMtD8ZgStvTmYdllXEuWcE1ZlxRZT9rpT8nxNTMwf/Rn7Ypw9SbAM
-         cb8TlSa560WeBvyoB5PKckJQHyIRstb5tFv/iC9HkPIg5nof0b07sNQIr38DcMILJaSm
-         A756Upl4c09BEW4u3jUQFUMZQgYpH6jLrXNK2TmWteDTTN0ZNMsAy0+NbrfykYiDvE6K
-         3Mxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794986696; x=1795591496;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
-        b=ixZguYCjyvi3njr3xIVIN8TAIcHptRXEF4A1qkScfq++HSy3W86n4pbcNDZ6n31MXD
-         SVhXYFAmAYacYO2eDLXdB/aphtmoNpcfdeZJvmUM9+aWTYa/HePFMzxE7PsfyYG3IiUj
-         KEK8fEuBqChIPTD5Be26lS+y3w1OwZafPKeQKgFLLp0K8Th1AWAqCajolHL4DphWxApd
-         r7F4Pqf/PtN1o94eednH9MEg8FdPd2MtCzKt/JYUq1Ts882lJefmvSrdKbq+eZsZ7ZQf
-         9bM9Nz/XR4K1adQCrqTf+kO6tY7AjmOhewUfvWxYMRIRtScvfdHIEKdyYM8t5zXTicaZ
-         /oSA==
-X-Forwarded-Encrypted: i=1; AL+hErFijUs3KJsoumzWHIyoqQn9RUC/e2YTlILpBF8XPhX7mbKetqZ0Z5UIv8h9QgZctP1otvHRHf6tljkNUKfB@vger.kernel.org
-X-Gm-Message-State: APuU4Z/h0TcDnwS3H2lhADo/J3sM6MZFpVeEVIFaYwzPObjW1h7jTTCf
-	tD3ipIlxY2tihj+KgUwn0zIl6QMU3YvQ01fzkJdViZ2A14pFVNE2Vwwt
-X-Gm-Gg: AZFdTZeEjLiHB5tV2mC7NyTZSeOJQNCnAqDUOWUb9MDlb/snSUr0Em7+8u56K3tYHXK
-	CIltZEjuwebrPZng0OBnv02q6yBoTVyS/cZtpqtJhwfzn5+2rhOypAFqKQD+oNurcOdRHIgqaJF
-	Pf4Av1ovCR36c9h1fWeuLmxmgQy/yDY+T/ZCiagC35zvBu39JFuCq1//N2M6PRs1XSQ/sIs5ohS
-	5t1PeYPhu4j+GdYMykeXZY12Vo9H7Tl07tsDNqT1ZwFNvLns1Fm78+FpyZGsO6bpfRpW+byIyzF
-	O2ULJpL09fYKL/46chJ6o7H0KInkEqHhIhdH5/bKF7z6HKpcsUV/JBeA628rKHjAPxt+dfFAkTd
-	Qj2oOewhS4F62Rv5eC2KqBEO//fLLLy19HmUbu/HW+DNr65nG+u8J4BoGXo1Dnadl98YWWhAaeD
-	qrr83HDhkQl945J2mwVWVeyz6VEC2JUBtn5hOid17wu1+BVQ+B79H2lhu54JyGoxgoHelDuk/ZM
-	9AEL+wCVWYFgaBjhDDaXvRj6w0zyajr1Mx1zrVfkSd0HPzvbgAgusNUsgs/l4Vq94FnEGAFptPS
-	VF+9YSfyy71vXmUhlo5YBMY8tzjO0PgAO+X1NpzLwb4hkNFZl6qPYDDSzFM9fI79lka0Dx0ZRtR
-	l79J0/+xduYSCCi3IdD/BCpLVvVnyHHIu8CJ2WsXbuYSZZoGheJEUdWBAMFGMHw==
-X-Received: by 2002:a17:90a:d44b:b0:3ab:884b:65ab with SMTP id 98e67ed59e1d1-3b3d07c2479mr1638407a91.55.1794986695524;
-        Tue, 17 Nov 2026 23:24:55 -0800 (PST)
-Received: from lwq-System-Product-Name.. ([2602:feda:30:cafe:ec49:29ac:0:f6])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b3d56ee297sm934947a91.4.2026.11.17.23.24.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 23:24:55 -0800 (PST)
-From: Yaohan Li <shunsheng1218@gmail.com>
-To: jeff.hugo@oss.qualcomm.com,
-	ogabbay@kernel.org
-Cc: carl.vanderlip@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	jacek.lawrynowicz@linux.intel.com,
-	quic_pkanojiy@quicinc.com,
-	stanislaw.gruszka@linux.intel.com
-Subject: [PATCH] accel/qaic: drain the control workqueue before the device is freed
-Date: Wed, 18 Nov 2026 15:24:48 +0800
-Message-Id: <20261118072448.1259909-1-shunsheng1218@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=lvlw2APD
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 704701A16AA;
+	Wed, 18 Nov 2026 07:43:35 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2820E5FFAF;
+	Wed, 18 Nov 2026 07:43:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 77C8D11BC076C;
+	Wed, 18 Nov 2026 08:42:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1794987811; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=5tdOi87MUQVrh0lDnm0y5zaT0nPUT+qlg7v5xkEiqMk=;
+	b=lvlw2APDkLOsWdPZXrcTGO0SBvJt5AeVKx0Z42miklOsc8vPctTcjUfLvtwVkHahSrHPLo
+	CGkq45BFyuEH8fedQgM6HJ/XMbau2Rz9aKP/PJ7PtvuBj2hMJXvtJKDgvO7p6Q3pjLfN6i
+	0Ut1+LTYYEyg77hZo16dxZxUGEgStz4MKBFw9hj/2Tiw4koxWXy5yQ8yIHNJQ0YwvKbt02
+	l/18CHS5c8YF9Wb/y9UNTxVZrOZMCPnkOtQCGZPI3/uD2p7Qv4dv6TVs+LHq5iTBVHSMvU
+	434h8Tsq1BRLh2Btis1Fush6eJ7xmbr9hxqVcPbs2tV0AeddsTbxh0K8Mz1lOg==
+Date: Wed, 18 Nov 2026 08:42:46 +0100
+From: Herve Codina <herve.codina@bootlin.com>
+To: Peng Fan <peng.fan@linux.dev>
+Cc: Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>,
+ Krzysztof Kozlowski <krzk@kernel.org>, Peter Griffin
+ <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, Andrew
+ Lunn <andrew@lunn.ch>, Gregory Clement <gregory.clement@bootlin.com>,
+ Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Ryan Chen
+ <ryan_chen@aspeedtech.com>, Benjamin Herrenschmidt
+ <benh@kernel.crashing.org>, Joel Stanley <joel@jms.id.au>, Andrew Jeffery
+ <andrew@codeconstruct.com.au>, Billy Tsai <billy_tsai@aspeedtech.com>, Tan
+ Siewert <tan.siewert@9elements.com>, Eddie James <eajames@linux.ibm.com>,
+ Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
+ <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, Broadcom
+ internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Caleb
+ James DeLisle <cjd@cjdns.fr>, Marc Zyngier <maz@kernel.org>, Miodrag Dinic
+ <miodrag.dinic@mips.com>, Frank Li <Frank.Li@nxp.com>, Sascha Hauer
+ <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Huacai Chen <chenhuacai@kernel.org>,
+ WANG Xuerui <kernel@xen0n.name>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Vladimir Zapolskiy <vz@mleia.com>, Piotr Wojtaszczyk
+ <piotr.wojtaszczyk@timesys.com>, Anup Patel <anup@brainfault.org>, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+ <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Samuel Holland
+ <samuel.holland@sifive.com>, Qin Jian <qinjian@cqplus1.com>, Changhuang
+ Liang <changhuang.liang@starfivetech.com>, Maxime Coquelin
+ <mcoquelin.stm32@gmail.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>, Jernej
+ Skrabec <jernej.skrabec@gmail.com>, Nishanth Menon <nm@ti.com>, Tero Kristo
+ <kristo@kernel.org>, Santosh Shilimkar <ssantosh@kernel.org>, Linus Walleij
+ <linusw@kernel.org>, Michal Simek <michal.simek@amd.com>, Anirudha Sarangi
+ <anirudha.sarangi@amd.com>, Tushar Nimkar <tushar.nimkar@amd.com>,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-samsung-soc@vger.kernel.org, linux-i2c@vger.kernel.org,
+ openbmc@lists.ozlabs.org, linux-aspeed@lists.ozlabs.org,
+ linux-rpi-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
+ imx@lists.linux.dev, loongarch@lists.linux.dev,
+ linux-riscv@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-sunxi@lists.linux.dev, git@amd.com, linux-arm-msm@vger.kernel.org,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] irqchip: Convert chained handlers to
+ guard_chained_irq()
+Message-ID: <20261118084246.5b5bf203@bootlin.com>
+In-Reply-To: <20261114-irqchip-cleanup-api-v1-1-4a9d598b0bdb@nxp.com>
+References: <20261114-irqchip-cleanup-api-v1-1-4a9d598b0bdb@nxp.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -101,59 +107,31 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-qaic_pci_remove() tears the MHI controller down and destroys the DRM
-device, but nothing drains qdev->cntl_wq.  qdev itself is allocated with
-devm_kzalloc_flex() and is freed as soon as the PCI device is unbound,
-while cntl_wq is a DRM-managed resource that survives until the last
-open file drops its reference to the DRM device.
+Hi Peng,
 
-resp_work is queued from qaic_mhi_dl_xfer_cb() and resp_worker()
-dereferences qdev, so a work item that is still queued, or still
-running, when the driver instance goes away touches freed memory.
+On Sat, 14 Nov 2026 23:06:15 +0800
+Peng Fan <peng.fan@linux.dev> wrote:
 
-mhi_power_down() moves the controller to the shutdown state, disables
-the interrupt and flushes the state worker that destroys the channel
-devices, and mhi_unregister_controller() removes the controller, so no
-data event can reach qaic_mhi_dl_xfer_cb() once
-qaic_mhi_free_controller() has returned.  Flushing the workqueue after
-it therefore covers every work item that can still be queued.
+> From: Peng Fan <peng.fan@nxp.com>
+> 
+> Use the scope-based guard_chained_irq() helper in all chained handlers
+> under drivers/irqchip/ so that chained_irq_exit() is always invoked when
+> the handler returns. Handlers that duplicated the exit call on an error
+> path or jumped to a common exit label simply return now and rely on the
+> guard.
+> 
+> No functional changes.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
 
-Fixes: c501ca23a6a3 ("accel/qaic: Add uapi and core driver file")
-Signed-off-by: Yaohan Li <shunsheng1218@gmail.com>
----
-Prepared against v7.4-rc1-1969-g666539eecdf4.
+For the irq-lan966x-oic driver:
 
-AI assistance: the analysis, the change and its review notes were
-prepared with Claude (Anthropic) as a coding assistant.  The author
-reviewed the reasoning and takes responsibility for the content.
+Reviewed-by: Herve Codina <herve.codina@bootlin.com> # irq-lan966x-oic.c
 
-Testing: compile tested only (arm64, gcc 11.4).  No QAIC hardware was
-available, so the teardown race was not run.
- drivers/accel/qaic/qaic_drv.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/drivers/accel/qaic/qaic_drv.c b/drivers/accel/qaic/qaic_drv.c
-index 90c0d31e414a..c4c3f450e67b 100644
---- a/drivers/accel/qaic/qaic_drv.c
-+++ b/drivers/accel/qaic/qaic_drv.c
-@@ -625,6 +625,15 @@ static void qaic_pci_remove(struct pci_dev *pdev)
- 
- 	qaic_dev_reset_clean_local_state(qdev);
- 	qaic_mhi_free_controller(qdev->mhi_cntrl, link_up);
-+
-+	/*
-+	 * The control channel is gone, so nothing can queue resp_work any
-+	 * more.  Drain it before qdev is freed: the workqueue belongs to the
-+	 * DRM device and may outlive this driver instance, and resp_worker()
-+	 * dereferences qdev.
-+	 */
-+	flush_workqueue(qdev->cntl_wq);
-+
- 	qaic_destroy_drm_device(qdev, QAIC_NO_PARTITION);
- }
- 
--- 
-2.34.1
-
+Best regards,
+Hervé
