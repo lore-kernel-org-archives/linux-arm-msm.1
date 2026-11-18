@@ -1,75 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795037052;
-	b=KeVfPOQH0YnOUGhQnzEGcf9uef3xFRgQrkaDrSc+bfA+N5PzQQKQZTHzQMUSgMvPUCbP
-	 9DL0Nf3PTuX43/iOzF2TUqFaz4HOBXqzxuOzYJVq4uHRpjqXP3oK4dzcZE8BQvW1ndqk5
-	 6I6BaUD6GqNJIRsWOQGdXSuweFMAY/PrfYQvoVrXh6Gl4ozEQC9CNwLP7OlU49iF8EL0Z
-	 ceQA8T4fmpy6G5MaTPG8dmF5GuIzOCS+ZJPmuvbBAxIRNF/z/A+ZSTBL3Dg5R/NZlXL1p
-	 V/HdfTuNrw31kWOjn9C8esELnhdvT821lZEqtvqUcNhulTqgLKlWTUj5dmHnLMNpd4w==
+	t=1795037505;
+	b=Lt9kIDRBS6BzuHr2TOT2fXBZxJugrnd51WKaJQBT8O+IYFfZJa7tBMDuu2mDCKHhwHV2
+	 6s3L9VCQn20tMViHogAv3R600dNvMZd9fCM+WZzrQvt47iP+/BozQMEYKaN5ZDbSNZdG1
+	 dlb3dKXzSJl4gXBgWJCMr3z8A3clH6ROxVJrDbhpUCQ3CchqDauInB5+OdQ+xJDTY/VAV
+	 /PtS4TyUo3Z0Z8ILlI/OpTMcXcjwG/YvSF+6Z6WWTji2TM4Xy2y9eZEMLhDCNPjBy/jue
+	 djPfZjGKLatkLPNv2P+45cIu+fAdsxzXohgiyTwKLSVPlZoFCHSrrFSyewdz3C0ei0A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795037052;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795037505;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=CBZ4MUDN1V6G6hrYGqXNAHH4lS+mS4YrSWVjq50XU4g=;
-	b=YejS33btBiFn5WQ+cTf/FSCWfRyZHHqEXgIBruAR9Gkj+SYW+skfzY2ofhbZxA4arxAm
-	 kivb0mO123W9I+A5ijuRLb6PB0xJG7Mjk8WGnxj7tfz/0q6CHQZUylnoeJzhrOZlLjZZp
-	 aJU9+PTigsS0O2MNREDFjR//gEWm9H1sDk+HxUEtDSMgd/rrj1dq8uKkdtyyGCkymsYKj
-	 VrOjFArVmr3vBIvBXgfniCDiSRFBk8pLhTYyGatcwj5BS56NLFWQvHlYu59yhu95JDZaM
-	 6rtqf55dKEO8Ko0W/HTOOm9OJvbGuzFl5Sd0fiZ/XdAuXMbRdBni8dQYi842ibQyPkA==
+	bh=mdkhViCmxHPHXtPAzeJjBMbiylUhANODZG9eH04+n2k=;
+	b=db6oSK9S0laOyHzcQ5ht6KKdQbvPrFbTbtZ6uwhJ1s3mH+kefgBh8mgNtnKYEkOdqUG5
+	 uPg/F7kA4ARmHJnT+oC7GUmwj7gG/4ljZLdmy5cmTJa+E7RupenyA/MasNtXRt0NTZjzs
+	 RjKCp8Nc9vnwq9J5057G52vL+ljUoCh4lbkQe8qZEWyKNAefE7l2cYh8oTVcMbzRL6rWu
+	 WQ7gcusifWp+NGqnyMYl0t4pcxt6km7uPowQZFx5+hCEgvDUJeGxYSK1FCCnxTcvwjnSL
+	 Cyaj+l5/ipsLdns82ED3EA/oqUlzcVxXJ0dr3A1nKDufMfaphkx5xLGlpFe/JxvpOvg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HTqDh8QD;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f1fT7cjh;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF8A6606A32A;
-	Wed, 18 Nov 2026 21:24:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCC2A606A32A;
+	Wed, 18 Nov 2026 21:31:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HTqDh8QD
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4379C1F000C8;
-	Wed, 18 Nov 2026 21:24:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f1fT7cjh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0961F000C6;
+	Wed, 18 Nov 2026 21:31:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795037052;
-	bh=CBZ4MUDN1V6G6hrYGqXNAHH4lS+mS4YrSWVjq50XU4g=;
+	s=k20260515; t=1795037505;
+	bh=mdkhViCmxHPHXtPAzeJjBMbiylUhANODZG9eH04+n2k=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HTqDh8QDi3DGGaQUwXFEviTDlrmX2axB052QtdHd8dMFcNwdO4DSGIt+93JSBpLm5
-	 xSt0q3Ru4nrkGdckC03eujeEOS9i2UHgl6ezymWi9Og8k4swawOVYhOXt2ZGxjyBDL
-	 vDLGluqblK/cL60WiCTdwz0v/xo5h9hv01p3WgTK5808ui3xCOp+nIAH//q0WHZPdh
-	 J4fAngvIE+VoVYFw0H7zRxo6JQwaC+Ts1HN+uGnyhyquxE1P1v8ft/70bny45NfsjC
-	 pLH5ad8QyPjRbdpy7T5bbK73w+kZ0AmgqIm2amo/qvXpdklHwxmMpkR29+cbJHXMbh
-	 arwdaAf2N4+iQ==
-Date: Wed, 18 Nov 2026 15:24:09 -0600
+	b=f1fT7cjhk+5dNPB0HxhpbrfQFDRbFCM/NQnTblXNfdI1K7GSA1cQT7O1dE4OtyynP
+	 p3uF3KdgGG51lale/hPw1glbT2Ail6zoLLAcl2PDMQGibHDa+xLxlryyRkT6XRFL2I
+	 Z+4pyCGA/sPI2Wln20kXmD8WUCeWSWQtux/2ksJuAdG0loaRgyYi/wwhrItj/0ppu5
+	 4UX1TWtgXU3ruGPaYJT0w53X/X6A0la6V38Hg4P/HsKFVtkOyYN8B94t13AdcrWAxt
+	 G914L6OoQydGHLnAWCi7zYau88yuvfTxW3Vdn8fxhADJw3BOdweUIeeJND4rz3frcn
+	 5i8KNXFE3lMgQ==
+Date: Wed, 18 Nov 2026 15:31:42 -0600
 From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Nabige Aala <nabige.aala@oss.qualcomm.com>
-Cc: Sean Paul <sean@poorly.run>, Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Mahadevan P <mahadevan.p@oss.qualcomm.com>,
-	dri-devel@lists.freedesktop.org,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Kuogee Hsieh <quic_khsieh@quicinc.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	David Airlie <airlied@gmail.com>, devicetree@vger.kernel.org,
-	Maxime Ripard <mripard@kernel.org>, freedreno@lists.freedesktop.org,
-	Bjorn Andersson <andersson@kernel.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>, linux-phy@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
+To: David Heidelberg <david@ixit.cz>
+Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, phone-devel@vger.kernel.org,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 04/11] dt-bindings: display/msm: qcom,sm8650-dpu: Add
- Qualcomm Nord Soc
-Message-ID: <179503704934.1079357.8885119101380287004.robh@kernel.org>
-References: <20261116-nord-drv-dt-v3-0-e3d3bf0e2c49@oss.qualcomm.com>
- <20261116-nord-drv-dt-v3-4-e3d3bf0e2c49@oss.qualcomm.com>
+	Richard Acayan <mailingradian@gmail.com>,
+	linux-arm-msm@vger.kernel.org, Abel Vesa <abelvesa@kernel.org>,
+	devicetree@vger.kernel.org,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	linux-remoteproc@vger.kernel.org,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	linux-kernel@vger.kernel.org, Miro Mraz <mraz.miro@seznam.cz>,
+	Bjorn Andersson <andersson@kernel.org>
+Subject: Re: [PATCH v3 1/3] dt-bindings: remoteproc: qcom,msm8996-mss-pil:
+ Document google,require-socinfo
+Message-ID: <179503750248.1112860.10353200603959842423.robh@kernel.org>
+References: <20261116-modemsmem-v3-0-24ebc7ed6eb9@ixit.cz>
+ <20261116-modemsmem-v3-1-24ebc7ed6eb9@ixit.cz>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -81,21 +69,25 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261116-nord-drv-dt-v3-4-e3d3bf0e2c49@oss.qualcomm.com>
+In-Reply-To: <20261116-modemsmem-v3-1-24ebc7ed6eb9@ixit.cz>
 
 
-On Mon, 16 Nov 2026 18:46:43 +0530, Nabige Aala wrote:
-> Add DPU (v12.1) for Qualcomm Nord SoC which has noticeable
-> differences against SM8750 (v12.0):
->  - Added DSPP blocks
->  - Added INTF6-INTF10 and removed INTF1,INTF2 and INF5
->  - Added one more DP
+On Mon, 16 Nov 2026 16:50:43 +0100, David Heidelberg wrote:
+> The modem firmware on Google Pixel boards (Pixel 3 through Pixel 5a)
+> expects the application processor to publish the SoC platform type,
+> subtype and revision in the first vendor-reserved SMEM item before the
+> modem is started. Represent that requirement as a boolean property on
+> the MSS remoteproc node so the MSS driver can publish the data before
+> booting the modem, instead of carrying a separate node and driver for
+> it.
 > 
-> Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
+> This patch was written with assistance from a large language model.
+> 
+> Signed-off-by: David Heidelberg <david@ixit.cz>
 > ---
->  Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml | 1 +
->  1 file changed, 1 insertion(+)
+>  .../devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml     | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 > 
 
-Acked-by: Rob Herring (Arm) <robh@kernel.org>
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 
