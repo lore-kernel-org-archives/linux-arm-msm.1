@@ -1,45 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795018036;
-	b=bxhKZ9GXwJc0yxRO9MzHQjq8w4IF/pgwseVwjML1t+n50GZflL+itb/kCtJ8rdGiI0XY
-	 UBcooxHaV441FqUUwwUnHGa9oExl6gm5i0Auqc56Cj7CkxFK3mVbEw1A1mm260jHfflEh
-	 2dbC5iThQmK96m7e7nNTevN6QWJ8swxUKtUoXaXK8G1SHg62UZnoM0d5yPypuF4WhqfPO
-	 e+VCvxm1utpFzRKta00sonH7eBztw6+BRjCYMgXRf/Pnvd2JUwWxL4sfBN8NZN5j+bnda
-	 5sKfePjzLN+lv1VTinlmfGDSwA2EIj4P+PLd+xDULvhP5KkHvRJHLaYGuqz12oYzAoA==
+	t=1795018404;
+	b=cVDZQFfIi8taHe/LuD8XD+2CqOiOt/4Nzjm4PQEp4przoBBhaEpQT4Qdxgji7AJIoztm
+	 UPOWC/gNc8GJ+/X5mOWj6P7gAWIl4D8hhVB0oaESNyz+RXRcEQ9VwIYlqBLWxhJDN87+j
+	 zPT4u0MTYWpLoEfl37B91lxXj6oJ4vaf0a7KPZyeLEgtk5v0GhPrsBDREhd3TfuCW1A7l
+	 4PxPr7D21u9eWLJc1aEjOns7An/pAmrEjobYe4QEthT+e5voqff/K+nJ2igYbEcZF3p99
+	 FFz43rkmxGyW8NDT6oLhR55JVyIZI6KryNpPLToAfoqULg1DqjIysXJwGsI5u7z7Sag==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795018036;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=ngBn9IgkxuA1QATjbZhn0dD+vrQfjiVM3wD6LtiJpaM=;
-	b=TNLum1jSyWtHrWgzq5gFnSb+rgXz4uWMJZ5rh4D7d2RCbUYAS4iJk8DkVD8mtVqzeiUL
-	 dEIjkJvG+FZ3jzt4TUP5Ecil0wxeHKbNRilTJ3RMFOv4x1DLcA27i6QRCwNvGBFG0M2/1
-	 R6yAkTK/fZtD20HEGFZgWrI4fG4hI2IjF/IR8GgsvGAjnjRTSpNqKtE2wDRy/laNf1IH5
-	 G2F12HWqrerbvwE4rr2EMlSwoQh8Lr+158OBxbl6VI7QsQdtp8+rf4YfOZAwrpad4KHfw
-	 W0HAoGhMFnZIhMmStBL0GxEC7dom5Yv/tozRzsBIgc+O3H2CfNpSjcNsV/apC9Kjsrg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795018404;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Mime-Version:
+	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
+	 From:To:X-Mailer:References:In-Reply-To;
+	bh=3Lq/7sTlAJbfIIqLa7wmAuF2tMNPuQ+wGipfJEmlBdE=;
+	b=ItRNV92GQCoYER6keIt9K2ct4vFGQChpwmU37tGp60CjOmWbvCXoxoqMaMbOH+eKI05n
+	 SKDZHFDgM2Q8Lvs2w9WaYTGGHTsIledEGqZ4Vl0lNCoLN7CQ1HvjkM3hUfsKaf3eBG57H
+	 F2Tk6BPMuTwOQIaE/i51/nQ7CWVhtTdOHlH0URn8nlGDO7qXwOp0JSstkgjZXM39hw42R
+	 yEDWpw8Q6gLCQHtftTLW0J1LB6ufU6Jd/dFedHrKuKqU6ZqF0uNueytGc0HU1mtPTqvJd
+	 urosCie1xIC8r3APOVpJSscIIBPuSgpKhDy+Inbek6IGuE2FQpLGxdtzPZy3hjd5BnQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dKIZcolW;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=fairphone.com;
+	spf=pass smtp.mailfrom=fairphone.com;
+	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=FV0bltX0;
+	arc=none smtp.remote-ip=209.85.208.51
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09AEF606A320;
-	Wed, 18 Nov 2026 16:07:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A643606A330
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 16:13:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1A643606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dKIZcolW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E4E81F000C4;
-	Wed, 18 Nov 2026 16:07:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795018035;
-	bh=ngBn9IgkxuA1QATjbZhn0dD+vrQfjiVM3wD6LtiJpaM=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=dKIZcolWbnuLTKqutq9BmxD9ACQlJdPkqJmQ7dOWKxPpMdvcVKulma5xuQHT0zwHf
-	 v5pqM2+EcmxkfVsmgN1TYYi0ZFoLR4hkQTg1mROqw2VQHX3at7lk8d9b/21gNCnRBz
-	 gk+madvKADNedFNMXuYlAS6UBm77p1LRimtoaPAASi75cwe8gj/NGMvNu7WTpMBhk5
-	 U9+7qdaslGzB6uFNngTzB3NmxhhP0wWAEnMFdMgFVyQTVtk6RBmer8daPM7fDLUB4C
-	 DTps3Soa12TrpMaJysTncT+Y5kn9JLWb3reuFwAGCJpA7zviedaeLHGFvTZDrFebtp
-	 1T1ZmcHGVDWAA==
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=FV0bltX0
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6b8a2518f7cso1047116a12.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 08:13:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fairphone.com; s=fair; t=1795018401; x=1795623201; darn=vger.kernel.org;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=3Lq/7sTlAJbfIIqLa7wmAuF2tMNPuQ+wGipfJEmlBdE=;
+        b=FV0bltX0oekj6/9f3wa9B0/l8zl9COMFFyQ5EAruEn6+3u8/cdTM5/fAof+ws1va0+
+         9V7ZDTR58f1agBhb7jH2ZL23CYfYjNxO9GWe5UnzWp/TDmnnGY2nLr8Kic0Ewgy0cvoj
+         0YFwCl6ZFhMviqdtHWJ7uNUE7iVBQ9qja0BQtawatKhVTmELVv/qTlkkbMn7FFPzE7+t
+         eXoRoWgCAjRLWh80ANeC3KOnPoeMh687hvXa8XsLwshJmADDY3F0N9ej++7BVjTBWgni
+         JzCzrJrBRgmsz6I5zgmhaUZ9e6xoF5WOnjD/Gel1Oxr/msrr91dJmbK9CBW/d0LiXQ9B
+         CBhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795018401; x=1795623201;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3Lq/7sTlAJbfIIqLa7wmAuF2tMNPuQ+wGipfJEmlBdE=;
+        b=uZ/XgD7xZ9Qqwy9hyfGsnDO0Z32RrJw1uzL330yvFM3jgMzl5Ui+LE78mK/Gc3Bk+M
+         1Otzn04FTsXwcRLB8M5M2/bYSdRbxjPIRPBjfWmC6jvXMzWIMx6uV4X1mcewNzb77OxD
+         qrxqJOIeJMH+q+q1PZIqzKY/dOZrw3j04Aw61SEW4ky5FfoD0Bu5FXKW/GD/uj5JtDUf
+         z3Yauamf7isJAuXNEQZLlucoSTVQJEHS/ioiWW5/i20zW6Hi5gXWP2lYx9R6mP1/qQN1
+         Iy3UyHYuKaRj3W+aMApsx9wEX5EOZUPqV5b39z1yGSzoxWB4IsTyENQR8WwJM13G73qk
+         HM0A==
+X-Gm-Message-State: APuU4Z/A44okRCAnt4pYRCHOKnDRj4oeyMRvbgb4Q7LqhX4D5TyWPpWh
+	rP96a9lDNpjFSJ9AtKbz1gpWD0EKJm7WY3Z7yanOkVtphDigz0KQnfWkccKwq0CkrwU=
+X-Gm-Gg: AYBFou1kBckbFAiKYVqzsBb+xr8dhZk3+WFkHCcyAG5dQ7GLet9TP0iR+9gzJ7luATr
+	HtOVacX3TM5O4jnigcsqFXmPi0/ZEFEpc+T6bgR/2SYuXT0xNkvf1IMoIOpZ7jyVLldMFllErtO
+	0b1+zqZWXluruXtyFoeGDcE4IQmhPdRyZZ1+l4wHfsvsMEQa43vHTrz8+Y4YiT/CIaDttNj8RrX
+	qBnayjbX+oHZYnaweIkigfqsyIZYpGq8ZAGU3AiWYT76Oz46/3zvrn5MvP7neynjVp6kD1hkPl6
+	CLlyhaGvUoJ6Ev7XMO35m5fDtBhZAWB7Yy/09ryk5hkbZuD/mLpV48r/Nh3V/6g7bBF6TpVLd+v
+	UC7PJUP06DiT3OHg6xPxcwXvZzObsM3DwqrEaXbokvcvj7tykMl0zFMIdhw81+4yKw73RWCZqEz
+	zjT35yoh1Wn0WGjWM3HQOfRs+dwzQr3Q0PO4ISMB0bY9MMAr5cp0UitHionaHxDsGJq8XpT+fmE
+	3Sm2hsCwGYIYWgnPLBjQyqVjkKQrVQJlorMY7RrGl8XvFmOuuaDbyU4RMoB2W9lwMFSFXS27+bU
+	s7rcLBa9IBDkVWtQVDgA8dmlJkJvpT8zGlxZsAH83iNJu00Dkm2z/zmPezx3jbiqPcyNCEbytA=
+	=
+X-Received: by 2002:a05:6402:693:b0:6b7:5712:f13e with SMTP id 4fb4d7f45d1cf-6b887e9a998mr2171788a12.21.1795018401363;
+        Wed, 18 Nov 2026 08:13:21 -0800 (PST)
+Received: from localhost (144-178-202-142.static.ef-service.nl. [144.178.202.142])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b88a6fc230sm1256698a12.36.2026.11.18.08.13.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 18 Nov 2026 08:13:21 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -48,63 +87,73 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 2/3] media: iris: Skip redundant HFI_PROP_TIER updates
-From: bod@kernel.org
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Vedang Nagar <quic_vnagar@quicinc.com>, Hans Verkuil <hverkuil@kernel.org>, 
- Stefan Schmidt <stefan.schmidt@linaro.org>, 
- Hans Verkuil <hverkuil+cisco@kernel.org>, 
- Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>, 
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- stable@vger.kernel.org
-In-Reply-To: <20261031-fix_dec_seek-v1-2-cfedf0c267ee@oss.qualcomm.com>
-References: <20261031-fix_dec_seek-v1-0-cfedf0c267ee@oss.qualcomm.com>
- <20261031-fix_dec_seek-v1-2-cfedf0c267ee@oss.qualcomm.com>
-Date: Wed, 18 Nov 2026 16:07:10 +0000
-Message-Id: <179501803041.2846709.479596500645471046.b4-reply@b4>
-X-Mailer: b4 0.17-dev-e3fc9
-X-Developer-Signature: v=1; a=openpgp-sha256; l=941; i=bod@kernel.org;
- h=from:subject:message-id; bh=EzW7ed+tOi0UapeX4dTOqd0hl7HzztMfnZPqsWsSQGE=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq/c0uqfS6qXMMAwhT4jq2zif+9KQU3YgpLK+o2
- EMiw79tcWCJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCav3NLgAKCRAicTuzoY3I
- Oqd3D/wOzo0O3Pql77X+XK/wM4/eGgLw2WK1pm4gxuxajoZC5gpbangHaQ/mT1oN4JJ1txvojhm
- vaWxTkK8w+v22I9BTD1j6EHLekl9pQrzXxjHL+jpjmrANFRTbWb4vTWz0W2mthjvuvtQu3/i1Dz
- MMqkaq6q6Dk2D/joH6jsrXeUCrj1Mqoh+PZCKQuUA6Rx6pDc6OtPYBhzQVRtmsrV+KXtvntHXsp
- t1Lhja/dLzXdDKxMKt/jxGbikKRHZtAHcOjP7BqG1cghbV+gQIRLEtjAov8NXBK87iBumVHiFfi
- 7ouVIKFt08bH+4bHPR2opGILO8q05T0l5KkngsdD8NnnD5rooctnzH5YeXJ6rlkckMS7nsZJtP1
- JcOPHfgUQM2Asr7yVqlPdnEr4lHrOBxhXp8lV3+P/pK3seP7+wdzT4VQ/rye4MbwmkEZGP8Kmmu
- EMZ3b8sLjZ4JXIg+6h3qJaFi2Jvot4ZXbCSs5yxSmAyuI1O+vyUCI4Ps9mrpYWcWmvq2af9vwjx
- phT09K347Kk/0kdGHw4RnoqGMuCQYVE9Ehf6/gKmNttosxxhcdiEg/jtahy8pcoGejsb8QOalhS
- VdivwqQlynI1oTcydsCOqLbk8xEuD9+n18dnba0ib09VjBoottVnRDfnNtDczIhf/7mKSv5Pc3Y
- +Zs9PEwUHda8kXA==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 18 Nov 2026 17:13:20 +0100
+Message-Id: <DMYGX16XPQEY.PD4MUZN1IINL@fairphone.com>
+Cc: <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <wcn36xx@lists.infradead.org>,
+ <linux-wireless@vger.kernel.org>
+Subject: Re: [PATCH 2/3] wifi: wcn36xx: Do not enforce interrupt trigger
+ type
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: <arapaille@atlr-engineering.com>, "Bjorn Andersson"
+ <andersson@kernel.org>, "Konrad Dybcio" <konradybcio@kernel.org>, "Abel
+ Vesa" <abelvesa@kernel.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Loic Poulain" <loic.poulain@oss.qualcomm.com>, "Luca Weiss"
+ <luca@lucaweiss.eu>, "Eugene Krasnikov" <k.eugene.e@gmail.com>
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
+References: <20261118-wcnss-series-v1-v1-0-a64d82e151bf@atlr-engineering.com> <20261118-wcnss-series-v1-v1-2-a64d82e151bf@atlr-engineering.com>
+In-Reply-To: <20261118-wcnss-series-v1-v1-2-a64d82e151bf@atlr-engineering.com>
 
-On 2026-10-31 01:49 +0530, Vishnu Reddy wrote:
-> HFI_PROP_TIER is already programmed by iris_hfi_gen2_set_tier(), which
-> selects TIER or TIER_AV1 based on the active codec. The TIER and TIER_AV1
-> caps also define a .set callback. As a result, iris_set_properties()
-> programs HFI_PROP_TIER again through the generic cap path.
-> 
-> The generic property loop sets TIER first and TIER_AV1 last. For non AV1
-> codecs, the TIER_AV1 property is programmed after the correct tier value
-> and overrides it. Remove the .set callbacks from both caps. This ensures
-> HFI_PROP_TIER is programmed only once with the value for the active codec.
+On Wed Nov 18, 2026 at 3:58 PM CET, Alexandre Rapaille via B4 Relay wrote:
+> From: Alexandre Rapaille <arapaille@atlr-engineering.com>
+>
+> Forcing IRQF_TRIGGER_HIGH over the DT type makes the re-probe after a WCN=
+SS
+> restart fail ("type mismatch, failed to map hwirq"). Rely on the DT, as
+> commit 1ee6c5abebd3 ("ath10k: do not enforce interrupt trigger type") did=
+.
 
-I think this commit log should list where and how these settings can be
-applied three times ? and what the sequence is exactly which leads to the
-invalid setting.
+Worth noting, that all upstream dts files that use qcom,wcnss-wlan
+(apart from msm8974.dtsi which is getting updated in this series) are
+already using IRQ_TYPE_LEVEL_HIGH, so this should not change behavior
+for any other SoC.
 
-It's not enomrously obvious reading the log and then the code how that
-happens and which one is so obviously wrong.
----
-bod
+>
+> Fixes: 8e84c2582169 ("wcn36xx: mac80211 driver for Qualcomm WCN3660/WCN36=
+80 hardware")
+> Signed-off-by: Alexandre Rapaille <arapaille@atlr-engineering.com>
+> ---
+>  drivers/net/wireless/ath/wcn36xx/dxe.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/net/wireless/ath/wcn36xx/dxe.c b/drivers/net/wireles=
+s/ath/wcn36xx/dxe.c
+> index 801f1218ef..7852f71368 100644
+> --- a/drivers/net/wireless/ath/wcn36xx/dxe.c
+> +++ b/drivers/net/wireless/ath/wcn36xx/dxe.c
+> @@ -552,14 +552,14 @@ static int wcn36xx_dxe_request_irqs(struct wcn36xx =
+*wcn)
+>  {
+>  	int ret;
+> =20
+> -	ret =3D request_irq(wcn->tx_irq, wcn36xx_irq_tx_complete,
+> -			  IRQF_TRIGGER_HIGH, "wcn36xx_tx", wcn);
+> +	ret =3D request_irq(wcn->tx_irq, wcn36xx_irq_tx_complete, 0,
+> +			  "wcn36xx_tx", wcn);
+>  	if (ret) {
+>  		wcn36xx_err("failed to alloc tx irq\n");
+>  		goto out_err;
+>  	}
+> =20
+> -	ret =3D request_irq(wcn->rx_irq, wcn36xx_irq_rx_ready, IRQF_TRIGGER_HIG=
+H,
+> +	ret =3D request_irq(wcn->rx_irq, wcn36xx_irq_rx_ready, 0,
+>  			  "wcn36xx_rx", wcn);
+>  	if (ret) {
+>  		wcn36xx_err("failed to alloc rx irq\n");
+
 
