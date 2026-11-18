@@ -1,63 +1,80 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795037505;
-	b=Lt9kIDRBS6BzuHr2TOT2fXBZxJugrnd51WKaJQBT8O+IYFfZJa7tBMDuu2mDCKHhwHV2
-	 6s3L9VCQn20tMViHogAv3R600dNvMZd9fCM+WZzrQvt47iP+/BozQMEYKaN5ZDbSNZdG1
-	 dlb3dKXzSJl4gXBgWJCMr3z8A3clH6ROxVJrDbhpUCQ3CchqDauInB5+OdQ+xJDTY/VAV
-	 /PtS4TyUo3Z0Z8ILlI/OpTMcXcjwG/YvSF+6Z6WWTji2TM4Xy2y9eZEMLhDCNPjBy/jue
-	 djPfZjGKLatkLPNv2P+45cIu+fAdsxzXohgiyTwKLSVPlZoFCHSrrFSyewdz3C0ei0A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795037505;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=mdkhViCmxHPHXtPAzeJjBMbiylUhANODZG9eH04+n2k=;
-	b=db6oSK9S0laOyHzcQ5ht6KKdQbvPrFbTbtZ6uwhJ1s3mH+kefgBh8mgNtnKYEkOdqUG5
-	 uPg/F7kA4ARmHJnT+oC7GUmwj7gG/4ljZLdmy5cmTJa+E7RupenyA/MasNtXRt0NTZjzs
-	 RjKCp8Nc9vnwq9J5057G52vL+ljUoCh4lbkQe8qZEWyKNAefE7l2cYh8oTVcMbzRL6rWu
-	 WQ7gcusifWp+NGqnyMYl0t4pcxt6km7uPowQZFx5+hCEgvDUJeGxYSK1FCCnxTcvwjnSL
-	 Cyaj+l5/ipsLdns82ED3EA/oqUlzcVxXJ0dr3A1nKDufMfaphkx5xLGlpFe/JxvpOvg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f1fT7cjh;
-	arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795043836;
+	b=OwlnquKyklSL4CITpFa7sIFx9ngUWlgOQELpua1pmmEKpmyLVPOD0s6fB6HvuPx+kuuY
+	 Du2f7agR1QwyFyazgaV9aDBottH7gBnZm+7+BWNXi1op7ZepuoEycTihGrmEQXum6Z75S
+	 DlCPtwe8ch7TT/WO3T70NwfaKEwVGnz2vEmr16r65Y8r/wM9f4Bk2qpbwKZZuXEdTvYKQ
+	 1Fi7Kgkyxm0//SwBiLbHXlpV0y4Mw8UYOwFWulwBEKi5tbETC/iP/8hje5XyUNm+j/gby
+	 KsWMuesEMM4H1febORUxpZ/RREdV3XTPC1zwi0hJ5qVbI8s1loI+rMvb1fg/ckDhbdg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795043836;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=aIHaNivNnDKPL6lEv3NGXavFI3CYp1me/OAnTqDsNPw=;
+	b=49H5pk6K2kzOBQd06M9lmwXf9OAYz7cmfmexjRU7uYnIgJJeq9VqdcAmJTJc3NFAmedc
+	 jI5J5KQqtwWeMLbR2x0DOU5DqWfAnV5mSUieIyur6YTlz+Ae8K2zlCN+IE3SRZRDkA8B/
+	 XDCpIpP+/GbXyllTaZUVv+OMsm4ZI+86mhSByaygdCBjm7QN+f0z0P54+hC0K8BvZHagY
+	 fn3k82Yczg/I4cUEIJKoW6CrCuvAeNCPP4KXo8wcQJAIhL9ED30JwiZ/Bc/HoBNsCz0ll
+	 WWGu3I57jDx0Pnh0iHL+447A+54CwBPFnFmoFgDmO9NJ0xTB07fugmp5M2yW/A/cVtg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HQWyWRaD;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCC2A606A32A;
-	Wed, 18 Nov 2026 21:31:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14F3606A31C;
+	Wed, 18 Nov 2026 23:17:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f1fT7cjh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0961F000C6;
-	Wed, 18 Nov 2026 21:31:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HQWyWRaD
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795043836;
+	b=lQaKZXYqyOjDkyxhbfaOlFZwNwz6/tUq/Gfm+iQTGFIaHuUVzN2p13n63lJ0BTmrjLPm
+	 LjY1XDzgkyPo83O4NSf+mylAe7F9c9GfJLVffrZ9W6YfE+rLfq7SMeNr1QneBpeKb6hvg
+	 T4Ayvb24+jhdHYU4eB/WcUT1ehNnBCXSNNgTIge2hhCfrG72V7ZeZcJZDQmBa8Hgji8Ll
+	 iRMDHfqi6hAwlFmL8oGhm6jpHjNcxG4i9sUI6hdjiWTg/1Q2M2tWwWZPpIwn5VXdYXGXA
+	 DuXdtwiz3DOuIyImbFUgKUlFcXxC354BF1KrT58GqfERrQIrhk0R1h2R4GxZV9LaQEQ==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795043836;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=aIHaNivNnDKPL6lEv3NGXavFI3CYp1me/OAnTqDsNPw=;
+	b=GnvYySc/B5MUJX5jdMrSFkOpu1cMinvKX722hngbQAti4P37S9nkJAR/MgndgOdqyXmX
+	 X/R13kJb1OZsqHSLhORb3tjsNkNhcd5sq+r2eUvmN3Vf3Dlzkx/EgVLbRGIucJ343C/lI
+	 xaBU3CBTjoedVCduaFCcNIThN+SxFq4ic6ElaBUNS2NNA5Col/4lQY77Az03yaKvdCKA5
+	 gl67W8A6LLYqMucyAoTwOi9/v8e1AKIRsbqCgEIfz12IoQ5pk9OY1EIz8b2JH5TfckSuc
+	 koBVVDEF+qFPJYgJNc6v09o1pScSU6N7PesmD1NCmuTPNYZr5OAbG6JpublRf5buJJQ==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id B1D2D1F000C8;
+	Wed, 18 Nov 2026 23:17:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795037505;
-	bh=mdkhViCmxHPHXtPAzeJjBMbiylUhANODZG9eH04+n2k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=f1fT7cjhk+5dNPB0HxhpbrfQFDRbFCM/NQnTblXNfdI1K7GSA1cQT7O1dE4OtyynP
-	 p3uF3KdgGG51lale/hPw1glbT2Ail6zoLLAcl2PDMQGibHDa+xLxlryyRkT6XRFL2I
-	 Z+4pyCGA/sPI2Wln20kXmD8WUCeWSWQtux/2ksJuAdG0loaRgyYi/wwhrItj/0ppu5
-	 4UX1TWtgXU3ruGPaYJT0w53X/X6A0la6V38Hg4P/HsKFVtkOyYN8B94t13AdcrWAxt
-	 G914L6OoQydGHLnAWCi7zYau88yuvfTxW3Vdn8fxhADJw3BOdweUIeeJND4rz3frcn
-	 5i8KNXFE3lMgQ==
-Date: Wed, 18 Nov 2026 15:31:42 -0600
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: David Heidelberg <david@ixit.cz>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, phone-devel@vger.kernel.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Richard Acayan <mailingradian@gmail.com>,
-	linux-arm-msm@vger.kernel.org, Abel Vesa <abelvesa@kernel.org>,
-	devicetree@vger.kernel.org,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	linux-remoteproc@vger.kernel.org,
-	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-kernel@vger.kernel.org, Miro Mraz <mraz.miro@seznam.cz>,
-	Bjorn Andersson <andersson@kernel.org>
-Subject: Re: [PATCH v3 1/3] dt-bindings: remoteproc: qcom,msm8996-mss-pil:
- Document google,require-socinfo
-Message-ID: <179503750248.1112860.10353200603959842423.robh@kernel.org>
-References: <20261116-modemsmem-v3-0-24ebc7ed6eb9@ixit.cz>
- <20261116-modemsmem-v3-1-24ebc7ed6eb9@ixit.cz>
+	s=k20260515; t=1795043836;
+	bh=aIHaNivNnDKPL6lEv3NGXavFI3CYp1me/OAnTqDsNPw=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=HQWyWRaD+sS/qfX2VnxS7nu80ZVwfcGhedPtSG0odgF8pk2Edmbwi+k05J2TWSgZH
+	 xhAs7fCXU/zmNXvw0OD1Ouqeq2BZV6w6J9GAGqV//j9lCRJQI9zn/R1l65gN1M2KyW
+	 7FzYKwDFwKCrA5zPdmej1jxgZGDDpz/tGEs5lEHohHhA/XRr2NszmeQcx30AE/NaJ8
+	 p5ADJNEEmu0EjulFHUgxlmyBO08z+Yp0N9RGj3oEJyehXsHkyD0n4PmBTMZeGuitSD
+	 zppVemq2hADQe6lVXG2gpGzG+vP1b8+IM4OSPMixFukfkxhtwSC1bmToCvLU6QlDB/
+	 +s82ZPhc/neog==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 165ED4B017;
+	Wed, 18 Nov 2026 23:17:15 +0000 (UTC)
+From: =?utf-8?q?Alexandru_Andrie=C8=99_via_B4_Relay?= <devnull+alex.andries.aa.gmail.com@kernel.org>
+Subject: [PATCH 0/3] power: supply: qcom_battmgr: fix SM8350/SM8550 units,
+ acks, and negative temp
+Date: Thu, 19 Nov 2026 00:16:49 +0100
+Message-Id: <20261119-upstream-qcom-battmgr-fixes-v1-v1-0-ca83700c08c1@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -67,27 +84,71 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261116-modemsmem-v3-1-24ebc7ed6eb9@ixit.cz>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMSQrDMAxA0asErSuwXHe8SunCcZTUBWeQnFAIu
+ Xvcdvn48FdQlsgK92oF4SVqHPoCOlQQXr7vGGNTDNbYMxHdcB41C/uEUxgS1j7n1Am28cOKC6E
+ xrj260/USnIUyGYV/rTwez791rt8c8vcK27YD2U51/IIAAAA=
+X-Change-ID: 20261119-upstream-qcom-battmgr-fixes-v1-004f34587c42
+To: Sebastian Reichel <sre@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, stable@vger.kernel.org, 
+ =?utf-8?q?Alexandru_Andrie=C8=99?= <alex.andries.aa@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795043834; l=1715;
+ i=alex.andries.aa@gmail.com; s=20261118; h=from:subject:message-id;
+ bh=m10mZSU/1Zs9cTC5pq8aFlYb+YKIJMjUiK5nOQ8Ic5U=;
+ b=14Lq8wuWQuoQc3cNz9//dLqgr1JXctqOo4kFuKLkJS5coL8EnvrYoqD4Hmn/Xuy24mz+804oV
+ Ot47XW7aOgGDN+Xcx13lP93bzbL+7qiM343UtygdiLY50P/9tSM4AHS
+X-Developer-Key: i=alex.andries.aa@gmail.com; a=ed25519;
+ pk=kNAqgavfB7uUd1mA8o8TszhGxzyqBwY71PGO/oK4v84=
+X-Endpoint-Received: by B4 Relay for alex.andries.aa@gmail.com/20261118
+ with auth_id=1564
+X-Original-From: =?utf-8?q?Alexandru_Andrie=C8=99?= <alex.andries.aa@gmail.com>
+Reply-To: alex.andries.aa@gmail.com
 
+Fix three issues in qcom_battmgr encountered while bringing up PMIC GLINK
+battery reporting on a Xiaomi MIX 4 (xiaomi-odin, SM8350):
 
-On Mon, 16 Nov 2026 16:50:43 +0100, David Heidelberg wrote:
-> The modem firmware on Google Pixel boards (Pixel 3 through Pixel 5a)
-> expects the application processor to publish the SoC platform type,
-> subtype and revision in the first vendor-reserved SMEM item before the
-> modem is started. Represent that requirement as a boolean property on
-> the MSS remoteproc node so the MSS driver can publish the data before
-> booting the modem, instead of carrying a separate node and driver for
-> it.
-> 
-> This patch was written with assistance from a large language model.
-> 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
->  .../devicetree/bindings/remoteproc/qcom,msm8996-mss-pil.yaml     | 9 +++++++++
->  1 file changed, 9 insertions(+)
-> 
+1. Set battmgr->unit to QCOM_BATTMGR_UNIT_mAh on SM8350 and SM8550 so
+   charge_full and charge_full_design stop returning -ENODATA.
+2. Complete &battmgr->ack on invalid payload length errors in both
+   callbacks so callers receive -ENODATA immediately instead of stalling
+   for 1s with -ETIMEDOUT and aborting power_supply_uevent().
+3. Change status.temperature and qcom_battmgr_sc8280xp_convert_temp() to
+   int and cast SM8350 BATT_TEMP values to s32 before dividing by 10 so
+   sub-zero temperatures do not wrap into large positive values.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+Testing:
+- Built warning-free (W=1) on arm64 against commit 97d73c825122.
+- Tested on a Xiaomi MIX 4 (xiaomi-odin, SM8350) with UPower 1.91.0.
+- The SM8550 variant in patch 1, the SC8280XP paths in patches 2 and 3,
+  and sub-zero battery temperatures (< 0 C) in patch 3 were not
+  hardware-tested.
+
+AI disclosure:
+- Debugged and drafted with assistance from Gemini 4 Carbon
+  (Antigravity), and reviewed and tested on hardware by the submitter.
+
+---
+Alexandru Andrieș (3):
+      power: supply: qcom_battmgr: set mAh unit for SM8350 and SM8550
+      power: supply: qcom_battmgr: complete ack on callback payload errors
+      power: supply: qcom_battmgr: fix negative temperature values
+
+ drivers/power/supply/qcom_battmgr.c | 27 ++++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+---
+base-commit: 97d73c8251226cf27cc6656b4c542869bb8c69fa
+change-id: 20261119-upstream-qcom-battmgr-fixes-v1-004f34587c42
+
+Best regards,
+--  
+Alexandru Andrieș <alex.andries.aa@gmail.com>
+
 
