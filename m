@@ -1,90 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794986641;
-	b=1zMex3GEGmPTiNpJ8cn6s2UX9fAluWyHWc0hxzT1s6k0I0HIOHoAa+vf3102wApZzXng
-	 1+9hFlN0IM9duonddWz6iV8KnCAREN+A1I88/i1RFyk0xuXad8N6Meq9YDh8+gViwP9Ji
-	 WBsFvW8W+b+boVAxh6kFcNu5/NHYv7gW5Y00vQhiuX9abW3KZ8CoYLNpalRs44LrFYNZE
-	 r7KpIj+EvDWIWqEVk+cetcY51z1wgR2RXSaLjEv5XCHjykxcY7rRXerHqjsQPRsogWhUH
-	 HrxwFAk/tRHezzDd9n+NDNKYLhUHgS1mdUxx5CzOYrJvOjugNDMrWVfFz2vBaG5Nkow==
+	t=1794986696;
+	b=qX71vxR11hktHaBkH0Sp+OlgH2i/f87iPLfu5d/yApqzjgxQLe1ec8NCaPR8FQhgXJhE
+	 w3xgDzyXnMjs9t2GZ5imsJxPMQG0B1kf27xvfGGDjg+2KvuoRMMVnQg6zC9RwCKydO3Qb
+	 9w3LAUClaAoRCmWvo1eFXLmCEJ/fYpIFlom8GjGeB7Ucbt4O6WPF75GPS4IGD0GA4ADgd
+	 pWIkAnlL/N6/A3lkFOoTezgFtaL+Xi/tc5JPoTR/KydShKPPi6bSh+9AeNyp4GJblqdBg
+	 Qh1Y/o4x3bBauUKAq2m1WxetWFcrZyCR6Hw7bIvkxwRgfjIfSp/OIo6n+1P3G4lQI5w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794986641;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794986696;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=vSJzI8GBb8ZaTH+tAugZ/R1HgxYHhFd5lsw8P9UM59c=;
-	b=Z9FFcxns4wpCBD0a2/Io9LHsnpYVEYc3tOBAvJJORlDIjoDSfp3U1TC2kNEjW54Epagg
-	 V1xmn/Iz6wefLQe3WW8jQuZieJ2e9ecqD/ywQnzVXji3J4p56/QsFNhpPO+nNYm5nzcoR
-	 U5sSO3+W9wyDUAagdsaSLl+iRgUdXyfPZZPTxUKZdHpjk0LH3ujshMjAwb5Ui2M7O0gyi
-	 StdKG1+WfIV0R3uUc+0XUMhTxDIvvDPXXcjDSJvCsS629tCcEt/QwJTAqp78Ud50uXDV1
-	 6svUhJ5g8Gy6Ze4GbkGXCmStEmKnAxvYJakGuwyWobiaEmEZgDPuZKfgf5Gp+Vavs8w==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
+	b=dNEGKoPjZfR9lVrx2M2K4hOVmNO00TsOwy4tZNZo6h7gzLVNbC19v3HUtq720w5XyrKD
+	 7UITfI6vpCaNCyXB6SiNgXnLEenrS6bPmWxq3LTvfhyzOz7OrthppJ45b4k6xVqjrTsAA
+	 QhxQCardkGWAzzecAyRN7NyWhv3H0L/EGlENPL/jsJQ/zA37/Lmi8wfQ4ba6w4AlFkahH
+	 +mE/alVwusS/gYW4V5A0Q+uMdMP+QsTpQjk2dg5q21EbtLq0+13wieN4T1B5RA65UtUeN
+	 hRyBL3erF/Sc8LsIjH9minxh2iaNxGXhUU+Yo1c8BzH1qfGwEFqGF29mu/mYeDAxr7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zcR1nlVL;
-	arc=none smtp.remote-ip=74.125.82.170
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bHVGsYVs;
+	arc=none smtp.remote-ip=209.85.215.182
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CE5E606A31C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 07:24:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9CE5E606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47724606A325
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 07:24:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47724606A325
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zcR1nlVL
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-382f4710a17so522252eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 23:24:00 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bHVGsYVs
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cdba1bbde0bso313202a12.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 17 Nov 2026 23:24:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794986640; x=1795591440; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1794986696; x=1795591496; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vSJzI8GBb8ZaTH+tAugZ/R1HgxYHhFd5lsw8P9UM59c=;
-        b=zcR1nlVL3ZvmA2Wm7UMtZQVq6XfeYG6VFCmt6nMaThUGUOvyeBIn7QuPm4OQ0endMj
-         qNpJKc9A1oBr5YXXiMIX7kqPvGJnYkqTgViYcJ4XcZjd9JCgb5d+QrNpEjnf9khaR0G7
-         rxQ/8KVV6irgNMXXIM2ZQ75K6UiBEYHsCjIzBORZ43tesxfy8OYzKO2BQvDwPjq/3ZpT
-         XqbIu1BZw+ELuMdJeUWGxS4VGBqJlo8PIt9lNDk7t3gOU9A/YLO7y3/+bWI3MWf36A5Q
-         7u5cgJYDwi46c9JB0BjLAZnSueM2O5Dx+SyUIYXLWmHJvucfdckDRXdudrKp/Ejl6tV4
-         YP3A==
+        bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
+        b=bHVGsYVshDuBPLd5wfU4E2Dv0/H7SOWZgvWb2MPz1dHjqZrbhfeOtQtQV2g3B5mPEv
+         HWSiKGIRwAV1cHk6hq9OLuwAaKJfVsj1kxuZtIjb1AB2sjm7Ihkp1kMoT0CEzfWVZmge
+         kjToBmF+WhtM0brpMtD8ZgStvTmYdllXEuWcE1ZlxRZT9rpT8nxNTMwf/Rn7Ypw9SbAM
+         cb8TlSa560WeBvyoB5PKckJQHyIRstb5tFv/iC9HkPIg5nof0b07sNQIr38DcMILJaSm
+         A756Upl4c09BEW4u3jUQFUMZQgYpH6jLrXNK2TmWteDTTN0ZNMsAy0+NbrfykYiDvE6K
+         3Mxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794986640; x=1795591440;
+        d=1e100.net; s=20260707; t=1794986696; x=1795591496;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vSJzI8GBb8ZaTH+tAugZ/R1HgxYHhFd5lsw8P9UM59c=;
-        b=O/6tE/3TDNUDEmM29qNn5JfI+h56vtT8vMZ5yOe6fpYeSHeUQy7DNY95v5toGXIq60
-         n0aydE3jxyixRf3yME3QXLad8F7axvmVr3ZDnHGWWWbdWU5IMlxT/BGFY6NSpkjMMRH9
-         UUUc7F3MYI2c2edDQXoaSNoVVtbZTBZnepRys002Kjt24QSLmu5lJUZsFo0m09v5KaBa
-         P/iJ26spSCNZKqwXGXUA5miMojtNOqZpX3SIoKZoVKtSWSLVJkxX2iAf6i7+stZJiUIh
-         I0VyjacD21DxtADQnDPxmomFILiHru7v60cOtrXlmZ7VQQu9HqUVCqWxu+9LVro6DdA9
-         vw+w==
-X-Gm-Message-State: APuU4Z8LBIKSGJOOVwX/tmdZ0e+46+qQErYqx6C0CqlGjHmTIKjJBjxw
-	Q2ys1mSJayC2bU9wXsL21KLnZaKkMcOaN/TvilC/7GRNmmqkEdtYXGaP
-X-Gm-Gg: AYBFou3yYOhbIIW7nPS5E/cMv5wQdLw9Vx3YtX4rpEKDWYlh2RGI39zhPM3zaHqy+Wj
-	ENEpBFIS/PgrUEV3sDVfXXRTGJjRgXpEgB8iVhRx2+Tv38uwCzjSCWUk4wbg2Ek+0N72CFLdyS2
-	AvPx1KJQ/aIpMNoP3NCjAivPGlwrxLC+bP1TPHSj6HMe0SigYk0xNKPKmoHktou/uUkJpFnAZBw
-	f4d+yJG2/XeBbvZT6sLrVMTzq7HP/Lab3GkYLYPunjGb5DdCoBL+MZCrlWzyWSY6cZjF+Y51Hm3
-	477qMTlIswnnWECHT4uQSSYG2yC8aLBfKy5tdS8CuEeTtqfZImglLDI7yCjnL+O1NDlO6x1jw6m
-	0HlfRMqR9dcUtJWXIW/q40MU5ltMBpiIvdncJuMi6K3aEH2x/K7ErpKOpeUhAKWZCdbP8shYumr
-	goGdLF2XYfpmp/LtaF28aR5VU2CWvO/39GCw7dGVE10tId74/Jm+OG+9/2VNYU1klYmFdkP5jYp
-	E81Fc06dgdyNDjH8IS2Bu+rQejcxKsFj7RKv5P/F4EM0Vt/xvOYTul0o0ncAOX3yufGutpF2isv
-	6uz6cBUF+7Gn+FBTsih+q6d4PjPt9XTbtpPkhVMYZqx9zNfDDPE8Y4C/Vl+QvzvRYOrSakZ8VwM
-	Q0/ab3S/cV3TUHlvAb7pkeUlOhJFmqHlg5WLRMKTa
-X-Received: by 2002:a05:7023:d0d:b0:1b2:60b2:96ff with SMTP id a92af1059eb24-1b543d0ce1fmr1925170c88.38.1794986639490;
-        Tue, 17 Nov 2026 23:23:59 -0800 (PST)
+        bh=bsjzF6TvIUuw+1BiWPKqYlHDsaiLhXoBbNKg0Yd1gBs=;
+        b=ixZguYCjyvi3njr3xIVIN8TAIcHptRXEF4A1qkScfq++HSy3W86n4pbcNDZ6n31MXD
+         SVhXYFAmAYacYO2eDLXdB/aphtmoNpcfdeZJvmUM9+aWTYa/HePFMzxE7PsfyYG3IiUj
+         KEK8fEuBqChIPTD5Be26lS+y3w1OwZafPKeQKgFLLp0K8Th1AWAqCajolHL4DphWxApd
+         r7F4Pqf/PtN1o94eednH9MEg8FdPd2MtCzKt/JYUq1Ts882lJefmvSrdKbq+eZsZ7ZQf
+         9bM9Nz/XR4K1adQCrqTf+kO6tY7AjmOhewUfvWxYMRIRtScvfdHIEKdyYM8t5zXTicaZ
+         /oSA==
+X-Forwarded-Encrypted: i=1; AL+hErFijUs3KJsoumzWHIyoqQn9RUC/e2YTlILpBF8XPhX7mbKetqZ0Z5UIv8h9QgZctP1otvHRHf6tljkNUKfB@vger.kernel.org
+X-Gm-Message-State: APuU4Z/h0TcDnwS3H2lhADo/J3sM6MZFpVeEVIFaYwzPObjW1h7jTTCf
+	tD3ipIlxY2tihj+KgUwn0zIl6QMU3YvQ01fzkJdViZ2A14pFVNE2Vwwt
+X-Gm-Gg: AZFdTZeEjLiHB5tV2mC7NyTZSeOJQNCnAqDUOWUb9MDlb/snSUr0Em7+8u56K3tYHXK
+	CIltZEjuwebrPZng0OBnv02q6yBoTVyS/cZtpqtJhwfzn5+2rhOypAFqKQD+oNurcOdRHIgqaJF
+	Pf4Av1ovCR36c9h1fWeuLmxmgQy/yDY+T/ZCiagC35zvBu39JFuCq1//N2M6PRs1XSQ/sIs5ohS
+	5t1PeYPhu4j+GdYMykeXZY12Vo9H7Tl07tsDNqT1ZwFNvLns1Fm78+FpyZGsO6bpfRpW+byIyzF
+	O2ULJpL09fYKL/46chJ6o7H0KInkEqHhIhdH5/bKF7z6HKpcsUV/JBeA628rKHjAPxt+dfFAkTd
+	Qj2oOewhS4F62Rv5eC2KqBEO//fLLLy19HmUbu/HW+DNr65nG+u8J4BoGXo1Dnadl98YWWhAaeD
+	qrr83HDhkQl945J2mwVWVeyz6VEC2JUBtn5hOid17wu1+BVQ+B79H2lhu54JyGoxgoHelDuk/ZM
+	9AEL+wCVWYFgaBjhDDaXvRj6w0zyajr1Mx1zrVfkSd0HPzvbgAgusNUsgs/l4Vq94FnEGAFptPS
+	VF+9YSfyy71vXmUhlo5YBMY8tzjO0PgAO+X1NpzLwb4hkNFZl6qPYDDSzFM9fI79lka0Dx0ZRtR
+	l79J0/+xduYSCCi3IdD/BCpLVvVnyHHIu8CJ2WsXbuYSZZoGheJEUdWBAMFGMHw==
+X-Received: by 2002:a17:90a:d44b:b0:3ab:884b:65ab with SMTP id 98e67ed59e1d1-3b3d07c2479mr1638407a91.55.1794986695524;
+        Tue, 17 Nov 2026 23:24:55 -0800 (PST)
 Received: from lwq-System-Product-Name.. ([2602:feda:30:cafe:ec49:29ac:0:f6])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5447da7e0sm6185847c88.9.2026.11.17.23.23.56
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b3d56ee297sm934947a91.4.2026.11.17.23.24.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 23:23:59 -0800 (PST)
+        Tue, 17 Nov 2026 23:24:55 -0800 (PST)
 From: Yaohan Li <shunsheng1218@gmail.com>
-To: lgirdwood@gmail.com,
-	broonie@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
+To: jeff.hugo@oss.qualcomm.com,
+	ogabbay@kernel.org
+Cc: carl.vanderlip@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	sumit.semwal@linaro.org
-Subject: [PATCH] regulator: qcom-labibb: stop the recovery workers on teardown
-Date: Wed, 18 Nov 2026 15:23:53 +0800
-Message-Id: <20261118072353.1259751-1-shunsheng1218@gmail.com>
+	jacek.lawrynowicz@linux.intel.com,
+	quic_pkanojiy@quicinc.com,
+	stanislaw.gruszka@linux.intel.com
+Subject: [PATCH] accel/qaic: drain the control workqueue before the device is freed
+Date: Wed, 18 Nov 2026 15:24:48 +0800
+Message-Id: <20261118072448.1259909-1-shunsheng1218@gmail.com>
 X-Mailer: git-send-email 2.34.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -97,63 +103,24 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The driver never stops sc_recovery_work or ocp_recovery_work.  Both are
-queued from the interrupt handlers and reschedule themselves from their
-recovery paths, so they outlive the driver data that devres frees once
-the probe or the removal is over.  A short-circuit or over-current event
-followed by an unbind leaves a pending work item that runs against a
-freed labibb_regulator.
+qaic_pci_remove() tears the MHI controller down and destroys the DRM
+device, but nothing drains qdev->cntl_wq.  qdev itself is allocated with
+devm_kzalloc_flex() and is freed as soon as the PCI device is unbound,
+while cntl_wq is a DRM-managed resource that survives until the last
+open file drops its reference to the DRM device.
 
-A ->remove() callback would cover the unbind but not a probe that fails
-after the interrupt was requested: the driver core does not call
-->remove() for a failed probe, while devres still releases the
-interrupts and the private data.
+resp_work is queued from qaic_mhi_dl_xfer_cb() and resp_worker()
+dereferences qdev, so a work item that is still queued, or still
+running, when the driver instance goes away touches freed memory.
 
-Register one devres action in ->probe() instead, after the short-circuit
-interrupt, and let that action own every resource that has no devres
-release of its own: it stops both workers and it releases the
-over-current interrupt.  disable_delayed_work_sync() is used rather than
-cancel_delayed_work_sync() because both workers reschedule themselves.
+mhi_power_down() moves the controller to the shutdown state, disables
+the interrupt and flushes the state worker that destroys the channel
+devices, and mhi_unregister_controller() removes the controller, so no
+data event can reach qaic_mhi_dl_xfer_cb() once
+qaic_mhi_free_controller() has returned.  Flushing the workqueue after
+it therefore covers every work item that can still be queued.
 
-The over-current interrupt cannot be requested from
-->set_over_current_protection(): the regulator core calls that op from
-set_machine_constraints(), inside regulator_register(), so a devres node
-created there is released after the regulator itself and the recovery
-worker would still be runnable while vreg->rdev is gone.  That op now
-only programs the interrupt registers and records the request; ->probe()
-installs the interrupt once devm_regulator_register() has returned, and
-a runtime first enable goes through the same helper.  Both requests stay
-after the regulator node, so the teardown order becomes: stop the works,
-release the interrupts, unregister the regulator.
-
-The interrupt is requested with request_threaded_irq() rather than with
-the devres helper so that the same action can release it; its name comes
-from vreg->desc.name, which outlives the interrupt, while a name
-allocated with devres would be released before the action runs.  This
-also keeps the cleanup to a single devres action: a second one
-registered from the helper would be released by devm_add_action_or_reset()
-from under ocp_lock on allocation failure, and would then re-enter
-itself through that lock.
-
-The op and the probe side share a per-device mutex, and the probe
-publishes the registration only after the deferred cleanup action
-exists, so a runtime enable cannot request an interrupt that has no
-teardown paired with it.  The hardware source is enabled only after the
-handler has been installed, and turned back off when that fails, so a
-retry can be attempted without leaving the source running on its own.
-
-The teardown action publishes a shutdown flag before it drains anything:
-an over-current request that runs while devres is releasing the actions
-is refused instead of installing an interrupt whose cleanup action has
-already gone, and the hardware source is turned off once the handlers
-are stopped.  The interrupt may still be left disabled by a handler that
-called disable_irq_nosync(), with no recovery worker left to re-enable
-it; that depth is left alone on purpose, because free_irq() shuts the
-line down regardless of it while an enable_irq() racing with a handler
-that is still running would unmask a line whose thread has not
-finished.
-
-Fixes: 498ab2fdf855 ("regulator: qcom: Add labibb driver")
+Fixes: c501ca23a6a3 ("accel/qaic: Add uapi and core driver file")
 Signed-off-by: Yaohan Li <shunsheng1218@gmail.com>
 ---
 Prepared against v7.4-rc1-1969-g666539eecdf4.
@@ -162,279 +129,31 @@ AI assistance: the analysis, the change and its review notes were
 prepared with Claude (Anthropic) as a coding assistant.  The author
 reviewed the reasoning and takes responsibility for the content.
 
-Testing: compile tested only (arm64, gcc 11.4).  No PMI8998 hardware was
-available, so no over-current or short-circuit event was run.
- drivers/regulator/qcom-labibb-regulator.c | 195 ++++++++++++++++++++--
- 1 file changed, 177 insertions(+), 18 deletions(-)
+Testing: compile tested only (arm64, gcc 11.4).  No QAIC hardware was
+available, so the teardown race was not run.
+ drivers/accel/qaic/qaic_drv.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/regulator/qcom-labibb-regulator.c b/drivers/regulator/qcom-labibb-regulator.c
-index 8641e69b55c3..49aaa31a539d 100644
---- a/drivers/regulator/qcom-labibb-regulator.c
-+++ b/drivers/regulator/qcom-labibb-regulator.c
-@@ -96,6 +96,12 @@ struct labibb_regulator {
- 	int				ocp_irq;
- 	int				ocp_irq_count;
- 	int				fatal_count;
-+	bool				registered;
-+	bool				ocp_requested;
-+	bool				ocp_irq_done;
-+	bool				shutting_down;
-+	/* serialises the over-current request between set_ocp() and probe */
-+	struct mutex			ocp_lock;
- };
+diff --git a/drivers/accel/qaic/qaic_drv.c b/drivers/accel/qaic/qaic_drv.c
+index 90c0d31e414a..c4c3f450e67b 100644
+--- a/drivers/accel/qaic/qaic_drv.c
++++ b/drivers/accel/qaic/qaic_drv.c
+@@ -625,6 +625,15 @@ static void qaic_pci_remove(struct pci_dev *pdev)
  
- struct labibb_regulator_data {
-@@ -307,12 +313,141 @@ static irqreturn_t qcom_labibb_ocp_isr(int irq, void *chip)
- 	return IRQ_HANDLED;
+ 	qaic_dev_reset_clean_local_state(qdev);
+ 	qaic_mhi_free_controller(qdev->mhi_cntrl, link_up);
++
++	/*
++	 * The control channel is gone, so nothing can queue resp_work any
++	 * more.  Drain it before qdev is freed: the workqueue belongs to the
++	 * DRM device and may outlive this driver instance, and resp_worker()
++	 * dereferences qdev.
++	 */
++	flush_workqueue(qdev->cntl_wq);
++
+ 	qaic_destroy_drm_device(qdev, QAIC_NO_PARTITION);
  }
  
-+/*
-+ * Stop the recovery workers and release the over-current interrupt.  A
-+ * devres action is used instead of ->remove() so that a probe which fails
-+ * after the resources were set up goes through the same teardown: the
-+ * driver core does not call ->remove() for a failed probe, but devres
-+ * still releases what was registered.
-+ *
-+ * This is the only cleanup entry, and the over-current interrupt is
-+ * requested without devres so that it can be released here: registering a
-+ * second action from a path that runs under ocp_lock would also make
-+ * devm_add_action_or_reset() run this function from under that lock on
-+ * allocation failure.
-+ */
-+static void qcom_labibb_stop_works(void *data)
-+{
-+	struct labibb_regulator *vreg = data;
-+	int irq = 0;
-+
-+	/*
-+	 * Announce the shutdown before anything is drained: a set_ocp()
-+	 * that runs from here on must not request the over-current
-+	 * interrupt while devres is releasing the action that would stop
-+	 * its worker.
-+	 */
-+	mutex_lock(&vreg->ocp_lock);
-+	vreg->shutting_down = true;
-+	mutex_unlock(&vreg->ocp_lock);
-+
-+	/*
-+	 * Both recovery workers reschedule themselves, so a plain cancel
-+	 * would leave them queued again: disable_delayed_work_sync() also
-+	 * blocks the requeue.
-+	 */
-+	disable_delayed_work_sync(&vreg->sc_recovery_work);
-+	if (vreg->ocp_irq > 0) {
-+		disable_delayed_work_sync(&vreg->ocp_recovery_work);
-+
-+		/*
-+		 * The over-current handler turns the source off before it
-+		 * queues the worker, but a handler that was stopped above
-+		 * may have done so after the worker was drained: leave the
-+		 * source off now that nobody would turn it back on.
-+		 */
-+		qcom_labibb_ocp_hw_disable(vreg->rdev);
-+
-+		mutex_lock(&vreg->ocp_lock);
-+		if (vreg->ocp_irq_done) {
-+			vreg->ocp_irq_done = false;
-+			irq = vreg->ocp_irq;
-+		}
-+		mutex_unlock(&vreg->ocp_lock);
-+
-+		/*
-+		 * A stopped handler can also have left the interrupt
-+		 * disabled with disable_irq_nosync(), while the recovery
-+		 * worker - the only caller of enable_irq() - is gone.  The
-+		 * depth is deliberately not unwound here: free_irq() shuts
-+		 * the line down regardless of it, whereas an enable_irq()
-+		 * racing with a handler that is still running would unmask
-+		 * a line whose thread has not finished.
-+		 *
-+		 * free_irq() waits for a running handler, so it is called
-+		 * without ocp_lock held.
-+		 */
-+		if (irq)
-+			free_irq(irq, vreg);
-+	}
-+}
-+
-+/*
-+ * Request the over-current interrupt once the regulator is registered.
-+ * Requesting it from ->set_over_current_protection() is not possible: the
-+ * regulator core calls that op from set_machine_constraints(), inside
-+ * regulator_register(), and a devres node created there is released after
-+ * the regulator itself.  The recovery worker would then still be runnable
-+ * while vreg->rdev is already gone.
-+ */
-+static int qcom_labibb_setup_ocp_irq(struct labibb_regulator *vreg)
-+{
-+	u32 irq_flags = IRQF_ONESHOT;
-+	int ret;
-+
-+	lockdep_assert_held(&vreg->ocp_lock);
-+
-+	if (vreg->shutting_down)
-+		return -ESHUTDOWN;
-+
-+	if (!vreg->ocp_requested)
-+		return 0;
-+
-+	if (!vreg->ocp_irq_done) {
-+		/* IRQ polarities - LAB: trigger-low, IBB: trigger-high */
-+		switch (vreg->type) {
-+		case QCOM_LAB_TYPE:
-+			irq_flags |= IRQF_TRIGGER_LOW;
-+			break;
-+		case QCOM_IBB_TYPE:
-+			irq_flags |= IRQF_TRIGGER_HIGH;
-+			break;
-+		default:
-+			return -EINVAL;
-+		}
-+
-+		/*
-+		 * The interrupt is owned and released by the cleanup
-+		 * action, so its name has to outlive the interrupt:
-+		 * devres would release a name allocated here before the
-+		 * action runs, while vreg->desc.name is owned by the
-+		 * driver data.
-+		 */
-+		ret = request_threaded_irq(vreg->ocp_irq, NULL,
-+					   qcom_labibb_ocp_isr, irq_flags,
-+					   vreg->desc.name, vreg);
-+		if (ret)
-+			return ret;
-+
-+		vreg->ocp_irq_done = true;
-+	}
-+
-+	/*
-+	 * Enable the hardware source only once a handler exists, and turn
-+	 * it back off if that failed, so that a later attempt can retry
-+	 * without leaving the source enabled on its own.
-+	 */
-+	ret = qcom_labibb_ocp_hw_enable(vreg->rdev);
-+	if (ret)
-+		qcom_labibb_ocp_hw_disable(vreg->rdev);
-+
-+	return ret;
-+}
-+
- static int qcom_labibb_set_ocp(struct regulator_dev *rdev, int lim,
- 			       int severity, bool enable)
- {
- 	struct labibb_regulator *vreg = rdev_get_drvdata(rdev);
--	char *ocp_irq_name;
--	u32 irq_flags = IRQF_ONESHOT;
- 	int irq_trig_low, ret;
- 
- 	/*
-@@ -326,52 +461,58 @@ static int qcom_labibb_set_ocp(struct regulator_dev *rdev, int lim,
- 	if (vreg->ocp_irq <= 0)
- 		return -EINVAL;
- 
--	ocp_irq_name = devm_kasprintf(vreg->dev, GFP_KERNEL, "%s-over-current",
--				      vreg->desc.name);
--	if (!ocp_irq_name)
--		return -ENOMEM;
--
- 	/* IRQ polarities - LAB: trigger-low, IBB: trigger-high */
- 	switch (vreg->type) {
- 	case QCOM_LAB_TYPE:
--		irq_flags |= IRQF_TRIGGER_LOW;
- 		irq_trig_low = 1;
- 		break;
- 	case QCOM_IBB_TYPE:
--		irq_flags |= IRQF_TRIGGER_HIGH;
- 		irq_trig_low = 0;
- 		break;
- 	default:
- 		return -EINVAL;
- 	}
- 
-+	mutex_lock(&vreg->ocp_lock);
-+
-+	if (vreg->shutting_down) {
-+		ret = -ESHUTDOWN;
-+		goto unlock;
-+	}
-+
- 	/* Activate OCP HW level interrupt */
- 	ret = regmap_update_bits(rdev->regmap,
- 				 vreg->base + REG_LABIBB_INT_SET_TYPE,
- 				 LABIBB_INT_VREG_OK,
- 				 LABIBB_INT_VREG_TYPE_LEVEL);
- 	if (ret)
--		return ret;
-+		goto unlock;
- 
- 	/* Set OCP interrupt polarity */
- 	ret = regmap_update_bits(rdev->regmap,
- 				 vreg->base + REG_LABIBB_INT_POLARITY_HIGH,
- 				 LABIBB_INT_VREG_OK, !irq_trig_low);
- 	if (ret)
--		return ret;
-+		goto unlock;
- 	ret = regmap_update_bits(rdev->regmap,
- 				 vreg->base + REG_LABIBB_INT_POLARITY_LOW,
- 				 LABIBB_INT_VREG_OK, irq_trig_low);
- 	if (ret)
--		return ret;
-+		goto unlock;
- 
--	ret = qcom_labibb_ocp_hw_enable(rdev);
--	if (ret)
--		return ret;
-+	vreg->ocp_requested = true;
-+
-+	/*
-+	 * During regulator_register() there is no interrupt yet and no
-+	 * cleanup action to pair with it; the probe finishes the job once
-+	 * the regulator and its devres nodes exist.
-+	 */
-+	if (vreg->registered)
-+		ret = qcom_labibb_setup_ocp_irq(vreg);
- 
--	return devm_request_threaded_irq(vreg->dev, vreg->ocp_irq, NULL,
--					 qcom_labibb_ocp_isr, irq_flags,
--					 ocp_irq_name, vreg);
-+unlock:
-+	mutex_unlock(&vreg->ocp_lock);
-+	return ret;
- }
- 
- /**
-@@ -836,6 +977,7 @@ static int qcom_labibb_regulator_probe(struct platform_device *pdev)
- 		vreg->dev = dev;
- 		vreg->base = reg_data->base;
- 		vreg->type = reg_data->type;
-+		mutex_init(&vreg->ocp_lock);
- 		INIT_DELAYED_WORK(&vreg->sc_recovery_work,
- 				  qcom_labibb_sc_recovery_worker);
- 
-@@ -884,6 +1026,23 @@ static int qcom_labibb_regulator_probe(struct platform_device *pdev)
- 						sc_irq_name, vreg);
- 		if (ret)
- 			return ret;
-+
-+		ret = devm_add_action_or_reset(vreg->dev,
-+					       qcom_labibb_stop_works, vreg);
-+		if (ret)
-+			return ret;
-+
-+		/*
-+		 * Publish the registration only now: a concurrent
-+		 * set_ocp() must not be able to request the over-current
-+		 * interrupt before the action that stops its worker exists.
-+		 */
-+		mutex_lock(&vreg->ocp_lock);
-+		vreg->registered = true;
-+		ret = qcom_labibb_setup_ocp_irq(vreg);
-+		mutex_unlock(&vreg->ocp_lock);
-+		if (ret)
-+			return ret;
- 	}
- 
- 	return 0;
 -- 
 2.34.1
 
