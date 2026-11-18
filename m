@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795096377;
-	b=Wtq/gAUGZjEIlgxoE5eQIrpDUTA1wUjVGUw92vcx9W/oc85hRp+lmavw82VTKlUtwyJI
-	 utZ5H7rG+Qg3L3iiyUc7knrsgxv9eay4cPR9PC6+zskFXP4i+2ChnXWZxZgYWLdVQpaZI
-	 c2QdyFxbO8aSNtjh285Ymi5kR0zVQmBmTN3JXP706TA6XeMR3Mt3a1/by2EAiERFFnQi9
-	 MUI7FyjcmzGfhtSm7hReZ2z2hs47HoperWD1ZACyC31AVQ9UdqMlyPRJqduLHdlnTKmqi
-	 zUeKf+eey7kKubIhH3i88AuijUnLG4xMKt2lNcicGS82yFtq2xfpKA2RlUcOBoUN3Zg==
+	t=1795096400;
+	b=P8dtMNSNuRgb9wwdhm7wyxd5PnAyo5gwsVA/iOlSkHU2h7J+uYaPW+YnZ003f/EIn7Dc
+	 DfAVU8gpNYaj9zbbPOLO0lfSgnuSccgqhGTnup9WDcSIwFFPJ6laDHsyyQdx85/QXJrGT
+	 Y8nDkJbJ4h8B/mL3yyrcResc4+RVtCtoKJB98gxwjomwOHxfFnlGz06U4L2pEa6Ov5Z/F
+	 Cmc/LiC/W4x1mE07+zKke9j++P4QKG5qh/6sGs9g1uGx0q3x9ZokwZ0ug0AK8NxzymjkK
+	 5uP4MLrzFDAt/d0/R/Mdhwp80zTiFhiokmpxGpCCug94REpEsKd7joEBorRizV4rbSg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795096377;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795096400;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=tKMaRZhJS84cVoupH0cVMat32QSTexnKCZROGeeGQ6o=;
-	b=z01419iw1TFCUSxczcRfZfsDxqdfxeKIoOm7Rx4+key8AFtgaFdfGcrs67j6Pq4lBe/M
-	 2sgAVPMsBGobhUOPPek5VHKQ0lSmv4wJ617DQjLPRmZJFPKNnsW84ytbSBq3skpTpJM9z
-	 UY+WjoSZ71DfS+3anOoVnZCmyMrIeI5MTDIcLOl/9Ow6C/LdV/U6u23ZU3A7mrAESi4CH
-	 9mR0agIcgbcshdYYKkrh+wM8bl9cvVOmLUFwzPPrNWFrAQKsKUmldw571Yo4Bpz9Fta0S
-	 NEZME9dWMHI0n+31Rvs5D8LB8lBTXwM6skhfBtis0C51dK4u+BwYZPkzm8cgTyHyMRg==
+	bh=yEHuIKscNBcr2ODtIvDbXvMU1VdStlgHKQaKmCUfC7M=;
+	b=xM9JBMiaIDhVtMe/k7XSfrgfz+rlTxV+onLHHymf5F1AagVwH/rj9uYxCmgDEogZrOPC
+	 JlUAoDHWNMIwVjscKKfoVippnVOGsyO9a8OwEPd1ZYVKd5nw5sgcUyAznvi2iiURt0BIR
+	 TuZSHHwnSJSmcfS5cWTSqXITikxwIhAHIic2p6Px8ZiG4dx6H9qyOJYIgfvElNJO/UjsO
+	 kajb+10NxpxLYFFuzrB1FY1Iu4Y/l7Ly0zKCnTZtQWfQDSBtZGqVT6huBZS1PktG9/Qrn
+	 Vx2Ce8y/scNKbZVy8RGaVi+pig2w40esuAT4oaWuFPsUtIQjILFCJn989ELABLujpOw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hDVc7ijL;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hkMf8ITB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 947CB606A32F;
-	Thu, 19 Nov 2026 13:52:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A262E606A332;
+	Thu, 19 Nov 2026 13:53:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hDVc7ijL
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E49D01F000C8;
-	Thu, 19 Nov 2026 13:52:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hkMf8ITB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4CAF1F000C9;
+	Thu, 19 Nov 2026 13:53:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795096377;
-	bh=tKMaRZhJS84cVoupH0cVMat32QSTexnKCZROGeeGQ6o=;
+	s=k20260515; t=1795096400;
+	bh=yEHuIKscNBcr2ODtIvDbXvMU1VdStlgHKQaKmCUfC7M=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=hDVc7ijL63NJ8PseqOohYiBj4Ew3jc6B1koyLQVpB8yKru/1s9x3sxjdhsnn8pna7
-	 YRbfoEC5Jqj6C0kC06PAAQvkzN6cFqS0/9X58jB8Y8zByx1S/GZFohlmvnwDuwUl/e
-	 DdKi8V0LgmLcvVDK/MUJUwjT4rIEiF8vOA1MLVqDG4IcAFgkttarq+GhAwSX2+OXBt
-	 tpQrk2nFS42VugkIdazBqsDnk4whkFFOpZtRsEyGY7Q+3bOU+GLeulDmGBfa/P5cox
-	 M7/ytO1hkXyw1G0skLOWBB5Cc+QYBjLIaIH/TOOy/2QtClF+U8t/Ty8/mvjy4RxIB5
-	 iMBaNKEuEiwvw==
+	b=hkMf8ITB0dqSeKaBr/vbFzlLk09P602us5XrF5yM6T3pYjvU7erMD4smeTfRHvFlB
+	 QVOaY2EtYgHZiWiCHU6Qe+IGpGLuzsZ5//DgDHfi+4hiJyDFta2aRL8ys6g1MH1Bb7
+	 HiB/1axhrnqqhm4r9SaRxmrMP4tgixAtGxprEhdaHgZ1A7J71vsLyUZq+nXQGZOBSt
+	 PV6QANKUmtkaU+gsBp2UAMetB2S0pWCo5XtDd+LgIoJMDed0a2tRbtvj0TAcyAbyOK
+	 swbC10WWZmKsZeLHxTM5n+jDnQD58GFVMzHCHe9wVBOIhMFALb7G4pkrRPtAXDc5jt
+	 NJcbsSQZWoFhQ==
 From: Mark Brown <broonie@kernel.org>
 To: Srinivas Kandagatla <srini@kernel.org>, 
- zhaofeng2 <zhaofeng2@cmss.chinamobile.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, 
- Selby Mashiki <mashikiselby@gmail.com>, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20261110101026.1154-1-zhaofeng2@cmss.chinamobile.com>
-References: <20261110101026.1154-1-zhaofeng2@cmss.chinamobile.com>
-Subject: Re: [PATCH] ASoC: qcom: qdsp6: Fix device node leaks when parsing
- "iommus" phandle
-Message-Id: <179502571077.810609.427201941271650065.b4-ty@b4>
-Date: Wed, 18 Nov 2026 18:15:10 +0000
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, "Ingo A. Kubbilun" <ingo.kubbilun@gmail.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261113214544.232836-1-ingo.kubbilun@gmail.com>
+References: <20261113214544.232836-1-ingo.kubbilun@gmail.com>
+Subject: Re: [PATCH] ASoC: qcom: common: report line-out plugs on the
+ Headphone Jack pin
+Message-Id: <179502567183.810609.6836739761636920522.b4-ty@b4>
+Date: Wed, 18 Nov 2026 18:14:31 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,17 +64,17 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1155; i=broonie@kernel.org;
- h=from:subject:message-id; bh=7kte9NX+Yhx17Y/UEllUXs2tJ+7WSPaA2rQS15TcrzQ=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+/TfjdJ9X4vl70aJTzb+OBX54JbX4xl53J3u3C9F1/
- lw7M98/6yhlYRDjYpAVU2SJy+J+WV/yeg3fwYVtMHNYmUCGMHBxCsBE+iwY/ifnWYS9vfDgPGvI
- 5vmPUj11XwY9mXO7bm3r+4CVh85KOf1jZNiXlTPnSZzAZyUmS78Cx5q3odbbD5y7c/TCB4Nrhi0
- r8zkA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1156; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=vEdsMOYSGYQgjuscyDjbKmibDWbAMiNJHEbk0zfz2jw=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+/fc5s5L53z5/SxdPMe6td0RVWNYUXjf5wd2659u7f
+ N8PkpMWdJSyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAi+qUM/73Ni34Zzl9fmX1S
+ 9EHgxxrelY5Fn+4vnWi0T6Kybe3Zd0cY/kq+uHImj1cw0EZI6vsipj+bo5hc1iQ5cl9mm/3vysk
+ UM0YA
 X-Developer-Key: i=broonie@kernel.org; a=openpgp;
  fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Tue, 10 Nov 2026 18:10:26 +0800, zhaofeng2 wrote:
-> ASoC: qcom: qdsp6: Fix device node leaks when parsing "iommus" phandle
+On Fri, 13 Nov 2026 22:45:35 +0100, Ingo A. Kubbilun wrote:
+> ASoC: qcom: common: report line-out plugs on the Headphone Jack pin
 
 Applied to
 
@@ -82,8 +82,8 @@ Applied to
 
 Thanks!
 
-[1/1] ASoC: qcom: qdsp6: Fix device node leaks when parsing "iommus" phandle
-      https://git.kernel.org/broonie/sound/c/2b6e81a4d50a
+[1/1] ASoC: qcom: common: report line-out plugs on the Headphone Jack pin
+      https://git.kernel.org/broonie/sound/c/b610f9cd00f4
 
 All being well this means that it will be integrated into the linux-next
 tree (usually sometime in the next 24 hours) and sent to Linus during
