@@ -1,72 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.108
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795028340;
-	b=5rmUP79m+6VozfO1fFN1oOt5W9Xs3tx/dIscD0Aw/TFDA1TXO+TAJ1O9smxvzozkDNci
-	 nYA13lyO2MUQZTnQBJqvTNEtZ4SDqdi11xT90L3U44QAcfKp3qEbvEgcpnGHdF1IBNWFv
-	 5ri6z6Z2zc9FH4Qv6jt7xrS9j/uJDctekx6q7Fy31dsGMNtR214+cgSTeLi55yVdMInnz
-	 4wXCSvRIg4IGwKIUjMAcDcXg0G/bXoN/4kiOqIt14CfvKuP/KDwbwst/LTpZG9V4rdqQD
-	 lObktKrvWIkv+xw3H0SvMEVnVvFAl7Z5L/cjOTLbbIyflcURyNunBW2TjKMEuqOJZVw==
+	t=1795028646;
+	b=kyvEqjoYZeHKgYkp4t/p0TcIer6+oz19hInRzLnaFhKinKxJzz4QBKF0J8WLh6XGf0wS
+	 d2eNT30pcroFiMTGp9FVoGN0bZQPZt655vIufonPbB4Kvmmtzq42GLIBWI+S1rgAxU8S1
+	 KsUuyJE7wZ7PssSBTDAhFHEadP4mxQro7cHdM1+RIOCPPr2DQMG2SVzJxy7T6TqoP8wvc
+	 6qcvYdVwr6CopKHkIrMH+bdNQLedfBtMMTaLc17/iINadOQtZp/lUryBqhDBz30wzbfX3
+	 pqUmucPR2qbYI/rr3VBu6LGy5bi2BVRu3PjGG3bDEH7+QqxyhRSwxFXZ2HK/g/fgbzQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795028340;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=z/in6Go4HJ3XPHRMCUvYGzPNDvTXNSyIYKavm5KQvOA=;
-	b=LdTsoEv05jJZpfhl3nvIjRgR24XoBI1mgV0/9gyPXmAnx5Q0hbKtm8I+2JERHqTjH6oR
-	 23/0qtBClLRzIQ1+UR5chbiV7vKoUll//64hOPrG1TMb6RStfnVys4TOroZqQYPlrYBTo
-	 WabuAHRFiK8r2/57oFBx2VVVgDisBkSizzaT1JEz1N75+XDVPf64c3iUsKaVyNm3sYliG
-	 Pk9e29hehQYARD1CrjHNDh7VQfxT1haC9svo63AWUF+jIEKK3QIWcp2yQxlG14E53+aSZ
-	 QmsQRr0oV3qu/m45tOJP+BhS6aF4ISTK66wxg7i06qWMLEHnlRmgt1QYu3U2xnK9T/w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795028646;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
+	 In-Reply-To:References:Date:Message-ID:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=jB3zNzp9bGFfrdi7e1OlyYov72F+Grzt3PWA5XTMrYY=;
+	b=5hiA5wmORtgOGXfAwdHAY2cKoDa1RvJy3ATpHJ7EJUGyy/vnPVmyRaKkNX11OrTdrRnj
+	 TuTIhc7qStlDeDouKGYNfGvEoV8HSXJmm6q9z5s1VNl1B2+8uiflNvFIHPrP5IIISVo+X
+	 dilJ5IQw2XgfIjXSn5LQ3PAe6Fw8TxE3IL4lU9O8LqPjdx7Um2zVKjgKeEYyUpu7A4kws
+	 8Eg/iVqHfCxlt2UhmKXG6HKz2ZHX/BJQW0HVpoJ3UVs2k2Mx+pAqmyhkj+D5+Auk6r+5t
+	 OdgvaknCFUwu/UEGXxu/etEl/Lh3WQIvBKdaxSBa1hdqhRhxAhO8paAbMpy68IdEh7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HS0WspjP;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=luixo.me;
+	spf=pass smtp.mailfrom=luixo.me;
+	dkim=pass header.d=luixo.me header.i=@luixo.me header.a=rsa-sha256 header.s=protonmail3 header.b=vJQcywnn;
+	arc=none smtp.remote-ip=109.224.244.108
+Received: from mail-244108.protonmail.ch (mail-244108.protonmail.ch [109.224.244.108])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3013606A32C;
-	Wed, 18 Nov 2026 18:58:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A58760A2603
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 19:04:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0A58760A2603
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=luixo.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=luixo.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HS0WspjP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B52A1F000C5;
-	Wed, 18 Nov 2026 18:58:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795028339;
-	bh=z/in6Go4HJ3XPHRMCUvYGzPNDvTXNSyIYKavm5KQvOA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HS0WspjPH1WYyeQ56SzNZK0LISwQUIcp2gHZVIWc6ofAbLaHPjAjebTzVLTjZ7w6c
-	 BB6sVDyk/uH9KDdd10veudeuPeAUstgQ3JKD3KymD0NlX3FBLVRC9yPEytrh8NW7Gj
-	 EyZedxyDJ8Zye05oa1ZP6kPBsVsioxK0edIGb2uYjhhMNBkpbxemXVu54o4jcHw3NM
-	 29t3NZ4qA1FFcNRcfkmKqwTNtUDJvZUiA+wWBNYQIgvemZ6xgwXtChiIGudoVLVy77
-	 eGsFkI2JnZy/hy0Dutlaucqu5n5rHZiBMDJRn73oSQMkqVgJZolCrbR6Bw9j9ioquF
-	 wTfhQiVGiifsw==
-Date: Wed, 18 Nov 2026 12:58:57 -0600
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Cc: Eric Dumazet <edumazet@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Andrew Davis <afd@ti.com>, "David S. Miller" <davem@davemloft.net>,
-	Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-	linux-stm32@st-md-mailman.stormreply.com,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Paolo Abeni <pabeni@redhat.com>, linux-arm-msm@vger.kernel.org,
-	Richard Cochran <richardcochran@gmail.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>, Andrew Lunn <andrew@lunn.ch>,
-	Jose Abreu <joabreu@synopsys.com>, devicetree@vger.kernel.org,
-	Conor Dooley <conor+dt@kernel.org>,
-	Russell King <linux@armlinux.org.uk>, netdev@vger.kernel.org,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>, linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	Heiner Kallweit <hkallweit1@gmail.com>
-Subject: Re: [PATCH net-next v4 01/10] dt-bindings: net: ti,dp83867: add
- supply properties
-Message-ID: <179502833706.197934.11325095223476825212.robh@kernel.org>
-References: <20261117-shikra_ethernet-v4-0-c41902e5f2fa@oss.qualcomm.com>
- <20261117-shikra_ethernet-v4-1-c41902e5f2fa@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=luixo.me header.i=@luixo.me header.a=rsa-sha256 header.s=protonmail3 header.b=vJQcywnn
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=luixo.me;
+	s=protonmail3; t=1795028642; x=1795287842;
+	bh=jB3zNzp9bGFfrdi7e1OlyYov72F+Grzt3PWA5XTMrYY=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=vJQcywnn3WPlHrpDbMIAMo3P9YDkcI3FTs9vLZq02zcQGPuqsj72cJqOpDxuoO9Fz
+	 +62w2VZeh0Mp2grCZkRDUkC6+Xs73vr86CYKHWcAmNmWsF7ihEpjJbQPPFmMI1uZO8
+	 9t0kROHiIMhLXCzvSTDp5JxqXeFASZdJn/nTQMYUwaudsCKR3RKKtFwWJPGnmsXd3k
+	 0poBxeG1b4ELrEGXQ6KgdxMwZh6oZ3fQrMTeH3R/VYBDfKB9jC/5JtpvO7ClRfkPnB
+	 weOPS24W+vsIfgPZ7EFF7KwRRNqY2hhEHxu9m1G7iD9BYKqmctaMDVNdFlcAPl/sef
+	 r9ylIEA31BJoQ==
+X-Pm-Submission-Id: 4jV9xW1Zl1z1DDLH
+From: Alexey Immoreev <luixo-public@luixo.me>
+To: exxxxkc@getgoogleoff.me, brgl@kernel.org
+Cc: andersson@kernel.org, linusw@kernel.org, linux-gpio@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject:
+ Re: [PATCH v6 4/5] pinctrl: qcom: ipq5018: allow it to be bulid on arm32
+In-Reply-To: <20241007163414.32458-5-exxxxkc@getgoogleoff.me>
+References: <20241007163414.32458-1-exxxxkc@getgoogleoff.me>
+ <20241007163414.32458-5-exxxxkc@getgoogleoff.me>
+Date: Wed, 18 Nov 2026 19:03:57 -0000
+Message-ID: <179502863770.692988.1837894979494592810@luixo.me>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,42 +67,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261117-shikra_ethernet-v4-1-c41902e5f2fa@oss.qualcomm.com>
 
+Hi Karl and Bartosz,
 
-On Tue, 17 Nov 2026 14:15:21 +0530, Mohd Ayaan Anwar wrote:
-> The DP83867 PHY has four distinct power supplies:
-> 
->   VDDA2P5 -- 2.5V analog supply
->   VDD1P0  -- 1.0V digital supply
->   VDDA1P8 -- 1.8V analog supply
->   VDDIO   -- I/O supply, which can be 3.3V or 2.5V or 1.8V
-> 
-> The DP83867E/IS/CS datasheet (section 8.3) describes two power supply
-> configurations - "two-supply" and "three-supply".
-> 
->   1. Two-Supply Configuration: VDDA2P5 and VDD1P0 connected, and the
->      VDDA1P8 pins are left unconnected.
->   2. Three-Supply Configuration: VDDA2P5, VDD1P0 and VDDA1P8 are all
->      connected.
-> 
-> VDDIO is a separate fourth supply present in both configurations. The
-> datasheet specifies that it can either be 1.8V or 2.5V or 3.3V.
-> 
-> Some embedded board design expose a GPIO-controlled regulator to control
-> any one or more of these supplies. Therefore, document all four of the
-> available supply properties.
-> 
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-> ---
-> v4: This patch was accidentally dropped in v3. It has been re-added
-> as-is from v2.
-> ---
->  Documentation/devicetree/bindings/net/ti,dp83867.yaml | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
-> 
+The Xiaomi Mesh System AX3000 (RA82) is another IPQ5018 board where
+32-bit kernel support is useful. Our working path from the vendor
+firmware enters Linux in AArch32. This is a property of the chosen
+firmware path.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+On the current Qualcomm pinctrl tree, `PINCTRL_IPQ5018` is still
+unavailable on `ARCH=arm` without `COMPILE_TEST`, even if the Qualcomm
+pinctrl core is enabled. Your v6 patch makes the existing TLMM driver
+selectable on ARM without changing its code, DT binding or ARM64
+dependency. The separate IPQ5018 GCC change already landed as
+`5d02941c8399`.
 
+With the same Kconfig change and `COMPILE_TEST` disabled, our downstream
+ARM32 OpenWrt kernel booted on the RA82 with a working serial console
+configured to use TLMM. An isolated check against the current Kconfig
+confirmed ARM32 selection without changing the tested ARM64 or
+`COMPILE_TEST` cases; we did not build or boot the current upstream
+kernel.
+
+Since v6, the driver has gained `default ARCH_QCOM`. Adding `ARM`
+alone now also defaults it on when the Qualcomm pinctrl core is built
+into a 32-bit Qualcomm config. Is that desired, or should ARM32 be
+opt-in while the existing ARM64 default is kept?
+
+Would it make sense to revisit the pinctrl change on its own? I'd be
+happy to help refresh it against the current tree.
