@@ -1,110 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795027490;
-	b=TM/026IOasS5RJk78KbIYg8n2HTS/3Wpfej8F7eUSzrW0yrocKd8WmMUM7XcP3gzAdXl
-	 SlT2R3LClQYhPJzkIlaEs+mR9pYFzrNLrceafftKdiOct2YBlUyi9SQu4doXraWHgtrRc
-	 QJ00tNm9zxup/xh4NPxzR6B56+AJBqHM8P4DgkFL1NBHLf1QdYlFge3sO/xhb/4oROzpU
-	 vT/xKeIb8wHZBrdFoVHnAbjpG5epiF9mhs+88v+CBd4RMj2AOeC5HEAGDlbV8DPQYGRHh
-	 0eoTWo4Q56Qk7Sb1kja9mbt8nSS1dw7Sgh9gk5wpffxFB1hIuPyzJ3AMFpZq+z0Zwmw==
+	t=1795027528;
+	b=h7oV0DnbKyrmy4yGjcYO7uYoNDBlmV5euuYStoAKVkdqFF/fXKff84sbhocVfhBGBH52
+	 rdnkhXRj0hlVnYc0v30aYZEfy6IbFXRigMJ3Z2C3SUN+NtI9fgH6MCd6I9hzjI8vic13H
+	 6Ixce688iCowUrizAQ6Kh92P84H5qB7B1ZBGQJKboCt7HIei9Ew6PjeL4gXhYA17olpMQ
+	 jy79JjYFJLyR8KU3K2N/FfLf4ASyF0Qduv9UmFBarG7ikhVAVPkLq1aqQxD13oxpW99Vj
+	 StaQc0eZ3xIPTJCFrkR6nqHUf6x7EcRhJ/JMbRH53SKE3P8UBWTkOxkU16qMu57f6vA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795027490;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795027528;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
 	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=a/1FJMohcTZY+9QiEVW33qHS2hIU0UKeXROf1tu+3XU=;
-	b=lAErSLUEND3iaYreZYoyXGqEJj6WHeDbuL3rajNwXWhNWeL4ANhzJzRtgjyAWkty6bh+
-	 jgv+XQI7lQp25IToDdIuUdgpWAKQUK7FgUYh47K6bbnvUrlsGtbi/9PrSARDyQUP1JFYk
-	 YP7XyNObZZ6aTHTZGFb6ypkonVk7hR87AZxzCNZmVnQm5FiBC3G5193yS6P8q9Zb/MrYX
-	 NsQhQIhQItBLgEqmEKFmNxC0b82IYq0SqrH0nK+B/AcbcTF02FgEaxF89siioPjZqZ1cf
-	 qSqxfF7Q1xF00scKvUuBt6VB+pyz6vQV2xXSbagiMGHc3Wm76dL5EEGf0fl4/EqhsRQ==
+	bh=1OzZpcUFjpmG81df7E566yXplpxzc02RjjT/i4nIPrI=;
+	b=a/x+JNtxladI16/lyD05E9xBM+fHyNVvU7ipbtekcokXY3E/3wR7ZbE3axiG6RnyCq+S
+	 zz/JBeOTBcc5MDnvH6LO8ivwmSA0TtQTy9FnSaGNNVALKwMWryrRuw4I7m0QzbAP2gnvP
+	 9J72fM4fEAyo6nxCzRTUt8/e/eTtBrcEOEsDWsilymrOeimEbwtS1w8kFyT5JNtFPhVlA
+	 8ZXVrmlgzEIs3/6Y498r0V1usWIDm7ax/Mi/lSb8/r3U/JI5oAnJ7PLy9mKUG5zB/PbwR
+	 LW/490UBNXBKHYWt8TFfuw33QPWvvz1rfPq4Q+WPF2c5CaJt3HyKvTzTyY4MBTOPxIA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N10e3bat;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IWH6qJWr;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PZYjwBB8;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="H0IHp/CN";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA52460A260C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:44:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DA52460A260C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B0F160A2610
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:45:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0B0F160A2610
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N10e3bat;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IWH6qJWr
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AIHHB534086844
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:44:44 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PZYjwBB8;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=H0IHp/CN
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AIHG2YJ3412661
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:45:21 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	a/1FJMohcTZY+9QiEVW33qHS2hIU0UKeXROf1tu+3XU=; b=N10e3batxmo44iLK
-	e0ggGLrFGUVup8oItqLUH94w7nY6RAHtXIuHt9Unc2uY6AcvHHLBiPdFxWNULtPg
-	j6Sc4+X/SyXwh7OlgxOem2VHCJRbZ6VxZy7hDxiSaMRRA4SpjTfNT/yk9hCRW5/s
-	1wKHdF3HQEdHFh2vixpA1/iCP7JOKCLnAuE1nrKpJ5XBbJpzdqDF4YExSah1eLwl
-	ke/XIvT82L7xdeTB31pxziL+/qvoAYbvilwRs9t43KVum3xyHgI6IGJXazuY24LP
-	A8vD7V0pC4GZDlTfulL91iLC38KbVNCbcLV2Odpo0M1x7s3iwO7MBDzEUdJSGfLP
-	M6HrBw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1dfcsck8-1
+	1OzZpcUFjpmG81df7E566yXplpxzc02RjjT/i4nIPrI=; b=PZYjwBB81Hid/zVF
+	k6/+pAP93fHhK+aQIKnJKf29J7JdoNn062YzdC8vc9Zb1bEqqyvWIv4OJS+19vUf
+	kxA90Xa2Kxu+qUUmG45JZcVby9g1LmyUdy1vtHGndI/RkrFOBuEevnhrfksLJtNP
+	sMXO3znsSFtYYZHzFZFvNNO3y5cJL9gGK6w/YLoB+N9/bEPtXU3cCRGrnLom3Bzk
+	rSl1HQMMQboo/cgac5Aua3XbDUBosOCQakRemjfNYA/yN8Id2TG74eHMSWZnM1wG
+	nuHAX1+/tSjS+mbyEr4RXsG3CP3cykrVxxrZVLN4Aw/4IlRZOiNEldSC8txgj0/a
+	3Xn8sw==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1etnrvcs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:44:44 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2e95f8543c9so18699035ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 10:44:44 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:45:21 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-16bc6f3fdb1so796106c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 10:45:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795027483; x=1795632283; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795027520; x=1795632320; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=a/1FJMohcTZY+9QiEVW33qHS2hIU0UKeXROf1tu+3XU=;
-        b=IWH6qJWrkwmHq2L2FKQ9cGiD33E5eF3VC6BRzsORepISu5GcHIykkXDwdfRA/wMWCP
-         Yj2tiE16mpC4d7bH2bTWHmtafnH2ggmPXx+nxZRUSNTU42MPqs4UZVtLV3SVTHvb5RWm
-         /OPS7Qf6RaW6zp5lwE14HoQ6nS7651X3BWmhqTMX8XyETYkKiRpSKYbOBt45T/9AW1O8
-         SIzbK46kV9eX3KVc+UdG8MTBE5xZjpTJwNEOoEYjguJV7fxzLNRC9nooS/WrP1HAJ+2g
-         9aoWoDBorenuTHe4xERZJu3yqPY428Z/1F1CDq/ZSuICGOupTVhnaTxzi78EP3XSHoTV
-         DGuQ==
+        bh=1OzZpcUFjpmG81df7E566yXplpxzc02RjjT/i4nIPrI=;
+        b=H0IHp/CNJNuZlxpsyggXt/uDAa7H0Ax+IIlX2v8JxXQtmJ712p0V6cvUIqvKtL/z8l
+         KlSOSr7mjpnaMERa9J/N/mDNrevHGzxH9d24cwQonDF6el9wbAyObxDiypJGRFPyykqq
+         SFr9wTUvxBbs4nX+3dLL8hGSVGvimRzfQ0gZjuzEculQ/QVSi5ncDu5+PV1MtrvNZCLU
+         S+ltBP2b/dgOa6qz3rS8mhf/WNKse6TUu3e/cNyyInNGU0ok2HiooNE8CoIHuR0fzh1L
+         7YEc2JOBkw/En6ZzVs+85ebeaw42+yyRN6PLR8+UonC4eNU2e1epRObE1TgcmbzfrK4m
+         nV2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795027483; x=1795632283;
+        d=1e100.net; s=20260707; t=1795027520; x=1795632320;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=a/1FJMohcTZY+9QiEVW33qHS2hIU0UKeXROf1tu+3XU=;
-        b=XPCjS6KFehz0hbIHi3tSIn89lXEaT4v7p2ax1hNtZT6mD5zDVHjyBhFDLlvMgf4bK2
-         CDhK97imzC+ClKdLX1x1hfKu4467wIp5rb7sqApW1jR8d29Lktd4afwjOFHMfxvfVtVt
-         Gb5zFewnBnTrM5TqRlfPkS3xQpu0rDOqytFybSz4Yk88g048x8yFY/Ddzh2Cp33Jc9gJ
-         68RIpn49Nj4g04XTqn8CBafYOwUm0oLgTqCYeOpjQhUf82Er2OQEirzk5FD4XbwDYlOT
-         jzuf4Oj0B0o28MIHkWaDNUEHhww3vIVSIBfEpZr+FkSrSVVlVILPV0iyjw1pCZHRxhLy
-         7mug==
-X-Gm-Message-State: APuU4Z/f8MQ0rKebmYpq3UPdsdD9naKaM2dvaBX+wZHcEagMRJ2n4ih/
-	IIRmnHyXVN9QzU5GQcRMpMmb1GZXT0lIhS+dP0aO54H0RES5pxZi47lzlqjnj5/i+3VLtsksBG2
-	tbD3gX/LdtPWaj7Ir/OUelmZnKP7tMRJgRuWhszVfqRduCnvPzG1AkHBP2wROkkkbc+W7
-X-Gm-Gg: AZFdTZcAc0ehE3f6Q6QdTcb0TN2FCKn1Vh97haRKI+0Ym2ILhOsViX+RYWDj+Z+c7Aj
-	lRYjskQhvzzq3f6rlCtLHFdcFE2wq0gNcuOVJJqmADjFO7Hx7TOQaOpPRb5JSxxtVLCoHhR+YSy
-	O4zwPqr7KgshfmcGHi1m4ARLpbLCsC4QMS+gU74CQ51Yx2+VqK3c076UFusRXaejVRhG/OWdimd
-	mRK8R3OdtscDJ+WGIi9Fr2DnvkF7vDztu0kuNy1rk6cM0aogxFINxW+BNAvl4L49d1QSFOFrxBq
-	R8UEJ6LHA8zbe2veUR5nDTI4qvm2pysT1vTFwjDdRL85X+iIVpsyQOhSUjWVkLO+4zu2l7hy1ee
-	/5yvTrAGP2BX6ekRpIokH5ZcPro5hGPEv4Qk14FPxTxiRuS2ZWoMoLMqBoVqktyg8OuxQwZC4MA
+        bh=1OzZpcUFjpmG81df7E566yXplpxzc02RjjT/i4nIPrI=;
+        b=fV4FTFBWhRAUVb461jUz5eCN+YmTghrluhHTGsuDSnibHf8V/HuKWBOyJloOldAT1J
+         lE+Nea8Hmb7XXHx+ZVIVR2CbOrf7VeOxs4OV1cqaJiWQeVtQ1nsrX6kEvNyYAhMqjLwC
+         FqyicMf9X2HPPBPEOyY6maGnz0/27MLNPIyApzkQ0+/rEnQViM97GpXlSDHXqyjkZIpm
+         33J+naLnJ586jmMQDPwgqU91QVhNwCpPjWYtEqTwrCqoZHQ6ToSXIlu+N2Zn7iiDG5MK
+         QI5hX32gDdfeGOx81cnQBuGYDyeYu3heKlJc6Bff6FVwvnUPXQqIdT7HUbqhyCy8MAG4
+         Ljng==
+X-Gm-Message-State: APuU4Z/8gCqzaIJB6wrnCsBohzIXkWx+czydtVWoK1XB1FAhFbi56Kc0
+	V6KKPE0nRsBiJiQ23xjusM6eRJO/wUv8ghVWarGVXq1SIqEizdUlrtmkPjC6K/XAnLV/Y5sY+6O
+	KilhkBdSlNLwJfAFjQkiPpcyKFcj3HmWTHc2BCf5t8lKh1lbKG8yACRINsZAstOHfbeUg
+X-Gm-Gg: AYBFou2+bTe/r44pVEGNBA5kEwF3Bw1lEcnuWCVWzo/nWrpjmr8UNC9fKtiaTiPbXID
+	r+19VuOgTxVpD4F1Hb0/Nnh6JNU15uavZXQoc6osrWNmt9g+aCJUr7nHDnA1+mTteghGWmBjVpo
+	UhjGFful9Ova/LNj9NJc56fMhsJHOlq7TipxZCPB3Jaw6XunVZoNJmUsF5C+6Tdct0587k8jZwY
+	2H82MxfotqHtkLT8v8i12+7giEo9/NhHWR7IUPB0Gge1aj4hiYrtlsXbJMDU1QkWS7gqfgqF3Iw
+	Rm5a4L++Kw1ce7LtXCqblMVZ6NP07ATrM9vkzVHw4Bt5Sa7PLLQaskO9YqBDBxDFn3bcmzV7A1y
+	5L7qFBuxdCCaah2wMbaULJaE8WDivE1ihmqQvP0SvveEo1zzXiZWT7eszAcUcPUpVbK00dww7ag
 	==
-X-Received: by 2002:a17:903:32c1:b0:2ed:1b26:2bf2 with SMTP id d9443c01a7336-2eff7100c7bmr32660365ad.3.1795027483397;
-        Wed, 18 Nov 2026 10:44:43 -0800 (PST)
-X-Received: by 2002:a17:903:32c1:b0:2ed:1b26:2bf2 with SMTP id d9443c01a7336-2eff7100c7bmr32660205ad.3.1795027482912;
-        Wed, 18 Nov 2026 10:44:42 -0800 (PST)
+X-Received: by 2002:a05:701b:424c:10b0:1b2:6eef:3f32 with SMTP id a92af1059eb24-1b543d0c613mr3282690c88.37.1795027520268;
+        Wed, 18 Nov 2026 10:45:20 -0800 (PST)
+X-Received: by 2002:a05:701b:424c:10b0:1b2:6eef:3f32 with SMTP id a92af1059eb24-1b543d0c613mr3282649c88.37.1795027519445;
+        Wed, 18 Nov 2026 10:45:19 -0800 (PST)
 Received: from [10.204.104.211] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2eff6115f28sm18076975ad.19.2026.11.18.10.44.36
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5447da7e0sm12271571c88.9.2026.11.18.10.45.12
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 18 Nov 2026 10:44:42 -0800 (PST)
-Message-ID: <069c590a-7b30-4985-ab83-56150efc8009@oss.qualcomm.com>
-Date: Thu, 19 Nov 2026 00:14:34 +0530
+        Wed, 18 Nov 2026 10:45:19 -0800 (PST)
+Message-ID: <c495dc29-5af7-4abd-9608-43b0236c15fc@oss.qualcomm.com>
+Date: Thu, 19 Nov 2026 00:15:10 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,8 +115,8 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] drm/msm/a6xx: Don't fail GMU resume if the GPU init
- regs SCM call is absent
+Subject: Re: [PATCH 3/6] dt-bindings: display/msm: gpu: Document the CX SMMU
+ aperture region
 To: Puranam V G Tejaswi <puranam.tejaswi@oss.qualcomm.com>,
         Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
@@ -137,116 +137,81 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org
 References: <20261118-adreno-scm-fallback-v1-0-e99cdbf3121d@oss.qualcomm.com>
- <20261118-adreno-scm-fallback-v1-2-e99cdbf3121d@oss.qualcomm.com>
+ <20261118-adreno-scm-fallback-v1-3-e99cdbf3121d@oss.qualcomm.com>
 Content-Language: en-US
 From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-In-Reply-To: <20261118-adreno-scm-fallback-v1-2-e99cdbf3121d@oss.qualcomm.com>
+In-Reply-To: <20261118-adreno-scm-fallback-v1-3-e99cdbf3121d@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: Cg6GQ6ZzGJpET6W4XEkPonNtl9OVIRW9
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE4MDA3NCBTYWx0ZWRfX3oWnAgHRQuej
- 89zvJbFgAW0pXwqCmWsyWspQCOmwqoTsl0IJwrI5y+Z+pGSZXie8AWIqyy3Db6DjiHf+f+oy9SP
- PfqTgjwFOLaDYzNYc0GvZiQR5Q9V+Tg=
-X-Authority-Analysis: v=2.4 cv=CdSdd7rl c=1 sm=1 tr=0 ts=6afdf21c cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Authority-Analysis: v=2.4 cv=b8UncdGx c=1 sm=1 tr=0 ts=6afdf241 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=xDuVsFAvjFWeh2iC3aIA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-ORIG-GUID: Cg6GQ6ZzGJpET6W4XEkPonNtl9OVIRW9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE4MDA3NCBTYWx0ZWRfX5DuzDDmoo/8b
- aBfrovALSATm2pkKt43N+it64XhR9mot2n6JvJ95XHfybGGjHQ1jvR0wduQuhmYgs8TMKSIz8WV
- 72Ix4xTNKQJ8CshGkO5gbuHnrn5y2ZkdhZc538JeC8z5Ysq4vc3HDoqbkYBINC4BP/t9vTmBfmN
- IXL1uPwKOwKqdoH3tu7k8tGazu8Guo6fo2l601UKtANyfMT0Xqya6mmqjO4+Fk67LRd4zsEZRxe
- 4M34J3nk8cfWxa2MekJCziVjk6L/9A/Q55OTXu8FIZFnZwVQLMAXeekAPVDIRvg2eAn5YsCn0Af
- P5J7M0I5pQEd+VeYNi9HZBx+j2n//mENXFmNFjM862TTIgQoKOZLbGsUWGDwY0DONQweH3N0STE
- MO6y0XejKLo3H6OY3A8BhVPYqAll2H7odMt/Ev4Ele1eAJ44mtEldwIHVOFlKxpDMzoDs0Ee3Iq
- hRLoAtmihLIkxEcMNnQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=Rpd184sqDP2D46n30CoA:9 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-GUID: jMLUu_dkua8hA3fHaGFPkcZnMcPwGcu7
+X-Proofpoint-ORIG-GUID: jMLUu_dkua8hA3fHaGFPkcZnMcPwGcu7
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE4MDA3NCBTYWx0ZWRfX8sXbT3LGjyyA
+ u2nYCcVdGlbjn0EtKWaZ8iNX+xBtqzBTpFE2jYvYaGDv7JBwYAY7t/IQVlwgmXrHS4gJzdZCT9M
+ iJPfnx1XDCMm8f5kWNjt8qliI45Fwog=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE4MDA3NCBTYWx0ZWRfX+tT4AQwr0V6F
+ JIijDz34U6CtmJeTRZ2IUZcvyaUwi2Z7yQhC4SKhvmfAQDAgR/d65jQGdldn/2I7a+cXm+Owx1u
+ WzrkOMLJu85Zd8b11QqKTuPM0ekYIImvI41QeIOYSrusWCmv4ZnlBhBh8zePw/6Eni3fPqxFsAx
+ f7JFlOUijFKtADHmSNP6685Cv896NGdY9JbsFbAaX4DOc+2hiJhFEKpV/1eTPConDhbbZDAsAjd
+ CjQP5gofXLWs2dzLvadeEZ/54QrVBr1kv85FIGvEgZSsoIp1fzDGUVkpRwtQsNlx5pCkXd8X5T/
+ 805zYlA+uz5Xni4ZB3/xqgGS5WlGETa7lfpV+Aic7qq0B27RZVq5F+hmmnLbBkWahVvZPvlSnGn
+ UP/Jguw0GeisQN3wn2yjSbdMwVwa8sJTICdZmBbGazvX6VcK+MZ4Sj+h4tMckvDN7m3T/sw5Hrz
+ hqVQgyKjFOiaHmWSpJA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-18_05,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 adultscore=0 clxscore=1015
- lowpriorityscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611180074
+ impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0 spamscore=0
+ clxscore=1015 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611180074
 
 
 
 On 11/18/2026 6:38 PM, Puranam V G Tejaswi wrote:
-> On A750, A753 and A8xx, a6xx_gmu_secure_init() asks the secure world to
-> program CX_MISC_SW_FUSE_VALUE through qcom_scm_gpu_init_regs(), and
-> aborts the GMU resume if that call fails.
+> The CX SMMU aperture is a register block in the GPU. It holds the
+> location of the GPU SMMU context banks that the CP uses for pagetable
+> switching.
 > 
-> Some platforms have a secure world that does not implement this call.
-> The call fails every time and the GPU never powers up. The fuse
-> register is still protected from the kernel, so the driver cannot
-> program it directly either.
-> 
-> If the secure world does not support the call, skip it, but still read
-> the fuse register back. An earlier boot stage may have programmed it,
-> and the features it enables, such as raytracing, are then reported
-> correctly. If nothing programmed it, they stay disabled. Log once when
-> the call is skipped.
+> On some GPUs the block lies outside the existing GPU register regions.
+> Add it as an optional aperture region, so the driver can program it on
+> platforms where the secure world does not.
 > 
 > Signed-off-by: Puranam V G Tejaswi <puranam.tejaswi@oss.qualcomm.com>
 
-Maybe shorten the subject a bit. Say "Make gpu reg init SCM call optional".
+Acked-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
 
-Either way:
+-Akhil
 
-Reviewed-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-
--Akhil.
 > ---
->  drivers/gpu/drm/msm/adreno/a6xx_gmu.c | 27 ++++++++++++++++++---------
->  1 file changed, 18 insertions(+), 9 deletions(-)
+>  Documentation/devicetree/bindings/display/msm/gpu.yaml | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> index 0fa2d2091f3e..95636dabee38 100644
-> --- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> +++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-> @@ -1249,22 +1249,31 @@ static int a6xx_gmu_secure_init(struct a6xx_gpu *a6xx_gpu)
->  			goto done;
->  		}
+> diff --git a/Documentation/devicetree/bindings/display/msm/gpu.yaml b/Documentation/devicetree/bindings/display/msm/gpu.yaml
+> index 3c90a09febe7..5e4f3149839e 100644
+> --- a/Documentation/devicetree/bindings/display/msm/gpu.yaml
+> +++ b/Documentation/devicetree/bindings/display/msm/gpu.yaml
+> @@ -54,7 +54,7 @@ properties:
 >  
-> -		u32 gpu_req = QCOM_SCM_GPU_ALWAYS_EN_REQ | QCOM_SCM_GPU_TSENSE_EN_REQ;
-> +		/*
-> +		 * Some secure world implementations do not provide this call.
-> +		 * Skip it then. An earlier boot stage may still have
-> +		 * programmed the fuse register, so read it back either way.
-> +		 */
-> +		if (qcom_scm_gpu_init_regs_is_available()) {
-> +			u32 gpu_req = QCOM_SCM_GPU_ALWAYS_EN_REQ |
-> +				      QCOM_SCM_GPU_TSENSE_EN_REQ;
+>    reg:
+>      minItems: 1
+> -    maxItems: 3
+> +    maxItems: 4
 >  
-> -		if (adreno_gpu->info->a6xx->clx_tbl)
-> -			gpu_req |= QCOM_SCM_GPU_CLX_EN_REQ;
-> +			if (adreno_gpu->info->a6xx->clx_tbl)
-> +				gpu_req |= QCOM_SCM_GPU_CLX_EN_REQ;
+>    reg-names:
+>      minItems: 1
+> @@ -62,6 +62,7 @@ properties:
+>        - const: kgsl_3d0_reg_memory
+>        - const: cx_mem
+>        - const: cx_dbgc
+> +      - const: aperture
 >  
-> -		ret = qcom_scm_gpu_init_regs(gpu_req);
-> -		if (ret) {
-> -			dev_warn_once(gpu->dev->dev,
-> -				"SCM call failed\n");
-> -			return ret;
-> +			ret = qcom_scm_gpu_init_regs(gpu_req);
-> +			if (ret) {
-> +				dev_warn_once(gpu->dev->dev, "SCM call failed\n");
-> +				return ret;
-> +			}
-> +		} else {
-> +			dev_info_once(gpu->dev->dev, "GPU init regs SCM call not available, skipping\n");
->  		}
->  
->  		/*
->  		 * On A7XX_GEN3 and newer, raytracing may be disabled by the
->  		 * firmware, find out whether that's the case. The scm call
-> -		 * above sets the fuse register.
-> +		 * above, or an earlier boot stage, sets the fuse register.
->  		 */
->  		fuse_val = a6xx_cx_misc_read(a6xx_gpu,
->  					 REG_A7XX_CX_MISC_SW_FUSE_VALUE);
+>    interrupts:
+>      maxItems: 1
 > 
 
