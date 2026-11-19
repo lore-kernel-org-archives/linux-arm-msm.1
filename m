@@ -1,98 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.3
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795055368;
-	b=BY0uRu3Z8p8mrrN6fJXVHGr6o5qbXr9Sovdq3X19dkexhUEXuAFuZaTfBlZxssN0yKmq
-	 oYZ8SKVL5xB029NmNVWK9QULFWuzJ6vw4+lBF2THaiFNRJK9Rcv3l1hGmK0mU0NG+Z8z6
-	 KUNl2mVywDGl5gMu4oqqB0TnZFnkr47LGgu6nHGNkAIcalvUDBmjIGKJNnZqJLh13H6hl
-	 ftL+Grg4eEOPVle45PCbx9WJfWXRSBb6sQDlUSOb/kOuBtgp4lB3VsEXyFFD04bpuBgH/
-	 9jBtoseU8agW7P3HJvlmB1KbwopN67u+JHNJ0st8roz2qh9YBFtjy8CbP/QqrvovJCg==
+	t=1795060098;
+	b=iLUa1kt6Jze//W+xmUdi3ur+FYTG1ir7XOvekfCZiO4ZuzRnbCv5+Wmiy1bU6MgTcp53
+	 VKMMKB/6Di8EqTKIQ/XAaMVFQMGfCFp/jN1N5ksur/oHb2UXqnOmDCXvB6n5EOP3aXIwX
+	 ci5tb0oKMUWqtG0B/nIQ2EENZOFQGtuZ5zHuXN7S5hoVNOMnzbC6ZVLTsz5nrfRtVa5yZ
+	 Re/dvECKbsfVnOMhAuqxaFMXDMDZbTFSrAO45Hhhk8N7F6vmbfn93wtlIBkEwI3r0gWOA
+	 6lNPCaPnTwetJoFPsfO3h5MCwR7AuaGaDNgKFZPY33DpHMxunkMI4JWw4sD4uIY+0VQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795055368;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=C3K0E2vNrzLhMfNcPaWTZ4EGNNKVe3QGEsiFAnE9hUA=;
-	b=kCwMkP4jC1dyjriaTS7nDbksht9n1aPGLYZ1fcKZi2Zdw1rtWoYUQbhI2167hRdzMcOV
-	 iIrju/mhlQt4gFzekycLkh9fC3flVVQ78kBO0j57zwDPDHNtZYzJRoPV+LJUOyfI3P4pp
-	 NfNOS1xM276CTUh86PV5H9Wfi2A1/8IUUsh1K9ykRdZrOvuQCYNjkCSwRKhHbTjXLm4by
-	 +kp2CzwPIfhdbOb4PfnDKBdUjX11IBNmL6q3lYBCu+H7OZWZiSsBAtjtKWHtSryO7221G
-	 /nSAyKEvf+Ov/NBLp96hZkQAlR81DYC5ZVnlT34NPDYaDC64JKJ1SKzSpx/hB7ymapA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795060098;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
+	bh=vwTZeo7iBYBs+QejrwiRws0+OdtO38BbVpGXCkhgvvE=;
+	b=dWhmpy9YpLX+TxUKZuSLPXesuSdJhKZulRUCkNc9d91aiTVA6xAAknOq53AKIU0mBb62
+	 OIWcLS8/MtZHZcdJRD3nnyFTSFR+FvUWLWfvQIWkngHyX9zTAx2RIUuA4ydlt27c2bupE
+	 0saOCHp+mvNb2Ttb2PF8LXVYAve/zG4O2Mj7u5jqkU4veoflU44Urs2Cuv6I05AdXIajq
+	 RvM/lANjEd/BO/JhGy9S/qss41d52gQuMShnFlYk+WJ7Nbj58cRmS9QxD88i64egpw4kf
+	 30mmPXiJ63WkIqh9RQNnFsy+UYv3fq6FGYjjBkvB4zpGCKpwyH7JBbIZ8leWmNXqF3g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hfkO1mZZ;
-	arc=none smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=MwMsvsOq;
+	arc=none smtp.remote-ip=220.197.31.3
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 378DD606A32C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 02:29:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 378DD606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3F61606A32A;
+	Thu, 19 Nov 2026 03:48:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F3F61606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hfkO1mZZ
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-380b40319bdso2588417eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 18 Nov 2026 18:29:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795055366; x=1795660166; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=C3K0E2vNrzLhMfNcPaWTZ4EGNNKVe3QGEsiFAnE9hUA=;
-        b=hfkO1mZZ/vfSVEhMG8cg64y1lwb1AfkeHi11N20zxxDaPgnVnAFBH+n1Zsrt5HGnH5
-         uYqCZ3hYtJITao6yK5H3aekaW1/42+V+jW+j6tXzKLWNFCKe6CVvEDgAy6yWH8BjFM4D
-         BrYruSStdYXcpkFi+0Pr8Q76rmMGEv/8d75NiBbr6pL1rsJWdbYZJWqoNCe2/MHqt0xQ
-         0MTAv0/9uY46bLu8qB4qLmwE0F92BhnhgkCYtXxXN4Db/rf9Ob0oGV5r/qqW0qOYCphC
-         mOt8P3zA4lYfGO5hsFMumh7fsKBMcFn2eoLPawnH9XbBysyTI6wvLtAmnuKRVuNx3zvQ
-         WBuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795055366; x=1795660166;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=C3K0E2vNrzLhMfNcPaWTZ4EGNNKVe3QGEsiFAnE9hUA=;
-        b=JB1iwz771xRm8GMUaDcnRaNLu45Xfk2F0smTMccgfLe9fP9vDHZKqUzG1FjAhSE+Tk
-         kRsz4PWfWOpufjUzHHZV7qxxlbucsr9BiyJM7CAiTrqrK+Idr4O8RKKCi5xYZGGp1c6a
-         zp1cbPnOdWvWsSfn+w6rbkLuMqA2zpD5EOpakUOEEG+bi9MWS2UvU9FmAt8tgd6n1Rve
-         2Vu08NAupYKzB7NUX77i/Z4keczZNjUvWmDLCg3lug0zuZTBhPGeK3kUjeViWGp7v57f
-         UmcE2ucS0AR4qHsTWT8M0dBXs9X9o8Hru1KUPGzkQ2iQSoCkTGyrrzPot7GbFPv+xXuD
-         CbYw==
-X-Forwarded-Encrypted: i=1; AL+hErHPspTCjNmP+Iog4VyuAO6YehZKb2kYsEiinjTVoWiZEd1QxYkg4QWS/YPTHX5WfbiN+z+H4HIQqeG6KID2@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Hf0qFLzjAfzOpV0IlwS/BlpYhiNI0tYWEVup6xxnl+iFj6a0g
-	sGP86x85nVtHLlLQrFGCaXJVt2n4tCsYg5faIAl/bK6PHvFxYXMlpmi0
-X-Gm-Gg: AZFdTZcuJh4op0FaBQEUE8wOqMoxDbzNcKzL5XyDR8+rnXLMMcVjK3x3BaZCc1M7u5T
-	dl+ePdQuR6wcUvZeq0GC0dJwq8MLU/qPU6LbkXDLV2UznzaKhIu863Vr1DjEPua4vxJBUIe8qA7
-	s5yFjEG8xLtbhwLfrGALIimqBIsbNkUEPVoE0XhnXJiOuV9+ACS2kRmtqMBJh+kmfVJ+9an0rBt
-	xgIsh4lLQ27wd37djhhvjjPtAtmBKSmEIt1dwVflfI7CRu0nS6enG6axUEhgVINtMNZeEng59Hq
-	8ijcmrls3gi2JTbFF8PMdGMNWThzm+wsbt+vP8Cb03KLnuh/myVppkC9nl0cwnugzWtRlOsusuR
-	wn+ImMelVoQbcQZhzLPlr79dGiLTZpgFY8pdQxnOfkod2i+dZ9jDrLsXyB+qFHenmyoIe724mKn
-	7GdRdXzQIDSSXmSuh6dMjm134ydloDgQeTejWH/u6mQrsERxs0qWeXjqmfOwVRgewPRC4EWza9b
-	YGNLc0IZC0qdYj1u8xCY+6n5iQKRENt3q27qxlfiAGyMr0WQyRceixcrLT4NrKOxdlyXw8gpTDM
-	UdpzXVuZWfNO360myVu8D7P0+m4oxpR2Ratu6p4cAItxYQaWr/CPGq0BGHzOd2PIIHWGtWpyTz7
-	SnZ3ILyR2nOBvHw5IQ3eG6c+/yAEX4nNJy+wPj5JP
-X-Received: by 2002:a05:7301:fd84:b0:384:7a8f:3bc1 with SMTP id 5a478bee46e88-3847a8f4f1cmr130310eec.17.1795055365946;
-        Wed, 18 Nov 2026 18:29:25 -0800 (PST)
-Received: from lwq-System-Product-Name.. ([2602:feda:30:cafe:ec49:38a8:0:f6])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a79c96b2sm13193964eec.24.2026.11.18.18.29.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2026 18:29:25 -0800 (PST)
-From: Yaohan Li <shunsheng1218@gmail.com>
-To: jeff.hugo@oss.qualcomm.com,
-	ogabbay@kernel.org
-Cc: carl.vanderlip@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=MwMsvsOq
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=vw
+	TZeo7iBYBs+QejrwiRws0+OdtO38BbVpGXCkhgvvE=; b=MwMsvsOqUuoy5QcTAd
+	hL/GhAeJkifpYQORLcUmSxG7p0L5oTbDPuxoStAMxEp7Q+2cCRGgKcn+PxgfCOHP
+	8UOT5d/yg6a29XsinV50psgNX7v7F/+g5lefja8gkj5KehBsSJxgmTEReHVBpu3Y
+	tS9G3du98N2GduVAxLKt5sBBM=
+Received: from localhost.localdomain (unknown [])
+	by gzsmtp4 (Coremail) with SMTP id PygvCgA3En9Icf5qbvhPGw--.13124S2;
+	Thu, 19 Nov 2026 11:47:22 +0800 (CST)
+From: Haoxiang Li <haoxiang_li2024@163.com>
+To: robin.clark@oss.qualcomm.com,
+	sean@poorly.run,
+	konradybcio@kernel.org,
+	akhilpo@oss.qualcomm.com,
+	lumag@kernel.org,
+	abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch
+Cc: linux-arm-msm@vger.kernel.org,
 	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	jacek.lawrynowicz@linux.intel.com
-Subject: [PATCH v2] accel/qaic: drain the control workqueue before the device is freed
-Date: Thu, 19 Nov 2026 10:29:19 +0800
-Message-Id: <20261119022919.1493567-1-shunsheng1218@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261118072448.1259909-1-shunsheng1218@gmail.com>
-References: <20261118072448.1259909-1-shunsheng1218@gmail.com>
+	Haoxiang Li <haoxiang_li2024@163.com>
+Subject: [PATCH] drm/msm/gpu: Unwind power and clocks on resume failure
+Date: Thu, 19 Nov 2026 11:47:18 +0800
+Message-Id: <20261119034718.2818183-1-haoxiang_li2024@163.com>
+X-Mailer: git-send-email 2.25.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,64 +72,67 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PygvCgA3En9Icf5qbvhPGw--.13124S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KF1kWw43XrWDAr4ktrykuFg_yoW8Xw1fpw
+	srJasYkry8Z34Ig3y7AF4Du3W3Aw48AayxGwnF93yfAw1Yyrykt3W0yayFqFn5AFZ7Gw4a
+	qFs7JF17uF1YvwUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0piGjg7UUUUU=
+X-CM-SenderInfo: xkdr5xpdqjszblsqjki6rwjhhfrp/xtbC7QrIN2r+cUrK8QAA3M
 
-qaic_pci_remove() tears the MHI controller down and destroys the DRM
-device, but nothing drains qdev->cntl_wq.  qdev itself is allocated with
-devm_kzalloc_flex() and is freed as soon as the PCI device is unbound,
-while cntl_wq is a DRM-managed resource that survives until the last
-open file drops its reference to the DRM device.
+msm_gpu_pm_resume() returns without disabling the power rails when
+enabling the GPU clocks fails. If enabling the AXI clock fails, both
+the GPU clocks and power rails remain enabled. In addition,
+enable_pwrrail() leaves gpu_reg enabled if enabling gpu_cx fails.
 
-resp_work is queued from qaic_mhi_dl_xfer_cb() and resp_worker()
-dereferences qdev, so a work item that is still queued, or still
-running, when the driver instance goes away touches freed memory.
+Disable gpu_reg when enabling gpu_cx fails, and unwind the completed
+power and clock stages in reverse order when resume fails.
 
-mhi_power_down() moves the controller to the shutdown state, disables
-the interrupt and flushes the state worker that destroys the channel
-devices, and mhi_unregister_controller() removes the controller, so no
-data event can reach qaic_mhi_dl_xfer_cb() once
-qaic_mhi_free_controller() has returned.  Flushing the workqueue after
-it therefore covers every work item that can still be queued.
-
-Fixes: 22ec9a3b73dd ("accel/qaic: Leverage DRM managed APIs to release resources")
-Signed-off-by: Yaohan Li <shunsheng1218@gmail.com>
-
+Fixes: 7198e6b03155 ("drm/msm: add a3xx gpu support")
+Signed-off-by: Haoxiang Li <haoxiang_li2024@163.com>
 ---
-Prepared against v7.4-rc1-1969-g666539eecdf4.
+ drivers/gpu/drm/msm/msm_gpu.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-Compile tested only: arm64, aarch64-linux-gnu-gcc 11.4, CONFIG_DRM_ACCEL=y and
-CONFIG_DRM_ACCEL_QAIC=m.  No hardware was available, so the removal path was
-not exercised and no race injection was run.
-
-AI assistance: prepared with Claude (Anthropic) as a coding assistant; the
-author reviewed the reasoning and takes responsibility for the content.
-
-Changes in v2:
- - Correct Fixes: to 22ec9a3b73dd, the commit that moved the device release
-   to DRM managed resources.  No code change.
----
- drivers/accel/qaic/qaic_drv.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/drivers/accel/qaic/qaic_drv.c b/drivers/accel/qaic/qaic_drv.c
-index 90c0d31e414a..c4c3f450e67b 100644
---- a/drivers/accel/qaic/qaic_drv.c
-+++ b/drivers/accel/qaic/qaic_drv.c
-@@ -625,6 +625,15 @@ static void qaic_pci_remove(struct pci_dev *pdev)
+diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
+index 8319119041eb..5480abe1aba2 100644
+--- a/drivers/gpu/drm/msm/msm_gpu.c
++++ b/drivers/gpu/drm/msm/msm_gpu.c
+@@ -40,6 +40,8 @@ static int enable_pwrrail(struct msm_gpu *gpu)
+ 		ret = regulator_enable(gpu->gpu_cx);
+ 		if (ret) {
+ 			DRM_DEV_ERROR(dev->dev, "failed to enable 'gpu_cx': %d\n", ret);
++			if (gpu->gpu_reg)
++				regulator_disable(gpu->gpu_reg);
+ 			return ret;
+ 		}
+ 	}
+@@ -110,17 +112,24 @@ int msm_gpu_pm_resume(struct msm_gpu *gpu)
  
- 	qaic_dev_reset_clean_local_state(qdev);
- 	qaic_mhi_free_controller(qdev->mhi_cntrl, link_up);
+ 	ret = enable_clk(gpu);
+ 	if (ret)
+-		return ret;
++		goto err_disable_pwrrail;
+ 
+ 	ret = enable_axi(gpu);
+ 	if (ret)
+-		return ret;
++		goto err_disable_clk;
+ 
+ 	msm_devfreq_resume(gpu);
+ 
+ 	gpu->needs_hw_init = true;
+ 
+ 	return 0;
 +
-+	/*
-+	 * The control channel is gone, so nothing can queue resp_work any
-+	 * more.  Drain it before qdev is freed: the workqueue belongs to the
-+	 * DRM device and may outlive this driver instance, and resp_worker()
-+	 * dereferences qdev.
-+	 */
-+	flush_workqueue(qdev->cntl_wq);
++err_disable_clk:
++	disable_clk(gpu);
 +
- 	qaic_destroy_drm_device(qdev, QAIC_NO_PARTITION);
++err_disable_pwrrail:
++	disable_pwrrail(gpu);
++	return ret;
  }
  
+ int msm_gpu_pm_suspend(struct msm_gpu *gpu)
 -- 
-2.34.1
+2.25.1
 
