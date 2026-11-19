@@ -1,59 +1,68 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795126020;
-	b=XexqW6He+N8sIGEJRZKfXhwET1oxo8Eh2k3DCIi7b+dbaKADpsJ3ZPPpfLHfDacmFGKn
-	 vwFtrAfCtjqvApG8+OOnzOwk67GFz2mzVD3YQV5H4Ev6g+DsL4SSNyybZ/aCJpQWPopfy
-	 QsJHH8wjuv4miMEUUTms+rvIwUCU4GfvxqTxiSB8lxtgl5Y6asaOA3ztBHz2uF4Vn/LXN
-	 9Sl/hoLY+k5GPf1p5MfBQRhcBVXyw1kkfVfz1XolQrAwEZoiWpXrIcR+f5tFJCzZq2Fyl
-	 kNrXu5BWALdyEQS7O0/ztjyoDEEDTbCSEc3fFBuTm+UsIdWaJ7tmGphea8X8DX179XQ==
+	t=1795126413;
+	b=USxy4rfA3a4Q7BzZ5uxHX7OuoEtvzhpJsIOgFDRuVLSWXT0goC4t4rfbiub+0lzyQ91p
+	 3gd7afJW3d1W/A1L0CcqOX9lROnPFleunKsQrAJEyKYcroPQsYAnBT0I5ooT2mE085we2
+	 fwFX0Sbn3813PhxM5SuR99gPjqi2bz//HPWieaH5MLE7a/hzD7IxQ3cyU5BSwmkR4GwYc
+	 Gd8QhU/bSxNs2WfmanDehjuIV4Gp5mhn9Yssga5JlDmn4QV64i95dHZVYdK8QE5Hmayk7
+	 6JJpqwnSnXFxMAkL19Q+EyLMIrG74h9jntd1+pl7v/cICTBJKVk59+ty+qnyhpbky0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795126020;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795126413;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=ETZ7xeXM/79uniKVVrwhkskKouFWSJb1lviMqROj1wc=;
-	b=YbopHXfzzxiU+fHxc/kUHPR0d2oBduogxvaBZjL2TvGpSh1xTRhK2FLeNJ3Pioi20vJR
-	 XIO6Z4z2FE185UgymSOpBEc2h5IzKuiWmgdoF5ljoBVgf/az0619LyYUNGgR4bkedBw6S
-	 Wgbx5PycpOp9bF0I1lzQym9kXZaXHWLY1q9w0mJwJagAVGS1On3w+gnN6TNSRrAsawr33
-	 +QU25Rr6yIcFj5ngJv8h2k+88TwiypSFMcSv/O3VWy16H9UM8qM1pW5+SyoSnnnhByV84
-	 drfiOGfAPTafjzV4j4DiKsep/aTl0SZo2D7UI2RrBcLmyCe43HRlAaSsWuptyAmPoKg==
+	bh=lOSd5J4FCYgX98Se5iiOkvY37YVWiB+QhTNatsC3gsU=;
+	b=WfClrQRIkX47ywubC6vLRkd8vzHFyI8WInQotXkal2cTA89L2xp+GPUfhwuc3bcrMbhh
+	 QMQZbRmbzS1+DIJ/ND3a3yr1SfRLGPnu5ZHFKdWG8pNJdBVqGloBTr/BAk+3AuGdarYvR
+	 2EeSSiMHIdcPamHyAgXz209tnTZB7Cw46wX5q02SFoblHACwKQDTFyJ2acrIGKnM+OoAY
+	 kGQ6COWmwtEt/ElCeml+ECnCS0SySBuf89Bo+071k8WVfyGu6VLVIh0Hal+yPuJdhnVNQ
+	 wKiwQKiGwm0tGO3Onge4q2Zi/ULLcvHvbyEI3DwzRcim0UMsERBNx/s0cw9yfGGQJFA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JxSx1JVc;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WJ7B4MPs;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB46606A320;
-	Thu, 19 Nov 2026 22:06:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 446AC606A326;
+	Thu, 19 Nov 2026 22:13:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JxSx1JVc
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A2B81F000C4;
-	Thu, 19 Nov 2026 22:06:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WJ7B4MPs
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 975A01F000D3;
+	Thu, 19 Nov 2026 22:13:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795126019;
-	bh=ETZ7xeXM/79uniKVVrwhkskKouFWSJb1lviMqROj1wc=;
+	s=k20260515; t=1795126412;
+	bh=lOSd5J4FCYgX98Se5iiOkvY37YVWiB+QhTNatsC3gsU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JxSx1JVcPjmlNDwyivyMLlAGLrZ9HFJD3jFfyrmEoyE2ci9Zfwq7bRsTcVa2tt2+6
-	 bIum7g7PsFjUNna93J3xsm2WPkyA8N6FJ6EOj5uupIP6OTlAgEDnX9DRghLQQNk9lY
-	 9mZeRyqLgvbl1tpK8rYpOO+nLKSEZtQr0tWTBGlCsLSPm6xTjnEL4GECS4j4mS/yOJ
-	 RCf4wGLdWKKt0m6MmaqDJhU/EOP5N80ZoYZEblGy3c3+x4rqxzYUw3IhniiPXx17YR
-	 3jzH+48nsVjfq1aicY+SwZzehd3LLqZzqFMZ3zfsgHJXdCNN4D3BbnRAsKp0/xxbCs
-	 s14ToU8efo4BQ==
-Date: Thu, 19 Nov 2026 16:06:57 -0600
+	b=WJ7B4MPsIts0ax4y4MgrqQg9BS9ZXVquYhA2B6DQWXw4T8Cxcpnoi6Sw86Zh1nNo3
+	 ATd+jKwpGh32JtYrV6IkCwV8DhDJ0nDLbrbJz6ZGKawnjZVdyRp+RmSujCba15K6RS
+	 xKVQ02U+sTue8TZWkVVjVyZUePAsCag5V2o3z2U3Sj91YIWVXtKSiBf3xrkPtv4GII
+	 8y78ruxFi5/8zY993oJtwr2uCer5cu7O6wttZ9MYdCrHJEvh0aRPkZGt6ykcaAGM49
+	 +2XhANmBzOJ3gTihCUrg14zY1JScWAy+AFpPm53whHoKVArcterfTHCEysAJFBi3u+
+	 Y7QKQ5CS902/g==
+Date: Thu, 19 Nov 2026 16:13:30 -0600
 From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Vladimir Zapolskiy <vz@kernel.org>
-Cc: Robert Foss <rfoss@kernel.org>, linux-arm-msm@vger.kernel.org,
-	Konrad Dybcio <konradybcio@kernel.org>,
+To: Demeter Barna <me@fromdisposition.org>
+Cc: freedreno@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	David Airlie <airlied@gmail.com>, Abel Vesa <abelvesa@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Bjorn Andersson <andersson@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-	linux-i2c@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
-Subject: Re: [PATCH 1/3] dt-bindings: i2c: qcom-cci: Document SM8350
- compatible
-Message-ID: <179512601692.866431.5877068767600191893.robh@kernel.org>
-References: <20261104230529.3040285-1-vz@kernel.org>
- <20261104230529.3040285-2-vz@kernel.org>
+	linux-arm-msm@vger.kernel.org,
+	Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Simona Vetter <simona@ffwll.ch>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/5] dt-bindings: nvmem: qfprom: Add SM8350 compatible
+Message-ID: <179512640965.935436.17254466813902279332.robh@kernel.org>
+References: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
+ <20261105-b4-sm8350-gpu-v1-2-a7175cdd6512@fromdisposition.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,17 +74,17 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261104230529.3040285-2-vz@kernel.org>
+In-Reply-To: <20261105-b4-sm8350-gpu-v1-2-a7175cdd6512@fromdisposition.org>
 
 
-On Thu, 05 Nov 2026 01:05:27 +0200, Vladimir Zapolskiy wrote:
-> Add Qualcomm SM8350 SoC compatible to the CCI device tree bindings,
-> SM8350 CCI is compatible with CCI v2 found on MSM8996.
+On Thu, 05 Nov 2026 13:30:01 +0000, Demeter Barna wrote:
+> Document the SM8350 QFPROM. It needs its own compatible because some of
+> its regions cannot be read, and the driver has to know which.
 > 
-> Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+> Signed-off-by: Demeter Barna <me@fromdisposition.org>
 > ---
->  Documentation/devicetree/bindings/i2c/qcom,i2c-cci.yaml | 2 ++
->  1 file changed, 2 insertions(+)
+>  Documentation/devicetree/bindings/nvmem/qcom,qfprom.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 > 
 
 Acked-by: Rob Herring (Arm) <robh@kernel.org>
