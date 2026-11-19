@@ -1,66 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795082990;
-	b=Nvmz97J2ee8DNKAzKy111sd2lQuDZLbm/RbfKL0CqM6MSLcNdGPAmPu0eoQ5VuSq+30S
-	 ljmSuE5RSEvDB8qakwYSDSQ0P+m0SKqnWq84w1ACSRTMWGa0xxmbzDc/B/ZplLwYZ/SMj
-	 98NMt7AUNoIFQHJ4l10uoq28lmT7m0lS+GMwJhXHDJAdqAKGLMivoSoeK3jaPdgNw7NxE
-	 P4YPRh49FKX8SR5E2g1Q9J4VmFehR/1oInq7siAWQTvp5PnKvgF5NS73SNTs2YbIA8pvh
-	 LVFDpPAOIMrUCu5J9GRpB02DdfN/Yk3g7wJKHTfLuQLM/zSjBYHhNigSZKsPLXFSlKQ==
+	t=1795083606;
+	b=l6DuhcQU/BckxBAc+JhAUNznUfCOwB3yfmzlYYhT+bXb6mobgrGdA8jBVxNl9xU6YaJ6
+	 Ze4LRaA2uUOgCXZHydJTQv11Id1ijcGNyQqrxWpc10JW4IRWSlj/JccLy+z1cGP5dZiKf
+	 8c6SFJJiMPKNi4Gke6xlZLcnXb4xosaFglzZ7eOYCiioirMqJys67Y5wbnTJis4mXnFMK
+	 tUA9czAh6p2otbrB6wr43scNIjrxjVoO67vX+n0cRri1OdbO+eksE7nBXtDkSJkBkQYZa
+	 pdYI83yaiBXz9hjQIb2vPX1roiGr0Bju3c35czTxAD/Cg2zojTte/pBsQmL/8qhrB9Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795082990;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:User-Agent:From:To:Cc:
-	 Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:
-	 Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=+c2SR/tNT42HJhoGlWnFwCiTke63Erxsj6ah49lR+3A=;
-	b=VUAQHtdHN/X/vrFupVZAEvzOTwl5uFwv3oXJICPW2bpsamTh1xSi+3LUa175fmdx7oba
-	 /YVZCDi04hWwnK7wp1ECezK5pKFMdGtlViBdtAPdwbRvDbcSwf/OkjJtYN8qcoHxm9Eoy
-	 5ZlJN1IaBY5iku0E80uWrYjf5yIwZY0QkkWl9HX1poH37WaJz32w4zEuqGexGBTDhb8Wa
-	 DADxhsW5FQxv04bBiHPLTgdhnBonGLGTMDCtqlFAXruexcsBcmfSwhd+ejiiTVdNKLXqa
-	 /CNAp2INFakVcE6SDPaF/C2B8fDs6c7rR2+pII5XSfdJ2FP6YzAZWH1f9/RGMQpEV/A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795083606;
+	h=Received:DKIM-Signature:Received:Content-Type:MIME-Version:
+	 Content-Transfer-Encoding:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc;
+	bh=ARp8y0YRU3ej2yIzpOoEEAioGb8LlMiVU57DajBVeXA=;
+	b=Cs8keNRG+i1GPCam7Bpqo9743NS5hOg4JO2R5Bpr3eBKJLvcn31HPxKOukZ3H6epZB8l
+	 Bg+mjeqh/Bdmx0ZtMXOJrIv84Og4mWqKeDEhMRWtC5TUN0w8Ar8IlK6hlTp0XwQFVbqKk
+	 N9m2J1MW+wu+ooTEVXVCwcnYmKSEWsVeK7Q/hpXgtE1E08wwc1j5BGCL2Lh30L1ALuTAJ
+	 +JOrUP3gmt5LutmPsr7jHYZEJww3M75meErDil5t0J8fvqJcAjC4x9DyJfSIoj/S/RiE7
+	 1fGrIyQSSyrx4dCpuzTuyPa2SNM9G2hg7d5WxQphcwedn3fL4dUVg6IxOPsUaNFjA1A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=seaslug.moe;
-	spf=pass smtp.mailfrom=rsend.seaslug.moe;
-	dkim=pass header.d=seaslug.moe header.i=@seaslug.moe header.a=rsa-sha256 header.s=resend header.b=tburQjA9;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=a4ytP4tz;
-	arc=none smtp.remote-ip=23.251.234.56
-Received: from e234-56.smtp-out.ap-northeast-1.amazonses.com (e234-56.smtp-out.ap-northeast-1.amazonses.com [23.251.234.56])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FCRGCIqP;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3895F606A320;
-	Thu, 19 Nov 2026 10:09:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3895F606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=seaslug.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsend.seaslug.moe
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6DF0606A32C;
+	Thu, 19 Nov 2026 10:20:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=seaslug.moe header.i=@seaslug.moe header.a=rsa-sha256 header.s=resend header.b=tburQjA9;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=a4ytP4tz
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=seaslug.moe; t=1795082989;
-	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=ErlkRxmFQecr5Uue/oFTaTuv9wsp2Ivgw2iDqEihatc=;
-	b=tburQjA9nME2bnM/uFfxSc1ssQL8ysavQ90gBBTvs9cwwtCrzPTg3q8o92fx55qf
-	3k2Rq04XlQPXwjk1tYtTK4Yoeet68St6iuKxEtTahS5+rUQL4KNAsJzRO4Nnd5Hy4fm
-	Dls6iAionScmHQlP9aQWR8rq9foFZcxwekmPT2PI=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1795082989;
-	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=ErlkRxmFQecr5Uue/oFTaTuv9wsp2Ivgw2iDqEihatc=;
-	b=a4ytP4tz7PPcUdt8G3ZZI0qo0usvyWHNfpvJ6h8OlI5HgiIdDGes7K79il9JavXw
-	Ir94wFikDDclmwtn5T4Vru9yOrTxrwq3SpSuKz82ww5F0RFMnQ3dnBfPgJgiPSvrUTr
-	zEukJ9ObgHG1Gk0WvigQBu7TNFIhL9zs4A1OAPE4=
-User-Agent: Mozilla Thunderbird
-From: Jiekai He <i@seaslug.moe>
-To: robin.clark@oss.qualcomm.com, lumag@kernel.org
-Cc: abhinav.kumar@linux.dev, jesszhan0024@gmail.com, sean@poorly.run, 
-	marijn.suijten@somainline.org, airlied@gmail.com, simona@ffwll.ch, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org
-Subject: drm/msm/dsi: LANE_CFG1 hardcoded to 0x84 on a 3-lane C-PHY panel
- (7nm PHY, SM8250)
-Message-ID: <010601a1f348aca6-cb9be5e6-dcc4-4a7a-878c-006ed1cb9079-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: 7bit
-Date: Thu, 19 Nov 2026 10:09:48 +0000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FCRGCIqP
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 817501F000C5;
+	Thu, 19 Nov 2026 10:20:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795083606;
+	bh=ARp8y0YRU3ej2yIzpOoEEAioGb8LlMiVU57DajBVeXA=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=FCRGCIqPryc0b4d2DAzLKXBePu7S3vfvvYPmc280yHnSwDaC0hrpAPe/82N6cCClf
+	 QVEwbMOUaleo1o3lGl6vSd+2u/mEb5908uYONFsvcqCIKdekBwkD58xo45zRzlvpXT
+	 tfQ0O0m6PlogihewXi1nzYTKnXWh6wIT+2gvSYZMyaiism6huBGhzf/CMyA57+TXkF
+	 Jo/OxRh+YLE5z/re99NMRRMtbUTbm+RtEZkRyt1awSZJtUHvHpwTYmhVNpm/E/RZq7
+	 TSgMEFSGD7F5Lno/zWcwpBHrCj4XSOrBsn0crVchfcTXKGLROHvpEMNs5AZpikf+Yo
+	 u2ZuR0HtynEAw==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 773893808210;
+	Thu, 19 Nov 2026 10:20:06 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,89 +53,55 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.ZNuWYJTX3AC0+KBOptCLUmfpt7SHI3IHQOkB5LcUBhBP6cY5WSpWElQ2N5/Rm+HvriE3mnDhS+CVg02tsA3KAKkClMNixvejJkY0vVdjLtRJQuD2EBZHHHT1rD84raItQTVO4CxeNwLsHKoTx4hYfcdB/UVTn0LeTis7osgztBXJRrMsmYLNe50eLAKwP82x:1.ap-northeast-1.tL27A1JIpKR2Y51a8BkHZBekDcSR82jwOhKrSwgRw2U=:AmazonSES
-X-SES-Outgoing: 2026.11.19-23.251.234.56
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH net-next v6 0/2] net: wwan: qcom_bam_dmux: Add restricted
+ DMA pool support
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <179508360528.2997070.12306679425844705945.git-patchwork-notify@kernel.org>
+Date: Thu, 19 Nov 2026 10:20:05 +0000
+References: 
+ <20261112-qcom-bam-dmux-vmid-ext-v6-0-7a16bd3dff18@oss.qualcomm.com>
+In-Reply-To: 
+ <20261112-qcom-bam-dmux-vmid-ext-v6-0-7a16bd3dff18@oss.qualcomm.com>
+To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+Cc: stephan@gerhold.net, andrew+netdev@lunn.ch, davem@davemloft.net,
+ kuba@kernel.org, pabeni@redhat.com, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
+ johannes@sipsolutions.net, edumazet@kernel.org,
+ linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ deepak.singh@oss.qualcomm.com, krzysztof.kozlowski@oss.qualcomm.com
 
-Hi all,
+Hello:
 
-I am bringing up mainline on a Lenovo Legion Y700 Gen1 (TB-9707F, SM8250).
-Its panel is a Novatek NT36523 on a 3-lane C-PHY link, dual DSI, and the
-PHY driver is dsi_phy_7nm.c. I would like to ask about the hardcoded
-LANE_CFG1 value in dsi_7nm_phy_enable().
+This series was applied to netdev/net-next.git (main)
+by Paolo Abeni <pabeni@redhat.com>:
 
-What I actually know is one number: on this board, LANE_CFG1 = 0x84 leaves
-the panel dark, and 0x04 makes it display. Everything below is context for
-that single observation, not an argument for what the value should be.
+On Thu, 12 Nov 2026 14:43:30 +0530 you wrote:
+> Some Qualcomm SoCs, such as Shikra, run the modem in a separate security
+> domain with restricted access to system memory. BAM-DMUX DMA mappings
+> and BAM descriptor FIFOs must therefore be constrained to a designated
+> memory region that can be shared with the modem. Accesses outside that
+> region can trigger an XPU violation.
+> 
+> Add memory-region and qcom,vmid properties to the BAM-DMUX binding, and
+> a qcom,shikra-bam-dmux compatible that requires them. When qcom,vmid is
+> present, the driver SCM-assigns the entire restricted DMA pool to the
+> local and remote execution environments before requesting the DMA
+> channels.
+> 
+> [...]
 
-Method: to read what the bootloader leaves behind I boot with no display
-driver loaded (msm never binds) and read the DSI/PHY registers through
-/dev/mem, so the kernel has not touched them. Everything else below is a
-normal boot with DRM_MSM built in and the panel driver present.
+Here is the summary with links:
+  - [net-next,v6,1/2] dt-bindings: net: qcom,bam-dmux: Add memory-region and qcom,vmid properties
+    https://git.kernel.org/netdev/net-next/c/ed5087bd84ec
+  - [net-next,v6,2/2] net: wwan: qcom_bam_dmux: Assign restricted DMA pool to remote processor
+    https://git.kernel.org/netdev/net-next/c/a5ce83fc0b37
 
-Observations on this board:
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-  1. Bootloader baseline, panel displaying, no Linux display driver:
-     LANE_CFG1 = 0x04, LANE_ST0 = 0x17, LANE_ST1 = 0x17 (both PHYs).
 
-  2. mainline as-is (0x84): LANE_CFG1 = 0x84, LANE_ST0/LANE_ST1 = 0x1f.
-     The panel does not display.
-
-  3. Writing 0x04 instead (selected by phy->cphy_mode, D-PHY left at 0x84)
-     makes the PHY registers match the bootloader baseline exactly --
-     0x04 / 0x17 / 0x17 on both PHYs -- and the panel displays correctly
-     at 1600x2560.
-
-  4. Reference point: a Lenovo TB321FU, a different 3-lane C-PHY device,
-     runs with the stock 0x84 and displays fine. That comes from an
-     unofficial experimental port (github.com/enij90/armada-tb321fu), which
-     its author marks as unsupported by the Armada project. I have not been
-     able to check that device's registers myself, so all I can say is that
-     the same code path does not break that board.
-
-                  LANE_CFG1 (0x038)  LANE_ST0 (0x148)  LANE_ST1 (0x14c)
-  bootloader             0x04              0x17              0x17
-  mainline (0x84)        0x84              0x1f              0x1f
-  mainline (0x04)        0x04              0x17              0x17
-  TB321FU (port)         0x84              --                --
-
-For context, this board needs a handful of other DSI changes to come up
-(command DMA / read-command path, video mode start ordering, the dispcc
-MDP clock source, the MDSS reset). Those are constant across the comparison
-above: only the LANE_CFG1 writel changes between the two boots that differ.
-
-Questions:
-
-  - LANE_CFG1 is written as 0x84 in both dsi_phy_10nm.c and dsi_phy_7nm.c,
-    with a "TODO: we need to calculate this" comment, and it traces back to
-    dsi_phy_10nm.c in 2018. Is 0x84 intended as a 4-lane D-PHY default that
-    also happens to work for C-PHY, or is it expected to be independent of
-    the lane configuration?
-
-  - Would deriving LANE_CFG1 from the per-SoC cfg table, rather than from a
-    constant in the shared enable function, be a reasonable direction? The
-    2021 C-PHY series left 0x21/0x84 untouched, and at least one other
-    3-lane C-PHY device appears fine with 0x84, so on that hardware the
-    value is either correct or has no effect -- I cannot tell which.
-
-  - dsi_phy_hw_v4_0_lane_settings() still carries "TODO: Support all lane
-    swap configs" and only enables LPRX/CDRX for physical lane 0. I may be
-    misreading the scope of that TODO, but is LANE_CFG1 part of the same
-    unfinished work?
-
-  - The register database added in 2024 lists reg32 0x00034 as LANE_CFG0 and
-    0x00038 as LANE_CFG1, but I found no field layout for either. Is there
-    any public description of the bit fields, or a known reason why the
-    value is a constant rather than derived from a lane map?
-
-Full register dumps for all four DSI/PHY instances available on request.
-
-Disclosure: I am not a native English speaker; the wording of this message
-was improved with the help of an AI assistant. Every register reading, every
-build and every test was done by me on hardware I own, and the observations
-and conclusions are mine.
-
-Please keep me in Cc -- I am not subscribed to these lists.
-
-Thanks,
-Jiekai He
