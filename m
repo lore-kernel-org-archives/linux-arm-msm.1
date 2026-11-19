@@ -1,81 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795112450;
-	b=wIk/fRQzMAh7NHkaeoCiOia2aM7uR3FxR7zXifMeut/cLC9ExHzDqjgpxhCSKDmUnTC4
-	 ZuEWNBppQcoxQIkUVi3vK8j+XFSgHofmsyrhZLhU4pZzgWx035iR0oSN5HtXAI1z0cwkF
-	 nLl1l9gr6jg/wgOVV46OoebxBsag3UyBhVrLoUtc/fr3WrsYpeoabf1BBQ4e9vwK27IpS
-	 qf5u7eT+Rjan5he2nxDIX9xuLAMvnLJDA+0LZ70ay7R0ZTldMBQWlm/bWfyEGfXWdr7tO
-	 +C6N6RA4QxbuMljEvIi0pOvt+30XARC/70kYeFhOfjDj95mWmsL4bIoQsEgjh+xz4vw==
+	t=1795116142;
+	b=G4ujSpvmRC7yYGQw72sD5SHB8j26+8MtyS6Hvj6xVXPg+bDS2pBHfrzP7IknWv9qjyUn
+	 mqz0P0QEMot/1ePQR8HaWnHJqKS9ykmyGyrt4mIJkC7BChR3Eq4Ns2NlUvFhs70HFh20s
+	 GOzplk6nD+SYRv1SIGWsrvasTOazpA194pQ9HlOEplDEK5GxOycprIk2ZQzDA2JQQMoLX
+	 2ECzlrgnoWLLur00hEL8JWOV8rqP3viHporNupGnFmvhbCRit8OvaZES/an9FjUBrm6+f
+	 9Yx2qPbhVZIxyU47B4kKwYG0Zl9BTiueCudBohO/T+I238U5t6yG1DjMkP0zt9Vo2gQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795112450;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
-	b=MvCGHQeSVJeruMRl0a27+xVHcKTpNwtpxb7U+IAugbJqU2xMORWeZcZ+00XwvUKb/I6n
-	 KvhkbrKVemkwkJ+27LiniKf0vinp9mtOk45CmuZvERsK354OWiqgEAdJKyVSfP4Nu52aP
-	 dZblhoHdgcoR7u8qREJxVz1rVYZzaqYk5GfKuCMtBFKzKNeSRqC7E4oK0fgRWTWEs89UG
-	 Y5zJKG78ctaC0TuSKSIQhHvRkg2lgk8xFwdNTBfK3QFrPkyNSoAnt08EFYwvIJG3RD3un
-	 l5e5mgE2SL2LTQeLzRVPM/0HH860l4fLJnCEY2wpLi93/JLduiwphEH3cOb4PUkFdGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795116142;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=H/f08E3uJEXeSKK1itGvan6vjNPwDfLmBBZVqcKzRgM=;
+	b=NLwyYUi6UUsTS2ZE+0drsy+JbU8zEVyu5StgtgzqFvu8e5v151zOzguwnDzmazBAJ5Ae
+	 8hLmYVSTiTvVCObqmlIQApv5ozF/vRySbIuN2voAmdLEAuYzmXbixuIZcdX1nrJKVzTNt
+	 38bEN9jOrgoy64ulCwS4qdg6m5HG2iCN+exZ5T40B6raCzph0EYQH78JIlVF2idGBVcHp
+	 zTaWboyV0ufg6JBgNHT313w4z3PaRtyVS5z13OCZb/ep4kjkKQ21hKNQS/dNKNcxiZOQM
+	 QZTSewjVRWs9pLb9/87/eu9PthslECpKyYReG8FXLKdQOKDFxuz0FZGPy8zIvYrAv9A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CCj2V77w;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE7E5606A325;
-	Thu, 19 Nov 2026 18:20:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F8D3606A320;
+	Thu, 19 Nov 2026 19:22:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B0EC1F000C5;
-	Thu, 19 Nov 2026 18:20:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CCj2V77w
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03DEF1F000C4;
+	Thu, 19 Nov 2026 19:22:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795112449;
-	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=mFVkDPWNUUaI/lD8LZupI2Dv6P1hrK9IDKEmnqQP3hRcjIokrajVdotKHQAyu0NV/
-	 LRn7QDpEIl7PkujuQRr3JBOYQ+mJ0JJKhFd3EksrdvpLpq/b5w75RdtGldsmRSuWuG
-	 Ej9e2CQPJJ3vc6ty6KfikChr+J+4TieOCN5RUxlTysnTo90F+i3dQL/yhRCP6r9QKI
-	 ZUEOfNqI0qQI7nJ3efrl+mVFZSuYADsTl8cPGElqU4t+ZqtyImk+pdJ6b3Tve3I3qk
-	 6SUHTGBRqWjRzEw9B/SNFUNcnVx4t7sMsIkZvT0Ltu1LVrPnQ/gifStw7uYoI+dALN
-	 894KwzJuU9EZw==
-From: Lee Jones <lee@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Robert Marko <robimarko@gmail.com>, 
- Guru Das Srinagesh <linux@gurudas.dev>, Thomas Gleixner <tglx@kernel.org>, 
- Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>, 
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
- "Joerg Roedel (AMD)" <joro@8bytes.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
- Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
- Herbert Xu <herbert@gondor.apana.org.au>, 
- "David S. Miller" <davem@davemloft.net>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>, Amit Kucheria <amitk@kernel.org>, 
- Thara Gopinath <thara.gopinath@gmail.com>, 
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
- Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
- linux-usb@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org, 
- linux-pm@vger.kernel.org
-In-Reply-To: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
-References: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
-Subject: Re: (subset) [PATCH 05/17] dt-bindings: mfd: qcom,tcsr: Add
- Halliday TCSR
-Message-Id: <179511244123.91992.13336083093444200069.b4-ty@b4>
-Date: Thu, 19 Nov 2026 18:20:41 +0000
+	s=k20260515; t=1795116142;
+	bh=H/f08E3uJEXeSKK1itGvan6vjNPwDfLmBBZVqcKzRgM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=CCj2V77wmyjsVBonmc0uU0+rwfz9Ay4UAk0Szipp2SQoV/3VvAq6mZzI+2oKwUEKE
+	 uQ6vgAYh/C+E8mSixpUItMWThWHQvZT6++0goUQEgc1ILF7z9j5Ijjai7jzTbgYvWa
+	 c/UkdOIRZkUtrSE4Yr8cWhxiVbXI3hCDOGzsIAuQa9TiEm4zbhHmvXCw0xuLUP2Hef
+	 +P4H+UcLTVQCQa1uEjH7GKeIKTOOdM6wi17gZtPKEmBVJxiRUTFjPGdVSqgDfvmWLW
+	 knYiRr0xdqRnD27gOHqLniS1hPYEuMdSPGrEJu9M6ZMYsPCKd0qXaV0ZwSOEY7NnT2
+	 d0XizdQj0ZD1w==
+Date: Thu, 19 Nov 2026 13:22:20 -0600
+From: Rob Herring <robh@kernel.org>
+To: Karthik S <karthik.s@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 1/5] ASoC: dt-bindings: qcom,sm8250: Add
+ shikra-iqs-lt9611uxd-evk sound card
+Message-ID: <20261119192220.GA4074534-robh@kernel.org>
+References: <20261022094313.1074873-1-karthik.s@oss.qualcomm.com>
+ <20261022094313.1074873-2-karthik.s@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -85,18 +66,46 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261022094313.1074873-2-karthik.s@oss.qualcomm.com>
 
-On Mon, 09 Nov 2026 00:33:17 +0000, Stanislav Aleksandrov wrote:
-> Document the TCSR block on the Qualcomm Halliday SoC.
+On Thu, Oct 22, 2026 at 03:13:09PM +0530, Karthik S wrote:
+> Add the shikra-iqs-lt9611uxd-evk sound card compatible so DT can
+> describe board-specific audio topology. This Shikra EVK variant does
+> not use the MAX98091 codec as the base shikra-iqs does; instead it uses
+> the LT9611UXD HDMI bridge as an I2S audio codec. Describing these
+> variants explicitly in DT allows the machine driver to select the
+> correct DAPM routes, controls, and clocking behavior for each board.
+> 
+> Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
+> ---
+>  .../bindings/sound/qcom,sm8250.yaml           | 43 +++++++++++++++++++
+>  1 file changed, 43 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,sm8250.yaml b/Documentation/devicetree/bindings/sound/qcom,sm8250.yaml
+> index 1536fcd96d68..d1f948a14c62 100644
+> --- a/Documentation/devicetree/bindings/sound/qcom,sm8250.yaml
+> +++ b/Documentation/devicetree/bindings/sound/qcom,sm8250.yaml
+> @@ -50,6 +50,7 @@ properties:
+>            - qcom,sc7180-qdsp6-sndcard
+>            - qcom,sc8280xp-sndcard
+>            - qcom,sdm660-sndcard
+> +          - qcom,shikra-iqs-lt9611uxd-sndcard
+>            - qcom,sdm845-sndcard
+>            - qcom,sm8250-sndcard
+>            - qcom,sm8450-sndcard
+> @@ -247,3 +248,45 @@ examples:
+>              };
+>          };
+>      };
+> +
+> +  - |
+> +    #include <dt-bindings/sound/qcom,q6afe.h>
+> +    sound {
+> +        compatible = "qcom,shikra-iqs-lt9611uxd-sndcard";
 
-Applied, thanks!
+Is this example that different from the existing example(s)? I suspect 
+not, so drop it. Your .dts changes provide an example already.
 
-[05/17] dt-bindings: mfd: qcom,tcsr: Add Halliday TCSR
-        commit: 51a1764ff434dff86994f7e03125033deebda6e3
-
---
-Lee Jones [李琼斯]
-
+Rob
