@@ -1,79 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795102493;
-	b=Jyu/KNUnN+jTmq/aRFRHYq0S+JDyHdwmrQ0IeYDrA8beX0qSJlJs05rNAzEO6oGjr3xz
-	 XU0hbWnZyOm0y0QEWkDl5ZFkI59zNTJVtqH62ZRyoYo2aZFkpmrrjjAok3CEop1BTuRr7
-	 hAXlN+79vILkb0mcLlva1ekWVRToc96ccb6ADnv4ViKoQPuwxZeGskxKQXBGBjp2minEl
-	 GMjI4k0gA5QxLtzeRtLM6FOYTUVlnR1CJORp+R1A7H1Y+AYvXZLYR2GcjE6EptGisfmWT
-	 6tKWE0/zfcCaTMPytMgnW6WrcoHElrP6EFA8qWUXhHcO89j+dpz1dIR9g7oX4CmlC3w==
+	t=1795102540;
+	b=iEgtQ3g1HQsafbxeCMWv9SFwFKsDOG4Vt9lqJocKapMtZJdLgEQZBhN4b8AR8b2XLEOs
+	 WJKQKpbdubB3HMH3/VwE3riCqn2n8eO6Pva9LnzYLVecNHs8X4PY070SwLM6Xr3scPjPA
+	 N+FDrCIDhOQg/BLzjtzba2d/f+F6quQS3eXWFx39zrPNn7ns623oGR0jCJYukSwKcEaH7
+	 aVc0dBRvcABBS43NwZgp46m8KFpur6SCOkvOOWD8NwvXKAwphn0g1eIbPKbS6DRkKfnF6
+	 jEXRkeWzv9ckHrwmsK1V/aoq3/0s7EyB/XnU1u3/odgmfY7o6AQrXy29nd3srCqiH8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795102493;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=APdHxhVevbSPgpurjsZdo42O+VpO7Vh8nV06rY8boD4=;
-	b=sQvXAlN258/tlDndtxXj24vp+MJBewGTM1M44D3AMoec/vvcNGfqWx1X1Y3LVfSf3b+g
-	 L09EHupC46p9poAYZDbbTJnDcFeRUBo5s8Ygph242biywhw5RjRk1XR/SMKHAKOijHPmm
-	 vCr79IiBDYzJYqk0qBImiqRmoluHtZim7yA8V8J6UGUnLxeK1qQOwJk6JxFTswhLou6vM
-	 BhLkUsnnhhaUDfXtDTK7uVy91ryWMRzwmLVCv+syiF3Kks4Nq6yNIy3YyeyOcdXSsPkiw
-	 DGKBAUGoXEMmnFMdtP4uRwy5u4dYi7PbZbP/C3sbTOKfJ2CfEy+1KlCHoKWsVziXQLA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795102540;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=UeXDYRBppO46yxPAfOxxsv3qfn3han8/bDVYuqVzF74=;
+	b=n9HUKl2rvlXJxk1eWrltk2vFW+05R2cgu/Ly5EjnMZgJ4IEc33PtwZDgTLbD0naSZYi4
+	 JQ7Lkm4ISMoD5cqY9LSmPYy4DrHHYhk/TTV5rsM0Wp0IloHj6J8AIAF7b/m99OcDf5GYg
+	 aZGbRqSXLAepaeGZQ5iUz+/ihnwBRj1ZaKhnZpUlTG1RbDc40TGEvn0Qs0K1V8V6n1mKW
+	 /5hrUERkMixC6zntcBf5HOG5uJCmGXba4FLWLEU8AR8KsVjO89eN3ZJTRg9TG7HLnxlxh
+	 wgDCvQ85I4gfBa3/xLICUYngxshCE7r/kkVTFcLeLnXvkkixALqm0IzpUTLqJ5pT0tg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SYXclQdv;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g+8HXcpg;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F35860A380D;
-	Thu, 19 Nov 2026 15:34:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30B13606A33D;
+	Thu, 19 Nov 2026 15:35:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SYXclQdv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EB681F000D2;
-	Thu, 19 Nov 2026 15:34:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g+8HXcpg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA3B01F000C4;
+	Thu, 19 Nov 2026 15:35:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795102492;
-	bh=APdHxhVevbSPgpurjsZdo42O+VpO7Vh8nV06rY8boD4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SYXclQdv+b2ige8985m5EUIy/JLoQxmabD6L38JETBlbyWyOxafAyDnLaHlFuiZzI
-	 /kleeHI2fRI6NlzXJQ+01EHgKqPnrnWz2GxHUPBkmWq8xGnEhcqswjtufMMr/JVuVd
-	 Oim6b/4sspvRWabq5lRrDi7ieeWfcppAjZwnNFriQGxgZJKPjQ+ITgzNBkJeLjptSm
-	 CTkKZeFxoBR+bIZ90Rq28z+bZEO3fqgYVpxkcjnPYAi5DmrrR+9PwiAVnTogrtm68z
-	 UT9kNPLjCKpIduy7cFAblizPGwX/paLojDgejUv3m13aRTjQL6aa4KuAJwRT+HywIe
-	 ifbBCB27Cbtkw==
-Date: Thu, 19 Nov 2026 15:34:40 +0000
-From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-	Madhavan Srinivasan <maddy@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
-	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>, Shrikanth Hegde <sshegde@linux.ibm.com>, 
-	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, 
-	Jason Wang <jasowangio@gmail.com>, Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>, 
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Jarkko Sakkinen <jarkko@kernel.org>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.com>, Paul Moore <paul@paul-moore.com>, 
-	Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej =?utf-8?B?TW9zbsOhxI1law==?= <omosnacek@gmail.com>, 
-	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>, 
-	Ryan Chen <ryan_chen@aspeedtech.com>, Billy Tsai <billy_tsai@aspeedtech.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Jens Wiklander <jenswi@kernel.org>, 
-	Sumit Garg <sumit.garg@kernel.org>, Scott Branden <scott.branden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran <richardcochran@gmail.com>, 
-	David Woodhouse <dwmw2@infradead.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, xen-devel@lists.xenproject.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org, 
-	linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev, linux-sgx@vger.kernel.org, 
-	selinux@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, 
-	netdev@vger.kernel.org
-Subject: Re: [PATCH 14/14] vhost-vdpa: convert mmap hook to mmap_prepare
-Message-ID: <av8VB40ncsb5yEtr@gremlin>
-References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
- <20261105-late-2026-mmap_prepare-v1-14-c56aadfbab8a@kernel.org>
- <20261119100450-mutt-send-email-mst@kernel.org>
+	s=k20260515; t=1795102539;
+	bh=UeXDYRBppO46yxPAfOxxsv3qfn3han8/bDVYuqVzF74=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=g+8HXcpgP2YojPjDP1+MAQosOl0ajQiv+vGix8PMCsmdpT+EbWUj63X+fiapXZfH2
+	 K7Gw0dLBVdPIax7E/vLEYXn6HsVJWdBmQ0w+pU4TpTlQfIsyD8uHUSv/5N0NL0W6nK
+	 i6CSi9ASQtr+anRpiWcCy2RB1vUVT0mZOQxY3ZlTC9+/ZFcCFCA9zD/mJr2u6mCnL2
+	 yn+rPN4kXhKZSeDyg198LnZ8T1ZIHFqEFuZsxJZ5fj7GyBpqap3j9ofFs5cK7Fev7Y
+	 0HlhxVWQDBJX6Lv33vsmtB19R3n7LtC8oOQfp/euy72hwkQ+fjJO5KalbETUEIjTEp
+	 ExM1OpApaOdsg==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,23 +49,59 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261119100450-mutt-send-email-mst@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v4 2/6] media: qcom: camss: clamp VFE clock rates to
+ the highest level
+From: bod@kernel.org
+To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>, 
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261028132403.3505037-3-atanas.filipov@oss.qualcomm.com>
+References: <20261028132403.3505037-1-atanas.filipov@oss.qualcomm.com>
+ <20261028132403.3505037-3-atanas.filipov@oss.qualcomm.com>
+Date: Thu, 19 Nov 2026 15:35:34 +0000
+Message-Id: <179510253465.2846709.6572974352841900681.b4-reply@b4>
+X-Mailer: b4 0.17-dev-e3fc9
+X-Developer-Signature: v=1; a=openpgp-sha256; l=909; i=bod@kernel.org;
+ h=from:subject:message-id; bh=8dYBGYzl2S8liXZhKSMDIb8+flg+1yILtNCpaAexLDc=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq/xdGK/lFe7bp7sHjMxtOBZs8ExCA3f5bsnEkh
+ lt22sy+x0eJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCav8XRgAKCRAicTuzoY3I
+ Oq0NEACk7hlps6xySWJtb7EVAKaeGpHTtDUTwocUhBhSe5HKqt+BVw8ZQt/LyWPIF5FIat/RwxS
+ HYmJEvLaP3+e1q2cTbpRvyy/LDoFyPhDwVqjhRwFHpep/CjV6J+0KHnRYVhkS/Pc0Fgleie3GbG
+ wMlirdMYH8FA1Jz0m/n1+yASUaL36UpGk3A5huLtLy4eayXgu3rnDjYjKfEvjtYGbA/B70o+9aL
+ OdjWrsNybHElRw/1GYevagFcSONY7l2tcFm0yYuegojobhVKeZlCSSPZR1AH3o6jZ4jdzynQe+8
+ pWpxOtfhzVjsrmk22lqFZz+ixLLEM7K8BXy55jlRnT0ZXzOk6cqGnv6MbKd6Le6Jch4xIoMXPRg
+ sc4jd8vwWHlIuQC/ZfHp6Ny0U45P02gCeI1cmHUKxNZiU3pMOYQag6jfgBittDvTZLoCtCfvjig
+ ZB5xzLOT17v8qTWc+ulYFCUQak5ZRbmXVVY3ZG3SzlxRxkdidoqmbZKWbiMDiXg4L6rI/I45Dwb
+ RETeZcBHIUwiLKC16SKEJLiidbaqJceX0OUa3nuRCcomDwAcYyslaTVeZ6H8LL0Pv1yCA6AN2B9
+ vwpKhCsHUcbTDFH9M3WpXqyOpGBewtk+Zlm0q+6CwTAfzo6UVDx0n2/pvR7qVREjZCcmOkZVRDR
+ qyDuenZvLtGWGpg==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-On Thu, Nov 19, 2026 at 10:05:05AM -0500, Michael S. Tsirkin wrote:
-> On Thu, Nov 05, 2026 at 09:05:45PM +0000, Lorenzo Stoakes (ARM) wrote:
-> > Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
-> > only validates the request and sets the VMA flags, operations and page
-> > protection.
-> >
-> > Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
->
->
-> feel free to merge with rest of this.
+On 2026-10-28 15:23 +0200, Atanas Filipov wrote:
+> The VFE fails to power on when the pixel rate exceeds the highest rate
+> listed for any of its clocks. The rate tables of the VFE clocks are
+> independent and need not have the same number of levels, so a clock
+> with a lower top rate than the VFE core clock, such as the SC7280
+> camnoc_axi clock, makes the VFE reject pixel rates the core clock
+> still supports.
+> 
+> Keep failing when the pixel rate exceeds the highest rate of the VFE
+> core clock, and clamp the other VFE clocks to their highest listed
+> rate instead. Take the clamp into account for the other clocks when
+> another line powers on an already running VFE, so that a clock
+> running at its highest rate does not reject the request.
+> 
+> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 
-Thanks, sorry I missed your previous mail re: merging, I think ideally best
-merged together!
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+---
+bod
 
---
-Cheers, Lorenzo
