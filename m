@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795102650;
-	b=1zgECTQUiyP4Qaryq2XS59rdkNkbLUMZbsK1EdathsajgM7gEa/mg4GPZKOfbcj+L/0Q
-	 fd9n6BkuLMi2+S3exLlRbki7gy2DbptcmD9ebrXEEFQAzaxiTvHzBo19ovuR2hInbWVtA
-	 lCsbPOrBo3vHyeKjHb3AKJtO7OKpQOxXMQTiPDWiO2KT60C/H8VytxOwloQuj3/SxbJOx
-	 ya3TMP7SOzTMDiqAR9P4pl7cT0pj+afXSZZRezaEaTEdgl14+lbkPm9vaLIwXNJf8tUTP
-	 kuvwsrVPoK71Qtqh/ty1AJ0S/WJyiIvJP9+vIneMGHE5zayxWPmGdL0rvDZ9ulRkbPQ==
+	t=1795102725;
+	b=d1PfTqPduPGI5pgOoZSSSXHeuqYoCrK39PpGx/CVudp4I8Ol1NUXY9gG0ax2pZfy1pBV
+	 aUuzbrM0l32YNXxHi/dwxU+oZR2iOgksFJZ1v16b1mP0CmBagkgzURzxhEK0NLSuEwbhf
+	 extJIzivKCPZi1TNSQg6I1pnyi8RIIToHfebfssXCL9hWMQuzDhJnmUdpWFPjd4T9Mr3x
+	 yBYutxBB3nlNcXK0ZrfUWc7DkFqpbF2Wzf0L/t9BTIio+lS53+XTyvVmK0pmHX1jNab26
+	 DmWGA7GKYunsyy0TIihec+SdrXo5z+RbVhQcq948Gk/khKSAoai2DGt+yp7X3IptSjQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795102650;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795102725;
 	h=Received:DKIM-Signature:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
 	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=qJ0UWfPYC0fYyhd9uiu3p11FNj2/gRpheMtRiGNIGRE=;
-	b=IKaemaS1JVDmhMxWggFOmgX4n4dVVI9BxTvUUDIoWs5GALzOTPhMbPkUXX0MCNwVYwil
-	 qzqqzspVWl2rS/Lmx5LLw9DO3RCKqgQigTPzPEiCdi/+JzobVPsfFGwGLa+1c3xjOMgh7
-	 0dpUtBCj0fLWa/DQUlG8q1XkOys5DRAPPbczDtd9ldqQnynFuB59kZEn6AjACSIPjoNB3
-	 WCxKaXb6zFUPwXvTvZ4+b33oi95S5fKgv5CBNRxzSFJmdDmcCu/qpXtJl+vKPFo/S9w49
-	 4VuMbuL61m6QZZ0oJEnC/KYZLEW6oiLIkvq08UkUe6CODtf27Xm80VrLR1CCcpea9cw==
+	bh=38Sg+iyeqc6KBqbypZKVLEIJ0XzctRN+NIq5fG00TXE=;
+	b=KY7y9QteyN7pUvGrnCqs3q7OyQyJMtuIF64gJFaT9ZVvvUM44r9RDLzzlqugkWQp978e
+	 pWJBSYounoxyk93oEw08L/aKktPvkuHtAr3HXR/TBevuIEUzg9ap3eDoeL2+r1uylHOru
+	 drqbKArnLYNbNvWPJiLDoiKc/WOOhlefYd9yieGigcm0NZx7nTIXhkmvV1YuHcP5uKK4X
+	 khhOKEY2rfx9UvcR74L0lX7CeWnJtMoIgFn5b2NxHMEEVKsZ9QmetWnop0LcVRwCHUm9d
+	 EsgQW0pEl4P6T24hflcE5ZZz4iNQzyIEdYs0le1QD0oR2B26ZUCJTkE7fS1cnVXxhuA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QagVSURs;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XdtxF5+b;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAE4C606A33E;
-	Thu, 19 Nov 2026 15:37:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9177D60A262E;
+	Thu, 19 Nov 2026 15:38:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QagVSURs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAD781F000CC;
-	Thu, 19 Nov 2026 15:37:28 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XdtxF5+b
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B08141F000C5;
+	Thu, 19 Nov 2026 15:38:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795102650;
-	bh=qJ0UWfPYC0fYyhd9uiu3p11FNj2/gRpheMtRiGNIGRE=;
+	s=k20260515; t=1795102725;
+	bh=38Sg+iyeqc6KBqbypZKVLEIJ0XzctRN+NIq5fG00TXE=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=QagVSURsSVRKl29TU0u8IaqLSpkaLs+1e7qC4N5tfcPG+nREMgL0UEMX8D9pK70LO
-	 uA4f005sIHgZcqmcKtqK8RlmgKzj/ncKtRtz4QxOpHMMTe2FrlePWhiGjuq5u0VRev
-	 M8Nw0TGK1jL6mI+x8/E1yrQ3vGWndY58nPpeRG02pG/OwUGOle8jrxPbziftAGbIFX
-	 BCHpUKzBVrR1YFFeXOaN61puFX37MHqkxIgVnWPwioWY+0pTKVwotXEJ64kDXhaW/j
-	 bQLDJyGvnmeZf+1KI7OThscMnBWkCazgyh+OSNdIHrTfmZixqP94XqvrLSeD4oTMVk
-	 R9sAEgkH2DtKg==
+	b=XdtxF5+bO4nTBqs/TOhiQo2zNI9dB4IiFWqsvjBz/06hnwva/YggJIH5rskOKEcal
+	 PIKHD/PygFnXUhlPlaBulKFxQcaFAEdt8nzkrJfNom9h9cn68QY48T1Mg6ahOwUnNo
+	 9T8Oo0gJadpPNX5bgm8qPn3Ksir/QAFfhDmkbqh9XXzRyqQizQI4ARlRM9ChN/W6lq
+	 me3crgRW9TR9JiAYJAyf0/+0YZpoVyKs0aK/9A5hK2/P5JeetVgLbf3jLrGXsYy2yQ
+	 OHTEBgE5fwVAl8n1/87FmcOtkHiTjJvMnYLK713bn80mK/BIfGq8P/HLoVG15UK+1E
+	 Mn0ebwzIBH+Kg==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,8 +51,8 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v4 5/6] media: qcom: camss: sm8250: set the VFE AREG
- clock rate from the VFE
+Subject: Re: [PATCH v4 6/6] media: qcom: camss: sm8250: set the camera NoC
+ AXI rate from the VFE
 From: bod@kernel.org
 To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
@@ -62,39 +62,42 @@ Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
  Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>, 
  linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  linux-kernel@vger.kernel.org
-In-Reply-To: <20261028132403.3505037-6-atanas.filipov@oss.qualcomm.com>
+In-Reply-To: <20261028132403.3505037-7-atanas.filipov@oss.qualcomm.com>
 References: <20261028132403.3505037-1-atanas.filipov@oss.qualcomm.com>
- <20261028132403.3505037-6-atanas.filipov@oss.qualcomm.com>
-Date: Thu, 19 Nov 2026 15:37:26 +0000
-Message-Id: <179510264636.2846709.11683938055067241843.b4-reply@b4>
+ <20261028132403.3505037-7-atanas.filipov@oss.qualcomm.com>
+Date: Thu, 19 Nov 2026 15:38:41 +0000
+Message-Id: <179510272121.2846709.5296245274382118751.b4-reply@b4>
 X-Mailer: b4 0.17-dev-e3fc9
-X-Developer-Signature: v=1; a=openpgp-sha256; l=762; i=bod@kernel.org;
- h=from:subject:message-id; bh=1rbqkUnKYNw7JAsUg6r/+qrFKPX2DPdJgcL17Z3Y6vE=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq/xe234ZA5pEIAQyPMRYY4lrHFZE1djIqoKCNG
- euLP3rOIi6JAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCav8XtgAKCRAicTuzoY3I
- Oh1DEACbQ9boV31/H7XdMkDa4J5oaIZT9IgOUwEH2WQmWeJFAa3dKRjqeh6gAzzAnnYYllcbZjO
- xIMkY81p3VJqJKztzWtuGWgia/jngPnx6ZQ7uCwfkl3os+U4YevloDmwEHSkrLsnVq/wQyCTIcs
- mww3ZKQjoOCx4UEDv1bNf9Cn/kUWUrGHZ0mORQEw/9o83SqweWKqZ9O5TpQwVK+j3tSMLMqL4Yx
- btmx90V2efH0CIhMpa6eKYO9EwutZcxDB9LsIkBoX8xtzVcHdn5Sb4L0X+sItRoZ0eE5R0eIP5b
- dvqAoKcyQ+qsqJ3/5gRFAj1N1LjdTbEgxGuLWjTXY45WsOwCaoxlUrnPRHwsjPq3knTnW0/DI8b
- AU+4TCEsKeAJcCBu5dOMB3mlHkPwCkTP9+aN7+BZO6aoIqBeSeIwpqfOSqD/tk3Mn0BXnz37Qvc
- xepy3Dp53MfDjc/zrbnSY+hxiZdWjSrqkSMSEH+p/j8k0DYRwvfTXHxXhRIkQy5DrKEmKL/u2xv
- 9ZTQv0nmHfsGyX2SWW6pK1Lc9QQr8XjSy10bLjLOr4PedZow9A1nwrVRZe5+EHR/BCNqjdXjIzt
- QwUYpAGQdmU/KcegylJSM4BS8IK4rprU5P5WsYFyof+Hft146DTrQ9fAichP0XgIl+0bm/MxUiW
- BM7/+4tF7ePw8mA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=897; i=bod@kernel.org;
+ h=from:subject:message-id; bh=cmwL7aX52x4dm1pGfpUUyGqb0jQfa7yy4tQDAGjcRFQ=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBq/xgBP+XD3CHvLbZNvQI3StMz0CNiDHGRnK7iB
+ RITCtpXPVKJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCav8YAQAKCRAicTuzoY3I
+ OvgqD/9Le25BP3oAnae1CAJ9wXdinZ3Ov84nJhxp7kPtZtqehAP4HAoyvgq/1BZyIANWKAhMDoE
+ SY54fJwNNYKMh5fsa5azD7ifbSMKn1K2ZrSfxEl1ZVYsMuSvEnACYWpNqdue4RCyxjRKVTjLg4T
+ oX5TeOBGBqYYnJqqr2HoH1hYA1OmNTYWz200uZKbOH/UVH55MvnvByTMW74h+s91ma/ZssbRbvh
+ kW3/bvhNljWaxeJwc2f5nSUlh8GPc2IZLtiJzi8pcM5VoIZ36JZ9miUUUHejTRixtLJourAF0td
+ 2O66w5Rx6h8WIsSRXAgDaf3b631UEvjCEkfBNEw9itaOJ91o/TFKVlfUCnLhLd3BQUkEzRBNspq
+ WCpUTpgJJ0RY64taejQYDqwocg8EXrXnP0uZEn4aZ/IHAqtVHoTj1FqrX33tB6li6Ff13HclpCk
+ jSVceaP0AEyE8ExjKA+Df1m/S1tj8WQtvfbsfspP2HxM4Gl5a8+iJxWP+5WZU3NCJvJWRboB7CG
+ kzcc6kkEfciaWuvLdD8VjtNe1jxilWK4VqbdcejCcDtbA/vBbB9YC0qNuGVnrLsss52kVXy/G51
+ fTFWZZHuaY5Y3uNdTWuJUf8bZXq3naNEHQ6GxC/DtNaQ8lQSfu+SiiqQnqvJAErjmgEgYeyVNKN
+ Vco2XNS1sik9PxA==
 X-Developer-Key: i=bod@kernel.org; a=openpgp;
  fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
 On 2026-10-28 15:24 +0200, Atanas Filipov wrote:
-> The SM8250 VFE AREG clock lists four rates, 100, 200, 300 and 400 MHz,
-> in both the VFE and the CSID resources. The VFE only enables it, as
-> vfe_match_clock_names() does not match the AREG clock name, so its rate
-> is set by the CSID, which always selects the lowest one.
+> The SM8250 VFE resources list both the camera NoC AXI RCG,
+> camnoc_axi_src, and its camnoc_axi branch. The camnoc_axi_src levels
+> are never applied, since vfe_match_clock_names() does not match that
+> name, and they list 480 MHz, which the RCG does not support. The
+> camnoc_axi branch has no rates, so the camera NoC runs from XO and two
+> concurrent streams stall.
 > 
-> Match the VFE AREG clock in vfe_match_clock_names(), list a single
-> 400 MHz rate for it and drop its levels from the CSID resources. The
-> AREG clocks of VFE0 and VFE1 are separate clocks on the fast AHB
-> source, so a fixed rate keeps one VFE from lowering it under the other.
+> Drop camnoc_axi_src, as the camnoc_axi branch keeps it enabled through
+> its parent, and list the 300 and 400 MHz camera NoC AXI rates for the
+> camnoc_axi branch, whose rate the VFE sets through the parent. The four
+> VFEs share the camnoc_axi clock, so it runs at the highest rate
+> requested by the running VFEs.
 > 
 > Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 
