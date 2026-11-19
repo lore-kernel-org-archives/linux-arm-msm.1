@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
 	t=1795128015;
-	b=kNd9F3TgyRM2C81rqJBDSyzP2HFjjs+A9EMCL04+417vDFd816Qng1kKQyQHZQToNv7D
-	 RYM6QEoaIQSKTqv+4uyMyOAkUbShuQ0+IRk3BNjVtDytA02ts8SCJtKuaenTNqaC0Q3Dy
-	 +ijsx2F9dPdPBydvcCR3wAU1RHFrXOivwbP5J8ZZRmhkdOx8IpiMyD5JJMdFNNL2+D+D7
-	 Zndb7ptP1w0RFCeWKH0W5dQAgSBvT3iy6OO1ANuFk6WsSc1Bj+hHgMmzBZk0EdDE+0dhr
-	 4o56wzb/1a74Ot5HJNyEY2BFlA6tRTojAtJjn10WZltBHEAQu7tQlace/6VezhQRj8g==
+	b=xk3pawaYl3s6TpRxLXaFSl1xsrJMUFy2CgvyBlnBiqdEH2/sKGeDPqKafRxJ0hgKtKCd
+	 5j/aJWIbW+ARXK3VzGJ4ziEonGmwW1YLTo1xGlJNMyQYmFZulrNgUBZXUcc13QTJj5vfv
+	 wKtCKUgoKAWFcAIbV4LlnwVSRL1JNTiHwBK8RxX2OtyTUXOt48hxIDLJg9opKrthMLeRn
+	 hr9h2kbWwlr3EcGoV+hNDfzA7dm4QGYONBDdysMklUja55bJDrtiA2UUObbMt4zoiMTSf
+	 LRLnDHnOhuXXH5HQJQ+AOglWp2KgDoz6Vl4wT6uh7JpJPBMIJkbsTTCyYLbVieikr2g==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795128015;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=J+EF6tFLFNapF1ckdzdRZiht5pI5wqZxQpjBZcs2sF0=;
-	b=ZREYOdwTujBrtnu2zv2NwYfjlUQ9a8QDoCWNZ5lL1UJSQ1ZfllMHeSPg6Xk4ZELoKEp6
-	 3uuy1QicOYZONzPxLFTxrKfox/hjssYRyMq0O9O7qCCtgZdC4lPoOCOPCTWSsyWTkXNa1
-	 t1TRQn19xhAMv6nfc7GS+TRoV7okC7xexxhU2Zk+flhgFQ0eaLgX7I2Pseswssl348mfj
-	 tY5dFvWLNfBkm2gxxNL/69ZNrx2SNbn81MixglPgO5L1WTUBm9P9rsPwygZ5zCSgqt/JD
-	 edquR2sYV7tz2gJHLupbPaqEbpvmKwdm2kxyO1x3jY8m+GhZuo1VvaA6A68SK7uR6Zg==
+	bh=Xb9tGlBs/RI/3cYvgIuwT7LwCzWblww6OxyeA8tXJMI=;
+	b=NTsSPoQwKXL+UgjbChO8fnVE04gMh6zIp94+X+vEkYH6go4tP34w+e+7jHsOTLCs3LCE
+	 NKRR+mg2GqYoYO8o8MOPf05xZ49VfAz0Gn/fNg0MhNzKMczEQRXhOkgboGtKltL73bMIm
+	 CaFmUdH8sUFk8MWwDQ+F+lZKOSECHDoiA/q9kfhY8bHqZamIclaDdRocCIIbHFkqkW2g6
+	 qc6ggZuK+ss4eW7baY0TPVyRZECCH2BjM8oCixiBQx1cHThPA1Wz+54mTSuaGLLpTHtFH
+	 mJ2auMmCgyjE9sJkMTIAxgSWxVP8qrGQycCZcxZabl1owjAypLADx2NOTtclJuL3DgA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nResEvgR;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R023IU59;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9F78606A336;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D68D2606A33B;
 	Thu, 19 Nov 2026 22:40:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nResEvgR
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R023IU59
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
 	t=1795128015;
-	b=ZZnHG42QFIU4eZPI9ZCtJioNiRmzPyJerNn/dnlftu0hxSvACJUA6jSDR4q+XNhZm6ad
-	 goK6IqLWeSuwyhDqeqziw/btnflNK3sYMAdYQxdtShj7oAKO97f/66rpTsdP2X3CSKDX7
-	 FJmsD4vuCog73Gm0YozFWNg0gdnflGBrpukePKUWF/1+DB3RROwgRN99RH4j9TlJRMgGy
-	 nzbim+sf0oOvmHaoXh4bmREM8PzaI9Rn78SaohLMLx2ocsK2o91II2xDgbL+8029QAvP8
-	 i1HWTlDcgj06HpTR+SBD1u5b1qoyyH/B7P0SyIKekKlKLIyosNmb3JAaXgjaJTVGIAQ==
+	b=OE2AQVBhNyFXyKAZbg7kL0hrhwepf3se5s8CwtCL6Rxo3GoUk9TuI7j8sFN1pRuS2bMh
+	 PSKjznJn8IUoBUwYlYAw2Q3xbx+Ez8BQsedMabtlPOwRCzSpphtmPFGhugC/DIweO8w8N
+	 5wDSGq7CATg6fi11w9bdJoHt5+I5IN+xyBoRGKRKJAQZQw+y6mbs75a973DWw1LREyKwk
+	 NUHIVes/TZvWXaIBTeqhnIj/FFcdqPRcF1Gk8cdoghe0zY/GHCaNmQImlC3+TAqy/rWVf
+	 02hJjcy5FR73DgX6T+VcHvJZlRmzmucMGS8BWatHjYthvTAwqv/x0P/FRhbaXazNsmg==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
 	c=relaxed/relaxed; t=1795128015;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=J+EF6tFLFNapF1ckdzdRZiht5pI5wqZxQpjBZcs2sF0=;
-	b=XFcT3exLlv/K2AYlRau3bSVYCWXfDDB1fZhO71FPivMnNxyimvcCyx77lEB4yVJo+MQy
-	 SbOJ9N+f306ccd8jIvydJyLC958EwDs78aBm9baT3PsxVwB/1Y1+hthQ3EUTb1AjgBVaq
-	 Q/YzTyhUpvR52/YEpAMC7YsAFsmqqLmN1p/L8zM/luqG5MPJ6JYRRKtU8ha3ED7+Ra/gH
-	 zHlz2hN8Hbw1LvAjmwJCLZcnQoyTKk5SfuG+tJCOeYSCGs2ctz+4VBR0zcyxK4dvPJHC3
-	 It4E3nAWxXHLoAQguN+x9lxcEvOUSKyvZAtKeIqwd9g1NxJwtRGBBVu1CJPnNgEK4JA==
+	bh=Xb9tGlBs/RI/3cYvgIuwT7LwCzWblww6OxyeA8tXJMI=;
+	b=W7uEUK1MIrvXd2JdkE30vaccPO2HrUtgDN4nol49jh6prJk84WOWINULATO0oKvi7Ogv
+	 xX38Vkbr5qZ66GriNTs8LGQm/HhSWfOiPb94FCWfMXh6ZfPvEekUvzeXhDvMXmUstKMlC
+	 Lly9+Zwmb/N9yxRnQ5ybhqVbwDOevHTg5iJYi/ZAshIR7ip0gtXrlKQ2rXgRD/nibA1j9
+	 HTorINOGLJqJAl7fgREMl8t1M2mZtB0IqNj6k1updlDG/g/Z2RbxgtTh8v/xpDAJY8Tky
+	 ovZwEQq1KpK1Jw6CDB68O2IPwE6ay+2om+rz48S5dJVhl6VPmrTvP9/M3It57xqJpXg==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 322271F000C6;
-	Thu, 19 Nov 2026 22:40:14 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 1E5311F000D8;
+	Thu, 19 Nov 2026 22:40:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1795128015;
-	bh=J+EF6tFLFNapF1ckdzdRZiht5pI5wqZxQpjBZcs2sF0=;
+	bh=Xb9tGlBs/RI/3cYvgIuwT7LwCzWblww6OxyeA8tXJMI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=nResEvgRa+GF0St+b/xHS+xUc0aqHOfKfB9mCahOstqkLNfxiHN1XxVreSP6IsNV1
-	 bHPSWVoB+E3cWCqpZ+mi7MC40uqMziJ40Wv9XNDvLNY+YgGgyavl+QmS4JgrMBVIUq
-	 WyEW81XdTM9iV6Czyn1sW1qgm4q2ENAqaZlhViW8AlPQFurFOxn8f36f1DDMAG0rwU
-	 pYsDDvbZO4OShwxMQDbJJFyXg1i6oCuuDyA8u6GSMOeqWFLVBuKtfEnKupVkRTKnNG
-	 LJIGAJ/XIl4+wQfV6ihGiOcKYNiytRzzM+DRh8JMflj7UlhSlmCGLmSOtzAu1m1K7Y
-	 L60jIwobD9k5w==
+	b=R023IU59D9EYp56SaOKO4PIPeIQg6NxFsa/X85wERpiAl+VvxbAFUC7VU6nIRzR+K
+	 6VIvkiV4XFU+3+kejYOeQQitclFM11mF7NC16mi374FRc7q+iB9PkjVZegSQXHfZaY
+	 VKQKq13bUVLiFZeZEGHstu4X7W+ZynALUP85fLzOtDQVZadJfn9h3nS69s1w3WuLYP
+	 La4KhhXUUMBTC8ZRcRp/kXw9joJTF9bnZu/A8kMMOJcUseZKVF37MNpe5MCYOS62Eo
+	 PznUxGFKIX+5ZlGTvQp1JsHP/af3W86NRg0K9P1eSGhG12FOCQMrxAqzthnnrj74dP
+	 S1dY99XxxSVNQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id B5ECB41B45;
-	Thu, 19 Nov 2026 22:40:13 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 22A2C422D9;
+	Thu, 19 Nov 2026 22:40:14 +0000 (UTC)
 From: Nizat Mikayilli via B4 Relay <devnull+nacht.dxdmail.cc@kernel.org>
-Date: Thu, 19 Nov 2026 23:40:04 +0100
-Subject: [PATCH 1/6] arm64: dts: qcom: sm8550-samsung-gts9wifi: Enable CDSP
+Date: Thu, 19 Nov 2026 23:40:08 +0100
+Subject: [PATCH 5/6] arm64: dts: qcom: sm8550-samsung-gts9wifi: Enable
+ PM8550VS-C
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261119-b4-gts9wifi-followups-v1-1-2e2388589a62@dxdmail.cc>
+Message-Id: <20261119-b4-gts9wifi-followups-v1-5-2e2388589a62@dxdmail.cc>
 References: <20261119-b4-gts9wifi-followups-v1-0-2e2388589a62@dxdmail.cc>
 In-Reply-To: <20261119-b4-gts9wifi-followups-v1-0-2e2388589a62@dxdmail.cc>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -93,11 +94,11 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, Nizat Mikayilli <nacht@dxdmail.cc>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795128013; l=877;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795128013; l=687;
  i=nacht@dxdmail.cc; s=20261004; h=from:subject:message-id;
- bh=NnJjHpakdpxyyCZ6oFrLlypqqGlSBONU2v6+sLCEUd0=;
- b=HSIW++4ax0tLWO5zg/pur07sUSuGMeU7bTsW3qAPEdC/lJSQOP5Zz+7mRTLRiXNYh2wO67JfF
- EATqFW3CvHuAXNrldTf1BEs+6dSHJPjo6Y29J09CgQhk8yXnXKYQLMO
+ bh=euutEXnvvtMe/+gu763/D4wM9tSHPXBePYkghrhgKWA=;
+ b=iqF0RUUWMRzsVz0FHsGRx+CEJ+Z0fN32987dHWQBjv1wEquvza99qmUNlb0LuPtAowCpxS7mp
+ Y5JlmH6m8oLCN5HAV9omlX32uUrTMzttsHNw1+aozfbD9kDxKteHTEy
 X-Developer-Key: i=nacht@dxdmail.cc; a=ed25519;
  pk=Kay3P3pOJq5klUD+0/I8QX8JGOh0CeQXEwRVv7CMm4k=
 X-Endpoint-Received: by B4 Relay for nacht@dxdmail.cc/20261004 with
@@ -108,31 +109,29 @@ Content-Transfer-Encoding: 7bit
 
 From: Nizat Mikayilli <nacht@dxdmail.cc>
 
-Enable the CDSP with the Samsung-signed firmware shipped on the device.
+The board has a fourth PM8550VS, at SID 2. Enable it like the other
+three.
 
 Signed-off-by: Nizat Mikayilli <nacht@dxdmail.cc>
 ---
- arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts b/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
-index 1e8bfafcc8b1..8e906b7e2af4 100644
+index 4dc0b7e29db3..8323eb837710 100644
 --- a/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
 +++ b/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
-@@ -714,6 +714,13 @@ &remoteproc_adsp {
- 	status = "okay";
+@@ -724,6 +724,10 @@ volume_up_n: volume-up-n-state {
+ 	};
  };
  
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/sm8550/Samsung/gts9wifi/cdsp.mbn",
-+			"qcom/sm8550/Samsung/gts9wifi/cdsp_dtb.mbn";
-+
++&pm8550vs_c {
 +	status = "okay";
 +};
 +
- &sdhc_2 {
- 	cd-gpios = <&pm8550_gpios 12 GPIO_ACTIVE_LOW>;
- 	pinctrl-0 = <&sdc2_default>, <&sdc2_card_det_n>;
+ &pm8550vs_d {
+ 	status = "okay";
+ };
 
 -- 
 2.56.1
