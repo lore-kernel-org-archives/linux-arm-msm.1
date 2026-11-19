@@ -1,112 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795076821;
-	b=yU8v/TF7kuWY/zh7f6uDFUfPs+RmAowG4t5eJPlz6ZNCeQ9pNoSzdF+1FlsQ7b9qBU+P
-	 xulkV4kn0sUZ7E052U2kq/IK04YoToIhb0/4AWrpLEjx/STXGUisHdA7igUafPzt3iDt4
-	 WSrGRBR7NVGD/q/soVAB/s7k/kW+epu4PvGu2PxlOe//EQlGw89wPPwLP2ho420mHMM3C
-	 ELv7+3GH+DuKIp7NUF3MHNnKC/vffyBD73aCsuUe+RUzS+QJ0Z4tHK6aHBAotIvtWpzXJ
-	 +QGzEN7lzuosqf1aL3cxfkw7yh+kgJ6yNAVz68RHy1XjvfTZMwpCMy+uTlUF6wXIgHw==
+	t=1795077104;
+	b=VdH25PsSQdJVGkvGhoHcpSr3taflWSfZCqoD04WaF+TXf6CRY0saObp1Zx75YMzTFtcl
+	 ldZgjNVikwv6P/h3WmaNBDh4tltiu5GDHMhZkKJ8bgLYEcYEwyrDOobO3B96O9bpvwQiS
+	 9xlSgxaGo2oO7VY7buP+rxPdPVDbQ4tp4ZaQgrn4ozuboNbAJWnFcg9LIDUlb4wmmN2sf
+	 sUZE9sL83d0FUx+mJ3wRGyExQjm88RL+FFiL7ZKbWr2PkWZS3DbNecaYWX25P1NZbst2d
+	 yjzxAoN4AwfpJu4JbP5cL6HfSjIVTZt7561CigbWcjKK1YDu7WQroMlJM38o2oPvMvw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795076821;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=H7EyAW8gIZSrszNFTN7k6+v3oo0t52OnzoPD2MAjtew=;
-	b=GYu7s7JZdpnZN5HcGrh2AGVHMNFixvoIqEaJr8GA6arOaR0F7vc3Nmd89x8T70qO4Cvg
-	 HmjQjmycA7CpzGgZrq6KqMwbmtVTdXYTiRY85e21Ni3QyKOysUMIKVU0bEdIsN+tUZYTe
-	 LvnDwcdjXuA37C7BOyV0P3ksn7RViQMKVatTObDsmiEuJD3wSggzTKO9LyTKfdpO5TQYP
-	 kl8Rakusz8oKYDq+Xd47ptwgybC3PcIepE/9mr91K95w8SyjwfDxAApfEdoWcsXVaHmqB
-	 PipJbT3P7HQgXH8D1FmMlhV4clRyogVi1gP3GvX2SlWVmDJA0DkH+MKg1xUdpHS5Jcw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795077104;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=X92Y8+q760KTTL4n4XSfmzYYpr3dLaACGp8eBo1xrHI=;
+	b=BJ669usDeFf8g4SDVjOXMEaoyB1Otlg+tvzCwK7yAgVDOAgYILujuIGLvMqe+y8m7Sb1
+	 kfDdBVKICzzt/dcHjDt83nkZrQF7WZ1ljGGwNk7wp5Vd85i8RTJzqvaIe2cpiQ8ayHoGM
+	 Hci1WRSUrrVmHO01R2Dvwrnet1U55iazBZCeSj02Nk0+vkZAmCc52P9OOdnT1AlphWVm3
+	 VDyu4TIRRA1pt9BBhqpdOx9MU2t+LJyAUsL/jnhD7niSnZ0vzhjzehgVDWXgsaEhb5KuT
+	 b1DY1vOR4EZT8gW4KBOSWbjRPM5lb5MRgcQIaP8+6BvVzxiW/X7qFyAmHvRfsXWzEiA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oUGjqceR;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="IhkFZBy/";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=c+1rV+RK;
+	arc=none smtp.remote-ip=74.125.82.175
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C04160A2619
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:27:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7C04160A2619
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42F6B606A324
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:31:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 42F6B606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oUGjqceR;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IhkFZBy/
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AJ6vQMF2671916
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:26:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	H7EyAW8gIZSrszNFTN7k6+v3oo0t52OnzoPD2MAjtew=; b=oUGjqceRv3pdtJfP
-	viq1yj4xZt8AJF5HtctmfYOqGmcstEHoGd/enIe0GPiO8MXHOZGZA7gpntwk1DWI
-	jBn8hJZ49msAelEQk3ZgJ/dyQdZU0zcGnQI1DgXVOySgyx7UudM05ZjOZqEd4lb3
-	MHWw+Jg6lCkW2ygE1Lq+9MiqNO234c3BOOSmQowJi0anVB42ieVOVXj8FJ+ZuwRp
-	/eoSM7kWzryAfRRsmdUPNkyH1VtzKNHDkbLMMhXA3ZYqitmfNzBH1jJRlmxnmjTX
-	5UB6g4PM7JCMPUDG84ilub7d7SxTRFujdwxxGoufrowH9kqsgz0SN55+p18WUuBP
-	ZbFHEw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1g9p3g1q-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:26:59 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f33438950so384657585a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 00:26:59 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=c+1rV+RK
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-382f4710a17so2637584eec.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 00:31:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795076819; x=1795681619; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795077103; x=1795681903; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=H7EyAW8gIZSrszNFTN7k6+v3oo0t52OnzoPD2MAjtew=;
-        b=IhkFZBy/HJeywvs4HmfHHTsUxMU++O0NrUrjUC+fNo85gwRUyTDTxIdhg6WvsxCwz7
-         J4LHFcgY/Y34ame+eej5NPkTVZtE2InACvcYjD/tn6bELEMtpHzfF62YovKMHxJ66Jzc
-         I1cHFp/22K2vpCWRd4HYHw8OxG6KYV2tEnElVfQ3wKbmoW+bkhnDHqQI8a8AAWmoHJt1
-         cUMcD+iXatVxcALvKaP8R5yXY5PEpn90OJ9rBRXXXzGFPMKrs3IQAol+vOtGmznzMHm3
-         jeKBGRwqAOP6Iq5woquC9REG1DtfvyNohb6xZTR3YA/HNv8fr1DHniqGx3ZSK6RvVgsG
-         pgZA==
+        bh=X92Y8+q760KTTL4n4XSfmzYYpr3dLaACGp8eBo1xrHI=;
+        b=c+1rV+RKKN6SbNMi1B1M4NaW+We6pueNCakuRcbRcuLyRELWSSfZSgnubRZ7OyyY4D
+         QAZdRUM1ksvv+Jr/e65lhjw/9Scg6jYw95KlT4C+Ok6RP6xvkge2CSDlzZndzekMLRqV
+         Y4BerCUC86P1up8ihTfLVfq/l3fvaI85aURXipGNh7684IbbI+Bhs0gRXOcTLmMklY3v
+         dC16gJupuBYulPHXkUg3msYQjTS74gfub38KqLZFh4ce6kMr76SByXuiJOzLLWAZpQOk
+         SwMCUAyUwlpI5ireY3x3hTbW4Fd6emQuB8xXjBuSkEHt4/UO8XX4ZU2AlwzUvUwxaLKB
+         UR9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795076819; x=1795681619;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=H7EyAW8gIZSrszNFTN7k6+v3oo0t52OnzoPD2MAjtew=;
-        b=RSY2ldEcJy/h5aUC57Y7rrJ13IRv0CYo7iEIV81cLSHksxcJmZbDoDLNAHCySQZSti
-         2B6d1oksfEKdO+2GVNXo24adXvH0zSyMxjcsVZ6EunUK3vEOpFkZG6bypjbcPPB5nCO9
-         FSVF3y4DMYT1wn3hVgxVlzo6m9yX0KB3hCObSGDqOLQkWP+YRfXlhXoxi6SH+sHrGv27
-         B1aWXeuWIF7rZxqECzaHh4CXPta0OZyNhkVwjVAcuN2MtoAwt/Mon8AX0HQBn3JK0TR5
-         qm9h3RLkK7J3lMC7Ws72P9FCnXNWAHpWSp15JArePyDP936URvrk7wHrm9nC36oajN28
-         hfeA==
-X-Gm-Message-State: APuU4Z/gRxwrzpY9AS9ZscQLUf0euJg5jDVSWO+t6wBjdpzCmuprDPrR
-	rVWFzr6jzA10vn29eBersAkIyqtdTomJXCog9ks5yvUy0H/KK86hlc1IFB5IQ0W6f9PFlqDD5CV
-	W11mlGp2l1WIQFlSO7QN3fB/jy+cx9hQ2kFU/+w7TYD2ieQZEBxDdam9GcjyoQl7iUJBH
-X-Gm-Gg: AYBFou2diSIBMCk37m2CNWKriBxtq10IVgM3f0N5KwnNnuRhAU/dXtpaAtv4E6mZhIk
-	HnGkTdLQa4ispa1VadF5PXrS+6JUXehSYnQcQEHXMLBB/jP3LtXETXIJJJWWkg7RXfhAdsRc1nE
-	5yXsWFY47OnB4/8KCuEhBavdfqE6PAgGrbK2jDu7jMGIcA8YB5XaFhdAHKai44roE95G45ydygF
-	OTEY9Ri6uAgEArNXxNGbvXdAv5i3diQQUwzoy16VLE/YGLXmk/GqFgeEoCRBQslPKWHZV/ES0m6
-	L4TLen8brIHROpFdrhRZrGm1UxYSOomQONdMXsb2yA61x23GgnG9DgS4H2+mWXHaHDPUIczDbyD
-	S+ZLY+dX5JkFgA8HmefUKTYkE4QuOxmUud7nsg3keJubwxfRpZXYInZnJ54L36YmSiHoHhnhSsv
-	j8T3dW9a+zcGEkuV/umrdjziY93h8fHKF1rztL
-X-Received: by 2002:a05:620a:6c18:b0:93c:a191:88fe with SMTP id af79cd13be357-949994af046mr819247885a.8.1795076818788;
-        Thu, 19 Nov 2026 00:26:58 -0800 (PST)
-X-Received: by 2002:a05:620a:6c18:b0:93c:a191:88fe with SMTP id af79cd13be357-949994af046mr819244585a.8.1795076818214;
-        Thu, 19 Nov 2026 00:26:58 -0800 (PST)
-Received: from yongmou2.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9499b721861sm388465185a.11.2026.11.19.00.26.53
+        d=1e100.net; s=20260707; t=1795077103; x=1795681903;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=X92Y8+q760KTTL4n4XSfmzYYpr3dLaACGp8eBo1xrHI=;
+        b=jo7PemM8bk7oqztONB2r97rJ1udIdSS/ePPl1Chvnq7T3GfprS4VFC0QqKYiEbLWxV
+         ONV/iq0ZlZrSWdqPyLcQhb/HgocFoSn+p1QH6a6BDtcyslZsF/io9Wlmq9Xsvnhltkgq
+         sdCU21fLdVMVkdcRVIKz4e11n4vdG+BUVOmWGACGkJjrdKuaPJsl2v0Ughg0xabrJSN1
+         tOMUfVStY3Jj+P3pIh77vatIAprgiPHQA3+qGbEcS7mHR7YHa2rsc6NSVKomiv27TeuL
+         ZjKHq3PsiSDRzbcBRQORo+qbGijaVl1OBkA3luvmhv0aHNrVCQtiJ5ZriYnaLBocY5Xm
+         OFuw==
+X-Forwarded-Encrypted: i=1; AL+hErFqR5XsX2uhzmFJGtwklLcDdEQ0Vt37jA5nzYkNEKUjdtdno44r0d9NoFRjmeFl0X2WHwK2tqQXm4v6OIEO@vger.kernel.org
+X-Gm-Message-State: APuU4Z9dRRE8sD5UHn3LNodNeGvEFrY72tV22pFnUenfTCfBf9khTtc5
+	z+B78x5zG3za4Y+lFb2YMP3xcjWJQ40foELlqx6WFRShLbe0spcDnmUo
+X-Gm-Gg: AZFdTZc9qa7tIxAuo9jpLnWN2q7FWxX0v92xv2slR5hWuOR2a4OwlEOV/ZiJwsS2ajy
+	miopQ/33d0f5SoOVbXZ17JQ45joyP/pcvvZwGZfHv5Pzw7fTaJNqFxTc1myohQyK82dv3s0Hlyi
+	IdnhjMMdSFx8AyMBtxP/wF75RYZTbXye7OCVI79quXEwvPknaaw44DArn7pENuoZP7jNd03yd5O
+	6qZx8BY2pFKb1xx36zy8kZiAfaPIFCTeisz+w9yDukQ8/uZZZD+n+eklRt92OPcQfWGbGnuTr84
+	l4jo/2GJA2JrlUKXas0n2kWcmLuXuRVw9mr+DhDGNd2d2360hDEe86sggqdTxvzTzDbIzXCMiW7
+	PXwxCJn644AL42sYJBn+PESV2bdfqJByLhri9HXvdhlf6w6clDFvuDimceu12LpU1Uq/qFWIpMK
+	k53Lss3enrOTqy7upYH8s3Geg5nhaukq4c2YWuV+vDSTX5NPhuaICi2oKgHB8BNP4rkLzhiCNjt
+	l7TabAKTsS4d0mcVbwCl9V7jiC768M95gy42b5u42wP+o45a5lB8M/s2J5nDQN4bvr1hfK0s97Z
+	v86PWQEMnrPkXDc09DB7EuJeY/5uNfwU2O9VdXtUbnkmCRRqb1YIK4q6J9HtDmgn5Gr7ta19nXE
+	TMlpQQwWU5ocPe56SgArc5xrtvqMAUaBI/xts7ogLNOsWXfY=
+X-Received: by 2002:a05:693c:62ce:b0:384:7b5b:e1d4 with SMTP id 5a478bee46e88-3847b5be8fcmr703529eec.17.1795077103060;
+        Thu, 19 Nov 2026 00:31:43 -0800 (PST)
+Received: from lwq-server.tail118c18.ts.net ([74.176.208.23])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a63054ddsm16553792eec.4.2026.11.19.00.31.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 00:26:57 -0800 (PST)
-From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-Date: Thu, 19 Nov 2026 16:24:31 +0800
-Subject: [PATCH v9 29/29] soc: qcom: pmic-glink-altmode: skip retimer reset
- on DP IRQ
+        Thu, 19 Nov 2026 00:31:42 -0800 (PST)
+From: Yaohan Li <shunsheng1218@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Sandy Huang <hjc@rock-chips.com>,
+	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: [RFC PATCH v2 1/2] drm/msm: release the cursor flip work before the KMS is torn down
+Date: Thu, 19 Nov 2026 16:31:32 +0800
+Message-Id: <20261119083133.3437277-1-shunsheng1218@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20261119023604.1495603-1-shunsheng1218@gmail.com>
+References: <20261119023604.1495603-1-shunsheng1218@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,169 +115,253 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261119-msm-dp-mst-v9-29-ca61be4edfc3@oss.qualcomm.com>
-References: <20261119-msm-dp-mst-v9-0-ca61be4edfc3@oss.qualcomm.com>
-In-Reply-To: <20261119-msm-dp-mst-v9-0-ca61be4edfc3@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Jessica Zhang <jesszhan0024@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795076662; l=4168;
- i=yongxing.mou@oss.qualcomm.com; s=20250910; h=from:subject:message-id;
- bh=TmXXqL4+QkkVPUU1CXlnanGogNfSgc71YZHywrBoGyI=;
- b=Q6I/JovIIdyQKcMt76CYQBhCV4JoyljJDor7HDEc2HiMNCQP6UyyM96jcJoOWA0eC0gdcjaRM
- HACmEwkMUp+DL95zkJnPY4uvoH+mfs0sYxtG+8bDNjtQjC26l8aCSQA
-X-Developer-Key: i=yongxing.mou@oss.qualcomm.com; a=ed25519;
- pk=rAy5J1eP+V7OXqH5FJ7ngMCtUrnHhut30ZTldOj52UM=
-X-Proofpoint-ORIG-GUID: 79ixIBd-Dt0ASdJfHya-VgXIC05Vewvv
-X-Authority-Analysis: v=2.4 cv=LooHWXdc c=1 sm=1 tr=0 ts=6afeb2d3 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=rzLW7fUJNTnmvIt_Je4A:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX9A/+w3jHtE1I
- kPajgxqrE2h3khc44tpG671MOoYoWLzDYgHOf9FGw6y3lYL41X/ImJDq1ndeC322SMr4bGpM9yL
- JmcrAO0okU1o0Y6WnQVqi9n4YvpMcdCttaWpgK8vU0NcLWj3xz5vR/FXjQG0Cgj8L4TFcfdpg6T
- zRgcqazZO3tXfyfHewV0wcbsClKurAOgJTiM4oIDEexjB/i2bZfbdlp3lEvTMAL5/JlWR3UKaNh
- IMqiAAuhszffqmG0MU5t5Nq2rWvcXu6z4sG01yTdzCP40pVW4zspjYCIU82/PbbtTw3eBc03NdZ
- Zs2JWCPDzOvKX/eCSPY+QGYUlnxqSgwHSrgXcoOJisvvlLBwA5Qgr9Uo7xNIfIjIK/9yFFKFejq
- YVKLc+QO0aU06ZKj9SegglCGB3W04UZoOwQmVX7MBSiEzQIuXeBuqRRYYfW0sK15VIrjevmCgoM
- OwHbNSx2uwjkHEIRY4A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX6DTnOzVcF4JJ
- ESz4O/84ktl5kAeRaE6TCIXY/H13yy16MebEalKBxUaGctINiOLL8LMR/pd8tAxW+dIsm3ppR0j
- bjbTsC79/Pw+38wWz+GFTVmLYym2cnY=
-X-Proofpoint-GUID: 79ixIBd-Dt0ASdJfHya-VgXIC05Vewvv
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 malwarescore=0 impostorscore=0 phishscore=0
- adultscore=0 spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611190033
+Content-Transfer-Encoding: 8bit
 
-A DP HPD IRQ reports a sink-side event and does not imply a Type-C
-routing change. Reprogramming the retimer for every IRQ can reset or
-disturb its datapath while link training or video transmission is in
-progress, causing intermittent DisplayPort link failures.
+mdp4 and mdp5 queue the BO of every cursor update on a drm_flip_work and
+release it from unref_cursor_worker() once a vblank interrupt has
+committed it.  The work is cleaned up by a DRM-managed action, so it
+runs at the final drm_dev_put(), while msm_drm_uninit() destroys the KMS
+and its VM in msm_drm_kms_uninit() and only then drops the reference.
 
-Cache the successfully programmed DP retimer mode, HPD level, and
-orientation. When an IRQ arrives with the same state, leave the retimer
-untouched while continuing to notify DRM so MST sink IRQ handling is
-preserved. Invalidate the cache on non-DP modes and after a failed retimer
-update so later DP transitions are always configured.
+A cursor update that was queued but never committed - no vblank
+interrupt after the last atomic commit - is still in the flip work at
+teardown.  Releasing it needs the VM that unref_cursor_worker() reads
+through the KMS, so the cleanup has to run before the KMS goes away and
+not after.
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+Run the cleanup from the KMS destroy path, which is after the interrupts
+and the KMS workqueue have been stopped and before drm_gpuvm_put(), and
+remove the managed action so that it cannot run a second time.  The
+action is only released for a CRTC that registered it: a partially
+failed init can leave CRTCs behind that never added one.
+
+Guard the new CRTC traversal when the KMS has not got its drm_device yet:
+the teardown can run on a partly initialised KMS.  This does not make
+mdp4_destroy() safe for every such state - it dereferences mdp4_kms->dev
+before the loop - and the separate KMS-init error handling series is what
+reworks that lifecycle.
+
+This prepares for draining the queued tasks in drm_flip_work_cleanup():
+running them from the managed action, after the KMS and its VM are gone,
+would dereference the freed KMS.
+
+Signed-off-by: Yaohan Li <shunsheng1218@gmail.com>
+
 ---
- drivers/soc/qcom/pmic_glink_altmode.c | 38 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 37 insertions(+), 1 deletion(-)
+Changes in v2:
+  - New patch.  drm_flip_work_cleanup() is about to run the tasks that are
+    still queued, and for mdp4/mdp5 those tasks unpin a cursor BO through
+    the KMS and its VM, which msm_drm_kms_uninit() destroys long before the
+    DRM-managed action would run.  Release the action from the KMS destroy
+    path, before drm_gpuvm_put(), instead.  Reported by Sashiko.
+  - Only walk the CRTCs when the KMS already has its drm_device; this
+    covers the new traversal only.  The existing partial-initialisation
+    path in mdp4_destroy() still dereferences mdp4_kms->dev before the loop
+    and is left to the in-flight "drm/msm: fix the error handling of the
+    KMS init" series, which is not merged in msm-next yet.
+  - Checked as a series: both patches apply in order on msm-next
+    (d024361c631b) and on drm-misc-next (fac7a5f16230).
+Prepared against v7.4-rc1-1969-g666539eecdf4.
 
-diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
-index e903d4910e9c..5ae554dc01d9 100644
---- a/drivers/soc/qcom/pmic_glink_altmode.c
-+++ b/drivers/soc/qcom/pmic_glink_altmode.c
-@@ -121,6 +121,12 @@ struct pmic_glink_altmode_port {
- 	u8 hpd_state;
- 	u8 hpd_irq;
- 	u8 mux_ctrl;
+Compile tested only: arm64 with aarch64-linux-gnu-gcc 11.4
+and CONFIG_DRM_MSM=m.  The affected hardware was not available, so the
+teardown path was not exercised and no fault or race injection was run.
+
+Checked against msm-next (d024361c631b): the patch applies there, as part of
+the series it also applies on drm-misc-next (fac7a5f16230), and Dmitry
+Baryshkov's "drm/msm: fix the error handling of the KMS init" series is not
+merged yet, so mdp4_destroy() still dereferences mdp4_kms->dev before the
+new loop.  The guard added here covers the new CRTC traversal only; the
+existing partial-initialisation path keeps its current behaviour and is left
+to that series.
+
+AI assistance: the analysis, the change and its review notes were
+prepared with Claude (Anthropic) as a coding assistant.  The author
+reviewed the reasoning and takes responsibility for the content.
+---
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c | 26 ++++++++++++++++++++++
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c  | 13 +++++++++++
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h  |  1 +
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c | 27 +++++++++++++++++++++++
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c  | 13 +++++++++++
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h  |  1 +
+ 6 files changed, 81 insertions(+)
+
+diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
+index 93050b3c3548c..9767d9aef43d6 100644
+--- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
++++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
+@@ -54,6 +54,9 @@ struct mdp4_crtc {
+ 	/* for unref'ing cursor bo's after scanout completes: */
+ 	struct drm_flip_work unref_cursor_work;
+ 
++	/* the flip cleanup action is registered on the DRM device */
++	bool flip_cleanup_registered;
 +
-+	/* Last DP state successfully programmed into the retimer. */
-+	bool retimer_dp_valid;
-+	u8 retimer_dp_mode;
-+	bool retimer_dp_hpd_state;
-+	enum typec_orientation retimer_dp_orientation;
+ 	struct mdp_irq vblank;
+ 	struct mdp_irq err;
  };
- 
- #define work_to_altmode(w) container_of((w), struct pmic_glink_altmode, enable_work)
-@@ -180,6 +186,7 @@ static void pmic_glink_altmode_enable_dp(struct pmic_glink_altmode *altmode,
- 					 bool hpd_irq)
- {
- 	struct typec_displayport_data dp_data = {};
-+	bool retimer_state_unchanged;
- 	int ret;
- 
- 	dp_data.status = DP_STATUS_ENABLED;
-@@ -200,10 +207,31 @@ static void pmic_glink_altmode_enable_dp(struct pmic_glink_altmode *altmode,
- 	port->retimer_state.alt = &port->dp_alt;
- 	port->retimer_state.data = &dp_data;
- 	port->retimer_state.mode = TYPEC_MODAL_STATE(mode);
-+	retimer_state_unchanged = port->retimer_dp_valid &&
-+		port->retimer_dp_mode == mode &&
-+		port->retimer_dp_hpd_state == hpd_state &&
-+		port->retimer_dp_orientation == port->orientation;
-+
-+	/*
-+	 * An HPD IRQ is a sink-side DP interrupt, not a Type-C routing change.
-+	 * Avoid rewriting an already configured retimer while DP link training or
-+	 * video transmission is in progress. The DRM HPD IRQ notification below
-+	 * is deliberately still delivered.
-+	 */
-+	if (hpd_irq && retimer_state_unchanged)
-+		return;
- 
- 	ret = typec_retimer_set(port->typec_retimer, &port->retimer_state);
--	if (ret)
-+	if (ret) {
-+		/* A failed write may have left the retimer only partly configured. */
-+		port->retimer_dp_valid = false;
- 		dev_err(altmode->dev, "failed to setup retimer to DP: %d\n", ret);
-+	} else {
-+		port->retimer_dp_valid = true;
-+		port->retimer_dp_mode = mode;
-+		port->retimer_dp_hpd_state = hpd_state;
-+		port->retimer_dp_orientation = port->orientation;
-+	}
+@@ -622,6 +625,27 @@ static void mdp4_crtc_flip_cleanup(struct drm_device *dev, void *ptr)
+ 	drm_flip_work_cleanup(&mdp4_crtc->unref_cursor_work);
  }
  
- static void pmic_glink_altmode_enable_tbt(struct pmic_glink_altmode *altmode,
-@@ -214,6 +242,8 @@ static void pmic_glink_altmode_enable_tbt(struct pmic_glink_altmode *altmode,
- 	u32 cable_speed;
- 	int ret;
- 
-+	port->retimer_dp_valid = false;
++/*
++ * Run the cursor flip cleanup now instead of at the final drm_dev_put().
++ * msm_drm_kms_uninit() destroys the KMS and its VM long before that, and
++ * unref_cursor_worker() needs both to release the BOs of the cursor updates
++ * that were queued but never committed by a vblank interrupt.
++ */
++void mdp4_crtc_release_flip_work(struct drm_crtc *crtc)
++{
++	struct mdp4_crtc *mdp4_crtc;
 +
- 	/* Device Discover Mode VDO */
- 	tbt_data.device_mode = TBT_MODE;
- 	tbt_data.device_mode |= TBT_SET_ADAPTER(TBT_ADAPTER_TBT3);
-@@ -271,6 +301,8 @@ static void pmic_glink_altmode_enable_usb4(struct pmic_glink_altmode *altmode,
- 	struct enter_usb_data data = {};
- 	int ret;
- 
-+	port->retimer_dp_valid = false;
++	if (crtc->funcs != &mdp4_crtc_funcs)
++		return;
 +
- 	data.eudo = FIELD_PREP(EUDO_USB_MODE_MASK, EUDO_USB_MODE_USB4);
++	mdp4_crtc = to_mdp4_crtc(crtc);
++	if (!mdp4_crtc->flip_cleanup_registered)
++		return;
++
++	mdp4_crtc->flip_cleanup_registered = false;
++	drmm_release_action(crtc->dev, mdp4_crtc_flip_cleanup, mdp4_crtc);
++}
++
+ /* initialize crtc */
+ struct drm_crtc *mdp4_crtc_init(struct drm_device *dev,
+ 		struct drm_plane *plane, int ovlp_id,
+@@ -659,6 +683,8 @@ struct drm_crtc *mdp4_crtc_init(struct drm_device *dev,
+ 	if (ret)
+ 		return ERR_PTR(ret);
  
- 	if (tbt->usb_speed == 0) {
-@@ -307,6 +339,8 @@ static void pmic_glink_altmode_enable_usb(struct pmic_glink_altmode *altmode,
++	mdp4_crtc->flip_cleanup_registered = true;
++
+ 	drm_crtc_helper_add(crtc, &mdp4_crtc_helper_funcs);
+ 
+ 	return crtc;
+diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
+index ab7b62381685f..3fd528eeff0e3 100644
+--- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
++++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
+@@ -136,6 +136,19 @@ static void mdp4_destroy(struct msm_kms *kms)
  {
- 	int ret;
- 
-+	port->retimer_dp_valid = false;
+ 	struct mdp4_kms *mdp4_kms = to_mdp4_kms(to_mdp_kms(kms));
+ 	struct device *dev = mdp4_kms->dev->dev;
++	struct drm_crtc *crtc;
 +
- 	port->state.alt = NULL;
- 	port->state.data = NULL;
- 	port->state.mode = TYPEC_STATE_USB;
-@@ -329,6 +363,8 @@ static void pmic_glink_altmode_safe(struct pmic_glink_altmode *altmode,
++	/*
++	 * Release the cursor flip work while the VM is still alive.  The
++	 * cleanup is registered as a DRM-managed action, so it would only run
++	 * at the final drm_dev_put(), long after drm_gpuvm_put() below has
++	 * destroyed the VM that unref_cursor_worker() needs.  The interrupts
++	 * and the KMS workqueue have been stopped at this point, so no new
++	 * cursor update can be queued any more.
++	 */
++	if (mdp4_kms->dev)
++		drm_for_each_crtc(crtc, mdp4_kms->dev)
++			mdp4_crtc_release_flip_work(crtc);
+ 
+ 	if (mdp4_kms->blank_cursor_iova)
+ 		msm_gem_unpin_iova(mdp4_kms->blank_cursor_bo, kms->vm);
+diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
+index 06458d4ee48c9..48cb2b9d896b8 100644
+--- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
++++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
+@@ -184,6 +184,7 @@ uint32_t mdp4_crtc_vblank(struct drm_crtc *crtc);
+ void mdp4_crtc_set_config(struct drm_crtc *crtc, uint32_t config);
+ void mdp4_crtc_set_intf(struct drm_crtc *crtc, enum mdp4_intf intf, int mixer);
+ void mdp4_crtc_wait_for_commit_done(struct drm_crtc *crtc);
++void mdp4_crtc_release_flip_work(struct drm_crtc *crtc);
+ struct drm_crtc *mdp4_crtc_init(struct drm_device *dev,
+ 		struct drm_plane *plane, int ovlp_id,
+ 		enum mdp4_dma dma_id);
+diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c
+index 1e1fff37380c7..2d457311a3ef5 100644
+--- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c
++++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c
+@@ -53,6 +53,9 @@ struct mdp5_crtc {
+ 
+ 	bool lm_cursor_enabled;
+ 
++	/* the flip cleanup action is registered on the DRM device */
++	bool flip_cleanup_registered;
++
+ 	struct {
+ 		/* protect REG_MDP5_LM_CURSOR* registers and cursor scanout_bo*/
+ 		spinlock_t lock;
+@@ -1316,6 +1319,28 @@ void mdp5_crtc_wait_for_commit_done(struct drm_crtc *crtc)
+ }
+ 
+ /* initialize crtc */
++/*
++ * Run the cursor flip cleanup now instead of at the final drm_dev_put().
++ * msm_drm_kms_uninit() destroys the KMS and its VM long before that, and
++ * unref_cursor_worker() needs both to release the BOs of the cursor updates
++ * that were queued but never committed by a vblank interrupt.
++ */
++void mdp5_crtc_release_flip_work(struct drm_crtc *crtc)
++{
++	struct mdp5_crtc *mdp5_crtc;
++
++	if (crtc->funcs != &mdp5_crtc_funcs &&
++	    crtc->funcs != &mdp5_crtc_no_lm_cursor_funcs)
++		return;
++
++	mdp5_crtc = to_mdp5_crtc(crtc);
++	if (!mdp5_crtc->flip_cleanup_registered)
++		return;
++
++	mdp5_crtc->flip_cleanup_registered = false;
++	drmm_release_action(crtc->dev, mdp5_crtc_flip_cleanup, mdp5_crtc);
++}
++
+ struct drm_crtc *mdp5_crtc_init(struct drm_device *dev,
+ 				struct drm_plane *plane,
+ 				struct drm_plane *cursor_plane, int id)
+@@ -1353,6 +1378,8 @@ struct drm_crtc *mdp5_crtc_init(struct drm_device *dev,
+ 	if (ret)
+ 		return ERR_PTR(ret);
+ 
++	mdp5_crtc->flip_cleanup_registered = true;
++
+ 	drm_crtc_helper_add(crtc, &mdp5_crtc_helper_funcs);
+ 
+ 	return crtc;
+diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
+index ff6751b2ae626..834faf9c886ad 100644
+--- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
++++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
+@@ -201,6 +201,19 @@ static void mdp5_destroy(struct mdp5_kms *mdp5_kms);
+ static void mdp5_kms_destroy(struct msm_kms *kms)
  {
- 	int ret;
- 
-+	port->retimer_dp_valid = false;
+ 	struct mdp5_kms *mdp5_kms = to_mdp5_kms(to_mdp_kms(kms));
++	struct drm_crtc *crtc;
 +
- 	port->state.alt = NULL;
- 	port->state.data = NULL;
- 	port->state.mode = TYPEC_STATE_SAFE;
-
++	/*
++	 * Release the cursor flip work while the VM is still alive.  The
++	 * cleanup is registered as a DRM-managed action, so it would only run
++	 * at the final drm_dev_put(), long after drm_gpuvm_put() below has
++	 * destroyed the VM that unref_cursor_worker() needs.  The interrupts
++	 * and the KMS workqueue have been stopped at this point, so no new
++	 * cursor update can be queued any more.
++	 */
++	if (mdp5_kms->dev)
++		drm_for_each_crtc(crtc, mdp5_kms->dev)
++			mdp5_crtc_release_flip_work(crtc);
+ 
+ 	if (kms->vm) {
+ 		struct msm_mmu *mmu = to_msm_vm(kms->vm)->mmu;
+diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
+index 7bf2172fce0bd..b8b8c23b58500 100644
+--- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
++++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
+@@ -284,6 +284,7 @@ struct mdp5_hw_mixer *mdp5_crtc_get_mixer(struct drm_crtc *crtc);
+ struct mdp5_pipeline *mdp5_crtc_get_pipeline(struct drm_crtc *crtc);
+ void mdp5_crtc_set_pipeline(struct drm_crtc *crtc);
+ void mdp5_crtc_wait_for_commit_done(struct drm_crtc *crtc);
++void mdp5_crtc_release_flip_work(struct drm_crtc *crtc);
+ struct drm_crtc *mdp5_crtc_init(struct drm_device *dev,
+ 				struct drm_plane *plane,
+ 				struct drm_plane *cursor_plane, int id);
 -- 
-2.43.0
+2.34.1
 
