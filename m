@@ -1,79 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=fail;
-	t=1795128015;
-	b=fwB39Z+XbkV8pzlA99/BPwyLMb3Mai7dJLwt3T5OEDYmKY02JVzwz/887EOIk6ooI+bI
-	 Sr6NdOfgIQO3L73TYSnMDQ1lK7usbu8g9vcr5okBURw9Chtt1Ng+2ZsHNW5ojRp6L9/3v
-	 o+ZeX3BXptFVAH/tsVJw5lEfoKwyGwCp+gJPnvL9MbWfg1dKhx2ZKYwtdX10R56hSU5t3
-	 1l1tpSsGtpNeBn/lgR/P+jcUTHtWlXhqfCe5F6yesX4kL2Ny7Pmh0J7L/OTO4o3oAar6W
-	 lBaMwWgauoPImedEW6eluVQ50ej3udzY0TOSQ5uPHA5vyKQ1kfK1aTod1QR+Qk1tbMA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795128015;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=C8yvg5B5ossZhG7+FrTpUBFRY56QiJDsKLjWqMPJdQM=;
-	b=RH5Hw3m9VK6nT7qdnCLa52NvHjx9iq+R8iSkuVU1/UPZttEc3+pMgbISV8JFFWWBaNMQ
-	 sK3jF06eO/ycFII/Zx56gPKcfCoD0VITS1eyRS76qEYFFp1npYTdTMJBIx4duugAGPtod
-	 0V39M39qo/Ol01+WtEtE+Ybs5LiBaBRV1T0RcP+a2Z68tHGzeg1Ak1Ldp6LTT4vc37o6h
-	 86uGYOJ/DVoW3RTHCuJiEE/3Oaqr7e19cwwB8TEuauwAlMzG5glbrUD70PAS7vfbJkmM6
-	 oYjP07u/I0db+85aY/kni3SrvRliPrk06hM7bELNCjmrkRQP4HKOZnn1ddQJk1SVoBw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GHO8+qXA;
-	arc=fail smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795129731;
+	b=onYu42PXAe98kWkgmmkPl0cj9Nv8+mUFgLBwNyetq73MkgNuzG5vNE14/Am7r/QDCX5b
+	 omgan7SDSsRB7SK7wWsvnDHCS07H2Gp1N8vJrE82uoCXuI/7aXlb6gjdAFzPo+n8wAoVO
+	 d07Gs8BoD9ml4/c+XceS9JVXRx+ZlrG215kBewwwnwQNnJD5i/Bdg2Oxbq/Th4PoNqN4U
+	 iwaH4Z/xLEVtEiD4lYJ+9L491O+gYqcSHmYLks1Fr7M6FJdNlJmXHcbTqbUX5meLUP9XU
+	 YLZ5cwv6l+ga5JcZsd65yTty1fVT24BetJgOA0K16ZTknYSu7xZOjtsU2Ex/1h5PArA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795129731;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Cookie;
+	bh=wEZkBab7UqRfMrX7O5m1ZmNVlSf+C6CU+1tcpFcU1rY=;
+	b=m3pW0lm7xZ15XjoU9TJl3b9x3h2mjngh9dDanyj8q28/VZ9yhQUjrKEfV4ChyfyyNmgq
+	 zrCbN41QW8gX0WQTmD93p3TL1YGFHUkBPCrMbjp2Ne80j3eU203uYT0s+j7nnFWgLXC4k
+	 n9A/D0moj19JMFQBAHufeEV5tGGYEaq3Jqmv2f4klZ2QlLiQ0obPd/Bes1WLeOeemrisc
+	 W1r5Ku+j7w+04M9Xry/bqrBNLY5kQJtWLGd9O8sMZGBVz/QLSJxbYzIPVh5H6aUQxPCjo
+	 IenEM9aXUQ6XGb8cC6KJqzuqLgU1Fg/Oy0DNN6kQAfBux0R891VsgtCLHjfq0VnLtdw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Aog1mzOk;
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71A20606A333;
-	Thu, 19 Nov 2026 22:40:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A198606A326;
+	Thu, 19 Nov 2026 23:08:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GHO8+qXA
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795128015;
-	b=bY1Bh2GTUMmla9I03Am+s92/S4rd/jFQIe3tcv3IneqJOaQJOMN1ttmbqTOb05OMDLy2
-	 ac1gTcCxbFj/7s8Frgv8RQ+PmyYloqPyVWlSDZ+0F/2MQDfRTFVU+qSuUKFRJEF9oBHJ4
-	 3HAN0owXOwF+y/KwGhUbxU7gno7qegco9Q6M4yRBs28MTn0jjtAjGWkVx45iNh9DWEx7f
-	 UXehmOggFeU4XlLl8tybe9xzexCpV46/6msNFr2mrzTal9nmYlgK9Ld9ik+M8FpIblLqD
-	 q5Psun9UxvY88AQzsSpuMZDTBt4MGdfUaGPphKD0yiH6pO+6RVm4zcC5PLgfmN1UB9A==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795128015;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=C8yvg5B5ossZhG7+FrTpUBFRY56QiJDsKLjWqMPJdQM=;
-	b=DmU4C0fAHYyonL6GUSv+Cbt8NnHUrgPg9U7Cdr58k5bJyHp4CViEcV+wy6WdlW2pn0Gj
-	 Il0Y+ozWrQ6OWM2+OxjDkua0ZVMp+4Rgt+Bf1TyNXCxK9EdEMgVF8wTRhRlqfcXxh1n3X
-	 nQVGDxlrtK+2fziU9+Wp+LjZ8b0GmnfIFs2JLMu1iCHTbvSCRePKcGJslPTNxdO4IfnFl
-	 cZbZWF/F0mE8MW35wZo2dcIVy1qihSw+Vq1uULOkkPxDnUEa3NpES3t2VIXQwtZUjFqru
-	 ooiWI7d0rculBgKPT+ShsOBgZF1znlKOpy+ARKkLROLVZs54V0rT9XED10kHrSdfg7g==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 63DA41F000CA;
-	Thu, 19 Nov 2026 22:40:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Aog1mzOk
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2B1C1F000C4;
+	Thu, 19 Nov 2026 23:08:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795128015;
-	bh=C8yvg5B5ossZhG7+FrTpUBFRY56QiJDsKLjWqMPJdQM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=GHO8+qXA0gJCpFCbsnBB6A/Ie7hKMnMLOLA5297ZXSRjocy+Y98CXOgk6VOwcNxbZ
-	 RmvnDBaQ23b3niOZq05Qh/5MHF7Rio5eF89AmquXWcVAs81WWDrcAVN21GA/hEUd8C
-	 IFuldnxBxyqhKP1VlEvE2ZZ5NE3l35yCGXCsk7xIkb6BKGJCVWM4X4I4avZZlwuJyz
-	 n4xp848PEEiNzWuOsbU1CwJ24Ga8Ud44W6s22PQwU7Tb13MVlTC1g/kvqMnVf+JqTI
-	 Ghot2hL/lTyYT/NGVkQDjZRkeqzfENZ25EbqV3iFTeVNbkKhmFuO8D8LrUOOZrlDxj
-	 zwFQqTQUR5i/w==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id E6161422D0;
-	Thu, 19 Nov 2026 22:40:13 +0000 (UTC)
-From: Nizat Mikayilli via B4 Relay <devnull+nacht.dxdmail.cc@kernel.org>
-Date: Thu, 19 Nov 2026 23:40:06 +0100
-Subject: [PATCH 3/6] arm64: dts: qcom: sm8550-samsung-gts9wifi: Add rear
- flash LED
+	s=k20260515; t=1795129731;
+	bh=wEZkBab7UqRfMrX7O5m1ZmNVlSf+C6CU+1tcpFcU1rY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Aog1mzOkqQ7jjJze7fklA8q3RYQyFc/V/VGL2lGoDxtnIEvuRiN1jtsoDOe3JR1TF
+	 rVMlxWqL7l+83figGswkTV59u9kYatrwfuKm1GshDpR5KWrRUfVg2EEV3Wz60NTYwl
+	 jcOHCbXM3YXCXQF/8HW0iZqbmVSHlYdW95XbbDwyzpGJPZpusVjHJ4Fw5EoPN3aJNb
+	 Rny2BGnqhQtv3sTwoXa3whMioqYCykBKgAYtakYLsf3tJPDsCOnPhVx3pCjlz6jsr1
+	 N8faTCTvcs++TO2e0wEnJRgfmftOoIsqgybQ/iL+p7ig+h9GHz3qDJbE4VEUY+zPYo
+	 PsDcQYtr5IwIA==
+Date: Thu, 19 Nov 2026 23:08:44 +0000
+From: Mark Brown <broonie@kernel.org>
+To: Mohit Sharma <mohit.sharma@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
+	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/4] dt-bindings: sound: qcom,q6apm-dai: allow Shikra
+ compatible
+Message-ID: <edf0e84b-9512-4fcb-8ca9-ada287d2a00d@sirena.org.uk>
+References: <20261119164705.1594066-1-mohit.sharma@oss.qualcomm.com>
+ <20261119164705.1594066-2-mohit.sharma@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,76 +72,42 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261119-b4-gts9wifi-followups-v1-3-2e2388589a62@dxdmail.cc>
-References: <20261119-b4-gts9wifi-followups-v1-0-2e2388589a62@dxdmail.cc>
-In-Reply-To: <20261119-b4-gts9wifi-followups-v1-0-2e2388589a62@dxdmail.cc>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Nizat Mikayilli <nacht@dxdmail.cc>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795128013; l=1422;
- i=nacht@dxdmail.cc; s=20261004; h=from:subject:message-id;
- bh=LklzicKTYQYo/JFeFrkMHKE6fg9/z8CBkJFyC8WJ7Fk=;
- b=6Kv44Z130PJiYrpvk/y2vkSC6hhyyhQTge28cEelavFUk++WK/ZJBmVPgRXJtVINxxaktapjs
- 69mp3pCCkzbD+ytbFLxOsGflWTwKQZbcvnGpDhhnwzwXTx7kzFxLdZu
-X-Developer-Key: i=nacht@dxdmail.cc; a=ed25519;
- pk=Kay3P3pOJq5klUD+0/I8QX8JGOh0CeQXEwRVv7CMm4k=
-X-Endpoint-Received: by B4 Relay for nacht@dxdmail.cc/20261004 with
- auth_id=1111
-X-Original-From: Nizat Mikayilli <nacht@dxdmail.cc>
-Reply-To: nacht@dxdmail.cc
-Content-Transfer-Encoding: 7bit
-
-From: Nizat Mikayilli <nacht@dxdmail.cc>
-
-The rear flash is a white LED driven by the first two channels of the
-PM8550 flash module. The flash current and timeout limits are those of
-the vendor kernel, and the torch current is limited to 500 mA as on
-SM8550 QRD and Xperia 1 V.
-
-Signed-off-by: Nizat Mikayilli <nacht@dxdmail.cc>
----
- arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts b/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
-index 3832ea0deb46..ea69d161e6b6 100644
---- a/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8550-samsung-gts9wifi.dts
-@@ -11,6 +11,7 @@
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/leds/common.h>
- #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- #include "sm8550.dtsi"
-@@ -641,6 +642,19 @@ wifi@0 {
- 	};
- };
- 
-+&pm8550_flash {
-+	status = "okay";
-+
-+	led-0 {
-+		function = LED_FUNCTION_FLASH;
-+		color = <LED_COLOR_ID_WHITE>;
-+		led-sources = <1>, <2>;
-+		led-max-microamp = <500000>;
-+		flash-max-microamp = <2000000>;
-+		flash-max-timeout-us = <1280000>;
-+	};
-+};
-+
- &pm8550_gpios {
- 	sdc2_card_det_n: sdc2-card-det-state {
- 		pins = "gpio12";
-
--- 
-2.56.1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="IUg61mMA2sBAk5Yq"
+Content-Disposition: inline
+In-Reply-To: <20261119164705.1594066-2-mohit.sharma@oss.qualcomm.com>
+X-Cookie: I'm into SOFTWARE!
 
 
+--IUg61mMA2sBAk5Yq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Thu, Nov 19, 2026 at 10:17:02PM +0530, Mohit Sharma wrote:
+> Shikra's q6apm DAI needs a SoC-specific compatible so that the Qualcomm
+> SMMU implementation can select the identity domain required by its
+> firmware ABI.  The ASoC driver continues to bind using the generic
+> fallback compatible.
+
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
+
+--IUg61mMA2sBAk5Yq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmr/gXsACgkQJNaLcl1U
+h9DLegf8Dmpq6RqPrhHE1XLwNIHftQu0DFDGB1QevWyLOXMc+yCPYPFwtNjtCP41
+/iRlczHbACudNwezzaxEiZ/NFXHV4PUWctEzx5LROtVcpDAgOJMIRtYgWTNixBKP
+6ZwVa76xyyDTmVRKgzGxTn4tJdwSHi2KFVTHT/FRktaQHUUpbbVDcqHZ84eMKskG
+HamZ5V8UEypMC2xZXpGh82IobL2yhOjkTG3gQQlJT5xodnWg075N+II3lGIv1a1a
+QZGP1LbjEy75eyXuXqkxphAqZyagRGXCvS26O9++t3D2gK6nqaJ0QRtaUb+MvYZB
+B99IzWATW9svq8SLEUNiiMpbOKZPsA==
+=0Oos
+-----END PGP SIGNATURE-----
+
+--IUg61mMA2sBAk5Yq--
