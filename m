@@ -1,74 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795102317;
-	b=D4TeoaRer1SP6TTm5EMSTfnrPHuAZpeUDs5HnRkHLmIVkUPNJxCsCksRuYL5rqwJJ610
-	 2NoxIwSXxsMRKD0kjcljPh2x8vhTLXwNPKlMrAKjcSW4rfzyh3X9Pwod/oL/ZARFxHI5W
-	 7FUEGIr7xAqOcwBIZrG7S4e122S886e8GZ9DN5Qsgv5JR6Nhaw+oNZeyCGaUmuRxu72m9
-	 OL/Kq/n7e6H/Z/mgmo7oxSwEM1E8jLSszrLDCCgZTwhB6ebcvtqkLDscWEGTcmhGcm7UN
-	 KZGG5zoInsG8UdkrpoNgFqX8JvXRDB/QiH/XRDb1XQ0YyOfi2nPy6ule7oa1OpaSvzQ==
+	t=1795102380;
+	b=ONjcrqLLUCIhN+3mXOgGIV6cK//4sSSB+C/I2jmg/++bmxmAnDerZKQbHQIeORJuB8AM
+	 WUsA/w6sE0X+xrcVI3DH1xZ3vGouCncNRWr9Oi+Uas4R1zebCfdJeK/of9/QRY3av1NVA
+	 aRKQ+beIxkD1V6SiIgiCRARf5+qC2C3ZmLjwAfkZGXxngTjdlwQn15oT9v9g8fwBNPK8Q
+	 KYyJnLzWcLmHnmrZU4sOREGL1tm+rF3+zUfoql/17N64tmmdZIhLOqO3q8uN0VOJGMMXQ
+	 1yH4Or8w/mVo8bn2BwgWMkJUWtOKtJubhs9rzcx0op6rIH6Ora/lJajmmEALZr+4qug==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795102317;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795102380;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=X/7FVMEXiHBL4WSOz0Pysl4wEd+SmpS1KQgCfjBgAZI=;
-	b=LE97mIA0pHxFWuWlPp1bwzeLIIhW7e+g06GXjcXLZ2z5aXpnwkos+DYQyBu7ZubVBx6N
-	 VFVODKx32PXdQx7FT0Sxd9WQ0oUlGOLUJ3PvPPX0CkRpblsGcbeUT3UcQsJaepiYEJpDk
-	 kaTYr0As1rE8yxEB1mOxqSl8WfbtLzaqp1OST+h3cWOBSYV0/oevh6JVfPBLhGGGwx3e9
-	 2s6GnX2oebDBBG4M9SIuyeyaREK6iHlqDCSo2cAlWGi1pWbFqm+LxAjfucSTvxyZwGTrA
-	 sP3jH/N+KnMa9PW1B+y85BiFeuhHVmHY72uGyKAXl2hDIMISAP8yFeuc9gZwbkMt4LA==
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=o3dKSUXwzpHlMu8hRVlVzuUR+DCxdptQ4xWbHuYHzfc=;
+	b=MreH1IdYBKr3+Lsig+dvbymNHCqgnFzlcj+MuFrRAMP4IuB14DqpWpQvUJxKV8KsN+UK
+	 c/7dhk37eutM1UgA7nedAdETC+AOAsgRzfQ67eMOJBHrvRe0F+Mecz6L5d76bSc1MvqRy
+	 QXLp0mek4d+SigKAjP8AddQn2uJ3EhFMNTe+B4is7HhWU7RquH1MUOgSZENZYhHcwr0b3
+	 3NELriKL2bhcOTmPv8yA+WErziZpLitkMNMKfyWx6FNopjg4Nlc+3ttKKEVGL0DXAV4mY
+	 Ch9Rf2wq63NmULyq7mKOUlUvZGpZTXb09pJ6Hw6lvsFHnjwI+6gSbzXniu7q0VCOoPQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Iyr9/xW7";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=No+g73Xh;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2474606A320;
-	Thu, 19 Nov 2026 15:31:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0982E606A333;
+	Thu, 19 Nov 2026 15:32:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Iyr9/xW7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A29E21F000C4;
-	Thu, 19 Nov 2026 15:31:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=No+g73Xh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E20701F000C5;
+	Thu, 19 Nov 2026 15:32:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795102317;
-	bh=X/7FVMEXiHBL4WSOz0Pysl4wEd+SmpS1KQgCfjBgAZI=;
-	h=From:To:Cc:Subject:Date;
-	b=Iyr9/xW7xxwLpx19/6opDpoSmJ2s/MGFRTUq8pKHHWyvtgqt/6NY81BiQyhPzLFpF
-	 bxbG/rzEdIDvdk8tCaVzGBJoG3LuPdOxatvz49fC+WFtm2jzGsIVMrk5GYSYYGZii8
-	 TdPgGAEzYjCOdBMmzC2vkEgrqZoS9bWvfpUhRtjoPPJ36IN4kp4g0+eVjNr3wJFJ5Y
-	 VAwpM2PeTgakhzKIrg8KrOkekTlO88z/NspyQPtBWsNrcf0U0ijriZivmz6lM7in31
-	 fj0TuK4mEswc3lLYMzBRIBW0fAClOZRuT0tb2OIRHqYdzmeQctqLEEhzB7mGRl6n3b
-	 a6tiHvkhqbB/Q==
+	s=k20260515; t=1795102379;
+	bh=o3dKSUXwzpHlMu8hRVlVzuUR+DCxdptQ4xWbHuYHzfc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=No+g73XhDjBViduEqBQ4n3MG9HKKzqd8aN7OihB7z9+BkasyDcp++vVAEi2EvjcwM
+	 K0hcDUDRACHsrwTyqYW9lf7ZhrTe+jkK+Yf3nse1HQRZTDpx++NQfYvWyrnLD8NTya
+	 Hau+KH9QygCrlOTDhkwLJ5BvzD1ICEXOyUO7RDvhfyBPhQJpzZrTkE8+MyKgRTi1Yp
+	 hA0LQkHoNuSC9jxcJVSvECagW2QS3RmDkDwn1Tql7opR/w5OsHKwDM8jz9JTlY3zSV
+	 vbJ3ncsNIEuPew2hxwXZep9JH8lX5qhmxCsDTDR1y93aAwYbRBOurhEtzpFvYCf2OZ
+	 tck4lOr6thvtQ==
 From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Alexandru Ardelean <ardeleanalex@gmail.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Bogdan Bolocan <bogdan.bolocan@microchip.com>,
-	David Lechner <dlechner@baylibre.com>,
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Joe Sandom <joe.g.sandom@gmail.com>,
+To: lee@kernel.org,
 	Jonathan Cameron <jic23@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	linux@analog.com,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	Lothar Rubusch <l.rubusch@gmail.com>,
-	Lucas Stankus <lucas.p.stankus@gmail.com>,
-	Marius Cristea <marius.cristea@microchip.com>,
-	Mathieu Othacehe <othacehe@gnu.org>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
+	David Lechner <dlechner@baylibre.com>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Olivier Moysan <olivier.moysan@foss.st.com>
-Subject: [PATCH 00/10] iio: Fix memory corruption, teardown races and bounds checks
-Date: Thu, 19 Nov 2026 15:30:33 +0000
-Message-ID: <20261119153151.1397003-1-lee@kernel.org>
+	Andy Shevchenko <andy@kernel.org>,
+	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-iio@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH 07/10] iio: adc: qcom-spmi-adc5-gen3: Free TM auxiliary device wrapper in release callback
+Date: Thu, 19 Nov 2026 15:30:40 +0000
+Message-ID: <20261119153151.1397003-8-lee@kernel.org>
 X-Mailer: git-send-email 2.56.1.708.g77570a6a1d-goog
+In-Reply-To: <20261119153151.1397003-1-lee@kernel.org>
+References: <20261119153151.1397003-1-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -78,63 +65,111 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-These issues were reported by Sashiko.
+struct tm5_aux_dev_wrapper embeds a reference-counted struct
+auxiliary_device, whose memory must be released from its dev.release
+callback once the final device reference is dropped.
 
-Cc: Alexandre Torgue <alexandre.torgue@foss.st.com>
-Cc: Alexandru Ardelean <ardeleanalex@gmail.com>
-Cc: Andy Shevchenko <andy@kernel.org>
-Cc: Bogdan Bolocan <bogdan.bolocan@microchip.com>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Cc: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Joe Sandom <joe.g.sandom@gmail.com>
-Cc: Jonathan Cameron <jic23@kernel.org>
-Cc: Lars-Peter Clausen <lars@metafoo.de>
-Cc: linux@analog.com
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-iio@vger.kernel.org
-Cc: linux-stm32@st-md-mailman.stormreply.com
-Cc: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: Lucas Stankus <lucas.p.stankus@gmail.com>
-Cc: Marius Cristea <marius.cristea@microchip.com>
-Cc: Mathieu Othacehe <othacehe@gnu.org>
-Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: Michael Hennerich <Michael.Hennerich@analog.com>
-Cc: "Nuno Sá" <nuno.sa@analog.com>
-Cc: Olivier Moysan <olivier.moysan@foss.st.com>
+Allocating the wrapper with devm_kzalloc_obj() on the parent ADC device
+and providing an empty adc5_gen3_aux_device_release() causes parent
+devres teardown to free the wrapper immediately after
+auxiliary_device_uninit(), even if external references to the embedded
+struct device are still held.
 
-Lee Jones (10):
-  iio: imu: adis: Clear pointers after freeing in
-    adis_update_scan_mode()
-  iio: accel: adxl313: Prevent FIFO buffer overflow in
-    adxl313_fifo_transfer()
-  iio: accel: adxl313: Reject sub-base ODR codes in adxl313_read_raw()
-  iio: adc: stm32-adc: Validate channel index before writing chan_name
-  iio: adc: stm32-adc: Detach chained IRQ handler before removing domain
-  iio: adc: pac1934: Fix custom attribute allocation and channel bounds
-  iio: adc: qcom-spmi-adc5-gen3: Free TM auxiliary device wrapper in
-    release callback
-  iio: adc: qcom-spmi-adc5-gen3: Reject empty reg property in probe
-  iio: proximity: isl29501: Fix division by zero and overflow in
-    isl29501_set_freq()
-  iio: light: tsl2591: Prevent infinite recursion on threshold
-    boundaries
+Allocate the wrapper with kzalloc_obj(), release it from
+adc5_gen3_aux_device_release(), and unwind cleanly on early error paths
+in adc5_gen3_add_aux_tm_device().
 
- drivers/iio/accel/adxl313.h           |  2 +-
- drivers/iio/accel/adxl313_core.c      | 13 +++++++++--
- drivers/iio/adc/pac1934.c             | 33 ++++++++++++---------------
- drivers/iio/adc/qcom-spmi-adc5-gen3.c | 32 +++++++++++++++++++++-----
- drivers/iio/adc/stm32-adc-core.c      |  6 ++---
- drivers/iio/adc/stm32-adc.c           | 12 +++++-----
- drivers/iio/imu/adis_buffer.c         |  2 ++
- drivers/iio/light/tsl2591.c           | 25 ++++++++++++--------
- drivers/iio/proximity/isl29501.c      | 10 ++++++--
- 9 files changed, 87 insertions(+), 48 deletions(-)
+Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
+Closes: https://sashiko.dev/#/bug/linux-b738d116-f32b-4edf-aa73-77827b79a407
+Cc: stable@vger.kernel.org
+Signed-off-by: Lee Jones <lee@kernel.org>
+---
+ drivers/iio/adc/qcom-spmi-adc5-gen3.c | 30 +++++++++++++++++++++------
+ 1 file changed, 24 insertions(+), 6 deletions(-)
 
+diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+index 351c4fff17b4..52f039795418 100644
+--- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
++++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+@@ -24,6 +24,7 @@
+ #include <linux/platform_device.h>
+ #include <linux/property.h>
+ #include <linux/regmap.h>
++#include <linux/slab.h>
+ #include <linux/types.h>
+ #include <linux/unaligned.h>
+ 
+@@ -607,14 +608,20 @@ static void adc5_gen3_delete_aux(void *data)
+ 	auxiliary_device_delete(data);
+ }
+ 
+-static void adc5_gen3_aux_device_release(struct device *dev) {}
++static void adc5_gen3_aux_device_release(struct device *dev)
++{
++	struct tm5_aux_dev_wrapper *aux_device =
++		container_of(dev, struct tm5_aux_dev_wrapper, aux_dev.dev);
++
++	kfree(aux_device);
++}
+ 
+ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+ {
+ 	struct tm5_aux_dev_wrapper *aux_device;
+ 	int i, ret, i_tm = 0;
+ 
+-	aux_device = devm_kzalloc_obj(adc->dev, *aux_device);
++	aux_device = kzalloc_obj(*aux_device);
+ 	if (!aux_device)
+ 		return -ENOMEM;
+ 
+@@ -626,8 +633,10 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+ 	aux_device->tm_props = devm_kzalloc_objs(adc->dev,
+ 						 *aux_device->tm_props,
+ 						 adc->n_tm_channels);
+-	if (!aux_device->tm_props)
++	if (!aux_device->tm_props) {
++		kfree(aux_device);
+ 		return -ENOMEM;
++	}
+ 
+ 	aux_device->dev_data = &adc->dev_data;
+ 
+@@ -643,8 +652,10 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+ 	aux_device->n_tm_channels = adc->n_tm_channels;
+ 
+ 	ret = auxiliary_device_init(&aux_device->aux_dev);
+-	if (ret)
++	if (ret) {
++		kfree(aux_device);
+ 		return ret;
++	}
+ 
+ 	ret = devm_add_action_or_reset(adc->dev, adc5_gen3_uninit_aux,
+ 				       &aux_device->aux_dev);
+@@ -652,12 +663,19 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc, int id)
+ 		return ret;
+ 
+ 	ret = auxiliary_device_add(&aux_device->aux_dev);
+-	if (ret)
++	if (ret) {
++		devm_release_action(adc->dev, adc5_gen3_uninit_aux,
++				    &aux_device->aux_dev);
+ 		return ret;
++	}
++
+ 	ret = devm_add_action_or_reset(adc->dev, adc5_gen3_delete_aux,
+ 				       &aux_device->aux_dev);
+-	if (ret)
++	if (ret) {
++		devm_release_action(adc->dev, adc5_gen3_uninit_aux,
++				    &aux_device->aux_dev);
+ 		return ret;
++	}
+ 
+ 	return 0;
+ }
 -- 
 2.56.1.708.g77570a6a1d-goog
 
