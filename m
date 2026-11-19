@@ -1,90 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795081888;
-	b=1bJwSnf4b6p2q5Y3bc/6Vsv6gm3u36diwrtv4hmFXqiGldqBeYFB11wyyw7amQmvj8FH
-	 G0Q8PuHoigUFoUKof7ScdYucZmMxIu7tdImuivpx2TzgVLEDNuee0WL5IFHo+yo9CsM+J
-	 M+vWClLkQe67jaKSyiYDrBdlYB8aU5K4Idq+AUWs9tDdkzSxWFqbcbQQoS2DfMhdTI1f9
-	 tHh/ajSK0ZgBZVWK4E5e3FvWzxaGlOWKt5CvOZ8G0eceNz3Z/ms4sWdm2+ZSVFVY/syrF
-	 KS5kjyXwS59/65VuOzcXJU8UoHh/+yQ+LMxhaQFT73a78MBjd+VPEPgkq2gczr9LfYw==
+	t=1795081931;
+	b=pwegerwbPL8Kr9g3mXjZ81TrMJ8As64AEc40fD820vHlXO0gp46Lm/c2IPfmcUYRQEOf
+	 e+kXdDd/OYUqlr/rdNXp4QN1mnYi9Rnp86fgsmREdlU+OtI/OMsufnSg03VMjiBRThnf9
+	 MjNsoqspHFkyRaJR+RcBdXlOrHTETlwTXWJWmuEDHW4K4yEmgAodKnz/Ds2w5dw5NAifK
+	 dsvsCSLbeLJ02spt3Pm94A7mS6ajQn5k3EBdz0oq8vwqg+MaEc180bPzWQz5zxHoXhems
+	 +enm6ef7cFjCsCRwchCOjdyHU+zN6h1S1gkUNgfwI7HuWYZ/C2wPk/tvbxX7En00K0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795081888;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=QCtvpJJpK/tKPwcjLQpFBntT1fd2LvukVv7GFEkPKKk=;
-	b=4Uf3Zla61B1ukb9w9KgPXkTkiWPSiYqOIAFbDbUVLkXLKaVpCNuzsOM1ZSXU8uWlUHS/
-	 hK4zkmsZIokeComE1fUe89i8+2zj4nIsLESy4lVvsZbBloWGwKHbVG7lQiBOrHB6HPrFx
-	 3myLCLcUqcD5zeKcKX8Ox+1jJJJbZaRoHAgYDzo3GGnEl+8Dh01ZuRg4FB8WjknECiEdG
-	 XhHjEZv6fD46KydVyiRwRoI4EAxXb+amFF2mcUoC/gopsDtIkuW8ZWmwZ9Y1LTth+Hzwo
-	 ZEUYyWITVlUJ84I5y2o/px7WaZui/BoQcR9ZZQSTlaDIxMJi3Srg9lZp+7gwxwOECjA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795081931;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=CSizmi6Mw8mtze6J22xXAjJEj/rlBp05sy/aCy1nj3o=;
+	b=e1ncwrFQfBYKVOQHGjLszO/kyrv/KAEg/ZFWKc+oaF0x8xUhAh9izkkvNp95Ttv/Xb7G
+	 U3n4cma0rBIbI704e4J5FlDuwz4Z9gunNpFBYl8TAE0UywD83JE4ROsRevfCNhrv+qPC+
+	 /f59wkW9I/n7T2kqqo15wQcs0BIcxir88ay9PUUl2HgdusHFfah/XsPrLTi6kLmuK18uY
+	 uBsP13J6b4g1UshrzUNsI8r/ADjlOeDuHhw01mnNiTkKs/LJKpw/zlfEXgXAxsl8nUDnU
+	 /xXklkvqCFTP4P+/SKnBh5Ql9tOvrQE24e4yYHi7TpQfGKaEgythll/5UbGCjO0qjAw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fairphone.com;
-	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=UjzmLULU;
-	arc=none smtp.remote-ip=209.85.218.44
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VFyt1hB+;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="M/1//x+S";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC27D606A337
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:51:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC27D606A337
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3EB5606A324
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:52:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B3EB5606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=UjzmLULU
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c5123794038so163565166b.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 01:51:26 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VFyt1hB+;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=M/1//x+S
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AJ6wGHJ1534889
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:52:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	CSizmi6Mw8mtze6J22xXAjJEj/rlBp05sy/aCy1nj3o=; b=VFyt1hB+9wQlMz+p
+	hOTNWkff0nFqw6MVRCUzaZSOS4DLhAAoiXOhIsfPwE+F2FUyHE2/owOWSnfbZGwV
+	AKtSLHpusLYDsD58Sq87Ajl8DyiWAKANA0U1Iyx+7EW9HKaWcOsUWZkWUpPyIjyb
+	Lv9X/WVn4kE81U3rso7Bp4K3aEgM4iKOl5z9ZtIuyZ4fWGC/bRt65P79YzuVFQ0B
+	knCPijvz8QYkZSt6BQDaTXKDXWUr7DxKK45ixEREdap8n5auGnI97+eh6+oYhhHg
+	fxM9wftRjPUPJU6wjUWyZnYy0F9UUH6rO9YPnCaFJ17dCeIiXvmB4HVRDi1NMiNC
+	4LO9tg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1dpccjjp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:52:09 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cde02b50dd6so521549a12.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 01:52:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1795081885; x=1795686685; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QCtvpJJpK/tKPwcjLQpFBntT1fd2LvukVv7GFEkPKKk=;
-        b=UjzmLULUbPuX6Kv+v5NXSiVfqZ4enM39iH7s3fpgsoHsdvGqR6DqCDPTZ2Nk/BSSMs
-         NrRUKiKOMKPN3Uo5TCQOpVmslWSouoldP79RLrlf8zrHLk3HTSzZxmYHYq5xyPIz0ARN
-         rPlk+s5mhYW6hPr66VMoNsbqqi+5COb3G/Mk/qMS3xGutAMWrfMG84+yFWQZF1G2gBC6
-         64NipMh6Uj2gRF/H5gOJNUdq+DIncBQFHb31m8XboR1BhOgxNAUD/ZG4O93VJI2ZD/5A
-         YPOD3R59AsyJJckYJHzVb3YCnki9aQaMZ4px+K/iv6g1J29+L0CNgeNduum8NJitorBl
-         IcXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795081885; x=1795686685;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1795081929; x=1795686729; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=QCtvpJJpK/tKPwcjLQpFBntT1fd2LvukVv7GFEkPKKk=;
-        b=woloT8Yw0LIZ0dQRXSwGdziLjTG3ri8X8oKw5+nSacOSOyP5mWi7YSNVvHvAWV/9vJ
-         gZmNRKqs/QPRgoiE9Hod9XUmRW4kMLm46R0UdZBXlAqVhgZBiPfqrr74uyZe5Ru3yGGL
-         aegnM8Qc7SkDAdVaGZJKqJLuysgq5TmWyMH9sTk9UKB80itgnbyZYKaflWgs2Ykkgzox
-         T4wKVrL2CLVQEm1rxBvx1cyilswGA4prF3c/6l6ECQ6AJCoGtH8OO7PzHYNi5pRcQQ4i
-         cQQaKuIVn4cWiomu4yyCbV1FMtrLbDGyHz8Jpjk8FtbTVBD/RkNmVvYpx0ur255QJ1PX
-         insg==
-X-Forwarded-Encrypted: i=1; AL+hErGfhH5diefSsDAX/idSJyCMAC2kref8M4YK9zmTQlhKwQzNGvq2XYr65+W3xrvCXkA2lQb12BBGIkU0i6y0@vger.kernel.org
-X-Gm-Message-State: APuU4Z8y/6YAK7sr1VYFHfem909IfOfWA8lMnZNuiZry1J1SsDqjXxBU
-	9OaNFdfRMccQ9R/GiR9108JIhXpElB2QBgFTABWB0pcl2yeAOFVI6UUVTC4eRGzZZmIVhsprNtJ
-	sdXi3+XI=
-X-Gm-Gg: AYBFou19vRgn/oDXnHi5s9r52LN/YMtfNBLCAcvOvJc9QavaIsj7IWqCZSMtOsRjtwB
-	H8n9z65Hq5gVOC+ndwoEXZmdoMDPgTPuf/q6Gtb4InRpDrEECBCkWltEx3T0MWTR2awCHES/r7y
-	kBkFK+5aj5PzYqZ7PwFb5gOp3L54TjUz7m9t64HMO6I2RPVFt84Mw+DaBvmxLX8qZ/ht8QBpqDd
-	rjVvYb8k1H0wemrX8v1FjhC/TVYMLhGiFUHPEAXhknRAsGoTsQDRWPONRdyFdLkRkcSXY0zheAl
-	OfJHM3kIHaLAgZCbde808I1p/MKUm+thyEr2XXBAjGl2UdZniXpBC760Vx+enSeDLxMghW02W8A
-	OxQ50KdRgDCWie4JTCEZdfG1TZ6UYUXQR5lEfVMZD4ZnIt3RLJ2oajEBNRL+OBreGXluWbcIJkC
-	uMTwca8YSCTCAIBfQKAuqqn4yG47oItfq+BRdKM3OdmalSujxUtpf+zw6KXSdHhRj8Mz9FahvBl
-	5Ie3xrHIyhggC2QnQqrDlSinsZUD/xT0qK92+ju2IsiGmIh9P52bOYd96H9Q+k0HQYb8mbmDx4i
-	xYSGa009pmUvR9+KUj6/LQ6XlwJh1Xy9M7JU5GN0nX09GkaOEJYPROuuA1E6cJu4jTUuY/vUM8P
-	l84Qt+M8lUv4U
-X-Received: by 2002:a17:907:d7c9:b0:c2e:63ba:1f90 with SMTP id a640c23a62f3a-c510e58731cmr485530666b.48.1795081885550;
-        Thu, 19 Nov 2026 01:51:25 -0800 (PST)
-Received: from [172.16.220.224] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c51231bc213sm95057166b.12.2026.11.19.01.51.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 01:51:25 -0800 (PST)
-From: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-Date: Thu, 19 Nov 2026 10:51:23 +0100
-Subject: [PATCH v4 1/3] dt-bindings: media: i2c: dw9800: Redocument DW9800K
+        bh=CSizmi6Mw8mtze6J22xXAjJEj/rlBp05sy/aCy1nj3o=;
+        b=M/1//x+SX1LSinI/YBU/2HjQonY8ab9IMrHpR1/skqyGFYLRjbWy29ejKAoKoXUZ15
+         GD/xY/nibitxhsBlXTBZnZxV65Of8KshUkKsqooWS4Jd9rizphTyXuodi+AlsXJax5W+
+         fdxPtyc4eDYp/Bxy83qSF5ZQrJTiCkiif1OT+vsQWfcbacVDfV6Bida6qymifL4eJAqm
+         heQ+RC6EvvMcoY3MSHRiRYlnpER2ThHiUppBSZxe/UyhA88/pjaTuI3d9rU7fNJnzpmM
+         kZ90rx6l8lPs4KykbVd8wWB81aAi1aIud5N83iCPKbeWQXA0wECPuq+58CEaQEKHQbBj
+         /5qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795081929; x=1795686729;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CSizmi6Mw8mtze6J22xXAjJEj/rlBp05sy/aCy1nj3o=;
+        b=j92g4XFBMfI1mrP9su4Nd8yje9JYylIkKqAHS7bKB1Ru05BQVZGNl49kC0iJuAyqWx
+         V2xyz2nX+MGJjxY4+98vyrqYVabWG+yMUbdTy9d4q8Jt3GbDIxZmMbGYUKF3DplFIHFp
+         IpkoHi5ctOUcuvdwZaTKPkA1VYU9FvGo+KZd0IzCki7sra4taP/+ALjzjdZomY6CcJ6Z
+         kWOARqaEOGww2Sqn9EO3rt+zEoQO7KHUkE5F/rMbTz1DYTi5VbNKRXse6XqneyTSLOZi
+         jcnDutURJDlFinH/SDfoAmULr1ruw/hy7GqJqmNRAlFiT45QwKsHcGK47r4K1pjEkOs0
+         KmRg==
+X-Forwarded-Encrypted: i=1; AL+hErHaDAYYN+i31HCIlX5EFLJesEcdMtc8VppMtsV1l9bNvgWHyn2w02y5MspFZfMD21GOcHkzGSn8B0iKIuaK@vger.kernel.org
+X-Gm-Message-State: APuU4Z+GB3g0aSb+PJsYnXlTUfjdmKJcGZF75jJwTMQapngiPzpT2nkG
+	n9gAGA1RQctifhfxy9Kzja0sA3B1IY2vV7eI/qaX/sjxMsuqjox+dolx9P0ifv2NG0nmeLEOtzW
+	F0FPGpaOoWbwn0cYHYXv53XHLAIwkXuxiWDB8WOcVBQxZfa8g4GeiXdp2/z5jN4Z/5DCs
+X-Gm-Gg: AZFdTZf5mPykEvbxf1+Dqjze752chCMHDmBFjdtq6biifRS7xrZDC6kpEg9XjG60Bvw
+	5QDS1fUDfft5oFyMWKVdLBViJhPJvIZd1ieSkXLxtMjGEMbEPcrb5+RSyI7ZIjRK7r25+RyodjU
+	SOdCNAXba8xJvaLeRxg5wtM4gts7IaHdW8+XWU7ddJVOhOQvllKSwRDxbRabxnFlwRBDsNph2Qu
+	bU5BmR8oiWk0mEvSbhXlr7r/dc32Jc94POl14VtiuNiClSwNBOgDYT+kWlJsYHXkl6PhQRtgpFg
+	b0kDYJDh2glJaFJ8yvAjDGWX/F7Xj/70DkTYksz1iVL/gqqaUunR5ssgvduXvqNA9jloa7zXTwS
+	IzbDn2MIG9EHwodaUKJc3kusz0AuHs816vttBtrs482mWunhxLAVrwjHLlQLUhU+7jL8NzbcVzB
+	Vd96qaRKY=
+X-Received: by 2002:a17:90b:254c:b0:3ac:928a:68ce with SMTP id 98e67ed59e1d1-3b40a21dac0mr365150a91.33.1795081928900;
+        Thu, 19 Nov 2026 01:52:08 -0800 (PST)
+X-Received: by 2002:a17:90b:254c:b0:3ac:928a:68ce with SMTP id 98e67ed59e1d1-3b40a21dac0mr365128a91.33.1795081928418;
+        Thu, 19 Nov 2026 01:52:08 -0800 (PST)
+Received: from [10.219.49.219] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b4028310c5sm1189430a91.3.2026.11.19.01.52.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Nov 2026 01:52:07 -0800 (PST)
+Message-ID: <813a113d-f4fa-44e1-9616-c01dc5577365@oss.qualcomm.com>
+Date: Thu, 19 Nov 2026 15:22:02 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -94,164 +116,113 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 v6 8/9] ASoC: qcom: lpass-tx-macro: Add support for
+ Bolero v4.0
+To: Mark Brown <broonie@kernel.org>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+References: <20261106-add_shikra_support-v6-0-2cda302237cc@oss.qualcomm.com>
+ <20261106-add_shikra_support-v6-8-2cda302237cc@oss.qualcomm.com>
+ <179436005595.790675.2243536196647069749.b4-review@b4>
+Content-Language: en-US
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <179436005595.790675.2243536196647069749.b4-review@b4>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261119-b4-dw9800k_cleanup-v4-1-df26c431595e@fairphone.com>
-References: <20261119-b4-dw9800k_cleanup-v4-0-df26c431595e@fairphone.com>
-In-Reply-To: <20261119-b4-dw9800k_cleanup-v4-0-df26c431595e@fairphone.com>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- =?utf-8?q?Andr=C3=A9_Apitzsch?= <git@apitzsch.eu>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Daniel Scally <dan.scally@ideasonboard.com>, 
- Sakari Ailus <sakari.ailus@linux.intel.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Hans Verkuil <hverkuil+cisco@kernel.org>
-Cc: linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- stable@vger.kernel.org, Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795081884; l=4477;
- i=griffin.kroah@fairphone.com; s=20250804; h=from:subject:message-id;
- bh=g/OiRwFsFfdmnWKD7IddFC6HC4DRBlfOM96+ymjJkqc=;
- b=+9IaxyEdEXtMhI8Q3RfHlupMQA+Qy0T5cjXDl1x0aooiVjh1QhbWPkDRwu49Vw30ieXUb25Nl
- SfvolKTIkzsCOUMlU/9CFGhBywusMmHFMFgObvIcA5prfDof5CtDFpS
-X-Developer-Key: i=griffin.kroah@fairphone.com; a=ed25519;
- pk=drSBvqKFiR+xucmLWONHSq/wGrW+YvcVtBXFYnYzn8U=
+X-Authority-Analysis: v=2.4 cv=YJ0KWhGx c=1 sm=1 tr=0 ts=6afec6c9 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=4tHaGl9kwi2XGHUKs7MA:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzOSBTYWx0ZWRfXw20h/fRRwf5u
+ qhqdhraXH5uonank+J2Dt+XYuvAkm8xBpHZABXG5rpVsFYtG1zNjHt+2suaN48WHQrBuG2F9GO0
+ NhmGEz+a29KhYGJQOAOczehayqKx/rDQWql7uMbztPYh4zjh2jc9aqtRUggSYyXZKASoxI605+C
+ pXP1PL5NJY5ia4MoB5DI3sjfgSuXUWNgDkymZAzmB6TzG3g88cCEuXC48dRL3aFoRqxNWfsAXzr
+ 93wQFPUsdZQMIfAPHH0zCuREKXmRcTEDmzr4acfNcJKtRpsoEEgmDQSejiEC0xTBjgrF9Pqd5AY
+ 6WjGMyVXu//SkgLlA9ueF0TPl/+TBwbiCsF/ygZ/0PCFAuAAlo3VoD3KeHRN+AVhfjPcQcWBW4W
+ uW3Ll2CGCLWYcOjyyKBlWhQh1Dulb+G8cMl1C6Mwckxwh++KvgIDozf0pAFdpyZ3Fop0tJEUsgv
+ mnUkiX5vBT0dvwpvrsw==
+X-Proofpoint-ORIG-GUID: i1Gs7ty9qHsbW92vv5aTmS1zgCoY-bsO
+X-Proofpoint-GUID: i1Gs7ty9qHsbW92vv5aTmS1zgCoY-bsO
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzOSBTYWx0ZWRfX5cLEJoYisDCi
+ wmbA25qD0Wm+jf6EMj+QMnVhzpUoUCnRQitLcImXkdUmR98uVqz+Vw9mtqBxpg89swyaBtXLCLc
+ GQLD3ruuGWj9Ufl1MhOKMmp/sdeZnkQ=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 malwarescore=0 priorityscore=1501
+ lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0 adultscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611190039
 
-The DW9800K's properties are too different to justify sharing the same
-bindings file as the dw9719, Create a separate bindings documentation
-for the Dongwoon Anatech DW9800K with its updated properties.
 
-More specifically:
+On 11/11/2026 6:50 AM, Mark Brown wrote:
+>> Hawi integrates the Bolero v4.0 TX macro. This version extends the
+>> existing TX macro register layout with CFG2 port-select registers,
+>> per-path CFG2 registers and an ADPT control block.
+>> +#define CDC_ADPT0_ADPT_CTRL		(0x0800)
+>> +#define CDC_TX_ADPT_CTRL_EN_MASK	GENMASK(7, 0)
+> This is also 8 bits wide.
+Thanks for the comments Mark,
+Right, the enable field covers the entire 8-bit register. Since we clear 
+the whole register here, I'll switch this to a direct write and drop the 
+mask.
 
-The DW9800K did not share the SAC1 and SAC6 modes
-that the DW9719 used.
+>
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX0", SND_SOC_NOPM, 0, 0, &tx_wsa_mux0_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX1", SND_SOC_NOPM, 0, 0, &tx_wsa_mux1_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX2", SND_SOC_NOPM, 0, 0, &tx_wsa_mux2_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX3", SND_SOC_NOPM, 0, 0, &tx_wsa_mux3_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX4", SND_SOC_NOPM, 0, 0, &tx_wsa_mux4_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX5", SND_SOC_NOPM, 0, 0, &tx_wsa_mux5_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX6", SND_SOC_NOPM, 0, 0, &tx_wsa_mux6_mux),
+>> +	SND_SOC_DAPM_MUX("TX WSA MUX7", SND_SOC_NOPM, 0, 0, &tx_wsa_mux7_mux),
+>> +
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX0", SND_SOC_NOPM, 0, 0, &tx_psel_mux0_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX1", SND_SOC_NOPM, 0, 0, &tx_psel_mux1_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX2", SND_SOC_NOPM, 0, 0, &tx_psel_mux2_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX3", SND_SOC_NOPM, 0, 0, &tx_psel_mux3_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX4", SND_SOC_NOPM, 0, 0, &tx_psel_mux4_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX5", SND_SOC_NOPM, 0, 0, &tx_psel_mux5_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX6", SND_SOC_NOPM, 0, 0, &tx_psel_mux6_mux),
+>> +	SND_SOC_DAPM_MUX("TX PORT SEL MUX7", SND_SOC_NOPM, 0, 0, &tx_psel_mux7_mux),
+>> +	{"TX SMIC MUX0", NULL, "TX_SWR_CLK"},
+>> +	{"TX SMIC MUX0", "SWR_MIC0", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC1", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC2", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC3", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC4", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC5", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC6", "TX WSA MUX0"},
+>> +	{"TX SMIC MUX0", "SWR_MIC7", "TX WSA MUX0"},
+>> +	{"TX WSA MUX0", "NO_WSA", "TX PORT SEL MUX0"},
+>> +	{"TX WSA MUX0", "WSA1",   "TX PORT SEL MUX0"},
+>> +	{"TX WSA MUX0", "WSA2",   "TX PORT SEL MUX0"},
+>> +	{"TX WSA MUX0", "WSA3",   "TX PORT SEL MUX0"},
+>> +	{"TX WSA MUX0", "WSA4",   "TX PORT SEL MUX0"},
+>> +	{"TX PORT SEL MUX0", "PORT0", "TX SWR_INPUT"},
+>> +	{"TX PORT SEL MUX0", "PORT1", "TX SWR_INPUT"},
+>> +	{"TX PORT SEL MUX0", "PORT2", "TX SWR_INPUT"},
+>> +	{"TX PORT SEL MUX0", "PORT3", "TX SWR_INPUT"},
+>> +	{"TX PORT SEL MUX0", "PORT4", "TX SWR_INPUT"},
+> These muxes look weird, the different settings don't seem to change
+> anything?
 
-Description of vcm-prescale does not match the calculations labeled in
-the DW9800K datasheet for how clock diving rate is computed.
+The mux options select different values in the CFG1/CFG2 registers, so 
+each selection does change the hardware configuration. They all use the 
+same |TX SWR_INPUT|route because the input path itself is shared; only the WSA/port 
+selection within that path changes. Thanks, Prasad
 
-New property timing-control introduced to offer more fine-tuned dividing
-options available to the DW9800K.
 
-Signed-off-by: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
----
- .../bindings/media/i2c/dongwoon,dw9719.yaml        |  1 -
- .../bindings/media/i2c/dongwoon,dw9800k.yaml       | 91 ++++++++++++++++++++++
- 2 files changed, 91 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
-index 8e8d62436e0d0c4f9af9e52262b23881abd37cec..38db0764c0f70ad49295dcddc182b7e100a68b29 100644
---- a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
-+++ b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
-@@ -21,7 +21,6 @@ properties:
-       - dongwoon,dw9718s
-       - dongwoon,dw9719
-       - dongwoon,dw9761
--      - dongwoon,dw9800k
- 
-   reg:
-     maxItems: 1
-diff --git a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml
-new file mode 100644
-index 0000000000000000000000000000000000000000..99f3b506cf12c63ddef1e3d18fd59179a5e7800c
---- /dev/null
-+++ b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml
-@@ -0,0 +1,91 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/media/i2c/dongwoon,dw9800k.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Dongwoon Anatech DW9800K Bi-Direction Voice Coil Motor (Bi-VCM) Controller
-+
-+maintainers:
-+  - Luca Weiss <luca.weiss@fairphone.com>
-+  - Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-+
-+description:
-+  The Dongwoon DW9800K is a single 10-bit digital-to-analog converter with
-+  +-130 mA output current sink capability, designed for linear control of
-+  bi-directional voice coil motors (Bi-VCM) in camera lenses. This chip
-+  provides a Smart Actuator Control (SAC) mode intended for minimizing
-+  mechanical vibration.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - dongwoon,dw9800k
-+
-+  reg:
-+    maxItems: 1
-+
-+  vdd-supply:
-+    description: VDD power supply, can range from 2.3V to 4.8V
-+
-+  dongwoon,sac-mode:
-+    description: >
-+      Slew Rate Control mode to use: direct, LSC (Linear Slope Control) or
-+      SAC2-SAC5 (Smart Actuator Control).
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    enum:
-+      - 0 # Direct mode
-+      - 1 # LSC mode
-+      - 2 # SAC2 mode (operation time# 0.48 x Tvib)
-+      - 3 # SAC3 mode (operation time# 0.72 x Tvib)
-+      - 4 # SAC4 mode (operation time# 1.20 x Tvib)
-+      - 5 # SAC5 mode (operation time# 1.64 x Tvib)
-+    default: 3
-+
-+  dongwoon,vcm-prescale:
-+    description:
-+      Indication of VCM internal clock dividing rate select, as one multiple
-+      factor to calculate VCM ring periodic time Tvib.
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    enum:
-+      - 0 #  Dividing Rate -  2
-+      - 1 #  Dividing Rate -  1
-+      - 2 #  Dividing Rate -  1/2
-+      - 3 #  Dividing Rate -  1/4
-+      - 4 #  Dividing Rate -  8
-+      - 5 #  Dividing Rate -  4
-+    default: 1
-+
-+  dongwoon,timing-control:
-+    description:
-+      In LSC mode (252 + value * 4) * divider value in microseconds
-+      In SAC mode (6.3 + value * 0.1) * divider value in milliseconds
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 0x00
-+    maximum: 0x3f
-+    default: 0x20
-+
-+required:
-+  - compatible
-+  - reg
-+  - vdd-supply
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        actuator@c {
-+            compatible = "dongwoon,dw9800k";
-+            reg = <0x0c>;
-+
-+            vdd-supply = <&pm8937_l17>;
-+
-+            dongwoon,sac-mode = <4>;
-+            dongwoon,vcm-prescale = <0>;
-+            dongwoon,timing-control = <16>;
-+        };
-+    };
-
--- 
-2.43.0
-
+>
