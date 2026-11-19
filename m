@@ -1,72 +1,81 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.69
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.15
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795108253;
-	b=aVF0docWMiEeTAQ0ev7C2VTYotXt9KHSSRrBbJfS85hHZBOmSF+Ycw3kLiBF38r8Kagw
-	 MaHxOQFMYgIaibroaQXRKcnuT2VTfzf5qS4IROF1jvgiy6P0iaZNamLHBW9Pojr9Zyn/9
-	 qsQ9puskiblvnhsov/voEVvCXihqEh/7Wy5z7OJQvmrRkTjIaTVXtYFNtKqbX+Dg3mEWM
-	 gQdPEGyQqTX/3NkwBVxRYb7GAovIvL1sv6Rnh1QxX+0ga16SNtz1g8G1mnTyloVmwcafm
-	 InIwhiVpM5/qkFjnhPNWqyeK+oh8NNFMqovQMc2kJFDP4+KKF1JTV2czE3sfMx2aNmA==
+	t=1795109502;
+	b=bXfd6GK9yhSnowfTMnR6mPbuJOOSecUFWMKRczo1MZJVonLX6+WhBu6JxmSFHndpcBBg
+	 oLqd6lRh7la00eUfSYebzxIPIrsNSsLpiirLFiT5gFl85hX1zvhU6nt0blcZ/LttL7BkT
+	 jvVJUuenfPvKLLav5IPiRMjCjtMENMAbDvbV4CtrD4lJKzPSAOLCooT924m0LE4XhMkSj
+	 iM+vrQO0+U4zhKxtoJ2o2hCu6VdVlKnO2J8yhuCoo2ijhyHkIKOf1T4N/AAZxRrYF9FpJ
+	 VGN30/NeUQ1PP5N0dgDcnYjCxh9WBwq56I8Nn6jVARvZDQJKiuLmVrpp1he0E1iaoEA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795108253;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:Mime-Version:
-	 X-Mailer:Message-ID:Subject:From:To:Cc:Content-Type;
-	bh=UgCYURNKZXvnpxT2x6kH2Yd3H2eYME7sOBjpX93BA1E=;
-	b=wHN5ot4Zd1e9Cl1ZwV7uucPWA9bAdn4VVR6vgDDA+etkZyIDsn/bPdAgaQN9hs2F//1S
-	 s0FKRQEBT+OTmsa4zfw5YHtfLsFEoCgCiD2JrOY5zHnB4k60nAMLGZ3ywqRR21NYvhanK
-	 S39q+rnTl16U38103KsZi4XWTy0ZMnHFyWL0QApE3Lw18yks4Qze86bWlnm3fsxt96VgG
-	 b4C7qEuGm2+sYULJi4v/0AloPDcePbJW6tCYF4k8ojDgGU3ZJ7bDbeVGSU90fW0opa3/N
-	 HphGUzyetgRQ+XUY9vas3uwA10OP1f12QzclYigo0bovDZ5PrSwV1yZuR4NYgkI3AaA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795109502;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=FU9gR1dcoWLtL0sHRAxH8ZWMSEUomoVnjE/ppuPtboM=;
+	b=21QCs/mI/fSdrgC7U3P65CmJdvP/CgdLA7HqxUrkayujVzR5X2RbqFd2OM196GDZJUVV
+	 PQ2eRM6EWS5vq4h6EHCyK5vHWCeqXvyYN0SNtrFnuxqF+m8IjVWsUkMSQdcOcd376Zhgp
+	 RhHGEc0rmJRL14kxW2y0ecEqJffMTRsZoRhJUl0uP3awwX/n5stSaMNLuutMmz2ON0iBH
+	 aKzqN9dkUd9pbJ8RWTfhmB+Wm+oh2yYcu25xJQiT57so2zIMYwc5zEjF9keuZxLLOiJYz
+	 FysJEaPp6SMQpIY9Gcn0AKPcWwuFvOsK3iLA9P4bntUZUcgwpiq/0GvvvTbrTH9vu3Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=google.com;
-	spf=pass smtp.mailfrom=flex--irogers.bounces.google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=mG9gi0mV;
-	arc=none smtp.remote-ip=209.85.160.69
-Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com [209.85.160.69])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=DXy9jWl1;
+	arc=none smtp.remote-ip=192.198.163.15
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D4EC606A62C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 17:10:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D4EC606A62C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--irogers.bounces.google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9899C606A320;
+	Thu, 19 Nov 2026 17:31:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9899C606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=mG9gi0mV
-Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-4a72bcd6599so50282fac.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:10:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795108251; x=1795713051; darn=vger.kernel.org;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UgCYURNKZXvnpxT2x6kH2Yd3H2eYME7sOBjpX93BA1E=;
-        b=mG9gi0mVOhmiIBP/3pgBNO492dK6aVTffHRtReNQ7WB7JaI9vKdxZordBybyCgYi9A
-         zHlzeJxPxphp9kXbZLUbimVG2STDS139JM4lY3nWIEIDtJ1WYFL74oMGqtaEqHse/c5S
-         xVMbTDAjwRhjfSUti7+Bvv8ufMOp6qxOjG6Nldh8XeAG4DVeHoxZ8m2lWPya+dSR78B3
-         Z98raV0qXLFy7qNzKkmWZEyQEoVRe8Mgy5ge5uj9HPDTVwx2fyMgcgIE7uNGMZ0bTRKy
-         LXBmdx6fKdUb89TsXuHbPvV91OOtl5YQ1QGdTEw2yfd6YBebaihJgs2LrBUiHrOo6Gfj
-         j0Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795108251; x=1795713051;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=UgCYURNKZXvnpxT2x6kH2Yd3H2eYME7sOBjpX93BA1E=;
-        b=dYRM260U+aRch3Ej2IwKu60hLKVIKNdUuhFWvM7C+fCFmnt2iT1+V3bYDshbRwIQAR
-         JYetmSfY0CtpZvSuHSMkMnjXWq+8nnb9rzQJYf6J5Z7LiGRTAIZ2NC0+zMZDhXhqf+qi
-         LsYt2McJLArtxYSd+5wqG9LD9rZgy/9Q9w3qlXZM1hbB+pVTYpx9pyYJna22oEzPsp9R
-         KF2oEYLP2bUBjRZbwCFgpdomKLWWKCWj66ZqhtRxWZJsxZLmT8An9rTbX2PQbLzYKBee
-         7qnXI4Xm8bFSze2vWgaoEh/OYSsMJG4K+4WM3Mhn5v0PnYtpTJcDFuMltRQ62KYfXZLx
-         Hvzg==
-X-Forwarded-Encrypted: i=1; AL+hErEcSYGvfIs76vtWIbiGsCbpIT6zIN5HcnMh3D0u332Yy059cgfzVipVkah4ahf16zJtdiwZagFq/COUrlQh@vger.kernel.org
-X-Gm-Message-State: APuU4Z+hV/z9U5XMuRWb0YR5MhPbeOzP2pCBS6ozjacxiYdzJhQR+3ms
-	SnOHaaTn4efuEujR5swgUBFQUtdg9Uo+oMhxTpWlH9x6FbvwbIotpOU2v8/cCNoqLMPTjnC51Le
-	FQieR8Xkmjw==
-X-Received: from oadxh9-n1.prod.google.com ([2002:a05:6871:ed09:10b0:4a7:1cc1:e72])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6870:b14d:b0:4a2:47f6:3cbf
- with SMTP id 586e51a60fabf-4bc7d56ee04mr238017fac.8.1795108251216; Thu, 19
- Nov 2026 09:10:51 -0800 (PST)
-Date: Thu, 19 Nov 2026 09:10:46 -0800
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=DXy9jWl1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795109502; x=1826645502;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=qyA+t8Qays51sjn9XNSdEfaU+PoeWkwXgQUuw38mVe4=;
+  b=DXy9jWl1saxWXJVZtfnTBvJPdj9p7aRN/iulSsz0xrN1bvQdLrqszlte
+   Txa5bJz3mYUwoCtbEe4vNunrzI9W3691L8Bk7fiUdfLQbUO7uIFIzIRYR
+   7kmyATFBMBwgpPC3E3sw8XmhDLB+5ShgDZI0GJKxM47Os+9aw3YVOupw/
+   1oflXuTtnC1uEcbgmvavGVWU9owDBMmZHvpL2Qa3zrRBUt/5sdUTzzZEX
+   1RslLoKNO1QbWNh9MTXqX0tDkQXP/ixEtSIL7E5b65qOY4h46Us5IftO2
+   84enUfJX9iKcYfFcsMsxcmzWpi/IaDJTiL2lq/Y8A3NA80Df7Wv1Srgea
+   g==;
+X-CSE-ConnectionGUID: 0bq5YT5GRfKFQSZcZ0FG/w==
+X-CSE-MsgGUID: g6clW9S5S52KzWn2ngw8fQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11971"; a="3977276"
+X-IronPort-AV: E=Sophos;i="6.27,221,1787036400"; 
+   d="scan'208";a="3977276"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2026 09:31:27 -0800
+X-CSE-ConnectionGUID: g9wR7/PuRHWwHqkeMLZi8A==
+X-CSE-MsgGUID: y7MiF8JoSZixBl5J76Es+w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,221,1787036400"; 
+   d="scan'208";a="10829680"
+Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.61])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2026 09:31:24 -0800
+Date: Thu, 19 Nov 2026 19:31:22 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 08/10] iio: adc: qcom-spmi-adc5-gen3: Reject empty reg
+ property in probe
+Message-ID: <av8yak7K18Cm3wdd@ashevche-desk.local>
+References: <20261119153151.1397003-1-lee@kernel.org>
+ <20261119153151.1397003-9-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,69 +84,27 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.56.1.708.g77570a6a1d-goog
-Message-ID: <20261119171046.1536673-1-irogers@google.com>
-Subject: [PATCH] drm/msm/dp: Return MODE_BAD instead of -EINVAL from
- mode_valid callbacks
-From: Ian Rogers <irogers@google.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	llvm@lists.linux.dev, Elkin Cruz <elkin@google.com>, Ian Rogers <irogers@google.com>
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261119153151.1397003-9-lee@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-msm_dp_display_mode_valid() and msm_edp_bridge_mode_valid() have
-return type enum drm_mode_status, but return -EINVAL (-22) when dp,
-dp->connector, or mode->clock is zero/NULL. If a mode with zero pixel
-clock is validated and pruned, passing -22 to
-drm_get_mode_status_name() computes a negative array index and fires
-WARN_ON().
+On Thu, Nov 19, 2026 at 03:30:41PM +0000, Lee Jones wrote:
+> If a firmware node supplies an empty reg property,
+> device_property_count_u32() returns 0, which passes the negative error
+> check in adc5_gen3_probe() and leaves num_sdams set to 0.  Subsequent
+> zero-length allocations return ZERO_SIZE_PTR, which is then dereferenced
+> when requesting the VADC SDAM interrupt, and num_sdams * 8 - 1 wraps in
+> unsigned comparisons when counting TM channels.
+> 
+> Return -EINVAL when device_property_count_u32() reports zero elements.
 
-Return MODE_BAD instead of -EINVAL in both callbacks.
+ENOENT is usually used for that.
 
-Found via Clang -Wassign-enum on an x86_64 allyesconfig build.
-Verified by building drivers/gpu/drm/msm/dp/dp_display.o and dp_drm.o
-with LLVM=1 W=1 (-Werror) and -Wassign-enum; not runtime-tested on
-Qualcomm Snapdragon DP/eDP hardware.
-
-Fixes: c943b4948b58 ("drm/msm/dp: add displayPort driver support")
-Fixes: 05d001352733 ("drm/msm/dp: use the eDP bridge ops to validate eDP modes")
-Signed-off-by: Ian Rogers <irogers@google.com>
----
- drivers/gpu/drm/msm/dp/dp_display.c | 2 +-
- drivers/gpu/drm/msm/dp/dp_drm.c     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index c0c150e2c575..51649b584573 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -759,7 +759,7 @@ enum drm_mode_status msm_dp_display_mode_valid(struct msm_dp *dp,
- 
- 	if (!dp || !mode_pclk_khz || !dp->connector) {
- 		DRM_ERROR("invalid params\n");
--		return -EINVAL;
-+		return MODE_BAD;
- 	}
- 
- 	msm_dp_display = container_of(dp, struct msm_dp_display_private, msm_dp_display);
-diff --git a/drivers/gpu/drm/msm/dp/dp_drm.c b/drivers/gpu/drm/msm/dp/dp_drm.c
-index c1e4147bfef1..dd4e8426cfe0 100644
---- a/drivers/gpu/drm/msm/dp/dp_drm.c
-+++ b/drivers/gpu/drm/msm/dp/dp_drm.c
-@@ -251,7 +251,7 @@ static enum drm_mode_status msm_edp_bridge_mode_valid(struct drm_bridge *bridge,
- 
- 	if (!dp || !mode_pclk_khz || !dp->connector) {
- 		DRM_ERROR("invalid params\n");
--		return -EINVAL;
-+		return MODE_BAD;
- 	}
- 
- 	if (msm_dp_wide_bus_available(dp))
 -- 
-2.56.1.708.g77570a6a1d-goog
+With Best Regards,
+Andy Shevchenko
+
 
