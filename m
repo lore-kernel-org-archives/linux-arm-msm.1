@@ -1,112 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795077111;
-	b=4M3jnzhMY/tcnUr7OLIPUhxISfpxCHou5q5Sb7WPMr72X7bmgjSvnfBMlvOOyvHMS2iM
-	 X34/PlhMOiS/+TWV3L2ONWPceXYcNlpLliwMLlHIKRWFFbk0GiI/tZwNX/qEEf/DJx/tg
-	 pyXJ8dSEqEDHItWP0ADEeFCVQxBLwiRJWw2lVBXE27LjB/oVQsk2VtTfNu6Nrq0YjFhWU
-	 A34RragxVxwys/TvrjOHJ2cIbW0CqZM9Lthhdn07PQUUJJRd161myP+YMargOpt1MhePw
-	 TcEC5rviKzSl5O+Y3nxPboLIG7EFByMFSlE+ZrAh44uN1S9a1KJHZ7lzg9FhbwJEhjA==
+	t=1795078902;
+	b=5j3iHdoKBpVL1/Scn7wEOeSbIwBdF4k86lD0iojkom5WFej5jWznVPX1KwmcBl/xW9QN
+	 Nwe/htCclccPveKtVfRcv/xpK67Ev/BtYAZPRK3ERBZuY4QdaMhBGMfhAghpmbb0RfBMJ
+	 2vVsaCpQCw6A/pMi/57bZQU5o/+Xt8IgBqmb0z1V06GYVTL5WsYBVeecT3V3Nvw/VlmdE
+	 tMyfOQJPK/Xg5h65qRzRiQ0ZElD2ndkIUCf7I/mqpR/dw1fxlm5pR7YMuXVXNwK62mF5a
+	 /lcazeUtXdnO2pEvQOJWtXcaFlR8rQmE2Aji8H0GJGFJQUdMnsmp406VLZL0BbIvwIw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795077111;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=QE7ZF+eIOkDqPsqdXYso0HkQT1OPcmclWJ4l96GctkY=;
-	b=NH0nxJmlzHmufu/O8O3XDZ1klQu59moJeomIR7L6MWUe5Z0fGIjBSvYY41qj1rBZWXWs
-	 US7S62diHt1inaJS9Jmrd+PNYh2OVEYbT5c4H9zqRJCHt1N47ETLDr36CnkmGN6hOqyoQ
-	 /xflg5/W9HbiRZJ/M4yLF558wf8EcFF9m0+DYFjmQMcA149yMCCwNP6OhU2i2FkJVXxeC
-	 ySpZk8OKHNgBnj3b20JNJCv8NDGskSe2NNx1md5Cl5K4bZPDMO01MytpQe1pu0sfrEbo7
-	 8UHgbjVGaT3TPTTo67jviIhDlAn97HmrUF3sGkDNKDArhqT19eTAWwIzsujrnducHBQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795078902;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=ITGCEGI1ZSq7Vdj7hNGvtyM8m8GrUhYbkv5XfNHFCTc=;
+	b=za21tAicxU511N4iFxd2HOhS8JHn2/mF7TdXjgCAjnShBgTxNagdS6+oHReqDwQkgaRV
+	 6TqI2E42U/sPwZDfW4AV5MhzgeTkvIQV2rSm1uHIIQ2JmktWiRgfBWn7oc8FDlRiunrlY
+	 uuCSyb4fm7sr4sACqGL1ONSSl1ODOoxER3rSD4p1Xq/l7lHwFZICs0rWJeWvLgEBlJDxB
+	 ROGDnsFx6JxfPz4REYGe1r3CaUSPVn4BOPqk816qqMxN4O4TkDMTZXcfCJWGSP6M8Iuxp
+	 fD6n/gFCgvkEmFSvQsXejDSKsEeZnPaTQubn3ohC/6YEpMjYS3alRjAiMAxcYA8Sgiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=p7zhndNj;
-	arc=none smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TZUgwTmY;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NkC1cqhr;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 564E860A2608
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:31:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 564E860A2608
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BF0C606A33A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:01:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4BF0C606A33A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=p7zhndNj
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-382ecd5cf2cso733956eec.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 00:31:51 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TZUgwTmY;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NkC1cqhr
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AJ6v6Wm2030628
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:01:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=ITGCEGI1ZSq7Vdj7hNGvty
+	M8m8GrUhYbkv5XfNHFCTc=; b=TZUgwTmYMcMK/kxbo5yjiDiyYStlHnrk3z6Hog
+	EVNBlfiSViFmsWKAUDHGZ6kofY1tzvRQNyea/SCMIfHte21Z95m0RAatq1At3tAA
+	5/ufz27LtspqByurPrxAlzd8n4Kk+p8I2TAOEWNOThMwfG8tErGge/z4UUfjsg+b
+	Yz2NAO9HWffZLFh3YMw83VXD6KdUD/7V7wfhXGFlBL4NlSuVnO4lNKNI/Dl1IPtG
+	7+JAGQ0Q7VUEvRw/SHGSpt+XMLV/XifE1ZIDpbXRsUxA29UEmVqNBQkBuZ62uolS
+	l/ja9EA/+dzlRMbJZGn1/YFdp2uej0cNoihaci6Wt4JJ5eGQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1g3kum0h-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:01:39 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3b0a13ae043so2315575a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 01:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795077110; x=1795681910; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QE7ZF+eIOkDqPsqdXYso0HkQT1OPcmclWJ4l96GctkY=;
-        b=p7zhndNj+ByJ0t/ZowpKyXkDT0n/M5KpRKPY2QUfZjrSP4g7/a53NCFDUBT+txcfhP
-         6QH2k1Nj5inKUmUcCpVXFLazgjwx6bp+iFubnrhGH5Hd93kibYP6dIYhvdDr+ljbIdgB
-         nBrCYWeeZWBoXboSPQ8RjhcEv7Nk78WRTU5WLzISGR5OFRqYV/RCVLhEyO2mow6NAdog
-         20X8QXV/raRsmNyRhuBPR3bnQn5MAOYhHQ3PsA5202Lvuo4BK78Godm+ik10mwLXqPeC
-         8bXkHQ2kf5Oc3HjGczhROI2lj2IDer18jNftrh8cLmw//ETSskZE5h5SzJMxPy9q3TCw
-         Jgng==
+        d=oss.qualcomm.com; s=google; t=1795078899; x=1795683699; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=ITGCEGI1ZSq7Vdj7hNGvtyM8m8GrUhYbkv5XfNHFCTc=;
+        b=NkC1cqhr+pqIVr2nYzITnqpLD/kZk/DgVDTfweEqxh4QXwTpdYont8QNsnfV8ZrCGN
+         62FMmiiD37283hqzgowIol+VJEiCeUwCVmukEVRIIVX3hhCBXv5kmOVp9bJiCukyYb1N
+         R1w/QOX03DXhlgGCofikcYwOhxWcU9PHiR5vRDN1exDRjTrlxmMrxdkyzkj8pXTCrL/9
+         mha2PWlNTYPnUsobNPsmwmo8xk/DtZqPeDSeS1ZiUdb7/Duzn3bdE+YU4i2F0H0UVGga
+         f8RdwByGCnQCXtc2XoB01uBduTeZNdO3O5vy/vQy+fqpYxAWJ2j69hQxACWVXtGny0cU
+         15pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795077110; x=1795681910;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QE7ZF+eIOkDqPsqdXYso0HkQT1OPcmclWJ4l96GctkY=;
-        b=S3LWZVlBW8lk0YeeEP5as4El0MpsZ+NzIDZXU2DVbn8UzEArQWzmWvqeKFVwNBnoEx
-         rTBALZM05DrpzIGIOP0Im/lHzmJZPh0t8Ooge9rwwdAmQmoB37Bmcy7sXLrTKiP1KrF2
-         PaAAeBYY4nCq8lv7hBllQ0Xii9M7Hs2lDCbdQc2cpJEZ/4BFXUHHk+e+cPRyyJkYzlQZ
-         ocrjZHricBVCvUO4jZlIySXT4/mBBDSYB58uI/JCurCKaZL/PJihH8zFF1YVIGl3UNnJ
-         /OMcjQSQAtxXak3B7/AypOQ2TQG5/vH5HMkcT3iXQcIzeiyDsw2BgLbjVGPI5VKyfjbW
-         z5iA==
-X-Forwarded-Encrypted: i=1; AL+hErHLhRRFyfoXEQdiLmRNgyVGJ+Qv4vxYlrdiCV7mX5NKrhuhiId4/zCWPwkAgkZ+5hLfwwmW+4seqwdBa/oa@vger.kernel.org
-X-Gm-Message-State: APuU4Z+KWQu9X+WCgB1i/ZBQp0msMYDGdxqNEDhBep/As86crvp1G4Cx
-	UKzunL5SKWvPmALl9wzBbzjgvwPhQWYUhSM7ZBmjQWkkeeLsnETLd5i6
-X-Gm-Gg: AZFdTZcZEXYUfJFffCYURGoiWk0s8MNzMz+DK7xtbDO8jbwB7DyNQWxg5MhTTTVQ9Aw
-	CQ2Hv9Y5g2CQTIn7jPE7rnTOcsOysAHVc620lbivnTFPX8dJX1LcE/b/cJYXlDJv2v1PKx0RzTq
-	FfKJvhafJQDIVl5QoYc9m6AtrbQKJ86po1LgG71iW9ni7iWAqslD8ItrvcGvmfohgBI1yYz3Egy
-	1F//CEfhV54+PZzFZ1UuDxpqKhB21ADSSOmRwkK8NW0jn3mMwSsXkzUUGf1PbvDZ/GRRUBuXIKi
-	rXJomW7x05b3raCHznJwK47IqeVmd7INpzsZeDkbdlTKS0C2CR15YzTJyq3FygZTfL32bxnFVbO
-	eYHBxl0ZkcYdIEc0NmxCjqEvd3zz5mPD6ZTLWiJd6CZ54bTXraRRmtDMu6mmduzF10wS6Rrx2WC
-	LFoczgc5dGNIFAQ1aOAWveQDVok4edGHBwu82SC14MRQj1D5lVL2xFC+H4sx2uSXWZS90vzLpZe
-	Frt282FknWDU2iQg/Q6xUpowQ30ZfCEcEfV2sinKbRJ8oZyrqlDTD61NHuJM2MKbTbFP5wqFlAu
-	Hid97yEPgaNxcs0E5/6XHXcoPlQ6wClYvwQFsAd53MnQ3Lgd22KRuzGIQXtAe3ka3/RVGwdCzQR
-	ZUG0Fo1vhG8UjiNplCApy1U9nOfNrO2GCrUR0QbQsxeu335hH
-X-Received: by 2002:a05:7301:188e:b0:381:685a:e1ee with SMTP id 5a478bee46e88-384b3e78a26mr413843eec.12.1795077110279;
-        Thu, 19 Nov 2026 00:31:50 -0800 (PST)
-Received: from lwq-server.tail118c18.ts.net ([74.176.208.23])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a63054ddsm16553792eec.4.2026.11.19.00.31.43
+        d=1e100.net; s=20260707; t=1795078899; x=1795683699;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=ITGCEGI1ZSq7Vdj7hNGvtyM8m8GrUhYbkv5XfNHFCTc=;
+        b=CHvSOIVhWk6wuqImPtvp2MqVaaEW6wR8Y6qF5J7y7S6UIcaHpGXH8oZ9xMq28+icHQ
+         XXvZEl/tFifRF3LduFxXQWy2zLOWik+K9RngrxdTt2i+fH+lc+Fqv3xVW7V2WZUI1nOf
+         rjEa+JBpk4bBcUwj691XYWQY7cf1UQFKvqpRFJt6fksPGVi/eFUHtIYkhunHLG8lp61N
+         TbeBi12kAzxcZtE8bj+j0cDAYf8dos3u6s9AiCzsTju0RlVqtA799+XCGfStfLz7q0y0
+         pQE4IlUAqAzOmwRIbPa6Tnx+OTm+O0+MMUtOFh2S3m2a8CyjKyeVD1aY7hRsp9NL501J
+         mZuw==
+X-Gm-Message-State: APuU4Z8YujTuNK9m1CFpAab683pIbi4es1BH5P2P3rpgN0NQzVKfpyIN
+	H4158PhQTjn818dLwHCL/VlPoXkYSFKMt+4RtbzC8Vc398OHtcM/tdW7nHZ3WnE9f0k7D383ceY
+	nFG/QERp4zp/FjQ0Mz5Sxagoc2SjI8ogf91kYrdkMgQkcMWBAiKqf0vkhQN7eFkCX65ac
+X-Gm-Gg: AZFdTZfwp/K2VpxC+CQLnv4LRSWO+5oGeOTfwXgqU+XO3l6sMTi89O/io88/AuKLWm5
+	2H0OkA7VxvX2Uzrs3s1i0jDmMzCubYwYbSk+pRrCmxCNAlaBOF9wVYyEFNvEz9G8GRDZ+i7pI1V
+	QdR1Phwaq2unQqmxvzKLhbHu0IBzBLcOvhVPQLRcDXH3hrBfzJHNGrg+UGo6c2U6/Ggx46RzTOq
+	wYNmjOnn9Nn9WIgfAlJNnW/megakAFfAGuuHc6FKKH4VUsbt8bTMVCY2kPHOjs9GGGD+3Ne84TB
+	TNFLFapuqNTZ1pvhRyeOMI0ZwpYP5aKinHMmmX3OMKDhBXQNOUOFT3fg1rV1VXR1KPAsWFnkSBc
+	uuuL6Ab+W4LjjGF5EPxCYUEx6xo8hqprmnRe3OTHg9dsbn0pU04i4r4j9+2z95wgxn1iSgkQK61
+	RyPouE5Tx9g5Iha/BorwMXa067TDm66wJdiqlt
+X-Received: by 2002:a17:90b:240f:b0:3b3:fd13:6846 with SMTP id 98e67ed59e1d1-3b3fd137820mr1180156a91.11.1795078898513;
+        Thu, 19 Nov 2026 01:01:38 -0800 (PST)
+X-Received: by 2002:a17:90b:240f:b0:3b3:fd13:6846 with SMTP id 98e67ed59e1d1-3b3fd137820mr1180100a91.11.1795078897709;
+        Thu, 19 Nov 2026 01:01:37 -0800 (PST)
+Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b405d97356sm1689539a91.13.2026.11.19.01.01.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 00:31:49 -0800 (PST)
-From: Yaohan Li <shunsheng1218@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Sandy Huang <hjc@rock-chips.com>,
-	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-rockchip@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v2 2/2] drm/flip: drain the flip work on cleanup
-Date: Thu, 19 Nov 2026 16:31:33 +0800
-Message-Id: <20261119083133.3437277-2-shunsheng1218@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261119083133.3437277-1-shunsheng1218@gmail.com>
-References: <20261119023604.1495603-1-shunsheng1218@gmail.com>
- <20261119083133.3437277-1-shunsheng1218@gmail.com>
+        Thu, 19 Nov 2026 01:01:37 -0800 (PST)
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+Subject: [PATCH RFC 0/6] Coresight: Introduce Qualcomm QDCP support for
+ QECP-owned trace blocks
+Date: Thu, 19 Nov 2026 17:01:13 +0800
+Message-Id: <20261119-introduce-qcom-qecp-feature-v1-0-b1a730d2c57a@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,176 +114,410 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANu6/moC/x3MwQqDMAwA0F+RnBcwBTe6q+AH7Dp2KDHVHNZqq
+ mMg/vvKju/yDihiKgXuzQEmHy2aUwVdGuA5pElQx2pwrbsSkUdNm+VxZ8GV8xtX4QWjhG03wdh
+ 5brvgiG4e6rCYRP3+9yc8hh5e5/kDD6FV/HIAAAA=
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
+        Leo Yan <leo.yan@arm.com>,
+        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, coresight@lists.linaro.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        Jie Gan <jie.gan@oss.qualcomm.com>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795078890; l=17813;
+ i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
+ bh=Qm8wkTDkZmUAiyAjxR4v3XV6E4b8uB9Q9ij9pKed3qM=;
+ b=WHURqNKlO8bshALcTNZvAb2XCAG9UhRdzluI4GDnVo8+a+oCR8c8efuowElgHF3BibGfO4UZg
+ eO9ETnoPvn/BrDQejWYYPFXNn5iJIsUfZBXoM6X9uAYHvOnNSETbd6A
+X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
+ pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzNSBTYWx0ZWRfXzv5zKLK5XEJe
+ wsciFkDcQhC5aiOBEGj5BzsZgs+EDrdNCa4exSbRNbrqUKoYbWnzefBBWNIVQ4o1uVwUE6cFxQ5
+ SRJJCje7cife8Edy/8UtQ5NS6e9FIgqPKOhyKNqV5xy7Z6HPoKKScN8CjOG77/TxOqf285Ypp23
+ iwrd5lL2OyvpOk/dEescWv9+o8SFATJ+5TPuCUV/XKHvvB1cW+1c2BQDfD/Ux777ajoWYgLS238
+ vGl2a4bYGhY/+jBf34Uw9AiU7X43WqN7OuKZPuaerfFx0q0XuG9Puy/Ry/lB7OmN9XhpSkMGvbO
+ 0wtYmUuXzhIWs2aLOKzr+iMqQguIWVbXJ0n76UeIbVlSFevZI8Nx0RhWEMWRv8/5LDKrUWYGGVm
+ ur+Q00rBSa9F9KPpChs/3lJniT2sqxvY4PdlWYtUqxNQylPSuylbAYrAT6qPcdZnRbiQDs2DGBI
+ EkR7BFJQNA5eD7Z5KAg==
+X-Authority-Analysis: v=2.4 cv=Wom+otfv c=1 sm=1 tr=0 ts=6afebaf3 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=3_sEtDhLtaBHQnV-pIQA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzNSBTYWx0ZWRfX22CX0I2Zqss6
+ +0YVxTinJugbCMAAXJXhC/QJb6R9R2pZtl0S8uzk+BRObhYChFhmOiYtw/KggTw1OJFihv9uIGZ
+ sgWwhgG3JZOCJF7+Lq9lIhsg9AhFQV8=
+X-Proofpoint-ORIG-GUID: v9WLuNhPxZt4Qr0I50wENnNbXoAveYYt
+X-Proofpoint-GUID: v9WLuNhPxZt4Qr0I50wENnNbXoAveYYt
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ spamscore=0 clxscore=1015 phishscore=0 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611190035
 
-drm_flip_work_cleanup() only warns when the queued or the committed list
-is not empty.  Nothing cancels the worker and nothing runs the tasks
-that are still queued, so the caller silently leaks whatever the tasks
-hold (framebuffer references, vblank references, ...) and, if the
-worker is still pending, it can run after the structure embedding the
-flip work has been freed.
+On Qualcomm Hawi/Maili SoCs, part of the CoreSight trace hardware is
+owned by the Qualcomm Embedded Co-Processor (QECP), a separate on-die
+processor that runs its own firmware and has its own view of the trace
+topology. The owned blocks are an STM (System Trace Macrocell) source,
+a TMC (Trace Memory Controller) configured as an ETR (Embedded Trace
+Router) sink, and the internal funnels/replicators that connect them.
+This hardware ships today; it is not a future design.
 
-Cancel the worker and run the remaining tasks from
-drm_flip_work_cleanup().  The work item is the only producer of the
-committed list, so after cancel_work_sync() the two lists can be
-spliced out and iterated without holding the lock.
+The Qualcomm Debug Control Protocol (QDCP) is the firmware interface
+Linux uses to ask QECP to do what the AP (application processor, the
+cores running Linux) cannot do itself. It is a QMI (Qualcomm MSM
+Interface) service carried over QRTR (Qualcomm IPC Router), like other
+Qualcomm firmware services. QECP is the co-processor that owns the
+hardware; QDCP is the wire protocol Linux uses to talk to its firmware.
 
-The helper only drains the work items that exist when it is called, so
-the callers have to make sure that no new item can be queued and that
-the objects the tasks still use are alive:
+This series adds a QDCP provider plus an STM source driver and an ETR
+sink path that use it, so a QECP-owned STM -> ETR session works through
+the existing CoreSight sysfs interface.
 
- - Rockchip VOP: vop_unbind() unregisters the shared interrupt with
-   devm_free_irq() before the runtime PM is disabled and before the CRTC
-   and its flip work are cleaned up.  Disabling runtime PM is not a
-   barrier: vop_isr() bails out when pm_runtime_get_if_in_use() fails, but
-   that helper returns -EINVAL once runtime PM is disabled rather than a
-   "not in use" value, and the line is shared, so another user can still
-   get the handler invoked.  Removing it from the descriptor waits for the
-   invocation that is running and keeps new ones from starting, which is
-   what makes the drain that follows safe.  The bind error path that fails
-   after the interrupt was requested frees it the same way, so every
-   request is released exactly once.
+Register ownership
+------------------
 
- - MSM mdp4/mdp5: mdp4_destroy() and mdp5_kms_destroy() release the flip
-   work from the KMS destroy path, after the interrupt and the KMS
-   workqueue have been stopped and before drm_gpuvm_put() releases the
-   VM the worker needs.  The DRM-managed action is removed there, so it
-   cannot run later against a KMS that no longer exists.
+The QECP-owned MMIO control/status registers are protected by hardware
+access control. AP reads and writes to those ranges are blocked or
+trapped, so Linux cannot touch them and there is no race to describe.
+The AP does keep two things outright, with no access control involved:
 
-Rockchip VOP called drm_flip_work_cleanup() after drm_crtc_cleanup(),
-which memsets the CRTC.  Its worker calls drm_crtc_vblank_put() on that
-CRTC, so the drain has to happen before the CRTC is cleaned up.
+ - the STM stimulus write aperture, a separate MMIO region used only
+   for data writes, not for block control;
+ - the ETR trace buffer, ordinary system memory (DDR) that Linux
+   allocates, maps and owns exactly as for a local-MMIO ETR.
 
-Fixes: cabaafc78935 ("drm: add flip-work helper")
-Fixes: 47a7eb459777 ("drm/rockchip: Unreference framebuffers from flip work")
-Signed-off-by: Yaohan Li <shunsheng1218@gmail.com>
+                            AP (Linux)          QECP firmware
+                            ----------          -------------
+  STM stimulus aperture     owned, mapped,
+                            written directly
+  STM control registers                         owned, access-
+                                                controlled from AP
+  Funnel/replicator                             owned, private, not
+  routing                                       visible to Linux
+  TMC-ETR control registers                     owned, access-
+                                                controlled from AP
+  TMC-ETR trace buffer      owned, allocated,
+                            read via sysfs
+  TMC-ETR RRP/RWP/STS       read over QDCP      owned, returned over
+  (read/write pointers,                         QDCP on request
+  status)
+  Block clocks and power                        owned, controlled by
+                                                firmware only
 
+Linux owns what it can observe or allocate directly: the stimulus
+aperture, the trace buffer and its sysfs lifecycle. QECP owns what
+needs access to live hardware state: control registers, internal
+routing, pointer/status registers, and the clocks and power of the
+blocks. QDCP is the only channel between the two; there is no direct
+path and no fallback.
+
+Because firmware controls the blocks' clocks and power, the bindings
+describe no clocks, clock-names or power-domains for these devices, and
+the QDCP code adds no clock handling or runtime PM.
+
+System overview
+---------------
+
+Control path (QDCP, QMI over QRTR) and data path (hardware):
+
+  AP (Linux)                                 QECP
+  ----------                                 ----
+
+  sysfs / char dev
+        |
+  +-----v------------+  typed   +-----------+  QMI/QRTR  +-------------+
+  | QDCP STM source  |--------->|           |            |             |
+  | QDCP TMC-ETR sink|  API     | QDCP      |<---------->| QECP        |
+  +------------------+          | provider  |            | firmware    |
+                                | (soc/qcom)|            |             |
+                                +-----------+            +------+------+
+                                                                |
+                                       programs STM/TMC ctl regs,
+                                       ATID filter, internal routing
+                                                                |
+  Data path                                                     v
+  ---------
+  STM stimulus   +-----+   (QECP-private funnels/    +---------------+
+  aperture ----->| STM |----- replicators, no DT ---->| TMC (ETR)     |
+  (AP writes)    +-----+      node, not visible)      +-------+-------+
+                                                              | DMA
+                                                      +-------v-------+
+                                                      | etr_buf       |
+                                                      | (Linux memory)|
+                                                      +-------+-------+
+                                                              |
+                                       AP reads via /dev/<tmc> (sysfs)
+
+Enable, a trace session start (CoreSight enables sink first, then source):
+
+  CoreSight   QDCP ETR     QDCP STM      QDCP          QECP
+  core        (patch 6)    (patch 4)     provider      firmware
+     |            |            |            |             |
+     |--enable--->|            |            |             |
+     |  sink      | alloc/reuse etr_buf,    |             |
+     |            | compute paddr + IOVA    |             |
+     |            |--qdcp_tmc_etr_enable()->|             |
+     |            |            |            |--SG mode--->|
+     |            |            |            |--FFCR------>|
+     |            |            |            |--buffer---->|
+     |            |            |            |--start TMC->|
+     |            |            |            |<---ok-------|
+     |<--ok-------|            |            |             |
+     |--enable------------>    |            |             |
+     |  source                 |            |             |
+     |            |            |--qdcp_stm_source_enable()|
+     |            |            |  (src id, trace ID,      |
+     |            |            |   port mask)             |
+     |            |            |            |--set ATID-->|
+     |            |            |            |--start STM->|
+     |            |            |            |<---ok-------|
+     |<--ok------------------- |            |             |
+     |            |            |            |             |
+     |   trace flows STM -> (QECP-private routing) -> ETR -> etr_buf
+
+  (SG: scatter-gather, FFCR: formatter and flush control register,
+  IOVA: I/O virtual address, ATID: ATB trace ID.)
+
+Disable and readback (source first, then sink):
+
+  CoreSight   QDCP ETR     QDCP STM      QDCP          QECP
+  core        (patch 6)    (patch 4)     provider      firmware
+     |            |            |            |             |
+     |--disable-------------->|            |             |
+     |  source                |--qdcp_stm_source_disable()|
+     |            |           |            |--clear ATID>|
+     |            |           |            |--stop STM-->|
+     |--disable-->|            |            |             |
+     |  sink      |--qdcp_tmc_etr_disable()>|             |
+     |            |            |            |--stop TMC-->|
+     |            |            |            |<---ok-------|
+     |            | stop confirmed? no -> keep etr_buf pinned and retry
+     |            |   on the next enable, open() of /dev/<tmc> or removal
+     |            | yes:                    |             |
+     |            |--qdcp_tmc_get_param(RRP/RWP/STS)---->|
+     |            |<--values----------------------------|
+     |            | sync etr_buf, release                |
+     |            |            |            |             |
+  userspace reads trace from etr_buf through /dev/<tmc>, as for any ETR
+
+Sysfs ABI
+---------
+
+This series adds no new CoreSight-wide sysfs ABI. A QDCP ETR exposes
+the existing generic ETR/TMC attributes for buffer sizing and sysfs
+mode enable/disable, with one omission: trigger_cntr is not exposed,
+because the QDCP enable RPC does not convey it to firmware and writes
+would be silently ignored. The only new attribute is a read-only
+"traceid" on the QDCP STM source, like attributes other CoreSight
+source drivers already expose. Userspace reads trace data from the
+Linux-owned etr_buf through the same /dev/<tmc> interface as every
+other ETR; there is nothing QDCP-specific for it to learn.
+
+Why do qcom,service-id, qcom,instance-id and qcom,version come from DT?
+------------------------------------------------------------------------
+
+QDCP is a QMI client over QRTR. The only lookup primitive QMI offers a
+client is qmi_add_lookup(service, version, instance): "tell me when a
+server matching this tuple appears". There is no API to enumerate all
+registered services and pick one, so a client must know what it is
+looking for before it can look. Firmware does not advertise a list of
+services for Linux to negotiate against. The (service, version,
+instance) tuple is fixed by the platform firmware build, which is the
+kind of static platform fact DT (devicetree) exists to describe.
+qcom,service-id and qcom,instance-id are required; qcom,version is
+optional and defaults to 1.
+
+DT dependencies
+---------------
+
+The DT surface is deliberately small:
+
+ - the provider node has one connection-N child per QMI connection,
+   carrying the tuple above;
+ - each consumer has a qcom,qdcp phandle to a connection-N child and an
+   ID that names its block to firmware (qcom,qdcp-source-id for the
+   STM, qcom,qdcp-tmc-id for the ETR);
+ - the STM has its stimulus aperture in reg, and both consumers have
+   the usual CoreSight graph port towards the logical path.
+
+There are no clocks, power domains or nodes for QECP-internal topology,
+so the consumers depend on nothing else in DT.
+
+Design
+------
+
+CoreSight is a mature subsystem shared by every Arm CoreSight
+implementation. This series is built so that QDCP support:
+
+ - does not turn generic CoreSight drivers (coresight-stm.c, the shared
+   parts of coresight-tmc-core.c and coresight-tmc-etr.c) into
+   vendor-specific code;
+ - does not invent fake CoreSight DT nodes for hardware Linux cannot
+   observe or control;
+ - does not need a broad refactor of TMC/ETR internals.
+
+QDCP is therefore a firmware *provider*, not a CoreSight *device*. It
+lives under drivers/soc/qcom/ next to other Qualcomm QMI services, and
+consumers find it through a DT phandle, as for clocks or regulators. It
+never appears in the CoreSight topology graph and has no coresight_desc.
+The phandle must reference a connection-N child of the provider node,
+not the top-level provider node itself.
+
+Only Qualcomm-specific consumer drivers know about QDCP. coresight-stm.c
+is untouched, and TMC/ETR gains a parallel, isolated code path chosen
+once at probe time by the qcom,qdcp property, leaving the local-MMIO
+ETR path unchanged in behaviour. QECP-internal topology is not modeled
+in DT: there is no node for the funnels/replicators between the QDCP
+STM and the QDCP ETR, since CoreSight only needs a logical
+source-to-sink path to build a session.
+
+Probe-time resolution. The QDCP ETR reads DEVID (the TMC device
+configuration register) through qdcp_tmc_get_param() instead of MMIO,
+rejects any config type other than ETR, and selects its coresight_ops
+table and its RRP/RWP/STS readback function once, mirroring how
+CoreSight resolves desc.access for MMIO vs. system-register ETMs. The
+two paths never coexist on one device instance, so there is nothing to
+re-check at runtime.
+
+Lifecycle and safety rules
+--------------------------
+
+ - Firmware DMA into etr_buf is the main hazard. etr_buf is the buffer
+   firmware may be writing into, and Linux clears it only after
+   firmware has confirmed the TMC stop. If a stop is not confirmed,
+   including a failed or timed-out enable request that firmware may
+   still have executed, the buffer stays pinned: it is not synced,
+   freed or replaced, and the stop is retried on the next enable, the
+   next open of /dev/<tmc>, or device removal. If firmware never
+   confirms, the buffer is left allocated at removal rather than freed
+   under possible DMA.
+ - A failed read of the RRP/RWP/STS state invalidates the buffer
+   contents instead of leaving the previous capture readable.
+ - The provider-consumer link is core-managed, so unbinding the
+   provider first unbinds its consumers. A consumer that probes while
+   the provider is already unbinding defers its probe.
+ - If firmware does not confirm an STM stop, Linux still marks the
+   source disabled (the CoreSight source disable op cannot fail) and
+   logs a warning. The driver remembers the failed stop, so on removal
+   the trace ID is kept allocated whether the stop failed during
+   removal or earlier, and no other source can reuse an ID firmware may
+   still be applying.
+ - No lock is held across a QMI transaction wait.
+ - A QMI reply that omits its result TLV, or the value TLV of a
+   parameter read, is treated as a failure.
+
+Known limitations
+-----------------
+
+ - If QECP firmware resets while a session is active, Linux is not
+   notified and does not reprogram the STM or ETR. Trace stops until
+   the user disables and re-enables the session, and the disable logs
+   the firmware error. A provider reset notification is left
+   for a follow-up once the firmware reset behaviour is defined.
+ - The STM stimulus write path checks the CoreSight mode without a lock,
+   exactly like coresight-stm.c. It cannot take one, because the packet
+   callback is notrace and can run in atomic context, so a write can
+   race with a concurrent disable.
+ - QDCP-owned ETRs have no panic handler: the control registers are
+   firmware-owned and not accessible from the panic path, so trace data
+   is not preserved on panic.
+
+Scope
+-----
+
+This series implements one complete path:
+
+  QDCP STM source --(logical CoreSight path)--> QDCP ETR sink
+
+Not included, and deferred until a platform needs it: QDCP ETF (embedded
+trace FIFO)/link sinks, perf-mode (AUX) support for STM or ETR (sysfs
+mode only here), other QDCP source types such as TPDM (trace, profiling
+and diagnostics monitor) and OCLA (on-chip logic analyzer), a
+path-helper device for no-MMIO static sources, and the TMC
+BEGIN_READ/READ/END_READ firmware data-copy commands (the AP is assumed
+able to read the ETR buffer directly).
+
+Why not the power-domain framework?
+-----------------------------------
+
+The exported enable/disable calls could be modelled as a power-domain
+provider's .power_on/.power_off instead of a new API. This series does
+not do that, for three reasons.
+
+ 1. QDCP does not power anything on or off. The QECP-owned blocks are
+    controlled entirely by firmware, and HLOS (the high-level OS, here
+    Linux) has no way to request a power transition for them. When
+    firmware receives a QDCP request it decides for itself what the
+    block needs, including any power or clock handling, and performs
+    it. The on/off value in the SET_STATE requests starts or stops the
+    block's trace function, it is not a power-state request. A
+    power-domain provider, whose whole purpose is to control power
+    state, would describe something HLOS does not do.
+
+ 2. The calls carry data a power domain has no way to pass. The STM
+    enable sends the CoreSight-allocated trace ID and a port-enable mask
+    that firmware turns into its ATID filter. The ETR enable sends the
+    buffer physical and IOVA address, size, scatter-gather mode and
+    FFCR, in several requests. qdcp_tmc_get_param() also reads DEVID
+    and RRP/RWP/STS back from firmware, which the ETR needs to
+    synchronise etr_buf after a stop, and a power domain has no read
+    operation.
+
+ 3. The trigger is different. A power domain follows runtime PM, which
+    reacts to device usage. QDCP enable/disable must follow the
+    CoreSight path lifecycle: sink first, then source, started and
+    stopped by the user's sysfs enable. CoreSight already drives that
+    through its source/sink ops, so the QDCP calls hang off those ops
+    directly.
+
+Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
 ---
-Changes in v2:
-  - Split the MSM preparation out into patch 1; the generic helper keeps
-    draining the queued tasks here.
-  - Add the Fixes: tags for the flip-work helper and for the Rockchip
-    ordering.
-  - Describe the MSM callers by the new KMS-destroy call site instead of
-    the managed action, which now runs earlier.
-  - Rockchip: drop the pm_runtime_get_if_in_use() change.  Unregister the
-    shared interrupt before the runtime PM is disabled and before the CRTC
-    is destroyed, and release it on the probe path that fails after the
-    handler was registered.
-  - Checked as a series: both patches apply in order on msm-next
-    (d024361c631b) and on drm-misc-next (fac7a5f16230).
-Prepared against v7.4-rc1-1969-g666539eecdf4.
+Jie Gan (6):
+      dt-bindings: soc: qcom: add QDCP provider
+      soc: qcom: add QDCP firmware provider
+      dt-bindings: arm: qcom: add QDCP STM source
+      coresight: qcom: add QDCP STM source
+      dt-bindings: arm: qcom: add QDCP TMC ETR sink
+      coresight: tmc: add QDCP ETR sysfs support
 
-Compile tested only: arm64 with aarch64-linux-gnu-gcc 11.4
-and CONFIG_DRM_ROCKCHIP=m, CONFIG_DRM_MSM=m.  The affected hardware was not
-available, so the teardown path was not exercised and no fault or
-race injection was run.
-
-Checked as a series against the target trees: both patches apply in order on
-msm-next (d024361c631b) and on drm-misc-next (fac7a5f16230).
-
-AI assistance: the analysis, the change and its review notes were
-prepared with Claude (Anthropic) as a coding assistant.  The author
-reviewed the reasoning and takes responsibility for the content.
+ .../bindings/arm/qcom,coresight-stm-qdcp.yaml      | 111 +++
+ .../bindings/arm/qcom,coresight-tmc-qdcp.yaml      | 102 +++
+ .../devicetree/bindings/soc/qcom/qcom,qdcp.yaml    |  81 ++
+ drivers/hwtracing/coresight/Kconfig                |  11 +
+ drivers/hwtracing/coresight/Makefile               |   4 +-
+ .../hwtracing/coresight/coresight-qcom-qdcp-stm.c  | 550 ++++++++++++
+ drivers/hwtracing/coresight/coresight-tmc-core.c   | 145 ++-
+ .../hwtracing/coresight/coresight-tmc-etr-qdcp.c   | 379 ++++++++
+ drivers/hwtracing/coresight/coresight-tmc-etr.c    |  46 +-
+ drivers/hwtracing/coresight/coresight-tmc.h        |  46 +
+ drivers/soc/qcom/Kconfig                           |  12 +
+ drivers/soc/qcom/Makefile                          |   1 +
+ drivers/soc/qcom/qcom_qdcp.c                       | 985 +++++++++++++++++++++
+ include/linux/soc/qcom/qdcp.h                      | 128 +++
+ 14 files changed, 2553 insertions(+), 48 deletions(-)
 ---
- drivers/gpu/drm/drm_flip_work.c             | 23 +++++++++++++++++++--
- drivers/gpu/drm/rockchip/rockchip_drm_vop.c | 21 +++++++++++++++++--
- 2 files changed, 40 insertions(+), 4 deletions(-)
+base-commit: e8017d29067fd1310a65c3494ce1a1b492adbac6
+change-id: 20261119-introduce-qcom-qecp-feature-f59c05a21179
 
-diff --git a/drivers/gpu/drm/drm_flip_work.c b/drivers/gpu/drm/drm_flip_work.c
-index 52c437746d483..b8ce3966fa9ab 100644
---- a/drivers/gpu/drm/drm_flip_work.c
-+++ b/drivers/gpu/drm/drm_flip_work.c
-@@ -149,10 +149,29 @@ EXPORT_SYMBOL(drm_flip_work_init);
-  * drm_flip_work_cleanup - cleans up flip-work
-  * @work: the flip-work to cleanup
-  *
-- * Destroy resources allocated for the flip-work
-+ * Cancel the worker and run the tasks that are still queued, so that the
-+ * resources they hold are released even if the work never made it to the
-+ * workqueue.  Must be called before the object embedding @work is freed and
-+ * after the driver has stopped the code that calls drm_flip_work_queue()
-+ * and drm_flip_work_commit(): only the work items that exist when this
-+ * function is called are drained.
-  */
- void drm_flip_work_cleanup(struct drm_flip_work *work)
- {
--	WARN_ON(!list_empty(&work->queued) || !list_empty(&work->commited));
-+	struct drm_flip_task *task, *tmp;
-+	LIST_HEAD(tasks);
-+	unsigned long flags;
-+
-+	cancel_work_sync(&work->worker);
-+
-+	spin_lock_irqsave(&work->lock, flags);
-+	list_splice_tail_init(&work->queued, &tasks);
-+	list_splice_tail_init(&work->commited, &tasks);
-+	spin_unlock_irqrestore(&work->lock, flags);
-+
-+	list_for_each_entry_safe(task, tmp, &tasks, node) {
-+		work->func(work, task->data);
-+		kfree(task);
-+	}
- }
- EXPORT_SYMBOL(drm_flip_work_cleanup);
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_vop.c b/drivers/gpu/drm/rockchip/rockchip_drm_vop.c
-index 69e72727da24f..c10ad16147a54 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_vop.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_vop.c
-@@ -1990,12 +1990,19 @@ static void vop_destroy_crtc(struct vop *vop)
- 				 head)
- 		drm_plane_cleanup(plane);
- 
-+	/*
-+	 * The flip work drops the vblank reference taken when the framebuffer
-+	 * was queued, so it has to be drained while the CRTC is still valid.
-+	 * The CRTC has been shut down and runtime PM disabled by the time this
-+	 * runs, so no new work item can be queued anymore.
-+	 */
-+	drm_flip_work_cleanup(&vop->fb_unref_work);
-+
- 	/*
- 	 * Destroy CRTC after vop_plane_destroy() since vop_disable_plane()
- 	 * references the CRTC.
- 	 */
- 	drm_crtc_cleanup(crtc);
--	drm_flip_work_cleanup(&vop->fb_unref_work);
- }
- 
- static int vop_initial(struct vop *vop)
-@@ -2259,7 +2266,7 @@ static int vop_bind(struct device *dev, struct device *master, void *data)
- 		vop->rgb = rockchip_rgb_init(dev, &vop->crtc, vop->drm_dev, 0);
- 		if (IS_ERR(vop->rgb)) {
- 			ret = PTR_ERR(vop->rgb);
--			goto err_disable_pm_runtime;
-+			goto err_free_irq;
- 		}
- 	}
- 
-@@ -2267,6 +2274,8 @@ static int vop_bind(struct device *dev, struct device *master, void *data)
- 
- 	return 0;
- 
-+err_free_irq:
-+	devm_free_irq(dev, vop->irq, vop);
- err_disable_pm_runtime:
- 	pm_runtime_disable(&pdev->dev);
- 	vop_destroy_crtc(vop);
-@@ -2280,6 +2289,14 @@ static void vop_unbind(struct device *dev, struct device *master, void *data)
- 	if (vop->rgb)
- 		rockchip_rgb_fini(vop->rgb);
- 
-+	/*
-+	 * Unregister the shared handler before the runtime PM is disabled and
-+	 * before the CRTC and its flip work are cleaned up: disabling runtime
-+	 * PM does not keep vop_isr() from running, and the flip work the
-+	 * handler commits has to be drained afterwards.
-+	 */
-+	devm_free_irq(dev, vop->irq, vop);
-+
- 	pm_runtime_disable(dev);
- 	vop_destroy_crtc(vop);
- 
+Best regards,
 -- 
-2.34.1
+Jie Gan <jie.gan@oss.qualcomm.com>
 
