@@ -1,79 +1,78 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795043837;
-	b=lhDR+t9o0ac7ZHixgtJUoxTfaI4znADH9qk0ufoNQ7FWmQ3zO168tp1mFlTuPIye7ACc
-	 krIDtyzOMA/u9I+1vH4ZUsOvLV5vBLzdDsf9viGs6E1wGPQh2r95aMrKQ2IJS7F+gMkWu
-	 ExHAQsXE826r8Yio4cinXK4jdygiyFwdgpUBPfYKsakqjOt06WhA7Aeur2i74HlEPBjAW
-	 Eiek1ey9RMqL7+NMdHdbXsH5cklr4hcbUX0zNaqDCMGnKKSSmytjElaJuyPbN6f/0MgX8
-	 uttmBytzz+MIcJaWRBhwhkIxFdUzq6lvXrzzmcDJOkxYYvkdj8EnEvf2B1FRiSGphEQ==
+	t=1795049302;
+	b=hNDB3962G99fHF5mT9aswAwJhKb3dIR7rlaIVvh9LqAWXMi5FnOpUdQSgtKNrmBzDzbl
+	 HL69ArHmWHtv95PCkXskA2UoYTbf+gAD36SDuhEfPLIq+HyUYEzSV+m54QIkPhwjQIiXp
+	 2Fr1f7tXM3FcORxOa8WEnDNRDnmbDuTEkxopZPxOENier66QN+RVs5t57EVzLRG9sqImA
+	 pO8+cFsU8nQXpi6F5jjC6y2rtCfnsxG9ppVake6VXfrqwNcjxG7Og4NF/I7tNmKrfb5Uq
+	 XZMmr611oG2PA6IxCjbbKG/ATLPyHS6q4T5EH/lUESdBVzEC6St6/dorT03vQ/s/zZA==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795043837;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795049302;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9CeY2H+xs1/uP6Al65hZcJhz1eI/t+6B7af7ReXxmio=;
-	b=SAR3rW6ytCDBHajljeMcNtq6dMzL5kAoxQMroKi9p1D6+S+xr3+UXasELgjVsetY2zpL
-	 bJfo1GsF5zMZfTUwQ1/lB/7lf85/ejXsmhn+Yh14JfWlbj9fcnbI5kmNlTHojxqwNAe4/
-	 ygAlhMtrTL9UoeG7SXCeFzlVEjrTImHbXcFHNoQUypzGuEGi46drTuRtAF9NAhGJPH4YB
-	 dgF+EUWBh8xEau5DqeAbdDuyyrHUZ7QaAICMz6jYQZBYUJN05e6q/OB7+0Ys1LkXsSIvo
-	 cTypv3ByLUv2Ya0lhBIrXSUttNiMwYZF+SjmGaPu3j59Rn9AGUzVYLhn4kN31pI53Ig==
+	bh=5Xh8yKRlhBfEpQNEhsMcynrEiq1Ep9eqggMSvfIFRus=;
+	b=xS/DoBr+O6UsSuF0MP8ccqNjYw+TJSve7ThaK0BBuryvRFJ5YTtVZE3gklkx5fHo/e+S
+	 d62bz6dNO2NTYAtYv27swd+bboJwgwvkWvS9yqUzVNS8wCRSChmim103QFutl0L/BNYoR
+	 R2GYZECIUO4+wE2pn6yX/sTRFKa6Zbhiyp1I7oHCP4g5gOAvrASKVmgVtiWRpiLQvpVhR
+	 jMJSMgOfqmCbKUkhai48udb0nSSIpBzQbICFqf+JewGYCXLz9tVkg6z5BfxVrhnaqfQb8
+	 CzA5dmkqoL0JUS4i4AcMK8WbMEiQnu7PQ6SSmBX3XCxQHbkCO1RkYTrlIU2pW1C3cJA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eB9KIEms;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gupwqcAW;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6510260A2607;
-	Wed, 18 Nov 2026 23:17:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93F6C606A33F;
+	Thu, 19 Nov 2026 00:48:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eB9KIEms
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gupwqcAW
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795043837;
-	b=KZAhjkJNrkRajDLFanC/3Sq5h41vlCENifPQSg1qfjLs1aJpQHZlz8qZRy81nhGBo4u4
-	 HLpQgCGKXZoWDo+xCS/HXBOnei1Hs3aI1DkfygNxLMYw2typDtvp4f69byQk7oZRZc1Vg
-	 33YiUgdhRCaZzQs+jnhWHjnJTyQMdWw2imssNdulNmf9Nszco4dEZWYDhhkCwpBawf+Hn
-	 g5e0FaAIusNhemI1ueDLQhLfqeKmX7Xt1x5QcbqHvXbkgy43SqAaZSe2Oo6Z6sM18GX7F
-	 AcqB8/uows7IrMMCydchPo2vbtQh6TdUJXrV+HaTV+vN+34NMhxTAJp86vE/h0efkLA==
+	t=1795049302;
+	b=zetupSLD8QCv2gM+YTgKRONi4DmoX0edZgXeQah7sgVBvigSbC1+JpDMe7hSkPlBBsCp
+	 4WhkM/Um0V2P/4Df+5atr7NLrSHfPwEpbGDS4eRBB7/MvBmjHy2Is3oR5H2BhwWW2t5t+
+	 PKEDFZsgzqH99Yl2c6Ti++AVyKfCMrejeJX6kXQ31jIzcFEHTlr6KG2L1GiaH4w7hXbG3
+	 nN7w011FrHfX17Lydivu9lIOUJ0RHYq0wOu+8aLSR34vtcBWGyV+4r3jstNURiJd5EMGT
+	 VIiE821vU9X5HpFee9fakvE3oA5pVKfPhexCn2h2TLXoJMbAahcrKjL57RXb1VqXvjg==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795043837;
+	c=relaxed/relaxed; t=1795049302;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=9CeY2H+xs1/uP6Al65hZcJhz1eI/t+6B7af7ReXxmio=;
-	b=TGzPfIIXrz0YImeJOgsUCoBZOp5yAoCNIJhORSUgcc+e9X4LShRd1ZXu3Z50hISkUmSJ
-	 4EtTclvr17YLox9PERroRw1wC0iaYcGh/0fzQS81wS7S/oPiOM0PjpSbLnbNtlq/wXKKv
-	 NFKmbTKJ3VoqSgv38b2QTYxaCCpv+VJsn+/U7n9FWebXkv6Iq97vFHDMj5lnwSpQUUYd/
-	 oQYCm9tml9VNTAhP75YzvgTshxzMkDnY64VeSy4Ee+fvhYV4/4OpJUQuk2stMw7+3OXel
-	 GWkbTPA7DzxC2PpffCnyQiY9BfrWpYy9QgAYA9aYjkZXS1Ke9bDFlf4GhQynaosypbw==
+	bh=5Xh8yKRlhBfEpQNEhsMcynrEiq1Ep9eqggMSvfIFRus=;
+	b=HyFCGVXLiik0vt3odBsW+Kk1pue0INbX4TJAJVXNVEha+kuY6xt5K87dwZ3YLRY5i3b9
+	 s/nAzzLunDPAFS+OEZi9y9gU8zQhhEFeutQPci8lJQQYnrBaY+P1ROI3VkQ3zk3W+8QIv
+	 1cjjfNr9TPktnO6ytEJVgzsvhbKxecJAaWbB/7L9N8XqzUN8qxDU0uEReAFPFjhmHTlpj
+	 G2Im3a93bbq6mxOlcEQE5jCEyiCQeU8Txzt11rOMbKVuP+gQjwN36gykbO2HGXJ1l4HzC
+	 pL5gq0rDDIVevFtTn2lgnlr/qCnTIiaxx23p8PcTSV6stxi0r+wpPvMczH3GCfTxVKQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id B7DB11F000C9;
-	Wed, 18 Nov 2026 23:17:15 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id AA6631F000C4;
+	Thu, 19 Nov 2026 00:48:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795043837;
-	bh=9CeY2H+xs1/uP6Al65hZcJhz1eI/t+6B7af7ReXxmio=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=eB9KIEmslW5ZrbP1xXQKV1Dw+n3fpU429nb9V5lc9TPrYBhv9xtNg/MhPCqybbF+k
-	 t5Mvci3IaHZ9cMoKdABQfiORhpafgQijRKCdN2eeU8IEH8wR/s+qRwp7zDy7hUYCgX
-	 L/HBZfRFaEFrzUSb64JEBsPPILG2U0pQ4UGIve/Of3jCwbzgsIOqctLW1Ud8Ql9z3U
-	 kfjHvLXX/P3NZmZ7ArNi0iZZgcLRSd2G/Ayxph3QpMF59NHAsO9y0CCH90D01teK8J
-	 b5O6T10EzcFi8Epxup7c5JZF1G3IDAJCCB/ZSnO9XhKTPqlTCORFtrU1YALxc356UG
-	 zfdnBDHsKdvYw==
+	s=k20260515; t=1795049302;
+	bh=5Xh8yKRlhBfEpQNEhsMcynrEiq1Ep9eqggMSvfIFRus=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=gupwqcAWgdG4vpYWnZotfPHnC7siDyWnGUbiT/Ptt0Yj4WpkA7/ytlmq1r1gqJi9f
+	 wrRCJXpHHtRmqrX3rldB+jFtBJFIvE6gY9HQgiMXEyLv1ij5FHzQ6Ho2YybUgfA424
+	 j1e2A18z+4FzB713/IJw0o6ADWtBioYapfesJY2kJWdMXM+NHZNq+rpEn+J6JsFHYp
+	 OZHK7EdayteJSUEfhx0sb67rueYqz9A/yQPbpNn20aXhp5QM4FoS4WN6aOCISOOMxi
+	 GQHusZU17TToPuLQL68Gp1uMg3DYlF2ovOGGRzDCnJEfTu4wjD2wtiLfOen7bvqVF/
+	 9UtmikDewnUtg==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 489AD4B01B;
-	Wed, 18 Nov 2026 23:17:15 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 0B0454B053;
+	Thu, 19 Nov 2026 00:48:21 +0000 (UTC)
 From: =?utf-8?q?Alexandru_Andrie=C8=99_via_B4_Relay?= <devnull+alex.andries.aa.gmail.com@kernel.org>
-Date: Thu, 19 Nov 2026 00:16:51 +0100
-Subject: [PATCH 2/3] power: supply: qcom_battmgr: complete ack on callback
- payload errors
+Date: Thu, 19 Nov 2026 01:47:58 +0100
+Subject: [PATCH] drm/msm/dpu: use single DSC encoder when slice_count is 1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,24 +83,27 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261119-upstream-qcom-battmgr-fixes-v1-v1-2-ca83700c08c1@gmail.com>
-References: <20261119-upstream-qcom-battmgr-fixes-v1-v1-0-ca83700c08c1@gmail.com>
-In-Reply-To: <20261119-upstream-qcom-battmgr-fixes-v1-v1-0-ca83700c08c1@gmail.com>
-To: Sebastian Reichel <sre@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, stable@vger.kernel.org, 
+Message-Id: <20261119-upstream-drm-msm-dpu-dsc-single-slice-v1-v1-1-4744ad5b9747@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNQQrCMBCF4auUWTtgirXWq4iLOBnrSBPDTFOE0
+ rsbdfX4Nv9bwViFDc7NCsqLmLxShds1QA+fRkYJ1dDu26NzbsCSbVb2EYNGjFY3FwxGaJLGidE
+ mIcbFYdf1RL6n4XQgqLmsfJf37+py/dvK7ck0f/uwbR/+4X6DjAAAAA==
+X-Change-ID: 20261119-upstream-drm-msm-dpu-dsc-single-slice-v1-557cca7c984c
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org, 
  =?utf-8?q?Alexandru_Andrie=C8=99?= <alex.andries.aa@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795043834; l=4014;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795049300; l=2415;
  i=alex.andries.aa@gmail.com; s=20261118; h=from:subject:message-id;
- bh=4a5S/RCiOR+4vQvgLxF6hT1Z621jRwseAFd13o3O2w0=;
- b=CkKPXNOplgo1JQ1Ks5iRvi3VDP4HJqvXCRCoVwGYk/kboEMLmTEPGZKDftPrE4glT65Y/l1pb
- UZd0A/aH3UVCuFfCyqn20nYFE+QowQ2EtzPvLLbSBJnrkb7Gugg10zQ
+ bh=f5QJmSYrdCgoJ98DDgeJ718yQzeQFrq5DX9OKNMAinQ=;
+ b=rXC2vTGceRQp0u2V8QoFCw7XfnzFKhnBDOn2ug/aufs/tPdEbAjHloh/v8jz8fV6yqUYOOnsT
+ ZnHYpjgXT73D+qJA46bwgRoo3hvneMu/5Zh6S3+xMEJw2zW2w+qLN80
 X-Developer-Key: i=alex.andries.aa@gmail.com; a=ed25519;
  pk=kNAqgavfB7uUd1mA8o8TszhGxzyqBwY71PGO/oK4v84=
 X-Endpoint-Received: by B4 Relay for alex.andries.aa@gmail.com/20261118
@@ -112,117 +114,63 @@ Content-Transfer-Encoding: 8bit
 
 From: Alexandru Andrieș <alex.andries.aa@gmail.com>
 
-On unexpected payload lengths, qcom_battmgr_sc8280xp_callback() and
-qcom_battmgr_sm8350_callback() return early without completing
-&battmgr->ack, stalling qcom_battmgr_request() for 1s until
-wait_for_completion_timeout() expires with -ETIMEDOUT instead of
-returning -ENODATA. Aside from the 1s delay, -ETIMEDOUT causes
-power_supply_uevent() to abort the entire uevent on firmware with
-mismatched property payloads (such as shifted BATT_MODEL_NAME IDs on
-Xiaomi SM8350), whereas -ENODATA lets add_prop_uevent() skip only the
-affected property.
+dpu_encoder_update_topology() currently selects 2 DSC encoders whenever
+catalog->dsc_count >= 2, even when the panel only uses a single DSC
+slice (dsc->slice_count == 1).
 
-Set battmgr->error = -ENODATA on short payloads as well and jump to
-out_complete on all payload length errors.
+A single slice cannot be split across two DSC encoders: merge mode
+halves the per-encoder input width below slice_width and, on DPU 7.0+,
+computes num_active_slice_per_enc = dsc->slice_count / 2 = 0 in
+dpu_hw_dsc_config_1_2(), dividing by zero in
+_dsc_calc_output_buf_max_addr().
 
-Tested the SM8350 path on a Xiaomi MIX 4; the SC8280XP path was
-build-tested only.
+Require dsc->slice_count >= 2 before selecting 2 DSC encoders on a
+single interface so single-slice panels use 1 DSC encoder.
 
-Fixes: 29e8142b5623 ("power: supply: Introduce Qualcomm PMIC GLINK power supply")
+Fixes: b6090ffb30f3 ("drm/msm/dpu: Fall back to a single DSC encoder (1:1:1) on small SoCs")
 Cc: stable@vger.kernel.org
 Signed-off-by: Alexandru Andrieș <alex.andries.aa@gmail.com>
 ---
- drivers/power/supply/qcom_battmgr.c | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+Testing:
+- Tested on a Xiaomi MIX 4 (SM8350, DPU 7.0) with a 1080x2400@120Hz
+  single-DSI single-slice DSC panel; dual-DSI topologies were not
+  hardware-tested.
 
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index c07e2db8f242..83e67d22c432 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -1285,7 +1285,8 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 	if (payload_len < sizeof(__le32)) {
- 		dev_warn(battmgr->dev, "invalid payload length for %#x: %zd\n",
- 			 opcode, len);
--		return;
-+		battmgr->error = -ENODATA;
-+		goto out_complete;
- 	}
- 
- 	switch (opcode) {
-@@ -1300,7 +1301,7 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 				 "invalid payload length for battery information request: %zd\n",
- 				 payload_len);
- 			battmgr->error = -ENODATA;
--			return;
-+			goto out_complete;
- 		}
- 
- 		battmgr->unit = le32_to_cpu(resp->info.power_unit);
-@@ -1325,7 +1326,7 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 				 "invalid payload length for battery status request: %zd\n",
- 				 payload_len);
- 			battmgr->error = -ENODATA;
--			return;
-+			goto out_complete;
- 		}
- 
- 		battmgr->status.capacity = le32_to_cpu(resp->status.capacity) * 1000;
-@@ -1388,6 +1389,7 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 		break;
- 	}
- 
-+out_complete:
- 	complete(&battmgr->ack);
- }
- 
-@@ -1403,7 +1405,8 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 	if (payload_len < sizeof(__le32)) {
- 		dev_warn(battmgr->dev, "invalid payload length for %#x: %zd\n",
- 			 opcode, len);
--		return;
-+		battmgr->error = -ENODATA;
-+		goto out_complete;
- 	}
- 
- 	switch (opcode) {
-@@ -1415,7 +1418,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 					 "invalid payload length for BATT_MODEL_NAME request: %zd\n",
- 					 payload_len);
- 				battmgr->error = -ENODATA;
--				return;
-+				goto out_complete;
- 			}
- 		} else {
- 			if (payload_len != sizeof(resp->intval)) {
-@@ -1423,7 +1426,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 					 "invalid payload length for %#x request: %zd\n",
- 					 property, payload_len);
- 				battmgr->error = -ENODATA;
--				return;
-+				goto out_complete;
- 			}
- 
- 			battmgr->error = le32_to_cpu(resp->intval.result);
-@@ -1514,7 +1517,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 				 "invalid payload length for %#x request: %zd\n",
- 				 property, payload_len);
- 			battmgr->error = -ENODATA;
--			return;
-+			goto out_complete;
- 		}
- 
- 		battmgr->error = le32_to_cpu(resp->intval.result);
-@@ -1555,7 +1558,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 				 "invalid payload length for %#x request: %zd\n",
- 				 property, payload_len);
- 			battmgr->error = -ENODATA;
--			return;
-+			goto out_complete;
- 		}
- 
- 		battmgr->error = le32_to_cpu(resp->intval.result);
+AI disclosure:
+- Debugged and drafted with assistance from Gemini 4 Carbon
+  (Antigravity), and reviewed and tested on hardware by the submitter.
+---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
--- 
-2.56.1
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+index 0a6be69a3e83..ffccee6b41f1 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+@@ -680,13 +680,14 @@ void dpu_encoder_update_topology(struct drm_encoder *drm_enc,
+ 		/*
+ 		 * Use 2 DSC encoders, 2 layer mixers and 1 or 2 interfaces
+ 		 * when Display Stream Compression (DSC) is enabled,
+-		 * and when enough DSC blocks are available.
++		 * and when enough DSC blocks and slices are available.
+ 		 * This is power-optimal and can drive up to (including) 4k
+ 		 * screens.
+ 		 */
+ 		WARN(topology->num_intf > 2,
+ 		     "DSC topology cannot support more than 2 interfaces\n");
+-		if (topology->num_intf >= 2 || dpu_kms->catalog->dsc_count >= 2)
++		if (topology->num_intf >= 2 ||
++		    (dpu_kms->catalog->dsc_count >= 2 && dsc->slice_count >= 2))
+ 			topology->num_dsc = 2;
+ 		else
+ 			topology->num_dsc = 1;
+
+---
+base-commit: 97d73c8251226cf27cc6656b4c542869bb8c69fa
+change-id: 20261119-upstream-drm-msm-dpu-dsc-single-slice-v1-557cca7c984c
+
+Best regards,
+--  
+Alexandru Andrieș <alex.andries.aa@gmail.com>
 
 
