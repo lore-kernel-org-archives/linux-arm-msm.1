@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795090000;
-	b=PM2D6q6CSJetFjDXb4ydPHBPHviSf5W+79FwegLn8YeBAoqm5bqcpSkXkI0eFComgTd+
-	 0Q5Cc9iBzYWQUesPkCyUqUBPguWlEREOpDecNzbNmxWA9IHAhRYYuRhp6ax3V0m9usBzj
-	 ynay7ZPBn1gfdFAr7O7T2+YknL86OZ+nYczHj4CSPWFN2osVNK50VZMSHZogEK9MVw69m
-	 Y6ORBMZlRN3NHj6DazDc6spABGvPg3R730OD8Sqr0N13bN7Hrtu6EzdjJ7Akv6tPXyHAG
-	 yeolVpRWWHYWr8DXzPaLBs4ANMmF+di86Rx/LM0gDKjwVvlSQ8FeopP7L0l4RudR6BQ==
+	t=1795090050;
+	b=b0iil8ZlwJCZ0wFkkqREDZxGEX/ssVeYw+o+QAoqlMb1puQT4s0FEKB9yfDc8PVt6iUf
+	 0qD0Hb3m4Dxb+U1fJFf1uABd6Cl8l2QtEQp4g+VwYVFH1b+Ow1NAxosfBspmGBsXDO4lu
+	 CYrD5gs9GpzQHf0cce2hShK8vdEZaEvuF4msOsNvAOJiNJM55CQxFiRy5gDgn9BOKl6Cd
+	 TRQPztHH+slYXHvBqPKAbN3WQAWwMgVg8j4jteeZV9xBuJFxPis7OdK7U9LmrumLCnoz9
+	 ZMCO+T1fKnT82BrWDh2+4UYLyMAIA3K/jyqcNA+DvfAtsFRyWdfY6VE0MLuBUVS44Lg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795090000;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795090050;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=7YOuzXDEw+rkcmBi95+83IbwhlceUdsO0O5u8keZMqg=;
-	b=nrEY+ynHyp+PDzB7K/GGUUgY1CizmDpmMNESMqSaS0w7kyjjWoCIatT6GcrUXDmh5kO1
-	 PEmPqTfhUO/jKzdElojdGit3+KJtRjyHj1HJeWSAqszvogclARBzY8gyaECbMtN7f7eZg
-	 QLiYpbyuYytE/Ul+BD3lnUooKebzW9LFM+q4w6thPd7VTGNUJI0wZnEyIs3yRYOtGT1Ir
-	 FzYdW9PfXQMs/vvlQMbde/bdw3bIc27yiFIG8UkW+Ia8SvL3HT6mxpymwlzapcJ3UkJMd
-	 hARbV61MC0khjDcy7HwhUn+WJD58iW8melg7vCD5b3mfYLJT/kjoGwnOpHeG2R5MpXA==
+	bh=sEh748hTFXKoOcx65XoNThIs8/IpsB6k+/cDw03wuuQ=;
+	b=e+OwexX0YnWslqWCKl9ysuua656vkf2lWMVQIHq/LJEHahfoYa0UHx6UplZ5CMuZQakh
+	 GkKk4LGlD1E3Wi9qRWXTOoUnFol6P/kvCsMFsvHDk5odNR5rmW6utNIVCvlBvi5YPIzpp
+	 SW7YbUmmyLrLD4YVI4IOu7jjFlvZ2E6NcTnz30AircYTDv1lqOBGExXAb6mjWb7OgduUA
+	 SuxsgIQaePOyq3e++Tde3j3CQlbgjwumWh76+TylJGpn+nynL9Z/RRgh5WjoQHw66+LAa
+	 jYYPHKz56equm2wPuk74Aqgycl8ennCSNSLeNhXQRSwZNUPzzN9kQ+Tg2BBqPS6ToEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IokQDEy9;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ebXpSfCf;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4252606A335;
-	Thu, 19 Nov 2026 12:06:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5E41606A320;
+	Thu, 19 Nov 2026 12:07:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IokQDEy9
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D7421F000C5;
-	Thu, 19 Nov 2026 12:06:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ebXpSfCf
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AEAE1F000C6;
+	Thu, 19 Nov 2026 12:07:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795089999;
-	bh=7YOuzXDEw+rkcmBi95+83IbwhlceUdsO0O5u8keZMqg=;
+	s=k20260515; t=1795090050;
+	bh=sEh748hTFXKoOcx65XoNThIs8/IpsB6k+/cDw03wuuQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=IokQDEy9FFPAqn76OIIITvZMgmibs49pav/hDDUvS2JKMTA7o8CbFdY5PYwoPOvmo
-	 pi35wQzheSexYax/2PQRMtG3H++zLtWcjE8HNOJI8ldMfw5bHQHBqudgM+QdMBo/PQ
-	 oUxKsb5UaGb15TZ0tNPmMohXUBI7WcI5TcNK0rxtaqhJs4h+r/naB4+/rkWIXwjhOg
-	 zz+VhpS9vuKOM0e2mG3dWdRCiSLeTQJ7RG5KYrhPttbOv6otLcKT/mgx4HBU/ONPQK
-	 E9ouLHncTMloI46SMfCeRNOFYrDdhjpMb3lxxvYi1yZ53gvi5DujXLzy+zEr6GpAwA
-	 bLXdlQ+r6D6Kg==
-Message-ID: <d741093d-345d-4cdf-a48d-2c5e55be2129@kernel.org>
-Date: Thu, 19 Nov 2026 13:06:32 +0100
+	b=ebXpSfCf8kV1dK07wotHuytks1bSCVLhMs9HtkjTk5CxdHsMwFCN7o/mk92jksQLl
+	 GNFoG5p6F1DoJiVYzjXFzMi1K0hRkOLheT2tQ3Y8wPOv5BIO+3l/JugEjkGhfG/xmq
+	 aGZo2O+3M7zW5FhNx29Ig8y3Ue6m4OeqdIoYLA6KHQzHblPUKm7p1vC1xfxt/Ywtly
+	 RsoVahPbktMkx9ToZPWrUDYhU0Ipvuq+xSiM+RMAIZY+kOacv/RKVDl9DBEVSH93wq
+	 Z8zW90bjcB8UmPAvwB+pnLvVHeH3CGW+TPhnIKKCrEo/IsYF0b+A5QUwqCJaRQdTH8
+	 OXnkpNJrf2n2g==
+Message-ID: <cf2091e5-44a3-473a-a5e4-d9044b053b45@kernel.org>
+Date: Thu, 19 Nov 2026 13:07:26 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,25 +52,12 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] dt-bindings: media: qcom,glymur-camss: Drop port@3
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Suresh Vankadara <svankada@qti.qualcomm.com>,
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-References: <20261113-glymur_camss-v2-0-b1b76509c744@oss.qualcomm.com>
- <20261113-glymur_camss-v2-1-b1b76509c744@oss.qualcomm.com>
- <20261116-vegan-amphibian-muskox-3c8a55@quoll>
- <de0bd55f-9b80-414f-adb6-eece067d92ff@oss.qualcomm.com>
- <8e8300f1-d837-495b-b947-a3b52f44b4d6@kernel.org>
- <d90f6dc5-bd8b-4fa3-a17a-e00470a9b8a8@oss.qualcomm.com>
- <88467521-f50d-4c87-8206-4a3249f65212@oss.qualcomm.com>
+Subject: Re: [PATCH v4] devfreq: qcom: bwmon: Reduce zone1 threshold count to
+ 3
+To: Pushpendra Singh <pushpendra.singh@oss.qualcomm.com>,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261119114426.4050161-1-pushpendra.singh@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -116,30 +103,31 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <88467521-f50d-4c87-8206-4a3249f65212@oss.qualcomm.com>
+In-Reply-To: <20261119114426.4050161-1-pushpendra.singh@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 19/11/2026 12:37, Nihal Kumar Gupta wrote:
+On 19/11/2026 12:44, Pushpendra Singh wrote:
+> Reduce zone1_thres_count from 16 to 3 so the driver can lower the bus
+> vote after 3 sample windows instead of waiting for 16. The previous
+> 16‑window delay (~64 ms) is too long at higher FPS workloads,
+> causing delayed decision making and measurable power regression.
 > 
+> Power and performance measurements were collected for
+> zone1_thres_count = 3 and 16, with the following results:
 > 
-> On 16-11-2026 18:02, Nihal Kumar Gupta wrote:
->> On 16-11-2026 17:52, Krzysztof Kozlowski wrote:
->>>> It was not used in-tree yet. 
->>> That's different question. You added ABI and that ABI could have been
->>> used. Was the ABI ever correct in the first place?
->> The documented ABI was not correct: port@3 came from the old X1E80100
->> resource-table mapping, not from the Glymur CAMSS port layout.
+> Usecase                         zone1_cnt=16	zone1_cnt=3       Delta
+> YouTube streaming (power)	4126.49 mW	3991.30 mW      -3.28%
+> Google Meet audio (power)	3058.79 mW	2929.73 mW      -4.22%
+> Speedometer 3.1(perf)		25.8		26.5            +2.7%
+> Geekbench 6.5 ST(perf)		3907		3905            -0.1%
+> Geekbench 6.5 MT(perf)		18636		18680           +0.2%
 > 
-> Hi Krzysztof ,
-> 
-> How would you prefer this ABI issue to be handled, or should I
-> send the next version incorporating Loic's comments?
+> The reduced threshold therefore allows BWMON to react sooner to falling
+> bandwidth demand, providing measurable power savings in the tested
+> workloads without a meaningful performance regression.
 
-Commit msg should be clear that ABI is changed, whether that ABI was
-ever working or even correct/possible to work in the first place. You do
-not answer my question really, because if description was not correct
-but everything was working fine, then clearly IT WAS correct to some level.
+I do not see how you resolved my comment, so same comment.
 
 Best regards,
 Krzysztof
