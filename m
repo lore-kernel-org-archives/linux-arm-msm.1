@@ -1,51 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=132.226.202.154
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795076110;
-	b=PcuMUzETKF82fI3VifwNSAB2vlzJAH32hrrlE7Pvn2aHEoJnIXC0nJgKPpjX3qg74la3
-	 WFwWc5UxI1Cqqtntz6k9EoOmlaetDk+Yf/k2zHzZzQMHc+DJ8Smfp9q/81cZUWbTaGrky
-	 2hCHRT+9nbX30tT69t0G/5amFw8ZXkI6Dc08Bg+aiQRYCW70ndH2dvBQNYVYKauOqjSce
-	 hpmGwQLIulHykrGg/B12t4lazjyv7KguPIKViO+0CqqPwH67ELH1vQoJ3HRmsJBbh75Or
-	 vlc8zOcDWXolnK6+R+QWBblUjL0r9CjINYitbLwAO6olLtEHprFt9Tbuh4WTyaR9gMw==
+	t=1795076672;
+	b=4wAC1ehkupIBsauYrVRrsd5Q0CMp+3DX7jNQOaY3RlwYlICi2YzN/7PS2V5aX4qm7yzM
+	 Qa5FBwO4DOnkaQ4hCi5Dn/0XM+xV68bBAox/yDysgbD4LUQoX0iMI3o4CSorYbG7xBvkW
+	 Us92FxoqlPYTs0IUAhwfaYvD9Z7UDs1OePtXpamVBTLyC9nvoFWEmHfWgW+I1Uf5kLJ0b
+	 lEP3ZH6YgJib0WmltU49AXbiwH8/z9+DmvhbigjoJgFfalABhUDghtwneSFPsrp5AeufI
+	 gg+9wK15TssCIe3VNIxC0y/f+3k4cq3AruJRTmDzFHhKloQzhfcoj8VLtpzxlFidexA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795076110;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=l9RGs4BDvEAPJGPC1B7Y5D7yby+dqFQdmB19pLlvL/k=;
-	b=4UUiPzuovu33Y/iDnNXGfNYgiyUJycVgmwbPVim3oVMPxaFzIeI8IK8/RvH8q7If0tsJ
-	 WumXmrTcasv9OvH2FJm4VfxN2iS8fHRdMXf6gEh5/UjwKNuHaGAlWGLvKL6IrJCiMhh1k
-	 sJlHbETS2Qg0Iu0Lfj9jlS1msHI/Ob/BtWvdPgzNHTuoaFqV7s0B2tMOTCt5Adl9g5VUt
-	 +CS6ORsuekRVf2fvP1ZiYUff8EmDLlfjZyjCFXrGDT2tYJhWd4+f9iMWIc/GM2ypn6trE
-	 JqiEjryywfWUS2J8oXk3Z4JE9ekCOqcMfw4MQtd5DqVexjY/Aw8d538eYFcMmwTjWGg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795076672;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=w538saYmLFKkF/0b9eZpywTKwazCO0Kdn3yWVwLKeRw=;
+	b=muGO3M+S4j1PLgmguPGQuEB/RvPF9naU6KHIKh3NlZ/xJCv+wW/L0qKMbVAqhLTYf77F
+	 ++pvlx/Cwm7wCgupBAzVNi2ijRXo3MknKTBC5F3Wd3DZ2k4gbAzVSkqhCOkPzTGbhwKyQ
+	 /kdka89m7qIGKXS/2SeRHJMxBZbvKX5E3N9/sgJjxzvUCLaDubkPSQN9keCWUilfbDnIt
+	 vDXOxp70P2K+9NK4Ex4k/3CSIVp3ci6AC9FN9gMy8rJw4vfCIuIBxjgQhZTA3WTXTFZYZ
+	 1+WQ6DmuQPSbqZaA0uQuDjsiuh8MYHXd5bOVprtAyyBcRcxF447sC4Es4IS7g5aYiSw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.zgclab.edu.cn;
-	spf=pass smtp.mailfrom=mail.zgclab.edu.cn;
-	dkim=pass header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=n1+27df2;
-	arc=none smtp.remote-ip=132.226.202.154
-Received: from fraori-sdnproxy-3.icoremail.net (fraori-sdnproxy-3.icoremail.net [132.226.202.154])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C884E60A2602;
-	Thu, 19 Nov 2026 08:15:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C884E60A2602
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.zgclab.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.zgclab.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GFPUAJtD;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gJtEH9AW;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E257606A325
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:24:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5E257606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=n1+27df2
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GFPUAJtD;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gJtEH9AW
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AJ6wKcT1007338
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:24:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=w538saYmLFKkF/0b9eZpyw
+	TKwazCO0Kdn3yWVwLKeRw=; b=GFPUAJtDEJZq9aOma9/LyjD/4w04prU95WAnkb
+	QW0z0aubuzaOcxyWpK5vV+bn455SScwhfkBcpkkY6s4OqKO6f3J4f1b+96xCMuAw
+	YpcurGcgoTuANMz9nBYIOiwWG1xq7D2H/Oqu7ueU9Q1doi7ZPNTVHnnnIEWjONqd
+	pnVMoaGIEE/uoUSzKIHEJiwrMErPJLKkAkExaEtINmb7FjnVQ/6o7FgariW5sQj5
+	TOOXCC1FRICXoDy1XIOnHm1yDQdmlOMQYpH/b4+NQ23GqWrrj0CLNr1Qe8nPYrmB
+	hT1MiificuFCgqpiC7PWPOwxdn2joLkKTg7IiGDOKz24kuQg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1etnus58-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 08:24:30 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9308eafb465so454837985a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 00:24:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.zgclab.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=l9RGs4BDvEAPJGPC1B7Y5D7yby+dqFQdmB19pLlvL/k=; b=n1+27df2ubGwf
-	6Wz1PvSkLl0YmiFaZrUEHxHlfo5gubmVG1yhEK+HFEEBouUBvmuiXKLd0Gc4gM/w
-	eTMiDu+oBN5MvrhFR0NX1kvYPJj12w6Z/i/idrtyOp+xhK6I6pseM+YLM7vg+uXO
-	8qWNJTg02j9suWy6mVft0F3Y4eOqyU=
-Received: from 01.eml (unknown [58.206.202.11])
-	by web2 (Coremail) with SMTP id yQQGZQBHdWn3r_5qGSJLAQ--.57096S2;
-	Thu, 19 Nov 2026 16:14:47 +0800 (CST)
-From: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>
-To: jeff.hugo@oss.qualcomm.com, carl.vanderlip@oss.qualcomm.com
-Cc: ogabbay@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, phasta@kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, wanghr2026@mail.zgclab.edu.cn
-Subject: [PATCH] accel/qaic: hold the dma_resv lock when mapping imported buffers
-Date: Thu, 19 Nov 2026 16:14:48 +0800
-Message-ID: <1795076088845-1-b103cfa7@mail.zgclab.edu.cn>
+        d=oss.qualcomm.com; s=google; t=1795076669; x=1795681469; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=w538saYmLFKkF/0b9eZpywTKwazCO0Kdn3yWVwLKeRw=;
+        b=gJtEH9AWkZbp0Wan1Y43NbJxS3ibBPbyC3qhFm7Y4iTogPo7GO0PEq1Ttup0iI/uNL
+         m92lgZTQruV2UEOt++s+8A+ckwhBeCpCYPG2kyb1zcUHrrLzMtSxfaRhboBDn96kWbGV
+         vmuSfDhPSNYPjNUVPNSt/8+m+iliN2fvgyJ61ymlVjBWcw8zi8peaAyUZpY0JJjoqcj2
+         ahVlUFwFK/po5/bmzI9O2baYM82RyKXyuacAnKwqyFDEmqqMf6u5KzIu/msg/9AjFbU0
+         GmjuImMsMRT7DsWMCskOlHkjvFbzxAHyFV1+Cwa+1Hi6A4Hj+eQ5UFCGKZjiqPQWAep1
+         o8yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795076669; x=1795681469;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=w538saYmLFKkF/0b9eZpywTKwazCO0Kdn3yWVwLKeRw=;
+        b=ie3n0usIJfUOxnpI0T9Aw4vaFPUUGXKrmv8PkiVLaRxt2EH5CeP03KkB0C/ToTixeM
+         gRIlzaJW6ijmlKmnFj6fh9H8xjJ2blLf9RKqM75/uEk7EsnDEqrpjW42Q2nbJi+I6kgC
+         avczyd4VroC1QW2/N3lQng1Ri0wK7I+2NAR1vc8nrYlXQYbUBLbOfpj4CW+tHlehpGHs
+         svCr49nbL1Gpz2jl0RLm8/1gz/vUGXi9dp4GBFSJwr8wTZ1OpgkF9n3x6PkfvH3cBZki
+         7K8O0ymbv2n96qd8lX6XXAIgQvXHWHa/ZkHlkP+gneVWQQLvNGP9skfVfpBZqRrjx9n4
+         SM3g==
+X-Gm-Message-State: APuU4Z/yn7wBvvtiTF/LpxIrBBfRDnvedU2eBKnKbwasbOln0wYrDZXm
+	T6o48IyVblezjtKmFSceJ5bFNh5IzIZp/qkwV1M2iDd+h76wZR9S3zgW2ZqyrEpmINz71ZX1qVA
+	ZrNSEm/OFGxrIqS0TzhKddJMXYSIeFqqaQ4gP54NDIzj2e30/qWjCxY4Yc/bTSd2gahFo
+X-Gm-Gg: AYBFou3Mn678iLJ1EUabxSAtiWQ79tvovSpzvxBWvEuyhaUziWRaLxs+asaDCm/+bjn
+	Y/qABuOGG3KF+kmBm7UwuXn+GOepM7B5KSHMnsT3htXNlZn1/1uMI95wQkXHB1aHYrMAagx+xr/
+	HfZURa+TAB33u43TCz3Uyfdu0uNJ2bpFsJVBfg1WiG6en1jT57R+wdjz0WcfMlzxUzlxOlUzIc3
+	ALTlyKsA6aKD64dmocSshR1Gg6RYibuWGOeW6HQnNZFsyBXnkefT/gm/7UM+b1G9WcA6O2lA8B7
+	g4tugF0YgOur6vIjUd1IwzOBGsDm1ZXxOo3/tIVwMRxg7wd8sCA0hEKFSmNwUQ2Ra5BSy4plKN0
+	HrMt490NHJBEU0uMpHCcB6sbtv12QGec21gfN0+GjGENi6fp7/tKlOirKt3dEujfrljwb6NMRqz
+	DTVog5fCPOCPV82ibX6hbitwLgKQo7q2SGUDXy
+X-Received: by 2002:a05:620a:2b85:b0:947:1d0a:c8b5 with SMTP id af79cd13be357-949995ecc9dmr916274785a.54.1795076669065;
+        Thu, 19 Nov 2026 00:24:29 -0800 (PST)
+X-Received: by 2002:a05:620a:2b85:b0:947:1d0a:c8b5 with SMTP id af79cd13be357-949995ecc9dmr916270685a.54.1795076668433;
+        Thu, 19 Nov 2026 00:24:28 -0800 (PST)
+Received: from yongmou2.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9499b721861sm388465185a.11.2026.11.19.00.24.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Nov 2026 00:24:27 -0800 (PST)
+From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+Subject: [PATCH v9 00/29] drm/msm/dp: Add MST support for MSM chipsets
+Date: Thu, 19 Nov 2026 16:24:02 +0800
+Message-Id: <20261119-msm-dp-mst-v9-0-ca61be4edfc3@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,77 +113,352 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:yQQGZQBHdWn3r_5qGSJLAQ--.57096S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZF15Gry8CrW7tw43tF1fWFg_yoW8urW5pF
-	WFgr9rCrZ0qr48ZFWUZ3yUKw1Ykw4Yk34UZF4DJa4SvFn8WrnIvr1UKFnxAFnIgr1DAF90
-	vr17u393ur9rAF7anT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUQ014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-	6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
-	1j6F4UJwAaw2AFwI0_Jrv_JF1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28I
-	cVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx
-	0Ex4A2jsIE14v26F4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I2
-	1c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0En4kS14v26r
-	1q6r43MxkIecxEwVAFwVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8
-	JwCFI7km07C267AKxVWUXVWUAwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14
-	v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY
-	67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2
-	IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87Iv6xkF7I0E14v2
-	6r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUeWrWDUUUU
-X-CM-SenderInfo: pzdqwxbusqjlo62juzldeovvfxof0/1tbiAgEQD2r+J8-7xgADse
+X-B4-Tracking: v=1; b=H4sIACiy/moC/3XQUWvDIBAH8K8SfJ5FvdNoKWPfY+xB42UVlqaNa
+ dgo/e4zKay0ax9UTvDn/+7EMg2JMltXJzbQlHLqd6VwLxVrtn73STzFUjMllBEoBe9yx+O+HCM
+ HLUEEQzZYZOXBfqA2fS/Y+8elHuhwLOZ4uWTBZ+JN33VpXFfKQB0iNUKD9kogNtGCoOCdrx0YM
+ FpGJxBmuqOc/RJmXW3mLFIo5Nt95Gk4cJpoN2Y+WS64IXLoqPZg8a3PeXU4+q/5y1XZXtmca5v
+ y2A8/S88TLsEetTdh4YISWtpIvqx/3KJN+ioY5W4EXQQZrVWlEalafCKYq2BB3gimCI2TEXQ0b
+ XDPMtRXwd1lqIuAwUqsQVpN9RPB/glS3s1hHmsUKNoAEINuHwjn8/kXfwfAw0sCAAA=
+X-Change-ID: 20260410-msm-dp-mst-35130b6e8b84
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Jessica Zhang <jesszhan0024@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+        Joonhoe Kim <26rote@gmail.com>, stable@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Abhinav Kumar <quic_abhinavk@quicinc.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795076662; l=15225;
+ i=yongxing.mou@oss.qualcomm.com; s=20250910; h=from:subject:message-id;
+ bh=QcoWzdol2YEJ6TwNavNmYnG+UA/0AacQTzPPdO7fbsc=;
+ b=YkIyqvF2KUnLFHDmFjxIqoY8LMMWFVJeZsJXGxcA81IC8nBGxpGzlNW00WAr7aRBe2EcOQ63e
+ PBy1Q+citXbC/F2JwuDwSjHMg2uxxxG5QrL66dqKjHm3PrZGweFN4Um
+X-Developer-Key: i=yongxing.mou@oss.qualcomm.com; a=ed25519;
+ pk=rAy5J1eP+V7OXqH5FJ7ngMCtUrnHhut30ZTldOj52UM=
+X-Authority-Analysis: v=2.4 cv=b8UncdGx c=1 sm=1 tr=0 ts=6afeb23e cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=z_i5WFFK-8ga3zmfCq4A:9
+ a=pog74ck2hQlt4hhh:21 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-GUID: -ruA8g4LQIqItYDOOqN7C-aiCcqrIDdU
+X-Proofpoint-ORIG-GUID: -ruA8g4LQIqItYDOOqN7C-aiCcqrIDdU
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX8+8SqhA5y5Yq
+ 0Gqam7tsz+pIhX037qFXkD19Z3Nl2XoE1JY60h4JPe0CAxUQd6JrMb2LetAi4LX4p9QGgKxnLsj
+ Uab7sYIFdm7/WCAY5uodaUUL8Aszto0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX9fgCf4qZflHa
+ vax3uBC4ocPC5I6gB7qgLgrmj7kwJzm6bfnp8kMWaIceh0jdVe7OePwZCern0Hi5Ut+lZ6wzBtE
+ SSlEgwLtQ/zpR2OGFuA+bJavb6JDV4SzBgc/XJZhO0lW7kbqxzKKkwM6na9U//qD+XdgVcsZ6hD
+ QOe6MD1HvK/ePLoUPDJlJ8SwAdCN9EUSUdLo51slwI96DC2kluwMyuh0YSA4cF0eR1UX3/6FfDY
+ xrVIEs1nDYVn2/xqWKrKdxcTUBvyN2g1ULYhTqGXDYRz19lpmOoBZwKqd6Nj4cW8osFmO/ycehE
+ U+61Q/OiZQJ9rwg5WGAhj352YuoIBmfrODE7KkOwSuzA6EVztNH/Vd8KrKo5Em8YVKhKg9GlK3K
+ y03YHdH3yThcGpWOrEO8E6o9ngGLbFSpbSSo0omdU6e0mvjGyKKqDK+aj3h9mYn0VamiJxfQeUi
+ +kgl9jl9J4L7cGDPVKQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0 spamscore=0
+ clxscore=1015 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611190033
 
-qaic_prepare_import_bo() maps an imported dma-buf with
-dma_buf_map_attachment() and qaic_unprepare_import_bo() unmaps it with
-dma_buf_unmap_attachment().  Those are the locked variants: the dma-buf
-locking convention requires importers to hold the buffer's reservation
-lock when calling them, and both assert it via dma_resv_assert_held(),
-i.e. lockdep_assert_held() on attach->dmabuf->resv.
+Add support for Multi-stream transport for MSM chipsets that allow
+a single instance of DP controller to send multiple streams.
 
-qaic calls both without holding the reservation lock, so on a
-lockdep-enabled kernel every slice attach/detach against an imported
-buffer trips the lockdep assertion (a WARNING with a backtrace).  The
-reservation lock also serializes the importer against the exporter
-moving or invalidating the buffer's backing storage for a dynamic
-attachment, so an unlocked map can race that move and use a stale
-sg_table.
+This series has been validated on sa8775p ride platform using multiple
+MST dongles and also daisy chain method on both DP0 and DP1 upto 1080P.
 
-Hold the reservation lock around the map and unmap calls, which is
-equivalent to the dedicated dma_buf_map_attachment_unlocked() and
-dma_buf_unmap_attachment_unlocked() helpers.
+With 4x4K monitors, due to lack of layer mixers that combination will not
+work but this can be supported as well after some rework on the DPU side.
 
-Signed-off-by: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>
-Fixes: ff13be830333 ("accel/qaic: Add datapath")
+In addition, SST was re-validated with all these changes to ensure there
+were no regressions.
+
+This series depends on Dmitry's "drm: handle IRQ_HPD events correctly"
+series [1], which adds the IRQ_HPD propagation infrastructure required
+for Type-C MST support.
+
+Overall, the patch series has been organized in the following way:
+
+1) MST controller support (patches 01-07): low-level additions for
+multi-stream operation — ACT/VCPF packet transmission, payload slot
+allocation, and mainlink MST mode.
+2) Driver refactors (patches 08-11): replace the power_on flag with a
+per-stream bitmask, factor out panel-accepting bridge helpers, and
+introduce link_ready for explicit link-level state tracking.
+3) MST DRM infrastructure (patches 12-18): new dp_mst_drm module for
+topology management, DPU per-stream encoder support, and atomic
+stream enable/disable handling.
+4) SST/MST connector state and HPD fixes (patches 19-29): SST/MST
+connector state management, HPD event routing through the MST
+manager, per-stream bpp selection, and Type-C retimer guard.
+
+Note:
+- Validation for this series has been done on the latest linux-next on
+LeMans (sa8775p) and Glymur, covering both FB console and Weston.
+Type-C MST has been validated on Glymur with MST dongles.
+- AI review comments on patch 13 and subsequent patches will be
+reviewed and addressed in the next revision of this series.
+
+[1] https://lore.kernel.org/all/20261024-hpd-irq-events-v8-0-6ee949e7a384@oss.qualcomm.com/
+
 ---
+Changes in v9:
+- Patch 02: Turn off the pixel clock if sending ACT or waiting for video ready fails.[Dmitry]
+- Patch 07: Drop the unused DP_MAX_TIME_SLOTS define.[Dmitry]
+- Patch 10: Fix the debug message printed when the link is already disabled.[Dmitry]
+- Link to v8: https://lore.kernel.org/r/20261110-msm-dp-mst-v8-0-d040fb33db5f@oss.qualcomm.com
 
-diff --git a/drivers/accel/qaic/qaic_data.c b/drivers/accel/qaic/qaic_data.c
-index ee35e13091b3..0b57f8d544a2 100644
---- a/drivers/accel/qaic/qaic_data.c
-+++ b/drivers/accel/qaic/qaic_data.c
-@@ -895,7 +895,9 @@ static int qaic_prepare_import_bo(struct qaic_bo *bo, struct qaic_attach_slice_h
- 	struct sg_table *sgt;
- 	int ret;
- 
-+	dma_resv_lock(obj->resv, NULL);
- 	sgt = dma_buf_map_attachment(obj->import_attach, hdr->dir);
-+	dma_resv_unlock(obj->resv);
- 	if (IS_ERR(sgt)) {
- 		ret = PTR_ERR(sgt);
- 		return ret;
-@@ -936,7 +938,9 @@ static int qaic_prepare_bo(struct qaic_device *qdev, struct qaic_bo *bo,
- 
- static void qaic_unprepare_import_bo(struct qaic_bo *bo)
- {
-+	dma_resv_lock(bo->base.resv, NULL);
- 	dma_buf_unmap_attachment(bo->base.import_attach, bo->sgt, bo->dir);
-+	dma_resv_unlock(bo->base.resv);
- 	bo->sgt = NULL;
- }
- 
+Changes in v8:
+- Rebased onto linux-next-20261102; dropped patches 01-07 of v7.
+- Dropped patch 32/35 of v7 since it not needed.
+- Renamed the controller's mst_active to mst_mode so that it no longer
+  shadows struct msm_dp::mst_active).
+- Dropped the driver-side slot bookkeeping; the MST helpers now pass a
+  msm_dp_mst_slot_info table built from the topology state (patches 07,
+  09, 18).
+- Patch 01 (new): Skip sink requests while the mainlink clocks are off.
+- Patch 02: Use DIV_ROUND_UP_ULL() for the 64-bit division in the ACT
+  wait time.
+- Patch 06: Mask the STATUS5/STATUS7 reads down to their own interrupt
+  bits.
+- Patch 07: Take the slot table from the caller; simplify the rate
+  governor's fixed-point rounding. Rewrite commit message.
+- Patch 08: Replace active_stream_cnt with active_stream_mask so that a
+  single stream can be queried.
+- Patch 09: Thread the slot table through the helpers; key the disable
+  guard on the stream's own bit.
+- Patch 10: Release the runtime PM reference on every prepare_link()
+  failure path, and check sink_count before taking it.
+- Patch 12: Skip the MST manager cleanup when dpu_kms->dev is NULL after
+  an early probe failure.
+- Patch 13: Use the DP controller's own device for runtime PM; return
+  early when MST is not active.
+- Patch 18: Report enable failures and stop the stream enable sequence;
+  collect the payload slots of all streams.
+- Patch 19: Read the old connector status in the same critical section
+  as detect().
+- Patch 20: Drop the explanatory comment.
+- Patch 21: Drop the plug guard in msm_dp_hpd_plug_handle(); hpd v8 has
+  a stronger one.
+- Patch 23: Check for MST before taking plugged_lock.
+- Patch 27: Drop the hunk that handled plug before IRQ_HPD, now done by
+  hpd v8; retitle accordingly.
+- Patch 28 (new): Select the MST stream bpp during the atomic check
+  instead of failing the modeset.
+- Link to v7: https://lore.kernel.org/r/20260929-msm-dp-mst-v7-0-4b81473185e7@oss.qualcomm.com
+
+Changes in v7:
+- Rebased onto linux-next-20260918.
+- Incorporate Type-C IRQ_HPD support: new patches 33-35 handle IRQ_HPD
+  events from Type-C controllers.
+- Patch 02: Rewrite commit message.
+- Patch 05: Handle optional pixel resources without spurious errors and
+  track each register block's size separately.
+- Patch 07: Use optional-resource mapping for MST2/MST3 registers.
+- Patch 12: Handle stream 2/3 VCPF completion through STATUS7 and reuse
+  the existing idle helper for SST.
+- Patch 15: Preserve the disable guard and adapt it to active_stream_cnt.
+- Patch 18: Add explicit MST manager cleanup during KMS teardown.
+- Patch 23 (new): Move link capabilities from msm_dp_panel to msm_dp_link.
+- Patch 24: Propagate enable errors, update remaining payload slots on
+  removal, skip disable hardware operations after disconnect, and use
+  shared link capabilities.
+- Patch 25 (new): drm/bridge_connector: suppress hotplug for IRQ_HPD
+  without status changes.
+- Patch 26 (new): drm/bridge_connector: avoid detect-based HPD
+  notifications for DisplayPort.
+- Patch 27: Route IRQ_HPD through bridge events, drain pending ESI
+  events, and synchronize the IRQ before manager destruction.
+- Patch 30: Use shared link capabilities and explicitly check for MST.
+- Patch 31: Preserve SST operation for SST-sideband-only sinks.
+- Patch 33 (new): Fix threaded HPD handler not woken on controller IRQ;
+  Fixes: 5043357e75ba ("drm/msm/dp: rework HPD handling"); Cc: stable.
+- Patch 34 (new): Order IRQ HPD handling: process plug before IRQ_HPD;
+  discard IRQ_HPD on unplug.
+- Patch 35 (new): soc: qcom: pmic-glink-altmode: skip retimer reset on
+  DP IRQ when state is unchanged.
+- Link to v6: https://lore.kernel.org/r/20260831-msm-dp-mst-v6-0-c91d35d6fb9e@oss.qualcomm.com
+
+Changes in v6:
+- Rebased onto linux-next 20260828; drop already-merged prerequisite
+  cleanup patches.
+- Reordered patches for better logical flow.
+- Patch 01: Also move power_on=false into display_unprepare.
+- Patch 02 (new): Split from old patch 04.
+- Patch 03 (new): Split from old patch 04.
+- Patch 04: Squash num_pixel_clks into this patch.
+- Patch 05: Use loop for snapshot; skip inactive streams before adding.
+- Patch 06 (new): Split register definitions out of old patch 04.
+- Patch 07: Rewrite old patch 04; replace stream_id special-casing
+  with transparent msm_dp_read/write_link() helpers.
+- Patch 08: Fix REG_DP_MST_ACT register placement.
+- Patch 13: Drop defensive start_slot bounds check; rename
+  channel_alloc -> update_timeslot.
+- Patch 14: Guard link training with active_stream_cnt == 0.
+- Patch 16: Add locking annotation; group link_ready with status
+  variables.
+- Patch 17: Drop redundant stream_id >= DP_STREAM_MAX check.
+- Patch 18: Consolidate msm_dp_mst_attach_encoder() and
+  msm_dp_get_mst_max_stream() definition, declaration, and usage
+  into this patch.
+- Patch 19 (new): Split connector/topology callbacks out of old
+  patch 23+24.
+- Patch 20 (new): Split dpu_encoder_get_intf() refactor out of old
+  patch 21.
+- Patch 21: Squash stream_id condition; reorder before MST encoder
+  patch.
+- Patch 22: Use thin wrappers instead of renaming/exporting core
+  dpu_encoder functions; use suggested for-loop style.
+- Patch 23 (new): Split atomic stream enable/disable/check out of
+  old patch 23.
+- Patch 24: Add hpd_irq_lock; use %*ph for ESI debug prints.
+- Patch 26: Defer SST-disconnect-on-MST-cap to new patches 28-29
+  to avoid bisect breakage.
+- Patch 27: Add comment for clear-before-write DPCD sequence.
+- Patch 28 (new): Split from old patch 14; handle boot-with-cable
+  SST bridge detection.
+- Patch 29 (new): Handle SST connector status when MST is enabled.
+- Link to v5: https://lore.kernel.org/r/20260629-msm-dp-mst-v5-0-2ed6aee1867a@oss.qualcomm.com
+
+Changes in v5(fix comments from V4):
+- Dropped early refactoring patches (v4 01-12); restructured as
+  "move link-level teardown", "factor out _helper variants", etc.
+- Dropped v4 39/39 (platform MST stream list); use DT pixel-clock
+  count instead per Dmitry's request.
+- Patch 02: Remove artificial max-stream limitation check.
+  unify register naming (REG_DP1 vs MMSS_DP1).
+- Patch 05: Calculate ACT wait time dynamically from mode parameters
+  instead of hardcoded 20 ms.
+- Patch 08: Replace start-slot loop with direct math; fix commit message.
+- Patch 09: Add locking annotation "Must be called with
+  msm_dp_mst::mst_lock held" to msm_dp_ctrl_push_vcpf().
+- Patch 17: Rename prepared flag to link_ready.
+- Patch 22: Move drm_dp_mst_atomic_check() call into msm_atomic.c.
+- Patch 23: Replace bridge-based MST DRM model with encoder-based
+  approach; remove redundant bridge layer between encoder and connector.
+- Patch 24: Add drm_edid_free(); add FIXME for bpp negotiation.
+- Patch 25: Use dp->plugged flag instead of link status for MST plug path routing.
+- Link to v4: https://lore.kernel.org/r/20260410-msm-dp-mst-v4-0-b20518dea8de@oss.qualcomm.com
+
+Changes in v4:
+- Fixed most comments from V3.
+- Rebase onto HPD refactor V5.
+- Fixed casing/formatting issues, for example: "mst".
+- Drop .mode_set() and set_mode in .atomic_enable().
+- Rewrite commit messages that are unclear.
+- Use the same API for MST link and SST link writes.
+- Use the new drm_dp_dpcd_read_byte() / drm_dp_dpcd_write_byte() interfaces.
+- Remove some unnecessary payload fields from the MST bridge.
+- Remove some defensive NULL pointer checks.
+- Reworked the patch order to make the series easier to follow.
+- Add support for more platforms.
+- Link to v3: https://lore.kernel.org/r/20250825-msm-dp-mst-v3-0-01faacfcdedd@oss.qualcomm.com
+
+Changes in v3: Fixed review comments from Dmitry
+- Fixed lots of comments from series V1/V2.
+- Rebased onto next-20250808.
+- Rebased onto Jessica's HPD-refactor branch.
+- Fixed formatting issues in commit messages under changes.
+- Removed unnecessary one-line wrappers.
+- Relocated MST-related .atomic_check() calls to their appropriate positions.
+- Removed the logic related to slot checking in .mode_valid().
+- Link to v2: https://lore.kernel.org/r/20250609-msm-dp-mst-v2-0-a54d8902a23d@quicinc.com
+
+Changes in v2: Fixed review comments from Dmitry
+- Rebase on top of next-20250606
+- Add all 4 streams pixel clks support and MST2/MST3 Link clk support
+- Address the formatting issues mentioned in the review comments
+- Drop the cache of msm_dp_panel->drm_edid cached
+- Remove the one-line wrapper funtion and redundant conditional check
+- Fixed the commit messgae descriptions of some patches
+- Reordered the patches and renamed some functions and variables
+- Link to v1: https://lore.kernel.org/all/20241205-dp_mst-v1-0-f
+8618d42a99a@quicinc.com/
+
+Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
 
 ---
+Abhinav Kumar (13):
+      drm/msm/dp: add support to send ACT packets for MST
+      drm/msm/dp: add support to enable MST in mainlink control
+      drm/msm/dp: no need to update tu calculation for mst
+      drm/msm/dp: always program MST_FIFO_CONSTANT_FILL for MST use cases
+      drm/msm/dp: add support for sending VCPF packets in DP controller
+      drm/msm/dp: add support for MST channel slot allocation
+      drm/msm/dp: replace power_on with active_stream_mask
+      drm/msm/dp: factor out _helper variants of bridge ops accepting a panel
+      drm/msm/dp: add msm_dp_display_get_panel() to initialize DP panel
+      drm/msm/dp: add HPD callback for dp MST
+      drm/msm/dp: mark the SST bridge disconnected when mst is active
+      drm/msm/dp: enable MST on capable sinks
+      drm/msm/dp: mark the SST bridge disconnected when an MST-capable sink is present
 
-The vulnerability was found by static analysis.
+Yongxing Mou (16):
+      drm/msm/dp: skip sink requests while the mainlink clocks are off
+      drm/msm/dp: add link_ready to manage link-level operations
+      drm/msm/dp: introduce dp_mst_drm module
+      drm/msm/dp: add MST connector creation and topology callbacks
+      drm/msm/dpu: pass msm_display_info to dpu_encoder_get_intf()
+      drm/msm/dpu: use stream_id to select MST interfaces
+      drm/msm/dpu: add per-stream MST encoders
+      drm/msm/dp: move link capabilities to dp_link
+      drm/msm/dp: add atomic stream handling for MST
+      drm/bridge_connector: suppress hotplug for IRQ_HPD without status changes
+      drm/bridge_connector: avoid detect-based HPD notifications for DisplayPort
+      drm/msm/dp: wire MST helpers into atomic check and commit paths
+      drm/msm/dp: wake threaded handler for HPD IRQs
+      drm/msm/dp: ignore IRQ HPD latched together with an unplug
+      drm/msm/dp: select MST stream bpp during atomic check
+      soc: qcom: pmic-glink-altmode: skip retimer reset on DP IRQ
+
+ drivers/gpu/drm/display/drm_bridge_connector.c |  23 +-
+ drivers/gpu/drm/msm/Makefile                   |   3 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c    |  51 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.h    |   2 +
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c        |  37 +-
+ drivers/gpu/drm/msm/dp/dp_audio.c              |   2 +-
+ drivers/gpu/drm/msm/dp/dp_ctrl.c               | 325 +++++++++++-
+ drivers/gpu/drm/msm/dp/dp_ctrl.h               |   9 +-
+ drivers/gpu/drm/msm/dp/dp_debug.c              |   6 +-
+ drivers/gpu/drm/msm/dp/dp_display.c            | 388 ++++++++++----
+ drivers/gpu/drm/msm/dp/dp_display.h            |  27 +-
+ drivers/gpu/drm/msm/dp/dp_link.h               |   2 +
+ drivers/gpu/drm/msm/dp/dp_mst_drm.c            | 679 +++++++++++++++++++++++++
+ drivers/gpu/drm/msm/dp/dp_mst_drm.h            |  18 +
+ drivers/gpu/drm/msm/dp/dp_panel.c              |  34 +-
+ drivers/gpu/drm/msm/dp/dp_panel.h              |  10 +-
+ drivers/gpu/drm/msm/dp/dp_reg.h                |  17 +
+ drivers/gpu/drm/msm/msm_atomic.c               |  14 +-
+ drivers/gpu/drm/msm/msm_drv.h                  |  47 ++
+ drivers/gpu/drm/msm/msm_kms.c                  |   1 +
+ drivers/soc/qcom/pmic_glink_altmode.c          |  38 +-
+ 21 files changed, 1603 insertions(+), 130 deletions(-)
+---
+base-commit: 2637bdec0535a2044cd830eba9a79363651d9043
+change-id: 20260410-msm-dp-mst-35130b6e8b84
+prerequisite-message-id: <20261024-hpd-irq-events-v8-0-6ee949e7a384@oss.qualcomm.com>
+prerequisite-patch-id: 38205d2013335920df343c240fa0afc17b987763
+prerequisite-patch-id: 358e5f35d442041b88e52d8e39a564a053a0f990
+prerequisite-patch-id: 9860b9acb12b1c2652e4e9f4860968a2ca3361f0
+prerequisite-patch-id: 53486e695198f785401740f7f4372bdf335fb620
+prerequisite-patch-id: c8e551a07553f7dc107063a1dbec1d415184f97b
+prerequisite-patch-id: 1a6251919897ca5e8b12a63774a833fd8460c67a
+prerequisite-patch-id: 846ab694795c6bec123d1dc46d7a53097bf594bf
+prerequisite-patch-id: 2a058aa8309016f424b1d4ca19a9b20e92f4d8b6
+prerequisite-patch-id: 76ea1ecf4e1d83ce2e5730aa36ed1a4524f15e56
+
+Best regards,
+-- 
+Yongxing Mou <yongxing.mou@oss.qualcomm.com>
 
