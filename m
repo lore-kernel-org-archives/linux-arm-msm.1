@@ -1,74 +1,74 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.70
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.200
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795108091;
-	b=y2VT1u81Y7RnvpUSjX2zfrYurcMeimxEIgvwmbuD4UCdJd7L/C3xRSvPbyQegg7pQ6Qj
-	 TW177hYvkiOCLxqyP42X2Hqxa166z7SmCKIqF/JrrzQ4Fxe1jjU87gPKaY1twLK7Gplcu
-	 kAOeV1gX02hdter7kMacfkRn95/GesEY3LbnUovZuZr6tjP5PYixTkr8xOoepXDfWsAKc
-	 aa+dGFOtG+xYEl6+9VZixT7qgGtJjvl0jymeXRAMohH8b/0G+oPE2euKe9a36/RdXiaS6
-	 tWGKoBrDXD12pw1AgwIMb1bZA5AwjxeVo/xc8go2mxxu4UTUm6J79aTBZwd3DrD+M5Q==
+	t=1795108097;
+	b=axEXScAusLqrMUw9qz2klIY2u9mglQfnMSStSqyj3N4DmbVLykFA7XBStJZRT3L2lkF5
+	 XB5X8A19O31+xO4BWzS9u3Z4pnVcJXVufukp+/7Y4/RRLq1PYovOGKc5bI4QBWNrhBOYd
+	 pQYXFS6CjPywkNOboUvBWlFjqLJzoUNrrs2qAZGJyf7aZqnyulxLBqya7gi+gk7PKV8ug
+	 Dws6ICShRq3fkErs/uflNf/Ohw0LGCTmUtIVmjKrlX25MytXk40J63y8bD2UBtXeNWnC6
+	 SRqPJVa8TOmENU4ZlEpg3mlX4HJ7eVU2PVBrhlDeiDfmi+sjBZdFcE8ZpNGLGkNRbcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795108091;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795108097;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:In-Reply-To:
 	 Mime-Version:References:X-Mailer:Message-ID:Subject:From:To:Cc:
 	 Content-Type;
-	bh=nb8Ts+L+z/DpTGbH2tq/3CpL8ayCSrXAUIaUzn6KeKM=;
-	b=HIE+up4iimptpq2kKgTuZ4P0TMF30TzMOOyNbaurS6++ksIzRNbuLnx9Y8CGuP1luYUv
-	 qA2rLskBbd5R0GWpnFh5mVpZXfxU/ALxXVQTps5X1gQ+gDAYZjFa7/un0KmDauVV5UBW9
-	 mKUq+ApLrYLwbVwAVtviRRjdaESU8qSrUn5hDHd7p5FBd9c0OErlnytyF5pw+5AE+9AIp
-	 MsKZUkp3uXrNjl51YYsGjyz7v2BRTLUjXdtIwC90hIc4I1SF6ejV/roVdm5HYgxSeK82h
-	 FLeTlWB6BCPsqmnkzcikDV0FLgylDDtlw24Ua51tIDNkNDDAc/TGa/Dy5XpEXS52vTA==
+	bh=ghmmPH2pRPCD8AwyevzwpwCC/jzSYHUp2/6zeVVdZoo=;
+	b=pfhcGbGeDz3InGusRsZ/vfnOojXb64hL0SyiniZtHOhLd4tbpdSD52ckgBgA3hOQO0Ba
+	 RD8Ob2YCQ6tC3lG2JM5NXUJKalHhMt7mL10AUyQUXNuhfhH8Itjaw+azvQH9vVW6DtQV1
+	 jzdryCV2xdaDKEyXPimjZCfvyAdhSJsUGYjPIbrRdXmHjBp1gQv5tI4O5FVSJEvDa9IzE
+	 UkWuA/LYUa2IJjju/tmFnootMhLiY8mOrpoMoLKBn4gmpcqfx+foiv91LBmQe3ZQeTF6X
+	 cBLJ49XdVC2hsLbz6D81xbsgov0ptvxCmlU1Ld9BpbUELSkN8KMw83ej3zn1L6xCq/A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=google.com;
 	spf=pass smtp.mailfrom=flex--irogers.bounces.google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=mt+Uvlc0;
-	arc=none smtp.remote-ip=209.85.216.70
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b="gGHa/39Q";
+	arc=none smtp.remote-ip=74.125.82.200
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60EDA60A2606
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 17:08:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 60EDA60A2606
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 106BB606A33F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 17:08:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 106BB606A33F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--irogers.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=mt+Uvlc0
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b3c459a35eso24974a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:08:11 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=gGHa/39Q
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-383ec96a7deso1419309eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 09:08:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795108091; x=1795712891; darn=vger.kernel.org;
+        d=google.com; s=20260707; t=1795108096; x=1795712896; darn=vger.kernel.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nb8Ts+L+z/DpTGbH2tq/3CpL8ayCSrXAUIaUzn6KeKM=;
-        b=mt+Uvlc0ci9UzOY5SdxKwQpbYeDDmxdZYa1g4FdQttSKyQ0M65AP7d7L/7rv539F4M
-         9ElHbrhLUKguXzt6hN5sIeq749PR2K6fIU/P4v96oJWoXt7ts+z41Fzm5zU9lhVicqEf
-         uqZsXo2xAQoVRVrc355YgLTCid7O4YY1JtTrlOSdbfYPkNzcjWYv5l/QHA2PtZqnOP87
-         9iGjjyW2v8O/ZRGfGJPSWfsZuihQF6WXxbskpBusqgRvU9iTwrkPI6mAyBLv3BZTwvD1
-         ZzG8bfjPTYUYEe+iVnv4dg0wKm29+or0/hSxWegWMgZtskHVxtL0pMbqTZkSfzu7WGAk
-         FNig==
+        bh=ghmmPH2pRPCD8AwyevzwpwCC/jzSYHUp2/6zeVVdZoo=;
+        b=gGHa/39QLPyCZ0RgBw8vLO5i2C5OU6Vs5rt36RyPTS8CI5ngk6cAVvKkALlvpa/ofA
+         Dnjs++Lua8gLy2tHZtZTr0Pm3F0+C0wwo1MGF3Ltl5KkT3rj7USwYH83D3TSxUfAoFFS
+         N9Ud74nfr5Fz3yGmOvqmK0D5QyCWlPfb4vOfKl7ONEg4lzdFnRy7nMEOAZy3nNy+6JUy
+         fVbf5+AvdE/Lyko8jMwJJEASxjpuP+Vpu1SoV1hKXqfXrTz2OknoW6GnTuT1JnCiOskN
+         Epusush5r3HXOLZfw6vCBurVNfGslL8BRMvFsSp9EkZsZHnz9EX+OvacpaBMVTcEwHI8
+         cbGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795108091; x=1795712891;
+        d=1e100.net; s=20260707; t=1795108096; x=1795712896;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nb8Ts+L+z/DpTGbH2tq/3CpL8ayCSrXAUIaUzn6KeKM=;
-        b=EysWha1jmkGEdHLl514u3mr+KEwKJqCN/Y0TKXK8J7KBkEfhmZLFZ01+33aO1OUKXo
-         qL8LpXhieO9Htq09iBdkEFmVw8153YsRHUd793PhO+QhwpxdMlbExKFBl0E4uQMBr+gI
-         SP7hF5ahmaVhgPWpFyI8o/WUJAOVSzwmfyMxk+QTzTEnc4jeFxrAeNDpjpZ+mTYVZLlU
-         J+cyye30Svmcez48YRE2mICWrYTJZ+zzIGct5iWrG49HTTtxz+gb05yjFdJbNKobMe4M
-         NI5IOCAdLy3zjfzy8E8pFhelLygLm68ROxQfNYyds14trAnkJHeZ/eZXIOGqQb9P22no
-         oI4g==
-X-Forwarded-Encrypted: i=1; AL+hErGyqiQaRIaFSAr415KGogfdkdCzfAB7TJGNLkegf1smbjCbAqEGMHHd9q1D2Vr3VIreP+7Lw1T4S4lsdUVd@vger.kernel.org
-X-Gm-Message-State: APuU4Z9gCE9QI8nJgZioClWhYcHLN+KwR7zMygz9SMQ9563r6/VgzwMA
-	j7oM2d91iB5TpN4ou/6Z9ZaFQhHMJ58wlx719ZDlkAnczk2yuKAg/VTVsZm9tu2SdlN1dFykhSM
-	MHZc1V9DZQQ==
-X-Received: from pjbds10.prod.google.com ([2002:a17:90b:8ca:b0:3b3:b3a3:5e41])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:4c0a:b0:3b3:c998:6d6e
- with SMTP id 98e67ed59e1d1-3b3d07c68a0mr7206916a91.37.1795108090513; Thu, 19
- Nov 2026 09:08:10 -0800 (PST)
-Date: Thu, 19 Nov 2026 09:07:58 -0800
+        bh=ghmmPH2pRPCD8AwyevzwpwCC/jzSYHUp2/6zeVVdZoo=;
+        b=Ghp1A2ihylsNX8lce8XZvhsfC0eb4eC8WkIBxtNTvBTnv7V70c31rr9/9rsUNNZC4n
+         nDGzuIdcTCKRxa5TD3Gx6rgx37uDnAT15LdKNLdH1dhSGsByUwENnutCAmEj2d9D7tHJ
+         sxOSD3yd0Xjz/+tEjYiq1w4DOsvPJZpMH4pKeYzBUaEbpy2sun7JlfYowykv2ZmMzhUg
+         acAI7PudvWLXIS5uHKuSHj/sa/4cbbYN95utS5lrPsPH4MiaoMCOtuUD1/tHcfF7bG/f
+         WytfGMNqKo2EwP3J2V9MaqqtWxXu0mbaczc1zEFEHl7llViu6d8rgL04uYaWAy1HmxuW
+         Y9Gw==
+X-Forwarded-Encrypted: i=1; AL+hErGzeDcU06vGM06jtjIL1M4k3SBMT8//Pw6j42Kgs93vEvaZegwUy/ir5HPsjH2O+WkZSzuf6TxWJPwT/cr8@vger.kernel.org
+X-Gm-Message-State: APuU4Z+/ApcsaWJ2gzQO0SclJel140CD+gWPDgg+mjaxtSOVMB+afK5f
+	11mU4+a9F/4OeLQuDZ6OwrD/Ir6O511YufZA8zi45wx3reokJLPeAJ7CDMnE1kkGy8XLfPu6lVG
+	YV3OPYXC+yA==
+X-Received: from dybdr19.prod.google.com ([2002:a05:7300:b293:b0:375:861c:512e])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7301:db86:b0:384:d59d:199c
+ with SMTP id 5a478bee46e88-3856c2c3fd0mr22119eec.1.1795108095991; Thu, 19 Nov
+ 2026 09:08:15 -0800 (PST)
+Date: Thu, 19 Nov 2026 09:07:59 -0800
 In-Reply-To: <cover.1795106962.git.irogers@google.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -81,9 +81,9 @@ Precedence: list
 Mime-Version: 1.0
 References: <cover.1795106962.git.irogers@google.com>
 X-Mailer: git-send-email 2.56.1.708.g77570a6a1d-goog
-Message-ID: <8af31a87f52c4cebc5ac7db6696a91545adb6ac4.1795106962.git.irogers@google.com>
-Subject: [PATCH 1/2] ASoC: codecs: lpass-rx-macro: Return early for non-HPH
- interpolators in HD2 control
+Message-ID: <1de898fc85710c85f6f90bb685d3be109f44c2ba.1795106962.git.irogers@google.com>
+Subject: [PATCH 2/2] ASoC: qcom: lpass-platform: Return IRQ_NONE on invalid
+ DAI ID in DMA ISR
 From: Ian Rogers <irogers@google.com>
 To: Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
 	Mark Brown <broonie@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
@@ -92,40 +92,40 @@ Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	Elkin Cruz <elkin@google.com>, Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
 
-rx_macro_enable_interp() invokes rx_macro_hd2_control() whenever
-rx->hph_hd2_mode is enabled, including for INTERP_AUX. However,
-rx_macro_hd2_control() only assigns hd2_scale_reg and hd2_enable_reg for
-INTERP_HPHL and INTERP_HPHR, leaving both u16 register offsets
-uninitialized on the stack for INTERP_AUX before testing
-'if (hd2_enable_reg && ...)' and writing to random codec register
-addresses.
+In lpass_dma_interrupt_handler(), the default switch branch returns
+-EINVAL from an irqreturn_t handler, which triggers report_bad_irq()
+in note_interrupt() instead of reporting an unhandled interrupt.
 
-Return immediately in the default branch of switch (interp_idx).
+Return IRQ_NONE, matching the other error paths in
+lpass_dma_interrupt_handler().
 
-Found via an x86_64 LLVM=1 (Clang 21.1.8) allyesconfig audit with
--Wconditional-uninitialized enabled; fix and changelog drafted with an AI
-coding assistant. Build-tested under LLVM=1 W=1 (-Werror) and
--Wconditional-uninitialized; not tested on Qualcomm LPASS audio hardware.
+Found via Clang -Wassign-enum on an x86_64 allyesconfig build.
+Verified by building sound/soc/qcom/lpass-platform.o with LLVM=1 W=1
+(-Werror) and -Wassign-enum; not runtime-tested on Qualcomm LPASS
+hardware.
 
-Fixes: 4f692926f562 ("ASoC: codecs: lpass-rx-macro: add dapm widgets and route")
+Fixes: 7cb37b7bd0d3 ("ASoC: qcom: Add support for lpass hdmi driver")
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- sound/soc/codecs/lpass-rx-macro.c | 2 ++
- 1 file changed, 2 insertions(+)
+ sound/soc/qcom/lpass-platform.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/sound/soc/codecs/lpass-rx-macro.c b/sound/soc/codecs/lpass-rx-macro.c
-index ab8a1c2b0489..84a3a47cf932 100644
---- a/sound/soc/codecs/lpass-rx-macro.c
-+++ b/sound/soc/codecs/lpass-rx-macro.c
-@@ -2414,6 +2414,8 @@ static void rx_macro_hd2_control(struct snd_soc_component *component,
- 		hd2_scale_reg = CDC_RX_RXn_RX_PATH_SEC3(rx, 1);
- 		hd2_enable_reg = CDC_RX_RXn_RX_PATH_CFG0(rx, 1);
- 		break;
-+	default:
-+		return;
+diff --git a/sound/soc/qcom/lpass-platform.c b/sound/soc/qcom/lpass-platform.c
+index dad4becf7579..45379604b689 100644
+--- a/sound/soc/qcom/lpass-platform.c
++++ b/sound/soc/qcom/lpass-platform.c
+@@ -963,8 +963,9 @@ static irqreturn_t lpass_dma_interrupt_handler(
+ 		val = 0;
+ 	break;
+ 	default:
+-	dev_err(soc_runtime->dev, "%s: invalid  %d interface\n", __func__, dai_id);
+-	return -EINVAL;
++		dev_err(soc_runtime->dev, "%s: invalid %d interface\n",
++			__func__, dai_id);
++		return IRQ_NONE;
  	}
- 
- 	if (hd2_enable_reg && SND_SOC_DAPM_EVENT_ON(event)) {
+ 	if (interrupts & LPAIF_IRQ_PER(chan)) {
+ 		rv = regmap_write_bits(map, reg, mask, (LPAIF_IRQ_PER(chan) | val));
 -- 
 2.56.1.708.g77570a6a1d-goog
 
