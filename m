@@ -1,112 +1,121 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795092410;
-	b=fS+lc5n7BJ+I6BipjAYX9zJ4fLesOVca8SqVsrlKOLJj6oS6J4uRo6CnJm1M/LpHYY58
-	 3i8XOTwAy1a5Ldxez33tOma5W57qY5ahvXrehLEW5wR38TCaObYANORJIKwN4XUQA4kYc
-	 sy8q7Zj2Ih4zL2RpnaaSEspJXw+3UONyRTseLZtPn1HXrfadYkeaJXMsmNcU3UNdgdEav
-	 oWWduBrWxSC381tgURaQHmD+fsZZ/fU+ZCOAFl83K4uYha5PXvm6e0X9TX1snPvxzkeRY
-	 RRdEr8yZ4uYSlDLCuVuBsagtI29vtc9HT38SGOBxnrCtUVPvQF/bqZlE8+KMxx7TKHA==
+	t=1795092546;
+	b=nzZQz8vQczIZRBKVOzZeN31iFTXENj1FvCr3xTEdnz3fBV+WUJGc2ZDQcKGAwg+b9Kwd
+	 Uw7nwzJVgHZ6sngKJ5Y85yj1wqO+ZlHW9BGRN4Mu8hKmw8wBK72NMX7ES8g8Sb0pbU7Fc
+	 mLTTnKTUVWGdSVsAqAYsD7NZz++mGJXbwvgz4Z52lkWOdg5udKpH/MKh3DCCHrNTRgSsm
+	 RSvPr6g6csVrOIocj+S+4OU18aldwPskjWqSY861WFLHrggOUFTq0oHCD9FMt1Qw6jNZP
+	 YKwiiYsM4zU+YS1oNIVmvAHVpilMgrOtFqJ8GvkjphFXW/8IA0hY3QsH1hbW6wNMFvw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795092410;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=R0SLI+cpRuDAPpaGNRcRyZsjUAuV82ogqilF0+QTbgo=;
-	b=GN57Jn3w3PXwvvh/J7iN5n8lUG8HJ3hoJiS9otrSamSgXviDqQSYf1SVLWjftL+5fHbK
-	 OstN68DSD2sTWuA7pOZ9Q8MLDD634dd8ijLk9lNPvegtcT3byOo5Q3DXUL1o4muoVvYJ5
-	 IeOt2ohJBIIFoqh5l/nLVrGtCtwFspmP0MQBEnaQbj1AYm62vrS8zsmT+Mc/CiBltOHVE
-	 uS3HukwmXyz8aUX/ZjvDi9DiVBneaqzXyYXrdTQ/1LBwCR6EycyA0DEYyWk52cXQXF+e7
-	 T0EpXvqhjOsyo9DMRIoCQdqLjXuUkiojdkwv5Q7RjbRUfTbxwdvHKayb9eA2I7ia0ww==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795092546;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:To:Cc:
+	 Subject:In-Reply-To:References:User-Agent:Date:Message-ID:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version;
+	bh=FrqcePVIbKpJOlr0CwwEXmHuYmHa3yUMeo1BTUrWcl0=;
+	b=T8RC8nt83vxImBRdFJA4krPMGuOdjWdvyB6F+7+Ayt+kYMLX/F/HL/JhD0dSeTr0EXKM
+	 VJyw6WqpY3bGGb9Ab62fn7XsT287XMwMcQFvZA2BBGfWXdCeuht8ls260ETG9Aaw/u4yg
+	 yeK5f6ohUzPHd/DkanaMFXSmf/jZxnVZa1+BAlUlQjPr75RUnnCWEuqL1Q2JXZVpKiyNO
+	 Q5IuTuqzKsiKcCpf7gDkT2cYkHNjj3p04q6afx/0g/VCul0wq345yG5e8Z5W4HPnkEteX
+	 W3NJFGNMEqXkNmxyAgs+mwflSjXLr2UFZxQ2UlLrrosqgXeyS2BkrTz7OJk61dVllIQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BfVexAMX;
-	arc=none smtp.remote-ip=74.125.82.52
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=mteItAuJ;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7C14606A326
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 12:46:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B7C14606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33E47606A324;
+	Thu, 19 Nov 2026 12:49:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 33E47606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BfVexAMX
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15ea896ddc8so3630323c88.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 04:46:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795092409; x=1795697209; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=R0SLI+cpRuDAPpaGNRcRyZsjUAuV82ogqilF0+QTbgo=;
-        b=BfVexAMXUExPA/yU1/HvoxaKMziAg/iD+IUkHNZoxPYzkEA3j1C6nIt89AbCwkXPRO
-         /cce9sydc7DmUaiiD9v7hE9hgI1ZMsnDCrGgTYI/xVDxscovZXfGZjiTvCQC5CBJ4zh1
-         rbfUnR6wOGT+8PMH0NHQY24Gy9AVVc4jze/FJc+s66e4NVtUg3Oi5AK3PlvSTRyjacP3
-         aOwAfj7uxwj418/tukp5tVVEF/PUTXOL4hycn4H6XyLCVA0Qkw8gmZIih5yFRhBe6V7P
-         YH+9n4wqb/IMKYyg+jwFOeRQEXeGZ58RtlgqVICZ99RkGTmlcRt0tbnS8gt7ZXphedba
-         4iGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795092409; x=1795697209;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=R0SLI+cpRuDAPpaGNRcRyZsjUAuV82ogqilF0+QTbgo=;
-        b=AZUAx7/ECoxBUmkZzYIthDfsi8rjMhXlSbjOHNsI5GJzQ04m/NjtfhYt9/4yaoqR10
-         uTPvtoAmv73CSXZXmNO/nUgLhhOQ1qIW1XqA05UV+fvYF4go2hAg5HGGrvl/0t651tzF
-         O1DJKOZUeSgQDAglHynbRpWIOr48zc5rug+9q5xbd2Vjs0Z0yj5VtJIu61+OxMkit848
-         1g/OAMiKRNpeKjWX0aLryG9OEgnW1jVOa2NXtx0oBvAUVAFOTiRgbkaHNVeJ1GdVzemg
-         Iv/5tZzIOa3Ek8aGqTxbpJ7h72YBHnd3rx5gwVLdE3ggN3BTS2eh0xZ1dkTebhVmDI2P
-         6Xpg==
-X-Forwarded-Encrypted: i=1; AL+hErHvZws2qIHzKHxSDTmopYYR0wYsrxwYtabFlL4xcUM4E4VF9EuR9RjWkQ3mWuI7o2ph/k0S+THr+eijGXnX@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Y01+fTaovdD4BVmmeS9j1c+cJpPdwpSEfCCG+R4c+Uc4n+Ojw
-	4MN2/KbfUje9sj37RG19WJnfuC//K1/EWjpQTepv/CEQ1mdml6R4jTd6
-X-Gm-Gg: AYBFou3L7o6d1N+8tmTRrwIIohUTZg7z7usRSGOaoEXk2VNcrFoYLtd5B9XR7jsS24m
-	7n5bMYKCeCo99Zfm4epQ5yCTv1fpXwPT4HjqMMfiHbmSvJzMLWmkYLaiB+C+VRCRBtdHyox+2JS
-	aqNXrpdAmqZLQPp7yuc3krJoevJNRp0yMeaoiLCisUfuDJIkWnPTGJhIaSO+GsR5UHhivleWA28
-	qmyanMtfTuBRh7FhM3gcALyzIVL3V2kWu+2SH5ggDLww3QYixm3353bXcYgVm0tRNILeGPa7xDo
-	kaQGx9k5kZfjqh2p8dvZOotgSEmSci2OCoeZeBVdKQXozHJBEzaKvkog0apjx3TtPi6zoxZhlnO
-	GbLjPTDhBh/VHIMn9ZB6bluo+eJxqsRf+x7qyKdLyNbvwXII74TSMSjRrGSBNnYdoYg8hK1bEGu
-	EsUMlc2ZcjeFeJiC9gMr33N/UfBLzCwmeLId77BDqy5JABp3Tsy520X8560SBNZf7q0YvFyYblq
-	nq2C4JzJfA1giKAn9ZjA8CThsSe47r7KTyvqDE5KyXlqavRHvMVz30dWlE9jzr2Tov52jvktRP1
-	Hvp3FMNho/1FK45afqF9w1VIzQbR0s8BT8w=
-X-Received: by 2002:a05:7022:7f15:b0:19a:20d3:a3d6 with SMTP id a92af1059eb24-1b543c3d7f0mr4441883c88.1.1795092408616;
-        Thu, 19 Nov 2026 04:46:48 -0800 (PST)
-Received: from DESKTOP-NM9EKIA ([2001:e60:8509:ba6c:11e:f696:8454:757])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5447f4eafsm13868656c88.14.2026.11.19.04.46.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 04:46:48 -0800 (PST)
-From: Joonhoe Kim <26rote@gmail.com>
-To: Peter Chen <peter.chen@oss.qualcomm.com>
-Cc: gregkh@linuxfoundation.org,
-	Thinh.Nguyen@synopsys.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	andersson@kernel.org,
-	konradybcio@kernel.org,
-	abel.vesa@oss.qualcomm.com,
-	wesley.cheng@oss.qualcomm.com,
-	krishna.kurapati@oss.qualcomm.com,
-	konrad.dybcio@oss.qualcomm.com,
-	dmitry.baryshkov@oss.qualcomm.com,
-	neil.armstrong@linaro.org,
-	val@packett.cool,
-	balaji.kalkonda@oss.qualcomm.com,
-	tvlad744@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 0/3] usb: dwc3: qcom: Keep USB 2.0 working in DisplayPort-only modes
-Date: Thu, 19 Nov 2026 21:46:47 +0900
-Message-ID: <20261119124647.983-1-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <avZ7-Ax-_VwcJhYG@hu-petche-lv.qualcomm.com>
-References: <20261103135057.1682-1-26rote@gmail.com> <avZ7-Ax-_VwcJhYG@hu-petche-lv.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=mteItAuJ
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id C2044C4CBF1;
+	Thu, 19 Nov 2026 12:49:09 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 5877D60271;
+	Thu, 19 Nov 2026 12:49:04 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CC49311BC0673;
+	Thu, 19 Nov 2026 13:48:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1795092535; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=FrqcePVIbKpJOlr0CwwEXmHuYmHa3yUMeo1BTUrWcl0=;
+	b=mteItAuJBxCXIm6o7Tz4CiCkaMG9jXhvMU2sSQLnSpwBcZpG8f2MBEvcJ1Bx2lQIvEFPHc
+	cDtQgbCpT1F3jW229XoKlV3ReW5mnP/ABdent9sCr/5183826BqbllILfT90L05VaHMgtP
+	dUJUiAyMuYUR1NhbdpZFwHZONdW4QU9si+WZSm1qV6DhZI6XlaK2xQVRCAOzwBKLP1wBFh
+	3qw4wVp4q47Ts1Jsp/lIRy+UYxCPzeFEV89KDKzTVDondoVzVYjpyUCZKV/Oz4GxrsbGus
+	YTBzHCONs5aDQShHm1+BnPAiQ9L4baKhNKmb68Cs/uKC0//BXan270Bf1Uz6BQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Richard Weinberger <richard@nod.at>,  Vignesh Raghavendra
+ <vigneshr@ti.com>,  linux-mtd@lists.infradead.org,
+  linux-kernel@vger.kernel.org,  Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>,  Srinivas Kandagatla <srini@kernel.org>,
+  Tze Yee Ng <tze.yee.ng@altera.com>,  Richard Cochran
+ <richardcochran@gmail.com>,  Jonathan Lemon <jonathan.lemon@gmail.com>,
+  Vadim Fedorenko <vadim.fedorenko@linux.dev>,  Yuqiang Sun
+ <izaiahsun@gmail.com>,  Amit Kumar Mahapatra
+ <amit.kumar-mahapatra@amd.com>,  Luca Ceresoli
+ <luca.ceresoli@bootlin.com>,  Bernhard Frauendienst
+ <kernel@nospam.obeliks.de>,  "Gustavo A. R. Silva"
+ <gustavoars@kernel.org>,  Kees Cook <kees@kernel.org>,
+  linux-hardening@vger.kernel.org,  Arseniy Krasnov
+ <AVKrasnov@sberdevices.ru>,  Boris Brezillon <bbrezillon@kernel.org>,
+  Brian Norris <computersforpeace@gmail.com>,  Jernej Skrabec
+ <jernej.skrabec@gmail.com>,  linux-arm-kernel@lists.infradead.org,
+  linux-sunxi@lists.linux.dev,  Samuel Holland <samuel@sholland.org>,
+  Chen-Yu Tsai <wens@kernel.org>,  David Woodhouse <dwmw2@infradead.org>,
+  Thomas Gleixner <tglx@kernel.org>,  Vitaly Wool <vitalywool@gmail.com>,
+  David Woodhouse <David.Woodhouse@intel.com>,  Russell King
+ <rmk+kernel@arm.linux.org.uk>,  Mike Rapoport <rppt@kernel.org>,
+  Alexandre Torgue <alexandre.torgue@foss.st.com>,  Christophe Kerello
+ <christophe.kerello@st.com>,  Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+  Jason Roberts <jason.e.roberts@intel.com>,  Boris Brezillon
+ <boris.brezillon@collabora.com>,  Michal Simek <michal.simek@amd.com>,
+  Mason Yang <masonccyang@mxic.com.tw>,  Ramuthevar Vadivel Murugan
+ <vadivel.muruganx.ramuthevar@linux.intel.com>,  Lucas Stach
+ <dev@lynxeye.de>,  Dmitry Osipenko <digetx@gmail.com>,  Jonathan Hunter
+ <jonathanh@nvidia.com>,  linux-tegra@vger.kernel.org,  Stefan Agner
+ <stefan@agner.ch>,  Thierry Reding <thierry.reding@kernel.org>,
+  AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+  Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+  linux-mediatek@lists.infradead.org,  Matthias Brugger
+ <matthias.bgg@gmail.com>,  Heiko Stuebner <heiko@sntech.de>,
+  linux-rockchip@lists.infradead.org,  Yifeng Zhao
+ <yifeng.zhao@rock-chips.com>,  Alexandre Belloni
+ <alexandre.belloni@bootlin.com>,  Claudiu Beznea
+ <claudiu.beznea@tuxon.dev>,  Nicolas Ferre <nicolas.ferre@microchip.com>,
+  Keguang Zhang <keguang.zhang@gmail.com>,  linux-mips@vger.kernel.org,
+  Shan-Chun Hung <schung@nuvoton.com>,  Jacky Huang <ychuang3@nuvoton.com>,
+  Fabio Estevam <festevam@gmail.com>,  Frank Li <Frank.Li@nxp.com>,
+  imx@lists.linux.dev,  Pengutronix Kernel Team <kernel@pengutronix.de>,
+  Sascha Hauer <s.hauer@pengutronix.de>,  Han Xu <han.xu@nxp.com>,
+  linux-renesas-soc@vger.kernel.org,  Wolfram Sang
+ <wsa+renesas@sang-engineering.com>,  Jerome Brunet <jbrunet@baylibre.com>,
+  Kevin Hilman <khilman@baylibre.com>,  Liang Yang
+ <liang.yang@amlogic.com>,  linux-amlogic@lists.infradead.org,  Martin
+ Blumenstingl <martin.blumenstingl@googlemail.com>,  Neil Armstrong
+ <neil.armstrong@linaro.org>,  linux-arm-msm@vger.kernel.org,  Manivannan
+ Sadhasivam <mani@kernel.org>,  Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,  Kamal Dasu
+ <kamal.dasu@broadcom.com>,  Piotr Wojtaszczyk
+ <piotr.wojtaszczyk@timesys.com>,  Vladimir Zapolskiy <vz@mleia.com>,
+  Harvey Hunt <harveyhuntnexus@gmail.com>,  Paul Cercueil
+ <paul@crapouillou.net>,  Maxim Levitsky <maximlevitsky@gmail.com>
+Subject: Re: [PATCH v5 00/58] mtd: rawnand: retain chip and controller state
+ across removal
+In-Reply-To: <20261115-submit-rawnand-retained-handle-lifetime-v1-v5-0-cbc49c5c5e74@gmail.com>
+	(James Hilliard's message of "Sun, 15 Nov 2026 23:29:15 -0700")
+References: <20261115-submit-rawnand-retained-handle-lifetime-v1-v5-0-cbc49c5c5e74@gmail.com>
+User-Agent: mu4e 1.12.12; emacs 30.2
+Date: Thu, 19 Nov 2026 13:48:02 +0100
+Message-ID: <87v75tc7i5.fsf@bootlin.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,25 +125,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Thu, Nov 12, 2026 at 06:54:48PM -0800, Peter Chen wrote:
-> We did an internal discussion for this use case, we may prefer the solution
-> that let the PHY notify the controller this PHY lane is going to change from
-> USB to DP (4lane) event, it could keep driver independent with dts for this
-> feature.
+Hi James,
 
-Thanks, Peter. I kept the mode switch in v4 and explained why in its
-cover letter. The Type-C mux framework already calls each mode switch
-linked from the connector, and with the usual graph (HS port to the
-controller, SS port to the PHY) the controller is called before the PHY
-changes lanes, so no new interface between the PHY and the controller is
-needed. The cost is a "mode-switch" property on each controller node,
-which a notification from the PHY would avoid. If you settle on that,
-the clock selection in patch 2 can be driven from it instead.
+On 15/11/2026 at 23:29:15 -07, James Hilliard <james.hilliard1@gmail.com> w=
+rote:
 
-v4: https://lore.kernel.org/all/20261119124558.1548-1-26rote@gmail.com/
+> An MTD handle can outlive controller unbind. Its metadata and NAND locks
+> must remain valid, including when a writable file closes and calls sync,
+> while further hardware access must be rejected after disconnection.
+>
+> This builds on earlier MTD removal-lifetime work. Commit 19bfa9ebebb5
+> ("mtd: use refcount to prevent corruption") added MTD reference counting
+> [0], but retaining an MTD reference does not by itself retain the
+> driver-owned allocation containing the master. The read/unbind discussion
+> also covered raw NAND [1] and draining active operations [2]. Tze Yee Ng's
+> SPI-NOR series addresses the corresponding SPI-NOR paths [3].
+>
+> Following Greg's review [7], separate class-device data from the MTD
+> backing allocation. Delete the device's interfaces and drain NVMEM and
+> class PM callbacks before releasing backing data. Bare device references
+> retain an independently allocated device, whose type, PM dispatch and
+> final release are built in even when MTD is modular. NVMEM similarly
+> disconnects and drains provider and layout callbacks before unregister
+> returns; retained consumers keep core-owned metadata and receive -ENODEV
+> on subsequent access.
+>
+> Introduce opt-in backing-object ownership for MTD masters. Registered
+> nodes and acquired MTD handles retain the chip, while nested partitions
+> also retain their parent metadata. Unregister first so removal notifiers
+> can finish I/O, then disconnect raw NAND and drain admitted operations.
+> Hardware resources can be released without waiting for open files to clos=
+e.
+>
+> Virtual concatenations serialize publication and removal across physical
+> controllers. Disconnect and drain a published concatenation before any
+> component can disappear, then release its component references. An old
+> handle keeps the disconnected virtual device, independently of a later
+> replacement.
+>
+> Run NAND and controller-specific cleanup during disconnection, while
+> the controller driver is still bound. Snapshot the OOB layout in core-own=
+ed
+> data before publication so metadata queries remain valid without driver
+> callbacks. The NAND core frees retained chip and controller allocations;
+> the final MTD put never calls back into the controller module. Ordinary
+> MTD and NVMEM handles retain the NAND core that implements their
+> operations, rather than the hardware driver.
+>
+> Share allocation ownership across the raw-NAND drivers, including
+> partially published probes. Shared controllers remain allocated until
+> their last retained chip is released. R852 allocates a new chip for each
+> card, and NDFC allocates controller state per binding.
+>
+> Based on NAND next at 30daaf3e7897, with Tze Yee Ng's module-reference
+> ordering fix [4], Karl Mehltretter's OTP cleanup fix [6], and the separat=
+ely
+> posted registration, operation-locking and controller probe/teardown fixes
+> identified by the prerequisite metadata. TLA+ models and their assumptions
+> and coverage limits are available in [5].
+
+While lifetime issues are a real concern in the kernel, please note that
+in general, removing or unbinding the flash controller driver is not a
+practical operation. While highly unlikely, this is possible though. But
+I am not going to sacrifice all the devm_ calls in favor of reinstating
+manual error handling just for that. If there is a way, it must be
+different.
+
+Also, this kind of contribution can only be done if you *understand*
+what you are doing. Getting the big picture here is not optional.
+
+Maybe the problem is MTD refcounting? Maybe the problem is the devm_
+orderging? I don't know, I haven't looked in depth at all the
+patches. But the current approach is clearly not acceptable.
 
 Thanks,
-Joonhoe Kim
+MIqu=C3=A8l
