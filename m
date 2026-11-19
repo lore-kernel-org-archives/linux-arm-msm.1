@@ -1,113 +1,106 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795088779;
-	b=ap8VeCtSLZ93tQ8IKyGLSXh89iXVbyB+q7vKhjjt/hDTZV5Q93CZgBMpQYvuZXv6MGLv
-	 v8LRZ8DKo8kx5Kh8Y9S/EKg6kEUQ8auZBI39zBNnZUUQ71yVw0vPWKAE7lfLdqTdAE2IV
-	 8I4TXeHEtC90v/BSB/wuJ0AYg9o2CFOx3NmMKrfRMNph3xt3hNZLZd4QmZdPyjDVZ0dAg
-	 QOeI9Rc71ctGpYgtyM8uKCCo9orvQ0oZIJ3dgXImjN9Wqq8Sc8591uSZxKZEgibhQm/q3
-	 LEus6wiJ8Z8SP21jGtBHkrjnD7eNIgM+xHheX7W3bv+iaJqvx8Tyo/F9zaueKHTU53A==
+	t=1795089247;
+	b=VxOJpzyKSXEE/8C/Wd8Mlscj/56Xwpm8jfcmCgSksTxNxDUIGLmVxF1vwb43xwW8qVQ/
+	 Um3auVdvyJvypWJe4t/D0xWGZejhUaMQWpYFzLRvwf9h0iTTNXdDDWDO3y/Urxq/7yy+4
+	 6RLALnNYGfd7/u3Evi+Pd0o909SjU4t5t5oHaVQAeKZOlk6x6kTuYeO9ZO2wLEY3nZSZF
+	 t9OM5G+aUw9XijnQdWEt0PaLJUhsn8l8WTEzoUbyxxBk8FnDWQd3O5ckSKj2qg8Ts9Tie
+	 tfkyk63MeItN8/k9MlaOw0817dqqf9+TddZQRO0N5nNLRXzCOFHWtZ90ClVmImMmYJw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795088779;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=P5hRMCbh8zeA7xTvrHto2CFQeRiZsjYuDhpYld4hdUY=;
-	b=RPJippzFtVbCBnF+ygIYROcVnk/X8HojCenJFbwTDg1DFoc0ARymLFeDj9+loB9W0e94
-	 pCL5yxrQ5X9a5OoDNrjXGN8wjrLoLWzyVGMUVgcUA6YTKr2V+EbLQnrtgxxlLWs5had+/
-	 X2SumfDOUu3NwIRdwVliQqNLLEUHMT2/rLruzDoXOH1h4Vwly64eR0gCty+NIQkczbKLv
-	 sYHCkGEatu+/irD3S4JyKD7TjC+tB9/A8fSC597Yy86lHvi2CuJpA0egMpbCUhZl39H+9
-	 Zcij3bEF5G1jnkLOH6Q8gTmExfJUnsYNfoJl27WiSrdv4NXgSheUGbV+XhVqkACI/Ew==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795089247;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=bLOCauCwZS8/D6IGzsWIvkfLxH3srbuFeiLhXgqvy6U=;
+	b=boUGr7UoYyCIcyUpE4es/0Iic/co/e9a2z9ErLWsSmR/GfWisVMehwD5TmA/7ZTXgMXs
+	 7qXc+6sTrTiwSmScmUfQWbxrcg0/ouonePm0RXYITxt1azOi5idM5id8XZ9S+wCP044rf
+	 giTduv1A8sqJVxmz9gYzlchFq6wNz69olZ8dMZWMjo3fPppR/4DOG1KmhgyCE+8t1Lj9h
+	 Urs/G9GWFHGYbYHGWZdyRpYpqlbSIFBAFeLudQnwYeUXttpYfVaGeojXcqlNxWWN3lZTD
+	 lBNPcM+8TwUNGX2azLuDlWGtUnTPrRWev+dqRcgnVE7EqP4htVO0kKSF6g4A6fNiLTQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dPIVgrO1;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FIdvR4Ib;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cNYaOTjn;
+	arc=none smtp.remote-ip=74.125.82.175
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F573606A335
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 11:46:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F573606A335
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 552EB606A32A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 11:54:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 552EB606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dPIVgrO1;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FIdvR4Ib
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AJBk7gG976750
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 11:46:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	P5hRMCbh8zeA7xTvrHto2CFQeRiZsjYuDhpYld4hdUY=; b=dPIVgrO1Xdu3l5b2
-	HBz8pH1615O6QtJgdsI7jixd7HZgPbzPLdf9csX6r5pGByflcyMAzeqNmtTmTY5S
-	r/nz+7eoFQY5+2+qhWjAqSkVyRutDY7Tydm+EK73hzmy6+AtsyJTQxtq82sD5002
-	lMPFmgLoq6vO3g2yhMaNUzSEGVcyuCgVS9WhsJnE7cmBcYTJfbc4J8lJ9q+1aUV/
-	r1hOzBeG66Dk5+f8WUTPpZ5iN1/fM/yMSEEy7wepBpVdfDHHUjuSpJQxXX1QRr+k
-	mKH5M9rXCZej16NCrBVHwA+l3/1pzoOy6c+m7eWw+MKthNbcXAZm5FQWxMVest9F
-	KqSjnQ==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1fpnmbhj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 11:46:18 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cdaf2073b0cso1226886a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 03:46:18 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cNYaOTjn
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-38431138772so1007849eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 03:54:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795088778; x=1795693578; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=P5hRMCbh8zeA7xTvrHto2CFQeRiZsjYuDhpYld4hdUY=;
-        b=FIdvR4Ib/rEtFYRFPlJZFEi9E5ssrwPSr8tOtbCbj6u0dw3Q8BJwLBpXfOXyCiPWRn
-         PqndUveRFWLUsrZVc6cYos6XzH5hUWxnkk6PdhryichZD6Xr/jAkkYg0I78idrnL5+eL
-         +w6ChVwNRwywTUiWcYj89RhhsuCmTjyUPqIgS3zibT8/U/41WdZt30D+kvBikHYXjMMM
-         Fq0UaYoJuYaSn5dmHt9pkkX7HeJEVxb+o3fCl8kiGe1VkiMHyVEXDr1GVkkVNdekTdAc
-         7uXS9C5jqdgnM4QMjXPq2fMGmpqGhW8G4gpK68rjE4IHpI9xlrUneski2L3udH0Sso61
-         +jMQ==
+        d=gmail.com; s=20260707; t=1795089246; x=1795694046; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=bLOCauCwZS8/D6IGzsWIvkfLxH3srbuFeiLhXgqvy6U=;
+        b=cNYaOTjnvzS1pEK0uRVMoCyx28ithK4lvHu9jpiNgASRoorUYcaPa1ce7CBliZzUvi
+         ENvJADmySvn1nE3O1xTJpr1IW+0qmLVGDwZktIYtiGp2H1eVMfBvxDcKsAeprfR1eXV8
+         DQI8YDy/JC1bqEWBO7Hlr56Wn4m9Eqw+vwy3vQNXLGLXSa25PYIdIgl2XEl0k6Pq+U9I
+         rKrYxp12LhiIH20QdtGLkXb2TYXLyyr3pwo0khnu15YotGCVJCGzVphRUSJsqPHSCfRi
+         Gl17jPX5MWEGtpPSgGmdB5d/RvguH8uwjhy+5ut0N6M6sw+RvsV4wbi/gm83GXbZ8ZiN
+         TvzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795088778; x=1795693578;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1795089246; x=1795694046;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=P5hRMCbh8zeA7xTvrHto2CFQeRiZsjYuDhpYld4hdUY=;
-        b=gBeRl8YbuApKbHrd1Dy4f55mDnG4iva8boD8YoYNTgquvPug5bty4YeH46meFmLVhb
-         OEYZ7OOpsZ2B1O+FOlsRWcXYhS+04JgSqirueTLOTun2NQvuGB50LAlycsjVmOWLsQfR
-         xGrqdaJwHX5aMwtvlwc7avMXBH7NLYlkISOHB9nqaqK5sPmXaV/q1/Lv3gei+W9oeWTa
-         jlbHlH6B7Dlm7AY4qOWrQeO/KVgTig1sSSzoAfdTqGlhT4JmtqRzecKkh2N0RR6GVmES
-         GI2WZzumixi7771gST6p/YEo0vAqfLUIgmX9axKiyn8DRqoNoKyCm8oWbydDrI0uoksH
-         ZGxA==
-X-Forwarded-Encrypted: i=1; AL+hErERSuKOoErZTrYlBhEEadj6uTHt/5K7hDK1GiKJ+XohhWo42WzJELm3Bn68Lt016lqgaN/V94Nnk/pyPrFz@vger.kernel.org
-X-Gm-Message-State: APuU4Z+VIT4cJ4lG7LWCW9GjwhY4Q48wC3FTEdJn45gHkmttRb0eaPjd
-	MV3I4ILRKDiqemOoTYbB2m+N1gBfBvrbAdt1MMGVEUInB9YtBzbsRfxxOsJ3sF1k/S2LeajHN8j
-	oogVcFT4ZV1yPd6B2BhS8OCGF+wvAQI6TkY23cqQPtTeFoZukiJlEBxrB9i4uc41ZEHx8
-X-Gm-Gg: AZFdTZdz3M5Ehh00YleBWyn7eppS0jc6u+yMV4Ylbq7gLQ9kldcuvedeVQdWSVQDrgA
-	T/Xf12y4DRwaxYpXWhZIKrGv2urzPt4Bd990WAIhsWOoDTxo5rI4tx3EMZXqWXZ9CmXy/DUfyZ+
-	RaRFSDwCBNo4aG4Rrc57MRePxSGIJddjZs9J75FqKiCCn+PM/DlIfofn25iYptUxBOiOWdd9h6S
-	1ZTAMhazr+O3ipVkRPDervr9mjYmztEBJCSWE7zxWOruHpjaP2RT1RDgikRnphHdOc4T4NSCMAh
-	YXWeGHUTJJ9bf4VoOq1pYc2Vi7kR/hy3g/ao7AcQ04wUvpPEZeCOICxIQyQsce6rrcaKjRN6kRn
-	vLBcaVoNNMDXksK2RUfV7SiMjrVI4TJfMTkZ4CiKCrcFpHXsbh8WyqTZs/BiGfrXLUatJzz047T
-	0hzmLtfU8=
-X-Received: by 2002:a17:90a:d2d0:b0:3b3:b621:4026 with SMTP id 98e67ed59e1d1-3b3d04d00e7mr5729441a91.0.1795088777714;
-        Thu, 19 Nov 2026 03:46:17 -0800 (PST)
-X-Received: by 2002:a17:90a:d2d0:b0:3b3:b621:4026 with SMTP id 98e67ed59e1d1-3b3d04d00e7mr5729427a91.0.1795088777243;
-        Thu, 19 Nov 2026 03:46:17 -0800 (PST)
-Received: from hu-bvisredd-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b405ecbd0bsm2397030a91.15.2026.11.19.03.46.12
+        bh=bLOCauCwZS8/D6IGzsWIvkfLxH3srbuFeiLhXgqvy6U=;
+        b=xlxREydE307pEVf+8Gkgr44Adztnn0dh8vA57A5LQI8wrhz2dIj6J86Z2fD71aoP7Q
+         cD+RYbJwMVudlFtTbPyO6R7lSX7k9FviXW4+eRkE9Uoow7Ijlupw6i45XgLXRRLjX8bG
+         ATnvS+Bdu2CLSYjK223P22gvt/jxGeeKIvZopIynzh+c1oTXmE0jG3/g2g9w256d+nAp
+         p9A9+HXgd15Bm1P0nVjMGLjum07KkluHaBD0HGCj1yQVrHI3Y6d9xu255LYSbrnuvtSy
+         EGRsTnnGcoo2Nw3ZFo4xH4dmA3MQDFmvuo1VukHkE66dxAbjLspgdz2RyN6mIKw1BMeu
+         XV5g==
+X-Forwarded-Encrypted: i=1; AL+hErGq0DAw+iJ/gzOc4PWLprOoM9rksTcwUQidoBLXbZ7Tckc3vfRVv1Pn0wmvy3NIVFN/3bFtOL6N8AQtqi5K@vger.kernel.org
+X-Gm-Message-State: APuU4Z8/BCb6swhh8ZoRdWm1AXVjI+HiWOWutTMUzXnu4Faudu+srvSm
+	O297n/6gTcxUc+sinTpDhrVpmaR0CBy5blx2r8xPhJoerTUxGiq2Uy/E
+X-Gm-Gg: AZFdTZfw0xY/bES4AfymVZlSXsYX3VQXYS80VmLHSWt9zFt3mmQBwXrZ8k5nobUg4Qe
+	R4O7lKftVntB9akDa64a2RvSreT1picx9yjCILxnfTgbXO+3BPfBJBJwskgHEn6E+u6EuWunCpY
+	xHi7cJ+zX7GXqlTXuTPkGo9mRZwJZ07jDVIK70Fb4z00TSirJTSublOxmwr+uNZuoOchIjLBHj5
+	ptLtmlIV+g/DsBceVahHBLtHUZx79n7UdSaM69Oftja2sABDpBqnWQQ5z0dnMCn86cMtiYpGq5L
+	QYiUlzByzB5FJ1iPmVG7VVB/VrJBieX/FtYx+KH2T1dysj9lcbxFY1jci7jBqpMdYLW8bklMLrQ
+	VW1pjtS9rqvGRHE5W8YwKPeY/zuIh7XEtu6sUZi2Hvr2IgdVvN3NZPNHYF2lmhoa1uc70DC4Eoc
+	454h8OptiKcSedc4/E5+NnHyZqpN0fCI00hH6OjWdUPkUsG3L3YUlx3wrW0kA1q+L36j0RRDrlZ
+	jqykHZi61CObnSE2egVrb6/fdnTYBWCcV7+7RS+MF4GNB53n+hvH4sBC8zJ/YdKivcvPImjYqyG
+	1cybKdO2O0u/B8ttVuDltfNR55HdyZNmlw4=
+X-Received: by 2002:a05:7300:d117:b0:372:32a1:b384 with SMTP id 5a478bee46e88-38281a0669amr5299111eec.33.1795089246055;
+        Thu, 19 Nov 2026 03:54:06 -0800 (PST)
+Received: from DESKTOP-NM9EKIA ([2001:e60:8509:ba6c:11e:f696:8454:757])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-382a6304ff2sm17199286eec.6.2026.11.19.03.54.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 03:46:16 -0800 (PST)
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Date: Thu, 19 Nov 2026 17:15:33 +0530
-Subject: [PATCH v3 4/4] media: iris: Wake up blocked clients when the
- driver is removed
+        Thu, 19 Nov 2026 03:54:05 -0800 (PST)
+From: Joonhoe Kim <26rote@gmail.com>
+To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v9 00/29] drm/msm/dp: Add MST support for MSM chipsets
+Date: Thu, 19 Nov 2026 20:54:05 +0900
+Message-ID: <20261119115405.162-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
+In-Reply-To: <20261119-msm-dp-mst-v9-0-ca61be4edfc3@oss.qualcomm.com>
+References: <20261119-msm-dp-mst-v9-0-ca61be4edfc3@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,159 +110,44 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261119-iris-handle-unbind-v3-4-52d467a13907@oss.qualcomm.com>
-References: <20261119-iris-handle-unbind-v3-0-52d467a13907@oss.qualcomm.com>
-In-Reply-To: <20261119-iris-handle-unbind-v3-0-52d467a13907@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Hans Verkuil <hverkuil@kernel.org>,
-        Stefan Schmidt <stefan.schmidt@linaro.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Hungyu Lin <dennylin0707@gmail.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>, stable@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795088753; l=3688;
- i=busanna.reddy@oss.qualcomm.com; s=20260216; h=from:subject:message-id;
- bh=HKcMkuZKb6s+vqIE767BoluWCKDfeOxDrf3OBQqzR6Y=;
- b=QgFtPD4XYcIztd2kVwil4os1V8xEgdiu6qpuQ8nVUgzKCmc7NK3my50qeIaKF2SZWgMaX+gFi
- fCph+HWf0MzC052bjPuFmnPAQMllGpoYyXRG5JMHJn0kuxfgPbiW9Jb
-X-Developer-Key: i=busanna.reddy@oss.qualcomm.com; a=ed25519;
- pk=9vmy9HahBKVAa+GBFj1yHVbz0ey/ucIs1hrlfx+qtok=
-X-Proofpoint-GUID: I9HlYFxrOGXO_BW5mV-KLoeEhE21LETU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDA0NiBTYWx0ZWRfX0CWXXEk3cWgt
- fxeI6QACDwSf+a66SxVLqYdVn5Gqkg6gKhAFMCceI5e751aNSt9Y/E6ubSWAU5DouoF6GoOC/j+
- PkqRVnP/0wt/WFhjhOemIMq834dnndvkfjpmOp52BCHveSDZYHFD0QJIryvV2p7rQ9Poymd3jLg
- JWky1d47JEhc9oZ8L0RqIOO/umZVWhryUwKAd1NFa/tyTz3giCkFszHeV7duS1oce72KDC/h0P7
- zD4LQgY1jTUIHIe/DQDkGbmN+QjRmzgdZ+deec9Zv9j7q47GnkbZM4Kpk4rBAAhnj/WYcrWeuaH
- JNcaePzNBNke0pFBx5ZUc0GJls5tkhIxvSeu3koQsnxbAgSIfHQPX4K1GLEF42TNnu2dIJ0GmUP
- sg25U9giU5JdZjHbJV+S/trxQpsdbH4cDNDzBmRv8L9k1RQPnO1o4UppSRLQNs9kCbLwsFowg6R
- 1Ygi/YxADjob0U/hDyA==
-X-Proofpoint-ORIG-GUID: I9HlYFxrOGXO_BW5mV-KLoeEhE21LETU
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDA0NiBTYWx0ZWRfX6jXaFvOQzgwU
- XmixOiwQsmaXls+GTvcEu0gHVnYUX0P0Em9CpM365MtQzqjTy7N6+z9QSSRtJ4YjetCluiSjHns
- EWubpdtPkATo1hnHIuOjBJZXEAoa1CU=
-X-Authority-Analysis: v=2.4 cv=PJ6aavqC c=1 sm=1 tr=0 ts=6afee18a cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=OLikLUY__WNYvvbHpiEA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-19_03,2026-11-19_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0
- priorityscore=1501 phishscore=0 spamscore=0 adultscore=0 impostorscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611190046
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-iris_remove() does not wake up a client that is blocked in
-VIDIOC_DQBUF or poll() on an open session. The client stays blocked and
-keeps its file descriptor open.
+On Thu, 19 Nov 2026, Yongxing Mou wrote:
+> Add support for Multi-stream transport for MSM chipsets that allow
+> a single instance of DP controller to send multiple streams.
 
-Flag the vb2 queues of all open instances as errored after the core is
-shut down. This wakes up the blocked clients, which fail with an error
-and can close the file descriptor. Skip the instances that are already
-closing, as iris_close() releases their queues.
+Hi Yongxing,
 
-Fixes: 38506cb7e8d2 ("media: iris: add platform driver for iris video device")
-Cc: stable@vger.kernel.org
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
----
- drivers/media/platform/qcom/iris/iris_instance.h |  2 ++
- drivers/media/platform/qcom/iris/iris_probe.c    | 16 ++++++++++++++++
- drivers/media/platform/qcom/iris/iris_vidc.c     |  5 +++++
- 3 files changed, 23 insertions(+)
+On v7 I reported that s2idle hangs on resume with MST active, and you
+said I could send the fix. I will not have time to follow it up as a
+separate patch, so here it is for you to take into the series if it is
+useful.
 
-diff --git a/drivers/media/platform/qcom/iris/iris_instance.h b/drivers/media/platform/qcom/iris/iris_instance.h
-index 771269e705d9..cb84753e4f91 100644
---- a/drivers/media/platform/qcom/iris/iris_instance.h
-+++ b/drivers/media/platform/qcom/iris/iris_instance.h
-@@ -50,6 +50,7 @@ struct iris_hfi_session_ops;
-  * @icc_data: structure of interconnect data
-  * @m2m_dev:	a reference to m2m device structure
-  * @m2m_ctx:	a reference to m2m context structure
-+ * @closing: set on close, skips the queue error during removal
-  * @sequence_cap: a sequence counter for capture queue
-  * @sequence_out: a sequence counter for output queue
-  * @tss: timestamp metadata
-@@ -98,6 +99,7 @@ struct iris_inst {
- 	struct icc_vote_data		icc_data;
- 	struct v4l2_m2m_dev		*m2m_dev;
- 	struct v4l2_m2m_ctx		*m2m_ctx;
-+	bool				closing;
- 	u32				sequence_cap;
- 	u32				sequence_out;
- 	struct iris_ts_metadata		tss[VIDEO_MAX_FRAME];
-diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index 57185dc432eb..a086e519a55f 100644
---- a/drivers/media/platform/qcom/iris/iris_probe.c
-+++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -12,8 +12,10 @@
- #include <linux/reset.h>
- #include <linux/soc/qcom/ubwc.h>
- 
-+#include "iris_buffer.h"
- #include "iris_core.h"
- #include "iris_ctrls.h"
-+#include "iris_instance.h"
- #include "iris_vidc.h"
- 
- static int iris_init_icc(struct iris_core *core)
-@@ -259,6 +261,18 @@ static void iris_core_put(void *data)
- 	v4l2_device_put(&core->v4l2_dev);
- }
- 
-+static void iris_instances_vb2_queue_error(struct iris_core *core)
-+{
-+	struct iris_inst *inst;
-+
-+	mutex_lock(&core->lock);
-+	list_for_each_entry(inst, &core->instances, list) {
-+		if (!inst->closing)
-+			iris_vb2_queue_error(inst);
-+	}
-+	mutex_unlock(&core->lock);
-+}
-+
- static void iris_remove(struct platform_device *pdev)
- {
- 	struct iris_core *core;
-@@ -281,6 +295,8 @@ static void iris_remove(struct platform_device *pdev)
- 
- 	iris_core_deinit(core);
- 
-+	iris_instances_vb2_queue_error(core);
-+
- 	pm_runtime_dont_use_autosuspend(core->dev);
- 	pm_runtime_disable(core->dev);
- 
-diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-index 4c9961206f9b..19d1583c20a7 100644
---- a/drivers/media/platform/qcom/iris/iris_vidc.c
-+++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-@@ -322,6 +322,11 @@ static void iris_check_num_queued_internal_buffers(struct iris_inst *inst, u32 p
- int iris_close(struct file *filp)
- {
- 	struct iris_inst *inst = iris_get_inst(filp);
-+	struct iris_core *core = inst->core;
-+
-+	mutex_lock(&core->lock);
-+	inst->closing = true;
-+	mutex_unlock(&core->lock);
- 
- 	v4l2_ctrl_handler_free(&inst->ctrl_handler);
- 	v4l2_m2m_ctx_release(inst->m2m_ctx);
+The series never calls drm_dp_mst_topology_mgr_suspend() or
+drm_dp_mst_topology_mgr_resume(). While MST is active the link is kept
+up after the last stream is disabled, so system suspend powers the
+controller down with link_ready still set; on resume the first stream
+enable skips link training, and the payload table write hangs retrying
+AUX over a link that is down.
 
--- 
-2.34.1
+The fix suspends the topology manager and takes the link down before the
+controller is suspended, and on resume initializes the PHY again and
+resumes the topology manager (turning MST off with a hotplug event if
+the branch device is gone). The version on top of v7 of this series is
+here:
 
+https://github.com/joonhoekim/tb323fu-linux/blob/0e73bc96d65386bee31cc003f2e76a2e9623f631/kernel/patches/0202-drm-msm-dp-suspend-and-resume-the-MST-topology-acros.patch
+
+With it, a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) with two displays on
+an MST hub resumed from s2idle 3 times out of 3. On v9,
+msm_dp_display_unprepare() should move into the patch's
+msm_dp_mst_suspend() and run under mst_lock, as
+msm_dp_mst_stream_post_disable() holds that lock when it calls it. If
+post_disable starts taking the link down after the last stream
+(Sashiko's comment on 18/29), only the topology manager suspend/resume
+part is still needed. Feel free to take it under your own name or keep
+my authorship.
+
+Thanks,
+Joonhoe Kim
