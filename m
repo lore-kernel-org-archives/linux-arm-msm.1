@@ -1,55 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795097055;
-	b=Ik54l/H9Cksu6sb0yoTWE3srjZzy7o2Th5CEqsJAtzydeaVDZ0ubj3dsatZMY3/JFvZj
-	 Y78GldUo4ELaBFIFA6Nj2Kz6DHErIkMUgAtKibjMdRPXCFOL+3doBRQLiUAESaXVlJYHI
-	 8sZPlMDHaK9Y1ag2ScpcxhxPouCAskvSZ3piMY4YfqZhJtA+6d3K2HAdSw8q0nwWFTJLD
-	 9iJiGljsrSzzCkcYvssmFCGIHIhxg92kmoTdofIWPS5jltmdF+J7bi1CMvTMhFD/xip9A
-	 VfSGEZxAmKM2a2Qq9T/c6wyKYE0kvgrP93PqOL1/B+igl/0u9fWW1+dgzG1qWWK3TZA==
+	t=1795097252;
+	b=0ErYpsMkSiiAwe5X8VIFjM+6WbHDLeCphNlyeyjS3T4GhC5xMKlzcP26QI2abuLP+qjz
+	 zuQ5ipo0JaAh0LPOGF1/VOYTtyGfNP3zSifedm8r7Qha8SJhbFbz8h1OZQodyrFXHUzhI
+	 GDHw8a81dvw/weWg2xnVfTYde95WurNDPYTJDIgpyxU76LwSCO1FQ83isYID12sbXxZTG
+	 4DfROrrkM1WDHV91zAdz0cjMjaDfMQ6gmFqsRhFRs/x5LhGWLPU0X+sxEGAS/JFXSlnGy
+	 eK4bH2gLyTsIp7S4Jgwaqf8dAEP5H5BAx0GDs6Ni7MfA54Hh6H8X/VgYYRIvWeG3Yrg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795097055;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=PC0PFG7TIo+xFHu67YfgJWGRHE1j5A8uLzGpf4YdqBo=;
-	b=yO3bSLCt9RzRfRBdlkbWAldlGZHwfk5Y7f3VUB2YEialbrQmNnbX++BTo8exXocU/Sxm
-	 dpebrT+0PHBf6QWmFhpJUjgBvy+yKajz17yTo26u7Z1/shh/nWtShbqhcKdDPedSHWTU3
-	 LlHPlC2/jh8r7H3+RdPeAZ9tlcN0crEHzBf2+uogzFtI1F1k8wnhSXjzJGUjp1lz/FlX7
-	 e75qfgNqzYQBn16n94FHYb7zCBua4RSs8vd2mIGtN5FODFMm7IeC+XNNZZe9TGuHyv0oZ
-	 lx0JBbmMqGCcq5yOzlWrCrQDZmq91Pzjc3T3Bq+unUbUA/our/O1pQ1V2JnnRof9LYA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795097252;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=CrmcpCex4fbHUrfhAFeTHYutNYioKuausMFQcYEbaLU=;
+	b=Yx7oqoKPRwVc0cSs0xj0Sd59pSR4lD73ZBK+X2iC+WSxBUQY8Zpevt5pE/Xlutxyo+BJ
+	 QSQatGQs1R/jPOJdSJQZ7jlwuD26zCaw1lV1CtfDVv005CzOx2cvqea2uxkSrr2JTmaQI
+	 WHbkOOLMHxcQFssNuSRAGMuK9q80utNYxsZm9APT69mN8grBMDA/791kCIh4MbP+lxwXV
+	 1qBBqHp+MRCFR4i68Xigenz8na7AEvA/dpH30WV/Lh745EMGMyAwtmQfY0vlZ4oWVQ+KQ
+	 IGB4w0oYnlHMl6eO1dKPiqkL3y4OMCrGZY8hbev2OEnwQw9fPcd7gmwZ6iAw97Tpgxg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=crOKfeIn;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K6r0XnPi;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 8CBA2606A320;
-	Thu, 19 Nov 2026 14:04:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13B74606A333;
+	Thu, 19 Nov 2026 14:07:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=crOKfeIn
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 31D721F000C5;
-	Thu, 19 Nov 2026 14:04:13 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K6r0XnPi
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C98081F000C5;
+	Thu, 19 Nov 2026 14:07:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795097055;
-	bh=PC0PFG7TIo+xFHu67YfgJWGRHE1j5A8uLzGpf4YdqBo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=crOKfeInQMsi6DXvztHXY9Jr+XziH1Lo8Qgi14Iz2yItuCEWtcOa2G3Q+74cDopwq
-	 s1kOjqHq193jkwUKmRHxhw3bPMNRe74zQdsY7AAGDQLSlePDr+JB2tjkI4qGP9WNrL
-	 71s/NSh/Yr5Ozc2IcSHLriUbwuBB7Mpfyn7y+8+72EO9dx1/nM4Gr50Xv32NDvpjAC
-	 +I6vusEYfOjuacm+QBcjauUupBOH926RLEATF8xJzzq5IxdDqW86Bw11ALK4KcHzik
-	 6tfzMlljir8a0OqJY5DRLLkXPwTgW89qsXNJvLZxMOQ5D454L42jNRpjn21CbK5RE6
-	 7QqOGaTmltjvA==
-Date: Thu, 19 Nov 2026 15:04:11 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: nord: Fix GPI DMA wiring of QUP SPI
- engines
-Message-ID: <5poepxkppbiyfxz2dxkjm7p7xiq4ndoltsnnbqlp5rdasbvrxr@p2ocx5b3kubj>
-References: <20261118112407.103412-1-shengchao.guo@oss.qualcomm.com>
+	s=k20260515; t=1795097251;
+	bh=CrmcpCex4fbHUrfhAFeTHYutNYioKuausMFQcYEbaLU=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=K6r0XnPiowhgFn2627B3i4MyZRiDxO47ZDdRhfCzqHJNBCq7yjbapdhGipDr0IihN
+	 YKKnxE8cRj/wabv0XC1sN+gHpkC7a6t85DiirTdVH6rNS2VYLKhd6qLz2o1i1aURD7
+	 7m3OtKmK4cqsM2VxkbWpCP2mrb4dRtOuLj4ejADaRSAwisKf34AX1ryXAVwmvke2zD
+	 vjjXxCzn87xmJMiD359g8P6prYbTV0qsSSGX7DjmhGbmEQg6r8Tw/n7/gGbecVYsug
+	 XaafrS/WRx2ajc1I4O5KpUo66LDyHFPLs6Oe8msUOFHVpEoEDg2qNh1avAnR9nNgMP
+	 oN79F5D5N8ycA==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,26 +49,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261118112407.103412-1-shengchao.guo@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] ASoC: codecs: wcd934x: drop the MCLK on every disable
+From: Mark Brown <broonie@kernel.org>
+To: Ivan Verbovoy <ivanverbovoy@gmail.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261110-wcd934x-mclk-v1-1-c62956792a3f@gmail.com>
+References: <20261110-wcd934x-mclk-v1-1-c62956792a3f@gmail.com>
+Date: Thu, 19 Nov 2026 14:07:26 +0000
+Message-Id: <179509724666.116416.15851195764740977182.b4-review@b4>
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=930; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=OPTfJIFUXKisHBNvjvMBZZnAD+Q6NVj/03XvBIsbR68=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL+M823vKf2r1EoxSFUSn6dctGKu7asR2/fdLqjOZlVP
+ TGjUWVbRykLgxgXg6yYIktcFvfL+pLXa/gOLmyDmcPKBDKEgYtTACayRJWR4RjjC+bpCcF/Uvm1
+ K9s+13/6YlnyWP/K39vPY+MyhS6sDWJkWJtyIeC86TrxrQ33osSC5q290st5xPiz8EK/YzeCf4o
+ v5wAA
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Wed, Nov 18, 2026 at 12:24:07PM +0100, Shawn Guo wrote:
-> Commit d8005dd04efc ("arm64: dts: qcom: nord: wire up GPI DMA for QUP
-> I2C/SPI engines") put the QCOM_GPI_SPI channels of SE 0-3, 7, 8, 11
-> and 12 into the uartN nodes instead of their spiN siblings, and left
-> spi4 and spi14..spi19 without any. The UART nodes now carry dmas
-> properties the GENI UART binding doesn't allow, and 15 of 18 SPI
-> engines can't use GPI DMA.
-> 
-> Move the channels from the UART nodes to the SPI nodes, and add the
-> missing ones for spi4 and spi14..spi19.
-> 
-> Fixes: d8005dd04efc ("arm64: dts: qcom: nord: wire up GPI DMA for QUP I2C/SPI engines")
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
+> __wcd934x_cdc_mclk_enable() takes a reference on every enable: it
+> prepares and enables the external clock and counts a user of the
+> analog bias and system clock (sysclk_users). On disable it returns
+> early while the SoundWire controller's clock is enabled, so neither is
+> dropped. Each DAPM MCLK power-down or MBHC micbias release during
+> SoundWire activity therefore leaks one reference, and the MCLK stays on
+> for good.
 
-Eek! Thanks. I think the comment from sashiko needs to be addresed
-though.
+> The early return is not needed: wcd934x_swrm_clock() takes its own
+> reference before it enables the SoundWire clock and clears that clock
+> before it drops the reference, and sysclk_users keeps the bias and the
+> system clock on while any user remains. Drop the check.
 
-Bart
+Are you absolutely sure there are no other paths that could do this, for
+example take a look at wcd_mbhc_adc_detect_plug_type() and the rest of
+the jack detection code?
+
+-- 
+Mark Brown <broonie@kernel.org>
