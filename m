@@ -1,71 +1,119 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795167652;
-	b=JZxxolDmtWL6oFKFNK8EFJo3/tt5VUwQ4oBJ8JlPAyX1+Juh2GlCngr5t3W0KgNSgbwO
-	 x/kqR5TuszROkfaquxlxrhcKN7s+b7JZhHxJhERp3gJBCjnrnFF4444WzgN/WSw/RAS7X
-	 b2lSmJ4tVcIj2kkv92ZirlJqNJa9yr2KbsH4+bl07QaCB6y1FphcmbXnLdPTxf07/i2//
-	 UTquOHbKLInFbGLZplVJx2f8da/WdWr3WN5msRtFjzaz2Bes77fqq6BADyVswPfllrPMm
-	 4tX0s82FLqt/pgtG6TS4TafXgk36mmX08aIelDzJYwXWY9CjhY0yXZd+NRhR5+DNjMA==
+	t=1795167963;
+	b=RJvpvtUFOT3VLZESNF1CXBeaFDrgipS7cyXvTSuS3e+3iYOL2HiS3GgyQBC89bZVpAD/
+	 8nURgz9W84PBSXY5V5tllNGFTxU0uRVEfkw6BTVArDQ2EQt+qkVA4FDkjCTAjcPvVrEmp
+	 wrc0DdSMVMPLK3x1YJ9qnDp7djxx79ObVo+VcCpoWI/qus1Scwv3xPTjrPCbwAyFWJAB3
+	 skKAtH4R86Ghg809ZTA0cb4UIrpMtBir7zn0vuU1/q0989PoYLFYmbyUtfhOxyoAFssEQ
+	 1YIm71HczWIVs4SpzlHphiVv8zKm7CzA4PJ81keBqlwE9uMTPF16Os3rLrD+gYOmJFg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795167652;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=R8cEUfchtfL1CMYDQSUQAyd5j+dKyqqQvy8JCKkeHTQ=;
-	b=PKQzza0A9hq76LjcYK56846FmgSc7Q2qGCzhLsOQRke2C3vBK3pVHa0klgwB6IggPxCo
-	 g/ZbGabETEaWiaFDl3qaQP6i0K3nK1K7UI/u4hf6eHCs3hXNarVc1PpgtEiRfZrxkaczI
-	 DgZ2zsPNXQiOmuqoJrTTkaYbJbYQ8phcVqQVkqn4SgTnaSzm1yEj0PoxHn0FiUlfgoc/E
-	 bJgkconX2bw/Z2J1IE9kBYAEWWFE05wlyQHZsh6nlC+3sIufHFvXpg4LNpacVlIH4GCQ9
-	 /6fqP1DrbeKHbFx+AcL94pkkSLRFZsJc5Yxmcw/EZinR9gvo0IymNZSvnUx9g2o1uPQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795167963;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=QMOQyHWGFl1egjU4MIi5naiiYRrUSwo/0LdsRuAGp8I=;
+	b=E7++9WIIZ6elesIbLvOuFUh/kD9SDQ0xubC1FfQO40naJW9NZSJ1XRs8DwMMV5JYOPOu
+	 oCc0zupLAOT1ZpOXcD3SE6OHJzSSc8z/nr9Z+tGFZvEmwihKY1UwTLKeC+kk0/fY+Murp
+	 jGWQS5bWH0FFDMwkglwcwrv/CZrtgPJ3LzdK1hfuPaUMLuqD0n9DeEeUV4jsiFoekqPFR
+	 +t8QfZnh3vDJn2XhWWwpGjj2VELKhB1W2ygP2llZKELgJPqNcwvmbqvz/8cpw2vwcWYgg
+	 jOgdrPsr8M0vglnoa3iylsa8qHFE4vLpvXopKiSWcJK/iqbPwY6q2i6wtGOibcOTCpA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iJ+pA1vH;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="kNgUScH/";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="cunAVU4/";
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 682EE606A330;
-	Fri, 20 Nov 2026 09:40:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 515C4606A333
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 09:46:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 515C4606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iJ+pA1vH
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E4A51F000C4;
-	Fri, 20 Nov 2026 09:40:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795167652;
-	bh=R8cEUfchtfL1CMYDQSUQAyd5j+dKyqqQvy8JCKkeHTQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=iJ+pA1vHpaNYllnqQbqUJ7mgvSduDG3aAkO2Mj7oUyPqQEon+BW+dm59hcqXed7VL
-	 2xtu6/DPBtppJc/p36pz4lTHf73j60dqs4Y2iJl2+JUNEVzrwf+FUUjlExFJBgEsM9
-	 ommrbKid81+gyu2CItU+cACBgqGl/bCcydWGsQIDBLEK3IOBb4Vzm8VbFOayIw+eeA
-	 Mn3q7Er6t/56wzjh/vyVRsbCdtdCx8dB8knuV7KCI8zp0v+RyrBWk7Pbc1vfCKG/3v
-	 SOZeEMbStmNbMGude3EWA+Nd70n/JdRSXZJ82oSZmKz8JurO6jnMHZwf8IJ9rdVHEB
-	 rSXwSijGS2C3A==
-Date: Fri, 20 Nov 2026 15:10:48 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>
-Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
-	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
-	Frank Li <Frank.Li@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
-	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>,
-	Andy Shevchenko <andriy.shevchenko@intel.com>
-Subject: Re: [PATCH v6 0/9] dmaengine: Support bus widths of 32 bytes and
- above
-Message-ID: <awAVoMe1VphXwQIw@parshuram>
-References: <20261014-dmaengine-support-wider-dma-masks-v6-0-5b3ffdef8191@analog.com>
- <auiDhzNcif3LhPlq@nsa>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kNgUScH/;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cunAVU4/
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK9ZdZJ905557
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 09:46:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=QMOQyHWGFl1egjU4MIi5naii
+	YRrUSwo/0LdsRuAGp8I=; b=kNgUScH/89dEhe5udhgT9SLv2tUYQiSlZO72qVxD
+	OaIOrfiaoKU5JiXC6b69czxE59qo2WfjGbKFhkpr5LBypSW9wzLDUmxA8J/uqKFv
+	R56Bf83Hqyz4Xy9Kbiy2c9c4X6B+whYiCmcxGDzNWjhYZNfeJElg2FQqRKtsR81J
+	Cj1hwKTc60rAPdhQRwLx+oC5KsPUJW/meOtfta6RD0iOg9plL3jt8FKtT9VWmx+3
+	U6Zi9r4cFbM+YohbcrVBMx7vO+pvY25yoC4NcJ8n5gbKHFiq3+zGRx8biVmfoxjx
+	io/KVPmW+V2MeRz33o1I8zb8EiNHL6eYQT1Izkh9MKtTBQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j27fyk1fu-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 09:46:02 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-934963b2bc0so148084285a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 01:46:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795167960; x=1795772760; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=QMOQyHWGFl1egjU4MIi5naiiYRrUSwo/0LdsRuAGp8I=;
+        b=cunAVU4/+qmZSiAgzBMbX/04tZzcwpkGu457bJPjfl8OJHV7EgK9UtKkF31I3yn4AQ
+         tNtkYOv0wlV4b62qhei3mdyxcD17pE5TDUgGubERo8nIqRFb+LT0s8zwLDjYyk9gHsiG
+         cJZqpKe7QZMlTWvlFCzP37Xxjnr5ZasHG1RdcYWlzteS7R9meUC1Bhxsszi7l/r7YI4K
+         lykqij07IeMx2ScYt7R2XBD0MWA9Z/ETaWLiiQdP3qpTGf5AiILNwOMbAnEM3/LerMWL
+         JY2NlphNRH79wW5oiWaV/0DL29DC5g1Lb/OhDvtmQMkYPc0NxibgNAsCJDlHA0D/2Pl6
+         wDJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795167960; x=1795772760;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QMOQyHWGFl1egjU4MIi5naiiYRrUSwo/0LdsRuAGp8I=;
+        b=VIwoAYiAAfiJXqd4f8LtN6lcFROoUIk+7inuK6Kqg3PeObLEq5eD/RGfZg4I2ueKe0
+         keooBr2d9u2BxGGKZsJwAaMbnqN/ul5UFrwAzbtxHwuLRZ0lygwbK/Wdj/HkF+kXFqZa
+         t0zyow1SloWaXXOZXIE0977jt4Wiz+plaxgpT33Agc29Q4GETnR3ehOZcWXlJD7r8iEP
+         IwG9qbQ2m5BoKliTxII4wt60lqgMNEC4TGdFbgK/4MF46AetU5TFoIV23ytFZPy1y6En
+         eMtQmuclRhUSDjBqd/08MPDE9kGvASUfSZ4/7AVwgpa3M/CVW2CYfwo5p4rJKjVpebA3
+         opvg==
+X-Forwarded-Encrypted: i=1; AL+hErHqHwWrOyGz2liJdG+VbHD4IB8jKKXxsAIY26Un0PlbiZTSIwfdtv2IU83/sAtnh9n/G37qC9nfJZME+gWH@vger.kernel.org
+X-Gm-Message-State: APuU4Z+DVMN78LgftuhGW+Uik42UWrOmLDV9rt78dagElqMn5e0SnLUU
+	6j/olHOyfQ8tw/ktpOZqivlOh+xYllUTk7uuakhnfwmKKI4GW0FnCVzVtcQ4ISB2jznepdTQf68
+	VHch+g+o7t+tm1nTwkuhnnSNruRPlydP6T64EZpjky1FLmJo1s0dlLPquH9tSm/r8/0ii
+X-Gm-Gg: AYBFou1qI06WCpvvzpQPOnqTjXfDvbgsETnkH1a1IeHhM8ALuEGRqjQDZtooiieBwDn
+	p7sW8hyrmXbJxtLIOWvvEBYHiLVzvWSoi5/6rl+E6O0jTJPk5jt1FH3JWxt/05Cun4v++zK9kue
+	vw/kwALW2KpmrPtgeKHHryC+fVzOx98szjF7RBfkiw/WCr1NAXMwfg0QuI672kJFyx1BeWX73PO
+	ppo9fllLQ3rD0TbdV1UdqnjJj2ua90LtqVGbotV1NOY6V6edtQMyj4Y7EY/j5xr2+SB5LEXxWbV
+	khfHk6yplkeXnVzzmkgoL5MCl6Dd9jcS61RnCBHxgrljcWTPhrGBZPtaxd0OQAXw8CirlHt2xBD
+	j8JF5PsiedZViF4YMP3fbCH5LHCudgh7deHZrQK8KBzX2HcMYO5mpWZc5SW8hb4XI
+X-Received: by 2002:a05:620a:17a2:b0:93f:2eaf:64cd with SMTP id af79cd13be357-949bab35bc6mr384600685a.50.1795167960289;
+        Fri, 20 Nov 2026 01:46:00 -0800 (PST)
+X-Received: by 2002:a05:620a:17a2:b0:93f:2eaf:64cd with SMTP id af79cd13be357-949bab35bc6mr384597185a.50.1795167959637;
+        Fri, 20 Nov 2026 01:45:59 -0800 (PST)
+Received: from oss.qualcomm.com ([188.27.161.77])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb42absm5035064f8f.1.2026.11.20.01.45.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Nov 2026 01:45:58 -0800 (PST)
+Date: Fri, 20 Nov 2026 11:45:57 +0200
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: sm8650-valve-deckard: add more reboot
+ modes
+Message-ID: <lt5f7xkdms6d3vztcwsirtziova6o2y45hdovur7n52t4h4q6p@4nu7vv7aei4k>
+References: <20261118-topic-sm8650-deckard-reboot-modes-v1-1-a214636f248e@linaro.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,86 +123,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <auiDhzNcif3LhPlq@nsa>
+In-Reply-To: <20261118-topic-sm8650-deckard-reboot-modes-v1-1-a214636f248e@linaro.org>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAzOCBTYWx0ZWRfX7HPlFSPJZl71
+ DF+PnYtZQodD+PHynjOttjewA/Ro9upHPUJsy53Ql82y6Ud24pKDaZvhUO78KyeGlF2jC2vIfKu
+ tfI5/AMMjcbdWqhjKmRNoWC5tRvxHsg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAzOCBTYWx0ZWRfXxK8FPu5Kyl7n
+ +UKp3lhlaqEp9lr5MPlEsDTfUsyFoKTajipAERNJpAeZnuJ1PllADG49kT5bZbPNTF/rzqzL10l
+ 6GTF1/2gDxxnHkl7iGAcQnrxizA24MzvgkXdaCK4apPFxtFI0p4HeVMamIzvjho4WN4svAEcnFw
+ iFw27/LC8FNcnywE8Nm3uQJuDNvnZaxtXa3sYonnZiK1CqXWNBjl7rZ2i+u1OLrvEjlmf5IOrHq
+ Sh86l8pEviTOaZlwM3sX36Wr5yM0qo2n+2kqGY3tVKwh/y2ixhTfsOVK9j0tUqCvyv+VEOhnABv
+ j4NJ35wTr8TfvdNRJVofjW/RgRPNTGDC0HSItQ48rmSEs03ic+6J8+KeWUk0QyLhAdxJLDKrLHM
+ z+f/tdMf++M5Tcw5FxF2ZQS2YS83k9Kxiia3JXlwm+AdKsY5OITrZinoX6mza2giuJyeW4Jb81M
+ vYqnbJzwIen2U/1Ro1g==
+X-Authority-Analysis: v=2.4 cv=GZKCDgXL c=1 sm=1 tr=0 ts=6b0016da cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=WYvkMGzYiQLzyujf63wA:9 a=CjuIK1q_8ugA:10
+ a=3Q3lADbaBCgA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: bjTPJieYNn0-HD5VMKwL2LRelvqtycEM
+X-Proofpoint-GUID: bjTPJieYNn0-HD5VMKwL2LRelvqtycEM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-20_03,2026-11-19_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ suspectscore=0 impostorscore=0 bulkscore=0 adultscore=0 spamscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611200038
 
-On 02-11-26, 12:36, Nuno Sá wrote:
-> On Wed, Oct 14, 2026 at 03:19:10PM +0100, Nuno Sá wrote:
-> > The DMA engine slave capabilities advertise the supported source and
-> > destination bus widths through src_addr_widths / dst_addr_widths. These
-> > are plain u32 bitmasks where a set bit's position equals the
-> > corresponding enum dma_slave_buswidth value, e.g.
-> > DMA_SLAVE_BUSWIDTH_4_BYTES sets bit 4.
-> > 
-> > The consequence is that widths of 32 bytes and above cannot be
-> > represented at all: DMA_SLAVE_BUSWIDTH_32/64/128_BYTES would need bits
-> > 32, 64 and 128, which do not fit in a u32. Hardware with wider data
-> > paths is becoming common, so add a representation that can express these
-> > widths while still using enum dma_slave_buswidth.
-> > 
-> > This series switches consumers and a small set of producers to the new
-> > bus width capabilities, represented by a dma_buswidth_mask_t modeled
-> > after dma_cap_mask_t. The legacy dma_device u32 fields are kept for now
-> > so the remaining DMA controller drivers can be converted incrementally:
-> > dma_async_device_register() folds a legacy-only producer's u32 into the
-> > mask, so consumers only ever have to look at the mask.
-> > 
-> > Once the remaining producers are converted, the legacy dma_device
-> > src/dst_addr_widths fields can be removed as a final cleanup.
-> > 
-> > This issue was discussed before here:
-> > 
-> > https://lore.kernel.org/dmaengine/abkoXXbaxaiqbBuX@vaman/
-> > 
-> > Changes in v6:
-> > - Patch 1:
-> >   - Prefix the bus width helpers with dmaengine_ (Frank).
-> >   - Drop the wrapper macros taking the address of their mask arguments.
-> >     The helpers are now static inline functions taking a
-> >     dma_buswidth_mask_t pointer (Frank).
-> >   - Drop a stray blank line in dma_get_slave_caps() (Frank).
-> > - Patch 2-8:
-> >   - Use the renamed helpers, passing the masks by pointer.
-> > - Link to v5: https://patch.msgid.link/20261009-dmaengine-support-wider-dma-masks-v5-0-4c4e63a7a1af@analog.com
-> > 
-> > ---
-> > Nuno Sá (9):
-> >       dmaengine: Support bus widths of 32 bytes and above
-> >       dmaengine: dma-axi-dmac: Use bus width capability helpers
-> >       dmaengine: dw-axi-dmac: Use bus width capability helpers
-> >       dmaengine: qcom: gpi: Use bus width capability helpers
-> >       dmaengine: stm32-dma3: Use bus width capability helpers
-> >       iio: buffer-dmaengine: Use dma_slave_caps bus width accessors
-> >       ALSA: pcm_dmaengine: Use dma_slave_caps bus width helpers
-> >       spi: dw: Use dma_slave_caps bus width helpers
-> >       dmaengine: Drop legacy bus width fields from dma_slave_caps
-> > 
-> >  drivers/dma/dma-axi-dmac.c                         |  13 +-
-> >  drivers/dma/dmaengine.c                            |  23 ++-
-> >  drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c     |  39 +++--
-> >  drivers/dma/qcom/gpi.c                             |  11 +-
-> >  drivers/dma/stm32/stm32-dma3.c                     |  37 ++--
-> >  drivers/iio/buffer/industrialio-buffer-dmaengine.c |  15 +-
-> >  drivers/spi/spi-dw-dma.c                           |   7 +-
-> >  drivers/spi/spi-dw.h                               |   3 +-
-> >  include/linux/dmaengine.h                          | 188 +++++++++++++++++++--
-> >  sound/core/pcm_dmaengine.c                         |  20 ++-
-> >  10 files changed, 289 insertions(+), 67 deletions(-)
-> > ---
-> > base-commit: 42c31fec1ca76b8b5f7759def122d418dff2cd4b
-> > change-id: 20260615-dmaengine-support-wider-dma-masks-5aac12497e27
-> > --
-> > 
-> > Thanks!
-> > - Nuno Sá
-> > 
+On 26-11-18 10:46:05, Neil Armstrong wrote:
+> Add the supplementary reboot modes supported by the Deckard bootloader.
 > 
-> Hi Vinod, pinging this one before resend. Already got the rb  tag from Frank on the
-> first patch. If anything left to do, let me know please.
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-This fails to apply for me, can you rebase on next and send
-
--- 
-~Vinod
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
