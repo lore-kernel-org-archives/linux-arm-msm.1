@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795160051;
-	b=XZn2x+vgFcpB28B8eMKq/wRzDymLHknGKj6p+jXHDQRPQPajiY5DtKtRV/W3MBDxEeUa
-	 zggBvdYX3Rux36IpQ9ms66VrUofCaQesRHJCyBO9LSxAktveWqnmCRWnbSiwMFyTMd3Lm
-	 E6SApHF4Ii7fc51V/LeeQ+DbxGz74Ym5eKfX+hxnELAWo65JNXkiZXjoF6dclh+eZv9Cy
-	 FjdMQeWQhCofYqSVg4pIqcRuYNRGMCyC0eNdSO2AH0+T7FivaHdk9/GXO/l6m4y1Ec5rD
-	 1J0VU0Gc+mmlIIcdWxyCmBOrbzHoWTlUbKPsxy+d5yB3uf1mdy3BNTrVPnLFIxbhV8w==
+	t=1795160052;
+	b=AqC4nKfSzOnfQQ1tOb9/Iw6Az47UXnI7MZhTPnh5y69ANBXQuHU2agvrYAG+7EmjaRtn
+	 fRXwLiXnW9yk7fYPSreEEgNuNNKu9Agb59csDJt6rg7Yos5zixcA/VDk4OALi4A+ZWv4N
+	 rK6FA7ijcGnbqZuqUx9hrIAijKomY8hS6PqhmNbWYg89BAwsB9bH1qpGY6T2TXElVADSw
+	 RGxHFxlOcDrZcjASeGwwc/rcmkwwblA6gmlKhsGyqm7xvlJWED6s2wa/pOf/l25jyVtGn
+	 UJdQNUrD38PClrPYhIWkk92ICrljHWzieNBb2cSahNaNxPstZO6wtQzY3JkJ07PSnEQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795160051;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795160052;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=zaM+gH/dN44KPfMZjWOtQikePy6isicudqZk6D3g/BU=;
-	b=hh0oA/RMwEIUGqtNdCBBNcNj56LHHXXfYpGT0LQycqJVG85h25VNKCbC3bxyYpVK23IS
-	 4/2IKSPqYlyDY8ArtfMjtVVwkwKF9epquh1mlK0a4I/0bF+qlYbN2TEtRjEUqrGzIdClH
-	 9ccRrnvqoejuuoP6QUbdG29dELJpKSsZecxfmFQZt5/ClOocmfj2qlGQRPQn5vcPHNFXx
-	 1LaBus0iLFY8yvXIWhRbvwe+m5Xz0PvATF4lEHqMkJe9FZ4wLh0BkZZUD7CqIWIFIxz/Q
-	 srn7/W3LtrZi3oFPaBvydfqN95zcXlQXtZsOWL6aO2JCNBxo+91gwJE9rA/Znun25Zg==
+	bh=kRnaLXMIjjDmMSY6mFAZa1ZXluewGJuLAGDDGmmf4rQ=;
+	b=eTZFz7vHBP+Qzq1IFYFB+B465FbH3uGDVfW149r70Kd1EP3ZFMetujV2Z+/CNMZo+3jL
+	 GRhJMzax3odOzCn6HuZfv0Er3h5wPBXguLXhRBbbUiNzTt4miToBSZsnjKIoW0ZGRsr1Z
+	 7OOTWOysB0RAsQvqFk9b6Eq1bqP16Q0zwduBMIeiSa6jt/qNA+Azs3jSlON5ovuQX/Dvq
+	 lCfT5i6w5N0PkFiSsakrk1HmRTGQjco3rsw89AGn3Zf8YMdQNHC4KtdIzkD9pWY7KMTo9
+	 cyvlOUKhcXmEgJGpwd/bUfliCXVwhrg0In+89J7NEs3jzVn3yljArT04rg50IMOYZZQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uM4EwaUG;
-	arc=none smtp.remote-ip=209.85.128.48
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HKPNdU8p;
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A130260A5BC4
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:34:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A130260A5BC4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C709360A380E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:34:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C709360A380E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uM4EwaUG
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4bb70074ab2so5014445e9.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 23:34:10 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HKPNdU8p
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a5b2be99a8so4317825e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 23:34:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795160049; x=1795764849; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795160050; x=1795764850; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zaM+gH/dN44KPfMZjWOtQikePy6isicudqZk6D3g/BU=;
-        b=uM4EwaUGJ3db/pFbwtIa1AwHXGzh7FRaXsI3Exn9B+X7Y+75sVIT5aImQsYlqQAktP
-         DgaBTApC542QL9npLpxxeTVf74R7zjkF0/m3xwM7xwescjyqHBWPycRakWxowLsZb6pX
-         cGrY63UXSZ2H2NfsxAY4yq/X+S/iYRF3tiEce/necRond/IuTh8tOFzJDbtLj6fzPK1U
-         MAKzBfqdFT2WqL8jMV4JsznILSHyDzkawPS8nssGskfTjuT9GGB1tNE4y1fIaSqBcyk9
-         SX9S2XOPB7yHp8jDZF2G4cOaKS8o12dwoejRkN2VyyrPktVoqeYV8KlFIkSASm0WmVT6
-         aKsA==
+        bh=kRnaLXMIjjDmMSY6mFAZa1ZXluewGJuLAGDDGmmf4rQ=;
+        b=HKPNdU8p6BYIA0PhbhaC1eJory9J9d32I7tNCfsWv3fuI/ikf80iOswt2MD/UneDAR
+         pZfsOIkqqGcjGwnK+QtkPXz76nrHkKEKIwP45S6dvMaiaSmTWRYOYMj9bs8Kvr9CqIhy
+         UlpiewL52fQp4co1XHQk4F373mEW+dWSbBgzggPwt42FJHWZ7PAAtv//hGT/1c5aa2xJ
+         /zbRclE/JIs2XkUT1vW3xRAdh6aefo8FO+wSmudGTq3AiCh0FSnZyAGRaqLKNoh5deiz
+         cM5lGO7zQLxFPFWg9KsIf1xmHAtyWTRD7J4o+skfJ5KIHrZLemE6Y9/SB3dgKLtZsULk
+         xLPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795160049; x=1795764849;
+        d=1e100.net; s=20260707; t=1795160050; x=1795764850;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zaM+gH/dN44KPfMZjWOtQikePy6isicudqZk6D3g/BU=;
-        b=l3bsafGKOM3qeXi1dNFVRz4MvzU3+F5MIsAbW3Nx/z6xQ4oAN66SPVlSsOjMNsJb0M
-         84Awu82v5vEz2Wj/zqoFZvxv3AcoLNHU45xkeAlezVnL0Zwbf6pN4JWZhs9DVnpUuSTF
-         /05C1YmFX4zUd5tyhuPPwK7yfGaOmI/wAQtCqXpQQPMZCUDLS0s/WPWjmqTLTkJ9J7tN
-         3TJdBmkY7236ZhTSUpiv8LNhC4lb/uWDvy/QTusxK7sye0ARBQS0n8+yFxyt9eMUxFf3
-         znSIhCb92cu8Lg40XxlULwi+xXVV9l5dMgVlpeP9JCRZjXV358C6AAPTZmsUAHinUDS7
-         SwIw==
-X-Gm-Message-State: APuU4Z/vXUuochtD2AlXQfeCXgFJBNoopJTuqQQB/luFrGd1vqYLbS95
-	eQa0p9IoaatgRK8wghS+aD4dbLlHVwerlPuDGI89Jhk0pPXfLtC/zWWyh7vcG13+9kQ=
-X-Gm-Gg: AYBFou2L1RRVza0k7VhakFXaDV+0NUjevOCfQseA1DOcJXyTap7hzRidb/vMTM72/lX
-	kAIu4LQ2Ffv0MFV+nxx9IjP1nKMnGcZ88OFKQrV9KmdcEiM9FTz4ey+7A5LntnYRnmcW8f9yH57
-	AAP01xulsZQGP5bm8GWrAMryguXPFc+reQkzsnVbD+Z+cDypKZff3o29ODi3/MrNgmb3P10jTG2
-	0eaZbD3DqiGg3Bvjw3PazRQeqr4nNvMhvGMANIiAPC+c468srWwEtSX80e4fS7L4p3TmeAQX48J
-	hrxhUzVhtsUrK6c1PdWOGX8/O8NgWvw0gZM3/ZzrT3nkBZkkhirJ71Kq2l3vbREg74HmmPYiYxa
-	U1FsCaiB+rBCjsT8F1UvR53RZCNY07ldIdcLJDOrll7Mx/qFMcm4hnofKEEXoR2KafA2tO290r5
-	c2eezhzypmiVDYQ8oSGdJUXwprvE7lxv9B7DxT5fwxB6hDBeckOvOyDHKRlRHGJ4UkhHiuJftZP
-	MmR7FkKNNGJm0S4d2UWbJUlMkRiXn9/60OOI2EccYVfFyDw33pV5i9L63+bi/rLemKKsqHqjzJR
-	MhPwsmErSDDtccoYwr8L3rqgloM0AQy4faqwLTugm3oscsNyJ6MrsC0RhaG3r3Qjj7fO1nqqAOg
+        bh=kRnaLXMIjjDmMSY6mFAZa1ZXluewGJuLAGDDGmmf4rQ=;
+        b=LFZkq4OQcT4Dcw4X2VR1lkkZq6TiRkscbzL4HtXZrtcqOOjd1ccxaSMszuC8VhArqE
+         KrWjWfkCWPsWaKyFRbxZADqzJRbJoF3pnH1MlVGcymyndZffpXzGUNekx+T7KFVR3Z4+
+         HSu/n5brFwHvXJl2i3TrYYmQ1n9Dk4JF5rx6AaVM1Hr0vARCOCNHu2ljE1CdC2LfMsPr
+         XROATh0JaGKQ0Qv1srMM9dzKspwR1U9/FQlw7YzGG8yzjVWiL0hMxcLJfZdzPzsmuwUo
+         +DPngzfPBK9dbuUri7NcwuflhttQLHq8s9UdT0K3EZHko+fdPDEk9aC+BD6bgZQe/3Sy
+         W/5g==
+X-Gm-Message-State: APuU4Z8wPXH+5f4a+nDJ2QgH14OJt8Vhm2t20iza0rgML7IoLZ6XEdsn
+	3qgCg9D9OIKkblxLvdvlIt2hiCmQZvr+RKSDQHQHnjiOFh+Zc/Byq/IrNdaXXlHQMVY=
+X-Gm-Gg: AYBFou3WNIgAqovwE6FqdRzhGPzr9FNgcZSKbSo3Q6NfqsciCBphJzYB434sHcY9G0n
+	CvPl76UHslWQ+4MJ3n1AkAMzVCI8VM/T/67/Yoz7VB0wty1RcoDjmOV76Wr3UqWe6LadNw4B28l
+	tDFdd+DpC129rv444KWB5yZue4c2vn+P9zX83QdB6HB5CqN4tOGKBrHdnsXB7YU69y7uo1/VUA+
+	kbk2PtP7pSZuH0yu6M/A7P093kxFwo6G0cU347LnSSh4mKhQHXbcMGhsU8l9NbvfIK2CHe5ydzT
+	5Yaj/XVwyvb3titwxqYxZPOZ5jPAGgEFmjzRFHADQDO4PZfOhw0iehz4aFPe+gtmGvRIJwW+M9s
+	JwrbhdYiTb9DLNzvsB6hl2C9IDIq/w4eIxw9d6iVhSIZoP7kQ2ANCW1v41zmCuMyXBGr+9yRInJ
+	YSPyZfiM0sAGCfCvez8nZ6mQW3/aUs7IWZquactVUn8PHHTwCRLRS2Wz/SjeftillQ7R13XsY8v
+	UqZuZOb7tRhQWSQt1jKAz9yJKK7Wz9kPz/qtY8wY038LwHZN0JHG4W6mdMemvs8/VPl572uxgyg
+	c4sASULyRGNn0ZkFQNKGW1iXZuKfSF5SEYrrj9uaggZ/DjpDGw0/3oCQ3yNzmZ1m+2Ri/3Mswas
 	=
-X-Received: by 2002:a05:600c:4515:b0:4bb:659c:b8db with SMTP id 5b1f17b1804b1-4bb88813b27mr44615435e9.12.1795160049029;
-        Thu, 19 Nov 2026 23:34:09 -0800 (PST)
+X-Received: by 2002:a05:600c:5246:b0:4bb:6de4:2f7c with SMTP id 5b1f17b1804b1-4bb8881c5bdmr46585025e9.20.1795160050056;
+        Thu, 19 Nov 2026 23:34:10 -0800 (PST)
 Received: from DESKTOP-BJ3EVC4.lan (178-164-182-185.pool.digikabel.hu. [178.164.182.185])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb884a3a3dsm54154045e9.10.2026.11.19.23.34.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb884a3a3dsm54154045e9.10.2026.11.19.23.34.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 23:34:08 -0800 (PST)
+        Thu, 19 Nov 2026 23:34:09 -0800 (PST)
 From: Abdur Rofik <rofikcoga@gmail.com>
 To: linux-arm-msm@vger.kernel.org
 Cc: devicetree@vger.kernel.org,
@@ -93,9 +93,9 @@ Cc: devicetree@vger.kernel.org,
 	Neil Armstrong <neil.armstrong@linaro.org>,
 	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
 	Abdur Rofik <rofikcoga@gmail.com>
-Subject: [PATCH v4 08/10] arm64: dts: qcom: sm8250-lg-timelm: add SW42902 touchscreen
-Date: Fri, 20 Nov 2026 08:33:56 +0100
-Message-Id: <20261120073358.10267-9-rofikcoga@gmail.com>
+Subject: [PATCH v4 09/10] arm64: dts: qcom: sm8250-lg-timelm: enable USB Type-C
+Date: Fri, 20 Nov 2026 08:33:57 +0100
+Message-Id: <20261120073358.10267-10-rofikcoga@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20261120073358.10267-1-rofikcoga@gmail.com>
 References: <20261120073358.10267-1-rofikcoga@gmail.com>
@@ -110,87 +110,91 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Describe the SW42902 touchscreen on GENI I2C13 with its interrupt,
-reset, regulator supplies, pinctrl, and native 1080x2460 touch area.
+Enable the PM8150B Type-C controller in sink mode with PDO_VAR up to
+9V/3A, and connect the OF graph endpoints for USB DWC3 and SuperSpeed
+QMP PHY orientation switching.
 
 Signed-off-by: Abdur Rofik <rofikcoga@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts | 48 +++++++++++++++++++
- 1 file changed, 48 insertions(+)
+ arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts | 47 +++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts b/arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts
-index 709cf9674e2d4..16014df9c087a 100644
+index 16014df9c087a..2d8b06c05ecc3 100644
 --- a/arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts
 +++ b/arch/arm64/boot/dts/qcom/sm8250-lg-timelm.dts
-@@ -107,6 +107,24 @@ vph_pwr: vph-pwr-regulator {
- 		regulator-always-on;
- 		regulator-boot-on;
+@@ -9,6 +9,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/input/input.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
++#include <dt-bindings/usb/pd.h>
+ #include "sm8250.dtsi"
+ #include "pm8150.dtsi"
+ #include "pm8150b.dtsi"
+@@ -556,6 +557,44 @@ volume_down_state: volume-down-state {
  	};
-+
-+	reg_ts_vcl: regulator-ts-vcl {
-+		compatible = "regulator-fixed";
-+		regulator-name = "reg_ts_vcl";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&pm8150_gpios 8 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_ts_vdd: regulator-ts-vdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "reg_ts_vdd";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		gpio = <&pm8150_gpios 9 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
  };
  
- &apps_rsc {
-@@ -461,6 +479,29 @@ &gpu_zap_shader {
- 	firmware-name = "qcom/sm8250/LG/timelm/a650_zap.mbn";
- };
- 
-+&i2c13 {
++&pm8150b_typec {
 +	status = "okay";
-+	clock-frequency = <400000>;
 +
-+	touchscreen@48 {
-+		compatible = "lg,sw42902";
-+		reg = <0x48>;
++	vdd-pdphy-supply = <&vreg_l2a_3p1>;
 +
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <39 IRQ_TYPE_LEVEL_LOW>;
++	connector {
++		compatible = "usb-c-connector";
 +
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&ts_int_default>;
++		power-role = "sink";
++		data-role = "device";
++		self-powered;
 +
-+		reset-gpios = <&tlmm 38 GPIO_ACTIVE_LOW>;
-+		vcl-supply = <&reg_ts_vcl>;
-+		vdd-supply = <&reg_ts_vdd>;
++		op-sink-microwatt = <15000000>;
++		sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
++			     PDO_VAR(5000, 9000, 3000)>;
 +
-+		touchscreen-size-x = <1080>;
-+		touchscreen-size-y = <2460>;
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++
++				pm8150b_hs_in: endpoint {
++					remote-endpoint = <&usb_1_dwc3_hs_out>;
++				};
++			};
++
++			port@1 {
++				reg = <1>;
++
++				pm8150b_typec_mux: endpoint {
++					remote-endpoint = <&usb_1_qmpphy_out>;
++				};
++			};
++		};
 +	};
 +};
-+
- &mdss {
+ &pon_pwrkey {
  	status = "okay";
  };
-@@ -580,6 +621,13 @@ sdc2_card_det_n: sd-card-det-n-state {
- 		drive-strength = <2>;
- 		bias-pull-up;
- 	};
-+
-+	ts_int_default: ts-int-default-state {
-+		pins = "gpio39";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
+@@ -660,6 +699,10 @@ &usb_1_dwc3 {
+ 	dr_mode = "peripheral";
  };
  
- &uart12 {
++&usb_1_dwc3_hs_out {
++	remote-endpoint = <&pm8150b_hs_in>;
++};
++
+ &usb_1_hsphy {
+ 	status = "okay";
+ 
+@@ -674,3 +717,7 @@ &usb_1_qmpphy {
+ 	vdda-phy-supply = <&vreg_l18a_0p9>;
+ 	vdda-pll-supply = <&vreg_l9a_1p2>;
+ };
++
++&usb_1_qmpphy_out {
++	remote-endpoint = <&pm8150b_typec_mux>;
++};
 -- 
 2.39.5
 
