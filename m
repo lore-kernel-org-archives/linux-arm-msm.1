@@ -1,11 +1,11 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.48
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795169464;
-	b=hc7xkfydvsRL31Ek7jYuZjdT0e0resXKeJKoOuq/Qot20p1ZJN1JqPL8ZgneclprqFzA
-	 dXVFcSUqERIcRE51cRPCFe8IVZPGXBIaP9GtR1+3P1dCAwiAoPDSb2FVYUrizZlSWGDZO
-	 cQG1uwkB5kLVCdtHKieXKOhPKCX7AyYD4humaeFYwzjqI+aT6bLtV4oSjJ57dU5tALckb
-	 Vs7ekXEOJLl0jh6V/VQDDAKZRtVscqyqe/Lx7+1MrYz6WAI70jmU3datAZOYQtr1+qlkj
-	 5OO6Io4v8IfyVAHdLF5mz/nzQ/4+4zxhbS/dxCiHDjZgdQuSgq9mCDLjoqZqnOx6piw==
+	b=UudGh+uIASTICNcMiqGjxx/D71u7/5jWt4oljVJl7li7KZzsGhFzKa3Ot9QFK7P7puMJ
+	 4zvyBmbWarEWSi9O17bSa937ZraKcdhuJwiJganJ/+/u/PANykDwb3Ggb2GWjdBbH+YA1
+	 RaD2W8pgKjik/y5eGxEQs8FHO8LgATvCEYzwWbGYB9Mc13RQZxb+KZajPLOnza/ElXYfZ
+	 9Ee9w7RXrAWp7o6TucLjj6Z/W7l5XzzakZW5d7SKGXnOYHK0u+86kqgz/Jnv+Ul3rlE+9
+	 VMk7x7JXnbBKLctlL/e2khR6bLBZhMtrj42/eHVWodsNWfRbBJMnYgbzhLO5OjjHi+Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795169464;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
@@ -13,76 +13,77 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=FmERSsGdijHPEpg70TWraIUuJ8ka7iU2Z/SCqAmN7f4=;
-	b=ZWyq+VGruAuVjtJwwYSyn6PNg+dI3UtFZpfbUY4ip3L/DocqYXBOhqVfVHK8sPtGbxwq
-	 xRIAlotQdrngHQd1pmwTnLIAcLGj0A+nrGCItrjqHdcBF/JgFHaikCs1AtXfzJxNL+R41
-	 KYG3uXBDWvXK0LIhTvVLEOQKYpM2LIGKhakP4bawPzbjS2Dr5TGq69+uzv9n5sipdKZNS
-	 GETDp/DB91wQL3Z5BePIKDtYYd9SEeF6emgkV6g5F6RU+VSOG6dSYeuKAeyIoMcq4IoCz
-	 Zp888m9Ikj9ySYwSHj7+NN0yxzAW9jlTy1c3LAF9XPqV9/IBYF+6PDKYM/Kyv6kbbtQ==
+	bh=77Y6wCFIm5JVasGrpviwvOl6CLOgdvUjRnndLUz4fyY=;
+	b=MyE6Z/iksuqauX2UDXpqySWa4A4sp5EA64qk964qa8QfNckMHAy688VADmTg83iDrt3w
+	 PGmiicPBaoT312xcaGAJdAIGzp5bVoXzlWoU7tCmBZPvn7DGnglZiODklZIXt3QfGiSpb
+	 p4fToQy8qY+amUVB0ZJH9K4zdYaAr3UHD0rWr0aWeWQVGGJj0r2Q9sW+q86D12B2qVYmh
+	 h1BPUieJE6SGeQL06BJXKMOUhNRT37lqAX5lqazWk8SjGSbt+xTyoPrefAMZ5ssK0G1TM
+	 SjL29UEZu63mNsEtf8avrvAwKNU9T2USe5M5ky3L5ksjfRrKm2caws4QC/BClcYZM7Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=MT4qzyq+;
-	arc=none smtp.remote-ip=209.85.218.48
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CO6t4NhI;
+	arc=none smtp.remote-ip=209.85.221.48
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4451560A2609
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 10:11:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4451560A2609
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80386606A33A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 10:11:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 80386606A33A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=MT4qzyq+
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c4d427836e9so112356266b.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 02:11:04 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CO6t4NhI
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-498f5fa5103so380911f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 02:11:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795169463; x=1795774263; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1795169462; x=1795774262; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FmERSsGdijHPEpg70TWraIUuJ8ka7iU2Z/SCqAmN7f4=;
-        b=MT4qzyq+rOl+HzFwCxY8b/rRr/wX8YGqDMPPdx0ArPgH9NoCfxfWUE+GtrTbHTKh9C
-         kmYfUjDMBVknI9fXJQLedyZUpfzRoDJHeop3+4KFwXqe9Usc5yxoC2g275p/9EuqPAhW
-         O+RtGxZtv5gmJtZmCI9jtvMqVqMziKGpAEO+VQbDw8qgBdNDZiduk7UFjd6TfMuus4Me
-         8Su48PCb3W+Q8TZxZHVfAiSYqUlFrz6uweN8wd7VMpjBzXiBXRLcSDXLUQOQyUZjcS+Y
-         3+P/QwEXdGuVwpxegJKdWF6POCaIPkB6rPrgT3Ebq3uqrztEoXRR1xhcnIQ5V65+/wFu
-         l2vA==
+        bh=77Y6wCFIm5JVasGrpviwvOl6CLOgdvUjRnndLUz4fyY=;
+        b=CO6t4NhI9pSu5IH5Odt57PBc2QqyJ2pJZfxyy0Dj6ZIGBONvEhsawyagR5JNL5Qv+Z
+         pgTTvgn86mDaS2krR17lObi867gRkhZp3+JxZg8G/gUtDZzh9CgYFLpIyYAQiqhhGm3A
+         tX1arzX7dAiy54GoZqE5abgP3lx/ISXC2wV1Y/7+tLmeashF+q6FjfXSr7G/QSr+fDGc
+         DE7IQCOigASfAP1rnek2LXJesyU4YuWSBvSWyiLEb8f8L4jywW8NYjdkxgSOrXjTZe1m
+         DYVkAQvKVix36mZ93xaJNmKrq1hmIN2HDqwd+rX4Ms7CoH5EJnTpe5R2JWwVZxVBI18v
+         tO1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795169463; x=1795774263;
+        d=1e100.net; s=20260707; t=1795169462; x=1795774262;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FmERSsGdijHPEpg70TWraIUuJ8ka7iU2Z/SCqAmN7f4=;
-        b=Jl08bCgZ1yVciNyM+dUp3KdFK+ib4ZEAeYbCnMPpIV9WLUp6zLevxO1FA7FQCxMJL8
-         Z59lac6hyL3xzA4RJgzXV25qcMD1lrgwlZy8MmcBXA567a3xpbT3ZvLJMy1g7l5jXL6e
-         kGSmFUH2E6aMhVXH8D+pcTDgVyQjzqWhP55LiZBcMV8eldzisLC/lTMshhQzD163oSfO
-         GrkBBsaNh7EvQ+XL5pMuZ4bx/F+cH+amhbyq16lgjgMs/CS75MsTKcHPSX+Hx+BlSLkO
-         uH4jFi469QzGEn8hpT6cYMK1f61Kl5GOkgdivSUYc22BXnUyQ/jaDI2BavMKEZApi9w5
-         gZcw==
-X-Gm-Message-State: APuU4Z+6Zpd4/fm7VyTZ4H7WxEFXWIXthx4XWIkpqY5UgPEgKoXokfgc
-	EaVpB+cAjmNEi8idK+5NY2XDf4w1kNW2WaJr163CjMu34EqVzYbjE2oiQ+hmFh7EU8eIUw+c8rc
-	+DJQOX4o=
-X-Gm-Gg: AYBFou1PFg7Dx7anl4Xnpazf3CQrwIvebwlZAHC1Y6FQwAbOcn9tHoF/NCbDIA6ssel
-	yxmAd0iuiqcYeIf9JnJDBFqFjU66Ks2P83iikg/r9pCYkTc5ioagtg1XVpASD38YgjPK0mAF7jh
-	rXESphU6e4sOtNZ0tlWs+2s6dOujFsrJU9SJV41ZPJEur87tJKCwpLo8dAm1iGI8MAvH6mIh+e0
-	By9e0IoXmeU1eHnlNHvhqysqRj+9vQ60BvKk+qY57NJkelkzj+7E50E4UgnzkFQJuouftQzX0gD
-	hLJ78hC8PEp4AEYKPxNlK+0Vwvkp6rO89v2eFTFacNaKeRd4CKcS08MUlggVDagWjYkQNoJqkh9
-	8kiUQqgZboNg7W3ckzkI9YoZt7MWETEF6kkt2WQZXJytdOQUNuC3FIMgfyv1ROQnqI1VzxpkQOa
-	NHEHwONKgmAmUsoRed8O6Va4gEpz3U2yMpXUAfTtQYBmEsmFESXdCaK8jdfG0o1WJsSxul2AuUY
-	7uegbIEfPrTpViGj7+PquFjIpyFKiIwmHxGI/1F527vtQnad3+aRpdq+p0TiDmmFsplXAdyppUW
-	s4yelmZOuKa+P94uOB1hFjGXjtL3RHmf16mScCi9qXs2Ies+Y+Q=
-X-Received: by 2002:a17:907:9903:b0:c49:cdc8:10cf with SMTP id a640c23a62f3a-c513ac754cbmr178323866b.40.1795169462412;
-        Fri, 20 Nov 2026 02:11:02 -0800 (PST)
+        bh=77Y6wCFIm5JVasGrpviwvOl6CLOgdvUjRnndLUz4fyY=;
+        b=QMQ2ljYPuPEjATv0ARPehAkcJ/ALLdczSym1Tvap/wljimE9lRhkhBCi4kQtJSl3Wq
+         z0Hgq1GBTD2N5eizU3EIg4GxOhF64eq5l6O4ixwuOgIbfJne2sUntA9V7nYmoes00dAH
+         Vjsd/3zKnryb1xHsXNLXoT+10f0zRi47TUaQc31VADg+rRPiavTavrWPBmJL/HpvU9Sk
+         4hGz+u9kUtqhXrCdN9lTXDkJmB2K2YfvsxD0Mx+eCv4CZnHReGiFBBexb1fM6n1vdI3h
+         5E3sr7ZdfBDHxtvMfy5ONaSpk6yzM1NWKBMurt8oWoKNr2eWibP3GCW89beWvjU4gQSO
+         e34Q==
+X-Gm-Message-State: APuU4Z+IURdJMYNNFEEY1LSNPwyhIviVS/vREVOEu9Dtk+pq2r8WBTgF
+	pgZ9hDRsB3uV8lVr+joBpzV2pHnba1wrYkFVMnT8gjFBV74nx2n06yY+K/gvQSo3ab2FSN71nxy
+	oxnCB3sA=
+X-Gm-Gg: AZFdTZcfBGex5Vu5r5gf3xqxiOkpmo6AGW2bR71DL38pdGou0/e4d0R4wOqaJWPy3bx
+	1ErDxjktEh9IrE25494O84FpJ/1vI/ciqF7MNH9JOvlOQNHSwjK26SJ1FjDb3eXLAuHgyjYNYax
+	eeutD7ppPLJE3GFtoZ/fp7K/Vr0gHha9se0sj3CH6Qi3uOoGJWSpHxdpLPJaKgacu5Ik+qUYMfo
+	xl3CympOl2LYt3aC9jBtCFTPEnCSw0SR2jxtaJpQkaxUTX4/CzQq+k+IHw80ivx0Iz0OUiWEuBC
+	E0Y9nQmlvfoPqvVMMD6HUq59suzyr+18A5oDkBdkxEVvYsP4nVQaxfgwOWmvZ2smvaWivMcMEgT
+	Acb17NRXls+fm1M39K+pfBQNZAHx70QybrwzCEDdjgMUkbwnZk5MGgmPfFMtlTTIadxfC+JLbjN
+	SwDg7fQjsEHZfxMQO2E3af4ew8Gv0t511fG0ryRTiXMDT8ehC+/QRnDoWEK4VuIEU+8UNzrHA0G
+	FjzjeF8DY0Quxyug8rlvCy+tz/8hLLZ9GFtrtw8OOy+adT2AE8jD05y7tbK4lU7gEGcxPD1rGVm
+	puS3gVzgGtzWPJR3TjPe+T6Fs14i7v2t5m34nEMei7bvGgiiqs1CgPRCCEkc0lpgHaHdBUfX
+X-Received: by 2002:a5d:5f91:0:b0:48d:f9dd:e3df with SMTP id ffacd0b85a97d-4abb386134bmr4515258f8f.18.1795169461730;
+        Fri, 20 Nov 2026 02:11:01 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6bc8ce06sm4674937f8f.47.2026.11.20.02.11.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 02:11:02 -0800 (PST)
+        Fri, 20 Nov 2026 02:11:01 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 20 Nov 2026 11:10:59 +0100
-Subject: [PATCH 2/2] regulator: qcom_usb_vbus: add PM8550B support
+Date: Fri, 20 Nov 2026 11:10:58 +0100
+Subject: [PATCH 1/2] dt-bindings: regulator: qcom,usb-vbus-regulator:
+ document PM8550B
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -94,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261120-topic-sm8x50-pm8550b-usb-vbus-v1-2-bbda7b708359@linaro.org>
+Message-Id: <20261120-topic-sm8x50-pm8550b-usb-vbus-v1-1-bbda7b708359@linaro.org>
 References: <20261120-topic-sm8x50-pm8550b-usb-vbus-v1-0-bbda7b708359@linaro.org>
 In-Reply-To: <20261120-topic-sm8x50-pm8550b-usb-vbus-v1-0-bbda7b708359@linaro.org>
 To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
@@ -103,87 +104,63 @@ To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
  devicetree@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2440;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1741;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=zBAUAtWRwgszoLaaEzP/mtjDOwBEAECtpNbyZWiYcu4=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrAByz4/EXZYFt5/wDRUlOFYvBOPrPKz1sJ/flkYNc
- ZH1lUAeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawAcswAKCRB33NvayMhJ0ZGYD/
- 90xSEruhI4srRsvEZUWLQk8ktU4PEZd22u/DG5EFs4eKpCtiKIi6TJ0MOjUd/kUJ9cRoHbFhJ6gqiC
- H40jTa4Mqm8yxPKyBPYA9n1MDmhvYFcU/PS0c2R2JkEOHy6015Lb1MttTJrJi1SNv7LvB+fjPc8gD2
- DtqRqKH7btttJWrMCCIoTC7t2VJZD+2GGZ8X/Sm8PREqIrDjsih8POxzPjCayF5t+F5Ch9NcXUMaPC
- yafKjCmWBtHT3UObSvDxEbYTcrCUS+75W6c9m9IxwahAy2j6iGyskvat0TGI6vWlZ4i4DUmpLuS2Jd
- t3/une/QQYI1tr/NYXoDHZkeJKqSHeh6vAro8320KduU3419wvY4umYWX4OuBBqPNyAHtbH/KISNV0
- SoEUi09upl2MvWOJf8QsQQFW8grvLWk+B1y13sjDh9oTx7BfB0orI8mWAPMgcIy9Vz59yNKYLLlzFP
- /qLfYxtRYGsXN79JKFxCGb7WXm48YDFSEkG/sAmA+LdwAMHGDNhsY71C92zrZ2Q7MWeSINeWOsyZj3
- flWlkWsgULdYGoG+1TdFfQwOrtYhXSZ0lNg6ljFINRrn+oyzWT0MF79f75rpjyCFPShaVEeU5KkScF
- I7paUjDmAmJXYqWRZMndreFQy6q83ZtQfmu/BCT9rEUGs3CbrgjKUQVxyMww==
+ bh=JIuEA4RHNSlujYvUz526d4e/oGx5qwBBNKR0d1bBZZw=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrAByz3IOuTymsiScexI9P+xMpgJE6ntEMJA78rVsc
+ 5lWWP5+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawAcswAKCRB33NvayMhJ0UgND/
+ 41kAAhaX1hlyfG9/eeduUUh3qb4A8SWhkNQrEwNjo7V8grfF+VuGOIorZnwq1ddz/J4+boVt05xxdp
+ UZL76HBgjqyZxvFYC63l2bK/LLrryrqoi53uKqSWNm4H8VK7s7sgj9pcG76iLHjUGaRT6G7f+DOsT4
+ 7LLvU3jCqmIp8smJ+qLmczo6zLj/aV/IKoZFgt6OF+hsrTe9mf0nZM1ah//Nlf5hSFbpG4d3Ilfy9H
+ qyqRsWBItd7jux5Vm1agFrHE+kHl8Nixtlw6WHl7BbziWNMo1pxHXEaiVBA9heCr9yyyrmKNuIbFv6
+ QqcMzKTqmnXQujCRkRh8Mo5RlYcfURdviuliA9Gkphc5YnXkb/S7MXoakHN7DVGyb/Lv7sSX4/EWkg
+ /pKQeko0H2rndrTGdW3emGC/B6AW7cuW4eTQy7SfhW2fBqOPFN88vE8+hEQvb/J5ICVD1iwoVog/f9
+ H3p2iZSxE8HUBNuL+6hxDQkJpxxbcYb9RtR+GTBxkllyC1/GpPYLssmTMAGo1JhdXj1aeT4wyzUD6b
+ +gLjiFxOaAFGHHSes9jbW5fS9ZKfRv5G2OtuccIBBXeCrdQuGMBQ+zZFfp1YuaIb6Y/W3l14SlQnKK
+ K6komWr1dAD2Bp5f6lfJH1slpE6Kb+me1cCEdz+rpUv2dneO561hTK6M76ww==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Add support for the PM8550B OTG boost with a different register
-layout, supporting a current limit encoding from 1 A to 1.75 A
-in 250 mA steps, then 2 A to 10 3.5 A in 500 mA steps.
+Document the PM8550B compatible, without fallback since the layout is not
+compatible with PM8150B, with an OTG selector covering from 1 A to 3.5 A.
 
 Assisted-by: LLM
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/regulator/qcom_usb_vbus-regulator.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ .../devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml      | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/regulator/qcom_usb_vbus-regulator.c b/drivers/regulator/qcom_usb_vbus-regulator.c
-index d909a6f2b7f1..dd149d28f62b 100644
---- a/drivers/regulator/qcom_usb_vbus-regulator.c
-+++ b/drivers/regulator/qcom_usb_vbus-regulator.c
-@@ -20,6 +20,12 @@
- #define OTG_CFG				0x53
- #define OTG_EN_SRC_CFG			BIT(1)
+diff --git a/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml b/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
+index 024b34d0eb1a..d3c706182873 100644
+--- a/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
++++ b/Documentation/devicetree/bindings/regulator/qcom,usb-vbus-regulator.yaml
+@@ -17,6 +17,10 @@ description: |
+   The pm8150b variant uses an OTG current-limit selector, supporting limits
+   of 500 mA, 1000 mA, 1500 mA, 2000 mA, 2500 mA and 3000 mA.
  
-+#define PM8550B_BST_EN			0x50
-+#define PM8550B_BST_ILIM_SEL		0x53
-+#define PM8550B_BST_IOUT_OCP_THD_MASK	GENMASK(2, 0)
-+#define PM8550B_BST_CFG			0x56
-+#define PM8550B_OTG_EN_SRC_CFG		BIT(0)
++  The pm8550b variant uses a different register layout with an OTG
++  current-limit selector supporting limits of 1000 mA, 1250 mA, 1500 mA,
++  1750 mA, 2000 mA, 2500 mA, 3000 mA and 3500 mA.
 +
- #define PM4125_VBOOST_EN		0x50
- #define PM4125_VBOOST_SEL		0x52
- #define PM4125_VBOOST_CFG_MASK		GENMASK(1, 0)
-@@ -45,6 +51,10 @@ static const unsigned int curr_table[] = {
- 	500000, 1000000, 1500000, 2000000, 2500000, 3000000,
- };
- 
-+static const unsigned int pm8550b_curr_table[] = {
-+	1000000, 1250000, 1500000, 1750000, 2000000, 2500000, 3000000, 3500000,
-+};
-+
- static const unsigned int pm4125_vboost_table[] = {
- 	4250000, 4500000, 4750000, 5000000,
- };
-@@ -68,6 +78,17 @@ static const struct qcom_usb_vbus_reg_data pm8150b_data = {
- 	.ops = &qcom_usb_vbus_reg_ops,
- };
- 
-+static const struct qcom_usb_vbus_reg_data pm8550b_data = {
-+	.cmd_otg = PM8550B_BST_EN,
-+	.otg_cfg = PM8550B_BST_CFG,
-+	.otg_en_src_cfg = PM8550B_OTG_EN_SRC_CFG,
-+	.csel_reg = PM8550B_BST_ILIM_SEL,
-+	.csel_mask = PM8550B_BST_IOUT_OCP_THD_MASK,
-+	.curr_table = pm8550b_curr_table,
-+	.n_current_limits = ARRAY_SIZE(pm8550b_curr_table),
-+	.ops = &qcom_usb_vbus_reg_ops,
-+};
-+
- static const struct regulator_ops qcom_usb_vbus_pm4125_reg_ops = {
- 	.enable = regulator_enable_regmap,
- 	.disable = regulator_disable_regmap,
-@@ -165,6 +186,7 @@ static int qcom_usb_vbus_regulator_probe(struct platform_device *pdev)
- 
- static const struct of_device_id qcom_usb_vbus_regulator_match[] = {
- 	{ .compatible = "qcom,pm8150b-vbus-reg", .data = &pm8150b_data },
-+	{ .compatible = "qcom,pm8550b-vbus-reg", .data = &pm8550b_data },
- 	{ .compatible = "qcom,pm4125-vbus-reg",  .data = &pm4125_data },
- 	{ }
- };
+   The pm4125 variant uses a different register layout with a 2-bit VBOOST
+   voltage selector supporting output voltages of 4.25 V, 4.5 V, 4.75 V
+   and 5.0 V.
+@@ -26,6 +30,7 @@ properties:
+     oneOf:
+       - enum:
+           - qcom,pm8150b-vbus-reg
++          - qcom,pm8550b-vbus-reg
+           - qcom,pm4125-vbus-reg
+       - items:
+           - enum:
+@@ -46,6 +51,7 @@ allOf:
+           contains:
+             enum:
+               - qcom,pm8150b-vbus-reg
++              - qcom,pm8550b-vbus-reg
+               - qcom,pm6150-vbus-reg
+               - qcom,pm7250b-vbus-reg
+               - qcom,pmi632-vbus-reg
 
 -- 
 2.34.1
