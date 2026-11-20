@@ -1,113 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795172816;
-	b=wMdteYaKW+Ow3rbSWXhMJ446U1y+a0EvmN+9RjL+8EIuLzGb0mR2iYIbsviRI61HOeVd
-	 jGNZQuEjU75n2BAxsAfgb1FwMyDzr3oqZkJ4SygkJcYczUOib7NKyFojhaxukwfJVx1m9
-	 YuArA7jrgxjQDP6GQs2b3eRAJIArKi0Or+08snlxmO0qp3OcFy7bdvviBance1ALiVI1/
-	 u+1KvBLw9e3ty6S77pXsKADh5ATVW60FCVQnCCFqsokVjWOpMAGeH2VMKFGa+c0lyftpF
-	 aPk/9gXLz0Bp+iY0h/CoqelYi49qwoE+IAbbvVv1W89iN93DeeXNBtDPwq5kr3/0DUw==
+	t=1795172824;
+	b=B5cOEu2ZQNxbtUxxW5cAgx7DJpHM57gCAz+jo6O9rlfgkFqqtwjOWyPuKKMRVD514u/r
+	 T1O+LgHyTnsvNeu9dBeSXyi5tqv/GVRQjWHHhGchaKMAL21dm2q0rp5La9jSLSL4woJ/w
+	 x5HPQz8KR58WX1cfpm7M+G6j1dtQvkphNFMmpbgFkmnJupKaGgpXeGX46/BYoAqAUUTHz
+	 WHC8+qQBcdzc/WOu2dVk54SU+LTa+Z2wB2ZJoduH2rClqgtMe4wM2HvTPrJqFR6AR/usr
+	 y+e060c7Pe6Laltll/w4Fu0vxyk3CDuG/mbpxb4N/gVpNTrvF0v7u0RNVLSXkR53rHQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795172816;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795172824;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=hz2XdZj1N82zwwGf5rQXwFrF2Tz/A+hhelwd2ljU2qQ=;
-	b=dTlXgixyqR+0vuewl32cGPHr+ACLtpQLuw99P3DuO4VFhR2/uvO7NjMaMUPuasMshIVB
-	 6pg9iU9F5LEAlzxohlGyTBiWMwypYKBaEsJ0xm70CkdxvoFU0HekwirmGUvESZONg9MJg
-	 x27iwBg3Y7xmxfzXf9LED2KG5+ldJHH898ZMfxEqVKVVDyumX8Nu1NmY9ZjCwwlhFk1pd
-	 m/OsQKUBm6eCnUOP6cmx4VtSgtjFEbLLHXu4BCIW1v30XRzd/jIl6Mk22jkJgmsNd8uhj
-	 DFEqsnD62hOC+LaFbqGxr3454avk3nqDRIczQCHy7lvW5rwMfu9hNfG4Ows3zQ2yzAw==
+	bh=9wp0Zy1+0zpa3C+2W/5fX2hdJ67qF+07MlJVkRCmQuQ=;
+	b=nxbd6H+EXsixztvv1azDjkq/0Sy4SDgLOIIFO52KA8rbSM8heHsiZ4Sq1Uc6VjHP9VUR
+	 v24CVlriXQJRDMHVweYUxsNyBoT4ay74aBNHJZ27TXsO8xGaVkuIcjyvpzQdmjHpaPowy
+	 qjRrnhuauPRLX3bqy0Olx30ZOjLtk0GC7IigcNO6EzpqPOW+3dKSQoMz4ttlgflgP6dXO
+	 hDo8DNhaVDBN57P0GJKDJI11/G/FHdLwwlKgT9QOhiiM8QgvEFumTKVjw6gbHAbscyJpx
+	 TKLU6Zk1m4zDIWnYwmhe9ev02gswQewO/cGNsVVxMyoyYeNReAKsq0b1gqHkrn3KyqQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="OLE/ah2/";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="WRsGW+/I";
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k6Ft9jzM;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h4Sf0ibu;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DA4760A2616
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:06:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6DA4760A2616
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC1D3606A320
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:07:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC1D3606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OLE/ah2/;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WRsGW+/I
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKAk1942433136
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:06:55 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=k6Ft9jzM;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h4Sf0ibu
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKAk01m3731648
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:07:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hz2XdZj1N82zwwGf5rQXwFrF2Tz/A+hhelwd2ljU2qQ=; b=OLE/ah2/EA/YApVL
-	YDox7iNZKWVUiawjm/9KI34WLgg5QEIn0CJ5Xtj/tGcSNsBpjo8yuF5sLbGg4Ajr
-	vhabz062Akceh+Xwm0SzRkpldVZOEMWeXCpGVBq7IK/fzgNzezHFiuA+w3qH18Tm
-	dp3QWFIgoP7yJikeVctlZQO2suD3mHboa0Pd2LdktHuy2prEU1gfUVQBMxMCL2x0
-	BmuWYWLFW+mgFvMqWEKREvnhOu6VK+V+XWJiI5/dkEnPlZ609NfHX/zX3JJCnS+c
-	Z1CZU3tjMwmLdCpAEkXRy+5bhMWsAPVO9gOxL0RHxyBTQYaa5Cn8/rMUvEg+0WkY
-	djwa8w==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2fjj9ex0-1
+	9wp0Zy1+0zpa3C+2W/5fX2hdJ67qF+07MlJVkRCmQuQ=; b=k6Ft9jzM+Hll4YRR
+	eaVThWjOWxFJvu7IoA/Do60Gtn+KTjaPAo7Cpr0s9KI6+itc9jYLIJ1zUUJYne5T
+	3c5HfDXZ8rKS7pde62QLuaCSn+SmHMylXGZiHYu9p4GgnycrT8rkLi8lZIZuI53k
+	Pm0yQ88iv25n/1nalIpxjikLGYV21KpyXE42GdDPzXl4rV1mxPlkyea93/ZOgzQM
+	eQr6kCo/JLVdsONz2XGgCQu5wIx2X8PNU2frIHavrrudyrpi3D0pzecmdROzAXcp
+	rpcEaGKCXlSc0UTOeFftUD6yNQ7MgnHEenrWFl8cLcsh3ZVQCmH6EIh/+jMZ4bkB
+	qc/Dlg==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2mm4g3s7-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:06:55 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3724667bc16so591514eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:06:55 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:07:01 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-384c78aa0dbso973945eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:07:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795172815; x=1795777615; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795172821; x=1795777621; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hz2XdZj1N82zwwGf5rQXwFrF2Tz/A+hhelwd2ljU2qQ=;
-        b=WRsGW+/IlvIGZRj7xUeVO6UYyZvKz40bPU7qWE+Nh7Qhq+9GJkQsR+NnjYWWpmbsRB
-         NIqLU9xfJW/s4ckYPd3ptSo3l5Y2rPfcZ1/RTcbFJkDDZTap45S76M8PVarteLzlsn7g
-         QEwxrai6kAQQ7bmBa3fNbRnsasmWnfpi02tz7+LoU+fJCsumUAMw/3BqOVgUTlBSdIco
-         TFU1HYpILmW2zEMuESzRDU0pAw/SRHN2Sftgvr/2vwJ5hmLyyxg13tor5un+qK2qjMWu
-         L3b/8UkWpkMGjdGEBUHoaH5X4R+TCi5Xtp7yud69BiwPrv1/xdFio/WCPq7szfvMypYF
-         GFAw==
+        bh=9wp0Zy1+0zpa3C+2W/5fX2hdJ67qF+07MlJVkRCmQuQ=;
+        b=h4Sf0ibu38VEJnd5XDTeXdjxBLfxjmCBYReq1o3+72L3GoMIIa97oaAOkkl4lpupWN
+         pAFwUv7KIB/KHVTtLKWiMwFzUIOJsVtpgJq5ILFMNk52+1cWAH2DgcVGERGUzh3blI+L
+         TCBQsa+mbiNt+kJTs5lYF3Eye5uw9v4SakThDt3rGbiWo7N2Z0nlHof5hjEHX6q8303D
+         2Anmc0gG9c8Rvl97V4d7Z4PaJeGC1zI3e1jxPtTSQlThOqdaA0GBMsZQFr8IY3m9cok9
+         Lx5yXlKQFCHiQ3gid9XJOl9yUKN7Dv8N7/OrdT29MR2CXJny4vi1SOPefSRx2/3ujWrJ
+         gayQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795172815; x=1795777615;
+        d=1e100.net; s=20260707; t=1795172821; x=1795777621;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hz2XdZj1N82zwwGf5rQXwFrF2Tz/A+hhelwd2ljU2qQ=;
-        b=DU1cE3zVyKjStZa+oLKs9E/dLVLnYxgTtmgQ9yK7ZSg0KYsUP/IR4ayL8vwBojHDem
-         chzg8vz32tXlPbUdFOSBRTZQzxDKToj4Ds90Vu7P9HYA6W5dVaRq+3Tkuj89hcEKjZPR
-         OkhSy+V48GbGMK3WBXxVkOa90DPeTPdK+IeiOcccmwKFjM3zEDiNgSC2/IKho5oY8UlZ
-         k5dq9z4Gd5VFYg3Y0qiaXQWVlm7mohDJ2kUwzKdzqMvEnKKlOJqwi4vYP4duJHiFJqv0
-         UZshqGZ/5DahHc2KD72aK1NYHvo+KYl8NbRXzrftzSwC4HbIq9+nsmakSHOOHpiZBzYG
-         bcnQ==
-X-Forwarded-Encrypted: i=1; AL+hErE1EZ6bPxZMsJVnbN1hY/VFXc04K1ay4A1NM8UH0brmDQ6A0vz2fJQV6cST83MtgkFHQHLnVz82ZQYUiHGu@vger.kernel.org
-X-Gm-Message-State: APuU4Z/S2b+IxBFHexFaeHHxSfKsGxsbKF54ZbytpnJ8Xb3NfXeUXjhY
-	t8f18JmUiiCPaukyT6a54Tdm7ii9P2MyhYKZL9pUu1XaCJvfVWGRw/acViSq6NhQub8S7evmmPo
-	LLOo52d9+2oMIPgblBbo6azZ4vlq5FJPMak82YcbXTz8cKXXgqtD4NvDqS9Ai5aIF++lB
-X-Gm-Gg: AZFdTZckUat6rOf635sY4Pz8z/IzX40lTxVNLX1KGooXRI/58ZzMGgcnVxCYwowOnrL
-	Cb3nZO9p8L5AnBCkhgwLq0v89zQ/lBdgA2+xYucNWbnyt6hDfajEYRuyMzbfTSARFBc7Ig6dG4O
-	+MV8nrGZCgVBOIswB5VfL9g+cIaILRgTiyjpo8bTQ8lpAmDVXzHQ2cThfWzYTtPpfDRh4lJ0rGu
-	SEHxeP8hIIgjDNNmF0TU+8HU1j9+FcRYGVFsY9vqqANRfPpKwobKsOaJToVHhXcves6E7VHir4h
-	DuRCKznktyyd/kAZ8Br8lAbPf0IkPtN5O90RnsLnbLCYbTsJVsNIw+YEQbU7WBgIL+COq/Ywv4g
-	9i5cLLXnkBrGbYFJdEQBjMv3X6zDZdNkwMhxwDsp7s/K4J6hUPMNdBNUiVGQkm4MddrQRM8+aWc
-	tr/KOx
-X-Received: by 2002:a05:693c:41cb:20b0:384:4fb:510 with SMTP id 5a478bee46e88-384b4e7510dmr3920917eec.27.1795172814791;
-        Fri, 20 Nov 2026 03:06:54 -0800 (PST)
-X-Received: by 2002:a05:693c:41cb:20b0:384:4fb:510 with SMTP id 5a478bee46e88-384b4e7510dmr3920883eec.27.1795172814150;
-        Fri, 20 Nov 2026 03:06:54 -0800 (PST)
+        bh=9wp0Zy1+0zpa3C+2W/5fX2hdJ67qF+07MlJVkRCmQuQ=;
+        b=N28xysp7bHOVcSwAUf0lCKj6TszFv1kx/ywg+mallHp/ZI7WNBHQOK2n3ewywiis0O
+         cwihFmPjynOnbEXM3YkY3gUFw5p9218akjGWI8X3l0FUbiDzulC6k8llErWugeL/nsx2
+         lM0OS1ekhLqm3Esb3X6KnKgZh/r9g/j9U1zQmeQlSNmum+4TX+hwQLP7xEEdiygWWzBH
+         +c1zIzHDBk8k7CzB9NHFP5VXb+PCtPsLFfMCxJ83X/pPzJIK7nICl+lFcfr/E/OovBsH
+         p9gnE6qFRphiK4Cx8g8QUucC2J3ea/phwuzlacXOpHdOCbevtEE+GhTVyVx1ya6lq+Ew
+         C8PQ==
+X-Forwarded-Encrypted: i=1; AL+hErHnW96GNIXjnKdaUz4JepvLuz2AxTz5MrhV+z1cGh3p0I99awsrlNlL+1del1s2aUO9yNAkp0/02VzIzMJB@vger.kernel.org
+X-Gm-Message-State: APuU4Z+JPnQBsTN5+rGnkHhweXG2g2ci9RyC1IAPgk+C9pgAXp0BOIG4
+	d5L04oxb9M7pLtNmK7Yk2DoaPQ87NcjHX7xfhof4LRjFkypK7zC/M9uIFrnzopBGVoypUao5La0
+	Vp2FuELPmv6KuDDHPQ5OC5rG+ydJbCGLxZyAGES6AeGQ8gZNCj4cRUL1YXt8lLR+fCytg
+X-Gm-Gg: AZFdTZfeQUdlFrEG2vyNSIjX+nSFwcHudIVxIO7rlMGm6PKAfWAKrfgxesaCKnzlslu
+	i+oMIjWEIHp239t4ehsERcxq9Mj4C8k6rfVHcJW1YCed/3R7lM/x0ZH6uLBD9lT5Sz0t48DoBJO
+	g5V9Uxd+b/m7LzlcadV2/Oj8cPGF34OgSsCDyMPodp+0UR6F9SMFpy37lttnZTxyojOCgZXbUSO
+	+24ayydM5OmGRbu45Hghp+g9P6z6coSvp9dznWQaNl3NoTn4SwhZAZTsd/wYUQ6hG9iXNoZZQps
+	bFrtARbnOHWuATSvJVZe3670VrqHtrBahz27hVCotMDpUyp3zjKjkwIj3WvFTzurBXv7J0KOCiH
+	t7P33HYX46bsA6xqAAB/UFCkc1fSqT1VMlG9sB8XbCJsDcGRgEuzcLVQjwi2fnRvCgLRE+7sBhc
+	/jbXbW
+X-Received: by 2002:a05:7300:430a:b0:379:7bb6:9c4b with SMTP id 5a478bee46e88-385717083eamr3104324eec.39.1795172820305;
+        Fri, 20 Nov 2026 03:07:00 -0800 (PST)
+X-Received: by 2002:a05:7300:430a:b0:379:7bb6:9c4b with SMTP id 5a478bee46e88-385717083eamr3104290eec.39.1795172819595;
+        Fri, 20 Nov 2026 03:06:59 -0800 (PST)
 Received: from hu-bibekkum-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e99fdsm9252594eec.5.2026.11.20.03.06.49
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e99fdsm9252594eec.5.2026.11.20.03.06.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 03:06:53 -0800 (PST)
+        Fri, 20 Nov 2026 03:06:59 -0800 (PST)
 From: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 16:35:42 +0530
-Subject: [PATCH v4 01/20] dt-bindings: iommu: arm,smmu: Document
- interconnects property
+Date: Fri, 20 Nov 2026 16:35:43 +0530
+Subject: [PATCH v4 02/20] iommu/arm-smmu: Add interconnect bandwidth voting
+ support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,8 +118,8 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261120-smmu_interconnect_addition-v4-1-cab8ee8be0b3@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261120-smmu_interconnect_addition-v4-2-cab8ee8be0b3@oss.qualcomm.com>
 References: <20261120-smmu_interconnect_addition-v4-0-cab8ee8be0b3@oss.qualcomm.com>
 In-Reply-To: <20261120-smmu_interconnect_addition-v4-0-cab8ee8be0b3@oss.qualcomm.com>
 To: Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
@@ -134,111 +134,333 @@ Cc: linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-arm-msm@vger.kernel.org,
         Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+        Val Packett <val@packett.cool>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795172803; l=2417;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795172803; l=10382;
  i=bibek.patro@oss.qualcomm.com; s=20260617; h=from:subject:message-id;
- bh=L9ZDNV193MgcYYJuTHrN/Rk+LSdrA3XbSL8eIPKsLAM=;
- b=wdg5TvZTBzYicERdTGjHlneO8uNo7gn2OPeJEAerjHG3UyVz5Pfkn/6J0N4Bhc0D+p0HdagtQ
- 2sciI9FlJ7GDWUDJ5zSVep6gADyCUDd2XYfiX8Wc3WXC3zK6xtK0mkb
+ bh=2Tn1fmNrImTIJuMoWPhujoBy9ypAmrcFqaUEL7ITQm0=;
+ b=82e3NtB7zovJkGgRY6qn9VlGw4xD8oguiXH/aMhyAV0D66HhFdOi+uicnbcEQtVbudd6sGBTp
+ XXV7mvXP61gCFF/Jd4OPrIq8UDWMEodObIuOHU1c4R9IDWgVvirvrFp
 X-Developer-Key: i=bibek.patro@oss.qualcomm.com; a=ed25519;
  pk=DkrbE5dhskZJmBAKR5LygWRsAydEOSN+T0/YxNYxDLM=
-X-Authority-Analysis: v=2.4 cv=FJaOVOos c=1 sm=1 tr=0 ts=6b0029cf cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-ORIG-GUID: ED_SOyYowhuqaC2dAl9nLTOS-1BpQhwG
+X-Authority-Analysis: v=2.4 cv=RZYFmFtv c=1 sm=1 tr=0 ts=6b0029d5 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=LIGS1bie0qojq0S7pNEA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfX94Q6/nMp/X5p
- 9l4MiLtsqSAwGlEKvlWszIweQO8w0B+19A8KWbZKG8G7FMdgEVXXPTjoZ1OV2OP0qsctzfC0Gdd
- IkWE7JBLIeuwk2PKwp/FHlJJp/ypGzg=
-X-Proofpoint-ORIG-GUID: eAevukx3GCIMZdnjY1JZQ_zMvgxh7pKW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfXyPXwU1omd33f
- DvmZPWHTWxTGxpgVzeqUO+N97qG08oMx6G6TmS6ase6E4+vh5wf8t98+9S1Poa25fajfJyFh8B3
- epocJeat4Ejs+21dvS6/yAVskwKD+XgS2VrFMG1QHAMFtPvVDmm2ZYqumsNEpDkMja+xxMBhomR
- 9dq5xfhGzkma3MccXsvo9rIkKkXhKdgm56XvJgjRknWL0GWERF2WosQ0YOo4u2l60o/L0SA1E9C
- ITT6xjMzFGOoMTtC54vbAxtYQG24mIYr5it9v/ia4Fir7zZFGRCm7qQT3nhMsZ433/V5H30agz2
- rYjC3lC9zZjrA+MjNtklX/O0hTRVKsq3IjvjKyRXrHcYRZj/w2ZUrokLhX9nwg0h6lJ2EjTEi29
- dlK9s3fdwy0NOmJQOn6XDHwn9Y8K8aexVRBoPWbLGOQt6IS4CejNM9Jdwb6asqp6JMQsbHlfizP
- 9e1FRGIaNARt6Ut1SCg==
-X-Proofpoint-GUID: eAevukx3GCIMZdnjY1JZQ_zMvgxh7pKW
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=m-PSj7kzn0EKmAiG594A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfX9L/RNuaDTVyi
+ uNFfUt5g7mcQN7pEQBLx1gd8VI1agjdaDLrtn2qGIzKJRP4sp8Vrz6PQmUOXhDVP6sTWDC8/nIj
+ bKkTFWDt2naN5zFXr4rpNg6JTkdAkxI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfX+NQNlbAE8t2z
+ q+Mq+v76aqqwYOtZPK8k7wdBTUz4wDP0Saan/jAXpAQkENkuyBhu6CE/2v7iMaL28pUIF85jsWe
+ eTpNnkAc88B8rtAcWH/bpz6YHr4XSLJXUmT7w9T+On8rcp8CmMohJc3EUXt15rqukYxre0m74Ig
+ wTEQS0d8W4dKxSJhiQaohyp0yEr48LxXIrDglL9XxnjswXiRtJct/rk3XM2huaNCjWnGAVpOFiv
+ S+9lfTu0AMiBIyyPltxmLBp3O8fy+w5ax86Bxhxy9jUJMit/asjGFin043kkrdLqFbThqaqxqzZ
+ A1IyfREwB6smTdQB6pKqousHXvrZuswwhVIyIqFrCW4+A/DdGwwJ1QGWlRhtl08cp0+tBbvruTv
+ 6zt/zDH36ZSl155aEqO6yieCJh7wbmTkqZj5Q7YEBdCpq7CCSa6aCy5YZU4dt9F/4xBxCtOSxjW
+ +NuAssgm6USTFbYi0TQ==
+X-Proofpoint-GUID: ED_SOyYowhuqaC2dAl9nLTOS-1BpQhwG
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-20_04,2026-11-19_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 phishscore=0 clxscore=1015 impostorscore=0
- malwarescore=0 lowpriorityscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611200044
+ phishscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 suspectscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611200044
 
-On Qualcomm platforms using the ARM MMU-500 (qcom,smmu-500) as the
-adreno SMMU, starting from SM8150 (Snapdragon 855), an active
-bandwidth vote is required on the interconnect path before the SMMU
-register space is accessible.
+On Qualcomm SoCs using the ARM MMU-500 as the adreno SMMU, the GPU TCU
+sits on GEM_NOC as an independent AXI master and requires an active
+interconnect bandwidth vote for its registers to be accessible. While
+other clients typically satisfy this requirement implicitly, certain
+corner cases (e.g. during sleep/wakeup transitions) can leave the SMMU
+without a vote, causing intermittent register access failures.
 
-On these platforms the GPU TCU is a separate hardware block with its
-own AXI master port (alm_gpu_tcu) on GEM_NOC, independent of the GPU
-rendering data ports. This means the TCU can be active during wakeup
-while the GPU data path is idle, leaving GEM_NOC without any other
-voter and causing intermittent SMMU register access failures.
+Add support for an optional interconnect path to the arm-smmu
+driver and vote for bandwidth while the SMMU is active. The path
+is acquired from DT if present and ignored otherwise.
 
-On earlier platforms using QSMMU (SMMU-v2) the TCU is integrated
-inside the SMMU block and shares the GPU data AXI port, so no
-independent vote is required.
+The bandwidth vote is enabled before accessing SMMU registers
+during probe and runtime resume, and released during runtime
+suspend and on error paths.
 
-Add the optional 'interconnects' property and allow it for all
-qcom,smmu-500 + qcom,adreno-smmu combinations.
+Generally, from an architectural perspective, GEM_NOC and DDR are
+expected to have an active vote whenever the adreno_smmu block is
+powered on. In most common use cases, this requirement is implicitly
+satisfied because other GPU-related clients (for example, the GMU
+device) already hold a GEM_NOC vote when adreno_smmu is enabled.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+However, there are certain corner cases, such as during sleep/wakeup
+transitions, where the GEM_NOC vote can be removed before adreno_smmu
+is powered down. If adreno_smmu is then accessed while the interconnect
+vote is missing, it can lead to the observed failures. Because of the
+precise ordering involved, this scenario is difficult to reproduce
+consistently. Additionally, GDSC power state transitions in adreno use
+cases can independently drop the interconnect vote, further contributing
+to this race.
+
+The design difference between QSMMU (SMMU-v2) and SMMU-500 explains
+why an explicit ICC vote is needed only for the latter:
+
+QSMMU (SMMU-v2) — SM6250 / SDM845 era: The TCU is NOT a separate
+hardware master. It is integrated INSIDE the SMMU-v2 block itself.
+
+  GPU SS
+  +----------------------------------+
+  |  QSMMU (SMMU-v2 @ 0x5040000)     |
+  |  +----------------------------+  |
+  |  |  TCU (integrated, no       |  |
+  |  |  separate AXI master port) |  |
+  |  +------------+---------------+  |
+  |               | page table walk  |
+  |               | issued on same   |
+  |               | AXI port as GPU  |
+  +---------------+------------------+
+                  |
+                  |  qxm_gpu0 / qxm_gpu1
+                  |  (GPU data + TCU walks share same NOC master)
+                  v
+             GEM_NOC -> LLCC -> MC -> DDR
+
+On SMMU-v2 platforms the TCU never needs an independent vote because
+it physically cannot be active without the GPU data path also being
+active.
+
+SMMU-500 — SM8150+ / SA8775P / SC7280 etc.: The TCU is a SEPARATE
+hardware block with its OWN AXI master.
+
+  GPU SS
+  +----------------------------------+
+  |  +-------------+  +-----------+  |
+  |  |  GPU Core   |  | GPU TCU   |  |  <- distinct HW block
+  |  |  (rendering)|  |  + DVM    |  |
+  |  +------+------+  +-----+-----+  |
+  +---------+---------------+--------+
+            |               |
+     qnm_gpu0/1        alm_gpu_tcu    <- separate NOC master port
+            |               |
+            +-------+-------+
+                    v
+               GEM_NOC -> LLCC -> MC -> DDR
+
+On SMMU-500 the TCU has its own master port — it can be active (e.g.
+page table walks during wakeup) while the GPU data path is idle,
+leaving GEM_NOC without any other voter. Hence the explicit
+MASTER_GPU_TCU -> SLAVE_EBI1 vote is required.
+
 Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+Tested-by: Val Packett <val@packett.cool> # sm7325-motorola-dubai
 ---
- .../devicetree/bindings/iommu/arm,smmu.yaml        | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 50 ++++++++++++++++++++++++++++++
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.h |  4 +++
+ drivers/iommu/arm/arm-smmu/arm-smmu.c      | 29 +++++++++++++++--
+ drivers/iommu/arm/arm-smmu/arm-smmu.h      |  2 ++
+ 4 files changed, 82 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/iommu/arm,smmu.yaml b/Documentation/devicetree/bindings/iommu/arm,smmu.yaml
-index 6748351c7812..ec0fc5f7d4fd 100644
---- a/Documentation/devicetree/bindings/iommu/arm,smmu.yaml
-+++ b/Documentation/devicetree/bindings/iommu/arm,smmu.yaml
-@@ -252,6 +252,13 @@ properties:
-     minItems: 1
-     maxItems: 3
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+index 795e8ec7e8fa..eee20811eede 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+@@ -6,6 +6,7 @@
+ #include <linux/acpi.h>
+ #include <linux/adreno-smmu-priv.h>
+ #include <linux/delay.h>
++#include <linux/interconnect.h>
+ #include <linux/of_device.h>
+ #include <linux/firmware/qcom/qcom_scm.h>
+ #include <linux/platform_device.h>
+@@ -608,6 +609,45 @@ static int qcom_sdm845_smmu500_reset(struct arm_smmu_device *smmu)
+ 	return ret;
+ }
  
-+  interconnects:
-+    maxItems: 1
-+    description:
-+      Interconnect path to the SMMU register space. Required on SoCs
-+      where the SMMU registers are only accessible after a bandwidth
-+      vote has been placed on the interconnect fabric.
++static int qcom_adreno_smmu_icc_init(struct arm_smmu_device *smmu)
++{
++	struct qcom_smmu *qsmmu = container_of(smmu, struct qcom_smmu, smmu);
++	int err;
 +
-   nvidia,memory-controller:
-     description: |
-       A phandle to the memory controller on NVIDIA Tegra186 and later SoCs.
-@@ -656,6 +663,24 @@ allOf:
-         clock-names: false
-         clocks: false
++	qsmmu->icc_path = devm_of_icc_get(smmu->dev, NULL);
++	if (!IS_ERR(qsmmu->icc_path))
++		return 0;
++
++	err = PTR_ERR(qsmmu->icc_path);
++
++	if (err == -ENODEV) {
++		qsmmu->icc_path = NULL;
++		return 0;
++	}
++	return dev_err_probe(smmu->dev, err,
++			     "failed to get interconnect path\n");
++}
++
++static int qcom_adreno_smmu_runtime_resume(struct arm_smmu_device *smmu)
++{
++	struct qcom_smmu *qsmmu = container_of(smmu, struct qcom_smmu, smmu);
++	int ret;
++
++	ret = icc_set_bw(qsmmu->icc_path, 0, 1);
++	WARN_ON_ONCE(ret);
++	return ret;
++}
++
++static int qcom_adreno_smmu_runtime_suspend(struct arm_smmu_device *smmu)
++{
++	struct qcom_smmu *qsmmu = container_of(smmu, struct qcom_smmu, smmu);
++	int ret;
++
++	ret = icc_set_bw(qsmmu->icc_path, 0, 0);
++	WARN_ON_ONCE(ret);
++	return ret;
++}
++
+ static const struct arm_smmu_impl qcom_smmu_v2_impl = {
+ 	.init_context = qcom_smmu_init_context,
+ 	.cfg_probe = qcom_smmu_cfg_probe,
+@@ -659,6 +699,8 @@ static const struct arm_smmu_impl qcom_adreno_smmu_500_impl = {
+ 	.alloc_context_bank = qcom_adreno_smmu_alloc_context_bank,
+ 	.write_sctlr = qcom_adreno_smmu_write_sctlr,
+ 	.tlb_sync = qcom_smmu_tlb_sync,
++	.runtime_resume = qcom_adreno_smmu_runtime_resume,
++	.runtime_suspend = qcom_adreno_smmu_runtime_suspend,
+ 	.context_fault_needs_threaded_irq = true,
+ };
  
-+  - if:
-+      allOf:
-+        - properties:
-+            compatible:
-+              contains:
-+                const: qcom,smmu-500
-+        - properties:
-+            compatible:
-+              contains:
-+                const: qcom,adreno-smmu
-+    then:
-+      properties:
-+        interconnects:
-+          maxItems: 1
-+    else:
-+      properties:
-+        interconnects: false
+@@ -668,6 +710,7 @@ static struct arm_smmu_device *qcom_smmu_create(struct arm_smmu_device *smmu,
+ 	const struct device_node *np = smmu->dev->of_node;
+ 	const struct arm_smmu_impl *impl;
+ 	struct qcom_smmu *qsmmu;
++	int ret;
+ 
+ 	if (!data)
+ 		return ERR_PTR(-EINVAL);
+@@ -692,6 +735,12 @@ static struct arm_smmu_device *qcom_smmu_create(struct arm_smmu_device *smmu,
+ 	qsmmu->smmu.impl = impl;
+ 	qsmmu->data = data;
+ 
++	if (data->icc_init) {
++		ret = data->icc_init(&qsmmu->smmu);
++		if (ret)
++			return ERR_PTR(ret);
++	}
 +
-   - if:
-       properties:
-         compatible:
+ 	return &qsmmu->smmu;
+ }
+ 
+@@ -734,6 +783,7 @@ static const struct qcom_smmu_match_data qcom_smmu_500_impl0_data = {
+ 	.adreno_impl = &qcom_adreno_smmu_500_impl,
+ 	.cfg = &qcom_smmu_impl0_cfg,
+ 	.client_match = qcom_smmu_actlr_client_of_match,
++	.icc_init = qcom_adreno_smmu_icc_init,
+ };
+ 
+ /*
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.h b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.h
+index 8addd453f5f1..12c3eda780dc 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.h
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.h
+@@ -6,12 +6,15 @@
+ #ifndef _ARM_SMMU_QCOM_H
+ #define _ARM_SMMU_QCOM_H
+ 
++struct icc_path;
++
+ struct qcom_smmu {
+ 	struct arm_smmu_device smmu;
+ 	const struct qcom_smmu_match_data *data;
+ 	bool bypass_quirk;
+ 	u8 bypass_cbndx;
+ 	u32 stall_enabled;
++	struct icc_path *icc_path;
+ };
+ 
+ enum qcom_smmu_impl_reg_offset {
+@@ -29,6 +32,7 @@ struct qcom_smmu_match_data {
+ 	const struct arm_smmu_impl *impl;
+ 	const struct arm_smmu_impl *adreno_impl;
+ 	const struct of_device_id * const client_match;
++	int (*icc_init)(struct arm_smmu_device *smmu);
+ };
+ 
+ irqreturn_t qcom_smmu_context_fault(int irq, void *dev);
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu.c b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+index 8d50a4ad221d..f015985cbb8e 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+@@ -2183,6 +2183,14 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+ 	if (err)
+ 		return err;
+ 
++	if (smmu->impl && smmu->impl->runtime_resume) {
++		err = smmu->impl->runtime_resume(smmu);
++		if (err) {
++			clk_bulk_disable_unprepare(smmu->num_clks, smmu->clks);
++			return err;
++		}
++	}
++
+ 	err = arm_smmu_device_cfg_probe(smmu);
+ 	if (err)
+ 		return err;
+@@ -2263,10 +2271,13 @@ static void arm_smmu_device_shutdown(struct platform_device *pdev)
+ 	arm_smmu_gr0_write(smmu, ARM_SMMU_GR0_sCR0, ARM_SMMU_sCR0_CLIENTPD);
+ 	arm_smmu_rpm_put(smmu);
+ 
+-	if (pm_runtime_enabled(smmu->dev))
++	if (pm_runtime_enabled(smmu->dev)) {
+ 		pm_runtime_force_suspend(smmu->dev);
+-	else
++	} else {
+ 		clk_bulk_disable(smmu->num_clks, smmu->clks);
++		if (smmu->impl && smmu->impl->runtime_suspend)
++			smmu->impl->runtime_suspend(smmu);
++	}
+ 
+ 	clk_bulk_unprepare(smmu->num_clks, smmu->clks);
+ }
+@@ -2286,9 +2297,18 @@ static int __maybe_unused arm_smmu_runtime_resume(struct device *dev)
+ 	struct arm_smmu_device *smmu = dev_get_drvdata(dev);
+ 	int ret;
+ 
++	if (smmu->impl && smmu->impl->runtime_resume) {
++		ret = smmu->impl->runtime_resume(smmu);
++		if (ret)
++			return ret;
++	}
++
+ 	ret = clk_bulk_enable(smmu->num_clks, smmu->clks);
+-	if (ret)
++	if (ret) {
++		if (smmu->impl && smmu->impl->runtime_suspend)
++			smmu->impl->runtime_suspend(smmu);
+ 		return ret;
++	}
+ 
+ 	arm_smmu_device_reset(smmu);
+ 
+@@ -2301,6 +2321,9 @@ static int __maybe_unused arm_smmu_runtime_suspend(struct device *dev)
+ 
+ 	clk_bulk_disable(smmu->num_clks, smmu->clks);
+ 
++	if (smmu->impl && smmu->impl->runtime_suspend)
++		return smmu->impl->runtime_suspend(smmu);
++
+ 	return 0;
+ }
+ 
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu.h b/drivers/iommu/arm/arm-smmu/arm-smmu.h
+index 26d2e33cd328..ed08f86cf99d 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu.h
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu.h
+@@ -455,6 +455,8 @@ struct arm_smmu_impl {
+ 	void (*write_s2cr)(struct arm_smmu_device *smmu, int idx);
+ 	void (*write_sctlr)(struct arm_smmu_device *smmu, int idx, u32 reg);
+ 	void (*probe_finalize)(struct arm_smmu_device *smmu, struct device *dev);
++	int (*runtime_resume)(struct arm_smmu_device *smmu);
++	int (*runtime_suspend)(struct arm_smmu_device *smmu);
+ };
+ 
+ #define INVALID_SMENDX			-1
 
 -- 
 2.34.1
