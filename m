@@ -1,56 +1,101 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.254.49.197
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795196144;
-	b=GJPEZqaCI/zyVcCnkzzLUqQ3LM4+TvlXStKa23RojWZjqAtyvvnRd/tQbJb3YBFJLEmY
-	 jLP7aGIIa2C1OfbBpSxo1vWkSvJftxYqLSptWlxDJcUjPMm9FYk4a0xh/jFZog1Zm+RDW
-	 CXlASvBfPkjdbnu/OjLhc5UsLenkPOx3VYBQ/Jg8bNaAEV3mY83hAnGcJ6ai6Ttgoe+fz
-	 hWw82advrtswadUcDaI8phjoZbSNW6oT1w1VbA9fCWOC8zrvi3K5UFGIKBYJdz7LaLnnw
-	 3z97I9fDFD+ZB5vSyiqqDYBY62IaKJYi7rKe8JDUrpK4wQGwiyRfzpdGuao4LmWEZVw==
+	t=1795196430;
+	b=o/uS8bBmQrbQ4+TvgQ7aKketKvpJQyblUQLPK3IA5k1WxTHFqbZLWNzxvB5Qmx3DOwaa
+	 k9nNaqadaP7oqmlBkjsyySd0CnjLDH/UHb/V/O24F7Ai+O2gpmEKimps+GuaGEtsW3q5Z
+	 Zm3ahgaadONvQworKpdOxBLIYHh1sm6sC9xxv+LCcZ7Fthr96SevnwaSoEOzxy1C5e/Y4
+	 DlE5EioaeE4FdVw39TlRByqzajRhdgGjmUs9cUBbydD1fgA1Pv729mzfv7nh8tEdcW0Bu
+	 J4dkHyiUw6eXOOfWC7XuuTriVIZiJI2l7DsrQbxLxoA3elGtGHJyKDDAgI+TYOlRxvg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795196144;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-HM-Tid:
-	 X-HM-MType:X-HM-Spam-Status:DKIM-Signature;
-	bh=KFuB17UBx3dmAUo4Do73D0BjXXKCh6ehL5UyXgHwGCE=;
-	b=bZF+PvWFibGmbh28HgnvTeri5QK7Wr47RflnGrX+LuHex55VdG4xKmrAUjnQlDfOMODO
-	 SLqYlJu0U/CYu+6RRM4QF5OoQZ2jwg0i4pa63bEpJMO+QBoHYyKJEwuHasNLV53H5ft7O
-	 JCDl8az4MTJ47e7yulJy5xPjHB7Fuz/FL97cVA5I3UHTWY+5T6bTMzyFIwdXcZCd8wFT0
-	 z9FLIGC52GSYOUA4fRz8WUNNc0kHt7FYZiPFhY5AJkS0AuHsg0qECnwSOhhx3PKk3Icvp
-	 IlS9ZOD3ykj5fSqTGNug/nCtE+ma9G2aOeZ1SsftbAG5QOFPaV9oiGJyfH88c+Y13wQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795196430;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=mAqhAwYtTGGUt9HsaNHp93GmUA0b3RGVILqFHkMc3dc=;
+	b=hx7sA6QOh4CMkad7fvC4ceU74mnj3YoYf79/3KrweBUu0IDH18jxVQsneIKV1GedMQIU
+	 z0cggbcm1qtDD0YQhGFikXAxnlGVYmQpEWU70jfX8486us/BRgdMH92wvTPlt9ljJRqXK
+	 ruIr6qs35ZVAXG05lzHvhIO2fcAdIT6XerVOocVHIOupSk1h02BgP9u2lQ4jh8694oNAy
+	 NNfuSLikLjoGpV2aBmWubxYVz57tdr7C23Gj2rmG56pTK1BVfVqjrMqNguU2MaDQbAQtK
+	 hmlJ/UcS5VS0hX13XK8E0eSzcbDqxCos2EIP5C+MSX1LkkNIOmXZ+cvihNnVZmiahtw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.sdu.edu.cn;
-	spf=pass smtp.mailfrom=mail.sdu.edu.cn;
-	dkim=pass header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=U0h+PKV0;
-	arc=none smtp.remote-ip=45.254.49.197
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aBURvjdg;
+	arc=none smtp.remote-ip=209.85.160.172
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0242D60A2627;
-	Fri, 20 Nov 2026 17:35:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0242D60A2627
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mail.sdu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.sdu.edu.cn
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3860606A335
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 17:40:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F3860606A335
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=U0h+PKV0
-Received: from lgs.. (unknown [101.76.249.61])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 5573c0ac1;
-	Sat, 21 Nov 2026 01:35:34 +0800 (GMT+08:00)
-From: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
-To: Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH] thermal: qcom: tsens: Fix potential repeated removal of shared debugfs root
-Date: Sat, 21 Nov 2026 01:35:32 +0800
-Message-ID: <20261120173533.3924126-1-liguangshuo@mail.sdu.edu.cn>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aBURvjdg
+Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-55c304f7031so13571191cf.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 09:40:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795196427; x=1795801227; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mAqhAwYtTGGUt9HsaNHp93GmUA0b3RGVILqFHkMc3dc=;
+        b=aBURvjdgxtLl5qAXgNdjYWSJnP66qnq8B2tblPLUXp88tUYLeqNR+SLJeCHnh2nghb
+         aTPmeT7jUar3P086sAi4sgLvFaRZcRvXDyRVX5ClNXV1Mg7gbBTOJbUvFBCwe/nLJ0oS
+         COtMCuYSY8Ej/OrWv5rabABWXky7gZzf0IyHlOU2+y3EsRkKcVsYcDs4cI3V0ilO+3gv
+         2t0CntRIr/Ikh+R08aOf4B5Y5sk6QeTU37eTl1XFQD/d9hukV/pZoavqBHYCkquiW7l7
+         Spxtogf8d/rH0ZpKrubJDKhDCIiosnQ1cel5U9eRRKgGAs5OyRYWBNUzpwFkBzl9DGxl
+         PVgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795196427; x=1795801227;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mAqhAwYtTGGUt9HsaNHp93GmUA0b3RGVILqFHkMc3dc=;
+        b=dEbBV/qWIsJi0GpbIVAman2gVAKFWjZLd+Fg7kLBuY95DrNLBNbqmFIYi3Zh1l5Z9n
+         D9EPgdrM/68ztHR6WTbYek5sptChzKj49p/cygw3LwwBdYDT4EJb/oe2WEu8C+APP2kw
+         nSMRplf840acWiy8OQh+JtHmmLe9uu7O3kyEHBUIu+XIFIQjxJGMXcNE8RH/ONlNdzPV
+         XgVdNU/9Wg5cjEErn73kcdHeViK+NnTrsZK3XKhDYh+frhJYXYz+iGhwaPCI838chJ5E
+         rs9kDKZbQHNIbUSBfjShFfM8olzaVM38tTw2FA1Jgjxj9q6Bo7tbcBG1Wcw+MZvkI4q4
+         nROQ==
+X-Forwarded-Encrypted: i=1; AL+hErEYY4xDM+N4Npy5630O6bAGwjatsEA8iMxncF435QSJvh/V5/4OYYT02AzHmFyY47jyYot+AYjQE7SmtPGk@vger.kernel.org
+X-Gm-Message-State: APuU4Z+JqbjnvKtSdOvcdomhTHx0dcHTEYDA1F6gqVppbskkrnF16NGh
+	8ytdmcdWz9iQ5Gl0i4sYXeX+mUnoIzqK5SiBQpsQsv7/ZAhYbS/k3x1/
+X-Gm-Gg: AYBFou2zKCbTOei+zzdAsuqaDG0P0HPsl7SMGoVIqwgiMERHbQkIefp3Yttm5lrvf5C
+	XO0JPIc2GkS6rB4jCKtRXygq3v9ECtJopseuIsWP8d8G/4HiSyCCdPjONxEME1P1RXTkK6FtHQc
+	0zTCsZsqugt/r4L4vin6twPn0D/PmNfYzxyGCJLRcSYy/7zn/l35BYo8aUkKipCdMX0Bj2MFD3R
+	CjB/q8+ctzJ38AQiuTcw18l2UVvnqfjCc3B6gZNo+RnDM2vP3hUdq6lhaqUj+79og6HcMHrK/lQ
+	5+ILbqRQ2q62VaeXf9xEYj5SuMBoqt5Y/faXg1lDbb0aYvZQCBXOfHQSFJ+9wf0V7S87tKKsblZ
+	Xf1o+eZl+qPF0Ki+1RUM02iqnPlQjEc9Ys4mDqEACHhCL8UBQGpdG0aOPGfRA1BMwC2pflxPP8d
+	J2bich8nEVsUnomNqga7j8N2eNFo9sdAZUk8sWMwD8R8V6h/BJN12PZVMgEcsgWusWKg2QGX0Gy
+	KjGGW9VMZ40TSmDjGtYT9H02xsEKNaZH9qSYIhzqg0AGps/pFF9Xq5GGkX6BHnhNwbvRmQpi0R/
+	HjQTdXRXQoFps6l7Eat74cd7DF8ZvSamQPaLPeITs80dJkyY54PG1e6DxbSVUhg2KSYfwtEgy8U
+	SUnrNsYGvGf+iGu4Tk5k3nZEB5Jfp4S1mdij0sRV4QCmigMdXIrDXmPRHUQMgorrOCmFJxSQAdP
+	lDZD5wmj2Qjw3XWRcQbAkmVdGDXQlgEQ+XVBgSB8QH1shMxgfLzEdI5P7cuucCsIcx0bDyRT+Eg
+	4sKcizSeWxWABqA9BwNJ+ahbC7lzTH1vKZxN/eU5fywpA==
+X-Received: by 2002:a05:622a:1808:b0:535:a5f7:d596 with SMTP id d75a77b69052e-55d6fd36ed3mr78926921cf.37.1795196427043;
+        Fri, 20 Nov 2026 09:40:27 -0800 (PST)
+Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:d420:4621:169f:8773])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-55d7889f8b6sm28110831cf.28.2026.11.20.09.40.26
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Fri, 20 Nov 2026 09:40:26 -0800 (PST)
+From: Jesse Casco <jesse.casco@gmail.com>
+To: Bryan O'Donoghue <bod@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+	Allan Siriani <allan@fatecpompeia.edu.br>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: [PATCH 1/2] media: qcom: camss: x1e80100: Use the lite clocks for the lite CSIDs
+Date: Fri, 20 Nov 2026 12:40:24 -0500
+Message-ID: <bf48f3c809f33c060e2944e5896f8a5a93fd78ea.1795196107.git.jesse.casco@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <cover.1795196107.git.jesse.casco@gmail.com>
+References: <cover.1795196107.git.jesse.casco@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,98 +105,60 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa1fa0723e303a1kunm13f08662238bb4
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaHU5KVhgaSEIaTUsZHkkfSFYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKS0pVTE1VSU9CVU1KWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0
-	NMVUpLS1VLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=U0h+PKV089Y9v2y82Tb/jss73lpZ1diiYfFdkaY9D+Zh6xJIVe9fTd7yF1HoBsOMp0kxonrelzb/FIfy8GJfYRm4kXyqYQXKZzgpO6x7y0uuzBbXVTjLrvjFSYjZY7FeJx0kLWV5M0JhsOTvvtoXhK17tL8KVAEevTRh4T3i+Rw=; c=relaxed/relaxed; s=default; d=mail.sdu.edu.cn; v=1;
-	bh=KFuB17UBx3dmAUo4Do73D0BjXXKCh6ehL5UyXgHwGCE=;
-	h=date:mime-version:subject:message-id:from;
 
-Each TSENS instance stores the same debugfs root and removes it during
-teardown. Removing one instance therefore removes the files of its
-peers, and subsequent removal operates on the same root again.
+The X1E80100 CSID_LITE0 and CSID_LITE1 resources list the full CSID
+clocks, "csid" and "csid_csiphy_rx", instead of "vfe_lite_csid" and
+"vfe_lite_cphy_rx", which the binding provides for them. The lite CSIDs
+then run with their own CSI-2 receiver unclocked: their registers can be
+read and they raise the reset interrupt, but they never report RX, RDI
+or buffer-done interrupts, so no frame arrives.
 
-Own the root at driver initialization and exit. Each instance only
-removes its own directory, leaving the shared root to the driver.
+Use the lite clocks, with the vfe_lite_csid rates the IFE_LITE entries
+already use.
 
-This issue was found by our static analysis tool under development.
-
-Fixes: 7c938f4837ab ("drivers: thermal: tsens: Add debugfs support")
-Cc: stable@vger.kernel.org
-Signed-off-by: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
+Fixes: 1830cf0f56c3 ("media: qcom: camss: Add x1e80100 specific support")
+Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
 ---
- drivers/thermal/qcom/tsens.c | 31 ++++++++++++++++++++++++-------
- 1 file changed, 24 insertions(+), 7 deletions(-)
+ drivers/media/platform/qcom/camss/camss.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/thermal/qcom/tsens.c b/drivers/thermal/qcom/tsens.c
-index 4d7013fc79d6..e0fdeafdca30 100644
---- a/drivers/thermal/qcom/tsens.c
-+++ b/drivers/thermal/qcom/tsens.c
-@@ -22,6 +22,8 @@
- #include "../thermal_hwmon.h"
- #include "tsens.h"
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index f8e5cf9f3..7d9622097 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -4287,13 +4287,13 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 	{
+ 		.regulators = {},
+ 		.clock = { "gcc_axi_hf", "gcc_axi_sf", "cpas_ahb",
+-			   "cpas_fast_ahb", "csid", "csid_csiphy_rx" },
++			   "cpas_fast_ahb", "vfe_lite_csid", "vfe_lite_cphy_rx" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 64000000, 80000000 },
+ 				{ 80000000,  100000000, 200000000,
+ 				  300000000, 400000000 },
+-				{ 300000000, 400000000, 480000000 },
++				{ 266666667, 400000000, 480000000 },
+ 				{ 300000000, 400000000, 480000000 }, },
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+@@ -4308,13 +4308,13 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 	{
+ 		.regulators = {},
+ 		.clock = { "gcc_axi_hf", "gcc_axi_sf", "cpas_ahb",
+-			   "cpas_fast_ahb", "csid", "csid_csiphy_rx" },
++			   "cpas_fast_ahb", "vfe_lite_csid", "vfe_lite_cphy_rx" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 64000000, 80000000 },
+ 				{ 80000000,  100000000, 200000000,
+ 				  300000000, 400000000 },
+-				{ 300000000, 400000000, 480000000 },
++				{ 266666667, 400000000, 480000000 },
+ 				{ 300000000, 400000000, 480000000 }, },
  
-+static struct dentry *tsens_debugfs_root;
-+
- /**
-  * struct tsens_irq_data - IRQ status and temperature violations
-  * @up_viol:        upper threshold violated
-@@ -902,12 +904,8 @@ static void tsens_debug_init(struct platform_device *pdev)
- {
- 	struct tsens_priv *priv = platform_get_drvdata(pdev);
- 
--	priv->debug_root = debugfs_lookup("tsens", NULL);
--	if (!priv->debug_root)
--		priv->debug_root = debugfs_create_dir("tsens", NULL);
--
- 	/* A directory for each instance of the TSENS IP */
--	priv->debug = debugfs_create_dir(dev_name(&pdev->dev), priv->debug_root);
-+	priv->debug = debugfs_create_dir(dev_name(&pdev->dev), tsens_debugfs_root);
- 	debugfs_create_file("version", 0444, priv->debug, pdev, &dbg_version_fops);
- 	debugfs_create_file("sensors", 0444, priv->debug, pdev, &dbg_sensors_fops);
- }
-@@ -1459,7 +1457,7 @@ static void tsens_remove(struct platform_device *pdev)
- {
- 	struct tsens_priv *priv = platform_get_drvdata(pdev);
- 
--	debugfs_remove_recursive(priv->debug_root);
-+	debugfs_remove_recursive(priv->debug);
- 	tsens_disable_irq(priv);
- 	if (priv->ops->disable)
- 		priv->ops->disable(priv);
-@@ -1474,7 +1472,26 @@ static struct platform_driver tsens_driver = {
- 		.of_match_table = tsens_table,
- 	},
- };
--module_platform_driver(tsens_driver);
-+
-+static int __init tsens_init(void)
-+{
-+	int ret;
-+
-+	tsens_debugfs_root = debugfs_create_dir("tsens", NULL);
-+	ret = platform_driver_register(&tsens_driver);
-+	if (ret)
-+		debugfs_remove_recursive(tsens_debugfs_root);
-+
-+	return ret;
-+}
-+module_init(tsens_init);
-+
-+static void __exit tsens_exit(void)
-+{
-+	platform_driver_unregister(&tsens_driver);
-+	debugfs_remove_recursive(tsens_debugfs_root);
-+}
-+module_exit(tsens_exit);
- 
- MODULE_LICENSE("GPL v2");
- MODULE_DESCRIPTION("QCOM Temperature Sensor driver");
+ 		.reg = { "csid_lite1" },
+-- 
+2.56.1
 
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
