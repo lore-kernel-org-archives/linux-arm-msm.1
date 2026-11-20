@@ -1,98 +1,71 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.182
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795167562;
-	b=pWDPIffHRNWdgjb/WU0uNyPOYfRSxKSE/3WeJXHb9i69pNSJLGcjiuGnXLJw5G8SfH32
-	 98McziwplppI1YhY6+USVAZvyuWJ788+C7n3F+vUlt4c+Pi4ZQ+/HFXQJ3jBkEv7iArpK
-	 oK9TWwK48BOO5i/DgZHgej6YYcHQP+U6uTcPKqPa2kD5FhZPYY1sc0TWezN57o3oV7m1l
-	 A5GRC67YGZpCIV4AItHTf5Ocok/KRK/2LsnWgTXkF2EhGHaW7/uHqyTFOfzjIeswucfCe
-	 Uralxf46mTaJHBpXX54iBRleQymvVRp2EiU6sRVZU1UDiO3xs18bEBJ0+DgxP+LMe8w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795167562;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type;
-	bh=BEAw+eFZcvRl43IB9+AAVp/qhU/BGg04lzJ5p+eG8r0=;
-	b=EegcSBm5xMz4nR4VEgn393Qr5Wbew83FeURZOMoROszIQVYQcRyPlL9fHKSAUKLRuCx6
-	 Zd1z93FQGSNfkDTVOalOlHfx0ceP3LF4FE/cD5DTm3UjI5OvnnukXbf2W/WfbvGOt5iW5
-	 VoE+Q6SmNVFDOsiUmXHTW6+q00PqbFEKIfMlTVrX2oDsTkZRQp731eU1UPuukr4dCIdZm
-	 Fpu2uSZpGXDGHuLKvbbKPiRkwVZFJoM8HrrUT2xxcIvmjtwZjt/jVQNgT0A4KbsOXYmfQ
-	 Is9Gv4M4ODgpGNkQLae/COzKxdka20t/d1wGPqgoRgt5VIJuOt792brJ32ALGML3FIA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U7bKuNcK;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.182
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795167652;
+	b=JZxxolDmtWL6oFKFNK8EFJo3/tt5VUwQ4oBJ8JlPAyX1+Juh2GlCngr5t3W0KgNSgbwO
+	 x/kqR5TuszROkfaquxlxrhcKN7s+b7JZhHxJhERp3gJBCjnrnFF4444WzgN/WSw/RAS7X
+	 b2lSmJ4tVcIj2kkv92ZirlJqNJa9yr2KbsH4+bl07QaCB6y1FphcmbXnLdPTxf07/i2//
+	 UTquOHbKLInFbGLZplVJx2f8da/WdWr3WN5msRtFjzaz2Bes77fqq6BADyVswPfllrPMm
+	 4tX0s82FLqt/pgtG6TS4TafXgk36mmX08aIelDzJYwXWY9CjhY0yXZd+NRhR5+DNjMA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795167652;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=R8cEUfchtfL1CMYDQSUQAyd5j+dKyqqQvy8JCKkeHTQ=;
+	b=PKQzza0A9hq76LjcYK56846FmgSc7Q2qGCzhLsOQRke2C3vBK3pVHa0klgwB6IggPxCo
+	 g/ZbGabETEaWiaFDl3qaQP6i0K3nK1K7UI/u4hf6eHCs3hXNarVc1PpgtEiRfZrxkaczI
+	 DgZ2zsPNXQiOmuqoJrTTkaYbJbYQ8phcVqQVkqn4SgTnaSzm1yEj0PoxHn0FiUlfgoc/E
+	 bJgkconX2bw/Z2J1IE9kBYAEWWFE05wlyQHZsh6nlC+3sIufHFvXpg4LNpacVlIH4GCQ9
+	 /6fqP1DrbeKHbFx+AcL94pkkSLRFZsJc5Yxmcw/EZinR9gvo0IymNZSvnUx9g2o1uPQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iJ+pA1vH;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20306606A320
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 09:39:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 20306606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 682EE606A330;
+	Fri, 20 Nov 2026 09:40:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U7bKuNcK
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-57728d87699so309047b6e.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 01:39:21 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795167561; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GTBwRHBf8Ba+QuIvZHYZGacNOmrwUzKW8jVqfKHkcrrCITuEkDF4sDKdmqb/Wc2oLO
-         3JDhhMp7f2CrRZiY2ACeez8tDUXcjg03kr13Fr+wjUybxVaM7cRZPnC+FbSboLcXDBgP
-         cWvtg5f8ronXctyasfT+Jd6fpUh7lF7Rso4ztY8+wjd0KPFuAjBD2EQSngxRb4IK8e5r
-         kEsaLxTK3n+LuksUF6uhNR8p76Qf+1W6wDX8ZG3OchZRWwtslxHbtm4Jx0veQh67rn/+
-         weW8PG9Sl56YFK8WORTQwicztgqqMeUKKL2yxJjH1EeVCYFdlfFWEOrhhf5VMYz+Y5Qd
-         9dQA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=BEAw+eFZcvRl43IB9+AAVp/qhU/BGg04lzJ5p+eG8r0=;
-        fh=wX15Usow23lYfj0xkUTRlhQff6StfewE5ULNn9aQJsk=;
-        b=C9NNcS4VLYe3hdqtpAPMDSSksxdawucXihdlppg0iXT2Jqe/dHrdSRj+ZAKFjmkHp8
-         Fnx+WnaCA4D/gA4A5yBSt5XaHOLfEytF2QraayooOqZNDIJNHj/Wk1eM+PC3cfSf8xAu
-         dbDrOayByeouROJpLy4lUxvwhhXEZ+ozBwYsOSfft15YyuRxgW3Df2R/lfFIYppKmplA
-         Mtl5BIFCKq7M8t1a/Bp68yDnLRj5gVfhQst/DpAIcDf+YsoL8ijtwW8UED8k93GLe5/Y
-         fqZTaw+S19BCaM7NOJ8lFM1zQeYmWPR2TL9SImUEDrzAxRkfy3/PLTxyRBNq/FO9OWO/
-         4/IQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795167561; x=1795772361; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:mime-version:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BEAw+eFZcvRl43IB9+AAVp/qhU/BGg04lzJ5p+eG8r0=;
-        b=U7bKuNcKsonM4dTM4PWzPN53V7izwr60AW+KBokkq0AQoPiRz0lCMsaJJYgsazleMq
-         Z2J9yzUzwJlO3cQ4Vau2apkc2t0dYpMsPqz1ntDTCVjG8i4+dbXNVXpFjb4m7BwtYl+t
-         ph+7ESEAeQeT/7v//5Hk6OkkWJPKgKW/rznEcaG7K76NtMR6pq03VuMf4OlmhadDzCgW
-         YiuSeGcCrPZo4VN9kj1tl1KYMWRiya49hRcimRhu6RH/gShpxy4SPaFm5xBEmgjF13Dg
-         POAPGiyLlb42zSwy9iJSfA/iZF18t0MKPqT8dV14NybUctaoEI2zhW3GoY+bVIhI8ZWf
-         pe2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795167561; x=1795772361;
-        h=content-type:cc:to:subject:message-id:date:from:mime-version
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=BEAw+eFZcvRl43IB9+AAVp/qhU/BGg04lzJ5p+eG8r0=;
-        b=QHEDnlaH+4YAj8SjHFioOb7MSLo4qAQ27RC9Xelr6aSmiyQBHqnDl6qNTSsUFPTu7F
-         4gvfo/RsjNEB9ypIoX0UjQ08HpdbBuPYj/s97P/GpLQYmHXNYjHz0HGH2yQ3mF6MkUzW
-         Uj3s4OY8yBwhZl04aAPBVzqlhlTCyWbLWkYkNyFJJenFBLyQzIWq+76iEZyeZ1ypNyH/
-         Uf1IYiw0g1Uzcqu3IyoS9lLTqANQB5SeCgZkcf32zDhlAdWvejvVwsc7JVet9R00527h
-         /b3OmkxfKhibETDL6XbMlWRL9l2BM2PaZHwBTbRkmi0XBci4yQ7Dpej2WwUKEcgWouaK
-         Scsg==
-X-Forwarded-Encrypted: i=1; AL+hErEzyMqbpLsO3dNA5uXtqhUL+iVmHjN2mpiqFY0dLcnHWOtH9ZtthB3pjwNFLyNOR2xFHXbvy29nKEwalXd+@vger.kernel.org
-X-Gm-Message-State: APuU4Z9+tbwR1EB47FwLg7brTS7eS0zLDXPupuhDeJmOgU+D9coFU30H
-	wztruhBdqiU04v48zW9I5YQjqdN5POyo2LpwlEqK5r9N5hS8ATcrQyMHGafLQccgrHr5K1DHwqd
-	Sy1kLvG6Ywj/mxG2VISeXgBSuvlxq7Co=
-X-Gm-Gg: AYBFou2RpUE/DsfJ0umzRTwo1xTGAOTrLLY4r7/j4E4cHM4wxjuN7X9HDA2Safd0el9
-	pYTStd5OFQj6eaSAHj1B8P63dPmEUu6EWhLAFB2VQ6r7wJNPde/qErgw9awHNa5ccTlKcMdEMFW
-	27CMdsvYqKO5/oERdMJ5ZLuQArBkBh5MvTP1XHtS4Gsw9CQ/Tv5xyynPND27mTdPdKzXlq3/QsP
-	scS3PzmQIAlJqWdosj3efkeOzNcZgZE062CrKxAjYhLERR8J/6YwC5k5HbOCdDv2v05DhAJdNdz
-	BDWEzr0whpvpxBSEiLaxbJHEU3pBoRgIPNFFpzS4buJJkfQ8q1Bz+prpmCj7Xv1gj8YIAOcACXd
-	3KPzWkQJuv65RserXcuwzIix235NlechNX75heGKS/qqP/u9G2fAuwLqFf+NhjrRy+N2X3hPtjd
-	5HwG80DCj2UHZrUoY=
-X-Received: by 2002:a05:6808:1908:b0:571:b166:3d76 with SMTP id
- 5614622812f47-57a0ab2460amr3343180b6e.29.1795167561090; Fri, 20 Nov 2026
- 01:39:21 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iJ+pA1vH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E4A51F000C4;
+	Fri, 20 Nov 2026 09:40:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795167652;
+	bh=R8cEUfchtfL1CMYDQSUQAyd5j+dKyqqQvy8JCKkeHTQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=iJ+pA1vHpaNYllnqQbqUJ7mgvSduDG3aAkO2Mj7oUyPqQEon+BW+dm59hcqXed7VL
+	 2xtu6/DPBtppJc/p36pz4lTHf73j60dqs4Y2iJl2+JUNEVzrwf+FUUjlExFJBgEsM9
+	 ommrbKid81+gyu2CItU+cACBgqGl/bCcydWGsQIDBLEK3IOBb4Vzm8VbFOayIw+eeA
+	 Mn3q7Er6t/56wzjh/vyVRsbCdtdCx8dB8knuV7KCI8zp0v+RyrBWk7Pbc1vfCKG/3v
+	 SOZeEMbStmNbMGude3EWA+Nd70n/JdRSXZJ82oSZmKz8JurO6jnMHZwf8IJ9rdVHEB
+	 rSXwSijGS2C3A==
+Date: Fri, 20 Nov 2026 15:10:48 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>
+Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+	Frank Li <Frank.Li@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>,
+	Frank Li <Frank.Li@nxp.com>,
+	Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>
+Subject: Re: [PATCH v6 0/9] dmaengine: Support bus widths of 32 bytes and
+ above
+Message-ID: <awAVoMe1VphXwQIw@parshuram>
+References: <20261014-dmaengine-support-wider-dma-masks-v6-0-5b3ffdef8191@analog.com>
+ <auiDhzNcif3LhPlq@nsa>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,68 +75,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-From: YoungJoon Lee <getfeus@gmail.com>
-Date: Fri, 20 Nov 2026 18:39:07 +0900
-X-Gm-Features: AclHuK9ltT3zUqHytloj1JW7CdVlxNOQfyl-kfE2Ms_hNbPGLsz0aADkKXJ9yAg
-Message-ID: <CA+m4KrAQZeEUL68dwJnVpO_ftJSS1ed86_XgnbW1g=EN=xKRcA@mail.gmail.com>
-Subject: [RFC] phy: qcom: qmp-combo: Gaokun3 USB0 xHCI stops responding after
- USB3_ONLY transition
-To: Pengyu Luo <mitltlatltl@gmail.com>, linux-arm-msm@vger.kernel.org
-Cc: linux-phy@lists.infradead.org, linux-usb@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <auiDhzNcif3LhPlq@nsa>
 
-Hi,
+On 02-11-26, 12:36, Nuno Sá wrote:
+> On Wed, Oct 14, 2026 at 03:19:10PM +0100, Nuno Sá wrote:
+> > The DMA engine slave capabilities advertise the supported source and
+> > destination bus widths through src_addr_widths / dst_addr_widths. These
+> > are plain u32 bitmasks where a set bit's position equals the
+> > corresponding enum dma_slave_buswidth value, e.g.
+> > DMA_SLAVE_BUSWIDTH_4_BYTES sets bit 4.
+> > 
+> > The consequence is that widths of 32 bytes and above cannot be
+> > represented at all: DMA_SLAVE_BUSWIDTH_32/64/128_BYTES would need bits
+> > 32, 64 and 128, which do not fit in a u32. Hardware with wider data
+> > paths is becoming common, so add a representation that can express these
+> > widths while still using enum dma_slave_buswidth.
+> > 
+> > This series switches consumers and a small set of producers to the new
+> > bus width capabilities, represented by a dma_buswidth_mask_t modeled
+> > after dma_cap_mask_t. The legacy dma_device u32 fields are kept for now
+> > so the remaining DMA controller drivers can be converted incrementally:
+> > dma_async_device_register() folds a legacy-only producer's u32 into the
+> > mask, so consumers only ever have to look at the mask.
+> > 
+> > Once the remaining producers are converted, the legacy dma_device
+> > src/dst_addr_widths fields can be removed as a final cleanup.
+> > 
+> > This issue was discussed before here:
+> > 
+> > https://lore.kernel.org/dmaengine/abkoXXbaxaiqbBuX@vaman/
+> > 
+> > Changes in v6:
+> > - Patch 1:
+> >   - Prefix the bus width helpers with dmaengine_ (Frank).
+> >   - Drop the wrapper macros taking the address of their mask arguments.
+> >     The helpers are now static inline functions taking a
+> >     dma_buswidth_mask_t pointer (Frank).
+> >   - Drop a stray blank line in dma_get_slave_caps() (Frank).
+> > - Patch 2-8:
+> >   - Use the renamed helpers, passing the masks by pointer.
+> > - Link to v5: https://patch.msgid.link/20261009-dmaengine-support-wider-dma-masks-v5-0-4c4e63a7a1af@analog.com
+> > 
+> > ---
+> > Nuno Sá (9):
+> >       dmaengine: Support bus widths of 32 bytes and above
+> >       dmaengine: dma-axi-dmac: Use bus width capability helpers
+> >       dmaengine: dw-axi-dmac: Use bus width capability helpers
+> >       dmaengine: qcom: gpi: Use bus width capability helpers
+> >       dmaengine: stm32-dma3: Use bus width capability helpers
+> >       iio: buffer-dmaengine: Use dma_slave_caps bus width accessors
+> >       ALSA: pcm_dmaengine: Use dma_slave_caps bus width helpers
+> >       spi: dw: Use dma_slave_caps bus width helpers
+> >       dmaengine: Drop legacy bus width fields from dma_slave_caps
+> > 
+> >  drivers/dma/dma-axi-dmac.c                         |  13 +-
+> >  drivers/dma/dmaengine.c                            |  23 ++-
+> >  drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c     |  39 +++--
+> >  drivers/dma/qcom/gpi.c                             |  11 +-
+> >  drivers/dma/stm32/stm32-dma3.c                     |  37 ++--
+> >  drivers/iio/buffer/industrialio-buffer-dmaengine.c |  15 +-
+> >  drivers/spi/spi-dw-dma.c                           |   7 +-
+> >  drivers/spi/spi-dw.h                               |   3 +-
+> >  include/linux/dmaengine.h                          | 188 +++++++++++++++++++--
+> >  sound/core/pcm_dmaengine.c                         |  20 ++-
+> >  10 files changed, 289 insertions(+), 67 deletions(-)
+> > ---
+> > base-commit: 42c31fec1ca76b8b5f7759def122d418dff2cd4b
+> > change-id: 20260615-dmaengine-support-wider-dma-masks-5aac12497e27
+> > --
+> > 
+> > Thanks!
+> > - Nuno Sá
+> > 
+> 
+> Hi Vinod, pinging this one before resend. Already got the rb  tag from Frank on the
+> first patch. If anything left to do, let me know please.
 
-On a Huawei MateBook E Go (Gaokun3, SC8280XP), I reproduced a USB0
-xHCI controller hang after USB 2.0 storage had registered and the
-QMP PHY switched from USB3DP to USB3_ONLY. Changing only the HS PHY
-PLL supply reference changed the outcome in a time-matched test.
+This fails to apply for me, can you rebase on next and send
 
-Both runs used the same local 7.3.4-gaokun3-touchtest1-pllmux1 image,
-initramfs and command line. The stack is based on Linux 7.3.4 and
-the Gaokun project's 7463df37160b device sources. The port was
-a600000.usb, with QMP 88eb000.phy and HS PHY 88e5000.phy. Both DTBs
-used L9D for QMP vdda-phy and L4D for QMP vdda-pll, and declared
-mode-switch on the test QMP. The sole B/C change was vdda-pll-supply
-on the HS PHY, from L6D to L9D.
-
-I booted with AC connected and the test device unplugged. I attached
-the same Patriot storage device (13fe:5200), Type-C adapter and USB
-2.0 extension in the same orientation, without a DP display. First
-480 Mbps enumeration was at 600.413 s in B and 602.532 s in C.
-Both runs logged the same QMP mode transition.
-
-B (HS PLL on L6D):
-  601.750124  SCSI disk registered
-  602.372963  QMP switched from USB3DP to USB3_ONLY
-  640.995390  xHCI host not responding to stop endpoint command
-  640.996749  HC died; cleaning up
-
-The controller reported HC died 39.247 s after disk registration.
-The USB device was still absent at the 114.85 s check.
-
-C (HS PLL on L9D): no Stop Endpoint timeout or HC died in this run.
-The first connection dropped 88.300 s after disk registration with
-the cable still in place. The port started re-enumerating 0.336 s
-later. After the disk returned, it stayed attached at 480 Mbps for
-90.092 s and completed a 32 KiB direct read. An earlier L6D run with
-attachment around 68 s after boot also passed the 90 s/read test.
-
-The L9D use count before attachment was 1 in B and 2 in C. With L9D
-shared, the HS PLL and QMP PHY each held one reference. In a separate
-instrumented build with L6D assigned to the HS PLL, I captured RPMh
-disable/enable requests to L9D (0x41104) during the transition before
-the next bulk OUT stopped completing. The matched B/C runs did not
-trace RPMh at the transition or measure rail voltage.
-
-The mainline Gaokun DTS already shares L9D and leaves mode-switch
-unset on this QMP node. Stock mainline reproduction is untested.
-The one-line alignment for the downstream DTS is here:
-https://github.com/right-0903/linux-gaokun/pull/9
-
-For the next trace I would like to correlate the L9D RPMh requests
-with the last xHCI completion. Is there a QMP or DWC3 status register
-you would sample across USB3DP -> USB3_ONLY to distinguish a supply
-interruption from a PIPE clock or PCS reset?
-
-Thanks
+-- 
+~Vinod
