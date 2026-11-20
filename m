@@ -1,111 +1,114 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795180582;
-	b=1iwlUcyTcbP/KF599dKP1ee5Vg9tPuHDmYpWoSseKHg2juLRjmc3rYoPL+XBoV8irzAs
-	 2tSIbGVKICU1dYN+G6nqmyrvmacb0eGgpZErj9kvrUctXgEsIUDC2YuX60wmv3FH69ioi
-	 H3/6pVfZdkUHIRp+HTNK4Sbt+m7HJBHbDBtCb74Sj/VXhbZIad+t8rBVyxZJUp+uTc8ty
-	 ez5E0ANRECsITOId67UipFLs2AgMq0bMbwf9VVTOWSYeVzeGjOTTp8WH6/v1JEpIACK1V
-	 PTrK1terwDrnozj3dFT1DWPZd/aPOs3RaAM590B1KIi/oadkxH/+TdEcl5W2bnOfUBw==
+	t=1795180670;
+	b=TulV5zifJh4B3VyYKZJHXojG5fwAJTJLhUk3wISmK9TSGbxUdobG1LUzD+KXfTJhIfKi
+	 cyJOizWulHQGzLASjg5P3jJDIPn8iU0ZlJ606sPFzxZ4oQy/zykA3giEPzZK0+tvwdkPb
+	 JNev+0zmVTW2NILFrYhRAGSpz/LLa9I4nDqTC9T+GXyEO9asZ1HJ2jC23LpIq05ZTFoF3
+	 gvwp0QBBtzX+DCXgOfld0XlXpr3CdGVsjsm4B+qzZ6K6tD8Acpxzyiupwhlf5D+8iHlOY
+	 +dCVBWoObtwNkghSht8bm+xryZWlj48LgZonDLdf2L9P3hCpiO85CnCXyqvNm2pM4bw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795180582;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795180670;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=thTaPBQucKRchZ9oiq8PpDYPNggYExvle3GYvZIp3lM=;
-	b=10EfT9F7z9xds64GCWTo9jWuyGrOGKSpUxWHe069QZnuNYwpIg3+8vJr1fuiXeUwrGE2
-	 rMq16Udp9lnlbPSBTd7N2y1+dQRpe2yrkMswEpzPV1yafGCOfNd81XDcx2grd5/PIRWf0
-	 QriTZG+ff0B3P/CeTGcyFQC6JIS6YSSi9v9GhI40KfnIDcq2gubV5i1MI4faVDALCYO2Z
-	 I8XRhn/n9XlptYhWqnwEFBVWNaFxSRMUy1Ky9K2hoyVFmGDhVaVhWUKo4I6hLCBdEsj1F
-	 I//sFxuc7DUSpU11Ajb+FcFu3E56BHO0w/yGswSVS4oIQxtkXGnrpN8Tofldwfkdjtg==
+	 X-Received:X-Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=qmAvKTczlmw/BaBQYnANIBlVwzoKLc6aZO5VymI3MVE=;
+	b=nIoBRt/trB50dKaAxy6zTh0q3eUWTWsK+II5pb+W/e9+STlDOcNN0qn4WzAEaehyKer9
+	 oOT2yegN7kJm31cksIkaVI3J55Eh0jATqMZuY+8WIXLGcC/YOl8Vd8gJjOcOr4nIAc4La
+	 CZ7r+PsUhjskhZq6l3Z5NGYAHLU2q8LFUhKpVo+BgSCxWcCVuqpZCszSjK5NuUQbdzI79
+	 ToxGLRIJXqS9nu2g7Qzq/ErbxJ6mPecR7VyEs837dPwkRRGh/5tZZ5PKgvrAqWdVbyCX+
+	 OU/guZDWJyvPnIur0NW4Kb/iw8v9M/JmpxfQyCItCe1KBwxmlCdQGF+YJ4t8jgYFslg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="FjSIE/wt";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=H1AQLLl4;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=glPkfccA;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EyP2CURk;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 213B9606A32C
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:16:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 213B9606A32C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDC9A60A2604
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:17:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDC9A60A2604
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FjSIE/wt;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=H1AQLLl4
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKAkfRh3107598
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:16:21 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=glPkfccA;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EyP2CURk
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKAjxtr1528618
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:17:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	thTaPBQucKRchZ9oiq8PpDYPNggYExvle3GYvZIp3lM=; b=FjSIE/wtVB669Ywu
-	Yrv5b0AhR6HMp8KwbhAFYqwPJrmnMkE6tbqGtWQGSfNY69n4quB3efG3+GuzhS7H
-	CWccCN2osXQ9hupg59yFW4huFULjYA193VPalAeHm8XhR+rFk7VU+w6TKhPTEh9W
-	O0Ito/Y87qjhx6oRzRuq2/mDV8y5cnbOXWmLWEpPF09fV12ViHCJVup84yF8npkm
-	EgAEXvtxOEq5DaaK3N91C+R3jJEhiXOkbF3YCgIfbafDaSZiaS7hrJ9vA5Y0Ej69
-	REzIDZy8ykZYJa4nY/aTInQlEudAJkWNaNBitmuUPhmJOUqKGR+ip/9e+didKtIM
-	ED+1Uw==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j27au3uhj-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=qmAvKTczlmw/BaBQYnANIBlVwzoKLc6aZO5
+	VymI3MVE=; b=glPkfccAQkvM+KwsJiq8EGJow/vXlIrm8Y3+jclO016Qe6ONnae
+	ZKZ9Tv4zv2t+LlcmC+3Q0Uk8O4QS5y2jiIZ5vr8S710K5N5q1hTVExRgO5ErbenO
+	A/mZjx2yjTUwpXz0/7Hfig9g1UsfusNj64wwD+N2RaSU7LD4pSt/+gksPO5MQn5X
+	6sUR7zFfDS4Ob+p53WaeZsWDk+TTuboT2hcv1Nmsjrpc828ktCVrwFMbaalQUAds
+	qKRWBY1srGLtan60fJzFeQ96X6bHpCYrIO9K1DkMdDb47gdYLb/Rau8IxHpyX/G+
+	qtKShJle/Ce7dYnInYxjamGJ2WQaYdES3DQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2fjtt0es-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:16:20 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-1a5005fd0f8so1697519c88.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 05:16:20 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 13:17:48 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-94975041698so495501885a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 05:17:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795180580; x=1795785380; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=thTaPBQucKRchZ9oiq8PpDYPNggYExvle3GYvZIp3lM=;
-        b=H1AQLLl489VBCtquRGYB4brHv8i/9x5Ey0v4JdxyFJS6tQHjX6I0lq2NNzo6CT0oFz
-         GrldyW/UB0gtW4MgvJw3lTrScx6CPG6OtKSrTfqY+7tydKJTVz5EcB9rhjJpTqSELsIu
-         VmeJQ5NgP3++3c4/bZnvkJB9BpUEgI460vehdnTMRJvFRG+B9wQ++1MkdIdbqsiBJj+x
-         5RUZ8feRWxQ8qriqryGZFpX832cw2VZCjSTonDkN4CFk6VJaXt+ZU1qzra5hti/Low4G
-         oEoSvC2ZIUOTFPsyCum2b2TtNwgtfyIeL5Hu3bpaCRoHyioMjBRNEEOdIiIuDK15uABx
-         Pa8Q==
+        d=oss.qualcomm.com; s=google; t=1795180668; x=1795785468; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qmAvKTczlmw/BaBQYnANIBlVwzoKLc6aZO5VymI3MVE=;
+        b=EyP2CURkZsJg0CxkAXvJJnDEuWv8IfaL1K8doDGNHEINRVgLw9SAThGIoEuOaM1Oag
+         7B5uRgjOq+bvRwvm2EYfdnhbjVSYFIVukoOYlwsPvEKEaznO9722uqTGOK29ZCz2lE00
+         0UuPdhXrUqbaQf2cAcEwtUnwcMK6fGevx+91unJLbcL99mZU/x/++tmVsiePCaFsFwBr
+         u0VPmf+4wfF9y1HkjR1347jmW5nX7MTbLyiv24D9+VR25TUVtFWVhhSQ+0rtXVoPlC/h
+         qzTj0fmVVVK0zqjrt/4mFBILv/jNhbFTLDUokxsYk0vZHYlXSUBPy3PyuW9/zssZTyPY
+         frGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795180580; x=1795785380;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=thTaPBQucKRchZ9oiq8PpDYPNggYExvle3GYvZIp3lM=;
-        b=NdgSwJzFxlDsJq6AyLKmpxmvMRO4Ic+2Kz6v0+gBuqgdXAIVd+8nrlrCiKBQdhobKv
-         ARVs0EMAOctn+bHr+SZGxRiA3y/MPkl4rPq9Be5K0PpTYX17e6KsKZu5h3zJwRynFril
-         ok+OzqeVgwLJpX/JYsNliJepsv7nr3mvttZI7o3tGUepkyXaGyEiZK3tSuMvDpUQmgue
-         0B3jHEFTUoi+sfthXYMSoqa2QyEEqGfJtVKL9xmPOnntWkxfULdRfVn5HA9yOTwFGyNy
-         SS+yqaS7fsMIvIrODBYxCWDwyWpjpehzDfb+4RgtYa3KtDARsBNnkVxxp38s56Y/FkOF
-         USaA==
-X-Gm-Message-State: APuU4Z8a1B1v1QLYJQJ/CnvReniESvEshHf03doS0Xuh674ooxF+Egz9
-	7l7jrWv8b5EO4i4kdmb9Z0Af8Dq13F3Hyd613M6JdolVSuNxP6KaiSxOmyXZd7o7HGu3WDMoool
-	q1QkGyE4x4q1J55w7cceNmhHEePCZjE2+kjomeRWiGplsALbZTh4vy05HJPcrrsnZueyxVWUuAO
-	2p
-X-Gm-Gg: AYBFou07+OYa2YVUCPmfjG/xit7dtxVYf8dLy7Io9m5UiOyv4U77mQ8HKiNjMiShymP
-	KannemtEX+pCkDw++w4ZncvzOUbHvZMdEXhqISds1b/QrnmYc16QGAcY7DB+PUJF0YajnQ+dHeb
-	MEtBPHu+LhsjIfdaGs9OGxTE9JhqhsNiET90go6Oza6v94KmULTV/eDJ3IRikfzGdME32qxp+5L
-	a9mYhFoeXyTcSxxfGKh9ot8lK3Ourhb6NsltR0Uqw2hX+bnbJ9Z0/sIS2AJnk32BKSPQAbZwflt
-	Yc0m8qb4BCv122te7hCM9lnMD0Y9m1JRoJ9pKNFv7xp7XbyuFJhXG4dZEGMcHQhUPMoDKduflCo
-	ZQUNSd6LXrjVrfV5OyLdaf7X2vGsevZxzre44tkVzUHyr5q4+jeokKdH6U1JAkQLS
-X-Received: by 2002:a05:7022:b908:b0:1b5:25e:9582 with SMTP id a92af1059eb24-1b55691dbe2mr2596744c88.37.1795180579690;
-        Fri, 20 Nov 2026 05:16:19 -0800 (PST)
-X-Received: by 2002:a05:7022:b908:b0:1b5:25e:9582 with SMTP id a92af1059eb24-1b55691dbe2mr2596706c88.37.1795180579034;
-        Fri, 20 Nov 2026 05:16:19 -0800 (PST)
-Received: from [10.213.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b55684c85fsm10494874c88.14.2026.11.20.05.16.13
+        d=1e100.net; s=20260707; t=1795180668; x=1795785468;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qmAvKTczlmw/BaBQYnANIBlVwzoKLc6aZO5VymI3MVE=;
+        b=N9pkjEkRBO8dVzdYL4WjcZygXNAmYzeKoZTRaK/HO+zr+Yp/zY8xG+CVSbVdJxubgZ
+         Xif6IgNURx4E5elKBWucdzdN+VDyd8jG5palFBpUBHyCVESiqdIurPaeqkYIN4JKgGJu
+         tkb4eyfLmsMxaObYEgoUwW2ZzQ0BislXSOE86p7KFVxmml1/H4Qm6TNyw4dfshEZdZ8E
+         bR0EHFE3cCERHilqtDLK75V6/8DdtPw8dR3KonfbICQinkVqmnMyhk6+sMG1kbljeQBG
+         mmI95jtU6RS5YO/OakLqSSintCvwuJb4BMUAGWWW3CW+NmYxgr5G8mFMdYI20Ckzzxkd
+         XHCw==
+X-Gm-Message-State: APuU4Z8M8XJHAzUCPAKXni3MBKG+4reJSENQwDX7BwRLa9//VQweVjAd
+	jSwJjbuOVwVrUlrVn35ZIyYvRlRQTHKin89MfhXv2OelVxPUe65s2KweRgwheSkDw+8Q92/W7eP
+	MOUH6BJy1EVn4vwC1yeT3eGgBERRa6z+Tqdoom+jcUrrs8JXZ49/FnQ+10T6BzJk/pxHFGLra4b
+	PS
+X-Gm-Gg: AYBFou2YvbMmbrGW5dwMZxA3yC1l65ROYU8O0ZGNtEevwOwwpKKhx+tQMuTRG0wh7L6
+	W975ZUvSe7FpGpv6jzzLmC/dHXYPWw7NbB7/Krjl12h5jNafTt3p5RtRUBsc6p8ITwIsaJWYD1R
+	u05WmCBnGvZUWW13xBkRWPjVTm2OhUDwuZSOjW4i0OMMMIzAU44LbW0KmzIXIme7MhyOibBEUks
+	EEGjhAJn2v+BgMGt0JcUbiEbDRB4o0amYw2t4SO/grweKxtTKOt0RO5ikDcTiuEa7vtqdNrhYsp
+	P6fOYiZi4VcMRYJdXKfOYFdfv4WN2wb3qhDSQ66ukJ1sF5ifBhUzOAgMmbBEfImip2UI+yKr6hY
+	wYY6I8aLk01VoEfuItx/nCPimi5vwQcgxgZBE0qhnQK22dgz7SKDNde9KPjleGyWV+ENaEdjbd+
+	w=
+X-Received: by 2002:a05:620a:4720:b0:93a:1196:ce5 with SMTP id af79cd13be357-949b362497emr696170285a.33.1795180668267;
+        Fri, 20 Nov 2026 05:17:48 -0800 (PST)
+X-Received: by 2002:a05:620a:4720:b0:93a:1196:ce5 with SMTP id af79cd13be357-949b362497emr696165985a.33.1795180667760;
+        Fri, 20 Nov 2026 05:17:47 -0800 (PST)
+Received: from brgl-qcom.local ([195.50.164.66])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb41f4sm5489060f8f.7.2026.11.20.05.17.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 05:16:18 -0800 (PST)
-From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 18:46:03 +0530
-Subject: [PATCH v7 1/5] dt-bindings: remoteproc: Move iommus constraint to
- SoC-specific bindings
+        Fri, 20 Nov 2026 05:17:46 -0800 (PST)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-kernel@vger.kernel.org, brgl@kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [GIT PULL] Qualcomm pin control fixes for v7.4-rc4
+Date: Fri, 20 Nov 2026 14:17:43 +0100
+Message-ID: <20261120131743.31836-1-bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,384 +118,79 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261120-shikra-el2-v7-1-b19595f24eb1@oss.qualcomm.com>
-References: <20261120-shikra-el2-v7-0-b19595f24eb1@oss.qualcomm.com>
-In-Reply-To: <20261120-shikra-el2-v7-0-b19595f24eb1@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Luca Weiss <luca.weiss@fairphone.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795180567; l=13099;
- i=komal.bajaj@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
- bh=+o0b31Dm1RBTdPfDwLMNjJUq7df600C1I0aEPpq1j9s=;
- b=pJX/OF2V+Z+7KkI5hMnrh2tKRSII1jY0r1PflRpX7g6FaE7XVquaIj14pI8JBOlJghE4mollX
- QJ4wGKD54leCWPvSLUPA2OBS128eVfwipIJeZxiirQjYpFFDu/rhyZs
-X-Developer-Key: i=komal.bajaj@oss.qualcomm.com; a=ed25519;
- pk=wKh8mgDh+ePUZ4IIvpBhQOqf16/KvuQHvSvHK20LXNU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA1MiBTYWx0ZWRfXw0WUSQDrytzu
- ExILDS/yPOgMlUrLyGq3vgFT+ROs0LO+scNtLnRgD3zJUIgu9g4EXKCCjghOSS0fwke+apr0ixv
- OTTSTwO0qKRTnN/82Cn6jnToZGZ+PUrK6ukSo74f1g2Nmgl1Ax+ilomEXrw5/urdSQDbgKudHQI
- AGeFR9IwyOpNf0CfqVd8O3h0Z+Fbd8z0Nxfu6am4yc86Zz3C3ZfmeNLknDGJu/zdACJT/4LTbrS
- 58lEGpfoV1jF0jGjkdTmSykhv83TL1lKDd/qgAs7ze5EWz+8cKXQvgfuX1DWPXEBKQ6acp6BKdP
- i9BBsay+HVPONEqjBbAJBvKu+7tjvsom5f9jYNXzcF6IVeZT6WD0roM/UYp0a/pI+Uk4qizeGsu
- 4xifHsl4sUTXW9DZZPwU93kMUj/fgtNGJ/BuOHOWerBOMj4J7QFkt7jSXAIIDFWEL2Lb6kf3fbu
- 5iQLWo7TzWR1TEmDs6g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA1MiBTYWx0ZWRfX9QIrHszo+Key
- GcmNjTKPFh4B8/PQ33NZikk9PIC5V5QL177CYTxV6VfjAZHNeGLoxYq+qirI9pS5/eaCj2XOGhG
- zsWi5u/pwwYyJyuG9JSSyRjHLzGbeSI=
-X-Proofpoint-ORIG-GUID: 54y09OIWZK0J_5qn2R7INAHoee_Gk9t1
-X-Proofpoint-GUID: 54y09OIWZK0J_5qn2R7INAHoee_Gk9t1
-X-Authority-Analysis: v=2.4 cv=KuHYSmWN c=1 sm=1 tr=0 ts=6b004825 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=Xh12SZzz1sePY-9oQmYA:9 a=QEXdDO2ut3YA:10
- a=Fk4IpSoW4aLDllm1B1p-:22
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: UDyaMQKzaVwJQ2QiDsOr_lhGzDQOLhiL
+X-Proofpoint-GUID: UDyaMQKzaVwJQ2QiDsOr_lhGzDQOLhiL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA1MiBTYWx0ZWRfX3cD18btSkFLZ
+ n/YyzOD+FPPjW+pJV0BY0ymzAoaJgKLgq2gPlZeI1cmvgXIcdsCJDcodphQqIoGZddnFaM2qXSQ
+ 7CyOmfzX0Uw/MNvBUN5wRbZbVceMsL4ce3WwSFBPpNKE8b2TZ4STuicTKxlSiua3PzlcGkPoyG3
+ 6YTeH1v1qR4Zi/cVLjejH3yOcm10zPKxA9vagL6hlaFn65F5MwvctVnuDKZNyIqaB7vjVgO8hHm
+ xaOgqYfHJgVlW08/AoKUDrKQySXnE3dCywHT+Vgko0M6ZWKz4S1WjTfK15ln7NQf2Vtr7LBaJGI
+ /dUPz1Ls9Yt7qmwE36GjqE8ieHlU+2a36JDl126fQEs5iIARFvbhIKuWc8w7rzoaTtvtSXPPCcI
+ r8Rb0zfBz44LGnvtXCWkJxA2lCEmFcFEM5EUfeN25B2ND1c9/Dwu4lSenRx4gV6VKUOV9RUInwa
+ epkLIXeyVCVB/RqruKA==
+X-Authority-Analysis: v=2.4 cv=XcccX455 c=1 sm=1 tr=0 ts=6b00487d cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Jk2/TV77q6/E6wQq2oQJxQ==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=Cb2_Q8YfTQsDjjc_npEA:9 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA1MiBTYWx0ZWRfX6OL8hqbjmzAT
+ NwlHIDLIAgthR/p119nJXO3YG/+WA+EKcJfnzAgkQEAbSdRMfC7qHJKDZO1jv5LzYmWSE8nOFQv
+ c/fA5w4WXe+B2zB3/ZMYA/O31JK3X8Q=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-20_04,2026-11-19_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 impostorscore=0
- priorityscore=1501 bulkscore=0 adultscore=0 spamscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611200052
+ impostorscore=0 clxscore=1015 malwarescore=0 adultscore=0 spamscore=0
+ suspectscore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611200052
 
-qcom,pas-common.yaml limits iommus to a single entry for every PAS
-remoteproc binding referencing it. This is too restrictive for SoCs
-whose firmware uses multiple IOMMU streams, and a schema referencing
-the common one cannot relax the inherited limit.
+Linus,
 
-Drop iommus from qcom,pas-common.yaml. As this removes the property
-from every binding referencing it, define it in the top-level
-properties of each of them, with a description and the same
-maxItems: 1 limit, so that SoCs needing a different limit can override
-it in their own binding.
+Please pull the following set of fixes for Qualcomm pin control drivers for the next RC.
 
-No functional change intended.
+Thanks,
+Bartosz
 
-Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
----
- Documentation/devicetree/bindings/remoteproc/qcom,adsp.yaml         | 6 ++++++
- .../devicetree/bindings/remoteproc/qcom,kaanapali-soccp-pas.yaml    | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml    | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml     | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml   | 3 ---
- Documentation/devicetree/bindings/remoteproc/qcom,qcs404-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml  | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sc8280xp-pas.yaml | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sdx55-pas.yaml    | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm6115-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm6375-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm8350-pas.yaml   | 6 ++++++
- Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml   | 6 ++++++
- 17 files changed, 96 insertions(+), 3 deletions(-)
+The following changes since commit 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4:
 
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,adsp.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,adsp.yaml
-index 6cac1f77993b..99c567da3e98 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,adsp.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,adsp.yaml
-@@ -82,6 +82,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - memory-region
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,kaanapali-soccp-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,kaanapali-soccp-pas.yaml
-index e6c78d621d17..06aeb45fb2d7 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,kaanapali-soccp-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,kaanapali-soccp-pas.yaml
-@@ -84,6 +84,12 @@ properties:
-     minItems: 2
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml
-index b24e6f6eaf37..4a033ccdecbb 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml
-@@ -76,6 +76,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-index e90d2953ba69..b1d84d8be4c6 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-@@ -89,6 +89,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-index f75cab6b4ed9..4662fe4cff62 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,pas-common.yaml
-@@ -32,9 +32,6 @@ properties:
-     minItems: 5
-     maxItems: 6
- 
--  iommus:
--    maxItems: 1
--
-   power-domains:
-     minItems: 1
-     maxItems: 3
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,qcs404-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,qcs404-pas.yaml
-index bf9bf1af9ff1..c8898a041fb3 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,qcs404-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,qcs404-pas.yaml
-@@ -67,6 +67,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-index dda2d144b720..73d25efed820 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sa8775p-pas.yaml
-@@ -82,6 +82,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-index b20780e5e26b..33c9ff6522ce 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sc7180-pas.yaml
-@@ -76,6 +76,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sc8280xp-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sc8280xp-pas.yaml
-index 4bbe4a986c7c..6bff0ed118a3 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sc8280xp-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sc8280xp-pas.yaml
-@@ -73,6 +73,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sdx55-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sdx55-pas.yaml
-index 8c16b01c53e4..83b9d7289e06 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sdx55-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sdx55-pas.yaml
-@@ -79,6 +79,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
-index 34a2f15e9361..74f83b7ce08d 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
-@@ -88,6 +88,12 @@ properties:
-     items:
-       - const: stop
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm6115-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm6115-pas.yaml
-index 454ba82bd6f1..6ea56b497f89 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm6115-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm6115-pas.yaml
-@@ -79,6 +79,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-index 42e02c64347a..28e44a1dcc7e 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm6350-pas.yaml
-@@ -73,6 +73,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm6375-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm6375-pas.yaml
-index 274f87880e2e..710dae4589b4 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm6375-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm6375-pas.yaml
-@@ -69,6 +69,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-index 5a7c5f8c92d1..9fbf1b6aed76 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml
-@@ -89,6 +89,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8350-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8350-pas.yaml
-index 72d0db5698c5..15da49130146 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8350-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8350-pas.yaml
-@@ -83,6 +83,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
-diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-index 99e9aeeb4f62..a3131e6417f5 100644
---- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-+++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-@@ -115,6 +115,12 @@ properties:
-     maxItems: 1
-     description: The names of the state bits used for SMP2P output
- 
-+  iommus:
-+    description:
-+      IOMMU specifiers of the streams used by the remote processor
-+      firmware for its memory accesses.
-+    maxItems: 1
-+
- required:
-   - compatible
-   - reg
+  Linux 7.4-rc1 (2026-11-01 13:26:31 -0800)
 
--- 
-2.34.1
+are available in the Git repository at:
 
+  git://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux.git pinctrl-qcom-fixes-for-v7.4-rc4
+
+for you to fetch changes up to 21d7ff7d6531b3420727539f04470ddae499592b:
+
+  pinctrl: qcom: spmi-gpio: don't cache new config until we know it's applied (2026-11-20 13:40:36 +0100)
+
+----------------------------------------------------------------
+Qualcomm pin control fixes for v7.4-rc4
+
+- don't cache new config until it's been correctly written to hardware
+  in pinctrl-spmi-gpio
+- fix incorrect pull-up reporting for non-i2c pins in Qualcomm pin
+  control drivers
+- add missing dual edge GPIO IRQ errata flag in pinctrl-sc8280x
+- fix a UAF bug in system shutdown path in Qualcomm pinctrl drivers
+- add the I2C strong pull-up bit in pinctrl-kaanapali
+
+----------------------------------------------------------------
+Bartosz Golaszewski (4):
+      Merge tag 'v7.4-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux into pinctrl-qcom/for-current
+      pinctrl: qcom: fix a use-after-free bug in system shutdown path
+      pinctrl: qcom: fix incorrect pull-up reporting
+      pinctrl: qcom: spmi-gpio: don't cache new config until we know it's applied
+
+Haipeng Lin (1):
+      pinctrl: qcom: sc8180x: Add missing dual edge GPIO IRQ errata flag
+
+Joonhoe Kim (1):
+      pinctrl: qcom: kaanapali: add the I2C strong pull-up bit
+
+ drivers/pinctrl/qcom/pinctrl-kaanapali.c |  1 +
+ drivers/pinctrl/qcom/pinctrl-msm.c       | 17 +++++++++++++++--
+ drivers/pinctrl/qcom/pinctrl-sc8180x.c   |  1 +
+ drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 11 ++++++++---
+ 4 files changed, 25 insertions(+), 5 deletions(-)
