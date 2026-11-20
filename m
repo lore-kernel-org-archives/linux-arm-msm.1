@@ -1,105 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.178
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.69
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795202459;
-	b=tEFeIE/L0tkYUPDCw3g2x8cOq2JnT/nrYEG9AcsxN51eXV9dlBro8HhCxFk426BXpNNq
-	 Lk52MGv4WmqtexKeqDjnYxbt3LvvufLyb+hkXfhIWM6vlh16tRTTpPuSXgrjXE9E76Sy0
-	 QY6Ch3fKwH8QYFaGv90/fMTlU2ZwoZNZEJC+KVRNQh9mHsBtY5oxfhDJ0pOjAAp1d8TLG
-	 R/F5YNR2QR4oI1dfW0JnVM6o5lWBjp/Q9gtpMhHUPhnr5CXvZGVjjG0S/IVn4SLSadaJ4
-	 rTjgF8mHEHFZi5O2gXbDlxh/uKJZ4F8+29g0Whfec1y3U46kj7Hla/rZv2o0TFq+c9w==
+	t=1795202706;
+	b=xzuyWHZX3oCeLvYEeYCTx1IKp7OaFDX91IrvekqHPzOohpCbxkISN3yo2um6fM2/moMw
+	 kycxChtMo68mD6HCs58/Lym9PkoetwdVMZtj2mfKvSo0czlO/3AjajIXN634YAOPp3g/L
+	 s5oqgmy5z4bzANltwByvN+Ds5HuQvS1B8lvL/mIzswCZMmfX5Z6gDGtqNsvxENebofQYX
+	 fu7Ux4QdWC+GceiIE/xDFufP+qWAK71kkPfo7xCWZra910gnqXFAYSyUlS0+BnKwxnlCK
+	 +OjitkfQ0MI27PflX+pNwCu1dwVqdq8K2DbBlbl6aWLQN38gvhc3PNrR8RJdzfI8wPQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795202459;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795202706;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=JzigroRRK1EKbCrob1Vqde61idCw6MMlemAEeFuskd4=;
-	b=zFUiesFntiye7AmA28YYgVEeKsX47Vm8F6zUUFBuOFS8J/kLXCnQRz1tmb92vWy8MGjP
-	 T1Xzj/xTTHJf9wvplWuBuvprDpIZv0I/KPsKnh9oiqeHZuBP8kHis4t4y3M8+BBPQW0j2
-	 mlaRXGho1mpHRT/vU9nIzOrQkWGG0ILUWk2PBlhkWSNOQjjLtXO6P5D6TLG1rIG9bu2uc
-	 UaRiR1a8NsoxO64wjacDNyfEMzG0JoXSWKWHPRBujiDnkUKdBlL+WMjYM226bh38wzxRe
-	 ee+hUN+5QBhkaDYjXpwEZ6KElsEu6AtPGwpv7kGGGTM9gai/qsJUGAJLjMKL1wr2cpw==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:Mime-Version:
+	 X-Mailer:Message-ID:Subject:From:To:Cc:Content-Type;
+	bh=GM6kjUvXbDa10d4WZljkBFVBHg4IBJ7Pu0WqJwPjtL0=;
+	b=jNYtDQmXtYRvLJc1Ng+pghLL12JaS5DkQRz41CVOA8cic5iNuRJJk/JeVtAGFVyP+yRH
+	 PobzZGve4Yjyc7ewjxifZDSqnOWO15r7SNmNqJvDK5plHZdANU1YpZZduAWB5srTdZ1eS
+	 Lo5mUEBe2/XJiM9v8ka//gD7/Vh7mZApZ9tkLVKRN2RkS5CgSbvwKh/HxZn8UZLNJ24yJ
+	 g3+6IdNdObzZSGAdKWt5MkMmbinsae/e0XOyJnKTcoxNbigOdUkyxJv0YEe7qfwYnwuat
+	 EkR5ijQro24kEmSiX9dyz7CSq+ZBS3AiMVpdHAYwi/pgbwzHsLsi1ik0qIPNLlDOOgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Zf6DpcyH;
-	arc=none smtp.remote-ip=209.85.160.178
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+	dmarc=pass header.from=google.com;
+	spf=pass smtp.mailfrom=flex--elkin.bounces.google.com;
+	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=c45vwFgo;
+	arc=none smtp.remote-ip=74.125.82.69
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF28B606A6F8
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 19:20:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF28B606A6F8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69100606A6F3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 19:25:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69100606A6F3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--elkin.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Zf6DpcyH
-Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-55d2b4a99d4so14622201cf.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:20:53 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=c45vwFgo
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1b3ae17c536so1202273c88.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:25:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795202453; x=1795807253; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JzigroRRK1EKbCrob1Vqde61idCw6MMlemAEeFuskd4=;
-        b=Zf6DpcyH4lpu1wQePVe6xNyOmZR5hsjXSYys71pERhjTfm+sbkmAmsfFYrW8ulzYA5
-         pUHFJQ9Tu+CS8dE98hHU4y9ooP4uI5OdtnYxz5oEOzM2T0Vii/eH4wqFMoBN7plS4AEq
-         wy/CJTMk+a8BSuxshEwkFiY4rMf+3NTrs8ECVVllpkQB/Fjr0h9RmNe5rHgk9xDXy6+T
-         0Kujq3GC3iYVjzxqUJYfkGWWQxbBCvA0pAxFusqP4GnYbdJtAKXLODkfQMzL8vnv5Jeq
-         Le9L/JDJeAGAJN+Ol8yvQ8XvBJQRAsN+LuFqulUM5iL721lhhxSPlzcmbywDQhs69BZM
-         QUGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795202453; x=1795807253;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=google.com; s=20260707; t=1795202702; x=1795807502; darn=vger.kernel.org;
+        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JzigroRRK1EKbCrob1Vqde61idCw6MMlemAEeFuskd4=;
-        b=FU7Ho8lK5oOLsTdsu1mY+nCwCpk6Sgcr2uRnSu11yohrRroj15WR43NXx58dEaCHEV
-         9SzE02B5/6gNsf3PZ5WaoIgwAZm5gsDXWhbWYZ+3b2W+heXlCe2de0hvT7Hehfn+5bq8
-         +BD07tsHZmQLvELt8pIuWfd184ymDkHOcm5PikCzm30Me9wXfpnSW7UfikoZoQ8DK0iq
-         LgfiFcXwqIcUJ0Q2UXIjv6SBtaox5mfs4nRWbEME/CdLsrlQ76HlCUQ6dgx0Z6G1lEjh
-         3H9MfN7RuRcQWxMvQ2GWrRLXcGLbAaf5mUq7GgQE9+2XcP+kUu763UgFZsoFH7mBxmfU
-         Ycog==
-X-Forwarded-Encrypted: i=1; AL+hErGdFjdmwc3dSEsbGwEyxFBD0Ita4JboaDPuEymupbbfgZSo9SDUp5xbjpuC4vueRKtDDR5o78+M3sknmKjE@vger.kernel.org
-X-Gm-Message-State: APuU4Z/xT+XN/s9N53ctA7ThZ3dZmOR/rU/zNq7XB1Tn7cwd29JHyuWn
-	GygLfbWJ9OHqlGqQIujhFlXP/QzDl2u8/mfR4HuDrhxN+JxbBlb8vQvq
-X-Gm-Gg: AYBFou16wNlr0b1guRrFwoNCKQbXrPFj4WHGqWvGoG5McKjyvKfe/uVfKlmRBfcKYqa
-	UuC37JUmd5DqqKHFT1mfYLY+0fn3r+GDURvn5mIoI7/dEchoqPEREFj/CNe1MXG2+e28rlt+kY0
-	DCxgaAuqHysWwBQKvzgYIqxlNtsh0AbWEW9faIGhRIB/QT+Cxa3gJsOmkfZa9NFZcHKVNeX06Gu
-	BknCEHhWzt6I1V3PzowogWq1mQV3QN57yZnqq/2pCUHloJ5hnzVJQPdUfsHc+WzN1D3eZTigYnu
-	+JdlEBYFo3lEE3xd4ET153YQmxiQK3z+LDV04v89ZVh9nFs6U8l9u0VSlUFm1vix/ifM5V3MokS
-	7vLiGy66SWBBxZBka7EaXluiLCsf2DGqj+wfSnWXY325B9n3QZyLvXnPfBFWPPCaxVHlPeDNHSK
-	oPzfRdi/sRwJpexYjfrRrFGcarMDbz5wWiioZ4hKSbhBEsmCrkO9KFUYBkbMiASWn8OiAv5Xr/f
-	kUbGjaNNrqFgzRG5KddHmx92iW3dSgIpnsnCYD2s0ghJrrhtbppF0Epdcb0uOmOX+6vfalCr5b9
-	kWxttN/QiYr7UZU8VrQ9+Ro1AShwsELp0dHGRZNJvg5ywGXZ+orErnlVscv8k36eHb9t/akxNdN
-	PVykRsxDx+xicIHYsLIPjsOC44sxPQFMqyuOCAZyc9USfywFvOhg/kI7/N/szTH88/84qgssbt1
-	7TJ0h258ko5IxCOULG7PMgkKTLY+g9AwXfQBoWpMdiYXDJpBzKTJfgpaOrssuJgcw6nOd0Ls4Pj
-	OC57UNjMHdizn/2w2gJVKXfLXn286gdgBNtkTLwCDO7mA==
-X-Received: by 2002:ac8:5a46:0:b0:536:6bbc:6187 with SMTP id d75a77b69052e-55d76a4ffabmr77548281cf.31.1795202452871;
-        Fri, 20 Nov 2026 11:20:52 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:d420:4621:169f:8773])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-55d7882e2c6sm31475921cf.12.2026.11.20.11.20.52
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Fri, 20 Nov 2026 11:20:52 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jim Martin <jimmartin@gmail.com>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org
-Subject: [PATCH 1/2] drm/msm/dp: carry the eDP rate-set selection into the link parameters
-Date: Fri, 20 Nov 2026 14:20:49 -0500
-Message-ID: <20261120192050.73315-2-jesse.casco@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261120192050.73315-1-jesse.casco@gmail.com>
-References: <20261120192050.73315-1-jesse.casco@gmail.com>
+        bh=GM6kjUvXbDa10d4WZljkBFVBHg4IBJ7Pu0WqJwPjtL0=;
+        b=c45vwFgoDksr5mTd+mDOLniVOU2upBOW/mtK1tOzkrAEmY0LvGJ0kz++/iZj3Y9hE1
+         EAqRwR1cbzZjsk+1JBgWXkzhk2Mr3HbYsIly9wWceZtJRs7c8wPdbsXdf53O5Sx/3lhY
+         x0RfazScfvrJBGgql+/+9ka1Y2SU4O7gqvoHkA3oT6ee99u173FkTiZOZx3rlZJsOEC4
+         imAteu55I2b2+kM1w75Wml6BDepkNFiYAcPWuk+t+hvtSfHmi17vmJyzM5n+mi0wa6qR
+         N6+JrzNvq3uTtFVaOmG4aUEFN8+RKzR3pjXGdS+2xBMesnhSk5KU7uvdyaaBszdA/qvZ
+         D/Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795202702; x=1795807502;
+        h=content-type:cc:to:from:subject:message-id:mime-version:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GM6kjUvXbDa10d4WZljkBFVBHg4IBJ7Pu0WqJwPjtL0=;
+        b=GOSa4Ex3bhj6moE39SdHBav+HKFvJyu/Aoya9TYMEoxGP07RDA7aBF/SkIRF1NF1Sy
+         QLHLDHqQqEzcInQ18yGbG4KxL+RX2tw+wW+4EduwKObmSXNdSFpBCdUhYN7jGKRia1g7
+         Dw7u2if87DIH4SGEwVF9/SBJFVPPIid+BAhBiI6sZ+A++Rrg2vGmPquPod69q82DCWS5
+         LbP0mDA75XCQwC/Vg+6kWvN9LCVQ8MuU276hMRVfNfHuA5H9qKukiSoEI6e/7DQIvScx
+         WtGQ39RPnHs7Gv6hLrQS291hVruBIpe2D8tZ/S3vDG7fl+hAlH4/pB7IZP8uefQ94wyr
+         cDLA==
+X-Forwarded-Encrypted: i=1; AL+hErG4i08iQLtSU6cl+ewZV68AcfWoO5EenkZhElJIGM9v/FRxV9O7j4ejQ1ygPQxp0BU3IWLD2qks455qHOPh@vger.kernel.org
+X-Gm-Message-State: APuU4Z+xAZpTR1imwUqNgNcqoLWKj90vthvpDuN56ZRTCyEEZWCoVCL6
+	S4nx6tm44zrjvvC07mPRwVEAiYwZKB5JTxtYEjDxHZ03hgg8/MkDJ8ZOR2aIZ+HIMyRnr/mYgV3
+	i8w==
+X-Received: from dlx4.prod.google.com ([2002:a05:7022:84:b0:1b2:63d2:5906])
+ (user=elkin job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:2608:b0:15b:afce:62c2
+ with SMTP id a92af1059eb24-1b55691337bmr3351862c88.41.1795202701742; Fri, 20
+ Nov 2026 11:25:01 -0800 (PST)
+Date: Fri, 20 Nov 2026 19:24:46 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,62 +75,81 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
+Message-ID: <20261120192446.2874087-1-elkin@google.com>
+Subject: [PATCH] drm/msm/a6xx: fix error unwind in a6xx_gmu_wrapper_init()
+From: Elkin Cruz <elkin@google.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+	llvm@lists.linux.dev, irogers@google.com, Elkin Cruz <elkin@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-msm_dp_panel_read_link_caps() picks an eDP 1.4 LINK_RATE_SET index and
-fills panel->link_info.rate_set, use_rate_set and supported_rates, but
-msm_dp_ctrl_on_link() only copies rate and num_lanes into
-ctrl->link->link_params. Link training builds its msm_dp_link_info from
-link_params, so use_rate_set is always false there and
-msm_dp_aux_link_configure() never writes LINK_RATE_SET. The rate-set
-branch of msm_dp_ctrl_link_rate_down_shift() is unreachable for the
-same reason.
+a6xx_gmu_wrapper_init() has three error-unwind bugs when initialization
+fails before gmu->initialized = true:
+1) When a6xx_gmu_get_mmio() returns an ERR_PTR, goto err_mmio passes
+the error pointer directly to iounmap(gmu->mmio). Jump to err_clk
+instead.
+2) When dev_pm_domain_attach_by_name(gmu->dev, "gx") returns an ERR_PTR
+(such as -EPROBE_DEFER), goto err_mmio skips detach_cxpd, leaking the
+attached gmu->cxpd domain and its runtime PM device link. Jump to
+detach_cxpd instead.
+3) err_clk: drops the gmu->dev reference without calling
+pm_runtime_disable(gmu->dev) to balance pm_runtime_enable(gmu->dev),
+causing an unbalanced pm_runtime_enable() warning on the surviving
+GMU platform device across -EPROBE_DEFER retries. Call
+pm_runtime_disable(gmu->dev) at err_clk: before put_device(gmu->dev).
 
-Copy the rate-set fields along with the rate, pass them to
-msm_dp_aux_link_configure(), and restore rate_set together with the
-rate when falling back to fewer lanes.
-
-Fixes: ed100aa239be ("drm/msm/dp: Enable support for eDP v1.4+ link rates table")
-Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
+Fixes: 5a903a44a984 ("drm/msm/a6xx: Introduce GMU wrapper support")
+Fixes: 15cc59ac954e ("drm/msm/a6xx: Add support for Adreno 612")
+Signed-off-by: Elkin Cruz <elkin@google.com>
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+I am trying out a new Clang static analysis linter for ERR_PTR/NULL
+handling, and it flagged this code as possibly buggy. The findings were triaged
+and fixed with an AI coding assistant, then checked against linux-next (not
+runtime-tested on hardware).
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index 47647fdec..c8d097d65 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -1596,6 +1596,7 @@ static int msm_dp_ctrl_link_lane_down_shift(struct msm_dp_ctrl_private *ctrl,
- 
- 	ctrl->link->link_params.num_lanes /= 2;
- 	ctrl->link->link_params.rate = panel->link_info.rate;
-+	ctrl->link->link_params.rate_set = panel->link_info.rate_set;
- 
- 	ctrl->link->phy_params.p_level = 0;
- 	ctrl->link->phy_params.v_level = 0;
-@@ -1712,6 +1713,8 @@ static int msm_dp_ctrl_link_train(struct msm_dp_ctrl_private *ctrl,
- 
- 	link_info.num_lanes = ctrl->link->link_params.num_lanes;
- 	link_info.rate = ctrl->link->link_params.rate;
-+	link_info.rate_set = ctrl->link->link_params.rate_set;
-+	link_info.use_rate_set = ctrl->link->link_params.use_rate_set;
- 	link_info.capabilities = DP_LINK_CAP_ENHANCED_FRAMING;
- 
- 	msm_dp_aux_link_configure(ctrl->aux, &link_info);
-@@ -2407,6 +2410,12 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_dp_ctrl,
- 		ctrl->link->link_params.rate = rate;
- 		ctrl->link->link_params.num_lanes =
- 			panel->link_info.num_lanes;
-+		ctrl->link->link_params.rate_set = panel->link_info.rate_set;
-+		ctrl->link->link_params.use_rate_set =
-+			panel->link_info.use_rate_set;
-+		memcpy(ctrl->link->link_params.supported_rates,
-+		       panel->link_info.supported_rates,
-+		       sizeof(ctrl->link->link_params.supported_rates));
- 		if (panel->msm_dp_mode.out_fmt_is_yuv_420)
- 			pixel_rate >>= 1;
+Thanks,
+Elkin
+
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+index a1561ca41a5b..7f6932d7200a 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
+@@ -2290,7 +2290,7 @@ int a6xx_gmu_wrapper_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node)
+ 	gmu->mmio = a6xx_gmu_get_mmio(pdev, &start);
+ 	if (IS_ERR(gmu->mmio)) {
+ 		ret = PTR_ERR(gmu->mmio);
+-		goto err_mmio;
++		goto err_clk;
  	}
+ 
+ 	res = platform_get_resource_byname(gpu->pdev, IORESOURCE_MEM, "kgsl_3d0_reg_memory");
+@@ -2321,7 +2321,7 @@ int a6xx_gmu_wrapper_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node)
+ 	gmu->gxpd = dev_pm_domain_attach_by_name(gmu->dev, "gx");
+ 	if (IS_ERR(gmu->gxpd)) {
+ 		ret = PTR_ERR(gmu->gxpd);
+-		goto err_mmio;
++		goto detach_cxpd;
+ 	}
+ 
+ 	gmu->initialized = true;
+@@ -2335,6 +2335,7 @@ int a6xx_gmu_wrapper_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node)
+ 	iounmap(gmu->mmio);
+ 
+ err_clk:
++	pm_runtime_disable(gmu->dev);
+ 	/* Drop reference taken in of_find_device_by_node */
+ 	put_device(gmu->dev);
+ 
 -- 
-2.56.1
+2.56.1.750.gf70dc682cf-goog
 
