@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795189965;
-	b=YkFZOn8OCooF27GH41VebJshNH5+/WnjR3f4XhfJ23TucceL3/drRpN110n+fObFjQEb
-	 QMCTVQt6Nd/8NqSH/XRcthrSUk1tRr5dHPAsRXo3dVz4iiSJEwkbXLM3KhPphgEvNLJ9Z
-	 S0AQuOyQwnk66LXykotXExiBK6O1+jLAz36kuF4n01uEbQtHGgHlnxOXeHGQXk4peg4Q9
-	 WrJ/GW/jq0tHdwVjLO8SJJzKDYts18YK0NJ4QPKASTsJnLfv0vOjQNpZyajkQh5s2TlUX
-	 ifCl+OGWKp9WnXgsuTPkeD8aZcQnFxFrCDB7+/KuByIuZOWF6aU2NZV9sPe9LrHzt3g==
+	t=1795189971;
+	b=ghJPSNXQV8nWxrQbBHnxMpxDwZIBPdagq6DgEFsCemrdsiRaEnDLNwCGkZryl91iToYl
+	 lgYb4ETDs4dyItt9JjpxYUoQlQRNv4QolgjtDWss5pJYjmcG6lIUpA11Em55pcO60TG+e
+	 8TYwpRuAo01Lj+H4Nneg0p9R7d/pMoMPrIc9DT/ayE9d+9S17kidDpnYB/jcSKL8W1CIs
+	 G4IdOIlin/UBPgrpp6XDzmPllZ5NQmUA8v1Ee+NIBUAhOeAxQcCuUaH9wZ8HJqqGT0Fz4
+	 c2lM/52vUMeDSnnYDHtipgn2OEs3p0UidQUT/db1vV4MIjlUgpiHy6lS9pImZeen67g==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795189965;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795189971;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=qmH6LAhqBr/82ZqBS4NPxlHrXW3U07fvSK4Pufu8P6A=;
-	b=ySkdPOZ6agAdjqVYLySBBqN7ecVP0McaQ6e8GaKGj0lYI3crm4mi4cKfKgcfdPBj5mhY
-	 LROGmOH9EXOYNbvfzoHv71AAfcz7VIG8H0c5XIP9ewwymjNmfckja6bGsZ04cKGkqMiKl
-	 RL8IbSSDH3xWW4bgoKP15KdUyqfDyc3K1ikYztahCuVbR1bcSp/WypPx6L5kvjL2NPz3V
-	 71t6DPUW3gvK9kC0kHxbWFBL0dLtY38WeOCfS37n4loGsMe8mg/0E/itE8TFYSGK42Ja8
-	 hI/H1fsSNMTJ0XFmkjOH5T+7sj0YXc46zK5tneyuTGv67f7dOVBX29VsP7j1EHq2MsA==
+	bh=+99cmFsfXOULQ9f90LxW+hyZsbOUVRXMjmKn92M1d3M=;
+	b=gLbYBOzjRvmJvmDt5hF5rh5wNQIm+T0kSADD4/BLi8m5lqg3wVySyHuDygYi7rKBaywe
+	 0O6SOeGu8v5eC+/BauJ3/Bm9d+Xm0acemLiqSLtLFyEfyGzhv+ftMj45Mz/TPuvC0HswV
+	 gWMRSBwBc1VhaxcG1oc6bbUMp5iJLwVUrra8LEOOtsr6F5PbBeQO5Lc7GwdFGN7v1vVBQ
+	 Dmn1nj07B3Z0A0jEoPE0dSSPwUznziQE1Qjhy1g85r9IdfYXvC34RET3CV1GNYvNBmzVs
+	 TboffvVWlRZ9a8MvvYxhJAFvHfc5WUK6X7VWrz0ZlCPdx2cGsOBOsHx/BdBJfdGohAA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hU+hKn+O;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jcQsY203;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D151A60A2603;
-	Fri, 20 Nov 2026 15:52:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82C9E60A2602;
+	Fri, 20 Nov 2026 15:52:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hU+hKn+O
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jcQsY203
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795189965;
-	b=fqtLwQ+vlCKFaqNscfrIN6L0y3UR+GlI+JClDU5gSfgs2GlZLfAK2rBfx2FZt431pqCO
-	 1pUF5efCB02M42ldPwFXhaNtL+mXe+kzvueAIWrY7jvHl3ydUlAHcy/eHPJSCaavtmbJC
-	 Fi4HEha2IEoZz1lAYiCg8815AgDbHKn1WOB3ZPt7ulckVuO41XDonMs/B2UY2lhvjDvNb
-	 vv7f4H/pTySIejQBCsOkLqA+r1wgQY3/X1g1dBRnJBY751/uGQGRankjjx6IujPVwILMh
-	 M66g1Z3X22NUXNLHQ2Zu8eSybton/PhprccUvqq3O95rvstZZ8PffvJu7l+KwRFeGlw==
+	t=1795189970;
+	b=nlPnMBO3A24Z10DDTDIia+DXYJok69ljkoj8BEZBsenXO9FoT+PJsmsUEqaVkFM2p34z
+	 s4EjT04dgOqrAyFUjsWcVLOjx4DyrtkznjS9hYdLN2yBmrLPLZW1OLnpltraTJ89xYKFy
+	 Z6pVBB5eXjn8DJhu4u8dSGnopzQZoC4o7Q1Noc2w0jfw9+E44JsmjvrzpXww5m+QtYyXf
+	 okJuBTvmrb7RkFHJYmIlMA7AJfUC2ZbeFnWLg/RZc5MVu3Fnt3Unk69v44ZbOUxZMiTWe
+	 SAtj/1nZzDgs12w6LDwExlrAsFEMyoM60N+bfj1yU8N5E9uZrVngJwDBNc2N1RJJ0ew==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795189965;
+	c=relaxed/relaxed; t=1795189970;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=qmH6LAhqBr/82ZqBS4NPxlHrXW3U07fvSK4Pufu8P6A=;
-	b=Z7hh1WAunx4xuChr2JtvfCOczVrt85xcsVDGJzDHbwyTgrvGbVxGWuX9EXOJ5u1d1fi4
-	 8uM77xootA3DBTXiTv7+F61YVxjwkdqrMNW1JDtJ/bSw2OKW1NgS0xGY4hxt/suYHsFxB
-	 wZ362LclFWk29gqkB09SM0iGzMOyVIlx49Du0ngCOsHbYOhLaeMtPctRlMj0OzcIpKf2B
-	 /55N+1fC3nHQDKPdUHgiPnAJ/zTGobL9Qv6oQsmHKkhBxVogXN+QMTYbHl8BS9998ndY+
-	 x+UDgeZ5cuBbH8p0q4hKcTM8O1HbqXo3/O/siJShParpl1t7Z0WnjBQMiJE6VzDROjw==
+	bh=+99cmFsfXOULQ9f90LxW+hyZsbOUVRXMjmKn92M1d3M=;
+	b=xDkgGUuAnFLpORZ/5nT14TTFoRdzgzKr5caMK69VtDvup4wcCpfxmkNnfVD4MzhJL1zM
+	 NNzCj59Lf2lQ4Jdwpf3vtQ3musl1A3YPTNDHSK+L3xWys2Got/AQ43IAtcwbW3GRTm2Jb
+	 G7AGJld3+peGjqdJ8tc4fUCuVfT1ZoAmsJBl24h4VWTBDbDpC5+0MzoIB1jALBZM731xt
+	 m/reZnj6Yvl4gjYUsJlrli0ntMP5qDtIfV3m5/5XBiaDqAG6fbuUg/5JVYDHCyULaMTH/
+	 5Smg0kaBRBb2oBUb2m7f3bSrvRVpftM4TXyD/UWYaCigropuyjjR/0ed0IHXFqiqudg==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 2B5251F00A00;
-	Fri, 20 Nov 2026 15:52:33 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 2FEFA1F000EC;
+	Fri, 20 Nov 2026 15:52:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795189965;
-	bh=qmH6LAhqBr/82ZqBS4NPxlHrXW3U07fvSK4Pufu8P6A=;
+	s=k20260515; t=1795189970;
+	bh=+99cmFsfXOULQ9f90LxW+hyZsbOUVRXMjmKn92M1d3M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=hU+hKn+OUDbw1s+TmWsYDxI1qQUx7vjpxZG2umMGJa3GIVjaY/fb96Kn1gINNo4bh
-	 zhrL7Do+Ao5vL2jM/mZj6GPbrWqos/BQuHK6+vCVxnVQE+rezpaBAUK7/TWDa5yo07
-	 R4xGkzQQleoJ2wnRfsbla4sxa4T3kz8AjMvdkojsX/0OFUi2NtJB9PZm0R7itLJ8oz
-	 18tIh98koYWWb0RE+NZIMsEfJ5oiMkYtB5aht+xIiwBCNca4RrU/q1KoxRoBKVijrS
-	 KmlBHXsZWsVhREh7PXWbAuahk1HS0WaQYugrXc/2xsacjLIhoTYcW+pF9+KNlNzH4z
-	 0/4SMTn57pLBQ==
+	b=jcQsY203WZzJ4Uc5wjeDeevGqTkI51zJKeynkS+t8/U7QV+Ds2fBi/3RRQfyWqdEH
+	 dCZHGh0WFEMVy079neVWxvzel574MdeihaAbzpukGKb1d5Dn6YTmwAGnZTB2pQGOyB
+	 6h0f6ren3x8CcWB5/+Kwmg0FP1S/8xE+FbW4Nw9vepwCidX6GkQqg0AkNlhsfV/nib
+	 DrC7Deum7Idb0aEVLqK0Db9fBtWSG8pYYsD/pkOK03r66v51f+uhqg05w/DLgGroNo
+	 /5u4XxcEvaijx6V/rVgjY9Midko0HmYGyZOKuuHUiPgazB1Q2+rwtsRnohkALNIyd+
+	 td1A2an/1kAhg==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id ACA4F4991B;
-	Fri, 20 Nov 2026 15:52:32 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id D259049927;
+	Fri, 20 Nov 2026 15:52:37 +0000 (UTC)
 From: Venkat Yadlapati via B4 Relay <devnull+venkat.yadlapati.yahoo.com@kernel.org>
-Date: Fri, 20 Nov 2026 21:22:32 +0530
-Subject: [PATCH v2 1/2] dt-bindings: clock: qcom: sm8450-gpucc: Add Molokai
- GPU clock controller
+Date: Fri, 20 Nov 2026 21:22:37 +0530
+Subject: [PATCH v2 1/2] dt-bindings: display/msm/gmu: Document Adreno 829
+ GMU
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,26 +84,30 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261120-molokai-gpucc-v2-1-e84a0869693f@yahoo.com>
-References: <20261120-molokai-gpucc-v2-0-e84a0869693f@yahoo.com>
-In-Reply-To: <20261120-molokai-gpucc-v2-0-e84a0869693f@yahoo.com>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+Message-Id: <20261120-molokai-a829-v2-1-c63c268d5ab3@yahoo.com>
+References: <20261120-molokai-a829-v2-0-c63c268d5ab3@yahoo.com>
+In-Reply-To: <20261120-molokai-a829-v2-0-c63c268d5ab3@yahoo.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
- Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- phone-devel@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
  Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795189951; l=1030;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795189956; l=903;
  i=venkat.yadlapati@yahoo.com; s=20261023; h=from:subject:message-id;
- bh=mrnaKyCtbWSwBM2yUM7bnJR1s3HBh1dB6OxsmcKviJI=;
- b=KFmW5iJ6agI7hpK/RGAm5p54LteBoOfdvLHa3hx4hr3oti2UmyKdJBx/8AD/KiMA7y4grBqR4
- P469yLnQ0iMBQBiCaNnONs7IwE9j0P23c8hZoChJVUsZeOsOpVPRpm/
+ bh=fWx8B8EVRHaa/QjmI//OdB1UeHRHRMAyCbcwF2whEXA=;
+ b=1bTZmN2D/D8obhEtn5O3YNXSXlkGtc/C3KCjY52B9UBG1bJTa+MOLZDfgjP8rg2gPPzhmKicK
+ E6DdQPy65G3BFBGBkSGOqDBeh6lcYwIRR9D1Habl8tBcXgepoa0ieEf
 X-Developer-Key: i=venkat.yadlapati@yahoo.com; a=ed25519;
  pk=e8KStCtEMvUP1Se/riB/KVnDAQFEVR2Dw2PcuA8/eME=
 X-Endpoint-Received: by B4 Relay for venkat.yadlapati@yahoo.com/20261023
@@ -114,28 +118,29 @@ Content-Transfer-Encoding: 7bit
 
 From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 
-Document the graphics clock controller of the Qualcomm Molokai (SM8845)
-SoC. It is the Kaanapali one with a different PLL configuration and three
-branch clocks at different offsets, so it is not compatible with it.
+The GMU of the Adreno 829 found on the Qualcomm Molokai (SM8845) SoC uses
+the same registers and clocks as the Adreno 840 one.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 ---
- Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/devicetree/bindings/display/msm/gmu.yaml | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-index 7eca456211e4..e62e6127b06f 100644
---- a/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-+++ b/Documentation/devicetree/bindings/clock/qcom,sm8450-gpucc.yaml
-@@ -37,6 +37,7 @@ properties:
-       - qcom,glymur-gpucc
-       - qcom,kaanapali-gpucc
-       - qcom,milos-gpucc
-+      - qcom,molokai-gpucc
-       - qcom,nord-gpu2cc
-       - qcom,nord-gpucc
-       - qcom,sar2130p-gpucc
+diff --git a/Documentation/devicetree/bindings/display/msm/gmu.yaml b/Documentation/devicetree/bindings/display/msm/gmu.yaml
+index 07f0e547b43c..2599eca08a36 100644
+--- a/Documentation/devicetree/bindings/display/msm/gmu.yaml
++++ b/Documentation/devicetree/bindings/display/msm/gmu.yaml
+@@ -337,7 +337,9 @@ allOf:
+       properties:
+         compatible:
+           contains:
+-            const: qcom,adreno-gmu-840.1
++            enum:
++              - qcom,adreno-gmu-829.0
++              - qcom,adreno-gmu-840.1
+     then:
+       properties:
+         reg:
 
 -- 
 2.56.1
