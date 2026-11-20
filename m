@@ -1,45 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795175341;
-	b=kkjkphQJlZJ1zR+ercapaRb/YQbvVAsu+1K8HMXxNZWUqU1f7Is7fWLP5miHW1j2/Izg
-	 0o/vohmX7wlvRp4Vvlxt/PylXsbdAc2vtKQ1xeYXmZFjJf+3InNO6Dpx+17ZIWa3bDZDw
-	 gyzGKZErSNRQ93zD6waUma9Orj7P/gu/N2HUfh2LRw0r5m6kQB3FZU/w9RjOVCTS5gdWZ
-	 iPHNvxMLMOTtcWPLS18BfD8pWYlLPqu1nui0YRBL/rb/6CxPGz4AsDFhjggHWY8unnkN1
-	 Vv3dHOi45ZRfa4pv+czea3we4WCSo56RLIAaeBp47+ALHCZgZNxZ0xN5otuobluGnKw==
+	t=1795175571;
+	b=Da5Ng+YiJumafM3uSrTigEvq2qho7n+CC4ZWWZzj4SydTM6sEid0LP0GvQTl8VAEmbiN
+	 /O4wKLzIpLa0zsgBcJ/nxEia2VNaIVzzo+JpQ0NIDIxP8d/pKgJsI7+awF4PVHQvQRalY
+	 XLVpF8jCoTHfAYJk8pcnyFkzGY0h3ag6gIU3ENeONZOR1cZ2/Yx0wKKx8coSKARicvyfd
+	 J+sQNjtewZ9coR1dg/eBR4Ckt1CN8IS6yuatpPbgGWbNGFV7hGmOhHokIiItlmQ4kjwKX
+	 MB+cKO8n3s4RuPH918knWnL2pl4SDWOIrRusoIJgdzVoVnANLsxeeD0BsFesEBxIpxQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795175341;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=u8l/U5OT/Y6CBEr80GX62yXAKFPyEQ4q4m7GqQI3+Nw=;
-	b=ylK4LNG9cakiR99B2NceVepfEtORs7s1kqvXxs9NTG5I0dleKZDYr6dEH9hoUfkoUsvr
-	 Ly3/2YL1vL5pA7x640bWzx5N2lrEUUUbkHsK57z8/rKR60XXxZh5Y53MfA24fzzJf/Y+R
-	 nfX0LBB6LF1rD2/mH1DSvEKmknYvqJqYSFq/5T/zpjlkkCEHl62fIs6alUOWPzIVhy3cN
-	 MCZFrR6EE1xbwttWS7dxQ7RqqZd9+N4sCB3qDhLPar0EHZH5sqUXe07pYejX9WRpO16Q6
-	 ibn0rxfkoi0PmiF2I3AmaFpfEqRgUzTujiBm0gnqAP6deInFNq9ilAqnn/BM+VI9MGA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795175571;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=LAgvIdQQwmp1OleVudQumUn8l7JMaos3FxIAqmwJxIc=;
+	b=HzOpowPwWZSLU9AYyXmiQZFTiAvl2M0r0gDMDimMEfZqsmTST8S5bGJ/uvOufszDnqQU
+	 ti0FMcWeaHG7m8ictM7ZtwJFHvBMIDBUaFXKwzBsfnqrBFfYyq3I6Uo1m5EvTFtmRQe/0
+	 ibhVxbOHql2Fh5s4XhWR8KFs+X9yyobJpWUgvvjXg/tCpoedQ/JeiRC8y85Jm5R4wkP5F
+	 LKIs9l8Hdqr4K9uu9bc1YspE+7k9c1FMSUY4mBtKemDvo3e/aC4q/4wto3G2wc28X8Vk/
+	 LNlG4Vgupzty3AGm+O/z5ZH+DZ1796Bt/kkr2Hyo8fl5mDzFI/aYEPV5/BzWExjrjpg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hcBexOHU;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="KO/NIHxw";
+	arc=none smtp.remote-ip=209.85.128.43
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9681E606A32A;
-	Fri, 20 Nov 2026 11:49:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F413A606A332
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:52:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F413A606A332
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hcBexOHU
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DCCE61F000C0;
-	Fri, 20 Nov 2026 11:48:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795175340;
-	bh=u8l/U5OT/Y6CBEr80GX62yXAKFPyEQ4q4m7GqQI3+Nw=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=hcBexOHUMQkhXRpw6J2YlBW+kBBvPm7QrGDW4CGU5mAlWg6twGFJxe1ZqttaN07tn
-	 sd4v+OROeVivVIw16xj/TXH5XCZ3S4hypUxgMbynLKxKBLD5ixIPy8UZ2ZY6c8FfvN
-	 pyEvQ5W9YO3DkgIPSor/3yhPOnVYGx7M6onSbyAdoqBvBckgNjBsqwJkBnm8ubbjQi
-	 0B57FJlZiBSaL/jud64G3ooz9IpjTTrMV2bj11E/eRbqZI0FUBT3ZQpTi1rjTRAmRl
-	 amccNZt1lXknyuG962K39swBEJNao4rwh3irNCNf0J1rhrkcIFw7AE5bnWnweHROJy
-	 wQanlKSiR+cfQ==
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=KO/NIHxw
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so7413505e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:52:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1795175569; x=1795780369; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LAgvIdQQwmp1OleVudQumUn8l7JMaos3FxIAqmwJxIc=;
+        b=KO/NIHxwBC0mednmwAI8pRPijQVr6PeehxPjlr+r+mn/+azrSmaZxAJKd9fcJdS/RB
+         hWzD0ABPIz41LXkSpWZSW0prTyYH4/BpsQvn00MByDG23v0gb0uZKc68+WIMEXxGVRoA
+         jpL1QLZ17XiMqbvXwB4E3iqiwFJtrjOWohTaojPRYnvqsSc/9G5wEiexYkMm8+SFNBye
+         V3kD4STrICzPC6kOXhZiBSWmHqPu/RYunNBqogZtQjtVhEGavdi5psYhgBPlI+SuLTHE
+         WlB1YShx4HeTIRlSUfu9oYsTD1gFcxv/co3ITbH6dMaxECIkDi+cDtxWqa55dnrTOWEh
+         n9mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795175569; x=1795780369;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LAgvIdQQwmp1OleVudQumUn8l7JMaos3FxIAqmwJxIc=;
+        b=yH1Bfjd4dCe/tKkLdoPfgwVP9iFgi08iQXQKZY295SKUhWYA1CwBAh3Oj3o7jW2AyA
+         GjqL3SE5DV/ICZ7v7Nmov4EbN3OZZ4FjQRkuAY+h9R6IAWVR35bU0XKxDufZvMYSYExu
+         8IoGiWXD6WkLX4yGiXD/wsFA5MyyiAxfzUvKtrLtZh45IIyu0kekoGK0vI3Nle5syWpn
+         K3CDNayhkPOzYCxjsD0pYXiZMg+FPS/KaYnxjOw4VEPLomYyGkF5Hpk6eAuiv7qD8fWx
+         RcIwZI7xrn9ZNXUaNQlOLmIkjewQV/NrncZHD3U0ohag+qYtiIKRYSuHGWm79d1Dn3Sg
+         iaCg==
+X-Gm-Message-State: APuU4Z9yDsxn2Y9Fbp8raTBGTmrq9CjmJXgDAGAGniKq1lLmfU3M8cy3
+	0PcR7nBMIqdTAgYdhGZWJvANR+i5BV5vLDZykKgh5s4wjequxctnBLYxulsh7i6FA2w=
+X-Gm-Gg: AYBFou3Og2mKhz3fOymvX1Mj8nIDi/tKfsEOLgsvYvLmgPiRx9KjmMYjaz7NRAOu647
+	GdtQ0uKSJd99cCXO7UDkgBl+Ux0XG1YO3PaQFLc270zYPBxTJWcsiGvANmYja26PMj9kFbCg3Rs
+	8c0D5HC8FIM45EirqGNLKv1CL1yI+FLSpMarGhKXfqIkl1lux0EUi/dbprF58HgkhP+YCMOc9U8
+	lBgPXjsK8/HU78sABZdg8NSUJDAi1B8vXMW78BPYiye51a/pSos7cWDFkW7MhjL91//aDXdeByv
+	jkGodGntsyA41i0J8LScPpItVUtIR0abFeeRAu18IiZDPOVAc6Uwh3S1V0xERfC+zcTUckyzm1F
+	0A2wVFoKWkr1r+KliC85Pxzx7hdAyqjVCXHhwx2P9Lx3bxf7G8iugPDSNF0GZ/SBAhU3X0d6dDQ
+	gfdpnQOWi818MxPJJOD1B2zUKNGUAIUzRPE9mySVu0EEao18fXsoFNYXtJNahjZQwntgOx4WBWD
+	6uxE0kYH+9cxO46xBidknwPPdrr0mAK6gP8jLFOi6GsOqERSVlWNZhfw/x3QLGmEcCimLf2On3P
+	FSL1/HVucqK2O04uttB5xfijARQ8IpB/vlBTEEjMfg==
+X-Received: by 2002:a05:600c:64c6:b0:4a3:598e:e7a8 with SMTP id 5b1f17b1804b1-4bb887c2c98mr60927405e9.4.1795175569215;
+        Fri, 20 Nov 2026 03:52:49 -0800 (PST)
+Received: from [192.168.0.167] ([109.76.69.230])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853368d3sm113806905e9.1.2026.11.20.03.52.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 20 Nov 2026 03:52:48 -0800 (PST)
+Message-ID: <4e832b25-bd98-4a48-890a-02d54d3b117f@linaro.org>
+Date: Fri, 20 Nov 2026 11:52:47 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -49,64 +89,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] usb: typec: qcom-pmic-typec: pdphy: disable the PD
+ PHY on stop
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org
+References: <20261120-topic-tcpm-qcom-fixes-v1-0-9a152f906fba@linaro.org>
+ <20261120-topic-tcpm-qcom-fixes-v1-1-9a152f906fba@linaro.org>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261120-topic-tcpm-qcom-fixes-v1-1-9a152f906fba@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v7 08/23] media: qcom: camss: Add PM clock definitions
- for SM8750
-From: bod@kernel.org
-To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Frank Li <Frank.Li@nxp.com>, linux-phy@lists.infradead.org, 
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-i2c@vger.kernel.org
-In-Reply-To: <20261114-add-support-for-camss-on-sm8750-v7-8-8ff2a11835f6@oss.qualcomm.com>
-References: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
- <20261114-add-support-for-camss-on-sm8750-v7-8-8ff2a11835f6@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 11:48:53 +0000
-Message-Id: <179517533369.2846709.4822429145839216229.b4-reply@b4>
-X-Mailer: b4 0.17-dev-e3fc9
-X-Developer-Signature: v=1; a=openpgp-sha256; l=487; i=bod@kernel.org;
- h=from:subject:message-id; bh=uMJapb3KunetUf6a8hwO+z88+IfyEVucqVVMO3w/uh0=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrADOl2MX4yKVTxDhvZxr+pGfmeAH85hqm4xuZY
- psAiCfBz8aJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawAzpQAKCRAicTuzoY3I
- Or65EACi218HD1FId3P5PiL3Jtf7fowZziKnMcsHHdroi69/H0q1YecJ6AxAF2bQU5s3/mlLynt
- MR9oVqbVOPwuFepOAFcq61n91ec/R5we+PVfA/3K0ku7nDnlKYnZywZx/9IcBLPRKRny9joAFvL
- AP2/YOg4vZWJDenNUtPp1CJNVR2vfzb2g422cPV91MKrTY1r+KcNHQ5Cfzz7Vf8Y0XLG3Hb3oy/
- PPHTz+/MGr2IradSx2J+/v9LUGcHjeZCxq5KDnM9ItPu0FwKqgzNcdbnSS/F2xB/UUr9YqAS4aw
- oCOvsZiveZufw0dGn3tmKqPpojUbEVC2urFqQyU0iIUZA3YQPGIafwqJFvY0eOrsrbI3TnSpiSF
- tVHeBRUjL9Drd8GMdVKy0zDnyxdYPs18SLPZyM1eEblBeJ+hcPS2AtRCs8gf1vMYZrupqTkHdiY
- T7uRSTzUSMGmPuzap3oh5pU4O39ccURtuy33xZdhQR/2dm+i3PwK/feD2R2XjC+vIK9rxuy0Y3T
- qz9DPscI1ogkiJEUlxVKJwY8w/iZo7uJ8swEc0ajLl90Uzgo8y6e0b2LR4GOFPrP00/EkVDUH6r
- zzq+XIzjGLGPOKleLiyQYPqoZ6th0YnWQIv8STVZxD1EbcNA0MuckMgYkFo3VbG/WpTJP0XlCvD
- fdkdjXePKPFPEWg==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-On 2026-11-14 19:29 +0800, Wenmeng Liu wrote:
-> From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+On 20/11/2026 09:59, Neil Armstrong wrote:
+> qcom_pmic_typec_pdphy_stop() only terminates the ongoing transmission and
+> clears the RX frame filter, the PD PHY itself stays enabled.
 > 
-> Add cpas_fast_ahb, cpas_ahb and gcc_axi_hf to the PM clock list for
-> SM8750. The CAMSS core enables them through the shared PM clock helper
-> when the device is probed.
+> Use qcom_pmic_typec_pdphy_disable() so the PD PHY is also turned off
+> before its supply is released, leaving it in the same state as before
+> qcom_pmic_typec_pdphy_start().
 > 
-> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> Assisted-by: LLM
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
-
+>   drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
+> index 435e07659d65..08cf65951796 100644
+> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
+> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
+> @@ -545,7 +545,7 @@ static void qcom_pmic_typec_pdphy_stop(struct pmic_typec *tcpm)
+>   
+>   	cancel_work_sync(&pmic_typec_pdphy->reset_work);
+>   
+> -	qcom_pmic_typec_pdphy_reset_on(pmic_typec_pdphy);
+> +	qcom_pmic_typec_pdphy_disable(pmic_typec_pdphy);
+>   
+>   	regulator_disable(pmic_typec_pdphy->vdd_pdphy);
+>   }
+> 
 Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
----
-bod
-
