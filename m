@@ -1,100 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.10.95
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795204074;
-	b=TR7lqMQERpjdiJmemLLcDFWUF1JUCawpY1Heg7gDZrmlRDRExYZP/TtLlpWTkdN5tOEV
-	 cXKH+IdsJR/meXVvFfxqFtX1/+4hhYxxg2/bfCmrqp8ApJXIt950wsBbB8kxWtu/UzEAe
-	 qxnykDZTwWDdLuALn6rygeGk2qAcClk8qDFvxgVheZ4vbFd4sOdSRvh8y/1ARk1qf/2yY
-	 3UotOvsyjbTVCyOpNpUuGuGngNOHARW63zDLhZMGms/3OVqokUzsnDS8O3hbU3w9gH/7g
-	 aZwVyHs2GoS7KH4ACwTzXibpp0sid2uaf9jXtEoE8xWzYrIVylx9WI6C6P6itUY46lQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795204074;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 Content-Transfer-Encoding:Content-Type:X-ClientProxiedBy:
-	 X-Microsoft-Original-Message-ID:MIME-Version:
-	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SLBlob-MailProps:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=YxDCVRDqOSFjn6rXyTggCjS8gO1LdHL/knK/E1qlKkA=;
-	b=yIbeaVitJ8EbvcvsIbuHEcyRkNEA+LrQQf0jtPtX9xBPkFSjxBPL9kYpL+4S5fGSgfd8
-	 9PHDKA4FciN2NhF9NbGDZP9XMqYdGBa/TejkK12PWuZJdTFkuZ/3NOaZDjPOghXDBMXmt
-	 Kt3d/bVGJY1XGYhLXSpHnCxrKS8PdWCkZH3t6iDGVVGsz5AJYSmpTI1GXtlE5KyYj9+Qu
-	 IRSOkUo7KWfd2VwNZtINOH+1zwa3Xqx5ptcy6W/peA0QtO11f+Yw4JDkwRKJe+4LZU0o8
-	 3eiP0uYpQ6OKl8WOHdkUoKqTogVXvKRkSCLoE1BqUiiFcN9AJf2drTkoPJW2F7QJsBQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=outlook.com;
-	spf=pass smtp.mailfrom=outlook.com;
-	dkim=pass header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256 header.s=selector1 header.b=PKtz4HjA;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.10.95
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azolkn19010095.outbound.protection.outlook.com [52.103.10.95])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795204615;
+	b=y0WkepE/3UKKi9paLfBdnFmnEvZvPuDiffSiFLFsJV3W2tNSsjSigNb2JgKEYhhAS1nl
+	 eIp72eGgeen0E1qs2+MAquwaaeq2EW35M46sPDvva2EI7cOEPA+GEulaeJLD2moWfxVEm
+	 OuZGnuGhPj1CTvZd4G4avIMLj2d18ClczCLb4LYJCL5WZc1ztPBhhK2mSmjM75qkgYvNZ
+	 067ruFhXPIs/2eo/Jg7kKcKHleU8ZRlqPW1ZX8gMHkpmCqitFp87aMG6OtTQ0Ga+DVCT6
+	 QF+jm7yswxOr25aOaBLgPFzLGDQD98ghQ+tXpieHkNNZX17b7qLwvjQWlBwDx9eyF0g==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795204615;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=MthzqvtkXetI+N7nP0vkl00pvKXnxIc0KKTtSHEGYK0=;
+	b=0L5lf12zbEqdxnQ3ZL6BdjtVc3052J27K8d7tF8bfvJ7L3wi+Y77MFR4o+/hGgnSZ6Cd
+	 XZtYPZxLO+z1P94f0ya3G1bZR7UnBWslS9F8txarXrQoOU8d4ezJdKcM7qMuFprEfAAiZ
+	 n4bbiiT/Go/VhSnmV2ktX1MKL0SlxOL9go37/HtWulAZOWLAzLOmeSViwEuDFF6nwCQQY
+	 lX4507PHKi7hVWzm8vY9P6v/BC8bI9xuq82impjxKRGt0YdafSwa/gsncDnzX7DmKfurp
+	 5MFl1awWheU34nI65WL3mHn3EQqns384gYTVfdc5ChIGjl66tsuw0PHKTPcWH+a+7ZA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Xj266ZfJ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DvirZqh4;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BE49606A6C3;
-	Fri, 20 Nov 2026 19:47:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7BE49606A6C3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B641606A6FF
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 19:56:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9B641606A6FF
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=outlook.com header.i=@outlook.com header.a=rsa-sha256 header.s=selector1 header.b=PKtz4HjA
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Sq7Lr/7hUxy6AN+6bM/vr1vdJLHApS0hUqJZ4/UXIlPCgp+Nz4kdq0xqpWbqiDCJPJN3nwlAjE0qROEpAsALK+9zNvH5dUHlk4Jlsrj/jUhdtF/0syRyThogYCtthgVL+UlvWY3FD7cOwJNVtpjtqWqk74EdCYGXJJybzr4z7wXLKm78cy9UhqAxvLs460m+Iafr7r8Ogd5nFT0IxG5GS77zjxLfZpnS+8w96q1++dFhsTuBj/D3U/S3X12j2NjjqoBeE2cBl0otoK4g2lXScu/HYF15UIp5k9/VBl/ADjqmAsIlsWeD5talFh28ODrZ7ZL4G2bVtLzS4bXy7ZB+9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YxDCVRDqOSFjn6rXyTggCjS8gO1LdHL/knK/E1qlKkA=;
- b=Z2mXS9o6CIPnfYMwN9CEV8q7CcGB62LdzBZJitnrtw4Y2cHeUQPr0Q/Yr3cx9v2G6FwYMvqilVuG3HK4VBP//BDKprk6JvYJdqFBiUiwCO7sWn/KLBJnBSdAua955Aw1dGwH9mdbxY/MyAdE2D8c76D0WiOTik7V+vf9tTIGiaWljaLBAvQYAK/+tImaaquoPZ+e/GkcQT6eN38JBeVGKM+RsDT3Xxrfyrw7vxPV6643F4De7IRITlMyO4gIlb5qVL5O5QMJSN8NkQFShKVwwTaijIAwzamw9tHU+7QqMPqcZUw1e0+WefEiprdrPgnNiMBRF4nr2GD6MOrNQ6ZLjA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YxDCVRDqOSFjn6rXyTggCjS8gO1LdHL/knK/E1qlKkA=;
- b=PKtz4HjAUIqKa+TRLgxngRhU8I+jb3kyrU51ByiJxVfoZFtloBleJBvBemCffuVTN38nS3P1yXVFfaF7/6lUqGMt7wrYmBGxOgkjmq9v94GkM9IlOt1jYt98BB6UWSwp5tC5b7gMSX/bLty+Gxp4eIwFUGvuuP/YeDiGd9V4yQEtuKpO6fESQFelGm9LfD0gsONIfveEBQTtSNYmX8VoJw2hWWt5B/G6tiKrMQZ3vyREbkbGeqUF1YIiysr3MIsZd3hNBxUWNgrFZa1kstTlovR2ILl6LwVlXy/czkxTrNLctRXEtdpTAgMzfheSy4Ht12oDuDRQFCwgkjani3mZvw==
-Received: from LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:408:2fb::15)
- by MW5PR84MB1665.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:303:1c0::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.10; Fri, 20 Nov
- 2026 19:47:42 +0000
-Received: from LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM
- ([fe80::9151:9e8:f98a:99e5]) by LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM
- ([fe80::9151:9e8:f98a:99e5%6]) with mapi id 15.21.0639.011; Fri, 20 Nov 2026
- 19:47:42 +0000
-From: Perry Dale <techluddite@outlook.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Perry Dale <techluddite@outlook.com>,
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH 2/2] ASoC: qcom: q6apm-dai: keep a playback stream running across a PCM reset
-Date: Fri, 20 Nov 2026 11:47:25 -0800
-Message-ID:
- <LV5PR84MB4026E23CD27421FEF1D8B373A7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
-References: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0205.namprd05.prod.outlook.com
- (2603:10b6:a03:330::30) To LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM
- (2603:10b6:408:2fb::15)
-X-Microsoft-Original-Message-ID:
- <20261120194725.4088815-3-techluddite@outlook.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Xj266ZfJ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DvirZqh4
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKJlNjG3619568
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 19:56:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	MthzqvtkXetI+N7nP0vkl00pvKXnxIc0KKTtSHEGYK0=; b=Xj266ZfJLd40v70+
+	eq0zNjJ28gCcJlYHXdGJYR1AYcqnIbx0euoFjL72ScHTfoRVGhxuBRoWeyTpKviJ
+	0Ro4QsdnAUg42XCH7/HDlWoPfDtvIiZduCia862IV12EOJjSPx5PokQJ90mCi2Oo
+	UGD73abKRP9IxbjAZfx8ItTgXBa6XmT72b7eoSXeNwvgCdoeYUIh78Q1ED5uP+e6
+	ih132fa/HxljD1WTMz9YJD4Lg0gtQgoNgA/y7ZynS5+ZlhqXs0znv/A9JjdXVtse
+	4INF5YAtjJAo/zdV4pIEp9IPJK6zXLlXOO8EqjRiW2/tD+4C6T7jzJGZkdqjuvZ9
+	o8XhuQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2vnx0120-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 19:56:51 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-934963b2bc0so271851585a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:56:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795204611; x=1795809411; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MthzqvtkXetI+N7nP0vkl00pvKXnxIc0KKTtSHEGYK0=;
+        b=DvirZqh4XxewWpgght6VLlQJ9L390SZCtw7vZBQiq+44TmBmw3VNbkeVk49Mpd6GyD
+         RWuZ9cOWO2BJObZQsLf1iUH7bAtn+lSKDad44ru6jJd3rWPncGg6J3xVrkEzseAeseYT
+         /W1bIKxCn+U2yNvtjqyJNMia24nAYbqFYbWgEodIX3mdU++YrP9xXNPijp8Lfbegygp4
+         QZHQKi4Cfa8u0dY+ME7aCwEdEPPfg6//74sPXK4yM7imwZHKeJn1HjCrBGvZG3WbrJ8Q
+         Sc0iVNIvj/Oq23/RZ9MvnEC7PrUkoewvcodZ3MIDpKrSk8yiDcyH6680Q6OOyJsxJWOy
+         2dVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795204611; x=1795809411;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MthzqvtkXetI+N7nP0vkl00pvKXnxIc0KKTtSHEGYK0=;
+        b=RpgP4zxru7BmWi1/QlrF3rl8Tq9RFexHtpXDZ4HF7Nh37jwqOzgt2nCWP7TJ3tP2aG
+         jr48mTwSP9W5QltPRkh07o71Gbs3A5RBXaUyh0aw30TxGFayz6vX/ALq8lCnF+QQQT58
+         maAgRuo7kqpUeOvAxWNDQqpUN1mFMWzL8wA1PTkOZ3hMg84yZPJ6+cSt3N/IkfbHtvvr
+         FrKX7uPtBFHFYawKQOEOqCcQM5wO3wD2k11X+D5r4uuw6KWCdz1kw5rMkWvKsLs3ca5g
+         HPqY+l5vqwxcJ7lJbOjvz/HPP3Xn9Zer7Lo1j9aISkXgfrTNAYLtexzieZqOjba+a04I
+         mb7w==
+X-Forwarded-Encrypted: i=1; AL+hErEvcLpHb2JH7o9bhZVXrxCM/2hGyuM0knn9LsDpnjdKTFbWQSd+3i/NRdnMrZgTkuprGZPGDw+YhWXdGj0m@vger.kernel.org
+X-Gm-Message-State: APuU4Z+CpH075DDPqCeLVLDDPnUgg+qVcyuFzOtmkddEJpyahregyqVv
+	VYcaGZTbD5f9PHnwzvaJBRBzZG6FDWSNwxzaMb4/vC/11FFu/Uddy3tCSwPSv5cOYszQuSNw99a
+	ncaxwOtSrTyRJv8rrec52/yq7D7Zckvocw37XDFqDhrmcTHcoix6hn2DFG0eFqedoQLNo
+X-Gm-Gg: AYBFou0aqv48ORlQNDu9iTowrRGIdEX4k3jUcSDcYOQQLsgmb6l09CR3PPXljOIfedn
+	pMBWurmt24nTuh112VEOtxm7gTZz4Y1BnHj2b7ECBSNDdn3CwsNQcyzVkdUoOV5f81/kPT2wfBZ
+	+5gvci1TewNvJ8xxyTKhijH3R+R4nFmh/UtMg01cflHyxFXUOb82leWXYTvPBjf8JoKuJLzoSjE
+	wsIFfFQ/lR8bnNQkgvhi+AfFxgYeM49nlAZRQeOGpiX/a10xsFG1zH7qiWcjC5EbVVoKq9Pwrjg
+	jn0lZ9y0yRjQqIoUE3fDTgTeIfODwX5fUSYci5HNPcQ1BUBQ4U0bUoxyNJJho3WuaZ1I20qEqez
+	S19OBSE+yQ8nqvR2q6wPIc+dbkVbrX8nOpjyk/DfDK3FxSHhwWPb6L4t4IOwFa1ySk09ZAmjK2i
+	VFxGdHIQRUTRmz
+X-Received: by 2002:a05:620a:489a:b0:93f:309a:ba5 with SMTP id af79cd13be357-949bab3085dmr756600885a.47.1795204610632;
+        Fri, 20 Nov 2026 11:56:50 -0800 (PST)
+X-Received: by 2002:a05:620a:489a:b0:93f:309a:ba5 with SMTP id af79cd13be357-949bab3085dmr756597585a.47.1795204610127;
+        Fri, 20 Nov 2026 11:56:50 -0800 (PST)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab69bf685asm6891792f8f.20.2026.11.20.11.56.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 20 Nov 2026 11:56:49 -0800 (PST)
+Message-ID: <313d44f4-d4fb-4239-8bd0-66547bd5b270@oss.qualcomm.com>
+Date: Fri, 20 Nov 2026 21:56:47 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,361 +116,188 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR84MB4026:EE_|MW5PR84MB1665:EE_
-X-MS-Office365-Filtering-Correlation-Id: 521d324a-e03d-4861-18b4-08df473f23c2
-X-MS-Exchange-SLBlob-MailProps:
-	qdrM8TqeFBvhuFgLLe5qs4jWk9CHdv0AQEIpEXbEjM+eiwlH8NH8IGd2xVlDOaSb8bBYOhIt2GRtskjrY5NpjEWEwexEtLN9VmZ8Y0IIktVkFZzNOglW7UEwjRQyyoQgs1UAgfCqwdk5gueY7tIRE6gUZE5C0jajj3+M/9Axu2d5YNepdAzfzwchwBUlx7n31OADS/djIVz2iy91fsiyATJtSZHGndEttwY7ZMGbav0FO6TKdaGlM4LOzgNkStRXJRhoJqzvA54MXVKhvd7va80fzu8RS3f9X/NWChItMHAH/9iKwkG3p9HcxL4gNJVJr2Htx6cfYcHlrjAOIoWt8meP1wMpogHAXEObc1W633Z98zhbk10lYhdYFT0apkAS1mUABSQ1SFlEZMC2B0nLuH/kKAtmLMOVrIfJkiswLs0kbljAeDKwgjohVfUL5kKfn+ETsxBHiLp0V4GZvKzusrrJT/NE/omjUumSFOEo3koCYubPsvPZpAwY8tv1eIv99yWvoQUr3+MAxDEz1Q4Kstwx2KCmbpsNbsmv36TT/pzrvLflMHrFJP3i2RJ1vcnZgUL8xCVwx/hy0WUinpJzNRfX7JXeZ+J2hcSrWVGOqpAxruu7HaJ+1eYi0qOEvtpXqRyBlzyiuyprkIobybrwRvdHJoPzzzdSGUAQwVBv8cm1KUTTQ9jWjPILWtAl6VKwH3jv5tNcwicTlulKDp2RNjElIVjGXXh1Nxvm4J44E8zwjB9r4m3+IlYQnUUua3xmpa+LIuWI2PustHtXVtQnVqn2tcgGUHab
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|8060799015|5072599009|51005399006|25010399006|23021999003|15080799012|12121999013|24021099003|19110799012|260925184616899003|21061999006|41001999006|12091999003|40105399003|3412199025|440099028|1710799026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?WmF2FxqMnRgmBW8reWj2U7kJnEVwSQSp/hYMlHKVKtfggxpovMu+Nbzhu7Gv?=
- =?us-ascii?Q?yP5GfvRnUR84o2v4ZoMGWJWh5cCRQLX2I0jwx5v86XoEOpAdz1Lqk5yb9aq9?=
- =?us-ascii?Q?J1uS/a+334fa5D6I4BQQStRtrTtHGxJnTSogqZz09A1Ef6P+1RYHqQMON7b7?=
- =?us-ascii?Q?fPmNdmjiIKy+0sQdsTX1KgJ/VhFt0Pm8quigLVPDv5B4+KajWStVYvU1HE48?=
- =?us-ascii?Q?U9XJrcP6Sj/2H+/PaqszohKHBinlrspRJ0bYnuaszb3qB0x5xGttuNvCDoP9?=
- =?us-ascii?Q?dvcEpM4gSOpmSUFiYne7IfaN2KLIDxO+/vtWgUt8KJxyGvWOaXz5L+KnqB0T?=
- =?us-ascii?Q?Q1vnXFaK1y2BiQ8i2OHuaES4quJQrzIppiG7RXbb9VcWYjTcfUjBi28vxgUb?=
- =?us-ascii?Q?pU8EZbOUVzgOk9fSjT5JRwqFlTeMvwZBFiJn34T+SPP50lMfEo7WL5va6vAA?=
- =?us-ascii?Q?mClMQqdAEGUflAWCmlFRuylSeMBTgTH3JayeWmDdUk5Gmi3ltwwqw2q5RGSd?=
- =?us-ascii?Q?0TR+57gERJTcU3N7b8moD6OBEdITLZHBq2YlMcVGlBQsNftQNIRh4fsw7UUP?=
- =?us-ascii?Q?l0PVqc70r1LuEersyMd9hwTYbxcItzFcMxlcICxSHlR8p/7mTvondXFCzslH?=
- =?us-ascii?Q?3Wzh18se3Z8eLye98vuYLdORDJ/enmY+DULSth/Xpa5C+pPQR4lkqfz71J1d?=
- =?us-ascii?Q?YY6bi4qnRoADf/jGB3+rXfemDTYRzAe+SDWvX9upk/ihTzCpHGQQDqA5Rd/o?=
- =?us-ascii?Q?kMD0fariRcYYaP24Ejx4zhXbPuS2rl5/4IzR7MaNrPPRhoBb4jXuQCk8eZ9u?=
- =?us-ascii?Q?nxLjhC9n8f8a+NxU4KI+k/fb1Mg5Nph2ibNBss4BafurJmR6S5AXEfX6rWmQ?=
- =?us-ascii?Q?2XepmgMp9VHwwE3WbfQf/zAB4dHSsds39dFKGKCFDrd8f4z2ZMuZYQytNSLh?=
- =?us-ascii?Q?7zvGOCmugSYBPtdsuohM5XvQbtAo5WSgTpHR/ZHyNIpeWvsr3pbnyY+BHR7a?=
- =?us-ascii?Q?JB4R8FyeM18+8ARjM9d5UfjVwlA+dorh35uzSu6vAjovBSN0cLVxmmN08R2k?=
- =?us-ascii?Q?GZ/nx234ps9v0pfPujDis1/vhj+r8wQHp50S5MAYzCcs+MUsemQ=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?poPtisqyLTNl1HAanmDN4AFCUlGldhvymeW9g8mgfpQWdmd5PsRKw0NnZI7c?=
- =?us-ascii?Q?wmoQLZU/AMYFzt7vN6WTMyk3NBqjCTqV3VG7v8UkQNwcmyhBvl8ymw1Ur3JS?=
- =?us-ascii?Q?h/Qje+7sAqa75Z/gGPU02XGGgSmqtHnI+d9xshnliXvPKVg9pvLMPHpKL/V0?=
- =?us-ascii?Q?wNPr/EOASIsFvZH3MQNGO8c08sjzvkILpANzdxIdd/6+1NOwKoaWEdPw2bM+?=
- =?us-ascii?Q?LVM2nb8uUbWPFzo+qQYf7plitdpFajEXQUkdvCD8CehnBijzVAaPgXCGClxk?=
- =?us-ascii?Q?ECzPbSH9t0Jpq300jowtKuLKIOBdFqKpRk2zKSm+n3x0MPZwWdcDh4kY5Q4U?=
- =?us-ascii?Q?Pfz4ri29mnYAjsxUtz8Y+fJ1I+7YgOyqCcF9bVZDXMogJfH9c0Gy3GV7voMq?=
- =?us-ascii?Q?U9XXZcNeJcdrHiIpbyLAwIgrKmAaOLFx0E6oWwXi6tGJ3GaarIyFjJYuzUzj?=
- =?us-ascii?Q?1hXsrH9nV69gtM9JUizVtSHRSxKcFenojOZ42K/JXry4TLNbaRsFpshMdiM0?=
- =?us-ascii?Q?k2QGoyonnTZhrm1Y/jGfrANkvfd6obzwSukk7U6Gk/vc05KKfUXXTiq20zFS?=
- =?us-ascii?Q?bsHWuFF//+u3FwEyi7TS0eZFV6tq6ROcPCoO6zT0y/MQTRqaB2f6BqyVOMO3?=
- =?us-ascii?Q?uHJ3uRYVCRcRzVD6DUI+KHT/GWqHP+faYKzu9aFgWpogKS92WZTmRdNS/DP8?=
- =?us-ascii?Q?hPrKVvQZMcVA2R4GwecPUBgNKEzI0KNS1JCXikwdgIJAlYPJuB1pNuaQ0wbL?=
- =?us-ascii?Q?J09kLxjzGhAT7UdRyuqVScGsDWOWqPuFfLX5z0HrwOfp45jogBN2zIa6pQG9?=
- =?us-ascii?Q?HYOdYjnxYYlgA0pEfeOfRT6+/tWCB/0HKEKS09P+sKeqs12YxhfB+yiJU5dg?=
- =?us-ascii?Q?A2vijUFxRMVNRc7bTYhBTV5jXNcKZfJio1t6xKzlwSqmhpFLslQiLTrVQzfu?=
- =?us-ascii?Q?dQxVLXmvFy6dB5vjpWtL2GogPjQ/JOzq20x0Sj2+IJXMP00I0+ZVWaNz0c0q?=
- =?us-ascii?Q?a/hUiKJ/j9XkuJstJd6uGKyYIqGT0RMvtf7gSvNKPV1Dem3EkVllVv6gJDn2?=
- =?us-ascii?Q?5dc/NAgL5Nqqsz9s4j1hYxySR0oUhdkSIVhERx8vU1W+TvqczErv/nABI9UX?=
- =?us-ascii?Q?RRhoYBAiMhJkv8Y4glDsNtbqYznHrKGHe4+q/ePSltYm6hm/ms9YbWANIdqg?=
- =?us-ascii?Q?AqkwiL+5sdAI2nRvYr0v54qTSPAf+FQP4xbDEOLb5bMm2vW9KDWWGqDgIK+i?=
- =?us-ascii?Q?wj8XI3Ai1D+88vWUZkXtd9sRn9gBGCrvr3cm27D60n4tlomXGVHfV4WDe34u?=
- =?us-ascii?Q?JQvPke7IV72bAJGXiiFsGdaihzYiCoMDNMpMnjgUiXL5rldA1gvf3tingtGu?=
- =?us-ascii?Q?gxOLvB8wcQujkguMZ/gcTYdi6I+9?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 521d324a-e03d-4861-18b4-08df473f23c2
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2026 19:47:41.9799
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR84MB1665
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] media: qcom: camss: Map each CSID to the VFE it feeds
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Jesse Casco <jesse.casco@gmail.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+        Allan Siriani <allan@fatecpompeia.edu.br>, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <cover.1795196107.git.jesse.casco@gmail.com>
+ <9e5bee0dbc1c116672ba0020013ef0a346385c29.1795196107.git.jesse.casco@gmail.com>
+ <CAFEp6-3cQXygekbk0wG8AcxqkW8NgbqHq80SjvPF5XnWhXMRyw@mail.gmail.com>
+Content-Language: en-US
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <CAFEp6-3cQXygekbk0wG8AcxqkW8NgbqHq80SjvPF5XnWhXMRyw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA3OSBTYWx0ZWRfX0kU8zhxbnScC
+ 0caDyfAoaf7jcVui9aLEcY60E6wUHvUrvfuFt8Y/7rkolny4zrHMl8xug/rr3sO4qqIjieJzNww
+ dHgryI3PUgY5+JuYACjVo1E+IxA3Vz0Ts2xpgVOVjZQj/PuQfdoAZL+2JkArtOuyArd2c1vJmrW
+ lXdsHJ6CZo8D9So0BkB46sHWdtD8scLFlAwxsTSW0DVM/S0TUP5/LVFBf9rnzZexLL7GUrHOlX/
+ Hj4aeiZEL3jSELgNTMQMfR6LGuE13JVgDDkA2Mxw2XrI+0JLi6V88+BOgAml5tBWv0HNBUxN0sw
+ +7l1w64tg1pR2grQGYv4JjVzzuOJ2XJAVfKDABDRgq4EGnJCAFYZhQdY9eTTyCjCyc8OmaN/iE8
+ uJc5AOrn3lTKWMZCeNgJigSPNQ5x1+MBdnBl9xP6OmVmWd2OoAqm8i9DKcmFuApPDdux6jz86hM
+ 0J0+dCyNxF8stVjpo8Q==
+X-Authority-Analysis: v=2.4 cv=SbRi5fRu c=1 sm=1 tr=0 ts=6b00a603 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=pGLkceISAAAA:8 a=fNfHNqqOajbSGWci9-sA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: co7e3EvxWYwZOIJNdvpyimiNRpSauGab
+X-Proofpoint-GUID: co7e3EvxWYwZOIJNdvpyimiNRpSauGab
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA3OSBTYWx0ZWRfX1Nt20XfU8yx/
+ t3hJ3Jhw6u89uQc8ZeD9c9w0cuzRHujwz/uOzCUBnF+xMh1fBM6D2u+lihiS+DjybjVWBg1T4tQ
+ yIjeVUj5AOPi1jr3li8C3I+czQ+S8Xg=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-20_05,2026-11-19_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 malwarescore=0 clxscore=1015 bulkscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611200079
 
-SNDRV_PCM_IOCTL_RESET sets appl_ptr to hw_ptr. On a running stream it
-first reduces hw_ptr modulo the buffer size, otherwise it sets hw_ptr
-to 0. The period buffers already given to the DSP stay with it, and
-queue_ptr keeps its value from before the reset. Once that value is
-at least a ring away from the new hw_ptr, q6apm_dai_ack() queues
-nothing, the application fills the ring and the stream stops advancing
-until its next prepare.
+Hi Loic,
 
-Count the buffers the DSP holds. A buffer is added when it is queued
-and taken off by the write-done event, under the stream lock and in the
-same section that reports the elapsed period. Prepare clears the count
-when it replaces the buffers.
+On 11/20/2026 9:39 PM, Loic Poulain wrote:
+> Hi Jesse,
+> 
+> On Fri, Nov 20, 2026 at 6:40 PM Jesse Casco <jesse.casco@gmail.com> wrote:
+>>
+>> CAMSS assumes that CSID n feeds VFE n: csid_set_power() powers the VFE
+>> with the CSID's index through parent_dev_ops, camss_buf_done() is passed
+>> a CSID index and completes the buffer on the VFE of that index, and
+>> camss_reg_update() is passed a VFE index and updates the CSID of that
+>> index.
+>>
+>> That holds as long as a SoC has the same number of full CSIDs and full
+>> VFEs, with the lite blocks after them. X1E80100 has three full CSIDs but
+>> only two full VFEs:
+>>
+>>   CSID:  0, 1, 2, LITE0 (3), LITE1 (4)
+>>   VFE:   0, 1, LITE0 (2), LITE1 (3)
+>>
+>> so CSID2 powers VFE_LITE0, CSID_LITE0 powers VFE_LITE1, and CSID_LITE1
+>> fails to stream with "Failed to power up pipeline: -22" because there is
+>> no VFE 4.
+>>
+>> Look the VFE up instead: a full CSID feeds the full VFE with the same
+>> index, and the n-th lite CSID feeds the n-th lite VFE. CSID2 has no VFE.
+>> This gives the same mapping as before on every other SoC.
+> 
+> Can you also check there is no possible link in the media graph
+> between LITE and FULL CSID/VFE blocks,
 
-Handle SNDRV_PCM_IOCTL1_RESET in an ioctl callback. After
-snd_pcm_lib_ioctl() has moved hw_ptr, give queue_ptr the ring offset it
-had, relative to the new hw_ptr. The next buffer handed to the DSP is
-then still the one after the buffers it holds. That offset is 0 both
-for an empty and for a full queue. A running stream with every buffer
-queued continues with those buffers, and what the application writes
-over them is not queued a second time. In every other case with offset
-0 the queue is taken as empty, and what is written from there on is
-queued as buffers come back.
+For the current state of the driver maybe make sense because "v4l2_pipeline_pm_get"
+is called in prepare_streaming in camss_video, with previous state of the driver
+this call was done on video_open. 
+I think that from sub-device api point of view it is not correct s_power to fail if link is 
+not enabled, but if there is consensus for that logic i think i am also ok...
 
-Move the queueing into a helper that both .ack and the write-done event
-call. One call queues at most the buffers the DSP does not hold. The
-limit of one ring per call did not account for buffers already queued.
-With that limit a write can find no free buffer, so the event queues
-what is waiting when a buffer comes back. Without it the data waited
-for the next write, which never comes at the end of a stream.
+~Gjorgji
 
-The helper measures queue_ptr against hw_ptr and aligns it in the same
-way when it is not within one ring ahead. hw_ptr passes queue_ptr after
-a reset before start with every buffer queued, and a reset on a paused
-or suspended stream can leave the two apart as well.
-
-A send that fails now stops the stream with an xrun. The core has
-advanced its buffer index by then, and only a prepare brings it back in
-step with queue_ptr. Before, the error went to the writer and the two
-stayed out of step.
-
-Not changed here: the graph keeps playing while the stream is paused,
-so a reset on a paused stream can skip the first period written after
-it, and a write-done event that the core drops leaves the count one too
-high until the next prepare.
-
-Tool use: written with Claude Fable 5.2 (Anthropic), run in Claude
-Code, from a prompt asking to carry a running stream across a reset.
-The tool wrote the change, the test program and this changelog, and
-revised them after reviews by Claude Opus 5.5 and GPT (Codex). Built as
-a module for 7.4-rc1 and run on the AYN Odin 2 Portal (SM8550) with the
-test program of the previous patch. Five resets in a row on a running
-stream, a reset with the queue played out in the second lap, a reset
-before start with two periods written, and a reset and rewrite with a
-full ring queued before start all continued. The cases of the previous
-patch passed, and the DSP kept answering through every run. A debug
-build that failed two sends during PipeWire playback stopped the stream
-each time, and PipeWire restarted it.
-The test checks that the stream advances. It does not check which
-samples the DSP plays for the buffers it held at a reset, and it does
-not exercise the boundary wrap or a paused stream.
-
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Signed-off-by: Perry Dale <techluddite@outlook.com>
----
- sound/soc/qcom/qdsp6/q6apm-dai.c | 156 ++++++++++++++++++++++++-------
- 1 file changed, 122 insertions(+), 34 deletions(-)
-
-diff --git a/sound/soc/qcom/qdsp6/q6apm-dai.c b/sound/soc/qcom/qdsp6/q6apm-dai.c
-index d0d19fc38..e4a6817ee 100644
---- a/sound/soc/qcom/qdsp6/q6apm-dai.c
-+++ b/sound/soc/qcom/qdsp6/q6apm-dai.c
-@@ -91,6 +91,8 @@ struct q6apm_dai_rtd {
- 	uint64_t copied_total;
- 	uint16_t bits_per_sample;
- 	snd_pcm_uframes_t queue_ptr;
-+	unsigned int in_flight;
-+	struct device *dev;
- 	bool next_track;
- 	enum stream_state state;
- 	struct q6apm_graph *graph;
-@@ -236,6 +238,8 @@ static const struct snd_pcm_hardware q6apm_dai_hardware_playback = {
- 	.fifo_size =            0,
- };
- 
-+static int q6apm_dai_queue_playback(struct snd_pcm_substream *substream);
-+
- static void event_handler(uint32_t opcode, uint32_t token, void *payload, void *priv)
- {
- 	struct q6apm_dai_rtd *prtd = priv;
-@@ -249,7 +253,13 @@ static void event_handler(uint32_t opcode, uint32_t token, void *payload, void *
- 		prtd->state = Q6APM_STREAM_STOPPED;
- 		break;
- 	case APM_CLIENT_EVENT_DATA_WRITE_DONE:
--		snd_pcm_period_elapsed(substream);
-+		scoped_guard(pcm_stream_lock_irqsave, substream) {
-+			if (prtd->in_flight)
-+				prtd->in_flight--;
-+			snd_pcm_period_elapsed_under_stream_lock(substream);
-+			/* The returned buffer may be needed for data already written. */
-+			q6apm_dai_queue_playback(substream);
-+		}
- 
- 		break;
- 	case APM_CLIENT_EVENT_DATA_READ_DONE:
-@@ -363,6 +373,10 @@ static int q6apm_dai_prepare(struct snd_soc_component *component,
- 	}
- 
- 	prtd->last_pos_index = 0;
-+	/* The graph gets a new set of buffers and starts with none queued. */
-+	snd_pcm_stream_lock_irq(substream);
-+	prtd->in_flight = 0;
-+	snd_pcm_stream_unlock_irq(substream);
- 	prtd->pcm_count = snd_pcm_lib_period_bytes(substream);
- 	if (q6apm_is_graph_in_push_pull_mode(prtd->graph)) {
- 		if (prtd->pcm_size != prtd->push_pull_size) {
-@@ -433,14 +447,39 @@ static int q6apm_dai_prepare(struct snd_soc_component *component,
- 	return 0;
- }
- 
--static int q6apm_dai_ack(struct snd_soc_component *component, struct snd_pcm_substream *substream)
-+/*
-+ * Give queue_ptr its ring offset back relative to hw_ptr. Called with the
-+ * stream lock held after hw_ptr moved without it.
-+ */
-+static void q6apm_dai_align_queue(struct snd_pcm_substream *substream)
- {
- 	struct snd_pcm_runtime *runtime = substream->runtime;
- 	struct q6apm_dai_rtd *prtd = runtime->private_data;
--	int i, ret = 0, avail_periods;
-+	snd_pcm_uframes_t hw_ptr = runtime->status->hw_ptr;
-+	snd_pcm_uframes_t ahead;
- 
--	if (q6apm_is_graph_in_push_pull_mode(prtd->graph))
--		return 0;
-+	ahead = (prtd->queue_ptr % runtime->buffer_size + runtime->buffer_size -
-+		 hw_ptr % runtime->buffer_size) % runtime->buffer_size;
-+	/*
-+	 * The offset is 0 both for an empty and for a full queue. A running
-+	 * stream with every buffer queued continues with the buffers the DSP
-+	 * holds. A paused stream can have them played before its hw_ptr moves
-+	 * again, so a stream that is not running queues what is written from
-+	 * here on.
-+	 */
-+	if (!ahead && snd_pcm_running(substream) && prtd->in_flight == runtime->periods)
-+		ahead = runtime->buffer_size;
-+
-+	prtd->queue_ptr = (hw_ptr + ahead) % runtime->boundary;
-+}
-+
-+/* Queue the periods written and not yet queued. Called with the stream lock held. */
-+static int q6apm_dai_queue_playback(struct snd_pcm_substream *substream)
-+{
-+	struct snd_pcm_runtime *runtime = substream->runtime;
-+	struct q6apm_dai_rtd *prtd = runtime->private_data;
-+	snd_pcm_sframes_t ahead, pending;
-+	int i, ret, avail_periods;
- 
- 	/*
- 	 * ALSA calls .ack whenever appl_ptr moves, also after a stop and
-@@ -461,37 +500,84 @@ static int q6apm_dai_ack(struct snd_soc_component *component, struct snd_pcm_sub
- 		return 0;
- 	}
- 
--	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
--		snd_pcm_sframes_t pending = runtime->control->appl_ptr - prtd->queue_ptr;
--
--		/* appl_ptr wraps at the boundary before queue_ptr does. */
--		if (pending < 0)
--			pending += runtime->boundary;
--
--		/*
--		 * What is left to queue is part of what ALSA holds for
--		 * playback. It is more when queue_ptr is ahead of appl_ptr,
--		 * as after SNDRV_PCM_IOCTL_RESET, or when appl_ptr was moved
--		 * more than a ring past hw_ptr.
--		 */
--		if (pending > snd_pcm_playback_hw_avail(runtime))
--			return 0;
--
--		avail_periods = min_t(snd_pcm_sframes_t, pending / runtime->period_size,
--				      runtime->periods);
--		for (i = 0; i < avail_periods; i++) {
--			ret = q6apm_write_async(prtd->graph, prtd->pcm_count, 0, 0, NO_TIMESTAMP);
--			if (ret < 0) {
--				dev_err(component->dev, "Error queuing playback buffer %d\n", ret);
--				return ret;
--			}
--			prtd->queue_ptr += runtime->period_size;
--			if (prtd->queue_ptr >= runtime->boundary)
--				prtd->queue_ptr -= runtime->boundary;
--		}
-+	/* Frames queued that hw_ptr has not passed yet, at most one ring. */
-+	ahead = prtd->queue_ptr - runtime->status->hw_ptr;
-+	if (ahead < 0)
-+		ahead += runtime->boundary;
-+	if (ahead > runtime->buffer_size) {
-+		q6apm_dai_align_queue(substream);
-+		ahead = prtd->queue_ptr - runtime->status->hw_ptr;
-+		if (ahead < 0)
-+			ahead += runtime->boundary;
- 	}
- 
--	return ret;
-+	/* Nothing to queue until appl_ptr has passed queue_ptr. */
-+	pending = snd_pcm_playback_hw_avail(runtime) - ahead;
-+	if (pending <= 0)
-+		return 0;
-+
-+	/* Leave the buffers the DSP still holds alone. */
-+	avail_periods = min_t(snd_pcm_sframes_t, pending / runtime->period_size,
-+			      (snd_pcm_sframes_t)runtime->periods -
-+			      (snd_pcm_sframes_t)prtd->in_flight);
-+	for (i = 0; i < avail_periods; i++) {
-+		ret = q6apm_write_async(prtd->graph, prtd->pcm_count, 0, 0, NO_TIMESTAMP);
-+		if (ret < 0) {
-+			dev_err(prtd->dev, "Error queuing playback buffer %d\n", ret);
-+			/*
-+			 * The core has moved on to its next buffer. Only a
-+			 * prepare brings queue_ptr back in step with it.
-+			 */
-+			snd_pcm_stop(substream, SNDRV_PCM_STATE_XRUN);
-+			return ret;
-+		}
-+		prtd->in_flight++;
-+		prtd->queue_ptr += runtime->period_size;
-+		if (prtd->queue_ptr >= runtime->boundary)
-+			prtd->queue_ptr -= runtime->boundary;
-+	}
-+
-+	return 0;
-+}
-+
-+static int q6apm_dai_ack(struct snd_soc_component *component, struct snd_pcm_substream *substream)
-+{
-+	struct snd_pcm_runtime *runtime = substream->runtime;
-+	struct q6apm_dai_rtd *prtd = runtime->private_data;
-+
-+	if (q6apm_is_graph_in_push_pull_mode(prtd->graph))
-+		return 0;
-+
-+	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
-+		return q6apm_dai_queue_playback(substream);
-+
-+	return 0;
-+}
-+
-+/*
-+ * A PCM reset, which ALSA also runs at the end of every prepare, moves
-+ * hw_ptr: modulo the buffer size on a running stream, to 0 otherwise.
-+ * appl_ptr follows it without a call to .ack. The buffers the DSP holds
-+ * stay with it, so keep queue_ptr in step with the ring.
-+ */
-+static int q6apm_dai_ioctl(struct snd_soc_component *component,
-+			   struct snd_pcm_substream *substream,
-+			   unsigned int cmd, void *arg)
-+{
-+	struct snd_pcm_runtime *runtime = substream->runtime;
-+	struct q6apm_dai_rtd *prtd = runtime->private_data;
-+	int ret;
-+
-+	ret = snd_pcm_lib_ioctl(substream, cmd, arg);
-+	if (ret < 0 || cmd != SNDRV_PCM_IOCTL1_RESET ||
-+	    substream->stream != SNDRV_PCM_STREAM_PLAYBACK ||
-+	    q6apm_is_graph_in_push_pull_mode(prtd->graph))
-+		return ret;
-+
-+	guard(pcm_stream_lock_irq)(substream);
-+	q6apm_dai_align_queue(substream);
-+
-+	return 0;
- }
- 
- static int q6apm_dai_trigger(struct snd_soc_component *component,
-@@ -547,6 +633,7 @@ static int q6apm_dai_open(struct snd_soc_component *component,
- 		return -ENOMEM;
- 
- 	spin_lock_init(&prtd->lock);
-+	prtd->dev = dev;
- 	prtd->substream = substream;
- 	prtd->graph = q6apm_graph_open(dev, event_handler, prtd, graph_id, substream->stream);
- 	if (IS_ERR(prtd->graph)) {
-@@ -1229,6 +1316,7 @@ static const struct snd_soc_component_driver q6apm_fe_dai_component = {
- 	.pointer	= q6apm_dai_pointer,
- 	.trigger	= q6apm_dai_trigger,
- 	.ack		= q6apm_dai_ack,
-+	.ioctl		= q6apm_dai_ioctl,
- 	.compress_ops	= &q6apm_dai_compress_ops,
- 	.use_dai_pcm_id = true,
- 	.remove_order   = SND_SOC_COMP_ORDER_EARLY,
--- 
-2.56.0
+> 
+>>
+>> Fixes: 1830cf0f56c3 ("media: qcom: camss: Add x1e80100 specific support")
+>> Signed-off-by: Jesse Casco <jesse.casco@gmail.com>
+>> ---
+>>  drivers/media/platform/qcom/camss/camss.c | 46 ++++++++++++++++++++---
+>>  1 file changed, 41 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+>> index 7d9622097..8020b675c 100644
+>> --- a/drivers/media/platform/qcom/camss/camss.c
+>> +++ b/drivers/media/platform/qcom/camss/camss.c
+>> @@ -4629,11 +4629,39 @@ static int camss_read_version(struct camss *camss)
+>>         return 0;
+>>  }
+>>
+>> +/*
+>> + * Return the index of the VFE fed by CSID @csid_id, or -EINVAL if it feeds
+>> + * none. A full CSID feeds the full VFE with the same index and the n-th lite
+>> + * CSID feeds the n-th lite VFE. The two only differ when a SoC has more full
+>> + * CSIDs than full VFEs, as X1E80100 does (three full CSIDs, two full VFEs).
+>> + */
+>> +static int camss_csid_to_vfe(struct camss *camss, int csid_id)
+>> +{
+>> +       const struct camss_resources *res = camss->res;
+>> +       int i, n = 0;
+>> +
+>> +       if (!res->csid_res[csid_id].csid.is_lite) {
+>> +               if (csid_id < res->vfe_num && !res->vfe_res[csid_id].vfe.is_lite)
+>> +                       return csid_id;
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       for (i = 0; i < csid_id; i++)
+>> +               n += res->csid_res[i].csid.is_lite;
+>> +
+>> +       for (i = 0; i < res->vfe_num; i++)
+>> +               if (res->vfe_res[i].vfe.is_lite && n-- == 0)
+>> +                       return i;
+>> +
+>> +       return -EINVAL;
+>> +}
+>> +
+>>  static int vfe_parent_dev_ops_get(struct camss *camss, int id)
+>>  {
+>>         int ret = -EINVAL;
+>>
+>> -       if (id < camss->res->vfe_num) {
+>> +       id = camss_csid_to_vfe(camss, id);
+>> +       if (id >= 0 && id < camss->res->vfe_num) {
+>>                 struct vfe_device *vfe = &camss->vfe[id];
+>>
+>>                 ret = vfe_get(vfe);
+>> @@ -4644,7 +4672,8 @@ static int vfe_parent_dev_ops_get(struct camss *camss, int id)
+>>
+>>  static int vfe_parent_dev_ops_put(struct camss *camss, int id)
+>>  {
+>> -       if (id < camss->res->vfe_num) {
+>> +       id = camss_csid_to_vfe(camss, id);
+>> +       if (id >= 0 && id < camss->res->vfe_num) {
+>>                 struct vfe_device *vfe = &camss->vfe[id];
+>>
+>>                 vfe_put(vfe);
+>> @@ -5043,11 +5072,16 @@ static int camss_link_entities(struct camss *camss)
+>>  void camss_reg_update(struct camss *camss, int hw_id, int port_id, bool is_clear)
+>>  {
+>>         struct csid_device *csid;
+>> +       int i;
+>>
+>> -       if (hw_id < camss->res->csid_num) {
+>> -               csid = &camss->csid[hw_id];
+>> +       /* hw_id is a VFE index; update the CSID that feeds that VFE */
+>> +       for (i = 0; i < camss->res->csid_num; i++) {
+>> +               if (camss_csid_to_vfe(camss, i) != hw_id)
+>> +                       continue;
+>>
+>> +               csid = &camss->csid[i];
+>>                 csid->res->hw_ops->reg_update(csid, port_id, is_clear);
+>> +               return;
+>>         }
+>>  }
+>>
+>> @@ -5055,7 +5089,9 @@ void camss_buf_done(struct camss *camss, int hw_id, int port_id)
+>>  {
+>>         struct vfe_device *vfe;
+>>
+>> -       if (hw_id < camss->res->vfe_num) {
+>> +       /* hw_id is a CSID index; complete the buffer on the VFE it feeds */
+>> +       hw_id = camss_csid_to_vfe(camss, hw_id);
+>> +       if (hw_id >= 0 && hw_id < camss->res->vfe_num) {
+>>                 vfe = &camss->vfe[hw_id];
+>>
+>>                 vfe->res->hw_ops->vfe_buf_done(vfe, port_id);
+>> --
+>> 2.56.1
+>>
+> 
 
