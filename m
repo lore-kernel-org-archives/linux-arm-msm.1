@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795177370;
-	b=2fmNnv6QhWFCAafuyKZNjpM9x2hP41bwQ0X/nKwMLccsiiQNJseLKlMy0mjWP4qzMw9v
-	 wXcBOVOKB6vIQ6YQqMQKEZTKNaQCWkET0rtls23yOTmwFUL5wsFEor2CXVlyB16T3Tk50
-	 iojKc+tlXFQyZg5PDlgxvjwfDI6eHiRVLyybxu19s0FUiDiFc4lD84PJZ+9rKe6gQ4vEQ
-	 /M6LTr4hzv9f8Sk8W11Gco0zwOH0sbmig38Dr3d6ffZxoQZeLcor56jJpHzOJ294SsRr6
-	 NW0dWImIyGlQjGbTW4i6G/Hdoh+POjfN9UKdkqEk+MqGeIrR4P4Gexvg/T0VyFUmrHQ==
+	t=1795177458;
+	b=OdvgRXFvPyuwMx/5WrK6eNqDmyZ5cpKQcTh6tuuJLOVqtdYpBrG7/lgR7BHp6j0dR9lw
+	 mMVM/OW2WdJREvABvdJ6VYMOwmHcsYd+3vtzWFnCH/28aG4r4UJNLHQmH1zBDNd1tsOS0
+	 YY6BvSMe0OFzWg3rGteTtgjSwVDlvR0/4TMkPsbOT+cVChjIn4zBvxzH9zZCUG1MSpKGI
+	 sX0p9wQ9ntEtApee7vgrQVHZNyZ8GI97kMP2ZZ2B3sHbz9kRk6v91GiRv/hP145Y185T6
+	 pn6+r4ItLJiI9bBrI/G1aGQCvf6LLVdN6M4BmS4u0IqXqBouyqDQHpvkJI2Z+DeIWtw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795177370;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795177458;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=96Zhd5B1TtXmDkm0G8JywvJmgEKxebMT/FIPXFPvqRk=;
-	b=FjwbyEJ8vEACqQEDj86r7r+TtUfdrJs1+3wTyJDYOyOubXofrQJPyVQiWRJs8qqQvfIy
-	 aMYhbu9yclaYAHyCcCorZcVGyv3sn4oRjTp9gKGvhA4i1/9S5p+qqsjkFF5NdpDLrxj+s
-	 h7lcDr02oyRSQKvZJPeTVAxilWT8lTebahY5jLH0WfbzfWAARfHrQ76Ty9v/VV6LA1tkV
-	 EVVQ28gLXl+5Ny5yag0/L0RIoh4w6lJGcqHP4boQm/X3uv+fAsDPRTWTJeUIYtKYA/rOJ
-	 WxhZ4SvSASVXx6AqgZx8DilYq2hEv9IzeHRwws3JWivDZsLDat9BMHUkLNlywuu9sgw==
+	bh=0czxhgq5wFGQ/KjwS9ColrCZlqVXj4X1xIOnzUvKlpA=;
+	b=PFTR8cCZgkng6okWFx0varpZGIhiiNct1QO43PfWLzj3PzI67ZP13iRPRTsuIMcYvWDU
+	 899GvfZ3r7O48S4C6F8ezYxXnIUFGdrzInQPlsGtujvs5UOK63P4Rl40GjZ+TKu5ew6X0
+	 7aMi6TmLU/1wW78LtalpabYMbpNRxEe71nDYzxw+xnGsKlNtX0QxfU9ePhPA6+YaUNmhy
+	 137pVyGiVUXULJUtDL1B3OaFSKGSkz938tcqRoubsLQnN4nSe8QWlCtIE4luYL8sZPuBg
+	 MG6X2tRIbpG+40j7lQlMHylVQNkT79yRgg9tsFMXGNtKnbLOb55NhUDVSLL/z7nju7A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AmBVNGI3;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LPwc5rAh;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B742A606A330;
-	Fri, 20 Nov 2026 12:22:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FB36606A330;
+	Fri, 20 Nov 2026 12:24:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AmBVNGI3
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC3D91F000C4;
-	Fri, 20 Nov 2026 12:22:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LPwc5rAh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B97A11F000C0;
+	Fri, 20 Nov 2026 12:24:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795177370;
-	bh=96Zhd5B1TtXmDkm0G8JywvJmgEKxebMT/FIPXFPvqRk=;
+	s=k20260515; t=1795177457;
+	bh=0czxhgq5wFGQ/KjwS9ColrCZlqVXj4X1xIOnzUvKlpA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=AmBVNGI3oxhUQny5bfIay1meY4+SmysxmhA3RZVAisqQOVEujjPF6lW6uokogpHVE
-	 XBVXXFLVtrRMWV42oTpsGjAHEefDVbNjwiynQN9uyEZAUFWG/dzZFI+ddT35ORYqOL
-	 r2c02bONRbGZ4sGDkXnSTQBJy7s+81bPDq0ziVFH8/s7AWSTD56Fg7cYQLGD72w23h
-	 XzDkC0sBnO88Wa+2LgELoaJpDONnPmsFcj/pZfQB97r0UvSNY5FgPtor0xiI/xMl3U
-	 C0tkuif7PfMwWrBVrn8tbNIkj0ylkXiEyC7qWcp+p68yjvSqOQhiblX6d2HvqxjkJA
-	 3QgZxpHfkFjgQ==
-Message-ID: <d1ecf0fc-acd9-47f6-972c-837c9a63bf4b@kernel.org>
-Date: Fri, 20 Nov 2026 13:22:44 +0100
+	b=LPwc5rAhaBZY4Z7dJ1/dqLemSDA3Bizvp3uN2mSt5H6/XqGmXGhZIixkyGhj3SJtw
+	 bAtz10W5SYZi4gzseSvtU4wPWgV/RnZfQMNuubzvN38Pr+uFa8UP/33xKF5RMxYHQK
+	 6kaHgNYkiX/PjtOcBxm8Gnf5Uq1cxZE5oL6RlBXDDZ0O5lVqDWtSvicKTbU+1vLqfJ
+	 MG1FkCrPJJX7U+0MQkknfy0sZLl4vZivZ1MciY6918DxWH6ndytZYOXKHjbbzLThdI
+	 TfbTKtJBQKu1V6qUPpAFI8uEzFOMNUNGSOW3DnOvCAtTUsqiD3cIW11W6pnYXt18SN
+	 Pmjl+VEjuTb9g==
+Message-ID: <f7d4a1cd-accf-4cb9-8137-0912ad6d7fb8@kernel.org>
+Date: Fri, 20 Nov 2026 13:24:12 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,18 +52,15 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/11] dt-bindings: arm: qcom: Document Molokai and the
- Motorola Signature
-To: venkat.yadlapati@yahoo.com, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+Subject: Re: [PATCH v2 1/2] dt-bindings: pinctrl: qcom: Add Molokai TLMM
+To: venkat.yadlapati@yahoo.com, Bartosz Golaszewski <brgl@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- Radu Rendec <radu@rendec.net>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261116-molokai-soc-v2-0-9dc4dddc4e96@yahoo.com>
- <20261116-molokai-soc-v2-7-9dc4dddc4e96@yahoo.com>
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261116-molokai-tlmm-v2-0-429f8c8d8eb1@yahoo.com>
+ <20261116-molokai-tlmm-v2-1-429f8c8d8eb1@yahoo.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -109,19 +106,37 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261116-molokai-soc-v2-7-9dc4dddc4e96@yahoo.com>
+In-Reply-To: <20261116-molokai-tlmm-v2-1-429f8c8d8eb1@yahoo.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 16/11/2026 08:40, Venkat Yadlapati via B4 Relay wrote:
+On 16/11/2026 08:39, Venkat Yadlapati via B4 Relay wrote:
 > From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
 > 
-> Document the Qualcomm Molokai (SM8845) SoC and the Motorola Signature
-> (vantage) phone based on it.
+> Document the Top Level Mode Multiplexer of the Qualcomm Molokai (SM8845)
+> SoC. It is a Kaanapali derivative, but has 205 GPIOs instead of 217, no
+> SDC2 pins and a different set of pin functions.
 > 
-> An LLM was used to help write this commit message.
+> Assisted-by: LLM
 
-Same comments, this does not belong to the commit msg, but to the changelog.
+Drop
+
+Please run scripts/checkpatch.pl on the patches and fix reported
+warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
+patches and (probably) fix more warnings. Some warnings can be ignored,
+especially from --strict run, but the code here looks like it needs a
+fix. Feel free to get in touch if the warning is not clear.
+
+> Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+> ---
+>  .../bindings/pinctrl/qcom,molokai-tlmm.yaml        | 128 +++++++++++++++++++++
+>  1 file changed, 128 insertions(+)
+
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+
+> 
+
 
 Best regards,
 Krzysztof
