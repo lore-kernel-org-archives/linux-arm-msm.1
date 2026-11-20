@@ -1,113 +1,158 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795173098;
-	b=mNK4pmxxD+J91bmQkhi4DmgUW1uz/rjUsTAgblptfQ+T5HNRg3Rfgqbyfj2lxCSHLAQg
-	 r0FlWpjORK1bo2MIEdiURDt9pXJfVHl2aQncpsM2+HW7Ss6TLRAIJzVp9l3vTXL0xojQ7
-	 ACsLYPhZH+S7/nKNqEXz0u0MNCMs6INq8wdzcZsZ4npzIoStzTg5yDWW8TTCOft1bj+Ps
-	 8xtDCf88Arpd6U35t81jEZ3cXKac2ofxXBeFbmzj1aJuTxuxD+nuS0+Yw/n0j8j+lp314
-	 LBcqaZjBMMNm/RaTLrb0pASRnk21jfZ65pJoOJ5/eNVAH6/yj7mgPTpFGAADPo3/lGw==
+	t=1795173101;
+	b=CfiKgQ3Mx0vg0f7Ut8O5xmF2orZvZ2XS8oA1eWA2mKnXp8m0DO9qUiUZOM+/xx/80mPV
+	 oI6GhlHih4+oUZSOLqHh7HvXh7SJfch0nLwtji7kiJTY/AF8NXflbHlSWzyv9bWbKdDL9
+	 463gcQy8WUIOu+nIg6nljcOBbe0xROC2KFuQxHy5b3+/ZRrigARkx4JmVYg3Ba76l5bue
+	 ZmKgqXOQ9yHJfLPVqoUnfXshvkvYMzg5DkA5SOU4e2yhYccqB1nptIl4eAYodrVR3DYGW
+	 xDM7Ro+mFV/lhWUGJpqKPMAIrLz8JP0sWqTesyOhItWBYghvTWY5afuHaHZBKYhACWw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795173098;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=z35r7zkccuSTk0hX+/sGIrSPymjmK+o3T2HJpVZS+Eo=;
-	b=mzlu8kUZnfnZaH9Hhkx6cYXiVSHkepSgUHYGoqK4sS0beutG/eDToe1Mr4ldOO5t3HP+
-	 mWedjGSmJA06RWbNTBMktx1TZTUb7wNhms0JQyEa5djpRMOFZbkQuf+xiWBNBccZ6VlrM
-	 5+ve0VNBpBj7lFSK/xn3XR6K35tfgUJNv+n1fiNQHS42bjqJNBgp+fhNMnz1hPFhf7pz3
-	 ODejqlh6fL9oh8hjh72T8dI9+FejASB2C+CfaFkJhSwiG6CTGFJaiuJutiJnisfZgO7sZ
-	 1U1JADxxQ6+MvHgwqE+KyEzy593zC6z0u10dLZGzAyYcudUB/6VKyBK+UFoACmG1i9w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795173101;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
+	 X-Developer-Signature:X-Developer-Key:Content-Transfer-Encoding;
+	bh=6iowvnjr0RIgWlIDQQOFrlHY5uCtXtYYlYEEp/cOH20=;
+	b=yxFl04cyM+kCKiYyIwIElCWeLFg2joPyUq1EePYhV4cLbUCht4XWWpDufPcz364nBThR
+	 67RQGGRNvRIC4A7wKmu/Oc0BP4+E3IbPuiu3E/zI9M9We0rLAy4pIbl7kB/3lKmV4aSrg
+	 JbX62UIifeHwUsykO/X9wjgZr6me17RxOVnETt15lcytp1UELgJc8cZW67+BPPWX8NZEK
+	 TGAsMtveAWfzV6yl2xeI57YkPVqj7palR4ksE3Hq79zcNmW3fChxz4oPyDOJNgX6N4NEU
+	 Ek4aK8JxgKpQyMM1gPFuwEbcK/DhoIBG9F8t5vi+P1Nx5sWcC0rbhUO4TxJllqEnzjQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZrarcjEO;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MVwp0pmg;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=baylibre.com;
+	spf=pass smtp.mailfrom=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=cy0T8JFY;
+	arc=none smtp.remote-ip=209.85.221.52
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 446E160A2609
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7106760A263B
 	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:11:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 446E160A2609
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7106760A263B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZrarcjEO;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MVwp0pmg
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AKAjr543731069
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:11:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	z35r7zkccuSTk0hX+/sGIrSPymjmK+o3T2HJpVZS+Eo=; b=ZrarcjEOINZbaXt5
-	bOniYTtLEfvWF8mpy9zanMgoolURDBYH0h4oZp9PHDr+dazlgPWJThLQ4MF6UlJJ
-	ghOW066bE85pTVdVboQDMlKtHSRYI5/jc7WxmhJ+4tCuloPx7Ve7uAD3El+YPG8t
-	3dum141sxokcprIbHW76sDHs71wKUHU0MtNPpPggh7WTac+s5Bp7oChJgMWyjuN7
-	kNKARfFobpR/SrH2nEGxelFCYKO6zEeAgt71iNvu0sTG7EwezyhHyGYDYDDE0jVV
-	HOTaaYtgfmLtEJgIVTTla7aBaUkLVHKCUthJsixs6TiIeIKixaxAIxvzqUvWEa06
-	tqrBCw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2mm4g4c3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 11:11:33 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-383165e9b0fso851025eec.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:11:33 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=cy0T8JFY
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-490c3ae81d3so431971f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:11:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795173092; x=1795777892; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=z35r7zkccuSTk0hX+/sGIrSPymjmK+o3T2HJpVZS+Eo=;
-        b=MVwp0pmgpg7t6p+qINaswqTorloIHdgNcBRZFMzTlLLED11Z+tmOB8Usa34dpZSP/m
-         bsx06rwxU9xKP9RWC2yNqKKBHbz8pT2WjRNkfJ1dRMrwtcugCpreF8VHq5OgfljufEpr
-         sUzNZGUdeMhTgESRIzpHosFJQXqiAKYtfsQbiFd3mdRwMJxVGQVM6lZLzbTWME5RgzUW
-         dHqCvHaZb2Wl0nUbhKaFJpImXy4rz2IefczSs1dzRVUf1FFE2yNOjBanwacv3dOEU6rB
-         kf8+8d5Iu/YNhjEQucSTE5TlG2+UC9PgB3FWEhJa2OPg4szGj50ZbnmNmZuLaMgaRuel
-         LIRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795173092; x=1795777892;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=baylibre.com; s=google; t=1795173093; x=1795777893; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=z35r7zkccuSTk0hX+/sGIrSPymjmK+o3T2HJpVZS+Eo=;
-        b=wP/cPpeys+hhqJBGL8VnY9i0NMj+n5NtzrVZ74PYitzUwDEqQLxbGGGfEkFfLJ8wxy
-         vKBj/DTP5XbyHiiuKPXyV4C9qYUvm3vnxVDa3JJJJcg9bUXY1HOKIVNB9oAhTtbfO0ag
-         Z3IMheLM9xim/1bhWlbyRR+2et6lvdXw+9VtNqcA2xeI9oeqwhPu+6xj5ELJ82VXOknH
-         aJ9Bec5hFMLQRHjwlnsYd2WvzHyNrcwoO4thA0O4b4sYefeEQA9qfdnpsIQuAnYlCfFw
-         g9oGS1x6+ABuo7/nKJqBgn12YpPYkD0brGUaPip55YB2BYVvgOGwauT5MfdaZZtJCYLv
-         70dA==
-X-Forwarded-Encrypted: i=1; AL+hErGYdljvG5Kcx5QvgI41XPHvphxDHtXOdChLYjRSbFn5/ymKnRH9YxUdntiQIKG23Nj//Gk+4T2C9brBfySt@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Bwy1qJI08jF5Se71H8IMdxXnb3PmdhWAZbSiPFZBA1AHnbrx6
-	d5IhWfGh5V/CQTmNaVwlP2rSyoaC7TaitwTMtpWWQ35iIvwQsd/ZwoXeAsMIiVNywUes+snkPJL
-	7gfDbJV7d8b7Sks+za7BAtIK+QEiuMr77D3mEFmUXnUKTJ5akd+2nBfF9FhlJfl4T1XhB
-X-Gm-Gg: AYBFou0jrJL/8bSTiHJu3HONdITlvZvQrZD9iuLvmMRKGUzuR7kGhLAGAa1NFJPmpZt
-	qhUgf/fzlYyakMyLm9tjs56ydTyLudM7z4VIufZLbNVLWe55r5IXpem5uPaZAE9xMvy4YKEf9OG
-	APyn8KnxQT6UzbdHfMR8kIFBKFzWogUpEp47W7xeg7OasoXbycrThIGM5ctDUkxoQhzGsqA7urc
-	wzBqt/zShb4V4AkfhmxoE1X5LeFEdYOXu7kUWzMiPb2cUlTCw8QqWAc71PGjLlhxZMDqW8rvHR3
-	c/HNJ7d/X+ashEUf/5Nig6Bg0o36gfEnc1+Hi42AJunrKSVfWyolvojB+nz8hqn92CCqssm5dDw
-	klA+ETdu5EJ9MXKIxDAslFDOHp8vGkMI5qp5aZF1Y4kVCBSHI9vCYUH5/3cVVXcfLGM9TynODmh
-	WfLohlr/S0
-X-Received: by 2002:a05:701a:8148:10b0:143:2719:f800 with SMTP id a92af1059eb24-1b556908ecdmr2340181c88.40.1795173092040;
+        bh=6iowvnjr0RIgWlIDQQOFrlHY5uCtXtYYlYEEp/cOH20=;
+        b=cy0T8JFYf6te/xTc1kjLehflkRMCyCLyy11kt5kR0iiTkUeh72a0VfbQtLsWdxQKbC
+         cFhL1NyNlrILzdeaX46VwkVy4MeXP+mFwxsgogALnuIqFabIzDYbfPIl3XyCnmwy3ai5
+         8T6EK3t8OE8eX7WpS5CBBnJ9gcHuPx45xGmWl0vctudKI11NB8OsFG4EaWegB9jAqjdE
+         yLVMj47I7qQc00jYFIsxNT/1utXJQ9rQvvCMZFbRZLgflQn5wfH6nc0qoZ6hPFJoQBZA
+         5jVraI3baGqMgrr/3P3ZFrjwysBQ3aAxoi2icTr9AnuVXVlkHmUvOvgDDhNFO4YMaSSw
+         JBMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795173093; x=1795777893;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=6iowvnjr0RIgWlIDQQOFrlHY5uCtXtYYlYEEp/cOH20=;
+        b=AuTM4jfjjlzvFZ70zuZQMr8qFlru50LFtCIwQ4rJQZJVCFs+Ku7JMQPQE1yH7X8NVQ
+         xgRVIeqvYDDHsiSYpcNt58oTjT3N1Zz98TdhVXI3HBVRFrqYZoCCKdA44lCe2ENHEjSM
+         jE6Z69kZ6Nt/MBd77tULjMy1LV5e8bf/gj9BwT0TFl4zoUteL8QKKYAAGV4PBPb6AR0A
+         en/4fxTymbZb+cL0c0BV3r++VivAd0EuwATxNeW9n5yWOZxuZ7pBR4IeALdeQIe/efmb
+         MxkILYWD+9WYnoBj4yYErFWRjIkfVTSXwO4LiyqMOYBuSYrhv5eIQ8MUP/ny7eYzl68M
+         dPrA==
+X-Forwarded-Encrypted: i=1; AL+hErFxQBL6FUgnRJon7IMFFiEFtao2zy4KyiaCHbMejnXIgI89TokClQw5D83ll9n/OXai2Ue+OiEbM2eQ9Q/C@vger.kernel.org
+X-Gm-Message-State: APuU4Z/fApJONZ6eELt4y7oiddu4IgjWTRDBRlZdbD6ckwBV7mRUWsns
+	HvINY1kWz4IUBpudWIEcmKpk1KiuUWZQtC68fAqICk5/r+YNKhVdJjQxJDFw/yvX9jA=
+X-Gm-Gg: AYBFou0q4pZF3focMmirYW4pjbPDS0Xwc6oaIgDSijuda1pjCM2nLMpkPkly3cVzP3+
+	z4cIHxDllANjxAkSo0BLIWg+E7z+kS3hiAOj7Fpaf8DrjpJYjv/3L10upnJos3j7YhmtaQmuxTA
+	o5GZKMYtduupZUoNoPNCSqy08a/7QZeBvDxEOpVAc4zUghtoHCASWMtt0B9NBsNriGUuJdiQSyX
+	rFMqdOwG8lH6WSgXXUQgcP8ZcpwH/WKtk9WPMXe0J6LcTiqVjkfgmYwGHIzSYgzRtbCfzhjA0Vx
+	eR9f2jnZp2vHGoVwnSArtbuiREIumhNtC1s1N3qwyl4GrqTZVh8WplcSP7jbBuswv3ho1p4/hSc
+	G/3/07FEkpFeQMXpDaEmQV7kNS+ll9K/fYYH8Lvjg88GGVqyKBeX4/2eylHtJ63YKT6lJD80uMX
+	9cuZYprWP4ZfdXtbG3XVkumvZQ22UqEmlCPrs5oPFAOfpcpE9Ib8JbazzocSHbw+vPekwvcpr35
+	cGBp4q2+dVNsT8IvQKyGnpntTAzHra05LjrXU+/dX0ZGM72xQV86v0oXxWs0CmmvlyO5OkXezyf
+	NH7MWnMaIM5TRQteXoCFpPzhxf/XUjt1SWOeSMRcQchCCN5/oR8az2Zq6nFrXkjM3zZcQQq3Y/Q
+	frCAswMph5wLGxVde
+X-Received: by 2002:a05:600c:3b0e:b0:4a1:efba:511 with SMTP id 5b1f17b1804b1-4bb8882508emr60110635e9.35.1795173092340;
         Fri, 20 Nov 2026 03:11:32 -0800 (PST)
-X-Received: by 2002:a05:701a:8148:10b0:143:2719:f800 with SMTP id a92af1059eb24-1b556908ecdmr2340148c88.40.1795173091432;
-        Fri, 20 Nov 2026 03:11:31 -0800 (PST)
-Received: from hu-vgarodia-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm7254229c88.13.2026.11.20.03.11.25
+Received: from localhost (p200300f65f19a904be03815e1634e776.dip0.t-ipconnect.de. [2003:f6:5f19:a904:be03:815e:1634:e776])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb884a15absm67887745e9.9.2026.11.20.03.11.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 20 Nov 2026 03:11:31 -0800 (PST)
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 16:40:54 +0530
-Subject: [PATCH v7 04/12] media: iris: Add non-pixel and pixel context bank
- devices
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Johan Hovold <johan@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Nipun Gupta <nipun.gupta@amd.com>,
+	Nikhil Agarwal <nikhil.agarwal@amd.com>,
+	Ioana Ciornei <ioana.ciornei@nxp.com>,
+	Longfang Liu <liulongfang@huawei.com>,
+	Julian Ruess <julianr@linux.ibm.com>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Brett Creeley <brett.creeley@amd.com>,
+	Giovanni Cabiddu <giovanni.cabiddu@intel.com>,
+	=?utf-8?q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	Eric Farman <farman@linux.ibm.com>,
+	Matthew Rosato <mjrosato@linux.ibm.com>,
+	Tony Krowiak <akrowiak@linux.ibm.com>,
+	Jason Herne <jjherne@linux.ibm.com>,
+	Harald Freudenberger <freude@linux.ibm.com>,
+	Holger Dengler <dengler@linux.ibm.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Mark Brown <broonie@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Sylwester Nawrocki <s.nawrocki@samsung.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Bradley Morgan <bradley.morgan@linux.dev>,
+	Armin Wolf <W_Armin@gmx.de>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-doc@vger.kernel.org,
+	driver-core@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	Alex Williamson <alex@shazbot.org>,
+	Mostafa Saleh <smostafa@google.com>,
+	kvm@vger.kernel.org,
+	qat-linux@intel.com,
+	virtualization@lists.linux.dev,
+	intel-xe@lists.freedesktop.org,
+	Vineeth Vijayan <vneethv@linux.ibm.com>,
+	Peter Oberparleiter <oberpar@linux.ibm.com>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	linux-s390@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	linux-spi@vger.kernel.org,
+	Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	linux-clk@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-remoteproc@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	Takashi Iwai <tiwai@suse.com>
+Subject: [PATCH v2 00/10] driver core: Disable driver overriding by default
+Date: Fri, 20 Nov 2026 12:11:01 +0100
+Message-ID: <cover.1795171088.git.u.kleine-koenig@baylibre.com>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,221 +162,110 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261120-vpu_iommu_iova_handling-v7-4-25a771235a7f@oss.qualcomm.com>
-References: <20261120-vpu_iommu_iova_handling-v7-0-25a771235a7f@oss.qualcomm.com>
-In-Reply-To: <20261120-vpu_iommu_iova_handling-v7-0-25a771235a7f@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795173061; l=5826;
- i=vikash.garodia@oss.qualcomm.com; s=20241104; h=from:subject:message-id;
- bh=8H0P4ddJnokiuKN13cprMhw/Zb8moRSMQ2sLTECuERc=;
- b=ydGkGahgKa74r0eBoQ9TzSZdEGYLaPLK4AAPAIObp1ZuAZfCH1VICsfJFB7B6qiFe7A/TcPo/
- qZ3D642vDrZB7Qju4NHrO7WKxVrKqTLookHXtGhxj+x3gqa/GiRtUZG
-X-Developer-Key: i=vikash.garodia@oss.qualcomm.com; a=ed25519;
- pk=LY9Eqp4KiHWxzGNKGHbwRFEJOfRCSzG/rxQNmvZvaKE=
-X-Proofpoint-ORIG-GUID: dIhfQHYvMCUen7L13HlmNnaaNUeuDdKw
-X-Authority-Analysis: v=2.4 cv=RZYFmFtv c=1 sm=1 tr=0 ts=6b002ae5 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=e5mUnYsNAAAA:8 a=EUspDBNiAAAA:8 a=FR9WZtxvUMymXjMYBvMA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfX+EvEz6NmXvpv
- YT1jpnWgB+SjOCwuhC/tK7y2XJoZypZiywuz4Vbo093Efn1k50Yjodo6lvl9sDSvTlhZv54fnZx
- bAYb++az75ixA04PKSk0R6yhIP4Shiw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDA0NCBTYWx0ZWRfXzIct2javHYKZ
- MfKViDLoYre/B3txszfKWpsfzowgfZWrl4qwI6TMvYEDd7wabHAZU+MQDn//NpqLHYpeFXuQQnW
- 25dERYtzkXr8qtXFXm42KrBXmGIy0K6BH2AHJ1Hc/wAHLOxbr+LHbCS1yfhaSz7u3vvPvoGlL4e
- fk67fgwWNEH01zE8vHgmRakWxTiADfO3XQJHX3hNn6vils80c6DqmQ5JD9uVyDw3xhAG53TXcjh
- Uqon/W2ZGwT4kPnOZwie4AOYHhe6hH97H6sbhLaNzXDYjpA9AFigpuKCSz9W4rfuNuG9ZxL3UMJ
- ERXAluXoAtA4mC9fhyaqynZ34WGhE64D52MlFi+X0GRAvG/AF+p3CSrTIaadvvdnckqqiy5to24
- 8VYgN0yAzXa4DKCYmxoRXBKH0unc79MWxzOwnSg8Jf+AO49Btwz6QCF29g/I39FYCA1U1puh/nG
- mGt3ix7shsq5idHJDxw==
-X-Proofpoint-GUID: dIhfQHYvMCUen7L13HlmNnaaNUeuDdKw
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-20_04,2026-11-19_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
- priorityscore=1501 spamscore=0 suspectscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611200044
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4896; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=zb+igsuXLt8tOTuUjhzAr7HaxCaZLq4II70BN40Br9Y=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBrACrJx1qga/LvoqPeQ2w7AGsIzkvZ0u8Ei7ilD OnkWyRDOleJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCawAqyQAKCRCPgPtYfRL+ TrT2B/4h+7Q3cE0LlxcXdMzSjo72DibWSV5sOQkmoVdvDT2jirOpWioUU86bki4NAIk6Z4fKuAQ Tq67UAFcdu/x0sb+TsWnSkdYqWbFXP1E9qqHzS6LbgG2Wo9AfXLnJRQPoIkCW5R3i/w6jmyDLiI LkWjw6qUO85o5cf3veZf7uvTVs/F1HlPcGi5H2XR8SEvtsTQoNcOqyDD/XO+JfY5VRim2QTygzC /LqpSYXX2fMI/PZcft+vtXeHkKEsua161Yxgcwt3mnXV1cWuUQhOgqkI5MNgrbn/8PHF60B4GWC cbYFOHiY7+15odYG/kF7YqO0HOLOodN9ndNTOKA9GdiXGD/D
+X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
+Content-Transfer-Encoding: 8bit
 
-The VPU issues DMA through several SMMU streams, and the hardware does
-not give every stream the same addressable range. The non-pixel stream
-cannot address the low 600MB of IOVA space, while the pixel stream can
-address the full range:
-    +-----------------------------------------------------------+
-    | non-pixel stream addressable range (600 MB - 3.5 GB)      |
-    | 0x25800000 - 0xe0000000                                   |
-    +-----------------------------------------------------------+
-    | pixel stream addressable range (0 - 3.5 GB)               |
-    | 0x00000000 - 0xe0000000                                   |
-    +-----------------------------------------------------------+
-A single "iommus" property on the video-codec node puts every stream in
-one IOMMU domain sharing one IOVA allocator, so nothing restricts a
-non-pixel buffer to avoid 0 to 600MB. Once an allocation lands below
-that boundary the hardware faults, which shows up as unhandled SMMU page
-faults and spontaneous reboots:
-https://gitlab.freedesktop.org/drm/msm/-/work_items/100
+Hello,
 
-Now the device tree describes "non-pixel" and "pixel" as separate
-context bank subnodes, each carrying its own "iommus" stream IDs.
-
-Add helper functions to create and clean up devices from these DT
-subnodes, and call them from iris_probe() and iris_remove(). This
-applies to the common probe path as it is required for all platforms.
-
-Set the context banks before v4l2_device_register() so the DMA plumbing
-is in place before any video device is visible to userspace, and tear
-them down on the probe error path and in iris_remove().
-
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
----
- drivers/media/platform/qcom/iris/iris_core.h  |  4 ++
- drivers/media/platform/qcom/iris/iris_probe.c | 71 +++++++++++++++++++++++++++
- 2 files changed, 75 insertions(+)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-index 3aeab49600e4a4742e1a8b141d1fedd219d8dbc5..236824d06c3bb7a3618bd24182f74c309a18bc29 100644
---- a/drivers/media/platform/qcom/iris/iris_core.h
-+++ b/drivers/media/platform/qcom/iris/iris_core.h
-@@ -40,6 +40,8 @@ struct qcom_ubwc_cfg_data;
-  * struct iris_core - holds core parameters valid for all instances
-  *
-  * @dev: reference to device structure
-+ * @np_dev: reference to non-pixel device structure
-+ * @p_dev: reference to pixel device structure
-  * @reg_base: IO memory base address
-  * @irq: iris irq
-  * @v4l2_dev: a holder for v4l2 device structure
-@@ -88,6 +90,8 @@ struct qcom_ubwc_cfg_data;
+here comes v2 which addresses the review feedback I got for (implicit)
+v1. See https://lore.kernel.org/linux-kernel/20261116110853.3418077-2-u.kleine-koenig@baylibre.com
+for the discussion about that previous submission.
  
- struct iris_core {
- 	struct device				*dev;
-+	struct device				*np_dev;
-+	struct device				*p_dev;
- 	void __iomem				*reg_base;
- 	int					irq;
- 	struct v4l2_device			v4l2_dev;
-diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index a086e519a55fea8649480a91d191fa3528fd2eaf..8b45a062a510dd0e96824e90d4398f9ef9294709 100644
---- a/drivers/media/platform/qcom/iris/iris_probe.c
-+++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -203,6 +203,72 @@ static int iris_reserve_iova_region(struct device *dev, struct dma_iova_state **
- 	return ret;
- }
- 
-+static struct device *iris_create_cb_dev(struct iris_core *core, const char *name)
-+{
-+	struct platform_device_info plat_dev_info = {};
-+	struct device_node *child_of_node;
-+	struct platform_device *pdev;
-+
-+	child_of_node = of_get_child_by_name(core->dev->of_node, name);
-+	if (!child_of_node)
-+		return NULL;
-+
-+	plat_dev_info.dma_mask = core->iris_platform_data->dma_mask;
-+	plat_dev_info.fwnode = &child_of_node->fwnode;
-+	plat_dev_info.name = child_of_node->name;
-+	plat_dev_info.id = PLATFORM_DEVID_AUTO;
-+	plat_dev_info.parent = core->dev;
-+
-+	pdev = platform_device_register_full(&plat_dev_info);
-+	of_node_put(child_of_node);
-+	if (IS_ERR(pdev))
-+		return ERR_CAST(pdev);
-+
-+	if (!device_iommu_mapped(&pdev->dev)) {
-+		platform_device_unregister(pdev);
-+		return ERR_PTR(-EPROBE_DEFER);
-+	}
-+
-+	dma_set_max_seg_size(&pdev->dev, DMA_BIT_MASK(32));
-+	dma_set_seg_boundary(&pdev->dev, DMA_BIT_MASK(32));
-+
-+	return &pdev->dev;
-+}
-+
-+static int iris_init_cb_devs(struct iris_core *core)
-+{
-+	struct device *dev;
-+
-+	dev = iris_create_cb_dev(core, "non-pixel");
-+	if (IS_ERR(dev))
-+		return PTR_ERR(dev);
-+
-+	core->np_dev = dev;
-+
-+	dev = iris_create_cb_dev(core, "pixel");
-+	if (IS_ERR(dev))
-+		goto unreg_np_dev;
-+
-+	core->p_dev = dev;
-+
-+	return 0;
-+
-+unreg_np_dev:
-+	if (core->np_dev)
-+		platform_device_unregister(to_platform_device(core->np_dev));
-+	core->np_dev = NULL;
-+
-+	return PTR_ERR(dev);
-+}
-+
-+static void iris_deinit_cb_devs(struct iris_core *core)
-+{
-+	if (core->p_dev)
-+		platform_device_unregister(to_platform_device(core->p_dev));
-+	if (core->np_dev)
-+		platform_device_unregister(to_platform_device(core->np_dev));
-+}
-+
- static int iris_register_video_device(struct iris_core *core, enum domain_type type)
- {
- 	struct video_device *vdev;
-@@ -249,6 +315,7 @@ static void iris_core_release(struct v4l2_device *v4l2_dev)
- {
- 	struct iris_core *core = container_of(v4l2_dev, struct iris_core, v4l2_dev);
- 
-+	iris_deinit_cb_devs(core);
- 	mutex_destroy(&core->lock);
- 	put_device(core->dev);
- 	kfree(core);
-@@ -377,6 +444,10 @@ static int iris_probe(struct platform_device *pdev)
- 	if (ret)
- 		return ret;
- 
-+	ret = iris_init_cb_devs(core);
-+	if (ret)
-+		goto err_unresv_iova_region;
-+
- 	ret = v4l2_device_register(dev, &core->v4l2_dev);
- 	if (ret)
- 		goto err_unresv_iova_region;
+The objective is to deny force binding a device to a driver that isn't
+prepared for that. There are many drivers that run in a null pointer
+exception when this happens and only very few drivers are supposed to be
+used like that. So the first patch implements an explicit opt-in for
+drivers and denies other matches; the remaining patches implement the
+opt-in for drivers that rely on it. This makes it unnecessary to fix
+individual drivers to explicitly refuse such bindings. See commit
+1e50a0349012 ("iio: adc: mcp3564: reject devices without match data")
+for an example of such a driver-specific fix.
 
+Changes since (implicit) v1:
+ 
+ - Rework parameter parsing to just use `allow_driver_override` on the
+   kernel commandline
+ - Add review tags
+ - Add patches by Alex Williamson setting .support_driver_override in
+   pci and vfio drivers
+ - Add patches for uio, spidev and a few more drivers setting
+   .support_driver_override
+ - align wording in Documentation/admin-guide/tainted-kernels.rst with 
+   tools/debugging/kernel-chktaint
+
+It is sensible to merge the driver core change (patch #1) together with
+the individual driver patches setting .support_driver_override because
+with the driver core change the driver override doesn't work any more
+for the unmodified drivers (unless the new kernel parameter is provided
+and a taint is accepted). So I suggest (once there is agreement that the
+patches are fine) to merge them all in one go and provide a stable
+branch in case a driver was missed to be adapted. I can create such a
+branch and ask Greg or Linus to pull it, or Greg can do that.
+
+So if you're the maintainer of one of the drivers touched by patches #2
+and later and assuming your ok with that patch, please provide your Ack
+(plus the required coordination if applicable) for not merging via your
+usual tree.
+
+Best regards
+Uwe
+
+Alex Williamson (3):
+  PCI: Allow untainted driver_override for PCI stub drivers
+  vfio: Allow untainted use of driver_override
+  s390/vfio: Allow untainted use of driver_override
+
+Uwe Kleine-König (7):
+  driver core: Disable driver overriding by default
+  uio: Allow untainted use of driver_override
+  spi: spidev: Allow untainted use of driver_override
+  clk: imx: scu: Allow untainted use of driver_override
+  remoteproc: Allow untainted use of driver_override
+  slimbus: qcom-ngd-ctrl: Allow untainted use of driver_override
+  ASoC: samsung: i2s: Allow untainted use of driver_override
+
+ .../admin-guide/kernel-parameters.txt         |  6 +++
+ Documentation/admin-guide/tainted-kernels.rst | 54 ++++++++++---------
+ drivers/base/bus.c                            | 51 ++++++++++++++++++
+ drivers/clk/imx/clk-scu.c                     |  1 +
+ drivers/pci/pci-pf-stub.c                     |  1 +
+ drivers/pci/pci-stub.c                        |  1 +
+ drivers/rpmsg/rpmsg_ctrl.c                    |  1 +
+ drivers/rpmsg/rpmsg_ns.c                      |  5 +-
+ drivers/s390/cio/vfio_ccw_drv.c               |  1 +
+ drivers/s390/crypto/vfio_ap_drv.c             |  1 +
+ drivers/slimbus/qcom-ngd-ctrl.c               |  1 +
+ drivers/spi/spidev.c                          |  1 +
+ drivers/uio/uio_dmem_genirq.c                 |  1 +
+ drivers/uio/uio_hv_generic.c                  |  1 +
+ drivers/uio/uio_pci_generic.c                 |  1 +
+ drivers/uio/uio_pdrv_genirq.c                 |  1 +
+ drivers/vfio/cdx/main.c                       |  1 +
+ drivers/vfio/fsl-mc/vfio_fsl_mc.c             |  1 +
+ .../vfio/pci/hisilicon/hisi_acc_vfio_pci.c    |  3 +-
+ drivers/vfio/pci/ism/main.c                   |  3 +-
+ drivers/vfio/pci/mlx5/main.c                  |  3 +-
+ drivers/vfio/pci/nvgrace-gpu/main.c           |  3 +-
+ drivers/vfio/pci/pds/pci_drv.c                |  3 +-
+ drivers/vfio/pci/qat/main.c                   |  3 +-
+ drivers/vfio/pci/vfio_pci.c                   |  3 +-
+ drivers/vfio/pci/virtio/main.c                |  3 +-
+ drivers/vfio/pci/xe/main.c                    |  3 +-
+ drivers/vfio/platform/vfio_amba.c             |  1 +
+ drivers/vfio/platform/vfio_platform.c         |  1 +
+ include/linux/device.h                        | 19 +------
+ include/linux/device/driver.h                 |  2 +
+ include/linux/panic.h                         |  3 +-
+ include/trace/events/module.h                 |  3 +-
+ kernel/panic.c                                |  3 +-
+ sound/soc/samsung/i2s.c                       |  1 +
+ tools/debugging/kernel-chktaint               |  9 ++++
+ 36 files changed, 144 insertions(+), 55 deletions(-)
+
+
+base-commit: 7cfbf79c66c63e807ea452abf0546e6f6d6833a6
 -- 
-2.34.1
+2.56.0.rc1
 
