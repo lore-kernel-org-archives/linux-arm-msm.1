@@ -1,13 +1,13 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795160564;
-	b=k4O9TYLW5QbfblhCsM5zpTwEm/W8l9X2spQepu6SWvQ5nwENzDwA0VVQxg48gsCa2JXa
-	 XQ0CoknKgp+K79xyY0LHJ1cz1P/DbQYC2XKDBvYWGlN8HU58CDrFKytdWsK79VuAZdSD1
-	 VUPoVJ+In7CcjS1eyJUpHLBc7z7t+mZS1r2KHYdqaIi4PWjfOa8NTP+9L/n744elA/kRm
-	 z5G6QymI1LnVusXvAVfixrpWFsK3Vp8DnJytMTXSi2urEHHG6brld0EgybcNEJqt0c7U9
-	 nQw3vNIZqO7tZt/nSl2nh4y4aY6/qyeek5LWB97wBYI1QAsc0hlLySOWiroeeYBNiXA==
+	t=1795160569;
+	b=0jUgMLGXgO6bJIPLIVNXmkQ62tckdqUMuYfeQYsL0V0lB3iy2k/QYbS7VOpcXBKOtl6l
+	 muQG91zkUUr31FT7ZT4ZVex6OYolc4YgC07Kdpk7kN068CDhLWanHnMIDrhUjMlEpflO7
+	 9e//uLut7fLuS/ohcV5vlznYxd4WZAWPf2+xbhdszkLWl1ZzuOIaEjAeAp4FfzFD5bydF
+	 brw+zf1zHDP8sWF+vn9QTqrnIDcSppLh9m5TjriInD93wC35R0BF1CYi9ZnsPAK65shxd
+	 21CCpQ+5YgWei7qHqXMSwsabWhgPc++ZM16i0WAqay6S1BrTsGL+cgGj/E5ikzEbFdQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795160564;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795160569;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
@@ -17,97 +17,97 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
 	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=bO+5h3pUzT673sUfWD3vvl2mmFCi713KGxBpQv+PfLY=;
-	b=fqdy/9gAn04P7omMjCaHqNojC3G6jJczWwccJ571wePdL6uVwx6S7u1Co/LcM9mP9MQ2
-	 +f7VzBUL33/5gFHejh9YnPuiDVrKXtJGuz+Jx6FOkuYmBDGhfkZHy5PYtFLVUA5l+T/2q
-	 m29XM7UugfHJj+SFLtIE4Zb/MFbopRjZrDXcWGzUE2L0vo1X0CVGgJSx05h943Bp9x4OV
-	 wNq5oVMp5AORWIY98TjPELnho6o9nqOkno6GD5yQa7+R+IGTzDdsihDEW3PPQ1nzfPQYW
-	 mlQRVYvtAFg6G5S3ZakJcLNdXGKnS8Fsa8WrdeaagW03Ef+CzT9pbqAm9HAI+P5Lh9g==
+	bh=3P3TooIy4YwC/bRKTvp92lrYDHs8AxA9i4f4CNemL4U=;
+	b=FnxqZrRM1c5Ms2Of+9mGGumfzRUqu0E/aT87UBrTpOjRRIpRYZesNqBcb1mRlT5bOMHy
+	 qUfYreREF46YmLccrgmeqzRKjhJRyXTpR7cXAghArKTV5hur4qhJsjaZDPAlc5dcJiBhD
+	 6ESxiUrKzvJdqfvNJeFoos30sPTkpUwegD0F0SB0ygbP6Pn0gLp7k6iF9PKl9P6GQaqit
+	 kmUCmegCDaEJ/VGB4xrjSDWDspNUTz7TOVWfJltjAYr0aCycSdRxlqzF7QHR6ZeBarsm7
+	 agHRsQH4LBxt4y1alxTOGhRGJUOV3d8NEGDjToSKiqGuhxzpC/CrsFJZXVkqxcXKvdw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZOKkY3Lm;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PuKRBhf1;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pEPfKawD;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="Zn/CSdY2";
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2CB9606A33A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D2CB9606A33A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 905AE60A262B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 905AE60A262B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZOKkY3Lm;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PuKRBhf1
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pEPfKawD;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Zn/CSdY2
 Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK7fr772695564
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:43 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK7froc2695584
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bO+5h3pUzT673sUfWD3vvl2mmFCi713KGxBpQv+PfLY=; b=ZOKkY3Lmuvuh3l+q
-	QrrfMDRXVpC0S5qy2ISqd1b9utqshfALMzxu797Gcq3E/dViOCY0nZCFloKsz5zd
-	oaxZuLGVJRyXtVzjUduVtXZ+vhqTgHG8AXiv1Npp5z4Wod/Vk96vgqIlnLdyGbnG
-	IvQlR+3jAhxj2azbIuY1CU/2v2lKUvGQHqe7iBAnZVijR6Xm5HpAByiDWhP3ScAK
-	IDwpuIX9G9T+OQrS5RZkAbCy3TcdXvrKSG+LvqVQy+KUr29b92cZaJcNAwnzAJBJ
-	lYLRMq+3nbJ9CnzzUa94xGdr+t7Cv7nO9z3we5zj9O0PjD7my4QALTu6UeVMoo29
-	Dowwiw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j27au2h8e-1
+	3P3TooIy4YwC/bRKTvp92lrYDHs8AxA9i4f4CNemL4U=; b=pEPfKawDG7fq90N5
+	w4DnlJwKZNzf1oYKZLvKfZ/69TrOVh6/aOzyDAjfQUEBzh8TVC5ZRWXArcQgeNWf
+	ay1JAWa4NhxqcoVzbGCK4DauWnh5ELVyzCB894yA5hjX9OE0jZtllYTTTmlu9KkC
+	cZ5hEtKbBPknbi+6NmybKtXtQiGm4w1fhYcYG+STBj/2OvmCx8QycmnLKB8ovWLt
+	KEdozHda5nRFd43Z+U9ycfFAIUctnfS/JrfupL8J9vcGIbbhbBFfoqGJ0vsxnmec
+	LoboY6I/HW3ZjFkTCnWE5y7A3Iqm9GTaBK38cvuj1ydFjwqPsfYAXxsiJXUY7aUR
+	J2+slw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j27au2h99-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:42 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3b4232374d6so728456a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 23:42:42 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 07:42:47 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3adeba76cadso636002a91.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 23:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795160561; x=1795765361; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795160566; x=1795765366; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bO+5h3pUzT673sUfWD3vvl2mmFCi713KGxBpQv+PfLY=;
-        b=PuKRBhf1gxRRIvXLs3R/9XzDMdFvyrJ0yX/OpZF02cmQAlATE3H8GTbXlzee6o8jvG
-         tOYSgAaDWa8BOTgjmGNcc7ADAGfK+VFGsOAbDlVLq2KQn3XrryB2qGoJxeRTA+CYBMmQ
-         oZMaOkBJ3NotmKw2sVoTcIQ29wpI9cTjmDeZMVB667uTCazlLFhpYai9bXJJ26b3PCwv
-         i4F6m00cYHpiN92T9nP+7Byks0K3MZvYGO51qyddXtCVCfhaXNHrNNPI2ussNLsj9KPe
-         G8yVReqIC3HVplRmo5jkW3/ZjnJYUswUSgb0EMxpPytwWiJd+SiFn8zA1KR7lVb0gtoU
-         0ayg==
+        bh=3P3TooIy4YwC/bRKTvp92lrYDHs8AxA9i4f4CNemL4U=;
+        b=Zn/CSdY2rRD33exT2i0GuJ9euLTlMZEheBzHzR2kK3wLzDcYYHc5i2my6fX5lnAINH
+         o8Q+GztoHnTAFPBEkTp4Uyy5ySxf/dXLaraSefET1WHNw/XMUbQfB/118hUr+FJFeftj
+         28hvJxwfp310QBVlWnsGFlUKOHaIegijB11RzhomayOl2ctAvzS91Yx+YKm3FkcKLZ+Z
+         8FBISkCbrDMpfo6CbGxiNiqZx7BlkGZHvNKzJuzGr2Tz1PSCsUihVamycPNf0GqhgFn5
+         qyTtrDWp6HfiUXhZQWUAdCLgemBFHGmO0dVxqL3Fq6IHgQMCSXfoPkIx4nfY6U3LrBlp
+         6VDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795160561; x=1795765361;
+        d=1e100.net; s=20260707; t=1795160566; x=1795765366;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bO+5h3pUzT673sUfWD3vvl2mmFCi713KGxBpQv+PfLY=;
-        b=p+bmt7GwTA3hJwsM+7V2SpWujJx5vn2bGNATf8LkC/ShFP7J0V/NR0+yhNrK+PBIvx
-         CUb1yT063z407zGzJ1L1y+Gner9mekFKivojkDZCQX9vwAGDvibZHxm9al1ScDQcoZs6
-         8MUFGFwn0lj1o7bzJcjI0oQE1bYBsE4wn8rYZegd/s/zcETp7j2xTKYN6D7gYi6UvcE0
-         SeSEXnAHPIakc8u0QSLSMZNgN9PI8va42uActdXB8zQ/68a74lmQ58YIo3sKCE6luJDE
-         nX1Pip69/sNDFlarC/MU02/6Mti2ZT/8ERj/xqgx/94OOQaBqsz4olxfPjw5nR1RjxIK
-         73tw==
-X-Forwarded-Encrypted: i=1; AL+hErGsR+qJf+X4AwBdFABBiRuB0sUpzYRpXj3igLv3wj1LTzI6NoSykAEFujFY+IGoJVP1/mxZVKG+66bmiL1J@vger.kernel.org
-X-Gm-Message-State: APuU4Z9gOKymB/p00/KVwgFfGKte+BES9yBQkuqeXQpchG6HGu31ozrp
-	Z1UlEvxfXnchJl+RQs6f25SKBZ4YsHEv9RSwv7gsXbSDVWU09wstvhdVFgtzqBHafmmm6EJRkON
-	ZBrWIedw9Z3gYHJq5w6uruve/j45qgyEdU/wgDgIfBf1huhXA4iio1/5Sw7cLwfWMzoKw
-X-Gm-Gg: AZFdTZcEma+M+6IV6tmpyp4NwMrFPxS+8KwVVikrPdlzMCCExhPHekjauqik7jxIqpz
-	/Q+hszPKisanpcMJORK/KnD0HZ9UjpNCM2FVF1ZtqDa3v5Hn8LKBSO0X+J7rmwCx6Sl5CI3CG/s
-	NwP8LYaiWqf5a7CyawE412kyGF94muAdNdo2C3q4VZOAqd/4qY3QFAG3bmoAMAS2PSF0ya7DJ6R
-	Iz1pI+S9zerNxha7A0YT5p0X2Ueh8GiYbsuRdckv7bJtK/W040MyNLaGGemu8Xf4eZJ9fVV4mdc
-	yFKfZA5XRH1lkNz3yiplYQN9wnSeJaqrOIfRFzoW7id+C9P8kLqBXWNUtxLjwjcrE3WFv0ZSkw3
-	pFhGSuTLohU+2T8nMSd05nfQZ/f0ptYoEIJHT4BAjcDTdJKFGZy3N7Unm5u8pKtBA3J0/zqIOxF
-	e4hPtGJfI=
-X-Received: by 2002:a17:90b:4d10:b0:3ae:533e:7e40 with SMTP id 98e67ed59e1d1-3b41c8d9bedmr2142755a91.23.1795160561396;
-        Thu, 19 Nov 2026 23:42:41 -0800 (PST)
-X-Received: by 2002:a17:90b:4d10:b0:3ae:533e:7e40 with SMTP id 98e67ed59e1d1-3b41c8d9bedmr2142732a91.23.1795160560923;
-        Thu, 19 Nov 2026 23:42:40 -0800 (PST)
+        bh=3P3TooIy4YwC/bRKTvp92lrYDHs8AxA9i4f4CNemL4U=;
+        b=kCGzLQ/hz6gLLOImZe3NHQ8cViIIMhBXWOD+3cXiVry/Gl9gyxa7T8T/umpXFBU1q1
+         61PnvoNzFbCgKnGnzajyTycV0Cw2vpiUd6axDzhOUfxEU8SMJahA17Xg5y5qrv9Ps21A
+         w1SCupuN5dYJUqVpejSzPLJdbnE4+sdVMOPVti+8iWj6UWwmpUWFyHEAyaeRX0rWigGC
+         o5zQz9aUhK+MOal0IgySZMTdFW6sfaVY0t6Ze6Jgas+SVdlFYg6dRDr7k7um29dTSz+5
+         l348LnTT7J6oOMmXucpHdg9zaxdugQxbt2KLFP/b9g8KFdnOGkNP4o1+e1AYE9PWqNpz
+         pupA==
+X-Forwarded-Encrypted: i=1; AL+hErFPIE9ZJVgXNk0Yx0K/MZqoOhndUUp+ej89yyeUzCyS4vG0HbDfIbLQJqv1ym0D9jxYEby6IssW0gcIWoUI@vger.kernel.org
+X-Gm-Message-State: APuU4Z+KucZGZTJx680LKeDUEuEz9hoRcbg1kbhE9hHqtMNvdNJ5uzC8
+	lU58SacMjTDZgZNknpWr49w2LKNh6t6gf3jz8I27cSjNSxs9kWzvX6td8VGcStrqzhCOZXtM9V4
+	+VRSHuE5Omxxj3TdIndXJe8oAffAkLeRXcCDgRdMvLn8MOf6HfslNOKMwIIAgVJYvDRUs
+X-Gm-Gg: AZFdTZdnvTJ6Wfwqo0ZbP5AHycYgx/DwGmtRwiGzzEhvW/u+GNidlrXdwSfuz7SdsC5
+	bJh54gZPl7FkE5E+/VMgD9xtFXkWdM1rKSv1jarwt2/SntqkmypfMTSocHcRGk4bj5N9ia1Xt+r
+	sO6+mVF6zBCbqdQgTyFm4m0kvL5iqo6JZ63Ip2Nn1oW07Yc3WaK79kfTPNTC+Rls++2N2NV9Yjf
+	ZDM/zQF61Twr4UZqKgTKc9oNovpPC1TO/KrRoe6gzajmDp8Qy1pv/eIWmq5prMF7hBM91SYGI83
+	aLYLUO5zgFEjPea8DNTPisNOFG1Q/+dJEnaCGsg58dvpHNJZacxyuuQ4dvPC6m85V0DTv1pTzZa
+	1FHpXpB7QCBGwgcno4COxo3D9i10kqmwhdWC0xaLCsfSwpuYkVmT2mrghL6jqoTAvqFOJgwhTBH
+	j+nOH6TjY=
+X-Received: by 2002:a17:90b:4a48:b0:3b3:c675:d923 with SMTP id 98e67ed59e1d1-3b41c908109mr1955440a91.28.1795160566240;
+        Thu, 19 Nov 2026 23:42:46 -0800 (PST)
+X-Received: by 2002:a17:90b:4a48:b0:3b3:c675:d923 with SMTP id 98e67ed59e1d1-3b41c908109mr1955410a91.28.1795160565766;
+        Thu, 19 Nov 2026 23:42:45 -0800 (PST)
 Received: from hu-bvisredd-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b4323bda5esm119935a91.3.2026.11.19.23.42.36
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b4323bda5esm119935a91.3.2026.11.19.23.42.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 23:42:40 -0800 (PST)
+        Thu, 19 Nov 2026 23:42:45 -0800 (PST)
 From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 13:12:05 +0530
-Subject: [PATCH v3 2/3] media: qcom: iris: Fix IRQ disable depth imbalance
- on watchdog interrupt
+Date: Fri, 20 Nov 2026 13:12:06 +0530
+Subject: [PATCH v3 3/3] media: qcom: iris: Skip register access in IRQ
+ handler after power-off
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -119,7 +119,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261120-fix-disable-irq-safely-v3-2-82f9561394cb@oss.qualcomm.com>
+Message-Id: <20261120-fix-disable-irq-safely-v3-3-82f9561394cb@oss.qualcomm.com>
 References: <20261120-fix-disable-irq-safely-v3-0-82f9561394cb@oss.qualcomm.com>
 In-Reply-To: <20261120-fix-disable-irq-safely-v3-0-82f9561394cb@oss.qualcomm.com>
 To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
@@ -136,32 +136,32 @@ Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-media@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         Vishnu Reddy <busanna.reddy@oss.qualcomm.com>, stable@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795160546; l=5737;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795160546; l=3824;
  i=busanna.reddy@oss.qualcomm.com; s=20260216; h=from:subject:message-id;
- bh=jL/rsl0+6+SlvQB04um7Rgb1J/JNey12+a0JxUfshMQ=;
- b=9Gd5QA3fMAPjPkZSlGleJ5TnURRs6HmmhJhNKK4xZ8y8IvhEq0ZFy3lZiyBv7kM4iDKrNsT2C
- SpdekXKgKh3CyhAqO23eYm6fgDbcXRKJbV5JyyqhylRM83aFAefUai/
+ bh=iXUOI58v6kMBfsFr8HiiRVJVTLJdxn/a84melQWTXhA=;
+ b=HbLLiFbKrXMtrwVZkPPtoPJGi1LMi/4DLPd6HugzGcTU1AZORkd2TKLtQvMLMwjC4ObdWw4qU
+ COXsa4UV4DbCZ7QTI/Q3LqUY5vFzGMdO2MBLa0j5zQI+pewmUnvLUyE
 X-Developer-Key: i=busanna.reddy@oss.qualcomm.com; a=ed25519;
  pk=9vmy9HahBKVAa+GBFj1yHVbz0ey/ucIs1hrlfx+qtok=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAzMCBTYWx0ZWRfX8HQEq4NAgxO7
- i7stilpHF9xDQTvt5TXEhxS+31L3vhk94nr5w4zlUVHG+3/o6E2dzYaHwc6wpo20VYPoUl/XaNd
- zM00i8L3sDndJyz4oWEQzZXqzYqYFiHBFuNIVrvkkcprOQFIu3/AvReUwGO1fRLC+nrCe/9rjEy
- uToI3onUtOmsNYV5KZIdRgo0uJyFMYHAzCMm6uUFVVnFJejGDk27L934MnFEFMuRCS7EPp1QCQM
- wyCRyUs7nHcCMKvgOQBKYst8izOaGx7nTZZnDVvzdNLOz8+xkdRXj0suMV8scFM5jEYKNptddWP
- +LI4G2La6TRkn+2ISwNUmf6Hg6m/Jkt6S+U3CM9QdxQfYn3n5Ol4ABwIYNJNbTq44waOJulT3+T
- VzfbWfu9A0IrMfkG+DCOpVHHuigavkE7zQqkwt6GkhkbNLscqKjozid2zxi3vgtIUgyyfcQn255
- H8lGKKyaBhkvWz6Bvpw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAzMCBTYWx0ZWRfX5/GpE4Sb84kA
- 3Xjjb8l2c9SEOCkSS3n2aq8u1jEm6NoRKcv6W4BNskCOF+kWYTBZoA5MBsHW4Gl3H8M5Kx0fj4C
- mF7kkCwhOL2yqEoYpvuQhPcDBqFjIEQ=
-X-Proofpoint-ORIG-GUID: Ms1Arxc2ndgCUtSM73kfdzGkOeSLLLGY
-X-Proofpoint-GUID: Ms1Arxc2ndgCUtSM73kfdzGkOeSLLLGY
-X-Authority-Analysis: v=2.4 cv=KuHYSmWN c=1 sm=1 tr=0 ts=6afff9f2 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAzMCBTYWx0ZWRfX+ya8QcnR2ANK
+ HfQNeWWZ6iMYXDa/1VaBv1inX8ehPIbWDvRNs8aVzxKNLkdkxVfStyWoc4pD72Bv9a/oi5cyUlS
+ zDO1Ef1O1+IjSPbAS6UfcZqQCMrXRp5Fv3mCXNBEd6ULGCQd84BnlRGDdZCUyOvm9oTtah58JEX
+ OXTJENoJEmUib4qJh6SSkmFnNO+42CT12fBTnxz4GZzTVGUI4U9/eWqZxAK0gecC8xKybrMVHQp
+ kPM2CrjJbZJxH7JYBpRz9wrb17vtBzYs2hLaC1zMIorkSOX2FA16IHj8UcVA9iDEdUDleOi6pEe
+ wz/GX8Q0SHbMqAQ0nfJCBFnrtpKw3qiLJpSzN79WROcy8WvGEsoacnCJ/V6jd6jd74Kos23/HCo
+ 8pmXWE/UoDIoosjvxjRe69Ibru/WvRbhfBO+3lg14xg6eZOKj9AgpIzpD5AKdmA96WSLR0r9PcN
+ XJJ6G5UmoPJ5wojPWpw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAzMCBTYWx0ZWRfXzEV7pd+3az33
+ 2xUP+1d5mRO7NnsQWQnzPwJLhcZ4jjNdDuf1yBucN+UIctdZyYid1BN3l5L0F1Wmz2ioWmKLEZB
+ XBFB5Nsi4JVt9ZlIme89HsM0O+7Udas=
+X-Proofpoint-ORIG-GUID: 5wBfYzx4SpkU3DM_gq2SguLcjg0iqPCm
+X-Proofpoint-GUID: 5wBfYzx4SpkU3DM_gq2SguLcjg0iqPCm
+X-Authority-Analysis: v=2.4 cv=KuHYSmWN c=1 sm=1 tr=0 ts=6afff9f7 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=kDI4m3mkCzHl_6bmBGsA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=acxGgeGPnh0hIPSWkr0A:9
+ a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-20_03,2026-11-19_01,2025-10-01_01
@@ -172,144 +172,93 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
  definitions=main-2611200030
 
-The hard IRQ handler disables the IRQ for every interrupt, and the
-threaded handler re-enables it for non-watchdog interrupts. This
-duplicates the masking and unmasking provided by IRQF_ONESHOT.
+The threaded IRQ handler reads and clears the interrupt registers
+under core->lock. Power-off disables the IRQ without waiting for a
+queued handler. If the handler is woken and queued around the same
+time power-off is entered, it runs after the VPU is powered down and
+accesses the registers of powered-off hardware.
 
-If power-off runs after the hard handler disables the IRQ but before
-the threaded handler updates core->intr_status, and the stale status
-indicates a non-watchdog interrupt, power-off disables the IRQ again.
-The watchdog handler does not re-enable the IRQ, so the two disables
-are not balanced by the single enable in power-on.
+disable_irq() cannot be used to wait for the handler. The caller of
+power-off holds core->lock and blocks in disable_irq() waiting for the
+handler, while the handler blocks waiting for core->lock.
 
-Request the IRQ with IRQF_ONESHOT and remove the hard IRQ handler.
-Explicitly disable the IRQ in the threaded handler for watchdog
-interrupts to prevent repeated triggering. Power-off always disables
-the IRQ once, and power-on balances that disable and any additional
-watchdog disable.
+Track the power state in core->powered, which power-on and power-off
+change under core->lock. The handler checks it after taking the lock
+and returns without touching the hardware when the VPU is off.
 
 Fixes: bb8a95aa038e ("media: iris: implement power management")
 Cc: stable@vger.kernel.org
 Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/iris/iris_core.h       |  2 ++
- drivers/media/platform/qcom/iris/iris_hfi_common.c | 14 ++++----------
- drivers/media/platform/qcom/iris/iris_hfi_common.h |  1 -
- drivers/media/platform/qcom/iris/iris_probe.c      |  5 +++--
- drivers/media/platform/qcom/iris/iris_vpu_common.c |  7 +++++--
- 5 files changed, 14 insertions(+), 15 deletions(-)
+ drivers/media/platform/qcom/iris/iris_core.h       | 2 ++
+ drivers/media/platform/qcom/iris/iris_hfi_common.c | 6 ++++++
+ drivers/media/platform/qcom/iris/iris_vpu_common.c | 2 ++
+ 3 files changed, 10 insertions(+)
 
 diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-index 3e4cf652bf39..468ccb551ec3 100644
+index 468ccb551ec3..ca1a55bec334 100644
 --- a/drivers/media/platform/qcom/iris/iris_core.h
 +++ b/drivers/media/platform/qcom/iris/iris_core.h
 @@ -70,6 +70,7 @@ struct qcom_ubwc_cfg_data;
   * @message_queue: shared interface queue to receive responses from firmware
   * @debug_queue: shared interface queue to receive debug info from firmware
   * @lock: a lock for this strucure
-+ * @wdt_irq_disabled: IRQ was disabled by the handler on a watchdog interrupt
++ * @powered: VPU is powered on, protected by @lock
+  * @wdt_irq_disabled: IRQ was disabled by the handler on a watchdog interrupt
   * @response_packet: a pointer to response packet from fw to driver
   * @header_id: id of packet header
-  * @packet_id: id of packet
-@@ -116,6 +117,7 @@ struct iris_core {
+@@ -117,6 +118,7 @@ struct iris_core {
  	struct iris_iface_q_info		message_queue;
  	struct iris_iface_q_info		debug_queue;
  	struct mutex				lock; /* lock for core related operations */
-+	bool					wdt_irq_disabled;
++	bool					powered;
+ 	bool					wdt_irq_disabled;
  	u8					*response_packet;
  	u32					header_id;
- 	u32					packet_id;
 diff --git a/drivers/media/platform/qcom/iris/iris_hfi_common.c b/drivers/media/platform/qcom/iris/iris_hfi_common.c
-index dad906d03fdc..a27c543e75bc 100644
+index a27c543e75bc..b7be3ccf499a 100644
 --- a/drivers/media/platform/qcom/iris/iris_hfi_common.c
 +++ b/drivers/media/platform/qcom/iris/iris_hfi_common.c
-@@ -90,13 +90,6 @@ int iris_hfi_core_init(struct iris_core *core)
- 	return hfi_ops->sys_interframe_powercollapse(core);
- }
+@@ -98,6 +98,11 @@ irqreturn_t iris_hfi_isr_handler(int irq, void *data)
+ 		return IRQ_NONE;
  
--irqreturn_t iris_hfi_isr(int irq, void *data)
--{
--	disable_irq_nosync(irq);
--
--	return IRQ_WAKE_THREAD;
--}
--
- irqreturn_t iris_hfi_isr_handler(int irq, void *data)
- {
- 	struct iris_core *core = data;
-@@ -107,14 +100,15 @@ irqreturn_t iris_hfi_isr_handler(int irq, void *data)
  	mutex_lock(&core->lock);
++	if (!core->powered) {
++		mutex_unlock(&core->lock);
++		goto exit;
++	}
++
  	pm_runtime_mark_last_busy(core->dev);
  	iris_vpu_clear_interrupt(core);
-+	if (iris_vpu_watchdog(core, core->intr_status)) {
-+		disable_irq_nosync(irq);
-+		core->wdt_irq_disabled = true;
-+	}
- 	mutex_unlock(&core->lock);
- 
+ 	if (iris_vpu_watchdog(core, core->intr_status)) {
+@@ -109,6 +114,7 @@ irqreturn_t iris_hfi_isr_handler(int irq, void *data)
  	if (core->hfi_sys_ops)
  		core->hfi_sys_ops->sys_hfi_response_handler(core);
  
--	if (!iris_vpu_watchdog(core, core->intr_status))
--		enable_irq(irq);
--
++exit:
  	return IRQ_HANDLED;
  }
  
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_common.h b/drivers/media/platform/qcom/iris/iris_hfi_common.h
-index 16099f9a25b6..366c9b81675c 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_common.h
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_common.h
-@@ -157,7 +157,6 @@ int iris_hfi_core_init(struct iris_core *core);
- int iris_hfi_pm_suspend(struct iris_core *core);
- int iris_hfi_pm_resume(struct iris_core *core);
- 
--irqreturn_t iris_hfi_isr(int irq, void *data);
- irqreturn_t iris_hfi_isr_handler(int irq, void *data);
- 
- #endif
-diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index 343e44c6b9c4..cecd2282e29c 100644
---- a/drivers/media/platform/qcom/iris/iris_probe.c
-+++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -311,9 +311,10 @@ static int iris_probe(struct platform_device *pdev)
- 	if (IS_ERR(core->ubwc_cfg))
- 		return PTR_ERR(core->ubwc_cfg);
- 
--	ret = devm_request_threaded_irq(core->dev, core->irq, iris_hfi_isr,
-+	ret = devm_request_threaded_irq(core->dev, core->irq, NULL,
- 					iris_hfi_isr_handler,
--					IRQF_TRIGGER_HIGH | IRQF_NO_AUTOEN,
-+					IRQF_TRIGGER_HIGH | IRQF_NO_AUTOEN |
-+					IRQF_ONESHOT,
- 					"iris", core);
- 	if (ret)
- 		return ret;
 diff --git a/drivers/media/platform/qcom/iris/iris_vpu_common.c b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-index 1e183fc4e58c..54ee7a671ef8 100644
+index 54ee7a671ef8..73ac63376b91 100644
 --- a/drivers/media/platform/qcom/iris/iris_vpu_common.c
 +++ b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-@@ -239,8 +239,7 @@ void iris_vpu_power_off(struct iris_core *core)
+@@ -234,6 +234,7 @@ void iris_vpu_power_off_hw(struct iris_core *core)
+ 
+ void iris_vpu_power_off(struct iris_core *core)
+ {
++	core->powered = false;
+ 	iris_opp_set_rate(core->dev, 0);
+ 	core->iris_platform_data->vpu_ops->power_off_hw(core);
  	core->iris_platform_data->vpu_ops->power_off_controller(core);
- 	iris_unset_icc_bw(core);
- 
--	if (!iris_vpu_watchdog(core, core->intr_status))
--		disable_irq_nosync(core->irq);
-+	disable_irq_nosync(core->irq);
- }
- 
- int iris_vpu_power_on_controller(struct iris_core *core)
-@@ -521,6 +520,10 @@ int iris_vpu_power_on(struct iris_core *core)
+@@ -520,6 +521,7 @@ int iris_vpu_power_on(struct iris_core *core)
  
  	core->iris_platform_data->vpu_ops->interrupt_init(core);
  	core->intr_status = 0;
-+	if (core->wdt_irq_disabled) {
-+		core->wdt_irq_disabled = false;
-+		enable_irq(core->irq);
-+	}
- 	enable_irq(core->irq);
- 
- 	return 0;
++	core->powered = true;
+ 	if (core->wdt_irq_disabled) {
+ 		core->wdt_irq_disabled = false;
+ 		enable_irq(core->irq);
 
 -- 
 2.34.1
