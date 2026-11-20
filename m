@@ -1,47 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795175210;
-	b=bkz24ytgiW+LkJYN/uPya5iTERt/exbfkXrv2Sp0zNPGRmhMWQ+hMMu/EyJzb2K5qazZ
-	 NdPxCj1zqR1kxFNfpoiP4AoB6o9nHWIjqVc2Fg4aaCdUDqfkvnaH3MauUU2d++IL4JB5W
-	 d0VDYkEWa3AHuYfPBcMpm609jxLH4hUO+3rUnUNUsgZiJ9qo7UXPEs6YU3qbKsA2zHkQ6
-	 ACnV7UFoXCdefTb0BP4o9juWRa1X/xePvPtOrPkLcZHshLkfJVSwYKBJXn+ijF68mLEBM
-	 vqi4ttTBpv5AnhXy8R+xGNnvHZvVB+Q820pjfNPlwhUsNyNZtiMNsP45Vo1dP70Ej4w==
+	t=1795175301;
+	b=N4qR1ZoMm3sPP3UWN0UtWHtaSfSQMEwJTJ8cHlpTO/jlNMMXOjwRRgftrXLtUrEYwPgU
+	 /tbUljLmX2SLWyR6j96RxJ/Jyg4mv9NyoxyaIVorPcMl5lL6zRXp8/NBf2HvjnrrAJf5r
+	 5WiNWMvALkj2PNU0Hyz7+nLeJhxZ7MV/scPU1+AW5RYxm6ayPhnFvIb50mqqubCKQNUrh
+	 3t2SnBnzlIoGBIK+h8Pp5mpIfRk1d1bqRUpnzRSvzxX+5uK2CtDHZgaghVL3noGPJsiy5
+	 G/F9mfwi8KTu+uPn9aeF3ED8RpF6qvh25Ne9ZrCrIbC62bmtQkTBCl84+TjLIgujK1g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795175210;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=f21tDZjqKcOPY336nyAIM7KO47wuCYsqNootvKfID7I=;
-	b=leu+NDTmqb9EQGhTXqoLWmYs9iEtX40L5WJZD0kg3LqM3P2z0HNPGohLb1SUzWSv59pk
-	 OLul6rtDjPMGQzBPUpplmoE29Ri84wfFJyPzKqH+wmmBfRBL86K7s7OQqhpIuoqlEiXi4
-	 +qT6xNQYxsSgKgXWJCqHP6iaV/s+xenwx20YltXsoA2NGdWkcYmSaRuKq9J4psIJa/CjH
-	 qxYL7i4kIQxFhzibvuywmjGX8pY/O7M4f0ewxKdYtbMitBoXoPAdxjEtdXjuzalrIZ4b/
-	 8oEWu4qghzWaGKpaGsT2jcXtxtwTUBsoYDUeirAYzEvkqpI0Fbj6FCVir+1dX28KuTA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795175301;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=KCiZ+OPPiUqNo96uGTMFbWd85A/AQQGSdw1qgemTJ/w=;
+	b=bsga6sKOoS3VzzOOODgwlFqeqA7e59bEzlFU+6S7zaK1hyNvLgn7owyoaOiSUvOino1R
+	 DtGyE4uXU6nwVQMcY/ZzOZtMWuRZ0VLa71zErCC/JxJ6gETO6t6BFyjso3DLFqe0l3w9p
+	 UPGLAsNs3sRiP9OdQpXXrfXopCsjTRA8dT6Dx4E85tKwo2GFawxAF4GSYQUDv0x9GayVd
+	 Gh2X3suvJbunGk7/NH8ONQlrLLWGfsaAdsrThSrewKz0c/IT+74qWQABr5tEst1JaeTpz
+	 CzW95h+cVlf+xGUdJQuqNAkB1VAwDXOX1ZWcFcWF+ff4o010olVrZNEeSMmxtMG0XTQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="aQBfA7q/";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g3FtLrEd;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A786606A332;
-	Fri, 20 Nov 2026 11:46:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA9D0606A320;
+	Fri, 20 Nov 2026 11:48:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aQBfA7q/
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1187C1F000C0;
-	Fri, 20 Nov 2026 11:46:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g3FtLrEd
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A0521F000D2;
+	Fri, 20 Nov 2026 11:48:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795175209;
-	bh=f21tDZjqKcOPY336nyAIM7KO47wuCYsqNootvKfID7I=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=aQBfA7q/tbMay95w3GWYwDt7xvivPiImCng8iARMDBbmWY958yEgw59v0ccX8B83u
-	 Q8FX3fskwhhqQMnENO8G7WASpkrUPKEuLugVef77+ld7WH3Qo1aSkvoGWlcmkGlAjG
-	 6XZ/gWt/2c85QS0M64vhPmFDABTleS3qCw5uzlI2FqGJt4yIghUq2fUf4vU2XEYnlO
-	 LPQadcaQmV/mdT8KFbTolGzfAOgsCZ0FfJkEl7pI9U994n6WsU/NtWf1U1cpHLn28I
-	 +3K8eYtpUN6MOfZ6IlLwUgN+6mOYjeGl6z4f6M8kGLKrdSU1302SGJoTfjBoZ6OBUA
-	 caRtSFz56R/jg==
-Message-ID: <00b0f4e3-e726-4537-8603-58570e79cc68@kernel.org>
-Date: Fri, 20 Nov 2026 12:46:45 +0100
+	s=k20260515; t=1795175301;
+	bh=KCiZ+OPPiUqNo96uGTMFbWd85A/AQQGSdw1qgemTJ/w=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=g3FtLrEdDCcx7zeFiksA1MQYSbIwpjOYCqyMb22iOuD1Kzfo2nH4UirJGUXFG+BeW
+	 9nksGUdMrH7NfSFyv5Zuipmumnckn+a3q0sMkc7pOJM+3e+F6f+cYFbrjzVsSXJD3M
+	 7Bpv1kEHdQc5B4OSIV1Td+lcOn6osFQuRK61tiqQHksevi42quuiGwZq3KS+zwRnbV
+	 Y15ZgS11PuI/91TsbvXB6rpn1DTO36ItmJ+HPinY95jEKd8KGbddMVr6NfPqyfwi5E
+	 0swLKxNq2DqmrM/FAjxhdCYdxtF+ZlH25SlI8hZY3KILrFnjFznbjundNzYdoo5VUw
+	 SiJLcWRdv3UHA==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,95 +49,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] devfreq: qcom: bwmon: Reduce zone1 threshold count to
- 3
-To: Pushpendra Singh <pushpendra.singh@oss.qualcomm.com>,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261119114426.4050161-1-pushpendra.singh@oss.qualcomm.com>
- <cf2091e5-44a3-473a-a5e4-d9044b053b45@kernel.org>
- <9130f308-e264-4ada-87cc-95553c5e9e0f@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <9130f308-e264-4ada-87cc-95553c5e9e0f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v7 06/23] phy: qcom-mipi-csi2: Add SM8750 support
+From: bod@kernel.org
+To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Frank Li <Frank.Li@nxp.com>, linux-phy@lists.infradead.org, 
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-i2c@vger.kernel.org
+In-Reply-To: <20261114-add-support-for-camss-on-sm8750-v7-6-8ff2a11835f6@oss.qualcomm.com>
+References: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
+ <20261114-add-support-for-camss-on-sm8750-v7-6-8ff2a11835f6@oss.qualcomm.com>
+Date: Fri, 20 Nov 2026 11:48:14 +0000
+Message-Id: <179517529405.2846709.10906711375536299427.b4-reply@b4>
+X-Mailer: b4 0.17-dev-e3fc9
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1472; i=bod@kernel.org;
+ h=from:subject:message-id; bh=HkCiTy52VEw3U3iHmphqDHJaeM19p2HQlEUAvtfV7sM=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrADN+rM7FGOD4L/bE61iccAJDLA1GBgvIi9K25
+ 7TFu2ta+NqJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawAzfgAKCRAicTuzoY3I
+ OnXgEACgF/ZyF9GFxmZtzZJvXcWq0YAAS8WJq/XOHG+rnlzVjz+XuzVJHpQJWwk51LrOn/wfCjN
+ Nt0D2a1l3jpyVyHwVIk9NBEYITqU+lUUrHni4ZgtoFD+hL8a75/pVSxyy53QgYf39WiC9t3LxY4
+ AkxKrjSz0A8WZDxolJYT9xcQyaN6aO4WNV34z6YCaMHvgE8YvwIBuXuSGvTbhlCq7zaPtB/LzfC
+ gX67yae2iIeQ5TSqXPMhUHmDCpmVm7C1eSrkGO5lsdud5UQZ+jdTU73pJ85jB4URNwGFgPlY9tA
+ n0VYIicr3vkyPPIvoxYT4Yo9RA8noTgxNaPQnjpo1YZIQYuBek2QxpV+gr5mWdA0gv3mn6vDB8i
+ jal2FESfQqkgdWuymUDxCzbNoOVMb0LLQKSY9Lvs5ZqRl72ZKBDjuEc+rem5yK18DRHFdOUM2Sy
+ BGDzevkaaAMZ4A2liil0oGoKFwPb3uyWnBvwGSNLBHH6+UyoK2svjyqMJIL1KhegYWUM9M9xfKB
+ 5xPpB8joDxgPlSgB23rj0dtvbVbMKzkTXY/BD4tMgkRql9u7F3Y1Hi7c1dKgvDKjNo89+2+Pff7
+ y/0g6iYNGwK8VVUk6MPFrKnfMRmlMNdvCXjiemQe6U9jIso7tywrVuX3keqDelvK/YN35RHwWAz
+ KoYo4vdep5v594w==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-On 20/11/2026 12:01, Pushpendra Singh wrote:
+On 2026-11-14 19:29 +0800, Wenmeng Liu wrote:
+> From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> 
+> Add the SM8750 CSI2 DPHY compatible to the match table, using the 3nm
+> DPHY configuration.
+> 
+> The SM8750 CSIPHY nodes only carry "qcom,sm8750-csi2-phy" with no
+> fallback compatible, so without this entry no driver matches them and
+> the PHYs stay unbound.
+> 
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> ---
+>  drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
+> index 165e3d026872db85e54a99c5dd25ca68a1a4e450..a672bf318487b16aacd1ecf165554cde3f38e292 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c
+> @@ -444,6 +444,7 @@ static int phy_qcom_mipi_csi2_probe(struct platform_device *pdev)
+>  
+>  static const struct of_device_id phy_qcom_mipi_csi2_of_match_table[] = {
+>  	{ .compatible	= "qcom,kaanapali-csi2-phy", .data = &mipi_csi2_dphy_3nm_kaanapali },
+> +	{ .compatible	= "qcom,sm8750-csi2-phy", .data = &mipi_csi2_dphy_3nm_kaanapali },
+>  	{ .compatible	= "qcom,x1e80100-csi2-phy", .data = &mipi_csi2_dphy_4nm_x1e },
+>  	{ }
+>  };
+> 
+> -- 
+> 2.34.1
 > 
 > 
-> On 11/19/2026 5:37 PM, Krzysztof Kozlowski wrote:
->> On 19/11/2026 12:44, Pushpendra Singh wrote:
->>> Reduce zone1_thres_count from 16 to 3 so the driver can lower the bus
->>> vote after 3 sample windows instead of waiting for 16. The previous
->>> 16‑window delay (~64 ms) is too long at higher FPS workloads,
->>> causing delayed decision making and measurable power regression.
->>>
->>> Power and performance measurements were collected for
->>> zone1_thres_count = 3 and 16, with the following results:
->>>
->>> Usecase                         zone1_cnt=16	zone1_cnt=3       Delta
->>> YouTube streaming (power)	4126.49 mW	3991.30 mW      -3.28%
->>> Google Meet audio (power)	3058.79 mW	2929.73 mW      -4.22%
->>> Speedometer 3.1(perf)		25.8		26.5            +2.7%
->>> Geekbench 6.5 ST(perf)		3907		3905            -0.1%
->>> Geekbench 6.5 MT(perf)		18636		18680           +0.2%
->>>
->>> The reduced threshold therefore allows BWMON to react sooner to falling
->>> bandwidth demand, providing measurable power savings in the tested
->>> workloads without a meaningful performance regression.
->>
->> I do not see how you resolved my comment, so same comment.
-> 
-> Thanks for the feedback. I had addressed the previous comment by rerunning the power and performance measurements on the latest kernel (v7.3.rc5) and shared the updated results in my previous reply[1]. I have also included these results in the commit message in this respin.
-> 
-> Could you please clarify if there is any additional concern that I may have missed? I’ll be happy to address it.
 
-OK, I missed then the part of commit msg explaining which hardware.
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+---
+bod
 
-Best regards,
-Krzysztof
