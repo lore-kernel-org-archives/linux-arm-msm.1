@@ -1,56 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795179716;
-	b=mQioeNFX9jEhcQpcJ6TZ3nmA1JgBQnNooBfVtXu5EQV+HIzD0tcLkJTEdddHfOZvVu8J
-	 EEzuQGbJJNIzgZxzsBX4ciYi5EqUE5ElqN8aFbxvnk/EhIF8SKP5MniwcpfvJCroVhulU
-	 UgNKRzPFmkDR5raABxqXrV0C73xMRi1IzD/GwZlq/txFo5DXPAP/LVyJQO0+wBGbZpbTG
-	 G39vZ2XnOOnw5VdjBEXSlj/o3PXa0dTkwAI8jsl0d6l4JMAUTydPy4frk/UqdU7SGughd
-	 sW3j8EJqD1ZqjzIdCyblsnjVEGJp4dWh3ae8ihbgbD/DeETTt4QWSeRX77HYEEQV1FA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795179716;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=cYsdqs4y232JPLuAEoAJ25nOUZJElAEMEA3xsIxpxkM=;
-	b=NljDn77F8WUitGG6WP5QLWkqJ26j+qgtGUQHNVyJUa8F3fjrxRaWk8xhiFaIXhDkYEkl
-	 WMuOqibGo7XtXEqTsZQ/1b2vz+Tc56A1JwKFSlqsB8NVyBiz9NHOTKh/+Da5a0vLG2Lpc
-	 YTpajnD0brQzKO0LvK7eWQkoNpJoV+z4KldV2c9M6HYjs2VTMIhpknajZzliM+/3WYYbR
-	 sZVgqOm5Q0B5x/PDUMRHZYMj8j7qks1/KwK1ApgoUsaThz2exM+hWMjnbvQPxCsplVnmO
-	 jLQs7WCfJE3GPtOeGqCXr0eabV1QYd3hlBRTspPTBEQp/hg8rJnaSOzLisjNff1Claw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hs0nlq9C;
-	arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795180392;
+	b=zscoLKCqCYMYv03cdjowYOq59+ixcjM3WVXUOF/hoMRFkJ6ecC2OP3GcuzRsQdEwQpkt
+	 rQSb0vsaL6j0pZnbKByfcpZSC++6+EHJ0NZ1uJLb8ITyjSIvjq9BH0CRSbJnEv2M4YA/n
+	 VfK8l2G2zesvaDRZpfvFGfTWFvkCCSh5/aVlUexeXvAJKmmTOzOv1JaHwPjpYQUWA7d7Y
+	 HFFSzbKc1Noy6wAcqHluPFXdOXDAvGa/I6DLQN6GTmfOLoGu2f3DUeRKg5zWlWBtf0CE7
+	 U+MOfj7MILkIvmG7xoEuLNxfdPPnKkhqUCPyaatQ+zMEwP4aV2DhaFTEIKnbmBmsaYA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795180392;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=A9ldS+40d764zde9QlR/VfxNDRLzrKYiXwhUHC+I/zg=;
+	b=tGovjvX8MMQfPAXFcJHvr898FRL8wwA2KfNpyl0PNNSs9bOW8yNOJgaLB9EfoaWTg1SC
+	 23ipJa5+l2a0XJMq3LEFoclbiMKYpOK8QCy7+S0wnYqmFpw0BaAebTk7jnSohc8f89sgd
+	 KCk07LOm43O9X1ShqAQhKqRUBVimoOwRwFKWOtvMxjoD+nj+A8EaLmOCykG40Khc7zRpv
+	 Mf4xNrBdG54s0qBEEAw/Y3Y7zIDu0zoZ619lbG/EUlj0hUHGBABhMka3ka8VoXPSz85DH
+	 8tYQkiJSM89Q6nsWDDM389MVgVJHprD2WCzbRAbjU89DjlWfCGoRkkblS1C9Et7tLqA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z2IcMwRU;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id EAFD0606A320;
-	Fri, 20 Nov 2026 13:01:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F959606A32A;
+	Fri, 20 Nov 2026 13:13:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hs0nlq9C
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 472B21F000C6;
-	Fri, 20 Nov 2026 13:01:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z2IcMwRU
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795180391;
+	b=3BvO8IJDj3ZfRXV+9JhSOEyy2OBN4m4pA2aBf8vDO1OYEEPcMnvCL8VgR1j0V86FY3+H
+	 GUp0lMj+/j7pBkQGC/b1cnN+V5uklh4TomOnlD4DsQdBfstSYwwKPWxSOFWy+vUwXhIqr
+	 DZ3KOf6iEPw1WDpSN1aq+y1jVvp5fDEmWB3EZ4681Q5Gi9zFPmhcJFgGAMm0yAK4ywqIw
+	 JfN1ugn7BN0uIzgBRtoVodFXFhJO/FqkqoZ74BC1OJmWo4CAAxYeAidh4/rM92yz3ddiz
+	 jsdgOUV8XGjSdkfqJLRt83i+66htNPEkx1Ofpnq5JT6DGlKkZ091SXFcn0DgjNZeCdA==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795180391;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=A9ldS+40d764zde9QlR/VfxNDRLzrKYiXwhUHC+I/zg=;
+	b=UUjI3VcH2M3O784W7cJnlFvVKIf+Gw6KHLGxSmFBzULqnLLelUvTdvJV3lWEd9nmZH4+
+	 b22JTubjDZzkJ7nHruYhc51WNVwkNBOfGyEHgloOpNjGLzQZpdjoQdatcbgJgQwNJUEEn
+	 d0g3JKMtF/4usVs6DWDxUXN+R7ywBzM3VK1CHDAmexwOBuYdVZY/pEny0qJeU1TD53Wcl
+	 whfCbHDKf7gHYTj/1kEO0QWwT8MfJXrDI3MpdYvt3ns4uW/C1VFhoqTjt7XxYWU4zgBIq
+	 KXgTmygdRAKZsaRMBd19/nEdeR0zvwVT+5K3uVkhdNkeXhhsQWb3tttragJdzYqvAfA==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id 0DFC61F000CA;
+	Fri, 20 Nov 2026 13:13:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795179715;
-	bh=cYsdqs4y232JPLuAEoAJ25nOUZJElAEMEA3xsIxpxkM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Hs0nlq9CX1tHPc6W09WRShiUTPcfyAvkwJlCfjKI7TYxn+t8Q/aP2TUoCYARmANMA
-	 4BQ87lqlXVv2qruQ0wbMfzyX5DRzA/wACHorYkehbMxMX3vn6Yz7D+shJ0PSm16r7w
-	 K20Wq7agCxBEt3jBRYG4WZmw2siy6zshIwcFZ1dSVeVpvf9d4ahXXeFQFLKMLLL2bH
-	 BHTKa6kYB1e5j5I/FF/ndiR+kewDs/5n2GVda1zNzdPWCY4AXkg23p5al8zvLmZKbF
-	 rGKW9dp15GAXjXGqvVQUJXu/+U7mGfRtYv7UBR0hAZb+HL7kEkMYbdMgVO4Ru3eufC
-	 gSFBulHJbEefg==
-Date: Fri, 20 Nov 2026 15:01:52 +0200
-From: Jarkko Sakkinen <jarkko@kernel.org>
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jenswi@kernel.org>,
-	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
-	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-integrity@vger.kernel.org
-Subject: Re: [PATCH v5 0/3] Add TPM support via Qualcomm TEE TPM TA
-Message-ID: <awBEwJf3CIjTvtid@kernel.org>
-References: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
+	s=k20260515; t=1795180391;
+	bh=A9ldS+40d764zde9QlR/VfxNDRLzrKYiXwhUHC+I/zg=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=Z2IcMwRULj6EvT0T4FLdasHIgKDsXEt24XamPaaT9VSEx9pA1yOlCaj1eaztbGqAM
+	 AfHNBVSjg/Io1UBG+2u9ZEU2gyKiEt0BQkyPVioCupTVZ6pF38GBrfn2CbM8YxAHOT
+	 7rWJWNFgWH6vXvaq6U3AKtHeUihy0Ek8wPgRb8V6zfgL3y33DHTMyJcVOi8zgw73hE
+	 jp2hnHwuYDAkOQKDYiPH/LBfiMhP8rZMrPxAjDSO8AzcZnit16Tcgyk4njmETVAdGK
+	 vUZwVmy8Pp1BF+bKGj29zT27OLt4xyV5HE/r3t1IhZcois7FBMdt7Dorq1mvnjIXyQ
+	 JLU8SMVdARliw==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 95D3E498A2;
+	Fri, 20 Nov 2026 13:13:00 +0000 (UTC)
+From: yzddMr6 via B4 Relay <devnull+yzddmr6.gmail.com@kernel.org>
+Date: Fri, 20 Nov 2026 21:12:58 +0800
+Subject: [PATCH] drm/msm/dsi: Fix double put of the PHY device on probe
+ deferral
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,105 +83,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261120-upstream2-msm-dsi-phy-ref-v1-1-d267b87d545f@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAFlHAGsC/z2MywrCMBBFf6XM2tEmkQr+irjIY2IiJJZMW5TSf
+ zep4PLcx1mBqURiuHYrFFoix1euIA4d2KDzgzC6yiB7OQghe5xHngrpJDFxQscRx/DBQh4NeeU
+ sKedpgPofaxjfu/t2/zHP5kl2asK2MJoJTdHZhhb91ae9WC7HMxarYNu+Btjip6cAAAA=
+X-Change-ID: 20261120-upstream2-msm-dsi-phy-ref-bef3dce3dfe6
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Miaoqian Lin <linmq006@gmail.com>, 
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ yzddMr6 <yzddmr6@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795180379; l=2738;
+ i=yzddmr6@gmail.com; s=20261028; h=from:subject:message-id;
+ bh=UCVOCZGuxoSVYeQlAgN1/asYu4mtdgFa/QW169bkdC0=;
+ b=7QmFwZrvmrODkce+oy/gZC9S60KYzd01Pcnk2A90Mlmot2xKuEHEWd+NWCw/J7sx7fn96rqNt
+ 8HLm21FetuqBbfXBNqL78hOjmlhrRxBqtU5JJms6lLdvRn58302t7l3
+X-Developer-Key: i=yzddmr6@gmail.com; a=ed25519;
+ pk=QLT2mwairk4R38oU379hkHynqjoLrlqd0Cl1ERUqIqY=
+X-Endpoint-Received: by B4 Relay for yzddmr6@gmail.com/20261028 with
+ auth_id=1489
+X-Original-From: yzddMr6 <yzddmr6@gmail.com>
+Reply-To: yzddmr6@gmail.com
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 20, 2026 at 04:23:31PM +0530, Kuldeep Singh wrote:
-> Qualcomm platforms with a discrete TPM (dTPM) talked to it directly over
-> a non-secure SPI channel from the kernel. Arm's Base Boot Security
-> Requirements (BBSR) v1.4 require that access to go through TrustZone
-> instead, so on affected Qualcomm platforms the TPM 2.0 instance is now
-> fronted by a Trusted Application (TA) running inside Qualcomm's Trusted
-> Execution Environment (QTEE), which talks to the dTPM (or implements an
-> fTPM) on the kernel's behalf.
-> 
-> This series adds a kernel driver for that TA, built on the QCOMTEE
-> object-IPC transport (drivers/tee/qcomtee/) already used to reach other
-> QTEE services.
-> 
-> This patch series functionally depends on below(first 5 changes specially)
-> for qtee service discovery.
-> - https://lore.kernel.org/lkml/20261105-qcom_uefisecapp_migrate_qcomtee-v6-0-c7d68ce05c51@oss.qualcomm.com/
-> 
-> Tested on Glymur-crd target with tpm2-tools utility.
-> 
-> Validations:
-> - Get capabilities
-> - Random number generator
-> - RSA key creation, encryption and decryption.
-> 
-> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> ---
-> Changes in v5:
-> - Rebase on next-20261119.
-> - Fix qcom_send_command resp_len computation(Amir)
-> - Use dev_err_probe in _probe and return appropriate failures.
-> - Propagate dtpm transfer/end error to callers.
-> - Fix drv_data after tpmm_chip_alloc call.
-> - Link to v4: https://patch.msgid.link/20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Add new line before goto label(Jarkko).
-> - Link to v3: https://patch.msgid.link/20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com
-> 
-> Changes in v3:
-> - Merge tpm_qcom.h into tpm_qcom.c(Amir comments)
-> - Update return values of functions and drop certain error prints.
-> - Define locality_arg as default value.
-> - Add Jarkko's tag on all but drop from 2/3 as significant changes done.
-> - Link to v2: https://patch.msgid.link/20260907-tpm_qcom_driver-v2-0-71a6b1752da8@oss.qualcomm.com
-> 
-> Changes in v2:
-> - Use QCOMTEE_TPM_UID as 81 for service discovery in patch 1.
-> - Use FIELD_GET, zero initialised array and log improvement (Konrad)
-> - Improve commit title and other fixes (Jarkko)
-> - Split MAINTAINERS entry as separate patch.
-> - Link to v1: https://patch.msgid.link/20260831-tpm_qcom_driver-v1-0-6f16fa6924fa@oss.qualcomm.com
-> 
-> To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> To: Jens Wiklander <jenswi@kernel.org>
-> To: Sumit Garg <sumit.garg@kernel.org>
-> To: Peter Huewe <peterhuewe@gmx.de>
-> To: Jarkko Sakkinen <jarkko@kernel.org>
-> To: Jason Gunthorpe <jgg@ziepe.ca>
-> To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: op-tee@lists.trustedfirmware.org
-> Cc: linux-kernel@vger.kernel.org
-> Cc: linux-integrity@vger.kernel.org
-> 
-> ---
-> Kuldeep Singh (3):
->       tee: qcomtee: Register qcom.tz.tpm service for discovery
->       tpm: Introduce Qualcomm TPM driver
->       MAINTAINERS: Add Qualcomm TPM driver entry
-> 
->  MAINTAINERS                       |   6 +
->  drivers/char/tpm/Kconfig          |   9 +
->  drivers/char/tpm/Makefile         |   1 +
->  drivers/char/tpm/tpm_qcom.c       | 410 ++++++++++++++++++++++++++++++++++++++
->  drivers/tee/qcomtee/call.c        |   4 +-
->  drivers/tee/qcomtee/qcomtee_msg.h |   2 +
->  6 files changed, 431 insertions(+), 1 deletion(-)
-> ---
-> base-commit: adcad7f4e6332cff3d6d7165f41584899f598534
-> change-id: 20260831-tpm_qcom_driver-d21c720e73b2
-> prerequisite-change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014:v6
-> prerequisite-patch-id: faf4520d818abf0d7533f71d9c8b9a8aade34626
-> prerequisite-patch-id: b487dfe2fbc076f4815dc6c73b9e68b0b78c961f
-> prerequisite-patch-id: 9f2c4ee37ba173bdc860f253d44974379f2cf125
-> prerequisite-patch-id: e86905ac6289821db30fd9a17f73e276e0a88363
-> prerequisite-patch-id: 09a86ee4de34e0c9cd2e4664c54a6473d7998299
-> prerequisite-patch-id: a940a0624f1e130d1fe5213952965aa469bf9547
-> prerequisite-patch-id: 7be993abea2ca36057d9352381a5890f50996dda
-> 
-> Best regards,
-> --  
-> Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> 
+From: yzddMr6 <yzddmr6@gmail.com>
+
+Since commit 6977cc89c875 ("drm/msm/dsi: Fix some reference counted
+resource leaks"), dsi_get_phy() stores the PHY device it looked up in
+msm_dsi->phy_dev before it checks whether the PHY driver has bound, and
+dsi_destroy() drops that reference. dsi_init() calls dsi_destroy() when
+dsi_get_phy() fails.
+
+Commit c04c3148ca12 ("drm/msm/dsi: Fix missing put_device() call in
+dsi_get_phy") then added a put_device() for the case where the PHY
+device exists but has no driver data yet. In that case the reference is
+now dropped twice, once in dsi_get_phy() and again in dsi_destroy(), so
+each probe deferral for this reason takes one reference too many from
+the PHY platform device. Enough deferrals underflow its refcount and
+free it while it is still registered.
+
+fw_devlink normally keeps the DSI host from probing before its PHY has
+bound. The path is reached with fw_devlink=permissive or off, and after
+the deferred probe timeout when no driver matches the PHY device, as
+the device link is relaxed then and every probe retry of the DSI host
+drops another reference.
+
+Drop the put_device() and leave the reference to dsi_destroy(). This
+effectively reverts that commit and brings back the single check that
+it split in two.
+
+The double put was found with the help of an AI coding assistant during
+a review of the driver.
+
+Fixes: c04c3148ca12 ("drm/msm/dsi: Fix missing put_device() call in dsi_get_phy")
+Signed-off-by: yzddMr6 <yzddmr6@gmail.com>
+---
+Found by reading the code; I have not hit this on hardware, and there
+is no reproducer. Build-tested only: drivers/gpu/drm/msm/ with W=1
+(arm64 defconfig) on the base commit below, no new warnings.
+
+I used an AI coding assistant for this work. It found the double put
+while reviewing the driver and drafted this patch and changelog. I have
+reviewed the change.
+---
+ drivers/gpu/drm/msm/dsi/dsi.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/dsi/dsi.c b/drivers/gpu/drm/msm/dsi/dsi.c
+index 090726be5061..5f9a1409432a 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi.c
++++ b/drivers/gpu/drm/msm/dsi/dsi.c
+@@ -44,12 +44,7 @@ static int dsi_get_phy(struct msm_dsi *msm_dsi)
+ 
+ 	of_node_put(phy_node);
+ 
+-	if (!phy_pdev) {
+-		DRM_DEV_ERROR(&pdev->dev, "%s: phy driver is not ready\n", __func__);
+-		return -EPROBE_DEFER;
+-	}
+-	if (!msm_dsi->phy) {
+-		put_device(&phy_pdev->dev);
++	if (!phy_pdev || !msm_dsi->phy) {
+ 		DRM_DEV_ERROR(&pdev->dev, "%s: phy driver is not ready\n", __func__);
+ 		return -EPROBE_DEFER;
+ 	}
+
+---
+base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
+change-id: 20261120-upstream2-msm-dsi-phy-ref-bef3dce3dfe6
+
+Best regards,
+--  
+yzddMr6 <yzddmr6@gmail.com>
 
 
-Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
-
-Br, Jarkko
