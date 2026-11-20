@@ -1,127 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795163980;
-	b=GaDbpJZK6sWX+L2CsCCzWPumLvZ8ltaO8R5hA91+APi7v/QAeXcGJKs9lkBPanrMar/4
-	 0Wn+BXKl56qoe/6qF7EivimdOeNahPN30kHMRqDNlxVHgG5s2oo7tYTkGYRNm66lPvn6N
-	 kgisrIJ64bJive2v3xgxkPOezEKHkzYwAHHYxnqHff/qfb/7M7FThw/SBo5XZQWO1lbQa
-	 6N/yUfE29SBVBY+GcRhiYFPVD+WOPPVlVqfe6a2Rg0kBCwL1LqCvQzx9G/Nou62pGPHIE
-	 j1oeA+sha6hrmysngS965dh2SzE6iA8mHWLGwsusDyD8k8yWInjFlS5GE8sK8l14SgA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795163980;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=r+JhNs/hZmUB32T/4fK4AcrAesi5EoNhHXMKe2hgKWM=;
-	b=w3c9Rs1/pkkPlXWNMgLgRExMl2wSDKzbXv5b9IL1FGHL1GrNa1aczgdaFhc0vajgmBGt
-	 sZDxOkm+VdmJ5TeEW+6BTKCeHVfwtR182+Y0EHEZzj9QXz7ftJBb2qZGnHFkejiSNY6+/
-	 gLAWki1ALn//7SO/+MHMlsbGwbhJRVNwRNzU01qIj2eJOJCuJbKz2uY6WfyvwiWnl4gQA
-	 pJo5PR42ZR+2Wt5lz+8lJcCbm7u232lJIJa++DJLsQBUFZLcQQE5Jm6VM3GjuHdyy6B0p
-	 RcP28MpjFM2jzo9bH1QyyPQTbamSsG51ZMCyvdc14GPhgX6hW44TIr9Wf9N3DtZvWaw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iGNIqfNo;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=i919bdSq;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.42
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795164497;
+	b=hFDhbjyrI0GIPeUB2Ibs9oPSIN5DGQ4gvqP/RPKePoIFT065VZlbX6b2ZD+gbFRroDSd
+	 4tI4DK1po6NGY5tU2g+HSDl48OXogu7fHKycUSHgzUG1DmhGHyDT/ERjxVRU0qcJx3ORS
+	 ckb8N8a8iozoT2RjDhYfMifzNRoCxtGrfp8bm+yD+2Qt1gwo/Dz2TgqbmlBgRPx7f0aQ/
+	 vjgnIpx3p/fv3fNPGEPr6wMjnojqo8/3Z2HrOxCM+vH5ewJE/6SCooexN2Cj9WTbtI53h
+	 F8V+8P7YAIb96/6VW+JD6TakO4u0ezgv9UTvBRRrVCbop6n54OMe9nA6lf3LA3Msx6g==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795164497;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:MIME-Version:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type;
+	bh=nzwN7I5atRRGIeyKWGRRj5kf7A+6/JDlOIWENYlt34E=;
+	b=R+lG8j2cb1iUV6t50eAcrDjCVXtaW9R+nHowlfru+aHjSldsYQ7WSFTrN+dlX/Xld2P/
+	 t3cwGIrXpi2HUwbxkjnR+oteoIgQwUOIEi+M4WtFevDbCZ88MT5kAJ/lkJzKoYOI4os/v
+	 snOZSpYMzW3Azi8ZM4QcFSoCuz7NaR/U2Omn3gGLXx3mRQ72aYNpcmcpOEA05N8GDTiun
+	 dTvUFG2+0M/ksTZNkCsLjmVhlD0wd0G7uvNCWlgYjZClD+yVXKDp7Z/FkZOO2jvrS7pHc
+	 HXFU7bjWPVrggZnTJN2A9XS/MmxN7XcJbQhmro2Z58KTjMeBdS7mrQQ1wCWBPC3QjiA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=CWmS09Be;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.42
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1561B606A320
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 08:39:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1561B606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 036D5606A320
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 08:48:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 036D5606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iGNIqfNo;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=i919bdSq
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK7fDk73320736
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 08:39:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=r+JhNs/hZmUB32T/4fK4AcrA
-	esi5EoNhHXMKe2hgKWM=; b=iGNIqfNoVZ2GCLVc/iSdDQdEWKccbAIVyLPosy9a
-	EcI2rFgZGwOKDn6Kbyqhh2ZdpxCBnAHiOtoQEtPnwZeCJmlwKl6JifwsUVD1zckn
-	S1YTiIYhOVDgMasD4u6lURu9PmmbB0QhrhaUj9N6Xhl9Jg8RkDx1bnfbcMwuPzhl
-	2Ke9MC5DxtnaBp8d1l1jgQI9Pv6a2E9CuibDfZcxw3Iq+k29HZMAYy6dI8jY8jP3
-	0scZD3qqzbc9DnOSF5QuXlVfoBiuCNfkxzZx2JU9tba2nLskjYKNAl9usR1EhbAz
-	lMGWqUJQ6c6sEhIuLIjp+/Om+o/fSEVfLS/b6TSGOkZ+rQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j2frhru66-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 08:39:38 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f20addba1so130303985a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 00:39:38 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=CWmS09Be
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-67db6d4054eso890848d50.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 00:48:15 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795164495; cv=none;
+        d=google.com; s=arc-20260327;
+        b=MEXbPhASseVATPv9MjffJR4kVXQOBM9kJGPrqYHM488LmXQn8QK2eJzgi8q3MVVkBZ
+         X7VN3DLOAB+GsMZQjB60pfUmE8erHo3ZpQ3LQlwvJgLC2AmnxKjiRqBLcdSK7xMku7Pj
+         77r7l9azBWTFt9nhO8166pVhGFW6TsJ3ZHieUgbv8+vME35Dn+zTcgtnDBLTKbXEiH9r
+         iIGUXuF1CT6eGlX+rcPW3x5AQPWYHj//9DS1bKrp+MA7CjkLQUHD7q0x7B6a3grFoVw8
+         ykMTRe72xvPFSotmf+AvhDxLXvnGgqomMXyr/aGyLoIhzS6STdByeTHBKxf40sHjX5I4
+         CH1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:mime-version:from:dkim-signature;
+        bh=nzwN7I5atRRGIeyKWGRRj5kf7A+6/JDlOIWENYlt34E=;
+        fh=U/HGPfwxRYKyMgbAE4kibAWrPLvxcpi66c5suZvU3H4=;
+        b=pxHr/i/TR6hnE8d5ka9a3WYhOPMXddbSJIhlAwCMiYL706WCmrRB7v50TlAhPntPxE
+         a7Q5MV8gBBK3UH+5w9Ye+L4C6wnhfNvS2G2jh2zJg5zgZdFigrUvjLeJ3SZU0zO9XkcM
+         2cmYfTrI7AxN5gXFsPLD8BB6e/Z1g7y7n+JIefh8Sbz7P5dKncmHWIRGRdeHNE2DjFNn
+         u5I5zz4lRKWfwfPuCQiNxepth66gqDEDmTAjUMf9v1bOBS3Nj942VwLqdAZfoQ29NfQ6
+         BtHXTBPS0fYDSHMHrK+5ZRTqMMYZeMAWahH8bIEisEPp5A2gX05gypVTVejzNa+pt6ki
+         iZSg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795163978; x=1795768778; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=r+JhNs/hZmUB32T/4fK4AcrAesi5EoNhHXMKe2hgKWM=;
-        b=i919bdSqoAW7AvaV4+DpLZlocwtPaBxK89F3Fb1GxIHQIdYxUQJMnvbQTyUwxnIBJv
-         ZJlRdiBCokaOHhhFcZRbsqt65T3clpmBBkr5XcnvzjU2tDTR/ymJZCD2BchxLLm+TyjX
-         1sAuDUi+X+hnOveMoR7uxzVmJgRWOEYGEnynHGhw3fhArnBZleGxJHbYIuarjgddEmdQ
-         a++0GgRISI2n/yk5AIb+OZapoyjRCRgoic/YcipzuK6uvtRpUiPIgcVSxpcAxt1tDkqa
-         U20595w1mP256AEjPnk+ucjiazJfeitROC5Hw/ODoqfg+mulkLeb4+Ufq0i56Mhq+EJH
-         Z8jA==
+        d=gmail.com; s=20260707; t=1795164495; x=1795769295; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:mime-version:from:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nzwN7I5atRRGIeyKWGRRj5kf7A+6/JDlOIWENYlt34E=;
+        b=CWmS09BeEMgCYXfV6FSNZi088ryEUO7i+CoKc8quODE6jVhEin1YTPQWY/vZ9AJGVJ
+         3BTcL2ThPTZCn2lcFathF7hp6wCRTGC6CKMmdrJRcPc9ssc8q/ejs+ol25rJ73lMAopC
+         kWKDB1ex6ZxH7XeCTFIf0MwyHFov97s5WIUjC4vLofTYTf6lOKdAxv0vfi4K1XSARlQq
+         s03ccCpfqvlQq2E8+R+vOBwYYNinlkBvCw1lxx1P8mAxhBPSjEn2drLpjR2dpEnOSLwT
+         cOZNLRWLeh6QR8h/PosdNZfH1SWeIHSFpg5vynx46ZG/pCXZFxbvZiPdHpHnaTs0UiWM
+         FbAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795163978; x=1795768778;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r+JhNs/hZmUB32T/4fK4AcrAesi5EoNhHXMKe2hgKWM=;
-        b=naF/f9sybi0nwzFbOGskeAJ/zesY6Vx+8BPkZVUgsyuCk5im0ZyhFBA013dAhQDqjX
-         k0EK+ygkw8EDkcfsmYfEMR0feRAi2QMN1lGbaFRcMbsnq2neLmDYDkYk909gnjVRRobu
-         IexbCOXyg9eF0dZUhVCYV58l8hn1wXYjYxDFAZ+LlOjm6NNufoXNdiBo31N4TSI0/AM3
-         4WsriTNNhuT0d5Gib/uIBv5GAhNnQ/ZNhnu/O/sy7eV354f2ENeCkbANlEqc929GkRNN
-         5iIWbAc4IW19FqKHZavrGcRWzumAvfBs4CLsHlYUHiA/b/+Nj7do2OLS7urkPin4LvmF
-         oGHg==
-X-Forwarded-Encrypted: i=1; AL+hErEz35tHBC0u3IXefMXQETqkGfUhN8vUxcNHPwC8WUtX39uIn2GJixwerpIYK6WkW5XL0d3Ms7m2qTDQjEQv@vger.kernel.org
-X-Gm-Message-State: APuU4Z+u8ooCaKBFGcXvPl/pNOT4PWwBJOLJJThAGEl3jeRAXgUucfd4
-	9LMe0hrgNhO6V/pCPd3DUv2ryiYy7O6riin45vi/ODfAjCG1ja89Ghi2+OJobzbGUJiShkrNHwN
-	ae06a7R8hz8Gu+MJtMmGvdr5yvDgzfnOkrSt9usKW2eW8P4uDwRlDA4YSccx8jBOMtN7m
-X-Gm-Gg: AYBFou0nGb3T4hkzGEpl1E+BR3FXEYhRlt9b4e45UsEQ3UGcODvBdoBH++wDhDyeVrl
-	0zy123QkaJv9Pmc7VFR4+T5vgUnHgwt1AghpVc1d0ttVpToKd1uXmPLAoJ3bxAXBgI/ry1uaXL2
-	zlHpbpuTdMHXkXKCwyRBm6diBYhHrcEOxZaSgmlGBBtHi/gfjznDIiufGGYy/th6oTCDVRc7RQO
-	BfkF05iaJNcfOdpo6ZJS76gcVeMIvf2lr2aw10s+afmyRVzBhy507j/cNj5FN3wh/w0D+rzrff2
-	Nu/yAhO/VKoVPugQss7SiXXOXmI8vt4WUJH/lJoWjOJA1tAeuxINsZoOaG/YQNd3pDriMpOV97Q
-	O9WB8zUe4CTrwHEYmrmWVx52wXRsxYfdeb/MIHtdiYkPm7M6NXneGtaAxX6nv0/bT
-X-Received: by 2002:a05:620a:6481:b0:949:90a3:3ccb with SMTP id af79cd13be357-949ba9fe6e3mr362655285a.61.1795163977948;
-        Fri, 20 Nov 2026 00:39:37 -0800 (PST)
-X-Received: by 2002:a05:620a:6481:b0:949:90a3:3ccb with SMTP id af79cd13be357-949ba9fe6e3mr362650785a.61.1795163977329;
-        Fri, 20 Nov 2026 00:39:37 -0800 (PST)
-Received: from oss.qualcomm.com ([188.27.161.77])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853a9846sm111790855e9.11.2026.11.20.00.39.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 00:39:36 -0800 (PST)
-Date: Fri, 20 Nov 2026 10:39:35 +0200
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Jie Gan <jie.gan@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Rob Herring <robh@kernel.org>, Leo Yan <leo.yan@arm.com>,
-        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
-        Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
-        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 3/4] arm64: dts: qcom: sm8750: add periphid for traceNoC
-Message-ID: <f3gazpnmbfqjukqi5wetqokl6l5cy2xtuzvdtayft32qadbg6p@kgyw2kcgvk6p>
-References: <20261118-fix-tracenoc-probe-v1-0-0298dc5f05ac@oss.qualcomm.com>
- <20261118-fix-tracenoc-probe-v1-3-0298dc5f05ac@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1795164495; x=1795769295;
+        h=content-type:cc:to:subject:message-id:date:mime-version:from
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=nzwN7I5atRRGIeyKWGRRj5kf7A+6/JDlOIWENYlt34E=;
+        b=OBVnGFOHDRf/bISP8aIt0lvGKYSixlhElIFBYEB/IlYo3Q64zjCqSVXeyJq9267LSk
+         3O1bc/fECPjKexTwNN8okpipMZxjTjtBw+8kt+doVd64skuNa4PKjWEKOWNSisWsIAZL
+         fHHW1aGTL7Xdg1onH3bJkNZi31KRTgQB19FiL5TzvXoCG74raC29gbpVLl4n0ZmEzacG
+         VpsGHa/Q/tx43zLEMNzmReUChtJwyliuWPhTNNpCX9Av3sRi9g6HnqfUBlBBgiHlU6I6
+         QuNkq9X+nq0fVEetY5qn5XMMZwzyccNmrpLt4XUQUafwu/0X9dYeIWvVmz5bz+iULe1Y
+         Y+Hw==
+X-Forwarded-Encrypted: i=1; AL+hErHWGaedqWXTcXqf/4wwLZF4ezkliQBJ+edS3E7XPMn8VHHeM6SfI87N9eXLXHxf5Inc8geG+Fx7gaMWu2uQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z9JWzM9Wus0I7QZ01kRUTBcFguCbxmFA44jthGEdonlGL3polCa
+	orIL7HIfY3bt9NK+fWTn/PMoZt6yuStRsK7zMBfUrYW+YTKG2zFgAGocVWHBX7h5M+E1xo0+pyI
+	junmmzpyy/LhzXXvFmzSWp/EW3mG2+Ns=
+X-Gm-Gg: AZFdTZdlVmHNeL3pBT+pFJIMNJ6EXFXrYQr6J0Ws5Vm4mrxRVIEphWyCk7hQrvmcbUe
+	I5vLpcHNsAyQtFNiUyHtdSvi/Zru9oNhjy4NLanQJO8oCenc0BtICFclst1VhoCyYY8gxJVEq57
+	pAgiUMEhXUjZRDyyYq6Bxva4IvFsjBWRI3+ehJS16FYyq2eBIJ8hy7ST/w0S79CLvnp+7HPjOSC
+	RIsIpX5px9CeQQih2LTBcRs/onuiNViz8kZ0krnORJMSn0KQ8ahGR/pQ7UOhJ8c2c9lkTSvFsoJ
+	XqjH3KEcYM5qgcNT/qf/a8XyBSkvopAnWceNG0Y6nnYvq8hfRpt6Smq7UiUmUtXBMVbwOpRfRTz
+	nxnmbAi9ZBGrw5MQHKo9U3IeP/LGaIpiSGAKz
+X-Received: by 2002:a05:690e:134a:b0:67d:c588:e563 with SMTP id
+ 956f58d0204a3-67df43ce393mr1241950d50.23.1795164495031; Fri, 20 Nov 2026
+ 00:48:15 -0800 (PST)
+Received: from 16659893159 named unknown by gmailapi.google.com with HTTPREST;
+ Fri, 20 Nov 2026 00:48:14 -0800
+From: Steve Meek <stevemeek82@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -131,51 +104,128 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261118-fix-tracenoc-probe-v1-3-0298dc5f05ac@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAzNCBTYWx0ZWRfX3s6mALIlQzkm
- ZmCjkNFEoFchLrh37PyZ+92rkjHi5qarHSW2/2JcgcfEV/HsJjlT9QgP8MZsui1nmyH2wYuDZ/L
- PrA3fFiR6hJeVO1el6lCrTkDDWP1K1g=
-X-Authority-Analysis: v=2.4 cv=d+9gWhjE c=1 sm=1 tr=0 ts=6b00074a cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=kDRJwTVxGBJz2jiGre8A:9 a=CjuIK1q_8ugA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: 9-i0PT4toJVWEaAXadaKHYEUWPkTYX-s
-X-Proofpoint-ORIG-GUID: 9-i0PT4toJVWEaAXadaKHYEUWPkTYX-s
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAzNCBTYWx0ZWRfX7RYG/kXjfOZI
- SiCBuqrLx+j+LwXqvMWYg/zC5Qbllt6MqwQ4sq4G/64u+4xSIZREyDqTjzsyN0+NBDqL1S/UKvf
- tR0ET3iRjw5fY16jRpUuf8MWFW4oL7Xs5ufbK/sWmO8Q1ly55iR23cPKGeqOzz4DAr22UidOKve
- /ZVTYMrpxvw9omwqoJahL6f52IUw9VICBzYotp5UNBpqa6cL3lhYInYtg2cbZEKnbzQmcZ1Xwyh
- FqRqLlg0kEoTKwtN/CLIthZ5MXegx1LLpl8P6pQ39pDpX6fDIGtMiiDQFBQOXIuPWysP2PoYi02
- jfldl0ufqU8JA2+b92OtswtNR6a3csbcQV9ukcLPMdRmdVCLTA0/Nrn1RfavdNeHUZggxGncsbw
- Cyle9XIRuZ01yExi8qvPuaSgSF232fAE0eMkNcDdzSbx6AkiPH8me1KwYx8VPDt2lM3wS6bhQo4
- tKtAqPId19Hzrbglikg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-20_03,2026-11-19_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
- impostorscore=0 clxscore=1015 bulkscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611200034
+Date: Fri, 20 Nov 2026 00:48:14 -0800
+X-Gm-Features: Aa3M54o4Xn00jWrzGntZB2_JEfjGjvq32pmj2DjG_uE_x2Fy5EbZhNSqDP66XzE
+Message-ID: <CAPzME4aUpO4foxtL7PpaHk=7dyz-qo1vxrbw=o=qEENEVj=Zqg@mail.gmail.com>
+Subject: [PATCH RESEND] bus: mhi: host: pci_generic: Disable doorbell burst
+ mode for Quectel RM500Q-AE
+To: Manivannan Sadhasivam <mani@kernel.org>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, mhi@lists.linux.dev, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On 26-11-18 15:01:45, Jie Gan wrote:
-> The traceNoC node uses the "qcom,coresight-tnoc", "arm,primecell"
-> compatible, which places the device on the AMBA bus. To bind an AMBA
-> device, the bus reads the peripheral and component ID registers (PID/CID)
-> at the top of the device's register block and matches them against the
-> primecell ID. The Component ID returned by the hardware is 0x00000000
-> instead of a valid AMBA Component ID, so the AMBA probe fails and the
-> device is left stuck in deferred probe indefinitely.
-> 
-> Add the "arm,primecell-periphid" property so the AMBA bus uses the
-> specified peripheral ID instead of reading it from the device, which
-> allows the traceNoC to probe on this hardware.
-> 
-> Fixes: ebd1eb365cae ("arm64: qcom: dts: sm8750: add coresight nodes")
-> Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+With burst mode enabled on the IP_HW0_MBIM hardware channels, the
+RM500Q-AE downlink stops under sustained multi-stream load. The MHI
+state stays M0 and uplink keeps working, but the downlink event ring
+stops interrupting, and after a while the MBIM control channel times
+out as well. Only a reboot recovers it.
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+At the stall, the last doorbell the host rang on channel 101 covered a
+single buffer. The host then refilled the ring without ringing again,
+as db_mode had been cleared, and the device never signalled doorbell
+mode again, so it never saw the new buffers. Writing the channel 101
+doorbell by hand with the current ring write pointer restores the
+downlink immediately.
+
+It is load dependent: it reproduces within a 25 second 16-stream TCP
+download when the wwan0 receive work runs on the same CPU as the
+modem's MSI, and was not seen with that work moved to another CPU.
+PCIe runtime PM is not involved, as it reproduces with PCIe port PM
+disabled.
+
+Give the RM500Q-AE its own channel table with burst mode disabled on
+the two hardware channels, so the host rings the doorbell on every
+transfer. Other modems sharing the em1xx table are left unchanged.
+
+Tested on a Xunison Exigo Hub D50 5G (IPQ5018, RM500Q-AE firmware
+RM500QAEAAR13A03M4G, 6.18 with this driver): with the receive work on
+the modem's CPU at up to 100% load, about 200 seconds of multi-stream
+downloads at up to 135 Mbps, no stall and no MHI errors, where the
+unpatched driver stalled within the first 25 second run.
+
+Fixes: f6985f512f82 ("bus: mhi: host: pci_generic: Add Quectel
+RM500Q-AE support")
+Assisted-by: LLM
+Signed-off-by: Steve Meek <stevemeek82@gmail.com>
+---
+Hi Mani,
+
+Resending as I haven't heard anything since 13 Oct. No changes, and it
+still applies cleanly to mainline.
+
+A follow-up to the RM500Q-AE support you applied on 11 Oct. Under heavy
+multi-stream download the modem's downlink stalls with burst mode on,
+and a manual doorbell write on channel 101 brings it straight back, so
+this turns burst mode off for the RM500Q-AE's two hardware channels
+only.
+
+The stall looks like a lost doorbell-mode handshake rather than
+anything board-specific, so it may affect other modems on the shared
+em1xx table under the same load. I've only got the RM500Q-AE to test
+on, so I've kept the change to that device. If you'd rather it were
+fixed in the core, I'm happy to send the traces from the stall.
+---
+ drivers/bus/mhi/host/pci_generic.c | 49 +++++++++++++++++++++++++++++-
+ 1 file changed, 48 insertions(+), 1 deletion(-)
+
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -470,10 +470,57 @@ static const struct mhi_pci_dev_info mhi
+ 	.sideband_wake = true,
+ };
+
++/*
++ * The RM500Q-AE stalls its downlink when the host refills the hardware
++ * channel in burst mode: the last doorbell covers one buffer, the host
++ * then queues the rest without ringing, and the device never signals
++ * doorbell mode again. Ring the doorbell on every transfer instead.
++ */
++#define MHI_CHANNEL_CONFIG_HW_NOBRST(ch_num, ch_name, el_count, ev_ring, d) \
++	{						\
++		.num = ch_num,				\
++		.name = ch_name,			\
++		.num_elements = el_count,		\
++		.event_ring = ev_ring,			\
++		.dir = d,				\
++		.ee_mask = BIT(MHI_EE_AMSS),		\
++		.pollcfg = 0,				\
++		.doorbell = MHI_DB_BRST_DISABLE,	\
++		.lpm_notify = false,			\
++		.offload_channel = false,		\
++		.doorbell_mode_switch = false,		\
++	}
++
++static const struct mhi_channel_config mhi_quectel_rm500q_channels[] = {
++	MHI_CHANNEL_CONFIG_UL(0, "NMEA", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(1, "NMEA", 32, 0),
++	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
++	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
++	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 32, 1),
++	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 32, 1),
++	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
++	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
++	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
++	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
++	MHI_CHANNEL_CONFIG_HW_NOBRST(100, "IP_HW0_MBIM", 128, 2, DMA_TO_DEVICE),
++	MHI_CHANNEL_CONFIG_HW_NOBRST(101, "IP_HW0_MBIM", 128, 3, DMA_FROM_DEVICE),
++};
++
++static const struct mhi_controller_config modem_quectel_rm500q_config = {
++	.max_channels = 128,
++	.timeout_ms = 20000,
++	.num_channels = ARRAY_SIZE(mhi_quectel_rm500q_channels),
++	.ch_cfg = mhi_quectel_rm500q_channels,
++	.num_events = ARRAY_SIZE(mhi_quectel_em1xx_events),
++	.event_cfg = mhi_quectel_em1xx_events,
++};
++
+ static const struct mhi_pci_dev_info mhi_quectel_rm500q_info = {
+ 	.name = "quectel-rm500q",
+ 	.edl = "qcom/sdx55m/edl.mbn",
+-	.config = &modem_quectel_em1xx_config,
++	.config = &modem_quectel_rm500q_config,
+ 	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
+ 	.dma_data_width = 32,
+ 	.mru_default = 32768,
