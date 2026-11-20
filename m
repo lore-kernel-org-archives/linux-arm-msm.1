@@ -1,52 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.36.144.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.217.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795210881;
-	b=sqneUbcnT/G4ftgqZIFktegkUVouIdr4SJpC6j3XSPyluMEWvDshkqYsm74I26RGighU
-	 hN3/y9pFLzM9e29Hul1c+ucnQl/Sy6DA+CJSixPYCnDx6mUGIacm8j+aLBK5tk9pp2AEx
-	 pJnPhwtsUeCdnA0YWc41T1q1O6AA8/OgptPJAAMrAwEQavd+n/cx9AIDFJXEsgHn8uXNy
-	 gVqGJYv+NS7zLASQn+zoCWGQ0ocNRropfmh0kxR64WYIsQl2pA0mlmnr6usg90lkZ7dKL
-	 c1hTKoY7wrsOS3pL9SKIRdms/L8bEj71W4q9pIXZELRK/xAkbMATRUOWd4ZsaPe2LPA==
+	t=1795212035;
+	b=2t4nz43alk7pwppX/FPGA/fRnIS89pgNi7cND0Ms43Rn/N4mmGdADCXazCAPxZTe9hQA
+	 ELk/AJROyfXF21Fgu3U3WlEHrOsXYp7BBldeaC4dMsAG00x55nBjR7dnp4mTmQpZv+PuF
+	 qG6qOe67hkurypbtp4UWVDwR32Rm64gN2FlB7v2T5Je8O6l5JC4kuGolo+lH5ysLK/T2N
+	 ahhSTrtlKxmJWZn1erzjisCWlhbzshyrVjdMfGO0BYetaMM86XUnJBS0tVC/BXtQSTu4W
+	 Xzy/Fw6dbabdU9hoj/VkWOSdmyyNa8+NQKGC1NuacSNnVtKEsAOiKaOL+OHXuDRs25Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795210881;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:From:Content-Language:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Last-TLS-Session-Version;
-	bh=yO0+P2z7OqcwcmXkYZCD4xrp2SZnKWNRDw7SRN86hlU=;
-	b=urK+rRIVvJkYvbIHWeNJZdn8wRBsYsjzyrzyBD5mk+YiYOooX6N98+yALWCC3mKZcgxV
-	 zv5RT5T2p4CJaUynllbz0JDaW/hFMOrYhaioyLLlRE1NwI0+FSyS756z1zz7wvmoqpp3y
-	 m3BTypaLtTFsuuoARkHuGOfi8yhVOtJWP0wWPpLCkMtZhZfwD7JJJ4LDpGANmyH3Yjl2k
-	 OSOMpkrMLOH6p1x6/936ATbu2n1JUoNzg1zzmMfsU7BeAIMdyKemzSkoeGm+p9O8NdnVN
-	 WwMIo2RbEULReGfgMn6qNBCaFqoAVUeYlLA3mta7hZ1y1HTCms2Ggn3v2I39kBAgMzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795212035;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=2xDPC6qU1uwq+PJaTb5Go3aqyR32791c6Eohq6KP4zc=;
+	b=acEu8UlxPQIXr5uoxD2N6TL7yvEytKCVdZReBQGUOWSGh6SuGzC+u56zWMqHGwCXsJNI
+	 csO21jnQpEwsU6EDQJvc3/vrsMWgAQu0rNPLLyb49uHVSHzlC7vwKvYQqQV58Zfz81a1l
+	 j0sjq8WD04VUv53tW1LwjrXewvbalrj2AQ4vByuT9uMIkArf90/JqbbI0tuGZFCALMc9l
+	 eNEZEEDRVWQOvQs7mWu6ikbBxplTLDYbEyqqOF1f8zJwogHrCAKgXSDKmmRiT+CY4SONb
+	 XAJvnoeiaaM/USNR6Q76LFbTL18uilRUDvjs1MerkQlWzG2VQZdF5cHsQ2fdwWtAgow==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=yoxcu.de;
-	spf=pass smtp.mailfrom=yoxcu.de;
-	dkim=pass header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=vCms8MKd;
-	arc=none smtp.remote-ip=194.36.144.171
-Received: from morty.yoxcu.de (morty.yoxcu.de [194.36.144.171])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=none header.from=fatecpompeia.edu.br;
+	spf=none smtp.mailfrom=fatecpompeia.edu.br;
+	dkim=pass header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=CFGSxRTa;
+	arc=none smtp.remote-ip=209.85.217.54
+Received: from mail-vs1-f54.google.com (mail-vs1-f54.google.com [209.85.217.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9180606A6AA;
-	Fri, 20 Nov 2026 21:41:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A9180606A6AA
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=yoxcu.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yoxcu.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD541606A6B8
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 22:00:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DD541606A6B8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fatecpompeia.edu.br
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=fatecpompeia.edu.br
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=vCms8MKd
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 70F051D87186;
-	Fri, 20 Nov 2026 22:41:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yoxcu.de; s=dkim;
-	t=1795210869; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references:autocrypt;
-	bh=yO0+P2z7OqcwcmXkYZCD4xrp2SZnKWNRDw7SRN86hlU=;
-	b=vCms8MKdqvQCVuZdDXwpX5ZnDH4545rdbaVTEzd9KZJOKtHXwwgKUT8RlnFBUj6zsOEY8G
-	BV6POQ/ycgJ6VA8UWWkU0rVBoBEiB5PLgAgAuhZcouvo+M/kVxLS+Q8zHP8ycmH8vl9Mhe
-	IT5qBSwebpWqx8ddEvR3tEcL+6vC2aq3IOQSq1Hg4xiBnFMb39m0VARPOldGHkEmwIrjFc
-	e6Wx/+RIkqdv57MIpDiD4EWeS9GLDXXV2kvlSZm/nm+96MdEGEv5AkerWmnMpaXTyT/rk6
-	ByIzutds/VLTZ/2D+CFL1PoKaqVetObqp5mceEE4wzxDhEpqFykTLH2+O64+IA==
-Message-ID: <6e30e65c-3fa7-409c-90da-2740f7bf0a24@yoxcu.de>
-Date: Fri, 20 Nov 2026 22:41:02 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=fatecpompeia-edu-br.20260707.gappssmtp.com header.i=@fatecpompeia-edu-br.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=CFGSxRTa
+Received: by mail-vs1-f54.google.com with SMTP id ada2fe7eead31-7cc91ddf447so491892137.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 14:00:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fatecpompeia-edu-br.20260707.gappssmtp.com; s=20260707; t=1795212033; x=1795816833; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2xDPC6qU1uwq+PJaTb5Go3aqyR32791c6Eohq6KP4zc=;
+        b=CFGSxRTa6bXs2QsYxgQ5v5d73J8Lj+epxBHOHXX2mlDR7UWb4MxwQ5Bm1Pr7vzdrwh
+         r8USXI5bJ+m7mAwuDd1B5apByZPbv5TxAApGDoJcZyE6XihUvV8Ok3s8poJO6FJSznlk
+         0Y2S3Nw1+LUcDT/xigP5IqjMkya5XQmdJNer8Ry7ph2qGx2p7PHSbRfVb2c0lJfxBSgY
+         yUosia0gElcX1WJ3sO67PttycNQBvwtTqGzyWL7w8N+GQX3mpIDDGSGjSKvm0Me9P3eM
+         NS16tg+468SMAoWp3Xi6mifOowze35Xbii2XDYmvxmnBOjoBv7RR3hGpcpvqkUNzesj6
+         B3gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795212033; x=1795816833;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2xDPC6qU1uwq+PJaTb5Go3aqyR32791c6Eohq6KP4zc=;
+        b=fiECwPWZ4bsDWuea87KvWypmXC9L6g77NCp3OquGWYVKS7gBanbrlbFHi2372fjAH9
+         Sz7QcgLDxWwYpuh9632c9r5llgypbctkfLJLeatuT9F9UauZcOkZTRLGE/dWhCGrg6B1
+         62uvNymEHC9H/O9zYN2v3HXcfhGJvw/YQn42SPrjsZ0F7IjjSPKwDv58REvx4/SPW2HF
+         AZPG6aPBhsGe7ruMdoqJRjR8t8n1DU21WCNuojkN+Kld5s2ii3C6hG9mWp8d/595mgQ2
+         gI6hMZL7MdNb2x5cIus9tQShfR0R20h4TSY141tOEt2WZ4xb839R+O74mb3sheEm02yP
+         7sWQ==
+X-Forwarded-Encrypted: i=1; AL+hErHZ1knN+064D5TZMhpSKWACnxoCpWS4gTn9R6QWIip8+y8xiazcChD+Rm08OJqsH+acxBh3NhuIKDDrZ2RZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z+H6oiASlOgj7uRc0tv3LRYqAIIfVS+FpykVenIoiMf2BtejpRZ
+	ZBcPcI+0q0suKvpMUKMMvWxtD7zFis7AF92i6LwnZKqjs/K02TfMQTzihxMIBnsWeq7Ufyh2YLh
+	RdcWvMpg=
+X-Gm-Gg: AZFdTZcDnhF0JsQoQgWQPF9h+sxDPq2/bIEM+7b9gq2zByyW7t/J6Y6q3Br3f4QaB3k
+	xbKGzyzE6NFrVI5rs9LL72cgRCtt4DFicNjsHMMA310ejNY1HbaBY/LlOXt7SP0gu9qvfGjcNUZ
+	KuQXqUYTGyLDtbDRO5MZp7YHbgFbTUtJJry14jvgIoMEYlHC2Bngslb+mJwnVNiufnfPj9dJyyB
+	lvZkFmfmZpNrgOeGjFXkGJS0kpJ16oeMhocQuZme4h1yQQjQs7J3smYgbbaSFgy11tKwWgHKRuw
+	ZgcqfsJTwqJPoN3/kXeGIzg7Dm55IS9SBVilg6AU8wznAfVddeVpiKGnnDbljg89WiKiUFc8YAO
+	jNLKMnL5qAfZQ5QgptUnZbHRlFzT5CLwslBnEZ5lmyJgfOqNkxWUb0fl8ob+1RgwoncUal1amxk
+	L4UGkIASmhOvnduDNSRfLLIV0lXPj2oARD25kv6RIxTrEsIE5GvrkFy54N8gR+sjgEofcHBgEJT
+	P9GbN2nkkQrnC4tuU/tpa6jVqb1WelhVsJbVxfbKDcPD7/3a6+V7C7fn26on7jnJYGoyL6tB5G1
+	EgKUL6t9OyRLcSsELH62PQdGxZLHcL28s7YFtDBYr/1iz9C13TtV8iQxIYbT8HS97uY=
+X-Received: by 2002:a05:6102:5cca:b0:785:c39b:6a1 with SMTP id ada2fe7eead31-7d7393a114amr1838341137.6.1795212032547;
+        Fri, 20 Nov 2026 14:00:32 -0800 (PST)
+Received: from localhost.localdomain ([2a09:bac1:1120:3bd0::422:8])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-99e6e0a2865sm4180139241.12.2026.11.20.14.00.29
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Fri, 20 Nov 2026 14:00:32 -0800 (PST)
+From: Allan Siriani <allan@fatecpompeia.edu.br>
+To: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
+	Jesse Casco <jesse.casco@gmail.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 2/2] media: qcom: camss: Map each CSID to the VFE it feeds
+Date: Fri, 20 Nov 2026 19:00:25 -0300
+Message-Id: <20261120220025.56887-1-allan@fatecpompeia.edu.br>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+In-Reply-To: <331d37b0-eea3-40b1-9a27-9a33cc756949@oss.qualcomm.com>
+References: <cover.1795196107.git.jesse.casco@gmail.com> <9e5bee0dbc1c116672ba0020013ef0a346385c29.1795196107.git.jesse.casco@gmail.com> <331d37b0-eea3-40b1-9a27-9a33cc756949@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -56,177 +104,18 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] interconnect: qcom: bcm-voter: Clear the ALC vote left
- by the bootloader
-To: Georgi Djakov <djakov@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Mike Tipton <mike.tipton@oss.qualcomm.com>, Ard Biesheuvel
- <ardb@kernel.org>, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261120122152.198114-1-mick@yoxcu.de>
-From: Michael Auer <mick@yoxcu.de>
-Content-Language: en-US
-Autocrypt: addr=mick@yoxcu.de; keydata=
- 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
- ShbHn51QMVl4y3nkTQ==
-In-Reply-To: <20261120122152.198114-1-mick@yoxcu.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 
-Hi,
+On 11/20/2026 9:51 PM, Gjorgji Rosikopulos (Consultant) wrote:
+> Maybe csid resources should contain the parent device index as well.
 
-A sashiko review of this patch found that the wake and sleep writes
-never reach the hardware. rpmh only caches them, the (0, 0) wake write
-replaces the (12, 0) wake value from the active-only write, and
-rpmh_flush() skips entries with equal sleep and wake values.
+That doesn't work on the ISPIF based SoCs: MSM8916/MSM8226 have two
+CSIDs and one VFE, and the ISPIF routes either CSID to VFE0. The parent
+has to come from the media link. CSID1 currently fails with -EINVAL in
+vfe_parent_dev_ops_get() (no VFE1); minimal fix:
 
-That matches the OnePlus 6: the rpmh cache has ALC at sleep 0 and
-wake 0, and the APPS DRV vote read back after a night with 139
-suspends is still 0x20030000, so (12, 0). What I tested is the
-active-only (12, 0) vote alone, held through suspend, and with it the
-SoC reaches CX collapse.
+https://lore.kernel.org/r/20261111135338.27008-5-allan@fatecpompeia.edu.br
 
-Konrad, did you mean ALC to drop to (0, 0) in sleep? Then the wake
-write has to go, so that rpmh_flush() programs both sets. I can test
-that. If the active vote is enough, I would drop the wake and sleep
-writes in v3, so the code does what was tested.
+I'll drop it if the parent is resolved from the link as in Jesse's 2/2.
 
-The review also found that bcm_voter can be unbound while the voter
-stays on the bcm_voters list. That is older than this patch... I can
-send a separate patch that sets suppress_bind_attrs.
-
-Best,
-Michael
-
-On 11/20/26 13:21, Michael Auer wrote:
-> The bootloader can leave a vote on the ALC BCM. No icc node maps to
-> ALC, so Linux never touches it and the vote stays. On SDM845 this
-> keeps DDR out of its sleep state, and the SoC never reaches CX
-> collapse or AOSS sleep in suspend.
->
-> Clear the vote when the voter probes: (12, 0) in the active-only set,
-> as the downstream kernel does, and (0, 0) in the wake and sleep sets.
->
-> Tested on a OnePlus 6 (SDM845). Before, cxsd and aosd in qcom_stats
-> stayed at 0. With this change, CX collapse was reached in 139
-> suspends over one night, for about 7.6 of 8.9 hours, and the average
-> current over the night was about 27 mA. The active-only vote stays
-> (12, 0) after suspend and resume, and the awake idle current with the
-> display off did not change.
->
-> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Assisted-by: LLM
-> Signed-off-by: Michael Auer <mick@yoxcu.de>
-> ---
-> Changes in v2:
-> - Drop the dt-bindings change and the dummy ALC node. Clear the vote in
->    bcm-voter at probe instead, with the code Konrad suggested.
-> - Link to v1: https://lore.kernel.org/r/20261013202611.3070778-1-mick@yoxcu.de
->
-> This runs for every voter on every SoC that has an ALC entry in
-> cmd-db. SDM845 only has the apps voter. Should it be limited to the
-> apps voter?
->
-> Ard, the code is different from v1, so I did not keep your Tested-by.
-> A retest on the C630 would be great.
->
->   drivers/interconnect/qcom/bcm-voter.c | 42 +++++++++++++++++++++++++++
->   1 file changed, 42 insertions(+)
->
-> diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
-> index 0880a287b0c0..f9d51f3d586d 100644
-> --- a/drivers/interconnect/qcom/bcm-voter.c
-> +++ b/drivers/interconnect/qcom/bcm-voter.c
-> @@ -390,6 +390,46 @@ int qcom_icc_bcm_voter_commit(struct bcm_voter *voter)
->   }
->   EXPORT_SYMBOL_GPL(qcom_icc_bcm_voter_commit);
->   
-> +/*
-> + * ALC is not modeled by any icc node, but the bootloader may leave it voted,
-> + * which prevents the SoC from reaching CX collapse and AOSS shutdown.
-> + */
-> +static void bcm_voter_clear_alc(struct bcm_voter *voter)
-> +{
-> +	struct tcs_cmd cmd;
-> +	u32 addr;
-> +	int ret;
-> +
-> +	addr = cmd_db_read_addr("ALC");
-> +	if (!addr)
-> +		return;
-> +
-> +	tcs_cmd_gen(&cmd, 12, 0, addr, true,
-> +		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_AMC));
-> +
-> +	ret = rpmh_write(voter->dev, RPMH_ACTIVE_ONLY_STATE, &cmd, 1);
-> +	if (ret) {
-> +		dev_err(voter->dev, "Error sending ALC AMC RPMH request (%d)\n", ret);
-> +		return;
-> +	}
-> +
-> +	tcs_cmd_gen(&cmd, 0, 0, addr, true,
-> +		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_WAKE));
-> +
-> +	ret = rpmh_write(voter->dev, RPMH_WAKE_ONLY_STATE, &cmd, 1);
-> +	if (ret) {
-> +		dev_err(voter->dev, "Error sending ALC WAKE RPMH request (%d)\n", ret);
-> +		return;
-> +	}
-> +
-> +	tcs_cmd_gen(&cmd, 0, 0, addr, true,
-> +		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_SLEEP));
-> +
-> +	ret = rpmh_write(voter->dev, RPMH_SLEEP_STATE, &cmd, 1);
-> +	if (ret)
-> +		dev_err(voter->dev, "Error sending ALC SLEEP RPMH request (%d)\n", ret);
-> +}
-> +
->   static int qcom_icc_bcm_voter_probe(struct platform_device *pdev)
->   {
->   	struct device_node *np = pdev->dev.of_node;
-> @@ -409,6 +449,8 @@ static int qcom_icc_bcm_voter_probe(struct platform_device *pdev)
->   	INIT_LIST_HEAD(&voter->commit_list);
->   	INIT_LIST_HEAD(&voter->ws_list);
->   
-> +	bcm_voter_clear_alc(voter);
-> +
->   	mutex_lock(&bcm_voter_lock);
->   	list_add_tail(&voter->voter_node, &bcm_voters);
->   	mutex_unlock(&bcm_voter_lock);
->
-> base-commit: 3fd56a2833c22f62eb84297d0dbd47739632f1a0
+Allan
