@@ -1,120 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795135968;
-	b=X1Db+sMdoS6aeJFdf8o6IEETmkQiXqIBqVlBTLcPYHyNRFy1UuUuk9HndEaj+Eegq8VF
-	 lhAw341FWqDHGcvlWhuRvly/5WtKSTnx0exeUbKh9zOzxxNvRrVPx+5QDXjG9ICg3bcFa
-	 E8gm7dE2WSCVvdN++bpFco+Y+RfNqM6c4k/GXSc1gQ0bjm/s4/7UMq0Nox7RsqpJrW9gy
-	 6em3GsR4KtjYYibrrOYPZTRjGYDBN9kQ1XKV9T9Yjg0COGteLjDbtUwwP1zG/skCvrBtu
-	 ZIGB0PLLHQ6e2c+115S8mA3pmrnNyg94tKybM7yPWZrE9OKBaxCqv0XSnCC0I/fZlVg==
+	t=1795145273;
+	b=XSEK1ceO+1tNgIL3Yexv87iCpQQJLZgCfYBKh4ERbzXqlLaXKnmdNkccRtmyfxXASMRU
+	 uBAXOy1xvw9S4ES6LOjz99Txl+Bb2Mn5XzPp2Jk4TVBnkqfdS7A/AYsfdLxMJUOrGSPaR
+	 M/nwxHtcjxrcDOKJ4r40zRtF5Ioa+HDyT21Moc9ugbPr3HtmZnKPyiyBamI615XNYTsui
+	 B5/2loF36zplKOjZGgm/RA11YEpG7QxfriAPVam95sJEDLmSVGEGbnxW+9KX/a/+gzHLC
+	 Hbp/exaKLt1dzWdnV76blhfcdqGOf4WELO7GCs8/u1Lw+tH9S7mOzW7Qj/nzfX1Gn0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795135968;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795145273;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=lfYDwuZSFviGTTlMEh9cD/tenkn6JZrvdi0nKAxg6CA=;
-	b=sQcMd32hfenyQMFNJDTe6TXRuYNnfDfaDwN5d/Qwvle+PUJ1pDGazpuHAEeAviFzZ6ya
-	 uSqYXc07656bnsCLY5CtVTkcn1fzibPpme9n3oH55SD2a3qF5ucYfQYvzHurd0SwE8Y5j
-	 rRVe6eEJQs1QMZsK4PBPZX0EyB1eggkk24jl16lWhjEiIJCfgts7v/6VnpDlnnf8aZU/3
-	 jsUED13VrjjV9CAQBKR59dxbKkUTGml1bwHxp7omTcSbbYsbC40Zhm55Nc5obSba8+wd7
-	 8b2vjpWja/1h0/XaZsiehdqPgB2ZgmvyJOU1M7RYgHEqO7A71CsAkw5iLuKIxlN0LBA==
+	bh=DS3T+X1wCXRsTi+mAH4YGUt6zEYW5jwzEoUyV6c4eIs=;
+	b=U1xjdDHw/Xg1lW1QJhxVMLyU8VpNTcNCCBvxUjvqJFzTYd8qoBqDyF7c60aJ2VJlkj8A
+	 sA7mkBd+/1tClb22Cv7Oo/eQDSUQDx2AnOmaqqvSOJxRG+rkuFOtV3HAoPdsu0tV3DFg7
+	 oMudWAn/5lY0Y0KmEqTXOjXgodVPyeVyqRjEm4ZL/MZn4psh35QztcxQIt+GuA5khwhbY
+	 ivGOsdbgsNE6ACnEwRZ7o1jwMz9lB92yotZaL3oF/0CgpV6h0hy8GUQx9+Ut0TZ8o+vZi
+	 M7hXFxPn3cTXLNoox4kGwlLG8kUFucGur1wj9LhYxrqA+nldgOy6BOicUtPI5qho53w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NSs0bbHT;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jofrHLu+;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PAADAi78;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kRPkmvyL;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2769606A326
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 00:52:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2769606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2B8C606A325
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:27:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D2B8C606A325
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NSs0bbHT;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jofrHLu+
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK0GbcD1724769
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 00:52:46 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PAADAi78;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kRPkmvyL
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AK0GDpG3825930
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:27:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=lfYDwuZSFviGTTlMEh9cD/tenkn6JZrvdi0
-	nKAxg6CA=; b=NSs0bbHTM+DMflHZBwkB14CcEwBV8yJyaGR0G4JTv1s6aIPWc5D
-	eJ8CzYxbgd3W8ozUL2zf8aaMEci57f3ZMj7mhwfS2ADwaxVxHGxoXqvsfTsx08Ei
-	HWnFHi0Ms6wqLa56dulDFnMMIIxrqqLm/CEE1LfirKLL2Sx3BOcfIiTfY5Ym6Q5+
-	IleabaGHQ15IlPFU0PrFpUNb1DIGjfIvCVlWXsu0bIEDchi2ogvr+cx3MTTzwvcz
-	vkCm2kz4YvKL4ogz/XekRN0XqlonhZ5x/lvwxERCwIIR0fH9RGcPOUsnN5awKyQe
-	P4iN3Cq8OJ02saT4ZgYuSoJQjIKePOQW/DQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j27au15fv-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=DS3T+X1wCXRsTi+mAH4YGU
+	t6zEYW5jwzEoUyV6c4eIs=; b=PAADAi78HkCPSqfC0wPBNVi4IYgzf5JBuzsOyy
+	k0qZmiZpr2VyDWu4k2460DXNfV8tX/OTj7vNx9ANmEqi2VKwzT+hnblsR2mzOrzg
+	RZnOlsIq61FBdcNGH81XnMeXrUr4Nt1f+8Sy5NIXbbLRc4t13Hee+PG8Cs1UBQEy
+	k9F7sRpTD7WD0FS1gATesqqNge5ItSdtBqnI0F6W4gydGg8qjyip/qwQSZ8c/1oS
+	odIzPlDb+8lbTXSr0fWQ1LglyR2tZZa5AkPYau72n0K0ruKkFGYW1cTm1vY3c9kx
+	ercbtHf+3UOK3wIwUx9Mhoz4G3bROotcgeo1nXqk6iT9N7yg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1yx6c1dq-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 00:52:46 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-384c78aa0dbso413723eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 16:52:46 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 03:27:51 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ad53f538d2so467237a91.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 19 Nov 2026 19:27:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795135965; x=1795740765; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lfYDwuZSFviGTTlMEh9cD/tenkn6JZrvdi0nKAxg6CA=;
-        b=jofrHLu+7pqT9dFoB37pfuzKQ747HyETox6wgdwV4cSq5Gg1C6JbBw0G0ZyYo5scCs
-         ESR7dDbd94+F1df02d+m9xA/rFlbR4WSKDua+XzgUOVxnM9ARLPPKas5mru6P5Zel4+3
-         sUEqDnr7YrWE97we3epLTp4r03lHRJz1MJQ5ktbVPAxJiwIcLU3xVeYmHK6zjz1+Lf9w
-         LrihoIDVj7+CxlJ7H+uLpUQVnpfWV2MALEfOwIn8wDym4tvoLFIDx4mULgqm/c42ouC5
-         BPwZj/iO/iZCZe1ZwQOdVfCgiv5zrG79QcydOOoEoJ/g19JHoQXqTVP000iguzuA3H8h
-         J1WA==
+        d=oss.qualcomm.com; s=google; t=1795145271; x=1795750071; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=DS3T+X1wCXRsTi+mAH4YGUt6zEYW5jwzEoUyV6c4eIs=;
+        b=kRPkmvyLV0Ms7kVt2oGcEo61AK/TQ4QqYh7WrSV2oRiocCXdQtKY/ORv9oUF2UmCNl
+         qMMyIE+DtDMJlM3d1k9aoE76CETypUN3tDfhsoO2evC4qGRZYVWHKYOTARqVaEHwhGwg
+         ytYb9fyuAGLyJWtbBKjjMyWJj1nTutY9C5oXq/YvhbdS0/QHkYZVztx1vtsjEBJfwmX8
+         HJNiksRjCx31/q7+k7U3Cht2IdxqGlvxysO2DPvt6KJP1EcONvx0PxJFxNaYj4aprOf1
+         aUcRATVzOztbWPAx0vfjoG5XBGu3B7/NaYYZnd98eSDfTLteDY9/Ylf42I1oABO9Hiev
+         LIOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795135965; x=1795740765;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lfYDwuZSFviGTTlMEh9cD/tenkn6JZrvdi0nKAxg6CA=;
-        b=OEGit51a7K5kcZFBzpdXetccvcE9TsYxajZ3jK6iN/Yidtzh/VttsPLFDEF9TKOL/f
-         WiyH2UI8a4pI12Vlj8YqTGV6ZFGblkUdEBPJ33iJcX6krDIkqlBwJWdcz2vopJ9Xgt26
-         aNHv5/2omEcdQpTmEZwquMPYVb9AYGxZUo5shd9KizqwXk5fmTBEYJ93xeIWJJK0p9ng
-         GFP270/hnVlq83iSGQOJlQBdEGmViDCZ4ua2JR2JWrLe9j+7Qq8/1SjUd2i+g76oqcRw
-         eNaLLjMKph/LNhogv+hqk9Bnlegmx6+oPIf0JLgJmHtN83RQqbR0yglxy0KLjhm1NRa1
-         7m8A==
-X-Forwarded-Encrypted: i=1; AL+hErH3NnQ5emWhrclsdgo0HNCGaQiPTCPk8XqSqBZpWYhezC4l3GTiOTEMi89G3AA0x1rPalicZnXN9F7FWPf9@vger.kernel.org
-X-Gm-Message-State: APuU4Z8pKW4VrpL5GKPJo32e3ht7bgedaCymzIS4qASwVdtPP4xVo9d8
-	qCR0ICmb0IXkv53ZWi2/mT1L1/c1biDj2eX1ASueBB6Xij54VHpy7WqKFlQJNq3mNxdoB6LUlLv
-	ZAF9//+wacmeY3jUY4aDvxuagRdi4Lw7wv7xG5vn3hYuqE3VWXDsHaGU2APqmcN2/+CRh
-X-Gm-Gg: AZFdTZfroZfSEp/ct19IGBuLhi6ctMATg6kOZ8L2m5IUHzVZXqVTXFxAO3a+TAXjiRz
-	JO0CacFyIx2li1d/P0VwGhkFhdzzyxTJ+8erdZ3L16+TZEgiuso1aQDj9V+EN1vRnUeGpnnJUUO
-	bgcA7eV2tCb84If6JtGNkumWQBxMOWiuDmvmI4xp1T2/Q7ULNvlA4sUgrIa3TYFSb98uf3YH2eA
-	DqtqV+/RhjsSZeB7jFLxVwJo2FU6c4/TOEAbOFoBnf3sbRIqYOHCSUdw3nwaYTRvpQaaZ/+2stm
-	sviYk7aEwLXCOB3MQd2Mae4CUVMkvbSjrxYoGAFuAJxjYcT2LRbQJX8GArgT9qbQbv5t+7dF9J+
-	L44qSxPI7qVCmRw81WhdOT1jny4cm6EdS5Ufyrnwh/nCwcU4/+GK92y84XlsjTuffe/3Cj8NJpZ
-	UgTpsHhID/cI0aLh5VY8iY77iakWMx2cKiz54f
-X-Received: by 2002:a05:7300:e9cd:20b0:36c:f88b:caae with SMTP id 5a478bee46e88-3857025cda6mr1224971eec.22.1795135965110;
-        Thu, 19 Nov 2026 16:52:45 -0800 (PST)
-X-Received: by 2002:a05:7300:e9cd:20b0:36c:f88b:caae with SMTP id 5a478bee46e88-3857025cda6mr1224946eec.22.1795135964551;
-        Thu, 19 Nov 2026 16:52:44 -0800 (PST)
-Received: from hu-scheluve-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm2164705eec.16.2026.11.19.16.52.43
+        d=1e100.net; s=20260707; t=1795145271; x=1795750071;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=DS3T+X1wCXRsTi+mAH4YGUt6zEYW5jwzEoUyV6c4eIs=;
+        b=IZxNQU59IJp6hsrxUsLqoqmqYO1EcChzmjuqsDWV9xodFIAWN94ipnxkDqLDgRVMbY
+         w4lIlPsSXv0X74Tw2MrARRWQKBEXW/uwipNMfkoAzc5rlEhIG6QxvTqZ5btj4qCx4vEq
+         YnE50aNOhLroS00cu5KcjLh6BSamM8RWb+RRFAbl2/B9dMWVRHhgZJ2Cp+I6CMN8aU1S
+         hzrD8baGYA2ytlpDgkTkR+wNtcmeMCOKfgtG0lw0pQMs19pApfyCV7+i78zUspXoAM/r
+         5UdAT9L8ZZGeHmMWM/VS/SFocZk3Fx0RatWM+WgpYeyRUKWpht6+PZoNYphmTmv7Dnr/
+         KzVA==
+X-Forwarded-Encrypted: i=1; AL+hErFBFprN6x2kCtJBFiyZ6c+o32XkdYjyRHVfbviZhe+0puRkgZiIkmqKCSwHIY+Y1+Zdmu7l1gGmgmko2lGo@vger.kernel.org
+X-Gm-Message-State: APuU4Z+oMd2c0f4mu0+iVirQzCfT4uP+wOi0nMTt6XeisrjgNMyH4d8q
+	7n6XKqP8G4jJqGkfDA0sBPwjZxfzeSrh+wjuaY59Z0/pm0ujeL6pf8HEgShiizngqTxdiPwTDly
+	41krCK2g8KFUOJ9hSn6SUF7usI9zjkx8ourx8s0vLnKCQGuDEDPhVWLffsSnIWP+/s2zZ
+X-Gm-Gg: AZFdTZcP1D0J6rcKIYyYSc2nrmuLD6wHV4XQyt9q9+Um9NAeO9J4+lct6m98htd+qJU
+	6cUsR3PoUJYvqXg+qvZmsq2W6+rYjEepP/fUKjVeM80GGnvszDXSQ5DDNEQcmHTFokVSyJlzeyJ
+	xqVeCqC5cjTAPxHK1baWvlhMwq1K1yG/BDfwik12i1NG0OrMgMHOZ54+jek9sYwv4r1z0JCp5iq
+	qegownSgogQNooGRhiWA9pMyhGEsgWzrfgraz0DOmy0z3EzNKuqNgw3aL4796EEPchMIq4uCIpS
+	YHFM8s28ZLsjTMwco3lcC14G5NWq1Mk0UOVDB0nfjWXXp1WrN2rP9Ct/VpjkBgTHVWVTnDkVXmk
+	nGLoLYr5pU1Bo9QKpimQZKzVX3x0lhLsKcMJzNGbQSFnCzNbWbHI5u6Ejcjwve2LwTQfB14PqmC
+	lReS1H+/aWgjLHfbgE0Ds9yg4yLeKmODWZktw=
+X-Received: by 2002:a17:90b:3a4f:b0:3ab:5758:3757 with SMTP id 98e67ed59e1d1-3b41c98bec2mr1331792a91.61.1795145270573;
+        Thu, 19 Nov 2026 19:27:50 -0800 (PST)
+X-Received: by 2002:a17:90b:3a4f:b0:3ab:5758:3757 with SMTP id 98e67ed59e1d1-3b41c98bec2mr1331739a91.61.1795145269729;
+        Thu, 19 Nov 2026 19:27:49 -0800 (PST)
+Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b40578d771sm5278297a91.1.2026.11.19.19.27.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Nov 2026 16:52:44 -0800 (PST)
-From: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
-To: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
-        edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
-        mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com
-Cc: netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, lorenzo.bianconi@oss.qualcomm.com,
-        hongmei.xu@oss.qualcomm.com,
-        Abhishek Chauhan <abhishek.chauhan@oss.qualcomm.com>,
-        Sarosh Hasan <sarosh.hasan@oss.qualcomm.com>,
-        Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
-Subject: [PATCH net-next v5] net: stmmac: dwxgmac2: enable L2 split header support
-Date: Thu, 19 Nov 2026 16:52:43 -0800
-Message-Id: <20261120005243.3724402-1-sagar.cheluvegowda@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+        Thu, 19 Nov 2026 19:27:49 -0800 (PST)
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+Subject: [PATCH v24 0/8] coresight: ctcu: Enable byte-cntr function for TMC
+ ETR
+Date: Fri, 20 Nov 2026 11:27:19 +0800
+Message-Id: <20261120-enable-byte-cntr-for-ctcu-v24-0-2d792c6b4819@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -124,245 +116,497 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAwMyBTYWx0ZWRfX8wiFhL9R9o8I
- SfCMdChg50lpypeq+CcGGF9wCIy1pqOD3SwUeSbQFOBwbvz2dmog37ucEVFFA/E/Vi97kAZngfi
- l8fvFPFiCdqXySkZaUEko+oNu6P2VrV91GuFkMvm55aUsIEbK3N4cg+SWWxImfoQCIK9Zrk61tb
- gpmn62nGPqi376NVZV5mbxix1Kgg7LDiEgNp9mnKKgugbkLwbUz04U5JVLc1AuPCMQwCzO+XNpb
- 2n97QlnbeV25vcBjxyXeIrt9wxWRNxJlJgtPOggpJFOy2X1VNTMwfpQBq4yu/ogglkPsm1og3Na
- y+nOlrsjOB48vJ7XmwxArsUw2F6gCcasvxrOPkPZwqb31dQ1SrIUXGzqiQHWz155P8d7vT8iDUo
- L9R5D5cYo5seHhJMSKZ0QSHPW8lLzUIWTroHbLIw6cZPGGZpa3L9QXVDnMhOhk9LPjjEXKBHpXC
- 5G/rxkbAkOYi/ytDnrA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAwMyBTYWx0ZWRfX8xxoMthnnmam
- HbSJhl/IiRF1iRLbXe9+jvoHlkPG+Q7xI/JQu+GNSO1mRsBSOiGKiKjl7bQ43cJ59bbSmRs0d54
- 5wrlTDbzw540uJEE4hLWdMC2fvcRluA=
-X-Proofpoint-ORIG-GUID: VlYcGJ-fzJdXMbX5UsOlOv9xNTY1glWL
-X-Proofpoint-GUID: VlYcGJ-fzJdXMbX5UsOlOv9xNTY1glWL
-X-Authority-Analysis: v=2.4 cv=KuHYSmWN c=1 sm=1 tr=0 ts=6aff99de cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=GebObiA6MxcdEQzCM0oA:9 a=scEy_gLbYbu1JhEsrz4S:22
+X-B4-Tracking: v=1; b=H4sIABm+/2oC/43QzW7CMAwA4FdBOS8odpq/nfYe0w5N4oxK0LK2o
+ CHEu89wGD2s0S6WbNmfLV/FRGNHk3jdXMVI527qhp4TbF42Iu3a/pNkl7kgUKFVWgVJfRv3JON
+ lJpn6eZRlGGWa00mW4i1ZCD66Inj+OFLpvh/4+wfnu26ah/Hy2HWG5l7+D8utUsmkvEdNpvVk3
+ 4Zp2n6d2n0aDoctB3Hnz2AWJOgqaZgE51yBhrKGsEbaBYl10jLp2gZ0RoDo8xrpnmSDUCUdkyE
+ VbUsxpiS1RvonaZSrkp5JjJhNUI3VrV4jw5O0aKpkYNKXGAsiee1hhUT4JQEU1kh+C1+pgZQN0
+ XmzdiXiggRVJZFJZXLjk6LIzWukXpK+SmomrSs55Ggjs3+Qt9vtB/sdUrVkAwAA
+To: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>,
+        James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+        Jie Gan <jie.gan@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Mao Jinlong <jinlong.mao@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
+Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795145262; l=24122;
+ i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
+ bh=EeWo/MhuEN4nLqTxyzCGotWqSDNeGXl8DBhANAuDJq8=;
+ b=JSQ3yclf+RFUhWfWKJHk0uiGdYU4WK8RMH0dkQf3Ib2cwfW5c8lnRwXkXMOlof1/8KsvYNI++
+ bUGjpXYi8MqBKsMiycQ/z4wI74p5reM1pxqIhwpikfbTDJWVvjXVYl9
+X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
+ pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
+X-Proofpoint-GUID: rF-iP1Tk9PHdnqj1APRA2LpWouvRiNZt
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIwMDAxMyBTYWx0ZWRfXyp5FNOL3xiw5
+ toDbuvCgWDcDMhdxIduZI+hgrzUZtNIeexyVj0mE1L3CUbxKMgOiQECx6jvgpV7Jk1Z0SHuXOLX
+ ydm9XBNJt/ah4FiS3lk1Bm5X8UFayOw=
+X-Proofpoint-ORIG-GUID: rF-iP1Tk9PHdnqj1APRA2LpWouvRiNZt
+X-Authority-Analysis: v=2.4 cv=FPmOVOos c=1 sm=1 tr=0 ts=6affbe37 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=Z-5mNY9kedEH7sAHGBgA:9
+ a=AWTiQ6kknJYosOI9:21 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIwMDAxMyBTYWx0ZWRfX0mvVwrDisxtc
+ meOAiu4zfz4WcfB5pO2RSAmyd1/+rMaQ/DGUuv01m3RakSLF2F7/6sDiop1mXUwjJCRTIlz37TK
+ +8hVHU7XSQr7M7euL2SklTM8UsSlT5QHZMX1JOhd0EYYN8WqGkQ2rNWVYlULuPV5mRQQuqd+CQn
+ 14QOFGCAY1nJ5Bl7MYe/0FRmvag5LS843KkGn8cGjVKmk3040wdC/WgTS9BhpxYjbEVmFCHGcY7
+ XpOGqYe1tNpBo+izHc/VY9tjnaCEj8ezr/1jRJu+KQV/DFssfI2n/qwLq7pw9aMOzHBpWEcRJ0Q
+ RbMFhIJkEN6p5kD7d6B4jS+sMc2CA6xtqEmbjNs6W7PCOfS7S340flUPVcKjEmjuWcTHIdO0x1S
+ 1cXE5f3TQaOq+8Tk6FJJgGg+NbyB0Ii8NicLZuZTYetuntjO2cCAGDOc3HjSWnrnn9yXo0aUWzm
+ DWjqC4s7/YL+RzigSUg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-20_01,2026-11-19_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 impostorscore=0
- priorityscore=1501 bulkscore=0 adultscore=0 spamscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 adultscore=0 malwarescore=0 spamscore=0 suspectscore=0
+ bulkscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611200003
+ definitions=main-2611200013
 
-When split header is enabled, XGMAC2 only splits IP packets that are
-untagged or VLAN stripped, at the L3/L4 header boundary. Other packets,
-such as tagged AV packets, can't use the split-header path.
+The byte-cntr function provided by the CTCU device is used to count the
+trace data entering the ETR. An interrupt is triggered if the data size
+exceeds the threshold set in the BYTECNTRVAL register. The interrupt
+handler counts the number of triggered interruptions.
 
-Add a config_l2_split MAC callback for the MAC-global part of split
-header and implement it for XGMAC2: select split at the L2 header offset
-(SPLM = L2OFST) and enable Split AV (SAVE_EN) in XGMAC_EXT_CFG1,
-extending the dwmac4 sequence added by commit d10f1a4e44c3 ("net:
-stmmac: Programming sequence for VLAN packets with split header") to
-XGMAC2. The databook states that L2 split is not supported for packets
-with variable preamble, so also clear VPRE in XGMAC_EXT_CFG0 while L2
-split is enabled.
+Based on this concept, the irq_cnt can be used to determine whether
+the etr_buf is full. The ETR device will be disabled when the active
+etr_buf is nearly full or a timeout occurs. The nearly full buffer will
+be switched to background after synced. A new buffer will be picked from
+the etr_buf_list, then restart the ETR device.
 
-The callback is called once, only on split header capable cores, and
-reverts SPLM/SAVE_EN when split header is disabled, e.g. when RX
-checksum offload is turned off. VPRE is left cleared, as it is reserved
-on cores without variable preamble support. The callback is not
-implemented for XLGMAC, which shares the XGMAC2 DMA ops but uses offset
-0x140 for XLGMAC_RXQ_ENABLE_CTRL0.
+The byte-cntr reading functions can access data from the synced and
+deactivated buffer, transferring trace data from the etr_buf to userspace
+without stopping the ETR device.
 
-Also make dwxgmac2_get_rx_header_len() follow the databook's "Header
-Length Availability in RDES2" table: HL is only valid on the first
-descriptor, and L34T is only valid on the last one. For non-IP packets
-RDES2[1:0] carry AV status, so HL is RDES2[9:2].
+The byte-cntr read operation has integrated with the file node tmc_etr,
+for example:
+/dev/tmc_etr0
+/dev/tmc_etr1
 
-Co-developed-by: Abhishek Chauhan <abhishek.chauhan@oss.qualcomm.com>
-Signed-off-by: Abhishek Chauhan <abhishek.chauhan@oss.qualcomm.com>
-Co-developed-by: Sarosh Hasan <sarosh.hasan@oss.qualcomm.com>
-Signed-off-by: Sarosh Hasan <sarosh.hasan@oss.qualcomm.com>
-Signed-off-by: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
+There are two scenarios for the tmc_etr file node with byte-cntr function:
+1. BYTECNTRVAL register is configured and byte-cntr is enabled -> byte-cntr read
+2. BYTECNTRVAL register is reset or byte-cntr is disabled -> original behavior
+
+Shell commands to enable byte-cntr reading for etr0:
+echo 1 > /sys/bus/coresight/devices/ctcu0/irq_enabled0
+echo 1 > /sys/bus/coresight/devices/tmc_etr0/enable_sink
+echo 1 > /sys/bus/coresight/devices/etm0/enable_source
+cat /dev/tmc_etr0
+
+Reset the flag of the BYTECNTR register for etr0:
+echo 0 > /sys/bus/coresight/devices/ctcu0/irq_enabled0
+
 ---
-v5:
-  - Move the XGMAC_EXT_CFG0/EXT_CFG1 programming out of the DMA
-    enable_sph op into a new config_l2_split MAC op implemented only
-    for XGMAC2. The shared DMA op also ran on XLGMAC, where 0x140 is
-    XLGMAC_RXQ_ENABLE_CTRL0, and cleared the RX queue 4 enable bit
-    (Sashiko)
-  - Program it once instead of per RX channel, only when sph_capable,
-    and revert SPLM/SAVE_EN when split header is disabled (Sashiko)
-  - Clear the SPLM field before setting it (Sashiko)
-  - Describe the FD/LD handling as following the databook rather than
-    as a fix
-  - Fix line length warning
-v4: https://lore.kernel.org/netdev/20261015221215.1714047-1-sagar.cheluvegowda@oss.qualcomm.com/
-  - Only read the header length on the first descriptor (FD=1)
-v3: https://lore.kernel.org/netdev/20261013192759.776537-1-sagar.cheluvegowda@oss.qualcomm.com/
-  - Use zero-padded 0x00000140 for XGMAC_EXT_CFG0
-v2: https://lore.kernel.org/netdev/20261007183905.2582759-1-sagar.cheluvegowda@oss.qualcomm.com/
-  - Add XGMAC_CONFIG1_SPLM_MASK and use it in XGMAC_CONFIG1_SPLM()
-v1: https://lore.kernel.org/netdev/20260922232116.889630-1-sagar.cheluvegowda@oss.qualcomm.com/
+Changes in v24
+1. coresight: tmc: add create/clean functions for etr_buf_list:
+   - Allocate all the nodes at once, as their number is known, and the
+     buffers first into a local list, and add the list to the
+     etr_buf_list in one critical section once the state of the sink is
+     checked again, instead of adding every node as it is allocated. The
+     array of the nodes is freed at once when the list is cleaned. The
+     drvdata is not touched on failure, so drop the special handling of
+     the live sysfs_buf when cleaning up.
+   - Don't set up the drvdata->sysfs_buf in tmc_create_etr_buf_list(),
+     it is done by the sink enabling only. The live sysfs_buf is wrapped
+     into the first node and the new nodes are free.
+   - Use a common helper to check the state of the sink and a single
+     exit path, instead of repeating the unlock, kfree and return.
+   - Fail with -EBUSY if the etr_buf_list already exists, as there must
+     be only one owner of the list.
+   - Rename the is_free of the etr_buf_node to free.
+   - Fix a typo in the commit message.
+2. coresight: tmc: add a function to switch the ETR to a free etr_buf:
+   - Remove tmc_etr_reset_sysfs_buf(), __tmc_etr_enable_hw() programs the
+     RRP/RWP/STS.Full for the ETR retaining them, and the other ETRs
+     reset them when disabled.
+   - Rename the is_free of the etr_buf_node to free.
+   - Keep the switched out buffer as the current one if the ETR fails to
+     restart in tmc_etr_switch_buf_node(), as the ETR may retain its
+     pointers, so a later sync matches the hardware.
+3. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Drop the buf_node before the etr_buf_list is freed in
+     tmc_read_unprepare_byte_cntr(), so a reader entering while reading
+     is still set can't use the freed node.
+   - Stop the byte-cntr in tmc_read_prepare_byte_cntr() when it can't
+     serve the trace (e.g. the buffer is of the reserved mode) and the
+     generic read is used instead, so the enable flag and the byte-cntr
+     register are not left set if the path is disabled with the generic
+     read still open.
+   - End the byte-cntr reading with -ENODEV in tmc_byte_cntr_get_data()
+     whenever the byte-cntr is stopped while the sink is still running,
+     instead of checking the removing flag, which is not ordered with the
+     enable flag. The generic read can't be used for the unsynced buffer
+     in use.
+   - Start the byte-cntr even if the byte-cntr read of the previous trace
+     is still in progress: the sink can't be enabled while its
+     etr_buf_list exists, and ctcu_byte_cntr_stop() stops the byte-cntr if
+     the enabling of the path fails. A trace enabled while the read is
+     being finished or prepared now gets the byte-cntr.
+- Link to v23: https://lore.kernel.org/r/20261118-enable-byte-cntr-for-ctcu-v23-0-67fd9db6bc0e@oss.qualcomm.com
 
- .../net/ethernet/stmicro/stmmac/dwxgmac2.h    |  9 +++++++++
- .../ethernet/stmicro/stmmac/dwxgmac2_core.c   | 20 +++++++++++++++++++
- .../ethernet/stmicro/stmmac/dwxgmac2_descs.c  | 16 ++++++++++++++-
- drivers/net/ethernet/stmicro/stmmac/hwif.h    |  4 ++++
- .../net/ethernet/stmicro/stmmac/stmmac_main.c |  5 +++++
- 5 files changed, 53 insertions(+), 1 deletion(-)
+Changes in v23 - addressing Sashiko comments
+1. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Serialize the readers of tmc_byte_cntr_get_data() with a per-port
+     mutex, so multiple readers of the same file descriptor can't race on
+     the buf_node and cause a NULL pointer dereference.
+   - Don't start byte-cntr for a sink in the reserved buffer mode, as the
+     reserved buffers share one memory region and can't be switched.
+   - Return -EBUSY from read_prepare() when a generic read session is in
+     progress, instead of marking byte-cntr as reading temporarily, which
+     misleads the reader of that session.
+   - Start the byte-cntr function only with the first path of a sink, by
+     checking the mode of the sink, instead of the enable flag. A path
+     enabled later can't start byte-cntr on a running sink, which would
+     otherwise leak the enable flag if the enabling of that path fails.
+   - Reject changing irq_enabled while the byte-cntr function is running,
+     so the generic read can't be forced on an armed byte-cntr. Update the
+     ABI file accordingly.
+   - Disable the byte-cntr IRQ in ctcu_platform_remove() when byte-cntr is
+     running, as ctcu_byte_cntr_stop() skips the register once the enable
+     flag is cleared.
+- Link to v22: https://lore.kernel.org/r/20261110-enable-byte-cntr-for-ctcu-v22-0-05d48c0eb110@oss.qualcomm.com
 
-diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
-index f8ab347f7b5b..7f43a0b17083 100644
---- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
-+++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
-@@ -167,6 +167,12 @@
- #define XGMAC_HW_FEATURE4		0x0000012c
- #define XGMAC_HWFEAT_EASP		BIT(4)
- #define XGMAC_HWFEAT_PCSEL		GENMASK(1, 0)
-+#define XGMAC_EXT_CFG0			0x00000140
-+#define XGMAC_EXT_CFG0_VPRE		BIT(8)
-+#define XGMAC_EXT_CFG1			0x00000144
-+#define XGMAC_CONFIG1_SAVE_EN		BIT(24)
-+#define XGMAC_CONFIG1_SPLM_MASK		GENMASK(9, 8)
-+#define XGMAC_CONFIG1_SPLM(v)		FIELD_PREP(XGMAC_CONFIG1_SPLM_MASK, v)
- #define XGMAC_MAC_DPP_FSM_INT_STATUS	0x00000150
- #define XGMAC_MAC_FSM_CONTROL		0x00000158
- #define XGMAC_PRTYEN			BIT(1)
-@@ -434,13 +440,16 @@
- #define XGMAC_RDES2_L4FM		BIT(28)
- #define XGMAC_RDES2_L3FM		BIT(27)
- #define XGMAC_RDES2_HL			GENMASK(9, 0)
-+#define XGMAC_RDES2_NONIPHL		GENMASK(9, 2)
- #define XGMAC_RDES3_OWN			BIT(31)
- #define XGMAC_RDES3_CTXT		BIT(30)
- #define XGMAC_RDES3_IOC			BIT(30)
-+#define XGMAC_RDES3_FD			BIT(29)
- #define XGMAC_RDES3_LD			BIT(28)
- #define XGMAC_RDES3_CDA			BIT(27)
- #define XGMAC_RDES3_RSV			BIT(26)
- #define XGMAC_RDES3_L34T		GENMASK(23, 20)
-+#define XGMAC_RDES3_L2T			GENMASK(19, 16)
- #define XGMAC_RDES3_ET_LT		GENMASK(19, 16)
- #define XGMAC_L34T_IP4TCP		0x1
- #define XGMAC_L34T_IP4UDP		0x2
-diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-index 09194b9d8322..58d7433e8b17 100644
---- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-+++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-@@ -1412,6 +1412,25 @@ static int dwxgmac2_config_l4_filter(struct mac_device_info *hw, u32 filter_no,
- 	return 0;
- }
- 
-+static void dwxgmac2_config_l2_split(struct mac_device_info *hw, bool en)
-+{
-+	void __iomem *ioaddr = hw->pcsr;
-+	u32 value;
-+
-+	/* L2 split is not supported for packets with variable preamble */
-+	if (en) {
-+		value = readl(ioaddr + XGMAC_EXT_CFG0);
-+		value &= ~XGMAC_EXT_CFG0_VPRE;
-+		writel(value, ioaddr + XGMAC_EXT_CFG0);
-+	}
-+
-+	value = readl(ioaddr + XGMAC_EXT_CFG1);
-+	value &= ~(XGMAC_CONFIG1_SPLM_MASK | XGMAC_CONFIG1_SAVE_EN);
-+	if (en)
-+		value |= XGMAC_CONFIG1_SPLM(1) | XGMAC_CONFIG1_SAVE_EN;
-+	writel(value, ioaddr + XGMAC_EXT_CFG1);
-+}
-+
- const struct stmmac_ops dwxgmac210_ops = {
- 	.core_init = dwxgmac2_core_init,
- 	.irq_modify = dwxgmac2_irq_modify,
-@@ -1451,6 +1470,7 @@ const struct stmmac_ops dwxgmac210_ops = {
- 	.config_l3_filter = dwxgmac2_config_l3_filter,
- 	.config_l4_filter = dwxgmac2_config_l4_filter,
- 	.fpe_map_preemption_class = dwxgmac3_fpe_map_preemption_class,
-+	.config_l2_split = dwxgmac2_config_l2_split,
- };
- 
- static void dwxlgmac2_rx_queue_enable(struct mac_device_info *hw, u8 mode,
-diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-index 6719ac6e395b..b28aa39f9947 100644
---- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-+++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-@@ -292,8 +292,22 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
- 
- static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
- {
--	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-+	u32 rdes3 = le32_to_cpu(p->des3);
-+
-+	/* HL is only defined on the first descriptor */
-+	if (!(rdes3 & XGMAC_RDES3_FD))
-+		return;
-+
-+	/* when FD=1 and LD=0, HL is RDES2[9:0] */
-+	if (!(rdes3 & XGMAC_RDES3_LD)) {
-+		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-+		return;
-+	}
-+
-+	if (rdes3 & XGMAC_RDES3_L34T)
- 		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-+	else if (rdes3 & XGMAC_RDES3_L2T)
-+		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
- }
- 
- static void dwxgmac2_set_sec_addr(struct dma_desc *p, dma_addr_t addr, bool is_valid)
-diff --git a/drivers/net/ethernet/stmicro/stmmac/hwif.h b/drivers/net/ethernet/stmicro/stmmac/hwif.h
-index 8ae95e91a36a..80131fdda2d5 100644
---- a/drivers/net/ethernet/stmicro/stmmac/hwif.h
-+++ b/drivers/net/ethernet/stmicro/stmmac/hwif.h
-@@ -410,6 +410,8 @@ struct stmmac_ops {
- 	int (*fpe_map_preemption_class)(struct net_device *ndev,
- 					struct netlink_ext_ack *extack,
- 					u32 pclass);
-+	/* L2 header split, MAC-global part of split header */
-+	void (*config_l2_split)(struct mac_device_info *hw, bool en);
- };
- 
- #define stmmac_mac_pcs_init(__priv) \
-@@ -492,6 +494,8 @@ struct stmmac_ops {
- 	stmmac_do_callback(__priv, mac, config_l4_filter, __args)
- #define stmmac_fpe_map_preemption_class(__priv, __args...) \
- 	stmmac_do_callback(__priv, mac, fpe_map_preemption_class, __args)
-+#define stmmac_config_l2_split(__priv, __args...) \
-+	stmmac_do_void_callback(__priv, mac, config_l2_split, __args)
- 
- struct ptp_system_timestamp;
- 
-diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-index f256244ce0d1..0c333d14be4d 100644
---- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-+++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-@@ -3832,6 +3832,8 @@ static int stmmac_hw_setup(struct net_device *dev)
- 
- 	/* Enable Split Header */
- 	sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
-+	if (priv->sph_capable)
-+		stmmac_config_l2_split(priv, priv->hw, sph_en);
- 	for (chan = 0; chan < rx_cnt; chan++)
- 		stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
- 
-@@ -6467,6 +6469,7 @@ static int stmmac_set_features(struct net_device *netdev,
- 		bool sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
- 		u8 chan;
- 
-+		stmmac_config_l2_split(priv, priv->hw, sph_en);
- 		for (chan = 0; chan < priv->plat->rx_queues_to_use; chan++)
- 			stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
- 	}
-@@ -7430,6 +7433,8 @@ int stmmac_xdp_open(struct net_device *dev)
- 
- 	/* Adjust Split header */
- 	sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
-+	if (priv->sph_capable)
-+		stmmac_config_l2_split(priv, priv->hw, sph_en);
- 
- 	/* DMA RX Channel Configuration */
- 	for (chan = 0; chan < rx_cnt; chan++) {
+Changes in v22 - addressing Sashiko comments
+1. coresight: tmc: add create/clean functions for etr_buf_list:
+   - Don't free the live sysfs_buf when tmc_create_etr_buf_list() fails,
+     even if the sink was disabled while the lock was dropped for the
+     allocation. The buffer holds the captured trace data.
+   - Fail with -EINVAL if the wrapped sysfs_buf or a newly allocated
+     buffer is of the reserved mode, as the reserved mode may be selected
+     after the sink was enabled or while the buffers are allocated.
+   - Allocate the buffers of the list with the size of the live sysfs_buf,
+     so all of them match, and match the IRQ threshold, even if the
+     buffer_size was changed after the sink was enabled.
+2. coresight: tmc: add a function to switch the ETR to a free etr_buf:
+   - Don't pick a buffer which is being read when switching, so the ETR
+     can't be restarted into it.
+3. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Don't treat a zero-length read as the end of the buffer in
+     tmc_byte_cntr_get_data(), which dropped the unread data.
+   - Don't call the byte-cntr read_unprepare() when closing a generic
+     read session (drvdata->reading is set), so it can't tear down the
+     state of another session or unbalance disable_irq_wake() and
+     module_put().
+   - Return the errors of read_prepare() to open(), except the -EINVAL
+     and -ENODEV which mean byte-cntr is not applicable, instead of
+     falling back to the generic read, which stops the ETR.
+   - Start the byte-cntr function only once for a sink: a path enabled on
+     a running sink keeps the threshold programmed by the first path, and
+     no start while the previous byte-cntr read is still in progress.
+   - Return -ENODEV from tmc_byte_cntr_get_data() when the CTCU device is
+     removed while the sink is still running, instead of reading the
+     buffer in use which is not synced.
+   - Drop the byte-cntr ops after the sessions ended and before the CTCU
+     device is unregistered, instead of when the devres is released.
+     Each device drops its ops user only once.
+   - Make ctcu_byte_cntr_init() return the error of
+     devm_add_action_or_reset() and fail the probe.
+   - Describe in the ABI file when the irq_enabled takes effect.
+- Link to v21: https://lore.kernel.org/r/20261102-enable-byte-cntr-for-ctcu-v21-0-231e069b7853@oss.qualcomm.com
+
+Changes in v21:
+1. coresight: tmc: add create/clean functions for etr_buf_list:
+   - Make the byte-cntr read and the generic sysfs read of the TMC
+     exclusive: tmc_create_etr_buf_list() returns -EBUSY if a generic
+     read is in progress and tmc_read_prepare_etr() returns -EBUSY if the
+     etr_buf_list is not empty.
+   - Wrap the live sysfs_buf into the list only while the sink is enabled
+     in sysfs mode, and keep it in tmc_clean_etr_buf_list() only in that
+     mode, as the sink enable path may reuse or free the sysfs_buf
+     otherwise.
+   - Don't create the list in the reserved buffer mode, as all the
+     etr_buf of this mode share the same reserved region.
+   - Fixed the kernel-doc of struct etr_buf_node and
+     tmc_create_etr_buf_list().
+2. coresight: tmc: add a function to switch the ETR to a free etr_buf (new):
+   - Move the buffer switch out of the byte-cntr patch to a TMC helper,
+     which stops the ETR, swaps the etr_buf and restarts the ETR in one
+     critical section. The switch was done in three separate critical
+     sections before, so tmc_disable_etr_sink() could run in between and
+     leave drvdata->etr_buf out of sync with the hardware.
+3. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Fixed the drain of the last etr_buf after the trace is stopped:
+     tmc_etr_get_sysfs_trace() falls back to the generic read when
+     byte-cntr has no more data (v20 returned EOF and lost the last
+     etr_buf). Other results of the byte-cntr read, such as the one of a
+     signal, are returned as they are.
+   - Program and reset the byte-cntr register when the path is enabled
+     and disabled, instead of in the read prepare/unprepare. The CTCU may
+     be powered off once the trace path is released, and accessing its
+     register from the read unprepare, which runs when the file is
+     closed after the trace is stopped, hangs the bus.
+   - Serialise the CTCU register programming with the ATID programming
+     with drvdata->spin_lock, as both unlock and lock the same register.
+   - Fixed the use-after-free of the byte-cntr data between
+     ctcu_platform_remove() and the read unprepare: the remove waits for
+     a completion which is the last access of the read unprepare, and a
+     new path can't start byte-cntr once the device is being removed.
+   - Wake up the blocked reader once the byte-cntr is stopped, instead of
+     waiting for the timeout.
+   - Start byte-cntr in ctcu_enable() only in sysfs mode and after the
+     trace ID is set.
+   - Check the interrupt returned by of_irq_get() against 0.
+   - Report the interrupt overwrite of the etr_buf which is handed over
+     for reading, instead of the one which is tracing.
+   - Make byte_cntr_sysfs_ops static and fixed the kernel-doc of the
+     structs in coresight-ctcu.h.
+   - Count the byte-cntr interrupts since the trace is started, and not reset
+     the count when the read session starts, so the first etr_buf is switched
+     at the right fill level for a reader which opens after the trace started.
+   - Ignore the ports which are not initialized by ctcu_byte_cntr_init().
+   - Updated the commit message.
+- Link to v20: https://lore.kernel.org/r/20261030-enable-byte-cntr-for-ctcu-v20-0-bd5c3ac9f916@oss.qualcomm.com
+
+Changes in v20:
+1. coresight: core: refactor ctcu_get_active_port and make it generic:
+   - Check the port number returned by coresight_get_in_port() against
+     ETR_MAX_NUM in ctcu_set_etr_traceid() to avoid an out-of-bounds
+     access of the per-port arrays with a bad DT port number.
+2. coresight: tmc: add create/clean functions for etr_buf_list:
+   - Take drvdata->sysfs_buf and add the first node to etr_buf_list in
+     one critical section, and do all etr_buf_list updates (add and
+     delete) with drvdata->spinlock held.
+   - Return -EBUSY from tmc_etr_get_sysfs_buffer() while etr_buf_list is
+     not empty, so the ETR sink enable path cannot free or replace a
+     buffer that is still owned by the list during a byte-cntr session.
+3. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Fixed a NULL pointer dereference in ctcu_get_byte_cntr() when the
+     opened ETR is not connected to a CTCU device, since the byte-cntr
+     sysfs ops are global to all the TMC ETRs.
+   - Fixed the sysfs read fallback: tmc_byte_cntr_get_data() now returns
+     -EINVAL unless a byte-cntr read session is active, and
+     tmc_etr_get_sysfs_trace() falls back to the generic read only for
+     -EINVAL. Errors and EOF of the byte-cntr read are returned as-is
+     instead of reading the live buffer.
+   - Fixed a race between the buffer switch and the sink disable path:
+     tmc_etr_enable_disable_hw() now checks the sink mode with
+     drvdata->spinlock held, so the ETR is not restarted after the sink
+     has been disabled.
+   - tmc_read_prepare_byte_cntr(): check irq_enabled with the
+     byte_cntr_data->spin_lock held, and clear reading under the lock
+     and wake up the waiter on the buffer list allocation failure path.
+   - Pin the module with try_module_get() for the duration of a byte-cntr
+     read session, so unloading the module fails with -EBUSY instead of
+     blocking in ctcu_platform_remove(). Documented that a manual unbind
+     still waits for the tmc_etr file to be closed.
+   - Dropped IRQF_SHARED from the byte-cntr interrupt: the handler does
+     not check the interrupt source.
+   - Read curr_buf with drvdata->spinlock held and handle a missing
+     current node in ctcu_byte_cntr_switch_buffer().
+   - Initialize the lock and waitqueue of every port before requesting
+     its interrupt, skip the ports without a registered IRQ in
+     ctcu_platform_remove(), and only expose irq_enabled for the ports
+     with a registered IRQ.
+   - Refcount the byte-cntr sysfs ops registration across CTCU devices
+     with a devm action, so removing one CTCU no longer disables
+     byte-cntr for the others. Replaced the single-CTCU-instance comment
+     on byte_cntr_sysfs_ops accordingly.
+- Link to v19: https://lore.kernel.org/r/20260625-enable-byte-cntr-for-ctcu-v19-0-8fbbf22e8381@oss.qualcomm.com
+
+Changes in v19:
+1. coresight: tmc: add create/clean functions for etr_buf_list:
+   - Simplified the kernel-doc "Locking:" note on tmc_create_etr_buf_list()
+     and tmc_clean_etr_buf_list() to state only the required contract
+     (caller must guarantee exclusive access to drvdata->etr_buf_list),
+     dropping the over-specific call-path details.
+   - Lock the required code block in create/clean functions.
+2. coresight: ctcu: enable byte-cntr for TMC ETR devices:
+   - Fixed a stale reading-state / double-free when irq_enabled was
+     cleared between prepare and unprepare: the byte-cntr read_unprepare
+     would return an error and tmc_read_unprepare_etr() would fall back
+     to the normal unprepare path, freeing drvdata->sysfs_buf while it
+     was still owned by the byte-cntr buffer list. irq_enabled_store()
+     now returns -EBUSY while byte_cntr_data->reading is set, so the flag
+     can no longer change mid-session, and tmc_read_unprepare_byte_cntr()
+     additionally guards on byte_cntr_data->reading.
+   - Moved enable_irq_wake()/disable_irq_wake() out of the
+     byte_cntr_data->spin_lock critical section in
+     tmc_read_prepare_byte_cntr()/tmc_read_unprepare_byte_cntr().
+     irq_set_irq_wake() may sleep on slow-bus irqchips, so it must not
+     be called under a raw spinlock. The threshold IRQ is already
+     disabled by the in-lock register write before disable_irq_wake() on
+     the unprepare path, so no wake event can race in the gap.
+   - Added a comment on the byte_cntr_sysfs_ops pointer documenting the
+     single-CTCU-instance-per-system assumption.
+- Link to v18: https://lore.kernel.org/r/20260507-enable-byte-cntr-for-ctcu-v18-0-2b2d590463a3@oss.qualcomm.com
+
+Changes in v18:
+1. add a NULL check for the in_conns instance in patch 1.
+2. fix a bug in patch 2: the tmc_alloc_etr_buf never return NULL and the
+   previous check for the return value is incorrect.
+3. add more kernel_doc description for tmc_clean_etr_buf_list function
+   in patch 2
+- Link to v17: https://lore.kernel.org/r/20260421-enable-byte-cntr-for-ctcu-v17-0-9cf36ff55fc0@oss.qualcomm.com
+
+Changes in v17:
+1. fix race issue during allocat buffer.
+2. fix user after free issue observed when remove module.
+- Link to v16: https://lore.kernel.org/r/20260323-enable-byte-cntr-for-ctcu-v16-0-7a413d211b8d@oss.qualcomm.com
+
+Changes in v16:
+1. Remove lock/unlock processes in patch "coresight: tmc: add create/clean
+   functions for etr_buf_list" because we are allocating/freeing memory.
+- Link to v15: https://lore.kernel.org/r/20260313-enable-byte-cntr-for-ctcu-v15-0-1777f14ed319@oss.qualcomm.com
+
+Changes in v15:
+1. add lockdep_assert_held in patch "coresight: tmc: add create/clean
+   functions for etr_buf_list"
+2. optimize tmc_clean_etr_buf_list function
+3. optimize the patch "enable byte-cntr for TMC ETR devices" according
+   to Suzuki's comments
+   - call byte_cntr_sysfs_ops from etr_sysfs_ops
+   - optimize the lock usage in all functions
+   - remove the buf_node parameter in etr_drvdata, move it to
+     byte_cntr_data
+   - move the tmc_reset_sysfs_buf function to tmc-etr.c
+   - add a read flag to struct etr_buf_node to allow updating pos while
+     traversing etr_buf_list during data reads.
+Link to v14: https://lore.kernel.org/r/20260309-enable-byte-cntr-for-ctcu-v14-0-c08823e5a8e6@oss.qualcomm.com
+
+Changes in V14:
+1. Drop the patch: integrate byte-cntr's sysfs_ops with tmc sysfs file_ops
+2. Replace tmc_sysfs_ops with byte_cntr_sysfs_ops in byte_cntr_start
+   function and restore etr_sysfs_ops in byte_cntr_unprepare function.
+3. Remove redundant checks in byte‑cntr functions.
+Link to V13: https://lore.kernel.org/all/20260223-enable-byte-cntr-for-ctcu-v13-0-9cb44178b250@oss.qualcomm.com/
+
+Changes in v13:
+1. initilize the byte_cntr_data->raw_spin_lock before using.
+2. replace kzalloc with kzalloc_obj.
+Link to V12: https://lore.kernel.org/all/20260203-enable-byte-cntr-for-ctcu-v12-0-7bf81b86b70e@oss.qualcomm.com/
+
+Changes in v12:
+1. Add a new function for retrieving the CTCU's coresight_dev instead of
+   refactor the existing function.
+Link to v11: https://lore.kernel.org/r/20260126-enable-byte-cntr-for-ctcu-v11-0-c0af66ba15cf@oss.qualcomm.com
+
+Changes in v11:
+1. Correct the description in patch1 for the function coresight_get_in_port.
+2. Renaming the sysfs_ops to tmc_sysfs_ops per Suzuki's suggestion.
+Link to v10: https://lore.kernel.org/r/20260122-enable-byte-cntr-for-ctcu-v10-0-22978e3c169f@oss.qualcomm.com
+
+Changes in v10:
+1. fix a free memory issue that is reported by robot for patch 2.
+Link to v9: https://lore.kernel.org/r/20251224-enable-byte-cntr-for-ctcu-v9-0-886c4496fed4@oss.qualcomm.com
+
+Changes in v9:
+1. Drop the patch: add a new API to retrieve the helper device
+2. Add a new patch to refactor the tmc_etr_get_catu_device function,
+   making it generic to support all types of helper devices associated with ETR.
+3. Optimizing the code for creating irq_threshold sysfs node.
+4. Remove interrupt-name property and obtain the IRQ based on the
+   in-port number.
+Link to v8: https://lore.kernel.org/r/20251211-enable-byte-cntr-for-ctcu-v8-0-3e12ff313191@oss.qualcomm.com
+
+Changes in V8:
+1. Optimizing the patch 1 and patch 2 according to Suzuki's comments.
+2. Combine the patch 3 and patch 4 together.
+3. Rename the interrupt-name to prevent confusion, for example:etr0->etrirq0.
+Link to V7 - https://lore.kernel.org/all/20251013-enable-byte-cntr-for-ctcu-v7-0-e1e8f41e15dd@oss.qualcomm.com/
+
+Changes in V7:
+1. rebased on tag next-20251010
+2. updated info for sysfs node document
+Link to V6 - https://lore.kernel.org/all/20250908-enable-byte-cntr-for-tmc-v6-0-1db9e621441a@oss.qualcomm.com/
+
+Changes in V6:
+1. rebased on next-20250905.
+2. fixed the issue that the dtsi file has re-named from sa8775p.dtsi to
+   lemans.dtsi.
+3. fixed some minor issues about comments.
+Link to V5 - https://lore.kernel.org/all/20250812083731.549-1-jie.gan@oss.qualcomm.com/
+
+Changes in V5:
+1. Add Mike's reviewed-by tag for patchset 1,2,5.
+2. Remove the function pointer added to helper_ops according to Mike's
+   comment, it also results the patchset has been removed.
+3. Optimizing the paired create/clean functions for etr_buf_list.
+4. Remove the unneeded parameter "reading" from the etr_buf_node.
+Link to V4 - https://lore.kernel.org/all/20250725100806.1157-1-jie.gan@oss.qualcomm.com/
+
+Changes in V4:
+1. Rename the function to coresight_get_in_port_dest regarding to Mike's
+comment (patch 1/10).
+2. Add lock to protect the connections regarding to Mike's comment
+(patch 2/10).
+3. Move all byte-cntr functions to coresight-ctcu-byte-cntr file.
+4. Add tmc_read_ops to wrap all read operations for TMC device.
+5. Add a function in helper_ops to check whether the byte-cntr is
+enabkled.
+6. Call byte-cntr's read_ops if byte-cntr is enabled when reading data
+from the sysfs node.
+Link to V3 resend - https://lore.kernel.org/all/20250714063109.591-1-jie.gan@oss.qualcomm.com/
+
+Changes in V3 resend:
+1. rebased on next-20250711.
+Link to V3 - https://lore.kernel.org/all/20250624060438.7469-1-jie.gan@oss.qualcomm.com/
+
+Changes in V3:
+1. The previous solution has been deprecated.
+2. Add a etr_buf_list to manage allcated etr buffers.
+3. Add a logic to switch buffer for ETR.
+4. Add read functions to read trace data from synced etr buffer.
+Link to V2 - https://lore.kernel.org/all/20250410013330.3609482-1-jie.gan@oss.qualcomm.com/
+
+Changes in V2:
+1. Removed the independent file node /dev/byte_cntr.
+2. Integrated the byte-cntr's file operations with current ETR file
+   node.
+3. Optimized the driver code of the CTCU that associated with byte-cntr.
+4. Add kernel document for the export API tmc_etr_get_rwp_offset.
+5. Optimized the way to read the rwp_offset according to Mike's
+   suggestion.
+6. Removed the dependency of the dts patch.
+Link to V1 - https://lore.kernel.org/all/20250310090407.2069489-1-quic_jiegan@quicinc.com/
+
+Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+
+---
+Jie Gan (8):
+      coresight: core: refactor ctcu_get_active_port and make it generic
+      coresight: tmc: add create/clean functions for etr_buf_list
+      coresight: tmc: add a function to switch the ETR to a free etr_buf
+      coresight: tmc: introduce tmc_sysfs_ops to wrap sysfs read operations
+      coresight: etr: add a new function to retrieve the CTCU device
+      dt-bindings: arm: add an interrupt property for Coresight CTCU
+      coresight: ctcu: enable byte-cntr for TMC ETR devices
+      arm64: dts: qcom: lemans: add interrupts to CTCU device
+
+ .../ABI/testing/sysfs-bus-coresight-devices-ctcu   |  13 +
+ .../bindings/arm/qcom,coresight-ctcu.yaml          |  10 +
+ arch/arm64/boot/dts/qcom/lemans.dtsi               |   3 +
+ drivers/hwtracing/coresight/Makefile               |   2 +-
+ drivers/hwtracing/coresight/coresight-core.c       |  27 ++
+ .../hwtracing/coresight/coresight-ctcu-byte-cntr.c | 484 +++++++++++++++++++++
+ drivers/hwtracing/coresight/coresight-ctcu-core.c  | 200 +++++++--
+ drivers/hwtracing/coresight/coresight-ctcu.h       |  94 +++-
+ drivers/hwtracing/coresight/coresight-priv.h       |   2 +
+ drivers/hwtracing/coresight/coresight-tmc-core.c   |  55 ++-
+ drivers/hwtracing/coresight/coresight-tmc-etr.c    | 383 +++++++++++++++-
+ drivers/hwtracing/coresight/coresight-tmc.h        |  45 ++
+ 12 files changed, 1240 insertions(+), 78 deletions(-)
+---
+base-commit: a39c950806213f6861d00f90729acaaa21f2d95a
+change-id: 20260309-enable-byte-cntr-for-ctcu-ff86e6198b7f
+
+Best regards,
 -- 
-2.34.1
+Jie Gan <jie.gan@oss.qualcomm.com>
 
